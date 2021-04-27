@@ -46,7 +46,7 @@
 class. All subclasses should overwrite the .getitem() method, which supports
 fetching a data sample for a given key. Subclasses could also optionally
 overwrite .length(), which is expected to return the size of the dataset
-(e.g. number of samples) by many ~torch.utils.data.Sampler implementations
+(e.g. number of samples) used by many sampler implementations
 and the default options of dataloader()." />
 
 
@@ -89,7 +89,7 @@ and the default options of dataloader()." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">torch</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.0</span>
       </span>
     </div>
 
@@ -134,6 +134,9 @@ and the default options of dataloader()." />
     </li>
     <li>
       <a href="../articles/extending-autograd.html">Extending autograd</a>
+    </li>
+    <li>
+      <a href="../articles/python-to-r.html">Python models</a>
     </li>
   </ul>
 </li>
@@ -189,10 +192,10 @@ and the default options of dataloader()." />
 
     <div class="ref-description">
     <p>All datasets that represent a map from keys to data samples should subclass this
-class. All subclasses should overwrite the .getitem() method, which supports
+class. All subclasses should overwrite the <code>.getitem()</code> method, which supports
 fetching a data sample for a given key. Subclasses could also optionally
-overwrite .length(), which is expected to return the size of the dataset
-(e.g. number of samples) by many ~torch.utils.data.Sampler implementations
+overwrite <code>.length()</code>, which is expected to return the size of the dataset
+(e.g. number of samples) used by many sampler implementations
 and the default options of <code><a href='dataloader.html'>dataloader()</a></code>.</p>
     </div>
 
@@ -242,6 +245,17 @@ objects.</p></td>
     <p><code><a href='dataloader.html'>dataloader()</a></code>  by default constructs a index
 sampler that yields integral indices.  To make it work with a map-style
 dataset with non-integral indices/keys, a custom sampler must be provided.</p>
+    <h2 class="hasAnchor" id="get-a-batch-of-observations"><a class="anchor" href="#get-a-batch-of-observations"></a>Get a batch of observations</h2>
+
+    
+
+
+<p>By default datasets are iterated by returning each observation/item individually.
+Sometimes it's possible to have an optimized implementation to take a batch
+of observations (eg, subsetting a tensor by multiple indexes at once is faster than
+subsetting once for each index), in this case you can implement a <code>.getbatch</code> method
+that will be used instead of <code>.getitem</code> when getting a batch of observations within
+the dataloader.</p>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

@@ -42,7 +42,7 @@
   
 
 <meta property="og:title" content="Split — torch_split" />
-<meta property="og:description" content="Split" />
+<meta property="og:description" content="Splits the tensor into chunks. Each chunk is a view of the original tensor." />
 
 
 
@@ -84,7 +84,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">torch</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.0</span>
       </span>
     </div>
 
@@ -129,6 +129,9 @@
     </li>
     <li>
       <a href="../articles/extending-autograd.html">Extending autograd</a>
+    </li>
+    <li>
+      <a href="../articles/python-to-r.html">Python models</a>
     </li>
   </ul>
 </li>
@@ -178,12 +181,12 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Split</h1>
-    <small class="dont-index">Source: <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-docs.R'><code>R/gen-namespace-docs.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-examples.R'><code>R/gen-namespace-examples.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace.R'><code>R/gen-namespace.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-docs.R'><code>R/gen-namespace-docs.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-examples.R'><code>R/gen-namespace-examples.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/wrapers.R'><code>R/wrapers.R</code></a></small>
     <div class="hidden name"><code>torch_split.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Split</p>
+    <p>Splits the tensor into chunks. Each chunk is a view of the original tensor.</p>
     </div>
 
     <pre class="usage"><span class='fu'>torch_split</span><span class='op'>(</span><span class='va'>self</span>, <span class='va'>split_size</span>, dim <span class='op'>=</span> <span class='fl'>1L</span><span class='op'>)</span></pre>
@@ -197,7 +200,8 @@
     </tr>
     <tr>
       <th>split_size</th>
-      <td><p>(int) size of a single chunk or        list of sizes for each chunk</p></td>
+      <td><p>(int) size of a single chunk or
+list of sizes for each chunk</p></td>
     </tr>
     <tr>
       <th>dim</th>
@@ -205,21 +209,15 @@
     </tr>
     </table>
 
-    <h2 class="hasAnchor" id="test-"><a class="anchor" href="#test-"></a>TEST </h2>
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    
-
-
-<p>Splits the tensor into chunks. Each chunk is a view of the original tensor.</p><pre>If `split_size_or_sections` is an integer type, then `tensor` will
+    <p>If <code>split_size</code> is an integer type, then <code>tensor</code> will
 be split into equally sized chunks (if possible). Last chunk will be smaller if
-the tensor size along the given dimension `dim` is not divisible by
-`split_size`.
-
-If `split_size_or_sections` is a list, then `tensor` will be split
-into `len(split_size_or_sections)` chunks with sizes in `dim` according
-to `split_size_or_sections`.
-</pre>
-
+the tensor size along the given dimension <code>dim</code> is not divisible by
+<code>split_size</code>.</p>
+<p>If <code>split_size</code> is a list, then <code>tensor</code> will be split
+into <code><a href='https://rdrr.io/r/base/length.html'>length(split_size)</a></code> chunks with sizes in <code>dim</code> according
+to <code>split_size_or_sections</code>.</p>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

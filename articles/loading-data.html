@@ -38,7 +38,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">torch</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.0</span>
       </span>
     </div>
 
@@ -83,6 +83,9 @@
     </li>
     <li>
       <a href="../articles/extending-autograd.html">Extending autograd</a>
+    </li>
+    <li>
+      <a href="../articles/python-to-r.html">Python models</a>
     </li>
   </ul>
 </li>
@@ -176,18 +179,18 @@
 
 <span class="va">penguins</span>
 <span class="co">#&gt; # A tibble: 344 x 8</span>
-<span class="co">#&gt;    species island bill_length_mm bill_depth_mm flipper_length_… body_mass_g</span>
-<span class="co">#&gt;    &lt;fct&gt;   &lt;fct&gt;           &lt;dbl&gt;         &lt;dbl&gt;            &lt;int&gt;       &lt;int&gt;</span>
-<span class="co">#&gt;  1 Adelie  Torge…           39.1          18.7              181        3750</span>
-<span class="co">#&gt;  2 Adelie  Torge…           39.5          17.4              186        3800</span>
-<span class="co">#&gt;  3 Adelie  Torge…           40.3          18                195        3250</span>
-<span class="co">#&gt;  4 Adelie  Torge…           NA            NA                 NA          NA</span>
-<span class="co">#&gt;  5 Adelie  Torge…           36.7          19.3              193        3450</span>
-<span class="co">#&gt;  6 Adelie  Torge…           39.3          20.6              190        3650</span>
-<span class="co">#&gt;  7 Adelie  Torge…           38.9          17.8              181        3625</span>
-<span class="co">#&gt;  8 Adelie  Torge…           39.2          19.6              195        4675</span>
-<span class="co">#&gt;  9 Adelie  Torge…           34.1          18.1              193        3475</span>
-<span class="co">#&gt; 10 Adelie  Torge…           42            20.2              190        4250</span>
+<span class="co">#&gt;    species island    bill_length_mm bill_depth_mm flipper_length_mm body_mass_g</span>
+<span class="co">#&gt;    &lt;fct&gt;   &lt;fct&gt;              &lt;dbl&gt;         &lt;dbl&gt;             &lt;int&gt;       &lt;int&gt;</span>
+<span class="co">#&gt;  1 Adelie  Torgersen           39.1          18.7               181        3750</span>
+<span class="co">#&gt;  2 Adelie  Torgersen           39.5          17.4               186        3800</span>
+<span class="co">#&gt;  3 Adelie  Torgersen           40.3          18                 195        3250</span>
+<span class="co">#&gt;  4 Adelie  Torgersen           NA            NA                  NA          NA</span>
+<span class="co">#&gt;  5 Adelie  Torgersen           36.7          19.3               193        3450</span>
+<span class="co">#&gt;  6 Adelie  Torgersen           39.3          20.6               190        3650</span>
+<span class="co">#&gt;  7 Adelie  Torgersen           38.9          17.8               181        3625</span>
+<span class="co">#&gt;  8 Adelie  Torgersen           39.2          19.6               195        4675</span>
+<span class="co">#&gt;  9 Adelie  Torgersen           34.1          18.1               193        3475</span>
+<span class="co">#&gt; 10 Adelie  Torgersen           42            20.2               190        4250</span>
 <span class="co">#&gt; # … with 334 more rows, and 2 more variables: sex &lt;fct&gt;, year &lt;int&gt;</span></code></pre></div>
 <p><code>Dataset</code>s are R6 classes created using the <code><a href="../reference/dataset.html">dataset()</a></code> constructor. You can pass a <code>name</code> and various member functions. Among those should be <code>initialize()</code>, to create instance variables, <code>.getitem()</code>, to indicate how the data should be returned, and <code>.length()</code>, to say how many items we have.</p>
 <p>In addition, any number of helper functions can be defined.</p>
@@ -325,7 +328,7 @@
   
   <span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/sprintf.html">sprintf</a></span><span class="op">(</span><span class="st">"Loss at epoch %d: %3f\n"</span>, <span class="va">epoch</span>, <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">l</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
 <span class="op">}</span>
-<span class="co">#&gt; Loss at epoch 1: 52605.662907</span>
+<span class="co">#&gt; Loss at epoch 1: 223.603793</span>
 <span class="co">#&gt; Loss at epoch 2: 2.068251</span>
 <span class="co">#&gt; Loss at epoch 3: 2.068251</span>
 <span class="co">#&gt; Loss at epoch 4: 2.068251</span>

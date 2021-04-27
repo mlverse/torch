@@ -84,7 +84,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">torch</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.0</span>
       </span>
     </div>
 
@@ -129,6 +129,9 @@
     </li>
     <li>
       <a href="../articles/extending-autograd.html">Extending autograd</a>
+    </li>
+    <li>
+      <a href="../articles/python-to-r.html">Python models</a>
     </li>
   </ul>
 </li>
@@ -212,13 +215,13 @@ Columns are preserved, but appear in a different order than before.</p>
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
 
-<span class='va'>x</span> <span class='op'>&lt;-</span> <span class='fu'><a href='torch_arange.html'>torch_arange</a></span><span class='op'>(</span>start <span class='op'>=</span> <span class='fl'>0</span>, end <span class='op'>=</span> <span class='fl'>4</span><span class='op'>)</span><span class='op'>$</span><span class='fu'>view</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>2</span>, <span class='fl'>2</span><span class='op'>)</span><span class='op'>)</span>
+<span class='va'>x</span> <span class='op'>&lt;-</span> <span class='fu'><a href='torch_arange.html'>torch_arange</a></span><span class='op'>(</span>start <span class='op'>=</span> <span class='fl'>1</span>, end <span class='op'>=</span> <span class='fl'>4</span><span class='op'>)</span><span class='op'>$</span><span class='fu'>view</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>2</span>, <span class='fl'>2</span><span class='op'>)</span><span class='op'>)</span>
 <span class='va'>x</span>
 <span class='fu'>torch_fliplr</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span>
 <span class='op'>}</span>
 </div><div class='output co'>#&gt; torch_tensor
-#&gt;  1  0
-#&gt;  3  2
+#&gt;  2  1
+#&gt;  4  3
 #&gt; [ CPUFloatType{2,2} ]</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

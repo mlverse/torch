@@ -83,7 +83,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">torch</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.0</span>
       </span>
     </div>
 
@@ -128,6 +128,9 @@
     </li>
     <li>
       <a href="../articles/extending-autograd.html">Extending autograd</a>
+    </li>
+    <li>
+      <a href="../articles/python-to-r.html">Python models</a>
     </li>
   </ul>
 </li>
@@ -1105,9 +1108,27 @@
       </tr><tr>
         
         <td>
-          <p><code><a href="torch_fft.html">torch_fft()</a></code> </p>
+          <p><code><a href="torch_fft_fft.html">torch_fft_fft()</a></code> </p>
         </td>
         <td><p>Fft</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="torch_fft_ifft.html">torch_fft_ifft()</a></code> </p>
+        </td>
+        <td><p>Ifft</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="torch_fft_irfft.html">torch_fft_irfft()</a></code> </p>
+        </td>
+        <td><p>Irfft</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="torch_fft_rfft.html">torch_fft_rfft()</a></code> </p>
+        </td>
+        <td><p>Rfft</p></td>
       </tr><tr>
         
         <td>
@@ -1261,12 +1282,6 @@
       </tr><tr>
         
         <td>
-          <p><code><a href="torch_ifft.html">torch_ifft()</a></code> </p>
-        </td>
-        <td><p>Ifft</p></td>
-      </tr><tr>
-        
-        <td>
           <p><code><a href="torch_imag.html">torch_imag()</a></code> </p>
         </td>
         <td><p>Imag</p></td>
@@ -1282,12 +1297,6 @@
           <p><code><a href="torch_inverse.html">torch_inverse()</a></code> </p>
         </td>
         <td><p>Inverse</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="torch_irfft.html">torch_irfft()</a></code> </p>
-        </td>
-        <td><p>Irfft</p></td>
       </tr><tr>
         
         <td>
@@ -1882,12 +1891,6 @@
           <p><code><a href="torch_result_type.html">torch_result_type()</a></code> </p>
         </td>
         <td><p>Result_type</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="torch_rfft.html">torch_rfft()</a></code> </p>
-        </td>
-        <td><p>Rfft</p></td>
       </tr><tr>
         
         <td>
@@ -2507,6 +2510,12 @@ planes.</p></td>
       </tr><tr>
         
         <td>
+          <p><code><a href="nn_group_norm.html">nn_group_norm()</a></code> </p>
+        </td>
+        <td><p>Group normalization</p></td>
+      </tr><tr>
+        
+        <td>
           <p><code><a href="nn_gru.html">nn_gru()</a></code> </p>
         </td>
         <td><p>Applies a multi-layer gated recurrent unit (GRU) RNN to an input sequence.</p></td>
@@ -2648,6 +2657,12 @@ planes.</p></td>
           <p><code><a href="nn_l1_loss.html">nn_l1_loss()</a></code> </p>
         </td>
         <td><p>L1 loss</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="nn_layer_norm.html">nn_layer_norm()</a></code> </p>
+        </td>
+        <td><p>Layer normalization</p></td>
       </tr><tr>
         
         <td>
@@ -3763,6 +3778,54 @@ single- or multi-process iterators over the dataset.</p></td>
           <p><code><a href="is_dataloader.html">is_dataloader()</a></code> </p>
         </td>
         <td><p>Checks if the object is a dataloader</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-distributions" class="hasAnchor"><a href="#section-distributions" class="anchor"></a>Distributions</h2>
+          <p class="section-desc"></p>
+        </th>
+      </tr>
+      
+      
+    </tbody><tbody>
+      
+      
+      <tr>
+        
+        <td>
+          <p><code><a href="distr_bernoulli.html">distr_bernoulli()</a></code> </p>
+        </td>
+        <td><p>Creates a Bernoulli distribution parameterized by <code>probs</code>
+or <code>logits</code> (but not both).
+Samples are binary (0 or 1). They take the value <code>1</code> with probability <code>p</code>
+and <code>0</code> with probability <code>1 - p</code>.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="distr_chi2.html">distr_chi2()</a></code> </p>
+        </td>
+        <td><p>Creates a Chi2 distribution parameterized by shape parameter <code>df</code>.
+This is exactly equivalent to <code>distr_gamma(alpha=0.5*df, beta=0.5)</code></p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="distr_gamma.html">distr_gamma()</a></code> </p>
+        </td>
+        <td><p>Creates a Gamma distribution parameterized by shape <code>concentration</code> and <code>rate</code>.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="distr_normal.html">distr_normal()</a></code> </p>
+        </td>
+        <td><p>Creates a normal (also called Gaussian) distribution parameterized by
+<code>loc</code> and <code>scale</code>.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="distr_poisson.html">distr_poisson()</a></code> </p>
+        </td>
+        <td><p>Creates a Poisson distribution parameterized by <code>rate</code>, the rate parameter.</p></td>
       </tr>
     </tbody><tbody>
       <tr>

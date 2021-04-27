@@ -84,7 +84,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">torch</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.0</span>
       </span>
     </div>
 
@@ -129,6 +129,9 @@
     </li>
     <li>
       <a href="../articles/extending-autograd.html">Extending autograd</a>
+    </li>
+    <li>
+      <a href="../articles/python-to-r.html">Python models</a>
     </li>
   </ul>
 </li>
@@ -186,7 +189,7 @@
     <p>Divide</p>
     </div>
 
-    <pre class="usage"><span class='fu'>torch_divide</span><span class='op'>(</span><span class='va'>self</span>, <span class='va'>other</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>torch_divide</span><span class='op'>(</span><span class='va'>self</span>, <span class='va'>other</span>, <span class='va'>rounding_mode</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -198,6 +201,19 @@
     <tr>
       <th>other</th>
       <td><p>(Number) the number to be divided to each element of <code>input</code></p></td>
+    </tr>
+    <tr>
+      <th>rounding_mode</th>
+      <td><p>(str, optional) – Type of rounding applied to the result:</p><ul>
+<li><p><code>NULL</code> - default behavior. Performs no rounding and, if both input and
+other are integer types, promotes the inputs to the default scalar type.
+Equivalent to true division in Python (the / operator) and NumPy’s
+<code>np.true_divide</code>.</p></li>
+<li><p>"trunc" - rounds the results of the division towards zero. Equivalent to
+C-style integer division.</p></li>
+<li><p>"floor" - rounds the results of the division down. Equivalent to floor
+division in Python (the // operator) and NumPy’s <code>np.floor_divide</code>.</p></li>
+</ul></td>
     </tr>
     </table>
 

@@ -2,6 +2,7 @@ pandoc: 2.7.3
 pkgdown: 1.6.1
 pkgdown_sha: ~
 articles:
+  distributions: distributions.html
   examples/basic-autograd: basic-autograd.html
   examples/basic-nn-module: basic-nn-module.html
   examples/dataset: dataset.html
@@ -10,9 +11,10 @@ articles:
   indexing: indexing.html
   installation: installation.html
   loading-data: loading-data.html
+  python-to-r: python-to-r.html
   serialization: serialization.html
   tensor/index: index.html
   tensor-creation: tensor-creation.html
   using-autograd: using-autograd.html
-last_built: 2021-01-05T20:29Z
+last_built: 2021-04-27T19:56Z
 

@@ -42,7 +42,7 @@
   
 
 <meta property="og:title" content="Nonzero — torch_nonzero" />
-<meta property="og:description" content="Nonzero" />
+<meta property="og:description" content="Nonzero elements of tensors." />
 
 
 
@@ -84,7 +84,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">torch</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.0</span>
       </span>
     </div>
 
@@ -129,6 +129,9 @@
     </li>
     <li>
       <a href="../articles/extending-autograd.html">Extending autograd</a>
+    </li>
+    <li>
+      <a href="../articles/python-to-r.html">Python models</a>
     </li>
   </ul>
 </li>
@@ -178,15 +181,15 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Nonzero</h1>
-    <small class="dont-index">Source: <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-docs.R'><code>R/gen-namespace-docs.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-examples.R'><code>R/gen-namespace-examples.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace.R'><code>R/gen-namespace.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-docs.R'><code>R/gen-namespace-docs.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-examples.R'><code>R/gen-namespace-examples.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/wrapers.R'><code>R/wrapers.R</code></a></small>
     <div class="hidden name"><code>torch_nonzero.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Nonzero</p>
+    <p>Nonzero elements of tensors.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>torch_nonzero</span><span class='op'>(</span><span class='va'>self</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>torch_nonzero</span><span class='op'>(</span><span class='va'>self</span>, as_list <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -195,28 +198,12 @@
       <th>self</th>
       <td><p>(Tensor) the input tensor.</p></td>
     </tr>
-    </table>
-
-    <h2 class="hasAnchor" id="note"><a class="anchor" href="#note"></a>Note</h2>
-
-    
-<pre>[`torch_nonzero(..., as_tuple=False) &lt;torch.nonzero&gt;`] (default) returns a
-2-D tensor where each row is the index for a nonzero value.
-
-[`torch_nonzero(..., as_tuple=TRUE) &lt;torch.nonzero&gt;`] returns a tuple of 1-D
-index tensors, allowing for advanced indexing, so `x[x.nonzero(as_tuple=TRUE)]`
-gives all nonzero values of tensor `x`. Of the returned tuple, each index tensor
-contains nonzero indices for a certain dimension.
-
-See below for more details on the two behaviors.
-</pre>
-
-    <h2 class="hasAnchor" id="nonzero-input-out-null-as-tuple-false-gt-longtensor-or-tuple-of-longtensors-"><a class="anchor" href="#nonzero-input-out-null-as-tuple-false-gt-longtensor-or-tuple-of-longtensors-"></a>nonzero(input, *, out=NULL, as_tuple=False) -&gt; LongTensor or tuple of LongTensors </h2>
-
-    
-
-
-<p><strong>When</strong> <code>as_tuple</code> <strong>is <code>FALSE</code> (default)</strong>:</p>
+    <tr>
+      <th>as_list</th>
+      <td><p>If <code>FALSE</code>, the output tensor containing indices. If <code>TRUE</code>, one
+1-D tensor for each dimension, containing the indices of each nonzero element
+along that dimension.</p>
+<p><strong>When</strong> <code>as_list</code> <strong>is <code>FALSE</code> (default)</strong>:</p>
 <p>Returns a tensor containing the indices of all non-zero elements of
 <code>input</code>.  Each row in the result contains the indices of a non-zero
 element in <code>input</code>. The result is sorted lexicographically, with
@@ -224,7 +211,7 @@ the last index changing the fastest (C-style).</p>
 <p>If <code>input</code> has \(n\) dimensions, then the resulting indices tensor
 <code>out</code> is of size \((z \times n)\), where \(z\) is the total number of
 non-zero elements in the <code>input</code> tensor.</p>
-<p><strong>When</strong> <code>as_tuple</code> <strong>is <code>TRUE</code></strong>:</p>
+<p><strong>When</strong> <code>as_list</code> <strong>is <code>TRUE</code></strong>:</p>
 <p>Returns a tuple of 1-D tensors, one for each dimension in <code>input</code>,
 each containing the indices (in that dimension) of all non-zero elements of
 <code>input</code> .</p>
@@ -232,7 +219,10 @@ each containing the indices (in that dimension) of all non-zero elements of
 tensors of size \(z\), where \(z\) is the total number of
 non-zero elements in the <code>input</code> tensor.</p>
 <p>As a special case, when <code>input</code> has zero dimensions and a nonzero scalar
-value, it is treated as a one-dimensional tensor with one element.</p>
+value, it is treated as a one-dimensional tensor with one element.</p></td>
+    </tr>
+    </table>
+
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
@@ -240,10 +230,10 @@ value, it is treated as a one-dimensional tensor with one element.</p>
 <span class='fu'>torch_nonzero</span><span class='op'>(</span><span class='fu'><a href='torch_tensor.html'>torch_tensor</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1</span>, <span class='fl'>1</span>, <span class='fl'>1</span>, <span class='fl'>0</span>, <span class='fl'>1</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span>
 <span class='op'>}</span>
 </div><div class='output co'>#&gt; torch_tensor
-#&gt;  0
 #&gt;  1
 #&gt;  2
-#&gt;  4
+#&gt;  3
+#&gt;  5
 #&gt; [ CPULongType{4,1} ]</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
