@@ -10,7 +10,7 @@ function(download_file url filename)
     if(NOT EXISTS ${filename})
         message("-- Downloading ${filename}: ${url}")
         file(DOWNLOAD  ${url} ${filename}
-             TIMEOUT 300
+             TIMEOUT 600
              TLS_VERIFY ON
         )
     endif()
@@ -44,7 +44,7 @@ elseif(WIN32)
         add_compile_definitions(CUDA102)
         retrieve_lib("https://download.pytorch.org/libtorch/cu102/libtorch-win-shared-with-deps-1.8.0.zip" "libtorch")
     elseif(DEFINED ENV{CUDA} AND '$ENV{CUDA}' STREQUAL '11.1')
-        add_compile_definitions(CUDA101)
+        add_compile_definitions(CUDA111)
         retrieve_lib("https://download.pytorch.org/libtorch/cu111/libtorch-win-shared-with-deps-1.8.1%2Bcu111.zip" "libtorch")
     else()
         retrieve_lib("https://download.pytorch.org/libtorch/cpu/libtorch-win-shared-with-deps-1.8.1%2Bcpu.zip" "libtorch")

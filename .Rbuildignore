@@ -21,7 +21,7 @@ tools/torchgen/.Rbuildignore
 ^cran-comments\.md$
 ^CRAN-RELEASE$
 # uncomment below for CRAN submission
-# ^inst/deps/.*
+^inst/deps/.*
 ^doc$
 ^Meta$
 ^vignettes/rsconnect*

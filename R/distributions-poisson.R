@@ -66,8 +66,12 @@ Poisson <- R6::R6Class(
 )
 
 #' Creates a Poisson distribution parameterized by `rate`, the rate parameter.
+#' 
+#' @description 
 #' Samples are nonnegative integers, with a pmf given by
-#' \eqn{\mathrm{rate}^k \frac{e^{-\mathrm{rate}}}{k!}}
+#' \deqn{
+#' \mbox{rate}^{k} \frac{e^{-\mbox{rate}}}{k!}
+#' }
 #' 
 #' @param rate (numeric, torch_tensor): the rate parameter
 #' @inheritParams distr_bernoulli

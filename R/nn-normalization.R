@@ -27,7 +27,7 @@
 #' 
 #' @param normalized_shape (int or list): input shape from an expected input
 #'   of size 
-#'   \eqn{[* \times \mbox{normalized_shape}[0] \times \mbox{normalized_shape}[1] \times \ldots \times \mbox{normalized_shape}[-1]]}
+#'   \eqn{[* \times \mbox{normalized\_shape}[0] \times \mbox{normalized\_shape}[1] \times \ldots \times \mbox{normalized\_shape}[-1]]}
 #'   If a single integer is used, it is treated as a singleton list, and this module will
 #'   normalize over the last dimension which is expected to be of that specific size.
 #' @param eps a value added to the denominator for numerical stability. Default: 1e-5
@@ -112,7 +112,7 @@ nn_layer_norm <- nn_module(
 #'    
 #' @section Shape:
 #' 
-#' - Input: \eqn{(N, C, *)} where \eqn{C=\text{num\_channels}}
+#' - Input: \eqn{(N, C, *)} where \eqn{C=\mbox{num\_channels}}
 #' - Output: \eqn{(N, C, *)}` (same shape as input)
 #' 
 #' @examples

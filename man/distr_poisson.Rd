@@ -2,9 +2,7 @@
 % Please edit documentation in R/distributions-poisson.R
 \name{distr_poisson}
 \alias{distr_poisson}
-\title{Creates a Poisson distribution parameterized by \code{rate}, the rate parameter.
-Samples are nonnegative integers, with a pmf given by
-\eqn{\mathrm{rate}^k \frac{e^{-\mathrm{rate}}}{k!}}}
+\title{Creates a Poisson distribution parameterized by \code{rate}, the rate parameter.}
 \usage{
 distr_poisson(rate, validate_args = NULL)
 }
@@ -14,9 +12,10 @@ distr_poisson(rate, validate_args = NULL)
 \item{validate_args}{whether to validate arguments or not.}
 }
 \description{
-Creates a Poisson distribution parameterized by \code{rate}, the rate parameter.
 Samples are nonnegative integers, with a pmf given by
-\eqn{\mathrm{rate}^k \frac{e^{-\mathrm{rate}}}{k!}}
+\deqn{
+\mbox{rate}^{k} \frac{e^{-\mbox{rate}}}{k!}
+}
 }
 \examples{
 if (torch_is_installed()) {
