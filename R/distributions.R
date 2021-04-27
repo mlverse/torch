@@ -124,9 +124,9 @@ Distribution <- R6::R6Class(
     #' of the result will be `(cardinality,) + batch_shape + event_shape
     #' (where `event_shape = ()` for univariate distributions).
     #' Note that this enumerates over all batched tensors in lock-step
-    #' `[[0, 0], [1, 1], ...]`. With `expand=FALSE`, enumeration happens
+    #' `list(c(0, 0), c(1, 1), ...)`. With `expand=FALSE`, enumeration happens
     #' along dim 0, but with the remaining batch dimensions being
-    #' singleton dimensions, `[[0], [1], ..`.
+    #' singleton dimensions, `list(c(0), c(1), ...)`.
     #' @param expand (bool): whether to expand the support over the
     #'  batch dims to match the distribution's `batch_shape`.
     #' @return Tensor iterating over dimension 0.

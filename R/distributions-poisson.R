@@ -70,6 +70,7 @@ Poisson <- R6::R6Class(
 #' \eqn{\mathrm{rate}^k \frac{e^{-\mathrm{rate}}}{k!}}
 #' 
 #' @param rate (numeric, torch_tensor): the rate parameter
+#' @inheritParams distr_bernoulli
 #' 
 #' @seealso [Distribution] for details on the available methods. 
 #' @family distributions

@@ -12,6 +12,8 @@ distr_gamma(concentration, rate, validate_args = NULL)
 
 \item{rate}{(float or Tensor): rate = 1 / scale of the distribution
 (often referred to as beta)}
+
+\item{validate_args}{whether to validate arguments or not.}
 }
 \description{
 Creates a Gamma distribution parameterized by shape \code{concentration} and \code{rate}.

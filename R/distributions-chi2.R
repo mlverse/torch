@@ -35,7 +35,9 @@ Chi2 <- add_class_definition(Chi2)
 
 #' Creates a Chi2 distribution parameterized by shape parameter `df`.
 #' This is exactly equivalent to `distr_gamma(alpha=0.5*df, beta=0.5)`
+#' 
 #' @param df (float or torch_tensor): shape parameter of the distribution
+#' @inheritParams distr_bernoulli
 #' 
 #' @seealso [Distribution] for details on the available methods. 
 #' @family distributions

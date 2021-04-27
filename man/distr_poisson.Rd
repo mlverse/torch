@@ -10,6 +10,8 @@ distr_poisson(rate, validate_args = NULL)
 }
 \arguments{
 \item{rate}{(numeric, torch_tensor): the rate parameter}
+
+\item{validate_args}{whether to validate arguments or not.}
 }
 \description{
 Creates a Poisson distribution parameterized by \code{rate}, the rate parameter.

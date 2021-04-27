@@ -191,7 +191,7 @@ Returns the inverse cumulative density/mass function evaluated at
 @description
 Returns tensor containing all values supported by a discrete
 distribution. The result will enumerate over dimension 0, so the shape
-of the result will be \verb{(cardinality,) + batch_shape + event_shape (where }event_shape = ()\verb{for univariate distributions). Note that this enumerates over all batched tensors in lock-step}[\link{0, 0}, \link{1, 1}, ...]\verb{. With }expand=FALSE\verb{, enumeration happens along dim 0, but with the remaining batch dimensions being singleton dimensions, }[\link{0}, \link{1}, ..`.
+of the result will be \verb{(cardinality,) + batch_shape + event_shape (where }event_shape = ()\verb{for univariate distributions). Note that this enumerates over all batched tensors in lock-step}list(c(0, 0), c(1, 1), ...)\verb{. With }expand=FALSE\verb{, enumeration happens along dim 0, but with the remaining batch dimensions being singleton dimensions, }list(c(0), c(1), ...)`.
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{Distribution$icdf(value)}\if{html}{\out{</div>}}
 }

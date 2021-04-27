@@ -4,7 +4,7 @@ torch_tensor_options <- function(dtype = NULL, layout = NULL, device = NULL,
                                  requires_grad = NULL, pinned_memory = NULL) {
   
   options <- list(
-    dtype = if (is.character(dtype)) torch_dtype(dtype)$ptr else dtype$ptr,
+    dtype = if (is.character(dtype)) dtype else dtype$ptr,
     layout = layout$ptr,
     device = if (is.character(device)) torch_device(device)$ptr else device$ptr,
     requires_grad = requires_grad,
