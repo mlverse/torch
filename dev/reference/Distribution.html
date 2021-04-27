@@ -6,24 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Distribution is the abstract base class for probability distributions.
-Generates a sample_shape shaped sample or sample_shape shaped batch of
-samples if the distribution parameters are batched.
-Generates a sample_shape shaped reparameterized sample or sample_shape
-shaped batch of reparameterized samples if the distribution parameters
-are batched.
-In PyTorch: sample_shape=torch.Size()
-Returns the log of the probability density/mass function evaluated at
-value.
-Returns the cumulative density/mass function evaluated at
-value.
-Returns the inverse cumulative density/mass function evaluated at
-value.
-Returns tensor containing all values supported by a discrete
-distribution. The result will enumerate over dimension 0, so the shape
-of the result will be (cardinality,) + batch_shape + event_shape (where event_shape = ()for univariate distributions). Note that this enumerates over all batched tensors in lock-step[0, 0, 1, 1, ...]. With expand=FALSE, enumeration happens along dim 0, but with the remaining batch dimensions being singleton dimensions, [0, 1, ... @param expand (bool): whether to expand the support over the batch dims to match the distribution's batch_shape. @return Tensor iterating over dimension 0. Returns entropy of distribution, batched over batch_shape. @return Tensor of shape batch_shape. Returns perplexity of distribution, batched over batch_shape. @param Tensor of shape batch_shape. Returns the size of the sample returned by the distribution, given a sample_shape`. Note, that the batch and event shapes of a distribution
-instance are fixed at the time of construction. If this is empty, the
-returned shape is upcast to (1,). — Distribution • torch</title>
+<title>Generic R6 class representing distributions — Distribution • torch</title>
 
 
 <!-- jquery -->
@@ -58,60 +41,10 @@ returned shape is upcast to (1,). — Distribution • torch</title>
   <link href="../extra.css" rel="stylesheet">
   
 
-<meta property="og:title" content="Distribution is the abstract base class for probability distributions.
-Generates a sample_shape shaped sample or sample_shape shaped batch of
-samples if the distribution parameters are batched.
-Generates a sample_shape shaped reparameterized sample or sample_shape
-shaped batch of reparameterized samples if the distribution parameters
-are batched.
-In PyTorch: sample_shape=torch.Size()
-Returns the log of the probability density/mass function evaluated at
-value.
-Returns the cumulative density/mass function evaluated at
-value.
-Returns the inverse cumulative density/mass function evaluated at
-value.
-Returns tensor containing all values supported by a discrete
-distribution. The result will enumerate over dimension 0, so the shape
-of the result will be (cardinality,) + batch_shape + event_shape (where event_shape = ()for univariate distributions). Note that this enumerates over all batched tensors in lock-step[0, 0, 1, 1, ...]. With expand=FALSE, enumeration happens along dim 0, but with the remaining batch dimensions being singleton dimensions, [0, 1, ... @param expand (bool): whether to expand the support over the batch dims to match the distribution's batch_shape. @return Tensor iterating over dimension 0. Returns entropy of distribution, batched over batch_shape. @return Tensor of shape batch_shape. Returns perplexity of distribution, batched over batch_shape. @param Tensor of shape batch_shape. Returns the size of the sample returned by the distribution, given a sample_shape`. Note, that the batch and event shapes of a distribution
-instance are fixed at the time of construction. If this is empty, the
-returned shape is upcast to (1,). — Distribution" />
+<meta property="og:title" content="Generic R6 class representing distributions — Distribution" />
 <meta property="og:description" content="Distribution is the abstract base class for probability distributions.
-Generates a sample_shape shaped sample or sample_shape shaped batch of
-samples if the distribution parameters are batched.
-Generates a sample_shape shaped reparameterized sample or sample_shape
-shaped batch of reparameterized samples if the distribution parameters
-are batched.
-In PyTorch: sample_shape=torch.Size()
-Returns the log of the probability density/mass function evaluated at
-value.
-Returns the cumulative density/mass function evaluated at
-value.
-Returns the inverse cumulative density/mass function evaluated at
-value.
-Returns tensor containing all values supported by a discrete
-distribution. The result will enumerate over dimension 0, so the shape
-of the result will be (cardinality,) + batch_shape + event_shape (where event_shape = ()for univariate distributions). Note that this enumerates over all batched tensors in lock-step[0, 0, 1, 1, ...]. With expand=FALSE, enumeration happens along dim 0, but with the remaining batch dimensions being singleton dimensions, [0, 1, ... @param expand (bool): whether to expand the support over the batch dims to match the distribution's batch_shape. @return Tensor iterating over dimension 0. Returns entropy of distribution, batched over batch_shape. @return Tensor of shape batch_shape. Returns perplexity of distribution, batched over batch_shape. @param Tensor of shape batch_shape. Returns the size of the sample returned by the distribution, given a sample_shape`. Note, that the batch and event shapes of a distribution
-instance are fixed at the time of construction. If this is empty, the
-returned shape is upcast to (1,).
-Distribution is the abstract base class for probability distributions.
-Generates a sample_shape shaped sample or sample_shape shaped batch of
-samples if the distribution parameters are batched.
-Generates a sample_shape shaped reparameterized sample or sample_shape
-shaped batch of reparameterized samples if the distribution parameters
-are batched.
-In PyTorch: sample_shape=torch.Size()
-Returns the log of the probability density/mass function evaluated at
-value.
-Returns the cumulative density/mass function evaluated at
-value.
-Returns the inverse cumulative density/mass function evaluated at
-value.
-Returns tensor containing all values supported by a discrete
-distribution. The result will enumerate over dimension 0, so the shape
-of the result will be (cardinality,) + batch_shape + event_shape (where event_shape = ()for univariate distributions). Note that this enumerates over all batched tensors in lock-step[0, 0, 1, 1, ...]. With expand=FALSE, enumeration happens along dim 0, but with the remaining batch dimensions being singleton dimensions, [0, 1, ... @param expand (bool): whether to expand the support over the batch dims to match the distribution's batch_shape. @return Tensor iterating over dimension 0. Returns entropy of distribution, batched over batch_shape. @return Tensor of shape batch_shape. Returns perplexity of distribution, batched over batch_shape. @param Tensor of shape batch_shape. Returns the size of the sample returned by the distribution, given a sample_shape`. Note, that the batch and event shapes of a distribution
-instance are fixed at the time of construction. If this is empty, the
-returned shape is upcast to (1,)." />
+Note: in Python, adding torch.Size objects works as concatenation
+Try for example: torch.Size((2, 1)) + torch.Size((1,))" />
 
 
 <meta name="robots" content="noindex">
@@ -153,7 +86,7 @@ returned shape is upcast to (1,)." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">torch</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.1.1.9000</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.2.1.9000</span>
       </span>
     </div>
 
@@ -161,53 +94,9 @@ returned shape is upcast to (1,)." />
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
-</li>
-<li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-    Getting started
-     
-    <span class="caret"></span>
-  </a>
-  <ul class="dropdown-menu" role="menu">
-    <li class="dropdown-header">Beginers guide</li>
-    <li>
-      <a href="../articles/getting-started/warmup.html">Warm-up</a>
-    </li>
-    <li>
-      <a href="../articles/getting-started/tensors.html">Tensors</a>
-    </li>
-    <li>
-      <a href="../articles/getting-started/tensors-and-autograd.html">Tensors and autograd</a>
-    </li>
-    <li>
-      <a href="../articles/getting-started/new-autograd-functions.html">Defining new autograd functions</a>
-    </li>
-    <li>
-      <a href="../articles/getting-started/nn.html">nn: neural networks with torch</a>
-    </li>
-    <li>
-      <a href="../articles/getting-started/optim.html">optim: optimizers in torch</a>
-    </li>
-    <li>
-      <a href="../articles/getting-started/custom-nn.html">Custom nn modules</a>
-    </li>
-    <li>
-      <a href="../articles/getting-started/control-flow-and-weight-sharing.html">Control flow &amp; Weight sharing</a>
-    </li>
-    <li class="dropdown-header">Torch Mechanics</li>
-    <li>
-      <a href="../articles/getting-started/what-is-torch.html">What's torch?</a>
-    </li>
-    <li>
-      <a href="../articles/getting-started/autograd.html">Autograd: automatic differentiation</a>
-    </li>
-    <li>
-      <a href="../articles/getting-started/neural-networks.html">Neural networks</a>
-    </li>
-  </ul>
 </li>
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
@@ -243,6 +132,9 @@ returned shape is upcast to (1,)." />
     <li>
       <a href="../articles/extending-autograd.html">Extending autograd</a>
     </li>
+    <li>
+      <a href="../articles/python-to-r.html">Python models</a>
+    </li>
   </ul>
 </li>
 <li class="dropdown">
@@ -273,7 +165,7 @@ returned shape is upcast to (1,)." />
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/mlverse/torch/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -290,69 +182,51 @@ returned shape is upcast to (1,)." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Distribution is the abstract base class for probability distributions.
-Generates a sample_shape shaped sample or sample_shape shaped batch of
-samples if the distribution parameters are batched.
-Generates a sample_shape shaped reparameterized sample or sample_shape
-shaped batch of reparameterized samples if the distribution parameters
-are batched.
-In PyTorch: sample_shape=torch.Size()
-Returns the log of the probability density/mass function evaluated at
-<code>value</code>.
-Returns the cumulative density/mass function evaluated at
-<code>value</code>.
-Returns the inverse cumulative density/mass function evaluated at
-<code>value</code>.
-Returns tensor containing all values supported by a discrete
-distribution. The result will enumerate over dimension 0, so the shape
-of the result will be <code>(cardinality,) + batch_shape + event_shape (where </code>event_shape = ()<code>for univariate distributions). Note that this enumerates over all batched tensors in lock-step</code>[0, 0, 1, 1, ...]<code>. With </code>expand=FALSE<code>, enumeration happens along dim 0, but with the remaining batch dimensions being singleton dimensions, </code>[0, 1, ..<code>. @param expand (bool): whether to expand the support over the batch dims to match the distribution's </code>batch_shape<code>. @return Tensor iterating over dimension 0. Returns entropy of distribution, batched over batch_shape. @return Tensor of shape batch_shape. Returns perplexity of distribution, batched over batch_shape. @param Tensor of shape batch_shape. Returns the size of the sample returned by the distribution, given a </code>sample_shape`. Note, that the batch and event shapes of a distribution
-instance are fixed at the time of construction. If this is empty, the
-returned shape is upcast to (1,).</h1>
-    <small class="dont-index">Source: <a href='https://github.com/mlverse/torch/blob/master/R/distribution.R'><code>R/distribution.R</code></a></small>
+    <h1>Generic R6 class representing distributions</h1>
+    <small class="dont-index">Source: <a href='https://github.com/mlverse/torch/blob/master/R/distributions.R'><code>R/distributions.R</code></a></small>
     <div class="hidden name"><code>Distribution.Rd</code></div>
     </div>
 
     <div class="ref-description">
     <p>Distribution is the abstract base class for probability distributions.
-Generates a sample_shape shaped sample or sample_shape shaped batch of
-samples if the distribution parameters are batched.
-Generates a sample_shape shaped reparameterized sample or sample_shape
-shaped batch of reparameterized samples if the distribution parameters
-are batched.
-In PyTorch: sample_shape=torch.Size()
-Returns the log of the probability density/mass function evaluated at
-<code>value</code>.
-Returns the cumulative density/mass function evaluated at
-<code>value</code>.
-Returns the inverse cumulative density/mass function evaluated at
-<code>value</code>.
-Returns tensor containing all values supported by a discrete
-distribution. The result will enumerate over dimension 0, so the shape
-of the result will be <code>(cardinality,) + batch_shape + event_shape (where </code>event_shape = ()<code>for univariate distributions). Note that this enumerates over all batched tensors in lock-step</code>[0, 0, 1, 1, ...]<code>. With </code>expand=FALSE<code>, enumeration happens along dim 0, but with the remaining batch dimensions being singleton dimensions, </code>[0, 1, ..<code>. @param expand (bool): whether to expand the support over the batch dims to match the distribution's </code>batch_shape<code>. @return Tensor iterating over dimension 0. Returns entropy of distribution, batched over batch_shape. @return Tensor of shape batch_shape. Returns perplexity of distribution, batched over batch_shape. @param Tensor of shape batch_shape. Returns the size of the sample returned by the distribution, given a </code>sample_shape`. Note, that the batch and event shapes of a distribution
-instance are fixed at the time of construction. If this is empty, the
-returned shape is upcast to (1,).</p>
-<p>Distribution is the abstract base class for probability distributions.
-Generates a sample_shape shaped sample or sample_shape shaped batch of
-samples if the distribution parameters are batched.
-Generates a sample_shape shaped reparameterized sample or sample_shape
-shaped batch of reparameterized samples if the distribution parameters
-are batched.
-In PyTorch: sample_shape=torch.Size()
-Returns the log of the probability density/mass function evaluated at
-<code>value</code>.
-Returns the cumulative density/mass function evaluated at
-<code>value</code>.
-Returns the inverse cumulative density/mass function evaluated at
-<code>value</code>.
-Returns tensor containing all values supported by a discrete
-distribution. The result will enumerate over dimension 0, so the shape
-of the result will be <code>(cardinality,) + batch_shape + event_shape (where </code>event_shape = ()<code>for univariate distributions). Note that this enumerates over all batched tensors in lock-step</code>[0, 0, 1, 1, ...]<code>. With </code>expand=FALSE<code>, enumeration happens along dim 0, but with the remaining batch dimensions being singleton dimensions, </code>[0, 1, ..<code>. @param expand (bool): whether to expand the support over the batch dims to match the distribution's </code>batch_shape<code>. @return Tensor iterating over dimension 0. Returns entropy of distribution, batched over batch_shape. @return Tensor of shape batch_shape. Returns perplexity of distribution, batched over batch_shape. @param Tensor of shape batch_shape. Returns the size of the sample returned by the distribution, given a </code>sample_shape`. Note, that the batch and event shapes of a distribution
-instance are fixed at the time of construction. If this is empty, the
-returned shape is upcast to (1,).</p>
+Note: in Python, adding torch.Size objects works as concatenation
+Try for example: torch.Size((2, 1)) + torch.Size((1,))</p>
     </div>
 
 
 
+    <h2 class="hasAnchor" id="public-fields"><a class="anchor" href="#public-fields"></a>Public fields</h2>
+
+    <p><div class="r6-fields"></p><dl>
+<dt><code>.validate_args</code></dt><dd><p>whether to validate arguments</p></dd>
+
+<dt><code>has_rsample</code></dt><dd><p>whether has an rsample</p></dd>
+
+<dt><code>has_enumerate_support</code></dt><dd><p>whether has enumerate support</p></dd>
+
+</dl><p></div></p>
+    <h2 class="hasAnchor" id="active-bindings"><a class="anchor" href="#active-bindings"></a>Active bindings</h2>
+
+    <p><div class="r6-active-bindings"></p><dl>
+<dt><code>batch_shape</code></dt><dd><p>Returns the shape over which parameters are batched.</p></dd>
+
+<dt><code>event_shape</code></dt><dd><p>Returns the shape of a single sample (without batching).
+Returns a dictionary from argument names to
+<code>torch_Constraint</code> objects that
+should be satisfied by each argument of this distribution. Args that
+are not tensors need not appear in this dict.</p></dd>
+
+<dt><code>support</code></dt><dd><p>Returns a <code>torch_Constraint</code> object representing this distribution's
+support.</p></dd>
+
+<dt><code>mean</code></dt><dd><p>Returns the mean on of the distribution</p></dd>
+
+<dt><code>variance</code></dt><dd><p>Returns the variance of the distribution</p></dd>
+
+<dt><code>stddev</code></dt><dd><p>Returns the standard deviation of the distribution
+TODO: consider different message</p></dd>
+
+</dl><p></div></p>
     <h2 class="hasAnchor" id="methods"><a class="anchor" href="#methods"></a>Methods</h2>
 
     
@@ -371,112 +245,160 @@ returned shape is upcast to (1,).</p>
 <li><p><a href='#method-perplexity'><code>Distribution$perplexity()</code></a></p></li>
 <li><p><a href='#method-.extended_shape'><code>Distribution$.extended_shape()</code></a></p></li>
 <li><p><a href='#method-.validate_sample'><code>Distribution$.validate_sample()</code></a></p></li>
-<li><p><a href='#method-.get_checked_instance'><code>Distribution$.get_checked_instance()</code></a></p></li>
 <li><p><a href='#method-print'><code>Distribution$print()</code></a></p></li>
 <li><p><a href='#method-clone'><code>Distribution$clone()</code></a></p></li>
 </ul>
 <p><hr>
 <a id="method-new"></a></p><h3 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Method <code>new()</code></h3>
+<p>Initializes a distribution class.</p><h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Usage</h4>
+<p><div class="r"></p><pre><span class='va'>Distribution</span><span class='op'>$</span><span class='fu'>new</span><span class='op'>(</span>batch_shape <span class='op'>=</span> <span class='cn'>NULL</span>, event_shape <span class='op'>=</span> <span class='cn'>NULL</span>, validate_args <span class='op'>=</span> <span class='cn'>NULL</span><span class='op'>)</span></pre><p></div></p>
 
-<h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Usage</h4>
-<p><div class="r"></p><pre><span class='va'>Distribution</span><span class='op'>$</span><span class='fu'>new</span><span class='op'>(</span><span class='va'>batch_shape</span>, <span class='va'>event_shape</span>, validate_args <span class='op'>=</span> <span class='cn'>NULL</span><span class='op'>)</span></pre><p></div></p>
+<h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Arguments</h4>
+<p><div class="arguments"></p><dl>
+<dt><code>batch_shape</code></dt><dd><p>the shape over which parameters are batched.</p></dd>
 
+<dt><code>event_shape</code></dt><dd><p>the shape of a single sample (without batching).</p></dd>
+
+<dt><code>validate_args</code></dt><dd><p>wether to validate the arguments or not. Validation
+can be time consuming so you might want to disable it.</p></dd>
+
+</dl><p></div></p>
 <p><hr>
 <a id="method-expand"></a></p><h3 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Method <code>expand()</code></h3>
-
-<h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Usage</h4>
+<p>Returns a new distribution instance (or populates an existing instance
+provided by a derived class) with batch dimensions expanded to batch_shape.
+This method calls expand on the distribution’s parameters. As such, this
+does not allocate new memory for the expanded distribution instance.
+Additionally, this does not repeat any args checking or parameter
+broadcasting in <code>initialize</code>, when an instance is first created.</p><h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Usage</h4>
 <p><div class="r"></p><pre><span class='va'>Distribution</span><span class='op'>$</span><span class='fu'>expand</span><span class='op'>(</span><span class='va'>batch_shape</span>, .instance <span class='op'>=</span> <span class='cn'>NULL</span><span class='op'>)</span></pre><p></div></p>
 
+<h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Arguments</h4>
+<p><div class="arguments"></p><dl>
+<dt><code>batch_shape</code></dt><dd><p>the desired expanded size.</p></dd>
+
+<dt><code>.instance</code></dt><dd><p>new instance provided by subclasses that need to
+override <code>expand</code>.</p></dd>
+
+</dl><p></div></p>
 <p><hr>
 <a id="method-sample"></a></p><h3 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Method <code><a href='https://rdrr.io/r/base/sample.html'>sample()</a></code></h3>
-
-<h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Usage</h4>
+<p>Generates a <code>sample_shape</code> shaped sample or <code>sample_shape</code> shaped batch of
+samples if the distribution parameters are batched.</p><h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Usage</h4>
 <p><div class="r"></p><pre><span class='va'>Distribution</span><span class='op'>$</span><span class='fu'>sample</span><span class='op'>(</span>sample_shape <span class='op'>=</span> <span class='cn'>NULL</span><span class='op'>)</span></pre><p></div></p>
 
+<h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Arguments</h4>
+<p><div class="arguments"></p><dl>
+<dt><code>sample_shape</code></dt><dd><p>the shape you want to sample.</p></dd>
+
+</dl><p></div></p>
 <p><hr>
 <a id="method-rsample"></a></p><h3 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Method <code>rsample()</code></h3>
-
-<h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Usage</h4>
+<p>Generates a sample_shape shaped reparameterized sample or sample_shape
+shaped batch of reparameterized samples if the distribution parameters
+are batched.</p><h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Usage</h4>
 <p><div class="r"></p><pre><span class='va'>Distribution</span><span class='op'>$</span><span class='fu'>rsample</span><span class='op'>(</span>sample_shape <span class='op'>=</span> <span class='cn'>NULL</span><span class='op'>)</span></pre><p></div></p>
 
+<h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Arguments</h4>
+<p><div class="arguments"></p><dl>
+<dt><code>sample_shape</code></dt><dd><p>the shape you want to sample.</p></dd>
+
+</dl><p></div></p>
 <p><hr>
 <a id="method-log_prob"></a></p><h3 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Method <code>log_prob()</code></h3>
-
-<h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Usage</h4>
+<p>Returns the log of the probability density/mass function evaluated at
+<code>value</code>.</p><h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Usage</h4>
 <p><div class="r"></p><pre><span class='va'>Distribution</span><span class='op'>$</span><span class='fu'>log_prob</span><span class='op'>(</span><span class='va'>value</span><span class='op'>)</span></pre><p></div></p>
 
+<h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Arguments</h4>
+<p><div class="arguments"></p><dl>
+<dt><code>value</code></dt><dd><p>values to evaluate the density on.</p></dd>
+
+</dl><p></div></p>
 <p><hr>
 <a id="method-cdf"></a></p><h3 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Method <code>cdf()</code></h3>
-
-<h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Usage</h4>
+<p>Returns the cumulative density/mass function evaluated at
+<code>value</code>.</p><h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Usage</h4>
 <p><div class="r"></p><pre><span class='va'>Distribution</span><span class='op'>$</span><span class='fu'>cdf</span><span class='op'>(</span><span class='va'>value</span><span class='op'>)</span></pre><p></div></p>
 
+<h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Arguments</h4>
+<p><div class="arguments"></p><dl>
+<dt><code>value</code></dt><dd><p>values to evaluate the density on.</p></dd>
+
+</dl><p></div></p>
 <p><hr>
 <a id="method-icdf"></a></p><h3 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Method <code>icdf()</code></h3>
-
-<h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Usage</h4>
+<p>Returns the inverse cumulative density/mass function evaluated at
+<code>value</code>.</p>
+<p>@description
+Returns tensor containing all values supported by a discrete
+distribution. The result will enumerate over dimension 0, so the shape
+of the result will be <code>(cardinality,) + batch_shape + event_shape (where </code>event_shape = ()<code>for univariate distributions). Note that this enumerates over all batched tensors in lock-step</code>[0, 0, 1, 1, ...]<code>. With </code>expand=FALSE<code>, enumeration happens along dim 0, but with the remaining batch dimensions being singleton dimensions, </code>[0, 1, ..`.</p><h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Usage</h4>
 <p><div class="r"></p><pre><span class='va'>Distribution</span><span class='op'>$</span><span class='fu'>icdf</span><span class='op'>(</span><span class='va'>value</span><span class='op'>)</span></pre><p></div></p>
 
+<h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Arguments</h4>
+<p><div class="arguments"></p><dl>
+<dt><code>value</code></dt><dd><p>values to evaluate the density on.</p></dd>
+
+</dl><p></div></p>
 <p><hr>
 <a id="method-enumerate_support"></a></p><h3 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Method <code>enumerate_support()</code></h3>
 
 <h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Usage</h4>
 <p><div class="r"></p><pre><span class='va'>Distribution</span><span class='op'>$</span><span class='fu'>enumerate_support</span><span class='op'>(</span>expand <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span></pre><p></div></p>
 
+<h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Arguments</h4>
+<p><div class="arguments"></p><dl>
+<dt><code>expand</code></dt><dd><p>(bool): whether to expand the support over the
+batch dims to match the distribution's <code>batch_shape</code>.</p></dd>
+
+</dl><p></div></p>
+<h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Returns</h4>
+<p>Tensor iterating over dimension 0.</p>
 <p><hr>
 <a id="method-entropy"></a></p><h3 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Method <code>entropy()</code></h3>
-
-<h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Usage</h4>
+<p>Returns entropy of distribution, batched over batch_shape.</p><h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Usage</h4>
 <p><div class="r"></p><pre><span class='va'>Distribution</span><span class='op'>$</span><span class='fu'>entropy</span><span class='op'>(</span><span class='op'>)</span></pre><p></div></p>
 
+<h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Returns</h4>
+<p>Tensor of shape batch_shape.</p>
 <p><hr>
 <a id="method-perplexity"></a></p><h3 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Method <code>perplexity()</code></h3>
-
-<h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Usage</h4>
+<p>Returns perplexity of distribution, batched over batch_shape.</p><h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Usage</h4>
 <p><div class="r"></p><pre><span class='va'>Distribution</span><span class='op'>$</span><span class='fu'>perplexity</span><span class='op'>(</span><span class='op'>)</span></pre><p></div></p>
 
+<h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Returns</h4>
+<p>Tensor of shape batch_shape.</p>
 <p><hr>
 <a id="method-.extended_shape"></a></p><h3 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Method <code>.extended_shape()</code></h3>
-
-<h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Usage</h4>
+<p>Returns the size of the sample returned by the distribution, given
+a <code>sample_shape</code>. Note, that the batch and event shapes of a distribution
+instance are fixed at the time of construction. If this is empty, the
+returned shape is upcast to (1,).</p><h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Usage</h4>
 <p><div class="r"></p><pre><span class='va'>Distribution</span><span class='op'>$</span><span class='fu'>.extended_shape</span><span class='op'>(</span>sample_shape <span class='op'>=</span> <span class='cn'>NULL</span><span class='op'>)</span></pre><p></div></p>
 
 <h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Arguments</h4>
 <p><div class="arguments"></p><dl>
-<dt><code>sample_shape</code></dt><dd><p>(torch_Size): the size of the sample to be drawn.
-Argument validation for distribution methods such as <code>log_prob</code>,
-<code>cdf</code> and <code>icdf</code>. The rightmost dimensions of a value to be
-scored via these methods must agree with the distribution's batch
-and event shapes.</p></dd>
+<dt><code>sample_shape</code></dt><dd><p>(torch_Size): the size of the sample to be drawn.</p></dd>
 
 </dl><p></div></p>
 <p><hr>
 <a id="method-.validate_sample"></a></p><h3 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Method <code>.validate_sample()</code></h3>
-
-<h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Usage</h4>
+<p>Argument validation for distribution methods such as <code>log_prob</code>,
+<code>cdf</code> and <code>icdf</code>. The rightmost dimensions of a value to be
+scored via these methods must agree with the distribution's batch
+and event shapes.</p><h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Usage</h4>
 <p><div class="r"></p><pre><span class='va'>Distribution</span><span class='op'>$</span><span class='fu'>.validate_sample</span><span class='op'>(</span><span class='va'>value</span><span class='op'>)</span></pre><p></div></p>
 
 <h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Arguments</h4>
 <p><div class="arguments"></p><dl>
 <dt><code>value</code></dt><dd><p>(Tensor): the tensor whose log probability is to be
-computed by the <code>log_prob</code> method.
-Returns a <code>dist_constraint</code> object
-representing this distribution's support.
-Returns the mean on of the distribution
-Returns the variance of the distribution
-Returns the standard deviation of the distribution</p></dd>
+computed by the <code>log_prob</code> method.</p></dd>
 
 </dl><p></div></p>
 <p><hr>
-<a id="method-.get_checked_instance"></a></p><h3 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Method <code>.get_checked_instance()</code></h3>
-
-<h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Usage</h4>
-<p><div class="r"></p><pre><span class='va'>Distribution</span><span class='op'>$</span><span class='fu'>.get_checked_instance</span><span class='op'>(</span><span class='va'>cls</span>, .instance <span class='op'>=</span> <span class='cn'>NULL</span><span class='op'>)</span></pre><p></div></p>
-
-<p><hr>
 <a id="method-print"></a></p><h3 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Method <code><a href='https://rdrr.io/r/base/print.html'>print()</a></code></h3>
-
-<h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Usage</h4>
+<p>Prints the distribution instance.</p><h4 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Usage</h4>
 <p><div class="r"></p><pre><span class='va'>Distribution</span><span class='op'>$</span><span class='fu'>print</span><span class='op'>(</span><span class='op'>)</span></pre><p></div></p>
 
 <p><hr>
