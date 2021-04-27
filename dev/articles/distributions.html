@@ -154,7 +154,7 @@
 <div id="basic-univariate-distributions" class="section level2">
 <h2 class="hasAnchor">
 <a href="#basic-univariate-distributions" class="anchor"></a>Basic univariate distributions</h2>
-<p>Let’s start and create a new instance of a Normal distribution:</p>
+<p>Let’s start and create a new instance of a normal distribution:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">n</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/distr_normal.html">distr_normal</a></span><span class="op">(</span>loc <span class="op">=</span> <span class="fl">0</span>, scale <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>
 <span class="va">n</span>
@@ -190,15 +190,15 @@
 <span class="co">#&gt; -8.9189</span>
 <span class="co">#&gt; [ CPUFloatType{3} ]</span></code></pre></div>
 </div>
-<div id="multiple-ddistributions" class="section level2">
+<div id="multiple-distributions" class="section level2">
 <h2 class="hasAnchor">
-<a href="#multiple-ddistributions" class="anchor"></a>Multiple ddistributions</h2>
+<a href="#multiple-distributions" class="anchor"></a>Multiple distributions</h2>
 <p>A distribution can take a tensor as it’s parameters:</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">b</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/distr_bernoulli.html">distr_bernoulli</a></span><span class="op">(</span>probs <span class="op">=</span> <span class="fu"><a href="../reference/torch_tensor.html">torch_tensor</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0.25</span>, <span class="fl">0.5</span>, <span class="fl">0.75</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
 <span class="va">b</span>
 <span class="co">#&gt; torch_Bernoulli ()</span></code></pre></div>
-<p>This object represents 3 independent bernoulli distributions, one for each element of the tensor.</p>
+<p>This object represents 3 independent Bernoulli distributions, one for each element of the tensor.</p>
 <p>We can sample a single observation:</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">b</span><span class="op">$</span><span class="fu">sample</span><span class="op">(</span><span class="op">)</span>
@@ -235,7 +235,7 @@
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">GaussianLinear</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/nn_module.html">nn_module</a></span><span class="op">(</span>
   initialize <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="op">)</span> <span class="op">{</span>
-    <span class="co"># this linear predictor will estimate the mean of the Normal distribution</span>
+    <span class="co"># this linear predictor will estimate the mean of the normal distribution</span>
     <span class="va">self</span><span class="op">$</span><span class="va">linear</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/nn_linear.html">nn_linear</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">1</span><span class="op">)</span>
     <span class="co"># this parameter will hold the estimate of the variability</span>
     <span class="va">self</span><span class="op">$</span><span class="va">scale</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/nn_parameter.html">nn_parameter</a></span><span class="op">(</span><span class="fu"><a href="../reference/torch_ones.html">torch_ones</a></span><span class="op">(</span><span class="fl">1</span><span class="op">)</span><span class="op">)</span>
