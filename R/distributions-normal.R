@@ -41,7 +41,7 @@ Normal <- R6::R6Class(
         scale = self$scale$expand(batch_shape)
       )
       
-      new <- self$.get_checked_instance(self, .instance, .args)
+      new <- private$.get_checked_instance(self, .instance, .args)
       
       # new$loc <- self$loc$expand(batch_shape)
       # new$scale <- self$scale$expand(batch_shape)
@@ -131,7 +131,7 @@ Normal <- R6::R6Class(
       },
       
       support = function(){
-        self$.support
+        private$.support
       }
     )
 )
@@ -151,6 +151,9 @@ Normal <- add_class_definition(Normal)
 #' m <- distr_normal(loc = 0, scale = 1)
 #' m$sample()  # normally distributed with loc=0 and scale=1
 #' 
+#' 
+#' @seealso [Distribution] for details on the available methods. 
+#' @family distributions
 #' @export
 distr_normal <- function(loc, scale, validate_args = NULL){
   Normal$new(loc, scale, validate_args)

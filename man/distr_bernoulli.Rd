@@ -26,3 +26,13 @@ m <- distr_bernoulli(0.3)
 m$sample()  # 30\% chance 1; 70\% chance 0
 }
 }
+\seealso{
+\link{Distribution} for details on the available methods.
+
+Other distributions: 
+\code{\link{distr_chi2}()},
+\code{\link{distr_gamma}()},
+\code{\link{distr_normal}()},
+\code{\link{distr_poisson}()}
+}
+\concept{distributions}

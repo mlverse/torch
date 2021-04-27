@@ -29,7 +29,7 @@ Gamma <- R6::R6Class(
     },
     
     expand = function(batch_shape, .instance = NULL){
-      new <- self$.get_checked_instance(self, .instance)
+      new <- private$.get_checked_instance(self, .instance)
       new$concentration <- self$concentration$expand(batch_shape)
       new$rate <- self$rate$expand(batch_shape)
       new$.__enclos_env__$super$initialize(batch_shape, validate_args = FALSE)
@@ -88,6 +88,9 @@ Gamma <- R6::R6Class(
 #' (often referred to as alpha)
 #' @param rate (float or Tensor): rate = 1 / scale of the distribution
 #' (often referred to as beta)
+#' 
+#' @seealso [Distribution] for details on the available methods. 
+#' @family distributions
 #' 
 #' @examples 
 #' m <- distr_gamma(torch_tensor(1.0), torch_tensor(1.0))

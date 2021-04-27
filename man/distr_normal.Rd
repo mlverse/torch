@@ -26,5 +26,16 @@ if (torch_is_installed()) {
 m <- distr_normal(loc = 0, scale = 1)
 m$sample()  # normally distributed with loc=0 and scale=1
 
+
 }
 }
+\seealso{
+\link{Distribution} for details on the available methods.
+
+Other distributions: 
+\code{\link{distr_bernoulli}()},
+\code{\link{distr_chi2}()},
+\code{\link{distr_gamma}()},
+\code{\link{distr_poisson}()}
+}
+\concept{distributions}

@@ -20,7 +20,7 @@ Poisson <- R6::R6Class(
     },
     
     expand = function(batch_shape, .instance){
-      new <- self$.get_checked_instance(self, .instance)
+      new <- private$.get_checked_instance(self, .instance)
       new$rate <- self$rate$expand(batch_shape)
       new$.__enclos_env__$super$initialize(batch_shape, validate_args = FALSE)
       new$.validate_args <- self$.validate_args
@@ -70,6 +70,9 @@ Poisson <- R6::R6Class(
 #' \eqn{\mathrm{rate}^k \frac{e^{-\mathrm{rate}}}{k!}}
 #' 
 #' @param rate (numeric, torch_tensor): the rate parameter
+#' 
+#' @seealso [Distribution] for details on the available methods. 
+#' @family distributions
 #' 
 #' @examples 
 #' m <- distr_poisson(torch_tensor(4))

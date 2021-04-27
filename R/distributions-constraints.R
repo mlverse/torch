@@ -9,12 +9,17 @@ Constraint <- R6::R6Class(
   
   public = list(
     
+    #' @description 
     #' Returns a byte tensor of `sample_shape + batch_shape` indicating
     #' whether each event in value satisfies this constraint.
+    #' 
+    #' @param value each event in value will be checked.
     check = function(value){
       not_implemented_error()
     },
     
+    #' @description 
+    #' Define the print method for constraints,
     print = function(){
       cat(glue("{class(self)}"))
     }

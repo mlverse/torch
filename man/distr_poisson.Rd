@@ -22,3 +22,13 @@ m <- distr_poisson(torch_tensor(4))
 m$sample()
 }
 }
+\seealso{
+\link{Distribution} for details on the available methods.
+
+Other distributions: 
+\code{\link{distr_bernoulli}()},
+\code{\link{distr_chi2}()},
+\code{\link{distr_gamma}()},
+\code{\link{distr_normal}()}
+}
+\concept{distributions}

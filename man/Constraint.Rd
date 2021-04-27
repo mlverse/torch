@@ -4,6 +4,11 @@
 \alias{Constraint}
 \title{Abstract base class for constraints.}
 \description{
+Abstract base class for constraints.
+
+Abstract base class for constraints.
+}
+\details{
 A constraint object represents a region over which a variable is valid,
 e.g. within which a variable can be optimized.
 }
@@ -19,20 +24,25 @@ e.g. within which a variable can be optimized.
 \if{html}{\out{<a id="method-check"></a>}}
 \if{latex}{\out{\hypertarget{method-check}{}}}
 \subsection{Method \code{check()}}{
+Returns a byte tensor of \code{sample_shape + batch_shape} indicating
+whether each event in value satisfies this constraint.
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{Constraint$check(value)}\if{html}{\out{</div>}}
 }
 
-\subsection{Details}{
-Returns a byte tensor of \code{sample_shape + batch_shape} indicating
-whether each event in value satisfies this constraint.
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{value}}{each event in value will be checked.}
 }
-
+\if{html}{\out{</div>}}
+}
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-print"></a>}}
 \if{latex}{\out{\hypertarget{method-print}{}}}
 \subsection{Method \code{print()}}{
+Define the print method for constraints,
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{Constraint$print()}\if{html}{\out{</div>}}
 }
