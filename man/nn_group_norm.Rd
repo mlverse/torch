@@ -41,7 +41,7 @@ evaluation modes.
 \section{Shape}{
 
 \itemize{
-\item Input: \eqn{(N, C, *)} where \eqn{C=\text{num\_channels}}
+\item Input: \eqn{(N, C, *)} where \eqn{C=\mbox{num\_channels}}
 \item Output: \eqn{(N, C, *)}` (same shape as input)
 }
 }

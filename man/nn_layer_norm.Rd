@@ -9,7 +9,7 @@ nn_layer_norm(normalized_shape, eps = 1e-05, elementwise_affine = TRUE)
 \arguments{
 \item{normalized_shape}{(int or list): input shape from an expected input
 of size
-\eqn{[* \times \mbox{normalized_shape}[0] \times \mbox{normalized_shape}[1] \times \ldots \times \mbox{normalized_shape}[-1]]}
+\eqn{[* \times \mbox{normalized\_shape}[0] \times \mbox{normalized\_shape}[1] \times \ldots \times \mbox{normalized\_shape}[-1]]}
 If a single integer is used, it is treated as a singleton list, and this module will
 normalize over the last dimension which is expected to be of that specific size.}
 
