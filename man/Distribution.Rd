@@ -77,7 +77,7 @@ Initializes a distribution class.
 
 \item{\code{event_shape}}{the shape of a single sample (without batching).}
 
-\item{\code{validate_args}}{wether to validate the arguments or not. Validation
+\item{\code{validate_args}}{whether to validate the arguments or not. Validation
 can be time consuming so you might want to disable it.}
 }
 \if{html}{\out{</div>}}
