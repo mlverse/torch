@@ -1,49 +1,62 @@
 # torch (development version)
 
-- `torch_split` now accepts a list of sizes as well as a fixed size. (#429)
-- Fixed bug in `optim_lbfgs` that would make model objects exponentially big. (#431)
+## Breaking changes
+
 - `torch_nonzero` and `tensor$nonzero()` now return 1-based indexes. (#432)
-- Correctly handle `NaN`s in L-BFGS optimizer (#433)
-- The default collate function now respects the data type when converting to a tensor (if the dataset returns an R object) (#434)
+- Breaking change: `torch_arange` returns in the closed interval `[start, end]` instead of the half open `[start, end)`. This makes it behave similar to R's `seq`. (#506)
+
+## New features
+
+- `torch_split` now accepts a list of sizes as well as a fixed size. (#429)
 - Added `nn_layer_norm`. (#435)
 - Allow `timeout=360` as `install_torch()` parameter for large file download (@cregouby #438)
 - Added `install_torch_from_file()` and `get_install_libs_url()`for setup cases where direct download is not possible (@cregouby #439)
 - Added `mean.torch_tensor` (#448)
 - New arguments `worker_globals` and `worker_packages` allowing to easily pass objects to workers in parallel dataloaders (#449).
-- Removed the PerformanceReporter from tests to get easier to read stack traces. (#449)
-- Fixed `torch_normal`. (#450)
-- Internal change in the R7 classes so R7 objects are simple external pointer instead of environments. This might cause breaking change if you relied on
-  saving any kind of state in the Tensor object. (#452)
-- Internal refactoring making Rcpp aware of some XPtrTorch* types so making it simpler to return them from Rcpp code. This might cause a breaking change if you are relying on `torch_dtype()` being an R6 class. (#451) 
 - We now call R garbage collector when there's no memory available on GPU, this can help in a few cases when the laziness of the garbage collector allows too many tensors to be on memory even though they are no longer referenced in R. (#456)
-- Fixed backward compatibility issue when loading models saved in older versions of torch. This bug was introduced in #452 and is now fixed and we also added a regression test. (#458)
-- Fixed bug when using RNN's on the GPU (#460)
-- Added vignette on reading models from Python (#469)
-- Internal changes to auto unwrap arguments from SEXP's in Rcpp. This will make easier to move the dispatcher system to C++ in the future, but already allows us to gain ~30% speedups in small operations. (#454)
-- Found and fixed some memory leaks, specially when creating datatypes from strings and when saving models with `torch_save`. (#454)
-- Fixed bug in `nnf_pad` when using `mode='circular'`. (#471)
 - Implemented `nn_group_norm` and fixed a bug in `nnf_group_norm` (#474)
 - Added backend functions allowing us to query which optimizations LibTorch was compiled with (#476)
 - Added normal distribution (#462)
 - Added bernoulli distribution (#484)
 - `as.list` for `nn_modules` (#492)
 - Enumerate support in Bernoulli distribution (#490)
-- Bugfixes in `nn_multihead_attention` (#496)
 - Added Poisson Distriibution (#495)
-- Fixed bug when using packed sequences with `nn_lstm` (#500)
 - Allow optional .getbatch in datasets/dataloaders (#498)
-- Fixed bug in the `to` method of `nn_module` that would reset the `requires_grad` attribute of parameters. (#501)
 - `nn_lstm`, `nn_gru` and `nn_gru` can now use cudnn accelerations when available (#503).
-- Added a Windows GPU CI workflow (#508).
-- Breaking change: `torch_arange` returns in the closed interval `[start, end]` instead of the half open `[start, end)`. This makes it behave similar to R's `seq`. (#506)
 - Added Gamma distribution (#489)
-- Update to LibTorch v1.8 (#513) 
-- Added `strong_wolfe` option to `optim_lbfgs`. (#517)
-- Moved some parts of the dispatcher to C++ to make it faster. (#520)
 - We now respect the TORCH_HOME env var to automatically install torch. (#522)
 - Implement comparison operator `!=` for torch dtypes. (#524)
 - Added Chi-square distribution. (#518)
 - Added `optimizer` function allowing to easily implement custom optimizers. (#527)
+
+## Bug fixes
+
+- Fixed bug in `optim_lbfgs` that would make model objects exponentially big. (#431)
+- Correctly handle `NaN`s in L-BFGS optimizer (#433)
+- The default collate function now respects the data type when converting to a tensor (if the dataset returns an R object) (#434)
+- Fixed `torch_normal`. (#450)
+- Fixed backward compatibility issue when loading models saved in older versions of torch. This bug was introduced in #452 and is now fixed and we also added a regression test. (#458)
+- Fixed bug when using RNN's on the GPU (#460)
+- Found and fixed some memory leaks, specially when creating datatypes from strings and when saving models with `torch_save`. (#454)
+- Fixed bug in `nnf_pad` when using `mode='circular'`. (#471)
+- Bugfixes in `nn_multihead_attention` (#496)
+- Fixed bug when using packed sequences with `nn_lstm` (#500)
+- Fixed bug in the `to` method of `nn_module` that would reset the `requires_grad` attribute of parameters. (#501)
+- Added `strong_wolfe` option to `optim_lbfgs`. (#517)
+
+## Documentation
+
+- Added vignette on reading models from Python (#469)
+
+## Internal changes
+
+- Removed the PerformanceReporter from tests to get easier to read stack traces. (#449)
+- Internal change in the R7 classes so R7 objects are simple external pointer instead of environments. This might cause breaking change if you relied on saving any kind of state in the Tensor object. (#452)
+- Internal refactoring making Rcpp aware of some XPtrTorch* types so making it simpler to return them from Rcpp code. This might cause a breaking change if you are relying on `torch_dtype()` being an R6 class. (#451) 
+- Internal changes to auto unwrap arguments from SEXP's in Rcpp. This will make easier to move the dispatcher system to C++ in the future, but already allows us to gain ~30% speedups in small operations. (#454)
+- Added a Windows GPU CI workflow (#508).
+- Update to LibTorch v1.8 (#513) 
+- Moved some parts of the dispatcher to C++ to make it faster. (#520)
 
 # torch 0.2.1
 
