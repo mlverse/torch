@@ -43,6 +43,7 @@
 - Fixed bug when using packed sequences with `nn_lstm` (#500)
 - Fixed bug in the `to` method of `nn_module` that would reset the `requires_grad` attribute of parameters. (#501)
 - Added `strong_wolfe` option to `optim_lbfgs`. (#517)
+- Fixed default argument of `nn_init_trunc_normal_` initializer function. (#535)
 
 ## Documentation
 
