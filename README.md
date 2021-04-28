@@ -4,7 +4,7 @@
 # torch <a href='https://torch.mlverse.org'><img src='man/figures/torch.png' align="right" height="139" /></a>
 
 [![Lifecycle:
-experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
+experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html)
 ![R build
 status](https://github.com/mlverse/torch/workflows/Test/badge.svg)
 [![CRAN
@@ -47,12 +47,12 @@ y <- torch_tensor(x, dtype = torch_float64())
 y
 #> torch_tensor
 #> (1,.,.) = 
-#>   0.8349  0.7436
-#>   0.2064  0.0739
+#>   0.2196  0.9240
+#>   0.2313  0.9342
 #> 
 #> (2,.,.) = 
-#>   0.6126  0.5951
-#>   0.0128  0.4982
+#>   0.5492  0.6236
+#>   0.6080  0.8861
 #> [ CPUDoubleType{2,2,2} ]
 identical(x, as_array(y))
 #> [1] TRUE

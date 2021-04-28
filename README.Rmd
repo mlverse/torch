@@ -15,7 +15,7 @@ knitr::opts_chunk$set(
 
 # torch <a href='https://torch.mlverse.org'><img src='man/figures/torch.png' align="right" height="139" /></a>
 
-[![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
+[![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html)
 ![R build status](https://github.com/mlverse/torch/workflows/Test/badge.svg)
 [![CRAN status](https://www.r-pkg.org/badges/version/torch)](https://CRAN.R-project.org/package=torch)
 [![](https://cranlogs.r-pkg.org/badges/torch)](https://cran.r-project.org/package=torch)
