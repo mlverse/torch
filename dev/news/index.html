@@ -83,7 +83,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">torch</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.2.1.9000</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.3.0.9000</span>
       </span>
     </div>
 
@@ -187,30 +187,32 @@
 <h1 class="page-header" data-toc-text="development version">
 <a href="#torch-development-version" class="anchor"></a>torch (development version)<small> Unreleased </small>
 </h1>
+</div>
+    <div id="torch-030" class="section level1">
+<h1 class="page-header" data-toc-text="0.3.0">
+<a href="#torch-030" class="anchor"></a>torch 0.3.0<small> Unreleased </small>
+</h1>
+<div id="breaking-changes" class="section level2">
+<h2 class="hasAnchor">
+<a href="#breaking-changes" class="anchor"></a>Breaking changes</h2>
+<ul>
+<li>
+<code>torch_nonzero</code> and <code>tensor$nonzero()</code> now return 1-based indexes. (<a href='https://github.com/mlverse/torch/issues/432'>#432</a>)</li>
+<li>Breaking change: <code>torch_arange</code> returns in the closed interval <code>[start, end]</code> instead of the half open <code>[start, end)</code>. This makes it behave similar to R’s <code>seq</code>. (<a href='https://github.com/mlverse/torch/issues/506'>#506</a>)</li>
+</ul>
+</div>
+<div id="new-features" class="section level2">
+<h2 class="hasAnchor">
+<a href="#new-features" class="anchor"></a>New features</h2>
 <ul>
 <li>
 <code>torch_split</code> now accepts a list of sizes as well as a fixed size. (<a href='https://github.com/mlverse/torch/issues/429'>#429</a>)</li>
-<li>Fixed bug in <code>optim_lbfgs</code> that would make model objects exponentially big. (<a href='https://github.com/mlverse/torch/issues/431'>#431</a>)</li>
-<li>
-<code>torch_nonzero</code> and <code>tensor$nonzero()</code> now return 1-based indexes. (<a href='https://github.com/mlverse/torch/issues/432'>#432</a>)</li>
-<li>Correctly handle <code>NaN</code>s in L-BFGS optimizer (<a href='https://github.com/mlverse/torch/issues/433'>#433</a>)</li>
-<li>The default collate function now respects the data type when converting to a tensor (if the dataset returns an R object) (<a href='https://github.com/mlverse/torch/issues/434'>#434</a>)</li>
 <li>Added <code>nn_layer_norm</code>. (<a href='https://github.com/mlverse/torch/issues/435'>#435</a>)</li>
 <li>Allow <code>timeout=360</code> as <code><a href="../reference/install_torch.html">install_torch()</a></code> parameter for large file download (<a href='https://github.com/cregouby'>@cregouby</a> <a href='https://github.com/mlverse/torch/issues/438'>#438</a>)</li>
 <li>Added <code><a href="../reference/install_torch_from_file.html">install_torch_from_file()</a></code> and <code><a href="../reference/get_install_libs_url.html">get_install_libs_url()</a></code>for setup cases where direct download is not possible (<a href='https://github.com/cregouby'>@cregouby</a> <a href='https://github.com/mlverse/torch/issues/439'>#439</a>)</li>
 <li>Added <code>mean.torch_tensor</code> (<a href='https://github.com/mlverse/torch/issues/448'>#448</a>)</li>
 <li>New arguments <code>worker_globals</code> and <code>worker_packages</code> allowing to easily pass objects to workers in parallel dataloaders (<a href='https://github.com/mlverse/torch/issues/449'>#449</a>).</li>
-<li>Removed the PerformanceReporter from tests to get easier to read stack traces. (<a href='https://github.com/mlverse/torch/issues/449'>#449</a>)</li>
-<li>Fixed <code>torch_normal</code>. (<a href='https://github.com/mlverse/torch/issues/450'>#450</a>)</li>
-<li>Internal change in the R7 classes so R7 objects are simple external pointer instead of environments. This might cause breaking change if you relied on saving any kind of state in the Tensor object. (<a href='https://github.com/mlverse/torch/issues/452'>#452</a>)</li>
-<li>Internal refactoring making Rcpp aware of some XPtrTorch* types so making it simpler to return them from Rcpp code. This might cause a breaking change if you are relying on <code><a href="../reference/torch_dtype.html">torch_dtype()</a></code> being an R6 class. (<a href='https://github.com/mlverse/torch/issues/451'>#451</a>)</li>
 <li>We now call R garbage collector when there’s no memory available on GPU, this can help in a few cases when the laziness of the garbage collector allows too many tensors to be on memory even though they are no longer referenced in R. (<a href='https://github.com/mlverse/torch/issues/456'>#456</a>)</li>
-<li>Fixed backward compatibility issue when loading models saved in older versions of torch. This bug was introduced in <a href='https://github.com/mlverse/torch/issues/452'>#452</a> and is now fixed and we also added a regression test. (<a href='https://github.com/mlverse/torch/issues/458'>#458</a>)</li>
-<li>Fixed bug when using RNN’s on the GPU (<a href='https://github.com/mlverse/torch/issues/460'>#460</a>)</li>
-<li>Added vignette on reading models from Python (<a href='https://github.com/mlverse/torch/issues/469'>#469</a>)</li>
-<li>Internal changes to auto unwrap arguments from SEXP’s in Rcpp. This will make easier to move the dispatcher system to C++ in the future, but already allows us to gain ~30% speedups in small operations. (<a href='https://github.com/mlverse/torch/issues/454'>#454</a>)</li>
-<li>Found and fixed some memory leaks, specially when creating datatypes from strings and when saving models with <code>torch_save</code>. (<a href='https://github.com/mlverse/torch/issues/454'>#454</a>)</li>
-<li>Fixed bug in <code>nnf_pad</code> when using <code>mode='circular'</code>. (<a href='https://github.com/mlverse/torch/issues/471'>#471</a>)</li>
 <li>Implemented <code>nn_group_norm</code> and fixed a bug in <code>nnf_group_norm</code> (<a href='https://github.com/mlverse/torch/issues/474'>#474</a>)</li>
 <li>Added backend functions allowing us to query which optimizations LibTorch was compiled with (<a href='https://github.com/mlverse/torch/issues/476'>#476</a>)</li>
 <li>Added normal distribution (<a href='https://github.com/mlverse/torch/issues/462'>#462</a>)</li>
@@ -218,41 +220,73 @@
 <li>
 <code>as.list</code> for <code>nn_modules</code> (<a href='https://github.com/mlverse/torch/issues/492'>#492</a>)</li>
 <li>Enumerate support in Bernoulli distribution (<a href='https://github.com/mlverse/torch/issues/490'>#490</a>)</li>
-<li>Bugfixes in <code>nn_multihead_attention</code> (<a href='https://github.com/mlverse/torch/issues/496'>#496</a>)</li>
 <li>Added Poisson Distriibution (<a href='https://github.com/mlverse/torch/issues/495'>#495</a>)</li>
-<li>Fixed bug when using packed sequences with <code>nn_lstm</code> (<a href='https://github.com/mlverse/torch/issues/500'>#500</a>)</li>
 <li>Allow optional .getbatch in datasets/dataloaders (<a href='https://github.com/mlverse/torch/issues/498'>#498</a>)</li>
-<li>Fixed bug in the <code>to</code> method of <code>nn_module</code> that would reset the <code>requires_grad</code> attribute of parameters. (<a href='https://github.com/mlverse/torch/issues/501'>#501</a>)</li>
 <li>
 <code>nn_lstm</code>, <code>nn_gru</code> and <code>nn_gru</code> can now use cudnn accelerations when available (<a href='https://github.com/mlverse/torch/issues/503'>#503</a>).</li>
-<li>Added a Windows GPU CI workflow (<a href='https://github.com/mlverse/torch/issues/508'>#508</a>).</li>
-<li>Breaking change: <code>torch_arange</code> returns in the closed interval <code>[start, end]</code> instead of the half open <code>[start, end)</code>. This makes it behave similar to R’s <code>seq</code>. (<a href='https://github.com/mlverse/torch/issues/506'>#506</a>)</li>
 <li>Added Gamma distribution (<a href='https://github.com/mlverse/torch/issues/489'>#489</a>)</li>
-<li>Update to LibTorch v1.8 (<a href='https://github.com/mlverse/torch/issues/513'>#513</a>)</li>
-<li>Added <code>strong_wolfe</code> option to <code>optim_lbfgs</code>. (<a href='https://github.com/mlverse/torch/issues/517'>#517</a>)</li>
-<li>Moved some parts of the dispatcher to C++ to make it faster. (<a href='https://github.com/mlverse/torch/issues/520'>#520</a>)</li>
 <li>We now respect the TORCH_HOME env var to automatically install torch. (<a href='https://github.com/mlverse/torch/issues/522'>#522</a>)</li>
 <li>Implement comparison operator <code><a href="https://rdrr.io/r/base/Comparison.html">!=</a></code> for torch dtypes. (<a href='https://github.com/mlverse/torch/issues/524'>#524</a>)</li>
 <li>Added Chi-square distribution. (<a href='https://github.com/mlverse/torch/issues/518'>#518</a>)</li>
 <li>Added <code>optimizer</code> function allowing to easily implement custom optimizers. (<a href='https://github.com/mlverse/torch/issues/527'>#527</a>)</li>
 </ul>
 </div>
+<div id="bug-fixes" class="section level2">
+<h2 class="hasAnchor">
+<a href="#bug-fixes" class="anchor"></a>Bug fixes</h2>
+<ul>
+<li>Fixed bug in <code>optim_lbfgs</code> that would make model objects exponentially big. (<a href='https://github.com/mlverse/torch/issues/431'>#431</a>)</li>
+<li>Correctly handle <code>NaN</code>s in L-BFGS optimizer (<a href='https://github.com/mlverse/torch/issues/433'>#433</a>)</li>
+<li>The default collate function now respects the data type when converting to a tensor (if the dataset returns an R object) (<a href='https://github.com/mlverse/torch/issues/434'>#434</a>)</li>
+<li>Fixed <code>torch_normal</code>. (<a href='https://github.com/mlverse/torch/issues/450'>#450</a>)</li>
+<li>Fixed backward compatibility issue when loading models saved in older versions of torch. This bug was introduced in <a href='https://github.com/mlverse/torch/issues/452'>#452</a> and is now fixed and we also added a regression test. (<a href='https://github.com/mlverse/torch/issues/458'>#458</a>)</li>
+<li>Fixed bug when using RNN’s on the GPU (<a href='https://github.com/mlverse/torch/issues/460'>#460</a>)</li>
+<li>Found and fixed some memory leaks, specially when creating datatypes from strings and when saving models with <code>torch_save</code>. (<a href='https://github.com/mlverse/torch/issues/454'>#454</a>)</li>
+<li>Fixed bug in <code>nnf_pad</code> when using <code>mode='circular'</code>. (<a href='https://github.com/mlverse/torch/issues/471'>#471</a>)</li>
+<li>Bugfixes in <code>nn_multihead_attention</code> (<a href='https://github.com/mlverse/torch/issues/496'>#496</a>)</li>
+<li>Fixed bug when using packed sequences with <code>nn_lstm</code> (<a href='https://github.com/mlverse/torch/issues/500'>#500</a>)</li>
+<li>Fixed bug in the <code>to</code> method of <code>nn_module</code> that would reset the <code>requires_grad</code> attribute of parameters. (<a href='https://github.com/mlverse/torch/issues/501'>#501</a>)</li>
+<li>Added <code>strong_wolfe</code> option to <code>optim_lbfgs</code>. (<a href='https://github.com/mlverse/torch/issues/517'>#517</a>)</li>
+<li>Fixed default argument of <code>nn_init_trunc_normal_</code> initializer function. (<a href='https://github.com/mlverse/torch/issues/535'>#535</a>)</li>
+</ul>
+</div>
+<div id="documentation" class="section level2">
+<h2 class="hasAnchor">
+<a href="#documentation" class="anchor"></a>Documentation</h2>
+<ul>
+<li>Added vignette on reading models from Python (<a href='https://github.com/mlverse/torch/issues/469'>#469</a>)</li>
+</ul>
+</div>
+<div id="internal-changes" class="section level2">
+<h2 class="hasAnchor">
+<a href="#internal-changes" class="anchor"></a>Internal changes</h2>
+<ul>
+<li>Removed the PerformanceReporter from tests to get easier to read stack traces. (<a href='https://github.com/mlverse/torch/issues/449'>#449</a>)</li>
+<li>Internal change in the R7 classes so R7 objects are simple external pointer instead of environments. This might cause breaking change if you relied on saving any kind of state in the Tensor object. (<a href='https://github.com/mlverse/torch/issues/452'>#452</a>)</li>
+<li>Internal refactoring making Rcpp aware of some XPtrTorch* types so making it simpler to return them from Rcpp code. This might cause a breaking change if you are relying on <code><a href="../reference/torch_dtype.html">torch_dtype()</a></code> being an R6 class. (<a href='https://github.com/mlverse/torch/issues/451'>#451</a>)</li>
+<li>Internal changes to auto unwrap arguments from SEXP’s in Rcpp. This will make easier to move the dispatcher system to C++ in the future, but already allows us to gain ~30% speedups in small operations. (<a href='https://github.com/mlverse/torch/issues/454'>#454</a>)</li>
+<li>Added a Windows GPU CI workflow (<a href='https://github.com/mlverse/torch/issues/508'>#508</a>).</li>
+<li>Update to LibTorch v1.8 (<a href='https://github.com/mlverse/torch/issues/513'>#513</a>)</li>
+<li>Moved some parts of the dispatcher to C++ to make it faster. (<a href='https://github.com/mlverse/torch/issues/520'>#520</a>)</li>
+</ul>
+</div>
+</div>
     <div id="torch-021" class="section level1">
 <h1 class="page-header" data-toc-text="0.2.1">
 <a href="#torch-021" class="anchor"></a>torch 0.2.1<small> 2021-01-05 </small>
 </h1>
-<div id="breaking-changes" class="section level2">
+<div id="breaking-changes-1" class="section level2">
 <h2 class="hasAnchor">
-<a href="#breaking-changes" class="anchor"></a>Breaking changes</h2>
+<a href="#breaking-changes-1" class="anchor"></a>Breaking changes</h2>
 <ul>
 <li>Made <code>torch_one_hot</code> and <code>nnf_one_hot</code> use 1-based indexing. (<a href='https://github.com/mlverse/torch/issues/410'>#410</a>)</li>
 <li>
 <code>nn_module$eval()</code> and <code>nn_module$train()</code> now return a callable <code>nn_module</code> instead of a <code>nn_Module</code>. (<a href='https://github.com/mlverse/torch/issues/425'>#425</a>)</li>
 </ul>
 </div>
-<div id="new-features" class="section level2">
+<div id="new-features-1" class="section level2">
 <h2 class="hasAnchor">
-<a href="#new-features" class="anchor"></a>New features</h2>
+<a href="#new-features-1" class="anchor"></a>New features</h2>
 <ul>
 <li>Added a custom CPU allocator to call <code>gc</code> when torch might need more memory (<a href='https://github.com/mlverse/torch/issues/402'>#402</a>)</li>
 <li>Updated to LibTorch 1.7.1 (<a href='https://github.com/mlverse/torch/issues/412'>#412</a>)</li>
@@ -262,9 +296,9 @@
 <li>Added support for CUDA 11 on linux (<a href='https://github.com/mlverse/torch/issues/424'>#424</a>)</li>
 </ul>
 </div>
-<div id="bug-fixes" class="section level2">
+<div id="bug-fixes-1" class="section level2">
 <h2 class="hasAnchor">
-<a href="#bug-fixes" class="anchor"></a>Bug fixes</h2>
+<a href="#bug-fixes-1" class="anchor"></a>Bug fixes</h2>
 <ul>
 <li>Fix support for cuda 9.2 (<a href='https://github.com/mlverse/torch/issues/398'>#398</a>)</li>
 <li>Fixed GPU CI that was skipping tests. (<a href='https://github.com/mlverse/torch/issues/398'>#398</a>)</li>
@@ -274,9 +308,9 @@
 <li>Fixed <code>nnf_normalize</code> and <code>x$norm()</code> as they were not able to be called (<a href='https://github.com/mlverse/torch/issues/409'>#409</a>)</li>
 </ul>
 </div>
-<div id="documentation" class="section level2">
+<div id="documentation-1" class="section level2">
 <h2 class="hasAnchor">
-<a href="#documentation" class="anchor"></a>Documentation</h2>
+<a href="#documentation-1" class="anchor"></a>Documentation</h2>
 <ul>
 <li>Small improvement to <code>nn_module</code> documentation (<a href='https://github.com/mlverse/torch/issues/399'>#399</a>).</li>
 <li>The getting started section has been removed from the pkgdown website in favor of the new guide in the landing page (<a href='https://github.com/mlverse/torch/issues/401'>#401</a>)</li>
@@ -288,9 +322,9 @@
 <h1 class="page-header" data-toc-text="0.2.0">
 <a href="#torch-020" class="anchor"></a>torch 0.2.0<small> 2020-12-15 </small>
 </h1>
-<div id="breaking-changes-1" class="section level2">
+<div id="breaking-changes-2" class="section level2">
 <h2 class="hasAnchor">
-<a href="#breaking-changes-1" class="anchor"></a>Breaking changes</h2>
+<a href="#breaking-changes-2" class="anchor"></a>Breaking changes</h2>
 <ul>
 <li>Dataloaders now returns a <code><a href="https://rdrr.io/pkg/coro/man/iterator.html">coro::exhausted</a></code> intead of raising <code>stop_iteration_error</code> when the dataloader exceeds. (<a href='https://github.com/mlverse/torch/issues/366'>#366</a>)</li>
 <li>Fixed bug that would happen with functions that need to transform tensors from 0-based to 1-based in the GPU. (<a href='https://github.com/mlverse/torch/issues/317'>#317</a>)</li>
@@ -298,9 +332,9 @@
 <li>Fixed <code>torch_argmax</code>, <code>torch_argmin</code>, <code>x$argmax()</code> and <code>x$argmin()</code> return 1-based indexes. (<a href='https://github.com/mlverse/torch/issues/389'>#389</a>)</li>
 </ul>
 </div>
-<div id="new-features-1" class="section level2">
+<div id="new-features-2" class="section level2">
 <h2 class="hasAnchor">
-<a href="#new-features-1" class="anchor"></a>New features</h2>
+<a href="#new-features-2" class="anchor"></a>New features</h2>
 <ul>
 <li>Added <code>$element_size()</code> method (<a href='https://github.com/dirkschumacher'>@dirkschumacher</a> <a href='https://github.com/mlverse/torch/issues/322'>#322</a>)</li>
 <li>Added <code>$bool()</code> method (<a href='https://github.com/dirkschumacher'>@dirkschumacher</a> <a href='https://github.com/mlverse/torch/issues/323'>#323</a>)</li>
@@ -323,9 +357,9 @@
 <li>Improved the <code>nn_module</code> UI by improving autocomplete support and adding a print method (<a href='https://github.com/mlverse/torch/issues/391'>#391</a>)</li>
 </ul>
 </div>
-<div id="bug-fixes-1" class="section level2">
+<div id="bug-fixes-2" class="section level2">
 <h2 class="hasAnchor">
-<a href="#bug-fixes-1" class="anchor"></a>Bug fixes</h2>
+<a href="#bug-fixes-2" class="anchor"></a>Bug fixes</h2>
 <ul>
 <li>Fixed bug when trying to print the <code>grad_fn</code> of a Tensor that doesn’t have one. See (<a href='https://github.com/mlverse/torch/issues/321'>#321</a>)</li>
 <li>Refactored the optimizers code to avoid duplication of parameter checks, etc. (<a href='https://github.com/dirkschumacher'>@dirkschumacher</a> <a href='https://github.com/mlverse/torch/issues/328'>#328</a>)</li>
@@ -344,9 +378,9 @@
 <h1 class="page-header" data-toc-text="0.1.1">
 <a href="#torch-011" class="anchor"></a>torch 0.1.1<small> 2020-10-20 </small>
 </h1>
-<div id="bug-fixes-2" class="section level2">
+<div id="bug-fixes-3" class="section level2">
 <h2 class="hasAnchor">
-<a href="#bug-fixes-2" class="anchor"></a>Bug fixes</h2>
+<a href="#bug-fixes-3" class="anchor"></a>Bug fixes</h2>
 <ul>
 <li>Fixed bug that made <code>RandomSampler(replacement = TRUE)</code> to never take the last element in the dataset. (84861fa)</li>
 <li>Fixed <code>torch_topk</code> and <code>x$topk</code> so the returned indexes are 1-based (<a href='https://github.com/mlverse/torch/issues/280'>#280</a>)</li>
@@ -365,9 +399,9 @@
 <li>Fixed <code>$max</code> and <code>$min</code> to return 1-based indexes. (<a href='https://github.com/mlverse/torch/issues/315'>#315</a>)</li>
 </ul>
 </div>
-<div id="new-features-2" class="section level2">
+<div id="new-features-3" class="section level2">
 <h2 class="hasAnchor">
-<a href="#new-features-2" class="anchor"></a>New features</h2>
+<a href="#new-features-3" class="anchor"></a>New features</h2>
 <ul>
 <li>Expanded the <code>utils_data_default_collate</code> to support converting R objects to torch tensors when needed. (<a href='https://github.com/mlverse/torch/issues/269'>#269</a>)</li>
 <li>Added an <code>as.matrix</code> method for torch Tensors. (<a href='https://github.com/mlverse/torch/issues/282'>#282</a>)</li>

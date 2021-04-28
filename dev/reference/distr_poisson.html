@@ -6,9 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Creates a Poisson distribution parameterized by rate, the rate parameter.
-Samples are nonnegative integers, with a pmf given by
-\(\mathrm{rate}^k \frac{e^{-\mathrm{rate}}}{k!}\) — distr_poisson • torch</title>
+<title>Creates a Poisson distribution parameterized by rate, the rate parameter. — distr_poisson • torch</title>
 
 
 <!-- jquery -->
@@ -43,12 +41,11 @@ Samples are nonnegative integers, with a pmf given by
   <link href="../extra.css" rel="stylesheet">
   
 
-<meta property="og:title" content="Creates a Poisson distribution parameterized by rate, the rate parameter.
-Samples are nonnegative integers, with a pmf given by
-\(\mathrm{rate}^k \frac{e^{-\mathrm{rate}}}{k!}\) — distr_poisson" />
-<meta property="og:description" content="Creates a Poisson distribution parameterized by rate, the rate parameter.
-Samples are nonnegative integers, with a pmf given by
-\(\mathrm{rate}^k \frac{e^{-\mathrm{rate}}}{k!}\)" />
+<meta property="og:title" content="Creates a Poisson distribution parameterized by rate, the rate parameter. — distr_poisson" />
+<meta property="og:description" content="Samples are nonnegative integers, with a pmf given by
+$$
+\mbox{rate}^{k} \frac{e^{-\mbox{rate}}}{k!}
+$$" />
 
 
 <meta name="robots" content="noindex">
@@ -90,7 +87,7 @@ Samples are nonnegative integers, with a pmf given by
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">torch</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.2.1.9000</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.3.0.9000</span>
       </span>
     </div>
 
@@ -186,17 +183,16 @@ Samples are nonnegative integers, with a pmf given by
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Creates a Poisson distribution parameterized by <code>rate</code>, the rate parameter.
-Samples are nonnegative integers, with a pmf given by
-\(\mathrm{rate}^k \frac{e^{-\mathrm{rate}}}{k!}\)</h1>
+    <h1>Creates a Poisson distribution parameterized by <code>rate</code>, the rate parameter.</h1>
     <small class="dont-index">Source: <a href='https://github.com/mlverse/torch/blob/master/R/distributions-poisson.R'><code>R/distributions-poisson.R</code></a></small>
     <div class="hidden name"><code>distr_poisson.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Creates a Poisson distribution parameterized by <code>rate</code>, the rate parameter.
-Samples are nonnegative integers, with a pmf given by
-\(\mathrm{rate}^k \frac{e^{-\mathrm{rate}}}{k!}\)</p>
+    <p>Samples are nonnegative integers, with a pmf given by
+$$
+\mbox{rate}^{k} \frac{e^{-\mbox{rate}}}{k!}
+$$</p>
     </div>
 
     <pre class="usage"><span class='fu'>distr_poisson</span><span class='op'>(</span><span class='va'>rate</span>, validate_args <span class='op'>=</span> <span class='cn'>NULL</span><span class='op'>)</span></pre>
