@@ -4,7 +4,7 @@
 \alias{nn_init_trunc_normal_}
 \title{Truncated normal initialization}
 \usage{
-nn_init_trunc_normal_(tensor, mean = 0, std = 1, a = -2, b = -2)
+nn_init_trunc_normal_(tensor, mean = 0, std = 1, a = -2, b = 2)
 }
 \arguments{
 \item{tensor}{an n-dimensional Tensor}
