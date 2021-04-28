@@ -138,7 +138,7 @@ nn_init_normal_ <- function(tensor, mean = 0, std = 1) {
 #' nn_init_trunc_normal_(w)
 #'
 #' @export
-nn_init_trunc_normal_ <- function(tensor, mean = 0, std = 1, a = -2, b = -2) {
+nn_init_trunc_normal_ <- function(tensor, mean = 0, std = 1, a = -2, b = 2) {
   nn_init_no_grad_trunc_normal(tensor, mean, std, a, b)
 }
 
