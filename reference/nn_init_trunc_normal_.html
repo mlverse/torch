@@ -191,7 +191,7 @@ normal distribution." />
 normal distribution.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>nn_init_trunc_normal_</span><span class='op'>(</span><span class='va'>tensor</span>, mean <span class='op'>=</span> <span class='fl'>0</span>, std <span class='op'>=</span> <span class='fl'>1</span>, a <span class='op'>=</span> <span class='op'>-</span><span class='fl'>2</span>, b <span class='op'>=</span> <span class='op'>-</span><span class='fl'>2</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>nn_init_trunc_normal_</span><span class='op'>(</span><span class='va'>tensor</span>, mean <span class='op'>=</span> <span class='fl'>0</span>, std <span class='op'>=</span> <span class='fl'>1</span>, a <span class='op'>=</span> <span class='op'>-</span><span class='fl'>2</span>, b <span class='op'>=</span> <span class='fl'>2</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -226,9 +226,9 @@ normal distribution.</p>
 
 <span class='op'>}</span>
 </div><div class='output co'>#&gt; torch_tensor
-#&gt; -2 -2 -2 -2 -2
-#&gt; -2 -2 -2 -2 -2
-#&gt; -2 -2 -2 -2 -2
+#&gt;  0.6130 -1.3581  1.1080 -0.6984  1.3939
+#&gt; -0.4015 -0.3020  0.4154 -0.1405  0.1699
+#&gt;  0.5940  0.3101 -1.0314 -1.1279 -0.9460
 #&gt; [ CPUFloatType{3,5} ]</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
