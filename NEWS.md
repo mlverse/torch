@@ -1,5 +1,7 @@
 # torch (development version)
 
+- Fixed bug in `nn_multihead_attention` when q,k,v inputs not all the same. (@jonathanbratt #540)
+
 # torch 0.3.0
 
 ## Breaking changes
