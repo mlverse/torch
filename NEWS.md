@@ -46,6 +46,7 @@
 - Fixed bug in the `to` method of `nn_module` that would reset the `requires_grad` attribute of parameters. (#501)
 - Added `strong_wolfe` option to `optim_lbfgs`. (#517)
 - Fixed default argument of `nn_init_trunc_normal_` initializer function. (#535)
+- Fixed bug in `nn_multihead_attention` when q,k,v inputs not all the same. (@jonathanbratt #540)
 
 ## Documentation
 
