@@ -34,7 +34,7 @@ jobs:
             test: ./lanterntest
             make: make
             build: build
-            cmakevars: -D_GLIBCXX_USE_CXX11_ABI=1
+            cmakevars:
             libext:
             exeext:
             fixlib: chrpath -r '$ORIGIN/.' liblantern.so
