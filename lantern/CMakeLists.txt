@@ -2,6 +2,13 @@ cmake_minimum_required(VERSION 3.16)
 
 project(lantern)
 
+# first check
+if(NOT DEFINED ${_GLIBCXX_USE_CXX11_ABI})
+  set(_GLIBCXX_USE_CXX11_ABI 1)
+endif()
+
+message("-- _GLIBCXX_USE_CXX11_ABI=${_GLIBCXX_USE_CXX11_ABI}")
+
 add_definitions(-D_GLIBCXX_USE_CXX11_ABI=${_GLIBCXX_USE_CXX11_ABI})
 
 ############################################################
@@ -66,7 +73,11 @@ elseif(UNIX)
         add_compile_definitions(CUDA111)
         retrieve_lib("https://download.pytorch.org/libtorch/cu111/libtorch-cxx11-abi-shared-with-deps-1.8.1%2Bcu111.zip" "libtorch")
     else()
+      if ('${_GLIBCXX_USE_CXX11_ABI}' STREQUAL '1')
         retrieve_lib("https://download.pytorch.org/libtorch/cpu/libtorch-cxx11-abi-shared-with-deps-1.8.1%2Bcpu.zip" "libtorch")
+      else()
+        retrieve_lib("https://download.pytorch.org/libtorch/cpu/libtorch-shared-with-deps-1.8.1%2Bcpu.zip" "libtorch")
+      endif()
     endif()
 else()
     message(FATAL_ERROR, "OS not supported.")
