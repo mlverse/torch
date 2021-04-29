@@ -34,7 +34,7 @@ jobs:
             test: ./lanterntest
             make: make
             build: build
-            cmakevars:
+            cmakevars: -D_GLIBCXX_USE_CXX11_ABI=1
             libext:
             exeext:
             fixlib: chrpath -r '$ORIGIN/.' liblantern.so
@@ -42,7 +42,7 @@ jobs:
             artifacts: liblantern.so
             upload: Linux
           - os: ubuntu-18.04
-            cuda: 0
+            cuda: -1
             library: liblantern.so
             test: ./lanterntest
             make: make

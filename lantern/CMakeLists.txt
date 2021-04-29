@@ -2,6 +2,8 @@ cmake_minimum_required(VERSION 3.16)
 
 project(lantern)
 
+add_definitions(-D_GLIBCXX_USE_CXX11_ABI=${_GLIBCXX_USE_CXX11_ABI})
+
 ############################################################
 # Helpers
 ############################################################
