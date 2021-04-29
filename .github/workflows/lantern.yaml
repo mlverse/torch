@@ -53,7 +53,7 @@ jobs:
             fixlib: chrpath -r '$ORIGIN/.' liblantern.so
             flavor: Release
             artifacts: liblantern.so
-            upload: Linux-Non-ABI
+            upload: LinuxNonABI
           - os: macos-10.15
             cuda: 0
             library: liblantern.dylib
@@ -256,7 +256,7 @@ jobs:
     runs-on: ubuntu-18.04
     strategy:
       matrix:
-        name: [macOS, Linux, Windows, Cuda101, Cuda102,  Cuda111, WindowsCuda101, WindowsCuda102, WindowsCuda111]
+        name: [macOS, Linux, LinuxNonABI, Windows, Cuda101, Cuda102,  Cuda111, WindowsCuda101, WindowsCuda102, WindowsCuda111]
         include:
           - name: macOS
             artifact: macOS
@@ -265,6 +265,10 @@ jobs:
           - name: Linux
             artifact: Linux
             upload: Linux
+            hw: cpu
+          - name: LinuxNonABI
+            artifact: LinuxNonABI
+            upload: LinuxNonABI
             hw: cpu
           - name: Windows
             artifact: Windows
