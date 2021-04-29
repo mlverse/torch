@@ -5,7 +5,7 @@ on:
     branches:
       - master
       - 'cran/**'
-      - re-add-cuda10.1
+      - non-abi
 
 jobs:
   build:
@@ -41,6 +41,19 @@ jobs:
             flavor: Release
             artifacts: liblantern.so
             upload: Linux
+          - os: ubuntu-18.04
+            cuda: 0
+            library: liblantern.so
+            test: ./lanterntest
+            make: make
+            build: build
+            cmakevars: -D_GLIBCXX_USE_CXX11_ABI=0
+            libext:
+            exeext:
+            fixlib: chrpath -r '$ORIGIN/.' liblantern.so
+            flavor: Release
+            artifacts: liblantern.so
+            upload: Linux-Non-ABI
           - os: macos-10.15
             cuda: 0
             library: liblantern.dylib
