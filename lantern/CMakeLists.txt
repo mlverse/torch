@@ -2,11 +2,10 @@ cmake_minimum_required(VERSION 3.16)
 
 project(lantern)
 
-# first check
-if(NOT DEFINED ${_GLIBCXX_USE_CXX11_ABI})
+
+if(NOT DEFINED _GLIBCXX_USE_CXX11_ABI)
   set(_GLIBCXX_USE_CXX11_ABI 1)
 endif()
-
 message("-- _GLIBCXX_USE_CXX11_ABI=${_GLIBCXX_USE_CXX11_ABI}")
 
 add_definitions(-D_GLIBCXX_USE_CXX11_ABI=${_GLIBCXX_USE_CXX11_ABI})
