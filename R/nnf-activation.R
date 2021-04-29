@@ -182,7 +182,7 @@ nnf_gumbel_softmax <- function(logits, tau = 1, hard = FALSE, dim = -1) {
     y_hard <- y_hard$scatter_(dim, index, 1)
     ret <- y_hard - y_soft$detach() + y_soft
   } else {
-    ret = y_soft
+    ret <- y_soft
   }
   ret
 }
