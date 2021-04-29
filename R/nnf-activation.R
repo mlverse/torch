@@ -581,7 +581,7 @@ nnf_multi_head_attention_forward <- function(
         v <- NULL
       } else {
         b_ <- in_proj_bias
-        start_ <- embed_dim
+        start_ <- embed_dim + 1
         end_ <- NULL
         w_ <- in_proj_weight[start_:N, ]
         if (!is.null(b_)) {
@@ -596,7 +596,7 @@ nnf_multi_head_attention_forward <- function(
       
       # This is inline in_proj function with in_proj_weight and in_proj_bias
       b_ <- in_proj_bias
-      start_ <- 0
+      start_ <- 1
       end_ <- embed_dim
       w_ <- in_proj_weight[start_:end_, ]
       if (!is.null(b_))
@@ -606,7 +606,7 @@ nnf_multi_head_attention_forward <- function(
       
       # This is inline in_proj function with in_proj_weight and in_proj_bias
       b_ <- in_proj_bias
-      start_ <- embed_dim
+      start_ <- embed_dim + 1
       end_ <- embed_dim * 2
       w_ <- in_proj_weight[start_:end_,]
       if (!is.null(b_))
@@ -615,7 +615,7 @@ nnf_multi_head_attention_forward <- function(
       
       # This is inline in_proj function with in_proj_weight and in_proj_bias
       b_ <- in_proj_bias
-      start_ <- embed_dim * 2
+      start_ <- embed_dim * 2 + 1
       end_ <- NULL
       w_ <- in_proj_weight[start_:N,]
       if (!is.null(b_)) {
