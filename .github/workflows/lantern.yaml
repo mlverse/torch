@@ -81,6 +81,19 @@ jobs:
             artifacts: liblantern.so
             upload: Linux-Cuda-101
           - os: ubuntu-18.04
+            cuda: 10.1
+            library: liblantern.so
+            test: ./lanterntest
+            make: make
+            build: build
+            cmakevars: -D_GLIBCXX_USE_CXX11_ABI=0
+            libext:
+            exeext:
+            fixlib: chrpath -r '$ORIGIN/.' liblantern.so
+            flavor: Release
+            artifacts: liblantern.so
+            upload: LinuxNonABI-Cuda-101
+          - os: ubuntu-18.04
             cuda: 10.2
             library: liblantern.so
             test: ./lanterntest
@@ -256,7 +269,7 @@ jobs:
     runs-on: ubuntu-18.04
     strategy:
       matrix:
-        name: [macOS, Linux, LinuxNonABI, Windows, Cuda101, Cuda102,  Cuda111, WindowsCuda101, WindowsCuda102, WindowsCuda111]
+        name: [macOS, Linux, LinuxNonABI, Windows, Cuda101, NonABICuda101, Cuda102,  Cuda111, WindowsCuda101, WindowsCuda102, WindowsCuda111]
         include:
           - name: macOS
             artifact: macOS
@@ -277,6 +290,11 @@ jobs:
           - name: Cuda101
             artifact: Linux-Cuda-101
             upload: Linux
+            hw: gpu
+            version: -101
+          - name: NonABICuda101
+            artifact: LinuxNonABI-Cuda-101
+            upload: LinuxNonABI
             hw: gpu
             version: -101
           - name: Cuda102
