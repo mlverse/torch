@@ -1,6 +1,7 @@
 # torch (development version)
 
 - Fixed bug in `nn_multihead_attention` when q,k,v inputs not all the same. (@jonathanbratt #540)
+- Added parameter to multihead attention module to allow output of unaveraged attention weights. (@jonathanbratt #542)
 
 # torch 0.3.0
 

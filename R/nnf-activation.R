@@ -514,6 +514,9 @@ nnf_threshold_ <- function(input, threshold, value) {
 #'   while the zero positions will be unchanged. If a BoolTensor is provided, positions with ``True``
 #'   is not allowed to attend while ``False`` values will be unchanged. If a FloatTensor
 #'   is provided, it will be added to the attention weight.
+#' @param avg_weights Logical; whether to average attn_output_weights over the
+#'   attention heads before outputting them. This doesn't change the returned 
+#'   value of attn_output; it only affects the returned attention weight matrix.
 #' @param in_proj_bias currently undocumented.
 #' @param bias_v currently undocumented.
 #' @param out_proj_bias currently undocumented.
@@ -540,6 +543,7 @@ nnf_multi_head_attention_forward <- function(
   key_padding_mask=NULL,           # type: Optional[Tensor]
   need_weights=TRUE,               # type: bool
   attn_mask=NULL,                  # type: Optional[Tensor]
+  avg_weights=TRUE,                # type: bool
   use_separate_proj_weight=FALSE,  # type: bool
   q_proj_weight=NULL,              # type: Optional[Tensor]
   k_proj_weight=NULL,              # type: Optional[Tensor]
@@ -730,7 +734,11 @@ nnf_multi_head_attention_forward <- function(
       tgt_len,
       src_len
     ))
-    return(list(attn_output, attn_output_weights$sum(dim = 2)/num_heads))
+    if (avg_weights) {
+      return(list(attn_output, attn_output_weights$sum(dim = 2)/num_heads))
+    } else {
+      return(list(attn_output, attn_output_weights))
+    }
   } else {
     return(list(attn_output, NULL))
   }

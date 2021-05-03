@@ -12,6 +12,12 @@ test_that("nn_multihead_attention", {
     expect_identical(out[[1]]$size(), c(5L, 8L, 32L))
     expect_identical(out[[2]]$size(), c(8L, 5L, 5L))
     
+    # unaveraged attention weights
+    out <- attn(t1, t1, t1, avg_weights = FALSE)
+    
+    expect_identical(out[[1]]$size(), c(5L, 8L, 32L))
+    expect_identical(out[[2]]$size(), c(8L, 8L, 5L, 5L))
+    
     # q different from k,v:
     out <- attn(t1, t2, t2)
     
