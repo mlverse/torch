@@ -716,10 +716,16 @@ nn_softshrink <- nn_module(
 #' 
 #' Outputs:
 #'   
-#' - attn_output: \eqn{(L, N, E)} where L is the target sequence length, N is the batch size,
-#'   E is the embedding dimension.
-#' - attn_output_weights: \eqn{(N, L, S)} where N is the batch size,
-#'   L is the target sequence length, S is the source sequence length.
+#' - attn_output: \eqn{(L, N, E)} where L is the target sequence length, N is 
+#'   the batch size, E is the embedding dimension.
+#' - attn_output_weights: 
+#'   - if ``avg_weights`` is ``TRUE`` (the default), the output attention 
+#'     weights are averaged over the attention heads, giving a tensor of shape 
+#'     \eqn{(N, L, S)} where N is the batch size, L is the target sequence 
+#'     length, S is the source sequence length.
+#'   - if ``avg_weights`` is ``FALSE``, the attention weight tensor is output 
+#'     as-is, with shape \eqn{(N, H, L, S)}, where H is the number of attention
+#'     heads.
 #'   
 #' @examples
 #' \dontrun{
@@ -809,7 +815,7 @@ nn_multihead_attention <- nn_module(
     
   },
   forward = function(query, key, value, key_padding_mask=NULL,
-                     need_weights=TRUE, attn_mask=NULL) {
+                     need_weights=TRUE, attn_mask=NULL, avg_weights=TRUE) {
     if (!self$qkv_same_embed_dim_) {
       nnf_multi_head_attention_forward(
         query, key, value, self$embed_dim, self$num_heads,
@@ -829,7 +835,7 @@ nn_multihead_attention <- nn_module(
         self$dropout, self$out_proj$weight, self$out_proj$bias,
         training=self$training,
         key_padding_mask=key_padding_mask, need_weights=need_weights,
-        attn_mask=attn_mask)
+        attn_mask=attn_mask, avg_weights=avg_weights)
     }
   }
 )

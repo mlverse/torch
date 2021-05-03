@@ -22,6 +22,7 @@ nnf_multi_head_attention_forward(
   key_padding_mask = NULL,
   need_weights = TRUE,
   attn_mask = NULL,
+  avg_weights = TRUE,
   use_separate_proj_weight = FALSE,
   q_proj_weight = NULL,
   k_proj_weight = NULL,
@@ -77,6 +78,10 @@ positions. If a ByteTensor is provided, the non-zero positions are not allowed t
 while the zero positions will be unchanged. If a BoolTensor is provided, positions with \code{True}
 is not allowed to attend while \code{False} values will be unchanged. If a FloatTensor
 is provided, it will be added to the attention weight.}
+
+\item{avg_weights}{Logical; whether to average attn_output_weights over the
+attention heads before outputting them. This doesn't change the returned
+value of attn_output; it only affects the returned attention weight matrix.}
 
 \item{use_separate_proj_weight}{the function accept the proj. weights for
 query, key, and value in different forms. If false, in_proj_weight will be used,
