@@ -35,7 +35,8 @@ Imports:
     tools,
     coro,
     callr,
-    cli
+    cli,
+    ellipsis
 RoxygenNote: 7.1.1
 Roxygen: list(markdown = TRUE)
 Suggests:

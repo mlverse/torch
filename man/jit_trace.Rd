@@ -4,19 +4,18 @@
 \alias{jit_trace}
 \title{Trace a function and return an executable \code{script_function}.}
 \usage{
-jit_trace(func, example_inputs, ...)
+jit_trace(func, ...)
 }
 \arguments{
 \item{func}{An R function that will be run with \code{example_inputs}. func arguments
 and return values must be tensors or (possibly nested) lists that contain tensors.}
 
-\item{example_inputs}{example inputs that will be passed to the function while
+\item{...}{example inputs that will be passed to the function while
 tracing. The resulting trace can be run with inputs of different types and
 shapes assuming the traced operations support those types and shapes.
 \code{example_inputs} may also be a single Tensor in which case it is automatically
-wrapped in a list.}
-
-\item{...}{currently unused.}
+wrapped in a list. Note that \code{...} \strong{can not} be named, and the order is
+respected.}
 }
 \value{
 An \code{script_function}
