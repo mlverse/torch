@@ -125,3 +125,23 @@ test_that("can output a list of tensors", {
   expect_equal_to_tensor(fn(x)[[2]], tr_fn(x)[[2]])
   
 })
+
+test_that("fn can take more than 1 argument", {
+  
+  fn <- function(x, y) {
+    list(x, x + y)
+  }
+  
+  x <- torch_tensor(1)
+  y <- torch_tensor(2)
+  
+  tr_fn <- jit_trace(fn, x, y)
+  expect_equal_to_tensor(fn(x, y)[[1]], tr_fn(x, y)[[1]])
+  expect_equal_to_tensor(fn(x, y)[[2]], tr_fn(x, y)[[2]])
+  
+  expect_error(
+    tr_fn <- jit_trace(fn, x = x, y = y)  
+  )
+  
+})
+

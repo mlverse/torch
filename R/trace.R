@@ -36,12 +36,12 @@
 #' 
 #' @param func An R function that will be run with `example_inputs`. func arguments 
 #'   and return values must be tensors or (possibly nested) lists that contain tensors.
-#' @param example_inputs example inputs that will be passed to the function while 
+#' @param ... example inputs that will be passed to the function while 
 #'   tracing. The resulting trace can be run with inputs of different types and 
 #'   shapes assuming the traced operations support those types and shapes. 
 #'   `example_inputs` may also be a single Tensor in which case it is automatically 
-#'   wrapped in a list.
-#' @param ... currently unused.
+#'   wrapped in a list. Note that `...` **can not** be named, and the order is 
+#'   respected.
 #' 
 #' @returns An `script_function`
 #' 
@@ -54,9 +54,10 @@
 #' tr_fn(input)
 #'
 #' @export
-jit_trace <- function(func, example_inputs, ...) {
+jit_trace <- function(func, ...) {
   tr_fn <- make_traceable_fn(func)
-  ex_inp <- torch_jit_stack(example_inputs)
+  ellipsis::check_dots_unnamed() # we do not support named arguments
+  ex_inp <- torch_jit_stack(...)
   ptr <- cpp_trace_function(tr_fn, ex_inp$ptr, .compilation_unit)
   new_script_function(ptr)
 }
