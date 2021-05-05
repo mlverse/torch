@@ -111,7 +111,7 @@ Tensor <- R7Class(
     copy_ = function(src, non_blocking = FALSE) {
       
       if (is_null_external_pointer(self$ptr)) {
-        g <- torch_empty_like(src)
+        g <- torch_empty_like(src, requires_grad = src$requires_grad)
         # this is the only way modify `self` in place.
         # changing it's address in the C side and
         # adding a protection to `g` so it only

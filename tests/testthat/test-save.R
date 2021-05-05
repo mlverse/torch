@@ -167,3 +167,35 @@ test_that("Can load a torch v0.2.1 model", {
   expect_tensor_shape(o, c(32, 10))
 })
 
+test_that("requires_grad for tensors is maintained", {
+  
+  x <- torch_randn(10, 10, requires_grad = TRUE)
+  tmp <- tempfile("model", fileext = "pt")
+  torch_save(x, tmp)
+  y <- torch_load(tmp)
+  expect_true(y$requires_grad)
+  
+  x <- torch_randn(10, 10, requires_grad = FALSE)
+  tmp <- tempfile("model", fileext = "pt")
+  torch_save(x, tmp)
+  y <- torch_load(tmp)
+  expect_false(y$requires_grad)
+})
+
+test_that("requires_grad of parameters is correct", {
+  model <- nn_linear(10, 10)
+  tmp <- tempfile("model", fileext = "pt")
+  torch_save(model, tmp)
+  model2 <- torch_load(tmp)
+  expect_true(model2$bias$requires_grad)
+  
+  
+  model <- nn_linear(10, 10)
+  model$bias$requires_grad_(FALSE)
+  expect_false(model$bias$requires_grad)
+  tmp <- tempfile("model", fileext = "pt")
+  torch_save(model, tmp)
+  model2 <- torch_load(tmp)
+  expect_false(model2$bias$requires_grad)
+})
+

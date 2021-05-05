@@ -321,3 +321,30 @@ test_that("tensor$bool works", {
   )
   expect_equal_to_tensor(result, expected)
 })
+
+test_that("copy_ respects the origin requires_grad", {
+  
+  x <- torch_randn(1, requires_grad = FALSE)
+  y <- torch_randn(1, requires_grad = TRUE)
+
+  x$copy_(y)  
+  expect_true(x$requires_grad)
+  
+  x <- torch_randn(1, requires_grad = FALSE)
+  with_no_grad({x$copy_(y)})
+  expect_false(x$requires_grad)
+  
+  x <- torch_randn(1, requires_grad = TRUE)
+  y <- torch_randn(1, requires_grad = FALSE)
+  expect_error(x$copy_(y))
+  
+  x <- torch_randn(1, requires_grad = TRUE)
+  with_no_grad({x$copy_(y)})
+  expect_true(x$requires_grad)
+  
+  x <- torch_randn(1, requires_grad = TRUE)
+  y <- torch_randn(1, requires_grad = TRUE)
+  with_no_grad({x$copy_(y)})
+  expect_true(x$requires_grad)
+  
+})
