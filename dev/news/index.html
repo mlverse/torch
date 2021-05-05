@@ -83,7 +83,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">torch</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.3.0.9000</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.3.0.9001</span>
       </span>
     </div>
 
@@ -191,6 +191,7 @@
 <li>Fixed bug in <code>nn_multihead_attention</code> when q,k,v inputs not all the same. (<a href='https://github.com/jonathanbratt'>@jonathanbratt</a> <a href='https://github.com/mlverse/torch/issues/540'>#540</a>)</li>
 <li>Added parameter to multihead attention module to allow output of unaveraged attention weights. (<a href='https://github.com/jonathanbratt'>@jonathanbratt</a> <a href='https://github.com/mlverse/torch/issues/542'>#542</a>)</li>
 <li>We now allow <code>jit_trace</code> functions with more than 1 argument. (<a href='https://github.com/mlverse/torch/issues/544'>#544</a>)</li>
+<li>Fixed <code>$copy_</code> so it correctly respects the src <code>requires_grad()</code> when reloading saved models with <code><a href="../reference/torch_load.html">torch_load()</a></code>. (<a href='https://github.com/mlverse/torch/issues/545'>#545</a>)</li>
 </ul>
 </div>
     <div id="torch-030" class="section level1">
