@@ -345,14 +345,14 @@ BEGIN_RCPP
 END_RCPP
 }
 // cpp_arg_to_torch_type
-std::string cpp_arg_to_torch_type(SEXP obj, std::vector<std::string> expected_types, std::string arg_name);
+std::string cpp_arg_to_torch_type(SEXP obj, const std::vector<std::string> expected_types, const std::string arg_name);
 RcppExport SEXP _torch_cpp_arg_to_torch_type(SEXP objSEXP, SEXP expected_typesSEXP, SEXP arg_nameSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< SEXP >::type obj(objSEXP);
-    Rcpp::traits::input_parameter< std::vector<std::string> >::type expected_types(expected_typesSEXP);
-    Rcpp::traits::input_parameter< std::string >::type arg_name(arg_nameSEXP);
+    Rcpp::traits::input_parameter< const std::vector<std::string> >::type expected_types(expected_typesSEXP);
+    Rcpp::traits::input_parameter< const std::string >::type arg_name(arg_nameSEXP);
     rcpp_result_gen = Rcpp::wrap(cpp_arg_to_torch_type(obj, expected_types, arg_name));
     return rcpp_result_gen;
 END_RCPP
@@ -370,15 +370,15 @@ BEGIN_RCPP
 END_RCPP
 }
 // cpp_make_function_name
-std::string cpp_make_function_name(std::string method_name, std::vector<std::string> arg_names, std::vector<std::string> arg_types, std::string type);
+std::string cpp_make_function_name(const std::string method_name, const std::vector<std::string> arg_names, const std::vector<std::string> arg_types, const std::string type);
 RcppExport SEXP _torch_cpp_make_function_name(SEXP method_nameSEXP, SEXP arg_namesSEXP, SEXP arg_typesSEXP, SEXP typeSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< std::string >::type method_name(method_nameSEXP);
-    Rcpp::traits::input_parameter< std::vector<std::string> >::type arg_names(arg_namesSEXP);
-    Rcpp::traits::input_parameter< std::vector<std::string> >::type arg_types(arg_typesSEXP);
-    Rcpp::traits::input_parameter< std::string >::type type(typeSEXP);
+    Rcpp::traits::input_parameter< const std::string >::type method_name(method_nameSEXP);
+    Rcpp::traits::input_parameter< const std::vector<std::string> >::type arg_names(arg_namesSEXP);
+    Rcpp::traits::input_parameter< const std::vector<std::string> >::type arg_types(arg_typesSEXP);
+    Rcpp::traits::input_parameter< const std::string >::type type(typeSEXP);
     rcpp_result_gen = Rcpp::wrap(cpp_make_function_name(method_name, arg_names, arg_types, type));
     return rcpp_result_gen;
 END_RCPP
