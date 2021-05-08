@@ -23,3 +23,19 @@ test_that("positive definite", {
   expect_equal_to_r(constraint_positive_definite$check(x), matrix(TRUE, nrow = 1, ncol = 1))
   
 })
+
+test_that("lower cholesky", {
+  
+  x <- torch_rand(5, 2,2)
+  expect_equal_to_r(constraint_lower_cholesky$check(x), rep(FALSE, 5))
+  
+  x <- torch_randn(5, 2,2)
+  expect_equal_to_r(constraint_lower_cholesky$check(x), rep(FALSE, 5))
+  
+  x <- torch_eye(2,2)$unsqueeze(1)
+  expect_equal_to_r(constraint_lower_cholesky$check(x), rep(TRUE, 1))
+
+  x <- torch_eye(2,2)$unsqueeze(1)$mul(-2)
+  expect_equal_to_r(constraint_lower_cholesky$check(x), rep(FALSE, 1))
+    
+})

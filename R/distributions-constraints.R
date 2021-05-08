@@ -346,6 +346,19 @@ is_dependent <- function(object){
   )
 )
 
+.LowerCholesky <- R6::R6Class(
+  "torch_LowerCholesky",
+  inherit = Constraint,
+  public = list(
+    check = function(value) {
+      value_tril <- value$tril()
+      lower_triangular <- (value_tril == value)$view(c(head2(value$shape,-2), -1))$min(-1)[[1]]
+      positive_diagonal <- (value$diagonal(dim1=-2, dim2=-1) > 0)$min(-1)[[1]]
+      lower_triangular & positive_diagonal
+    }
+  )
+)
+
 # Public interface
 # TODO: check .GreaterThan and other classes,
 # which are not instanced
@@ -377,3 +390,5 @@ constraint_interval <- .Interval
 constraint_half_open_interval <- .HalfOpenInterval
 
 constraint_positive_definite <- .PositiveDefinite$new()
+
+constraint_lower_cholesky <- .LowerCholesky$new()
