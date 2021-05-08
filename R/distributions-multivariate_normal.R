@@ -57,8 +57,10 @@ MultivariateNormal <- R6::R6Class(
   
   public = list(
     
-    .arg_constraints = list(loc   = constraint_real, 
-                            scale = constraint_positive),
+    .arg_constraints = list(loc   = constraint_real_vector,
+                            covariance_matrix = constraint_positive_definite,
+                            precision_matrix = constraint_positive_definite,
+                            scale = constraint_lower_cholesky),
     .support = constraint_real,
     has_rsample = TRUE,
     ._mean_carrier_measure = 0,
