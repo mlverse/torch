@@ -61,3 +61,9 @@ create_class <- function(name, inherit, ..., private, active, parent_env,
   f
 }
 
+# https://stackoverflow.com/a/54971834/3297472
+transpose_list <- function(x) {
+  do.call(Map, c(f = c, x))
+}
+  
+
