@@ -66,4 +66,10 @@ transpose_list <- function(x) {
   do.call(Map, c(f = c, x))
 }
   
+head2 <- function(x, n) {
+  if (n > 0)
+    utils::head(x, n = n)
+  else
+    utils::head(x, n = length(x) + n)
+}
 
