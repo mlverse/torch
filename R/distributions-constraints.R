@@ -21,7 +21,7 @@ Constraint <- R6::R6Class(
     #' @description 
     #' Define the print method for constraints,
     print = function(){
-      cat(glue("{class(self)}"))
+      cat(glue::glue("{class(self)}"))
     }
   )
 )
@@ -45,6 +45,28 @@ Constraint <- R6::R6Class(
 is_dependent <- function(object){
   inherits(object, "torch_Dependent")
 }
+
+.IndependentConstraint <- R6::R6Class(
+  "torch_IndependentConstraint",
+  lock_objects = FALSE,
+  inherit = Constraint,
+  public = list(
+    initialize = function(base_constraint, reinterpreted_batch_ndims) {
+      self$base_constraint <- base_constraint
+      self$reinterpreted_batch_ndims <- reinterpreted_batch_ndims
+    },
+    check = function(value) {
+      result <- self$base_constraint$check(value)
+      if (result$dim() < self$reinterpreted_batch_ndims) {
+        expected <- self$base_constraint$event_dim + self$reinterpreted_batch_ndims
+        value_error("Expected value$dim() >= {expected} but got {value$dim()}")
+      }
+      result <- result$reshape(c(head(result$shape, result$dim() - self$reinterpreted_batch_ndims), -1))
+      result <- result$all(dim = -1)
+      result
+    }
+  )
+)
 
 #' Constrain to the two values `{0, 1}`.
 #' @noRd
@@ -315,6 +337,8 @@ constraint_nonnegative_integer <- .IntegerGreaterThan$new(0)
 constraint_positive_integer <- .IntegerGreaterThan$new(1)
 
 constraint_real <- .Real$new()
+
+constraint_real_vector <- .IndependentConstraint$new(constraint_real, 1)
 
 constraint_positive <- .GreaterThan$new(0.)
 
