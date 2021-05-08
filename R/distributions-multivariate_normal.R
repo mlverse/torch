@@ -61,25 +61,59 @@ MultivariateNormal <- R6::R6Class(
                             covariance_matrix = constraint_positive_definite,
                             precision_matrix = constraint_positive_definite,
                             scale = constraint_lower_cholesky),
-    .support = constraint_real,
+    .support = constraint_real_vector,
     has_rsample = TRUE,
     ._mean_carrier_measure = 0,
     
-    initialize = function(loc, scale, validate_args = NULL){
-      # TODO
-      broadcasted <- broadcast_all(list(loc, scale))
-      self$loc    <- broadcasted[[1]]
-      self$scale  <- broadcasted[[2]]
+    initialize = function(loc, covariance_matrix=NULL, precision_matrix=NULL, 
+                          scale_tril=NULL, validate_args=NULL) {
       
-      # TODO: check this fragment
-      # It seems it's more suitbale for Python
-      # if (inherits(loc, "numeric") & inherits(scale, "numeric"))
-      #   batch_shape <- NULL
-      # else
-      #   batch_shape <- self$loc$size()
+      if (loc$dim() < 1)
+        value_error("loc must be at least one-dimensional.")
       
-      batch_shape <- self$loc$size()
-      super$initialize(batch_shape, validate_args=validate_args)
+      if ((!is.null(covariance_matrix) + !is.null(precision_matrix) + 
+           !is.null(scale_tril)) != 1)
+        value_error("Exactly one of covariance_matrix or precision_matrix or scale_tril may be specified.")
+      
+      
+      if (!is.null(scale_tril)) {
+        if (scale_tril$dim() < 2)
+          value_error(paste0("scale_tril matrix must be at least two-dimensional ", 
+                             "with optional leading batch dimensions"))
+        
+       batch_shape <- torch_broadcast_shapes(head2(scale_tril$shape, -2), head2(loc$shape, -1))
+       self$scale_tril <- scale_tril$expand(c(batch_shape, c(-1, -1)))
+      } else if (!is.null(covariance_matrix)) {
+        if (covariance_matrix$dim() < 2)
+          value_error(paste0("covariance_matrix matrix must be at least two-dimensional ", 
+                             "with optional leading batch dimensions"))
+        batch_shape <- torch_broadcast_shapes(
+          head2(covariance_matrix$shape,-2), 
+          head2(loc$shape, -1)
+        )
+        self$covariance_matrix <- covariance_matrix$expand(c(batch_shape, c(-1, -1)))
+      } else {
+        if (precision_matrix$dim() < 2)
+          value_error(paste0("precision_matrix matrix must be at least two-dimensional ", 
+                             "with optional leading batch dimensions"))
+        batch_shape <- torch_broadcast_shapes(
+          head2(precision_matrix$shape,-2), 
+          head2(loc$shape, -1)
+        )
+        self$covariance_matrix <- precision_matrix$expand(c(batch_shape, c(-1, -1)))
+      }
+      
+      self$loc <- loc$expand(c(batch_shape, -1))
+      event_shape = tail(self$loc$shape,1)
+      super$initialize(batch_shape, event_shape, validate_args=validate_args)
+      
+      if (!is.null(scale_tril)) {
+        self$.unbroadcasted_scale_tril <- scale_tril
+      } else if (!is.null(covariance_matrix)) {
+        self$.unbroadcasted_scale_tril <- torch_cholesky(covariance_matrix)
+      } else {
+        self$.unbroadcasted_scale_tril <- .precision_to_scale_tril(precision_matrix)
+      }
     }, 
     
     expand = function(batch_shape, .instance=NULL){
