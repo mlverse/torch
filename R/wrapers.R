@@ -550,3 +550,13 @@ torch_fft_irfft <- function(self, n = NULL, dim = -1L, norm = NULL) {
   .torch_fft_irfft(self = self, n = n, dim = dim, norm = norm)
 }
 
+torch_broadcast_shapes <- function(...) {
+  shapes <- rlang::list2(...)
+  with_no_grad({
+    scalar <- torch_scalar_tensor(0, device="cpu")
+    tensors <- lapply(shapes, function(shape) scalar$expand(shape))
+    out <- torch_broadcast_tensors(tensors)[[1]]$shape
+  })
+  out
+}
+

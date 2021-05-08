@@ -322,5 +322,11 @@ test_that("polygamma works", {
   expect_equal_to_r(r, c(1.64493405818939, 4.93480205535889))
 })
 
+test_that("broadcast_shapes", {
+  
+  expect_equal(torch_broadcast_shapes(c(2,2), c(2,2)), c(2,2))
+  expect_equal(torch_broadcast_shapes(c(2,1), c(2,2)), c(2,2))
+  expect_error(torch_broadcast_shapes(c(2,3), c(2,2)))
+})
 
 
