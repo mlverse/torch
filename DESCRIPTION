@@ -46,7 +46,8 @@ Suggests:
     rmarkdown,
     glue,
     palmerpenguins,
-    mvtnorm
+    mvtnorm,
+    numDeriv
 VignetteBuilder: knitr
 Collate: 
     'R7.R'
