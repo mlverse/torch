@@ -73,3 +73,10 @@ head2 <- function(x, n) {
     utils::head(x, n = length(x) + n)
 }
 
+seq2 <- function(start, end, by = 1L) {
+  if ((end - start) < by && (end-start != 0))
+    return(integer())
+  else
+    seq(start, end, by = by)
+}
+

@@ -11,24 +11,25 @@
   
   bx_batch_dims <- length(bx_batch_shape)
   bL_batch_dims <- bL$dim() - 2
-  outer_batch_dims <- bx_batch_dims - bL_batch_dims
+  outer_batch_dims <- bx_batch_dims - bL_batch_dims + 1
   old_batch_dims <- outer_batch_dims + bL_batch_dims
   new_batch_dims <- outer_batch_dims + 2 * bL_batch_dims
   
   # Reshape bx with the shape (..., 1, i, j, 1, n)
-  bx_new_shape <- head(bx$shape, outer_batch_dims)
+  bx_new_shape <- head(bx$shape, outer_batch_dims - 1)
   l <- list(
-    sL = head(bL$shape, length(bL$shape)-2),
-    sx = bx$shape[seq(outer_batch_dims, length(bx$shape) - 1)]
+    sL = head2(bL$shape, -2),
+    sx = bx$shape[seq2(outer_batch_dims, length(bx$shape) - 1)]
   )
   for (x in transpose_list(l)) {
     bx_new_shape <- c(bx_new_shape, c(trunc(x$sx / x$sL), x$sL))
   }
   bx_new_shape <- c(bx_new_shape, n)
+  bx$reshape(bx_new_shape)
   
-  permute_dims <- c(seq(1, outer_batch_dims), 
-                    seq(outer_batch_dims, new_batch_dims, by = 2),
-                    seq(outer_batch_dims + 1, new_batch_dims, by = 2),
+  permute_dims <- c(seq2(1, outer_batch_dims-1), 
+                    seq2(outer_batch_dims-1, new_batch_dims, by = 2),
+                    seq2(outer_batch_dims-1, new_batch_dims, by = 2),
                     new_batch_dims)
     
   bx <- bx$permute(permute_dims)
@@ -41,10 +42,10 @@
   
   # Now we revert the above reshape and permute operators.
   permuted_M <- M$reshape(head(bx$shape, length(bx$shape) - 1))  # shape = (..., 1, j, i, 1)
-  permute_inv_dims <- seq_len(outer_batch_dims)
+  permute_inv_dims <- seq_len(outer_batch_dims-1)
   
   for (i in seq_len(bL_batch_dims)) {
-    permute_inv_dims <- c(permute_inv_dims, c(outer_batch_dims + i, old_batch_dims + i))
+    permute_inv_dims <- c(permute_inv_dims, c(outer_batch_dims + i - 1, old_batch_dims + i))
   }
   reshaped_M <- permuted_M$permute(permute_inv_dims)
   reshaped_M$reshape(bx_batch_shape)
@@ -148,6 +149,22 @@ MultivariateNormal <- R6::R6Class(
       new$.unbroadcasted_scale_tril <- self$.unbroadcasted_scale_tril
       new$.validate_args <- self$.validate_args
       new
+    },
+    
+    rsample = function(sample_shape = NULL) {
+      shape <- self$.extended_shape(sample_shape)
+      eps <- .standard_normal(shape, dtype=self$loc$dtype, device=self$loc$device)
+      self$loc + .batch_mv(self$.unbroadcasted_scale_tril, eps)
+    },
+    
+    log_prob  = function(value) {
+      if (self$.validate_args)
+        self$.validate_sample(value)
+      
+      diff <- value - self$loc
+      M <- .batch_mahalanobis(self$.unbroadcasted_scale_tril, diff)
+      half_log_det <- self$.unbroadcasted_scale_tril$diagonal(dim1=-2, dim2=-1)$log()$sum(-1)
+      -0.5 * (self$event_shape[1] * log(2 * pi) + M) - half_log_det
     }
   )
 )
