@@ -50,6 +50,14 @@
   reshaped_M$reshape(bx_batch_shape)
 }
 
+.precision_to_scale_tril <- function(P) {
+  # Ref: https://nbviewer.jupyter.org/gist/fehiepsi/5ef8e09e61604f10607380467eb82006#Precision-to-scale_tril
+  Lf <- torch_cholesky(torch_flip(P, c(-2, -1)))
+  L_inv <- torch_transpose(torch_flip(Lf, c(-2, -1)), -2, -1)
+  torch_triangular_solve(torch_eye(head2(p$shape, -1), dtype = P$dtype, device=P$device),
+                         L_inv, upper = FALSE)[[1]]
+}
+
 MultivariateNormal <- R6::R6Class(
   "torch_MultivariateNormal",
   lock_objects = FALSE,
@@ -116,106 +124,38 @@ MultivariateNormal <- R6::R6Class(
       }
     }, 
     
-    expand = function(batch_shape, .instance=NULL){
+    expand = function(batch_shape, .instance=NULL) {
       
-      .args <- list(
-        loc = self$loc$expand(batch_shape),
-        scale = self$scale$expand(batch_shape)
-      )
+      #new <- private$.get_checked_instance(self, .instance)
+      new <- list()
       
-      new <- private$.get_checked_instance(self, .instance, .args)
+      loc_shape <- c(batch_shape, self$event_shape)
+      cov_shape <- c(batch_shape, self$event_shape, self$event_shape)
       
-      # new$loc <- self$loc$expand(batch_shape)
-      # new$scale <- self$scale$expand(batch_shape)
+      new$loc = self$loc$expand(loc_shape)
+      #new$.unbroadcasted_scale_tril <- self$.unbroadcasted_scale_tril
       
-      new$.__enclos_env__$super$initialize(
-        batch_shape, validate_args=FALSE
-      )
+      if (!is.null(self$covariance_matrix))
+        new$covariance_matrix <- self$convariance_matrix$expand(cov_shape)
+      
+      if (!is.null(self$scale_tril))
+        new$scale_tril <- self$scale_tril$expand(cov_shape)
+      
+      if (!is.null(self$scale_tril))
+        new$precision_matrix <- self$precision_matrix$expand(cov_shape)
+      
+      new <- do.call(MultivariateNormal$new, new)
+      new$.unbroadcasted_scale_tril <- self$.unbroadcasted_scale_tril
       new$.validate_args <- self$.validate_args
       new
-    },
-    
-    sample = function(sample_shape=NULL){
-      shape <- self$.extended_shape(sample_shape)
-      
-      with_no_grad({
-        torch_normal(
-          self$loc$expand(shape), self$scale$expand(shape)
-        )
-      })
-    },
-    
-    rsample = function(sample_shape=NULL){
-      shape <- self$.extended_shape(sample_shape)
-      eps <- .standard_normal(shape, dtype=self$loc$dtype, 
-                              device=self$loc$device)
-      self$loc + eps * self$scale
-    },
-    
-    log_prob = function(value){
-      if (self$.validate_args)
-        self$.validate_sample(value)
-      # compute the variance
-      var <- self$scale ** 2
-      
-      if (inherits(self$scale, "numeric"))
-        log_scale <- log(self$scale)
-      else 
-        log_scale <- self$scale$log()
-      
-      -((value - self$loc) ** 2) / (2 * var) - log_scale - log(sqrt(2 * pi))
-    },
-    
-    cdf = function(value){
-      if (self$.validate_args)
-        self$.validate_sample(value)
-      0.5 * (1 + torch_erf((value - self$loc) * self$scale$reciprocal() / sqrt(2)))
-    },
-    
-    icdf = function(value){
-      if (self$.validate_args)
-        self$.validate_sample(value)
-      self$loc + self$scale * torch_erfinv(2 * value - 1) * sqrt(2)
-    },
-    
-    entropy = function(){
-      0.5 + 0.5 * log(2 * pi) + torch_log(self$scale)
-    }
-    
-  ), 
-  
-  private = list(
-    .log_normalizer= function(x, y){
-      -0.25 * x$pow(2) / y + 0.5 * torch_log(-pi / y)
-    }
-  ),
-  
-  active = list(
-    
-    mean = function(){
-      self$loc
-    },
-    
-    stddev = function(){
-      self$scale
-    },
-    
-    variance = function(){
-      self$stddev$pow(2)
-    },
-    
-    .natural_params = function(){
-      list(self$loc / self$scale$pow(2), -0.5 * self$scale$pow(2)$reciprocal())
-    },
-    
-    .mean_carrier_measure = function(){
-      self$._mean_carrier_measure
-    },
-    
-    support = function(){
-      private$.support
     }
   )
 )
 
 MultivariateNormal <- add_class_definition(MultivariateNormal)
+
+distr_multivariate_normal <- function(loc, covariance_matrix=NULL, precision_matrix=NULL, 
+                         scale_tril=NULL, validate_args=NULL) {
+  MultivariateNormal$new(loc, covariance_matrix, precision_matrix, 
+             scale_tril, validate_args)
+}
