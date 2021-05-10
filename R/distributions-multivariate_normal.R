@@ -3,7 +3,7 @@
 }
 
 .batch_mahalanobis <- function(bL, bx) {
-  n <- bx$size(-1)
+  n <- tail(bx$shape, 1)
   bx_batch_shape <- bx$shape[-length(bx$shape)]
   
   # Assume that bL.shape = (i, 1, n, n), bx.shape = (..., i, j, n),

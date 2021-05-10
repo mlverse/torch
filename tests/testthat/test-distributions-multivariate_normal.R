@@ -21,6 +21,22 @@ test_that("multivariate nromal", {
   
 })
 
+test_that("multivaraitae_normal additional shapes", {
+  
+  
+  m <- distr_multivariate_normal(
+    loc = torch_randn(2), 
+    covariance_matrix = torch_eye(2)
+  )
+  
+  expect_tensor_shape(m$sample(c(10, 10)), c(10, 10, 2))
+  expect_tensor_shape(m$log_prob(m$sample(c(10, 10))), c(10, 10))
+  
+  expect_tensor_shape(m$sample(c(10, 5, 3)), c(10, 5, 3, 2))
+  expect_tensor_shape(m$log_prob(m$sample(c(10, 5, 3))), c(10, 5, 3))
+  
+})
+
 test_that("multivariate normal gradients", {
   
   skip_if_not_installed(c("numDeriv", "mvtnorm"))
