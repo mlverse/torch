@@ -4,6 +4,7 @@
 - Added parameter to multihead attention module to allow output of unaveraged attention weights. (@jonathanbratt #542)
 - We now allow `jit_trace` functions with more than 1 argument. (#544)
 - Fixed `$copy_` so it correctly respects the src `requires_grad()` when reloading saved models with `torch_load()`. (#545)
+- Added Multivariate normal distribution (#552)
 
 # torch 0.3.0
 
