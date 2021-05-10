@@ -234,6 +234,41 @@ MultivariateNormal <- R6::R6Class(
 
 MultivariateNormal <- add_class_definition(MultivariateNormal)
 
+#' Gaussian distribution
+#'
+#' Creates a multivariate normal (also called Gaussian) distribution
+#' parameterized by a mean vector and a covariance matrix.
+#' 
+#' The multivariate normal distribution can be parameterized either
+#' in terms of a positive definite covariance matrix \eqn{\mathbf{\Sigma}}
+#' or a positive definite precision matrix \eqn{\mathbf{\Sigma}^{-1}}
+#' or a lower-triangular matrix \eqn{\mathbf{L}} with positive-valued
+#' diagonal entries, such that
+#' \eqn{\mathbf{\Sigma} = \mathbf{L}\mathbf{L}^\top}. This triangular matrix
+#' can be obtained via e.g. Cholesky decomposition of the covariance.
+#' 
+#' @examples
+#' m <- distr_multivariate_normal(torch_zeros(2), torch_eye(2))
+#' m$sample()  # normally distributed with mean=`[0,0]` and covariance_matrix=`I`
+#' 
+#' 
+#' 
+#' @param loc (Tensor): mean of the distribution
+#' @param covariance_matrix (Tensor): positive-definite covariance matrix
+#' @param precision_matrix (Tensor): positive-definite precision matrix
+#' @param scale_tril (Tensor): lower-triangular factor of covariance, with positive-valued diagonal
+#' 
+#' @note
+#' Only one of `covariance_matrix` or `precision_matrix` or
+#' `scale_tril` can be specified.
+#' Using `scale_tril` will be more efficient: all computations internally
+#' are based on `scale_tril`. If `covariance_matrix` or
+#' `precision_matrix` is passed instead, it is only used to compute
+#' the corresponding lower triangular matrices using a Cholesky decomposition.
+#' 
+#' @seealso [Distribution] for details on the available methods. 
+#' @family distributions
+#' @export
 distr_multivariate_normal <- function(loc, covariance_matrix=NULL, precision_matrix=NULL, 
                          scale_tril=NULL, validate_args=NULL) {
   MultivariateNormal$new(loc, covariance_matrix, precision_matrix, 
