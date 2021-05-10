@@ -67,6 +67,7 @@ transpose_list <- function(x) {
 }
   
 #' @importFrom utils head
+#' @importFrom utils tail
 head2 <- function(x, n) {
   if (n > 0)
     utils::head(x, n = n)

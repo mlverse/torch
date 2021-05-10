@@ -55,7 +55,7 @@
   # Ref: https://nbviewer.jupyter.org/gist/fehiepsi/5ef8e09e61604f10607380467eb82006#Precision-to-scale_tril
   Lf <- torch_cholesky(torch_flip(P, c(-2, -1)))
   L_inv <- torch_transpose(torch_flip(Lf, c(-2, -1)), -2, -1)
-  torch_triangular_solve(torch_eye(head2(p$shape, -1), dtype = P$dtype, device=P$device),
+  torch_triangular_solve(torch_eye(head2(P$shape, -1), dtype = P$dtype, device=P$device),
                          L_inv, upper = FALSE)[[1]]
 }
 
