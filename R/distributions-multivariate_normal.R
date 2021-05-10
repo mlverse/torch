@@ -257,6 +257,7 @@ MultivariateNormal <- add_class_definition(MultivariateNormal)
 #' @param covariance_matrix (Tensor): positive-definite covariance matrix
 #' @param precision_matrix (Tensor): positive-definite precision matrix
 #' @param scale_tril (Tensor): lower-triangular factor of covariance, with positive-valued diagonal
+#' @param validate_args Bool wether to validate the arguments or not.
 #' 
 #' @note
 #' Only one of `covariance_matrix` or `precision_matrix` or

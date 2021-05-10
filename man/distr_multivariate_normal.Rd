@@ -20,6 +20,8 @@ distr_multivariate_normal(
 \item{precision_matrix}{(Tensor): positive-definite precision matrix}
 
 \item{scale_tril}{(Tensor): lower-triangular factor of covariance, with positive-valued diagonal}
+
+\item{validate_args}{Bool wether to validate the arguments or not.}
 }
 \description{
 Creates a multivariate normal (also called Gaussian) distribution
