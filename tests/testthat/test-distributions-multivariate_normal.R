@@ -1,5 +1,7 @@
 test_that("multivariate nromal", {
   
+  skip_if_not_installed(c("mvtnorm"))
+  
   m <- distr_multivariate_normal(
     loc = torch_randn(2), 
     covariance_matrix = torch_eye(2)
@@ -20,6 +22,8 @@ test_that("multivariate nromal", {
 })
 
 test_that("multivariate normal gradients", {
+  
+  skip_if_not_installed(c("numDeriv", "mvtnorm"))
   
   loc <- torch_randn(2, requires_grad = TRUE)
   var <- torch_eye(2, requires_grad = TRUE)

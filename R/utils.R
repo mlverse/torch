@@ -66,6 +66,7 @@ transpose_list <- function(x) {
   do.call(Map, c(f = c, x))
 }
   
+#' @importFrom utils head
 head2 <- function(x, n) {
   if (n > 0)
     utils::head(x, n = n)
