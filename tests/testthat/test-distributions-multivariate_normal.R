@@ -81,3 +81,18 @@ test_that("multivariate normal gradients", {
   expect_equal_to_r(loc$grad, grad_mean, tolerance = 1e-6)
   expect_equal_to_r(var$grad$view(4)[c(1,4)], grad_sigma[c(1,4)], tolerance = 1e-6)
 })
+
+test_that("properites", {
+  
+  m <- distr_multivariate_normal(
+    loc = torch_randn(2), 
+    covariance_matrix = torch_eye(2)
+  )
+  
+  expect_equal_to_tensor(m$scale_tril, torch_eye(2))
+  expect_equal_to_tensor(m$covariance_matrix, torch_eye(2))
+  expect_equal_to_tensor(m$precision_matrix, torch_eye(2))
+  expect_equal_to_tensor(m$mean, m$loc)
+  expect_tensor_shape(m$variance, c(2))
+  
+})

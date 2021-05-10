@@ -109,7 +109,7 @@ MultivariateNormal <- R6::R6Class(
           head2(precision_matrix$shape,-2), 
           head2(loc$shape, -1)
         )
-        self$covariance_matrix <- precision_matrix$expand(c(batch_shape, c(-1, -1)))
+        self$precision_matrix <- precision_matrix$expand(c(batch_shape, c(-1, -1)))
       }
       
       self$loc <- loc$expand(c(batch_shape, -1))
@@ -165,7 +165,70 @@ MultivariateNormal <- R6::R6Class(
       M <- .batch_mahalanobis(self$.unbroadcasted_scale_tril, diff)
       half_log_det <- self$.unbroadcasted_scale_tril$diagonal(dim1=-2, dim2=-1)$log()$sum(-1)
       -0.5 * (self$event_shape[1] * log(2 * pi) + M) - half_log_det
+    },
+    
+    entropy = function() {
+      half_log_det = self$.unbroadcasted_scale_tril$diagonal(dim1=-2, dim2=-1)$log()$sum(-1)
+      H <- 0.5 * self$event_shape[1] * (1.0 + log(2 * pi)) + half_log_det
+      if (length(self$batch_shape) == 0)
+        H
+      else
+        H$expand(self$batch_shape)
     }
+  ),
+  
+  active = list(
+    
+    scale_tril = function(x) {
+      
+      if (!missing(x))
+        private$scale_tril <- x
+      
+      if (!is.null(private$scale_tril))
+        return(private$scale_tril)
+      
+      self$.unbroadcasted_scale_tril$expand(
+        c(self$batch_shape, self$event_shape, self$event_shape)
+      )
+    },
+    
+    covariance_matrix = function(x) {
+      
+      if (!missing(x))
+        private$covariance_matrix <- x
+      
+      if (!is.null(private$covariance_matrix))
+        return(private$covariance_matrix)
+      
+      torch_matmul(self$.unbroadcasted_scale_tril,
+                   self$.unbroadcasted_scale_tril$transpose(c(-1, -2)))$
+        expand(c(self$batch_shape, self$event_shape, self$event_shape))
+    },
+    
+    precision_matrix = function(x) {
+      
+      if (!missing(x))
+        private$precision_matrix <- x
+      
+      if (!is.null(private$precision_matrix))
+        return(private$precision_matrix)
+      
+      identity <- torch_eye(tail(self$loc$shape,1), device=self$loc$device, 
+                            dtype=self$loc$dtype)
+      torch_cholesky_solve(identity, self$.unbroadcasted_scale_tril)$expand(
+        c(self$batch_shape,self$event_shape, self$event_shape))
+    },
+    
+    mean = function() {
+      self$loc
+    },
+    
+    variance = function() {
+      self$.unbroadcasted_scale_tril$pow(2)$sum(-1)$expand(
+        c(self$batch_shape, self$event_shape)
+      )
+    }
+      
   )
 )
 
