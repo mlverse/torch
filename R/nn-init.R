@@ -273,7 +273,7 @@ nn_init_xavier_uniform_ <- function(tensor, gain = 1) {
   fans <- nn_init_calculate_fan_in_and_fan_out(tensor)
   fan_in <- fans[[1]]
   fan_out <- fans[[2]]
-  std <- gain * sqrt(2.0 / fan_in + fan_out)
+  std <- gain * sqrt(2.0 / (fan_in + fan_out))
   a <- sqrt(3.0) * std # Calculate uniform bounds from standard deviation
   nn_init_no_grad_uniform(tensor, -a, a)
 }
@@ -297,7 +297,7 @@ nn_init_xavier_normal_ <- function(tensor, gain = 1) {
   fans <- nn_init_calculate_fan_in_and_fan_out(tensor)
   fan_in <- fans[[1]]
   fan_out <- fans[[2]]
-  std <- gain * sqrt(2.0 / fan_in + fan_out)
+  std <- gain * sqrt(2.0 / (fan_in + fan_out))
   nn_init_no_grad_normal(tensor, 0, std)
 }
 
