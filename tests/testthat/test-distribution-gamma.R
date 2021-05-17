@@ -27,7 +27,7 @@ test_that("Gamma distribution - rsample", {
     cdf_x <- dgamma(x, alpha)
     expected_grad <- -cdf_alpha / cdf_x
     rel_error <- abs(actual_grad - expected_grad) / (expected_grad + 1e-30)
-    expect_lt(max(rel_error), 9e-4)
+    expect_lt(max(rel_error), 0.005)
   }
 })
 
