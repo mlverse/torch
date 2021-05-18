@@ -5,6 +5,7 @@
 - We now allow `jit_trace` functions with more than 1 argument. (#544)
 - Fixed `$copy_` so it correctly respects the src `requires_grad()` when reloading saved models with `torch_load()`. (#545)
 - Fixed `nn_init_xavier_normal_()` and `nn_init_xavier_uniform_()` standard deviation calculation. (#557)
+- Fixed bug in `torch_tensordot()` when called when infering dimensions. (#563)
 
 # torch 0.3.0
 
