@@ -30,6 +30,7 @@ torch_tensor(0.1046)
 Other distributions: 
 \code{\link{distr_bernoulli}()},
 \code{\link{distr_gamma}()},
+\code{\link{distr_multivariate_normal}()},
 \code{\link{distr_normal}()},
 \code{\link{distr_poisson}()}
 }

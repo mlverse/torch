@@ -21,7 +21,7 @@ Constraint <- R6::R6Class(
     #' @description 
     #' Define the print method for constraints,
     print = function(){
-      cat(glue("{class(self)}"))
+      cat(glue::glue("{class(self)}"))
     }
   )
 )
@@ -45,6 +45,28 @@ Constraint <- R6::R6Class(
 is_dependent <- function(object){
   inherits(object, "torch_Dependent")
 }
+
+.IndependentConstraint <- R6::R6Class(
+  "torch_IndependentConstraint",
+  lock_objects = FALSE,
+  inherit = Constraint,
+  public = list(
+    initialize = function(base_constraint, reinterpreted_batch_ndims) {
+      self$base_constraint <- base_constraint
+      self$reinterpreted_batch_ndims <- reinterpreted_batch_ndims
+    },
+    check = function(value) {
+      result <- self$base_constraint$check(value)
+      if (result$dim() < self$reinterpreted_batch_ndims) {
+        expected <- self$base_constraint$event_dim + self$reinterpreted_batch_ndims
+        value_error("Expected value$dim() >= {expected} but got {value$dim()}")
+      }
+      result <- result$reshape(c(head(result$shape, result$dim() - self$reinterpreted_batch_ndims), -1))
+      result <- result$all(dim = -1)
+      result
+    }
+  )
+)
 
 #' Constrain to the two values `{0, 1}`.
 #' @noRd
@@ -302,6 +324,41 @@ is_dependent <- function(object){
   )
 )
 
+.PositiveDefinite <- R6::R6Class(
+  "torch_PositiveDefinite",
+  inherit = Constraint,
+  public = list(
+    check = function(value) {
+      matrix_shape <- value$shape[-1]
+      batch_shape <- head2(value$unsqueeze(c(1))$shape, -2)
+      # TODO: replace with batched linear algebra routine when one becomes available
+      # note that `symeig()` returns eigenvalues in ascending order
+      flattened_value <- value$reshape(c(-1, matrix_shape))
+      
+      o <- torch_stack(
+        lapply(seq_len(flattened_value$shape[1]), function(v) {
+          flattened_value[v]$symeig(eigenvectors=FALSE)[[1]][1] > 0.0
+        })
+      )
+        
+      o$view(batch_shape)
+    }
+  )
+)
+
+.LowerCholesky <- R6::R6Class(
+  "torch_LowerCholesky",
+  inherit = Constraint,
+  public = list(
+    check = function(value) {
+      value_tril <- value$tril()
+      lower_triangular <- (value_tril == value)$view(c(head2(value$shape,-2), -1))$min(-1)[[1]]
+      positive_diagonal <- (value$diagonal(dim1=-2, dim2=-1) > 0)$min(-1)[[1]]
+      lower_triangular & positive_diagonal
+    }
+  )
+)
+
 # Public interface
 # TODO: check .GreaterThan and other classes,
 # which are not instanced
@@ -316,6 +373,8 @@ constraint_positive_integer <- .IntegerGreaterThan$new(1)
 
 constraint_real <- .Real$new()
 
+constraint_real_vector <- .IndependentConstraint$new(constraint_real, 1)
+
 constraint_positive <- .GreaterThan$new(0.)
 
 constraint_greater_than <- .GreaterThan
@@ -329,3 +388,7 @@ constraint_unit_interval <- .Interval$new(0., 1.)
 constraint_interval <- .Interval
 
 constraint_half_open_interval <- .HalfOpenInterval
+
+constraint_positive_definite <- .PositiveDefinite$new()
+
+constraint_lower_cholesky <- .LowerCholesky$new()

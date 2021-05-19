@@ -45,7 +45,9 @@ Suggests:
     knitr,
     rmarkdown,
     glue,
-    palmerpenguins
+    palmerpenguins,
+    mvtnorm,
+    numDeriv
 VignetteBuilder: knitr
 Collate: 
     'R7.R'
@@ -67,6 +69,7 @@ Collate:
     'distributions-bernoulli.R'
     'distributions-gamma.R'
     'distributions-chi2.R'
+    'distributions-multivariate_normal.R'
     'distributions-normal.R'
     'distributions-poisson.R'
     'dtype.R'

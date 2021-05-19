@@ -61,3 +61,24 @@ create_class <- function(name, inherit, ..., private, active, parent_env,
   f
 }
 
+# https://stackoverflow.com/a/54971834/3297472
+transpose_list <- function(x) {
+  do.call(Map, c(f = c, x))
+}
+  
+#' @importFrom utils head
+#' @importFrom utils tail
+head2 <- function(x, n) {
+  if (n > 0)
+    utils::head(x, n = n)
+  else
+    utils::head(x, n = length(x) + n)
+}
+
+seq2 <- function(start, end, by = 1L) {
+  if ((end - start) < by && (end-start != 0))
+    return(integer())
+  else
+    seq(start, end, by = by)
+}
+
