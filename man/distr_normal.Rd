@@ -36,6 +36,7 @@ Other distributions:
 \code{\link{distr_bernoulli}()},
 \code{\link{distr_chi2}()},
 \code{\link{distr_gamma}()},
+\code{\link{distr_multivariate_normal}()},
 \code{\link{distr_poisson}()}
 }
 \concept{distributions}

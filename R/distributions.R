@@ -202,15 +202,14 @@ Distribution <- R6::R6Class(
     #' Prints the distribution instance.
     print = function(){
     
-      self_list <- as.list(self)
-      
       param_names <- 
         names(private$.arg_constraints)[
-          names(private$.arg_constraints) %in% names(self_list)
+          names(private$.arg_constraints) %in% names(self)
             ]
       
       args_string <- paste(
-        param_names, sapply(self_list[param_names], function(x) {
+        param_names, sapply(param_names, function(x) {
+          x <- self[[x]]
           as.array(if (is.function(x)) x() else x)
         }),
         sep = "=", collapse = ", "
