@@ -7437,3 +7437,35 @@ NULL
 #'
 #' @export
 NULL
+
+#' Computes the n-th forward difference along the given dimension.
+#' 
+#' The first-order differences are given by `out[i] = input[i + 1] - input[i]`. 
+#' Higher-order differences are calculated by using [torch_diff()] recursively.
+#'
+#' @note Only n = 1 is currently supported
+#' 
+#' @param self the tensor to compute the differences on
+#' @param n the number of times to recursively compute the difference
+#' @param dim the dimension to compute the difference along. Default is the last dimension.
+#' @param prepend values to prepend to input along dim before computing the 
+#'  difference. Their dimensions must be equivalent to that of input, and their 
+#'  shapes must match input’s shape except on dim.
+#' @param append values to append to input along dim before computing the 
+#'  difference. Their dimensions must be equivalent to that of input, and their 
+#'  shapes must match input’s shape except on dim.
+#'  
+#' @examples
+#' a <- torch_tensor(c(1,2,3))
+#' torch_diff(a)
+#' 
+#' b <- torch_tensor(c(4, 5))
+#' torch_diff(a, append = b)
+#' 
+#' c <- torch_tensor(rbind(c(1,2,3), c(3,4,5)))
+#' torch_diff(c, dim = 1)
+#' torch_diff(c, dim = 2) 
+#' 
+#' @name torch_diff
+#' @export
+NULL
