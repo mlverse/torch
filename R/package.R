@@ -1,4 +1,4 @@
-#' @useDynLib torchpkg
+#' @useDynLib torch
 #' @importFrom Rcpp sourceCpp
 NULL
 
@@ -46,7 +46,6 @@ globalVariables(c("..", "self", "private", "N"))
 }
 
 .onUnload <- function(libpath) {
-  
 }
 
 release_bullets <- function() {
