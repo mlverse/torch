@@ -66,5 +66,5 @@ make_cpp_function_name <- function(method_name, arg_types, type) {
 }
 
 make_cpp_function_name2 <- function(method_name, arg_types, type) {
-  torch:::cpp_make_function_name(method_name, names(arg_types), arg_types, type, clean_chars)
+  torch:::cpp_make_function_name(method_name, names(arg_types), arg_types, type)
 }

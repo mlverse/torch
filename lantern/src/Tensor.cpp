@@ -263,3 +263,26 @@ void* _lantern_normal_tensor_double_generator (void* mean, double std, void* gen
   return (void*) new LanternObject<torch::Tensor>(ten);
   LANTERN_FUNCTION_END
 }
+
+void *_lantern_optional_tensor(void* x, bool is_null)
+{
+  LANTERN_FUNCTION_START
+  c10::optional<torch::Tensor> out;
+  if (is_null)
+    out = c10::nullopt;
+  else
+  {
+    torch::Tensor value = reinterpret_cast<LanternObject<torch::Tensor>*>(x)->get();
+    out = value;
+  }
+    
+
+  return (void *)new LanternObject<c10::optional<torch::Tensor>>(out);
+  LANTERN_FUNCTION_END
+}
+
+bool _lantern_optional_tensor_has_value (void*x)
+{
+  auto value = reinterpret_cast<LanternObject<c10::optional<torch::Tensor>>*>(x)->get();
+  return value.has_value();
+}
