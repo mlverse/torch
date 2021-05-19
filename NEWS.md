@@ -6,6 +6,8 @@
 - Fixed `$copy_` so it correctly respects the src `requires_grad()` when reloading saved models with `torch_load()`. (#545)
 - Fixed `nn_init_xavier_normal_()` and `nn_init_xavier_uniform_()` standard deviation calculation. (#557)
 - Fixed bug in `torch_tensordot()` when called when infering dimensions. (#563)
+- Better handling optional Tensor arguments by using an explicit `XPtrTorchOptionalTensor` class. (#565)
+- Export the `torch_diff` function and added docs for it. (#565)
 
 # torch 0.3.0
 
