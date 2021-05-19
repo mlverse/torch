@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Tan — torch_tan • torch</title>
+<title>Gaussian distribution — distr_multivariate_normal • torch</title>
 
 
 <!-- jquery -->
@@ -41,8 +41,9 @@
   <link href="../extra.css" rel="stylesheet">
   
 
-<meta property="og:title" content="Tan — torch_tan" />
-<meta property="og:description" content="Tan" />
+<meta property="og:title" content="Gaussian distribution — distr_multivariate_normal" />
+<meta property="og:description" content="Creates a multivariate normal (also called Gaussian) distribution
+parameterized by a mean vector and a covariance matrix." />
 
 
 <meta name="robots" content="noindex">
@@ -180,49 +181,88 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Tan</h1>
-    <small class="dont-index">Source: <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-docs.R'><code>R/gen-namespace-docs.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-examples.R'><code>R/gen-namespace-examples.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace.R'><code>R/gen-namespace.R</code></a></small>
-    <div class="hidden name"><code>torch_tan.Rd</code></div>
+    <h1>Gaussian distribution</h1>
+    <small class="dont-index">Source: <a href='https://github.com/mlverse/torch/blob/master/R/distributions-multivariate_normal.R'><code>R/distributions-multivariate_normal.R</code></a></small>
+    <div class="hidden name"><code>distr_multivariate_normal.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Tan</p>
+    <p>Creates a multivariate normal (also called Gaussian) distribution
+parameterized by a mean vector and a covariance matrix.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>torch_tan</span><span class='op'>(</span><span class='va'>self</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>distr_multivariate_normal</span><span class='op'>(</span>
+  <span class='va'>loc</span>,
+  covariance_matrix <span class='op'>=</span> <span class='cn'>NULL</span>,
+  precision_matrix <span class='op'>=</span> <span class='cn'>NULL</span>,
+  scale_tril <span class='op'>=</span> <span class='cn'>NULL</span>,
+  validate_args <span class='op'>=</span> <span class='cn'>NULL</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>self</th>
-      <td><p>(Tensor) the input tensor.</p></td>
+      <th>loc</th>
+      <td><p>(Tensor): mean of the distribution</p></td>
+    </tr>
+    <tr>
+      <th>covariance_matrix</th>
+      <td><p>(Tensor): positive-definite covariance matrix</p></td>
+    </tr>
+    <tr>
+      <th>precision_matrix</th>
+      <td><p>(Tensor): positive-definite precision matrix</p></td>
+    </tr>
+    <tr>
+      <th>scale_tril</th>
+      <td><p>(Tensor): lower-triangular factor of covariance, with positive-valued diagonal</p></td>
+    </tr>
+    <tr>
+      <th>validate_args</th>
+      <td><p>Bool wether to validate the arguments or not.</p></td>
     </tr>
     </table>
 
-    <h2 class="hasAnchor" id="tan-input-out-null-gt-tensor-"><a class="anchor" href="#tan-input-out-null-gt-tensor-"></a>tan(input, out=NULL) -&gt; Tensor </h2>
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    
+    <p>The multivariate normal distribution can be parameterized either
+in terms of a positive definite covariance matrix \(\mathbf{\Sigma}\)
+or a positive definite precision matrix \(\mathbf{\Sigma}^{-1}\)
+or a lower-triangular matrix \(\mathbf{L}\) with positive-valued
+diagonal entries, such that
+\(\mathbf{\Sigma} = \mathbf{L}\mathbf{L}^\top\). This triangular matrix
+can be obtained via e.g. Cholesky decomposition of the covariance.</p>
+    <h2 class="hasAnchor" id="note"><a class="anchor" href="#note"></a>Note</h2>
 
+    <p>Only one of <code>covariance_matrix</code> or <code>precision_matrix</code> or
+<code>scale_tril</code> can be specified.
+Using <code>scale_tril</code> will be more efficient: all computations internally
+are based on <code>scale_tril</code>. If <code>covariance_matrix</code> or
+<code>precision_matrix</code> is passed instead, it is only used to compute
+the corresponding lower triangular matrices using a Cholesky decomposition.</p>
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-<p>Returns a new tensor with the tangent of the elements of <code>input</code>.</p>
-<p>$$
-    \mbox{out}_{i} = \tan(\mbox{input}_{i})
-$$</p>
+    <div class='dont-index'><p><a href='Distribution.html'>Distribution</a> for details on the available methods.</p>
+<p>Other distributions: 
+<code><a href='distr_bernoulli.html'>distr_bernoulli</a>()</code>,
+<code><a href='distr_chi2.html'>distr_chi2</a>()</code>,
+<code><a href='distr_gamma.html'>distr_gamma</a>()</code>,
+<code><a href='distr_normal.html'>distr_normal</a>()</code>,
+<code><a href='distr_poisson.html'>distr_poisson</a>()</code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
+<span class='va'>m</span> <span class='op'>&lt;-</span> <span class='fu'>distr_multivariate_normal</span><span class='op'>(</span><span class='fu'><a href='torch_zeros.html'>torch_zeros</a></span><span class='op'>(</span><span class='fl'>2</span><span class='op'>)</span>, <span class='fu'><a href='torch_eye.html'>torch_eye</a></span><span class='op'>(</span><span class='fl'>2</span><span class='op'>)</span><span class='op'>)</span>
+<span class='va'>m</span><span class='op'>$</span><span class='fu'>sample</span><span class='op'>(</span><span class='op'>)</span>  <span class='co'># normally distributed with mean=`[0,0]` and covariance_matrix=`I`</span>
 
-<span class='va'>a</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>4</span><span class='op'>)</span><span class='op'>)</span>
-<span class='va'>a</span>
-<span class='fu'>torch_tan</span><span class='op'>(</span><span class='va'>a</span><span class='op'>)</span>
+
+
 <span class='op'>}</span>
 </div><div class='output co'>#&gt; torch_tensor
-#&gt; -0.2369
-#&gt; -0.0133
-#&gt; -1.0031
-#&gt;  0.4411
-#&gt; [ CPUFloatType{4} ]</div></pre>
+#&gt;  0.2615
+#&gt;  0.1025
+#&gt; [ CPUFloatType{2} ]</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
