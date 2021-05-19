@@ -329,4 +329,13 @@ test_that("broadcast_shapes", {
   expect_error(torch_broadcast_shapes(c(2,3), c(2,2)))
 })
 
+test_that("tensordot works", {
+  
+  t1 <- torch_rand(10, 2, 3)
+  t2 <- torch_rand(3, 3, 5)
 
+  expect_tensor_shape(torch_tensordot(t1, t2, 1L), c(10,2,3,5))
+  expect_tensor_shape(torch_tensordot(t1, t2, list(3, 1)), c(10,2,3,5))
+  
+  
+})

@@ -179,7 +179,7 @@ torch_tensordot <- function(a, b, dims = 2) {
     if (dims < 1)
       runtime_error("tensordot expects dims >= 1, but got {dims}")
     
-    dims_a <- seq(from = -dims, to = 0)
+    dims_a <- seq(from = -dims, to = -1)
     dims_b <- seq(from = 1, to = dims)
   }
   
