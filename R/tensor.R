@@ -53,7 +53,12 @@ Tensor <- R7Class(
       if (missing(dim))
         return(x)
       
-      x[dim]
+      if (dim == 0) runtime_error("Indexing starts at 1 and got a 0.")
+      
+      if (dim > 0)
+        x[dim]
+      else
+        rev(x)[abs(dim)]
     },
     element_size = function() {
       cpp_tensor_element_size(self$ptr)
