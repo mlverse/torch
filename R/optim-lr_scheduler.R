@@ -397,10 +397,10 @@ lr_step <- lr_scheduler(
 #'                           epochs=10)
 #' 
 #' for (i in 1:epochs) {
-#'   for (batch in enumerate(data_loader)) {
+#'   coro::loop(for (batch in data_loader) {
 #'      train_batch(...)
 #'      scheduler$step()
-#'   }
+#'   })
 #' }
 #' }
 #' 

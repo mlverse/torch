@@ -10,6 +10,7 @@
 - Better handling optional Tensor arguments by using an explicit `XPtrTorchOptionalTensor` class. (#565)
 - Export the `torch_diff` function and added docs for it. (#565)
 - Dataset's `.getbatch` now takes an integer vector as input instead of a `list()`. (#572)
+- Fixed bug with `tensor$size()` when indexing with negative numbers. (#570)
 
 # torch 0.3.0
 
