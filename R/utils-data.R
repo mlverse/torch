@@ -70,10 +70,11 @@ dataset <- function(name = NULL, inherit = Dataset, ...,
 
 #' @export
 `[.dataset` <- function(x, y) {
-  if (length(y) > 1 && !is.null(x$.getbatch))
-    x$.getbatch(y)
-  else
+  if (length(y) > 1 && !is.null(x$.getbatch)) {
+    x$.getbatch(as.integer(y))
+  } else {
     x$.getitem(y)
+  }
 }
 
 #' @export

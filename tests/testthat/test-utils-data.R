@@ -56,3 +56,16 @@ test_that("dataset_subset works", {
   expect_tensor(data_subset[1:4][[1]])
   expect_equal(nrow(data_subset[1:4][[1]]), 4)
 })
+
+test_that("getbatch will get a vector of integers", {
+  
+  data <- dataset(
+    initialize = function() {},
+    .getbatch = function(indexes) {
+      expect_true(is.integer(indexes))
+    },
+    .length = function() {100}
+  )
+  
+  expect_true(data()[list(1,2,3,4)])
+})
