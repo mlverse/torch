@@ -39,6 +39,9 @@ enumerate <- function(x, ...) {
 #' @export
 enumerate.dataloader <- function(x, max_len = 1e6, ...) {
 
+  deprecated(message = c("The `enumerate` construct is deprecated in favor of the `coro::loop` syntax.",
+             "See https://github.com/mlverse/torch/issues/558 for more information."))
+  
   if (is.na(length(x)))
     len <- max_len
   else

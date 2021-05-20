@@ -23,3 +23,7 @@ stop_iteration_error <- function(..., env = rlang::caller_env()) {
 }
 
 inform <- rlang::inform
+
+deprecated <- function(..., env = rlang::caller_env()) {
+  rlang::warn(..., class = "deprecated")
+}
