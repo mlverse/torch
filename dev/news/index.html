@@ -83,7 +83,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">torch</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.3.0.9001</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.3.0.9002</span>
       </span>
     </div>
 
@@ -195,6 +195,8 @@
 <li>Added Multivariate normal distribution (<a href='https://github.com/mlverse/torch/issues/552'>#552</a>)</li>
 <li>Fixed <code><a href="../reference/nn_init_xavier_normal_.html">nn_init_xavier_normal_()</a></code> and <code><a href="../reference/nn_init_xavier_uniform_.html">nn_init_xavier_uniform_()</a></code> standard deviation calculation. (<a href='https://github.com/mlverse/torch/issues/557'>#557</a>)</li>
 <li>Fixed bug in <code><a href="../reference/torch_tensordot.html">torch_tensordot()</a></code> when called when infering dimensions. (<a href='https://github.com/mlverse/torch/issues/563'>#563</a>)</li>
+<li>Better handling optional Tensor arguments by using an explicit <code>XPtrTorchOptionalTensor</code> class. (<a href='https://github.com/mlverse/torch/issues/565'>#565</a>)</li>
+<li>Export the <code>torch_diff</code> function and added docs for it. (<a href='https://github.com/mlverse/torch/issues/565'>#565</a>)</li>
 </ul>
 </div>
     <div id="torch-030" class="section level1">
