@@ -146,6 +146,20 @@ test_that("_cholesky_solve_helper", {
   expect_tensor(torch__cholesky_solve_helper(x, x, TRUE))
 })
 
+test_that("diff works", {
+  
+  a <- torch_tensor(c(1,2,3))
+  expect_equal_to_r(torch_diff(a), c(1,1))
+
+  b <- torch_tensor(c(4, 5))
+  expect_equal_to_r(torch_diff(a, append = b), rep(1, 4))
+
+  c <- torch_tensor(rbind(c(1,2,3), c(3,4,5)))
+  expect_equal_to_tensor(torch_diff(c, dim = 1), torch_ones(1,3)*2)
+  expect_equal_to_tensor(torch_diff(c, dim = 2), torch_ones(2,2))
+  
+})
+
 test_that("einsum", {
   x <- torch_tensor(c(1,2,3))
   y <- torch_tensor(c(1,2))

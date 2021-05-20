@@ -3,6 +3,9 @@ if (!require(fs, quietly = TRUE)) {
   install.packages("fs")
 }
 
+if (!require(fs))
+  stop("fs was not correctly installed?")
+
 if (dir.exists("lantern")) {
   cat("Building lantern .... \n")
   

@@ -74,7 +74,7 @@ void event_loop_thread(std::atomic<bool> &event_loop_running)
 
 // [[Rcpp::export]]
 void cpp_torch_method__backward_self_Tensor_inputs_TensorList (XPtrTorchTensor self, XPtrTorchTensorList inputs, 
-                                                              XPtrTorchTensor gradient, bool retain_graph, 
+                                                              XPtrTorchOptionalTensor gradient, bool retain_graph, 
                                                               bool create_graph) {
   
   auto self_ptr = self.get();

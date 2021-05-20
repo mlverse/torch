@@ -124,6 +124,11 @@ cpp_parameter_type <- function(argument) {
     return("XPtrTorchIndexTensorList")
   }
 
+  if (argument$dynamic_type == "Tensor" &&
+      argument$type == "const c10::optional<Tensor> &") {
+    return("XPtrTorchOptionalTensor")
+  }
+
   if (argument$dynamic_type == "Tensor") {
     declaration <- "XPtrTorchTensor"
   }

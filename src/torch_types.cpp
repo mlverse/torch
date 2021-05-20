@@ -7,6 +7,18 @@ XPtrTorchTensor::operator SEXP () const {
   return xptr; 
 }
 
+XPtrTorchOptionalTensor::operator SEXP() const {
+  bool has_value = lantern_optional_tensor_has_value(this->get());
+  if (!has_value)
+  {
+    return R_NilValue;
+  }
+  else 
+  {
+    return XPtrTorchTensor(*this);
+  }
+}
+
 XPtrTorchIndexTensor::operator SEXP () const {
   auto xptr = make_xptr<XPtrTorchTensor>(*this);
   xptr.attr("class") = Rcpp::CharacterVector::create("torch_tensor", "R7");
@@ -132,6 +144,22 @@ XPtrTorchTensor XPtrTorchTensor_from_SEXP (SEXP x)
 
 XPtrTorchTensor::XPtrTorchTensor (SEXP x) : 
   XPtrTorch{XPtrTorchTensor_from_SEXP(x)} {}
+
+XPtrTorchOptionalTensor XPtrTorchOptionalTensor_from_SEXP (SEXP x)
+{
+  const bool is_null = TYPEOF(x) == NILSXP || (TYPEOF(x) == VECSXP && LENGTH(x) == 0);
+  if (is_null)
+  {
+    return XPtrTorchOptionalTensor(lantern_optional_tensor(nullptr, true));
+  }
+  else
+  {
+    return XPtrTorchOptionalTensor(lantern_optional_tensor(XPtrTorchTensor(x).get(), false));
+  }
+}
+
+XPtrTorchOptionalTensor::XPtrTorchOptionalTensor (SEXP x) :
+  XPtrTorch{XPtrTorchOptionalTensor_from_SEXP(x)} {}
 
 XPtrTorchIndexTensor XPtrTorchIndexTensor_from_SEXP (SEXP x)
 {
