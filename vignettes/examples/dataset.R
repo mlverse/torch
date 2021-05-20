@@ -62,12 +62,12 @@ mtcars_dataset$.getitem(1)
 dl <- dataloader(mtcars_dataset, batch_size = 15, shuffle = TRUE)
 
 # we can then loop trough the elements of the dataloader with
-for(batch in enumerate(dl)) {
+coro::loop(for(batch in dl) {
   cat("X size:  ")
   print(batch[[1]]$size())
   cat("Y size:  ")
   print(batch[[2]]$size())
-}
+})
 
 
 

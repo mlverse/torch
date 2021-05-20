@@ -37,12 +37,13 @@ test_that("dataloader iteration", {
     expect_tensor(batch[[2]])
   }
   
+  expect_warning(class = "deprecated", {
   # iterating with an enum
   for (batch in enumerate(dl)) {
     expect_tensor(batch[[1]])
     expect_tensor(batch[[2]])    
   }
-  
+  })
 })
 
 test_that("can have datasets that don't return tensors", {
@@ -64,6 +65,7 @@ test_that("can have datasets that don't return tensors", {
   dl <- dataloader(d, batch_size = 32, drop_last = TRUE)
   
   # iterating with an enum
+  expect_warning(class = "deprecated", {
   for (batch in enumerate(dl)) {
     expect_tensor_shape(batch[[1]], c(32, 1, 10))
     expect_true(batch[[1]]$dtype == torch_float())
@@ -72,7 +74,7 @@ test_that("can have datasets that don't return tensors", {
     expect_tensor_shape(batch[[3]], c(32, 10))    
     expect_true(batch[[3]]$dtype == torch_long())
   }
-  
+  })
   expect_true(batch[[1]]$dtype == torch_float32())
   expect_true(batch[[2]]$dtype == torch_int64())
   expect_true(batch[[3]]$dtype == torch_int64())
@@ -86,11 +88,14 @@ test_that("dataloader that shuffles", {
   d <- tensor_dataset(x, y)
   dl <- dataloader(dataset = d, batch_size = 50, shuffle = TRUE)
   
+  expect_warning(class = "deprecated", {
   for(i in enumerate(dl))
     expect_tensor_shape(i[[1]], c(50, 100))
+  })
   
   dl <- dataloader(dataset = d, batch_size = 30, shuffle = TRUE)
   j <- 0
+  expect_warning(class = "deprecated", {
   for (i in enumerate(dl)) {
     j <- j + 1
     if (j == 4)
@@ -98,6 +103,7 @@ test_that("dataloader that shuffles", {
     else
       expect_tensor_shape(i[[1]], c(30, 100))
   }
+  })
 
 })
 
@@ -169,11 +175,12 @@ test_that("dataloader works with num_workers", {
   dl <- dataloader(ds(), batch_size = 10, num_workers = 2)
   
   i <- 1
+  expect_warning(class = "deprecated", {
   for (batch in enumerate(dl)) {
     expect_equal_to_tensor(batch$x, i*torch_ones(10))
     i <- i + 1
   }
-
+  })
 })
 
 test_that("dataloader catches errors on workers", {
@@ -226,10 +233,12 @@ test_that("woprker init function is respected", {
                    worker_init_fn = worker_init_fn)
   
   i <- 1
+  expect_warning(class = "deprecated", {
   for (batch in enumerate(dl)) {
     expect_equal_to_tensor(batch$x, i*2*torch_ones(10))
     i <- i + 1
   }
+  })
   
 })
 
@@ -278,10 +287,11 @@ test_that("can return tensors in multiworker dataloaders", {
   
   dl <- dataloader(ds(), batch_size = 10, num_workers = 2)
   
+  expect_warning(class = "deprecated", {
   for (batch in enumerate(dl)) {
     expect_equal_to_tensor(batch$x, torch_ones(10))
   }
-  
+  })
 })
 
 test_that("can make reproducible runs", {
