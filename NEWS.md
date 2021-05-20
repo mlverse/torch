@@ -9,6 +9,7 @@
 - Fixed bug in `torch_tensordot()` when called when infering dimensions. (#563)
 - Better handling optional Tensor arguments by using an explicit `XPtrTorchOptionalTensor` class. (#565)
 - Export the `torch_diff` function and added docs for it. (#565)
+- Fixed bug with `tensor$size()` when indexing with negative numbers. (#570)
 
 # torch 0.3.0
 
