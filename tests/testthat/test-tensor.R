@@ -348,3 +348,16 @@ test_that("copy_ respects the origin requires_grad", {
   expect_true(x$requires_grad)
   
 })
+
+test_that("size works", {
+  
+  x <- torch_randn(1,2,3,4,5)
+  
+  expect_equal(x$size(1), 1)
+  expect_equal(x$size(-1), 5)
+  expect_equal(x$size(-2), 4)
+  expect_equal(x$size(4), 4)
+  
+  expect_error(x$size(0))
+  
+})
