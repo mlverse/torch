@@ -89,12 +89,55 @@ Categorical <- R6::R6Class(
       } else {
         probs_to_logits(self$.probs)
       }
+    },
+    mean = function() {
+      torch_full(self$.extended_shape(), NaN, dtype=self$probs$dtype, 
+                 device=self$probs$device)
+    },
+    variance = function() {
+      torch_full(self$.extended_shape(), NaN, dtype=self$probs$dtype, 
+                 device=self$probs$device)
     }
   )
 )
 
 Categorical <- add_class_definition(Categorical)
 
+#' Creates a categorical distribution parameterized by either `probs` or
+#' `logits` (but not both).
+#' 
+#' @note
+#' It is equivalent to the distribution that [torch_multinomial()]
+#' samples from.
+#' 
+#' Samples are integers from \eqn{\{0, \ldots, K-1\}} where `K` is `probs$size(-1)`.
+#' 
+#' If `probs` is 1-dimensional with length-`K`, each element is the relative probability
+#' of sampling the class at that index.
+#' 
+#' If `probs` is N-dimensional, the first N-1 dimensions are treated as a batch of
+#' relative probability vectors.
+#' 
+#' @note The `probs` argument must be non-negative, finite and have a non-zero sum,
+#' and it will be normalized to sum to 1 along the last dimension. attr:`probs`
+#' will return this normalized value.
+#' The `logits` argument will be interpreted as unnormalized log probabilities
+#' and can therefore be any real number. It will likewise be normalized so that
+#' the resulting probabilities sum to 1 along the last dimension. attr:`logits`
+#' will return this normalized value.
+#' 
+#' See also: [torch_multinomial()]
+#' 
+#' 
+#' @param probs (Tensor): event probabilities
+#' @param logits (Tensor): event log probabilities (unnormalized)
+#' @inheritParams distr_normal
+#' 
+#' @examples
+#' m <- distr_categorical(torch_tensor(c(0.25, 0.25, 0.25, 0.25)))
+#' m$sample()  # equal probability of 1,2,3,4
+#' 
+#' @export
 distr_categorical <- function(probs = NULL, logits = NULL, validate_args = NULL){
   Categorical$new(probs, logits, validate_args = validate_args)
 }

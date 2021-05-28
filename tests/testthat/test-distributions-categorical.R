@@ -7,8 +7,13 @@ test_that("categorical distribution works", {
   expect_equal(d$sample()$requires_grad, FALSE)
   expect_equal(d$sample(c(2,2))$shape, c(2,2))
   expect_equal(d$sample(c(1))$shape, c(1))
+  expect_equal_to_r(torch_all(torch_isnan(d$mean)), TRUE)
+  expect_equal_to_r(torch_all(torch_isnan(d$variance)), TRUE)
   
-  d$log_prob(torch_tensor(1))
+  expect_equal_to_tensor(
+    d$log_prob(torch_tensor(c(1,2,3))),
+    d$logits
+  )
   
 })
 
@@ -22,6 +27,5 @@ test_that("categorical 2d works", {
   
   expect_equal(distr_categorical(probs = p1)$sample()$shape, 2)
   expect_equal(distr_categorical(probs = p2)$sample()$shape, 2)
-  
   
 })
