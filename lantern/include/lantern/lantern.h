@@ -462,8 +462,8 @@ extern "C"
   HOST_API bool lantern_Tensor_is_contiguous(void *self) { bool ret = _lantern_Tensor_is_contiguous(self); LANTERN_HOST_HANDLER return ret;}
   LANTERN_API const char  * (LANTERN_PTR _lantern_tensor_save) (void* self);
   HOST_API const char  * lantern_tensor_save(void* self) { const char  * ret = _lantern_tensor_save(self); LANTERN_HOST_HANDLER return ret;}
-  LANTERN_API void * (LANTERN_PTR _lantern_tensor_load) (const char * s);
-  HOST_API void * lantern_tensor_load(const char * s) { void * ret = _lantern_tensor_load(s); LANTERN_HOST_HANDLER return ret;}
+  LANTERN_API void * (LANTERN_PTR _lantern_tensor_load) (const char * s, void* device);
+  HOST_API void * lantern_tensor_load(const char * s, void* device) { void * ret = _lantern_tensor_load(s, device); LANTERN_HOST_HANDLER return ret;}
   LANTERN_API void * (LANTERN_PTR _lantern_test_tensor)();
   HOST_API void * lantern_test_tensor() { void * ret = _lantern_test_tensor(); LANTERN_HOST_HANDLER return ret;}
   LANTERN_API void (LANTERN_PTR _lantern_test_print)(void* x); 

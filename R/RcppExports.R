@@ -9749,8 +9749,8 @@ cpp_tensor_save <- function(x) {
     .Call('_torch_cpp_tensor_save', PACKAGE = 'torchpkg', x)
 }
 
-cpp_tensor_load <- function(s) {
-    .Call('_torch_cpp_tensor_load', PACKAGE = 'torchpkg', s)
+cpp_tensor_load <- function(s, device) {
+    .Call('_torch_cpp_tensor_load', PACKAGE = 'torchpkg', s, device)
 }
 
 cpp_load_state_dict <- function(path) {

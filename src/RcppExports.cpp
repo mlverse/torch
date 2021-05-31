@@ -31834,13 +31834,14 @@ BEGIN_RCPP
 END_RCPP
 }
 // cpp_tensor_load
-Rcpp::XPtr<XPtrTorchTensor> cpp_tensor_load(std::string s);
-RcppExport SEXP _torch_cpp_tensor_load(SEXP sSEXP) {
+Rcpp::XPtr<XPtrTorchTensor> cpp_tensor_load(std::string s, XPtrTorchDevice device);
+RcppExport SEXP _torch_cpp_tensor_load(SEXP sSEXP, SEXP deviceSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< std::string >::type s(sSEXP);
-    rcpp_result_gen = Rcpp::wrap(cpp_tensor_load(s));
+    Rcpp::traits::input_parameter< XPtrTorchDevice >::type device(deviceSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_tensor_load(s, device));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -34924,7 +34925,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_torch_cpp_torch_reduction_none", (DL_FUNC) &_torch_cpp_torch_reduction_none, 0},
     {"_torch_cpp_torch_reduction_sum", (DL_FUNC) &_torch_cpp_torch_reduction_sum, 0},
     {"_torch_cpp_tensor_save", (DL_FUNC) &_torch_cpp_tensor_save, 1},
-    {"_torch_cpp_tensor_load", (DL_FUNC) &_torch_cpp_tensor_load, 1},
+    {"_torch_cpp_tensor_load", (DL_FUNC) &_torch_cpp_tensor_load, 2},
     {"_torch_cpp_load_state_dict", (DL_FUNC) &_torch_cpp_load_state_dict, 1},
     {"_torch_cpp_torch_scalar", (DL_FUNC) &_torch_cpp_torch_scalar, 1},
     {"_torch_cpp_torch_scalar_dtype", (DL_FUNC) &_torch_cpp_torch_scalar_dtype, 1},

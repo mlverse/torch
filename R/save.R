@@ -42,29 +42,30 @@ torch_save.nn_module <- function(obj, path, ...) {
 #' Loads a saved object
 #'
 #' @param path a path to the saved object 
+#' @param device
 #' 
 #' @family torch_save
 #' 
 #' @export
 #' @concept serialization
-torch_load <- function(path) {
+torch_load <- function(path, device = "cpu") {
   r <- readRDS(path)
   if (r$type == "tensor")
-    torch_load_tensor(r)
+    torch_load_tensor(r, device)
   else if (r$type == "module")
-    torch_load_module(r)
+    torch_load_module(r, device)
 }
 
-torch_load_tensor <- function(obj) {
-  Tensor$new(ptr = cpp_tensor_load(obj$values))
+torch_load_tensor <- function(obj, device) {
+  Tensor$new(ptr = cpp_tensor_load(obj$values, device))
 }
 
-torch_load_module <- function(obj) {
+torch_load_module <- function(obj, device) {
   obj$state_dict <- lapply(obj$state_dict, function(x) {
     con <- rawConnection(x)
     r <- readRDS(con)
     close(con)
-    torch_load_tensor(r)
+    torch_load_tensor(r, device)
   })
   
   if (is.null(obj$version) || (obj$version < 1))

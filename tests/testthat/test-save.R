@@ -199,3 +199,36 @@ test_that("requires_grad of parameters is correct", {
   expect_false(model2$bias$requires_grad)
 })
 
+test_that("save on cuda and load on cpu", {
+  
+  skip_if_cuda_not_available()
+  model <- nn_linear(10, 10)$cuda()
+  
+  expect_equal(model$weight$device$type, "cuda")
+  
+  tmp <- tempfile("model", fileext = "pt")
+  torch_save(model, tmp)
+  
+  mod <- torch_load(tmp)
+  
+  expect_equal(mod$weight$device$type, "cpu")
+  
+})
+
+test_that("save on cuda and load on cuda", {
+  
+  skip_if_cuda_not_available()
+  model <- nn_linear(10, 10)$cuda()
+  
+  expect_equal(model$weight$device$type, "cuda")
+  
+  tmp <- tempfile("model", fileext = "pt")
+  torch_save(model, tmp)
+  
+  mod <- torch_load(tmp, device = "cuda")
+  
+  expect_equal(mod$weight$device$type, "cuda")
+  
+})
+
+
