@@ -11,6 +11,7 @@
 - Export the `torch_diff` function and added docs for it. (#565)
 - Dataset's `.getbatch` now takes an integer vector as input instead of a `list()`. (#572)
 - Fixed bug with `tensor$size()` when indexing with negative numbers. (#570)
+- Added a `device` argument to `torch_load()` allowing one to select to which device parameters should be loaded. (#578)
 
 # torch 0.3.0
 
