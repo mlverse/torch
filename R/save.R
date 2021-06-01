@@ -43,7 +43,8 @@ torch_save.nn_module <- function(obj, path, ...) {
 #'
 #' @param path a path to the saved object 
 #' @param device a device to load tensors to. By default we load to the `cpu` but you can also
-#'   load them to any `cuda` device.
+#'   load them to any `cuda` device. If `NULL` then the device where the tensor has been saved will
+#'   be reused.
 #' 
 #' @family torch_save
 #' 
