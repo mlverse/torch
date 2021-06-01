@@ -40,7 +40,7 @@ std::size_t _lantern_tensor_serialized_size (const char * s)
     LANTERN_FUNCTION_END_RET(0)
 }
 
-void * _lantern_tensor_load (const char * s) 
+void * _lantern_tensor_load (const char * s, void* device) 
 {
     LANTERN_FUNCTION_START
     std::string str;
@@ -48,7 +48,8 @@ void * _lantern_tensor_load (const char * s)
     std::istringstream stream(str);
 
     torch::Tensor t;
-    torch::load(t, stream);
+    c10::optional<torch::Device> device_ = reinterpret_cast<LanternPtr<c10::optional<torch::Device>>*>(device)->get();
+    torch::load(t, stream, device_);
     return (void*) new LanternObject<torch::Tensor>(t);
     LANTERN_FUNCTION_END
 }

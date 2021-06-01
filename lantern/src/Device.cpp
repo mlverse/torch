@@ -63,6 +63,31 @@ void *_lantern_Device(const char *type, int64_t index, bool useIndex)
   LANTERN_FUNCTION_END
 }
 
+void* _lantern_OptionalDevice_from_device (void *x, bool is_null)
+{
+  LANTERN_FUNCTION_START
+  c10::optional<torch::Device> out = c10::nullopt;
+  if (!is_null)
+  {
+    out = reinterpret_cast<LanternPtr<torch::Device>*>(x)->get();
+  }
+  return (void *) new LanternPtr<c10::optional<torch::Device>>(out);
+  LANTERN_FUNCTION_END
+}
+
+void* _lantern_OptionalDevice (const char *type, int64_t index, bool useIndex, bool isNULL)
+{
+  LANTERN_FUNCTION_START
+  if (isNULL)
+  {
+    return _lantern_OptionalDevice_from_device(nullptr, true);
+  } else {
+    return _lantern_OptionalDevice_from_device(_lantern_Device(type, index, useIndex), false);
+  }
+  
+  LANTERN_FUNCTION_END
+}
+
 const char *_lantern_Device_type(void *device)
 {
   LANTERN_FUNCTION_START

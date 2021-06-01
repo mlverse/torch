@@ -118,6 +118,15 @@ public:
   operator SEXP () const;
 };
 
+class XPtrTorchOptionalDevice : public XPtrTorch {
+public:
+  XPtrTorchOptionalDevice (void* x) : XPtrTorch(x, lantern_optional_device_delete) {}
+  explicit XPtrTorchOptionalDevice (std::shared_ptr<void> x) : XPtrTorch(x) {};
+  XPtrTorchOptionalDevice (const XPtrTorchOptionalDevice& x) : XPtrTorch(x.get_shared()) {};
+  explicit XPtrTorchOptionalDevice (SEXP x);
+  operator SEXP () const;
+};
+
 class XPtrTorchDtype : public XPtrTorch {
 public:
   XPtrTorchDtype () : XPtrTorch{NULL} {}

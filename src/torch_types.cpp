@@ -371,6 +371,21 @@ XPtrTorchDevice XPtrTorchDevice_from_SEXP (SEXP x)
 XPtrTorchDevice::XPtrTorchDevice (SEXP x):
   XPtrTorch{XPtrTorchDevice_from_SEXP(x)} {}
 
+XPtrTorchOptionalDevice XPtrTorchOptionalDevice_from_SEXP (SEXP x)
+{
+  if (TYPEOF(x) == NILSXP)
+  {
+    return XPtrTorchOptionalDevice(lantern_OptionalDevice_from_device(nullptr, true));
+  } 
+  else 
+  {
+    return XPtrTorchOptionalDevice(lantern_OptionalDevice_from_device(XPtrTorchDevice_from_SEXP(x).get(), false));
+  }
+}
+
+XPtrTorchOptionalDevice::XPtrTorchOptionalDevice (SEXP x):
+  XPtrTorch{XPtrTorchOptionalDevice_from_SEXP(x)} {}
+
 XPtrTorchDtype XPtrTorchDtype_from_SEXP (SEXP x)
 {
   if (TYPEOF(x) == EXTPTRSXP && Rf_inherits(x, "torch_dtype")) {
@@ -676,8 +691,9 @@ XPtrTorchoptional_index_int64_t::XPtrTorchoptional_index_int64_t (SEXP x_)
 }
 
 // [[Rcpp::export]]
-int test_fun (XPtrTorchoptional_index_int64_t x)
+int test_fun_hello (XPtrTorchOptionalDevice x)
 {
+  std::cout << "test fun" << std::endl;
   lantern_print_stuff(x.get());
   return 1 + 1;
 }
