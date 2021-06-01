@@ -201,6 +201,8 @@ test_that("requires_grad of parameters is correct", {
 
 test_that("can save with a NULL device", {
   
+  skip_if_cuda_not_available()
+  
   model <- nn_linear(10, 10)$cuda()
   tmp <- tempfile("model", fileext = "pt")
   torch_save(model, tmp)
