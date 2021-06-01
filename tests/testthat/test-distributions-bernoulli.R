@@ -86,4 +86,16 @@ test_that("Bernoulli distribution - enumerate_support", {
   expect_true(all(unique_values %in% required_values))
 })
 
+test_that("log prob is correct", {
+  
+  probs <- torch_rand(10)
+  d <- distr_bernoulli(probs = probs)
+  
+  x <- torch_tensor(sample(c(0, 1), 10, replace = TRUE))
+  result <- d$log_prob(x)
+  expected <- dbinom(as.numeric(x), 1, prob = as.numeric(probs), log = TRUE)
+  
+  expect_equal_to_r(result, expected, tol = 1e-6)
+})
+
 
