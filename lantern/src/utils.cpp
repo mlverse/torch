@@ -199,8 +199,8 @@ void * _lantern_string_new (const char * value)
 void _lantern_print_stuff (void* x)
 {
   LANTERN_FUNCTION_START
-  auto v = reinterpret_cast<LanternObject<c10::optional<int64_t>>*>(x);
-  std::cout << v->get().value() << std::endl;
+  auto v = reinterpret_cast<LanternPtr<c10::optional<torch::Device>>*>(x);
+  std::cout << v->get().value().type() << std::endl;
   LANTERN_FUNCTION_END_VOID
 }
 

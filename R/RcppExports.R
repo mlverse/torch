@@ -9749,8 +9749,8 @@ cpp_tensor_save <- function(x) {
     .Call('_torch_cpp_tensor_save', PACKAGE = 'torchpkg', x)
 }
 
-cpp_tensor_load <- function(s) {
-    .Call('_torch_cpp_tensor_load', PACKAGE = 'torchpkg', s)
+cpp_tensor_load <- function(s, device) {
+    .Call('_torch_cpp_tensor_load', PACKAGE = 'torchpkg', s, device)
 }
 
 cpp_load_state_dict <- function(path) {
@@ -9913,8 +9913,8 @@ cpp_torch_tensor_options_print <- function(x) {
     invisible(.Call('_torch_cpp_torch_tensor_options_print', PACKAGE = 'torchpkg', x))
 }
 
-test_fun <- function(x) {
-    .Call('_torch_test_fun', PACKAGE = 'torchpkg', x)
+test_fun_hello <- function(x) {
+    .Call('_torch_test_fun_hello', PACKAGE = 'torchpkg', x)
 }
 
 cpp_trace_function <- function(fn, inputs, compilation_unit) {

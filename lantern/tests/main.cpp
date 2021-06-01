@@ -62,12 +62,6 @@ int main(int argc, char *argv[])
 
     _test_grad_fn();
 
-    //save
-    void* tensor_to_save = lantern_test_tensor();
-    const char* saved_tensor = lantern_tensor_save(tensor_to_save);
-    void*  reloaded_tensor = lantern_tensor_load(saved_tensor);
-    lantern_test_print(reloaded_tensor);
-
     trace_r_nn_module();
 
 

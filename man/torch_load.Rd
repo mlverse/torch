@@ -4,10 +4,14 @@
 \alias{torch_load}
 \title{Loads a saved object}
 \usage{
-torch_load(path)
+torch_load(path, device = "cpu")
 }
 \arguments{
 \item{path}{a path to the saved object}
+
+\item{device}{a device to load tensors to. By default we load to the \code{cpu} but you can also
+load them to any \code{cuda} device. If \code{NULL} then the device where the tensor has been saved will
+be reused.}
 }
 \description{
 Loads a saved object

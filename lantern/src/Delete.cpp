@@ -258,3 +258,10 @@ void _lantern_optional_tensor_delete (void* x)
   lantern_delete<LanternObject<c10::optional<torch::Tensor>>>(x);
   LANTERN_FUNCTION_END_VOID;
 }
+
+void _lantern_optional_device_delete (void* x)
+{
+  LANTERN_FUNCTION_START;
+  lantern_delete<LanternObject<c10::optional<torch::Device>>>(x);
+  LANTERN_FUNCTION_END_VOID;
+}
