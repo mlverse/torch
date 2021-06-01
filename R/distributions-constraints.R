@@ -359,6 +359,17 @@ is_dependent <- function(object){
   )
 )
 
+.Simplex <- R6::R6Class(
+  "torch_Simplex",
+  inherit = Constraint,
+  public = list(
+    event_dim = 1,
+    check = function(value) {
+      torch_all(value >= 0, dim=-1) && ((value$sum(dim = -1) - 1)$abs() < 1e-6)
+    }
+  )
+)
+
 # Public interface
 # TODO: check .GreaterThan and other classes,
 # which are not instanced
@@ -392,3 +403,5 @@ constraint_half_open_interval <- .HalfOpenInterval
 constraint_positive_definite <- .PositiveDefinite$new()
 
 constraint_lower_cholesky <- .LowerCholesky$new()
+
+constraint_simplex <- .Simplex$new()
