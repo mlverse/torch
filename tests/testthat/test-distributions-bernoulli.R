@@ -98,4 +98,17 @@ test_that("log prob is correct", {
   expect_equal_to_r(result, expected, tol = 1e-6)
 })
 
+test_that("gradients are correct", {
+  
+  probs <- torch_tensor(c(0.5, 0.2), requires_grad = TRUE)
+  d <- distr_bernoulli(probs = probs)
+  
+  x <- torch_cat(list(torch_ones(5,2), torch_zeros(5,2)))
+  loss <- d$log_prob(x)$mean()
+  loss$backward()
+  
+  expect_equal_to_r(probs$grad, c(0.0000000000, 0.9375000000)) # from pytorch
+  
+})
+
 
