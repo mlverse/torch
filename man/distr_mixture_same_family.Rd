@@ -11,17 +11,17 @@ distr_mixture_same_family(
 )
 }
 \arguments{
-\item{validate_args}{Additional arguments}
-
-\item{mixture_distribution:}{\code{torch_distributions.Categorical}-like
+\item{mixture_distribution}{\code{torch_distributions.Categorical}-like
 instance. Manages the probability of selecting component.
 The number of categories must match the rightmost batch
 dimension of the \code{component_distribution}. Must have either
 scalar \code{batch_shape} or \code{batch_shape} matching
 \verb{component_distribution.batch_shape[:-1]}}
 
-\item{component_distribution:}{\code{torch_distributions.Distribution}-like
+\item{component_distribution}{\code{torch_distributions.Distribution}-like
 instance. Right-most batch dimension indexes component.}
+
+\item{validate_args}{Additional arguments}
 }
 \description{
 The \code{MixtureSameFamily} distribution implements a (batch of) mixture

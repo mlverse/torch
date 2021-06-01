@@ -122,13 +122,13 @@ MixtureSameFamily <- add_class_definition(MixtureSameFamily)
 #' comp <- distr_normal(torch_randn(5), torch_rand(5))
 #' gmm <- distr_mixture_same_family(mix, comp)
 #' 
-#' @param mixture_distribution: `torch_distributions.Categorical`-like
+#' @param mixture_distribution `torch_distributions.Categorical`-like
 #'   instance. Manages the probability of selecting component.
 #'   The number of categories must match the rightmost batch
 #'   dimension of the `component_distribution`. Must have either
 #'   scalar `batch_shape` or `batch_shape` matching
 #'   `component_distribution.batch_shape[:-1]`
-#' @param component_distribution: `torch_distributions.Distribution`-like
+#' @param component_distribution `torch_distributions.Distribution`-like
 #'   instance. Right-most batch dimension indexes component.
 #' @inheritParams distr_normal
 #' 
