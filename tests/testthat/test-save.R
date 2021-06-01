@@ -199,6 +199,15 @@ test_that("requires_grad of parameters is correct", {
   expect_false(model2$bias$requires_grad)
 })
 
+test_that("can save with a NULL device", {
+  
+  model <- nn_linear(10, 10)
+  tmp <- tempfile("model", fileext = "pt")
+  torch_save(model, tmp)
+  torch_load(tmp, device = NULL)
+  
+})
+
 test_that("save on cuda and load on cpu", {
   
   skip_if_cuda_not_available()

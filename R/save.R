@@ -57,11 +57,11 @@ torch_load <- function(path, device = "cpu") {
     torch_load_module(r, device)
 }
 
-torch_load_tensor <- function(obj, device) {
+torch_load_tensor <- function(obj, device = NULL) {
   Tensor$new(ptr = cpp_tensor_load(obj$values, device))
 }
 
-torch_load_module <- function(obj, device) {
+torch_load_module <- function(obj, device = NULL) {
   obj$state_dict <- lapply(obj$state_dict, function(x) {
     con <- rawConnection(x)
     r <- readRDS(con)

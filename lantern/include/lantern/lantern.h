@@ -935,6 +935,20 @@ HOST_API bool lantern_optional_tensor_has_value (void* x)
   return ret;
 }
 
+LANTERN_API void* (LANTERN_PTR _lantern_OptionalDevice_from_device) (void *x, bool is_null);
+HOST_API void* lantern_OptionalDevice_from_device (void *x, bool is_null)
+{
+  void * ret = _lantern_OptionalDevice_from_device(x, is_null);
+  LANTERN_HOST_HANDLER;
+  return ret;
+}
+
+LANTERN_API void (LANTERN_PTR _lantern_optional_device_delete) (void*x);
+HOST_API void lantern_optional_device_delete (void* x)
+{
+  _lantern_optional_device_delete(x);
+  LANTERN_HOST_HANDLER;
+}
 
   /* Autogen Headers -- Start */
   LANTERN_API void* (LANTERN_PTR _lantern__cast_byte_tensor_bool)(void* self, void* non_blocking);
@@ -6047,6 +6061,8 @@ bool lanternInit(const std::string &libPath, std::string *pError)
   LOAD_SYMBOL(_lantern_optional_tensor_delete);
   LOAD_SYMBOL(_lantern_optional_tensor);
   LOAD_SYMBOL(_lantern_optional_tensor_has_value);
+  LOAD_SYMBOL(_lantern_OptionalDevice_from_device);
+  LOAD_SYMBOL(_lantern_optional_device_delete);
   /* Autogen Symbols -- Start */
   LOAD_SYMBOL(_lantern__cast_byte_tensor_bool)
   LOAD_SYMBOL(_lantern__cast_char_tensor_bool)

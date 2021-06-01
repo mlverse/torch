@@ -9913,8 +9913,8 @@ cpp_torch_tensor_options_print <- function(x) {
     invisible(.Call('_torch_cpp_torch_tensor_options_print', PACKAGE = 'torchpkg', x))
 }
 
-test_fun <- function(x) {
-    .Call('_torch_test_fun', PACKAGE = 'torchpkg', x)
+test_fun_hello <- function(x) {
+    .Call('_torch_test_fun_hello', PACKAGE = 'torchpkg', x)
 }
 
 cpp_trace_function <- function(fn, inputs, compilation_unit) {
