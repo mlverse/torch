@@ -14,6 +14,7 @@
 - Added a `device` argument to `torch_load()` allowing one to select to which device parameters should be loaded. (#578)
 - Added `distr_categorical()` (#576)
 - Added `distr_mixture_same_family()` (#576)
+- Fixed bug in the `log_prob` of `distr_bernoulli()` (#581)
 
 # torch 0.3.0
 
