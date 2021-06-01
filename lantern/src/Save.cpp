@@ -48,7 +48,7 @@ void * _lantern_tensor_load (const char * s, void* device)
     std::istringstream stream(str);
 
     torch::Tensor t;
-    c10::optional<torch::Device> device_ = reinterpret_cast<LanternObject<c10::optional<torch::Device>>*>(device)->get();
+    c10::optional<torch::Device> device_ = reinterpret_cast<LanternPtr<c10::optional<torch::Device>>*>(device)->get();
     torch::load(t, stream, device_);
     return (void*) new LanternObject<torch::Tensor>(t);
     LANTERN_FUNCTION_END

@@ -373,14 +373,12 @@ XPtrTorchDevice::XPtrTorchDevice (SEXP x):
 
 XPtrTorchOptionalDevice XPtrTorchOptionalDevice_from_SEXP (SEXP x)
 {
-  std::cout << "getting data"<< std::endl;
   if (TYPEOF(x) == NILSXP)
   {
     return XPtrTorchOptionalDevice(lantern_OptionalDevice_from_device(nullptr, true));
   } 
   else 
   {
-    std::cout << "getting data2"<< std::endl;
     return XPtrTorchOptionalDevice(lantern_OptionalDevice_from_device(XPtrTorchDevice_from_SEXP(x).get(), false));
   }
 }
