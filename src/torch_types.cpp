@@ -2,9 +2,20 @@
 #include "utils.h"
 
 XPtrTorchTensor::operator SEXP () const {
+  
+  if (lantern_tensor_get_pyobj(this->get()))
+  {
+    SEXP out = reinterpret_cast<SEXP>(lantern_tensor_get_pyobj(this->get()));
+    return out;
+  }
+  
   auto xptr = make_xptr<XPtrTorchTensor>(*this);
   xptr.attr("class") = Rcpp::CharacterVector::create("torch_tensor", "R7");
-  return xptr; 
+  
+  SEXP xptr_ = xptr;
+  lantern_tensor_set_pyobj(this->get(), (void*) xptr_);
+  
+  return xptr_; 
 }
 
 XPtrTorchOptionalTensor::operator SEXP() const {

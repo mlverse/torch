@@ -286,3 +286,20 @@ bool _lantern_optional_tensor_has_value (void*x)
   auto value = reinterpret_cast<LanternObject<c10::optional<torch::Tensor>>*>(x)->get();
   return value.has_value();
 }
+
+void _lantern_tensor_set_pyobj (void*x, void* ptr)
+{
+  LANTERN_FUNCTION_START
+  PyObject * ptr_ = reinterpret_cast<PyObject*>(ptr);
+  auto t = reinterpret_cast<LanternObject<torch::Tensor>*>(x)->get();
+  t.unsafeGetTensorImpl()->set_pyobj(ptr_);
+  LANTERN_FUNCTION_END_VOID
+}
+
+void* _lantern_tensor_get_pyobj (void* x)
+{
+  LANTERN_FUNCTION_START
+  auto t = reinterpret_cast<LanternObject<torch::Tensor>*>(x)->get();
+  return t.unsafeGetTensorImpl()->pyobj();
+  LANTERN_FUNCTION_END
+}
