@@ -11,10 +11,10 @@ std::string cpp_tensor_save (Rcpp::XPtr<XPtrTorchTensor> x)
 }
 
 // [[Rcpp::export]]
-Rcpp::XPtr<XPtrTorchTensor> cpp_tensor_load (std::string s, XPtrTorchOptionalDevice device)
+XPtrTorchTensor cpp_tensor_load (std::string s, XPtrTorchOptionalDevice device)
 {
   XPtrTorchTensor t = lantern_tensor_load(s.c_str(), device.get());
-  return make_xptr<XPtrTorchTensor>(t);
+  return t;
 }
 
 // [[Rcpp::export]]
