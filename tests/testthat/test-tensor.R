@@ -361,3 +361,16 @@ test_that("size works", {
   expect_error(x$size(0))
   
 })
+
+test_that("tensor identity works as expected", {
+  
+  x <- torch_randn(1)
+  y <- x$abs_()
+  z <- x$abs_()
+  
+  class(x) <- NULL
+  class(y) <- NULL
+  
+  expect_equal(x, y)
+  
+})
