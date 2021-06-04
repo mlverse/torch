@@ -34,15 +34,15 @@ public:
   operator SEXP () const;
 };
 
+
+std::function<void(void*)> tensor_deleter (void* x);
+
 class XPtrTorchTensor : public XPtrTorch {
 public:
   // TODO: we should make this explicit at some point, but not currently
   // possible because we rely on it in too many places.
   XPtrTorchTensor () : XPtrTorch{NULL} {}
-  XPtrTorchTensor (void* x) : XPtrTorch(x, [](void* x) {
-    lantern_tensor_set_pyobj(x, nullptr);
-    lantern_Tensor_delete(x);
-  }) {}
+  XPtrTorchTensor (void* x) : XPtrTorch(x, tensor_deleter(x)) {}
   explicit XPtrTorchTensor (std::shared_ptr<void> x) : XPtrTorch(x) {}
   XPtrTorchTensor (const XPtrTorchTensor& x): XPtrTorch(x.get_shared()) {}
   XPtrTorchTensor (XPtrTorchIndexTensor x): XPtrTorch(x.get_shared()) {}

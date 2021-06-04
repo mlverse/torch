@@ -80,3 +80,19 @@ bool cpp_torch_namespace__use_cudnn_rnn_flatten_weight ()
   return lantern__use_cudnn_rnn_flatten_weight();
 }
 
+std::function<void(void*)> tensor_deleter (void* x) {
+  if (lantern_tensor_get_pyobj(x)) {
+    return [](void* x) {
+      std::cout << "Deleting without weak: " << x << std::endl;
+      lantern_Tensor_delete(x);
+    };
+  }
+  else 
+  {
+    return [](void* x) {
+      std::cout << "Deleting with weak: " << x << std::endl;
+      lantern_tensor_set_pyobj(x, nullptr);
+      lantern_Tensor_delete(x);
+    };
+  }
+}

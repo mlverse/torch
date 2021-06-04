@@ -1,20 +1,34 @@
 #include "torch_types.h"
 #include "utils.h"
 
+void finalize_xptr (SEXP ptr)
+{
+  std::cout << "Calling the XPtr finalizer on: " << (void*) ptr << std::endl;
+  auto xptr = Rcpp::as<Rcpp::XPtr<XPtrTorchTensor>>(ptr);
+  lantern_tensor_set_pyobj(xptr->get(), nullptr);
+}
+
 XPtrTorchTensor::operator SEXP () const {
   
   if (lantern_tensor_get_pyobj(this->get()))
   {
-    SEXP out = reinterpret_cast<SEXP>(lantern_tensor_get_pyobj(this->get()));
-    return out;
+    SEXP ptr = PROTECT((SEXP) lantern_tensor_get_pyobj(this->get()));
+    std::cout << "In the void* : " << this->get() << std::endl;
+    std::cout << "Found a live SEXP at: " << (void*)ptr << std::endl;
+    std::cout << (void*) R_ExternalPtrProtected(ptr) << std::endl;
+    UNPROTECT(1);
+    return ptr;
   }
   
   auto xptr = make_xptr<XPtrTorchTensor>(*this);
   xptr.attr("class") = Rcpp::CharacterVector::create("torch_tensor", "R7");
+  R_RegisterCFinalizer(xptr, (R_CFinalizer_t) finalize_xptr);
   
-  SEXP xptr_ = xptr;
+  SEXP xptr_ = Rcpp::wrap(xptr);
+  std::cout << "xptr address: " << xptr << std::endl;
+  std::cout << "xptr_ address: " << (void*) xptr_ << std::endl;
+  std::cout << "void* address: " << this->get() << std::endl;
   lantern_tensor_set_pyobj(this->get(), (void*) xptr_);
-  
   return xptr_; 
 }
 
