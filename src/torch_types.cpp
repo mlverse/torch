@@ -1,33 +1,42 @@
 #include "torch_types.h"
 #include "utils.h"
 
-void finalize_xptr (SEXP ptr)
+void tensor_finalizer (SEXP ptr)
 {
-  std::cout << "Calling the XPtr finalizer on: " << (void*) ptr << std::endl;
   auto xptr = Rcpp::as<Rcpp::XPtr<XPtrTorchTensor>>(ptr);
   lantern_tensor_set_pyobj(xptr->get(), nullptr);
 }
 
 XPtrTorchTensor::operator SEXP () const {
   
+  // If there's an R object stored in the Tensor Implementation
+  // we want to return it directly so we have a unique R object
+  // that points to each tensor.
   if (lantern_tensor_get_pyobj(this->get()))
   {
-    SEXP ptr = PROTECT((SEXP) lantern_tensor_get_pyobj(this->get()));
-    std::cout << "In the void* : " << this->get() << std::endl;
-    std::cout << "Found a live SEXP at: " << (void*)ptr << std::endl;
-    std::cout << (void*) R_ExternalPtrProtected(ptr) << std::endl;
-    UNPROTECT(1);
-    return ptr;
+    // It could be that the R objet is still stored in the TensorImpl but
+    // it has already been scheduled for finalization by the GC.
+    // Thus we need to run the pending finalizers and retry.
+    R_RunPendingFinalizers();  
+    void* ptr = lantern_tensor_get_pyobj(this->get());
+    if (ptr)
+    {
+      SEXP out = PROTECT(Rf_duplicate((SEXP) ptr));
+      UNPROTECT(1);
+      return out;
+    }
   }
   
+  // If there's no R object stored in the Tensor, we will create a new one 
+  // and store the weak reference.
+  // Since this will be the only R object that points to that tensor, we also
+  // register a finalizer that will erase the reference to the R object in the 
+  // C++ object whenever this object gets out of scope.
   auto xptr = make_xptr<XPtrTorchTensor>(*this);
   xptr.attr("class") = Rcpp::CharacterVector::create("torch_tensor", "R7");
-  R_RegisterCFinalizer(xptr, (R_CFinalizer_t) finalize_xptr);
-  
   SEXP xptr_ = Rcpp::wrap(xptr);
-  std::cout << "xptr address: " << xptr << std::endl;
-  std::cout << "xptr_ address: " << (void*) xptr_ << std::endl;
-  std::cout << "void* address: " << this->get() << std::endl;
+  R_RegisterCFinalizer(xptr_, tensor_finalizer);
+  
   lantern_tensor_set_pyobj(this->get(), (void*) xptr_);
   return xptr_; 
 }

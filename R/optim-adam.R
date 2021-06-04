@@ -55,10 +55,8 @@ optim_adam <- optimizer(
   
   step = function(closure = NULL) {
     loop_fun <- function(group, param, g, p) {
-      browser()
+  
       grad <- param$grad
-      print(xptr::xptr_address(grad))
-      
       
       # if (grad$is_sparse) {
       #   runtime_error("Adam does not support sparse gradients, please consider",

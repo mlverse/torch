@@ -393,14 +393,14 @@ test_that("tensor identity works as expected", {
 
 test_that("using with optim", {
   
-  
-  x <- torch_tensor(100, requires_grad = TRUE)
-  opt <- optim_adam(x, lr = 1)
-  l <- (2*x^2)$mean()
-  l$backward()
-  f <- function() x$grad
-  gctorture(TRUE)
-  opt$step()
-  gctorture(FALSE)
+  expect_error(regexp = NA, {
+    x <- torch_tensor(100, requires_grad = TRUE)
+    opt <- optim_adam(x, lr = 1)
+    l <- (2*x^2)$mean()
+    l$backward()
+    gctorture(TRUE)
+    opt$step()
+    gctorture(FALSE)
+  })
   
 })
