@@ -269,7 +269,7 @@ test_that("GRU on the GPU keeps its parameters", {
   m$cuda()
   r_pars <- names(m$parameters)
   
-  expect_equal(m_pars, e_pars)
+  expect_equal(r_pars, e_pars)
   
 })
 
