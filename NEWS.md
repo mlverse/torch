@@ -14,6 +14,7 @@
 - Added a `device` argument to `torch_load()` allowing one to select to which device parameters should be loaded. (#578)
 - Added `distr_categorical()` (#576)
 - Added `distr_mixture_same_family()` (#576)
+- Tensors in the R side that point to the same C++ Tensor are now guaranteed to be the same object. This allows to easily determine unique model parameters. (#582)
 
 # torch 0.3.0
 
