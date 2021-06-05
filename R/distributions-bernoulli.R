@@ -76,7 +76,7 @@ Bernoulli <- R6::R6Class(
       results <- broadcast_all(list(self$logits, value))
       logits <- results[[1]]
       value <- results[[2]]
-      nnf_binary_cross_entropy_with_logits(
+      -nnf_binary_cross_entropy_with_logits(
         logits, value, reduction='none'
       )
     },

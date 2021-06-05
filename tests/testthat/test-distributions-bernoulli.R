@@ -86,4 +86,29 @@ test_that("Bernoulli distribution - enumerate_support", {
   expect_true(all(unique_values %in% required_values))
 })
 
+test_that("log prob is correct", {
+  
+  probs <- torch_rand(10)
+  d <- distr_bernoulli(probs = probs)
+  
+  x <- torch_tensor(sample(c(0, 1), 10, replace = TRUE))
+  result <- d$log_prob(x)
+  expected <- dbinom(as.numeric(x), 1, prob = as.numeric(probs), log = TRUE)
+  
+  expect_equal_to_r(result, expected, tol = 1e-6)
+})
+
+test_that("gradients are correct", {
+  
+  probs <- torch_tensor(c(0.5, 0.2), requires_grad = TRUE)
+  d <- distr_bernoulli(probs = probs)
+  
+  x <- torch_cat(list(torch_ones(5,2), torch_zeros(5,2)))
+  loss <- d$log_prob(x)$mean()
+  loss$backward()
+  
+  expect_equal_to_r(probs$grad, c(0.0000000000, 0.9375000000)) # from pytorch
+  
+})
+
 
