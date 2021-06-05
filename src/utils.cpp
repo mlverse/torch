@@ -79,4 +79,3 @@ bool cpp_torch_namespace__use_cudnn_rnn_flatten_weight ()
 {
   return lantern__use_cudnn_rnn_flatten_weight();
 }
-

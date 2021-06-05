@@ -361,3 +361,46 @@ test_that("size works", {
   expect_error(x$size(0))
   
 })
+
+test_that("tensor identity works as expected", {
+  
+  v <- runif(1)
+  gctorture()
+  x <- torch_tensor(v)
+  y <- x$abs_()$abs_()
+  z <- x$abs_()
+  gctorture(FALSE)
+  
+  class(x) <- NULL
+  class(y) <- NULL
+  class(z) <- NULL
+  
+  expect_equal(x, y)
+  expect_equal(x, z)
+  
+  rm(x); gc()
+  
+  class(y) <- class(torch_tensor(1))
+  expect_equal_to_r(y, v, tol = 1e-7)
+  
+  x <- y$abs_()
+  
+  class(x) <- NULL
+  class(y) <- NULL
+  expect_equal(x, y)
+  
+})
+
+test_that("using with optim", {
+  
+  expect_error(regexp = NA, {
+    x <- torch_tensor(100, requires_grad = TRUE)
+    opt <- optim_adam(x, lr = 1)
+    l <- (2*x^2)$mean()
+    l$backward()
+    gctorture(TRUE)
+    opt$step()
+    gctorture(FALSE)
+  })
+  
+})

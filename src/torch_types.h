@@ -34,6 +34,9 @@ public:
   operator SEXP () const;
 };
 
+
+std::function<void(void*)> tensor_deleter (void* x);
+
 class XPtrTorchTensor : public XPtrTorch {
 public:
   // TODO: we should make this explicit at some point, but not currently

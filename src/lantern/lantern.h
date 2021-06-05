@@ -950,6 +950,21 @@ HOST_API void lantern_optional_device_delete (void* x)
   LANTERN_HOST_HANDLER;
 }
 
+LANTERN_API void (LANTERN_PTR _lantern_tensor_set_pyobj) (void*x, void* ptr);
+HOST_API void lantern_tensor_set_pyobj (void* x, void* ptr)
+{
+  _lantern_tensor_set_pyobj(x, ptr);
+  LANTERN_HOST_HANDLER;
+}
+
+LANTERN_API void* (LANTERN_PTR _lantern_tensor_get_pyobj) (void* x);
+HOST_API void* lantern_tensor_get_pyobj (void* x)
+{
+  void* ret = _lantern_tensor_get_pyobj(x);
+  LANTERN_HOST_HANDLER;
+  return ret;
+}
+
   /* Autogen Headers -- Start */
   LANTERN_API void* (LANTERN_PTR _lantern__cast_byte_tensor_bool)(void* self, void* non_blocking);
   HOST_API void* lantern__cast_byte_tensor_bool(void* self, void* non_blocking) { void* ret = _lantern__cast_byte_tensor_bool(self, non_blocking); LANTERN_HOST_HANDLER return ret; }
@@ -6063,6 +6078,8 @@ bool lanternInit(const std::string &libPath, std::string *pError)
   LOAD_SYMBOL(_lantern_optional_tensor_has_value);
   LOAD_SYMBOL(_lantern_OptionalDevice_from_device);
   LOAD_SYMBOL(_lantern_optional_device_delete);
+  LOAD_SYMBOL(_lantern_tensor_set_pyobj);
+  LOAD_SYMBOL(_lantern_tensor_get_pyobj);
   /* Autogen Symbols -- Start */
   LOAD_SYMBOL(_lantern__cast_byte_tensor_bool)
   LOAD_SYMBOL(_lantern__cast_char_tensor_bool)

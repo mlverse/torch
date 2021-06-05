@@ -55,7 +55,7 @@ optim_adam <- optimizer(
   
   step = function(closure = NULL) {
     loop_fun <- function(group, param, g, p) {
-      
+  
       grad <- param$grad
       
       # if (grad$is_sparse) {

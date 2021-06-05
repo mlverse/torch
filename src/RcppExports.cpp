@@ -37,7 +37,7 @@ BEGIN_RCPP
 END_RCPP
 }
 // cpp_tensor_grad
-Rcpp::XPtr<XPtrTorchTensor> cpp_tensor_grad(Rcpp::XPtr<XPtrTorchTensor> self);
+XPtrTorchTensor cpp_tensor_grad(Rcpp::XPtr<XPtrTorchTensor> self);
 RcppExport SEXP _torch_cpp_tensor_grad(SEXP selfSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
@@ -399,7 +399,7 @@ BEGIN_RCPP
 END_RCPP
 }
 // cpp_contrib_torch_sparsemax
-Rcpp::XPtr<XPtrTorchTensor> cpp_contrib_torch_sparsemax(Rcpp::XPtr<XPtrTorchTensor> input, int dim);
+XPtrTorchTensor cpp_contrib_torch_sparsemax(Rcpp::XPtr<XPtrTorchTensor> input, int dim);
 RcppExport SEXP _torch_cpp_contrib_torch_sparsemax(SEXP inputSEXP, SEXP dimSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
@@ -31453,7 +31453,7 @@ BEGIN_RCPP
 END_RCPP
 }
 // Tensor_slice
-Rcpp::XPtr<XPtrTorchTensor> Tensor_slice(Rcpp::XPtr<XPtrTorchTensor> self, Rcpp::Environment e, bool drop, Rcpp::List mask);
+XPtrTorchTensor Tensor_slice(Rcpp::XPtr<XPtrTorchTensor> self, Rcpp::Environment e, bool drop, Rcpp::List mask);
 RcppExport SEXP _torch_Tensor_slice(SEXP selfSEXP, SEXP eSEXP, SEXP dropSEXP, SEXP maskSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
@@ -31660,7 +31660,7 @@ BEGIN_RCPP
 END_RCPP
 }
 // cpp_nn_utils_pad_sequence
-Rcpp::XPtr<XPtrTorchTensor> cpp_nn_utils_pad_sequence(XPtrTorchTensorList sequence, bool batch_first, double padding_value);
+XPtrTorchTensor cpp_nn_utils_pad_sequence(XPtrTorchTensorList sequence, bool batch_first, double padding_value);
 RcppExport SEXP _torch_cpp_nn_utils_pad_sequence(SEXP sequenceSEXP, SEXP batch_firstSEXP, SEXP padding_valueSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
@@ -31687,7 +31687,7 @@ BEGIN_RCPP
 END_RCPP
 }
 // cpp_nn_utils_PackedSequence_data
-Rcpp::XPtr<XPtrTorchTensor> cpp_nn_utils_PackedSequence_data(Rcpp::XPtr<XPtrTorchPackedSequence> x);
+XPtrTorchTensor cpp_nn_utils_PackedSequence_data(Rcpp::XPtr<XPtrTorchPackedSequence> x);
 RcppExport SEXP _torch_cpp_nn_utils_PackedSequence_data(SEXP xSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
@@ -31698,7 +31698,7 @@ BEGIN_RCPP
 END_RCPP
 }
 // cpp_nn_utils_PackedSequence_batch_sizes
-Rcpp::XPtr<XPtrTorchTensor> cpp_nn_utils_PackedSequence_batch_sizes(Rcpp::XPtr<XPtrTorchPackedSequence> x);
+XPtrTorchTensor cpp_nn_utils_PackedSequence_batch_sizes(Rcpp::XPtr<XPtrTorchPackedSequence> x);
 RcppExport SEXP _torch_cpp_nn_utils_PackedSequence_batch_sizes(SEXP xSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
@@ -31709,7 +31709,7 @@ BEGIN_RCPP
 END_RCPP
 }
 // cpp_nn_utils_PackedSequence_sorted_indices
-Rcpp::XPtr<XPtrTorchTensor> cpp_nn_utils_PackedSequence_sorted_indices(Rcpp::XPtr<XPtrTorchPackedSequence> x);
+XPtrTorchTensor cpp_nn_utils_PackedSequence_sorted_indices(Rcpp::XPtr<XPtrTorchPackedSequence> x);
 RcppExport SEXP _torch_cpp_nn_utils_PackedSequence_sorted_indices(SEXP xSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
@@ -31720,7 +31720,7 @@ BEGIN_RCPP
 END_RCPP
 }
 // cpp_nn_utils_PackedSequence_unsorted_indices
-Rcpp::XPtr<XPtrTorchTensor> cpp_nn_utils_PackedSequence_unsorted_indices(Rcpp::XPtr<XPtrTorchPackedSequence> x);
+XPtrTorchTensor cpp_nn_utils_PackedSequence_unsorted_indices(Rcpp::XPtr<XPtrTorchPackedSequence> x);
 RcppExport SEXP _torch_cpp_nn_utils_PackedSequence_unsorted_indices(SEXP xSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
@@ -31834,7 +31834,7 @@ BEGIN_RCPP
 END_RCPP
 }
 // cpp_tensor_load
-Rcpp::XPtr<XPtrTorchTensor> cpp_tensor_load(std::string s, XPtrTorchOptionalDevice device);
+XPtrTorchTensor cpp_tensor_load(std::string s, XPtrTorchOptionalDevice device);
 RcppExport SEXP _torch_cpp_tensor_load(SEXP sSEXP, SEXP deviceSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
@@ -32032,7 +32032,7 @@ BEGIN_RCPP
 END_RCPP
 }
 // cpp_torch_tensor
-Rcpp::XPtr<XPtrTorchTensor> cpp_torch_tensor(SEXP x, std::vector<std::int64_t> dim, XPtrTorchTensorOptions options, bool requires_grad, bool is_integer64);
+XPtrTorchTensor cpp_torch_tensor(SEXP x, std::vector<std::int64_t> dim, XPtrTorchTensorOptions options, bool requires_grad, bool is_integer64);
 RcppExport SEXP _torch_cpp_torch_tensor(SEXP xSEXP, SEXP dimSEXP, SEXP optionsSEXP, SEXP requires_gradSEXP, SEXP is_integer64SEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
@@ -32186,7 +32186,7 @@ BEGIN_RCPP
 END_RCPP
 }
 // cpp_namespace_normal_double_double
-Rcpp::XPtr<XPtrTorchTensor> cpp_namespace_normal_double_double(double mean, double std, std::vector<int64_t> size, Rcpp::XPtr<XPtrTorchGenerator> generator, XPtrTorchTensorOptions options);
+XPtrTorchTensor cpp_namespace_normal_double_double(double mean, double std, std::vector<int64_t> size, Rcpp::XPtr<XPtrTorchGenerator> generator, XPtrTorchTensorOptions options);
 RcppExport SEXP _torch_cpp_namespace_normal_double_double(SEXP meanSEXP, SEXP stdSEXP, SEXP sizeSEXP, SEXP generatorSEXP, SEXP optionsSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
@@ -32201,7 +32201,7 @@ BEGIN_RCPP
 END_RCPP
 }
 // cpp_namespace_normal_double_tensor
-Rcpp::XPtr<XPtrTorchTensor> cpp_namespace_normal_double_tensor(double mean, Rcpp::XPtr<XPtrTorchTensor> std, Rcpp::XPtr<XPtrTorchGenerator> generator);
+XPtrTorchTensor cpp_namespace_normal_double_tensor(double mean, Rcpp::XPtr<XPtrTorchTensor> std, Rcpp::XPtr<XPtrTorchGenerator> generator);
 RcppExport SEXP _torch_cpp_namespace_normal_double_tensor(SEXP meanSEXP, SEXP stdSEXP, SEXP generatorSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
@@ -32214,7 +32214,7 @@ BEGIN_RCPP
 END_RCPP
 }
 // cpp_namespace_normal_tensor_double
-Rcpp::XPtr<XPtrTorchTensor> cpp_namespace_normal_tensor_double(Rcpp::XPtr<XPtrTorchTensor> mean, double std, Rcpp::XPtr<XPtrTorchGenerator> generator);
+XPtrTorchTensor cpp_namespace_normal_tensor_double(Rcpp::XPtr<XPtrTorchTensor> mean, double std, Rcpp::XPtr<XPtrTorchGenerator> generator);
 RcppExport SEXP _torch_cpp_namespace_normal_tensor_double(SEXP meanSEXP, SEXP stdSEXP, SEXP generatorSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
@@ -32227,7 +32227,7 @@ BEGIN_RCPP
 END_RCPP
 }
 // cpp_namespace_normal_tensor_tensor
-Rcpp::XPtr<XPtrTorchTensor> cpp_namespace_normal_tensor_tensor(Rcpp::XPtr<XPtrTorchTensor> mean, Rcpp::XPtr<XPtrTorchTensor> std, Rcpp::XPtr<XPtrTorchGenerator> generator);
+XPtrTorchTensor cpp_namespace_normal_tensor_tensor(Rcpp::XPtr<XPtrTorchTensor> mean, Rcpp::XPtr<XPtrTorchTensor> std, Rcpp::XPtr<XPtrTorchGenerator> generator);
 RcppExport SEXP _torch_cpp_namespace_normal_tensor_tensor(SEXP meanSEXP, SEXP stdSEXP, SEXP generatorSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;

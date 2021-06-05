@@ -36,14 +36,14 @@ XPtrTorchTensorList cpp_nn_utils_pad_packed_sequence (
 }
 
 // [[Rcpp::export]]
-Rcpp::XPtr<XPtrTorchTensor> cpp_nn_utils_pad_sequence (
+XPtrTorchTensor cpp_nn_utils_pad_sequence (
   XPtrTorchTensorList sequence,
   bool batch_first,
   double padding_value
 ) {
   XPtrTorchTensor out = lantern_nn_utils_rnn_pad_sequence(sequence.get(), batch_first,
                                                            padding_value);
-  return make_xptr<XPtrTorchTensor>(out);
+  return out;
 }
 
 // [[Rcpp::export]]
@@ -62,29 +62,29 @@ Rcpp::XPtr<XPtrTorchPackedSequence> cpp_nn_utils_PackedSequence_new(Rcpp::XPtr<X
 }
 
 // [[Rcpp::export]]
-Rcpp::XPtr<XPtrTorchTensor> cpp_nn_utils_PackedSequence_data (Rcpp::XPtr<XPtrTorchPackedSequence> x)
+XPtrTorchTensor cpp_nn_utils_PackedSequence_data (Rcpp::XPtr<XPtrTorchPackedSequence> x)
 {
   XPtrTorchTensor out = lantern_nn_utils_PackedSequence_data(x->get());
-  return make_xptr<XPtrTorchTensor>(out);
+  return out;
 }
 
 // [[Rcpp::export]]
-Rcpp::XPtr<XPtrTorchTensor> cpp_nn_utils_PackedSequence_batch_sizes (Rcpp::XPtr<XPtrTorchPackedSequence> x)
+XPtrTorchTensor cpp_nn_utils_PackedSequence_batch_sizes (Rcpp::XPtr<XPtrTorchPackedSequence> x)
 {
   XPtrTorchTensor out = lantern_nn_utils_PackedSequence_batch_sizes(x->get());
-  return make_xptr<XPtrTorchTensor>(out);
+  return out;
 }
 
 // [[Rcpp::export]]
-Rcpp::XPtr<XPtrTorchTensor> cpp_nn_utils_PackedSequence_sorted_indices (Rcpp::XPtr<XPtrTorchPackedSequence> x)
+XPtrTorchTensor cpp_nn_utils_PackedSequence_sorted_indices (Rcpp::XPtr<XPtrTorchPackedSequence> x)
 {
   XPtrTorchTensor out = lantern_nn_utils_PackedSequence_sorted_indices(x->get());
-  return make_xptr<XPtrTorchTensor>(out);
+  return out;
 }
 
 // [[Rcpp::export]]
-Rcpp::XPtr<XPtrTorchTensor> cpp_nn_utils_PackedSequence_unsorted_indices (Rcpp::XPtr<XPtrTorchPackedSequence> x)
+XPtrTorchTensor cpp_nn_utils_PackedSequence_unsorted_indices (Rcpp::XPtr<XPtrTorchPackedSequence> x)
 {
   XPtrTorchTensor out = lantern_nn_utils_PackedSequence_unsorted_indices(x->get());
-  return make_xptr<XPtrTorchTensor>(out);
+  return out;
 }

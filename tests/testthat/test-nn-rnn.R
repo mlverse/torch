@@ -243,6 +243,36 @@ test_that("rnn gpu", {
   
 })
 
+test_that("GRU on the GPU keeps its parameters", {
+  
+  skip_if_cuda_not_available()
+  
+  model <- nn_module(
+    initialize = function(input_size, hidden_size) {
+      self$rnn <- nn_gru(
+        input_size = input_size,
+        hidden_size = hidden_size,
+        batch_first = TRUE
+      )
+      self$output <- nn_linear(hidden_size, 1)
+    },
+    forward = function(x) {
+      # list of [output, hidden]
+      # we are interested in the final timestep only, so we can directly use [[2]]
+      # but we want to remove the un-needed singleton dimension on the left
+      x <- self$rnn(x)[[2]]$squeeze(1)
+      x %>% self$output() 
+    }
+  )
+  m <- model(1, 64)
+  e_pars <- names(m$parameters)
+  m$cuda()
+  r_pars <- names(m$parameters)
+  
+  expect_equal(r_pars, e_pars)
+  
+})
+
 test_that("lstm and gru works with packed sequences", {
   # regression test for https://github.com/mlverse/torch/issues/499
   

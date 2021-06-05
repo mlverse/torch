@@ -47,7 +47,7 @@ Rcpp::List cpp_tensor_list_to_r_list(Rcpp::XPtr<XPtrTorchTensorList> x)
   for (int i = 0; i < sze; i++)
   {
     void * tmp = lantern_TensorList_at(x->get(), i);
-    out.push_back(make_xptr<XPtrTorchTensor>(tmp));
+    out.push_back(XPtrTorchTensor(tmp));
   }
 
   return out;

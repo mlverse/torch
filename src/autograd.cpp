@@ -30,8 +30,9 @@ bool cpp_autograd_is_enabled()
 }
 
 // [[Rcpp::export]]
-Rcpp::XPtr<XPtrTorchTensor> cpp_tensor_grad (Rcpp::XPtr<XPtrTorchTensor> self) {
-  return make_xptr<XPtrTorchTensor>(lantern_Tensor_grad(self->get()));
+XPtrTorchTensor cpp_tensor_grad (Rcpp::XPtr<XPtrTorchTensor> self) {
+  auto out = XPtrTorchTensor(lantern_Tensor_grad(self->get()));
+  return out;
 }
 
 // [[Rcpp::export]]
@@ -209,8 +210,10 @@ unsigned int cpp_tensor_register_hook (Rcpp::XPtr<XPtrTorchTensor> self, Rcpp::F
     
     std::packaged_task<void*()> task([f, x]() {
       LANTERN_CALLBACK_START
-      auto y = make_xptr<XPtrTorchTensor>(x);
-      return Rcpp::as<Rcpp::XPtr<XPtrTorchTensor>>(f(y))->get();
+      SEXP y = PROTECT(XPtrTorchTensor(x));
+      auto out = Rcpp::as<Rcpp::XPtr<XPtrTorchTensor>>(f(y))->get();
+      UNPROTECT(1);
+      return out;
       LANTERN_CALLBACK_END("Unknon error in hook.", NULL)
     });
     std::future<void*> result = task.get_future();
