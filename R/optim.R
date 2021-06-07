@@ -137,11 +137,11 @@ State <- R6::R6Class(
 )
 
 state <- function(self) {
-  attr(self, "state")
+  rlang::env_get(rlang::caller_env(), "self", default = NULL, inherit = TRUE)$state$get(self)
 }
 
 `state<-` <- function(self, value) {
-  attr(self, "state") <- value
+  rlang::env_get(rlang::caller_env(), "self", default = NULL, inherit = TRUE)$state$set(self, value)
   self
 }
 

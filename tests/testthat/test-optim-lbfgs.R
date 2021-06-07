@@ -16,9 +16,9 @@ test_that("state updates correctly", {
   }
   
   opt$step(f)
-  expect_equal(state(opt$param_groups[[1]]$params[[1]])$func_evals, 1)
+  expect_equal(opt$state$get(opt$param_groups[[1]]$params[[1]])$func_evals, 1)
   opt$step(f)
-  expect_equal(state(opt$param_groups[[1]]$params[[1]])$func_evals, 2)
+  expect_equal(opt$state$get(opt$param_groups[[1]]$params[[1]])$func_evals, 2)
 })
 
 test_that("lbfgs works", {
