@@ -39,6 +39,8 @@ Optimizer <- R6::R6Class(
       for (p in param_groups) {
         self$add_param_group(p)
       }
+      
+      self$state <- State$new()
     
     },
     add_param_group = function(param_group) {
@@ -115,6 +117,22 @@ Optimizer <- R6::R6Class(
         loss
       })
     }
+  )
+)
+
+State <- R6::R6Class(
+  "State",
+  lock_objects = FALSE,
+  public = list(
+    initialize = function() {
+      self$map <- list()
+    },
+    set = function(key, value) {
+      self$map[[rlang::hash(key)]] <- value
+    },
+    get = function(key) {
+      self$map[[rlang::hash(key)]]
+    }  
   )
 )
 
