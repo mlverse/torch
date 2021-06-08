@@ -89,6 +89,48 @@ Optimizer <- R6::R6Class(
           }
         }
       }
+    },
+    state_dict = function() {
+      
+      parameters <- unlist(lapply(self$param_groups, function(x) x$params))
+      parameters <- lapply(parameters, xptr_address)
+      
+      state_dict <- self$state$map
+      names(state_dict) <- match(names(self$state$map), parameters)
+      
+      param_groups <- self$param_groups
+      param_groups <- lapply(param_groups, function(x) {
+        group_param <- lapply(x$params, xptr_address)
+        x$params <- match(group_param, parameters)
+        x
+      })
+      
+      list(
+        param_groups = param_groups,
+        state = state_dict
+      )
+    },
+    load_state_dict = function(state_dict) {
+      
+      # validate the state dict
+      if(!length(self$param_groups) == length(state_dict$param_groups))
+        value_error("Loaded state dict has a different number of parameter groups")
+      
+      for (i in seq_along(self$param_groups)) {
+        if (! length(self$param_groups[[i]]$params) == length(state_dict$param_groups[[i]]$params))
+          value_error("Loaded state dict has contains a parameter group that doesn't match the size of optimizers group.")
+      }
+      
+      parameters <- unlist(lapply(self$param_groups, function(x) x$params))
+      
+      # update state
+      for (o in names(state_dict$state)) {
+        index <- as.integer(o)
+        value <- state_dict$state[[o]]
+        self$state$set(parameters[[index]], value)
+      }
+      
+      invisible(self)
     }
   ),
   private = list(
@@ -128,11 +170,14 @@ State <- R6::R6Class(
       self$map <- list()
     },
     set = function(key, value) {
-      self$map[[rlang::hash(key)]] <- value
+      self$map[[xptr_address(key)]] <- value
     },
     get = function(key) {
-      self$map[[rlang::hash(key)]]
-    }  
+      self$map[[xptr_address(key)]]
+    },
+    keys = function() {
+      names(self$map)
+    }
   )
 )
 

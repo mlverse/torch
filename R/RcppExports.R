@@ -9981,3 +9981,7 @@ set_xptr_protected <- function(s, pro) {
     .Call('_torch_set_xptr_protected', PACKAGE = 'torchpkg', s, pro)
 }
 
+xptr_address <- function(s) {
+    .Call('_torch_xptr_address', PACKAGE = 'torchpkg', s)
+}
+
