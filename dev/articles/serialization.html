@@ -209,6 +209,31 @@
 <span class="va">model</span><span class="op">$</span><span class="fu">load_state_dict</span><span class="op">(</span><span class="va">state_dict</span><span class="op">)</span></code></pre></div>
 <p>You can find working examples in <code>torchvision</code>. For example <a href="https://github.com/mlverse/torchvision/blob/main/R/models-alexnet.R#L2-L63">this</a> is what we do for the AlexNet model.</p>
 </div>
+<div id="saving-optimizer-state" class="section level2">
+<h2 class="hasAnchor">
+<a href="#saving-optimizer-state" class="anchor"></a>Saving optimizer state</h2>
+<p>You can save the state of optimizers so you can continue training from the exact same position.</p>
+<p>In order to this we use the <code>state_dict()</code> and <code><a href="../reference/load_state_dict.html">load_state_dict()</a></code> methods from the optimizer combined with <code>torch_save</code>:</p>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/nn_linear.html">nn_linear</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">1</span><span class="op">)</span>
+<span class="va">opt</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/optim_adam.html">optim_adam</a></span><span class="op">(</span><span class="va">model</span><span class="op">$</span><span class="va">parameters</span><span class="op">)</span>
+
+<span class="va">train_x</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/torch_randn.html">torch_randn</a></span><span class="op">(</span><span class="fl">100</span>, <span class="fl">1</span><span class="op">)</span>
+<span class="va">train_y</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/torch_randn.html">torch_randn</a></span><span class="op">(</span><span class="fl">100</span>, <span class="fl">1</span><span class="op">)</span>
+
+<span class="va">loss</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/nnf_mse_loss.html">nnf_mse_loss</a></span><span class="op">(</span><span class="fu">model</span><span class="op">(</span><span class="va">train_x</span><span class="op">)</span>, <span class="va">train_y</span><span class="op">)</span>
+<span class="va">loss</span><span class="op">$</span><span class="fu">backward</span><span class="op">(</span><span class="op">)</span>
+<span class="va">opt</span><span class="op">$</span><span class="fu">step</span><span class="op">(</span><span class="op">)</span>
+<span class="co">#&gt; NULL</span>
+
+<span class="co"># Now let's save the optimizer state</span>
+<span class="va">tmp</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html">tempfile</a></span><span class="op">(</span><span class="op">)</span>
+<span class="fu"><a href="../reference/torch_save.html">torch_save</a></span><span class="op">(</span><span class="va">opt</span><span class="op">$</span><span class="fu">state_dict</span><span class="op">(</span><span class="op">)</span>, <span class="va">tmp</span><span class="op">)</span>
+
+<span class="co"># And now let's create a new optimizer and load back</span>
+<span class="va">opt2</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/optim_adam.html">optim_adam</a></span><span class="op">(</span><span class="va">model</span><span class="op">$</span><span class="va">parameters</span><span class="op">)</span>
+<span class="va">opt2</span><span class="op">$</span><span class="fu">load_state_dict</span><span class="op">(</span><span class="fu"><a href="../reference/torch_load.html">torch_load</a></span><span class="op">(</span><span class="va">tmp</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+</div>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
