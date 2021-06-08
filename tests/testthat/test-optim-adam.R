@@ -47,3 +47,41 @@ test_that("optim state_dict with more parameters", {
   d <- opt2$state_dict()
   expect_equal(d, state_dict)
 })
+
+test_that("regression test for #559", {
+  
+  tmp <- tempfile()
+  
+  model <- nn_linear(1, 1)
+  opt <- optim_adam(model$parameters)
+  
+  train_x <- torch_randn(100, 1)
+  train_y <- torch_randn(100, 1)
+  
+  # first pass prior to saving and loading: succeeds
+  
+  loss <- nnf_mse_loss(model(train_x), train_y)
+  loss$backward()
+  opt$step()
+  
+  # save model
+  torch_save(model, tmp)
+  
+  rm(model); gc()
+  
+  # second pass
+  model <- torch_load(tmp)
+  opt <- optim_adam(model$parameters)
+  
+  loss <- nnf_mse_loss(model(train_x), train_y)
+  loss$backward()
+  
+  # where it fails
+  expect_error(
+    opt$step(),
+    regexp = NA
+  )
+  
+  expect_length(opt$state$map, 2)
+  
+})
