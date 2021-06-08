@@ -90,6 +90,30 @@ model$load_state_dict(state_dict)
 You can find working examples in `torchvision`. For example [this](https://github.com/mlverse/torchvision/blob/main/R/models-alexnet.R#L2-L63) is what we do for the AlexNet model.
 
 
+## Saving optimizer state
 
+You can save the state of optimizers so you can continue training from the exact same
+position.
 
+In order to this we use the `state_dict()` and `load_state_dict()` methods from
+the optimizer combined with `torch_save`:
 
+```{r}
+model <- nn_linear(1, 1)
+opt <- optim_adam(model$parameters)
+
+train_x <- torch_randn(100, 1)
+train_y <- torch_randn(100, 1)
+
+loss <- nnf_mse_loss(model(train_x), train_y)
+loss$backward()
+opt$step()
+
+# Now let's save the optimizer state
+tmp <- tempfile()
+torch_save(opt$state_dict(), tmp)
+
+# And now let's create a new optimizer and load back
+opt2 <- optim_adam(model$parameters)
+opt2$load_state_dict(torch_load(tmp))
+```

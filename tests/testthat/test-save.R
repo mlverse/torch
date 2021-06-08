@@ -243,4 +243,30 @@ test_that("save on cuda and load on cuda", {
   
 })
 
+test_that("can save and load from lists", {
+  
+  l <- list(
+    torch_tensor(1),
+    a = torch_tensor(2),
+    b = list(
+      x = torch_tensor(3),
+      y = 4
+    ),
+    c = 5
+  )
+  
+  tmp <- tempfile()
+  torch_save(l, tmp)  
+  
+  rm(l); gc()
+  
+  l <- torch_load(tmp)
+  expect_equal_to_tensor(l[[1]], torch_tensor(1))
+  expect_equal_to_tensor(l$a, torch_tensor(2))
+  expect_equal_to_tensor(l$b$x, torch_tensor(3))
+  expect_equal(l$b$y, 4)
+  expect_equal(l$c, 5)
+  
+})
+
 
