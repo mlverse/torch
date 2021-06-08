@@ -88,12 +88,12 @@ optim_sgd <- optimizer(
         d_p <- d_p$add(p, alpha = weight_decay)
       }
       if (momentum != 0) {
-        param_state <- attr(param, "state")
-        if (is.null(param_state) || !"momentum_buffer" %in% names(param_state)) {
+        
+        if (is.null(self$state$get(param)) || !"momentum_buffer" %in% names(self$state$get(param))) {
           buf <- torch_clone(d_p)$detach()
-          state(param) <- list(momentum_buffer = buf)
+          self$state$set(param, list(momentum_buffer = buf))
         } else {
-          buf <- param_state$momentum_buffer
+          buf <- self$state$get(param)$momentum_buffer
           buf$mul_(momentum)$add_(d_p, alpha=1 - dampening)
         }
         if (nesterov) {

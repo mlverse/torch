@@ -106,7 +106,6 @@ optim_adam <- optimizer(
       }
       
       step_size <- group$lr / bias_correction1
-      
       param$addcdiv_(exp_avg, denom, value=-step_size)
     }
     private$step_helper(closure, loop_fun)
