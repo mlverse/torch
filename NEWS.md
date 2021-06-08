@@ -17,6 +17,7 @@
 - Tensors in the R side that point to the same C++ Tensor are now guaranteed to be the same object. This allows to easily determine unique model parameters. (#582)
 - Fixed bug in the `log_prob` of `distr_bernoulli()` (#581)
 - Improve handling of optimizers state and implement `load_state_dict()` and `state_dict()` for optimizers. (#585)
+- Added the ability to save R `list`s containing `torch_tensor`s using `torch_save`. This allows us to save the state of optimizers and modules using `torch_save()`. (#586) 
 
 # torch 0.3.0
 
