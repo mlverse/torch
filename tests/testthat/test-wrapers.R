@@ -339,3 +339,13 @@ test_that("tensordot works", {
   
   
 })
+
+test_that("multinomial works", {
+  
+  x <- torch_tensor(1)
+  expect_equal_to_tensor(
+    torch_multinomial(x, 10, replacement = TRUE),
+    torch_ones(10)
+  )
+  
+})

@@ -57,10 +57,6 @@ Categorical <- R6::R6Class(
       probs2d <- self$probs$reshape(c(-1, self$.num_events))
       numel <- prod(as.integer(sample_shape))
       samples_2d <- torch_multinomial(probs2d, numel, replacement = TRUE)$t()
-      # TODO Fixme when https://github.com/mlverse/torch/issues/574 is done
-      torch::with_no_grad({
-        samples_2d <- samples_2d$add_(1L)
-      })
       samples_2d$reshape(self$.extended_shape(sample_shape))
     },
     log_prob = function(value) {
