@@ -560,3 +560,9 @@ torch_broadcast_shapes <- function(...) {
   out
 }
 
+#'@rdname torch_multinomial
+torch_multinomial <- function(self, num_samples, replacement = FALSE, generator = NULL) {
+  r <- .torch_multinomial(self, num_samples, replacement = replacement, generator = generator)
+  with_no_grad({ r$add_(torch_scalar(1L)) })
+  r
+}

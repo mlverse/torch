@@ -17104,8 +17104,8 @@ fun_type = 'namespace'
 }
 
 
-#' @rdname torch_multinomial
-torch_multinomial <- function(self, num_samples, replacement = FALSE, generator = NULL) {
+#' @rdname .torch_multinomial
+.torch_multinomial <- function(self, num_samples, replacement = FALSE, generator = NULL) {
   args <- mget(x = c("self", "num_samples", "replacement", "generator"))
 expected_types <- list(self = "Tensor", num_samples = "int64_t", replacement = "bool", 
     generator = "Generator")
