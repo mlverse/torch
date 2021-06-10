@@ -1,24 +1,35 @@
 # torch (development version)
 
-- Fixed bug in `nn_multihead_attention` when q,k,v inputs not all the same. (@jonathanbratt #540)
+## Breaking changes
+
+- `torch_multinomial` now returns 1-based indexes to comply with 1-based indexing across torch. (#588)
+
+## New features
+
 - Added parameter to multihead attention module to allow output of unaveraged attention weights. (@jonathanbratt #542)
 - We now allow `jit_trace` functions with more than 1 argument. (#544)
-- Fixed `$copy_` so it correctly respects the src `requires_grad()` when reloading saved models with `torch_load()`. (#545)
 - Added Multivariate normal distribution (#552)
-- Fixed `nn_init_xavier_normal_()` and `nn_init_xavier_uniform_()` standard deviation calculation. (#557)
-- Fixed bug in `torch_tensordot()` when called when infering dimensions. (#563)
-- Better handling optional Tensor arguments by using an explicit `XPtrTorchOptionalTensor` class. (#565)
 - Export the `torch_diff` function and added docs for it. (#565)
-- Dataset's `.getbatch` now takes an integer vector as input instead of a `list()`. (#572)
-- Fixed bug with `tensor$size()` when indexing with negative numbers. (#570)
 - Added a `device` argument to `torch_load()` allowing one to select to which device parameters should be loaded. (#578)
 - Added `distr_categorical()` (#576)
 - Added `distr_mixture_same_family()` (#576)
-- Tensors in the R side that point to the same C++ Tensor are now guaranteed to be the same object. This allows to easily determine unique model parameters. (#582)
-- Fixed bug in the `log_prob` of `distr_bernoulli()` (#581)
 - Improve handling of optimizers state and implement `load_state_dict()` and `state_dict()` for optimizers. (#585)
 - Added the ability to save R `list`s containing `torch_tensor`s using `torch_save`. This allows us to save the state of optimizers and modules using `torch_save()`. (#586) 
-- `torch_multinomial` now returns 1-based indexes to comply with 1-based indexing across torch. (#588)
+
+## Bug fixes
+
+- Fixed bug in `nn_multihead_attention` when q,k,v inputs not all the same. (@jonathanbratt #540)
+- Fixed `$copy_` so it correctly respects the src `requires_grad()` when reloading saved models with `torch_load()`. (#545)
+- Fixed `nn_init_xavier_normal_()` and `nn_init_xavier_uniform_()` standard deviation calculation. (#557)
+- Fixed bug in `torch_tensordot()` when called when infering dimensions. (#563)
+- Dataset's `.getbatch` now takes an integer vector as input instead of a `list()`. (#572)
+- Fixed bug with `tensor$size()` when indexing with negative numbers. (#570)
+- Fixed bug in the `log_prob` of `distr_bernoulli()` (#581)
+
+## Internal changes
+
+- Better handling optional Tensor arguments by using an explicit `XPtrTorchOptionalTensor` class. (#565)
+- Tensors in the R side that point to the same C++ Tensor are now guaranteed to be the same object. This allows to easily determine unique model parameters. (#582)
 
 # torch 0.3.0
 

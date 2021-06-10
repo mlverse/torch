@@ -19,7 +19,7 @@ knitr::opts_chunk$set(
 ![R build status](https://github.com/mlverse/torch/workflows/Test/badge.svg)
 [![CRAN status](https://www.r-pkg.org/badges/version/torch)](https://CRAN.R-project.org/package=torch)
 [![](https://cranlogs.r-pkg.org/badges/torch)](https://cran.r-project.org/package=torch)
-[![Discord](https://img.shields.io/discord/837019024499277855?logo=discord)](https://discord.gg/s3D5cKhBkx)
+[![Discord](https://img.shields.io/discord/837019024499277855?logo=discord)](https://discord.com/invite/s3D5cKhBkx)
 
 
 ## Installation

@@ -725,7 +725,7 @@ XPtrTorchoptional_index_int64_t::XPtrTorchoptional_index_int64_t (SEXP x_)
 // [[Rcpp::export]]
 int test_fun_hello (XPtrTorchOptionalDevice x)
 {
-  std::cout << "test fun" << std::endl;
+  // std::cout << "test fun" << std::endl;
   lantern_print_stuff(x.get());
   return 1 + 1;
 }
