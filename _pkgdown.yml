@@ -91,6 +91,7 @@ reference:
       - -matches("torch_.*_like")
       - -has_concept("tensor-attributes")
       - -has_concept("serialization")
+      - broadcast_all
   - title: Neural network modules
     contents:
       - starts_with("nn_")
@@ -102,6 +103,7 @@ reference:
       - starts_with("nnf_")
   - title: Optimizers
     contents:
+      - optimizer
       - starts_with("optim_")
       - is_optimizer
   - title: Learning rate schedulers
@@ -116,7 +118,9 @@ reference:
       - is_dataloader
   - title: Distributions
     contents:
+      - Distribution
       - starts_with("distr")
+      - Constraint
   - title: Autograd
     contents:
       - starts_with("autograd_")
@@ -129,6 +133,11 @@ reference:
   - title: JIT
     contents: 
       - starts_with("jit")
+  - title: Backends
+    contents:
+      - starts_with("backends_")
   - title: Installation
     contents:
       - install_torch
+      - starts_with("install_")
+      - get_install_libs_url

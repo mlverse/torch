@@ -33,8 +33,7 @@ the gradient is normalized by an estimation of its variance
 weight_decay (float, optional): weight decay (L2 penalty) (default: 0)}
 }
 \description{
-Proposed by G. Hinton in his
-\href{https://www.cs.toronto.edu/~tijmen/csc321/slides/lecture_slides_lec6.pdf}{course}
+Proposed by G. Hinton in his course.
 }
 \note{
 The centered version first appears in

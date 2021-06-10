@@ -3,8 +3,7 @@ NULL
 
 #' RMSprop optimizer
 #' 
-#' Proposed by G. Hinton in his
-#' [course](https://www.cs.toronto.edu/~tijmen/csc321/slides/lecture_slides_lec6.pdf)
+#' Proposed by G. Hinton in his course.
 #' 
 #' @param params (iterable): iterable of parameters to optimize or list defining parameter groups
 #' @param lr (float, optional): learning rate (default: 1e-2)
