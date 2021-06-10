@@ -43,7 +43,7 @@ Since version 0.1.1 torch supports GPU installation on Windows. In order to use 
 
 -   Have properly installed the NVIDIA CUDA toolkit version 10.2 or 11.1. For CUDA v11.1, follow the installation instructions [here](https://docs.nvidia.com/cuda/archive/11.1.1/index.html). **Note**: We currently do **not** support the latest CUDA version 11.
 
--   Have installed cuDNN version 7.6 (if using CUDA v10.1) or cuDNN 8.0 (if using CUDA 11.1). 
+-   Have installed cuDNN version 7.6 (if using CUDA v10.2) or cuDNN 8.0 (if using CUDA 11.1). 
 Follow the installation instructions available [here](https://docs.nvidia.com/deeplearning/cudnn/archives/cudnn-805/install-guide/index.html).
 
 Once you have installed all pre-requisites you can install `torch` with:
@@ -118,7 +118,7 @@ In cases where you cannot reach download servers from the machine you intend to 
 1- get the download URLs of the files.
 
 ```{r}
-get_install_libs_url(type = "10.1")
+get_install_libs_url(type = "10.2")
 ```
 
 2- save those files into the machine filesystem. We will use `/tmp/` here as an example .
