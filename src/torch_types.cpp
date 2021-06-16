@@ -151,6 +151,31 @@ XPtrTorchMemoryFormat::operator SEXP () const
   return xptr;
 }
 
+XPtrTorchvector_string::operator SEXP () const
+{
+  XPtrTorchvector_string s = lantern_get_state_dict_keys(this->get());
+  int size = lantern_vector_string_size(s.get());
+  
+  std::vector<std::string> output;
+  for (int i = 0; i < size; i++)
+  {
+    const char * k = lantern_vector_string_at(s.get(), i);
+    output.push_back(std::string(k));
+    lantern_const_char_delete(k);
+  }
+  
+  return Rcpp::wrap(output);
+}
+
+XPtrTorchjit_named_parameter_list::operator SEXP () const 
+{
+  XPtrTorchTensorList tensors = lantern_jit_named_parameter_list_tensors(this->get());
+  XPtrTorchvector_string names = lantern_jit_named_parameter_list_names(this->get());
+  Rcpp::List out = Rcpp::wrap(tensors);
+  out.attr("names") = Rcpp::wrap(names);
+  return out;
+}
+
 // Constructors ----------
 
 XPtrTorchTensor XPtrTorchTensor_from_SEXP (SEXP x)

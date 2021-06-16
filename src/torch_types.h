@@ -34,7 +34,6 @@ public:
   operator SEXP () const;
 };
 
-
 std::function<void(void*)> tensor_deleter (void* x);
 
 class XPtrTorchTensor : public XPtrTorch {
@@ -160,6 +159,14 @@ public:
   operator SEXP () const;
 };
 
+class XPtrTorchjit_named_parameter_list : public XPtrTorch {
+public:
+  XPtrTorchjit_named_parameter_list (void* x) : XPtrTorch(x, lantern_jit_named_parameter_list_delete) {}
+  explicit XPtrTorchjit_named_parameter_list (std::shared_ptr<void> x) : XPtrTorch(x) {};
+  XPtrTorchjit_named_parameter_list (const XPtrTorchjit_named_parameter_list& x) : XPtrTorch(x.get_shared()) {};
+  operator SEXP () const;
+};
+
 class XPtrTorchGenerator : public XPtrTorch {
 public:
   XPtrTorchGenerator (void* x) : XPtrTorch(x, lantern_Generator_delete) {}
@@ -266,6 +273,12 @@ public:
   }
 };
 
+class XPtrTorchvector_string : public XPtrTorch {
+public:
+  XPtrTorchvector_string (void * x) : XPtrTorch(x, lantern_vector_string_delete) {}
+  operator SEXP () const;
+};
+
 #include <Rcpp.h>
 
 class XPtrTorchQScheme : public XPtrTorch {
@@ -332,11 +345,6 @@ public:
 class XPtrTorchIValue : public XPtrTorch {
 public:
   XPtrTorchIValue (void * x) : XPtrTorch (x, lantern_IValue_delete) {}
-};
-
-class XPtrTorchvector_string : public XPtrTorch {
-public:
-  XPtrTorchvector_string (void * x) : XPtrTorch(x, lantern_vector_string_delete) {}
 };
 
 class XPtrTorchstring : public XPtrTorch {

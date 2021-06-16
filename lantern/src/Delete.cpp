@@ -265,3 +265,10 @@ void _lantern_optional_device_delete (void* x)
   lantern_delete<LanternObject<c10::optional<torch::Device>>>(x);
   LANTERN_FUNCTION_END_VOID;
 }
+
+void _lantern_jit_named_parameter_list_delete (void* x)
+{
+  LANTERN_FUNCTION_START;
+  lantern_delete<torch::jit::named_parameter_list>(x);
+  LANTERN_FUNCTION_END_VOID;
+}

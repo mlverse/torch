@@ -965,6 +965,46 @@ HOST_API void* lantern_tensor_get_pyobj (void* x)
   return ret;
 }
 
+LANTERN_API void* (LANTERN_PTR _lantern_ScriptModule_parameters) (void* module);
+HOST_API void* lantern_ScriptModule_parameters (void* module)
+{
+  void* ret = _lantern_ScriptModule_parameters(module);
+  LANTERN_HOST_HANDLER;
+  return ret;
+}
+
+LANTERN_API void (LANTERN_PTR _lantern_jit_named_parameter_list_delete) (void* x);
+HOST_API void lantern_jit_named_parameter_list_delete (void* x)
+{
+  _lantern_jit_named_parameter_list_delete(x);
+  LANTERN_HOST_HANDLER;
+}
+
+LANTERN_API int (LANTERN_PTR _lantern_jit_named_parameter_list_size) (void* self);
+HOST_API int lantern_jit_named_parameter_list_size (void* module)
+{
+  int ret = _lantern_jit_named_parameter_list_size(module);
+  LANTERN_HOST_HANDLER;
+  return ret;
+}
+
+LANTERN_API void* (LANTERN_PTR _lantern_jit_named_parameter_list_tensors) (void* self);
+HOST_API void* lantern_jit_named_parameter_list_tensors (void* module)
+{
+  void* ret = _lantern_jit_named_parameter_list_tensors(module);
+  LANTERN_HOST_HANDLER;
+  return ret;
+}
+
+LANTERN_API void* (LANTERN_PTR _lantern_jit_named_parameter_list_names) (void* self);
+HOST_API void* lantern_jit_named_parameter_list_names (void* module)
+{
+  void* ret = _lantern_jit_named_parameter_list_names(module);
+  LANTERN_HOST_HANDLER;
+  return ret;
+}
+
+
   /* Autogen Headers -- Start */
   LANTERN_API void* (LANTERN_PTR _lantern__cast_byte_tensor_bool)(void* self, void* non_blocking);
   HOST_API void* lantern__cast_byte_tensor_bool(void* self, void* non_blocking) { void* ret = _lantern__cast_byte_tensor_bool(self, non_blocking); LANTERN_HOST_HANDLER return ret; }
@@ -6080,6 +6120,11 @@ bool lanternInit(const std::string &libPath, std::string *pError)
   LOAD_SYMBOL(_lantern_optional_device_delete);
   LOAD_SYMBOL(_lantern_tensor_set_pyobj);
   LOAD_SYMBOL(_lantern_tensor_get_pyobj);
+  LOAD_SYMBOL(_lantern_jit_named_parameter_list_size);
+  LOAD_SYMBOL(_lantern_jit_named_parameter_list_tensors);
+  LOAD_SYMBOL(_lantern_jit_named_parameter_list_names);
+  LOAD_SYMBOL(_lantern_jit_named_parameter_list_delete);
+  LOAD_SYMBOL(_lantern_ScriptModule_parameters);
   /* Autogen Symbols -- Start */
   LOAD_SYMBOL(_lantern__cast_byte_tensor_bool)
   LOAD_SYMBOL(_lantern__cast_char_tensor_bool)
