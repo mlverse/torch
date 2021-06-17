@@ -31933,6 +31933,50 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// cpp_jit_script_module_train
+void cpp_jit_script_module_train(XPtrTorchScriptModule self, bool on);
+RcppExport SEXP _torch_cpp_jit_script_module_train(SEXP selfSEXP, SEXP onSEXP) {
+BEGIN_RCPP
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchScriptModule >::type self(selfSEXP);
+    Rcpp::traits::input_parameter< bool >::type on(onSEXP);
+    cpp_jit_script_module_train(self, on);
+    return R_NilValue;
+END_RCPP
+}
+// cpp_jit_script_module_set_optimized
+void cpp_jit_script_module_set_optimized(XPtrTorchScriptModule self, bool on);
+RcppExport SEXP _torch_cpp_jit_script_module_set_optimized(SEXP selfSEXP, SEXP onSEXP) {
+BEGIN_RCPP
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchScriptModule >::type self(selfSEXP);
+    Rcpp::traits::input_parameter< bool >::type on(onSEXP);
+    cpp_jit_script_module_set_optimized(self, on);
+    return R_NilValue;
+END_RCPP
+}
+// cpp_jit_script_module_is_training
+bool cpp_jit_script_module_is_training(XPtrTorchScriptModule self);
+RcppExport SEXP _torch_cpp_jit_script_module_is_training(SEXP selfSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchScriptModule >::type self(selfSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_jit_script_module_is_training(self));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_jit_script_module_is_optimized
+bool cpp_jit_script_module_is_optimized(XPtrTorchScriptModule self);
+RcppExport SEXP _torch_cpp_jit_script_module_is_optimized(SEXP selfSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchScriptModule >::type self(selfSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_jit_script_module_is_optimized(self));
+    return rcpp_result_gen;
+END_RCPP
+}
 // cpp_stack_new
 Rcpp::XPtr<XPtrTorchStack> cpp_stack_new();
 RcppExport SEXP _torch_cpp_stack_new() {
@@ -34956,6 +35000,10 @@ static const R_CallMethodDef CallEntries[] = {
     {"_torch_cpp_torch_scalar_to_float", (DL_FUNC) &_torch_cpp_torch_scalar_to_float, 1},
     {"_torch_cpp_torch_scalar_to_bool", (DL_FUNC) &_torch_cpp_torch_scalar_to_bool, 1},
     {"_torch_cpp_jit_script_module_parameters", (DL_FUNC) &_torch_cpp_jit_script_module_parameters, 1},
+    {"_torch_cpp_jit_script_module_train", (DL_FUNC) &_torch_cpp_jit_script_module_train, 2},
+    {"_torch_cpp_jit_script_module_set_optimized", (DL_FUNC) &_torch_cpp_jit_script_module_set_optimized, 2},
+    {"_torch_cpp_jit_script_module_is_training", (DL_FUNC) &_torch_cpp_jit_script_module_is_training, 1},
+    {"_torch_cpp_jit_script_module_is_optimized", (DL_FUNC) &_torch_cpp_jit_script_module_is_optimized, 1},
     {"_torch_cpp_stack_new", (DL_FUNC) &_torch_cpp_stack_new, 0},
     {"_torch_cpp_stack_push_back_Tensor", (DL_FUNC) &_torch_cpp_stack_push_back_Tensor, 2},
     {"_torch_cpp_stack_push_back_int64_t", (DL_FUNC) &_torch_cpp_stack_push_back_int64_t, 2},

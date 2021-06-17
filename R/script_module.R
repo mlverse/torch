@@ -7,11 +7,18 @@ ScriptModule <- R7Class(
     },
     print = function() {
       "<script_module>"
+    },
+    train = function(mode = TRUE) {
+      cpp_jit_script_module_train(self, mode)
+      invisible(self)
     }
   ),
   active = list(
     parameters = function() {
       cpp_jit_script_module_parameters(self)
+    },
+    is_training = function() {
+      cpp_jit_script_module_is_training(self)
     }
   )
 )

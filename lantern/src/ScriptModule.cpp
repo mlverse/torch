@@ -46,13 +46,13 @@ void _lantern_ScriptModule_set_optimized (void* module, bool o)
     module_->set_optimized(o);
 }
 
-bool _lantern_ScriptModule_is_training (void* module, bool o)
+bool _lantern_ScriptModule_is_training (void* module)
 {
     auto module_ = reinterpret_cast<torch::jit::script::Module *>(module);
     return module_->is_training();
 }
 
-bool _lantern_ScriptModule_is_optimized (void* module, bool o)
+bool _lantern_ScriptModule_is_optimized (void* module)
 {
     auto module_ = reinterpret_cast<torch::jit::script::Module *>(module);
     return module_->is_optimized();

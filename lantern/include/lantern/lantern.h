@@ -1036,18 +1036,18 @@ HOST_API void lantern_ScriptModule_set_optimized (void* module, bool o)
   
 }
 
-LANTERN_API bool (LANTERN_PTR _lantern_ScriptModule_is_training) (void* module, bool o);
-HOST_API bool lantern_ScriptModule_is_training (void* module, bool o)
+LANTERN_API bool (LANTERN_PTR _lantern_ScriptModule_is_training) (void* module);
+HOST_API bool lantern_ScriptModule_is_training (void* module)
 {
-  bool ret = _lantern_ScriptModule_is_training(module, o);
+  bool ret = _lantern_ScriptModule_is_training(module);
   LANTERN_HOST_HANDLER;
   return ret;
 }
 
-LANTERN_API bool (LANTERN_PTR _lantern_ScriptModule_is_optimized) (void* module, bool o);
-HOST_API bool lantern_ScriptModule_is_optimized (void* module, bool o)
+LANTERN_API bool (LANTERN_PTR _lantern_ScriptModule_is_optimized) (void* module);
+HOST_API bool lantern_ScriptModule_is_optimized (void* module)
 {
-  bool ret = _lantern_ScriptModule_is_optimized(module, o);
+  bool ret = _lantern_ScriptModule_is_optimized(module);
   LANTERN_HOST_HANDLER;
   return ret;
 }

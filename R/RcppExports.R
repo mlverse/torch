@@ -9785,6 +9785,22 @@ cpp_jit_script_module_parameters <- function(self) {
     .Call('_torch_cpp_jit_script_module_parameters', PACKAGE = 'torchpkg', self)
 }
 
+cpp_jit_script_module_train <- function(self, on) {
+    invisible(.Call('_torch_cpp_jit_script_module_train', PACKAGE = 'torchpkg', self, on))
+}
+
+cpp_jit_script_module_set_optimized <- function(self, on) {
+    invisible(.Call('_torch_cpp_jit_script_module_set_optimized', PACKAGE = 'torchpkg', self, on))
+}
+
+cpp_jit_script_module_is_training <- function(self) {
+    .Call('_torch_cpp_jit_script_module_is_training', PACKAGE = 'torchpkg', self)
+}
+
+cpp_jit_script_module_is_optimized <- function(self) {
+    .Call('_torch_cpp_jit_script_module_is_optimized', PACKAGE = 'torchpkg', self)
+}
+
 cpp_stack_new <- function() {
     .Call('_torch_cpp_stack_new', PACKAGE = 'torchpkg')
 }
