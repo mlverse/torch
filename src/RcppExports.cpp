@@ -31922,6 +31922,17 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// cpp_jit_script_module_parameters
+XPtrTorchjit_named_parameter_list cpp_jit_script_module_parameters(XPtrTorchScriptModule self);
+RcppExport SEXP _torch_cpp_jit_script_module_parameters(SEXP selfSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchScriptModule >::type self(selfSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_jit_script_module_parameters(self));
+    return rcpp_result_gen;
+END_RCPP
+}
 // cpp_stack_new
 Rcpp::XPtr<XPtrTorchStack> cpp_stack_new();
 RcppExport SEXP _torch_cpp_stack_new() {
@@ -32367,7 +32378,7 @@ BEGIN_RCPP
 END_RCPP
 }
 // cpp_jit_load
-Rcpp::XPtr<XPtrTorchJITModule> cpp_jit_load(std::string path);
+XPtrTorchScriptModule cpp_jit_load(std::string path);
 RcppExport SEXP _torch_cpp_jit_load(SEXP pathSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
@@ -34944,6 +34955,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_torch_cpp_torch_scalar_to_double", (DL_FUNC) &_torch_cpp_torch_scalar_to_double, 1},
     {"_torch_cpp_torch_scalar_to_float", (DL_FUNC) &_torch_cpp_torch_scalar_to_float, 1},
     {"_torch_cpp_torch_scalar_to_bool", (DL_FUNC) &_torch_cpp_torch_scalar_to_bool, 1},
+    {"_torch_cpp_jit_script_module_parameters", (DL_FUNC) &_torch_cpp_jit_script_module_parameters, 1},
     {"_torch_cpp_stack_new", (DL_FUNC) &_torch_cpp_stack_new, 0},
     {"_torch_cpp_stack_push_back_Tensor", (DL_FUNC) &_torch_cpp_stack_push_back_Tensor, 2},
     {"_torch_cpp_stack_push_back_int64_t", (DL_FUNC) &_torch_cpp_stack_push_back_int64_t, 2},

@@ -9781,6 +9781,10 @@ cpp_torch_scalar_to_bool <- function(self) {
     .Call('_torch_cpp_torch_scalar_to_bool', PACKAGE = 'torchpkg', self)
 }
 
+cpp_jit_script_module_parameters <- function(self) {
+    .Call('_torch_cpp_jit_script_module_parameters', PACKAGE = 'torchpkg', self)
+}
+
 cpp_stack_new <- function() {
     .Call('_torch_cpp_stack_new', PACKAGE = 'torchpkg')
 }

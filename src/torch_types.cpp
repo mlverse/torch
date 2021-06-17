@@ -116,6 +116,13 @@ XPtrTorchDevice::operator SEXP () const
   return xptr;
 }
 
+XPtrTorchScriptModule::operator SEXP () const 
+{
+  auto xptr = make_xptr<XPtrTorchScriptModule>(*this);
+  xptr.attr("class") = Rcpp::CharacterVector::create("torch_script_module", "R7");
+  return xptr;
+}
+
 XPtrTorchDtype::operator SEXP () const 
 {
   auto xptr = make_xptr<XPtrTorchDtype>(*this);
@@ -153,13 +160,13 @@ XPtrTorchMemoryFormat::operator SEXP () const
 
 XPtrTorchvector_string::operator SEXP () const
 {
-  XPtrTorchvector_string s = lantern_get_state_dict_keys(this->get());
-  int size = lantern_vector_string_size(s.get());
   
+  int size = lantern_vector_string_size(this->get());
+
   std::vector<std::string> output;
   for (int i = 0; i < size; i++)
   {
-    const char * k = lantern_vector_string_at(s.get(), i);
+    const char * k = lantern_vector_string_at(this->get(), i);
     output.push_back(std::string(k));
     lantern_const_char_delete(k);
   }
@@ -442,6 +449,19 @@ XPtrTorchOptionalDevice XPtrTorchOptionalDevice_from_SEXP (SEXP x)
 
 XPtrTorchOptionalDevice::XPtrTorchOptionalDevice (SEXP x):
   XPtrTorch{XPtrTorchOptionalDevice_from_SEXP(x)} {}
+
+XPtrTorchScriptModule XPtrTorchScriptModule_from_SEXP (SEXP x)
+{
+  if (TYPEOF(x) == EXTPTRSXP && Rf_inherits(x, "torch_script_module")) {
+    auto out = Rcpp::as<Rcpp::XPtr<XPtrTorchScriptModule>>(x);
+    return XPtrTorchScriptModule( out->get_shared());
+  }
+  
+  Rcpp::stop("Expected a torch_script_module");
+}
+
+XPtrTorchScriptModule::XPtrTorchScriptModule (SEXP x):
+  XPtrTorch{XPtrTorchScriptModule_from_SEXP(x)} {}
 
 XPtrTorchDtype XPtrTorchDtype_from_SEXP (SEXP x)
 {

@@ -49,6 +49,16 @@ public:
   operator SEXP () const;
 };
 
+class XPtrTorchScriptModule : public XPtrTorch {
+public:
+  // TODO rename lantern_JITModule_delete 
+  XPtrTorchScriptModule (void* x) : XPtrTorch(x, lantern_JITModule_delete) {}
+  explicit XPtrTorchScriptModule (std::shared_ptr<void> x) : XPtrTorch(x) {}
+  XPtrTorchScriptModule (const XPtrTorchScriptModule& x): XPtrTorch(x.get_shared()) {}
+  explicit XPtrTorchScriptModule (SEXP x);
+  operator SEXP () const;
+};
+
 class XPtrTorchOptionalTensor : public XPtrTorch {
 public:
   XPtrTorchOptionalTensor (void* x) : XPtrTorch(x, lantern_optional_tensor_delete) {}

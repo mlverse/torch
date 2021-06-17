@@ -50,10 +50,9 @@ std::string cpp_traced_fn_graph_print (Rcpp::XPtr<XPtrTorch> fn)
 }
 
 // [[Rcpp::export]]
-Rcpp::XPtr<XPtrTorchJITModule> cpp_jit_load (std::string path)
+XPtrTorchScriptModule cpp_jit_load (std::string path)
 {
-  XPtrTorchJITModule out = lantern_jit_load(path.c_str());
-  return make_xptr<XPtrTorchJITModule>(out);
+  return XPtrTorchScriptModule(lantern_jit_load(path.c_str()));
 }
 
 // [[Rcpp::export]]

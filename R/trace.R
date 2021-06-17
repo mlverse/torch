@@ -99,16 +99,6 @@ jit_save <- function(obj, path, ...) {
   invisible(obj)
 }
 
-ScriptModule <- R6::R6Class(
-  "ScriptModule",
-  public = list(
-    ptr = NULL,
-    initialize = function(ptr) {
-      self$ptr <- ptr
-    }
-  )
-)
-
 ScriptFunction <- R6::R6Class(
   "ScriptFunction",
   public = list(
@@ -167,27 +157,9 @@ new_script_function <- function(ptr) {
   f
 }
 
-new_script_module <- function(ptr) {
-  f <- function(...) {
-    inputs <- convert_inputs_to_jit_stack(...)
-    # calling the traced function always returns a stack
-    # with a single element.
-    out <- cpp_call_jit_script(ptr, inputs$ptr)
-    convert_outputs_to_r(out)
-  }
-  class(f) <- "script_module"
-  attr(f, "ScriptModule") <- ScriptModule$new(ptr = ptr)
-  f
-}
-
 #' @export
 print.script_function <- function(x, ...) {
   cat("<script_function>\n")
-}
-
-#' @export
-print.jit_module <- function(x, ...) {
-  cat("script_module>\n")
 }
 
 #' @export

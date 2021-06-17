@@ -1004,6 +1004,94 @@ HOST_API void* lantern_jit_named_parameter_list_names (void* module)
   return ret;
 }
 
+LANTERN_API void* (LANTERN_PTR _lantern_ScriptModule_forward) (void* module, void* inputs);
+HOST_API void* lantern_ScriptModule_forward (void* module, void* inputs)
+{
+  void* ret = _lantern_ScriptModule_forward(module, inputs);
+  LANTERN_HOST_HANDLER;
+  return ret;
+}
+
+LANTERN_API void (LANTERN_PTR _lantern_ScriptModule_train) (void* module, bool on);
+HOST_API void lantern_ScriptModule_train (void* module, bool on)
+{
+   _lantern_ScriptModule_train(module, on);
+  LANTERN_HOST_HANDLER;
+  
+}
+
+LANTERN_API void (LANTERN_PTR _lantern_ScriptModule_to) (void* module, void* device, bool non_blocking);
+HOST_API void lantern_ScriptModule_to (void* module, void* device, bool non_blocking)
+{
+   _lantern_ScriptModule_to(module, device, non_blocking);
+  LANTERN_HOST_HANDLER;
+  
+}
+
+LANTERN_API void (LANTERN_PTR _lantern_ScriptModule_set_optimized) (void* module, bool o);
+HOST_API void lantern_ScriptModule_set_optimized (void* module, bool o)
+{
+   _lantern_ScriptModule_set_optimized(module, o);
+  LANTERN_HOST_HANDLER;
+  
+}
+
+LANTERN_API bool (LANTERN_PTR _lantern_ScriptModule_is_training) (void* module, bool o);
+HOST_API bool lantern_ScriptModule_is_training (void* module, bool o)
+{
+  bool ret = _lantern_ScriptModule_is_training(module, o);
+  LANTERN_HOST_HANDLER;
+  return ret;
+}
+
+LANTERN_API bool (LANTERN_PTR _lantern_ScriptModule_is_optimized) (void* module, bool o);
+HOST_API bool lantern_ScriptModule_is_optimized (void* module, bool o)
+{
+  bool ret = _lantern_ScriptModule_is_optimized(module, o);
+  LANTERN_HOST_HANDLER;
+  return ret;
+}
+
+LANTERN_API void* (LANTERN_PTR _lantern_ScriptModule_modules) (void* module, bool o);
+HOST_API void* lantern_ScriptModule_modules (void* module, bool o)
+{
+  void* ret = _lantern_ScriptModule_modules(module, o);
+  LANTERN_HOST_HANDLER;
+  return ret;
+}
+
+LANTERN_API int (LANTERN_PTR _lantern_jit_named_module_list_size) (void* self);
+HOST_API int lantern_jit_named_module_list_size (void* self)
+{
+  int ret = _lantern_jit_named_module_list_size(self);
+  LANTERN_HOST_HANDLER;
+  return ret;
+}
+
+LANTERN_API void* (LANTERN_PTR _lantern_jit_named_module_list_module_at) (void* self, int64_t index);
+HOST_API void* lantern_jit_named_module_list_module_at (void* self, int64_t index)
+{
+  void* ret = _lantern_jit_named_module_list_module_at(self, index);
+  LANTERN_HOST_HANDLER;
+  return ret;
+}
+
+LANTERN_API void* (LANTERN_PTR _lantern_jit_named_module_list_names) (void* self);
+HOST_API void* lantern_jit_named_module_list_names (void* self)
+{
+  void* ret = _lantern_jit_named_module_list_names(self);
+  LANTERN_HOST_HANDLER;
+  return ret;
+}
+
+LANTERN_API void (LANTERN_PTR _lantern_jit_named_module_list_delete) (void* x);
+HOST_API void lantern_jit_named_module_list_delete (void* x)
+{
+   _lantern_jit_named_module_list_delete(x);
+  LANTERN_HOST_HANDLER;
+  
+}
+
 
   /* Autogen Headers -- Start */
   LANTERN_API void* (LANTERN_PTR _lantern__cast_byte_tensor_bool)(void* self, void* non_blocking);
@@ -6125,6 +6213,17 @@ bool lanternInit(const std::string &libPath, std::string *pError)
   LOAD_SYMBOL(_lantern_jit_named_parameter_list_names);
   LOAD_SYMBOL(_lantern_jit_named_parameter_list_delete);
   LOAD_SYMBOL(_lantern_ScriptModule_parameters);
+  LOAD_SYMBOL(_lantern_ScriptModule_forward);
+  LOAD_SYMBOL(_lantern_ScriptModule_train);
+  LOAD_SYMBOL(_lantern_ScriptModule_to);
+  LOAD_SYMBOL(_lantern_ScriptModule_set_optimized);
+  LOAD_SYMBOL(_lantern_ScriptModule_is_training);
+  LOAD_SYMBOL(_lantern_ScriptModule_is_optimized);
+  LOAD_SYMBOL(_lantern_ScriptModule_modules);
+  LOAD_SYMBOL(_lantern_jit_named_module_list_size);
+  LOAD_SYMBOL(_lantern_jit_named_module_list_module_at);
+  LOAD_SYMBOL(_lantern_jit_named_module_list_names);
+  LOAD_SYMBOL(_lantern_jit_named_module_list_delete);
   /* Autogen Symbols -- Start */
   LOAD_SYMBOL(_lantern__cast_byte_tensor_bool)
   LOAD_SYMBOL(_lantern__cast_char_tensor_bool)

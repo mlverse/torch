@@ -120,13 +120,6 @@ void* _lantern_call_jit_script (void* module, void* inputs)
     return (void*) outputs;
 }
 
-void* _lantern_ScriptModule_parameters (void* module)
-{
-    auto module_ = reinterpret_cast<torch::jit::script::Module *>(module);
-    auto output = module_->named_parameters();
-    return (void*) new torch::jit::named_parameter_list(output);
-}
-
 void _trace_r_nn_module ()
 {
     LANTERN_FUNCTION_START;

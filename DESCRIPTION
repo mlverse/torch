@@ -138,6 +138,7 @@ Collate:
     'reduction.R'
     'save.R'
     'scalar.R'
+    'script_module.R'
     'stack.R'
     'storage.R'
     'tensor_options.R'

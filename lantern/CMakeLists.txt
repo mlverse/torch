@@ -118,6 +118,7 @@ set(LANTERN_SRC
     src/Allocator.cpp
     src/Backends.cpp
     src/JITTypes.cpp
+    src/ScriptModule.cpp
 )
 
 
