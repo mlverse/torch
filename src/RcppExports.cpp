@@ -32015,6 +32015,18 @@ BEGIN_RCPP
     return R_NilValue;
 END_RCPP
 }
+// cpp_jit_script_module_to
+void cpp_jit_script_module_to(XPtrTorchScriptModule self, XPtrTorchDevice device, bool non_blocking);
+RcppExport SEXP _torch_cpp_jit_script_module_to(SEXP selfSEXP, SEXP deviceSEXP, SEXP non_blockingSEXP) {
+BEGIN_RCPP
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchScriptModule >::type self(selfSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchDevice >::type device(deviceSEXP);
+    Rcpp::traits::input_parameter< bool >::type non_blocking(non_blockingSEXP);
+    cpp_jit_script_module_to(self, device, non_blocking);
+    return R_NilValue;
+END_RCPP
+}
 // cpp_stack_new
 Rcpp::XPtr<XPtrTorchStack> cpp_stack_new();
 RcppExport SEXP _torch_cpp_stack_new() {
@@ -35045,6 +35057,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_torch_cpp_jit_script_module_is_optimized", (DL_FUNC) &_torch_cpp_jit_script_module_is_optimized, 1},
     {"_torch_cpp_jit_script_module_register_parameter", (DL_FUNC) &_torch_cpp_jit_script_module_register_parameter, 4},
     {"_torch_cpp_jit_script_module_register_buffer", (DL_FUNC) &_torch_cpp_jit_script_module_register_buffer, 3},
+    {"_torch_cpp_jit_script_module_to", (DL_FUNC) &_torch_cpp_jit_script_module_to, 3},
     {"_torch_cpp_stack_new", (DL_FUNC) &_torch_cpp_stack_new, 0},
     {"_torch_cpp_stack_push_back_Tensor", (DL_FUNC) &_torch_cpp_stack_push_back_Tensor, 2},
     {"_torch_cpp_stack_push_back_int64_t", (DL_FUNC) &_torch_cpp_stack_push_back_int64_t, 2},

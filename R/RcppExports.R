@@ -9813,6 +9813,10 @@ cpp_jit_script_module_register_buffer <- function(self, name, v) {
     invisible(.Call('_torch_cpp_jit_script_module_register_buffer', PACKAGE = 'torchpkg', self, name, v))
 }
 
+cpp_jit_script_module_to <- function(self, device, non_blocking) {
+    invisible(.Call('_torch_cpp_jit_script_module_to', PACKAGE = 'torchpkg', self, device, non_blocking))
+}
+
 cpp_stack_new <- function() {
     .Call('_torch_cpp_stack_new', PACKAGE = 'torchpkg')
 }

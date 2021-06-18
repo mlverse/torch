@@ -59,4 +59,16 @@ test_that("can register buffers", {
   
 })
 
+test_that("can move to device", {
+  
+  skip_if_cuda_not_available()
+  script_module <- jit_load("assets/linear.pt")
+  script_module$to("cuda")
+  parameters <- script_module$parameters
+  
+  expect_true(parameters$weight$device == torch_device("cuda"))
+  expect_true(parameters$bias$device == torch_device("cuda"))
+  
+})
+
 

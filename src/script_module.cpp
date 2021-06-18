@@ -53,3 +53,10 @@ void cpp_jit_script_module_register_buffer (XPtrTorchScriptModule self,
 {
   lantern_ScriptModule_register_buffer(self.get(), name.get(), v.get());  
 }
+
+// [[Rcpp::export]]
+void cpp_jit_script_module_to (XPtrTorchScriptModule self, XPtrTorchDevice device, 
+                               bool non_blocking)
+{
+  lantern_ScriptModule_to(self.get(), device.get(), non_blocking);
+}

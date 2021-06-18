@@ -21,6 +21,10 @@ ScriptModule <- R7Class(
         runtime_error("ScriptModule does not support non persistent buffers.")
       cpp_jit_script_module_register_buffer(self, name, tensor)
       invisible(self)
+    },
+    to = function(device, non_blocking = FALSE){
+      cpp_jit_script_module_to(device, non_blocking)
+      invisible(self)
     }
   ),
   active = list(
