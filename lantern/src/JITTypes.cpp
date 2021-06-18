@@ -26,15 +26,31 @@ int _lantern_jit_named_module_list_size (void* self)
     return jit_type_size<torch::jit::named_module_list>(self);
 }
 
-void* _lantern_jit_named_parameter_list_tensors (void* self)
+int _lantern_jit_named_buffer_list_size (void* self)
 {
-    auto self_ = reinterpret_cast<torch::jit::named_parameter_list *>(self);
+    return jit_type_size<torch::jit::named_buffer_list>(self);
+}
+
+template<class T>
+void* jit_named_list_tensors (void* self)
+{
+    auto self_ = reinterpret_cast<T *>(self);
     auto outputs = new LanternObject<std::vector<torch::Tensor>>();
     for (auto el : *self_)
     {
         outputs->get().push_back(el.value);
     }
     return (void*) outputs;
+}
+
+void* _lantern_jit_named_parameter_list_tensors (void* self)
+{
+    return jit_named_list_tensors<torch::jit::named_parameter_list>(self);
+}
+
+void* _lantern_jit_named_buffer_list_tensors (void* self)
+{
+    return jit_named_list_tensors<torch::jit::named_buffer_list>(self);
 }
 
 void* _lantern_jit_named_module_list_module_at (void* self, int64_t index)
@@ -75,4 +91,9 @@ void* _lantern_jit_named_parameter_list_names (void* self)
 void* _lantern_jit_named_module_list_names (void* self)
 {
     return jit_type_names<torch::jit::named_module_list>(self);
+}
+
+void* _lantern_jit_named_buffer_list_names (void* self)
+{
+    return jit_type_names<torch::jit::named_buffer_list>(self);
 }

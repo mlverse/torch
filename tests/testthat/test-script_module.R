@@ -42,4 +42,21 @@ test_that("can register parameters", {
   expect_equal(names(parameters), c("weight", "bias", "hello"))
 })
 
+test_that("can register buffers", {
+
+  script_module <- jit_load("assets/linear.pt")
+  buffers <- script_module$buffers
+  
+  expect_length(buffers, 0)
+  
+  script_module$register_buffer("hello", torch_tensor(1))
+  buffers <- script_module$buffers
+  
+  expect_length(buffers, 1)
+  expect_equal(names(buffers), "hello")
+  expect_equal_to_tensor(buffers[[1]], torch_tensor(1))
+    
+  
+})
+
 

@@ -965,10 +965,10 @@ HOST_API void* lantern_tensor_get_pyobj (void* x)
   return ret;
 }
 
-LANTERN_API void* (LANTERN_PTR _lantern_ScriptModule_parameters) (void* module);
-HOST_API void* lantern_ScriptModule_parameters (void* module)
+LANTERN_API void* (LANTERN_PTR _lantern_ScriptModule_parameters) (void* module, bool recurse);
+HOST_API void* lantern_ScriptModule_parameters (void* module, bool recurse)
 {
-  void* ret = _lantern_ScriptModule_parameters(module);
+  void* ret = _lantern_ScriptModule_parameters(module, recurse);
   LANTERN_HOST_HANDLER;
   return ret;
 }
@@ -1124,6 +1124,45 @@ HOST_API void lantern_ScriptModule_register_attribute (void* module, void* name,
   
 }
 
+LANTERN_API void* (LANTERN_PTR _lantern_jit_named_buffer_list_names) (void* self);
+HOST_API void* lantern_jit_named_buffer_list_names (void* self)
+{
+  void* ret = _lantern_jit_named_buffer_list_names(self);
+  LANTERN_HOST_HANDLER;
+  return ret;
+}
+
+LANTERN_API void* (LANTERN_PTR _lantern_jit_named_buffer_list_tensors) (void* self);
+HOST_API void* lantern_jit_named_buffer_list_tensors (void* self)
+{
+  void* ret = _lantern_jit_named_buffer_list_tensors(self);
+  LANTERN_HOST_HANDLER;
+  return ret;
+}
+
+LANTERN_API int (LANTERN_PTR _lantern_jit_named_buffer_list_size) (void* self);
+HOST_API int lantern_jit_named_buffer_list_size (void* self)
+{
+  int ret = _lantern_jit_named_buffer_list_size(self);
+  LANTERN_HOST_HANDLER;
+  return ret;
+}
+
+LANTERN_API void* (LANTERN_PTR _lantern_ScriptModule_buffers) (void* module, bool recurse);
+HOST_API void* lantern_ScriptModule_buffers (void* module, bool recurse)
+{
+  void* ret = _lantern_ScriptModule_buffers(module, recurse);
+  LANTERN_HOST_HANDLER;
+  return ret;
+}
+
+LANTERN_API void (LANTERN_PTR _lantern_jit_named_buffer_list_delete) (void* x);
+HOST_API void lantern_jit_named_buffer_list_delete (void* x)
+{
+   _lantern_jit_named_buffer_list_delete(x);
+  LANTERN_HOST_HANDLER;
+  
+}
 
   /* Autogen Headers -- Start */
   LANTERN_API void* (LANTERN_PTR _lantern__cast_byte_tensor_bool)(void* self, void* non_blocking);
@@ -6260,6 +6299,11 @@ bool lanternInit(const std::string &libPath, std::string *pError)
   LOAD_SYMBOL(_lantern_ScriptModule_register_buffer);
   LOAD_SYMBOL(_lantern_ScriptModule_register_module);
   LOAD_SYMBOL(_lantern_ScriptModule_register_attribute);
+  LOAD_SYMBOL(_lantern_jit_named_buffer_list_names);
+  LOAD_SYMBOL(_lantern_jit_named_buffer_list_tensors);
+  LOAD_SYMBOL(_lantern_jit_named_buffer_list_size);
+  LOAD_SYMBOL(_lantern_ScriptModule_buffers);
+  LOAD_SYMBOL(_lantern_jit_named_buffer_list_delete);
   /* Autogen Symbols -- Start */
   LOAD_SYMBOL(_lantern__cast_byte_tensor_bool)
   LOAD_SYMBOL(_lantern__cast_char_tensor_bool)

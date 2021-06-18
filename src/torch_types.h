@@ -177,6 +177,14 @@ public:
   operator SEXP () const;
 };
 
+class XPtrTorchjit_named_buffer_list : public XPtrTorch {
+public:
+  XPtrTorchjit_named_buffer_list (void* x) : XPtrTorch(x, lantern_jit_named_buffer_list_delete) {}
+  explicit XPtrTorchjit_named_buffer_list (std::shared_ptr<void> x) : XPtrTorch(x) {};
+  XPtrTorchjit_named_buffer_list (const XPtrTorchjit_named_buffer_list& x) : XPtrTorch(x.get_shared()) {};
+  operator SEXP () const;
+};
+
 class XPtrTorchGenerator : public XPtrTorch {
 public:
   XPtrTorchGenerator (void* x) : XPtrTorch(x, lantern_Generator_delete) {}

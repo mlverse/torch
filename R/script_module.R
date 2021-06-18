@@ -15,14 +15,23 @@ ScriptModule <- R7Class(
     register_parameter = function(name, param) {
       cpp_jit_script_module_register_parameter(self, name, param, FALSE)
       invisible(self)
+    },
+    register_buffer = function(name, tensor, persistent = TRUE) {
+      if (!persistent)
+        runtime_error("ScriptModule does not support non persistent buffers.")
+      cpp_jit_script_module_register_buffer(self, name, tensor)
+      invisible(self)
     }
   ),
   active = list(
     parameters = function() {
-      cpp_jit_script_module_parameters(self)
+      cpp_jit_script_module_parameters(self, TRUE)
     },
     is_training = function() {
       cpp_jit_script_module_is_training(self)
+    },
+    buffers = function() {
+      cpp_jit_script_module_buffers(self, TRUE)
     }
   )
 )

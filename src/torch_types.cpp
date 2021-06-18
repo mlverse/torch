@@ -183,6 +183,15 @@ XPtrTorchjit_named_parameter_list::operator SEXP () const
   return out;
 }
 
+XPtrTorchjit_named_buffer_list::operator SEXP () const 
+{
+  XPtrTorchTensorList tensors = lantern_jit_named_buffer_list_tensors(this->get());
+  XPtrTorchvector_string names = lantern_jit_named_buffer_list_names(this->get());
+  Rcpp::List out = Rcpp::wrap(tensors);
+  out.attr("names") = Rcpp::wrap(names);
+  return out;
+}
+
 // Constructors ----------
 
 XPtrTorchTensor XPtrTorchTensor_from_SEXP (SEXP x)

@@ -2,9 +2,15 @@
 #include "utils.h"
 
 // [[Rcpp::export]]
-XPtrTorchjit_named_parameter_list cpp_jit_script_module_parameters (XPtrTorchScriptModule self)
+XPtrTorchjit_named_parameter_list cpp_jit_script_module_parameters (XPtrTorchScriptModule self, bool recurse)
 {
-  return XPtrTorchjit_named_parameter_list(lantern_ScriptModule_parameters(self.get()));
+  return XPtrTorchjit_named_parameter_list(lantern_ScriptModule_parameters(self.get(), recurse));
+}
+
+// [[Rcpp::export]]
+XPtrTorchjit_named_buffer_list cpp_jit_script_module_buffers (XPtrTorchScriptModule self, bool recurse)
+{
+  return XPtrTorchjit_named_buffer_list(lantern_ScriptModule_buffers(self.get(), recurse));
 }
 
 // [[Rcpp::export]]

@@ -9781,8 +9781,12 @@ cpp_torch_scalar_to_bool <- function(self) {
     .Call('_torch_cpp_torch_scalar_to_bool', PACKAGE = 'torchpkg', self)
 }
 
-cpp_jit_script_module_parameters <- function(self) {
-    .Call('_torch_cpp_jit_script_module_parameters', PACKAGE = 'torchpkg', self)
+cpp_jit_script_module_parameters <- function(self, recurse) {
+    .Call('_torch_cpp_jit_script_module_parameters', PACKAGE = 'torchpkg', self, recurse)
+}
+
+cpp_jit_script_module_buffers <- function(self, recurse) {
+    .Call('_torch_cpp_jit_script_module_buffers', PACKAGE = 'torchpkg', self, recurse)
 }
 
 cpp_jit_script_module_train <- function(self, on) {

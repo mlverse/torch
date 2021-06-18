@@ -31923,13 +31923,26 @@ BEGIN_RCPP
 END_RCPP
 }
 // cpp_jit_script_module_parameters
-XPtrTorchjit_named_parameter_list cpp_jit_script_module_parameters(XPtrTorchScriptModule self);
-RcppExport SEXP _torch_cpp_jit_script_module_parameters(SEXP selfSEXP) {
+XPtrTorchjit_named_parameter_list cpp_jit_script_module_parameters(XPtrTorchScriptModule self, bool recurse);
+RcppExport SEXP _torch_cpp_jit_script_module_parameters(SEXP selfSEXP, SEXP recurseSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< XPtrTorchScriptModule >::type self(selfSEXP);
-    rcpp_result_gen = Rcpp::wrap(cpp_jit_script_module_parameters(self));
+    Rcpp::traits::input_parameter< bool >::type recurse(recurseSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_jit_script_module_parameters(self, recurse));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_jit_script_module_buffers
+XPtrTorchjit_named_buffer_list cpp_jit_script_module_buffers(XPtrTorchScriptModule self, bool recurse);
+RcppExport SEXP _torch_cpp_jit_script_module_buffers(SEXP selfSEXP, SEXP recurseSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchScriptModule >::type self(selfSEXP);
+    Rcpp::traits::input_parameter< bool >::type recurse(recurseSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_jit_script_module_buffers(self, recurse));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -35024,7 +35037,8 @@ static const R_CallMethodDef CallEntries[] = {
     {"_torch_cpp_torch_scalar_to_double", (DL_FUNC) &_torch_cpp_torch_scalar_to_double, 1},
     {"_torch_cpp_torch_scalar_to_float", (DL_FUNC) &_torch_cpp_torch_scalar_to_float, 1},
     {"_torch_cpp_torch_scalar_to_bool", (DL_FUNC) &_torch_cpp_torch_scalar_to_bool, 1},
-    {"_torch_cpp_jit_script_module_parameters", (DL_FUNC) &_torch_cpp_jit_script_module_parameters, 1},
+    {"_torch_cpp_jit_script_module_parameters", (DL_FUNC) &_torch_cpp_jit_script_module_parameters, 2},
+    {"_torch_cpp_jit_script_module_buffers", (DL_FUNC) &_torch_cpp_jit_script_module_buffers, 2},
     {"_torch_cpp_jit_script_module_train", (DL_FUNC) &_torch_cpp_jit_script_module_train, 2},
     {"_torch_cpp_jit_script_module_set_optimized", (DL_FUNC) &_torch_cpp_jit_script_module_set_optimized, 2},
     {"_torch_cpp_jit_script_module_is_training", (DL_FUNC) &_torch_cpp_jit_script_module_is_training, 1},

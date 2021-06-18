@@ -8,11 +8,18 @@
 using namespace torch::jit::tracer;
 using namespace torch::jit;
 
-void* _lantern_ScriptModule_parameters (void* module)
+void* _lantern_ScriptModule_parameters (void* module, bool recurse)
 {
     auto module_ = reinterpret_cast<torch::jit::script::Module *>(module);
-    auto output = module_->named_parameters();
+    auto output = module_->named_parameters(recurse);
     return (void*) new torch::jit::named_parameter_list(output);
+}
+
+void* _lantern_ScriptModule_buffers (void* module, bool recurse)
+{
+    auto module_ = reinterpret_cast<torch::jit::script::Module *>(module);
+    auto output = module_->named_buffers(recurse);
+    return (void*) new torch::jit::named_buffer_list(output);
 }
 
 void* _lantern_ScriptModule_forward (void* module, void* inputs)

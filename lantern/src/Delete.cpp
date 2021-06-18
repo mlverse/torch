@@ -280,3 +280,10 @@ void _lantern_jit_named_module_list_delete (void* x)
   LANTERN_FUNCTION_END_VOID;
 }
 
+void _lantern_jit_named_buffer_list_delete (void* x)
+{
+  LANTERN_FUNCTION_START;
+  lantern_delete<torch::jit::named_parameter_list>(x);
+  LANTERN_FUNCTION_END_VOID;
+}
+
