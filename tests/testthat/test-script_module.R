@@ -33,3 +33,13 @@ test_that("train works", {
   script_module$train(TRUE)
   expect_true(script_module$is_training)
 })
+
+test_that("can register parameters", {
+  script_module <- jit_load("assets/linear.pt")
+  x <- torch_tensor(1)
+  script_module$register_parameter("hello", x)
+  parameters <- script_module$parameters
+  expect_equal(names(parameters), c("weight", "bias", "hello"))
+})
+
+

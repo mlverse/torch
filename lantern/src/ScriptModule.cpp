@@ -64,3 +64,39 @@ void* _lantern_ScriptModule_modules (void* module, bool o)
     auto output = module_->named_modules();
     return (void*) new torch::jit::named_module_list(output);
 }
+
+void _lantern_ScriptModule_register_parameter (void* module, void* name, void* v, bool is_buffer)
+{
+    auto module_ = reinterpret_cast<torch::jit::script::Module *>(module);
+    auto name_ = reinterpret_cast<LanternObject<std::string>*>(name)->get();
+    auto v_ = reinterpret_cast<LanternObject<torch::Tensor>*>(v)->get();
+    module_->register_parameter(name_, v_, is_buffer);
+}
+
+void _lantern_ScriptModule_register_buffer (void* module, void* name, void* v)
+{
+    auto module_ = reinterpret_cast<torch::jit::script::Module *>(module);
+    auto name_ = reinterpret_cast<LanternObject<std::string>*>(name)->get();
+    auto v_ = reinterpret_cast<LanternObject<torch::Tensor>*>(v)->get();
+    module_->register_buffer(name_, v_);
+}
+
+void _lantern_ScriptModule_register_module (void* self, void* name, void* module)
+{
+    auto self_ = reinterpret_cast<torch::jit::script::Module *>(self);
+    auto name_ = reinterpret_cast<LanternObject<std::string>*>(name)->get();
+    auto module_ = reinterpret_cast<torch::jit::script::Module *>(module);
+    self_->register_module(name_, *module_);
+}
+
+void _lantern_ScriptModule_register_attribute (void* module, void* name, void* t, void* v, bool is_param, bool is_buffer)
+{
+    auto module_ = reinterpret_cast<torch::jit::script::Module *>(module);
+    auto name_ = reinterpret_cast<LanternObject<std::string>*>(name)->get();
+
+    auto t_ = reinterpret_cast<c10::TypePtr*>(t);
+    auto v_ = reinterpret_cast<c10::IValue*>(v);
+
+    module_->register_attribute(name_, *t_, *v_, is_param, is_buffer);
+}
+

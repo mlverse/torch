@@ -289,6 +289,13 @@ public:
   operator SEXP () const;
 };
 
+class XPtrTorchstring : public XPtrTorch {
+public:
+  XPtrTorchstring (void * x) : XPtrTorch(x, lantern_string_delete) {}
+  XPtrTorchstring (SEXP x);
+  XPtrTorchstring (const XPtrTorchstring& x) : XPtrTorch(x.get_shared()) {};
+};
+
 #include <Rcpp.h>
 
 class XPtrTorchQScheme : public XPtrTorch {
@@ -355,11 +362,6 @@ public:
 class XPtrTorchIValue : public XPtrTorch {
 public:
   XPtrTorchIValue (void * x) : XPtrTorch (x, lantern_IValue_delete) {}
-};
-
-class XPtrTorchstring : public XPtrTorch {
-public:
-  XPtrTorchstring (void * x) : XPtrTorch(x, lantern_string_delete) {}
 };
 
 class XPtrTorchStack : public XPtrTorch {

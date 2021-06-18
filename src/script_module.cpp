@@ -30,3 +30,20 @@ bool cpp_jit_script_module_is_optimized (XPtrTorchScriptModule self)
 {
   return _lantern_ScriptModule_is_optimized(self.get());
 }
+
+// [[Rcpp::export]]
+void cpp_jit_script_module_register_parameter (XPtrTorchScriptModule self, 
+                                               XPtrTorchstring name, 
+                                               XPtrTorchTensor v,
+                                               bool is_buffer)
+{
+  lantern_ScriptModule_register_parameter(self.get(), name.get(), v.get(), is_buffer);
+}
+
+// [[Rcpp::export]]
+void cpp_jit_script_module_register_buffer (XPtrTorchScriptModule self,
+                                            XPtrTorchstring name,
+                                            XPtrTorchTensor v) 
+{
+  lantern_ScriptModule_register_buffer(self.get(), name.get(), v.get());  
+}

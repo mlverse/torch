@@ -31977,6 +31977,31 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// cpp_jit_script_module_register_parameter
+void cpp_jit_script_module_register_parameter(XPtrTorchScriptModule self, XPtrTorchstring name, XPtrTorchTensor v, bool is_buffer);
+RcppExport SEXP _torch_cpp_jit_script_module_register_parameter(SEXP selfSEXP, SEXP nameSEXP, SEXP vSEXP, SEXP is_bufferSEXP) {
+BEGIN_RCPP
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchScriptModule >::type self(selfSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchstring >::type name(nameSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type v(vSEXP);
+    Rcpp::traits::input_parameter< bool >::type is_buffer(is_bufferSEXP);
+    cpp_jit_script_module_register_parameter(self, name, v, is_buffer);
+    return R_NilValue;
+END_RCPP
+}
+// cpp_jit_script_module_register_buffer
+void cpp_jit_script_module_register_buffer(XPtrTorchScriptModule self, XPtrTorchstring name, XPtrTorchTensor v);
+RcppExport SEXP _torch_cpp_jit_script_module_register_buffer(SEXP selfSEXP, SEXP nameSEXP, SEXP vSEXP) {
+BEGIN_RCPP
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchScriptModule >::type self(selfSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchstring >::type name(nameSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type v(vSEXP);
+    cpp_jit_script_module_register_buffer(self, name, v);
+    return R_NilValue;
+END_RCPP
+}
 // cpp_stack_new
 Rcpp::XPtr<XPtrTorchStack> cpp_stack_new();
 RcppExport SEXP _torch_cpp_stack_new() {
@@ -35004,6 +35029,8 @@ static const R_CallMethodDef CallEntries[] = {
     {"_torch_cpp_jit_script_module_set_optimized", (DL_FUNC) &_torch_cpp_jit_script_module_set_optimized, 2},
     {"_torch_cpp_jit_script_module_is_training", (DL_FUNC) &_torch_cpp_jit_script_module_is_training, 1},
     {"_torch_cpp_jit_script_module_is_optimized", (DL_FUNC) &_torch_cpp_jit_script_module_is_optimized, 1},
+    {"_torch_cpp_jit_script_module_register_parameter", (DL_FUNC) &_torch_cpp_jit_script_module_register_parameter, 4},
+    {"_torch_cpp_jit_script_module_register_buffer", (DL_FUNC) &_torch_cpp_jit_script_module_register_buffer, 3},
     {"_torch_cpp_stack_new", (DL_FUNC) &_torch_cpp_stack_new, 0},
     {"_torch_cpp_stack_push_back_Tensor", (DL_FUNC) &_torch_cpp_stack_push_back_Tensor, 2},
     {"_torch_cpp_stack_push_back_int64_t", (DL_FUNC) &_torch_cpp_stack_push_back_int64_t, 2},

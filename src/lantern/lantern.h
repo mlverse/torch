@@ -1092,6 +1092,38 @@ HOST_API void lantern_jit_named_module_list_delete (void* x)
   
 }
 
+LANTERN_API void (LANTERN_PTR _lantern_ScriptModule_register_parameter) (void* module, void* name, void* v, bool is_buffer);
+HOST_API void lantern_ScriptModule_register_parameter (void* module, void* name, void* v, bool is_buffer)
+{
+   _lantern_ScriptModule_register_parameter(module, name, v, is_buffer);
+  LANTERN_HOST_HANDLER;
+  
+}
+
+LANTERN_API void (LANTERN_PTR _lantern_ScriptModule_register_buffer) (void* module, void* name, void* v);
+HOST_API void lantern_ScriptModule_register_buffer (void* module, void* name, void* v)
+{
+   _lantern_ScriptModule_register_buffer(module, name, v);
+  LANTERN_HOST_HANDLER;
+  
+}
+
+LANTERN_API void (LANTERN_PTR _lantern_ScriptModule_register_module) (void* self, void* name, void* module);
+HOST_API void lantern_ScriptModule_register_module (void* self, void* name, void* module)
+{
+   _lantern_ScriptModule_register_module(self, name, module);
+  LANTERN_HOST_HANDLER;
+  
+}
+
+LANTERN_API void (LANTERN_PTR _lantern_ScriptModule_register_attribute) (void* module, void* name, void* t, void* v, bool is_param, bool is_buffer);
+HOST_API void lantern_ScriptModule_register_attribute (void* module, void* name, void* t, void* v, bool is_param, bool is_buffer)
+{
+   _lantern_ScriptModule_register_attribute(module, name, t, v, is_param, is_buffer);
+  LANTERN_HOST_HANDLER;
+  
+}
+
 
   /* Autogen Headers -- Start */
   LANTERN_API void* (LANTERN_PTR _lantern__cast_byte_tensor_bool)(void* self, void* non_blocking);
@@ -6224,6 +6256,10 @@ bool lanternInit(const std::string &libPath, std::string *pError)
   LOAD_SYMBOL(_lantern_jit_named_module_list_module_at);
   LOAD_SYMBOL(_lantern_jit_named_module_list_names);
   LOAD_SYMBOL(_lantern_jit_named_module_list_delete);
+  LOAD_SYMBOL(_lantern_ScriptModule_register_parameter);
+  LOAD_SYMBOL(_lantern_ScriptModule_register_buffer);
+  LOAD_SYMBOL(_lantern_ScriptModule_register_module);
+  LOAD_SYMBOL(_lantern_ScriptModule_register_attribute);
   /* Autogen Symbols -- Start */
   LOAD_SYMBOL(_lantern__cast_byte_tensor_bool)
   LOAD_SYMBOL(_lantern__cast_char_tensor_bool)

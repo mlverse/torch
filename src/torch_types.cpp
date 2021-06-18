@@ -676,6 +676,15 @@ XPtrTorchOptionalIntArrayRef::XPtrTorchOptionalIntArrayRef (SEXP x):
 XPtrTorchOptionalIndexIntArrayRef::XPtrTorchOptionalIndexIntArrayRef (SEXP x):
   XPtrTorchOptionalIntArrayRef{XPtrTorchOptionalIntArrayRef_from_SEXP(x, true)} {};
 
+XPtrTorchstring XPtrTorchstring_from_SEXP (SEXP x)
+{
+  std::string v = Rcpp::as<std::string>(x);
+  return XPtrTorchstring(lantern_string_new(v.c_str()));
+}
+
+XPtrTorchstring::XPtrTorchstring(SEXP x) :
+  XPtrTorchstring{XPtrTorchstring_from_SEXP(x)} {};
+
 XPtrTorchint64_t2::XPtrTorchint64_t2 (SEXP x_)
 {
   int64_t x;

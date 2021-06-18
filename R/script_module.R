@@ -11,6 +11,10 @@ ScriptModule <- R7Class(
     train = function(mode = TRUE) {
       cpp_jit_script_module_train(self, mode)
       invisible(self)
+    },
+    register_parameter = function(name, param) {
+      cpp_jit_script_module_register_parameter(self, name, param, FALSE)
+      invisible(self)
     }
   ),
   active = list(

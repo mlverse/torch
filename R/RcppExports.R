@@ -9801,6 +9801,14 @@ cpp_jit_script_module_is_optimized <- function(self) {
     .Call('_torch_cpp_jit_script_module_is_optimized', PACKAGE = 'torchpkg', self)
 }
 
+cpp_jit_script_module_register_parameter <- function(self, name, v, is_buffer) {
+    invisible(.Call('_torch_cpp_jit_script_module_register_parameter', PACKAGE = 'torchpkg', self, name, v, is_buffer))
+}
+
+cpp_jit_script_module_register_buffer <- function(self, name, v) {
+    invisible(.Call('_torch_cpp_jit_script_module_register_buffer', PACKAGE = 'torchpkg', self, name, v))
+}
+
 cpp_stack_new <- function() {
     .Call('_torch_cpp_stack_new', PACKAGE = 'torchpkg')
 }
