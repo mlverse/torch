@@ -66,8 +66,8 @@ test_that("can move to device", {
   script_module$to("cuda")
   parameters <- script_module$parameters
   
-  expect_true(parameters$weight$device == torch_device("cuda"))
-  expect_true(parameters$bias$device == torch_device("cuda"))
+  expect_true(parameters$weight$device$type == "cuda")
+  expect_true(parameters$bias$device$type == "cuda")
   
 })
 
