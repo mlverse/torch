@@ -23,7 +23,7 @@ ScriptModule <- R7Class(
       invisible(self)
     },
     to = function(device, non_blocking = FALSE){
-      cpp_jit_script_module_to(device, non_blocking)
+      cpp_jit_script_module_to(self, device, non_blocking)
       invisible(self)
     }
   ),
