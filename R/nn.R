@@ -253,7 +253,6 @@ nn_Module <- R6::R6Class(
       bufs
     },
     modules = function(value) {
-      
       if (!missing(value))
         runtime_error(
           "It's not possible to modify the modules list.\n",

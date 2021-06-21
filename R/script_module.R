@@ -33,6 +33,9 @@ ScriptModule <- R7Class(
     },
     buffers = function() {
       cpp_jit_script_module_buffers(self, TRUE)
+    },
+    modules = function() {
+      cpp_jit_script_module_children(self)
     }
   )
 )
@@ -46,6 +49,7 @@ nn_ScriptModule <- R6::R6Class(
       
       rm(list = "parameters_", envir = private)
       rm(list = "buffers_", envir = private)
+      rm(list = "modules_", envir = private)
       
       makeActiveBinding(
         "parameters_",
@@ -59,6 +63,14 @@ nn_ScriptModule <- R6::R6Class(
         "buffers_",
         fun = function() {
           cpp_jit_script_module_buffers(private$ptr, recurse = FALSE)
+        }, 
+        env = private
+      )
+      
+      makeActiveBinding(
+        "modules_",
+        fun = function() {
+          private$ptr$modules
         }, 
         env = private
       )
@@ -81,7 +93,7 @@ new_script_module <- function(ptr) {
     out <- cpp_call_jit_script(ptr, inputs$ptr)
     convert_outputs_to_r(out)
   }
-  class(f) <- "nn_module"
+  class(f) <- c("script_module", "nn_module")
   attr(f, "module") <- nn_ScriptModule$new(ptr = ptr)
   f
 }

@@ -118,9 +118,14 @@ XPtrTorchDevice::operator SEXP () const
 
 XPtrTorchScriptModule::operator SEXP () const 
 {
+  
   auto xptr = make_xptr<XPtrTorchScriptModule>(*this);
   xptr.attr("class") = Rcpp::CharacterVector::create("torch_script_module", "R7");
-  return xptr;
+  
+  Rcpp::Environment torch_pkg = Rcpp::Environment("package:torch");
+  Rcpp::Function f = torch_pkg["new_script_module"];
+  
+  return f(xptr);
 }
 
 XPtrTorchDtype::operator SEXP () const 
@@ -188,6 +193,26 @@ XPtrTorchjit_named_buffer_list::operator SEXP () const
   XPtrTorchTensorList tensors = lantern_jit_named_buffer_list_tensors(this->get());
   XPtrTorchvector_string names = lantern_jit_named_buffer_list_names(this->get());
   Rcpp::List out = Rcpp::wrap(tensors);
+  out.attr("names") = Rcpp::wrap(names);
+  return out;
+}
+
+XPtrTorchjit_named_module_list::operator SEXP () const 
+{
+  int size = lantern_jit_named_module_list_size(this->get());
+  Rcpp::List out;
+  
+  if (size == 0)
+  {
+    return out;
+  }
+  
+  for (int i = 0; i < size; i++)
+  {
+    out.push_back(XPtrTorchScriptModule(lantern_jit_named_module_list_module_at(this->get(), i)));
+  }
+  
+  XPtrTorchvector_string names = lantern_jit_named_module_list_names(this->get());
   out.attr("names") = Rcpp::wrap(names);
   return out;
 }

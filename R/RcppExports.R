@@ -9817,6 +9817,14 @@ cpp_jit_script_module_to <- function(self, device, non_blocking) {
     invisible(.Call('_torch_cpp_jit_script_module_to', PACKAGE = 'torchpkg', self, device, non_blocking))
 }
 
+cpp_jit_script_module_modules <- function(self) {
+    .Call('_torch_cpp_jit_script_module_modules', PACKAGE = 'torchpkg', self)
+}
+
+cpp_jit_script_module_children <- function(self) {
+    .Call('_torch_cpp_jit_script_module_children', PACKAGE = 'torchpkg', self)
+}
+
 cpp_stack_new <- function() {
     .Call('_torch_cpp_stack_new', PACKAGE = 'torchpkg')
 }

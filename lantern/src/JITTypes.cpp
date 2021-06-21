@@ -58,7 +58,7 @@ void* _lantern_jit_named_module_list_module_at (void* self, int64_t index)
     auto self_ = reinterpret_cast<torch::jit::named_module_list *>(self);
     
     int i = 0;
-    torch::jit::Module out;
+    torch::jit::script::Module out;
     for (auto el : *self_) {
         if (i == index)
         {
@@ -68,7 +68,7 @@ void* _lantern_jit_named_module_list_module_at (void* self, int64_t index)
         i++;    
     }
 
-    return (void*) new torch::jit::Module(out);
+    return (void*) new torch::jit::script::Module(out);
 }
 
 template <class T>

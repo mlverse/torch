@@ -1052,10 +1052,10 @@ HOST_API bool lantern_ScriptModule_is_optimized (void* module)
   return ret;
 }
 
-LANTERN_API void* (LANTERN_PTR _lantern_ScriptModule_modules) (void* module, bool o);
-HOST_API void* lantern_ScriptModule_modules (void* module, bool o)
+LANTERN_API void* (LANTERN_PTR _lantern_ScriptModule_modules) (void* module);
+HOST_API void* lantern_ScriptModule_modules (void* module)
 {
-  void* ret = _lantern_ScriptModule_modules(module, o);
+  void* ret = _lantern_ScriptModule_modules(module);
   LANTERN_HOST_HANDLER;
   return ret;
 }
@@ -1164,6 +1164,13 @@ HOST_API void lantern_jit_named_buffer_list_delete (void* x)
   
 }
 
+LANTERN_API void* (LANTERN_PTR _lantern_ScriptModule_children) (void* module);
+HOST_API void* lantern_ScriptModule_children (void* module)
+{
+  void* ret = _lantern_ScriptModule_children(module);
+  LANTERN_HOST_HANDLER;
+  return ret;
+}
   /* Autogen Headers -- Start */
   LANTERN_API void* (LANTERN_PTR _lantern__cast_byte_tensor_bool)(void* self, void* non_blocking);
   HOST_API void* lantern__cast_byte_tensor_bool(void* self, void* non_blocking) { void* ret = _lantern__cast_byte_tensor_bool(self, non_blocking); LANTERN_HOST_HANDLER return ret; }
@@ -6304,6 +6311,7 @@ bool lanternInit(const std::string &libPath, std::string *pError)
   LOAD_SYMBOL(_lantern_jit_named_buffer_list_size);
   LOAD_SYMBOL(_lantern_ScriptModule_buffers);
   LOAD_SYMBOL(_lantern_jit_named_buffer_list_delete);
+  LOAD_SYMBOL(_lantern_ScriptModule_children);
   /* Autogen Symbols -- Start */
   LOAD_SYMBOL(_lantern__cast_byte_tensor_bool)
   LOAD_SYMBOL(_lantern__cast_char_tensor_bool)

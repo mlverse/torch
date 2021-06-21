@@ -71,8 +71,7 @@ jit_trace <- function(func, ...) {
 #' @export
 jit_load <- function(path, ...) {
   path <- normalizePath(path, mustWork = TRUE)
-  ptr <- cpp_jit_load(path)
-  new_script_module(ptr)
+  cpp_jit_load(path)
 }
 
 #' Saves a `script_function` to a path

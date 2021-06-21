@@ -65,10 +65,17 @@ bool _lantern_ScriptModule_is_optimized (void* module)
     return module_->is_optimized();
 }
 
-void* _lantern_ScriptModule_modules (void* module, bool o)
+void* _lantern_ScriptModule_modules (void* module)
 {
     auto module_ = reinterpret_cast<torch::jit::script::Module *>(module);
     auto output = module_->named_modules();
+    return (void*) new torch::jit::named_module_list(output);
+}
+
+void* _lantern_ScriptModule_children (void* module)
+{
+    auto module_ = reinterpret_cast<torch::jit::script::Module *>(module);
+    auto output = module_->named_children();
     return (void*) new torch::jit::named_module_list(output);
 }
 

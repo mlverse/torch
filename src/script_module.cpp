@@ -60,3 +60,17 @@ void cpp_jit_script_module_to (XPtrTorchScriptModule self, XPtrTorchDevice devic
 {
   lantern_ScriptModule_to(self.get(), device.get(), non_blocking);
 }
+
+// [[Rcpp::export]]
+XPtrTorchjit_named_module_list cpp_jit_script_module_modules (XPtrTorchScriptModule self)
+{
+  return XPtrTorchjit_named_module_list(lantern_ScriptModule_modules(self.get()));
+}
+
+// [[Rcpp::export]]
+XPtrTorchjit_named_module_list cpp_jit_script_module_children (XPtrTorchScriptModule self)
+{
+  return XPtrTorchjit_named_module_list(lantern_ScriptModule_children(self.get()));
+}
+
+

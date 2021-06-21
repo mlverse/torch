@@ -68,4 +68,13 @@ test_that("can move to device", {
   expect_true(parameters$bias$device$type == "cuda")
 })
 
+test_that("can retrieve modules", {
+  
+  script_module <- jit_load("assets/linear.pt")
+  modules <- script_module$modules
+  
+  expect_length(modules, 1)
+  
+})
+
 

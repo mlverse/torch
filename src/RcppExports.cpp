@@ -32027,6 +32027,28 @@ BEGIN_RCPP
     return R_NilValue;
 END_RCPP
 }
+// cpp_jit_script_module_modules
+XPtrTorchjit_named_module_list cpp_jit_script_module_modules(XPtrTorchScriptModule self);
+RcppExport SEXP _torch_cpp_jit_script_module_modules(SEXP selfSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchScriptModule >::type self(selfSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_jit_script_module_modules(self));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_jit_script_module_children
+XPtrTorchjit_named_module_list cpp_jit_script_module_children(XPtrTorchScriptModule self);
+RcppExport SEXP _torch_cpp_jit_script_module_children(SEXP selfSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchScriptModule >::type self(selfSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_jit_script_module_children(self));
+    return rcpp_result_gen;
+END_RCPP
+}
 // cpp_stack_new
 Rcpp::XPtr<XPtrTorchStack> cpp_stack_new();
 RcppExport SEXP _torch_cpp_stack_new() {
@@ -35058,6 +35080,8 @@ static const R_CallMethodDef CallEntries[] = {
     {"_torch_cpp_jit_script_module_register_parameter", (DL_FUNC) &_torch_cpp_jit_script_module_register_parameter, 4},
     {"_torch_cpp_jit_script_module_register_buffer", (DL_FUNC) &_torch_cpp_jit_script_module_register_buffer, 3},
     {"_torch_cpp_jit_script_module_to", (DL_FUNC) &_torch_cpp_jit_script_module_to, 3},
+    {"_torch_cpp_jit_script_module_modules", (DL_FUNC) &_torch_cpp_jit_script_module_modules, 1},
+    {"_torch_cpp_jit_script_module_children", (DL_FUNC) &_torch_cpp_jit_script_module_children, 1},
     {"_torch_cpp_stack_new", (DL_FUNC) &_torch_cpp_stack_new, 0},
     {"_torch_cpp_stack_push_back_Tensor", (DL_FUNC) &_torch_cpp_stack_push_back_Tensor, 2},
     {"_torch_cpp_stack_push_back_int64_t", (DL_FUNC) &_torch_cpp_stack_push_back_int64_t, 2},
