@@ -5,9 +5,6 @@ ScriptModule <- R7Class(
     initialize = function(ptr) {
       ptr
     },
-    print = function() {
-      "<script_module>"
-    },
     train = function(mode = TRUE) {
       cpp_jit_script_module_train(self, mode)
       invisible(self)
@@ -40,10 +37,41 @@ ScriptModule <- R7Class(
   )
 )
 
-#' @export
-`$.script_module` <- function(x, nm) {
-  attr(x, "ScriptModule")[[nm]]
-} 
+nn_ScriptModule <- R6::R6Class(
+  inherit = nn_Module,
+  lock_objects = FALSE,
+  public = list(
+    initialize = function(ptr) {
+      private$ptr <- ptr
+      
+      rm(list = "parameters_", envir = private)
+      rm(list = "buffers_", envir = private)
+      
+      makeActiveBinding(
+        "parameters_",
+        fun = function() {
+          cpp_jit_script_module_parameters(private$ptr, recurse = FALSE)
+        }, 
+        env = private
+      )
+      
+      makeActiveBinding(
+        "buffers_",
+        fun = function() {
+          cpp_jit_script_module_buffers(private$ptr, recurse = FALSE)
+        }, 
+        env = private
+      )
+      
+    },
+    register_parameter = function(name, param) {
+      private$ptr$register_parameter(name, param)
+    },
+    register_buffer = function(name, tensor, persistent = TRUE) {
+      private$ptr$register_buffer(name, tensor, persistent)
+    }
+  )
+)
 
 new_script_module <- function(ptr) {
   f <- function(...) {
@@ -53,12 +81,7 @@ new_script_module <- function(ptr) {
     out <- cpp_call_jit_script(ptr, inputs$ptr)
     convert_outputs_to_r(out)
   }
-  class(f) <- "script_module"
-  attr(f, "ScriptModule") <- ptr
+  class(f) <- "nn_module"
+  attr(f, "module") <- nn_ScriptModule$new(ptr = ptr)
   f
-}
-
-#' @export
-print.script_module <- function(x, ...) {
-  cat("script_module>\n")
 }

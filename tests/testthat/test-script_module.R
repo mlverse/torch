@@ -25,13 +25,13 @@ test_that("train works", {
   script_module <- jit_load("assets/linear.pt")
   
   script_module$train(TRUE)
-  expect_true(script_module$is_training)
+  expect_true(script_module$training)
   
   script_module$train(FALSE)
-  expect_true(!script_module$is_training)
+  expect_true(!script_module$training)
   
   script_module$train(TRUE)
-  expect_true(script_module$is_training)
+  expect_true(script_module$training)
 })
 
 test_that("can register parameters", {
@@ -55,8 +55,6 @@ test_that("can register buffers", {
   expect_length(buffers, 1)
   expect_equal(names(buffers), "hello")
   expect_equal_to_tensor(buffers[[1]], torch_tensor(1))
-    
-  
 })
 
 test_that("can move to device", {
@@ -68,7 +66,6 @@ test_that("can move to device", {
   
   expect_true(parameters$weight$device$type == "cuda")
   expect_true(parameters$bias$device$type == "cuda")
-  
 })
 
 

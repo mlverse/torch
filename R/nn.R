@@ -236,6 +236,22 @@ nn_Module <- R6::R6Class(
       
       pars
     },
+    buffers = function(value) {
+      
+      if (!missing(value))
+        runtime_error(
+          "It's not possible to modify the buffers list.\n",
+          " You can modify the parameter in-place or use",
+          " `module$parameter_name <- new_value`"
+        )
+      
+      bufs <- lapply(private$modules_, function(x) x$buffers)
+      bufs <- append(bufs, private$buffers_)
+      bufs <- unlist(bufs, recursive = TRUE, use.names = TRUE)
+      bufs <- bufs[!duplicated(bufs)] # unique doesn't preserve the names
+      
+      bufs
+    },
     modules = function(value) {
       
       if (!missing(value))
