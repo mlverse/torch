@@ -102,4 +102,15 @@ test_that("can apply functions", {
   
 })
 
-
+test_that("can get the state dict and reload", {
+  
+  script_module <- jit_load("assets/linear.pt")
+  state_dict <- script_module$state_dict()
+  
+  expect_length(state_dict, 2)
+  state_dict[[1]] <- torch_zeros_like(state_dict[[1]])
+  
+  script_module$load_state_dict(state_dict)
+  
+  expect_equal_to_tensor(script_module$parameters[[1]], state_dict[[1]])
+})
