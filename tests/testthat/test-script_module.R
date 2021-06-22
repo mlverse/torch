@@ -9,6 +9,13 @@ test_that("script module parameters", {
   
 })
 
+test_that("script_module is callable", {
+  script_module <- jit_load("assets/linear.pt")
+  tensor <- script_module(torch_randn(100, 10))
+  
+  expect_tensor(tensor)
+})
+
 test_that("parameters are modifiable in-place", {
   script_module <- jit_load("assets/linear.pt")
   parameters <- script_module$parameters

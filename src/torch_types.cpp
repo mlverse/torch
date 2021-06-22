@@ -122,7 +122,8 @@ XPtrTorchScriptModule::operator SEXP () const
   auto xptr = make_xptr<XPtrTorchScriptModule>(*this);
   xptr.attr("class") = Rcpp::CharacterVector::create("torch_script_module", "R7");
   
-  Rcpp::Environment torch_pkg = Rcpp::Environment("package:torch");
+  Rcpp::Function asNamespace("asNamespace");
+  Rcpp::Environment torch_pkg = asNamespace("torch");
   Rcpp::Function f = torch_pkg["new_script_module"];
   
   return f(xptr);
