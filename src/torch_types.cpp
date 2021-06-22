@@ -236,6 +236,12 @@ XPtrTorchjit_named_module_list::operator SEXP () const
   return out;
 }
 
+XPtrTorchStack::operator SEXP () const 
+{
+
+  
+}
+
 // Constructors ----------
 
 XPtrTorchTensor XPtrTorchTensor_from_SEXP (SEXP x)

@@ -92,6 +92,44 @@ extern "C"
 {
 #endif
 
+enum IValue_types {
+    IValueBlobType,
+    IValueBoolType,
+    IValueBoolListType,
+    IValueCapsuleType,
+    IValueComplexDoubleType,
+    IValueComplexDoubleListType,
+    IValueCustomClassType,
+    IValueDeviceType,
+    IValueDoubleType,
+    IValueDoubleListType,
+    IValueNoneType,
+    IValueEnumType,
+    IValueFutureType,
+    IValueGeneratorType,
+    IValueGenericDictType,
+    IValueIntType,
+    IValueIntListType,
+    IValueListType,
+    IValueModuleType,
+    IValueObjectType,
+    IValuePtrTypeType,
+    IValuePyObjectType,
+    IValueQuantizerType,
+    IValueRRefType,
+    IValueSameIdentityType,
+    IValueScalarType,
+    IValueStorageType,
+    IValueStreamType,
+    IValueStringType,
+    IValueTensorType,
+    IValueTensorListType,
+    IValueTupleType,
+    IValueTypeUnknownType
+};
+
+
+
   LANTERN_API void(LANTERN_PTR lanternConfigure)(int log);
   LANTERN_API const char*(LANTERN_PTR lanternVersion)();
   LANTERN_API void(LANTERN_PTR lanternSetLastError)(const char*);
@@ -1192,6 +1230,286 @@ LANTERN_API void* (LANTERN_PTR _lantern_ScriptMethod_call) (void* self, void* in
 HOST_API void* lantern_ScriptMethod_call (void* self, void* inputs)
 {
   void* ret = _lantern_ScriptMethod_call(self, inputs);
+  LANTERN_HOST_HANDLER;
+  return ret;
+}
+
+LANTERN_API int (LANTERN_PTR _lantern_IValue_type) (void* self);
+HOST_API int lantern_IValue_type (void* self)
+{
+  int ret = _lantern_IValue_type(self);
+  LANTERN_HOST_HANDLER;
+  return ret;
+}
+
+LANTERN_API bool (LANTERN_PTR _lantern_IValue_Bool) (void * self);
+HOST_API bool lantern_IValue_Bool (void * self)
+{
+  bool ret = _lantern_IValue_Bool(self);
+  LANTERN_HOST_HANDLER;
+  return ret;
+}
+
+LANTERN_API void* (LANTERN_PTR _lantern_IValue_BoolList) (void* self);
+HOST_API void* lantern_IValue_BoolList (void* self)
+{
+  void* ret = _lantern_IValue_BoolList(self);
+  LANTERN_HOST_HANDLER;
+  return ret;
+}
+
+LANTERN_API void* (LANTERN_PTR _lantern_IValue_Device) (void* self);
+HOST_API void* lantern_IValue_Device (void* self)
+{
+  void* ret = _lantern_IValue_Device(self);
+  LANTERN_HOST_HANDLER;
+  return ret;
+}
+
+LANTERN_API double (LANTERN_PTR _lantern_IValue_Double) (void* self);
+HOST_API double lantern_IValue_Double (void* self)
+{
+  double ret = _lantern_IValue_Double(self);
+  LANTERN_HOST_HANDLER;
+  return ret;
+}
+
+LANTERN_API void* (LANTERN_PTR _lantern_IValue_DoubleList) (void* self);
+HOST_API void* lantern_IValue_DoubleList (void* self)
+{
+  void* ret = _lantern_IValue_DoubleList(self);
+  LANTERN_HOST_HANDLER;
+  return ret;
+}
+
+LANTERN_API void* (LANTERN_PTR _lantern_IValue_Generator) (void* self);
+HOST_API void* lantern_IValue_Generator (void* self)
+{
+  void* ret = _lantern_IValue_Generator(self);
+  LANTERN_HOST_HANDLER;
+  return ret;
+}
+
+LANTERN_API void* (LANTERN_PTR _lantern_IValue_GenericDict) (void* self);
+HOST_API void* lantern_IValue_GenericDict (void* self)
+{
+  void* ret = _lantern_IValue_GenericDict(self);
+  LANTERN_HOST_HANDLER;
+  return ret;
+}
+
+LANTERN_API int64_t (LANTERN_PTR _lantern_IValue_Int) (void* self);
+HOST_API int64_t lantern_IValue_Int (void* self)
+{
+  int64_t ret = _lantern_IValue_Int(self);
+  LANTERN_HOST_HANDLER;
+  return ret;
+}
+
+LANTERN_API void* (LANTERN_PTR _lantern_IValue_IntList) (void* self);
+HOST_API void* lantern_IValue_IntList (void* self)
+{
+  void* ret = _lantern_IValue_IntList(self);
+  LANTERN_HOST_HANDLER;
+  return ret;
+}
+
+LANTERN_API void* (LANTERN_PTR _lantern_IValue_List) (void* self);
+HOST_API void* lantern_IValue_List (void* self)
+{
+  void* ret = _lantern_IValue_List(self);
+  LANTERN_HOST_HANDLER;
+  return ret;
+}
+
+LANTERN_API void* (LANTERN_PTR _lantern_IValue_Module) (void* self);
+HOST_API void* lantern_IValue_Module (void* self)
+{
+  void* ret = _lantern_IValue_Module(self);
+  LANTERN_HOST_HANDLER;
+  return ret;
+}
+
+LANTERN_API void* (LANTERN_PTR _lantern_IValue_Scalar) (void* self);
+HOST_API void* lantern_IValue_Scalar (void* self)
+{
+  void* ret = _lantern_IValue_Scalar(self);
+  LANTERN_HOST_HANDLER;
+  return ret;
+}
+
+LANTERN_API void* (LANTERN_PTR _lantern_IValue_String) (void* self);
+HOST_API void* lantern_IValue_String (void* self)
+{
+  void* ret = _lantern_IValue_String(self);
+  LANTERN_HOST_HANDLER;
+  return ret;
+}
+
+LANTERN_API void* (LANTERN_PTR _lantern_IValue_Tensor) (void* self);
+HOST_API void* lantern_IValue_Tensor (void* self)
+{
+  void* ret = _lantern_IValue_Tensor(self);
+  LANTERN_HOST_HANDLER;
+  return ret;
+}
+
+LANTERN_API void* (LANTERN_PTR _lantern_IValue_TensorList) (void* self);
+HOST_API void* lantern_IValue_TensorList (void* self)
+{
+  void* ret = _lantern_IValue_TensorList(self);
+  LANTERN_HOST_HANDLER;
+  return ret;
+}
+
+LANTERN_API void* (LANTERN_PTR _lantern_IValue_Tuple) (void* self);
+HOST_API void* lantern_IValue_Tuple (void* self)
+{
+  void* ret = _lantern_IValue_Tuple(self);
+  LANTERN_HOST_HANDLER;
+  return ret;
+}
+
+LANTERN_API void (LANTERN_PTR _lantern_GenericDict_delete) (void* x);
+HOST_API void lantern_GenericDict_delete (void* x)
+{
+   _lantern_GenericDict_delete(x);
+  LANTERN_HOST_HANDLER;
+  
+}
+
+LANTERN_API void (LANTERN_PTR _lantern_GenericList_delete) (void* x);
+HOST_API void lantern_GenericList_delete (void* x)
+{
+   _lantern_GenericList_delete(x);
+  LANTERN_HOST_HANDLER;
+  
+}
+
+LANTERN_API void* (LANTERN_PTR _lantern_Stack_at) (void* self, int64_t index);
+HOST_API void* lantern_Stack_at (void* self, int64_t index)
+{
+  void* ret = _lantern_Stack_at(self, index);
+  LANTERN_HOST_HANDLER;
+  return ret;
+}
+
+LANTERN_API void* (LANTERN_PTR _lantern_IValue_from_Bool) (bool self);
+HOST_API void* lantern_IValue_from_Bool (bool self)
+{
+  void* ret = _lantern_IValue_from_Bool(self);
+  LANTERN_HOST_HANDLER;
+  return ret;
+}
+
+LANTERN_API void* (LANTERN_PTR _lantern_IValue_from_BoolList) (void* self);
+HOST_API void* lantern_IValue_from_BoolList (void* self)
+{
+  void* ret = _lantern_IValue_from_BoolList(self);
+  LANTERN_HOST_HANDLER;
+  return ret;
+}
+
+LANTERN_API void* (LANTERN_PTR _lantern_IValue_from_Device) (void* self);
+HOST_API void* lantern_IValue_from_Device (void* self)
+{
+  void* ret = _lantern_IValue_from_Device(self);
+  LANTERN_HOST_HANDLER;
+  return ret;
+}
+
+LANTERN_API void* (LANTERN_PTR _lantern_IValue_from_Double) (double self);
+HOST_API void* lantern_IValue_from_Double (double self)
+{
+  void* ret = _lantern_IValue_from_Double(self);
+  LANTERN_HOST_HANDLER;
+  return ret;
+}
+
+LANTERN_API void* (LANTERN_PTR _lantern_IValue_from_DoubleList) (void* self);
+HOST_API void* lantern_IValue_from_DoubleList (void* self)
+{
+  void* ret = _lantern_IValue_from_DoubleList(self);
+  LANTERN_HOST_HANDLER;
+  return ret;
+}
+
+LANTERN_API void* (LANTERN_PTR _lantern_IValue_from_Generator) (void* self);
+HOST_API void* lantern_IValue_from_Generator (void* self)
+{
+  void* ret = _lantern_IValue_from_Generator(self);
+  LANTERN_HOST_HANDLER;
+  return ret;
+}
+
+LANTERN_API void* (LANTERN_PTR _lantern_IValue_from_GenericDict) (void* self);
+HOST_API void* lantern_IValue_from_GenericDict (void* self)
+{
+  void* ret = _lantern_IValue_from_GenericDict(self);
+  LANTERN_HOST_HANDLER;
+  return ret;
+}
+
+LANTERN_API void* (LANTERN_PTR _lantern_IValue_from_Int) (int64_t self);
+HOST_API void* lantern_IValue_from_Int (int64_t self)
+{
+  void* ret = _lantern_IValue_from_Int(self);
+  LANTERN_HOST_HANDLER;
+  return ret;
+}
+
+LANTERN_API void* (LANTERN_PTR _lantern_IValue_from_IntList) (void* self);
+HOST_API void* lantern_IValue_from_IntList (void* self)
+{
+  void* ret = _lantern_IValue_from_IntList(self);
+  LANTERN_HOST_HANDLER;
+  return ret;
+}
+
+LANTERN_API void* (LANTERN_PTR _lantern_IValue_from_List) (void* self);
+HOST_API void* lantern_IValue_from_List (void* self)
+{
+  void* ret = _lantern_IValue_from_List(self);
+  LANTERN_HOST_HANDLER;
+  return ret;
+}
+
+LANTERN_API void* (LANTERN_PTR _lantern_IValue_from_Module) (void* self);
+HOST_API void* lantern_IValue_from_Module (void* self)
+{
+  void* ret = _lantern_IValue_from_Module(self);
+  LANTERN_HOST_HANDLER;
+  return ret;
+}
+
+LANTERN_API void* (LANTERN_PTR _lantern_IValue_from_Scalar) (void* self);
+HOST_API void* lantern_IValue_from_Scalar (void* self)
+{
+  void* ret = _lantern_IValue_from_Scalar(self);
+  LANTERN_HOST_HANDLER;
+  return ret;
+}
+
+LANTERN_API void* (LANTERN_PTR _lantern_IValue_from_String) (void* self);
+HOST_API void* lantern_IValue_from_String (void* self)
+{
+  void* ret = _lantern_IValue_from_String(self);
+  LANTERN_HOST_HANDLER;
+  return ret;
+}
+
+LANTERN_API void* (LANTERN_PTR _lantern_IValue_from_Tensor) (void* self);
+HOST_API void* lantern_IValue_from_Tensor (void* self)
+{
+  void* ret = _lantern_IValue_from_Tensor(self);
+  LANTERN_HOST_HANDLER;
+  return ret;
+}
+
+LANTERN_API void* (LANTERN_PTR _lantern_IValue_from_TensorList) (void* self);
+HOST_API void* lantern_IValue_from_TensorList (void* self)
+{
+  void* ret = _lantern_IValue_from_TensorList(self);
   LANTERN_HOST_HANDLER;
   return ret;
 }
@@ -6339,6 +6657,41 @@ bool lanternInit(const std::string &libPath, std::string *pError)
   LOAD_SYMBOL(_lantern_jit_ScriptMethod_delete);
   LOAD_SYMBOL(_lantern_ScriptModule_find_method);
   LOAD_SYMBOL(_lantern_ScriptMethod_call);
+  LOAD_SYMBOL(_lantern_IValue_type);
+LOAD_SYMBOL(_lantern_IValue_Bool);
+LOAD_SYMBOL(_lantern_IValue_BoolList);
+LOAD_SYMBOL(_lantern_IValue_Device);
+LOAD_SYMBOL(_lantern_IValue_Double);
+LOAD_SYMBOL(_lantern_IValue_DoubleList);
+LOAD_SYMBOL(_lantern_IValue_Generator);
+LOAD_SYMBOL(_lantern_IValue_GenericDict);
+LOAD_SYMBOL(_lantern_IValue_Int);
+LOAD_SYMBOL(_lantern_IValue_IntList);
+LOAD_SYMBOL(_lantern_IValue_List);
+LOAD_SYMBOL(_lantern_IValue_Module);
+LOAD_SYMBOL(_lantern_IValue_Scalar);
+LOAD_SYMBOL(_lantern_IValue_String);
+LOAD_SYMBOL(_lantern_IValue_Tensor);
+LOAD_SYMBOL(_lantern_IValue_TensorList);
+LOAD_SYMBOL(_lantern_IValue_Tuple);
+LOAD_SYMBOL(_lantern_GenericDict_delete);
+LOAD_SYMBOL(_lantern_GenericList_delete);
+LOAD_SYMBOL(_lantern_Stack_at);
+LOAD_SYMBOL(_lantern_IValue_from_Bool);
+LOAD_SYMBOL(_lantern_IValue_from_BoolList);
+LOAD_SYMBOL(_lantern_IValue_from_Device);
+LOAD_SYMBOL(_lantern_IValue_from_Double);
+LOAD_SYMBOL(_lantern_IValue_from_DoubleList);
+LOAD_SYMBOL(_lantern_IValue_from_Generator);
+LOAD_SYMBOL(_lantern_IValue_from_GenericDict);
+LOAD_SYMBOL(_lantern_IValue_from_Int);
+LOAD_SYMBOL(_lantern_IValue_from_IntList);
+LOAD_SYMBOL(_lantern_IValue_from_List);
+LOAD_SYMBOL(_lantern_IValue_from_Module);
+LOAD_SYMBOL(_lantern_IValue_from_Scalar);
+LOAD_SYMBOL(_lantern_IValue_from_String);
+LOAD_SYMBOL(_lantern_IValue_from_Tensor);
+LOAD_SYMBOL(_lantern_IValue_from_TensorList);
   /* Autogen Symbols -- Start */
   LOAD_SYMBOL(_lantern__cast_byte_tensor_bool)
   LOAD_SYMBOL(_lantern__cast_char_tensor_bool)

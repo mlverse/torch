@@ -294,3 +294,16 @@ void _lantern_jit_ScriptMethod_delete (void* x)
   LANTERN_FUNCTION_END_VOID;
 }
 
+void _lantern_GenericDict_delete (void* x)
+{
+  LANTERN_FUNCTION_START;
+  lantern_delete<c10::impl::GenericDict>(x);
+  LANTERN_FUNCTION_END_VOID;
+}
+
+void _lantern_GenericList_delete (void* x)
+{
+  LANTERN_FUNCTION_START;
+  lantern_delete<c10::impl::GenericList>(x);
+  LANTERN_FUNCTION_END_VOID;
+}
