@@ -68,7 +68,7 @@ test_that("can move to device", {
   
   skip_if_cuda_not_available()
   script_module <- jit_load("assets/linear.pt")
-  script_module$to("cuda")
+  script_module$to(device = "cuda")
   parameters <- script_module$parameters
   
   expect_true(parameters$weight$device$type == "cuda")
