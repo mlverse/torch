@@ -53,7 +53,14 @@ nn_ScriptModule <- R6::R6Class(
       
       makeActiveBinding(
         "parameters_",
-        fun = function() {
+        fun = function(value) {
+          
+          if (!missing(value)) {
+            for(name in names(value)) {
+              self$register_parameter(name, value[[name]])
+            }
+          }
+          
           cpp_jit_script_module_parameters(private$ptr, recurse = FALSE)
         }, 
         env = private
@@ -61,7 +68,14 @@ nn_ScriptModule <- R6::R6Class(
       
       makeActiveBinding(
         "buffers_",
-        fun = function() {
+        fun = function(value) {
+          
+          if (!missing(value)) {
+            for(name in names(value)) {
+              self$register_buffer(name, value[[name]])
+            }
+          }
+          
           cpp_jit_script_module_buffers(private$ptr, recurse = FALSE)
         }, 
         env = private
