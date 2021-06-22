@@ -59,6 +59,15 @@ public:
   operator SEXP () const;
 };
 
+class XPtrTorchScriptMethod : public XPtrTorch {
+public:
+  XPtrTorchScriptMethod (void* x) : XPtrTorch(x, lantern_jit_ScriptMethod_delete) {}
+  explicit XPtrTorchScriptMethod (std::shared_ptr<void> x) : XPtrTorch(x) {}
+  XPtrTorchScriptMethod (const XPtrTorchScriptMethod& x): XPtrTorch(x.get_shared()) {}
+  explicit XPtrTorchScriptMethod (SEXP x);
+  operator SEXP () const;
+};
+
 class XPtrTorchOptionalTensor : public XPtrTorch {
 public:
   XPtrTorchOptionalTensor (void* x) : XPtrTorch(x, lantern_optional_tensor_delete) {}

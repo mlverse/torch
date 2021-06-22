@@ -287,3 +287,10 @@ void _lantern_jit_named_buffer_list_delete (void* x)
   LANTERN_FUNCTION_END_VOID;
 }
 
+void _lantern_jit_ScriptMethod_delete (void* x)
+{
+  LANTERN_FUNCTION_START;
+  lantern_delete<torch::jit::script::Method>(x);
+  LANTERN_FUNCTION_END_VOID;
+}
+

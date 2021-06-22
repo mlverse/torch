@@ -82,6 +82,10 @@ test_that("can retrieve modules", {
   
   expect_length(modules, 1)
   
+  x <- torch_randn(10, 10)
+  tensor <- modules[[1]](x)
+  
+  expect_equal_to_tensor(tensor, script_module(x))
 })
 
 

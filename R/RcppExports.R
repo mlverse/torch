@@ -9825,6 +9825,14 @@ cpp_jit_script_module_children <- function(self) {
     .Call('_torch_cpp_jit_script_module_children', PACKAGE = 'torchpkg', self)
 }
 
+cpp_jit_script_module_find_method <- function(self, basename) {
+    .Call('_torch_cpp_jit_script_module_find_method', PACKAGE = 'torchpkg', self, basename)
+}
+
+cpp_jit_script_method_call <- function(self, inputs) {
+    .Call('_torch_cpp_jit_script_method_call', PACKAGE = 'torchpkg', self, inputs)
+}
+
 cpp_stack_new <- function() {
     .Call('_torch_cpp_stack_new', PACKAGE = 'torchpkg')
 }

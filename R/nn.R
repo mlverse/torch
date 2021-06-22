@@ -502,6 +502,13 @@ create_nn_module_callable <- function(instance) {
       return(o)
   }
   
+  find_method <- x[[".__enclos_env__"]][["private"]][["find_method"]]
+  if (!is.null(find_method)) {
+    o <- find_method(y)
+    if (!is.null(o))
+      return(o)
+  }
+  
   NextMethod("[[", x)
 }
 

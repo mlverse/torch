@@ -73,4 +73,15 @@ XPtrTorchjit_named_module_list cpp_jit_script_module_children (XPtrTorchScriptMo
   return XPtrTorchjit_named_module_list(lantern_ScriptModule_children(self.get()));
 }
 
+// [[Rcpp::export]]
+XPtrTorchScriptMethod cpp_jit_script_module_find_method (XPtrTorchScriptModule self, XPtrTorchstring basename)
+{
+  return XPtrTorchScriptMethod(lantern_ScriptModule_find_method(self.get(), basename.get()));
+}
 
+// [[Rcpp::export]]
+Rcpp::XPtr<XPtrTorchStack> cpp_jit_script_method_call (XPtrTorchScriptMethod self, Rcpp::XPtr<XPtrTorchStack> inputs)
+{
+  auto out = XPtrTorchStack(lantern_ScriptMethod_call(self.get(), inputs->get()));
+  return make_xptr<XPtrTorchStack>(out);
+}

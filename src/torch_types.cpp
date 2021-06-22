@@ -129,6 +129,24 @@ XPtrTorchScriptModule::operator SEXP () const
   return f(xptr);
 }
 
+XPtrTorchScriptMethod::operator SEXP () const 
+{
+  
+  if (!this->get())
+  {
+    return R_NilValue;
+  }
+  
+  auto xptr = make_xptr<XPtrTorchScriptMethod>(*this);
+  xptr.attr("class") = Rcpp::CharacterVector::create("torch_script_method", "R7");
+  
+  Rcpp::Function asNamespace("asNamespace");
+  Rcpp::Environment torch_pkg = asNamespace("torch");
+  Rcpp::Function f = torch_pkg["new_script_method"];
+  
+  return f(xptr);
+}
+
 XPtrTorchDtype::operator SEXP () const 
 {
   auto xptr = make_xptr<XPtrTorchDtype>(*this);
@@ -497,6 +515,19 @@ XPtrTorchScriptModule XPtrTorchScriptModule_from_SEXP (SEXP x)
 
 XPtrTorchScriptModule::XPtrTorchScriptModule (SEXP x):
   XPtrTorch{XPtrTorchScriptModule_from_SEXP(x)} {}
+
+XPtrTorchScriptMethod XPtrTorchScriptMethod_from_SEXP (SEXP x)
+{
+  if (TYPEOF(x) == EXTPTRSXP && Rf_inherits(x, "torch_script_method")) {
+    auto out = Rcpp::as<Rcpp::XPtr<XPtrTorchScriptMethod>>(x);
+    return XPtrTorchScriptMethod(out->get_shared());
+  }
+  
+  Rcpp::stop("Expected a torch_script_module");
+}
+
+XPtrTorchScriptMethod::XPtrTorchScriptMethod (SEXP x):
+  XPtrTorch{XPtrTorchScriptMethod_from_SEXP(x)} {}
 
 XPtrTorchDtype XPtrTorchDtype_from_SEXP (SEXP x)
 {

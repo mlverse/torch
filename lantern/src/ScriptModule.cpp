@@ -114,3 +114,30 @@ void _lantern_ScriptModule_register_attribute (void* module, void* name, void* t
     module_->register_attribute(name_, *t_, *v_, is_param, is_buffer);
 }
 
+void* _lantern_ScriptModule_find_method (void* self, void* basename)
+{
+    auto self_ = reinterpret_cast<torch::jit::script::Module *>(self);
+    auto basename_ = reinterpret_cast<LanternObject<std::string>*>(basename)->get();
+    auto method = self_->find_method(basename_);
+
+    if (!method.has_value())
+    {
+        return nullptr;
+    }
+    else
+    {
+        return (void*) new torch::jit::script::Method(method.value());
+    }
+}
+
+void* _lantern_ScriptMethod_call (void* self, void* inputs)
+{
+    auto self_ = *reinterpret_cast<torch::jit::script::Method *>(self);
+    Stack inputs_ = reinterpret_cast<LanternObject<Stack>*>(inputs)->get();
+    
+    auto outputs = new LanternObject<torch::jit::Stack>();
+    auto out = self_(inputs_);
+    outputs->get().push_back(out);  
+
+    return (void*) outputs;
+}

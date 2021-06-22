@@ -22,6 +22,9 @@ ScriptModule <- R7Class(
     to = function(device, non_blocking = FALSE){
       cpp_jit_script_module_to(self, device, non_blocking)
       invisible(self)
+    },
+    find_method = function(name) {
+      cpp_jit_script_module_find_method(self, name)
     }
   ),
   active = list(
@@ -96,6 +99,11 @@ nn_ScriptModule <- R6::R6Class(
     register_buffer = function(name, tensor, persistent = TRUE) {
       private$ptr$register_buffer(name, tensor, persistent)
     }
+  ),
+  private = list(
+    find_method = function(name) {
+      private$ptr$find_method(name)
+    }
   )
 )
 
@@ -111,3 +119,32 @@ new_script_module <- function(ptr) {
   attr(f, "module") <- nn_ScriptModule$new(ptr = ptr)
   f
 }
+
+ScriptMethod <- R7Class(
+  "torch_script_method",
+  public = list(
+    ptr = NULL,
+    initialize = function(ptr) {
+      ptr
+    },
+    print = function() {
+      cat("<script_method>")
+    }
+  )
+)
+
+new_script_method <- function(ptr) {
+  f <- function(...) {
+    inputs <- convert_inputs_to_jit_stack(...)
+    # calling the traced function always returns a stack
+    # with a single element.
+    out <- cpp_call_jit_script(ptr, inputs$ptr)
+    convert_outputs_to_r(out)
+  }
+  class(f) <- c("script_method", "nn_module")
+  attr(f, "method") <- ptr
+  f
+}
+
+
+

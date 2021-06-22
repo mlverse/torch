@@ -1171,6 +1171,30 @@ HOST_API void* lantern_ScriptModule_children (void* module)
   LANTERN_HOST_HANDLER;
   return ret;
 }
+
+LANTERN_API void (LANTERN_PTR _lantern_jit_ScriptMethod_delete) (void* x);
+HOST_API void lantern_jit_ScriptMethod_delete (void* x)
+{
+   _lantern_jit_ScriptMethod_delete(x);
+  LANTERN_HOST_HANDLER;
+  
+}
+
+LANTERN_API void* (LANTERN_PTR _lantern_ScriptModule_find_method) (void* self, void* basename);
+HOST_API void* lantern_ScriptModule_find_method (void* self, void* basename)
+{
+  void* ret = _lantern_ScriptModule_find_method(self, basename);
+  LANTERN_HOST_HANDLER;
+  return ret;
+}
+
+LANTERN_API void* (LANTERN_PTR _lantern_ScriptMethod_call) (void* self, void* inputs);
+HOST_API void* lantern_ScriptMethod_call (void* self, void* inputs)
+{
+  void* ret = _lantern_ScriptMethod_call(self, inputs);
+  LANTERN_HOST_HANDLER;
+  return ret;
+}
   /* Autogen Headers -- Start */
   LANTERN_API void* (LANTERN_PTR _lantern__cast_byte_tensor_bool)(void* self, void* non_blocking);
   HOST_API void* lantern__cast_byte_tensor_bool(void* self, void* non_blocking) { void* ret = _lantern__cast_byte_tensor_bool(self, non_blocking); LANTERN_HOST_HANDLER return ret; }
@@ -6312,6 +6336,9 @@ bool lanternInit(const std::string &libPath, std::string *pError)
   LOAD_SYMBOL(_lantern_ScriptModule_buffers);
   LOAD_SYMBOL(_lantern_jit_named_buffer_list_delete);
   LOAD_SYMBOL(_lantern_ScriptModule_children);
+  LOAD_SYMBOL(_lantern_jit_ScriptMethod_delete);
+  LOAD_SYMBOL(_lantern_ScriptModule_find_method);
+  LOAD_SYMBOL(_lantern_ScriptMethod_call);
   /* Autogen Symbols -- Start */
   LOAD_SYMBOL(_lantern__cast_byte_tensor_bool)
   LOAD_SYMBOL(_lantern__cast_char_tensor_bool)

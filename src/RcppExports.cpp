@@ -32049,6 +32049,30 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// cpp_jit_script_module_find_method
+XPtrTorchScriptMethod cpp_jit_script_module_find_method(XPtrTorchScriptModule self, XPtrTorchstring basename);
+RcppExport SEXP _torch_cpp_jit_script_module_find_method(SEXP selfSEXP, SEXP basenameSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchScriptModule >::type self(selfSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchstring >::type basename(basenameSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_jit_script_module_find_method(self, basename));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_jit_script_method_call
+Rcpp::XPtr<XPtrTorchStack> cpp_jit_script_method_call(XPtrTorchScriptMethod self, Rcpp::XPtr<XPtrTorchStack> inputs);
+RcppExport SEXP _torch_cpp_jit_script_method_call(SEXP selfSEXP, SEXP inputsSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchScriptMethod >::type self(selfSEXP);
+    Rcpp::traits::input_parameter< Rcpp::XPtr<XPtrTorchStack> >::type inputs(inputsSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_jit_script_method_call(self, inputs));
+    return rcpp_result_gen;
+END_RCPP
+}
 // cpp_stack_new
 Rcpp::XPtr<XPtrTorchStack> cpp_stack_new();
 RcppExport SEXP _torch_cpp_stack_new() {
@@ -35082,6 +35106,8 @@ static const R_CallMethodDef CallEntries[] = {
     {"_torch_cpp_jit_script_module_to", (DL_FUNC) &_torch_cpp_jit_script_module_to, 3},
     {"_torch_cpp_jit_script_module_modules", (DL_FUNC) &_torch_cpp_jit_script_module_modules, 1},
     {"_torch_cpp_jit_script_module_children", (DL_FUNC) &_torch_cpp_jit_script_module_children, 1},
+    {"_torch_cpp_jit_script_module_find_method", (DL_FUNC) &_torch_cpp_jit_script_module_find_method, 2},
+    {"_torch_cpp_jit_script_method_call", (DL_FUNC) &_torch_cpp_jit_script_method_call, 2},
     {"_torch_cpp_stack_new", (DL_FUNC) &_torch_cpp_stack_new, 0},
     {"_torch_cpp_stack_push_back_Tensor", (DL_FUNC) &_torch_cpp_stack_push_back_Tensor, 2},
     {"_torch_cpp_stack_push_back_int64_t", (DL_FUNC) &_torch_cpp_stack_push_back_int64_t, 2},
