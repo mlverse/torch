@@ -88,4 +88,18 @@ test_that("can retrieve modules", {
   expect_equal_to_tensor(tensor, script_module(x))
 })
 
+test_that("can apply functions", {
+  
+  script_module <- jit_load("assets/linear.pt")
+  script_module$.apply(function(x) x$zero_())
+  
+  lapply(
+    script_module$parameters,
+    function(x) {
+      expect_equal_to_tensor(x, torch_zeros_like(x))
+    }
+  )
+  
+})
+
 
