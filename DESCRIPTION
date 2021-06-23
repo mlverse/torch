@@ -83,6 +83,7 @@ Collate:
     'help.R'
     'indexing.R'
     'install.R'
+    'ivalue.R'
     'lantern_load.R'
     'lantern_sync.R'
     'layout.R'
