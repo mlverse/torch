@@ -329,6 +329,37 @@ public:
   operator SEXP () const;
 };
 
+class XPtrTorchIValue : public XPtrTorch {
+public:
+  XPtrTorchIValue (void * x) : XPtrTorch (x, lantern_IValue_delete) {}
+  explicit XPtrTorchIValue (std::shared_ptr<void> x) : XPtrTorch(x) {};
+  XPtrTorchIValue (const XPtrTorchIValue& x) : XPtrTorch(x.get_shared()) {};
+  XPtrTorchIValue (SEXP x);
+  operator SEXP () const;
+};
+
+class XPtrTorchvector_bool : public XPtrTorch {
+public:
+  XPtrTorchvector_bool (void * x) : XPtrTorch(x, lantern_vector_bool_delete) {}
+  operator SEXP() const;
+  XPtrTorchvector_bool (SEXP x);
+};
+
+class XPtrTorchvector_int64_t : public XPtrTorch {
+public:
+  XPtrTorchvector_int64_t (void* x) : XPtrTorch(x, lantern_vector_int64_t2_delete) {}
+  operator SEXP() const;
+  XPtrTorchvector_int64_t (SEXP x);
+};
+
+class XPtrTorchvector_double : public XPtrTorch {
+public:
+  XPtrTorchvector_double (void* x) : XPtrTorch(x, lantern_vector_double_delete) {}
+  operator SEXP() const;
+  XPtrTorchvector_double (SEXP x);
+};
+
+
 #include <Rcpp.h>
 
 class XPtrTorchQScheme : public XPtrTorch {
@@ -349,11 +380,6 @@ public:
 class XPtrTorchint64_t : public XPtrTorch {
 public:
   XPtrTorchint64_t (void* x) : XPtrTorch(x, lantern_int64_t_delete) {}
-};
-
-class XPtrTorchvector_int64_t : public XPtrTorch {
-public:
-  XPtrTorchvector_int64_t (void* x) : XPtrTorch(x, lantern_vector_int64_t_delete) {}
 };
 
 class XPtrTorchbool : public XPtrTorch {
@@ -392,11 +418,6 @@ public:
   XPtrTorchStorage (void * x) : XPtrTorch(x, lantern_Storage_delete) {}
 };
 
-class XPtrTorchIValue : public XPtrTorch {
-public:
-  XPtrTorchIValue (void * x) : XPtrTorch (x, lantern_IValue_delete) {}
-};
-
 class XPtrTorchCompilationUnit : public XPtrTorch {
 public:
   XPtrTorchCompilationUnit (void * x) : XPtrTorch(x, lantern_CompilationUnit_delete) {}
@@ -410,11 +431,6 @@ public:
 class XPtrTorchTraceableFunction : public XPtrTorch {
 public:
   XPtrTorchTraceableFunction (void * x) : XPtrTorch(x, lantern_TraceableFunction_delete) {}
-};
-
-class XPtrTorchvector_bool : public XPtrTorch {
-public:
-  XPtrTorchvector_bool (void * x) : XPtrTorch(x, lantern_vector_bool_delete) {}
 };
 
 class XPtrTorchvector_void : public XPtrTorch {

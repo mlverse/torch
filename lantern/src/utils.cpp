@@ -16,12 +16,56 @@ void *_lantern_vector_int64_t(int64_t *x, size_t x_size)
   LANTERN_FUNCTION_END
 }
 
+int64_t _lantern_vector_int64_t_size(void* self)
+{
+  LANTERN_FUNCTION_START
+  return reinterpret_cast<std::vector<int64_t> *>(self)->size();
+  LANTERN_FUNCTION_END
+}
+
+int64_t _lantern_vector_int64_t_at (void* self, int64_t index)
+{
+  return reinterpret_cast<std::vector<int64_t> *>(self)->at(index);
+}
+
 void *_lantern_vector_double(double *x, size_t x_size)
 {
   LANTERN_FUNCTION_START
   auto out = std::vector<double>(x, x + x_size);
   return (void *)new LanternObject<std::vector<double>>(out);
   LANTERN_FUNCTION_END
+}
+
+void* _lantern_vector_double_new ()
+{
+  return (void *)new std::vector<double>();
+}
+
+void* _lantern_vector_int64_t_new ()
+{
+  return (void *)new std::vector<int64_t>();
+}
+
+void _lantern_vector_double_push_back(void* self, double x)
+{
+  reinterpret_cast<std::vector<double>*>(self)->push_back(x);
+}
+
+void _lantern_vector_int64_t_push_back(void* self, int64_t x)
+{
+  reinterpret_cast<std::vector<int64_t>*>(self)->push_back(x);
+}
+
+double _lantern_vector_double_size(void* self)
+{
+  LANTERN_FUNCTION_START
+  return reinterpret_cast<std::vector<double> *>(self)->size();
+  LANTERN_FUNCTION_END
+}
+
+double _lantern_vector_double_at (void* self, int64_t index)
+{
+  return reinterpret_cast<std::vector<double> *>(self)->at(index);
 }
 
 void * _lantern_optional_vector_double(double * x, size_t x_size, bool is_null)

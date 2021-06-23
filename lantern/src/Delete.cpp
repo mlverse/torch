@@ -192,7 +192,7 @@ void _lantern_const_char_delete (const char * x)
 void _lantern_IValue_delete (void * x)
 {
   LANTERN_FUNCTION_START
-  lantern_delete<LanternObject<torch::IValue>>(x);
+  lantern_delete<torch::jit::IValue>(x);
   LANTERN_FUNCTION_END_VOID
 }
 
@@ -306,4 +306,18 @@ void _lantern_GenericList_delete (void* x)
   LANTERN_FUNCTION_START;
   lantern_delete<c10::impl::GenericList>(x);
   LANTERN_FUNCTION_END_VOID;
+}
+
+void _lantern_vector_double_delete (void* x)
+{
+  LANTERN_FUNCTION_START;
+  lantern_delete<std::vector<double>>(x);
+  LANTERN_FUNCTION_END_VOID;
+}
+
+void _lantern_vector_int64_t2_delete(void *x)
+{
+  LANTERN_FUNCTION_START
+  lantern_delete<std::vector<int64_t>>(x);
+  LANTERN_FUNCTION_END_VOID
 }

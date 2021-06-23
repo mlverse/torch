@@ -51,7 +51,7 @@ bool _lantern_IValue_Bool (void * self)
 
 void* _lantern_IValue_from_Bool (bool self)
 {
-    return (void*) new torch::IValue(self);
+    return (void*) new torch::jit::IValue(self);
 }
 
 void* _lantern_IValue_BoolList (void* self)

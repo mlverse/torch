@@ -541,7 +541,7 @@ enum IValue_types {
   LANTERN_API void (LANTERN_PTR _lantern_IValue_delete) (void * x);
   HOST_API void lantern_IValue_delete (void* x)
   {
-    _lantern_get_state_dict_values(x);
+    _lantern_IValue_delete(x);
     LANTERN_HOST_HANDLER;
   }
 
@@ -1513,6 +1513,87 @@ HOST_API void* lantern_IValue_from_TensorList (void* self)
   LANTERN_HOST_HANDLER;
   return ret;
 }
+
+LANTERN_API int64_t (LANTERN_PTR _lantern_vector_int64_t_size) (void* self);
+HOST_API int64_t lantern_vector_int64_t_size (void* self)
+{
+  int64_t ret = _lantern_vector_int64_t_size(self);
+  LANTERN_HOST_HANDLER;
+  return ret;
+}
+
+LANTERN_API int64_t (LANTERN_PTR _lantern_vector_int64_t_at) (void* self, int64_t index);
+HOST_API int64_t lantern_vector_int64_t_at (void* self, int64_t index)
+{
+  int64_t ret = _lantern_vector_int64_t_at(self, index);
+  LANTERN_HOST_HANDLER;
+  return ret;
+}
+
+LANTERN_API double (LANTERN_PTR _lantern_vector_double_size) (void* self);
+HOST_API double lantern_vector_double_size (void* self)
+{
+  double ret = _lantern_vector_double_size(self);
+  LANTERN_HOST_HANDLER;
+  return ret;
+}
+
+LANTERN_API double (LANTERN_PTR _lantern_vector_double_at) (void* self, int64_t index);
+HOST_API double lantern_vector_double_at (void* self, int64_t index)
+{
+  double ret = _lantern_vector_double_at(self, index);
+  LANTERN_HOST_HANDLER;
+  return ret;
+}
+
+LANTERN_API void (LANTERN_PTR _lantern_vector_double_delete) (void* x);
+HOST_API void lantern_vector_double_delete (void* x)
+{
+   _lantern_vector_double_delete(x);
+  LANTERN_HOST_HANDLER;
+  
+}
+
+LANTERN_API void (LANTERN_PTR _lantern_vector_int64_t2_delete) (void* x);
+HOST_API void lantern_vector_int64_t2_delete (void* x)
+{
+   _lantern_vector_int64_t2_delete(x);
+  LANTERN_HOST_HANDLER;
+  
+}
+
+LANTERN_API void* (LANTERN_PTR _lantern_vector_double_new) ();
+HOST_API void* lantern_vector_double_new ()
+{
+  void* ret = _lantern_vector_double_new();
+  LANTERN_HOST_HANDLER;
+  return ret;
+}
+
+LANTERN_API void* (LANTERN_PTR _lantern_vector_int64_t_new) ();
+HOST_API void* lantern_vector_int64_t_new ()
+{
+  void* ret = _lantern_vector_int64_t_new();
+  LANTERN_HOST_HANDLER;
+  return ret;
+}
+
+LANTERN_API void (LANTERN_PTR _lantern_vector_double_push_back) (void* self, double x);
+HOST_API void lantern_vector_double_push_back (void* self, double x)
+{
+   _lantern_vector_double_push_back(self, x);
+  LANTERN_HOST_HANDLER;
+  
+}
+
+LANTERN_API void (LANTERN_PTR _lantern_vector_int64_t_push_back) (void* self, int64_t x);
+HOST_API void lantern_vector_int64_t_push_back (void* self, int64_t x)
+{
+   _lantern_vector_int64_t_push_back(self, x);
+  LANTERN_HOST_HANDLER;
+  
+}
+
   /* Autogen Headers -- Start */
   LANTERN_API void* (LANTERN_PTR _lantern__cast_byte_tensor_bool)(void* self, void* non_blocking);
   HOST_API void* lantern__cast_byte_tensor_bool(void* self, void* non_blocking) { void* ret = _lantern__cast_byte_tensor_bool(self, non_blocking); LANTERN_HOST_HANDLER return ret; }
@@ -6692,6 +6773,16 @@ LOAD_SYMBOL(_lantern_IValue_from_Scalar);
 LOAD_SYMBOL(_lantern_IValue_from_String);
 LOAD_SYMBOL(_lantern_IValue_from_Tensor);
 LOAD_SYMBOL(_lantern_IValue_from_TensorList);
+LOAD_SYMBOL(_lantern_vector_int64_t_size);
+LOAD_SYMBOL(_lantern_vector_int64_t_at);
+LOAD_SYMBOL(_lantern_vector_double_size);
+LOAD_SYMBOL(_lantern_vector_double_at);
+LOAD_SYMBOL(_lantern_vector_double_delete);
+LOAD_SYMBOL(_lantern_vector_int64_t2_delete);
+LOAD_SYMBOL(_lantern_vector_double_new);
+LOAD_SYMBOL(_lantern_vector_int64_t_new);
+LOAD_SYMBOL(_lantern_vector_double_push_back);
+LOAD_SYMBOL(_lantern_vector_int64_t_push_back);
   /* Autogen Symbols -- Start */
   LOAD_SYMBOL(_lantern__cast_byte_tensor_bool)
   LOAD_SYMBOL(_lantern__cast_char_tensor_bool)

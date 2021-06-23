@@ -1,3 +1,4 @@
+library(magrittr)
 
 make_decls <- function(decls) {
   type <- stringr::str_match(decls, "(.*) _lantern")[,2]
@@ -28,42 +29,11 @@ make_load_symbols <- function(decls) {
 
 decls <- readr::read_lines(
   "
-int _lantern_IValue_type (void* self)
-bool _lantern_IValue_Bool (void * self)
-void* _lantern_IValue_BoolList (void* self)
-void* _lantern_IValue_Device (void* self)
-double _lantern_IValue_Double (void* self)
-void* _lantern_IValue_DoubleList (void* self)
-void* _lantern_IValue_Generator (void* self)
-void* _lantern_IValue_GenericDict (void* self)
-int64_t _lantern_IValue_Int (void* self)
-void* _lantern_IValue_IntList (void* self)
-void* _lantern_IValue_List (void* self)
-void* _lantern_IValue_Module (void* self)
-void* _lantern_IValue_Scalar (void* self)
-void* _lantern_IValue_String (void* self)
-void* _lantern_IValue_Tensor (void* self)
-void* _lantern_IValue_TensorList (void* self)
-void* _lantern_IValue_Tuple (void* self)
-void _lantern_GenericDict_delete (void* x)
-void _lantern_GenericList_delete (void* x)
-void* _lantern_Stack_at (void* self, int64_t index)
-void _lantern_IValue_delete (void* x)
-void* _lantern_IValue_from_Bool (bool self)
-void* _lantern_IValue_from_BoolList (void* self)
-void* _lantern_IValue_from_Device (void* self)
-void* _lantern_IValue_from_Double (double self)
-void* _lantern_IValue_from_DoubleList (void* self)
-void* _lantern_IValue_from_Generator (void* self)
-void* _lantern_IValue_from_GenericDict (void* self)
-void* _lantern_IValue_from_Int (int64_t self)
-void* _lantern_IValue_from_IntList (void* self)
-void* _lantern_IValue_from_List (void* self)
-void* _lantern_IValue_from_Module (void* self)
-void* _lantern_IValue_from_Scalar (void* self)
-void* _lantern_IValue_from_String (void* self)
-void* _lantern_IValue_from_Tensor (void* self)
-void* _lantern_IValue_from_TensorList (void* self)
+void _lantern_optional_vector_int64_t2_delete (void* x)
+void* _lantern_vector_double_new ()
+void* _lantern_vector_int64_t_new ()
+void _lantern_vector_double_push_back (void* self, double x)
+void _lantern_vector_int64_t_push_back (void* self, int64_t x)
 "  
 )
 
