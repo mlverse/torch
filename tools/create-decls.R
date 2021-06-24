@@ -29,11 +29,7 @@ make_load_symbols <- function(decls) {
 
 decls <- readr::read_lines(
   "
-void _lantern_optional_vector_int64_t2_delete (void* x)
-void* _lantern_vector_double_new ()
-void* _lantern_vector_int64_t_new ()
-void _lantern_vector_double_push_back (void* self, double x)
-void _lantern_vector_int64_t_push_back (void* self, int64_t x)
+const char * _lantern_string_get (void* self)
 "  
 )
 

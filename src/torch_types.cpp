@@ -186,7 +186,7 @@ XPtrTorchvector_string::operator SEXP () const
 {
   
   int size = lantern_vector_string_size(this->get());
-
+  
   std::vector<std::string> output;
   for (int i = 0; i < size; i++)
   {
@@ -194,6 +194,15 @@ XPtrTorchvector_string::operator SEXP () const
     output.push_back(std::string(k));
     lantern_const_char_delete(k);
   }
+  
+  return Rcpp::wrap(output);
+}
+
+XPtrTorchstring::operator SEXP () const
+{
+  const char * out = lantern_string_get(this->get());
+  auto output = std::string(out);
+  lantern_const_char_delete(out);
   
   return Rcpp::wrap(output);
 }
@@ -316,8 +325,8 @@ XPtrTorchIValue::operator SEXP () const
   case IValue_types::IValueScalarType:
     return Rcpp::wrap(XPtrTorchScalar(lantern_IValue_Scalar(this->get())));
     
-  // case IValue_types::IValueStringType:
-  //   return Rcpp::wrap(XPtrTorchstring(lantern_IValue_String(this->get())));
+  case IValue_types::IValueStringType:
+    return Rcpp::wrap(XPtrTorchstring(lantern_IValue_String(this->get())));
     
   case IValue_types::IValueTensorListType:
     return Rcpp::wrap(XPtrTorchTensorList(lantern_IValue_TensorList(this->get())));
@@ -895,6 +904,11 @@ XPtrTorchIValue XPtrTorchIValue_from_SEXP (SEXP x)
   if (TYPEOF(x) == REALSXP && LENGTH(x) > 1)
   {
     return XPtrTorchIValue(lantern_IValue_from_DoubleList(Rcpp::as<XPtrTorchvector_double>(x).get()));
+  }
+  
+  if (TYPEOF(x)== STRSXP && LENGTH(x) == 1)
+  {
+    return XPtrTorchIValue(lantern_IValue_from_String(Rcpp::as<XPtrTorchstring>(x).get()));
   }
   
   if (is_tensor(x))

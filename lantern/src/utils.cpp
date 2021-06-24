@@ -240,6 +240,14 @@ void * _lantern_string_new (const char * value)
   LANTERN_FUNCTION_END
 }
 
+const char * _lantern_string_get (void* self)
+{
+  auto str = *reinterpret_cast<std::string*>(self);
+  char *cstr = new char[str.length() + 1];
+  strcpy(cstr, str.c_str());
+  return cstr;
+}
+
 void _lantern_print_stuff (void* x)
 {
   LANTERN_FUNCTION_START

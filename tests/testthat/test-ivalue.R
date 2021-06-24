@@ -41,3 +41,8 @@ test_that("tensor list works", {
   expect_equal_to_tensor(y[[1]], x[[1]])
   expect_equal_to_tensor(y[[2]], x[[2]])
 })
+
+test_that("works for strings", {
+  x <- "hello"
+  expect_equal(ivalue_test_function(x), x)
+})

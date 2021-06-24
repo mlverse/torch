@@ -1594,6 +1594,14 @@ HOST_API void lantern_vector_int64_t_push_back (void* self, int64_t x)
   
 }
 
+LANTERN_API const char * (LANTERN_PTR _lantern_string_get) (void* self);
+HOST_API const char * lantern_string_get (void* self)
+{
+  const char * ret = _lantern_string_get(self);
+  LANTERN_HOST_HANDLER;
+  return ret;
+}
+
   /* Autogen Headers -- Start */
   LANTERN_API void* (LANTERN_PTR _lantern__cast_byte_tensor_bool)(void* self, void* non_blocking);
   HOST_API void* lantern__cast_byte_tensor_bool(void* self, void* non_blocking) { void* ret = _lantern__cast_byte_tensor_bool(self, non_blocking); LANTERN_HOST_HANDLER return ret; }
@@ -6783,6 +6791,7 @@ LOAD_SYMBOL(_lantern_vector_double_new);
 LOAD_SYMBOL(_lantern_vector_int64_t_new);
 LOAD_SYMBOL(_lantern_vector_double_push_back);
 LOAD_SYMBOL(_lantern_vector_int64_t_push_back);
+LOAD_SYMBOL(_lantern_string_get);
   /* Autogen Symbols -- Start */
   LOAD_SYMBOL(_lantern__cast_byte_tensor_bool)
   LOAD_SYMBOL(_lantern__cast_char_tensor_bool)

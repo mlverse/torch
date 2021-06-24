@@ -319,6 +319,7 @@ public:
   XPtrTorchstring (void * x) : XPtrTorch(x, lantern_string_delete) {}
   XPtrTorchstring (SEXP x);
   XPtrTorchstring (const XPtrTorchstring& x) : XPtrTorch(x.get_shared()) {};
+  operator SEXP () const;
 };
 
 class XPtrTorchStack : public XPtrTorch {
