@@ -28,3 +28,16 @@ test_that("works for double list", {
   x <- runif(100)
   expect_equal(ivalue_test_function(x), x)
 })
+
+test_that("tensor works", {
+  x <- torch_randn(100, 100)
+  expect_equal_to_tensor(ivalue_test_function(x), x)
+})
+
+test_that("tensor list works", {
+  x <- list(torch_tensor(1), torch_tensor(2))
+  y <- ivalue_test_function(x)
+  
+  expect_equal_to_tensor(y[[1]], x[[1]])
+  expect_equal_to_tensor(y[[2]], x[[2]])
+})

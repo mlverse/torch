@@ -327,6 +327,7 @@ XPtrTorchIValue::operator SEXP () const
     
   }
   
+  Rcpp::Rcout << lantern_IValue_type(this->get()) << std::endl; 
   Rcpp::stop("Type not handled");
 }
 
@@ -845,6 +846,20 @@ XPtrTorchstring XPtrTorchstring_from_SEXP (SEXP x)
 XPtrTorchstring::XPtrTorchstring(SEXP x) :
   XPtrTorchstring{XPtrTorchstring_from_SEXP(x)} {};
 
+bool rlang_is_named (SEXP x)
+{
+  
+  Rcpp::Function asNamespace("asNamespace");
+  Rcpp::Environment rlang_pkg = asNamespace("rlang");
+  Rcpp::Function f = rlang_pkg["is_named"];
+  return f(x);
+}
+
+bool is_tensor (SEXP x)
+{
+  return TYPEOF(x) == EXTPTRSXP && Rf_inherits(x, "torch_tensor");
+}
+
 XPtrTorchIValue XPtrTorchIValue_from_SEXP (SEXP x)
 {
   if (TYPEOF(x) == INTSXP && LENGTH(x) == 1)
@@ -880,6 +895,31 @@ XPtrTorchIValue XPtrTorchIValue_from_SEXP (SEXP x)
   if (TYPEOF(x) == REALSXP && LENGTH(x) > 1)
   {
     return XPtrTorchIValue(lantern_IValue_from_DoubleList(Rcpp::as<XPtrTorchvector_double>(x).get()));
+  }
+  
+  if (is_tensor(x))
+  {
+    return XPtrTorchIValue(lantern_IValue_from_Tensor(Rcpp::as<XPtrTorchTensor>(x).get()));
+  }
+  
+  // is a list
+  if (TYPEOF(x) == VECSXP)
+  {
+    
+    // is a named list, thus we should convert to a dictionary to
+    // preserve the names
+    if (rlang_is_named(x))
+    {
+    
+    }
+    
+    // is not a named list, thus we will convert a List or TensorList
+    Rcpp::List x_ = Rcpp::wrap(x);
+    if (std::all_of(x_.cbegin(), x_.cend(), [](SEXP x){ return is_tensor(x); }))
+    {
+      return XPtrTorchIValue(lantern_IValue_from_TensorList(Rcpp::as<XPtrTorchTensorList>(x).get()));
+    }
+    
   }
   
   Rcpp::stop("Unsupported type");

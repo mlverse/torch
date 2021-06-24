@@ -25,10 +25,8 @@ int _lantern_IValue_type (void* self)
     if (self_->isGenericDict()) return IValue_types::IValueGenericDictType;
     if (self_->isInt()) return IValue_types::IValueIntType;
     if (self_->isIntList()) return IValue_types::IValueIntListType;
-    if (self_->isList()) return IValue_types::IValueListType;
     if (self_->isModule()) return IValue_types::IValueModuleType;
     if (self_->isObject()) return IValue_types::IValueObjectType;
-    if (self_->isPtrType()) return IValue_types::IValuePtrTypeType;
     if (self_->isPyObject()) return IValue_types::IValuePyObjectType;
     if (self_->isQuantizer()) return IValue_types::IValueQuantizerType;
     if (self_->isRRef()) return IValue_types::IValueRRefType;
@@ -39,6 +37,8 @@ int _lantern_IValue_type (void* self)
     if (self_->isTensor()) return IValue_types::IValueTensorType;
     if (self_->isTensorList()) return IValue_types::IValueTensorListType;
     if (self_->isTuple()) return IValue_types::IValueTupleType;
+    if (self_->isPtrType()) return IValue_types::IValuePtrTypeType;
+    if (self_->isList()) return IValue_types::IValueListType;
     
     return IValue_types::IValueTypeUnknownType;
 }
