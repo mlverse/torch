@@ -334,10 +334,26 @@ XPtrTorchIValue::operator SEXP () const
   case IValue_types::IValueTensorType:
     return Rcpp::wrap(XPtrTorchTensor(lantern_IValue_Tensor(this->get())));
     
+  case IValue_types::IValueTupleType:
+    return Rcpp::wrap(XPtrTorchTuple(lantern_IValue_Tuple(this->get())));
+    
   }
   
   Rcpp::Rcout << lantern_IValue_type(this->get()) << std::endl; 
   Rcpp::stop("Type not handled");
+}
+
+XPtrTorchTuple::operator SEXP () const 
+{
+  auto size = lantern_jit_Tuple_size(this->get());
+  
+  Rcpp::List out;
+  for (int i = 0; i < size; i++)
+  {
+    out.push_back(Rcpp::wrap(XPtrTorchIValue(lantern_jit_Tuple_at(this->get(), i))));
+  }
+  
+  return out;
 }
 
 // Constructors ----------
@@ -853,7 +869,21 @@ XPtrTorchstring XPtrTorchstring_from_SEXP (SEXP x)
 }
 
 XPtrTorchstring::XPtrTorchstring(SEXP x) :
-  XPtrTorchstring{XPtrTorchstring_from_SEXP(x)} {};
+  XPtrTorchstring{XPtrTorchstring_from_SEXP(x)} {}
+
+XPtrTorchTuple XPtrTorchTuple_from_SEXP (SEXP x)
+{
+  auto list = Rcpp::as<Rcpp::List>(x);
+  XPtrTorchTuple out = lantern_jit_Tuple_new();
+  for (auto el : list)
+  {
+    lantern_jit_Tuple_push_back(out.get(), Rcpp::as<XPtrTorchIValue>(el).get());
+  }
+  return out;
+}
+
+XPtrTorchTuple::XPtrTorchTuple(SEXP x) :
+  XPtrTorchTuple{XPtrTorchTuple_from_SEXP(x)} {}
 
 bool rlang_is_named (SEXP x)
 {
@@ -929,11 +959,14 @@ XPtrTorchIValue XPtrTorchIValue_from_SEXP (SEXP x)
     
     // is not a named list, thus we will convert a List or TensorList
     Rcpp::List x_ = Rcpp::wrap(x);
+    
     if (std::all_of(x_.cbegin(), x_.cend(), [](SEXP x){ return is_tensor(x); }))
     {
       return XPtrTorchIValue(lantern_IValue_from_TensorList(Rcpp::as<XPtrTorchTensorList>(x).get()));
     }
     
+    // it's not a list full of tensors so we need create a tuple
+    return XPtrTorchIValue(lantern_IValue_from_Tuple(Rcpp::as<XPtrTorchTuple>(x).get()));
   }
   
   Rcpp::stop("Unsupported type");

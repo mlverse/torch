@@ -339,6 +339,14 @@ public:
   operator SEXP () const;
 };
 
+class XPtrTorchTuple : public XPtrTorch {
+public:
+  XPtrTorchTuple (void * x) : XPtrTorch (x, lantern_GenericList_delete) {}
+  XPtrTorchTuple (const XPtrTorchTuple& x) : XPtrTorch(x.get_shared()) {};
+  XPtrTorchTuple (SEXP x);
+  operator SEXP () const;
+};
+
 class XPtrTorchvector_bool : public XPtrTorch {
 public:
   XPtrTorchvector_bool (void * x) : XPtrTorch(x, lantern_vector_bool_delete) {}

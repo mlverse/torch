@@ -321,3 +321,11 @@ void _lantern_vector_int64_t2_delete(void *x)
   lantern_delete<std::vector<int64_t>>(x);
   LANTERN_FUNCTION_END_VOID
 }
+
+void _lantern_Tuple_delete(void *x)
+{
+  LANTERN_FUNCTION_START
+  lantern_delete<std::vector<torch::IValue>>(x);
+  LANTERN_FUNCTION_END_VOID
+}
+

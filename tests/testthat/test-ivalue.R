@@ -46,3 +46,12 @@ test_that("works for strings", {
   x <- "hello"
   expect_equal(ivalue_test_function(x), x)
 })
+
+test_that("works for unamed lists", {
+  
+  x <- list(1L, 1:10, 1.1, c(2, 3.3, 4.4), torch_tensor(1), 
+            list(torch_tensor(1), torch_tensor(2)),
+            TRUE, c(TRUE, FALSE))
+  x[[length(x)+1]] <- x
+  expect_equal(ivalue_test_function(x), x)
+})

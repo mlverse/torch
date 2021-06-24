@@ -224,5 +224,11 @@ void* _lantern_IValue_from_TensorList (void* self)
 void* _lantern_IValue_Tuple (void* self)
 {
     auto self_ = reinterpret_cast<torch::jit::IValue *>(self);
-    return (void *)new c10::ivalue::Tuple(*self_->toTuple().get());
+    return (void *)new std::vector<torch::IValue>(self_->toTuple()->elements());
+}
+
+void* _lantern_IValue_from_Tuple (void* self)
+{
+    auto self_ = reinterpret_cast<std::vector<torch::IValue>*>(self);
+    return (void*) new torch::IValue(c10::ivalue::Tuple::create(*self_));
 }

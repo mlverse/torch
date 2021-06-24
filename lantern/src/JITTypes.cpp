@@ -97,3 +97,26 @@ void* _lantern_jit_named_buffer_list_names (void* self)
 {
     return jit_type_names<torch::jit::named_buffer_list>(self);
 }
+
+void* _lantern_jit_Tuple_new ()
+{
+    return (void*) new std::vector<torch::IValue>();
+}
+
+void _lantern_jit_Tuple_push_back (void* self, void* element)
+{
+    auto self_ = reinterpret_cast<std::vector<torch::IValue>*>(self);
+    self_->push_back(*reinterpret_cast<torch::IValue *>(element));
+}
+
+int64_t _lantern_jit_Tuple_size (void* self)
+{
+    auto self_ = reinterpret_cast<std::vector<torch::IValue>*>(self);
+    return self_->size();
+}
+
+void* _lantern_jit_Tuple_at (void* self, int64_t index)
+{
+    auto self_ = reinterpret_cast<std::vector<torch::IValue>*>(self);
+    return (void*) new torch::IValue(self_->at(index));
+}

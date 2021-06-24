@@ -1602,6 +1602,54 @@ HOST_API const char * lantern_string_get (void* self)
   return ret;
 }
 
+LANTERN_API void (LANTERN_PTR _lantern_Tuple_delete) (void *x);
+HOST_API void lantern_Tuple_delete (void *x)
+{
+   _lantern_Tuple_delete(x);
+  LANTERN_HOST_HANDLER;
+  
+}
+
+LANTERN_API void* (LANTERN_PTR _lantern_IValue_from_Tuple) (void* self);
+HOST_API void* lantern_IValue_from_Tuple (void* self)
+{
+  void* ret = _lantern_IValue_from_Tuple(self);
+  LANTERN_HOST_HANDLER;
+  return ret;
+}
+
+LANTERN_API void* (LANTERN_PTR _lantern_jit_Tuple_new) ();
+HOST_API void* lantern_jit_Tuple_new ()
+{
+  void* ret = _lantern_jit_Tuple_new();
+  LANTERN_HOST_HANDLER;
+  return ret;
+}
+
+LANTERN_API void (LANTERN_PTR _lantern_jit_Tuple_push_back) (void* self, void* element);
+HOST_API void lantern_jit_Tuple_push_back (void* self, void* element)
+{
+   _lantern_jit_Tuple_push_back(self, element);
+  LANTERN_HOST_HANDLER;
+  
+}
+
+LANTERN_API int64_t (LANTERN_PTR _lantern_jit_Tuple_size) (void* self);
+HOST_API int64_t lantern_jit_Tuple_size (void* self)
+{
+  int64_t ret = _lantern_jit_Tuple_size(self);
+  LANTERN_HOST_HANDLER;
+  return ret;
+}
+
+LANTERN_API void* (LANTERN_PTR _lantern_jit_Tuple_at) (void* self, int64_t index);
+HOST_API void* lantern_jit_Tuple_at (void* self, int64_t index)
+{
+  void* ret = _lantern_jit_Tuple_at(self, index);
+  LANTERN_HOST_HANDLER;
+  return ret;
+}
+
   /* Autogen Headers -- Start */
   LANTERN_API void* (LANTERN_PTR _lantern__cast_byte_tensor_bool)(void* self, void* non_blocking);
   HOST_API void* lantern__cast_byte_tensor_bool(void* self, void* non_blocking) { void* ret = _lantern__cast_byte_tensor_bool(self, non_blocking); LANTERN_HOST_HANDLER return ret; }
@@ -6792,6 +6840,12 @@ LOAD_SYMBOL(_lantern_vector_int64_t_new);
 LOAD_SYMBOL(_lantern_vector_double_push_back);
 LOAD_SYMBOL(_lantern_vector_int64_t_push_back);
 LOAD_SYMBOL(_lantern_string_get);
+LOAD_SYMBOL(_lantern_Tuple_delete);
+LOAD_SYMBOL(_lantern_IValue_from_Tuple);
+LOAD_SYMBOL(_lantern_jit_Tuple_new);
+LOAD_SYMBOL(_lantern_jit_Tuple_push_back);
+LOAD_SYMBOL(_lantern_jit_Tuple_size);
+LOAD_SYMBOL(_lantern_jit_Tuple_at);
   /* Autogen Symbols -- Start */
   LOAD_SYMBOL(_lantern__cast_byte_tensor_bool)
   LOAD_SYMBOL(_lantern__cast_char_tensor_bool)
