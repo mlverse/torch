@@ -121,6 +121,34 @@ void* _lantern_jit_Tuple_at (void* self, int64_t index)
     return (void*) new torch::IValue(self_->at(index));
 }
 
+void* _lantern_jit_NamedTuple_new ()
+{
+    return (void*) new NamedTupleHelper();
+}
+
+void _lantern_jit_NamedTuple_push_back (void* self, void* name, void* element)
+{
+    auto self_ = reinterpret_cast<NamedTupleHelper*>(self);
+    self_->elements.push_back(
+        *reinterpret_cast<torch::IValue *>(element)
+    );
+    self_->names.push_back(
+        *reinterpret_cast<std::string *>(name)
+    );
+}
+
+void* _lantern_jit_NamedTupleHelper_keys (void* self)
+{
+    auto self_ = reinterpret_cast<NamedTupleHelper*>(self);
+    return (void*) new std::vector<std::string>(self_->names);
+}
+
+void* _lantern_jit_NamedTupleHelper_elements (void* self)
+{
+    auto self_ = reinterpret_cast<NamedTupleHelper*>(self);
+    return (void*) new std::vector<torch::IValue>(self_->elements);
+}
+
 void* _lantern_jit_TensorDict_new ()
 {
     return (void*) new c10::Dict<std::string, torch::Tensor>();

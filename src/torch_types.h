@@ -319,6 +319,7 @@ public:
   XPtrTorchstring (void * x) : XPtrTorch(x, lantern_string_delete) {}
   XPtrTorchstring (SEXP x);
   XPtrTorchstring (const XPtrTorchstring& x) : XPtrTorch(x.get_shared()) {};
+  XPtrTorchstring (std::string x) : XPtrTorchstring(lantern_string_new(x.c_str())) {};
   operator SEXP () const;
 };
 
@@ -389,6 +390,13 @@ public:
 class XPtrTorchvector_IValue : public XPtrTorch {
 public:
   XPtrTorchvector_IValue (void* x) : XPtrTorch(x, lantern_jit_vector_IValue_delete) {}
+  operator SEXP() const;
+};
+
+class XPtrTorchNamedTupleHelper : public XPtrTorch {
+public:
+  XPtrTorchNamedTupleHelper (void* x) : XPtrTorch(x, lantern_NamedTupleHelper_delete) {}
+  XPtrTorchNamedTupleHelper (SEXP x);
   operator SEXP() const;
 };
 

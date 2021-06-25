@@ -60,4 +60,9 @@ test_that("works for dicts of tensors", {
   x <- list(a = torch_tensor(1), b = torch_tensor(2))
   expect_equal(ivalue_test_function(x), x)
 })
+
+test_that("works for named list of different types", {
+  x <- list(a = torch_tensor(1), b = 1)
+  expect_equal(ivalue_test_function(x), x)
+})
  

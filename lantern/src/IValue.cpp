@@ -224,13 +224,42 @@ void* _lantern_IValue_from_TensorList (void* self)
 void* _lantern_IValue_Tuple (void* self)
 {
     auto self_ = reinterpret_cast<torch::jit::IValue *>(self);
-    return (void *)new std::vector<torch::IValue>(self_->toTuple()->elements());
+    auto tuple = self_->toTuple();
+    
+    std::vector<std::string> names;
+    if (tuple->type()->schema())
+    {
+        auto arguments = tuple->type()->schema()->arguments();
+    
+        for (const auto& el : arguments)
+        {
+            names.push_back(el.name());
+        }
+
+    }
+
+    return (void *)new NamedTupleHelper{tuple->elements(), names};
 }
 
 void* _lantern_IValue_from_Tuple (void* self)
 {
     auto self_ = reinterpret_cast<std::vector<torch::IValue>*>(self);
     return (void*) new torch::IValue(c10::ivalue::Tuple::create(*self_));
+}
+
+void* _lantern_IValue_from_NamedTuple (void* self) {
+    auto self_ = reinterpret_cast<NamedTupleHelper*>(self);
+
+    std::vector<c10::TypePtr> types;
+    for (auto el : self_->elements)
+    {
+        types.push_back(el.type());
+    }
+    auto tuple = c10::ivalue::Tuple::createNamed(
+        self_->elements,
+        c10::TupleType::createNamed(c10::nullopt, self_->names, types)
+    );
+    return (void*) new torch::IValue(tuple);
 }
 
 void* _lantern_IValue_from_TensorDict (void* self)

@@ -357,4 +357,11 @@ void _lantern_jit_vector_IValue_delete(void *x)
   LANTERN_FUNCTION_END_VOID
 }
 
+void _lantern_NamedTupleHelper_delete (void* x)
+{
+  LANTERN_FUNCTION_START
+  lantern_delete<NamedTupleHelper>(x);
+  LANTERN_FUNCTION_END_VOID
+}
+
 

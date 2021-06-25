@@ -1754,6 +1754,54 @@ HOST_API void* lantern_jit_vector_IValue_at (void* self, int64_t index)
   return ret;
 }
 
+LANTERN_API void* (LANTERN_PTR _lantern_jit_NamedTuple_new) ();
+HOST_API void* lantern_jit_NamedTuple_new ()
+{
+  void* ret = _lantern_jit_NamedTuple_new();
+  LANTERN_HOST_HANDLER;
+  return ret;
+}
+
+LANTERN_API void (LANTERN_PTR _lantern_jit_NamedTuple_push_back) (void* self, void* name, void* element);
+HOST_API void lantern_jit_NamedTuple_push_back (void* self, void* name, void* element)
+{
+   _lantern_jit_NamedTuple_push_back(self, name, element);
+  LANTERN_HOST_HANDLER;
+  
+}
+
+LANTERN_API void* (LANTERN_PTR _lantern_jit_NamedTupleHelper_keys) (void* self);
+HOST_API void* lantern_jit_NamedTupleHelper_keys (void* self)
+{
+  void* ret = _lantern_jit_NamedTupleHelper_keys(self);
+  LANTERN_HOST_HANDLER;
+  return ret;
+}
+
+LANTERN_API void* (LANTERN_PTR _lantern_jit_NamedTupleHelper_elements) (void* self);
+HOST_API void* lantern_jit_NamedTupleHelper_elements (void* self)
+{
+  void* ret = _lantern_jit_NamedTupleHelper_elements(self);
+  LANTERN_HOST_HANDLER;
+  return ret;
+}
+
+LANTERN_API void* (LANTERN_PTR _lantern_IValue_from_NamedTuple) (void* self);
+HOST_API void* lantern_IValue_from_NamedTuple (void* self)
+{
+  void* ret = _lantern_IValue_from_NamedTuple(self);
+  LANTERN_HOST_HANDLER;
+  return ret;
+}
+
+LANTERN_API void (LANTERN_PTR _lantern_NamedTupleHelper_delete) (void* x);
+HOST_API void lantern_NamedTupleHelper_delete (void* x)
+{
+   _lantern_NamedTupleHelper_delete(x);
+  LANTERN_HOST_HANDLER;
+  
+}
+
   /* Autogen Headers -- Start */
   LANTERN_API void* (LANTERN_PTR _lantern__cast_byte_tensor_bool)(void* self, void* non_blocking);
   HOST_API void* lantern__cast_byte_tensor_bool(void* self, void* non_blocking) { void* ret = _lantern__cast_byte_tensor_bool(self, non_blocking); LANTERN_HOST_HANDLER return ret; }
@@ -6963,6 +7011,12 @@ LOAD_SYMBOL(_lantern_IValue_from_TensorDict);
 LOAD_SYMBOL(_lantern_jit_vector_IValue_delete);
 LOAD_SYMBOL(_lantern_jit_vector_IValue_size);
 LOAD_SYMBOL(_lantern_jit_vector_IValue_at);
+LOAD_SYMBOL(_lantern_jit_NamedTuple_new);
+LOAD_SYMBOL(_lantern_jit_NamedTuple_push_back);
+LOAD_SYMBOL(_lantern_jit_NamedTupleHelper_keys);
+LOAD_SYMBOL(_lantern_jit_NamedTupleHelper_elements);
+LOAD_SYMBOL(_lantern_IValue_from_NamedTuple);
+LOAD_SYMBOL(_lantern_NamedTupleHelper_delete);
   /* Autogen Symbols -- Start */
   LOAD_SYMBOL(_lantern__cast_byte_tensor_bool)
   LOAD_SYMBOL(_lantern__cast_char_tensor_bool)
