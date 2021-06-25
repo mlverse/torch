@@ -322,10 +322,39 @@ void _lantern_vector_int64_t2_delete(void *x)
   LANTERN_FUNCTION_END_VOID
 }
 
-void _lantern_Tuple_delete(void *x)
+void _lantern_jit_Tuple_delete(void *x)
 {
   LANTERN_FUNCTION_START
   lantern_delete<std::vector<torch::IValue>>(x);
   LANTERN_FUNCTION_END_VOID
 }
+
+void _lantern_jit_TensorDict_delete(void *x)
+{
+  LANTERN_FUNCTION_START
+  lantern_delete<c10::Dict<std::string, torch::Tensor>>(x);
+  LANTERN_FUNCTION_END_VOID
+}
+
+void _lantern_jit_GenericDict_delete(void *x)
+{
+  LANTERN_FUNCTION_START
+  lantern_delete<c10::impl::GenericDict>(x);
+  LANTERN_FUNCTION_END_VOID
+}
+
+void _lantern_jit_GenericList_delete(void *x)
+{
+  LANTERN_FUNCTION_START
+  lantern_delete<c10::impl::GenericList>(x);
+  LANTERN_FUNCTION_END_VOID
+}
+
+void _lantern_jit_vector_IValue_delete(void *x)
+{
+  LANTERN_FUNCTION_START
+  lantern_delete<std::vector<torch::IValue>>(x);
+  LANTERN_FUNCTION_END_VOID
+}
+
 

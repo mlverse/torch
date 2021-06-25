@@ -341,7 +341,7 @@ public:
 
 class XPtrTorchTuple : public XPtrTorch {
 public:
-  XPtrTorchTuple (void * x) : XPtrTorch (x, lantern_GenericList_delete) {}
+  XPtrTorchTuple (void * x) : XPtrTorch (x, lantern_jit_Tuple_delete) {}
   XPtrTorchTuple (const XPtrTorchTuple& x) : XPtrTorch(x.get_shared()) {};
   XPtrTorchTuple (SEXP x);
   operator SEXP () const;
@@ -368,6 +368,29 @@ public:
   XPtrTorchvector_double (SEXP x);
 };
 
+class XPtrTorchTensorDict : public XPtrTorch {
+public:
+  XPtrTorchTensorDict (void* x) : XPtrTorch(x, lantern_jit_TensorDict_delete) {}
+  XPtrTorchTensorDict (SEXP x);
+};
+
+class XPtrTorchGenericDict : public XPtrTorch {
+public:
+  XPtrTorchGenericDict (void* x) : XPtrTorch(x, lantern_jit_GenericDict_delete) {}
+  operator SEXP() const;
+};
+
+class XPtrTorchGenericList : public XPtrTorch {
+public:
+  XPtrTorchGenericList (void* x) : XPtrTorch(x, lantern_jit_GenericList_delete) {}
+  operator SEXP() const;
+};
+
+class XPtrTorchvector_IValue : public XPtrTorch {
+public:
+  XPtrTorchvector_IValue (void* x) : XPtrTorch(x, lantern_jit_vector_IValue_delete) {}
+  operator SEXP() const;
+};
 
 #include <Rcpp.h>
 

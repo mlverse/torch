@@ -22,7 +22,6 @@ int _lantern_IValue_type (void* self)
     if (self_->isEnum()) return IValue_types::IValueEnumType;
     if (self_->isFuture()) return IValue_types::IValueFutureType;
     if (self_->isGenerator()) return IValue_types::IValueGeneratorType;
-    if (self_->isGenericDict()) return IValue_types::IValueGenericDictType;
     if (self_->isInt()) return IValue_types::IValueIntType;
     if (self_->isIntList()) return IValue_types::IValueIntListType;
     if (self_->isModule()) return IValue_types::IValueModuleType;
@@ -35,10 +34,11 @@ int _lantern_IValue_type (void* self)
     if (self_->isStream()) return IValue_types::IValueStreamType;
     if (self_->isString()) return IValue_types::IValueStringType;
     if (self_->isTensor()) return IValue_types::IValueTensorType;
+    if (self_->isGenericDict()) return IValue_types::IValueGenericDictType;
     if (self_->isTensorList()) return IValue_types::IValueTensorListType;
     if (self_->isTuple()) return IValue_types::IValueTupleType;
-    if (self_->isPtrType()) return IValue_types::IValuePtrTypeType;
     if (self_->isList()) return IValue_types::IValueListType;
+    if (self_->isPtrType()) return IValue_types::IValuePtrTypeType;
     
     return IValue_types::IValueTypeUnknownType;
 }
@@ -231,4 +231,10 @@ void* _lantern_IValue_from_Tuple (void* self)
 {
     auto self_ = reinterpret_cast<std::vector<torch::IValue>*>(self);
     return (void*) new torch::IValue(c10::ivalue::Tuple::create(*self_));
+}
+
+void* _lantern_IValue_from_TensorDict (void* self)
+{
+    auto self_ = reinterpret_cast<c10::Dict<std::string, torch::Tensor>*>(self);
+    return (void*) new torch::IValue(*self_);
 }

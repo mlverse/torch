@@ -1602,10 +1602,10 @@ HOST_API const char * lantern_string_get (void* self)
   return ret;
 }
 
-LANTERN_API void (LANTERN_PTR _lantern_Tuple_delete) (void *x);
-HOST_API void lantern_Tuple_delete (void *x)
+LANTERN_API void (LANTERN_PTR _lantern_jit_Tuple_delete) (void *x);
+HOST_API void lantern_jit_Tuple_delete (void *x)
 {
-   _lantern_Tuple_delete(x);
+   _lantern_jit_Tuple_delete(x);
   LANTERN_HOST_HANDLER;
   
 }
@@ -1646,6 +1646,110 @@ LANTERN_API void* (LANTERN_PTR _lantern_jit_Tuple_at) (void* self, int64_t index
 HOST_API void* lantern_jit_Tuple_at (void* self, int64_t index)
 {
   void* ret = _lantern_jit_Tuple_at(self, index);
+  LANTERN_HOST_HANDLER;
+  return ret;
+}
+
+LANTERN_API void (LANTERN_PTR _lantern_jit_TensorDict_delete) (void *x);
+HOST_API void lantern_jit_TensorDict_delete (void *x)
+{
+   _lantern_jit_TensorDict_delete(x);
+  LANTERN_HOST_HANDLER;
+  
+}
+
+LANTERN_API void (LANTERN_PTR _lantern_jit_GenericDict_delete) (void *x);
+HOST_API void lantern_jit_GenericDict_delete (void *x)
+{
+   _lantern_jit_GenericDict_delete(x);
+  LANTERN_HOST_HANDLER;
+  
+}
+
+LANTERN_API void (LANTERN_PTR _lantern_jit_GenericList_delete) (void *x);
+HOST_API void lantern_jit_GenericList_delete (void *x)
+{
+   _lantern_jit_GenericList_delete(x);
+  LANTERN_HOST_HANDLER;
+  
+}
+
+LANTERN_API void* (LANTERN_PTR _lantern_jit_TensorDict_new) ();
+HOST_API void* lantern_jit_TensorDict_new ()
+{
+  void* ret = _lantern_jit_TensorDict_new();
+  LANTERN_HOST_HANDLER;
+  return ret;
+}
+
+LANTERN_API void (LANTERN_PTR _lantern_jit_TensorDict_push_back) (void* self, void* key, void* value);
+HOST_API void lantern_jit_TensorDict_push_back (void* self, void* key, void* value)
+{
+   _lantern_jit_TensorDict_push_back(self, key, value);
+  LANTERN_HOST_HANDLER;
+  
+}
+
+LANTERN_API void* (LANTERN_PTR _lantern_jit_GenericDict_keys) (void* self);
+HOST_API void* lantern_jit_GenericDict_keys (void* self)
+{
+  void* ret = _lantern_jit_GenericDict_keys(self);
+  LANTERN_HOST_HANDLER;
+  return ret;
+}
+
+LANTERN_API void* (LANTERN_PTR _lantern_jit_GenericDict_at) (void* self, void* key);
+HOST_API void* lantern_jit_GenericDict_at (void* self, void* key)
+{
+  void* ret = _lantern_jit_GenericDict_at(self, key);
+  LANTERN_HOST_HANDLER;
+  return ret;
+}
+
+LANTERN_API int64_t (LANTERN_PTR _lantern_jit_GenericList_size) (void* self);
+HOST_API int64_t lantern_jit_GenericList_size (void* self)
+{
+  int64_t ret = _lantern_jit_GenericList_size(self);
+  LANTERN_HOST_HANDLER;
+  return ret;
+}
+
+LANTERN_API void* (LANTERN_PTR _lantern_jit_GenericList_at) (void* self, int64_t index);
+HOST_API void* lantern_jit_GenericList_at (void* self, int64_t index)
+{
+  void* ret = _lantern_jit_GenericList_at(self, index);
+  LANTERN_HOST_HANDLER;
+  return ret;
+}
+
+LANTERN_API void* (LANTERN_PTR _lantern_IValue_from_TensorDict) (void* self);
+HOST_API void* lantern_IValue_from_TensorDict (void* self)
+{
+  void* ret = _lantern_IValue_from_TensorDict(self);
+  LANTERN_HOST_HANDLER;
+  return ret;
+}
+
+LANTERN_API void (LANTERN_PTR _lantern_jit_vector_IValue_delete) (void* x);
+HOST_API void lantern_jit_vector_IValue_delete (void* x)
+{
+   _lantern_jit_vector_IValue_delete(x);
+  LANTERN_HOST_HANDLER;
+  
+}
+
+LANTERN_API int64_t (LANTERN_PTR _lantern_jit_vector_IValue_size) (void* self);
+HOST_API int64_t lantern_jit_vector_IValue_size (void* self)
+{
+  int64_t ret = _lantern_jit_vector_IValue_size(self);
+  LANTERN_HOST_HANDLER;
+  return ret;
+}
+
+LANTERN_API void* (LANTERN_PTR _lantern_jit_vector_IValue_at) (void* self, int64_t index);
+HOST_API void* lantern_jit_vector_IValue_at (void* self, int64_t index)
+{
+  void* ret = _lantern_jit_vector_IValue_at(self, index);
   LANTERN_HOST_HANDLER;
   return ret;
 }
@@ -6840,12 +6944,25 @@ LOAD_SYMBOL(_lantern_vector_int64_t_new);
 LOAD_SYMBOL(_lantern_vector_double_push_back);
 LOAD_SYMBOL(_lantern_vector_int64_t_push_back);
 LOAD_SYMBOL(_lantern_string_get);
-LOAD_SYMBOL(_lantern_Tuple_delete);
+LOAD_SYMBOL(_lantern_jit_Tuple_delete);
 LOAD_SYMBOL(_lantern_IValue_from_Tuple);
 LOAD_SYMBOL(_lantern_jit_Tuple_new);
 LOAD_SYMBOL(_lantern_jit_Tuple_push_back);
 LOAD_SYMBOL(_lantern_jit_Tuple_size);
 LOAD_SYMBOL(_lantern_jit_Tuple_at);
+LOAD_SYMBOL(_lantern_jit_TensorDict_delete);
+LOAD_SYMBOL(_lantern_jit_GenericDict_delete);
+LOAD_SYMBOL(_lantern_jit_GenericList_delete);
+LOAD_SYMBOL(_lantern_jit_TensorDict_new);
+LOAD_SYMBOL(_lantern_jit_TensorDict_push_back);
+LOAD_SYMBOL(_lantern_jit_GenericDict_keys);
+LOAD_SYMBOL(_lantern_jit_GenericDict_at);
+LOAD_SYMBOL(_lantern_jit_GenericList_size);
+LOAD_SYMBOL(_lantern_jit_GenericList_at);
+LOAD_SYMBOL(_lantern_IValue_from_TensorDict);
+LOAD_SYMBOL(_lantern_jit_vector_IValue_delete);
+LOAD_SYMBOL(_lantern_jit_vector_IValue_size);
+LOAD_SYMBOL(_lantern_jit_vector_IValue_at);
   /* Autogen Symbols -- Start */
   LOAD_SYMBOL(_lantern__cast_byte_tensor_bool)
   LOAD_SYMBOL(_lantern__cast_char_tensor_bool)

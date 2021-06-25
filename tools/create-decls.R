@@ -29,12 +29,9 @@ make_load_symbols <- function(decls) {
 
 decls <- readr::read_lines(
   "
-void _lantern_Tuple_delete (void *x)
-void* _lantern_IValue_from_Tuple (void* self)
-void* _lantern_jit_Tuple_new ()
-void _lantern_jit_Tuple_push_back (void* self, void* element)
-int64_t _lantern_jit_Tuple_size (void* self)
-void* _lantern_jit_Tuple_at (void* self, int64_t index)
+void _lantern_jit_vector_IValue_delete (void* x)
+int64_t _lantern_jit_vector_IValue_size (void* self)
+void* _lantern_jit_vector_IValue_at (void* self, int64_t index)
 "  
 )
 

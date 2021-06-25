@@ -9621,6 +9621,10 @@ ivalue_test_function <- function(x) {
     .Call('_torch_ivalue_test_function', PACKAGE = 'torchpkg', x)
 }
 
+test_ivalue <- function(x) {
+    invisible(.Call('_torch_test_ivalue', PACKAGE = 'torchpkg', x))
+}
+
 cpp_lantern_configure <- function(log) {
     invisible(.Call('_torch_cpp_lantern_configure', PACKAGE = 'torchpkg', log))
 }

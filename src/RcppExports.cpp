@@ -31490,6 +31490,16 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// test_ivalue
+void test_ivalue(XPtrTorchTensorList x);
+RcppExport SEXP _torch_test_ivalue(SEXP xSEXP) {
+BEGIN_RCPP
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchTensorList >::type x(xSEXP);
+    test_ivalue(x);
+    return R_NilValue;
+END_RCPP
+}
 // cpp_lantern_configure
 void cpp_lantern_configure(int log);
 RcppExport SEXP _torch_cpp_lantern_configure(SEXP logSEXP) {
@@ -35066,6 +35076,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_torch_Tensor_slice", (DL_FUNC) &_torch_Tensor_slice, 4},
     {"_torch_Tensor_slice_put", (DL_FUNC) &_torch_Tensor_slice_put, 4},
     {"_torch_ivalue_test_function", (DL_FUNC) &_torch_ivalue_test_function, 1},
+    {"_torch_test_ivalue", (DL_FUNC) &_torch_test_ivalue, 1},
     {"_torch_cpp_lantern_configure", (DL_FUNC) &_torch_cpp_lantern_configure, 1},
     {"_torch_cpp_lantern_version", (DL_FUNC) &_torch_cpp_lantern_version, 0},
     {"_torch_cpp_lantern_init", (DL_FUNC) &_torch_cpp_lantern_init, 1},

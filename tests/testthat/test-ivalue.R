@@ -55,3 +55,9 @@ test_that("works for unamed lists", {
   x[[length(x)+1]] <- x
   expect_equal(ivalue_test_function(x), x)
 })
+
+test_that("works for dicts of tensors", {
+  x <- list(a = torch_tensor(1), b = torch_tensor(2))
+  expect_equal(ivalue_test_function(x), x)
+})
+ 

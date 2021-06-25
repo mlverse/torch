@@ -120,3 +120,59 @@ void* _lantern_jit_Tuple_at (void* self, int64_t index)
     auto self_ = reinterpret_cast<std::vector<torch::IValue>*>(self);
     return (void*) new torch::IValue(self_->at(index));
 }
+
+void* _lantern_jit_TensorDict_new ()
+{
+    return (void*) new c10::Dict<std::string, torch::Tensor>();
+}
+
+void _lantern_jit_TensorDict_push_back(void* self, void* key, void* value)
+{
+    auto self_ = reinterpret_cast<c10::Dict<std::string, torch::Tensor>*>(self);
+    self_->insert(
+        *reinterpret_cast<std::string*>(key),
+        reinterpret_cast<LanternObject<torch::Tensor>*>(value)->get()
+    );
+}
+
+void* _lantern_jit_GenericDict_keys (void* self)
+{
+    auto self_ = *reinterpret_cast<c10::impl::GenericDict*>(self);
+    std::vector<torch::IValue> out;
+    for (auto& element : self_)
+    {
+        out.push_back(element.key());
+    }
+    return (void*) new std::vector<torch::IValue>(out);
+}
+
+void* _lantern_jit_GenericDict_at (void* self, void* key)
+{
+    auto self_ = reinterpret_cast<c10::impl::GenericDict*>(self);
+    auto key_ = *reinterpret_cast<torch::IValue*>(key);
+    return (void*) new torch::IValue(self_->at(key_));
+}
+
+int64_t _lantern_jit_GenericList_size (void* self)
+{
+    auto self_ = reinterpret_cast<c10::impl::GenericList*>(self);
+    return self_->size();
+}
+
+void* _lantern_jit_GenericList_at (void* self, int64_t index)
+{
+    auto self_ = *reinterpret_cast<c10::impl::GenericList*>(self);
+    return (void*) new torch::IValue(self_[index]);
+}
+
+int64_t _lantern_jit_vector_IValue_size (void* self)
+{
+    auto self_ = reinterpret_cast<std::vector<torch::IValue>*>(self);
+    return self_->size();
+}
+
+void* _lantern_jit_vector_IValue_at (void* self, int64_t index)
+{
+    auto self_ = reinterpret_cast<std::vector<torch::IValue>*>(self);
+    return (void*) new torch::IValue(self_->at(index));
+}
