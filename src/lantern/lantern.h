@@ -667,48 +667,10 @@ HOST_API void lantern_Stack_delete (void * x)
   LANTERN_HOST_HANDLER;
 }
 
-LANTERN_API void (LANTERN_PTR _lantern_Stack_push_back_Tensor) (void* self, void* x);
-HOST_API void lantern_Stack_push_back_Tensor (void* self, void* x)
-{
-  _lantern_Stack_push_back_Tensor(self, x);
-  LANTERN_HOST_HANDLER;
-}
-
-LANTERN_API void* (LANTERN_PTR _lantern_Stack_at_Tensor) (void*self, int64_t i);
-HOST_API void * lantern_Stack_at_Tensor (void* self, int64_t i)
-{
-  void* ret = _lantern_Stack_at_Tensor(self, i);
-  LANTERN_HOST_HANDLER;
-  return ret;
-}
-
-LANTERN_API void (LANTERN_PTR _lantern_Stack_push_back_int64_t) (void* self, int64_t x);
-HOST_API void lantern_Stack_push_back_int64_t (void* self, int64_t x)
-{
-  _lantern_Stack_push_back_int64_t(self, x);
-  LANTERN_HOST_HANDLER;
-}
-
-LANTERN_API int64_t (LANTERN_PTR _lantern_Stack_at_int64_t) (void*self, int64_t i);
-HOST_API int64_t lantern_Stack_at_int64_t (void* self, int64_t i)
-{
-  int64_t ret = _lantern_Stack_at_int64_t(self, i);
-  LANTERN_HOST_HANDLER;
-  return ret;
-}
-
 LANTERN_API int64_t (LANTERN_PTR _lantern_Stack_size) (void* self);
 HOST_API int64_t lantern_Stack_size (void* self)
 {
   int64_t ret = _lantern_Stack_size(self);
-  LANTERN_HOST_HANDLER;
-  return ret;
-}
-
-LANTERN_API bool (LANTERN_PTR _lantern_Stack_at_is) (void* self, int64_t i, const char * type);
-HOST_API bool lantern_Stack_at_is (void* self, int64_t i, const char * type)
-{
-  bool ret = _lantern_Stack_at_is(self, i, type);
   LANTERN_HOST_HANDLER;
   return ret;
 }
@@ -796,21 +758,6 @@ HOST_API void lantern_JITModule_delete (void* x)
 {
   _lantern_JITModule_delete(x);
   LANTERN_HOST_HANDLER;
-}
-
-LANTERN_API void (LANTERN_PTR _lantern_Stack_push_back_TensorList) (void* self, void* x);
-HOST_API void lantern_Stack_push_back_TensorList (void* self, void* x)
-{
-  _lantern_Stack_push_back_TensorList(self, x);
-  LANTERN_HOST_HANDLER;
-}
-
-LANTERN_API void* (LANTERN_PTR _lantern_Stack_at_TensorList) (void* self, int64_t i);
-HOST_API void*lantern_Stack_at_TensorList (void* self, int64_t i)
-{
-  void* ret = _lantern_Stack_at_TensorList(self, i);
-  LANTERN_HOST_HANDLER;
-  return ret;
 }
 
 LANTERN_API void (LANTERN_PTR _lantern_TraceableFunction_delete) (void* x);
@@ -6881,12 +6828,7 @@ bool lanternInit(const std::string &libPath, std::string *pError)
   LOAD_SYMBOL(_trace_r_nn_module);
   LOAD_SYMBOL(_lantern_Stack_delete);
   LOAD_SYMBOL(_lantern_Stack_new);
-  LOAD_SYMBOL(_lantern_Stack_push_back_Tensor);
-  LOAD_SYMBOL(_lantern_Stack_at_Tensor);
-  LOAD_SYMBOL(_lantern_Stack_push_back_int64_t);
-  LOAD_SYMBOL(_lantern_Stack_at_int64_t);
   LOAD_SYMBOL(_lantern_Stack_size);
-  LOAD_SYMBOL(_lantern_Stack_at_is);
   LOAD_SYMBOL(_lantern_create_traceable_fun);
   LOAD_SYMBOL(_lantern_trace_fn);
   LOAD_SYMBOL(_lantern_CompilationUnit_new);
@@ -6898,8 +6840,6 @@ bool lanternInit(const std::string &libPath, std::string *pError)
   LOAD_SYMBOL(_lantern_jit_load);
   LOAD_SYMBOL(_lantern_call_jit_script);
   LOAD_SYMBOL(_lantern_JITModule_delete);
-  LOAD_SYMBOL(_lantern_Stack_push_back_TensorList);
-  LOAD_SYMBOL(_lantern_Stack_at_TensorList);
   LOAD_SYMBOL(_lantern_TraceableFunction_delete);
   LOAD_SYMBOL(_set_lantern_allocator);
   LOAD_SYMBOL(_lantern_vector_bool_delete);
