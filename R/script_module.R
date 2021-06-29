@@ -135,11 +135,10 @@ ScriptMethod <- R7Class(
 
 new_script_method <- function(ptr) {
   f <- function(...) {
-    inputs <- convert_inputs_to_jit_stack(...)
+    out <- cpp_call_jit_script(ptr, list(...))
     # calling the traced function always returns a stack
     # with a single element.
-    out <- cpp_call_jit_script(ptr, inputs$ptr)
-    convert_outputs_to_r(out)
+    out[[1]]
   }
   class(f) <- c("script_method", "nn_module")
   attr(f, "method") <- ptr
