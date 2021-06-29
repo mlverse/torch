@@ -36,7 +36,7 @@ Rcpp::XPtr<XPtrTorchCompilationUnit> cpp_jit_compilation_unit ()
 
 // [[Rcpp::export]]
 XPtrTorchStack cpp_call_traced_fn (Rcpp::XPtr<XPtrTorch> fn, 
-                                               XPtrTorchStack inputs)
+                                   XPtrTorchStack inputs)
 {
   XPtrTorchStack out = lantern_call_traced_fn(fn->get(), inputs.get());
   return out;

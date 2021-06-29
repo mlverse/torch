@@ -1065,10 +1065,14 @@ XPtrTorchIValue XPtrTorchIValue_from_SEXP (SEXP x)
     // preserve the names
     if (rlang_is_named(x))
     {
-      // named list of tensors! we will convert to a Dict
-      if (std::all_of(x_.cbegin(), x_.cend(), [](SEXP x){ return is_tensor(x); }))
+      
+      if (!Rf_inherits(x, "jit_tuple"))
       {
-        return XPtrTorchIValue(lantern_IValue_from_TensorDict(Rcpp::as<XPtrTorchTensorDict>(x).get()));
+        // named list of tensors! we will convert to a Dict
+        if (std::all_of(x_.cbegin(), x_.cend(), [](SEXP x){ return is_tensor(x); }))
+        {
+          return XPtrTorchIValue(lantern_IValue_from_TensorDict(Rcpp::as<XPtrTorchTensorDict>(x).get()));
+        }
       }
       
       // named list of arbitrary types. converting to a NamedTuple
@@ -1077,9 +1081,12 @@ XPtrTorchIValue XPtrTorchIValue_from_SEXP (SEXP x)
     else
     {
       
-      if (std::all_of(x_.cbegin(), x_.cend(), [](SEXP x){ return is_tensor(x); }))
+      if (!Rf_inherits(x, "jit_tuple"))
       {
-        return XPtrTorchIValue(lantern_IValue_from_TensorList(Rcpp::as<XPtrTorchTensorList>(x).get()));
+        if (std::all_of(x_.cbegin(), x_.cend(), [](SEXP x){ return is_tensor(x); }))
+        {
+          return XPtrTorchIValue(lantern_IValue_from_TensorList(Rcpp::as<XPtrTorchTensorList>(x).get()));
+        }
       }
       
       // it's not a list full of tensors so we create a tuple
