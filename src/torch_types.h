@@ -231,6 +231,13 @@ public:
   //operator SEXP () const;
 };
 
+class XPtrTorchFunctionPtr : public XPtrTorch {
+public:
+  XPtrTorchFunctionPtr (void* x) : XPtrTorch(x, lantern_FunctionPtr_delete) {}
+  explicit XPtrTorchFunctionPtr (std::shared_ptr<void> x) : XPtrTorch(x) {};
+  XPtrTorchFunctionPtr (const XPtrTorchFunctionPtr& x) : XPtrTorch(x.get_shared()) {};
+};
+
 class XPtrTorchIndexIntArrayRef : public XPtrTorch {
 public:
   XPtrTorchIndexIntArrayRef () : XPtrTorch{NULL} {};

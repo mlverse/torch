@@ -364,4 +364,11 @@ void _lantern_NamedTupleHelper_delete (void* x)
   LANTERN_FUNCTION_END_VOID
 }
 
+void _lantern_FunctionPtr_delete (void* x)
+{
+  LANTERN_FUNCTION_START
+  lantern_delete<torch::jit::Function*>(x);
+  LANTERN_FUNCTION_END_VOID
+}
+
 

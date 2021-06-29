@@ -32429,7 +32429,7 @@ BEGIN_RCPP
 END_RCPP
 }
 // cpp_trace_function
-Rcpp::XPtr<XPtrTorch> cpp_trace_function(Rcpp::Function fn, XPtrTorchStack inputs, Rcpp::XPtr<XPtrTorchCompilationUnit> compilation_unit, bool strict);
+Rcpp::XPtr<XPtrTorchFunctionPtr> cpp_trace_function(Rcpp::Function fn, XPtrTorchStack inputs, Rcpp::XPtr<XPtrTorchCompilationUnit> compilation_unit, bool strict);
 RcppExport SEXP _torch_cpp_trace_function(SEXP fnSEXP, SEXP inputsSEXP, SEXP compilation_unitSEXP, SEXP strictSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
@@ -32443,11 +32443,11 @@ BEGIN_RCPP
 END_RCPP
 }
 // cpp_save_traced_fn
-void cpp_save_traced_fn(Rcpp::XPtr<XPtrTorch> fn, std::string filename);
+void cpp_save_traced_fn(Rcpp::XPtr<XPtrTorchFunctionPtr> fn, std::string filename);
 RcppExport SEXP _torch_cpp_save_traced_fn(SEXP fnSEXP, SEXP filenameSEXP) {
 BEGIN_RCPP
     Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< Rcpp::XPtr<XPtrTorch> >::type fn(fnSEXP);
+    Rcpp::traits::input_parameter< Rcpp::XPtr<XPtrTorchFunctionPtr> >::type fn(fnSEXP);
     Rcpp::traits::input_parameter< std::string >::type filename(filenameSEXP);
     cpp_save_traced_fn(fn, filename);
     return R_NilValue;
@@ -32464,24 +32464,24 @@ BEGIN_RCPP
 END_RCPP
 }
 // cpp_call_traced_fn
-XPtrTorchStack cpp_call_traced_fn(Rcpp::XPtr<XPtrTorch> fn, XPtrTorchStack inputs);
+XPtrTorchStack cpp_call_traced_fn(Rcpp::XPtr<XPtrTorchFunctionPtr> fn, XPtrTorchStack inputs);
 RcppExport SEXP _torch_cpp_call_traced_fn(SEXP fnSEXP, SEXP inputsSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< Rcpp::XPtr<XPtrTorch> >::type fn(fnSEXP);
+    Rcpp::traits::input_parameter< Rcpp::XPtr<XPtrTorchFunctionPtr> >::type fn(fnSEXP);
     Rcpp::traits::input_parameter< XPtrTorchStack >::type inputs(inputsSEXP);
     rcpp_result_gen = Rcpp::wrap(cpp_call_traced_fn(fn, inputs));
     return rcpp_result_gen;
 END_RCPP
 }
 // cpp_traced_fn_graph_print
-std::string cpp_traced_fn_graph_print(Rcpp::XPtr<XPtrTorch> fn);
+std::string cpp_traced_fn_graph_print(Rcpp::XPtr<XPtrTorchFunctionPtr> fn);
 RcppExport SEXP _torch_cpp_traced_fn_graph_print(SEXP fnSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< Rcpp::XPtr<XPtrTorch> >::type fn(fnSEXP);
+    Rcpp::traits::input_parameter< Rcpp::XPtr<XPtrTorchFunctionPtr> >::type fn(fnSEXP);
     rcpp_result_gen = Rcpp::wrap(cpp_traced_fn_graph_print(fn));
     return rcpp_result_gen;
 END_RCPP

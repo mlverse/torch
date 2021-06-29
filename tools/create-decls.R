@@ -29,7 +29,7 @@ make_load_symbols <- function(decls) {
 
 decls <- readr::read_lines(
   "
-void _lantern_Stack_push_back_IValue (void* self, void* x)
+void _lantern_FunctionPtr_delete (void* x)
 "  
 )
 
