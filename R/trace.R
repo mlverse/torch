@@ -42,6 +42,11 @@
 #'   `example_inputs` may also be a single Tensor in which case it is automatically 
 #'   wrapped in a list. Note that `...` **can not** be named, and the order is 
 #'   respected.
+#' @param strict run the tracer in a strict mode or not (default: `TRUE`). Only 
+#'   turn this off when you want the tracer to record your mutable container types 
+#'   (currently list/dict) and you are sure that the container you are using in 
+#'   your problem is a constant structure and does not get used as control flow 
+#'   (`if`, `for`) conditions.
 #' 
 #' @returns An `script_function`
 #' 
@@ -54,10 +59,10 @@
 #' tr_fn(input)
 #'
 #' @export
-jit_trace <- function(func, ...) {
+jit_trace <- function(func, ..., strict = TRUE) {
   tr_fn <- make_traceable_fn(func)
   ellipsis::check_dots_unnamed() # we do not support named arguments
-  ptr <- cpp_trace_function(tr_fn, list(...), .compilation_unit)
+  ptr <- cpp_trace_function(tr_fn, list(...), .compilation_unit, strict)
   new_script_function(ptr)
 }
 

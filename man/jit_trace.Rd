@@ -4,7 +4,7 @@
 \alias{jit_trace}
 \title{Trace a function and return an executable \code{script_function}.}
 \usage{
-jit_trace(func, ...)
+jit_trace(func, ..., strict = TRUE)
 }
 \arguments{
 \item{func}{An R function that will be run with \code{example_inputs}. func arguments
@@ -16,6 +16,12 @@ shapes assuming the traced operations support those types and shapes.
 \code{example_inputs} may also be a single Tensor in which case it is automatically
 wrapped in a list. Note that \code{...} \strong{can not} be named, and the order is
 respected.}
+
+\item{strict}{run the tracer in a strict mode or not (default: \code{TRUE}). Only
+turn this off when you want the tracer to record your mutable container types
+(currently list/dict) and you are sure that the container you are using in
+your problem is a constant structure and does not get used as control flow
+(\code{if}, \code{for}) conditions.}
 }
 \value{
 An \code{script_function}

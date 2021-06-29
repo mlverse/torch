@@ -5,7 +5,8 @@ void* rcpp_call_hook (void* x, void* hook);
 
 // [[Rcpp::export]]
 Rcpp::XPtr<XPtrTorch> cpp_trace_function (Rcpp::Function fn, XPtrTorchStack inputs,
-                        Rcpp::XPtr<XPtrTorchCompilationUnit> compilation_unit)
+                        Rcpp::XPtr<XPtrTorchCompilationUnit> compilation_unit,
+                        bool strict = true)
 {
   
   auto output = XPtrTorchStack(lantern_Stack_new());
@@ -16,7 +17,7 @@ Rcpp::XPtr<XPtrTorch> cpp_trace_function (Rcpp::Function fn, XPtrTorchStack inpu
   };
   
   XPtrTorchTraceableFunction traceable_fn = lantern_create_traceable_fun(&rcpp_call_hook, (void*) &r_fn);
-  XPtrTorch tr_fn = lantern_trace_fn(traceable_fn.get(), inputs.get(), compilation_unit->get());
+  XPtrTorch tr_fn = lantern_trace_fn(traceable_fn.get(), inputs.get(), compilation_unit->get(), strict);
   
   return make_xptr<XPtrTorch>(tr_fn);
 }

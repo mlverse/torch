@@ -32439,15 +32439,16 @@ BEGIN_RCPP
 END_RCPP
 }
 // cpp_trace_function
-Rcpp::XPtr<XPtrTorch> cpp_trace_function(Rcpp::Function fn, XPtrTorchStack inputs, Rcpp::XPtr<XPtrTorchCompilationUnit> compilation_unit);
-RcppExport SEXP _torch_cpp_trace_function(SEXP fnSEXP, SEXP inputsSEXP, SEXP compilation_unitSEXP) {
+Rcpp::XPtr<XPtrTorch> cpp_trace_function(Rcpp::Function fn, XPtrTorchStack inputs, Rcpp::XPtr<XPtrTorchCompilationUnit> compilation_unit, bool strict);
+RcppExport SEXP _torch_cpp_trace_function(SEXP fnSEXP, SEXP inputsSEXP, SEXP compilation_unitSEXP, SEXP strictSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< Rcpp::Function >::type fn(fnSEXP);
     Rcpp::traits::input_parameter< XPtrTorchStack >::type inputs(inputsSEXP);
     Rcpp::traits::input_parameter< Rcpp::XPtr<XPtrTorchCompilationUnit> >::type compilation_unit(compilation_unitSEXP);
-    rcpp_result_gen = Rcpp::wrap(cpp_trace_function(fn, inputs, compilation_unit));
+    Rcpp::traits::input_parameter< bool >::type strict(strictSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_trace_function(fn, inputs, compilation_unit, strict));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -35118,7 +35119,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_torch_cpp_torch_tensor_options", (DL_FUNC) &_torch_cpp_torch_tensor_options, 5},
     {"_torch_cpp_torch_tensor_options_print", (DL_FUNC) &_torch_cpp_torch_tensor_options_print, 1},
     {"_torch_test_fun_hello", (DL_FUNC) &_torch_test_fun_hello, 1},
-    {"_torch_cpp_trace_function", (DL_FUNC) &_torch_cpp_trace_function, 3},
+    {"_torch_cpp_trace_function", (DL_FUNC) &_torch_cpp_trace_function, 4},
     {"_torch_cpp_save_traced_fn", (DL_FUNC) &_torch_cpp_save_traced_fn, 2},
     {"_torch_cpp_jit_compilation_unit", (DL_FUNC) &_torch_cpp_jit_compilation_unit, 0},
     {"_torch_cpp_call_traced_fn", (DL_FUNC) &_torch_cpp_call_traced_fn, 2},

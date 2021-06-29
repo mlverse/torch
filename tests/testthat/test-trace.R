@@ -143,10 +143,10 @@ test_that("fn can take more than 1 argument", {
   
 })
 
-test_that("can have named inputs", {
+test_that("can have named inputs and outputs", {
   
   fn <- function(x) { 
-    list(x$t1, x$t2)
+    list(x = x$t1, y = x$t2)
   } 
   
   x <- list(
@@ -154,7 +154,7 @@ test_that("can have named inputs", {
     t2 = torch_tensor(2)
   ) 
   
-  tr_fn <- jit_trace(fn, x)
+  tr_fn <- jit_trace(fn, x, strict = FALSE)
   
   expect_equal(
     tr_fn(x),

@@ -9961,8 +9961,8 @@ test_fun_hello <- function(x) {
     .Call('_torch_test_fun_hello', PACKAGE = 'torchpkg', x)
 }
 
-cpp_trace_function <- function(fn, inputs, compilation_unit) {
-    .Call('_torch_cpp_trace_function', PACKAGE = 'torchpkg', fn, inputs, compilation_unit)
+cpp_trace_function <- function(fn, inputs, compilation_unit, strict = TRUE) {
+    .Call('_torch_cpp_trace_function', PACKAGE = 'torchpkg', fn, inputs, compilation_unit, strict)
 }
 
 cpp_save_traced_fn <- function(fn, filename) {
