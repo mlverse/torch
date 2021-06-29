@@ -32137,6 +32137,17 @@ BEGIN_RCPP
     return R_NilValue;
 END_RCPP
 }
+// test_stack
+XPtrTorchStack test_stack(XPtrTorchStack x);
+RcppExport SEXP _torch_test_stack(SEXP xSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchStack >::type x(xSEXP);
+    rcpp_result_gen = Rcpp::wrap(test_stack(x));
+    return rcpp_result_gen;
+END_RCPP
+}
 // cpp_stack_to_r
 Rcpp::List cpp_stack_to_r(Rcpp::XPtr<XPtrTorchStack> self);
 RcppExport SEXP _torch_cpp_stack_to_r(SEXP selfSEXP) {
@@ -32482,13 +32493,13 @@ BEGIN_RCPP
 END_RCPP
 }
 // cpp_trace_function
-Rcpp::XPtr<XPtrTorch> cpp_trace_function(Rcpp::Function fn, Rcpp::XPtr<XPtrTorchStack> inputs, Rcpp::XPtr<XPtrTorchCompilationUnit> compilation_unit);
+Rcpp::XPtr<XPtrTorch> cpp_trace_function(Rcpp::Function fn, XPtrTorchStack inputs, Rcpp::XPtr<XPtrTorchCompilationUnit> compilation_unit);
 RcppExport SEXP _torch_cpp_trace_function(SEXP fnSEXP, SEXP inputsSEXP, SEXP compilation_unitSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< Rcpp::Function >::type fn(fnSEXP);
-    Rcpp::traits::input_parameter< Rcpp::XPtr<XPtrTorchStack> >::type inputs(inputsSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchStack >::type inputs(inputsSEXP);
     Rcpp::traits::input_parameter< Rcpp::XPtr<XPtrTorchCompilationUnit> >::type compilation_unit(compilation_unitSEXP);
     rcpp_result_gen = Rcpp::wrap(cpp_trace_function(fn, inputs, compilation_unit));
     return rcpp_result_gen;
@@ -32516,13 +32527,13 @@ BEGIN_RCPP
 END_RCPP
 }
 // cpp_call_traced_fn
-Rcpp::XPtr<XPtrTorchStack> cpp_call_traced_fn(Rcpp::XPtr<XPtrTorch> fn, Rcpp::XPtr<XPtrTorchStack> inputs);
+XPtrTorchStack cpp_call_traced_fn(Rcpp::XPtr<XPtrTorch> fn, XPtrTorchStack inputs);
 RcppExport SEXP _torch_cpp_call_traced_fn(SEXP fnSEXP, SEXP inputsSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< Rcpp::XPtr<XPtrTorch> >::type fn(fnSEXP);
-    Rcpp::traits::input_parameter< Rcpp::XPtr<XPtrTorchStack> >::type inputs(inputsSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchStack >::type inputs(inputsSEXP);
     rcpp_result_gen = Rcpp::wrap(cpp_call_traced_fn(fn, inputs));
     return rcpp_result_gen;
 END_RCPP
@@ -32550,13 +32561,13 @@ BEGIN_RCPP
 END_RCPP
 }
 // cpp_call_jit_script
-Rcpp::XPtr<XPtrTorchStack> cpp_call_jit_script(Rcpp::XPtr<XPtrTorchJITModule> module, Rcpp::XPtr<XPtrTorchStack> inputs);
+XPtrTorchStack cpp_call_jit_script(Rcpp::XPtr<XPtrTorchJITModule> module, XPtrTorchStack inputs);
 RcppExport SEXP _torch_cpp_call_jit_script(SEXP moduleSEXP, SEXP inputsSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< Rcpp::XPtr<XPtrTorchJITModule> >::type module(moduleSEXP);
-    Rcpp::traits::input_parameter< Rcpp::XPtr<XPtrTorchStack> >::type inputs(inputsSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchStack >::type inputs(inputsSEXP);
     rcpp_result_gen = Rcpp::wrap(cpp_call_jit_script(module, inputs));
     return rcpp_result_gen;
 END_RCPP
@@ -35135,6 +35146,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_torch_cpp_stack_push_back_Tensor", (DL_FUNC) &_torch_cpp_stack_push_back_Tensor, 2},
     {"_torch_cpp_stack_push_back_int64_t", (DL_FUNC) &_torch_cpp_stack_push_back_int64_t, 2},
     {"_torch_cpp_stack_push_back_TensorList", (DL_FUNC) &_torch_cpp_stack_push_back_TensorList, 2},
+    {"_torch_test_stack", (DL_FUNC) &_torch_test_stack, 1},
     {"_torch_cpp_stack_to_r", (DL_FUNC) &_torch_cpp_stack_to_r, 1},
     {"_torch_cpp_Tensor_storage", (DL_FUNC) &_torch_cpp_Tensor_storage, 1},
     {"_torch_cpp_Tensor_has_storage", (DL_FUNC) &_torch_cpp_Tensor_has_storage, 1},

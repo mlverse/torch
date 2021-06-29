@@ -76,6 +76,15 @@ void _lantern_Stack_push_back_int64_t (void* self, int64_t x)
     LANTERN_FUNCTION_END_VOID;
 }
 
+void _lantern_Stack_push_back_IValue (void* self, void* x)
+{
+    LANTERN_FUNCTION_START;
+    reinterpret_cast<LanternObject<torch::jit::Stack> *>(self)->get().push_back(
+        *reinterpret_cast<torch::IValue*>(x)
+    );
+    LANTERN_FUNCTION_END_VOID;
+}
+
 void * _lantern_Stack_at_Tensor (void* self, int64_t i)
 {
     LANTERN_FUNCTION_START;

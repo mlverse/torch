@@ -4,18 +4,19 @@
 void* rcpp_call_hook (void* x, void* hook);
 
 // [[Rcpp::export]]
-Rcpp::XPtr<XPtrTorch> cpp_trace_function (Rcpp::Function fn, Rcpp::XPtr<XPtrTorchStack> inputs,
+Rcpp::XPtr<XPtrTorch> cpp_trace_function (Rcpp::Function fn, XPtrTorchStack inputs,
                         Rcpp::XPtr<XPtrTorchCompilationUnit> compilation_unit)
 {
   
-  std::function<void*(void*)> r_fn = [&fn](void* inputs) {
-    auto inputs_ = make_xptr<XPtrTorchStack>(inputs);
-    auto out = Rcpp::as<Rcpp::XPtr<XPtrTorchStack>>(fn(inputs_));
-    return out->get();
+  auto output = XPtrTorchStack(lantern_Stack_new());
+  std::function<void*(void*)> r_fn = [&fn, &output](void* inputs) {
+    auto inputs_ = XPtrTorchStack(inputs);
+    output = Rcpp::as<XPtrTorchStack>(fn(inputs_));
+    return output.get();
   };
   
   XPtrTorchTraceableFunction traceable_fn = lantern_create_traceable_fun(&rcpp_call_hook, (void*) &r_fn);
-  XPtrTorch tr_fn = lantern_trace_fn(traceable_fn.get(), inputs->get(), compilation_unit->get());
+  XPtrTorch tr_fn = lantern_trace_fn(traceable_fn.get(), inputs.get(), compilation_unit->get());
   
   return make_xptr<XPtrTorch>(tr_fn);
 }
@@ -33,11 +34,11 @@ Rcpp::XPtr<XPtrTorchCompilationUnit> cpp_jit_compilation_unit ()
 }
 
 // [[Rcpp::export]]
-Rcpp::XPtr<XPtrTorchStack> cpp_call_traced_fn (Rcpp::XPtr<XPtrTorch> fn, 
-                                               Rcpp::XPtr<XPtrTorchStack> inputs)
+XPtrTorchStack cpp_call_traced_fn (Rcpp::XPtr<XPtrTorch> fn, 
+                                               XPtrTorchStack inputs)
 {
-  XPtrTorchStack out = lantern_call_traced_fn(fn->get(), inputs->get());
-  return make_xptr<XPtrTorchStack>(out);
+  XPtrTorchStack out = lantern_call_traced_fn(fn->get(), inputs.get());
+  return out;
 }
 
 // [[Rcpp::export]]
@@ -56,9 +57,9 @@ XPtrTorchScriptModule cpp_jit_load (std::string path)
 }
 
 // [[Rcpp::export]]
-Rcpp::XPtr<XPtrTorchStack> cpp_call_jit_script (Rcpp::XPtr<XPtrTorchJITModule> module, 
-                                                Rcpp::XPtr<XPtrTorchStack> inputs)
+XPtrTorchStack cpp_call_jit_script (Rcpp::XPtr<XPtrTorchJITModule> module, 
+                                                XPtrTorchStack inputs)
 {
-  XPtrTorchStack out = lantern_call_jit_script(module->get(), inputs->get());
-  return make_xptr<XPtrTorchStack>(out);
+  XPtrTorchStack out = lantern_call_jit_script(module->get(), inputs.get());
+  return out;
 }

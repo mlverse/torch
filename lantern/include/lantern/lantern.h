@@ -1802,6 +1802,14 @@ HOST_API void lantern_NamedTupleHelper_delete (void* x)
   
 }
 
+LANTERN_API void (LANTERN_PTR _lantern_Stack_push_back_IValue) (void* self, void* x);
+HOST_API void lantern_Stack_push_back_IValue (void* self, void* x)
+{
+   _lantern_Stack_push_back_IValue(self, x);
+  LANTERN_HOST_HANDLER;
+  
+}
+
   /* Autogen Headers -- Start */
   LANTERN_API void* (LANTERN_PTR _lantern__cast_byte_tensor_bool)(void* self, void* non_blocking);
   HOST_API void* lantern__cast_byte_tensor_bool(void* self, void* non_blocking) { void* ret = _lantern__cast_byte_tensor_bool(self, non_blocking); LANTERN_HOST_HANDLER return ret; }
@@ -7017,6 +7025,7 @@ LOAD_SYMBOL(_lantern_jit_NamedTupleHelper_keys);
 LOAD_SYMBOL(_lantern_jit_NamedTupleHelper_elements);
 LOAD_SYMBOL(_lantern_IValue_from_NamedTuple);
 LOAD_SYMBOL(_lantern_NamedTupleHelper_delete);
+LOAD_SYMBOL(_lantern_Stack_push_back_IValue);
   /* Autogen Symbols -- Start */
   LOAD_SYMBOL(_lantern__cast_byte_tensor_bool)
   LOAD_SYMBOL(_lantern__cast_char_tensor_bool)

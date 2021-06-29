@@ -109,11 +109,11 @@ nn_ScriptModule <- R6::R6Class(
 
 new_script_module <- function(ptr) {
   f <- function(...) {
-    inputs <- convert_inputs_to_jit_stack(...)
+    inputs <- list(...)
+    out <- cpp_call_jit_script(ptr, inputs)
     # calling the traced function always returns a stack
     # with a single element.
-    out <- cpp_call_jit_script(ptr, inputs$ptr)
-    convert_outputs_to_r(out)
+    out[[1]]
   }
   class(f) <- c("script_module", "nn_module")
   attr(f, "module") <- nn_ScriptModule$new(ptr = ptr)

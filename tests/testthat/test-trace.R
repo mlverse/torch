@@ -95,9 +95,7 @@ test_that("errors gracefully when passing unsupported inputs", {
   }
   
   expect_error(
-    jit_trace(fn, "a"),
-    class = "runtime_error",
-    regexp = "Unsupported"
+    jit_trace(fn, "a")
   )
   
 })
@@ -141,6 +139,26 @@ test_that("fn can take more than 1 argument", {
   
   expect_error(
     tr_fn <- jit_trace(fn, x = x, y = y)  
+  )
+  
+})
+
+test_that("can have named inputs", {
+  
+  fn <- function(x) { 
+    list(x$t1, x$t2)
+  } 
+  
+  x <- list(
+    t1 = torch_tensor(1), 
+    t2 = torch_tensor(2)
+  ) 
+  
+  tr_fn <- jit_trace(fn, x)
+  
+  expect_equal(
+    tr_fn(x),
+    fn(x)
   )
   
 })

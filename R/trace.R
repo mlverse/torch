@@ -57,8 +57,7 @@
 jit_trace <- function(func, ...) {
   tr_fn <- make_traceable_fn(func)
   ellipsis::check_dots_unnamed() # we do not support named arguments
-  ex_inp <- torch_jit_stack(...)
-  ptr <- cpp_trace_function(tr_fn, ex_inp$ptr, .compilation_unit)
+  ptr <- cpp_trace_function(tr_fn, list(...), .compilation_unit)
   new_script_function(ptr)
 }
 
@@ -131,25 +130,13 @@ GraphFunction <- R6::R6Class(
   )
 )
 
-convert_inputs_to_jit_stack <- function(...) {
-  # inputs to the traced function must be a stack
-  inputs <- torch_jit_stack(...)
-  inputs
-}
-
-convert_outputs_to_r <- function(out) {
-  # post processs the output
-  out <- Stack$new(ptr = out)$to_r()
-  out[[1]] # always return a single thing!
-}
-
 new_script_function <- function(ptr) {
   f <- function(...) {
-    inputs <- convert_inputs_to_jit_stack(...)
+    inputs <- list(...)
+    out <- cpp_call_traced_fn(ptr, inputs)
     # calling the traced function always returns a stack
     # with a single element.
-    out <- cpp_call_traced_fn(ptr, inputs$ptr)
-    convert_outputs_to_r(out)
+    out[[1]]
   }
   class(f) <- "script_function"
   attr(f, "ScriptFunction") <- ScriptFunction$new(ptr = ptr)
@@ -170,11 +157,8 @@ print.script_function <- function(x, ...) {
 # a torch::jit::Stack ptr and returns a torch::jit::Stack ptr.
 make_traceable_fn <- function(fn) {
   function(inputs) {
-    r_inputs <- Stack$new(ptr = inputs)$to_r()
-    r_out <- do.call(fn, r_inputs)
-    s_out <- Stack$new()
-    s_out$push_back(r_out)
-    s_out$ptr
+    out <- do.call(fn, inputs)
+    list(out)
   }
 }
 

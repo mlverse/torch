@@ -9857,6 +9857,10 @@ cpp_stack_push_back_TensorList <- function(self, x) {
     invisible(.Call('_torch_cpp_stack_push_back_TensorList', PACKAGE = 'torchpkg', self, x))
 }
 
+test_stack <- function(x) {
+    .Call('_torch_test_stack', PACKAGE = 'torchpkg', x)
+}
+
 cpp_stack_to_r <- function(self) {
     .Call('_torch_cpp_stack_to_r', PACKAGE = 'torchpkg', self)
 }

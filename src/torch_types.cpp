@@ -280,8 +280,13 @@ XPtrTorchvector_double::operator SEXP() const
 
 XPtrTorchStack::operator SEXP () const 
 {
-
-  
+  int64_t size = lantern_Stack_size(this->get());
+  Rcpp::List output;
+  for (int64_t i = 0; i < size; i++)
+  {
+    output.push_back(XPtrTorchIValue(lantern_Stack_at(this->get(), i)));
+  }
+  return output;
 }
 
 XPtrTorchIValue::operator SEXP () const
@@ -1151,6 +1156,23 @@ XPtrTorchNamedTupleHelper XPtrTorchNamedTupleHelper_from_SEXP (SEXP x)
 
 XPtrTorchNamedTupleHelper::XPtrTorchNamedTupleHelper (SEXP x) :
   XPtrTorchNamedTupleHelper{XPtrTorchNamedTupleHelper_from_SEXP(x)} {}
+
+XPtrTorchStack XPtrTorchStack_from_SEXP (SEXP x) 
+{
+  auto list = Rcpp::as<Rcpp::List>(x);
+  XPtrTorchStack output = lantern_Stack_new();
+  for (const auto& el : list)
+  {
+    lantern_Stack_push_back_IValue(
+      output.get(),
+      Rcpp::as<XPtrTorchIValue>(el).get()
+    );
+  }
+  return output;
+}
+
+XPtrTorchStack::XPtrTorchStack (SEXP x) :
+  XPtrTorchStack{XPtrTorchStack_from_SEXP(x)} {}
 
 XPtrTorchint64_t2::XPtrTorchint64_t2 (SEXP x_)
 {

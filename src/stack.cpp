@@ -51,6 +51,12 @@ XPtrTorchTensorList cpp_stack_at_TensorList (Rcpp::XPtr<XPtrTorchStack> self,
 }
 
 // [[Rcpp::export]]
+XPtrTorchStack test_stack (XPtrTorchStack x)
+{
+  return x;
+}
+
+// [[Rcpp::export]]
 Rcpp::List cpp_stack_to_r (Rcpp::XPtr<XPtrTorchStack> self) 
 {
 
