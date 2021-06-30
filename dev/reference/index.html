@@ -83,7 +83,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">torch</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.3.0.9004</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.4.0.9000</span>
       </span>
     </div>
 
@@ -2275,6 +2275,13 @@
           <p><code><a href="torch_where.html">torch_where()</a></code> </p>
         </td>
         <td><p>Where</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="broadcast_all.html">broadcast_all()</a></code> </p>
+        </td>
+        <td><p>Given a list of values (possibly containing numbers), returns a list where each
+value is broadcasted based on the following rules:</p></td>
       </tr>
     </tbody><tbody>
       <tr>
@@ -3614,6 +3621,12 @@ planes.</p></td>
       <tr>
         
         <td>
+          <p><code><a href="optimizer.html">optimizer()</a></code> </p>
+        </td>
+        <td><p>Creates a custom optimizer</p></td>
+      </tr><tr>
+        
+        <td>
           <p><code><a href="optim_adadelta.html">optim_adadelta()</a></code> </p>
         </td>
         <td><p>Adadelta optimizer</p></td>
@@ -3800,6 +3813,12 @@ single- or multi-process iterators over the dataset.</p></td>
       <tr>
         
         <td>
+          <p><code><a href="Distribution.html">Distribution</a></code> </p>
+        </td>
+        <td><p>Generic R6 class representing distributions</p></td>
+      </tr><tr>
+        
+        <td>
           <p><code><a href="distr_bernoulli.html">distr_bernoulli()</a></code> </p>
         </td>
         <td><p>Creates a Bernoulli distribution parameterized by <code>probs</code>
@@ -3851,6 +3870,12 @@ This is exactly equivalent to <code>distr_gamma(alpha=0.5*df, beta=0.5)</code></
           <p><code><a href="distr_poisson.html">distr_poisson()</a></code> </p>
         </td>
         <td><p>Creates a Poisson distribution parameterized by <code>rate</code>, the rate parameter.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="Constraint.html">Constraint</a></code> </p>
+        </td>
+        <td><p>Abstract base class for constraints.</p></td>
       </tr>
     </tbody><tbody>
       <tr>
@@ -3972,6 +3997,37 @@ This is exactly equivalent to <code>distr_gamma(alpha=0.5*df, beta=0.5)</code></
     </tbody><tbody>
       <tr>
         <th colspan="2">
+          <h2 id="section-backends" class="hasAnchor"><a href="#section-backends" class="anchor"></a>Backends</h2>
+          <p class="section-desc"></p>
+        </th>
+      </tr>
+      
+      
+    </tbody><tbody>
+      
+      
+      <tr>
+        
+        <td>
+          <p><code><a href="backends_mkl_is_available.html">backends_mkl_is_available()</a></code> </p>
+        </td>
+        <td><p>MKL is available</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="backends_mkldnn_is_available.html">backends_mkldnn_is_available()</a></code> </p>
+        </td>
+        <td><p>MKLDNN is available</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="backends_openmp_is_available.html">backends_openmp_is_available()</a></code> </p>
+        </td>
+        <td><p>OpenMP is available</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
           <h2 id="section-installation" class="hasAnchor"><a href="#section-installation" class="anchor"></a>Installation</h2>
           <p class="section-desc"></p>
         </th>
@@ -3987,6 +4043,18 @@ This is exactly equivalent to <code>distr_gamma(alpha=0.5*df, beta=0.5)</code></
           <p><code><a href="install_torch.html">install_torch()</a></code> </p>
         </td>
         <td><p>Install Torch</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="install_torch_from_file.html">install_torch_from_file()</a></code> </p>
+        </td>
+        <td><p>Install Torch from files</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="get_install_libs_url.html">get_install_libs_url()</a></code> </p>
+        </td>
+        <td><p>List of files to download</p></td>
       </tr>
     </tbody>
     </table>
