@@ -1055,6 +1055,11 @@ XPtrTorchIValue XPtrTorchIValue_from_SEXP (SEXP x)
     return XPtrTorchIValue(lantern_IValue_from_Tensor(Rcpp::as<XPtrTorchTensor>(x).get()));
   }
   
+  if (x == R_NilValue)
+  {
+    return XPtrTorchIValue(lantern_IValue_from_None());
+  }
+  
   // is a list
   if (TYPEOF(x) == VECSXP)
   {

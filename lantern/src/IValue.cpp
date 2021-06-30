@@ -221,6 +221,11 @@ void* _lantern_IValue_from_TensorList (void* self)
     return (void*) new torch::IValue(self_->get());
 }
 
+void* _lantern_IValue_from_None () 
+{
+    return (void*) new torch::IValue(c10::nullopt);
+}
+
 void* _lantern_IValue_Tuple (void* self)
 {
     auto self_ = reinterpret_cast<torch::jit::IValue *>(self);

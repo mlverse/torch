@@ -66,7 +66,6 @@ test_that("works for named list of different types", {
   expect_equal(ivalue_test_function(x), x)
 })
  
-
 test_that("works for named tuples", {
   x <- list(a = torch_tensor(1), b = torch_tensor(2))
   class(x) <- "jit_tuple"
@@ -77,4 +76,8 @@ test_that("works for tuples", {
   x <- list(torch_tensor(1), torch_tensor(2))
   class(x) <- "jit_tuple"
   expect_equal(ivalue_test_function(x), unclass(x))
+})
+
+test_that("works with NULL", {
+  expect_equal(ivalue_test_function(NULL), NULL)
 })

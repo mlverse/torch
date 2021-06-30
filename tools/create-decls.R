@@ -29,7 +29,7 @@ make_load_symbols <- function(decls) {
 
 decls <- readr::read_lines(
   "
-void _lantern_FunctionPtr_delete (void* x)
+void* _lantern_IValue_from_None () 
 "  
 )
 
