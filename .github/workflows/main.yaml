@@ -72,16 +72,10 @@ jobs:
           error_on <- if (.Platform$OS.type == "windows") "error" else "warning"
           rcmdcheck::rcmdcheck(args = c("--no-multiarch", "--no-manual"), error_on = error_on, check_dir = "check")
         shell: Rscript {0}
-      - name: Install
-        run: |
-          torch_package <- dir("check", full.names = TRUE, pattern = "torch_")
-          install.packages(torch_package, repos = NULL, type = "source", INSTALL_opts = "--no-multiarch")
-        shell: Rscript {0}
-      - name: Test
-        run: |
-          setwd("tests")
-          source("testthat.R")
-        shell: Rscript {0}
+      - name: Show testthat output
+        if: always()
+        run: find check -name 'testthat.Rout*' -exec cat '{}' \; || true
+        shell: bash
       - name: Logs
         if: ${{ failure() }}
         run: cat lantern.log
