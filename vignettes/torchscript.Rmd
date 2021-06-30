@@ -1,0 +1,57 @@
+---
+title: "TorchScript"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{TorchScript}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  eval = identical(Sys.getenv("TORCH_TEST", unset = "0"), "1")
+)
+```
+
+```{r setup}
+library(torch)
+```
+
+[TorchScript](https://pytorch.org/docs/stable/jit_language_reference.html#language-reference) is a statically typed subset of Python that can be interpret by LibTorch without any Python dependency. TorchScript programs can be created from R using tracing. When using tracing, code is automatically converted into this subset of Python by recording only the actual operators on tensors and simply executing and discarding the other surrounding R code.
+
+The R package can also execute TorchScript programs created in Python (or other languages). They are loaded `jit_load()` and seem like usual `nn_module()` objects.
+
+## Types
+
+The following table lists all TorchScript types and how to convert the to and back to R.
+
+| TorchScript Type          | R Description                                                                         |
+|---------------------------|---------------------------------------------------------------------------------------|
+| `Tensor`                  | A `torch_tensor` with any shape, dtype or backend.                                    |
+| `Tuple[T0, T1, ..., TN]`  | A `list()` containing subtypes `T0`, `T1`, etc. wrapped with `jit_tuple()` .          |
+| `bool`                    | A scalar logical value create using `jit_scalar`.                                     |
+| `int`                     | A scalar integer value created using `jit_scalar`.                                    |
+| `float`                   | A scalar floating value created using `jit_scalar`.                                   |
+| `str`                     | A string (ie. character vector of length 1) wrapped in `jit_scalar`.                  |
+| `List[T]`                 | An R list of which all types are type `T` . Or numeric vectors, logical vectors, etc. |
+| `Optional[T]`             | Not yet supported.                                                                    |
+| `Dict[str, V]`            | A named list with values of type `V` . Only `str` key values are currently supported. |
+| `T`                       | Not yet supported.                                                                    |
+| `E`                       | Not yet supported.                                                                    |
+| `NamedTuple[T0, T1, ...]` | A named list containing subtypes `T0`, `T1`, etc. wrapped in `jit_tuple()`.           |
+
+## Creating TorchScript programs
+
+Currently the only supported way to create TorchScript programs from R is using tracing.
+
+See `?jit_trace` for documentation on tracing.
+
+## Executing TorchScript programs
+
+TorchScript programs can be loaded from disk using `jit_load()` and later executed.
+
+The loaded programs are represented by a `ScriptModule` that behaves similar to `nn_module()`s.
+
+R objects are automatically converted to their TorchScript counterpart following the Types table in this document. However, sometimes it's necessary to make type annotations with `jit_tuple()` and `jit_scalar()` to disambiguate the conversion.
