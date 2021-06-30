@@ -1,5 +1,7 @@
 # torch (development version)
 
+- Added Dockerfiles for CUDA 11.1 (#597)
+
 # torch 0.4.0
 
 ## Breaking changes
