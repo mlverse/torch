@@ -30,7 +30,7 @@ void* _lantern_create_traceable_fun (void *(*r_caller)(void *, void *), void* fn
     LANTERN_FUNCTION_END;
 }
 
-void* _lantern_trace_fn (void* fn, void* inputs, void* compilation_unit)
+void* _lantern_trace_fn (void* fn, void* inputs, void* compilation_unit, bool strict)
 {
     LANTERN_FUNCTION_START;
     std::function<Stack(Stack)> fn_ = reinterpret_cast<LanternObject<std::function<Stack(Stack)>>*>(fn)->get();
@@ -44,7 +44,8 @@ void* _lantern_trace_fn (void* fn, void* inputs, void* compilation_unit)
     auto traced = torch::jit::tracer::trace(
         inputs_,
         fn_,
-        var_fn
+        var_fn,
+        strict
     );
 
     auto tr_fn = cu->create_function("name", std::get<0>(traced)->graph, true);
@@ -55,25 +56,29 @@ void* _lantern_trace_fn (void* fn, void* inputs, void* compilation_unit)
 
 void* _lantern_call_traced_fn (void* fn, void* inputs)
 {
-  Function* fn_ = reinterpret_cast<Function *>(fn);
-  Stack inputs_ = reinterpret_cast<LanternObject<Stack>*>(inputs)->get();
+    LANTERN_FUNCTION_START
+    Function* fn_ = reinterpret_cast<Function *>(fn);
+    Stack inputs_ = reinterpret_cast<LanternObject<Stack>*>(inputs)->get();
 
-  auto outputs = new LanternObject<torch::jit::Stack>();
-  auto out = (*fn_)(inputs_);
-  outputs->get().push_back(out);  
-  
-  return (void*) outputs;
+    auto outputs = new LanternObject<torch::jit::Stack>();
+    auto out = (*fn_)(inputs_);
+    outputs->get().push_back(out);  
+    
+    return (void*) outputs;
+    LANTERN_FUNCTION_END
 }
 
 void addFunctionToModule(Module& module, const Function* func) {
-  // Make a graph with a fake self argument
-  auto graph = func->graph()->copy();
-  auto v = graph->insertInput(0, "self");
-  v->setType(module._ivalue()->type());
-  const auto name = QualifiedName(*module.type()->name(), "forward");
-  auto method =
-      module._ivalue()->compilation_unit()->create_function(name, graph);
-  module.type()->addMethod(method);
+    LANTERN_FUNCTION_START
+    // Make a graph with a fake self argument
+    auto graph = func->graph()->copy();
+    auto v = graph->insertInput(0, "self");
+    v->setType(module._ivalue()->type());
+    const auto name = QualifiedName(*module.type()->name(), "forward");
+    auto method =
+        module._ivalue()->compilation_unit()->create_function(name, graph);
+    module.type()->addMethod(method);
+    LANTERN_FUNCTION_END_VOID
 }
 
 void _lantern_traced_fn_save (void* fn, const char* filename)
@@ -103,13 +108,16 @@ const char * _lantern_traced_fn_graph_print (void * fn)
 
 void * _lantern_jit_load(const char * path)
 {
+    LANTERN_FUNCTION_START
     auto module = new torch::jit::script::Module();
     *module = torch::jit::load(std::string(path));
     return (void*) module;
+    LANTERN_FUNCTION_END
 }
 
 void* _lantern_call_jit_script (void* module, void* inputs)
 {
+    LANTERN_FUNCTION_START
     Stack inputs_ = reinterpret_cast<LanternObject<Stack>*>(inputs)->get();
     auto module_ = reinterpret_cast<torch::jit::script::Module *>(module);
 
@@ -118,6 +126,7 @@ void* _lantern_call_jit_script (void* module, void* inputs)
     outputs->get().push_back(out);  
 
     return (void*) outputs;
+    LANTERN_FUNCTION_END
 }
 
 void _trace_r_nn_module ()

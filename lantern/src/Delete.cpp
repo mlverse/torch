@@ -192,7 +192,7 @@ void _lantern_const_char_delete (const char * x)
 void _lantern_IValue_delete (void * x)
 {
   LANTERN_FUNCTION_START
-  lantern_delete<LanternObject<torch::IValue>>(x);
+  lantern_delete<torch::jit::IValue>(x);
   LANTERN_FUNCTION_END_VOID
 }
 
@@ -265,3 +265,110 @@ void _lantern_optional_device_delete (void* x)
   lantern_delete<LanternObject<c10::optional<torch::Device>>>(x);
   LANTERN_FUNCTION_END_VOID;
 }
+
+void _lantern_jit_named_parameter_list_delete (void* x)
+{
+  LANTERN_FUNCTION_START;
+  lantern_delete<torch::jit::named_parameter_list>(x);
+  LANTERN_FUNCTION_END_VOID;
+}
+
+void _lantern_jit_named_module_list_delete (void* x)
+{
+  LANTERN_FUNCTION_START;
+  lantern_delete<torch::jit::named_module_list>(x);
+  LANTERN_FUNCTION_END_VOID;
+}
+
+void _lantern_jit_named_buffer_list_delete (void* x)
+{
+  LANTERN_FUNCTION_START;
+  lantern_delete<torch::jit::named_parameter_list>(x);
+  LANTERN_FUNCTION_END_VOID;
+}
+
+void _lantern_jit_ScriptMethod_delete (void* x)
+{
+  LANTERN_FUNCTION_START;
+  lantern_delete<torch::jit::script::Method>(x);
+  LANTERN_FUNCTION_END_VOID;
+}
+
+void _lantern_GenericDict_delete (void* x)
+{
+  LANTERN_FUNCTION_START;
+  lantern_delete<c10::impl::GenericDict>(x);
+  LANTERN_FUNCTION_END_VOID;
+}
+
+void _lantern_GenericList_delete (void* x)
+{
+  LANTERN_FUNCTION_START;
+  lantern_delete<c10::impl::GenericList>(x);
+  LANTERN_FUNCTION_END_VOID;
+}
+
+void _lantern_vector_double_delete (void* x)
+{
+  LANTERN_FUNCTION_START;
+  lantern_delete<std::vector<double>>(x);
+  LANTERN_FUNCTION_END_VOID;
+}
+
+void _lantern_vector_int64_t2_delete(void *x)
+{
+  LANTERN_FUNCTION_START
+  lantern_delete<std::vector<int64_t>>(x);
+  LANTERN_FUNCTION_END_VOID
+}
+
+void _lantern_jit_Tuple_delete(void *x)
+{
+  LANTERN_FUNCTION_START
+  lantern_delete<std::vector<torch::IValue>>(x);
+  LANTERN_FUNCTION_END_VOID
+}
+
+void _lantern_jit_TensorDict_delete(void *x)
+{
+  LANTERN_FUNCTION_START
+  lantern_delete<c10::Dict<std::string, torch::Tensor>>(x);
+  LANTERN_FUNCTION_END_VOID
+}
+
+void _lantern_jit_GenericDict_delete(void *x)
+{
+  LANTERN_FUNCTION_START
+  lantern_delete<c10::impl::GenericDict>(x);
+  LANTERN_FUNCTION_END_VOID
+}
+
+void _lantern_jit_GenericList_delete(void *x)
+{
+  LANTERN_FUNCTION_START
+  lantern_delete<c10::impl::GenericList>(x);
+  LANTERN_FUNCTION_END_VOID
+}
+
+void _lantern_jit_vector_IValue_delete(void *x)
+{
+  LANTERN_FUNCTION_START
+  lantern_delete<std::vector<torch::IValue>>(x);
+  LANTERN_FUNCTION_END_VOID
+}
+
+void _lantern_NamedTupleHelper_delete (void* x)
+{
+  LANTERN_FUNCTION_START
+  lantern_delete<NamedTupleHelper>(x);
+  LANTERN_FUNCTION_END_VOID
+}
+
+void _lantern_FunctionPtr_delete (void* x)
+{
+  LANTERN_FUNCTION_START
+  lantern_delete<torch::jit::Function*>(x);
+  LANTERN_FUNCTION_END_VOID
+}
+
+

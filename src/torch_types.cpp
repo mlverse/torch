@@ -116,6 +116,37 @@ XPtrTorchDevice::operator SEXP () const
   return xptr;
 }
 
+XPtrTorchScriptModule::operator SEXP () const 
+{
+  
+  auto xptr = make_xptr<XPtrTorchScriptModule>(*this);
+  xptr.attr("class") = Rcpp::CharacterVector::create("torch_script_module", "R7");
+  
+  Rcpp::Function asNamespace("asNamespace");
+  Rcpp::Environment torch_pkg = asNamespace("torch");
+  Rcpp::Function f = torch_pkg["new_script_module"];
+  
+  return f(xptr);
+}
+
+XPtrTorchScriptMethod::operator SEXP () const 
+{
+  
+  if (!this->get())
+  {
+    return R_NilValue;
+  }
+  
+  auto xptr = make_xptr<XPtrTorchScriptMethod>(*this);
+  xptr.attr("class") = Rcpp::CharacterVector::create("torch_script_method", "R7");
+  
+  Rcpp::Function asNamespace("asNamespace");
+  Rcpp::Environment torch_pkg = asNamespace("torch");
+  Rcpp::Function f = torch_pkg["new_script_method"];
+  
+  return f(xptr);
+}
+
 XPtrTorchDtype::operator SEXP () const 
 {
   auto xptr = make_xptr<XPtrTorchDtype>(*this);
@@ -149,6 +180,264 @@ XPtrTorchMemoryFormat::operator SEXP () const
   auto xptr = make_xptr<XPtrTorchMemoryFormat>(*this);
   xptr.attr("class") = Rcpp::CharacterVector::create("torch_memory_format", "R7");
   return xptr;
+}
+
+XPtrTorchvector_string::operator SEXP () const
+{
+  
+  int size = lantern_vector_string_size(this->get());
+  
+  std::vector<std::string> output;
+  for (int i = 0; i < size; i++)
+  {
+    const char * k = lantern_vector_string_at(this->get(), i);
+    output.push_back(std::string(k));
+    lantern_const_char_delete(k);
+  }
+  
+  return Rcpp::wrap(output);
+}
+
+XPtrTorchstring::operator SEXP () const
+{
+  const char * out = lantern_string_get(this->get());
+  auto output = std::string(out);
+  lantern_const_char_delete(out);
+  
+  return Rcpp::wrap(output);
+}
+
+XPtrTorchjit_named_parameter_list::operator SEXP () const 
+{
+  XPtrTorchTensorList tensors = lantern_jit_named_parameter_list_tensors(this->get());
+  XPtrTorchvector_string names = lantern_jit_named_parameter_list_names(this->get());
+  Rcpp::List out = Rcpp::wrap(tensors);
+  out.attr("names") = Rcpp::wrap(names);
+  return out;
+}
+
+XPtrTorchjit_named_buffer_list::operator SEXP () const 
+{
+  XPtrTorchTensorList tensors = lantern_jit_named_buffer_list_tensors(this->get());
+  XPtrTorchvector_string names = lantern_jit_named_buffer_list_names(this->get());
+  Rcpp::List out = Rcpp::wrap(tensors);
+  out.attr("names") = Rcpp::wrap(names);
+  return out;
+}
+
+XPtrTorchjit_named_module_list::operator SEXP () const 
+{
+  int size = lantern_jit_named_module_list_size(this->get());
+  Rcpp::List out;
+  
+  if (size == 0)
+  {
+    return out;
+  }
+  
+  for (int i = 0; i < size; i++)
+  {
+    out.push_back(XPtrTorchScriptModule(lantern_jit_named_module_list_module_at(this->get(), i)));
+  }
+  
+  XPtrTorchvector_string names = lantern_jit_named_module_list_names(this->get());
+  out.attr("names") = Rcpp::wrap(names);
+  return out;
+}
+
+XPtrTorchvector_bool::operator SEXP() const
+{
+  int64_t size = lantern_vector_bool_size(this->get());
+  std::vector<bool> out;
+  for (int i = 0; i < size; i++)
+  {
+    out.push_back(lantern_vector_bool_at(this->get(), i));
+  }
+  return Rcpp::wrap(out);
+}
+
+XPtrTorchvector_int64_t::operator SEXP() const
+{
+  int64_t size = lantern_vector_int64_t_size(this->get());
+  std::vector<int64_t> out;
+  for (int i = 0; i < size; i++)
+  {
+    out.push_back(lantern_vector_int64_t_at(this->get(), i));
+  }
+  return Rcpp::wrap(out);
+}
+
+XPtrTorchvector_double::operator SEXP() const
+{
+  double size = lantern_vector_double_size(this->get());
+  std::vector<double> out;
+  for (int i = 0; i < size; i++)
+  {
+    out.push_back(lantern_vector_double_at(this->get(), i));
+  }
+  return Rcpp::wrap(out);
+}
+
+XPtrTorchStack::operator SEXP () const 
+{
+  int64_t size = lantern_Stack_size(this->get());
+  Rcpp::List output;
+  for (int64_t i = 0; i < size; i++)
+  {
+    output.push_back(XPtrTorchIValue(lantern_Stack_at(this->get(), i)));
+  }
+  return output;
+}
+
+XPtrTorchIValue::operator SEXP () const
+{
+  
+  int type = lantern_IValue_type(this->get());
+  
+  switch (type)
+  {
+  
+  case IValue_types::IValueBoolType:
+    return Rcpp::wrap(lantern_IValue_Bool(this->get()));
+  
+  case IValue_types::IValueBoolListType:
+    return Rcpp::wrap(XPtrTorchvector_bool(lantern_IValue_BoolList(this->get())));
+    
+  case IValue_types::IValueDeviceType:
+    return Rcpp::wrap(XPtrTorchDevice(lantern_IValue_Device(this->get())));
+  
+  case IValue_types::IValueDoubleType:
+    return Rcpp::wrap(lantern_IValue_Double(this->get()));
+    
+  case IValue_types::IValueDoubleListType:
+    return Rcpp::wrap(XPtrTorchvector_double(lantern_IValue_DoubleList(this->get())));
+    
+  case IValue_types::IValueGeneratorType:
+    return Rcpp::wrap(XPtrTorchGenerator(lantern_IValue_Generator(this->get())));
+    
+  case IValue_types::IValueIntType:
+    return Rcpp::wrap(lantern_IValue_Int(this->get()));
+    
+  case IValue_types::IValueIntListType:
+    return Rcpp::wrap(XPtrTorchvector_int64_t(lantern_IValue_IntList(this->get())));
+    
+  case IValue_types::IValueModuleType:
+    return Rcpp::wrap(XPtrTorchScriptModule(lantern_IValue_Module(this->get())));
+    
+  case IValue_types::IValueNoneType:
+    return R_NilValue;
+    
+  case IValue_types::IValueScalarType:
+    return Rcpp::wrap(XPtrTorchScalar(lantern_IValue_Scalar(this->get())));
+    
+  case IValue_types::IValueStringType:
+    return Rcpp::wrap(XPtrTorchstring(lantern_IValue_String(this->get())));
+    
+  case IValue_types::IValueTensorListType:
+    return Rcpp::wrap(XPtrTorchTensorList(lantern_IValue_TensorList(this->get())));
+    
+  case IValue_types::IValueTensorType:
+    return Rcpp::wrap(XPtrTorchTensor(lantern_IValue_Tensor(this->get())));
+    
+  case IValue_types::IValueTupleType:
+    return Rcpp::wrap(XPtrTorchNamedTupleHelper(lantern_IValue_Tuple(this->get())));
+    
+  case IValue_types::IValueGenericDictType:
+    return Rcpp::wrap(XPtrTorchGenericDict(lantern_IValue_GenericDict(this->get())));
+    
+  case IValue_types::IValueListType:
+    return Rcpp::wrap(XPtrTorchGenericList(lantern_IValue_List(this->get())));
+    
+  }
+  
+  Rcpp::Rcout << lantern_IValue_type(this->get()) << std::endl; 
+  Rcpp::stop("Type not handled");
+}
+
+XPtrTorchTuple::operator SEXP () const 
+{
+  auto size = lantern_jit_Tuple_size(this->get());
+  
+  Rcpp::List out;
+  for (int i = 0; i < size; i++)
+  {
+    out.push_back(Rcpp::wrap(XPtrTorchIValue(lantern_jit_Tuple_at(this->get(), i))));
+  }
+  
+  return out;
+}
+
+XPtrTorchNamedTupleHelper::operator SEXP () const 
+{
+  XPtrTorchvector_string names = lantern_jit_NamedTupleHelper_keys(this->get());
+  XPtrTorchvector_IValue elements = lantern_jit_NamedTupleHelper_elements(this->get());
+  
+  std::vector<std::string> names_ = Rcpp::as<std::vector<std::string>>(names);
+  Rcpp::List elements_ = Rcpp::as<Rcpp::List>(elements);
+  
+  if (names_.size() != elements_.size()) return elements_;
+  
+  if (std::all_of(names_.begin(), names_.end(), [](std::string x) { return x.length() != 0; }))
+  {
+    elements_.attr("names") = names_;
+  }
+  
+  return elements_;
+}
+
+XPtrTorchvector_IValue::operator SEXP () const 
+{
+  auto size = lantern_jit_vector_IValue_size(this->get());
+  
+  Rcpp::List out;
+  for (int i = 0; i < size; i++)
+  {
+    out.push_back(Rcpp::wrap(XPtrTorchIValue(lantern_jit_vector_IValue_at(this->get(), i))));
+  }
+  
+  return out;
+}
+
+XPtrTorchGenericDict::operator SEXP () const
+{
+  XPtrTorchvector_IValue keys = lantern_jit_GenericDict_keys(this->get());
+  int64_t size = lantern_jit_vector_IValue_size(keys.get());
+  
+  Rcpp::List out;
+  for (int i = 0; i < size; i++)
+  {
+    out.push_back(
+      XPtrTorchIValue(
+        lantern_jit_GenericDict_at(
+          this->get(),
+          XPtrTorchIValue(lantern_jit_vector_IValue_at(keys.get(), i)).get()
+        )
+      )
+    );
+  }
+  out.attr("names") = Rcpp::wrap(keys);
+  return out;
+}
+
+XPtrTorchGenericList::operator SEXP () const
+{
+  
+  int64_t size = lantern_jit_GenericList_size(this->get());
+  
+  Rcpp::List out;
+  for (int i = 0; i < size; i++)
+  {
+    out.push_back(
+      XPtrTorchIValue(
+        lantern_jit_GenericList_at(
+          this->get(),
+          i
+        )
+      )
+    );
+  }
+  
+  return out;
 }
 
 // Constructors ----------
@@ -418,6 +707,32 @@ XPtrTorchOptionalDevice XPtrTorchOptionalDevice_from_SEXP (SEXP x)
 XPtrTorchOptionalDevice::XPtrTorchOptionalDevice (SEXP x):
   XPtrTorch{XPtrTorchOptionalDevice_from_SEXP(x)} {}
 
+XPtrTorchScriptModule XPtrTorchScriptModule_from_SEXP (SEXP x)
+{
+  if (TYPEOF(x) == EXTPTRSXP && Rf_inherits(x, "torch_script_module")) {
+    auto out = Rcpp::as<Rcpp::XPtr<XPtrTorchScriptModule>>(x);
+    return XPtrTorchScriptModule( out->get_shared());
+  }
+  
+  Rcpp::stop("Expected a torch_script_module");
+}
+
+XPtrTorchScriptModule::XPtrTorchScriptModule (SEXP x):
+  XPtrTorch{XPtrTorchScriptModule_from_SEXP(x)} {}
+
+XPtrTorchScriptMethod XPtrTorchScriptMethod_from_SEXP (SEXP x)
+{
+  if (TYPEOF(x) == EXTPTRSXP && Rf_inherits(x, "torch_script_method")) {
+    auto out = Rcpp::as<Rcpp::XPtr<XPtrTorchScriptMethod>>(x);
+    return XPtrTorchScriptMethod(out->get_shared());
+  }
+  
+  Rcpp::stop("Expected a torch_script_module");
+}
+
+XPtrTorchScriptMethod::XPtrTorchScriptMethod (SEXP x):
+  XPtrTorch{XPtrTorchScriptMethod_from_SEXP(x)} {}
+
 XPtrTorchDtype XPtrTorchDtype_from_SEXP (SEXP x)
 {
   if (TYPEOF(x) == EXTPTRSXP && Rf_inherits(x, "torch_dtype")) {
@@ -630,6 +945,241 @@ XPtrTorchOptionalIntArrayRef::XPtrTorchOptionalIntArrayRef (SEXP x):
 
 XPtrTorchOptionalIndexIntArrayRef::XPtrTorchOptionalIndexIntArrayRef (SEXP x):
   XPtrTorchOptionalIntArrayRef{XPtrTorchOptionalIntArrayRef_from_SEXP(x, true)} {};
+
+XPtrTorchstring XPtrTorchstring_from_SEXP (SEXP x)
+{
+  std::string v = Rcpp::as<std::string>(x);
+  return XPtrTorchstring(lantern_string_new(v.c_str()));
+}
+
+XPtrTorchstring::XPtrTorchstring(SEXP x) :
+  XPtrTorchstring{XPtrTorchstring_from_SEXP(x)} {}
+
+XPtrTorchTuple XPtrTorchTuple_from_SEXP (SEXP x)
+{
+  auto list = Rcpp::as<Rcpp::List>(x);
+  XPtrTorchTuple out = lantern_jit_Tuple_new();
+  for (auto el : list)
+  {
+    lantern_jit_Tuple_push_back(out.get(), Rcpp::as<XPtrTorchIValue>(el).get());
+  }
+  return out;
+}
+
+XPtrTorchTuple::XPtrTorchTuple(SEXP x) :
+  XPtrTorchTuple{XPtrTorchTuple_from_SEXP(x)} {}
+
+XPtrTorchTensorDict XPtrTorchTensorDict_from_SEXP (SEXP x)
+{
+  auto list = Rcpp::as<Rcpp::List>(x);
+  XPtrTorchTensorDict out = lantern_jit_TensorDict_new();
+  
+  Rcpp::List names = list.attr("names");
+  for (int i = 0; i < names.size(); i++)
+  {
+    lantern_jit_TensorDict_push_back(
+      out.get(),
+      Rcpp::as<XPtrTorchstring>(names[i]).get(),
+      Rcpp::as<XPtrTorchTensor>(list[i]).get()
+    );
+  }
+  return out;
+}
+
+XPtrTorchTensorDict::XPtrTorchTensorDict(SEXP x) :
+  XPtrTorchTensorDict{XPtrTorchTensorDict_from_SEXP(x)} {}
+
+bool rlang_is_named (SEXP x)
+{
+  auto x_ = Rcpp::as<Rcpp::List>(x);
+  SEXP names =  x_.names();
+  
+  if (Rf_isNull(names)) return false;
+  if (x_.size() != Rcpp::as<Rcpp::CharacterVector>(names).size()) return false;
+  
+  Rcpp::Function asNamespace("asNamespace");
+  Rcpp::Environment rlang_pkg = asNamespace("rlang");
+  Rcpp::Function f = rlang_pkg["is_named"];
+  return f(x);
+}
+
+bool is_tensor (SEXP x)
+{
+  return TYPEOF(x) == EXTPTRSXP && Rf_inherits(x, "torch_tensor");
+}
+
+XPtrTorchIValue XPtrTorchIValue_from_SEXP (SEXP x)
+{
+  if (TYPEOF(x) == INTSXP && LENGTH(x) == 1 && Rf_inherits(x, "jit_scalar"))
+  {
+    return XPtrTorchIValue(lantern_IValue_from_Int(Rcpp::as<int64_t>(x)));
+  }
+  
+  if (TYPEOF(x) == INTSXP)
+  {
+    return XPtrTorchIValue(lantern_IValue_from_IntList(Rcpp::as<XPtrTorchvector_int64_t>(x).get()));
+  }
+  
+  if (TYPEOF(x) == LGLSXP && LENGTH(x) == 1 && Rf_inherits(x, "jit_scalar"))
+  {
+    return XPtrTorchIValue(lantern_IValue_from_Bool(Rcpp::as<bool>(x)));
+  }
+  
+  if (TYPEOF(x) == LGLSXP)
+  {
+    return XPtrTorchIValue(lantern_IValue_from_BoolList(Rcpp::as<XPtrTorchvector_bool>(x).get()));
+  }
+  
+  if (TYPEOF(x) == REALSXP && LENGTH(x) == 1 && Rf_inherits(x, "jit_scalar"))
+  {
+    return XPtrTorchIValue(lantern_IValue_from_Double(Rcpp::as<double>(x)));
+  }
+  
+  if (TYPEOF(x) == REALSXP)
+  {
+    return XPtrTorchIValue(lantern_IValue_from_DoubleList(Rcpp::as<XPtrTorchvector_double>(x).get()));
+  }
+  
+  if (TYPEOF(x)== STRSXP && LENGTH(x) == 1)
+  {
+    return XPtrTorchIValue(lantern_IValue_from_String(Rcpp::as<XPtrTorchstring>(x).get()));
+  }
+  
+  if (is_tensor(x))
+  {
+    return XPtrTorchIValue(lantern_IValue_from_Tensor(Rcpp::as<XPtrTorchTensor>(x).get()));
+  }
+  
+  if (x == R_NilValue)
+  {
+    return XPtrTorchIValue(lantern_IValue_from_None());
+  }
+  
+  // is a list
+  if (TYPEOF(x) == VECSXP)
+  {
+    
+    auto x_ = Rcpp::as<Rcpp::List>(x);
+    
+    // is a named list, thus we should convert to a dictionary to
+    // preserve the names
+    if (rlang_is_named(x))
+    {
+      
+      if (!Rf_inherits(x, "jit_tuple"))
+      {
+        // named list of tensors! we will convert to a Dict
+        if (std::all_of(x_.cbegin(), x_.cend(), [](SEXP x){ return is_tensor(x); }))
+        {
+          return XPtrTorchIValue(lantern_IValue_from_TensorDict(Rcpp::as<XPtrTorchTensorDict>(x).get()));
+        }
+      }
+      
+      // named list of arbitrary types. converting to a NamedTuple
+      return XPtrTorchIValue(lantern_IValue_from_NamedTuple(Rcpp::as<XPtrTorchNamedTupleHelper>(x).get()));
+    }
+    else
+    {
+      
+      if (!Rf_inherits(x, "jit_tuple"))
+      {
+        if (std::all_of(x_.cbegin(), x_.cend(), [](SEXP x){ return is_tensor(x); }))
+        {
+          return XPtrTorchIValue(lantern_IValue_from_TensorList(Rcpp::as<XPtrTorchTensorList>(x).get()));
+        }
+      }
+      
+      // it's not a list full of tensors so we create a tuple
+      return XPtrTorchIValue(lantern_IValue_from_Tuple(Rcpp::as<XPtrTorchTuple>(x).get()));
+    }
+    
+  }
+  
+  Rcpp::stop("Unsupported type");
+}
+
+XPtrTorchIValue::XPtrTorchIValue(SEXP x) :
+  XPtrTorchIValue{XPtrTorchIValue_from_SEXP(x)} {}
+
+XPtrTorchvector_bool XPtrTorchvector_bool_from_SEXP (SEXP x)
+{
+  auto input = Rcpp::as<std::vector<bool>>(x);
+  XPtrTorchvector_bool out = lantern_vector_bool_new();
+  for (auto el : input)
+  {
+    lantern_vector_bool_push_back(out.get(), el);
+  }
+  return out;
+}
+
+XPtrTorchvector_bool::XPtrTorchvector_bool (SEXP x) :
+  XPtrTorchvector_bool{XPtrTorchvector_bool_from_SEXP(x)} {}
+
+XPtrTorchvector_int64_t XPtrTorchvector_int64_t_from_SEXP (SEXP x)
+{
+  auto input = Rcpp::as<std::vector<int64_t>>(x);
+  XPtrTorchvector_int64_t out = lantern_vector_int64_t_new();
+  for (auto el : input)
+  {
+    lantern_vector_int64_t_push_back(out.get(), el);
+  }
+  return out;
+}
+
+XPtrTorchvector_int64_t::XPtrTorchvector_int64_t (SEXP x) :
+  XPtrTorchvector_int64_t{XPtrTorchvector_int64_t_from_SEXP(x)} {}
+
+XPtrTorchvector_double XPtrTorchvector_double_from_SEXP (SEXP x)
+{
+  auto input = Rcpp::as<std::vector<double>>(x);
+  XPtrTorchvector_double out = lantern_vector_double_new();
+  for (auto el : input)
+  {
+    lantern_vector_double_push_back(out.get(), el);
+  }
+  return out;
+}
+
+XPtrTorchvector_double::XPtrTorchvector_double (SEXP x) :
+  XPtrTorchvector_double{XPtrTorchvector_double_from_SEXP(x)} {}
+
+XPtrTorchNamedTupleHelper XPtrTorchNamedTupleHelper_from_SEXP (SEXP x)
+{
+  XPtrTorchNamedTupleHelper out = lantern_jit_NamedTuple_new();
+  auto x_ = Rcpp::as<Rcpp::List>(x);
+  auto names = Rcpp::as<std::vector<std::string>>(x_.names());
+  
+  for (int i = 0; i < names.size(); i++)
+  {
+    lantern_jit_NamedTuple_push_back(
+      out.get(),
+      XPtrTorchstring(names[i]).get(),
+      Rcpp::as<XPtrTorchIValue>(x_[i]).get()
+    );
+  }
+  
+  return out;
+}
+
+XPtrTorchNamedTupleHelper::XPtrTorchNamedTupleHelper (SEXP x) :
+  XPtrTorchNamedTupleHelper{XPtrTorchNamedTupleHelper_from_SEXP(x)} {}
+
+XPtrTorchStack XPtrTorchStack_from_SEXP (SEXP x) 
+{
+  auto list = Rcpp::as<Rcpp::List>(x);
+  XPtrTorchStack output = lantern_Stack_new();
+  for (const auto& el : list)
+  {
+    lantern_Stack_push_back_IValue(
+      output.get(),
+      Rcpp::as<XPtrTorchIValue>(el).get()
+    );
+  }
+  return output;
+}
+
+XPtrTorchStack::XPtrTorchStack (SEXP x) :
+  XPtrTorchStack{XPtrTorchStack_from_SEXP(x)} {}
 
 XPtrTorchint64_t2::XPtrTorchint64_t2 (SEXP x_)
 {

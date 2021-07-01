@@ -364,6 +364,8 @@ test_that("size works", {
 
 test_that("tensor identity works as expected", {
   
+  skip_on_os("mac")
+  
   v <- runif(1)
   gctorture()
   x <- torch_tensor(v)
@@ -392,6 +394,8 @@ test_that("tensor identity works as expected", {
 })
 
 test_that("using with optim", {
+  
+  skip_on_os("mac")
   
   expect_error(regexp = NA, {
     x <- torch_tensor(100, requires_grad = TRUE)

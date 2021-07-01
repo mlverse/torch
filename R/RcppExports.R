@@ -9617,6 +9617,10 @@ Tensor_slice_put <- function(self, e, rhs, mask) {
     invisible(.Call('_torch_Tensor_slice_put', PACKAGE = 'torchpkg', self, e, rhs, mask))
 }
 
+ivalue_test_function <- function(x) {
+    .Call('_torch_ivalue_test_function', PACKAGE = 'torchpkg', x)
+}
+
 cpp_lantern_configure <- function(log) {
     invisible(.Call('_torch_cpp_lantern_configure', PACKAGE = 'torchpkg', log))
 }
@@ -9781,24 +9785,60 @@ cpp_torch_scalar_to_bool <- function(self) {
     .Call('_torch_cpp_torch_scalar_to_bool', PACKAGE = 'torchpkg', self)
 }
 
-cpp_stack_new <- function() {
-    .Call('_torch_cpp_stack_new', PACKAGE = 'torchpkg')
+cpp_jit_script_module_parameters <- function(self, recurse) {
+    .Call('_torch_cpp_jit_script_module_parameters', PACKAGE = 'torchpkg', self, recurse)
 }
 
-cpp_stack_push_back_Tensor <- function(self, x) {
-    invisible(.Call('_torch_cpp_stack_push_back_Tensor', PACKAGE = 'torchpkg', self, x))
+cpp_jit_script_module_buffers <- function(self, recurse) {
+    .Call('_torch_cpp_jit_script_module_buffers', PACKAGE = 'torchpkg', self, recurse)
 }
 
-cpp_stack_push_back_int64_t <- function(self, x) {
-    invisible(.Call('_torch_cpp_stack_push_back_int64_t', PACKAGE = 'torchpkg', self, x))
+cpp_jit_script_module_train <- function(self, on) {
+    invisible(.Call('_torch_cpp_jit_script_module_train', PACKAGE = 'torchpkg', self, on))
 }
 
-cpp_stack_push_back_TensorList <- function(self, x) {
-    invisible(.Call('_torch_cpp_stack_push_back_TensorList', PACKAGE = 'torchpkg', self, x))
+cpp_jit_script_module_set_optimized <- function(self, on) {
+    invisible(.Call('_torch_cpp_jit_script_module_set_optimized', PACKAGE = 'torchpkg', self, on))
 }
 
-cpp_stack_to_r <- function(self) {
-    .Call('_torch_cpp_stack_to_r', PACKAGE = 'torchpkg', self)
+cpp_jit_script_module_is_training <- function(self) {
+    .Call('_torch_cpp_jit_script_module_is_training', PACKAGE = 'torchpkg', self)
+}
+
+cpp_jit_script_module_is_optimized <- function(self) {
+    .Call('_torch_cpp_jit_script_module_is_optimized', PACKAGE = 'torchpkg', self)
+}
+
+cpp_jit_script_module_register_parameter <- function(self, name, v, is_buffer) {
+    invisible(.Call('_torch_cpp_jit_script_module_register_parameter', PACKAGE = 'torchpkg', self, name, v, is_buffer))
+}
+
+cpp_jit_script_module_register_buffer <- function(self, name, v) {
+    invisible(.Call('_torch_cpp_jit_script_module_register_buffer', PACKAGE = 'torchpkg', self, name, v))
+}
+
+cpp_jit_script_module_to <- function(self, device, non_blocking) {
+    invisible(.Call('_torch_cpp_jit_script_module_to', PACKAGE = 'torchpkg', self, device, non_blocking))
+}
+
+cpp_jit_script_module_modules <- function(self) {
+    .Call('_torch_cpp_jit_script_module_modules', PACKAGE = 'torchpkg', self)
+}
+
+cpp_jit_script_module_children <- function(self) {
+    .Call('_torch_cpp_jit_script_module_children', PACKAGE = 'torchpkg', self)
+}
+
+cpp_jit_script_module_find_method <- function(self, basename) {
+    .Call('_torch_cpp_jit_script_module_find_method', PACKAGE = 'torchpkg', self, basename)
+}
+
+cpp_jit_script_method_call <- function(self, inputs) {
+    .Call('_torch_cpp_jit_script_method_call', PACKAGE = 'torchpkg', self, inputs)
+}
+
+test_stack <- function(x) {
+    .Call('_torch_test_stack', PACKAGE = 'torchpkg', x)
 }
 
 cpp_Tensor_storage <- function(self) {
@@ -9917,8 +9957,8 @@ test_fun_hello <- function(x) {
     .Call('_torch_test_fun_hello', PACKAGE = 'torchpkg', x)
 }
 
-cpp_trace_function <- function(fn, inputs, compilation_unit) {
-    .Call('_torch_cpp_trace_function', PACKAGE = 'torchpkg', fn, inputs, compilation_unit)
+cpp_trace_function <- function(fn, inputs, compilation_unit, strict = TRUE) {
+    .Call('_torch_cpp_trace_function', PACKAGE = 'torchpkg', fn, inputs, compilation_unit, strict)
 }
 
 cpp_save_traced_fn <- function(fn, filename) {

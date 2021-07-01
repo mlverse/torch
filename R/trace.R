@@ -42,6 +42,11 @@
 #'   `example_inputs` may also be a single Tensor in which case it is automatically 
 #'   wrapped in a list. Note that `...` **can not** be named, and the order is 
 #'   respected.
+#' @param strict run the tracer in a strict mode or not (default: `TRUE`). Only 
+#'   turn this off when you want the tracer to record your mutable container types 
+#'   (currently list/dict) and you are sure that the container you are using in 
+#'   your problem is a constant structure and does not get used as control flow 
+#'   (`if`, `for`) conditions.
 #' 
 #' @returns An `script_function`
 #' 
@@ -54,11 +59,10 @@
 #' tr_fn(input)
 #'
 #' @export
-jit_trace <- function(func, ...) {
+jit_trace <- function(func, ..., strict = TRUE) {
   tr_fn <- make_traceable_fn(func)
   ellipsis::check_dots_unnamed() # we do not support named arguments
-  ex_inp <- torch_jit_stack(...)
-  ptr <- cpp_trace_function(tr_fn, ex_inp$ptr, .compilation_unit)
+  ptr <- cpp_trace_function(tr_fn, list(...), .compilation_unit, strict)
   new_script_function(ptr)
 }
 
@@ -71,8 +75,7 @@ jit_trace <- function(func, ...) {
 #' @export
 jit_load <- function(path, ...) {
   path <- normalizePath(path, mustWork = TRUE)
-  ptr <- cpp_jit_load(path)
-  new_script_module(ptr)
+  cpp_jit_load(path)
 }
 
 #' Saves a `script_function` to a path
@@ -98,16 +101,6 @@ jit_save <- function(obj, path, ...) {
   obj$save(path)
   invisible(obj)
 }
-
-ScriptModule <- R6::R6Class(
-  "ScriptModule",
-  public = list(
-    ptr = NULL,
-    initialize = function(ptr) {
-      self$ptr <- ptr
-    }
-  )
-)
 
 ScriptFunction <- R6::R6Class(
   "ScriptFunction",
@@ -142,52 +135,22 @@ GraphFunction <- R6::R6Class(
   )
 )
 
-convert_inputs_to_jit_stack <- function(...) {
-  # inputs to the traced function must be a stack
-  inputs <- torch_jit_stack(...)
-  inputs
-}
-
-convert_outputs_to_r <- function(out) {
-  # post processs the output
-  out <- Stack$new(ptr = out)$to_r()
-  out[[1]] # always return a single thing!
-}
-
 new_script_function <- function(ptr) {
   f <- function(...) {
-    inputs <- convert_inputs_to_jit_stack(...)
+    inputs <- list(...)
+    out <- cpp_call_traced_fn(ptr, inputs)
     # calling the traced function always returns a stack
     # with a single element.
-    out <- cpp_call_traced_fn(ptr, inputs$ptr)
-    convert_outputs_to_r(out)
+    out[[1]]
   }
   class(f) <- "script_function"
   attr(f, "ScriptFunction") <- ScriptFunction$new(ptr = ptr)
   f
 }
 
-new_script_module <- function(ptr) {
-  f <- function(...) {
-    inputs <- convert_inputs_to_jit_stack(...)
-    # calling the traced function always returns a stack
-    # with a single element.
-    out <- cpp_call_jit_script(ptr, inputs$ptr)
-    convert_outputs_to_r(out)
-  }
-  class(f) <- "script_module"
-  attr(f, "ScriptModule") <- ScriptModule$new(ptr = ptr)
-  f
-}
-
 #' @export
 print.script_function <- function(x, ...) {
   cat("<script_function>\n")
-}
-
-#' @export
-print.jit_module <- function(x, ...) {
-  cat("script_module>\n")
 }
 
 #' @export
@@ -199,11 +162,8 @@ print.jit_module <- function(x, ...) {
 # a torch::jit::Stack ptr and returns a torch::jit::Stack ptr.
 make_traceable_fn <- function(fn) {
   function(inputs) {
-    r_inputs <- Stack$new(ptr = inputs)$to_r()
-    r_out <- do.call(fn, r_inputs)
-    s_out <- Stack$new()
-    s_out$push_back(r_out)
-    s_out$ptr
+    out <- do.call(fn, inputs)
+    list(out)
   }
 }
 

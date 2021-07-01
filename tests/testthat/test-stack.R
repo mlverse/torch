@@ -1,23 +1,26 @@
-test_that("stacks works", {
+test_that("can run convert to and back", {
   
-  stack <- Stack$new()
+  x <- list(torch_tensor(1))
+  expect_equal(test_stack(x), x)
   
-  x <- torch_tensor(c(1,2,3))
-  y <- 1L
-  z <- list(x, x)
+  x <- list(torch_tensor(1), 1)
+  expect_equal(test_stack(x), x)
   
-  stack$push_back(x)
-  stack$push_back(y)
-  stack$push_back(z)
+  x <- list(torch_tensor(1), 1, c(1,2,3))
+  expect_equal(test_stack(x), x)
   
-  x_ <- stack$at(1)
-  y_ <- stack$at(2)
-  z_ <- stack$at(3)
+  x <- list(torch_tensor(1), 1, c(1,2,3), 1L, 1:10)
+  expect_equal(test_stack(x), x)
   
-  expect_equal_to_tensor(x, x_)
-  expect_equal(y, y_)
-  expect_equal_to_tensor(z[[1]], z_[[1]])
-  expect_equal_to_tensor(z[[2]], z_[[2]])
-  expect_equal(length(z), length(z_))
+  x <- list(torch_tensor(1), 1, c(1,2,3), 1L, 1:10, list(torch_tensor(1), torch_tensor(2)))
+  expect_equal(test_stack(x), x)
+  
+  x <- list(torch_tensor(1), 1, c(1,2,3), list(1L, 1:10), list(torch_tensor(1), torch_tensor(2)))
+  expect_equal(test_stack(x), x)
+  
+  x <- list(a = torch_tensor(1), b = torch_tensor(2))
+  class(x) <- "jit_tuple"
+  x <- list(x)
+  expect_equal(test_stack(x), list(list(a = torch_tensor(1), b = torch_tensor(2))))
   
 })

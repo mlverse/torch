@@ -236,8 +236,23 @@ nn_Module <- R6::R6Class(
       
       pars
     },
-    modules = function(value) {
+    buffers = function(value) {
       
+      if (!missing(value))
+        runtime_error(
+          "It's not possible to modify the buffers list.\n",
+          " You can modify the parameter in-place or use",
+          " `module$parameter_name <- new_value`"
+        )
+      
+      bufs <- lapply(private$modules_, function(x) x$buffers)
+      bufs <- append(bufs, private$buffers_)
+      bufs <- unlist(bufs, recursive = TRUE, use.names = TRUE)
+      bufs <- bufs[!duplicated(bufs)] # unique doesn't preserve the names
+      
+      bufs
+    },
+    modules = function(value) {
       if (!missing(value))
         runtime_error(
           "It's not possible to modify the modules list.\n",
@@ -483,6 +498,13 @@ create_nn_module_callable <- function(instance) {
   mods <- x[[".__enclos_env__"]][["private"]][["modules_"]]
   if (!is.null(mods)) {
     o <- mods[[y]]
+    if (!is.null(o))
+      return(o)
+  }
+  
+  find_method <- x[[".__enclos_env__"]][["private"]][["find_method"]]
+  if (!is.null(find_method)) {
+    o <- find_method(y)
     if (!is.null(o))
       return(o)
   }

@@ -95,9 +95,7 @@ test_that("errors gracefully when passing unsupported inputs", {
   }
   
   expect_error(
-    jit_trace(fn, "a"),
-    class = "runtime_error",
-    regexp = "Unsupported"
+    jit_trace(fn, "a")
   )
   
 })
@@ -145,3 +143,66 @@ test_that("fn can take more than 1 argument", {
   
 })
 
+test_that("can have named inputs and outputs", {
+  
+  fn <- function(x) { 
+    list(x = x$t1, y = x$t2)
+  } 
+  
+  x <- list(
+    t1 = torch_tensor(1), 
+    t2 = torch_tensor(2)
+  ) 
+  
+  tr_fn <- jit_trace(fn, x, strict = FALSE)
+
+  expect_equal(
+    tr_fn(x),
+    fn(x)
+  )
+  
+})
+
+test_that("tuple inputs are correctly handled", {
+  
+  fn <- function(x) { 
+    jit_tuple(list(x = x$t1, y = x$t2))
+  } 
+  
+  x <- jit_tuple(list(
+    t1 = torch_tensor(1), 
+    t2 = torch_tensor(2)
+  ))
+  
+  tr_fn <- jit_trace(fn, x, strict = FALSE)
+  
+  # returned named tuples will loose their names
+  expect_equal(tr_fn(x), list(torch_tensor(1), torch_tensor(2)))
+  
+  # if the model has been traced with a named tuple we 
+  # will expect a tuple back too.
+  expect_error(
+    tr_fn(list(t1 = torch_tensor(1), t2 = torch_tensor(2)))
+  )
+  
+})
+
+test_that("tuple casting", {
+  
+  fn <- function(y) {
+    jit_tuple(list(y[[1]], y[[2]]))
+  }
+  
+  x <- jit_tuple(list(torch_tensor(1), torch_tensor(2)))
+  tr_fn <- jit_trace(fn, x)
+  
+  expect_error(
+    tr_fn(list(torch_tensor(1), torch_tensor(2)))  
+  )
+  
+  expect_equal(
+    tr_fn(jit_tuple(list(torch_tensor(1), torch_tensor(2)))),
+    list(torch_tensor(1), torch_tensor(2))
+  )
+  
+})

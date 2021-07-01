@@ -117,6 +117,9 @@ set(LANTERN_SRC
     src/Stack.cpp
     src/Allocator.cpp
     src/Backends.cpp
+    src/JITTypes.cpp
+    src/ScriptModule.cpp
+    src/IValue.cpp
 )
 
 

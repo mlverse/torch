@@ -2,7 +2,7 @@
 #include "utils.h"
 
 // [[Rcpp::export]]
-XPtrTorchStack test_stack (XPtrTorchStack x)
+XPtrTorchIValue ivalue_test_function (XPtrTorchIValue x)
 {
   return x;
 }
