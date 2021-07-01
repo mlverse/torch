@@ -49,7 +49,7 @@ mkdir  ../../../../rstudio_home
 ```
 
 ### 4. Create `auth.txt`
-Create `auth.txt` into `torch/docker/` and write root user's password and rstudio(default user) user's password which you would like to set.
+Create `auth.txt` into `torch/docker/build_env_tools/cuda-xxx` and write root user's password and rstudio(default user) user's password which you would like to set.
 
 ```bash
 echo "rstudio" >> auth.txt # root user's password
