@@ -9985,6 +9985,18 @@ cpp_call_jit_script <- function(module, inputs) {
     .Call('_torch_cpp_call_jit_script', PACKAGE = 'torchpkg', module, inputs)
 }
 
+cpp_jit_compile <- function(source) {
+    .Call('_torch_cpp_jit_compile', PACKAGE = 'torchpkg', source)
+}
+
+cpp_jit_compile_list_methods <- function(cu) {
+    .Call('_torch_cpp_jit_compile_list_methods', PACKAGE = 'torchpkg', cu)
+}
+
+cpp_jit_compile_get_function <- function(cu, name) {
+    .Call('_torch_cpp_jit_compile_get_function', PACKAGE = 'torchpkg', cu, name)
+}
+
 cpp_nullptr <- function() {
     .Call('_torch_cpp_nullptr', PACKAGE = 'torchpkg')
 }

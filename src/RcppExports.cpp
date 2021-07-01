@@ -32509,6 +32509,40 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// cpp_jit_compile
+Rcpp::XPtr<XPtrTorchCompilationUnit> cpp_jit_compile(XPtrTorchstring source);
+RcppExport SEXP _torch_cpp_jit_compile(SEXP sourceSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchstring >::type source(sourceSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_jit_compile(source));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_jit_compile_list_methods
+XPtrTorchvector_string cpp_jit_compile_list_methods(Rcpp::XPtr<XPtrTorchCompilationUnit> cu);
+RcppExport SEXP _torch_cpp_jit_compile_list_methods(SEXP cuSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< Rcpp::XPtr<XPtrTorchCompilationUnit> >::type cu(cuSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_jit_compile_list_methods(cu));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_jit_compile_get_function
+Rcpp::XPtr<XPtrTorchFunctionPtr> cpp_jit_compile_get_function(Rcpp::XPtr<XPtrTorchCompilationUnit> cu, XPtrTorchstring name);
+RcppExport SEXP _torch_cpp_jit_compile_get_function(SEXP cuSEXP, SEXP nameSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< Rcpp::XPtr<XPtrTorchCompilationUnit> >::type cu(cuSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchstring >::type name(nameSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_jit_compile_get_function(cu, name));
+    return rcpp_result_gen;
+END_RCPP
+}
 // cpp_nullptr
 Rcpp::XPtr<std::nullptr_t> cpp_nullptr();
 RcppExport SEXP _torch_cpp_nullptr() {
@@ -35115,6 +35149,9 @@ static const R_CallMethodDef CallEntries[] = {
     {"_torch_cpp_traced_fn_graph_print", (DL_FUNC) &_torch_cpp_traced_fn_graph_print, 1},
     {"_torch_cpp_jit_load", (DL_FUNC) &_torch_cpp_jit_load, 1},
     {"_torch_cpp_call_jit_script", (DL_FUNC) &_torch_cpp_call_jit_script, 2},
+    {"_torch_cpp_jit_compile", (DL_FUNC) &_torch_cpp_jit_compile, 1},
+    {"_torch_cpp_jit_compile_list_methods", (DL_FUNC) &_torch_cpp_jit_compile_list_methods, 1},
+    {"_torch_cpp_jit_compile_get_function", (DL_FUNC) &_torch_cpp_jit_compile_get_function, 2},
     {"_torch_cpp_nullptr", (DL_FUNC) &_torch_cpp_nullptr, 0},
     {"_torch_cpp_nullopt", (DL_FUNC) &_torch_cpp_nullopt, 0},
     {"_torch_cpp_optional_int64_t", (DL_FUNC) &_torch_cpp_optional_int64_t, 1},

@@ -64,3 +64,21 @@ XPtrTorchStack cpp_call_jit_script (Rcpp::XPtr<XPtrTorchJITModule> module,
   XPtrTorchStack out = lantern_call_jit_script(module->get(), inputs.get());
   return out;
 }
+
+// [[Rcpp::export]]
+Rcpp::XPtr<XPtrTorchCompilationUnit> cpp_jit_compile (XPtrTorchstring source)
+{
+  return make_xptr<XPtrTorchCompilationUnit>(lantern_jit_compile(source.get(), nullptr));
+}
+
+// [[Rcpp::export]]
+XPtrTorchvector_string cpp_jit_compile_list_methods (Rcpp::XPtr<XPtrTorchCompilationUnit> cu)
+{
+  return XPtrTorchvector_string(lantern_jit_compile_list_methods(cu->get()));
+}
+
+// [[Rcpp::export]]
+Rcpp::XPtr<XPtrTorchFunctionPtr> cpp_jit_compile_get_function(Rcpp::XPtr<XPtrTorchCompilationUnit> cu, XPtrTorchstring name)
+{
+  return make_xptr<XPtrTorchFunctionPtr>(lantern_jit_compile_get_method(cu->get(), name.get()));
+}
