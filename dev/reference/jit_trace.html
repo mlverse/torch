@@ -193,7 +193,7 @@ recording the operations performed on all the tensors." />
 recording the operations performed on all the tensors.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>jit_trace</span><span class='op'>(</span><span class='va'>func</span>, <span class='va'>...</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>jit_trace</span><span class='op'>(</span><span class='va'>func</span>, <span class='va'>...</span>, strict <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -211,6 +211,14 @@ shapes assuming the traced operations support those types and shapes.
 <code>example_inputs</code> may also be a single Tensor in which case it is automatically
 wrapped in a list. Note that <code>...</code> <strong>can not</strong> be named, and the order is
 respected.</p></td>
+    </tr>
+    <tr>
+      <th>strict</th>
+      <td><p>run the tracer in a strict mode or not (default: <code>TRUE</code>). Only
+turn this off when you want the tracer to record your mutable container types
+(currently list/dict) and you are sure that the container you are using in
+your problem is a constant structure and does not get used as control flow
+(<code>if</code>, <code>for</code>) conditions.</p></td>
     </tr>
     </table>
 
