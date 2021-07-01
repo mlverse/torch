@@ -1010,37 +1010,32 @@ bool is_tensor (SEXP x)
 
 XPtrTorchIValue XPtrTorchIValue_from_SEXP (SEXP x)
 {
-  if (TYPEOF(x) == INTSXP && LENGTH(x) == 1)
+  if (TYPEOF(x) == INTSXP && LENGTH(x) == 1 && Rf_inherits(x, "jit_scalar"))
   {
     return XPtrTorchIValue(lantern_IValue_from_Int(Rcpp::as<int64_t>(x)));
   }
   
-  if (TYPEOF(x) == INTSXP && LENGTH(x) > 1)
+  if (TYPEOF(x) == INTSXP)
   {
     return XPtrTorchIValue(lantern_IValue_from_IntList(Rcpp::as<XPtrTorchvector_int64_t>(x).get()));
   }
   
-  if (TYPEOF(x) == CHARSXP && LENGTH(x) == 1)
-  {
-    return XPtrTorchIValue(lantern_IValue_from_String(Rcpp::as<XPtrTorchstring>(x).get()));
-  }
-  
-  if (TYPEOF(x) == LGLSXP && LENGTH(x) == 1)
+  if (TYPEOF(x) == LGLSXP && LENGTH(x) == 1 && Rf_inherits(x, "jit_scalar"))
   {
     return XPtrTorchIValue(lantern_IValue_from_Bool(Rcpp::as<bool>(x)));
   }
   
-  if (TYPEOF(x) == LGLSXP && LENGTH(x) > 1)
+  if (TYPEOF(x) == LGLSXP)
   {
     return XPtrTorchIValue(lantern_IValue_from_BoolList(Rcpp::as<XPtrTorchvector_bool>(x).get()));
   }
   
-  if (TYPEOF(x) == REALSXP && LENGTH(x) == 1)
+  if (TYPEOF(x) == REALSXP && LENGTH(x) == 1 && Rf_inherits(x, "jit_scalar"))
   {
     return XPtrTorchIValue(lantern_IValue_from_Double(Rcpp::as<double>(x)));
   }
   
-  if (TYPEOF(x) == REALSXP && LENGTH(x) > 1)
+  if (TYPEOF(x) == REALSXP)
   {
     return XPtrTorchIValue(lantern_IValue_from_DoubleList(Rcpp::as<XPtrTorchvector_double>(x).get()));
   }

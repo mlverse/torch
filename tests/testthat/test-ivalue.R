@@ -81,3 +81,11 @@ test_that("works for tuples", {
 test_that("works with NULL", {
   expect_equal(ivalue_test_function(NULL), NULL)
 })
+
+test_that("works with scalars", {
+  
+  expect_equal(ivalue_test_function(jit_scalar(1)), 1)
+  expect_equal(ivalue_test_function(jit_scalar(1L)), 1L)
+  expect_equal(ivalue_test_function(jit_scalar(TRUE)), TRUE)
+  
+})
