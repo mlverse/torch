@@ -1,5 +1,5 @@
 # Build Torch RStudio with CUDA on Docker
-This document is a environmental constrauction guide for Torch RStudio with CUDA on Docker.
+This document is an environmental construction guide for Torch RStudio with CUDA on Docker.
 
 ## Requirements
 Following requirements are expected to work on a Linux machine.
@@ -25,7 +25,7 @@ build_env_tools/
 
 ## Building env
 ### 1. Clone repository
-Just doing following command.
+Just do the following command.
 
 ```bash
 git clone https://github.com/mlverse/torch.git
