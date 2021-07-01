@@ -23,8 +23,10 @@ int64_t _lantern_Stack_size (void* self)
 
 void* _lantern_Stack_at (void* self, int64_t index)
 {
+    LANTERN_FUNCTION_START
     auto self_ = reinterpret_cast<LanternObject<torch::jit::Stack> *>(self)->get();
     return (void*) new c10::IValue(self_.at(index));
+    LANTERN_FUNCTION_END
 }
 
 void _lantern_Stack_push_back_IValue (void* self, void* x)
