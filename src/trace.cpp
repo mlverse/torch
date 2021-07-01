@@ -5,7 +5,7 @@ void* rcpp_call_hook (void* x, void* hook);
 
 // [[Rcpp::export]]
 Rcpp::XPtr<XPtrTorchFunctionPtr> cpp_trace_function (Rcpp::Function fn, XPtrTorchStack inputs,
-                        Rcpp::XPtr<XPtrTorchCompilationUnit> compilation_unit,
+                        XPtrTorchCompilationUnit compilation_unit,
                         bool strict = true)
 {
   
@@ -17,7 +17,7 @@ Rcpp::XPtr<XPtrTorchFunctionPtr> cpp_trace_function (Rcpp::Function fn, XPtrTorc
   };
   
   XPtrTorchTraceableFunction traceable_fn = lantern_create_traceable_fun(&rcpp_call_hook, (void*) &r_fn);
-  XPtrTorchFunctionPtr tr_fn = lantern_trace_fn(traceable_fn.get(), inputs.get(), compilation_unit->get(), strict);
+  XPtrTorchFunctionPtr tr_fn = lantern_trace_fn(traceable_fn.get(), inputs.get(), compilation_unit.get(), strict);
   
   return make_xptr<XPtrTorchFunctionPtr>(tr_fn);
 }
@@ -29,9 +29,9 @@ void cpp_save_traced_fn (Rcpp::XPtr<XPtrTorchFunctionPtr> fn, std::string filena
 }
 
 // [[Rcpp::export]]
-Rcpp::XPtr<XPtrTorchCompilationUnit> cpp_jit_compilation_unit ()
+XPtrTorchCompilationUnit cpp_jit_compilation_unit ()
 {
-  return make_xptr<XPtrTorchCompilationUnit>(lantern_CompilationUnit_new());
+  return XPtrTorchCompilationUnit(lantern_CompilationUnit_new());
 }
 
 // [[Rcpp::export]]
@@ -63,22 +63,4 @@ XPtrTorchStack cpp_call_jit_script (Rcpp::XPtr<XPtrTorchJITModule> module,
 {
   XPtrTorchStack out = lantern_call_jit_script(module->get(), inputs.get());
   return out;
-}
-
-// [[Rcpp::export]]
-Rcpp::XPtr<XPtrTorchCompilationUnit> cpp_jit_compile (XPtrTorchstring source)
-{
-  return make_xptr<XPtrTorchCompilationUnit>(lantern_jit_compile(source.get(), nullptr));
-}
-
-// [[Rcpp::export]]
-XPtrTorchvector_string cpp_jit_compile_list_methods (Rcpp::XPtr<XPtrTorchCompilationUnit> cu)
-{
-  return XPtrTorchvector_string(lantern_jit_compile_list_methods(cu->get()));
-}
-
-// [[Rcpp::export]]
-Rcpp::XPtr<XPtrTorchFunctionPtr> cpp_jit_compile_get_function(Rcpp::XPtr<XPtrTorchCompilationUnit> cu, XPtrTorchstring name)
-{
-  return make_xptr<XPtrTorchFunctionPtr>(lantern_jit_compile_get_method(cu->get(), name.get()));
 }

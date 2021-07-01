@@ -109,6 +109,13 @@ XPtrTorchTensorOptions::operator SEXP () const
   return xptr;
 }
 
+XPtrTorchCompilationUnit::operator SEXP () const 
+{
+  auto xptr = make_xptr<XPtrTorchCompilationUnit>(*this);
+  xptr.attr("class") = Rcpp::CharacterVector::create("torch_compilation_unit", "R7");
+  return xptr;
+}
+
 XPtrTorchDevice::operator SEXP () const 
 {
   auto xptr = make_xptr<XPtrTorchDevice>(*this);
@@ -1180,6 +1187,19 @@ XPtrTorchStack XPtrTorchStack_from_SEXP (SEXP x)
 
 XPtrTorchStack::XPtrTorchStack (SEXP x) :
   XPtrTorchStack{XPtrTorchStack_from_SEXP(x)} {}
+
+XPtrTorchCompilationUnit XPtrTorchCompilationUnit_from_SEXP (SEXP x) 
+{
+  if (TYPEOF(x) == EXTPTRSXP && Rf_inherits(x, "torch_compilation_unit"))
+  {
+    auto out = Rcpp::as<Rcpp::XPtr<XPtrTorchCompilationUnit>>(x);
+    return XPtrTorchCompilationUnit( out->get_shared());
+  }
+  Rcpp::stop("Unsupported type. Expected an external pointer.");
+}
+
+XPtrTorchCompilationUnit::XPtrTorchCompilationUnit (SEXP x) :
+  XPtrTorchCompilationUnit{XPtrTorchCompilationUnit_from_SEXP(x)} {}
 
 XPtrTorchint64_t2::XPtrTorchint64_t2 (SEXP x_)
 {

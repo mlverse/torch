@@ -129,32 +129,6 @@ void* _lantern_call_jit_script (void* module, void* inputs)
     LANTERN_FUNCTION_END
 }
 
-void* _lantern_jit_compile (void* source, void* cu)
-{
-    const auto source_ = *reinterpret_cast<std::string*>(source);
-    auto result = new torch::jit::CompilationUnit(std::move(*torch::jit::compile(source_)));
-    return (void*) result;
-}
-
-void* _lantern_jit_compile_list_methods (void* cu)
-{
-    auto cu_ = reinterpret_cast<torch::jit::CompilationUnit*>(cu);
-    auto funs = cu_->get_functions();
-    std::vector<std::string> names;
-    for (const auto& f: funs)
-    {
-        names.push_back(f->name());
-    }
-    return (void*) new std::vector<std::string>(names);
-}
-
-void* _lantern_jit_compile_get_method (void* cu, void* name)
-{
-    auto cu_ = reinterpret_cast<torch::jit::CompilationUnit*>(cu);
-    auto name_ = *reinterpret_cast<std::string*>(name);
-    return (void*) cu_->find_function(name_);
-}
-
 void _trace_r_nn_module ()
 {
     LANTERN_FUNCTION_START;
