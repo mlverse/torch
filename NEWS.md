@@ -1,5 +1,8 @@
 # torch (development version)
 
+- Improved R<->JIT types conversion. (#593)
+- Added support for ScriptModule. Loaded JIT modules now operate as `nn_module`s. (#593)
+
 # torch 0.4.0
 
 ## Breaking changes
