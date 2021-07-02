@@ -407,6 +407,15 @@ public:
   operator SEXP() const;
 };
 
+class XPtrTorchCompilationUnit : public XPtrTorch {
+public:
+  XPtrTorchCompilationUnit (void * x) : XPtrTorch(x, lantern_CompilationUnit_delete) {}
+  XPtrTorchCompilationUnit (SEXP x);
+  explicit XPtrTorchCompilationUnit (std::shared_ptr<void> x) : XPtrTorch(x) {};
+  XPtrTorchCompilationUnit (const XPtrTorchCompilationUnit& x) : XPtrTorch(x.get_shared()) {};
+  operator SEXP () const;
+};
+
 #include <Rcpp.h>
 
 class XPtrTorchQScheme : public XPtrTorch {
@@ -463,11 +472,6 @@ public:
 class XPtrTorchStorage : public XPtrTorch {
 public:
   XPtrTorchStorage (void * x) : XPtrTorch(x, lantern_Storage_delete) {}
-};
-
-class XPtrTorchCompilationUnit : public XPtrTorch {
-public:
-  XPtrTorchCompilationUnit (void * x) : XPtrTorch(x, lantern_CompilationUnit_delete) {}
 };
 
 class XPtrTorchJITModule : public XPtrTorch {

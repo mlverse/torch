@@ -120,6 +120,7 @@ set(LANTERN_SRC
     src/JITTypes.cpp
     src/ScriptModule.cpp
     src/IValue.cpp
+    src/Compile.cpp
 )
 
 

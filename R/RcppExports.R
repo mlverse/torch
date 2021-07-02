@@ -9621,6 +9621,18 @@ ivalue_test_function <- function(x) {
     .Call('_torch_ivalue_test_function', PACKAGE = 'torchpkg', x)
 }
 
+cpp_jit_compile <- function(source) {
+    .Call('_torch_cpp_jit_compile', PACKAGE = 'torchpkg', source)
+}
+
+cpp_jit_compile_list_methods <- function(cu) {
+    .Call('_torch_cpp_jit_compile_list_methods', PACKAGE = 'torchpkg', cu)
+}
+
+cpp_jit_compile_get_function <- function(cu, name) {
+    .Call('_torch_cpp_jit_compile_get_function', PACKAGE = 'torchpkg', cu, name)
+}
+
 cpp_lantern_configure <- function(log) {
     invisible(.Call('_torch_cpp_lantern_configure', PACKAGE = 'torchpkg', log))
 }
