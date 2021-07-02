@@ -1797,6 +1797,14 @@ HOST_API void* lantern_jit_compile (void* source, void* cu)
   return ret;
 }
 
+LANTERN_API void* (LANTERN_PTR _lantern_ScriptModule_new) (void* cu, void* name);
+HOST_API void* lantern_ScriptModule_new (void* cu, void* name)
+{
+  void* ret = _lantern_ScriptModule_new(cu, name);
+  LANTERN_HOST_HANDLER;
+  return ret;
+}
+
   /* Autogen Headers -- Start */
   LANTERN_API void* (LANTERN_PTR _lantern__cast_byte_tensor_bool)(void* self, void* non_blocking);
   HOST_API void* lantern__cast_byte_tensor_bool(void* self, void* non_blocking) { void* ret = _lantern__cast_byte_tensor_bool(self, non_blocking); LANTERN_HOST_HANDLER return ret; }
@@ -7011,6 +7019,7 @@ LOAD_SYMBOL(_lantern_IValue_from_None);
 LOAD_SYMBOL(_lantern_jit_compile_get_method);
 LOAD_SYMBOL(_lantern_jit_compile_list_methods);
 LOAD_SYMBOL(_lantern_jit_compile);
+LOAD_SYMBOL(_lantern_ScriptModule_new);
   /* Autogen Symbols -- Start */
   LOAD_SYMBOL(_lantern__cast_byte_tensor_bool)
   LOAD_SYMBOL(_lantern__cast_char_tensor_bool)

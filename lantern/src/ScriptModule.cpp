@@ -8,6 +8,18 @@
 using namespace torch::jit::tracer;
 using namespace torch::jit;
 
+void* _lantern_ScriptModule_new (void* cu, void* name)
+{
+    // this pointer shouldn't use the default deleter as its memory is managed in 
+    // the R side.
+    auto cu_ = std::shared_ptr<torch::CompilationUnit>(
+        reinterpret_cast<torch::CompilationUnit*>(cu), 
+        [](void* x){}
+        );
+    auto name_ = *reinterpret_cast<std::string*>(name);
+    return (void*) new torch::jit::Module(name_, cu_);
+}
+
 void* _lantern_ScriptModule_parameters (void* module, bool recurse)
 {
     auto module_ = reinterpret_cast<torch::jit::script::Module *>(module);
