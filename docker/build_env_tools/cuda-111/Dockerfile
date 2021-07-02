@@ -1,10 +1,10 @@
-FROM nvidia/cuda:10.1-cudnn7-devel
+FROM nvidia/cuda:11.1-cudnn8-devel-ubuntu18.04
 
 ARG ROOT_PASSWD
 ARG PASSWD
 
 # Set up R(Reference rocker/r-ver)
-ARG R_VERSION_FULL=4.0.2
+ARG R_VERSION_FULL=4.0.5
 ARG R_VERSION=4
 ENV CRAN=${CRAN:-https://cran.rstudio.com}
 ENV LC_ALL=en_US.UTF-8
@@ -15,7 +15,7 @@ ENV DEBIAN_FRONTEND=noninteractive
 RUN apt-get update && apt-get install -y --no-install-recommends bash-completion libbz2-dev \
     ca-certificates file fonts-texgyre g++ gfortran gsfonts libblas-dev libbz2-1.0 libcurl4 \
     libcurl4-openssl-dev libjpeg-dev liblzma-dev libopenblas-dev libpangocairo-1.0-0 libpcre2-dev \
-    libpcre3 libpng16-16 libreadline-dev libtiff5 liblzma5 locales make unzip wget xorg-dev zip zlib1g \
+    libpcre3 libpng16-16 libreadline-dev libtiff5 liblzma5 locales make unzip wget xorg-dev zip zlib1g libpq5 \
   && BUILDDEPS="curl default-jdk libbz2-dev libcairo2-dev libcurl4-openssl-dev libpango1.0-dev libjpeg-dev \
     libicu-dev libpcre3-dev libpng-dev libreadline-dev libtiff5-dev liblzma-dev libx11-dev libxt-dev perl \
     tcl8.6-dev tk8.6-dev texinfo texlive-extra-utils texlive-fonts-recommended texlive-fonts-extra \
@@ -64,13 +64,13 @@ RUN apt-get update && apt-get install -y --no-install-recommends bash-completion
 
 # Set up RStudio(Reference rocker/rstudio)
 ARG RSTUDIO_VERSION
-ENV RSTUDIO_VERSION=${RSTUDIO_VERSION:-1.2.5042}
+ENV RSTUDIO_VERSION=${RSTUDIO_VERSION:-1.3.1093}
 ARG S6_VERSION
 ARG PANDOC_TEMPLATES_VERSION
-ENV S6_VERSION=${S6_VERSION:-v1.21.7.0}
+ENV S6_VERSION=${S6_VERSION:-v2.2.0.3}
 ENV S6_BEHAVIOUR_IF_STAGE2_FAILS=2
 ENV PATH=/usr/lib/rstudio-server/bin:$PATH
-ENV PANDOC_TEMPLATES_VERSION=${PANDOC_TEMPLATES_VERSION:-2.9}
+ENV PANDOC_TEMPLATES_VERSION=${PANDOC_TEMPLATES_VERSION:-2.14.0.3}
 
 ## Download and install RStudio server & dependencies
 ## Attempts to get detect latest version, otherwise falls back to version given in $VER

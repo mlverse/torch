@@ -1,5 +1,5 @@
 # Build Torch RStudio with CUDA on Docker
-This document is a environmental constrauction guide for Torch RStudio with CUDA on Docker.
+This document is an environmental construction guide for Torch RStudio with CUDA on Docker.
 
 ## Requirements
 Following requirements are expected to work on a Linux machine.
@@ -8,30 +8,48 @@ Following requirements are expected to work on a Linux machine.
 * NVIDIA Docker 2
 * CUDA arch based GPU env
 
+## Directory structure
+The directory structure of this tools as follows.
+
+```bash
+build_env_tools/
+├── cuda-101
+│   ├── Dockerfile
+│   ├── build_env.sh
+│   └── docker-compose.yml
+└── cuda-111
+    ├── Dockerfile
+    ├── build_env.sh
+    └── docker-compose.yml
+```
+
 ## Building env
 ### 1. Clone repository
-Just doing following command.
+Just do the following command.
 
 ```bash
 git clone https://github.com/mlverse/torch.git
 ```
 
 ### 2. Change directory
-Move into `torch/docker` directory.
+Move into `torch/docker/build_env_tools/cuda-xxx` directory.`xxx` is CUDA version which you would like to use.
+* If you would like to use CUDA 11(CUDA 10), you should move into cuda-111(cuda-101) directory.
+* If you will install CUDA 10 in your machine, you must move into cuda-101 directory.
+
 
 ```bash
-cd torch/docker
+cd torch/docker/build_env_tools/cuda-xxx
 ```
 
 ### 3. Create `rstudio_home` directory
 Create `rstudio_home` directory outside of torch directory which uses home directory of container.(just doing following command.) If you would like to use another directory as home directory, you must modify `docker-compose.yml`(`Path` strings at `volume` section).
 
 ```bash
-mkdir  ../../rstudio_home
+mkdir  ../../../../rstudio_home
 ```
 
 ### 4. Create `auth.txt`
-Create `auth.txt` into `torch/docker/` and write root user's password and rstudio(default user) user's password which you would like to set.
+Create `auth.txt` into `torch/docker/build_env_tools/cuda-xxx` and write root user's password and rstudio(default user) user's password which you would like to set.
 
 ```bash
 echo "rstudio" >> auth.txt # root user's password

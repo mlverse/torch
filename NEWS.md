@@ -3,6 +3,7 @@
 - Improved R<->JIT types conversion. (#593)
 - Added support for ScriptModule. Loaded JIT modules now operate as `nn_module`s. (#593)
 - Added a `jit_compile` function that allows compiling arbitrary TorchScript code into script function that can be serialized and executed. (#601)
+- Added Dockerfiles for CUDA 11.1 (#597)
 
 # torch 0.4.0
 
