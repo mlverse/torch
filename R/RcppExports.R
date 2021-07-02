@@ -9825,6 +9825,10 @@ cpp_jit_script_module_register_parameter <- function(self, name, v, is_buffer) {
     invisible(.Call('_torch_cpp_jit_script_module_register_parameter', PACKAGE = 'torchpkg', self, name, v, is_buffer))
 }
 
+cpp_jit_script_module_register_module <- function(self, name, module) {
+    invisible(.Call('_torch_cpp_jit_script_module_register_module', PACKAGE = 'torchpkg', self, name, module))
+}
+
 cpp_jit_script_module_register_buffer <- function(self, name, v) {
     invisible(.Call('_torch_cpp_jit_script_module_register_buffer', PACKAGE = 'torchpkg', self, name, v))
 }
@@ -9847,6 +9851,10 @@ cpp_jit_script_module_find_method <- function(self, basename) {
 
 cpp_jit_script_method_call <- function(self, inputs) {
     .Call('_torch_cpp_jit_script_method_call', PACKAGE = 'torchpkg', self, inputs)
+}
+
+cpp_jit_script_module_new <- function(cu, name) {
+    .Call('_torch_cpp_jit_script_module_new', PACKAGE = 'torchpkg', cu, name)
 }
 
 test_stack <- function(x) {
@@ -9969,8 +9977,8 @@ test_fun_hello <- function(x) {
     .Call('_torch_test_fun_hello', PACKAGE = 'torchpkg', x)
 }
 
-cpp_trace_function <- function(fn, inputs, compilation_unit, strict = TRUE) {
-    .Call('_torch_cpp_trace_function', PACKAGE = 'torchpkg', fn, inputs, compilation_unit, strict)
+cpp_trace_function <- function(fn, inputs, compilation_unit, strict = TRUE, module = NULL) {
+    .Call('_torch_cpp_trace_function', PACKAGE = 'torchpkg', fn, inputs, compilation_unit, strict, module)
 }
 
 cpp_save_traced_fn <- function(fn, filename) {

@@ -19,6 +19,19 @@ ScriptModule <- R7Class(
       cpp_jit_script_module_register_buffer(self, name, tensor)
       invisible(self)
     },
+    register_module = function(name, module) {
+      if (inherits(module, "script_module"))
+        module <- module$..ptr..()
+      
+      if (!inherits(module, "torch_script_module"))
+        runtime_error("Script modules can only register Script modules children.")
+      
+      if (is.numeric(name))
+        name <- as.character(name)
+      
+      cpp_jit_script_module_register_module(self, name, module)
+      invisible(self)
+    },
     to = function(device, non_blocking = FALSE){
       cpp_jit_script_module_to(self, device, non_blocking)
       invisible(self)
@@ -98,6 +111,12 @@ nn_ScriptModule <- R6::R6Class(
     },
     register_buffer = function(name, tensor, persistent = TRUE) {
       private$ptr$register_buffer(name, tensor, persistent)
+    },
+    register_module = function(name, module) {
+      private$ptr$register_module(name, module)
+    },
+    ..ptr.. = function() {
+      private$ptr
     }
   ),
   private = list(

@@ -167,3 +167,29 @@ make_traceable_fn <- function(fn) {
   }
 }
 
+
+
+create_script_module <- function(mod) {
+  
+  module <- cpp_jit_script_module_new(.compilation_unit, digest::digest(runif(1)))
+  
+  purrr::iwalk(mod$named_parameters(recursive = FALSE), function(par, name) {
+    module$register_parameter(name, par)
+  })
+  
+  purrr::iwalk(mod$named_buffers(recursive = FALSE), function(buf, name) {
+    module$register_buffer(name, buf)
+  })
+  
+  purrr::iwalk(mod$children, function(child, name) {
+    module$register_module(name, create_script_module(child))
+  }) 
+  
+  module
+}
+
+
+jit_trace_module <- function(mod, inputs) {
+  
+}
+

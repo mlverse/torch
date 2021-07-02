@@ -683,10 +683,10 @@ HOST_API void* lantern_create_traceable_fun (void *(*r_caller)(void *, void *), 
   return ret;
 }
 
-LANTERN_API void* (LANTERN_PTR _lantern_trace_fn) (void* fn, void* inputs, void* compilation_unit, bool strict);
-HOST_API void* lantern_trace_fn (void* fn, void* inputs, void* compilation_unit, bool strict)
+LANTERN_API void* (LANTERN_PTR _lantern_trace_fn) (void* fn, void* inputs, void* compilation_unit, bool strict, void* module);
+HOST_API void* lantern_trace_fn (void* fn, void* inputs, void* compilation_unit, bool strict, void* module)
 {
-  void* ret = _lantern_trace_fn(fn, inputs, compilation_unit, strict);
+  void* ret = _lantern_trace_fn(fn, inputs, compilation_unit, strict, module);
   LANTERN_HOST_HANDLER;
   return ret;
 }
@@ -1793,6 +1793,14 @@ LANTERN_API void* (LANTERN_PTR _lantern_jit_compile) (void* source, void* cu);
 HOST_API void* lantern_jit_compile (void* source, void* cu)
 {
   void* ret = _lantern_jit_compile(source, cu);
+  LANTERN_HOST_HANDLER;
+  return ret;
+}
+
+LANTERN_API void* (LANTERN_PTR _lantern_ScriptModule_new) (void* cu, void* name);
+HOST_API void* lantern_ScriptModule_new (void* cu, void* name)
+{
+  void* ret = _lantern_ScriptModule_new(cu, name);
   LANTERN_HOST_HANDLER;
   return ret;
 }
@@ -7011,6 +7019,7 @@ LOAD_SYMBOL(_lantern_IValue_from_None);
 LOAD_SYMBOL(_lantern_jit_compile_get_method);
 LOAD_SYMBOL(_lantern_jit_compile_list_methods);
 LOAD_SYMBOL(_lantern_jit_compile);
+LOAD_SYMBOL(_lantern_ScriptModule_new);
   /* Autogen Symbols -- Start */
   LOAD_SYMBOL(_lantern__cast_byte_tensor_bool)
   LOAD_SYMBOL(_lantern__cast_char_tensor_bool)

@@ -142,6 +142,13 @@ void* _lantern_ScriptModule_find_method (void* self, void* basename)
     }
 }
 
+void _lantern_ScriptModule_add_method (void* self, void* method) 
+{
+    auto self_ = reinterpret_cast<torch::jit::script::Module *>(self);
+    auto method_ = reinterpret_cast<torch::jit::Function *>(method);
+    self_->type()->addMethod(method_);
+}
+
 void* _lantern_ScriptMethod_call (void* self, void* inputs)
 {
     auto self_ = *reinterpret_cast<torch::jit::script::Method *>(self);

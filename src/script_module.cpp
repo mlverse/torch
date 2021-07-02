@@ -47,6 +47,14 @@ void cpp_jit_script_module_register_parameter (XPtrTorchScriptModule self,
 }
 
 // [[Rcpp::export]]
+void cpp_jit_script_module_register_module (XPtrTorchScriptModule self,
+                                            XPtrTorchstring name,
+                                            XPtrTorchScriptModule module)
+{
+  lantern_ScriptModule_register_module(self.get(), name.get(), module.get());
+}
+
+// [[Rcpp::export]]
 void cpp_jit_script_module_register_buffer (XPtrTorchScriptModule self,
                                             XPtrTorchstring name,
                                             XPtrTorchTensor v) 
@@ -84,4 +92,10 @@ Rcpp::XPtr<XPtrTorchStack> cpp_jit_script_method_call (XPtrTorchScriptMethod sel
 {
   auto out = XPtrTorchStack(lantern_ScriptMethod_call(self.get(), inputs->get()));
   return make_xptr<XPtrTorchStack>(out);
+}
+
+// [[Rcpp::export]]
+XPtrTorchScriptModule cpp_jit_script_module_new (XPtrTorchCompilationUnit cu, XPtrTorchstring name)
+{
+  return XPtrTorchScriptModule(lantern_ScriptModule_new(cu.get(), name.get()));
 }

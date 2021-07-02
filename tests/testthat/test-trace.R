@@ -206,3 +206,24 @@ test_that("tuple casting", {
   )
   
 })
+
+test_that("create a script module", {
+  
+  test_module <- nn_module(
+    initialize = function() {
+      self$linear <- nn_linear(10, 10)
+      self$norm <- nn_batch_norm2d(10)
+      self$par <- nn_parameter(torch_randn(10, 10))
+      self$buff <- nn_buffer(torch_randn(10, 5))
+    },
+    forward = function(x) {
+      x
+    }
+  )
+  
+  expect_error(
+    m <- create_script_module(test_module()),
+    regexp = NA
+  )
+
+})
