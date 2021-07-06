@@ -15,7 +15,7 @@
 # 2021-05-21:
 # * Fixed "object `x` not found" error in `imap()` (@mgirlich)
 
-#' @importFrom rlang as_function %||% set_names
+#' @importFrom rlang as_function %||% set_names global_env is_true is_logical
 map <- function(.x, .f, ...) {
   .f <- as_function(.f, env = global_env())
   lapply(.x, .f, ...)

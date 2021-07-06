@@ -181,7 +181,7 @@ module_ignored_names <- c(
 
 create_script_module <- function(mod) {
   
-  module <- cpp_jit_script_module_new(.compilation_unit, digest::digest(runif(1)))
+  module <- cpp_jit_script_module_new(.compilation_unit, as.character(stats::runif(1)))
   
   iwalk(mod$named_parameters(recursive = FALSE), function(par, name) {
     module$register_parameter(name, par)
