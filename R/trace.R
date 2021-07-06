@@ -183,20 +183,20 @@ create_script_module <- function(mod) {
   
   module <- cpp_jit_script_module_new(.compilation_unit, digest::digest(runif(1)))
   
-  purrr::iwalk(mod$named_parameters(recursive = FALSE), function(par, name) {
+  iwalk(mod$named_parameters(recursive = FALSE), function(par, name) {
     module$register_parameter(name, par)
   })
   
-  purrr::iwalk(mod$named_buffers(recursive = FALSE), function(buf, name) {
+  iwalk(mod$named_buffers(recursive = FALSE), function(buf, name) {
     module$register_buffer(name, buf)
   })
   
-  purrr::iwalk(mod$children, function(child, name) {
+  iwalk(mod$children, function(child, name) {
     module$register_module(name, create_script_module(child))
   })
   
   constants <- names(mod)[!names(mod) %in% module_ignored_names]
-  purrr::walk(constants, function(name) {
+  walk(constants, function(name) {
     if (rlang::is_closure(mod[[name]])) return()
     # TODO catch invalid types and raise a warning listing their names.
     module$add_constant(name, mod[[name]])  
