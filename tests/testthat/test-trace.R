@@ -215,6 +215,8 @@ test_that("create a script module", {
       self$norm <- nn_batch_norm2d(10)
       self$par <- nn_parameter(torch_randn(10, 10))
       self$buff <- nn_buffer(torch_randn(10, 5))
+      self$constant <- 1
+      self$hello <- list(torch_tensor(1), torch_tensor(2), "hello")
     },
     forward = function(x) {
       x
@@ -225,5 +227,11 @@ test_that("create a script module", {
     m <- create_script_module(test_module()),
     regexp = NA
   )
+  
+  expect_equal(m$constant, 1)
+  expect_equal(m$hello, list(torch_tensor(1), torch_tensor(2), "hello"))
+  expect_length(m$parameters, 5)
+  expect_length(m$buffers, 4)
+  expect_length(m$modules, 3)
 
 })

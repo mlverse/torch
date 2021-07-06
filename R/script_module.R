@@ -32,12 +32,19 @@ ScriptModule <- R7Class(
       cpp_jit_script_module_register_module(self, name, module)
       invisible(self)
     },
+    add_constant = function(name, value) {
+      cpp_jit_script_module_add_constant(self, name, value)
+      invisible(self)
+    },
     to = function(device, non_blocking = FALSE){
       cpp_jit_script_module_to(self, device, non_blocking)
       invisible(self)
     },
     find_method = function(name) {
       cpp_jit_script_module_find_method(self, name)
+    },
+    find_constant = function(name) {
+      cpp_jit_script_module_find_constant(self, name)
     }
   ),
   active = list(
@@ -115,6 +122,9 @@ nn_ScriptModule <- R6::R6Class(
     register_module = function(name, module) {
       private$ptr$register_module(name, module)
     },
+    add_constant = function(name, value) {
+      private$ptr$add_constant(name, value)
+    },
     ..ptr.. = function() {
       private$ptr
     }
@@ -125,6 +135,19 @@ nn_ScriptModule <- R6::R6Class(
     }
   )
 )
+
+#' @export
+`[[.script_module` <- function(x, y) {
+  out <- attr(x, "module")$..ptr..()$find_constant(y)
+  if (!is.null(out))
+    return(out)
+  NextMethod()
+}
+
+#' @export
+`$.script_module` <- function(x, y) {
+  x[[y]]
+}
 
 new_script_module <- function(ptr) {
   f <- function(...) {

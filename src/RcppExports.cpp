@@ -32048,18 +32048,6 @@ BEGIN_RCPP
     return R_NilValue;
 END_RCPP
 }
-// cpp_jit_script_module_register_module
-void cpp_jit_script_module_register_module(XPtrTorchScriptModule self, XPtrTorchstring name, XPtrTorchScriptModule module);
-RcppExport SEXP _torch_cpp_jit_script_module_register_module(SEXP selfSEXP, SEXP nameSEXP, SEXP moduleSEXP) {
-BEGIN_RCPP
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< XPtrTorchScriptModule >::type self(selfSEXP);
-    Rcpp::traits::input_parameter< XPtrTorchstring >::type name(nameSEXP);
-    Rcpp::traits::input_parameter< XPtrTorchScriptModule >::type module(moduleSEXP);
-    cpp_jit_script_module_register_module(self, name, module);
-    return R_NilValue;
-END_RCPP
-}
 // cpp_jit_script_module_register_buffer
 void cpp_jit_script_module_register_buffer(XPtrTorchScriptModule self, XPtrTorchstring name, XPtrTorchTensor v);
 RcppExport SEXP _torch_cpp_jit_script_module_register_buffer(SEXP selfSEXP, SEXP nameSEXP, SEXP vSEXP) {
@@ -32069,6 +32057,18 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< XPtrTorchstring >::type name(nameSEXP);
     Rcpp::traits::input_parameter< XPtrTorchTensor >::type v(vSEXP);
     cpp_jit_script_module_register_buffer(self, name, v);
+    return R_NilValue;
+END_RCPP
+}
+// cpp_jit_script_module_register_module
+void cpp_jit_script_module_register_module(XPtrTorchScriptModule self, XPtrTorchstring name, XPtrTorchScriptModule module);
+RcppExport SEXP _torch_cpp_jit_script_module_register_module(SEXP selfSEXP, SEXP nameSEXP, SEXP moduleSEXP) {
+BEGIN_RCPP
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchScriptModule >::type self(selfSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchstring >::type name(nameSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchScriptModule >::type module(moduleSEXP);
+    cpp_jit_script_module_register_module(self, name, module);
     return R_NilValue;
 END_RCPP
 }
@@ -32139,6 +32139,30 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< XPtrTorchCompilationUnit >::type cu(cuSEXP);
     Rcpp::traits::input_parameter< XPtrTorchstring >::type name(nameSEXP);
     rcpp_result_gen = Rcpp::wrap(cpp_jit_script_module_new(cu, name));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_jit_script_module_add_constant
+void cpp_jit_script_module_add_constant(XPtrTorchScriptModule self, XPtrTorchstring name, XPtrTorchIValue value);
+RcppExport SEXP _torch_cpp_jit_script_module_add_constant(SEXP selfSEXP, SEXP nameSEXP, SEXP valueSEXP) {
+BEGIN_RCPP
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchScriptModule >::type self(selfSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchstring >::type name(nameSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchIValue >::type value(valueSEXP);
+    cpp_jit_script_module_add_constant(self, name, value);
+    return R_NilValue;
+END_RCPP
+}
+// cpp_jit_script_module_find_constant
+SEXP cpp_jit_script_module_find_constant(XPtrTorchScriptModule self, XPtrTorchstring name);
+RcppExport SEXP _torch_cpp_jit_script_module_find_constant(SEXP selfSEXP, SEXP nameSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchScriptModule >::type self(selfSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchstring >::type name(nameSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_jit_script_module_find_constant(self, name));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -35134,14 +35158,16 @@ static const R_CallMethodDef CallEntries[] = {
     {"_torch_cpp_jit_script_module_is_training", (DL_FUNC) &_torch_cpp_jit_script_module_is_training, 1},
     {"_torch_cpp_jit_script_module_is_optimized", (DL_FUNC) &_torch_cpp_jit_script_module_is_optimized, 1},
     {"_torch_cpp_jit_script_module_register_parameter", (DL_FUNC) &_torch_cpp_jit_script_module_register_parameter, 4},
-    {"_torch_cpp_jit_script_module_register_module", (DL_FUNC) &_torch_cpp_jit_script_module_register_module, 3},
     {"_torch_cpp_jit_script_module_register_buffer", (DL_FUNC) &_torch_cpp_jit_script_module_register_buffer, 3},
+    {"_torch_cpp_jit_script_module_register_module", (DL_FUNC) &_torch_cpp_jit_script_module_register_module, 3},
     {"_torch_cpp_jit_script_module_to", (DL_FUNC) &_torch_cpp_jit_script_module_to, 3},
     {"_torch_cpp_jit_script_module_modules", (DL_FUNC) &_torch_cpp_jit_script_module_modules, 1},
     {"_torch_cpp_jit_script_module_children", (DL_FUNC) &_torch_cpp_jit_script_module_children, 1},
     {"_torch_cpp_jit_script_module_find_method", (DL_FUNC) &_torch_cpp_jit_script_module_find_method, 2},
     {"_torch_cpp_jit_script_method_call", (DL_FUNC) &_torch_cpp_jit_script_method_call, 2},
     {"_torch_cpp_jit_script_module_new", (DL_FUNC) &_torch_cpp_jit_script_module_new, 2},
+    {"_torch_cpp_jit_script_module_add_constant", (DL_FUNC) &_torch_cpp_jit_script_module_add_constant, 3},
+    {"_torch_cpp_jit_script_module_find_constant", (DL_FUNC) &_torch_cpp_jit_script_module_find_constant, 2},
     {"_torch_test_stack", (DL_FUNC) &_torch_test_stack, 1},
     {"_torch_cpp_Tensor_storage", (DL_FUNC) &_torch_cpp_Tensor_storage, 1},
     {"_torch_cpp_Tensor_has_storage", (DL_FUNC) &_torch_cpp_Tensor_has_storage, 1},

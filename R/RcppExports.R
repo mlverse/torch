@@ -9825,12 +9825,12 @@ cpp_jit_script_module_register_parameter <- function(self, name, v, is_buffer) {
     invisible(.Call('_torch_cpp_jit_script_module_register_parameter', PACKAGE = 'torchpkg', self, name, v, is_buffer))
 }
 
-cpp_jit_script_module_register_module <- function(self, name, module) {
-    invisible(.Call('_torch_cpp_jit_script_module_register_module', PACKAGE = 'torchpkg', self, name, module))
-}
-
 cpp_jit_script_module_register_buffer <- function(self, name, v) {
     invisible(.Call('_torch_cpp_jit_script_module_register_buffer', PACKAGE = 'torchpkg', self, name, v))
+}
+
+cpp_jit_script_module_register_module <- function(self, name, module) {
+    invisible(.Call('_torch_cpp_jit_script_module_register_module', PACKAGE = 'torchpkg', self, name, module))
 }
 
 cpp_jit_script_module_to <- function(self, device, non_blocking) {
@@ -9855,6 +9855,14 @@ cpp_jit_script_method_call <- function(self, inputs) {
 
 cpp_jit_script_module_new <- function(cu, name) {
     .Call('_torch_cpp_jit_script_module_new', PACKAGE = 'torchpkg', cu, name)
+}
+
+cpp_jit_script_module_add_constant <- function(self, name, value) {
+    invisible(.Call('_torch_cpp_jit_script_module_add_constant', PACKAGE = 'torchpkg', self, name, value))
+}
+
+cpp_jit_script_module_find_constant <- function(self, name) {
+    .Call('_torch_cpp_jit_script_module_find_constant', PACKAGE = 'torchpkg', self, name)
 }
 
 test_stack <- function(x) {

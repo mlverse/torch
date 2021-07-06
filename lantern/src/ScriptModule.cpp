@@ -149,6 +149,29 @@ void _lantern_ScriptModule_add_method (void* self, void* method)
     self_->type()->addMethod(method_);
 }
 
+void _lantern_ScriptModule_add_constant (void* self, void* name, void* value)
+{
+    auto self_ = reinterpret_cast<torch::jit::script::Module *>(self);
+    auto name_ = reinterpret_cast<std::string*>(name);
+    auto value_ = reinterpret_cast<c10::IValue*>(value);
+    self_->type()->addConstant(*name_, *value_);
+}
+
+void* _lantern_ScriptModule_find_constant (void* self, void* name)
+{
+    auto self_ = reinterpret_cast<torch::jit::script::Module *>(self);
+    auto name_ = reinterpret_cast<std::string*>(name);
+    auto constant = self_->type()->findConstant(*name_);
+    if (!constant.has_value())
+    {
+        return nullptr;
+    }
+    else
+    {
+        return (void*) new c10::IValue(constant.value());
+    }
+}
+
 void* _lantern_ScriptMethod_call (void* self, void* inputs)
 {
     auto self_ = *reinterpret_cast<torch::jit::script::Method *>(self);

@@ -168,6 +168,16 @@ make_traceable_fn <- function(fn) {
 }
 
 
+module_ignored_names <- c(
+  ".__enclos_env__", "children", 
+  "modules", "buffers", "parameters", ".classes", "training", "clone", 
+  "forward", "reset_parameters", "initialize", "named_buffers", 
+  "named_parameters", "apply", "zero_grad", "load_state_dict", 
+  ".load_from_state_dict", "state_dict", ".save_to_state_dict", 
+  "print", "to", "cpu", "cuda", ".apply", "eval", "train", "register_buffer", 
+  "register_parameter", "register_module", "add_module"
+)
+
 
 create_script_module <- function(mod) {
   
@@ -183,13 +193,19 @@ create_script_module <- function(mod) {
   
   purrr::iwalk(mod$children, function(child, name) {
     module$register_module(name, create_script_module(child))
-  }) 
+  })
+  
+  constants <- names(mod)[!names(mod) %in% module_ignored_names]
+  purrr::walk(constants, function(name) {
+    if (rlang::is_closure(mod[[name]])) return()
+    # TODO catch invalid types and raise a warning listing their names.
+    module$add_constant(name, mod[[name]])  
+  })
   
   module
 }
 
-
 jit_trace_module <- function(mod, inputs) {
-  
+  module <- create_script_module(mod)
 }
 

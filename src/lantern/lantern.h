@@ -1805,6 +1805,22 @@ HOST_API void* lantern_ScriptModule_new (void* cu, void* name)
   return ret;
 }
 
+LANTERN_API void (LANTERN_PTR _lantern_ScriptModule_add_constant) (void* self, void* name, void* value);
+HOST_API void lantern_ScriptModule_add_constant (void* self, void* name, void* value)
+{
+   _lantern_ScriptModule_add_constant(self, name, value);
+  LANTERN_HOST_HANDLER;
+  
+}
+
+LANTERN_API void* (LANTERN_PTR _lantern_ScriptModule_find_constant) (void* self, void* name);
+HOST_API void* lantern_ScriptModule_find_constant (void* self, void* name)
+{
+  void* ret = _lantern_ScriptModule_find_constant(self, name);
+  LANTERN_HOST_HANDLER;
+  return ret;
+}
+
   /* Autogen Headers -- Start */
   LANTERN_API void* (LANTERN_PTR _lantern__cast_byte_tensor_bool)(void* self, void* non_blocking);
   HOST_API void* lantern__cast_byte_tensor_bool(void* self, void* non_blocking) { void* ret = _lantern__cast_byte_tensor_bool(self, non_blocking); LANTERN_HOST_HANDLER return ret; }
@@ -7020,6 +7036,8 @@ LOAD_SYMBOL(_lantern_jit_compile_get_method);
 LOAD_SYMBOL(_lantern_jit_compile_list_methods);
 LOAD_SYMBOL(_lantern_jit_compile);
 LOAD_SYMBOL(_lantern_ScriptModule_new);
+LOAD_SYMBOL(_lantern_ScriptModule_add_constant);
+LOAD_SYMBOL(_lantern_ScriptModule_find_constant);
   /* Autogen Symbols -- Start */
   LOAD_SYMBOL(_lantern__cast_byte_tensor_bool)
   LOAD_SYMBOL(_lantern__cast_char_tensor_bool)
