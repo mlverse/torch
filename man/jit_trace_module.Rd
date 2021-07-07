@@ -10,22 +10,15 @@ jit_trace_module(mod, ..., strict = TRUE)
 \item{mod}{A torch \code{nn_module()}  containing methods whose names are specified
 in inputs. The given methods will be compiled as a part of a single ScriptModule.}
 
-\item{...}{example inputs that will be passed to the function while
-tracing. The resulting trace can be run with inputs of different types and
-shapes assuming the traced operations support those types and shapes.
-\code{example_inputs} may also be a single Tensor in which case it is automatically
-wrapped in a list. Note that \code{...} \strong{can not} be named, and the order is
-respected.}
+\item{...}{A named list containing sample inputs indexed by method names
+in mod. The inputs will be passed to methods whose names correspond to inputs
+keys while tracing. \code{list('forward'=example_forward_input, 'method2'=example_method2_input)}.}
 
 \item{strict}{run the tracer in a strict mode or not (default: \code{TRUE}). Only
 turn this off when you want the tracer to record your mutable container types
 (currently list/dict) and you are sure that the container you are using in
 your problem is a constant structure and does not get used as control flow
 (\code{if}, \code{for}) conditions.}
-
-\item{inputs}{A named list containing sample inputs indexed by method names
-in mod. The inputs will be passed to methods whose names correspond to inputs
-keys while tracing. \code{list('forward'=example_forward_input, 'method2'=example_method2_input)}.}
 }
 \description{
 Trace a module and return an executable ScriptModule that will be optimized

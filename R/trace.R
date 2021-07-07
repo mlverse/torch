@@ -69,7 +69,7 @@ jit_trace <- function(func, ..., strict = TRUE) {
   if (inherits(func, "nn_module")) {
     args <- list(
       mod = func, 
-      forward = list(...), 
+      forward = rlang::list2(...), 
       strict = strict
     )
     return(do.call(jit_trace_module, args))
@@ -230,7 +230,7 @@ create_script_module <- function(mod) {
 #'
 #' @param mod A torch `nn_module()`  containing methods whose names are specified 
 #'   in inputs. The given methods will be compiled as a part of a single ScriptModule.
-#' @param inputs A named list containing sample inputs indexed by method names 
+#' @param ... A named list containing sample inputs indexed by method names 
 #'   in mod. The inputs will be passed to methods whose names correspond to inputs
 #'   keys while tracing. `list('forward'=example_forward_input, 'method2'=example_method2_input)`.
 #'
@@ -246,7 +246,7 @@ create_script_module <- function(mod) {
 #' @export
 jit_trace_module <- function(mod, ..., strict = TRUE) {
   
-  inputs <- list(...)
+  inputs <- rlang::list2(...)
   
   if (!inherits(mod, "nn_module"))
     value_error("`mod` must be a `nn_module()`.")
