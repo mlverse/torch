@@ -29,7 +29,8 @@ make_load_symbols <- function(decls) {
 
 decls <- readr::read_lines(
   "
-void* _lantern_ScriptModule_new (void* cu, void* name)
+void* _lantern_Method_call (void* self, void* inputs) 
+void _lantern_Method_delete (void* x)
 "  
 )
 

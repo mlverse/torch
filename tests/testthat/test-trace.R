@@ -207,24 +207,34 @@ test_that("tuple casting", {
   
 })
 
-test_that("create a script module", {
+test_that("trace a nn module", {
   
   test_module <- nn_module(
     initialize = function() {
       self$linear <- nn_linear(10, 10)
-      self$norm <- nn_batch_norm2d(10)
-      self$par <- nn_parameter(torch_randn(10, 10))
+      self$norm <- nn_batch_norm1d(10)
+      self$par <- nn_parameter(torch_tensor(2))
       self$buff <- nn_buffer(torch_randn(10, 5))
       self$constant <- 1
       self$hello <- list(torch_tensor(1), torch_tensor(2), "hello")
     },
     forward = function(x) {
-      x
+      self$par * x
+    },
+    testing = function(x) {
+      x %>% 
+        self$linear()
     }
   )
   
+  mod <- test_module()
+  
   expect_error(
-    m <- create_script_module(test_module()),
+    m <- jit_trace_module(
+      mod, 
+      forward = torch_randn(1),
+      testing = list(torch_randn(10, 10))
+    ),
     regexp = NA
   )
   
@@ -234,4 +244,26 @@ test_that("create a script module", {
   expect_length(m$buffers, 4)
   expect_length(m$modules, 3)
 
+  expect_equal_to_tensor(m(torch_tensor(2)), torch_tensor(4))
+  with_no_grad(m$par$zero_())
+  expect_equal_to_tensor(m(torch_tensor(2)), torch_tensor(0))
+  
+  # TODO figure out why this doesn't work
+  # x <- torch_randn(10, 10)
+  # expect_equal_to_tensor(m$testing(x), mod$testing(x))
+  # with_no_grad({
+  #   m$linear$weight$zero_()$add_(1)
+  #   mod$linear$weight$zero_()$add_(1)  
+  # })
+  # expect_equal_to_tensor(m$testing(x), mod$testing(x))
+  
+})
+
+test_that("dont crash when gcing a method", {
+  mod <- jit_trace(nn_linear(10, 10), torch_randn(10, 10))
+  gc();
+  forward <- mod$forward
+  rm(forward)
+  gc(); gc();
+  expect_error(regexp = NA, mod$forward)
 })

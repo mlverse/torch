@@ -9861,6 +9861,10 @@ cpp_jit_script_module_add_constant <- function(self, name, value) {
     invisible(.Call('_torch_cpp_jit_script_module_add_constant', PACKAGE = 'torchpkg', self, name, value))
 }
 
+cpp_jit_script_module_add_method <- function(self, method) {
+    invisible(.Call('_torch_cpp_jit_script_module_add_method', PACKAGE = 'torchpkg', self, method))
+}
+
 cpp_jit_script_module_find_constant <- function(self, name) {
     .Call('_torch_cpp_jit_script_module_find_constant', PACKAGE = 'torchpkg', self, name)
 }
@@ -9985,8 +9989,8 @@ test_fun_hello <- function(x) {
     .Call('_torch_test_fun_hello', PACKAGE = 'torchpkg', x)
 }
 
-cpp_trace_function <- function(fn, inputs, compilation_unit, strict = TRUE, module = NULL) {
-    .Call('_torch_cpp_trace_function', PACKAGE = 'torchpkg', fn, inputs, compilation_unit, strict, module)
+cpp_trace_function <- function(fn, inputs, compilation_unit, name, strict = TRUE, module = NULL, should_mangle = TRUE, manage_memory = TRUE) {
+    .Call('_torch_cpp_trace_function', PACKAGE = 'torchpkg', fn, inputs, compilation_unit, name, strict, module, should_mangle, manage_memory)
 }
 
 cpp_save_traced_fn <- function(fn, filename) {

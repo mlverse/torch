@@ -62,10 +62,16 @@ public:
 class XPtrTorchScriptMethod : public XPtrTorch {
 public:
   XPtrTorchScriptMethod (void* x) : XPtrTorch(x, lantern_jit_ScriptMethod_delete) {}
+  XPtrTorchScriptMethod (void* x, std::function<void(void* x)> deleter) : XPtrTorch(x, deleter) {}
   explicit XPtrTorchScriptMethod (std::shared_ptr<void> x) : XPtrTorch(x) {}
   XPtrTorchScriptMethod (const XPtrTorchScriptMethod& x): XPtrTorch(x.get_shared()) {}
   explicit XPtrTorchScriptMethod (SEXP x);
   operator SEXP () const;
+};
+
+class XPtrTorchScriptMethodNoDeleter : public XPtrTorchScriptMethod {
+public:
+  XPtrTorchScriptMethodNoDeleter (void* x) : XPtrTorchScriptMethod(x, [](void* x) {}) {}
 };
 
 class XPtrTorchOptionalTensor : public XPtrTorch {
@@ -234,6 +240,7 @@ public:
 class XPtrTorchFunctionPtr : public XPtrTorch {
 public:
   XPtrTorchFunctionPtr (void* x) : XPtrTorch(x, lantern_FunctionPtr_delete) {}
+  XPtrTorchFunctionPtr (void* x, std::function<void(void*)> deleter) : XPtrTorch(x, deleter) {}
   explicit XPtrTorchFunctionPtr (std::shared_ptr<void> x) : XPtrTorch(x) {};
   XPtrTorchFunctionPtr (const XPtrTorchFunctionPtr& x) : XPtrTorch(x.get_shared()) {};
 };

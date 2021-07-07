@@ -371,4 +371,3 @@ void _lantern_FunctionPtr_delete (void* x)
   LANTERN_FUNCTION_END_VOID
 }
 
-

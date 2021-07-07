@@ -32119,12 +32119,12 @@ BEGIN_RCPP
 END_RCPP
 }
 // cpp_jit_script_method_call
-Rcpp::XPtr<XPtrTorchStack> cpp_jit_script_method_call(XPtrTorchScriptMethod self, Rcpp::XPtr<XPtrTorchStack> inputs);
+Rcpp::XPtr<XPtrTorchStack> cpp_jit_script_method_call(XPtrTorchScriptMethodNoDeleter self, Rcpp::XPtr<XPtrTorchStack> inputs);
 RcppExport SEXP _torch_cpp_jit_script_method_call(SEXP selfSEXP, SEXP inputsSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< XPtrTorchScriptMethod >::type self(selfSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchScriptMethodNoDeleter >::type self(selfSEXP);
     Rcpp::traits::input_parameter< Rcpp::XPtr<XPtrTorchStack> >::type inputs(inputsSEXP);
     rcpp_result_gen = Rcpp::wrap(cpp_jit_script_method_call(self, inputs));
     return rcpp_result_gen;
@@ -32151,6 +32151,17 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< XPtrTorchstring >::type name(nameSEXP);
     Rcpp::traits::input_parameter< XPtrTorchIValue >::type value(valueSEXP);
     cpp_jit_script_module_add_constant(self, name, value);
+    return R_NilValue;
+END_RCPP
+}
+// cpp_jit_script_module_add_method
+void cpp_jit_script_module_add_method(XPtrTorchScriptModule self, Rcpp::XPtr<XPtrTorch> method);
+RcppExport SEXP _torch_cpp_jit_script_module_add_method(SEXP selfSEXP, SEXP methodSEXP) {
+BEGIN_RCPP
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchScriptModule >::type self(selfSEXP);
+    Rcpp::traits::input_parameter< Rcpp::XPtr<XPtrTorch> >::type method(methodSEXP);
+    cpp_jit_script_module_add_method(self, method);
     return R_NilValue;
 END_RCPP
 }
@@ -32511,17 +32522,20 @@ BEGIN_RCPP
 END_RCPP
 }
 // cpp_trace_function
-Rcpp::XPtr<XPtrTorchFunctionPtr> cpp_trace_function(Rcpp::Function fn, XPtrTorchStack inputs, XPtrTorchCompilationUnit compilation_unit, bool strict, XPtrTorchScriptModule module);
-RcppExport SEXP _torch_cpp_trace_function(SEXP fnSEXP, SEXP inputsSEXP, SEXP compilation_unitSEXP, SEXP strictSEXP, SEXP moduleSEXP) {
+Rcpp::XPtr<XPtrTorchFunctionPtr> cpp_trace_function(Rcpp::Function fn, XPtrTorchStack inputs, XPtrTorchCompilationUnit compilation_unit, XPtrTorchstring name, bool strict, XPtrTorchScriptModule module, bool should_mangle, bool manage_memory);
+RcppExport SEXP _torch_cpp_trace_function(SEXP fnSEXP, SEXP inputsSEXP, SEXP compilation_unitSEXP, SEXP nameSEXP, SEXP strictSEXP, SEXP moduleSEXP, SEXP should_mangleSEXP, SEXP manage_memorySEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< Rcpp::Function >::type fn(fnSEXP);
     Rcpp::traits::input_parameter< XPtrTorchStack >::type inputs(inputsSEXP);
     Rcpp::traits::input_parameter< XPtrTorchCompilationUnit >::type compilation_unit(compilation_unitSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchstring >::type name(nameSEXP);
     Rcpp::traits::input_parameter< bool >::type strict(strictSEXP);
     Rcpp::traits::input_parameter< XPtrTorchScriptModule >::type module(moduleSEXP);
-    rcpp_result_gen = Rcpp::wrap(cpp_trace_function(fn, inputs, compilation_unit, strict, module));
+    Rcpp::traits::input_parameter< bool >::type should_mangle(should_mangleSEXP);
+    Rcpp::traits::input_parameter< bool >::type manage_memory(manage_memorySEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_trace_function(fn, inputs, compilation_unit, name, strict, module, should_mangle, manage_memory));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -35167,6 +35181,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_torch_cpp_jit_script_method_call", (DL_FUNC) &_torch_cpp_jit_script_method_call, 2},
     {"_torch_cpp_jit_script_module_new", (DL_FUNC) &_torch_cpp_jit_script_module_new, 2},
     {"_torch_cpp_jit_script_module_add_constant", (DL_FUNC) &_torch_cpp_jit_script_module_add_constant, 3},
+    {"_torch_cpp_jit_script_module_add_method", (DL_FUNC) &_torch_cpp_jit_script_module_add_method, 2},
     {"_torch_cpp_jit_script_module_find_constant", (DL_FUNC) &_torch_cpp_jit_script_module_find_constant, 2},
     {"_torch_test_stack", (DL_FUNC) &_torch_test_stack, 1},
     {"_torch_cpp_Tensor_storage", (DL_FUNC) &_torch_cpp_Tensor_storage, 1},
@@ -35198,7 +35213,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_torch_cpp_torch_tensor_options", (DL_FUNC) &_torch_cpp_torch_tensor_options, 5},
     {"_torch_cpp_torch_tensor_options_print", (DL_FUNC) &_torch_cpp_torch_tensor_options_print, 1},
     {"_torch_test_fun_hello", (DL_FUNC) &_torch_test_fun_hello, 1},
-    {"_torch_cpp_trace_function", (DL_FUNC) &_torch_cpp_trace_function, 5},
+    {"_torch_cpp_trace_function", (DL_FUNC) &_torch_cpp_trace_function, 8},
     {"_torch_cpp_save_traced_fn", (DL_FUNC) &_torch_cpp_save_traced_fn, 2},
     {"_torch_cpp_jit_compilation_unit", (DL_FUNC) &_torch_cpp_jit_compilation_unit, 0},
     {"_torch_cpp_call_traced_fn", (DL_FUNC) &_torch_cpp_call_traced_fn, 2},

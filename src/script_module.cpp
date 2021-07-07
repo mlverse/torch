@@ -84,11 +84,13 @@ XPtrTorchjit_named_module_list cpp_jit_script_module_children (XPtrTorchScriptMo
 // [[Rcpp::export]]
 XPtrTorchScriptMethod cpp_jit_script_module_find_method (XPtrTorchScriptModule self, XPtrTorchstring basename)
 {
+  // we use a empty deleter as we don't control the memory for the returned method...
+  // its the module that can control it.
   return XPtrTorchScriptMethod(lantern_ScriptModule_find_method(self.get(), basename.get()));
 }
 
 // [[Rcpp::export]]
-Rcpp::XPtr<XPtrTorchStack> cpp_jit_script_method_call (XPtrTorchScriptMethod self, Rcpp::XPtr<XPtrTorchStack> inputs)
+Rcpp::XPtr<XPtrTorchStack> cpp_jit_script_method_call (XPtrTorchScriptMethodNoDeleter self, Rcpp::XPtr<XPtrTorchStack> inputs)
 {
   auto out = XPtrTorchStack(lantern_ScriptMethod_call(self.get(), inputs->get()));
   return make_xptr<XPtrTorchStack>(out);
@@ -102,10 +104,16 @@ XPtrTorchScriptModule cpp_jit_script_module_new (XPtrTorchCompilationUnit cu, XP
 
 // [[Rcpp::export]]
 void cpp_jit_script_module_add_constant (XPtrTorchScriptModule self, 
-                                                          XPtrTorchstring name,
-                                                          XPtrTorchIValue value)
+                                         XPtrTorchstring name,
+                                         XPtrTorchIValue value)
 {
   lantern_ScriptModule_add_constant(self.get(), name.get(), value.get());
+}
+
+// [[Rcpp::export]]
+void cpp_jit_script_module_add_method (XPtrTorchScriptModule self, Rcpp::XPtr<XPtrTorch> method)
+{
+  lantern_ScriptModule_add_method(self.get(), method->get());
 }
 
 // [[Rcpp::export]]

@@ -170,7 +170,7 @@ ScriptMethod <- R7Class(
       ptr
     },
     print = function() {
-      cat("<script_method>")
+      cat("<script_method>\n")
     }
   )
 )
@@ -182,10 +182,14 @@ new_script_method <- function(ptr) {
     # with a single element.
     out[[1]]
   }
-  class(f) <- c("script_method", "nn_module")
+  class(f) <- c("script_method")
   attr(f, "method") <- ptr
   f
 }
 
+#' @export
+print.script_method <- function(x, ...) {
+  cat("<script_method>\n")
+}
 
 

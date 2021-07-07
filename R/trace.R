@@ -36,6 +36,8 @@
 #' 
 #' @param func An R function that will be run with `example_inputs`. func arguments 
 #'   and return values must be tensors or (possibly nested) lists that contain tensors.
+#'   Can also be a [nn_module()], in such case [jit_trace_module()] is used to trace
+#'   that module.
 #' @param ... example inputs that will be passed to the function while 
 #'   tracing. The resulting trace can be run with inputs of different types and 
 #'   shapes assuming the traced operations support those types and shapes. 
@@ -48,7 +50,8 @@
 #'   your problem is a constant structure and does not get used as control flow 
 #'   (`if`, `for`) conditions.
 #' 
-#' @returns An `script_function`
+#' @returns An `script_function` if `func` is a function and `script_module` if 
+#'   `func` is a `nn_module()`.
 #' 
 #' @examples
 #' fn <- function(x) {
@@ -62,7 +65,17 @@
 jit_trace <- function(func, ..., strict = TRUE) {
   tr_fn <- make_traceable_fn(func)
   ellipsis::check_dots_unnamed() # we do not support named arguments
-  ptr <- cpp_trace_function(tr_fn, list(...), .compilation_unit, strict)
+  
+  if (inherits(func, "nn_module")) {
+    args <- list(
+      mod = func, 
+      forward = list(...), 
+      strict = strict
+    )
+    return(do.call(jit_trace_module, args))
+  }
+  
+  ptr <- cpp_trace_function(tr_fn, list(...), .compilation_unit, strict, name = "name")
   new_script_function(ptr)
 }
 
@@ -205,7 +218,68 @@ create_script_module <- function(mod) {
   module
 }
 
-jit_trace_module <- function(mod, inputs) {
+#' Trace a module
+#' 
+#' Trace a module and return an executable ScriptModule that will be optimized 
+#' using just-in-time compilation. When a module is passed to [jit_trace()], only 
+#' the forward method is run and traced. With [jit_trace_module()], you can specify 
+#' a named list of method names to example inputs to trace (see the inputs) 
+#' argument below.
+#' 
+#' See [jit_trace] for more information on tracing.
+#'
+#' @param mod A torch `nn_module()`  containing methods whose names are specified 
+#'   in inputs. The given methods will be compiled as a part of a single ScriptModule.
+#' @param inputs A named list containing sample inputs indexed by method names 
+#'   in mod. The inputs will be passed to methods whose names correspond to inputs
+#'   keys while tracing. `list('forward'=example_forward_input, 'method2'=example_method2_input)`.
+#'
+#' @inheritParams jit_trace
+#' 
+#' @examples
+#' linear <- nn_linear(10, 1)
+#' tr_linear <- jit_trace_module(linear, forward = list(torch_randn(10, 10)))
+#' 
+#' x <- torch_randn(10, 10)
+#' torch_allclose(linear(x), tr_linear(x))
+#'
+#' @export
+jit_trace_module <- function(mod, ..., strict = TRUE) {
+  
+  inputs <- list(...)
+  
+  if (!inherits(mod, "nn_module"))
+    value_error("`mod` must be a `nn_module()`.")
+  
+  if (!rlang::is_named(inputs))
+    value_error("Arguments passed trough `...` must be named.")
+  
   module <- create_script_module(mod)
+  
+  for (name in names(inputs)) {
+    
+    if (!rlang::is_closure(mod[[name]]))
+      value_error("Method '{name}' does not exist in `mod` and therefore can't be traced.") 
+    
+    inp <- inputs[[name]]
+    if (!is.list(inp))
+      inp <- list(inp)
+    
+    tr_fn <- make_traceable_fn(mod[[name]])
+    ptr <- cpp_trace_function(
+      fn = tr_fn, 
+      inputs = inp, 
+      compilation_unit = .compilation_unit, 
+      strict = strict, 
+      module = module$..ptr..(), 
+      name = name,
+      should_mangle = TRUE, 
+      manage_memory = FALSE
+    )  
+    cpp_jit_script_module_add_method(module$..ptr..(), ptr)  
+    
+  }
+  
+  module
 }
 
