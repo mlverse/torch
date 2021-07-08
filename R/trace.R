@@ -212,6 +212,9 @@ make_script_module_name <- function(x) {
 
 create_script_module <- function(mod) {
   
+  if (inherits(mod, "script_module"))
+    return(mod)
+  
   module <- cpp_jit_script_module_new(.compilation_unit, make_script_module_name(mod))
   
   iwalk(mod$named_parameters(recursive = FALSE), function(par, name) {

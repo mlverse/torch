@@ -413,5 +413,25 @@ test_that("we get a good error message when trying to call a method from a submo
     regexp = "Methods from submodules of traced modules are not traced"
   )
   
-
 })
+
+test_that("we can include traced module as a submodule and trace", {
+  
+  module <- nn_module(
+    initialize = function() {
+      self$linear <- jit_trace(nn_linear(10, 10), torch_randn(10, 10))
+    },
+    forward = function(x) {
+      self$linear(x)
+    }
+  )
+  mod <- module()
+  
+  m <- jit_trace(mod, torch_randn(10, 10))
+  
+  x <- torch_randn(10, 10)
+  expect_equal_to_tensor(m(x), mod(x))
+  expect_equal_to_tensor(m$linear(x), mod$linear(x))
+  
+})
+
