@@ -45,6 +45,9 @@ ScriptModule <- R7Class(
     },
     find_constant = function(name) {
       cpp_jit_script_module_find_constant(self, name)
+    },
+    save = function(path) {
+      cpp_jit_script_module_save(self, path)
     }
   ),
   active = list(

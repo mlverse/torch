@@ -1829,6 +1829,14 @@ HOST_API void lantern_ScriptModule_add_method (void* self, void* method)
   
 }
 
+LANTERN_API void (LANTERN_PTR _lantern_ScriptModule_save) (void* self, void* path);
+HOST_API void lantern_ScriptModule_save (void* self, void* path)
+{
+   _lantern_ScriptModule_save(self, path);
+  LANTERN_HOST_HANDLER;
+  
+}
+
   /* Autogen Headers -- Start */
   LANTERN_API void* (LANTERN_PTR _lantern__cast_byte_tensor_bool)(void* self, void* non_blocking);
   HOST_API void* lantern__cast_byte_tensor_bool(void* self, void* non_blocking) { void* ret = _lantern__cast_byte_tensor_bool(self, non_blocking); LANTERN_HOST_HANDLER return ret; }
@@ -7047,6 +7055,7 @@ LOAD_SYMBOL(_lantern_ScriptModule_new);
 LOAD_SYMBOL(_lantern_ScriptModule_add_constant);
 LOAD_SYMBOL(_lantern_ScriptModule_find_constant);
 LOAD_SYMBOL(_lantern_ScriptModule_add_method);
+LOAD_SYMBOL(_lantern_ScriptModule_save);
   /* Autogen Symbols -- Start */
   LOAD_SYMBOL(_lantern__cast_byte_tensor_bool)
   LOAD_SYMBOL(_lantern__cast_char_tensor_bool)

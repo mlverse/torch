@@ -127,3 +127,10 @@ SEXP cpp_jit_script_module_find_constant (XPtrTorchScriptModule self,
     return R_NilValue;
   }
 }
+
+// [[Rcpp::export]]
+void cpp_jit_script_module_save (XPtrTorchScriptModule self,
+                                 XPtrTorchstring path)
+{
+  lantern_ScriptModule_save(self.get(), path.get());
+}

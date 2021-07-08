@@ -9869,6 +9869,10 @@ cpp_jit_script_module_find_constant <- function(self, name) {
     .Call('_torch_cpp_jit_script_module_find_constant', PACKAGE = 'torchpkg', self, name)
 }
 
+cpp_jit_script_module_save <- function(self, path) {
+    invisible(.Call('_torch_cpp_jit_script_module_save', PACKAGE = 'torchpkg', self, path))
+}
+
 test_stack <- function(x) {
     .Call('_torch_test_stack', PACKAGE = 'torchpkg', x)
 }

@@ -32177,6 +32177,17 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// cpp_jit_script_module_save
+void cpp_jit_script_module_save(XPtrTorchScriptModule self, XPtrTorchstring path);
+RcppExport SEXP _torch_cpp_jit_script_module_save(SEXP selfSEXP, SEXP pathSEXP) {
+BEGIN_RCPP
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchScriptModule >::type self(selfSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchstring >::type path(pathSEXP);
+    cpp_jit_script_module_save(self, path);
+    return R_NilValue;
+END_RCPP
+}
 // test_stack
 XPtrTorchStack test_stack(XPtrTorchStack x);
 RcppExport SEXP _torch_test_stack(SEXP xSEXP) {
@@ -35183,6 +35194,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_torch_cpp_jit_script_module_add_constant", (DL_FUNC) &_torch_cpp_jit_script_module_add_constant, 3},
     {"_torch_cpp_jit_script_module_add_method", (DL_FUNC) &_torch_cpp_jit_script_module_add_method, 2},
     {"_torch_cpp_jit_script_module_find_constant", (DL_FUNC) &_torch_cpp_jit_script_module_find_constant, 2},
+    {"_torch_cpp_jit_script_module_save", (DL_FUNC) &_torch_cpp_jit_script_module_save, 2},
     {"_torch_test_stack", (DL_FUNC) &_torch_test_stack, 1},
     {"_torch_cpp_Tensor_storage", (DL_FUNC) &_torch_cpp_Tensor_storage, 1},
     {"_torch_cpp_Tensor_has_storage", (DL_FUNC) &_torch_cpp_Tensor_has_storage, 1},

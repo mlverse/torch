@@ -111,7 +111,14 @@ jit_load <- function(path, ...) {
 #' @export
 jit_save <- function(obj, path, ...) {
   path <- normalizePath(path, mustWork = FALSE)
-  obj$save(path)
+  
+  if (inherits(obj, "script_function"))
+    obj$save(path)
+  else if (inherits(obj, "script_module"))
+    obj$..ptr..()$save(path)
+  else
+    value_error("Only `script_function` or `script_module` can be saved with `jit_save`.")
+  
   invisible(obj)
 }
 
@@ -192,9 +199,13 @@ module_ignored_names <- c(
 )
 
 
+make_script_module_name <- function(x) {
+  paste0(class(x)[1],"_", paste(sample(letters, 24, replace = TRUE), collapse = ""))
+}
+
 create_script_module <- function(mod) {
   
-  module <- cpp_jit_script_module_new(.compilation_unit, as.character(stats::runif(1)))
+  module <- cpp_jit_script_module_new(.compilation_unit, make_script_module_name(mod))
   
   iwalk(mod$named_parameters(recursive = FALSE), function(par, name) {
     module$register_parameter(name, par)
