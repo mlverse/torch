@@ -67,6 +67,10 @@ jit_trace <- function(func, ..., strict = TRUE) {
   ellipsis::check_dots_unnamed() # we do not support named arguments
   
   if (inherits(func, "nn_module")) {
+    
+    if (inherits(func, "nn_module_generator"))
+      value_error("You must initialize the nn_module before tracing.")
+    
     args <- list(
       mod = func, 
       forward = rlang::list2(...), 
@@ -74,6 +78,9 @@ jit_trace <- function(func, ..., strict = TRUE) {
     )
     return(do.call(jit_trace_module, args))
   }
+  
+  if (!rlang::is_closure(func))
+    value_error("jit_trace needs a function or nn_module.")
   
   ptr <- cpp_trace_function(tr_fn, list(...), .compilation_unit, strict, name = "name")
   new_script_function(ptr)

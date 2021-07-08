@@ -368,3 +368,29 @@ test_that("trace a module", {
   tr_fn <- jit_trace(net, input)
   expect_equal_to_tensor(net(input), tr_fn(input), tolerance = 1e-6)
 })
+
+test_that("Can recover from errors in the traced method", {
+  
+  module <- nn_module(
+    initialize = function() {},
+    forward = function(x) {
+      stop("The error abcde")
+    }
+  )
+  
+  expect_error(
+    jit_trace(module(), torch_tensor(1)),
+    regexp = ".*abcde"
+  )
+  
+  expect_error(
+    regexp = "You must initialize the nn_module before tracing",
+    jit_trace(module, torch_tensor(1))
+  )
+  
+  expect_error(
+    regexp = "jit_trace needs a function or nn_module",
+    jit_trace(1, torch_tensor(1))
+  )
+  
+})
