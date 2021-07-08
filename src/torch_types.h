@@ -69,11 +69,6 @@ public:
   operator SEXP () const;
 };
 
-class XPtrTorchScriptMethodNoDeleter : public XPtrTorchScriptMethod {
-public:
-  XPtrTorchScriptMethodNoDeleter (void* x) : XPtrTorchScriptMethod(x, [](void* x) {}) {}
-};
-
 class XPtrTorchOptionalTensor : public XPtrTorch {
 public:
   XPtrTorchOptionalTensor (void* x) : XPtrTorch(x, lantern_optional_tensor_delete) {}

@@ -32119,13 +32119,13 @@ BEGIN_RCPP
 END_RCPP
 }
 // cpp_jit_script_method_call
-Rcpp::XPtr<XPtrTorchStack> cpp_jit_script_method_call(XPtrTorchScriptMethodNoDeleter self, Rcpp::XPtr<XPtrTorchStack> inputs);
+XPtrTorchStack cpp_jit_script_method_call(XPtrTorchScriptMethod self, XPtrTorchStack inputs);
 RcppExport SEXP _torch_cpp_jit_script_method_call(SEXP selfSEXP, SEXP inputsSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< XPtrTorchScriptMethodNoDeleter >::type self(selfSEXP);
-    Rcpp::traits::input_parameter< Rcpp::XPtr<XPtrTorchStack> >::type inputs(inputsSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchScriptMethod >::type self(selfSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchStack >::type inputs(inputsSEXP);
     rcpp_result_gen = Rcpp::wrap(cpp_jit_script_method_call(self, inputs));
     return rcpp_result_gen;
 END_RCPP

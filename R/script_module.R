@@ -177,7 +177,7 @@ ScriptMethod <- R7Class(
 
 new_script_method <- function(ptr) {
   f <- function(...) {
-    out <- cpp_call_jit_script(ptr, list(...))
+    out <- cpp_jit_script_method_call(ptr, list(...))
     # calling the traced function always returns a stack
     # with a single element.
     out[[1]]

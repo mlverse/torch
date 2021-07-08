@@ -248,14 +248,13 @@ test_that("trace a nn module", {
   with_no_grad(m$par$zero_())
   expect_equal_to_tensor(m(torch_tensor(2)), torch_tensor(0))
   
-  # TODO figure out why this doesn't work
-  # x <- torch_randn(10, 10)
-  # expect_equal_to_tensor(m$testing(x), mod$testing(x))
-  # with_no_grad({
-  #   m$linear$weight$zero_()$add_(1)
-  #   mod$linear$weight$zero_()$add_(1)  
-  # })
-  # expect_equal_to_tensor(m$testing(x), mod$testing(x))
+  x <- torch_randn(10, 10)
+  expect_equal_to_tensor(m$testing(x), mod$testing(x))
+  with_no_grad({
+    m$linear$weight$zero_()$add_(1)
+    mod$linear$weight$zero_()$add_(1)
+  })
+  expect_equal_to_tensor(m$testing(x), mod$testing(x))
   
 })
 
