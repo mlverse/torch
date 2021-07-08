@@ -394,3 +394,24 @@ test_that("Can recover from errors in the traced method", {
   )
   
 })
+
+test_that("we get a good error message when trying to call a method from a submodule", {
+  
+  module <- nn_module(
+    initialize = function() {
+      self$linear <- nn_linear(10, 10)
+    },
+    forward = function(x) {
+      self$linear(x)
+    }
+  )
+  
+  m <- jit_trace(module(), torch_randn(100, 10))
+  
+  expect_error(
+    m$linear(torch_randn(10, 10)),
+    regexp = "Methods from submodules of traced modules are not traced"
+  )
+  
+
+})

@@ -155,6 +155,10 @@ nn_ScriptModule <- R6::R6Class(
 new_script_module <- function(ptr) {
   f <- function(...) {
     inputs <- list(...)
+    
+    if (is.null(ptr$find_method("forward")))
+      runtime_error("Forward is not defined. Methods from submodules of traced modules are not traced. Are you trying to call from a submodule?")
+    
     out <- cpp_call_jit_script(ptr, inputs)
     # calling the traced function always returns a stack
     # with a single element.
