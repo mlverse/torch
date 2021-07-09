@@ -20,6 +20,10 @@ Rcpp::XPtr<XPtrTorchFunctionPtr> cpp_trace_function (Rcpp::Function fn, XPtrTorc
     // we don't control this memory as it will be controlled by
     // the lantern side function therefore we use a no-op deleter.
     auto inputs_ = XPtrTorchStack(inputs, [](void* x) {});
+    
+    // the R function call and the convertion to a stack might fail and 
+    // in that case we can't raise the error directly from R, otherwise the
+    // tracer is left unfinished and in an error state.
     try
     {
       output = Rcpp::as<XPtrTorchStack>(fn(inputs_));
@@ -57,9 +61,13 @@ Rcpp::XPtr<XPtrTorchFunctionPtr> cpp_trace_function (Rcpp::Function fn, XPtrTorc
       should_mangle
     );
   }
-  catch (...)
+  catch (const std::exception& e)
   {
-    Rcpp::stop(error);
+    Rcpp::stop(std::string(e.what()) + std::string(": ") + error);
+  }
+  catch (...) 
+  {
+    Rcpp::stop("Unknown error");
   }
   
   auto tr_fn = XPtrTorchFunctionPtr(

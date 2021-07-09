@@ -415,6 +415,25 @@ test_that("we get a good error message when trying to call a method from a submo
   
 })
 
+test_that("errors in the tracer are correctly captured", {
+  
+  module <- nn_module(
+    initialize = function() {
+      self$linear <- nn_linear(10, 10)
+    },
+    forward = function(x) {
+      self$linear(x)
+      1
+    }
+  )
+  
+  expect_error(
+    jit_trace(module(), torch_randn(10, 10)),
+    regexp = ".*Only tensors, lists, tuples of tensors"
+  )
+  
+})
+
 test_that("we can include traced module as a submodule and trace", {
   
   module <- nn_module(
