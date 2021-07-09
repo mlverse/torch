@@ -86,7 +86,7 @@ See reference: Attention Is All You Need" />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">torch</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.0</span>
       </span>
     </div>
 
@@ -276,10 +276,17 @@ is provided, it will be added to the attention weight.</p></li>
 </ul>
 
 <p>Outputs:</p><ul>
-<li><p>attn_output: \((L, N, E)\) where L is the target sequence length, N is the batch size,
-E is the embedding dimension.</p></li>
-<li><p>attn_output_weights: \((N, L, S)\) where N is the batch size,
-L is the target sequence length, S is the source sequence length.</p></li>
+<li><p>attn_output: \((L, N, E)\) where L is the target sequence length, N is
+the batch size, E is the embedding dimension.</p></li>
+<li><p>attn_output_weights:</p><ul>
+<li><p>if <code>avg_weights</code> is <code>TRUE</code> (the default), the output attention
+weights are averaged over the attention heads, giving a tensor of shape
+\((N, L, S)\) where N is the batch size, L is the target sequence
+length, S is the source sequence length.</p></li>
+<li><p>if <code>avg_weights</code> is <code>FALSE</code>, the attention weight tensor is output
+as-is, with shape \((N, H, L, S)\), where H is the number of attention
+heads.</p></li>
+</ul></li>
 </ul>
 
 

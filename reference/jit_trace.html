@@ -86,7 +86,7 @@ recording the operations performed on all the tensors." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">torch</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.0</span>
       </span>
     </div>
 
@@ -193,7 +193,7 @@ recording the operations performed on all the tensors." />
 recording the operations performed on all the tensors.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>jit_trace</span><span class='op'>(</span><span class='va'>func</span>, <span class='va'>example_inputs</span>, <span class='va'>...</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>jit_trace</span><span class='op'>(</span><span class='va'>func</span>, <span class='va'>...</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -204,16 +204,13 @@ recording the operations performed on all the tensors.</p>
 and return values must be tensors or (possibly nested) lists that contain tensors.</p></td>
     </tr>
     <tr>
-      <th>example_inputs</th>
+      <th>...</th>
       <td><p>example inputs that will be passed to the function while
 tracing. The resulting trace can be run with inputs of different types and
 shapes assuming the traced operations support those types and shapes.
 <code>example_inputs</code> may also be a single Tensor in which case it is automatically
-wrapped in a list.</p></td>
-    </tr>
-    <tr>
-      <th>...</th>
-      <td><p>currently unused.</p></td>
+wrapped in a list. Note that <code>...</code> <strong>can not</strong> be named, and the order is
+respected.</p></td>
     </tr>
     </table>
 

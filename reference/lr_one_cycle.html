@@ -88,7 +88,7 @@ than the initial learning rate." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">torch</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.0</span>
       </span>
     </div>
 
@@ -340,10 +340,10 @@ epochs and steps_per_epoch.</p>
                           epochs<span class='op'>=</span><span class='fl'>10</span><span class='op'>)</span>
 
 <span class='kw'>for</span> <span class='op'>(</span><span class='va'>i</span> <span class='kw'>in</span> <span class='fl'>1</span><span class='op'>:</span><span class='va'>epochs</span><span class='op'>)</span> <span class='op'>{</span>
-  <span class='kw'>for</span> <span class='op'>(</span><span class='va'>batch</span> <span class='kw'>in</span> <span class='fu'><a href='enumerate.html'>enumerate</a></span><span class='op'>(</span><span class='va'>data_loader</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
+  <span class='fu'>coro</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/coro/man/collect.html'>loop</a></span><span class='op'>(</span><span class='kw'>for</span> <span class='op'>(</span><span class='va'>batch</span> <span class='kw'>in</span> <span class='va'>data_loader</span><span class='op'>)</span> <span class='op'>{</span>
      <span class='fu'>train_batch</span><span class='op'>(</span><span class='va'>...</span><span class='op'>)</span>
      <span class='va'>scheduler</span><span class='op'>$</span><span class='fu'>step</span><span class='op'>(</span><span class='op'>)</span>
-  <span class='op'>}</span>
+  <span class='op'>}</span><span class='op'>)</span>
 <span class='op'>}</span>
 <span class='op'>}</span>
 
