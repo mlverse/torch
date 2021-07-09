@@ -9829,6 +9829,10 @@ cpp_jit_script_module_register_buffer <- function(self, name, v) {
     invisible(.Call('_torch_cpp_jit_script_module_register_buffer', PACKAGE = 'torchpkg', self, name, v))
 }
 
+cpp_jit_script_module_register_module <- function(self, name, module) {
+    invisible(.Call('_torch_cpp_jit_script_module_register_module', PACKAGE = 'torchpkg', self, name, module))
+}
+
 cpp_jit_script_module_to <- function(self, device, non_blocking) {
     invisible(.Call('_torch_cpp_jit_script_module_to', PACKAGE = 'torchpkg', self, device, non_blocking))
 }
@@ -9847,6 +9851,26 @@ cpp_jit_script_module_find_method <- function(self, basename) {
 
 cpp_jit_script_method_call <- function(self, inputs) {
     .Call('_torch_cpp_jit_script_method_call', PACKAGE = 'torchpkg', self, inputs)
+}
+
+cpp_jit_script_module_new <- function(cu, name) {
+    .Call('_torch_cpp_jit_script_module_new', PACKAGE = 'torchpkg', cu, name)
+}
+
+cpp_jit_script_module_add_constant <- function(self, name, value) {
+    invisible(.Call('_torch_cpp_jit_script_module_add_constant', PACKAGE = 'torchpkg', self, name, value))
+}
+
+cpp_jit_script_module_add_method <- function(self, method) {
+    invisible(.Call('_torch_cpp_jit_script_module_add_method', PACKAGE = 'torchpkg', self, method))
+}
+
+cpp_jit_script_module_find_constant <- function(self, name) {
+    .Call('_torch_cpp_jit_script_module_find_constant', PACKAGE = 'torchpkg', self, name)
+}
+
+cpp_jit_script_module_save <- function(self, path) {
+    invisible(.Call('_torch_cpp_jit_script_module_save', PACKAGE = 'torchpkg', self, path))
 }
 
 test_stack <- function(x) {
@@ -9969,8 +9993,8 @@ test_fun_hello <- function(x) {
     .Call('_torch_test_fun_hello', PACKAGE = 'torchpkg', x)
 }
 
-cpp_trace_function <- function(fn, inputs, compilation_unit, strict = TRUE) {
-    .Call('_torch_cpp_trace_function', PACKAGE = 'torchpkg', fn, inputs, compilation_unit, strict)
+cpp_trace_function <- function(fn, inputs, compilation_unit, name, strict = TRUE, module = NULL, should_mangle = TRUE, manage_memory = TRUE) {
+    .Call('_torch_cpp_trace_function', PACKAGE = 'torchpkg', fn, inputs, compilation_unit, name, strict, module, should_mangle, manage_memory)
 }
 
 cpp_save_traced_fn <- function(fn, filename) {

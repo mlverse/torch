@@ -3,3 +3,4 @@ tensor.pt
 model.pt
 *.R
 rsconnect
+path.pt

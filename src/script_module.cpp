@@ -55,6 +55,14 @@ void cpp_jit_script_module_register_buffer (XPtrTorchScriptModule self,
 }
 
 // [[Rcpp::export]]
+void cpp_jit_script_module_register_module (XPtrTorchScriptModule self,
+                                            XPtrTorchstring name,
+                                            XPtrTorchScriptModule module)
+{
+  lantern_ScriptModule_register_module(self.get(), name.get(), module.get());
+}
+
+// [[Rcpp::export]]
 void cpp_jit_script_module_to (XPtrTorchScriptModule self, XPtrTorchDevice device, 
                                bool non_blocking)
 {
@@ -80,8 +88,49 @@ XPtrTorchScriptMethod cpp_jit_script_module_find_method (XPtrTorchScriptModule s
 }
 
 // [[Rcpp::export]]
-Rcpp::XPtr<XPtrTorchStack> cpp_jit_script_method_call (XPtrTorchScriptMethod self, Rcpp::XPtr<XPtrTorchStack> inputs)
+XPtrTorchStack cpp_jit_script_method_call (XPtrTorchScriptMethod self, XPtrTorchStack inputs)
 {
-  auto out = XPtrTorchStack(lantern_ScriptMethod_call(self.get(), inputs->get()));
-  return make_xptr<XPtrTorchStack>(out);
+  return XPtrTorchStack(lantern_ScriptMethod_call(self.get(), inputs.get()));
+}
+
+// [[Rcpp::export]]
+XPtrTorchScriptModule cpp_jit_script_module_new (XPtrTorchCompilationUnit cu, XPtrTorchstring name)
+{
+  return XPtrTorchScriptModule(lantern_ScriptModule_new(cu.get(), name.get()));
+}
+
+// [[Rcpp::export]]
+void cpp_jit_script_module_add_constant (XPtrTorchScriptModule self, 
+                                         XPtrTorchstring name,
+                                         XPtrTorchIValue value)
+{
+  lantern_ScriptModule_add_constant(self.get(), name.get(), value.get());
+}
+
+// [[Rcpp::export]]
+void cpp_jit_script_module_add_method (XPtrTorchScriptModule self, Rcpp::XPtr<XPtrTorch> method)
+{
+  lantern_ScriptModule_add_method(self.get(), method->get());
+}
+
+// [[Rcpp::export]]
+SEXP cpp_jit_script_module_find_constant (XPtrTorchScriptModule self,
+                                          XPtrTorchstring name)
+{
+  void* ret = lantern_ScriptModule_find_constant(self.get(), name.get());
+  if (ret)
+  {
+    return Rcpp::wrap(XPtrTorchIValue(ret));
+  }
+  else
+  {
+    return R_NilValue;
+  }
+}
+
+// [[Rcpp::export]]
+void cpp_jit_script_module_save (XPtrTorchScriptModule self,
+                                 XPtrTorchstring path)
+{
+  lantern_ScriptModule_save(self.get(), path.get());
 }

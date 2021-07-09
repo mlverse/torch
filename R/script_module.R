@@ -19,12 +19,35 @@ ScriptModule <- R7Class(
       cpp_jit_script_module_register_buffer(self, name, tensor)
       invisible(self)
     },
+    register_module = function(name, module) {
+      if (inherits(module, "script_module"))
+        module <- module$..ptr..()
+      
+      if (!inherits(module, "torch_script_module"))
+        runtime_error("Script modules can only register Script modules children.")
+      
+      if (is.numeric(name))
+        name <- as.character(name)
+      
+      cpp_jit_script_module_register_module(self, name, module)
+      invisible(self)
+    },
+    add_constant = function(name, value) {
+      cpp_jit_script_module_add_constant(self, name, value)
+      invisible(self)
+    },
     to = function(device, non_blocking = FALSE){
       cpp_jit_script_module_to(self, device, non_blocking)
       invisible(self)
     },
     find_method = function(name) {
       cpp_jit_script_module_find_method(self, name)
+    },
+    find_constant = function(name) {
+      cpp_jit_script_module_find_constant(self, name)
+    },
+    save = function(path) {
+      cpp_jit_script_module_save(self, path)
     }
   ),
   active = list(
@@ -98,6 +121,15 @@ nn_ScriptModule <- R6::R6Class(
     },
     register_buffer = function(name, tensor, persistent = TRUE) {
       private$ptr$register_buffer(name, tensor, persistent)
+    },
+    register_module = function(name, module) {
+      private$ptr$register_module(name, module)
+    },
+    add_constant = function(name, value) {
+      private$ptr$add_constant(name, value)
+    },
+    ..ptr.. = function() {
+      private$ptr
     }
   ),
   private = list(
@@ -107,9 +139,26 @@ nn_ScriptModule <- R6::R6Class(
   )
 )
 
+#' @export
+`[[.script_module` <- function(x, y) {
+  out <- attr(x, "module")$..ptr..()$find_constant(y)
+  if (!is.null(out))
+    return(out)
+  NextMethod()
+}
+
+#' @export
+`$.script_module` <- function(x, y) {
+  x[[y]]
+}
+
 new_script_module <- function(ptr) {
   f <- function(...) {
     inputs <- list(...)
+    
+    if (is.null(ptr$find_method("forward")))
+      runtime_error("Forward is not defined. Methods from submodules of traced modules are not traced. Are you trying to call from a submodule?")
+    
     out <- cpp_call_jit_script(ptr, inputs)
     # calling the traced function always returns a stack
     # with a single element.
@@ -128,22 +177,26 @@ ScriptMethod <- R7Class(
       ptr
     },
     print = function() {
-      cat("<script_method>")
+      cat("<script_method>\n")
     }
   )
 )
 
 new_script_method <- function(ptr) {
   f <- function(...) {
-    out <- cpp_call_jit_script(ptr, list(...))
+    out <- cpp_jit_script_method_call(ptr, list(...))
     # calling the traced function always returns a stack
     # with a single element.
     out[[1]]
   }
-  class(f) <- c("script_method", "nn_module")
+  class(f) <- c("script_method")
   attr(f, "method") <- ptr
   f
 }
 
+#' @export
+print.script_method <- function(x, ...) {
+  cat("<script_method>\n")
+}
 
 

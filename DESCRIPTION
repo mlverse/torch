@@ -56,6 +56,7 @@ Collate:
     'autograd.R'
     'backends.R'
     'codegen-utils.R'
+    'compat-purrr.R'
     'compilation_unit.R'
     'conditions.R'
     'creation-ops.R'

@@ -683,10 +683,10 @@ HOST_API void* lantern_create_traceable_fun (void *(*r_caller)(void *, void *), 
   return ret;
 }
 
-LANTERN_API void* (LANTERN_PTR _lantern_trace_fn) (void* fn, void* inputs, void* compilation_unit, bool strict);
-HOST_API void* lantern_trace_fn (void* fn, void* inputs, void* compilation_unit, bool strict)
+LANTERN_API void* (LANTERN_PTR _lantern_trace_fn) (void* fn, void* inputs, void* compilation_unit, bool strict, void* module, void* name, bool should_mangle);
+HOST_API void* lantern_trace_fn (void* fn, void* inputs, void* compilation_unit, bool strict, void* module, void* name, bool should_mangle)
 {
-  void* ret = _lantern_trace_fn(fn, inputs, compilation_unit, strict);
+  void* ret = _lantern_trace_fn(fn, inputs, compilation_unit, strict, module, name, should_mangle);
   LANTERN_HOST_HANDLER;
   return ret;
 }
@@ -1795,6 +1795,46 @@ HOST_API void* lantern_jit_compile (void* source, void* cu)
   void* ret = _lantern_jit_compile(source, cu);
   LANTERN_HOST_HANDLER;
   return ret;
+}
+
+LANTERN_API void* (LANTERN_PTR _lantern_ScriptModule_new) (void* cu, void* name);
+HOST_API void* lantern_ScriptModule_new (void* cu, void* name)
+{
+  void* ret = _lantern_ScriptModule_new(cu, name);
+  LANTERN_HOST_HANDLER;
+  return ret;
+}
+
+LANTERN_API void (LANTERN_PTR _lantern_ScriptModule_add_constant) (void* self, void* name, void* value);
+HOST_API void lantern_ScriptModule_add_constant (void* self, void* name, void* value)
+{
+   _lantern_ScriptModule_add_constant(self, name, value);
+  LANTERN_HOST_HANDLER;
+  
+}
+
+LANTERN_API void* (LANTERN_PTR _lantern_ScriptModule_find_constant) (void* self, void* name);
+HOST_API void* lantern_ScriptModule_find_constant (void* self, void* name)
+{
+  void* ret = _lantern_ScriptModule_find_constant(self, name);
+  LANTERN_HOST_HANDLER;
+  return ret;
+}
+
+LANTERN_API void (LANTERN_PTR _lantern_ScriptModule_add_method) (void* self, void* method);
+HOST_API void lantern_ScriptModule_add_method (void* self, void* method)
+{
+   _lantern_ScriptModule_add_method(self, method);
+  LANTERN_HOST_HANDLER;
+  
+}
+
+LANTERN_API void (LANTERN_PTR _lantern_ScriptModule_save) (void* self, void* path);
+HOST_API void lantern_ScriptModule_save (void* self, void* path)
+{
+   _lantern_ScriptModule_save(self, path);
+  LANTERN_HOST_HANDLER;
+  
 }
 
   /* Autogen Headers -- Start */
@@ -7011,6 +7051,11 @@ LOAD_SYMBOL(_lantern_IValue_from_None);
 LOAD_SYMBOL(_lantern_jit_compile_get_method);
 LOAD_SYMBOL(_lantern_jit_compile_list_methods);
 LOAD_SYMBOL(_lantern_jit_compile);
+LOAD_SYMBOL(_lantern_ScriptModule_new);
+LOAD_SYMBOL(_lantern_ScriptModule_add_constant);
+LOAD_SYMBOL(_lantern_ScriptModule_find_constant);
+LOAD_SYMBOL(_lantern_ScriptModule_add_method);
+LOAD_SYMBOL(_lantern_ScriptModule_save);
   /* Autogen Symbols -- Start */
   LOAD_SYMBOL(_lantern__cast_byte_tensor_bool)
   LOAD_SYMBOL(_lantern__cast_char_tensor_bool)

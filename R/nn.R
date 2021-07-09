@@ -12,7 +12,10 @@ nn_Module <- R6::R6Class(
     },
     
     add_module = function(name, module) {
-      
+      self$register_module(name, module)
+    },
+    
+    register_module = function(name, module) {
       if (is.numeric(name))
         name <- as.character(name)
       
@@ -210,6 +213,20 @@ nn_Module <- R6::R6Class(
       }
       fn(self)
       invisible(create_nn_module_callable(self))
+    },
+    
+    named_parameters = function(recursive = TRUE) {
+      if (recursive)
+        self$parameters
+      else
+        private$parameters_
+    },
+    
+    named_buffers = function(recursive = TRUE) {
+      if (recursive)
+        self$buffers
+      else
+        private$buffers_
     }
   
   ),
@@ -220,7 +237,7 @@ nn_Module <- R6::R6Class(
     non_persistent_buffers_ = character()
   ),
   active = list(
-    parameters = function(value) {
+    parameters = function(value, recursive = TRUE) {
       
       if (!missing(value))
         runtime_error(
@@ -230,7 +247,7 @@ nn_Module <- R6::R6Class(
           )
       
       pars <- lapply(private$modules_, function(x) x$parameters)
-      pars <- append(pars, private$parameters_)
+      pars <- append(pars, self$named_parameters(recursive = FALSE))
       pars <- unlist(pars, recursive = TRUE, use.names = TRUE)
       pars <- pars[!duplicated(pars)] # unique doesn't preserve the names
       
@@ -246,7 +263,7 @@ nn_Module <- R6::R6Class(
         )
       
       bufs <- lapply(private$modules_, function(x) x$buffers)
-      bufs <- append(bufs, private$buffers_)
+      bufs <- append(bufs, self$named_buffers(recursive = FALSE))
       bufs <- unlist(bufs, recursive = TRUE, use.names = TRUE)
       bufs <- bufs[!duplicated(bufs)] # unique doesn't preserve the names
       
@@ -270,6 +287,15 @@ nn_Module <- R6::R6Class(
       modules <- modules[!duplicated(module_instances)]
       
       modules
+    },
+    children = function(value) {
+      if (!missing(value))
+        runtime_error(
+          "It's not possible to modify the children list.\n",
+          " You can modify the modules in-place"
+        )
+      
+      private$modules_
     }
   )
 )

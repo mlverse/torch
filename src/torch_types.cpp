@@ -721,6 +721,11 @@ XPtrTorchScriptModule XPtrTorchScriptModule_from_SEXP (SEXP x)
     return XPtrTorchScriptModule( out->get_shared());
   }
   
+  if (x == R_NilValue)
+  {
+    return XPtrTorchScriptModule((void*)nullptr);
+  }
+  
   Rcpp::stop("Expected a torch_script_module");
 }
 

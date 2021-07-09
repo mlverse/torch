@@ -8,7 +8,9 @@ jit_trace(func, ..., strict = TRUE)
 }
 \arguments{
 \item{func}{An R function that will be run with \code{example_inputs}. func arguments
-and return values must be tensors or (possibly nested) lists that contain tensors.}
+and return values must be tensors or (possibly nested) lists that contain tensors.
+Can also be a \code{\link[=nn_module]{nn_module()}}, in such case \code{\link[=jit_trace_module]{jit_trace_module()}} is used to trace
+that module.}
 
 \item{...}{example inputs that will be passed to the function while
 tracing. The resulting trace can be run with inputs of different types and
@@ -24,7 +26,8 @@ your problem is a constant structure and does not get used as control flow
 (\code{if}, \code{for}) conditions.}
 }
 \value{
-An \code{script_function}
+An \code{script_function} if \code{func} is a function and \code{script_module} if
+\code{func} is a \code{nn_module()}.
 }
 \description{
 Using \code{jit_trace}, you can turn an existing R function into a TorchScript

@@ -29,9 +29,7 @@ make_load_symbols <- function(decls) {
 
 decls <- readr::read_lines(
   "
-void* _lantern_jit_compile_get_method (void* cu, void* name)
-void* _lantern_jit_compile_list_methods (void* cu)
-void* _lantern_jit_compile (void* source, void* cu)
+void _lantern_ScriptModule_save (void* self, void* path)
 "  
 )
 
