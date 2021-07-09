@@ -201,7 +201,9 @@ recording the operations performed on all the tensors.</p>
     <tr>
       <th>func</th>
       <td><p>An R function that will be run with <code>example_inputs</code>. func arguments
-and return values must be tensors or (possibly nested) lists that contain tensors.</p></td>
+and return values must be tensors or (possibly nested) lists that contain tensors.
+Can also be a <code><a href='nn_module.html'>nn_module()</a></code>, in such case <code><a href='jit_trace_module.html'>jit_trace_module()</a></code> is used to trace
+that module.</p></td>
     </tr>
     <tr>
       <th>...</th>
@@ -224,7 +226,8 @@ your problem is a constant structure and does not get used as control flow
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>An <code>script_function</code></p>
+    <p>An <code>script_function</code> if <code>func</code> is a function and <code>script_module</code> if
+<code>func</code> is a <code><a href='nn_module.html'>nn_module()</a></code>.</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p>The resulting recording of a standalone function produces a <code>script_function</code>.

@@ -147,16 +147,232 @@
     
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://torch.mlverse.org/docs">torch</a></span><span class="op">)</span></code></pre></div>
-<p><a href="https://pytorch.org/docs/stable/jit_language_reference.html#language-reference">TorchScript</a> is a statically typed subset of Python that can be interpret by LibTorch without any Python dependency. TorchScript programs can be created from R using tracing. When using tracing, code is automatically converted into this subset of Python by recording only the actual operators on tensors and simply executing and discarding the other surrounding R code.</p>
-<p>The R package can also execute TorchScript programs created in Python (or other languages). They are loaded <code><a href="../reference/jit_load.html">jit_load()</a></code> and seem like usual <code><a href="../reference/nn_module.html">nn_module()</a></code> objects.</p>
+<p><a href="https://pytorch.org/docs/stable/jit_language_reference.html#language-reference">TorchScript</a> is a statically typed subset of Python that can be interpret by LibTorch without any Python dependency. The torch R packages provides interfaces to create, serialize, load and execute TorchScript programs.</p>
+<p>Advantages of using TorchScritpt are:</p>
+<ul>
+<li><p>TorchScript code can be invoked in its own interpreter, which is basically a restricted Python interpreter. This interpreter does not acquire the Global Interpreter Lock, and so many requests can be processed on the same instance simultaneously.</p></li>
+<li><p>This format allows us to save the whole model to disk and load it into another environment, such as in a server written in a language other than R</p></li>
+<li><p>TorchScript gives us a representation in which we can do compiler optimizations on the code to provide more efficient execution</p></li>
+<li><p>TorchScript allows us to interface with many backend/device runtimes that require a broader view of the program than individual operators.</p></li>
+</ul>
+<div id="creating-torchscript-programs" class="section level2">
+<h2 class="hasAnchor">
+<a href="#creating-torchscript-programs" class="anchor"></a>Creating TorchScript programs</h2>
+<div id="tracing" class="section level3">
+<h3 class="hasAnchor">
+<a href="#tracing" class="anchor"></a>Tracing</h3>
+<p>TorchScript programs can be created from R using tracing. When using tracing, code is automatically converted into this subset of Python by recording only the actual operators on tensors and simply executing and discarding the other surrounding R code.</p>
+<p>Currently tracing is the only supported way to create TorchScript programs from R code.</p>
+<p>For example, let’s use the <code>jit_trace</code> function to create a TorchScript program. We pass a regular R function and example inputs.</p>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">fn</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span>
+  <span class="fu"><a href="../reference/torch_relu.html">torch_relu</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>
+<span class="op">}</span>
+
+<span class="va">traced_fn</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/jit_trace.html">jit_trace</a></span><span class="op">(</span><span class="va">fn</span>, <span class="fu"><a href="../reference/torch_tensor.html">torch_tensor</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">1</span>, <span class="fl">0</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<p>The <code>jit_trace</code> function has execute the R function with the example input and recorded all torch operations that occured during the execution to create a <em>graph</em>. <em>graph</em> is how we call the intermediate representation of TorchScript programs, and it can be inspected with:</p>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">traced_fn</span><span class="op">$</span><span class="va">graph</span>
+<span class="co">#&gt; graph(%0 : Float(3, strides=[1], requires_grad=0, device=cpu)):</span>
+<span class="co">#&gt;   %1 : Float(3, strides=[1], requires_grad=0, device=cpu) = aten::relu(%0)</span>
+<span class="co">#&gt;   return (%1)</span></code></pre></div>
+<p>The traced function can now be invoked as a regular R function:</p>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu">traced_fn</span><span class="op">(</span><span class="fu"><a href="../reference/torch_randn.html">torch_randn</a></span><span class="op">(</span><span class="fl">3</span><span class="op">)</span><span class="op">)</span>
+<span class="co">#&gt; torch_tensor</span>
+<span class="co">#&gt;  1.3483</span>
+<span class="co">#&gt;  0.6464</span>
+<span class="co">#&gt;  0.0528</span>
+<span class="co">#&gt; [ CPUFloatType{3} ]</span></code></pre></div>
+<p>It’s also possible to trace <code>nn_modules()</code> defined in R, for example:</p>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">module</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/nn_module.html">nn_module</a></span><span class="op">(</span>
+  initialize <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="op">)</span> <span class="op">{</span>
+    <span class="va">self</span><span class="op">$</span><span class="va">linear1</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/nn_linear.html">nn_linear</a></span><span class="op">(</span><span class="fl">10</span>, <span class="fl">10</span><span class="op">)</span>
+    <span class="va">self</span><span class="op">$</span><span class="va">linear2</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/nn_linear.html">nn_linear</a></span><span class="op">(</span><span class="fl">10</span>, <span class="fl">1</span><span class="op">)</span>
+  <span class="op">}</span>,
+  forward <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span>
+    <span class="va">x</span> <span class="op">%&gt;%</span> 
+      <span class="va">self</span><span class="op">$</span><span class="fu">linear1</span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+      <span class="fu"><a href="../reference/nnf_relu.html">nnf_relu</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+      <span class="va">self</span><span class="op">$</span><span class="fu">linear2</span><span class="op">(</span><span class="op">)</span>
+  <span class="op">}</span>
+<span class="op">)</span>
+<span class="va">traced_module</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/jit_trace.html">jit_trace</a></span><span class="op">(</span><span class="fu">module</span><span class="op">(</span><span class="op">)</span>, <span class="fu"><a href="../reference/torch_randn.html">torch_randn</a></span><span class="op">(</span><span class="fl">10</span>, <span class="fl">10</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<p>When using <code>jit_trace</code> with a <code>nn_module</code> only the <code>forward</code> method is traced. You can use the <code>jit_trace_module</code> function to pass example inputs to other methods. Traced modules look like normal <code>nn_modules()</code> be executed with:</p>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu">traced_module</span><span class="op">(</span><span class="fu"><a href="../reference/torch_randn.html">torch_randn</a></span><span class="op">(</span><span class="fl">3</span>, <span class="fl">10</span><span class="op">)</span><span class="op">)</span>
+<span class="co">#&gt; torch_tensor</span>
+<span class="co">#&gt;  0.3170</span>
+<span class="co">#&gt;  0.4439</span>
+<span class="co">#&gt;  0.2195</span>
+<span class="co">#&gt; [ CPUFloatType{3,1} ]</span></code></pre></div>
+<div id="limitations-of-tracing" class="section level4">
+<h4 class="hasAnchor">
+<a href="#limitations-of-tracing" class="anchor"></a>Limitations of tracing</h4>
+<ol style="list-style-type: decimal">
+<li>Tracing will not record any control-flow like if-statements or loops. When this control-flow is constant across your module, this is fine and it often inlines the control-flow decisions. But sometimes the control-flow is actually part of the model itself. For instance, a recurrent network is a loop over the (possibly dynamic) length of an input sequence. For example:</li>
+</ol>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># fn does does an operation for each dimension of a tensor</span>
+<span class="va">fn</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span>
+  <span class="va">x</span> <span class="op">%&gt;%</span> 
+    <span class="fu"><a href="../reference/torch_unbind.html">torch_unbind</a></span><span class="op">(</span>dim <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+    <span class="fu"><a href="https://rdrr.io/r/base/lapply.html">lapply</a></span><span class="op">(</span><span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="va">x</span><span class="op">$</span><span class="fu">sum</span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+    <span class="fu"><a href="../reference/torch_stack.html">torch_stack</a></span><span class="op">(</span>dim <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>
+<span class="op">}</span>
+<span class="co"># we trace using as an example a tensor with size (10, 5, 5)</span>
+<span class="va">traced_fn</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/jit_trace.html">jit_trace</a></span><span class="op">(</span><span class="va">fn</span>, <span class="fu"><a href="../reference/torch_randn.html">torch_randn</a></span><span class="op">(</span><span class="fl">10</span>, <span class="fl">5</span>, <span class="fl">5</span><span class="op">)</span><span class="op">)</span>
+<span class="co"># applying it with a tensor with different size returns an error.</span>
+<span class="fu">traced_fn</span><span class="op">(</span><span class="fu"><a href="../reference/torch_randn.html">torch_randn</a></span><span class="op">(</span><span class="fl">11</span>, <span class="fl">5</span>, <span class="fl">5</span><span class="op">)</span><span class="op">)</span>
+<span class="co">#&gt; Error in cpp_call_traced_fn(ptr, inputs): The following operation failed in the TorchScript interpreter.</span>
+<span class="co">#&gt; Traceback of TorchScript (most recent call last):</span>
+<span class="co">#&gt; RuntimeError: Expected 10 elements in a list but found 11</span></code></pre></div>
+<ol start="2" style="list-style-type: decimal">
+<li>In the returned <code>ScriptModule</code>, operations that have different behaviors in training and eval modes will always behave as if it is in the mode it was in during tracing, no matter which mode the <code>ScriptModule</code> is in. For example:</li>
+</ol>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">traced_dropout</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/jit_trace.html">jit_trace</a></span><span class="op">(</span><span class="fu"><a href="../reference/nn_dropout.html">nn_dropout</a></span><span class="op">(</span><span class="op">)</span>, <span class="fu"><a href="../reference/torch_ones.html">torch_ones</a></span><span class="op">(</span><span class="fl">5</span>,<span class="fl">5</span><span class="op">)</span><span class="op">)</span>
+<span class="fu">traced_dropout</span><span class="op">(</span><span class="fu"><a href="../reference/torch_ones.html">torch_ones</a></span><span class="op">(</span><span class="fl">3</span>,<span class="fl">3</span><span class="op">)</span><span class="op">)</span>
+<span class="co">#&gt; torch_tensor</span>
+<span class="co">#&gt;  0  0  2</span>
+<span class="co">#&gt;  2  2  2</span>
+<span class="co">#&gt;  0  2  0</span>
+<span class="co">#&gt; [ CPUFloatType{3,3} ]</span>
+<span class="va">traced_dropout</span><span class="op">$</span><span class="fu">eval</span><span class="op">(</span><span class="op">)</span>
+<span class="co"># even after setting to eval mode, dropout is applied</span>
+<span class="fu">traced_dropout</span><span class="op">(</span><span class="fu"><a href="../reference/torch_ones.html">torch_ones</a></span><span class="op">(</span><span class="fl">3</span>,<span class="fl">3</span><span class="op">)</span><span class="op">)</span>
+<span class="co">#&gt; torch_tensor</span>
+<span class="co">#&gt;  0  0  0</span>
+<span class="co">#&gt;  0  0  2</span>
+<span class="co">#&gt;  0  2  0</span>
+<span class="co">#&gt; [ CPUFloatType{3,3} ]</span></code></pre></div>
+<ol start="3" style="list-style-type: decimal">
+<li>Tracing proegrams can only take tensors and lists of tensors as input and return tensors and lists of tensors. For example:</li>
+</ol>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">fn</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span><span class="op">)</span> <span class="op">{</span>
+  <span class="va">x</span> <span class="op">+</span> <span class="va">y</span>
+<span class="op">}</span>
+<span class="fu"><a href="../reference/jit_trace.html">jit_trace</a></span><span class="op">(</span><span class="va">fn</span>, <span class="fu"><a href="../reference/torch_tensor.html">torch_tensor</a></span><span class="op">(</span><span class="fl">1</span><span class="op">)</span>, <span class="fl">1</span><span class="op">)</span>
+<span class="co">#&gt; Error in cpp_trace_function(tr_fn, list(...), .compilation_unit, strict, : Only tensors or (possibly nested) dict or tuples of tensors can be inputs to traced functions. Got float</span>
+<span class="co">#&gt; Exception raised from addInput at ../torch/csrc/jit/frontend/tracer.cpp:404 (most recent call first):</span>
+<span class="co">#&gt; frame #0: c10::Error::Error(c10::SourceLocation, std::__1::basic_string&lt;char, std::__1::char_traits&lt;char&gt;, std::__1::allocator&lt;char&gt; &gt;) + 98 (0x104f9be52 in libc10.dylib)</span>
+<span class="co">#&gt; frame #1: c10::detail::torchCheckFail(char const*, char const*, unsigned int, std::__1::basic_string&lt;char, std::__1::char_traits&lt;char&gt;, std::__1::allocator&lt;char&gt; &gt; const&amp;) + 106 (0x104f9ad1a in libc10.dylib)</span>
+<span class="co">#&gt; frame #2: torch::jit::tracer::addInput(std::__1::shared_ptr&lt;torch::jit::tracer::TracingState&gt; const&amp;, c10::IValue const&amp;, std::__1::shared_ptr&lt;c10::Type&gt; const&amp;, torch::jit::Value*) + 7190 (0x10a881196 in libtorch_cpu.dylib)</span>
+<span class="co">#&gt; frame #3: torch::jit::tracer::addInput(std::__1::shared_ptr&lt;torch::jit::tracer::TracingState&gt; const&amp;, c10::IValue const&amp;, std::__1::shared_ptr&lt;c10::Type&gt; const&amp;, torch::jit::Value*) + 4120 (0x10a880598 in libtorch_cpu.dylib)</span>
+<span class="co">#&gt; frame #4: torch::jit::tracer::trace(std::__1::vector&lt;c10::IValue, std::__1::allocator&lt;c10::IValue&gt; &gt;, std::__1::function&lt;std::__1::vector&lt;c10::IValue, std::__1::allocator&lt;c10::IValue&gt; &gt; (std::__1::vector&lt;c10::IValue, std::__1::allocator&lt;c10::IValue&gt; &gt;)&gt; const&amp;, std::__1::function&lt;std::__1::basic_string&lt;char, std::__1::char_traits&lt;char&gt;, std::__1::allocator&lt;char&gt; &gt; (at::Tensor const&amp;)&gt;, bool, bool, torch::jit::Module*) + 762 (0x10a87df2a in libtorch_cpu.dylib)</span>
+<span class="co">#&gt; frame #5: _lantern_trace_fn + 512 (0x104dbe040 in liblantern.dylib)</span>
+<span class="co">#&gt; frame #6: cpp_trace_function(Rcpp::Function_Impl&lt;Rcpp::PreserveStorage&gt;, XPtrTorchStack, XPtrTorchCompilationUnit, XPtrTorchstring, bool, XPtrTorchScriptModule, bool, bool) + 505 (0x107290579 in torchpkg.so)</span>
+<span class="co">#&gt; frame #7: _torch_cpp_trace_function + 720 (0x107130480 in torchpkg.so)</span>
+<span class="co">#&gt; frame #8: R_doDotCall + 2679 (0x100d9d417 in libR.dylib)</span>
+<span class="co">#&gt; frame #9: do_dotcall + 334 (0x100d9e8de in libR.dylib)</span>
+<span class="co">#&gt; frame #10: bcEval + 28581 (0x100dd5915 in libR.dylib)</span>
+<span class="co">#&gt; frame #11: Rf_eval + 385 (0x100dce2c1 in libR.dylib)</span>
+<span class="co">#&gt; frame #12: R_execClosure + 2169 (0x100dee139 in libR.dylib)</span>
+<span class="co">#&gt; frame #13: Rf_applyClosure + 471 (0x100decf27 in libR.dylib)</span>
+<span class="co">#&gt; frame #14: bcEval + 26782 (0x100dd520e in libR.dylib)</span>
+<span class="co">#&gt; frame #15: Rf_eval + 385 (0x100dce2c1 in libR.dylib)</span>
+<span class="co">#&gt; frame #16: R_execClosure + 2169 (0x100dee139 in libR.dylib)</span>
+<span class="co">#&gt; frame #17: Rf_applyClosure + 471 (0x100decf27 in libR.dylib)</span>
+<span class="co">#&gt; frame #18: Rf_eval + 1595 (0x100dce77b in libR.dylib)</span>
+<span class="co">#&gt; frame #19: do_eval + 625 (0x100df2171 in libR.dylib)</span>
+<span class="co">#&gt; frame #20: bcEval + 28581 (0x100dd5915 in libR.dylib)</span>
+<span class="co">#&gt; frame #21: Rf_eval + 385 (0x100dce2c1 in libR.dylib)</span>
+<span class="co">#&gt; frame #22: R_execClosure + 2169 (0x100dee139 in libR.dylib)</span>
+<span class="co">#&gt; frame #23: Rf_applyClosure + 471 (0x100decf27 in libR.dylib)</span>
+<span class="co">#&gt; frame #24: bcEval + 26782 (0x100dd520e in libR.dylib)</span>
+<span class="co">#&gt; frame #25: Rf_eval + 385 (0x100dce2c1 in libR.dylib)</span>
+<span class="co">#&gt; frame #26: forcePromise + 172 (0x100dec63c in libR.dylib)</span>
+<span class="co">#&gt; frame #27: Rf_eval + 1124 (0x100dce5a4 in libR.dylib)</span>
+<span class="co">#&gt; frame #28: do_withVisible + 57 (0x100df27e9 in libR.dylib)</span>
+<span class="co">#&gt; frame #29: do_internal + 362 (0x100e35eea in libR.dylib)</span>
+<span class="co">#&gt; frame #30: bcEval + 29053 (0x100dd5aed in libR.dylib)</span>
+<span class="co">#&gt; frame #31: Rf_eval + 385 (0x100dce2c1 in libR.dylib)</span>
+<span class="co">#&gt; frame #32: R_execClosure + 2169 (0x100dee139 in libR.dylib)</span>
+<span class="co">#&gt; frame #33: Rf_applyClosure + 471 (0x100decf27 in libR.dylib)</span>
+<span class="co">#&gt; frame #34: bcEval + 26782 (0x100dd520e in libR.dylib)</span>
+<span class="co">#&gt; frame #35: Rf_eval + 385 (0x100dce2c1 in libR.dylib)</span>
+<span class="co">#&gt; frame #36: forcePromise + 172 (0x100dec63c in libR.dylib)</span>
+<span class="co">#&gt; frame #37: getvar + 778 (0x100df7c8a in libR.dylib)</span>
+<span class="co">#&gt; frame #38: bcEval + 15063 (0x100dd2447 in libR.dylib)</span>
+<span class="co">#&gt; frame #39: Rf_eval + 385 (0x100dce2c1 in libR.dylib)</span>
+<span class="co">#&gt; frame #40: R_execClosure + 2169 (0x100dee139 in libR.dylib)</span>
+<span class="co">#&gt; frame #41: Rf_applyClosure + 471 (0x100decf27 in libR.dylib)</span>
+<span class="co">#&gt; frame #42: bcEval + 26782 (0x100dd520e in libR.dylib)</span>
+<span class="co">#&gt; frame #43: Rf_eval + 385 (0x100dce2c1 in libR.dylib)</span>
+<span class="co">#&gt; frame #44: forcePromise + 172 (0x100dec63c in libR.dylib)</span>
+<span class="co">#&gt; frame #45: getvar + 778 (0x100df7c8a in libR.dylib)</span>
+<span class="co">#&gt; frame #46: bcEval + 15063 (0x100dd2447 in libR.dylib)</span>
+<span class="co">#&gt; frame #47: Rf_eval + 385 (0x100dce2c1 in libR.dylib)</span>
+<span class="co">#&gt; frame #48: forcePromise + 172 (0x100dec63c in libR.dylib)</span>
+<span class="co">#&gt; frame #49: getvar + 778 (0x100df7c8a in libR.dylib)</span>
+<span class="co">#&gt; frame #50: bcEval + 15063 (0x100dd2447 in libR.dylib)</span>
+<span class="co">#&gt; frame #51: Rf_eval + 385 (0x100dce2c1 in libR.dylib)</span>
+<span class="co">#&gt; frame #52: forcePromise + 172 (0x100dec63c in libR.dylib)</span>
+<span class="co">#&gt; frame #53: getvar + 778 (0x100df7c8a in libR.dylib)</span>
+<span class="co">#&gt; frame #54: bcEval + 15063 (0x100dd2447 in libR.dylib)</span>
+<span class="co">#&gt; frame #55: Rf_eval + 385 (0x100dce2c1 in libR.dylib)</span>
+<span class="co">#&gt; frame #56: forcePromise + 172 (0x100dec63c in libR.dylib)</span>
+<span class="co">#&gt; frame #57: getvar + 778 (0x100df7c8a in libR.dylib)</span>
+<span class="co">#&gt; frame #58: bcEval + 15063 (0x100dd2447 in libR.dylib)</span>
+<span class="co">#&gt; frame #59: Rf_eval + 385 (0x100dce2c1 in libR.dylib)</span>
+<span class="co">#&gt; frame #60: forcePromise + 172 (0x100dec63c in libR.dylib)</span>
+<span class="co">#&gt; frame #61: getvar + 778 (0x100df7c8a in libR.dylib)</span>
+<span class="co">#&gt; frame #62: bcEval + 15063 (0x100dd2447 in libR.dylib)</span>
+<span class="co">#&gt; frame #63: Rf_eval + 385 (0x100dce2c1 in libR.dylib)</span>
+<span class="co">#&gt; :</span></code></pre></div>
+</div>
+</div>
+<div id="compiling-torchscript" class="section level3">
+<h3 class="hasAnchor">
+<a href="#compiling-torchscript" class="anchor"></a>Compiling TorchScript</h3>
+<p>It’s also possible to create TorchScript programs by compiling TorchScript code. TorchScript code looks a lot like standard python code. For example:</p>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">tr</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/jit_compile.html">jit_compile</a></span><span class="op">(</span><span class="st">"
+def fn (x: Tensor):
+  return torch.relu(x)
+
+"</span><span class="op">)</span>
+<span class="va">tr</span><span class="op">$</span><span class="fu">fn</span><span class="op">(</span><span class="fu"><a href="../reference/torch_tensor.html">torch_tensor</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">1</span>, <span class="fl">0</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
+<span class="co">#&gt; torch_tensor</span>
+<span class="co">#&gt;  0</span>
+<span class="co">#&gt;  0</span>
+<span class="co">#&gt;  1</span>
+<span class="co">#&gt; [ CPUFloatType{3} ]</span></code></pre></div>
+</div>
+</div>
+<div id="serializing-and-loading" class="section level2">
+<h2 class="hasAnchor">
+<a href="#serializing-and-loading" class="anchor"></a>Serializing and loading</h2>
+<p>TorchScript programs can be serialized using the <code>jit_save</code> function and loaded back from disk with <code>jit_load</code>.</p>
+<p>For example:</p>
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">fn</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span>
+  <span class="fu"><a href="../reference/torch_relu.html">torch_relu</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>
+<span class="op">}</span>
+<span class="va">tr_fn</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/jit_trace.html">jit_trace</a></span><span class="op">(</span><span class="va">fn</span>, <span class="fu"><a href="../reference/torch_tensor.html">torch_tensor</a></span><span class="op">(</span><span class="fl">1</span><span class="op">)</span><span class="op">)</span>
+<span class="fu"><a href="../reference/jit_save.html">jit_save</a></span><span class="op">(</span><span class="va">tr_fn</span>, <span class="st">"path.pt"</span><span class="op">)</span>
+<span class="va">loaded</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/jit_load.html">jit_load</a></span><span class="op">(</span><span class="st">"path.pt"</span><span class="op">)</span></code></pre></div>
+<p>Loaded programs can be executed as usual:</p>
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu">loaded</span><span class="op">(</span><span class="fu"><a href="../reference/torch_tensor.html">torch_tensor</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">1</span>, <span class="fl">0</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
+<span class="co">#&gt; torch_tensor</span>
+<span class="co">#&gt;  0</span>
+<span class="co">#&gt;  0</span>
+<span class="co">#&gt;  1</span>
+<span class="co">#&gt; [ CPUFloatType{3} ]</span></code></pre></div>
+<p><strong>Note</strong> You can load TorchScript programs that were in libraries different than <code>torch</code> for R. Eg, a TorchScript program can be created in PyTorch with <code>torch.jit.trace</code> or <code>torch.jit.script</code> and runned from R.</p>
+<p>R objects are automatically converted to their TorchScript counterpart following the Types table in this document. However, sometimes it’s necessary to make type annotations with <code><a href="../reference/jit_tuple.html">jit_tuple()</a></code> and <code><a href="../reference/jit_scalar.html">jit_scalar()</a></code> to disambiguate the conversion.</p>
+</div>
 <div id="types" class="section level2">
 <h2 class="hasAnchor">
 <a href="#types" class="anchor"></a>Types</h2>
 <p>The following table lists all TorchScript types and how to convert the to and back to R.</p>
 <table class="table">
 <colgroup>
-<col width="23%">
-<col width="76%">
+<col width="24%">
+<col width="75%">
 </colgroup>
 <thead><tr class="header">
 <th>TorchScript Type</th>
@@ -213,19 +429,6 @@
 </tr>
 </tbody>
 </table>
-</div>
-<div id="creating-torchscript-programs" class="section level2">
-<h2 class="hasAnchor">
-<a href="#creating-torchscript-programs" class="anchor"></a>Creating TorchScript programs</h2>
-<p>Currently the only supported way to create TorchScript programs from R is using tracing.</p>
-<p>See <code><a href="../reference/jit_trace.html">?jit_trace</a></code> for documentation on tracing.</p>
-</div>
-<div id="executing-torchscript-programs" class="section level2">
-<h2 class="hasAnchor">
-<a href="#executing-torchscript-programs" class="anchor"></a>Executing TorchScript programs</h2>
-<p>TorchScript programs can be loaded from disk using <code><a href="../reference/jit_load.html">jit_load()</a></code> and later executed.</p>
-<p>The loaded programs are represented by a <code>ScriptModule</code> that behaves similar to <code><a href="../reference/nn_module.html">nn_module()</a></code>s.</p>
-<p>R objects are automatically converted to their TorchScript counterpart following the Types table in this document. However, sometimes it’s necessary to make type annotations with <code><a href="../reference/jit_tuple.html">jit_tuple()</a></code> and <code><a href="../reference/jit_scalar.html">jit_scalar()</a></code> to disambiguate the conversion.</p>
 </div>
   </div>
 
