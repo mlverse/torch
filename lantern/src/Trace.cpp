@@ -23,6 +23,9 @@ void* _lantern_create_traceable_fun (void *(*r_caller)(void *, void *), void* fn
         //auto r_fn = *reinterpret_cast<std::function<void*(void*)>*>(fn);
         auto tmp = LanternObject<Stack>(x);
         void* out = (*r_caller)((void *)(&tmp), fn);
+        if (out == nullptr) 
+            throw std::runtime_error("Error in the R function execution.");
+
         return reinterpret_cast<LanternObject<Stack>*>(out)->get();
     };
 

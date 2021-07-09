@@ -14,11 +14,21 @@ Rcpp::XPtr<XPtrTorchFunctionPtr> cpp_trace_function (Rcpp::Function fn, XPtrTorc
                         )
 {
   auto output = XPtrTorchStack(lantern_Stack_new());
-  std::function<void*(void*)> r_fn = [&fn, &output](void* inputs) {
+  std::string error;
+  
+  std::function<void*(void*)> r_fn = [&error, &fn, &output](void* inputs) {
     // we don't control this memory as it will be controlled by
     // the lantern side function therefore we use a no-op deleter.
     auto inputs_ = XPtrTorchStack(inputs, [](void* x) {});
-    output = Rcpp::as<XPtrTorchStack>(fn(inputs_));
+    try
+    {
+      output = Rcpp::as<XPtrTorchStack>(fn(inputs_));
+    }
+    catch (const std::exception& e)
+    {
+      error = e.what();
+      output = XPtrTorchStack((void*) nullptr);
+    }
     return output.get();
   };
   
@@ -33,8 +43,11 @@ Rcpp::XPtr<XPtrTorchFunctionPtr> cpp_trace_function (Rcpp::Function fn, XPtrTorc
   }
   
   XPtrTorchTraceableFunction traceable_fn = lantern_create_traceable_fun(&rcpp_call_hook, (void*) &r_fn);
-  auto tr_fn = XPtrTorchFunctionPtr(
-    lantern_trace_fn(
+  
+  void* tr_fn_ptr;
+  try
+  {
+    tr_fn_ptr = lantern_trace_fn(
       traceable_fn.get(), 
       inputs.get(), 
       compilation_unit.get(), 
@@ -42,7 +55,15 @@ Rcpp::XPtr<XPtrTorchFunctionPtr> cpp_trace_function (Rcpp::Function fn, XPtrTorc
       module.get(), 
       name.get(), 
       should_mangle
-    ), 
+    );
+  }
+  catch (...)
+  {
+    Rcpp::stop(error);
+  }
+  
+  auto tr_fn = XPtrTorchFunctionPtr(
+    tr_fn_ptr, 
     deleter
   );
   
