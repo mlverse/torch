@@ -15,7 +15,9 @@ Rcpp::XPtr<XPtrTorchFunctionPtr> cpp_trace_function (Rcpp::Function fn, XPtrTorc
 {
   auto output = XPtrTorchStack(lantern_Stack_new());
   std::function<void*(void*)> r_fn = [&fn, &output](void* inputs) {
-    auto inputs_ = XPtrTorchStack(inputs);
+    // we don't control this memory as it will be controlled by
+    // the lantern side function therefore we use a no-op deleter.
+    auto inputs_ = XPtrTorchStack(inputs, [](void* x) {});
     output = Rcpp::as<XPtrTorchStack>(fn(inputs_));
     return output.get();
   };

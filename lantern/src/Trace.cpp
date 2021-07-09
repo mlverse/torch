@@ -21,8 +21,8 @@ void* _lantern_create_traceable_fun (void *(*r_caller)(void *, void *), void* fn
     std::function<Stack(Stack)> tr_fn = [r_caller, fn](Stack x)
     {
         //auto r_fn = *reinterpret_cast<std::function<void*(void*)>*>(fn);
-        auto tmp = new LanternObject<Stack>(x);
-        void* out = (*r_caller)((void *)tmp, fn);
+        auto tmp = LanternObject<Stack>(x);
+        void* out = (*r_caller)((void *)(&tmp), fn);
         return reinterpret_cast<LanternObject<Stack>*>(out)->get();
     };
 
@@ -37,7 +37,7 @@ void* _lantern_trace_fn (void* fn, void* inputs, void* compilation_unit, bool st
     Stack inputs_ = reinterpret_cast<LanternObject<Stack>*>(inputs)->get();
     CompilationUnit* cu = reinterpret_cast<CompilationUnit*>(compilation_unit);
     auto module_ = reinterpret_cast<torch::jit::script::Module *>(module);
-    auto name_ = *reinterpret_cast<std::string*>(name);
+    auto name_ = reinterpret_cast<LanternObject<std::string>*>(name)->get();
 
     std::function<std::string(const torch::autograd::Variable&)> var_fn = [](const torch::autograd::Variable& x) {
         return "";

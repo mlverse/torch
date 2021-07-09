@@ -335,6 +335,7 @@ public:
 class XPtrTorchStack : public XPtrTorch {
 public:
   XPtrTorchStack (void * x) : XPtrTorch(x, lantern_Stack_delete) {}
+  XPtrTorchStack (void * x, std::function<void(void*)> deleter) : XPtrTorch(x, deleter) {}
   explicit XPtrTorchStack (std::shared_ptr<void> x) : XPtrTorch(x) {};
   XPtrTorchStack (SEXP x);
   operator SEXP () const;
