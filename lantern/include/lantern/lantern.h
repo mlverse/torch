@@ -1837,6 +1837,70 @@ HOST_API void lantern_ScriptModule_save (void* self, void* path)
   
 }
 
+LANTERN_API void* (LANTERN_PTR _lantern_jit_script_create_Decl) (void* range, void* params, void* return_type);
+HOST_API void* lantern_jit_script_create_Decl (void* range, void* params, void* return_type)
+{
+  void* ret = _lantern_jit_script_create_Decl(range, params, return_type);
+  LANTERN_HOST_HANDLER;
+  return ret;
+}
+
+LANTERN_API void* (LANTERN_PTR _lantern_jit_script_create_SourceRange) (void* source, int start, int end);
+HOST_API void* lantern_jit_script_create_SourceRange (void* source, int start, int end)
+{
+  void* ret = _lantern_jit_script_create_SourceRange(source, start, end);
+  LANTERN_HOST_HANDLER;
+  return ret;
+}
+
+LANTERN_API void* (LANTERN_PTR _lantern_jit_script_create_Source) (void* text);
+HOST_API void* lantern_jit_script_create_Source (void* text)
+{
+  void* ret = _lantern_jit_script_create_Source(text);
+  LANTERN_HOST_HANDLER;
+  return ret;
+}
+
+LANTERN_API void* (LANTERN_PTR _lantern_jit_script_create_Ident) (void* range, void* name);
+HOST_API void* lantern_jit_script_create_Ident (void* range, void* name)
+{
+  void* ret = _lantern_jit_script_create_Ident(range, name);
+  LANTERN_HOST_HANDLER;
+  return ret;
+}
+
+LANTERN_API void* (LANTERN_PTR _lantern_jit_script_create_Param) (void* range, void* ident, void* type, void* def, bool kwarg_only);
+HOST_API void* lantern_jit_script_create_Param (void* range, void* ident, void* type, void* def, bool kwarg_only)
+{
+  void* ret = _lantern_jit_script_create_Param(range, ident, type, def, kwarg_only);
+  LANTERN_HOST_HANDLER;
+  return ret;
+}
+
+LANTERN_API void* (LANTERN_PTR _lantern_jit_script_create_ExprStmt) (void* range, void* list);
+HOST_API void* lantern_jit_script_create_ExprStmt (void* range, void* list)
+{
+  void* ret = _lantern_jit_script_create_ExprStmt(range, list);
+  LANTERN_HOST_HANDLER;
+  return ret;
+}
+
+LANTERN_API void* (LANTERN_PTR _lantern_jit_script_create_Const) (void* range, void* value);
+HOST_API void* lantern_jit_script_create_Const (void* range, void* value)
+{
+  void* ret = _lantern_jit_script_create_Const(range, value);
+  LANTERN_HOST_HANDLER;
+  return ret;
+}
+
+LANTERN_API void* (LANTERN_PTR _lantern_jit_script_create_Return) (void* range, void* value);
+HOST_API void* lantern_jit_script_create_Return (void* range, void* value)
+{
+  void* ret = _lantern_jit_script_create_Return(range, value);
+  LANTERN_HOST_HANDLER;
+  return ret;
+}
+
   /* Autogen Headers -- Start */
   LANTERN_API void* (LANTERN_PTR _lantern__cast_byte_tensor_bool)(void* self, void* non_blocking);
   HOST_API void* lantern__cast_byte_tensor_bool(void* self, void* non_blocking) { void* ret = _lantern__cast_byte_tensor_bool(self, non_blocking); LANTERN_HOST_HANDLER return ret; }
@@ -7056,6 +7120,14 @@ LOAD_SYMBOL(_lantern_ScriptModule_add_constant);
 LOAD_SYMBOL(_lantern_ScriptModule_find_constant);
 LOAD_SYMBOL(_lantern_ScriptModule_add_method);
 LOAD_SYMBOL(_lantern_ScriptModule_save);
+LOAD_SYMBOL(_lantern_jit_script_create_Decl);
+LOAD_SYMBOL(_lantern_jit_script_create_SourceRange;
+LOAD_SYMBOL(_lantern_jit_script_create_Source);
+LOAD_SYMBOL(_lantern_jit_script_create_Ident);
+LOAD_SYMBOL(_lantern_jit_script_create_Param);
+LOAD_SYMBOL(_lantern_jit_script_create_ExprStmt);
+LOAD_SYMBOL(_lantern_jit_script_create_Const);
+LOAD_SYMBOL(_lantern_jit_script_create_Return);
   /* Autogen Symbols -- Start */
   LOAD_SYMBOL(_lantern__cast_byte_tensor_bool)
   LOAD_SYMBOL(_lantern__cast_char_tensor_bool)
