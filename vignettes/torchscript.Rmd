@@ -19,16 +19,16 @@ knitr::opts_chunk$set(
 library(torch)
 ```
 
-[TorchScript](https://pytorch.org/docs/stable/jit_language_reference.html#language-reference) is a statically typed subset of Python that can be interpret by LibTorch without any Python dependency. 
-The torch R packages provides interfaces to create, serialize, load and execute TorchScript programs.
+[TorchScript](https://pytorch.org/docs/stable/jit_language_reference.html#language-reference) is a statically typed subset of Python that can be interpreted by LibTorch without any Python dependency. 
+The torch R package provides interfaces to create, serialize, load and execute TorchScript programs.
 
-Advantages of using TorchScritpt are:
+Advantages of using TorchScript are:
 
 - TorchScript code can be invoked in its own interpreter, which is basically a restricted Python interpreter. This interpreter does not acquire the Global Interpreter Lock, and so many requests can be processed on the same instance simultaneously.
 
-- This format allows us to save the whole model to disk and load it into another environment, such as in a server written in a language other than R
+- This format allows us to save the whole model to disk and load it into another environment, such as on server written in a language other than R.
 
-- TorchScript gives us a representation in which we can do compiler optimizations on the code to provide more efficient execution
+- TorchScript gives us a representation in which we can do compiler optimizations on the code to make execution more efficient.
 
 - TorchScript allows us to interface with many backend/device runtimes that require a broader view of the program than individual operators.
 
@@ -52,8 +52,8 @@ fn <- function(x) {
 traced_fn <- jit_trace(fn, torch_tensor(c(-1, 0, 1)))
 ```
 
-The `jit_trace` function has execute the R function with the example input and recorded
-all torch operations that occured during the execution to create a *graph*. *graph* is
+The `jit_trace` function has executed the R function with the example input and recorded
+all torch operations that occurred during execution to create a *graph*. *graph* is
 how we call the intermediate representation of TorchScript programs, and it can be inspected with:
 
 ```{r}
@@ -85,7 +85,7 @@ traced_module <- jit_trace(module(), torch_randn(10, 10))
 
 When using `jit_trace` with a `nn_module` only the `forward` method is traced. You
 can use the `jit_trace_module` function to pass example inputs to other methods.
-Traced modules look like normal `nn_modules()`  be executed with:
+Traced modules look like normal `nn_modules()`, and can be called the same way:
 
 ```{r}
 traced_module(torch_randn(3, 10))
@@ -93,7 +93,7 @@ traced_module(torch_randn(3, 10))
 
 #### Limitations of tracing
 
-1. Tracing will not record any control-flow like if-statements or loops. When this control-flow is constant across your module, this is fine and it often inlines the control-flow decisions. But sometimes the control-flow is actually part of the model itself. For instance, a recurrent network is a loop over the (possibly dynamic) length of an input sequence. For example:
+1. Tracing will not record any control flow like if-statements or loops. When this control flow is constant across your module, this is fine and it often inlines the control flow decisions. But sometimes the control flow is actually part of the model itself. For instance, a recurrent network is a loop over the (possibly dynamic) length of an input sequence. For example:
 
 ```{r, error=TRUE}
 # fn does does an operation for each dimension of a tensor
@@ -109,7 +109,7 @@ traced_fn <- jit_trace(fn, torch_randn(10, 5, 5))
 traced_fn(torch_randn(11, 5, 5))
 ```
 
-2. In the returned `ScriptModule`, operations that have different behaviors in training and eval modes will always behave as if it is in the mode it was in during tracing, no matter which mode the `ScriptModule` is in. For example:
+2. In the returned `ScriptModule`, operations that have different behaviors in training and eval modes will always behave as if it were in the mode it was in during tracing, no matter which mode the `ScriptModule` is in. For example:
 
 ```{r}
 traced_dropout <- jit_trace(nn_dropout(), torch_ones(5,5))
@@ -165,8 +165,8 @@ Loaded programs can be executed as usual:
 loaded(torch_tensor(c(-1, 0, 1)))
 ```
 
-**Note** You can load TorchScript programs that were in libraries different than
-`torch` for R. Eg, a TorchScript program can be created in PyTorch with `torch.jit.trace` or `torch.jit.script` and runned from R.
+**Note** You can load TorchScript programs that were created in libraries different than
+`torch` for R. Eg, a TorchScript program can be created in PyTorch with `torch.jit.trace` or `torch.jit.script`, and run from R.
 
 R objects are automatically converted to their TorchScript counterpart following the Types table in this document. However, sometimes it's necessary to make type annotations with `jit_tuple()` and `jit_scalar()` to disambiguate the conversion.
 
