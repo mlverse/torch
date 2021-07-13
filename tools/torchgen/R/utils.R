@@ -7,7 +7,7 @@
 #' @export
 declarations <- function() {
 
-  version <- getOption("torchgen.version", default = "1.8.0")
+  version <- getOption("torchgen.version", default = "1.9.0")
   path <- getOption("torchgen.path")
 
   if (is.null(path)) {
@@ -16,6 +16,15 @@ declarations <- function() {
       package = "torchgen"
     )
   }
+
+  file <- readr::read_file(path)
+
+  new_file <- file %>%
+    stringr::str_replace_all(stringr::fixed("at::"), "") %>%
+    stringr::str_replace_all(stringr::fixed("const Scalar &"), "Scalar")
+
+  path <- tempfile()
+  readr::write_file(new_file, file = path)
 
   decls <- yaml::read_yaml(
     file = path,
