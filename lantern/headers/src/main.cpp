@@ -155,13 +155,20 @@ std::string buildCalls(std::string name, YAML::Node node, size_t start)
             std::cout << "optional tensor" << std::endl;
             type = "c10::optional<torch::Tensor>";
         }
+        else if (type == "const at::Scalar &" && dtype == "const c10::optional<at::Scalar> &")
+        {
+            std::cout << "optional scalar" << std::endl;
+            type = "c10::optional<at::Scalar>";
+        }
 
         // add optional call if required
         std::string call = node[idx]["name"].as<std::string>();
         if ((dtype.find("c10::optional") != std::string::npos) & 
             (type != "std::vector<torch::Dimname>") &
             (type != "c10::List<c10::optional<torch::Tensor>>") &
-            (type != "c10::optional<torch::Tensor>")
+            (type != "c10::optional<torch::Tensor>") &
+            (type != "const c10::List<c10::optional<at::Tensor>> &") &
+            (type != "c10::optional<at::Scalar>")
             )
         {
             if ((type != "double") & 
