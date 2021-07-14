@@ -371,3 +371,10 @@ void _lantern_FunctionPtr_delete (void* x)
   LANTERN_FUNCTION_END_VOID
 }
 
+void _lantern_vector_Scalar_delete (void* x)
+{
+  LANTERN_FUNCTION_START
+  lantern_delete<std::vector<torch::Scalar>>(x);
+  LANTERN_FUNCTION_END_VOID
+}
+

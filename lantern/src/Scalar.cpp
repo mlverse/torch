@@ -78,3 +78,34 @@ void *_lantern_Scalar_nullopt()
   LANTERN_FUNCTION_END
 }
 
+void* _lantern_vector_Scalar_new ()
+{
+  LANTERN_FUNCTION_START
+  return (void*) new std::vector<torch::Scalar>();
+  LANTERN_FUNCTION_END
+}
+
+void _lantern_vector_Scalar_push_back (void* self, void* value)
+{
+  LANTERN_FUNCTION_START
+  auto v = reinterpret_cast<std::vector<torch::Scalar> *>(self);
+  v->push_back(reinterpret_cast<LanternObject<torch::Scalar> *>(value)->get());
+  LANTERN_FUNCTION_END_VOID
+}
+
+int64_t _lantern_vector_Scalar_size (void* self)
+{
+  LANTERN_FUNCTION_START
+  auto v = reinterpret_cast<std::vector<torch::Scalar> *>(self);
+  return v->size();
+  LANTERN_FUNCTION_END
+}
+
+void* _lantern_vector_Scalar_at (void* self, int64_t index)
+{
+  LANTERN_FUNCTION_START
+  auto v = reinterpret_cast<std::vector<torch::Scalar> *>(self);
+  return (void *)new LanternObject<torch::Scalar>(v->at(index));
+  LANTERN_FUNCTION_END
+}
+

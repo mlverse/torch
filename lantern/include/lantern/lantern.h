@@ -1837,6 +1837,46 @@ HOST_API void lantern_ScriptModule_save (void* self, void* path)
   
 }
 
+LANTERN_API void* (LANTERN_PTR _lantern_vector_Scalar_new) ();
+HOST_API void* lantern_vector_Scalar_new ()
+{
+  void* ret = _lantern_vector_Scalar_new();
+  LANTERN_HOST_HANDLER;
+  return ret;
+}
+
+LANTERN_API void (LANTERN_PTR _lantern_vector_Scalar_push_back) (void* self, void* value);
+HOST_API void lantern_vector_Scalar_push_back (void* self, void* value)
+{
+   _lantern_vector_Scalar_push_back(self, value);
+  LANTERN_HOST_HANDLER;
+  
+}
+
+LANTERN_API int64_t (LANTERN_PTR _lantern_vector_Scalar_size) (void* self);
+HOST_API int64_t lantern_vector_Scalar_size (void* self)
+{
+  int64_t ret = _lantern_vector_Scalar_size(self);
+  LANTERN_HOST_HANDLER;
+  return ret;
+}
+
+LANTERN_API void* (LANTERN_PTR _lantern_vector_Scalar_at) (void* self, int64_t index);
+HOST_API void* lantern_vector_Scalar_at (void* self, int64_t index)
+{
+  void* ret = _lantern_vector_Scalar_at(self, index);
+  LANTERN_HOST_HANDLER;
+  return ret;
+}
+
+LANTERN_API void (LANTERN_PTR _lantern_vector_Scalar_delete) (void* x);
+HOST_API void lantern_vector_Scalar_delete (void* x)
+{
+   _lantern_vector_Scalar_delete(x);
+  LANTERN_HOST_HANDLER;
+  
+}
+
   /* Autogen Headers -- Start */
   LANTERN_API void* (LANTERN_PTR _lantern__cast_byte_attensor_bool)(void* self, void* non_blocking);
   HOST_API void* lantern__cast_byte_attensor_bool(void* self, void* non_blocking) { void* ret = _lantern__cast_byte_attensor_bool(self, non_blocking); LANTERN_HOST_HANDLER return ret; }
@@ -7404,6 +7444,11 @@ LOAD_SYMBOL(_lantern_ScriptModule_add_constant);
 LOAD_SYMBOL(_lantern_ScriptModule_find_constant);
 LOAD_SYMBOL(_lantern_ScriptModule_add_method);
 LOAD_SYMBOL(_lantern_ScriptModule_save);
+LOAD_SYMBOL(_lantern_vector_Scalar_new);
+LOAD_SYMBOL(_lantern_vector_Scalar_push_back);
+LOAD_SYMBOL(_lantern_vector_Scalar_size);
+LOAD_SYMBOL(_lantern_vector_Scalar_at);
+LOAD_SYMBOL(_lantern_vector_Scalar_delete);
   /* Autogen Symbols -- Start */
   LOAD_SYMBOL(_lantern__cast_byte_attensor_bool)
   LOAD_SYMBOL(_lantern__cast_char_attensor_bool)

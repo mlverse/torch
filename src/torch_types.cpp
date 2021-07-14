@@ -205,6 +205,18 @@ XPtrTorchvector_string::operator SEXP () const
   return Rcpp::wrap(output);
 }
 
+XPtrTorchvector_Scalar::operator SEXP () const
+{
+  int size = lantern_vector_Scalar_size(this->get());
+  Rcpp::List output;
+  for (int i = 0; i < size; i++)
+  {
+    auto value = XPtrTorchScalar(lantern_vector_Scalar_at(this->get(), i))
+    output.push_back(value);
+  }
+  return output;
+}
+
 XPtrTorchstring::operator SEXP () const
 {
   const char * out = lantern_string_get(this->get());
@@ -1126,6 +1138,20 @@ XPtrTorchvector_bool XPtrTorchvector_bool_from_SEXP (SEXP x)
 
 XPtrTorchvector_bool::XPtrTorchvector_bool (SEXP x) :
   XPtrTorchvector_bool{XPtrTorchvector_bool_from_SEXP(x)} {}
+
+XPtrTorchvector_Scalar XPtrTorchvector_Scalar_from_SEXP (SEXP x)
+{
+  auto input = Rcpp::as<Rcpp::List>(x);
+  XPtrTorchvector_Scalar output = lantern_vector_Scalar_new();
+  for (auto& el : input)
+  {
+    lantern_vector_Scalar_push_back(output.get(), Rcpp::as<XPtrTorchScalar>(el));
+  }
+  return output;
+}
+
+XPtrTorchvector_Scalar::XPtrTorchvector_Scalar (SEXP x) :
+  XPtrTorchvector_Scalar{XPtrTorchvector_Scalar_from_SEXP(x)} {}
 
 XPtrTorchvector_int64_t XPtrTorchvector_int64_t_from_SEXP (SEXP x)
 {

@@ -365,6 +365,14 @@ public:
   XPtrTorchvector_bool (SEXP x);
 };
 
+class XPtrTorchvector_Scalar : public XPtrTorch {
+public:
+  XPtrTorchvector_Scalar (void * x) : XPtrTorch(x, lantern_vector_Scalar_delete) {}
+  operator SEXP() const;
+  XPtrTorchvector_Scalar (SEXP x);
+  XPtrTorchvector_Scalar (const XPtrTorchvector_Scalar& x) : XPtrTorch(x.get_shared()) {};
+};
+
 class XPtrTorchvector_int64_t : public XPtrTorch {
 public:
   XPtrTorchvector_int64_t (void* x) : XPtrTorch(x, lantern_vector_int64_t2_delete) {}
