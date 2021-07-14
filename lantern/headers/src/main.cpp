@@ -3,6 +3,7 @@
 #include <iostream>
 #include <istream>
 #include <vector>
+#include <regex>
 
 #include "yaml-cpp/yaml.h"
 
@@ -25,13 +26,20 @@ std::string toCharOnly(std::string str)
     return std::string(str.begin(), iterEnd);
 }
 
+std::string removeAt(std::string str)
+{
+    std::regex e ("at::"); 
+    auto result = std::regex_replace (str, e, "");
+    return std::regex_replace(result, std::regex("const Scalar &"), "Scalar");
+}
+
 std::string toFunction(std::string str, YAML::Node node)
 {
     std::string name = toLower(str);
 
     for (size_t idx = 0; idx < node.size(); idx++)
     {
-        name += "_" + toLower(toCharOnly(node[idx]["dynamic_type"].as<std::string>()));
+        name += "_" + toLower(toCharOnly(removeAt(node[idx]["dynamic_type"].as<std::string>())));
     }
 
     return name;
