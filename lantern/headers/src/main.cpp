@@ -127,11 +127,14 @@ std::string buildCalls(std::string name, YAML::Node node, size_t start)
             arguments += ", ";
         }
 
-        std::string type = node[idx]["dynamic_type"].as<std::string>();
-        std::string dtype = node[idx]["type"].as<std::string>();
+        std::string type = removeAt(node[idx]["dynamic_type"].as<std::string>());
+        std::string dtype = removeAt(node[idx]["type"].as<std::string>());
+
+        std::cout << type << std::endl;
 
         if (type == "IntArrayRef" & dtype != "c10::optional<IntArrayRef>")
         {
+            std::cout << "intarrayref" << std::endl;
             type = "std::vector<int64_t>";
         }
         else if (type == "ArrayRef<double>" & dtype != "c10::optional<ArrayRef<double>>")
@@ -295,8 +298,9 @@ std::string buildReturn(YAML::Node node)
         type = "std::vector<void*>";
     }
 
-    if (type == "torch::TensorList")
+    if (type == "at::TensorList")
     {
+        std::cout << "hello" << std::endl;
         type = "std::vector<torch::Tensor>";
     }
 
