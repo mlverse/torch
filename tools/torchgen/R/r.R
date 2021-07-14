@@ -163,10 +163,16 @@ r_argument_default <- function(default) {
   if (default == "MemoryFormat::Contiguous")
     return("torch_contiguous_format()")
 
+  if (default == "MemoryFormContiguous")
+    return("torch_contiguous_format()")
+
   if (default == "nullptr")
     return("NULL")
 
   if (default == "at::Reduction::Mean")
+    return("torch_reduction_mean()")
+
+  if (default == "Reduction::Mean")
     return("torch_reduction_mean()")
 
   if (default == "{0,1}")
@@ -175,10 +181,13 @@ r_argument_default <- function(default) {
   if (default == "{-2,-1}")
     return("c(-2,-1)")
 
-  if (default == "\"L\"")
-    return("\"L\"")
+  if (default %in% c("\"L\"", "\"fro\""))
+    return(default)
 
   if (default == "at::kLong")
+    return("torch_long()")
+
+  if (default == "kLong")
     return("torch_long()")
 
   if (default == "\"reduced\"")
@@ -247,7 +256,7 @@ r_argument_with_default <- function(name, decls) {
     unique()
 
   if (length(default) > 1) {
-    browser()
+    default <- default[1]
   }
 
   name <- r_argument_name(name)

@@ -237,6 +237,10 @@ cpp_parameter_type <- function(argument) {
     declaration <- "XPtrTorch"
   }
 
+  if (argument$dynamic_type == "ArrayRef<Scalar>") {
+    declaration <- "XPtrTorchvector_Scalar"
+  }
+
   declaration
 }
 
@@ -373,6 +377,10 @@ cpp_argument_transform <- function(argument) {
   }
 
   if (argument$dynamic_type == "Stream") {
+    result <- glue::glue("{argument$name}.get()")
+  }
+
+  if (argument$dynamic_type == "ArrayRef<Scalar>") {
     result <- glue::glue("{argument$name}.get()")
   }
 
