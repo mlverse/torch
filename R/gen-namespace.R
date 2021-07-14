@@ -7274,42 +7274,6 @@ fun_type = 'namespace'
 }
 
 
-#' @rdname torch_clamp
-torch_clamp <- function(self, min = NULL, max = NULL) {
-  args <- mget(x = c("self", "min", "max"))
-expected_types <- list(self = "Tensor", min = c("Scalar", "Tensor"), max = c("Scalar", 
-"Tensor"))
-nd_args <- "self"
-return_types <- list(list('Tensor'))
-call_c_function(
-fun_name = 'clamp',
-args = args,
-expected_types = expected_types,
-nd_args = nd_args,
-return_types = return_types,
-fun_type = 'namespace'
-)
-}
-
-
-#' @rdname torch_clamp_
-torch_clamp_ <- function(self, min = NULL, max = NULL) {
-  args <- mget(x = c("self", "min", "max"))
-expected_types <- list(self = "Tensor", min = c("Scalar", "Tensor"), max = c("Scalar", 
-"Tensor"))
-nd_args <- "self"
-return_types <- list(list('Tensor'))
-call_c_function(
-fun_name = 'clamp_',
-args = args,
-expected_types = expected_types,
-nd_args = nd_args,
-return_types = return_types,
-fun_type = 'namespace'
-)
-}
-
-
 #' @rdname torch_clamp_max
 torch_clamp_max <- function(self, max) {
   args <- mget(x = c("self", "max"))

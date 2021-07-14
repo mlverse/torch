@@ -1306,34 +1306,6 @@ call_c_function(
   return_types = return_types,
   fun_type = 'method'
 )})
-Tensor$set("public", "clamp", function(min = NULL, max = NULL) {  args <- mget(x = c("min", "max"))
-args <- append(list(self = self), args)
-expected_types <- list(self = "Tensor", min = c("Scalar", "Tensor"), max = c("Scalar", 
-"Tensor"))
-nd_args <- "self"
-return_types <- list(list('Tensor'))
-call_c_function(
-  fun_name = 'clamp',
-  args = args,
-  expected_types = expected_types,
-  nd_args = nd_args,
-  return_types = return_types,
-  fun_type = 'method'
-)})
-Tensor$set("public", "clamp_", function(min = NULL, max = NULL) {  args <- mget(x = c("min", "max"))
-args <- append(list(self = self), args)
-expected_types <- list(self = "Tensor", min = c("Scalar", "Tensor"), max = c("Scalar", 
-"Tensor"))
-nd_args <- "self"
-return_types <- list(list('Tensor'))
-call_c_function(
-  fun_name = 'clamp_',
-  args = args,
-  expected_types = expected_types,
-  nd_args = nd_args,
-  return_types = return_types,
-  fun_type = 'method'
-)})
 Tensor$set("public", "clamp_max", function(max) {  args <- mget(x = c("max"))
 args <- append(list(self = self), args)
 expected_types <- list(self = "Tensor", max = c("Scalar", "Tensor"))

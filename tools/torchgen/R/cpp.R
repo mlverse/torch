@@ -560,7 +560,21 @@ SKIP_R_BINDIND <- c(
   "_use_cudnn_rnn_flatten_weight",
   "is_vulkan_available",
   "_test_ambiguous_defaults",
-  "_test_string_default"
+  "_test_string_default",
+  "clamp_",
+  "clamp"
+)
+
+SKIP_CPP_BINDING <- c(
+  "clamp",
+  "clamp_",
+  "clip",
+  "clip_",
+  "clamp_out",
+  "clip_out",
+  "conv1d",
+  "conv2d",
+  "conv3d"
 )
 
 cpp <- function(path) {
@@ -570,10 +584,12 @@ cpp <- function(path) {
     purrr::discard(~.x$name == "range" && length(.x$arguments) == 3)
 
   methods_code <- decls %>%
+    purrr::discard(~.x$name %in% SKIP_CPP_BINDING) %>%
     purrr::keep(~"Tensor" %in% .x$method_of) %>%
     purrr::map_chr(cpp_method)
 
   namespace_code <- decls %>%
+    purrr::discard(~.x$name %in% SKIP_CPP_BINDING) %>%
     purrr::keep(~"namespace" %in% .x$method_of) %>%
     purrr::map_chr(cpp_namespace)
 

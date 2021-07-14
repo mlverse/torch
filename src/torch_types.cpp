@@ -211,7 +211,7 @@ XPtrTorchvector_Scalar::operator SEXP () const
   Rcpp::List output;
   for (int i = 0; i < size; i++)
   {
-    auto value = XPtrTorchScalar(lantern_vector_Scalar_at(this->get(), i))
+    auto value = XPtrTorchScalar(lantern_vector_Scalar_at(this->get(), i));
     output.push_back(value);
   }
   return output;
