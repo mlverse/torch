@@ -53,6 +53,11 @@ get_arguments_order <- function(methods) {
   if (methods[[1]]$name %in% c("rnn_tanh", "rnn_relu", "lstm", "gru"))
    order$id_max[order$name == "bidirectional"] <- order$id_max[order$name == "bidirectional"] + 100
 
+  # new stable argument is getting placed as first argument with this algorithm
+  # which is a breaking change. so we manually move it as last arg.
+  if (methods[[1]]$name == "sort")
+    order$id_max[order$name == "stable"] <- order$id_max[order$name == "stable"] + 100
+
   order %>%
     dplyr::arrange(id_max) %>%
     purrr::pluck("name")

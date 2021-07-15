@@ -5642,11 +5642,11 @@ call_c_function(
   return_types = return_types,
   fun_type = 'method'
 )})
-Tensor$set("public", "sort", function(stable, dim = -1L, descending = FALSE) {  args <- mget(x = c("stable", "dim", "descending"))
+Tensor$set("public", "sort", function(dim = -1L, descending = FALSE, stable) {  args <- mget(x = c("dim", "descending", "stable"))
 args <- append(list(self = self), args)
-expected_types <- list(self = "Tensor", stable = "bool", dim = c("int64_t", "Dimname"
-), descending = "bool")
-nd_args <- c("self", "stable", "dim")
+expected_types <- list(self = "Tensor", dim = c("int64_t", "Dimname"), descending = "bool", 
+    stable = "bool")
+nd_args <- c("self", "dim", "stable")
 return_types <- list(list("Tensor", "Tensor"))
 call_c_function(
   fun_name = 'sort',

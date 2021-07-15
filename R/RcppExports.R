@@ -2937,16 +2937,16 @@ cpp_torch_method_sort_self_Tensor_dim_int64_t <- function(self, dim, descending)
     .Call('_torch_cpp_torch_method_sort_self_Tensor_dim_int64_t', PACKAGE = 'torchpkg', self, dim, descending)
 }
 
-cpp_torch_method_sort_self_Tensor_stable_bool_dim_int64_t <- function(self, stable, dim, descending) {
-    .Call('_torch_cpp_torch_method_sort_self_Tensor_stable_bool_dim_int64_t', PACKAGE = 'torchpkg', self, stable, dim, descending)
+cpp_torch_method_sort_self_Tensor_dim_int64_t_stable_bool <- function(self, stable, dim, descending) {
+    .Call('_torch_cpp_torch_method_sort_self_Tensor_dim_int64_t_stable_bool', PACKAGE = 'torchpkg', self, stable, dim, descending)
 }
 
 cpp_torch_method_sort_self_Tensor_dim_Dimname <- function(self, dim, descending) {
     .Call('_torch_cpp_torch_method_sort_self_Tensor_dim_Dimname', PACKAGE = 'torchpkg', self, dim, descending)
 }
 
-cpp_torch_method_sort_self_Tensor_stable_bool_dim_Dimname <- function(self, stable, dim, descending) {
-    .Call('_torch_cpp_torch_method_sort_self_Tensor_stable_bool_dim_Dimname', PACKAGE = 'torchpkg', self, stable, dim, descending)
+cpp_torch_method_sort_self_Tensor_dim_Dimname_stable_bool <- function(self, stable, dim, descending) {
+    .Call('_torch_cpp_torch_method_sort_self_Tensor_dim_Dimname_stable_bool', PACKAGE = 'torchpkg', self, stable, dim, descending)
 }
 
 cpp_torch_method_msort_self_Tensor <- function(self) {
@@ -8133,8 +8133,8 @@ cpp_torch_namespace_sort_self_Tensor_dim_int64_t <- function(self, dim, descendi
     .Call('_torch_cpp_torch_namespace_sort_self_Tensor_dim_int64_t', PACKAGE = 'torchpkg', self, dim, descending)
 }
 
-cpp_torch_namespace_sort_self_Tensor_stable_bool_dim_int64_t <- function(self, stable, dim, descending) {
-    .Call('_torch_cpp_torch_namespace_sort_self_Tensor_stable_bool_dim_int64_t', PACKAGE = 'torchpkg', self, stable, dim, descending)
+cpp_torch_namespace_sort_self_Tensor_dim_int64_t_stable_bool <- function(self, stable, dim, descending) {
+    .Call('_torch_cpp_torch_namespace_sort_self_Tensor_dim_int64_t_stable_bool', PACKAGE = 'torchpkg', self, stable, dim, descending)
 }
 
 cpp_torch_namespace_sort_out_values_Tensor_indices_Tensor_self_Tensor_dim_Dimname <- function(values, indices, self, dim, descending) {
@@ -8149,8 +8149,8 @@ cpp_torch_namespace_sort_self_Tensor_dim_Dimname <- function(self, dim, descendi
     .Call('_torch_cpp_torch_namespace_sort_self_Tensor_dim_Dimname', PACKAGE = 'torchpkg', self, dim, descending)
 }
 
-cpp_torch_namespace_sort_self_Tensor_stable_bool_dim_Dimname <- function(self, stable, dim, descending) {
-    .Call('_torch_cpp_torch_namespace_sort_self_Tensor_stable_bool_dim_Dimname', PACKAGE = 'torchpkg', self, stable, dim, descending)
+cpp_torch_namespace_sort_self_Tensor_dim_Dimname_stable_bool <- function(self, stable, dim, descending) {
+    .Call('_torch_cpp_torch_namespace_sort_self_Tensor_dim_Dimname_stable_bool', PACKAGE = 'torchpkg', self, stable, dim, descending)
 }
 
 cpp_torch_namespace_msort_out_out_Tensor_self_Tensor <- function(out, self) {

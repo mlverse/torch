@@ -4072,7 +4072,7 @@ return Rcpp::List::create(XPtrTorchTensor(lantern_vector_get(wrap.get(), 0)),XPt
 }
 
 // [[Rcpp::export]]
-Rcpp::List cpp_torch_method_sort_self_Tensor_stable_bool_dim_int64_t (XPtrTorchTensor self, bool stable, XPtrTorchindex_int64_t dim, bool descending) {
+Rcpp::List cpp_torch_method_sort_self_Tensor_dim_int64_t_stable_bool (XPtrTorchTensor self, bool stable, XPtrTorchindex_int64_t dim, bool descending) {
   auto r_out = lantern_Tensor_sort_tensor_bool_intt_bool(self.get(), reinterpret_cast<void*>(&stable), dim.get(), reinterpret_cast<void*>(&descending));
 auto wrap = XPtrTorchvector_void(r_out);
 return Rcpp::List::create(XPtrTorchTensor(lantern_vector_get(wrap.get(), 0)),XPtrTorchTensor(lantern_vector_get(wrap.get(), 1)));
@@ -4086,7 +4086,7 @@ return Rcpp::List::create(XPtrTorchTensor(lantern_vector_get(wrap.get(), 0)),XPt
 }
 
 // [[Rcpp::export]]
-Rcpp::List cpp_torch_method_sort_self_Tensor_stable_bool_dim_Dimname (XPtrTorchTensor self, bool stable, XPtrTorchDimname dim, bool descending) {
+Rcpp::List cpp_torch_method_sort_self_Tensor_dim_Dimname_stable_bool (XPtrTorchTensor self, bool stable, XPtrTorchDimname dim, bool descending) {
   auto r_out = lantern_Tensor_sort_tensor_bool_dimname_bool(self.get(), reinterpret_cast<void*>(&stable), dim.get(), reinterpret_cast<void*>(&descending));
 auto wrap = XPtrTorchvector_void(r_out);
 return Rcpp::List::create(XPtrTorchTensor(lantern_vector_get(wrap.get(), 0)),XPtrTorchTensor(lantern_vector_get(wrap.get(), 1)));
@@ -12020,7 +12020,7 @@ return Rcpp::List::create(XPtrTorchTensor(lantern_vector_get(wrap.get(), 0)),XPt
 }
 
 // [[Rcpp::export]]
-Rcpp::List cpp_torch_namespace_sort_self_Tensor_stable_bool_dim_int64_t (XPtrTorchTensor self, bool stable, XPtrTorchindex_int64_t dim, bool descending) {
+Rcpp::List cpp_torch_namespace_sort_self_Tensor_dim_int64_t_stable_bool (XPtrTorchTensor self, bool stable, XPtrTorchindex_int64_t dim, bool descending) {
   auto r_out = lantern_sort_tensor_bool_intt_bool(self.get(), reinterpret_cast<void*>(&stable), dim.get(), reinterpret_cast<void*>(&descending));
 auto wrap = XPtrTorchvector_void(r_out);
 return Rcpp::List::create(XPtrTorchTensor(lantern_vector_get(wrap.get(), 0)),XPtrTorchTensor(lantern_vector_get(wrap.get(), 1)));
@@ -12048,7 +12048,7 @@ return Rcpp::List::create(XPtrTorchTensor(lantern_vector_get(wrap.get(), 0)),XPt
 }
 
 // [[Rcpp::export]]
-Rcpp::List cpp_torch_namespace_sort_self_Tensor_stable_bool_dim_Dimname (XPtrTorchTensor self, bool stable, XPtrTorchDimname dim, bool descending) {
+Rcpp::List cpp_torch_namespace_sort_self_Tensor_dim_Dimname_stable_bool (XPtrTorchTensor self, bool stable, XPtrTorchDimname dim, bool descending) {
   auto r_out = lantern_sort_tensor_bool_dimname_bool(self.get(), reinterpret_cast<void*>(&stable), dim.get(), reinterpret_cast<void*>(&descending));
 auto wrap = XPtrTorchvector_void(r_out);
 return Rcpp::List::create(XPtrTorchTensor(lantern_vector_get(wrap.get(), 0)),XPtrTorchTensor(lantern_vector_get(wrap.get(), 1)));

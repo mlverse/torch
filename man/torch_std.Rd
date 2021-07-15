@@ -5,7 +5,7 @@
 \alias{torch_std}
 \title{Std}
 \usage{
-torch_std(self, dim, unbiased = TRUE, keepdim = FALSE)
+torch_std(self, dim, correction, unbiased = TRUE, keepdim = FALSE)
 }
 \arguments{
 \item{self}{(Tensor) the input tensor.}

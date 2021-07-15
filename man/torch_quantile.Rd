@@ -5,7 +5,7 @@
 \alias{torch_quantile}
 \title{Quantile}
 \usage{
-torch_quantile(self, q, dim = NULL, keepdim = FALSE)
+torch_quantile(self, q, dim = NULL, keepdim = FALSE, interpolation)
 }
 \arguments{
 \item{self}{(Tensor) the input tensor.}

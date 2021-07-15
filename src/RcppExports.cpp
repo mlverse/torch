@@ -8990,9 +8990,9 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
-// cpp_torch_method_sort_self_Tensor_stable_bool_dim_int64_t
-Rcpp::List cpp_torch_method_sort_self_Tensor_stable_bool_dim_int64_t(XPtrTorchTensor self, bool stable, XPtrTorchindex_int64_t dim, bool descending);
-RcppExport SEXP _torch_cpp_torch_method_sort_self_Tensor_stable_bool_dim_int64_t(SEXP selfSEXP, SEXP stableSEXP, SEXP dimSEXP, SEXP descendingSEXP) {
+// cpp_torch_method_sort_self_Tensor_dim_int64_t_stable_bool
+Rcpp::List cpp_torch_method_sort_self_Tensor_dim_int64_t_stable_bool(XPtrTorchTensor self, bool stable, XPtrTorchindex_int64_t dim, bool descending);
+RcppExport SEXP _torch_cpp_torch_method_sort_self_Tensor_dim_int64_t_stable_bool(SEXP selfSEXP, SEXP stableSEXP, SEXP dimSEXP, SEXP descendingSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -9000,7 +9000,7 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< bool >::type stable(stableSEXP);
     Rcpp::traits::input_parameter< XPtrTorchindex_int64_t >::type dim(dimSEXP);
     Rcpp::traits::input_parameter< bool >::type descending(descendingSEXP);
-    rcpp_result_gen = Rcpp::wrap(cpp_torch_method_sort_self_Tensor_stable_bool_dim_int64_t(self, stable, dim, descending));
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_method_sort_self_Tensor_dim_int64_t_stable_bool(self, stable, dim, descending));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -9017,9 +9017,9 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
-// cpp_torch_method_sort_self_Tensor_stable_bool_dim_Dimname
-Rcpp::List cpp_torch_method_sort_self_Tensor_stable_bool_dim_Dimname(XPtrTorchTensor self, bool stable, XPtrTorchDimname dim, bool descending);
-RcppExport SEXP _torch_cpp_torch_method_sort_self_Tensor_stable_bool_dim_Dimname(SEXP selfSEXP, SEXP stableSEXP, SEXP dimSEXP, SEXP descendingSEXP) {
+// cpp_torch_method_sort_self_Tensor_dim_Dimname_stable_bool
+Rcpp::List cpp_torch_method_sort_self_Tensor_dim_Dimname_stable_bool(XPtrTorchTensor self, bool stable, XPtrTorchDimname dim, bool descending);
+RcppExport SEXP _torch_cpp_torch_method_sort_self_Tensor_dim_Dimname_stable_bool(SEXP selfSEXP, SEXP stableSEXP, SEXP dimSEXP, SEXP descendingSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -9027,7 +9027,7 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< bool >::type stable(stableSEXP);
     Rcpp::traits::input_parameter< XPtrTorchDimname >::type dim(dimSEXP);
     Rcpp::traits::input_parameter< bool >::type descending(descendingSEXP);
-    rcpp_result_gen = Rcpp::wrap(cpp_torch_method_sort_self_Tensor_stable_bool_dim_Dimname(self, stable, dim, descending));
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_method_sort_self_Tensor_dim_Dimname_stable_bool(self, stable, dim, descending));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -26411,9 +26411,9 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
-// cpp_torch_namespace_sort_self_Tensor_stable_bool_dim_int64_t
-Rcpp::List cpp_torch_namespace_sort_self_Tensor_stable_bool_dim_int64_t(XPtrTorchTensor self, bool stable, XPtrTorchindex_int64_t dim, bool descending);
-RcppExport SEXP _torch_cpp_torch_namespace_sort_self_Tensor_stable_bool_dim_int64_t(SEXP selfSEXP, SEXP stableSEXP, SEXP dimSEXP, SEXP descendingSEXP) {
+// cpp_torch_namespace_sort_self_Tensor_dim_int64_t_stable_bool
+Rcpp::List cpp_torch_namespace_sort_self_Tensor_dim_int64_t_stable_bool(XPtrTorchTensor self, bool stable, XPtrTorchindex_int64_t dim, bool descending);
+RcppExport SEXP _torch_cpp_torch_namespace_sort_self_Tensor_dim_int64_t_stable_bool(SEXP selfSEXP, SEXP stableSEXP, SEXP dimSEXP, SEXP descendingSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -26421,7 +26421,7 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< bool >::type stable(stableSEXP);
     Rcpp::traits::input_parameter< XPtrTorchindex_int64_t >::type dim(dimSEXP);
     Rcpp::traits::input_parameter< bool >::type descending(descendingSEXP);
-    rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace_sort_self_Tensor_stable_bool_dim_int64_t(self, stable, dim, descending));
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace_sort_self_Tensor_dim_int64_t_stable_bool(self, stable, dim, descending));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -26469,9 +26469,9 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
-// cpp_torch_namespace_sort_self_Tensor_stable_bool_dim_Dimname
-Rcpp::List cpp_torch_namespace_sort_self_Tensor_stable_bool_dim_Dimname(XPtrTorchTensor self, bool stable, XPtrTorchDimname dim, bool descending);
-RcppExport SEXP _torch_cpp_torch_namespace_sort_self_Tensor_stable_bool_dim_Dimname(SEXP selfSEXP, SEXP stableSEXP, SEXP dimSEXP, SEXP descendingSEXP) {
+// cpp_torch_namespace_sort_self_Tensor_dim_Dimname_stable_bool
+Rcpp::List cpp_torch_namespace_sort_self_Tensor_dim_Dimname_stable_bool(XPtrTorchTensor self, bool stable, XPtrTorchDimname dim, bool descending);
+RcppExport SEXP _torch_cpp_torch_namespace_sort_self_Tensor_dim_Dimname_stable_bool(SEXP selfSEXP, SEXP stableSEXP, SEXP dimSEXP, SEXP descendingSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -26479,7 +26479,7 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< bool >::type stable(stableSEXP);
     Rcpp::traits::input_parameter< XPtrTorchDimname >::type dim(dimSEXP);
     Rcpp::traits::input_parameter< bool >::type descending(descendingSEXP);
-    rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace_sort_self_Tensor_stable_bool_dim_Dimname(self, stable, dim, descending));
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace_sort_self_Tensor_dim_Dimname_stable_bool(self, stable, dim, descending));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -35811,9 +35811,9 @@ static const R_CallMethodDef CallEntries[] = {
     {"_torch_cpp_torch_method_nanquantile_self_Tensor_q_double_dim_int64_t_keepdim_bool_interpolation_stdstring", (DL_FUNC) &_torch_cpp_torch_method_nanquantile_self_Tensor_q_double_dim_int64_t_keepdim_bool_interpolation_stdstring, 5},
     {"_torch_cpp_torch_method_nanquantile_self_Tensor_q_Tensor_dim_int64_t_keepdim_bool_interpolation_stdstring", (DL_FUNC) &_torch_cpp_torch_method_nanquantile_self_Tensor_q_Tensor_dim_int64_t_keepdim_bool_interpolation_stdstring, 5},
     {"_torch_cpp_torch_method_sort_self_Tensor_dim_int64_t", (DL_FUNC) &_torch_cpp_torch_method_sort_self_Tensor_dim_int64_t, 3},
-    {"_torch_cpp_torch_method_sort_self_Tensor_stable_bool_dim_int64_t", (DL_FUNC) &_torch_cpp_torch_method_sort_self_Tensor_stable_bool_dim_int64_t, 4},
+    {"_torch_cpp_torch_method_sort_self_Tensor_dim_int64_t_stable_bool", (DL_FUNC) &_torch_cpp_torch_method_sort_self_Tensor_dim_int64_t_stable_bool, 4},
     {"_torch_cpp_torch_method_sort_self_Tensor_dim_Dimname", (DL_FUNC) &_torch_cpp_torch_method_sort_self_Tensor_dim_Dimname, 3},
-    {"_torch_cpp_torch_method_sort_self_Tensor_stable_bool_dim_Dimname", (DL_FUNC) &_torch_cpp_torch_method_sort_self_Tensor_stable_bool_dim_Dimname, 4},
+    {"_torch_cpp_torch_method_sort_self_Tensor_dim_Dimname_stable_bool", (DL_FUNC) &_torch_cpp_torch_method_sort_self_Tensor_dim_Dimname_stable_bool, 4},
     {"_torch_cpp_torch_method_msort_self_Tensor", (DL_FUNC) &_torch_cpp_torch_method_msort_self_Tensor, 1},
     {"_torch_cpp_torch_method_argsort_self_Tensor_dim_int64_t", (DL_FUNC) &_torch_cpp_torch_method_argsort_self_Tensor_dim_int64_t, 3},
     {"_torch_cpp_torch_method_argsort_self_Tensor_dim_Dimname", (DL_FUNC) &_torch_cpp_torch_method_argsort_self_Tensor_dim_Dimname, 3},
@@ -37110,11 +37110,11 @@ static const R_CallMethodDef CallEntries[] = {
     {"_torch_cpp_torch_namespace_sort_out_values_Tensor_indices_Tensor_self_Tensor_dim_int64_t", (DL_FUNC) &_torch_cpp_torch_namespace_sort_out_values_Tensor_indices_Tensor_self_Tensor_dim_int64_t, 5},
     {"_torch_cpp_torch_namespace_sort_out_values_Tensor_indices_Tensor_self_Tensor_stable_bool_dim_int64_t", (DL_FUNC) &_torch_cpp_torch_namespace_sort_out_values_Tensor_indices_Tensor_self_Tensor_stable_bool_dim_int64_t, 6},
     {"_torch_cpp_torch_namespace_sort_self_Tensor_dim_int64_t", (DL_FUNC) &_torch_cpp_torch_namespace_sort_self_Tensor_dim_int64_t, 3},
-    {"_torch_cpp_torch_namespace_sort_self_Tensor_stable_bool_dim_int64_t", (DL_FUNC) &_torch_cpp_torch_namespace_sort_self_Tensor_stable_bool_dim_int64_t, 4},
+    {"_torch_cpp_torch_namespace_sort_self_Tensor_dim_int64_t_stable_bool", (DL_FUNC) &_torch_cpp_torch_namespace_sort_self_Tensor_dim_int64_t_stable_bool, 4},
     {"_torch_cpp_torch_namespace_sort_out_values_Tensor_indices_Tensor_self_Tensor_dim_Dimname", (DL_FUNC) &_torch_cpp_torch_namespace_sort_out_values_Tensor_indices_Tensor_self_Tensor_dim_Dimname, 5},
     {"_torch_cpp_torch_namespace_sort_out_values_Tensor_indices_Tensor_self_Tensor_stable_bool_dim_Dimname", (DL_FUNC) &_torch_cpp_torch_namespace_sort_out_values_Tensor_indices_Tensor_self_Tensor_stable_bool_dim_Dimname, 6},
     {"_torch_cpp_torch_namespace_sort_self_Tensor_dim_Dimname", (DL_FUNC) &_torch_cpp_torch_namespace_sort_self_Tensor_dim_Dimname, 3},
-    {"_torch_cpp_torch_namespace_sort_self_Tensor_stable_bool_dim_Dimname", (DL_FUNC) &_torch_cpp_torch_namespace_sort_self_Tensor_stable_bool_dim_Dimname, 4},
+    {"_torch_cpp_torch_namespace_sort_self_Tensor_dim_Dimname_stable_bool", (DL_FUNC) &_torch_cpp_torch_namespace_sort_self_Tensor_dim_Dimname_stable_bool, 4},
     {"_torch_cpp_torch_namespace_msort_out_out_Tensor_self_Tensor", (DL_FUNC) &_torch_cpp_torch_namespace_msort_out_out_Tensor_self_Tensor, 2},
     {"_torch_cpp_torch_namespace_msort_self_Tensor", (DL_FUNC) &_torch_cpp_torch_namespace_msort_self_Tensor, 1},
     {"_torch_cpp_torch_namespace_argsort_self_Tensor_dim_int64_t", (DL_FUNC) &_torch_cpp_torch_namespace_argsort_self_Tensor_dim_int64_t, 3},

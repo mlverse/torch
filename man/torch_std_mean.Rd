@@ -5,7 +5,7 @@
 \alias{torch_std_mean}
 \title{Std_mean}
 \usage{
-torch_std_mean(self, dim, unbiased = TRUE, keepdim = FALSE)
+torch_std_mean(self, dim, correction, unbiased = TRUE, keepdim = FALSE)
 }
 \arguments{
 \item{self}{(Tensor) the input tensor.}

@@ -5,7 +5,7 @@
 \alias{torch_nanquantile}
 \title{Nanquantile}
 \usage{
-torch_nanquantile(self, q, dim = NULL, keepdim = FALSE)
+torch_nanquantile(self, q, dim = NULL, keepdim = FALSE, interpolation)
 }
 \arguments{
 \item{self}{(Tensor) the input tensor.}

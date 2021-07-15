@@ -5,7 +5,7 @@
 \alias{torch_var_mean}
 \title{Var_mean}
 \usage{
-torch_var_mean(self, dim, unbiased = TRUE, keepdim = FALSE)
+torch_var_mean(self, dim, correction, unbiased = TRUE, keepdim = FALSE)
 }
 \arguments{
 \item{self}{(Tensor) the input tensor.}

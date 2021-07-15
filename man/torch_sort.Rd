@@ -5,7 +5,7 @@
 \alias{torch_sort}
 \title{Sort}
 \usage{
-torch_sort(self, dim = -1L, descending = FALSE)
+torch_sort(self, stable, dim = -1L, descending = FALSE)
 }
 \arguments{
 \item{self}{(Tensor) the input tensor.}
