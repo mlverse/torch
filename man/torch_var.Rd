@@ -12,6 +12,8 @@ torch_var(self, dim, correction, unbiased = TRUE, keepdim = FALSE)
 
 \item{dim}{(int or tuple of ints) the dimension or dimensions to reduce.}
 
+\item{correction}{The type of correction.}
+
 \item{unbiased}{(bool) whether to use the unbiased estimation or not}
 
 \item{keepdim}{(bool) whether the output tensor has \code{dim} retained or not.}

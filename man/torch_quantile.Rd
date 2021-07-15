@@ -15,6 +15,8 @@ torch_quantile(self, q, dim = NULL, keepdim = FALSE, interpolation)
 \item{dim}{(int) the dimension to reduce.}
 
 \item{keepdim}{(bool) whether the output tensor has \code{dim} retained or not.}
+
+\item{interpolation}{The interpolation method.}
 }
 \description{
 Quantile

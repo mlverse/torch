@@ -3611,7 +3611,7 @@ NULL
 #' @param unbiased (bool) whether to use the unbiased estimation or not
 #' @param dim (int or tuple of ints) the dimension or dimensions to reduce.
 #' @param keepdim (bool) whether the output tensor has `dim` retained or not.
-#' 
+#' @param correction The type of correction.
 #'
 #' @name torch_std
 #'
@@ -3649,6 +3649,7 @@ NULL
 #' @param unbiased (bool) whether to use the unbiased estimation or not
 #' @param dim (int or tuple of ints) the dimension or dimensions to reduce.
 #' @param keepdim (bool) whether the output tensor has `dim` retained or not.
+#' @inheritParams torch_std
 #'
 #' @name torch_std_mean
 #'
@@ -3988,7 +3989,7 @@ NULL
 #' @param unbiased (bool) whether to use the unbiased estimation or not
 #' @param dim (int or tuple of ints) the dimension or dimensions to reduce.
 #' @param keepdim (bool) whether the output tensor has `dim` retained or not.
-#' 
+#' @inheritParams torch_std
 #'
 #' @name torch_var
 #'
@@ -4025,6 +4026,7 @@ NULL
 #' @param unbiased (bool) whether to use the unbiased estimation or not
 #' @param dim (int or tuple of ints) the dimension or dimensions to reduce.
 #' @param keepdim (bool) whether the output tensor has `dim` retained or not.
+#' @inheritParams torch_std
 #'
 #' @name torch_var_mean
 #'
@@ -5778,6 +5780,8 @@ NULL
 #' @param self (Tensor) the input tensor.
 #' @param dim (int, optional) the dimension to sort along
 #' @param descending (bool, optional) controls the sorting order (ascending or descending)
+#' @param stable (bool, optional) – makes the sorting routine stable, which guarantees 
+#'   that the order of equivalent elements is preserved.
 #'
 #' @name torch_sort
 #'
@@ -7317,6 +7321,7 @@ NULL
 #' @param q (float or Tensor) a scalar or 1D tensor of quantile values in the range `[0, 1]`
 #' @param dim (int) the dimension to reduce.
 #' @param keepdim (bool) whether the output tensor has `dim` retained or not.
+#' @inheritParams torch_nanquantile
 #'
 #' @name torch_quantile
 #'
@@ -7338,6 +7343,7 @@ NULL
 #' @param q (float or Tensor) a scalar or 1D tensor of quantile values in the range `[0, 1]`
 #' @param dim (int) the dimension to reduce.
 #' @param keepdim (bool) whether the output tensor has `dim` retained or not.
+#' @param interpolation The interpolation method.
 #'
 #' @name torch_nanquantile
 #'

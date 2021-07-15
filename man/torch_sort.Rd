@@ -5,7 +5,7 @@
 \alias{torch_sort}
 \title{Sort}
 \usage{
-torch_sort(self, stable, dim = -1L, descending = FALSE)
+torch_sort(self, dim = -1L, descending = FALSE, stable)
 }
 \arguments{
 \item{self}{(Tensor) the input tensor.}
@@ -13,6 +13,9 @@ torch_sort(self, stable, dim = -1L, descending = FALSE)
 \item{dim}{(int, optional) the dimension to sort along}
 
 \item{descending}{(bool, optional) controls the sorting order (ascending or descending)}
+
+\item{stable}{(bool, optional) – makes the sorting routine stable, which guarantees
+that the order of equivalent elements is preserved.}
 }
 \description{
 Sort
