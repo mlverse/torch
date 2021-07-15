@@ -76,8 +76,21 @@ cpp_namespace_name <- function(decl) {
   cpp_function_name(decl, "namespace")
 }
 
+dispatch_arguments_from_name <- memoise::memoise(function(name) {
+  methods <- memoised_declarations() %>% keep(~.x$name == name)
+  get_dispatch_arguments(methods)
+})
+
 cpp_function_name <- function(method, type) {
-  arguments <- get_arguments_with_no_default(list(method))
+
+  dispatch_arguments <- dispatch_arguments_from_name(method$name)
+
+  arguments <- method$arguments %>%
+    map_chr(~.x$name)
+
+  # reorder and filter
+  arguments <- dispatch_arguments[dispatch_arguments %in% arguments]
+
   arg_types <- list()
   for (nm in arguments) {
     arg_types[[nm]] <- method$arguments %>%
@@ -560,22 +573,10 @@ SKIP_R_BINDIND <- c(
   "_use_cudnn_rnn_flatten_weight",
   "is_vulkan_available",
   "_test_ambiguous_defaults",
-  "_test_string_default",
-  "clamp_",
-  "clamp"
+  "_test_string_default"
 )
 
-SKIP_CPP_BINDING <- c(
-  "clamp",
-  "clamp_",
-  "clip",
-  "clip_",
-  "clamp_out",
-  "clip_out",
-  "conv1d",
-  "conv2d",
-  "conv3d"
-)
+SKIP_CPP_BINDING <- c()
 
 cpp <- function(path) {
 
@@ -583,15 +584,31 @@ cpp <- function(path) {
     purrr::discard(~.x$name %in% SKIP_R_BINDIND) %>%
     purrr::discard(~.x$name == "range" && length(.x$arguments) == 3)
 
+  pb <- NULL
+
   methods_code <- decls %>%
     purrr::discard(~.x$name %in% SKIP_CPP_BINDING) %>%
     purrr::keep(~"Tensor" %in% .x$method_of) %>%
-    purrr::map_chr(cpp_method)
+    {
+      pb <<- progress::progress_bar$new(total = length(.), format = "[:bar] :eta")
+      .
+    } %>%
+    purrr::map_chr(function(x) {
+      pb$tick()
+      cpp_method(x)
+    })
 
   namespace_code <- decls %>%
     purrr::discard(~.x$name %in% SKIP_CPP_BINDING) %>%
     purrr::keep(~"namespace" %in% .x$method_of) %>%
-    purrr::map_chr(cpp_namespace)
+    {
+      pb <<- progress::progress_bar$new(total = length(.), format = "[:bar] :eta")
+      .
+    } %>%
+    purrr::map_chr(function(x) {
+      pb$tick()
+      cpp_namespace(x)
+    })
 
   writeLines(
     c(

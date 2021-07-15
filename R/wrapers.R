@@ -100,12 +100,12 @@ torch_hann_window <- function(window_length, periodic=TRUE, dtype=NULL,
 torch_result_type <- function(tensor1, tensor2) {
   
   if (is_torch_tensor(tensor1) && is_torch_tensor(tensor2)) {
-    o <- cpp_torch_namespace_result_type_tensor_Tensor_other_Tensor(
+    o <- cpp_torch_namespace_result_type_other_Tensor_tensor_Tensor(
       tensor1$ptr, 
       tensor2$ptr
     )
   } else if (is_torch_tensor(tensor1) && !is_torch_tensor(tensor2)) {
-    o <- cpp_torch_namespace_result_type_tensor_Tensor_other_Scalar(
+    o <- cpp_torch_namespace_result_type_other_Scalar_tensor_Tensor(
       tensor1$ptr, 
       torch_scalar(tensor2)$ptr
     )
@@ -378,9 +378,10 @@ torch_movedim <- function(self, source, destination) {
 #' @rdname torch_norm
 torch_norm <- function(self, p = 2L, dim, keepdim = FALSE, dtype) {
   
-  if (missing(dim) && missing(dtype))
-    return(.torch_norm(self = self, p = p))
-  
+  if (missing(dtype)) {
+    dtype <- self$dtype
+  }
+    
   p <- Scalar$new(p)
   if (missing(dim) && !missing(dtype)) {
     
@@ -391,10 +392,6 @@ torch_norm <- function(self, p = 2L, dim, keepdim = FALSE, dtype) {
     )
     
     return(Tensor$new(ptr = o))
-  }
-  
-  if (missing(dtype)) {
-    dtype <- self$dtype
   }
   
   if (is.numeric(unlist(dim))) {
@@ -566,3 +563,4 @@ torch_multinomial <- function(self, num_samples, replacement = FALSE, generator 
   with_no_grad({ r$add_(torch_scalar(1L)) })
   r
 }
+

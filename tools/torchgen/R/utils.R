@@ -45,6 +45,8 @@ declarations <- function() {
   decls
 }
 
+memoised_declarations <- memoise::memoise(declarations)
+
 #' Get all tensor methods from Declarations.yaml
 #'
 #' @export

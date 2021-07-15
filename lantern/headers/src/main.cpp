@@ -290,7 +290,7 @@ std::string buildReturn(YAML::Node node)
         if (idx > 0)
             type += ", ";
 
-        type += addNamespace(node[idx]["dynamic_type"].as<std::string>());
+        type += addNamespace(removeAt(node[idx]["dynamic_type"].as<std::string>()));
     }
 
     if (node.size() > 1)
@@ -298,7 +298,7 @@ std::string buildReturn(YAML::Node node)
         type = "std::vector<void*>";
     }
 
-    if (type == "at::TensorList")
+    if (type == "torch::TensorList")
     {
         std::cout << "hello" << std::endl;
         type = "std::vector<torch::Tensor>";

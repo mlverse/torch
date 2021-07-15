@@ -29,7 +29,7 @@ make_load_symbols <- function(decls) {
 
 decls <- readr::read_lines(
   "
-void _lantern_ScriptModule_save (void* self, void* path)
+void _lantern_vector_Scalar_delete (void* x)
 "  
 )
 
