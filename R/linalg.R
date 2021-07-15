@@ -168,3 +168,60 @@ linalg_det <- function(A) {
 linalg_slogdet <- function(A) {
   torch_linalg_slogdet(A)
 }
+
+
+#' Computes the condition number of a matrix with respect to a matrix norm.
+#' 
+#' Letting \eqn{\mathbb{K}} be \eqn{\mathbb{R}} or \eqn{\mathbb{C}},
+#' the **condition number** \eqn{\kappa} of a matrix
+#' \eqn{A \in \mathbb{K}^{n \times n}} is defined as
+#' 
+#' \deqn{\kappa(A) = \|A\|_p\|A^{-1}\|_p}
+#'   
+#' The condition number of `A` measures the numerical stability of the linear system `AX = B`
+#' with respect to a matrix norm.
+#' 
+#' Supports input of float, double, cfloat and cdouble dtypes.
+#' Also supports batches of matrices, and if `A` is a batch of matrices then
+#' the output has the same batch dimensions.
+#' 
+#' `p` defines the matrix norm that is computed. See the table in 'Details' to 
+#' find the supported norms.
+#' 
+#' For `p` is one of `('fro', 'nuc', inf, -inf, 1, -1)`, this function uses
+#' [linalg_norm()] and [linalg_inv()].
+#' 
+#' As such, in this case, the matrix (or every matrix in the batch) `A` has to be square
+#' and invertible.
+#' 
+#' For `p` in `(2, -2)`, this function can be computed in terms of the singular values
+#' \eqn{\sigma_1 \geq \ldots \geq \sigma_n}
+#' 
+#' \deqn{\kappa_2(A) = \frac{\sigma_1}{\sigma_n}\qquad \kappa_{-2}(A) = \frac{\sigma_n}{\sigma_1}}
+#'     
+#' In these cases, it is computed using [`torch_linalg.svd`]. For these norms, the matrix
+#' (or every matrix in the batch) `A` may have any shape.
+#' 
+#' @note When inputs are on a CUDA device, this function synchronizes that device with the CPU if
+#'  if `p` is one of `('fro', 'nuc', inf, -inf, 1, -1)`.
+#'  
+#' @includeRmd man/rmd/linalg-cond.Rmd details
+#' 
+#' @param A (Tensor): tensor of shape `(*, m, n)` where `*` is zero or more batch dimensions
+#' for `p` in `(2, -2)`, and of shape `(*, n, n)` where every matrix
+#' is invertible for `p` in `('fro', 'nuc', inf, -inf, 1, -1)`.
+#' @param p (int, inf, -inf, 'fro', 'nuc', optional):
+#'   the type of the matrix norm to use in the computations (see above). Default: `NULL`
+#'   
+#' @returns 
+#' A real-valued tensor, even when `A` is complex.
+#' 
+#' @examples 
+#' a <- torch_tensor(rbind(c(1., 0, -1), c(0, 1, 0), c(1, 0, 1)))
+#' linalg_cond(a)
+#' linalg_cond(a, "fro")
+#'  
+#' @export
+linalg_cond <- function(A, p=NULL) {
+  torch_linalg_cond(a, p = p)
+}

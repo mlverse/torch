@@ -60,3 +60,14 @@ test_that("slog det", {
   expect_tensor_shape(linalg_slogdet(a)[[1]], integer(0))
   expect_tensor_shape(linalg_slogdet(a)[[2]], integer(0))
 })
+
+test_that("cond works", {
+  a <- torch_tensor(rbind(c(1., 0, -1), c(0, 1, 0), c(1, 0, 1)))
+  expect_equal_to_r(linalg_cond(a), 1.4142, tolerance = 1e-4)
+  expect_equal_to_r(linalg_cond(a, "fro"), 3.1623, tolerance = 1e-4)
+  expect_equal_to_r(linalg_cond(a, "nuc"), 9.2426, tolerance = 1e-4)
+  expect_equal_to_r(linalg_cond(a, Inf), 2, tolerance = 1e-4)
+  expect_equal_to_r(linalg_cond(a, -Inf), 1, tolerance = 1e-4)
+  expect_equal_to_r(linalg_cond(a, 1), 2, tolerance = 1e-4)
+  expect_equal_to_r(linalg_cond(a, -1), 1, tolerance = 1e-4)
+})
