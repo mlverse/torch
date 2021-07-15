@@ -55,19 +55,6 @@ jobs:
             artifacts: liblantern.dylib
             upload: macOS
           - os: ubuntu-18.04
-            cuda: 10.1
-            library: liblantern.so
-            test: ./lanterntest
-            make: make
-            build: build
-            cmakevars:
-            libext:
-            exeext:
-            fixlib: chrpath -r '$ORIGIN/.' liblantern.so
-            flavor: Release
-            artifacts: liblantern.so
-            upload: Linux-Cuda-101
-          - os: ubuntu-18.04
             cuda: 10.2
             library: liblantern.so
             test: ./lanterntest
@@ -93,21 +80,6 @@ jobs:
             flavor: Release
             artifacts: liblantern.so
             upload: Linux-Cuda-111
-          - os: windows-2019
-            cuda: 10.1
-            library: lantern.dll
-            test: "& './lanterntest.exe' "
-            make: "& 'C:/Program Files (x86)/Microsoft Visual Studio/2019/Enterprise/MSBuild/Current/Bin/MSBuild' lantern.sln /t:Build /p:Configuration=Release"
-            build: build/Release
-            cmakevars: '-DCUDA_TOOLKIT_ROOT_DIR="C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v10.1"'
-            libext: .dll
-            exeext: .exe
-            fixlib:
-            flavor: Release
-            artifacts: lantern.dll
-            upload: Windows-Cuda-101
-            cudatoolkit: 'https://developer.nvidia.com/compute/cuda/10.1/Prod/local_installers/cuda_10.1.105_418.96_win10.exe'
-            cudnn: 'https://storage.googleapis.com/torch-lantern-builds/cudnn/cudnn-10.1-windows10-x64-v7.6.5.32.zip'
           - os: windows-2019
             cuda: 10.2
             library: lantern.dll
@@ -145,22 +117,6 @@ jobs:
       - name: Free up 24GB of disk space
         if: ${{ matrix.os == 'ubuntu-18.04' }}
         run: sudo rm -rf /usr/share/dotnet
-      - name: Prep cmake cuda 10.1
-        if: ${{ matrix.cuda == 10.1 && matrix.os == 'ubuntu-18.04' }}
-        run: |
-          wget --quiet https://storage.googleapis.com/torch-lantern-builds/cuda/cuda_10.1.105_418.39_linux.run
-          chmod +x cuda_10.1.105_418.39_linux.run
-          sudo ./cuda_10.1.105_418.39_linux.run --silent --toolkit
-          echo "CUDA=${{matrix.cuda}}" >> $GITHUB_ENV
-          echo "CUDA_TOOLKIT_ROOT_DIR=/usr/local/cuda" >> $GITHUB_ENV
-          dir /usr/local
-          wget --quiet https://storage.googleapis.com/torch-lantern-builds/cudnn/cudnn-10.1-linux-x64-v7.6.5.32.tgz
-          tar -xzvf cudnn-10.1-linux-x64-v7.6.5.32.tgz
-          sudo cp cuda/include/cudnn*.h /usr/local/cuda/include
-          sudo cp cuda/lib64/libcudnn* /usr/local/cuda/lib64
-          sudo chmod a+r /usr/local/cuda/include/cudnn*.h /usr/local/cuda/lib64/libcudnn*
-          echo "CUDNN_LIBRARY_PATH=/usr/local/cuda/lib64" >> $GITHUB_ENV
-          echo "CUDNN_INCLUDE_PATH=/usr/local/cuda/include" >> $GITHUB_ENV
       - name: Prep cmake cuda 10.2
         if: ${{ matrix.cuda == 10.2 && matrix.os == 'ubuntu-18.04'}}
         run: |
@@ -257,11 +213,6 @@ jobs:
             artifact: Windows
             upload: Windows
             hw: cpu
-          - name: Cuda101
-            artifact: Linux-Cuda-101
-            upload: Linux
-            hw: gpu
-            version: -101
           - name: Cuda102
             artifact: Linux-Cuda-102
             upload: Linux
@@ -272,11 +223,6 @@ jobs:
             upload: Linux
             hw: gpu
             version: -111
-          - name: WindowsCuda101
-            artifact: Windows-Cuda-101
-            upload: Windows
-            hw: gpu
-            version: -101
           - name: WindowsCuda102
             artifact: Windows-Cuda-102
             upload: Windows
