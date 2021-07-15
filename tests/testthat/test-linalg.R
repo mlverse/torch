@@ -52,3 +52,11 @@ test_that("det works", {
   expect_tensor_shape(linalg_det(a), c(3))
   
 })
+
+test_that("slog det", {
+  
+  a <- torch_randn(3,3)
+  expect_length(linalg_slogdet(a), 2)
+  expect_tensor_shape(linalg_slogdet(a)[[1]], integer(0))
+  expect_tensor_shape(linalg_slogdet(a)[[2]], integer(0))
+})

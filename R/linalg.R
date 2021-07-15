@@ -158,3 +158,13 @@ linalg_det <- function(A) {
 #' A list `(sign, logabsdet)`.
 #' `logabsdet` will always be real-valued, even when `A` is complex.
 #' `sign` will have the same dtype as `A`.
+#' 
+#' @examples
+#' a <- torch_randn(3,3)
+#' linalg_slogdet(a)
+#' 
+#' @family linalg
+#' @export
+linalg_slogdet <- function(A) {
+  torch_linalg_slogdet(A)
+}
