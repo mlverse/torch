@@ -75,7 +75,7 @@ among all drawn elements. The resulting tensor has size given by \code{size}.
 \examples{
 if (torch_is_installed()) {
 
-torch_normal(mean=0, std=torch_arange(1, 0, -0.1))
+torch_normal(mean=0, std=torch_arange(1, 0, -0.1) + 1e-6)
 torch_normal(mean=0.5, std=torch_arange(1., 6.))
 torch_normal(mean=torch_arange(1., 6.))
 torch_normal(2, 3, size=c(1, 4))
