@@ -138,3 +138,23 @@ linalg_matrix_norm <- function(A, ord='fro', dim=c(-2, -1), keepdim=FALSE, dtype
 linalg_det <- function(A) {
   torch_linalg_det(A)
 }
+
+#' Computes the sign and natural logarithm of the absolute value of the determinant of a square matrix.
+#' 
+#' For complex `A`, it returns the angle and the natural logarithm of the modulus of the
+#' determinant, that is, a logarithmic polar decomposition of the determinant.
+#' Supports input of float, double, cfloat and cdouble dtypes.
+#' Also supports batches of matrices, and if `A` is a batch of matrices then
+#' the output has the same batch dimensions.
+#' 
+#' @section Notes:
+#' - The determinant can be recovered as `sign * exp(logabsdet)`.
+#' - When a matrix has a determinant of zero, it returns `(0, -Inf)`.
+#' 
+#' @inheritParams linalg_det
+#' 
+#' @returns
+#' 
+#' A list `(sign, logabsdet)`.
+#' `logabsdet` will always be real-valued, even when `A` is complex.
+#' `sign` will have the same dtype as `A`.
