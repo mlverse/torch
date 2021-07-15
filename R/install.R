@@ -274,7 +274,7 @@ install_type <- function(version) {
 #' reported length, an increase of the \code{timeout} value should help.
 #' 
 #' @export
-install_torch <- function(version = "1.8.0", type = install_type(version = version), reinstall = FALSE,
+install_torch <- function(version = "1.9.0", type = install_type(version = version), reinstall = FALSE,
                           path = install_path(), timeout = 360, ...) {
   
   if (reinstall) {
@@ -332,7 +332,7 @@ install_torch <- function(version = "1.8.0", type = install_type(version = versi
 #' 
 #' 
 #' @export
-install_torch_from_file <- function(version = "1.8.0", type = install_type(version = version), libtorch, liblantern, ...) {
+install_torch_from_file <- function(version = "1.9.0", type = install_type(version = version), libtorch, liblantern, ...) {
   stopifnot(inherits(url(libtorch), "file"))
   stopifnot(inherits(url(liblantern), "file"))
 
@@ -351,7 +351,7 @@ install_torch_from_file <- function(version = "1.8.0", type = install_type(versi
 #' 
 #' 
 #' @export
-get_install_libs_url <- function(version = "1.8.0", type = install_type(version = version)) {
+get_install_libs_url <- function(version = "1.9.0", type = install_type(version = version)) {
 
   libtorch <- install_config[[version]][[type]][[install_os()]][["libtorch"]][["url"]]
   liblantern <- install_config[[version]][[type]][[install_os()]][["liblantern"]]
