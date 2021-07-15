@@ -5,12 +5,14 @@
 \alias{torch_var_mean}
 \title{Var_mean}
 \usage{
-torch_var_mean(self, dim, unbiased = TRUE, keepdim = FALSE)
+torch_var_mean(self, dim, correction, unbiased = TRUE, keepdim = FALSE)
 }
 \arguments{
 \item{self}{(Tensor) the input tensor.}
 
 \item{dim}{(int or tuple of ints) the dimension or dimensions to reduce.}
+
+\item{correction}{The type of correction.}
 
 \item{unbiased}{(bool) whether to use the unbiased estimation or not}
 

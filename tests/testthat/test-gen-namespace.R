@@ -136,11 +136,6 @@ test_that("_cdist_backward", {
   expect_tensor(torch__cdist_backward(x, x, x, 1, x))
 })
 
-test_that("_cholesky_helper", {
-  x <- torch_tensor(matrix(c(1,0,0,1), ncol = 2))
-  expect_tensor(torch__cholesky_helper(x, TRUE))
-})
-
 test_that("_cholesky_solve_helper", {
   x <- torch_tensor(matrix(c(1,0,0,1), ncol = 2))
   expect_tensor(torch__cholesky_solve_helper(x, x, TRUE))

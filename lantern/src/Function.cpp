@@ -11,6 +11,14 @@ if (lanternLastError() != NULL) {                                    \
     throw std::string(last.c_str());                                 \
 } 
 
+inline std::vector<c10::optional<torch::autograd::Variable>> to_optional(torch::autograd::variable_list& output) {
+    std::vector<c10::optional<torch::autograd::Variable>> result;
+    for (auto& v : output) {
+        result.push_back(c10::optional<torch::autograd::Variable>(v));
+    }   
+    return result;
+}
+
 namespace torch
 {
 namespace autograd
@@ -59,15 +67,16 @@ variable_list LanternFunction::apply(
         args,
         node->ctx_.get_non_differentiable(),
         node->ctx_.get_dirty(),
-        outputs,
+        to_optional(outputs),
         is_executable ? node : nullptr);
 
     node->output_info_.reserve(wrapped_outputs.size());
     for (auto &output : wrapped_outputs)
     {
-        if (is_executable)
-        {
-            node->output_info_.emplace_back(output);
+        if (is_executable && output.has_value()) {
+            node->output_info_.emplace_back(output.value());
+        } else if (is_executable) {
+            node->output_info_.emplace_back();
         }
     }
 

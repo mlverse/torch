@@ -14,6 +14,31 @@ get_arguments_with_default <- function(methods) {
     unique()
 }
 
+#' Dispatch arguments are those that don't have a default or
+#' they occur in multiple signatures with different at least 2 different types.
+get_dispatch_arguments <- function(methods) {
+  args <- methods %>%
+    purrr::map(~.x$arguments) %>%
+    purrr::map_dfr(~map_dfr(.x, function(arg) {
+     tibble::tibble(
+       name = as.character(arg$name),
+       type = arg$dynamic_type,
+       no_default = is.null(arg$default)
+     )
+    }))
+
+  args <- args %>%
+    dplyr::group_by(name) %>%
+    dplyr::filter(
+      dplyr::n_distinct(type) > 1 | no_default
+    ) %>%
+    dplyr::distinct(name) %>%
+    dplyr::pull("name")
+
+  args_order <- get_arguments_order(methods)
+  args_order[args_order %in% args]
+}
+
 #' @importFrom rlang .data
 get_arguments_order <- function(methods) {
 
@@ -26,7 +51,12 @@ get_arguments_order <- function(methods) {
 
   # both have the same id_max but bidirectional should be last.
   if (methods[[1]]$name %in% c("rnn_tanh", "rnn_relu", "lstm", "gru"))
-    order$id_max[order$name == "bidirectional"] <- order$id_max[order$name == "bidirectional"] + 1
+   order$id_max[order$name == "bidirectional"] <- order$id_max[order$name == "bidirectional"] + 100
+
+  # new stable argument is getting placed as first argument with this algorithm
+  # which is a breaking change. so we manually move it as last arg.
+  if (methods[[1]]$name == "sort")
+    order$id_max[order$name == "stable"] <- order$id_max[order$name == "stable"] + 100
 
   order %>%
     dplyr::arrange(id_max) %>%
@@ -113,7 +143,7 @@ internal_funs <- c("logical_not", "max_pool1d_with_indices", "max_pool2d_with_in
                    "movedim", "argsort", "norm",
                    "argmax", "argmin", "one_hot", "split",
                    "nonzero", "fft_fft", "fft_ifft", "fft_rfft", "fft_irfft",
-                   "multinomial"
+                   "multinomial", "norm"
                    )
 
 internal_funs <- c(internal_funs, creation_ops)
@@ -163,10 +193,16 @@ r_argument_default <- function(default) {
   if (default == "MemoryFormat::Contiguous")
     return("torch_contiguous_format()")
 
+  if (default == "MemoryFormContiguous")
+    return("torch_contiguous_format()")
+
   if (default == "nullptr")
     return("NULL")
 
   if (default == "at::Reduction::Mean")
+    return("torch_reduction_mean()")
+
+  if (default == "Reduction::Mean")
     return("torch_reduction_mean()")
 
   if (default == "{0,1}")
@@ -175,10 +211,13 @@ r_argument_default <- function(default) {
   if (default == "{-2,-1}")
     return("c(-2,-1)")
 
-  if (default == "\"L\"")
-    return("\"L\"")
+  if (default %in% c("\"L\"", "\"fro\""))
+    return(default)
 
   if (default == "at::kLong")
+    return("torch_long()")
+
+  if (default == "kLong")
     return("torch_long()")
 
   if (default == "\"reduced\"")
@@ -247,7 +286,7 @@ r_argument_with_default <- function(name, decls) {
     unique()
 
   if (length(default) > 1) {
-    browser()
+    default <- default[1]
   }
 
   name <- r_argument_name(name)
@@ -313,7 +352,7 @@ r_arguments_expected_types <- function(decls) {
 }
 
 r_arguments_with_no_default <- function(decls) {
-  args <- get_arguments_with_no_default(decls)
+  args <- get_dispatch_arguments(decls)
   args <- purrr::map_chr(args, r_argument_name)
   args <- glue::glue_collapse(capture.output(dput(args)), sep = "\n")
   glue::glue("nd_args <- {args}")

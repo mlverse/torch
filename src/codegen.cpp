@@ -92,6 +92,11 @@ std::string cpp_arg_to_torch_type (SEXP obj, const std::vector<std::string> expe
   
   bool is_numeric_or_list_or_null = is_numeric || is_list || is_null;
   
+  if (is_in("int64_t", etypes) && ((is_numeric && len == 1) || is_null))
+  {
+    return "int64_t";
+  }
+  
   if (is_in("IntArrayRef", etypes) && is_numeric_or_list_or_null)
   {
     return "IntArrayRef";
@@ -100,11 +105,6 @@ std::string cpp_arg_to_torch_type (SEXP obj, const std::vector<std::string> expe
   if (is_in("ArrayRef<double>", etypes) && (is_numeric || is_null))
   {
     return "ArrayRef<double>";
-  }
-  
-  if (is_in("int64_t", etypes) && ((is_numeric && len == 1) || is_null))
-  {
-    return "int64_t";
   }
   
   if (is_in("double", etypes) && ((is_numeric && len == 1) || is_null))

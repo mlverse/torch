@@ -3,6 +3,7 @@
 #include <iostream>
 #include <istream>
 #include <vector>
+#include <regex>
 
 #include "yaml-cpp/yaml.h"
 
@@ -25,13 +26,20 @@ std::string toCharOnly(std::string str)
     return std::string(str.begin(), iterEnd);
 }
 
+std::string removeAt(std::string str)
+{
+    std::regex e ("at::"); 
+    auto result = std::regex_replace (str, e, "");
+    return std::regex_replace(result, std::regex("const Scalar &"), "Scalar");
+}
+
 std::string toFunction(std::string str, YAML::Node node)
 {
     std::string name = toLower(str);
 
     for (size_t idx = 0; idx < node.size(); idx++)
     {
-        name += "_" + toLower(toCharOnly(node[idx]["dynamic_type"].as<std::string>()));
+        name += "_" + toLower(toCharOnly(removeAt(node[idx]["dynamic_type"].as<std::string>())));
     }
 
     return name;
@@ -119,11 +127,14 @@ std::string buildCalls(std::string name, YAML::Node node, size_t start)
             arguments += ", ";
         }
 
-        std::string type = node[idx]["dynamic_type"].as<std::string>();
-        std::string dtype = node[idx]["type"].as<std::string>();
+        std::string type = removeAt(node[idx]["dynamic_type"].as<std::string>());
+        std::string dtype = removeAt(node[idx]["type"].as<std::string>());
+
+        std::cout << type << std::endl;
 
         if (type == "IntArrayRef" & dtype != "c10::optional<IntArrayRef>")
         {
+            std::cout << "intarrayref" << std::endl;
             type = "std::vector<int64_t>";
         }
         else if (type == "ArrayRef<double>" & dtype != "c10::optional<ArrayRef<double>>")
@@ -155,13 +166,20 @@ std::string buildCalls(std::string name, YAML::Node node, size_t start)
             std::cout << "optional tensor" << std::endl;
             type = "c10::optional<torch::Tensor>";
         }
+        else if (type == "const at::Scalar &" && dtype == "const c10::optional<at::Scalar> &")
+        {
+            std::cout << "optional scalar" << std::endl;
+            type = "c10::optional<at::Scalar>";
+        }
 
         // add optional call if required
         std::string call = node[idx]["name"].as<std::string>();
         if ((dtype.find("c10::optional") != std::string::npos) & 
             (type != "std::vector<torch::Dimname>") &
             (type != "c10::List<c10::optional<torch::Tensor>>") &
-            (type != "c10::optional<torch::Tensor>")
+            (type != "c10::optional<torch::Tensor>") &
+            (type != "const c10::List<c10::optional<at::Tensor>> &") &
+            (type != "c10::optional<at::Scalar>")
             )
         {
             if ((type != "double") & 
@@ -272,7 +290,7 @@ std::string buildReturn(YAML::Node node)
         if (idx > 0)
             type += ", ";
 
-        type += addNamespace(node[idx]["dynamic_type"].as<std::string>());
+        type += addNamespace(removeAt(node[idx]["dynamic_type"].as<std::string>()));
     }
 
     if (node.size() > 1)
@@ -282,6 +300,7 @@ std::string buildReturn(YAML::Node node)
 
     if (type == "torch::TensorList")
     {
+        std::cout << "hello" << std::endl;
         type = "std::vector<torch::Tensor>";
     }
 

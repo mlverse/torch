@@ -5,7 +5,7 @@
 \alias{torch_quantile}
 \title{Quantile}
 \usage{
-torch_quantile(self, q, dim = NULL, keepdim = FALSE)
+torch_quantile(self, q, dim = NULL, keepdim = FALSE, interpolation)
 }
 \arguments{
 \item{self}{(Tensor) the input tensor.}
@@ -15,6 +15,8 @@ torch_quantile(self, q, dim = NULL, keepdim = FALSE)
 \item{dim}{(int) the dimension to reduce.}
 
 \item{keepdim}{(bool) whether the output tensor has \code{dim} retained or not.}
+
+\item{interpolation}{The interpolation method.}
 }
 \description{
 Quantile
