@@ -90,6 +90,7 @@ Collate:
     'lantern_load.R'
     'lantern_sync.R'
     'layout.R'
+    'linalg.R'
     'memory_format.R'
     'utils-data.R'
     'nn.R'
