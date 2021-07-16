@@ -56,6 +56,7 @@ any shape.
 Other linalg: 
 \code{\link{linalg_cholesky}()},
 \code{\link{linalg_det}()},
+\code{\link{linalg_eigvals}()},
 \code{\link{linalg_matrix_norm}()},
 \code{\link{linalg_matrix_rank}()},
 \code{\link{linalg_norm}()},

@@ -432,3 +432,35 @@ linalg_qr <- function(A, mode='reduced') {
 linalg_eig <- function(A) {
   torch_linalg_eig(A)
 }
+
+#' Computes the eigenvalues of a square matrix.
+#' 
+#' Letting \eqn{\mathbb{K}} be \eqn{\mathbb{R}} or \eqn{\mathbb{C}},
+#' the **eigenvalues** of a square matrix \eqn{A \in \mathbb{K}^{n \times n}} are defined
+#' as the roots (counted with multiplicity) of the polynomial `p` of degree `n` given by
+#' 
+#' \deqn{
+#'   p(\lambda) = \operatorname{det}(A - \lambda \mathrm{I}_n)\mathrlap{\qquad \lambda \in \mathbb{C}}
+#' }
+#' 
+#' where \eqn{\mathrm{I}_n} is the `n`-dimensional identity matrix.
+#' Supports input of float, double, cfloat and cdouble dtypes.
+#' Also supports batches of matrices, and if `A` is a batch of matrices then
+#' the output has the same batch dimensions.
+#' 
+#' @note The eigenvalues of a real matrix may be complex, as the roots of a real polynomial may be complex.
+#'       The eigenvalues of a matrix are always well-defined, even when the matrix is not diagonalizable.
+#'   
+#' @seealso [linalg_eig()] computes the full eigenvalue decomposition.
+#' 
+#' @param A (Tensor): tensor of shape `(*, n, n)` where `*` is zero or more batch dimensions.
+#' 
+#' @examples 
+#' a <- torch_randn(2, 2)
+#' w <- linalg_eigvals(a)
+#' 
+#' @family linalg
+#' @export
+linalg_eigvals <- function(A) {
+  torch_linalg_eigvals(A)
+}

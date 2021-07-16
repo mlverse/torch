@@ -107,3 +107,11 @@ test_that("eig works", {
   
   expect_length(wv, 2)
 })
+
+test_that("eigvals", {
+  
+  a <- torch_randn(2, 2)
+  w <- linalg_eigvals(a)
+  
+  expect_equal(w$shape, 2)
+})
