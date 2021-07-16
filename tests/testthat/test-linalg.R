@@ -84,3 +84,8 @@ test_that("matrix_rank works", {
   expect_equal_to_r(linalg_matrix_rank(a, tol = 0.0001), 10)
   expect_equal_to_r(linalg_matrix_rank(a, tol = torch_scalar_tensor(0, dtype = torch_float64())), 10)
 })
+
+test_that("cholesky", {
+  a <- torch_eye(10)
+  expect_equal_to_tensor(linalg_cholesky(a), a)
+})

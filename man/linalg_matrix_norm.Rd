@@ -67,6 +67,7 @@ linalg_matrix_norm(b, dim = c(1, 3))
 }
 \seealso{
 Other linalg: 
+\code{\link{linalg_cholesky}()},
 \code{\link{linalg_det}()},
 \code{\link{linalg_matrix_rank}()},
 \code{\link{linalg_norm}()},

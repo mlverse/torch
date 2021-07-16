@@ -223,7 +223,7 @@ linalg_slogdet <- function(A) {
 #'  
 #' @export
 linalg_cond <- function(A, p=NULL) {
-  torch_linalg_cond(a, p = p)
+  torch_linalg_cond(A, p = p)
 }
 
 #' Computes the numerical rank of a matrix.
@@ -276,4 +276,44 @@ linalg_matrix_rank <- function(A, tol=NULL, hermitian=FALSE) {
       tol <- torch_scalar_tensor(tol)
     torch_linalg_matrix_rank(input = A, tol = tol, hermitian = hermitian)
   }
+}
+
+
+#' Computes the Cholesky decomposition of a complex Hermitian or real symmetric positive-definite matrix.
+#' 
+#' Letting \eqn{\mathbb{K}} be \eqn{\mathbb{R}} or \eqn{\mathbb{C}},
+#' the **Cholesky decomposition** of a complex Hermitian or real symmetric positive-definite matrix
+#' \eqn{A \in \mathbb{K}^{n \times n}} is defined as
+#' 
+#' \deqn{
+#' A = LL^{\mbox{H}}\mathrlap{\qquad L \in \mathbb{K}^{n \times n}}
+#' }
+#' where \eqn{L} is a lower triangular matrix and
+#' \eqn{L^{\mbox{H}}} is the conjugate transpose when \eqn{L} is complex, and the
+#' transpose when \eqn{L} is real-valued.
+#' 
+#' Supports input of float, double, cfloat and cdouble dtypes.
+#' Also supports batches of matrices, and if `A` is a batch of matrices then
+#' the output has the same batch dimensions.
+#' 
+#' @seealso 
+#' - [linalg_cholesky_ex()] for a version of this operation that
+#' skips the (slow) error checking by default and instead returns the debug
+#' information. This makes it a faster way to check if a matrix is
+#' positive-definite.
+#' [linalg_eigh()] for a different decomposition of a Hermitian matrix.
+#' The eigenvalue decomposition gives more information about the matrix but it
+#' slower to compute than the Cholesky decomposition.
+#' 
+#' @param A (Tensor): tensor of shape `(*, n, n)` where `*` is zero or more batch dimensions
+#' consisting of symmetric or Hermitian positive-definite matrices.
+#' 
+#' @examples
+#' a <- torch_eye(10)
+#' linalg_cholesky(a)
+#' 
+#' @family linalg
+#' @export
+linalg_cholesky <- function(A) {
+  torch_linalg_cholesky(A)
 }

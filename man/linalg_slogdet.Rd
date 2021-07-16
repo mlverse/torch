@@ -38,6 +38,7 @@ linalg_slogdet(a)
 }
 \seealso{
 Other linalg: 
+\code{\link{linalg_cholesky}()},
 \code{\link{linalg_det}()},
 \code{\link{linalg_matrix_norm}()},
 \code{\link{linalg_matrix_rank}()},
