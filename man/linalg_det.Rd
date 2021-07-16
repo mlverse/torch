@@ -27,6 +27,7 @@ linalg_det(a)
 \seealso{
 Other linalg: 
 \code{\link{linalg_cholesky}()},
+\code{\link{linalg_eigh}()},
 \code{\link{linalg_eigvals}()},
 \code{\link{linalg_eig}()},
 \code{\link{linalg_matrix_norm}()},

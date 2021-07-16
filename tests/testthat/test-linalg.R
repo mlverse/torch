@@ -115,3 +115,11 @@ test_that("eigvals", {
   
   expect_equal(w$shape, 2)
 })
+
+test_that("linalg_eigh", {
+  
+  a <- torch_randn(2, 2)
+  expect_length(linalg_eigh(a), 2)
+  expect_length(linalg_eigh(a, UPLO = "U"), 2)
+  
+})

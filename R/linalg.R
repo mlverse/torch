@@ -464,3 +464,80 @@ linalg_eig <- function(A) {
 linalg_eigvals <- function(A) {
   torch_linalg_eigvals(A)
 }
+
+#' Computes the eigenvalue decomposition of a complex Hermitian or real symmetric matrix.
+#' 
+#' Letting \eqn{\mathbb{K}} be \eqn{\mathbb{R}} or \eqn{\mathbb{C}},
+#' the **eigenvalue decomposition** of a complex Hermitian or real symmetric matrix
+#' \eqn{A \in \mathbb{K}^{n \times n}} is defined as
+#' 
+#' \deqn{
+#'   A = Q \operatorname{diag}(\Lambda) Q^{\mbox{H}}\mathrlap{\qquad Q \in \mathbb{K}^{n \times n}, \Lambda \in \mathbb{R}^n}
+#' }
+#' 
+#' where \eqn{Q^{\mbox{H}}} is the conjugate transpose when \eqn{Q} is complex, and the transpose when \eqn{Q} is real-valued.
+#' \eqn{Q} is orthogonal in the real case and unitary in the complex case.
+#' 
+#' Supports input of float, double, cfloat and cdouble dtypes.
+#' Also supports batches of matrices, and if `A` is a batch of matrices then
+#' the output has the same batch dimensions.
+#' 
+#' `A` is assumed to be Hermitian (resp. symmetric), but this is not checked internally, instead:
+#' - If `UPLO`\ `= 'L'` (default), only the lower triangular part of the matrix is used in the computation.
+#' - If `UPLO`\ `= 'U'`, only the upper triangular part of the matrix is used.
+#' The eigenvalues are returned in ascending order.
+#' 
+#' @note The eigenvalues of real symmetric or complex Hermitian matrices are always real.
+#' @warning 
+#' - The eigenvectors of a symmetric matrix are not unique, nor are they continuous with
+#'   respect to `A`. Due to this lack of uniqueness, different hardware and
+#'   software may compute different eigenvectors.
+#'   This non-uniqueness is caused by the fact that multiplying an eigenvector by
+#'   `-1` in the real case or by \eqn{e^{i \phi}, \phi \in \mathbb{R}} in the complex
+#'   case produces another set of valid eigenvectors of the matrix.
+#'   This non-uniqueness problem is even worse when the matrix has repeated eigenvalues.
+#'   In this case, one may multiply the associated eigenvectors spanning
+#'   the subspace by a rotation matrix and the resulting eigenvectors will be valid
+#'   eigenvectors.
+#' - Gradients computed using the `eigenvectors` tensor will only be finite when
+#'   `A` has unique eigenvalues.
+#'   Furthermore, if the distance between any two eigvalues is close to zero,
+#'   the gradient will be numerically unstable, as it depends on the eigenvalues
+#'   \eqn{\lambda_i} through the computation of
+#'   \eqn{\frac{1}{\min_{i \neq j} \lambda_i - \lambda_j}}.
+#'  
+#' @seealso 
+#' - [linalg_eigvalsh()] computes only the eigenvalues values of a Hermitian matrix.
+#'   Unlike [linalg_eigh()], the gradients of [linalg_eigvalsh()] are always
+#'   numerically stable.
+#' - [linalg_cholesky()] for a different decomposition of a Hermitian matrix.
+#'   The Cholesky decomposition gives less information about the matrix but is much faster
+#'   to compute than the eigenvalue decomposition.
+#' - [linalg_eig()] for a (slower) function that computes the eigenvalue decomposition
+#'   of a not necessarily Hermitian square matrix.
+#' - [linalg_svd()] for a (slower) function that computes the more general SVD
+#'   decomposition of matrices of any shape.
+#' - [linalg_qr()] for another (much faster) decomposition that works on general
+#'   matrices.
+#' 
+#' @param A (Tensor): tensor of shape `(*, n, n)` where `*` is zero or more batch dimensions
+#'   consisting of symmetric or Hermitian matrices.
+#' @param UPLO ('L', 'U', optional): controls whether to use the upper or lower triangular part
+#'   of `A` in the computations. Default: `'L'`.
+#' 
+#' @returns
+#' A list `(eigenvalues, eigenvectors)` which corresponds to \eqn{\Lambda} and \eqn{Q} above.
+#' `eigenvalues` will always be real-valued, even when `A` is complex.
+#' 
+#' It will also be ordered in ascending order.
+#' `eigenvectors` will have the same dtype as `A` and will contain the eigenvectors as its columns.
+#' 
+#' @examples 
+#' a <- torch_randn(2, 2)
+#' linalg_eigh(a)
+#' 
+#' @family linalg
+#' @export
+linalg_eigh <- function(A, UPLO='L') {
+  torch_linalg_eigh(A, UPLO)
+}
