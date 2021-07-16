@@ -89,3 +89,13 @@ test_that("cholesky", {
   a <- torch_eye(10)
   expect_equal_to_tensor(linalg_cholesky(a), a)
 })
+
+test_that("qr", {
+  
+  a <- torch_tensor(rbind(c(12., -51, 4), c(6, 167, -68), c(-4, 24, -41)))
+  qr <- linalg_qr(a)
+
+  expect_equal_to_tensor(torch_mm(qr[[1]], qr[[2]])$round(), a)
+  expect_equal_to_tensor(torch_mm(qr[[1]]$t(), qr[[1]])$round(), torch_eye(3))
+  
+})

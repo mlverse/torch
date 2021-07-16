@@ -317,3 +317,53 @@ linalg_matrix_rank <- function(A, tol=NULL, hermitian=FALSE) {
 linalg_cholesky <- function(A) {
   torch_linalg_cholesky(A)
 }
+
+#' Computes the QR decomposition of a matrix.
+#' 
+#' Letting \eqn{\mathbb{K}} be \eqn{\mathbb{R}} or \eqn{\mathbb{C}},
+#' the **full QR decomposition** of a matrix
+#' \eqn{A \in \mathbb{K}^{m \times n}} is defined as
+#' 
+#' \deqn{
+#'   A = QR\mathrlap{\qquad Q \in \mathbb{K}^{m \times m}, R \in \mathbb{K}^{m \times n}}
+#' }
+#' 
+#' where \eqn{Q} is orthogonal in the real case and unitary in the complex case, and \eqn{R} is upper triangular.
+#' When `m > n` (tall matrix), as `R` is upper triangular, its last `m - n` rows are zero.
+#' In this case, we can drop the last `m - n` columns of `Q` to form the
+#' **reduced QR decomposition**:
+#'
+#' \deqn{
+#'   A = QR\mathrlap{\qquad Q \in \mathbb{K}^{m \times n}, R \in \mathbb{K}^{n \times n}}
+#' }
+#' 
+#' The reduced QR decomposition agrees with the full QR decomposition when `n >= m` (wide matrix).
+#' Supports input of float, double, cfloat and cdouble dtypes.
+#' Also supports batches of matrices, and if `A` is a batch of matrices then
+#' the output has the same batch dimensions.
+#' The parameter `mode` chooses between the full and reduced QR decomposition.
+#' 
+#' If `A` has shape `(*, m, n)`, denoting `k = min(m, n)`
+#' - `mode = 'reduced'` (default): Returns `(Q, R)` of shapes `(*, m, k)`, `(*, k, n)` respectively.
+#' - `mode = 'complete'`: Returns `(Q, R)` of shapes `(*, m, m)`, `(*, m, n)` respectively.
+#' - `mode = 'r'`: Computes only the reduced `R`. Returns `(Q, R)` with `Q` empty and `R` of shape `(*, k, n)`.
+#' 
+#' 
+#' @param A (Tensor): tensor of shape `(*, m, n)` where `*` is zero or more batch dimensions.
+#' @param mode (str, optional): one of `'reduced'`, `'complete'`, `'r'`.
+#'   Controls the shape of the returned tensors. Default: `'reduced'`.
+#' 
+#' @returns A list `(Q, R)`.
+#' 
+#' @examples
+#' a <- torch_tensor(rbind(c(12., -51, 4), c(6, 167, -68), c(-4, 24, -41)))
+#' qr <- linalg_qr(a)
+#' 
+#' torch_mm(qr[[1]], qr[[2]])$round()
+#' torch_mm(qr[[1]]$t(), qr[[1]])$round()
+#' 
+#' @family linalg
+#' @export
+linalg_qr <- function(A, mode='reduced') {
+  torch_linalg_qr(A, mode = mode)
+}

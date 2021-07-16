@@ -57,6 +57,7 @@ Other linalg:
 \code{\link{linalg_det}()},
 \code{\link{linalg_matrix_norm}()},
 \code{\link{linalg_norm}()},
+\code{\link{linalg_qr}()},
 \code{\link{linalg_slogdet}()},
 \code{\link{linalg_vector_norm}()}
 }
