@@ -225,3 +225,55 @@ linalg_slogdet <- function(A) {
 linalg_cond <- function(A, p=NULL) {
   torch_linalg_cond(a, p = p)
 }
+
+#' Computes the numerical rank of a matrix.
+#' 
+#' The matrix rank is computed as the number of singular values
+#' (or eigenvalues in absolute value when `hermitian = TRUE`)
+#' that are greater than the specified `tol` threshold.
+#' 
+#' Supports input of float, double, cfloat and cdouble dtypes.
+#' Also supports batches of matrices, and if `A` is a batch of matrices then
+#' the output has the same batch dimensions.
+#' 
+#' If `hermitian = TRUE`, `A` is assumed to be Hermitian if complex or
+#' symmetric if real, but this is not checked internally. Instead, just the lower
+#' triangular part of the matrix is used in the computations.
+#' 
+#' If `tol` is not specified and `A` is a matrix of dimensions `(m, n)`,
+#' the tolerance is set to be
+#' 
+#' \deqn{
+#' \mbox{tol} = \sigma_1 \max(m, n) \varepsilon
+#' }
+#'   
+#' where \eqn{\sigma_1} is the largest singular value
+#' (or eigenvalue in absolute value when `hermitian = TRUE`), and
+#' \eqn{\varepsilon} is the epsilon value for the dtype of `A` (see [torch_finfo()]).
+#' 
+#' If `A` is a batch of matrices, `tol` is computed this way for every element of
+#' the batch.
+#' 
+#' @param A (Tensor): tensor of shape `(*, m, n)` where `*` is zero or more 
+#'   batch dimensions.
+#' @param tol (float, Tensor, optional): the tolerance value. See above for 
+#' the value it takes when `NULL`. Default: `NULL`.
+#' @param hermitian(bool, optional): indicates whether `A` is Hermitian if complex
+#' or symmetric if real. Default: `FALSE`.
+#' 
+#' @examples 
+#' a <- torch_eye(10)
+#' linalg_matrix_rank(a)
+#' 
+#' @family linalg
+#' @export
+linalg_matrix_rank <- function(A, tol=NULL, hermitian=FALSE) {
+  
+  if (is.null(tol))
+    torch_linalg_matrix_rank(self = A, tol = tol, hermitian = hermitian)
+  else {
+    if (!is_torch_tensor(tol))
+      tol <- torch_scalar_tensor(tol)
+    torch_linalg_matrix_rank(input = A, tol = tol, hermitian = hermitian)
+  }
+}

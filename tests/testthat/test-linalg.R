@@ -62,12 +62,25 @@ test_that("slog det", {
 })
 
 test_that("cond works", {
-  a <- torch_tensor(rbind(c(1., 0, -1), c(0, 1, 0), c(1, 0, 1)))
-  expect_equal_to_r(linalg_cond(a), 1.4142, tolerance = 1e-4)
-  expect_equal_to_r(linalg_cond(a, "fro"), 3.1623, tolerance = 1e-4)
-  expect_equal_to_r(linalg_cond(a, "nuc"), 9.2426, tolerance = 1e-4)
-  expect_equal_to_r(linalg_cond(a, Inf), 2, tolerance = 1e-4)
-  expect_equal_to_r(linalg_cond(a, -Inf), 1, tolerance = 1e-4)
-  expect_equal_to_r(linalg_cond(a, 1), 2, tolerance = 1e-4)
-  expect_equal_to_r(linalg_cond(a, -1), 1, tolerance = 1e-4)
+  
+  example <- torch_tensor(rbind(c(1., 0, -1), c(0, 1, 0), c(1, 0, 1)))
+  
+  expect_equal_to_r(linalg_cond(example), 1.4142, tolerance = 1e-4)
+  expect_equal_to_r(linalg_cond(example, "fro"), 3.1623, tolerance = 1e-4)
+  expect_equal_to_r(linalg_cond(example, "nuc"), 9.2426, tolerance = 1e-4)
+  expect_equal_to_r(linalg_cond(example, Inf), 2, tolerance = 1e-4)
+  expect_equal_to_r(linalg_cond(example, -Inf), 1, tolerance = 1e-4)
+  expect_equal_to_r(linalg_cond(example, 1), 2, tolerance = 1e-4)
+  expect_equal_to_r(linalg_cond(example, -1), 1, tolerance = 1e-4)
+})
+
+test_that("matrix_rank works", {
+  
+  a <- torch_eye(10)
+  expect_equal_to_r(linalg_matrix_rank(a), 10)
+  expect_equal_to_r(linalg_matrix_rank(a, tol = torch_scalar_tensor(0.001)), 10)
+  expect_equal_to_r(linalg_matrix_rank(a, hermitian = TRUE), 10)
+  expect_equal_to_r(linalg_matrix_rank(a, tol = torch_scalar_tensor(0.001), hermitian = TRUE), 10)
+  expect_equal_to_r(linalg_matrix_rank(a, tol = 0.0001), 10)
+  expect_equal_to_r(linalg_matrix_rank(a, tol = torch_scalar_tensor(0, dtype = torch_float64())), 10)
 })

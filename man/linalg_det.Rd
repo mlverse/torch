@@ -27,6 +27,7 @@ linalg_det(a)
 \seealso{
 Other linalg: 
 \code{\link{linalg_matrix_norm}()},
+\code{\link{linalg_matrix_rank}()},
 \code{\link{linalg_norm}()},
 \code{\link{linalg_slogdet}()},
 \code{\link{linalg_vector_norm}()}
