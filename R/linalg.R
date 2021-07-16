@@ -258,7 +258,7 @@ linalg_cond <- function(A, p=NULL) {
 #'   batch dimensions.
 #' @param tol (float, Tensor, optional): the tolerance value. See above for 
 #' the value it takes when `NULL`. Default: `NULL`.
-#' @param hermitian(bool, optional): indicates whether `A` is Hermitian if complex
+#' @param hermitian (bool, optional): indicates whether `A` is Hermitian if complex
 #' or symmetric if real. Default: `FALSE`.
 #' 
 #' @examples 
@@ -366,4 +366,69 @@ linalg_cholesky <- function(A) {
 #' @export
 linalg_qr <- function(A, mode='reduced') {
   torch_linalg_qr(A, mode = mode)
+}
+
+#' Computes the eigenvalue decomposition of a square matrix if it exists.
+#' 
+#' Letting \eqn{\mathbb{K}} be \eqn{\mathbb{R}} or \eqn{\mathbb{C}},
+#' the **eigenvalue decomposition** of a square matrix
+#' \eqn{A \in \mathbb{K}^{n \times n}} (if it exists) is defined as
+#' 
+#' \deqn{
+#'   A = V \operatorname{diag}(\Lambda) V^{-1}\mathrlap{\qquad V \in \mathbb{C}^{n \times n}, \Lambda \in \mathbb{C}^n}
+#' }
+#' 
+#' This decomposition exists if and only if \eqn{A} is `diagonalizable`_.
+#' This is the case when all its eigenvalues are different.
+#' Supports input of float, double, cfloat and cdouble dtypes.
+#' Also supports batches of matrices, and if `A` is a batch of matrices then
+#' the output has the same batch dimensions.
+#' 
+#' @note The eigenvalues and eigenvectors of a real matrix may be complex.
+#' 
+#' @warning 
+#' - This function assumes that `A` is `diagonalizable`_ (for example, when all the
+#'   eigenvalues are different). If it is not diagonalizable, the returned
+#'   eigenvalues will be correct but \eqn{A \neq V \operatorname{diag}(\Lambda)V^{-1}}.
+#'  
+#' - The eigenvectors of a matrix are not unique, nor are they continuous with respect to
+#'   `A`. Due to this lack of uniqueness, different hardware and software may compute
+#'   different eigenvectors.
+#'   This non-uniqueness is caused by the fact that multiplying an eigenvector by a
+#'   non-zero number produces another set of valid eigenvectors of the matrix.
+#'   In this implmentation, the returned eigenvectors are normalized to have norm
+#'   `1` and largest real component.
+#' 
+#' - Gradients computed using `V` will only be finite when `A` does not have repeated eigenvalues.
+#'   Furthermore, if the distance between any two eigenvalues is close to zero,
+#'   the gradient will be numerically unstable, as it depends on the eigenvalues
+#'   \eqn{\lambda_i} through the computation of
+#'   \eqn{\frac{1}{\min_{i \neq j} \lambda_i - \lambda_j}}.
+#'   
+#' @seealso 
+#' - [linalg_eigvals()] computes only the eigenvalues. Unlike [linalg_eig()], the gradients of 
+#'   [linalg_eigvals()] are always numerically stable.
+#' - [linalg_eigh()] for a (faster) function that computes the eigenvalue decomposition
+#'   for Hermitian and symmetric matrices.
+#' - [linalg_svd()] for a function that computes another type of spectral
+#'   decomposition that works on matrices of any shape.
+#' - [linalg_qr()] for another (much faster) decomposition that works on matrices of
+#'   any shape.
+#'   
+#' @param A (Tensor): tensor of shape `(*, n, n)` where `*` is zero or more batch dimensions
+#'   consisting of diagonalizable matrices.
+#' 
+#' @returns
+#' A list `(eigenvalues, eigenvectors)` which corresponds to \eqn{\Lambda} and \eqn{V} above.
+#' `eigenvalues` and `eigenvectors` will always be complex-valued, even when `A` is real. The eigenvectors
+#' will be given by the columns of `eigenvectors`.
+#' 
+#' @examples
+#' a <- torch_randn(2, 2)
+#' wv = linalg_eig(a)
+#' 
+#' @family linalg
+#' @export
+linalg_eig <- function(A) {
+  torch_linalg_eig(A)
 }

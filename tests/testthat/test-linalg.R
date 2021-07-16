@@ -99,3 +99,11 @@ test_that("qr", {
   expect_equal_to_tensor(torch_mm(qr[[1]]$t(), qr[[1]])$round(), torch_eye(3))
   
 })
+
+test_that("eig works", {
+  
+  a <- torch_randn(2,2)
+  wv <- linalg_eig(a)
+  
+  expect_length(wv, 2)
+})

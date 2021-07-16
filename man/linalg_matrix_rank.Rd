@@ -13,7 +13,7 @@ batch dimensions.}
 \item{tol}{(float, Tensor, optional): the tolerance value. See above for
 the value it takes when \code{NULL}. Default: \code{NULL}.}
 
-\item{hermitian(bool, }{optional): indicates whether \code{A} is Hermitian if complex
+\item{hermitian}{(bool, optional): indicates whether \code{A} is Hermitian if complex
 or symmetric if real. Default: \code{FALSE}.}
 }
 \description{
@@ -55,6 +55,7 @@ linalg_matrix_rank(a)
 Other linalg: 
 \code{\link{linalg_cholesky}()},
 \code{\link{linalg_det}()},
+\code{\link{linalg_eig}()},
 \code{\link{linalg_matrix_norm}()},
 \code{\link{linalg_norm}()},
 \code{\link{linalg_qr}()},
