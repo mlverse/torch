@@ -386,7 +386,8 @@ linalg_qr <- function(A, mode='reduced') {
 #' 
 #' @note The eigenvalues and eigenvectors of a real matrix may be complex.
 #' 
-#' @warning 
+#' @section Warning:
+#' 
 #' - This function assumes that `A` is `diagonalizable`_ (for example, when all the
 #'   eigenvalues are different). If it is not diagonalizable, the returned
 #'   eigenvalues will be correct but \eqn{A \neq V \operatorname{diag}(\Lambda)V^{-1}}.
@@ -488,7 +489,8 @@ linalg_eigvals <- function(A) {
 #' The eigenvalues are returned in ascending order.
 #' 
 #' @note The eigenvalues of real symmetric or complex Hermitian matrices are always real.
-#' @warning 
+#' 
+#' @section Warning: 
 #' - The eigenvectors of a symmetric matrix are not unique, nor are they continuous with
 #'   respect to `A`. Due to this lack of uniqueness, different hardware and
 #'   software may compute different eigenvectors.
@@ -540,4 +542,145 @@ linalg_eigvals <- function(A) {
 #' @export
 linalg_eigh <- function(A, UPLO='L') {
   torch_linalg_eigh(A, UPLO)
+}
+
+#' Computes the eigenvalues of a complex Hermitian or real symmetric matrix.
+#' 
+#' Letting \eqn{\mathbb{K}} be \eqn{\mathbb{R}} or \eqn{\mathbb{C}},
+#' the **eigenvalues** of a complex Hermitian or real symmetric  matrix \eqn{A \in \mathbb{K}^{n \times n}}
+#' are defined as the roots (counted with multiplicity) of the polynomial `p` of degree `n` given by
+#' 
+#' \deqn{
+#'   p(\lambda) = \operatorname{det}(A - \lambda \mathrm{I}_n)\mathrlap{\qquad \lambda \in \mathbb{R}}
+#' }
+#' 
+#' where \eqn{\mathrm{I}_n} is the `n`-dimensional identity matrix.
+#' 
+#' The eigenvalues of a real symmetric or complex Hermitian matrix are always real.
+#' Supports input of float, double, cfloat and cdouble dtypes.
+#' Also supports batches of matrices, and if `A` is a batch of matrices then
+#' the output has the same batch dimensions.
+#' The eigenvalues are returned in ascending order.
+#' 
+#' `A` is assumed to be Hermitian (resp. symmetric), but this is not checked internally, instead:
+#' - If `UPLO`\ `= 'L'` (default), only the lower triangular part of the matrix is used in the computation.
+#' - If `UPLO`\ `= 'U'`, only the upper triangular part of the matrix is used.
+#' 
+#' 
+#' @seealso 
+#' - [linalg_eigh()] computes the full eigenvalue decomposition.
+#' 
+#' @param A (Tensor): tensor of shape `(*, n, n)` where `*` is zero or more batch dimensions
+#'   consisting of symmetric or Hermitian matrices.
+#' @param UPLO ('L', 'U', optional): controls whether to use the upper or lower triangular part
+#'   of `A` in the computations. Default: `'L'`.
+#'   
+#' @returns
+#' A real-valued tensor cointaining the eigenvalues even when `A` is complex.
+#' The eigenvalues are returned in ascending order.
+#' 
+#' @examples 
+#' a <- torch_randn(2, 2)
+#' linalg_eigvalsh(a)
+#' 
+#' @family linalg
+#' @export
+linalg_eigvalsh <- function(A, UPLO='L') {
+  torch_linalg_eigvalsh(A, UPLO = UPLO)
+}
+
+#' Computes the singular value decomposition (SVD) of a matrix.
+#' 
+#' Letting \eqn{\mathbb{K}} be \eqn{\mathbb{R}} or \eqn{\mathbb{C}},
+#' the **full SVD** of a matrix
+#' \eqn{A \in \mathbb{K}^{m \times n}}, if `k = min(m,n)`, is defined as
+#' 
+#' \deqn{
+#'   A = U \operatorname{diag}(S) V^{\mbox{H}}
+#' }
+#' 
+#' \mathrlap{\qquad U \in \mathbb{K}^{m \times m}, S \in \mathbb{R}^k, V \in \mathbb{K}^{n \times n}}
+#' where \eqn{\operatorname{diag}(S) \in \mathbb{K}^{m \times n}},
+#' \eqn{V^{\mbox{H}}} is the conjugate transpose when \eqn{V} is complex, and the transpose when \eqn{V} is real-valued.
+#' 
+#' The matrices  \eqn{U}, \eqn{V} (and thus \eqn{V^{\mbox{H}}}) are orthogonal in the real case, and unitary in the complex case.
+#' When `m > n` (resp. `m < n`) we can drop the last `m - n` (resp. `n - m`) columns of `U` (resp. `V`) to form the **reduced SVD**:
+#'
+#' \deqn{
+#'   A = U \operatorname{diag}(S) V^{\mbox{H}}
+#' }
+#' 
+#' \mathrlap{\qquad U \in \mathbb{K}^{m \times k}, S \in \mathbb{R}^k, V \in \mathbb{K}^{k \times n}}
+#' where \eqn{\operatorname{diag}(S) \in \mathbb{K}^{k \times k}}.
+#' 
+#' In this case, \eqn{U} and \eqn{V} also have orthonormal columns.
+#' Supports input of float, double, cfloat and cdouble dtypes.
+#' 
+#' Also supports batches of matrices, and if `A` is a batch of matrices then
+#' the output has the same batch dimensions.
+#' 
+#' The returned decomposition is a named tuple `(U, S, Vᴴ)`
+#' which corresponds to \eqn{U}, \eqn{S}, \eqn{V^{\mbox{H}}} above.
+#' 
+#' The singular values are returned in descending order.
+#' The parameter `full_matrices` chooses between the full (default) and reduced SVD.
+#' 
+#' @note 
+#' When `full_matrices=TRUE`, the gradients with respect to `U[..., :, min(m, n):]`
+#' and `Vh[..., min(m, n):, :]` will be ignored, as those vectors can be arbitrary bases
+#' of the corresponding subspaces.
+#' 
+#' @section Warnings:
+#' The returned tensors `U` and `V` are not unique, nor are they continuous with
+#' respect to `A`.
+#' Due to this lack of uniqueness, different hardware and software may compute
+#' different singular vectors.
+#' This non-uniqueness is caused by the fact that multiplying any pair of singular
+#' vectors \eqn{u_k, v_k} by `-1` in the real case or by
+#' \eqn{e^{i \phi}, \phi \in \mathbb{R}} in the complex case produces another two
+#' valid singular vectors of the matrix.
+#' This non-uniqueness problem is even worse when the matrix has repeated singular values.
+#' In this case, one may multiply the associated singular vectors of `U` and `V` spanning
+#' the subspace by a rotation matrix and the resulting vectors will span the same subspace.
+#' 
+#' Gradients computed using `U` or `Vᴴ` will only be finite when
+#' `A` does not have zero as a singular value or repeated singular values.
+#' Furthermore, if the distance between any two singular values is close to zero,
+#' the gradient will be numerically unstable, as it depends on the singular values
+#' \eqn{\sigma_i} through the computation of
+#' \eqn{\frac{1}{\min_{i \neq j} \sigma_i^2 - \sigma_j^2}}.
+#' The gradient will also be numerically unstable when `A` has small singular
+#' values, as it also depends on the computaiton of \eqn{\frac{1}{\sigma_i}}.
+#' 
+#' @seealso 
+#' - [linalg_svdvals()] computes only the singular values.
+#'   Unlike [linalg_svd()], the gradients of [linalg_svdvals()] are always
+#'   numerically stable.
+#' - [linalg_eig()] for a function that computes another type of spectral
+#'   decomposition of a matrix. The eigendecomposition works just on on square matrices.
+#' - [linalg_eigh()] for a (faster) function that computes the eigenvalue decomposition
+#'   for Hermitian and symmetric matrices.
+#' - [linalg_qr()] for another (much faster) decomposition that works on general
+#'   matrices.
+#'   
+#' @param A (Tensor): tensor of shape `(*, m, n)` where `*` is zero or more batch dimensions.
+#' @param full_matrices (bool, optional): controls whether to compute the full or reduced
+#'        SVD, and consequently, the shape of the returned tensors `U` and `Vᴴ`. Default: `TRUE`.
+#' 
+#' @returns
+#' A list `(U, S, V)` which corresponds to \eqn{U}, \eqn{S}, \eqn{V^{\mbox{H}}} above.
+#' `S` will always be real-valued, even when `A` is complex.
+#' It will also be ordered in descending order.
+#' `U` and `Vᴴ` will have the same dtype as `A`. The left / right singular vectors will be given by
+#' the columns of `U` and the rows of `Vᴴ` respectively.
+#' 
+#' @examples 
+#' 
+#' a <- torch_randn(5, 3)
+#' linalg_svd(a, full_matrices=FALSE)
+#' 
+#' @family linalg
+#' @export
+linalg_svd <- function(A, full_matrices=TRUE) {
+  torch_linalg_svd(A, full_matrices = full_matrices)
 }

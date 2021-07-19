@@ -123,3 +123,20 @@ test_that("linalg_eigh", {
   expect_length(linalg_eigh(a, UPLO = "U"), 2)
   
 })
+
+test_that("eigvalsh", {
+  
+  a <- torch_randn(2, 2)
+  expect_tensor_shape(linalg_eigvalsh(a), 2)
+  
+})
+
+test_that("linalg_svd", {
+  a <- torch_randn(5, 3)
+  r <- linalg_svd(a, full_matrices=FALSE)
+  
+  expect_length(r, 3)
+  expect_tensor_shape(r[[1]], c(5, 3))
+  expect_tensor_shape(r[[2]], 3)
+  expect_tensor_shape(r[[3]], c(3,3))
+})

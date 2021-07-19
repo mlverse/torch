@@ -47,6 +47,28 @@ The eigenvalues are returned in ascending order.
 \note{
 The eigenvalues of real symmetric or complex Hermitian matrices are always real.
 }
+\section{Warning}{
+
+\itemize{
+\item The eigenvectors of a symmetric matrix are not unique, nor are they continuous with
+respect to \code{A}. Due to this lack of uniqueness, different hardware and
+software may compute different eigenvectors.
+This non-uniqueness is caused by the fact that multiplying an eigenvector by
+\code{-1} in the real case or by \eqn{e^{i \phi}, \phi \in \mathbb{R}} in the complex
+case produces another set of valid eigenvectors of the matrix.
+This non-uniqueness problem is even worse when the matrix has repeated eigenvalues.
+In this case, one may multiply the associated eigenvectors spanning
+the subspace by a rotation matrix and the resulting eigenvectors will be valid
+eigenvectors.
+\item Gradients computed using the \code{eigenvectors} tensor will only be finite when
+\code{A} has unique eigenvalues.
+Furthermore, if the distance between any two eigvalues is close to zero,
+the gradient will be numerically unstable, as it depends on the eigenvalues
+\eqn{\lambda_i} through the computation of
+\eqn{\frac{1}{\min_{i \neq j} \lambda_i - \lambda_j}}.
+}
+}
+
 \examples{
 if (torch_is_installed()) {
 a <- torch_randn(2, 2)
@@ -73,6 +95,7 @@ matrices.
 Other linalg: 
 \code{\link{linalg_cholesky}()},
 \code{\link{linalg_det}()},
+\code{\link{linalg_eigvalsh}()},
 \code{\link{linalg_eigvals}()},
 \code{\link{linalg_eig}()},
 \code{\link{linalg_matrix_norm}()},
@@ -80,6 +103,7 @@ Other linalg:
 \code{\link{linalg_norm}()},
 \code{\link{linalg_qr}()},
 \code{\link{linalg_slogdet}()},
+\code{\link{linalg_svd}()},
 \code{\link{linalg_vector_norm}()}
 }
 \concept{linalg}

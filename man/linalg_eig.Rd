@@ -34,6 +34,27 @@ the output has the same batch dimensions.
 \note{
 The eigenvalues and eigenvectors of a real matrix may be complex.
 }
+\section{Warning}{
+
+\itemize{
+\item This function assumes that \code{A} is \code{diagonalizable}_ (for example, when all the
+eigenvalues are different). If it is not diagonalizable, the returned
+eigenvalues will be correct but \eqn{A \neq V \operatorname{diag}(\Lambda)V^{-1}}.
+\item The eigenvectors of a matrix are not unique, nor are they continuous with respect to
+\code{A}. Due to this lack of uniqueness, different hardware and software may compute
+different eigenvectors.
+This non-uniqueness is caused by the fact that multiplying an eigenvector by a
+non-zero number produces another set of valid eigenvectors of the matrix.
+In this implmentation, the returned eigenvectors are normalized to have norm
+\code{1} and largest real component.
+\item Gradients computed using \code{V} will only be finite when \code{A} does not have repeated eigenvalues.
+Furthermore, if the distance between any two eigenvalues is close to zero,
+the gradient will be numerically unstable, as it depends on the eigenvalues
+\eqn{\lambda_i} through the computation of
+\eqn{\frac{1}{\min_{i \neq j} \lambda_i - \lambda_j}}.
+}
+}
+
 \examples{
 if (torch_is_installed()) {
 a <- torch_randn(2, 2)
@@ -57,12 +78,14 @@ Other linalg:
 \code{\link{linalg_cholesky}()},
 \code{\link{linalg_det}()},
 \code{\link{linalg_eigh}()},
+\code{\link{linalg_eigvalsh}()},
 \code{\link{linalg_eigvals}()},
 \code{\link{linalg_matrix_norm}()},
 \code{\link{linalg_matrix_rank}()},
 \code{\link{linalg_norm}()},
 \code{\link{linalg_qr}()},
 \code{\link{linalg_slogdet}()},
+\code{\link{linalg_svd}()},
 \code{\link{linalg_vector_norm}()}
 }
 \concept{linalg}

@@ -42,12 +42,14 @@ Other linalg:
 \code{\link{linalg_cholesky}()},
 \code{\link{linalg_det}()},
 \code{\link{linalg_eigh}()},
+\code{\link{linalg_eigvalsh}()},
 \code{\link{linalg_eig}()},
 \code{\link{linalg_matrix_norm}()},
 \code{\link{linalg_matrix_rank}()},
 \code{\link{linalg_norm}()},
 \code{\link{linalg_qr}()},
 \code{\link{linalg_slogdet}()},
+\code{\link{linalg_svd}()},
 \code{\link{linalg_vector_norm}()}
 }
 \concept{linalg}
