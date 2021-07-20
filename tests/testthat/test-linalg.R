@@ -140,3 +140,13 @@ test_that("linalg_svd", {
   expect_tensor_shape(r[[2]], 3)
   expect_tensor_shape(r[[3]], c(3,3))
 })
+
+test_that("svdvals", {
+  A <- torch_randn(5, 3)
+  S <- linalg_svdvals(A)
+  expect_tensor_shape(S, 3)
+  
+  r <- linalg_svd(A)
+  expect_equal_to_tensor(S, r[[2]], tolerance = 1e-6)
+})
+

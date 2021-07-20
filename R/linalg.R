@@ -684,3 +684,29 @@ linalg_eigvalsh <- function(A, UPLO='L') {
 linalg_svd <- function(A, full_matrices=TRUE) {
   torch_linalg_svd(A, full_matrices = full_matrices)
 }
+
+#' Computes the singular values of a matrix.
+#' 
+#' Supports input of float, double, cfloat and cdouble dtypes.
+#' Also supports batches of matrices, and if `A` is a batch of matrices then
+#' the output has the same batch dimensions.
+#' The singular values are returned in descending order.
+#' 
+#' @seealso 
+#' [linalg_svd()] computes the full singular value decomposition.
+#' 
+#' @param A (Tensor): tensor of shape `(*, m, n)` where `*` is zero or more batch dimensions.
+#' 
+#' @returns
+#' A real-valued tensor, even when `A` is complex.
+#' 
+#' @examples
+#' A <- torch_randn(5, 3)
+#' S <- linalg_svdvals(A)
+#' S
+#' 
+#' @family linalg
+#' @export
+linalg_svdvals <- function(A) {
+  torch_linalg_svdvals(A)
+}
