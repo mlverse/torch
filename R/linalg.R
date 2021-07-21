@@ -963,3 +963,76 @@ linalg_pinv <- function(A, rcond = 1e-15, hermitian=FALSE) {
     out <- out$squeeze(1)
   out
 }
+
+#' Computes the `n`-th power of a square matrix for an integer `n`.
+#' 
+#' Supports input of float, double, cfloat and cdouble dtypes.
+#' Also supports batches of matrices, and if `A` is a batch of matrices then
+#' the output has the same batch dimensions.
+#' 
+#' If `n=0`, it returns the identity matrix (or batch) of the same shape
+#' as `A`. If `n` is negative, it returns the inverse of each matrix
+#' (if invertible) raised to the power of `abs(n)`.
+#' 
+#' @seealso 
+#' [linalg_solve()] computes `A$inverse() %*% B` with a
+#' numerically stable algorithm.
+#' 
+#' 
+#' @param A (Tensor): tensor of shape `(*, m, m)` where `*` is zero or more batch dimensions.
+#' @param n (int): the exponent.
+#'
+#' @examples
+#' A <- torch_randn(3, 3)
+#' linalg_matrix_power(A, 0)
+#' 
+#' @family linalg
+#' @export
+linalg_matrix_power <- function(A, n) {
+  torch_linalg_matrix_power(A, n = n)
+}
+
+#' Efficiently multiplies two or more matrices
+#' 
+#' Efficiently multiplies two or more matrices by reordering the multiplications so that
+#' the fewest arithmetic operations are performed.
+#' 
+#' Supports inputs of `float`, `double`, `cfloat` and `cdouble` dtypes.
+#' This function does not support batched inputs.
+#' 
+#' Every tensor in `tensors` must be 2D, except for the first and last which
+#' may be 1D. If the first tensor is a 1D vector of shape `(n,)` it is treated as a row vector
+#' of shape `(1, n)`, similarly if the last tensor is a 1D vector of shape `(n,)` it is treated
+#' as a column vector of shape `(n, 1)`.
+#' 
+#' If the first and last tensors are matrices, the output will be a matrix.
+#' However, if either is a 1D vector, then the output will be a 1D vector.
+#' @note This function is implemented by chaining [torch_mm()] calls after
+#' computing the optimal matrix multiplication order.
+#' 
+#' @note The cost of multiplying two matrices with shapes `(a, b)` and `(b, c)` is
+#' `a * b * c`. Given matrices `A`, `B`, `C` with shapes `(10, 100)`,
+#' `(100, 5)`, `(5, 50)` respectively, we can calculate the cost of different
+#' multiplication orders as follows:
+#'
+#' \deqn{
+#' \begin{align*}
+#' \operatorname{cost}((AB)C) &= 10 \times 100 \times 5 + 10 \times 5 \times 50 = 7500 \\
+#' \operatorname{cost}(A(BC)) &= 10 \times 100 \times 50 + 100 \times 5 \times 50 = 75000
+#' \end{align*}
+#' }
+#' In this case, multiplying `A` and `B` first followed by `C` is 10 times faster.
+#' 
+#' 
+#' @param tensors (Sequence[Tensor]): two or more tensors to multiply. The first and last
+#' tensors may be 1D or 2D. Every other tensor must be 2D.
+#' 
+#' @examples
+#' 
+#' linalg_multi_dot(list(torch_tensor(c(1,2)), torch_tensor(c(2,3))))
+#' 
+#' @family linalg
+#' @export
+linalg_multi_dot <- function(tensors) {
+  torch_linalg_multi_dot(tensors)
+} 

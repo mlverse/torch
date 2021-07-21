@@ -190,3 +190,26 @@ test_that("pinv", {
     tolerance = 1e-6
   )
 })
+
+test_that("matrix power", {
+  
+  A <- torch_randn(3, 3)
+  
+  expect_equal_to_tensor(
+    linalg_matrix_power(A, 0),
+    torch_eye(3)
+  )
+  
+  expect_equal_to_tensor(
+    linalg_matrix_power(A, 1),
+    A
+  )
+  
+})
+
+test_that("multi dot", {
+  expect_equal_to_r(
+    linalg_multi_dot(list(torch_tensor(c(1,2)), torch_tensor(c(2,3)))),
+    8
+  )
+})

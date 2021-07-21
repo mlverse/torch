@@ -4,7 +4,7 @@
 \alias{linalg_pinv}
 \title{Computes the pseudoinverse (Moore-Penrose inverse) of a matrix.}
 \usage{
-linalg_pinv(A, rcond = 1e-05, hermitian = FALSE)
+linalg_pinv(A, rcond = 1e-15, hermitian = FALSE)
 }
 \arguments{
 \item{A}{(Tensor): tensor of shape \verb{(*, m, n)} where \code{*} is zero or more batch dimensions.}
@@ -68,7 +68,9 @@ Other linalg:
 \code{\link{linalg_inv}()},
 \code{\link{linalg_lstsq}()},
 \code{\link{linalg_matrix_norm}()},
+\code{\link{linalg_matrix_power}()},
 \code{\link{linalg_matrix_rank}()},
+\code{\link{linalg_multi_dot}()},
 \code{\link{linalg_norm}()},
 \code{\link{linalg_qr}()},
 \code{\link{linalg_slogdet}()},
