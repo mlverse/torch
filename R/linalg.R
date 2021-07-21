@@ -374,9 +374,9 @@ linalg_qr <- function(A, mode='reduced') {
 #' the **eigenvalue decomposition** of a square matrix
 #' \eqn{A \in \mathbb{K}^{n \times n}} (if it exists) is defined as
 #' 
-#' \deqn{
+#' \Sexpr[results=rd, stage=build]{katex::math_to_rd(r"{
 #'   A = V \operatorname{diag}(\Lambda) V^{-1}\mathrlap{\qquad V \in \mathbb{C}^{n \times n}, \Lambda \in \mathbb{C}^n}
-#' }
+#' }")}
 #' 
 #' This decomposition exists if and only if \eqn{A} is `diagonalizable`_.
 #' This is the case when all its eigenvalues are different.
@@ -440,9 +440,9 @@ linalg_eig <- function(A) {
 #' the **eigenvalues** of a square matrix \eqn{A \in \mathbb{K}^{n \times n}} are defined
 #' as the roots (counted with multiplicity) of the polynomial `p` of degree `n` given by
 #' 
-#' \deqn{
+#' \Sexpr[results=rd, stage=build]{katex::math_to_rd(r"{
 #'   p(\lambda) = \operatorname{det}(A - \lambda \mathrm{I}_n)\mathrlap{\qquad \lambda \in \mathbb{C}}
-#' }
+#' }")}
 #' 
 #' where \eqn{\mathrm{I}_n} is the `n`-dimensional identity matrix.
 #' Supports input of float, double, cfloat and cdouble dtypes.
@@ -472,9 +472,9 @@ linalg_eigvals <- function(A) {
 #' the **eigenvalue decomposition** of a complex Hermitian or real symmetric matrix
 #' \eqn{A \in \mathbb{K}^{n \times n}} is defined as
 #' 
-#' \deqn{
+#' \Sexpr[results=rd, stage=build]{katex::math_to_rd(r"{
 #'   A = Q \operatorname{diag}(\Lambda) Q^{\mbox{H}}\mathrlap{\qquad Q \in \mathbb{K}^{n \times n}, \Lambda \in \mathbb{R}^n}
-#' }
+#' }")}
 #' 
 #' where \eqn{Q^{\mbox{H}}} is the conjugate transpose when \eqn{Q} is complex, and the transpose when \eqn{Q} is real-valued.
 #' \eqn{Q} is orthogonal in the real case and unitary in the complex case.

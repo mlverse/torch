@@ -47,7 +47,8 @@ Suggests:
     glue,
     palmerpenguins,
     mvtnorm,
-    numDeriv
+    numDeriv,
+    katex
 VignetteBuilder: knitr
 Collate: 
     'R7.R'
