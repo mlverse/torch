@@ -756,3 +756,114 @@ linalg_svdvals <- function(A) {
 linalg_solve <- function(A, B) {
   torch_linalg_solve(A, B)
 }
+
+
+#' Computes a solution to the least squares problem of a system of linear equations.
+#' 
+#' Letting \eqn{\mathbb{K}} be \eqn{\mathbb{R}} or \eqn{\mathbb{C}},
+#' the **least squares problem** for a linear system \eqn{AX = B} with
+#' \eqn{A \in \mathbb{K}^{m \times n}, B \in \mathbb{K}^{m \times k}} is defined as
+#' 
+#' \deqn{
+#'   \min_{X \in \mathbb{K}^{n \times k}} \|AX - B\|_F
+#' }
+#' 
+#' where \eqn{\|-\|_F} denotes the Frobenius norm.
+#' Supports inputs of float, double, cfloat and cdouble dtypes.
+#' 
+#' Also supports batches of matrices, and if the inputs are batches of matrices then
+#' the output has the same batch dimensions.
+#' `driver` chooses the LAPACK/MAGMA function that will be used.
+#' 
+#' For CPU inputs the valid values are `'gels'`, `'gelsy'`, `'gelsd`, `'gelss'`.
+#' For CUDA input, the only valid driver is `'gels'`, which assumes that `A` is full-rank.
+#' 
+#' To choose the best driver on CPU consider:
+#' - If `A` is well-conditioned (its [condition number](https://pytorch.org/docs/master/linalg.html#torch.linalg.cond) is not too large), or you do not mind some precision loss.
+#' - For a general matrix: `'gelsy'` (QR with pivoting) (default)
+#' - If `A` is full-rank: `'gels'` (QR)
+#' - If `A` is not well-conditioned.
+#' - `'gelsd'` (tridiagonal reduction and SVD)
+#' - But if you run into memory issues: `'gelss'` (full SVD).
+#' 
+#' See also the [full description of these drivers](https://www.netlib.org/lapack/lug/node27.html)
+#' 
+#' `rcond` is used to determine the effective rank of the matrices in `A`
+#' when `driver` is one of (`'gelsy'`, `'gelsd'`, `'gelss'`).
+#' In this case, if \eqn{\sigma_i} are the singular values of `A` in decreasing order,
+#' \eqn{\sigma_i} will be rounded down to zero if \eqn{\sigma_i \leq \mbox{rcond} \cdot \sigma_1}.
+#' If `rcond = NULL` (default), `rcond` is set to the machine precision of the dtype of `A`.
+#' 
+#' This function returns the solution to the problem and some extra information in a list of
+#' four tensors `(solution, residuals, rank, singular_values)`. For inputs `A`, `B`
+#' of shape `(*, m, n)`, `(*, m, k)` respectively, it cointains
+#' - `solution`: the least squares solution. It has shape `(*, n, k)`.
+#' - `residuals`: the squared residuals of the solutions, that is, \eqn{\|AX - B\|_F^2}.
+#' It has shape equal to the batch dimensions of `A`.
+#' It is computed when `m > n` and every matrix in `A` is full-rank,
+#' otherwise, it is an empty tensor.
+#' If `A` is a batch of matrices and any matrix in the batch is not full rank,
+#' then an empty tensor is returned. This behavior may change in a future PyTorch release.
+#' - `rank`: tensor of ranks of the matrices in `A`.
+#' It has shape equal to the batch dimensions of `A`.
+#' It is computed when `driver` is one of (`'gelsy'`, `'gelsd'`, `'gelss'`),
+#' otherwise it is an empty tensor.
+#' - `singular_values`: tensor of singular values of the matrices in `A`.
+#' It has shape `(*, min(m, n))`.
+#' It is computed when `driver` is one of (`'gelsd'`, `'gelss'`),
+#' otherwise it is an empty tensor.
+#' 
+#' @note
+#' This function computes `X = A$pinverse() %*% B` in a faster and
+#' more numerically stable way than performing the computations separately.
+#' 
+#' @section Warning:
+#' The default value of `rcond` may change in a future PyTorch release.
+#' It is therefore recommended to use a fixed value to avoid potential
+#' breaking changes.
+#' 
+#' @param A (Tensor): lhs tensor of shape `(*, m, n)` where `*` is zero or more batch dimensions.
+#' @param B (Tensor): rhs tensor of shape `(*, m, k)` where `*` is zero or more batch dimensions.
+#' @param rcond (float, optional): used to determine the effective rank of `A`.
+#'   If `rcond = NULL`, `rcond` is set to the machine
+#'   precision of the dtype of `A` times `max(m, n)`. Default: `NULL`.
+#' @param ... currently unused.
+#' @param driver (str, optional): name of the LAPACK/MAGMA method to be used.
+#'   If `NULL`, `'gelsy'` is used for CPU inputs and `'gels'` for CUDA inputs.
+#'   Default: `NULL`.
+#' 
+#' @returns
+#' A list `(solution, residuals, rank, singular_values)`.
+#' 
+#' @examples
+#' A <- torch_tensor(rbind(c(10, 2, 3), c(3, 10, 5), c(5, 6, 12)))$unsqueeze(1) # shape (1, 3, 3)
+#' B <- torch_stack(list(rbind(c(2, 5, 1), c(3, 2, 1), c(5, 1, 9)),
+#'                       rbind(c(4, 2, 9), c(2, 0, 3), c(2, 5, 3))), dim = 1) # shape (2, 3, 3)
+#' X <- linalg_lstsq(A, B)$solution # A is broadcasted to shape (2, 3, 3)
+#' 
+#' @family linalg
+#' @export
+linalg_lstsq <- function(A, B, rcond = NULL, ..., driver = NULL) {
+  ellipsis::check_dots_empty()
+  
+  args <- list(
+    self = A,
+    b = B
+  )
+  
+  if (is.null(driver)) {
+    if (!is_torch_tensor(A) || is_cpu_device(A$device))
+      driver <- "gelsy"
+    else
+      driver <- "gels"
+  }
+  
+  args$driver <- driver
+  
+  if (!is.null(rcond))
+    args$rcond <- rcond
+  
+  res <- do.call(torch_linalg_lstsq, args)
+  res <- setNames(res, c("solution", "residuals", "rank", "singular_values"))
+  res
+}

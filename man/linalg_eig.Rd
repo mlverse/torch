@@ -80,6 +80,7 @@ Other linalg:
 \code{\link{linalg_eigh}()},
 \code{\link{linalg_eigvalsh}()},
 \code{\link{linalg_eigvals}()},
+\code{\link{linalg_lstsq}()},
 \code{\link{linalg_matrix_norm}()},
 \code{\link{linalg_matrix_rank}()},
 \code{\link{linalg_norm}()},

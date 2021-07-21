@@ -157,3 +157,11 @@ test_that("solve", {
   expect_equal_to_tensor(torch_matmul(A, x), b, tolerance = 1e-6)
 })
 
+test_that("lstsq", {
+  A <- torch_tensor(rbind(c(10, 2, 3), c(3, 10, 5), c(5, 6, 12)))$unsqueeze(1) # shape (1, 3, 3)
+  B <- torch_stack(list(rbind(c(2, 5, 1), c(3, 2, 1), c(5, 1, 9)),
+                        rbind(c(4, 2, 9), c(2, 0, 3), c(2, 5, 3))), dim = 1) # shape (2, 3, 3)
+  X <- linalg_lstsq(A, B) # A is broadcasted to shape (2, 3, 3)
+  expect_length(X, 4)
+})
+
