@@ -176,7 +176,16 @@ test_that("pinv", {
   B <- torch_randn(3, 3)
   
   expect_equal_to_tensor(
-    torch_matmul(linalg_pinv(A), B)$squeeze(1),
+    torch_matmul(linalg_pinv(A), B),
+    linalg_lstsq(A, B)$solution,
+    tolerance = 1e-6
+  )
+  
+  A <- torch_randn(3, 3, 5)
+  B <- torch_randn(3, 3, 3)
+  
+  expect_equal_to_tensor(
+    torch_bmm(linalg_pinv(A), B),
     linalg_lstsq(A, B)$solution,
     tolerance = 1e-6
   )

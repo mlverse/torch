@@ -957,6 +957,9 @@ linalg_inv <- function(A) {
 #' 
 #' @family linalg
 #' @export
-linalg_pinv <- function(A, rcond = 1e-5, hermitian=FALSE) {
-  torch_linalg_pinv(A, rcond = rcond, hermitian = hermitian)
+linalg_pinv <- function(A, rcond = 1e-15, hermitian=FALSE) {
+  out <- torch_linalg_pinv(A, rcond = rcond, hermitian = hermitian)
+  if (length(dim(out)) != length(dim(A)))
+    out <- out$squeeze(1)
+  out
 }
