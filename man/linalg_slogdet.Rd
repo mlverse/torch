@@ -38,6 +38,7 @@ linalg_slogdet(a)
 }
 \seealso{
 Other linalg: 
+\code{\link{linalg_cholesky_ex}()},
 \code{\link{linalg_cholesky}()},
 \code{\link{linalg_det}()},
 \code{\link{linalg_eigh}()},
@@ -45,6 +46,7 @@ Other linalg:
 \code{\link{linalg_eigvals}()},
 \code{\link{linalg_eig}()},
 \code{\link{linalg_householder_product}()},
+\code{\link{linalg_inv_ex}()},
 \code{\link{linalg_inv}()},
 \code{\link{linalg_lstsq}()},
 \code{\link{linalg_matrix_norm}()},

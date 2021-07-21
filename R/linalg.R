@@ -1159,3 +1159,82 @@ linalg_tensorinv <- function(A, ind = 3L) {
 linalg_tensorsolve <- function(A, B, dims = NULL) {
   torch_linalg_tensorsolve(A, B, dims)
 }
+
+#' Computes the Cholesky decomposition of a complex Hermitian or real
+#' symmetric positive-definite matrix.
+#' 
+#' This function skips the (slow) error checking and error message construction
+#' of [linalg_cholesky()], instead directly returning the LAPACK
+#' error codes as part of a named tuple `(L, info)`. This makes this function
+#' a faster way to check if a matrix is positive-definite, and it provides an
+#' opportunity to handle decomposition errors more gracefully or performantly
+#' than [linalg_cholesky()] does.
+#' Supports input of float, double, cfloat and cdouble dtypes.
+#' Also supports batches of matrices, and if `A` is a batch of matrices then
+#' the output has the same batch dimensions.
+#' If `A` is not a Hermitian positive-definite matrix, or if it's a batch of matrices
+#' and one or more of them is not a Hermitian positive-definite matrix,
+#' then `info` stores a positive integer for the corresponding matrix.
+#' The positive integer indicates the order of the leading minor that is not positive-definite,
+#' and the decomposition could not be completed.
+#' `info` filled with zeros indicates that the decomposition was successful.
+#' If `check_errors=TRUE` and `info` contains positive integers, then a RuntimeError is thrown.
+#' @note If `A` is on a CUDA device, this function may synchronize that device with the CPU.
+#' @note This function is "experimental" and it may change in a future PyTorch release.
+#' @seealso 
+#' [linalg_cholesky()] is a NumPy compatible variant that always checks for errors.
+#' 
+#' @param A (Tensor): the Hermitian `n \times n` matrix or the batch of such matrices of size
+#'                     `(*, n, n)` where `*` is one or more batch dimensions.
+#' @param check_errors (bool, optional): controls whether to check the content of `infos`. Default: `FALSE`.
+#' 
+#' @examples
+#' A <- torch_randn(2, 2)
+#' out = linalg_cholesky_ex(A)
+#' out
+#' 
+#' @family linalg
+#' @export
+linalg_cholesky_ex <- function(A, check_errors = FALSE) {
+  setNames(torch_linalg_cholesky_ex(A, check_errors = check_errors),
+           c("L", "info"))
+}
+
+#' Computes the inverse of a square matrix if it is invertible.
+#' 
+#' Returns a namedtuple `(inverse, info)`. `inverse` contains the result of
+#' inverting `A` and `info` stores the LAPACK error codes.
+#' If `A` is not an invertible matrix, or if it's a batch of matrices
+#' and one or more of them is not an invertible matrix,
+#' then `info` stores a positive integer for the corresponding matrix.
+#' The positive integer indicates the diagonal element of the LU decomposition of
+#' the input matrix that is exactly zero.
+#' `info` filled with zeros indicates that the inversion was successful.
+#' If `check_errors=TRUE` and `info` contains positive integers, then a RuntimeError is thrown.
+#' Supports input of float, double, cfloat and cdouble dtypes.
+#' Also supports batches of matrices, and if `A` is a batch of matrices then
+#' the output has the same batch dimensions.
+#' @note
+#' If `A` is on a CUDA device then this function may synchronize
+#' that device with the CPU.
+#' @note This function is "experimental" and it may change in a future PyTorch release.
+#' 
+#' @seealso 
+#' [linalg_inv()] is a NumPy compatible variant that always checks for errors.
+#' 
+#' @param A (Tensor): tensor of shape `(*, n, n)` where `*` is zero or more batch dimensions
+#'                     consisting of square matrices.
+#' @param check_errors (bool, optional): controls whether to check the content of `info`. Default: `FALSE`.
+#' 
+#' @examples
+#' A <- torch_randn(3, 3)
+#' out <- linalg_inv_ex(A)
+#' 
+#' @family linalg
+#' @export
+linalg_inv_ex <- function(A, check_errors = FALSE) {
+  setNames(
+    torch_linalg_inv_ex(A, check_errors = check_errors),
+    c("inverse", "info")
+  )
+}

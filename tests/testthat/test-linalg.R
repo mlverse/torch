@@ -248,6 +248,22 @@ test_that("tensorsolve", {
   X <- linalg_tensorsolve(A, B, dims=c(1, 3))
   A <- A$permute(c(2, 4, 5, 1, 3))
   expect_true(
-    torch_allclose(torch_tensordot(A, X, dims=X$ndim), B, atol=1e-6)  
+    torch_allclose(torch_tensordot(A, X, dims=X$ndim), B, atol=1e-5)  
+  )
+})
+
+test_that("cholesky ex", {
+  A <- torch_randn(2, 2)
+  out = linalg_cholesky_ex(A)
+  expect_length(out,2)
+  expect_named(out, c("L", "info"))
+})
+
+test_that("linalg_inv_ex", {
+  A <- torch_randn(3, 3)
+  out <- linalg_inv_ex(A)
+  expect_equal_to_tensor(
+    out$inverse,
+    linalg_inv(A)
   )
 })
