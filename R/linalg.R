@@ -710,3 +710,49 @@ linalg_svd <- function(A, full_matrices=TRUE) {
 linalg_svdvals <- function(A) {
   torch_linalg_svdvals(A)
 }
+
+#' Computes the solution of a square system of linear equations with a unique solution.
+#' 
+#' Letting \eqn{\mathbb{K}} be \eqn{\mathbb{R}} or \eqn{\mathbb{C}},
+#' this function computes the solution \eqn{X \in \mathbb{K}^{n \times k}} of the **linear system** associated to
+#' \eqn{A \in \mathbb{K}^{n \times n}, B \in \mathbb{K}^{m \times k}}, which is defined as
+#' 
+#' \deqn{
+#'   AX = B
+#' }
+#' 
+#' This system of linear equations has one solution if and only if \eqn{A} is `invertible`_.
+#' This function assumes that \eqn{A} is invertible.
+#' Supports inputs of float, double, cfloat and cdouble dtypes.
+#' Also supports batches of matrices, and if the inputs are batches of matrices then
+#' the output has the same batch dimensions.
+#' 
+#' Letting `*` be zero or more batch dimensions,
+#' 
+#' - If `A` has shape `(*, n, n)` and `B` has shape `(*, n)` (a batch of vectors) or shape
+#'   `(*, n, k)` (a batch of matrices or "multiple right-hand sides"), this function returns `X` of shape
+#'   `(*, n)` or `(*, n, k)` respectively.
+#' - Otherwise, if `A` has shape `(*, n, n)` and  `B` has shape `(n,)`  or `(n, k)`, `B`
+#'   is broadcasted to have shape `(*, n)` or `(*, n, k)` respectively.
+#' 
+#' This function then returns the solution of the resulting batch of systems of linear equations.
+#' 
+#' @note
+#' This function computes `X = A$inverse() @ B` in a faster and
+#' more numerically stable way than performing the computations separately.
+#' 
+#' @param A (Tensor): tensor of shape `(*, n, n)` where `*` is zero or more batch dimensions.
+#' @param B (Tensor): right-hand side tensor of shape `(*, n)` or  `(*, n, k)` or `(n,)` or `(n, k)`
+#'   according to the rules described above
+#'   
+#' @examples
+#' A <- torch_randn(3, 3)
+#' b <- torch_randn(3)
+#' x <- linalg_solve(A, b)
+#' torch_allclose(torch_matmul(A, x), b)
+#' 
+#' @family linalg
+#' @export
+linalg_solve <- function(A, B) {
+  torch_linalg_solve(A, B)
+}

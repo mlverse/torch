@@ -150,3 +150,10 @@ test_that("svdvals", {
   expect_equal_to_tensor(S, r[[2]], tolerance = 1e-6)
 })
 
+test_that("solve", {
+  A <- torch_randn(3, 3)
+  b <- torch_randn(3)
+  x <- linalg_solve(A, b)
+  expect_equal_to_tensor(torch_matmul(A, x), b, tolerance = 1e-6)
+})
+
