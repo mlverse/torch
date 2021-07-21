@@ -165,3 +165,8 @@ test_that("lstsq", {
   expect_length(X, 4)
 })
 
+test_that("linalg_inv", {
+  X <- torch_randn(2,2)
+  Xi <- linalg_inv(X)
+  expect_equal_to_tensor(torch_matmul(X, Xi), torch_eye(2), tolerance = 1e-6)
+})

@@ -867,3 +867,46 @@ linalg_lstsq <- function(A, B, rcond = NULL, ..., driver = NULL) {
   res <- setNames(res, c("solution", "residuals", "rank", "singular_values"))
   res
 }
+
+#' Computes the inverse of a square matrix if it exists.
+#' 
+#' Throws a `runtime_error` if the matrix is not invertible.
+#' 
+#' Letting \eqn{\mathbb{K}} be \eqn{\mathbb{R}} or \eqn{\mathbb{C}},
+#' for a matrix \eqn{A \in \mathbb{K}^{n \times n}},
+#' its **inverse matrix** \eqn{A^{-1} \in \mathbb{K}^{n \times n}} (if it exists) is defined as
+#' \deqn{
+#'   A^{-1}A = AA^{-1} = \mathrm{I}_n
+#' }
+#' where \eqn{\mathrm{I}_n} is the `n`-dimensional identity matrix.
+#' 
+#' The inverse matrix exists if and only if \eqn{A} is invertible. In this case,
+#' the inverse is unique.
+#' Supports input of float, double, cfloat and cdouble dtypes.
+#' Also supports batches of matrices, and if `A` is a batch of matrices
+#' then the output has the same batch dimensions.
+#' 
+#' Consider using [linalg.solve()] if possible for multiplying a matrix on the left by
+#' the inverse, as `linalg_solve(A, B) == A$inv() %*% B`
+#' It is always prefered to use [linalg_solve()] when possible, as it is faster and more
+#' numerically stable than computing the inverse explicitly.
+#' 
+#' @seealso 
+#' [linalg_pinv()] computes the pseudoinverse (Moore-Penrose inverse) of matrices
+#' of any shape.
+#' [linalg_solve()] computes `A$inv() %*% B` with a
+#' numerically stable algorithm.
+#' 
+#' 
+#' @param A (Tensor): tensor of shape `(*, n, n)` where `*` is zero or more batch dimensions
+#'   consisting of invertible matrices.
+#' 
+#' @examples
+#' A <- torch_randn(4, 4)
+#' linalg_inv(A)
+#' 
+#' @family linalg
+#' @export
+linalg_inv <- function(A) {
+  torch_linalg_inv(self = A)
+}
