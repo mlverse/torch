@@ -213,3 +213,41 @@ test_that("multi dot", {
     8
   )
 })
+
+test_that("householder_product", {
+  A <- torch_randn(2, 2)
+  h_tau <- torch_geqrf(A)
+  Q <- linalg_householder_product(h_tau[[1]], h_tau[[2]])
+  expect_equal_to_tensor(Q, linalg_qr(A)[[1]])
+})
+
+test_that("tensorinv", {
+  A <- torch_eye(4 * 6)$reshape(c(4, 6, 8, 3))
+  Ainv <- linalg_tensorinv(A, ind=3)
+  Ainv$shape
+  B <- torch_randn(4, 6)
+  expect_true(torch_allclose(torch_tensordot(Ainv, B), linalg_tensorsolve(A, B)))
+
+  A <- torch_randn(4, 4)
+  Atensorinv<- linalg_tensorinv(A, 2)
+  Ainv <- linalg_inv(A)
+  expect_true(torch_allclose(Atensorinv, Ainv))
+})
+
+test_that("tensorsolve", {
+  A <- torch_eye(2 * 3 * 4)$reshape(c(2 * 3, 4, 2, 3, 4))
+  B <- torch_randn(2 * 3, 4)
+  X <- linalg_tensorsolve(A, B)
+  X$shape
+  expect_true(
+    torch_allclose(torch_tensordot(A, X, dims=X$ndim), B)
+  )
+
+  A <- torch_randn(6, 4, 4, 3, 2)
+  B <- torch_randn(4, 3, 2)
+  X <- linalg_tensorsolve(A, B, dims=c(1, 3))
+  A <- A$permute(c(2, 4, 5, 1, 3))
+  expect_true(
+    torch_allclose(torch_tensordot(A, X, dims=X$ndim), B, atol=1e-6)  
+  )
+})

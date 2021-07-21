@@ -1036,3 +1036,126 @@ linalg_matrix_power <- function(A, n) {
 linalg_multi_dot <- function(tensors) {
   torch_linalg_multi_dot(tensors)
 } 
+
+#' Computes the first `n` columns of a product of Householder matrices.
+#' 
+#' Letting \eqn{\mathbb{K}} be \eqn{\mathbb{R}} or \eqn{\mathbb{C}},
+#' for a matrix \eqn{V \in \mathbb{K}^{m \times n}} with columns \eqn{v_i \in \mathbb{K}^m}
+#' with \eqn{m \geq n} and a vector \eqn{\tau \in \mathbb{K}^k} with \eqn{k \leq n},
+#' this function computes the first \eqn{n} columns of the matrix
+#' 
+#' \deqn{
+#' H_1H_2 ... H_k \qquad\mbox{with}\qquad H_i = \mathrm{I}_m - \tau_i v_i v_i^{\mbox{H}}
+#' }
+#' where \eqn{\mathrm{I}_m} is the `m`-dimensional identity matrix and
+#' \eqn{v^{\mbox{H}}} is the conjugate transpose when \eqn{v} is complex, and the transpose when \eqn{v} is real-valued.
+#' See [Representation of Orthogonal or Unitary Matrices](https://www.netlib.org/lapack/lug/node128.html) for 
+#' further details.
+#' 
+#' Supports inputs of float, double, cfloat and cdouble dtypes.
+#' Also supports batches of matrices, and if the inputs are batches of matrices then
+#' the output has the same batch dimensions.
+#' @note This function only uses the values strictly below the main diagonal of `A`.
+#' The other values are ignored.
+#' 
+#' @seealso
+#' - [torch_geqrf()] can be used together with this function to form the `Q` from the
+#' [linalg_qr()] decomposition.
+#' 
+#' - [torch_ormqr()] is a related function that computes the matrix multiplication
+#' of a product of Householder matrices with another matrix.
+#' However, that function is not supported by autograd.
+#' 
+#' @param A (Tensor): tensor of shape `(*, m, n)` where `*` is zero or more batch dimensions.
+#' @param tau (Tensor): tensor of shape `(*, k)` where `*` is zero or more batch dimensions.
+#' 
+#' @examples
+#' A <- torch_randn(2, 2)
+#' h_tau <- torch_geqrf(A)
+#' Q <- linalg_householder_product(h_tau[[1]], h_tau[[2]])
+#' torch_allclose(Q, linalg_qr(A)[[1]])
+#' 
+#' @family linalg
+#' @export
+linalg_householder_product <- function(A, tau) {
+  torch_linalg_householder_product(A, tau)
+}
+
+#' Computes the multiplicative inverse of [torch_tensordot()]
+#' 
+#' If `m` is the product of the first `ind` dimensions of `A` and `n` is the product of
+#' the rest of the dimensions, this function expects `m` and `n` to be equal.
+#' If this is the case, it computes a tensor `X` such that
+#' `tensordot(A, X, ind)` is the identity matrix in dimension `m`.
+#' 
+#' Supports input of float, double, cfloat and cdouble dtypes.
+#' 
+#' @note Consider using [linalg_tensorsolve()] if possible for multiplying a tensor on the left
+#' by the tensor inverse as `linalg_tensorsolve(A, B) == torch_tensordot(linalg_tensorinv(A), B))`
+#' 
+#' It is always prefered to use [linalg_tensorsolve()] when possible, as it is faster and more
+#' numerically stable than computing the pseudoinverse explicitly.
+#' 
+#' @seealso 
+#' - [linalg_tensorsolve()] computes `torch_tensordot(linalg_tensorinv(A), B))`.
+#' 
+#' @param A (Tensor): tensor to invert. 
+#' @param ind (int): index at which to compute the inverse of [torch_tensordot()]. Default: `3`.
+#' 
+#' @examples
+#' A <- torch_eye(4 * 6)$reshape(c(4, 6, 8, 3))
+#' Ainv <- linalg_tensorinv(A, ind=3)
+#' Ainv$shape
+#' B <- torch_randn(4, 6)
+#' torch_allclose(torch_tensordot(Ainv, B), linalg_tensorsolve(A, B))
+#' 
+#' A <- torch_randn(4, 4)
+#' Atensorinv<- linalg_tensorinv(A, 2)
+#' Ainv <- linalg_inv(A)
+#' torch_allclose(Atensorinv, Ainv)
+#' 
+#' @family linalg
+#' @export
+linalg_tensorinv <- function(A, ind = 3L) {
+  torch_linalg_tensorinv(A, ind = ind - 1L)
+}
+
+#' Computes the solution `X` to the system `torch_tensordot(A, X) = B`.
+#' 
+#' If `m` is the product of the first `B`\ `.ndim`  dimensions of `A` and
+#' `n` is the product of the rest of the dimensions, this function expects `m` and `n` to be equal.
+#' The returned tensor `x` satisfies
+#' `tensordot(A, x, dims=x$ndim) == B`.
+#' 
+#' If `dims` is specified, `A` will be reshaped as
+#' `A = movedim(A, dims, seq(len(dims) - A$ndim + 1, 0))`
+#' 
+#' Supports inputs of float, double, cfloat and cdouble dtypes.
+#' 
+#' @seealso 
+#' - [linalg_tensorinv()] computes the multiplicative inverse of
+#' [torch_tensordot()].
+#' 
+#' @param A (Tensor): tensor to solve for. 
+#' @param B (Tensor): the solution
+#' @param dims (Tuple[int], optional): dimensions of `A` to be moved.
+#' If `NULL`, no dimensions are moved. Default: `NULL`.
+#' 
+#' @examples
+#' A <- torch_eye(2 * 3 * 4)$reshape(c(2 * 3, 4, 2, 3, 4))
+#' B <- torch_randn(2 * 3, 4)
+#' X <- linalg_tensorsolve(A, B)
+#' X$shape
+#' torch_allclose(torch_tensordot(A, X, dims=X$ndim), B)
+#' 
+#' A <- torch_randn(6, 4, 4, 3, 2)
+#' B <- torch_randn(4, 3, 2)
+#' X <- linalg_tensorsolve(A, B, dims=c(1, 3))
+#' A <- A$permute(c(2, 4, 5, 1, 3))
+#' torch_allclose(torch_tensordot(A, X, dims=X$ndim), B, atol=1e-6)
+#' 
+#' @family linalg
+#' @export
+linalg_tensorsolve <- function(A, B, dims = NULL) {
+  torch_linalg_tensorsolve(A, B, dims)
+}

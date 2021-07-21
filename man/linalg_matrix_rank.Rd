@@ -59,6 +59,7 @@ Other linalg:
 \code{\link{linalg_eigvalsh}()},
 \code{\link{linalg_eigvals}()},
 \code{\link{linalg_eig}()},
+\code{\link{linalg_householder_product}()},
 \code{\link{linalg_inv}()},
 \code{\link{linalg_lstsq}()},
 \code{\link{linalg_matrix_norm}()},
@@ -71,6 +72,8 @@ Other linalg:
 \code{\link{linalg_solve}()},
 \code{\link{linalg_svdvals}()},
 \code{\link{linalg_svd}()},
+\code{\link{linalg_tensorinv}()},
+\code{\link{linalg_tensorsolve}()},
 \code{\link{linalg_vector_norm}()}
 }
 \concept{linalg}
