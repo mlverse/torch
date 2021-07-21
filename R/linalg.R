@@ -910,3 +910,53 @@ linalg_lstsq <- function(A, B, rcond = NULL, ..., driver = NULL) {
 linalg_inv <- function(A) {
   torch_linalg_inv(self = A)
 }
+
+#' Computes the pseudoinverse (Moore-Penrose inverse) of a matrix.
+#' 
+#' The pseudoinverse may be `defined algebraically`_
+#' but it is more computationally convenient to understand it `through the SVD`_
+#' Supports input of float, double, cfloat and cdouble dtypes.
+#' Also supports batches of matrices, and if `A` is a batch of matrices then
+#' the output has the same batch dimensions.
+#' 
+#' If `hermitian= TRUE`, `A` is assumed to be Hermitian if complex or
+#' symmetric if real, but this is not checked internally. Instead, just the lower
+#' triangular part of the matrix is used in the computations.
+#' The singular values (or the norm of the eigenvalues when `hermitian= TRUE`)
+#' that are below the specified `rcond` threshold are treated as zero and discarded 
+#' in the computation.
+#' 
+#' @note This function uses [linalg_svd()] if `hermitian= FALSE` and
+#' [linalg_eigh()] if `hermitian= TRUE`.
+#' For CUDA inputs, this function synchronizes that device with the CPU.
+#' 
+#' @note
+#' Consider using [linalg_lstsq()] if possible for multiplying a matrix on the left by
+#' the pseudoinverse, as `linalg_lstsq(A, B)$solution == A$pinv() %*% B`
+#' 
+#' It is always prefered to use [linalg_lstsq()] when possible, as it is faster and more
+#' numerically stable than computing the pseudoinverse explicitly.
+#' 
+#' @seealso 
+#' - [linalg_inv()] computes the inverse of a square matrix.
+#' - [linalg_lstsq()] computes `A$pinv() %*% B` with a
+#'   numerically stable algorithm.
+#' 
+#' @param A (Tensor): tensor of shape `(*, m, n)` where `*` is zero or more batch dimensions.
+#' @param rcond (float or Tensor, optional): the tolerance value to determine when is a singular value zero
+#'   If it is a `torch_Tensor`, its shape must be
+#'   broadcastable to that of the singular values of
+#'   `A` as returned by [linalg_svd()].
+#'   Default: `1e-15`.
+#' @param hermitian(bool, optional): indicates whether `A` is Hermitian if complex
+#'   or symmetric if real. Default: `FALSE`.
+#' 
+#' @examples
+#' A <- torch_randn(3, 5)
+#' linalg_pinv(A)
+#' 
+#' @family linalg
+#' @export
+linalg_pinv <- function(A, rcond = 1e-5, hermitian=FALSE) {
+  torch_linalg_pinv(A, rcond = rcond, hermitian = hermitian)
+}

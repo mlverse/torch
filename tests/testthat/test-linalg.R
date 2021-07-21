@@ -170,3 +170,14 @@ test_that("linalg_inv", {
   Xi <- linalg_inv(X)
   expect_equal_to_tensor(torch_matmul(X, Xi), torch_eye(2), tolerance = 1e-6)
 })
+
+test_that("pinv", {
+  A <- torch_randn(3, 5)
+  B <- torch_randn(3, 3)
+  
+  expect_equal_to_tensor(
+    torch_matmul(linalg_pinv(A), B)$squeeze(1),
+    linalg_lstsq(A, B)$solution,
+    tolerance = 1e-6
+  )
+})

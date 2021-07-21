@@ -41,6 +41,7 @@ Other linalg:
 \code{\link{linalg_matrix_norm}()},
 \code{\link{linalg_matrix_rank}()},
 \code{\link{linalg_norm}()},
+\code{\link{linalg_pinv}()},
 \code{\link{linalg_qr}()},
 \code{\link{linalg_slogdet}()},
 \code{\link{linalg_solve}()},
