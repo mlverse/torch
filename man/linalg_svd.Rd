@@ -13,7 +13,7 @@ linalg_svd(A, full_matrices = TRUE)
 SVD, and consequently, the shape of the returned tensors \code{U} and \code{Vᴴ}. Default: \code{TRUE}.}
 }
 \value{
-A list \verb{(U, S, V)} which corresponds to \eqn{U}, \eqn{S}, \eqn{V^{\mbox{H}}} above.
+A list \verb{(U, S, V)} which corresponds to \eqn{U}, \eqn{S}, \eqn{V^{H}} above.
 \code{S} will always be real-valued, even when \code{A} is complex.
 It will also be ordered in descending order.
 \code{U} and \code{Vᴴ} will have the same dtype as \code{A}. The left / right singular vectors will be given by
@@ -25,22 +25,20 @@ the \strong{full SVD} of a matrix
 \eqn{A \in \mathbb{K}^{m \times n}}, if \code{k = min(m,n)}, is defined as
 }
 \details{
-\deqn{
-  A = U \operatorname{diag}(S) V^{\mbox{H}}
-}
+\Sexpr[results=rd, stage=build]{katex::math_to_rd(r"{
+A = U \operatorname{diag}(S) V^{H} \mathrlap{\qquad U \in \mathbb{K}^{m \times m}, S \in \mathbb{R}^k, V \in \mathbb{K}^{n \times n}}
+}")}
 
-\mathrlap{\qquad U \in \mathbb{K}^{m \times m}, S \in \mathbb{R}^k, V \in \mathbb{K}^{n \times n}}
 where \eqn{\operatorname{diag}(S) \in \mathbb{K}^{m \times n}},
-\eqn{V^{\mbox{H}}} is the conjugate transpose when \eqn{V} is complex, and the transpose when \eqn{V} is real-valued.
+\eqn{V^{H}} is the conjugate transpose when \eqn{V} is complex, and the transpose when \eqn{V} is real-valued.
 
-The matrices  \eqn{U}, \eqn{V} (and thus \eqn{V^{\mbox{H}}}) are orthogonal in the real case, and unitary in the complex case.
+The matrices  \eqn{U}, \eqn{V} (and thus \eqn{V^{H}}) are orthogonal in the real case, and unitary in the complex case.
 When \code{m > n} (resp. \code{m < n}) we can drop the last \code{m - n} (resp. \code{n - m}) columns of \code{U} (resp. \code{V}) to form the \strong{reduced SVD}:
 
-\deqn{
-  A = U \operatorname{diag}(S) V^{\mbox{H}}
-}
+\Sexpr[results=rd, stage=build]{katex::math_to_rd(r"{
+A = U \operatorname{diag}(S) V^{H} \mathrlap{\qquad U \in \mathbb{K}^{m \times k}, S \in \mathbb{R}^k, V \in \mathbb{K}^{k \times n}}
+}")}
 
-\mathrlap{\qquad U \in \mathbb{K}^{m \times k}, S \in \mathbb{R}^k, V \in \mathbb{K}^{k \times n}}
 where \eqn{\operatorname{diag}(S) \in \mathbb{K}^{k \times k}}.
 
 In this case, \eqn{U} and \eqn{V} also have orthonormal columns.
@@ -50,7 +48,7 @@ Also supports batches of matrices, and if \code{A} is a batch of matrices then
 the output has the same batch dimensions.
 
 The returned decomposition is a named tuple \verb{(U, S, Vᴴ)}
-which corresponds to \eqn{U}, \eqn{S}, \eqn{V^{\mbox{H}}} above.
+which corresponds to \eqn{U}, \eqn{S}, \eqn{V^{H}} above.
 
 The singular values are returned in descending order.
 The parameter \code{full_matrices} chooses between the full (default) and reduced SVD.

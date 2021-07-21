@@ -18,11 +18,12 @@ with \eqn{m \geq n} and a vector \eqn{\tau \in \mathbb{K}^k} with \eqn{k \leq n}
 this function computes the first \eqn{n} columns of the matrix
 }
 \details{
-\deqn{
-H_1H_2 ... H_k \qquad\mbox{with}\qquad H_i = \mathrm{I}_m - \tau_i v_i v_i^{\mbox{H}}
-}
+\Sexpr[results=rd, stage=build]{katex::math_to_rd(r"{
+H_1H_2 ... H_k \qquad with \qquad H_i = \mathrm{I}_m - \tau_i v_i v_i^{H}
+}")}
+
 where \eqn{\mathrm{I}_m} is the \code{m}-dimensional identity matrix and
-\eqn{v^{\mbox{H}}} is the conjugate transpose when \eqn{v} is complex, and the transpose when \eqn{v} is real-valued.
+\eqn{v^{H}} is the conjugate transpose when \eqn{v} is complex, and the transpose when \eqn{v} is real-valued.
 See \href{https://www.netlib.org/lapack/lug/node128.html}{Representation of Orthogonal or Unitary Matrices} for
 further details.
 

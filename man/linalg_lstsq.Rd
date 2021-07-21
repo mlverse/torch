@@ -30,9 +30,9 @@ the \strong{least squares problem} for a linear system \eqn{AX = B} with
 \eqn{A \in \mathbb{K}^{m \times n}, B \in \mathbb{K}^{m \times k}} is defined as
 }
 \details{
-\deqn{
-  \min_{X \in \mathbb{K}^{n \times k}} \|AX - B\|_F
-}
+\Sexpr[results=rd, stage=build]{katex::math_to_rd(r"{
+\min_{X \in \mathbb{K}^{n \times k}} \|AX - B\|_F
+}")}
 
 where \eqn{\|-\|_F} denotes the Frobenius norm.
 Supports inputs of float, double, cfloat and cdouble dtypes.
@@ -59,7 +59,7 @@ See also the \href{https://www.netlib.org/lapack/lug/node27.html}{full descripti
 \code{rcond} is used to determine the effective rank of the matrices in \code{A}
 when \code{driver} is one of (\code{'gelsy'}, \code{'gelsd'}, \code{'gelss'}).
 In this case, if \eqn{\sigma_i} are the singular values of \code{A} in decreasing order,
-\eqn{\sigma_i} will be rounded down to zero if \eqn{\sigma_i \leq \mbox{rcond} \cdot \sigma_1}.
+\eqn{\sigma_i} will be rounded down to zero if \eqn{\sigma_i \leq rcond \cdot \sigma_1}.
 If \code{rcond = NULL} (default), \code{rcond} is set to the machine precision of the dtype of \code{A}.
 
 This function returns the solution to the problem and some extra information in a list of

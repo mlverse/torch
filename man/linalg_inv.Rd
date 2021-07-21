@@ -17,9 +17,10 @@ Throws a \code{runtime_error} if the matrix is not invertible.
 Letting \eqn{\mathbb{K}} be \eqn{\mathbb{R}} or \eqn{\mathbb{C}},
 for a matrix \eqn{A \in \mathbb{K}^{n \times n}},
 its \strong{inverse matrix} \eqn{A^{-1} \in \mathbb{K}^{n \times n}} (if it exists) is defined as
-\deqn{
-  A^{-1}A = AA^{-1} = \mathrm{I}_n
-}
+
+\Sexpr[results=rd, stage=build]{katex::math_to_rd(r"{
+A^{-1}A = AA^{-1} = \mathrm{I}_n
+}")}
 where \eqn{\mathrm{I}_n} is the \code{n}-dimensional identity matrix.
 
 The inverse matrix exists if and only if \eqn{A} is invertible. In this case,
@@ -28,7 +29,7 @@ Supports input of float, double, cfloat and cdouble dtypes.
 Also supports batches of matrices, and if \code{A} is a batch of matrices
 then the output has the same batch dimensions.
 
-Consider using \code{\link[=linalg.solve]{linalg.solve()}} if possible for multiplying a matrix on the left by
+Consider using \code{\link[=linalg_solve]{linalg_solve()}} if possible for multiplying a matrix on the left by
 the inverse, as \code{linalg_solve(A, B) == A$inv() \%*\% B}
 It is always prefered to use \code{\link[=linalg_solve]{linalg_solve()}} when possible, as it is faster and more
 numerically stable than computing the inverse explicitly.

@@ -7,7 +7,7 @@
 linalg_multi_dot(tensors)
 }
 \arguments{
-\item{tensors}{(Sequence\link{Tensor}): two or more tensors to multiply. The first and last
+\item{tensors}{(\code{Sequence[Tensor]}): two or more tensors to multiply. The first and last
 tensors may be 1D or 2D. Every other tensor must be 2D.}
 }
 \description{
@@ -35,12 +35,13 @@ The cost of multiplying two matrices with shapes \verb{(a, b)} and \verb{(b, c)}
 \verb{(100, 5)}, \verb{(5, 50)} respectively, we can calculate the cost of different
 multiplication orders as follows:
 
-\deqn{
+\Sexpr[results=rd, stage=build]{katex::math_to_rd(r"{
 \begin{align*}
 \operatorname{cost}((AB)C) &= 10 \times 100 \times 5 + 10 \times 5 \times 50 = 7500 \\
 \operatorname{cost}(A(BC)) &= 10 \times 100 \times 50 + 100 \times 5 \times 50 = 75000
 \end{align*}
-}
+}")}
+
 In this case, multiplying \code{A} and \code{B} first followed by \code{C} is 10 times faster.
 }
 \examples{

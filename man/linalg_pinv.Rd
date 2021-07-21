@@ -15,7 +15,7 @@ broadcastable to that of the singular values of
 \code{A} as returned by \code{\link[=linalg_svd]{linalg_svd()}}.
 Default: \code{1e-15}.}
 
-\item{hermitian(bool, }{optional): indicates whether \code{A} is Hermitian if complex
+\item{hermitian}{(bool, optional): indicates whether \code{A} is Hermitian if complex
 or symmetric if real. Default: \code{FALSE}.}
 }
 \description{

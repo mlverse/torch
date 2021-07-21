@@ -176,7 +176,7 @@ linalg_slogdet <- function(A) {
 #' the **condition number** \eqn{\kappa} of a matrix
 #' \eqn{A \in \mathbb{K}^{n \times n}} is defined as
 #' 
-#' \deqn{\kappa(A) = \|A\|_p\|A^{-1}\|_p}
+#' \Sexpr[results=rd, stage=build]{katex::math_to_rd(r"{\kappa(A) = \|A\|_p\|A^{-1}\|_p}")}
 #'   
 #' The condition number of `A` measures the numerical stability of the linear system `AX = B`
 #' with respect to a matrix norm.
@@ -197,9 +197,9 @@ linalg_slogdet <- function(A) {
 #' For `p` in `(2, -2)`, this function can be computed in terms of the singular values
 #' \eqn{\sigma_1 \geq \ldots \geq \sigma_n}
 #' 
-#' \deqn{\kappa_2(A) = \frac{\sigma_1}{\sigma_n}\qquad \kappa_{-2}(A) = \frac{\sigma_n}{\sigma_1}}
+#' \Sexpr[results=rd, stage=build]{katex::math_to_rd(r"{\kappa_2(A) = \frac{\sigma_1}{\sigma_n}\qquad \kappa_{-2}(A) = \frac{\sigma_n}{\sigma_1}}")}
 #'     
-#' In these cases, it is computed using [`torch_linalg.svd`]. For these norms, the matrix
+#' In these cases, it is computed using [linalg_svd()]. For these norms, the matrix
 #' (or every matrix in the batch) `A` may have any shape.
 #' 
 #' @note When inputs are on a CUDA device, this function synchronizes that device with the CPU if
@@ -243,9 +243,9 @@ linalg_cond <- function(A, p=NULL) {
 #' If `tol` is not specified and `A` is a matrix of dimensions `(m, n)`,
 #' the tolerance is set to be
 #' 
-#' \deqn{
-#' \mbox{tol} = \sigma_1 \max(m, n) \varepsilon
-#' }
+#' \Sexpr[results=rd, stage=build]{katex::math_to_rd(r"{
+#' tol = \sigma_1 \max(m, n) \varepsilon
+#' }")}
 #'   
 #' where \eqn{\sigma_1} is the largest singular value
 #' (or eigenvalue in absolute value when `hermitian = TRUE`), and
@@ -285,11 +285,12 @@ linalg_matrix_rank <- function(A, tol=NULL, hermitian=FALSE) {
 #' the **Cholesky decomposition** of a complex Hermitian or real symmetric positive-definite matrix
 #' \eqn{A \in \mathbb{K}^{n \times n}} is defined as
 #' 
-#' \deqn{
-#' A = LL^{\mbox{H}}\mathrlap{\qquad L \in \mathbb{K}^{n \times n}}
-#' }
+#' \Sexpr[results=rd, stage=build]{katex::math_to_rd(r"{
+#' A = LL^{H}\mathrlap{\qquad L \in \mathbb{K}^{n \times n}}
+#' }")}
+#' 
 #' where \eqn{L} is a lower triangular matrix and
-#' \eqn{L^{\mbox{H}}} is the conjugate transpose when \eqn{L} is complex, and the
+#' \eqn{L^{H}} is the conjugate transpose when \eqn{L} is complex, and the
 #' transpose when \eqn{L} is real-valued.
 #' 
 #' Supports input of float, double, cfloat and cdouble dtypes.
@@ -324,18 +325,18 @@ linalg_cholesky <- function(A) {
 #' the **full QR decomposition** of a matrix
 #' \eqn{A \in \mathbb{K}^{m \times n}} is defined as
 #' 
-#' \deqn{
+#' \Sexpr[results=rd, stage=build]{katex::math_to_rd(r"{
 #'   A = QR\mathrlap{\qquad Q \in \mathbb{K}^{m \times m}, R \in \mathbb{K}^{m \times n}}
-#' }
+#' }")}
 #' 
 #' where \eqn{Q} is orthogonal in the real case and unitary in the complex case, and \eqn{R} is upper triangular.
 #' When `m > n` (tall matrix), as `R` is upper triangular, its last `m - n` rows are zero.
 #' In this case, we can drop the last `m - n` columns of `Q` to form the
 #' **reduced QR decomposition**:
 #'
-#' \deqn{
+#' \Sexpr[results=rd, stage=build]{katex::math_to_rd(r"{
 #'   A = QR\mathrlap{\qquad Q \in \mathbb{K}^{m \times n}, R \in \mathbb{K}^{n \times n}}
-#' }
+#' }")}
 #' 
 #' The reduced QR decomposition agrees with the full QR decomposition when `n >= m` (wide matrix).
 #' Supports input of float, double, cfloat and cdouble dtypes.
@@ -473,10 +474,10 @@ linalg_eigvals <- function(A) {
 #' \eqn{A \in \mathbb{K}^{n \times n}} is defined as
 #' 
 #' \Sexpr[results=rd, stage=build]{katex::math_to_rd(r"{
-#'   A = Q \operatorname{diag}(\Lambda) Q^{\mbox{H}}\mathrlap{\qquad Q \in \mathbb{K}^{n \times n}, \Lambda \in \mathbb{R}^n}
+#'   A = Q \operatorname{diag}(\Lambda) Q^{H}\mathrlap{\qquad Q \in \mathbb{K}^{n \times n}, \Lambda \in \mathbb{R}^n}
 #' }")}
 #' 
-#' where \eqn{Q^{\mbox{H}}} is the conjugate transpose when \eqn{Q} is complex, and the transpose when \eqn{Q} is real-valued.
+#' where \eqn{Q^{H}} is the conjugate transpose when \eqn{Q} is complex, and the transpose when \eqn{Q} is real-valued.
 #' \eqn{Q} is orthogonal in the real case and unitary in the complex case.
 #' 
 #' Supports input of float, double, cfloat and cdouble dtypes.
@@ -550,9 +551,9 @@ linalg_eigh <- function(A, UPLO='L') {
 #' the **eigenvalues** of a complex Hermitian or real symmetric  matrix \eqn{A \in \mathbb{K}^{n \times n}}
 #' are defined as the roots (counted with multiplicity) of the polynomial `p` of degree `n` given by
 #' 
-#' \deqn{
+#' \Sexpr[results=rd, stage=build]{katex::math_to_rd(r"{
 #'   p(\lambda) = \operatorname{det}(A - \lambda \mathrm{I}_n)\mathrlap{\qquad \lambda \in \mathbb{R}}
-#' }
+#' }")}
 #' 
 #' where \eqn{\mathrm{I}_n} is the `n`-dimensional identity matrix.
 #' 
@@ -595,22 +596,20 @@ linalg_eigvalsh <- function(A, UPLO='L') {
 #' the **full SVD** of a matrix
 #' \eqn{A \in \mathbb{K}^{m \times n}}, if `k = min(m,n)`, is defined as
 #' 
-#' \deqn{
-#'   A = U \operatorname{diag}(S) V^{\mbox{H}}
-#' }
+#' \Sexpr[results=rd, stage=build]{katex::math_to_rd(r"{
+#'   A = U \operatorname{diag}(S) V^{H} \mathrlap{\qquad U \in \mathbb{K}^{m \times m}, S \in \mathbb{R}^k, V \in \mathbb{K}^{n \times n}}
+#' }")}
 #' 
-#' \mathrlap{\qquad U \in \mathbb{K}^{m \times m}, S \in \mathbb{R}^k, V \in \mathbb{K}^{n \times n}}
 #' where \eqn{\operatorname{diag}(S) \in \mathbb{K}^{m \times n}},
-#' \eqn{V^{\mbox{H}}} is the conjugate transpose when \eqn{V} is complex, and the transpose when \eqn{V} is real-valued.
+#' \eqn{V^{H}} is the conjugate transpose when \eqn{V} is complex, and the transpose when \eqn{V} is real-valued.
 #' 
-#' The matrices  \eqn{U}, \eqn{V} (and thus \eqn{V^{\mbox{H}}}) are orthogonal in the real case, and unitary in the complex case.
+#' The matrices  \eqn{U}, \eqn{V} (and thus \eqn{V^{H}}) are orthogonal in the real case, and unitary in the complex case.
 #' When `m > n` (resp. `m < n`) we can drop the last `m - n` (resp. `n - m`) columns of `U` (resp. `V`) to form the **reduced SVD**:
 #'
-#' \deqn{
-#'   A = U \operatorname{diag}(S) V^{\mbox{H}}
-#' }
+#' \Sexpr[results=rd, stage=build]{katex::math_to_rd(r"{
+#'   A = U \operatorname{diag}(S) V^{H} \mathrlap{\qquad U \in \mathbb{K}^{m \times k}, S \in \mathbb{R}^k, V \in \mathbb{K}^{k \times n}}
+#' }")}
 #' 
-#' \mathrlap{\qquad U \in \mathbb{K}^{m \times k}, S \in \mathbb{R}^k, V \in \mathbb{K}^{k \times n}}
 #' where \eqn{\operatorname{diag}(S) \in \mathbb{K}^{k \times k}}.
 #' 
 #' In this case, \eqn{U} and \eqn{V} also have orthonormal columns.
@@ -620,7 +619,7 @@ linalg_eigvalsh <- function(A, UPLO='L') {
 #' the output has the same batch dimensions.
 #' 
 #' The returned decomposition is a named tuple `(U, S, Vᴴ)`
-#' which corresponds to \eqn{U}, \eqn{S}, \eqn{V^{\mbox{H}}} above.
+#' which corresponds to \eqn{U}, \eqn{S}, \eqn{V^{H}} above.
 #' 
 #' The singular values are returned in descending order.
 #' The parameter `full_matrices` chooses between the full (default) and reduced SVD.
@@ -668,7 +667,7 @@ linalg_eigvalsh <- function(A, UPLO='L') {
 #'        SVD, and consequently, the shape of the returned tensors `U` and `Vᴴ`. Default: `TRUE`.
 #' 
 #' @returns
-#' A list `(U, S, V)` which corresponds to \eqn{U}, \eqn{S}, \eqn{V^{\mbox{H}}} above.
+#' A list `(U, S, V)` which corresponds to \eqn{U}, \eqn{S}, \eqn{V^{H}} above.
 #' `S` will always be real-valued, even when `A` is complex.
 #' It will also be ordered in descending order.
 #' `U` and `Vᴴ` will have the same dtype as `A`. The left / right singular vectors will be given by
@@ -764,9 +763,9 @@ linalg_solve <- function(A, B) {
 #' the **least squares problem** for a linear system \eqn{AX = B} with
 #' \eqn{A \in \mathbb{K}^{m \times n}, B \in \mathbb{K}^{m \times k}} is defined as
 #' 
-#' \deqn{
+#' \Sexpr[results=rd, stage=build]{katex::math_to_rd(r"{
 #'   \min_{X \in \mathbb{K}^{n \times k}} \|AX - B\|_F
-#' }
+#' }")}
 #' 
 #' where \eqn{\|-\|_F} denotes the Frobenius norm.
 #' Supports inputs of float, double, cfloat and cdouble dtypes.
@@ -791,7 +790,7 @@ linalg_solve <- function(A, B) {
 #' `rcond` is used to determine the effective rank of the matrices in `A`
 #' when `driver` is one of (`'gelsy'`, `'gelsd'`, `'gelss'`).
 #' In this case, if \eqn{\sigma_i} are the singular values of `A` in decreasing order,
-#' \eqn{\sigma_i} will be rounded down to zero if \eqn{\sigma_i \leq \mbox{rcond} \cdot \sigma_1}.
+#' \eqn{\sigma_i} will be rounded down to zero if \eqn{\sigma_i \leq rcond \cdot \sigma_1}.
 #' If `rcond = NULL` (default), `rcond` is set to the machine precision of the dtype of `A`.
 #' 
 #' This function returns the solution to the problem and some extra information in a list of
@@ -875,9 +874,10 @@ linalg_lstsq <- function(A, B, rcond = NULL, ..., driver = NULL) {
 #' Letting \eqn{\mathbb{K}} be \eqn{\mathbb{R}} or \eqn{\mathbb{C}},
 #' for a matrix \eqn{A \in \mathbb{K}^{n \times n}},
 #' its **inverse matrix** \eqn{A^{-1} \in \mathbb{K}^{n \times n}} (if it exists) is defined as
-#' \deqn{
+#' 
+#' \Sexpr[results=rd, stage=build]{katex::math_to_rd(r"{
 #'   A^{-1}A = AA^{-1} = \mathrm{I}_n
-#' }
+#' }")}
 #' where \eqn{\mathrm{I}_n} is the `n`-dimensional identity matrix.
 #' 
 #' The inverse matrix exists if and only if \eqn{A} is invertible. In this case,
@@ -886,7 +886,7 @@ linalg_lstsq <- function(A, B, rcond = NULL, ..., driver = NULL) {
 #' Also supports batches of matrices, and if `A` is a batch of matrices
 #' then the output has the same batch dimensions.
 #' 
-#' Consider using [linalg.solve()] if possible for multiplying a matrix on the left by
+#' Consider using [linalg_solve()] if possible for multiplying a matrix on the left by
 #' the inverse, as `linalg_solve(A, B) == A$inv() %*% B`
 #' It is always prefered to use [linalg_solve()] when possible, as it is faster and more
 #' numerically stable than computing the inverse explicitly.
@@ -948,7 +948,7 @@ linalg_inv <- function(A) {
 #'   broadcastable to that of the singular values of
 #'   `A` as returned by [linalg_svd()].
 #'   Default: `1e-15`.
-#' @param hermitian(bool, optional): indicates whether `A` is Hermitian if complex
+#' @param hermitian (bool, optional): indicates whether `A` is Hermitian if complex
 #'   or symmetric if real. Default: `FALSE`.
 #' 
 #' @examples
@@ -1015,16 +1015,17 @@ linalg_matrix_power <- function(A, n) {
 #' `(100, 5)`, `(5, 50)` respectively, we can calculate the cost of different
 #' multiplication orders as follows:
 #'
-#' \deqn{
+#' \Sexpr[results=rd, stage=build]{katex::math_to_rd(r"{
 #' \begin{align*}
 #' \operatorname{cost}((AB)C) &= 10 \times 100 \times 5 + 10 \times 5 \times 50 = 7500 \\
 #' \operatorname{cost}(A(BC)) &= 10 \times 100 \times 50 + 100 \times 5 \times 50 = 75000
 #' \end{align*}
-#' }
+#' }")}
+#' 
 #' In this case, multiplying `A` and `B` first followed by `C` is 10 times faster.
 #' 
 #' 
-#' @param tensors (Sequence[Tensor]): two or more tensors to multiply. The first and last
+#' @param tensors (`Sequence[Tensor]`): two or more tensors to multiply. The first and last
 #' tensors may be 1D or 2D. Every other tensor must be 2D.
 #' 
 #' @examples
@@ -1044,11 +1045,12 @@ linalg_multi_dot <- function(tensors) {
 #' with \eqn{m \geq n} and a vector \eqn{\tau \in \mathbb{K}^k} with \eqn{k \leq n},
 #' this function computes the first \eqn{n} columns of the matrix
 #' 
-#' \deqn{
-#' H_1H_2 ... H_k \qquad\mbox{with}\qquad H_i = \mathrm{I}_m - \tau_i v_i v_i^{\mbox{H}}
-#' }
+#' \Sexpr[results=rd, stage=build]{katex::math_to_rd(r"{
+#' H_1H_2 ... H_k \qquad with \qquad H_i = \mathrm{I}_m - \tau_i v_i v_i^{H}
+#' }")}
+#' 
 #' where \eqn{\mathrm{I}_m} is the `m`-dimensional identity matrix and
-#' \eqn{v^{\mbox{H}}} is the conjugate transpose when \eqn{v} is complex, and the transpose when \eqn{v} is real-valued.
+#' \eqn{v^{H}} is the conjugate transpose when \eqn{v} is complex, and the transpose when \eqn{v} is real-valued.
 #' See [Representation of Orthogonal or Unitary Matrices](https://www.netlib.org/lapack/lug/node128.html) for 
 #' further details.
 #' 
@@ -1231,6 +1233,7 @@ linalg_cholesky_ex <- function(A, check_errors = FALSE) {
 #' out <- linalg_inv_ex(A)
 #' 
 #' @family linalg
+#' @importFrom stats setNames
 #' @export
 linalg_inv_ex <- function(A, check_errors = FALSE) {
   setNames(
