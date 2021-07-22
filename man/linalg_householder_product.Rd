@@ -19,7 +19,7 @@ this function computes the first \eqn{n} columns of the matrix
 }
 \details{
 \Sexpr[results=rd, stage=build]{katex::math_to_rd("
-H_1H_2 ... H_k \\qquad with \\qquad H_i = \\mathrm{I}_m - \\tau_i v_i v_i^{H}
+H_1H_2 ... H_k \\\\qquad with \\\\qquad H_i = \\\\mathrm{I}_m - \\\\tau_i v_i v_i^{H}
 ")}
 
 where \eqn{\mathrm{I}_m} is the \code{m}-dimensional identity matrix and

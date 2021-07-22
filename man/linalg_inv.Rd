@@ -19,7 +19,7 @@ for a matrix \eqn{A \in \mathbb{K}^{n \times n}},
 its \strong{inverse matrix} \eqn{A^{-1} \in \mathbb{K}^{n \times n}} (if it exists) is defined as
 
 \Sexpr[results=rd, stage=build]{katex::math_to_rd("
-A^{-1}A = AA^{-1} = \\mathrm{I}_n
+A^{-1}A = AA^{-1} = \\\\mathrm{I}_n
 ")}
 where \eqn{\mathrm{I}_n} is the \code{n}-dimensional identity matrix.
 

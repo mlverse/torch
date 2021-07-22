@@ -22,7 +22,7 @@ the \strong{eigenvalue decomposition} of a square matrix
 }
 \details{
 \Sexpr[results=rd, stage=build]{katex::math_to_rd("
-A = V \\operatorname{diag}(\\Lambda) V^{-1}\\mathrlap{\\qquad V \\in \\mathbb{C}^{n \\times n}, \\Lambda \\in \\mathbb{C}^n}
+A = V \\\\operatorname{diag}(\\\\Lambda) V^{-1}\\\\mathrlap{\\\\qquad V \\\\in \\\\mathbb{C}^{n \\\\times n}, \\\\Lambda \\\\in \\\\mathbb{C}^n}
 ")}
 
 This decomposition exists if and only if \eqn{A} is \code{diagonalizable}_.

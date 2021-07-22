@@ -34,7 +34,7 @@ If \code{tol} is not specified and \code{A} is a matrix of dimensions \verb{(m, 
 the tolerance is set to be
 
 \Sexpr[results=rd, stage=build]{katex::math_to_rd("
-tol = \\sigma_1 \\max(m, n) \\varepsilon
+tol = \\\\sigma_1 \\\\max(m, n) \\\\varepsilon
 ")}
 
 where \eqn{\sigma_1} is the largest singular value

@@ -36,10 +36,10 @@ The cost of multiplying two matrices with shapes \verb{(a, b)} and \verb{(b, c)}
 multiplication orders as follows:
 
 \Sexpr[results=rd, stage=build]{katex::math_to_rd("
-\\begin{align*}
-\\operatorname{cost}((AB)C) &= 10 \\times 100 \\times 5 + 10 \\times 5 \\times 50 = 7500 \\
-\\operatorname{cost}(A(BC)) &= 10 \\times 100 \\times 50 + 100 \\times 5 \\times 50 = 75000
-\\end{align*}
+\\\\begin{align*}
+\\\\operatorname{cost}((AB)C) &= 10 \\\\times 100 \\\\times 5 + 10 \\\\times 5 \\\\times 50 = 7500 \\\\
+\\\\operatorname{cost}(A(BC)) &= 10 \\\\times 100 \\\\times 50 + 100 \\\\times 5 \\\\times 50 = 75000
+\\\\end{align*}
 ")}
 
 In this case, multiplying \code{A} and \code{B} first followed by \code{C} is 10 times faster.

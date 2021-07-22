@@ -31,7 +31,7 @@ the \strong{least squares problem} for a linear system \eqn{AX = B} with
 }
 \details{
 \Sexpr[results=rd, stage=build]{katex::math_to_rd("
-\\min_{X \\in \\mathbb{K}^{n \\times k}} \\|AX - B\\|_F
+\\\\min_{X \\\\in \\\\mathbb{K}^{n \\\\times k}} \\\\|AX - B\\\\|_F
 ")}
 
 where \eqn{\|-\|_F} denotes the Frobenius norm.

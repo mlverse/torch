@@ -176,7 +176,7 @@ linalg_slogdet <- function(A) {
 #' the **condition number** \eqn{\kappa} of a matrix
 #' \eqn{A \in \mathbb{K}^{n \times n}} is defined as
 #' 
-#' \Sexpr[results=rd, stage=build]{katex::math_to_rd("\\kappa(A) = \\|A\\|_p\\|A^{-1}\\|_p")}
+#' \Sexpr[results=rd, stage=build]{katex::math_to_rd("\\\\kappa(A) = \\\\|A\\\\|_p\\\\|A^{-1}\\\\|_p")}
 #'   
 #' The condition number of `A` measures the numerical stability of the linear system `AX = B`
 #' with respect to a matrix norm.
@@ -197,7 +197,7 @@ linalg_slogdet <- function(A) {
 #' For `p` in `(2, -2)`, this function can be computed in terms of the singular values
 #' \eqn{\sigma_1 \geq \ldots \geq \sigma_n}
 #' 
-#' \Sexpr[results=rd, stage=build]{katex::math_to_rd("\\kappa_2(A) = \\frac{\\sigma_1}{\\sigma_n}\\qquad \\kappa_{-2}(A) = \\frac{\\sigma_n}{\\sigma_1}")}
+#' \Sexpr[results=rd, stage=build]{katex::math_to_rd("\\\\kappa_2(A) = \\\\frac{\\\\sigma_1}{\\\\sigma_n}\\\\qquad \\\\kappa_{-2}(A) = \\\\frac{\\\\sigma_n}{\\\\sigma_1}")}
 #'     
 #' In these cases, it is computed using [linalg_svd()]. For these norms, the matrix
 #' (or every matrix in the batch) `A` may have any shape.
@@ -244,7 +244,7 @@ linalg_cond <- function(A, p=NULL) {
 #' the tolerance is set to be
 #' 
 #' \Sexpr[results=rd, stage=build]{katex::math_to_rd("
-#' tol = \\sigma_1 \\max(m, n) \\varepsilon
+#' tol = \\\\sigma_1 \\\\max(m, n) \\\\varepsilon
 #' ")}
 #'   
 #' where \eqn{\sigma_1} is the largest singular value
@@ -286,7 +286,7 @@ linalg_matrix_rank <- function(A, tol=NULL, hermitian=FALSE) {
 #' \eqn{A \in \mathbb{K}^{n \times n}} is defined as
 #' 
 #' \Sexpr[results=rd, stage=build]{katex::math_to_rd("
-#' A = LL^{H}\\mathrlap{\\qquad L \\in \\mathbb{K}^{n \\times n}}
+#' A = LL^{H}\\\\mathrlap{\\\\qquad L \\\\in \\\\mathbb{K}^{n \\\\times n}}
 #' ")}
 #' 
 #' where \eqn{L} is a lower triangular matrix and
@@ -326,7 +326,7 @@ linalg_cholesky <- function(A) {
 #' \eqn{A \in \mathbb{K}^{m \times n}} is defined as
 #' 
 #' \Sexpr[results=rd, stage=build]{katex::math_to_rd("
-#'   A = QR\\mathrlap{\\qquad Q \\in \\mathbb{K}^{m \\times m}, R \\in \\mathbb{K}^{m \\times n}}
+#'   A = QR\\\\mathrlap{\\\\qquad Q \\\\in \\\\mathbb{K}^{m \\\\times m}, R \\\\in \\\\mathbb{K}^{m \\\\times n}}
 #' ")}
 #' 
 #' where \eqn{Q} is orthogonal in the real case and unitary in the complex case, and \eqn{R} is upper triangular.
@@ -335,7 +335,7 @@ linalg_cholesky <- function(A) {
 #' **reduced QR decomposition**:
 #'
 #' \Sexpr[results=rd, stage=build]{katex::math_to_rd("
-#'   A = QR\\mathrlap{\\qquad Q \\in \\mathbb{K}^{m \\times n}, R \\in \\mathbb{K}^{n \\times n}}
+#'   A = QR\\\\mathrlap{\\\\qquad Q \\\\in \\\\mathbb{K}^{m \\\\times n}, R \\\\in \\\\mathbb{K}^{n \\\\times n}}
 #' ")}
 #' 
 #' The reduced QR decomposition agrees with the full QR decomposition when `n >= m` (wide matrix).
@@ -376,7 +376,7 @@ linalg_qr <- function(A, mode='reduced') {
 #' \eqn{A \in \mathbb{K}^{n \times n}} (if it exists) is defined as
 #' 
 #' \Sexpr[results=rd, stage=build]{katex::math_to_rd("
-#'   A = V \\operatorname{diag}(\\Lambda) V^{-1}\\mathrlap{\\qquad V \\in \\mathbb{C}^{n \\times n}, \\Lambda \\in \\mathbb{C}^n}
+#'   A = V \\\\operatorname{diag}(\\\\Lambda) V^{-1}\\\\mathrlap{\\\\qquad V \\\\in \\\\mathbb{C}^{n \\\\times n}, \\\\Lambda \\\\in \\\\mathbb{C}^n}
 #' ")}
 #' 
 #' This decomposition exists if and only if \eqn{A} is `diagonalizable`_.
@@ -442,7 +442,7 @@ linalg_eig <- function(A) {
 #' as the roots (counted with multiplicity) of the polynomial `p` of degree `n` given by
 #' 
 #' \Sexpr[results=rd, stage=build]{katex::math_to_rd("
-#'   p(\\lambda) = \\operatorname{det}(A - \\lambda \\mathrm{I}_n)\\mathrlap{\\qquad \\lambda \\in \\mathbb{C}}
+#'   p(\\\\lambda) = \\\\operatorname{det}(A - \\\\lambda \\\\mathrm{I}_n)\\\\mathrlap{\\\\qquad \\\\lambda \\\\in \\\\mathbb{C}}
 #' ")}
 #' 
 #' where \eqn{\mathrm{I}_n} is the `n`-dimensional identity matrix.
@@ -474,7 +474,7 @@ linalg_eigvals <- function(A) {
 #' \eqn{A \in \mathbb{K}^{n \times n}} is defined as
 #' 
 #' \Sexpr[results=rd, stage=build]{katex::math_to_rd("
-#'   A = Q \\operatorname{diag}(\\Lambda) Q^{H}\\mathrlap{\\qquad Q \\in \\mathbb{K}^{n \\times n}, \\Lambda \\in \\mathbb{R}^n}
+#'   A = Q \\\\operatorname{diag}(\\\\Lambda) Q^{H}\\\\mathrlap{\\\\qquad Q \\\\in \\\\mathbb{K}^{n \\\\times n}, \\\\Lambda \\\\in \\\\mathbb{R}^n}
 #' ")}
 #' 
 #' where \eqn{Q^{H}} is the conjugate transpose when \eqn{Q} is complex, and the transpose when \eqn{Q} is real-valued.
@@ -552,7 +552,7 @@ linalg_eigh <- function(A, UPLO='L') {
 #' are defined as the roots (counted with multiplicity) of the polynomial `p` of degree `n` given by
 #' 
 #' \Sexpr[results=rd, stage=build]{katex::math_to_rd("
-#'   p(\\lambda) = \\operatorname{det}(A - \\lambda \\mathrm{I}_n)\\mathrlap{\\qquad \\lambda \\in \\mathbb{R}}
+#'   p(\\\\lambda) = \\\\operatorname{det}(A - \\\\lambda \\\\mathrm{I}_n)\\\\mathrlap{\\\\qquad \\\\lambda \\\\in \\\\mathbb{R}}
 #' ")}
 #' 
 #' where \eqn{\mathrm{I}_n} is the `n`-dimensional identity matrix.
@@ -597,7 +597,7 @@ linalg_eigvalsh <- function(A, UPLO='L') {
 #' \eqn{A \in \mathbb{K}^{m \times n}}, if `k = min(m,n)`, is defined as
 #' 
 #' \Sexpr[results=rd, stage=build]{katex::math_to_rd("
-#'   A = U \\operatorname{diag}(S) V^{H} \\mathrlap{\\qquad U \\in \\mathbb{K}^{m \\times m}, S \\in \\mathbb{R}^k, V \\in \\mathbb{K}^{n \\times n}}
+#'   A = U \\\\operatorname{diag}(S) V^{H} \\\\mathrlap{\\\\qquad U \\\\in \\\\mathbb{K}^{m \\\\times m}, S \\\\in \\\\mathbb{R}^k, V \\\\in \\\\mathbb{K}^{n \\\\times n}}
 #' ")}
 #' 
 #' where \eqn{\operatorname{diag}(S) \in \mathbb{K}^{m \times n}},
@@ -607,7 +607,7 @@ linalg_eigvalsh <- function(A, UPLO='L') {
 #' When `m > n` (resp. `m < n`) we can drop the last `m - n` (resp. `n - m`) columns of `U` (resp. `V`) to form the **reduced SVD**:
 #'
 #' \Sexpr[results=rd, stage=build]{katex::math_to_rd("
-#'   A = U \\operatorname{diag}(S) V^{H} \\mathrlap{\\qquad U \\in \\mathbb{K}^{m \\times k}, S \\in \\mathbb{R}^k, V \\in \\mathbb{K}^{k \\times n}}
+#'   A = U \\\\operatorname{diag}(S) V^{H} \\\\mathrlap{\\\\qquad U \\\\in \\\\mathbb{K}^{m \\\\times k}, S \\\\in \\\\mathbb{R}^k, V \\\\in \\\\mathbb{K}^{k \\\\times n}}
 #' ")}
 #' 
 #' where \eqn{\operatorname{diag}(S) \in \mathbb{K}^{k \times k}}.
@@ -764,7 +764,7 @@ linalg_solve <- function(A, B) {
 #' \eqn{A \in \mathbb{K}^{m \times n}, B \in \mathbb{K}^{m \times k}} is defined as
 #' 
 #' \Sexpr[results=rd, stage=build]{katex::math_to_rd("
-#'   \\min_{X \\in \\mathbb{K}^{n \\times k}} \\|AX - B\\|_F
+#'   \\\\min_{X \\\\in \\\\mathbb{K}^{n \\\\times k}} \\\\|AX - B\\\\|_F
 #' ")}
 #' 
 #' where \eqn{\|-\|_F} denotes the Frobenius norm.
@@ -876,7 +876,7 @@ linalg_lstsq <- function(A, B, rcond = NULL, ..., driver = NULL) {
 #' its **inverse matrix** \eqn{A^{-1} \in \mathbb{K}^{n \times n}} (if it exists) is defined as
 #' 
 #' \Sexpr[results=rd, stage=build]{katex::math_to_rd("
-#'   A^{-1}A = AA^{-1} = \\mathrm{I}_n
+#'   A^{-1}A = AA^{-1} = \\\\mathrm{I}_n
 #' ")}
 #' where \eqn{\mathrm{I}_n} is the `n`-dimensional identity matrix.
 #' 
@@ -1016,10 +1016,10 @@ linalg_matrix_power <- function(A, n) {
 #' multiplication orders as follows:
 #'
 #' \Sexpr[results=rd, stage=build]{katex::math_to_rd("
-#' \\begin{align*}
-#' \\operatorname{cost}((AB)C) &= 10 \\times 100 \\times 5 + 10 \\times 5 \\times 50 = 7500 \\
-#' \\operatorname{cost}(A(BC)) &= 10 \\times 100 \\times 50 + 100 \\times 5 \\times 50 = 75000
-#' \\end{align*}
+#' \\\\begin{align*}
+#' \\\\operatorname{cost}((AB)C) &= 10 \\\\times 100 \\\\times 5 + 10 \\\\times 5 \\\\times 50 = 7500 \\\\
+#' \\\\operatorname{cost}(A(BC)) &= 10 \\\\times 100 \\\\times 50 + 100 \\\\times 5 \\\\times 50 = 75000
+#' \\\\end{align*}
 #' ")}
 #' 
 #' In this case, multiplying `A` and `B` first followed by `C` is 10 times faster.
@@ -1046,7 +1046,7 @@ linalg_multi_dot <- function(tensors) {
 #' this function computes the first \eqn{n} columns of the matrix
 #' 
 #' \Sexpr[results=rd, stage=build]{katex::math_to_rd("
-#' H_1H_2 ... H_k \\qquad with \\qquad H_i = \\mathrm{I}_m - \\tau_i v_i v_i^{H}
+#' H_1H_2 ... H_k \\\\qquad with \\\\qquad H_i = \\\\mathrm{I}_m - \\\\tau_i v_i v_i^{H}
 #' ")}
 #' 
 #' where \eqn{\mathrm{I}_m} is the `m`-dimensional identity matrix and

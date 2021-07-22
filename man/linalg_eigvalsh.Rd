@@ -24,7 +24,7 @@ are defined as the roots (counted with multiplicity) of the polynomial \code{p} 
 }
 \details{
 \Sexpr[results=rd, stage=build]{katex::math_to_rd("
-p(\\lambda) = \\operatorname{det}(A - \\lambda \\mathrm{I}_n)\\mathrlap{\\qquad \\lambda \\in \\mathbb{R}}
+p(\\\\lambda) = \\\\operatorname{det}(A - \\\\lambda \\\\mathrm{I}_n)\\\\mathrlap{\\\\qquad \\\\lambda \\\\in \\\\mathbb{R}}
 ")}
 
 where \eqn{\mathrm{I}_n} is the \code{n}-dimensional identity matrix.

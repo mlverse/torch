@@ -26,7 +26,7 @@ the \strong{full SVD} of a matrix
 }
 \details{
 \Sexpr[results=rd, stage=build]{katex::math_to_rd("
-A = U \\operatorname{diag}(S) V^{H} \\mathrlap{\\qquad U \\in \\mathbb{K}^{m \\times m}, S \\in \\mathbb{R}^k, V \\in \\mathbb{K}^{n \\times n}}
+A = U \\\\operatorname{diag}(S) V^{H} \\\\mathrlap{\\\\qquad U \\\\in \\\\mathbb{K}^{m \\\\times m}, S \\\\in \\\\mathbb{R}^k, V \\\\in \\\\mathbb{K}^{n \\\\times n}}
 ")}
 
 where \eqn{\operatorname{diag}(S) \in \mathbb{K}^{m \times n}},
@@ -36,7 +36,7 @@ The matrices  \eqn{U}, \eqn{V} (and thus \eqn{V^{H}}) are orthogonal in the real
 When \code{m > n} (resp. \code{m < n}) we can drop the last \code{m - n} (resp. \code{n - m}) columns of \code{U} (resp. \code{V}) to form the \strong{reduced SVD}:
 
 \Sexpr[results=rd, stage=build]{katex::math_to_rd("
-A = U \\operatorname{diag}(S) V^{H} \\mathrlap{\\qquad U \\in \\mathbb{K}^{m \\times k}, S \\in \\mathbb{R}^k, V \\in \\mathbb{K}^{k \\times n}}
+A = U \\\\operatorname{diag}(S) V^{H} \\\\mathrlap{\\\\qquad U \\\\in \\\\mathbb{K}^{m \\\\times k}, S \\\\in \\\\mathbb{R}^k, V \\\\in \\\\mathbb{K}^{k \\\\times n}}
 ")}
 
 where \eqn{\operatorname{diag}(S) \in \mathbb{K}^{k \times k}}.

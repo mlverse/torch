@@ -16,7 +16,7 @@ as the roots (counted with multiplicity) of the polynomial \code{p} of degree \c
 }
 \details{
 \Sexpr[results=rd, stage=build]{katex::math_to_rd("
-p(\\lambda) = \\operatorname{det}(A - \\lambda \\mathrm{I}_n)\\mathrlap{\\qquad \\lambda \\in \\mathbb{C}}
+p(\\\\lambda) = \\\\operatorname{det}(A - \\\\lambda \\\\mathrm{I}_n)\\\\mathrlap{\\\\qquad \\\\lambda \\\\in \\\\mathbb{C}}
 ")}
 
 where \eqn{\mathrm{I}_n} is the \code{n}-dimensional identity matrix.

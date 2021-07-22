@@ -17,7 +17,7 @@ the \strong{Cholesky decomposition} of a complex Hermitian or real symmetric pos
 }
 \details{
 \Sexpr[results=rd, stage=build]{katex::math_to_rd("
-A = LL^{H}\\mathrlap{\\qquad L \\in \\mathbb{K}^{n \\times n}}
+A = LL^{H}\\\\mathrlap{\\\\qquad L \\\\in \\\\mathbb{K}^{n \\\\times n}}
 ")}
 
 where \eqn{L} is a lower triangular matrix and
