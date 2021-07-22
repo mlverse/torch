@@ -42,6 +42,12 @@ utils_data_default_convert <- function(data) {
     return(data)
   else if (is.list(data))
     return(lapply(data, utils_data_default_convert))
-  else
-    value_error("Can't convert data of class: '{class(data)}'")
+  else {
+    tryCatch({
+      return(torch_tensor(data))
+    }, 
+    error = function(e) {
+      value_error("Can't convert data of class: '{class(data)}'")  
+    })
+  }
 }
