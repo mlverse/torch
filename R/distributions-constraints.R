@@ -329,19 +329,7 @@ is_dependent <- function(object){
   inherit = Constraint,
   public = list(
     check = function(value) {
-      matrix_shape <- value$shape[-1]
-      batch_shape <- head2(value$unsqueeze(c(1))$shape, -2)
-      # TODO: replace with batched linear algebra routine when one becomes available
-      # note that `symeig()` returns eigenvalues in ascending order
-      flattened_value <- value$reshape(c(-1, matrix_shape))
-      
-      o <- torch_stack(
-        lapply(seq_len(flattened_value$shape[1]), function(v) {
-          flattened_value[v]$symeig(eigenvectors=FALSE)[[1]][1] > 0.0
-        })
-      )
-        
-      o$view(batch_shape)
+     linalg_cholesky_ex(value)$info$eq(0)$unsqueeze(1)
     }
   )
 )

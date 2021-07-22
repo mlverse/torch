@@ -33,6 +33,12 @@ std::string cpp_arg_to_torch_type (SEXP obj, const std::vector<std::string> expe
     return "Tensor";
   }
   
+  bool is_character = TYPEOF(obj) == STRSXP;
+  if (is_in("std::string", etypes) && is_character)
+  {
+    return "std::string";
+  }
+  
   if (is_in("Scalar", etypes) && (Rf_inherits(obj, "torch_scalar") || is_null))
   {
     return "Scalar"; 
@@ -81,7 +87,6 @@ std::string cpp_arg_to_torch_type (SEXP obj, const std::vector<std::string> expe
     return "Tensor";
   }
   
-  bool is_character = TYPEOF(obj) == STRSXP;
   if (e_dimname_list && is_character)
   {
     return "DimnameList";
@@ -118,10 +123,7 @@ std::string cpp_arg_to_torch_type (SEXP obj, const std::vector<std::string> expe
     return "bool";
   }
   
-  if (is_in("std::string", etypes) && is_character)
-  {
-    return "std::string";
-  }
+  
   
   if ((is_in("std::array<bool,4>", etypes) || is_in("std::array<bool,3>", etypes)
         || is_in("std::array<bool,2>", etypes)) && is_logical)

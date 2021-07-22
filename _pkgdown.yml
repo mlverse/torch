@@ -127,6 +127,9 @@ reference:
       - with_no_grad
       - with_enable_grad
       - AutogradContext
+  - title: Linear Algebra
+    contents:
+      - starts_with("linalg_")
   - title: Cuda utilities
     contents:
       - starts_with("cuda_")

@@ -7,6 +7,7 @@
 - Added `jit_trace` support for `nn_module` created from R. (#604)
 - Updated LibTorch to version 1.9.0 (#610)
 - Droped support for CUDA 10.1 (#610)
+- Added Linear Algebra functions (#612)
 
 # torch 0.4.0
 

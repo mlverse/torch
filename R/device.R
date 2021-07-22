@@ -91,3 +91,11 @@ is_torch_device <- function(x) {
   inherits(x, "torch_device")
 }
 
+is_cuda_device <- function(x) {
+  x$type == "cuda"
+}
+
+is_cpu_device <- function(x) {
+  x$type == "cpu"
+}
+
