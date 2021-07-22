@@ -64,7 +64,7 @@
   if (!is_torch_tensor(e1))
     e1 <- torch_tensor(e1, device = e2$device)
   
-  torch_floor_divide(e1, e2)
+  torch_div(e1, e2, rounding_mode = "trunc")
 }
 
 #' @export
