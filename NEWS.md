@@ -8,6 +8,7 @@
 - Updated LibTorch to version 1.9.0 (#610)
 - Droped support for CUDA 10.1 (#610)
 - Added Linear Algebra functions (#612)
+- Fixed a bug when using a `.getbatch` method that didn't return a `torch_tensor`. (#615)
 
 # torch 0.4.0
 
