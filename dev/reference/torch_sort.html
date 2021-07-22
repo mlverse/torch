@@ -189,7 +189,7 @@
     <p>Sort</p>
     </div>
 
-    <pre class="usage"><span class='fu'>torch_sort</span><span class='op'>(</span><span class='va'>self</span>, dim <span class='op'>=</span> <span class='op'>-</span><span class='fl'>1L</span>, descending <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>torch_sort</span><span class='op'>(</span><span class='va'>self</span>, dim <span class='op'>=</span> <span class='op'>-</span><span class='fl'>1L</span>, descending <span class='op'>=</span> <span class='cn'>FALSE</span>, <span class='va'>stable</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -205,6 +205,11 @@
     <tr>
       <th>descending</th>
       <td><p>(bool, optional) controls the sorting order (ascending or descending)</p></td>
+    </tr>
+    <tr>
+      <th>stable</th>
+      <td><p>(bool, optional) – makes the sorting routine stable, which guarantees
+that the order of equivalent elements is preserved.</p></td>
     </tr>
     </table>
 
@@ -233,16 +238,16 @@ sorted values and <code>indices</code> are the indices of the elements in the or
 <span class='op'>}</span>
 </div><div class='output co'>#&gt; [[1]]
 #&gt; torch_tensor
-#&gt; -0.4138 -0.4647 -1.0676  0.8779
-#&gt; -0.0891  0.2942  0.4909  1.1087
-#&gt;  1.1957  1.4620  1.8007  1.2603
+#&gt; -0.2322 -0.4844 -1.6556 -0.5293
+#&gt; -0.0926 -0.1894 -0.1064  0.4235
+#&gt; -0.0917 -0.1023  1.2190  1.2386
 #&gt; [ CPUFloatType{3,4} ]
 #&gt; 
 #&gt; [[2]]
 #&gt; torch_tensor
-#&gt;  2  1  2  2
-#&gt;  0  2  1  0
-#&gt;  1  0  0  1
+#&gt;  1  2  0  1
+#&gt;  0  1  2  2
+#&gt;  2  0  1  0
 #&gt; [ CPULongType{3,4} ]
 #&gt; </div></pre>
   </div>

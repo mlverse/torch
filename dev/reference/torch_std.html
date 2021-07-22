@@ -189,7 +189,7 @@
     <p>Std</p>
     </div>
 
-    <pre class="usage"><span class='fu'>torch_std</span><span class='op'>(</span><span class='va'>self</span>, <span class='va'>dim</span>, unbiased <span class='op'>=</span> <span class='cn'>TRUE</span>, keepdim <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>torch_std</span><span class='op'>(</span><span class='va'>self</span>, <span class='va'>dim</span>, <span class='va'>correction</span>, unbiased <span class='op'>=</span> <span class='cn'>TRUE</span>, keepdim <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -201,6 +201,10 @@
     <tr>
       <th>dim</th>
       <td><p>(int or tuple of ints) the dimension or dimensions to reduce.</p></td>
+    </tr>
+    <tr>
+      <th>correction</th>
+      <td><p>The type of correction.</p></td>
     </tr>
     <tr>
       <th>unbiased</th>
@@ -248,10 +252,10 @@ via the biased estimator. Otherwise, Bessel's correction will be used.</p>
 <span class='fu'>torch_std</span><span class='op'>(</span><span class='va'>a</span>, dim<span class='op'>=</span><span class='fl'>1</span><span class='op'>)</span>
 <span class='op'>}</span>
 </div><div class='output co'>#&gt; torch_tensor
-#&gt;  0.6676
-#&gt;  0.4146
-#&gt;  1.3961
-#&gt;  0.9745
+#&gt;  1.0060
+#&gt;  1.3011
+#&gt;  0.7424
+#&gt;  1.2975
 #&gt; [ CPUFloatType{4} ]</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
