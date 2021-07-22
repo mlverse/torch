@@ -53,7 +53,7 @@
 
 .precision_to_scale_tril <- function(P) {
   # Ref: https://nbviewer.jupyter.org/gist/fehiepsi/5ef8e09e61604f10607380467eb82006#Precision-to-scale_tril
-  Lf <- torch_cholesky(torch_flip(P, c(-2, -1)))
+  Lf <- linalg_cholesky(torch_flip(P, c(-2, -1)))
   L_inv <- torch_transpose(torch_flip(Lf, c(-2, -1)), -2, -1)
   torch_triangular_solve(torch_eye(head2(P$shape, -1), dtype = P$dtype, device=P$device),
                          L_inv, upper = FALSE)[[1]]
@@ -119,7 +119,7 @@ MultivariateNormal <- R6::R6Class(
       if (!is.null(scale_tril)) {
         self$.unbroadcasted_scale_tril <- scale_tril
       } else if (!is.null(covariance_matrix)) {
-        self$.unbroadcasted_scale_tril <- torch_cholesky(covariance_matrix)
+        self$.unbroadcasted_scale_tril <- linalg_cholesky(covariance_matrix)
       } else {
         self$.unbroadcasted_scale_tril <- .precision_to_scale_tril(precision_matrix)
       }
