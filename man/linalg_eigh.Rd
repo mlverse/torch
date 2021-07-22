@@ -26,9 +26,9 @@ the \strong{eigenvalue decomposition} of a complex Hermitian or real symmetric m
 \eqn{A \in \mathbb{K}^{n \times n}} is defined as
 }
 \details{
-\Sexpr[results=rd, stage=build]{katex::math_to_rd(r"{
-A = Q \operatorname{diag}(\Lambda) Q^{H}\mathrlap{\qquad Q \in \mathbb{K}^{n \times n}, \Lambda \in \mathbb{R}^n}
-}")}
+\Sexpr[results=rd, stage=build]{katex::math_to_rd("
+A = Q \\operatorname{diag}(\\Lambda) Q^{H}\\mathrlap{\\qquad Q \\in \\mathbb{K}^{n \\times n}, \\Lambda \\in \\mathbb{R}^n}
+")}
 
 where \eqn{Q^{H}} is the conjugate transpose when \eqn{Q} is complex, and the transpose when \eqn{Q} is real-valued.
 \eqn{Q} is orthogonal in the real case and unitary in the complex case.

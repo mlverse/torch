@@ -21,18 +21,18 @@ the \strong{full QR decomposition} of a matrix
 \eqn{A \in \mathbb{K}^{m \times n}} is defined as
 }
 \details{
-\Sexpr[results=rd, stage=build]{katex::math_to_rd(r"{
-A = QR\mathrlap{\qquad Q \in \mathbb{K}^{m \times m}, R \in \mathbb{K}^{m \times n}}
-}")}
+\Sexpr[results=rd, stage=build]{katex::math_to_rd("
+A = QR\\mathrlap{\\qquad Q \\in \\mathbb{K}^{m \\times m}, R \\in \\mathbb{K}^{m \\times n}}
+")}
 
 where \eqn{Q} is orthogonal in the real case and unitary in the complex case, and \eqn{R} is upper triangular.
 When \code{m > n} (tall matrix), as \code{R} is upper triangular, its last \code{m - n} rows are zero.
 In this case, we can drop the last \code{m - n} columns of \code{Q} to form the
 \strong{reduced QR decomposition}:
 
-\Sexpr[results=rd, stage=build]{katex::math_to_rd(r"{
-A = QR\mathrlap{\qquad Q \in \mathbb{K}^{m \times n}, R \in \mathbb{K}^{n \times n}}
-}")}
+\Sexpr[results=rd, stage=build]{katex::math_to_rd("
+A = QR\\mathrlap{\\qquad Q \\in \\mathbb{K}^{m \\times n}, R \\in \\mathbb{K}^{n \\times n}}
+")}
 
 The reduced QR decomposition agrees with the full QR decomposition when \code{n >= m} (wide matrix).
 Supports input of float, double, cfloat and cdouble dtypes.

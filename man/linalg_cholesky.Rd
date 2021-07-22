@@ -16,9 +16,9 @@ the \strong{Cholesky decomposition} of a complex Hermitian or real symmetric pos
 \eqn{A \in \mathbb{K}^{n \times n}} is defined as
 }
 \details{
-\Sexpr[results=rd, stage=build]{katex::math_to_rd(r"{
-A = LL^{H}\mathrlap{\qquad L \in \mathbb{K}^{n \times n}}
-}")}
+\Sexpr[results=rd, stage=build]{katex::math_to_rd("
+A = LL^{H}\\mathrlap{\\qquad L \\in \\mathbb{K}^{n \\times n}}
+")}
 
 where \eqn{L} is a lower triangular matrix and
 \eqn{L^{H}} is the conjugate transpose when \eqn{L} is complex, and the

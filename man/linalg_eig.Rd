@@ -21,9 +21,9 @@ the \strong{eigenvalue decomposition} of a square matrix
 \eqn{A \in \mathbb{K}^{n \times n}} (if it exists) is defined as
 }
 \details{
-\Sexpr[results=rd, stage=build]{katex::math_to_rd(r"{
-A = V \operatorname{diag}(\Lambda) V^{-1}\mathrlap{\qquad V \in \mathbb{C}^{n \times n}, \Lambda \in \mathbb{C}^n}
-}")}
+\Sexpr[results=rd, stage=build]{katex::math_to_rd("
+A = V \\operatorname{diag}(\\Lambda) V^{-1}\\mathrlap{\\qquad V \\in \\mathbb{C}^{n \\times n}, \\Lambda \\in \\mathbb{C}^n}
+")}
 
 This decomposition exists if and only if \eqn{A} is \code{diagonalizable}_.
 This is the case when all its eigenvalues are different.
