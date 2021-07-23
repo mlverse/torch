@@ -126,10 +126,15 @@ if(DEFINED ENV{CUDA})
   set(LANTERN_SRC 
       ${LANTERN_SRC} 
       src/AllocatorCuda.cpp
+      src/Contrib/SortVertices/sort_vert_kernel.cu
+      src/Contrib/SortVertices/sort_vert.cpp
   )
+
+  cuda_add_library(lantern SHARED ${LANTERN_SRC})
+else()
+  add_library(lantern SHARED ${LANTERN_SRC})
 endif()
 
-add_library(lantern SHARED ${LANTERN_SRC})
 add_library(lantern::library ALIAS lantern)
 
 target_include_directories(lantern PUBLIC
