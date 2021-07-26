@@ -141,6 +141,10 @@ cpp_contrib_torch_sparsemax <- function(input, dim) {
     .Call('_torch_cpp_contrib_torch_sparsemax', PACKAGE = 'torchpkg', input, dim)
 }
 
+cpp_contrib_torch_sort_vertices <- function(vertices, mask, num_valid) {
+    .Call('_torch_cpp_contrib_torch_sort_vertices', PACKAGE = 'torchpkg', vertices, mask, num_valid)
+}
+
 cpp_cuda_is_available <- function() {
     .Call('_torch_cpp_cuda_is_available', PACKAGE = 'torchpkg')
 }

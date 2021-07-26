@@ -410,6 +410,19 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// cpp_contrib_torch_sort_vertices
+XPtrTorchTensor cpp_contrib_torch_sort_vertices(XPtrTorchTensor vertices, XPtrTorchTensor mask, XPtrTorchTensor num_valid);
+RcppExport SEXP _torch_cpp_contrib_torch_sort_vertices(SEXP verticesSEXP, SEXP maskSEXP, SEXP num_validSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type vertices(verticesSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type mask(maskSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type num_valid(num_validSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_contrib_torch_sort_vertices(vertices, mask, num_valid));
+    return rcpp_result_gen;
+END_RCPP
+}
 // cpp_cuda_is_available
 bool cpp_cuda_is_available();
 RcppExport SEXP _torch_cpp_cuda_is_available() {
@@ -35107,6 +35120,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_torch_cpp_make_function_name", (DL_FUNC) &_torch_cpp_make_function_name, 4},
     {"_torch_create_fn_name", (DL_FUNC) &_torch_create_fn_name, 5},
     {"_torch_cpp_contrib_torch_sparsemax", (DL_FUNC) &_torch_cpp_contrib_torch_sparsemax, 2},
+    {"_torch_cpp_contrib_torch_sort_vertices", (DL_FUNC) &_torch_cpp_contrib_torch_sort_vertices, 3},
     {"_torch_cpp_cuda_is_available", (DL_FUNC) &_torch_cpp_cuda_is_available, 0},
     {"_torch_cpp_cuda_device_count", (DL_FUNC) &_torch_cpp_cuda_device_count, 0},
     {"_torch_cpp_cuda_current_device", (DL_FUNC) &_torch_cpp_cuda_current_device, 0},

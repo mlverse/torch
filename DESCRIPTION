@@ -60,6 +60,7 @@ Collate:
     'compat-purrr.R'
     'compilation_unit.R'
     'conditions.R'
+    'contrib.R'
     'creation-ops.R'
     'cuda.R'
     'device.R'
