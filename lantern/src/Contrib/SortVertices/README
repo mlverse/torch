@@ -1,4 +1,5 @@
-/*
+Files in this directory are vendored from https://github.com/lilanxiao/Rotated_IoU
+They are licensed under MIT:
 
 MIT License
 
@@ -21,10 +22,3 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
-
-*/
-
-#pragma once
-#define MAX_NUM_VERT_IDX 9
-
-at::Tensor sort_vertices(at::Tensor vertices, at::Tensor mask, at::Tensor num_valid);
