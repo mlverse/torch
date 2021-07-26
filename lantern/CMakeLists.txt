@@ -132,6 +132,10 @@ if(DEFINED ENV{CUDA})
 
   cuda_add_library(lantern SHARED ${LANTERN_SRC})
 else()
+  set(LANTERN_SRC 
+      ${LANTERN_SRC} 
+      src/Contrib/SortVertices/sort_vert_cpu.cpp
+  )
   add_library(lantern SHARED ${LANTERN_SRC})
 endif()
 
