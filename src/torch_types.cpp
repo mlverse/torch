@@ -34,10 +34,10 @@ XPtrTorchTensor::operator SEXP () const {
   // C++ object whenever this object gets out of scope.
   auto xptr = make_xptr<XPtrTorchTensor>(*this);
   xptr.attr("class") = Rcpp::CharacterVector::create("torch_tensor", "R7");
-  SEXP xptr_ = Rcpp::wrap(xptr);
+  SEXP xptr_ = PROTECT(Rcpp::wrap(xptr));
   R_RegisterCFinalizer(xptr_, tensor_finalizer);
-  
   lantern_tensor_set_pyobj(this->get(), (void*) xptr_);
+  UNPROTECT(1);
   return xptr_; 
 }
 
