@@ -229,12 +229,17 @@ create_script_module <- function(mod) {
     module$register_module(name, create_script_module(child))
   })
   
-  constants <- names(mod)[!names(mod) %in% module_ignored_names]
-  walk(constants, function(name) {
-    if (rlang::is_closure(mod[[name]])) return()
-    # TODO catch invalid types and raise a warning listing their names.
-    module$add_constant(name, mod[[name]])  
-  })
+  
+  # Let's not keep the constants in the module right now as it might cause more
+  # problems than benefits. In pytorch they are only added if their name is in 
+  # `__constants__` and we are using `torch.jit.script`, not `torch.jit.trace`.
+  
+  # constants <- names(mod)[!names(mod) %in% module_ignored_names]
+  # walk(constants, function(name) {
+  #   if (rlang::is_closure(mod[[name]])) return()
+  #   # TODO catch invalid types and raise a warning listing their names.
+  #   module$add_constant(name, mod[[name]])  
+  # })
   
   module
 }

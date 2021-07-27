@@ -242,8 +242,6 @@ test_that("trace a nn module", {
     regexp = NA
   )
   
-  expect_equal(m$constant, 1)
-  expect_equal(m$hello, list(torch_tensor(1), torch_tensor(2), "hello"))
   expect_length(m$parameters, 5)
   expect_length(m$buffers, 4)
   expect_length(m$modules, 3)
@@ -308,8 +306,6 @@ test_that("we can save traced modules", {
   
   m <- jit_load("tracedmodule.pt")
   
-  expect_equal(m$constant, 1)
-  expect_equal(m$hello, list(torch_tensor(1), torch_tensor(2), "hello"))
   expect_length(m$parameters, 5)
   expect_length(m$buffers, 4)
   expect_length(m$modules, 3)
