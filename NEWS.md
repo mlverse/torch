@@ -10,6 +10,7 @@
 - Added Linear Algebra functions (#612)
 - Fixed a bug when using a `.getbatch` method that didn't return a `torch_tensor`. (#615)
 - Fixed warning when using `%/%` caused by a call to deprecated `torch_floor_divide` (#616)
+- Added `contrib_sort_vertices` to efficiently sort vertices on CUDA. (#619)
 
 # torch 0.4.0
 
