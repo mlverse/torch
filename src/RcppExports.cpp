@@ -6,6 +6,11 @@
 
 using namespace Rcpp;
 
+#ifdef RCPP_USE_GLOBAL_ROSTREAM
+Rcpp::Rostream<true>&  Rcpp::Rcout = Rcpp::Rcpp_cout_get();
+Rcpp::Rostream<false>& Rcpp::Rcerr = Rcpp::Rcpp_cerr_get();
+#endif
+
 // cpp_set_lantern_allocator
 void cpp_set_lantern_allocator(uint64_t threshold_call_gc);
 RcppExport SEXP _torch_cpp_set_lantern_allocator(SEXP threshold_call_gcSEXP) {

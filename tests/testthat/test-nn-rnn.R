@@ -300,3 +300,14 @@ test_that("lstm and gru works with packed sequences", {
   expect_tensor_shape(unpack[[1]], c(4, 3, 4))
   
 })
+
+test_that("gru can be traced", {
+  x <- nn_gru(10, 10)
+  tr <- jit_trace(x, torch_randn(10, 10, 10))
+  
+  v <- torch_randn(10, 10, 10)
+  expect_equal_to_tensor(
+    x(v)[[1]],
+    tr(v)[[1]]
+  )
+})
