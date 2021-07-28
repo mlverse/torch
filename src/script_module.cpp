@@ -94,6 +94,12 @@ XPtrTorchStack cpp_jit_script_method_call (XPtrTorchScriptMethod self, XPtrTorch
 }
 
 // [[Rcpp::export]]
+SEXP cpp_jit_script_method_graph_print (XPtrTorchScriptMethod self)
+{
+  return XPtrTorchstring(lantern_ScriptMethod_graph_print(self.get()));
+}
+
+// [[Rcpp::export]]
 XPtrTorchScriptModule cpp_jit_script_module_new (XPtrTorchCompilationUnit cu, XPtrTorchstring name)
 {
   return XPtrTorchScriptModule(lantern_ScriptModule_new(cu.get(), name.get()));

@@ -34493,6 +34493,17 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// cpp_jit_script_method_graph_print
+SEXP cpp_jit_script_method_graph_print(XPtrTorchScriptMethod self);
+RcppExport SEXP _torch_cpp_jit_script_method_graph_print(SEXP selfSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchScriptMethod >::type self(selfSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_jit_script_method_graph_print(self));
+    return rcpp_result_gen;
+END_RCPP
+}
 // cpp_jit_script_module_new
 XPtrTorchScriptModule cpp_jit_script_module_new(XPtrTorchCompilationUnit cu, XPtrTorchstring name);
 RcppExport SEXP _torch_cpp_jit_script_module_new(SEXP cuSEXP, SEXP nameSEXP) {
@@ -37728,6 +37739,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_torch_cpp_jit_script_module_children", (DL_FUNC) &_torch_cpp_jit_script_module_children, 1},
     {"_torch_cpp_jit_script_module_find_method", (DL_FUNC) &_torch_cpp_jit_script_module_find_method, 2},
     {"_torch_cpp_jit_script_method_call", (DL_FUNC) &_torch_cpp_jit_script_method_call, 2},
+    {"_torch_cpp_jit_script_method_graph_print", (DL_FUNC) &_torch_cpp_jit_script_method_graph_print, 1},
     {"_torch_cpp_jit_script_module_new", (DL_FUNC) &_torch_cpp_jit_script_module_new, 2},
     {"_torch_cpp_jit_script_module_add_constant", (DL_FUNC) &_torch_cpp_jit_script_module_add_constant, 3},
     {"_torch_cpp_jit_script_module_add_method", (DL_FUNC) &_torch_cpp_jit_script_module_add_method, 2},
