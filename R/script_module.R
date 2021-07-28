@@ -136,6 +136,11 @@ nn_ScriptModule <- R6::R6Class(
     find_method = function(name) {
       private$ptr$find_method(name)
     }
+  ),
+  active = list(
+    graph = function() {
+      self$forward$graph
+    }
   )
 )
 
@@ -179,6 +184,11 @@ ScriptMethod <- R7Class(
     print = function() {
       cat("<script_method>\n")
     }
+  ),
+  active = list(
+    graph = function() {
+      structure(list(ptr = self), class = "script_method_graph")
+    }
   )
 )
 
@@ -195,8 +205,23 @@ new_script_method <- function(ptr) {
 }
 
 #' @export
+`[[.script_method` <- function(x, y) {
+  attr(x, "method")[[y]]
+}
+
+#' @export
+`$.script_method` <- function(x, y) {
+  x[[y]]
+}
+
+#' @export
 print.script_method <- function(x, ...) {
   cat("<script_method>\n")
+}
+
+#' @export
+print.script_method_graph <- function(x, ...) {
+  cat(cpp_jit_script_method_graph_print(x$ptr))
 }
 
 

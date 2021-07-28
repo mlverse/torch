@@ -1885,6 +1885,14 @@ HOST_API void* lantern_contrib_sort_vertices(void* vertices, void* mask, void* n
   return ret;
 }
 
+LANTERN_API void* (LANTERN_PTR _lantern_ScriptMethod_graph_print) (void* self);
+HOST_API void* lantern_ScriptMethod_graph_print (void* self)
+{
+  void* ret = _lantern_ScriptMethod_graph_print(self);
+  LANTERN_HOST_HANDLER;
+  return ret;
+}
+
   /* Autogen Headers -- Start */
   LANTERN_API void* (LANTERN_PTR _lantern__cast_byte_tensor_bool)(void* self, void* non_blocking);
   HOST_API void* lantern__cast_byte_tensor_bool(void* self, void* non_blocking) { void* ret = _lantern__cast_byte_tensor_bool(self, non_blocking); LANTERN_HOST_HANDLER return ret; }
@@ -7458,6 +7466,7 @@ LOAD_SYMBOL(_lantern_vector_Scalar_size);
 LOAD_SYMBOL(_lantern_vector_Scalar_at);
 LOAD_SYMBOL(_lantern_vector_Scalar_delete);
 LOAD_SYMBOL(_lantern_contrib_sort_vertices);
+LOAD_SYMBOL(_lantern_ScriptMethod_graph_print);
   /* Autogen Symbols -- Start */
   LOAD_SYMBOL(_lantern__cast_byte_tensor_bool)
   LOAD_SYMBOL(_lantern__cast_char_tensor_bool)

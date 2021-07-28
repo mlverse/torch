@@ -214,3 +214,12 @@ void _lantern_ScriptModule_save (void* self, void* path)
     self_->save(path_);
     LANTERN_FUNCTION_END_VOID
 }
+
+void* _lantern_ScriptMethod_graph_print (void* self)
+{
+    LANTERN_FUNCTION_START
+    auto self_ = reinterpret_cast<torch::jit::script::Method *>(self);
+    std::string str = self_->graph()->toString();
+    return (void*) new std::string(str);
+    LANTERN_FUNCTION_END
+}

@@ -10553,6 +10553,10 @@ cpp_jit_script_method_call <- function(self, inputs) {
     .Call('_torch_cpp_jit_script_method_call', PACKAGE = 'torchpkg', self, inputs)
 }
 
+cpp_jit_script_method_graph_print <- function(self) {
+    .Call('_torch_cpp_jit_script_method_graph_print', PACKAGE = 'torchpkg', self)
+}
+
 cpp_jit_script_module_new <- function(cu, name) {
     .Call('_torch_cpp_jit_script_module_new', PACKAGE = 'torchpkg', cu, name)
 }
