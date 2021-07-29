@@ -325,6 +325,12 @@ MultiProcessingDataLoaderIter <- R6::R6Class(
         not_implemented_error()
       }
       
+      # we call gc here because on Windows it seems that R is not aware of the
+      # memory allocated by the subsessions, so it doesn't automatically call GC.
+      # We can endup with too many worker sessions if calling dataloader in a 
+      # loop. See https://github.com/mlverse/torch/issues/622 for more info.
+      gc() 
+      
       # initialize all the worker sections
       # using callr
       private$workers <- list()
