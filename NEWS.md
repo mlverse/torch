@@ -12,6 +12,7 @@
 - Fixed warning when using `%/%` caused by a call to deprecated `torch_floor_divide` (#616)
 - Added `contrib_sort_vertices` to efficiently sort vertices on CUDA. (#619)
 - Allows querying the graph from traced modules. (#623)
+- A warning is raised when an incompatible dataset is passed to a parallel dataloader. (#626)
 
 # torch 0.4.0
 
