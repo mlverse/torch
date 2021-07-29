@@ -456,3 +456,42 @@ test_that("a value error is returned when its not possible to convert", {
   )
   
 })
+
+
+test_that("warning tensor", {
+  
+  
+  dt <- dataset(
+    initialize = function() {
+      self$x <- torch_randn(100, 100)
+      private$k <- torch_randn(10, 10)
+      self$z <- list(
+        k = torch_tensor(1),
+        torch_tensor(2)
+      )
+    },
+    .getitem = function(i) {
+      torch_randn(1,1)
+    },
+    .length = function() {
+      100
+    },
+    active = list(
+      y = function() {
+        torch_randn(1)
+      }
+    ),
+    private = list(
+      k = 1
+    )
+  )
+  
+  
+  dt <- dt()
+  expect_warning(
+    x <- dataloader(dt, batch_size = 2, num_workers=  10),
+    regexp = "parallel dataloader"
+  )
+  
+    
+})
