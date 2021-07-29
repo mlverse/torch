@@ -521,7 +521,7 @@ walk_r6_instance_fields <- function(instance, func) {
   
   # find active fields - those should not be checked if they are tensors or
   # not.
-  active <- dt$.__enclos_env__$.__active__
+  active <- instance$.__enclos_env__$.__active__
   
   nms <- rlang::env_names(instance)
   nms <- nms[!nms %in% active]
