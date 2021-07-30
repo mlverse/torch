@@ -6,6 +6,9 @@
 \usage{
 with_detect_anomaly(code)
 }
+\arguments{
+\item{code}{Cod that will be execued in the detect anomaly context.}
+}
 \description{
 This does two things:
 \itemize{
@@ -15,11 +18,12 @@ backward function.
 \item Any backward computation that generate "nan" value will raise an error.
 }
 }
-\details{
-.@section Warning:
+\section{Warning}{
+
 This mode should be enabled only for debugging as the different tests
 will slow down your program execution.
 }
+
 \examples{
 if (torch_is_installed()) {
 x <- torch_randn(2, requires_grad = TRUE)

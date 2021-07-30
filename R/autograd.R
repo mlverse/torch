@@ -10,9 +10,11 @@ NULL
 #' backward function.
 #' - Any backward computation that generate "nan" value will raise an error.
 #' 
-#' .@section Warning:
+#' @section Warning:
 #' This mode should be enabled only for debugging as the different tests
 #' will slow down your program execution.
+#' 
+#' @param code Cod that will be execued in the detect anomaly context.
 #' 
 #' @examples
 #' x <- torch_randn(2, requires_grad = TRUE)
