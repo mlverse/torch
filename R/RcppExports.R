@@ -13,6 +13,14 @@ cpp_autograd_is_enabled <- function() {
     .Call('_torch_cpp_autograd_is_enabled', PACKAGE = 'torchpkg')
 }
 
+cpp_autograd_set_detect_anomaly <- function(enabled) {
+    invisible(.Call('_torch_cpp_autograd_set_detect_anomaly', PACKAGE = 'torchpkg', enabled))
+}
+
+cpp_autograd_detect_anomaly_is_enabled <- function() {
+    .Call('_torch_cpp_autograd_detect_anomaly_is_enabled', PACKAGE = 'torchpkg')
+}
+
 cpp_tensor_grad <- function(self) {
     .Call('_torch_cpp_tensor_grad', PACKAGE = 'torchpkg', self)
 }

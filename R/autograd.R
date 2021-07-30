@@ -1,6 +1,51 @@
 #' @include tensor.R
 NULL
 
+#' Context-manager that enable anomaly detection for the autograd engine.
+#' 
+#' This does two things:
+#'   
+#' - Running the forward pass with detection enabled will allow the backward
+#' pass to print the traceback of the forward operation that created the failing
+#' backward function.
+#' - Any backward computation that generate "nan" value will raise an error.
+#' 
+#' @section Warning:
+#' This mode should be enabled only for debugging as the different tests
+#' will slow down your program execution.
+#' 
+#' @param code Cod that will be execued in the detect anomaly context.
+#' 
+#' @examples
+#' x <- torch_randn(2, requires_grad = TRUE)
+#' y <- torch_randn(1)
+#' b <- (x^y)$sum()
+#' y$add_(1)
+#' 
+#' try({
+#' 
+#' b$backward()
+#' 
+#' with_detect_anomaly({
+#'   b$backward()
+#' })
+#' 
+#' })
+#' 
+#' @export
+with_detect_anomaly <- function(code) {
+  warn("This mode should be enabled only for debugging as the different tests will slow down your program execution.")
+  current_mode <- cpp_autograd_detect_anomaly_is_enabled()
+  withr::with_(
+    set = function() {
+      cpp_autograd_set_detect_anomaly(TRUE)
+    },
+    reset = function(old) {
+      cpp_autograd_set_detect_anomaly(current_mode)
+    }
+  )(code)
+}
+
 #' Temporarily modify gradient recording.
 #'
 #' @param code code to be executed with no gradient recording.

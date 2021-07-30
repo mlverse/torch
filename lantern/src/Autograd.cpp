@@ -17,6 +17,20 @@ void _lantern_autograd_set_grad_mode(bool enabled)
     LANTERN_FUNCTION_END_VOID
 }
 
+void _lantern_autograd_set_detect_anomaly (bool enabled)
+{
+    LANTERN_FUNCTION_START
+    torch::autograd::AnomalyMode::set_enabled(enabled);
+    LANTERN_FUNCTION_END_VOID
+}
+
+bool _lantern_autograd_detect_anomaly_is_enabled ()
+{
+    LANTERN_FUNCTION_START
+    return torch::autograd::AnomalyMode::is_enabled();
+    LANTERN_FUNCTION_END
+}
+
 bool _lantern_autograd_is_enabled ()
 {
     LANTERN_FUNCTION_START
