@@ -1893,6 +1893,22 @@ HOST_API void* lantern_ScriptMethod_graph_print (void* self)
   return ret;
 }
 
+LANTERN_API void (LANTERN_PTR _lantern_autograd_set_detect_anomaly) (bool enabled);
+HOST_API void lantern_autograd_set_detect_anomaly (bool enabled)
+{
+   _lantern_autograd_set_detect_anomaly(enabled);
+  LANTERN_HOST_HANDLER;
+  
+}
+
+LANTERN_API bool (LANTERN_PTR _lantern_autograd_detect_anomaly_is_enabled) ();
+HOST_API bool lantern_autograd_detect_anomaly_is_enabled ()
+{
+  bool ret = _lantern_autograd_detect_anomaly_is_enabled();
+  LANTERN_HOST_HANDLER;
+  return ret;
+}
+
   /* Autogen Headers -- Start */
   LANTERN_API void* (LANTERN_PTR _lantern__cast_byte_tensor_bool)(void* self, void* non_blocking);
   HOST_API void* lantern__cast_byte_tensor_bool(void* self, void* non_blocking) { void* ret = _lantern__cast_byte_tensor_bool(self, non_blocking); LANTERN_HOST_HANDLER return ret; }
@@ -7467,6 +7483,8 @@ LOAD_SYMBOL(_lantern_vector_Scalar_at);
 LOAD_SYMBOL(_lantern_vector_Scalar_delete);
 LOAD_SYMBOL(_lantern_contrib_sort_vertices);
 LOAD_SYMBOL(_lantern_ScriptMethod_graph_print);
+LOAD_SYMBOL(_lantern_autograd_set_detect_anomaly);
+LOAD_SYMBOL(_lantern_autograd_detect_anomaly_is_enabled);
   /* Autogen Symbols -- Start */
   LOAD_SYMBOL(_lantern__cast_byte_tensor_bool)
   LOAD_SYMBOL(_lantern__cast_char_tensor_bool)

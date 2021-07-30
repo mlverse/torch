@@ -753,3 +753,24 @@ test_that("can set requires_grad", {
   expect_true(x$requires_grad)
   
 })
+
+test_that("with detect anomaly", {
+  
+  x <- torch_randn(2, requires_grad = TRUE)
+  y <- torch_randn(1)
+  b <- (x^y)$sum()
+  y$add_(1)
+
+  expect_error({
+    b$backward()  
+  }, regexp = "detect_anomaly")
+  
+  expect_warning(regexp = "should be enabled only for debugging", {
+  expect_error(regexp = "one of the variables needed", {
+    with_detect_anomaly({
+      b$backward()
+    })
+  })
+  })
+  
+})

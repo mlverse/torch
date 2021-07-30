@@ -28,6 +28,18 @@ bool cpp_autograd_is_enabled()
 {
   return lantern_autograd_is_enabled();  
 }
+  
+// [[Rcpp::export]]
+void cpp_autograd_set_detect_anomaly (bool enabled)
+{
+  lantern_autograd_set_detect_anomaly(enabled);
+}
+  
+// [[Rcpp::export]]
+bool cpp_autograd_detect_anomaly_is_enabled ()
+{
+  return lantern_autograd_detect_anomaly_is_enabled();
+}
 
 // [[Rcpp::export]]
 XPtrTorchTensor cpp_tensor_grad (Rcpp::XPtr<XPtrTorchTensor> self) {

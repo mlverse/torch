@@ -29,7 +29,8 @@ make_load_symbols <- function(decls) {
 
 decls <- readr::read_lines(
   "
-void* _lantern_ScriptMethod_graph_print (void* self)
+void _lantern_autograd_set_detect_anomaly (bool enabled)
+bool _lantern_autograd_detect_anomaly_is_enabled ()
 "  
 )
 
