@@ -12,7 +12,7 @@
 - Fixed warning when using `%/%` caused by a call to deprecated `torch_floor_divide` (#616)
 - Added `contrib_sort_vertices` to efficiently sort vertices on CUDA. (#619)
 - Allows querying the graph from traced modules. (#623)
-- Added `with_detect_anomaly` to debug AutoGrad errors. (#628)
+- Added `with_detect_anomaly` to debug autograd errors. (#628)
 
 # torch 0.4.0
 
