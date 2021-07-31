@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Diag_embed — torch_diag_embed • torch</title>
+<title>Context-manager that enable anomaly detection for the autograd engine. — with_detect_anomaly • torch</title>
 
 
 <!-- jquery -->
@@ -41,8 +41,14 @@
   <link href="../extra.css" rel="stylesheet">
   
 
-<meta property="og:title" content="Diag_embed — torch_diag_embed" />
-<meta property="og:description" content="Diag_embed" />
+<meta property="og:title" content="Context-manager that enable anomaly detection for the autograd engine. — with_detect_anomaly" />
+<meta property="og:description" content="This does two things:
+Running the forward pass with detection enabled will allow the backward
+pass to print the traceback of the forward operation that created the failing
+backward function.
+Any backward computation that generate &quot;nan&quot; value will raise an error.
+
+" />
 
 
 <meta name="robots" content="noindex">
@@ -180,87 +186,59 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Diag_embed</h1>
-    <small class="dont-index">Source: <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-docs.R'><code>R/gen-namespace-docs.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace-examples.R'><code>R/gen-namespace-examples.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace.R'><code>R/gen-namespace.R</code></a></small>
-    <div class="hidden name"><code>torch_diag_embed.Rd</code></div>
+    <h1>Context-manager that enable anomaly detection for the autograd engine.</h1>
+    <small class="dont-index">Source: <a href='https://github.com/mlverse/torch/blob/master/R/autograd.R'><code>R/autograd.R</code></a></small>
+    <div class="hidden name"><code>with_detect_anomaly.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Diag_embed</p>
+    <p>This does two things:</p><ul>
+<li><p>Running the forward pass with detection enabled will allow the backward
+pass to print the traceback of the forward operation that created the failing
+backward function.</p></li>
+<li><p>Any backward computation that generate "nan" value will raise an error.</p></li>
+</ul>
+
     </div>
 
-    <pre class="usage"><span class='fu'>torch_diag_embed</span><span class='op'>(</span><span class='va'>self</span>, offset <span class='op'>=</span> <span class='fl'>0L</span>, dim1 <span class='op'>=</span> <span class='op'>-</span><span class='fl'>2L</span>, dim2 <span class='op'>=</span> <span class='op'>-</span><span class='fl'>1L</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>with_detect_anomaly</span><span class='op'>(</span><span class='va'>code</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>self</th>
-      <td><p>(Tensor) the input tensor. Must be at least 1-dimensional.</p></td>
-    </tr>
-    <tr>
-      <th>offset</th>
-      <td><p>(int, optional) which diagonal to consider. Default: 0        (main diagonal).</p></td>
-    </tr>
-    <tr>
-      <th>dim1</th>
-      <td><p>(int, optional) first dimension with respect to which to        take diagonal. Default: -2.</p></td>
-    </tr>
-    <tr>
-      <th>dim2</th>
-      <td><p>(int, optional) second dimension with respect to which to        take diagonal. Default: -1.</p></td>
+      <th>code</th>
+      <td><p>Cod that will be execued in the detect anomaly context.</p></td>
     </tr>
     </table>
 
-    <h2 class="hasAnchor" id="diag-embed-input-offset-dim-dim-gt-tensor-"><a class="anchor" href="#diag-embed-input-offset-dim-dim-gt-tensor-"></a>diag_embed(input, offset=0, dim1=-2, dim2=-1) -&gt; Tensor </h2>
+    <h2 class="hasAnchor" id="warning"><a class="anchor" href="#warning"></a>Warning</h2>
 
     
 
-
-<p>Creates a tensor whose diagonals of certain 2D planes (specified by
-<code>dim1</code> and <code>dim2</code>) are filled by <code>input</code>.
-To facilitate creating batched diagonal matrices, the 2D planes formed by
-the last two dimensions of the returned tensor are chosen by default.</p>
-<p>The argument <code>offset</code> controls which diagonal to consider:</p><ul>
-<li><p>If <code>offset</code> = 0, it is the main diagonal.</p></li>
-<li><p>If <code>offset</code> &gt; 0, it is above the main diagonal.</p></li>
-<li><p>If <code>offset</code> &lt; 0, it is below the main diagonal.</p></li>
-</ul>
-
-<p>The size of the new matrix will be calculated to make the specified diagonal
-of the size of the last input dimension.
-Note that for <code>offset</code> other than \(0\), the order of <code>dim1</code>
-and <code>dim2</code> matters. Exchanging them is equivalent to changing the
-sign of <code>offset</code>.</p>
-<p>Applying <code>torch_diagonal</code> to the output of this function with
-the same arguments yields a matrix identical to input. However,
-<code>torch_diagonal</code> has different default dimensions, so those
-need to be explicitly specified.</p>
+<p>This mode should be enabled only for debugging as the different tests
+will slow down your program execution.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
+<span class='va'>x</span> <span class='op'>&lt;-</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span><span class='op'>(</span><span class='fl'>2</span>, requires_grad <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
+<span class='va'>y</span> <span class='op'>&lt;-</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span><span class='op'>(</span><span class='fl'>1</span><span class='op'>)</span>
+<span class='va'>b</span> <span class='op'>&lt;-</span> <span class='op'>(</span><span class='va'>x</span><span class='op'>^</span><span class='va'>y</span><span class='op'>)</span><span class='op'>$</span><span class='fu'>sum</span><span class='op'>(</span><span class='op'>)</span>
+<span class='va'>y</span><span class='op'>$</span><span class='fu'>add_</span><span class='op'>(</span><span class='fl'>1</span><span class='op'>)</span>
 
-<span class='va'>a</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>2</span>, <span class='fl'>3</span><span class='op'>)</span><span class='op'>)</span>
-<span class='fu'>torch_diag_embed</span><span class='op'>(</span><span class='va'>a</span><span class='op'>)</span>
-<span class='fu'>torch_diag_embed</span><span class='op'>(</span><span class='va'>a</span>, offset<span class='op'>=</span><span class='fl'>1</span>, dim1<span class='op'>=</span><span class='fl'>1</span>, dim2<span class='op'>=</span><span class='fl'>3</span><span class='op'>)</span>
+<span class='kw'><a href='https://rdrr.io/r/base/try.html'>try</a></span><span class='op'>(</span><span class='op'>{</span>
+
+<span class='va'>b</span><span class='op'>$</span><span class='fu'>backward</span><span class='op'>(</span><span class='op'>)</span>
+
+<span class='fu'>with_detect_anomaly</span><span class='op'>(</span><span class='op'>{</span>
+  <span class='va'>b</span><span class='op'>$</span><span class='fu'>backward</span><span class='op'>(</span><span class='op'>)</span>
+<span class='op'>}</span><span class='op'>)</span>
+
+<span class='op'>}</span><span class='op'>)</span>
+
 <span class='op'>}</span>
-</div><div class='output co'>#&gt; torch_tensor
-#&gt; (1,.,.) = 
-#&gt;   0.0000  0.4778  0.0000  0.0000
-#&gt;   0.0000 -0.0152  0.0000  0.0000
-#&gt; 
-#&gt; (2,.,.) = 
-#&gt;   0.0000  0.0000  0.9447  0.0000
-#&gt;   0.0000  0.0000 -1.0168  0.0000
-#&gt; 
-#&gt; (3,.,.) = 
-#&gt;   0.0000  0.0000  0.0000 -1.4407
-#&gt;   0.0000  0.0000  0.0000  0.4373
-#&gt; 
-#&gt; (4,.,.) = 
-#&gt;   0  0  0  0
-#&gt;   0  0  0  0
-#&gt; [ CPUFloatType{4,2,4} ]</div></pre>
+</div><div class='output co'>#&gt; Error in (function (self, inputs, gradient, retain_graph, create_graph)  : 
+#&gt;   one of the variables needed for gradient computation has been modified by an inplace operation: [CPUFloatType [1]] is at version 1; expected version 0 instead. Hint: enable anomaly detection to find the operation that failed to compute its gradient, with torch.autograd.set_detect_anomaly(True).</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

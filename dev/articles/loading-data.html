@@ -164,8 +164,9 @@
 <span id="cb2-10"><a href="#cb2-10"></a></span>
 <span id="cb2-11"><a href="#cb2-11"></a>dl &lt;-<span class="st"> </span><span class="kw">dataloader</span>(ds, <span class="dt">batch_size =</span> <span class="dv">32</span>, <span class="dt">shuffle =</span> <span class="ot">TRUE</span>)</span>
 <span id="cb2-12"><a href="#cb2-12"></a></span>
-<span id="cb2-13"><a href="#cb2-13"></a><span class="cf">for</span> (b <span class="cf">in</span> <span class="kw">enumerate</span>(dl)) {</span>
-<span id="cb2-14"><a href="#cb2-14"></a>  <span class="co"># ...</span></span></code></pre></div>
+<span id="cb2-13"><a href="#cb2-13"></a>coro<span class="op">::</span><span class="kw">loop</span>(<span class="cf">for</span> (b <span class="cf">in</span> dl)) {</span>
+<span id="cb2-14"><a href="#cb2-14"></a><span class="co"># ...</span></span>
+<span id="cb2-15"><a href="#cb2-15"></a>}<span class="er">)</span></span></code></pre></div>
 <p>Cf. <code>vignettes/examples/mnist-cnn.R</code> for a complete example.</p>
 <p>What if you want to train on a different dataset? In these cases, you subclass <code>Dataset</code>, an abstract container that needs to know how to iterate over the given data. To that purpose, your subclass needs to implement <code>.getitem()</code>, and say what should be returned when the data loader is asking for the next batch.</p>
 <p>In <code>.getitem()</code>, you can implement whatever preprocessing you require. Additionally, you should implement <code>.length()</code>, so users can find out how many items there are in the dataset.</p>
@@ -286,7 +287,7 @@
 <span class="co">#&gt;  1</span>
 <span class="co">#&gt;  1</span>
 <span class="co">#&gt; [ CPULongType{8} ]</span></code></pre></div>
-<p>To train a network, we can use <code>enumerate</code> to iterate over batches.</p>
+<p>To train a network, we can use <code><a href="https://rdrr.io/pkg/coro/man/collect.html">coro::loop()</a></code> to iterate over batches.</p>
 </div>
 <div id="training-with-data-loaders" class="section level2">
 <h2 class="hasAnchor">
@@ -318,46 +319,26 @@
   
   <span class="va">l</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="op">)</span>
   
-  <span class="kw">for</span> <span class="op">(</span><span class="va">b</span> <span class="kw">in</span> <span class="fu"><a href="../reference/enumerate.html">enumerate</a></span><span class="op">(</span><span class="va">dl</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span>
+  <span class="fu">coro</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/coro/man/collect.html">loop</a></span><span class="op">(</span><span class="kw">for</span> <span class="op">(</span><span class="va">b</span> <span class="kw">in</span> <span class="va">dl</span><span class="op">)</span> <span class="op">{</span>
     <span class="va">optimizer</span><span class="op">$</span><span class="fu">zero_grad</span><span class="op">(</span><span class="op">)</span>
     <span class="va">output</span> <span class="op">&lt;-</span> <span class="fu">model</span><span class="op">(</span><span class="va">b</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">)</span>
     <span class="va">loss</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/nnf_nll_loss.html">nnf_nll_loss</a></span><span class="op">(</span><span class="va">output</span>, <span class="va">b</span><span class="op">[[</span><span class="fl">2</span><span class="op">]</span><span class="op">]</span><span class="op">)</span>
     <span class="va">loss</span><span class="op">$</span><span class="fu">backward</span><span class="op">(</span><span class="op">)</span>
     <span class="va">optimizer</span><span class="op">$</span><span class="fu">step</span><span class="op">(</span><span class="op">)</span>
     <span class="va">l</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">l</span>, <span class="va">loss</span><span class="op">$</span><span class="fu">item</span><span class="op">(</span><span class="op">)</span><span class="op">)</span>
-  <span class="op">}</span>
+  <span class="op">}</span><span class="op">)</span>
   
   <span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/sprintf.html">sprintf</a></span><span class="op">(</span><span class="st">"Loss at epoch %d: %3f\n"</span>, <span class="va">epoch</span>, <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">l</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
 <span class="op">}</span>
-<span class="co">#&gt; Warning: The `enumerate` construct is deprecated in favor of the `coro::loop` syntax.</span>
-<span class="co">#&gt; * See https://github.com/mlverse/torch/issues/558 for more information.</span>
-<span class="co">#&gt; Loss at epoch 1: 759.730274</span>
-<span class="co">#&gt; Warning: The `enumerate` construct is deprecated in favor of the `coro::loop` syntax.</span>
-<span class="co">#&gt; * See https://github.com/mlverse/torch/issues/558 for more information.</span>
+<span class="co">#&gt; Loss at epoch 1: 48.941230</span>
 <span class="co">#&gt; Loss at epoch 2: 2.068251</span>
-<span class="co">#&gt; Warning: The `enumerate` construct is deprecated in favor of the `coro::loop` syntax.</span>
-<span class="co">#&gt; * See https://github.com/mlverse/torch/issues/558 for more information.</span>
 <span class="co">#&gt; Loss at epoch 3: 2.068251</span>
-<span class="co">#&gt; Warning: The `enumerate` construct is deprecated in favor of the `coro::loop` syntax.</span>
-<span class="co">#&gt; * See https://github.com/mlverse/torch/issues/558 for more information.</span>
 <span class="co">#&gt; Loss at epoch 4: 2.068251</span>
-<span class="co">#&gt; Warning: The `enumerate` construct is deprecated in favor of the `coro::loop` syntax.</span>
-<span class="co">#&gt; * See https://github.com/mlverse/torch/issues/558 for more information.</span>
 <span class="co">#&gt; Loss at epoch 5: 2.068251</span>
-<span class="co">#&gt; Warning: The `enumerate` construct is deprecated in favor of the `coro::loop` syntax.</span>
-<span class="co">#&gt; * See https://github.com/mlverse/torch/issues/558 for more information.</span>
 <span class="co">#&gt; Loss at epoch 6: 2.068251</span>
-<span class="co">#&gt; Warning: The `enumerate` construct is deprecated in favor of the `coro::loop` syntax.</span>
-<span class="co">#&gt; * See https://github.com/mlverse/torch/issues/558 for more information.</span>
 <span class="co">#&gt; Loss at epoch 7: 2.068251</span>
-<span class="co">#&gt; Warning: The `enumerate` construct is deprecated in favor of the `coro::loop` syntax.</span>
-<span class="co">#&gt; * See https://github.com/mlverse/torch/issues/558 for more information.</span>
 <span class="co">#&gt; Loss at epoch 8: 2.068251</span>
-<span class="co">#&gt; Warning: The `enumerate` construct is deprecated in favor of the `coro::loop` syntax.</span>
-<span class="co">#&gt; * See https://github.com/mlverse/torch/issues/558 for more information.</span>
 <span class="co">#&gt; Loss at epoch 9: 2.068251</span>
-<span class="co">#&gt; Warning: The `enumerate` construct is deprecated in favor of the `coro::loop` syntax.</span>
-<span class="co">#&gt; * See https://github.com/mlverse/torch/issues/558 for more information.</span>
 <span class="co">#&gt; Loss at epoch 10: 2.068251</span></code></pre></div>
 </div>
   </div>
