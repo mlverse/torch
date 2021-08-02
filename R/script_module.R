@@ -115,6 +115,15 @@ nn_ScriptModule <- R6::R6Class(
         env = private
       )
       
+      rm(list = "training", envir = self)
+      makeActiveBinding(
+        "training",
+        fun = function() {
+          cpp_jit_script_module_is_training(private$ptr)
+        }, 
+        env = self
+      )
+      
     },
     register_parameter = function(name, param) {
       private$ptr$register_parameter(name, param)
@@ -130,6 +139,10 @@ nn_ScriptModule <- R6::R6Class(
     },
     ..ptr.. = function() {
       private$ptr
+    },
+    train = function(mode = TRUE) {
+      private$ptr$train(mode = mode)
+      invisible(create_nn_module_callable(self))
     }
   ),
   private = list(

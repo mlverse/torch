@@ -229,6 +229,7 @@ create_script_module <- function(mod) {
     module$register_module(name, create_script_module(child))
   })
   
+  module$train(mod$training)
   
   # Let's not keep the constants in the module right now as it might cause more
   # problems than benefits. In pytorch they are only added if their name is in 
