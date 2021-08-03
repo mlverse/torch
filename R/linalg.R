@@ -176,7 +176,7 @@ linalg_slogdet <- function(A) {
 #' the **condition number** \eqn{\kappa} of a matrix
 #' \eqn{A \in \mathbb{K}^{n \times n}} is defined as
 #' 
-#' \Sexpr[results=rd, stage=build]{katex::math_to_rd("\\\\kappa(A) = \\\\|A\\\\|_p\\\\|A^{-1}\\\\|_p")}
+#' \Sexpr[results=rd, stage=build]{torch:::math_to_rd("\\\\kappa(A) = \\\\|A\\\\|_p\\\\|A^{-1}\\\\|_p")}
 #'   
 #' The condition number of `A` measures the numerical stability of the linear system `AX = B`
 #' with respect to a matrix norm.
@@ -197,7 +197,7 @@ linalg_slogdet <- function(A) {
 #' For `p` in `(2, -2)`, this function can be computed in terms of the singular values
 #' \eqn{\sigma_1 \geq \ldots \geq \sigma_n}
 #' 
-#' \Sexpr[results=rd, stage=build]{katex::math_to_rd("\\\\kappa_2(A) = \\\\frac{\\\\sigma_1}{\\\\sigma_n}\\\\qquad \\\\kappa_{-2}(A) = \\\\frac{\\\\sigma_n}{\\\\sigma_1}")}
+#' \Sexpr[results=rd, stage=build]{torch:::math_to_rd("\\\\kappa_2(A) = \\\\frac{\\\\sigma_1}{\\\\sigma_n}\\\\qquad \\\\kappa_{-2}(A) = \\\\frac{\\\\sigma_n}{\\\\sigma_1}")}
 #'     
 #' In these cases, it is computed using [linalg_svd()]. For these norms, the matrix
 #' (or every matrix in the batch) `A` may have any shape.
@@ -243,7 +243,7 @@ linalg_cond <- function(A, p=NULL) {
 #' If `tol` is not specified and `A` is a matrix of dimensions `(m, n)`,
 #' the tolerance is set to be
 #' 
-#' \Sexpr[results=rd, stage=build]{katex::math_to_rd("
+#' \Sexpr[results=rd, stage=build]{torch:::math_to_rd("
 #' tol = \\\\sigma_1 \\\\max(m, n) \\\\varepsilon
 #' ")}
 #'   
@@ -285,7 +285,7 @@ linalg_matrix_rank <- function(A, tol=NULL, hermitian=FALSE) {
 #' the **Cholesky decomposition** of a complex Hermitian or real symmetric positive-definite matrix
 #' \eqn{A \in \mathbb{K}^{n \times n}} is defined as
 #' 
-#' \Sexpr[results=rd, stage=build]{katex::math_to_rd("
+#' \Sexpr[results=rd, stage=build]{torch:::math_to_rd("
 #' A = LL^{H}\\\\mathrlap{\\\\qquad L \\\\in \\\\mathbb{K}^{n \\\\times n}}
 #' ")}
 #' 
@@ -325,7 +325,7 @@ linalg_cholesky <- function(A) {
 #' the **full QR decomposition** of a matrix
 #' \eqn{A \in \mathbb{K}^{m \times n}} is defined as
 #' 
-#' \Sexpr[results=rd, stage=build]{katex::math_to_rd("
+#' \Sexpr[results=rd, stage=build]{torch:::math_to_rd("
 #'   A = QR\\\\mathrlap{\\\\qquad Q \\\\in \\\\mathbb{K}^{m \\\\times m}, R \\\\in \\\\mathbb{K}^{m \\\\times n}}
 #' ")}
 #' 
@@ -334,7 +334,7 @@ linalg_cholesky <- function(A) {
 #' In this case, we can drop the last `m - n` columns of `Q` to form the
 #' **reduced QR decomposition**:
 #'
-#' \Sexpr[results=rd, stage=build]{katex::math_to_rd("
+#' \Sexpr[results=rd, stage=build]{torch:::math_to_rd("
 #'   A = QR\\\\mathrlap{\\\\qquad Q \\\\in \\\\mathbb{K}^{m \\\\times n}, R \\\\in \\\\mathbb{K}^{n \\\\times n}}
 #' ")}
 #' 
@@ -375,7 +375,7 @@ linalg_qr <- function(A, mode='reduced') {
 #' the **eigenvalue decomposition** of a square matrix
 #' \eqn{A \in \mathbb{K}^{n \times n}} (if it exists) is defined as
 #' 
-#' \Sexpr[results=rd, stage=build]{katex::math_to_rd("
+#' \Sexpr[results=rd, stage=build]{torch:::math_to_rd("
 #'   A = V \\\\operatorname{diag}(\\\\Lambda) V^{-1}\\\\mathrlap{\\\\qquad V \\\\in \\\\mathbb{C}^{n \\\\times n}, \\\\Lambda \\\\in \\\\mathbb{C}^n}
 #' ")}
 #' 
@@ -441,7 +441,7 @@ linalg_eig <- function(A) {
 #' the **eigenvalues** of a square matrix \eqn{A \in \mathbb{K}^{n \times n}} are defined
 #' as the roots (counted with multiplicity) of the polynomial `p` of degree `n` given by
 #' 
-#' \Sexpr[results=rd, stage=build]{katex::math_to_rd("
+#' \Sexpr[results=rd, stage=build]{torch:::math_to_rd("
 #'   p(\\\\lambda) = \\\\operatorname{det}(A - \\\\lambda \\\\mathrm{I}_n)\\\\mathrlap{\\\\qquad \\\\lambda \\\\in \\\\mathbb{C}}
 #' ")}
 #' 
@@ -473,7 +473,7 @@ linalg_eigvals <- function(A) {
 #' the **eigenvalue decomposition** of a complex Hermitian or real symmetric matrix
 #' \eqn{A \in \mathbb{K}^{n \times n}} is defined as
 #' 
-#' \Sexpr[results=rd, stage=build]{katex::math_to_rd("
+#' \Sexpr[results=rd, stage=build]{torch:::math_to_rd("
 #'   A = Q \\\\operatorname{diag}(\\\\Lambda) Q^{H}\\\\mathrlap{\\\\qquad Q \\\\in \\\\mathbb{K}^{n \\\\times n}, \\\\Lambda \\\\in \\\\mathbb{R}^n}
 #' ")}
 #' 
@@ -551,7 +551,7 @@ linalg_eigh <- function(A, UPLO='L') {
 #' the **eigenvalues** of a complex Hermitian or real symmetric  matrix \eqn{A \in \mathbb{K}^{n \times n}}
 #' are defined as the roots (counted with multiplicity) of the polynomial `p` of degree `n` given by
 #' 
-#' \Sexpr[results=rd, stage=build]{katex::math_to_rd("
+#' \Sexpr[results=rd, stage=build]{torch:::math_to_rd("
 #'   p(\\\\lambda) = \\\\operatorname{det}(A - \\\\lambda \\\\mathrm{I}_n)\\\\mathrlap{\\\\qquad \\\\lambda \\\\in \\\\mathbb{R}}
 #' ")}
 #' 
@@ -596,7 +596,7 @@ linalg_eigvalsh <- function(A, UPLO='L') {
 #' the **full SVD** of a matrix
 #' \eqn{A \in \mathbb{K}^{m \times n}}, if `k = min(m,n)`, is defined as
 #' 
-#' \Sexpr[results=rd, stage=build]{katex::math_to_rd("
+#' \Sexpr[results=rd, stage=build]{torch:::math_to_rd("
 #'   A = U \\\\operatorname{diag}(S) V^{H} \\\\mathrlap{\\\\qquad U \\\\in \\\\mathbb{K}^{m \\\\times m}, S \\\\in \\\\mathbb{R}^k, V \\\\in \\\\mathbb{K}^{n \\\\times n}}
 #' ")}
 #' 
@@ -606,7 +606,7 @@ linalg_eigvalsh <- function(A, UPLO='L') {
 #' The matrices  \eqn{U}, \eqn{V} (and thus \eqn{V^{H}}) are orthogonal in the real case, and unitary in the complex case.
 #' When `m > n` (resp. `m < n`) we can drop the last `m - n` (resp. `n - m`) columns of `U` (resp. `V`) to form the **reduced SVD**:
 #'
-#' \Sexpr[results=rd, stage=build]{katex::math_to_rd("
+#' \Sexpr[results=rd, stage=build]{torch:::math_to_rd("
 #'   A = U \\\\operatorname{diag}(S) V^{H} \\\\mathrlap{\\\\qquad U \\\\in \\\\mathbb{K}^{m \\\\times k}, S \\\\in \\\\mathbb{R}^k, V \\\\in \\\\mathbb{K}^{k \\\\times n}}
 #' ")}
 #' 
@@ -763,7 +763,7 @@ linalg_solve <- function(A, B) {
 #' the **least squares problem** for a linear system \eqn{AX = B} with
 #' \eqn{A \in \mathbb{K}^{m \times n}, B \in \mathbb{K}^{m \times k}} is defined as
 #' 
-#' \Sexpr[results=rd, stage=build]{katex::math_to_rd("
+#' \Sexpr[results=rd, stage=build]{torch:::math_to_rd("
 #'   \\\\min_{X \\\\in \\\\mathbb{K}^{n \\\\times k}} \\\\|AX - B\\\\|_F
 #' ")}
 #' 
@@ -875,7 +875,7 @@ linalg_lstsq <- function(A, B, rcond = NULL, ..., driver = NULL) {
 #' for a matrix \eqn{A \in \mathbb{K}^{n \times n}},
 #' its **inverse matrix** \eqn{A^{-1} \in \mathbb{K}^{n \times n}} (if it exists) is defined as
 #' 
-#' \Sexpr[results=rd, stage=build]{katex::math_to_rd("
+#' \Sexpr[results=rd, stage=build]{torch:::math_to_rd("
 #'   A^{-1}A = AA^{-1} = \\\\mathrm{I}_n
 #' ")}
 #' where \eqn{\mathrm{I}_n} is the `n`-dimensional identity matrix.
@@ -1015,7 +1015,7 @@ linalg_matrix_power <- function(A, n) {
 #' `(100, 5)`, `(5, 50)` respectively, we can calculate the cost of different
 #' multiplication orders as follows:
 #'
-#' \Sexpr[results=rd, stage=build]{katex::math_to_rd("
+#' \Sexpr[results=rd, stage=build]{torch:::math_to_rd("
 #' \\\\begin{align*}
 #' \\\\operatorname{cost}((AB)C) &= 10 \\\\times 100 \\\\times 5 + 10 \\\\times 5 \\\\times 50 = 7500 \\\\
 #' \\\\operatorname{cost}(A(BC)) &= 10 \\\\times 100 \\\\times 50 + 100 \\\\times 5 \\\\times 50 = 75000
@@ -1045,7 +1045,7 @@ linalg_multi_dot <- function(tensors) {
 #' with \eqn{m \geq n} and a vector \eqn{\tau \in \mathbb{K}^k} with \eqn{k \leq n},
 #' this function computes the first \eqn{n} columns of the matrix
 #' 
-#' \Sexpr[results=rd, stage=build]{katex::math_to_rd("
+#' \Sexpr[results=rd, stage=build]{torch:::math_to_rd("
 #' H_1H_2 ... H_k \\\\qquad with \\\\qquad H_i = \\\\mathrm{I}_m - \\\\tau_i v_i v_i^{H}
 #' ")}
 #' 

@@ -30,7 +30,7 @@ the \strong{least squares problem} for a linear system \eqn{AX = B} with
 \eqn{A \in \mathbb{K}^{m \times n}, B \in \mathbb{K}^{m \times k}} is defined as
 }
 \details{
-\Sexpr[results=rd, stage=build]{katex::math_to_rd("
+\Sexpr[results=rd, stage=build]{torch:::math_to_rd("
 \\\\min_{X \\\\in \\\\mathbb{K}^{n \\\\times k}} \\\\|AX - B\\\\|_F
 ")}
 

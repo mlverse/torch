@@ -23,7 +23,7 @@ the \strong{eigenvalues} of a complex Hermitian or real symmetric  matrix \eqn{A
 are defined as the roots (counted with multiplicity) of the polynomial \code{p} of degree \code{n} given by
 }
 \details{
-\Sexpr[results=rd, stage=build]{katex::math_to_rd("
+\Sexpr[results=rd, stage=build]{torch:::math_to_rd("
 p(\\\\lambda) = \\\\operatorname{det}(A - \\\\lambda \\\\mathrm{I}_n)\\\\mathrlap{\\\\qquad \\\\lambda \\\\in \\\\mathbb{R}}
 ")}
 

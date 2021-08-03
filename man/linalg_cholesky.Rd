@@ -16,7 +16,7 @@ the \strong{Cholesky decomposition} of a complex Hermitian or real symmetric pos
 \eqn{A \in \mathbb{K}^{n \times n}} is defined as
 }
 \details{
-\Sexpr[results=rd, stage=build]{katex::math_to_rd("
+\Sexpr[results=rd, stage=build]{torch:::math_to_rd("
 A = LL^{H}\\\\mathrlap{\\\\qquad L \\\\in \\\\mathbb{K}^{n \\\\times n}}
 ")}
 

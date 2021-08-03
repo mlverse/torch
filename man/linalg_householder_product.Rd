@@ -18,7 +18,7 @@ with \eqn{m \geq n} and a vector \eqn{\tau \in \mathbb{K}^k} with \eqn{k \leq n}
 this function computes the first \eqn{n} columns of the matrix
 }
 \details{
-\Sexpr[results=rd, stage=build]{katex::math_to_rd("
+\Sexpr[results=rd, stage=build]{torch:::math_to_rd("
 H_1H_2 ... H_k \\\\qquad with \\\\qquad H_i = \\\\mathrm{I}_m - \\\\tau_i v_i v_i^{H}
 ")}
 

@@ -33,7 +33,7 @@ triangular part of the matrix is used in the computations.
 If \code{tol} is not specified and \code{A} is a matrix of dimensions \verb{(m, n)},
 the tolerance is set to be
 
-\Sexpr[results=rd, stage=build]{katex::math_to_rd("
+\Sexpr[results=rd, stage=build]{torch:::math_to_rd("
 tol = \\\\sigma_1 \\\\max(m, n) \\\\varepsilon
 ")}
 

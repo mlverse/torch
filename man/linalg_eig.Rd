@@ -21,7 +21,7 @@ the \strong{eigenvalue decomposition} of a square matrix
 \eqn{A \in \mathbb{K}^{n \times n}} (if it exists) is defined as
 }
 \details{
-\Sexpr[results=rd, stage=build]{katex::math_to_rd("
+\Sexpr[results=rd, stage=build]{torch:::math_to_rd("
 A = V \\\\operatorname{diag}(\\\\Lambda) V^{-1}\\\\mathrlap{\\\\qquad V \\\\in \\\\mathbb{C}^{n \\\\times n}, \\\\Lambda \\\\in \\\\mathbb{C}^n}
 ")}
 

@@ -15,7 +15,7 @@ the \strong{eigenvalues} of a square matrix \eqn{A \in \mathbb{K}^{n \times n}} 
 as the roots (counted with multiplicity) of the polynomial \code{p} of degree \code{n} given by
 }
 \details{
-\Sexpr[results=rd, stage=build]{katex::math_to_rd("
+\Sexpr[results=rd, stage=build]{torch:::math_to_rd("
 p(\\\\lambda) = \\\\operatorname{det}(A - \\\\lambda \\\\mathrm{I}_n)\\\\mathrlap{\\\\qquad \\\\lambda \\\\in \\\\mathbb{C}}
 ")}
 

@@ -21,7 +21,7 @@ the \strong{full QR decomposition} of a matrix
 \eqn{A \in \mathbb{K}^{m \times n}} is defined as
 }
 \details{
-\Sexpr[results=rd, stage=build]{katex::math_to_rd("
+\Sexpr[results=rd, stage=build]{torch:::math_to_rd("
 A = QR\\\\mathrlap{\\\\qquad Q \\\\in \\\\mathbb{K}^{m \\\\times m}, R \\\\in \\\\mathbb{K}^{m \\\\times n}}
 ")}
 
@@ -30,7 +30,7 @@ When \code{m > n} (tall matrix), as \code{R} is upper triangular, its last \code
 In this case, we can drop the last \code{m - n} columns of \code{Q} to form the
 \strong{reduced QR decomposition}:
 
-\Sexpr[results=rd, stage=build]{katex::math_to_rd("
+\Sexpr[results=rd, stage=build]{torch:::math_to_rd("
 A = QR\\\\mathrlap{\\\\qquad Q \\\\in \\\\mathbb{K}^{m \\\\times n}, R \\\\in \\\\mathbb{K}^{n \\\\times n}}
 ")}
 

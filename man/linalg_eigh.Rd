@@ -26,7 +26,7 @@ the \strong{eigenvalue decomposition} of a complex Hermitian or real symmetric m
 \eqn{A \in \mathbb{K}^{n \times n}} is defined as
 }
 \details{
-\Sexpr[results=rd, stage=build]{katex::math_to_rd("
+\Sexpr[results=rd, stage=build]{torch:::math_to_rd("
 A = Q \\\\operatorname{diag}(\\\\Lambda) Q^{H}\\\\mathrlap{\\\\qquad Q \\\\in \\\\mathbb{K}^{n \\\\times n}, \\\\Lambda \\\\in \\\\mathbb{R}^n}
 ")}
 

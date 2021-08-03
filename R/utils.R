@@ -82,3 +82,12 @@ seq2 <- function(start, end, by = 1L) {
     seq(start, end, by = by)
 }
 
+math_to_rd <- function(tex, ascii = tex, displayMode = TRUE, ..., include_css = TRUE) {
+  if (rlang::is_installed("katex")) {
+    katex::math_to_rd(tex, ascii, displayMode = displayMode, ..., include_css = include_css)
+  } else {
+    rd <- "\\out{Equation not displayed. Install 'katex' then re-install 'torch'.}"
+    structure(rd, class = "Rdtext")
+  }
+}
+
