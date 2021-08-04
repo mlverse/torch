@@ -11,21 +11,21 @@ linalg_eig(A)
 consisting of diagonalizable matrices.}
 }
 \value{
-A list \verb{(eigenvalues, eigenvectors)} which corresponds to \eqn{\Lambda} and \eqn{V} above.
+A list \verb{(eigenvalues, eigenvectors)} which corresponds to \teqn{\Lambda} and \teqn{V} above.
 \code{eigenvalues} and \code{eigenvectors} will always be complex-valued, even when \code{A} is real. The eigenvectors
 will be given by the columns of \code{eigenvectors}.
 }
 \description{
-Letting \eqn{\mathbb{K}} be \eqn{\mathbb{R}} or \eqn{\mathbb{C}},
+Letting \teqn{\mathbb{K}} be \teqn{\mathbb{R}} or \teqn{\mathbb{C}},
 the \strong{eigenvalue decomposition} of a square matrix
-\eqn{A \in \mathbb{K}^{n \times n}} (if it exists) is defined as
+\teqn{A \in \mathbb{K}^{n \times n}} (if it exists) is defined as
 }
 \details{
-\Sexpr[results=rd, stage=build]{katex::math_to_rd("
+\Sexpr[results=rd, stage=build]{torch:::math_to_rd("
 A = V \\\\operatorname{diag}(\\\\Lambda) V^{-1}\\\\mathrlap{\\\\qquad V \\\\in \\\\mathbb{C}^{n \\\\times n}, \\\\Lambda \\\\in \\\\mathbb{C}^n}
 ")}
 
-This decomposition exists if and only if \eqn{A} is \code{diagonalizable}_.
+This decomposition exists if and only if \teqn{A} is \code{diagonalizable}_.
 This is the case when all its eigenvalues are different.
 Supports input of float, double, cfloat and cdouble dtypes.
 Also supports batches of matrices, and if \code{A} is a batch of matrices then
@@ -39,7 +39,7 @@ The eigenvalues and eigenvectors of a real matrix may be complex.
 \itemize{
 \item This function assumes that \code{A} is \code{diagonalizable}_ (for example, when all the
 eigenvalues are different). If it is not diagonalizable, the returned
-eigenvalues will be correct but \eqn{A \neq V \operatorname{diag}(\Lambda)V^{-1}}.
+eigenvalues will be correct but \teqn{A \neq V \operatorname{diag}(\Lambda)V^{-1}}.
 \item The eigenvectors of a matrix are not unique, nor are they continuous with respect to
 \code{A}. Due to this lack of uniqueness, different hardware and software may compute
 different eigenvectors.
@@ -50,8 +50,8 @@ In this implmentation, the returned eigenvectors are normalized to have norm
 \item Gradients computed using \code{V} will only be finite when \code{A} does not have repeated eigenvalues.
 Furthermore, if the distance between any two eigenvalues is close to zero,
 the gradient will be numerically unstable, as it depends on the eigenvalues
-\eqn{\lambda_i} through the computation of
-\eqn{\frac{1}{\min_{i \neq j} \lambda_i - \lambda_j}}.
+\teqn{\lambda_i} through the computation of
+\teqn{\frac{1}{\min_{i \neq j} \lambda_i - \lambda_j}}.
 }
 }
 

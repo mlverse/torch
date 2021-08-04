@@ -82,3 +82,32 @@ seq2 <- function(start, end, by = 1L) {
     seq(start, end, by = by)
 }
 
+math_to_rd_impl <- function(tex, ascii = tex, displayMode = TRUE, ..., include_css = TRUE) {
+  html <- katex::katex_html(tex, include_css = include_css, displayMode = displayMode, ...,
+                     preview = FALSE)
+  
+  html_out <- paste('\\if{html}{\\out{', html, '}}', sep = '\n')
+  # We won't show the equations in latex mode because of limitted support.
+  latex_out <- paste('\\if{latex,text}{\\out{', ascii, '}}', sep = '\n')
+  rd <- paste(html_out, latex_out, sep = '\n')
+  if(identical(.Platform$OS.type, 'windows') && getRversion() < '4.1.1'){
+    # https://bugs.r-project.org/bugzilla/show_bug.cgi?id=18152
+    rd <- enc2native(rd)
+  }
+  structure(rd, class = 'Rdtext')
+}
+
+math_to_rd <- function(tex, ascii = tex, displayMode = TRUE, ..., include_css = TRUE) {
+  
+  if (tex == ascii) {
+    ascii <- "Equation not displayed. Please find it in 'https://torch.mlverse.org/docs'"
+  }
+  
+  if (rlang::is_installed("katex")) {
+    math_to_rd_impl(tex, ascii, displayMode = displayMode, ..., include_css = include_css)
+  } else {
+    rd <- "\\out{Equation not displayed. Install 'katex' then re-install 'torch'.}"
+    structure(rd, class = "Rdtext")
+  }
+}
+

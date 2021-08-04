@@ -12,18 +12,18 @@ linalg_householder_product(A, tau)
 \item{tau}{(Tensor): tensor of shape \verb{(*, k)} where \code{*} is zero or more batch dimensions.}
 }
 \description{
-Letting \eqn{\mathbb{K}} be \eqn{\mathbb{R}} or \eqn{\mathbb{C}},
-for a matrix \eqn{V \in \mathbb{K}^{m \times n}} with columns \eqn{v_i \in \mathbb{K}^m}
-with \eqn{m \geq n} and a vector \eqn{\tau \in \mathbb{K}^k} with \eqn{k \leq n},
-this function computes the first \eqn{n} columns of the matrix
+Letting \teqn{\mathbb{K}} be \teqn{\mathbb{R}} or \teqn{\mathbb{C}},
+for a matrix \teqn{V \in \mathbb{K}^{m \times n}} with columns \teqn{v_i \in \mathbb{K}^m}
+with \teqn{m \geq n} and a vector \teqn{\tau \in \mathbb{K}^k} with \teqn{k \leq n},
+this function computes the first \teqn{n} columns of the matrix
 }
 \details{
-\Sexpr[results=rd, stage=build]{katex::math_to_rd("
+\Sexpr[results=rd, stage=build]{torch:::math_to_rd("
 H_1H_2 ... H_k \\\\qquad with \\\\qquad H_i = \\\\mathrm{I}_m - \\\\tau_i v_i v_i^{H}
 ")}
 
-where \eqn{\mathrm{I}_m} is the \code{m}-dimensional identity matrix and
-\eqn{v^{H}} is the conjugate transpose when \eqn{v} is complex, and the transpose when \eqn{v} is real-valued.
+where \teqn{\mathrm{I}_m} is the \code{m}-dimensional identity matrix and
+\teqn{v^{H}} is the conjugate transpose when \teqn{v} is complex, and the transpose when \teqn{v} is real-valued.
 See \href{https://www.netlib.org/lapack/lug/node128.html}{Representation of Orthogonal or Unitary Matrices} for
 further details.
 
