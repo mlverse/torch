@@ -82,3 +82,6 @@ seq2 <- function(start, end, by = 1L) {
     seq(start, end, by = by)
 }
 
+torch_option <- function(option, default = NULL) {
+  getOption(paste0("torch.", option), default)
+}

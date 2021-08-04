@@ -829,10 +829,20 @@ XPtrTorchGenerator XPtrTorchGenerator_from_SEXP (SEXP x)
   
   if (TYPEOF(x) == NILSXP)
   {
-    auto out = Rcpp::as<Rcpp::XPtr<XPtrTorchGenerator>>(
-      Rcpp::Environment::namespace_env("torch").find(".generator_null")
-    );
-    return XPtrTorchGenerator( out->get_shared());
+    Rcpp::Function torch_option = Rcpp::Environment::namespace_env("torch").find("torch_option");
+    
+    if (Rcpp::as<bool>(torch_option("old_seed_behavior", false)))
+    {
+      auto out = Rcpp::as<Rcpp::XPtr<XPtrTorchGenerator>>(
+        Rcpp::Environment::namespace_env("torch").find(".generator_null")
+      );  
+      return XPtrTorchGenerator(out->get_shared());
+    }
+    else
+    {
+      return XPtrTorchGenerator(lantern_get_default_Generator());  
+    }
+    
   }
   
   Rcpp::stop("Expected a torch_generator");
