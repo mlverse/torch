@@ -42,9 +42,9 @@
   
 
 <meta property="og:title" content="Computes the solution of a square system of linear equations with a unique solution. — linalg_solve" />
-<meta property="og:description" content="Letting \(\mathbb{K}\) be \(\mathbb{R}\) or \(\mathbb{C}\),
-this function computes the solution \(X \in \mathbb{K}^{n \times k}\) of the linear system associated to
-\(A \in \mathbb{K}^{n \times n}, B \in \mathbb{K}^{m \times k}\), which is defined as" />
+<meta property="og:description" content="Letting  be  or ,
+this function computes the solution  of the linear system associated to
+, which is defined as" />
 
 
 <meta name="robots" content="noindex">
@@ -188,9 +188,9 @@ this function computes the solution \(X \in \mathbb{K}^{n \times k}\) of the lin
     </div>
 
     <div class="ref-description">
-    <p>Letting \(\mathbb{K}\) be \(\mathbb{R}\) or \(\mathbb{C}\),
-this function computes the solution \(X \in \mathbb{K}^{n \times k}\) of the <strong>linear system</strong> associated to
-\(A \in \mathbb{K}^{n \times n}, B \in \mathbb{K}^{m \times k}\), which is defined as</p>
+    <p>Letting  be  or ,
+this function computes the solution  of the <strong>linear system</strong> associated to
+, which is defined as</p>
     </div>
 
     <pre class="usage"><span class='fu'>linalg_solve</span><span class='op'>(</span><span class='va'>A</span>, <span class='va'>B</span><span class='op'>)</span></pre>
@@ -214,8 +214,8 @@ according to the rules described above</p></td>
     <p>$$
   AX = B
 $$</p>
-<p>This system of linear equations has one solution if and only if \(A\) is <code>invertible</code>_.
-This function assumes that \(A\) is invertible.
+<p>This system of linear equations has one solution if and only if  is <code>invertible</code>_.
+This function assumes that  is invertible.
 Supports inputs of float, double, cfloat and cdouble dtypes.
 Also supports batches of matrices, and if the inputs are batches of matrices then
 the output has the same batch dimensions.</p>

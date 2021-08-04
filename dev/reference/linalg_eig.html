@@ -42,9 +42,9 @@
   
 
 <meta property="og:title" content="Computes the eigenvalue decomposition of a square matrix if it exists. — linalg_eig" />
-<meta property="og:description" content="Letting \(\mathbb{K}\) be \(\mathbb{R}\) or \(\mathbb{C}\),
+<meta property="og:description" content="Letting  be  or ,
 the eigenvalue decomposition of a square matrix
-\(A \in \mathbb{K}^{n \times n}\) (if it exists) is defined as" />
+ (if it exists) is defined as" />
 
 
 <meta name="robots" content="noindex">
@@ -188,9 +188,9 @@ the eigenvalue decomposition of a square matrix
     </div>
 
     <div class="ref-description">
-    <p>Letting \(\mathbb{K}\) be \(\mathbb{R}\) or \(\mathbb{C}\),
+    <p>Letting  be  or ,
 the <strong>eigenvalue decomposition</strong> of a square matrix
-\(A \in \mathbb{K}^{n \times n}\) (if it exists) is defined as</p>
+ (if it exists) is defined as</p>
     </div>
 
     <pre class="usage"><span class='fu'>linalg_eig</span><span class='op'>(</span><span class='va'>A</span><span class='op'>)</span></pre>
@@ -207,7 +207,7 @@ consisting of diagonalizable matrices.</p></td>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A list <code>(eigenvalues, eigenvectors)</code> which corresponds to \(\Lambda\) and \(V\) above.
+    <p>A list <code>(eigenvalues, eigenvectors)</code> which corresponds to  and  above.
 <code>eigenvalues</code> and <code>eigenvectors</code> will always be complex-valued, even when <code>A</code> is real. The eigenvectors
 will be given by the columns of <code>eigenvectors</code>.</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
@@ -216,7 +216,7 @@ will be given by the columns of <code>eigenvectors</code>.</p>
 <span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>A</mi><mo>=</mo><mi>V</mi><mi mathvariant="normal">diag</mi><mo>⁡</mo><mo stretchy="false">(</mo><mi mathvariant="normal">Λ</mi><mo stretchy="false">)</mo><msup><mi>V</mi><mrow><mo>−</mo><mn>1</mn></mrow></msup><mpadded width="0px"><mrow><mspace width="2em"/><mi>V</mi><mo>∈</mo><msup><mi mathvariant="double-struck">C</mi><mrow><mi>n</mi><mo>×</mo><mi>n</mi></mrow></msup><mo separator="true">,</mo><mi mathvariant="normal">Λ</mi><mo>∈</mo><msup><mi mathvariant="double-struck">C</mi><mi>n</mi></msup></mrow></mpadded></mrow><annotation encoding="application/x-tex">
 A = V \operatorname{diag}(\Lambda) V^{-1}\mathrlap{\qquad V \in \mathbb{C}^{n \times n}, \Lambda \in \mathbb{C}^n}
 </annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathnormal">A</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1.1141079999999999em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.22222em;">V</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mop"><span class="mord mathrm" style="margin-right:0.01389em;">diag</span></span><span class="mopen">(</span><span class="mord">Λ</span><span class="mclose">)</span><span class="mord"><span class="mord mathnormal" style="margin-right:0.22222em;">V</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.864108em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">−</span><span class="mord mtight">1</span></span></span></span></span></span></span></span></span><span class="mord vbox"><span class="thinbox"><span class="rlap"><span class="strut" style="height:1.015771em;vertical-align:-0.19444em;"></span><span class="inner"><span class="mord"><span class="mspace" style="margin-right:2em;"></span><span class="mord mathnormal" style="margin-right:0.22222em;">V</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">∈</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mord"><span class="mord mathbb">C</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.821331em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">n</span><span class="mbin mtight">×</span><span class="mord mathnormal mtight">n</span></span></span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord">Λ</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">∈</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mord"><span class="mord mathbb">C</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.7143919999999999em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">n</span></span></span></span></span></span></span></span></span></span><span class="fix"></span></span></span></span></span></span></span></span></p>
-<p>This decomposition exists if and only if \(A\) is <code>diagonalizable</code>_.
+<p>This decomposition exists if and only if  is <code>diagonalizable</code>_.
 This is the case when all its eigenvalues are different.
 Supports input of float, double, cfloat and cdouble dtypes.
 Also supports batches of matrices, and if <code>A</code> is a batch of matrices then
@@ -231,7 +231,7 @@ the output has the same batch dimensions.</p>
 <ul>
 <li><p>This function assumes that <code>A</code> is <code>diagonalizable</code>_ (for example, when all the
 eigenvalues are different). If it is not diagonalizable, the returned
-eigenvalues will be correct but \(A \neq V \operatorname{diag}(\Lambda)V^{-1}\).</p></li>
+eigenvalues will be correct but .</p></li>
 <li><p>The eigenvectors of a matrix are not unique, nor are they continuous with respect to
 <code>A</code>. Due to this lack of uniqueness, different hardware and software may compute
 different eigenvectors.
@@ -242,8 +242,8 @@ In this implmentation, the returned eigenvectors are normalized to have norm
 <li><p>Gradients computed using <code>V</code> will only be finite when <code>A</code> does not have repeated eigenvalues.
 Furthermore, if the distance between any two eigenvalues is close to zero,
 the gradient will be numerically unstable, as it depends on the eigenvalues
-\(\lambda_i\) through the computation of
-\(\frac{1}{\min_{i \neq j} \lambda_i - \lambda_j}\).</p></li>
+ through the computation of
+.</p></li>
 </ul>
 
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>

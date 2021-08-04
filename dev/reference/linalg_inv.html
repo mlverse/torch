@@ -203,15 +203,15 @@ consisting of invertible matrices.</p></td>
 
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>Letting \(\mathbb{K}\) be \(\mathbb{R}\) or \(\mathbb{C}\),
-for a matrix \(A \in \mathbb{K}^{n \times n}\),
-its <strong>inverse matrix</strong> \(A^{-1} \in \mathbb{K}^{n \times n}\) (if it exists) is defined as</p>
+    <p>Letting  be  or ,
+for a matrix ,
+its <strong>inverse matrix</strong>  (if it exists) is defined as</p>
 <p><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/katex@0.13.11/dist/katex.min.css" data-external="1">
 <span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msup><mi>A</mi><mrow><mo>−</mo><mn>1</mn></mrow></msup><mi>A</mi><mo>=</mo><mi>A</mi><msup><mi>A</mi><mrow><mo>−</mo><mn>1</mn></mrow></msup><mo>=</mo><msub><mi mathvariant="normal">I</mi><mi>n</mi></msub></mrow><annotation encoding="application/x-tex">
 A^{-1}A = AA^{-1} = \mathrm{I}_n
 </annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.864108em;vertical-align:0em;"></span><span class="mord"><span class="mord mathnormal">A</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.864108em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">−</span><span class="mord mtight">1</span></span></span></span></span></span></span></span></span><span class="mord mathnormal">A</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.864108em;vertical-align:0em;"></span><span class="mord mathnormal">A</span><span class="mord"><span class="mord mathnormal">A</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.864108em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">−</span><span class="mord mtight">1</span></span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.83333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathrm">I</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">n</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span></span>
-where \(\mathrm{I}_n\) is the <code>n</code>-dimensional identity matrix.</p>
-<p>The inverse matrix exists if and only if \(A\) is invertible. In this case,
+where  is the <code>n</code>-dimensional identity matrix.</p>
+<p>The inverse matrix exists if and only if  is invertible. In this case,
 the inverse is unique.
 Supports input of float, double, cfloat and cdouble dtypes.
 Also supports batches of matrices, and if <code>A</code> is a batch of matrices
@@ -259,10 +259,10 @@ numerically stable algorithm.</p>
 
 <span class='op'>}</span>
 </div><div class='output co'>#&gt; torch_tensor
-#&gt; -0.1111  0.3870 -0.2653 -0.0841
-#&gt; -0.5346  0.1714  0.1889  0.0022
-#&gt; -0.0005 -2.4334 -0.5156 -0.7914
-#&gt; -0.0115 -1.1125 -0.4855  0.1338
+#&gt;  0.5158 -0.6645  0.1326 -0.6592
+#&gt; -1.6894  1.5206 -1.1280  0.3679
+#&gt;  1.8095 -4.7332  5.5629 -1.4851
+#&gt; -0.0558  1.3113 -1.2544 -0.0414
 #&gt; [ CPUFloatType{4,4} ]</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

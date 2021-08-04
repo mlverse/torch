@@ -42,9 +42,9 @@
   
 
 <meta property="og:title" content="Computes a solution to the least squares problem of a system of linear equations. — linalg_lstsq" />
-<meta property="og:description" content="Letting \(\mathbb{K}\) be \(\mathbb{R}\) or \(\mathbb{C}\),
-the least squares problem for a linear system \(AX = B\) with
-\(A \in \mathbb{K}^{m \times n}, B \in \mathbb{K}^{m \times k}\) is defined as" />
+<meta property="og:description" content="Letting  be  or ,
+the least squares problem for a linear system  with
+ is defined as" />
 
 
 <meta name="robots" content="noindex">
@@ -188,9 +188,9 @@ the least squares problem for a linear system \(AX = B\) with
     </div>
 
     <div class="ref-description">
-    <p>Letting \(\mathbb{K}\) be \(\mathbb{R}\) or \(\mathbb{C}\),
-the <strong>least squares problem</strong> for a linear system \(AX = B\) with
-\(A \in \mathbb{K}^{m \times n}, B \in \mathbb{K}^{m \times k}\) is defined as</p>
+    <p>Letting  be  or ,
+the <strong>least squares problem</strong> for a linear system  with
+ is defined as</p>
     </div>
 
     <pre class="usage"><span class='fu'>linalg_lstsq</span><span class='op'>(</span><span class='va'>A</span>, <span class='va'>B</span>, rcond <span class='op'>=</span> <span class='cn'>NULL</span>, <span class='va'>...</span>, driver <span class='op'>=</span> <span class='cn'>NULL</span><span class='op'>)</span></pre>
@@ -233,7 +233,7 @@ Default: <code>NULL</code>.</p></td>
 <span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><munder><mrow><mi>min</mi><mo>⁡</mo></mrow><mrow><mi>X</mi><mo>∈</mo><msup><mi mathvariant="double-struck">K</mi><mrow><mi>n</mi><mo>×</mo><mi>k</mi></mrow></msup></mrow></munder><mi mathvariant="normal">∥</mi><mi>A</mi><mi>X</mi><mo>−</mo><mi>B</mi><msub><mi mathvariant="normal">∥</mi><mi>F</mi></msub></mrow><annotation encoding="application/x-tex">
 \min_{X \in \mathbb{K}^{n \times k}} \|AX - B\|_F
 </annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.59079em;vertical-align:-0.8407899999999999em;"></span><span class="mop op-limits"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.66786em;"><span style="top:-2.28658em;margin-left:0em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.07847em;">X</span><span class="mrel mtight">∈</span><span class="mord mtight"><span class="mord mathbb mtight">K</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.7820285714285714em;"><span style="top:-2.786em;margin-right:0.07142857142857144em;"><span class="pstrut" style="height:2.5em;"></span><span class="sizing reset-size3 size1 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">n</span><span class="mbin mtight">×</span><span class="mord mathnormal mtight" style="margin-right:0.03148em;">k</span></span></span></span></span></span></span></span></span></span></span></span><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span><span class="mop">min</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.8407899999999999em;"><span></span></span></span></span></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord">∥</span><span class="mord mathnormal">A</span><span class="mord mathnormal" style="margin-right:0.07847em;">X</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.05017em;">B</span><span class="mord"><span class="mord">∥</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.32833099999999993em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.13889em;">F</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span></span></p>
-<p>where \(\|-\|_F\) denotes the Frobenius norm.
+<p>where  denotes the Frobenius norm.
 Supports inputs of float, double, cfloat and cdouble dtypes.</p>
 <p>Also supports batches of matrices, and if the inputs are batches of matrices then
 the output has the same batch dimensions.
@@ -252,14 +252,14 @@ For CUDA input, the only valid driver is <code>'gels'</code>, which assumes that
 <p>See also the <a href='https://www.netlib.org/lapack/lug/node27.html'>full description of these drivers</a></p>
 <p><code>rcond</code> is used to determine the effective rank of the matrices in <code>A</code>
 when <code>driver</code> is one of (<code>'gelsy'</code>, <code>'gelsd'</code>, <code>'gelss'</code>).
-In this case, if \(\sigma_i\) are the singular values of <code>A</code> in decreasing order,
-\(\sigma_i\) will be rounded down to zero if \(\sigma_i \leq rcond \cdot \sigma_1\).
+In this case, if  are the singular values of <code>A</code> in decreasing order,
+ will be rounded down to zero if .
 If <code>rcond = NULL</code> (default), <code>rcond</code> is set to the machine precision of the dtype of <code>A</code>.</p>
 <p>This function returns the solution to the problem and some extra information in a list of
 four tensors <code>(solution, residuals, rank, singular_values)</code>. For inputs <code>A</code>, <code>B</code>
 of shape <code>(*, m, n)</code>, <code>(*, m, k)</code> respectively, it cointains</p><ul>
 <li><p><code>solution</code>: the least squares solution. It has shape <code>(*, n, k)</code>.</p></li>
-<li><p><code>residuals</code>: the squared residuals of the solutions, that is, \(\|AX - B\|_F^2\).
+<li><p><code>residuals</code>: the squared residuals of the solutions, that is, .
 It has shape equal to the batch dimensions of <code>A</code>.
 It is computed when <code>m &gt; n</code> and every matrix in <code>A</code> is full-rank,
 otherwise, it is an empty tensor.

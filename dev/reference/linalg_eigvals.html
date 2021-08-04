@@ -42,8 +42,8 @@
   
 
 <meta property="og:title" content="Computes the eigenvalues of a square matrix. — linalg_eigvals" />
-<meta property="og:description" content="Letting \(\mathbb{K}\) be \(\mathbb{R}\) or \(\mathbb{C}\),
-the eigenvalues of a square matrix \(A \in \mathbb{K}^{n \times n}\) are defined
+<meta property="og:description" content="Letting  be  or ,
+the eigenvalues of a square matrix  are defined
 as the roots (counted with multiplicity) of the polynomial p of degree n given by" />
 
 
@@ -188,8 +188,8 @@ as the roots (counted with multiplicity) of the polynomial p of degree n given b
     </div>
 
     <div class="ref-description">
-    <p>Letting \(\mathbb{K}\) be \(\mathbb{R}\) or \(\mathbb{C}\),
-the <strong>eigenvalues</strong> of a square matrix \(A \in \mathbb{K}^{n \times n}\) are defined
+    <p>Letting  be  or ,
+the <strong>eigenvalues</strong> of a square matrix  are defined
 as the roots (counted with multiplicity) of the polynomial <code>p</code> of degree <code>n</code> given by</p>
     </div>
 
@@ -210,7 +210,7 @@ as the roots (counted with multiplicity) of the polynomial <code>p</code> of deg
 <span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>p</mi><mo stretchy="false">(</mo><mi>λ</mi><mo stretchy="false">)</mo><mo>=</mo><mi mathvariant="normal">det</mi><mo>⁡</mo><mo stretchy="false">(</mo><mi>A</mi><mo>−</mo><mi>λ</mi><msub><mi mathvariant="normal">I</mi><mi>n</mi></msub><mo stretchy="false">)</mo><mpadded width="0px"><mrow><mspace width="2em"/><mi>λ</mi><mo>∈</mo><mi mathvariant="double-struck">C</mi></mrow></mpadded></mrow><annotation encoding="application/x-tex">
 p(\lambda) = \operatorname{det}(A - \lambda \mathrm{I}_n)\mathrlap{\qquad \lambda \in \mathbb{C}}
 </annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal">p</span><span class="mopen">(</span><span class="mord mathnormal">λ</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mop"><span class="mord mathrm">det</span></span><span class="mopen">(</span><span class="mord mathnormal">A</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal">λ</span><span class="mord"><span class="mord mathrm">I</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">n</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mclose">)</span><span class="mord vbox"><span class="thinbox"><span class="rlap"><span class="strut" style="height:0.73354em;vertical-align:-0.0391em;"></span><span class="inner"><span class="mord"><span class="mspace" style="margin-right:2em;"></span><span class="mord mathnormal">λ</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">∈</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mord mathbb">C</span></span></span><span class="fix"></span></span></span></span></span></span></span></span></p>
-<p>where \(\mathrm{I}_n\) is the <code>n</code>-dimensional identity matrix.
+<p>where  is the <code>n</code>-dimensional identity matrix.
 Supports input of float, double, cfloat and cdouble dtypes.
 Also supports batches of matrices, and if <code>A</code> is a batch of matrices then
 the output has the same batch dimensions.</p>

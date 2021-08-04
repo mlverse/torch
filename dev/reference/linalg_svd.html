@@ -42,9 +42,9 @@
   
 
 <meta property="og:title" content="Computes the singular value decomposition (SVD) of a matrix. — linalg_svd" />
-<meta property="og:description" content="Letting \(\mathbb{K}\) be \(\mathbb{R}\) or \(\mathbb{C}\),
+<meta property="og:description" content="Letting  be  or ,
 the full SVD of a matrix
-\(A \in \mathbb{K}^{m \times n}\), if k = min(m,n), is defined as" />
+, if k = min(m,n), is defined as" />
 
 
 <meta name="robots" content="noindex">
@@ -188,9 +188,9 @@ the full SVD of a matrix
     </div>
 
     <div class="ref-description">
-    <p>Letting \(\mathbb{K}\) be \(\mathbb{R}\) or \(\mathbb{C}\),
+    <p>Letting  be  or ,
 the <strong>full SVD</strong> of a matrix
-\(A \in \mathbb{K}^{m \times n}\), if <code>k = min(m,n)</code>, is defined as</p>
+, if <code>k = min(m,n)</code>, is defined as</p>
     </div>
 
     <pre class="usage"><span class='fu'>linalg_svd</span><span class='op'>(</span><span class='va'>A</span>, full_matrices <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span></pre>
@@ -205,38 +205,38 @@ the <strong>full SVD</strong> of a matrix
     <tr>
       <th>full_matrices</th>
       <td><p>(bool, optional): controls whether to compute the full or reduced
-SVD, and consequently, the shape of the returned tensors <code>U</code> and <code>Vᴴ</code>. Default: <code>TRUE</code>.</p></td>
+SVD, and consequently, the shape of the returned tensors <code>U</code> and <code>V</code>. Default: <code>TRUE</code>.</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A list <code>(U, S, V)</code> which corresponds to \(U\), \(S\), \(V^{H}\) above.
+    <p>A list <code>(U, S, V)</code> which corresponds to , ,  above.
 <code>S</code> will always be real-valued, even when <code>A</code> is complex.
 It will also be ordered in descending order.
-<code>U</code> and <code>Vᴴ</code> will have the same dtype as <code>A</code>. The left / right singular vectors will be given by
-the columns of <code>U</code> and the rows of <code>Vᴴ</code> respectively.</p>
+<code>U</code> and <code>V</code> will have the same dtype as <code>A</code>. The left / right singular vectors will be given by
+the columns of <code>U</code> and the rows of <code>V</code> respectively.</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/katex@0.13.11/dist/katex.min.css" data-external="1">
 <span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>A</mi><mo>=</mo><mi>U</mi><mi mathvariant="normal">diag</mi><mo>⁡</mo><mo stretchy="false">(</mo><mi>S</mi><mo stretchy="false">)</mo><msup><mi>V</mi><mi>H</mi></msup><mpadded width="0px"><mrow><mspace width="2em"/><mi>U</mi><mo>∈</mo><msup><mi mathvariant="double-struck">K</mi><mrow><mi>m</mi><mo>×</mo><mi>m</mi></mrow></msup><mo separator="true">,</mo><mi>S</mi><mo>∈</mo><msup><mi mathvariant="double-struck">R</mi><mi>k</mi></msup><mo separator="true">,</mo><mi>V</mi><mo>∈</mo><msup><mi mathvariant="double-struck">K</mi><mrow><mi>n</mi><mo>×</mo><mi>n</mi></mrow></msup></mrow></mpadded></mrow><annotation encoding="application/x-tex">
 A = U \operatorname{diag}(S) V^{H} \mathrlap{\qquad U \in \mathbb{K}^{m \times m}, S \in \mathbb{R}^k, V \in \mathbb{K}^{n \times n}}
 </annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathnormal">A</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1.149108em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.10903em;">U</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mop"><span class="mord mathrm" style="margin-right:0.01389em;">diag</span></span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.05764em;">S</span><span class="mclose">)</span><span class="mord"><span class="mord mathnormal" style="margin-right:0.22222em;">V</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8913309999999999em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.08125em;">H</span></span></span></span></span></span></span></span></span><span class="mord vbox"><span class="thinbox"><span class="rlap"><span class="strut" style="height:1.093548em;vertical-align:-0.19444em;"></span><span class="inner"><span class="mord"><span class="mspace" style="margin-right:2em;"></span><span class="mord mathnormal" style="margin-right:0.10903em;">U</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">∈</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mord"><span class="mord mathbb">K</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.821331em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">m</span><span class="mbin mtight">×</span><span class="mord mathnormal mtight">m</span></span></span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathnormal" style="margin-right:0.05764em;">S</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">∈</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mord"><span class="mord mathbb">R</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8991079999999999em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.03148em;">k</span></span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathnormal" style="margin-right:0.22222em;">V</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">∈</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mord"><span class="mord mathbb">K</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.821331em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">n</span><span class="mbin mtight">×</span><span class="mord mathnormal mtight">n</span></span></span></span></span></span></span></span></span></span></span><span class="fix"></span></span></span></span></span></span></span></span></p>
-<p>where \(\operatorname{diag}(S) \in \mathbb{K}^{m \times n}\),
-\(V^{H}\) is the conjugate transpose when \(V\) is complex, and the transpose when \(V\) is real-valued.</p>
-<p>The matrices  \(U\), \(V\) (and thus \(V^{H}\)) are orthogonal in the real case, and unitary in the complex case.
+<p>where ,
+ is the conjugate transpose when  is complex, and the transpose when  is real-valued.</p>
+<p>The matrices  ,  (and thus ) are orthogonal in the real case, and unitary in the complex case.
 When <code>m &gt; n</code> (resp. <code>m &lt; n</code>) we can drop the last <code>m - n</code> (resp. <code>n - m</code>) columns of <code>U</code> (resp. <code>V</code>) to form the <strong>reduced SVD</strong>:</p>
 <p><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/katex@0.13.11/dist/katex.min.css" data-external="1">
 <span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>A</mi><mo>=</mo><mi>U</mi><mi mathvariant="normal">diag</mi><mo>⁡</mo><mo stretchy="false">(</mo><mi>S</mi><mo stretchy="false">)</mo><msup><mi>V</mi><mi>H</mi></msup><mpadded width="0px"><mrow><mspace width="2em"/><mi>U</mi><mo>∈</mo><msup><mi mathvariant="double-struck">K</mi><mrow><mi>m</mi><mo>×</mo><mi>k</mi></mrow></msup><mo separator="true">,</mo><mi>S</mi><mo>∈</mo><msup><mi mathvariant="double-struck">R</mi><mi>k</mi></msup><mo separator="true">,</mo><mi>V</mi><mo>∈</mo><msup><mi mathvariant="double-struck">K</mi><mrow><mi>k</mi><mo>×</mo><mi>n</mi></mrow></msup></mrow></mpadded></mrow><annotation encoding="application/x-tex">
 A = U \operatorname{diag}(S) V^{H} \mathrlap{\qquad U \in \mathbb{K}^{m \times k}, S \in \mathbb{R}^k, V \in \mathbb{K}^{k \times n}}
 </annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathnormal">A</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1.149108em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.10903em;">U</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mop"><span class="mord mathrm" style="margin-right:0.01389em;">diag</span></span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.05764em;">S</span><span class="mclose">)</span><span class="mord"><span class="mord mathnormal" style="margin-right:0.22222em;">V</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8913309999999999em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.08125em;">H</span></span></span></span></span></span></span></span></span><span class="mord vbox"><span class="thinbox"><span class="rlap"><span class="strut" style="height:1.093548em;vertical-align:-0.19444em;"></span><span class="inner"><span class="mord"><span class="mspace" style="margin-right:2em;"></span><span class="mord mathnormal" style="margin-right:0.10903em;">U</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">∈</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mord"><span class="mord mathbb">K</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8991079999999999em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">m</span><span class="mbin mtight">×</span><span class="mord mathnormal mtight" style="margin-right:0.03148em;">k</span></span></span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathnormal" style="margin-right:0.05764em;">S</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">∈</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mord"><span class="mord mathbb">R</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8991079999999999em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.03148em;">k</span></span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathnormal" style="margin-right:0.22222em;">V</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">∈</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mord"><span class="mord mathbb">K</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8991079999999999em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.03148em;">k</span><span class="mbin mtight">×</span><span class="mord mathnormal mtight">n</span></span></span></span></span></span></span></span></span></span></span><span class="fix"></span></span></span></span></span></span></span></span></p>
-<p>where \(\operatorname{diag}(S) \in \mathbb{K}^{k \times k}\).</p>
-<p>In this case, \(U\) and \(V\) also have orthonormal columns.
+<p>where .</p>
+<p>In this case,  and  also have orthonormal columns.
 Supports input of float, double, cfloat and cdouble dtypes.</p>
 <p>Also supports batches of matrices, and if <code>A</code> is a batch of matrices then
 the output has the same batch dimensions.</p>
-<p>The returned decomposition is a named tuple <code>(U, S, Vᴴ)</code>
-which corresponds to \(U\), \(S\), \(V^{H}\) above.</p>
+<p>The returned decomposition is a named tuple <code>(U, S, V)</code>
+which corresponds to , ,  above.</p>
 <p>The singular values are returned in descending order.
 The parameter <code>full_matrices</code> chooses between the full (default) and reduced SVD.</p>
     <h2 class="hasAnchor" id="note"><a class="anchor" href="#note"></a>Note</h2>
@@ -253,20 +253,20 @@ respect to <code>A</code>.
 Due to this lack of uniqueness, different hardware and software may compute
 different singular vectors.
 This non-uniqueness is caused by the fact that multiplying any pair of singular
-vectors \(u_k, v_k\) by <code>-1</code> in the real case or by
-\(e^{i \phi}, \phi \in \mathbb{R}\) in the complex case produces another two
+vectors  by <code>-1</code> in the real case or by
+ in the complex case produces another two
 valid singular vectors of the matrix.
 This non-uniqueness problem is even worse when the matrix has repeated singular values.
 In this case, one may multiply the associated singular vectors of <code>U</code> and <code>V</code> spanning
 the subspace by a rotation matrix and the resulting vectors will span the same subspace.</p>
-<p>Gradients computed using <code>U</code> or <code>Vᴴ</code> will only be finite when
+<p>Gradients computed using <code>U</code> or <code>V</code> will only be finite when
 <code>A</code> does not have zero as a singular value or repeated singular values.
 Furthermore, if the distance between any two singular values is close to zero,
 the gradient will be numerically unstable, as it depends on the singular values
-\(\sigma_i\) through the computation of
-\(\frac{1}{\min_{i \neq j} \sigma_i^2 - \sigma_j^2}\).
+ through the computation of
+.
 The gradient will also be numerically unstable when <code>A</code> has small singular
-values, as it also depends on the computaiton of \(\frac{1}{\sigma_i}\).</p>
+values, as it also depends on the computaiton of .</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'>
@@ -317,25 +317,25 @@ matrices.</p></li>
 <span class='op'>}</span>
 </div><div class='output co'>#&gt; [[1]]
 #&gt; torch_tensor
-#&gt;  0.0404 -0.4495  0.6555
-#&gt; -0.9385 -0.2409  0.0329
-#&gt;  0.1726 -0.8316 -0.4070
-#&gt; -0.0422 -0.0013 -0.6131
-#&gt;  0.2933 -0.2200  0.1665
+#&gt;  0.4990  0.5456  0.0218
+#&gt;  0.2416 -0.0605  0.8764
+#&gt;  0.7351 -0.0650 -0.0982
+#&gt; -0.2934  0.8240  0.1113
+#&gt;  0.2572  0.1244 -0.4576
 #&gt; [ CPUFloatType{5,3} ]
 #&gt; 
 #&gt; [[2]]
 #&gt; torch_tensor
-#&gt;  2.9592
-#&gt;  2.2225
-#&gt;  1.2049
+#&gt;  2.6816
+#&gt;  1.8579
+#&gt;  0.3224
 #&gt; [ CPUFloatType{3} ]
 #&gt; 
 #&gt; [[3]]
 #&gt; torch_tensor
-#&gt; -0.5646 -0.7862 -0.2514
-#&gt; -0.7940  0.6005 -0.0945
-#&gt;  0.2253  0.1462 -0.9633
+#&gt;  0.2777  0.1939  0.9409
+#&gt;  0.0536  0.9748 -0.2167
+#&gt;  0.9592 -0.1106 -0.2603
 #&gt; [ CPUFloatType{3,3} ]
 #&gt; </div></pre>
   </div>
