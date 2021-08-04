@@ -25,16 +25,16 @@ Default: \code{NULL}.}
 A list \verb{(solution, residuals, rank, singular_values)}.
 }
 \description{
-Letting \eqn{\mathbb{K}} be \eqn{\mathbb{R}} or \eqn{\mathbb{C}},
-the \strong{least squares problem} for a linear system \eqn{AX = B} with
-\eqn{A \in \mathbb{K}^{m \times n}, B \in \mathbb{K}^{m \times k}} is defined as
+Letting \teqn{\mathbb{K}} be \teqn{\mathbb{R}} or \teqn{\mathbb{C}},
+the \strong{least squares problem} for a linear system \teqn{AX = B} with
+\teqn{A \in \mathbb{K}^{m \times n}, B \in \mathbb{K}^{m \times k}} is defined as
 }
 \details{
 \Sexpr[results=rd, stage=build]{torch:::math_to_rd("
 \\\\min_{X \\\\in \\\\mathbb{K}^{n \\\\times k}} \\\\|AX - B\\\\|_F
 ")}
 
-where \eqn{\|-\|_F} denotes the Frobenius norm.
+where \teqn{\|-\|_F} denotes the Frobenius norm.
 Supports inputs of float, double, cfloat and cdouble dtypes.
 
 Also supports batches of matrices, and if the inputs are batches of matrices then
@@ -58,8 +58,8 @@ See also the \href{https://www.netlib.org/lapack/lug/node27.html}{full descripti
 
 \code{rcond} is used to determine the effective rank of the matrices in \code{A}
 when \code{driver} is one of (\code{'gelsy'}, \code{'gelsd'}, \code{'gelss'}).
-In this case, if \eqn{\sigma_i} are the singular values of \code{A} in decreasing order,
-\eqn{\sigma_i} will be rounded down to zero if \eqn{\sigma_i \leq rcond \cdot \sigma_1}.
+In this case, if \teqn{\sigma_i} are the singular values of \code{A} in decreasing order,
+\teqn{\sigma_i} will be rounded down to zero if \teqn{\sigma_i \leq rcond \cdot \sigma_1}.
 If \code{rcond = NULL} (default), \code{rcond} is set to the machine precision of the dtype of \code{A}.
 
 This function returns the solution to the problem and some extra information in a list of
@@ -67,7 +67,7 @@ four tensors \verb{(solution, residuals, rank, singular_values)}. For inputs \co
 of shape \verb{(*, m, n)}, \verb{(*, m, k)} respectively, it cointains
 \itemize{
 \item \code{solution}: the least squares solution. It has shape \verb{(*, n, k)}.
-\item \code{residuals}: the squared residuals of the solutions, that is, \eqn{\|AX - B\|_F^2}.
+\item \code{residuals}: the squared residuals of the solutions, that is, \teqn{\|AX - B\|_F^2}.
 It has shape equal to the batch dimensions of \code{A}.
 It is computed when \code{m > n} and every matrix in \code{A} is full-rank,
 otherwise, it is an empty tensor.

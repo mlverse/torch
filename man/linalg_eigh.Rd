@@ -14,24 +14,24 @@ consisting of symmetric or Hermitian matrices.}
 of \code{A} in the computations. Default: \code{'L'}.}
 }
 \value{
-A list \verb{(eigenvalues, eigenvectors)} which corresponds to \eqn{\Lambda} and \eqn{Q} above.
+A list \verb{(eigenvalues, eigenvectors)} which corresponds to \teqn{\Lambda} and \teqn{Q} above.
 \code{eigenvalues} will always be real-valued, even when \code{A} is complex.
 
 It will also be ordered in ascending order.
 \code{eigenvectors} will have the same dtype as \code{A} and will contain the eigenvectors as its columns.
 }
 \description{
-Letting \eqn{\mathbb{K}} be \eqn{\mathbb{R}} or \eqn{\mathbb{C}},
+Letting \teqn{\mathbb{K}} be \teqn{\mathbb{R}} or \teqn{\mathbb{C}},
 the \strong{eigenvalue decomposition} of a complex Hermitian or real symmetric matrix
-\eqn{A \in \mathbb{K}^{n \times n}} is defined as
+\teqn{A \in \mathbb{K}^{n \times n}} is defined as
 }
 \details{
 \Sexpr[results=rd, stage=build]{torch:::math_to_rd("
 A = Q \\\\operatorname{diag}(\\\\Lambda) Q^{H}\\\\mathrlap{\\\\qquad Q \\\\in \\\\mathbb{K}^{n \\\\times n}, \\\\Lambda \\\\in \\\\mathbb{R}^n}
 ")}
 
-where \eqn{Q^{H}} is the conjugate transpose when \eqn{Q} is complex, and the transpose when \eqn{Q} is real-valued.
-\eqn{Q} is orthogonal in the real case and unitary in the complex case.
+where \teqn{Q^{H}} is the conjugate transpose when \teqn{Q} is complex, and the transpose when \teqn{Q} is real-valued.
+\teqn{Q} is orthogonal in the real case and unitary in the complex case.
 
 Supports input of float, double, cfloat and cdouble dtypes.
 Also supports batches of matrices, and if \code{A} is a batch of matrices then
@@ -54,7 +54,7 @@ The eigenvalues of real symmetric or complex Hermitian matrices are always real.
 respect to \code{A}. Due to this lack of uniqueness, different hardware and
 software may compute different eigenvectors.
 This non-uniqueness is caused by the fact that multiplying an eigenvector by
-\code{-1} in the real case or by \eqn{e^{i \phi}, \phi \in \mathbb{R}} in the complex
+\code{-1} in the real case or by \teqn{e^{i \phi}, \phi \in \mathbb{R}} in the complex
 case produces another set of valid eigenvectors of the matrix.
 This non-uniqueness problem is even worse when the matrix has repeated eigenvalues.
 In this case, one may multiply the associated eigenvectors spanning
@@ -64,8 +64,8 @@ eigenvectors.
 \code{A} has unique eigenvalues.
 Furthermore, if the distance between any two eigvalues is close to zero,
 the gradient will be numerically unstable, as it depends on the eigenvalues
-\eqn{\lambda_i} through the computation of
-\eqn{\frac{1}{\min_{i \neq j} \lambda_i - \lambda_j}}.
+\teqn{\lambda_i} through the computation of
+\teqn{\frac{1}{\min_{i \neq j} \lambda_i - \lambda_j}}.
 }
 }
 

@@ -37,9 +37,9 @@ the tolerance is set to be
 tol = \\\\sigma_1 \\\\max(m, n) \\\\varepsilon
 ")}
 
-where \eqn{\sigma_1} is the largest singular value
+where \teqn{\sigma_1} is the largest singular value
 (or eigenvalue in absolute value when \code{hermitian = TRUE}), and
-\eqn{\varepsilon} is the epsilon value for the dtype of \code{A} (see \code{\link[=torch_finfo]{torch_finfo()}}).
+\teqn{\varepsilon} is the epsilon value for the dtype of \code{A} (see \code{\link[=torch_finfo]{torch_finfo()}}).
 
 If \code{A} is a batch of matrices, \code{tol} is computed this way for every element of
 the batch.

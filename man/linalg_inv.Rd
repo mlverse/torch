@@ -14,16 +14,16 @@ consisting of invertible matrices.}
 Throws a \code{runtime_error} if the matrix is not invertible.
 }
 \details{
-Letting \eqn{\mathbb{K}} be \eqn{\mathbb{R}} or \eqn{\mathbb{C}},
-for a matrix \eqn{A \in \mathbb{K}^{n \times n}},
-its \strong{inverse matrix} \eqn{A^{-1} \in \mathbb{K}^{n \times n}} (if it exists) is defined as
+Letting \teqn{\mathbb{K}} be \teqn{\mathbb{R}} or \teqn{\mathbb{C}},
+for a matrix \teqn{A \in \mathbb{K}^{n \times n}},
+its \strong{inverse matrix} \teqn{A^{-1} \in \mathbb{K}^{n \times n}} (if it exists) is defined as
 
 \Sexpr[results=rd, stage=build]{torch:::math_to_rd("
 A^{-1}A = AA^{-1} = \\\\mathrm{I}_n
 ")}
-where \eqn{\mathrm{I}_n} is the \code{n}-dimensional identity matrix.
+where \teqn{\mathrm{I}_n} is the \code{n}-dimensional identity matrix.
 
-The inverse matrix exists if and only if \eqn{A} is invertible. In this case,
+The inverse matrix exists if and only if \teqn{A} is invertible. In this case,
 the inverse is unique.
 Supports input of float, double, cfloat and cdouble dtypes.
 Also supports batches of matrices, and if \code{A} is a batch of matrices

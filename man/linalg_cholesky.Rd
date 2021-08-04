@@ -11,18 +11,18 @@ linalg_cholesky(A)
 consisting of symmetric or Hermitian positive-definite matrices.}
 }
 \description{
-Letting \eqn{\mathbb{K}} be \eqn{\mathbb{R}} or \eqn{\mathbb{C}},
+Letting \teqn{\mathbb{K}} be \teqn{\mathbb{R}} or \teqn{\mathbb{C}},
 the \strong{Cholesky decomposition} of a complex Hermitian or real symmetric positive-definite matrix
-\eqn{A \in \mathbb{K}^{n \times n}} is defined as
+\teqn{A \in \mathbb{K}^{n \times n}} is defined as
 }
 \details{
 \Sexpr[results=rd, stage=build]{torch:::math_to_rd("
 A = LL^{H}\\\\mathrlap{\\\\qquad L \\\\in \\\\mathbb{K}^{n \\\\times n}}
 ")}
 
-where \eqn{L} is a lower triangular matrix and
-\eqn{L^{H}} is the conjugate transpose when \eqn{L} is complex, and the
-transpose when \eqn{L} is real-valued.
+where \teqn{L} is a lower triangular matrix and
+\teqn{L^{H}} is the conjugate transpose when \teqn{L} is complex, and the
+transpose when \teqn{L} is real-valued.
 
 Supports input of float, double, cfloat and cdouble dtypes.
 Also supports batches of matrices, and if \code{A} is a batch of matrices then

@@ -18,8 +18,8 @@ A real-valued tensor cointaining the eigenvalues even when \code{A} is complex.
 The eigenvalues are returned in ascending order.
 }
 \description{
-Letting \eqn{\mathbb{K}} be \eqn{\mathbb{R}} or \eqn{\mathbb{C}},
-the \strong{eigenvalues} of a complex Hermitian or real symmetric  matrix \eqn{A \in \mathbb{K}^{n \times n}}
+Letting \teqn{\mathbb{K}} be \teqn{\mathbb{R}} or \teqn{\mathbb{C}},
+the \strong{eigenvalues} of a complex Hermitian or real symmetric  matrix \teqn{A \in \mathbb{K}^{n \times n}}
 are defined as the roots (counted with multiplicity) of the polynomial \code{p} of degree \code{n} given by
 }
 \details{
@@ -27,7 +27,7 @@ are defined as the roots (counted with multiplicity) of the polynomial \code{p} 
 p(\\\\lambda) = \\\\operatorname{det}(A - \\\\lambda \\\\mathrm{I}_n)\\\\mathrlap{\\\\qquad \\\\lambda \\\\in \\\\mathbb{R}}
 ")}
 
-where \eqn{\mathrm{I}_n} is the \code{n}-dimensional identity matrix.
+where \teqn{\mathrm{I}_n} is the \code{n}-dimensional identity matrix.
 
 The eigenvalues of a real symmetric or complex Hermitian matrix are always real.
 Supports input of float, double, cfloat and cdouble dtypes.

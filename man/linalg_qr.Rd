@@ -16,16 +16,16 @@ Controls the shape of the returned tensors. Default: \code{'reduced'}.}
 A list \verb{(Q, R)}.
 }
 \description{
-Letting \eqn{\mathbb{K}} be \eqn{\mathbb{R}} or \eqn{\mathbb{C}},
+Letting \teqn{\mathbb{K}} be \teqn{\mathbb{R}} or \teqn{\mathbb{C}},
 the \strong{full QR decomposition} of a matrix
-\eqn{A \in \mathbb{K}^{m \times n}} is defined as
+\teqn{A \in \mathbb{K}^{m \times n}} is defined as
 }
 \details{
 \Sexpr[results=rd, stage=build]{torch:::math_to_rd("
 A = QR\\\\mathrlap{\\\\qquad Q \\\\in \\\\mathbb{K}^{m \\\\times m}, R \\\\in \\\\mathbb{K}^{m \\\\times n}}
 ")}
 
-where \eqn{Q} is orthogonal in the real case and unitary in the complex case, and \eqn{R} is upper triangular.
+where \teqn{Q} is orthogonal in the real case and unitary in the complex case, and \teqn{R} is upper triangular.
 When \code{m > n} (tall matrix), as \code{R} is upper triangular, its last \code{m - n} rows are zero.
 In this case, we can drop the last \code{m - n} columns of \code{Q} to form the
 \strong{reduced QR decomposition}:

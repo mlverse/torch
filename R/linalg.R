@@ -172,9 +172,9 @@ linalg_slogdet <- function(A) {
 
 #' Computes the condition number of a matrix with respect to a matrix norm.
 #' 
-#' Letting \eqn{\mathbb{K}} be \eqn{\mathbb{R}} or \eqn{\mathbb{C}},
-#' the **condition number** \eqn{\kappa} of a matrix
-#' \eqn{A \in \mathbb{K}^{n \times n}} is defined as
+#' Letting \teqn{\mathbb{K}} be \teqn{\mathbb{R}} or \teqn{\mathbb{C}},
+#' the **condition number** \teqn{\kappa} of a matrix
+#' \teqn{A \in \mathbb{K}^{n \times n}} is defined as
 #' 
 #' \Sexpr[results=rd, stage=build]{torch:::math_to_rd("\\\\kappa(A) = \\\\|A\\\\|_p\\\\|A^{-1}\\\\|_p")}
 #'   
@@ -195,7 +195,7 @@ linalg_slogdet <- function(A) {
 #' and invertible.
 #' 
 #' For `p` in `(2, -2)`, this function can be computed in terms of the singular values
-#' \eqn{\sigma_1 \geq \ldots \geq \sigma_n}
+#' \teqn{\sigma_1 \geq \ldots \geq \sigma_n}
 #' 
 #' \Sexpr[results=rd, stage=build]{torch:::math_to_rd("\\\\kappa_2(A) = \\\\frac{\\\\sigma_1}{\\\\sigma_n}\\\\qquad \\\\kappa_{-2}(A) = \\\\frac{\\\\sigma_n}{\\\\sigma_1}")}
 #'     
@@ -247,9 +247,9 @@ linalg_cond <- function(A, p=NULL) {
 #' tol = \\\\sigma_1 \\\\max(m, n) \\\\varepsilon
 #' ")}
 #'   
-#' where \eqn{\sigma_1} is the largest singular value
+#' where \teqn{\sigma_1} is the largest singular value
 #' (or eigenvalue in absolute value when `hermitian = TRUE`), and
-#' \eqn{\varepsilon} is the epsilon value for the dtype of `A` (see [torch_finfo()]).
+#' \teqn{\varepsilon} is the epsilon value for the dtype of `A` (see [torch_finfo()]).
 #' 
 #' If `A` is a batch of matrices, `tol` is computed this way for every element of
 #' the batch.
@@ -281,17 +281,17 @@ linalg_matrix_rank <- function(A, tol=NULL, hermitian=FALSE) {
 
 #' Computes the Cholesky decomposition of a complex Hermitian or real symmetric positive-definite matrix.
 #' 
-#' Letting \eqn{\mathbb{K}} be \eqn{\mathbb{R}} or \eqn{\mathbb{C}},
+#' Letting \teqn{\mathbb{K}} be \teqn{\mathbb{R}} or \teqn{\mathbb{C}},
 #' the **Cholesky decomposition** of a complex Hermitian or real symmetric positive-definite matrix
-#' \eqn{A \in \mathbb{K}^{n \times n}} is defined as
+#' \teqn{A \in \mathbb{K}^{n \times n}} is defined as
 #' 
 #' \Sexpr[results=rd, stage=build]{torch:::math_to_rd("
 #' A = LL^{H}\\\\mathrlap{\\\\qquad L \\\\in \\\\mathbb{K}^{n \\\\times n}}
 #' ")}
 #' 
-#' where \eqn{L} is a lower triangular matrix and
-#' \eqn{L^{H}} is the conjugate transpose when \eqn{L} is complex, and the
-#' transpose when \eqn{L} is real-valued.
+#' where \teqn{L} is a lower triangular matrix and
+#' \teqn{L^{H}} is the conjugate transpose when \teqn{L} is complex, and the
+#' transpose when \teqn{L} is real-valued.
 #' 
 #' Supports input of float, double, cfloat and cdouble dtypes.
 #' Also supports batches of matrices, and if `A` is a batch of matrices then
@@ -321,15 +321,15 @@ linalg_cholesky <- function(A) {
 
 #' Computes the QR decomposition of a matrix.
 #' 
-#' Letting \eqn{\mathbb{K}} be \eqn{\mathbb{R}} or \eqn{\mathbb{C}},
+#' Letting \teqn{\mathbb{K}} be \teqn{\mathbb{R}} or \teqn{\mathbb{C}},
 #' the **full QR decomposition** of a matrix
-#' \eqn{A \in \mathbb{K}^{m \times n}} is defined as
+#' \teqn{A \in \mathbb{K}^{m \times n}} is defined as
 #' 
 #' \Sexpr[results=rd, stage=build]{torch:::math_to_rd("
 #'   A = QR\\\\mathrlap{\\\\qquad Q \\\\in \\\\mathbb{K}^{m \\\\times m}, R \\\\in \\\\mathbb{K}^{m \\\\times n}}
 #' ")}
 #' 
-#' where \eqn{Q} is orthogonal in the real case and unitary in the complex case, and \eqn{R} is upper triangular.
+#' where \teqn{Q} is orthogonal in the real case and unitary in the complex case, and \teqn{R} is upper triangular.
 #' When `m > n` (tall matrix), as `R` is upper triangular, its last `m - n` rows are zero.
 #' In this case, we can drop the last `m - n` columns of `Q` to form the
 #' **reduced QR decomposition**:
@@ -371,15 +371,15 @@ linalg_qr <- function(A, mode='reduced') {
 
 #' Computes the eigenvalue decomposition of a square matrix if it exists.
 #' 
-#' Letting \eqn{\mathbb{K}} be \eqn{\mathbb{R}} or \eqn{\mathbb{C}},
+#' Letting \teqn{\mathbb{K}} be \teqn{\mathbb{R}} or \teqn{\mathbb{C}},
 #' the **eigenvalue decomposition** of a square matrix
-#' \eqn{A \in \mathbb{K}^{n \times n}} (if it exists) is defined as
+#' \teqn{A \in \mathbb{K}^{n \times n}} (if it exists) is defined as
 #' 
 #' \Sexpr[results=rd, stage=build]{torch:::math_to_rd("
 #'   A = V \\\\operatorname{diag}(\\\\Lambda) V^{-1}\\\\mathrlap{\\\\qquad V \\\\in \\\\mathbb{C}^{n \\\\times n}, \\\\Lambda \\\\in \\\\mathbb{C}^n}
 #' ")}
 #' 
-#' This decomposition exists if and only if \eqn{A} is `diagonalizable`_.
+#' This decomposition exists if and only if \teqn{A} is `diagonalizable`_.
 #' This is the case when all its eigenvalues are different.
 #' Supports input of float, double, cfloat and cdouble dtypes.
 #' Also supports batches of matrices, and if `A` is a batch of matrices then
@@ -391,7 +391,7 @@ linalg_qr <- function(A, mode='reduced') {
 #' 
 #' - This function assumes that `A` is `diagonalizable`_ (for example, when all the
 #'   eigenvalues are different). If it is not diagonalizable, the returned
-#'   eigenvalues will be correct but \eqn{A \neq V \operatorname{diag}(\Lambda)V^{-1}}.
+#'   eigenvalues will be correct but \teqn{A \neq V \operatorname{diag}(\Lambda)V^{-1}}.
 #'  
 #' - The eigenvectors of a matrix are not unique, nor are they continuous with respect to
 #'   `A`. Due to this lack of uniqueness, different hardware and software may compute
@@ -404,8 +404,8 @@ linalg_qr <- function(A, mode='reduced') {
 #' - Gradients computed using `V` will only be finite when `A` does not have repeated eigenvalues.
 #'   Furthermore, if the distance between any two eigenvalues is close to zero,
 #'   the gradient will be numerically unstable, as it depends on the eigenvalues
-#'   \eqn{\lambda_i} through the computation of
-#'   \eqn{\frac{1}{\min_{i \neq j} \lambda_i - \lambda_j}}.
+#'   \teqn{\lambda_i} through the computation of
+#'   \teqn{\frac{1}{\min_{i \neq j} \lambda_i - \lambda_j}}.
 #'   
 #' @seealso 
 #' - [linalg_eigvals()] computes only the eigenvalues. Unlike [linalg_eig()], the gradients of 
@@ -421,7 +421,7 @@ linalg_qr <- function(A, mode='reduced') {
 #'   consisting of diagonalizable matrices.
 #' 
 #' @returns
-#' A list `(eigenvalues, eigenvectors)` which corresponds to \eqn{\Lambda} and \eqn{V} above.
+#' A list `(eigenvalues, eigenvectors)` which corresponds to \teqn{\Lambda} and \teqn{V} above.
 #' `eigenvalues` and `eigenvectors` will always be complex-valued, even when `A` is real. The eigenvectors
 #' will be given by the columns of `eigenvectors`.
 #' 
@@ -437,15 +437,15 @@ linalg_eig <- function(A) {
 
 #' Computes the eigenvalues of a square matrix.
 #' 
-#' Letting \eqn{\mathbb{K}} be \eqn{\mathbb{R}} or \eqn{\mathbb{C}},
-#' the **eigenvalues** of a square matrix \eqn{A \in \mathbb{K}^{n \times n}} are defined
+#' Letting \teqn{\mathbb{K}} be \teqn{\mathbb{R}} or \teqn{\mathbb{C}},
+#' the **eigenvalues** of a square matrix \teqn{A \in \mathbb{K}^{n \times n}} are defined
 #' as the roots (counted with multiplicity) of the polynomial `p` of degree `n` given by
 #' 
 #' \Sexpr[results=rd, stage=build]{torch:::math_to_rd("
 #'   p(\\\\lambda) = \\\\operatorname{det}(A - \\\\lambda \\\\mathrm{I}_n)\\\\mathrlap{\\\\qquad \\\\lambda \\\\in \\\\mathbb{C}}
 #' ")}
 #' 
-#' where \eqn{\mathrm{I}_n} is the `n`-dimensional identity matrix.
+#' where \teqn{\mathrm{I}_n} is the `n`-dimensional identity matrix.
 #' Supports input of float, double, cfloat and cdouble dtypes.
 #' Also supports batches of matrices, and if `A` is a batch of matrices then
 #' the output has the same batch dimensions.
@@ -469,16 +469,16 @@ linalg_eigvals <- function(A) {
 
 #' Computes the eigenvalue decomposition of a complex Hermitian or real symmetric matrix.
 #' 
-#' Letting \eqn{\mathbb{K}} be \eqn{\mathbb{R}} or \eqn{\mathbb{C}},
+#' Letting \teqn{\mathbb{K}} be \teqn{\mathbb{R}} or \teqn{\mathbb{C}},
 #' the **eigenvalue decomposition** of a complex Hermitian or real symmetric matrix
-#' \eqn{A \in \mathbb{K}^{n \times n}} is defined as
+#' \teqn{A \in \mathbb{K}^{n \times n}} is defined as
 #' 
 #' \Sexpr[results=rd, stage=build]{torch:::math_to_rd("
 #'   A = Q \\\\operatorname{diag}(\\\\Lambda) Q^{H}\\\\mathrlap{\\\\qquad Q \\\\in \\\\mathbb{K}^{n \\\\times n}, \\\\Lambda \\\\in \\\\mathbb{R}^n}
 #' ")}
 #' 
-#' where \eqn{Q^{H}} is the conjugate transpose when \eqn{Q} is complex, and the transpose when \eqn{Q} is real-valued.
-#' \eqn{Q} is orthogonal in the real case and unitary in the complex case.
+#' where \teqn{Q^{H}} is the conjugate transpose when \teqn{Q} is complex, and the transpose when \teqn{Q} is real-valued.
+#' \teqn{Q} is orthogonal in the real case and unitary in the complex case.
 #' 
 #' Supports input of float, double, cfloat and cdouble dtypes.
 #' Also supports batches of matrices, and if `A` is a batch of matrices then
@@ -496,7 +496,7 @@ linalg_eigvals <- function(A) {
 #'   respect to `A`. Due to this lack of uniqueness, different hardware and
 #'   software may compute different eigenvectors.
 #'   This non-uniqueness is caused by the fact that multiplying an eigenvector by
-#'   `-1` in the real case or by \eqn{e^{i \phi}, \phi \in \mathbb{R}} in the complex
+#'   `-1` in the real case or by \teqn{e^{i \phi}, \phi \in \mathbb{R}} in the complex
 #'   case produces another set of valid eigenvectors of the matrix.
 #'   This non-uniqueness problem is even worse when the matrix has repeated eigenvalues.
 #'   In this case, one may multiply the associated eigenvectors spanning
@@ -506,8 +506,8 @@ linalg_eigvals <- function(A) {
 #'   `A` has unique eigenvalues.
 #'   Furthermore, if the distance between any two eigvalues is close to zero,
 #'   the gradient will be numerically unstable, as it depends on the eigenvalues
-#'   \eqn{\lambda_i} through the computation of
-#'   \eqn{\frac{1}{\min_{i \neq j} \lambda_i - \lambda_j}}.
+#'   \teqn{\lambda_i} through the computation of
+#'   \teqn{\frac{1}{\min_{i \neq j} \lambda_i - \lambda_j}}.
 #'  
 #' @seealso 
 #' - [linalg_eigvalsh()] computes only the eigenvalues values of a Hermitian matrix.
@@ -529,7 +529,7 @@ linalg_eigvals <- function(A) {
 #'   of `A` in the computations. Default: `'L'`.
 #' 
 #' @returns
-#' A list `(eigenvalues, eigenvectors)` which corresponds to \eqn{\Lambda} and \eqn{Q} above.
+#' A list `(eigenvalues, eigenvectors)` which corresponds to \teqn{\Lambda} and \teqn{Q} above.
 #' `eigenvalues` will always be real-valued, even when `A` is complex.
 #' 
 #' It will also be ordered in ascending order.
@@ -547,15 +547,15 @@ linalg_eigh <- function(A, UPLO='L') {
 
 #' Computes the eigenvalues of a complex Hermitian or real symmetric matrix.
 #' 
-#' Letting \eqn{\mathbb{K}} be \eqn{\mathbb{R}} or \eqn{\mathbb{C}},
-#' the **eigenvalues** of a complex Hermitian or real symmetric  matrix \eqn{A \in \mathbb{K}^{n \times n}}
+#' Letting \teqn{\mathbb{K}} be \teqn{\mathbb{R}} or \teqn{\mathbb{C}},
+#' the **eigenvalues** of a complex Hermitian or real symmetric  matrix \teqn{A \in \mathbb{K}^{n \times n}}
 #' are defined as the roots (counted with multiplicity) of the polynomial `p` of degree `n` given by
 #' 
 #' \Sexpr[results=rd, stage=build]{torch:::math_to_rd("
 #'   p(\\\\lambda) = \\\\operatorname{det}(A - \\\\lambda \\\\mathrm{I}_n)\\\\mathrlap{\\\\qquad \\\\lambda \\\\in \\\\mathbb{R}}
 #' ")}
 #' 
-#' where \eqn{\mathrm{I}_n} is the `n`-dimensional identity matrix.
+#' where \teqn{\mathrm{I}_n} is the `n`-dimensional identity matrix.
 #' 
 #' The eigenvalues of a real symmetric or complex Hermitian matrix are always real.
 #' Supports input of float, double, cfloat and cdouble dtypes.
@@ -592,34 +592,34 @@ linalg_eigvalsh <- function(A, UPLO='L') {
 
 #' Computes the singular value decomposition (SVD) of a matrix.
 #' 
-#' Letting \eqn{\mathbb{K}} be \eqn{\mathbb{R}} or \eqn{\mathbb{C}},
+#' Letting \teqn{\mathbb{K}} be \teqn{\mathbb{R}} or \teqn{\mathbb{C}},
 #' the **full SVD** of a matrix
-#' \eqn{A \in \mathbb{K}^{m \times n}}, if `k = min(m,n)`, is defined as
+#' \teqn{A \in \mathbb{K}^{m \times n}}, if `k = min(m,n)`, is defined as
 #' 
 #' \Sexpr[results=rd, stage=build]{torch:::math_to_rd("
 #'   A = U \\\\operatorname{diag}(S) V^{H} \\\\mathrlap{\\\\qquad U \\\\in \\\\mathbb{K}^{m \\\\times m}, S \\\\in \\\\mathbb{R}^k, V \\\\in \\\\mathbb{K}^{n \\\\times n}}
 #' ")}
 #' 
-#' where \eqn{\operatorname{diag}(S) \in \mathbb{K}^{m \times n}},
-#' \eqn{V^{H}} is the conjugate transpose when \eqn{V} is complex, and the transpose when \eqn{V} is real-valued.
+#' where \teqn{\operatorname{diag}(S) \in \mathbb{K}^{m \times n}},
+#' \teqn{V^{H}} is the conjugate transpose when \teqn{V} is complex, and the transpose when \teqn{V} is real-valued.
 #' 
-#' The matrices  \eqn{U}, \eqn{V} (and thus \eqn{V^{H}}) are orthogonal in the real case, and unitary in the complex case.
+#' The matrices  \teqn{U}, \teqn{V} (and thus \teqn{V^{H}}) are orthogonal in the real case, and unitary in the complex case.
 #' When `m > n` (resp. `m < n`) we can drop the last `m - n` (resp. `n - m`) columns of `U` (resp. `V`) to form the **reduced SVD**:
 #'
 #' \Sexpr[results=rd, stage=build]{torch:::math_to_rd("
 #'   A = U \\\\operatorname{diag}(S) V^{H} \\\\mathrlap{\\\\qquad U \\\\in \\\\mathbb{K}^{m \\\\times k}, S \\\\in \\\\mathbb{R}^k, V \\\\in \\\\mathbb{K}^{k \\\\times n}}
 #' ")}
 #' 
-#' where \eqn{\operatorname{diag}(S) \in \mathbb{K}^{k \times k}}.
+#' where \teqn{\operatorname{diag}(S) \in \mathbb{K}^{k \times k}}.
 #' 
-#' In this case, \eqn{U} and \eqn{V} also have orthonormal columns.
+#' In this case, \teqn{U} and \teqn{V} also have orthonormal columns.
 #' Supports input of float, double, cfloat and cdouble dtypes.
 #' 
 #' Also supports batches of matrices, and if `A` is a batch of matrices then
 #' the output has the same batch dimensions.
 #' 
-#' The returned decomposition is a named tuple `(U, S, Vᴴ)`
-#' which corresponds to \eqn{U}, \eqn{S}, \eqn{V^{H}} above.
+#' The returned decomposition is a named tuple `(U, S, V)`
+#' which corresponds to \teqn{U}, \teqn{S}, \teqn{V^{H}} above.
 #' 
 #' The singular values are returned in descending order.
 #' The parameter `full_matrices` chooses between the full (default) and reduced SVD.
@@ -635,21 +635,21 @@ linalg_eigvalsh <- function(A, UPLO='L') {
 #' Due to this lack of uniqueness, different hardware and software may compute
 #' different singular vectors.
 #' This non-uniqueness is caused by the fact that multiplying any pair of singular
-#' vectors \eqn{u_k, v_k} by `-1` in the real case or by
-#' \eqn{e^{i \phi}, \phi \in \mathbb{R}} in the complex case produces another two
+#' vectors \teqn{u_k, v_k} by `-1` in the real case or by
+#' \teqn{e^{i \phi}, \phi \in \mathbb{R}} in the complex case produces another two
 #' valid singular vectors of the matrix.
 #' This non-uniqueness problem is even worse when the matrix has repeated singular values.
 #' In this case, one may multiply the associated singular vectors of `U` and `V` spanning
 #' the subspace by a rotation matrix and the resulting vectors will span the same subspace.
 #' 
-#' Gradients computed using `U` or `Vᴴ` will only be finite when
+#' Gradients computed using `U` or `V` will only be finite when
 #' `A` does not have zero as a singular value or repeated singular values.
 #' Furthermore, if the distance between any two singular values is close to zero,
 #' the gradient will be numerically unstable, as it depends on the singular values
-#' \eqn{\sigma_i} through the computation of
-#' \eqn{\frac{1}{\min_{i \neq j} \sigma_i^2 - \sigma_j^2}}.
+#' \teqn{\sigma_i} through the computation of
+#' \teqn{\frac{1}{\min_{i \neq j} \sigma_i^2 - \sigma_j^2}}.
 #' The gradient will also be numerically unstable when `A` has small singular
-#' values, as it also depends on the computaiton of \eqn{\frac{1}{\sigma_i}}.
+#' values, as it also depends on the computaiton of \teqn{\frac{1}{\sigma_i}}.
 #' 
 #' @seealso 
 #' - [linalg_svdvals()] computes only the singular values.
@@ -664,14 +664,14 @@ linalg_eigvalsh <- function(A, UPLO='L') {
 #'   
 #' @param A (Tensor): tensor of shape `(*, m, n)` where `*` is zero or more batch dimensions.
 #' @param full_matrices (bool, optional): controls whether to compute the full or reduced
-#'        SVD, and consequently, the shape of the returned tensors `U` and `Vᴴ`. Default: `TRUE`.
+#'        SVD, and consequently, the shape of the returned tensors `U` and `V`. Default: `TRUE`.
 #' 
 #' @returns
-#' A list `(U, S, V)` which corresponds to \eqn{U}, \eqn{S}, \eqn{V^{H}} above.
+#' A list `(U, S, V)` which corresponds to \teqn{U}, \teqn{S}, \teqn{V^{H}} above.
 #' `S` will always be real-valued, even when `A` is complex.
 #' It will also be ordered in descending order.
-#' `U` and `Vᴴ` will have the same dtype as `A`. The left / right singular vectors will be given by
-#' the columns of `U` and the rows of `Vᴴ` respectively.
+#' `U` and `V` will have the same dtype as `A`. The left / right singular vectors will be given by
+#' the columns of `U` and the rows of `V` respectively.
 #' 
 #' @examples 
 #' 
@@ -712,16 +712,16 @@ linalg_svdvals <- function(A) {
 
 #' Computes the solution of a square system of linear equations with a unique solution.
 #' 
-#' Letting \eqn{\mathbb{K}} be \eqn{\mathbb{R}} or \eqn{\mathbb{C}},
-#' this function computes the solution \eqn{X \in \mathbb{K}^{n \times k}} of the **linear system** associated to
-#' \eqn{A \in \mathbb{K}^{n \times n}, B \in \mathbb{K}^{m \times k}}, which is defined as
+#' Letting \teqn{\mathbb{K}} be \teqn{\mathbb{R}} or \teqn{\mathbb{C}},
+#' this function computes the solution \teqn{X \in \mathbb{K}^{n \times k}} of the **linear system** associated to
+#' \teqn{A \in \mathbb{K}^{n \times n}, B \in \mathbb{K}^{m \times k}}, which is defined as
 #' 
 #' \deqn{
 #'   AX = B
 #' }
 #' 
-#' This system of linear equations has one solution if and only if \eqn{A} is `invertible`_.
-#' This function assumes that \eqn{A} is invertible.
+#' This system of linear equations has one solution if and only if \teqn{A} is `invertible`_.
+#' This function assumes that \teqn{A} is invertible.
 #' Supports inputs of float, double, cfloat and cdouble dtypes.
 #' Also supports batches of matrices, and if the inputs are batches of matrices then
 #' the output has the same batch dimensions.
@@ -759,15 +759,15 @@ linalg_solve <- function(A, B) {
 
 #' Computes a solution to the least squares problem of a system of linear equations.
 #' 
-#' Letting \eqn{\mathbb{K}} be \eqn{\mathbb{R}} or \eqn{\mathbb{C}},
-#' the **least squares problem** for a linear system \eqn{AX = B} with
-#' \eqn{A \in \mathbb{K}^{m \times n}, B \in \mathbb{K}^{m \times k}} is defined as
+#' Letting \teqn{\mathbb{K}} be \teqn{\mathbb{R}} or \teqn{\mathbb{C}},
+#' the **least squares problem** for a linear system \teqn{AX = B} with
+#' \teqn{A \in \mathbb{K}^{m \times n}, B \in \mathbb{K}^{m \times k}} is defined as
 #' 
 #' \Sexpr[results=rd, stage=build]{torch:::math_to_rd("
 #'   \\\\min_{X \\\\in \\\\mathbb{K}^{n \\\\times k}} \\\\|AX - B\\\\|_F
 #' ")}
 #' 
-#' where \eqn{\|-\|_F} denotes the Frobenius norm.
+#' where \teqn{\|-\|_F} denotes the Frobenius norm.
 #' Supports inputs of float, double, cfloat and cdouble dtypes.
 #' 
 #' Also supports batches of matrices, and if the inputs are batches of matrices then
@@ -789,15 +789,15 @@ linalg_solve <- function(A, B) {
 #' 
 #' `rcond` is used to determine the effective rank of the matrices in `A`
 #' when `driver` is one of (`'gelsy'`, `'gelsd'`, `'gelss'`).
-#' In this case, if \eqn{\sigma_i} are the singular values of `A` in decreasing order,
-#' \eqn{\sigma_i} will be rounded down to zero if \eqn{\sigma_i \leq rcond \cdot \sigma_1}.
+#' In this case, if \teqn{\sigma_i} are the singular values of `A` in decreasing order,
+#' \teqn{\sigma_i} will be rounded down to zero if \teqn{\sigma_i \leq rcond \cdot \sigma_1}.
 #' If `rcond = NULL` (default), `rcond` is set to the machine precision of the dtype of `A`.
 #' 
 #' This function returns the solution to the problem and some extra information in a list of
 #' four tensors `(solution, residuals, rank, singular_values)`. For inputs `A`, `B`
 #' of shape `(*, m, n)`, `(*, m, k)` respectively, it cointains
 #' - `solution`: the least squares solution. It has shape `(*, n, k)`.
-#' - `residuals`: the squared residuals of the solutions, that is, \eqn{\|AX - B\|_F^2}.
+#' - `residuals`: the squared residuals of the solutions, that is, \teqn{\|AX - B\|_F^2}.
 #' It has shape equal to the batch dimensions of `A`.
 #' It is computed when `m > n` and every matrix in `A` is full-rank,
 #' otherwise, it is an empty tensor.
@@ -871,16 +871,16 @@ linalg_lstsq <- function(A, B, rcond = NULL, ..., driver = NULL) {
 #' 
 #' Throws a `runtime_error` if the matrix is not invertible.
 #' 
-#' Letting \eqn{\mathbb{K}} be \eqn{\mathbb{R}} or \eqn{\mathbb{C}},
-#' for a matrix \eqn{A \in \mathbb{K}^{n \times n}},
-#' its **inverse matrix** \eqn{A^{-1} \in \mathbb{K}^{n \times n}} (if it exists) is defined as
+#' Letting \teqn{\mathbb{K}} be \teqn{\mathbb{R}} or \teqn{\mathbb{C}},
+#' for a matrix \teqn{A \in \mathbb{K}^{n \times n}},
+#' its **inverse matrix** \teqn{A^{-1} \in \mathbb{K}^{n \times n}} (if it exists) is defined as
 #' 
 #' \Sexpr[results=rd, stage=build]{torch:::math_to_rd("
 #'   A^{-1}A = AA^{-1} = \\\\mathrm{I}_n
 #' ")}
-#' where \eqn{\mathrm{I}_n} is the `n`-dimensional identity matrix.
+#' where \teqn{\mathrm{I}_n} is the `n`-dimensional identity matrix.
 #' 
-#' The inverse matrix exists if and only if \eqn{A} is invertible. In this case,
+#' The inverse matrix exists if and only if \teqn{A} is invertible. In this case,
 #' the inverse is unique.
 #' Supports input of float, double, cfloat and cdouble dtypes.
 #' Also supports batches of matrices, and if `A` is a batch of matrices
@@ -1040,17 +1040,17 @@ linalg_multi_dot <- function(tensors) {
 
 #' Computes the first `n` columns of a product of Householder matrices.
 #' 
-#' Letting \eqn{\mathbb{K}} be \eqn{\mathbb{R}} or \eqn{\mathbb{C}},
-#' for a matrix \eqn{V \in \mathbb{K}^{m \times n}} with columns \eqn{v_i \in \mathbb{K}^m}
-#' with \eqn{m \geq n} and a vector \eqn{\tau \in \mathbb{K}^k} with \eqn{k \leq n},
-#' this function computes the first \eqn{n} columns of the matrix
+#' Letting \teqn{\mathbb{K}} be \teqn{\mathbb{R}} or \teqn{\mathbb{C}},
+#' for a matrix \teqn{V \in \mathbb{K}^{m \times n}} with columns \teqn{v_i \in \mathbb{K}^m}
+#' with \teqn{m \geq n} and a vector \teqn{\tau \in \mathbb{K}^k} with \teqn{k \leq n},
+#' this function computes the first \teqn{n} columns of the matrix
 #' 
 #' \Sexpr[results=rd, stage=build]{torch:::math_to_rd("
 #' H_1H_2 ... H_k \\\\qquad with \\\\qquad H_i = \\\\mathrm{I}_m - \\\\tau_i v_i v_i^{H}
 #' ")}
 #' 
-#' where \eqn{\mathrm{I}_m} is the `m`-dimensional identity matrix and
-#' \eqn{v^{H}} is the conjugate transpose when \eqn{v} is complex, and the transpose when \eqn{v} is real-valued.
+#' where \teqn{\mathrm{I}_m} is the `m`-dimensional identity matrix and
+#' \teqn{v^{H}} is the conjugate transpose when \teqn{v} is complex, and the transpose when \teqn{v} is real-valued.
 #' See [Representation of Orthogonal or Unitary Matrices](https://www.netlib.org/lapack/lug/node128.html) for 
 #' further details.
 #' 

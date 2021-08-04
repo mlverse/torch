@@ -13,17 +13,17 @@ linalg_solve(A, B)
 according to the rules described above}
 }
 \description{
-Letting \eqn{\mathbb{K}} be \eqn{\mathbb{R}} or \eqn{\mathbb{C}},
-this function computes the solution \eqn{X \in \mathbb{K}^{n \times k}} of the \strong{linear system} associated to
-\eqn{A \in \mathbb{K}^{n \times n}, B \in \mathbb{K}^{m \times k}}, which is defined as
+Letting \teqn{\mathbb{K}} be \teqn{\mathbb{R}} or \teqn{\mathbb{C}},
+this function computes the solution \teqn{X \in \mathbb{K}^{n \times k}} of the \strong{linear system} associated to
+\teqn{A \in \mathbb{K}^{n \times n}, B \in \mathbb{K}^{m \times k}}, which is defined as
 }
 \details{
 \deqn{
   AX = B
 }
 
-This system of linear equations has one solution if and only if \eqn{A} is \code{invertible}_.
-This function assumes that \eqn{A} is invertible.
+This system of linear equations has one solution if and only if \teqn{A} is \code{invertible}_.
+This function assumes that \teqn{A} is invertible.
 Supports inputs of float, double, cfloat and cdouble dtypes.
 Also supports batches of matrices, and if the inputs are batches of matrices then
 the output has the same batch dimensions.
