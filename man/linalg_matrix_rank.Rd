@@ -33,13 +33,13 @@ triangular part of the matrix is used in the computations.
 If \code{tol} is not specified and \code{A} is a matrix of dimensions \verb{(m, n)},
 the tolerance is set to be
 
-\Sexpr[results=rd, stage=build]{katex::math_to_rd("
+\Sexpr[results=rd, stage=build]{torch:::math_to_rd("
 tol = \\\\sigma_1 \\\\max(m, n) \\\\varepsilon
 ")}
 
-where \eqn{\sigma_1} is the largest singular value
+where \teqn{\sigma_1} is the largest singular value
 (or eigenvalue in absolute value when \code{hermitian = TRUE}), and
-\eqn{\varepsilon} is the epsilon value for the dtype of \code{A} (see \code{\link[=torch_finfo]{torch_finfo()}}).
+\teqn{\varepsilon} is the epsilon value for the dtype of \code{A} (see \code{\link[=torch_finfo]{torch_finfo()}}).
 
 If \code{A} is a batch of matrices, \code{tol} is computed this way for every element of
 the batch.
