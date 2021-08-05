@@ -16,6 +16,13 @@ void *_lantern_Generator()
   LANTERN_FUNCTION_END
 }
 
+void* _lantern_get_default_Generator ()
+{
+  LANTERN_FUNCTION_START
+  return (void *)new LanternObject<torch::Generator>(at::detail::getDefaultCPUGenerator());
+  LANTERN_FUNCTION_END
+}
+
 uint64_t _lantern_Generator_current_seed(void *generator)
 {
   LANTERN_FUNCTION_START

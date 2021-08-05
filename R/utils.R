@@ -82,6 +82,10 @@ seq2 <- function(start, end, by = 1L) {
     seq(start, end, by = by)
 }
 
+torch_option <- function(option, default = NULL) {
+  getOption(paste0("torch.", option), default)
+}
+
 math_to_rd_impl <- function(tex, ascii = tex, displayMode = TRUE, ..., include_css = TRUE) {
   html <- katex::katex_html(tex, include_css = include_css, displayMode = displayMode, ...,
                      preview = FALSE)
@@ -110,4 +114,3 @@ math_to_rd <- function(tex, ascii = tex, displayMode = TRUE, ..., include_css = 
     structure(rd, class = "Rdtext")
   }
 }
-
