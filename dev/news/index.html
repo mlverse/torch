@@ -202,6 +202,10 @@
 <li>Allows querying the graph from traced modules. (<a href='https://github.com/mlverse/torch/issues/623'>#623</a>)</li>
 <li>Added <code>with_detect_anomaly</code> to debug autograd errors. (<a href='https://github.com/mlverse/torch/issues/628'>#628</a>)</li>
 <li>A warning is raised when an incompatible dataset is passed to a parallel dataloader. (<a href='https://github.com/mlverse/torch/issues/626'>#626</a>)</li>
+<li>
+<code><a href="../reference/torch_manual_seed.html">torch_manual_seed()</a></code> now matches PyTorch’s behavior so we can more easily compare implementations. Since this is a breaking change we added the <code>torch.old_seed_behavior=TRUE</code> option so users can stick to the old behavior. (<a href='https://github.com/mlverse/torch/issues/639'>#639</a>)</li>
+<li>Implemented <code>traced_module$graph_for()</code> to allow inspecting the optimized jit graph. (<a href='https://github.com/mlverse/torch/issues/643'>#643</a>)</li>
+<li>Improved CUDA version auto-detection (<a href='https://github.com/mlverse/torch/issues/644'>#644</a>)</li>
 </ul>
 </div>
     <div id="torch-040" class="section level1">
