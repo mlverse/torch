@@ -46,6 +46,7 @@ jobs:
       TORCH_LOG: 2
       TORCH_TEST: 1
       TORCH_INSTALL: 1
+      GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
 
     steps:
       - uses: actions/checkout@v1
