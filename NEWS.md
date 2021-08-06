@@ -16,6 +16,7 @@
 - A warning is raised when an incompatible dataset is passed to a parallel dataloader. (#626)
 - `torch_manual_seed()` now matches PyTorch's behavior so we can more easily compare implementations. Since this is a breaking change we added the `torch.old_seed_behavior=TRUE` option so users can stick to the old behavior. (#639)
 - Implemented `traced_module$graph_for()` to allow inspecting the optimized jit graph. (#643)
+- Improved CUDA version auto-detection (#644)
 
 # torch 0.4.0
 
