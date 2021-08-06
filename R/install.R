@@ -208,11 +208,13 @@ install_type_windows <- function(version) {
 }
 
 nvcc_version_from_path <- function(nvcc) {
-  nvcc <- tryCatch(system2(nvcc, "--version", stdout = TRUE, stderr = TRUE), error = function(e) NULL)
-  if (!is.null(nvcc))
-    gsub(".*release |, V.*", "", nvcc[grepl("release", nvcc)])
-  else
-    NULL
+  suppressWarnings(
+    nvcc <- tryCatch(system2(nvcc, "--version", stdout = TRUE, stderr = TRUE), error = function(e) NULL)  
+  )
+  
+  if (is.null(nvcc) || !any(grepl("release", nvcc))) return(NULL)
+  
+  gsub(".*release |, V.*", "", nvcc[grepl("release", nvcc)])
 }
 
 #' @keywords internal
@@ -251,7 +253,7 @@ install_type <- function(version) {
   
   # Query nvcc from conventional location
   if (is.null(cuda_version)) {
-    cuda_version <- nvcc_version_from_path("/usr/local/cuda/bin")
+    cuda_version <- nvcc_version_from_path("/usr/local/cuda/bin/nvcc")
   }
   
   if (is.null(cuda_version)) {
