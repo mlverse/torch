@@ -100,6 +100,12 @@ SEXP cpp_jit_script_method_graph_print (XPtrTorchScriptMethod self)
 }
 
 // [[Rcpp::export]]
+SEXP cpp_jit_last_executed_optimized_graph_print ()
+{
+  return XPtrTorchstring(lantern_last_executed_optimized_graph_print());
+}
+
+// [[Rcpp::export]]
 XPtrTorchScriptModule cpp_jit_script_module_new (XPtrTorchCompilationUnit cu, XPtrTorchstring name)
 {
   return XPtrTorchScriptModule(lantern_ScriptModule_new(cu.get(), name.get()));

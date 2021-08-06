@@ -10565,6 +10565,10 @@ cpp_jit_script_method_graph_print <- function(self) {
     .Call('_torch_cpp_jit_script_method_graph_print', PACKAGE = 'torchpkg', self)
 }
 
+cpp_jit_last_executed_optimized_graph_print <- function() {
+    .Call('_torch_cpp_jit_last_executed_optimized_graph_print', PACKAGE = 'torchpkg')
+}
+
 cpp_jit_script_module_new <- function(cu, name) {
     .Call('_torch_cpp_jit_script_module_new', PACKAGE = 'torchpkg', cu, name)
 }
