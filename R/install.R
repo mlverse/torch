@@ -207,6 +207,16 @@ install_type_windows <- function(version) {
   cuda_version
 }
 
+nvcc_version_from_path <- function(nvcc) {
+  suppressWarnings(
+    nvcc <- tryCatch(system2(nvcc, "--version", stdout = TRUE, stderr = TRUE), error = function(e) NULL)  
+  )
+  
+  if (is.null(nvcc) || !any(grepl("release", nvcc))) return(NULL)
+  
+  gsub(".*release |, V.*", "", nvcc[grepl("release", nvcc)])
+}
+
 #' @keywords internal
 install_type <- function(version) {
   if (nzchar(Sys.getenv("CUDA"))) return(Sys.getenv("CUDA"))
@@ -219,6 +229,7 @@ install_type <- function(version) {
   cuda_version <- NULL
   cuda_home <- Sys.getenv("CUDA_HOME")
   
+  # This file no longer exists with cuda >= 11
   if (nzchar(cuda_home)) {
     versions_file <- file.path(cuda_home, "version.txt")
     if (file.exists(versions_file)) {
@@ -226,6 +237,13 @@ install_type <- function(version) {
     }
   }
   
+  # Query nvcc from cuda in cuda_home path.
+  if (nzchar(cuda_home) && is.null(cuda_version)) {
+    nvcc_path <- file.path(cuda_home, "bin", "nvcc")
+    cuda_version <- nvcc_version_from_path(nvcc_path)
+  }
+  
+  # Try to find in conventional location.
   if (is.null(cuda_version)) {
     versions_file <- "/usr/local/cuda/version.txt"
     if (file.exists(versions_file)) {
@@ -233,11 +251,13 @@ install_type <- function(version) {
     }
   }
   
+  # Query nvcc from conventional location
   if (is.null(cuda_version)) {
-    nvcc <- tryCatch(system2("nvcc", "--version", stdout = TRUE, stderr = TRUE), error = function(e) NULL)
-    if (!is.null(nvcc)) {
-      cuda_version <- gsub(".*release |, V.*", "", nvcc[grepl("release", nvcc)])
-    }
+    cuda_version <- nvcc_version_from_path("/usr/local/cuda/bin/nvcc")
+  }
+  
+  if (is.null(cuda_version)) {
+    cuda_version <- nvcc_version_from_path("nvcc")
   }
   
   if (is.null(cuda_version)) return("cpu")
