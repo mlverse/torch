@@ -18,12 +18,12 @@ the type of the matrix norm to use in the computations (see above). Default: \co
 A real-valued tensor, even when \code{A} is complex.
 }
 \description{
-Letting \eqn{\mathbb{K}} be \eqn{\mathbb{R}} or \eqn{\mathbb{C}},
-the \strong{condition number} \eqn{\kappa} of a matrix
-\eqn{A \in \mathbb{K}^{n \times n}} is defined as
+Letting \teqn{\mathbb{K}} be \teqn{\mathbb{R}} or \teqn{\mathbb{C}},
+the \strong{condition number} \teqn{\kappa} of a matrix
+\teqn{A \in \mathbb{K}^{n \times n}} is defined as
 }
 \details{
-\Sexpr[results=rd, stage=build]{katex::math_to_rd("\\\\kappa(A) = \\\\|A\\\\|_p\\\\|A^{-1}\\\\|_p")}
+\Sexpr[results=rd, stage=build]{torch:::math_to_rd("\\\\kappa(A) = \\\\|A\\\\|_p\\\\|A^{-1}\\\\|_p")}
 
 The condition number of \code{A} measures the numerical stability of the linear system \code{AX = B}
 with respect to a matrix norm.
@@ -42,9 +42,9 @@ As such, in this case, the matrix (or every matrix in the batch) \code{A} has to
 and invertible.
 
 For \code{p} in \verb{(2, -2)}, this function can be computed in terms of the singular values
-\eqn{\sigma_1 \geq \ldots \geq \sigma_n}
+\teqn{\sigma_1 \geq \ldots \geq \sigma_n}
 
-\Sexpr[results=rd, stage=build]{katex::math_to_rd("\\\\kappa_2(A) = \\\\frac{\\\\sigma_1}{\\\\sigma_n}\\\\qquad \\\\kappa_{-2}(A) = \\\\frac{\\\\sigma_n}{\\\\sigma_1}")}
+\Sexpr[results=rd, stage=build]{torch:::math_to_rd("\\\\kappa_2(A) = \\\\frac{\\\\sigma_1}{\\\\sigma_n}\\\\qquad \\\\kappa_{-2}(A) = \\\\frac{\\\\sigma_n}{\\\\sigma_1}")}
 
 In these cases, it is computed using \code{\link[=linalg_svd]{linalg_svd()}}. For these norms, the matrix
 (or every matrix in the batch) \code{A} may have any shape.

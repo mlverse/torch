@@ -10,16 +10,16 @@ linalg_eigvals(A)
 \item{A}{(Tensor): tensor of shape \verb{(*, n, n)} where \code{*} is zero or more batch dimensions.}
 }
 \description{
-Letting \eqn{\mathbb{K}} be \eqn{\mathbb{R}} or \eqn{\mathbb{C}},
-the \strong{eigenvalues} of a square matrix \eqn{A \in \mathbb{K}^{n \times n}} are defined
+Letting \teqn{\mathbb{K}} be \teqn{\mathbb{R}} or \teqn{\mathbb{C}},
+the \strong{eigenvalues} of a square matrix \teqn{A \in \mathbb{K}^{n \times n}} are defined
 as the roots (counted with multiplicity) of the polynomial \code{p} of degree \code{n} given by
 }
 \details{
-\Sexpr[results=rd, stage=build]{katex::math_to_rd("
+\Sexpr[results=rd, stage=build]{torch:::math_to_rd("
 p(\\\\lambda) = \\\\operatorname{det}(A - \\\\lambda \\\\mathrm{I}_n)\\\\mathrlap{\\\\qquad \\\\lambda \\\\in \\\\mathbb{C}}
 ")}
 
-where \eqn{\mathrm{I}_n} is the \code{n}-dimensional identity matrix.
+where \teqn{\mathrm{I}_n} is the \code{n}-dimensional identity matrix.
 Supports input of float, double, cfloat and cdouble dtypes.
 Also supports batches of matrices, and if \code{A} is a batch of matrices then
 the output has the same batch dimensions.

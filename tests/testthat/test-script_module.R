@@ -145,3 +145,17 @@ test_that("training attribute is persisted", {
   expect_true(!test_model$training)
   expect_true(!test_model[["0"]]$training)
 })
+  
+test_that("graph_for", {
+  testthat::local_edition(3)
+
+  traced <- jit_trace(nn_linear(10, 10), torch_randn(10, 10))
+  expect_snapshot_output({
+    traced$forward$graph_for(torch_randn(10, 10))
+  })
+  
+  expect_snapshot_output({
+    traced$graph_for(torch_randn(10, 10))
+  })
+
+})

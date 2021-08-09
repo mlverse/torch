@@ -235,6 +235,7 @@ test_that("tensorinv", {
 })
 
 test_that("tensorsolve", {
+  torch_manual_seed(204929)
   A <- torch_eye(2 * 3 * 4)$reshape(c(2 * 3, 4, 2, 3, 4))
   B <- torch_randn(2 * 3, 4)
   X <- linalg_tensorsolve(A, B)

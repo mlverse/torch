@@ -223,3 +223,11 @@ void* _lantern_ScriptMethod_graph_print (void* self)
     return (void*) new std::string(str);
     LANTERN_FUNCTION_END
 }
+
+void* _lantern_last_executed_optimized_graph_print ()
+{
+    LANTERN_FUNCTION_START
+    auto str = torch::jit::lastExecutedOptimizedGraph()->toString();
+    return (void*) new std::string(str);
+    LANTERN_FUNCTION_END
+}

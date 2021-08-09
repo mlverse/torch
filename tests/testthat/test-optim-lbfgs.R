@@ -22,7 +22,8 @@ test_that("state updates correctly", {
 })
 
 test_that("lbfgs works", {
-  torch_manual_seed(1)
+  
+  torch_manual_seed(3)
   x <- torch_randn(100, 10)
   y <- torch_sum(x, 2, keepdim = TRUE)
   

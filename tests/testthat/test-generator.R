@@ -27,3 +27,15 @@ test_that("manual_seed works", {
   expect_equal_to_tensor(a$bias, b$bias)
   
 })
+
+test_that("current behavior is identical to pytorch", {
+  
+  torch_manual_seed(1)
+  expect_equal_to_r(torch_randn(1), 0.661352157592773)
+  
+  withr::with_options(new = list("torch.old_seed_behavior" = TRUE), {
+    torch_manual_seed(2019)
+    expect_equal_to_r(torch_randn(1), -0.364226043224335)
+  })
+  
+})

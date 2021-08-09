@@ -10,45 +10,45 @@ linalg_svd(A, full_matrices = TRUE)
 \item{A}{(Tensor): tensor of shape \verb{(*, m, n)} where \code{*} is zero or more batch dimensions.}
 
 \item{full_matrices}{(bool, optional): controls whether to compute the full or reduced
-SVD, and consequently, the shape of the returned tensors \code{U} and \code{Vᴴ}. Default: \code{TRUE}.}
+SVD, and consequently, the shape of the returned tensors \code{U} and \code{V}. Default: \code{TRUE}.}
 }
 \value{
-A list \verb{(U, S, V)} which corresponds to \eqn{U}, \eqn{S}, \eqn{V^{H}} above.
+A list \verb{(U, S, V)} which corresponds to \teqn{U}, \teqn{S}, \teqn{V^{H}} above.
 \code{S} will always be real-valued, even when \code{A} is complex.
 It will also be ordered in descending order.
-\code{U} and \code{Vᴴ} will have the same dtype as \code{A}. The left / right singular vectors will be given by
-the columns of \code{U} and the rows of \code{Vᴴ} respectively.
+\code{U} and \code{V} will have the same dtype as \code{A}. The left / right singular vectors will be given by
+the columns of \code{U} and the rows of \code{V} respectively.
 }
 \description{
-Letting \eqn{\mathbb{K}} be \eqn{\mathbb{R}} or \eqn{\mathbb{C}},
+Letting \teqn{\mathbb{K}} be \teqn{\mathbb{R}} or \teqn{\mathbb{C}},
 the \strong{full SVD} of a matrix
-\eqn{A \in \mathbb{K}^{m \times n}}, if \code{k = min(m,n)}, is defined as
+\teqn{A \in \mathbb{K}^{m \times n}}, if \code{k = min(m,n)}, is defined as
 }
 \details{
-\Sexpr[results=rd, stage=build]{katex::math_to_rd("
+\Sexpr[results=rd, stage=build]{torch:::math_to_rd("
 A = U \\\\operatorname{diag}(S) V^{H} \\\\mathrlap{\\\\qquad U \\\\in \\\\mathbb{K}^{m \\\\times m}, S \\\\in \\\\mathbb{R}^k, V \\\\in \\\\mathbb{K}^{n \\\\times n}}
 ")}
 
-where \eqn{\operatorname{diag}(S) \in \mathbb{K}^{m \times n}},
-\eqn{V^{H}} is the conjugate transpose when \eqn{V} is complex, and the transpose when \eqn{V} is real-valued.
+where \teqn{\operatorname{diag}(S) \in \mathbb{K}^{m \times n}},
+\teqn{V^{H}} is the conjugate transpose when \teqn{V} is complex, and the transpose when \teqn{V} is real-valued.
 
-The matrices  \eqn{U}, \eqn{V} (and thus \eqn{V^{H}}) are orthogonal in the real case, and unitary in the complex case.
+The matrices  \teqn{U}, \teqn{V} (and thus \teqn{V^{H}}) are orthogonal in the real case, and unitary in the complex case.
 When \code{m > n} (resp. \code{m < n}) we can drop the last \code{m - n} (resp. \code{n - m}) columns of \code{U} (resp. \code{V}) to form the \strong{reduced SVD}:
 
-\Sexpr[results=rd, stage=build]{katex::math_to_rd("
+\Sexpr[results=rd, stage=build]{torch:::math_to_rd("
 A = U \\\\operatorname{diag}(S) V^{H} \\\\mathrlap{\\\\qquad U \\\\in \\\\mathbb{K}^{m \\\\times k}, S \\\\in \\\\mathbb{R}^k, V \\\\in \\\\mathbb{K}^{k \\\\times n}}
 ")}
 
-where \eqn{\operatorname{diag}(S) \in \mathbb{K}^{k \times k}}.
+where \teqn{\operatorname{diag}(S) \in \mathbb{K}^{k \times k}}.
 
-In this case, \eqn{U} and \eqn{V} also have orthonormal columns.
+In this case, \teqn{U} and \teqn{V} also have orthonormal columns.
 Supports input of float, double, cfloat and cdouble dtypes.
 
 Also supports batches of matrices, and if \code{A} is a batch of matrices then
 the output has the same batch dimensions.
 
-The returned decomposition is a named tuple \verb{(U, S, Vᴴ)}
-which corresponds to \eqn{U}, \eqn{S}, \eqn{V^{H}} above.
+The returned decomposition is a named tuple \verb{(U, S, V)}
+which corresponds to \teqn{U}, \teqn{S}, \teqn{V^{H}} above.
 
 The singular values are returned in descending order.
 The parameter \code{full_matrices} chooses between the full (default) and reduced SVD.
@@ -65,21 +65,21 @@ respect to \code{A}.
 Due to this lack of uniqueness, different hardware and software may compute
 different singular vectors.
 This non-uniqueness is caused by the fact that multiplying any pair of singular
-vectors \eqn{u_k, v_k} by \code{-1} in the real case or by
-\eqn{e^{i \phi}, \phi \in \mathbb{R}} in the complex case produces another two
+vectors \teqn{u_k, v_k} by \code{-1} in the real case or by
+\teqn{e^{i \phi}, \phi \in \mathbb{R}} in the complex case produces another two
 valid singular vectors of the matrix.
 This non-uniqueness problem is even worse when the matrix has repeated singular values.
 In this case, one may multiply the associated singular vectors of \code{U} and \code{V} spanning
 the subspace by a rotation matrix and the resulting vectors will span the same subspace.
 
-Gradients computed using \code{U} or \code{Vᴴ} will only be finite when
+Gradients computed using \code{U} or \code{V} will only be finite when
 \code{A} does not have zero as a singular value or repeated singular values.
 Furthermore, if the distance between any two singular values is close to zero,
 the gradient will be numerically unstable, as it depends on the singular values
-\eqn{\sigma_i} through the computation of
-\eqn{\frac{1}{\min_{i \neq j} \sigma_i^2 - \sigma_j^2}}.
+\teqn{\sigma_i} through the computation of
+\teqn{\frac{1}{\min_{i \neq j} \sigma_i^2 - \sigma_j^2}}.
 The gradient will also be numerically unstable when \code{A} has small singular
-values, as it also depends on the computaiton of \eqn{\frac{1}{\sigma_i}}.
+values, as it also depends on the computaiton of \teqn{\frac{1}{\sigma_i}}.
 }
 
 \examples{

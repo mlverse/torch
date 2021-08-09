@@ -46,6 +46,7 @@ jobs:
       TORCH_LOG: 2
       TORCH_TEST: 1
       TORCH_INSTALL: 1
+      GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
 
     steps:
       - uses: actions/checkout@v1
@@ -93,6 +94,7 @@ jobs:
       TORCH_TEST: 1
       TORCH_INSTALL: 1
       BUILD_LANTERN: ${{ contains( github.event.pull_request.labels.*.name, 'lantern') }}
+      GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
     steps:
       - uses: actions/checkout@v2
       - name: Build image

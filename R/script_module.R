@@ -137,6 +137,9 @@ nn_ScriptModule <- R6::R6Class(
     add_constant = function(name, value) {
       private$ptr$add_constant(name, value)
     },
+    graph_for = function(...) {
+      self$forward$graph_for(...)
+    },
     ..ptr.. = function() {
       private$ptr
     },
@@ -196,11 +199,19 @@ ScriptMethod <- R7Class(
     },
     print = function() {
       cat("<script_method>\n")
+    },
+    graph_for = function(...) {
+      # we only implement python's fallback method which calls the graph and 
+      # then reads the last used method.
+      new_script_method(self)(...)
+      str <- cpp_jit_last_executed_optimized_graph_print()
+      structure(list(str = str), class = "script_method_graph")
     }
   ),
   active = list(
     graph = function() {
-      structure(list(ptr = self), class = "script_method_graph")
+      str <- cpp_jit_script_method_graph_print(self)
+      structure(list(str = str), class = "script_method_graph")
     }
   )
 )
@@ -234,7 +245,7 @@ print.script_method <- function(x, ...) {
 
 #' @export
 print.script_method_graph <- function(x, ...) {
-  cat(cpp_jit_script_method_graph_print(x$ptr))
+  cat(x$str)
 }
 
 
