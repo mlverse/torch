@@ -1,3 +1,38 @@
+#' Creates a slice 
+#' 
+#' Creates a slice object that can be used when indexing torch tensors.
+#' 
+#' @param start (integer) starting index.
+#' @param end (integer) the last selected index.
+#' @param step (integer) the step between indexes.
+#' 
+#' @examples 
+#' x <- torch_randn(10)
+#' x[slc(start = 1, end = 5, step = 2)]
+#' 
+#' @export
+slc <- function(start, end, step = 1) {
+  
+  if (end == -1)
+    end <- .Machine$integer.max
+  else
+    end <- end + 1
+  
+  structure(
+    list(
+      start = ifelse(start > 0, start - 1, start),
+      end = end,
+      step = step
+    ),
+    class = "slice"
+  )
+}
+
+#' @export
+print.slice <- function(x, ...) {
+  cat("<slice>\n")
+}
+
 .d <- list(
   
   `:` = function(x, y) {
