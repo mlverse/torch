@@ -72,6 +72,21 @@ Another special syntax is the `N`, meaning the size of the specified dimension.
 x[5:N]
 ```
 
+> Note: the slicing behavior relies on [Non Standard Evaluation](https://adv-r.hadley.nz/evaluation.html#evaluation). It requires that the expression is passed to the `[` not exactly the resulting R vector.
+
+To allow dynamic dynamic indices, you can create a new slice using the `slc` function.
+For example:
+
+```{r}
+x[1:5:2]
+```
+
+is equivalent to:
+
+```{r}
+x[slc(start = 1, end = 5, step = 2)]
+```
+
 ## Getting the complete dimension
 
 Like in R, you can take all elements in a dimension by leaving an index empty.

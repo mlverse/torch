@@ -144,3 +144,35 @@ test_that("indexing with long tensors", {
   index <- torch_tensor(c(-1, 0, 1), dtype = torch_long())
   expect_error(x[index, ], regexp = "Indexing starts at 1")
 })
+
+test_that("can use the slc construct", {
+  
+  x <- torch_randn(10, 10)
+  r <- as_array(x)
+  
+  expect_equal_to_r(
+    x[slc(start = 1, end = 5, step = 2),],
+    r[seq(1,5,by = 2),]
+  )
+  
+  expect_equal_to_r(
+    x[slc(start = 1, end = 5, step = 2),1],
+    r[seq(1,5,by = 2),1]
+  )
+  
+  expect_equal_to_r(
+    x[slc(start = 1, end = 5, step = 2),slc(start = 1, end = 5, step = 2)],
+    r[seq(1,5,by = 2),seq(1,5,by = 2)]
+  )
+  
+  expect_equal_to_tensor(
+    x[slc(2,Inf),],
+    x[2:N,]
+  )
+  
+})
+
+test_that("print slice", {
+  testthat::local_edition(3)
+  expect_snapshot(print(slc(1,3,5)))
+})
