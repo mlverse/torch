@@ -13,6 +13,9 @@
 #' @export
 slc <- function(start, end, step = 1) {
   
+  if (is.infinite(end) && end > 0)
+    end <- .Machine$integer.max
+  
   if (end == -1)
     end <- .Machine$integer.max
   else if (end < -1)

@@ -165,6 +165,11 @@ test_that("can use the slc construct", {
     r[seq(1,5,by = 2),seq(1,5,by = 2)]
   )
   
+  expect_equal_to_tensor(
+    x[slc(2,Inf),],
+    x[2:N,]
+  )
+  
 })
 
 test_that("print slice", {
