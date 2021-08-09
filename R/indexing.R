@@ -15,7 +15,7 @@ slc <- function(start, end, step = 1) {
   
   if (end == -1)
     end <- .Machine$integer.max
-  else
+  else if (end < -1)
     end <- end + 1
   
   structure(
@@ -42,15 +42,7 @@ print.slice <- function(x, ...) {
       return(x)
     }
     
-    # end should be inclusive
-    if (y == -1)
-      y <- .Machine$integer.max
-    else if (y < -1)
-      y <-  y + 1
-    
-    e <- list(start = ifelse(x > 0, x - 1, x), end = y, step = 1)
-    attr(e, "class") <- "slice"
-    e
+    slc(start = x, end = y)
   },
   
   N = .Machine$integer.max, 
