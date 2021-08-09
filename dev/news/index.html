@@ -206,6 +206,7 @@
 <code><a href="../reference/torch_manual_seed.html">torch_manual_seed()</a></code> now matches PyTorch’s behavior so we can more easily compare implementations. Since this is a breaking change we added the <code>torch.old_seed_behavior=TRUE</code> option so users can stick to the old behavior. (<a href='https://github.com/mlverse/torch/issues/639'>#639</a>)</li>
 <li>Implemented <code>traced_module$graph_for()</code> to allow inspecting the optimized jit graph. (<a href='https://github.com/mlverse/torch/issues/643'>#643</a>)</li>
 <li>Improved CUDA version auto-detection (<a href='https://github.com/mlverse/torch/issues/644'>#644</a>)</li>
+<li>Added <code>slc</code> to allow dynamically creating slices when indexing tensors. (<a href='https://github.com/mlverse/torch/issues/648'>#648</a>)</li>
 </ul>
 </div>
     <div id="torch-040" class="section level1">
