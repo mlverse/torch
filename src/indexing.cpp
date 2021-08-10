@@ -88,8 +88,9 @@ XPtrTorchTensor cpp_torch_tensor (SEXP x, std::vector<std::int64_t> dim,
                                   XPtrTorchTensorOptions options,
                                   bool requires_grad, bool is_integer64);
 
-XPtrTorchTensorIndex slices_to_index (std::vector<Rcpp::RObject> slices, bool drop)
+std::vector<XPtrTorchTensorIndex> slices_to_index (std::vector<Rcpp::RObject> slices, bool drop)
 {
+  std::vector<XPtrTorchTensorIndex> output;
   XPtrTorchTensorIndex index = lantern_TensorIndex_new();
   
   SEXP slice;
@@ -198,6 +199,22 @@ XPtrTorchTensorIndex slices_to_index (std::vector<Rcpp::RObject> slices, bool dr
       XPtrTorchTensor tensor = cpp_torch_tensor(v, dim, options, false, false);
       
       lantern_TensorIndex_append_tensor(index.get(), tensor.get());
+      
+      // we add a NULL to get all the other dimensions and append it to the output vector.
+      lantern_TensorIndex_append_ellipsis(index.get());
+      output.push_back(index);
+      
+      index = lantern_TensorIndex_new();
+      for(int j = 0; j <= i; j++)
+      {
+        XPtrTorchSlice s = lantern_Slice(
+          XPtrTorchoptional_int64_t(lantern_optional_int64_t(0, true)).get(), 
+          XPtrTorchoptional_int64_t(lantern_optional_int64_t(0, true)).get(),
+          XPtrTorchoptional_int64_t(lantern_optional_int64_t(1, false)).get()
+        );
+        lantern_TensorIndex_append_slice(index.get(), s.get());
+      }
+      
       continue;
     }
     
@@ -269,16 +286,25 @@ XPtrTorchTensorIndex slices_to_index (std::vector<Rcpp::RObject> slices, bool dr
     
   }
   
-  return index;
+  if (!lantern_TensorIndex_is_empty(index.get()))
+  {
+    output.push_back(index);  
+  }
+  
+  return output;
 }
 
 // [[Rcpp::export]]
-XPtrTorchTensor Tensor_slice(Rcpp::XPtr<XPtrTorchTensor> self, Rcpp::Environment e,
+XPtrTorchTensor Tensor_slice(XPtrTorchTensor self, Rcpp::Environment e,
                                          bool drop, Rcpp::List mask)
 {
   auto dots = evaluate_slices(enquos0(e), mask);
   auto index = slices_to_index(dots, drop);
-  XPtrTorchTensor out = lantern_Tensor_index(self->get(), index.get());
+  XPtrTorchTensor out = self;
+  for (auto& ind : index) 
+  {
+    out = lantern_Tensor_index(out.get(), ind.get());  
+  }
   return out;
 }
 
@@ -289,24 +315,27 @@ void Tensor_slice_put(Rcpp::XPtr<XPtrTorchTensor> self, Rcpp::Environment e,
                       SEXP rhs, Rcpp::List mask)
 {
   auto dots = evaluate_slices(enquos0(e), mask);
-  auto index = slices_to_index(dots, true);
+  auto indexes = slices_to_index(dots, true);
   
-  
-  if ((TYPEOF(rhs) == REALSXP || TYPEOF(rhs) == INTSXP || TYPEOF(rhs) == LGLSXP ||
-      TYPEOF(rhs) == STRSXP) && LENGTH(rhs) == 1)
+  for (auto& index : indexes)
   {
-    auto s = cpp_torch_scalar(rhs);
-    lantern_Tensor_index_put_scalar_(self->get(), index.get(), s.get());  
-    return;
+    if ((TYPEOF(rhs) == REALSXP || TYPEOF(rhs) == INTSXP || TYPEOF(rhs) == LGLSXP ||
+        TYPEOF(rhs) == STRSXP) && LENGTH(rhs) == 1)
+    {
+      auto s = cpp_torch_scalar(rhs);
+      lantern_Tensor_index_put_scalar_(self->get(), index.get(), s.get());  
+      return;
+    }
+    
+    if (Rf_inherits(rhs, "torch_tensor"))
+    {
+      Rcpp::XPtr<XPtrTorchTensor> t = Rcpp::as<Rcpp::XPtr<XPtrTorchTensor>>(rhs);
+      lantern_Tensor_index_put_tensor_(self->get(), index.get(), t->get());  
+      return;
+    }
+    
+    Rcpp::stop("rhs must be a torch_tensor or scalar value.");
   }
   
-  if (Rf_inherits(rhs, "torch_tensor"))
-  {
-    Rcpp::XPtr<XPtrTorchTensor> t = Rcpp::as<Rcpp::XPtr<XPtrTorchTensor>>(rhs);
-    lantern_Tensor_index_put_tensor_(self->get(), index.get(), t->get());  
-    return;
-  }
-  
-  Rcpp::stop("rhs must be a torch_tensor or scalar value.");
 }
 

@@ -17,6 +17,13 @@ void *_lantern_TensorIndex_new()
     LANTERN_FUNCTION_END
 }
 
+bool _lantern_TensorIndex_is_empty (void* self)
+{
+    LANTERN_FUNCTION_START
+    return reinterpret_cast<LanternObject<std::vector<at::indexing::TensorIndex>> *>(self)->get().size() == 0;
+    LANTERN_FUNCTION_END
+}
+
 void _lantern_TensorIndex_append_tensor(void *self, void *x)
 {
     LANTERN_FUNCTION_START

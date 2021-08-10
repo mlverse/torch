@@ -1925,6 +1925,14 @@ HOST_API void* lantern_last_executed_optimized_graph_print ()
   return ret;
 }
 
+LANTERN_API bool (LANTERN_PTR _lantern_TensorIndex_is_empty) (void* self);
+HOST_API bool lantern_TensorIndex_is_empty (void* self)
+{
+  bool ret = _lantern_TensorIndex_is_empty(self);
+  LANTERN_HOST_HANDLER;
+  return ret;
+}
+
   /* Autogen Headers -- Start */
   LANTERN_API void* (LANTERN_PTR _lantern__cast_byte_tensor_bool)(void* self, void* non_blocking);
   HOST_API void* lantern__cast_byte_tensor_bool(void* self, void* non_blocking) { void* ret = _lantern__cast_byte_tensor_bool(self, non_blocking); LANTERN_HOST_HANDLER return ret; }
@@ -7503,6 +7511,7 @@ LOAD_SYMBOL(_lantern_autograd_set_detect_anomaly);
 LOAD_SYMBOL(_lantern_autograd_detect_anomaly_is_enabled);
 LOAD_SYMBOL(_lantern_get_default_Generator);
 LOAD_SYMBOL(_lantern_last_executed_optimized_graph_print);
+LOAD_SYMBOL(_lantern_TensorIndex_is_empty);
   /* Autogen Symbols -- Start */
   LOAD_SYMBOL(_lantern__cast_byte_tensor_bool)
   LOAD_SYMBOL(_lantern__cast_char_tensor_bool)

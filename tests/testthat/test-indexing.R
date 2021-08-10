@@ -33,7 +33,7 @@ test_that("[ works", {
   
   x <- torch_randn(10, 10)
   x[c(2,3,1), c(3,2,1)]
-  expect_length(x[c(2,3,1), c(3,2,1)], 3)
+  expect_equal_to_r(x[c(2,3,1), c(3,2,1)], as_array(x)[c(2,3,1), c(3,2,1)])
   
   x <- torch_randn(10)
   expect_equal_to_tensor(x[1:5,..], x[1:5])

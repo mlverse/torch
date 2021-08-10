@@ -33836,12 +33836,12 @@ BEGIN_RCPP
 END_RCPP
 }
 // Tensor_slice
-XPtrTorchTensor Tensor_slice(Rcpp::XPtr<XPtrTorchTensor> self, Rcpp::Environment e, bool drop, Rcpp::List mask);
+XPtrTorchTensor Tensor_slice(XPtrTorchTensor self, Rcpp::Environment e, bool drop, Rcpp::List mask);
 RcppExport SEXP _torch_Tensor_slice(SEXP selfSEXP, SEXP eSEXP, SEXP dropSEXP, SEXP maskSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< Rcpp::XPtr<XPtrTorchTensor> >::type self(selfSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
     Rcpp::traits::input_parameter< Rcpp::Environment >::type e(eSEXP);
     Rcpp::traits::input_parameter< bool >::type drop(dropSEXP);
     Rcpp::traits::input_parameter< Rcpp::List >::type mask(maskSEXP);
