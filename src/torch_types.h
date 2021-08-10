@@ -89,7 +89,7 @@ public:
 
 class XPtrTorchOptionalTensorList : public XPtrTorch {
 public:
-  XPtrTorchOptionalTensorList (void* x) : XPtrTorch(x, lantern_TensorList_delete) {}
+  XPtrTorchOptionalTensorList (void* x) : XPtrTorch(x, lantern_OptionalTensorList_delete) {}
   explicit XPtrTorchOptionalTensorList (std::shared_ptr<void> x) : XPtrTorch(x) {}
   XPtrTorchOptionalTensorList (const XPtrTorchTensorList& x) : XPtrTorch(x.get_shared()) {}
   explicit XPtrTorchOptionalTensorList (SEXP x);
