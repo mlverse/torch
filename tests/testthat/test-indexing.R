@@ -133,9 +133,17 @@ test_that("indexing with long tensors", {
   
   x <- torch_randn(4,4)
   index <- torch_tensor(1, dtype = torch_long())
+  expect_equal(x[index, index]$item(), x[1,1]$item())
+  expect_tensor_shape(x[index, index], c(1,1))
+  
+  index <- torch_scalar_tensor(1, dtype = torch_long())
   expect_equal_to_tensor(x[index, index], x[1,1])
   
   index <- torch_tensor(-1, dtype = torch_long())
+  expect_equal(x[index, index]$item(), x[-1,-1]$item())
+  expect_tensor_shape(x[index, index], c(1,1))
+  
+  index <- torch_scalar_tensor(-1, dtype = torch_long())
   expect_equal_to_tensor(x[index, index], x[-1,-1])
   
   index <- torch_tensor(c(-1,1), dtype = torch_long())
@@ -175,4 +183,57 @@ test_that("can use the slc construct", {
 test_that("print slice", {
   testthat::local_edition(3)
   expect_snapshot(print(slc(1,3,5)))
+})
+
+test_that("mix vector indexing with slices and others", {
+  
+  x <- torch_randn(3,3,3)
+  expect_equal_to_tensor(
+    x[c(1,2), 1:2, c(1,2)],
+    x[1:2,1:2,1:2]  
+  )
+  
+  expect_equal_to_tensor(
+    x[c(1,2), newaxis, 1:2, c(1,2)],
+    x[1:2, newaxis, 1:2,1:2]  
+  )
+  
+  expect_equal_to_tensor(
+    x[newaxis, c(1,2), newaxis, 1:2, c(1,2)],
+    x[newaxis, 1:2, newaxis, 1:2,1:2]  
+  )
+  
+  expect_equal_to_tensor(
+    x[c(1,2), c(1,2), ],
+    x[1:2,1:2, ]  
+  )
+  
+  expect_equal_to_tensor(
+    x[c(1,2), ,c(1,2)],
+    x[1:2,,1:2 ]  
+  )
+  
+  expect_equal_to_tensor(
+    x[c(1,2), c(1,2), c(1,2)],
+    x[1:2,1:2,1:2]  
+  )
+  
+  expect_equal_to_tensor(
+    x[c(1,2), c(1,2), newaxis, c(1,2)],
+    x[1:2,1:2, newaxis, 1:2]  
+  )
+  
+})
+
+test_that("boolean vector indexing works as expected", {
+  
+  
+  x <- torch_randn(4,4,4)
+  index <- c(TRUE, FALSE, TRUE, FALSE)
+  
+  expect_equal_to_r(
+    x[index, index, index],
+    as_array(x)[index, index, index]
+  )
+  
 })

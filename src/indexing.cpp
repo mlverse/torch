@@ -181,7 +181,7 @@ void index_append_bool_vector (XPtrTorchTensorIndex& index, SEXP slice)
   lantern_TensorIndex_append_tensor(index.get(), tensor.get());
 }
 
-void index_append_tensor (XPtrTorchTensorIndex& index, SEXP slice)
+bool index_append_tensor (XPtrTorchTensorIndex& index, SEXP slice)
 {
   Rcpp::XPtr<XPtrTorchTensor> t = Rcpp::as<Rcpp::XPtr<XPtrTorchTensor>>(slice);
   
@@ -227,97 +227,137 @@ void index_append_tensor (XPtrTorchTensorIndex& index, SEXP slice)
   } else {
     Rcpp::stop("Only long and boolean tensors are supported.");  
   }
+  
+  return lantern_Tensor_ndimension(t->get()) == 0;
+}
+
+struct index_info {
+  int dim; // number of dimensions that are kept in the output
+  bool vector; // vector like?
+};
+
+// returns true if appended a vector like object. We use the boolean vector
+// to decide if we should start a new index object.
+index_info index_append_sexp (XPtrTorchTensorIndex& index, SEXP slice, bool drop)
+{
+  // a single NA means empty argument which and in turn we must select
+  // all elements in that dimension.
+  if (TYPEOF(slice) == LGLSXP && LENGTH(slice) == 1 && LOGICAL(slice)[0] == NA_LOGICAL)
+  {
+    index_append_empty_slice(index);
+    return {1, false};
+  }
+  
+  // a single numeric scalar to take a single element of a dimension,
+  // this slice will drop the dimension so we optionaly add a `none`
+  // to add it again.
+  if ((TYPEOF(slice) == REALSXP || TYPEOF(slice) == INTSXP) && LENGTH(slice) == 1)
+  {
+    index_append_scalar_integer(index, slice);
+    if (!drop)
+    {
+      index_append_none(index);
+      return {1, false};
+    }
+    else
+    {
+      return {0, false};
+    }
+    
+  }
+  
+  // scalar boolean
+  if (TYPEOF(slice) == LGLSXP && LENGTH(slice) == 1)
+  {
+    index_append_scalar_bool(index, slice);
+    return {1, false};
+  }
+  
+  // the fill sybol was passed. in this case we add the ellipsis ...
+  if (Rf_inherits(slice, "fill"))
+  {
+    index_append_ellipsis(index);
+    return {1, false};
+  }
+  
+  // NULL means add an axis.
+  if (TYPEOF(slice) == NILSXP)
+  {
+    index_append_none(index);
+    return {1, false};
+  }
+  
+  // if it's a slice with start and end values
+  if (Rf_inherits(slice, "slice"))
+  {
+    index_append_slice(index, slice);
+    return {1, false};
+  }
+  
+  // if it's a numeric vector
+  if ((TYPEOF(slice) == REALSXP || TYPEOF(slice) == INTSXP) && LENGTH(slice) > 1)
+  {
+    index_append_integer_vector(index, slice);
+    return {1, true};
+  }
+  
+  if (TYPEOF(slice) == LGLSXP && LENGTH(slice) > 1)
+  {
+    index_append_bool_vector(index, slice);
+    return {1, true};
+  }
+  
+  if (Rf_inherits(slice, "torch_tensor"))
+  {
+    bool is_scalar = index_append_tensor(index, slice);
+    if (is_scalar) 
+    {
+      return {0, false};
+    }
+    else
+    {
+      return {1, true};  
+    }
+  }
+  
+  Rcpp::stop("Unsupported index.");
 }
 
 std::vector<XPtrTorchTensorIndex> slices_to_index (std::vector<Rcpp::RObject> slices, bool drop)
 {
   std::vector<XPtrTorchTensorIndex> output;
   XPtrTorchTensorIndex index = lantern_TensorIndex_new();
-  
   SEXP slice;
+  int num_dim = 0;
   for (int i = 0; i < slices.size(); i++)
   {
     slice = slices[i];
-    
-    // a single NA means empty argument which and in turn we must select
-    // all elements in that dimension.
-    if (TYPEOF(slice) == LGLSXP && LENGTH(slice) == 1 && LOGICAL(slice)[0] == NA_LOGICAL)
+    auto info = index_append_sexp(index, slice, drop);
+    num_dim += info.dim;
+    if (info.vector)
     {
-      index_append_empty_slice(index);
-      continue;
-    }
-    
-    // a single numeric scalar to take a single element of a dimension,
-    // this slice will drop the dimension so we optionaly add a `none`
-    // to add it again.
-    if ((TYPEOF(slice) == REALSXP || TYPEOF(slice) == INTSXP) && LENGTH(slice) == 1)
-    {
-      index_append_scalar_integer(index, slice);
-      if (!drop)
-      {
-        index_append_none(index);
-      }
-      continue;
-    }
-    
-    // scalar boolean
-    if (TYPEOF(slice) == LGLSXP && LENGTH(slice) == 1)
-    {
-      index_append_scalar_bool(index, slice);
-      continue;
-    }
-    
-    // the fill sybol was passed. in this case we add the ellipsis ...
-    if (Rf_inherits(slice, "fill"))
-    {
-      index_append_ellipsis(index);
-      continue;
-    }
-    
-    // NULL means add an axis.
-    if (TYPEOF(slice) == NILSXP)
-    {
-      index_append_none(index);
-      continue;
-    }
-    
-    // if it's a slice with start and end values
-    if (Rf_inherits(slice, "slice"))
-    {
-      index_append_slice(index, slice);
-      continue;
-    }
-    
-    // if it's a numeric vector
-    if ((TYPEOF(slice) == REALSXP || TYPEOF(slice) == INTSXP) && LENGTH(slice) > 1)
-    {
-      index_append_integer_vector(index, slice);
-      
+      bool last_dim = i >= (slices.size() - 1);
       // we add an ellipsis to get all the other dimensions and append it to the output vector.
-      index_append_ellipsis(index);
+      // we only append if it's not the last dimension too.
+      if (!last_dim)
+      {
+        index_append_ellipsis(index);  
+      }
+      
       output.push_back(index);
       index = lantern_TensorIndex_new();
-      for(int j = 0; j <= i; j++)
+      // if there's still more slices to go trough, we need to add empty slices
+      // in the new index object. the number of empty slices that we need to add
+      // is related to the number of dimensions of the resulting intermidiary tensor 
+      // that is tracked by num_dim.
+      if (!last_dim)
       {
-        index_append_empty_slice(index);
+        for(int j = 0; j < num_dim; j++)
+        {
+          index_append_empty_slice(index);
+        }
       }
-      
-      continue;
     }
-    
-    // if it's a numeric vector
-    if (TYPEOF(slice) == LGLSXP && LENGTH(slice) > 1)
-    {
-      index_append_bool_vector(index, slice);
-      continue;
-    }
-    
-    if (Rf_inherits(slice, "torch_tensor"))
-    {
-      index_append_tensor(index, slice);
-      continue;
-    }
-    
   }
   
   if (!lantern_TensorIndex_is_empty(index.get()))
@@ -351,25 +391,30 @@ void Tensor_slice_put(Rcpp::XPtr<XPtrTorchTensor> self, Rcpp::Environment e,
   auto dots = evaluate_slices(enquos0(e), mask);
   auto indexes = slices_to_index(dots, true);
   
-  for (auto& index : indexes)
+  if (indexes.size() > 1)
   {
-    if ((TYPEOF(rhs) == REALSXP || TYPEOF(rhs) == INTSXP || TYPEOF(rhs) == LGLSXP ||
-        TYPEOF(rhs) == STRSXP) && LENGTH(rhs) == 1)
-    {
-      auto s = cpp_torch_scalar(rhs);
-      lantern_Tensor_index_put_scalar_(self->get(), index.get(), s.get());  
-      return;
-    }
-    
-    if (Rf_inherits(rhs, "torch_tensor"))
-    {
-      Rcpp::XPtr<XPtrTorchTensor> t = Rcpp::as<Rcpp::XPtr<XPtrTorchTensor>>(rhs);
-      lantern_Tensor_index_put_tensor_(self->get(), index.get(), t->get());  
-      return;
-    }
-    
-    Rcpp::stop("rhs must be a torch_tensor or scalar value.");
+    Rcpp::stop("Subset assignment indexing doesn't work with vector like indexing. " 
+               "Use slices or scalar indexing.");
   }
   
-}
+  auto index = indexes.at(0);
+  
+  
+  if ((TYPEOF(rhs) == REALSXP || TYPEOF(rhs) == INTSXP || TYPEOF(rhs) == LGLSXP ||
+      TYPEOF(rhs) == STRSXP) && LENGTH(rhs) == 1)
+  {
+    auto s = cpp_torch_scalar(rhs);
+    lantern_Tensor_index_put_scalar_(self->get(), index.get(), s.get());  
+    return;
+  }
+  
+  if (Rf_inherits(rhs, "torch_tensor"))
+  {
+    Rcpp::XPtr<XPtrTorchTensor> t = Rcpp::as<Rcpp::XPtr<XPtrTorchTensor>>(rhs);
+    lantern_Tensor_index_put_tensor_(self->get(), index.get(), t->get());  
+    return;
+  }
+  
+  Rcpp::stop("rhs must be a torch_tensor or scalar value.");
 
+}
