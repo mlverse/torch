@@ -37,21 +37,33 @@ jobs:
 
       - uses: r-lib/actions/setup-pandoc@v1
 
-      - name: Query dependencies
+      - name: Install pak and query dependencies
         run: |
-          install.packages('remotes')
-          saveRDS(remotes::dev_package_deps(dependencies = TRUE), ".github/depends.Rds", version = 2)
-          writeLines(sprintf("R-%i.%i", getRversion()$major, getRversion()$minor), ".github/R-version")
+          install.packages("pak", repos = "https://r-lib.github.io/p/pak/dev/")
+          saveRDS(pak::pkg_deps_tree("local::.", dependencies = TRUE), ".github/r-depends.rds")
         shell: Rscript {0}
 
+      - name: Install system dependencies
+        if: runner.os == 'Linux'
+        run: |
+          Rscript -e 'pak::local_system_requirements(execute = TRUE)'
+          sudo apt-get install libgit2-dev
+          
       - name: Install dependencies
         run: |
-          remotes::install_deps(dependencies = TRUE)
-          remotes::install_github("r-lib/rcmdcheck")
+          pak::local_install_dev_deps(upgrade = TRUE)
+          pak::pkg_install("rcmdcheck")
         shell: Rscript {0}
         
       - run: |
           remotes::install_github("r-lib/revdepcheck")
+        shell: Rscript {0}
+        
+      - name: Session info
+        run: |
+          options(width = 100)
+          pkgs <- installed.packages()[, "Package"]
+          sessioninfo::session_info(pkgs, include_base = TRUE)
         shell: Rscript {0}
   
       - name: Run revdep check
