@@ -21,7 +21,7 @@ torchaudio:
   name: torchaudio
 etm:
   weight: 30
-  desc: 'ETM is a generative topic model combining traditional topic models (LDA) with word embeddings (word2vec). It models each word with a categorical distribution whose natural parameter is the inner product between a word embedding and an embedding of its assigned topic'
+  desc: 'ETM is a generative topic model combining traditional topic models (LDA) with word embeddings (word2vec). It models each word with a categorical distribution whose natural parameter is the inner product between a word embedding and an embedding of its assigned topic.'
   url_git: https://github.com/bnosac/ETM
   url_docs: https://github.com/bnosac/ETM
   url_cran: https://cloud.r-project.org/web/packages/ETM/index.html
