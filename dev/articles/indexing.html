@@ -271,23 +271,23 @@
 <code class="sourceCode R"><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/torch_randn.html">torch_randn</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">3</span><span class="op">)</span>
 <span class="va">x</span>
 <span class="co">#&gt; torch_tensor</span>
-<span class="co">#&gt; -1.3323 -0.3996 -1.2173</span>
-<span class="co">#&gt; -0.0169  1.0425  0.9254</span>
+<span class="co">#&gt;  1.4695  1.3989 -0.2709</span>
+<span class="co">#&gt;  0.3662  0.7398 -0.3689</span>
 <span class="co">#&gt; [ CPUFloatType{2,3} ]</span></code></pre></div>
 <p>The following syntax will give you the first row:</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">x</span><span class="op">[</span><span class="fl">1</span>,<span class="op">]</span>
 <span class="co">#&gt; torch_tensor</span>
-<span class="co">#&gt; -1.3323</span>
-<span class="co">#&gt; -0.3996</span>
-<span class="co">#&gt; -1.2173</span>
+<span class="co">#&gt;  1.4695</span>
+<span class="co">#&gt;  1.3989</span>
+<span class="co">#&gt; -0.2709</span>
 <span class="co">#&gt; [ CPUFloatType{3} ]</span></code></pre></div>
 <p>And this would give you the first 2 columns:</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">x</span><span class="op">[</span>,<span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">]</span>
 <span class="co">#&gt; torch_tensor</span>
-<span class="co">#&gt; -1.3323 -0.3996</span>
-<span class="co">#&gt; -0.0169  1.0425</span>
+<span class="co">#&gt;  1.4695  1.3989</span>
+<span class="co">#&gt;  0.3662  0.7398</span>
 <span class="co">#&gt; [ CPUFloatType{2,2} ]</span></code></pre></div>
 </div>
 <div id="dropping-dimensions" class="section level2">
@@ -342,6 +342,40 @@
 <span class="co">#&gt;   76   81   86   91   96</span>
 <span class="co">#&gt;  101  106  111  116  121</span>
 <span class="co">#&gt; [ CPULongType{5,5} ]</span></code></pre></div>
+</div>
+<div id="indexing-with-vectors" class="section level2">
+<h2 class="hasAnchor">
+<a href="#indexing-with-vectors" class="anchor"></a>Indexing with vectors</h2>
+<p>Vector indexing is also supported but care must be taken regarding performance as, in general its much less performant than slice based indexing.</p>
+<blockquote>
+<p>Note: Starting from version 0.5.0, vector indexing in torch follows R semantics, prior to that the behavior was similar to <a href="https://numpy.org/doc/stable/reference/arrays.indexing.html#advanced-indexing">numpy’s advanced indexing</a>. To use the old behavior, consider using <code><a href="../reference/torch_index.html">?torch_index</a></code>, <code><a href="../reference/torch_index_put.html">?torch_index_put</a></code> or <code>torch_index_put_</code>.</p>
+</blockquote>
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/torch_randn.html">torch_randn</a></span><span class="op">(</span><span class="fl">4</span>,<span class="fl">4</span><span class="op">)</span>
+<span class="va">x</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">3</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">3</span><span class="op">)</span><span class="op">]</span>
+<span class="co">#&gt; torch_tensor</span>
+<span class="co">#&gt; -0.5259 -0.6345</span>
+<span class="co">#&gt; -0.2691  0.4986</span>
+<span class="co">#&gt; [ CPUFloatType{2,2} ]</span></code></pre></div>
+<p>You can also use boolean vectors, for example:</p>
+<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">x</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="cn">TRUE</span>, <span class="cn">FALSE</span>, <span class="cn">TRUE</span>, <span class="cn">FALSE</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="cn">TRUE</span>, <span class="cn">FALSE</span>, <span class="cn">TRUE</span>, <span class="cn">FALSE</span><span class="op">)</span><span class="op">]</span>
+<span class="co">#&gt; torch_tensor</span>
+<span class="co">#&gt; -0.5259 -0.6345</span>
+<span class="co">#&gt; -0.2691  0.4986</span>
+<span class="co">#&gt; [ CPUFloatType{2,2} ]</span></code></pre></div>
+<p>The above examples also work if the index were long or boolean tensors, instead of R vectors. It’s also possible to index with multi-dimensional boolean tensors:</p>
+<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/torch_tensor.html">torch_tensor</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/cbind.html">rbind</a></span><span class="op">(</span>
+  <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">2</span>,<span class="fl">3</span><span class="op">)</span>,
+  <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">4</span>,<span class="fl">5</span>,<span class="fl">6</span><span class="op">)</span>
+<span class="op">)</span><span class="op">)</span>
+<span class="va">x</span><span class="op">[</span><span class="va">x</span><span class="op">&gt;</span><span class="fl">3</span><span class="op">]</span>
+<span class="co">#&gt; torch_tensor</span>
+<span class="co">#&gt;  4</span>
+<span class="co">#&gt;  5</span>
+<span class="co">#&gt;  6</span>
+<span class="co">#&gt; [ CPUFloatType{3} ]</span></code></pre></div>
 </div>
   </div>
 

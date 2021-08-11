@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Kaiming normal initialization — nn_init_kaiming_normal_ • torch</title>
+<title>Index torch tensors — torch_index • torch</title>
 
 
 <!-- jquery -->
@@ -41,10 +41,8 @@
   <link href="../extra.css" rel="stylesheet">
   
 
-<meta property="og:title" content="Kaiming normal initialization — nn_init_kaiming_normal_" />
-<meta property="og:description" content="Fills the input Tensor with values according to the method
-described in Delving deep into rectifiers: Surpassing human-level performance on ImageNet classification - He, K. et al. (2015), using a
-normal distribution." />
+<meta property="og:title" content="Index torch tensors — torch_index" />
+<meta property="og:description" content="Helper functions to index tensors." />
 
 
 <meta name="robots" content="noindex">
@@ -182,61 +180,32 @@ normal distribution." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Kaiming normal initialization</h1>
-    <small class="dont-index">Source: <a href='https://github.com/mlverse/torch/blob/master/R/nn-init.R'><code>R/nn-init.R</code></a></small>
-    <div class="hidden name"><code>nn_init_kaiming_normal_.Rd</code></div>
+    <h1>Index torch tensors</h1>
+    <small class="dont-index">Source: <a href='https://github.com/mlverse/torch/blob/master/R/gen-namespace.R'><code>R/gen-namespace.R</code></a>, <a href='https://github.com/mlverse/torch/blob/master/R/wrapers.R'><code>R/wrapers.R</code></a></small>
+    <div class="hidden name"><code>torch_index.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Fills the input <code>Tensor</code> with values according to the method
-described in <code>Delving deep into rectifiers: Surpassing human-level performance on ImageNet classification</code> - He, K. et al. (2015), using a
-normal distribution.</p>
+    <p>Helper functions to index tensors.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>nn_init_kaiming_normal_</span><span class='op'>(</span>
-  <span class='va'>tensor</span>,
-  a <span class='op'>=</span> <span class='fl'>0</span>,
-  mode <span class='op'>=</span> <span class='st'>"fan_in"</span>,
-  nonlinearity <span class='op'>=</span> <span class='st'>"leaky_relu"</span>
-<span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>torch_index</span><span class='op'>(</span><span class='va'>self</span>, <span class='va'>indices</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>tensor</th>
-      <td><p>an n-dimensional <code>torch.Tensor</code></p></td>
+      <th>self</th>
+      <td><p>(Tensor) Tensor that will be indexed.</p></td>
     </tr>
     <tr>
-      <th>a</th>
-      <td><p>the negative slope of the rectifier used after this layer (only used
-with <code>'leaky_relu'</code>)</p></td>
-    </tr>
-    <tr>
-      <th>mode</th>
-      <td><p>either 'fan_in' (default) or 'fan_out'. Choosing 'fan_in' preserves
-the magnitude of the variance of the weights in the forward pass. Choosing
-'fan_out' preserves the magnitudes in the backwards pass.</p></td>
-    </tr>
-    <tr>
-      <th>nonlinearity</th>
-      <td><p>the non-linear function. recommended to use only with 'relu'
-or 'leaky_relu' (default).</p></td>
+      <th>indices</th>
+      <td><p>(<code>List[Tensor]</code>) List of indices. Indices are torch tensors with
+<code><a href='torch_dtype.html'>torch_long()</a></code> dtype.</p></td>
     </tr>
     </table>
 
 
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
-<span class='va'>w</span> <span class='op'>&lt;-</span> <span class='fu'><a href='torch_empty.html'>torch_empty</a></span><span class='op'>(</span><span class='fl'>3</span>, <span class='fl'>5</span><span class='op'>)</span>
-<span class='fu'>nn_init_kaiming_normal_</span><span class='op'>(</span><span class='va'>w</span>, mode <span class='op'>=</span> <span class='st'>"fan_in"</span>, nonlinearity <span class='op'>=</span> <span class='st'>"leaky_relu"</span><span class='op'>)</span>
-
-<span class='op'>}</span>
-</div><div class='output co'>#&gt; torch_tensor
-#&gt; -1.1406 -0.1652  0.8380  0.4346  0.6411
-#&gt;  0.4545  0.1728 -0.0452  0.8544  0.5508
-#&gt;  0.1421 -0.6713  0.4061  0.0759  1.3879
-#&gt; [ CPUFloatType{3,5} ]</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
