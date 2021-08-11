@@ -1,0 +1,64 @@
+on:
+  workflow_dispatch:
+
+
+name: revdep
+
+jobs:
+  revdep:
+    
+    strategy:
+      fail-fast: false
+      matrix: 
+        cuda: ["111"]
+    
+    runs-on: [self-hosted, linux]
+    
+    env:
+      R_REMOTES_NO_ERRORS_FROM_WARNINGS: true
+      TORCH_TEST: 1
+      TORCH_INSTALL: 1
+      GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
+      DEBIAN_FRONTEND: 'noninteractive'
+      
+    container:
+      image: nvidia/cuda:11.1-cudnn8-devel-ubuntu18.04
+      options: --gpus all
+      
+    steps:
+    
+      - run: |
+          apt-get update -y
+          apt-get install -y sudo software-properties-common dialog apt-utils tzdata libpng-dev
+          
+      - uses: r-lib/actions/setup-r@master
+        with:
+          r-version: 'release'
+
+      - uses: r-lib/actions/setup-pandoc@master
+
+      - name: Query dependencies
+        run: |
+          install.packages('remotes')
+          saveRDS(remotes::dev_package_deps(dependencies = TRUE), ".github/depends.Rds", version = 2)
+          writeLines(sprintf("R-%i.%i", getRversion()$major, getRversion()$minor), ".github/R-version")
+        shell: Rscript {0}
+
+      - name: Install dependencies
+        run: |
+          remotes::install_deps(dependencies = TRUE)
+          remotes::install_cran("rcmdcheck")
+          remotes::install_github("r-lib/revdepcheck")
+        shell: Rscript {0}
+  
+      - name: Run revdep check
+        run: |
+          revdepcheck::revdep_check()
+        shell: Rscript {0}
+      
+      - name: Upload revdep results
+        if: always()
+        uses: actions/upload-artifact@main
+        with:
+          name: revdep-results
+          path: revdep
