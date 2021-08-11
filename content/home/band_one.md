@@ -1,6 +1,10 @@
 ---
 col0:
   row1: torch
+col1:
+  row2: 
+    title: luz
+    url: https://mlverse.github.io/luz
 col2:
   row2: 
     title: torchaudio

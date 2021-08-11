@@ -5,6 +5,13 @@ torch:
   url_docs: https://torch.mlverse.org/
   url_cran: https://cloud.r-project.org/web/packages/torch/index.html
   name: torch
+luz:
+  weight: 2
+  desc: "luz is a higher level API for torch providing abstractions to allow for much less verbose training loops. Luz let's you take your Torch nn_module definition and fit it to a dataloader, while handling the boring parts like moving data between devices, updating the weights, showing progress bars and tracking metrics."
+  url_git: https://github.com/mlverse/luz
+  url_docs: https://mlverse.github.io/luz
+  url_cran: https://cloud.r-project.org/web/packages/luz/index.html
+  name: luz
 torchvision:
   weight: 10
   desc: 'torchvision is an extension providing image loading, transformations, common architectures for computer vision, pre-trained weights and access to commonly used datasets.'

@@ -18,7 +18,7 @@
         {{ end }}
         {{ $col1 := .Params.col1 }}
         {{ with $col1 }}
-        {{ with .row2 }}<a href="https://{{ . }}{{ $.Site.Params.hex_base_url }}"><img src="{{ printf ("/css/images/hex/%s.%s") . "png" }}" alt="{{ . }} hex sticker" class="r2 c1"></a>{{ end }}
+        {{ with .row2 }}<a href="{{ .url }}"><img src="{{ printf ("/css/images/hex/%s.%s") .title "png" }}" alt="{{ .title }} hex sticker" class="r2 c1"></a>{{ end }}
         {{ with .row3 }}<a href="https://{{ . }}{{ $.Site.Params.hex_base_url }}"><img src="{{ printf ("/css/images/hex/%s.%s") . "png" }}" alt="{{ . }} hex sticker" class="r3 c1"></a>{{ end }}
         {{ end }}
         {{ $col2 := .Params.col2 }}
