@@ -156,7 +156,7 @@ Vector indexing is also supported but care must be taken regarding performance a
 
 > Note: Starting from version 0.5.0, vector indexing in torch follows R semantics, 
 prior to that the behavior was similar to [numpy's advanced indexing](https://numpy.org/doc/stable/reference/arrays.indexing.html#advanced-indexing).
-To use the old behavior, 
+To use the old behavior, consider using `?torch_index`, `?torch_index_put` or `torch_index_put_`.
 
 ```{r}
 x <- torch_randn(4,4)

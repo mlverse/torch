@@ -564,3 +564,30 @@ torch_multinomial <- function(self, num_samples, replacement = FALSE, generator 
   r
 }
 
+#' Index torch tensors
+#' 
+#' Helper functions to index tensors.
+#' 
+#' @param self (Tensor) Tensor that will be indexed.
+#' @param indices (`List[Tensor]`) List of indices. Indices are torch tensors with
+#'   `torch_long()` dtype.
+#' 
+#' @name torch_index
+#' @export
+NULL
+
+#' In-place version of `torch_index_put`.
+#' @name torch_index_put_
+#' @inheritParams torch_index
+#' @param values (Tensor) values that will be replaced the indexed location. Used
+#'   for `torch_index_put` and `torch_index_put_`.
+#' @param accumulate (bool) Wether instead of replacing the current values with `values`,
+#'   you want to add them.
+#' @export
+NULL
+
+#' Modify values selected by `indices`.
+#' @inheritParams torch_index_put_
+#' @name torch_index_put 
+#' @export
+NULL

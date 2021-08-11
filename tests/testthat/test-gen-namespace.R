@@ -162,6 +162,36 @@ test_that("einsum", {
   expect_equal_to_r(out, matrix(c(1,2,3,2,4,6), ncol = 2))
 })
 
+test_that("index", {
+  
+  x <- torch_randn(4,4)
+  y <- torch_index(x, list(torch_tensor(1:2), torch_tensor(1:2)))
+  
+  expect_equal_to_tensor(y, torch_stack(list(x[1,1], x[2,2])))
+  
+})
+
+test_that("index_put", {
+  
+  x <- torch_randn(4,4)
+  y <- torch_index_put(x, list(torch_tensor(1:2), torch_tensor(1:2)), torch_tensor(0))
+  
+  x[1,1] <- 0
+  x[2,2] <- 0
+  
+  expect_equal_to_tensor(y, x)
+  
+})
+
+test_that("index_put_", {
+  
+  x <- torch_randn(4,4)
+  torch_index_put_(x, list(torch_tensor(1:2), torch_tensor(1:2)), torch_tensor(0))
+  
+  expect_equal(x[1,1]$item(), 0)
+  expect_equal(x[2,2]$item(), 0)
+})
+
 test_that("tensordot", {
   
   a <- torch_arange(start = 1, end = 60)$reshape(c(3, 4, 5))
