@@ -5,3 +5,6 @@ lantern
 vignettes
 .Rproj.user
 Meta
+tests/
+doc/
+build/
