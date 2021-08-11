@@ -50,7 +50,7 @@ jobs:
         shell: Rscript {0}
         
       - run: |
-          remotes::install_github("r-lib/revdepcheck")
+          pak::pkg_install("r-lib/revdepcheck")
         shell: Rscript {0}
         
       - name: Session info
