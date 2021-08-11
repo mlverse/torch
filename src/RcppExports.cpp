@@ -3072,13 +3072,13 @@ BEGIN_RCPP
 END_RCPP
 }
 // cpp_torch_method_index_self_Tensor_indices_constc10Listc10optionalTensor
-XPtrTorchTensor cpp_torch_method_index_self_Tensor_indices_constc10Listc10optionalTensor(XPtrTorchTensor self, XPtrTorchOptionalTensorList indices);
+XPtrTorchTensor cpp_torch_method_index_self_Tensor_indices_constc10Listc10optionalTensor(XPtrTorchTensor self, XPtrTorchOptionalIndexTensorList indices);
 RcppExport SEXP _torch_cpp_torch_method_index_self_Tensor_indices_constc10Listc10optionalTensor(SEXP selfSEXP, SEXP indicesSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
-    Rcpp::traits::input_parameter< XPtrTorchOptionalTensorList >::type indices(indicesSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchOptionalIndexTensorList >::type indices(indicesSEXP);
     rcpp_result_gen = Rcpp::wrap(cpp_torch_method_index_self_Tensor_indices_constc10Listc10optionalTensor(self, indices));
     return rcpp_result_gen;
 END_RCPP
@@ -3140,13 +3140,13 @@ BEGIN_RCPP
 END_RCPP
 }
 // cpp_torch_method_index_put__self_Tensor_indices_constc10Listc10optionalTensor_values_Tensor
-XPtrTorchTensor cpp_torch_method_index_put__self_Tensor_indices_constc10Listc10optionalTensor_values_Tensor(XPtrTorchTensor self, XPtrTorchOptionalTensorList indices, XPtrTorchTensor values, bool accumulate);
+XPtrTorchTensor cpp_torch_method_index_put__self_Tensor_indices_constc10Listc10optionalTensor_values_Tensor(XPtrTorchTensor self, XPtrTorchOptionalIndexTensorList indices, XPtrTorchTensor values, bool accumulate);
 RcppExport SEXP _torch_cpp_torch_method_index_put__self_Tensor_indices_constc10Listc10optionalTensor_values_Tensor(SEXP selfSEXP, SEXP indicesSEXP, SEXP valuesSEXP, SEXP accumulateSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
-    Rcpp::traits::input_parameter< XPtrTorchOptionalTensorList >::type indices(indicesSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchOptionalIndexTensorList >::type indices(indicesSEXP);
     Rcpp::traits::input_parameter< XPtrTorchTensor >::type values(valuesSEXP);
     Rcpp::traits::input_parameter< bool >::type accumulate(accumulateSEXP);
     rcpp_result_gen = Rcpp::wrap(cpp_torch_method_index_put__self_Tensor_indices_constc10Listc10optionalTensor_values_Tensor(self, indices, values, accumulate));
@@ -3154,13 +3154,13 @@ BEGIN_RCPP
 END_RCPP
 }
 // cpp_torch_method_index_put_self_Tensor_indices_constc10Listc10optionalTensor_values_Tensor
-XPtrTorchTensor cpp_torch_method_index_put_self_Tensor_indices_constc10Listc10optionalTensor_values_Tensor(XPtrTorchTensor self, XPtrTorchOptionalTensorList indices, XPtrTorchTensor values, bool accumulate);
+XPtrTorchTensor cpp_torch_method_index_put_self_Tensor_indices_constc10Listc10optionalTensor_values_Tensor(XPtrTorchTensor self, XPtrTorchOptionalIndexTensorList indices, XPtrTorchTensor values, bool accumulate);
 RcppExport SEXP _torch_cpp_torch_method_index_put_self_Tensor_indices_constc10Listc10optionalTensor_values_Tensor(SEXP selfSEXP, SEXP indicesSEXP, SEXP valuesSEXP, SEXP accumulateSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
-    Rcpp::traits::input_parameter< XPtrTorchOptionalTensorList >::type indices(indicesSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchOptionalIndexTensorList >::type indices(indicesSEXP);
     Rcpp::traits::input_parameter< XPtrTorchTensor >::type values(valuesSEXP);
     Rcpp::traits::input_parameter< bool >::type accumulate(accumulateSEXP);
     rcpp_result_gen = Rcpp::wrap(cpp_torch_method_index_put_self_Tensor_indices_constc10Listc10optionalTensor_values_Tensor(self, indices, values, accumulate));
@@ -15152,13 +15152,13 @@ BEGIN_RCPP
 END_RCPP
 }
 // cpp_torch_namespace_index_self_Tensor_indices_constc10Listc10optionalTensor
-XPtrTorchTensor cpp_torch_namespace_index_self_Tensor_indices_constc10Listc10optionalTensor(XPtrTorchTensor self, XPtrTorchOptionalTensorList indices);
+XPtrTorchTensor cpp_torch_namespace_index_self_Tensor_indices_constc10Listc10optionalTensor(XPtrTorchTensor self, XPtrTorchOptionalIndexTensorList indices);
 RcppExport SEXP _torch_cpp_torch_namespace_index_self_Tensor_indices_constc10Listc10optionalTensor(SEXP selfSEXP, SEXP indicesSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
-    Rcpp::traits::input_parameter< XPtrTorchOptionalTensorList >::type indices(indicesSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchOptionalIndexTensorList >::type indices(indicesSEXP);
     rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace_index_self_Tensor_indices_constc10Listc10optionalTensor(self, indices));
     return rcpp_result_gen;
 END_RCPP
@@ -15192,13 +15192,13 @@ BEGIN_RCPP
 END_RCPP
 }
 // cpp_torch_namespace_index_put__self_Tensor_indices_constc10Listc10optionalTensor_values_Tensor
-XPtrTorchTensor cpp_torch_namespace_index_put__self_Tensor_indices_constc10Listc10optionalTensor_values_Tensor(XPtrTorchTensor self, XPtrTorchOptionalTensorList indices, XPtrTorchTensor values, bool accumulate);
+XPtrTorchTensor cpp_torch_namespace_index_put__self_Tensor_indices_constc10Listc10optionalTensor_values_Tensor(XPtrTorchTensor self, XPtrTorchOptionalIndexTensorList indices, XPtrTorchTensor values, bool accumulate);
 RcppExport SEXP _torch_cpp_torch_namespace_index_put__self_Tensor_indices_constc10Listc10optionalTensor_values_Tensor(SEXP selfSEXP, SEXP indicesSEXP, SEXP valuesSEXP, SEXP accumulateSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
-    Rcpp::traits::input_parameter< XPtrTorchOptionalTensorList >::type indices(indicesSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchOptionalIndexTensorList >::type indices(indicesSEXP);
     Rcpp::traits::input_parameter< XPtrTorchTensor >::type values(valuesSEXP);
     Rcpp::traits::input_parameter< bool >::type accumulate(accumulateSEXP);
     rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace_index_put__self_Tensor_indices_constc10Listc10optionalTensor_values_Tensor(self, indices, values, accumulate));
@@ -15206,13 +15206,13 @@ BEGIN_RCPP
 END_RCPP
 }
 // cpp_torch_namespace_index_put_self_Tensor_indices_constc10Listc10optionalTensor_values_Tensor
-XPtrTorchTensor cpp_torch_namespace_index_put_self_Tensor_indices_constc10Listc10optionalTensor_values_Tensor(XPtrTorchTensor self, XPtrTorchOptionalTensorList indices, XPtrTorchTensor values, bool accumulate);
+XPtrTorchTensor cpp_torch_namespace_index_put_self_Tensor_indices_constc10Listc10optionalTensor_values_Tensor(XPtrTorchTensor self, XPtrTorchOptionalIndexTensorList indices, XPtrTorchTensor values, bool accumulate);
 RcppExport SEXP _torch_cpp_torch_namespace_index_put_self_Tensor_indices_constc10Listc10optionalTensor_values_Tensor(SEXP selfSEXP, SEXP indicesSEXP, SEXP valuesSEXP, SEXP accumulateSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
-    Rcpp::traits::input_parameter< XPtrTorchOptionalTensorList >::type indices(indicesSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchOptionalIndexTensorList >::type indices(indicesSEXP);
     Rcpp::traits::input_parameter< XPtrTorchTensor >::type values(valuesSEXP);
     Rcpp::traits::input_parameter< bool >::type accumulate(accumulateSEXP);
     rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace_index_put_self_Tensor_indices_constc10Listc10optionalTensor_values_Tensor(self, indices, values, accumulate));
@@ -15220,13 +15220,13 @@ BEGIN_RCPP
 END_RCPP
 }
 // cpp_torch_namespace__index_put_impl__self_Tensor_indices_constc10Listc10optionalTensor_values_Tensor
-XPtrTorchTensor cpp_torch_namespace__index_put_impl__self_Tensor_indices_constc10Listc10optionalTensor_values_Tensor(XPtrTorchTensor self, XPtrTorchOptionalTensorList indices, XPtrTorchTensor values, bool accumulate, bool unsafe);
+XPtrTorchTensor cpp_torch_namespace__index_put_impl__self_Tensor_indices_constc10Listc10optionalTensor_values_Tensor(XPtrTorchTensor self, XPtrTorchOptionalIndexTensorList indices, XPtrTorchTensor values, bool accumulate, bool unsafe);
 RcppExport SEXP _torch_cpp_torch_namespace__index_put_impl__self_Tensor_indices_constc10Listc10optionalTensor_values_Tensor(SEXP selfSEXP, SEXP indicesSEXP, SEXP valuesSEXP, SEXP accumulateSEXP, SEXP unsafeSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
-    Rcpp::traits::input_parameter< XPtrTorchOptionalTensorList >::type indices(indicesSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchOptionalIndexTensorList >::type indices(indicesSEXP);
     Rcpp::traits::input_parameter< XPtrTorchTensor >::type values(valuesSEXP);
     Rcpp::traits::input_parameter< bool >::type accumulate(accumulateSEXP);
     Rcpp::traits::input_parameter< bool >::type unsafe(unsafeSEXP);

@@ -1941,6 +1941,30 @@ HOST_API void lantern_OptionalTensorList_delete (void* x)
   
 }
 
+LANTERN_API int64_t (LANTERN_PTR _lantern_OptionalTensorList_size) (void* self);
+HOST_API int64_t lantern_OptionalTensorList_size (void* self)
+{
+  int64_t ret = _lantern_OptionalTensorList_size(self);
+  LANTERN_HOST_HANDLER;
+  return ret;
+}
+
+LANTERN_API void* (LANTERN_PTR _lantern_OptionalTensorList_at) (void* self, int64_t i);
+HOST_API void* lantern_OptionalTensorList_at (void* self, int64_t i)
+{
+  void* ret = _lantern_OptionalTensorList_at(self, i);
+  LANTERN_HOST_HANDLER;
+  return ret;
+}
+
+LANTERN_API bool (LANTERN_PTR _lantern_OptionalTensorList_at_is_null) (void* self, int64_t i);
+HOST_API bool lantern_OptionalTensorList_at_is_null (void* self, int64_t i)
+{
+  bool ret = _lantern_OptionalTensorList_at_is_null(self, i);
+  LANTERN_HOST_HANDLER;
+  return ret;
+}
+
   /* Autogen Headers -- Start */
   LANTERN_API void* (LANTERN_PTR _lantern__cast_byte_tensor_bool)(void* self, void* non_blocking);
   HOST_API void* lantern__cast_byte_tensor_bool(void* self, void* non_blocking) { void* ret = _lantern__cast_byte_tensor_bool(self, non_blocking); LANTERN_HOST_HANDLER return ret; }
@@ -7521,6 +7545,9 @@ LOAD_SYMBOL(_lantern_get_default_Generator);
 LOAD_SYMBOL(_lantern_last_executed_optimized_graph_print);
 LOAD_SYMBOL(_lantern_TensorIndex_is_empty);
 LOAD_SYMBOL(_lantern_OptionalTensorList_delete);
+LOAD_SYMBOL(_lantern_OptionalTensorList_size);
+LOAD_SYMBOL(_lantern_OptionalTensorList_at);
+LOAD_SYMBOL(_lantern_OptionalTensorList_at_is_null);
   /* Autogen Symbols -- Start */
   LOAD_SYMBOL(_lantern__cast_byte_tensor_bool)
   LOAD_SYMBOL(_lantern__cast_char_tensor_bool)

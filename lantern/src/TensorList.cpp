@@ -46,7 +46,29 @@ void _lantern_OptionalTensorList_push_back (void* self, void* x, bool is_null)
     LANTERN_FUNCTION_END_VOID
 }
 
-void *_lantern_TensorList_at(void *self, int64_t i)
+int64_t _lantern_OptionalTensorList_size (void* self)
+{
+    LANTERN_FUNCTION_START
+    return reinterpret_cast<LanternObject<c10::List<c10::optional<torch::Tensor>>>*>(self)->get().size();
+    LANTERN_FUNCTION_END
+}
+
+void* _lantern_OptionalTensorList_at (void* self, int64_t i)
+{
+    LANTERN_FUNCTION_START
+    auto t = reinterpret_cast<LanternObject<c10::List<c10::optional<torch::Tensor>>>*>(self)->get().get(i);
+    return (void*) new LanternObject<torch::Tensor>(t.value());
+    LANTERN_FUNCTION_END
+}
+
+bool _lantern_OptionalTensorList_at_is_null (void* self, int64_t i)
+{
+    LANTERN_FUNCTION_START
+    return (!reinterpret_cast<LanternObject<c10::List<c10::optional<torch::Tensor>>>*>(self)->get().get(i).has_value());
+    LANTERN_FUNCTION_END
+}
+
+void* _lantern_TensorList_at(void *self, int64_t i)
 {
     LANTERN_FUNCTION_START
     torch::Tensor out = reinterpret_cast<LanternObject<std::vector<torch::Tensor>> *>(self)->get().at(i);

@@ -104,6 +104,14 @@ public:
   explicit XPtrTorchIndexTensorList (SEXP x);
 };
 
+class XPtrTorchOptionalIndexTensorList: public XPtrTorch {
+public:
+  XPtrTorchOptionalIndexTensorList (void* x) : XPtrTorch(x, lantern_OptionalTensorList_delete) {}
+  explicit XPtrTorchOptionalIndexTensorList (std::shared_ptr<void> x) : XPtrTorch(x) {}
+  XPtrTorchOptionalIndexTensorList (const XPtrTorchOptionalIndexTensorList& x) : XPtrTorch(x.get_shared()) {}
+  explicit XPtrTorchOptionalIndexTensorList (SEXP x);
+};
+
 class XPtrTorchScalarType : public XPtrTorch {
 public:
   XPtrTorchScalarType (void* x) : XPtrTorch (x, lantern_ScalarType_delete) {}

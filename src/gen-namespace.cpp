@@ -1168,7 +1168,7 @@ return XPtrTorchTensor(r_out);
 }
 
 // [[Rcpp::export]]
-XPtrTorchTensor cpp_torch_method_index_self_Tensor_indices_constc10Listc10optionalTensor (XPtrTorchTensor self, XPtrTorchOptionalTensorList indices) {
+XPtrTorchTensor cpp_torch_method_index_self_Tensor_indices_constc10Listc10optionalTensor (XPtrTorchTensor self, XPtrTorchOptionalIndexTensorList indices) {
   auto r_out = lantern_Tensor_index_tensor_constclistcoptionaltensor(self.get(), indices.get());
 return XPtrTorchTensor(r_out);
 }
@@ -1198,13 +1198,13 @@ return XPtrTorchTensor(r_out);
 }
 
 // [[Rcpp::export]]
-XPtrTorchTensor cpp_torch_method_index_put__self_Tensor_indices_constc10Listc10optionalTensor_values_Tensor (XPtrTorchTensor self, XPtrTorchOptionalTensorList indices, XPtrTorchTensor values, bool accumulate) {
+XPtrTorchTensor cpp_torch_method_index_put__self_Tensor_indices_constc10Listc10optionalTensor_values_Tensor (XPtrTorchTensor self, XPtrTorchOptionalIndexTensorList indices, XPtrTorchTensor values, bool accumulate) {
   auto r_out = lantern_Tensor_index_put__tensor_constclistcoptionaltensor_tensor_bool(self.get(), indices.get(), values.get(), reinterpret_cast<void*>(&accumulate));
 return XPtrTorchTensor(r_out);
 }
 
 // [[Rcpp::export]]
-XPtrTorchTensor cpp_torch_method_index_put_self_Tensor_indices_constc10Listc10optionalTensor_values_Tensor (XPtrTorchTensor self, XPtrTorchOptionalTensorList indices, XPtrTorchTensor values, bool accumulate) {
+XPtrTorchTensor cpp_torch_method_index_put_self_Tensor_indices_constc10Listc10optionalTensor_values_Tensor (XPtrTorchTensor self, XPtrTorchOptionalIndexTensorList indices, XPtrTorchTensor values, bool accumulate) {
   auto r_out = lantern_Tensor_index_put_tensor_constclistcoptionaltensor_tensor_bool(self.get(), indices.get(), values.get(), reinterpret_cast<void*>(&accumulate));
 return XPtrTorchTensor(r_out);
 }
@@ -6830,7 +6830,7 @@ void cpp_torch_namespace__cufft_clear_plan_cache_device_index_int64_t (XPtrTorch
 }
 
 // [[Rcpp::export]]
-XPtrTorchTensor cpp_torch_namespace_index_self_Tensor_indices_constc10Listc10optionalTensor (XPtrTorchTensor self, XPtrTorchOptionalTensorList indices) {
+XPtrTorchTensor cpp_torch_namespace_index_self_Tensor_indices_constc10Listc10optionalTensor (XPtrTorchTensor self, XPtrTorchOptionalIndexTensorList indices) {
   auto r_out = lantern_index_tensor_constclistcoptionaltensor(self.get(), indices.get());
 return XPtrTorchTensor(r_out);
 }
@@ -6848,19 +6848,19 @@ return XPtrTorchTensor(r_out);
 }
 
 // [[Rcpp::export]]
-XPtrTorchTensor cpp_torch_namespace_index_put__self_Tensor_indices_constc10Listc10optionalTensor_values_Tensor (XPtrTorchTensor self, XPtrTorchOptionalTensorList indices, XPtrTorchTensor values, bool accumulate) {
+XPtrTorchTensor cpp_torch_namespace_index_put__self_Tensor_indices_constc10Listc10optionalTensor_values_Tensor (XPtrTorchTensor self, XPtrTorchOptionalIndexTensorList indices, XPtrTorchTensor values, bool accumulate) {
   auto r_out = lantern_index_put__tensor_constclistcoptionaltensor_tensor_bool(self.get(), indices.get(), values.get(), reinterpret_cast<void*>(&accumulate));
 return XPtrTorchTensor(r_out);
 }
 
 // [[Rcpp::export]]
-XPtrTorchTensor cpp_torch_namespace_index_put_self_Tensor_indices_constc10Listc10optionalTensor_values_Tensor (XPtrTorchTensor self, XPtrTorchOptionalTensorList indices, XPtrTorchTensor values, bool accumulate) {
+XPtrTorchTensor cpp_torch_namespace_index_put_self_Tensor_indices_constc10Listc10optionalTensor_values_Tensor (XPtrTorchTensor self, XPtrTorchOptionalIndexTensorList indices, XPtrTorchTensor values, bool accumulate) {
   auto r_out = lantern_index_put_tensor_constclistcoptionaltensor_tensor_bool(self.get(), indices.get(), values.get(), reinterpret_cast<void*>(&accumulate));
 return XPtrTorchTensor(r_out);
 }
 
 // [[Rcpp::export]]
-XPtrTorchTensor cpp_torch_namespace__index_put_impl__self_Tensor_indices_constc10Listc10optionalTensor_values_Tensor (XPtrTorchTensor self, XPtrTorchOptionalTensorList indices, XPtrTorchTensor values, bool accumulate, bool unsafe) {
+XPtrTorchTensor cpp_torch_namespace__index_put_impl__self_Tensor_indices_constc10Listc10optionalTensor_values_Tensor (XPtrTorchTensor self, XPtrTorchOptionalIndexTensorList indices, XPtrTorchTensor values, bool accumulate, bool unsafe) {
   auto r_out = lantern__index_put_impl__tensor_constclistcoptionaltensor_tensor_bool_bool(self.get(), indices.get(), values.get(), reinterpret_cast<void*>(&accumulate), reinterpret_cast<void*>(&unsafe));
 return XPtrTorchTensor(r_out);
 }
