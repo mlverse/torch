@@ -35,7 +35,7 @@ jobs:
         with:
           r-version: 'release'
 
-      - uses: r-lib/actions/setup-pandoc@master
+      - uses: r-lib/actions/setup-pandoc@v1
 
       - name: Query dependencies
         run: |
@@ -48,6 +48,9 @@ jobs:
         run: |
           remotes::install_deps(dependencies = TRUE)
           remotes::install_github("r-lib/rcmdcheck")
+        shell: Rscript {0}
+        
+      - run: |
           remotes::install_github("r-lib/revdepcheck")
         shell: Rscript {0}
   
