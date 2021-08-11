@@ -149,3 +149,34 @@ z <- torch_tensor(1:125)$reshape(c(5,5,5))
 z[1,..]
 z[..,1]
 ```
+
+## Indexing with vectors
+
+Vector indexing is also supported but care must be taken regarding performance as, in general its much less performant than slice based indexing.
+
+> Note: Starting from version 0.5.0, vector indexing in torch follows R semantics, 
+prior to that the behavior was similar to [numpy's advanced indexing](https://numpy.org/doc/stable/reference/arrays.indexing.html#advanced-indexing).
+To use the old behavior, consider using `?torch_index`, `?torch_index_put` or `torch_index_put_`.
+
+```{r}
+x <- torch_randn(4,4)
+x[c(1,3), c(1,3)]
+```
+
+You can also use boolean vectors, for example:
+
+```{r}
+x[c(TRUE, FALSE, TRUE, FALSE), c(TRUE, FALSE, TRUE, FALSE)]
+```
+
+The above examples also work if the index were long or boolean tensors, instead of R vectors.
+It's also possible to index with multi-dimensional boolean tensors:
+
+```{r}
+x <- torch_tensor(rbind(
+  c(1,2,3),
+  c(4,5,6)
+))
+x[x>3]
+```
+

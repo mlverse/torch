@@ -617,6 +617,17 @@ XPtrTorchIndexTensorList XPtrTorchIndexTensorList_from_SEXP (SEXP x)
 XPtrTorchIndexTensorList::XPtrTorchIndexTensorList (SEXP x) :
   XPtrTorch{XPtrTorchIndexTensorList_from_SEXP(x)} {}
 
+XPtrTorchOptionalIndexTensorList XPtrTorchOptionalIndexTensorList_from_SEXP (SEXP x)
+{
+  XPtrTorchOptionalTensorList t = XPtrTorchOptionalTensorList_from_SEXP(x);
+  XPtrTorchOptionalIndexTensorList zero_index = to_optional_index_tensor_list(t);
+  
+  return zero_index;
+}
+
+XPtrTorchOptionalIndexTensorList::XPtrTorchOptionalIndexTensorList (SEXP x) :
+  XPtrTorch{XPtrTorchOptionalIndexTensorList_from_SEXP(x)} {}
+
 XPtrTorchTensorOptions XPtrTorchTensorOptions_from_SEXP (SEXP x)
 {
   

@@ -18,6 +18,7 @@
 - Implemented `traced_module$graph_for()` to allow inspecting the optimized jit graph. (#643)
 - Improved CUDA version auto-detection (#644)
 - Added `slc` to allow dynamically creating slices when indexing tensors. (#648)
+- Indexing with vectors has a now the same behavior as R indexing, making it easier to understand. Users can still use the old behavior by using `torch_index` or `torch_index_put`. (#649)
 
 # torch 0.4.0
 

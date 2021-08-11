@@ -123,8 +123,6 @@ std::string cpp_arg_to_torch_type (SEXP obj, const std::vector<std::string> expe
     return "bool";
   }
   
-  
-  
   if ((is_in("std::array<bool,4>", etypes) || is_in("std::array<bool,3>", etypes)
         || is_in("std::array<bool,2>", etypes)) && is_logical)
   {
@@ -149,6 +147,11 @@ std::string cpp_arg_to_torch_type (SEXP obj, const std::vector<std::string> expe
   if (is_in("Device", etypes) && (Rf_inherits(obj, "torch_device") || is_character))
   {
     return "Device";
+  }
+  
+  if (is_in("const c10::List<c10::optional<Tensor>> &", etypes) && is_list)
+  {
+    return "const c10::List<c10::optional<Tensor>> &";
   }
   
   Rcpp::stop("Can't convert argument");

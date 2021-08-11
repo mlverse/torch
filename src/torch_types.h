@@ -89,7 +89,7 @@ public:
 
 class XPtrTorchOptionalTensorList : public XPtrTorch {
 public:
-  XPtrTorchOptionalTensorList (void* x) : XPtrTorch(x, lantern_TensorList_delete) {}
+  XPtrTorchOptionalTensorList (void* x) : XPtrTorch(x, lantern_OptionalTensorList_delete) {}
   explicit XPtrTorchOptionalTensorList (std::shared_ptr<void> x) : XPtrTorch(x) {}
   XPtrTorchOptionalTensorList (const XPtrTorchTensorList& x) : XPtrTorch(x.get_shared()) {}
   explicit XPtrTorchOptionalTensorList (SEXP x);
@@ -102,6 +102,14 @@ public:
   explicit XPtrTorchIndexTensorList (std::shared_ptr<void> x) : XPtrTorch(x) {}
   XPtrTorchIndexTensorList (const XPtrTorchIndexTensorList& x) : XPtrTorch(x.get_shared()) {}
   explicit XPtrTorchIndexTensorList (SEXP x);
+};
+
+class XPtrTorchOptionalIndexTensorList: public XPtrTorch {
+public:
+  XPtrTorchOptionalIndexTensorList (void* x) : XPtrTorch(x, lantern_OptionalTensorList_delete) {}
+  explicit XPtrTorchOptionalIndexTensorList (std::shared_ptr<void> x) : XPtrTorch(x) {}
+  XPtrTorchOptionalIndexTensorList (const XPtrTorchOptionalIndexTensorList& x) : XPtrTorch(x.get_shared()) {}
+  explicit XPtrTorchOptionalIndexTensorList (SEXP x);
 };
 
 class XPtrTorchScalarType : public XPtrTorch {

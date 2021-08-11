@@ -49,6 +49,13 @@ void _lantern_TensorList_delete(void *x)
   LANTERN_FUNCTION_END_VOID
 }
 
+void _lantern_OptionalTensorList_delete(void* x)
+{
+  LANTERN_FUNCTION_START
+  lantern_delete<LanternObject<c10::List<c10::optional<torch::Tensor>>>>(x);
+  LANTERN_FUNCTION_END_VOID
+}
+
 void _lantern_double_delete(void *x)
 {
   LANTERN_FUNCTION_START

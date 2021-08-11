@@ -29,8 +29,9 @@ make_load_symbols <- function(decls) {
 
 decls <- readr::read_lines(
   "
-void _lantern_autograd_set_detect_anomaly (bool enabled)
-bool _lantern_autograd_detect_anomaly_is_enabled ()
+int64_t _lantern_OptionalTensorList_size (void* self)
+void* _lantern_OptionalTensorList_at (void* self, int64_t i)
+bool _lantern_OptionalTensorList_at_is_null (void* self, int64_t i)
 "  
 )
 
