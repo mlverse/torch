@@ -20,6 +20,7 @@ jobs:
       TORCH_INSTALL: 1
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
       DEBIAN_FRONTEND: 'noninteractive'
+      CRAN: 'https://packagemanager.rstudio.com/all/__linux__/bionic/latest'
       
     container:
       image: nvidia/cuda:11.1-cudnn8-devel-ubuntu18.04
