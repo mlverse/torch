@@ -1,24 +1,35 @@
 # torch (development version)
 
-- Improved R <-> JIT types conversion. (#593)
+## Breaking changes
+
+- Droped support for CUDA 10.1 (#610)
+- `torch_manual_seed()` now matches PyTorch's behavior so we can more easily compare implementations. Since this is a breaking change we added the `torch.old_seed_behavior=TRUE` option so users can stick to the old behavior. (#639)
+- Indexing with vectors has a now the same behavior as R indexing, making it easier to understand. Users can still use the old behavior by using `torch_index` or `torch_index_put`. (#649)
+
+## New features
+
 - Added support for ScriptModule. Loaded JIT modules now operate as `nn_module`s. (#593)
 - Added a `jit_compile` function that allows compiling arbitrary TorchScript code into script function that can be serialized and executed. (#601)
-- Added Dockerfiles for CUDA 11.1 (#597)
 - Added `jit_trace` support for `nn_module` created from R. (#604)
 - Updated LibTorch to version 1.9.0 (#610)
-- Droped support for CUDA 10.1 (#610)
 - Added Linear Algebra functions (#612)
-- Fixed a bug when using a `.getbatch` method that didn't return a `torch_tensor`. (#615)
-- Fixed warning when using `%/%` caused by a call to deprecated `torch_floor_divide` (#616)
 - Added `contrib_sort_vertices` to efficiently sort vertices on CUDA. (#619)
 - Allows querying the graph from traced modules. (#623)
 - Added `with_detect_anomaly` to debug autograd errors. (#628)
-- A warning is raised when an incompatible dataset is passed to a parallel dataloader. (#626)
-- `torch_manual_seed()` now matches PyTorch's behavior so we can more easily compare implementations. Since this is a breaking change we added the `torch.old_seed_behavior=TRUE` option so users can stick to the old behavior. (#639)
 - Implemented `traced_module$graph_for()` to allow inspecting the optimized jit graph. (#643)
-- Improved CUDA version auto-detection (#644)
 - Added `slc` to allow dynamically creating slices when indexing tensors. (#648)
-- Indexing with vectors has a now the same behavior as R indexing, making it easier to understand. Users can still use the old behavior by using `torch_index` or `torch_index_put`. (#649)
+
+## Bug fixes
+
+- Fixed a bug when using a `.getbatch` method that didn't return a `torch_tensor`. (#615)
+- Fixed warning when using `%/%` caused by a call to deprecated `torch_floor_divide` (#616)
+- Improved CUDA version auto-detection (#644)
+
+## Internal changes
+
+- Improved R <-> JIT types conversion. (#593)
+- Added Dockerfiles for CUDA 11.1 (#597)
+- A warning is raised when an incompatible dataset is passed to a parallel dataloader. (#626)
 - Additionally to calling `gc` when CUDA memory is exhausted we now call `R_RunPendingFinalizers`. THis should improve memory usage, because we will now delete tensors earlier. (#654)
 
 # torch 0.4.0
