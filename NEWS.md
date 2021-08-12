@@ -19,6 +19,7 @@
 - Improved CUDA version auto-detection (#644)
 - Added `slc` to allow dynamically creating slices when indexing tensors. (#648)
 - Indexing with vectors has a now the same behavior as R indexing, making it easier to understand. Users can still use the old behavior by using `torch_index` or `torch_index_put`. (#649)
+- Additionally to calling `gc` when CUDA memory is exhausted we now call `R_RunPendingFinalizers`. THis should improve memory usage, because we will now delete tensors earlier. (#654)
 
 # torch 0.4.0
 
