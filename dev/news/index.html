@@ -208,6 +208,7 @@
 <li>Improved CUDA version auto-detection (<a href='https://github.com/mlverse/torch/issues/644'>#644</a>)</li>
 <li>Added <code>slc</code> to allow dynamically creating slices when indexing tensors. (<a href='https://github.com/mlverse/torch/issues/648'>#648</a>)</li>
 <li>Indexing with vectors has a now the same behavior as R indexing, making it easier to understand. Users can still use the old behavior by using <code>torch_index</code> or <code>torch_index_put</code>. (<a href='https://github.com/mlverse/torch/issues/649'>#649</a>)</li>
+<li>Additionally to calling <code>gc</code> when CUDA memory is exhausted we now call <code>R_RunPendingFinalizers</code>. THis should improve memory usage, because we will now delete tensors earlier. (<a href='https://github.com/mlverse/torch/issues/654'>#654</a>)</li>
 </ul>
 </div>
     <div id="torch-040" class="section level1">
