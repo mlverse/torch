@@ -26,9 +26,14 @@ jobs:
       options: --gpus all
       
     steps:
-      
+    
       - run: |
           ls $GITHUB_WORKSPACE
+          
+      - run: |
+          ls $GITHUB_WORKSPACE/..
+    
+      - uses: actions/checkout@v2
       
       - run: |
           apt-get update -y
