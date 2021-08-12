@@ -23,9 +23,12 @@ jobs:
       
     container:
       image: nvidia/cuda:11.1-cudnn8-devel-ubuntu18.04
-      options: --gpus all --user 1001
+      options: --gpus all
       
     steps:
+      
+      - run: |
+          ls $GITHUB_WORKSPACE
       
       - run: |
           apt-get update -y
