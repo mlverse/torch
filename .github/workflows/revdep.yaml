@@ -23,11 +23,9 @@ jobs:
       
     container:
       image: nvidia/cuda:11.1-cudnn8-devel-ubuntu18.04
-      options: --gpus all
+      options: --gpus all --user 1001
       
     steps:
-      
-      - uses: AutoModality/action-clean@v1
       
       - run: |
           apt-get update -y
