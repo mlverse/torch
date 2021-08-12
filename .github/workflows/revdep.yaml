@@ -27,11 +27,9 @@ jobs:
       
     steps:
     
-      - run: |
-          ls $GITHUB_WORKSPACE
-          
-      - run: |
-          ls $GITHUB_WORKSPACE/../..
+      - name: Clean up temp directory
+        run: |
+          sudo rm -r $GITHUB_WORKSPACE/../../_temp/*
     
       - uses: actions/checkout@v2
       
