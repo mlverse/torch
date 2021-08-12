@@ -64,6 +64,10 @@ jobs:
         run: |
           revdepcheck::revdep_check()
         shell: Rscript {0}
+        
+      - name: Remove library
+        run: |
+          rm -r revdep/library.noindex
       
       - name: Upload revdep results
         if: always()
