@@ -31,7 +31,7 @@ jobs:
           ls $GITHUB_WORKSPACE
           
       - run: |
-          ls $GITHUB_WORKSPACE/..
+          ls $GITHUB_WORKSPACE/../..
     
       - uses: actions/checkout@v2
       
