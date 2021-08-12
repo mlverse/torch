@@ -26,3 +26,4 @@ tools/torchgen/.Rbuildignore
 ^doc$
 ^Meta$
 ^vignettes/rsconnect*
+^revdep$
