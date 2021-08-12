@@ -1,4 +1,4 @@
-branch <- "master"  
+branch <- "cran/v0.5.0"  
 
 install_config <- list(
   "1.9.0" = list(
