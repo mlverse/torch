@@ -457,7 +457,7 @@ After all that hard work, training the model with `luz` is a breeze.
 
 # Train the network
 
-What happens when you train a neural network? Conceptually, the following has to happen for every batch:
+What happens when you train a neural network? *Conceptually*, the following has to happen for every batch. (Wait -- don't execute these lines :-) You'll see `luz` taking care of it for you in a minute.)
 
 1.  Run the model on the input, to obtain its current predictions:
 
