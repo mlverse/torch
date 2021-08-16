@@ -30,7 +30,7 @@
 - Improved R <-> JIT types conversion. (#593)
 - Added Dockerfiles for CUDA 11.1 (#597)
 - A warning is raised when an incompatible dataset is passed to a parallel dataloader. (#626)
-- Additionally to calling `gc` when CUDA memory is exhausted we now call `R_RunPendingFinalizers`. THis should improve memory usage, because we will now delete tensors earlier. (#654)
+- Additionally to calling `gc` when CUDA memory is exhausted we now call `R_RunPendingFinalizers`. This should improve memory usage, because we will now delete tensors earlier. (#654)
 
 # torch 0.4.0
 
