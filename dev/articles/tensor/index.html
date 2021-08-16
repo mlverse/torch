@@ -149,11 +149,11 @@
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://torch.mlverse.org/docs">torch</a></span><span class="op">)</span></code></pre></div>
 <p>Central to torch is the <code>torch_tensor</code> objects. <code>torch_tensor</code>’s are R objects very similar to R6 instances. Tensors have a large amount of methods that can be called using the <code><a href="https://rdrr.io/r/base/Extract.html">$</a></code> operator.</p>
 <p>Following is a list of all methods that can be called by tensor objects and their documentation. You can also look at <a href="https://pytorch.org/docs/stable/tensors.html">PyTorch’s documentation</a> for additional details.</p>
-<div id="t" class="section level2">
+<div id="numpy_t" class="section level2">
 <h2 class="hasAnchor">
-<a href="#t" class="anchor"></a>T</h2>
+<a href="#numpy_t" class="anchor"></a>numpy_T</h2>
 <p>Is this Tensor with its dimensions reversed.</p>
-<p>If <code>n</code> is the number of dimensions in <code>x</code>, <code>x$T</code> is equivalent to <code>x$permute(n-1, n-2, ..., 0)</code>.</p>
+<p>If <code>n</code> is the number of dimensions in <code>x</code>, <code>x$numpy_T()</code> is equivalent to <code>x$permute(n, n-1, ..., 1)</code>.</p>
 </div>
 <div id="abs" class="section level2">
 <h2 class="hasAnchor">
@@ -3189,9 +3189,9 @@ self[i][j][index[i][j][k]] += src[i][j][k]  # if dim == 2</code></pre>
 <p>symeig(eigenvectors=FALSE, upper=TRUE) -&gt; (Tensor, Tensor)</p>
 <p>See <code><a href="../../reference/torch_symeig.html">?torch_symeig</a></code></p>
 </div>
-<div id="t-1" class="section level2">
+<div id="t" class="section level2">
 <h2 class="hasAnchor">
-<a href="#t-1" class="anchor"></a>t</h2>
+<a href="#t" class="anchor"></a>t</h2>
 <p>t() -&gt; Tensor</p>
 <p>See <code><a href="../../reference/torch_t.html">?torch_t</a></code></p>
 </div>
