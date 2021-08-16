@@ -49,7 +49,7 @@ XPtrTorchOptionalTensor::operator SEXP() const {
   }
   else 
   {
-    return XPtrTorchTensor(*this);
+    return XPtrTorchTensor(lantern_optional_tensor_value(this->get()));
   }
 }
 
@@ -356,7 +356,7 @@ XPtrTorchIValue::operator SEXP () const
     return Rcpp::wrap(XPtrTorchTensorList(lantern_IValue_TensorList(this->get())));
     
   case IValue_types::IValueTensorType:
-    return Rcpp::wrap(XPtrTorchTensor(lantern_IValue_Tensor(this->get())));
+    return XPtrTorchTensor(lantern_IValue_Tensor(this->get()));
     
   case IValue_types::IValueTupleType:
     return Rcpp::wrap(XPtrTorchNamedTupleHelper(lantern_IValue_Tuple(this->get())));
