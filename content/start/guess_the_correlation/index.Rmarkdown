@@ -11,20 +11,16 @@ knitr::opts_chunk$set(eval=FALSE)
 
 # Get the packages
 
-To use `torch`, you first need to install it. Same for its high-level wrapper, [luz](https://mlverse.github.io/luz/index.html). While torch has all the basic functionality, `luz` provides a declarative, concise API that lets you train a network in a few lines of code.
-
-To get the respective CRAN versions, do
+To use `torch`, you first need to install it. To get the CRAN version, do
 
 ```{r, eval=FALSE}
 install.packages("torch")
-install.packages("luz")
 ```
 
 Does it work? Here's a quick test:
 
 ```{r}
 library(torch)
-library(luz)
 torch_tensor(1)
 ```
 
@@ -32,7 +28,7 @@ torch_tensor(1)
      1
     [ CPUFloatType{1} ]
 
-Now, while `torch` contains all the core functionality, and `luz`, the training logic, there is a whole ecosystem built around them.
+Now, while `torch` contains all the core functionality, there is a whole ecosystem built around it.
 
 Notably, `torchvision` is essential to image-processing tasks. In this example, we don't use it much -- overtly, that is. It's used more prominently behind the scenes. Let's get it:
 
@@ -409,13 +405,13 @@ net <- nn_module(
   }
 )
 
+model <- net()
 
 ```
 
 Even before training, we can call the model on a batch of data -- this immediately tells us if we got all shapes matching up:
 
 ```{r}
-model <- net()
 model(batch$x)
 ```
 
@@ -453,82 +449,196 @@ model(batch$x)
     ... [the output was truncated (use n=-1 to disable)]
     [ CPUFloatType{64,1} ]
 
-After all that hard work, training the model with `luz` is a breeze.
+Now we get ready for training the model.
 
 # Train the network
 
-What happens when you train a neural network? *Conceptually*, the following has to happen for every batch. (Wait -- don't execute these lines :-) You'll see `luz` taking care of it for you in a minute.)
+In neural network libraries, optimizers take care of adapting the network weights. One of the most popular algorithms is *Adam*. When we create the object, we tell it what it's supposed to work on -- the model's parameters:
 
-1.  Run the model on the input, to obtain its current predictions:
+```{r}
+optimizer <- optim_adam(model$parameters)
+```
+
+How does it know which way to change the parameters? We need to decide on a reasonable way to assess model performance. Here we're trying to predict a numerical value -- the size of the correlation. Thus, a measure like mean squared error is adequate. This line (in the upcoming code snippet) computes mean squared error between model predictions and target value:
+
+```{r, eval=FALSE}
+loss <- nnf_mse_loss(output, b$y$unsqueeze(2))
+```
+
+Overall, what happens for every training batch is the following:
+
+1.  We obtain the current model predictions:
 
     ```{r, eval=FALSE}
     output <- model(b$x)
     ```
 
-2.  Calculate the *loss*, a measure of divergence between model estimate and ground truth:
+2.  We calculate the loss, a measure of divergence between model estimate and ground truth:
 
     ```{r, eval=FALSE}
     loss <- nnf_mse_loss(output, b$y$unsqueeze(2))
     ```
 
-3.  Have that loss *propagate back* through the network, causing gradients to be computed for all parameters:
+3.  We have that loss *propagate back* through the network, causing gradients to be computed for all parameters:
 
     ```{r, eval=FALSE}
     loss$backward()
     ```
 
-4.  Ask the optimizer to update the parameters accordingly:
+4.  We ask the optimizer to update the parameters accordingly:
 
     ```{r, eval=FALSE}
     optimizer$step()
     ```
 
-Fortunately, with `luz`, we don't have to compute the training loop ourselves! All this is taken care of by a pair of two functions: `setup()` and `fit()`.
-
-In `setup()`, we decide which loss function and which optimization algorithm to use. For regression problems, the most popular loss is mean squared error: `nn_mse_loss()`.
-
-And among optimization algorithms ("optimizers"), among the most popular ones is Adam (`optim_adam()`).
-
-`setup()` is called on the model definition, like so:
+Here are the four steps, conveniently packaged into a function. If you're wondering about the very first line, this is just a formality (a required one, though!) related to how the optimizer does its accounting.
 
 ```{r}
-fitted <- net %>%
-  setup(
-    loss = function(y_hat, y_true) nnf_mse_loss(y_hat, y_true$unsqueeze(2)),
-    optimizer = optim_adam
-  )
+train_batch <- function(b) {
+  
+  optimizer$zero_grad()
+  
+  # get predictions
+  output <- model(b$x)
+  
+  # calculate loss
+  loss <- nnf_mse_loss(output, b$y$unsqueeze(2))
+
+  # have gradients get calculated        
+  loss$backward()
+  
+  # have gradients get applied
+  optimizer$step()
+  
+  loss$item()
+  
+}
+
 ```
 
-Then `fit()` is used to pass the training data loader, the number of epochs to train for, and optionally, the validation data loader. After every epoch, the model is run on the validation data, in "test mode" (no parameter updates involved). That way, you immediately see whether you're overfitting to the training set. Here are both calls together -- everything we need to start training:
+Whenever we'll have passed through the training set once, we'll want to double-check performance on the validation set.
 
 ```{r}
-fitted <- net %>%
-  setup(
-    loss = function(y_hat, y_true) nnf_mse_loss(y_hat, y_true$unsqueeze(2)),
-    optimizer = optim_adam
-  ) %>%
-  fit(train_dl, epochs = 10, valid_data = test_dl)
+valid_batch <- function(b) {
+
+  output <- model(b$x)
+  loss <- nnf_mse_loss(output, b$y$unsqueeze(2))
+  loss$item()
+  
+}
 ```
+
+While these functions will be called to iterate over batches, the overall workflow is an iteration over epochs.
+
+Every time we start training, we put the model in training state:
+
+```{r, eval=FALSE}
+model$train()
+```
+
+... while every time we assess its performance, we change the state to evaluation:
+
+```{r, eval=FALSE}
+model$eval()
+```
+
+Let's do ten epochs:
+
+```{r}
+
+num_epochs <- 10
+
+for (epoch in 1:num_epochs) {
+
+  # don't forget to do this
+  model$train()
+  
+  train_losses <- c()
+
+  coro::loop(for (b in train_dl) {
+    
+    loss <- train_batch(b)
+    train_losses <- c(train_losses, loss)
+    
+  })
+
+  # don't forget to do this either
+  model$eval()
+  
+  valid_losses <- c()
+
+  coro::loop(for (b in valid_dl) {
+    
+    loss <- valid_batch(b)
+    valid_losses <- c(valid_losses, loss)
+    
+  })
+
+  cat(sprintf("\nLoss at epoch %d: training: %1.5f, validation: %1.5f\n", epoch, mean(train_losses), mean(valid_losses)))
+  
+}
+
+
+```
+
+    Loss at epoch 1: training: 0.05769, validation: 0.01608
+
+    Loss at epoch 2: training: 0.01122, validation: 0.00785
+
+    Loss at epoch 3: training: 0.00587, validation: 0.00443
+
+    Loss at epoch 4: training: 0.00372, validation: 0.00317
+
+    Loss at epoch 5: training: 0.00250, validation: 0.00273
+
+    Loss at epoch 6: training: 0.00206, validation: 0.00248
+
+    Loss at epoch 7: training: 0.00174, validation: 0.00166
+
+    Loss at epoch 8: training: 0.00129, validation: 0.00144
+
+    Loss at epoch 9: training: 0.00105, validation: 0.00136
+
+    Loss at epoch 10: training: 0.00093, validation: 0.00123
 
 As you can see, the network has made good progress -- on both training and validation set. How about the test set? And how good of a fit are the inferred correlations?
 
 # Evaluate performance
 
-We use `luz::predict()` to get predictions on the test set:
+To find out, we keep track of predictions and true correlations, so we can compare them later.
+
+Again, before running the respective code we want to make sure we're in evaluation mode.
 
 ```{r}
+model$eval()
 
-preds <- predict(fitted, test_dl)
+test_batch <- function(b) {
+  
+  output <- model(b$x)
+  loss <- nnf_mse_loss(output, b$y$unsqueeze(2))
+  
+  preds <<- c(preds, output %>% as.numeric())
+  targets <<- c(targets, b$y %>% as.numeric())
+  test_losses <<- c(test_losses, loss$item())
+  
+}
+
+test_losses <- c()
+preds <- c()
+targets <- c()
+
+coro::loop(for (b in test_dl) {
+  test_batch(b)
+})
+
+mean(test_losses)
 ```
 
-How do predictions and ground truth line up? Well, since all this has been about scatterplots, why not create one to investigate that?
+    [1] 0.001346638
+
+So no surprises from the loss. Now let's inspect the predictions -- and as we're dealing with those all the time, why not create a scatterplot?
 
 ```{r}
-
-preds <- preds$to(device = "cpu")$squeeze() %>% as.numeric()
-test_dl <- dataloader(test_ds, batch_size = 5000)
-targets <- (test_dl %>% dataloader_make_iter() %>% dataloader_next())$y %>% as.numeric()
-
 df <- data.frame(preds = preds, targets = targets)
 
 library(ggplot2)
