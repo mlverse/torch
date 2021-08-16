@@ -7,6 +7,7 @@ tools/torchgen/.Rbuildignore
 ^_pkgdown\.yml$
 ^docs$
 ^pkgdown$
+^revdep$
 ^\.github$
 ^lantern$
 .*\.tmp
@@ -17,7 +18,6 @@ tools/torchgen/.Rbuildignore
 ^LICENSE\.md$
 ^.*torchpkg.dll$
 ^deps.*
-^build.*
 ^public/.*
 ^cran-comments\.md$
 ^CRAN-RELEASE$
