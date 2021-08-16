@@ -28,12 +28,12 @@ Following is a list of all methods that can be called by tensor objects and thei
 documentation. You can also look at [PyTorch's documentation](https://pytorch.org/docs/stable/tensors.html) for additional details. 
 
 
-## T
+## numpy_T
 
 Is this Tensor with its dimensions reversed.
 
 If `n` is the number of dimensions in `x`,
-`x$T` is equivalent to `x$permute(n-1, n-2, ..., 0)`.
+`x$numpy_T()` is equivalent to `x$permute(n, n-1, ..., 1)`.
 
 ## abs
 
