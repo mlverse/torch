@@ -287,6 +287,12 @@ bool _lantern_optional_tensor_has_value (void*x)
   return value.has_value();
 }
 
+void* _lantern_optional_tensor_value (void* x)
+{
+  auto value = reinterpret_cast<LanternObject<c10::optional<torch::Tensor>>*>(x)->get();
+  return (void *)new LanternObject<torch::Tensor>(value.value());
+}
+
 void _lantern_tensor_set_pyobj (void*x, void* ptr)
 {
   LANTERN_FUNCTION_START
