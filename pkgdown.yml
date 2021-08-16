@@ -15,6 +15,7 @@ articles:
   serialization: serialization.html
   tensor/index: index.html
   tensor-creation: tensor-creation.html
+  torchscript: torchscript.html
   using-autograd: using-autograd.html
-last_built: 2021-07-09T17:05Z
+last_built: 2021-08-16T18:10Z
 

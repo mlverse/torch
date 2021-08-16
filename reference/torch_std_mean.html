@@ -84,7 +84,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">torch</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.0</span>
       </span>
     </div>
 
@@ -189,7 +189,7 @@
     <p>Std_mean</p>
     </div>
 
-    <pre class="usage"><span class='fu'>torch_std_mean</span><span class='op'>(</span><span class='va'>self</span>, <span class='va'>dim</span>, unbiased <span class='op'>=</span> <span class='cn'>TRUE</span>, keepdim <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>torch_std_mean</span><span class='op'>(</span><span class='va'>self</span>, <span class='va'>dim</span>, <span class='va'>correction</span>, unbiased <span class='op'>=</span> <span class='cn'>TRUE</span>, keepdim <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -201,6 +201,10 @@
     <tr>
       <th>dim</th>
       <td><p>(int or tuple of ints) the dimension or dimensions to reduce.</p></td>
+    </tr>
+    <tr>
+      <th>correction</th>
+      <td><p>The type of correction.</p></td>
     </tr>
     <tr>
       <th>unbiased</th>
@@ -249,18 +253,18 @@ via the biased estimator. Otherwise, Bessel's correction will be used.</p>
 <span class='op'>}</span>
 </div><div class='output co'>#&gt; [[1]]
 #&gt; torch_tensor
-#&gt;  1.4646
-#&gt;  0.4008
-#&gt;  0.8063
-#&gt;  0.7926
+#&gt;  0.9491
+#&gt;  0.6134
+#&gt;  0.7070
+#&gt;  1.0228
 #&gt; [ CPUFloatType{4} ]
 #&gt; 
 #&gt; [[2]]
 #&gt; torch_tensor
-#&gt;  0.3391
-#&gt; -0.4743
-#&gt; -0.1888
-#&gt;  0.0544
+#&gt; -0.0110
+#&gt;  0.4403
+#&gt; -0.1819
+#&gt; -0.2869
 #&gt; [ CPUFloatType{4} ]
 #&gt; </div></pre>
   </div>

@@ -84,7 +84,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">torch</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.0</span>
       </span>
     </div>
 
@@ -189,7 +189,7 @@
     <p>Nanquantile</p>
     </div>
 
-    <pre class="usage"><span class='fu'>torch_nanquantile</span><span class='op'>(</span><span class='va'>self</span>, <span class='va'>q</span>, dim <span class='op'>=</span> <span class='cn'>NULL</span>, keepdim <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>torch_nanquantile</span><span class='op'>(</span><span class='va'>self</span>, <span class='va'>q</span>, dim <span class='op'>=</span> <span class='cn'>NULL</span>, keepdim <span class='op'>=</span> <span class='cn'>FALSE</span>, <span class='va'>interpolation</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -209,6 +209,10 @@
     <tr>
       <th>keepdim</th>
       <td><p>(bool) whether the output tensor has <code>dim</code> retained or not.</p></td>
+    </tr>
+    <tr>
+      <th>interpolation</th>
+      <td><p>The interpolation method.</p></td>
     </tr>
     </table>
 

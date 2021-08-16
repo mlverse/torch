@@ -38,7 +38,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">torch</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.0</span>
       </span>
     </div>
 
@@ -162,15 +162,15 @@
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">n</span><span class="op">$</span><span class="fu">sample</span><span class="op">(</span><span class="op">)</span>
 <span class="co">#&gt; torch_tensor</span>
-<span class="co">#&gt; -0.8007</span>
+<span class="co">#&gt; -2.7888</span>
 <span class="co">#&gt; [ CPUFloatType{1} ]</span></code></pre></div>
 <p>or, draw multiple samples:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">n</span><span class="op">$</span><span class="fu">sample</span><span class="op">(</span><span class="fl">3</span><span class="op">)</span>
 <span class="co">#&gt; torch_tensor</span>
-<span class="co">#&gt; -1.0235</span>
-<span class="co">#&gt; -1.4508</span>
-<span class="co">#&gt; -0.8554</span>
+<span class="co">#&gt; -0.9898</span>
+<span class="co">#&gt;  1.0701</span>
+<span class="co">#&gt;  0.7814</span>
 <span class="co">#&gt; [ CPUFloatType{3,1} ]</span></code></pre></div>
 <p>We can evaluate the log probability of values:</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
@@ -203,19 +203,19 @@
 <code class="sourceCode R"><span class="va">b</span><span class="op">$</span><span class="fu">sample</span><span class="op">(</span><span class="op">)</span>
 <span class="co">#&gt; torch_tensor</span>
 <span class="co">#&gt;  0</span>
-<span class="co">#&gt;  0</span>
+<span class="co">#&gt;  1</span>
 <span class="co">#&gt;  1</span>
 <span class="co">#&gt; [ CPUFloatType{3} ]</span></code></pre></div>
 <p>or, a batch of <code>n</code> observations:</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">b</span><span class="op">$</span><span class="fu">sample</span><span class="op">(</span><span class="fl">6</span><span class="op">)</span>
 <span class="co">#&gt; torch_tensor</span>
+<span class="co">#&gt;  0  1  0</span>
+<span class="co">#&gt;  0  0  1</span>
+<span class="co">#&gt;  0  0  1</span>
 <span class="co">#&gt;  0  1  1</span>
-<span class="co">#&gt;  0  0  0</span>
-<span class="co">#&gt;  1  0  0</span>
-<span class="co">#&gt;  1  0  1</span>
-<span class="co">#&gt;  1  0  1</span>
-<span class="co">#&gt;  1  1  0</span>
+<span class="co">#&gt;  0  0  1</span>
+<span class="co">#&gt;  0  0  1</span>
 <span class="co">#&gt; [ CPUFloatType{6,3} ]</span></code></pre></div>
 </div>
 <div id="using-distributions-within-models" class="section level2">
@@ -261,32 +261,32 @@
   <span class="kw">if</span> <span class="op">(</span><span class="va">i</span> <span class="op">%%</span> <span class="fl">10</span> <span class="op">==</span> <span class="fl">0</span><span class="op">)</span>
     <span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="st">"iter: "</span>, <span class="va">i</span>, <span class="st">" loss: "</span>, <span class="va">loss</span><span class="op">$</span><span class="fu">item</span><span class="op">(</span><span class="op">)</span>, <span class="st">"\n"</span><span class="op">)</span>
 <span class="op">}</span>
-<span class="co">#&gt; iter:  10  loss:  2.371322 </span>
-<span class="co">#&gt; iter:  20  loss:  2.198657 </span>
-<span class="co">#&gt; iter:  30  loss:  2.072692 </span>
-<span class="co">#&gt; iter:  40  loss:  1.953401 </span>
-<span class="co">#&gt; iter:  50  loss:  1.829014 </span>
-<span class="co">#&gt; iter:  60  loss:  1.697476 </span>
-<span class="co">#&gt; iter:  70  loss:  1.571049 </span>
-<span class="co">#&gt; iter:  80  loss:  1.483804 </span>
-<span class="co">#&gt; iter:  90  loss:  1.452302 </span>
-<span class="co">#&gt; iter:  100  loss:  1.445976</span></code></pre></div>
+<span class="co">#&gt; iter:  10  loss:  1.809854 </span>
+<span class="co">#&gt; iter:  20  loss:  1.606322 </span>
+<span class="co">#&gt; iter:  30  loss:  1.46065 </span>
+<span class="co">#&gt; iter:  40  loss:  1.399433 </span>
+<span class="co">#&gt; iter:  50  loss:  1.39078 </span>
+<span class="co">#&gt; iter:  60  loss:  1.390136 </span>
+<span class="co">#&gt; iter:  70  loss:  1.390089 </span>
+<span class="co">#&gt; iter:  80  loss:  1.390086 </span>
+<span class="co">#&gt; iter:  90  loss:  1.390085 </span>
+<span class="co">#&gt; iter:  100  loss:  1.390085</span></code></pre></div>
 <p>We can see the parameter estimates with:</p>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">model</span><span class="op">$</span><span class="va">parameters</span>
 <span class="co">#&gt; $linear.weight</span>
 <span class="co">#&gt; torch_tensor</span>
-<span class="co">#&gt;  2.0788</span>
+<span class="co">#&gt;  1.9772</span>
 <span class="co">#&gt; [ CPUFloatType{1,1} ]</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; $linear.bias</span>
 <span class="co">#&gt; torch_tensor</span>
-<span class="co">#&gt;  1.0011</span>
+<span class="co">#&gt;  1.0390</span>
 <span class="co">#&gt; [ CPUFloatType{1} ]</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; $scale</span>
 <span class="co">#&gt; torch_tensor</span>
-<span class="co">#&gt;  1.0323</span>
+<span class="co">#&gt;  0.9716</span>
 <span class="co">#&gt; [ CPUFloatType{1} ]</span></code></pre></div>
 <p>and quickly compare with the <code><a href="https://rdrr.io/r/stats/glm.html">glm()</a></code> function:</p>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
@@ -297,20 +297,20 @@
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Deviance Residuals: </span>
 <span class="co">#&gt;     Min       1Q   Median       3Q      Max  </span>
-<span class="co">#&gt; -2.8718  -0.5836  -0.0256   0.5039   3.2606  </span>
+<span class="co">#&gt; -2.5311  -0.6277  -0.1177   0.5544   3.3037  </span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Coefficients:</span>
 <span class="co">#&gt;               Estimate Std. Error t value Pr(&gt;|t|)    </span>
-<span class="co">#&gt; (Intercept)     1.0333     0.1051    9.83 2.84e-16 ***</span>
-<span class="co">#&gt; as.numeric(x)   2.1196     0.1028   20.61  &lt; 2e-16 ***</span>
+<span class="co">#&gt; (Intercept)    1.03900    0.09844   10.55   &lt;2e-16 ***</span>
+<span class="co">#&gt; as.numeric(x)  1.97723    0.09392   21.05   &lt;2e-16 ***</span>
 <span class="co">#&gt; ---</span>
 <span class="co">#&gt; Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt; (Dispersion parameter for gaussian family taken to be 1.074217)</span>
+<span class="co">#&gt; (Dispersion parameter for gaussian family taken to be 0.963191)</span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt;     Null deviance: 561.54  on 99  degrees of freedom</span>
-<span class="co">#&gt; Residual deviance: 105.27  on 98  degrees of freedom</span>
-<span class="co">#&gt; AIC: 294.93</span>
+<span class="co">#&gt;     Null deviance: 521.260  on 99  degrees of freedom</span>
+<span class="co">#&gt; Residual deviance:  94.393  on 98  degrees of freedom</span>
+<span class="co">#&gt; AIC: 284.02</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Number of Fisher Scoring iterations: 2</span></code></pre></div>
 </div>
