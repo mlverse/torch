@@ -45,9 +45,9 @@ Tensor <- R7Class(
       if (!is.null(self$ptr$grad_fn)) {
         cat('[ grad_fn = <')
         cat(self$ptr$grad_fn$print())
-        cat('> ]')
+        cat('> ]\n')
       } else if (self$ptr$requires_grad && is.null(self$ptr$grad_fn)){
-        cat('[ requires_grad = TRUE ]')
+        cat('[ requires_grad = TRUE ]\n')
       }
       invisible(self)
     },
