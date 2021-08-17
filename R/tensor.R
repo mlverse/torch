@@ -43,9 +43,9 @@ Tensor <- R7Class(
       cat("torch_tensor\n")
       cpp_torch_tensor_print(self$ptr, n)
       if (!is.null(self$ptr$grad_fn)) {
-        cat('[ grad_fn = ')
+        cat('[ grad_fn = <')
         cat(self$ptr$grad_fn$print())
-        cat(' ]')
+        cat('> ]')
       } else if (self$ptr$requires_grad && is.null(self$ptr$grad_fn)){
         cat('[ requires_grad = TRUE ]')
       }
