@@ -83,7 +83,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">torch</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.4.0.9000</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.5.0.9000</span>
       </span>
     </div>
 
@@ -187,6 +187,11 @@
 <h1 class="page-header" data-toc-text="development version">
 <a href="#torch-development-version" class="anchor"></a>torch (development version)<small> Unreleased </small>
 </h1>
+</div>
+    <div id="torch-050" class="section level1">
+<h1 class="page-header" data-toc-text="0.5.0">
+<a href="#torch-050" class="anchor"></a>torch 0.5.0<small> Unreleased </small>
+</h1>
 <div id="breaking-changes" class="section level2">
 <h2 class="hasAnchor">
 <a href="#breaking-changes" class="anchor"></a>Breaking changes</h2>
@@ -229,7 +234,8 @@
 <li>Improved R &lt;-&gt; JIT types conversion. (<a href='https://github.com/mlverse/torch/issues/593'>#593</a>)</li>
 <li>Added Dockerfiles for CUDA 11.1 (<a href='https://github.com/mlverse/torch/issues/597'>#597</a>)</li>
 <li>A warning is raised when an incompatible dataset is passed to a parallel dataloader. (<a href='https://github.com/mlverse/torch/issues/626'>#626</a>)</li>
-<li>Additionally to calling <code>gc</code> when CUDA memory is exhausted we now call <code>R_RunPendingFinalizers</code>. THis should improve memory usage, because we will now delete tensors earlier. (<a href='https://github.com/mlverse/torch/issues/654'>#654</a>)</li>
+<li>Additionally to calling <code>gc</code> when CUDA memory is exhausted we now call <code>R_RunPendingFinalizers</code>. This should improve memory usage, because we will now delete tensors earlier. (<a href='https://github.com/mlverse/torch/issues/654'>#654</a>)</li>
+<li>Fix rchk issues (<a href='https://github.com/mlverse/torch/issues/667'>#667</a>)</li>
 </ul>
 </div>
 </div>
