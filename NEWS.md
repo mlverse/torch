@@ -1,5 +1,7 @@
 # torch (development version)
 
+- Additional info is showed when printing tensors like if it requires grad and the grad fn. (#668, #669, #673, @mohamed-180)
+
 # torch 0.5.0
 
 ## Breaking changes
