@@ -178,28 +178,28 @@
 <span class="va">model</span><span class="op">$</span><span class="va">parameters</span></code></pre></div>
 <pre><code>## $w
 ## torch_tensor
-##  1.6409
-## -0.1513
-## -1.5338
-## [ CPUFloatType{3,1} ]
+## -0.5499
+##  0.4491
+##  2.3417
+## [ CPUFloatType{3,1} ][ requires_grad = TRUE ]
 ## 
 ## $b
 ## torch_tensor
 ##  0
-## [ CPUFloatType{1} ]</code></pre>
+## [ CPUFloatType{1} ][ requires_grad = TRUE ]</code></pre>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># or individually</span>
 <span class="va">model</span><span class="op">$</span><span class="va">w</span></code></pre></div>
 <pre><code>## torch_tensor
-##  1.6409
-## -0.1513
-## -1.5338
-## [ CPUFloatType{3,1} ]</code></pre>
+## -0.5499
+##  0.4491
+##  2.3417
+## [ CPUFloatType{3,1} ][ requires_grad = TRUE ]</code></pre>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">model</span><span class="op">$</span><span class="va">b</span></code></pre></div>
 <pre><code>## torch_tensor
 ##  0
-## [ CPUFloatType{1} ]</code></pre>
+## [ CPUFloatType{1} ][ requires_grad = TRUE ]</code></pre>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># create an input tensor</span>
 <span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/torch_randn.html">torch_randn</a></span><span class="op">(</span><span class="fl">10</span>, <span class="fl">3</span><span class="op">)</span>
@@ -208,17 +208,17 @@
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">y_pred</span></code></pre></div>
 <pre><code>## torch_tensor
-##  1.9304
-## -3.2480
-## -0.5283
-## -0.4815
-##  0.9127
-## -1.3201
-## -2.0603
-##  1.7260
-## -0.6465
-## -2.2932
-## [ CPUFloatType{10,1} ]</code></pre>
+## -2.8017
+##  3.2049
+##  1.3497
+##  1.5144
+## -2.9518
+## -5.1498
+##  1.6634
+## -0.7934
+## -1.5343
+##  0.2232
+## [ CPUFloatType{10,1} ][ grad_fn = &lt;AddBackward0&gt; ]</code></pre>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
