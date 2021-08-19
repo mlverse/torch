@@ -49,7 +49,7 @@ void cpp_torch_tensor_print (Rcpp::XPtr<XPtrTorchTensor> x, int n) {
       result += "... [the output was truncated (use n=-1 to disable)]\n";
   }
   
-  Rcpp::Rcout << result << std::endl;
+  Rcpp::Rcout << result;
 };
 
 // [[Rcpp::export]]

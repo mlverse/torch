@@ -393,6 +393,15 @@ test_that("tensor identity works as expected", {
   
 })
 
+test_that("print tensors with grad_fn and requires_grad", {
+  x <- torch_tensor(c(1,2,3))
+  y <- torch_tensor(c(1,2,3), requires_grad = TRUE)
+  z <- torch_log(y)
+  
+  testthat::local_edition(3)
+  expect_snapshot({print(x);print(y);print(z)})
+})
+
 test_that("using with optim", {
   
   skip_on_os("mac")
