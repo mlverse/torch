@@ -42,6 +42,16 @@ Tensor <- R7Class(
     print = function(n = 30) {
       cat("torch_tensor\n")
       cpp_torch_tensor_print(self$ptr, n)
+      if (!is_undefined_tensor(self)) {
+        if (!is.null(self$ptr$grad_fn)) {
+          cat('[ grad_fn = <')
+          cat(self$ptr$grad_fn$print())
+          cat('> ]')
+        } else if (self$ptr$requires_grad && is.null(self$ptr$grad_fn)){
+          cat('[ requires_grad = TRUE ]')
+        }  
+      }
+      cat("\n")
       invisible(self)
     },
     dim = function() {

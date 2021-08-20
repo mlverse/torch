@@ -121,7 +121,7 @@ nn_conv_nd <- nn_module(
 #' @param out_channels (int): Number of channels produced by the convolution
 #' @param kernel_size (int or tuple): Size of the convolving kernel
 #' @param stride (int or tuple, optional): Stride of the convolution. Default: 1
-#' @param padding (int or tuple, optional): Zero-padding added to both sides of
+#' @param padding (int, tuple or str, optional) – Padding added to both sides of 
 #'   the input. Default: 0
 #' @param padding_mode (string, optional): `'zeros'`, `'reflect'`,
 #'   `'replicate'` or `'circular'`. Default: `'zeros'`
@@ -168,7 +168,12 @@ nn_conv1d <- nn_module(
                         bias = TRUE, padding_mode = 'zeros') {
     kernel_size <- nn_util_single(kernel_size)
     stride <- nn_util_single(stride)
-    padding <- nn_util_single(padding)
+    
+    if (is.character(padding))
+      padding <- padding
+    else
+      padding <- nn_util_single(padding)
+    
     dilation <- nn_util_single(dilation)
     super$initialize(in_channels, out_channels, kernel_size, stride, padding, dilation,
                      FALSE, nn_util_single(0), groups, bias, padding_mode)
@@ -255,8 +260,10 @@ nn_conv1d <- nn_module(
 #' @param out_channels (int): Number of channels produced by the convolution
 #' @param kernel_size (int or tuple): Size of the convolving kernel
 #' @param stride (int or tuple, optional): Stride of the convolution. Default: 1
-#' @param padding (int or tuple, optional): Zero-padding added to both sides of
-#'   the input. Default: 0
+#' @param padding (int or tuple or string, optional): Zero-padding added to both sides of
+#'   the input. controls the amount of padding applied to the input. It
+#'   can be either a string `'valid'`, `'same'` or a tuple of ints giving the
+#'   amount of implicit padding applied on both sides. Default: 0
 #' @param padding_mode (string, optional): `'zeros'`, `'reflect'`,
 #'   `'replicate'` or `'circular'`. Default: `'zeros'`
 #' @param dilation (int or tuple, optional): Spacing between kernel elements. Default: 1
@@ -311,7 +318,12 @@ nn_conv2d <- nn_module(
                         bias=TRUE, padding_mode='zeros') {
     kernel_size <- nn_util_pair(kernel_size)
     stride <- nn_util_pair(stride)
-    padding <- nn_util_pair(padding)
+    
+    if (is.character(padding))
+      padding <- padding
+    else
+      padding <- nn_util_pair(padding)
+    
     dilation <- nn_util_pair(dilation)
     super$initialize(in_channels, out_channels, kernel_size, stride, padding, dilation,
                      FALSE, nn_util_pair(0), groups, bias, padding_mode)
@@ -394,7 +406,7 @@ nn_conv2d <- nn_module(
 #' @param out_channels (int): Number of channels produced by the convolution
 #' @param kernel_size (int or tuple): Size of the convolving kernel
 #' @param stride (int or tuple, optional): Stride of the convolution. Default: 1
-#' @param padding (int or tuple, optional): Zero-padding added to all three sides of the input. Default: 0
+#' @param padding (int, tuple or str, optional): padding added to all six sides of the input. Default: 0
 #' @param padding_mode (string, optional): `'zeros'`, `'reflect'`, `'replicate'` or `'circular'`. Default: `'zeros'`
 #' @param dilation (int or tuple, optional): Spacing between kernel elements. Default: 1
 #' @param groups (int, optional): Number of blocked connections from input channels to output channels. Default: 1
@@ -446,7 +458,12 @@ nn_conv3d <- nn_module(
                         padding_mode = 'zeros') {
     kernel_size <- nn_util_triple(kernel_size)
     stride <- nn_util_triple(stride)
-    padding <- nn_util_triple(padding)
+    
+    if (is.character(padding))
+      padding <- padding
+    else
+      padding <- nn_util_triple(padding)
+    
     dilation <- nn_util_triple(dilation)
     super$initialize(in_channels, out_channels, kernel_size, stride, padding, 
                      dilation, FALSE, nn_util_triple(0), groups, bias, 
@@ -454,7 +471,7 @@ nn_conv3d <- nn_module(
   },
   forward = function(input) {
     if (self$padding_mode != "zeros") {
-      nnf_conv3d(F.pad(input, self$reversed_padding_repeated_twice_, mode=self$padding_mode),
+      nnf_conv3d(nnf_pad(input, self$reversed_padding_repeated_twice_, mode=self$padding_mode),
                self$weight, self$bias, self$stride, nn_util_triple(0),
                self$dilation, self$groups)
     } else {
@@ -633,7 +650,10 @@ nn_conv_transpose1d <- nn_module(
     
     kernel_size <- nn_util_single(kernel_size)
     stride <- nn_util_single(stride)
-    padding <- nn_util_single(padding)
+    
+    if (!is.character(padding))
+      padding <- nn_util_single(padding)
+    
     dilation <- nn_util_single(dilation)
     output_padding <- nn_util_single(output_padding)
     
@@ -784,7 +804,10 @@ nn_conv_transpose2d <- nn_module(
     
     kernel_size <- nn_util_pair(kernel_size)
     stride <- nn_util_pair(stride)
-    padding <- nn_util_pair(padding)
+    
+    if (!is.character(padding))
+      padding <- nn_util_pair(padding)
+    
     dilation <- nn_util_pair(dilation)
     output_padding <- nn_util_pair(output_padding)
     super$initialize(
@@ -932,7 +955,10 @@ nn_conv_transpose3d <- nn_module(
     
     kernel_size <- nn_util_triple(kernel_size)
     stride <- nn_util_triple(stride)
-    padding <- nn_util_triple(padding)
+    
+    if (!is.character(padding))
+      padding <- nn_util_triple(padding)
+    
     dilation <- nn_util_triple(dilation)
     output_padding <- nn_util_triple(output_padding)
     

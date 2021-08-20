@@ -13,6 +13,15 @@ test_that("conv3d", {
   expect_tensor_shape(o, c(20, 33,  8, 5, 9))
 })
 
+test_that("conv2d", {
+  
+  input <- torch_randn(1, 3, 13, 13)
+  conv <- nn_conv2d(3, 10, kernel_size = 3, padding = "same")
+  out <- conv(input)
+  
+  expect_tensor_shape(out, c(1, 10, 13, 13))
+})
+
 test_that("nn_conv_transpose1d", {
   
   m <- nn_conv_transpose1d(32, 16, 2)

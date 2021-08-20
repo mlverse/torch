@@ -225,3 +225,30 @@
      99
     [ CPUFloatType{100} ]
 
+# print tensors with grad_fn and requires_grad
+
+    Code
+      print(x)
+    Output
+      torch_tensor
+       1
+       2
+       3
+      [ CPUFloatType{3} ]
+    Code
+      print(y)
+    Output
+      torch_tensor
+       1
+       2
+       3
+      [ CPUFloatType{3} ][ requires_grad = TRUE ]
+    Code
+      print(z)
+    Output
+      torch_tensor
+       0.0000
+       0.6931
+       1.0986
+      [ CPUFloatType{3} ][ grad_fn = <LogBackward> ]
+
