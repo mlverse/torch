@@ -555,3 +555,24 @@ test_that("calling to doesn't modify the requires_grad attribute of a parameter"
   expect_true(!x$weight$requires_grad)
   
 })
+
+test_that("we can subset `nn_sequential`", {
+  
+
+  x <- nn_sequential(
+    nn_relu(),
+    nn_tanh(),
+    nn_relu6(),
+    nn_relu(),
+    nn_tanh()
+  )
+  
+  expect_true(inherits(x[[1]], "nn_relu"))
+  expect_true(inherits(x[[3]], "nn_relu6"))
+
+  y <- x[2:4]
+  expect_true(inherits(y, "nn_sequential"))
+  expect_true(inherits(y[[1]], "nn_tanh"))
+  expect_true(inherits(y[[2]], "nn_relu6"))
+    
+})
