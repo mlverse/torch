@@ -2,6 +2,7 @@
 
 - Additional info is showed when printing tensors like if it requires grad and the grad fn. (#668, #669, #673, @mohamed-180)
 - We can now subset `nn_sequential` modules using `[`. (#678, @mohamed-180)
+- We now allow `padding='same'` and `padding='valid'` when using convolutions. (#679)
 
 # torch 0.5.0
 
