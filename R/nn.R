@@ -626,6 +626,19 @@ length.nn_sequential <- function(x) {
   length(x$.__enclos_env__$private$modules_)
 }
 
+#' @export 
+`[[.nn_sequential` <- function(x, y) { 
+   if (rlang::is_scalar_integerish(y)) 
+     x$.__enclos_env__$private$modules_[[y]] 
+   else 
+     NextMethod("[[") 
+ }
+ 
+#' @export
+`[.nn_sequential` <- function(x, y) {
+  nn_sequential(!!!lapply(y, function(i) x[[i]]))
+}
+                          
 #' Holds submodules in a list.
 #' 
 #' [nn_module_list] can be indexed like a regular R list, but
