@@ -191,6 +191,8 @@
 <li>Additional info is showed when printing tensors like if it requires grad and the grad fn. (<a href='https://github.com/mlverse/torch/issues/668'>#668</a>, <a href='https://github.com/mlverse/torch/issues/669'>#669</a>, <a href='https://github.com/mlverse/torch/issues/673'>#673</a>, <a href='https://github.com/mohamed-180'>@mohamed-180</a>)</li>
 <li>We can now subset <code>nn_sequential</code> modules using <code><a href="https://rdrr.io/r/base/Extract.html">[</a></code>. (<a href='https://github.com/mlverse/torch/issues/678'>#678</a>, <a href='https://github.com/mohamed-180'>@mohamed-180</a>)</li>
 <li>We now allow <code>padding='same'</code> and <code>padding='valid'</code> when using convolutions. (<a href='https://github.com/mlverse/torch/issues/679'>#679</a>)</li>
+<li>
+<code>nnf_cross_entropy</code> now uses the ATen <code>cross_entropy</code> operation directly instead of doing logsoftmax + NLLLoss. (<a href='https://github.com/mlverse/torch/issues/680'>#680</a>)</li>
 </ul>
 </div>
     <div id="torch-050" class="section level1">
