@@ -78,3 +78,14 @@ torch_nll_loss2d <- function(self, target, weight = list(), reduction = torch_re
 torch_argsort <- function(self, dim = -1L, descending = FALSE) {
   .torch_argsort(self = self, dim = dim, descending = descending)$add_(1L, 1L)
 }
+
+torch_cross_entropy_loss <- function(
+  self, target, weight = list(), 
+  reduction = torch_reduction_mean(), 
+  ignore_index = -100L
+) {
+  
+  target <- target$sub(1L, 1L)
+  .torch_cross_entropy_loss(self = self, target = target, weight = weight,
+                            reduction = reduction, ignore_index = ignore_index)
+}

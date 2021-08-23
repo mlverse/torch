@@ -143,7 +143,7 @@ internal_funs <- c("logical_not", "max_pool1d_with_indices", "max_pool2d_with_in
                    "movedim", "argsort", "norm",
                    "argmax", "argmin", "one_hot", "split",
                    "nonzero", "fft_fft", "fft_ifft", "fft_rfft", "fft_irfft",
-                   "multinomial", "norm"
+                   "multinomial", "norm", "cross_entropy_loss"
                    )
 
 internal_funs <- c(internal_funs, creation_ops)
