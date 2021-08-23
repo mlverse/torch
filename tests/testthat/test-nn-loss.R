@@ -18,6 +18,11 @@ test_that("nn_cross_entropy_loss", {
   output$backward()
   
   expect_tensor(output)
+  
+  input <- torch_randn(1, 6, 100, 100, requires_grad=TRUE)
+  target <- torch_randint(low = 1, high = 6, size = c(1,100, 100), dtype = torch_long())
+  expect_tensor(loss(input, target))
+  
 })
 
 test_that("nn_kl_div_loss", {
