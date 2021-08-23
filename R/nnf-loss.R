@@ -441,8 +441,9 @@ nnf_nll_loss <- function(input, target, weight = NULL, ignore_index = -100,
 nnf_cross_entropy <- function(input, target, weight=NULL, ignore_index=-100, 
                               reduction=c("mean", "sum", "none")) {
   reduction <- match.arg(reduction)
-  torch_nll_loss(self = torch_log_softmax(input, 2), target = target, weight = weight, 
-                 reduction = reduction_enum(reduction), ignore_index = ignore_index)
+  torch_cross_entropy_loss(self = input, target = target, weight = weight, 
+                           reduction = reduction_enum(reduction), 
+                           ignore_index = ignore_index)
 }
 
 #' Binary_cross_entropy_with_logits
