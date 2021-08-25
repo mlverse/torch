@@ -64,7 +64,7 @@ dataset <- function(name = NULL, inherit = Dataset, ...,
     private = private, 
     active = active,
     parent_env = parent_env,
-    attr_name = "Dataset"
+    constructor_class = "Dataset"
   )
 }
 
