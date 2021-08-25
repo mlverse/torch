@@ -56,9 +56,8 @@ create_class <- function(name, inherit, ..., private, active, parent_env,
       d$new(!!!rlang::fn_fmls_syms(init))
     })
   )
-  
-  attr(f, attr_name) <- d
-  f
+    structure(f , class = constructor_class , impl = d)
+
 }
 
 # https://stackoverflow.com/a/54971834/3297472
