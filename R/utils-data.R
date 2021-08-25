@@ -64,12 +64,19 @@ dataset <- function(name = NULL, inherit = Dataset, ...,
     private = private, 
     active = active,
     parent_env = parent_env,
-    attr_name = "Dataset"
+    constructor_class = "Dataset"
   )
 }
 
+#' @export 
+`$.Dataset` <- function(x,y) { 
+  x <- attr(x, 'impl' , exact = TRUE)
+  x$y
+}
+
 #' @export
-`[.dataset` <- function(x, y) {
+`[.Dataset` <- function(x, y) {
+  x <- attr(x, 'impl' , exact = TRUE)
   if (length(y) > 1 && !is.null(x$.getbatch)) {
     x$.getbatch(as.integer(y))
   } else {
@@ -78,7 +85,8 @@ dataset <- function(name = NULL, inherit = Dataset, ...,
 }
 
 #' @export
-length.dataset <- function(x) {
+length.Dataset <- function(x) {
+  x <- attr(x, 'impl' , exact = TRUE)
   x$.length()
 }
 
