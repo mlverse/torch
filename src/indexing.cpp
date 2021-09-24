@@ -144,14 +144,15 @@ XPtrTorchTensor cpp_torch_tensor (SEXP x, std::vector<std::int64_t> dim,
 
 void index_append_integer_vector (XPtrTorchTensorIndex& index, SEXP slice)
 {
-  Rcpp::NumericVector v = slice;
-  for (int j = 0; j < v.size(); j++)
+  Rcpp::NumericVector v(LENGTH(slice)); #temp variable to not change slice opject
+  Rcpp::NumericVector u = Rcpp::as<Rcpp::NumericVector>(slice); # cast slice to integer vextor
+  for (int j = 0; j < u.size(); j++)
   {
-    if (v[j] > 0)
+    if (u[j] > 0)
     {
-      v[j] = v[j] - 1; // make it 0-based.
+      v[j] = u[j] - 1; // make it 0-based.
     }
-    else if (v[j] == 0)
+    else if (u[j] == 0)
     {
       Rcpp::stop("Indexing in R is 1-based and found a 0.");
     }
