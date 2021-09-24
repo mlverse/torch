@@ -145,7 +145,7 @@ XPtrTorchTensor cpp_torch_tensor (SEXP x, std::vector<std::int64_t> dim,
 void index_append_integer_vector (XPtrTorchTensorIndex& index, SEXP slice)
 {
   Rcpp::NumericVector v(LENGTH(slice));  // temp variable to not change slice opject
-  Rcpp::NumericVector u = Rcpp::as<Rcpp::NumericVector>(slice);   // cast slice to integer vextor
+  Rcpp::NumericVector u = Rcpp::as<Rcpp::NumericVector>(slice); // cast slice to integer vextor
   for (int j = 0; j < u.size(); j++)
   {
     if (u[j] > 0)
