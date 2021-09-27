@@ -237,3 +237,10 @@ test_that("boolean vector indexing works as expected", {
   )
   
 })
+
+test_that("regression test for #691", {
+  a <- torch_randn(c(6,4))
+  b <- c(1,2,3)
+  a[b]
+  expect_equal(b, c(1,2,3))
+})
