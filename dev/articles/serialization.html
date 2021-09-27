@@ -225,7 +225,6 @@
 <span class="va">loss</span><span class="op">$</span><span class="fu">backward</span><span class="op">(</span><span class="op">)</span>
 <span class="va">opt</span><span class="op">$</span><span class="fu">step</span><span class="op">(</span><span class="op">)</span>
 <span class="co">#&gt; NULL</span>
-
 <span class="co"># Now let's save the optimizer state</span>
 <span class="va">tmp</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html">tempfile</a></span><span class="op">(</span><span class="op">)</span>
 <span class="fu"><a href="../reference/torch_save.html">torch_save</a></span><span class="op">(</span><span class="va">opt</span><span class="op">$</span><span class="fu">state_dict</span><span class="op">(</span><span class="op">)</span>, <span class="va">tmp</span><span class="op">)</span>
