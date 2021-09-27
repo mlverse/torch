@@ -156,6 +156,10 @@ void index_append_integer_vector (XPtrTorchTensorIndex& index, SEXP slice)
     {
       Rcpp::stop("Indexing in R is 1-based and found a 0.");
     }
+    else 
+    {
+      v[j] = u[j];
+    }
   }
   
   // Create the integer Tensor
