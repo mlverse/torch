@@ -4,6 +4,7 @@
 - We can now subset `nn_sequential` modules using `[`. (#678, @mohamed-180)
 - We now allow `padding='same'` and `padding='valid'` when using convolutions. (#679)
 - `nnf_cross_entropy` now uses the ATen `cross_entropy` operation directly instead of doing logsoftmax + NLLLoss. (#680)
+- Fixed bug when indexing with numeric vectors. (#693)
 
 # torch 0.5.0
 
