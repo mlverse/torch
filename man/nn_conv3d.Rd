@@ -25,7 +25,7 @@ nn_conv3d(
 
 \item{stride}{(int or tuple, optional): Stride of the convolution. Default: 1}
 
-\item{padding}{(int or tuple, optional): Zero-padding added to all three sides of the input. Default: 0}
+\item{padding}{(int, tuple or str, optional): padding added to all six sides of the input. Default: 0}
 
 \item{dilation}{(int or tuple, optional): Spacing between kernel elements. Default: 1}
 
