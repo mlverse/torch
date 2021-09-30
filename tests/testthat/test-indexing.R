@@ -244,3 +244,26 @@ test_that("regression test for #691", {
   a[b]
   expect_equal(b, c(1,2,3))
 })
+
+test_that("regression test for #695", {
+  a <- torch_randn(c(3,4,2))
+  b <- torch_tensor(c(1,3), dtype = torch_long())
+  
+  expect_equal_to_r(
+    a[..,b,],
+    as.array(a)[,c(1,3),]
+  )
+  
+  a <- torch_randn(c(3,4,3))
+  
+  expect_equal_to_r(
+    a[..,b,b],
+    as.array(a)[,c(1,3),c(1,3)]
+  )
+  
+  expect_equal_to_r(
+    a[b,..,b],
+    as.array(a)[c(1,3),,c(1,3)]
+  )
+  
+})
