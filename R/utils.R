@@ -28,7 +28,7 @@ add_class_definition <- function(r6_class_generator){
 }
 
 create_class <- function(name, inherit, ..., private, active, parent_env,
-                         attr_name) {
+                         attr_name, constructor_class = NULL) {
   
   args <- list(...)
   
@@ -58,6 +58,10 @@ create_class <- function(name, inherit, ..., private, active, parent_env,
   )
   
   attr(f, attr_name) <- d
+  if (!is.null(constructor_class)) {
+    class(f) <- constructor_class 
+  }
+  
   f
 }
 
