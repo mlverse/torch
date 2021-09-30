@@ -245,7 +245,7 @@ state <- function(self) {
 #' }
 #' all.equal(x$item(), 0, tolerance = 1e-9)
 #' 
-#'
+#' @includeRmd man/rmd/optim-note.Rmd note
 #' @export
 optimizer <- function(name = NULL, inherit = Optimizer, ..., 
                     private = NULL, active = NULL,

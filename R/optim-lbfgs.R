@@ -307,7 +307,7 @@ NULL
 #' @param line_search_fn (str): either 'strong_wolfe' or None (default: None).
 #' @inheritParams optim_sgd
 #' 
-#' 
+#' @includeRmd man/rmd/optim-note.Rmd note
 #' @export  
 optim_lbfgs <- optimizer(
   "optim_lbfgs", 

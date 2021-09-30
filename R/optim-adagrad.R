@@ -28,7 +28,7 @@ NULL
 #' The equation above and some remarks quoted 
 #' after [*An overview of gradient descent optimization algorithms*](https://ruder.io/optimizing-gradient-descent/index.html#adagrad)
 #' by Sebastian Ruder.
-#' 
+#' @includeRmd man/rmd/optim-note.Rmd note
 #' @export
 optim_adagrad <- optimizer(
   "optim_adagrad",

@@ -30,6 +30,14 @@ parameter groups}
 \description{
 Proposed in \href{https://dl.acm.org/doi/10.1137/0330046}{Acceleration of stochastic approximation by averaging}
 }
+\section{Warning}{
+If you need to move a model to GPU via \verb{$cuda()}, please do so before
+constructing optimizers for it. Parameters of a model after \verb{$cuda()}
+will be different objects with those before the call. In general, you
+should make sure that optimized parameters live in consistent locations
+when optimizers are constructed and used.
+}
+
 \examples{
 if (torch_is_installed()) {
 \dontrun{

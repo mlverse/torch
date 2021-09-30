@@ -34,6 +34,14 @@ When implementing custom optimizers you will usually need to implement
 the \code{initialize} and \code{step} methods. See the example section below
 for a full example.
 }
+\section{Warning}{
+If you need to move a model to GPU via \verb{$cuda()}, please do so before
+constructing optimizers for it. Parameters of a model after \verb{$cuda()}
+will be different objects with those before the call. In general, you
+should make sure that optimized parameters live in consistent locations
+when optimizers are constructed and used.
+}
+
 \examples{
 if (torch_is_installed()) {
 
@@ -73,7 +81,6 @@ for (i in 1:100) {
   opt$step()
 }
 all.equal(x$item(), 0, tolerance = 1e-9)
-
 
 }
 }

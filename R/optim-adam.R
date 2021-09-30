@@ -17,6 +17,8 @@ NULL
 #'   algorithm from the paper [On the Convergence of Adam and Beyond](https://openreview.net/forum?id=ryQu7f-RZ)
 #'   (default: FALSE)
 #'   
+#' @includeRmd man/rmd/optim-note.Rmd note
+#'   
 #' @examples
 #' \dontrun{
 #' optimizer <- optim_adam(model$parameters(), lr=0.1)

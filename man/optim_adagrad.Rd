@@ -46,3 +46,11 @@ The equation above and some remarks quoted
 after \href{https://ruder.io/optimizing-gradient-descent/index.html#adagrad}{\emph{An overview of gradient descent optimization algorithms}}
 by Sebastian Ruder.
 }
+\section{Warning}{
+If you need to move a model to GPU via \verb{$cuda()}, please do so before
+constructing optimizers for it. Parameters of a model after \verb{$cuda()}
+will be different objects with those before the call. In general, you
+should make sure that optimized parameters live in consistent locations
+when optimizers are constructed and used.
+}
+

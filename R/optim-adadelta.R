@@ -42,7 +42,7 @@ NULL
 #' loss_fn(model(input), target)$backward()
 #' optimizer$step()
 #' }
-#' 
+#' @includeRmd man/rmd/optim-note.Rmd note
 #' @export
 optim_adadelta <- optimizer(
   "optim_adadelta",

@@ -50,3 +50,11 @@ Update rule:
 \theta_{t+1} = \theta_{t} - \frac{\eta }{\sqrt{{E[g^2]}_{t} + \epsilon}} * g_{t} 
 }
 }
+\section{Warning}{
+If you need to move a model to GPU via \verb{$cuda()}, please do so before
+constructing optimizers for it. Parameters of a model after \verb{$cuda()}
+will be different objects with those before the call. In general, you
+should make sure that optimized parameters live in consistent locations
+when optimizers are constructed and used.
+}
+
