@@ -69,3 +69,18 @@ test_that("getbatch will get a vector of integers", {
   
   expect_true(data()[list(1,2,3,4)])
 })
+
+test_that("datasets have a custom print method", {
+  
+  data <- dataset(
+    initialize = function() {},
+    .getbatch = function(indexes) {
+      expect_true(is.integer(indexes))
+    },
+    .length = function() {100}, 
+    parent_env = .GlobalEnv
+  )
+  
+  expect_output(print(data), regex = "dataset_generator")
+  
+})

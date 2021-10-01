@@ -64,8 +64,15 @@ dataset <- function(name = NULL, inherit = Dataset, ...,
     private = private, 
     active = active,
     parent_env = parent_env,
-    attr_name = "Dataset"
+    attr_name = "Dataset",
+    constructor_class = "dataset_generator"
   )
+}
+
+#' @export
+print.dataset_generator <- function(x, ...) {
+  cli::cat_line("<dataset_generator>")
+  print(attr(x, "Dataset"))
 }
 
 #' @export
