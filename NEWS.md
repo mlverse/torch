@@ -6,6 +6,7 @@
 - `nnf_cross_entropy` now uses the ATen `cross_entropy` operation directly instead of doing logsoftmax + NLLLoss. (#680)
 - Fixed bug when indexing with numeric vectors. (#693, @mohamed-180)
 - Fixed bug when indexing tensors with ellipsis and a tensor. (#696)
+- Improved optimizer documentation by adding a 'Warning' regarding the creation and usage order. (#698)
 
 # torch 0.5.0
 

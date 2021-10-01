@@ -13,6 +13,8 @@ NULL
 #' @param t0 (float, optional): point at which to start averaging (default: 1e6)
 #' @param weight_decay (float, optional): weight decay (L2 penalty) (default: 0)
 #' 
+#' @includeRmd man/rmd/optim-note.Rmd note
+#' 
 #' @examples
 #' \dontrun{
 #' optimizer <- optim_asgd(model$parameters(), lr=0.1)

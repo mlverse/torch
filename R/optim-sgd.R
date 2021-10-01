@@ -42,6 +42,8 @@ NULL
 #' }
 #' The Nesterov version is analogously modified.
 #' 
+#' @includeRmd man/rmd/optim-note.Rmd note
+#' 
 #' @examples
 #' \dontrun{
 #' optimizer <- optim_sgd(model$parameters(), lr=0.1, momentum=0.9)

@@ -21,7 +21,7 @@ NULL
 #' loss_fn(model(input), target)$backward()
 #' optimizer$step()
 #' }
-#' 
+#' @includeRmd man/rmd/optim-note.Rmd note
 #' @export
 optim_rprop <- optimizer(
   "optim_rprop",

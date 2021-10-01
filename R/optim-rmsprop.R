@@ -30,7 +30,7 @@ NULL
 #' \deqn{
 #' \theta_{t+1} = \theta_{t} - \frac{\eta }{\sqrt{{E[g^2]}_{t} + \epsilon}} * g_{t} 
 #' }
-#' 
+#' @includeRmd man/rmd/optim-note.Rmd note
 #' @export
 optim_rmsprop <- optimizer(
   "optim_rmsprop",
