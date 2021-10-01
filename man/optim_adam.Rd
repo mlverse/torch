@@ -37,9 +37,10 @@ It has been proposed in \href{https://arxiv.org/abs/1412.6980}{Adam: A Method fo
 \section{Warning}{
 If you need to move a model to GPU via \verb{$cuda()}, please do so before
 constructing optimizers for it. Parameters of a model after \verb{$cuda()}
-will be different objects with those before the call. In general, you
-should make sure that optimized parameters live in consistent locations
-when optimizers are constructed and used.
+will be different objects from those before the call. In general, you
+should make sure that the objects pointed to by model parameters subject
+to optimization remain the same over the whole lifecycle of optimizer
+creation and usage.
 }
 
 \examples{
