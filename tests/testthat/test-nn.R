@@ -58,12 +58,14 @@ test_that("nn_sequential", {
   expect_equal(output$shape, c(1000, 1))
   expect_length(model$parameters, 4)
   
-  model <- nn_sequential(
-    name = "mynet",
+  my_sequential <- nn_module(inherit = nn_sequential, classname = "mynet")
+  
+  model <- my_sequential(
     nn_linear(10, 100),
     nn_relu(),
     nn_linear(100, 1)
   )
+  
   expect_s3_class(model, "mynet")
   expect_s3_class(model, "nn_module")
 })
