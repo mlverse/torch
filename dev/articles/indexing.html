@@ -271,23 +271,23 @@
 <code class="sourceCode R"><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/torch_randn.html">torch_randn</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">3</span><span class="op">)</span>
 <span class="va">x</span>
 <span class="co">#&gt; torch_tensor</span>
-<span class="co">#&gt; -0.4493 -0.2328  1.5777</span>
-<span class="co">#&gt; -1.2262 -0.0433 -0.8689</span>
+<span class="co">#&gt; -1.7279  0.3546 -1.1903</span>
+<span class="co">#&gt;  0.2029  0.2070  0.5891</span>
 <span class="co">#&gt; [ CPUFloatType{2,3} ]</span></code></pre></div>
 <p>The following syntax will give you the first row:</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">x</span><span class="op">[</span><span class="fl">1</span>,<span class="op">]</span>
 <span class="co">#&gt; torch_tensor</span>
-<span class="co">#&gt; -0.4493</span>
-<span class="co">#&gt; -0.2328</span>
-<span class="co">#&gt;  1.5777</span>
+<span class="co">#&gt; -1.7279</span>
+<span class="co">#&gt;  0.3546</span>
+<span class="co">#&gt; -1.1903</span>
 <span class="co">#&gt; [ CPUFloatType{3} ]</span></code></pre></div>
 <p>And this would give you the first 2 columns:</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">x</span><span class="op">[</span>,<span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">]</span>
 <span class="co">#&gt; torch_tensor</span>
-<span class="co">#&gt; -0.4493 -0.2328</span>
-<span class="co">#&gt; -1.2262 -0.0433</span>
+<span class="co">#&gt; -1.7279  0.3546</span>
+<span class="co">#&gt;  0.2029  0.2070</span>
 <span class="co">#&gt; [ CPUFloatType{2,2} ]</span></code></pre></div>
 </div>
 <div id="dropping-dimensions" class="section level2">
@@ -354,15 +354,15 @@
 <code class="sourceCode R"><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/torch_randn.html">torch_randn</a></span><span class="op">(</span><span class="fl">4</span>,<span class="fl">4</span><span class="op">)</span>
 <span class="va">x</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">3</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">3</span><span class="op">)</span><span class="op">]</span>
 <span class="co">#&gt; torch_tensor</span>
-<span class="co">#&gt;  0.1519  1.3110</span>
-<span class="co">#&gt; -1.0328  0.8093</span>
+<span class="co">#&gt;  0.2855 -0.9696</span>
+<span class="co">#&gt;  0.3863  0.4854</span>
 <span class="co">#&gt; [ CPUFloatType{2,2} ]</span></code></pre></div>
 <p>You can also use boolean vectors, for example:</p>
 <div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">x</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="cn">TRUE</span>, <span class="cn">FALSE</span>, <span class="cn">TRUE</span>, <span class="cn">FALSE</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="cn">TRUE</span>, <span class="cn">FALSE</span>, <span class="cn">TRUE</span>, <span class="cn">FALSE</span><span class="op">)</span><span class="op">]</span>
 <span class="co">#&gt; torch_tensor</span>
-<span class="co">#&gt;  0.1519  1.3110</span>
-<span class="co">#&gt; -1.0328  0.8093</span>
+<span class="co">#&gt;  0.2855 -0.9696</span>
+<span class="co">#&gt;  0.3863  0.4854</span>
 <span class="co">#&gt; [ CPUFloatType{2,2} ]</span></code></pre></div>
 <p>The above examples also work if the index were long or boolean tensors, instead of R vectors. It’s also possible to index with multi-dimensional boolean tensors:</p>
 <div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">

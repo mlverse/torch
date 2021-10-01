@@ -224,8 +224,10 @@ planes.</p>
     </tr>
     <tr>
       <th>padding</th>
-      <td><p>(int or tuple, optional): Zero-padding added to both sides of
-the input. Default: 0</p></td>
+      <td><p>(int or tuple or string, optional): Zero-padding added to both sides of
+the input. controls the amount of padding applied to the input. It
+can be either a string <code>'valid'</code>, <code>'same'</code> or a tuple of ints giving the
+amount of implicit padding applied on both sides. Default: 0</p></td>
     </tr>
     <tr>
       <th>dilation</th>
