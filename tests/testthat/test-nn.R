@@ -600,6 +600,6 @@ test_that("classes are inherited correctly", {
   n <- nn(10, 10)
   expect_equal(class(n), c("hello", "nn_linear", "nn_module"))
   n2 <- nn2(10, 10)
-  expect_equal(class(n), c("goodbye", "hello", "nn_linear", "nn_module"))
+  expect_equal(class(n2), c("goodbye", "hello", "nn_linear", "nn_module"))
   
 })
