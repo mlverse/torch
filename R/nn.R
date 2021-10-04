@@ -600,7 +600,6 @@ print.nn_module <- function(x, ...) {
 #' See examples.
 #' 
 #' @param ... sequence of modules to be added
-#' @param name optional name for the generated module.
 #' 
 #' @examples 
 #' 
@@ -614,24 +613,21 @@ print.nn_module <- function(x, ...) {
 #' output <- model(input)
 #' 
 #' @export
-nn_sequential <- function(... , name = NULL) {
-  module <- nn_module(
-    classname = ifelse(is.null(name), "nn_sequential", name),
-    initialize = function(...) {
-      modules <- rlang::list2(...)
-      for (i in seq_along(modules)) {
-        self$add_module(name = i - 1, module = modules[[i]])  
-      }
-    },
-    forward = function(input) {
-      for (module in private$modules_) {
-        input <- module(input)
-      }
-      input
+nn_sequential <- module <- nn_module(
+  classname = "nn_sequential",
+  initialize = function(...) {
+    modules <- rlang::list2(...)
+    for (i in seq_along(modules)) {
+      self$add_module(name = i - 1, module = modules[[i]])  
     }
-  )
-  module(...)
-}
+  },
+  forward = function(input) {
+    for (module in private$modules_) {
+      input <- module(input)
+    }
+    input
+  }
+)
 
 #' @export
 length.nn_sequential <- function(x) {
