@@ -196,6 +196,8 @@
 <li>Fixed bug when indexing with numeric vectors. (<a href='https://github.com/mlverse/torch/issues/693'>#693</a>, <a href='https://github.com/mohamed-180'>@mohamed-180</a>)</li>
 <li>Fixed bug when indexing tensors with ellipsis and a tensor. (<a href='https://github.com/mlverse/torch/issues/696'>#696</a>)</li>
 <li>Improved optimizer documentation by adding a ‘Warning’ regarding the creation and usage order. (<a href='https://github.com/mlverse/torch/issues/698'>#698</a>)</li>
+<li>
+<code>nn_sequential</code> is now a bare <code>nn_module</code>, allowing to easily inherit from it. This is a breaking change if you used the <code>name</code> argument. The <code>name</code> behavior can be achieved by subclassing; see the tests in the PR. (<a href='https://github.com/mlverse/torch/issues/699'>#699</a>)</li>
 </ul>
 </div>
     <div id="torch-050" class="section level1">
