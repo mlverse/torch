@@ -4,12 +4,10 @@
 \alias{nn_sequential}
 \title{A sequential container}
 \usage{
-nn_sequential(..., name = NULL)
+nn_sequential(...)
 }
 \arguments{
 \item{...}{sequence of modules to be added}
-
-\item{name}{optional name for the generated module.}
 }
 \description{
 A sequential container.
