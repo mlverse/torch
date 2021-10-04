@@ -7,7 +7,7 @@
 - Fixed bug when indexing with numeric vectors. (#693, @mohamed-180)
 - Fixed bug when indexing tensors with ellipsis and a tensor. (#696)
 - Improved optimizer documentation by adding a 'Warning' regarding the creation and usage order. (#698)
-- `nn_sequential` is now a bare `nn_module`, allowing to easily inherit from it. This is a breaking change if you used the `name` argument. The `name` behavior can be achieved by inheriting see the tests in the PR. (#699)
+- `nn_sequential` is now a bare `nn_module`, allowing to easily inherit from it. This is a breaking change if you used the `name` argument. The `name` behavior can be achieved by subclassing; see the tests in the PR. (#699)
 
 # torch 0.5.0
 
