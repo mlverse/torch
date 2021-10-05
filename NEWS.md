@@ -8,6 +8,7 @@
 - Fixed bug when indexing tensors with ellipsis and a tensor. (#696)
 - Improved optimizer documentation by adding a 'Warning' regarding the creation and usage order. (#698)
 - `nn_sequential` is now a bare `nn_module`, allowing to easily inherit from it. This is a breaking change if you used the `name` argument. The `name` behavior can be achieved by subclassing; see the tests in the PR. (#699)
+- Inherited classes are now persisted by subclasses. THis is specially useful if you subclass `nn_sequential` and still want that the specific S3 methods still work. (#701)
 
 # torch 0.5.0
 

@@ -578,3 +578,30 @@ test_that("we can subset `nn_sequential`", {
   expect_true(inherits(y[[2]], "nn_relu6"))
     
 })
+
+test_that("classes are inherited correctly", {
+  
+  nn <- nn_module(
+    classname = "hello",
+    inherit = nn_linear
+  )
+  
+  nn2 <- nn_module(
+    classname = "goodbye",
+    inherit = nn
+  )
+  
+  expect_equal(
+    class(nn), c("hello", "nn_linear", "nn_module", "nn_module_generator")
+  )
+  
+  expect_equal(
+    class(nn2), c("goodbye", "hello", "nn_linear", "nn_module", "nn_module_generator")
+  )
+  
+  n <- nn(10, 10)
+  expect_equal(class(n), c("hello", "nn_linear", "nn_module"))
+  n2 <- nn2(10, 10)
+  expect_equal(class(n2), c("goodbye", "hello", "nn_linear", "nn_module"))
+  
+})

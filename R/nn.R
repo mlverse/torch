@@ -1,6 +1,17 @@
 #' @include utils-data.R
 NULL
 
+get_inherited_classes <- function(inherit) {
+  inherit_class <- inherit$public_fields$.classes
+  # Filter out classes that we eventually add in our normal flow.
+  inherit_class <- inherit_class[inherit_class != "nn_Module"]
+  inherit_class <- inherit_class[inherit_class != "R6ClassGenerator"]
+  inherit_class <- inherit_class[inherit_class != "nn_module_generator"]
+  inherit_class <- inherit_class[inherit_class != "nn_module"]
+  inherit_class <- inherit_class[!duplicated(inherit_class, fromLast = TRUE)]
+  inherit_class
+}
+
 nn_Module <- R6::R6Class(
   classname = "nn_Module",
   lock_objects = FALSE,
@@ -443,8 +454,9 @@ nn_module <- function(classname = NULL, inherit = nn_Module, ...,
   
   e <- new.env(parent = parent_env)
   e$inherit <- inherit
-    
-  classes <- c(classname, "nn_module")
+  
+  inherit_class <- get_inherited_classes(inherit)
+  classes <- c(classname, inherit_class, "nn_module")
   
   Module <- R6::R6Class(
     classname = classname,
@@ -761,4 +773,3 @@ get_parameter_count <- function(self) {
   pars <- sapply(self$parameters, function(x) prod(x$shape))
   sum(pars)
 }
-
