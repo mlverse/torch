@@ -198,6 +198,7 @@
 <li>Improved optimizer documentation by adding a ‘Warning’ regarding the creation and usage order. (<a href='https://github.com/mlverse/torch/issues/698'>#698</a>)</li>
 <li>
 <code>nn_sequential</code> is now a bare <code>nn_module</code>, allowing to easily inherit from it. This is a breaking change if you used the <code>name</code> argument. The <code>name</code> behavior can be achieved by subclassing; see the tests in the PR. (<a href='https://github.com/mlverse/torch/issues/699'>#699</a>)</li>
+<li>Inherited classes are now persisted by subclasses. THis is specially useful if you subclass <code>nn_sequential</code> and still want that the specific S3 methods still work. (<a href='https://github.com/mlverse/torch/issues/701'>#701</a>)</li>
 </ul>
 </div>
     <div id="torch-050" class="section level1">
