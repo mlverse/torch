@@ -49,7 +49,10 @@ XPtrTorchOptionalTensor::operator SEXP() const {
   }
   else 
   {
-    return XPtrTorchTensor(lantern_optional_tensor_value(this->get()));
+    auto ten = PROTECT(XPtrTorchTensor(lantern_optional_tensor_value(this->get())));
+    auto sxp = Rcpp::wrap(ten);
+    UNPROTECT(1);
+    return sxp;
   }
 }
 
@@ -356,7 +359,12 @@ XPtrTorchIValue::operator SEXP () const
     return Rcpp::wrap(XPtrTorchTensorList(lantern_IValue_TensorList(this->get())));
     
   case IValue_types::IValueTensorType:
-    return XPtrTorchTensor(lantern_IValue_Tensor(this->get()));
+  {
+    auto ten = PROTECT(XPtrTorchTensor(lantern_IValue_Tensor(this->get())));
+    auto sxp = Rcpp::wrap(ten);
+    UNPROTECT(1);
+    return sxp;
+  }
     
   case IValue_types::IValueTupleType:
     return Rcpp::wrap(XPtrTorchNamedTupleHelper(lantern_IValue_Tuple(this->get())));

@@ -132,7 +132,7 @@ SEXP cpp_jit_script_module_find_constant (XPtrTorchScriptModule self,
   void* ret = lantern_ScriptModule_find_constant(self.get(), name.get());
   if (ret)
   {
-    return Rcpp::wrap(XPtrTorchIValue(ret));
+    return XPtrTorchIValue(ret);
   }
   else
   {
