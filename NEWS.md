@@ -1,14 +1,25 @@
 # torch (development version)
 
+## Breaking changes
+
+- `nn_sequential` is now a bare `nn_module`, allowing to easily inherit from it. This is a breaking change if you used the `name` argument. The `name` behavior can be achieved by subclassing; see the tests in the PR. (#699)
+
+## New features
+
 - Additional info is showed when printing tensors like if it requires grad and the grad fn. (#668, #669, #673, @mohamed-180)
 - We can now subset `nn_sequential` modules using `[`. (#678, @mohamed-180)
 - We now allow `padding='same'` and `padding='valid'` when using convolutions. (#679)
 - `nnf_cross_entropy` now uses the ATen `cross_entropy` operation directly instead of doing logsoftmax + NLLLoss. (#680)
+- Inherited classes are now persisted by subclasses. This is specially useful if you subclass `nn_sequential` and still want that the specific S3 methods still work. (#701)
+
+## Bug fixes
+
 - Fixed bug when indexing with numeric vectors. (#693, @mohamed-180)
 - Fixed bug when indexing tensors with ellipsis and a tensor. (#696)
+
+## Documentation
+
 - Improved optimizer documentation by adding a 'Warning' regarding the creation and usage order. (#698)
-- `nn_sequential` is now a bare `nn_module`, allowing to easily inherit from it. This is a breaking change if you used the `name` argument. The `name` behavior can be achieved by subclassing; see the tests in the PR. (#699)
-- Inherited classes are now persisted by subclasses. THis is specially useful if you subclass `nn_sequential` and still want that the specific S3 methods still work. (#701)
 
 # torch 0.5.0
 

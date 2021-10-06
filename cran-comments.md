@@ -1,5 +1,7 @@
 This release includes many bug fixes and 
 new features.
 
-Also fixed the rchk protection issues.
+Fixed the rchk protection issues.
+Fixed PDF manual building errors on Debian/Clang.
+
 
