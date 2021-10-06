@@ -38,7 +38,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../../index.html">torch</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.6.0</span>
       </span>
     </div>
 
@@ -177,28 +177,28 @@
 <span class="va">model</span><span class="op">$</span><span class="va">parameters</span></code></pre></div>
 <pre><code>## $w
 ## torch_tensor
-##  0.6168
-##  1.5389
-##  0.6375
-## [ CPUFloatType{3,1} ]
+## -0.1443
+##  1.7670
+##  0.2148
+## [ CPUFloatType{3,1} ][ requires_grad = TRUE ]
 ## 
 ## $b
 ## torch_tensor
 ##  0
-## [ CPUFloatType{1} ]</code></pre>
+## [ CPUFloatType{1} ][ requires_grad = TRUE ]</code></pre>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># or individually</span>
 <span class="va">model</span><span class="op">$</span><span class="va">w</span></code></pre></div>
 <pre><code>## torch_tensor
-##  0.6168
-##  1.5389
-##  0.6375
-## [ CPUFloatType{3,1} ]</code></pre>
+## -0.1443
+##  1.7670
+##  0.2148
+## [ CPUFloatType{3,1} ][ requires_grad = TRUE ]</code></pre>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">model</span><span class="op">$</span><span class="va">b</span></code></pre></div>
 <pre><code>## torch_tensor
 ##  0
-## [ CPUFloatType{1} ]</code></pre>
+## [ CPUFloatType{1} ][ requires_grad = TRUE ]</code></pre>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># create an input tensor</span>
 <span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/torch_randn.html">torch_randn</a></span><span class="op">(</span><span class="fl">10</span>, <span class="fl">3</span><span class="op">)</span>
@@ -207,17 +207,17 @@
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">y_pred</span></code></pre></div>
 <pre><code>## torch_tensor
-##  1.3420
-##  0.1540
-## -1.6145
-##  0.5455
-##  0.8259
-## -1.9992
-## -1.3325
-## -1.1607
-##  2.0183
-##  0.6809
-## [ CPUFloatType{10,1} ]</code></pre>
+## -1.9565
+##  1.7632
+## -0.5164
+## -0.4912
+##  1.9312
+##  1.2110
+## -0.2178
+##  1.7162
+## -0.0361
+##  2.8043
+## [ CPUFloatType{10,1} ][ grad_fn = &lt;AddBackward0&gt; ]</code></pre>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

@@ -86,7 +86,7 @@ for a full example." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">torch</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.6.0</span>
       </span>
     </div>
 
@@ -234,6 +234,14 @@ The default is fine for most situations.</p></td>
     </tr>
     </table>
 
+    <h2 class="hasAnchor" id="warning"><a class="anchor" href="#warning"></a>Warning</h2>
+
+    <p>If you need to move a model to GPU via <code>$cuda()</code>, please do so before
+constructing optimizers for it. Parameters of a model after <code>$cuda()</code>
+will be different objects from those before the call. In general, you
+should make sure that the objects pointed to by model parameters subject
+to optimization remain the same over the whole lifecycle of optimizer
+creation and usage.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
@@ -274,7 +282,6 @@ The default is fine for most situations.</p></td>
   <span class='va'>opt</span><span class='op'>$</span><span class='fu'>step</span><span class='op'>(</span><span class='op'>)</span>
 <span class='op'>}</span>
 <span class='fu'><a href='https://rdrr.io/r/base/all.equal.html'>all.equal</a></span><span class='op'>(</span><span class='va'>x</span><span class='op'>$</span><span class='fu'>item</span><span class='op'>(</span><span class='op'>)</span>, <span class='fl'>0</span>, tolerance <span class='op'>=</span> <span class='fl'>1e-9</span><span class='op'>)</span>
-
 
 <span class='op'>}</span>
 </div><div class='output co'>#&gt; [1] TRUE</div></pre>

@@ -85,7 +85,7 @@ minFunc" />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">torch</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.6.0</span>
       </span>
     </div>
 
@@ -258,6 +258,12 @@ try reducing the history size, or use a different algorithm.</p>
 groups (there can be only one).</p>
 <p>Right now all parameters have to be on a single device. This will be
 improved in the future.</p>
+<p>If you need to move a model to GPU via <code>$cuda()</code>, please do so before
+constructing optimizers for it. Parameters of a model after <code>$cuda()</code>
+will be different objects from those before the call. In general, you
+should make sure that the objects pointed to by model parameters subject
+to optimization remain the same over the whole lifecycle of optimizer
+creation and usage.</p>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

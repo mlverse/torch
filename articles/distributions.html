@@ -38,7 +38,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">torch</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.6.0</span>
       </span>
     </div>
 
@@ -162,15 +162,15 @@
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">n</span><span class="op">$</span><span class="fu">sample</span><span class="op">(</span><span class="op">)</span>
 <span class="co">#&gt; torch_tensor</span>
-<span class="co">#&gt;  2.3726</span>
+<span class="co">#&gt; -0.4680</span>
 <span class="co">#&gt; [ CPUFloatType{1} ]</span></code></pre></div>
 <p>or, draw multiple samples:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">n</span><span class="op">$</span><span class="fu">sample</span><span class="op">(</span><span class="fl">3</span><span class="op">)</span>
 <span class="co">#&gt; torch_tensor</span>
-<span class="co">#&gt; -0.5598</span>
-<span class="co">#&gt;  1.5850</span>
-<span class="co">#&gt;  0.1286</span>
+<span class="co">#&gt;  1.6913</span>
+<span class="co">#&gt; -0.6393</span>
+<span class="co">#&gt;  0.5338</span>
 <span class="co">#&gt; [ CPUFloatType{3,1} ]</span></code></pre></div>
 <p>We can evaluate the log probability of values:</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
@@ -277,17 +277,17 @@
 <span class="co">#&gt; $linear.weight</span>
 <span class="co">#&gt; torch_tensor</span>
 <span class="co">#&gt;  1.9772</span>
-<span class="co">#&gt; [ CPUFloatType{1,1} ]</span>
+<span class="co">#&gt; [ CPUFloatType{1,1} ][ requires_grad = TRUE ]</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; $linear.bias</span>
 <span class="co">#&gt; torch_tensor</span>
 <span class="co">#&gt;  1.0390</span>
-<span class="co">#&gt; [ CPUFloatType{1} ]</span>
+<span class="co">#&gt; [ CPUFloatType{1} ][ requires_grad = TRUE ]</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; $scale</span>
 <span class="co">#&gt; torch_tensor</span>
 <span class="co">#&gt;  0.9716</span>
-<span class="co">#&gt; [ CPUFloatType{1} ]</span></code></pre></div>
+<span class="co">#&gt; [ CPUFloatType{1} ][ requires_grad = TRUE ]</span></code></pre></div>
 <p>and quickly compare with the <code><a href="https://rdrr.io/r/stats/glm.html">glm()</a></code> function:</p>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/glm.html">glm</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span><span class="op">(</span><span class="va">y</span><span class="op">)</span> <span class="op">~</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
