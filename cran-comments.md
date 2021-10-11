@@ -1,7 +1,6 @@
-This release includes many bug fixes and 
-new features.
-
-Fixed the rchk protection issues.
-Fixed PDF manual building errors on Debian/Clang.
+Fixed valgrind errors. The vignettes shouldn't be evaluated in that context and
+a bug in a recent knitr version cause R CMD CHECK to ignore the global handlers
+that avoid the code to be evaluated. We have now pinned the knitr version to 
+avoid that.
 
 

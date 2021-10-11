@@ -1,5 +1,7 @@
 # torch (development version)
 
+- Fixed valgrind errors on CRAN by requiring a more recent version of knitr.
+
 # torch 0.6.0
 
 ## Breaking changes
