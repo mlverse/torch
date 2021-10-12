@@ -179,5 +179,18 @@ void _trace_r_nn_module ()
     LANTERN_FUNCTION_END_VOID;
 }
 
+void _lantern_traced_fn_save_for_mobile (void* fn, const char* filename)
+{
+  LANTERN_FUNCTION_START;
+  Function* fn_ = reinterpret_cast<Function *>(fn);
+  auto filename_ = std::string(filename);
+  
+  Module module("__torch__.PlaceholderModule");
+  
+  module.register_attribute("training", BoolType::get(), true);
+  addFunctionToModule(module, fn_);
+  module._save_for_mobile(filename_);
+  LANTERN_FUNCTION_END_VOID;
+}
 
 

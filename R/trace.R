@@ -140,6 +140,11 @@ ScriptFunction <- R6::R6Class(
       path <- normalizePath(filename, mustWork = FALSE)
       cpp_save_traced_fn(self$ptr, path)
       invisible(self)
+    },
+    save_for_mobile = function(filename) {
+      path <- normalizePath(filename, mustWork = FALSE)
+      cpp_save_traced_fn_for_mobile(self$ptr, path)
+      invisible(self)
     }
   ),
   active = list(
@@ -309,3 +314,16 @@ jit_trace_module <- function(mod, ..., strict = TRUE) {
   module
 }
 
+#' @export
+jit_save_for_mobile <- function(obj, path, ...) {
+  path <- normalizePath(path, mustWork = FALSE)
+  
+  if (inherits(obj, "script_function"))
+    obj$save_for_mobile(path)
+  else if (inherits(obj, "script_module"))
+    obj$..ptr..()$save_for_mobile(path)
+  else
+    value_error("Only `script_function` or `script_module` can be saved with `jit_save`.")
+  
+  invisible(obj)
+}
