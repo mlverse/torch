@@ -3,6 +3,7 @@
 ## New features
 
 - `jit_save_for_mobile` allows to save a traced model in bytecode form, to be loaded by a `LiteModuleLoader`. (#713)
+- Fixed valgrind errors on CRAN by requiring a more recent version of knitr.
 
 # torch 0.6.0
 
