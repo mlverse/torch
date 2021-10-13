@@ -314,6 +314,24 @@ jit_trace_module <- function(mod, ..., strict = TRUE) {
   module
 }
 
+#' Saves a `script_function` or `script_module` in bytecode form,
+#' to be loaded on a mobile device
+#' 
+#' @param obj An `script_function` or `script_module` to save
+#' @param path The path to save the serialized function.
+#' @param ... currently unused
+#' 
+#' @examples
+#' fn <- function(x) {
+#'   torch_relu(x)
+#' }
+#' 
+#' input <- torch_tensor(c(-1, 0, 1))
+#' tr_fn <- jit_trace(fn, input)
+#' 
+#' tmp <- tempfile("tst", fileext = "pt")
+#' jit_save_for_mobile(tr_fn, tmp)
+#' 
 #' @export
 jit_save_for_mobile <- function(obj, path, ...) {
   path <- normalizePath(path, mustWork = FALSE)
