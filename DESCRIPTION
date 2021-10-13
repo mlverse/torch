@@ -42,7 +42,7 @@ Roxygen: list(markdown = TRUE)
 Suggests:
     testthat (>= 3.0.0),
     covr,
-    knitr,
+    knitr (>= 1.36),
     rmarkdown,
     glue,
     palmerpenguins,
