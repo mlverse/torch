@@ -7,8 +7,7 @@ lantern_sync <- function(sync_lib = FALSE) {
   }
   
   if (sync_lib) {
-    lib_dest <- file.path(system.file("", package = "torch"), "deps")
-    lib_dest <- "deps/"
+    lib_dest <- "inst/"
     suppressWarnings(dir.create(lib_dest))
     lib_src <- "lantern/build/liblantern"
     
@@ -21,7 +20,7 @@ lantern_sync <- function(sync_lib = FALSE) {
     
     file.copy(
       path,
-      lib_dest,
+      file.path(lib_dest, "lib"),
       overwrite = TRUE
     )
   }

@@ -25,3 +25,4 @@ Meta
 build/
 tracedmodule.pt
 revdep
+inst/
