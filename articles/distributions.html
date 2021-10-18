@@ -38,7 +38,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">torch</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.6.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.6.1</span>
       </span>
     </div>
 
@@ -162,16 +162,16 @@
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">n</span><span class="op">$</span><span class="fu">sample</span><span class="op">(</span><span class="op">)</span>
 <span class="co">#&gt; torch_tensor</span>
-<span class="co">#&gt; 0.01 *</span>
-<span class="co">#&gt;  9.4287</span>
+<span class="co">#&gt; 0.001 *</span>
+<span class="co">#&gt; -3.4872</span>
 <span class="co">#&gt; [ CPUFloatType{1} ]</span></code></pre></div>
 <p>or, draw multiple samples:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">n</span><span class="op">$</span><span class="fu">sample</span><span class="op">(</span><span class="fl">3</span><span class="op">)</span>
 <span class="co">#&gt; torch_tensor</span>
-<span class="co">#&gt; -1.2245</span>
-<span class="co">#&gt;  0.3746</span>
-<span class="co">#&gt;  0.5875</span>
+<span class="co">#&gt; -0.1946</span>
+<span class="co">#&gt;  1.6676</span>
+<span class="co">#&gt;  0.0192</span>
 <span class="co">#&gt; [ CPUFloatType{3,1} ]</span></code></pre></div>
 <p>We can evaluate the log probability of values:</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
