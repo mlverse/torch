@@ -21,6 +21,18 @@ tools/torchgen/.Rbuildignore
 ^public/.*
 ^cran-comments\.md$
 ^CRAN-RELEASE$
+
+# remove vignettes from CRAN
+^vignettes/distributions\.Rmd
+^vignettes/extending-autograd\.Rmd
+^vignettes/indexing\.Rmd
+^vignettes/loading-data\.Rmd
+^vignettes/python-to-r\.Rmd
+^vignettes/serialization\.Rmd
+^vignettes/tensor-creation\.Rmd
+^vignettes/torchscript\.Rmd
+^vignettes/using-autograd\.Rmd
+
 # uncomment below for CRAN submission
 ^inst/deps/.*
 ^doc$
