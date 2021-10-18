@@ -42,9 +42,9 @@ void lantern_host_handler();
 
 extern int lanternLogEnabled;
 #define LLOG(...) if ((lanternLogEnabled & 1) == 1) {              \
-  printf("%ld INFO ", time(NULL));                                 \
-  printf(__VA_ARGS__);                                             \
-  printf("\n");                                                    \
+printf("%ld INFO ", time(NULL));                                   \
+printf(__VA_ARGS__);                                               \
+printf("\n");                                                      \
 }                                                                  \
 if ((lanternLogEnabled & 2) == 2) {                                \
   FILE *pFile = fopen("lantern.log", "a");                         \
@@ -58,22 +58,22 @@ if ((lanternLogEnabled & 2) == 2) {                                \
 extern std::string *pLanternLastError;
 #endif
 #define LANTERN_FUNCTION_START                                     \
-  LLOG("Entering %s", __func__)                                    \
+LLOG("Entering %s", __func__)                                      \
   try {
-#define LANTERN_FUNCTION_END_RET(ret)                              \
-} catch(const std::exception& ex) {                                \
-  LLOG("Error %s in %s", ex.what(), __func__)                      \
-  pLanternLastError = new std::string(ex.what());                  \
-  return ret;                                                      \
-} catch(std::string& ex) {                                         \
-  LLOG("Error %s in %s", ex.c_str(), __func__)                     \
-  pLanternLastError = new std::string(ex);                         \
-  return ret;                                                      \
-} catch(...) {                                                     \
-  LLOG("Error in %s", __func__)                                    \
-  pLanternLastError = new std::string("Unknown error. ");          \
-  return ret;                                                      \
-}
+#define LANTERN_FUNCTION_END_RET(ret)                                \
+  } catch(const std::exception& ex) {                                \
+    LLOG("Error %s in %s", ex.what(), __func__)                      \
+    pLanternLastError = new std::string(ex.what());                  \
+    return ret;                                                      \
+  } catch(std::string& ex) {                                         \
+    LLOG("Error %s in %s", ex.c_str(), __func__)                     \
+    pLanternLastError = new std::string(ex);                         \
+    return ret;                                                      \
+  } catch(...) {                                                     \
+    LLOG("Error in %s", __func__)                                    \
+    pLanternLastError = new std::string("Unknown error. ");          \
+    return ret;                                                      \
+  }
 #define LANTERN_FUNCTION_END LANTERN_FUNCTION_END_RET(NULL)
 #define LANTERN_FUNCTION_END_VOID                                  \
 } catch(const std::exception& ex) {                                \
@@ -86,13 +86,13 @@ extern std::string *pLanternLastError;
   LLOG("Error in %s", __func__)                                    \
   pLanternLastError = new std::string("Unknown error. ");          \
 }
- 
+
 #ifdef __cplusplus
 extern "C"
 {
 #endif
-
-enum IValue_types {
+  
+  enum IValue_types {
     IValueBlobType,
     IValueBoolType,
     IValueBoolListType,
@@ -126,10 +126,10 @@ enum IValue_types {
     IValueTensorListType,
     IValueTupleType,
     IValueTypeUnknownType
-};
-
-
-
+  };
+  
+  
+  
   LANTERN_API void(LANTERN_PTR lanternConfigure)(int log);
   LANTERN_API const char*(LANTERN_PTR lanternVersion)();
   LANTERN_API void(LANTERN_PTR lanternSetLastError)(const char*);
@@ -516,42 +516,42 @@ enum IValue_types {
   HOST_API void lantern_Tensor_index_put_scalar_ (void* self, void* index, void* rhs) { _lantern_Tensor_index_put_scalar_(self, index, rhs); LANTERN_HOST_HANDLER}
   LANTERN_API void (LANTERN_PTR _lantern_manual_seed) (int64_t seed);
   HOST_API void lantern_manual_seed (int64_t seed) {_lantern_manual_seed(seed); LANTERN_HOST_HANDLER}
-
+  
   LANTERN_API void* (LANTERN_PTR _lantern_load_state_dict) (const char * path);
   HOST_API void * lantern_load_state_dict (const char * path)
   {
     void * ret = _lantern_load_state_dict(path);
     LANTERN_HOST_HANDLER return ret;
   }
-
+  
   LANTERN_API void* (LANTERN_PTR _lantern_get_state_dict_keys) (void * ivalue);
   HOST_API void* lantern_get_state_dict_keys (void* ivalue)
   {
     void * ret = _lantern_get_state_dict_keys(ivalue);
     LANTERN_HOST_HANDLER return ret;
   }
-
+  
   LANTERN_API void* (LANTERN_PTR _lantern_get_state_dict_values) (void * ivalue);
   HOST_API void* lantern_get_state_dict_values (void* ivalue)
   {
     void * ret = _lantern_get_state_dict_values(ivalue);
     LANTERN_HOST_HANDLER return ret;
   }
-
+  
   LANTERN_API void (LANTERN_PTR _lantern_IValue_delete) (void * x);
   HOST_API void lantern_IValue_delete (void* x)
   {
     _lantern_IValue_delete(x);
     LANTERN_HOST_HANDLER;
   }
-
+  
   LANTERN_API void (LANTERN_PTR _lantern_vector_string_delete) (void * x);
   HOST_API void lantern_vector_string_delete (void* x)
   {
     _lantern_vector_string_delete(x);
     LANTERN_HOST_HANDLER;
   }
-
+  
   LANTERN_API int64_t *(LANTERN_PTR _lantern_Tensor_data_ptr_int64_t)(void *self);
   HOST_API int64_t* lantern_Tensor_data_ptr_int64_t (void* self)
   {
@@ -559,7 +559,7 @@ enum IValue_types {
     LANTERN_HOST_HANDLER;
     return ret;
   }
-
+  
   LANTERN_API bool  (LANTERN_PTR _lantern_Tensor_has_names) (void* self);
   HOST_API bool lantern_Tensor_has_names (void* self)
   {
@@ -567,7 +567,7 @@ enum IValue_types {
     LANTERN_HOST_HANDLER;
     return ret;
   }
-
+  
   LANTERN_API void* (LANTERN_PTR _lantern_Tensor_names) (void * self);
   HOST_API void* lantern_Tensor_names (void* self)
   {
@@ -575,7 +575,7 @@ enum IValue_types {
     LANTERN_HOST_HANDLER;
     return ret;
   }
-
+  
   LANTERN_API void* (LANTERN_PTR _lantern_string_new) (const char * value);
   HOST_API void* lantern_string_new (const char* value)
   {
@@ -583,14 +583,14 @@ enum IValue_types {
     LANTERN_HOST_HANDLER;
     return ret;
   }
-
+  
   LANTERN_API void (LANTERN_PTR _lantern_string_delete) (void * x);
   HOST_API void lantern_string_delete (void* x)
   {
     _lantern_string_delete(x);
     LANTERN_HOST_HANDLER;
   }
-
+  
   LANTERN_API void * (LANTERN_PTR _lantern_contrib_torch_sparsemax) (void * input, int dim);
   HOST_API void * lantern_contrib_torch_sparsemax (void* input, int dim)
   {
@@ -598,1381 +598,1376 @@ enum IValue_types {
     LANTERN_HOST_HANDLER;
     return ret;
   }
-
-LANTERN_API void (LANTERN_PTR _lantern_set_num_threads) (int n);
-HOST_API void lantern_set_num_threads (int n)
-{
-  _lantern_set_num_threads(n);
-  LANTERN_HOST_HANDLER;
-}
-
-LANTERN_API void (LANTERN_PTR _lantern_set_num_interop_threads) (int n);
-HOST_API void lantern_set_num_interop_threads (int n)
-{
-  _lantern_set_num_interop_threads(n);
-  LANTERN_HOST_HANDLER;
-}
-
-LANTERN_API int (LANTERN_PTR _lantern_get_num_threads) ();
-HOST_API int lantern_get_num_threads ()
-{
-  int ret = _lantern_get_num_threads();
-  LANTERN_HOST_HANDLER;
-  return ret;
-}
-
-LANTERN_API int (LANTERN_PTR _lantern_get_num_interop_threads) ();
-HOST_API int lantern_get_num_interop_threads ()
-{
-  int ret = _lantern_get_num_interop_threads();
-  LANTERN_HOST_HANDLER;
-  return ret;
-}
-
-LANTERN_API void * (LANTERN_PTR _lantern_optional_vector_int64_t) (int64_t * x, size_t x_size, bool is_null);
-HOST_API void* lantern_optional_vector_int64_t (int64_t * x, size_t x_size, bool is_null)
-{
-  void* ret = _lantern_optional_vector_int64_t(x, x_size, is_null);
-  LANTERN_HOST_HANDLER;
-  return ret;
-}
-
-LANTERN_API void * (LANTERN_PTR _lantern_optional_vector_double) (double * x, size_t x_size, bool is_null);
-HOST_API void* lantern_optional_vector_double (double * x, size_t x_size, bool is_null)
-{
-  void* ret = _lantern_optional_vector_double(x, x_size, is_null);
-  LANTERN_HOST_HANDLER;
-  return ret;
-}
-
-LANTERN_API void (LANTERN_PTR _trace_r_nn_module) ();
-HOST_API void trace_r_nn_module ()
-{
-  _trace_r_nn_module();
-  LANTERN_HOST_HANDLER;
-}
-
-LANTERN_API void * (LANTERN_PTR _lantern_Stack_new) ();
-HOST_API void * lantern_Stack_new ()
-{
-  void* ret = _lantern_Stack_new();
-  LANTERN_HOST_HANDLER;
-  return ret;
-}
-
-LANTERN_API void (LANTERN_PTR _lantern_Stack_delete) (void * x);
-HOST_API void lantern_Stack_delete (void * x)
-{
-  _lantern_Stack_delete(x);
-  LANTERN_HOST_HANDLER;
-}
-
-LANTERN_API int64_t (LANTERN_PTR _lantern_Stack_size) (void* self);
-HOST_API int64_t lantern_Stack_size (void* self)
-{
-  int64_t ret = _lantern_Stack_size(self);
-  LANTERN_HOST_HANDLER;
-  return ret;
-}
-
-LANTERN_API void* (LANTERN_PTR _lantern_create_traceable_fun) (void *(*r_caller)(void *, void *), void* fn);
-HOST_API void* lantern_create_traceable_fun (void *(*r_caller)(void *, void *), void* fn)
-{
-  void* ret = _lantern_create_traceable_fun(r_caller, fn);
-  LANTERN_HOST_HANDLER;
-  return ret;
-}
-
-LANTERN_API void* (LANTERN_PTR _lantern_trace_fn) (void* fn, void* inputs, void* compilation_unit, bool strict, void* module, void* name, bool should_mangle);
-HOST_API void* lantern_trace_fn (void* fn, void* inputs, void* compilation_unit, bool strict, void* module, void* name, bool should_mangle)
-{
-  void* ret = _lantern_trace_fn(fn, inputs, compilation_unit, strict, module, name, should_mangle);
-  LANTERN_HOST_HANDLER;
-  return ret;
-}
-
-LANTERN_API void* (LANTERN_PTR _lantern_call_traced_fn) (void* fn, void* inputs);
-HOST_API void* lantern_call_traced_fn(void* fn, void* inputs)
-{
-  void* ret = _lantern_call_traced_fn(fn, inputs);
-  LANTERN_HOST_HANDLER;
-  return ret;
-}
-
-LANTERN_API void* (LANTERN_PTR _lantern_CompilationUnit_new) ();
-HOST_API void* lantern_CompilationUnit_new ()
-{
-  void* ret = _lantern_CompilationUnit_new();
-  LANTERN_HOST_HANDLER;
-  return ret;
-}
-
-LANTERN_API void (LANTERN_PTR _lantern_CompilationUnit_delete) (void* x);
-HOST_API void lantern_CompilationUnit_delete (void* x)
-{
-  _lantern_CompilationUnit_delete(x);
-  LANTERN_HOST_HANDLER;
-}
-
-LANTERN_API void (LANTERN_PTR _lantern_traced_fn_save) (void* fn, const char * filename);
-HOST_API void lantern_traced_fn_save (void* fn, const char * filename)
-{
-  _lantern_traced_fn_save(fn, filename);
-  LANTERN_HOST_HANDLER;
-}
-
-LANTERN_API const char * (LANTERN_PTR _lantern_traced_fn_graph_print) (void* fn);
-HOST_API const char * lantern_traced_fn_graph_print (void* fn)
-{
-  const char * ret = _lantern_traced_fn_graph_print(fn);
-  LANTERN_HOST_HANDLER;
-  return ret;
-}
-
-LANTERN_API bool (LANTERN_PTR _lantern_Tensor_has_any_zeros) (void * self);
-HOST_API bool lantern_Tensor_has_any_zeros (void* self)
-{
-  bool ret = _lantern_Tensor_has_any_zeros(self);
-  LANTERN_HOST_HANDLER;
-  return ret;
-}
-
-LANTERN_API void* (LANTERN_PTR _lantern_jit_load) (const char * path);
-HOST_API void* lantern_jit_load (const char * path)
-{
-  void* ret = _lantern_jit_load(path);
-  LANTERN_HOST_HANDLER;
-  return ret;
-}
-
-LANTERN_API void* (LANTERN_PTR _lantern_call_jit_script) (void* module, void* inputs);
-HOST_API void* lantern_call_jit_script (void* module, void* inputs)
-{
-  void* ret = _lantern_call_jit_script(module, inputs);
-  LANTERN_HOST_HANDLER;
-  return ret;
-}
-
-LANTERN_API void (LANTERN_PTR _lantern_JITModule_delete) (void* x);
-HOST_API void lantern_JITModule_delete (void* x)
-{
-  _lantern_JITModule_delete(x);
-  LANTERN_HOST_HANDLER;
-}
-
-LANTERN_API void (LANTERN_PTR _lantern_TraceableFunction_delete) (void* x);
-HOST_API void lantern_TraceableFunction_delete (void* x)
-{
-  _lantern_TraceableFunction_delete(x);
-  LANTERN_HOST_HANDLER;
-}
-
-LANTERN_API void (LANTERN_PTR _set_lantern_allocator) (void (*r_gc) (), uint64_t threshold_mb);
-HOST_API void set_lantern_allocator (void (*r_gc) (), uint64_t threshold_mb)
-{
-  _set_lantern_allocator(r_gc, threshold_mb);
-  LANTERN_HOST_HANDLER;
-}
-
-LANTERN_API void (LANTERN_PTR _lantern_vector_bool_delete) (void* x);
-HOST_API void lantern_vector_bool_delete (void* x)
-{
-  _lantern_vector_bool_delete(x);
-  LANTERN_HOST_HANDLER;
-}
-
-LANTERN_API void* (LANTERN_PTR _lantern_normal_double_double_intarrayref_generator_tensoroptions) (double mean, double std, void* size, void* generator, void* options);
-HOST_API void* lantern_normal_double_double_intarrayref_generator_tensoroptions (double mean, double std, void* size, void* generator, void* options) 
-{
-  void* ret = _lantern_normal_double_double_intarrayref_generator_tensoroptions(mean, std, size, generator, options);
-  LANTERN_HOST_HANDLER 
-  return ret;
-}
-
-LANTERN_API void* (LANTERN_PTR _lantern_normal_tensor_tensor_generator) (void* mean, void* std, void* generator);
-HOST_API void* lantern_normal_tensor_tensor_generator (void* mean, void* std, void* generator)
-{
-  void* ret = _lantern_normal_tensor_tensor_generator(mean, std, generator);
-  LANTERN_HOST_HANDLER 
-  return ret;
-}
-
-LANTERN_API void* (LANTERN_PTR _lantern_normal_double_tensor_generator) (double mean, void* std, void* generator);
-HOST_API void* lantern_normal_double_tensor_generator (double mean, void* std, void* generator)
-{
-  void* ret = _lantern_normal_double_tensor_generator(mean, std, generator);
-  LANTERN_HOST_HANDLER 
-  return ret;
-}
-
-LANTERN_API void* (LANTERN_PTR _lantern_normal_tensor_double_generator) (void* mean, double std, void* generator);
-HOST_API void* lantern_normal_tensor_double_generator (void* mean, double std, void* generator)
-{
-  void* ret = _lantern_normal_tensor_double_generator(mean, std, generator);
-  LANTERN_HOST_HANDLER 
-  return ret;
-}
-
-LANTERN_API void (LANTERN_PTR _lantern_vector_void_delete) (void* x);
-HOST_API void lantern_vector_void_delete (void* x)
-{
-  _lantern_vector_void_delete(x);
-  LANTERN_HOST_HANDLER;
-}
-
-LANTERN_API bool (LANTERN_PTR _lantern_autograd_is_enabled) ();
-HOST_API bool lantern_autograd_is_enabled ()
-{
-  bool ret = _lantern_autograd_is_enabled();
-  LANTERN_HOST_HANDLER;
-  return ret;
-}
-
-LANTERN_API void (LANTERN_PTR _lantern_print_stuff) (void* x);
-HOST_API void lantern_print_stuff (void* x) {
-  _lantern_print_stuff (x);
-  LANTERN_HOST_HANDLER;
-}
-
-LANTERN_API void* (LANTERN_PTR _lantern_nn_functional_pad_circular) (void* input, void* padding);
-HOST_API void* lantern_nn_functional_pad_circular (void* input, void* padding)
-{
-  void* ret = _lantern_nn_functional_pad_circular(input, padding);
-  LANTERN_HOST_HANDLER;
-  return ret;
-}
-
-LANTERN_API bool (LANTERN_PTR _lantern_backend_has_mkl) ();
-HOST_API bool lantern_backend_has_mkl ()
-{
-  bool ret = _lantern_backend_has_mkl();
-  LANTERN_HOST_HANDLER;
-  return ret;
-}
-
-LANTERN_API bool (LANTERN_PTR _lantern_backend_has_openmp) ();
-HOST_API bool lantern_backend_has_openmp ()
-{
-  bool ret = _lantern_backend_has_openmp();
-  LANTERN_HOST_HANDLER;
-  return ret;
-}
-
-LANTERN_API bool (LANTERN_PTR _lantern_backend_has_lapack) ();
-HOST_API bool lantern_backend_has_lapack ()
-{
-  bool ret = _lantern_backend_has_lapack();
-  LANTERN_HOST_HANDLER;
-  return ret;
-}
-
-LANTERN_API bool (LANTERN_PTR _lantern_backend_has_mkldnn) ();
-HOST_API bool lantern_backend_has_mkldnn ()
-{
-  bool ret = _lantern_backend_has_mkldnn();
-  LANTERN_HOST_HANDLER;
-  return ret;
-}
-
-LANTERN_API void* (LANTERN_PTR _lantern_OptionalTensorList) ();
-HOST_API void* lantern_OptionalTensorList ()
-{
-  void* ret = _lantern_OptionalTensorList();
-  LANTERN_HOST_HANDLER;
-  return ret;
-}
-
-LANTERN_API void (LANTERN_PTR _lantern_OptionalTensorList_push_back) (void* self, void* x, bool is_null);
-HOST_API void lantern_OptionalTensorList_push_back (void* self, void* x, bool is_null)
-{
-  _lantern_OptionalTensorList_push_back(self, x, is_null);
-  LANTERN_HOST_HANDLER;
-}
-
-LANTERN_API void* (LANTERN_PTR _lantern_Stream) ();
-HOST_API void* lantern_Stream ()
-{
-  void* ret = _lantern_Stream();
-  LANTERN_HOST_HANDLER;
-  return ret;
-}
-
-LANTERN_API void (LANTERN_PTR _lantern_optional_tensor_delete) (void* x);
-HOST_API void lantern_optional_tensor_delete (void* x)
-{
-  _lantern_optional_tensor_delete(x);
-  LANTERN_HOST_HANDLER;
-}
-
-LANTERN_API void* (LANTERN_PTR _lantern_optional_tensor) (void*x, bool is_null);
-HOST_API void* lantern_optional_tensor (void* x, bool is_null)
-{
-  void* ret = _lantern_optional_tensor(x, is_null);
-  LANTERN_HOST_HANDLER;
-  return ret;
-}
-
-LANTERN_API bool (LANTERN_PTR _lantern_optional_tensor_has_value) (void*x);
-HOST_API bool lantern_optional_tensor_has_value (void* x)
-{
-  bool ret = _lantern_optional_tensor_has_value(x);
-  LANTERN_HOST_HANDLER;
-  return ret;
-}
-
-LANTERN_API void* (LANTERN_PTR _lantern_OptionalDevice_from_device) (void *x, bool is_null);
-HOST_API void* lantern_OptionalDevice_from_device (void *x, bool is_null)
-{
-  void * ret = _lantern_OptionalDevice_from_device(x, is_null);
-  LANTERN_HOST_HANDLER;
-  return ret;
-}
-
-LANTERN_API void (LANTERN_PTR _lantern_optional_device_delete) (void*x);
-HOST_API void lantern_optional_device_delete (void* x)
-{
-  _lantern_optional_device_delete(x);
-  LANTERN_HOST_HANDLER;
-}
-
-LANTERN_API void (LANTERN_PTR _lantern_tensor_set_pyobj) (void*x, void* ptr);
-HOST_API void lantern_tensor_set_pyobj (void* x, void* ptr)
-{
-  _lantern_tensor_set_pyobj(x, ptr);
-  LANTERN_HOST_HANDLER;
-}
-
-LANTERN_API void* (LANTERN_PTR _lantern_tensor_get_pyobj) (void* x);
-HOST_API void* lantern_tensor_get_pyobj (void* x)
-{
-  void* ret = _lantern_tensor_get_pyobj(x);
-  LANTERN_HOST_HANDLER;
-  return ret;
-}
-
-LANTERN_API void* (LANTERN_PTR _lantern_ScriptModule_parameters) (void* module, bool recurse);
-HOST_API void* lantern_ScriptModule_parameters (void* module, bool recurse)
-{
-  void* ret = _lantern_ScriptModule_parameters(module, recurse);
-  LANTERN_HOST_HANDLER;
-  return ret;
-}
-
-LANTERN_API void (LANTERN_PTR _lantern_jit_named_parameter_list_delete) (void* x);
-HOST_API void lantern_jit_named_parameter_list_delete (void* x)
-{
-  _lantern_jit_named_parameter_list_delete(x);
-  LANTERN_HOST_HANDLER;
-}
-
-LANTERN_API int (LANTERN_PTR _lantern_jit_named_parameter_list_size) (void* self);
-HOST_API int lantern_jit_named_parameter_list_size (void* module)
-{
-  int ret = _lantern_jit_named_parameter_list_size(module);
-  LANTERN_HOST_HANDLER;
-  return ret;
-}
-
-LANTERN_API void* (LANTERN_PTR _lantern_jit_named_parameter_list_tensors) (void* self);
-HOST_API void* lantern_jit_named_parameter_list_tensors (void* module)
-{
-  void* ret = _lantern_jit_named_parameter_list_tensors(module);
-  LANTERN_HOST_HANDLER;
-  return ret;
-}
-
-LANTERN_API void* (LANTERN_PTR _lantern_jit_named_parameter_list_names) (void* self);
-HOST_API void* lantern_jit_named_parameter_list_names (void* module)
-{
-  void* ret = _lantern_jit_named_parameter_list_names(module);
-  LANTERN_HOST_HANDLER;
-  return ret;
-}
-
-LANTERN_API void* (LANTERN_PTR _lantern_ScriptModule_forward) (void* module, void* inputs);
-HOST_API void* lantern_ScriptModule_forward (void* module, void* inputs)
-{
-  void* ret = _lantern_ScriptModule_forward(module, inputs);
-  LANTERN_HOST_HANDLER;
-  return ret;
-}
-
-LANTERN_API void (LANTERN_PTR _lantern_ScriptModule_train) (void* module, bool on);
-HOST_API void lantern_ScriptModule_train (void* module, bool on)
-{
-   _lantern_ScriptModule_train(module, on);
-  LANTERN_HOST_HANDLER;
   
-}
-
-LANTERN_API void (LANTERN_PTR _lantern_ScriptModule_to) (void* module, void* device, bool non_blocking);
-HOST_API void lantern_ScriptModule_to (void* module, void* device, bool non_blocking)
-{
-   _lantern_ScriptModule_to(module, device, non_blocking);
-  LANTERN_HOST_HANDLER;
+  LANTERN_API void (LANTERN_PTR _lantern_set_num_threads) (int n);
+  HOST_API void lantern_set_num_threads (int n)
+  {
+    _lantern_set_num_threads(n);
+    LANTERN_HOST_HANDLER;
+  }
   
-}
-
-LANTERN_API void (LANTERN_PTR _lantern_ScriptModule_set_optimized) (void* module, bool o);
-HOST_API void lantern_ScriptModule_set_optimized (void* module, bool o)
-{
-   _lantern_ScriptModule_set_optimized(module, o);
-  LANTERN_HOST_HANDLER;
+  LANTERN_API void (LANTERN_PTR _lantern_set_num_interop_threads) (int n);
+  HOST_API void lantern_set_num_interop_threads (int n)
+  {
+    _lantern_set_num_interop_threads(n);
+    LANTERN_HOST_HANDLER;
+  }
   
-}
-
-LANTERN_API bool (LANTERN_PTR _lantern_ScriptModule_is_training) (void* module);
-HOST_API bool lantern_ScriptModule_is_training (void* module)
-{
-  bool ret = _lantern_ScriptModule_is_training(module);
-  LANTERN_HOST_HANDLER;
-  return ret;
-}
-
-LANTERN_API bool (LANTERN_PTR _lantern_ScriptModule_is_optimized) (void* module);
-HOST_API bool lantern_ScriptModule_is_optimized (void* module)
-{
-  bool ret = _lantern_ScriptModule_is_optimized(module);
-  LANTERN_HOST_HANDLER;
-  return ret;
-}
-
-LANTERN_API void* (LANTERN_PTR _lantern_ScriptModule_modules) (void* module);
-HOST_API void* lantern_ScriptModule_modules (void* module)
-{
-  void* ret = _lantern_ScriptModule_modules(module);
-  LANTERN_HOST_HANDLER;
-  return ret;
-}
-
-LANTERN_API int (LANTERN_PTR _lantern_jit_named_module_list_size) (void* self);
-HOST_API int lantern_jit_named_module_list_size (void* self)
-{
-  int ret = _lantern_jit_named_module_list_size(self);
-  LANTERN_HOST_HANDLER;
-  return ret;
-}
-
-LANTERN_API void* (LANTERN_PTR _lantern_jit_named_module_list_module_at) (void* self, int64_t index);
-HOST_API void* lantern_jit_named_module_list_module_at (void* self, int64_t index)
-{
-  void* ret = _lantern_jit_named_module_list_module_at(self, index);
-  LANTERN_HOST_HANDLER;
-  return ret;
-}
-
-LANTERN_API void* (LANTERN_PTR _lantern_jit_named_module_list_names) (void* self);
-HOST_API void* lantern_jit_named_module_list_names (void* self)
-{
-  void* ret = _lantern_jit_named_module_list_names(self);
-  LANTERN_HOST_HANDLER;
-  return ret;
-}
-
-LANTERN_API void (LANTERN_PTR _lantern_jit_named_module_list_delete) (void* x);
-HOST_API void lantern_jit_named_module_list_delete (void* x)
-{
-   _lantern_jit_named_module_list_delete(x);
-  LANTERN_HOST_HANDLER;
+  LANTERN_API int (LANTERN_PTR _lantern_get_num_threads) ();
+  HOST_API int lantern_get_num_threads ()
+  {
+    int ret = _lantern_get_num_threads();
+    LANTERN_HOST_HANDLER;
+    return ret;
+  }
   
-}
-
-LANTERN_API void (LANTERN_PTR _lantern_ScriptModule_register_parameter) (void* module, void* name, void* v, bool is_buffer);
-HOST_API void lantern_ScriptModule_register_parameter (void* module, void* name, void* v, bool is_buffer)
-{
-   _lantern_ScriptModule_register_parameter(module, name, v, is_buffer);
-  LANTERN_HOST_HANDLER;
+  LANTERN_API int (LANTERN_PTR _lantern_get_num_interop_threads) ();
+  HOST_API int lantern_get_num_interop_threads ()
+  {
+    int ret = _lantern_get_num_interop_threads();
+    LANTERN_HOST_HANDLER;
+    return ret;
+  }
   
-}
-
-LANTERN_API void (LANTERN_PTR _lantern_ScriptModule_register_buffer) (void* module, void* name, void* v);
-HOST_API void lantern_ScriptModule_register_buffer (void* module, void* name, void* v)
-{
-   _lantern_ScriptModule_register_buffer(module, name, v);
-  LANTERN_HOST_HANDLER;
+  LANTERN_API void * (LANTERN_PTR _lantern_optional_vector_int64_t) (int64_t * x, size_t x_size, bool is_null);
+  HOST_API void* lantern_optional_vector_int64_t (int64_t * x, size_t x_size, bool is_null)
+  {
+    void* ret = _lantern_optional_vector_int64_t(x, x_size, is_null);
+    LANTERN_HOST_HANDLER;
+    return ret;
+  }
   
-}
-
-LANTERN_API void (LANTERN_PTR _lantern_ScriptModule_register_module) (void* self, void* name, void* module);
-HOST_API void lantern_ScriptModule_register_module (void* self, void* name, void* module)
-{
-   _lantern_ScriptModule_register_module(self, name, module);
-  LANTERN_HOST_HANDLER;
+  LANTERN_API void * (LANTERN_PTR _lantern_optional_vector_double) (double * x, size_t x_size, bool is_null);
+  HOST_API void* lantern_optional_vector_double (double * x, size_t x_size, bool is_null)
+  {
+    void* ret = _lantern_optional_vector_double(x, x_size, is_null);
+    LANTERN_HOST_HANDLER;
+    return ret;
+  }
   
-}
-
-LANTERN_API void (LANTERN_PTR _lantern_ScriptModule_register_attribute) (void* module, void* name, void* t, void* v, bool is_param, bool is_buffer);
-HOST_API void lantern_ScriptModule_register_attribute (void* module, void* name, void* t, void* v, bool is_param, bool is_buffer)
-{
-   _lantern_ScriptModule_register_attribute(module, name, t, v, is_param, is_buffer);
-  LANTERN_HOST_HANDLER;
+  LANTERN_API void (LANTERN_PTR _trace_r_nn_module) ();
+  HOST_API void trace_r_nn_module ()
+  {
+    _trace_r_nn_module();
+    LANTERN_HOST_HANDLER;
+  }
   
-}
-
-LANTERN_API void* (LANTERN_PTR _lantern_jit_named_buffer_list_names) (void* self);
-HOST_API void* lantern_jit_named_buffer_list_names (void* self)
-{
-  void* ret = _lantern_jit_named_buffer_list_names(self);
-  LANTERN_HOST_HANDLER;
-  return ret;
-}
-
-LANTERN_API void* (LANTERN_PTR _lantern_jit_named_buffer_list_tensors) (void* self);
-HOST_API void* lantern_jit_named_buffer_list_tensors (void* self)
-{
-  void* ret = _lantern_jit_named_buffer_list_tensors(self);
-  LANTERN_HOST_HANDLER;
-  return ret;
-}
-
-LANTERN_API int (LANTERN_PTR _lantern_jit_named_buffer_list_size) (void* self);
-HOST_API int lantern_jit_named_buffer_list_size (void* self)
-{
-  int ret = _lantern_jit_named_buffer_list_size(self);
-  LANTERN_HOST_HANDLER;
-  return ret;
-}
-
-LANTERN_API void* (LANTERN_PTR _lantern_ScriptModule_buffers) (void* module, bool recurse);
-HOST_API void* lantern_ScriptModule_buffers (void* module, bool recurse)
-{
-  void* ret = _lantern_ScriptModule_buffers(module, recurse);
-  LANTERN_HOST_HANDLER;
-  return ret;
-}
-
-LANTERN_API void (LANTERN_PTR _lantern_jit_named_buffer_list_delete) (void* x);
-HOST_API void lantern_jit_named_buffer_list_delete (void* x)
-{
-   _lantern_jit_named_buffer_list_delete(x);
-  LANTERN_HOST_HANDLER;
+  LANTERN_API void * (LANTERN_PTR _lantern_Stack_new) ();
+  HOST_API void * lantern_Stack_new ()
+  {
+    void* ret = _lantern_Stack_new();
+    LANTERN_HOST_HANDLER;
+    return ret;
+  }
   
-}
-
-LANTERN_API void* (LANTERN_PTR _lantern_ScriptModule_children) (void* module);
-HOST_API void* lantern_ScriptModule_children (void* module)
-{
-  void* ret = _lantern_ScriptModule_children(module);
-  LANTERN_HOST_HANDLER;
-  return ret;
-}
-
-LANTERN_API void (LANTERN_PTR _lantern_jit_ScriptMethod_delete) (void* x);
-HOST_API void lantern_jit_ScriptMethod_delete (void* x)
-{
-   _lantern_jit_ScriptMethod_delete(x);
-  LANTERN_HOST_HANDLER;
+  LANTERN_API void (LANTERN_PTR _lantern_Stack_delete) (void * x);
+  HOST_API void lantern_Stack_delete (void * x)
+  {
+    _lantern_Stack_delete(x);
+    LANTERN_HOST_HANDLER;
+  }
   
-}
-
-LANTERN_API void* (LANTERN_PTR _lantern_ScriptModule_find_method) (void* self, void* basename);
-HOST_API void* lantern_ScriptModule_find_method (void* self, void* basename)
-{
-  void* ret = _lantern_ScriptModule_find_method(self, basename);
-  LANTERN_HOST_HANDLER;
-  return ret;
-}
-
-LANTERN_API void* (LANTERN_PTR _lantern_ScriptMethod_call) (void* self, void* inputs);
-HOST_API void* lantern_ScriptMethod_call (void* self, void* inputs)
-{
-  void* ret = _lantern_ScriptMethod_call(self, inputs);
-  LANTERN_HOST_HANDLER;
-  return ret;
-}
-
-LANTERN_API int (LANTERN_PTR _lantern_IValue_type) (void* self);
-HOST_API int lantern_IValue_type (void* self)
-{
-  int ret = _lantern_IValue_type(self);
-  LANTERN_HOST_HANDLER;
-  return ret;
-}
-
-LANTERN_API bool (LANTERN_PTR _lantern_IValue_Bool) (void * self);
-HOST_API bool lantern_IValue_Bool (void * self)
-{
-  bool ret = _lantern_IValue_Bool(self);
-  LANTERN_HOST_HANDLER;
-  return ret;
-}
-
-LANTERN_API void* (LANTERN_PTR _lantern_IValue_BoolList) (void* self);
-HOST_API void* lantern_IValue_BoolList (void* self)
-{
-  void* ret = _lantern_IValue_BoolList(self);
-  LANTERN_HOST_HANDLER;
-  return ret;
-}
-
-LANTERN_API void* (LANTERN_PTR _lantern_IValue_Device) (void* self);
-HOST_API void* lantern_IValue_Device (void* self)
-{
-  void* ret = _lantern_IValue_Device(self);
-  LANTERN_HOST_HANDLER;
-  return ret;
-}
-
-LANTERN_API double (LANTERN_PTR _lantern_IValue_Double) (void* self);
-HOST_API double lantern_IValue_Double (void* self)
-{
-  double ret = _lantern_IValue_Double(self);
-  LANTERN_HOST_HANDLER;
-  return ret;
-}
-
-LANTERN_API void* (LANTERN_PTR _lantern_IValue_DoubleList) (void* self);
-HOST_API void* lantern_IValue_DoubleList (void* self)
-{
-  void* ret = _lantern_IValue_DoubleList(self);
-  LANTERN_HOST_HANDLER;
-  return ret;
-}
-
-LANTERN_API void* (LANTERN_PTR _lantern_IValue_Generator) (void* self);
-HOST_API void* lantern_IValue_Generator (void* self)
-{
-  void* ret = _lantern_IValue_Generator(self);
-  LANTERN_HOST_HANDLER;
-  return ret;
-}
-
-LANTERN_API void* (LANTERN_PTR _lantern_IValue_GenericDict) (void* self);
-HOST_API void* lantern_IValue_GenericDict (void* self)
-{
-  void* ret = _lantern_IValue_GenericDict(self);
-  LANTERN_HOST_HANDLER;
-  return ret;
-}
-
-LANTERN_API int64_t (LANTERN_PTR _lantern_IValue_Int) (void* self);
-HOST_API int64_t lantern_IValue_Int (void* self)
-{
-  int64_t ret = _lantern_IValue_Int(self);
-  LANTERN_HOST_HANDLER;
-  return ret;
-}
-
-LANTERN_API void* (LANTERN_PTR _lantern_IValue_IntList) (void* self);
-HOST_API void* lantern_IValue_IntList (void* self)
-{
-  void* ret = _lantern_IValue_IntList(self);
-  LANTERN_HOST_HANDLER;
-  return ret;
-}
-
-LANTERN_API void* (LANTERN_PTR _lantern_IValue_List) (void* self);
-HOST_API void* lantern_IValue_List (void* self)
-{
-  void* ret = _lantern_IValue_List(self);
-  LANTERN_HOST_HANDLER;
-  return ret;
-}
-
-LANTERN_API void* (LANTERN_PTR _lantern_IValue_Module) (void* self);
-HOST_API void* lantern_IValue_Module (void* self)
-{
-  void* ret = _lantern_IValue_Module(self);
-  LANTERN_HOST_HANDLER;
-  return ret;
-}
-
-LANTERN_API void* (LANTERN_PTR _lantern_IValue_Scalar) (void* self);
-HOST_API void* lantern_IValue_Scalar (void* self)
-{
-  void* ret = _lantern_IValue_Scalar(self);
-  LANTERN_HOST_HANDLER;
-  return ret;
-}
-
-LANTERN_API void* (LANTERN_PTR _lantern_IValue_String) (void* self);
-HOST_API void* lantern_IValue_String (void* self)
-{
-  void* ret = _lantern_IValue_String(self);
-  LANTERN_HOST_HANDLER;
-  return ret;
-}
-
-LANTERN_API void* (LANTERN_PTR _lantern_IValue_Tensor) (void* self);
-HOST_API void* lantern_IValue_Tensor (void* self)
-{
-  void* ret = _lantern_IValue_Tensor(self);
-  LANTERN_HOST_HANDLER;
-  return ret;
-}
-
-LANTERN_API void* (LANTERN_PTR _lantern_IValue_TensorList) (void* self);
-HOST_API void* lantern_IValue_TensorList (void* self)
-{
-  void* ret = _lantern_IValue_TensorList(self);
-  LANTERN_HOST_HANDLER;
-  return ret;
-}
-
-LANTERN_API void* (LANTERN_PTR _lantern_IValue_Tuple) (void* self);
-HOST_API void* lantern_IValue_Tuple (void* self)
-{
-  void* ret = _lantern_IValue_Tuple(self);
-  LANTERN_HOST_HANDLER;
-  return ret;
-}
-
-LANTERN_API void (LANTERN_PTR _lantern_GenericDict_delete) (void* x);
-HOST_API void lantern_GenericDict_delete (void* x)
-{
-   _lantern_GenericDict_delete(x);
-  LANTERN_HOST_HANDLER;
+  LANTERN_API int64_t (LANTERN_PTR _lantern_Stack_size) (void* self);
+  HOST_API int64_t lantern_Stack_size (void* self)
+  {
+    int64_t ret = _lantern_Stack_size(self);
+    LANTERN_HOST_HANDLER;
+    return ret;
+  }
   
-}
-
-LANTERN_API void (LANTERN_PTR _lantern_GenericList_delete) (void* x);
-HOST_API void lantern_GenericList_delete (void* x)
-{
-   _lantern_GenericList_delete(x);
-  LANTERN_HOST_HANDLER;
+  LANTERN_API void* (LANTERN_PTR _lantern_create_traceable_fun) (void *(*r_caller)(void *, void *), void* fn);
+  HOST_API void* lantern_create_traceable_fun (void *(*r_caller)(void *, void *), void* fn)
+  {
+    void* ret = _lantern_create_traceable_fun(r_caller, fn);
+    LANTERN_HOST_HANDLER;
+    return ret;
+  }
   
-}
-
-LANTERN_API void* (LANTERN_PTR _lantern_Stack_at) (void* self, int64_t index);
-HOST_API void* lantern_Stack_at (void* self, int64_t index)
-{
-  void* ret = _lantern_Stack_at(self, index);
-  LANTERN_HOST_HANDLER;
-  return ret;
-}
-
-LANTERN_API void* (LANTERN_PTR _lantern_IValue_from_Bool) (bool self);
-HOST_API void* lantern_IValue_from_Bool (bool self)
-{
-  void* ret = _lantern_IValue_from_Bool(self);
-  LANTERN_HOST_HANDLER;
-  return ret;
-}
-
-LANTERN_API void* (LANTERN_PTR _lantern_IValue_from_BoolList) (void* self);
-HOST_API void* lantern_IValue_from_BoolList (void* self)
-{
-  void* ret = _lantern_IValue_from_BoolList(self);
-  LANTERN_HOST_HANDLER;
-  return ret;
-}
-
-LANTERN_API void* (LANTERN_PTR _lantern_IValue_from_Device) (void* self);
-HOST_API void* lantern_IValue_from_Device (void* self)
-{
-  void* ret = _lantern_IValue_from_Device(self);
-  LANTERN_HOST_HANDLER;
-  return ret;
-}
-
-LANTERN_API void* (LANTERN_PTR _lantern_IValue_from_Double) (double self);
-HOST_API void* lantern_IValue_from_Double (double self)
-{
-  void* ret = _lantern_IValue_from_Double(self);
-  LANTERN_HOST_HANDLER;
-  return ret;
-}
-
-LANTERN_API void* (LANTERN_PTR _lantern_IValue_from_DoubleList) (void* self);
-HOST_API void* lantern_IValue_from_DoubleList (void* self)
-{
-  void* ret = _lantern_IValue_from_DoubleList(self);
-  LANTERN_HOST_HANDLER;
-  return ret;
-}
-
-LANTERN_API void* (LANTERN_PTR _lantern_IValue_from_Generator) (void* self);
-HOST_API void* lantern_IValue_from_Generator (void* self)
-{
-  void* ret = _lantern_IValue_from_Generator(self);
-  LANTERN_HOST_HANDLER;
-  return ret;
-}
-
-LANTERN_API void* (LANTERN_PTR _lantern_IValue_from_GenericDict) (void* self);
-HOST_API void* lantern_IValue_from_GenericDict (void* self)
-{
-  void* ret = _lantern_IValue_from_GenericDict(self);
-  LANTERN_HOST_HANDLER;
-  return ret;
-}
-
-LANTERN_API void* (LANTERN_PTR _lantern_IValue_from_Int) (int64_t self);
-HOST_API void* lantern_IValue_from_Int (int64_t self)
-{
-  void* ret = _lantern_IValue_from_Int(self);
-  LANTERN_HOST_HANDLER;
-  return ret;
-}
-
-LANTERN_API void* (LANTERN_PTR _lantern_IValue_from_IntList) (void* self);
-HOST_API void* lantern_IValue_from_IntList (void* self)
-{
-  void* ret = _lantern_IValue_from_IntList(self);
-  LANTERN_HOST_HANDLER;
-  return ret;
-}
-
-LANTERN_API void* (LANTERN_PTR _lantern_IValue_from_List) (void* self);
-HOST_API void* lantern_IValue_from_List (void* self)
-{
-  void* ret = _lantern_IValue_from_List(self);
-  LANTERN_HOST_HANDLER;
-  return ret;
-}
-
-LANTERN_API void* (LANTERN_PTR _lantern_IValue_from_Module) (void* self);
-HOST_API void* lantern_IValue_from_Module (void* self)
-{
-  void* ret = _lantern_IValue_from_Module(self);
-  LANTERN_HOST_HANDLER;
-  return ret;
-}
-
-LANTERN_API void* (LANTERN_PTR _lantern_IValue_from_Scalar) (void* self);
-HOST_API void* lantern_IValue_from_Scalar (void* self)
-{
-  void* ret = _lantern_IValue_from_Scalar(self);
-  LANTERN_HOST_HANDLER;
-  return ret;
-}
-
-LANTERN_API void* (LANTERN_PTR _lantern_IValue_from_String) (void* self);
-HOST_API void* lantern_IValue_from_String (void* self)
-{
-  void* ret = _lantern_IValue_from_String(self);
-  LANTERN_HOST_HANDLER;
-  return ret;
-}
-
-LANTERN_API void* (LANTERN_PTR _lantern_IValue_from_Tensor) (void* self);
-HOST_API void* lantern_IValue_from_Tensor (void* self)
-{
-  void* ret = _lantern_IValue_from_Tensor(self);
-  LANTERN_HOST_HANDLER;
-  return ret;
-}
-
-LANTERN_API void* (LANTERN_PTR _lantern_IValue_from_TensorList) (void* self);
-HOST_API void* lantern_IValue_from_TensorList (void* self)
-{
-  void* ret = _lantern_IValue_from_TensorList(self);
-  LANTERN_HOST_HANDLER;
-  return ret;
-}
-
-LANTERN_API int64_t (LANTERN_PTR _lantern_vector_int64_t_size) (void* self);
-HOST_API int64_t lantern_vector_int64_t_size (void* self)
-{
-  int64_t ret = _lantern_vector_int64_t_size(self);
-  LANTERN_HOST_HANDLER;
-  return ret;
-}
-
-LANTERN_API int64_t (LANTERN_PTR _lantern_vector_int64_t_at) (void* self, int64_t index);
-HOST_API int64_t lantern_vector_int64_t_at (void* self, int64_t index)
-{
-  int64_t ret = _lantern_vector_int64_t_at(self, index);
-  LANTERN_HOST_HANDLER;
-  return ret;
-}
-
-LANTERN_API double (LANTERN_PTR _lantern_vector_double_size) (void* self);
-HOST_API double lantern_vector_double_size (void* self)
-{
-  double ret = _lantern_vector_double_size(self);
-  LANTERN_HOST_HANDLER;
-  return ret;
-}
-
-LANTERN_API double (LANTERN_PTR _lantern_vector_double_at) (void* self, int64_t index);
-HOST_API double lantern_vector_double_at (void* self, int64_t index)
-{
-  double ret = _lantern_vector_double_at(self, index);
-  LANTERN_HOST_HANDLER;
-  return ret;
-}
-
-LANTERN_API void (LANTERN_PTR _lantern_vector_double_delete) (void* x);
-HOST_API void lantern_vector_double_delete (void* x)
-{
-   _lantern_vector_double_delete(x);
-  LANTERN_HOST_HANDLER;
+  LANTERN_API void* (LANTERN_PTR _lantern_trace_fn) (void* fn, void* inputs, void* compilation_unit, bool strict, void* module, void* name, bool should_mangle);
+  HOST_API void* lantern_trace_fn (void* fn, void* inputs, void* compilation_unit, bool strict, void* module, void* name, bool should_mangle)
+  {
+    void* ret = _lantern_trace_fn(fn, inputs, compilation_unit, strict, module, name, should_mangle);
+    LANTERN_HOST_HANDLER;
+    return ret;
+  }
   
-}
-
-LANTERN_API void (LANTERN_PTR _lantern_vector_int64_t2_delete) (void* x);
-HOST_API void lantern_vector_int64_t2_delete (void* x)
-{
-   _lantern_vector_int64_t2_delete(x);
-  LANTERN_HOST_HANDLER;
+  LANTERN_API void* (LANTERN_PTR _lantern_call_traced_fn) (void* fn, void* inputs);
+  HOST_API void* lantern_call_traced_fn(void* fn, void* inputs)
+  {
+    void* ret = _lantern_call_traced_fn(fn, inputs);
+    LANTERN_HOST_HANDLER;
+    return ret;
+  }
   
-}
-
-LANTERN_API void* (LANTERN_PTR _lantern_vector_double_new) ();
-HOST_API void* lantern_vector_double_new ()
-{
-  void* ret = _lantern_vector_double_new();
-  LANTERN_HOST_HANDLER;
-  return ret;
-}
-
-LANTERN_API void* (LANTERN_PTR _lantern_vector_int64_t_new) ();
-HOST_API void* lantern_vector_int64_t_new ()
-{
-  void* ret = _lantern_vector_int64_t_new();
-  LANTERN_HOST_HANDLER;
-  return ret;
-}
-
-LANTERN_API void (LANTERN_PTR _lantern_vector_double_push_back) (void* self, double x);
-HOST_API void lantern_vector_double_push_back (void* self, double x)
-{
-   _lantern_vector_double_push_back(self, x);
-  LANTERN_HOST_HANDLER;
+  LANTERN_API void* (LANTERN_PTR _lantern_CompilationUnit_new) ();
+  HOST_API void* lantern_CompilationUnit_new ()
+  {
+    void* ret = _lantern_CompilationUnit_new();
+    LANTERN_HOST_HANDLER;
+    return ret;
+  }
   
-}
-
-LANTERN_API void (LANTERN_PTR _lantern_vector_int64_t_push_back) (void* self, int64_t x);
-HOST_API void lantern_vector_int64_t_push_back (void* self, int64_t x)
-{
-   _lantern_vector_int64_t_push_back(self, x);
-  LANTERN_HOST_HANDLER;
+  LANTERN_API void (LANTERN_PTR _lantern_CompilationUnit_delete) (void* x);
+  HOST_API void lantern_CompilationUnit_delete (void* x)
+  {
+    _lantern_CompilationUnit_delete(x);
+    LANTERN_HOST_HANDLER;
+  }
   
-}
-
-LANTERN_API const char * (LANTERN_PTR _lantern_string_get) (void* self);
-HOST_API const char * lantern_string_get (void* self)
-{
-  const char * ret = _lantern_string_get(self);
-  LANTERN_HOST_HANDLER;
-  return ret;
-}
-
-LANTERN_API void (LANTERN_PTR _lantern_jit_Tuple_delete) (void *x);
-HOST_API void lantern_jit_Tuple_delete (void *x)
-{
-   _lantern_jit_Tuple_delete(x);
-  LANTERN_HOST_HANDLER;
+  LANTERN_API void (LANTERN_PTR _lantern_traced_fn_save) (void* fn, const char * filename);
+  HOST_API void lantern_traced_fn_save (void* fn, const char * filename)
+  {
+    _lantern_traced_fn_save(fn, filename);
+    LANTERN_HOST_HANDLER;
+  }
   
-}
-
-LANTERN_API void* (LANTERN_PTR _lantern_IValue_from_Tuple) (void* self);
-HOST_API void* lantern_IValue_from_Tuple (void* self)
-{
-  void* ret = _lantern_IValue_from_Tuple(self);
-  LANTERN_HOST_HANDLER;
-  return ret;
-}
-
-LANTERN_API void* (LANTERN_PTR _lantern_jit_Tuple_new) ();
-HOST_API void* lantern_jit_Tuple_new ()
-{
-  void* ret = _lantern_jit_Tuple_new();
-  LANTERN_HOST_HANDLER;
-  return ret;
-}
-
-LANTERN_API void (LANTERN_PTR _lantern_jit_Tuple_push_back) (void* self, void* element);
-HOST_API void lantern_jit_Tuple_push_back (void* self, void* element)
-{
-   _lantern_jit_Tuple_push_back(self, element);
-  LANTERN_HOST_HANDLER;
+  LANTERN_API const char * (LANTERN_PTR _lantern_traced_fn_graph_print) (void* fn);
+  HOST_API const char * lantern_traced_fn_graph_print (void* fn)
+  {
+    const char * ret = _lantern_traced_fn_graph_print(fn);
+    LANTERN_HOST_HANDLER;
+    return ret;
+  }
   
-}
-
-LANTERN_API int64_t (LANTERN_PTR _lantern_jit_Tuple_size) (void* self);
-HOST_API int64_t lantern_jit_Tuple_size (void* self)
-{
-  int64_t ret = _lantern_jit_Tuple_size(self);
-  LANTERN_HOST_HANDLER;
-  return ret;
-}
-
-LANTERN_API void* (LANTERN_PTR _lantern_jit_Tuple_at) (void* self, int64_t index);
-HOST_API void* lantern_jit_Tuple_at (void* self, int64_t index)
-{
-  void* ret = _lantern_jit_Tuple_at(self, index);
-  LANTERN_HOST_HANDLER;
-  return ret;
-}
-
-LANTERN_API void (LANTERN_PTR _lantern_jit_TensorDict_delete) (void *x);
-HOST_API void lantern_jit_TensorDict_delete (void *x)
-{
-   _lantern_jit_TensorDict_delete(x);
-  LANTERN_HOST_HANDLER;
+  LANTERN_API bool (LANTERN_PTR _lantern_Tensor_has_any_zeros) (void * self);
+  HOST_API bool lantern_Tensor_has_any_zeros (void* self)
+  {
+    bool ret = _lantern_Tensor_has_any_zeros(self);
+    LANTERN_HOST_HANDLER;
+    return ret;
+  }
   
-}
-
-LANTERN_API void (LANTERN_PTR _lantern_jit_GenericDict_delete) (void *x);
-HOST_API void lantern_jit_GenericDict_delete (void *x)
-{
-   _lantern_jit_GenericDict_delete(x);
-  LANTERN_HOST_HANDLER;
+  LANTERN_API void* (LANTERN_PTR _lantern_jit_load) (const char * path);
+  HOST_API void* lantern_jit_load (const char * path)
+  {
+    void* ret = _lantern_jit_load(path);
+    LANTERN_HOST_HANDLER;
+    return ret;
+  }
   
-}
-
-LANTERN_API void (LANTERN_PTR _lantern_jit_GenericList_delete) (void *x);
-HOST_API void lantern_jit_GenericList_delete (void *x)
-{
-   _lantern_jit_GenericList_delete(x);
-  LANTERN_HOST_HANDLER;
+  LANTERN_API void* (LANTERN_PTR _lantern_call_jit_script) (void* module, void* inputs);
+  HOST_API void* lantern_call_jit_script (void* module, void* inputs)
+  {
+    void* ret = _lantern_call_jit_script(module, inputs);
+    LANTERN_HOST_HANDLER;
+    return ret;
+  }
   
-}
-
-LANTERN_API void* (LANTERN_PTR _lantern_jit_TensorDict_new) ();
-HOST_API void* lantern_jit_TensorDict_new ()
-{
-  void* ret = _lantern_jit_TensorDict_new();
-  LANTERN_HOST_HANDLER;
-  return ret;
-}
-
-LANTERN_API void (LANTERN_PTR _lantern_jit_TensorDict_push_back) (void* self, void* key, void* value);
-HOST_API void lantern_jit_TensorDict_push_back (void* self, void* key, void* value)
-{
-   _lantern_jit_TensorDict_push_back(self, key, value);
-  LANTERN_HOST_HANDLER;
+  LANTERN_API void (LANTERN_PTR _lantern_JITModule_delete) (void* x);
+  HOST_API void lantern_JITModule_delete (void* x)
+  {
+    _lantern_JITModule_delete(x);
+    LANTERN_HOST_HANDLER;
+  }
   
-}
-
-LANTERN_API void* (LANTERN_PTR _lantern_jit_GenericDict_keys) (void* self);
-HOST_API void* lantern_jit_GenericDict_keys (void* self)
-{
-  void* ret = _lantern_jit_GenericDict_keys(self);
-  LANTERN_HOST_HANDLER;
-  return ret;
-}
-
-LANTERN_API void* (LANTERN_PTR _lantern_jit_GenericDict_at) (void* self, void* key);
-HOST_API void* lantern_jit_GenericDict_at (void* self, void* key)
-{
-  void* ret = _lantern_jit_GenericDict_at(self, key);
-  LANTERN_HOST_HANDLER;
-  return ret;
-}
-
-LANTERN_API int64_t (LANTERN_PTR _lantern_jit_GenericList_size) (void* self);
-HOST_API int64_t lantern_jit_GenericList_size (void* self)
-{
-  int64_t ret = _lantern_jit_GenericList_size(self);
-  LANTERN_HOST_HANDLER;
-  return ret;
-}
-
-LANTERN_API void* (LANTERN_PTR _lantern_jit_GenericList_at) (void* self, int64_t index);
-HOST_API void* lantern_jit_GenericList_at (void* self, int64_t index)
-{
-  void* ret = _lantern_jit_GenericList_at(self, index);
-  LANTERN_HOST_HANDLER;
-  return ret;
-}
-
-LANTERN_API void* (LANTERN_PTR _lantern_IValue_from_TensorDict) (void* self);
-HOST_API void* lantern_IValue_from_TensorDict (void* self)
-{
-  void* ret = _lantern_IValue_from_TensorDict(self);
-  LANTERN_HOST_HANDLER;
-  return ret;
-}
-
-LANTERN_API void (LANTERN_PTR _lantern_jit_vector_IValue_delete) (void* x);
-HOST_API void lantern_jit_vector_IValue_delete (void* x)
-{
-   _lantern_jit_vector_IValue_delete(x);
-  LANTERN_HOST_HANDLER;
+  LANTERN_API void (LANTERN_PTR _lantern_TraceableFunction_delete) (void* x);
+  HOST_API void lantern_TraceableFunction_delete (void* x)
+  {
+    _lantern_TraceableFunction_delete(x);
+    LANTERN_HOST_HANDLER;
+  }
   
-}
-
-LANTERN_API int64_t (LANTERN_PTR _lantern_jit_vector_IValue_size) (void* self);
-HOST_API int64_t lantern_jit_vector_IValue_size (void* self)
-{
-  int64_t ret = _lantern_jit_vector_IValue_size(self);
-  LANTERN_HOST_HANDLER;
-  return ret;
-}
-
-LANTERN_API void* (LANTERN_PTR _lantern_jit_vector_IValue_at) (void* self, int64_t index);
-HOST_API void* lantern_jit_vector_IValue_at (void* self, int64_t index)
-{
-  void* ret = _lantern_jit_vector_IValue_at(self, index);
-  LANTERN_HOST_HANDLER;
-  return ret;
-}
-
-LANTERN_API void* (LANTERN_PTR _lantern_jit_NamedTuple_new) ();
-HOST_API void* lantern_jit_NamedTuple_new ()
-{
-  void* ret = _lantern_jit_NamedTuple_new();
-  LANTERN_HOST_HANDLER;
-  return ret;
-}
-
-LANTERN_API void (LANTERN_PTR _lantern_jit_NamedTuple_push_back) (void* self, void* name, void* element);
-HOST_API void lantern_jit_NamedTuple_push_back (void* self, void* name, void* element)
-{
-   _lantern_jit_NamedTuple_push_back(self, name, element);
-  LANTERN_HOST_HANDLER;
+  LANTERN_API void (LANTERN_PTR _set_lantern_allocator) (void (*r_gc) (), uint64_t threshold_mb);
+  HOST_API void set_lantern_allocator (void (*r_gc) (), uint64_t threshold_mb)
+  {
+    _set_lantern_allocator(r_gc, threshold_mb);
+    LANTERN_HOST_HANDLER;
+  }
   
-}
-
-LANTERN_API void* (LANTERN_PTR _lantern_jit_NamedTupleHelper_keys) (void* self);
-HOST_API void* lantern_jit_NamedTupleHelper_keys (void* self)
-{
-  void* ret = _lantern_jit_NamedTupleHelper_keys(self);
-  LANTERN_HOST_HANDLER;
-  return ret;
-}
-
-LANTERN_API void* (LANTERN_PTR _lantern_jit_NamedTupleHelper_elements) (void* self);
-HOST_API void* lantern_jit_NamedTupleHelper_elements (void* self)
-{
-  void* ret = _lantern_jit_NamedTupleHelper_elements(self);
-  LANTERN_HOST_HANDLER;
-  return ret;
-}
-
-LANTERN_API void* (LANTERN_PTR _lantern_IValue_from_NamedTuple) (void* self);
-HOST_API void* lantern_IValue_from_NamedTuple (void* self)
-{
-  void* ret = _lantern_IValue_from_NamedTuple(self);
-  LANTERN_HOST_HANDLER;
-  return ret;
-}
-
-LANTERN_API void (LANTERN_PTR _lantern_NamedTupleHelper_delete) (void* x);
-HOST_API void lantern_NamedTupleHelper_delete (void* x)
-{
-   _lantern_NamedTupleHelper_delete(x);
-  LANTERN_HOST_HANDLER;
+  LANTERN_API void (LANTERN_PTR _lantern_vector_bool_delete) (void* x);
+  HOST_API void lantern_vector_bool_delete (void* x)
+  {
+    _lantern_vector_bool_delete(x);
+    LANTERN_HOST_HANDLER;
+  }
   
-}
-
-LANTERN_API void (LANTERN_PTR _lantern_Stack_push_back_IValue) (void* self, void* x);
-HOST_API void lantern_Stack_push_back_IValue (void* self, void* x)
-{
-   _lantern_Stack_push_back_IValue(self, x);
-  LANTERN_HOST_HANDLER;
+  LANTERN_API void* (LANTERN_PTR _lantern_normal_double_double_intarrayref_generator_tensoroptions) (double mean, double std, void* size, void* generator, void* options);
+  HOST_API void* lantern_normal_double_double_intarrayref_generator_tensoroptions (double mean, double std, void* size, void* generator, void* options) 
+  {
+    void* ret = _lantern_normal_double_double_intarrayref_generator_tensoroptions(mean, std, size, generator, options);
+    LANTERN_HOST_HANDLER 
+      return ret;
+  }
   
-}
-
-LANTERN_API void (LANTERN_PTR _lantern_FunctionPtr_delete) (void* x);
-HOST_API void lantern_FunctionPtr_delete (void* x)
-{
-   _lantern_FunctionPtr_delete(x);
-  LANTERN_HOST_HANDLER;
+  LANTERN_API void* (LANTERN_PTR _lantern_normal_tensor_tensor_generator) (void* mean, void* std, void* generator);
+  HOST_API void* lantern_normal_tensor_tensor_generator (void* mean, void* std, void* generator)
+  {
+    void* ret = _lantern_normal_tensor_tensor_generator(mean, std, generator);
+    LANTERN_HOST_HANDLER 
+      return ret;
+  }
   
-}
-
-LANTERN_API void* (LANTERN_PTR _lantern_IValue_from_None) ();
-HOST_API void* lantern_IValue_from_None ()
-{
-  void* ret = _lantern_IValue_from_None();
-  LANTERN_HOST_HANDLER;
-  return ret;
-}
-
-LANTERN_API void* (LANTERN_PTR _lantern_jit_compile_get_method) (void* cu, void* name);
-HOST_API void* lantern_jit_compile_get_method (void* cu, void* name)
-{
-  void* ret = _lantern_jit_compile_get_method(cu, name);
-  LANTERN_HOST_HANDLER;
-  return ret;
-}
-
-LANTERN_API void* (LANTERN_PTR _lantern_jit_compile_list_methods) (void* cu);
-HOST_API void* lantern_jit_compile_list_methods (void* cu)
-{
-  void* ret = _lantern_jit_compile_list_methods(cu);
-  LANTERN_HOST_HANDLER;
-  return ret;
-}
-
-LANTERN_API void* (LANTERN_PTR _lantern_jit_compile) (void* source, void* cu);
-HOST_API void* lantern_jit_compile (void* source, void* cu)
-{
-  void* ret = _lantern_jit_compile(source, cu);
-  LANTERN_HOST_HANDLER;
-  return ret;
-}
-
-LANTERN_API void* (LANTERN_PTR _lantern_ScriptModule_new) (void* cu, void* name);
-HOST_API void* lantern_ScriptModule_new (void* cu, void* name)
-{
-  void* ret = _lantern_ScriptModule_new(cu, name);
-  LANTERN_HOST_HANDLER;
-  return ret;
-}
-
-LANTERN_API void (LANTERN_PTR _lantern_ScriptModule_add_constant) (void* self, void* name, void* value);
-HOST_API void lantern_ScriptModule_add_constant (void* self, void* name, void* value)
-{
-   _lantern_ScriptModule_add_constant(self, name, value);
-  LANTERN_HOST_HANDLER;
+  LANTERN_API void* (LANTERN_PTR _lantern_normal_double_tensor_generator) (double mean, void* std, void* generator);
+  HOST_API void* lantern_normal_double_tensor_generator (double mean, void* std, void* generator)
+  {
+    void* ret = _lantern_normal_double_tensor_generator(mean, std, generator);
+    LANTERN_HOST_HANDLER 
+      return ret;
+  }
   
-}
-
-LANTERN_API void* (LANTERN_PTR _lantern_ScriptModule_find_constant) (void* self, void* name);
-HOST_API void* lantern_ScriptModule_find_constant (void* self, void* name)
-{
-  void* ret = _lantern_ScriptModule_find_constant(self, name);
-  LANTERN_HOST_HANDLER;
-  return ret;
-}
-
-LANTERN_API void (LANTERN_PTR _lantern_ScriptModule_add_method) (void* self, void* method);
-HOST_API void lantern_ScriptModule_add_method (void* self, void* method)
-{
-   _lantern_ScriptModule_add_method(self, method);
-  LANTERN_HOST_HANDLER;
+  LANTERN_API void* (LANTERN_PTR _lantern_normal_tensor_double_generator) (void* mean, double std, void* generator);
+  HOST_API void* lantern_normal_tensor_double_generator (void* mean, double std, void* generator)
+  {
+    void* ret = _lantern_normal_tensor_double_generator(mean, std, generator);
+    LANTERN_HOST_HANDLER 
+      return ret;
+  }
   
-}
-
-LANTERN_API void (LANTERN_PTR _lantern_ScriptModule_save) (void* self, void* path);
-HOST_API void lantern_ScriptModule_save (void* self, void* path)
-{
-   _lantern_ScriptModule_save(self, path);
-  LANTERN_HOST_HANDLER;
+  LANTERN_API void (LANTERN_PTR _lantern_vector_void_delete) (void* x);
+  HOST_API void lantern_vector_void_delete (void* x)
+  {
+    _lantern_vector_void_delete(x);
+    LANTERN_HOST_HANDLER;
+  }
   
-}
-
-LANTERN_API void* (LANTERN_PTR _lantern_vector_Scalar_new) ();
-HOST_API void* lantern_vector_Scalar_new ()
-{
-  void* ret = _lantern_vector_Scalar_new();
-  LANTERN_HOST_HANDLER;
-  return ret;
-}
-
-LANTERN_API void (LANTERN_PTR _lantern_vector_Scalar_push_back) (void* self, void* value);
-HOST_API void lantern_vector_Scalar_push_back (void* self, void* value)
-{
-   _lantern_vector_Scalar_push_back(self, value);
-  LANTERN_HOST_HANDLER;
+  //LANTERN_API bool (LANTERN_PTR _lantern_autograd_is_enabled) ();
+  bool lantern_autograd_is_enabled ();
   
-}
-
-LANTERN_API int64_t (LANTERN_PTR _lantern_vector_Scalar_size) (void* self);
-HOST_API int64_t lantern_vector_Scalar_size (void* self)
-{
-  int64_t ret = _lantern_vector_Scalar_size(self);
-  LANTERN_HOST_HANDLER;
-  return ret;
-}
-
-LANTERN_API void* (LANTERN_PTR _lantern_vector_Scalar_at) (void* self, int64_t index);
-HOST_API void* lantern_vector_Scalar_at (void* self, int64_t index)
-{
-  void* ret = _lantern_vector_Scalar_at(self, index);
-  LANTERN_HOST_HANDLER;
-  return ret;
-}
-
-LANTERN_API void (LANTERN_PTR _lantern_vector_Scalar_delete) (void* x);
-HOST_API void lantern_vector_Scalar_delete (void* x)
-{
-   _lantern_vector_Scalar_delete(x);
-  LANTERN_HOST_HANDLER;
+  LANTERN_API void (LANTERN_PTR _lantern_print_stuff) (void* x);
+  HOST_API void lantern_print_stuff (void* x) {
+    _lantern_print_stuff (x);
+    LANTERN_HOST_HANDLER;
+  }
   
-}
-
-LANTERN_API void* (LANTERN_PTR _lantern_contrib_sort_vertices) (void* vertices, void* mask, void* num_valid);
-HOST_API void* lantern_contrib_sort_vertices(void* vertices, void* mask, void* num_valid)
-{
-  void* ret = _lantern_contrib_sort_vertices(vertices, mask, num_valid);
-  LANTERN_HOST_HANDLER;
-  return ret;
-}
-
-LANTERN_API void* (LANTERN_PTR _lantern_ScriptMethod_graph_print) (void* self);
-HOST_API void* lantern_ScriptMethod_graph_print (void* self)
-{
-  void* ret = _lantern_ScriptMethod_graph_print(self);
-  LANTERN_HOST_HANDLER;
-  return ret;
-}
-
-LANTERN_API void (LANTERN_PTR _lantern_autograd_set_detect_anomaly) (bool enabled);
-HOST_API void lantern_autograd_set_detect_anomaly (bool enabled)
-{
-   _lantern_autograd_set_detect_anomaly(enabled);
-  LANTERN_HOST_HANDLER;
+  LANTERN_API void* (LANTERN_PTR _lantern_nn_functional_pad_circular) (void* input, void* padding);
+  HOST_API void* lantern_nn_functional_pad_circular (void* input, void* padding)
+  {
+    void* ret = _lantern_nn_functional_pad_circular(input, padding);
+    LANTERN_HOST_HANDLER;
+    return ret;
+  }
   
-}
-
-LANTERN_API bool (LANTERN_PTR _lantern_autograd_detect_anomaly_is_enabled) ();
-HOST_API bool lantern_autograd_detect_anomaly_is_enabled ()
-{
-  bool ret = _lantern_autograd_detect_anomaly_is_enabled();
-  LANTERN_HOST_HANDLER;
-  return ret;
-}
-
-LANTERN_API void* (LANTERN_PTR _lantern_get_default_Generator) ();
-HOST_API void* lantern_get_default_Generator ()
-{
-  void* ret = _lantern_get_default_Generator();
-  LANTERN_HOST_HANDLER;
-  return ret;
-}
-
-LANTERN_API void* (LANTERN_PTR _lantern_last_executed_optimized_graph_print) ();
-HOST_API void* lantern_last_executed_optimized_graph_print ()
-{
-  void* ret = _lantern_last_executed_optimized_graph_print();
-  LANTERN_HOST_HANDLER;
-  return ret;
-}
-
-LANTERN_API bool (LANTERN_PTR _lantern_TensorIndex_is_empty) (void* self);
-HOST_API bool lantern_TensorIndex_is_empty (void* self)
-{
-  bool ret = _lantern_TensorIndex_is_empty(self);
-  LANTERN_HOST_HANDLER;
-  return ret;
-}
-
-LANTERN_API void (LANTERN_PTR _lantern_OptionalTensorList_delete) (void* x);
-HOST_API void lantern_OptionalTensorList_delete (void* x)
-{
-   _lantern_OptionalTensorList_delete(x);
-  LANTERN_HOST_HANDLER;
+  LANTERN_API bool (LANTERN_PTR _lantern_backend_has_mkl) ();
+  HOST_API bool lantern_backend_has_mkl ()
+  {
+    bool ret = _lantern_backend_has_mkl();
+    LANTERN_HOST_HANDLER;
+    return ret;
+  }
   
-}
-
-LANTERN_API int64_t (LANTERN_PTR _lantern_OptionalTensorList_size) (void* self);
-HOST_API int64_t lantern_OptionalTensorList_size (void* self)
-{
-  int64_t ret = _lantern_OptionalTensorList_size(self);
-  LANTERN_HOST_HANDLER;
-  return ret;
-}
-
-LANTERN_API void* (LANTERN_PTR _lantern_OptionalTensorList_at) (void* self, int64_t i);
-HOST_API void* lantern_OptionalTensorList_at (void* self, int64_t i)
-{
-  void* ret = _lantern_OptionalTensorList_at(self, i);
-  LANTERN_HOST_HANDLER;
-  return ret;
-}
-
-LANTERN_API bool (LANTERN_PTR _lantern_OptionalTensorList_at_is_null) (void* self, int64_t i);
-HOST_API bool lantern_OptionalTensorList_at_is_null (void* self, int64_t i)
-{
-  bool ret = _lantern_OptionalTensorList_at_is_null(self, i);
-  LANTERN_HOST_HANDLER;
-  return ret;
-}
-
-LANTERN_API void* (LANTERN_PTR _lantern_optional_tensor_value) (void* x);
-HOST_API void* lantern_optional_tensor_value (void* x)
-{
-  void* ret = _lantern_optional_tensor_value(x);
-  LANTERN_HOST_HANDLER;
-  return ret;
-}
-
+  LANTERN_API bool (LANTERN_PTR _lantern_backend_has_openmp) ();
+  HOST_API bool lantern_backend_has_openmp ()
+  {
+    bool ret = _lantern_backend_has_openmp();
+    LANTERN_HOST_HANDLER;
+    return ret;
+  }
+  
+  LANTERN_API bool (LANTERN_PTR _lantern_backend_has_lapack) ();
+  HOST_API bool lantern_backend_has_lapack ()
+  {
+    bool ret = _lantern_backend_has_lapack();
+    LANTERN_HOST_HANDLER;
+    return ret;
+  }
+  
+  LANTERN_API bool (LANTERN_PTR _lantern_backend_has_mkldnn) ();
+  HOST_API bool lantern_backend_has_mkldnn ()
+  {
+    bool ret = _lantern_backend_has_mkldnn();
+    LANTERN_HOST_HANDLER;
+    return ret;
+  }
+  
+  LANTERN_API void* (LANTERN_PTR _lantern_OptionalTensorList) ();
+  HOST_API void* lantern_OptionalTensorList ()
+  {
+    void* ret = _lantern_OptionalTensorList();
+    LANTERN_HOST_HANDLER;
+    return ret;
+  }
+  
+  LANTERN_API void (LANTERN_PTR _lantern_OptionalTensorList_push_back) (void* self, void* x, bool is_null);
+  HOST_API void lantern_OptionalTensorList_push_back (void* self, void* x, bool is_null)
+  {
+    _lantern_OptionalTensorList_push_back(self, x, is_null);
+    LANTERN_HOST_HANDLER;
+  }
+  
+  LANTERN_API void* (LANTERN_PTR _lantern_Stream) ();
+  HOST_API void* lantern_Stream ()
+  {
+    void* ret = _lantern_Stream();
+    LANTERN_HOST_HANDLER;
+    return ret;
+  }
+  
+  LANTERN_API void (LANTERN_PTR _lantern_optional_tensor_delete) (void* x);
+  HOST_API void lantern_optional_tensor_delete (void* x)
+  {
+    _lantern_optional_tensor_delete(x);
+    LANTERN_HOST_HANDLER;
+  }
+  
+  LANTERN_API void* (LANTERN_PTR _lantern_optional_tensor) (void*x, bool is_null);
+  HOST_API void* lantern_optional_tensor (void* x, bool is_null)
+  {
+    void* ret = _lantern_optional_tensor(x, is_null);
+    LANTERN_HOST_HANDLER;
+    return ret;
+  }
+  
+  LANTERN_API bool (LANTERN_PTR _lantern_optional_tensor_has_value) (void*x);
+  HOST_API bool lantern_optional_tensor_has_value (void* x)
+  {
+    bool ret = _lantern_optional_tensor_has_value(x);
+    LANTERN_HOST_HANDLER;
+    return ret;
+  }
+  
+  LANTERN_API void* (LANTERN_PTR _lantern_OptionalDevice_from_device) (void *x, bool is_null);
+  HOST_API void* lantern_OptionalDevice_from_device (void *x, bool is_null)
+  {
+    void * ret = _lantern_OptionalDevice_from_device(x, is_null);
+    LANTERN_HOST_HANDLER;
+    return ret;
+  }
+  
+  LANTERN_API void (LANTERN_PTR _lantern_optional_device_delete) (void*x);
+  HOST_API void lantern_optional_device_delete (void* x)
+  {
+    _lantern_optional_device_delete(x);
+    LANTERN_HOST_HANDLER;
+  }
+  
+  LANTERN_API void (LANTERN_PTR _lantern_tensor_set_pyobj) (void*x, void* ptr);
+  HOST_API void lantern_tensor_set_pyobj (void* x, void* ptr)
+  {
+    _lantern_tensor_set_pyobj(x, ptr);
+    LANTERN_HOST_HANDLER;
+  }
+  
+  LANTERN_API void* (LANTERN_PTR _lantern_tensor_get_pyobj) (void* x);
+  HOST_API void* lantern_tensor_get_pyobj (void* x)
+  {
+    void* ret = _lantern_tensor_get_pyobj(x);
+    LANTERN_HOST_HANDLER;
+    return ret;
+  }
+  
+  LANTERN_API void* (LANTERN_PTR _lantern_ScriptModule_parameters) (void* module, bool recurse);
+  HOST_API void* lantern_ScriptModule_parameters (void* module, bool recurse)
+  {
+    void* ret = _lantern_ScriptModule_parameters(module, recurse);
+    LANTERN_HOST_HANDLER;
+    return ret;
+  }
+  
+  LANTERN_API void (LANTERN_PTR _lantern_jit_named_parameter_list_delete) (void* x);
+  HOST_API void lantern_jit_named_parameter_list_delete (void* x)
+  {
+    _lantern_jit_named_parameter_list_delete(x);
+    LANTERN_HOST_HANDLER;
+  }
+  
+  LANTERN_API int (LANTERN_PTR _lantern_jit_named_parameter_list_size) (void* self);
+  HOST_API int lantern_jit_named_parameter_list_size (void* module)
+  {
+    int ret = _lantern_jit_named_parameter_list_size(module);
+    LANTERN_HOST_HANDLER;
+    return ret;
+  }
+  
+  LANTERN_API void* (LANTERN_PTR _lantern_jit_named_parameter_list_tensors) (void* self);
+  HOST_API void* lantern_jit_named_parameter_list_tensors (void* module)
+  {
+    void* ret = _lantern_jit_named_parameter_list_tensors(module);
+    LANTERN_HOST_HANDLER;
+    return ret;
+  }
+  
+  LANTERN_API void* (LANTERN_PTR _lantern_jit_named_parameter_list_names) (void* self);
+  HOST_API void* lantern_jit_named_parameter_list_names (void* module)
+  {
+    void* ret = _lantern_jit_named_parameter_list_names(module);
+    LANTERN_HOST_HANDLER;
+    return ret;
+  }
+  
+  LANTERN_API void* (LANTERN_PTR _lantern_ScriptModule_forward) (void* module, void* inputs);
+  HOST_API void* lantern_ScriptModule_forward (void* module, void* inputs)
+  {
+    void* ret = _lantern_ScriptModule_forward(module, inputs);
+    LANTERN_HOST_HANDLER;
+    return ret;
+  }
+  
+  LANTERN_API void (LANTERN_PTR _lantern_ScriptModule_train) (void* module, bool on);
+  HOST_API void lantern_ScriptModule_train (void* module, bool on)
+  {
+    _lantern_ScriptModule_train(module, on);
+    LANTERN_HOST_HANDLER;
+    
+  }
+  
+  LANTERN_API void (LANTERN_PTR _lantern_ScriptModule_to) (void* module, void* device, bool non_blocking);
+  HOST_API void lantern_ScriptModule_to (void* module, void* device, bool non_blocking)
+  {
+    _lantern_ScriptModule_to(module, device, non_blocking);
+    LANTERN_HOST_HANDLER;
+    
+  }
+  
+  LANTERN_API void (LANTERN_PTR _lantern_ScriptModule_set_optimized) (void* module, bool o);
+  HOST_API void lantern_ScriptModule_set_optimized (void* module, bool o)
+  {
+    _lantern_ScriptModule_set_optimized(module, o);
+    LANTERN_HOST_HANDLER;
+    
+  }
+  
+  LANTERN_API bool (LANTERN_PTR _lantern_ScriptModule_is_training) (void* module);
+  HOST_API bool lantern_ScriptModule_is_training (void* module)
+  {
+    bool ret = _lantern_ScriptModule_is_training(module);
+    LANTERN_HOST_HANDLER;
+    return ret;
+  }
+  
+  LANTERN_API bool (LANTERN_PTR _lantern_ScriptModule_is_optimized) (void* module);
+  HOST_API bool lantern_ScriptModule_is_optimized (void* module)
+  {
+    bool ret = _lantern_ScriptModule_is_optimized(module);
+    LANTERN_HOST_HANDLER;
+    return ret;
+  }
+  
+  LANTERN_API void* (LANTERN_PTR _lantern_ScriptModule_modules) (void* module);
+  HOST_API void* lantern_ScriptModule_modules (void* module)
+  {
+    void* ret = _lantern_ScriptModule_modules(module);
+    LANTERN_HOST_HANDLER;
+    return ret;
+  }
+  
+  LANTERN_API int (LANTERN_PTR _lantern_jit_named_module_list_size) (void* self);
+  HOST_API int lantern_jit_named_module_list_size (void* self)
+  {
+    int ret = _lantern_jit_named_module_list_size(self);
+    LANTERN_HOST_HANDLER;
+    return ret;
+  }
+  
+  LANTERN_API void* (LANTERN_PTR _lantern_jit_named_module_list_module_at) (void* self, int64_t index);
+  HOST_API void* lantern_jit_named_module_list_module_at (void* self, int64_t index)
+  {
+    void* ret = _lantern_jit_named_module_list_module_at(self, index);
+    LANTERN_HOST_HANDLER;
+    return ret;
+  }
+  
+  LANTERN_API void* (LANTERN_PTR _lantern_jit_named_module_list_names) (void* self);
+  HOST_API void* lantern_jit_named_module_list_names (void* self)
+  {
+    void* ret = _lantern_jit_named_module_list_names(self);
+    LANTERN_HOST_HANDLER;
+    return ret;
+  }
+  
+  LANTERN_API void (LANTERN_PTR _lantern_jit_named_module_list_delete) (void* x);
+  HOST_API void lantern_jit_named_module_list_delete (void* x)
+  {
+    _lantern_jit_named_module_list_delete(x);
+    LANTERN_HOST_HANDLER;
+    
+  }
+  
+  LANTERN_API void (LANTERN_PTR _lantern_ScriptModule_register_parameter) (void* module, void* name, void* v, bool is_buffer);
+  HOST_API void lantern_ScriptModule_register_parameter (void* module, void* name, void* v, bool is_buffer)
+  {
+    _lantern_ScriptModule_register_parameter(module, name, v, is_buffer);
+    LANTERN_HOST_HANDLER;
+    
+  }
+  
+  LANTERN_API void (LANTERN_PTR _lantern_ScriptModule_register_buffer) (void* module, void* name, void* v);
+  HOST_API void lantern_ScriptModule_register_buffer (void* module, void* name, void* v)
+  {
+    _lantern_ScriptModule_register_buffer(module, name, v);
+    LANTERN_HOST_HANDLER;
+    
+  }
+  
+  LANTERN_API void (LANTERN_PTR _lantern_ScriptModule_register_module) (void* self, void* name, void* module);
+  HOST_API void lantern_ScriptModule_register_module (void* self, void* name, void* module)
+  {
+    _lantern_ScriptModule_register_module(self, name, module);
+    LANTERN_HOST_HANDLER;
+    
+  }
+  
+  LANTERN_API void (LANTERN_PTR _lantern_ScriptModule_register_attribute) (void* module, void* name, void* t, void* v, bool is_param, bool is_buffer);
+  HOST_API void lantern_ScriptModule_register_attribute (void* module, void* name, void* t, void* v, bool is_param, bool is_buffer)
+  {
+    _lantern_ScriptModule_register_attribute(module, name, t, v, is_param, is_buffer);
+    LANTERN_HOST_HANDLER;
+    
+  }
+  
+  LANTERN_API void* (LANTERN_PTR _lantern_jit_named_buffer_list_names) (void* self);
+  HOST_API void* lantern_jit_named_buffer_list_names (void* self)
+  {
+    void* ret = _lantern_jit_named_buffer_list_names(self);
+    LANTERN_HOST_HANDLER;
+    return ret;
+  }
+  
+  LANTERN_API void* (LANTERN_PTR _lantern_jit_named_buffer_list_tensors) (void* self);
+  HOST_API void* lantern_jit_named_buffer_list_tensors (void* self)
+  {
+    void* ret = _lantern_jit_named_buffer_list_tensors(self);
+    LANTERN_HOST_HANDLER;
+    return ret;
+  }
+  
+  LANTERN_API int (LANTERN_PTR _lantern_jit_named_buffer_list_size) (void* self);
+  HOST_API int lantern_jit_named_buffer_list_size (void* self)
+  {
+    int ret = _lantern_jit_named_buffer_list_size(self);
+    LANTERN_HOST_HANDLER;
+    return ret;
+  }
+  
+  LANTERN_API void* (LANTERN_PTR _lantern_ScriptModule_buffers) (void* module, bool recurse);
+  HOST_API void* lantern_ScriptModule_buffers (void* module, bool recurse)
+  {
+    void* ret = _lantern_ScriptModule_buffers(module, recurse);
+    LANTERN_HOST_HANDLER;
+    return ret;
+  }
+  
+  LANTERN_API void (LANTERN_PTR _lantern_jit_named_buffer_list_delete) (void* x);
+  HOST_API void lantern_jit_named_buffer_list_delete (void* x)
+  {
+    _lantern_jit_named_buffer_list_delete(x);
+    LANTERN_HOST_HANDLER;
+    
+  }
+  
+  LANTERN_API void* (LANTERN_PTR _lantern_ScriptModule_children) (void* module);
+  HOST_API void* lantern_ScriptModule_children (void* module)
+  {
+    void* ret = _lantern_ScriptModule_children(module);
+    LANTERN_HOST_HANDLER;
+    return ret;
+  }
+  
+  LANTERN_API void (LANTERN_PTR _lantern_jit_ScriptMethod_delete) (void* x);
+  HOST_API void lantern_jit_ScriptMethod_delete (void* x)
+  {
+    _lantern_jit_ScriptMethod_delete(x);
+    LANTERN_HOST_HANDLER;
+    
+  }
+  
+  LANTERN_API void* (LANTERN_PTR _lantern_ScriptModule_find_method) (void* self, void* basename);
+  HOST_API void* lantern_ScriptModule_find_method (void* self, void* basename)
+  {
+    void* ret = _lantern_ScriptModule_find_method(self, basename);
+    LANTERN_HOST_HANDLER;
+    return ret;
+  }
+  
+  LANTERN_API void* (LANTERN_PTR _lantern_ScriptMethod_call) (void* self, void* inputs);
+  HOST_API void* lantern_ScriptMethod_call (void* self, void* inputs)
+  {
+    void* ret = _lantern_ScriptMethod_call(self, inputs);
+    LANTERN_HOST_HANDLER;
+    return ret;
+  }
+  
+  LANTERN_API int (LANTERN_PTR _lantern_IValue_type) (void* self);
+  HOST_API int lantern_IValue_type (void* self)
+  {
+    int ret = _lantern_IValue_type(self);
+    LANTERN_HOST_HANDLER;
+    return ret;
+  }
+  
+  LANTERN_API bool (LANTERN_PTR _lantern_IValue_Bool) (void * self);
+  HOST_API bool lantern_IValue_Bool (void * self)
+  {
+    bool ret = _lantern_IValue_Bool(self);
+    LANTERN_HOST_HANDLER;
+    return ret;
+  }
+  
+  LANTERN_API void* (LANTERN_PTR _lantern_IValue_BoolList) (void* self);
+  HOST_API void* lantern_IValue_BoolList (void* self)
+  {
+    void* ret = _lantern_IValue_BoolList(self);
+    LANTERN_HOST_HANDLER;
+    return ret;
+  }
+  
+  LANTERN_API void* (LANTERN_PTR _lantern_IValue_Device) (void* self);
+  HOST_API void* lantern_IValue_Device (void* self)
+  {
+    void* ret = _lantern_IValue_Device(self);
+    LANTERN_HOST_HANDLER;
+    return ret;
+  }
+  
+  LANTERN_API double (LANTERN_PTR _lantern_IValue_Double) (void* self);
+  HOST_API double lantern_IValue_Double (void* self)
+  {
+    double ret = _lantern_IValue_Double(self);
+    LANTERN_HOST_HANDLER;
+    return ret;
+  }
+  
+  LANTERN_API void* (LANTERN_PTR _lantern_IValue_DoubleList) (void* self);
+  HOST_API void* lantern_IValue_DoubleList (void* self)
+  {
+    void* ret = _lantern_IValue_DoubleList(self);
+    LANTERN_HOST_HANDLER;
+    return ret;
+  }
+  
+  LANTERN_API void* (LANTERN_PTR _lantern_IValue_Generator) (void* self);
+  HOST_API void* lantern_IValue_Generator (void* self)
+  {
+    void* ret = _lantern_IValue_Generator(self);
+    LANTERN_HOST_HANDLER;
+    return ret;
+  }
+  
+  LANTERN_API void* (LANTERN_PTR _lantern_IValue_GenericDict) (void* self);
+  HOST_API void* lantern_IValue_GenericDict (void* self)
+  {
+    void* ret = _lantern_IValue_GenericDict(self);
+    LANTERN_HOST_HANDLER;
+    return ret;
+  }
+  
+  LANTERN_API int64_t (LANTERN_PTR _lantern_IValue_Int) (void* self);
+  HOST_API int64_t lantern_IValue_Int (void* self)
+  {
+    int64_t ret = _lantern_IValue_Int(self);
+    LANTERN_HOST_HANDLER;
+    return ret;
+  }
+  
+  LANTERN_API void* (LANTERN_PTR _lantern_IValue_IntList) (void* self);
+  HOST_API void* lantern_IValue_IntList (void* self)
+  {
+    void* ret = _lantern_IValue_IntList(self);
+    LANTERN_HOST_HANDLER;
+    return ret;
+  }
+  
+  LANTERN_API void* (LANTERN_PTR _lantern_IValue_List) (void* self);
+  HOST_API void* lantern_IValue_List (void* self)
+  {
+    void* ret = _lantern_IValue_List(self);
+    LANTERN_HOST_HANDLER;
+    return ret;
+  }
+  
+  LANTERN_API void* (LANTERN_PTR _lantern_IValue_Module) (void* self);
+  HOST_API void* lantern_IValue_Module (void* self)
+  {
+    void* ret = _lantern_IValue_Module(self);
+    LANTERN_HOST_HANDLER;
+    return ret;
+  }
+  
+  LANTERN_API void* (LANTERN_PTR _lantern_IValue_Scalar) (void* self);
+  HOST_API void* lantern_IValue_Scalar (void* self)
+  {
+    void* ret = _lantern_IValue_Scalar(self);
+    LANTERN_HOST_HANDLER;
+    return ret;
+  }
+  
+  LANTERN_API void* (LANTERN_PTR _lantern_IValue_String) (void* self);
+  HOST_API void* lantern_IValue_String (void* self)
+  {
+    void* ret = _lantern_IValue_String(self);
+    LANTERN_HOST_HANDLER;
+    return ret;
+  }
+  
+  LANTERN_API void* (LANTERN_PTR _lantern_IValue_Tensor) (void* self);
+  HOST_API void* lantern_IValue_Tensor (void* self)
+  {
+    void* ret = _lantern_IValue_Tensor(self);
+    LANTERN_HOST_HANDLER;
+    return ret;
+  }
+  
+  LANTERN_API void* (LANTERN_PTR _lantern_IValue_TensorList) (void* self);
+  HOST_API void* lantern_IValue_TensorList (void* self)
+  {
+    void* ret = _lantern_IValue_TensorList(self);
+    LANTERN_HOST_HANDLER;
+    return ret;
+  }
+  
+  LANTERN_API void* (LANTERN_PTR _lantern_IValue_Tuple) (void* self);
+  HOST_API void* lantern_IValue_Tuple (void* self)
+  {
+    void* ret = _lantern_IValue_Tuple(self);
+    LANTERN_HOST_HANDLER;
+    return ret;
+  }
+  
+  LANTERN_API void (LANTERN_PTR _lantern_GenericDict_delete) (void* x);
+  HOST_API void lantern_GenericDict_delete (void* x)
+  {
+    _lantern_GenericDict_delete(x);
+    LANTERN_HOST_HANDLER;
+    
+  }
+  
+  LANTERN_API void (LANTERN_PTR _lantern_GenericList_delete) (void* x);
+  HOST_API void lantern_GenericList_delete (void* x)
+  {
+    _lantern_GenericList_delete(x);
+    LANTERN_HOST_HANDLER;
+    
+  }
+  
+  LANTERN_API void* (LANTERN_PTR _lantern_Stack_at) (void* self, int64_t index);
+  HOST_API void* lantern_Stack_at (void* self, int64_t index)
+  {
+    void* ret = _lantern_Stack_at(self, index);
+    LANTERN_HOST_HANDLER;
+    return ret;
+  }
+  
+  LANTERN_API void* (LANTERN_PTR _lantern_IValue_from_Bool) (bool self);
+  HOST_API void* lantern_IValue_from_Bool (bool self)
+  {
+    void* ret = _lantern_IValue_from_Bool(self);
+    LANTERN_HOST_HANDLER;
+    return ret;
+  }
+  
+  LANTERN_API void* (LANTERN_PTR _lantern_IValue_from_BoolList) (void* self);
+  HOST_API void* lantern_IValue_from_BoolList (void* self)
+  {
+    void* ret = _lantern_IValue_from_BoolList(self);
+    LANTERN_HOST_HANDLER;
+    return ret;
+  }
+  
+  LANTERN_API void* (LANTERN_PTR _lantern_IValue_from_Device) (void* self);
+  HOST_API void* lantern_IValue_from_Device (void* self)
+  {
+    void* ret = _lantern_IValue_from_Device(self);
+    LANTERN_HOST_HANDLER;
+    return ret;
+  }
+  
+  LANTERN_API void* (LANTERN_PTR _lantern_IValue_from_Double) (double self);
+  HOST_API void* lantern_IValue_from_Double (double self)
+  {
+    void* ret = _lantern_IValue_from_Double(self);
+    LANTERN_HOST_HANDLER;
+    return ret;
+  }
+  
+  LANTERN_API void* (LANTERN_PTR _lantern_IValue_from_DoubleList) (void* self);
+  HOST_API void* lantern_IValue_from_DoubleList (void* self)
+  {
+    void* ret = _lantern_IValue_from_DoubleList(self);
+    LANTERN_HOST_HANDLER;
+    return ret;
+  }
+  
+  LANTERN_API void* (LANTERN_PTR _lantern_IValue_from_Generator) (void* self);
+  HOST_API void* lantern_IValue_from_Generator (void* self)
+  {
+    void* ret = _lantern_IValue_from_Generator(self);
+    LANTERN_HOST_HANDLER;
+    return ret;
+  }
+  
+  LANTERN_API void* (LANTERN_PTR _lantern_IValue_from_GenericDict) (void* self);
+  HOST_API void* lantern_IValue_from_GenericDict (void* self)
+  {
+    void* ret = _lantern_IValue_from_GenericDict(self);
+    LANTERN_HOST_HANDLER;
+    return ret;
+  }
+  
+  LANTERN_API void* (LANTERN_PTR _lantern_IValue_from_Int) (int64_t self);
+  HOST_API void* lantern_IValue_from_Int (int64_t self)
+  {
+    void* ret = _lantern_IValue_from_Int(self);
+    LANTERN_HOST_HANDLER;
+    return ret;
+  }
+  
+  LANTERN_API void* (LANTERN_PTR _lantern_IValue_from_IntList) (void* self);
+  HOST_API void* lantern_IValue_from_IntList (void* self)
+  {
+    void* ret = _lantern_IValue_from_IntList(self);
+    LANTERN_HOST_HANDLER;
+    return ret;
+  }
+  
+  LANTERN_API void* (LANTERN_PTR _lantern_IValue_from_List) (void* self);
+  HOST_API void* lantern_IValue_from_List (void* self)
+  {
+    void* ret = _lantern_IValue_from_List(self);
+    LANTERN_HOST_HANDLER;
+    return ret;
+  }
+  
+  LANTERN_API void* (LANTERN_PTR _lantern_IValue_from_Module) (void* self);
+  HOST_API void* lantern_IValue_from_Module (void* self)
+  {
+    void* ret = _lantern_IValue_from_Module(self);
+    LANTERN_HOST_HANDLER;
+    return ret;
+  }
+  
+  LANTERN_API void* (LANTERN_PTR _lantern_IValue_from_Scalar) (void* self);
+  HOST_API void* lantern_IValue_from_Scalar (void* self)
+  {
+    void* ret = _lantern_IValue_from_Scalar(self);
+    LANTERN_HOST_HANDLER;
+    return ret;
+  }
+  
+  LANTERN_API void* (LANTERN_PTR _lantern_IValue_from_String) (void* self);
+  HOST_API void* lantern_IValue_from_String (void* self)
+  {
+    void* ret = _lantern_IValue_from_String(self);
+    LANTERN_HOST_HANDLER;
+    return ret;
+  }
+  
+  LANTERN_API void* (LANTERN_PTR _lantern_IValue_from_Tensor) (void* self);
+  HOST_API void* lantern_IValue_from_Tensor (void* self)
+  {
+    void* ret = _lantern_IValue_from_Tensor(self);
+    LANTERN_HOST_HANDLER;
+    return ret;
+  }
+  
+  LANTERN_API void* (LANTERN_PTR _lantern_IValue_from_TensorList) (void* self);
+  HOST_API void* lantern_IValue_from_TensorList (void* self)
+  {
+    void* ret = _lantern_IValue_from_TensorList(self);
+    LANTERN_HOST_HANDLER;
+    return ret;
+  }
+  
+  LANTERN_API int64_t (LANTERN_PTR _lantern_vector_int64_t_size) (void* self);
+  HOST_API int64_t lantern_vector_int64_t_size (void* self)
+  {
+    int64_t ret = _lantern_vector_int64_t_size(self);
+    LANTERN_HOST_HANDLER;
+    return ret;
+  }
+  
+  LANTERN_API int64_t (LANTERN_PTR _lantern_vector_int64_t_at) (void* self, int64_t index);
+  HOST_API int64_t lantern_vector_int64_t_at (void* self, int64_t index)
+  {
+    int64_t ret = _lantern_vector_int64_t_at(self, index);
+    LANTERN_HOST_HANDLER;
+    return ret;
+  }
+  
+  LANTERN_API double (LANTERN_PTR _lantern_vector_double_size) (void* self);
+  HOST_API double lantern_vector_double_size (void* self)
+  {
+    double ret = _lantern_vector_double_size(self);
+    LANTERN_HOST_HANDLER;
+    return ret;
+  }
+  
+  LANTERN_API double (LANTERN_PTR _lantern_vector_double_at) (void* self, int64_t index);
+  HOST_API double lantern_vector_double_at (void* self, int64_t index)
+  {
+    double ret = _lantern_vector_double_at(self, index);
+    LANTERN_HOST_HANDLER;
+    return ret;
+  }
+  
+  LANTERN_API void (LANTERN_PTR _lantern_vector_double_delete) (void* x);
+  HOST_API void lantern_vector_double_delete (void* x)
+  {
+    _lantern_vector_double_delete(x);
+    LANTERN_HOST_HANDLER;
+    
+  }
+  
+  LANTERN_API void (LANTERN_PTR _lantern_vector_int64_t2_delete) (void* x);
+  HOST_API void lantern_vector_int64_t2_delete (void* x)
+  {
+    _lantern_vector_int64_t2_delete(x);
+    LANTERN_HOST_HANDLER;
+    
+  }
+  
+  LANTERN_API void* (LANTERN_PTR _lantern_vector_double_new) ();
+  HOST_API void* lantern_vector_double_new ()
+  {
+    void* ret = _lantern_vector_double_new();
+    LANTERN_HOST_HANDLER;
+    return ret;
+  }
+  
+  LANTERN_API void* (LANTERN_PTR _lantern_vector_int64_t_new) ();
+  HOST_API void* lantern_vector_int64_t_new ()
+  {
+    void* ret = _lantern_vector_int64_t_new();
+    LANTERN_HOST_HANDLER;
+    return ret;
+  }
+  
+  LANTERN_API void (LANTERN_PTR _lantern_vector_double_push_back) (void* self, double x);
+  HOST_API void lantern_vector_double_push_back (void* self, double x)
+  {
+    _lantern_vector_double_push_back(self, x);
+    LANTERN_HOST_HANDLER;
+    
+  }
+  
+  LANTERN_API void (LANTERN_PTR _lantern_vector_int64_t_push_back) (void* self, int64_t x);
+  HOST_API void lantern_vector_int64_t_push_back (void* self, int64_t x)
+  {
+    _lantern_vector_int64_t_push_back(self, x);
+    LANTERN_HOST_HANDLER;
+    
+  }
+  
+  LANTERN_API const char * (LANTERN_PTR _lantern_string_get) (void* self);
+  HOST_API const char * lantern_string_get (void* self)
+  {
+    const char * ret = _lantern_string_get(self);
+    LANTERN_HOST_HANDLER;
+    return ret;
+  }
+  
+  LANTERN_API void (LANTERN_PTR _lantern_jit_Tuple_delete) (void *x);
+  HOST_API void lantern_jit_Tuple_delete (void *x)
+  {
+    _lantern_jit_Tuple_delete(x);
+    LANTERN_HOST_HANDLER;
+    
+  }
+  
+  LANTERN_API void* (LANTERN_PTR _lantern_IValue_from_Tuple) (void* self);
+  HOST_API void* lantern_IValue_from_Tuple (void* self)
+  {
+    void* ret = _lantern_IValue_from_Tuple(self);
+    LANTERN_HOST_HANDLER;
+    return ret;
+  }
+  
+  LANTERN_API void* (LANTERN_PTR _lantern_jit_Tuple_new) ();
+  HOST_API void* lantern_jit_Tuple_new ()
+  {
+    void* ret = _lantern_jit_Tuple_new();
+    LANTERN_HOST_HANDLER;
+    return ret;
+  }
+  
+  LANTERN_API void (LANTERN_PTR _lantern_jit_Tuple_push_back) (void* self, void* element);
+  HOST_API void lantern_jit_Tuple_push_back (void* self, void* element)
+  {
+    _lantern_jit_Tuple_push_back(self, element);
+    LANTERN_HOST_HANDLER;
+    
+  }
+  
+  LANTERN_API int64_t (LANTERN_PTR _lantern_jit_Tuple_size) (void* self);
+  HOST_API int64_t lantern_jit_Tuple_size (void* self)
+  {
+    int64_t ret = _lantern_jit_Tuple_size(self);
+    LANTERN_HOST_HANDLER;
+    return ret;
+  }
+  
+  LANTERN_API void* (LANTERN_PTR _lantern_jit_Tuple_at) (void* self, int64_t index);
+  HOST_API void* lantern_jit_Tuple_at (void* self, int64_t index)
+  {
+    void* ret = _lantern_jit_Tuple_at(self, index);
+    LANTERN_HOST_HANDLER;
+    return ret;
+  }
+  
+  LANTERN_API void (LANTERN_PTR _lantern_jit_TensorDict_delete) (void *x);
+  HOST_API void lantern_jit_TensorDict_delete (void *x)
+  {
+    _lantern_jit_TensorDict_delete(x);
+    LANTERN_HOST_HANDLER;
+    
+  }
+  
+  LANTERN_API void (LANTERN_PTR _lantern_jit_GenericDict_delete) (void *x);
+  HOST_API void lantern_jit_GenericDict_delete (void *x)
+  {
+    _lantern_jit_GenericDict_delete(x);
+    LANTERN_HOST_HANDLER;
+    
+  }
+  
+  LANTERN_API void (LANTERN_PTR _lantern_jit_GenericList_delete) (void *x);
+  HOST_API void lantern_jit_GenericList_delete (void *x)
+  {
+    _lantern_jit_GenericList_delete(x);
+    LANTERN_HOST_HANDLER;
+    
+  }
+  
+  LANTERN_API void* (LANTERN_PTR _lantern_jit_TensorDict_new) ();
+  HOST_API void* lantern_jit_TensorDict_new ()
+  {
+    void* ret = _lantern_jit_TensorDict_new();
+    LANTERN_HOST_HANDLER;
+    return ret;
+  }
+  
+  LANTERN_API void (LANTERN_PTR _lantern_jit_TensorDict_push_back) (void* self, void* key, void* value);
+  HOST_API void lantern_jit_TensorDict_push_back (void* self, void* key, void* value)
+  {
+    _lantern_jit_TensorDict_push_back(self, key, value);
+    LANTERN_HOST_HANDLER;
+    
+  }
+  
+  LANTERN_API void* (LANTERN_PTR _lantern_jit_GenericDict_keys) (void* self);
+  HOST_API void* lantern_jit_GenericDict_keys (void* self)
+  {
+    void* ret = _lantern_jit_GenericDict_keys(self);
+    LANTERN_HOST_HANDLER;
+    return ret;
+  }
+  
+  LANTERN_API void* (LANTERN_PTR _lantern_jit_GenericDict_at) (void* self, void* key);
+  HOST_API void* lantern_jit_GenericDict_at (void* self, void* key)
+  {
+    void* ret = _lantern_jit_GenericDict_at(self, key);
+    LANTERN_HOST_HANDLER;
+    return ret;
+  }
+  
+  LANTERN_API int64_t (LANTERN_PTR _lantern_jit_GenericList_size) (void* self);
+  HOST_API int64_t lantern_jit_GenericList_size (void* self)
+  {
+    int64_t ret = _lantern_jit_GenericList_size(self);
+    LANTERN_HOST_HANDLER;
+    return ret;
+  }
+  
+  LANTERN_API void* (LANTERN_PTR _lantern_jit_GenericList_at) (void* self, int64_t index);
+  HOST_API void* lantern_jit_GenericList_at (void* self, int64_t index)
+  {
+    void* ret = _lantern_jit_GenericList_at(self, index);
+    LANTERN_HOST_HANDLER;
+    return ret;
+  }
+  
+  LANTERN_API void* (LANTERN_PTR _lantern_IValue_from_TensorDict) (void* self);
+  HOST_API void* lantern_IValue_from_TensorDict (void* self)
+  {
+    void* ret = _lantern_IValue_from_TensorDict(self);
+    LANTERN_HOST_HANDLER;
+    return ret;
+  }
+  
+  LANTERN_API void (LANTERN_PTR _lantern_jit_vector_IValue_delete) (void* x);
+  HOST_API void lantern_jit_vector_IValue_delete (void* x)
+  {
+    _lantern_jit_vector_IValue_delete(x);
+    LANTERN_HOST_HANDLER;
+    
+  }
+  
+  LANTERN_API int64_t (LANTERN_PTR _lantern_jit_vector_IValue_size) (void* self);
+  HOST_API int64_t lantern_jit_vector_IValue_size (void* self)
+  {
+    int64_t ret = _lantern_jit_vector_IValue_size(self);
+    LANTERN_HOST_HANDLER;
+    return ret;
+  }
+  
+  LANTERN_API void* (LANTERN_PTR _lantern_jit_vector_IValue_at) (void* self, int64_t index);
+  HOST_API void* lantern_jit_vector_IValue_at (void* self, int64_t index)
+  {
+    void* ret = _lantern_jit_vector_IValue_at(self, index);
+    LANTERN_HOST_HANDLER;
+    return ret;
+  }
+  
+  LANTERN_API void* (LANTERN_PTR _lantern_jit_NamedTuple_new) ();
+  HOST_API void* lantern_jit_NamedTuple_new ()
+  {
+    void* ret = _lantern_jit_NamedTuple_new();
+    LANTERN_HOST_HANDLER;
+    return ret;
+  }
+  
+  LANTERN_API void (LANTERN_PTR _lantern_jit_NamedTuple_push_back) (void* self, void* name, void* element);
+  HOST_API void lantern_jit_NamedTuple_push_back (void* self, void* name, void* element)
+  {
+    _lantern_jit_NamedTuple_push_back(self, name, element);
+    LANTERN_HOST_HANDLER;
+    
+  }
+  
+  LANTERN_API void* (LANTERN_PTR _lantern_jit_NamedTupleHelper_keys) (void* self);
+  HOST_API void* lantern_jit_NamedTupleHelper_keys (void* self)
+  {
+    void* ret = _lantern_jit_NamedTupleHelper_keys(self);
+    LANTERN_HOST_HANDLER;
+    return ret;
+  }
+  
+  LANTERN_API void* (LANTERN_PTR _lantern_jit_NamedTupleHelper_elements) (void* self);
+  HOST_API void* lantern_jit_NamedTupleHelper_elements (void* self)
+  {
+    void* ret = _lantern_jit_NamedTupleHelper_elements(self);
+    LANTERN_HOST_HANDLER;
+    return ret;
+  }
+  
+  LANTERN_API void* (LANTERN_PTR _lantern_IValue_from_NamedTuple) (void* self);
+  HOST_API void* lantern_IValue_from_NamedTuple (void* self)
+  {
+    void* ret = _lantern_IValue_from_NamedTuple(self);
+    LANTERN_HOST_HANDLER;
+    return ret;
+  }
+  
+  LANTERN_API void (LANTERN_PTR _lantern_NamedTupleHelper_delete) (void* x);
+  HOST_API void lantern_NamedTupleHelper_delete (void* x)
+  {
+    _lantern_NamedTupleHelper_delete(x);
+    LANTERN_HOST_HANDLER;
+    
+  }
+  
+  LANTERN_API void (LANTERN_PTR _lantern_Stack_push_back_IValue) (void* self, void* x);
+  HOST_API void lantern_Stack_push_back_IValue (void* self, void* x)
+  {
+    _lantern_Stack_push_back_IValue(self, x);
+    LANTERN_HOST_HANDLER;
+    
+  }
+  
+  LANTERN_API void (LANTERN_PTR _lantern_FunctionPtr_delete) (void* x);
+  HOST_API void lantern_FunctionPtr_delete (void* x)
+  {
+    _lantern_FunctionPtr_delete(x);
+    LANTERN_HOST_HANDLER;
+    
+  }
+  
+  LANTERN_API void* (LANTERN_PTR _lantern_IValue_from_None) ();
+  HOST_API void* lantern_IValue_from_None ()
+  {
+    void* ret = _lantern_IValue_from_None();
+    LANTERN_HOST_HANDLER;
+    return ret;
+  }
+  
+  LANTERN_API void* (LANTERN_PTR _lantern_jit_compile_get_method) (void* cu, void* name);
+  HOST_API void* lantern_jit_compile_get_method (void* cu, void* name)
+  {
+    void* ret = _lantern_jit_compile_get_method(cu, name);
+    LANTERN_HOST_HANDLER;
+    return ret;
+  }
+  
+  LANTERN_API void* (LANTERN_PTR _lantern_jit_compile_list_methods) (void* cu);
+  HOST_API void* lantern_jit_compile_list_methods (void* cu)
+  {
+    void* ret = _lantern_jit_compile_list_methods(cu);
+    LANTERN_HOST_HANDLER;
+    return ret;
+  }
+  
+  LANTERN_API void* (LANTERN_PTR _lantern_jit_compile) (void* source, void* cu);
+  HOST_API void* lantern_jit_compile (void* source, void* cu)
+  {
+    void* ret = _lantern_jit_compile(source, cu);
+    LANTERN_HOST_HANDLER;
+    return ret;
+  }
+  
+  LANTERN_API void* (LANTERN_PTR _lantern_ScriptModule_new) (void* cu, void* name);
+  HOST_API void* lantern_ScriptModule_new (void* cu, void* name)
+  {
+    void* ret = _lantern_ScriptModule_new(cu, name);
+    LANTERN_HOST_HANDLER;
+    return ret;
+  }
+  
+  LANTERN_API void (LANTERN_PTR _lantern_ScriptModule_add_constant) (void* self, void* name, void* value);
+  HOST_API void lantern_ScriptModule_add_constant (void* self, void* name, void* value)
+  {
+    _lantern_ScriptModule_add_constant(self, name, value);
+    LANTERN_HOST_HANDLER;
+    
+  }
+  
+  LANTERN_API void* (LANTERN_PTR _lantern_ScriptModule_find_constant) (void* self, void* name);
+  HOST_API void* lantern_ScriptModule_find_constant (void* self, void* name)
+  {
+    void* ret = _lantern_ScriptModule_find_constant(self, name);
+    LANTERN_HOST_HANDLER;
+    return ret;
+  }
+  
+  LANTERN_API void (LANTERN_PTR _lantern_ScriptModule_add_method) (void* self, void* method);
+  HOST_API void lantern_ScriptModule_add_method (void* self, void* method)
+  {
+    _lantern_ScriptModule_add_method(self, method);
+    LANTERN_HOST_HANDLER;
+    
+  }
+  
+  LANTERN_API void (LANTERN_PTR _lantern_ScriptModule_save) (void* self, void* path);
+  HOST_API void lantern_ScriptModule_save (void* self, void* path)
+  {
+    _lantern_ScriptModule_save(self, path);
+    LANTERN_HOST_HANDLER;
+    
+  }
+  
+  LANTERN_API void* (LANTERN_PTR _lantern_vector_Scalar_new) ();
+  HOST_API void* lantern_vector_Scalar_new ()
+  {
+    void* ret = _lantern_vector_Scalar_new();
+    LANTERN_HOST_HANDLER;
+    return ret;
+  }
+  
+  LANTERN_API void (LANTERN_PTR _lantern_vector_Scalar_push_back) (void* self, void* value);
+  HOST_API void lantern_vector_Scalar_push_back (void* self, void* value)
+  {
+    _lantern_vector_Scalar_push_back(self, value);
+    LANTERN_HOST_HANDLER;
+    
+  }
+  
+  LANTERN_API int64_t (LANTERN_PTR _lantern_vector_Scalar_size) (void* self);
+  HOST_API int64_t lantern_vector_Scalar_size (void* self)
+  {
+    int64_t ret = _lantern_vector_Scalar_size(self);
+    LANTERN_HOST_HANDLER;
+    return ret;
+  }
+  
+  LANTERN_API void* (LANTERN_PTR _lantern_vector_Scalar_at) (void* self, int64_t index);
+  HOST_API void* lantern_vector_Scalar_at (void* self, int64_t index)
+  {
+    void* ret = _lantern_vector_Scalar_at(self, index);
+    LANTERN_HOST_HANDLER;
+    return ret;
+  }
+  
+  LANTERN_API void (LANTERN_PTR _lantern_vector_Scalar_delete) (void* x);
+  HOST_API void lantern_vector_Scalar_delete (void* x)
+  {
+    _lantern_vector_Scalar_delete(x);
+    LANTERN_HOST_HANDLER;
+    
+  }
+  
+  LANTERN_API void* (LANTERN_PTR _lantern_contrib_sort_vertices) (void* vertices, void* mask, void* num_valid);
+  HOST_API void* lantern_contrib_sort_vertices(void* vertices, void* mask, void* num_valid)
+  {
+    void* ret = _lantern_contrib_sort_vertices(vertices, mask, num_valid);
+    LANTERN_HOST_HANDLER;
+    return ret;
+  }
+  
+  LANTERN_API void* (LANTERN_PTR _lantern_ScriptMethod_graph_print) (void* self);
+  HOST_API void* lantern_ScriptMethod_graph_print (void* self)
+  {
+    void* ret = _lantern_ScriptMethod_graph_print(self);
+    LANTERN_HOST_HANDLER;
+    return ret;
+  }
+  
+  LANTERN_API void (LANTERN_PTR _lantern_autograd_set_detect_anomaly) (bool enabled);
+  HOST_API void lantern_autograd_set_detect_anomaly (bool enabled)
+  {
+    _lantern_autograd_set_detect_anomaly(enabled);
+    LANTERN_HOST_HANDLER;
+    
+  }
+  
+  LANTERN_API bool (LANTERN_PTR _lantern_autograd_detect_anomaly_is_enabled) ();
+  HOST_API bool lantern_autograd_detect_anomaly_is_enabled ()
+  {
+    bool ret = _lantern_autograd_detect_anomaly_is_enabled();
+    LANTERN_HOST_HANDLER;
+    return ret;
+  }
+  
+  LANTERN_API void* (LANTERN_PTR _lantern_get_default_Generator) ();
+  HOST_API void* lantern_get_default_Generator ()
+  {
+    void* ret = _lantern_get_default_Generator();
+    LANTERN_HOST_HANDLER;
+    return ret;
+  }
+  
+  LANTERN_API void* (LANTERN_PTR _lantern_last_executed_optimized_graph_print) ();
+  HOST_API void* lantern_last_executed_optimized_graph_print ()
+  {
+    void* ret = _lantern_last_executed_optimized_graph_print();
+    LANTERN_HOST_HANDLER;
+    return ret;
+  }
+  
+  LANTERN_API bool (LANTERN_PTR _lantern_TensorIndex_is_empty) (void* self);
+  HOST_API bool lantern_TensorIndex_is_empty (void* self)
+  {
+    bool ret = _lantern_TensorIndex_is_empty(self);
+    LANTERN_HOST_HANDLER;
+    return ret;
+  }
+  
+  LANTERN_API void (LANTERN_PTR _lantern_OptionalTensorList_delete) (void* x);
+  HOST_API void lantern_OptionalTensorList_delete (void* x)
+  {
+    _lantern_OptionalTensorList_delete(x);
+    LANTERN_HOST_HANDLER;
+    
+  }
+  
+  LANTERN_API int64_t (LANTERN_PTR _lantern_OptionalTensorList_size) (void* self);
+  HOST_API int64_t lantern_OptionalTensorList_size (void* self)
+  {
+    int64_t ret = _lantern_OptionalTensorList_size(self);
+    LANTERN_HOST_HANDLER;
+    return ret;
+  }
+  
+  LANTERN_API void* (LANTERN_PTR _lantern_OptionalTensorList_at) (void* self, int64_t i);
+  HOST_API void* lantern_OptionalTensorList_at (void* self, int64_t i)
+  {
+    void* ret = _lantern_OptionalTensorList_at(self, i);
+    LANTERN_HOST_HANDLER;
+    return ret;
+  }
+  
+  LANTERN_API bool (LANTERN_PTR _lantern_OptionalTensorList_at_is_null) (void* self, int64_t i);
+  HOST_API bool lantern_OptionalTensorList_at_is_null (void* self, int64_t i)
+  {
+    bool ret = _lantern_OptionalTensorList_at_is_null(self, i);
+    LANTERN_HOST_HANDLER;
+    return ret;
+  }
+  
+  LANTERN_API void* (LANTERN_PTR _lantern_optional_tensor_value) (void* x);
+  HOST_API void* lantern_optional_tensor_value (void* x)
+  {
+    void* ret = _lantern_optional_tensor_value(x);
+    LANTERN_HOST_HANDLER;
+    return ret;
+  }
+  
   /* Autogen Headers -- Start */
   LANTERN_API void* (LANTERN_PTR _lantern__cast_byte_tensor_bool)(void* self, void* non_blocking);
   HOST_API void* lantern__cast_byte_tensor_bool(void* self, void* non_blocking) { void* ret = _lantern__cast_byte_tensor_bool(self, non_blocking); LANTERN_HOST_HANDLER return ret; }
@@ -7011,7 +7006,7 @@ HOST_API void* lantern_optional_tensor_value (void* x)
   LANTERN_API void* (LANTERN_PTR _lantern_unflatten_dense_tensors_tensor_tensorlist)(void* flat, void* tensors);
   HOST_API void* lantern_unflatten_dense_tensors_tensor_tensorlist(void* flat, void* tensors) { void* ret = _lantern_unflatten_dense_tensors_tensor_tensorlist(flat, tensors); LANTERN_HOST_HANDLER return ret; }
   /* Autogen Headers -- End */
-
+  
 #ifdef __cplusplus
 }
 #endif
@@ -7045,25 +7040,25 @@ inline const char *libraryName()
 void *pLibrary = NULL;
 
 #define LOAD_SYMBOL(name)                                         \
-  if (!laternLoadSymbol(pLibrary, #name, (void **)&name, pError))  \
-    return false;
+if (!laternLoadSymbol(pLibrary, #name, (void **)&name, pError))   \
+  return false;
 
 void lanternLoadError(std::string *pError)
 {
 #ifdef _WIN32
   LPVOID lpMsgBuf;
   DWORD dw = ::GetLastError();
-
+  
   DWORD length = ::FormatMessage(
-      FORMAT_MESSAGE_ALLOCATE_BUFFER |
-          FORMAT_MESSAGE_FROM_SYSTEM |
-          FORMAT_MESSAGE_IGNORE_INSERTS,
+    FORMAT_MESSAGE_ALLOCATE_BUFFER |
+      FORMAT_MESSAGE_FROM_SYSTEM |
+      FORMAT_MESSAGE_IGNORE_INSERTS,
       NULL,
       dw,
       MAKELANGID(LANG_NEUTRAL, SUBLANG_DEFAULT),
       (LPTSTR)&lpMsgBuf,
       0, NULL);
-
+  
   if (length != 0)
   {
     std::string msg((LPTSTR)lpMsgBuf);
@@ -7086,30 +7081,30 @@ void lanternLoadError(std::string *pError)
 bool lanternLoadLibrary(const std::string &libPath, std::string *pError)
 {
   pLibrary = NULL;
-
+  
   char lastLibChar = libPath.at(libPath.size() - 1);
   std::string separator = (lastLibChar == '/' || lastLibChar == '\\') ? "" : pathSeparator();
   std::string libFile = libPath + separator + libraryName();
-
+  
 #ifdef _WIN32
-
+  
   typedef DLL_DIRECTORY_COOKIE(WINAPI * PAddDllDirectory)(PCWSTR);
   HMODULE hKernel = ::GetModuleHandle("kernel32.dll");
-
+  
   if (hKernel == NULL)
   {
     lanternLoadError(pError);
     *pError = "Get Kernel - " + *pError;
     return false;
   }
-
+  
   PAddDllDirectory add_dll_directory = (PAddDllDirectory)::GetProcAddress(hKernel, "AddDllDirectory");
-
+  
   if (add_dll_directory != NULL)
   {
     std::wstring libPathWStr = std::wstring(libPath.begin(), libPath.end());
     DLL_DIRECTORY_COOKIE cookie = add_dll_directory(libPathWStr.c_str());
-
+    
     if (cookie == NULL)
     {
       lanternLoadError(pError);
@@ -7117,7 +7112,7 @@ bool lanternLoadLibrary(const std::string &libPath, std::string *pError)
       return false;
     }
   }
-
+  
   pLibrary = (void *)::LoadLibraryEx(libFile.c_str(), NULL, LOAD_LIBRARY_SEARCH_DEFAULT_DIRS);
 #else
   pLibrary = ::dlopen(libFile.c_str(), RTLD_NOW | RTLD_GLOBAL);
@@ -7159,23 +7154,23 @@ bool laternCloseLibrary(void *pLib, std::string *pError)
 #ifdef _WIN32
   if (!::FreeLibrary((HMODULE)pLib))
 #else
-  if (::dlclose(pLib) != 0)
+    if (::dlclose(pLib) != 0)
 #endif
-  {
-    lanternLoadError(pError);
-    return false;
-  }
-  else
-  {
-    return true;
-  }
+{
+  lanternLoadError(pError);
+  return false;
+}
+    else
+    {
+      return true;
+    }
 }
 
 bool lanternInit(const std::string &libPath, std::string *pError)
 {
   if (!lanternLoadLibrary(libPath, pError))
     return false;
-
+  
   LOAD_SYMBOL(lanternConfigure);
   LOAD_SYMBOL(lanternVersion);
   LOAD_SYMBOL(lanternSetLastError);
@@ -7412,7 +7407,7 @@ bool lanternInit(const std::string &libPath, std::string *pError)
   LOAD_SYMBOL(_lantern_normal_double_tensor_generator);
   LOAD_SYMBOL(_lantern_normal_tensor_double_generator);
   LOAD_SYMBOL(_lantern_vector_void_delete);
-  LOAD_SYMBOL(_lantern_autograd_is_enabled);
+  //LOAD_SYMBOL(_lantern_autograd_is_enabled);
   LOAD_SYMBOL(_lantern_print_stuff);
   LOAD_SYMBOL(_lantern_nn_functional_pad_circular);
   LOAD_SYMBOL(_lantern_backend_has_lapack);
@@ -7459,2626 +7454,2626 @@ bool lanternInit(const std::string &libPath, std::string *pError)
   LOAD_SYMBOL(_lantern_ScriptModule_find_method);
   LOAD_SYMBOL(_lantern_ScriptMethod_call);
   LOAD_SYMBOL(_lantern_IValue_type);
-LOAD_SYMBOL(_lantern_IValue_Bool);
-LOAD_SYMBOL(_lantern_IValue_BoolList);
-LOAD_SYMBOL(_lantern_IValue_Device);
-LOAD_SYMBOL(_lantern_IValue_Double);
-LOAD_SYMBOL(_lantern_IValue_DoubleList);
-LOAD_SYMBOL(_lantern_IValue_Generator);
-LOAD_SYMBOL(_lantern_IValue_GenericDict);
-LOAD_SYMBOL(_lantern_IValue_Int);
-LOAD_SYMBOL(_lantern_IValue_IntList);
-LOAD_SYMBOL(_lantern_IValue_List);
-LOAD_SYMBOL(_lantern_IValue_Module);
-LOAD_SYMBOL(_lantern_IValue_Scalar);
-LOAD_SYMBOL(_lantern_IValue_String);
-LOAD_SYMBOL(_lantern_IValue_Tensor);
-LOAD_SYMBOL(_lantern_IValue_TensorList);
-LOAD_SYMBOL(_lantern_IValue_Tuple);
-LOAD_SYMBOL(_lantern_GenericDict_delete);
-LOAD_SYMBOL(_lantern_GenericList_delete);
-LOAD_SYMBOL(_lantern_Stack_at);
-LOAD_SYMBOL(_lantern_IValue_from_Bool);
-LOAD_SYMBOL(_lantern_IValue_from_BoolList);
-LOAD_SYMBOL(_lantern_IValue_from_Device);
-LOAD_SYMBOL(_lantern_IValue_from_Double);
-LOAD_SYMBOL(_lantern_IValue_from_DoubleList);
-LOAD_SYMBOL(_lantern_IValue_from_Generator);
-LOAD_SYMBOL(_lantern_IValue_from_GenericDict);
-LOAD_SYMBOL(_lantern_IValue_from_Int);
-LOAD_SYMBOL(_lantern_IValue_from_IntList);
-LOAD_SYMBOL(_lantern_IValue_from_List);
-LOAD_SYMBOL(_lantern_IValue_from_Module);
-LOAD_SYMBOL(_lantern_IValue_from_Scalar);
-LOAD_SYMBOL(_lantern_IValue_from_String);
-LOAD_SYMBOL(_lantern_IValue_from_Tensor);
-LOAD_SYMBOL(_lantern_IValue_from_TensorList);
-LOAD_SYMBOL(_lantern_vector_int64_t_size);
-LOAD_SYMBOL(_lantern_vector_int64_t_at);
-LOAD_SYMBOL(_lantern_vector_double_size);
-LOAD_SYMBOL(_lantern_vector_double_at);
-LOAD_SYMBOL(_lantern_vector_double_delete);
-LOAD_SYMBOL(_lantern_vector_int64_t2_delete);
-LOAD_SYMBOL(_lantern_vector_double_new);
-LOAD_SYMBOL(_lantern_vector_int64_t_new);
-LOAD_SYMBOL(_lantern_vector_double_push_back);
-LOAD_SYMBOL(_lantern_vector_int64_t_push_back);
-LOAD_SYMBOL(_lantern_string_get);
-LOAD_SYMBOL(_lantern_jit_Tuple_delete);
-LOAD_SYMBOL(_lantern_IValue_from_Tuple);
-LOAD_SYMBOL(_lantern_jit_Tuple_new);
-LOAD_SYMBOL(_lantern_jit_Tuple_push_back);
-LOAD_SYMBOL(_lantern_jit_Tuple_size);
-LOAD_SYMBOL(_lantern_jit_Tuple_at);
-LOAD_SYMBOL(_lantern_jit_TensorDict_delete);
-LOAD_SYMBOL(_lantern_jit_GenericDict_delete);
-LOAD_SYMBOL(_lantern_jit_GenericList_delete);
-LOAD_SYMBOL(_lantern_jit_TensorDict_new);
-LOAD_SYMBOL(_lantern_jit_TensorDict_push_back);
-LOAD_SYMBOL(_lantern_jit_GenericDict_keys);
-LOAD_SYMBOL(_lantern_jit_GenericDict_at);
-LOAD_SYMBOL(_lantern_jit_GenericList_size);
-LOAD_SYMBOL(_lantern_jit_GenericList_at);
-LOAD_SYMBOL(_lantern_IValue_from_TensorDict);
-LOAD_SYMBOL(_lantern_jit_vector_IValue_delete);
-LOAD_SYMBOL(_lantern_jit_vector_IValue_size);
-LOAD_SYMBOL(_lantern_jit_vector_IValue_at);
-LOAD_SYMBOL(_lantern_jit_NamedTuple_new);
-LOAD_SYMBOL(_lantern_jit_NamedTuple_push_back);
-LOAD_SYMBOL(_lantern_jit_NamedTupleHelper_keys);
-LOAD_SYMBOL(_lantern_jit_NamedTupleHelper_elements);
-LOAD_SYMBOL(_lantern_IValue_from_NamedTuple);
-LOAD_SYMBOL(_lantern_NamedTupleHelper_delete);
-LOAD_SYMBOL(_lantern_Stack_push_back_IValue);
-LOAD_SYMBOL(_lantern_FunctionPtr_delete);
-LOAD_SYMBOL(_lantern_IValue_from_None);
-LOAD_SYMBOL(_lantern_jit_compile_get_method);
-LOAD_SYMBOL(_lantern_jit_compile_list_methods);
-LOAD_SYMBOL(_lantern_jit_compile);
-LOAD_SYMBOL(_lantern_ScriptModule_new);
-LOAD_SYMBOL(_lantern_ScriptModule_add_constant);
-LOAD_SYMBOL(_lantern_ScriptModule_find_constant);
-LOAD_SYMBOL(_lantern_ScriptModule_add_method);
-LOAD_SYMBOL(_lantern_ScriptModule_save);
-LOAD_SYMBOL(_lantern_vector_Scalar_new);
-LOAD_SYMBOL(_lantern_vector_Scalar_push_back);
-LOAD_SYMBOL(_lantern_vector_Scalar_size);
-LOAD_SYMBOL(_lantern_vector_Scalar_at);
-LOAD_SYMBOL(_lantern_vector_Scalar_delete);
-LOAD_SYMBOL(_lantern_contrib_sort_vertices);
-LOAD_SYMBOL(_lantern_ScriptMethod_graph_print);
-LOAD_SYMBOL(_lantern_autograd_set_detect_anomaly);
-LOAD_SYMBOL(_lantern_autograd_detect_anomaly_is_enabled);
-LOAD_SYMBOL(_lantern_get_default_Generator);
-LOAD_SYMBOL(_lantern_last_executed_optimized_graph_print);
-LOAD_SYMBOL(_lantern_TensorIndex_is_empty);
-LOAD_SYMBOL(_lantern_OptionalTensorList_delete);
-LOAD_SYMBOL(_lantern_OptionalTensorList_size);
-LOAD_SYMBOL(_lantern_OptionalTensorList_at);
-LOAD_SYMBOL(_lantern_OptionalTensorList_at_is_null);
-LOAD_SYMBOL(_lantern_optional_tensor_value);
+  LOAD_SYMBOL(_lantern_IValue_Bool);
+  LOAD_SYMBOL(_lantern_IValue_BoolList);
+  LOAD_SYMBOL(_lantern_IValue_Device);
+  LOAD_SYMBOL(_lantern_IValue_Double);
+  LOAD_SYMBOL(_lantern_IValue_DoubleList);
+  LOAD_SYMBOL(_lantern_IValue_Generator);
+  LOAD_SYMBOL(_lantern_IValue_GenericDict);
+  LOAD_SYMBOL(_lantern_IValue_Int);
+  LOAD_SYMBOL(_lantern_IValue_IntList);
+  LOAD_SYMBOL(_lantern_IValue_List);
+  LOAD_SYMBOL(_lantern_IValue_Module);
+  LOAD_SYMBOL(_lantern_IValue_Scalar);
+  LOAD_SYMBOL(_lantern_IValue_String);
+  LOAD_SYMBOL(_lantern_IValue_Tensor);
+  LOAD_SYMBOL(_lantern_IValue_TensorList);
+  LOAD_SYMBOL(_lantern_IValue_Tuple);
+  LOAD_SYMBOL(_lantern_GenericDict_delete);
+  LOAD_SYMBOL(_lantern_GenericList_delete);
+  LOAD_SYMBOL(_lantern_Stack_at);
+  LOAD_SYMBOL(_lantern_IValue_from_Bool);
+  LOAD_SYMBOL(_lantern_IValue_from_BoolList);
+  LOAD_SYMBOL(_lantern_IValue_from_Device);
+  LOAD_SYMBOL(_lantern_IValue_from_Double);
+  LOAD_SYMBOL(_lantern_IValue_from_DoubleList);
+  LOAD_SYMBOL(_lantern_IValue_from_Generator);
+  LOAD_SYMBOL(_lantern_IValue_from_GenericDict);
+  LOAD_SYMBOL(_lantern_IValue_from_Int);
+  LOAD_SYMBOL(_lantern_IValue_from_IntList);
+  LOAD_SYMBOL(_lantern_IValue_from_List);
+  LOAD_SYMBOL(_lantern_IValue_from_Module);
+  LOAD_SYMBOL(_lantern_IValue_from_Scalar);
+  LOAD_SYMBOL(_lantern_IValue_from_String);
+  LOAD_SYMBOL(_lantern_IValue_from_Tensor);
+  LOAD_SYMBOL(_lantern_IValue_from_TensorList);
+  LOAD_SYMBOL(_lantern_vector_int64_t_size);
+  LOAD_SYMBOL(_lantern_vector_int64_t_at);
+  LOAD_SYMBOL(_lantern_vector_double_size);
+  LOAD_SYMBOL(_lantern_vector_double_at);
+  LOAD_SYMBOL(_lantern_vector_double_delete);
+  LOAD_SYMBOL(_lantern_vector_int64_t2_delete);
+  LOAD_SYMBOL(_lantern_vector_double_new);
+  LOAD_SYMBOL(_lantern_vector_int64_t_new);
+  LOAD_SYMBOL(_lantern_vector_double_push_back);
+  LOAD_SYMBOL(_lantern_vector_int64_t_push_back);
+  LOAD_SYMBOL(_lantern_string_get);
+  LOAD_SYMBOL(_lantern_jit_Tuple_delete);
+  LOAD_SYMBOL(_lantern_IValue_from_Tuple);
+  LOAD_SYMBOL(_lantern_jit_Tuple_new);
+  LOAD_SYMBOL(_lantern_jit_Tuple_push_back);
+  LOAD_SYMBOL(_lantern_jit_Tuple_size);
+  LOAD_SYMBOL(_lantern_jit_Tuple_at);
+  LOAD_SYMBOL(_lantern_jit_TensorDict_delete);
+  LOAD_SYMBOL(_lantern_jit_GenericDict_delete);
+  LOAD_SYMBOL(_lantern_jit_GenericList_delete);
+  LOAD_SYMBOL(_lantern_jit_TensorDict_new);
+  LOAD_SYMBOL(_lantern_jit_TensorDict_push_back);
+  LOAD_SYMBOL(_lantern_jit_GenericDict_keys);
+  LOAD_SYMBOL(_lantern_jit_GenericDict_at);
+  LOAD_SYMBOL(_lantern_jit_GenericList_size);
+  LOAD_SYMBOL(_lantern_jit_GenericList_at);
+  LOAD_SYMBOL(_lantern_IValue_from_TensorDict);
+  LOAD_SYMBOL(_lantern_jit_vector_IValue_delete);
+  LOAD_SYMBOL(_lantern_jit_vector_IValue_size);
+  LOAD_SYMBOL(_lantern_jit_vector_IValue_at);
+  LOAD_SYMBOL(_lantern_jit_NamedTuple_new);
+  LOAD_SYMBOL(_lantern_jit_NamedTuple_push_back);
+  LOAD_SYMBOL(_lantern_jit_NamedTupleHelper_keys);
+  LOAD_SYMBOL(_lantern_jit_NamedTupleHelper_elements);
+  LOAD_SYMBOL(_lantern_IValue_from_NamedTuple);
+  LOAD_SYMBOL(_lantern_NamedTupleHelper_delete);
+  LOAD_SYMBOL(_lantern_Stack_push_back_IValue);
+  LOAD_SYMBOL(_lantern_FunctionPtr_delete);
+  LOAD_SYMBOL(_lantern_IValue_from_None);
+  LOAD_SYMBOL(_lantern_jit_compile_get_method);
+  LOAD_SYMBOL(_lantern_jit_compile_list_methods);
+  LOAD_SYMBOL(_lantern_jit_compile);
+  LOAD_SYMBOL(_lantern_ScriptModule_new);
+  LOAD_SYMBOL(_lantern_ScriptModule_add_constant);
+  LOAD_SYMBOL(_lantern_ScriptModule_find_constant);
+  LOAD_SYMBOL(_lantern_ScriptModule_add_method);
+  LOAD_SYMBOL(_lantern_ScriptModule_save);
+  LOAD_SYMBOL(_lantern_vector_Scalar_new);
+  LOAD_SYMBOL(_lantern_vector_Scalar_push_back);
+  LOAD_SYMBOL(_lantern_vector_Scalar_size);
+  LOAD_SYMBOL(_lantern_vector_Scalar_at);
+  LOAD_SYMBOL(_lantern_vector_Scalar_delete);
+  LOAD_SYMBOL(_lantern_contrib_sort_vertices);
+  LOAD_SYMBOL(_lantern_ScriptMethod_graph_print);
+  LOAD_SYMBOL(_lantern_autograd_set_detect_anomaly);
+  LOAD_SYMBOL(_lantern_autograd_detect_anomaly_is_enabled);
+  LOAD_SYMBOL(_lantern_get_default_Generator);
+  LOAD_SYMBOL(_lantern_last_executed_optimized_graph_print);
+  LOAD_SYMBOL(_lantern_TensorIndex_is_empty);
+  LOAD_SYMBOL(_lantern_OptionalTensorList_delete);
+  LOAD_SYMBOL(_lantern_OptionalTensorList_size);
+  LOAD_SYMBOL(_lantern_OptionalTensorList_at);
+  LOAD_SYMBOL(_lantern_OptionalTensorList_at_is_null);
+  LOAD_SYMBOL(_lantern_optional_tensor_value);
   /* Autogen Symbols -- Start */
   LOAD_SYMBOL(_lantern__cast_byte_tensor_bool)
-  LOAD_SYMBOL(_lantern__cast_char_tensor_bool)
-  LOAD_SYMBOL(_lantern__cast_double_tensor_bool)
-  LOAD_SYMBOL(_lantern__cast_float_tensor_bool)
-  LOAD_SYMBOL(_lantern__cast_int_tensor_bool)
-  LOAD_SYMBOL(_lantern__cast_long_tensor_bool)
-  LOAD_SYMBOL(_lantern__cast_short_tensor_bool)
-  LOAD_SYMBOL(_lantern__cast_half_tensor_bool)
-  LOAD_SYMBOL(_lantern_Tensor__backward_tensor_tensorlist_tensor_bool_bool)
-  LOAD_SYMBOL(_lantern_Tensor_set_data_tensor_tensor)
-  LOAD_SYMBOL(_lantern_Tensor_data_tensor)
-  LOAD_SYMBOL(_lantern_Tensor_is_leaf_tensor)
-  LOAD_SYMBOL(_lantern_Tensor_output_nr_tensor)
-  LOAD_SYMBOL(_lantern_Tensor__version_tensor)
-  LOAD_SYMBOL(_lantern_Tensor_requires_grad__tensor_bool)
-  LOAD_SYMBOL(_lantern_Tensor_retain_grad_tensor)
-  LOAD_SYMBOL(_lantern_Tensor__fw_primal_tensor_intt)
-  LOAD_SYMBOL(_lantern__make_dual_tensor_tensor_intt)
-  LOAD_SYMBOL(_lantern__unpack_dual_tensor_intt)
-  LOAD_SYMBOL(_lantern_Tensor_rename__tensor_dimnamelist)
-  LOAD_SYMBOL(_lantern_Tensor_rename_tensor_dimnamelist)
-  LOAD_SYMBOL(_lantern_Tensor_align_to_tensor_dimnamelist)
-  LOAD_SYMBOL(_lantern_Tensor_align_to_tensor_dimnamelist_intt)
-  LOAD_SYMBOL(_lantern_Tensor_align_as_tensor_tensor)
-  LOAD_SYMBOL(_lantern_align_tensors_tensorlist)
-  LOAD_SYMBOL(_lantern__assert_async_tensor)
-  LOAD_SYMBOL(_lantern_Tensor_refine_names_tensor_dimnamelist)
-  LOAD_SYMBOL(_lantern__use_cudnn_ctc_loss_tensor_tensor_intarrayref_intarrayref_intt)
-  LOAD_SYMBOL(_lantern__cudnn_ctc_loss_tensor_tensor_intarrayref_intarrayref_intt_bool_bool)
-  LOAD_SYMBOL(_lantern__use_cudnn_rnn_flatten_weight)
-  LOAD_SYMBOL(_lantern__cudnn_rnn_flatten_weight_tensorlist_intt_intt_intt_intt_intt_intt_bool_bool)
-  LOAD_SYMBOL(_lantern__cudnn_rnn_tensor_tensorlist_intt_tensor_tensor_tensor_intt_intt_intt_intt_bool_double_bool_bool_intarrayref_tensor)
-  LOAD_SYMBOL(_lantern__cudnn_rnn_backward_tensor_tensorlist_intt_tensor_tensor_tensor_tensor_tensor_tensor_tensor_intt_intt_intt_intt_bool_double_bool_bool_intarrayref_tensor_tensor_stdarraybool)
-  LOAD_SYMBOL(_lantern__cudnn_init_dropout_state_double_bool_intt_tensoroptions)
-  LOAD_SYMBOL(_lantern__debug_has_internal_overlap_tensor)
-  LOAD_SYMBOL(_lantern__fused_dropout_tensor_double_generator)
-  LOAD_SYMBOL(_lantern__masked_scale_tensor_tensor_double)
-  LOAD_SYMBOL(_lantern__sobol_engine_draw_tensor_intt_tensor_intt_intt_scalartype)
-  LOAD_SYMBOL(_lantern__sobol_engine_ff__tensor_intt_tensor_intt_intt)
-  LOAD_SYMBOL(_lantern__sobol_engine_scramble__tensor_tensor_intt)
-  LOAD_SYMBOL(_lantern__sobol_engine_initialize_state__tensor_intt)
-  LOAD_SYMBOL(_lantern__reshape_from_tensor_tensor_tensor)
-  LOAD_SYMBOL(_lantern__shape_as_tensor_tensor)
-  LOAD_SYMBOL(_lantern_dropout_tensor_double_bool)
-  LOAD_SYMBOL(_lantern_dropout__tensor_double_bool)
-  LOAD_SYMBOL(_lantern_feature_dropout_tensor_double_bool)
-  LOAD_SYMBOL(_lantern_feature_dropout__tensor_double_bool)
-  LOAD_SYMBOL(_lantern_alpha_dropout_tensor_double_bool)
-  LOAD_SYMBOL(_lantern_alpha_dropout__tensor_double_bool)
-  LOAD_SYMBOL(_lantern_feature_alpha_dropout_tensor_double_bool)
-  LOAD_SYMBOL(_lantern_feature_alpha_dropout__tensor_double_bool)
-  LOAD_SYMBOL(_lantern_abs_tensor)
-  LOAD_SYMBOL(_lantern_Tensor_abs_tensor)
-  LOAD_SYMBOL(_lantern_abs__tensor)
-  LOAD_SYMBOL(_lantern_Tensor_abs__tensor)
-  LOAD_SYMBOL(_lantern_abs_out_tensor_tensor)
-  LOAD_SYMBOL(_lantern_absolute_tensor)
-  LOAD_SYMBOL(_lantern_Tensor_absolute_tensor)
-  LOAD_SYMBOL(_lantern_Tensor_absolute__tensor)
-  LOAD_SYMBOL(_lantern_absolute_out_tensor_tensor)
-  LOAD_SYMBOL(_lantern_angle_tensor)
-  LOAD_SYMBOL(_lantern_Tensor_angle_tensor)
-  LOAD_SYMBOL(_lantern_angle_out_tensor_tensor)
-  LOAD_SYMBOL(_lantern_view_as_real_tensor)
-  LOAD_SYMBOL(_lantern_view_as_complex_tensor)
-  LOAD_SYMBOL(_lantern_sgn_tensor)
-  LOAD_SYMBOL(_lantern_Tensor_sgn_tensor)
-  LOAD_SYMBOL(_lantern_Tensor_sgn__tensor)
-  LOAD_SYMBOL(_lantern_sgn_out_tensor_tensor)
-  LOAD_SYMBOL(_lantern_real_tensor)
-  LOAD_SYMBOL(_lantern_imag_tensor)
-  LOAD_SYMBOL(_lantern_conj_tensor)
-  LOAD_SYMBOL(_lantern_Tensor_conj_tensor)
-  LOAD_SYMBOL(_lantern_conj_out_tensor_tensor)
-  LOAD_SYMBOL(_lantern__conj_tensor)
-  LOAD_SYMBOL(_lantern_acos_tensor)
-  LOAD_SYMBOL(_lantern_Tensor_acos_tensor)
-  LOAD_SYMBOL(_lantern_acos__tensor)
-  LOAD_SYMBOL(_lantern_Tensor_acos__tensor)
-  LOAD_SYMBOL(_lantern_acos_out_tensor_tensor)
-  LOAD_SYMBOL(_lantern_arccos_tensor)
-  LOAD_SYMBOL(_lantern_Tensor_arccos_tensor)
-  LOAD_SYMBOL(_lantern_arccos__tensor)
-  LOAD_SYMBOL(_lantern_Tensor_arccos__tensor)
-  LOAD_SYMBOL(_lantern_arccos_out_tensor_tensor)
-  LOAD_SYMBOL(_lantern_avg_pool1d_tensor_intarrayref_intarrayref_intarrayref_bool_bool)
-  LOAD_SYMBOL(_lantern_adaptive_avg_pool1d_tensor_intarrayref)
-  LOAD_SYMBOL(_lantern_adaptive_max_pool1d_tensor_intarrayref)
-  LOAD_SYMBOL(_lantern_add_tensor_tensor_scalar)
-  LOAD_SYMBOL(_lantern_Tensor_add_tensor_tensor_scalar)
-  LOAD_SYMBOL(_lantern_Tensor_add__tensor_tensor_scalar)
-  LOAD_SYMBOL(_lantern_add_out_tensor_tensor_tensor_scalar)
-  LOAD_SYMBOL(_lantern__add_relu_tensor_tensor_scalar)
-  LOAD_SYMBOL(_lantern__add_relu__tensor_tensor_scalar)
-  LOAD_SYMBOL(_lantern__add_relu_out_tensor_tensor_tensor_scalar)
-  LOAD_SYMBOL(_lantern_add_tensor_scalar_scalar)
-  LOAD_SYMBOL(_lantern_Tensor_add_tensor_scalar_scalar)
-  LOAD_SYMBOL(_lantern_Tensor_add__tensor_scalar_scalar)
-  LOAD_SYMBOL(_lantern_addmv_tensor_tensor_tensor_scalar_scalar)
-  LOAD_SYMBOL(_lantern_Tensor_addmv_tensor_tensor_tensor_scalar_scalar)
-  LOAD_SYMBOL(_lantern_addmv__tensor_tensor_tensor_scalar_scalar)
-  LOAD_SYMBOL(_lantern_Tensor_addmv__tensor_tensor_tensor_scalar_scalar)
-  LOAD_SYMBOL(_lantern_addmv_out_tensor_tensor_tensor_tensor_scalar_scalar)
-  LOAD_SYMBOL(_lantern_addr_tensor_tensor_tensor_scalar_scalar)
-  LOAD_SYMBOL(_lantern_Tensor_addr_tensor_tensor_tensor_scalar_scalar)
-  LOAD_SYMBOL(_lantern_Tensor_addr__tensor_tensor_tensor_scalar_scalar)
-  LOAD_SYMBOL(_lantern_addr_out_tensor_tensor_tensor_tensor_scalar_scalar)
-  LOAD_SYMBOL(_lantern_affine_grid_generator_tensor_intarrayref_bool)
-  LOAD_SYMBOL(_lantern_affine_grid_generator_backward_tensor_intarrayref_bool)
-  LOAD_SYMBOL(_lantern_all_tensor_intt_bool)
-  LOAD_SYMBOL(_lantern_Tensor_all_tensor_intt_bool)
-  LOAD_SYMBOL(_lantern_all_out_tensor_tensor_intt_bool)
-  LOAD_SYMBOL(_lantern_all_tensor_dimname_bool)
-  LOAD_SYMBOL(_lantern_Tensor_all_tensor_dimname_bool)
-  LOAD_SYMBOL(_lantern_all_out_tensor_tensor_dimname_bool)
-  LOAD_SYMBOL(_lantern_allclose_tensor_tensor_double_double_bool)
-  LOAD_SYMBOL(_lantern_Tensor_allclose_tensor_tensor_double_double_bool)
-  LOAD_SYMBOL(_lantern_any_tensor_intt_bool)
-  LOAD_SYMBOL(_lantern_Tensor_any_tensor_intt_bool)
-  LOAD_SYMBOL(_lantern_any_out_tensor_tensor_intt_bool)
-  LOAD_SYMBOL(_lantern_any_tensor_dimname_bool)
-  LOAD_SYMBOL(_lantern_Tensor_any_tensor_dimname_bool)
-  LOAD_SYMBOL(_lantern_any_out_tensor_tensor_dimname_bool)
-  LOAD_SYMBOL(_lantern_arange_scalar_tensoroptions)
-  LOAD_SYMBOL(_lantern_arange_scalar_scalar_tensoroptions)
-  LOAD_SYMBOL(_lantern_arange_scalar_scalar_scalar_tensoroptions)
-  LOAD_SYMBOL(_lantern_arange_out_tensor_scalar)
-  LOAD_SYMBOL(_lantern_arange_out_tensor_scalar_scalar_scalar)
-  LOAD_SYMBOL(_lantern__dim_arange_tensor_intt)
-  LOAD_SYMBOL(_lantern_argmax_tensor_intt_bool)
-  LOAD_SYMBOL(_lantern_Tensor_argmax_tensor_intt_bool)
-  LOAD_SYMBOL(_lantern_argmax_out_tensor_tensor_intt_bool)
-  LOAD_SYMBOL(_lantern_argmin_tensor_intt_bool)
-  LOAD_SYMBOL(_lantern_Tensor_argmin_tensor_intt_bool)
-  LOAD_SYMBOL(_lantern_argmin_out_tensor_tensor_intt_bool)
-  LOAD_SYMBOL(_lantern_acosh_tensor)
-  LOAD_SYMBOL(_lantern_Tensor_acosh_tensor)
-  LOAD_SYMBOL(_lantern_acosh__tensor)
-  LOAD_SYMBOL(_lantern_Tensor_acosh__tensor)
-  LOAD_SYMBOL(_lantern_acosh_out_tensor_tensor)
-  LOAD_SYMBOL(_lantern_arccosh_tensor)
-  LOAD_SYMBOL(_lantern_Tensor_arccosh_tensor)
-  LOAD_SYMBOL(_lantern_arccosh__tensor)
-  LOAD_SYMBOL(_lantern_Tensor_arccosh__tensor)
-  LOAD_SYMBOL(_lantern_arccosh_out_tensor_tensor)
-  LOAD_SYMBOL(_lantern_asinh_tensor)
-  LOAD_SYMBOL(_lantern_Tensor_asinh_tensor)
-  LOAD_SYMBOL(_lantern_asinh__tensor)
-  LOAD_SYMBOL(_lantern_Tensor_asinh__tensor)
-  LOAD_SYMBOL(_lantern_asinh_out_tensor_tensor)
-  LOAD_SYMBOL(_lantern_arcsinh_tensor)
-  LOAD_SYMBOL(_lantern_Tensor_arcsinh_tensor)
-  LOAD_SYMBOL(_lantern_arcsinh__tensor)
-  LOAD_SYMBOL(_lantern_Tensor_arcsinh__tensor)
-  LOAD_SYMBOL(_lantern_arcsinh_out_tensor_tensor)
-  LOAD_SYMBOL(_lantern_atanh_tensor)
-  LOAD_SYMBOL(_lantern_Tensor_atanh_tensor)
-  LOAD_SYMBOL(_lantern_atanh__tensor)
-  LOAD_SYMBOL(_lantern_Tensor_atanh__tensor)
-  LOAD_SYMBOL(_lantern_atanh_out_tensor_tensor)
-  LOAD_SYMBOL(_lantern_arctanh_tensor)
-  LOAD_SYMBOL(_lantern_Tensor_arctanh_tensor)
-  LOAD_SYMBOL(_lantern_arctanh__tensor)
-  LOAD_SYMBOL(_lantern_Tensor_arctanh__tensor)
-  LOAD_SYMBOL(_lantern_arctanh_out_tensor_tensor)
-  LOAD_SYMBOL(_lantern_as_strided_tensor_intarrayref_intarrayref_intt)
-  LOAD_SYMBOL(_lantern_Tensor_as_strided_tensor_intarrayref_intarrayref_intt)
-  LOAD_SYMBOL(_lantern_as_strided__tensor_intarrayref_intarrayref_intt)
-  LOAD_SYMBOL(_lantern_Tensor_as_strided__tensor_intarrayref_intarrayref_intt)
-  LOAD_SYMBOL(_lantern_asin_tensor)
-  LOAD_SYMBOL(_lantern_Tensor_asin_tensor)
-  LOAD_SYMBOL(_lantern_asin__tensor)
-  LOAD_SYMBOL(_lantern_Tensor_asin__tensor)
-  LOAD_SYMBOL(_lantern_asin_out_tensor_tensor)
-  LOAD_SYMBOL(_lantern_arcsin_tensor)
-  LOAD_SYMBOL(_lantern_Tensor_arcsin_tensor)
-  LOAD_SYMBOL(_lantern_arcsin__tensor)
-  LOAD_SYMBOL(_lantern_Tensor_arcsin__tensor)
-  LOAD_SYMBOL(_lantern_arcsin_out_tensor_tensor)
-  LOAD_SYMBOL(_lantern_atan_tensor)
-  LOAD_SYMBOL(_lantern_Tensor_atan_tensor)
-  LOAD_SYMBOL(_lantern_atan__tensor)
-  LOAD_SYMBOL(_lantern_Tensor_atan__tensor)
-  LOAD_SYMBOL(_lantern_atan_out_tensor_tensor)
-  LOAD_SYMBOL(_lantern_arctan_tensor)
-  LOAD_SYMBOL(_lantern_Tensor_arctan_tensor)
-  LOAD_SYMBOL(_lantern_arctan__tensor)
-  LOAD_SYMBOL(_lantern_Tensor_arctan__tensor)
-  LOAD_SYMBOL(_lantern_arctan_out_tensor_tensor)
-  LOAD_SYMBOL(_lantern_atleast_1d_tensor)
-  LOAD_SYMBOL(_lantern_atleast_1d_tensorlist)
-  LOAD_SYMBOL(_lantern_atleast_2d_tensor)
-  LOAD_SYMBOL(_lantern_atleast_2d_tensorlist)
-  LOAD_SYMBOL(_lantern_atleast_3d_tensor)
-  LOAD_SYMBOL(_lantern_atleast_3d_tensorlist)
-  LOAD_SYMBOL(_lantern_baddbmm_tensor_tensor_tensor_scalar_scalar)
-  LOAD_SYMBOL(_lantern_Tensor_baddbmm_tensor_tensor_tensor_scalar_scalar)
-  LOAD_SYMBOL(_lantern_Tensor_baddbmm__tensor_tensor_tensor_scalar_scalar)
-  LOAD_SYMBOL(_lantern__baddbmm_mkl__tensor_tensor_tensor_scalar_scalar)
-  LOAD_SYMBOL(_lantern_baddbmm_out_tensor_tensor_tensor_tensor_scalar_scalar)
-  LOAD_SYMBOL(_lantern_bartlett_window_intt_tensoroptions)
-  LOAD_SYMBOL(_lantern_bartlett_window_intt_bool_tensoroptions)
-  LOAD_SYMBOL(_lantern_batch_norm_tensor_tensor_tensor_tensor_tensor_bool_double_double_bool)
-  LOAD_SYMBOL(_lantern_quantized_batch_norm_tensor_tensor_tensor_tensor_tensor_double_double_intt)
-  LOAD_SYMBOL(_lantern__batch_norm_impl_index_tensor_tensor_tensor_tensor_tensor_bool_double_double_bool)
-  LOAD_SYMBOL(_lantern__batch_norm_impl_index_backward_intt_tensor_tensor_tensor_tensor_tensor_tensor_tensor_bool_double_stdarraybool_tensor)
-  LOAD_SYMBOL(_lantern_bernoulli_tensor_generator)
-  LOAD_SYMBOL(_lantern_Tensor_bernoulli_tensor_generator)
-  LOAD_SYMBOL(_lantern_bernoulli_out_tensor_tensor_generator)
-  LOAD_SYMBOL(_lantern_Tensor_bernoulli__tensor_tensor_generator)
-  LOAD_SYMBOL(_lantern_Tensor_bernoulli__tensor_double_generator)
-  LOAD_SYMBOL(_lantern_bernoulli_tensor_double_generator)
-  LOAD_SYMBOL(_lantern_Tensor_bernoulli_tensor_double_generator)
-  LOAD_SYMBOL(_lantern_bilinear_tensor_tensor_tensor_tensor)
-  LOAD_SYMBOL(_lantern_binary_cross_entropy_tensor_tensor_tensor_intt)
-  LOAD_SYMBOL(_lantern_binary_cross_entropy_out_tensor_tensor_tensor_tensor_intt)
-  LOAD_SYMBOL(_lantern_binary_cross_entropy_backward_tensor_tensor_tensor_tensor_intt)
-  LOAD_SYMBOL(_lantern_binary_cross_entropy_backward_out_tensor_tensor_tensor_tensor_tensor_intt)
-  LOAD_SYMBOL(_lantern_binary_cross_entropy_with_logits_tensor_tensor_tensor_tensor_intt)
-  LOAD_SYMBOL(_lantern_binary_cross_entropy_with_logits_backward_tensor_tensor_tensor_tensor_tensor_intt)
-  LOAD_SYMBOL(_lantern_bincount_tensor_tensor_intt)
-  LOAD_SYMBOL(_lantern_Tensor_bincount_tensor_tensor_intt)
-  LOAD_SYMBOL(_lantern_bitwise_not_tensor)
-  LOAD_SYMBOL(_lantern_Tensor_bitwise_not_tensor)
-  LOAD_SYMBOL(_lantern_Tensor_bitwise_not__tensor)
-  LOAD_SYMBOL(_lantern_bitwise_not_out_tensor_tensor)
-  LOAD_SYMBOL(_lantern_copysign_out_tensor_tensor_tensor)
-  LOAD_SYMBOL(_lantern_copysign_tensor_tensor)
-  LOAD_SYMBOL(_lantern_Tensor_copysign_tensor_tensor)
-  LOAD_SYMBOL(_lantern_Tensor_copysign__tensor_tensor)
-  LOAD_SYMBOL(_lantern_copysign_tensor_scalar)
-  LOAD_SYMBOL(_lantern_Tensor_copysign_tensor_scalar)
-  LOAD_SYMBOL(_lantern_Tensor_copysign__tensor_scalar)
-  LOAD_SYMBOL(_lantern_copysign_out_tensor_tensor_scalar)
-  LOAD_SYMBOL(_lantern_logical_not_tensor)
-  LOAD_SYMBOL(_lantern_Tensor_logical_not_tensor)
-  LOAD_SYMBOL(_lantern_Tensor_logical_not__tensor)
-  LOAD_SYMBOL(_lantern_logical_not_out_tensor_tensor)
-  LOAD_SYMBOL(_lantern_logical_xor_tensor_tensor)
-  LOAD_SYMBOL(_lantern_Tensor_logical_xor_tensor_tensor)
-  LOAD_SYMBOL(_lantern_Tensor_logical_xor__tensor_tensor)
-  LOAD_SYMBOL(_lantern_logical_xor_out_tensor_tensor_tensor)
-  LOAD_SYMBOL(_lantern_logical_and_tensor_tensor)
-  LOAD_SYMBOL(_lantern_Tensor_logical_and_tensor_tensor)
-  LOAD_SYMBOL(_lantern_Tensor_logical_and__tensor_tensor)
-  LOAD_SYMBOL(_lantern_logical_and_out_tensor_tensor_tensor)
-  LOAD_SYMBOL(_lantern_logical_or_tensor_tensor)
-  LOAD_SYMBOL(_lantern_Tensor_logical_or_tensor_tensor)
-  LOAD_SYMBOL(_lantern_Tensor_logical_or__tensor_tensor)
-  LOAD_SYMBOL(_lantern_logical_or_out_tensor_tensor_tensor)
-  LOAD_SYMBOL(_lantern_blackman_window_intt_tensoroptions)
-  LOAD_SYMBOL(_lantern_blackman_window_intt_bool_tensoroptions)
-  LOAD_SYMBOL(_lantern_bmm_tensor_tensor)
-  LOAD_SYMBOL(_lantern_Tensor_bmm_tensor_tensor)
-  LOAD_SYMBOL(_lantern__bmm_tensor_tensor_bool)
-  LOAD_SYMBOL(_lantern_bmm_out_tensor_tensor_tensor)
-  LOAD_SYMBOL(_lantern__bmm_out_tensor_tensor_tensor_bool)
-  LOAD_SYMBOL(_lantern_broadcast_tensors_tensorlist)
-  LOAD_SYMBOL(_lantern_broadcast_to_tensor_intarrayref)
-  LOAD_SYMBOL(_lantern_Tensor_broadcast_to_tensor_intarrayref)
-  LOAD_SYMBOL(_lantern_cat_tensorlist_intt)
-  LOAD_SYMBOL(_lantern_cat_out_tensor_tensorlist_intt)
-  LOAD_SYMBOL(_lantern_cat_tensorlist_dimname)
-  LOAD_SYMBOL(_lantern_cat_out_tensor_tensorlist_dimname)
-  LOAD_SYMBOL(_lantern_block_diag_tensorlist)
-  LOAD_SYMBOL(_lantern_ceil_tensor)
-  LOAD_SYMBOL(_lantern_Tensor_ceil_tensor)
-  LOAD_SYMBOL(_lantern_ceil__tensor)
-  LOAD_SYMBOL(_lantern_Tensor_ceil__tensor)
-  LOAD_SYMBOL(_lantern_ceil_out_tensor_tensor)
-  LOAD_SYMBOL(_lantern_chain_matmul_tensorlist)
-  LOAD_SYMBOL(_lantern_chain_matmul_out_tensor_tensorlist)
-  LOAD_SYMBOL(_lantern_unsafe_chunk_tensor_intt_intt)
-  LOAD_SYMBOL(_lantern_Tensor_unsafe_chunk_tensor_intt_intt)
-  LOAD_SYMBOL(_lantern_chunk_tensor_intt_intt)
-  LOAD_SYMBOL(_lantern_Tensor_chunk_tensor_intt_intt)
-  LOAD_SYMBOL(_lantern_tensor_split_tensor_intt_intt)
-  LOAD_SYMBOL(_lantern_Tensor_tensor_split_tensor_intt_intt)
-  LOAD_SYMBOL(_lantern_tensor_split_tensor_intarrayref_intt)
-  LOAD_SYMBOL(_lantern_Tensor_tensor_split_tensor_intarrayref_intt)
-  LOAD_SYMBOL(_lantern_tensor_split_tensor_tensor_intt)
-  LOAD_SYMBOL(_lantern_Tensor_tensor_split_tensor_tensor_intt)
-  LOAD_SYMBOL(_lantern_clamp_tensor_scalar_scalar)
-  LOAD_SYMBOL(_lantern_Tensor_clamp_tensor_scalar_scalar)
-  LOAD_SYMBOL(_lantern_clamp_tensor_tensor_tensor)
-  LOAD_SYMBOL(_lantern_Tensor_clamp_tensor_tensor_tensor)
-  LOAD_SYMBOL(_lantern_clamp__tensor_scalar_scalar)
-  LOAD_SYMBOL(_lantern_Tensor_clamp__tensor_scalar_scalar)
-  LOAD_SYMBOL(_lantern_clamp__tensor_tensor_tensor)
-  LOAD_SYMBOL(_lantern_Tensor_clamp__tensor_tensor_tensor)
-  LOAD_SYMBOL(_lantern_clamp_out_tensor_tensor_scalar_scalar)
-  LOAD_SYMBOL(_lantern_clamp_out_tensor_tensor_tensor_tensor)
-  LOAD_SYMBOL(_lantern_clamp_max_tensor_scalar)
-  LOAD_SYMBOL(_lantern_Tensor_clamp_max_tensor_scalar)
-  LOAD_SYMBOL(_lantern_clamp_max_tensor_tensor)
-  LOAD_SYMBOL(_lantern_Tensor_clamp_max_tensor_tensor)
-  LOAD_SYMBOL(_lantern_clamp_max__tensor_scalar)
-  LOAD_SYMBOL(_lantern_Tensor_clamp_max__tensor_scalar)
-  LOAD_SYMBOL(_lantern_clamp_max__tensor_tensor)
-  LOAD_SYMBOL(_lantern_Tensor_clamp_max__tensor_tensor)
-  LOAD_SYMBOL(_lantern_clamp_max_out_tensor_tensor_scalar)
-  LOAD_SYMBOL(_lantern_clamp_max_out_tensor_tensor_tensor)
-  LOAD_SYMBOL(_lantern_clamp_min_tensor_scalar)
-  LOAD_SYMBOL(_lantern_Tensor_clamp_min_tensor_scalar)
-  LOAD_SYMBOL(_lantern_clamp_min_tensor_tensor)
-  LOAD_SYMBOL(_lantern_Tensor_clamp_min_tensor_tensor)
-  LOAD_SYMBOL(_lantern_clamp_min__tensor_scalar)
-  LOAD_SYMBOL(_lantern_Tensor_clamp_min__tensor_scalar)
-  LOAD_SYMBOL(_lantern_clamp_min__tensor_tensor)
-  LOAD_SYMBOL(_lantern_Tensor_clamp_min__tensor_tensor)
-  LOAD_SYMBOL(_lantern_clamp_min_out_tensor_tensor_scalar)
-  LOAD_SYMBOL(_lantern_clamp_min_out_tensor_tensor_tensor)
-  LOAD_SYMBOL(_lantern_clip_tensor_scalar_scalar)
-  LOAD_SYMBOL(_lantern_Tensor_clip_tensor_scalar_scalar)
-  LOAD_SYMBOL(_lantern_clip_tensor_tensor_tensor)
-  LOAD_SYMBOL(_lantern_Tensor_clip_tensor_tensor_tensor)
-  LOAD_SYMBOL(_lantern_clip__tensor_scalar_scalar)
-  LOAD_SYMBOL(_lantern_Tensor_clip__tensor_scalar_scalar)
-  LOAD_SYMBOL(_lantern_clip__tensor_tensor_tensor)
-  LOAD_SYMBOL(_lantern_Tensor_clip__tensor_tensor_tensor)
-  LOAD_SYMBOL(_lantern_clip_out_tensor_tensor_scalar_scalar)
-  LOAD_SYMBOL(_lantern_clip_out_tensor_tensor_tensor_tensor)
-  LOAD_SYMBOL(_lantern_cudnn_is_acceptable_tensor)
-  LOAD_SYMBOL(_lantern_complex_tensor_tensor)
-  LOAD_SYMBOL(_lantern_complex_out_tensor_tensor_tensor)
-  LOAD_SYMBOL(_lantern_polar_tensor_tensor)
-  LOAD_SYMBOL(_lantern_polar_out_tensor_tensor_tensor)
-  LOAD_SYMBOL(_lantern_constant_pad_nd_tensor_intarrayref_scalar)
-  LOAD_SYMBOL(_lantern_Tensor_contiguous_tensor_memoryformat)
-  LOAD_SYMBOL(_lantern_convolution_tensor_tensor_tensor_intarrayref_intarrayref_intarrayref_bool_intarrayref_intt)
-  LOAD_SYMBOL(_lantern_convolution_overrideable_tensor_tensor_tensor_intarrayref_intarrayref_intarrayref_bool_intarrayref_intt)
-  LOAD_SYMBOL(_lantern_convolution_backward_overrideable_tensor_tensor_tensor_intarrayref_intarrayref_intarrayref_bool_intarrayref_intt_stdarraybool)
-  LOAD_SYMBOL(_lantern__convolution_tensor_tensor_tensor_intarrayref_intarrayref_intarrayref_bool_intarrayref_intt_bool_bool_bool_bool)
-  LOAD_SYMBOL(_lantern__convolution_tensor_tensor_tensor_intarrayref_intarrayref_intarrayref_bool_intarrayref_intt_bool_bool_bool)
-  LOAD_SYMBOL(_lantern__convolution_mode_tensor_tensor_tensor_intarrayref_stdstring_intarrayref_intt)
-  LOAD_SYMBOL(_lantern__convolution_nogroup_tensor_tensor_tensor_intarrayref_intarrayref_intarrayref_bool_intarrayref)
-  LOAD_SYMBOL(_lantern__convolution_double_backward_tensor_tensor_tensor_tensor_tensor_tensor_intarrayref_intarrayref_intarrayref_bool_intarrayref_intt_bool_bool_bool_bool_stdarraybool)
-  LOAD_SYMBOL(_lantern_conv1d_tensor_tensor_tensor_intarrayref_intarrayref_intarrayref_intt)
-  LOAD_SYMBOL(_lantern_conv2d_tensor_tensor_tensor_intarrayref_intarrayref_intarrayref_intt)
-  LOAD_SYMBOL(_lantern_conv3d_tensor_tensor_tensor_intarrayref_intarrayref_intarrayref_intt)
-  LOAD_SYMBOL(_lantern_conv1d_tensor_tensor_tensor_intarrayref_stdstring_intarrayref_intt)
-  LOAD_SYMBOL(_lantern_conv2d_tensor_tensor_tensor_intarrayref_stdstring_intarrayref_intt)
-  LOAD_SYMBOL(_lantern_conv3d_tensor_tensor_tensor_intarrayref_stdstring_intarrayref_intt)
-  LOAD_SYMBOL(_lantern_conv_tbc_tensor_tensor_tensor_intt)
-  LOAD_SYMBOL(_lantern_conv_tbc_backward_tensor_tensor_tensor_tensor_intt)
-  LOAD_SYMBOL(_lantern_conv_transpose1d_tensor_tensor_tensor_intarrayref_intarrayref_intarrayref_intt_intarrayref)
-  LOAD_SYMBOL(_lantern_conv_transpose2d_tensor_tensor_tensor_intarrayref_intarrayref_intarrayref_intt_intarrayref)
-  LOAD_SYMBOL(_lantern_conv_transpose3d_tensor_tensor_tensor_intarrayref_intarrayref_intarrayref_intt_intarrayref)
-  LOAD_SYMBOL(_lantern_Tensor_copy__tensor_tensor_bool)
-  LOAD_SYMBOL(_lantern__copy_from_tensor_tensor_bool)
-  LOAD_SYMBOL(_lantern_cos_tensor)
-  LOAD_SYMBOL(_lantern_Tensor_cos_tensor)
-  LOAD_SYMBOL(_lantern_cos__tensor)
-  LOAD_SYMBOL(_lantern_Tensor_cos__tensor)
-  LOAD_SYMBOL(_lantern_cos_out_tensor_tensor)
-  LOAD_SYMBOL(_lantern_cosh_tensor)
-  LOAD_SYMBOL(_lantern_Tensor_cosh_tensor)
-  LOAD_SYMBOL(_lantern_cosh__tensor)
-  LOAD_SYMBOL(_lantern_Tensor_cosh__tensor)
-  LOAD_SYMBOL(_lantern_cosh_out_tensor_tensor)
-  LOAD_SYMBOL(_lantern_cosine_embedding_loss_tensor_tensor_tensor_double_intt)
-  LOAD_SYMBOL(_lantern_count_nonzero_tensor_intarrayref)
-  LOAD_SYMBOL(_lantern_Tensor_count_nonzero_tensor_intarrayref)
-  LOAD_SYMBOL(_lantern_count_nonzero_tensor_intt)
-  LOAD_SYMBOL(_lantern_Tensor_count_nonzero_tensor_intt)
-  LOAD_SYMBOL(_lantern_cudnn_affine_grid_generator_tensor_intt_intt_intt_intt)
-  LOAD_SYMBOL(_lantern_cudnn_affine_grid_generator_backward_tensor_intt_intt_intt_intt)
-  LOAD_SYMBOL(_lantern_cudnn_batch_norm_tensor_tensor_tensor_tensor_tensor_bool_double_double)
-  LOAD_SYMBOL(_lantern_cudnn_batch_norm_backward_tensor_tensor_tensor_tensor_tensor_tensor_tensor_double_tensor)
-  LOAD_SYMBOL(_lantern_cudnn_convolution_tensor_tensor_tensor_intarrayref_intarrayref_intarrayref_intt_bool_bool)
-  LOAD_SYMBOL(_lantern_cudnn_convolution_tensor_tensor_intarrayref_intarrayref_intarrayref_intt_bool_bool)
-  LOAD_SYMBOL(_lantern_cudnn_convolution_tensor_tensor_intarrayref_intarrayref_intarrayref_intt_bool_bool_bool)
-  LOAD_SYMBOL(_lantern_cudnn_convolution_backward_input_intarrayref_tensor_tensor_intarrayref_intarrayref_intarrayref_intt_bool_bool_bool)
-  LOAD_SYMBOL(_lantern_cudnn_convolution_backward_tensor_tensor_tensor_intarrayref_intarrayref_intarrayref_intt_bool_bool_bool_stdarraybool)
-  LOAD_SYMBOL(_lantern_cudnn_convolution_backward_weight_intarrayref_tensor_tensor_intarrayref_intarrayref_intarrayref_intt_bool_bool_bool)
-  LOAD_SYMBOL(_lantern_cudnn_convolution_transpose_tensor_tensor_tensor_intarrayref_intarrayref_intarrayref_intarrayref_intt_bool_bool)
-  LOAD_SYMBOL(_lantern_cudnn_convolution_transpose_tensor_tensor_intarrayref_intarrayref_intarrayref_intarrayref_intt_bool_bool)
-  LOAD_SYMBOL(_lantern_cudnn_convolution_transpose_tensor_tensor_intarrayref_intarrayref_intarrayref_intarrayref_intt_bool_bool_bool)
-  LOAD_SYMBOL(_lantern_cudnn_convolution_transpose_backward_tensor_tensor_tensor_intarrayref_intarrayref_intarrayref_intarrayref_intt_bool_bool_bool_stdarraybool)
-  LOAD_SYMBOL(_lantern_cudnn_convolution_transpose_backward_input_tensor_tensor_intarrayref_intarrayref_intarrayref_intt_bool_bool_bool)
-  LOAD_SYMBOL(_lantern_cudnn_convolution_transpose_backward_weight_intarrayref_tensor_tensor_intarrayref_intarrayref_intarrayref_intt_bool_bool_bool)
-  LOAD_SYMBOL(_lantern_cudnn_convolution_relu_tensor_tensor_tensor_intarrayref_intarrayref_intarrayref_intt)
-  LOAD_SYMBOL(_lantern_cudnn_convolution_add_relu_tensor_tensor_tensor_scalar_tensor_intarrayref_intarrayref_intarrayref_intt)
-  LOAD_SYMBOL(_lantern_cudnn_grid_sampler_tensor_tensor)
-  LOAD_SYMBOL(_lantern_cudnn_grid_sampler_backward_tensor_tensor_tensor)
-  LOAD_SYMBOL(_lantern_cummax_tensor_intt)
-  LOAD_SYMBOL(_lantern_Tensor_cummax_tensor_intt)
-  LOAD_SYMBOL(_lantern_cummax_out_tensor_tensor_tensor_intt)
-  LOAD_SYMBOL(_lantern_cummax_tensor_dimname)
-  LOAD_SYMBOL(_lantern_Tensor_cummax_tensor_dimname)
-  LOAD_SYMBOL(_lantern_cummax_out_tensor_tensor_tensor_dimname)
-  LOAD_SYMBOL(_lantern__cummax_helper_tensor_tensor_tensor_intt)
-  LOAD_SYMBOL(_lantern_cummin_tensor_intt)
-  LOAD_SYMBOL(_lantern_Tensor_cummin_tensor_intt)
-  LOAD_SYMBOL(_lantern_cummin_out_tensor_tensor_tensor_intt)
-  LOAD_SYMBOL(_lantern_cummin_tensor_dimname)
-  LOAD_SYMBOL(_lantern_Tensor_cummin_tensor_dimname)
-  LOAD_SYMBOL(_lantern_cummin_out_tensor_tensor_tensor_dimname)
-  LOAD_SYMBOL(_lantern__cummin_helper_tensor_tensor_tensor_intt)
-  LOAD_SYMBOL(_lantern_cummaxmin_backward_tensor_tensor_tensor_intt)
-  LOAD_SYMBOL(_lantern_cumprod_tensor_intt_scalartype)
-  LOAD_SYMBOL(_lantern_Tensor_cumprod_tensor_intt_scalartype)
-  LOAD_SYMBOL(_lantern_Tensor_cumprod__tensor_intt_scalartype)
-  LOAD_SYMBOL(_lantern_cumprod_out_tensor_tensor_intt_scalartype)
-  LOAD_SYMBOL(_lantern_cumprod_tensor_dimname_scalartype)
-  LOAD_SYMBOL(_lantern_Tensor_cumprod_tensor_dimname_scalartype)
-  LOAD_SYMBOL(_lantern_Tensor_cumprod__tensor_dimname_scalartype)
-  LOAD_SYMBOL(_lantern_cumprod_out_tensor_tensor_dimname_scalartype)
-  LOAD_SYMBOL(_lantern_cumprod_backward_tensor_tensor_intt_tensor)
-  LOAD_SYMBOL(_lantern_cumsum_tensor_intt_scalartype)
-  LOAD_SYMBOL(_lantern_Tensor_cumsum_tensor_intt_scalartype)
-  LOAD_SYMBOL(_lantern_Tensor_cumsum__tensor_intt_scalartype)
-  LOAD_SYMBOL(_lantern_cumsum_out_tensor_tensor_intt_scalartype)
-  LOAD_SYMBOL(_lantern_cumsum_tensor_dimname_scalartype)
-  LOAD_SYMBOL(_lantern_Tensor_cumsum_tensor_dimname_scalartype)
-  LOAD_SYMBOL(_lantern_Tensor_cumsum__tensor_dimname_scalartype)
-  LOAD_SYMBOL(_lantern_cumsum_out_tensor_tensor_dimname_scalartype)
-  LOAD_SYMBOL(_lantern_ctc_loss_tensor_tensor_intarrayref_intarrayref_intt_intt_bool)
-  LOAD_SYMBOL(_lantern_ctc_loss_tensor_tensor_tensor_tensor_intt_intt_bool)
-  LOAD_SYMBOL(_lantern__ctc_loss_tensor_tensor_intarrayref_intarrayref_intt_bool)
-  LOAD_SYMBOL(_lantern__ctc_loss_backward_tensor_tensor_tensor_intarrayref_intarrayref_tensor_tensor_intt_bool)
-  LOAD_SYMBOL(_lantern_diag_embed_tensor_intt_intt_intt)
-  LOAD_SYMBOL(_lantern_Tensor_diag_embed_tensor_intt_intt_intt)
-  LOAD_SYMBOL(_lantern_diagflat_tensor_intt)
-  LOAD_SYMBOL(_lantern_Tensor_diagflat_tensor_intt)
-  LOAD_SYMBOL(_lantern_diagonal_tensor_intt_intt_intt)
-  LOAD_SYMBOL(_lantern_Tensor_diagonal_tensor_intt_intt_intt)
-  LOAD_SYMBOL(_lantern_diagonal_tensor_dimname_dimname_dimname_intt)
-  LOAD_SYMBOL(_lantern_Tensor_diagonal_tensor_dimname_dimname_dimname_intt)
-  LOAD_SYMBOL(_lantern_diagonal_backward_tensor_intarrayref_intt_intt_intt)
-  LOAD_SYMBOL(_lantern_Tensor_fill_diagonal__tensor_scalar_bool)
-  LOAD_SYMBOL(_lantern_diff_tensor_intt_intt_tensor_tensor)
-  LOAD_SYMBOL(_lantern_Tensor_diff_tensor_intt_intt_tensor_tensor)
-  LOAD_SYMBOL(_lantern_diff_out_tensor_tensor_intt_intt_tensor_tensor)
-  LOAD_SYMBOL(_lantern_gradient_tensor_scalar_intt_intt)
-  LOAD_SYMBOL(_lantern_gradient_tensor_scalar_intarrayref_intt)
-  LOAD_SYMBOL(_lantern_gradient_tensor_intarrayref_intt)
-  LOAD_SYMBOL(_lantern_gradient_tensor_arrayrefscalar_intt_intt)
-  LOAD_SYMBOL(_lantern_gradient_tensor_arrayrefscalar_intarrayref_intt)
-  LOAD_SYMBOL(_lantern_gradient_tensor_tensorlist_intt_intt)
-  LOAD_SYMBOL(_lantern_gradient_tensor_tensorlist_intarrayref_intt)
-  LOAD_SYMBOL(_lantern_div_tensor_tensor)
-  LOAD_SYMBOL(_lantern_Tensor_div_tensor_tensor)
-  LOAD_SYMBOL(_lantern_Tensor_div__tensor_tensor)
-  LOAD_SYMBOL(_lantern_div_out_tensor_tensor_tensor)
-  LOAD_SYMBOL(_lantern_div_tensor_tensor_stdstring)
-  LOAD_SYMBOL(_lantern_Tensor_div_tensor_tensor_stdstring)
-  LOAD_SYMBOL(_lantern_Tensor_div__tensor_tensor_stdstring)
-  LOAD_SYMBOL(_lantern_div_out_tensor_tensor_tensor_stdstring)
-  LOAD_SYMBOL(_lantern_div_tensor_scalar)
-  LOAD_SYMBOL(_lantern_Tensor_div_tensor_scalar)
-  LOAD_SYMBOL(_lantern_Tensor_div__tensor_scalar)
-  LOAD_SYMBOL(_lantern_div_tensor_scalar_stdstring)
-  LOAD_SYMBOL(_lantern_Tensor_div_tensor_scalar_stdstring)
-  LOAD_SYMBOL(_lantern_Tensor_div__tensor_scalar_stdstring)
-  LOAD_SYMBOL(_lantern_divide_tensor_tensor)
-  LOAD_SYMBOL(_lantern_Tensor_divide_tensor_tensor)
-  LOAD_SYMBOL(_lantern_Tensor_divide__tensor_tensor)
-  LOAD_SYMBOL(_lantern_divide_out_tensor_tensor_tensor)
-  LOAD_SYMBOL(_lantern_divide_tensor_scalar)
-  LOAD_SYMBOL(_lantern_Tensor_divide_tensor_scalar)
-  LOAD_SYMBOL(_lantern_Tensor_divide__tensor_scalar)
-  LOAD_SYMBOL(_lantern_divide_tensor_tensor_stdstring)
-  LOAD_SYMBOL(_lantern_Tensor_divide_tensor_tensor_stdstring)
-  LOAD_SYMBOL(_lantern_Tensor_divide__tensor_tensor_stdstring)
-  LOAD_SYMBOL(_lantern_divide_out_tensor_tensor_tensor_stdstring)
-  LOAD_SYMBOL(_lantern_divide_tensor_scalar_stdstring)
-  LOAD_SYMBOL(_lantern_Tensor_divide_tensor_scalar_stdstring)
-  LOAD_SYMBOL(_lantern_Tensor_divide__tensor_scalar_stdstring)
-  LOAD_SYMBOL(_lantern_true_divide_tensor_tensor)
-  LOAD_SYMBOL(_lantern_Tensor_true_divide_tensor_tensor)
-  LOAD_SYMBOL(_lantern_Tensor_true_divide__tensor_tensor)
-  LOAD_SYMBOL(_lantern_true_divide_out_tensor_tensor_tensor)
-  LOAD_SYMBOL(_lantern_true_divide_tensor_scalar)
-  LOAD_SYMBOL(_lantern_Tensor_true_divide_tensor_scalar)
-  LOAD_SYMBOL(_lantern_Tensor_true_divide__tensor_scalar)
-  LOAD_SYMBOL(_lantern_dot_tensor_tensor)
-  LOAD_SYMBOL(_lantern_Tensor_dot_tensor_tensor)
-  LOAD_SYMBOL(_lantern_dot_out_tensor_tensor_tensor)
-  LOAD_SYMBOL(_lantern_vdot_tensor_tensor)
-  LOAD_SYMBOL(_lantern_Tensor_vdot_tensor_tensor)
-  LOAD_SYMBOL(_lantern_vdot_out_tensor_tensor_tensor)
-  LOAD_SYMBOL(_lantern_einsum_stdstring_tensorlist)
-  LOAD_SYMBOL(_lantern_embedding_tensor_tensor_intt_bool_bool)
-  LOAD_SYMBOL(_lantern_embedding_backward_tensor_tensor_intt_intt_bool_bool)
-  LOAD_SYMBOL(_lantern_embedding_dense_backward_tensor_tensor_intt_intt_bool)
-  LOAD_SYMBOL(_lantern_embedding_renorm__tensor_tensor_double_double)
-  LOAD_SYMBOL(_lantern_embedding_sparse_backward_tensor_tensor_intt_intt_bool)
-  LOAD_SYMBOL(_lantern__embedding_bag_forward_only_tensor_tensor_tensor_bool_intt_bool_tensor_bool_intt)
-  LOAD_SYMBOL(_lantern__rowwise_prune_tensor_tensor_scalartype)
-  LOAD_SYMBOL(_lantern_row_stack_tensorlist)
-  LOAD_SYMBOL(_lantern_row_stack_out_tensor_tensorlist)
-  LOAD_SYMBOL(_lantern_embedding_bag_tensor_tensor_tensor_bool_intt_bool_tensor_bool)
-  LOAD_SYMBOL(_lantern_embedding_bag_tensor_tensor_tensor_bool_intt_bool_tensor_bool_intt)
-  LOAD_SYMBOL(_lantern__embedding_bag_tensor_tensor_tensor_bool_intt_bool_tensor_bool_intt)
-  LOAD_SYMBOL(_lantern__embedding_bag_backward_tensor_tensor_tensor_tensor_tensor_tensor_intt_bool_intt_bool_tensor_intt)
-  LOAD_SYMBOL(_lantern__embedding_bag_sparse_backward_tensor_tensor_tensor_tensor_tensor_intt_bool_intt_tensor_intt)
-  LOAD_SYMBOL(_lantern__embedding_bag_dense_backward_tensor_tensor_tensor_tensor_tensor_intt_bool_intt_tensor_intt)
-  LOAD_SYMBOL(_lantern__embedding_bag_per_sample_weights_backward_tensor_tensor_tensor_tensor_tensor_intt_intt)
-  LOAD_SYMBOL(_lantern_empty_intarrayref_dimnamelist_tensoroptions_memoryformat)
-  LOAD_SYMBOL(_lantern_empty_intarrayref_tensoroptions_memoryformat)
-  LOAD_SYMBOL(_lantern_Tensor_new_empty_tensor_intarrayref_tensoroptions)
-  LOAD_SYMBOL(_lantern_Tensor_new_empty_strided_tensor_intarrayref_intarrayref_tensoroptions)
-  LOAD_SYMBOL(_lantern_Tensor_new_full_tensor_intarrayref_scalar_tensoroptions)
-  LOAD_SYMBOL(_lantern_Tensor_new_zeros_tensor_intarrayref_tensoroptions)
-  LOAD_SYMBOL(_lantern__empty_affine_quantized_intarrayref_tensoroptions_double_intt_memoryformat)
-  LOAD_SYMBOL(_lantern__empty_per_channel_affine_quantized_intarrayref_tensor_tensor_intt_tensoroptions_memoryformat)
-  LOAD_SYMBOL(_lantern_Tensor_resize__tensor_intarrayref_memoryformat)
-  LOAD_SYMBOL(_lantern_empty_quantized_intarrayref_tensor)
-  LOAD_SYMBOL(_lantern_empty_out_tensor_intarrayref_memoryformat)
-  LOAD_SYMBOL(_lantern_empty_like_tensor_tensoroptions_memoryformat)
-  LOAD_SYMBOL(_lantern_empty_strided_intarrayref_intarrayref_tensoroptions)
-  LOAD_SYMBOL(_lantern_erf_tensor)
-  LOAD_SYMBOL(_lantern_Tensor_erf_tensor)
-  LOAD_SYMBOL(_lantern_erf__tensor)
-  LOAD_SYMBOL(_lantern_Tensor_erf__tensor)
-  LOAD_SYMBOL(_lantern_erf_out_tensor_tensor)
-  LOAD_SYMBOL(_lantern_erfc_tensor)
-  LOAD_SYMBOL(_lantern_Tensor_erfc_tensor)
-  LOAD_SYMBOL(_lantern_erfc__tensor)
-  LOAD_SYMBOL(_lantern_Tensor_erfc__tensor)
-  LOAD_SYMBOL(_lantern_erfc_out_tensor_tensor)
-  LOAD_SYMBOL(_lantern_exp_tensor)
-  LOAD_SYMBOL(_lantern_Tensor_exp_tensor)
-  LOAD_SYMBOL(_lantern_exp__tensor)
-  LOAD_SYMBOL(_lantern_Tensor_exp__tensor)
-  LOAD_SYMBOL(_lantern_exp_out_tensor_tensor)
-  LOAD_SYMBOL(_lantern_exp2_tensor)
-  LOAD_SYMBOL(_lantern_Tensor_exp2_tensor)
-  LOAD_SYMBOL(_lantern_exp2__tensor)
-  LOAD_SYMBOL(_lantern_Tensor_exp2__tensor)
-  LOAD_SYMBOL(_lantern_exp2_out_tensor_tensor)
-  LOAD_SYMBOL(_lantern_expm1_tensor)
-  LOAD_SYMBOL(_lantern_Tensor_expm1_tensor)
-  LOAD_SYMBOL(_lantern_expm1__tensor)
-  LOAD_SYMBOL(_lantern_Tensor_expm1__tensor)
-  LOAD_SYMBOL(_lantern_expm1_out_tensor_tensor)
-  LOAD_SYMBOL(_lantern_Tensor_expand_tensor_intarrayref_bool)
-  LOAD_SYMBOL(_lantern_Tensor_expand_as_tensor_tensor)
-  LOAD_SYMBOL(_lantern_eye_intt_tensoroptions)
-  LOAD_SYMBOL(_lantern_eye_intt_intt_tensoroptions)
-  LOAD_SYMBOL(_lantern_eye_out_tensor_intt)
-  LOAD_SYMBOL(_lantern_eye_out_tensor_intt_intt)
-  LOAD_SYMBOL(_lantern_flatten_tensor_intt_intt)
-  LOAD_SYMBOL(_lantern_Tensor_flatten_tensor_intt_intt)
-  LOAD_SYMBOL(_lantern_flatten_tensor_intt_intt_dimname)
-  LOAD_SYMBOL(_lantern_Tensor_flatten_tensor_intt_intt_dimname)
-  LOAD_SYMBOL(_lantern_flatten_tensor_dimname_dimname_dimname)
-  LOAD_SYMBOL(_lantern_Tensor_flatten_tensor_dimname_dimname_dimname)
-  LOAD_SYMBOL(_lantern_flatten_tensor_dimnamelist_dimname)
-  LOAD_SYMBOL(_lantern_Tensor_flatten_tensor_dimnamelist_dimname)
-  LOAD_SYMBOL(_lantern_Tensor_unflatten_tensor_intt_intarrayref_dimnamelist)
-  LOAD_SYMBOL(_lantern_Tensor_unflatten_tensor_dimname_intarrayref_dimnamelist)
-  LOAD_SYMBOL(_lantern_fill__tensor_scalar)
-  LOAD_SYMBOL(_lantern_Tensor_fill__tensor_scalar)
-  LOAD_SYMBOL(_lantern_fill__tensor_tensor)
-  LOAD_SYMBOL(_lantern_Tensor_fill__tensor_tensor)
-  LOAD_SYMBOL(_lantern_floor_tensor)
-  LOAD_SYMBOL(_lantern_Tensor_floor_tensor)
-  LOAD_SYMBOL(_lantern_floor__tensor)
-  LOAD_SYMBOL(_lantern_Tensor_floor__tensor)
-  LOAD_SYMBOL(_lantern_floor_out_tensor_tensor)
-  LOAD_SYMBOL(_lantern_floor_divide_tensor_tensor)
-  LOAD_SYMBOL(_lantern_Tensor_floor_divide_tensor_tensor)
-  LOAD_SYMBOL(_lantern_Tensor_floor_divide__tensor_tensor)
-  LOAD_SYMBOL(_lantern_floor_divide_out_tensor_tensor_tensor)
-  LOAD_SYMBOL(_lantern_floor_divide_tensor_scalar)
-  LOAD_SYMBOL(_lantern_Tensor_floor_divide_tensor_scalar)
-  LOAD_SYMBOL(_lantern_Tensor_floor_divide__tensor_scalar)
-  LOAD_SYMBOL(_lantern_frac_tensor)
-  LOAD_SYMBOL(_lantern_Tensor_frac_tensor)
-  LOAD_SYMBOL(_lantern_frac__tensor)
-  LOAD_SYMBOL(_lantern_Tensor_frac__tensor)
-  LOAD_SYMBOL(_lantern_frac_out_tensor_tensor)
-  LOAD_SYMBOL(_lantern_full_intarrayref_scalar_dimnamelist_tensoroptions)
-  LOAD_SYMBOL(_lantern_full_intarrayref_scalar_tensoroptions)
-  LOAD_SYMBOL(_lantern_full_out_tensor_intarrayref_scalar)
-  LOAD_SYMBOL(_lantern_full_like_tensor_scalar_tensoroptions_memoryformat)
-  LOAD_SYMBOL(_lantern_from_file_stdstring_bool_intt_tensoroptions)
-  LOAD_SYMBOL(_lantern_gcd_out_tensor_tensor_tensor)
-  LOAD_SYMBOL(_lantern_gcd_tensor_tensor)
-  LOAD_SYMBOL(_lantern_Tensor_gcd_tensor_tensor)
-  LOAD_SYMBOL(_lantern_gcd__tensor_tensor)
-  LOAD_SYMBOL(_lantern_Tensor_gcd__tensor_tensor)
-  LOAD_SYMBOL(_lantern_lcm_out_tensor_tensor_tensor)
-  LOAD_SYMBOL(_lantern_lcm_tensor_tensor)
-  LOAD_SYMBOL(_lantern_Tensor_lcm_tensor_tensor)
-  LOAD_SYMBOL(_lantern_lcm__tensor_tensor)
-  LOAD_SYMBOL(_lantern_Tensor_lcm__tensor_tensor)
-  LOAD_SYMBOL(_lantern_grid_sampler_tensor_tensor_intt_intt_bool)
-  LOAD_SYMBOL(_lantern_grid_sampler_2d_tensor_tensor_intt_intt_bool)
-  LOAD_SYMBOL(_lantern_grid_sampler_2d_backward_tensor_tensor_tensor_intt_intt_bool)
-  LOAD_SYMBOL(_lantern__grid_sampler_2d_cpu_fallback_tensor_tensor_intt_intt_bool)
-  LOAD_SYMBOL(_lantern__grid_sampler_2d_cpu_fallback_backward_tensor_tensor_tensor_intt_intt_bool)
-  LOAD_SYMBOL(_lantern_grid_sampler_3d_tensor_tensor_intt_intt_bool)
-  LOAD_SYMBOL(_lantern_grid_sampler_3d_backward_tensor_tensor_tensor_intt_intt_bool)
-  LOAD_SYMBOL(_lantern_hann_window_intt_tensoroptions)
-  LOAD_SYMBOL(_lantern_hann_window_intt_bool_tensoroptions)
-  LOAD_SYMBOL(_lantern_hamming_window_intt_tensoroptions)
-  LOAD_SYMBOL(_lantern_hamming_window_intt_bool_tensoroptions)
-  LOAD_SYMBOL(_lantern_hamming_window_intt_bool_double_tensoroptions)
-  LOAD_SYMBOL(_lantern_hamming_window_intt_bool_double_double_tensoroptions)
-  LOAD_SYMBOL(_lantern_kaiser_window_intt_tensoroptions)
-  LOAD_SYMBOL(_lantern_kaiser_window_intt_bool_tensoroptions)
-  LOAD_SYMBOL(_lantern_kaiser_window_intt_bool_double_tensoroptions)
-  LOAD_SYMBOL(_lantern_hinge_embedding_loss_tensor_tensor_double_intt)
-  LOAD_SYMBOL(_lantern_group_norm_tensor_intt_tensor_tensor_double_bool)
-  LOAD_SYMBOL(_lantern_native_group_norm_tensor_tensor_tensor_intt_intt_intt_intt_double)
-  LOAD_SYMBOL(_lantern_native_group_norm_backward_tensor_tensor_tensor_tensor_tensor_intt_intt_intt_intt_stdarraybool)
-  LOAD_SYMBOL(_lantern__fft_r2c_tensor_intarrayref_intt_bool)
-  LOAD_SYMBOL(_lantern__fft_r2c_out_tensor_tensor_intarrayref_intt_bool)
-  LOAD_SYMBOL(_lantern__fft_c2r_tensor_intarrayref_intt_intt)
-  LOAD_SYMBOL(_lantern__fft_c2r_out_tensor_tensor_intarrayref_intt_intt)
-  LOAD_SYMBOL(_lantern__fft_c2c_tensor_intarrayref_intt_bool)
-  LOAD_SYMBOL(_lantern__fft_c2c_out_tensor_tensor_intarrayref_intt_bool)
-  LOAD_SYMBOL(_lantern__cufft_get_plan_cache_size_intt)
-  LOAD_SYMBOL(_lantern__cufft_get_plan_cache_max_size_intt)
-  LOAD_SYMBOL(_lantern__cufft_set_plan_cache_max_size_intt_intt)
-  LOAD_SYMBOL(_lantern__cufft_clear_plan_cache_intt)
-  LOAD_SYMBOL(_lantern_index_tensor_constclistcoptionaltensor)
-  LOAD_SYMBOL(_lantern_Tensor_index_tensor_constclistcoptionaltensor)
-  LOAD_SYMBOL(_lantern_Tensor_index_copy__tensor_intt_tensor_tensor)
-  LOAD_SYMBOL(_lantern_index_copy_tensor_intt_tensor_tensor)
-  LOAD_SYMBOL(_lantern_Tensor_index_copy_tensor_intt_tensor_tensor)
-  LOAD_SYMBOL(_lantern_Tensor_index_copy__tensor_dimname_tensor_tensor)
-  LOAD_SYMBOL(_lantern_index_copy_tensor_dimname_tensor_tensor)
-  LOAD_SYMBOL(_lantern_Tensor_index_copy_tensor_dimname_tensor_tensor)
-  LOAD_SYMBOL(_lantern_index_put__tensor_constclistcoptionaltensor_tensor_bool)
-  LOAD_SYMBOL(_lantern_Tensor_index_put__tensor_constclistcoptionaltensor_tensor_bool)
-  LOAD_SYMBOL(_lantern_index_put_tensor_constclistcoptionaltensor_tensor_bool)
-  LOAD_SYMBOL(_lantern_Tensor_index_put_tensor_constclistcoptionaltensor_tensor_bool)
-  LOAD_SYMBOL(_lantern__index_put_impl__tensor_constclistcoptionaltensor_tensor_bool_bool)
-  LOAD_SYMBOL(_lantern_instance_norm_tensor_tensor_tensor_tensor_tensor_bool_double_double_bool)
-  LOAD_SYMBOL(_lantern_inverse_tensor)
-  LOAD_SYMBOL(_lantern_Tensor_inverse_tensor)
-  LOAD_SYMBOL(_lantern_inverse_out_tensor_tensor)
-  LOAD_SYMBOL(_lantern__inverse_helper_tensor)
-  LOAD_SYMBOL(_lantern_isclose_tensor_tensor_double_double_bool)
-  LOAD_SYMBOL(_lantern_Tensor_isclose_tensor_tensor_double_double_bool)
-  LOAD_SYMBOL(_lantern_isnan_tensor)
-  LOAD_SYMBOL(_lantern_Tensor_isnan_tensor)
-  LOAD_SYMBOL(_lantern_is_distributed_tensor)
-  LOAD_SYMBOL(_lantern_Tensor_is_distributed_tensor)
-  LOAD_SYMBOL(_lantern_is_floating_point_tensor)
-  LOAD_SYMBOL(_lantern_Tensor_is_floating_point_tensor)
-  LOAD_SYMBOL(_lantern_is_complex_tensor)
-  LOAD_SYMBOL(_lantern_Tensor_is_complex_tensor)
-  LOAD_SYMBOL(_lantern_isreal_tensor)
-  LOAD_SYMBOL(_lantern_Tensor_isreal_tensor)
-  LOAD_SYMBOL(_lantern_is_nonzero_tensor)
-  LOAD_SYMBOL(_lantern_Tensor_is_nonzero_tensor)
-  LOAD_SYMBOL(_lantern_is_same_size_tensor_tensor)
-  LOAD_SYMBOL(_lantern_Tensor_is_same_size_tensor_tensor)
-  LOAD_SYMBOL(_lantern_is_signed_tensor)
-  LOAD_SYMBOL(_lantern_Tensor_is_signed_tensor)
-  LOAD_SYMBOL(_lantern_kl_div_tensor_tensor_intt_bool)
-  LOAD_SYMBOL(_lantern_kl_div_backward_tensor_tensor_tensor_intt_bool)
-  LOAD_SYMBOL(_lantern_kron_tensor_tensor)
-  LOAD_SYMBOL(_lantern_Tensor_kron_tensor_tensor)
-  LOAD_SYMBOL(_lantern_kron_out_tensor_tensor_tensor)
-  LOAD_SYMBOL(_lantern_kthvalue_tensor_intt_intt_bool)
-  LOAD_SYMBOL(_lantern_Tensor_kthvalue_tensor_intt_intt_bool)
-  LOAD_SYMBOL(_lantern_kthvalue_out_tensor_tensor_tensor_intt_intt_bool)
-  LOAD_SYMBOL(_lantern_kthvalue_tensor_intt_dimname_bool)
-  LOAD_SYMBOL(_lantern_Tensor_kthvalue_tensor_intt_dimname_bool)
-  LOAD_SYMBOL(_lantern_kthvalue_out_tensor_tensor_tensor_intt_dimname_bool)
-  LOAD_SYMBOL(_lantern_layer_norm_tensor_intarrayref_tensor_tensor_double_bool)
-  LOAD_SYMBOL(_lantern_native_layer_norm_tensor_intarrayref_tensor_tensor_double)
-  LOAD_SYMBOL(_lantern_native_layer_norm_backward_tensor_tensor_intarrayref_tensor_tensor_tensor_tensor_stdarraybool)
-  LOAD_SYMBOL(_lantern_nan_to_num_tensor_double_double_double)
-  LOAD_SYMBOL(_lantern_Tensor_nan_to_num_tensor_double_double_double)
-  LOAD_SYMBOL(_lantern_nan_to_num__tensor_double_double_double)
-  LOAD_SYMBOL(_lantern_Tensor_nan_to_num__tensor_double_double_double)
-  LOAD_SYMBOL(_lantern_nan_to_num_out_tensor_tensor_double_double_double)
-  LOAD_SYMBOL(_lantern_linear_tensor_tensor_tensor)
-  LOAD_SYMBOL(_lantern_mkldnn_linear_tensor_tensor_tensor)
-  LOAD_SYMBOL(_lantern_mkldnn_linear_backward_input_intarrayref_tensor_tensor)
-  LOAD_SYMBOL(_lantern_mkldnn_linear_backward_weights_tensor_tensor_tensor_bool)
-  LOAD_SYMBOL(_lantern_mkldnn_linear_backward_tensor_tensor_tensor_stdarraybool)
-  LOAD_SYMBOL(_lantern_fbgemm_linear_int8_weight_fp32_activation_tensor_tensor_tensor_tensor_scalar_scalar_tensor)
-  LOAD_SYMBOL(_lantern_fbgemm_linear_int8_weight_tensor_tensor_tensor_tensor_scalar_scalar_tensor)
-  LOAD_SYMBOL(_lantern_fbgemm_linear_quantize_weight_tensor)
-  LOAD_SYMBOL(_lantern_fbgemm_pack_gemm_matrix_fp16_tensor)
-  LOAD_SYMBOL(_lantern_fbgemm_linear_fp16_weight_fp32_activation_tensor_tensor_tensor)
-  LOAD_SYMBOL(_lantern_fbgemm_linear_fp16_weight_tensor_tensor_tensor)
-  LOAD_SYMBOL(_lantern_fbgemm_pack_quantized_matrix_tensor)
-  LOAD_SYMBOL(_lantern_fbgemm_pack_quantized_matrix_tensor_intt_intt)
-  LOAD_SYMBOL(_lantern_ldexp_tensor_tensor)
-  LOAD_SYMBOL(_lantern_Tensor_ldexp_tensor_tensor)
-  LOAD_SYMBOL(_lantern_ldexp__tensor_tensor)
-  LOAD_SYMBOL(_lantern_Tensor_ldexp__tensor_tensor)
-  LOAD_SYMBOL(_lantern_ldexp_out_tensor_tensor_tensor)
-  LOAD_SYMBOL(_lantern_linspace_scalar_scalar_intt_tensoroptions)
-  LOAD_SYMBOL(_lantern_linspace_out_tensor_scalar_scalar_intt)
-  LOAD_SYMBOL(_lantern_log_tensor)
-  LOAD_SYMBOL(_lantern_Tensor_log_tensor)
-  LOAD_SYMBOL(_lantern_log__tensor)
-  LOAD_SYMBOL(_lantern_Tensor_log__tensor)
-  LOAD_SYMBOL(_lantern_log_out_tensor_tensor)
-  LOAD_SYMBOL(_lantern_log10_tensor)
-  LOAD_SYMBOL(_lantern_Tensor_log10_tensor)
-  LOAD_SYMBOL(_lantern_log10__tensor)
-  LOAD_SYMBOL(_lantern_Tensor_log10__tensor)
-  LOAD_SYMBOL(_lantern_log10_out_tensor_tensor)
-  LOAD_SYMBOL(_lantern_log1p_tensor)
-  LOAD_SYMBOL(_lantern_Tensor_log1p_tensor)
-  LOAD_SYMBOL(_lantern_log1p__tensor)
-  LOAD_SYMBOL(_lantern_Tensor_log1p__tensor)
-  LOAD_SYMBOL(_lantern_log1p_out_tensor_tensor)
-  LOAD_SYMBOL(_lantern_log2_tensor)
-  LOAD_SYMBOL(_lantern_Tensor_log2_tensor)
-  LOAD_SYMBOL(_lantern_log2__tensor)
-  LOAD_SYMBOL(_lantern_Tensor_log2__tensor)
-  LOAD_SYMBOL(_lantern_log2_out_tensor_tensor)
-  LOAD_SYMBOL(_lantern_logaddexp_out_tensor_tensor_tensor)
-  LOAD_SYMBOL(_lantern_logaddexp_tensor_tensor)
-  LOAD_SYMBOL(_lantern_Tensor_logaddexp_tensor_tensor)
-  LOAD_SYMBOL(_lantern_logaddexp2_out_tensor_tensor_tensor)
-  LOAD_SYMBOL(_lantern_logaddexp2_tensor_tensor)
-  LOAD_SYMBOL(_lantern_Tensor_logaddexp2_tensor_tensor)
-  LOAD_SYMBOL(_lantern_xlogy_tensor_tensor)
-  LOAD_SYMBOL(_lantern_Tensor_xlogy_tensor_tensor)
-  LOAD_SYMBOL(_lantern_xlogy_scalar_tensor)
-  LOAD_SYMBOL(_lantern_xlogy_tensor_scalar)
-  LOAD_SYMBOL(_lantern_Tensor_xlogy_tensor_scalar)
-  LOAD_SYMBOL(_lantern_xlogy__tensor_tensor)
-  LOAD_SYMBOL(_lantern_Tensor_xlogy__tensor_tensor)
-  LOAD_SYMBOL(_lantern_xlogy__tensor_scalar)
-  LOAD_SYMBOL(_lantern_Tensor_xlogy__tensor_scalar)
-  LOAD_SYMBOL(_lantern_xlogy_out_tensor_tensor_tensor)
-  LOAD_SYMBOL(_lantern_xlogy_out_tensor_scalar_tensor)
-  LOAD_SYMBOL(_lantern_xlogy_out_tensor_tensor_scalar)
-  LOAD_SYMBOL(_lantern_logdet_tensor)
-  LOAD_SYMBOL(_lantern_Tensor_logdet_tensor)
-  LOAD_SYMBOL(_lantern_logspace_scalar_scalar_intt_double_tensoroptions)
-  LOAD_SYMBOL(_lantern_logspace_out_tensor_scalar_scalar_intt_double)
-  LOAD_SYMBOL(_lantern_log_softmax_tensor_intt_scalartype)
-  LOAD_SYMBOL(_lantern_Tensor_log_softmax_tensor_intt_scalartype)
-  LOAD_SYMBOL(_lantern_log_softmax_tensor_dimname_scalartype)
-  LOAD_SYMBOL(_lantern_Tensor_log_softmax_tensor_dimname_scalartype)
-  LOAD_SYMBOL(_lantern__log_softmax_tensor_intt_bool)
-  LOAD_SYMBOL(_lantern__log_softmax_backward_data_tensor_tensor_intt_tensor)
-  LOAD_SYMBOL(_lantern__logcumsumexp_tensor_intt)
-  LOAD_SYMBOL(_lantern__logcumsumexp_out_tensor_tensor_intt)
-  LOAD_SYMBOL(_lantern_logcumsumexp_tensor_intt)
-  LOAD_SYMBOL(_lantern_Tensor_logcumsumexp_tensor_intt)
-  LOAD_SYMBOL(_lantern_logcumsumexp_out_tensor_tensor_intt)
-  LOAD_SYMBOL(_lantern_logcumsumexp_tensor_dimname)
-  LOAD_SYMBOL(_lantern_Tensor_logcumsumexp_tensor_dimname)
-  LOAD_SYMBOL(_lantern_logcumsumexp_out_tensor_tensor_dimname)
-  LOAD_SYMBOL(_lantern_logsumexp_tensor_intarrayref_bool)
-  LOAD_SYMBOL(_lantern_Tensor_logsumexp_tensor_intarrayref_bool)
-  LOAD_SYMBOL(_lantern_logsumexp_out_tensor_tensor_intarrayref_bool)
-  LOAD_SYMBOL(_lantern_logsumexp_tensor_dimnamelist_bool)
-  LOAD_SYMBOL(_lantern_Tensor_logsumexp_tensor_dimnamelist_bool)
-  LOAD_SYMBOL(_lantern_logsumexp_out_tensor_tensor_dimnamelist_bool)
-  LOAD_SYMBOL(_lantern_margin_ranking_loss_tensor_tensor_tensor_double_intt)
-  LOAD_SYMBOL(_lantern_matmul_tensor_tensor)
-  LOAD_SYMBOL(_lantern_Tensor_matmul_tensor_tensor)
-  LOAD_SYMBOL(_lantern_matmul_out_tensor_tensor_tensor)
-  LOAD_SYMBOL(_lantern_matrix_rank_tensor_double_bool)
-  LOAD_SYMBOL(_lantern_matrix_rank_tensor_bool)
-  LOAD_SYMBOL(_lantern_matrix_power_tensor_intt)
-  LOAD_SYMBOL(_lantern_Tensor_matrix_power_tensor_intt)
-  LOAD_SYMBOL(_lantern_matrix_power_out_tensor_tensor_intt)
-  LOAD_SYMBOL(_lantern_matrix_exp_tensor)
-  LOAD_SYMBOL(_lantern_Tensor_matrix_exp_tensor)
-  LOAD_SYMBOL(_lantern_matrix_exp_backward_tensor_tensor)
-  LOAD_SYMBOL(_lantern__aminmax_tensor)
-  LOAD_SYMBOL(_lantern__aminmax_tensor_intt_bool)
-  LOAD_SYMBOL(_lantern__compute_linear_combination_tensor_tensor)
-  LOAD_SYMBOL(_lantern__compute_linear_combination_out_tensor_tensor_tensor)
-  LOAD_SYMBOL(_lantern_max_tensor_intt_bool)
-  LOAD_SYMBOL(_lantern_Tensor_max_tensor_intt_bool)
-  LOAD_SYMBOL(_lantern_max_out_tensor_tensor_tensor_intt_bool)
-  LOAD_SYMBOL(_lantern_max_tensor_dimname_bool)
-  LOAD_SYMBOL(_lantern_Tensor_max_tensor_dimname_bool)
-  LOAD_SYMBOL(_lantern_max_out_tensor_tensor_tensor_dimname_bool)
-  LOAD_SYMBOL(_lantern_value_selecting_reduction_backward_tensor_intt_tensor_intarrayref_bool)
-  LOAD_SYMBOL(_lantern_amax_tensor_intarrayref_bool)
-  LOAD_SYMBOL(_lantern_Tensor_amax_tensor_intarrayref_bool)
-  LOAD_SYMBOL(_lantern_amax_out_tensor_tensor_intarrayref_bool)
-  LOAD_SYMBOL(_lantern_max_pool1d_with_indices_tensor_intarrayref_intarrayref_intarrayref_intarrayref_bool)
-  LOAD_SYMBOL(_lantern_max_pool1d_tensor_intarrayref_intarrayref_intarrayref_intarrayref_bool)
-  LOAD_SYMBOL(_lantern_max_pool2d_tensor_intarrayref_intarrayref_intarrayref_intarrayref_bool)
-  LOAD_SYMBOL(_lantern_mkldnn_max_pool2d_tensor_intarrayref_intarrayref_intarrayref_intarrayref_bool)
-  LOAD_SYMBOL(_lantern_mkldnn_max_pool2d_backward_tensor_tensor_tensor_intarrayref_intarrayref_intarrayref_intarrayref_bool)
-  LOAD_SYMBOL(_lantern_mkldnn_max_pool3d_tensor_intarrayref_intarrayref_intarrayref_intarrayref_bool)
-  LOAD_SYMBOL(_lantern_mkldnn_max_pool3d_backward_tensor_tensor_tensor_intarrayref_intarrayref_intarrayref_intarrayref_bool)
-  LOAD_SYMBOL(_lantern_quantized_max_pool1d_tensor_intarrayref_intarrayref_intarrayref_intarrayref_bool)
-  LOAD_SYMBOL(_lantern_quantized_max_pool2d_tensor_intarrayref_intarrayref_intarrayref_intarrayref_bool)
-  LOAD_SYMBOL(_lantern_max_pool3d_tensor_intarrayref_intarrayref_intarrayref_intarrayref_bool)
-  LOAD_SYMBOL(_lantern_mean_tensor_scalartype)
-  LOAD_SYMBOL(_lantern_Tensor_mean_tensor_scalartype)
-  LOAD_SYMBOL(_lantern_mean_tensor_intarrayref_bool_scalartype)
-  LOAD_SYMBOL(_lantern_Tensor_mean_tensor_intarrayref_bool_scalartype)
-  LOAD_SYMBOL(_lantern_mean_out_tensor_tensor_intarrayref_bool_scalartype)
-  LOAD_SYMBOL(_lantern_mean_tensor_dimnamelist_bool_scalartype)
-  LOAD_SYMBOL(_lantern_Tensor_mean_tensor_dimnamelist_bool_scalartype)
-  LOAD_SYMBOL(_lantern_mean_out_tensor_tensor_dimnamelist_bool_scalartype)
-  LOAD_SYMBOL(_lantern_median_tensor)
-  LOAD_SYMBOL(_lantern_Tensor_median_tensor)
-  LOAD_SYMBOL(_lantern_median_tensor_intt_bool)
-  LOAD_SYMBOL(_lantern_Tensor_median_tensor_intt_bool)
-  LOAD_SYMBOL(_lantern_median_out_tensor_tensor_tensor_intt_bool)
-  LOAD_SYMBOL(_lantern_median_tensor_dimname_bool)
-  LOAD_SYMBOL(_lantern_Tensor_median_tensor_dimname_bool)
-  LOAD_SYMBOL(_lantern_median_out_tensor_tensor_tensor_dimname_bool)
-  LOAD_SYMBOL(_lantern_nanmedian_tensor)
-  LOAD_SYMBOL(_lantern_Tensor_nanmedian_tensor)
-  LOAD_SYMBOL(_lantern_nanmedian_tensor_intt_bool)
-  LOAD_SYMBOL(_lantern_Tensor_nanmedian_tensor_intt_bool)
-  LOAD_SYMBOL(_lantern_nanmedian_out_tensor_tensor_tensor_intt_bool)
-  LOAD_SYMBOL(_lantern_nanmedian_tensor_dimname_bool)
-  LOAD_SYMBOL(_lantern_Tensor_nanmedian_tensor_dimname_bool)
-  LOAD_SYMBOL(_lantern_nanmedian_out_tensor_tensor_tensor_dimname_bool)
-  LOAD_SYMBOL(_lantern_min_tensor_intt_bool)
-  LOAD_SYMBOL(_lantern_Tensor_min_tensor_intt_bool)
-  LOAD_SYMBOL(_lantern_min_out_tensor_tensor_tensor_intt_bool)
-  LOAD_SYMBOL(_lantern_min_tensor_dimname_bool)
-  LOAD_SYMBOL(_lantern_Tensor_min_tensor_dimname_bool)
-  LOAD_SYMBOL(_lantern_min_out_tensor_tensor_tensor_dimname_bool)
-  LOAD_SYMBOL(_lantern_amin_tensor_intarrayref_bool)
-  LOAD_SYMBOL(_lantern_Tensor_amin_tensor_intarrayref_bool)
-  LOAD_SYMBOL(_lantern_amin_out_tensor_tensor_intarrayref_bool)
-  LOAD_SYMBOL(_lantern_mkldnn_convolution_tensor_tensor_tensor_intarrayref_intarrayref_intarrayref_intt)
-  LOAD_SYMBOL(_lantern_mkldnn_convolution_backward_input_intarrayref_tensor_tensor_intarrayref_intarrayref_intarrayref_intt_bool)
-  LOAD_SYMBOL(_lantern_mkldnn_convolution_backward_weights_intarrayref_tensor_tensor_intarrayref_intarrayref_intarrayref_intt_bool)
-  LOAD_SYMBOL(_lantern_mkldnn_convolution_backward_tensor_tensor_tensor_intarrayref_intarrayref_intarrayref_intt_stdarraybool)
-  LOAD_SYMBOL(_lantern_miopen_batch_norm_tensor_tensor_tensor_tensor_tensor_bool_double_double)
-  LOAD_SYMBOL(_lantern_miopen_batch_norm_backward_tensor_tensor_tensor_tensor_tensor_tensor_tensor_double)
-  LOAD_SYMBOL(_lantern_miopen_convolution_tensor_tensor_tensor_intarrayref_intarrayref_intarrayref_intt_bool_bool)
-  LOAD_SYMBOL(_lantern_miopen_convolution_backward_input_intarrayref_tensor_tensor_intarrayref_intarrayref_intarrayref_intt_bool_bool)
-  LOAD_SYMBOL(_lantern_miopen_convolution_backward_tensor_tensor_tensor_intarrayref_intarrayref_intarrayref_intt_bool_bool_stdarraybool)
-  LOAD_SYMBOL(_lantern_miopen_convolution_backward_bias_tensor)
-  LOAD_SYMBOL(_lantern_miopen_convolution_backward_weight_intarrayref_tensor_tensor_intarrayref_intarrayref_intarrayref_intt_bool_bool)
-  LOAD_SYMBOL(_lantern_miopen_convolution_transpose_tensor_tensor_tensor_intarrayref_intarrayref_intarrayref_intarrayref_intt_bool_bool)
-  LOAD_SYMBOL(_lantern_miopen_convolution_transpose_backward_tensor_tensor_tensor_intarrayref_intarrayref_intarrayref_intarrayref_intt_bool_bool_stdarraybool)
-  LOAD_SYMBOL(_lantern_miopen_convolution_transpose_backward_input_tensor_tensor_intarrayref_intarrayref_intarrayref_intt_bool_bool)
-  LOAD_SYMBOL(_lantern_miopen_convolution_transpose_backward_weight_intarrayref_tensor_tensor_intarrayref_intarrayref_intarrayref_intt_bool_bool)
-  LOAD_SYMBOL(_lantern_miopen_depthwise_convolution_tensor_tensor_tensor_intarrayref_intarrayref_intarrayref_intt_bool_bool)
-  LOAD_SYMBOL(_lantern_miopen_depthwise_convolution_backward_input_intarrayref_tensor_tensor_intarrayref_intarrayref_intarrayref_intt_bool_bool)
-  LOAD_SYMBOL(_lantern_miopen_depthwise_convolution_backward_tensor_tensor_tensor_intarrayref_intarrayref_intarrayref_intt_bool_bool_stdarraybool)
-  LOAD_SYMBOL(_lantern_miopen_depthwise_convolution_backward_weight_intarrayref_tensor_tensor_intarrayref_intarrayref_intarrayref_intt_bool_bool)
-  LOAD_SYMBOL(_lantern_miopen_rnn_tensor_tensorlist_intt_tensor_tensor_intt_intt_intt_bool_double_bool_bool_intarrayref_tensor)
-  LOAD_SYMBOL(_lantern_miopen_rnn_backward_tensor_tensorlist_intt_tensor_tensor_tensor_tensor_tensor_tensor_tensor_intt_intt_intt_bool_double_bool_bool_intarrayref_tensor_tensor_stdarraybool)
-  LOAD_SYMBOL(_lantern_mm_tensor_tensor)
-  LOAD_SYMBOL(_lantern_Tensor_mm_tensor_tensor)
-  LOAD_SYMBOL(_lantern_mm_out_tensor_tensor_tensor)
-  LOAD_SYMBOL(_lantern__sparse_mm_tensor_tensor)
-  LOAD_SYMBOL(_lantern__sparse_sparse_matmul_tensor_tensor)
-  LOAD_SYMBOL(_lantern__sparse_mask_helper_tensor_tensor)
-  LOAD_SYMBOL(_lantern_mode_tensor_intt_bool)
-  LOAD_SYMBOL(_lantern_Tensor_mode_tensor_intt_bool)
-  LOAD_SYMBOL(_lantern_mode_out_tensor_tensor_tensor_intt_bool)
-  LOAD_SYMBOL(_lantern_mode_tensor_dimname_bool)
-  LOAD_SYMBOL(_lantern_Tensor_mode_tensor_dimname_bool)
-  LOAD_SYMBOL(_lantern_mode_out_tensor_tensor_tensor_dimname_bool)
-  LOAD_SYMBOL(_lantern_mul_tensor_tensor)
-  LOAD_SYMBOL(_lantern_Tensor_mul_tensor_tensor)
-  LOAD_SYMBOL(_lantern_Tensor_mul__tensor_tensor)
-  LOAD_SYMBOL(_lantern_mul_out_tensor_tensor_tensor)
-  LOAD_SYMBOL(_lantern_mul_tensor_scalar)
-  LOAD_SYMBOL(_lantern_Tensor_mul_tensor_scalar)
-  LOAD_SYMBOL(_lantern_Tensor_mul__tensor_scalar)
-  LOAD_SYMBOL(_lantern_multiply_tensor_tensor)
-  LOAD_SYMBOL(_lantern_Tensor_multiply_tensor_tensor)
-  LOAD_SYMBOL(_lantern_Tensor_multiply__tensor_tensor)
-  LOAD_SYMBOL(_lantern_multiply_out_tensor_tensor_tensor)
-  LOAD_SYMBOL(_lantern_multiply_tensor_scalar)
-  LOAD_SYMBOL(_lantern_Tensor_multiply_tensor_scalar)
-  LOAD_SYMBOL(_lantern_Tensor_multiply__tensor_scalar)
-  LOAD_SYMBOL(_lantern_mv_tensor_tensor)
-  LOAD_SYMBOL(_lantern_Tensor_mv_tensor_tensor)
-  LOAD_SYMBOL(_lantern_mv_out_tensor_tensor_tensor)
-  LOAD_SYMBOL(_lantern_mvlgamma_tensor_intt)
-  LOAD_SYMBOL(_lantern_Tensor_mvlgamma_tensor_intt)
-  LOAD_SYMBOL(_lantern_Tensor_mvlgamma__tensor_intt)
-  LOAD_SYMBOL(_lantern_narrow_copy_tensor_intt_intt_intt)
-  LOAD_SYMBOL(_lantern_Tensor_narrow_copy_tensor_intt_intt_intt)
-  LOAD_SYMBOL(_lantern_narrow_copy_out_tensor_tensor_intt_intt_intt)
-  LOAD_SYMBOL(_lantern_narrow_tensor_intt_intt_intt)
-  LOAD_SYMBOL(_lantern_Tensor_narrow_tensor_intt_intt_intt)
-  LOAD_SYMBOL(_lantern_narrow_tensor_intt_tensor_intt)
-  LOAD_SYMBOL(_lantern_Tensor_narrow_tensor_intt_tensor_intt)
-  LOAD_SYMBOL(_lantern_native_batch_norm_tensor_tensor_tensor_tensor_tensor_bool_double_double)
-  LOAD_SYMBOL(_lantern_native_batch_norm_out_tensor_tensor_tensor_tensor_tensor_tensor_tensor_tensor_bool_double_double)
-  LOAD_SYMBOL(_lantern_batch_norm_stats_tensor_double)
-  LOAD_SYMBOL(_lantern_batch_norm_elemt_tensor_tensor_tensor_tensor_tensor_double)
-  LOAD_SYMBOL(_lantern_batch_norm_elemt_out_tensor_tensor_tensor_tensor_tensor_tensor_double)
-  LOAD_SYMBOL(_lantern_batch_norm_gather_stats_tensor_tensor_tensor_tensor_tensor_double_double_intt)
-  LOAD_SYMBOL(_lantern_batch_norm_gather_stats_with_counts_tensor_tensor_tensor_tensor_tensor_double_double_tensor)
-  LOAD_SYMBOL(_lantern_native_batch_norm_backward_tensor_tensor_tensor_tensor_tensor_tensor_tensor_bool_double_stdarraybool)
-  LOAD_SYMBOL(_lantern_batch_norm_backward_reduce_tensor_tensor_tensor_tensor_tensor_bool_bool_bool)
-  LOAD_SYMBOL(_lantern_batch_norm_backward_elemt_tensor_tensor_tensor_tensor_tensor_tensor_tensor_tensor)
-  LOAD_SYMBOL(_lantern_batch_norm_update_stats_tensor_tensor_tensor_double)
-  LOAD_SYMBOL(_lantern_is_vulkan_available)
-  LOAD_SYMBOL(_lantern__nnpack_available)
-  LOAD_SYMBOL(_lantern__nnpack_spatial_convolution_tensor_tensor_tensor_intarrayref_intarrayref)
-  LOAD_SYMBOL(_lantern__nnpack_spatial_convolution_backward_tensor_tensor_tensor_intarrayref_stdarraybool)
-  LOAD_SYMBOL(_lantern__nnpack_spatial_convolution_backward_input_tensor_tensor_tensor_intarrayref)
-  LOAD_SYMBOL(_lantern__nnpack_spatial_convolution_backward_weight_tensor_intarrayref_tensor_intarrayref)
-  LOAD_SYMBOL(_lantern_ones_intarrayref_dimnamelist_tensoroptions)
-  LOAD_SYMBOL(_lantern_ones_intarrayref_tensoroptions)
-  LOAD_SYMBOL(_lantern_ones_out_tensor_intarrayref)
-  LOAD_SYMBOL(_lantern_ones_like_tensor_tensoroptions_memoryformat)
-  LOAD_SYMBOL(_lantern_pairwise_distance_tensor_tensor_double_double_bool)
-  LOAD_SYMBOL(_lantern_cdist_tensor_tensor_double_intt)
-  LOAD_SYMBOL(_lantern__euclidean_dist_tensor_tensor)
-  LOAD_SYMBOL(_lantern__cdist_forward_tensor_tensor_double_intt)
-  LOAD_SYMBOL(_lantern__cdist_backward_tensor_tensor_tensor_double_tensor)
-  LOAD_SYMBOL(_lantern_pdist_tensor_double)
-  LOAD_SYMBOL(_lantern__pdist_forward_tensor_double)
-  LOAD_SYMBOL(_lantern__pdist_backward_tensor_tensor_double_tensor)
-  LOAD_SYMBOL(_lantern_cosine_similarity_tensor_tensor_intt_double)
-  LOAD_SYMBOL(_lantern_permute_tensor_intarrayref)
-  LOAD_SYMBOL(_lantern_Tensor_permute_tensor_intarrayref)
-  LOAD_SYMBOL(_lantern_movedim_tensor_intarrayref_intarrayref)
-  LOAD_SYMBOL(_lantern_Tensor_movedim_tensor_intarrayref_intarrayref)
-  LOAD_SYMBOL(_lantern_movedim_tensor_intt_intt)
-  LOAD_SYMBOL(_lantern_Tensor_movedim_tensor_intt_intt)
-  LOAD_SYMBOL(_lantern_moveaxis_tensor_intarrayref_intarrayref)
-  LOAD_SYMBOL(_lantern_Tensor_moveaxis_tensor_intarrayref_intarrayref)
-  LOAD_SYMBOL(_lantern_moveaxis_tensor_intt_intt)
-  LOAD_SYMBOL(_lantern_Tensor_moveaxis_tensor_intt_intt)
-  LOAD_SYMBOL(_lantern_Tensor_numpy_t_tensor)
-  LOAD_SYMBOL(_lantern_pixel_shuffle_tensor_intt)
-  LOAD_SYMBOL(_lantern_pixel_unshuffle_tensor_intt)
-  LOAD_SYMBOL(_lantern_channel_shuffle_tensor_intt)
-  LOAD_SYMBOL(_lantern_Tensor_is_pinned_tensor)
-  LOAD_SYMBOL(_lantern_Tensor_pin_memory_tensor)
-  LOAD_SYMBOL(_lantern_pinverse_tensor_double)
-  LOAD_SYMBOL(_lantern_Tensor_pinverse_tensor_double)
-  LOAD_SYMBOL(_lantern_poisson_nll_loss_tensor_tensor_bool_bool_double_intt)
-  LOAD_SYMBOL(_lantern_rad2deg_tensor)
-  LOAD_SYMBOL(_lantern_Tensor_rad2deg_tensor)
-  LOAD_SYMBOL(_lantern_rad2deg__tensor)
-  LOAD_SYMBOL(_lantern_Tensor_rad2deg__tensor)
-  LOAD_SYMBOL(_lantern_rad2deg_out_tensor_tensor)
-  LOAD_SYMBOL(_lantern_deg2rad_tensor)
-  LOAD_SYMBOL(_lantern_Tensor_deg2rad_tensor)
-  LOAD_SYMBOL(_lantern_deg2rad__tensor)
-  LOAD_SYMBOL(_lantern_Tensor_deg2rad__tensor)
-  LOAD_SYMBOL(_lantern_deg2rad_out_tensor_tensor)
-  LOAD_SYMBOL(_lantern_scalar_tensor_scalar_tensoroptions)
-  LOAD_SYMBOL(_lantern_rand_intarrayref_dimnamelist_tensoroptions)
-  LOAD_SYMBOL(_lantern_rand_intarrayref_generator_dimnamelist_tensoroptions)
-  LOAD_SYMBOL(_lantern_rand_intarrayref_tensoroptions)
-  LOAD_SYMBOL(_lantern_rand_intarrayref_generator_tensoroptions)
-  LOAD_SYMBOL(_lantern_rand_out_tensor_intarrayref)
-  LOAD_SYMBOL(_lantern_rand_out_tensor_intarrayref_generator)
-  LOAD_SYMBOL(_lantern_rand_like_tensor_tensoroptions_memoryformat)
-  LOAD_SYMBOL(_lantern_randint_intt_intarrayref_tensoroptions)
-  LOAD_SYMBOL(_lantern_randint_intt_intarrayref_generator_tensoroptions)
-  LOAD_SYMBOL(_lantern_randint_intt_intt_intarrayref_tensoroptions)
-  LOAD_SYMBOL(_lantern_randint_intt_intt_intarrayref_generator_tensoroptions)
-  LOAD_SYMBOL(_lantern_randint_out_tensor_intt_intarrayref)
-  LOAD_SYMBOL(_lantern_randint_out_tensor_intt_intarrayref_generator)
-  LOAD_SYMBOL(_lantern_randint_out_tensor_intt_intt_intarrayref)
-  LOAD_SYMBOL(_lantern_randint_out_tensor_intt_intt_intarrayref_generator)
-  LOAD_SYMBOL(_lantern_randint_like_tensor_intt_tensoroptions_memoryformat)
-  LOAD_SYMBOL(_lantern_randint_like_tensor_intt_intt_tensoroptions_memoryformat)
-  LOAD_SYMBOL(_lantern_randn_intarrayref_tensoroptions)
-  LOAD_SYMBOL(_lantern_randn_intarrayref_generator_tensoroptions)
-  LOAD_SYMBOL(_lantern_randn_intarrayref_dimnamelist_tensoroptions)
-  LOAD_SYMBOL(_lantern_randn_intarrayref_generator_dimnamelist_tensoroptions)
-  LOAD_SYMBOL(_lantern_randn_out_tensor_intarrayref)
-  LOAD_SYMBOL(_lantern_randn_out_tensor_intarrayref_generator)
-  LOAD_SYMBOL(_lantern_randn_like_tensor_tensoroptions_memoryformat)
-  LOAD_SYMBOL(_lantern_randperm_intt_tensoroptions)
-  LOAD_SYMBOL(_lantern_randperm_intt_generator_tensoroptions)
-  LOAD_SYMBOL(_lantern_randperm_out_tensor_intt)
-  LOAD_SYMBOL(_lantern_randperm_out_tensor_intt_generator)
-  LOAD_SYMBOL(_lantern_range_scalar_scalar_scalar_tensoroptions)
-  LOAD_SYMBOL(_lantern_range_scalar_scalar_tensoroptions)
-  LOAD_SYMBOL(_lantern_range_out_tensor_scalar_scalar_scalar)
-  LOAD_SYMBOL(_lantern_ravel_tensor)
-  LOAD_SYMBOL(_lantern_Tensor_ravel_tensor)
-  LOAD_SYMBOL(_lantern_reciprocal_tensor)
-  LOAD_SYMBOL(_lantern_Tensor_reciprocal_tensor)
-  LOAD_SYMBOL(_lantern_reciprocal__tensor)
-  LOAD_SYMBOL(_lantern_Tensor_reciprocal__tensor)
-  LOAD_SYMBOL(_lantern_reciprocal_out_tensor_tensor)
-  LOAD_SYMBOL(_lantern_neg_tensor)
-  LOAD_SYMBOL(_lantern_Tensor_neg_tensor)
-  LOAD_SYMBOL(_lantern_neg__tensor)
-  LOAD_SYMBOL(_lantern_Tensor_neg__tensor)
-  LOAD_SYMBOL(_lantern_neg_out_tensor_tensor)
-  LOAD_SYMBOL(_lantern_negative_tensor)
-  LOAD_SYMBOL(_lantern_Tensor_negative_tensor)
-  LOAD_SYMBOL(_lantern_negative__tensor)
-  LOAD_SYMBOL(_lantern_Tensor_negative__tensor)
-  LOAD_SYMBOL(_lantern_negative_out_tensor_tensor)
-  LOAD_SYMBOL(_lantern_Tensor_repeat_tensor_intarrayref)
-  LOAD_SYMBOL(_lantern_repeat_interleave_tensor)
-  LOAD_SYMBOL(_lantern_repeat_interleave_tensor_tensor_intt)
-  LOAD_SYMBOL(_lantern_Tensor_repeat_interleave_tensor_tensor_intt)
-  LOAD_SYMBOL(_lantern_repeat_interleave_tensor_intt_intt)
-  LOAD_SYMBOL(_lantern_Tensor_repeat_interleave_tensor_intt_intt)
-  LOAD_SYMBOL(_lantern_reshape_tensor_intarrayref)
-  LOAD_SYMBOL(_lantern_Tensor_reshape_tensor_intarrayref)
-  LOAD_SYMBOL(_lantern__mkldnn_reshape_tensor_intarrayref)
-  LOAD_SYMBOL(_lantern_Tensor_reshape_as_tensor_tensor)
-  LOAD_SYMBOL(_lantern_round_tensor)
-  LOAD_SYMBOL(_lantern_Tensor_round_tensor)
-  LOAD_SYMBOL(_lantern_round__tensor)
-  LOAD_SYMBOL(_lantern_Tensor_round__tensor)
-  LOAD_SYMBOL(_lantern_round_out_tensor_tensor)
-  LOAD_SYMBOL(_lantern_rrelu_tensor_scalar_scalar_bool_generator)
-  LOAD_SYMBOL(_lantern_rrelu__tensor_scalar_scalar_bool_generator)
-  LOAD_SYMBOL(_lantern_relu_tensor)
-  LOAD_SYMBOL(_lantern_Tensor_relu_tensor)
-  LOAD_SYMBOL(_lantern_relu__tensor)
-  LOAD_SYMBOL(_lantern_Tensor_relu__tensor)
-  LOAD_SYMBOL(_lantern_relu6_tensor)
-  LOAD_SYMBOL(_lantern_relu6__tensor)
-  LOAD_SYMBOL(_lantern_prelu_tensor_tensor)
-  LOAD_SYMBOL(_lantern_Tensor_prelu_tensor_tensor)
-  LOAD_SYMBOL(_lantern_prelu_backward_tensor_tensor_tensor)
-  LOAD_SYMBOL(_lantern_Tensor_prelu_backward_tensor_tensor_tensor)
-  LOAD_SYMBOL(_lantern_gelu_tensor)
-  LOAD_SYMBOL(_lantern_gelu_backward_tensor_tensor)
-  LOAD_SYMBOL(_lantern_infinitely_differentiable_gelu_backward_tensor_tensor)
-  LOAD_SYMBOL(_lantern_hardshrink_tensor_scalar)
-  LOAD_SYMBOL(_lantern_Tensor_hardshrink_tensor_scalar)
-  LOAD_SYMBOL(_lantern_hardshrink_backward_tensor_tensor_scalar)
-  LOAD_SYMBOL(_lantern_Tensor_hardshrink_backward_tensor_tensor_scalar)
-  LOAD_SYMBOL(_lantern_rsqrt_tensor)
-  LOAD_SYMBOL(_lantern_Tensor_rsqrt_tensor)
-  LOAD_SYMBOL(_lantern_rsqrt__tensor)
-  LOAD_SYMBOL(_lantern_Tensor_rsqrt__tensor)
-  LOAD_SYMBOL(_lantern_rsqrt_out_tensor_tensor)
-  LOAD_SYMBOL(_lantern_select_tensor_dimname_intt)
-  LOAD_SYMBOL(_lantern_Tensor_select_tensor_dimname_intt)
-  LOAD_SYMBOL(_lantern_select_tensor_intt_intt)
-  LOAD_SYMBOL(_lantern_Tensor_select_tensor_intt_intt)
-  LOAD_SYMBOL(_lantern_select_backward_tensor_intarrayref_intt_intt)
-  LOAD_SYMBOL(_lantern_selu_tensor)
-  LOAD_SYMBOL(_lantern_selu__tensor)
-  LOAD_SYMBOL(_lantern_celu_tensor_scalar)
-  LOAD_SYMBOL(_lantern_celu__tensor_scalar)
-  LOAD_SYMBOL(_lantern_silu_tensor)
-  LOAD_SYMBOL(_lantern_silu__tensor)
-  LOAD_SYMBOL(_lantern_silu_out_tensor_tensor)
-  LOAD_SYMBOL(_lantern_silu_backward_tensor_tensor)
-  LOAD_SYMBOL(_lantern_mish_tensor)
-  LOAD_SYMBOL(_lantern_mish__tensor)
-  LOAD_SYMBOL(_lantern_mish_out_tensor_tensor)
-  LOAD_SYMBOL(_lantern_mish_backward_tensor_tensor)
-  LOAD_SYMBOL(_lantern_sigmoid_tensor)
-  LOAD_SYMBOL(_lantern_Tensor_sigmoid_tensor)
-  LOAD_SYMBOL(_lantern_sigmoid__tensor)
-  LOAD_SYMBOL(_lantern_Tensor_sigmoid__tensor)
-  LOAD_SYMBOL(_lantern_sigmoid_out_tensor_tensor)
-  LOAD_SYMBOL(_lantern_logit_tensor_double)
-  LOAD_SYMBOL(_lantern_Tensor_logit_tensor_double)
-  LOAD_SYMBOL(_lantern_logit__tensor_double)
-  LOAD_SYMBOL(_lantern_Tensor_logit__tensor_double)
-  LOAD_SYMBOL(_lantern_logit_out_tensor_tensor_double)
-  LOAD_SYMBOL(_lantern_sin_tensor)
-  LOAD_SYMBOL(_lantern_Tensor_sin_tensor)
-  LOAD_SYMBOL(_lantern_sin__tensor)
-  LOAD_SYMBOL(_lantern_Tensor_sin__tensor)
-  LOAD_SYMBOL(_lantern_sin_out_tensor_tensor)
-  LOAD_SYMBOL(_lantern_sinc_tensor)
-  LOAD_SYMBOL(_lantern_Tensor_sinc_tensor)
-  LOAD_SYMBOL(_lantern_sinc__tensor)
-  LOAD_SYMBOL(_lantern_Tensor_sinc__tensor)
-  LOAD_SYMBOL(_lantern_sinc_out_tensor_tensor)
-  LOAD_SYMBOL(_lantern_sinh_tensor)
-  LOAD_SYMBOL(_lantern_Tensor_sinh_tensor)
-  LOAD_SYMBOL(_lantern_sinh__tensor)
-  LOAD_SYMBOL(_lantern_Tensor_sinh__tensor)
-  LOAD_SYMBOL(_lantern_sinh_out_tensor_tensor)
-  LOAD_SYMBOL(_lantern_detach_tensor)
-  LOAD_SYMBOL(_lantern_Tensor_detach_tensor)
-  LOAD_SYMBOL(_lantern_detach__tensor)
-  LOAD_SYMBOL(_lantern_Tensor_detach__tensor)
-  LOAD_SYMBOL(_lantern_size_tensor_intt)
-  LOAD_SYMBOL(_lantern_size_tensor_dimname)
-  LOAD_SYMBOL(_lantern_Tensor_size_tensor_dimname)
-  LOAD_SYMBOL(_lantern_slice_tensor_intt_intt_intt_intt)
-  LOAD_SYMBOL(_lantern_Tensor_slice_tensor_intt_intt_intt_intt)
-  LOAD_SYMBOL(_lantern_slice_backward_tensor_intarrayref_intt_intt_intt_intt)
-  LOAD_SYMBOL(_lantern_slogdet_tensor)
-  LOAD_SYMBOL(_lantern_Tensor_slogdet_tensor)
-  LOAD_SYMBOL(_lantern_smm_tensor_tensor)
-  LOAD_SYMBOL(_lantern_Tensor_smm_tensor_tensor)
-  LOAD_SYMBOL(_lantern_softmax_tensor_intt_scalartype)
-  LOAD_SYMBOL(_lantern_Tensor_softmax_tensor_intt_scalartype)
-  LOAD_SYMBOL(_lantern_softmax_tensor_dimname_scalartype)
-  LOAD_SYMBOL(_lantern_Tensor_softmax_tensor_dimname_scalartype)
-  LOAD_SYMBOL(_lantern__softmax_tensor_intt_bool)
-  LOAD_SYMBOL(_lantern__softmax_backward_data_tensor_tensor_intt_tensor)
-  LOAD_SYMBOL(_lantern_unsafe_split_tensor_intt_intt)
-  LOAD_SYMBOL(_lantern_Tensor_unsafe_split_tensor_intt_intt)
-  LOAD_SYMBOL(_lantern_split_tensor_intt_intt)
-  LOAD_SYMBOL(_lantern_Tensor_split_tensor_intt_intt)
-  LOAD_SYMBOL(_lantern_unsafe_split_with_sizes_tensor_intarrayref_intt)
-  LOAD_SYMBOL(_lantern_Tensor_unsafe_split_with_sizes_tensor_intarrayref_intt)
-  LOAD_SYMBOL(_lantern_split_with_sizes_tensor_intarrayref_intt)
-  LOAD_SYMBOL(_lantern_Tensor_split_with_sizes_tensor_intarrayref_intt)
-  LOAD_SYMBOL(_lantern_hsplit_tensor_intt)
-  LOAD_SYMBOL(_lantern_Tensor_hsplit_tensor_intt)
-  LOAD_SYMBOL(_lantern_hsplit_tensor_intarrayref)
-  LOAD_SYMBOL(_lantern_Tensor_hsplit_tensor_intarrayref)
-  LOAD_SYMBOL(_lantern_vsplit_tensor_intt)
-  LOAD_SYMBOL(_lantern_Tensor_vsplit_tensor_intt)
-  LOAD_SYMBOL(_lantern_vsplit_tensor_intarrayref)
-  LOAD_SYMBOL(_lantern_Tensor_vsplit_tensor_intarrayref)
-  LOAD_SYMBOL(_lantern_dsplit_tensor_intt)
-  LOAD_SYMBOL(_lantern_Tensor_dsplit_tensor_intt)
-  LOAD_SYMBOL(_lantern_dsplit_tensor_intarrayref)
-  LOAD_SYMBOL(_lantern_Tensor_dsplit_tensor_intarrayref)
-  LOAD_SYMBOL(_lantern_squeeze_tensor)
-  LOAD_SYMBOL(_lantern_Tensor_squeeze_tensor)
-  LOAD_SYMBOL(_lantern_squeeze_tensor_intt)
-  LOAD_SYMBOL(_lantern_Tensor_squeeze_tensor_intt)
-  LOAD_SYMBOL(_lantern_squeeze_tensor_dimname)
-  LOAD_SYMBOL(_lantern_Tensor_squeeze_tensor_dimname)
-  LOAD_SYMBOL(_lantern_Tensor_squeeze__tensor)
-  LOAD_SYMBOL(_lantern_Tensor_squeeze__tensor_intt)
-  LOAD_SYMBOL(_lantern_Tensor_squeeze__tensor_dimname)
-  LOAD_SYMBOL(_lantern_sspaddmm_tensor_tensor_tensor_scalar_scalar)
-  LOAD_SYMBOL(_lantern_Tensor_sspaddmm_tensor_tensor_tensor_scalar_scalar)
-  LOAD_SYMBOL(_lantern_sspaddmm_out_tensor_tensor_tensor_tensor_scalar_scalar)
-  LOAD_SYMBOL(_lantern_stack_tensorlist_intt)
-  LOAD_SYMBOL(_lantern_stack_out_tensor_tensorlist_intt)
-  LOAD_SYMBOL(_lantern__stack_tensorlist_intt)
-  LOAD_SYMBOL(_lantern__stack_out_tensor_tensorlist_intt)
-  LOAD_SYMBOL(_lantern_hstack_tensorlist)
-  LOAD_SYMBOL(_lantern_hstack_out_tensor_tensorlist)
-  LOAD_SYMBOL(_lantern_vstack_tensorlist)
-  LOAD_SYMBOL(_lantern_vstack_out_tensor_tensorlist)
-  LOAD_SYMBOL(_lantern_dstack_tensorlist)
-  LOAD_SYMBOL(_lantern_dstack_out_tensor_tensorlist)
-  LOAD_SYMBOL(_lantern_stft_tensor_intt_intt_intt_tensor_bool_bool_bool)
-  LOAD_SYMBOL(_lantern_Tensor_stft_tensor_intt_intt_intt_tensor_bool_bool_bool)
-  LOAD_SYMBOL(_lantern_istft_tensor_intt_intt_intt_tensor_bool_bool_bool_intt_bool)
-  LOAD_SYMBOL(_lantern_Tensor_istft_tensor_intt_intt_intt_tensor_bool_bool_bool_intt_bool)
-  LOAD_SYMBOL(_lantern_stride_tensor_intt)
-  LOAD_SYMBOL(_lantern_Tensor_stride_tensor_intt)
-  LOAD_SYMBOL(_lantern_stride_tensor_dimname)
-  LOAD_SYMBOL(_lantern_Tensor_stride_tensor_dimname)
-  LOAD_SYMBOL(_lantern_sum_tensor_scalartype)
-  LOAD_SYMBOL(_lantern_Tensor_sum_tensor_scalartype)
-  LOAD_SYMBOL(_lantern_sum_tensor_intarrayref_bool_scalartype)
-  LOAD_SYMBOL(_lantern_Tensor_sum_tensor_intarrayref_bool_scalartype)
-  LOAD_SYMBOL(_lantern_sum_tensor_dimnamelist_bool_scalartype)
-  LOAD_SYMBOL(_lantern_Tensor_sum_tensor_dimnamelist_bool_scalartype)
-  LOAD_SYMBOL(_lantern_sum_out_tensor_tensor_intarrayref_bool_scalartype)
-  LOAD_SYMBOL(_lantern_sum_out_tensor_tensor_dimnamelist_bool_scalartype)
-  LOAD_SYMBOL(_lantern_nansum_tensor_scalartype)
-  LOAD_SYMBOL(_lantern_Tensor_nansum_tensor_scalartype)
-  LOAD_SYMBOL(_lantern_nansum_tensor_intarrayref_bool_scalartype)
-  LOAD_SYMBOL(_lantern_Tensor_nansum_tensor_intarrayref_bool_scalartype)
-  LOAD_SYMBOL(_lantern_nansum_out_tensor_tensor_intarrayref_bool_scalartype)
-  LOAD_SYMBOL(_lantern_Tensor_sum_to_size_tensor_intarrayref)
-  LOAD_SYMBOL(_lantern_sqrt_tensor)
-  LOAD_SYMBOL(_lantern_Tensor_sqrt_tensor)
-  LOAD_SYMBOL(_lantern_sqrt__tensor)
-  LOAD_SYMBOL(_lantern_Tensor_sqrt__tensor)
-  LOAD_SYMBOL(_lantern_sqrt_out_tensor_tensor)
-  LOAD_SYMBOL(_lantern_square_tensor)
-  LOAD_SYMBOL(_lantern_Tensor_square_tensor)
-  LOAD_SYMBOL(_lantern_square__tensor)
-  LOAD_SYMBOL(_lantern_Tensor_square__tensor)
-  LOAD_SYMBOL(_lantern_square_out_tensor_tensor)
-  LOAD_SYMBOL(_lantern_std_tensor_bool)
-  LOAD_SYMBOL(_lantern_Tensor_std_tensor_bool)
-  LOAD_SYMBOL(_lantern_std_tensor_intarrayref_bool_bool)
-  LOAD_SYMBOL(_lantern_Tensor_std_tensor_intarrayref_bool_bool)
-  LOAD_SYMBOL(_lantern_std_tensor_intarrayref_intt_bool)
-  LOAD_SYMBOL(_lantern_Tensor_std_tensor_intarrayref_intt_bool)
-  LOAD_SYMBOL(_lantern_std_mean_tensor_bool)
-  LOAD_SYMBOL(_lantern_std_mean_tensor_intarrayref_bool_bool)
-  LOAD_SYMBOL(_lantern_std_mean_tensor_intarrayref_intt_bool)
-  LOAD_SYMBOL(_lantern_std_mean_tensor_dimnamelist_bool_bool)
-  LOAD_SYMBOL(_lantern_std_mean_tensor_dimnamelist_intt_bool)
-  LOAD_SYMBOL(_lantern_std_out_tensor_tensor_intarrayref_bool_bool)
-  LOAD_SYMBOL(_lantern_std_out_tensor_tensor_intarrayref_intt_bool)
-  LOAD_SYMBOL(_lantern_std_tensor_dimnamelist_bool_bool)
-  LOAD_SYMBOL(_lantern_Tensor_std_tensor_dimnamelist_bool_bool)
-  LOAD_SYMBOL(_lantern_std_out_tensor_tensor_dimnamelist_bool_bool)
-  LOAD_SYMBOL(_lantern_std_tensor_dimnamelist_intt_bool)
-  LOAD_SYMBOL(_lantern_Tensor_std_tensor_dimnamelist_intt_bool)
-  LOAD_SYMBOL(_lantern_std_out_tensor_tensor_dimnamelist_intt_bool)
-  LOAD_SYMBOL(_lantern_prod_tensor_scalartype)
-  LOAD_SYMBOL(_lantern_Tensor_prod_tensor_scalartype)
-  LOAD_SYMBOL(_lantern_prod_tensor_intt_bool_scalartype)
-  LOAD_SYMBOL(_lantern_Tensor_prod_tensor_intt_bool_scalartype)
-  LOAD_SYMBOL(_lantern_prod_out_tensor_tensor_intt_bool_scalartype)
-  LOAD_SYMBOL(_lantern_prod_tensor_dimname_bool_scalartype)
-  LOAD_SYMBOL(_lantern_Tensor_prod_tensor_dimname_bool_scalartype)
-  LOAD_SYMBOL(_lantern_prod_out_tensor_tensor_dimname_bool_scalartype)
-  LOAD_SYMBOL(_lantern_t_tensor)
-  LOAD_SYMBOL(_lantern_Tensor_t_tensor)
-  LOAD_SYMBOL(_lantern_Tensor_t__tensor)
-  LOAD_SYMBOL(_lantern_tan_tensor)
-  LOAD_SYMBOL(_lantern_Tensor_tan_tensor)
-  LOAD_SYMBOL(_lantern_tan__tensor)
-  LOAD_SYMBOL(_lantern_Tensor_tan__tensor)
-  LOAD_SYMBOL(_lantern_tan_out_tensor_tensor)
-  LOAD_SYMBOL(_lantern_tanh_tensor)
-  LOAD_SYMBOL(_lantern_Tensor_tanh_tensor)
-  LOAD_SYMBOL(_lantern_tanh__tensor)
-  LOAD_SYMBOL(_lantern_Tensor_tanh__tensor)
-  LOAD_SYMBOL(_lantern_tanh_out_tensor_tensor)
-  LOAD_SYMBOL(_lantern_tensordot_tensor_tensor_intarrayref_intarrayref)
-  LOAD_SYMBOL(_lantern_tensordot_out_tensor_tensor_tensor_intarrayref_intarrayref)
-  LOAD_SYMBOL(_lantern_threshold_tensor_scalar_scalar)
-  LOAD_SYMBOL(_lantern_threshold__tensor_scalar_scalar)
-  LOAD_SYMBOL(_lantern_threshold_out_tensor_tensor_scalar_scalar)
-  LOAD_SYMBOL(_lantern_threshold_backward_out_tensor_tensor_tensor_scalar)
-  LOAD_SYMBOL(_lantern_threshold_backward_tensor_tensor_scalar)
-  LOAD_SYMBOL(_lantern_tile_tensor_intarrayref)
-  LOAD_SYMBOL(_lantern_Tensor_tile_tensor_intarrayref)
-  LOAD_SYMBOL(_lantern_transpose_tensor_intt_intt)
-  LOAD_SYMBOL(_lantern_Tensor_transpose_tensor_intt_intt)
-  LOAD_SYMBOL(_lantern_transpose_tensor_dimname_dimname)
-  LOAD_SYMBOL(_lantern_Tensor_transpose_tensor_dimname_dimname)
-  LOAD_SYMBOL(_lantern__mkldnn_transpose_tensor_intt_intt)
-  LOAD_SYMBOL(_lantern_Tensor_transpose__tensor_intt_intt)
-  LOAD_SYMBOL(_lantern__mkldnn_transpose__tensor_intt_intt)
-  LOAD_SYMBOL(_lantern_one_hot_tensor_intt)
-  LOAD_SYMBOL(_lantern_flip_tensor_intarrayref)
-  LOAD_SYMBOL(_lantern_Tensor_flip_tensor_intarrayref)
-  LOAD_SYMBOL(_lantern_fliplr_tensor)
-  LOAD_SYMBOL(_lantern_Tensor_fliplr_tensor)
-  LOAD_SYMBOL(_lantern_flipud_tensor)
-  LOAD_SYMBOL(_lantern_Tensor_flipud_tensor)
-  LOAD_SYMBOL(_lantern_roll_tensor_intarrayref_intarrayref)
-  LOAD_SYMBOL(_lantern_Tensor_roll_tensor_intarrayref_intarrayref)
-  LOAD_SYMBOL(_lantern_rot90_tensor_intt_intarrayref)
-  LOAD_SYMBOL(_lantern_Tensor_rot90_tensor_intt_intarrayref)
-  LOAD_SYMBOL(_lantern_trapz_tensor_tensor_intt)
-  LOAD_SYMBOL(_lantern_trapz_tensor_double_intt)
-  LOAD_SYMBOL(_lantern__trilinear_tensor_tensor_tensor_intarrayref_intarrayref_intarrayref_intarrayref_intt)
-  LOAD_SYMBOL(_lantern_triplet_margin_loss_tensor_tensor_tensor_double_double_double_bool_intt)
-  LOAD_SYMBOL(_lantern_trunc_tensor)
-  LOAD_SYMBOL(_lantern_Tensor_trunc_tensor)
-  LOAD_SYMBOL(_lantern_trunc__tensor)
-  LOAD_SYMBOL(_lantern_Tensor_trunc__tensor)
-  LOAD_SYMBOL(_lantern_trunc_out_tensor_tensor)
-  LOAD_SYMBOL(_lantern_fix_tensor)
-  LOAD_SYMBOL(_lantern_Tensor_fix_tensor)
-  LOAD_SYMBOL(_lantern_fix__tensor)
-  LOAD_SYMBOL(_lantern_Tensor_fix__tensor)
-  LOAD_SYMBOL(_lantern_fix_out_tensor_tensor)
-  LOAD_SYMBOL(_lantern_Tensor_type_as_tensor_tensor)
-  LOAD_SYMBOL(_lantern__has_compatible_shallow_copy_type_tensor_tensor)
-  LOAD_SYMBOL(_lantern__unique_tensor_bool_bool)
-  LOAD_SYMBOL(_lantern_unique_dim_tensor_intt_bool_bool_bool)
-  LOAD_SYMBOL(_lantern_unique_consecutive_tensor_bool_bool_intt)
-  LOAD_SYMBOL(_lantern_unique_dim_consecutive_tensor_intt_bool_bool)
-  LOAD_SYMBOL(_lantern__unique2_tensor_bool_bool_bool)
-  LOAD_SYMBOL(_lantern__unsafe_view_tensor_intarrayref)
-  LOAD_SYMBOL(_lantern_unsqueeze_tensor_intt)
-  LOAD_SYMBOL(_lantern_Tensor_unsqueeze_tensor_intt)
-  LOAD_SYMBOL(_lantern_Tensor_unsqueeze__tensor_intt)
-  LOAD_SYMBOL(_lantern_vander_tensor_intt_bool)
-  LOAD_SYMBOL(_lantern_var_tensor_bool)
-  LOAD_SYMBOL(_lantern_Tensor_var_tensor_bool)
-  LOAD_SYMBOL(_lantern_var_tensor_intarrayref_bool_bool)
-  LOAD_SYMBOL(_lantern_Tensor_var_tensor_intarrayref_bool_bool)
-  LOAD_SYMBOL(_lantern_var_tensor_intarrayref_intt_bool)
-  LOAD_SYMBOL(_lantern_Tensor_var_tensor_intarrayref_intt_bool)
-  LOAD_SYMBOL(_lantern_var_out_tensor_tensor_intarrayref_bool_bool)
-  LOAD_SYMBOL(_lantern_var_out_tensor_tensor_intarrayref_intt_bool)
-  LOAD_SYMBOL(_lantern_var_tensor_dimnamelist_bool_bool)
-  LOAD_SYMBOL(_lantern_Tensor_var_tensor_dimnamelist_bool_bool)
-  LOAD_SYMBOL(_lantern_var_out_tensor_tensor_dimnamelist_bool_bool)
-  LOAD_SYMBOL(_lantern_var_tensor_dimnamelist_intt_bool)
-  LOAD_SYMBOL(_lantern_Tensor_var_tensor_dimnamelist_intt_bool)
-  LOAD_SYMBOL(_lantern_var_out_tensor_tensor_dimnamelist_intt_bool)
-  LOAD_SYMBOL(_lantern_var_mean_tensor_bool)
-  LOAD_SYMBOL(_lantern_var_mean_tensor_intarrayref_bool_bool)
-  LOAD_SYMBOL(_lantern_var_mean_tensor_intarrayref_intt_bool)
-  LOAD_SYMBOL(_lantern_var_mean_tensor_dimnamelist_bool_bool)
-  LOAD_SYMBOL(_lantern_var_mean_tensor_dimnamelist_intt_bool)
-  LOAD_SYMBOL(_lantern_Tensor_view_as_tensor_tensor)
-  LOAD_SYMBOL(_lantern_where_tensor_tensor_tensor)
-  LOAD_SYMBOL(_lantern_Tensor_where_tensor_tensor_tensor)
-  LOAD_SYMBOL(_lantern_where_tensor_scalar_tensor)
-  LOAD_SYMBOL(_lantern_where_tensor_tensor_scalar)
-  LOAD_SYMBOL(_lantern_where_tensor_scalar_scalar)
-  LOAD_SYMBOL(_lantern_where_tensor)
-  LOAD_SYMBOL(_lantern__s_where_tensor_tensor_tensor)
-  LOAD_SYMBOL(_lantern_norm_except_dim_tensor_intt_intt)
-  LOAD_SYMBOL(_lantern__weight_norm_tensor_tensor_intt)
-  LOAD_SYMBOL(_lantern__weight_norm_cuda_interface_tensor_tensor_intt)
-  LOAD_SYMBOL(_lantern__weight_norm_cuda_interface_backward_tensor_tensor_tensor_tensor_intt)
-  LOAD_SYMBOL(_lantern__weight_norm_differentiable_backward_tensor_tensor_tensor_tensor_intt)
-  LOAD_SYMBOL(_lantern_zeros_intarrayref_dimnamelist_tensoroptions)
-  LOAD_SYMBOL(_lantern_zeros_intarrayref_tensoroptions)
-  LOAD_SYMBOL(_lantern_zeros_out_tensor_intarrayref)
-  LOAD_SYMBOL(_lantern_zeros_like_tensor_tensoroptions_memoryformat)
-  LOAD_SYMBOL(_lantern__standard_gamma_grad_tensor_tensor)
-  LOAD_SYMBOL(_lantern__standard_gamma_tensor_generator)
-  LOAD_SYMBOL(_lantern__dirichlet_grad_tensor_tensor_tensor)
-  LOAD_SYMBOL(_lantern__sample_dirichlet_tensor_generator)
-  LOAD_SYMBOL(_lantern_poisson_tensor_generator)
-  LOAD_SYMBOL(_lantern_binomial_tensor_tensor_generator)
-  LOAD_SYMBOL(_lantern_native_norm_tensor_scalar)
-  LOAD_SYMBOL(_lantern_native_norm_tensor_scalar_intarrayref_bool_scalartype)
-  LOAD_SYMBOL(_lantern__sparse_sum_tensor)
-  LOAD_SYMBOL(_lantern__sparse_sum_tensor_scalartype)
-  LOAD_SYMBOL(_lantern__sparse_sum_tensor_intarrayref)
-  LOAD_SYMBOL(_lantern__sparse_sum_tensor_intarrayref_scalartype)
-  LOAD_SYMBOL(_lantern__sparse_sum_backward_tensor_tensor_intarrayref)
-  LOAD_SYMBOL(_lantern__sparse_softmax_tensor_intt_scalartype)
-  LOAD_SYMBOL(_lantern__sparse_softmax_tensor_dimname_scalartype)
-  LOAD_SYMBOL(_lantern__sparse_softmax_tensor_intt_bool)
-  LOAD_SYMBOL(_lantern__sparse_softmax_backward_data_tensor_tensor_intt_tensor)
-  LOAD_SYMBOL(_lantern__sparse_log_softmax_tensor_intt_scalartype)
-  LOAD_SYMBOL(_lantern__sparse_log_softmax_tensor_dimname_scalartype)
-  LOAD_SYMBOL(_lantern__sparse_log_softmax_tensor_intt_bool)
-  LOAD_SYMBOL(_lantern__sparse_log_softmax_backward_data_tensor_tensor_intt_tensor)
-  LOAD_SYMBOL(_lantern_norm_tensor_scalar_scalartype)
-  LOAD_SYMBOL(_lantern_Tensor_norm_tensor_scalar_scalartype)
-  LOAD_SYMBOL(_lantern_norm_tensor_scalar)
-  LOAD_SYMBOL(_lantern_Tensor_norm_tensor_scalar)
-  LOAD_SYMBOL(_lantern_norm_tensor_scalar_intarrayref_bool_scalartype)
-  LOAD_SYMBOL(_lantern_Tensor_norm_tensor_scalar_intarrayref_bool_scalartype)
-  LOAD_SYMBOL(_lantern_norm_tensor_scalar_intarrayref_bool)
-  LOAD_SYMBOL(_lantern_Tensor_norm_tensor_scalar_intarrayref_bool)
-  LOAD_SYMBOL(_lantern_norm_out_tensor_tensor_scalar_intarrayref_bool_scalartype)
-  LOAD_SYMBOL(_lantern_norm_out_tensor_tensor_scalar_intarrayref_bool)
-  LOAD_SYMBOL(_lantern_norm_tensor_scalar_dimnamelist_bool_scalartype)
-  LOAD_SYMBOL(_lantern_Tensor_norm_tensor_scalar_dimnamelist_bool_scalartype)
-  LOAD_SYMBOL(_lantern_norm_tensor_scalar_dimnamelist_bool)
-  LOAD_SYMBOL(_lantern_Tensor_norm_tensor_scalar_dimnamelist_bool)
-  LOAD_SYMBOL(_lantern_norm_out_tensor_tensor_scalar_dimnamelist_bool_scalartype)
-  LOAD_SYMBOL(_lantern_norm_out_tensor_tensor_scalar_dimnamelist_bool)
-  LOAD_SYMBOL(_lantern_frexp_tensor)
-  LOAD_SYMBOL(_lantern_Tensor_frexp_tensor)
-  LOAD_SYMBOL(_lantern_frexp_out_tensor_tensor_tensor)
-  LOAD_SYMBOL(_lantern_frobenius_norm_tensor)
-  LOAD_SYMBOL(_lantern_frobenius_norm_tensor_intarrayref_bool)
-  LOAD_SYMBOL(_lantern_frobenius_norm_out_tensor_tensor_intarrayref_bool)
-  LOAD_SYMBOL(_lantern_nuclear_norm_tensor_bool)
-  LOAD_SYMBOL(_lantern_nuclear_norm_out_tensor_tensor_bool)
-  LOAD_SYMBOL(_lantern_nuclear_norm_tensor_intarrayref_bool)
-  LOAD_SYMBOL(_lantern_nuclear_norm_out_tensor_tensor_intarrayref_bool)
-  LOAD_SYMBOL(_lantern_clone_tensor_memoryformat)
-  LOAD_SYMBOL(_lantern_Tensor_clone_tensor_memoryformat)
-  LOAD_SYMBOL(_lantern_positive_tensor)
-  LOAD_SYMBOL(_lantern_Tensor_positive_tensor)
-  LOAD_SYMBOL(_lantern_resize_as__tensor_tensor_memoryformat)
-  LOAD_SYMBOL(_lantern_Tensor_resize_as__tensor_tensor_memoryformat)
-  LOAD_SYMBOL(_lantern_resize_as_sparse__tensor_tensor)
-  LOAD_SYMBOL(_lantern_zero__tensor)
-  LOAD_SYMBOL(_lantern_Tensor_zero__tensor)
-  LOAD_SYMBOL(_lantern_sub_out_tensor_tensor_tensor_scalar)
-  LOAD_SYMBOL(_lantern_sub_tensor_tensor_scalar)
-  LOAD_SYMBOL(_lantern_Tensor_sub_tensor_tensor_scalar)
-  LOAD_SYMBOL(_lantern_Tensor_sub__tensor_tensor_scalar)
-  LOAD_SYMBOL(_lantern_sub_tensor_scalar_scalar)
-  LOAD_SYMBOL(_lantern_Tensor_sub_tensor_scalar_scalar)
-  LOAD_SYMBOL(_lantern_Tensor_sub__tensor_scalar_scalar)
-  LOAD_SYMBOL(_lantern_subtract_out_tensor_tensor_tensor_scalar)
-  LOAD_SYMBOL(_lantern_subtract_tensor_tensor_scalar)
-  LOAD_SYMBOL(_lantern_Tensor_subtract_tensor_tensor_scalar)
-  LOAD_SYMBOL(_lantern_Tensor_subtract__tensor_tensor_scalar)
-  LOAD_SYMBOL(_lantern_subtract_tensor_scalar_scalar)
-  LOAD_SYMBOL(_lantern_Tensor_subtract_tensor_scalar_scalar)
-  LOAD_SYMBOL(_lantern_Tensor_subtract__tensor_scalar_scalar)
-  LOAD_SYMBOL(_lantern_rsub_tensor_tensor_scalar)
-  LOAD_SYMBOL(_lantern_heaviside_out_tensor_tensor_tensor)
-  LOAD_SYMBOL(_lantern_heaviside_tensor_tensor)
-  LOAD_SYMBOL(_lantern_Tensor_heaviside_tensor_tensor)
-  LOAD_SYMBOL(_lantern_Tensor_heaviside__tensor_tensor)
-  LOAD_SYMBOL(_lantern_rsub_tensor_scalar_scalar)
-  LOAD_SYMBOL(_lantern__sparse_addmm_tensor_tensor_tensor_scalar_scalar)
-  LOAD_SYMBOL(_lantern_addmm_out_tensor_tensor_tensor_tensor_scalar_scalar)
-  LOAD_SYMBOL(_lantern_addmm_tensor_tensor_tensor_scalar_scalar)
-  LOAD_SYMBOL(_lantern_Tensor_addmm_tensor_tensor_tensor_scalar_scalar)
-  LOAD_SYMBOL(_lantern_Tensor_addmm__tensor_tensor_tensor_scalar_scalar)
-  LOAD_SYMBOL(_lantern__sparse_csr_tensor_tensor_tensor_tensor_intarrayref_tensoroptions)
-  LOAD_SYMBOL(_lantern__sparse_csr_tensor_tensor_tensor_tensor_tensoroptions)
-  LOAD_SYMBOL(_lantern_sparse_coo_tensor_intarrayref_tensoroptions)
-  LOAD_SYMBOL(_lantern_sparse_coo_tensor_tensor_tensor_tensoroptions)
-  LOAD_SYMBOL(_lantern_sparse_coo_tensor_tensor_tensor_intarrayref_tensoroptions)
-  LOAD_SYMBOL(_lantern__sparse_coo_tensor_unsafe_tensor_tensor_intarrayref_tensoroptions)
-  LOAD_SYMBOL(_lantern__validate_sparse_coo_tensor_args_tensor_tensor_intarrayref)
-  LOAD_SYMBOL(_lantern__sparse_coo_tensor_with_dims_intt_intt_intarrayref_tensoroptions)
-  LOAD_SYMBOL(_lantern__sparse_coo_tensor_with_dims_and_tensors_intt_intt_intarrayref_tensor_tensor_tensoroptions)
-  LOAD_SYMBOL(_lantern_Tensor_sparse_resize__tensor_intarrayref_intt_intt)
-  LOAD_SYMBOL(_lantern_Tensor_sparse_resize_and_clear__tensor_intarrayref_intt_intt)
-  LOAD_SYMBOL(_lantern_Tensor_sparse_mask_tensor_tensor)
-  LOAD_SYMBOL(_lantern_Tensor_to_dense_tensor_scalartype)
-  LOAD_SYMBOL(_lantern_to_dense_backward_tensor_tensor)
-  LOAD_SYMBOL(_lantern_Tensor_sparse_dim_tensor)
-  LOAD_SYMBOL(_lantern_Tensor__dimi_tensor)
-  LOAD_SYMBOL(_lantern_Tensor_dense_dim_tensor)
-  LOAD_SYMBOL(_lantern_Tensor__dimv_tensor)
-  LOAD_SYMBOL(_lantern_Tensor__nnz_tensor)
-  LOAD_SYMBOL(_lantern_Tensor_coalesce_tensor)
-  LOAD_SYMBOL(_lantern__coalesce_tensor)
-  LOAD_SYMBOL(_lantern_Tensor_is_coalesced_tensor)
-  LOAD_SYMBOL(_lantern_Tensor__indices_tensor)
-  LOAD_SYMBOL(_lantern_Tensor__values_tensor)
-  LOAD_SYMBOL(_lantern_Tensor__coalesced__tensor_bool)
-  LOAD_SYMBOL(_lantern_Tensor_indices_tensor)
-  LOAD_SYMBOL(_lantern_Tensor_values_tensor)
-  LOAD_SYMBOL(_lantern_Tensor_crow_indices_tensor)
-  LOAD_SYMBOL(_lantern_Tensor_col_indices_tensor)
-  LOAD_SYMBOL(_lantern_hspmm_out_tensor_tensor_tensor)
-  LOAD_SYMBOL(_lantern_hspmm_tensor_tensor)
-  LOAD_SYMBOL(_lantern_copy_sparse_to_sparse__tensor_tensor_bool)
-  LOAD_SYMBOL(_lantern_unbind_tensor_intt)
-  LOAD_SYMBOL(_lantern_Tensor_unbind_tensor_intt)
-  LOAD_SYMBOL(_lantern_unbind_tensor_dimname)
-  LOAD_SYMBOL(_lantern_Tensor_unbind_tensor_dimname)
-  LOAD_SYMBOL(_lantern_Tensor_to_sparse_tensor_intt)
-  LOAD_SYMBOL(_lantern_Tensor_to_sparse_tensor)
-  LOAD_SYMBOL(_lantern_Tensor_to_mkldnn_tensor_scalartype)
-  LOAD_SYMBOL(_lantern_mkldnn_reorder_conv2d_weight_tensor_intarrayref_intarrayref_intarrayref_intt)
-  LOAD_SYMBOL(_lantern_mkldnn_reorder_conv3d_weight_tensor_intarrayref_intarrayref_intarrayref_intt)
-  LOAD_SYMBOL(_lantern_to_mkldnn_backward_tensor_tensor)
-  LOAD_SYMBOL(_lantern_quantize_per_tensor_tensor_double_intt_scalartype)
-  LOAD_SYMBOL(_lantern_quantize_per_tensor_tensorlist_tensor_tensor_scalartype)
-  LOAD_SYMBOL(_lantern_quantize_per_channel_tensor_tensor_tensor_intt_scalartype)
-  LOAD_SYMBOL(_lantern_dequantize_tensor)
-  LOAD_SYMBOL(_lantern_Tensor_dequantize_tensor)
-  LOAD_SYMBOL(_lantern_dequantize_tensorlist)
-  LOAD_SYMBOL(_lantern_q_scale_tensor)
-  LOAD_SYMBOL(_lantern_Tensor_q_scale_tensor)
-  LOAD_SYMBOL(_lantern_q_zero_point_tensor)
-  LOAD_SYMBOL(_lantern_Tensor_q_zero_point_tensor)
-  LOAD_SYMBOL(_lantern_q_per_channel_scales_tensor)
-  LOAD_SYMBOL(_lantern_Tensor_q_per_channel_scales_tensor)
-  LOAD_SYMBOL(_lantern_q_per_channel_zero_points_tensor)
-  LOAD_SYMBOL(_lantern_Tensor_q_per_channel_zero_points_tensor)
-  LOAD_SYMBOL(_lantern_q_per_channel_axis_tensor)
-  LOAD_SYMBOL(_lantern_Tensor_q_per_channel_axis_tensor)
-  LOAD_SYMBOL(_lantern_int_repr_tensor)
-  LOAD_SYMBOL(_lantern_Tensor_int_repr_tensor)
-  LOAD_SYMBOL(_lantern__make_per_tensor_quantized_tensor_tensor_double_intt)
-  LOAD_SYMBOL(_lantern__make_per_channel_quantized_tensor_tensor_tensor_tensor_intt)
-  LOAD_SYMBOL(_lantern_Tensor_qscheme_tensor)
-  LOAD_SYMBOL(_lantern_fake_quantize_per_tensor_affine_tensor_double_intt_intt_intt)
-  LOAD_SYMBOL(_lantern_fake_quantize_per_tensor_affine_cachemask_tensor_double_intt_intt_intt)
-  LOAD_SYMBOL(_lantern_fake_quantize_per_tensor_affine_cachemask_backward_tensor_tensor)
-  LOAD_SYMBOL(_lantern__fake_quantize_learnable_per_tensor_affine_tensor_tensor_tensor_intt_intt_double)
-  LOAD_SYMBOL(_lantern__fake_quantize_learnable_per_tensor_affine_backward_tensor_tensor_tensor_tensor_intt_intt_double)
-  LOAD_SYMBOL(_lantern_fake_quantize_per_channel_affine_tensor_tensor_tensor_intt_intt_intt)
-  LOAD_SYMBOL(_lantern_fake_quantize_per_channel_affine_cachemask_tensor_tensor_tensor_intt_intt_intt)
-  LOAD_SYMBOL(_lantern_fake_quantize_per_channel_affine_cachemask_backward_tensor_tensor)
-  LOAD_SYMBOL(_lantern__fake_quantize_learnable_per_channel_affine_tensor_tensor_tensor_intt_intt_intt_double)
-  LOAD_SYMBOL(_lantern__fake_quantize_learnable_per_channel_affine_backward_tensor_tensor_tensor_tensor_intt_intt_intt_double)
-  LOAD_SYMBOL(_lantern__choose_qparams_per_tensor_tensor_bool)
-  LOAD_SYMBOL(_lantern__saturate_weight_to_fp16_tensor)
-  LOAD_SYMBOL(_lantern_choose_qparams_optimized_tensor_intt_intt_double_intt)
-  LOAD_SYMBOL(_lantern_Tensor_to_tensor_tensoroptions_bool_bool_memoryformat)
-  LOAD_SYMBOL(_lantern_Tensor_to_tensor_device_scalartype_bool_bool_memoryformat)
-  LOAD_SYMBOL(_lantern_Tensor_to_tensor_scalartype_bool_bool_memoryformat)
-  LOAD_SYMBOL(_lantern_Tensor_to_tensor_tensor_bool_bool_memoryformat)
-  LOAD_SYMBOL(_lantern_meshgrid_tensorlist)
-  LOAD_SYMBOL(_lantern_cartesian_prod_tensorlist)
-  LOAD_SYMBOL(_lantern_combinations_tensor_intt_bool)
-  LOAD_SYMBOL(_lantern_Tensor_item_tensor)
-  LOAD_SYMBOL(_lantern_result_type_tensor_tensor)
-  LOAD_SYMBOL(_lantern_result_type_tensor_scalar)
-  LOAD_SYMBOL(_lantern_result_type_scalar_tensor)
-  LOAD_SYMBOL(_lantern_result_type_scalar_scalar)
-  LOAD_SYMBOL(_lantern_can_cast_scalartype_scalartype)
-  LOAD_SYMBOL(_lantern_promote_types_scalartype_scalartype)
-  LOAD_SYMBOL(_lantern__local_scalar_dense_tensor)
-  LOAD_SYMBOL(_lantern__thnn_fused_lstm_cell_tensor_tensor_tensor_tensor_tensor)
-  LOAD_SYMBOL(_lantern__thnn_fused_lstm_cell_backward_tensor_tensor_tensor_tensor_tensor_bool)
-  LOAD_SYMBOL(_lantern__thnn_differentiable_lstm_cell_backward_tensor_tensor_tensor_tensor_tensor_tensor_tensor_tensor)
-  LOAD_SYMBOL(_lantern__thnn_fused_gru_cell_tensor_tensor_tensor_tensor_tensor)
-  LOAD_SYMBOL(_lantern__thnn_fused_gru_cell_backward_tensor_tensor_bool)
-  LOAD_SYMBOL(_lantern__thnn_differentiable_gru_cell_backward_tensor_tensor_tensor_tensor_tensor_tensor)
-  LOAD_SYMBOL(_lantern_lstm_tensor_tensorlist_tensorlist_bool_intt_double_bool_bool_bool)
-  LOAD_SYMBOL(_lantern_lstm_tensor_tensor_tensorlist_tensorlist_bool_intt_double_bool_bool)
-  LOAD_SYMBOL(_lantern_gru_tensor_tensor_tensorlist_bool_intt_double_bool_bool_bool)
-  LOAD_SYMBOL(_lantern_gru_tensor_tensor_tensor_tensorlist_bool_intt_double_bool_bool)
-  LOAD_SYMBOL(_lantern_rnn_tanh_tensor_tensor_tensorlist_bool_intt_double_bool_bool_bool)
-  LOAD_SYMBOL(_lantern_rnn_tanh_tensor_tensor_tensor_tensorlist_bool_intt_double_bool_bool)
-  LOAD_SYMBOL(_lantern_rnn_relu_tensor_tensor_tensorlist_bool_intt_double_bool_bool_bool)
-  LOAD_SYMBOL(_lantern_rnn_relu_tensor_tensor_tensor_tensorlist_bool_intt_double_bool_bool)
-  LOAD_SYMBOL(_lantern_lstm_cell_tensor_tensorlist_tensor_tensor_tensor_tensor)
-  LOAD_SYMBOL(_lantern_gru_cell_tensor_tensor_tensor_tensor_tensor_tensor)
-  LOAD_SYMBOL(_lantern_rnn_tanh_cell_tensor_tensor_tensor_tensor_tensor_tensor)
-  LOAD_SYMBOL(_lantern_rnn_relu_cell_tensor_tensor_tensor_tensor_tensor_tensor)
-  LOAD_SYMBOL(_lantern_quantized_lstm_cell_tensor_tensorlist_tensor_tensor_tensor_tensor_tensor_tensor_tensor_tensor_scalar_scalar_scalar_scalar)
-  LOAD_SYMBOL(_lantern_quantized_gru_cell_tensor_tensor_tensor_tensor_tensor_tensor_tensor_tensor_tensor_tensor_scalar_scalar_scalar_scalar)
-  LOAD_SYMBOL(_lantern_quantized_rnn_relu_cell_tensor_tensor_tensor_tensor_tensor_tensor_tensor_tensor_tensor_tensor_scalar_scalar_scalar_scalar)
-  LOAD_SYMBOL(_lantern_quantized_rnn_tanh_cell_tensor_tensor_tensor_tensor_tensor_tensor_tensor_tensor_tensor_tensor_scalar_scalar_scalar_scalar)
-  LOAD_SYMBOL(_lantern__pack_padded_sequence_tensor_tensor_bool)
-  LOAD_SYMBOL(_lantern__pack_padded_sequence_backward_tensor_intarrayref_tensor_bool)
-  LOAD_SYMBOL(_lantern__pad_packed_sequence_tensor_tensor_bool_scalar_intt)
-  LOAD_SYMBOL(_lantern_Tensor_set__tensor_storage)
-  LOAD_SYMBOL(_lantern_Tensor_set__tensor_storage_intt_intarrayref_intarrayref)
-  LOAD_SYMBOL(_lantern_Tensor_set__tensor_tensor)
-  LOAD_SYMBOL(_lantern_Tensor_set__tensor)
-  LOAD_SYMBOL(_lantern_Tensor_is_set_to_tensor_tensor)
-  LOAD_SYMBOL(_lantern_Tensor_masked_fill__tensor_tensor_scalar)
-  LOAD_SYMBOL(_lantern_masked_fill_tensor_tensor_scalar)
-  LOAD_SYMBOL(_lantern_Tensor_masked_fill_tensor_tensor_scalar)
-  LOAD_SYMBOL(_lantern_Tensor_masked_fill__tensor_tensor_tensor)
-  LOAD_SYMBOL(_lantern_masked_fill_tensor_tensor_tensor)
-  LOAD_SYMBOL(_lantern_Tensor_masked_fill_tensor_tensor_tensor)
-  LOAD_SYMBOL(_lantern_Tensor_masked_scatter__tensor_tensor_tensor)
-  LOAD_SYMBOL(_lantern_masked_scatter_tensor_tensor_tensor)
-  LOAD_SYMBOL(_lantern_Tensor_masked_scatter_tensor_tensor_tensor)
-  LOAD_SYMBOL(_lantern_Tensor_view_tensor_intarrayref)
-  LOAD_SYMBOL(_lantern_Tensor_view_tensor_scalartype)
-  LOAD_SYMBOL(_lantern_Tensor_put__tensor_tensor_tensor_bool)
-  LOAD_SYMBOL(_lantern_put_tensor_tensor_tensor_bool)
-  LOAD_SYMBOL(_lantern_Tensor_put_tensor_tensor_tensor_bool)
-  LOAD_SYMBOL(_lantern_Tensor_index_add__tensor_intt_tensor_tensor)
-  LOAD_SYMBOL(_lantern_Tensor_index_add__tensor_intt_tensor_tensor_scalar)
-  LOAD_SYMBOL(_lantern_index_add_tensor_intt_tensor_tensor)
-  LOAD_SYMBOL(_lantern_Tensor_index_add_tensor_intt_tensor_tensor)
-  LOAD_SYMBOL(_lantern_index_add_tensor_intt_tensor_tensor_scalar)
-  LOAD_SYMBOL(_lantern_Tensor_index_add_tensor_intt_tensor_tensor_scalar)
-  LOAD_SYMBOL(_lantern_index_add_tensor_dimname_tensor_tensor_scalar)
-  LOAD_SYMBOL(_lantern_Tensor_index_add_tensor_dimname_tensor_tensor_scalar)
-  LOAD_SYMBOL(_lantern_Tensor_index_fill__tensor_intt_tensor_scalar)
-  LOAD_SYMBOL(_lantern_index_fill_tensor_intt_tensor_scalar)
-  LOAD_SYMBOL(_lantern_Tensor_index_fill_tensor_intt_tensor_scalar)
-  LOAD_SYMBOL(_lantern_Tensor_index_fill__tensor_intt_tensor_tensor)
-  LOAD_SYMBOL(_lantern_index_fill_tensor_intt_tensor_tensor)
-  LOAD_SYMBOL(_lantern_Tensor_index_fill_tensor_intt_tensor_tensor)
-  LOAD_SYMBOL(_lantern_Tensor_index_fill__tensor_dimname_tensor_scalar)
-  LOAD_SYMBOL(_lantern_Tensor_index_fill__tensor_dimname_tensor_tensor)
-  LOAD_SYMBOL(_lantern_index_fill_tensor_dimname_tensor_scalar)
-  LOAD_SYMBOL(_lantern_Tensor_index_fill_tensor_dimname_tensor_scalar)
-  LOAD_SYMBOL(_lantern_index_fill_tensor_dimname_tensor_tensor)
-  LOAD_SYMBOL(_lantern_Tensor_index_fill_tensor_dimname_tensor_tensor)
-  LOAD_SYMBOL(_lantern_Tensor_scatter__tensor_intt_tensor_tensor)
-  LOAD_SYMBOL(_lantern_scatter_tensor_intt_tensor_tensor)
-  LOAD_SYMBOL(_lantern_Tensor_scatter_tensor_intt_tensor_tensor)
-  LOAD_SYMBOL(_lantern_Tensor_scatter__tensor_intt_tensor_scalar)
-  LOAD_SYMBOL(_lantern_scatter_tensor_intt_tensor_scalar)
-  LOAD_SYMBOL(_lantern_Tensor_scatter_tensor_intt_tensor_scalar)
-  LOAD_SYMBOL(_lantern_scatter_tensor_dimname_tensor_tensor)
-  LOAD_SYMBOL(_lantern_Tensor_scatter_tensor_dimname_tensor_tensor)
-  LOAD_SYMBOL(_lantern_scatter_tensor_dimname_tensor_scalar)
-  LOAD_SYMBOL(_lantern_Tensor_scatter_tensor_dimname_tensor_scalar)
-  LOAD_SYMBOL(_lantern_Tensor_scatter__tensor_intt_tensor_tensor_stdstring)
-  LOAD_SYMBOL(_lantern_Tensor_scatter__tensor_intt_tensor_scalar_stdstring)
-  LOAD_SYMBOL(_lantern_Tensor_scatter_add__tensor_intt_tensor_tensor)
-  LOAD_SYMBOL(_lantern_scatter_add_tensor_intt_tensor_tensor)
-  LOAD_SYMBOL(_lantern_Tensor_scatter_add_tensor_intt_tensor_tensor)
-  LOAD_SYMBOL(_lantern_scatter_add_tensor_dimname_tensor_tensor)
-  LOAD_SYMBOL(_lantern_Tensor_scatter_add_tensor_dimname_tensor_tensor)
-  LOAD_SYMBOL(_lantern_Tensor_eq__tensor_scalar)
-  LOAD_SYMBOL(_lantern_Tensor_eq__tensor_tensor)
-  LOAD_SYMBOL(_lantern_bitwise_and_out_tensor_tensor_tensor)
-  LOAD_SYMBOL(_lantern_bitwise_and_out_tensor_tensor_scalar)
-  LOAD_SYMBOL(_lantern_bitwise_and_tensor_scalar)
-  LOAD_SYMBOL(_lantern_Tensor_bitwise_and_tensor_scalar)
-  LOAD_SYMBOL(_lantern_bitwise_and_tensor_tensor)
-  LOAD_SYMBOL(_lantern_Tensor_bitwise_and_tensor_tensor)
-  LOAD_SYMBOL(_lantern_Tensor_bitwise_and__tensor_scalar)
-  LOAD_SYMBOL(_lantern_Tensor_bitwise_and__tensor_tensor)
-  LOAD_SYMBOL(_lantern___and___tensor_scalar)
-  LOAD_SYMBOL(_lantern_Tensor___and___tensor_scalar)
-  LOAD_SYMBOL(_lantern___and___tensor_tensor)
-  LOAD_SYMBOL(_lantern_Tensor___and___tensor_tensor)
-  LOAD_SYMBOL(_lantern_Tensor___iand___tensor_scalar)
-  LOAD_SYMBOL(_lantern_Tensor___iand___tensor_tensor)
-  LOAD_SYMBOL(_lantern_bitwise_or_out_tensor_tensor_tensor)
-  LOAD_SYMBOL(_lantern_bitwise_or_out_tensor_tensor_scalar)
-  LOAD_SYMBOL(_lantern_bitwise_or_tensor_scalar)
-  LOAD_SYMBOL(_lantern_Tensor_bitwise_or_tensor_scalar)
-  LOAD_SYMBOL(_lantern_bitwise_or_tensor_tensor)
-  LOAD_SYMBOL(_lantern_Tensor_bitwise_or_tensor_tensor)
-  LOAD_SYMBOL(_lantern_Tensor_bitwise_or__tensor_scalar)
-  LOAD_SYMBOL(_lantern_Tensor_bitwise_or__tensor_tensor)
-  LOAD_SYMBOL(_lantern___or___tensor_scalar)
-  LOAD_SYMBOL(_lantern_Tensor___or___tensor_scalar)
-  LOAD_SYMBOL(_lantern___or___tensor_tensor)
-  LOAD_SYMBOL(_lantern_Tensor___or___tensor_tensor)
-  LOAD_SYMBOL(_lantern_Tensor___ior___tensor_scalar)
-  LOAD_SYMBOL(_lantern_Tensor___ior___tensor_tensor)
-  LOAD_SYMBOL(_lantern_bitwise_xor_out_tensor_tensor_tensor)
-  LOAD_SYMBOL(_lantern_bitwise_xor_out_tensor_tensor_scalar)
-  LOAD_SYMBOL(_lantern_bitwise_xor_tensor_scalar)
-  LOAD_SYMBOL(_lantern_Tensor_bitwise_xor_tensor_scalar)
-  LOAD_SYMBOL(_lantern_bitwise_xor_tensor_tensor)
-  LOAD_SYMBOL(_lantern_Tensor_bitwise_xor_tensor_tensor)
-  LOAD_SYMBOL(_lantern_Tensor_bitwise_xor__tensor_scalar)
-  LOAD_SYMBOL(_lantern_Tensor_bitwise_xor__tensor_tensor)
-  LOAD_SYMBOL(_lantern___xor___tensor_scalar)
-  LOAD_SYMBOL(_lantern_Tensor___xor___tensor_scalar)
-  LOAD_SYMBOL(_lantern___xor___tensor_tensor)
-  LOAD_SYMBOL(_lantern_Tensor___xor___tensor_tensor)
-  LOAD_SYMBOL(_lantern_Tensor___ixor___tensor_scalar)
-  LOAD_SYMBOL(_lantern_Tensor___ixor___tensor_tensor)
-  LOAD_SYMBOL(_lantern___lshift___tensor_scalar)
-  LOAD_SYMBOL(_lantern_Tensor___lshift___tensor_scalar)
-  LOAD_SYMBOL(_lantern___lshift___tensor_tensor)
-  LOAD_SYMBOL(_lantern_Tensor___lshift___tensor_tensor)
-  LOAD_SYMBOL(_lantern_Tensor___ilshift___tensor_scalar)
-  LOAD_SYMBOL(_lantern_Tensor___ilshift___tensor_tensor)
-  LOAD_SYMBOL(_lantern___rshift___tensor_scalar)
-  LOAD_SYMBOL(_lantern_Tensor___rshift___tensor_scalar)
-  LOAD_SYMBOL(_lantern___rshift___tensor_tensor)
-  LOAD_SYMBOL(_lantern_Tensor___rshift___tensor_tensor)
-  LOAD_SYMBOL(_lantern_Tensor___irshift___tensor_scalar)
-  LOAD_SYMBOL(_lantern_Tensor___irshift___tensor_tensor)
-  LOAD_SYMBOL(_lantern_Tensor_tril__tensor_intt)
-  LOAD_SYMBOL(_lantern_Tensor_triu__tensor_intt)
-  LOAD_SYMBOL(_lantern_Tensor_digamma__tensor)
-  LOAD_SYMBOL(_lantern_Tensor_renorm__tensor_scalar_intt_scalar)
-  LOAD_SYMBOL(_lantern_Tensor_lerp__tensor_tensor_scalar)
-  LOAD_SYMBOL(_lantern_Tensor_lerp__tensor_tensor_tensor)
-  LOAD_SYMBOL(_lantern_Tensor_fmod__tensor_scalar)
-  LOAD_SYMBOL(_lantern_Tensor_fmod__tensor_tensor)
-  LOAD_SYMBOL(_lantern_Tensor_remainder__tensor_scalar)
-  LOAD_SYMBOL(_lantern_Tensor_remainder__tensor_tensor)
-  LOAD_SYMBOL(_lantern_Tensor_addbmm__tensor_tensor_tensor_scalar_scalar)
-  LOAD_SYMBOL(_lantern_addbmm_out_tensor_tensor_tensor_tensor_scalar_scalar)
-  LOAD_SYMBOL(_lantern_addbmm_tensor_tensor_tensor_scalar_scalar)
-  LOAD_SYMBOL(_lantern_Tensor_addbmm_tensor_tensor_tensor_scalar_scalar)
-  LOAD_SYMBOL(_lantern_Tensor_addcdiv__tensor_tensor_tensor_scalar)
-  LOAD_SYMBOL(_lantern_Tensor_random__tensor_intt_intt_generator)
-  LOAD_SYMBOL(_lantern_Tensor_random__tensor_intt_generator)
-  LOAD_SYMBOL(_lantern_Tensor_random__tensor_generator)
-  LOAD_SYMBOL(_lantern_Tensor_uniform__tensor_double_double_generator)
-  LOAD_SYMBOL(_lantern_Tensor_cauchy__tensor_double_double_generator)
-  LOAD_SYMBOL(_lantern_Tensor_log_normal__tensor_double_double_generator)
-  LOAD_SYMBOL(_lantern_Tensor_exponential__tensor_double_generator)
-  LOAD_SYMBOL(_lantern_Tensor_geometric__tensor_double_generator)
-  LOAD_SYMBOL(_lantern_diag_out_tensor_tensor_intt)
-  LOAD_SYMBOL(_lantern_diag_tensor_intt)
-  LOAD_SYMBOL(_lantern_Tensor_diag_tensor_intt)
-  LOAD_SYMBOL(_lantern_diag_backward_tensor_intarrayref_intt)
-  LOAD_SYMBOL(_lantern_cross_out_tensor_tensor_tensor_intt)
-  LOAD_SYMBOL(_lantern_cross_tensor_tensor_intt)
-  LOAD_SYMBOL(_lantern_Tensor_cross_tensor_tensor_intt)
-  LOAD_SYMBOL(_lantern_triu_out_tensor_tensor_intt)
-  LOAD_SYMBOL(_lantern_triu_tensor_intt)
-  LOAD_SYMBOL(_lantern_Tensor_triu_tensor_intt)
-  LOAD_SYMBOL(_lantern_tril_out_tensor_tensor_intt)
-  LOAD_SYMBOL(_lantern_tril_tensor_intt)
-  LOAD_SYMBOL(_lantern_Tensor_tril_tensor_intt)
-  LOAD_SYMBOL(_lantern_tril_indices_intt_intt_intt_tensoroptions)
-  LOAD_SYMBOL(_lantern_triu_indices_intt_intt_intt_tensoroptions)
-  LOAD_SYMBOL(_lantern_trace_tensor)
-  LOAD_SYMBOL(_lantern_Tensor_trace_tensor)
-  LOAD_SYMBOL(_lantern_trace_backward_tensor_intarrayref)
-  LOAD_SYMBOL(_lantern_ne_out_tensor_tensor_scalar)
-  LOAD_SYMBOL(_lantern_ne_tensor_scalar)
-  LOAD_SYMBOL(_lantern_Tensor_ne_tensor_scalar)
-  LOAD_SYMBOL(_lantern_ne_out_tensor_tensor_tensor)
-  LOAD_SYMBOL(_lantern_ne_tensor_tensor)
-  LOAD_SYMBOL(_lantern_Tensor_ne_tensor_tensor)
-  LOAD_SYMBOL(_lantern_Tensor_ne__tensor_scalar)
-  LOAD_SYMBOL(_lantern_Tensor_ne__tensor_tensor)
-  LOAD_SYMBOL(_lantern_not_equal_out_tensor_tensor_scalar)
-  LOAD_SYMBOL(_lantern_not_equal_tensor_scalar)
-  LOAD_SYMBOL(_lantern_Tensor_not_equal_tensor_scalar)
-  LOAD_SYMBOL(_lantern_not_equal_out_tensor_tensor_tensor)
-  LOAD_SYMBOL(_lantern_not_equal_tensor_tensor)
-  LOAD_SYMBOL(_lantern_Tensor_not_equal_tensor_tensor)
-  LOAD_SYMBOL(_lantern_Tensor_not_equal__tensor_scalar)
-  LOAD_SYMBOL(_lantern_Tensor_not_equal__tensor_tensor)
-  LOAD_SYMBOL(_lantern_eq_out_tensor_tensor_scalar)
-  LOAD_SYMBOL(_lantern_eq_tensor_scalar)
-  LOAD_SYMBOL(_lantern_Tensor_eq_tensor_scalar)
-  LOAD_SYMBOL(_lantern_eq_out_tensor_tensor_tensor)
-  LOAD_SYMBOL(_lantern_eq_tensor_tensor)
-  LOAD_SYMBOL(_lantern_Tensor_eq_tensor_tensor)
-  LOAD_SYMBOL(_lantern_ge_out_tensor_tensor_scalar)
-  LOAD_SYMBOL(_lantern_ge_tensor_scalar)
-  LOAD_SYMBOL(_lantern_Tensor_ge_tensor_scalar)
-  LOAD_SYMBOL(_lantern_ge_out_tensor_tensor_tensor)
-  LOAD_SYMBOL(_lantern_ge_tensor_tensor)
-  LOAD_SYMBOL(_lantern_Tensor_ge_tensor_tensor)
-  LOAD_SYMBOL(_lantern_Tensor_ge__tensor_scalar)
-  LOAD_SYMBOL(_lantern_Tensor_ge__tensor_tensor)
-  LOAD_SYMBOL(_lantern_greater_equal_out_tensor_tensor_scalar)
-  LOAD_SYMBOL(_lantern_greater_equal_tensor_scalar)
-  LOAD_SYMBOL(_lantern_Tensor_greater_equal_tensor_scalar)
-  LOAD_SYMBOL(_lantern_greater_equal_out_tensor_tensor_tensor)
-  LOAD_SYMBOL(_lantern_greater_equal_tensor_tensor)
-  LOAD_SYMBOL(_lantern_Tensor_greater_equal_tensor_tensor)
-  LOAD_SYMBOL(_lantern_Tensor_greater_equal__tensor_scalar)
-  LOAD_SYMBOL(_lantern_Tensor_greater_equal__tensor_tensor)
-  LOAD_SYMBOL(_lantern_le_out_tensor_tensor_scalar)
-  LOAD_SYMBOL(_lantern_le_tensor_scalar)
-  LOAD_SYMBOL(_lantern_Tensor_le_tensor_scalar)
-  LOAD_SYMBOL(_lantern_le_out_tensor_tensor_tensor)
-  LOAD_SYMBOL(_lantern_le_tensor_tensor)
-  LOAD_SYMBOL(_lantern_Tensor_le_tensor_tensor)
-  LOAD_SYMBOL(_lantern_Tensor_le__tensor_scalar)
-  LOAD_SYMBOL(_lantern_Tensor_le__tensor_tensor)
-  LOAD_SYMBOL(_lantern_less_equal_out_tensor_tensor_scalar)
-  LOAD_SYMBOL(_lantern_less_equal_tensor_scalar)
-  LOAD_SYMBOL(_lantern_Tensor_less_equal_tensor_scalar)
-  LOAD_SYMBOL(_lantern_less_equal_out_tensor_tensor_tensor)
-  LOAD_SYMBOL(_lantern_less_equal_tensor_tensor)
-  LOAD_SYMBOL(_lantern_Tensor_less_equal_tensor_tensor)
-  LOAD_SYMBOL(_lantern_Tensor_less_equal__tensor_scalar)
-  LOAD_SYMBOL(_lantern_Tensor_less_equal__tensor_tensor)
-  LOAD_SYMBOL(_lantern_gt_out_tensor_tensor_scalar)
-  LOAD_SYMBOL(_lantern_gt_tensor_scalar)
-  LOAD_SYMBOL(_lantern_Tensor_gt_tensor_scalar)
-  LOAD_SYMBOL(_lantern_gt_out_tensor_tensor_tensor)
-  LOAD_SYMBOL(_lantern_gt_tensor_tensor)
-  LOAD_SYMBOL(_lantern_Tensor_gt_tensor_tensor)
-  LOAD_SYMBOL(_lantern_Tensor_gt__tensor_scalar)
-  LOAD_SYMBOL(_lantern_Tensor_gt__tensor_tensor)
-  LOAD_SYMBOL(_lantern_greater_out_tensor_tensor_scalar)
-  LOAD_SYMBOL(_lantern_greater_tensor_scalar)
-  LOAD_SYMBOL(_lantern_Tensor_greater_tensor_scalar)
-  LOAD_SYMBOL(_lantern_greater_out_tensor_tensor_tensor)
-  LOAD_SYMBOL(_lantern_greater_tensor_tensor)
-  LOAD_SYMBOL(_lantern_Tensor_greater_tensor_tensor)
-  LOAD_SYMBOL(_lantern_Tensor_greater__tensor_scalar)
-  LOAD_SYMBOL(_lantern_Tensor_greater__tensor_tensor)
-  LOAD_SYMBOL(_lantern_lt_out_tensor_tensor_scalar)
-  LOAD_SYMBOL(_lantern_lt_tensor_scalar)
-  LOAD_SYMBOL(_lantern_Tensor_lt_tensor_scalar)
-  LOAD_SYMBOL(_lantern_lt_out_tensor_tensor_tensor)
-  LOAD_SYMBOL(_lantern_lt_tensor_tensor)
-  LOAD_SYMBOL(_lantern_Tensor_lt_tensor_tensor)
-  LOAD_SYMBOL(_lantern_Tensor_lt__tensor_scalar)
-  LOAD_SYMBOL(_lantern_Tensor_lt__tensor_tensor)
-  LOAD_SYMBOL(_lantern_less_out_tensor_tensor_scalar)
-  LOAD_SYMBOL(_lantern_less_tensor_scalar)
-  LOAD_SYMBOL(_lantern_Tensor_less_tensor_scalar)
-  LOAD_SYMBOL(_lantern_less_out_tensor_tensor_tensor)
-  LOAD_SYMBOL(_lantern_less_tensor_tensor)
-  LOAD_SYMBOL(_lantern_Tensor_less_tensor_tensor)
-  LOAD_SYMBOL(_lantern_Tensor_less__tensor_scalar)
-  LOAD_SYMBOL(_lantern_Tensor_less__tensor_tensor)
-  LOAD_SYMBOL(_lantern_take_out_tensor_tensor_tensor)
-  LOAD_SYMBOL(_lantern_take_tensor_tensor)
-  LOAD_SYMBOL(_lantern_Tensor_take_tensor_tensor)
-  LOAD_SYMBOL(_lantern_take_along_dim_out_tensor_tensor_tensor_intt)
-  LOAD_SYMBOL(_lantern_take_along_dim_tensor_tensor_intt)
-  LOAD_SYMBOL(_lantern_Tensor_take_along_dim_tensor_tensor_intt)
-  LOAD_SYMBOL(_lantern_index_select_out_tensor_tensor_intt_tensor)
-  LOAD_SYMBOL(_lantern_index_select_tensor_intt_tensor)
-  LOAD_SYMBOL(_lantern_Tensor_index_select_tensor_intt_tensor)
-  LOAD_SYMBOL(_lantern_index_select_out_tensor_tensor_dimname_tensor)
-  LOAD_SYMBOL(_lantern_index_select_tensor_dimname_tensor)
-  LOAD_SYMBOL(_lantern_Tensor_index_select_tensor_dimname_tensor)
-  LOAD_SYMBOL(_lantern_index_select_backward_tensor_intarrayref_intt_tensor)
-  LOAD_SYMBOL(_lantern_masked_select_out_tensor_tensor_tensor)
-  LOAD_SYMBOL(_lantern_masked_select_tensor_tensor)
-  LOAD_SYMBOL(_lantern_Tensor_masked_select_tensor_tensor)
-  LOAD_SYMBOL(_lantern_masked_select_backward_tensor_tensor_tensor)
-  LOAD_SYMBOL(_lantern_nonzero_out_tensor_tensor)
-  LOAD_SYMBOL(_lantern_nonzero_tensor)
-  LOAD_SYMBOL(_lantern_Tensor_nonzero_tensor)
-  LOAD_SYMBOL(_lantern_nonzero_numpy_tensor)
-  LOAD_SYMBOL(_lantern_Tensor_nonzero_numpy_tensor)
-  LOAD_SYMBOL(_lantern_gather_out_tensor_tensor_intt_tensor_bool)
-  LOAD_SYMBOL(_lantern_gather_tensor_intt_tensor_bool)
-  LOAD_SYMBOL(_lantern_Tensor_gather_tensor_intt_tensor_bool)
-  LOAD_SYMBOL(_lantern_gather_backward_tensor_tensor_intt_tensor_bool)
-  LOAD_SYMBOL(_lantern_gather_out_tensor_tensor_dimname_tensor_bool)
-  LOAD_SYMBOL(_lantern_gather_tensor_dimname_tensor_bool)
-  LOAD_SYMBOL(_lantern_Tensor_gather_tensor_dimname_tensor_bool)
-  LOAD_SYMBOL(_lantern__gather_sparse_backward_tensor_intt_tensor_tensor)
-  LOAD_SYMBOL(_lantern_addcmul_out_tensor_tensor_tensor_tensor_scalar)
-  LOAD_SYMBOL(_lantern_addcmul_tensor_tensor_tensor_scalar)
-  LOAD_SYMBOL(_lantern_Tensor_addcmul_tensor_tensor_tensor_scalar)
-  LOAD_SYMBOL(_lantern_Tensor_addcmul__tensor_tensor_tensor_scalar)
-  LOAD_SYMBOL(_lantern_addcdiv_out_tensor_tensor_tensor_tensor_scalar)
-  LOAD_SYMBOL(_lantern_addcdiv_tensor_tensor_tensor_scalar)
-  LOAD_SYMBOL(_lantern_Tensor_addcdiv_tensor_tensor_tensor_scalar)
-  LOAD_SYMBOL(_lantern_cross_entropy_loss_tensor_tensor_tensor_intt_intt)
-  LOAD_SYMBOL(_lantern_lstsq_out_tensor_tensor_tensor_tensor)
-  LOAD_SYMBOL(_lantern_lstsq_tensor_tensor)
-  LOAD_SYMBOL(_lantern_Tensor_lstsq_tensor_tensor)
-  LOAD_SYMBOL(_lantern_triangular_solve_out_tensor_tensor_tensor_tensor_bool_bool_bool)
-  LOAD_SYMBOL(_lantern_triangular_solve_tensor_tensor_bool_bool_bool)
-  LOAD_SYMBOL(_lantern_Tensor_triangular_solve_tensor_tensor_bool_bool_bool)
-  LOAD_SYMBOL(_lantern_symeig_out_tensor_tensor_tensor_bool_bool)
-  LOAD_SYMBOL(_lantern_symeig_tensor_bool_bool)
-  LOAD_SYMBOL(_lantern_Tensor_symeig_tensor_bool_bool)
-  LOAD_SYMBOL(_lantern__symeig_helper_tensor_bool_bool)
-  LOAD_SYMBOL(_lantern_eig_out_tensor_tensor_tensor_bool)
-  LOAD_SYMBOL(_lantern_eig_tensor_bool)
-  LOAD_SYMBOL(_lantern_Tensor_eig_tensor_bool)
-  LOAD_SYMBOL(_lantern_svd_out_tensor_tensor_tensor_tensor_bool_bool)
-  LOAD_SYMBOL(_lantern_svd_tensor_bool_bool)
-  LOAD_SYMBOL(_lantern_Tensor_svd_tensor_bool_bool)
-  LOAD_SYMBOL(_lantern__svd_helper_tensor_bool_bool)
-  LOAD_SYMBOL(_lantern_swapaxes_tensor_intt_intt)
-  LOAD_SYMBOL(_lantern_Tensor_swapaxes_tensor_intt_intt)
-  LOAD_SYMBOL(_lantern_Tensor_swapaxes__tensor_intt_intt)
-  LOAD_SYMBOL(_lantern_swapdims_tensor_intt_intt)
-  LOAD_SYMBOL(_lantern_Tensor_swapdims_tensor_intt_intt)
-  LOAD_SYMBOL(_lantern_Tensor_swapdims__tensor_intt_intt)
-  LOAD_SYMBOL(_lantern_cholesky_out_tensor_tensor_bool)
-  LOAD_SYMBOL(_lantern_cholesky_tensor_bool)
-  LOAD_SYMBOL(_lantern_Tensor_cholesky_tensor_bool)
-  LOAD_SYMBOL(_lantern_cholesky_solve_out_tensor_tensor_tensor_bool)
-  LOAD_SYMBOL(_lantern_cholesky_solve_tensor_tensor_bool)
-  LOAD_SYMBOL(_lantern_Tensor_cholesky_solve_tensor_tensor_bool)
-  LOAD_SYMBOL(_lantern__cholesky_solve_helper_tensor_tensor_bool)
-  LOAD_SYMBOL(_lantern_solve_tensor_tensor)
-  LOAD_SYMBOL(_lantern_Tensor_solve_tensor_tensor)
-  LOAD_SYMBOL(_lantern_solve_out_tensor_tensor_tensor_tensor)
-  LOAD_SYMBOL(_lantern__solve_helper_tensor_tensor)
-  LOAD_SYMBOL(_lantern_cholesky_inverse_tensor_bool)
-  LOAD_SYMBOL(_lantern_Tensor_cholesky_inverse_tensor_bool)
-  LOAD_SYMBOL(_lantern_cholesky_inverse_out_tensor_tensor_bool)
-  LOAD_SYMBOL(_lantern_qr_out_tensor_tensor_tensor_bool)
-  LOAD_SYMBOL(_lantern_qr_tensor_bool)
-  LOAD_SYMBOL(_lantern_Tensor_qr_tensor_bool)
-  LOAD_SYMBOL(_lantern_geqrf_out_tensor_tensor_tensor)
-  LOAD_SYMBOL(_lantern_geqrf_tensor)
-  LOAD_SYMBOL(_lantern_Tensor_geqrf_tensor)
-  LOAD_SYMBOL(_lantern_orgqr_tensor_tensor)
-  LOAD_SYMBOL(_lantern_Tensor_orgqr_tensor_tensor)
-  LOAD_SYMBOL(_lantern_orgqr_out_tensor_tensor_tensor)
-  LOAD_SYMBOL(_lantern_ormqr_out_tensor_tensor_tensor_tensor_bool_bool)
-  LOAD_SYMBOL(_lantern_ormqr_tensor_tensor_tensor_bool_bool)
-  LOAD_SYMBOL(_lantern_Tensor_ormqr_tensor_tensor_tensor_bool_bool)
-  LOAD_SYMBOL(_lantern__lu_with_info_tensor_bool_bool)
-  LOAD_SYMBOL(_lantern_lu_solve_out_tensor_tensor_tensor_tensor)
-  LOAD_SYMBOL(_lantern_lu_solve_tensor_tensor_tensor)
-  LOAD_SYMBOL(_lantern_Tensor_lu_solve_tensor_tensor_tensor)
-  LOAD_SYMBOL(_lantern_lu_unpack_tensor_tensor_bool_bool)
-  LOAD_SYMBOL(_lantern_lu_unpack_out_tensor_tensor_tensor_tensor_tensor_bool_bool)
-  LOAD_SYMBOL(_lantern_multinomial_out_tensor_tensor_intt_bool_generator)
-  LOAD_SYMBOL(_lantern_multinomial_tensor_intt_bool_generator)
-  LOAD_SYMBOL(_lantern_Tensor_multinomial_tensor_intt_bool_generator)
-  LOAD_SYMBOL(_lantern_lgamma_out_tensor_tensor)
-  LOAD_SYMBOL(_lantern_Tensor_lgamma__tensor)
-  LOAD_SYMBOL(_lantern_lgamma_tensor)
-  LOAD_SYMBOL(_lantern_Tensor_lgamma_tensor)
-  LOAD_SYMBOL(_lantern_digamma_out_tensor_tensor)
-  LOAD_SYMBOL(_lantern_digamma_tensor)
-  LOAD_SYMBOL(_lantern_Tensor_digamma_tensor)
-  LOAD_SYMBOL(_lantern_polygamma_out_tensor_intt_tensor)
-  LOAD_SYMBOL(_lantern_Tensor_polygamma__tensor_intt)
-  LOAD_SYMBOL(_lantern_erfinv_tensor)
-  LOAD_SYMBOL(_lantern_Tensor_erfinv_tensor)
-  LOAD_SYMBOL(_lantern_Tensor_erfinv__tensor)
-  LOAD_SYMBOL(_lantern_erfinv_out_tensor_tensor)
-  LOAD_SYMBOL(_lantern_i0_tensor)
-  LOAD_SYMBOL(_lantern_Tensor_i0_tensor)
-  LOAD_SYMBOL(_lantern_i0__tensor)
-  LOAD_SYMBOL(_lantern_Tensor_i0__tensor)
-  LOAD_SYMBOL(_lantern_i0_out_tensor_tensor)
-  LOAD_SYMBOL(_lantern_sign_tensor)
-  LOAD_SYMBOL(_lantern_Tensor_sign_tensor)
-  LOAD_SYMBOL(_lantern_Tensor_sign__tensor)
-  LOAD_SYMBOL(_lantern_sign_out_tensor_tensor)
-  LOAD_SYMBOL(_lantern_signbit_tensor)
-  LOAD_SYMBOL(_lantern_Tensor_signbit_tensor)
-  LOAD_SYMBOL(_lantern_signbit_out_tensor_tensor)
-  LOAD_SYMBOL(_lantern_dist_tensor_tensor_scalar)
-  LOAD_SYMBOL(_lantern_Tensor_dist_tensor_tensor_scalar)
-  LOAD_SYMBOL(_lantern_atan2_out_tensor_tensor_tensor)
-  LOAD_SYMBOL(_lantern_Tensor_atan2__tensor_tensor)
-  LOAD_SYMBOL(_lantern_atan2_tensor_tensor)
-  LOAD_SYMBOL(_lantern_Tensor_atan2_tensor_tensor)
-  LOAD_SYMBOL(_lantern_lerp_out_tensor_tensor_tensor_scalar)
-  LOAD_SYMBOL(_lantern_lerp_out_tensor_tensor_tensor_tensor)
-  LOAD_SYMBOL(_lantern_lerp_tensor_tensor_scalar)
-  LOAD_SYMBOL(_lantern_Tensor_lerp_tensor_tensor_scalar)
-  LOAD_SYMBOL(_lantern_lerp_tensor_tensor_tensor)
-  LOAD_SYMBOL(_lantern_Tensor_lerp_tensor_tensor_tensor)
-  LOAD_SYMBOL(_lantern_histc_out_tensor_tensor_intt_scalar_scalar)
-  LOAD_SYMBOL(_lantern_histc_tensor_intt_scalar_scalar)
-  LOAD_SYMBOL(_lantern_Tensor_histc_tensor_intt_scalar_scalar)
-  LOAD_SYMBOL(_lantern_fmod_out_tensor_tensor_scalar)
-  LOAD_SYMBOL(_lantern_fmod_tensor_scalar)
-  LOAD_SYMBOL(_lantern_Tensor_fmod_tensor_scalar)
-  LOAD_SYMBOL(_lantern_fmod_out_tensor_tensor_tensor)
-  LOAD_SYMBOL(_lantern_fmod_tensor_tensor)
-  LOAD_SYMBOL(_lantern_Tensor_fmod_tensor_tensor)
-  LOAD_SYMBOL(_lantern_hypot_out_tensor_tensor_tensor)
-  LOAD_SYMBOL(_lantern_hypot_tensor_tensor)
-  LOAD_SYMBOL(_lantern_Tensor_hypot_tensor_tensor)
-  LOAD_SYMBOL(_lantern_Tensor_hypot__tensor_tensor)
-  LOAD_SYMBOL(_lantern_igamma_out_tensor_tensor_tensor)
-  LOAD_SYMBOL(_lantern_igamma_tensor_tensor)
-  LOAD_SYMBOL(_lantern_Tensor_igamma_tensor_tensor)
-  LOAD_SYMBOL(_lantern_Tensor_igamma__tensor_tensor)
-  LOAD_SYMBOL(_lantern_igammac_out_tensor_tensor_tensor)
-  LOAD_SYMBOL(_lantern_igammac_tensor_tensor)
-  LOAD_SYMBOL(_lantern_Tensor_igammac_tensor_tensor)
-  LOAD_SYMBOL(_lantern_Tensor_igammac__tensor_tensor)
-  LOAD_SYMBOL(_lantern_nextafter_out_tensor_tensor_tensor)
-  LOAD_SYMBOL(_lantern_nextafter_tensor_tensor)
-  LOAD_SYMBOL(_lantern_Tensor_nextafter_tensor_tensor)
-  LOAD_SYMBOL(_lantern_Tensor_nextafter__tensor_tensor)
-  LOAD_SYMBOL(_lantern_remainder_out_tensor_tensor_scalar)
-  LOAD_SYMBOL(_lantern_remainder_tensor_scalar)
-  LOAD_SYMBOL(_lantern_Tensor_remainder_tensor_scalar)
-  LOAD_SYMBOL(_lantern_remainder_out_tensor_tensor_tensor)
-  LOAD_SYMBOL(_lantern_remainder_tensor_tensor)
-  LOAD_SYMBOL(_lantern_Tensor_remainder_tensor_tensor)
-  LOAD_SYMBOL(_lantern_min_tensor)
-  LOAD_SYMBOL(_lantern_Tensor_min_tensor)
-  LOAD_SYMBOL(_lantern_fmin_tensor_tensor)
-  LOAD_SYMBOL(_lantern_Tensor_fmin_tensor_tensor)
-  LOAD_SYMBOL(_lantern_fmin_out_tensor_tensor_tensor)
-  LOAD_SYMBOL(_lantern_max_tensor)
-  LOAD_SYMBOL(_lantern_Tensor_max_tensor)
-  LOAD_SYMBOL(_lantern_fmax_tensor_tensor)
-  LOAD_SYMBOL(_lantern_Tensor_fmax_tensor_tensor)
-  LOAD_SYMBOL(_lantern_fmax_out_tensor_tensor_tensor)
-  LOAD_SYMBOL(_lantern_maximum_tensor_tensor)
-  LOAD_SYMBOL(_lantern_Tensor_maximum_tensor_tensor)
-  LOAD_SYMBOL(_lantern_maximum_out_tensor_tensor_tensor)
-  LOAD_SYMBOL(_lantern_max_tensor_tensor)
-  LOAD_SYMBOL(_lantern_Tensor_max_tensor_tensor)
-  LOAD_SYMBOL(_lantern_max_out_tensor_tensor_tensor)
-  LOAD_SYMBOL(_lantern_minimum_tensor_tensor)
-  LOAD_SYMBOL(_lantern_Tensor_minimum_tensor_tensor)
-  LOAD_SYMBOL(_lantern_minimum_out_tensor_tensor_tensor)
-  LOAD_SYMBOL(_lantern_min_out_tensor_tensor_tensor)
-  LOAD_SYMBOL(_lantern_min_tensor_tensor)
-  LOAD_SYMBOL(_lantern_Tensor_min_tensor_tensor)
-  LOAD_SYMBOL(_lantern_quantile_out_tensor_tensor_double_intt_bool)
-  LOAD_SYMBOL(_lantern_quantile_tensor_double_intt_bool)
-  LOAD_SYMBOL(_lantern_Tensor_quantile_tensor_double_intt_bool)
-  LOAD_SYMBOL(_lantern_quantile_out_tensor_tensor_tensor_intt_bool)
-  LOAD_SYMBOL(_lantern_quantile_tensor_tensor_intt_bool)
-  LOAD_SYMBOL(_lantern_Tensor_quantile_tensor_tensor_intt_bool)
-  LOAD_SYMBOL(_lantern_nanquantile_out_tensor_tensor_double_intt_bool)
-  LOAD_SYMBOL(_lantern_nanquantile_tensor_double_intt_bool)
-  LOAD_SYMBOL(_lantern_Tensor_nanquantile_tensor_double_intt_bool)
-  LOAD_SYMBOL(_lantern_nanquantile_out_tensor_tensor_tensor_intt_bool)
-  LOAD_SYMBOL(_lantern_nanquantile_tensor_tensor_intt_bool)
-  LOAD_SYMBOL(_lantern_Tensor_nanquantile_tensor_tensor_intt_bool)
-  LOAD_SYMBOL(_lantern_quantile_out_tensor_tensor_double_intt_bool_stdstring)
-  LOAD_SYMBOL(_lantern_quantile_tensor_double_intt_bool_stdstring)
-  LOAD_SYMBOL(_lantern_Tensor_quantile_tensor_double_intt_bool_stdstring)
-  LOAD_SYMBOL(_lantern_quantile_out_tensor_tensor_tensor_intt_bool_stdstring)
-  LOAD_SYMBOL(_lantern_quantile_tensor_tensor_intt_bool_stdstring)
-  LOAD_SYMBOL(_lantern_Tensor_quantile_tensor_tensor_intt_bool_stdstring)
-  LOAD_SYMBOL(_lantern_nanquantile_out_tensor_tensor_double_intt_bool_stdstring)
-  LOAD_SYMBOL(_lantern_nanquantile_tensor_double_intt_bool_stdstring)
-  LOAD_SYMBOL(_lantern_Tensor_nanquantile_tensor_double_intt_bool_stdstring)
-  LOAD_SYMBOL(_lantern_nanquantile_out_tensor_tensor_tensor_intt_bool_stdstring)
-  LOAD_SYMBOL(_lantern_nanquantile_tensor_tensor_intt_bool_stdstring)
-  LOAD_SYMBOL(_lantern_Tensor_nanquantile_tensor_tensor_intt_bool_stdstring)
-  LOAD_SYMBOL(_lantern_sort_out_tensor_tensor_tensor_intt_bool)
-  LOAD_SYMBOL(_lantern_sort_out_tensor_tensor_tensor_bool_intt_bool)
-  LOAD_SYMBOL(_lantern_sort_tensor_intt_bool)
-  LOAD_SYMBOL(_lantern_Tensor_sort_tensor_intt_bool)
-  LOAD_SYMBOL(_lantern_sort_tensor_bool_intt_bool)
-  LOAD_SYMBOL(_lantern_Tensor_sort_tensor_bool_intt_bool)
-  LOAD_SYMBOL(_lantern_sort_out_tensor_tensor_tensor_dimname_bool)
-  LOAD_SYMBOL(_lantern_sort_out_tensor_tensor_tensor_bool_dimname_bool)
-  LOAD_SYMBOL(_lantern_sort_tensor_dimname_bool)
-  LOAD_SYMBOL(_lantern_Tensor_sort_tensor_dimname_bool)
-  LOAD_SYMBOL(_lantern_sort_tensor_bool_dimname_bool)
-  LOAD_SYMBOL(_lantern_Tensor_sort_tensor_bool_dimname_bool)
-  LOAD_SYMBOL(_lantern_msort_out_tensor_tensor)
-  LOAD_SYMBOL(_lantern_msort_tensor)
-  LOAD_SYMBOL(_lantern_Tensor_msort_tensor)
-  LOAD_SYMBOL(_lantern_argsort_tensor_intt_bool)
-  LOAD_SYMBOL(_lantern_Tensor_argsort_tensor_intt_bool)
-  LOAD_SYMBOL(_lantern_argsort_tensor_dimname_bool)
-  LOAD_SYMBOL(_lantern_Tensor_argsort_tensor_dimname_bool)
-  LOAD_SYMBOL(_lantern_topk_out_tensor_tensor_tensor_intt_intt_bool_bool)
-  LOAD_SYMBOL(_lantern_topk_tensor_intt_intt_bool_bool)
-  LOAD_SYMBOL(_lantern_Tensor_topk_tensor_intt_intt_bool_bool)
-  LOAD_SYMBOL(_lantern_all_tensor)
-  LOAD_SYMBOL(_lantern_Tensor_all_tensor)
-  LOAD_SYMBOL(_lantern_any_tensor)
-  LOAD_SYMBOL(_lantern_Tensor_any_tensor)
-  LOAD_SYMBOL(_lantern_renorm_out_tensor_tensor_scalar_intt_scalar)
-  LOAD_SYMBOL(_lantern_renorm_tensor_scalar_intt_scalar)
-  LOAD_SYMBOL(_lantern_Tensor_renorm_tensor_scalar_intt_scalar)
-  LOAD_SYMBOL(_lantern_Tensor_unfold_tensor_intt_intt_intt)
-  LOAD_SYMBOL(_lantern_unfold_backward_tensor_intarrayref_intt_intt_intt)
-  LOAD_SYMBOL(_lantern_equal_tensor_tensor)
-  LOAD_SYMBOL(_lantern_Tensor_equal_tensor_tensor)
-  LOAD_SYMBOL(_lantern_pow_out_tensor_tensor_tensor)
-  LOAD_SYMBOL(_lantern_pow_tensor_tensor)
-  LOAD_SYMBOL(_lantern_Tensor_pow_tensor_tensor)
-  LOAD_SYMBOL(_lantern_pow_out_tensor_scalar_tensor)
-  LOAD_SYMBOL(_lantern_pow_scalar_tensor)
-  LOAD_SYMBOL(_lantern_pow_out_tensor_tensor_scalar)
-  LOAD_SYMBOL(_lantern_pow_tensor_scalar)
-  LOAD_SYMBOL(_lantern_Tensor_pow_tensor_scalar)
-  LOAD_SYMBOL(_lantern_Tensor_pow__tensor_scalar)
-  LOAD_SYMBOL(_lantern_Tensor_pow__tensor_tensor)
-  LOAD_SYMBOL(_lantern_float_power_out_tensor_tensor_tensor)
-  LOAD_SYMBOL(_lantern_float_power_tensor_tensor)
-  LOAD_SYMBOL(_lantern_Tensor_float_power_tensor_tensor)
-  LOAD_SYMBOL(_lantern_float_power_out_tensor_scalar_tensor)
-  LOAD_SYMBOL(_lantern_float_power_scalar_tensor)
-  LOAD_SYMBOL(_lantern_float_power_out_tensor_tensor_scalar)
-  LOAD_SYMBOL(_lantern_float_power_tensor_scalar)
-  LOAD_SYMBOL(_lantern_Tensor_float_power_tensor_scalar)
-  LOAD_SYMBOL(_lantern_Tensor_float_power__tensor_scalar)
-  LOAD_SYMBOL(_lantern_Tensor_float_power__tensor_tensor)
-  LOAD_SYMBOL(_lantern_Tensor_normal__tensor_double_double_generator)
-  LOAD_SYMBOL(_lantern_normal_out_tensor_tensor_double_generator)
-  LOAD_SYMBOL(_lantern_normal_out_tensor_double_tensor_generator)
-  LOAD_SYMBOL(_lantern_normal_out_tensor_tensor_tensor_generator)
-  LOAD_SYMBOL(_lantern_normal_out_tensor_double_double_intarrayref_generator)
-  LOAD_SYMBOL(_lantern_alias_tensor)
-  LOAD_SYMBOL(_lantern_Tensor_alias_tensor)
-  LOAD_SYMBOL(_lantern__index_copy__tensor_intt_tensor_tensor)
-  LOAD_SYMBOL(_lantern__cumsum_tensor_intt)
-  LOAD_SYMBOL(_lantern__cumsum_out_tensor_tensor_intt)
-  LOAD_SYMBOL(_lantern__cumprod_tensor_intt)
-  LOAD_SYMBOL(_lantern__cumprod_out_tensor_tensor_intt)
-  LOAD_SYMBOL(_lantern__amp_foreach_non_finite_check_and_unscale__tensorlist_tensor_tensor)
-  LOAD_SYMBOL(_lantern__amp_update_scale__tensor_tensor_tensor_double_double_intt)
-  LOAD_SYMBOL(_lantern__cat_tensorlist_intt)
-  LOAD_SYMBOL(_lantern__cat_out_tensor_tensorlist_intt)
-  LOAD_SYMBOL(_lantern__foreach_add_tensorlist_scalar)
-  LOAD_SYMBOL(_lantern__foreach_add__tensorlist_scalar)
-  LOAD_SYMBOL(_lantern__foreach_sub_tensorlist_scalar)
-  LOAD_SYMBOL(_lantern__foreach_sub__tensorlist_scalar)
-  LOAD_SYMBOL(_lantern__foreach_mul_tensorlist_scalar)
-  LOAD_SYMBOL(_lantern__foreach_mul__tensorlist_scalar)
-  LOAD_SYMBOL(_lantern__foreach_div_tensorlist_scalar)
-  LOAD_SYMBOL(_lantern__foreach_div__tensorlist_scalar)
-  LOAD_SYMBOL(_lantern__foreach_add_tensorlist_tensorlist_scalar)
-  LOAD_SYMBOL(_lantern__foreach_add__tensorlist_tensorlist_scalar)
-  LOAD_SYMBOL(_lantern__foreach_sub_tensorlist_tensorlist_scalar)
-  LOAD_SYMBOL(_lantern__foreach_sub__tensorlist_tensorlist_scalar)
-  LOAD_SYMBOL(_lantern__foreach_mul_tensorlist_tensorlist)
-  LOAD_SYMBOL(_lantern__foreach_mul__tensorlist_tensorlist)
-  LOAD_SYMBOL(_lantern__foreach_div_tensorlist_tensorlist)
-  LOAD_SYMBOL(_lantern__foreach_div__tensorlist_tensorlist)
-  LOAD_SYMBOL(_lantern__foreach_add_tensorlist_arrayrefscalar)
-  LOAD_SYMBOL(_lantern__foreach_add__tensorlist_arrayrefscalar)
-  LOAD_SYMBOL(_lantern__foreach_sub_tensorlist_arrayrefscalar)
-  LOAD_SYMBOL(_lantern__foreach_sub__tensorlist_arrayrefscalar)
-  LOAD_SYMBOL(_lantern__foreach_div_tensorlist_arrayrefscalar)
-  LOAD_SYMBOL(_lantern__foreach_div__tensorlist_arrayrefscalar)
-  LOAD_SYMBOL(_lantern__foreach_mul_tensorlist_arrayrefscalar)
-  LOAD_SYMBOL(_lantern__foreach_mul__tensorlist_arrayrefscalar)
-  LOAD_SYMBOL(_lantern__foreach_exp_tensorlist)
-  LOAD_SYMBOL(_lantern__foreach_zero__tensorlist)
-  LOAD_SYMBOL(_lantern__foreach_exp__tensorlist)
-  LOAD_SYMBOL(_lantern__foreach_sqrt_tensorlist)
-  LOAD_SYMBOL(_lantern__foreach_sqrt__tensorlist)
-  LOAD_SYMBOL(_lantern__foreach_abs_tensorlist)
-  LOAD_SYMBOL(_lantern__foreach_abs__tensorlist)
-  LOAD_SYMBOL(_lantern__foreach_acos_tensorlist)
-  LOAD_SYMBOL(_lantern__foreach_acos__tensorlist)
-  LOAD_SYMBOL(_lantern__foreach_asin_tensorlist)
-  LOAD_SYMBOL(_lantern__foreach_asin__tensorlist)
-  LOAD_SYMBOL(_lantern__foreach_atan_tensorlist)
-  LOAD_SYMBOL(_lantern__foreach_atan__tensorlist)
-  LOAD_SYMBOL(_lantern__foreach_ceil_tensorlist)
-  LOAD_SYMBOL(_lantern__foreach_ceil__tensorlist)
-  LOAD_SYMBOL(_lantern__foreach_cos_tensorlist)
-  LOAD_SYMBOL(_lantern__foreach_cos__tensorlist)
-  LOAD_SYMBOL(_lantern__foreach_cosh_tensorlist)
-  LOAD_SYMBOL(_lantern__foreach_cosh__tensorlist)
-  LOAD_SYMBOL(_lantern__foreach_erf_tensorlist)
-  LOAD_SYMBOL(_lantern__foreach_erf__tensorlist)
-  LOAD_SYMBOL(_lantern__foreach_erfc_tensorlist)
-  LOAD_SYMBOL(_lantern__foreach_erfc__tensorlist)
-  LOAD_SYMBOL(_lantern__foreach_expm1_tensorlist)
-  LOAD_SYMBOL(_lantern__foreach_expm1__tensorlist)
-  LOAD_SYMBOL(_lantern__foreach_floor_tensorlist)
-  LOAD_SYMBOL(_lantern__foreach_floor__tensorlist)
-  LOAD_SYMBOL(_lantern__foreach_log_tensorlist)
-  LOAD_SYMBOL(_lantern__foreach_log__tensorlist)
-  LOAD_SYMBOL(_lantern__foreach_log10_tensorlist)
-  LOAD_SYMBOL(_lantern__foreach_log10__tensorlist)
-  LOAD_SYMBOL(_lantern__foreach_log1p_tensorlist)
-  LOAD_SYMBOL(_lantern__foreach_log1p__tensorlist)
-  LOAD_SYMBOL(_lantern__foreach_log2_tensorlist)
-  LOAD_SYMBOL(_lantern__foreach_log2__tensorlist)
-  LOAD_SYMBOL(_lantern__foreach_neg_tensorlist)
-  LOAD_SYMBOL(_lantern__foreach_neg__tensorlist)
-  LOAD_SYMBOL(_lantern__foreach_tan_tensorlist)
-  LOAD_SYMBOL(_lantern__foreach_tan__tensorlist)
-  LOAD_SYMBOL(_lantern__foreach_tanh_tensorlist)
-  LOAD_SYMBOL(_lantern__foreach_tanh__tensorlist)
-  LOAD_SYMBOL(_lantern__foreach_sin_tensorlist)
-  LOAD_SYMBOL(_lantern__foreach_sin__tensorlist)
-  LOAD_SYMBOL(_lantern__foreach_sinh_tensorlist)
-  LOAD_SYMBOL(_lantern__foreach_sinh__tensorlist)
-  LOAD_SYMBOL(_lantern__foreach_round_tensorlist)
-  LOAD_SYMBOL(_lantern__foreach_round__tensorlist)
-  LOAD_SYMBOL(_lantern__foreach_lgamma_tensorlist)
-  LOAD_SYMBOL(_lantern__foreach_lgamma__tensorlist)
-  LOAD_SYMBOL(_lantern__foreach_frac_tensorlist)
-  LOAD_SYMBOL(_lantern__foreach_frac__tensorlist)
-  LOAD_SYMBOL(_lantern__foreach_reciprocal_tensorlist)
-  LOAD_SYMBOL(_lantern__foreach_reciprocal__tensorlist)
-  LOAD_SYMBOL(_lantern__foreach_sigmoid_tensorlist)
-  LOAD_SYMBOL(_lantern__foreach_sigmoid__tensorlist)
-  LOAD_SYMBOL(_lantern__foreach_trunc_tensorlist)
-  LOAD_SYMBOL(_lantern__foreach_trunc__tensorlist)
-  LOAD_SYMBOL(_lantern__foreach_addcdiv__tensorlist_tensorlist_tensorlist_scalar)
-  LOAD_SYMBOL(_lantern__foreach_addcmul__tensorlist_tensorlist_tensorlist_scalar)
-  LOAD_SYMBOL(_lantern__foreach_addcdiv__tensorlist_tensorlist_tensorlist_arrayrefscalar)
-  LOAD_SYMBOL(_lantern__foreach_addcmul__tensorlist_tensorlist_tensorlist_arrayrefscalar)
-  LOAD_SYMBOL(_lantern__foreach_addcdiv_tensorlist_tensorlist_tensorlist_scalar)
-  LOAD_SYMBOL(_lantern__foreach_addcmul_tensorlist_tensorlist_tensorlist_scalar)
-  LOAD_SYMBOL(_lantern__foreach_addcdiv_tensorlist_tensorlist_tensorlist_arrayrefscalar)
-  LOAD_SYMBOL(_lantern__foreach_addcmul_tensorlist_tensorlist_tensorlist_arrayrefscalar)
-  LOAD_SYMBOL(_lantern__foreach_maximum_tensorlist_tensorlist)
-  LOAD_SYMBOL(_lantern__foreach_minimum_tensorlist_tensorlist)
-  LOAD_SYMBOL(_lantern_bucketize_tensor_tensor_bool_bool)
-  LOAD_SYMBOL(_lantern_bucketize_out_tensor_tensor_tensor_bool_bool)
-  LOAD_SYMBOL(_lantern_bucketize_scalar_tensor_bool_bool)
-  LOAD_SYMBOL(_lantern_searchsorted_tensor_tensor_bool_bool)
-  LOAD_SYMBOL(_lantern_searchsorted_out_tensor_tensor_tensor_bool_bool)
-  LOAD_SYMBOL(_lantern_searchsorted_tensor_scalar_bool_bool)
-  LOAD_SYMBOL(_lantern_mse_loss_out_tensor_tensor_tensor_intt)
-  LOAD_SYMBOL(_lantern_mse_loss_tensor_tensor_intt)
-  LOAD_SYMBOL(_lantern_mse_loss_backward_out_tensor_tensor_tensor_tensor_intt)
-  LOAD_SYMBOL(_lantern_mse_loss_backward_tensor_tensor_tensor_intt)
-  LOAD_SYMBOL(_lantern_l1_loss_out_tensor_tensor_tensor_intt)
-  LOAD_SYMBOL(_lantern_l1_loss_tensor_tensor_intt)
-  LOAD_SYMBOL(_lantern_l1_loss_backward_out_tensor_tensor_tensor_tensor_intt)
-  LOAD_SYMBOL(_lantern_l1_loss_backward_tensor_tensor_tensor_intt)
-  LOAD_SYMBOL(_lantern_multi_margin_loss_out_tensor_tensor_tensor_scalar_scalar_tensor_intt)
-  LOAD_SYMBOL(_lantern_multi_margin_loss_tensor_tensor_scalar_scalar_tensor_intt)
-  LOAD_SYMBOL(_lantern_multi_margin_loss_backward_out_tensor_tensor_tensor_tensor_scalar_scalar_tensor_intt)
-  LOAD_SYMBOL(_lantern_multi_margin_loss_backward_tensor_tensor_tensor_scalar_scalar_tensor_intt)
-  LOAD_SYMBOL(_lantern_multilabel_margin_loss_out_tensor_tensor_tensor_intt)
-  LOAD_SYMBOL(_lantern_multilabel_margin_loss_tensor_tensor_intt)
-  LOAD_SYMBOL(_lantern_multilabel_margin_loss_forward_out_tensor_tensor_tensor_tensor_intt)
-  LOAD_SYMBOL(_lantern_multilabel_margin_loss_forward_tensor_tensor_intt)
-  LOAD_SYMBOL(_lantern_multilabel_margin_loss_backward_out_tensor_tensor_tensor_tensor_intt_tensor)
-  LOAD_SYMBOL(_lantern_multilabel_margin_loss_backward_tensor_tensor_tensor_intt_tensor)
-  LOAD_SYMBOL(_lantern_nll_loss_out_tensor_tensor_tensor_tensor_intt_intt)
-  LOAD_SYMBOL(_lantern_nll_loss_nd_tensor_tensor_tensor_intt_intt)
-  LOAD_SYMBOL(_lantern_nll_loss_tensor_tensor_tensor_intt_intt)
-  LOAD_SYMBOL(_lantern_nll_loss_forward_out_tensor_tensor_tensor_tensor_tensor_intt_intt)
-  LOAD_SYMBOL(_lantern_nll_loss_forward_tensor_tensor_tensor_intt_intt)
-  LOAD_SYMBOL(_lantern_nll_loss_backward_out_tensor_tensor_tensor_tensor_tensor_intt_intt_tensor)
-  LOAD_SYMBOL(_lantern_nll_loss_backward_tensor_tensor_tensor_tensor_intt_intt_tensor)
-  LOAD_SYMBOL(_lantern_nll_loss2d_out_tensor_tensor_tensor_tensor_intt_intt)
-  LOAD_SYMBOL(_lantern_nll_loss2d_tensor_tensor_tensor_intt_intt)
-  LOAD_SYMBOL(_lantern_nll_loss2d_forward_out_tensor_tensor_tensor_tensor_tensor_intt_intt)
-  LOAD_SYMBOL(_lantern_nll_loss2d_forward_tensor_tensor_tensor_intt_intt)
-  LOAD_SYMBOL(_lantern_nll_loss2d_backward_out_tensor_tensor_tensor_tensor_tensor_intt_intt_tensor)
-  LOAD_SYMBOL(_lantern_nll_loss2d_backward_tensor_tensor_tensor_tensor_intt_intt_tensor)
-  LOAD_SYMBOL(_lantern_smooth_l1_loss_out_tensor_tensor_tensor_intt_double)
-  LOAD_SYMBOL(_lantern_smooth_l1_loss_tensor_tensor_intt_double)
-  LOAD_SYMBOL(_lantern_smooth_l1_loss_backward_out_tensor_tensor_tensor_tensor_intt_double)
-  LOAD_SYMBOL(_lantern_smooth_l1_loss_backward_tensor_tensor_tensor_intt_double)
-  LOAD_SYMBOL(_lantern_huber_loss_out_tensor_tensor_tensor_intt_double)
-  LOAD_SYMBOL(_lantern_huber_loss_tensor_tensor_intt_double)
-  LOAD_SYMBOL(_lantern_huber_loss_backward_out_tensor_tensor_tensor_tensor_intt_double)
-  LOAD_SYMBOL(_lantern_huber_loss_backward_tensor_tensor_tensor_intt_double)
-  LOAD_SYMBOL(_lantern_soft_margin_loss_out_tensor_tensor_tensor_intt)
-  LOAD_SYMBOL(_lantern_soft_margin_loss_tensor_tensor_intt)
-  LOAD_SYMBOL(_lantern_soft_margin_loss_backward_out_tensor_tensor_tensor_tensor_intt)
-  LOAD_SYMBOL(_lantern_soft_margin_loss_backward_tensor_tensor_tensor_intt)
-  LOAD_SYMBOL(_lantern_elu_out_tensor_tensor_scalar_scalar_scalar)
-  LOAD_SYMBOL(_lantern_elu_tensor_scalar_scalar_scalar)
-  LOAD_SYMBOL(_lantern_elu_backward_tensor_scalar_scalar_scalar_bool_tensor)
-  LOAD_SYMBOL(_lantern_elu__tensor_scalar_scalar_scalar)
-  LOAD_SYMBOL(_lantern_glu_out_tensor_tensor_intt)
-  LOAD_SYMBOL(_lantern_glu_tensor_intt)
-  LOAD_SYMBOL(_lantern_glu_backward_out_tensor_tensor_tensor_intt)
-  LOAD_SYMBOL(_lantern_glu_backward_tensor_tensor_intt)
-  LOAD_SYMBOL(_lantern_hardsigmoid_out_tensor_tensor)
-  LOAD_SYMBOL(_lantern_hardsigmoid_tensor)
-  LOAD_SYMBOL(_lantern_hardsigmoid__tensor)
-  LOAD_SYMBOL(_lantern_hardsigmoid_backward_tensor_tensor)
-  LOAD_SYMBOL(_lantern_hardtanh_out_tensor_tensor_scalar_scalar)
-  LOAD_SYMBOL(_lantern_hardtanh_tensor_scalar_scalar)
-  LOAD_SYMBOL(_lantern_hardtanh_backward_out_tensor_tensor_tensor_scalar_scalar)
-  LOAD_SYMBOL(_lantern_hardtanh_backward_tensor_tensor_scalar_scalar)
-  LOAD_SYMBOL(_lantern_hardtanh__tensor_scalar_scalar)
-  LOAD_SYMBOL(_lantern_hardswish_out_tensor_tensor)
-  LOAD_SYMBOL(_lantern_hardswish_tensor)
-  LOAD_SYMBOL(_lantern_hardswish__tensor)
-  LOAD_SYMBOL(_lantern_hardswish_backward_tensor_tensor)
-  LOAD_SYMBOL(_lantern_leaky_relu_out_tensor_tensor_scalar)
-  LOAD_SYMBOL(_lantern_leaky_relu_tensor_scalar)
-  LOAD_SYMBOL(_lantern_leaky_relu_backward_tensor_tensor_scalar_bool)
-  LOAD_SYMBOL(_lantern_leaky_relu__tensor_scalar)
-  LOAD_SYMBOL(_lantern_log_sigmoid_out_tensor_tensor)
-  LOAD_SYMBOL(_lantern_log_sigmoid_tensor)
-  LOAD_SYMBOL(_lantern_log_sigmoid_forward_out_tensor_tensor_tensor)
-  LOAD_SYMBOL(_lantern_log_sigmoid_forward_tensor)
-  LOAD_SYMBOL(_lantern_log_sigmoid_backward_out_tensor_tensor_tensor_tensor)
-  LOAD_SYMBOL(_lantern_log_sigmoid_backward_tensor_tensor_tensor)
-  LOAD_SYMBOL(_lantern_rrelu_with_noise_out_tensor_tensor_tensor_scalar_scalar_bool_generator)
-  LOAD_SYMBOL(_lantern_rrelu_with_noise_tensor_tensor_scalar_scalar_bool_generator)
-  LOAD_SYMBOL(_lantern_rrelu_with_noise_backward_tensor_tensor_tensor_scalar_scalar_bool_bool)
-  LOAD_SYMBOL(_lantern_rrelu_with_noise__tensor_tensor_scalar_scalar_bool_generator)
-  LOAD_SYMBOL(_lantern_softplus_out_tensor_tensor_scalar_scalar)
-  LOAD_SYMBOL(_lantern_softplus_tensor_scalar_scalar)
-  LOAD_SYMBOL(_lantern_softplus_backward_out_tensor_tensor_tensor_scalar_scalar_tensor)
-  LOAD_SYMBOL(_lantern_softplus_backward_tensor_tensor_scalar_scalar_tensor)
-  LOAD_SYMBOL(_lantern_softshrink_out_tensor_tensor_scalar)
-  LOAD_SYMBOL(_lantern_softshrink_tensor_scalar)
-  LOAD_SYMBOL(_lantern_softshrink_backward_out_tensor_tensor_tensor_scalar)
-  LOAD_SYMBOL(_lantern_softshrink_backward_tensor_tensor_scalar)
-  LOAD_SYMBOL(_lantern_adaptive_avg_pool2d_out_tensor_tensor_intarrayref)
-  LOAD_SYMBOL(_lantern_adaptive_avg_pool2d_tensor_intarrayref)
-  LOAD_SYMBOL(_lantern_mkldnn_adaptive_avg_pool2d_tensor_intarrayref)
-  LOAD_SYMBOL(_lantern_mkldnn_adaptive_avg_pool2d_backward_tensor_tensor)
-  LOAD_SYMBOL(_lantern__adaptive_avg_pool2d_tensor_intarrayref)
-  LOAD_SYMBOL(_lantern__adaptive_avg_pool2d_backward_tensor_tensor)
-  LOAD_SYMBOL(_lantern_adaptive_avg_pool3d_out_tensor_tensor_intarrayref)
-  LOAD_SYMBOL(_lantern_adaptive_avg_pool3d_tensor_intarrayref)
-  LOAD_SYMBOL(_lantern__adaptive_avg_pool3d_tensor_intarrayref)
-  LOAD_SYMBOL(_lantern_adaptive_avg_pool3d_backward_out_tensor_tensor_tensor)
-  LOAD_SYMBOL(_lantern__adaptive_avg_pool3d_backward_tensor_tensor)
-  LOAD_SYMBOL(_lantern_adaptive_max_pool2d_out_tensor_tensor_tensor_intarrayref)
-  LOAD_SYMBOL(_lantern_adaptive_max_pool2d_tensor_intarrayref)
-  LOAD_SYMBOL(_lantern_adaptive_max_pool2d_backward_out_tensor_tensor_tensor_tensor)
-  LOAD_SYMBOL(_lantern_adaptive_max_pool2d_backward_tensor_tensor_tensor)
-  LOAD_SYMBOL(_lantern_adaptive_max_pool3d_out_tensor_tensor_tensor_intarrayref)
-  LOAD_SYMBOL(_lantern_adaptive_max_pool3d_tensor_intarrayref)
-  LOAD_SYMBOL(_lantern_adaptive_max_pool3d_backward_out_tensor_tensor_tensor_tensor)
-  LOAD_SYMBOL(_lantern_adaptive_max_pool3d_backward_tensor_tensor_tensor)
-  LOAD_SYMBOL(_lantern_avg_pool2d_out_tensor_tensor_intarrayref_intarrayref_intarrayref_bool_bool_intt)
-  LOAD_SYMBOL(_lantern_avg_pool2d_tensor_intarrayref_intarrayref_intarrayref_bool_bool_intt)
-  LOAD_SYMBOL(_lantern_avg_pool2d_backward_out_tensor_tensor_tensor_intarrayref_intarrayref_intarrayref_bool_bool_intt)
-  LOAD_SYMBOL(_lantern_avg_pool2d_backward_tensor_tensor_intarrayref_intarrayref_intarrayref_bool_bool_intt)
-  LOAD_SYMBOL(_lantern_avg_pool3d_out_tensor_tensor_intarrayref_intarrayref_intarrayref_bool_bool_intt)
-  LOAD_SYMBOL(_lantern_avg_pool3d_tensor_intarrayref_intarrayref_intarrayref_bool_bool_intt)
-  LOAD_SYMBOL(_lantern_avg_pool3d_backward_out_tensor_tensor_tensor_intarrayref_intarrayref_intarrayref_bool_bool_intt)
-  LOAD_SYMBOL(_lantern_avg_pool3d_backward_tensor_tensor_intarrayref_intarrayref_intarrayref_bool_bool_intt)
-  LOAD_SYMBOL(_lantern_fractional_max_pool2d_out_tensor_tensor_tensor_intarrayref_intarrayref_tensor)
-  LOAD_SYMBOL(_lantern_fractional_max_pool2d_tensor_intarrayref_intarrayref_tensor)
-  LOAD_SYMBOL(_lantern_fractional_max_pool2d_backward_out_tensor_tensor_tensor_intarrayref_intarrayref_tensor)
-  LOAD_SYMBOL(_lantern_fractional_max_pool2d_backward_tensor_tensor_intarrayref_intarrayref_tensor)
-  LOAD_SYMBOL(_lantern_fractional_max_pool3d_out_tensor_tensor_tensor_intarrayref_intarrayref_tensor)
-  LOAD_SYMBOL(_lantern_fractional_max_pool3d_tensor_intarrayref_intarrayref_tensor)
-  LOAD_SYMBOL(_lantern_fractional_max_pool3d_backward_out_tensor_tensor_tensor_intarrayref_intarrayref_tensor)
-  LOAD_SYMBOL(_lantern_fractional_max_pool3d_backward_tensor_tensor_intarrayref_intarrayref_tensor)
-  LOAD_SYMBOL(_lantern_max_pool2d_with_indices_out_tensor_tensor_tensor_intarrayref_intarrayref_intarrayref_intarrayref_bool)
-  LOAD_SYMBOL(_lantern_max_pool2d_with_indices_tensor_intarrayref_intarrayref_intarrayref_intarrayref_bool)
-  LOAD_SYMBOL(_lantern_max_pool2d_with_indices_backward_out_tensor_tensor_tensor_intarrayref_intarrayref_intarrayref_intarrayref_bool_tensor)
-  LOAD_SYMBOL(_lantern_max_pool2d_with_indices_backward_tensor_tensor_intarrayref_intarrayref_intarrayref_intarrayref_bool_tensor)
-  LOAD_SYMBOL(_lantern_max_pool3d_with_indices_out_tensor_tensor_tensor_intarrayref_intarrayref_intarrayref_intarrayref_bool)
-  LOAD_SYMBOL(_lantern_max_pool3d_with_indices_tensor_intarrayref_intarrayref_intarrayref_intarrayref_bool)
-  LOAD_SYMBOL(_lantern_max_pool3d_with_indices_backward_out_tensor_tensor_tensor_intarrayref_intarrayref_intarrayref_intarrayref_bool_tensor)
-  LOAD_SYMBOL(_lantern_max_pool3d_with_indices_backward_tensor_tensor_intarrayref_intarrayref_intarrayref_intarrayref_bool_tensor)
-  LOAD_SYMBOL(_lantern_max_unpool2d_out_tensor_tensor_tensor_intarrayref)
-  LOAD_SYMBOL(_lantern_max_unpool2d_tensor_tensor_intarrayref)
-  LOAD_SYMBOL(_lantern_max_unpool2d_backward_out_tensor_tensor_tensor_tensor_intarrayref)
-  LOAD_SYMBOL(_lantern_max_unpool2d_backward_tensor_tensor_tensor_intarrayref)
-  LOAD_SYMBOL(_lantern_max_unpool3d_out_tensor_tensor_tensor_intarrayref_intarrayref_intarrayref)
-  LOAD_SYMBOL(_lantern_max_unpool3d_tensor_tensor_intarrayref_intarrayref_intarrayref)
-  LOAD_SYMBOL(_lantern_max_unpool3d_backward_out_tensor_tensor_tensor_tensor_intarrayref_intarrayref_intarrayref)
-  LOAD_SYMBOL(_lantern_max_unpool3d_backward_tensor_tensor_tensor_intarrayref_intarrayref_intarrayref)
-  LOAD_SYMBOL(_lantern_reflection_pad1d_out_tensor_tensor_intarrayref)
-  LOAD_SYMBOL(_lantern_reflection_pad1d_tensor_intarrayref)
-  LOAD_SYMBOL(_lantern_reflection_pad1d_backward_out_tensor_tensor_tensor_intarrayref)
-  LOAD_SYMBOL(_lantern_reflection_pad1d_backward_tensor_tensor_intarrayref)
-  LOAD_SYMBOL(_lantern_reflection_pad2d_out_tensor_tensor_intarrayref)
-  LOAD_SYMBOL(_lantern_reflection_pad2d_tensor_intarrayref)
-  LOAD_SYMBOL(_lantern_reflection_pad2d_backward_out_tensor_tensor_tensor_intarrayref)
-  LOAD_SYMBOL(_lantern_reflection_pad2d_backward_tensor_tensor_intarrayref)
-  LOAD_SYMBOL(_lantern_replication_pad1d_out_tensor_tensor_intarrayref)
-  LOAD_SYMBOL(_lantern_replication_pad1d_tensor_intarrayref)
-  LOAD_SYMBOL(_lantern_replication_pad1d_backward_out_tensor_tensor_tensor_intarrayref)
-  LOAD_SYMBOL(_lantern_replication_pad1d_backward_tensor_tensor_intarrayref)
-  LOAD_SYMBOL(_lantern_replication_pad2d_out_tensor_tensor_intarrayref)
-  LOAD_SYMBOL(_lantern_replication_pad2d_tensor_intarrayref)
-  LOAD_SYMBOL(_lantern_replication_pad2d_backward_out_tensor_tensor_tensor_intarrayref)
-  LOAD_SYMBOL(_lantern_replication_pad2d_backward_tensor_tensor_intarrayref)
-  LOAD_SYMBOL(_lantern_replication_pad3d_out_tensor_tensor_intarrayref)
-  LOAD_SYMBOL(_lantern_replication_pad3d_tensor_intarrayref)
-  LOAD_SYMBOL(_lantern_replication_pad3d_backward_out_tensor_tensor_tensor_intarrayref)
-  LOAD_SYMBOL(_lantern_replication_pad3d_backward_tensor_tensor_intarrayref)
-  LOAD_SYMBOL(_lantern_upsample_linear1d_tensor_intarrayref_bool_arrayrefdouble)
-  LOAD_SYMBOL(_lantern_upsample_linear1d_backward_tensor_intarrayref_intarrayref_bool_arrayrefdouble)
-  LOAD_SYMBOL(_lantern_upsample_bilinear2d_tensor_intarrayref_bool_arrayrefdouble)
-  LOAD_SYMBOL(_lantern_upsample_bilinear2d_backward_tensor_intarrayref_intarrayref_bool_arrayrefdouble)
-  LOAD_SYMBOL(_lantern_upsample_trilinear3d_tensor_intarrayref_bool_arrayrefdouble)
-  LOAD_SYMBOL(_lantern_upsample_trilinear3d_backward_tensor_intarrayref_intarrayref_bool_arrayrefdouble)
-  LOAD_SYMBOL(_lantern_upsample_bicubic2d_tensor_intarrayref_bool_arrayrefdouble)
-  LOAD_SYMBOL(_lantern_upsample_bicubic2d_backward_tensor_intarrayref_intarrayref_bool_arrayrefdouble)
-  LOAD_SYMBOL(_lantern_upsample_nearest1d_tensor_intarrayref_arrayrefdouble)
-  LOAD_SYMBOL(_lantern_upsample_nearest1d_backward_tensor_intarrayref_intarrayref_arrayrefdouble)
-  LOAD_SYMBOL(_lantern_upsample_nearest2d_tensor_intarrayref_arrayrefdouble)
-  LOAD_SYMBOL(_lantern_upsample_nearest2d_backward_tensor_intarrayref_intarrayref_arrayrefdouble)
-  LOAD_SYMBOL(_lantern_upsample_nearest3d_tensor_intarrayref_arrayrefdouble)
-  LOAD_SYMBOL(_lantern_upsample_nearest3d_backward_tensor_intarrayref_intarrayref_arrayrefdouble)
-  LOAD_SYMBOL(_lantern_upsample_linear1d_out_tensor_tensor_intarrayref_bool_double)
-  LOAD_SYMBOL(_lantern_upsample_linear1d_tensor_intarrayref_bool_double)
-  LOAD_SYMBOL(_lantern_upsample_linear1d_backward_out_tensor_tensor_intarrayref_intarrayref_bool_double)
-  LOAD_SYMBOL(_lantern_upsample_linear1d_backward_tensor_intarrayref_intarrayref_bool_double)
-  LOAD_SYMBOL(_lantern_upsample_bilinear2d_out_tensor_tensor_intarrayref_bool_double_double)
-  LOAD_SYMBOL(_lantern_upsample_bilinear2d_tensor_intarrayref_bool_double_double)
-  LOAD_SYMBOL(_lantern_upsample_bilinear2d_backward_out_tensor_tensor_intarrayref_intarrayref_bool_double_double)
-  LOAD_SYMBOL(_lantern_upsample_bilinear2d_backward_tensor_intarrayref_intarrayref_bool_double_double)
-  LOAD_SYMBOL(_lantern_upsample_bicubic2d_out_tensor_tensor_intarrayref_bool_double_double)
-  LOAD_SYMBOL(_lantern_upsample_bicubic2d_tensor_intarrayref_bool_double_double)
-  LOAD_SYMBOL(_lantern_upsample_bicubic2d_backward_out_tensor_tensor_intarrayref_intarrayref_bool_double_double)
-  LOAD_SYMBOL(_lantern_upsample_bicubic2d_backward_tensor_intarrayref_intarrayref_bool_double_double)
-  LOAD_SYMBOL(_lantern_upsample_trilinear3d_out_tensor_tensor_intarrayref_bool_double_double_double)
-  LOAD_SYMBOL(_lantern_upsample_trilinear3d_tensor_intarrayref_bool_double_double_double)
-  LOAD_SYMBOL(_lantern_upsample_trilinear3d_backward_out_tensor_tensor_intarrayref_intarrayref_bool_double_double_double)
-  LOAD_SYMBOL(_lantern_upsample_trilinear3d_backward_tensor_intarrayref_intarrayref_bool_double_double_double)
-  LOAD_SYMBOL(_lantern_upsample_nearest1d_out_tensor_tensor_intarrayref_double)
-  LOAD_SYMBOL(_lantern_upsample_nearest1d_tensor_intarrayref_double)
-  LOAD_SYMBOL(_lantern_upsample_nearest1d_backward_out_tensor_tensor_intarrayref_intarrayref_double)
-  LOAD_SYMBOL(_lantern_upsample_nearest1d_backward_tensor_intarrayref_intarrayref_double)
-  LOAD_SYMBOL(_lantern_upsample_nearest2d_out_tensor_tensor_intarrayref_double_double)
-  LOAD_SYMBOL(_lantern_upsample_nearest2d_tensor_intarrayref_double_double)
-  LOAD_SYMBOL(_lantern_upsample_nearest2d_backward_out_tensor_tensor_intarrayref_intarrayref_double_double)
-  LOAD_SYMBOL(_lantern_upsample_nearest2d_backward_tensor_intarrayref_intarrayref_double_double)
-  LOAD_SYMBOL(_lantern_upsample_nearest3d_out_tensor_tensor_intarrayref_double_double_double)
-  LOAD_SYMBOL(_lantern_upsample_nearest3d_tensor_intarrayref_double_double_double)
-  LOAD_SYMBOL(_lantern_upsample_nearest3d_backward_out_tensor_tensor_intarrayref_intarrayref_double_double_double)
-  LOAD_SYMBOL(_lantern_upsample_nearest3d_backward_tensor_intarrayref_intarrayref_double_double_double)
-  LOAD_SYMBOL(_lantern_sigmoid_backward_out_tensor_tensor_tensor)
-  LOAD_SYMBOL(_lantern_sigmoid_backward_tensor_tensor)
-  LOAD_SYMBOL(_lantern_logit_backward_out_tensor_tensor_tensor_double)
-  LOAD_SYMBOL(_lantern_logit_backward_tensor_tensor_double)
-  LOAD_SYMBOL(_lantern_tanh_backward_out_tensor_tensor_tensor)
-  LOAD_SYMBOL(_lantern_tanh_backward_tensor_tensor)
-  LOAD_SYMBOL(_lantern_slow_conv_transpose2d_out_tensor_tensor_tensor_intarrayref_tensor_intarrayref_intarrayref_intarrayref_intarrayref)
-  LOAD_SYMBOL(_lantern_slow_conv_transpose2d_tensor_tensor_intarrayref_tensor_intarrayref_intarrayref_intarrayref_intarrayref)
-  LOAD_SYMBOL(_lantern_slow_conv_transpose2d_backward_out_tensor_tensor_tensor_tensor_tensor_tensor_intarrayref_intarrayref_intarrayref_intarrayref_intarrayref_tensor_tensor)
-  LOAD_SYMBOL(_lantern_slow_conv_transpose2d_backward_tensor_tensor_tensor_intarrayref_intarrayref_intarrayref_intarrayref_intarrayref_tensor_tensor_stdarraybool)
-  LOAD_SYMBOL(_lantern_slow_conv_transpose3d_out_tensor_tensor_tensor_intarrayref_tensor_intarrayref_intarrayref_intarrayref_intarrayref)
-  LOAD_SYMBOL(_lantern_slow_conv_transpose3d_tensor_tensor_intarrayref_tensor_intarrayref_intarrayref_intarrayref_intarrayref)
-  LOAD_SYMBOL(_lantern_slow_conv_transpose3d_backward_out_tensor_tensor_tensor_tensor_tensor_tensor_intarrayref_intarrayref_intarrayref_intarrayref_intarrayref_tensor_tensor)
-  LOAD_SYMBOL(_lantern_slow_conv_transpose3d_backward_tensor_tensor_tensor_intarrayref_intarrayref_intarrayref_intarrayref_intarrayref_tensor_tensor_stdarraybool)
-  LOAD_SYMBOL(_lantern_thnn_conv2d_out_tensor_tensor_tensor_intarrayref_tensor_intarrayref_intarrayref)
-  LOAD_SYMBOL(_lantern_thnn_conv2d_tensor_tensor_intarrayref_tensor_intarrayref_intarrayref)
-  LOAD_SYMBOL(_lantern_thnn_conv2d_forward_out_tensor_tensor_tensor_tensor_tensor_intarrayref_tensor_intarrayref_intarrayref)
-  LOAD_SYMBOL(_lantern_thnn_conv2d_forward_tensor_tensor_intarrayref_tensor_intarrayref_intarrayref)
-  LOAD_SYMBOL(_lantern_thnn_conv2d_backward_out_tensor_tensor_tensor_tensor_tensor_tensor_intarrayref_intarrayref_intarrayref_tensor_tensor)
-  LOAD_SYMBOL(_lantern_thnn_conv2d_backward_tensor_tensor_tensor_intarrayref_intarrayref_intarrayref_tensor_tensor_stdarraybool)
-  LOAD_SYMBOL(_lantern_thnn_conv_depthwise2d_out_tensor_tensor_tensor_intarrayref_tensor_intarrayref_intarrayref_intarrayref)
-  LOAD_SYMBOL(_lantern_thnn_conv_depthwise2d_tensor_tensor_intarrayref_tensor_intarrayref_intarrayref_intarrayref)
-  LOAD_SYMBOL(_lantern_thnn_conv_depthwise2d_forward_out_tensor_tensor_tensor_intarrayref_tensor_intarrayref_intarrayref_intarrayref)
-  LOAD_SYMBOL(_lantern_thnn_conv_depthwise2d_forward_tensor_tensor_intarrayref_tensor_intarrayref_intarrayref_intarrayref)
-  LOAD_SYMBOL(_lantern_thnn_conv_depthwise2d_backward_out_tensor_tensor_tensor_tensor_tensor_intarrayref_intarrayref_intarrayref_intarrayref)
-  LOAD_SYMBOL(_lantern_thnn_conv_depthwise2d_backward_tensor_tensor_tensor_intarrayref_intarrayref_intarrayref_intarrayref_stdarraybool)
-  LOAD_SYMBOL(_lantern_conv_depthwise3d_tensor_tensor_intarrayref_tensor_intarrayref_intarrayref_intarrayref)
-  LOAD_SYMBOL(_lantern_conv_depthwise3d_backward_out_tensor_tensor_tensor_tensor_tensor_tensor_intarrayref_intarrayref_intarrayref_intarrayref)
-  LOAD_SYMBOL(_lantern_conv_depthwise3d_backward_tensor_tensor_tensor_intarrayref_intarrayref_intarrayref_intarrayref_stdarraybool)
-  LOAD_SYMBOL(_lantern_slow_conv3d_out_tensor_tensor_tensor_intarrayref_tensor_intarrayref_intarrayref)
-  LOAD_SYMBOL(_lantern_slow_conv3d_tensor_tensor_intarrayref_tensor_intarrayref_intarrayref)
-  LOAD_SYMBOL(_lantern_slow_conv3d_forward_out_tensor_tensor_tensor_tensor_tensor_intarrayref_tensor_intarrayref_intarrayref)
-  LOAD_SYMBOL(_lantern_slow_conv3d_forward_tensor_tensor_intarrayref_tensor_intarrayref_intarrayref)
-  LOAD_SYMBOL(_lantern_slow_conv3d_backward_out_tensor_tensor_tensor_tensor_tensor_tensor_intarrayref_intarrayref_intarrayref_tensor_tensor)
-  LOAD_SYMBOL(_lantern_slow_conv3d_backward_tensor_tensor_tensor_intarrayref_intarrayref_intarrayref_tensor_tensor_stdarraybool)
-  LOAD_SYMBOL(_lantern_slow_conv_dilated2d_tensor_tensor_intarrayref_tensor_intarrayref_intarrayref_intarrayref)
-  LOAD_SYMBOL(_lantern_slow_conv_dilated2d_backward_tensor_tensor_tensor_intarrayref_intarrayref_intarrayref_intarrayref_stdarraybool)
-  LOAD_SYMBOL(_lantern_slow_conv_dilated3d_tensor_tensor_intarrayref_tensor_intarrayref_intarrayref_intarrayref)
-  LOAD_SYMBOL(_lantern_slow_conv_dilated3d_backward_tensor_tensor_tensor_intarrayref_intarrayref_intarrayref_intarrayref_stdarraybool)
-  LOAD_SYMBOL(_lantern_col2im_out_tensor_tensor_intarrayref_intarrayref_intarrayref_intarrayref_intarrayref)
-  LOAD_SYMBOL(_lantern_col2im_tensor_intarrayref_intarrayref_intarrayref_intarrayref_intarrayref)
-  LOAD_SYMBOL(_lantern_col2im_backward_out_tensor_tensor_intarrayref_intarrayref_intarrayref_intarrayref)
-  LOAD_SYMBOL(_lantern_col2im_backward_tensor_intarrayref_intarrayref_intarrayref_intarrayref)
-  LOAD_SYMBOL(_lantern_column_stack_tensorlist)
-  LOAD_SYMBOL(_lantern_column_stack_out_tensor_tensorlist)
-  LOAD_SYMBOL(_lantern_im2col_out_tensor_tensor_intarrayref_intarrayref_intarrayref_intarrayref)
-  LOAD_SYMBOL(_lantern_im2col_tensor_intarrayref_intarrayref_intarrayref_intarrayref)
-  LOAD_SYMBOL(_lantern_im2col_backward_out_tensor_tensor_intarrayref_intarrayref_intarrayref_intarrayref_intarrayref)
-  LOAD_SYMBOL(_lantern_im2col_backward_tensor_intarrayref_intarrayref_intarrayref_intarrayref_intarrayref)
-  LOAD_SYMBOL(_lantern_isfinite_tensor)
-  LOAD_SYMBOL(_lantern_Tensor_isfinite_tensor)
-  LOAD_SYMBOL(_lantern_isinf_tensor)
-  LOAD_SYMBOL(_lantern_Tensor_isinf_tensor)
-  LOAD_SYMBOL(_lantern_Tensor_record_stream_tensor_stream)
-  LOAD_SYMBOL(_lantern_isposinf_tensor)
-  LOAD_SYMBOL(_lantern_Tensor_isposinf_tensor)
-  LOAD_SYMBOL(_lantern_isposinf_out_tensor_tensor)
-  LOAD_SYMBOL(_lantern_isneginf_tensor)
-  LOAD_SYMBOL(_lantern_Tensor_isneginf_tensor)
-  LOAD_SYMBOL(_lantern_isneginf_out_tensor_tensor)
-  LOAD_SYMBOL(_lantern__add_batch_dim_tensor_intt_intt)
-  LOAD_SYMBOL(_lantern__remove_batch_dim_tensor_intt_intt_intt)
-  LOAD_SYMBOL(_lantern_special_entr_tensor)
-  LOAD_SYMBOL(_lantern_special_entr_out_tensor_tensor)
-  LOAD_SYMBOL(_lantern_special_expm1_tensor)
-  LOAD_SYMBOL(_lantern_special_expm1_out_tensor_tensor)
-  LOAD_SYMBOL(_lantern_special_exp2_tensor)
-  LOAD_SYMBOL(_lantern_special_exp2_out_tensor_tensor)
-  LOAD_SYMBOL(_lantern_special_gammaln_tensor)
-  LOAD_SYMBOL(_lantern_special_gammaln_out_tensor_tensor)
-  LOAD_SYMBOL(_lantern_special_erf_tensor)
-  LOAD_SYMBOL(_lantern_special_erf_out_tensor_tensor)
-  LOAD_SYMBOL(_lantern_special_erfc_tensor)
-  LOAD_SYMBOL(_lantern_special_erfc_out_tensor_tensor)
-  LOAD_SYMBOL(_lantern_special_erfinv_tensor)
-  LOAD_SYMBOL(_lantern_special_erfinv_out_tensor_tensor)
-  LOAD_SYMBOL(_lantern_special_xlog1py_tensor_tensor)
-  LOAD_SYMBOL(_lantern_special_xlog1py_scalar_tensor)
-  LOAD_SYMBOL(_lantern_special_xlog1py_tensor_scalar)
-  LOAD_SYMBOL(_lantern_special_xlog1py_out_tensor_tensor_tensor)
-  LOAD_SYMBOL(_lantern_special_xlog1py_out_tensor_scalar_tensor)
-  LOAD_SYMBOL(_lantern_special_xlog1py_out_tensor_tensor_scalar)
-  LOAD_SYMBOL(_lantern_special_i0e_tensor)
-  LOAD_SYMBOL(_lantern_special_i0e_out_tensor_tensor)
-  LOAD_SYMBOL(_lantern_special_logit_tensor_double)
-  LOAD_SYMBOL(_lantern_special_logit_out_tensor_tensor_double)
-  LOAD_SYMBOL(_lantern_special_expit_tensor)
-  LOAD_SYMBOL(_lantern_special_expit_out_tensor_tensor)
-  LOAD_SYMBOL(_lantern_fft_fft_tensor_intt_intt_stdstring)
-  LOAD_SYMBOL(_lantern_fft_fft_out_tensor_tensor_intt_intt_stdstring)
-  LOAD_SYMBOL(_lantern_fft_ifft_tensor_intt_intt_stdstring)
-  LOAD_SYMBOL(_lantern_fft_ifft_out_tensor_tensor_intt_intt_stdstring)
-  LOAD_SYMBOL(_lantern_fft_rfft_tensor_intt_intt_stdstring)
-  LOAD_SYMBOL(_lantern_fft_rfft_out_tensor_tensor_intt_intt_stdstring)
-  LOAD_SYMBOL(_lantern_fft_irfft_tensor_intt_intt_stdstring)
-  LOAD_SYMBOL(_lantern_fft_irfft_out_tensor_tensor_intt_intt_stdstring)
-  LOAD_SYMBOL(_lantern_fft_hfft_tensor_intt_intt_stdstring)
-  LOAD_SYMBOL(_lantern_fft_hfft_out_tensor_tensor_intt_intt_stdstring)
-  LOAD_SYMBOL(_lantern_fft_ihfft_tensor_intt_intt_stdstring)
-  LOAD_SYMBOL(_lantern_fft_ihfft_out_tensor_tensor_intt_intt_stdstring)
-  LOAD_SYMBOL(_lantern_fft_fft2_tensor_intarrayref_intarrayref_stdstring)
-  LOAD_SYMBOL(_lantern_fft_fft2_out_tensor_tensor_intarrayref_intarrayref_stdstring)
-  LOAD_SYMBOL(_lantern_fft_ifft2_tensor_intarrayref_intarrayref_stdstring)
-  LOAD_SYMBOL(_lantern_fft_ifft2_out_tensor_tensor_intarrayref_intarrayref_stdstring)
-  LOAD_SYMBOL(_lantern_fft_rfft2_tensor_intarrayref_intarrayref_stdstring)
-  LOAD_SYMBOL(_lantern_fft_rfft2_out_tensor_tensor_intarrayref_intarrayref_stdstring)
-  LOAD_SYMBOL(_lantern_fft_irfft2_tensor_intarrayref_intarrayref_stdstring)
-  LOAD_SYMBOL(_lantern_fft_irfft2_out_tensor_tensor_intarrayref_intarrayref_stdstring)
-  LOAD_SYMBOL(_lantern_fft_fftn_tensor_intarrayref_intarrayref_stdstring)
-  LOAD_SYMBOL(_lantern_fft_fftn_out_tensor_tensor_intarrayref_intarrayref_stdstring)
-  LOAD_SYMBOL(_lantern_fft_ifftn_tensor_intarrayref_intarrayref_stdstring)
-  LOAD_SYMBOL(_lantern_fft_ifftn_out_tensor_tensor_intarrayref_intarrayref_stdstring)
-  LOAD_SYMBOL(_lantern_fft_rfftn_tensor_intarrayref_intarrayref_stdstring)
-  LOAD_SYMBOL(_lantern_fft_rfftn_out_tensor_tensor_intarrayref_intarrayref_stdstring)
-  LOAD_SYMBOL(_lantern_fft_irfftn_tensor_intarrayref_intarrayref_stdstring)
-  LOAD_SYMBOL(_lantern_fft_irfftn_out_tensor_tensor_intarrayref_intarrayref_stdstring)
-  LOAD_SYMBOL(_lantern_fft_fftfreq_intt_double_tensoroptions)
-  LOAD_SYMBOL(_lantern_fft_fftfreq_out_tensor_intt_double)
-  LOAD_SYMBOL(_lantern_fft_rfftfreq_intt_double_tensoroptions)
-  LOAD_SYMBOL(_lantern_fft_rfftfreq_out_tensor_intt_double)
-  LOAD_SYMBOL(_lantern_fft_fftshift_tensor_intarrayref)
-  LOAD_SYMBOL(_lantern_fft_ifftshift_tensor_intarrayref)
-  LOAD_SYMBOL(_lantern_linalg_cholesky_ex_tensor_bool)
-  LOAD_SYMBOL(_lantern_linalg_cholesky_ex_out_tensor_tensor_tensor_bool)
-  LOAD_SYMBOL(_lantern_linalg_cholesky_tensor)
-  LOAD_SYMBOL(_lantern_linalg_cholesky_out_tensor_tensor)
-  LOAD_SYMBOL(_lantern_linalg_det_tensor)
-  LOAD_SYMBOL(_lantern_linalg_det_out_tensor_tensor)
-  LOAD_SYMBOL(_lantern_det_tensor)
-  LOAD_SYMBOL(_lantern_Tensor_det_tensor)
-  LOAD_SYMBOL(_lantern_linalg_lstsq_tensor_tensor_double_stdstring)
-  LOAD_SYMBOL(_lantern_linalg_lstsq_out_tensor_tensor_tensor_tensor_tensor_tensor_double_stdstring)
-  LOAD_SYMBOL(_lantern_linalg_slogdet_tensor)
-  LOAD_SYMBOL(_lantern_linalg_slogdet_out_tensor_tensor_tensor)
-  LOAD_SYMBOL(_lantern_linalg_eig_tensor)
-  LOAD_SYMBOL(_lantern_linalg_eig_out_tensor_tensor_tensor)
-  LOAD_SYMBOL(_lantern_linalg_eigvals_tensor)
-  LOAD_SYMBOL(_lantern_linalg_eigvals_out_tensor_tensor)
-  LOAD_SYMBOL(_lantern_linalg_eigh_tensor_stdstring)
-  LOAD_SYMBOL(_lantern_linalg_eigh_out_tensor_tensor_tensor_stdstring)
-  LOAD_SYMBOL(_lantern_linalg_eigvalsh_tensor_stdstring)
-  LOAD_SYMBOL(_lantern_linalg_eigvalsh_out_tensor_tensor_stdstring)
-  LOAD_SYMBOL(_lantern_linalg_householder_product_tensor_tensor)
-  LOAD_SYMBOL(_lantern_linalg_householder_product_out_tensor_tensor_tensor)
-  LOAD_SYMBOL(_lantern__linalg_inv_out_helper__tensor_tensor_tensor)
-  LOAD_SYMBOL(_lantern_linalg_inv_ex_tensor_bool)
-  LOAD_SYMBOL(_lantern_linalg_inv_ex_out_tensor_tensor_tensor_bool)
-  LOAD_SYMBOL(_lantern_linalg_inv_tensor)
-  LOAD_SYMBOL(_lantern_linalg_inv_out_tensor_tensor)
-  LOAD_SYMBOL(_lantern_inner_tensor_tensor)
-  LOAD_SYMBOL(_lantern_Tensor_inner_tensor_tensor)
-  LOAD_SYMBOL(_lantern_inner_out_tensor_tensor_tensor)
-  LOAD_SYMBOL(_lantern_outer_tensor_tensor)
-  LOAD_SYMBOL(_lantern_Tensor_outer_tensor_tensor)
-  LOAD_SYMBOL(_lantern_outer_out_tensor_tensor_tensor)
-  LOAD_SYMBOL(_lantern_ger_tensor_tensor)
-  LOAD_SYMBOL(_lantern_Tensor_ger_tensor_tensor)
-  LOAD_SYMBOL(_lantern_ger_out_tensor_tensor_tensor)
-  LOAD_SYMBOL(_lantern_linalg_norm_tensor_scalar_intarrayref_bool_scalartype)
-  LOAD_SYMBOL(_lantern_linalg_norm_tensor_stdstring_intarrayref_bool_scalartype)
-  LOAD_SYMBOL(_lantern_linalg_norm_out_tensor_tensor_scalar_intarrayref_bool_scalartype)
-  LOAD_SYMBOL(_lantern_linalg_norm_out_tensor_tensor_stdstring_intarrayref_bool_scalartype)
-  LOAD_SYMBOL(_lantern_linalg_vector_norm_tensor_scalar_intarrayref_bool_scalartype)
-  LOAD_SYMBOL(_lantern_linalg_vector_norm_out_tensor_tensor_scalar_intarrayref_bool_scalartype)
-  LOAD_SYMBOL(_lantern_linalg_matrix_norm_tensor_scalar_intarrayref_bool_scalartype)
-  LOAD_SYMBOL(_lantern_linalg_matrix_norm_out_tensor_tensor_scalar_intarrayref_bool_scalartype)
-  LOAD_SYMBOL(_lantern_linalg_matrix_norm_tensor_stdstring_intarrayref_bool_scalartype)
-  LOAD_SYMBOL(_lantern_linalg_matrix_norm_out_tensor_tensor_stdstring_intarrayref_bool_scalartype)
-  LOAD_SYMBOL(_lantern_linalg_svd_out_tensor_tensor_tensor_tensor_bool)
-  LOAD_SYMBOL(_lantern_linalg_svd_tensor_bool)
-  LOAD_SYMBOL(_lantern_linalg_svdvals_tensor)
-  LOAD_SYMBOL(_lantern_linalg_svdvals_out_tensor_tensor)
-  LOAD_SYMBOL(_lantern_linalg_cond_tensor_scalar)
-  LOAD_SYMBOL(_lantern_linalg_cond_out_tensor_tensor_scalar)
-  LOAD_SYMBOL(_lantern_linalg_cond_tensor_stdstring)
-  LOAD_SYMBOL(_lantern_linalg_cond_out_tensor_tensor_stdstring)
-  LOAD_SYMBOL(_lantern_linalg_pinv_tensor_double_bool)
-  LOAD_SYMBOL(_lantern_linalg_pinv_tensor_tensor_bool)
-  LOAD_SYMBOL(_lantern_linalg_pinv_out_tensor_tensor_double_bool)
-  LOAD_SYMBOL(_lantern_linalg_pinv_out_tensor_tensor_tensor_bool)
-  LOAD_SYMBOL(_lantern__linalg_solve_out_helper__tensor_tensor_tensor)
-  LOAD_SYMBOL(_lantern_linalg_solve_tensor_tensor)
-  LOAD_SYMBOL(_lantern_linalg_solve_out_tensor_tensor_tensor)
-  LOAD_SYMBOL(_lantern_linalg_tensorinv_tensor_intt)
-  LOAD_SYMBOL(_lantern_linalg_tensorinv_out_tensor_tensor_intt)
-  LOAD_SYMBOL(_lantern_linalg_tensorsolve_tensor_tensor_intarrayref)
-  LOAD_SYMBOL(_lantern_linalg_tensorsolve_out_tensor_tensor_tensor_intarrayref)
-  LOAD_SYMBOL(_lantern_linalg_qr_tensor_stdstring)
-  LOAD_SYMBOL(_lantern_linalg_qr_out_tensor_tensor_tensor_stdstring)
-  LOAD_SYMBOL(_lantern__linalg_qr_helper_tensor_stdstring)
-  LOAD_SYMBOL(_lantern_linalg_matrix_power_tensor_intt)
-  LOAD_SYMBOL(_lantern_linalg_matrix_power_out_tensor_tensor_intt)
-  LOAD_SYMBOL(_lantern_linalg_matrix_rank_tensor_double_bool)
-  LOAD_SYMBOL(_lantern_linalg_matrix_rank_out_tensor_tensor_double_bool)
-  LOAD_SYMBOL(_lantern_linalg_matrix_rank_tensor_tensor_bool)
-  LOAD_SYMBOL(_lantern_linalg_matrix_rank_out_tensor_tensor_tensor_bool)
-  LOAD_SYMBOL(_lantern_linalg_multi_dot_tensorlist)
-  LOAD_SYMBOL(_lantern_linalg_multi_dot_out_tensor_tensorlist)
-  LOAD_SYMBOL(_lantern__test_serialization_subcmul_tensor_tensor_scalar)
-  LOAD_SYMBOL(_lantern__test_optional_intlist_tensor_intarrayref)
-  LOAD_SYMBOL(_lantern__test_optional_filled_intlist_tensor_intarrayref)
-  LOAD_SYMBOL(_lantern__test_optional_floatlist_tensor_arrayrefdouble)
-  LOAD_SYMBOL(_lantern__test_string_default_tensor_stdstring_stdstring)
-  LOAD_SYMBOL(_lantern__test_ambiguous_defaults_tensor_intt_intt)
-  LOAD_SYMBOL(_lantern__test_ambiguous_defaults_tensor_intt_stdstring)
-  LOAD_SYMBOL(_lantern_segment_reduce_tensor_stdstring_tensor_tensor_intt_bool_scalar)
-  LOAD_SYMBOL(_lantern_segment_reduce_backward_tensor_tensor_tensor_tensor)
-  LOAD_SYMBOL(_lantern_pad_sequence_tensorlist_bool_double)
-  LOAD_SYMBOL(_lantern_flatten_dense_tensors_tensorlist)
-  LOAD_SYMBOL(_lantern_unflatten_dense_tensors_tensor_tensorlist)
-  /* Autogen Symbols -- End */
-
-  return true;
+    LOAD_SYMBOL(_lantern__cast_char_tensor_bool)
+    LOAD_SYMBOL(_lantern__cast_double_tensor_bool)
+    LOAD_SYMBOL(_lantern__cast_float_tensor_bool)
+    LOAD_SYMBOL(_lantern__cast_int_tensor_bool)
+    LOAD_SYMBOL(_lantern__cast_long_tensor_bool)
+    LOAD_SYMBOL(_lantern__cast_short_tensor_bool)
+    LOAD_SYMBOL(_lantern__cast_half_tensor_bool)
+    LOAD_SYMBOL(_lantern_Tensor__backward_tensor_tensorlist_tensor_bool_bool)
+    LOAD_SYMBOL(_lantern_Tensor_set_data_tensor_tensor)
+    LOAD_SYMBOL(_lantern_Tensor_data_tensor)
+    LOAD_SYMBOL(_lantern_Tensor_is_leaf_tensor)
+    LOAD_SYMBOL(_lantern_Tensor_output_nr_tensor)
+    LOAD_SYMBOL(_lantern_Tensor__version_tensor)
+    LOAD_SYMBOL(_lantern_Tensor_requires_grad__tensor_bool)
+    LOAD_SYMBOL(_lantern_Tensor_retain_grad_tensor)
+    LOAD_SYMBOL(_lantern_Tensor__fw_primal_tensor_intt)
+    LOAD_SYMBOL(_lantern__make_dual_tensor_tensor_intt)
+    LOAD_SYMBOL(_lantern__unpack_dual_tensor_intt)
+    LOAD_SYMBOL(_lantern_Tensor_rename__tensor_dimnamelist)
+    LOAD_SYMBOL(_lantern_Tensor_rename_tensor_dimnamelist)
+    LOAD_SYMBOL(_lantern_Tensor_align_to_tensor_dimnamelist)
+    LOAD_SYMBOL(_lantern_Tensor_align_to_tensor_dimnamelist_intt)
+    LOAD_SYMBOL(_lantern_Tensor_align_as_tensor_tensor)
+    LOAD_SYMBOL(_lantern_align_tensors_tensorlist)
+    LOAD_SYMBOL(_lantern__assert_async_tensor)
+    LOAD_SYMBOL(_lantern_Tensor_refine_names_tensor_dimnamelist)
+    LOAD_SYMBOL(_lantern__use_cudnn_ctc_loss_tensor_tensor_intarrayref_intarrayref_intt)
+    LOAD_SYMBOL(_lantern__cudnn_ctc_loss_tensor_tensor_intarrayref_intarrayref_intt_bool_bool)
+    LOAD_SYMBOL(_lantern__use_cudnn_rnn_flatten_weight)
+    LOAD_SYMBOL(_lantern__cudnn_rnn_flatten_weight_tensorlist_intt_intt_intt_intt_intt_intt_bool_bool)
+    LOAD_SYMBOL(_lantern__cudnn_rnn_tensor_tensorlist_intt_tensor_tensor_tensor_intt_intt_intt_intt_bool_double_bool_bool_intarrayref_tensor)
+    LOAD_SYMBOL(_lantern__cudnn_rnn_backward_tensor_tensorlist_intt_tensor_tensor_tensor_tensor_tensor_tensor_tensor_intt_intt_intt_intt_bool_double_bool_bool_intarrayref_tensor_tensor_stdarraybool)
+    LOAD_SYMBOL(_lantern__cudnn_init_dropout_state_double_bool_intt_tensoroptions)
+    LOAD_SYMBOL(_lantern__debug_has_internal_overlap_tensor)
+    LOAD_SYMBOL(_lantern__fused_dropout_tensor_double_generator)
+    LOAD_SYMBOL(_lantern__masked_scale_tensor_tensor_double)
+    LOAD_SYMBOL(_lantern__sobol_engine_draw_tensor_intt_tensor_intt_intt_scalartype)
+    LOAD_SYMBOL(_lantern__sobol_engine_ff__tensor_intt_tensor_intt_intt)
+    LOAD_SYMBOL(_lantern__sobol_engine_scramble__tensor_tensor_intt)
+    LOAD_SYMBOL(_lantern__sobol_engine_initialize_state__tensor_intt)
+    LOAD_SYMBOL(_lantern__reshape_from_tensor_tensor_tensor)
+    LOAD_SYMBOL(_lantern__shape_as_tensor_tensor)
+    LOAD_SYMBOL(_lantern_dropout_tensor_double_bool)
+    LOAD_SYMBOL(_lantern_dropout__tensor_double_bool)
+    LOAD_SYMBOL(_lantern_feature_dropout_tensor_double_bool)
+    LOAD_SYMBOL(_lantern_feature_dropout__tensor_double_bool)
+    LOAD_SYMBOL(_lantern_alpha_dropout_tensor_double_bool)
+    LOAD_SYMBOL(_lantern_alpha_dropout__tensor_double_bool)
+    LOAD_SYMBOL(_lantern_feature_alpha_dropout_tensor_double_bool)
+    LOAD_SYMBOL(_lantern_feature_alpha_dropout__tensor_double_bool)
+    LOAD_SYMBOL(_lantern_abs_tensor)
+    LOAD_SYMBOL(_lantern_Tensor_abs_tensor)
+    LOAD_SYMBOL(_lantern_abs__tensor)
+    LOAD_SYMBOL(_lantern_Tensor_abs__tensor)
+    LOAD_SYMBOL(_lantern_abs_out_tensor_tensor)
+    LOAD_SYMBOL(_lantern_absolute_tensor)
+    LOAD_SYMBOL(_lantern_Tensor_absolute_tensor)
+    LOAD_SYMBOL(_lantern_Tensor_absolute__tensor)
+    LOAD_SYMBOL(_lantern_absolute_out_tensor_tensor)
+    LOAD_SYMBOL(_lantern_angle_tensor)
+    LOAD_SYMBOL(_lantern_Tensor_angle_tensor)
+    LOAD_SYMBOL(_lantern_angle_out_tensor_tensor)
+    LOAD_SYMBOL(_lantern_view_as_real_tensor)
+    LOAD_SYMBOL(_lantern_view_as_complex_tensor)
+    LOAD_SYMBOL(_lantern_sgn_tensor)
+    LOAD_SYMBOL(_lantern_Tensor_sgn_tensor)
+    LOAD_SYMBOL(_lantern_Tensor_sgn__tensor)
+    LOAD_SYMBOL(_lantern_sgn_out_tensor_tensor)
+    LOAD_SYMBOL(_lantern_real_tensor)
+    LOAD_SYMBOL(_lantern_imag_tensor)
+    LOAD_SYMBOL(_lantern_conj_tensor)
+    LOAD_SYMBOL(_lantern_Tensor_conj_tensor)
+    LOAD_SYMBOL(_lantern_conj_out_tensor_tensor)
+    LOAD_SYMBOL(_lantern__conj_tensor)
+    LOAD_SYMBOL(_lantern_acos_tensor)
+    LOAD_SYMBOL(_lantern_Tensor_acos_tensor)
+    LOAD_SYMBOL(_lantern_acos__tensor)
+    LOAD_SYMBOL(_lantern_Tensor_acos__tensor)
+    LOAD_SYMBOL(_lantern_acos_out_tensor_tensor)
+    LOAD_SYMBOL(_lantern_arccos_tensor)
+    LOAD_SYMBOL(_lantern_Tensor_arccos_tensor)
+    LOAD_SYMBOL(_lantern_arccos__tensor)
+    LOAD_SYMBOL(_lantern_Tensor_arccos__tensor)
+    LOAD_SYMBOL(_lantern_arccos_out_tensor_tensor)
+    LOAD_SYMBOL(_lantern_avg_pool1d_tensor_intarrayref_intarrayref_intarrayref_bool_bool)
+    LOAD_SYMBOL(_lantern_adaptive_avg_pool1d_tensor_intarrayref)
+    LOAD_SYMBOL(_lantern_adaptive_max_pool1d_tensor_intarrayref)
+    LOAD_SYMBOL(_lantern_add_tensor_tensor_scalar)
+    LOAD_SYMBOL(_lantern_Tensor_add_tensor_tensor_scalar)
+    LOAD_SYMBOL(_lantern_Tensor_add__tensor_tensor_scalar)
+    LOAD_SYMBOL(_lantern_add_out_tensor_tensor_tensor_scalar)
+    LOAD_SYMBOL(_lantern__add_relu_tensor_tensor_scalar)
+    LOAD_SYMBOL(_lantern__add_relu__tensor_tensor_scalar)
+    LOAD_SYMBOL(_lantern__add_relu_out_tensor_tensor_tensor_scalar)
+    LOAD_SYMBOL(_lantern_add_tensor_scalar_scalar)
+    LOAD_SYMBOL(_lantern_Tensor_add_tensor_scalar_scalar)
+    LOAD_SYMBOL(_lantern_Tensor_add__tensor_scalar_scalar)
+    LOAD_SYMBOL(_lantern_addmv_tensor_tensor_tensor_scalar_scalar)
+    LOAD_SYMBOL(_lantern_Tensor_addmv_tensor_tensor_tensor_scalar_scalar)
+    LOAD_SYMBOL(_lantern_addmv__tensor_tensor_tensor_scalar_scalar)
+    LOAD_SYMBOL(_lantern_Tensor_addmv__tensor_tensor_tensor_scalar_scalar)
+    LOAD_SYMBOL(_lantern_addmv_out_tensor_tensor_tensor_tensor_scalar_scalar)
+    LOAD_SYMBOL(_lantern_addr_tensor_tensor_tensor_scalar_scalar)
+    LOAD_SYMBOL(_lantern_Tensor_addr_tensor_tensor_tensor_scalar_scalar)
+    LOAD_SYMBOL(_lantern_Tensor_addr__tensor_tensor_tensor_scalar_scalar)
+    LOAD_SYMBOL(_lantern_addr_out_tensor_tensor_tensor_tensor_scalar_scalar)
+    LOAD_SYMBOL(_lantern_affine_grid_generator_tensor_intarrayref_bool)
+    LOAD_SYMBOL(_lantern_affine_grid_generator_backward_tensor_intarrayref_bool)
+    LOAD_SYMBOL(_lantern_all_tensor_intt_bool)
+    LOAD_SYMBOL(_lantern_Tensor_all_tensor_intt_bool)
+    LOAD_SYMBOL(_lantern_all_out_tensor_tensor_intt_bool)
+    LOAD_SYMBOL(_lantern_all_tensor_dimname_bool)
+    LOAD_SYMBOL(_lantern_Tensor_all_tensor_dimname_bool)
+    LOAD_SYMBOL(_lantern_all_out_tensor_tensor_dimname_bool)
+    LOAD_SYMBOL(_lantern_allclose_tensor_tensor_double_double_bool)
+    LOAD_SYMBOL(_lantern_Tensor_allclose_tensor_tensor_double_double_bool)
+    LOAD_SYMBOL(_lantern_any_tensor_intt_bool)
+    LOAD_SYMBOL(_lantern_Tensor_any_tensor_intt_bool)
+    LOAD_SYMBOL(_lantern_any_out_tensor_tensor_intt_bool)
+    LOAD_SYMBOL(_lantern_any_tensor_dimname_bool)
+    LOAD_SYMBOL(_lantern_Tensor_any_tensor_dimname_bool)
+    LOAD_SYMBOL(_lantern_any_out_tensor_tensor_dimname_bool)
+    LOAD_SYMBOL(_lantern_arange_scalar_tensoroptions)
+    LOAD_SYMBOL(_lantern_arange_scalar_scalar_tensoroptions)
+    LOAD_SYMBOL(_lantern_arange_scalar_scalar_scalar_tensoroptions)
+    LOAD_SYMBOL(_lantern_arange_out_tensor_scalar)
+    LOAD_SYMBOL(_lantern_arange_out_tensor_scalar_scalar_scalar)
+    LOAD_SYMBOL(_lantern__dim_arange_tensor_intt)
+    LOAD_SYMBOL(_lantern_argmax_tensor_intt_bool)
+    LOAD_SYMBOL(_lantern_Tensor_argmax_tensor_intt_bool)
+    LOAD_SYMBOL(_lantern_argmax_out_tensor_tensor_intt_bool)
+    LOAD_SYMBOL(_lantern_argmin_tensor_intt_bool)
+    LOAD_SYMBOL(_lantern_Tensor_argmin_tensor_intt_bool)
+    LOAD_SYMBOL(_lantern_argmin_out_tensor_tensor_intt_bool)
+    LOAD_SYMBOL(_lantern_acosh_tensor)
+    LOAD_SYMBOL(_lantern_Tensor_acosh_tensor)
+    LOAD_SYMBOL(_lantern_acosh__tensor)
+    LOAD_SYMBOL(_lantern_Tensor_acosh__tensor)
+    LOAD_SYMBOL(_lantern_acosh_out_tensor_tensor)
+    LOAD_SYMBOL(_lantern_arccosh_tensor)
+    LOAD_SYMBOL(_lantern_Tensor_arccosh_tensor)
+    LOAD_SYMBOL(_lantern_arccosh__tensor)
+    LOAD_SYMBOL(_lantern_Tensor_arccosh__tensor)
+    LOAD_SYMBOL(_lantern_arccosh_out_tensor_tensor)
+    LOAD_SYMBOL(_lantern_asinh_tensor)
+    LOAD_SYMBOL(_lantern_Tensor_asinh_tensor)
+    LOAD_SYMBOL(_lantern_asinh__tensor)
+    LOAD_SYMBOL(_lantern_Tensor_asinh__tensor)
+    LOAD_SYMBOL(_lantern_asinh_out_tensor_tensor)
+    LOAD_SYMBOL(_lantern_arcsinh_tensor)
+    LOAD_SYMBOL(_lantern_Tensor_arcsinh_tensor)
+    LOAD_SYMBOL(_lantern_arcsinh__tensor)
+    LOAD_SYMBOL(_lantern_Tensor_arcsinh__tensor)
+    LOAD_SYMBOL(_lantern_arcsinh_out_tensor_tensor)
+    LOAD_SYMBOL(_lantern_atanh_tensor)
+    LOAD_SYMBOL(_lantern_Tensor_atanh_tensor)
+    LOAD_SYMBOL(_lantern_atanh__tensor)
+    LOAD_SYMBOL(_lantern_Tensor_atanh__tensor)
+    LOAD_SYMBOL(_lantern_atanh_out_tensor_tensor)
+    LOAD_SYMBOL(_lantern_arctanh_tensor)
+    LOAD_SYMBOL(_lantern_Tensor_arctanh_tensor)
+    LOAD_SYMBOL(_lantern_arctanh__tensor)
+    LOAD_SYMBOL(_lantern_Tensor_arctanh__tensor)
+    LOAD_SYMBOL(_lantern_arctanh_out_tensor_tensor)
+    LOAD_SYMBOL(_lantern_as_strided_tensor_intarrayref_intarrayref_intt)
+    LOAD_SYMBOL(_lantern_Tensor_as_strided_tensor_intarrayref_intarrayref_intt)
+    LOAD_SYMBOL(_lantern_as_strided__tensor_intarrayref_intarrayref_intt)
+    LOAD_SYMBOL(_lantern_Tensor_as_strided__tensor_intarrayref_intarrayref_intt)
+    LOAD_SYMBOL(_lantern_asin_tensor)
+    LOAD_SYMBOL(_lantern_Tensor_asin_tensor)
+    LOAD_SYMBOL(_lantern_asin__tensor)
+    LOAD_SYMBOL(_lantern_Tensor_asin__tensor)
+    LOAD_SYMBOL(_lantern_asin_out_tensor_tensor)
+    LOAD_SYMBOL(_lantern_arcsin_tensor)
+    LOAD_SYMBOL(_lantern_Tensor_arcsin_tensor)
+    LOAD_SYMBOL(_lantern_arcsin__tensor)
+    LOAD_SYMBOL(_lantern_Tensor_arcsin__tensor)
+    LOAD_SYMBOL(_lantern_arcsin_out_tensor_tensor)
+    LOAD_SYMBOL(_lantern_atan_tensor)
+    LOAD_SYMBOL(_lantern_Tensor_atan_tensor)
+    LOAD_SYMBOL(_lantern_atan__tensor)
+    LOAD_SYMBOL(_lantern_Tensor_atan__tensor)
+    LOAD_SYMBOL(_lantern_atan_out_tensor_tensor)
+    LOAD_SYMBOL(_lantern_arctan_tensor)
+    LOAD_SYMBOL(_lantern_Tensor_arctan_tensor)
+    LOAD_SYMBOL(_lantern_arctan__tensor)
+    LOAD_SYMBOL(_lantern_Tensor_arctan__tensor)
+    LOAD_SYMBOL(_lantern_arctan_out_tensor_tensor)
+    LOAD_SYMBOL(_lantern_atleast_1d_tensor)
+    LOAD_SYMBOL(_lantern_atleast_1d_tensorlist)
+    LOAD_SYMBOL(_lantern_atleast_2d_tensor)
+    LOAD_SYMBOL(_lantern_atleast_2d_tensorlist)
+    LOAD_SYMBOL(_lantern_atleast_3d_tensor)
+    LOAD_SYMBOL(_lantern_atleast_3d_tensorlist)
+    LOAD_SYMBOL(_lantern_baddbmm_tensor_tensor_tensor_scalar_scalar)
+    LOAD_SYMBOL(_lantern_Tensor_baddbmm_tensor_tensor_tensor_scalar_scalar)
+    LOAD_SYMBOL(_lantern_Tensor_baddbmm__tensor_tensor_tensor_scalar_scalar)
+    LOAD_SYMBOL(_lantern__baddbmm_mkl__tensor_tensor_tensor_scalar_scalar)
+    LOAD_SYMBOL(_lantern_baddbmm_out_tensor_tensor_tensor_tensor_scalar_scalar)
+    LOAD_SYMBOL(_lantern_bartlett_window_intt_tensoroptions)
+    LOAD_SYMBOL(_lantern_bartlett_window_intt_bool_tensoroptions)
+    LOAD_SYMBOL(_lantern_batch_norm_tensor_tensor_tensor_tensor_tensor_bool_double_double_bool)
+    LOAD_SYMBOL(_lantern_quantized_batch_norm_tensor_tensor_tensor_tensor_tensor_double_double_intt)
+    LOAD_SYMBOL(_lantern__batch_norm_impl_index_tensor_tensor_tensor_tensor_tensor_bool_double_double_bool)
+    LOAD_SYMBOL(_lantern__batch_norm_impl_index_backward_intt_tensor_tensor_tensor_tensor_tensor_tensor_tensor_bool_double_stdarraybool_tensor)
+    LOAD_SYMBOL(_lantern_bernoulli_tensor_generator)
+    LOAD_SYMBOL(_lantern_Tensor_bernoulli_tensor_generator)
+    LOAD_SYMBOL(_lantern_bernoulli_out_tensor_tensor_generator)
+    LOAD_SYMBOL(_lantern_Tensor_bernoulli__tensor_tensor_generator)
+    LOAD_SYMBOL(_lantern_Tensor_bernoulli__tensor_double_generator)
+    LOAD_SYMBOL(_lantern_bernoulli_tensor_double_generator)
+    LOAD_SYMBOL(_lantern_Tensor_bernoulli_tensor_double_generator)
+    LOAD_SYMBOL(_lantern_bilinear_tensor_tensor_tensor_tensor)
+    LOAD_SYMBOL(_lantern_binary_cross_entropy_tensor_tensor_tensor_intt)
+    LOAD_SYMBOL(_lantern_binary_cross_entropy_out_tensor_tensor_tensor_tensor_intt)
+    LOAD_SYMBOL(_lantern_binary_cross_entropy_backward_tensor_tensor_tensor_tensor_intt)
+    LOAD_SYMBOL(_lantern_binary_cross_entropy_backward_out_tensor_tensor_tensor_tensor_tensor_intt)
+    LOAD_SYMBOL(_lantern_binary_cross_entropy_with_logits_tensor_tensor_tensor_tensor_intt)
+    LOAD_SYMBOL(_lantern_binary_cross_entropy_with_logits_backward_tensor_tensor_tensor_tensor_tensor_intt)
+    LOAD_SYMBOL(_lantern_bincount_tensor_tensor_intt)
+    LOAD_SYMBOL(_lantern_Tensor_bincount_tensor_tensor_intt)
+    LOAD_SYMBOL(_lantern_bitwise_not_tensor)
+    LOAD_SYMBOL(_lantern_Tensor_bitwise_not_tensor)
+    LOAD_SYMBOL(_lantern_Tensor_bitwise_not__tensor)
+    LOAD_SYMBOL(_lantern_bitwise_not_out_tensor_tensor)
+    LOAD_SYMBOL(_lantern_copysign_out_tensor_tensor_tensor)
+    LOAD_SYMBOL(_lantern_copysign_tensor_tensor)
+    LOAD_SYMBOL(_lantern_Tensor_copysign_tensor_tensor)
+    LOAD_SYMBOL(_lantern_Tensor_copysign__tensor_tensor)
+    LOAD_SYMBOL(_lantern_copysign_tensor_scalar)
+    LOAD_SYMBOL(_lantern_Tensor_copysign_tensor_scalar)
+    LOAD_SYMBOL(_lantern_Tensor_copysign__tensor_scalar)
+    LOAD_SYMBOL(_lantern_copysign_out_tensor_tensor_scalar)
+    LOAD_SYMBOL(_lantern_logical_not_tensor)
+    LOAD_SYMBOL(_lantern_Tensor_logical_not_tensor)
+    LOAD_SYMBOL(_lantern_Tensor_logical_not__tensor)
+    LOAD_SYMBOL(_lantern_logical_not_out_tensor_tensor)
+    LOAD_SYMBOL(_lantern_logical_xor_tensor_tensor)
+    LOAD_SYMBOL(_lantern_Tensor_logical_xor_tensor_tensor)
+    LOAD_SYMBOL(_lantern_Tensor_logical_xor__tensor_tensor)
+    LOAD_SYMBOL(_lantern_logical_xor_out_tensor_tensor_tensor)
+    LOAD_SYMBOL(_lantern_logical_and_tensor_tensor)
+    LOAD_SYMBOL(_lantern_Tensor_logical_and_tensor_tensor)
+    LOAD_SYMBOL(_lantern_Tensor_logical_and__tensor_tensor)
+    LOAD_SYMBOL(_lantern_logical_and_out_tensor_tensor_tensor)
+    LOAD_SYMBOL(_lantern_logical_or_tensor_tensor)
+    LOAD_SYMBOL(_lantern_Tensor_logical_or_tensor_tensor)
+    LOAD_SYMBOL(_lantern_Tensor_logical_or__tensor_tensor)
+    LOAD_SYMBOL(_lantern_logical_or_out_tensor_tensor_tensor)
+    LOAD_SYMBOL(_lantern_blackman_window_intt_tensoroptions)
+    LOAD_SYMBOL(_lantern_blackman_window_intt_bool_tensoroptions)
+    LOAD_SYMBOL(_lantern_bmm_tensor_tensor)
+    LOAD_SYMBOL(_lantern_Tensor_bmm_tensor_tensor)
+    LOAD_SYMBOL(_lantern__bmm_tensor_tensor_bool)
+    LOAD_SYMBOL(_lantern_bmm_out_tensor_tensor_tensor)
+    LOAD_SYMBOL(_lantern__bmm_out_tensor_tensor_tensor_bool)
+    LOAD_SYMBOL(_lantern_broadcast_tensors_tensorlist)
+    LOAD_SYMBOL(_lantern_broadcast_to_tensor_intarrayref)
+    LOAD_SYMBOL(_lantern_Tensor_broadcast_to_tensor_intarrayref)
+    LOAD_SYMBOL(_lantern_cat_tensorlist_intt)
+    LOAD_SYMBOL(_lantern_cat_out_tensor_tensorlist_intt)
+    LOAD_SYMBOL(_lantern_cat_tensorlist_dimname)
+    LOAD_SYMBOL(_lantern_cat_out_tensor_tensorlist_dimname)
+    LOAD_SYMBOL(_lantern_block_diag_tensorlist)
+    LOAD_SYMBOL(_lantern_ceil_tensor)
+    LOAD_SYMBOL(_lantern_Tensor_ceil_tensor)
+    LOAD_SYMBOL(_lantern_ceil__tensor)
+    LOAD_SYMBOL(_lantern_Tensor_ceil__tensor)
+    LOAD_SYMBOL(_lantern_ceil_out_tensor_tensor)
+    LOAD_SYMBOL(_lantern_chain_matmul_tensorlist)
+    LOAD_SYMBOL(_lantern_chain_matmul_out_tensor_tensorlist)
+    LOAD_SYMBOL(_lantern_unsafe_chunk_tensor_intt_intt)
+    LOAD_SYMBOL(_lantern_Tensor_unsafe_chunk_tensor_intt_intt)
+    LOAD_SYMBOL(_lantern_chunk_tensor_intt_intt)
+    LOAD_SYMBOL(_lantern_Tensor_chunk_tensor_intt_intt)
+    LOAD_SYMBOL(_lantern_tensor_split_tensor_intt_intt)
+    LOAD_SYMBOL(_lantern_Tensor_tensor_split_tensor_intt_intt)
+    LOAD_SYMBOL(_lantern_tensor_split_tensor_intarrayref_intt)
+    LOAD_SYMBOL(_lantern_Tensor_tensor_split_tensor_intarrayref_intt)
+    LOAD_SYMBOL(_lantern_tensor_split_tensor_tensor_intt)
+    LOAD_SYMBOL(_lantern_Tensor_tensor_split_tensor_tensor_intt)
+    LOAD_SYMBOL(_lantern_clamp_tensor_scalar_scalar)
+    LOAD_SYMBOL(_lantern_Tensor_clamp_tensor_scalar_scalar)
+    LOAD_SYMBOL(_lantern_clamp_tensor_tensor_tensor)
+    LOAD_SYMBOL(_lantern_Tensor_clamp_tensor_tensor_tensor)
+    LOAD_SYMBOL(_lantern_clamp__tensor_scalar_scalar)
+    LOAD_SYMBOL(_lantern_Tensor_clamp__tensor_scalar_scalar)
+    LOAD_SYMBOL(_lantern_clamp__tensor_tensor_tensor)
+    LOAD_SYMBOL(_lantern_Tensor_clamp__tensor_tensor_tensor)
+    LOAD_SYMBOL(_lantern_clamp_out_tensor_tensor_scalar_scalar)
+    LOAD_SYMBOL(_lantern_clamp_out_tensor_tensor_tensor_tensor)
+    LOAD_SYMBOL(_lantern_clamp_max_tensor_scalar)
+    LOAD_SYMBOL(_lantern_Tensor_clamp_max_tensor_scalar)
+    LOAD_SYMBOL(_lantern_clamp_max_tensor_tensor)
+    LOAD_SYMBOL(_lantern_Tensor_clamp_max_tensor_tensor)
+    LOAD_SYMBOL(_lantern_clamp_max__tensor_scalar)
+    LOAD_SYMBOL(_lantern_Tensor_clamp_max__tensor_scalar)
+    LOAD_SYMBOL(_lantern_clamp_max__tensor_tensor)
+    LOAD_SYMBOL(_lantern_Tensor_clamp_max__tensor_tensor)
+    LOAD_SYMBOL(_lantern_clamp_max_out_tensor_tensor_scalar)
+    LOAD_SYMBOL(_lantern_clamp_max_out_tensor_tensor_tensor)
+    LOAD_SYMBOL(_lantern_clamp_min_tensor_scalar)
+    LOAD_SYMBOL(_lantern_Tensor_clamp_min_tensor_scalar)
+    LOAD_SYMBOL(_lantern_clamp_min_tensor_tensor)
+    LOAD_SYMBOL(_lantern_Tensor_clamp_min_tensor_tensor)
+    LOAD_SYMBOL(_lantern_clamp_min__tensor_scalar)
+    LOAD_SYMBOL(_lantern_Tensor_clamp_min__tensor_scalar)
+    LOAD_SYMBOL(_lantern_clamp_min__tensor_tensor)
+    LOAD_SYMBOL(_lantern_Tensor_clamp_min__tensor_tensor)
+    LOAD_SYMBOL(_lantern_clamp_min_out_tensor_tensor_scalar)
+    LOAD_SYMBOL(_lantern_clamp_min_out_tensor_tensor_tensor)
+    LOAD_SYMBOL(_lantern_clip_tensor_scalar_scalar)
+    LOAD_SYMBOL(_lantern_Tensor_clip_tensor_scalar_scalar)
+    LOAD_SYMBOL(_lantern_clip_tensor_tensor_tensor)
+    LOAD_SYMBOL(_lantern_Tensor_clip_tensor_tensor_tensor)
+    LOAD_SYMBOL(_lantern_clip__tensor_scalar_scalar)
+    LOAD_SYMBOL(_lantern_Tensor_clip__tensor_scalar_scalar)
+    LOAD_SYMBOL(_lantern_clip__tensor_tensor_tensor)
+    LOAD_SYMBOL(_lantern_Tensor_clip__tensor_tensor_tensor)
+    LOAD_SYMBOL(_lantern_clip_out_tensor_tensor_scalar_scalar)
+    LOAD_SYMBOL(_lantern_clip_out_tensor_tensor_tensor_tensor)
+    LOAD_SYMBOL(_lantern_cudnn_is_acceptable_tensor)
+    LOAD_SYMBOL(_lantern_complex_tensor_tensor)
+    LOAD_SYMBOL(_lantern_complex_out_tensor_tensor_tensor)
+    LOAD_SYMBOL(_lantern_polar_tensor_tensor)
+    LOAD_SYMBOL(_lantern_polar_out_tensor_tensor_tensor)
+    LOAD_SYMBOL(_lantern_constant_pad_nd_tensor_intarrayref_scalar)
+    LOAD_SYMBOL(_lantern_Tensor_contiguous_tensor_memoryformat)
+    LOAD_SYMBOL(_lantern_convolution_tensor_tensor_tensor_intarrayref_intarrayref_intarrayref_bool_intarrayref_intt)
+    LOAD_SYMBOL(_lantern_convolution_overrideable_tensor_tensor_tensor_intarrayref_intarrayref_intarrayref_bool_intarrayref_intt)
+    LOAD_SYMBOL(_lantern_convolution_backward_overrideable_tensor_tensor_tensor_intarrayref_intarrayref_intarrayref_bool_intarrayref_intt_stdarraybool)
+    LOAD_SYMBOL(_lantern__convolution_tensor_tensor_tensor_intarrayref_intarrayref_intarrayref_bool_intarrayref_intt_bool_bool_bool_bool)
+    LOAD_SYMBOL(_lantern__convolution_tensor_tensor_tensor_intarrayref_intarrayref_intarrayref_bool_intarrayref_intt_bool_bool_bool)
+    LOAD_SYMBOL(_lantern__convolution_mode_tensor_tensor_tensor_intarrayref_stdstring_intarrayref_intt)
+    LOAD_SYMBOL(_lantern__convolution_nogroup_tensor_tensor_tensor_intarrayref_intarrayref_intarrayref_bool_intarrayref)
+    LOAD_SYMBOL(_lantern__convolution_double_backward_tensor_tensor_tensor_tensor_tensor_tensor_intarrayref_intarrayref_intarrayref_bool_intarrayref_intt_bool_bool_bool_bool_stdarraybool)
+    LOAD_SYMBOL(_lantern_conv1d_tensor_tensor_tensor_intarrayref_intarrayref_intarrayref_intt)
+    LOAD_SYMBOL(_lantern_conv2d_tensor_tensor_tensor_intarrayref_intarrayref_intarrayref_intt)
+    LOAD_SYMBOL(_lantern_conv3d_tensor_tensor_tensor_intarrayref_intarrayref_intarrayref_intt)
+    LOAD_SYMBOL(_lantern_conv1d_tensor_tensor_tensor_intarrayref_stdstring_intarrayref_intt)
+    LOAD_SYMBOL(_lantern_conv2d_tensor_tensor_tensor_intarrayref_stdstring_intarrayref_intt)
+    LOAD_SYMBOL(_lantern_conv3d_tensor_tensor_tensor_intarrayref_stdstring_intarrayref_intt)
+    LOAD_SYMBOL(_lantern_conv_tbc_tensor_tensor_tensor_intt)
+    LOAD_SYMBOL(_lantern_conv_tbc_backward_tensor_tensor_tensor_tensor_intt)
+    LOAD_SYMBOL(_lantern_conv_transpose1d_tensor_tensor_tensor_intarrayref_intarrayref_intarrayref_intt_intarrayref)
+    LOAD_SYMBOL(_lantern_conv_transpose2d_tensor_tensor_tensor_intarrayref_intarrayref_intarrayref_intt_intarrayref)
+    LOAD_SYMBOL(_lantern_conv_transpose3d_tensor_tensor_tensor_intarrayref_intarrayref_intarrayref_intt_intarrayref)
+    LOAD_SYMBOL(_lantern_Tensor_copy__tensor_tensor_bool)
+    LOAD_SYMBOL(_lantern__copy_from_tensor_tensor_bool)
+    LOAD_SYMBOL(_lantern_cos_tensor)
+    LOAD_SYMBOL(_lantern_Tensor_cos_tensor)
+    LOAD_SYMBOL(_lantern_cos__tensor)
+    LOAD_SYMBOL(_lantern_Tensor_cos__tensor)
+    LOAD_SYMBOL(_lantern_cos_out_tensor_tensor)
+    LOAD_SYMBOL(_lantern_cosh_tensor)
+    LOAD_SYMBOL(_lantern_Tensor_cosh_tensor)
+    LOAD_SYMBOL(_lantern_cosh__tensor)
+    LOAD_SYMBOL(_lantern_Tensor_cosh__tensor)
+    LOAD_SYMBOL(_lantern_cosh_out_tensor_tensor)
+    LOAD_SYMBOL(_lantern_cosine_embedding_loss_tensor_tensor_tensor_double_intt)
+    LOAD_SYMBOL(_lantern_count_nonzero_tensor_intarrayref)
+    LOAD_SYMBOL(_lantern_Tensor_count_nonzero_tensor_intarrayref)
+    LOAD_SYMBOL(_lantern_count_nonzero_tensor_intt)
+    LOAD_SYMBOL(_lantern_Tensor_count_nonzero_tensor_intt)
+    LOAD_SYMBOL(_lantern_cudnn_affine_grid_generator_tensor_intt_intt_intt_intt)
+    LOAD_SYMBOL(_lantern_cudnn_affine_grid_generator_backward_tensor_intt_intt_intt_intt)
+    LOAD_SYMBOL(_lantern_cudnn_batch_norm_tensor_tensor_tensor_tensor_tensor_bool_double_double)
+    LOAD_SYMBOL(_lantern_cudnn_batch_norm_backward_tensor_tensor_tensor_tensor_tensor_tensor_tensor_double_tensor)
+    LOAD_SYMBOL(_lantern_cudnn_convolution_tensor_tensor_tensor_intarrayref_intarrayref_intarrayref_intt_bool_bool)
+    LOAD_SYMBOL(_lantern_cudnn_convolution_tensor_tensor_intarrayref_intarrayref_intarrayref_intt_bool_bool)
+    LOAD_SYMBOL(_lantern_cudnn_convolution_tensor_tensor_intarrayref_intarrayref_intarrayref_intt_bool_bool_bool)
+    LOAD_SYMBOL(_lantern_cudnn_convolution_backward_input_intarrayref_tensor_tensor_intarrayref_intarrayref_intarrayref_intt_bool_bool_bool)
+    LOAD_SYMBOL(_lantern_cudnn_convolution_backward_tensor_tensor_tensor_intarrayref_intarrayref_intarrayref_intt_bool_bool_bool_stdarraybool)
+    LOAD_SYMBOL(_lantern_cudnn_convolution_backward_weight_intarrayref_tensor_tensor_intarrayref_intarrayref_intarrayref_intt_bool_bool_bool)
+    LOAD_SYMBOL(_lantern_cudnn_convolution_transpose_tensor_tensor_tensor_intarrayref_intarrayref_intarrayref_intarrayref_intt_bool_bool)
+    LOAD_SYMBOL(_lantern_cudnn_convolution_transpose_tensor_tensor_intarrayref_intarrayref_intarrayref_intarrayref_intt_bool_bool)
+    LOAD_SYMBOL(_lantern_cudnn_convolution_transpose_tensor_tensor_intarrayref_intarrayref_intarrayref_intarrayref_intt_bool_bool_bool)
+    LOAD_SYMBOL(_lantern_cudnn_convolution_transpose_backward_tensor_tensor_tensor_intarrayref_intarrayref_intarrayref_intarrayref_intt_bool_bool_bool_stdarraybool)
+    LOAD_SYMBOL(_lantern_cudnn_convolution_transpose_backward_input_tensor_tensor_intarrayref_intarrayref_intarrayref_intt_bool_bool_bool)
+    LOAD_SYMBOL(_lantern_cudnn_convolution_transpose_backward_weight_intarrayref_tensor_tensor_intarrayref_intarrayref_intarrayref_intt_bool_bool_bool)
+    LOAD_SYMBOL(_lantern_cudnn_convolution_relu_tensor_tensor_tensor_intarrayref_intarrayref_intarrayref_intt)
+    LOAD_SYMBOL(_lantern_cudnn_convolution_add_relu_tensor_tensor_tensor_scalar_tensor_intarrayref_intarrayref_intarrayref_intt)
+    LOAD_SYMBOL(_lantern_cudnn_grid_sampler_tensor_tensor)
+    LOAD_SYMBOL(_lantern_cudnn_grid_sampler_backward_tensor_tensor_tensor)
+    LOAD_SYMBOL(_lantern_cummax_tensor_intt)
+    LOAD_SYMBOL(_lantern_Tensor_cummax_tensor_intt)
+    LOAD_SYMBOL(_lantern_cummax_out_tensor_tensor_tensor_intt)
+    LOAD_SYMBOL(_lantern_cummax_tensor_dimname)
+    LOAD_SYMBOL(_lantern_Tensor_cummax_tensor_dimname)
+    LOAD_SYMBOL(_lantern_cummax_out_tensor_tensor_tensor_dimname)
+    LOAD_SYMBOL(_lantern__cummax_helper_tensor_tensor_tensor_intt)
+    LOAD_SYMBOL(_lantern_cummin_tensor_intt)
+    LOAD_SYMBOL(_lantern_Tensor_cummin_tensor_intt)
+    LOAD_SYMBOL(_lantern_cummin_out_tensor_tensor_tensor_intt)
+    LOAD_SYMBOL(_lantern_cummin_tensor_dimname)
+    LOAD_SYMBOL(_lantern_Tensor_cummin_tensor_dimname)
+    LOAD_SYMBOL(_lantern_cummin_out_tensor_tensor_tensor_dimname)
+    LOAD_SYMBOL(_lantern__cummin_helper_tensor_tensor_tensor_intt)
+    LOAD_SYMBOL(_lantern_cummaxmin_backward_tensor_tensor_tensor_intt)
+    LOAD_SYMBOL(_lantern_cumprod_tensor_intt_scalartype)
+    LOAD_SYMBOL(_lantern_Tensor_cumprod_tensor_intt_scalartype)
+    LOAD_SYMBOL(_lantern_Tensor_cumprod__tensor_intt_scalartype)
+    LOAD_SYMBOL(_lantern_cumprod_out_tensor_tensor_intt_scalartype)
+    LOAD_SYMBOL(_lantern_cumprod_tensor_dimname_scalartype)
+    LOAD_SYMBOL(_lantern_Tensor_cumprod_tensor_dimname_scalartype)
+    LOAD_SYMBOL(_lantern_Tensor_cumprod__tensor_dimname_scalartype)
+    LOAD_SYMBOL(_lantern_cumprod_out_tensor_tensor_dimname_scalartype)
+    LOAD_SYMBOL(_lantern_cumprod_backward_tensor_tensor_intt_tensor)
+    LOAD_SYMBOL(_lantern_cumsum_tensor_intt_scalartype)
+    LOAD_SYMBOL(_lantern_Tensor_cumsum_tensor_intt_scalartype)
+    LOAD_SYMBOL(_lantern_Tensor_cumsum__tensor_intt_scalartype)
+    LOAD_SYMBOL(_lantern_cumsum_out_tensor_tensor_intt_scalartype)
+    LOAD_SYMBOL(_lantern_cumsum_tensor_dimname_scalartype)
+    LOAD_SYMBOL(_lantern_Tensor_cumsum_tensor_dimname_scalartype)
+    LOAD_SYMBOL(_lantern_Tensor_cumsum__tensor_dimname_scalartype)
+    LOAD_SYMBOL(_lantern_cumsum_out_tensor_tensor_dimname_scalartype)
+    LOAD_SYMBOL(_lantern_ctc_loss_tensor_tensor_intarrayref_intarrayref_intt_intt_bool)
+    LOAD_SYMBOL(_lantern_ctc_loss_tensor_tensor_tensor_tensor_intt_intt_bool)
+    LOAD_SYMBOL(_lantern__ctc_loss_tensor_tensor_intarrayref_intarrayref_intt_bool)
+    LOAD_SYMBOL(_lantern__ctc_loss_backward_tensor_tensor_tensor_intarrayref_intarrayref_tensor_tensor_intt_bool)
+    LOAD_SYMBOL(_lantern_diag_embed_tensor_intt_intt_intt)
+    LOAD_SYMBOL(_lantern_Tensor_diag_embed_tensor_intt_intt_intt)
+    LOAD_SYMBOL(_lantern_diagflat_tensor_intt)
+    LOAD_SYMBOL(_lantern_Tensor_diagflat_tensor_intt)
+    LOAD_SYMBOL(_lantern_diagonal_tensor_intt_intt_intt)
+    LOAD_SYMBOL(_lantern_Tensor_diagonal_tensor_intt_intt_intt)
+    LOAD_SYMBOL(_lantern_diagonal_tensor_dimname_dimname_dimname_intt)
+    LOAD_SYMBOL(_lantern_Tensor_diagonal_tensor_dimname_dimname_dimname_intt)
+    LOAD_SYMBOL(_lantern_diagonal_backward_tensor_intarrayref_intt_intt_intt)
+    LOAD_SYMBOL(_lantern_Tensor_fill_diagonal__tensor_scalar_bool)
+    LOAD_SYMBOL(_lantern_diff_tensor_intt_intt_tensor_tensor)
+    LOAD_SYMBOL(_lantern_Tensor_diff_tensor_intt_intt_tensor_tensor)
+    LOAD_SYMBOL(_lantern_diff_out_tensor_tensor_intt_intt_tensor_tensor)
+    LOAD_SYMBOL(_lantern_gradient_tensor_scalar_intt_intt)
+    LOAD_SYMBOL(_lantern_gradient_tensor_scalar_intarrayref_intt)
+    LOAD_SYMBOL(_lantern_gradient_tensor_intarrayref_intt)
+    LOAD_SYMBOL(_lantern_gradient_tensor_arrayrefscalar_intt_intt)
+    LOAD_SYMBOL(_lantern_gradient_tensor_arrayrefscalar_intarrayref_intt)
+    LOAD_SYMBOL(_lantern_gradient_tensor_tensorlist_intt_intt)
+    LOAD_SYMBOL(_lantern_gradient_tensor_tensorlist_intarrayref_intt)
+    LOAD_SYMBOL(_lantern_div_tensor_tensor)
+    LOAD_SYMBOL(_lantern_Tensor_div_tensor_tensor)
+    LOAD_SYMBOL(_lantern_Tensor_div__tensor_tensor)
+    LOAD_SYMBOL(_lantern_div_out_tensor_tensor_tensor)
+    LOAD_SYMBOL(_lantern_div_tensor_tensor_stdstring)
+    LOAD_SYMBOL(_lantern_Tensor_div_tensor_tensor_stdstring)
+    LOAD_SYMBOL(_lantern_Tensor_div__tensor_tensor_stdstring)
+    LOAD_SYMBOL(_lantern_div_out_tensor_tensor_tensor_stdstring)
+    LOAD_SYMBOL(_lantern_div_tensor_scalar)
+    LOAD_SYMBOL(_lantern_Tensor_div_tensor_scalar)
+    LOAD_SYMBOL(_lantern_Tensor_div__tensor_scalar)
+    LOAD_SYMBOL(_lantern_div_tensor_scalar_stdstring)
+    LOAD_SYMBOL(_lantern_Tensor_div_tensor_scalar_stdstring)
+    LOAD_SYMBOL(_lantern_Tensor_div__tensor_scalar_stdstring)
+    LOAD_SYMBOL(_lantern_divide_tensor_tensor)
+    LOAD_SYMBOL(_lantern_Tensor_divide_tensor_tensor)
+    LOAD_SYMBOL(_lantern_Tensor_divide__tensor_tensor)
+    LOAD_SYMBOL(_lantern_divide_out_tensor_tensor_tensor)
+    LOAD_SYMBOL(_lantern_divide_tensor_scalar)
+    LOAD_SYMBOL(_lantern_Tensor_divide_tensor_scalar)
+    LOAD_SYMBOL(_lantern_Tensor_divide__tensor_scalar)
+    LOAD_SYMBOL(_lantern_divide_tensor_tensor_stdstring)
+    LOAD_SYMBOL(_lantern_Tensor_divide_tensor_tensor_stdstring)
+    LOAD_SYMBOL(_lantern_Tensor_divide__tensor_tensor_stdstring)
+    LOAD_SYMBOL(_lantern_divide_out_tensor_tensor_tensor_stdstring)
+    LOAD_SYMBOL(_lantern_divide_tensor_scalar_stdstring)
+    LOAD_SYMBOL(_lantern_Tensor_divide_tensor_scalar_stdstring)
+    LOAD_SYMBOL(_lantern_Tensor_divide__tensor_scalar_stdstring)
+    LOAD_SYMBOL(_lantern_true_divide_tensor_tensor)
+    LOAD_SYMBOL(_lantern_Tensor_true_divide_tensor_tensor)
+    LOAD_SYMBOL(_lantern_Tensor_true_divide__tensor_tensor)
+    LOAD_SYMBOL(_lantern_true_divide_out_tensor_tensor_tensor)
+    LOAD_SYMBOL(_lantern_true_divide_tensor_scalar)
+    LOAD_SYMBOL(_lantern_Tensor_true_divide_tensor_scalar)
+    LOAD_SYMBOL(_lantern_Tensor_true_divide__tensor_scalar)
+    LOAD_SYMBOL(_lantern_dot_tensor_tensor)
+    LOAD_SYMBOL(_lantern_Tensor_dot_tensor_tensor)
+    LOAD_SYMBOL(_lantern_dot_out_tensor_tensor_tensor)
+    LOAD_SYMBOL(_lantern_vdot_tensor_tensor)
+    LOAD_SYMBOL(_lantern_Tensor_vdot_tensor_tensor)
+    LOAD_SYMBOL(_lantern_vdot_out_tensor_tensor_tensor)
+    LOAD_SYMBOL(_lantern_einsum_stdstring_tensorlist)
+    LOAD_SYMBOL(_lantern_embedding_tensor_tensor_intt_bool_bool)
+    LOAD_SYMBOL(_lantern_embedding_backward_tensor_tensor_intt_intt_bool_bool)
+    LOAD_SYMBOL(_lantern_embedding_dense_backward_tensor_tensor_intt_intt_bool)
+    LOAD_SYMBOL(_lantern_embedding_renorm__tensor_tensor_double_double)
+    LOAD_SYMBOL(_lantern_embedding_sparse_backward_tensor_tensor_intt_intt_bool)
+    LOAD_SYMBOL(_lantern__embedding_bag_forward_only_tensor_tensor_tensor_bool_intt_bool_tensor_bool_intt)
+    LOAD_SYMBOL(_lantern__rowwise_prune_tensor_tensor_scalartype)
+    LOAD_SYMBOL(_lantern_row_stack_tensorlist)
+    LOAD_SYMBOL(_lantern_row_stack_out_tensor_tensorlist)
+    LOAD_SYMBOL(_lantern_embedding_bag_tensor_tensor_tensor_bool_intt_bool_tensor_bool)
+    LOAD_SYMBOL(_lantern_embedding_bag_tensor_tensor_tensor_bool_intt_bool_tensor_bool_intt)
+    LOAD_SYMBOL(_lantern__embedding_bag_tensor_tensor_tensor_bool_intt_bool_tensor_bool_intt)
+    LOAD_SYMBOL(_lantern__embedding_bag_backward_tensor_tensor_tensor_tensor_tensor_tensor_intt_bool_intt_bool_tensor_intt)
+    LOAD_SYMBOL(_lantern__embedding_bag_sparse_backward_tensor_tensor_tensor_tensor_tensor_intt_bool_intt_tensor_intt)
+    LOAD_SYMBOL(_lantern__embedding_bag_dense_backward_tensor_tensor_tensor_tensor_tensor_intt_bool_intt_tensor_intt)
+    LOAD_SYMBOL(_lantern__embedding_bag_per_sample_weights_backward_tensor_tensor_tensor_tensor_tensor_intt_intt)
+    LOAD_SYMBOL(_lantern_empty_intarrayref_dimnamelist_tensoroptions_memoryformat)
+    LOAD_SYMBOL(_lantern_empty_intarrayref_tensoroptions_memoryformat)
+    LOAD_SYMBOL(_lantern_Tensor_new_empty_tensor_intarrayref_tensoroptions)
+    LOAD_SYMBOL(_lantern_Tensor_new_empty_strided_tensor_intarrayref_intarrayref_tensoroptions)
+    LOAD_SYMBOL(_lantern_Tensor_new_full_tensor_intarrayref_scalar_tensoroptions)
+    LOAD_SYMBOL(_lantern_Tensor_new_zeros_tensor_intarrayref_tensoroptions)
+    LOAD_SYMBOL(_lantern__empty_affine_quantized_intarrayref_tensoroptions_double_intt_memoryformat)
+    LOAD_SYMBOL(_lantern__empty_per_channel_affine_quantized_intarrayref_tensor_tensor_intt_tensoroptions_memoryformat)
+    LOAD_SYMBOL(_lantern_Tensor_resize__tensor_intarrayref_memoryformat)
+    LOAD_SYMBOL(_lantern_empty_quantized_intarrayref_tensor)
+    LOAD_SYMBOL(_lantern_empty_out_tensor_intarrayref_memoryformat)
+    LOAD_SYMBOL(_lantern_empty_like_tensor_tensoroptions_memoryformat)
+    LOAD_SYMBOL(_lantern_empty_strided_intarrayref_intarrayref_tensoroptions)
+    LOAD_SYMBOL(_lantern_erf_tensor)
+    LOAD_SYMBOL(_lantern_Tensor_erf_tensor)
+    LOAD_SYMBOL(_lantern_erf__tensor)
+    LOAD_SYMBOL(_lantern_Tensor_erf__tensor)
+    LOAD_SYMBOL(_lantern_erf_out_tensor_tensor)
+    LOAD_SYMBOL(_lantern_erfc_tensor)
+    LOAD_SYMBOL(_lantern_Tensor_erfc_tensor)
+    LOAD_SYMBOL(_lantern_erfc__tensor)
+    LOAD_SYMBOL(_lantern_Tensor_erfc__tensor)
+    LOAD_SYMBOL(_lantern_erfc_out_tensor_tensor)
+    LOAD_SYMBOL(_lantern_exp_tensor)
+    LOAD_SYMBOL(_lantern_Tensor_exp_tensor)
+    LOAD_SYMBOL(_lantern_exp__tensor)
+    LOAD_SYMBOL(_lantern_Tensor_exp__tensor)
+    LOAD_SYMBOL(_lantern_exp_out_tensor_tensor)
+    LOAD_SYMBOL(_lantern_exp2_tensor)
+    LOAD_SYMBOL(_lantern_Tensor_exp2_tensor)
+    LOAD_SYMBOL(_lantern_exp2__tensor)
+    LOAD_SYMBOL(_lantern_Tensor_exp2__tensor)
+    LOAD_SYMBOL(_lantern_exp2_out_tensor_tensor)
+    LOAD_SYMBOL(_lantern_expm1_tensor)
+    LOAD_SYMBOL(_lantern_Tensor_expm1_tensor)
+    LOAD_SYMBOL(_lantern_expm1__tensor)
+    LOAD_SYMBOL(_lantern_Tensor_expm1__tensor)
+    LOAD_SYMBOL(_lantern_expm1_out_tensor_tensor)
+    LOAD_SYMBOL(_lantern_Tensor_expand_tensor_intarrayref_bool)
+    LOAD_SYMBOL(_lantern_Tensor_expand_as_tensor_tensor)
+    LOAD_SYMBOL(_lantern_eye_intt_tensoroptions)
+    LOAD_SYMBOL(_lantern_eye_intt_intt_tensoroptions)
+    LOAD_SYMBOL(_lantern_eye_out_tensor_intt)
+    LOAD_SYMBOL(_lantern_eye_out_tensor_intt_intt)
+    LOAD_SYMBOL(_lantern_flatten_tensor_intt_intt)
+    LOAD_SYMBOL(_lantern_Tensor_flatten_tensor_intt_intt)
+    LOAD_SYMBOL(_lantern_flatten_tensor_intt_intt_dimname)
+    LOAD_SYMBOL(_lantern_Tensor_flatten_tensor_intt_intt_dimname)
+    LOAD_SYMBOL(_lantern_flatten_tensor_dimname_dimname_dimname)
+    LOAD_SYMBOL(_lantern_Tensor_flatten_tensor_dimname_dimname_dimname)
+    LOAD_SYMBOL(_lantern_flatten_tensor_dimnamelist_dimname)
+    LOAD_SYMBOL(_lantern_Tensor_flatten_tensor_dimnamelist_dimname)
+    LOAD_SYMBOL(_lantern_Tensor_unflatten_tensor_intt_intarrayref_dimnamelist)
+    LOAD_SYMBOL(_lantern_Tensor_unflatten_tensor_dimname_intarrayref_dimnamelist)
+    LOAD_SYMBOL(_lantern_fill__tensor_scalar)
+    LOAD_SYMBOL(_lantern_Tensor_fill__tensor_scalar)
+    LOAD_SYMBOL(_lantern_fill__tensor_tensor)
+    LOAD_SYMBOL(_lantern_Tensor_fill__tensor_tensor)
+    LOAD_SYMBOL(_lantern_floor_tensor)
+    LOAD_SYMBOL(_lantern_Tensor_floor_tensor)
+    LOAD_SYMBOL(_lantern_floor__tensor)
+    LOAD_SYMBOL(_lantern_Tensor_floor__tensor)
+    LOAD_SYMBOL(_lantern_floor_out_tensor_tensor)
+    LOAD_SYMBOL(_lantern_floor_divide_tensor_tensor)
+    LOAD_SYMBOL(_lantern_Tensor_floor_divide_tensor_tensor)
+    LOAD_SYMBOL(_lantern_Tensor_floor_divide__tensor_tensor)
+    LOAD_SYMBOL(_lantern_floor_divide_out_tensor_tensor_tensor)
+    LOAD_SYMBOL(_lantern_floor_divide_tensor_scalar)
+    LOAD_SYMBOL(_lantern_Tensor_floor_divide_tensor_scalar)
+    LOAD_SYMBOL(_lantern_Tensor_floor_divide__tensor_scalar)
+    LOAD_SYMBOL(_lantern_frac_tensor)
+    LOAD_SYMBOL(_lantern_Tensor_frac_tensor)
+    LOAD_SYMBOL(_lantern_frac__tensor)
+    LOAD_SYMBOL(_lantern_Tensor_frac__tensor)
+    LOAD_SYMBOL(_lantern_frac_out_tensor_tensor)
+    LOAD_SYMBOL(_lantern_full_intarrayref_scalar_dimnamelist_tensoroptions)
+    LOAD_SYMBOL(_lantern_full_intarrayref_scalar_tensoroptions)
+    LOAD_SYMBOL(_lantern_full_out_tensor_intarrayref_scalar)
+    LOAD_SYMBOL(_lantern_full_like_tensor_scalar_tensoroptions_memoryformat)
+    LOAD_SYMBOL(_lantern_from_file_stdstring_bool_intt_tensoroptions)
+    LOAD_SYMBOL(_lantern_gcd_out_tensor_tensor_tensor)
+    LOAD_SYMBOL(_lantern_gcd_tensor_tensor)
+    LOAD_SYMBOL(_lantern_Tensor_gcd_tensor_tensor)
+    LOAD_SYMBOL(_lantern_gcd__tensor_tensor)
+    LOAD_SYMBOL(_lantern_Tensor_gcd__tensor_tensor)
+    LOAD_SYMBOL(_lantern_lcm_out_tensor_tensor_tensor)
+    LOAD_SYMBOL(_lantern_lcm_tensor_tensor)
+    LOAD_SYMBOL(_lantern_Tensor_lcm_tensor_tensor)
+    LOAD_SYMBOL(_lantern_lcm__tensor_tensor)
+    LOAD_SYMBOL(_lantern_Tensor_lcm__tensor_tensor)
+    LOAD_SYMBOL(_lantern_grid_sampler_tensor_tensor_intt_intt_bool)
+    LOAD_SYMBOL(_lantern_grid_sampler_2d_tensor_tensor_intt_intt_bool)
+    LOAD_SYMBOL(_lantern_grid_sampler_2d_backward_tensor_tensor_tensor_intt_intt_bool)
+    LOAD_SYMBOL(_lantern__grid_sampler_2d_cpu_fallback_tensor_tensor_intt_intt_bool)
+    LOAD_SYMBOL(_lantern__grid_sampler_2d_cpu_fallback_backward_tensor_tensor_tensor_intt_intt_bool)
+    LOAD_SYMBOL(_lantern_grid_sampler_3d_tensor_tensor_intt_intt_bool)
+    LOAD_SYMBOL(_lantern_grid_sampler_3d_backward_tensor_tensor_tensor_intt_intt_bool)
+    LOAD_SYMBOL(_lantern_hann_window_intt_tensoroptions)
+    LOAD_SYMBOL(_lantern_hann_window_intt_bool_tensoroptions)
+    LOAD_SYMBOL(_lantern_hamming_window_intt_tensoroptions)
+    LOAD_SYMBOL(_lantern_hamming_window_intt_bool_tensoroptions)
+    LOAD_SYMBOL(_lantern_hamming_window_intt_bool_double_tensoroptions)
+    LOAD_SYMBOL(_lantern_hamming_window_intt_bool_double_double_tensoroptions)
+    LOAD_SYMBOL(_lantern_kaiser_window_intt_tensoroptions)
+    LOAD_SYMBOL(_lantern_kaiser_window_intt_bool_tensoroptions)
+    LOAD_SYMBOL(_lantern_kaiser_window_intt_bool_double_tensoroptions)
+    LOAD_SYMBOL(_lantern_hinge_embedding_loss_tensor_tensor_double_intt)
+    LOAD_SYMBOL(_lantern_group_norm_tensor_intt_tensor_tensor_double_bool)
+    LOAD_SYMBOL(_lantern_native_group_norm_tensor_tensor_tensor_intt_intt_intt_intt_double)
+    LOAD_SYMBOL(_lantern_native_group_norm_backward_tensor_tensor_tensor_tensor_tensor_intt_intt_intt_intt_stdarraybool)
+    LOAD_SYMBOL(_lantern__fft_r2c_tensor_intarrayref_intt_bool)
+    LOAD_SYMBOL(_lantern__fft_r2c_out_tensor_tensor_intarrayref_intt_bool)
+    LOAD_SYMBOL(_lantern__fft_c2r_tensor_intarrayref_intt_intt)
+    LOAD_SYMBOL(_lantern__fft_c2r_out_tensor_tensor_intarrayref_intt_intt)
+    LOAD_SYMBOL(_lantern__fft_c2c_tensor_intarrayref_intt_bool)
+    LOAD_SYMBOL(_lantern__fft_c2c_out_tensor_tensor_intarrayref_intt_bool)
+    LOAD_SYMBOL(_lantern__cufft_get_plan_cache_size_intt)
+    LOAD_SYMBOL(_lantern__cufft_get_plan_cache_max_size_intt)
+    LOAD_SYMBOL(_lantern__cufft_set_plan_cache_max_size_intt_intt)
+    LOAD_SYMBOL(_lantern__cufft_clear_plan_cache_intt)
+    LOAD_SYMBOL(_lantern_index_tensor_constclistcoptionaltensor)
+    LOAD_SYMBOL(_lantern_Tensor_index_tensor_constclistcoptionaltensor)
+    LOAD_SYMBOL(_lantern_Tensor_index_copy__tensor_intt_tensor_tensor)
+    LOAD_SYMBOL(_lantern_index_copy_tensor_intt_tensor_tensor)
+    LOAD_SYMBOL(_lantern_Tensor_index_copy_tensor_intt_tensor_tensor)
+    LOAD_SYMBOL(_lantern_Tensor_index_copy__tensor_dimname_tensor_tensor)
+    LOAD_SYMBOL(_lantern_index_copy_tensor_dimname_tensor_tensor)
+    LOAD_SYMBOL(_lantern_Tensor_index_copy_tensor_dimname_tensor_tensor)
+    LOAD_SYMBOL(_lantern_index_put__tensor_constclistcoptionaltensor_tensor_bool)
+    LOAD_SYMBOL(_lantern_Tensor_index_put__tensor_constclistcoptionaltensor_tensor_bool)
+    LOAD_SYMBOL(_lantern_index_put_tensor_constclistcoptionaltensor_tensor_bool)
+    LOAD_SYMBOL(_lantern_Tensor_index_put_tensor_constclistcoptionaltensor_tensor_bool)
+    LOAD_SYMBOL(_lantern__index_put_impl__tensor_constclistcoptionaltensor_tensor_bool_bool)
+    LOAD_SYMBOL(_lantern_instance_norm_tensor_tensor_tensor_tensor_tensor_bool_double_double_bool)
+    LOAD_SYMBOL(_lantern_inverse_tensor)
+    LOAD_SYMBOL(_lantern_Tensor_inverse_tensor)
+    LOAD_SYMBOL(_lantern_inverse_out_tensor_tensor)
+    LOAD_SYMBOL(_lantern__inverse_helper_tensor)
+    LOAD_SYMBOL(_lantern_isclose_tensor_tensor_double_double_bool)
+    LOAD_SYMBOL(_lantern_Tensor_isclose_tensor_tensor_double_double_bool)
+    LOAD_SYMBOL(_lantern_isnan_tensor)
+    LOAD_SYMBOL(_lantern_Tensor_isnan_tensor)
+    LOAD_SYMBOL(_lantern_is_distributed_tensor)
+    LOAD_SYMBOL(_lantern_Tensor_is_distributed_tensor)
+    LOAD_SYMBOL(_lantern_is_floating_point_tensor)
+    LOAD_SYMBOL(_lantern_Tensor_is_floating_point_tensor)
+    LOAD_SYMBOL(_lantern_is_complex_tensor)
+    LOAD_SYMBOL(_lantern_Tensor_is_complex_tensor)
+    LOAD_SYMBOL(_lantern_isreal_tensor)
+    LOAD_SYMBOL(_lantern_Tensor_isreal_tensor)
+    LOAD_SYMBOL(_lantern_is_nonzero_tensor)
+    LOAD_SYMBOL(_lantern_Tensor_is_nonzero_tensor)
+    LOAD_SYMBOL(_lantern_is_same_size_tensor_tensor)
+    LOAD_SYMBOL(_lantern_Tensor_is_same_size_tensor_tensor)
+    LOAD_SYMBOL(_lantern_is_signed_tensor)
+    LOAD_SYMBOL(_lantern_Tensor_is_signed_tensor)
+    LOAD_SYMBOL(_lantern_kl_div_tensor_tensor_intt_bool)
+    LOAD_SYMBOL(_lantern_kl_div_backward_tensor_tensor_tensor_intt_bool)
+    LOAD_SYMBOL(_lantern_kron_tensor_tensor)
+    LOAD_SYMBOL(_lantern_Tensor_kron_tensor_tensor)
+    LOAD_SYMBOL(_lantern_kron_out_tensor_tensor_tensor)
+    LOAD_SYMBOL(_lantern_kthvalue_tensor_intt_intt_bool)
+    LOAD_SYMBOL(_lantern_Tensor_kthvalue_tensor_intt_intt_bool)
+    LOAD_SYMBOL(_lantern_kthvalue_out_tensor_tensor_tensor_intt_intt_bool)
+    LOAD_SYMBOL(_lantern_kthvalue_tensor_intt_dimname_bool)
+    LOAD_SYMBOL(_lantern_Tensor_kthvalue_tensor_intt_dimname_bool)
+    LOAD_SYMBOL(_lantern_kthvalue_out_tensor_tensor_tensor_intt_dimname_bool)
+    LOAD_SYMBOL(_lantern_layer_norm_tensor_intarrayref_tensor_tensor_double_bool)
+    LOAD_SYMBOL(_lantern_native_layer_norm_tensor_intarrayref_tensor_tensor_double)
+    LOAD_SYMBOL(_lantern_native_layer_norm_backward_tensor_tensor_intarrayref_tensor_tensor_tensor_tensor_stdarraybool)
+    LOAD_SYMBOL(_lantern_nan_to_num_tensor_double_double_double)
+    LOAD_SYMBOL(_lantern_Tensor_nan_to_num_tensor_double_double_double)
+    LOAD_SYMBOL(_lantern_nan_to_num__tensor_double_double_double)
+    LOAD_SYMBOL(_lantern_Tensor_nan_to_num__tensor_double_double_double)
+    LOAD_SYMBOL(_lantern_nan_to_num_out_tensor_tensor_double_double_double)
+    LOAD_SYMBOL(_lantern_linear_tensor_tensor_tensor)
+    LOAD_SYMBOL(_lantern_mkldnn_linear_tensor_tensor_tensor)
+    LOAD_SYMBOL(_lantern_mkldnn_linear_backward_input_intarrayref_tensor_tensor)
+    LOAD_SYMBOL(_lantern_mkldnn_linear_backward_weights_tensor_tensor_tensor_bool)
+    LOAD_SYMBOL(_lantern_mkldnn_linear_backward_tensor_tensor_tensor_stdarraybool)
+    LOAD_SYMBOL(_lantern_fbgemm_linear_int8_weight_fp32_activation_tensor_tensor_tensor_tensor_scalar_scalar_tensor)
+    LOAD_SYMBOL(_lantern_fbgemm_linear_int8_weight_tensor_tensor_tensor_tensor_scalar_scalar_tensor)
+    LOAD_SYMBOL(_lantern_fbgemm_linear_quantize_weight_tensor)
+    LOAD_SYMBOL(_lantern_fbgemm_pack_gemm_matrix_fp16_tensor)
+    LOAD_SYMBOL(_lantern_fbgemm_linear_fp16_weight_fp32_activation_tensor_tensor_tensor)
+    LOAD_SYMBOL(_lantern_fbgemm_linear_fp16_weight_tensor_tensor_tensor)
+    LOAD_SYMBOL(_lantern_fbgemm_pack_quantized_matrix_tensor)
+    LOAD_SYMBOL(_lantern_fbgemm_pack_quantized_matrix_tensor_intt_intt)
+    LOAD_SYMBOL(_lantern_ldexp_tensor_tensor)
+    LOAD_SYMBOL(_lantern_Tensor_ldexp_tensor_tensor)
+    LOAD_SYMBOL(_lantern_ldexp__tensor_tensor)
+    LOAD_SYMBOL(_lantern_Tensor_ldexp__tensor_tensor)
+    LOAD_SYMBOL(_lantern_ldexp_out_tensor_tensor_tensor)
+    LOAD_SYMBOL(_lantern_linspace_scalar_scalar_intt_tensoroptions)
+    LOAD_SYMBOL(_lantern_linspace_out_tensor_scalar_scalar_intt)
+    LOAD_SYMBOL(_lantern_log_tensor)
+    LOAD_SYMBOL(_lantern_Tensor_log_tensor)
+    LOAD_SYMBOL(_lantern_log__tensor)
+    LOAD_SYMBOL(_lantern_Tensor_log__tensor)
+    LOAD_SYMBOL(_lantern_log_out_tensor_tensor)
+    LOAD_SYMBOL(_lantern_log10_tensor)
+    LOAD_SYMBOL(_lantern_Tensor_log10_tensor)
+    LOAD_SYMBOL(_lantern_log10__tensor)
+    LOAD_SYMBOL(_lantern_Tensor_log10__tensor)
+    LOAD_SYMBOL(_lantern_log10_out_tensor_tensor)
+    LOAD_SYMBOL(_lantern_log1p_tensor)
+    LOAD_SYMBOL(_lantern_Tensor_log1p_tensor)
+    LOAD_SYMBOL(_lantern_log1p__tensor)
+    LOAD_SYMBOL(_lantern_Tensor_log1p__tensor)
+    LOAD_SYMBOL(_lantern_log1p_out_tensor_tensor)
+    LOAD_SYMBOL(_lantern_log2_tensor)
+    LOAD_SYMBOL(_lantern_Tensor_log2_tensor)
+    LOAD_SYMBOL(_lantern_log2__tensor)
+    LOAD_SYMBOL(_lantern_Tensor_log2__tensor)
+    LOAD_SYMBOL(_lantern_log2_out_tensor_tensor)
+    LOAD_SYMBOL(_lantern_logaddexp_out_tensor_tensor_tensor)
+    LOAD_SYMBOL(_lantern_logaddexp_tensor_tensor)
+    LOAD_SYMBOL(_lantern_Tensor_logaddexp_tensor_tensor)
+    LOAD_SYMBOL(_lantern_logaddexp2_out_tensor_tensor_tensor)
+    LOAD_SYMBOL(_lantern_logaddexp2_tensor_tensor)
+    LOAD_SYMBOL(_lantern_Tensor_logaddexp2_tensor_tensor)
+    LOAD_SYMBOL(_lantern_xlogy_tensor_tensor)
+    LOAD_SYMBOL(_lantern_Tensor_xlogy_tensor_tensor)
+    LOAD_SYMBOL(_lantern_xlogy_scalar_tensor)
+    LOAD_SYMBOL(_lantern_xlogy_tensor_scalar)
+    LOAD_SYMBOL(_lantern_Tensor_xlogy_tensor_scalar)
+    LOAD_SYMBOL(_lantern_xlogy__tensor_tensor)
+    LOAD_SYMBOL(_lantern_Tensor_xlogy__tensor_tensor)
+    LOAD_SYMBOL(_lantern_xlogy__tensor_scalar)
+    LOAD_SYMBOL(_lantern_Tensor_xlogy__tensor_scalar)
+    LOAD_SYMBOL(_lantern_xlogy_out_tensor_tensor_tensor)
+    LOAD_SYMBOL(_lantern_xlogy_out_tensor_scalar_tensor)
+    LOAD_SYMBOL(_lantern_xlogy_out_tensor_tensor_scalar)
+    LOAD_SYMBOL(_lantern_logdet_tensor)
+    LOAD_SYMBOL(_lantern_Tensor_logdet_tensor)
+    LOAD_SYMBOL(_lantern_logspace_scalar_scalar_intt_double_tensoroptions)
+    LOAD_SYMBOL(_lantern_logspace_out_tensor_scalar_scalar_intt_double)
+    LOAD_SYMBOL(_lantern_log_softmax_tensor_intt_scalartype)
+    LOAD_SYMBOL(_lantern_Tensor_log_softmax_tensor_intt_scalartype)
+    LOAD_SYMBOL(_lantern_log_softmax_tensor_dimname_scalartype)
+    LOAD_SYMBOL(_lantern_Tensor_log_softmax_tensor_dimname_scalartype)
+    LOAD_SYMBOL(_lantern__log_softmax_tensor_intt_bool)
+    LOAD_SYMBOL(_lantern__log_softmax_backward_data_tensor_tensor_intt_tensor)
+    LOAD_SYMBOL(_lantern__logcumsumexp_tensor_intt)
+    LOAD_SYMBOL(_lantern__logcumsumexp_out_tensor_tensor_intt)
+    LOAD_SYMBOL(_lantern_logcumsumexp_tensor_intt)
+    LOAD_SYMBOL(_lantern_Tensor_logcumsumexp_tensor_intt)
+    LOAD_SYMBOL(_lantern_logcumsumexp_out_tensor_tensor_intt)
+    LOAD_SYMBOL(_lantern_logcumsumexp_tensor_dimname)
+    LOAD_SYMBOL(_lantern_Tensor_logcumsumexp_tensor_dimname)
+    LOAD_SYMBOL(_lantern_logcumsumexp_out_tensor_tensor_dimname)
+    LOAD_SYMBOL(_lantern_logsumexp_tensor_intarrayref_bool)
+    LOAD_SYMBOL(_lantern_Tensor_logsumexp_tensor_intarrayref_bool)
+    LOAD_SYMBOL(_lantern_logsumexp_out_tensor_tensor_intarrayref_bool)
+    LOAD_SYMBOL(_lantern_logsumexp_tensor_dimnamelist_bool)
+    LOAD_SYMBOL(_lantern_Tensor_logsumexp_tensor_dimnamelist_bool)
+    LOAD_SYMBOL(_lantern_logsumexp_out_tensor_tensor_dimnamelist_bool)
+    LOAD_SYMBOL(_lantern_margin_ranking_loss_tensor_tensor_tensor_double_intt)
+    LOAD_SYMBOL(_lantern_matmul_tensor_tensor)
+    LOAD_SYMBOL(_lantern_Tensor_matmul_tensor_tensor)
+    LOAD_SYMBOL(_lantern_matmul_out_tensor_tensor_tensor)
+    LOAD_SYMBOL(_lantern_matrix_rank_tensor_double_bool)
+    LOAD_SYMBOL(_lantern_matrix_rank_tensor_bool)
+    LOAD_SYMBOL(_lantern_matrix_power_tensor_intt)
+    LOAD_SYMBOL(_lantern_Tensor_matrix_power_tensor_intt)
+    LOAD_SYMBOL(_lantern_matrix_power_out_tensor_tensor_intt)
+    LOAD_SYMBOL(_lantern_matrix_exp_tensor)
+    LOAD_SYMBOL(_lantern_Tensor_matrix_exp_tensor)
+    LOAD_SYMBOL(_lantern_matrix_exp_backward_tensor_tensor)
+    LOAD_SYMBOL(_lantern__aminmax_tensor)
+    LOAD_SYMBOL(_lantern__aminmax_tensor_intt_bool)
+    LOAD_SYMBOL(_lantern__compute_linear_combination_tensor_tensor)
+    LOAD_SYMBOL(_lantern__compute_linear_combination_out_tensor_tensor_tensor)
+    LOAD_SYMBOL(_lantern_max_tensor_intt_bool)
+    LOAD_SYMBOL(_lantern_Tensor_max_tensor_intt_bool)
+    LOAD_SYMBOL(_lantern_max_out_tensor_tensor_tensor_intt_bool)
+    LOAD_SYMBOL(_lantern_max_tensor_dimname_bool)
+    LOAD_SYMBOL(_lantern_Tensor_max_tensor_dimname_bool)
+    LOAD_SYMBOL(_lantern_max_out_tensor_tensor_tensor_dimname_bool)
+    LOAD_SYMBOL(_lantern_value_selecting_reduction_backward_tensor_intt_tensor_intarrayref_bool)
+    LOAD_SYMBOL(_lantern_amax_tensor_intarrayref_bool)
+    LOAD_SYMBOL(_lantern_Tensor_amax_tensor_intarrayref_bool)
+    LOAD_SYMBOL(_lantern_amax_out_tensor_tensor_intarrayref_bool)
+    LOAD_SYMBOL(_lantern_max_pool1d_with_indices_tensor_intarrayref_intarrayref_intarrayref_intarrayref_bool)
+    LOAD_SYMBOL(_lantern_max_pool1d_tensor_intarrayref_intarrayref_intarrayref_intarrayref_bool)
+    LOAD_SYMBOL(_lantern_max_pool2d_tensor_intarrayref_intarrayref_intarrayref_intarrayref_bool)
+    LOAD_SYMBOL(_lantern_mkldnn_max_pool2d_tensor_intarrayref_intarrayref_intarrayref_intarrayref_bool)
+    LOAD_SYMBOL(_lantern_mkldnn_max_pool2d_backward_tensor_tensor_tensor_intarrayref_intarrayref_intarrayref_intarrayref_bool)
+    LOAD_SYMBOL(_lantern_mkldnn_max_pool3d_tensor_intarrayref_intarrayref_intarrayref_intarrayref_bool)
+    LOAD_SYMBOL(_lantern_mkldnn_max_pool3d_backward_tensor_tensor_tensor_intarrayref_intarrayref_intarrayref_intarrayref_bool)
+    LOAD_SYMBOL(_lantern_quantized_max_pool1d_tensor_intarrayref_intarrayref_intarrayref_intarrayref_bool)
+    LOAD_SYMBOL(_lantern_quantized_max_pool2d_tensor_intarrayref_intarrayref_intarrayref_intarrayref_bool)
+    LOAD_SYMBOL(_lantern_max_pool3d_tensor_intarrayref_intarrayref_intarrayref_intarrayref_bool)
+    LOAD_SYMBOL(_lantern_mean_tensor_scalartype)
+    LOAD_SYMBOL(_lantern_Tensor_mean_tensor_scalartype)
+    LOAD_SYMBOL(_lantern_mean_tensor_intarrayref_bool_scalartype)
+    LOAD_SYMBOL(_lantern_Tensor_mean_tensor_intarrayref_bool_scalartype)
+    LOAD_SYMBOL(_lantern_mean_out_tensor_tensor_intarrayref_bool_scalartype)
+    LOAD_SYMBOL(_lantern_mean_tensor_dimnamelist_bool_scalartype)
+    LOAD_SYMBOL(_lantern_Tensor_mean_tensor_dimnamelist_bool_scalartype)
+    LOAD_SYMBOL(_lantern_mean_out_tensor_tensor_dimnamelist_bool_scalartype)
+    LOAD_SYMBOL(_lantern_median_tensor)
+    LOAD_SYMBOL(_lantern_Tensor_median_tensor)
+    LOAD_SYMBOL(_lantern_median_tensor_intt_bool)
+    LOAD_SYMBOL(_lantern_Tensor_median_tensor_intt_bool)
+    LOAD_SYMBOL(_lantern_median_out_tensor_tensor_tensor_intt_bool)
+    LOAD_SYMBOL(_lantern_median_tensor_dimname_bool)
+    LOAD_SYMBOL(_lantern_Tensor_median_tensor_dimname_bool)
+    LOAD_SYMBOL(_lantern_median_out_tensor_tensor_tensor_dimname_bool)
+    LOAD_SYMBOL(_lantern_nanmedian_tensor)
+    LOAD_SYMBOL(_lantern_Tensor_nanmedian_tensor)
+    LOAD_SYMBOL(_lantern_nanmedian_tensor_intt_bool)
+    LOAD_SYMBOL(_lantern_Tensor_nanmedian_tensor_intt_bool)
+    LOAD_SYMBOL(_lantern_nanmedian_out_tensor_tensor_tensor_intt_bool)
+    LOAD_SYMBOL(_lantern_nanmedian_tensor_dimname_bool)
+    LOAD_SYMBOL(_lantern_Tensor_nanmedian_tensor_dimname_bool)
+    LOAD_SYMBOL(_lantern_nanmedian_out_tensor_tensor_tensor_dimname_bool)
+    LOAD_SYMBOL(_lantern_min_tensor_intt_bool)
+    LOAD_SYMBOL(_lantern_Tensor_min_tensor_intt_bool)
+    LOAD_SYMBOL(_lantern_min_out_tensor_tensor_tensor_intt_bool)
+    LOAD_SYMBOL(_lantern_min_tensor_dimname_bool)
+    LOAD_SYMBOL(_lantern_Tensor_min_tensor_dimname_bool)
+    LOAD_SYMBOL(_lantern_min_out_tensor_tensor_tensor_dimname_bool)
+    LOAD_SYMBOL(_lantern_amin_tensor_intarrayref_bool)
+    LOAD_SYMBOL(_lantern_Tensor_amin_tensor_intarrayref_bool)
+    LOAD_SYMBOL(_lantern_amin_out_tensor_tensor_intarrayref_bool)
+    LOAD_SYMBOL(_lantern_mkldnn_convolution_tensor_tensor_tensor_intarrayref_intarrayref_intarrayref_intt)
+    LOAD_SYMBOL(_lantern_mkldnn_convolution_backward_input_intarrayref_tensor_tensor_intarrayref_intarrayref_intarrayref_intt_bool)
+    LOAD_SYMBOL(_lantern_mkldnn_convolution_backward_weights_intarrayref_tensor_tensor_intarrayref_intarrayref_intarrayref_intt_bool)
+    LOAD_SYMBOL(_lantern_mkldnn_convolution_backward_tensor_tensor_tensor_intarrayref_intarrayref_intarrayref_intt_stdarraybool)
+    LOAD_SYMBOL(_lantern_miopen_batch_norm_tensor_tensor_tensor_tensor_tensor_bool_double_double)
+    LOAD_SYMBOL(_lantern_miopen_batch_norm_backward_tensor_tensor_tensor_tensor_tensor_tensor_tensor_double)
+    LOAD_SYMBOL(_lantern_miopen_convolution_tensor_tensor_tensor_intarrayref_intarrayref_intarrayref_intt_bool_bool)
+    LOAD_SYMBOL(_lantern_miopen_convolution_backward_input_intarrayref_tensor_tensor_intarrayref_intarrayref_intarrayref_intt_bool_bool)
+    LOAD_SYMBOL(_lantern_miopen_convolution_backward_tensor_tensor_tensor_intarrayref_intarrayref_intarrayref_intt_bool_bool_stdarraybool)
+    LOAD_SYMBOL(_lantern_miopen_convolution_backward_bias_tensor)
+    LOAD_SYMBOL(_lantern_miopen_convolution_backward_weight_intarrayref_tensor_tensor_intarrayref_intarrayref_intarrayref_intt_bool_bool)
+    LOAD_SYMBOL(_lantern_miopen_convolution_transpose_tensor_tensor_tensor_intarrayref_intarrayref_intarrayref_intarrayref_intt_bool_bool)
+    LOAD_SYMBOL(_lantern_miopen_convolution_transpose_backward_tensor_tensor_tensor_intarrayref_intarrayref_intarrayref_intarrayref_intt_bool_bool_stdarraybool)
+    LOAD_SYMBOL(_lantern_miopen_convolution_transpose_backward_input_tensor_tensor_intarrayref_intarrayref_intarrayref_intt_bool_bool)
+    LOAD_SYMBOL(_lantern_miopen_convolution_transpose_backward_weight_intarrayref_tensor_tensor_intarrayref_intarrayref_intarrayref_intt_bool_bool)
+    LOAD_SYMBOL(_lantern_miopen_depthwise_convolution_tensor_tensor_tensor_intarrayref_intarrayref_intarrayref_intt_bool_bool)
+    LOAD_SYMBOL(_lantern_miopen_depthwise_convolution_backward_input_intarrayref_tensor_tensor_intarrayref_intarrayref_intarrayref_intt_bool_bool)
+    LOAD_SYMBOL(_lantern_miopen_depthwise_convolution_backward_tensor_tensor_tensor_intarrayref_intarrayref_intarrayref_intt_bool_bool_stdarraybool)
+    LOAD_SYMBOL(_lantern_miopen_depthwise_convolution_backward_weight_intarrayref_tensor_tensor_intarrayref_intarrayref_intarrayref_intt_bool_bool)
+    LOAD_SYMBOL(_lantern_miopen_rnn_tensor_tensorlist_intt_tensor_tensor_intt_intt_intt_bool_double_bool_bool_intarrayref_tensor)
+    LOAD_SYMBOL(_lantern_miopen_rnn_backward_tensor_tensorlist_intt_tensor_tensor_tensor_tensor_tensor_tensor_tensor_intt_intt_intt_bool_double_bool_bool_intarrayref_tensor_tensor_stdarraybool)
+    LOAD_SYMBOL(_lantern_mm_tensor_tensor)
+    LOAD_SYMBOL(_lantern_Tensor_mm_tensor_tensor)
+    LOAD_SYMBOL(_lantern_mm_out_tensor_tensor_tensor)
+    LOAD_SYMBOL(_lantern__sparse_mm_tensor_tensor)
+    LOAD_SYMBOL(_lantern__sparse_sparse_matmul_tensor_tensor)
+    LOAD_SYMBOL(_lantern__sparse_mask_helper_tensor_tensor)
+    LOAD_SYMBOL(_lantern_mode_tensor_intt_bool)
+    LOAD_SYMBOL(_lantern_Tensor_mode_tensor_intt_bool)
+    LOAD_SYMBOL(_lantern_mode_out_tensor_tensor_tensor_intt_bool)
+    LOAD_SYMBOL(_lantern_mode_tensor_dimname_bool)
+    LOAD_SYMBOL(_lantern_Tensor_mode_tensor_dimname_bool)
+    LOAD_SYMBOL(_lantern_mode_out_tensor_tensor_tensor_dimname_bool)
+    LOAD_SYMBOL(_lantern_mul_tensor_tensor)
+    LOAD_SYMBOL(_lantern_Tensor_mul_tensor_tensor)
+    LOAD_SYMBOL(_lantern_Tensor_mul__tensor_tensor)
+    LOAD_SYMBOL(_lantern_mul_out_tensor_tensor_tensor)
+    LOAD_SYMBOL(_lantern_mul_tensor_scalar)
+    LOAD_SYMBOL(_lantern_Tensor_mul_tensor_scalar)
+    LOAD_SYMBOL(_lantern_Tensor_mul__tensor_scalar)
+    LOAD_SYMBOL(_lantern_multiply_tensor_tensor)
+    LOAD_SYMBOL(_lantern_Tensor_multiply_tensor_tensor)
+    LOAD_SYMBOL(_lantern_Tensor_multiply__tensor_tensor)
+    LOAD_SYMBOL(_lantern_multiply_out_tensor_tensor_tensor)
+    LOAD_SYMBOL(_lantern_multiply_tensor_scalar)
+    LOAD_SYMBOL(_lantern_Tensor_multiply_tensor_scalar)
+    LOAD_SYMBOL(_lantern_Tensor_multiply__tensor_scalar)
+    LOAD_SYMBOL(_lantern_mv_tensor_tensor)
+    LOAD_SYMBOL(_lantern_Tensor_mv_tensor_tensor)
+    LOAD_SYMBOL(_lantern_mv_out_tensor_tensor_tensor)
+    LOAD_SYMBOL(_lantern_mvlgamma_tensor_intt)
+    LOAD_SYMBOL(_lantern_Tensor_mvlgamma_tensor_intt)
+    LOAD_SYMBOL(_lantern_Tensor_mvlgamma__tensor_intt)
+    LOAD_SYMBOL(_lantern_narrow_copy_tensor_intt_intt_intt)
+    LOAD_SYMBOL(_lantern_Tensor_narrow_copy_tensor_intt_intt_intt)
+    LOAD_SYMBOL(_lantern_narrow_copy_out_tensor_tensor_intt_intt_intt)
+    LOAD_SYMBOL(_lantern_narrow_tensor_intt_intt_intt)
+    LOAD_SYMBOL(_lantern_Tensor_narrow_tensor_intt_intt_intt)
+    LOAD_SYMBOL(_lantern_narrow_tensor_intt_tensor_intt)
+    LOAD_SYMBOL(_lantern_Tensor_narrow_tensor_intt_tensor_intt)
+    LOAD_SYMBOL(_lantern_native_batch_norm_tensor_tensor_tensor_tensor_tensor_bool_double_double)
+    LOAD_SYMBOL(_lantern_native_batch_norm_out_tensor_tensor_tensor_tensor_tensor_tensor_tensor_tensor_bool_double_double)
+    LOAD_SYMBOL(_lantern_batch_norm_stats_tensor_double)
+    LOAD_SYMBOL(_lantern_batch_norm_elemt_tensor_tensor_tensor_tensor_tensor_double)
+    LOAD_SYMBOL(_lantern_batch_norm_elemt_out_tensor_tensor_tensor_tensor_tensor_tensor_double)
+    LOAD_SYMBOL(_lantern_batch_norm_gather_stats_tensor_tensor_tensor_tensor_tensor_double_double_intt)
+    LOAD_SYMBOL(_lantern_batch_norm_gather_stats_with_counts_tensor_tensor_tensor_tensor_tensor_double_double_tensor)
+    LOAD_SYMBOL(_lantern_native_batch_norm_backward_tensor_tensor_tensor_tensor_tensor_tensor_tensor_bool_double_stdarraybool)
+    LOAD_SYMBOL(_lantern_batch_norm_backward_reduce_tensor_tensor_tensor_tensor_tensor_bool_bool_bool)
+    LOAD_SYMBOL(_lantern_batch_norm_backward_elemt_tensor_tensor_tensor_tensor_tensor_tensor_tensor_tensor)
+    LOAD_SYMBOL(_lantern_batch_norm_update_stats_tensor_tensor_tensor_double)
+    LOAD_SYMBOL(_lantern_is_vulkan_available)
+    LOAD_SYMBOL(_lantern__nnpack_available)
+    LOAD_SYMBOL(_lantern__nnpack_spatial_convolution_tensor_tensor_tensor_intarrayref_intarrayref)
+    LOAD_SYMBOL(_lantern__nnpack_spatial_convolution_backward_tensor_tensor_tensor_intarrayref_stdarraybool)
+    LOAD_SYMBOL(_lantern__nnpack_spatial_convolution_backward_input_tensor_tensor_tensor_intarrayref)
+    LOAD_SYMBOL(_lantern__nnpack_spatial_convolution_backward_weight_tensor_intarrayref_tensor_intarrayref)
+    LOAD_SYMBOL(_lantern_ones_intarrayref_dimnamelist_tensoroptions)
+    LOAD_SYMBOL(_lantern_ones_intarrayref_tensoroptions)
+    LOAD_SYMBOL(_lantern_ones_out_tensor_intarrayref)
+    LOAD_SYMBOL(_lantern_ones_like_tensor_tensoroptions_memoryformat)
+    LOAD_SYMBOL(_lantern_pairwise_distance_tensor_tensor_double_double_bool)
+    LOAD_SYMBOL(_lantern_cdist_tensor_tensor_double_intt)
+    LOAD_SYMBOL(_lantern__euclidean_dist_tensor_tensor)
+    LOAD_SYMBOL(_lantern__cdist_forward_tensor_tensor_double_intt)
+    LOAD_SYMBOL(_lantern__cdist_backward_tensor_tensor_tensor_double_tensor)
+    LOAD_SYMBOL(_lantern_pdist_tensor_double)
+    LOAD_SYMBOL(_lantern__pdist_forward_tensor_double)
+    LOAD_SYMBOL(_lantern__pdist_backward_tensor_tensor_double_tensor)
+    LOAD_SYMBOL(_lantern_cosine_similarity_tensor_tensor_intt_double)
+    LOAD_SYMBOL(_lantern_permute_tensor_intarrayref)
+    LOAD_SYMBOL(_lantern_Tensor_permute_tensor_intarrayref)
+    LOAD_SYMBOL(_lantern_movedim_tensor_intarrayref_intarrayref)
+    LOAD_SYMBOL(_lantern_Tensor_movedim_tensor_intarrayref_intarrayref)
+    LOAD_SYMBOL(_lantern_movedim_tensor_intt_intt)
+    LOAD_SYMBOL(_lantern_Tensor_movedim_tensor_intt_intt)
+    LOAD_SYMBOL(_lantern_moveaxis_tensor_intarrayref_intarrayref)
+    LOAD_SYMBOL(_lantern_Tensor_moveaxis_tensor_intarrayref_intarrayref)
+    LOAD_SYMBOL(_lantern_moveaxis_tensor_intt_intt)
+    LOAD_SYMBOL(_lantern_Tensor_moveaxis_tensor_intt_intt)
+    LOAD_SYMBOL(_lantern_Tensor_numpy_t_tensor)
+    LOAD_SYMBOL(_lantern_pixel_shuffle_tensor_intt)
+    LOAD_SYMBOL(_lantern_pixel_unshuffle_tensor_intt)
+    LOAD_SYMBOL(_lantern_channel_shuffle_tensor_intt)
+    LOAD_SYMBOL(_lantern_Tensor_is_pinned_tensor)
+    LOAD_SYMBOL(_lantern_Tensor_pin_memory_tensor)
+    LOAD_SYMBOL(_lantern_pinverse_tensor_double)
+    LOAD_SYMBOL(_lantern_Tensor_pinverse_tensor_double)
+    LOAD_SYMBOL(_lantern_poisson_nll_loss_tensor_tensor_bool_bool_double_intt)
+    LOAD_SYMBOL(_lantern_rad2deg_tensor)
+    LOAD_SYMBOL(_lantern_Tensor_rad2deg_tensor)
+    LOAD_SYMBOL(_lantern_rad2deg__tensor)
+    LOAD_SYMBOL(_lantern_Tensor_rad2deg__tensor)
+    LOAD_SYMBOL(_lantern_rad2deg_out_tensor_tensor)
+    LOAD_SYMBOL(_lantern_deg2rad_tensor)
+    LOAD_SYMBOL(_lantern_Tensor_deg2rad_tensor)
+    LOAD_SYMBOL(_lantern_deg2rad__tensor)
+    LOAD_SYMBOL(_lantern_Tensor_deg2rad__tensor)
+    LOAD_SYMBOL(_lantern_deg2rad_out_tensor_tensor)
+    LOAD_SYMBOL(_lantern_scalar_tensor_scalar_tensoroptions)
+    LOAD_SYMBOL(_lantern_rand_intarrayref_dimnamelist_tensoroptions)
+    LOAD_SYMBOL(_lantern_rand_intarrayref_generator_dimnamelist_tensoroptions)
+    LOAD_SYMBOL(_lantern_rand_intarrayref_tensoroptions)
+    LOAD_SYMBOL(_lantern_rand_intarrayref_generator_tensoroptions)
+    LOAD_SYMBOL(_lantern_rand_out_tensor_intarrayref)
+    LOAD_SYMBOL(_lantern_rand_out_tensor_intarrayref_generator)
+    LOAD_SYMBOL(_lantern_rand_like_tensor_tensoroptions_memoryformat)
+    LOAD_SYMBOL(_lantern_randint_intt_intarrayref_tensoroptions)
+    LOAD_SYMBOL(_lantern_randint_intt_intarrayref_generator_tensoroptions)
+    LOAD_SYMBOL(_lantern_randint_intt_intt_intarrayref_tensoroptions)
+    LOAD_SYMBOL(_lantern_randint_intt_intt_intarrayref_generator_tensoroptions)
+    LOAD_SYMBOL(_lantern_randint_out_tensor_intt_intarrayref)
+    LOAD_SYMBOL(_lantern_randint_out_tensor_intt_intarrayref_generator)
+    LOAD_SYMBOL(_lantern_randint_out_tensor_intt_intt_intarrayref)
+    LOAD_SYMBOL(_lantern_randint_out_tensor_intt_intt_intarrayref_generator)
+    LOAD_SYMBOL(_lantern_randint_like_tensor_intt_tensoroptions_memoryformat)
+    LOAD_SYMBOL(_lantern_randint_like_tensor_intt_intt_tensoroptions_memoryformat)
+    LOAD_SYMBOL(_lantern_randn_intarrayref_tensoroptions)
+    LOAD_SYMBOL(_lantern_randn_intarrayref_generator_tensoroptions)
+    LOAD_SYMBOL(_lantern_randn_intarrayref_dimnamelist_tensoroptions)
+    LOAD_SYMBOL(_lantern_randn_intarrayref_generator_dimnamelist_tensoroptions)
+    LOAD_SYMBOL(_lantern_randn_out_tensor_intarrayref)
+    LOAD_SYMBOL(_lantern_randn_out_tensor_intarrayref_generator)
+    LOAD_SYMBOL(_lantern_randn_like_tensor_tensoroptions_memoryformat)
+    LOAD_SYMBOL(_lantern_randperm_intt_tensoroptions)
+    LOAD_SYMBOL(_lantern_randperm_intt_generator_tensoroptions)
+    LOAD_SYMBOL(_lantern_randperm_out_tensor_intt)
+    LOAD_SYMBOL(_lantern_randperm_out_tensor_intt_generator)
+    LOAD_SYMBOL(_lantern_range_scalar_scalar_scalar_tensoroptions)
+    LOAD_SYMBOL(_lantern_range_scalar_scalar_tensoroptions)
+    LOAD_SYMBOL(_lantern_range_out_tensor_scalar_scalar_scalar)
+    LOAD_SYMBOL(_lantern_ravel_tensor)
+    LOAD_SYMBOL(_lantern_Tensor_ravel_tensor)
+    LOAD_SYMBOL(_lantern_reciprocal_tensor)
+    LOAD_SYMBOL(_lantern_Tensor_reciprocal_tensor)
+    LOAD_SYMBOL(_lantern_reciprocal__tensor)
+    LOAD_SYMBOL(_lantern_Tensor_reciprocal__tensor)
+    LOAD_SYMBOL(_lantern_reciprocal_out_tensor_tensor)
+    LOAD_SYMBOL(_lantern_neg_tensor)
+    LOAD_SYMBOL(_lantern_Tensor_neg_tensor)
+    LOAD_SYMBOL(_lantern_neg__tensor)
+    LOAD_SYMBOL(_lantern_Tensor_neg__tensor)
+    LOAD_SYMBOL(_lantern_neg_out_tensor_tensor)
+    LOAD_SYMBOL(_lantern_negative_tensor)
+    LOAD_SYMBOL(_lantern_Tensor_negative_tensor)
+    LOAD_SYMBOL(_lantern_negative__tensor)
+    LOAD_SYMBOL(_lantern_Tensor_negative__tensor)
+    LOAD_SYMBOL(_lantern_negative_out_tensor_tensor)
+    LOAD_SYMBOL(_lantern_Tensor_repeat_tensor_intarrayref)
+    LOAD_SYMBOL(_lantern_repeat_interleave_tensor)
+    LOAD_SYMBOL(_lantern_repeat_interleave_tensor_tensor_intt)
+    LOAD_SYMBOL(_lantern_Tensor_repeat_interleave_tensor_tensor_intt)
+    LOAD_SYMBOL(_lantern_repeat_interleave_tensor_intt_intt)
+    LOAD_SYMBOL(_lantern_Tensor_repeat_interleave_tensor_intt_intt)
+    LOAD_SYMBOL(_lantern_reshape_tensor_intarrayref)
+    LOAD_SYMBOL(_lantern_Tensor_reshape_tensor_intarrayref)
+    LOAD_SYMBOL(_lantern__mkldnn_reshape_tensor_intarrayref)
+    LOAD_SYMBOL(_lantern_Tensor_reshape_as_tensor_tensor)
+    LOAD_SYMBOL(_lantern_round_tensor)
+    LOAD_SYMBOL(_lantern_Tensor_round_tensor)
+    LOAD_SYMBOL(_lantern_round__tensor)
+    LOAD_SYMBOL(_lantern_Tensor_round__tensor)
+    LOAD_SYMBOL(_lantern_round_out_tensor_tensor)
+    LOAD_SYMBOL(_lantern_rrelu_tensor_scalar_scalar_bool_generator)
+    LOAD_SYMBOL(_lantern_rrelu__tensor_scalar_scalar_bool_generator)
+    LOAD_SYMBOL(_lantern_relu_tensor)
+    LOAD_SYMBOL(_lantern_Tensor_relu_tensor)
+    LOAD_SYMBOL(_lantern_relu__tensor)
+    LOAD_SYMBOL(_lantern_Tensor_relu__tensor)
+    LOAD_SYMBOL(_lantern_relu6_tensor)
+    LOAD_SYMBOL(_lantern_relu6__tensor)
+    LOAD_SYMBOL(_lantern_prelu_tensor_tensor)
+    LOAD_SYMBOL(_lantern_Tensor_prelu_tensor_tensor)
+    LOAD_SYMBOL(_lantern_prelu_backward_tensor_tensor_tensor)
+    LOAD_SYMBOL(_lantern_Tensor_prelu_backward_tensor_tensor_tensor)
+    LOAD_SYMBOL(_lantern_gelu_tensor)
+    LOAD_SYMBOL(_lantern_gelu_backward_tensor_tensor)
+    LOAD_SYMBOL(_lantern_infinitely_differentiable_gelu_backward_tensor_tensor)
+    LOAD_SYMBOL(_lantern_hardshrink_tensor_scalar)
+    LOAD_SYMBOL(_lantern_Tensor_hardshrink_tensor_scalar)
+    LOAD_SYMBOL(_lantern_hardshrink_backward_tensor_tensor_scalar)
+    LOAD_SYMBOL(_lantern_Tensor_hardshrink_backward_tensor_tensor_scalar)
+    LOAD_SYMBOL(_lantern_rsqrt_tensor)
+    LOAD_SYMBOL(_lantern_Tensor_rsqrt_tensor)
+    LOAD_SYMBOL(_lantern_rsqrt__tensor)
+    LOAD_SYMBOL(_lantern_Tensor_rsqrt__tensor)
+    LOAD_SYMBOL(_lantern_rsqrt_out_tensor_tensor)
+    LOAD_SYMBOL(_lantern_select_tensor_dimname_intt)
+    LOAD_SYMBOL(_lantern_Tensor_select_tensor_dimname_intt)
+    LOAD_SYMBOL(_lantern_select_tensor_intt_intt)
+    LOAD_SYMBOL(_lantern_Tensor_select_tensor_intt_intt)
+    LOAD_SYMBOL(_lantern_select_backward_tensor_intarrayref_intt_intt)
+    LOAD_SYMBOL(_lantern_selu_tensor)
+    LOAD_SYMBOL(_lantern_selu__tensor)
+    LOAD_SYMBOL(_lantern_celu_tensor_scalar)
+    LOAD_SYMBOL(_lantern_celu__tensor_scalar)
+    LOAD_SYMBOL(_lantern_silu_tensor)
+    LOAD_SYMBOL(_lantern_silu__tensor)
+    LOAD_SYMBOL(_lantern_silu_out_tensor_tensor)
+    LOAD_SYMBOL(_lantern_silu_backward_tensor_tensor)
+    LOAD_SYMBOL(_lantern_mish_tensor)
+    LOAD_SYMBOL(_lantern_mish__tensor)
+    LOAD_SYMBOL(_lantern_mish_out_tensor_tensor)
+    LOAD_SYMBOL(_lantern_mish_backward_tensor_tensor)
+    LOAD_SYMBOL(_lantern_sigmoid_tensor)
+    LOAD_SYMBOL(_lantern_Tensor_sigmoid_tensor)
+    LOAD_SYMBOL(_lantern_sigmoid__tensor)
+    LOAD_SYMBOL(_lantern_Tensor_sigmoid__tensor)
+    LOAD_SYMBOL(_lantern_sigmoid_out_tensor_tensor)
+    LOAD_SYMBOL(_lantern_logit_tensor_double)
+    LOAD_SYMBOL(_lantern_Tensor_logit_tensor_double)
+    LOAD_SYMBOL(_lantern_logit__tensor_double)
+    LOAD_SYMBOL(_lantern_Tensor_logit__tensor_double)
+    LOAD_SYMBOL(_lantern_logit_out_tensor_tensor_double)
+    LOAD_SYMBOL(_lantern_sin_tensor)
+    LOAD_SYMBOL(_lantern_Tensor_sin_tensor)
+    LOAD_SYMBOL(_lantern_sin__tensor)
+    LOAD_SYMBOL(_lantern_Tensor_sin__tensor)
+    LOAD_SYMBOL(_lantern_sin_out_tensor_tensor)
+    LOAD_SYMBOL(_lantern_sinc_tensor)
+    LOAD_SYMBOL(_lantern_Tensor_sinc_tensor)
+    LOAD_SYMBOL(_lantern_sinc__tensor)
+    LOAD_SYMBOL(_lantern_Tensor_sinc__tensor)
+    LOAD_SYMBOL(_lantern_sinc_out_tensor_tensor)
+    LOAD_SYMBOL(_lantern_sinh_tensor)
+    LOAD_SYMBOL(_lantern_Tensor_sinh_tensor)
+    LOAD_SYMBOL(_lantern_sinh__tensor)
+    LOAD_SYMBOL(_lantern_Tensor_sinh__tensor)
+    LOAD_SYMBOL(_lantern_sinh_out_tensor_tensor)
+    LOAD_SYMBOL(_lantern_detach_tensor)
+    LOAD_SYMBOL(_lantern_Tensor_detach_tensor)
+    LOAD_SYMBOL(_lantern_detach__tensor)
+    LOAD_SYMBOL(_lantern_Tensor_detach__tensor)
+    LOAD_SYMBOL(_lantern_size_tensor_intt)
+    LOAD_SYMBOL(_lantern_size_tensor_dimname)
+    LOAD_SYMBOL(_lantern_Tensor_size_tensor_dimname)
+    LOAD_SYMBOL(_lantern_slice_tensor_intt_intt_intt_intt)
+    LOAD_SYMBOL(_lantern_Tensor_slice_tensor_intt_intt_intt_intt)
+    LOAD_SYMBOL(_lantern_slice_backward_tensor_intarrayref_intt_intt_intt_intt)
+    LOAD_SYMBOL(_lantern_slogdet_tensor)
+    LOAD_SYMBOL(_lantern_Tensor_slogdet_tensor)
+    LOAD_SYMBOL(_lantern_smm_tensor_tensor)
+    LOAD_SYMBOL(_lantern_Tensor_smm_tensor_tensor)
+    LOAD_SYMBOL(_lantern_softmax_tensor_intt_scalartype)
+    LOAD_SYMBOL(_lantern_Tensor_softmax_tensor_intt_scalartype)
+    LOAD_SYMBOL(_lantern_softmax_tensor_dimname_scalartype)
+    LOAD_SYMBOL(_lantern_Tensor_softmax_tensor_dimname_scalartype)
+    LOAD_SYMBOL(_lantern__softmax_tensor_intt_bool)
+    LOAD_SYMBOL(_lantern__softmax_backward_data_tensor_tensor_intt_tensor)
+    LOAD_SYMBOL(_lantern_unsafe_split_tensor_intt_intt)
+    LOAD_SYMBOL(_lantern_Tensor_unsafe_split_tensor_intt_intt)
+    LOAD_SYMBOL(_lantern_split_tensor_intt_intt)
+    LOAD_SYMBOL(_lantern_Tensor_split_tensor_intt_intt)
+    LOAD_SYMBOL(_lantern_unsafe_split_with_sizes_tensor_intarrayref_intt)
+    LOAD_SYMBOL(_lantern_Tensor_unsafe_split_with_sizes_tensor_intarrayref_intt)
+    LOAD_SYMBOL(_lantern_split_with_sizes_tensor_intarrayref_intt)
+    LOAD_SYMBOL(_lantern_Tensor_split_with_sizes_tensor_intarrayref_intt)
+    LOAD_SYMBOL(_lantern_hsplit_tensor_intt)
+    LOAD_SYMBOL(_lantern_Tensor_hsplit_tensor_intt)
+    LOAD_SYMBOL(_lantern_hsplit_tensor_intarrayref)
+    LOAD_SYMBOL(_lantern_Tensor_hsplit_tensor_intarrayref)
+    LOAD_SYMBOL(_lantern_vsplit_tensor_intt)
+    LOAD_SYMBOL(_lantern_Tensor_vsplit_tensor_intt)
+    LOAD_SYMBOL(_lantern_vsplit_tensor_intarrayref)
+    LOAD_SYMBOL(_lantern_Tensor_vsplit_tensor_intarrayref)
+    LOAD_SYMBOL(_lantern_dsplit_tensor_intt)
+    LOAD_SYMBOL(_lantern_Tensor_dsplit_tensor_intt)
+    LOAD_SYMBOL(_lantern_dsplit_tensor_intarrayref)
+    LOAD_SYMBOL(_lantern_Tensor_dsplit_tensor_intarrayref)
+    LOAD_SYMBOL(_lantern_squeeze_tensor)
+    LOAD_SYMBOL(_lantern_Tensor_squeeze_tensor)
+    LOAD_SYMBOL(_lantern_squeeze_tensor_intt)
+    LOAD_SYMBOL(_lantern_Tensor_squeeze_tensor_intt)
+    LOAD_SYMBOL(_lantern_squeeze_tensor_dimname)
+    LOAD_SYMBOL(_lantern_Tensor_squeeze_tensor_dimname)
+    LOAD_SYMBOL(_lantern_Tensor_squeeze__tensor)
+    LOAD_SYMBOL(_lantern_Tensor_squeeze__tensor_intt)
+    LOAD_SYMBOL(_lantern_Tensor_squeeze__tensor_dimname)
+    LOAD_SYMBOL(_lantern_sspaddmm_tensor_tensor_tensor_scalar_scalar)
+    LOAD_SYMBOL(_lantern_Tensor_sspaddmm_tensor_tensor_tensor_scalar_scalar)
+    LOAD_SYMBOL(_lantern_sspaddmm_out_tensor_tensor_tensor_tensor_scalar_scalar)
+    LOAD_SYMBOL(_lantern_stack_tensorlist_intt)
+    LOAD_SYMBOL(_lantern_stack_out_tensor_tensorlist_intt)
+    LOAD_SYMBOL(_lantern__stack_tensorlist_intt)
+    LOAD_SYMBOL(_lantern__stack_out_tensor_tensorlist_intt)
+    LOAD_SYMBOL(_lantern_hstack_tensorlist)
+    LOAD_SYMBOL(_lantern_hstack_out_tensor_tensorlist)
+    LOAD_SYMBOL(_lantern_vstack_tensorlist)
+    LOAD_SYMBOL(_lantern_vstack_out_tensor_tensorlist)
+    LOAD_SYMBOL(_lantern_dstack_tensorlist)
+    LOAD_SYMBOL(_lantern_dstack_out_tensor_tensorlist)
+    LOAD_SYMBOL(_lantern_stft_tensor_intt_intt_intt_tensor_bool_bool_bool)
+    LOAD_SYMBOL(_lantern_Tensor_stft_tensor_intt_intt_intt_tensor_bool_bool_bool)
+    LOAD_SYMBOL(_lantern_istft_tensor_intt_intt_intt_tensor_bool_bool_bool_intt_bool)
+    LOAD_SYMBOL(_lantern_Tensor_istft_tensor_intt_intt_intt_tensor_bool_bool_bool_intt_bool)
+    LOAD_SYMBOL(_lantern_stride_tensor_intt)
+    LOAD_SYMBOL(_lantern_Tensor_stride_tensor_intt)
+    LOAD_SYMBOL(_lantern_stride_tensor_dimname)
+    LOAD_SYMBOL(_lantern_Tensor_stride_tensor_dimname)
+    LOAD_SYMBOL(_lantern_sum_tensor_scalartype)
+    LOAD_SYMBOL(_lantern_Tensor_sum_tensor_scalartype)
+    LOAD_SYMBOL(_lantern_sum_tensor_intarrayref_bool_scalartype)
+    LOAD_SYMBOL(_lantern_Tensor_sum_tensor_intarrayref_bool_scalartype)
+    LOAD_SYMBOL(_lantern_sum_tensor_dimnamelist_bool_scalartype)
+    LOAD_SYMBOL(_lantern_Tensor_sum_tensor_dimnamelist_bool_scalartype)
+    LOAD_SYMBOL(_lantern_sum_out_tensor_tensor_intarrayref_bool_scalartype)
+    LOAD_SYMBOL(_lantern_sum_out_tensor_tensor_dimnamelist_bool_scalartype)
+    LOAD_SYMBOL(_lantern_nansum_tensor_scalartype)
+    LOAD_SYMBOL(_lantern_Tensor_nansum_tensor_scalartype)
+    LOAD_SYMBOL(_lantern_nansum_tensor_intarrayref_bool_scalartype)
+    LOAD_SYMBOL(_lantern_Tensor_nansum_tensor_intarrayref_bool_scalartype)
+    LOAD_SYMBOL(_lantern_nansum_out_tensor_tensor_intarrayref_bool_scalartype)
+    LOAD_SYMBOL(_lantern_Tensor_sum_to_size_tensor_intarrayref)
+    LOAD_SYMBOL(_lantern_sqrt_tensor)
+    LOAD_SYMBOL(_lantern_Tensor_sqrt_tensor)
+    LOAD_SYMBOL(_lantern_sqrt__tensor)
+    LOAD_SYMBOL(_lantern_Tensor_sqrt__tensor)
+    LOAD_SYMBOL(_lantern_sqrt_out_tensor_tensor)
+    LOAD_SYMBOL(_lantern_square_tensor)
+    LOAD_SYMBOL(_lantern_Tensor_square_tensor)
+    LOAD_SYMBOL(_lantern_square__tensor)
+    LOAD_SYMBOL(_lantern_Tensor_square__tensor)
+    LOAD_SYMBOL(_lantern_square_out_tensor_tensor)
+    LOAD_SYMBOL(_lantern_std_tensor_bool)
+    LOAD_SYMBOL(_lantern_Tensor_std_tensor_bool)
+    LOAD_SYMBOL(_lantern_std_tensor_intarrayref_bool_bool)
+    LOAD_SYMBOL(_lantern_Tensor_std_tensor_intarrayref_bool_bool)
+    LOAD_SYMBOL(_lantern_std_tensor_intarrayref_intt_bool)
+    LOAD_SYMBOL(_lantern_Tensor_std_tensor_intarrayref_intt_bool)
+    LOAD_SYMBOL(_lantern_std_mean_tensor_bool)
+    LOAD_SYMBOL(_lantern_std_mean_tensor_intarrayref_bool_bool)
+    LOAD_SYMBOL(_lantern_std_mean_tensor_intarrayref_intt_bool)
+    LOAD_SYMBOL(_lantern_std_mean_tensor_dimnamelist_bool_bool)
+    LOAD_SYMBOL(_lantern_std_mean_tensor_dimnamelist_intt_bool)
+    LOAD_SYMBOL(_lantern_std_out_tensor_tensor_intarrayref_bool_bool)
+    LOAD_SYMBOL(_lantern_std_out_tensor_tensor_intarrayref_intt_bool)
+    LOAD_SYMBOL(_lantern_std_tensor_dimnamelist_bool_bool)
+    LOAD_SYMBOL(_lantern_Tensor_std_tensor_dimnamelist_bool_bool)
+    LOAD_SYMBOL(_lantern_std_out_tensor_tensor_dimnamelist_bool_bool)
+    LOAD_SYMBOL(_lantern_std_tensor_dimnamelist_intt_bool)
+    LOAD_SYMBOL(_lantern_Tensor_std_tensor_dimnamelist_intt_bool)
+    LOAD_SYMBOL(_lantern_std_out_tensor_tensor_dimnamelist_intt_bool)
+    LOAD_SYMBOL(_lantern_prod_tensor_scalartype)
+    LOAD_SYMBOL(_lantern_Tensor_prod_tensor_scalartype)
+    LOAD_SYMBOL(_lantern_prod_tensor_intt_bool_scalartype)
+    LOAD_SYMBOL(_lantern_Tensor_prod_tensor_intt_bool_scalartype)
+    LOAD_SYMBOL(_lantern_prod_out_tensor_tensor_intt_bool_scalartype)
+    LOAD_SYMBOL(_lantern_prod_tensor_dimname_bool_scalartype)
+    LOAD_SYMBOL(_lantern_Tensor_prod_tensor_dimname_bool_scalartype)
+    LOAD_SYMBOL(_lantern_prod_out_tensor_tensor_dimname_bool_scalartype)
+    LOAD_SYMBOL(_lantern_t_tensor)
+    LOAD_SYMBOL(_lantern_Tensor_t_tensor)
+    LOAD_SYMBOL(_lantern_Tensor_t__tensor)
+    LOAD_SYMBOL(_lantern_tan_tensor)
+    LOAD_SYMBOL(_lantern_Tensor_tan_tensor)
+    LOAD_SYMBOL(_lantern_tan__tensor)
+    LOAD_SYMBOL(_lantern_Tensor_tan__tensor)
+    LOAD_SYMBOL(_lantern_tan_out_tensor_tensor)
+    LOAD_SYMBOL(_lantern_tanh_tensor)
+    LOAD_SYMBOL(_lantern_Tensor_tanh_tensor)
+    LOAD_SYMBOL(_lantern_tanh__tensor)
+    LOAD_SYMBOL(_lantern_Tensor_tanh__tensor)
+    LOAD_SYMBOL(_lantern_tanh_out_tensor_tensor)
+    LOAD_SYMBOL(_lantern_tensordot_tensor_tensor_intarrayref_intarrayref)
+    LOAD_SYMBOL(_lantern_tensordot_out_tensor_tensor_tensor_intarrayref_intarrayref)
+    LOAD_SYMBOL(_lantern_threshold_tensor_scalar_scalar)
+    LOAD_SYMBOL(_lantern_threshold__tensor_scalar_scalar)
+    LOAD_SYMBOL(_lantern_threshold_out_tensor_tensor_scalar_scalar)
+    LOAD_SYMBOL(_lantern_threshold_backward_out_tensor_tensor_tensor_scalar)
+    LOAD_SYMBOL(_lantern_threshold_backward_tensor_tensor_scalar)
+    LOAD_SYMBOL(_lantern_tile_tensor_intarrayref)
+    LOAD_SYMBOL(_lantern_Tensor_tile_tensor_intarrayref)
+    LOAD_SYMBOL(_lantern_transpose_tensor_intt_intt)
+    LOAD_SYMBOL(_lantern_Tensor_transpose_tensor_intt_intt)
+    LOAD_SYMBOL(_lantern_transpose_tensor_dimname_dimname)
+    LOAD_SYMBOL(_lantern_Tensor_transpose_tensor_dimname_dimname)
+    LOAD_SYMBOL(_lantern__mkldnn_transpose_tensor_intt_intt)
+    LOAD_SYMBOL(_lantern_Tensor_transpose__tensor_intt_intt)
+    LOAD_SYMBOL(_lantern__mkldnn_transpose__tensor_intt_intt)
+    LOAD_SYMBOL(_lantern_one_hot_tensor_intt)
+    LOAD_SYMBOL(_lantern_flip_tensor_intarrayref)
+    LOAD_SYMBOL(_lantern_Tensor_flip_tensor_intarrayref)
+    LOAD_SYMBOL(_lantern_fliplr_tensor)
+    LOAD_SYMBOL(_lantern_Tensor_fliplr_tensor)
+    LOAD_SYMBOL(_lantern_flipud_tensor)
+    LOAD_SYMBOL(_lantern_Tensor_flipud_tensor)
+    LOAD_SYMBOL(_lantern_roll_tensor_intarrayref_intarrayref)
+    LOAD_SYMBOL(_lantern_Tensor_roll_tensor_intarrayref_intarrayref)
+    LOAD_SYMBOL(_lantern_rot90_tensor_intt_intarrayref)
+    LOAD_SYMBOL(_lantern_Tensor_rot90_tensor_intt_intarrayref)
+    LOAD_SYMBOL(_lantern_trapz_tensor_tensor_intt)
+    LOAD_SYMBOL(_lantern_trapz_tensor_double_intt)
+    LOAD_SYMBOL(_lantern__trilinear_tensor_tensor_tensor_intarrayref_intarrayref_intarrayref_intarrayref_intt)
+    LOAD_SYMBOL(_lantern_triplet_margin_loss_tensor_tensor_tensor_double_double_double_bool_intt)
+    LOAD_SYMBOL(_lantern_trunc_tensor)
+    LOAD_SYMBOL(_lantern_Tensor_trunc_tensor)
+    LOAD_SYMBOL(_lantern_trunc__tensor)
+    LOAD_SYMBOL(_lantern_Tensor_trunc__tensor)
+    LOAD_SYMBOL(_lantern_trunc_out_tensor_tensor)
+    LOAD_SYMBOL(_lantern_fix_tensor)
+    LOAD_SYMBOL(_lantern_Tensor_fix_tensor)
+    LOAD_SYMBOL(_lantern_fix__tensor)
+    LOAD_SYMBOL(_lantern_Tensor_fix__tensor)
+    LOAD_SYMBOL(_lantern_fix_out_tensor_tensor)
+    LOAD_SYMBOL(_lantern_Tensor_type_as_tensor_tensor)
+    LOAD_SYMBOL(_lantern__has_compatible_shallow_copy_type_tensor_tensor)
+    LOAD_SYMBOL(_lantern__unique_tensor_bool_bool)
+    LOAD_SYMBOL(_lantern_unique_dim_tensor_intt_bool_bool_bool)
+    LOAD_SYMBOL(_lantern_unique_consecutive_tensor_bool_bool_intt)
+    LOAD_SYMBOL(_lantern_unique_dim_consecutive_tensor_intt_bool_bool)
+    LOAD_SYMBOL(_lantern__unique2_tensor_bool_bool_bool)
+    LOAD_SYMBOL(_lantern__unsafe_view_tensor_intarrayref)
+    LOAD_SYMBOL(_lantern_unsqueeze_tensor_intt)
+    LOAD_SYMBOL(_lantern_Tensor_unsqueeze_tensor_intt)
+    LOAD_SYMBOL(_lantern_Tensor_unsqueeze__tensor_intt)
+    LOAD_SYMBOL(_lantern_vander_tensor_intt_bool)
+    LOAD_SYMBOL(_lantern_var_tensor_bool)
+    LOAD_SYMBOL(_lantern_Tensor_var_tensor_bool)
+    LOAD_SYMBOL(_lantern_var_tensor_intarrayref_bool_bool)
+    LOAD_SYMBOL(_lantern_Tensor_var_tensor_intarrayref_bool_bool)
+    LOAD_SYMBOL(_lantern_var_tensor_intarrayref_intt_bool)
+    LOAD_SYMBOL(_lantern_Tensor_var_tensor_intarrayref_intt_bool)
+    LOAD_SYMBOL(_lantern_var_out_tensor_tensor_intarrayref_bool_bool)
+    LOAD_SYMBOL(_lantern_var_out_tensor_tensor_intarrayref_intt_bool)
+    LOAD_SYMBOL(_lantern_var_tensor_dimnamelist_bool_bool)
+    LOAD_SYMBOL(_lantern_Tensor_var_tensor_dimnamelist_bool_bool)
+    LOAD_SYMBOL(_lantern_var_out_tensor_tensor_dimnamelist_bool_bool)
+    LOAD_SYMBOL(_lantern_var_tensor_dimnamelist_intt_bool)
+    LOAD_SYMBOL(_lantern_Tensor_var_tensor_dimnamelist_intt_bool)
+    LOAD_SYMBOL(_lantern_var_out_tensor_tensor_dimnamelist_intt_bool)
+    LOAD_SYMBOL(_lantern_var_mean_tensor_bool)
+    LOAD_SYMBOL(_lantern_var_mean_tensor_intarrayref_bool_bool)
+    LOAD_SYMBOL(_lantern_var_mean_tensor_intarrayref_intt_bool)
+    LOAD_SYMBOL(_lantern_var_mean_tensor_dimnamelist_bool_bool)
+    LOAD_SYMBOL(_lantern_var_mean_tensor_dimnamelist_intt_bool)
+    LOAD_SYMBOL(_lantern_Tensor_view_as_tensor_tensor)
+    LOAD_SYMBOL(_lantern_where_tensor_tensor_tensor)
+    LOAD_SYMBOL(_lantern_Tensor_where_tensor_tensor_tensor)
+    LOAD_SYMBOL(_lantern_where_tensor_scalar_tensor)
+    LOAD_SYMBOL(_lantern_where_tensor_tensor_scalar)
+    LOAD_SYMBOL(_lantern_where_tensor_scalar_scalar)
+    LOAD_SYMBOL(_lantern_where_tensor)
+    LOAD_SYMBOL(_lantern__s_where_tensor_tensor_tensor)
+    LOAD_SYMBOL(_lantern_norm_except_dim_tensor_intt_intt)
+    LOAD_SYMBOL(_lantern__weight_norm_tensor_tensor_intt)
+    LOAD_SYMBOL(_lantern__weight_norm_cuda_interface_tensor_tensor_intt)
+    LOAD_SYMBOL(_lantern__weight_norm_cuda_interface_backward_tensor_tensor_tensor_tensor_intt)
+    LOAD_SYMBOL(_lantern__weight_norm_differentiable_backward_tensor_tensor_tensor_tensor_intt)
+    LOAD_SYMBOL(_lantern_zeros_intarrayref_dimnamelist_tensoroptions)
+    LOAD_SYMBOL(_lantern_zeros_intarrayref_tensoroptions)
+    LOAD_SYMBOL(_lantern_zeros_out_tensor_intarrayref)
+    LOAD_SYMBOL(_lantern_zeros_like_tensor_tensoroptions_memoryformat)
+    LOAD_SYMBOL(_lantern__standard_gamma_grad_tensor_tensor)
+    LOAD_SYMBOL(_lantern__standard_gamma_tensor_generator)
+    LOAD_SYMBOL(_lantern__dirichlet_grad_tensor_tensor_tensor)
+    LOAD_SYMBOL(_lantern__sample_dirichlet_tensor_generator)
+    LOAD_SYMBOL(_lantern_poisson_tensor_generator)
+    LOAD_SYMBOL(_lantern_binomial_tensor_tensor_generator)
+    LOAD_SYMBOL(_lantern_native_norm_tensor_scalar)
+    LOAD_SYMBOL(_lantern_native_norm_tensor_scalar_intarrayref_bool_scalartype)
+    LOAD_SYMBOL(_lantern__sparse_sum_tensor)
+    LOAD_SYMBOL(_lantern__sparse_sum_tensor_scalartype)
+    LOAD_SYMBOL(_lantern__sparse_sum_tensor_intarrayref)
+    LOAD_SYMBOL(_lantern__sparse_sum_tensor_intarrayref_scalartype)
+    LOAD_SYMBOL(_lantern__sparse_sum_backward_tensor_tensor_intarrayref)
+    LOAD_SYMBOL(_lantern__sparse_softmax_tensor_intt_scalartype)
+    LOAD_SYMBOL(_lantern__sparse_softmax_tensor_dimname_scalartype)
+    LOAD_SYMBOL(_lantern__sparse_softmax_tensor_intt_bool)
+    LOAD_SYMBOL(_lantern__sparse_softmax_backward_data_tensor_tensor_intt_tensor)
+    LOAD_SYMBOL(_lantern__sparse_log_softmax_tensor_intt_scalartype)
+    LOAD_SYMBOL(_lantern__sparse_log_softmax_tensor_dimname_scalartype)
+    LOAD_SYMBOL(_lantern__sparse_log_softmax_tensor_intt_bool)
+    LOAD_SYMBOL(_lantern__sparse_log_softmax_backward_data_tensor_tensor_intt_tensor)
+    LOAD_SYMBOL(_lantern_norm_tensor_scalar_scalartype)
+    LOAD_SYMBOL(_lantern_Tensor_norm_tensor_scalar_scalartype)
+    LOAD_SYMBOL(_lantern_norm_tensor_scalar)
+    LOAD_SYMBOL(_lantern_Tensor_norm_tensor_scalar)
+    LOAD_SYMBOL(_lantern_norm_tensor_scalar_intarrayref_bool_scalartype)
+    LOAD_SYMBOL(_lantern_Tensor_norm_tensor_scalar_intarrayref_bool_scalartype)
+    LOAD_SYMBOL(_lantern_norm_tensor_scalar_intarrayref_bool)
+    LOAD_SYMBOL(_lantern_Tensor_norm_tensor_scalar_intarrayref_bool)
+    LOAD_SYMBOL(_lantern_norm_out_tensor_tensor_scalar_intarrayref_bool_scalartype)
+    LOAD_SYMBOL(_lantern_norm_out_tensor_tensor_scalar_intarrayref_bool)
+    LOAD_SYMBOL(_lantern_norm_tensor_scalar_dimnamelist_bool_scalartype)
+    LOAD_SYMBOL(_lantern_Tensor_norm_tensor_scalar_dimnamelist_bool_scalartype)
+    LOAD_SYMBOL(_lantern_norm_tensor_scalar_dimnamelist_bool)
+    LOAD_SYMBOL(_lantern_Tensor_norm_tensor_scalar_dimnamelist_bool)
+    LOAD_SYMBOL(_lantern_norm_out_tensor_tensor_scalar_dimnamelist_bool_scalartype)
+    LOAD_SYMBOL(_lantern_norm_out_tensor_tensor_scalar_dimnamelist_bool)
+    LOAD_SYMBOL(_lantern_frexp_tensor)
+    LOAD_SYMBOL(_lantern_Tensor_frexp_tensor)
+    LOAD_SYMBOL(_lantern_frexp_out_tensor_tensor_tensor)
+    LOAD_SYMBOL(_lantern_frobenius_norm_tensor)
+    LOAD_SYMBOL(_lantern_frobenius_norm_tensor_intarrayref_bool)
+    LOAD_SYMBOL(_lantern_frobenius_norm_out_tensor_tensor_intarrayref_bool)
+    LOAD_SYMBOL(_lantern_nuclear_norm_tensor_bool)
+    LOAD_SYMBOL(_lantern_nuclear_norm_out_tensor_tensor_bool)
+    LOAD_SYMBOL(_lantern_nuclear_norm_tensor_intarrayref_bool)
+    LOAD_SYMBOL(_lantern_nuclear_norm_out_tensor_tensor_intarrayref_bool)
+    LOAD_SYMBOL(_lantern_clone_tensor_memoryformat)
+    LOAD_SYMBOL(_lantern_Tensor_clone_tensor_memoryformat)
+    LOAD_SYMBOL(_lantern_positive_tensor)
+    LOAD_SYMBOL(_lantern_Tensor_positive_tensor)
+    LOAD_SYMBOL(_lantern_resize_as__tensor_tensor_memoryformat)
+    LOAD_SYMBOL(_lantern_Tensor_resize_as__tensor_tensor_memoryformat)
+    LOAD_SYMBOL(_lantern_resize_as_sparse__tensor_tensor)
+    LOAD_SYMBOL(_lantern_zero__tensor)
+    LOAD_SYMBOL(_lantern_Tensor_zero__tensor)
+    LOAD_SYMBOL(_lantern_sub_out_tensor_tensor_tensor_scalar)
+    LOAD_SYMBOL(_lantern_sub_tensor_tensor_scalar)
+    LOAD_SYMBOL(_lantern_Tensor_sub_tensor_tensor_scalar)
+    LOAD_SYMBOL(_lantern_Tensor_sub__tensor_tensor_scalar)
+    LOAD_SYMBOL(_lantern_sub_tensor_scalar_scalar)
+    LOAD_SYMBOL(_lantern_Tensor_sub_tensor_scalar_scalar)
+    LOAD_SYMBOL(_lantern_Tensor_sub__tensor_scalar_scalar)
+    LOAD_SYMBOL(_lantern_subtract_out_tensor_tensor_tensor_scalar)
+    LOAD_SYMBOL(_lantern_subtract_tensor_tensor_scalar)
+    LOAD_SYMBOL(_lantern_Tensor_subtract_tensor_tensor_scalar)
+    LOAD_SYMBOL(_lantern_Tensor_subtract__tensor_tensor_scalar)
+    LOAD_SYMBOL(_lantern_subtract_tensor_scalar_scalar)
+    LOAD_SYMBOL(_lantern_Tensor_subtract_tensor_scalar_scalar)
+    LOAD_SYMBOL(_lantern_Tensor_subtract__tensor_scalar_scalar)
+    LOAD_SYMBOL(_lantern_rsub_tensor_tensor_scalar)
+    LOAD_SYMBOL(_lantern_heaviside_out_tensor_tensor_tensor)
+    LOAD_SYMBOL(_lantern_heaviside_tensor_tensor)
+    LOAD_SYMBOL(_lantern_Tensor_heaviside_tensor_tensor)
+    LOAD_SYMBOL(_lantern_Tensor_heaviside__tensor_tensor)
+    LOAD_SYMBOL(_lantern_rsub_tensor_scalar_scalar)
+    LOAD_SYMBOL(_lantern__sparse_addmm_tensor_tensor_tensor_scalar_scalar)
+    LOAD_SYMBOL(_lantern_addmm_out_tensor_tensor_tensor_tensor_scalar_scalar)
+    LOAD_SYMBOL(_lantern_addmm_tensor_tensor_tensor_scalar_scalar)
+    LOAD_SYMBOL(_lantern_Tensor_addmm_tensor_tensor_tensor_scalar_scalar)
+    LOAD_SYMBOL(_lantern_Tensor_addmm__tensor_tensor_tensor_scalar_scalar)
+    LOAD_SYMBOL(_lantern__sparse_csr_tensor_tensor_tensor_tensor_intarrayref_tensoroptions)
+    LOAD_SYMBOL(_lantern__sparse_csr_tensor_tensor_tensor_tensor_tensoroptions)
+    LOAD_SYMBOL(_lantern_sparse_coo_tensor_intarrayref_tensoroptions)
+    LOAD_SYMBOL(_lantern_sparse_coo_tensor_tensor_tensor_tensoroptions)
+    LOAD_SYMBOL(_lantern_sparse_coo_tensor_tensor_tensor_intarrayref_tensoroptions)
+    LOAD_SYMBOL(_lantern__sparse_coo_tensor_unsafe_tensor_tensor_intarrayref_tensoroptions)
+    LOAD_SYMBOL(_lantern__validate_sparse_coo_tensor_args_tensor_tensor_intarrayref)
+    LOAD_SYMBOL(_lantern__sparse_coo_tensor_with_dims_intt_intt_intarrayref_tensoroptions)
+    LOAD_SYMBOL(_lantern__sparse_coo_tensor_with_dims_and_tensors_intt_intt_intarrayref_tensor_tensor_tensoroptions)
+    LOAD_SYMBOL(_lantern_Tensor_sparse_resize__tensor_intarrayref_intt_intt)
+    LOAD_SYMBOL(_lantern_Tensor_sparse_resize_and_clear__tensor_intarrayref_intt_intt)
+    LOAD_SYMBOL(_lantern_Tensor_sparse_mask_tensor_tensor)
+    LOAD_SYMBOL(_lantern_Tensor_to_dense_tensor_scalartype)
+    LOAD_SYMBOL(_lantern_to_dense_backward_tensor_tensor)
+    LOAD_SYMBOL(_lantern_Tensor_sparse_dim_tensor)
+    LOAD_SYMBOL(_lantern_Tensor__dimi_tensor)
+    LOAD_SYMBOL(_lantern_Tensor_dense_dim_tensor)
+    LOAD_SYMBOL(_lantern_Tensor__dimv_tensor)
+    LOAD_SYMBOL(_lantern_Tensor__nnz_tensor)
+    LOAD_SYMBOL(_lantern_Tensor_coalesce_tensor)
+    LOAD_SYMBOL(_lantern__coalesce_tensor)
+    LOAD_SYMBOL(_lantern_Tensor_is_coalesced_tensor)
+    LOAD_SYMBOL(_lantern_Tensor__indices_tensor)
+    LOAD_SYMBOL(_lantern_Tensor__values_tensor)
+    LOAD_SYMBOL(_lantern_Tensor__coalesced__tensor_bool)
+    LOAD_SYMBOL(_lantern_Tensor_indices_tensor)
+    LOAD_SYMBOL(_lantern_Tensor_values_tensor)
+    LOAD_SYMBOL(_lantern_Tensor_crow_indices_tensor)
+    LOAD_SYMBOL(_lantern_Tensor_col_indices_tensor)
+    LOAD_SYMBOL(_lantern_hspmm_out_tensor_tensor_tensor)
+    LOAD_SYMBOL(_lantern_hspmm_tensor_tensor)
+    LOAD_SYMBOL(_lantern_copy_sparse_to_sparse__tensor_tensor_bool)
+    LOAD_SYMBOL(_lantern_unbind_tensor_intt)
+    LOAD_SYMBOL(_lantern_Tensor_unbind_tensor_intt)
+    LOAD_SYMBOL(_lantern_unbind_tensor_dimname)
+    LOAD_SYMBOL(_lantern_Tensor_unbind_tensor_dimname)
+    LOAD_SYMBOL(_lantern_Tensor_to_sparse_tensor_intt)
+    LOAD_SYMBOL(_lantern_Tensor_to_sparse_tensor)
+    LOAD_SYMBOL(_lantern_Tensor_to_mkldnn_tensor_scalartype)
+    LOAD_SYMBOL(_lantern_mkldnn_reorder_conv2d_weight_tensor_intarrayref_intarrayref_intarrayref_intt)
+    LOAD_SYMBOL(_lantern_mkldnn_reorder_conv3d_weight_tensor_intarrayref_intarrayref_intarrayref_intt)
+    LOAD_SYMBOL(_lantern_to_mkldnn_backward_tensor_tensor)
+    LOAD_SYMBOL(_lantern_quantize_per_tensor_tensor_double_intt_scalartype)
+    LOAD_SYMBOL(_lantern_quantize_per_tensor_tensorlist_tensor_tensor_scalartype)
+    LOAD_SYMBOL(_lantern_quantize_per_channel_tensor_tensor_tensor_intt_scalartype)
+    LOAD_SYMBOL(_lantern_dequantize_tensor)
+    LOAD_SYMBOL(_lantern_Tensor_dequantize_tensor)
+    LOAD_SYMBOL(_lantern_dequantize_tensorlist)
+    LOAD_SYMBOL(_lantern_q_scale_tensor)
+    LOAD_SYMBOL(_lantern_Tensor_q_scale_tensor)
+    LOAD_SYMBOL(_lantern_q_zero_point_tensor)
+    LOAD_SYMBOL(_lantern_Tensor_q_zero_point_tensor)
+    LOAD_SYMBOL(_lantern_q_per_channel_scales_tensor)
+    LOAD_SYMBOL(_lantern_Tensor_q_per_channel_scales_tensor)
+    LOAD_SYMBOL(_lantern_q_per_channel_zero_points_tensor)
+    LOAD_SYMBOL(_lantern_Tensor_q_per_channel_zero_points_tensor)
+    LOAD_SYMBOL(_lantern_q_per_channel_axis_tensor)
+    LOAD_SYMBOL(_lantern_Tensor_q_per_channel_axis_tensor)
+    LOAD_SYMBOL(_lantern_int_repr_tensor)
+    LOAD_SYMBOL(_lantern_Tensor_int_repr_tensor)
+    LOAD_SYMBOL(_lantern__make_per_tensor_quantized_tensor_tensor_double_intt)
+    LOAD_SYMBOL(_lantern__make_per_channel_quantized_tensor_tensor_tensor_tensor_intt)
+    LOAD_SYMBOL(_lantern_Tensor_qscheme_tensor)
+    LOAD_SYMBOL(_lantern_fake_quantize_per_tensor_affine_tensor_double_intt_intt_intt)
+    LOAD_SYMBOL(_lantern_fake_quantize_per_tensor_affine_cachemask_tensor_double_intt_intt_intt)
+    LOAD_SYMBOL(_lantern_fake_quantize_per_tensor_affine_cachemask_backward_tensor_tensor)
+    LOAD_SYMBOL(_lantern__fake_quantize_learnable_per_tensor_affine_tensor_tensor_tensor_intt_intt_double)
+    LOAD_SYMBOL(_lantern__fake_quantize_learnable_per_tensor_affine_backward_tensor_tensor_tensor_tensor_intt_intt_double)
+    LOAD_SYMBOL(_lantern_fake_quantize_per_channel_affine_tensor_tensor_tensor_intt_intt_intt)
+    LOAD_SYMBOL(_lantern_fake_quantize_per_channel_affine_cachemask_tensor_tensor_tensor_intt_intt_intt)
+    LOAD_SYMBOL(_lantern_fake_quantize_per_channel_affine_cachemask_backward_tensor_tensor)
+    LOAD_SYMBOL(_lantern__fake_quantize_learnable_per_channel_affine_tensor_tensor_tensor_intt_intt_intt_double)
+    LOAD_SYMBOL(_lantern__fake_quantize_learnable_per_channel_affine_backward_tensor_tensor_tensor_tensor_intt_intt_intt_double)
+    LOAD_SYMBOL(_lantern__choose_qparams_per_tensor_tensor_bool)
+    LOAD_SYMBOL(_lantern__saturate_weight_to_fp16_tensor)
+    LOAD_SYMBOL(_lantern_choose_qparams_optimized_tensor_intt_intt_double_intt)
+    LOAD_SYMBOL(_lantern_Tensor_to_tensor_tensoroptions_bool_bool_memoryformat)
+    LOAD_SYMBOL(_lantern_Tensor_to_tensor_device_scalartype_bool_bool_memoryformat)
+    LOAD_SYMBOL(_lantern_Tensor_to_tensor_scalartype_bool_bool_memoryformat)
+    LOAD_SYMBOL(_lantern_Tensor_to_tensor_tensor_bool_bool_memoryformat)
+    LOAD_SYMBOL(_lantern_meshgrid_tensorlist)
+    LOAD_SYMBOL(_lantern_cartesian_prod_tensorlist)
+    LOAD_SYMBOL(_lantern_combinations_tensor_intt_bool)
+    LOAD_SYMBOL(_lantern_Tensor_item_tensor)
+    LOAD_SYMBOL(_lantern_result_type_tensor_tensor)
+    LOAD_SYMBOL(_lantern_result_type_tensor_scalar)
+    LOAD_SYMBOL(_lantern_result_type_scalar_tensor)
+    LOAD_SYMBOL(_lantern_result_type_scalar_scalar)
+    LOAD_SYMBOL(_lantern_can_cast_scalartype_scalartype)
+    LOAD_SYMBOL(_lantern_promote_types_scalartype_scalartype)
+    LOAD_SYMBOL(_lantern__local_scalar_dense_tensor)
+    LOAD_SYMBOL(_lantern__thnn_fused_lstm_cell_tensor_tensor_tensor_tensor_tensor)
+    LOAD_SYMBOL(_lantern__thnn_fused_lstm_cell_backward_tensor_tensor_tensor_tensor_tensor_bool)
+    LOAD_SYMBOL(_lantern__thnn_differentiable_lstm_cell_backward_tensor_tensor_tensor_tensor_tensor_tensor_tensor_tensor)
+    LOAD_SYMBOL(_lantern__thnn_fused_gru_cell_tensor_tensor_tensor_tensor_tensor)
+    LOAD_SYMBOL(_lantern__thnn_fused_gru_cell_backward_tensor_tensor_bool)
+    LOAD_SYMBOL(_lantern__thnn_differentiable_gru_cell_backward_tensor_tensor_tensor_tensor_tensor_tensor)
+    LOAD_SYMBOL(_lantern_lstm_tensor_tensorlist_tensorlist_bool_intt_double_bool_bool_bool)
+    LOAD_SYMBOL(_lantern_lstm_tensor_tensor_tensorlist_tensorlist_bool_intt_double_bool_bool)
+    LOAD_SYMBOL(_lantern_gru_tensor_tensor_tensorlist_bool_intt_double_bool_bool_bool)
+    LOAD_SYMBOL(_lantern_gru_tensor_tensor_tensor_tensorlist_bool_intt_double_bool_bool)
+    LOAD_SYMBOL(_lantern_rnn_tanh_tensor_tensor_tensorlist_bool_intt_double_bool_bool_bool)
+    LOAD_SYMBOL(_lantern_rnn_tanh_tensor_tensor_tensor_tensorlist_bool_intt_double_bool_bool)
+    LOAD_SYMBOL(_lantern_rnn_relu_tensor_tensor_tensorlist_bool_intt_double_bool_bool_bool)
+    LOAD_SYMBOL(_lantern_rnn_relu_tensor_tensor_tensor_tensorlist_bool_intt_double_bool_bool)
+    LOAD_SYMBOL(_lantern_lstm_cell_tensor_tensorlist_tensor_tensor_tensor_tensor)
+    LOAD_SYMBOL(_lantern_gru_cell_tensor_tensor_tensor_tensor_tensor_tensor)
+    LOAD_SYMBOL(_lantern_rnn_tanh_cell_tensor_tensor_tensor_tensor_tensor_tensor)
+    LOAD_SYMBOL(_lantern_rnn_relu_cell_tensor_tensor_tensor_tensor_tensor_tensor)
+    LOAD_SYMBOL(_lantern_quantized_lstm_cell_tensor_tensorlist_tensor_tensor_tensor_tensor_tensor_tensor_tensor_tensor_scalar_scalar_scalar_scalar)
+    LOAD_SYMBOL(_lantern_quantized_gru_cell_tensor_tensor_tensor_tensor_tensor_tensor_tensor_tensor_tensor_tensor_scalar_scalar_scalar_scalar)
+    LOAD_SYMBOL(_lantern_quantized_rnn_relu_cell_tensor_tensor_tensor_tensor_tensor_tensor_tensor_tensor_tensor_tensor_scalar_scalar_scalar_scalar)
+    LOAD_SYMBOL(_lantern_quantized_rnn_tanh_cell_tensor_tensor_tensor_tensor_tensor_tensor_tensor_tensor_tensor_tensor_scalar_scalar_scalar_scalar)
+    LOAD_SYMBOL(_lantern__pack_padded_sequence_tensor_tensor_bool)
+    LOAD_SYMBOL(_lantern__pack_padded_sequence_backward_tensor_intarrayref_tensor_bool)
+    LOAD_SYMBOL(_lantern__pad_packed_sequence_tensor_tensor_bool_scalar_intt)
+    LOAD_SYMBOL(_lantern_Tensor_set__tensor_storage)
+    LOAD_SYMBOL(_lantern_Tensor_set__tensor_storage_intt_intarrayref_intarrayref)
+    LOAD_SYMBOL(_lantern_Tensor_set__tensor_tensor)
+    LOAD_SYMBOL(_lantern_Tensor_set__tensor)
+    LOAD_SYMBOL(_lantern_Tensor_is_set_to_tensor_tensor)
+    LOAD_SYMBOL(_lantern_Tensor_masked_fill__tensor_tensor_scalar)
+    LOAD_SYMBOL(_lantern_masked_fill_tensor_tensor_scalar)
+    LOAD_SYMBOL(_lantern_Tensor_masked_fill_tensor_tensor_scalar)
+    LOAD_SYMBOL(_lantern_Tensor_masked_fill__tensor_tensor_tensor)
+    LOAD_SYMBOL(_lantern_masked_fill_tensor_tensor_tensor)
+    LOAD_SYMBOL(_lantern_Tensor_masked_fill_tensor_tensor_tensor)
+    LOAD_SYMBOL(_lantern_Tensor_masked_scatter__tensor_tensor_tensor)
+    LOAD_SYMBOL(_lantern_masked_scatter_tensor_tensor_tensor)
+    LOAD_SYMBOL(_lantern_Tensor_masked_scatter_tensor_tensor_tensor)
+    LOAD_SYMBOL(_lantern_Tensor_view_tensor_intarrayref)
+    LOAD_SYMBOL(_lantern_Tensor_view_tensor_scalartype)
+    LOAD_SYMBOL(_lantern_Tensor_put__tensor_tensor_tensor_bool)
+    LOAD_SYMBOL(_lantern_put_tensor_tensor_tensor_bool)
+    LOAD_SYMBOL(_lantern_Tensor_put_tensor_tensor_tensor_bool)
+    LOAD_SYMBOL(_lantern_Tensor_index_add__tensor_intt_tensor_tensor)
+    LOAD_SYMBOL(_lantern_Tensor_index_add__tensor_intt_tensor_tensor_scalar)
+    LOAD_SYMBOL(_lantern_index_add_tensor_intt_tensor_tensor)
+    LOAD_SYMBOL(_lantern_Tensor_index_add_tensor_intt_tensor_tensor)
+    LOAD_SYMBOL(_lantern_index_add_tensor_intt_tensor_tensor_scalar)
+    LOAD_SYMBOL(_lantern_Tensor_index_add_tensor_intt_tensor_tensor_scalar)
+    LOAD_SYMBOL(_lantern_index_add_tensor_dimname_tensor_tensor_scalar)
+    LOAD_SYMBOL(_lantern_Tensor_index_add_tensor_dimname_tensor_tensor_scalar)
+    LOAD_SYMBOL(_lantern_Tensor_index_fill__tensor_intt_tensor_scalar)
+    LOAD_SYMBOL(_lantern_index_fill_tensor_intt_tensor_scalar)
+    LOAD_SYMBOL(_lantern_Tensor_index_fill_tensor_intt_tensor_scalar)
+    LOAD_SYMBOL(_lantern_Tensor_index_fill__tensor_intt_tensor_tensor)
+    LOAD_SYMBOL(_lantern_index_fill_tensor_intt_tensor_tensor)
+    LOAD_SYMBOL(_lantern_Tensor_index_fill_tensor_intt_tensor_tensor)
+    LOAD_SYMBOL(_lantern_Tensor_index_fill__tensor_dimname_tensor_scalar)
+    LOAD_SYMBOL(_lantern_Tensor_index_fill__tensor_dimname_tensor_tensor)
+    LOAD_SYMBOL(_lantern_index_fill_tensor_dimname_tensor_scalar)
+    LOAD_SYMBOL(_lantern_Tensor_index_fill_tensor_dimname_tensor_scalar)
+    LOAD_SYMBOL(_lantern_index_fill_tensor_dimname_tensor_tensor)
+    LOAD_SYMBOL(_lantern_Tensor_index_fill_tensor_dimname_tensor_tensor)
+    LOAD_SYMBOL(_lantern_Tensor_scatter__tensor_intt_tensor_tensor)
+    LOAD_SYMBOL(_lantern_scatter_tensor_intt_tensor_tensor)
+    LOAD_SYMBOL(_lantern_Tensor_scatter_tensor_intt_tensor_tensor)
+    LOAD_SYMBOL(_lantern_Tensor_scatter__tensor_intt_tensor_scalar)
+    LOAD_SYMBOL(_lantern_scatter_tensor_intt_tensor_scalar)
+    LOAD_SYMBOL(_lantern_Tensor_scatter_tensor_intt_tensor_scalar)
+    LOAD_SYMBOL(_lantern_scatter_tensor_dimname_tensor_tensor)
+    LOAD_SYMBOL(_lantern_Tensor_scatter_tensor_dimname_tensor_tensor)
+    LOAD_SYMBOL(_lantern_scatter_tensor_dimname_tensor_scalar)
+    LOAD_SYMBOL(_lantern_Tensor_scatter_tensor_dimname_tensor_scalar)
+    LOAD_SYMBOL(_lantern_Tensor_scatter__tensor_intt_tensor_tensor_stdstring)
+    LOAD_SYMBOL(_lantern_Tensor_scatter__tensor_intt_tensor_scalar_stdstring)
+    LOAD_SYMBOL(_lantern_Tensor_scatter_add__tensor_intt_tensor_tensor)
+    LOAD_SYMBOL(_lantern_scatter_add_tensor_intt_tensor_tensor)
+    LOAD_SYMBOL(_lantern_Tensor_scatter_add_tensor_intt_tensor_tensor)
+    LOAD_SYMBOL(_lantern_scatter_add_tensor_dimname_tensor_tensor)
+    LOAD_SYMBOL(_lantern_Tensor_scatter_add_tensor_dimname_tensor_tensor)
+    LOAD_SYMBOL(_lantern_Tensor_eq__tensor_scalar)
+    LOAD_SYMBOL(_lantern_Tensor_eq__tensor_tensor)
+    LOAD_SYMBOL(_lantern_bitwise_and_out_tensor_tensor_tensor)
+    LOAD_SYMBOL(_lantern_bitwise_and_out_tensor_tensor_scalar)
+    LOAD_SYMBOL(_lantern_bitwise_and_tensor_scalar)
+    LOAD_SYMBOL(_lantern_Tensor_bitwise_and_tensor_scalar)
+    LOAD_SYMBOL(_lantern_bitwise_and_tensor_tensor)
+    LOAD_SYMBOL(_lantern_Tensor_bitwise_and_tensor_tensor)
+    LOAD_SYMBOL(_lantern_Tensor_bitwise_and__tensor_scalar)
+    LOAD_SYMBOL(_lantern_Tensor_bitwise_and__tensor_tensor)
+    LOAD_SYMBOL(_lantern___and___tensor_scalar)
+    LOAD_SYMBOL(_lantern_Tensor___and___tensor_scalar)
+    LOAD_SYMBOL(_lantern___and___tensor_tensor)
+    LOAD_SYMBOL(_lantern_Tensor___and___tensor_tensor)
+    LOAD_SYMBOL(_lantern_Tensor___iand___tensor_scalar)
+    LOAD_SYMBOL(_lantern_Tensor___iand___tensor_tensor)
+    LOAD_SYMBOL(_lantern_bitwise_or_out_tensor_tensor_tensor)
+    LOAD_SYMBOL(_lantern_bitwise_or_out_tensor_tensor_scalar)
+    LOAD_SYMBOL(_lantern_bitwise_or_tensor_scalar)
+    LOAD_SYMBOL(_lantern_Tensor_bitwise_or_tensor_scalar)
+    LOAD_SYMBOL(_lantern_bitwise_or_tensor_tensor)
+    LOAD_SYMBOL(_lantern_Tensor_bitwise_or_tensor_tensor)
+    LOAD_SYMBOL(_lantern_Tensor_bitwise_or__tensor_scalar)
+    LOAD_SYMBOL(_lantern_Tensor_bitwise_or__tensor_tensor)
+    LOAD_SYMBOL(_lantern___or___tensor_scalar)
+    LOAD_SYMBOL(_lantern_Tensor___or___tensor_scalar)
+    LOAD_SYMBOL(_lantern___or___tensor_tensor)
+    LOAD_SYMBOL(_lantern_Tensor___or___tensor_tensor)
+    LOAD_SYMBOL(_lantern_Tensor___ior___tensor_scalar)
+    LOAD_SYMBOL(_lantern_Tensor___ior___tensor_tensor)
+    LOAD_SYMBOL(_lantern_bitwise_xor_out_tensor_tensor_tensor)
+    LOAD_SYMBOL(_lantern_bitwise_xor_out_tensor_tensor_scalar)
+    LOAD_SYMBOL(_lantern_bitwise_xor_tensor_scalar)
+    LOAD_SYMBOL(_lantern_Tensor_bitwise_xor_tensor_scalar)
+    LOAD_SYMBOL(_lantern_bitwise_xor_tensor_tensor)
+    LOAD_SYMBOL(_lantern_Tensor_bitwise_xor_tensor_tensor)
+    LOAD_SYMBOL(_lantern_Tensor_bitwise_xor__tensor_scalar)
+    LOAD_SYMBOL(_lantern_Tensor_bitwise_xor__tensor_tensor)
+    LOAD_SYMBOL(_lantern___xor___tensor_scalar)
+    LOAD_SYMBOL(_lantern_Tensor___xor___tensor_scalar)
+    LOAD_SYMBOL(_lantern___xor___tensor_tensor)
+    LOAD_SYMBOL(_lantern_Tensor___xor___tensor_tensor)
+    LOAD_SYMBOL(_lantern_Tensor___ixor___tensor_scalar)
+    LOAD_SYMBOL(_lantern_Tensor___ixor___tensor_tensor)
+    LOAD_SYMBOL(_lantern___lshift___tensor_scalar)
+    LOAD_SYMBOL(_lantern_Tensor___lshift___tensor_scalar)
+    LOAD_SYMBOL(_lantern___lshift___tensor_tensor)
+    LOAD_SYMBOL(_lantern_Tensor___lshift___tensor_tensor)
+    LOAD_SYMBOL(_lantern_Tensor___ilshift___tensor_scalar)
+    LOAD_SYMBOL(_lantern_Tensor___ilshift___tensor_tensor)
+    LOAD_SYMBOL(_lantern___rshift___tensor_scalar)
+    LOAD_SYMBOL(_lantern_Tensor___rshift___tensor_scalar)
+    LOAD_SYMBOL(_lantern___rshift___tensor_tensor)
+    LOAD_SYMBOL(_lantern_Tensor___rshift___tensor_tensor)
+    LOAD_SYMBOL(_lantern_Tensor___irshift___tensor_scalar)
+    LOAD_SYMBOL(_lantern_Tensor___irshift___tensor_tensor)
+    LOAD_SYMBOL(_lantern_Tensor_tril__tensor_intt)
+    LOAD_SYMBOL(_lantern_Tensor_triu__tensor_intt)
+    LOAD_SYMBOL(_lantern_Tensor_digamma__tensor)
+    LOAD_SYMBOL(_lantern_Tensor_renorm__tensor_scalar_intt_scalar)
+    LOAD_SYMBOL(_lantern_Tensor_lerp__tensor_tensor_scalar)
+    LOAD_SYMBOL(_lantern_Tensor_lerp__tensor_tensor_tensor)
+    LOAD_SYMBOL(_lantern_Tensor_fmod__tensor_scalar)
+    LOAD_SYMBOL(_lantern_Tensor_fmod__tensor_tensor)
+    LOAD_SYMBOL(_lantern_Tensor_remainder__tensor_scalar)
+    LOAD_SYMBOL(_lantern_Tensor_remainder__tensor_tensor)
+    LOAD_SYMBOL(_lantern_Tensor_addbmm__tensor_tensor_tensor_scalar_scalar)
+    LOAD_SYMBOL(_lantern_addbmm_out_tensor_tensor_tensor_tensor_scalar_scalar)
+    LOAD_SYMBOL(_lantern_addbmm_tensor_tensor_tensor_scalar_scalar)
+    LOAD_SYMBOL(_lantern_Tensor_addbmm_tensor_tensor_tensor_scalar_scalar)
+    LOAD_SYMBOL(_lantern_Tensor_addcdiv__tensor_tensor_tensor_scalar)
+    LOAD_SYMBOL(_lantern_Tensor_random__tensor_intt_intt_generator)
+    LOAD_SYMBOL(_lantern_Tensor_random__tensor_intt_generator)
+    LOAD_SYMBOL(_lantern_Tensor_random__tensor_generator)
+    LOAD_SYMBOL(_lantern_Tensor_uniform__tensor_double_double_generator)
+    LOAD_SYMBOL(_lantern_Tensor_cauchy__tensor_double_double_generator)
+    LOAD_SYMBOL(_lantern_Tensor_log_normal__tensor_double_double_generator)
+    LOAD_SYMBOL(_lantern_Tensor_exponential__tensor_double_generator)
+    LOAD_SYMBOL(_lantern_Tensor_geometric__tensor_double_generator)
+    LOAD_SYMBOL(_lantern_diag_out_tensor_tensor_intt)
+    LOAD_SYMBOL(_lantern_diag_tensor_intt)
+    LOAD_SYMBOL(_lantern_Tensor_diag_tensor_intt)
+    LOAD_SYMBOL(_lantern_diag_backward_tensor_intarrayref_intt)
+    LOAD_SYMBOL(_lantern_cross_out_tensor_tensor_tensor_intt)
+    LOAD_SYMBOL(_lantern_cross_tensor_tensor_intt)
+    LOAD_SYMBOL(_lantern_Tensor_cross_tensor_tensor_intt)
+    LOAD_SYMBOL(_lantern_triu_out_tensor_tensor_intt)
+    LOAD_SYMBOL(_lantern_triu_tensor_intt)
+    LOAD_SYMBOL(_lantern_Tensor_triu_tensor_intt)
+    LOAD_SYMBOL(_lantern_tril_out_tensor_tensor_intt)
+    LOAD_SYMBOL(_lantern_tril_tensor_intt)
+    LOAD_SYMBOL(_lantern_Tensor_tril_tensor_intt)
+    LOAD_SYMBOL(_lantern_tril_indices_intt_intt_intt_tensoroptions)
+    LOAD_SYMBOL(_lantern_triu_indices_intt_intt_intt_tensoroptions)
+    LOAD_SYMBOL(_lantern_trace_tensor)
+    LOAD_SYMBOL(_lantern_Tensor_trace_tensor)
+    LOAD_SYMBOL(_lantern_trace_backward_tensor_intarrayref)
+    LOAD_SYMBOL(_lantern_ne_out_tensor_tensor_scalar)
+    LOAD_SYMBOL(_lantern_ne_tensor_scalar)
+    LOAD_SYMBOL(_lantern_Tensor_ne_tensor_scalar)
+    LOAD_SYMBOL(_lantern_ne_out_tensor_tensor_tensor)
+    LOAD_SYMBOL(_lantern_ne_tensor_tensor)
+    LOAD_SYMBOL(_lantern_Tensor_ne_tensor_tensor)
+    LOAD_SYMBOL(_lantern_Tensor_ne__tensor_scalar)
+    LOAD_SYMBOL(_lantern_Tensor_ne__tensor_tensor)
+    LOAD_SYMBOL(_lantern_not_equal_out_tensor_tensor_scalar)
+    LOAD_SYMBOL(_lantern_not_equal_tensor_scalar)
+    LOAD_SYMBOL(_lantern_Tensor_not_equal_tensor_scalar)
+    LOAD_SYMBOL(_lantern_not_equal_out_tensor_tensor_tensor)
+    LOAD_SYMBOL(_lantern_not_equal_tensor_tensor)
+    LOAD_SYMBOL(_lantern_Tensor_not_equal_tensor_tensor)
+    LOAD_SYMBOL(_lantern_Tensor_not_equal__tensor_scalar)
+    LOAD_SYMBOL(_lantern_Tensor_not_equal__tensor_tensor)
+    LOAD_SYMBOL(_lantern_eq_out_tensor_tensor_scalar)
+    LOAD_SYMBOL(_lantern_eq_tensor_scalar)
+    LOAD_SYMBOL(_lantern_Tensor_eq_tensor_scalar)
+    LOAD_SYMBOL(_lantern_eq_out_tensor_tensor_tensor)
+    LOAD_SYMBOL(_lantern_eq_tensor_tensor)
+    LOAD_SYMBOL(_lantern_Tensor_eq_tensor_tensor)
+    LOAD_SYMBOL(_lantern_ge_out_tensor_tensor_scalar)
+    LOAD_SYMBOL(_lantern_ge_tensor_scalar)
+    LOAD_SYMBOL(_lantern_Tensor_ge_tensor_scalar)
+    LOAD_SYMBOL(_lantern_ge_out_tensor_tensor_tensor)
+    LOAD_SYMBOL(_lantern_ge_tensor_tensor)
+    LOAD_SYMBOL(_lantern_Tensor_ge_tensor_tensor)
+    LOAD_SYMBOL(_lantern_Tensor_ge__tensor_scalar)
+    LOAD_SYMBOL(_lantern_Tensor_ge__tensor_tensor)
+    LOAD_SYMBOL(_lantern_greater_equal_out_tensor_tensor_scalar)
+    LOAD_SYMBOL(_lantern_greater_equal_tensor_scalar)
+    LOAD_SYMBOL(_lantern_Tensor_greater_equal_tensor_scalar)
+    LOAD_SYMBOL(_lantern_greater_equal_out_tensor_tensor_tensor)
+    LOAD_SYMBOL(_lantern_greater_equal_tensor_tensor)
+    LOAD_SYMBOL(_lantern_Tensor_greater_equal_tensor_tensor)
+    LOAD_SYMBOL(_lantern_Tensor_greater_equal__tensor_scalar)
+    LOAD_SYMBOL(_lantern_Tensor_greater_equal__tensor_tensor)
+    LOAD_SYMBOL(_lantern_le_out_tensor_tensor_scalar)
+    LOAD_SYMBOL(_lantern_le_tensor_scalar)
+    LOAD_SYMBOL(_lantern_Tensor_le_tensor_scalar)
+    LOAD_SYMBOL(_lantern_le_out_tensor_tensor_tensor)
+    LOAD_SYMBOL(_lantern_le_tensor_tensor)
+    LOAD_SYMBOL(_lantern_Tensor_le_tensor_tensor)
+    LOAD_SYMBOL(_lantern_Tensor_le__tensor_scalar)
+    LOAD_SYMBOL(_lantern_Tensor_le__tensor_tensor)
+    LOAD_SYMBOL(_lantern_less_equal_out_tensor_tensor_scalar)
+    LOAD_SYMBOL(_lantern_less_equal_tensor_scalar)
+    LOAD_SYMBOL(_lantern_Tensor_less_equal_tensor_scalar)
+    LOAD_SYMBOL(_lantern_less_equal_out_tensor_tensor_tensor)
+    LOAD_SYMBOL(_lantern_less_equal_tensor_tensor)
+    LOAD_SYMBOL(_lantern_Tensor_less_equal_tensor_tensor)
+    LOAD_SYMBOL(_lantern_Tensor_less_equal__tensor_scalar)
+    LOAD_SYMBOL(_lantern_Tensor_less_equal__tensor_tensor)
+    LOAD_SYMBOL(_lantern_gt_out_tensor_tensor_scalar)
+    LOAD_SYMBOL(_lantern_gt_tensor_scalar)
+    LOAD_SYMBOL(_lantern_Tensor_gt_tensor_scalar)
+    LOAD_SYMBOL(_lantern_gt_out_tensor_tensor_tensor)
+    LOAD_SYMBOL(_lantern_gt_tensor_tensor)
+    LOAD_SYMBOL(_lantern_Tensor_gt_tensor_tensor)
+    LOAD_SYMBOL(_lantern_Tensor_gt__tensor_scalar)
+    LOAD_SYMBOL(_lantern_Tensor_gt__tensor_tensor)
+    LOAD_SYMBOL(_lantern_greater_out_tensor_tensor_scalar)
+    LOAD_SYMBOL(_lantern_greater_tensor_scalar)
+    LOAD_SYMBOL(_lantern_Tensor_greater_tensor_scalar)
+    LOAD_SYMBOL(_lantern_greater_out_tensor_tensor_tensor)
+    LOAD_SYMBOL(_lantern_greater_tensor_tensor)
+    LOAD_SYMBOL(_lantern_Tensor_greater_tensor_tensor)
+    LOAD_SYMBOL(_lantern_Tensor_greater__tensor_scalar)
+    LOAD_SYMBOL(_lantern_Tensor_greater__tensor_tensor)
+    LOAD_SYMBOL(_lantern_lt_out_tensor_tensor_scalar)
+    LOAD_SYMBOL(_lantern_lt_tensor_scalar)
+    LOAD_SYMBOL(_lantern_Tensor_lt_tensor_scalar)
+    LOAD_SYMBOL(_lantern_lt_out_tensor_tensor_tensor)
+    LOAD_SYMBOL(_lantern_lt_tensor_tensor)
+    LOAD_SYMBOL(_lantern_Tensor_lt_tensor_tensor)
+    LOAD_SYMBOL(_lantern_Tensor_lt__tensor_scalar)
+    LOAD_SYMBOL(_lantern_Tensor_lt__tensor_tensor)
+    LOAD_SYMBOL(_lantern_less_out_tensor_tensor_scalar)
+    LOAD_SYMBOL(_lantern_less_tensor_scalar)
+    LOAD_SYMBOL(_lantern_Tensor_less_tensor_scalar)
+    LOAD_SYMBOL(_lantern_less_out_tensor_tensor_tensor)
+    LOAD_SYMBOL(_lantern_less_tensor_tensor)
+    LOAD_SYMBOL(_lantern_Tensor_less_tensor_tensor)
+    LOAD_SYMBOL(_lantern_Tensor_less__tensor_scalar)
+    LOAD_SYMBOL(_lantern_Tensor_less__tensor_tensor)
+    LOAD_SYMBOL(_lantern_take_out_tensor_tensor_tensor)
+    LOAD_SYMBOL(_lantern_take_tensor_tensor)
+    LOAD_SYMBOL(_lantern_Tensor_take_tensor_tensor)
+    LOAD_SYMBOL(_lantern_take_along_dim_out_tensor_tensor_tensor_intt)
+    LOAD_SYMBOL(_lantern_take_along_dim_tensor_tensor_intt)
+    LOAD_SYMBOL(_lantern_Tensor_take_along_dim_tensor_tensor_intt)
+    LOAD_SYMBOL(_lantern_index_select_out_tensor_tensor_intt_tensor)
+    LOAD_SYMBOL(_lantern_index_select_tensor_intt_tensor)
+    LOAD_SYMBOL(_lantern_Tensor_index_select_tensor_intt_tensor)
+    LOAD_SYMBOL(_lantern_index_select_out_tensor_tensor_dimname_tensor)
+    LOAD_SYMBOL(_lantern_index_select_tensor_dimname_tensor)
+    LOAD_SYMBOL(_lantern_Tensor_index_select_tensor_dimname_tensor)
+    LOAD_SYMBOL(_lantern_index_select_backward_tensor_intarrayref_intt_tensor)
+    LOAD_SYMBOL(_lantern_masked_select_out_tensor_tensor_tensor)
+    LOAD_SYMBOL(_lantern_masked_select_tensor_tensor)
+    LOAD_SYMBOL(_lantern_Tensor_masked_select_tensor_tensor)
+    LOAD_SYMBOL(_lantern_masked_select_backward_tensor_tensor_tensor)
+    LOAD_SYMBOL(_lantern_nonzero_out_tensor_tensor)
+    LOAD_SYMBOL(_lantern_nonzero_tensor)
+    LOAD_SYMBOL(_lantern_Tensor_nonzero_tensor)
+    LOAD_SYMBOL(_lantern_nonzero_numpy_tensor)
+    LOAD_SYMBOL(_lantern_Tensor_nonzero_numpy_tensor)
+    LOAD_SYMBOL(_lantern_gather_out_tensor_tensor_intt_tensor_bool)
+    LOAD_SYMBOL(_lantern_gather_tensor_intt_tensor_bool)
+    LOAD_SYMBOL(_lantern_Tensor_gather_tensor_intt_tensor_bool)
+    LOAD_SYMBOL(_lantern_gather_backward_tensor_tensor_intt_tensor_bool)
+    LOAD_SYMBOL(_lantern_gather_out_tensor_tensor_dimname_tensor_bool)
+    LOAD_SYMBOL(_lantern_gather_tensor_dimname_tensor_bool)
+    LOAD_SYMBOL(_lantern_Tensor_gather_tensor_dimname_tensor_bool)
+    LOAD_SYMBOL(_lantern__gather_sparse_backward_tensor_intt_tensor_tensor)
+    LOAD_SYMBOL(_lantern_addcmul_out_tensor_tensor_tensor_tensor_scalar)
+    LOAD_SYMBOL(_lantern_addcmul_tensor_tensor_tensor_scalar)
+    LOAD_SYMBOL(_lantern_Tensor_addcmul_tensor_tensor_tensor_scalar)
+    LOAD_SYMBOL(_lantern_Tensor_addcmul__tensor_tensor_tensor_scalar)
+    LOAD_SYMBOL(_lantern_addcdiv_out_tensor_tensor_tensor_tensor_scalar)
+    LOAD_SYMBOL(_lantern_addcdiv_tensor_tensor_tensor_scalar)
+    LOAD_SYMBOL(_lantern_Tensor_addcdiv_tensor_tensor_tensor_scalar)
+    LOAD_SYMBOL(_lantern_cross_entropy_loss_tensor_tensor_tensor_intt_intt)
+    LOAD_SYMBOL(_lantern_lstsq_out_tensor_tensor_tensor_tensor)
+    LOAD_SYMBOL(_lantern_lstsq_tensor_tensor)
+    LOAD_SYMBOL(_lantern_Tensor_lstsq_tensor_tensor)
+    LOAD_SYMBOL(_lantern_triangular_solve_out_tensor_tensor_tensor_tensor_bool_bool_bool)
+    LOAD_SYMBOL(_lantern_triangular_solve_tensor_tensor_bool_bool_bool)
+    LOAD_SYMBOL(_lantern_Tensor_triangular_solve_tensor_tensor_bool_bool_bool)
+    LOAD_SYMBOL(_lantern_symeig_out_tensor_tensor_tensor_bool_bool)
+    LOAD_SYMBOL(_lantern_symeig_tensor_bool_bool)
+    LOAD_SYMBOL(_lantern_Tensor_symeig_tensor_bool_bool)
+    LOAD_SYMBOL(_lantern__symeig_helper_tensor_bool_bool)
+    LOAD_SYMBOL(_lantern_eig_out_tensor_tensor_tensor_bool)
+    LOAD_SYMBOL(_lantern_eig_tensor_bool)
+    LOAD_SYMBOL(_lantern_Tensor_eig_tensor_bool)
+    LOAD_SYMBOL(_lantern_svd_out_tensor_tensor_tensor_tensor_bool_bool)
+    LOAD_SYMBOL(_lantern_svd_tensor_bool_bool)
+    LOAD_SYMBOL(_lantern_Tensor_svd_tensor_bool_bool)
+    LOAD_SYMBOL(_lantern__svd_helper_tensor_bool_bool)
+    LOAD_SYMBOL(_lantern_swapaxes_tensor_intt_intt)
+    LOAD_SYMBOL(_lantern_Tensor_swapaxes_tensor_intt_intt)
+    LOAD_SYMBOL(_lantern_Tensor_swapaxes__tensor_intt_intt)
+    LOAD_SYMBOL(_lantern_swapdims_tensor_intt_intt)
+    LOAD_SYMBOL(_lantern_Tensor_swapdims_tensor_intt_intt)
+    LOAD_SYMBOL(_lantern_Tensor_swapdims__tensor_intt_intt)
+    LOAD_SYMBOL(_lantern_cholesky_out_tensor_tensor_bool)
+    LOAD_SYMBOL(_lantern_cholesky_tensor_bool)
+    LOAD_SYMBOL(_lantern_Tensor_cholesky_tensor_bool)
+    LOAD_SYMBOL(_lantern_cholesky_solve_out_tensor_tensor_tensor_bool)
+    LOAD_SYMBOL(_lantern_cholesky_solve_tensor_tensor_bool)
+    LOAD_SYMBOL(_lantern_Tensor_cholesky_solve_tensor_tensor_bool)
+    LOAD_SYMBOL(_lantern__cholesky_solve_helper_tensor_tensor_bool)
+    LOAD_SYMBOL(_lantern_solve_tensor_tensor)
+    LOAD_SYMBOL(_lantern_Tensor_solve_tensor_tensor)
+    LOAD_SYMBOL(_lantern_solve_out_tensor_tensor_tensor_tensor)
+    LOAD_SYMBOL(_lantern__solve_helper_tensor_tensor)
+    LOAD_SYMBOL(_lantern_cholesky_inverse_tensor_bool)
+    LOAD_SYMBOL(_lantern_Tensor_cholesky_inverse_tensor_bool)
+    LOAD_SYMBOL(_lantern_cholesky_inverse_out_tensor_tensor_bool)
+    LOAD_SYMBOL(_lantern_qr_out_tensor_tensor_tensor_bool)
+    LOAD_SYMBOL(_lantern_qr_tensor_bool)
+    LOAD_SYMBOL(_lantern_Tensor_qr_tensor_bool)
+    LOAD_SYMBOL(_lantern_geqrf_out_tensor_tensor_tensor)
+    LOAD_SYMBOL(_lantern_geqrf_tensor)
+    LOAD_SYMBOL(_lantern_Tensor_geqrf_tensor)
+    LOAD_SYMBOL(_lantern_orgqr_tensor_tensor)
+    LOAD_SYMBOL(_lantern_Tensor_orgqr_tensor_tensor)
+    LOAD_SYMBOL(_lantern_orgqr_out_tensor_tensor_tensor)
+    LOAD_SYMBOL(_lantern_ormqr_out_tensor_tensor_tensor_tensor_bool_bool)
+    LOAD_SYMBOL(_lantern_ormqr_tensor_tensor_tensor_bool_bool)
+    LOAD_SYMBOL(_lantern_Tensor_ormqr_tensor_tensor_tensor_bool_bool)
+    LOAD_SYMBOL(_lantern__lu_with_info_tensor_bool_bool)
+    LOAD_SYMBOL(_lantern_lu_solve_out_tensor_tensor_tensor_tensor)
+    LOAD_SYMBOL(_lantern_lu_solve_tensor_tensor_tensor)
+    LOAD_SYMBOL(_lantern_Tensor_lu_solve_tensor_tensor_tensor)
+    LOAD_SYMBOL(_lantern_lu_unpack_tensor_tensor_bool_bool)
+    LOAD_SYMBOL(_lantern_lu_unpack_out_tensor_tensor_tensor_tensor_tensor_bool_bool)
+    LOAD_SYMBOL(_lantern_multinomial_out_tensor_tensor_intt_bool_generator)
+    LOAD_SYMBOL(_lantern_multinomial_tensor_intt_bool_generator)
+    LOAD_SYMBOL(_lantern_Tensor_multinomial_tensor_intt_bool_generator)
+    LOAD_SYMBOL(_lantern_lgamma_out_tensor_tensor)
+    LOAD_SYMBOL(_lantern_Tensor_lgamma__tensor)
+    LOAD_SYMBOL(_lantern_lgamma_tensor)
+    LOAD_SYMBOL(_lantern_Tensor_lgamma_tensor)
+    LOAD_SYMBOL(_lantern_digamma_out_tensor_tensor)
+    LOAD_SYMBOL(_lantern_digamma_tensor)
+    LOAD_SYMBOL(_lantern_Tensor_digamma_tensor)
+    LOAD_SYMBOL(_lantern_polygamma_out_tensor_intt_tensor)
+    LOAD_SYMBOL(_lantern_Tensor_polygamma__tensor_intt)
+    LOAD_SYMBOL(_lantern_erfinv_tensor)
+    LOAD_SYMBOL(_lantern_Tensor_erfinv_tensor)
+    LOAD_SYMBOL(_lantern_Tensor_erfinv__tensor)
+    LOAD_SYMBOL(_lantern_erfinv_out_tensor_tensor)
+    LOAD_SYMBOL(_lantern_i0_tensor)
+    LOAD_SYMBOL(_lantern_Tensor_i0_tensor)
+    LOAD_SYMBOL(_lantern_i0__tensor)
+    LOAD_SYMBOL(_lantern_Tensor_i0__tensor)
+    LOAD_SYMBOL(_lantern_i0_out_tensor_tensor)
+    LOAD_SYMBOL(_lantern_sign_tensor)
+    LOAD_SYMBOL(_lantern_Tensor_sign_tensor)
+    LOAD_SYMBOL(_lantern_Tensor_sign__tensor)
+    LOAD_SYMBOL(_lantern_sign_out_tensor_tensor)
+    LOAD_SYMBOL(_lantern_signbit_tensor)
+    LOAD_SYMBOL(_lantern_Tensor_signbit_tensor)
+    LOAD_SYMBOL(_lantern_signbit_out_tensor_tensor)
+    LOAD_SYMBOL(_lantern_dist_tensor_tensor_scalar)
+    LOAD_SYMBOL(_lantern_Tensor_dist_tensor_tensor_scalar)
+    LOAD_SYMBOL(_lantern_atan2_out_tensor_tensor_tensor)
+    LOAD_SYMBOL(_lantern_Tensor_atan2__tensor_tensor)
+    LOAD_SYMBOL(_lantern_atan2_tensor_tensor)
+    LOAD_SYMBOL(_lantern_Tensor_atan2_tensor_tensor)
+    LOAD_SYMBOL(_lantern_lerp_out_tensor_tensor_tensor_scalar)
+    LOAD_SYMBOL(_lantern_lerp_out_tensor_tensor_tensor_tensor)
+    LOAD_SYMBOL(_lantern_lerp_tensor_tensor_scalar)
+    LOAD_SYMBOL(_lantern_Tensor_lerp_tensor_tensor_scalar)
+    LOAD_SYMBOL(_lantern_lerp_tensor_tensor_tensor)
+    LOAD_SYMBOL(_lantern_Tensor_lerp_tensor_tensor_tensor)
+    LOAD_SYMBOL(_lantern_histc_out_tensor_tensor_intt_scalar_scalar)
+    LOAD_SYMBOL(_lantern_histc_tensor_intt_scalar_scalar)
+    LOAD_SYMBOL(_lantern_Tensor_histc_tensor_intt_scalar_scalar)
+    LOAD_SYMBOL(_lantern_fmod_out_tensor_tensor_scalar)
+    LOAD_SYMBOL(_lantern_fmod_tensor_scalar)
+    LOAD_SYMBOL(_lantern_Tensor_fmod_tensor_scalar)
+    LOAD_SYMBOL(_lantern_fmod_out_tensor_tensor_tensor)
+    LOAD_SYMBOL(_lantern_fmod_tensor_tensor)
+    LOAD_SYMBOL(_lantern_Tensor_fmod_tensor_tensor)
+    LOAD_SYMBOL(_lantern_hypot_out_tensor_tensor_tensor)
+    LOAD_SYMBOL(_lantern_hypot_tensor_tensor)
+    LOAD_SYMBOL(_lantern_Tensor_hypot_tensor_tensor)
+    LOAD_SYMBOL(_lantern_Tensor_hypot__tensor_tensor)
+    LOAD_SYMBOL(_lantern_igamma_out_tensor_tensor_tensor)
+    LOAD_SYMBOL(_lantern_igamma_tensor_tensor)
+    LOAD_SYMBOL(_lantern_Tensor_igamma_tensor_tensor)
+    LOAD_SYMBOL(_lantern_Tensor_igamma__tensor_tensor)
+    LOAD_SYMBOL(_lantern_igammac_out_tensor_tensor_tensor)
+    LOAD_SYMBOL(_lantern_igammac_tensor_tensor)
+    LOAD_SYMBOL(_lantern_Tensor_igammac_tensor_tensor)
+    LOAD_SYMBOL(_lantern_Tensor_igammac__tensor_tensor)
+    LOAD_SYMBOL(_lantern_nextafter_out_tensor_tensor_tensor)
+    LOAD_SYMBOL(_lantern_nextafter_tensor_tensor)
+    LOAD_SYMBOL(_lantern_Tensor_nextafter_tensor_tensor)
+    LOAD_SYMBOL(_lantern_Tensor_nextafter__tensor_tensor)
+    LOAD_SYMBOL(_lantern_remainder_out_tensor_tensor_scalar)
+    LOAD_SYMBOL(_lantern_remainder_tensor_scalar)
+    LOAD_SYMBOL(_lantern_Tensor_remainder_tensor_scalar)
+    LOAD_SYMBOL(_lantern_remainder_out_tensor_tensor_tensor)
+    LOAD_SYMBOL(_lantern_remainder_tensor_tensor)
+    LOAD_SYMBOL(_lantern_Tensor_remainder_tensor_tensor)
+    LOAD_SYMBOL(_lantern_min_tensor)
+    LOAD_SYMBOL(_lantern_Tensor_min_tensor)
+    LOAD_SYMBOL(_lantern_fmin_tensor_tensor)
+    LOAD_SYMBOL(_lantern_Tensor_fmin_tensor_tensor)
+    LOAD_SYMBOL(_lantern_fmin_out_tensor_tensor_tensor)
+    LOAD_SYMBOL(_lantern_max_tensor)
+    LOAD_SYMBOL(_lantern_Tensor_max_tensor)
+    LOAD_SYMBOL(_lantern_fmax_tensor_tensor)
+    LOAD_SYMBOL(_lantern_Tensor_fmax_tensor_tensor)
+    LOAD_SYMBOL(_lantern_fmax_out_tensor_tensor_tensor)
+    LOAD_SYMBOL(_lantern_maximum_tensor_tensor)
+    LOAD_SYMBOL(_lantern_Tensor_maximum_tensor_tensor)
+    LOAD_SYMBOL(_lantern_maximum_out_tensor_tensor_tensor)
+    LOAD_SYMBOL(_lantern_max_tensor_tensor)
+    LOAD_SYMBOL(_lantern_Tensor_max_tensor_tensor)
+    LOAD_SYMBOL(_lantern_max_out_tensor_tensor_tensor)
+    LOAD_SYMBOL(_lantern_minimum_tensor_tensor)
+    LOAD_SYMBOL(_lantern_Tensor_minimum_tensor_tensor)
+    LOAD_SYMBOL(_lantern_minimum_out_tensor_tensor_tensor)
+    LOAD_SYMBOL(_lantern_min_out_tensor_tensor_tensor)
+    LOAD_SYMBOL(_lantern_min_tensor_tensor)
+    LOAD_SYMBOL(_lantern_Tensor_min_tensor_tensor)
+    LOAD_SYMBOL(_lantern_quantile_out_tensor_tensor_double_intt_bool)
+    LOAD_SYMBOL(_lantern_quantile_tensor_double_intt_bool)
+    LOAD_SYMBOL(_lantern_Tensor_quantile_tensor_double_intt_bool)
+    LOAD_SYMBOL(_lantern_quantile_out_tensor_tensor_tensor_intt_bool)
+    LOAD_SYMBOL(_lantern_quantile_tensor_tensor_intt_bool)
+    LOAD_SYMBOL(_lantern_Tensor_quantile_tensor_tensor_intt_bool)
+    LOAD_SYMBOL(_lantern_nanquantile_out_tensor_tensor_double_intt_bool)
+    LOAD_SYMBOL(_lantern_nanquantile_tensor_double_intt_bool)
+    LOAD_SYMBOL(_lantern_Tensor_nanquantile_tensor_double_intt_bool)
+    LOAD_SYMBOL(_lantern_nanquantile_out_tensor_tensor_tensor_intt_bool)
+    LOAD_SYMBOL(_lantern_nanquantile_tensor_tensor_intt_bool)
+    LOAD_SYMBOL(_lantern_Tensor_nanquantile_tensor_tensor_intt_bool)
+    LOAD_SYMBOL(_lantern_quantile_out_tensor_tensor_double_intt_bool_stdstring)
+    LOAD_SYMBOL(_lantern_quantile_tensor_double_intt_bool_stdstring)
+    LOAD_SYMBOL(_lantern_Tensor_quantile_tensor_double_intt_bool_stdstring)
+    LOAD_SYMBOL(_lantern_quantile_out_tensor_tensor_tensor_intt_bool_stdstring)
+    LOAD_SYMBOL(_lantern_quantile_tensor_tensor_intt_bool_stdstring)
+    LOAD_SYMBOL(_lantern_Tensor_quantile_tensor_tensor_intt_bool_stdstring)
+    LOAD_SYMBOL(_lantern_nanquantile_out_tensor_tensor_double_intt_bool_stdstring)
+    LOAD_SYMBOL(_lantern_nanquantile_tensor_double_intt_bool_stdstring)
+    LOAD_SYMBOL(_lantern_Tensor_nanquantile_tensor_double_intt_bool_stdstring)
+    LOAD_SYMBOL(_lantern_nanquantile_out_tensor_tensor_tensor_intt_bool_stdstring)
+    LOAD_SYMBOL(_lantern_nanquantile_tensor_tensor_intt_bool_stdstring)
+    LOAD_SYMBOL(_lantern_Tensor_nanquantile_tensor_tensor_intt_bool_stdstring)
+    LOAD_SYMBOL(_lantern_sort_out_tensor_tensor_tensor_intt_bool)
+    LOAD_SYMBOL(_lantern_sort_out_tensor_tensor_tensor_bool_intt_bool)
+    LOAD_SYMBOL(_lantern_sort_tensor_intt_bool)
+    LOAD_SYMBOL(_lantern_Tensor_sort_tensor_intt_bool)
+    LOAD_SYMBOL(_lantern_sort_tensor_bool_intt_bool)
+    LOAD_SYMBOL(_lantern_Tensor_sort_tensor_bool_intt_bool)
+    LOAD_SYMBOL(_lantern_sort_out_tensor_tensor_tensor_dimname_bool)
+    LOAD_SYMBOL(_lantern_sort_out_tensor_tensor_tensor_bool_dimname_bool)
+    LOAD_SYMBOL(_lantern_sort_tensor_dimname_bool)
+    LOAD_SYMBOL(_lantern_Tensor_sort_tensor_dimname_bool)
+    LOAD_SYMBOL(_lantern_sort_tensor_bool_dimname_bool)
+    LOAD_SYMBOL(_lantern_Tensor_sort_tensor_bool_dimname_bool)
+    LOAD_SYMBOL(_lantern_msort_out_tensor_tensor)
+    LOAD_SYMBOL(_lantern_msort_tensor)
+    LOAD_SYMBOL(_lantern_Tensor_msort_tensor)
+    LOAD_SYMBOL(_lantern_argsort_tensor_intt_bool)
+    LOAD_SYMBOL(_lantern_Tensor_argsort_tensor_intt_bool)
+    LOAD_SYMBOL(_lantern_argsort_tensor_dimname_bool)
+    LOAD_SYMBOL(_lantern_Tensor_argsort_tensor_dimname_bool)
+    LOAD_SYMBOL(_lantern_topk_out_tensor_tensor_tensor_intt_intt_bool_bool)
+    LOAD_SYMBOL(_lantern_topk_tensor_intt_intt_bool_bool)
+    LOAD_SYMBOL(_lantern_Tensor_topk_tensor_intt_intt_bool_bool)
+    LOAD_SYMBOL(_lantern_all_tensor)
+    LOAD_SYMBOL(_lantern_Tensor_all_tensor)
+    LOAD_SYMBOL(_lantern_any_tensor)
+    LOAD_SYMBOL(_lantern_Tensor_any_tensor)
+    LOAD_SYMBOL(_lantern_renorm_out_tensor_tensor_scalar_intt_scalar)
+    LOAD_SYMBOL(_lantern_renorm_tensor_scalar_intt_scalar)
+    LOAD_SYMBOL(_lantern_Tensor_renorm_tensor_scalar_intt_scalar)
+    LOAD_SYMBOL(_lantern_Tensor_unfold_tensor_intt_intt_intt)
+    LOAD_SYMBOL(_lantern_unfold_backward_tensor_intarrayref_intt_intt_intt)
+    LOAD_SYMBOL(_lantern_equal_tensor_tensor)
+    LOAD_SYMBOL(_lantern_Tensor_equal_tensor_tensor)
+    LOAD_SYMBOL(_lantern_pow_out_tensor_tensor_tensor)
+    LOAD_SYMBOL(_lantern_pow_tensor_tensor)
+    LOAD_SYMBOL(_lantern_Tensor_pow_tensor_tensor)
+    LOAD_SYMBOL(_lantern_pow_out_tensor_scalar_tensor)
+    LOAD_SYMBOL(_lantern_pow_scalar_tensor)
+    LOAD_SYMBOL(_lantern_pow_out_tensor_tensor_scalar)
+    LOAD_SYMBOL(_lantern_pow_tensor_scalar)
+    LOAD_SYMBOL(_lantern_Tensor_pow_tensor_scalar)
+    LOAD_SYMBOL(_lantern_Tensor_pow__tensor_scalar)
+    LOAD_SYMBOL(_lantern_Tensor_pow__tensor_tensor)
+    LOAD_SYMBOL(_lantern_float_power_out_tensor_tensor_tensor)
+    LOAD_SYMBOL(_lantern_float_power_tensor_tensor)
+    LOAD_SYMBOL(_lantern_Tensor_float_power_tensor_tensor)
+    LOAD_SYMBOL(_lantern_float_power_out_tensor_scalar_tensor)
+    LOAD_SYMBOL(_lantern_float_power_scalar_tensor)
+    LOAD_SYMBOL(_lantern_float_power_out_tensor_tensor_scalar)
+    LOAD_SYMBOL(_lantern_float_power_tensor_scalar)
+    LOAD_SYMBOL(_lantern_Tensor_float_power_tensor_scalar)
+    LOAD_SYMBOL(_lantern_Tensor_float_power__tensor_scalar)
+    LOAD_SYMBOL(_lantern_Tensor_float_power__tensor_tensor)
+    LOAD_SYMBOL(_lantern_Tensor_normal__tensor_double_double_generator)
+    LOAD_SYMBOL(_lantern_normal_out_tensor_tensor_double_generator)
+    LOAD_SYMBOL(_lantern_normal_out_tensor_double_tensor_generator)
+    LOAD_SYMBOL(_lantern_normal_out_tensor_tensor_tensor_generator)
+    LOAD_SYMBOL(_lantern_normal_out_tensor_double_double_intarrayref_generator)
+    LOAD_SYMBOL(_lantern_alias_tensor)
+    LOAD_SYMBOL(_lantern_Tensor_alias_tensor)
+    LOAD_SYMBOL(_lantern__index_copy__tensor_intt_tensor_tensor)
+    LOAD_SYMBOL(_lantern__cumsum_tensor_intt)
+    LOAD_SYMBOL(_lantern__cumsum_out_tensor_tensor_intt)
+    LOAD_SYMBOL(_lantern__cumprod_tensor_intt)
+    LOAD_SYMBOL(_lantern__cumprod_out_tensor_tensor_intt)
+    LOAD_SYMBOL(_lantern__amp_foreach_non_finite_check_and_unscale__tensorlist_tensor_tensor)
+    LOAD_SYMBOL(_lantern__amp_update_scale__tensor_tensor_tensor_double_double_intt)
+    LOAD_SYMBOL(_lantern__cat_tensorlist_intt)
+    LOAD_SYMBOL(_lantern__cat_out_tensor_tensorlist_intt)
+    LOAD_SYMBOL(_lantern__foreach_add_tensorlist_scalar)
+    LOAD_SYMBOL(_lantern__foreach_add__tensorlist_scalar)
+    LOAD_SYMBOL(_lantern__foreach_sub_tensorlist_scalar)
+    LOAD_SYMBOL(_lantern__foreach_sub__tensorlist_scalar)
+    LOAD_SYMBOL(_lantern__foreach_mul_tensorlist_scalar)
+    LOAD_SYMBOL(_lantern__foreach_mul__tensorlist_scalar)
+    LOAD_SYMBOL(_lantern__foreach_div_tensorlist_scalar)
+    LOAD_SYMBOL(_lantern__foreach_div__tensorlist_scalar)
+    LOAD_SYMBOL(_lantern__foreach_add_tensorlist_tensorlist_scalar)
+    LOAD_SYMBOL(_lantern__foreach_add__tensorlist_tensorlist_scalar)
+    LOAD_SYMBOL(_lantern__foreach_sub_tensorlist_tensorlist_scalar)
+    LOAD_SYMBOL(_lantern__foreach_sub__tensorlist_tensorlist_scalar)
+    LOAD_SYMBOL(_lantern__foreach_mul_tensorlist_tensorlist)
+    LOAD_SYMBOL(_lantern__foreach_mul__tensorlist_tensorlist)
+    LOAD_SYMBOL(_lantern__foreach_div_tensorlist_tensorlist)
+    LOAD_SYMBOL(_lantern__foreach_div__tensorlist_tensorlist)
+    LOAD_SYMBOL(_lantern__foreach_add_tensorlist_arrayrefscalar)
+    LOAD_SYMBOL(_lantern__foreach_add__tensorlist_arrayrefscalar)
+    LOAD_SYMBOL(_lantern__foreach_sub_tensorlist_arrayrefscalar)
+    LOAD_SYMBOL(_lantern__foreach_sub__tensorlist_arrayrefscalar)
+    LOAD_SYMBOL(_lantern__foreach_div_tensorlist_arrayrefscalar)
+    LOAD_SYMBOL(_lantern__foreach_div__tensorlist_arrayrefscalar)
+    LOAD_SYMBOL(_lantern__foreach_mul_tensorlist_arrayrefscalar)
+    LOAD_SYMBOL(_lantern__foreach_mul__tensorlist_arrayrefscalar)
+    LOAD_SYMBOL(_lantern__foreach_exp_tensorlist)
+    LOAD_SYMBOL(_lantern__foreach_zero__tensorlist)
+    LOAD_SYMBOL(_lantern__foreach_exp__tensorlist)
+    LOAD_SYMBOL(_lantern__foreach_sqrt_tensorlist)
+    LOAD_SYMBOL(_lantern__foreach_sqrt__tensorlist)
+    LOAD_SYMBOL(_lantern__foreach_abs_tensorlist)
+    LOAD_SYMBOL(_lantern__foreach_abs__tensorlist)
+    LOAD_SYMBOL(_lantern__foreach_acos_tensorlist)
+    LOAD_SYMBOL(_lantern__foreach_acos__tensorlist)
+    LOAD_SYMBOL(_lantern__foreach_asin_tensorlist)
+    LOAD_SYMBOL(_lantern__foreach_asin__tensorlist)
+    LOAD_SYMBOL(_lantern__foreach_atan_tensorlist)
+    LOAD_SYMBOL(_lantern__foreach_atan__tensorlist)
+    LOAD_SYMBOL(_lantern__foreach_ceil_tensorlist)
+    LOAD_SYMBOL(_lantern__foreach_ceil__tensorlist)
+    LOAD_SYMBOL(_lantern__foreach_cos_tensorlist)
+    LOAD_SYMBOL(_lantern__foreach_cos__tensorlist)
+    LOAD_SYMBOL(_lantern__foreach_cosh_tensorlist)
+    LOAD_SYMBOL(_lantern__foreach_cosh__tensorlist)
+    LOAD_SYMBOL(_lantern__foreach_erf_tensorlist)
+    LOAD_SYMBOL(_lantern__foreach_erf__tensorlist)
+    LOAD_SYMBOL(_lantern__foreach_erfc_tensorlist)
+    LOAD_SYMBOL(_lantern__foreach_erfc__tensorlist)
+    LOAD_SYMBOL(_lantern__foreach_expm1_tensorlist)
+    LOAD_SYMBOL(_lantern__foreach_expm1__tensorlist)
+    LOAD_SYMBOL(_lantern__foreach_floor_tensorlist)
+    LOAD_SYMBOL(_lantern__foreach_floor__tensorlist)
+    LOAD_SYMBOL(_lantern__foreach_log_tensorlist)
+    LOAD_SYMBOL(_lantern__foreach_log__tensorlist)
+    LOAD_SYMBOL(_lantern__foreach_log10_tensorlist)
+    LOAD_SYMBOL(_lantern__foreach_log10__tensorlist)
+    LOAD_SYMBOL(_lantern__foreach_log1p_tensorlist)
+    LOAD_SYMBOL(_lantern__foreach_log1p__tensorlist)
+    LOAD_SYMBOL(_lantern__foreach_log2_tensorlist)
+    LOAD_SYMBOL(_lantern__foreach_log2__tensorlist)
+    LOAD_SYMBOL(_lantern__foreach_neg_tensorlist)
+    LOAD_SYMBOL(_lantern__foreach_neg__tensorlist)
+    LOAD_SYMBOL(_lantern__foreach_tan_tensorlist)
+    LOAD_SYMBOL(_lantern__foreach_tan__tensorlist)
+    LOAD_SYMBOL(_lantern__foreach_tanh_tensorlist)
+    LOAD_SYMBOL(_lantern__foreach_tanh__tensorlist)
+    LOAD_SYMBOL(_lantern__foreach_sin_tensorlist)
+    LOAD_SYMBOL(_lantern__foreach_sin__tensorlist)
+    LOAD_SYMBOL(_lantern__foreach_sinh_tensorlist)
+    LOAD_SYMBOL(_lantern__foreach_sinh__tensorlist)
+    LOAD_SYMBOL(_lantern__foreach_round_tensorlist)
+    LOAD_SYMBOL(_lantern__foreach_round__tensorlist)
+    LOAD_SYMBOL(_lantern__foreach_lgamma_tensorlist)
+    LOAD_SYMBOL(_lantern__foreach_lgamma__tensorlist)
+    LOAD_SYMBOL(_lantern__foreach_frac_tensorlist)
+    LOAD_SYMBOL(_lantern__foreach_frac__tensorlist)
+    LOAD_SYMBOL(_lantern__foreach_reciprocal_tensorlist)
+    LOAD_SYMBOL(_lantern__foreach_reciprocal__tensorlist)
+    LOAD_SYMBOL(_lantern__foreach_sigmoid_tensorlist)
+    LOAD_SYMBOL(_lantern__foreach_sigmoid__tensorlist)
+    LOAD_SYMBOL(_lantern__foreach_trunc_tensorlist)
+    LOAD_SYMBOL(_lantern__foreach_trunc__tensorlist)
+    LOAD_SYMBOL(_lantern__foreach_addcdiv__tensorlist_tensorlist_tensorlist_scalar)
+    LOAD_SYMBOL(_lantern__foreach_addcmul__tensorlist_tensorlist_tensorlist_scalar)
+    LOAD_SYMBOL(_lantern__foreach_addcdiv__tensorlist_tensorlist_tensorlist_arrayrefscalar)
+    LOAD_SYMBOL(_lantern__foreach_addcmul__tensorlist_tensorlist_tensorlist_arrayrefscalar)
+    LOAD_SYMBOL(_lantern__foreach_addcdiv_tensorlist_tensorlist_tensorlist_scalar)
+    LOAD_SYMBOL(_lantern__foreach_addcmul_tensorlist_tensorlist_tensorlist_scalar)
+    LOAD_SYMBOL(_lantern__foreach_addcdiv_tensorlist_tensorlist_tensorlist_arrayrefscalar)
+    LOAD_SYMBOL(_lantern__foreach_addcmul_tensorlist_tensorlist_tensorlist_arrayrefscalar)
+    LOAD_SYMBOL(_lantern__foreach_maximum_tensorlist_tensorlist)
+    LOAD_SYMBOL(_lantern__foreach_minimum_tensorlist_tensorlist)
+    LOAD_SYMBOL(_lantern_bucketize_tensor_tensor_bool_bool)
+    LOAD_SYMBOL(_lantern_bucketize_out_tensor_tensor_tensor_bool_bool)
+    LOAD_SYMBOL(_lantern_bucketize_scalar_tensor_bool_bool)
+    LOAD_SYMBOL(_lantern_searchsorted_tensor_tensor_bool_bool)
+    LOAD_SYMBOL(_lantern_searchsorted_out_tensor_tensor_tensor_bool_bool)
+    LOAD_SYMBOL(_lantern_searchsorted_tensor_scalar_bool_bool)
+    LOAD_SYMBOL(_lantern_mse_loss_out_tensor_tensor_tensor_intt)
+    LOAD_SYMBOL(_lantern_mse_loss_tensor_tensor_intt)
+    LOAD_SYMBOL(_lantern_mse_loss_backward_out_tensor_tensor_tensor_tensor_intt)
+    LOAD_SYMBOL(_lantern_mse_loss_backward_tensor_tensor_tensor_intt)
+    LOAD_SYMBOL(_lantern_l1_loss_out_tensor_tensor_tensor_intt)
+    LOAD_SYMBOL(_lantern_l1_loss_tensor_tensor_intt)
+    LOAD_SYMBOL(_lantern_l1_loss_backward_out_tensor_tensor_tensor_tensor_intt)
+    LOAD_SYMBOL(_lantern_l1_loss_backward_tensor_tensor_tensor_intt)
+    LOAD_SYMBOL(_lantern_multi_margin_loss_out_tensor_tensor_tensor_scalar_scalar_tensor_intt)
+    LOAD_SYMBOL(_lantern_multi_margin_loss_tensor_tensor_scalar_scalar_tensor_intt)
+    LOAD_SYMBOL(_lantern_multi_margin_loss_backward_out_tensor_tensor_tensor_tensor_scalar_scalar_tensor_intt)
+    LOAD_SYMBOL(_lantern_multi_margin_loss_backward_tensor_tensor_tensor_scalar_scalar_tensor_intt)
+    LOAD_SYMBOL(_lantern_multilabel_margin_loss_out_tensor_tensor_tensor_intt)
+    LOAD_SYMBOL(_lantern_multilabel_margin_loss_tensor_tensor_intt)
+    LOAD_SYMBOL(_lantern_multilabel_margin_loss_forward_out_tensor_tensor_tensor_tensor_intt)
+    LOAD_SYMBOL(_lantern_multilabel_margin_loss_forward_tensor_tensor_intt)
+    LOAD_SYMBOL(_lantern_multilabel_margin_loss_backward_out_tensor_tensor_tensor_tensor_intt_tensor)
+    LOAD_SYMBOL(_lantern_multilabel_margin_loss_backward_tensor_tensor_tensor_intt_tensor)
+    LOAD_SYMBOL(_lantern_nll_loss_out_tensor_tensor_tensor_tensor_intt_intt)
+    LOAD_SYMBOL(_lantern_nll_loss_nd_tensor_tensor_tensor_intt_intt)
+    LOAD_SYMBOL(_lantern_nll_loss_tensor_tensor_tensor_intt_intt)
+    LOAD_SYMBOL(_lantern_nll_loss_forward_out_tensor_tensor_tensor_tensor_tensor_intt_intt)
+    LOAD_SYMBOL(_lantern_nll_loss_forward_tensor_tensor_tensor_intt_intt)
+    LOAD_SYMBOL(_lantern_nll_loss_backward_out_tensor_tensor_tensor_tensor_tensor_intt_intt_tensor)
+    LOAD_SYMBOL(_lantern_nll_loss_backward_tensor_tensor_tensor_tensor_intt_intt_tensor)
+    LOAD_SYMBOL(_lantern_nll_loss2d_out_tensor_tensor_tensor_tensor_intt_intt)
+    LOAD_SYMBOL(_lantern_nll_loss2d_tensor_tensor_tensor_intt_intt)
+    LOAD_SYMBOL(_lantern_nll_loss2d_forward_out_tensor_tensor_tensor_tensor_tensor_intt_intt)
+    LOAD_SYMBOL(_lantern_nll_loss2d_forward_tensor_tensor_tensor_intt_intt)
+    LOAD_SYMBOL(_lantern_nll_loss2d_backward_out_tensor_tensor_tensor_tensor_tensor_intt_intt_tensor)
+    LOAD_SYMBOL(_lantern_nll_loss2d_backward_tensor_tensor_tensor_tensor_intt_intt_tensor)
+    LOAD_SYMBOL(_lantern_smooth_l1_loss_out_tensor_tensor_tensor_intt_double)
+    LOAD_SYMBOL(_lantern_smooth_l1_loss_tensor_tensor_intt_double)
+    LOAD_SYMBOL(_lantern_smooth_l1_loss_backward_out_tensor_tensor_tensor_tensor_intt_double)
+    LOAD_SYMBOL(_lantern_smooth_l1_loss_backward_tensor_tensor_tensor_intt_double)
+    LOAD_SYMBOL(_lantern_huber_loss_out_tensor_tensor_tensor_intt_double)
+    LOAD_SYMBOL(_lantern_huber_loss_tensor_tensor_intt_double)
+    LOAD_SYMBOL(_lantern_huber_loss_backward_out_tensor_tensor_tensor_tensor_intt_double)
+    LOAD_SYMBOL(_lantern_huber_loss_backward_tensor_tensor_tensor_intt_double)
+    LOAD_SYMBOL(_lantern_soft_margin_loss_out_tensor_tensor_tensor_intt)
+    LOAD_SYMBOL(_lantern_soft_margin_loss_tensor_tensor_intt)
+    LOAD_SYMBOL(_lantern_soft_margin_loss_backward_out_tensor_tensor_tensor_tensor_intt)
+    LOAD_SYMBOL(_lantern_soft_margin_loss_backward_tensor_tensor_tensor_intt)
+    LOAD_SYMBOL(_lantern_elu_out_tensor_tensor_scalar_scalar_scalar)
+    LOAD_SYMBOL(_lantern_elu_tensor_scalar_scalar_scalar)
+    LOAD_SYMBOL(_lantern_elu_backward_tensor_scalar_scalar_scalar_bool_tensor)
+    LOAD_SYMBOL(_lantern_elu__tensor_scalar_scalar_scalar)
+    LOAD_SYMBOL(_lantern_glu_out_tensor_tensor_intt)
+    LOAD_SYMBOL(_lantern_glu_tensor_intt)
+    LOAD_SYMBOL(_lantern_glu_backward_out_tensor_tensor_tensor_intt)
+    LOAD_SYMBOL(_lantern_glu_backward_tensor_tensor_intt)
+    LOAD_SYMBOL(_lantern_hardsigmoid_out_tensor_tensor)
+    LOAD_SYMBOL(_lantern_hardsigmoid_tensor)
+    LOAD_SYMBOL(_lantern_hardsigmoid__tensor)
+    LOAD_SYMBOL(_lantern_hardsigmoid_backward_tensor_tensor)
+    LOAD_SYMBOL(_lantern_hardtanh_out_tensor_tensor_scalar_scalar)
+    LOAD_SYMBOL(_lantern_hardtanh_tensor_scalar_scalar)
+    LOAD_SYMBOL(_lantern_hardtanh_backward_out_tensor_tensor_tensor_scalar_scalar)
+    LOAD_SYMBOL(_lantern_hardtanh_backward_tensor_tensor_scalar_scalar)
+    LOAD_SYMBOL(_lantern_hardtanh__tensor_scalar_scalar)
+    LOAD_SYMBOL(_lantern_hardswish_out_tensor_tensor)
+    LOAD_SYMBOL(_lantern_hardswish_tensor)
+    LOAD_SYMBOL(_lantern_hardswish__tensor)
+    LOAD_SYMBOL(_lantern_hardswish_backward_tensor_tensor)
+    LOAD_SYMBOL(_lantern_leaky_relu_out_tensor_tensor_scalar)
+    LOAD_SYMBOL(_lantern_leaky_relu_tensor_scalar)
+    LOAD_SYMBOL(_lantern_leaky_relu_backward_tensor_tensor_scalar_bool)
+    LOAD_SYMBOL(_lantern_leaky_relu__tensor_scalar)
+    LOAD_SYMBOL(_lantern_log_sigmoid_out_tensor_tensor)
+    LOAD_SYMBOL(_lantern_log_sigmoid_tensor)
+    LOAD_SYMBOL(_lantern_log_sigmoid_forward_out_tensor_tensor_tensor)
+    LOAD_SYMBOL(_lantern_log_sigmoid_forward_tensor)
+    LOAD_SYMBOL(_lantern_log_sigmoid_backward_out_tensor_tensor_tensor_tensor)
+    LOAD_SYMBOL(_lantern_log_sigmoid_backward_tensor_tensor_tensor)
+    LOAD_SYMBOL(_lantern_rrelu_with_noise_out_tensor_tensor_tensor_scalar_scalar_bool_generator)
+    LOAD_SYMBOL(_lantern_rrelu_with_noise_tensor_tensor_scalar_scalar_bool_generator)
+    LOAD_SYMBOL(_lantern_rrelu_with_noise_backward_tensor_tensor_tensor_scalar_scalar_bool_bool)
+    LOAD_SYMBOL(_lantern_rrelu_with_noise__tensor_tensor_scalar_scalar_bool_generator)
+    LOAD_SYMBOL(_lantern_softplus_out_tensor_tensor_scalar_scalar)
+    LOAD_SYMBOL(_lantern_softplus_tensor_scalar_scalar)
+    LOAD_SYMBOL(_lantern_softplus_backward_out_tensor_tensor_tensor_scalar_scalar_tensor)
+    LOAD_SYMBOL(_lantern_softplus_backward_tensor_tensor_scalar_scalar_tensor)
+    LOAD_SYMBOL(_lantern_softshrink_out_tensor_tensor_scalar)
+    LOAD_SYMBOL(_lantern_softshrink_tensor_scalar)
+    LOAD_SYMBOL(_lantern_softshrink_backward_out_tensor_tensor_tensor_scalar)
+    LOAD_SYMBOL(_lantern_softshrink_backward_tensor_tensor_scalar)
+    LOAD_SYMBOL(_lantern_adaptive_avg_pool2d_out_tensor_tensor_intarrayref)
+    LOAD_SYMBOL(_lantern_adaptive_avg_pool2d_tensor_intarrayref)
+    LOAD_SYMBOL(_lantern_mkldnn_adaptive_avg_pool2d_tensor_intarrayref)
+    LOAD_SYMBOL(_lantern_mkldnn_adaptive_avg_pool2d_backward_tensor_tensor)
+    LOAD_SYMBOL(_lantern__adaptive_avg_pool2d_tensor_intarrayref)
+    LOAD_SYMBOL(_lantern__adaptive_avg_pool2d_backward_tensor_tensor)
+    LOAD_SYMBOL(_lantern_adaptive_avg_pool3d_out_tensor_tensor_intarrayref)
+    LOAD_SYMBOL(_lantern_adaptive_avg_pool3d_tensor_intarrayref)
+    LOAD_SYMBOL(_lantern__adaptive_avg_pool3d_tensor_intarrayref)
+    LOAD_SYMBOL(_lantern_adaptive_avg_pool3d_backward_out_tensor_tensor_tensor)
+    LOAD_SYMBOL(_lantern__adaptive_avg_pool3d_backward_tensor_tensor)
+    LOAD_SYMBOL(_lantern_adaptive_max_pool2d_out_tensor_tensor_tensor_intarrayref)
+    LOAD_SYMBOL(_lantern_adaptive_max_pool2d_tensor_intarrayref)
+    LOAD_SYMBOL(_lantern_adaptive_max_pool2d_backward_out_tensor_tensor_tensor_tensor)
+    LOAD_SYMBOL(_lantern_adaptive_max_pool2d_backward_tensor_tensor_tensor)
+    LOAD_SYMBOL(_lantern_adaptive_max_pool3d_out_tensor_tensor_tensor_intarrayref)
+    LOAD_SYMBOL(_lantern_adaptive_max_pool3d_tensor_intarrayref)
+    LOAD_SYMBOL(_lantern_adaptive_max_pool3d_backward_out_tensor_tensor_tensor_tensor)
+    LOAD_SYMBOL(_lantern_adaptive_max_pool3d_backward_tensor_tensor_tensor)
+    LOAD_SYMBOL(_lantern_avg_pool2d_out_tensor_tensor_intarrayref_intarrayref_intarrayref_bool_bool_intt)
+    LOAD_SYMBOL(_lantern_avg_pool2d_tensor_intarrayref_intarrayref_intarrayref_bool_bool_intt)
+    LOAD_SYMBOL(_lantern_avg_pool2d_backward_out_tensor_tensor_tensor_intarrayref_intarrayref_intarrayref_bool_bool_intt)
+    LOAD_SYMBOL(_lantern_avg_pool2d_backward_tensor_tensor_intarrayref_intarrayref_intarrayref_bool_bool_intt)
+    LOAD_SYMBOL(_lantern_avg_pool3d_out_tensor_tensor_intarrayref_intarrayref_intarrayref_bool_bool_intt)
+    LOAD_SYMBOL(_lantern_avg_pool3d_tensor_intarrayref_intarrayref_intarrayref_bool_bool_intt)
+    LOAD_SYMBOL(_lantern_avg_pool3d_backward_out_tensor_tensor_tensor_intarrayref_intarrayref_intarrayref_bool_bool_intt)
+    LOAD_SYMBOL(_lantern_avg_pool3d_backward_tensor_tensor_intarrayref_intarrayref_intarrayref_bool_bool_intt)
+    LOAD_SYMBOL(_lantern_fractional_max_pool2d_out_tensor_tensor_tensor_intarrayref_intarrayref_tensor)
+    LOAD_SYMBOL(_lantern_fractional_max_pool2d_tensor_intarrayref_intarrayref_tensor)
+    LOAD_SYMBOL(_lantern_fractional_max_pool2d_backward_out_tensor_tensor_tensor_intarrayref_intarrayref_tensor)
+    LOAD_SYMBOL(_lantern_fractional_max_pool2d_backward_tensor_tensor_intarrayref_intarrayref_tensor)
+    LOAD_SYMBOL(_lantern_fractional_max_pool3d_out_tensor_tensor_tensor_intarrayref_intarrayref_tensor)
+    LOAD_SYMBOL(_lantern_fractional_max_pool3d_tensor_intarrayref_intarrayref_tensor)
+    LOAD_SYMBOL(_lantern_fractional_max_pool3d_backward_out_tensor_tensor_tensor_intarrayref_intarrayref_tensor)
+    LOAD_SYMBOL(_lantern_fractional_max_pool3d_backward_tensor_tensor_intarrayref_intarrayref_tensor)
+    LOAD_SYMBOL(_lantern_max_pool2d_with_indices_out_tensor_tensor_tensor_intarrayref_intarrayref_intarrayref_intarrayref_bool)
+    LOAD_SYMBOL(_lantern_max_pool2d_with_indices_tensor_intarrayref_intarrayref_intarrayref_intarrayref_bool)
+    LOAD_SYMBOL(_lantern_max_pool2d_with_indices_backward_out_tensor_tensor_tensor_intarrayref_intarrayref_intarrayref_intarrayref_bool_tensor)
+    LOAD_SYMBOL(_lantern_max_pool2d_with_indices_backward_tensor_tensor_intarrayref_intarrayref_intarrayref_intarrayref_bool_tensor)
+    LOAD_SYMBOL(_lantern_max_pool3d_with_indices_out_tensor_tensor_tensor_intarrayref_intarrayref_intarrayref_intarrayref_bool)
+    LOAD_SYMBOL(_lantern_max_pool3d_with_indices_tensor_intarrayref_intarrayref_intarrayref_intarrayref_bool)
+    LOAD_SYMBOL(_lantern_max_pool3d_with_indices_backward_out_tensor_tensor_tensor_intarrayref_intarrayref_intarrayref_intarrayref_bool_tensor)
+    LOAD_SYMBOL(_lantern_max_pool3d_with_indices_backward_tensor_tensor_intarrayref_intarrayref_intarrayref_intarrayref_bool_tensor)
+    LOAD_SYMBOL(_lantern_max_unpool2d_out_tensor_tensor_tensor_intarrayref)
+    LOAD_SYMBOL(_lantern_max_unpool2d_tensor_tensor_intarrayref)
+    LOAD_SYMBOL(_lantern_max_unpool2d_backward_out_tensor_tensor_tensor_tensor_intarrayref)
+    LOAD_SYMBOL(_lantern_max_unpool2d_backward_tensor_tensor_tensor_intarrayref)
+    LOAD_SYMBOL(_lantern_max_unpool3d_out_tensor_tensor_tensor_intarrayref_intarrayref_intarrayref)
+    LOAD_SYMBOL(_lantern_max_unpool3d_tensor_tensor_intarrayref_intarrayref_intarrayref)
+    LOAD_SYMBOL(_lantern_max_unpool3d_backward_out_tensor_tensor_tensor_tensor_intarrayref_intarrayref_intarrayref)
+    LOAD_SYMBOL(_lantern_max_unpool3d_backward_tensor_tensor_tensor_intarrayref_intarrayref_intarrayref)
+    LOAD_SYMBOL(_lantern_reflection_pad1d_out_tensor_tensor_intarrayref)
+    LOAD_SYMBOL(_lantern_reflection_pad1d_tensor_intarrayref)
+    LOAD_SYMBOL(_lantern_reflection_pad1d_backward_out_tensor_tensor_tensor_intarrayref)
+    LOAD_SYMBOL(_lantern_reflection_pad1d_backward_tensor_tensor_intarrayref)
+    LOAD_SYMBOL(_lantern_reflection_pad2d_out_tensor_tensor_intarrayref)
+    LOAD_SYMBOL(_lantern_reflection_pad2d_tensor_intarrayref)
+    LOAD_SYMBOL(_lantern_reflection_pad2d_backward_out_tensor_tensor_tensor_intarrayref)
+    LOAD_SYMBOL(_lantern_reflection_pad2d_backward_tensor_tensor_intarrayref)
+    LOAD_SYMBOL(_lantern_replication_pad1d_out_tensor_tensor_intarrayref)
+    LOAD_SYMBOL(_lantern_replication_pad1d_tensor_intarrayref)
+    LOAD_SYMBOL(_lantern_replication_pad1d_backward_out_tensor_tensor_tensor_intarrayref)
+    LOAD_SYMBOL(_lantern_replication_pad1d_backward_tensor_tensor_intarrayref)
+    LOAD_SYMBOL(_lantern_replication_pad2d_out_tensor_tensor_intarrayref)
+    LOAD_SYMBOL(_lantern_replication_pad2d_tensor_intarrayref)
+    LOAD_SYMBOL(_lantern_replication_pad2d_backward_out_tensor_tensor_tensor_intarrayref)
+    LOAD_SYMBOL(_lantern_replication_pad2d_backward_tensor_tensor_intarrayref)
+    LOAD_SYMBOL(_lantern_replication_pad3d_out_tensor_tensor_intarrayref)
+    LOAD_SYMBOL(_lantern_replication_pad3d_tensor_intarrayref)
+    LOAD_SYMBOL(_lantern_replication_pad3d_backward_out_tensor_tensor_tensor_intarrayref)
+    LOAD_SYMBOL(_lantern_replication_pad3d_backward_tensor_tensor_intarrayref)
+    LOAD_SYMBOL(_lantern_upsample_linear1d_tensor_intarrayref_bool_arrayrefdouble)
+    LOAD_SYMBOL(_lantern_upsample_linear1d_backward_tensor_intarrayref_intarrayref_bool_arrayrefdouble)
+    LOAD_SYMBOL(_lantern_upsample_bilinear2d_tensor_intarrayref_bool_arrayrefdouble)
+    LOAD_SYMBOL(_lantern_upsample_bilinear2d_backward_tensor_intarrayref_intarrayref_bool_arrayrefdouble)
+    LOAD_SYMBOL(_lantern_upsample_trilinear3d_tensor_intarrayref_bool_arrayrefdouble)
+    LOAD_SYMBOL(_lantern_upsample_trilinear3d_backward_tensor_intarrayref_intarrayref_bool_arrayrefdouble)
+    LOAD_SYMBOL(_lantern_upsample_bicubic2d_tensor_intarrayref_bool_arrayrefdouble)
+    LOAD_SYMBOL(_lantern_upsample_bicubic2d_backward_tensor_intarrayref_intarrayref_bool_arrayrefdouble)
+    LOAD_SYMBOL(_lantern_upsample_nearest1d_tensor_intarrayref_arrayrefdouble)
+    LOAD_SYMBOL(_lantern_upsample_nearest1d_backward_tensor_intarrayref_intarrayref_arrayrefdouble)
+    LOAD_SYMBOL(_lantern_upsample_nearest2d_tensor_intarrayref_arrayrefdouble)
+    LOAD_SYMBOL(_lantern_upsample_nearest2d_backward_tensor_intarrayref_intarrayref_arrayrefdouble)
+    LOAD_SYMBOL(_lantern_upsample_nearest3d_tensor_intarrayref_arrayrefdouble)
+    LOAD_SYMBOL(_lantern_upsample_nearest3d_backward_tensor_intarrayref_intarrayref_arrayrefdouble)
+    LOAD_SYMBOL(_lantern_upsample_linear1d_out_tensor_tensor_intarrayref_bool_double)
+    LOAD_SYMBOL(_lantern_upsample_linear1d_tensor_intarrayref_bool_double)
+    LOAD_SYMBOL(_lantern_upsample_linear1d_backward_out_tensor_tensor_intarrayref_intarrayref_bool_double)
+    LOAD_SYMBOL(_lantern_upsample_linear1d_backward_tensor_intarrayref_intarrayref_bool_double)
+    LOAD_SYMBOL(_lantern_upsample_bilinear2d_out_tensor_tensor_intarrayref_bool_double_double)
+    LOAD_SYMBOL(_lantern_upsample_bilinear2d_tensor_intarrayref_bool_double_double)
+    LOAD_SYMBOL(_lantern_upsample_bilinear2d_backward_out_tensor_tensor_intarrayref_intarrayref_bool_double_double)
+    LOAD_SYMBOL(_lantern_upsample_bilinear2d_backward_tensor_intarrayref_intarrayref_bool_double_double)
+    LOAD_SYMBOL(_lantern_upsample_bicubic2d_out_tensor_tensor_intarrayref_bool_double_double)
+    LOAD_SYMBOL(_lantern_upsample_bicubic2d_tensor_intarrayref_bool_double_double)
+    LOAD_SYMBOL(_lantern_upsample_bicubic2d_backward_out_tensor_tensor_intarrayref_intarrayref_bool_double_double)
+    LOAD_SYMBOL(_lantern_upsample_bicubic2d_backward_tensor_intarrayref_intarrayref_bool_double_double)
+    LOAD_SYMBOL(_lantern_upsample_trilinear3d_out_tensor_tensor_intarrayref_bool_double_double_double)
+    LOAD_SYMBOL(_lantern_upsample_trilinear3d_tensor_intarrayref_bool_double_double_double)
+    LOAD_SYMBOL(_lantern_upsample_trilinear3d_backward_out_tensor_tensor_intarrayref_intarrayref_bool_double_double_double)
+    LOAD_SYMBOL(_lantern_upsample_trilinear3d_backward_tensor_intarrayref_intarrayref_bool_double_double_double)
+    LOAD_SYMBOL(_lantern_upsample_nearest1d_out_tensor_tensor_intarrayref_double)
+    LOAD_SYMBOL(_lantern_upsample_nearest1d_tensor_intarrayref_double)
+    LOAD_SYMBOL(_lantern_upsample_nearest1d_backward_out_tensor_tensor_intarrayref_intarrayref_double)
+    LOAD_SYMBOL(_lantern_upsample_nearest1d_backward_tensor_intarrayref_intarrayref_double)
+    LOAD_SYMBOL(_lantern_upsample_nearest2d_out_tensor_tensor_intarrayref_double_double)
+    LOAD_SYMBOL(_lantern_upsample_nearest2d_tensor_intarrayref_double_double)
+    LOAD_SYMBOL(_lantern_upsample_nearest2d_backward_out_tensor_tensor_intarrayref_intarrayref_double_double)
+    LOAD_SYMBOL(_lantern_upsample_nearest2d_backward_tensor_intarrayref_intarrayref_double_double)
+    LOAD_SYMBOL(_lantern_upsample_nearest3d_out_tensor_tensor_intarrayref_double_double_double)
+    LOAD_SYMBOL(_lantern_upsample_nearest3d_tensor_intarrayref_double_double_double)
+    LOAD_SYMBOL(_lantern_upsample_nearest3d_backward_out_tensor_tensor_intarrayref_intarrayref_double_double_double)
+    LOAD_SYMBOL(_lantern_upsample_nearest3d_backward_tensor_intarrayref_intarrayref_double_double_double)
+    LOAD_SYMBOL(_lantern_sigmoid_backward_out_tensor_tensor_tensor)
+    LOAD_SYMBOL(_lantern_sigmoid_backward_tensor_tensor)
+    LOAD_SYMBOL(_lantern_logit_backward_out_tensor_tensor_tensor_double)
+    LOAD_SYMBOL(_lantern_logit_backward_tensor_tensor_double)
+    LOAD_SYMBOL(_lantern_tanh_backward_out_tensor_tensor_tensor)
+    LOAD_SYMBOL(_lantern_tanh_backward_tensor_tensor)
+    LOAD_SYMBOL(_lantern_slow_conv_transpose2d_out_tensor_tensor_tensor_intarrayref_tensor_intarrayref_intarrayref_intarrayref_intarrayref)
+    LOAD_SYMBOL(_lantern_slow_conv_transpose2d_tensor_tensor_intarrayref_tensor_intarrayref_intarrayref_intarrayref_intarrayref)
+    LOAD_SYMBOL(_lantern_slow_conv_transpose2d_backward_out_tensor_tensor_tensor_tensor_tensor_tensor_intarrayref_intarrayref_intarrayref_intarrayref_intarrayref_tensor_tensor)
+    LOAD_SYMBOL(_lantern_slow_conv_transpose2d_backward_tensor_tensor_tensor_intarrayref_intarrayref_intarrayref_intarrayref_intarrayref_tensor_tensor_stdarraybool)
+    LOAD_SYMBOL(_lantern_slow_conv_transpose3d_out_tensor_tensor_tensor_intarrayref_tensor_intarrayref_intarrayref_intarrayref_intarrayref)
+    LOAD_SYMBOL(_lantern_slow_conv_transpose3d_tensor_tensor_intarrayref_tensor_intarrayref_intarrayref_intarrayref_intarrayref)
+    LOAD_SYMBOL(_lantern_slow_conv_transpose3d_backward_out_tensor_tensor_tensor_tensor_tensor_tensor_intarrayref_intarrayref_intarrayref_intarrayref_intarrayref_tensor_tensor)
+    LOAD_SYMBOL(_lantern_slow_conv_transpose3d_backward_tensor_tensor_tensor_intarrayref_intarrayref_intarrayref_intarrayref_intarrayref_tensor_tensor_stdarraybool)
+    LOAD_SYMBOL(_lantern_thnn_conv2d_out_tensor_tensor_tensor_intarrayref_tensor_intarrayref_intarrayref)
+    LOAD_SYMBOL(_lantern_thnn_conv2d_tensor_tensor_intarrayref_tensor_intarrayref_intarrayref)
+    LOAD_SYMBOL(_lantern_thnn_conv2d_forward_out_tensor_tensor_tensor_tensor_tensor_intarrayref_tensor_intarrayref_intarrayref)
+    LOAD_SYMBOL(_lantern_thnn_conv2d_forward_tensor_tensor_intarrayref_tensor_intarrayref_intarrayref)
+    LOAD_SYMBOL(_lantern_thnn_conv2d_backward_out_tensor_tensor_tensor_tensor_tensor_tensor_intarrayref_intarrayref_intarrayref_tensor_tensor)
+    LOAD_SYMBOL(_lantern_thnn_conv2d_backward_tensor_tensor_tensor_intarrayref_intarrayref_intarrayref_tensor_tensor_stdarraybool)
+    LOAD_SYMBOL(_lantern_thnn_conv_depthwise2d_out_tensor_tensor_tensor_intarrayref_tensor_intarrayref_intarrayref_intarrayref)
+    LOAD_SYMBOL(_lantern_thnn_conv_depthwise2d_tensor_tensor_intarrayref_tensor_intarrayref_intarrayref_intarrayref)
+    LOAD_SYMBOL(_lantern_thnn_conv_depthwise2d_forward_out_tensor_tensor_tensor_intarrayref_tensor_intarrayref_intarrayref_intarrayref)
+    LOAD_SYMBOL(_lantern_thnn_conv_depthwise2d_forward_tensor_tensor_intarrayref_tensor_intarrayref_intarrayref_intarrayref)
+    LOAD_SYMBOL(_lantern_thnn_conv_depthwise2d_backward_out_tensor_tensor_tensor_tensor_tensor_intarrayref_intarrayref_intarrayref_intarrayref)
+    LOAD_SYMBOL(_lantern_thnn_conv_depthwise2d_backward_tensor_tensor_tensor_intarrayref_intarrayref_intarrayref_intarrayref_stdarraybool)
+    LOAD_SYMBOL(_lantern_conv_depthwise3d_tensor_tensor_intarrayref_tensor_intarrayref_intarrayref_intarrayref)
+    LOAD_SYMBOL(_lantern_conv_depthwise3d_backward_out_tensor_tensor_tensor_tensor_tensor_tensor_intarrayref_intarrayref_intarrayref_intarrayref)
+    LOAD_SYMBOL(_lantern_conv_depthwise3d_backward_tensor_tensor_tensor_intarrayref_intarrayref_intarrayref_intarrayref_stdarraybool)
+    LOAD_SYMBOL(_lantern_slow_conv3d_out_tensor_tensor_tensor_intarrayref_tensor_intarrayref_intarrayref)
+    LOAD_SYMBOL(_lantern_slow_conv3d_tensor_tensor_intarrayref_tensor_intarrayref_intarrayref)
+    LOAD_SYMBOL(_lantern_slow_conv3d_forward_out_tensor_tensor_tensor_tensor_tensor_intarrayref_tensor_intarrayref_intarrayref)
+    LOAD_SYMBOL(_lantern_slow_conv3d_forward_tensor_tensor_intarrayref_tensor_intarrayref_intarrayref)
+    LOAD_SYMBOL(_lantern_slow_conv3d_backward_out_tensor_tensor_tensor_tensor_tensor_tensor_intarrayref_intarrayref_intarrayref_tensor_tensor)
+    LOAD_SYMBOL(_lantern_slow_conv3d_backward_tensor_tensor_tensor_intarrayref_intarrayref_intarrayref_tensor_tensor_stdarraybool)
+    LOAD_SYMBOL(_lantern_slow_conv_dilated2d_tensor_tensor_intarrayref_tensor_intarrayref_intarrayref_intarrayref)
+    LOAD_SYMBOL(_lantern_slow_conv_dilated2d_backward_tensor_tensor_tensor_intarrayref_intarrayref_intarrayref_intarrayref_stdarraybool)
+    LOAD_SYMBOL(_lantern_slow_conv_dilated3d_tensor_tensor_intarrayref_tensor_intarrayref_intarrayref_intarrayref)
+    LOAD_SYMBOL(_lantern_slow_conv_dilated3d_backward_tensor_tensor_tensor_intarrayref_intarrayref_intarrayref_intarrayref_stdarraybool)
+    LOAD_SYMBOL(_lantern_col2im_out_tensor_tensor_intarrayref_intarrayref_intarrayref_intarrayref_intarrayref)
+    LOAD_SYMBOL(_lantern_col2im_tensor_intarrayref_intarrayref_intarrayref_intarrayref_intarrayref)
+    LOAD_SYMBOL(_lantern_col2im_backward_out_tensor_tensor_intarrayref_intarrayref_intarrayref_intarrayref)
+    LOAD_SYMBOL(_lantern_col2im_backward_tensor_intarrayref_intarrayref_intarrayref_intarrayref)
+    LOAD_SYMBOL(_lantern_column_stack_tensorlist)
+    LOAD_SYMBOL(_lantern_column_stack_out_tensor_tensorlist)
+    LOAD_SYMBOL(_lantern_im2col_out_tensor_tensor_intarrayref_intarrayref_intarrayref_intarrayref)
+    LOAD_SYMBOL(_lantern_im2col_tensor_intarrayref_intarrayref_intarrayref_intarrayref)
+    LOAD_SYMBOL(_lantern_im2col_backward_out_tensor_tensor_intarrayref_intarrayref_intarrayref_intarrayref_intarrayref)
+    LOAD_SYMBOL(_lantern_im2col_backward_tensor_intarrayref_intarrayref_intarrayref_intarrayref_intarrayref)
+    LOAD_SYMBOL(_lantern_isfinite_tensor)
+    LOAD_SYMBOL(_lantern_Tensor_isfinite_tensor)
+    LOAD_SYMBOL(_lantern_isinf_tensor)
+    LOAD_SYMBOL(_lantern_Tensor_isinf_tensor)
+    LOAD_SYMBOL(_lantern_Tensor_record_stream_tensor_stream)
+    LOAD_SYMBOL(_lantern_isposinf_tensor)
+    LOAD_SYMBOL(_lantern_Tensor_isposinf_tensor)
+    LOAD_SYMBOL(_lantern_isposinf_out_tensor_tensor)
+    LOAD_SYMBOL(_lantern_isneginf_tensor)
+    LOAD_SYMBOL(_lantern_Tensor_isneginf_tensor)
+    LOAD_SYMBOL(_lantern_isneginf_out_tensor_tensor)
+    LOAD_SYMBOL(_lantern__add_batch_dim_tensor_intt_intt)
+    LOAD_SYMBOL(_lantern__remove_batch_dim_tensor_intt_intt_intt)
+    LOAD_SYMBOL(_lantern_special_entr_tensor)
+    LOAD_SYMBOL(_lantern_special_entr_out_tensor_tensor)
+    LOAD_SYMBOL(_lantern_special_expm1_tensor)
+    LOAD_SYMBOL(_lantern_special_expm1_out_tensor_tensor)
+    LOAD_SYMBOL(_lantern_special_exp2_tensor)
+    LOAD_SYMBOL(_lantern_special_exp2_out_tensor_tensor)
+    LOAD_SYMBOL(_lantern_special_gammaln_tensor)
+    LOAD_SYMBOL(_lantern_special_gammaln_out_tensor_tensor)
+    LOAD_SYMBOL(_lantern_special_erf_tensor)
+    LOAD_SYMBOL(_lantern_special_erf_out_tensor_tensor)
+    LOAD_SYMBOL(_lantern_special_erfc_tensor)
+    LOAD_SYMBOL(_lantern_special_erfc_out_tensor_tensor)
+    LOAD_SYMBOL(_lantern_special_erfinv_tensor)
+    LOAD_SYMBOL(_lantern_special_erfinv_out_tensor_tensor)
+    LOAD_SYMBOL(_lantern_special_xlog1py_tensor_tensor)
+    LOAD_SYMBOL(_lantern_special_xlog1py_scalar_tensor)
+    LOAD_SYMBOL(_lantern_special_xlog1py_tensor_scalar)
+    LOAD_SYMBOL(_lantern_special_xlog1py_out_tensor_tensor_tensor)
+    LOAD_SYMBOL(_lantern_special_xlog1py_out_tensor_scalar_tensor)
+    LOAD_SYMBOL(_lantern_special_xlog1py_out_tensor_tensor_scalar)
+    LOAD_SYMBOL(_lantern_special_i0e_tensor)
+    LOAD_SYMBOL(_lantern_special_i0e_out_tensor_tensor)
+    LOAD_SYMBOL(_lantern_special_logit_tensor_double)
+    LOAD_SYMBOL(_lantern_special_logit_out_tensor_tensor_double)
+    LOAD_SYMBOL(_lantern_special_expit_tensor)
+    LOAD_SYMBOL(_lantern_special_expit_out_tensor_tensor)
+    LOAD_SYMBOL(_lantern_fft_fft_tensor_intt_intt_stdstring)
+    LOAD_SYMBOL(_lantern_fft_fft_out_tensor_tensor_intt_intt_stdstring)
+    LOAD_SYMBOL(_lantern_fft_ifft_tensor_intt_intt_stdstring)
+    LOAD_SYMBOL(_lantern_fft_ifft_out_tensor_tensor_intt_intt_stdstring)
+    LOAD_SYMBOL(_lantern_fft_rfft_tensor_intt_intt_stdstring)
+    LOAD_SYMBOL(_lantern_fft_rfft_out_tensor_tensor_intt_intt_stdstring)
+    LOAD_SYMBOL(_lantern_fft_irfft_tensor_intt_intt_stdstring)
+    LOAD_SYMBOL(_lantern_fft_irfft_out_tensor_tensor_intt_intt_stdstring)
+    LOAD_SYMBOL(_lantern_fft_hfft_tensor_intt_intt_stdstring)
+    LOAD_SYMBOL(_lantern_fft_hfft_out_tensor_tensor_intt_intt_stdstring)
+    LOAD_SYMBOL(_lantern_fft_ihfft_tensor_intt_intt_stdstring)
+    LOAD_SYMBOL(_lantern_fft_ihfft_out_tensor_tensor_intt_intt_stdstring)
+    LOAD_SYMBOL(_lantern_fft_fft2_tensor_intarrayref_intarrayref_stdstring)
+    LOAD_SYMBOL(_lantern_fft_fft2_out_tensor_tensor_intarrayref_intarrayref_stdstring)
+    LOAD_SYMBOL(_lantern_fft_ifft2_tensor_intarrayref_intarrayref_stdstring)
+    LOAD_SYMBOL(_lantern_fft_ifft2_out_tensor_tensor_intarrayref_intarrayref_stdstring)
+    LOAD_SYMBOL(_lantern_fft_rfft2_tensor_intarrayref_intarrayref_stdstring)
+    LOAD_SYMBOL(_lantern_fft_rfft2_out_tensor_tensor_intarrayref_intarrayref_stdstring)
+    LOAD_SYMBOL(_lantern_fft_irfft2_tensor_intarrayref_intarrayref_stdstring)
+    LOAD_SYMBOL(_lantern_fft_irfft2_out_tensor_tensor_intarrayref_intarrayref_stdstring)
+    LOAD_SYMBOL(_lantern_fft_fftn_tensor_intarrayref_intarrayref_stdstring)
+    LOAD_SYMBOL(_lantern_fft_fftn_out_tensor_tensor_intarrayref_intarrayref_stdstring)
+    LOAD_SYMBOL(_lantern_fft_ifftn_tensor_intarrayref_intarrayref_stdstring)
+    LOAD_SYMBOL(_lantern_fft_ifftn_out_tensor_tensor_intarrayref_intarrayref_stdstring)
+    LOAD_SYMBOL(_lantern_fft_rfftn_tensor_intarrayref_intarrayref_stdstring)
+    LOAD_SYMBOL(_lantern_fft_rfftn_out_tensor_tensor_intarrayref_intarrayref_stdstring)
+    LOAD_SYMBOL(_lantern_fft_irfftn_tensor_intarrayref_intarrayref_stdstring)
+    LOAD_SYMBOL(_lantern_fft_irfftn_out_tensor_tensor_intarrayref_intarrayref_stdstring)
+    LOAD_SYMBOL(_lantern_fft_fftfreq_intt_double_tensoroptions)
+    LOAD_SYMBOL(_lantern_fft_fftfreq_out_tensor_intt_double)
+    LOAD_SYMBOL(_lantern_fft_rfftfreq_intt_double_tensoroptions)
+    LOAD_SYMBOL(_lantern_fft_rfftfreq_out_tensor_intt_double)
+    LOAD_SYMBOL(_lantern_fft_fftshift_tensor_intarrayref)
+    LOAD_SYMBOL(_lantern_fft_ifftshift_tensor_intarrayref)
+    LOAD_SYMBOL(_lantern_linalg_cholesky_ex_tensor_bool)
+    LOAD_SYMBOL(_lantern_linalg_cholesky_ex_out_tensor_tensor_tensor_bool)
+    LOAD_SYMBOL(_lantern_linalg_cholesky_tensor)
+    LOAD_SYMBOL(_lantern_linalg_cholesky_out_tensor_tensor)
+    LOAD_SYMBOL(_lantern_linalg_det_tensor)
+    LOAD_SYMBOL(_lantern_linalg_det_out_tensor_tensor)
+    LOAD_SYMBOL(_lantern_det_tensor)
+    LOAD_SYMBOL(_lantern_Tensor_det_tensor)
+    LOAD_SYMBOL(_lantern_linalg_lstsq_tensor_tensor_double_stdstring)
+    LOAD_SYMBOL(_lantern_linalg_lstsq_out_tensor_tensor_tensor_tensor_tensor_tensor_double_stdstring)
+    LOAD_SYMBOL(_lantern_linalg_slogdet_tensor)
+    LOAD_SYMBOL(_lantern_linalg_slogdet_out_tensor_tensor_tensor)
+    LOAD_SYMBOL(_lantern_linalg_eig_tensor)
+    LOAD_SYMBOL(_lantern_linalg_eig_out_tensor_tensor_tensor)
+    LOAD_SYMBOL(_lantern_linalg_eigvals_tensor)
+    LOAD_SYMBOL(_lantern_linalg_eigvals_out_tensor_tensor)
+    LOAD_SYMBOL(_lantern_linalg_eigh_tensor_stdstring)
+    LOAD_SYMBOL(_lantern_linalg_eigh_out_tensor_tensor_tensor_stdstring)
+    LOAD_SYMBOL(_lantern_linalg_eigvalsh_tensor_stdstring)
+    LOAD_SYMBOL(_lantern_linalg_eigvalsh_out_tensor_tensor_stdstring)
+    LOAD_SYMBOL(_lantern_linalg_householder_product_tensor_tensor)
+    LOAD_SYMBOL(_lantern_linalg_householder_product_out_tensor_tensor_tensor)
+    LOAD_SYMBOL(_lantern__linalg_inv_out_helper__tensor_tensor_tensor)
+    LOAD_SYMBOL(_lantern_linalg_inv_ex_tensor_bool)
+    LOAD_SYMBOL(_lantern_linalg_inv_ex_out_tensor_tensor_tensor_bool)
+    LOAD_SYMBOL(_lantern_linalg_inv_tensor)
+    LOAD_SYMBOL(_lantern_linalg_inv_out_tensor_tensor)
+    LOAD_SYMBOL(_lantern_inner_tensor_tensor)
+    LOAD_SYMBOL(_lantern_Tensor_inner_tensor_tensor)
+    LOAD_SYMBOL(_lantern_inner_out_tensor_tensor_tensor)
+    LOAD_SYMBOL(_lantern_outer_tensor_tensor)
+    LOAD_SYMBOL(_lantern_Tensor_outer_tensor_tensor)
+    LOAD_SYMBOL(_lantern_outer_out_tensor_tensor_tensor)
+    LOAD_SYMBOL(_lantern_ger_tensor_tensor)
+    LOAD_SYMBOL(_lantern_Tensor_ger_tensor_tensor)
+    LOAD_SYMBOL(_lantern_ger_out_tensor_tensor_tensor)
+    LOAD_SYMBOL(_lantern_linalg_norm_tensor_scalar_intarrayref_bool_scalartype)
+    LOAD_SYMBOL(_lantern_linalg_norm_tensor_stdstring_intarrayref_bool_scalartype)
+    LOAD_SYMBOL(_lantern_linalg_norm_out_tensor_tensor_scalar_intarrayref_bool_scalartype)
+    LOAD_SYMBOL(_lantern_linalg_norm_out_tensor_tensor_stdstring_intarrayref_bool_scalartype)
+    LOAD_SYMBOL(_lantern_linalg_vector_norm_tensor_scalar_intarrayref_bool_scalartype)
+    LOAD_SYMBOL(_lantern_linalg_vector_norm_out_tensor_tensor_scalar_intarrayref_bool_scalartype)
+    LOAD_SYMBOL(_lantern_linalg_matrix_norm_tensor_scalar_intarrayref_bool_scalartype)
+    LOAD_SYMBOL(_lantern_linalg_matrix_norm_out_tensor_tensor_scalar_intarrayref_bool_scalartype)
+    LOAD_SYMBOL(_lantern_linalg_matrix_norm_tensor_stdstring_intarrayref_bool_scalartype)
+    LOAD_SYMBOL(_lantern_linalg_matrix_norm_out_tensor_tensor_stdstring_intarrayref_bool_scalartype)
+    LOAD_SYMBOL(_lantern_linalg_svd_out_tensor_tensor_tensor_tensor_bool)
+    LOAD_SYMBOL(_lantern_linalg_svd_tensor_bool)
+    LOAD_SYMBOL(_lantern_linalg_svdvals_tensor)
+    LOAD_SYMBOL(_lantern_linalg_svdvals_out_tensor_tensor)
+    LOAD_SYMBOL(_lantern_linalg_cond_tensor_scalar)
+    LOAD_SYMBOL(_lantern_linalg_cond_out_tensor_tensor_scalar)
+    LOAD_SYMBOL(_lantern_linalg_cond_tensor_stdstring)
+    LOAD_SYMBOL(_lantern_linalg_cond_out_tensor_tensor_stdstring)
+    LOAD_SYMBOL(_lantern_linalg_pinv_tensor_double_bool)
+    LOAD_SYMBOL(_lantern_linalg_pinv_tensor_tensor_bool)
+    LOAD_SYMBOL(_lantern_linalg_pinv_out_tensor_tensor_double_bool)
+    LOAD_SYMBOL(_lantern_linalg_pinv_out_tensor_tensor_tensor_bool)
+    LOAD_SYMBOL(_lantern__linalg_solve_out_helper__tensor_tensor_tensor)
+    LOAD_SYMBOL(_lantern_linalg_solve_tensor_tensor)
+    LOAD_SYMBOL(_lantern_linalg_solve_out_tensor_tensor_tensor)
+    LOAD_SYMBOL(_lantern_linalg_tensorinv_tensor_intt)
+    LOAD_SYMBOL(_lantern_linalg_tensorinv_out_tensor_tensor_intt)
+    LOAD_SYMBOL(_lantern_linalg_tensorsolve_tensor_tensor_intarrayref)
+    LOAD_SYMBOL(_lantern_linalg_tensorsolve_out_tensor_tensor_tensor_intarrayref)
+    LOAD_SYMBOL(_lantern_linalg_qr_tensor_stdstring)
+    LOAD_SYMBOL(_lantern_linalg_qr_out_tensor_tensor_tensor_stdstring)
+    LOAD_SYMBOL(_lantern__linalg_qr_helper_tensor_stdstring)
+    LOAD_SYMBOL(_lantern_linalg_matrix_power_tensor_intt)
+    LOAD_SYMBOL(_lantern_linalg_matrix_power_out_tensor_tensor_intt)
+    LOAD_SYMBOL(_lantern_linalg_matrix_rank_tensor_double_bool)
+    LOAD_SYMBOL(_lantern_linalg_matrix_rank_out_tensor_tensor_double_bool)
+    LOAD_SYMBOL(_lantern_linalg_matrix_rank_tensor_tensor_bool)
+    LOAD_SYMBOL(_lantern_linalg_matrix_rank_out_tensor_tensor_tensor_bool)
+    LOAD_SYMBOL(_lantern_linalg_multi_dot_tensorlist)
+    LOAD_SYMBOL(_lantern_linalg_multi_dot_out_tensor_tensorlist)
+    LOAD_SYMBOL(_lantern__test_serialization_subcmul_tensor_tensor_scalar)
+    LOAD_SYMBOL(_lantern__test_optional_intlist_tensor_intarrayref)
+    LOAD_SYMBOL(_lantern__test_optional_filled_intlist_tensor_intarrayref)
+    LOAD_SYMBOL(_lantern__test_optional_floatlist_tensor_arrayrefdouble)
+    LOAD_SYMBOL(_lantern__test_string_default_tensor_stdstring_stdstring)
+    LOAD_SYMBOL(_lantern__test_ambiguous_defaults_tensor_intt_intt)
+    LOAD_SYMBOL(_lantern__test_ambiguous_defaults_tensor_intt_stdstring)
+    LOAD_SYMBOL(_lantern_segment_reduce_tensor_stdstring_tensor_tensor_intt_bool_scalar)
+    LOAD_SYMBOL(_lantern_segment_reduce_backward_tensor_tensor_tensor_tensor)
+    LOAD_SYMBOL(_lantern_pad_sequence_tensorlist_bool_double)
+    LOAD_SYMBOL(_lantern_flatten_dense_tensors_tensorlist)
+    LOAD_SYMBOL(_lantern_unflatten_dense_tensors_tensor_tensorlist)
+    /* Autogen Symbols -- End */
+    
+    return true;
 }
 
 #else

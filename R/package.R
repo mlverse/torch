@@ -1,4 +1,4 @@
-#' @useDynLib torchpkg
+
 #' @importFrom Rcpp sourceCpp
 NULL
 
@@ -31,6 +31,9 @@ globalVariables(c("..", "self", "private", "N"))
     # in case init fails aallow user to restart session rather than blocking install
     tryCatch({
       lantern_start()
+      dyn.load(file.path("inst", "lib", "liblantern.dylib"), local = FALSE)
+      # browser()
+      dyn.load("src/torchpkg.so")
       cpp_set_lantern_allocator(getOption("torch.threshold_call_gc", 4000L))
       
       # .generator_null is no longer used. set the option `torch.old_seed_behavior=TRUE` to use it.

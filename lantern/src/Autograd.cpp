@@ -31,11 +31,13 @@ bool _lantern_autograd_detect_anomaly_is_enabled ()
     LANTERN_FUNCTION_END
 }
 
-bool _lantern_autograd_is_enabled ()
-{
+extern "C" {
+  bool lantern_autograd_is_enabled ()
+  {
     LANTERN_FUNCTION_START
     return torch::autograd::GradMode::is_enabled();
     LANTERN_FUNCTION_END
+  }
 }
 
 void *_lantern_Tensor_grad(void *self)
