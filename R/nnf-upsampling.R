@@ -1,61 +1,3 @@
-interp_output_size <- function(input, size, scale_factor, recompute_scale_factor) {
-  dim <- input$dim() - 2
-  
-  if (is.null(size) && is.null(scale_factor))
-    value_error("either size or scale_factor should be defined")
-  
-  if (!is.null(size) && !is.null(scale_factor))
-    value_error("only one of size or scale_factor should be defined")
-  
-  if (!is.null(scale_factor)) {
-    if (length(scale_factor) != dim)
-      value_error("scale_factor shape must match input shape.", 
-                  "Input is {dim}D, scale_factor size is {lenght(scale_factor)}")
-    
-  }
-  
-  if (!is.null(size)) {
-    if (length(size) > 1)
-      return(size)
-    else
-      return(rep(size, dim))
-  }
-  
-  if (is.null(scale_factor))
-    value_error("assertion failed")
-  
-  if (length(scale_factor) > 1)
-    scale_factors <- scale_factor
-  else
-    scale_factors <- rep(scale_factor, dim)
-  
-  
-  if (is.null(recompute_scale_factor)) {
-    is_float_scale_factor <- FALSE
-    
-    for (scale in scale_factors) {
-      is_float_scale_factor <- floor(scale) != scale
-      if (is_float_scale_factor)
-        break
-    }
-    
-    warn("The default behavior for interpolate/upsample with float scale_factor will change ",
-         "in 1.6.0 to align with other frameworks/libraries, and use scale_factor directly, ",
-         "instead of relying on the computed output size. ",
-         "If you wish to keep the old behavior, please set recompute_scale_factor=True. ",
-         "See the documentation of nn.Upsample for details. ")
-  }
-  
-  
-  lapply(
-    seq_len(dim),
-    function(i) {
-      i <- i - 1
-      floor(input$size(i + 2) * scale_factors[i + 1])
-    }
-  )
-}
-
 #' Interpolate
 #'
 #' Down/up samples the input to either the given `size` or the given
@@ -106,51 +48,87 @@ nnf_interpolate <- function(input, size = NULL, scale_factor = NULL,
                             mode = "nearest", align_corners = FALSE, 
                             recompute_scale_factor = NULL) {
   
-  scale_factor_len <- input$dim() - 2
-  scale_factor_list <- scale_factor
+  dim <- input$dim() - 2
   
-  if (!is.null(scale_factor) && (
-    is.null(recompute_scale_factor) || !recompute_scale_factor)) {
-    
-    if (length(scale_factor) == 1)
-      scale_factor_repeated <- rep(scale_factor, scale_factor_len)
-    else
-      scale_factor_repeated <- scale_factor
-    
-    scale_factor_list <- scale_factor_repeated
+  if (is.null(align_corners)) align_corners <- FALSE
+  
+  # Process size and scale_factor.  Validate that exactly one is set.
+  # Validate its length if it is a list, or expand it if it is a scalar.
+  # After this block, exactly one of output_size and scale_factors will
+  # be non-None, and it will be a list (or tuple).  
+  
+  if (!is.null(size) && !is.null(scale_factor)) {
+    value_error("only one of size or scale_factor should be defined")
+  } else if (!is.null(size)) {
+    scale_factors <- NULL
+    if (length(size) == 1) {
+      output_size <- rep(size, dim)
+    } else {
+      if (length(size) != dim) {
+        value_error("size shape must match input shape. Input is {dim}D, size is {length(size)}")
+      }
+      output_size <- size
+    }
+  } else if (!is.null(scale_factor)) {
+    output_size <- NULL
+    if (length(scale_factor) == 1) {
+      scale_factors <- rep(scale_factor, dim)
+    } else {
+      if (length(scale_factor) != dim) {
+        value_error("scale_factor shape must match input shape. Input is {dim}D, size is {length(size)}")
+      }
+      scale_factors <- scale_factor
+    }
+  } else {
+    value_error("either size or scale_factor should be defined")
   }
+  
+  # "area" mode always requires an explicit size rather than scale factor.
+  # Re-use the recompute_scale_factor code path.
+  if (mode == "area" && is.null(output_size))
+    recompute_scale_factor <- TRUE
     
-  sfl <- scale_factor_list
-  sze <- interp_output_size(input, size = size, scale_factor = scale_factor, 
-                            recompute_scale_factor = recompute_scale_factor)
+  if (!is.null(recompute_scale_factor) && recompute_scale_factor) {
+    # We compute output_size here, then un-set scale_factors.
+    # The C++ code will recompute it based on the (integer) output size.
+    output_size <- lapply(seq_len(dim), function(i) {
+      as.integer(floor(input$size(i + 1)) * scale_factors[i])
+    })
+    scale_factors <- NULL
+  }
   
   if (input$dim() == 3 && mode == "nearest") {
-    return(torch_upsample_nearest1d(input, output_size = sze, scales = sfl[[1]]))
+    return(
+      torch_upsample_nearest1d(input = input, output_size = output_size, 
+                               scale_factors = scale_factors))
   }
   
   if (input$dim() == 4 && mode == "nearest") {
-    return(torch_upsample_nearest2d(input, output_size = sze, scales_h = sfl[[1]],
-                                    scales_w = sfl[[2]]))
+    return(torch_upsample_nearest2d(input = input, output_size = output_size, 
+                                    scale_factors = scale_factors))
   }
   
   if (input$dim() == 5 && mode == "nearest") {
-    return(torch_upsample_nearest3d(input, sze, sfl[[1]], sfl[[2]], sfl[[3]]))
+    return(torch_upsample_nearest3d(input = input, output_size = output_size, 
+                                    scale_factors = scale_factors))
   }
   
   if (input$dim() == 3 && mode == "area") {
-    return(torch_adaptive_avg_pool1d(input, sze))
+    return(torch_adaptive_avg_pool1d(input = input, output_size = output_size))
   }
   
   if (input$dim() == 4 && mode == "area") {
-    return(torch_adaptive_avg_pool2d(input, sze))
+    return(torch_adaptive_avg_pool2d(input = input, output_size = output_size))
   }
   
   if (input$dim() == 5 && mode == "area") {
-    return(torch_adaptive_avg_pool3d(input, sze))
+    return(torch_adaptive_avg_pool3d(input = input, output_size = output_size))
   }
   
   if (input$dim() == 3 && mode == "linear") {
-    return(torch_upsample_linear1d(input, sze, align_corners, sfl[[1]]))
+    return(torch_upsample_linear1d(input = input, output_size = output_size, 
+                                   align_corners = align_corners, 
+                                   scale_factors = scale_factors))
   }
   
   if (input$dim() == 3 && mode == "bilinear") {
@@ -166,9 +144,9 @@ nnf_interpolate <- function(input, size = NULL, scale_factor = NULL,
   }
   
   if (input$dim() == 4 && mode == "bilinear") {
-    return(torch_upsample_bilinear2d(input, output_size = sze, align_corners = align_corners, 
-                                     scales_h = sfl[[1]], scales_w = sfl[[2]],
-                                     scale_factors = NULL))
+    return(torch_upsample_bilinear2d(input = input, output_size = output_size, 
+                                     align_corners = align_corners, 
+                                     scale_factors = scale_factors))
   }
   
   if (input$dim() == 4 && mode == "trilinear") {
@@ -184,12 +162,15 @@ nnf_interpolate <- function(input, size = NULL, scale_factor = NULL,
   }
   
   if (input$dim() == 5 && mode == "trilinear") {
-    return(torch_upsample_trilinear3d(input, sze, align_corners, sfl[[1]], sfl[[2]], 
-                                      sfl[[3]]))
+    return(torch_upsample_trilinear3d(input = input, output_size = output_size, 
+                                      align_corners = align_corners, 
+                                      scale_factors = scale_factors))
   }
   
   if (input$dim() ==4 && mode == "bicubic") {
-    return(torch_upsample_bicubic2d(input, sze, align_corners, sfl[[1]], sfl[[2]]))
+    return(torch_upsample_bicubic2d(input = input, output_size = output_size, 
+                                    align_corners = align_corners, 
+                                    scale_factors = scale_factors))
   }
   
   not_implemented_error("Input Error: Only 3D, 4D and 5D input Tensors supported",
