@@ -1,6 +1,7 @@
 # torch 0.6.1
 
-- Fixed valgrind errors on CRAN by requiring a more recent version of knitr.
+- Fixed valgrind errors on CRAN by requiring a more recent version of knitr and 
+  by removing vignettes from CRAN.
 
 # torch 0.6.0
 
