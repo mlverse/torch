@@ -16,8 +16,10 @@ lantern_sync <- function(sync_lib = FALSE) {
     else if (file.exists(paste0(lib_src, ".so")))
       path <- paste0(lib_src, ".so")
     else if (file.exists("lantern/build/Release/lantern.dll"))
-      path <- "lantern/build/Release/lantern.dll"
+      path <- list.files("lantern/build/Release/", full.names = TRUE)
     
+    suppressWarnings(dir.create("inst/lib"))
+
     file.copy(
       path,
       file.path(lib_dest, "lib"),
