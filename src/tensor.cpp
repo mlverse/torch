@@ -1,5 +1,5 @@
 
-#include "torch_types.h"
+#include <torch.h>
 #include "utils.h"
 
 // [[Rcpp::export]]

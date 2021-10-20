@@ -1,5 +1,5 @@
-#include "lantern/lantern.h"
-#include "torch_types.h"
+#include <lantern/lantern.h>
+#include <torch.h>
 #include "utils.h"
 
 // [[Rcpp::export]]

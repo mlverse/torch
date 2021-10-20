@@ -1,4 +1,4 @@
-#include "torch_types.h"
+#include <torch.h>
 #include "utils.h"
 
 void tensor_finalizer (SEXP ptr)

@@ -1,4 +1,4 @@
-#include "torch_types.h"
+#include <torch.h>
 #include "utils.h"
 
 static R_len_t dots_size(SEXP dots) {

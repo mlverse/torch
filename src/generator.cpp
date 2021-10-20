@@ -1,4 +1,4 @@
-#include "torch_types.h"
+#include <torch.h>
 #include "utils.h"
 
 // https://pytorch.org/docs/stable/torch.html#generators

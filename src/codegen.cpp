@@ -1,4 +1,4 @@
-#include "torch_types.h"
+#include <torch.h>
 #include <set>
 
 inline std::set<std::string> create_set(const std::vector<std::string> v)

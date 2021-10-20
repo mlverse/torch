@@ -1,4 +1,4 @@
-#include "torch_types.h"
+#include <torch.h>
 #include "utils.h"
 
 void* rcpp_call_hook (void* x, void* hook);

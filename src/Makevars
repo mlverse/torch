@@ -1,3 +1,5 @@
+PKG_CPPFLAGS += -I../inst/include/
+
 all: $(SHLIB) rename
 
 rename:

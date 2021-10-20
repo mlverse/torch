@@ -25,4 +25,8 @@ Meta
 build/
 tracedmodule.pt
 revdep
-inst/
+inst/*
+!inst/include
+inst/include/*
+!inst/include/torch.h
+!inst/include/lantern

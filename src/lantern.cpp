@@ -1,4 +1,4 @@
-#include "torch_types.h"
+#include <torch.h>
 #include "translate_messages.h"
 
 using namespace Rcpp;

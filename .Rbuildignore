@@ -23,7 +23,7 @@ tools/torchgen/.Rbuildignore
 ^CRAN-RELEASE$
 # uncomment below for CRAN submission
 ^inst/bin/.*
-^inst/include/.*
+^inst/include/(?!torch.h|lantern).*
 ^inst/lib/.*
 ^inst/share/.*
 ^inst/build-hash
