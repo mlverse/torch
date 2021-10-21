@@ -1,3 +1,4 @@
+#' @useDynLib torchpkg
 #' @importFrom Rcpp sourceCpp
 NULL
 
@@ -10,11 +11,6 @@ globalVariables(c("..", "self", "private", "N"))
 }
 
 .onLoad <- function(libname, pkgname){
-  pkgload <- file.path(libname, pkgname, "src", paste0("torch", .Platform$dynlib.ext))
-  if (file.exists(pkgload))
-    dyn.load(pkgload)
-  else
-    library.dynam("torch", pkgname, libname, local = FALSE)
   install_success <- TRUE
   autoinstall <- interactive() ||
                  "JPY_PARENT_PID" %in% names(Sys.getenv()) ||
