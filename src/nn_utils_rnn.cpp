@@ -1,5 +1,5 @@
 #include <torch.h>
-#include "utils.h"
+
 
 // [[Rcpp::export]]
 Rcpp::XPtr<XPtrTorchPackedSequence> cpp_nn_utils_rnn_pack_padded_sequence (

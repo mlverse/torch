@@ -1,6 +1,8 @@
 #include <torch.h>
-#include "utils.h"
+
 #include <algorithm>
+
+// [[Rcpp::interfaces(r, cpp)]]
 
 // [[Rcpp::export]]
 Rcpp::XPtr<std::nullptr_t> cpp_nullptr () {
@@ -29,6 +31,7 @@ XPtrTorchTensor cpp_tensor_undefined () {
   return XPtrTorchTensor(lantern_Tensor_undefined());
 }
 
+// [[Rcpp::export]]
 XPtrTorchTensor to_index_tensor (XPtrTorchTensor t) 
 {
   // check that there's no zeros
@@ -57,43 +60,6 @@ XPtrTorchTensor to_index_tensor (XPtrTorchTensor t)
   );
   
   return zero_index;
-}
-
-XPtrTorchIndexTensorList to_index_tensor_list (XPtrTorchTensorList x)
-{
-  XPtrTorchIndexTensorList out = lantern_TensorList();
-  int64_t sze = lantern_TensorList_size(x.get());
-  
-  for (int i=0; i < sze; i++)
-  {
-    XPtrTorchTensor t = lantern_TensorList_at(x.get(), i);
-    XPtrTorchTensor zero_index = to_index_tensor (t);
-    lantern_TensorList_push_back(out.get(), zero_index.get());
-  }
-  
-  return out;
-}
-
-XPtrTorchOptionalIndexTensorList to_optional_index_tensor_list (XPtrTorchOptionalTensorList x)
-{
-  XPtrTorchOptionalIndexTensorList out = lantern_OptionalTensorList();
-  int64_t sze = lantern_OptionalTensorList_size(x.get());
-  
-  for (int i=0; i < sze; i++)
-  {
-    if (lantern_OptionalTensorList_at_is_null(x.get(), i))
-    {
-      lantern_OptionalTensorList_push_back(out.get(), nullptr, true);
-    }
-    else
-    {
-      XPtrTorchTensor t = lantern_OptionalTensorList_at(x.get(), i); 
-      XPtrTorchTensor zero_index = to_index_tensor (t);
-      lantern_OptionalTensorList_push_back(out.get(), zero_index.get(), false);
-    }
-  }
-  
-  return out;
 }
 
 // [[Rcpp::export]]

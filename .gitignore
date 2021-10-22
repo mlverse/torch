@@ -30,3 +30,4 @@ inst/*
 inst/include/*
 !inst/include/torch.h
 !inst/include/lantern
+!inst/include/torch_RcppExports.h

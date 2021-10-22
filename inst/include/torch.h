@@ -2,10 +2,9 @@
 #define LANTERN_HEADERS_ONLY
 #include <string>
 #include <memory>
-
-#include "lantern/lantern.h"
-
 #include <RcppCommon.h>
+#include <Rcpp.h>
+#include "lantern/lantern.h"
 
 class XPtrTorch
 {
@@ -559,3 +558,7 @@ public:
       return this->x;
   }
 };
+
+#include "utils.h"
+#include "torch_RcppExports.h"
+#include "torch_impl.h"

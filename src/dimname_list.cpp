@@ -1,6 +1,5 @@
 
 #include <torch.h>
-#include "utils.h"
 
 // [[Rcpp::export]]
 XPtrTorchDimname cpp_torch_dimname(const std::string& str) {
