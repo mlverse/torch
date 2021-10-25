@@ -31,3 +31,5 @@ inst/include/*
 !inst/include/torch.h
 !inst/include/lantern
 !inst/include/torch_RcppExports.h
+!inst/include/torch_api.h
+!inst/include/torch_imports.h

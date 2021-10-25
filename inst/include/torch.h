@@ -292,6 +292,7 @@ class XPtrTorchint64_t2 {
 public:
   std::shared_ptr<void> ptr;
   explicit XPtrTorchint64_t2 (SEXP x_);
+  explicit XPtrTorchint64_t2 (std::shared_ptr<void> x) : ptr(x) {};
   void* get () {
     return ptr.get();
   }
@@ -301,6 +302,7 @@ class XPtrTorchoptional_int64_t2 {
 public:
   std::shared_ptr<void> ptr;
   explicit XPtrTorchoptional_int64_t2 (SEXP x_);
+  explicit XPtrTorchoptional_int64_t2 (std::shared_ptr<void> x) : ptr(x) {};
   void* get () {
     return ptr.get();
   }
@@ -310,6 +312,7 @@ class XPtrTorchindex_int64_t {
 public:
   std::shared_ptr<void> ptr;
   explicit XPtrTorchindex_int64_t (SEXP x_);
+  explicit XPtrTorchindex_int64_t (std::shared_ptr<void> x) : ptr(x) {};
   void* get () {
     return ptr.get();
   }
@@ -319,6 +322,7 @@ class XPtrTorchoptional_index_int64_t {
 public:
   std::shared_ptr<void> ptr;
   explicit XPtrTorchoptional_index_int64_t (SEXP x_);
+  explicit XPtrTorchoptional_index_int64_t (std::shared_ptr<void> x) : ptr(x) {};
   void* get () {
     return ptr.get();
   }
