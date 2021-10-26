@@ -35,3 +35,4 @@ inst/include/*
 !inst/include/torch_imports.h
 !inst/include/torch_types.h
 !inst/include/torch_deleters.h
+!inst/include/utils.h
