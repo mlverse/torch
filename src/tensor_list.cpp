@@ -1,8 +1,5 @@
 #include <torch.h>
 
-
-// [[Rcpp::interfaces(r, cpp)]]
-
 // [[Rcpp::export]]
 XPtrTorchTensorList cpp_torch_tensor_list(const Rcpp::List &x)
 {

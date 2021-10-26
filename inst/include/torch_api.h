@@ -1,4 +1,8 @@
-#include <torch.h>
+#ifndef TORCH_API
+#define TORCH_API
+
+#include "torch_types.h"
+#include "torch_deleters.h"
 
 SEXP operator_sexp_tensor (const XPtrTorchTensor* self);
 SEXP operator_sexp_optional_tensor (const XPtrTorchOptionalTensor* self);
@@ -67,4 +71,5 @@ XPtrTorchint64_t2 from_sexp_int64_t_2 (SEXP x_);
 XPtrTorchoptional_int64_t2 from_sexp_optional_int64_t_2 (SEXP x_);
 XPtrTorchindex_int64_t from_sexp_index_int64_t (SEXP x_);
 XPtrTorchoptional_index_int64_t from_sexp_optional_index_int64_t (SEXP x_);
-  
+
+#endif // TORCH_API

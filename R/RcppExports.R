@@ -10777,7 +10777,3 @@ xptr_address <- function(s) {
     .Call('_torch_xptr_address', PACKAGE = 'torchpkg', s)
 }
 
-# Register entry points for exported C++ functions
-methods::setLoadAction(function(ns) {
-    .Call('_torch_RcppExport_registerCCallable', PACKAGE = 'torchpkg')
-})

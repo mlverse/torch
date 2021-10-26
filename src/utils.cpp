@@ -2,8 +2,6 @@
 
 #include <algorithm>
 
-// [[Rcpp::interfaces(r, cpp)]]
-
 // [[Rcpp::export]]
 Rcpp::XPtr<std::nullptr_t> cpp_nullptr () {
   return make_xptr<std::nullptr_t>(nullptr);

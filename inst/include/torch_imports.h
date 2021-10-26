@@ -1,3 +1,6 @@
+#ifndef TORCH_IMPORTS
+#define TORCH_IMPORTS
+
 #include "torch.h"
 
 #define IMPORT_SEXP_OPERATOR(name, type)                                         \
@@ -70,8 +73,8 @@ IMPORT_FROM_SEXP(from_sexp_dimname, XPtrTorchDimname)
 IMPORT_FROM_SEXP(from_sexp_dimname_list, XPtrTorchDimnameList)
 IMPORT_FROM_SEXP(from_sexp_generator, XPtrTorchGenerator)
 IMPORT_FROM_SEXP(from_sexp_memory_format, XPtrTorchMemoryFormat)
-IMPORT_FROM_SEXP(from_sexp_int_array_ref, XPtrTorchIntArrayRef)
-IMPORT_FROM_SEXP(from_sexp_optional_int_array_ref, XPtrTorchOptionalIntArrayRef)
+//IMPORT_FROM_SEXP(from_sexp_int_array_ref, XPtrTorchIntArrayRef)
+//IMPORT_FROM_SEXP(from_sexp_optional_int_array_ref, XPtrTorchOptionalIntArrayRef)
 IMPORT_FROM_SEXP(from_sexp_string, XPtrTorchstring)
 IMPORT_FROM_SEXP(from_sexp_tuple, XPtrTorchTuple)
 IMPORT_FROM_SEXP(from_sexp_tensor_dict, XPtrTorchTensorDict)
@@ -87,3 +90,112 @@ IMPORT_FROM_SEXP(from_sexp_int64_t_2, XPtrTorchint64_t2)
 IMPORT_FROM_SEXP(from_sexp_optional_int64_t_2, XPtrTorchoptional_int64_t2)
 IMPORT_FROM_SEXP(from_sexp_index_int64_t, XPtrTorchindex_int64_t)
 IMPORT_FROM_SEXP(from_sexp_optional_index_int64_t, XPtrTorchoptional_index_int64_t)
+    
+#define IMPORT_DELETER(name)                                                 \
+    void name (void* x)                                                      \
+    {                                                                        \
+      static void (*fn)(void*) = NULL;                                       \
+      if (fn == NULL) {                                                      \
+        fn = (void (*) (void*)) R_GetCCallable("torch", #name);              \
+      }                                                                      \
+      return fn(x);                                                          \
+    }                                                          
+    
+IMPORT_DELETER(delete_tensor)
+IMPORT_DELETER(delete_script_module)
+IMPORT_DELETER(delete_script_method)
+IMPORT_DELETER(delete_optional_tensor)
+IMPORT_DELETER(delete_tensor_list)
+IMPORT_DELETER(delete_optional_tensor_list)
+IMPORT_DELETER(delete_scalar_type)
+IMPORT_DELETER(delete_scalar)
+IMPORT_DELETER(delete_tensor_options)
+IMPORT_DELETER(delete_device)
+IMPORT_DELETER(delete_optional_device)
+IMPORT_DELETER(delete_dtype)
+IMPORT_DELETER(delete_dimname)
+IMPORT_DELETER(delete_dimname_list)
+IMPORT_DELETER(delete_jit_named_parameter_list)
+IMPORT_DELETER(delete_jit_named_buffer_list)
+IMPORT_DELETER(delete_jit_named_module_list)
+IMPORT_DELETER(delete_generator)
+IMPORT_DELETER(delete_memory_format)
+IMPORT_DELETER(delete_vector_int64_t)
+IMPORT_DELETER(delete_function_ptr)
+IMPORT_DELETER(delete_optional_int_array_ref)
+IMPORT_DELETER(delete_vector_string)
+IMPORT_DELETER(delete_string)
+IMPORT_DELETER(delete_stack)
+IMPORT_DELETER(delete_ivalue)
+IMPORT_DELETER(delete_tuple)
+IMPORT_DELETER(delete_vector_bool)
+IMPORT_DELETER(delete_vector_scalar)
+IMPORT_DELETER(delete_int64_t_2)
+IMPORT_DELETER(delete_vector_double)
+IMPORT_DELETER(delete_tensor_dict)
+IMPORT_DELETER(delete_generic_dict)
+IMPORT_DELETER(delete_generic_list)
+IMPORT_DELETER(delete_vector_ivalue)
+IMPORT_DELETER(delete_named_tuple_helper)
+IMPORT_DELETER(delete_compilation_unit)
+IMPORT_DELETER(delete_qscheme)
+IMPORT_DELETER(delete_double)
+IMPORT_DELETER(delete_variable_list)
+IMPORT_DELETER(delete_int64_t)
+IMPORT_DELETER(delete_bool)
+IMPORT_DELETER(delete_layout)
+IMPORT_DELETER(delete_tensor_index)
+IMPORT_DELETER(delete_optional_int64_t)
+IMPORT_DELETER(delete_slice)
+IMPORT_DELETER(delete_packed_sequence)
+IMPORT_DELETER(delete_storage)
+IMPORT_DELETER(delete_jit_module)
+IMPORT_DELETER(delete_traceable_function)
+IMPORT_DELETER(delete_vector_void)
+
+XPtrTorchIntArrayRef from_sexp_int_array_ref (SEXP x, bool allow_null, bool index)
+{
+  static XPtrTorchIntArrayRef (*fn)(SEXP, bool, bool) = NULL;
+  if (fn == NULL) {                                                              
+    fn = (XPtrTorchIntArrayRef (*) (SEXP, bool, bool)) R_GetCCallable("torch", "from_sexp_int_array_ref");
+  }
+  return fn(x, allow_null, index);
+}
+
+XPtrTorchOptionalIntArrayRef from_sexp_optional_int_array_ref (SEXP x, bool index)
+{
+  static XPtrTorchOptionalIntArrayRef (*fn)(SEXP, bool) = NULL;
+  if (fn == NULL) {                                                              
+    fn = (XPtrTorchOptionalIntArrayRef (*) (SEXP, bool)) R_GetCCallable("torch", "from_sexp_optional_int_array_ref");
+  }
+  return fn(x, index);
+}   
+  
+void* fixme_optional_vector_int64_t (int64_t * x, size_t x_size, bool is_null)                                                            
+{                                                                                
+  static void* (*fn)(int64_t*, size_t, bool) = NULL;                             
+  if (fn == NULL) {                                                              
+    fn = (void* (*) (int64_t*, size_t, bool)) R_GetCCallable("torch", "fixme_optional_vector_int64_t");
+  }                                                                              
+  return fn(x, x_size, is_null);                                                                  
+}
+
+void* fixme_new_string (const char* x)                                                               
+{                                                                                
+  static void* (*fn)(const char *) = NULL;                             
+  if (fn == NULL) {                                                              
+    fn = (void* (*) (const char *)) R_GetCCallable("torch", "fixme_new_string");
+  }                                                                              
+  return fn(x);                                                                  
+}
+
+void* fixme_new_dimname (const char* x)                                                               
+{                                                                                
+  static void* (*fn)(const char *) = NULL;                             
+  if (fn == NULL) {                                                              
+    fn = (void* (*) (const char *)) R_GetCCallable("torch", "fixme_new_dimname");
+  }                                                                              
+  return fn(x);                                                                  
+}
+    
+#endif // TORCH_IMPORTS

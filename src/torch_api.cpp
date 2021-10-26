@@ -1,3 +1,4 @@
+#define TORCH_IMPL
 #include <torch.h>
 
 // This file defines torch functions that are exported in order to create torch's
@@ -151,6 +152,11 @@ XPtrTorchTensor from_sexp_tensor (SEXP x)
   Rcpp::stop("Expected a torch_tensor.");
 }
 
+void delete_tensor (void* x)
+{
+  lantern_Tensor_delete(x);
+}
+
 // optional_torch_tensor
 
 SEXP operator_sexp_optional_tensor (const XPtrTorchOptionalTensor* self) 
@@ -180,6 +186,11 @@ XPtrTorchOptionalTensor from_sexp_optional_tensor (SEXP x)
   {
     return XPtrTorchOptionalTensor(lantern_optional_tensor(XPtrTorchTensor(x).get(), false));
   }
+}
+
+void delete_optional_tensor (void* x)
+{
+  lantern_optional_tensor_delete(x);
 }
 
 // index tensor
@@ -240,6 +251,11 @@ XPtrTorchTensorList from_sexp_tensor_list (SEXP x)
   Rcpp::stop("Expected a torch_tensor_list.");
 }
 
+void delete_tensor_list (void* x)
+{
+  lantern_TensorList_delete(x);
+}
+
 // scalar
 
 SEXP operator_sexp_scalar (const XPtrTorchScalar* self)
@@ -293,6 +309,11 @@ XPtrTorchScalar from_sexp_scalar (SEXP x)
   Rcpp::stop("Expected a torch_scalar.");
 }
 
+void delete_scalar (void* x)
+{
+  lantern_Scalar_delete(x);
+}
+
 // scalar type
 
 SEXP operator_sexp_scalar_type (const XPtrTorchScalarType* self)
@@ -300,6 +321,11 @@ SEXP operator_sexp_scalar_type (const XPtrTorchScalarType* self)
   auto xptr = make_xptr<XPtrTorchScalarType>(*self);
   xptr.attr("class") = Rcpp::CharacterVector::create("torch_dtype", "R7");
   return xptr; 
+}
+
+void delete_scalar_type (void* x)
+{
+  lantern_ScalarType_delete(x);
 }
 
 // tensor options
@@ -365,6 +391,11 @@ XPtrTorchTensorOptions from_sexp_tensor_options (SEXP x)
   Rcpp::stop("Expected a torch_tensor_option.");
 }
 
+void delete_tensor_options (void* x)
+{
+  lantern_TensorOptions_delete(x);
+}
+
 // compilation unit
 
 SEXP operator_sexp_compilation_unit (const XPtrTorchCompilationUnit* self)
@@ -382,6 +413,11 @@ XPtrTorchCompilationUnit from_sexp_compilation_unit (SEXP x)
     return XPtrTorchCompilationUnit( out->get_shared());
   }
   Rcpp::stop("Unsupported type. Expected an external pointer.");
+}
+
+void delete_compilation_unit (void* x)
+{
+  lantern_CompilationUnit_delete(x);
 }
 
 // device
@@ -426,6 +462,10 @@ XPtrTorchDevice from_sexp_device (SEXP x)
   Rcpp::stop("Expected a torch_device");
 }
 
+void delete_device (void* x)
+{
+  lantern_Device_delete(x);
+}
 
 // script module
 
@@ -454,6 +494,11 @@ XPtrTorchScriptModule from_sexp_script_module (SEXP x)
   }
   
   Rcpp::stop("Expected a torch_script_module");
+}
+
+void delete_script_module (void* x)
+{
+  lantern_JITModule_delete(x);
 }
 
 // script method
@@ -485,6 +530,11 @@ XPtrTorchScriptMethod from_sexp_script_method (SEXP x)
   Rcpp::stop("Expected a torch_script_module");
 }
 
+void delete_script_method(void* x)
+{
+  lantern_jit_ScriptMethod_delete(x);
+}
+
 // dtype
 
 SEXP operator_sexp_dtype (const XPtrTorchDtype* self)
@@ -507,6 +557,11 @@ XPtrTorchDtype from_sexp_dtype (SEXP x)
   }
   
   Rcpp::stop("Expected a torch_dtype");
+}
+
+void delete_dtype (void* x)
+{
+  lantern_Dtype_delete(x);
 }
 
 // dimname
@@ -532,6 +587,16 @@ XPtrTorchDimname from_sexp_dimname (SEXP x)
   }
   
   Rcpp::stop("Expected a torch_dimname");
+}
+
+void delete_dimname (void* x)
+{
+  lantern_Dimname_delete(x);
+}
+
+void * fixme_new_dimname (const char* x)
+{
+  return lantern_Dimname(x);
 }
 
 // dimname_list
@@ -562,6 +627,11 @@ XPtrTorchDimnameList from_sexp_dimname_list (SEXP x)
   }
   
   Rcpp::stop("Expected a torch_dimname_list");
+}
+
+void delete_dimname_list (void* x)
+{
+  lantern_DimnameList_delete(x);
 }
 
 // generator
@@ -602,6 +672,11 @@ XPtrTorchGenerator from_sexp_generator (SEXP x)
   Rcpp::stop("Expected a torch_generator");
 }
 
+void delete_generator (void* x)
+{
+  lantern_Generator_delete(x);
+}
+
 // memory format
 
 SEXP operator_sexp_memory_format (const XPtrTorchMemoryFormat* self)
@@ -626,6 +701,11 @@ XPtrTorchMemoryFormat from_sexp_memory_format (SEXP x)
   Rcpp::stop("Expected a torch_dtype");
 }
 
+void delete_memory_format (void* x)
+{
+  lantern_MemoryFormat_delete(x);
+}
+
 // vector string
 
 SEXP operator_sexp_vector_string (const XPtrTorchvector_string * self)
@@ -641,6 +721,11 @@ SEXP operator_sexp_vector_string (const XPtrTorchvector_string * self)
   }
   
   return Rcpp::wrap(output);
+}
+
+void delete_vector_string (void* x)
+{
+  lantern_vector_string_delete(x);
 }
 
 // vector scalar
@@ -668,6 +753,11 @@ XPtrTorchvector_Scalar from_sexp_vector_scalar (SEXP x)
   return output;
 }
 
+void delete_vector_scalar (void* x)
+{
+  lantern_vector_Scalar_delete(x);
+}
+
 
 // string
 
@@ -686,6 +776,16 @@ XPtrTorchstring from_sexp_string (SEXP x)
   return XPtrTorchstring(lantern_string_new(v.c_str()));
 }
 
+void delete_string (void* x)
+{
+  lantern_string_delete(x);
+}
+
+void* fixme_new_string (const char* x)
+{
+  return lantern_string_new(x);
+}
+
 // jit_named_parameter_list
 
 SEXP operator_sexp_jit_named_parameter_list (const XPtrTorchjit_named_parameter_list* self)
@@ -697,6 +797,11 @@ SEXP operator_sexp_jit_named_parameter_list (const XPtrTorchjit_named_parameter_
   return out;
 }
 
+void delete_jit_named_parameter_list (void* x)
+{
+  lantern_jit_named_parameter_list_delete(x);
+}
+
 // jit_named_buffer_list
 
 SEXP operator_sexp_jit_named_buffer_list (const XPtrTorchjit_named_buffer_list* self)
@@ -706,6 +811,11 @@ SEXP operator_sexp_jit_named_buffer_list (const XPtrTorchjit_named_buffer_list* 
   Rcpp::List out = Rcpp::wrap(tensors);
   out.attr("names") = Rcpp::wrap(names);
   return out;
+}
+
+void delete_jit_named_buffer_list (void* x)
+{
+  lantern_jit_named_buffer_list_delete(x);
 }
 
 // named_modules_list
@@ -730,6 +840,11 @@ SEXP operator_sexp_jit_named_module_list (const XPtrTorchjit_named_module_list* 
   return out;
 }
 
+void delete_jit_named_module_list (void* x)
+{
+  lantern_jit_named_module_list_delete(x);
+}
+
 // vector_bool
 
 SEXP operator_sexp_vector_bool (const XPtrTorchvector_bool* self)
@@ -752,6 +867,11 @@ XPtrTorchvector_bool from_sexp_vector_bool (SEXP x)
     lantern_vector_bool_push_back(out.get(), el);
   }
   return out;
+}
+
+void delete_vector_bool (void* x)
+{
+  lantern_vector_bool_delete(x);
 }
 
 
@@ -779,6 +899,11 @@ XPtrTorchvector_int64_t from_sexp_vector_int64_t (SEXP x)
   return out;
 }
 
+void delete_vector_int64_t (void* x)
+{
+  lantern_vector_int64_t2_delete(x);
+}
+
 // vector_double
 
 SEXP operator_sexp_vector_double (const XPtrTorchvector_double* self)
@@ -801,6 +926,11 @@ XPtrTorchvector_double from_sexp_vector_double (SEXP x)
     lantern_vector_double_push_back(out.get(), el);
   }
   return out;
+}
+
+void delete_vector_double (void* x)
+{
+  lantern_vector_double_delete(x);
 }
 
 
@@ -829,6 +959,11 @@ XPtrTorchStack from_sexp_stack (SEXP x)
     );
   }
   return output;
+}
+
+void delete_stack (void* x)
+{
+  lantern_Stack_delete(x);
 }
 
 // ivalue
@@ -993,6 +1128,11 @@ XPtrTorchIValue from_sexp_ivalue (SEXP x)
   Rcpp::stop("Unsupported type");
 }
 
+void delete_ivalue (void* x)
+{
+  lantern_IValue_delete(x);
+}
+
 // tuple
 
 SEXP operator_sexp_tuple (const XPtrTorchTuple* self)
@@ -1017,6 +1157,11 @@ XPtrTorchTuple from_sexp_tuple (SEXP x)
     lantern_jit_Tuple_push_back(out.get(), Rcpp::as<XPtrTorchIValue>(el).get());
   }
   return out;
+}
+
+void delete_tuple (void* x)
+{
+  lantern_jit_Tuple_delete(x);
 }
 
 // named tuple helper
@@ -1057,6 +1202,10 @@ XPtrTorchNamedTupleHelper from_sexp_named_tuple_helper (SEXP x)
   return out;
 }
 
+void delete_named_tuple_helper (void* x)
+{
+  lantern_NamedTupleHelper_delete(x);
+}
 
 // vector_ivalue
 
@@ -1071,6 +1220,11 @@ SEXP operator_sexp_vector_ivalue (const XPtrTorchvector_IValue* self)
   }
   
   return out;
+}
+
+void delete_vector_ivalue (void* x)
+{
+  lantern_jit_vector_IValue_delete(x);
 }
 
 // generic dict
@@ -1096,6 +1250,11 @@ SEXP operator_sexp_generic_dict (const XPtrTorchGenericDict* self)
   return out;
 }
 
+void delete_generic_dict (void* x)
+{
+  lantern_jit_GenericDict_delete(x);
+}
+
 // generic list
 
 SEXP operator_sexp_generic_list (const XPtrTorchGenericList* self)
@@ -1116,6 +1275,11 @@ SEXP operator_sexp_generic_list (const XPtrTorchGenericList* self)
   }
   
   return out;
+}
+
+void delete_generic_list (void* x)
+{
+  lantern_jit_GenericList_delete(x);
 }
 
 // optional_tensor_list
@@ -1140,6 +1304,11 @@ XPtrTorchOptionalTensorList from_sexp_optional_tensor_list (SEXP x)
   }
   
   Rcpp::stop("Expected a torch_optional_tensor_list.");
+}
+
+void delete_optional_tensor_list (void* x)
+{
+  lantern_OptionalTensorList_delete(x);
 }
 
 // index_tensor_list
@@ -1174,6 +1343,11 @@ XPtrTorchOptionalDevice from_sexp_optional_device (SEXP x)
   {
     return XPtrTorchOptionalDevice(lantern_OptionalDevice_from_device(from_sexp_device(x).get(), false));
   }
+}
+
+void delete_optional_device (void* x)
+{
+  lantern_optional_device_delete(x);
 }
 
 // int array ref
@@ -1279,6 +1453,16 @@ XPtrTorchOptionalIntArrayRef from_sexp_optional_int_array_ref (SEXP x, bool inde
   return XPtrTorchOptionalIntArrayRef(data, is_null);
 }
 
+void delete_optional_int_array_ref (void* x)
+{
+  lantern_optional_vector_int64_t_delete(x);
+}
+
+void* fixme_optional_vector_int64_t (int64_t * x, size_t x_size, bool is_null)
+{
+  return lantern_optional_vector_int64_t(x, x_size, is_null);
+}
+
 // tensor_dict
 
 XPtrTorchTensorDict from_sexp_tensor_dict (SEXP x)
@@ -1298,6 +1482,11 @@ XPtrTorchTensorDict from_sexp_tensor_dict (SEXP x)
   return out;
 }
 
+void delete_tensor_dict (void* x)
+{
+  lantern_jit_TensorDict_delete(x);
+}
+
 // int64_t 2
 
 XPtrTorchint64_t2 from_sexp_int64_t_2 (SEXP x_)
@@ -1314,6 +1503,11 @@ XPtrTorchint64_t2 from_sexp_int64_t_2 (SEXP x_)
     lantern_int64_t(x), 
     lantern_int64_t_delete
   ));
+}
+
+void delete_int64_t_2 (void* x)
+{
+  lantern_vector_int64_t2_delete(x);
 }
 
 // optional_int64_t 2
@@ -1337,6 +1531,11 @@ XPtrTorchoptional_int64_t2 from_sexp_optional_int64_t_2 (SEXP x_)
     lantern_optional_int64_t(x, is_null), 
     lantern_optional_int64_t_delete
   ));
+}
+
+void delete_optional_int64_t (void* x)
+{
+  lantern_optional_int64_t_delete(x);
 }
 
 // index_int64_t
@@ -1399,4 +1598,100 @@ XPtrTorchoptional_index_int64_t from_sexp_optional_index_int64_t (SEXP x_)
   ));
 }
 
+// function ptr
 
+void delete_function_ptr (void* x)
+{
+  lantern_FunctionPtr_delete(x);
+}
+
+// QScheme
+
+void delete_qscheme (void* x)
+{
+  lantern_QScheme_delete(x);
+}
+
+// double
+
+void delete_double (void* x)
+{
+  lantern_double_delete(x);
+}
+
+// variable_list
+
+void delete_variable_list (void* x)
+{
+  lantern_variable_list_delete(x);
+}
+
+// int64_t
+
+void delete_int64_t (void* x)
+{
+  lantern_int64_t_delete(x);
+}
+
+// bool
+
+void delete_bool (void* x)
+{
+  lantern_bool_delete(x);
+}
+
+// layout
+
+void delete_layout (void* x)
+{
+  lantern_Layout_delete(x);
+}
+
+// tensor index
+
+void delete_tensor_index (void* x)
+{
+  lantern_TensorIndex_delete(x);
+}
+
+// slice
+
+void delete_slice (void* x)
+{
+  lantern_Slice_delete(x);
+}
+
+// packed_sequence
+
+void delete_packed_sequence (void* x)
+{
+  lantern_PackedSequence_delete(x);
+}
+
+// storage
+
+void delete_storage (void* x)
+{
+  lantern_Storage_delete(x);
+}
+
+// jit module
+
+void delete_jit_module (void* x)
+{
+  lantern_JITModule_delete(x);
+}
+
+// traceable_function
+
+void delete_traceable_function (void* x)
+{
+  lantern_TraceableFunction_delete(x);
+}
+
+// vector_void
+
+void delete_vector_void (void* x)
+{
+  lantern_vector_void_delete(x);
+}

@@ -2,9 +2,8 @@
 // Generator token: 10BE3573-1514-4C36-9D1C-5A225CD40393
 
 #include "../inst/include/torch.h"
+#include "../inst/include/torch_types.h"
 #include <Rcpp.h>
-#include <string>
-#include <set>
 
 using namespace Rcpp;
 
@@ -482,106 +481,37 @@ END_RCPP
 }
 // cpp_device_type_to_string
 std::string cpp_device_type_to_string(Rcpp::XPtr<XPtrTorchDevice> device);
-static SEXP _torch_cpp_device_type_to_string_try(SEXP deviceSEXP) {
+RcppExport SEXP _torch_cpp_device_type_to_string(SEXP deviceSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< Rcpp::XPtr<XPtrTorchDevice> >::type device(deviceSEXP);
     rcpp_result_gen = Rcpp::wrap(cpp_device_type_to_string(device));
     return rcpp_result_gen;
-END_RCPP_RETURN_ERROR
-}
-RcppExport SEXP _torch_cpp_device_type_to_string(SEXP deviceSEXP) {
-    SEXP rcpp_result_gen;
-    {
-        Rcpp::RNGScope rcpp_rngScope_gen;
-        rcpp_result_gen = PROTECT(_torch_cpp_device_type_to_string_try(deviceSEXP));
-    }
-    Rboolean rcpp_isInterrupt_gen = Rf_inherits(rcpp_result_gen, "interrupted-error");
-    if (rcpp_isInterrupt_gen) {
-        UNPROTECT(1);
-        Rf_onintr();
-    }
-    bool rcpp_isLongjump_gen = Rcpp::internal::isLongjumpSentinel(rcpp_result_gen);
-    if (rcpp_isLongjump_gen) {
-        Rcpp::internal::resumeJump(rcpp_result_gen);
-    }
-    Rboolean rcpp_isError_gen = Rf_inherits(rcpp_result_gen, "try-error");
-    if (rcpp_isError_gen) {
-        SEXP rcpp_msgSEXP_gen = Rf_asChar(rcpp_result_gen);
-        UNPROTECT(1);
-        Rf_error(CHAR(rcpp_msgSEXP_gen));
-    }
-    UNPROTECT(1);
-    return rcpp_result_gen;
+END_RCPP
 }
 // cpp_device_index_to_int
 std::int64_t cpp_device_index_to_int(Rcpp::XPtr<XPtrTorchDevice> device);
-static SEXP _torch_cpp_device_index_to_int_try(SEXP deviceSEXP) {
+RcppExport SEXP _torch_cpp_device_index_to_int(SEXP deviceSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< Rcpp::XPtr<XPtrTorchDevice> >::type device(deviceSEXP);
     rcpp_result_gen = Rcpp::wrap(cpp_device_index_to_int(device));
     return rcpp_result_gen;
-END_RCPP_RETURN_ERROR
-}
-RcppExport SEXP _torch_cpp_device_index_to_int(SEXP deviceSEXP) {
-    SEXP rcpp_result_gen;
-    {
-        Rcpp::RNGScope rcpp_rngScope_gen;
-        rcpp_result_gen = PROTECT(_torch_cpp_device_index_to_int_try(deviceSEXP));
-    }
-    Rboolean rcpp_isInterrupt_gen = Rf_inherits(rcpp_result_gen, "interrupted-error");
-    if (rcpp_isInterrupt_gen) {
-        UNPROTECT(1);
-        Rf_onintr();
-    }
-    bool rcpp_isLongjump_gen = Rcpp::internal::isLongjumpSentinel(rcpp_result_gen);
-    if (rcpp_isLongjump_gen) {
-        Rcpp::internal::resumeJump(rcpp_result_gen);
-    }
-    Rboolean rcpp_isError_gen = Rf_inherits(rcpp_result_gen, "try-error");
-    if (rcpp_isError_gen) {
-        SEXP rcpp_msgSEXP_gen = Rf_asChar(rcpp_result_gen);
-        UNPROTECT(1);
-        Rf_error(CHAR(rcpp_msgSEXP_gen));
-    }
-    UNPROTECT(1);
-    return rcpp_result_gen;
+END_RCPP
 }
 // cpp_torch_device
 XPtrTorchDevice cpp_torch_device(std::string type, Rcpp::Nullable<std::int64_t> index);
-static SEXP _torch_cpp_torch_device_try(SEXP typeSEXP, SEXP indexSEXP) {
+RcppExport SEXP _torch_cpp_torch_device(SEXP typeSEXP, SEXP indexSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< std::string >::type type(typeSEXP);
     Rcpp::traits::input_parameter< Rcpp::Nullable<std::int64_t> >::type index(indexSEXP);
     rcpp_result_gen = Rcpp::wrap(cpp_torch_device(type, index));
     return rcpp_result_gen;
-END_RCPP_RETURN_ERROR
-}
-RcppExport SEXP _torch_cpp_torch_device(SEXP typeSEXP, SEXP indexSEXP) {
-    SEXP rcpp_result_gen;
-    {
-        Rcpp::RNGScope rcpp_rngScope_gen;
-        rcpp_result_gen = PROTECT(_torch_cpp_torch_device_try(typeSEXP, indexSEXP));
-    }
-    Rboolean rcpp_isInterrupt_gen = Rf_inherits(rcpp_result_gen, "interrupted-error");
-    if (rcpp_isInterrupt_gen) {
-        UNPROTECT(1);
-        Rf_onintr();
-    }
-    bool rcpp_isLongjump_gen = Rcpp::internal::isLongjumpSentinel(rcpp_result_gen);
-    if (rcpp_isLongjump_gen) {
-        Rcpp::internal::resumeJump(rcpp_result_gen);
-    }
-    Rboolean rcpp_isError_gen = Rf_inherits(rcpp_result_gen, "try-error");
-    if (rcpp_isError_gen) {
-        SEXP rcpp_msgSEXP_gen = Rf_asChar(rcpp_result_gen);
-        UNPROTECT(1);
-        Rf_error(CHAR(rcpp_msgSEXP_gen));
-    }
-    UNPROTECT(1);
-    return rcpp_result_gen;
+END_RCPP
 }
 // cpp_torch_dimname
 XPtrTorchDimname cpp_torch_dimname(const std::string& str);
@@ -34357,207 +34287,69 @@ END_RCPP
 }
 // cpp_torch_scalar
 XPtrTorchScalar cpp_torch_scalar(SEXP x);
-static SEXP _torch_cpp_torch_scalar_try(SEXP xSEXP) {
+RcppExport SEXP _torch_cpp_torch_scalar(SEXP xSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< SEXP >::type x(xSEXP);
     rcpp_result_gen = Rcpp::wrap(cpp_torch_scalar(x));
     return rcpp_result_gen;
-END_RCPP_RETURN_ERROR
-}
-RcppExport SEXP _torch_cpp_torch_scalar(SEXP xSEXP) {
-    SEXP rcpp_result_gen;
-    {
-        Rcpp::RNGScope rcpp_rngScope_gen;
-        rcpp_result_gen = PROTECT(_torch_cpp_torch_scalar_try(xSEXP));
-    }
-    Rboolean rcpp_isInterrupt_gen = Rf_inherits(rcpp_result_gen, "interrupted-error");
-    if (rcpp_isInterrupt_gen) {
-        UNPROTECT(1);
-        Rf_onintr();
-    }
-    bool rcpp_isLongjump_gen = Rcpp::internal::isLongjumpSentinel(rcpp_result_gen);
-    if (rcpp_isLongjump_gen) {
-        Rcpp::internal::resumeJump(rcpp_result_gen);
-    }
-    Rboolean rcpp_isError_gen = Rf_inherits(rcpp_result_gen, "try-error");
-    if (rcpp_isError_gen) {
-        SEXP rcpp_msgSEXP_gen = Rf_asChar(rcpp_result_gen);
-        UNPROTECT(1);
-        Rf_error(CHAR(rcpp_msgSEXP_gen));
-    }
-    UNPROTECT(1);
-    return rcpp_result_gen;
+END_RCPP
 }
 // cpp_torch_scalar_dtype
 Rcpp::XPtr<XPtrTorchScalarType> cpp_torch_scalar_dtype(Rcpp::XPtr<XPtrTorchScalar> self);
-static SEXP _torch_cpp_torch_scalar_dtype_try(SEXP selfSEXP) {
+RcppExport SEXP _torch_cpp_torch_scalar_dtype(SEXP selfSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< Rcpp::XPtr<XPtrTorchScalar> >::type self(selfSEXP);
     rcpp_result_gen = Rcpp::wrap(cpp_torch_scalar_dtype(self));
     return rcpp_result_gen;
-END_RCPP_RETURN_ERROR
-}
-RcppExport SEXP _torch_cpp_torch_scalar_dtype(SEXP selfSEXP) {
-    SEXP rcpp_result_gen;
-    {
-        Rcpp::RNGScope rcpp_rngScope_gen;
-        rcpp_result_gen = PROTECT(_torch_cpp_torch_scalar_dtype_try(selfSEXP));
-    }
-    Rboolean rcpp_isInterrupt_gen = Rf_inherits(rcpp_result_gen, "interrupted-error");
-    if (rcpp_isInterrupt_gen) {
-        UNPROTECT(1);
-        Rf_onintr();
-    }
-    bool rcpp_isLongjump_gen = Rcpp::internal::isLongjumpSentinel(rcpp_result_gen);
-    if (rcpp_isLongjump_gen) {
-        Rcpp::internal::resumeJump(rcpp_result_gen);
-    }
-    Rboolean rcpp_isError_gen = Rf_inherits(rcpp_result_gen, "try-error");
-    if (rcpp_isError_gen) {
-        SEXP rcpp_msgSEXP_gen = Rf_asChar(rcpp_result_gen);
-        UNPROTECT(1);
-        Rf_error(CHAR(rcpp_msgSEXP_gen));
-    }
-    UNPROTECT(1);
-    return rcpp_result_gen;
+END_RCPP
 }
 // cpp_torch_scalar_to_int
 int cpp_torch_scalar_to_int(Rcpp::XPtr<XPtrTorchScalar> self);
-static SEXP _torch_cpp_torch_scalar_to_int_try(SEXP selfSEXP) {
+RcppExport SEXP _torch_cpp_torch_scalar_to_int(SEXP selfSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< Rcpp::XPtr<XPtrTorchScalar> >::type self(selfSEXP);
     rcpp_result_gen = Rcpp::wrap(cpp_torch_scalar_to_int(self));
     return rcpp_result_gen;
-END_RCPP_RETURN_ERROR
-}
-RcppExport SEXP _torch_cpp_torch_scalar_to_int(SEXP selfSEXP) {
-    SEXP rcpp_result_gen;
-    {
-        Rcpp::RNGScope rcpp_rngScope_gen;
-        rcpp_result_gen = PROTECT(_torch_cpp_torch_scalar_to_int_try(selfSEXP));
-    }
-    Rboolean rcpp_isInterrupt_gen = Rf_inherits(rcpp_result_gen, "interrupted-error");
-    if (rcpp_isInterrupt_gen) {
-        UNPROTECT(1);
-        Rf_onintr();
-    }
-    bool rcpp_isLongjump_gen = Rcpp::internal::isLongjumpSentinel(rcpp_result_gen);
-    if (rcpp_isLongjump_gen) {
-        Rcpp::internal::resumeJump(rcpp_result_gen);
-    }
-    Rboolean rcpp_isError_gen = Rf_inherits(rcpp_result_gen, "try-error");
-    if (rcpp_isError_gen) {
-        SEXP rcpp_msgSEXP_gen = Rf_asChar(rcpp_result_gen);
-        UNPROTECT(1);
-        Rf_error(CHAR(rcpp_msgSEXP_gen));
-    }
-    UNPROTECT(1);
-    return rcpp_result_gen;
+END_RCPP
 }
 // cpp_torch_scalar_to_double
 double cpp_torch_scalar_to_double(Rcpp::XPtr<XPtrTorchScalar> self);
-static SEXP _torch_cpp_torch_scalar_to_double_try(SEXP selfSEXP) {
+RcppExport SEXP _torch_cpp_torch_scalar_to_double(SEXP selfSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< Rcpp::XPtr<XPtrTorchScalar> >::type self(selfSEXP);
     rcpp_result_gen = Rcpp::wrap(cpp_torch_scalar_to_double(self));
     return rcpp_result_gen;
-END_RCPP_RETURN_ERROR
-}
-RcppExport SEXP _torch_cpp_torch_scalar_to_double(SEXP selfSEXP) {
-    SEXP rcpp_result_gen;
-    {
-        Rcpp::RNGScope rcpp_rngScope_gen;
-        rcpp_result_gen = PROTECT(_torch_cpp_torch_scalar_to_double_try(selfSEXP));
-    }
-    Rboolean rcpp_isInterrupt_gen = Rf_inherits(rcpp_result_gen, "interrupted-error");
-    if (rcpp_isInterrupt_gen) {
-        UNPROTECT(1);
-        Rf_onintr();
-    }
-    bool rcpp_isLongjump_gen = Rcpp::internal::isLongjumpSentinel(rcpp_result_gen);
-    if (rcpp_isLongjump_gen) {
-        Rcpp::internal::resumeJump(rcpp_result_gen);
-    }
-    Rboolean rcpp_isError_gen = Rf_inherits(rcpp_result_gen, "try-error");
-    if (rcpp_isError_gen) {
-        SEXP rcpp_msgSEXP_gen = Rf_asChar(rcpp_result_gen);
-        UNPROTECT(1);
-        Rf_error(CHAR(rcpp_msgSEXP_gen));
-    }
-    UNPROTECT(1);
-    return rcpp_result_gen;
+END_RCPP
 }
 // cpp_torch_scalar_to_float
 float cpp_torch_scalar_to_float(Rcpp::XPtr<XPtrTorchScalar> self);
-static SEXP _torch_cpp_torch_scalar_to_float_try(SEXP selfSEXP) {
+RcppExport SEXP _torch_cpp_torch_scalar_to_float(SEXP selfSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< Rcpp::XPtr<XPtrTorchScalar> >::type self(selfSEXP);
     rcpp_result_gen = Rcpp::wrap(cpp_torch_scalar_to_float(self));
     return rcpp_result_gen;
-END_RCPP_RETURN_ERROR
-}
-RcppExport SEXP _torch_cpp_torch_scalar_to_float(SEXP selfSEXP) {
-    SEXP rcpp_result_gen;
-    {
-        Rcpp::RNGScope rcpp_rngScope_gen;
-        rcpp_result_gen = PROTECT(_torch_cpp_torch_scalar_to_float_try(selfSEXP));
-    }
-    Rboolean rcpp_isInterrupt_gen = Rf_inherits(rcpp_result_gen, "interrupted-error");
-    if (rcpp_isInterrupt_gen) {
-        UNPROTECT(1);
-        Rf_onintr();
-    }
-    bool rcpp_isLongjump_gen = Rcpp::internal::isLongjumpSentinel(rcpp_result_gen);
-    if (rcpp_isLongjump_gen) {
-        Rcpp::internal::resumeJump(rcpp_result_gen);
-    }
-    Rboolean rcpp_isError_gen = Rf_inherits(rcpp_result_gen, "try-error");
-    if (rcpp_isError_gen) {
-        SEXP rcpp_msgSEXP_gen = Rf_asChar(rcpp_result_gen);
-        UNPROTECT(1);
-        Rf_error(CHAR(rcpp_msgSEXP_gen));
-    }
-    UNPROTECT(1);
-    return rcpp_result_gen;
+END_RCPP
 }
 // cpp_torch_scalar_to_bool
 bool cpp_torch_scalar_to_bool(Rcpp::XPtr<XPtrTorchScalar> self);
-static SEXP _torch_cpp_torch_scalar_to_bool_try(SEXP selfSEXP) {
+RcppExport SEXP _torch_cpp_torch_scalar_to_bool(SEXP selfSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< Rcpp::XPtr<XPtrTorchScalar> >::type self(selfSEXP);
     rcpp_result_gen = Rcpp::wrap(cpp_torch_scalar_to_bool(self));
     return rcpp_result_gen;
-END_RCPP_RETURN_ERROR
-}
-RcppExport SEXP _torch_cpp_torch_scalar_to_bool(SEXP selfSEXP) {
-    SEXP rcpp_result_gen;
-    {
-        Rcpp::RNGScope rcpp_rngScope_gen;
-        rcpp_result_gen = PROTECT(_torch_cpp_torch_scalar_to_bool_try(selfSEXP));
-    }
-    Rboolean rcpp_isInterrupt_gen = Rf_inherits(rcpp_result_gen, "interrupted-error");
-    if (rcpp_isInterrupt_gen) {
-        UNPROTECT(1);
-        Rf_onintr();
-    }
-    bool rcpp_isLongjump_gen = Rcpp::internal::isLongjumpSentinel(rcpp_result_gen);
-    if (rcpp_isLongjump_gen) {
-        Rcpp::internal::resumeJump(rcpp_result_gen);
-    }
-    Rboolean rcpp_isError_gen = Rf_inherits(rcpp_result_gen, "try-error");
-    if (rcpp_isError_gen) {
-        SEXP rcpp_msgSEXP_gen = Rf_asChar(rcpp_result_gen);
-        UNPROTECT(1);
-        Rf_error(CHAR(rcpp_msgSEXP_gen));
-    }
-    UNPROTECT(1);
-    return rcpp_result_gen;
+END_RCPP
 }
 // cpp_jit_script_module_parameters
 XPtrTorchjit_named_parameter_list cpp_jit_script_module_parameters(XPtrTorchScriptModule self, bool recurse);
@@ -35089,71 +34881,25 @@ END_RCPP
 }
 // cpp_torch_tensor_list
 XPtrTorchTensorList cpp_torch_tensor_list(const Rcpp::List& x);
-static SEXP _torch_cpp_torch_tensor_list_try(SEXP xSEXP) {
+RcppExport SEXP _torch_cpp_torch_tensor_list(SEXP xSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< const Rcpp::List& >::type x(xSEXP);
     rcpp_result_gen = Rcpp::wrap(cpp_torch_tensor_list(x));
     return rcpp_result_gen;
-END_RCPP_RETURN_ERROR
-}
-RcppExport SEXP _torch_cpp_torch_tensor_list(SEXP xSEXP) {
-    SEXP rcpp_result_gen;
-    {
-        Rcpp::RNGScope rcpp_rngScope_gen;
-        rcpp_result_gen = PROTECT(_torch_cpp_torch_tensor_list_try(xSEXP));
-    }
-    Rboolean rcpp_isInterrupt_gen = Rf_inherits(rcpp_result_gen, "interrupted-error");
-    if (rcpp_isInterrupt_gen) {
-        UNPROTECT(1);
-        Rf_onintr();
-    }
-    bool rcpp_isLongjump_gen = Rcpp::internal::isLongjumpSentinel(rcpp_result_gen);
-    if (rcpp_isLongjump_gen) {
-        Rcpp::internal::resumeJump(rcpp_result_gen);
-    }
-    Rboolean rcpp_isError_gen = Rf_inherits(rcpp_result_gen, "try-error");
-    if (rcpp_isError_gen) {
-        SEXP rcpp_msgSEXP_gen = Rf_asChar(rcpp_result_gen);
-        UNPROTECT(1);
-        Rf_error(CHAR(rcpp_msgSEXP_gen));
-    }
-    UNPROTECT(1);
-    return rcpp_result_gen;
+END_RCPP
 }
 // cpp_tensor_list_to_r_list
 Rcpp::List cpp_tensor_list_to_r_list(Rcpp::XPtr<XPtrTorchTensorList> x);
-static SEXP _torch_cpp_tensor_list_to_r_list_try(SEXP xSEXP) {
+RcppExport SEXP _torch_cpp_tensor_list_to_r_list(SEXP xSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< Rcpp::XPtr<XPtrTorchTensorList> >::type x(xSEXP);
     rcpp_result_gen = Rcpp::wrap(cpp_tensor_list_to_r_list(x));
     return rcpp_result_gen;
-END_RCPP_RETURN_ERROR
-}
-RcppExport SEXP _torch_cpp_tensor_list_to_r_list(SEXP xSEXP) {
-    SEXP rcpp_result_gen;
-    {
-        Rcpp::RNGScope rcpp_rngScope_gen;
-        rcpp_result_gen = PROTECT(_torch_cpp_tensor_list_to_r_list_try(xSEXP));
-    }
-    Rboolean rcpp_isInterrupt_gen = Rf_inherits(rcpp_result_gen, "interrupted-error");
-    if (rcpp_isInterrupt_gen) {
-        UNPROTECT(1);
-        Rf_onintr();
-    }
-    bool rcpp_isLongjump_gen = Rcpp::internal::isLongjumpSentinel(rcpp_result_gen);
-    if (rcpp_isLongjump_gen) {
-        Rcpp::internal::resumeJump(rcpp_result_gen);
-    }
-    Rboolean rcpp_isError_gen = Rf_inherits(rcpp_result_gen, "try-error");
-    if (rcpp_isError_gen) {
-        SEXP rcpp_msgSEXP_gen = Rf_asChar(rcpp_result_gen);
-        UNPROTECT(1);
-        Rf_error(CHAR(rcpp_msgSEXP_gen));
-    }
-    UNPROTECT(1);
-    return rcpp_result_gen;
+END_RCPP
 }
 // cpp_torch_tensor_options
 XPtrTorchTensorOptions cpp_torch_tensor_options(Rcpp::Nullable<Rcpp::XPtr<XPtrTorchDtype>> dtype_ptr, Rcpp::Nullable<Rcpp::XPtr<XPtrTorch>> layout_ptr, Rcpp::Nullable<Rcpp::XPtr<XPtrTorch>> device_ptr, Rcpp::Nullable<bool> requires_grad, Rcpp::Nullable<bool> pinned_memory);
@@ -35267,203 +35013,65 @@ END_RCPP
 }
 // cpp_nullptr
 Rcpp::XPtr<std::nullptr_t> cpp_nullptr();
-static SEXP _torch_cpp_nullptr_try() {
+RcppExport SEXP _torch_cpp_nullptr() {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
     rcpp_result_gen = Rcpp::wrap(cpp_nullptr());
     return rcpp_result_gen;
-END_RCPP_RETURN_ERROR
-}
-RcppExport SEXP _torch_cpp_nullptr() {
-    SEXP rcpp_result_gen;
-    {
-        Rcpp::RNGScope rcpp_rngScope_gen;
-        rcpp_result_gen = PROTECT(_torch_cpp_nullptr_try());
-    }
-    Rboolean rcpp_isInterrupt_gen = Rf_inherits(rcpp_result_gen, "interrupted-error");
-    if (rcpp_isInterrupt_gen) {
-        UNPROTECT(1);
-        Rf_onintr();
-    }
-    bool rcpp_isLongjump_gen = Rcpp::internal::isLongjumpSentinel(rcpp_result_gen);
-    if (rcpp_isLongjump_gen) {
-        Rcpp::internal::resumeJump(rcpp_result_gen);
-    }
-    Rboolean rcpp_isError_gen = Rf_inherits(rcpp_result_gen, "try-error");
-    if (rcpp_isError_gen) {
-        SEXP rcpp_msgSEXP_gen = Rf_asChar(rcpp_result_gen);
-        UNPROTECT(1);
-        Rf_error(CHAR(rcpp_msgSEXP_gen));
-    }
-    UNPROTECT(1);
-    return rcpp_result_gen;
+END_RCPP
 }
 // cpp_nullopt
 Rcpp::XPtr<std::nullptr_t> cpp_nullopt();
-static SEXP _torch_cpp_nullopt_try() {
+RcppExport SEXP _torch_cpp_nullopt() {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
     rcpp_result_gen = Rcpp::wrap(cpp_nullopt());
     return rcpp_result_gen;
-END_RCPP_RETURN_ERROR
-}
-RcppExport SEXP _torch_cpp_nullopt() {
-    SEXP rcpp_result_gen;
-    {
-        Rcpp::RNGScope rcpp_rngScope_gen;
-        rcpp_result_gen = PROTECT(_torch_cpp_nullopt_try());
-    }
-    Rboolean rcpp_isInterrupt_gen = Rf_inherits(rcpp_result_gen, "interrupted-error");
-    if (rcpp_isInterrupt_gen) {
-        UNPROTECT(1);
-        Rf_onintr();
-    }
-    bool rcpp_isLongjump_gen = Rcpp::internal::isLongjumpSentinel(rcpp_result_gen);
-    if (rcpp_isLongjump_gen) {
-        Rcpp::internal::resumeJump(rcpp_result_gen);
-    }
-    Rboolean rcpp_isError_gen = Rf_inherits(rcpp_result_gen, "try-error");
-    if (rcpp_isError_gen) {
-        SEXP rcpp_msgSEXP_gen = Rf_asChar(rcpp_result_gen);
-        UNPROTECT(1);
-        Rf_error(CHAR(rcpp_msgSEXP_gen));
-    }
-    UNPROTECT(1);
-    return rcpp_result_gen;
+END_RCPP
 }
 // cpp_optional_int64_t
 Rcpp::XPtr<XPtrTorchoptional_int64_t> cpp_optional_int64_t(Rcpp::Nullable<int64_t> x);
-static SEXP _torch_cpp_optional_int64_t_try(SEXP xSEXP) {
+RcppExport SEXP _torch_cpp_optional_int64_t(SEXP xSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< Rcpp::Nullable<int64_t> >::type x(xSEXP);
     rcpp_result_gen = Rcpp::wrap(cpp_optional_int64_t(x));
     return rcpp_result_gen;
-END_RCPP_RETURN_ERROR
-}
-RcppExport SEXP _torch_cpp_optional_int64_t(SEXP xSEXP) {
-    SEXP rcpp_result_gen;
-    {
-        Rcpp::RNGScope rcpp_rngScope_gen;
-        rcpp_result_gen = PROTECT(_torch_cpp_optional_int64_t_try(xSEXP));
-    }
-    Rboolean rcpp_isInterrupt_gen = Rf_inherits(rcpp_result_gen, "interrupted-error");
-    if (rcpp_isInterrupt_gen) {
-        UNPROTECT(1);
-        Rf_onintr();
-    }
-    bool rcpp_isLongjump_gen = Rcpp::internal::isLongjumpSentinel(rcpp_result_gen);
-    if (rcpp_isLongjump_gen) {
-        Rcpp::internal::resumeJump(rcpp_result_gen);
-    }
-    Rboolean rcpp_isError_gen = Rf_inherits(rcpp_result_gen, "try-error");
-    if (rcpp_isError_gen) {
-        SEXP rcpp_msgSEXP_gen = Rf_asChar(rcpp_result_gen);
-        UNPROTECT(1);
-        Rf_error(CHAR(rcpp_msgSEXP_gen));
-    }
-    UNPROTECT(1);
-    return rcpp_result_gen;
+END_RCPP
 }
 // cpp_tensor_undefined
 XPtrTorchTensor cpp_tensor_undefined();
-static SEXP _torch_cpp_tensor_undefined_try() {
+RcppExport SEXP _torch_cpp_tensor_undefined() {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
     rcpp_result_gen = Rcpp::wrap(cpp_tensor_undefined());
     return rcpp_result_gen;
-END_RCPP_RETURN_ERROR
-}
-RcppExport SEXP _torch_cpp_tensor_undefined() {
-    SEXP rcpp_result_gen;
-    {
-        Rcpp::RNGScope rcpp_rngScope_gen;
-        rcpp_result_gen = PROTECT(_torch_cpp_tensor_undefined_try());
-    }
-    Rboolean rcpp_isInterrupt_gen = Rf_inherits(rcpp_result_gen, "interrupted-error");
-    if (rcpp_isInterrupt_gen) {
-        UNPROTECT(1);
-        Rf_onintr();
-    }
-    bool rcpp_isLongjump_gen = Rcpp::internal::isLongjumpSentinel(rcpp_result_gen);
-    if (rcpp_isLongjump_gen) {
-        Rcpp::internal::resumeJump(rcpp_result_gen);
-    }
-    Rboolean rcpp_isError_gen = Rf_inherits(rcpp_result_gen, "try-error");
-    if (rcpp_isError_gen) {
-        SEXP rcpp_msgSEXP_gen = Rf_asChar(rcpp_result_gen);
-        UNPROTECT(1);
-        Rf_error(CHAR(rcpp_msgSEXP_gen));
-    }
-    UNPROTECT(1);
-    return rcpp_result_gen;
+END_RCPP
 }
 // to_index_tensor
 XPtrTorchTensor to_index_tensor(XPtrTorchTensor t);
-static SEXP _torch_to_index_tensor_try(SEXP tSEXP) {
+RcppExport SEXP _torch_to_index_tensor(SEXP tSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< XPtrTorchTensor >::type t(tSEXP);
     rcpp_result_gen = Rcpp::wrap(to_index_tensor(t));
     return rcpp_result_gen;
-END_RCPP_RETURN_ERROR
-}
-RcppExport SEXP _torch_to_index_tensor(SEXP tSEXP) {
-    SEXP rcpp_result_gen;
-    {
-        Rcpp::RNGScope rcpp_rngScope_gen;
-        rcpp_result_gen = PROTECT(_torch_to_index_tensor_try(tSEXP));
-    }
-    Rboolean rcpp_isInterrupt_gen = Rf_inherits(rcpp_result_gen, "interrupted-error");
-    if (rcpp_isInterrupt_gen) {
-        UNPROTECT(1);
-        Rf_onintr();
-    }
-    bool rcpp_isLongjump_gen = Rcpp::internal::isLongjumpSentinel(rcpp_result_gen);
-    if (rcpp_isLongjump_gen) {
-        Rcpp::internal::resumeJump(rcpp_result_gen);
-    }
-    Rboolean rcpp_isError_gen = Rf_inherits(rcpp_result_gen, "try-error");
-    if (rcpp_isError_gen) {
-        SEXP rcpp_msgSEXP_gen = Rf_asChar(rcpp_result_gen);
-        UNPROTECT(1);
-        Rf_error(CHAR(rcpp_msgSEXP_gen));
-    }
-    UNPROTECT(1);
-    return rcpp_result_gen;
+END_RCPP
 }
 // cpp_torch_namespace__use_cudnn_rnn_flatten_weight
 bool cpp_torch_namespace__use_cudnn_rnn_flatten_weight();
-static SEXP _torch_cpp_torch_namespace__use_cudnn_rnn_flatten_weight_try() {
+RcppExport SEXP _torch_cpp_torch_namespace__use_cudnn_rnn_flatten_weight() {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
     rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace__use_cudnn_rnn_flatten_weight());
     return rcpp_result_gen;
-END_RCPP_RETURN_ERROR
-}
-RcppExport SEXP _torch_cpp_torch_namespace__use_cudnn_rnn_flatten_weight() {
-    SEXP rcpp_result_gen;
-    {
-        Rcpp::RNGScope rcpp_rngScope_gen;
-        rcpp_result_gen = PROTECT(_torch_cpp_torch_namespace__use_cudnn_rnn_flatten_weight_try());
-    }
-    Rboolean rcpp_isInterrupt_gen = Rf_inherits(rcpp_result_gen, "interrupted-error");
-    if (rcpp_isInterrupt_gen) {
-        UNPROTECT(1);
-        Rf_onintr();
-    }
-    bool rcpp_isLongjump_gen = Rcpp::internal::isLongjumpSentinel(rcpp_result_gen);
-    if (rcpp_isLongjump_gen) {
-        Rcpp::internal::resumeJump(rcpp_result_gen);
-    }
-    Rboolean rcpp_isError_gen = Rf_inherits(rcpp_result_gen, "try-error");
-    if (rcpp_isError_gen) {
-        SEXP rcpp_msgSEXP_gen = Rf_asChar(rcpp_result_gen);
-        UNPROTECT(1);
-        Rf_error(CHAR(rcpp_msgSEXP_gen));
-    }
-    UNPROTECT(1);
-    return rcpp_result_gen;
+END_RCPP
 }
 // cpp_torch_variable_list
 Rcpp::XPtr<XPtrTorchvariable_list> cpp_torch_variable_list(const Rcpp::List& x);
@@ -35521,54 +35129,6 @@ BEGIN_RCPP
     rcpp_result_gen = Rcpp::wrap(xptr_address(s));
     return rcpp_result_gen;
 END_RCPP
-}
-
-// validate (ensure exported C++ functions exist before calling them)
-static int _torch_RcppExport_validate(const char* sig) { 
-    static std::set<std::string> signatures;
-    if (signatures.empty()) {
-        signatures.insert("std::string(*cpp_device_type_to_string)(Rcpp::XPtr<XPtrTorchDevice>)");
-        signatures.insert("std::int64_t(*cpp_device_index_to_int)(Rcpp::XPtr<XPtrTorchDevice>)");
-        signatures.insert("XPtrTorchDevice(*cpp_torch_device)(std::string,Rcpp::Nullable<std::int64_t>)");
-        signatures.insert("XPtrTorchScalar(*cpp_torch_scalar)(SEXP)");
-        signatures.insert("Rcpp::XPtr<XPtrTorchScalarType>(*cpp_torch_scalar_dtype)(Rcpp::XPtr<XPtrTorchScalar>)");
-        signatures.insert("int(*cpp_torch_scalar_to_int)(Rcpp::XPtr<XPtrTorchScalar>)");
-        signatures.insert("double(*cpp_torch_scalar_to_double)(Rcpp::XPtr<XPtrTorchScalar>)");
-        signatures.insert("float(*cpp_torch_scalar_to_float)(Rcpp::XPtr<XPtrTorchScalar>)");
-        signatures.insert("bool(*cpp_torch_scalar_to_bool)(Rcpp::XPtr<XPtrTorchScalar>)");
-        signatures.insert("XPtrTorchTensorList(*cpp_torch_tensor_list)(const Rcpp::List&)");
-        signatures.insert("Rcpp::List(*cpp_tensor_list_to_r_list)(Rcpp::XPtr<XPtrTorchTensorList>)");
-        signatures.insert("Rcpp::XPtr<std::nullptr_t>(*cpp_nullptr)()");
-        signatures.insert("Rcpp::XPtr<std::nullptr_t>(*cpp_nullopt)()");
-        signatures.insert("Rcpp::XPtr<XPtrTorchoptional_int64_t>(*cpp_optional_int64_t)(Rcpp::Nullable<int64_t>)");
-        signatures.insert("XPtrTorchTensor(*cpp_tensor_undefined)()");
-        signatures.insert("XPtrTorchTensor(*to_index_tensor)(XPtrTorchTensor)");
-        signatures.insert("bool(*cpp_torch_namespace__use_cudnn_rnn_flatten_weight)()");
-    }
-    return signatures.find(sig) != signatures.end();
-}
-
-// registerCCallable (register entry points for exported C++ functions)
-RcppExport SEXP _torch_RcppExport_registerCCallable() { 
-    R_RegisterCCallable("torch", "_torch_cpp_device_type_to_string", (DL_FUNC)_torch_cpp_device_type_to_string_try);
-    R_RegisterCCallable("torch", "_torch_cpp_device_index_to_int", (DL_FUNC)_torch_cpp_device_index_to_int_try);
-    R_RegisterCCallable("torch", "_torch_cpp_torch_device", (DL_FUNC)_torch_cpp_torch_device_try);
-    R_RegisterCCallable("torch", "_torch_cpp_torch_scalar", (DL_FUNC)_torch_cpp_torch_scalar_try);
-    R_RegisterCCallable("torch", "_torch_cpp_torch_scalar_dtype", (DL_FUNC)_torch_cpp_torch_scalar_dtype_try);
-    R_RegisterCCallable("torch", "_torch_cpp_torch_scalar_to_int", (DL_FUNC)_torch_cpp_torch_scalar_to_int_try);
-    R_RegisterCCallable("torch", "_torch_cpp_torch_scalar_to_double", (DL_FUNC)_torch_cpp_torch_scalar_to_double_try);
-    R_RegisterCCallable("torch", "_torch_cpp_torch_scalar_to_float", (DL_FUNC)_torch_cpp_torch_scalar_to_float_try);
-    R_RegisterCCallable("torch", "_torch_cpp_torch_scalar_to_bool", (DL_FUNC)_torch_cpp_torch_scalar_to_bool_try);
-    R_RegisterCCallable("torch", "_torch_cpp_torch_tensor_list", (DL_FUNC)_torch_cpp_torch_tensor_list_try);
-    R_RegisterCCallable("torch", "_torch_cpp_tensor_list_to_r_list", (DL_FUNC)_torch_cpp_tensor_list_to_r_list_try);
-    R_RegisterCCallable("torch", "_torch_cpp_nullptr", (DL_FUNC)_torch_cpp_nullptr_try);
-    R_RegisterCCallable("torch", "_torch_cpp_nullopt", (DL_FUNC)_torch_cpp_nullopt_try);
-    R_RegisterCCallable("torch", "_torch_cpp_optional_int64_t", (DL_FUNC)_torch_cpp_optional_int64_t_try);
-    R_RegisterCCallable("torch", "_torch_cpp_tensor_undefined", (DL_FUNC)_torch_cpp_tensor_undefined_try);
-    R_RegisterCCallable("torch", "_torch_to_index_tensor", (DL_FUNC)_torch_to_index_tensor_try);
-    R_RegisterCCallable("torch", "_torch_cpp_torch_namespace__use_cudnn_rnn_flatten_weight", (DL_FUNC)_torch_cpp_torch_namespace__use_cudnn_rnn_flatten_weight_try);
-    R_RegisterCCallable("torch", "_torch_RcppExport_validate", (DL_FUNC)_torch_RcppExport_validate);
-    return R_NilValue;
 }
 
 static const R_CallMethodDef CallEntries[] = {
@@ -38266,12 +37826,11 @@ static const R_CallMethodDef CallEntries[] = {
     {"_torch_set_xptr_address", (DL_FUNC) &_torch_set_xptr_address, 2},
     {"_torch_set_xptr_protected", (DL_FUNC) &_torch_set_xptr_protected, 2},
     {"_torch_xptr_address", (DL_FUNC) &_torch_xptr_address, 1},
-    {"_torch_RcppExport_registerCCallable", (DL_FUNC) &_torch_RcppExport_registerCCallable, 0},
     {NULL, NULL, 0}
 };
 
 void register_callables(DllInfo *dll);
-RcppExport void R_init_torch(DllInfo *dll) {
+RcppExport void R_init_torchpkg(DllInfo *dll) {
     R_registerRoutines(dll, NULL, CallEntries, NULL, NULL);
     R_useDynamicSymbols(dll, FALSE);
     register_callables(dll);
