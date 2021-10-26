@@ -2,6 +2,7 @@
 #define TORCH_TYPES
 
 #include <Rcpp.h>
+#include <memory>
 #include "torch_deleters.h"
 
 class XPtrTorch
