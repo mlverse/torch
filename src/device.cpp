@@ -1,6 +1,5 @@
 #include <lantern/lantern.h>
 #include <torch.h>
-#include "utils.h"
 
 // [[Rcpp::export]]
 std::string cpp_device_type_to_string(Rcpp::XPtr<XPtrTorchDevice> device)

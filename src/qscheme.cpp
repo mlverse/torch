@@ -1,5 +1,5 @@
 #include <torch.h>
-#include "utils.h" 
+ 
 
 // [[Rcpp::export]]
 std::string cpp_qscheme_to_string(Rcpp::XPtr<XPtrTorchQScheme> x) {

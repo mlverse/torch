@@ -1,5 +1,5 @@
 #include <torch.h>
-#include "utils.h"
+
 
 // [[Rcpp::export]]
 XPtrTorchTensorOptions cpp_torch_tensor_options (

@@ -1,5 +1,5 @@
 // This file is auto generated. Dont modify it by hand.
-#include "utils.h"
+#include <torch.h>
 
 // [[Rcpp::export]]
 void cpp_torch_method_set_data_self_Tensor_new_data_Tensor (XPtrTorchTensor self, XPtrTorchTensor new_data) {

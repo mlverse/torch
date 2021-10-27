@@ -2,6 +2,7 @@
 // Generator token: 10BE3573-1514-4C36-9D1C-5A225CD40393
 
 #include "../inst/include/torch.h"
+#include "../inst/include/torch_types.h"
 #include <Rcpp.h>
 
 using namespace Rcpp;
@@ -34925,17 +34926,6 @@ BEGIN_RCPP
     return R_NilValue;
 END_RCPP
 }
-// test_fun_hello
-int test_fun_hello(XPtrTorchOptionalDevice x);
-RcppExport SEXP _torch_test_fun_hello(SEXP xSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< XPtrTorchOptionalDevice >::type x(xSEXP);
-    rcpp_result_gen = Rcpp::wrap(test_fun_hello(x));
-    return rcpp_result_gen;
-END_RCPP
-}
 // cpp_trace_function
 Rcpp::XPtr<XPtrTorchFunctionPtr> cpp_trace_function(Rcpp::Function fn, XPtrTorchStack inputs, XPtrTorchCompilationUnit compilation_unit, XPtrTorchstring name, bool strict, XPtrTorchScriptModule module, bool should_mangle, bool manage_memory);
 RcppExport SEXP _torch_cpp_trace_function(SEXP fnSEXP, SEXP inputsSEXP, SEXP compilation_unitSEXP, SEXP nameSEXP, SEXP strictSEXP, SEXP moduleSEXP, SEXP should_mangleSEXP, SEXP manage_memorySEXP) {
@@ -35059,6 +35049,17 @@ BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     rcpp_result_gen = Rcpp::wrap(cpp_tensor_undefined());
+    return rcpp_result_gen;
+END_RCPP
+}
+// to_index_tensor
+XPtrTorchTensor to_index_tensor(XPtrTorchTensor t);
+RcppExport SEXP _torch_to_index_tensor(SEXP tSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchTensor >::type t(tSEXP);
+    rcpp_result_gen = Rcpp::wrap(to_index_tensor(t));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -37807,7 +37808,6 @@ static const R_CallMethodDef CallEntries[] = {
     {"_torch_cpp_tensor_list_to_r_list", (DL_FUNC) &_torch_cpp_tensor_list_to_r_list, 1},
     {"_torch_cpp_torch_tensor_options", (DL_FUNC) &_torch_cpp_torch_tensor_options, 5},
     {"_torch_cpp_torch_tensor_options_print", (DL_FUNC) &_torch_cpp_torch_tensor_options_print, 1},
-    {"_torch_test_fun_hello", (DL_FUNC) &_torch_test_fun_hello, 1},
     {"_torch_cpp_trace_function", (DL_FUNC) &_torch_cpp_trace_function, 8},
     {"_torch_cpp_save_traced_fn", (DL_FUNC) &_torch_cpp_save_traced_fn, 2},
     {"_torch_cpp_jit_compilation_unit", (DL_FUNC) &_torch_cpp_jit_compilation_unit, 0},
@@ -37819,6 +37819,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_torch_cpp_nullopt", (DL_FUNC) &_torch_cpp_nullopt, 0},
     {"_torch_cpp_optional_int64_t", (DL_FUNC) &_torch_cpp_optional_int64_t, 1},
     {"_torch_cpp_tensor_undefined", (DL_FUNC) &_torch_cpp_tensor_undefined, 0},
+    {"_torch_to_index_tensor", (DL_FUNC) &_torch_to_index_tensor, 1},
     {"_torch_cpp_torch_namespace__use_cudnn_rnn_flatten_weight", (DL_FUNC) &_torch_cpp_torch_namespace__use_cudnn_rnn_flatten_weight, 0},
     {"_torch_cpp_torch_variable_list", (DL_FUNC) &_torch_cpp_torch_variable_list, 1},
     {"_torch_cpp_variable_list_to_r_list", (DL_FUNC) &_torch_cpp_variable_list_to_r_list, 1},
@@ -37828,7 +37829,9 @@ static const R_CallMethodDef CallEntries[] = {
     {NULL, NULL, 0}
 };
 
-RcppExport void R_init_torch(DllInfo *dll) {
+void register_callables(DllInfo *dll);
+RcppExport void R_init_torchpkg(DllInfo *dll) {
     R_registerRoutines(dll, NULL, CallEntries, NULL, NULL);
     R_useDynamicSymbols(dll, FALSE);
+    register_callables(dll);
 }

@@ -10705,10 +10705,6 @@ cpp_torch_tensor_options_print <- function(x) {
     invisible(.Call('_torch_cpp_torch_tensor_options_print', PACKAGE = 'torchpkg', x))
 }
 
-test_fun_hello <- function(x) {
-    .Call('_torch_test_fun_hello', PACKAGE = 'torchpkg', x)
-}
-
 cpp_trace_function <- function(fn, inputs, compilation_unit, name, strict = TRUE, module = NULL, should_mangle = TRUE, manage_memory = TRUE) {
     .Call('_torch_cpp_trace_function', PACKAGE = 'torchpkg', fn, inputs, compilation_unit, name, strict, module, should_mangle, manage_memory)
 }
@@ -10751,6 +10747,10 @@ cpp_optional_int64_t <- function(x) {
 
 cpp_tensor_undefined <- function() {
     .Call('_torch_cpp_tensor_undefined', PACKAGE = 'torchpkg')
+}
+
+to_index_tensor <- function(t) {
+    .Call('_torch_to_index_tensor', PACKAGE = 'torchpkg', t)
 }
 
 cpp_torch_namespace__use_cudnn_rnn_flatten_weight <- function() {

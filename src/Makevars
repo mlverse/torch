@@ -1,6 +1,11 @@
-PKG_CPPFLAGS += -I../inst/include/
+PKG_CPPFLAGS = -I../inst/include/
 
+.PHONY: rename_init
 all: $(SHLIB) rename
+
+rename_init:
+	@echo "Renaming init"
+	"${R_HOME}/bin${R_ARCH_BIN}/Rscript" "../tools/renameinit.R"
 
 rename:
 	@echo "Renaming torch lib to torchpkg"
@@ -8,3 +13,4 @@ rename:
 
 # in order to rename SHLIb must be done.
 rename : $(SHLIB)
+RcppExports.o : rename_init

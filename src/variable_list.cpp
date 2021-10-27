@@ -1,5 +1,5 @@
 #include <torch.h>
-#include "utils.h"
+
 
 // [[Rcpp::export]]
 Rcpp::XPtr<XPtrTorchvariable_list> cpp_torch_variable_list(const Rcpp::List &x)
