@@ -1,9 +1,10 @@
 #pragma once
+#ifndef __TORCH
+#define __TORCH
 
-#include <string>
-#include <memory>
-#include <RcppCommon.h>
 #include <Rcpp.h>
+#include <memory>
+#include <string>
 #include "torch_types.h"
 #include "torch_api.h"
 #include "utils.h"
@@ -18,6 +19,14 @@
 #define LANTERN_HEADERS_ONLY
 #include "lantern/lantern.h"
 
-#endif // IMPORT_TORCH
+#ifdef FALSE
+#undef FALSE
+#endif
 
+#ifdef TRUE
+#undef TRUE
+#endif
+
+#endif // IMPORT_TORCH
+#endif // __TORCH
 
