@@ -2,6 +2,7 @@
 
 - Fixed valgrind errors on CRAN by requiring a more recent version of knitr and 
   by removing vignettes from CRAN.
+- Updated LibTorch to version 1.9.1 (#725)
 
 # torch 0.6.0
 
