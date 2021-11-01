@@ -257,6 +257,8 @@ void _lantern_print_stuff (void* x)
 }
 
 void lantern_host_handler() {}
+bool lantern_loaded = false;
+void check_lantern_loaded() {}
 
 void* _lantern_nn_functional_pad_circular (void* input, void* padding)
 {
