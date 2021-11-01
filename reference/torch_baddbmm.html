@@ -239,46 +239,47 @@ For inputs of type <code>FloatTensor</code> or <code>DoubleTensor</code>, argume
 <code>alpha</code> must be real numbers, otherwise they should be integers.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
-
-<span class='va'>M</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>10</span>, <span class='fl'>3</span>, <span class='fl'>5</span><span class='op'>)</span><span class='op'>)</span>
-<span class='va'>batch1</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>10</span>, <span class='fl'>3</span>, <span class='fl'>4</span><span class='op'>)</span><span class='op'>)</span>
-<span class='va'>batch2</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>10</span>, <span class='fl'>4</span>, <span class='fl'>5</span><span class='op'>)</span><span class='op'>)</span>
-<span class='fu'>torch_baddbmm</span><span class='op'>(</span><span class='va'>M</span>, <span class='va'>batch1</span>, <span class='va'>batch2</span><span class='op'>)</span>
-<span class='op'>}</span>
-</div><div class='output co'>#&gt; torch_tensor
-#&gt; (1,.,.) = 
-#&gt;   2.8456 -1.1256  0.2357  0.1689  0.4327
-#&gt;  -2.6215 -2.0365  1.3862 -1.0860 -0.4120
-#&gt;  -0.5332  1.0512 -1.0728 -0.4011 -0.4764
-#&gt; 
-#&gt; (2,.,.) = 
-#&gt;   2.2022 -3.6015 -3.9596  4.3062  0.9234
-#&gt;  -2.8826 -0.3486 -0.2270  0.2135 -1.5725
-#&gt;  -2.1646  0.9152  0.0727 -2.8062 -0.7849
-#&gt; 
-#&gt; (3,.,.) = 
-#&gt;   2.0611  2.0910 -2.8911  2.1510 -1.4820
-#&gt;  -0.4653  0.4901  2.8107  1.5438  1.4450
-#&gt;  -0.4155  0.5787  3.3245 -0.8748  0.1873
-#&gt; 
-#&gt; (4,.,.) = 
-#&gt;   2.2455 -0.8609 -1.2851  1.6627  1.2977
-#&gt;   0.7847  0.3030 -1.3790  1.9642  0.9398
-#&gt;  -0.8097 -0.7070 -2.5773  2.5572  0.1385
-#&gt; 
-#&gt; (5,.,.) = 
-#&gt;   0.3868 -1.0439 -1.9409 -1.5967 -2.9359
-#&gt;   1.2742  1.8622  3.2334 -1.5311  5.0569
-#&gt;  -0.5777  0.7178 -0.5191 -0.7142  0.5768
-#&gt; 
-#&gt; (6,.,.) = 
-#&gt;   4.1277  1.9470 -1.3960  1.4382  4.1330
-#&gt;   3.6434  1.2339 -1.1353 -2.5781  2.3826
-#&gt;  -2.8435  0.6563 -2.4904  0.2384 -1.4944
-#&gt; 
-#&gt; ... [the output was truncated (use n=-1 to disable)]
-#&gt; [ CPUFloatType{10,3,5} ]</div></pre>
+    <pre class="examples"><span class='r-in'><span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='va'>M</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>10</span>, <span class='fl'>3</span>, <span class='fl'>5</span><span class='op'>)</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>batch1</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>10</span>, <span class='fl'>3</span>, <span class='fl'>4</span><span class='op'>)</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>batch2</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>10</span>, <span class='fl'>4</span>, <span class='fl'>5</span><span class='op'>)</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'>torch_baddbmm</span><span class='op'>(</span><span class='va'>M</span>, <span class='va'>batch1</span>, <span class='va'>batch2</span><span class='op'>)</span></span>
+<span class='r-in'><span class='op'>}</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> torch_tensor</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> (1,.,.) = </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  -0.6581 -1.4613  0.2925  0.4420  0.9484</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   4.0662  0.1576  0.1795  0.2636  2.9987</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   2.5950 -1.8691  0.2646 -1.3623 -0.5311</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> (2,.,.) = </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   0.5395 -1.5357  3.6175  4.4863  0.6470</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   1.7563  2.1731 -5.2345 -0.2222 -0.1781</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  -0.5521  4.5754 -1.3174 -3.3338 -1.5691</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> (3,.,.) = </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   0.8492 -0.9330  1.1646 -0.3860  0.1841</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  -1.8355 -0.3287 -0.4684 -0.5055  0.6915</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   0.5005  0.5850 -1.2958  1.4081 -0.2311</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> (4,.,.) = </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   2.5027  2.7809  1.5304 -3.2493  0.9753</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  -1.7528  2.0978 -3.2906 -2.5106 -2.1591</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  -0.1480 -2.9151  0.4364  0.8253 -0.3935</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> (5,.,.) = </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   7.5919 -0.2229 -0.2839 -3.3164 -1.6879</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   0.5501 -0.2594  0.0514 -1.4239  0.5065</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   2.8784 -3.0407 -0.7115 -0.9960 -2.0019</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> (6,.,.) = </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   2.5557 -4.4647 -0.3591  0.8885  0.1070</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  -2.6770 -0.5882 -1.5870  1.8210  2.5684</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  -5.5118 -1.7628 -1.0572 -1.9374 -0.4451</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> ... [the output was truncated (use n=-1 to disable)]</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [ CPUFloatType{10,3,5} ]</span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

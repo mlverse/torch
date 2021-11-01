@@ -196,7 +196,7 @@
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>self</th>
-      <td><p>(Tensor) the input tensor of size <code>(*, n, n)</code> where <code><a href='https://rdrr.io/r/base/Arithmetic.html'>*</a></code> is zero or more                batch dimensions.</p></td>
+      <td><p>(Tensor) the input tensor of size <code>(*, n, n)</code> where <code>*</code> is zero or more                batch dimensions.</p></td>
     </tr>
     </table>
 
@@ -220,24 +220,25 @@ See `~torch.svd` for details.
 <p>Calculates the sign and log absolute value of the determinant(s) of a square matrix or batches of square matrices.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
-
-<span class='va'>A</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>3</span>, <span class='fl'>3</span><span class='op'>)</span><span class='op'>)</span>
-<span class='va'>A</span>
-<span class='fu'><a href='torch_det.html'>torch_det</a></span><span class='op'>(</span><span class='va'>A</span><span class='op'>)</span>
-<span class='fu'><a href='torch_logdet.html'>torch_logdet</a></span><span class='op'>(</span><span class='va'>A</span><span class='op'>)</span>
-<span class='fu'>torch_slogdet</span><span class='op'>(</span><span class='va'>A</span><span class='op'>)</span>
-<span class='op'>}</span>
-</div><div class='output co'>#&gt; [[1]]
-#&gt; torch_tensor
-#&gt; -1
-#&gt; [ CPUFloatType{} ]
-#&gt; 
-#&gt; [[2]]
-#&gt; torch_tensor
-#&gt; -0.341033
-#&gt; [ CPUFloatType{} ]
-#&gt; </div></pre>
+    <pre class="examples"><span class='r-in'><span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='va'>A</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>3</span>, <span class='fl'>3</span><span class='op'>)</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>A</span></span>
+<span class='r-in'><span class='fu'><a href='torch_det.html'>torch_det</a></span><span class='op'>(</span><span class='va'>A</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'><a href='torch_logdet.html'>torch_logdet</a></span><span class='op'>(</span><span class='va'>A</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'>torch_slogdet</span><span class='op'>(</span><span class='va'>A</span><span class='op'>)</span></span>
+<span class='r-in'><span class='op'>}</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [[1]]</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> torch_tensor</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 1</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [ CPUFloatType{} ]</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [[2]]</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> torch_tensor</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 0.899175</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [ CPUFloatType{} ]</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

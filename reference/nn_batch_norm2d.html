@@ -244,7 +244,7 @@ $$</p>
 the mini-batches and \(\gamma\) and \(\beta\) are learnable parameter vectors
 of size <code>C</code> (where <code>C</code> is the input size). By default, the elements of \(\gamma\) are set
 to 1 and the elements of \(\beta\) are set to 0. The standard-deviation is calculated
-via the biased estimator, equivalent to <code><a href='torch_var.html'>torch_var(input, unbiased=FALSE)</a></code>.
+via the biased estimator, equivalent to <code>torch_var(input, unbiased=FALSE)</code>.
 Also by default, during training this layer keeps running estimates of its
 computed mean and variance, which are then used for normalization during
 evaluation. The running estimates are kept with a default <code>momentum</code>
@@ -273,16 +273,16 @@ on <code>(N, H, W)</code> slices, it's common terminology to call this Spatial B
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
-<span class='co'># With Learnable Parameters</span>
-<span class='va'>m</span> <span class='op'>&lt;-</span> <span class='fu'>nn_batch_norm2d</span><span class='op'>(</span><span class='fl'>100</span><span class='op'>)</span>
-<span class='co'># Without Learnable Parameters</span>
-<span class='va'>m</span> <span class='op'>&lt;-</span> <span class='fu'>nn_batch_norm2d</span><span class='op'>(</span><span class='fl'>100</span>, affine<span class='op'>=</span><span class='cn'>FALSE</span><span class='op'>)</span>
-<span class='va'>input</span> <span class='op'>&lt;-</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span><span class='op'>(</span><span class='fl'>20</span>, <span class='fl'>100</span>, <span class='fl'>35</span>, <span class='fl'>45</span><span class='op'>)</span>
-<span class='va'>output</span> <span class='op'>&lt;-</span> <span class='fu'>m</span><span class='op'>(</span><span class='va'>input</span><span class='op'>)</span>
-
-<span class='op'>}</span>
-</div></pre>
+    <pre class="examples"><span class='r-in'><span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span></span>
+<span class='r-in'><span class='co'># With Learnable Parameters</span></span>
+<span class='r-in'><span class='va'>m</span> <span class='op'>&lt;-</span> <span class='fu'>nn_batch_norm2d</span><span class='op'>(</span><span class='fl'>100</span><span class='op'>)</span></span>
+<span class='r-in'><span class='co'># Without Learnable Parameters</span></span>
+<span class='r-in'><span class='va'>m</span> <span class='op'>&lt;-</span> <span class='fu'>nn_batch_norm2d</span><span class='op'>(</span><span class='fl'>100</span>, affine<span class='op'>=</span><span class='cn'>FALSE</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>input</span> <span class='op'>&lt;-</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span><span class='op'>(</span><span class='fl'>20</span>, <span class='fl'>100</span>, <span class='fl'>35</span>, <span class='fl'>45</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>output</span> <span class='op'>&lt;-</span> <span class='fu'>m</span><span class='op'>(</span><span class='va'>input</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='op'>}</span></span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

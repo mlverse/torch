@@ -219,18 +219,19 @@ corresponding to the polar coordinates with absolute value <code>abs</code> and 
 $$</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
-
-<span class='va'>abs</span> <span class='op'>&lt;-</span> <span class='fu'><a href='torch_tensor.html'>torch_tensor</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1</span>, <span class='fl'>2</span><span class='op'>)</span>, dtype<span class='op'>=</span><span class='fu'><a href='torch_dtype.html'>torch_float64</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span>
-<span class='va'>angle</span> <span class='op'>&lt;-</span> <span class='fu'><a href='torch_tensor.html'>torch_tensor</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='va'>pi</span> <span class='op'>/</span> <span class='fl'>2</span>, <span class='fl'>5</span> <span class='op'>*</span> <span class='va'>pi</span> <span class='op'>/</span> <span class='fl'>4</span><span class='op'>)</span>, dtype<span class='op'>=</span><span class='fu'><a href='torch_dtype.html'>torch_float64</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span>
-<span class='va'>z</span> <span class='op'>&lt;-</span> <span class='fu'>torch_polar</span><span class='op'>(</span><span class='va'>abs</span>, <span class='va'>angle</span><span class='op'>)</span>
-<span class='va'>z</span>
-<span class='op'>}</span>
-</div><div class='output co'>#&gt; torch_tensor
-#&gt; 1e-17 *
-#&gt;  6.1232
-#&gt; -141421356237309520.0000
-#&gt; [ CPUComplexDoubleType{2} ]</div></pre>
+    <pre class="examples"><span class='r-in'><span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='va'>abs</span> <span class='op'>&lt;-</span> <span class='fu'><a href='torch_tensor.html'>torch_tensor</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1</span>, <span class='fl'>2</span><span class='op'>)</span>, dtype<span class='op'>=</span><span class='fu'><a href='torch_dtype.html'>torch_float64</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>angle</span> <span class='op'>&lt;-</span> <span class='fu'><a href='torch_tensor.html'>torch_tensor</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='va'>pi</span> <span class='op'>/</span> <span class='fl'>2</span>, <span class='fl'>5</span> <span class='op'>*</span> <span class='va'>pi</span> <span class='op'>/</span> <span class='fl'>4</span><span class='op'>)</span>, dtype<span class='op'>=</span><span class='fu'><a href='torch_dtype.html'>torch_float64</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>z</span> <span class='op'>&lt;-</span> <span class='fu'>torch_polar</span><span class='op'>(</span><span class='va'>abs</span>, <span class='va'>angle</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>z</span></span>
+<span class='r-in'><span class='op'>}</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> torch_tensor</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 1e-17 *</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  6.1232</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> -141421356237309520.0000</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [ CPUComplexDoubleType{2} ]</span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

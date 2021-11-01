@@ -214,20 +214,20 @@ $$</p>
     
 
 <ul>
-<li><p>Input: \((N, *)\) where <code><a href='https://rdrr.io/r/base/Arithmetic.html'>*</a></code> means, any number of additional
+<li><p>Input: \((N, *)\) where <code>*</code> means, any number of additional
 dimensions</p></li>
 <li><p>Output: \((N, *)\), same shape as the input</p></li>
 </ul>
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
-<span class='va'>m</span> <span class='op'>&lt;-</span> <span class='fu'>nn_elu</span><span class='op'>(</span><span class='op'>)</span>
-<span class='va'>input</span> <span class='op'>&lt;-</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span><span class='op'>(</span><span class='fl'>2</span><span class='op'>)</span>
-<span class='va'>output</span> <span class='op'>&lt;-</span>  <span class='fu'>m</span><span class='op'>(</span><span class='va'>input</span><span class='op'>)</span>
-
-<span class='op'>}</span>
-</div></pre>
+    <pre class="examples"><span class='r-in'><span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span></span>
+<span class='r-in'><span class='va'>m</span> <span class='op'>&lt;-</span> <span class='fu'>nn_elu</span><span class='op'>(</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>input</span> <span class='op'>&lt;-</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span><span class='op'>(</span><span class='fl'>2</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>output</span> <span class='op'>&lt;-</span>  <span class='fu'>m</span><span class='op'>(</span><span class='va'>input</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='op'>}</span></span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

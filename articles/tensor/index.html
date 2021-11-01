@@ -146,7 +146,7 @@
     
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://torch.mlverse.org/docs">torch</a></span><span class="op">)</span></code></pre></div>
-<p>Central to torch is the <code>torch_tensor</code> objects. <code>torch_tensor</code>’s are R objects very similar to R6 instances. Tensors have a large amount of methods that can be called using the <code><a href="https://rdrr.io/r/base/Extract.html">$</a></code> operator.</p>
+<p>Central to torch is the <code>torch_tensor</code> objects. <code>torch_tensor</code>’s are R objects very similar to R6 instances. Tensors have a large amount of methods that can be called using the <code>$</code> operator.</p>
 <p>Following is a list of all methods that can be called by tensor objects and their documentation. You can also look at <a href="https://pytorch.org/docs/stable/tensors.html">PyTorch’s documentation</a> for additional details.</p>
 <div id="numpy_t" class="section level2">
 <h2 class="hasAnchor">
@@ -3531,7 +3531,7 @@ P(x) = \dfrac{1}{\text{to} - \text{from}}
 <h2 class="hasAnchor">
 <a href="#where" class="anchor"></a>where</h2>
 <p>where(condition, y) -&gt; Tensor</p>
-<p><code>self$where(condition, y)</code> is equivalent to <code><a href="../../reference/torch_where.html">torch_where(condition, self, y)</a></code>. See <code><a href="../../reference/torch_where.html">?torch_where</a></code></p>
+<p><code>self$where(condition, y)</code> is equivalent to <code>torch_where(condition, self, y)</code>. See <code><a href="../../reference/torch_where.html">?torch_where</a></code></p>
 </div>
 <div id="zero_" class="section level2">
 <h2 class="hasAnchor">

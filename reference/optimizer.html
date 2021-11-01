@@ -244,47 +244,48 @@ to optimization remain the same over the whole lifecycle of optimizer
 creation and usage.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
-
-<span class='co'># In this example we will create a custom optimizer</span>
-<span class='co'># that's just a simplified version of the `optim_sgd` function.</span>
-
-<span class='va'>optim_sgd2</span> <span class='op'>&lt;-</span> <span class='fu'>optimizer</span><span class='op'>(</span>
-  initialize <span class='op'>=</span> <span class='kw'>function</span><span class='op'>(</span><span class='va'>params</span>, <span class='va'>learning_rate</span><span class='op'>)</span> <span class='op'>{</span>
-    <span class='va'>defaults</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>
-      learning_rate <span class='op'>=</span> <span class='va'>learning_rate</span>
-    <span class='op'>)</span>
-    <span class='va'>super</span><span class='op'>$</span><span class='fu'>initialize</span><span class='op'>(</span><span class='va'>params</span>, <span class='va'>defaults</span><span class='op'>)</span>
-  <span class='op'>}</span>,
-  step <span class='op'>=</span> <span class='kw'>function</span><span class='op'>(</span><span class='op'>)</span> <span class='op'>{</span>
-    <span class='fu'><a href='with_no_grad.html'>with_no_grad</a></span><span class='op'>(</span><span class='op'>{</span>
-      <span class='kw'>for</span> <span class='op'>(</span><span class='va'>g</span> <span class='kw'>in</span> <span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq_along</a></span><span class='op'>(</span><span class='va'>self</span><span class='op'>$</span><span class='va'>param_groups</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
-        <span class='va'>group</span> <span class='op'>&lt;-</span> <span class='va'>self</span><span class='op'>$</span><span class='va'>param_groups</span><span class='op'>[[</span><span class='va'>g</span><span class='op'>]</span><span class='op'>]</span>
-        <span class='kw'>for</span> <span class='op'>(</span><span class='va'>p</span> <span class='kw'>in</span> <span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq_along</a></span><span class='op'>(</span><span class='va'>group</span><span class='op'>$</span><span class='va'>params</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
-          <span class='va'>param</span> <span class='op'>&lt;-</span> <span class='va'>group</span><span class='op'>$</span><span class='va'>params</span><span class='op'>[[</span><span class='va'>p</span><span class='op'>]</span><span class='op'>]</span>
-          
-          <span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/NULL.html'>is.null</a></span><span class='op'>(</span><span class='va'>param</span><span class='op'>$</span><span class='va'>grad</span><span class='op'>)</span> <span class='op'>||</span> <span class='fu'><a href='is_undefined_tensor.html'>is_undefined_tensor</a></span><span class='op'>(</span><span class='va'>param</span><span class='op'>$</span><span class='va'>grad</span><span class='op'>)</span><span class='op'>)</span>
-            <span class='kw'>next</span>
-          
-          <span class='va'>param</span><span class='op'>$</span><span class='fu'>add_</span><span class='op'>(</span><span class='va'>param</span><span class='op'>$</span><span class='va'>grad</span>, alpha <span class='op'>=</span> <span class='op'>-</span><span class='va'>group</span><span class='op'>$</span><span class='va'>learning_rate</span><span class='op'>)</span>
-        <span class='op'>}</span>
-      <span class='op'>}</span>
-    <span class='op'>}</span><span class='op'>)</span>
-  <span class='op'>}</span>
-<span class='op'>)</span>
-
-<span class='va'>x</span> <span class='op'>&lt;-</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span><span class='op'>(</span><span class='fl'>1</span>, requires_grad <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
-<span class='va'>opt</span> <span class='op'>&lt;-</span> <span class='fu'>optim_sgd2</span><span class='op'>(</span><span class='va'>x</span>, learning_rate <span class='op'>=</span> <span class='fl'>0.1</span><span class='op'>)</span>
-<span class='kw'>for</span> <span class='op'>(</span><span class='va'>i</span> <span class='kw'>in</span> <span class='fl'>1</span><span class='op'>:</span><span class='fl'>100</span><span class='op'>)</span> <span class='op'>{</span>
-  <span class='va'>opt</span><span class='op'>$</span><span class='fu'>zero_grad</span><span class='op'>(</span><span class='op'>)</span>
-  <span class='va'>y</span> <span class='op'>&lt;-</span> <span class='va'>x</span><span class='op'>^</span><span class='fl'>2</span>
-  <span class='va'>y</span><span class='op'>$</span><span class='fu'>backward</span><span class='op'>(</span><span class='op'>)</span>
-  <span class='va'>opt</span><span class='op'>$</span><span class='fu'>step</span><span class='op'>(</span><span class='op'>)</span>
-<span class='op'>}</span>
-<span class='fu'><a href='https://rdrr.io/r/base/all.equal.html'>all.equal</a></span><span class='op'>(</span><span class='va'>x</span><span class='op'>$</span><span class='fu'>item</span><span class='op'>(</span><span class='op'>)</span>, <span class='fl'>0</span>, tolerance <span class='op'>=</span> <span class='fl'>1e-9</span><span class='op'>)</span>
-
-<span class='op'>}</span>
-</div><div class='output co'>#&gt; [1] TRUE</div></pre>
+    <pre class="examples"><span class='r-in'><span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># In this example we will create a custom optimizer</span></span>
+<span class='r-in'><span class='co'># that's just a simplified version of the `optim_sgd` function.</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='va'>optim_sgd2</span> <span class='op'>&lt;-</span> <span class='fu'>optimizer</span><span class='op'>(</span></span>
+<span class='r-in'>  initialize <span class='op'>=</span> <span class='kw'>function</span><span class='op'>(</span><span class='va'>params</span>, <span class='va'>learning_rate</span><span class='op'>)</span> <span class='op'>{</span></span>
+<span class='r-in'>    <span class='va'>defaults</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span></span>
+<span class='r-in'>      learning_rate <span class='op'>=</span> <span class='va'>learning_rate</span></span>
+<span class='r-in'>    <span class='op'>)</span></span>
+<span class='r-in'>    <span class='va'>super</span><span class='op'>$</span><span class='fu'>initialize</span><span class='op'>(</span><span class='va'>params</span>, <span class='va'>defaults</span><span class='op'>)</span></span>
+<span class='r-in'>  <span class='op'>}</span>,</span>
+<span class='r-in'>  step <span class='op'>=</span> <span class='kw'>function</span><span class='op'>(</span><span class='op'>)</span> <span class='op'>{</span></span>
+<span class='r-in'>    <span class='fu'><a href='with_no_grad.html'>with_no_grad</a></span><span class='op'>(</span><span class='op'>{</span></span>
+<span class='r-in'>      <span class='kw'>for</span> <span class='op'>(</span><span class='va'>g</span> <span class='kw'>in</span> <span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq_along</a></span><span class='op'>(</span><span class='va'>self</span><span class='op'>$</span><span class='va'>param_groups</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span></span>
+<span class='r-in'>        <span class='va'>group</span> <span class='op'>&lt;-</span> <span class='va'>self</span><span class='op'>$</span><span class='va'>param_groups</span><span class='op'>[[</span><span class='va'>g</span><span class='op'>]</span><span class='op'>]</span></span>
+<span class='r-in'>        <span class='kw'>for</span> <span class='op'>(</span><span class='va'>p</span> <span class='kw'>in</span> <span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq_along</a></span><span class='op'>(</span><span class='va'>group</span><span class='op'>$</span><span class='va'>params</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span></span>
+<span class='r-in'>          <span class='va'>param</span> <span class='op'>&lt;-</span> <span class='va'>group</span><span class='op'>$</span><span class='va'>params</span><span class='op'>[[</span><span class='va'>p</span><span class='op'>]</span><span class='op'>]</span></span>
+<span class='r-in'>          </span>
+<span class='r-in'>          <span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/NULL.html'>is.null</a></span><span class='op'>(</span><span class='va'>param</span><span class='op'>$</span><span class='va'>grad</span><span class='op'>)</span> <span class='op'>||</span> <span class='fu'><a href='is_undefined_tensor.html'>is_undefined_tensor</a></span><span class='op'>(</span><span class='va'>param</span><span class='op'>$</span><span class='va'>grad</span><span class='op'>)</span><span class='op'>)</span></span>
+<span class='r-in'>            <span class='kw'>next</span></span>
+<span class='r-in'>          </span>
+<span class='r-in'>          <span class='va'>param</span><span class='op'>$</span><span class='fu'>add_</span><span class='op'>(</span><span class='va'>param</span><span class='op'>$</span><span class='va'>grad</span>, alpha <span class='op'>=</span> <span class='op'>-</span><span class='va'>group</span><span class='op'>$</span><span class='va'>learning_rate</span><span class='op'>)</span></span>
+<span class='r-in'>        <span class='op'>}</span></span>
+<span class='r-in'>      <span class='op'>}</span></span>
+<span class='r-in'>    <span class='op'>}</span><span class='op'>)</span></span>
+<span class='r-in'>  <span class='op'>}</span></span>
+<span class='r-in'><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='va'>x</span> <span class='op'>&lt;-</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span><span class='op'>(</span><span class='fl'>1</span>, requires_grad <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>opt</span> <span class='op'>&lt;-</span> <span class='fu'>optim_sgd2</span><span class='op'>(</span><span class='va'>x</span>, learning_rate <span class='op'>=</span> <span class='fl'>0.1</span><span class='op'>)</span></span>
+<span class='r-in'><span class='kw'>for</span> <span class='op'>(</span><span class='va'>i</span> <span class='kw'>in</span> <span class='fl'>1</span><span class='op'>:</span><span class='fl'>100</span><span class='op'>)</span> <span class='op'>{</span></span>
+<span class='r-in'>  <span class='va'>opt</span><span class='op'>$</span><span class='fu'>zero_grad</span><span class='op'>(</span><span class='op'>)</span></span>
+<span class='r-in'>  <span class='va'>y</span> <span class='op'>&lt;-</span> <span class='va'>x</span><span class='op'>^</span><span class='fl'>2</span></span>
+<span class='r-in'>  <span class='va'>y</span><span class='op'>$</span><span class='fu'>backward</span><span class='op'>(</span><span class='op'>)</span></span>
+<span class='r-in'>  <span class='va'>opt</span><span class='op'>$</span><span class='fu'>step</span><span class='op'>(</span><span class='op'>)</span></span>
+<span class='r-in'><span class='op'>}</span></span>
+<span class='r-in'><span class='fu'><a href='https://rdrr.io/r/base/all.equal.html'>all.equal</a></span><span class='op'>(</span><span class='va'>x</span><span class='op'>$</span><span class='fu'>item</span><span class='op'>(</span><span class='op'>)</span>, <span class='fl'>0</span>, tolerance <span class='op'>=</span> <span class='fl'>1e-9</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='op'>}</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] TRUE</span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

@@ -229,7 +229,7 @@ optional.</p></td>
     <tr>
       <th>window</th>
       <td><p>(Optional(torch.Tensor)) The optional window function.
-(Default: <code><a href='torch_ones.html'>torch_ones(win_length)</a></code>)</p></td>
+(Default: <code>torch_ones(win_length)</code>)</p></td>
     </tr>
     <tr>
       <th>center</th>
@@ -274,7 +274,7 @@ since the signal isn't padded).</p>
 Left padding can be trimmed off exactly because they can be calculated but right
 padding cannot be calculated without additional information.</p>
 <p>Example: Suppose the last window is:
-<code>[c(17, 18, 0, 0, 0)</code> vs <code><a href='https://rdrr.io/r/base/c.html'>c(18, 0, 0, 0, 0)</a></code></p>
+<code>[c(17, 18, 0, 0, 0)</code> vs <code>c(18, 0, 0, 0, 0)</code></p>
 <p>The <code>n_fft</code>, <code>hop_length</code>, <code>win_length</code> are all the same which prevents the calculation
 of right padding. These additional values could be zeros or a reflection of the signal so providing
 <code>length</code> could be useful. If <code>length</code> is <code>None</code> then padding will be aggressively removed

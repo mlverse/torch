@@ -202,7 +202,7 @@ The singular values are returned in descending order.</p>
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>A</th>
-      <td><p>(Tensor): tensor of shape <code>(*, m, n)</code> where <code><a href='https://rdrr.io/r/base/Arithmetic.html'>*</a></code> is zero or more batch dimensions.</p></td>
+      <td><p>(Tensor): tensor of shape <code>(*, m, n)</code> where <code>*</code> is zero or more batch dimensions.</p></td>
     </tr>
     </table>
 
@@ -239,17 +239,18 @@ The singular values are returned in descending order.</p>
 <code><a href='linalg_vector_norm.html'>linalg_vector_norm</a>()</code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
-<span class='va'>A</span> <span class='op'>&lt;-</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span><span class='op'>(</span><span class='fl'>5</span>, <span class='fl'>3</span><span class='op'>)</span>
-<span class='va'>S</span> <span class='op'>&lt;-</span> <span class='fu'>linalg_svdvals</span><span class='op'>(</span><span class='va'>A</span><span class='op'>)</span>
-<span class='va'>S</span>
-
-<span class='op'>}</span>
-</div><div class='output co'>#&gt; torch_tensor
-#&gt;  3.1545
-#&gt;  1.5769
-#&gt;  0.3449
-#&gt; [ CPUFloatType{3} ]</div></pre>
+    <pre class="examples"><span class='r-in'><span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span></span>
+<span class='r-in'><span class='va'>A</span> <span class='op'>&lt;-</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span><span class='op'>(</span><span class='fl'>5</span>, <span class='fl'>3</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>S</span> <span class='op'>&lt;-</span> <span class='fu'>linalg_svdvals</span><span class='op'>(</span><span class='va'>A</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>S</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='op'>}</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> torch_tensor</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  2.2950</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  1.9227</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  0.6027</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [ CPUFloatType{3} ]</span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

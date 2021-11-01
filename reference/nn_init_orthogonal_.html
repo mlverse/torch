@@ -212,16 +212,17 @@ trailing dimensions are flattened.</p>
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
-<span class='va'>w</span> <span class='op'>&lt;-</span> <span class='fu'><a href='torch_empty.html'>torch_empty</a></span><span class='op'>(</span><span class='fl'>3</span>,<span class='fl'>5</span><span class='op'>)</span>
-<span class='fu'>nn_init_orthogonal_</span><span class='op'>(</span><span class='va'>w</span><span class='op'>)</span>
-
-<span class='op'>}</span>
-</div><div class='output co'>#&gt; torch_tensor
-#&gt; -0.2748 -0.1087  0.3890 -0.7871  0.3767
-#&gt;  0.5277 -0.3407  0.6900  0.0324 -0.3582
-#&gt;  0.3930 -0.3572 -0.6016 -0.5228 -0.2875
-#&gt; [ CPUFloatType{3,5} ]</div></pre>
+    <pre class="examples"><span class='r-in'><span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span></span>
+<span class='r-in'><span class='va'>w</span> <span class='op'>&lt;-</span> <span class='fu'><a href='torch_empty.html'>torch_empty</a></span><span class='op'>(</span><span class='fl'>3</span>,<span class='fl'>5</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'>nn_init_orthogonal_</span><span class='op'>(</span><span class='va'>w</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='op'>}</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> torch_tensor</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> -0.0640 -0.1076 -0.1270  0.3968  0.9004</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> -0.1767 -0.6625 -0.5724 -0.4489  0.0254</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> -0.0867  0.6342 -0.1684 -0.6679  0.3402</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [ CPUFloatType{3,5} ]</span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

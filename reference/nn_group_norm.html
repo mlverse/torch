@@ -227,7 +227,7 @@ separately over the each group. \(\gamma\) and \(\beta\) are learnable
 per-channel affine transform parameter vectors of size <code>num_channels</code> if
 <code>affine</code> is <code>TRUE</code>.
 The standard-deviation is calculated via the biased estimator, equivalent to
-<code><a href='torch_var.html'>torch_var(input, unbiased=FALSE)</a></code>.</p>
+<code>torch_var(input, unbiased=FALSE)</code>.</p>
     <h2 class="hasAnchor" id="note"><a class="anchor" href="#note"></a>Note</h2>
 
     <p>This layer uses statistics computed from input data in both training and
@@ -243,20 +243,20 @@ evaluation modes.</p>
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
-
-<span class='va'>input</span> <span class='op'>&lt;-</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span><span class='op'>(</span><span class='fl'>20</span>, <span class='fl'>6</span>, <span class='fl'>10</span>, <span class='fl'>10</span><span class='op'>)</span>
-<span class='co'># Separate 6 channels into 3 groups</span>
-<span class='va'>m</span> <span class='op'>&lt;-</span> <span class='fu'>nn_group_norm</span><span class='op'>(</span><span class='fl'>3</span>, <span class='fl'>6</span><span class='op'>)</span>
-<span class='co'># Separate 6 channels into 6 groups (equivalent with [nn_instance_morm])</span>
-<span class='va'>m</span> <span class='op'>&lt;-</span> <span class='fu'>nn_group_norm</span><span class='op'>(</span><span class='fl'>6</span>, <span class='fl'>6</span><span class='op'>)</span>
-<span class='co'># Put all 6 channels into a single group (equivalent with [nn_layer_norm])</span>
-<span class='va'>m</span> <span class='op'>&lt;-</span> <span class='fu'>nn_group_norm</span><span class='op'>(</span><span class='fl'>1</span>, <span class='fl'>6</span><span class='op'>)</span>
-<span class='co'># Activating the module</span>
-<span class='va'>output</span> <span class='op'>&lt;-</span> <span class='fu'>m</span><span class='op'>(</span><span class='va'>input</span><span class='op'>)</span>
-
-<span class='op'>}</span>
-</div></pre>
+    <pre class="examples"><span class='r-in'><span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='va'>input</span> <span class='op'>&lt;-</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span><span class='op'>(</span><span class='fl'>20</span>, <span class='fl'>6</span>, <span class='fl'>10</span>, <span class='fl'>10</span><span class='op'>)</span></span>
+<span class='r-in'><span class='co'># Separate 6 channels into 3 groups</span></span>
+<span class='r-in'><span class='va'>m</span> <span class='op'>&lt;-</span> <span class='fu'>nn_group_norm</span><span class='op'>(</span><span class='fl'>3</span>, <span class='fl'>6</span><span class='op'>)</span></span>
+<span class='r-in'><span class='co'># Separate 6 channels into 6 groups (equivalent with [nn_instance_morm])</span></span>
+<span class='r-in'><span class='va'>m</span> <span class='op'>&lt;-</span> <span class='fu'>nn_group_norm</span><span class='op'>(</span><span class='fl'>6</span>, <span class='fl'>6</span><span class='op'>)</span></span>
+<span class='r-in'><span class='co'># Put all 6 channels into a single group (equivalent with [nn_layer_norm])</span></span>
+<span class='r-in'><span class='va'>m</span> <span class='op'>&lt;-</span> <span class='fu'>nn_group_norm</span><span class='op'>(</span><span class='fl'>1</span>, <span class='fl'>6</span><span class='op'>)</span></span>
+<span class='r-in'><span class='co'># Activating the module</span></span>
+<span class='r-in'><span class='va'>output</span> <span class='op'>&lt;-</span> <span class='fu'>m</span><span class='op'>(</span><span class='va'>input</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='op'>}</span></span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

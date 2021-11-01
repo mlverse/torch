@@ -227,16 +227,17 @@ or 'leaky_relu' (default).</p></td>
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
-<span class='va'>w</span> <span class='op'>&lt;-</span> <span class='fu'><a href='torch_empty.html'>torch_empty</a></span><span class='op'>(</span><span class='fl'>3</span>, <span class='fl'>5</span><span class='op'>)</span>
-<span class='fu'>nn_init_kaiming_uniform_</span><span class='op'>(</span><span class='va'>w</span>, mode <span class='op'>=</span> <span class='st'>"fan_in"</span>, nonlinearity <span class='op'>=</span> <span class='st'>"leaky_relu"</span><span class='op'>)</span>
-
-<span class='op'>}</span>
-</div><div class='output co'>#&gt; torch_tensor
-#&gt; -0.8820  0.6070 -0.0728  0.4634  0.2928
-#&gt; -0.3892  0.2695  1.0310  0.0999  0.0916
-#&gt;  0.2540  0.9150  0.2741  0.7875  0.5364
-#&gt; [ CPUFloatType{3,5} ]</div></pre>
+    <pre class="examples"><span class='r-in'><span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span></span>
+<span class='r-in'><span class='va'>w</span> <span class='op'>&lt;-</span> <span class='fu'><a href='torch_empty.html'>torch_empty</a></span><span class='op'>(</span><span class='fl'>3</span>, <span class='fl'>5</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'>nn_init_kaiming_uniform_</span><span class='op'>(</span><span class='va'>w</span>, mode <span class='op'>=</span> <span class='st'>"fan_in"</span>, nonlinearity <span class='op'>=</span> <span class='st'>"leaky_relu"</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='op'>}</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> torch_tensor</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> -0.0696 -0.0959  0.4481 -0.6277  0.9249</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  1.0028  0.2491 -0.8704 -0.2307  0.1505</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> -0.2851 -0.2862  0.2840  0.2763  0.3519</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [ CPUFloatType{3,5} ]</span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

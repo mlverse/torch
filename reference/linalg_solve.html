@@ -200,7 +200,7 @@ this function computes the solution  of the <strong>linear system</strong> assoc
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>A</th>
-      <td><p>(Tensor): tensor of shape <code>(*, n, n)</code> where <code><a href='https://rdrr.io/r/base/Arithmetic.html'>*</a></code> is zero or more batch dimensions.</p></td>
+      <td><p>(Tensor): tensor of shape <code>(*, n, n)</code> where <code>*</code> is zero or more batch dimensions.</p></td>
     </tr>
     <tr>
       <th>B</th>
@@ -219,7 +219,7 @@ This function assumes that  is invertible.
 Supports inputs of float, double, cfloat and cdouble dtypes.
 Also supports batches of matrices, and if the inputs are batches of matrices then
 the output has the same batch dimensions.</p>
-<p>Letting <code><a href='https://rdrr.io/r/base/Arithmetic.html'>*</a></code> be zero or more batch dimensions,</p><ul>
+<p>Letting <code>*</code> be zero or more batch dimensions,</p><ul>
 <li><p>If <code>A</code> has shape <code>(*, n, n)</code> and <code>B</code> has shape <code>(*, n)</code> (a batch of vectors) or shape
 <code>(*, n, k)</code> (a batch of matrices or "multiple right-hand sides"), this function returns <code>X</code> of shape
 <code>(*, n)</code> or <code>(*, n, k)</code> respectively.</p></li>
@@ -261,14 +261,15 @@ more numerically stable way than performing the computations separately.</p>
 <code><a href='linalg_vector_norm.html'>linalg_vector_norm</a>()</code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
-<span class='va'>A</span> <span class='op'>&lt;-</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span><span class='op'>(</span><span class='fl'>3</span>, <span class='fl'>3</span><span class='op'>)</span>
-<span class='va'>b</span> <span class='op'>&lt;-</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span><span class='op'>(</span><span class='fl'>3</span><span class='op'>)</span>
-<span class='va'>x</span> <span class='op'>&lt;-</span> <span class='fu'>linalg_solve</span><span class='op'>(</span><span class='va'>A</span>, <span class='va'>b</span><span class='op'>)</span>
-<span class='fu'><a href='torch_allclose.html'>torch_allclose</a></span><span class='op'>(</span><span class='fu'><a href='torch_matmul.html'>torch_matmul</a></span><span class='op'>(</span><span class='va'>A</span>, <span class='va'>x</span><span class='op'>)</span>, <span class='va'>b</span><span class='op'>)</span>
-
-<span class='op'>}</span>
-</div><div class='output co'>#&gt; [1] TRUE</div></pre>
+    <pre class="examples"><span class='r-in'><span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span></span>
+<span class='r-in'><span class='va'>A</span> <span class='op'>&lt;-</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span><span class='op'>(</span><span class='fl'>3</span>, <span class='fl'>3</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>b</span> <span class='op'>&lt;-</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span><span class='op'>(</span><span class='fl'>3</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>x</span> <span class='op'>&lt;-</span> <span class='fu'>linalg_solve</span><span class='op'>(</span><span class='va'>A</span>, <span class='va'>b</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'><a href='torch_allclose.html'>torch_allclose</a></span><span class='op'>(</span><span class='fu'><a href='torch_matmul.html'>torch_matmul</a></span><span class='op'>(</span><span class='va'>A</span>, <span class='va'>x</span><span class='op'>)</span>, <span class='va'>b</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='op'>}</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] TRUE</span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

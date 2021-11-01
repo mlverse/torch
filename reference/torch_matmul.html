@@ -237,62 +237,63 @@ tensor, <code>out</code> will be an \((j \times k \times n \times p)\) tensor.</
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
-
-<span class='co'># vector x vector</span>
-<span class='va'>tensor1</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>3</span><span class='op'>)</span><span class='op'>)</span>
-<span class='va'>tensor2</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>3</span><span class='op'>)</span><span class='op'>)</span>
-<span class='fu'>torch_matmul</span><span class='op'>(</span><span class='va'>tensor1</span>, <span class='va'>tensor2</span><span class='op'>)</span>
-<span class='co'># matrix x vector</span>
-<span class='va'>tensor1</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>3</span>, <span class='fl'>4</span><span class='op'>)</span><span class='op'>)</span>
-<span class='va'>tensor2</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>4</span><span class='op'>)</span><span class='op'>)</span>
-<span class='fu'>torch_matmul</span><span class='op'>(</span><span class='va'>tensor1</span>, <span class='va'>tensor2</span><span class='op'>)</span>
-<span class='co'># batched matrix x broadcasted vector</span>
-<span class='va'>tensor1</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>10</span>, <span class='fl'>3</span>, <span class='fl'>4</span><span class='op'>)</span><span class='op'>)</span>
-<span class='va'>tensor2</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>4</span><span class='op'>)</span><span class='op'>)</span>
-<span class='fu'>torch_matmul</span><span class='op'>(</span><span class='va'>tensor1</span>, <span class='va'>tensor2</span><span class='op'>)</span>
-<span class='co'># batched matrix x batched matrix</span>
-<span class='va'>tensor1</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>10</span>, <span class='fl'>3</span>, <span class='fl'>4</span><span class='op'>)</span><span class='op'>)</span>
-<span class='va'>tensor2</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>10</span>, <span class='fl'>4</span>, <span class='fl'>5</span><span class='op'>)</span><span class='op'>)</span>
-<span class='fu'>torch_matmul</span><span class='op'>(</span><span class='va'>tensor1</span>, <span class='va'>tensor2</span><span class='op'>)</span>
-<span class='co'># batched matrix x broadcasted matrix</span>
-<span class='va'>tensor1</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>10</span>, <span class='fl'>3</span>, <span class='fl'>4</span><span class='op'>)</span><span class='op'>)</span>
-<span class='va'>tensor2</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>4</span>, <span class='fl'>5</span><span class='op'>)</span><span class='op'>)</span>
-<span class='fu'>torch_matmul</span><span class='op'>(</span><span class='va'>tensor1</span>, <span class='va'>tensor2</span><span class='op'>)</span>
-<span class='op'>}</span>
-</div><div class='output co'>#&gt; torch_tensor
-#&gt; (1,.,.) = 
-#&gt;  -2.0017  1.6106  0.7640 -1.9343  0.2446
-#&gt;   0.9730  2.0477  1.4966  0.5396 -1.5926
-#&gt;  -0.1078  2.4477  1.0707 -0.0175 -0.5839
-#&gt; 
-#&gt; (2,.,.) = 
-#&gt;  -0.3362  1.4370  1.3467  4.3532 -3.1179
-#&gt;  -3.1384  5.1702  3.1070  2.2273 -3.4231
-#&gt;  -2.4068  1.8410  0.0387 -1.5826  1.2902
-#&gt; 
-#&gt; (3,.,.) = 
-#&gt;  -4.7518  8.1931  5.1877  4.4921 -6.1918
-#&gt;   3.5735  2.3798  2.9773  0.4240 -3.6010
-#&gt;  -4.3255  3.7592  1.4701 -0.1710 -0.6364
-#&gt; 
-#&gt; (4,.,.) = 
-#&gt;   0.4140 -1.9351 -0.2288 -0.8537 -0.1270
-#&gt;  -3.5563  4.8261  2.8195  2.9110 -3.4049
-#&gt;   7.4027 -5.4500 -1.5871 -3.1809  1.4480
-#&gt; 
-#&gt; (5,.,.) = 
-#&gt;  -0.8995  1.8479  1.3705 -0.0731 -1.2748
-#&gt;  -3.0747  1.8224  0.2867  0.7387  0.0006
-#&gt;   0.4527  0.6284  0.1662  0.2083 -0.0623
-#&gt; 
-#&gt; (6,.,.) = 
-#&gt;  -0.3988  0.0365  0.4367  0.2504 -0.7443
-#&gt;  -1.4531  4.3840  2.8800  0.8842 -2.8659
-#&gt;  -1.4662 -0.5401 -0.8250  0.2000  0.9181
-#&gt; 
-#&gt; ... [the output was truncated (use n=-1 to disable)]
-#&gt; [ CPUFloatType{10,3,5} ]</div></pre>
+    <pre class="examples"><span class='r-in'><span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># vector x vector</span></span>
+<span class='r-in'><span class='va'>tensor1</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>3</span><span class='op'>)</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>tensor2</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>3</span><span class='op'>)</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'>torch_matmul</span><span class='op'>(</span><span class='va'>tensor1</span>, <span class='va'>tensor2</span><span class='op'>)</span></span>
+<span class='r-in'><span class='co'># matrix x vector</span></span>
+<span class='r-in'><span class='va'>tensor1</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>3</span>, <span class='fl'>4</span><span class='op'>)</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>tensor2</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>4</span><span class='op'>)</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'>torch_matmul</span><span class='op'>(</span><span class='va'>tensor1</span>, <span class='va'>tensor2</span><span class='op'>)</span></span>
+<span class='r-in'><span class='co'># batched matrix x broadcasted vector</span></span>
+<span class='r-in'><span class='va'>tensor1</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>10</span>, <span class='fl'>3</span>, <span class='fl'>4</span><span class='op'>)</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>tensor2</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>4</span><span class='op'>)</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'>torch_matmul</span><span class='op'>(</span><span class='va'>tensor1</span>, <span class='va'>tensor2</span><span class='op'>)</span></span>
+<span class='r-in'><span class='co'># batched matrix x batched matrix</span></span>
+<span class='r-in'><span class='va'>tensor1</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>10</span>, <span class='fl'>3</span>, <span class='fl'>4</span><span class='op'>)</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>tensor2</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>10</span>, <span class='fl'>4</span>, <span class='fl'>5</span><span class='op'>)</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'>torch_matmul</span><span class='op'>(</span><span class='va'>tensor1</span>, <span class='va'>tensor2</span><span class='op'>)</span></span>
+<span class='r-in'><span class='co'># batched matrix x broadcasted matrix</span></span>
+<span class='r-in'><span class='va'>tensor1</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>10</span>, <span class='fl'>3</span>, <span class='fl'>4</span><span class='op'>)</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>tensor2</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>4</span>, <span class='fl'>5</span><span class='op'>)</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'>torch_matmul</span><span class='op'>(</span><span class='va'>tensor1</span>, <span class='va'>tensor2</span><span class='op'>)</span></span>
+<span class='r-in'><span class='op'>}</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> torch_tensor</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> (1,.,.) = </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   2.6383  1.7356 -1.2383  0.0433 -2.2985</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  -4.9624 -3.8363 -0.1741  2.3110  1.3929</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  -3.1208 -1.9481  0.1602  0.5348  0.9909</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> (2,.,.) = </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  -1.1031 -2.4205  0.1131  1.8152  0.8059</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   4.2600  4.0187 -2.1455 -1.9344 -4.5433</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   0.0766  1.6391 -1.3699 -0.5269 -2.0429</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> (3,.,.) = </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   1.7068  1.1730  0.6607  0.0290  0.7444</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   2.9049  2.5945  0.1830 -1.9623 -0.8810</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   1.9416  2.9879  0.5424 -1.5764  0.1528</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> (4,.,.) = </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   0.0881  2.8306  0.2736 -3.0340 -0.3652</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  -0.7980  1.1394  2.7952 -2.2098  3.7631</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   2.5206  1.2458  1.8696 -1.4140  1.7853</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> (5,.,.) = </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  -0.3528 -2.6266 -0.2411  2.0645  0.1279</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  -3.3091 -0.7529 -0.0197  0.2869  0.8690</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   7.2163  0.6377 -2.0253  1.5277 -4.3339</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> (6,.,.) = </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  -1.7751 -1.4067  0.8732  1.0600  2.0096</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   1.9065  3.7404 -0.6319 -2.5315 -1.8847</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   3.7150  4.3798  1.0231 -3.3116 -0.0745</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> ... [the output was truncated (use n=-1 to disable)]</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [ CPUFloatType{10,3,5} ]</span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

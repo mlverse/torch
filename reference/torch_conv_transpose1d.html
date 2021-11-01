@@ -247,45 +247,46 @@ composed of several input planes, sometimes also called "deconvolution".</p>
 <p>See <code><a href='nn_conv_transpose1d.html'>nn_conv_transpose1d()</a></code>  for details and output shape.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
-
-<span class='va'>inputs</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>20</span>, <span class='fl'>16</span>, <span class='fl'>50</span><span class='op'>)</span><span class='op'>)</span>
-<span class='va'>weights</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>16</span>, <span class='fl'>33</span>, <span class='fl'>5</span><span class='op'>)</span><span class='op'>)</span>
-<span class='fu'><a href='nnf_conv_transpose1d.html'>nnf_conv_transpose1d</a></span><span class='op'>(</span><span class='va'>inputs</span>, <span class='va'>weights</span><span class='op'>)</span>
-<span class='op'>}</span>
-</div><div class='output co'>#&gt; torch_tensor
-#&gt; (1,.,.) = 
-#&gt;  Columns 1 to 6 -1.4552e+00 -4.2143e+00  2.1152e+00 -4.2894e+00 -3.2255e+00 -5.4242e+00
-#&gt;  -5.1987e+00 -7.3660e+00 -1.0970e+00  2.6091e+00  4.8396e+00  3.8577e+00
-#&gt;   4.5324e+00 -5.4726e-01 -3.2100e+00 -6.9495e-01 -6.7147e+00 -9.5210e+00
-#&gt;  -4.8192e+00 -8.0477e+00 -7.3335e+00 -9.1230e+00 -1.3500e+01  9.4301e+00
-#&gt;   3.4818e+00 -4.2251e+00  3.5671e+00  5.8714e+00  8.0004e+00  5.4327e+00
-#&gt;  -7.4115e-01 -6.4205e+00 -3.7238e-01 -5.2809e+00  8.2858e+00  5.4556e-01
-#&gt;  -3.8529e+00 -8.1918e+00 -1.6601e+01 -5.3319e-01  9.3885e+00  7.2006e+00
-#&gt;   2.1451e+00 -7.5367e+00 -8.7403e-02  3.3138e+00 -2.4059e-01 -8.0504e+00
-#&gt;   2.0794e-01 -4.5884e+00 -3.4693e+00  1.1728e+01  2.0385e+01 -7.3527e+00
-#&gt;  -4.8705e+00 -9.5355e+00 -8.6758e+00 -1.0937e+01  7.1245e+00 -1.2047e+00
-#&gt;   2.6386e+00  5.7652e+00  1.1270e+01  9.9627e+00  3.0373e+00  8.2946e+00
-#&gt;  -3.7124e+00 -1.1476e+01  2.1661e+00 -3.1895e+00  5.3134e+00  2.1565e+01
-#&gt;  -1.8449e-01 -2.6455e+00 -4.7538e+00 -6.1012e-01  1.5641e+01 -1.5077e+01
-#&gt;  -3.4652e+00 -6.2520e+00 -6.1627e-01 -7.0744e+00 -1.6070e+01  2.0625e+00
-#&gt;  -4.9726e-01 -5.2184e+00 -9.1426e+00 -2.2909e-01  6.9017e+00  9.1073e-01
-#&gt;  -1.0535e+00 -1.0318e+01 -2.3290e+00 -1.6432e+01  2.2156e+01 -1.1585e+00
-#&gt;   9.6249e-01  2.5970e+00  1.2961e+01  7.4093e+00  9.9733e+00 -1.5773e+01
-#&gt;  -4.0732e+00 -6.2599e+00 -1.3901e+01 -1.0028e+01  2.2641e+01 -5.3720e+00
-#&gt;  -8.6347e-01 -7.9258e+00  1.8666e+00  1.1570e+00 -1.8313e+00  3.1189e+00
-#&gt;  -2.3882e+00 -7.7852e-01  3.2402e+00  6.1536e+00 -9.1137e-01 -7.6873e-01
-#&gt;  -1.4401e+00 -1.7350e+01 -1.9638e+01 -9.1335e+00 -8.5422e+00 -1.1881e+01
-#&gt;   9.9531e-01  5.9856e+00  3.5548e-02  1.0326e+01  6.4471e+00 -4.1961e+00
-#&gt;   3.1303e+00  2.0315e+00  1.1611e+01  2.0331e+01  2.5821e+00 -8.7747e+00
-#&gt;  -3.9304e+00 -2.7501e+00 -2.4181e+00  4.8533e+00  1.9892e+01 -1.5773e+01
-#&gt;   6.3911e+00  8.8384e+00  5.6559e+00  2.4288e+00  7.8911e-01  8.8443e+00
-#&gt;  -1.2138e+00 -7.1214e+00 -6.2626e-01  2.8623e+00  2.8173e+00  2.0929e-01
-#&gt;   1.6049e+00  6.2749e+00 -9.9045e+00  1.8000e-01 -4.1648e+00  1.3285e+01
-#&gt;   1.8066e-01  7.6321e+00  2.2850e+00  3.6144e+00 -9.0449e+00 -2.8041e+00
-#&gt;  -8.8878e-01  4.7304e+00  7.3699e+00  6.3699e+00 -3.3063e+00  1.1045e+01
-#&gt; ... [the output was truncated (use n=-1 to disable)]
-#&gt; [ CPUFloatType{20,33,54} ]</div></pre>
+    <pre class="examples"><span class='r-in'><span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='va'>inputs</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>20</span>, <span class='fl'>16</span>, <span class='fl'>50</span><span class='op'>)</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>weights</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>16</span>, <span class='fl'>33</span>, <span class='fl'>5</span><span class='op'>)</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'><a href='nnf_conv_transpose1d.html'>nnf_conv_transpose1d</a></span><span class='op'>(</span><span class='va'>inputs</span>, <span class='va'>weights</span><span class='op'>)</span></span>
+<span class='r-in'><span class='op'>}</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> torch_tensor</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> (1,.,.) = </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  Columns 1 to 8   6.2903  -3.2585  -8.7131   2.7097   3.3658  -3.8871  17.8501   8.1823</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   -1.7640  -1.5125  -2.4232  -8.9416   6.4265   4.7327  22.2834  -5.0334</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   -8.1593  -6.2840  -7.8174  -5.6593  -0.3963   8.8607 -10.8260  12.3080</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  -14.1091  -6.0568  -0.5219  -2.3240  -9.1099  19.4433   9.1718  -9.7524</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>    1.7703   6.6577  -3.9612  -3.1356  11.0259   4.9352  22.6227 -14.3838</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   -3.3320  -3.8379   3.2650 -10.0173 -17.6590 -25.4246 -11.5286 -12.9583</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   -0.6856   2.7186   3.0068   5.6000  -6.1957  15.2211  -8.7372  13.1689</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   -1.1998  -0.1353   5.7222   3.2676  -2.3805   5.8261  22.5605   8.4684</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   -0.6397   3.9147   1.9727   4.7599  -9.7489   3.8604   9.7941  -0.0443</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>    6.0765   7.9103  11.6958   0.5398  -6.5803  -1.2886   3.4473   3.7357</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   -1.3332  -1.6605  -3.9251  -8.2767   0.0744   5.9556   1.2523   4.7495</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>    4.7567   8.1193   4.7288  -4.4028  -7.9963  -6.7334  -6.4100  -2.6107</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>    1.8197   0.6992  -2.9314  14.2546  -0.0973   6.7739  -3.7569  -4.7670</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>    5.3476  -8.0138  15.1909   0.5698  -9.6239   8.4917  -9.9010   8.9222</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   -6.2226  -4.4024   5.1523  11.6537   6.2615  10.4667 -22.6304   9.9882</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>    5.0027 -11.2890   4.9259   0.9347  -5.3694  -6.7595 -14.0808  -2.4497</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   -9.4066   2.0722   2.6110  16.2699   5.5785  11.7314  -6.9298  14.0492</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   -2.6415 -15.1920  -4.7320   2.9296   3.1810 -13.5642 -11.3846  -0.5284</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   -5.7370  -1.8448   2.8309   9.3317 -22.5460   7.7479  -0.5978   8.1913</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   -2.7158  -5.9401   0.7137   8.2585   5.7995   8.3760  -1.8287  -7.2776</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   -0.0479   2.2347  12.2096   4.6644  -0.4222   4.5633  -6.2992  12.7323</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   -2.7476  -5.9631   1.5069   1.4336  12.0562  10.0861  -0.8579  11.0198</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>    0.4105   5.8169   5.5087   7.2501   3.7005   1.9712   0.8749   5.5938</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>    0.2810   9.4633   1.5065  13.1308  13.6297  15.8186   2.9983   1.1285</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   -4.5478   6.5816   4.5335  -6.0548  -0.4096  13.1030   4.9956  -5.1375</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   -0.2588  19.2630   0.2986  -8.4808  -4.6823  -1.7392   1.5149  -0.9863</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>    3.7449  -2.2185 -10.5293 -10.7578   3.5338   0.3502  16.6058 -20.1266</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>    1.0907   4.7870  -7.0267  -3.5857  -2.3508  -6.8904  -0.8040   2.8317</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>    2.2960  -6.2131  12.5267  -1.5910   4.1589   5.2234 -12.4036 -10.9960</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> ... [the output was truncated (use n=-1 to disable)]</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [ CPUFloatType{20,33,54} ]</span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

@@ -196,7 +196,7 @@
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>self</th>
-      <td><p>(Tensor) the input tensor of size \((*, m, n)\) where <code><a href='https://rdrr.io/r/base/Arithmetic.html'>*</a></code> is zero or more                    batch dimensions consisting of \(m \times n\) matrices.</p></td>
+      <td><p>(Tensor) the input tensor of size \((*, m, n)\) where <code>*</code> is zero or more                    batch dimensions consisting of \(m \times n\) matrices.</p></td>
     </tr>
     <tr>
       <th>some</th>
@@ -243,25 +243,26 @@ i.e., if the last two dimensions of <code>input</code> are <code>m</code> and <c
 of shape \((m \times m)\) and \((n \times n)\) respectively. <code>some</code> will be ignored here.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
-
-<span class='va'>a</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>5</span>, <span class='fl'>3</span><span class='op'>)</span><span class='op'>)</span>
-<span class='va'>a</span>
-<span class='va'>out</span> <span class='op'>=</span> <span class='fu'>torch_svd</span><span class='op'>(</span><span class='va'>a</span><span class='op'>)</span>
-<span class='va'>u</span> <span class='op'>=</span> <span class='va'>out</span><span class='op'>[[</span><span class='fl'>1</span><span class='op'>]</span><span class='op'>]</span>
-<span class='va'>s</span> <span class='op'>=</span> <span class='va'>out</span><span class='op'>[[</span><span class='fl'>2</span><span class='op'>]</span><span class='op'>]</span>
-<span class='va'>v</span> <span class='op'>=</span> <span class='va'>out</span><span class='op'>[[</span><span class='fl'>3</span><span class='op'>]</span><span class='op'>]</span>
-<span class='fu'><a href='torch_dist.html'>torch_dist</a></span><span class='op'>(</span><span class='va'>a</span>, <span class='fu'><a href='torch_mm.html'>torch_mm</a></span><span class='op'>(</span><span class='fu'><a href='torch_mm.html'>torch_mm</a></span><span class='op'>(</span><span class='va'>u</span>, <span class='fu'><a href='torch_diag.html'>torch_diag</a></span><span class='op'>(</span><span class='va'>s</span><span class='op'>)</span><span class='op'>)</span>, <span class='va'>v</span><span class='op'>$</span><span class='fu'>t</span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span>
-<span class='va'>a_big</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>7</span>, <span class='fl'>5</span>, <span class='fl'>3</span><span class='op'>)</span><span class='op'>)</span>
-<span class='va'>out</span> <span class='op'>=</span> <span class='fu'>torch_svd</span><span class='op'>(</span><span class='va'>a_big</span><span class='op'>)</span>
-<span class='va'>u</span> <span class='op'>=</span> <span class='va'>out</span><span class='op'>[[</span><span class='fl'>1</span><span class='op'>]</span><span class='op'>]</span>
-<span class='va'>s</span> <span class='op'>=</span> <span class='va'>out</span><span class='op'>[[</span><span class='fl'>2</span><span class='op'>]</span><span class='op'>]</span>
-<span class='va'>v</span> <span class='op'>=</span> <span class='va'>out</span><span class='op'>[[</span><span class='fl'>3</span><span class='op'>]</span><span class='op'>]</span>
-<span class='fu'><a href='torch_dist.html'>torch_dist</a></span><span class='op'>(</span><span class='va'>a_big</span>, <span class='fu'><a href='torch_matmul.html'>torch_matmul</a></span><span class='op'>(</span><span class='fu'><a href='torch_matmul.html'>torch_matmul</a></span><span class='op'>(</span><span class='va'>u</span>, <span class='fu'><a href='torch_diag_embed.html'>torch_diag_embed</a></span><span class='op'>(</span><span class='va'>s</span><span class='op'>)</span><span class='op'>)</span>, <span class='va'>v</span><span class='op'>$</span><span class='fu'>transpose</span><span class='op'>(</span><span class='op'>-</span><span class='fl'>2</span>, <span class='op'>-</span><span class='fl'>1</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span>
-<span class='op'>}</span>
-</div><div class='output co'>#&gt; torch_tensor
-#&gt; 2.92293e-06
-#&gt; [ CPUFloatType{} ]</div></pre>
+    <pre class="examples"><span class='r-in'><span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='va'>a</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>5</span>, <span class='fl'>3</span><span class='op'>)</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>a</span></span>
+<span class='r-in'><span class='va'>out</span> <span class='op'>=</span> <span class='fu'>torch_svd</span><span class='op'>(</span><span class='va'>a</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>u</span> <span class='op'>=</span> <span class='va'>out</span><span class='op'>[[</span><span class='fl'>1</span><span class='op'>]</span><span class='op'>]</span></span>
+<span class='r-in'><span class='va'>s</span> <span class='op'>=</span> <span class='va'>out</span><span class='op'>[[</span><span class='fl'>2</span><span class='op'>]</span><span class='op'>]</span></span>
+<span class='r-in'><span class='va'>v</span> <span class='op'>=</span> <span class='va'>out</span><span class='op'>[[</span><span class='fl'>3</span><span class='op'>]</span><span class='op'>]</span></span>
+<span class='r-in'><span class='fu'><a href='torch_dist.html'>torch_dist</a></span><span class='op'>(</span><span class='va'>a</span>, <span class='fu'><a href='torch_mm.html'>torch_mm</a></span><span class='op'>(</span><span class='fu'><a href='torch_mm.html'>torch_mm</a></span><span class='op'>(</span><span class='va'>u</span>, <span class='fu'><a href='torch_diag.html'>torch_diag</a></span><span class='op'>(</span><span class='va'>s</span><span class='op'>)</span><span class='op'>)</span>, <span class='va'>v</span><span class='op'>$</span><span class='fu'>t</span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>a_big</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>7</span>, <span class='fl'>5</span>, <span class='fl'>3</span><span class='op'>)</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>out</span> <span class='op'>=</span> <span class='fu'>torch_svd</span><span class='op'>(</span><span class='va'>a_big</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>u</span> <span class='op'>=</span> <span class='va'>out</span><span class='op'>[[</span><span class='fl'>1</span><span class='op'>]</span><span class='op'>]</span></span>
+<span class='r-in'><span class='va'>s</span> <span class='op'>=</span> <span class='va'>out</span><span class='op'>[[</span><span class='fl'>2</span><span class='op'>]</span><span class='op'>]</span></span>
+<span class='r-in'><span class='va'>v</span> <span class='op'>=</span> <span class='va'>out</span><span class='op'>[[</span><span class='fl'>3</span><span class='op'>]</span><span class='op'>]</span></span>
+<span class='r-in'><span class='fu'><a href='torch_dist.html'>torch_dist</a></span><span class='op'>(</span><span class='va'>a_big</span>, <span class='fu'><a href='torch_matmul.html'>torch_matmul</a></span><span class='op'>(</span><span class='fu'><a href='torch_matmul.html'>torch_matmul</a></span><span class='op'>(</span><span class='va'>u</span>, <span class='fu'><a href='torch_diag_embed.html'>torch_diag_embed</a></span><span class='op'>(</span><span class='va'>s</span><span class='op'>)</span><span class='op'>)</span>, <span class='va'>v</span><span class='op'>$</span><span class='fu'>transpose</span><span class='op'>(</span><span class='op'>-</span><span class='fl'>2</span>, <span class='op'>-</span><span class='fl'>1</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span></span>
+<span class='r-in'><span class='op'>}</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> torch_tensor</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 2.60493e-06</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [ CPUFloatType{} ]</span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

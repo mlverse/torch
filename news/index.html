@@ -188,7 +188,8 @@
 <a href="#torch-061" class="anchor"></a>torch 0.6.1<small> Unreleased </small>
 </h1>
 <ul>
-<li>Fixed valgrind errors on CRAN by requiring a more recent version of knitr and by removing vignettes from CRAN.</li>
+<li>Fixed valgrind errors on CRAN by requiring a more recent version of knitr.</li>
+<li>We now check if lantern DLL’s are loaded before calling any lantern function. This avoids segfaults when Lantern is not installed. (<a href='https://github.com/mlverse/torch/issues/723'>#723</a>).</li>
 </ul>
 </div>
     <div id="torch-060" class="section level1">
@@ -208,7 +209,7 @@
 <a href="#new-features" class="anchor"></a>New features</h2>
 <ul>
 <li>Additional info is showed when printing tensors like if it requires grad and the grad fn. (<a href='https://github.com/mlverse/torch/issues/668'>#668</a>, <a href='https://github.com/mlverse/torch/issues/669'>#669</a>, <a href='https://github.com/mlverse/torch/issues/673'>#673</a>, <a href='https://github.com/mohamed-180'>@mohamed-180</a>)</li>
-<li>We can now subset <code>nn_sequential</code> modules using <code><a href="https://rdrr.io/r/base/Extract.html">[</a></code>. (<a href='https://github.com/mlverse/torch/issues/678'>#678</a>, <a href='https://github.com/mohamed-180'>@mohamed-180</a>)</li>
+<li>We can now subset <code>nn_sequential</code> modules using <code>[</code>. (<a href='https://github.com/mlverse/torch/issues/678'>#678</a>, <a href='https://github.com/mohamed-180'>@mohamed-180</a>)</li>
 <li>We now allow <code>padding='same'</code> and <code>padding='valid'</code> when using convolutions. (<a href='https://github.com/mlverse/torch/issues/679'>#679</a>)</li>
 <li>
 <code>nnf_cross_entropy</code> now uses the ATen <code>cross_entropy</code> operation directly instead of doing logsoftmax + NLLLoss. (<a href='https://github.com/mlverse/torch/issues/680'>#680</a>)</li>
@@ -266,7 +267,7 @@
 <a href="#bug-fixes-1" class="anchor"></a>Bug fixes</h2>
 <ul>
 <li>Fixed a bug when using a <code>.getbatch</code> method that didn’t return a <code>torch_tensor</code>. (<a href='https://github.com/mlverse/torch/issues/615'>#615</a>)</li>
-<li>Fixed warning when using <code><a href="https://rdrr.io/r/base/Arithmetic.html">%/%</a></code> caused by a call to deprecated <code>torch_floor_divide</code> (<a href='https://github.com/mlverse/torch/issues/616'>#616</a>)</li>
+<li>Fixed warning when using <code>%/%</code> caused by a call to deprecated <code>torch_floor_divide</code> (<a href='https://github.com/mlverse/torch/issues/616'>#616</a>)</li>
 <li>Improved CUDA version auto-detection (<a href='https://github.com/mlverse/torch/issues/644'>#644</a>)</li>
 </ul>
 </div>
@@ -369,7 +370,7 @@
 <code>nn_lstm</code>, <code>nn_gru</code> and <code>nn_gru</code> can now use cudnn accelerations when available (<a href='https://github.com/mlverse/torch/issues/503'>#503</a>).</li>
 <li>Added Gamma distribution (<a href='https://github.com/mlverse/torch/issues/489'>#489</a>)</li>
 <li>We now respect the TORCH_HOME env var to automatically install torch. (<a href='https://github.com/mlverse/torch/issues/522'>#522</a>)</li>
-<li>Implement comparison operator <code><a href="https://rdrr.io/r/base/Comparison.html">!=</a></code> for torch dtypes. (<a href='https://github.com/mlverse/torch/issues/524'>#524</a>)</li>
+<li>Implement comparison operator <code>!=</code> for torch dtypes. (<a href='https://github.com/mlverse/torch/issues/524'>#524</a>)</li>
 <li>Added Chi-square distribution. (<a href='https://github.com/mlverse/torch/issues/518'>#518</a>)</li>
 <li>Added <code>optimizer</code> function allowing to easily implement custom optimizers. (<a href='https://github.com/mlverse/torch/issues/527'>#527</a>)</li>
 </ul>
@@ -548,7 +549,7 @@
 <ul>
 <li>Expanded the <code>utils_data_default_collate</code> to support converting R objects to torch tensors when needed. (<a href='https://github.com/mlverse/torch/issues/269'>#269</a>)</li>
 <li>Added an <code>as.matrix</code> method for torch Tensors. (<a href='https://github.com/mlverse/torch/issues/282'>#282</a>)</li>
-<li>By default we now truncate the output of <code><a href="https://rdrr.io/r/base/print.html">print(totrch_tensor(1:40))</a></code> if it spans for more than 30 lines. This is useful for not spamming the console or taking very long to print when you print a very large tensor. (<a href='https://github.com/mlverse/torch/issues/283'>#283</a>)</li>
+<li>By default we now truncate the output of <code>print(totrch_tensor(1:40))</code> if it spans for more than 30 lines. This is useful for not spamming the console or taking very long to print when you print a very large tensor. (<a href='https://github.com/mlverse/torch/issues/283'>#283</a>)</li>
 <li>Added the Adadelta optimizer (<a href='https://github.com/krzjoa'>@krzjoa</a> <a href='https://github.com/mlverse/torch/issues/284'>#284</a>)</li>
 <li>Added support for GPU’s on Windows (<a href='https://github.com/mlverse/torch/issues/281'>#281</a>)</li>
 <li>Added the Adagrad optimizer (<a href='https://github.com/krzjoa'>@krzjoa</a> <a href='https://github.com/mlverse/torch/issues/289'>#289</a>)</li>

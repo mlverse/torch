@@ -221,23 +221,23 @@ Default: 0.1.</p></td>
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
-<span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
-<span class='co'># Assuming optimizer uses lr = 0.05 for all groups</span>
-<span class='co'># lr = 0.05     if epoch &lt; 30</span>
-<span class='co'># lr = 0.005    if 30 &lt;= epoch &lt; 60</span>
-<span class='co'># lr = 0.0005   if 60 &lt;= epoch &lt; 90</span>
-<span class='co'># ...</span>
-<span class='va'>scheduler</span> <span class='op'>&lt;-</span> <span class='fu'>lr_step</span><span class='op'>(</span><span class='va'>optimizer</span>, step_size<span class='op'>=</span><span class='fl'>30</span>, gamma<span class='op'>=</span><span class='fl'>0.1</span><span class='op'>)</span>
-<span class='kw'>for</span> <span class='op'>(</span><span class='va'>epoch</span> <span class='kw'>in</span> <span class='fl'>1</span><span class='op'>:</span><span class='fl'>100</span><span class='op'>)</span> <span class='op'>{</span>
-  <span class='fu'>train</span><span class='op'>(</span><span class='va'>...</span><span class='op'>)</span>
-  <span class='fu'>validate</span><span class='op'>(</span><span class='va'>...</span><span class='op'>)</span>
-  <span class='va'>scheduler</span><span class='op'>$</span><span class='fu'>step</span><span class='op'>(</span><span class='op'>)</span>
-<span class='op'>}</span>
-<span class='op'>}</span>
-
-<span class='op'>}</span>
-</div></pre>
+    <pre class="examples"><span class='r-in'><span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span></span>
+<span class='r-in'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span></span>
+<span class='r-in'><span class='co'># Assuming optimizer uses lr = 0.05 for all groups</span></span>
+<span class='r-in'><span class='co'># lr = 0.05     if epoch &lt; 30</span></span>
+<span class='r-in'><span class='co'># lr = 0.005    if 30 &lt;= epoch &lt; 60</span></span>
+<span class='r-in'><span class='co'># lr = 0.0005   if 60 &lt;= epoch &lt; 90</span></span>
+<span class='r-in'><span class='co'># ...</span></span>
+<span class='r-in'><span class='va'>scheduler</span> <span class='op'>&lt;-</span> <span class='fu'>lr_step</span><span class='op'>(</span><span class='va'>optimizer</span>, step_size<span class='op'>=</span><span class='fl'>30</span>, gamma<span class='op'>=</span><span class='fl'>0.1</span><span class='op'>)</span></span>
+<span class='r-in'><span class='kw'>for</span> <span class='op'>(</span><span class='va'>epoch</span> <span class='kw'>in</span> <span class='fl'>1</span><span class='op'>:</span><span class='fl'>100</span><span class='op'>)</span> <span class='op'>{</span></span>
+<span class='r-in'>  <span class='fu'>train</span><span class='op'>(</span><span class='va'>...</span><span class='op'>)</span></span>
+<span class='r-in'>  <span class='fu'>validate</span><span class='op'>(</span><span class='va'>...</span><span class='op'>)</span></span>
+<span class='r-in'>  <span class='va'>scheduler</span><span class='op'>$</span><span class='fu'>step</span><span class='op'>(</span><span class='op'>)</span></span>
+<span class='r-in'><span class='op'>}</span></span>
+<span class='r-in'><span class='op'>}</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='op'>}</span></span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

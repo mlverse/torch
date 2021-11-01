@@ -196,7 +196,7 @@
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>self</th>
-      <td><p>(Tensor) the input tensor of size \((*, n, n)\) where <code><a href='https://rdrr.io/r/base/Arithmetic.html'>*</a></code> is zero or more                    batch dimensions</p></td>
+      <td><p>(Tensor) the input tensor of size \((*, n, n)\) where <code>*</code> is zero or more                    batch dimensions</p></td>
     </tr>
     </table>
 
@@ -217,21 +217,21 @@ of 2D square tensors, in which case this function would return a tensor composed
 individual inverses.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
-<span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
-<span class='va'>x</span> <span class='op'>=</span> <span class='fu'><a href='torch_rand.html'>torch_rand</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>4</span>, <span class='fl'>4</span><span class='op'>)</span><span class='op'>)</span>
-<span class='va'>y</span> <span class='op'>=</span> <span class='fu'>torch_inverse</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span>
-<span class='va'>z</span> <span class='op'>=</span> <span class='fu'><a href='torch_mm.html'>torch_mm</a></span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>y</span><span class='op'>)</span>
-<span class='va'>z</span>
-<span class='fu'><a href='torch_max.html'>torch_max</a></span><span class='op'>(</span><span class='fu'><a href='torch_abs.html'>torch_abs</a></span><span class='op'>(</span><span class='va'>z</span> <span class='op'>-</span> <span class='fu'><a href='torch_eye.html'>torch_eye</a></span><span class='op'>(</span><span class='fl'>4</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span> <span class='co'># Max non-zero</span>
-<span class='co'># Batched inverse example</span>
-<span class='va'>x</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>2</span>, <span class='fl'>3</span>, <span class='fl'>4</span>, <span class='fl'>4</span><span class='op'>)</span><span class='op'>)</span>
-<span class='va'>y</span> <span class='op'>=</span> <span class='fu'>torch_inverse</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span>
-<span class='va'>z</span> <span class='op'>=</span> <span class='fu'><a href='torch_matmul.html'>torch_matmul</a></span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>y</span><span class='op'>)</span>
-<span class='fu'><a href='torch_max.html'>torch_max</a></span><span class='op'>(</span><span class='fu'><a href='torch_abs.html'>torch_abs</a></span><span class='op'>(</span><span class='va'>z</span> <span class='op'>-</span> <span class='fu'><a href='torch_eye.html'>torch_eye</a></span><span class='op'>(</span><span class='fl'>4</span><span class='op'>)</span><span class='op'>$</span><span class='fu'>expand_as</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span> <span class='co'># Max non-zero</span>
-<span class='op'>}</span>
-<span class='op'>}</span>
-</div></pre>
+    <pre class="examples"><span class='r-in'><span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span></span>
+<span class='r-in'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span></span>
+<span class='r-in'><span class='va'>x</span> <span class='op'>=</span> <span class='fu'><a href='torch_rand.html'>torch_rand</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>4</span>, <span class='fl'>4</span><span class='op'>)</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>y</span> <span class='op'>=</span> <span class='fu'>torch_inverse</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>z</span> <span class='op'>=</span> <span class='fu'><a href='torch_mm.html'>torch_mm</a></span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>y</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>z</span></span>
+<span class='r-in'><span class='fu'><a href='torch_max.html'>torch_max</a></span><span class='op'>(</span><span class='fu'><a href='torch_abs.html'>torch_abs</a></span><span class='op'>(</span><span class='va'>z</span> <span class='op'>-</span> <span class='fu'><a href='torch_eye.html'>torch_eye</a></span><span class='op'>(</span><span class='fl'>4</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span> <span class='co'># Max non-zero</span></span>
+<span class='r-in'><span class='co'># Batched inverse example</span></span>
+<span class='r-in'><span class='va'>x</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>2</span>, <span class='fl'>3</span>, <span class='fl'>4</span>, <span class='fl'>4</span><span class='op'>)</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>y</span> <span class='op'>=</span> <span class='fu'>torch_inverse</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>z</span> <span class='op'>=</span> <span class='fu'><a href='torch_matmul.html'>torch_matmul</a></span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>y</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'><a href='torch_max.html'>torch_max</a></span><span class='op'>(</span><span class='fu'><a href='torch_abs.html'>torch_abs</a></span><span class='op'>(</span><span class='va'>z</span> <span class='op'>-</span> <span class='fu'><a href='torch_eye.html'>torch_eye</a></span><span class='op'>(</span><span class='fl'>4</span><span class='op'>)</span><span class='op'>$</span><span class='fu'>expand_as</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span> <span class='co'># Max non-zero</span></span>
+<span class='r-in'><span class='op'>}</span></span>
+<span class='r-in'><span class='op'>}</span></span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

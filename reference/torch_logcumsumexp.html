@@ -217,23 +217,24 @@ elements of <code>input</code> in the dimension <code>dim</code>.</p>
 $$</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
-
-<span class='va'>a</span> <span class='op'>&lt;-</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>10</span><span class='op'>)</span><span class='op'>)</span>
-<span class='fu'>torch_logcumsumexp</span><span class='op'>(</span><span class='va'>a</span>, dim<span class='op'>=</span><span class='fl'>1</span><span class='op'>)</span>
-<span class='op'>}</span>
-</div><div class='output co'>#&gt; torch_tensor
-#&gt;  1.3917
-#&gt;  1.6559
-#&gt;  2.0071
-#&gt;  2.2605
-#&gt;  2.2803
-#&gt;  2.3479
-#&gt;  2.4732
-#&gt;  2.6243
-#&gt;  2.7049
-#&gt;  2.8805
-#&gt; [ CPUFloatType{10} ]</div></pre>
+    <pre class="examples"><span class='r-in'><span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='va'>a</span> <span class='op'>&lt;-</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>10</span><span class='op'>)</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'>torch_logcumsumexp</span><span class='op'>(</span><span class='va'>a</span>, dim<span class='op'>=</span><span class='fl'>1</span><span class='op'>)</span></span>
+<span class='r-in'><span class='op'>}</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> torch_tensor</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  0.1786</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  0.6731</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  1.5914</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  1.7089</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  1.8430</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  1.9001</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  2.8719</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  3.1631</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  3.2612</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  3.3071</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [ CPUFloatType{10} ]</span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

@@ -211,7 +211,7 @@ be treated as batch dimensions. The output will have the same batch dimensions.<
     <tr>
       <th>A</th>
       <td><p>(Tensor): tensor with two or more dimensions. By default its
-shape is interpreted as <code>(*, m, n)</code> where <code><a href='https://rdrr.io/r/base/Arithmetic.html'>*</a></code> is zero or more
+shape is interpreted as <code>(*, m, n)</code> where <code>*</code> is zero or more
 batch dimensions, but this behavior can be controlled using <code>dim</code>.</p></td>
     </tr>
     <tr>
@@ -245,11 +245,11 @@ supported:</p><table class='table'>
 <tr><td><code>NULL</code> (default)</td><td>Frobenius norm</td><td><code>2</code>-norm (see below)</td></tr>
 <tr><td><code>"fro"</code></td><td>Frobenius norm</td><td>– not supported –</td></tr>
 <tr><td><code>"nuc"</code></td><td>nuclear norm</td><td>– not supported –</td></tr>
-<tr><td><code>Inf</code></td><td><code><a href='https://rdrr.io/r/base/Extremes.html'>max(sum(abs(x), dim=2))</a></code></td><td><code><a href='https://rdrr.io/r/base/Extremes.html'>max(abs(x))</a></code></td></tr>
-<tr><td><code>-Inf</code></td><td><code><a href='https://rdrr.io/r/base/Extremes.html'>min(sum(abs(x), dim=2))</a></code></td><td><code><a href='https://rdrr.io/r/base/Extremes.html'>min(abs(x))</a></code></td></tr>
-<tr><td><code>0</code></td><td>– not supported –</td><td><code><a href='https://rdrr.io/r/base/sum.html'>sum(x != 0)</a></code></td></tr>
-<tr><td><code>1</code></td><td><code><a href='https://rdrr.io/r/base/Extremes.html'>max(sum(abs(x), dim=1))</a></code></td><td>as below</td></tr>
-<tr><td><code>-1</code></td><td><code><a href='https://rdrr.io/r/base/Extremes.html'>min(sum(abs(x), dim=1))</a></code></td><td>as below</td></tr>
+<tr><td><code>Inf</code></td><td><code>max(sum(abs(x), dim=2))</code></td><td><code>max(abs(x))</code></td></tr>
+<tr><td><code>-Inf</code></td><td><code>min(sum(abs(x), dim=2))</code></td><td><code>min(abs(x))</code></td></tr>
+<tr><td><code>0</code></td><td>– not supported –</td><td><code>sum(x != 0)</code></td></tr>
+<tr><td><code>1</code></td><td><code>max(sum(abs(x), dim=1))</code></td><td>as below</td></tr>
+<tr><td><code>-1</code></td><td><code>min(sum(abs(x), dim=1))</code></td><td>as below</td></tr>
 <tr><td><code>2</code></td><td>largest singular value</td><td>as below</td></tr>
 <tr><td><code>-2</code></td><td>smallest singular value</td><td>as below</td></tr>
 <tr><td>other <code>int</code> or <code>float</code></td><td>– not supported –</td><td><code>sum(abs(x)^{ord})^{(1 / ord)}</code></td></tr>
@@ -285,20 +285,21 @@ supported:</p><table class='table'>
 <code><a href='linalg_vector_norm.html'>linalg_vector_norm</a>()</code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
-<span class='va'>a</span> <span class='op'>&lt;-</span> <span class='fu'><a href='torch_arange.html'>torch_arange</a></span><span class='op'>(</span><span class='fl'>0</span>, <span class='fl'>8</span>, dtype<span class='op'>=</span><span class='fu'><a href='torch_dtype.html'>torch_float</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span><span class='op'>$</span><span class='fu'>reshape</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>3</span>,<span class='fl'>3</span><span class='op'>)</span><span class='op'>)</span>
-<span class='fu'>linalg_matrix_norm</span><span class='op'>(</span><span class='va'>a</span><span class='op'>)</span>
-<span class='fu'>linalg_matrix_norm</span><span class='op'>(</span><span class='va'>a</span>, ord <span class='op'>=</span> <span class='op'>-</span><span class='fl'>1</span><span class='op'>)</span>
-<span class='va'>b</span> <span class='op'>&lt;-</span> <span class='va'>a</span><span class='op'>$</span><span class='fu'>expand</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>2</span>, <span class='op'>-</span><span class='fl'>1</span>, <span class='op'>-</span><span class='fl'>1</span><span class='op'>)</span><span class='op'>)</span>
-<span class='fu'>linalg_matrix_norm</span><span class='op'>(</span><span class='va'>b</span><span class='op'>)</span>
-<span class='fu'>linalg_matrix_norm</span><span class='op'>(</span><span class='va'>b</span>, dim <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1</span>, <span class='fl'>3</span><span class='op'>)</span><span class='op'>)</span>
-
-<span class='op'>}</span>
-</div><div class='output co'>#&gt; torch_tensor
-#&gt;   3.1623
-#&gt;  10.0000
-#&gt;  17.2627
-#&gt; [ CPUFloatType{3} ]</div></pre>
+    <pre class="examples"><span class='r-in'><span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span></span>
+<span class='r-in'><span class='va'>a</span> <span class='op'>&lt;-</span> <span class='fu'><a href='torch_arange.html'>torch_arange</a></span><span class='op'>(</span><span class='fl'>0</span>, <span class='fl'>8</span>, dtype<span class='op'>=</span><span class='fu'><a href='torch_dtype.html'>torch_float</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span><span class='op'>$</span><span class='fu'>reshape</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>3</span>,<span class='fl'>3</span><span class='op'>)</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'>linalg_matrix_norm</span><span class='op'>(</span><span class='va'>a</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'>linalg_matrix_norm</span><span class='op'>(</span><span class='va'>a</span>, ord <span class='op'>=</span> <span class='op'>-</span><span class='fl'>1</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>b</span> <span class='op'>&lt;-</span> <span class='va'>a</span><span class='op'>$</span><span class='fu'>expand</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>2</span>, <span class='op'>-</span><span class='fl'>1</span>, <span class='op'>-</span><span class='fl'>1</span><span class='op'>)</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'>linalg_matrix_norm</span><span class='op'>(</span><span class='va'>b</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'>linalg_matrix_norm</span><span class='op'>(</span><span class='va'>b</span>, dim <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1</span>, <span class='fl'>3</span><span class='op'>)</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='op'>}</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> torch_tensor</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   3.1623</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  10.0000</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  17.2627</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [ CPUFloatType{3} ]</span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
