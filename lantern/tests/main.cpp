@@ -3,6 +3,8 @@
 #include <vector>
 
 #define LANTERN_HEADERS_ONLY
+#define LANTERN_CHECK_LOADED
+bool lantern_loaded = false;
 #include "lantern/lantern.h"
 
 #include "init.h"

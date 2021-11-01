@@ -1,7 +1,7 @@
 # torch 0.6.1
 
-- Fixed valgrind errors on CRAN by requiring a more recent version of knitr and 
-  by removing vignettes from CRAN.
+- Fixed valgrind errors on CRAN by requiring a more recent version of knitr.
+- We now check if lantern DLL's are loaded before calling any lantern function. This avoids segfaults when Lantern is not installed. (#723).
 
 # torch 0.6.0
 
