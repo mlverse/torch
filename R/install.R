@@ -24,7 +24,6 @@ install_config <- list(
       "linux" = list(
         "libtorch" = list(
           path = "libtorch/",
-          md5hash = "5e0f412ffc7437b0631b86dcfa1a6368"
           url = "https://download.pytorch.org/libtorch/cpu/libtorch-cxx11-abi-shared-with-deps-1.9.1%2Bcpu.zip",
           md5hash = "6e5f236d42572b92d8a44183d60223c3"
         ),
@@ -35,7 +34,6 @@ install_config <- list(
       "linux" = list(
         "libtorch" = list(
           path = "libtorch/",
-          md5hash = "439e074e788c7838459baeda8dbed5b0"
           url = "https://download.pytorch.org/libtorch/cu102/libtorch-cxx11-abi-shared-with-deps-1.9.1%2Bcu102.zip",
           md5hash = "34f5253ca015f4cc6dc8eebd05605ecd"
         ),
@@ -55,7 +53,6 @@ install_config <- list(
       "linux" = list(
         "libtorch" = list(
           path = "libtorch/",
-          md5hash = "c5f69cfd23b3c564927a4e6fa697a553"
           url = "https://download.pytorch.org/libtorch/cu111/libtorch-cxx11-abi-shared-with-deps-1.9.1%2Bcu111.zip",
           md5hash = "de8f7f922c1fc31b316161d4381dcf15"
         ),
