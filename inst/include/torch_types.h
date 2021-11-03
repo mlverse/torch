@@ -5,6 +5,7 @@
 #include <memory>
 #include "torch_deleters.h"
 
+
 class XPtrTorch
 {
 private:
@@ -558,5 +559,131 @@ public:
       return this->x;
   }
 };
+
+namespace torch
+{
+namespace types
+{
+using Tensor = XPtrTorchTensor;
+using TensorList = XPtrTorchTensorList;
+using ScalarType = XPtrTorchScalarType;
+using Scalar = XPtrTorchScalar;
+using TensorOptions = XPtrTorchTensorOptions;
+using Device = XPtrTorchDevice;
+using Dtype = XPtrTorchDtype;
+using Dimname = XPtrTorchDimname;
+using DimnameList = XPtrTorchDimnameList;
+using Generator = XPtrTorchGenerator;
+using MemoryFormat = XPtrTorchMemoryFormat;
+using IntArrayRef = XPtrTorchIntArrayRef;
+using TensorDict = XPtrTorchTensorDict;
+using CompilationUnit = XPtrTorchCompilationUnit;
+using QScheme = XPtrTorchQScheme;
+using variable_list = XPtrTorchvariable_list;
+using Layout = XPtrTorchLayout;
+using Storage = XPtrTorchStorage;
+
+using int64_t2 = XPtrTorchint64_t2;
+using string = XPtrTorchstring;
+using double_t = XPtrTorchdouble;
+using int64_t = XPtrTorchint64_t;
+using bool_t = XPtrTorchbool;
+
+namespace indexing
+{
+using TensorIndex = XPtrTorchTensorIndex;
+using Slice = XPtrTorchSlice;
+}
+
+namespace impl
+{
+using GenericDict = XPtrTorchGenericDict;
+using GenericList = XPtrTorchGenericList;
+using NamedTupleHelper = XPtrTorchNamedTupleHelper;
+}
+
+namespace nn
+{
+namespace utils
+{
+namespace rnn 
+{
+using PackedSequence = XPtrTorchPackedSequence;
+}
+}
+}
+
+
+namespace optional 
+{
+using Tensor = XPtrTorchOptionalTensor;
+using TensorList = XPtrTorchOptionalTensorList;
+using Device = XPtrTorchOptionalDevice;
+using IntArrayRef = XPtrTorchOptionalIntArrayRef;
+
+using int64_t2 = XPtrTorchoptional_int64_t2;
+using int64_t = XPtrTorchoptional_int64_t;
+
+}
+
+namespace vector 
+{
+using Tensor = XPtrTorchTensorList;
+using int64_t = XPtrTorchvector_int64_t;
+using string = XPtrTorchvector_string;
+using bool_t = XPtrTorchvector_bool;
+using Scalar = XPtrTorchvector_Scalar;
+using double_t = XPtrTorchvector_double;
+using void_ptr = XPtrTorchvector_void;
+
+namespace jit
+{
+using IValue = XPtrTorchvector_IValue;
+}
+}
+
+namespace index 
+{
+using Tensor = XPtrTorchIndexTensor;
+using TensorList = XPtrTorchIndexTensorList;
+using IntArrayRef = XPtrTorchIndexIntArrayRef;
+using int64_t = XPtrTorchindex_int64_t;
+namespace optional
+{
+using TensorList = XPtrTorchOptionalIndexTensorList;
+using IntArrayRef = XPtrTorchOptionalIndexIntArrayRef;
+}
+}
+
+namespace jit
+{
+using named_parameter_list = XPtrTorchjit_named_parameter_list;
+using named_buffer_list = XPtrTorchjit_named_buffer_list;
+using named_module_list = XPtrTorchjit_named_module_list;
+using FunctionPtr = XPtrTorchFunctionPtr;
+using Stack = XPtrTorchStack;
+using IValue = XPtrTorchIValue;
+using Tuple = XPtrTorchTuple;
+
+namespace vector
+{
+using IValue = XPtrTorchTuple;
+}
+
+namespace script
+{
+using Module = XPtrTorchScriptModule;
+using Method = XPtrTorchScriptMethod;
+}
+
+namespace impl
+{
+using TraceableFunction = XPtrTorchTraceableFunction;
+}
+
+}
+}
+}
+
 
 #endif // TORCH_DYPES
