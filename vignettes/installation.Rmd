@@ -25,7 +25,7 @@ We have provide pre-compiled binaries for all major platforms and you can find s
 
 If you don't have a GPU or want to install the CPU version of `torch`, you can install with:
 
-```{r}
+```{r, eval = FALSE}
 install.packages("torch")
 ```
 
@@ -48,7 +48,7 @@ Follow the installation instructions available [here](https://docs.nvidia.com/de
 
 Once you have installed all pre-requisites you can install `torch` with:
 
-```{r}
+```{r, eval = FALSE}
 install.packages("torch")
 ```
 
@@ -60,7 +60,7 @@ If you have followed default installation locations we will detect that you have
 
 We only support CPU builds of torch on MacOS. On MacOS you can install torch with:
 
-```{r}
+```{r, eval = FALSE}
 install.packages("torch")
 ```
 
@@ -70,7 +70,7 @@ install.packages("torch")
 
 To install the cpu version of `torch` you can run:
 
-```{r}
+```{r, eval = FALSE}
 install.packages("torch")
 ```
 
@@ -86,7 +86,7 @@ To install the GPU version of `torch` on linux you must verify that:
 
 Once you have installed all pre-requisites you can install `torch` with:
 
-```{r}
+```{r, eval = FALSE}
 install.packages("torch")
 ```
 
@@ -107,7 +107,7 @@ Warning messages:
 ```
 This means you encounter a download timeout. 
 then, you should increase the timeout value in `install_torch()` like 
-```{r}
+```{r, eval = FALSE}
 install_torch(timeout = 600)
 ```
 
@@ -117,7 +117,7 @@ In cases where you cannot reach download servers from the machine you intend to 
 
 1- get the download URLs of the files.
 
-```{r}
+```{r, eval = FALSE}
 get_install_libs_url(type = "10.2")
 ```
 
@@ -125,7 +125,7 @@ get_install_libs_url(type = "10.2")
 
 3- install torch from files
 
-```{r}
+```{r, eval = FALSE}
 install_torch_from_file(libtorch = "file:///tmp/libtorch-cxx11-abi-shared-with-deps-1.7.1%2Bcu101.zip",
                         liblantern = "file:///tmp/Linux-gpu-101.zip")
 ```

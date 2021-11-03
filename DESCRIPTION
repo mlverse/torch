@@ -9,6 +9,7 @@ Authors@R: c(
     person("Athos", "Damiani", role = c("ctb")),
     person("Christophe", "Regouby", role = c("ctb")),
     person("Krzysztof", "Joachimiak", role = c("ctb")),
+    person("Hamada S.", "Badr", role = c("ctb")),
     person(family = "RStudio", role = c("cph"))
     )
 Description: Provides functionality to define and train neural networks similar to 

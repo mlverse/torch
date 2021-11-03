@@ -15,6 +15,15 @@ void lantern_host_handler()
   } 
 }
 
+bool lantern_loaded = false;
+void check_lantern_loaded ()
+{
+  if (!lantern_loaded)
+  {
+    throw std::runtime_error("Lantern is not loaded. Please use `install_torch()` to install additional dependencies.");
+  }
+}
+
 // [[Rcpp::export]]
 void cpp_lantern_configure(int log) {
   lanternConfigure(log);

@@ -5,7 +5,7 @@
 \title{Install Torch from files}
 \usage{
 install_torch_from_file(
-  version = "1.9.0",
+  version = "1.9.1",
   type = install_type(version = version),
   libtorch,
   liblantern,
