@@ -359,7 +359,7 @@ AutogradContext <- R6::R6Class(
 #'     result
 #'   },
 #'   backward = function(ctx, grad_output) {
-#'     list(i = grad_output * ctx$saved_variable$result)
+#'     list(i = grad_output * ctx$saved_variables$result)
 #'   }
 #' )
 #' 
