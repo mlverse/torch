@@ -12,8 +12,8 @@ void *_lantern_nn_utils_rnn_pack_padded_sequence(void *input, void *lengths, boo
 {
     LANTERN_FUNCTION_START
     auto out = torch::nn::utils::rnn::pack_padded_sequence(
-        reinterpret_cast<LanternObject<torch::Tensor> *>(input)->get(),
-        reinterpret_cast<LanternObject<torch::Tensor> *>(lengths)->get(),
+        from_raw::Tensor(input),
+        from_raw::Tensor(lengths),
         batch_first,
         enforce_sorted);
 
@@ -57,7 +57,7 @@ void *_lantern_nn_utils_rnn_pad_sequence(void *sequence, bool batch_first, doubl
         batch_first,
         padding_value);
 
-    return (void *)new LanternObject<torch::Tensor>(out);
+    return make_unique::Tensor(out);
     LANTERN_FUNCTION_END
 }
 
@@ -65,10 +65,10 @@ void *_lantern_nn_utils_rnn_PackedSequence_new(void *data, void *batch_sizes, vo
 {
     LANTERN_FUNCTION_START
     auto out = torch::nn::utils::rnn::PackedSequence(
-        reinterpret_cast<LanternObject<torch::Tensor> *>(data)->get(),
-        reinterpret_cast<LanternObject<torch::Tensor> *>(batch_sizes)->get(),
-        reinterpret_cast<LanternObject<torch::Tensor> *>(sorted_indices)->get(),
-        reinterpret_cast<LanternObject<torch::Tensor> *>(unsorted_indices)->get());
+        from_raw::Tensor(data),
+        from_raw::Tensor(batch_sizes),
+        from_raw::Tensor(sorted_indices),
+        from_raw::Tensor(unsorted_indices));
     return (void *)new LanternPtr<torch::nn::utils::rnn::PackedSequence>(out);
     LANTERN_FUNCTION_END
 }
@@ -77,7 +77,7 @@ void *_lantern_nn_utils_PackedSequence_data(void *input)
 {
     LANTERN_FUNCTION_START
     auto x = reinterpret_cast<LanternPtr<torch::nn::utils::rnn::PackedSequence> *>(input)->get();
-    return (void *)new LanternObject<torch::Tensor>(x.data());
+    return make_unique::Tensor(x.data());
     LANTERN_FUNCTION_END
 }
 
@@ -85,7 +85,7 @@ void *_lantern_nn_utils_PackedSequence_batch_sizes(void *input)
 {
     LANTERN_FUNCTION_START
     auto x = reinterpret_cast<LanternPtr<torch::nn::utils::rnn::PackedSequence> *>(input)->get();
-    return (void *)new LanternObject<torch::Tensor>(x.batch_sizes());
+    return make_unique::Tensor(x.batch_sizes());
     LANTERN_FUNCTION_END
 }
 
@@ -93,7 +93,7 @@ void *_lantern_nn_utils_PackedSequence_sorted_indices(void *input)
 {
     LANTERN_FUNCTION_START
     auto x = reinterpret_cast<LanternPtr<torch::nn::utils::rnn::PackedSequence> *>(input)->get();
-    return (void *)new LanternObject<torch::Tensor>(x.sorted_indices());
+    return make_unique::Tensor(x.sorted_indices());
     LANTERN_FUNCTION_END
 }
 
@@ -101,6 +101,6 @@ void *_lantern_nn_utils_PackedSequence_unsorted_indices(void *input)
 {
     LANTERN_FUNCTION_START
     auto x = reinterpret_cast<LanternPtr<torch::nn::utils::rnn::PackedSequence> *>(input)->get();
-    return (void *)new LanternObject<torch::Tensor>(x.unsorted_indices());
+    return make_unique::Tensor(x.unsorted_indices());
     LANTERN_FUNCTION_END
 }

@@ -11,7 +11,7 @@
 void *_lantern_Tensor_storage(void *self)
 {
     LANTERN_FUNCTION_START
-    torch::Tensor x = reinterpret_cast<LanternObject<torch::Tensor> *>(self)->get();
+    torch::Tensor x = from_raw::Tensor(self);
     return (void *)new LanternObject<torch::Storage>(x.storage());
     LANTERN_FUNCTION_END
 }
@@ -19,7 +19,7 @@ void *_lantern_Tensor_storage(void *self)
 bool _lantern_Tensor_has_storage(void *self)
 {
     LANTERN_FUNCTION_START
-    torch::Tensor x = reinterpret_cast<LanternObject<torch::Tensor> *>(self)->get();
+    torch::Tensor x = from_raw::Tensor(self);
     return x.has_storage();
     LANTERN_FUNCTION_END_RET(false)
 }

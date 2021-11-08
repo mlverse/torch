@@ -58,7 +58,7 @@ void _lantern_Tensor_set_grad_(void* self, void * new_grad)
 bool _lantern_Tensor_requires_grad(void *self)
 {
     LANTERN_FUNCTION_START
-    return reinterpret_cast<LanternObject<torch::Tensor> *>(self)->get().requires_grad();
+    return from_raw::Tensor(self).requires_grad();
     LANTERN_FUNCTION_END
 }
 
@@ -66,7 +66,7 @@ unsigned int _lantern_Tensor_register_hook(void *self, void *hook)
 {
     LANTERN_FUNCTION_START
     auto h = reinterpret_cast<LanternObject<std::function<torch::Tensor(torch::Tensor)>> *>(hook)->get();
-    auto x = reinterpret_cast<LanternObject<torch::Tensor> *>(self)->get();
+    auto x = from_raw::Tensor(self);
     return x.register_hook(h);
     LANTERN_FUNCTION_END_RET(0)
 }
@@ -79,12 +79,12 @@ void *_lantern_new_hook(void *(*fun)(void *, void *), void *custom)
 {
     LANTERN_FUNCTION_START
     auto out = [fun, custom](torch::Tensor grad) {
-        auto out = (*fun)((void *)new LanternObject<torch::Tensor>(grad), custom);
+        auto out = (*fun)(make_unique::Tensor(grad), custom);
         if (out == (void*)NULL) {
           torch::Tensor empty;
           return empty;
         }
-        auto ten = reinterpret_cast<LanternObject<torch::Tensor> *>(out)->get();
+        auto ten = from_raw::Tensor(out);
         return ten;
     };
     return (void *)new LanternObject<std::function<torch::Tensor(torch::Tensor)>>(out);
@@ -94,7 +94,7 @@ void *_lantern_new_hook(void *(*fun)(void *, void *), void *custom)
 void _lantern_Tensor_remove_hook(void *self, unsigned int pos)
 {
     LANTERN_FUNCTION_START
-    reinterpret_cast<LanternObject<torch::Tensor> *>(self)->get().remove_hook(pos);
+    from_raw::Tensor(self).remove_hook(pos);
     LANTERN_FUNCTION_END_VOID
 }
 
@@ -109,7 +109,7 @@ void *_lantern_variable_list_new()
 void _lantern_variable_list_push_back(void *self, void *x)
 {
     LANTERN_FUNCTION_START
-    auto t = reinterpret_cast<LanternObject<torch::Tensor> *>(x)->get();
+    auto t = from_raw::Tensor(x);
     reinterpret_cast<LanternObject<torch::autograd::variable_list> *>(self)->get().push_back(t);
     LANTERN_FUNCTION_END_VOID
 }
@@ -119,7 +119,7 @@ void *_lantern_variable_list_get(void *self, int64_t i)
     LANTERN_FUNCTION_START
     auto s = reinterpret_cast<LanternObject<torch::autograd::variable_list> *>(self)->get();
     torch::Tensor out = s[i];
-    return (void *)new LanternObject<torch::Tensor>(out);
+    return make_unique::Tensor(out);
     LANTERN_FUNCTION_END
 }
 
@@ -259,7 +259,7 @@ void *_lantern_autograd_grad(void *outputs, void *inputs, void *grad_outputs,
 void *_lantern_Tensor_grad_fn(void *self)
 {
     LANTERN_FUNCTION_START
-    auto t = reinterpret_cast<LanternObject<torch::Tensor> *>(self)->get();
+    auto t = from_raw::Tensor(self);
     auto f = t.grad_fn().get();
     return reinterpret_cast<void *>(f);
     LANTERN_FUNCTION_END
@@ -318,7 +318,7 @@ void _test_grad_fn()
     std::cout << "take 1" << std::endl;
     std::cout << y.grad_fn()->name() << std::endl;
     std::cout << "take 2" << std::endl;
-    auto o = (void *)new LanternObject<torch::Tensor>(y);
+    auto o = make_unique::Tensor(y);
     auto s = std::string(_lantern_Node_name(_lantern_Tensor_grad_fn(o)));
     std::cout << s << std::endl;
 

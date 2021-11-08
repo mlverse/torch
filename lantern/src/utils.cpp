@@ -170,7 +170,7 @@ void *_lantern_Tensor_undefined()
 {
   LANTERN_FUNCTION_START
   torch::Tensor x = {};
-  return (void *)new LanternObject<torch::Tensor>(x);
+  return make_unique::Tensor(x);
   LANTERN_FUNCTION_END
 }
 
@@ -263,10 +263,10 @@ void check_lantern_loaded() {}
 void* _lantern_nn_functional_pad_circular (void* input, void* padding)
 {
   LANTERN_FUNCTION_START
-  auto input_ = reinterpret_cast<LanternObject<torch::Tensor>*>(input)->get();
+  auto input_ = from_raw::Tensor(input);
   auto padding_ = reinterpret_cast<LanternObject<std::vector<int64_t>>*>(padding)->get();
   auto out = torch::nn::functional::_pad_circular(input_, padding_);
-  return (void*) new LanternObject<torch::Tensor>(out);
+  return make_unique::Tensor(out);
   LANTERN_FUNCTION_END
 }
 

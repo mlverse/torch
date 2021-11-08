@@ -27,7 +27,7 @@ bool _lantern_TensorIndex_is_empty (void* self)
 void _lantern_TensorIndex_append_tensor(void *self, void *x)
 {
     LANTERN_FUNCTION_START
-    torch::Tensor ten = reinterpret_cast<LanternObject<torch::Tensor> *>(x)->get();
+    torch::Tensor ten = from_raw::Tensor(x);
     reinterpret_cast<LanternObject<std::vector<at::indexing::TensorIndex>> *>(self)->get().push_back(ten);
     LANTERN_FUNCTION_END_VOID
 }
@@ -99,7 +99,7 @@ void *_lantern_Tensor_index(void *self, void *index)
     LANTERN_FUNCTION_START
     torch::Tensor ten = from_raw::Tensor(self);
     torch::Tensor out = ten.index(reinterpret_cast<LanternObject<std::vector<at::indexing::TensorIndex>> *>(index)->get());
-    return (void *)new LanternObject<torch::Tensor>(out);
+    return make_unique::Tensor(out);
     LANTERN_FUNCTION_END
 }
 

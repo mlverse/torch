@@ -255,15 +255,15 @@ void* _lantern_IValue_Tensor (void* self)
 {
     LANTERN_FUNCTION_START
     auto self_ = reinterpret_cast<torch::jit::IValue *>(self);
-    return (void *)new LanternObject<torch::Tensor>(self_->toTensor());
+    return make_unique::Tensor(self_->toTensor());
     LANTERN_FUNCTION_END
 }
 
 void* _lantern_IValue_from_Tensor (void* self)
 {
     LANTERN_FUNCTION_START
-    auto self_ = reinterpret_cast<LanternObject<torch::Tensor>*>(self);
-    return (void*) new torch::IValue(self_->get());
+    auto self_ = from_raw::Tensor(self);
+    return (void*) new torch::IValue(self_);
     LANTERN_FUNCTION_END
 }
 

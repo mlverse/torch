@@ -25,7 +25,7 @@ void* _lantern_OptionalTensorList ()
 void _lantern_TensorList_push_back(void *self, void *x)
 {
     LANTERN_FUNCTION_START
-    torch::Tensor ten = reinterpret_cast<LanternObject<torch::Tensor> *>(x)->get();
+    torch::Tensor ten = from_raw::Tensor(x);
     reinterpret_cast<LanternObject<std::vector<torch::Tensor>> *>(self)->get().push_back(ten);
     LANTERN_FUNCTION_END_VOID
 }
@@ -40,7 +40,7 @@ void _lantern_OptionalTensorList_push_back (void* self, void* x, bool is_null)
     }
     else
     {
-        tensor = reinterpret_cast<LanternObject<torch::Tensor>*>(x)->get();
+        tensor = from_raw::Tensor(x);
     }
     reinterpret_cast<LanternObject<c10::List<c10::optional<torch::Tensor>>>*>(self)->get().push_back(tensor);
     LANTERN_FUNCTION_END_VOID
@@ -57,7 +57,7 @@ void* _lantern_OptionalTensorList_at (void* self, int64_t i)
 {
     LANTERN_FUNCTION_START
     auto t = reinterpret_cast<LanternObject<c10::List<c10::optional<torch::Tensor>>>*>(self)->get().get(i);
-    return (void*) new LanternObject<torch::Tensor>(t.value());
+    return make_unique::Tensor(t.value());
     LANTERN_FUNCTION_END
 }
 
@@ -72,7 +72,7 @@ void* _lantern_TensorList_at(void *self, int64_t i)
 {
     LANTERN_FUNCTION_START
     torch::Tensor out = reinterpret_cast<LanternObject<std::vector<torch::Tensor>> *>(self)->get().at(i);
-    return (void *)new LanternObject<torch::Tensor>(out);
+    return make_unique::Tensor(out);
     LANTERN_FUNCTION_END
 }
 

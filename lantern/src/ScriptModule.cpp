@@ -100,7 +100,7 @@ void _lantern_ScriptModule_register_parameter (void* module, void* name, void* v
     LANTERN_FUNCTION_START
     auto module_ = reinterpret_cast<torch::jit::script::Module *>(module);
     auto name_ = reinterpret_cast<LanternObject<std::string>*>(name)->get();
-    auto v_ = reinterpret_cast<LanternObject<torch::Tensor>*>(v)->get();
+    auto v_ = from_raw::Tensor(v);
     module_->register_parameter(name_, v_, is_buffer);
     LANTERN_FUNCTION_END_VOID
 }
@@ -110,7 +110,7 @@ void _lantern_ScriptModule_register_buffer (void* module, void* name, void* v)
     LANTERN_FUNCTION_START
     auto module_ = reinterpret_cast<torch::jit::script::Module *>(module);
     auto name_ = reinterpret_cast<LanternObject<std::string>*>(name)->get();
-    auto v_ = reinterpret_cast<LanternObject<torch::Tensor>*>(v)->get();
+    auto v_ = from_raw::Tensor(v);
     module_->register_buffer(name_, v_);
     LANTERN_FUNCTION_END_VOID
 }

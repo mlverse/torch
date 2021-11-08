@@ -17,7 +17,7 @@ std::string size_t_to_string( std::size_t i) {
 const char  * _lantern_tensor_save (void* self)
 {
     LANTERN_FUNCTION_START
-    auto t = reinterpret_cast<LanternObject<torch::Tensor> *>(self)->get();
+    auto t = from_raw::Tensor(self);
 
     std::ostringstream oss;
     torch::save(t, oss);
@@ -50,21 +50,21 @@ void * _lantern_tensor_load (const char * s, void* device)
     torch::Tensor t;
     c10::optional<torch::Device> device_ = reinterpret_cast<LanternPtr<c10::optional<torch::Device>>*>(device)->get();
     torch::load(t, stream, device_);
-    return (void*) new LanternObject<torch::Tensor>(t);
+    return make_unique::Tensor(t);
     LANTERN_FUNCTION_END
 }
 
 void* _lantern_test_tensor ()
 {
     LANTERN_FUNCTION_START
-    return (void*) new LanternObject<torch::Tensor>(torch::ones({5, 5}));
+    return make_unique::Tensor(torch::ones({5, 5}));
     LANTERN_FUNCTION_END
 }
 
 void _lantern_test_print (void * x)
 {
     LANTERN_FUNCTION_START
-    auto t = reinterpret_cast<LanternObject<torch::Tensor> *>(x)->get();
+    auto t = from_raw::Tensor(x);
     std::cout << t << std::endl;
     LANTERN_FUNCTION_END_VOID
 }

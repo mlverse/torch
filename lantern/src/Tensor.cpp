@@ -11,7 +11,7 @@
 void *_lantern_from_blob(void *data, int64_t *sizes, size_t sizes_size, void *options)
 {
   LANTERN_FUNCTION_START
-  return (void *)new LanternObject<torch::Tensor>(torch::from_blob(
+  return make_unique::Tensor(torch::from_blob(
       data,
       std::vector<int64_t>(sizes, sizes + sizes_size),
       reinterpret_cast<LanternObject<torch::TensorOptions> *>(options)->get()));
@@ -23,7 +23,7 @@ const char *_lantern_Tensor_StreamInsertion(void *x)
   LANTERN_FUNCTION_START
   std::stringstream ss;
 
-  auto tensor = reinterpret_cast<LanternObject<torch::Tensor> *>(x)->get();
+  auto tensor = from_raw::Tensor(x);
 
   // the stream insertion method for quantized tensors does not
   // exist so we dequantize before printing.
@@ -43,49 +43,49 @@ const char *_lantern_Tensor_StreamInsertion(void *x)
 void *_lantern_Tensor_clone(void *self)
 {
   LANTERN_FUNCTION_START
-  torch::Tensor x = reinterpret_cast<LanternObject<torch::Tensor> *>(self)->get();
-  return (void *)new LanternObject<torch::Tensor>(x.clone());
+  torch::Tensor x = from_raw::Tensor(self);
+  return make_unique::Tensor(x.clone());
   LANTERN_FUNCTION_END
 }
 
 void *_lantern_Tensor_permute(void *self, void *dims)
 {
   LANTERN_FUNCTION_START
-  torch::Tensor x = reinterpret_cast<LanternObject<torch::Tensor> *>(self)->get();
+  torch::Tensor x = from_raw::Tensor(self);
   std::vector<int64_t> y = reinterpret_cast<LanternObject<std::vector<int64_t>> *>(dims)->get();
-  return (void *)new LanternObject<torch::Tensor>(x.permute(y));
+  return make_unique::Tensor(x.permute(y));
   LANTERN_FUNCTION_END
 }
 
 void *_lantern_Tensor_contiguous(void *self)
 {
   LANTERN_FUNCTION_START
-  torch::Tensor x = reinterpret_cast<LanternObject<torch::Tensor> *>(self)->get();
-  return (void *)new LanternObject<torch::Tensor>(x.contiguous());
+  torch::Tensor x = from_raw::Tensor(self);;
+  return make_unique::Tensor(x.contiguous());
   LANTERN_FUNCTION_END
 }
 
 void *_lantern_Tensor_to(void *self, void *options)
 {
   LANTERN_FUNCTION_START
-  torch::Tensor x = reinterpret_cast<LanternObject<torch::Tensor> *>(self)->get();
+  torch::Tensor x = from_raw::Tensor(self);;
   torch::TensorOptions y = reinterpret_cast<LanternObject<torch::TensorOptions> *>(options)->get();
-  return (void *)new LanternObject<torch::Tensor>(x.to(y));
+  return make_unique::Tensor(x.to(y));
   LANTERN_FUNCTION_END
 }
 
 void *_lantern_Tensor_set_requires_grad(void *self, bool requires_grad)
 {
   LANTERN_FUNCTION_START
-  torch::Tensor x = reinterpret_cast<LanternObject<torch::Tensor> *>(self)->get();
-  return (void *)new LanternObject<torch::Tensor>(x.set_requires_grad(requires_grad));
+  torch::Tensor x = from_raw::Tensor(self);;
+  return make_unique::Tensor(x.set_requires_grad(requires_grad));
   LANTERN_FUNCTION_END
 }
 
 double *_lantern_Tensor_data_ptr_double(void *self)
 {
   LANTERN_FUNCTION_START
-  torch::Tensor x = reinterpret_cast<LanternObject<torch::Tensor> *>(self)->get();
+  torch::Tensor x = from_raw::Tensor(self);;
   return x.data_ptr<double>();
   LANTERN_FUNCTION_END
 }
@@ -93,7 +93,7 @@ double *_lantern_Tensor_data_ptr_double(void *self)
 uint8_t *_lantern_Tensor_data_ptr_uint8_t(void *self)
 {
   LANTERN_FUNCTION_START
-  torch::Tensor x = reinterpret_cast<LanternObject<torch::Tensor> *>(self)->get();
+  torch::Tensor x = from_raw::Tensor(self);;
   return x.data_ptr<uint8_t>();
   LANTERN_FUNCTION_END
 }
@@ -101,7 +101,7 @@ uint8_t *_lantern_Tensor_data_ptr_uint8_t(void *self)
 int64_t *_lantern_Tensor_data_ptr_int64_t(void *self)
 {
   LANTERN_FUNCTION_START
-  torch::Tensor x = reinterpret_cast<LanternObject<torch::Tensor> *>(self)->get();
+  torch::Tensor x = from_raw::Tensor(self);;
   return x.data_ptr<int64_t>();
   LANTERN_FUNCTION_END
 }
@@ -109,7 +109,7 @@ int64_t *_lantern_Tensor_data_ptr_int64_t(void *self)
 int32_t *_lantern_Tensor_data_ptr_int32_t(void *self)
 {
   LANTERN_FUNCTION_START
-  torch::Tensor x = reinterpret_cast<LanternObject<torch::Tensor> *>(self)->get();
+  torch::Tensor x = from_raw::Tensor(self);;
   return x.data_ptr<int32_t>();
   LANTERN_FUNCTION_END
 }
@@ -117,7 +117,7 @@ int32_t *_lantern_Tensor_data_ptr_int32_t(void *self)
 int16_t *_lantern_Tensor_data_ptr_int16_t(void *self)
 {
   LANTERN_FUNCTION_START
-  torch::Tensor x = reinterpret_cast<LanternObject<torch::Tensor> *>(self)->get();
+  torch::Tensor x = from_raw::Tensor(self);;
   return x.data_ptr<int16_t>();
   LANTERN_FUNCTION_END
 }
@@ -125,7 +125,7 @@ int16_t *_lantern_Tensor_data_ptr_int16_t(void *self)
 bool *_lantern_Tensor_data_ptr_bool(void *self)
 {
   LANTERN_FUNCTION_START
-  torch::Tensor x = reinterpret_cast<LanternObject<torch::Tensor> *>(self)->get();
+  torch::Tensor x = from_raw::Tensor(self);;
   return x.data_ptr<bool>();
   LANTERN_FUNCTION_END
 }
@@ -133,7 +133,7 @@ bool *_lantern_Tensor_data_ptr_bool(void *self)
 int64_t _lantern_Tensor_numel(void *self)
 {
   LANTERN_FUNCTION_START
-  torch::Tensor x = reinterpret_cast<LanternObject<torch::Tensor> *>(self)->get();
+  torch::Tensor x = from_raw::Tensor(self);;
   return x.numel();
   LANTERN_FUNCTION_END_RET(0)
 }
@@ -141,7 +141,7 @@ int64_t _lantern_Tensor_numel(void *self)
 int64_t _lantern_Tensor_element_size(void *self)
 {
   LANTERN_FUNCTION_START
-  torch::Tensor x = reinterpret_cast<LanternObject<torch::Tensor> *>(self)->get();
+  torch::Tensor x = from_raw::Tensor(self);;
   return x.element_size();
   LANTERN_FUNCTION_END_RET(0)
 }
@@ -149,7 +149,7 @@ int64_t _lantern_Tensor_element_size(void *self)
 int64_t _lantern_Tensor_ndimension(void *self)
 {
   LANTERN_FUNCTION_START
-  torch::Tensor x = reinterpret_cast<LanternObject<torch::Tensor> *>(self)->get();
+  torch::Tensor x = from_raw::Tensor(self);;
   return x.ndimension();
   LANTERN_FUNCTION_END_RET(0)
 }
@@ -157,7 +157,7 @@ int64_t _lantern_Tensor_ndimension(void *self)
 int64_t _lantern_Tensor_size(void *self, int64_t i)
 {
   LANTERN_FUNCTION_START
-  torch::Tensor x = reinterpret_cast<LanternObject<torch::Tensor> *>(self)->get();
+  torch::Tensor x = from_raw::Tensor(self);;
   return x.size(i);
   LANTERN_FUNCTION_END_RET(0)
 }
@@ -165,7 +165,7 @@ int64_t _lantern_Tensor_size(void *self, int64_t i)
 void *_lantern_Tensor_dtype(void *self)
 {
   LANTERN_FUNCTION_START
-  torch::Tensor x = reinterpret_cast<LanternObject<torch::Tensor> *>(self)->get();
+  torch::Tensor x = from_raw::Tensor(self);;
   torch::Dtype dtype = c10::typeMetaToScalarType(x.dtype());
   return (void *)new LanternObject<torch::Dtype>(dtype);
   LANTERN_FUNCTION_END
@@ -174,7 +174,7 @@ void *_lantern_Tensor_dtype(void *self)
 void *_lantern_Tensor_device(void *self)
 {
   LANTERN_FUNCTION_START
-  torch::Tensor x = reinterpret_cast<LanternObject<torch::Tensor> *>(self)->get();
+  torch::Tensor x = from_raw::Tensor(self);;
   torch::Device device = x.device();
   return (void *)new LanternPtr<torch::Device>(device);
   LANTERN_FUNCTION_END
@@ -183,7 +183,7 @@ void *_lantern_Tensor_device(void *self)
 bool _lantern_Tensor_is_undefined(void *self)
 {
   LANTERN_FUNCTION_START
-  torch::Tensor x = reinterpret_cast<LanternObject<torch::Tensor> *>(self)->get();
+  torch::Tensor x = from_raw::Tensor(self);;
   return x.dtype() == torch::ScalarType::Undefined;
   LANTERN_FUNCTION_END_RET(false)
 }
@@ -191,7 +191,7 @@ bool _lantern_Tensor_is_undefined(void *self)
 bool _lantern_Tensor_is_contiguous(void *self)
 {
   LANTERN_FUNCTION_START
-  torch::Tensor x = reinterpret_cast<LanternObject<torch::Tensor> *>(self)->get();
+  torch::Tensor x = from_raw::Tensor(self);;
   return x.is_contiguous();
   LANTERN_FUNCTION_END_RET(false)
 }
@@ -199,7 +199,7 @@ bool _lantern_Tensor_is_contiguous(void *self)
 bool _lantern_Tensor_has_names (void * self)
 {
   LANTERN_FUNCTION_START
-  torch::Tensor x = reinterpret_cast<LanternObject<torch::Tensor> *>(self)->get();
+  torch::Tensor x = from_raw::Tensor(self);;
   return x.has_names();
   LANTERN_FUNCTION_END_RET(false)
 }
@@ -207,7 +207,7 @@ bool _lantern_Tensor_has_names (void * self)
 void* _lantern_Tensor_names (void* self)
 {
   LANTERN_FUNCTION_START
-  torch::Tensor x = reinterpret_cast<LanternObject<torch::Tensor> *>(self)->get();
+  torch::Tensor x = from_raw::Tensor(self);;
   std::vector<torch::Dimname> nms = x.names().vec();
   return (void *)new LanternPtr<std::vector<torch::Dimname>>(nms);
   LANTERN_FUNCTION_END
@@ -217,7 +217,7 @@ void* _lantern_Tensor_names (void* self)
 bool _lantern_Tensor_has_any_zeros (void * self)
 {
   LANTERN_FUNCTION_START
-  torch::Tensor x = reinterpret_cast<LanternObject<torch::Tensor> *>(self)->get();
+  torch::Tensor x = from_raw::Tensor(self);;
   return (x == 0).any().item().toBool();
   LANTERN_FUNCTION_END
 }
@@ -229,38 +229,38 @@ void* _lantern_normal_double_double_intarrayref_generator_tensoroptions (double 
   auto generator_ = reinterpret_cast<LanternObject<torch::Generator>*>(generator)->get();
   auto options_ = reinterpret_cast<LanternObject<torch::TensorOptions>*>(options)->get();
   auto ten = at::normal(mean, std, size_, generator_, options_);
-  return (void*) new LanternObject<torch::Tensor>(ten);
+  return make_unique::Tensor(ten);
   LANTERN_FUNCTION_END
 }
 
 void* _lantern_normal_tensor_tensor_generator (void* mean, void* std, void* generator)
 {
   LANTERN_FUNCTION_START
-  auto mean_ = reinterpret_cast<LanternObject<torch::Tensor>*>(mean)->get();
-  auto std_ = reinterpret_cast<LanternObject<torch::Tensor>*>(std)->get();
+  auto mean_ = from_raw::Tensor(mean);
+  auto std_ = from_raw::Tensor(std);
   auto generator_ = reinterpret_cast<LanternObject<torch::Generator>*>(generator)->get();
   auto ten = at::normal(mean_, std_, generator_);
-  return (void*) new LanternObject<torch::Tensor>(ten);
+  return make_unique::Tensor(ten);
   LANTERN_FUNCTION_END
 }
 
 void* _lantern_normal_double_tensor_generator (double mean, void* std, void* generator)
 {
   LANTERN_FUNCTION_START
-  auto std_ = reinterpret_cast<LanternObject<torch::Tensor>*>(std)->get();
+  auto std_ = from_raw::Tensor(std);
   auto generator_ = reinterpret_cast<LanternObject<torch::Generator>*>(generator)->get();
   auto ten = at::normal(mean, std_, generator_);
-  return (void*) new LanternObject<torch::Tensor>(ten);
+  return make_unique::Tensor(ten);
   LANTERN_FUNCTION_END
 }
 
 void* _lantern_normal_tensor_double_generator (void* mean, double std, void* generator)
 {
   LANTERN_FUNCTION_START
-  auto mean_ = reinterpret_cast<LanternObject<torch::Tensor>*>(mean)->get();
+  auto mean_ = from_raw::Tensor(mean);
   auto generator_ = reinterpret_cast<LanternObject<torch::Generator>*>(generator)->get();
   auto ten = at::normal(mean_, std, generator_);
-  return (void*) new LanternObject<torch::Tensor>(ten);
+  return make_unique::Tensor(ten);
   LANTERN_FUNCTION_END
 }
 
@@ -272,7 +272,7 @@ void *_lantern_optional_tensor(void* x, bool is_null)
     out = c10::nullopt;
   else
   {
-    torch::Tensor value = reinterpret_cast<LanternObject<torch::Tensor>*>(x)->get();
+    torch::Tensor value = from_raw::Tensor(x);
     out = value;
   }
     
@@ -290,14 +290,14 @@ bool _lantern_optional_tensor_has_value (void*x)
 void* _lantern_optional_tensor_value (void* x)
 {
   auto value = reinterpret_cast<LanternObject<c10::optional<torch::Tensor>>*>(x)->get();
-  return (void *)new LanternObject<torch::Tensor>(value.value());
+  return make_unique::Tensor(value.value());
 }
 
 void _lantern_tensor_set_pyobj (void*x, void* ptr)
 {
   LANTERN_FUNCTION_START
   PyObject * ptr_ = reinterpret_cast<PyObject*>(ptr);
-  auto t = reinterpret_cast<LanternObject<torch::Tensor>*>(x)->get();
+  auto t = from_raw::Tensor(x);
   t.unsafeGetTensorImpl()->set_pyobj(ptr_);
   LANTERN_FUNCTION_END_VOID
 }
@@ -305,7 +305,7 @@ void _lantern_tensor_set_pyobj (void*x, void* ptr)
 void* _lantern_tensor_get_pyobj (void* x)
 {
   LANTERN_FUNCTION_START
-  auto t = reinterpret_cast<LanternObject<torch::Tensor>*>(x)->get();
+  auto t = from_raw::Tensor(x);
   return t.unsafeGetTensorImpl()->pyobj();
   LANTERN_FUNCTION_END
 }

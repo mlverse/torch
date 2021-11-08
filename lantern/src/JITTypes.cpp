@@ -198,7 +198,7 @@ void _lantern_jit_TensorDict_push_back(void* self, void* key, void* value)
     auto self_ = reinterpret_cast<c10::Dict<std::string, torch::Tensor>*>(self);
     self_->insert(
         *reinterpret_cast<std::string*>(key),
-        reinterpret_cast<LanternObject<torch::Tensor>*>(value)->get()
+        from_raw::Tensor(value)
     );
     LANTERN_FUNCTION_END_VOID
 }

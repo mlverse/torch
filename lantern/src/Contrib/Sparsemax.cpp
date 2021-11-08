@@ -126,8 +126,8 @@ class SparseMaxFunction : public Function<SparseMaxFunction> {
 void * _lantern_contrib_torch_sparsemax (void * input, int dim)
 {
     LANTERN_FUNCTION_START
-    torch::Tensor t = reinterpret_cast<LanternObject<torch::Tensor> *>(input)->get();
+    torch::Tensor t = from_raw::Tensor(input);
     torch::Tensor res = SparseMaxFunction::apply(t, dim);
-    return (void*) new LanternObject<torch::Tensor>(res);
+    return make_unique::Tensor(res);
     LANTERN_FUNCTION_END
 }
