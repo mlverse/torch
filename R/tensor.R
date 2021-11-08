@@ -368,11 +368,6 @@ as_array.torch_tensor <- function(x) {
   out
 }
 
-
-#' Checks if object is a [torch_tensor]
-#'
-#' @param x object to check 
-#' @export
 is_torch_tensor <- function(x) {
   inherits(x, "torch_tensor")
 }

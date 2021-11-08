@@ -41,7 +41,7 @@ exp2 <- autograd_function(
     result
   },
   backward = function(ctx, grad_output) {
-    list(i = grad_output * ctx$saved_variables$result)
+    list(i = grad_output * ctx$saved_variable$result)
   }
 )
 
