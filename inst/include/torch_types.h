@@ -562,8 +562,6 @@ public:
 
 namespace torch
 {
-namespace types
-{
 using Tensor = XPtrTorchTensor;
 using TensorList = XPtrTorchTensorList;
 using ScalarType = XPtrTorchScalarType;
@@ -683,7 +681,7 @@ using TraceableFunction = XPtrTorchTraceableFunction;
 
 }
 }
-}
+
 
 
 #endif // TORCH_DYPES
