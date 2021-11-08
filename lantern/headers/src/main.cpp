@@ -130,11 +130,8 @@ std::string buildCalls(std::string name, YAML::Node node, size_t start)
         std::string type = removeAt(node[idx]["dynamic_type"].as<std::string>());
         std::string dtype = removeAt(node[idx]["type"].as<std::string>());
 
-        std::cout << type << std::endl;
-
         if (type == "IntArrayRef" & dtype != "c10::optional<IntArrayRef>")
         {
-            std::cout << "intarrayref" << std::endl;
             type = "std::vector<int64_t>";
         }
         else if (type == "ArrayRef<double>" & dtype != "c10::optional<ArrayRef<double>>")
@@ -163,12 +160,10 @@ std::string buildCalls(std::string name, YAML::Node node, size_t start)
         }
         else if (dtype == "const c10::optional<Tensor> &")
         {
-            std::cout << "optional tensor" << std::endl;
             type = "c10::optional<torch::Tensor>";
         }
         else if (type == "const at::Scalar &" && dtype == "const c10::optional<at::Scalar> &")
         {
-            std::cout << "optional scalar" << std::endl;
             type = "c10::optional<at::Scalar>";
         }
 
@@ -193,8 +188,19 @@ std::string buildCalls(std::string name, YAML::Node node, size_t start)
             type = "c10::optional<" + type + ">";
         }
 
-        arguments += "((" + lanternObject(type) + "<" + addNamespace(type) + ">*)" +
+
+        
+        if (type == "Tensor")
+        {
+            arguments += "from_raw::Tensor(" + call + ")";
+        }
+        else
+        {
+            arguments += "((" + lanternObject(type) + "<" + addNamespace(type) + ">*)" +
                      call + ")->get()";
+        }
+
+        
 
         if (type == "std::shared_ptr<torch::Generator>")
         {
@@ -300,7 +306,6 @@ std::string buildReturn(YAML::Node node)
 
     if (type == "torch::TensorList")
     {
-        std::cout << "hello" << std::endl;
         type = "std::vector<torch::Tensor>";
     }
 
@@ -359,8 +364,16 @@ int main(int argc, char *argv[])
             {
                 if (config[idx]["returns"].size() == 1)
                 {
-                    bodies.push_back("    return (void *) new LanternObject<" + returns + ">(" + functionCall + name + "(");
-                    bodies.push_back("        " + calls + "));");
+                    if (returns == "torch::Tensor")
+                    {
+                        bodies.push_back("    return make_unique::Tensor(" + functionCall + name + "(");
+                        bodies.push_back("        " + calls + "));");
+                    }
+                    else
+                    {
+                        bodies.push_back("    return (void *) new LanternObject<" + returns + ">(" + functionCall + name + "(");
+                        bodies.push_back("        " + calls + "));");
+                    }
                 }
                 else
                 {
@@ -378,12 +391,6 @@ int main(int argc, char *argv[])
         if (hasMethodOf(config[idx], "Tensor") || name == "stride")
         {
 
-            if (name == "stride" && function == "stride_tensor_intt")
-            {
-                std::cout << "writing stride \n";
-                std::cout << function << std::endl;
-            }
-
             headers.push_back("  LANTERN_API void* (LANTERN_PTR _lantern_Tensor_" + function + ")(" + arguments + ");");
             headers.push_back("  HOST_API void* lantern_Tensor_" + function + "(" + arguments + ") { void* ret = _lantern_Tensor_" + function + "(" + argumentsCalls + "); LANTERN_HOST_HANDLER return ret; }");
   
@@ -391,18 +398,21 @@ int main(int argc, char *argv[])
 
             std::string firstType = config[idx]["arguments"][0]["dynamic_type"].as<std::string>();
             std::string firstName = config[idx]["arguments"][0]["name"].as<std::string>();
-            functionCall = "((LanternObject<" + addNamespace(firstType) + ">*)" + firstName + ")->get().";
+
+            if (firstType == "at::Tensor" || firstType == "Tensor" || firstType == "torch::Tensor")
+            {
+                functionCall = "from_raw::Tensor(" + firstName + ").";
+            }
+            else
+            {
+                functionCall = "((LanternObject<" + addNamespace(firstType) + ">*)" + firstName + ")->get().";
+            }
 
             bool skipCuda102 = function == "true_divide_tensor_scalar" ||
                                function == "true_divide__tensor_scalar" ||
                                function == "true_divide_tensor_tensor" ||
                                function == "true_divide__tensor_tensor";
 
-            if (name == "stride" && function == "stride_tensor_intt")
-            {
-                std::cout << "writing stride \n";
-                std::cout << function << std::endl;
-            }
 
             bodies.push_back("void* _lantern_Tensor_" + function + "(" + arguments + ")");
             bodies.push_back("{");
@@ -422,8 +432,16 @@ int main(int argc, char *argv[])
             {
                 if (config[idx]["returns"].size() == 1)
                 {
-                    bodies.push_back("    return (void *) new LanternObject<" + returns + ">(" + functionCall + name + "(");
-                    bodies.push_back("        " + calls + "));");
+                    if (returns == "torch::Tensor")
+                    {
+                        bodies.push_back("    return make_unique::Tensor(" + functionCall + name + "(");
+                        bodies.push_back("        " + calls + "));");
+                    }
+                    else
+                    {
+                        bodies.push_back("    return (void *) new LanternObject<" + returns + ">(" + functionCall + name + "(");
+                        bodies.push_back("        " + calls + "));");
+                    }
                 }
                 else
                 {
