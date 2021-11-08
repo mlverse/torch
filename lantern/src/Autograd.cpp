@@ -41,16 +41,16 @@ bool _lantern_autograd_is_enabled ()
 void *_lantern_Tensor_grad(void *self)
 {
     LANTERN_FUNCTION_START
-    auto out = reinterpret_cast<LanternObject<torch::Tensor> *>(self)->get().grad();
-    return (void *)new LanternObject<torch::Tensor>(out);
+    auto out = from_raw::Tensor(self).grad();
+    return make_unique::Tensor(out);
     LANTERN_FUNCTION_END
 }
 
 void _lantern_Tensor_set_grad_(void* self, void * new_grad)
 {
     LANTERN_FUNCTION_START
-    auto t =  reinterpret_cast<LanternObject<torch::Tensor> *>(self)->get();
-    auto g = reinterpret_cast<LanternObject<torch::Tensor> *>(new_grad)->get();
+    auto t =  from_raw::Tensor(self);
+    auto g =  from_raw::Tensor(new_grad);
     t.mutable_grad() = g;
     LANTERN_FUNCTION_END_VOID
 }
