@@ -4,6 +4,7 @@
 
 #include "lantern/lantern.h"
 
+#include <ATen/cuda/CUDAContext.h>
 #include <torch/torch.h>
 
 #include "utils.hpp"
@@ -34,4 +35,13 @@ void _lantern_cuda_show_config()
     LANTERN_FUNCTION_START
     std::cout << at::detail::getCUDAHooks().showConfig() << std::endl;
     LANTERN_FUNCTION_END_VOID
+}
+
+void* _lantern_cuda_get_device_capability(int64_t device)
+{
+    LANTERN_FUNCTION_START
+    cudaDeviceProp * devprop = at::cuda::getDeviceProperties(device);
+    std::vector<int64_t> cap = {devprop->major, devprop->minor};
+    return (void*) new LanternObject<std::vector<int64_t>>(cap);
+    LANTERN_FUNCTION_END
 }

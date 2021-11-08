@@ -2163,6 +2163,15 @@ HOST_API void* lantern_optional_tensor_value (void* x)
   return ret;
 }
 
+LANTERN_API void* (LANTERN_PTR _lantern_cuda_get_device_capability) (int64_t device);
+HOST_API void* lantern_cuda_get_device_capability (int64_t device)
+{
+  LANTERN_CHECK_LOADED
+  void* ret = _lantern_cuda_get_device_capability(device);
+  LANTERN_HOST_HANDLER;
+  return ret;
+}
+
   /* Autogen Headers -- Start */
   LANTERN_API void* (LANTERN_PTR _lantern__cast_byte_tensor_bool)(void* self, void* non_blocking);
   HOST_API void* lantern__cast_byte_tensor_bool(void* self, void* non_blocking) { LANTERN_CHECK_LOADED void* ret = _lantern__cast_byte_tensor_bool(self, non_blocking); LANTERN_HOST_HANDLER return ret; }
@@ -7749,6 +7758,7 @@ LOAD_SYMBOL(_lantern_OptionalTensorList_size);
 LOAD_SYMBOL(_lantern_OptionalTensorList_at);
 LOAD_SYMBOL(_lantern_OptionalTensorList_at_is_null);
 LOAD_SYMBOL(_lantern_optional_tensor_value);
+LOAD_SYMBOL(_lantern_cuda_get_device_capability);
   /* Autogen Symbols -- Start */
   LOAD_SYMBOL(_lantern__cast_byte_tensor_bool)
   LOAD_SYMBOL(_lantern__cast_char_tensor_bool)
