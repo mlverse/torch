@@ -270,4 +270,22 @@ void* _lantern_nn_functional_pad_circular (void* input, void* padding)
   LANTERN_FUNCTION_END
 }
 
+template<class T>
+void* make_ptr (const T& x) {
+  return (void*) std::make_unique<T>(x).release();
+}
+
+namespace make_unique {
+  void* Tensor (const torch::Tensor& x)
+  {
+    return make_ptr<torch::Tensor>(x);
+  }
+}
+
+#define LANTERN_FROM_RAW(name, type) \
+  type& name(void* x) {return reinterpret_cast<LanternObject<type>*>(x)->get();}
+
+namespace from_raw {
+  LANTERN_FROM_RAW(Tensor, torch::Tensor)
+}
 

@@ -81,3 +81,18 @@ struct NamedTupleHelper {
     std::vector<torch::IValue> elements;
     std::vector<std::string> names;
 };
+
+namespace make_unique {
+  void* Tensor (const torch::Tensor& x);
+}
+
+#define LANTERN_FROM_RAW_DECL(name, type)                                                 \
+  type& name (void* x);                 
+
+namespace from_raw {
+  LANTERN_FROM_RAW_DECL(Tensor, torch::Tensor)
+}
+
+// operator type () const;                                           \
+//    operator type& ();                                          \
+//    type value(); \
