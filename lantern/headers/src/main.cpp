@@ -202,6 +202,10 @@ std::string buildCalls(std::string name, YAML::Node node, size_t start)
         {
             arguments += "from_raw::Scalar(" + call + ")";
         }
+        else if (type == "TensorOptions")
+        {
+            arguments += "from_raw::TensorOptions(" + call + ")";
+        }
         else
         {
             arguments += "((" + lanternObject(type) + "<" + addNamespace(type) + ">*)" +
@@ -387,6 +391,11 @@ int main(int argc, char *argv[])
                         bodies.push_back("    return make_unique::Scalar(" + functionCall + name + "(");
                         bodies.push_back("        " + calls + "));");
                     }
+                    else if (returns == "torch::TensorOptions")
+                    {
+                        bodies.push_back("    return make_unique::TensorOptions(" + functionCall + name + "(");
+                        bodies.push_back("        " + calls + "));");
+                    }
                     else
                     {
                         bodies.push_back("    return (void *) new LanternObject<" + returns + ">(" + functionCall + name + "(");
@@ -468,6 +477,11 @@ int main(int argc, char *argv[])
                     else if (returns == "torch::Scalar")
                     {
                         bodies.push_back("    return make_unique::Scalar(" + functionCall + name + "(");
+                        bodies.push_back("        " + calls + "));");
+                    }
+                    else if (returns == "torch::TensorOptions")
+                    {
+                        bodies.push_back("    return make_unique::TensorOptions(" + functionCall + name + "(");
                         bodies.push_back("        " + calls + "));");
                     }
                     else

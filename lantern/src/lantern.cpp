@@ -323,7 +323,7 @@ void* _lantern__cudnn_init_dropout_state_double_bool_intt_tensoroptions(void* dr
 {
   LANTERN_FUNCTION_START
     return make_unique::Tensor(torch::_cudnn_init_dropout_state(
-        ((LanternObject<double>*)dropout)->get(), ((LanternObject<bool>*)train)->get(), ((LanternObject<int64_t>*)dropout_seed)->get(), ((LanternObject<torch::TensorOptions>*)options)->get()));
+        ((LanternObject<double>*)dropout)->get(), ((LanternObject<bool>*)train)->get(), ((LanternObject<int64_t>*)dropout_seed)->get(), from_raw::TensorOptions(options)));
   LANTERN_FUNCTION_END
 }
 
@@ -1043,7 +1043,7 @@ void* _lantern_arange_scalar_tensoroptions(void* end, void* options)
 {
   LANTERN_FUNCTION_START
     return make_unique::Tensor(torch::arange(
-        from_raw::Scalar(end), ((LanternObject<torch::TensorOptions>*)options)->get()));
+        from_raw::Scalar(end), from_raw::TensorOptions(options)));
   LANTERN_FUNCTION_END
 }
 
@@ -1051,7 +1051,7 @@ void* _lantern_arange_scalar_scalar_tensoroptions(void* start, void* end, void* 
 {
   LANTERN_FUNCTION_START
     return make_unique::Tensor(torch::arange(
-        from_raw::Scalar(start), from_raw::Scalar(end), ((LanternObject<torch::TensorOptions>*)options)->get()));
+        from_raw::Scalar(start), from_raw::Scalar(end), from_raw::TensorOptions(options)));
   LANTERN_FUNCTION_END
 }
 
@@ -1059,7 +1059,7 @@ void* _lantern_arange_scalar_scalar_scalar_tensoroptions(void* start, void* end,
 {
   LANTERN_FUNCTION_START
     return make_unique::Tensor(torch::arange(
-        from_raw::Scalar(start), from_raw::Scalar(end), from_raw::Scalar(step), ((LanternObject<torch::TensorOptions>*)options)->get()));
+        from_raw::Scalar(start), from_raw::Scalar(end), from_raw::Scalar(step), from_raw::TensorOptions(options)));
   LANTERN_FUNCTION_END
 }
 
@@ -1659,7 +1659,7 @@ void* _lantern_bartlett_window_intt_tensoroptions(void* window_length, void* opt
 {
   LANTERN_FUNCTION_START
     return make_unique::Tensor(torch::bartlett_window(
-        ((LanternObject<int64_t>*)window_length)->get(), ((LanternObject<torch::TensorOptions>*)options)->get()));
+        ((LanternObject<int64_t>*)window_length)->get(), from_raw::TensorOptions(options)));
   LANTERN_FUNCTION_END
 }
 
@@ -1667,7 +1667,7 @@ void* _lantern_bartlett_window_intt_bool_tensoroptions(void* window_length, void
 {
   LANTERN_FUNCTION_START
     return make_unique::Tensor(torch::bartlett_window(
-        ((LanternObject<int64_t>*)window_length)->get(), ((LanternObject<bool>*)periodic)->get(), ((LanternObject<torch::TensorOptions>*)options)->get()));
+        ((LanternObject<int64_t>*)window_length)->get(), ((LanternObject<bool>*)periodic)->get(), from_raw::TensorOptions(options)));
   LANTERN_FUNCTION_END
 }
 
@@ -2059,7 +2059,7 @@ void* _lantern_blackman_window_intt_tensoroptions(void* window_length, void* opt
 {
   LANTERN_FUNCTION_START
     return make_unique::Tensor(torch::blackman_window(
-        ((LanternObject<int64_t>*)window_length)->get(), ((LanternObject<torch::TensorOptions>*)options)->get()));
+        ((LanternObject<int64_t>*)window_length)->get(), from_raw::TensorOptions(options)));
   LANTERN_FUNCTION_END
 }
 
@@ -2067,7 +2067,7 @@ void* _lantern_blackman_window_intt_bool_tensoroptions(void* window_length, void
 {
   LANTERN_FUNCTION_START
     return make_unique::Tensor(torch::blackman_window(
-        ((LanternObject<int64_t>*)window_length)->get(), ((LanternObject<bool>*)periodic)->get(), ((LanternObject<torch::TensorOptions>*)options)->get()));
+        ((LanternObject<int64_t>*)window_length)->get(), ((LanternObject<bool>*)periodic)->get(), from_raw::TensorOptions(options)));
   LANTERN_FUNCTION_END
 }
 
@@ -4067,7 +4067,7 @@ void* _lantern_empty_intarrayref_dimnamelist_tensoroptions_memoryformat(void* si
 {
   LANTERN_FUNCTION_START
     return make_unique::Tensor(torch::empty(
-        ((LanternObject<std::vector<int64_t>>*)size)->get(), ((LanternPtr<std::vector<torch::Dimname>>*)names)->get(), ((LanternObject<torch::TensorOptions>*)options)->get(), ((LanternObject<c10::optional<torch::MemoryFormat>>*)optional<torch::MemoryFormat>(memory_format).get())->get()));
+        ((LanternObject<std::vector<int64_t>>*)size)->get(), ((LanternPtr<std::vector<torch::Dimname>>*)names)->get(), from_raw::TensorOptions(options), ((LanternObject<c10::optional<torch::MemoryFormat>>*)optional<torch::MemoryFormat>(memory_format).get())->get()));
   LANTERN_FUNCTION_END
 }
 
@@ -4075,7 +4075,7 @@ void* _lantern_empty_intarrayref_tensoroptions_memoryformat(void* size, void* op
 {
   LANTERN_FUNCTION_START
     return make_unique::Tensor(torch::empty(
-        ((LanternObject<std::vector<int64_t>>*)size)->get(), ((LanternObject<torch::TensorOptions>*)options)->get(), ((LanternObject<c10::optional<torch::MemoryFormat>>*)optional<torch::MemoryFormat>(memory_format).get())->get()));
+        ((LanternObject<std::vector<int64_t>>*)size)->get(), from_raw::TensorOptions(options), ((LanternObject<c10::optional<torch::MemoryFormat>>*)optional<torch::MemoryFormat>(memory_format).get())->get()));
   LANTERN_FUNCTION_END
 }
 
@@ -4083,7 +4083,7 @@ void* _lantern_Tensor_new_empty_tensor_intarrayref_tensoroptions(void* self, voi
 {
   LANTERN_FUNCTION_START
     return make_unique::Tensor(from_raw::Tensor(self).new_empty(
-        ((LanternObject<std::vector<int64_t>>*)size)->get(), ((LanternObject<torch::TensorOptions>*)options)->get()));
+        ((LanternObject<std::vector<int64_t>>*)size)->get(), from_raw::TensorOptions(options)));
   LANTERN_FUNCTION_END
 }
 
@@ -4091,7 +4091,7 @@ void* _lantern_Tensor_new_empty_strided_tensor_intarrayref_intarrayref_tensoropt
 {
   LANTERN_FUNCTION_START
     return make_unique::Tensor(from_raw::Tensor(self).new_empty_strided(
-        ((LanternObject<std::vector<int64_t>>*)size)->get(), ((LanternObject<std::vector<int64_t>>*)stride)->get(), ((LanternObject<torch::TensorOptions>*)options)->get()));
+        ((LanternObject<std::vector<int64_t>>*)size)->get(), ((LanternObject<std::vector<int64_t>>*)stride)->get(), from_raw::TensorOptions(options)));
   LANTERN_FUNCTION_END
 }
 
@@ -4099,7 +4099,7 @@ void* _lantern_Tensor_new_full_tensor_intarrayref_scalar_tensoroptions(void* sel
 {
   LANTERN_FUNCTION_START
     return make_unique::Tensor(from_raw::Tensor(self).new_full(
-        ((LanternObject<std::vector<int64_t>>*)size)->get(), from_raw::Scalar(fill_value), ((LanternObject<torch::TensorOptions>*)options)->get()));
+        ((LanternObject<std::vector<int64_t>>*)size)->get(), from_raw::Scalar(fill_value), from_raw::TensorOptions(options)));
   LANTERN_FUNCTION_END
 }
 
@@ -4107,7 +4107,7 @@ void* _lantern_Tensor_new_zeros_tensor_intarrayref_tensoroptions(void* self, voi
 {
   LANTERN_FUNCTION_START
     return make_unique::Tensor(from_raw::Tensor(self).new_zeros(
-        ((LanternObject<std::vector<int64_t>>*)size)->get(), ((LanternObject<torch::TensorOptions>*)options)->get()));
+        ((LanternObject<std::vector<int64_t>>*)size)->get(), from_raw::TensorOptions(options)));
   LANTERN_FUNCTION_END
 }
 
@@ -4115,7 +4115,7 @@ void* _lantern__empty_affine_quantized_intarrayref_tensoroptions_double_intt_mem
 {
   LANTERN_FUNCTION_START
     return make_unique::Tensor(torch::_empty_affine_quantized(
-        ((LanternObject<std::vector<int64_t>>*)size)->get(), ((LanternObject<torch::TensorOptions>*)options)->get(), ((LanternObject<double>*)scale)->get(), ((LanternObject<int64_t>*)zero_point)->get(), ((LanternObject<c10::optional<torch::MemoryFormat>>*)optional<torch::MemoryFormat>(memory_format).get())->get()));
+        ((LanternObject<std::vector<int64_t>>*)size)->get(), from_raw::TensorOptions(options), ((LanternObject<double>*)scale)->get(), ((LanternObject<int64_t>*)zero_point)->get(), ((LanternObject<c10::optional<torch::MemoryFormat>>*)optional<torch::MemoryFormat>(memory_format).get())->get()));
   LANTERN_FUNCTION_END
 }
 
@@ -4123,7 +4123,7 @@ void* _lantern__empty_per_channel_affine_quantized_intarrayref_tensor_tensor_int
 {
   LANTERN_FUNCTION_START
     return make_unique::Tensor(torch::_empty_per_channel_affine_quantized(
-        ((LanternObject<std::vector<int64_t>>*)size)->get(), from_raw::Tensor(scales), from_raw::Tensor(zero_points), ((LanternObject<int64_t>*)axis)->get(), ((LanternObject<torch::TensorOptions>*)options)->get(), ((LanternObject<c10::optional<torch::MemoryFormat>>*)optional<torch::MemoryFormat>(memory_format).get())->get()));
+        ((LanternObject<std::vector<int64_t>>*)size)->get(), from_raw::Tensor(scales), from_raw::Tensor(zero_points), ((LanternObject<int64_t>*)axis)->get(), from_raw::TensorOptions(options), ((LanternObject<c10::optional<torch::MemoryFormat>>*)optional<torch::MemoryFormat>(memory_format).get())->get()));
   LANTERN_FUNCTION_END
 }
 
@@ -4155,7 +4155,7 @@ void* _lantern_empty_like_tensor_tensoroptions_memoryformat(void* self, void* op
 {
   LANTERN_FUNCTION_START
     return make_unique::Tensor(torch::empty_like(
-        from_raw::Tensor(self), ((LanternObject<torch::TensorOptions>*)options)->get(), ((LanternObject<c10::optional<torch::MemoryFormat>>*)optional<torch::MemoryFormat>(memory_format).get())->get()));
+        from_raw::Tensor(self), from_raw::TensorOptions(options), ((LanternObject<c10::optional<torch::MemoryFormat>>*)optional<torch::MemoryFormat>(memory_format).get())->get()));
   LANTERN_FUNCTION_END
 }
 
@@ -4163,7 +4163,7 @@ void* _lantern_empty_strided_intarrayref_intarrayref_tensoroptions(void* size, v
 {
   LANTERN_FUNCTION_START
     return make_unique::Tensor(torch::empty_strided(
-        ((LanternObject<std::vector<int64_t>>*)size)->get(), ((LanternObject<std::vector<int64_t>>*)stride)->get(), ((LanternObject<torch::TensorOptions>*)options)->get()));
+        ((LanternObject<std::vector<int64_t>>*)size)->get(), ((LanternObject<std::vector<int64_t>>*)stride)->get(), from_raw::TensorOptions(options)));
   LANTERN_FUNCTION_END
 }
 
@@ -4387,7 +4387,7 @@ void* _lantern_eye_intt_tensoroptions(void* n, void* options)
 {
   LANTERN_FUNCTION_START
     return make_unique::Tensor(torch::eye(
-        ((LanternObject<int64_t>*)n)->get(), ((LanternObject<torch::TensorOptions>*)options)->get()));
+        ((LanternObject<int64_t>*)n)->get(), from_raw::TensorOptions(options)));
   LANTERN_FUNCTION_END
 }
 
@@ -4395,7 +4395,7 @@ void* _lantern_eye_intt_intt_tensoroptions(void* n, void* m, void* options)
 {
   LANTERN_FUNCTION_START
     return make_unique::Tensor(torch::eye(
-        ((LanternObject<int64_t>*)n)->get(), ((LanternObject<int64_t>*)m)->get(), ((LanternObject<torch::TensorOptions>*)options)->get()));
+        ((LanternObject<int64_t>*)n)->get(), ((LanternObject<int64_t>*)m)->get(), from_raw::TensorOptions(options)));
   LANTERN_FUNCTION_END
 }
 
@@ -4667,7 +4667,7 @@ void* _lantern_full_intarrayref_scalar_dimnamelist_tensoroptions(void* size, voi
 {
   LANTERN_FUNCTION_START
     return make_unique::Tensor(torch::full(
-        ((LanternObject<std::vector<int64_t>>*)size)->get(), from_raw::Scalar(fill_value), ((LanternPtr<std::vector<torch::Dimname>>*)names)->get(), ((LanternObject<torch::TensorOptions>*)options)->get()));
+        ((LanternObject<std::vector<int64_t>>*)size)->get(), from_raw::Scalar(fill_value), ((LanternPtr<std::vector<torch::Dimname>>*)names)->get(), from_raw::TensorOptions(options)));
   LANTERN_FUNCTION_END
 }
 
@@ -4675,7 +4675,7 @@ void* _lantern_full_intarrayref_scalar_tensoroptions(void* size, void* fill_valu
 {
   LANTERN_FUNCTION_START
     return make_unique::Tensor(torch::full(
-        ((LanternObject<std::vector<int64_t>>*)size)->get(), from_raw::Scalar(fill_value), ((LanternObject<torch::TensorOptions>*)options)->get()));
+        ((LanternObject<std::vector<int64_t>>*)size)->get(), from_raw::Scalar(fill_value), from_raw::TensorOptions(options)));
   LANTERN_FUNCTION_END
 }
 
@@ -4691,7 +4691,7 @@ void* _lantern_full_like_tensor_scalar_tensoroptions_memoryformat(void* self, vo
 {
   LANTERN_FUNCTION_START
     return make_unique::Tensor(torch::full_like(
-        from_raw::Tensor(self), from_raw::Scalar(fill_value), ((LanternObject<torch::TensorOptions>*)options)->get(), ((LanternObject<c10::optional<torch::MemoryFormat>>*)optional<torch::MemoryFormat>(memory_format).get())->get()));
+        from_raw::Tensor(self), from_raw::Scalar(fill_value), from_raw::TensorOptions(options), ((LanternObject<c10::optional<torch::MemoryFormat>>*)optional<torch::MemoryFormat>(memory_format).get())->get()));
   LANTERN_FUNCTION_END
 }
 
@@ -4699,7 +4699,7 @@ void* _lantern_from_file_stdstring_bool_intt_tensoroptions(void* filename, void*
 {
   LANTERN_FUNCTION_START
     return make_unique::Tensor(torch::from_file(
-        ((LanternObject<std::string>*)filename)->get(), ((LanternObject<c10::optional<bool>>*)optional<bool>(shared).get())->get(), ((LanternObject<c10::optional<int64_t>>*)size)->get(), ((LanternObject<torch::TensorOptions>*)options)->get()));
+        ((LanternObject<std::string>*)filename)->get(), ((LanternObject<c10::optional<bool>>*)optional<bool>(shared).get())->get(), ((LanternObject<c10::optional<int64_t>>*)size)->get(), from_raw::TensorOptions(options)));
   LANTERN_FUNCTION_END
 }
 
@@ -4843,7 +4843,7 @@ void* _lantern_hann_window_intt_tensoroptions(void* window_length, void* options
 {
   LANTERN_FUNCTION_START
     return make_unique::Tensor(torch::hann_window(
-        ((LanternObject<int64_t>*)window_length)->get(), ((LanternObject<torch::TensorOptions>*)options)->get()));
+        ((LanternObject<int64_t>*)window_length)->get(), from_raw::TensorOptions(options)));
   LANTERN_FUNCTION_END
 }
 
@@ -4851,7 +4851,7 @@ void* _lantern_hann_window_intt_bool_tensoroptions(void* window_length, void* pe
 {
   LANTERN_FUNCTION_START
     return make_unique::Tensor(torch::hann_window(
-        ((LanternObject<int64_t>*)window_length)->get(), ((LanternObject<bool>*)periodic)->get(), ((LanternObject<torch::TensorOptions>*)options)->get()));
+        ((LanternObject<int64_t>*)window_length)->get(), ((LanternObject<bool>*)periodic)->get(), from_raw::TensorOptions(options)));
   LANTERN_FUNCTION_END
 }
 
@@ -4859,7 +4859,7 @@ void* _lantern_hamming_window_intt_tensoroptions(void* window_length, void* opti
 {
   LANTERN_FUNCTION_START
     return make_unique::Tensor(torch::hamming_window(
-        ((LanternObject<int64_t>*)window_length)->get(), ((LanternObject<torch::TensorOptions>*)options)->get()));
+        ((LanternObject<int64_t>*)window_length)->get(), from_raw::TensorOptions(options)));
   LANTERN_FUNCTION_END
 }
 
@@ -4867,7 +4867,7 @@ void* _lantern_hamming_window_intt_bool_tensoroptions(void* window_length, void*
 {
   LANTERN_FUNCTION_START
     return make_unique::Tensor(torch::hamming_window(
-        ((LanternObject<int64_t>*)window_length)->get(), ((LanternObject<bool>*)periodic)->get(), ((LanternObject<torch::TensorOptions>*)options)->get()));
+        ((LanternObject<int64_t>*)window_length)->get(), ((LanternObject<bool>*)periodic)->get(), from_raw::TensorOptions(options)));
   LANTERN_FUNCTION_END
 }
 
@@ -4875,7 +4875,7 @@ void* _lantern_hamming_window_intt_bool_double_tensoroptions(void* window_length
 {
   LANTERN_FUNCTION_START
     return make_unique::Tensor(torch::hamming_window(
-        ((LanternObject<int64_t>*)window_length)->get(), ((LanternObject<bool>*)periodic)->get(), ((LanternObject<double>*)alpha)->get(), ((LanternObject<torch::TensorOptions>*)options)->get()));
+        ((LanternObject<int64_t>*)window_length)->get(), ((LanternObject<bool>*)periodic)->get(), ((LanternObject<double>*)alpha)->get(), from_raw::TensorOptions(options)));
   LANTERN_FUNCTION_END
 }
 
@@ -4883,7 +4883,7 @@ void* _lantern_hamming_window_intt_bool_double_double_tensoroptions(void* window
 {
   LANTERN_FUNCTION_START
     return make_unique::Tensor(torch::hamming_window(
-        ((LanternObject<int64_t>*)window_length)->get(), ((LanternObject<bool>*)periodic)->get(), ((LanternObject<double>*)alpha)->get(), ((LanternObject<double>*)beta)->get(), ((LanternObject<torch::TensorOptions>*)options)->get()));
+        ((LanternObject<int64_t>*)window_length)->get(), ((LanternObject<bool>*)periodic)->get(), ((LanternObject<double>*)alpha)->get(), ((LanternObject<double>*)beta)->get(), from_raw::TensorOptions(options)));
   LANTERN_FUNCTION_END
 }
 
@@ -4891,7 +4891,7 @@ void* _lantern_kaiser_window_intt_tensoroptions(void* window_length, void* optio
 {
   LANTERN_FUNCTION_START
     return make_unique::Tensor(torch::kaiser_window(
-        ((LanternObject<int64_t>*)window_length)->get(), ((LanternObject<torch::TensorOptions>*)options)->get()));
+        ((LanternObject<int64_t>*)window_length)->get(), from_raw::TensorOptions(options)));
   LANTERN_FUNCTION_END
 }
 
@@ -4899,7 +4899,7 @@ void* _lantern_kaiser_window_intt_bool_tensoroptions(void* window_length, void* 
 {
   LANTERN_FUNCTION_START
     return make_unique::Tensor(torch::kaiser_window(
-        ((LanternObject<int64_t>*)window_length)->get(), ((LanternObject<bool>*)periodic)->get(), ((LanternObject<torch::TensorOptions>*)options)->get()));
+        ((LanternObject<int64_t>*)window_length)->get(), ((LanternObject<bool>*)periodic)->get(), from_raw::TensorOptions(options)));
   LANTERN_FUNCTION_END
 }
 
@@ -4907,7 +4907,7 @@ void* _lantern_kaiser_window_intt_bool_double_tensoroptions(void* window_length,
 {
   LANTERN_FUNCTION_START
     return make_unique::Tensor(torch::kaiser_window(
-        ((LanternObject<int64_t>*)window_length)->get(), ((LanternObject<bool>*)periodic)->get(), ((LanternObject<double>*)beta)->get(), ((LanternObject<torch::TensorOptions>*)options)->get()));
+        ((LanternObject<int64_t>*)window_length)->get(), ((LanternObject<bool>*)periodic)->get(), ((LanternObject<double>*)beta)->get(), from_raw::TensorOptions(options)));
   LANTERN_FUNCTION_END
 }
 
@@ -5611,7 +5611,7 @@ void* _lantern_linspace_scalar_scalar_intt_tensoroptions(void* start, void* end,
 {
   LANTERN_FUNCTION_START
     return make_unique::Tensor(torch::linspace(
-        from_raw::Scalar(start), from_raw::Scalar(end), ((LanternObject<c10::optional<int64_t>>*)steps)->get(), ((LanternObject<torch::TensorOptions>*)options)->get()));
+        from_raw::Scalar(start), from_raw::Scalar(end), ((LanternObject<c10::optional<int64_t>>*)steps)->get(), from_raw::TensorOptions(options)));
   LANTERN_FUNCTION_END
 }
 
@@ -5947,7 +5947,7 @@ void* _lantern_logspace_scalar_scalar_intt_double_tensoroptions(void* start, voi
 {
   LANTERN_FUNCTION_START
     return make_unique::Tensor(torch::logspace(
-        from_raw::Scalar(start), from_raw::Scalar(end), ((LanternObject<c10::optional<int64_t>>*)steps)->get(), ((LanternObject<double>*)base)->get(), ((LanternObject<torch::TensorOptions>*)options)->get()));
+        from_raw::Scalar(start), from_raw::Scalar(end), ((LanternObject<c10::optional<int64_t>>*)steps)->get(), ((LanternObject<double>*)base)->get(), from_raw::TensorOptions(options)));
   LANTERN_FUNCTION_END
 }
 
@@ -7291,7 +7291,7 @@ void* _lantern_ones_intarrayref_dimnamelist_tensoroptions(void* size, void* name
 {
   LANTERN_FUNCTION_START
     return make_unique::Tensor(torch::ones(
-        ((LanternObject<std::vector<int64_t>>*)size)->get(), ((LanternPtr<std::vector<torch::Dimname>>*)names)->get(), ((LanternObject<torch::TensorOptions>*)options)->get()));
+        ((LanternObject<std::vector<int64_t>>*)size)->get(), ((LanternPtr<std::vector<torch::Dimname>>*)names)->get(), from_raw::TensorOptions(options)));
   LANTERN_FUNCTION_END
 }
 
@@ -7299,7 +7299,7 @@ void* _lantern_ones_intarrayref_tensoroptions(void* size, void* options)
 {
   LANTERN_FUNCTION_START
     return make_unique::Tensor(torch::ones(
-        ((LanternObject<std::vector<int64_t>>*)size)->get(), ((LanternObject<torch::TensorOptions>*)options)->get()));
+        ((LanternObject<std::vector<int64_t>>*)size)->get(), from_raw::TensorOptions(options)));
   LANTERN_FUNCTION_END
 }
 
@@ -7315,7 +7315,7 @@ void* _lantern_ones_like_tensor_tensoroptions_memoryformat(void* self, void* opt
 {
   LANTERN_FUNCTION_START
     return make_unique::Tensor(torch::ones_like(
-        from_raw::Tensor(self), ((LanternObject<torch::TensorOptions>*)options)->get(), ((LanternObject<c10::optional<torch::MemoryFormat>>*)optional<torch::MemoryFormat>(memory_format).get())->get()));
+        from_raw::Tensor(self), from_raw::TensorOptions(options), ((LanternObject<c10::optional<torch::MemoryFormat>>*)optional<torch::MemoryFormat>(memory_format).get())->get()));
   LANTERN_FUNCTION_END
 }
 
@@ -7627,7 +7627,7 @@ void* _lantern_scalar_tensor_scalar_tensoroptions(void* s, void* options)
 {
   LANTERN_FUNCTION_START
     return make_unique::Tensor(torch::scalar_tensor(
-        from_raw::Scalar(s), ((LanternObject<torch::TensorOptions>*)options)->get()));
+        from_raw::Scalar(s), from_raw::TensorOptions(options)));
   LANTERN_FUNCTION_END
 }
 
@@ -7635,7 +7635,7 @@ void* _lantern_rand_intarrayref_dimnamelist_tensoroptions(void* size, void* name
 {
   LANTERN_FUNCTION_START
     return make_unique::Tensor(torch::rand(
-        ((LanternObject<std::vector<int64_t>>*)size)->get(), ((LanternPtr<std::vector<torch::Dimname>>*)names)->get(), ((LanternObject<torch::TensorOptions>*)options)->get()));
+        ((LanternObject<std::vector<int64_t>>*)size)->get(), ((LanternPtr<std::vector<torch::Dimname>>*)names)->get(), from_raw::TensorOptions(options)));
   LANTERN_FUNCTION_END
 }
 
@@ -7643,7 +7643,7 @@ void* _lantern_rand_intarrayref_generator_dimnamelist_tensoroptions(void* size, 
 {
   LANTERN_FUNCTION_START
     return make_unique::Tensor(torch::rand(
-        ((LanternObject<std::vector<int64_t>>*)size)->get(), ((LanternObject<c10::optional<torch::Generator>>*)optional<torch::Generator>(generator).get())->get(), ((LanternPtr<std::vector<torch::Dimname>>*)names)->get(), ((LanternObject<torch::TensorOptions>*)options)->get()));
+        ((LanternObject<std::vector<int64_t>>*)size)->get(), ((LanternObject<c10::optional<torch::Generator>>*)optional<torch::Generator>(generator).get())->get(), ((LanternPtr<std::vector<torch::Dimname>>*)names)->get(), from_raw::TensorOptions(options)));
   LANTERN_FUNCTION_END
 }
 
@@ -7651,7 +7651,7 @@ void* _lantern_rand_intarrayref_tensoroptions(void* size, void* options)
 {
   LANTERN_FUNCTION_START
     return make_unique::Tensor(torch::rand(
-        ((LanternObject<std::vector<int64_t>>*)size)->get(), ((LanternObject<torch::TensorOptions>*)options)->get()));
+        ((LanternObject<std::vector<int64_t>>*)size)->get(), from_raw::TensorOptions(options)));
   LANTERN_FUNCTION_END
 }
 
@@ -7659,7 +7659,7 @@ void* _lantern_rand_intarrayref_generator_tensoroptions(void* size, void* genera
 {
   LANTERN_FUNCTION_START
     return make_unique::Tensor(torch::rand(
-        ((LanternObject<std::vector<int64_t>>*)size)->get(), ((LanternObject<c10::optional<torch::Generator>>*)optional<torch::Generator>(generator).get())->get(), ((LanternObject<torch::TensorOptions>*)options)->get()));
+        ((LanternObject<std::vector<int64_t>>*)size)->get(), ((LanternObject<c10::optional<torch::Generator>>*)optional<torch::Generator>(generator).get())->get(), from_raw::TensorOptions(options)));
   LANTERN_FUNCTION_END
 }
 
@@ -7683,7 +7683,7 @@ void* _lantern_rand_like_tensor_tensoroptions_memoryformat(void* self, void* opt
 {
   LANTERN_FUNCTION_START
     return make_unique::Tensor(torch::rand_like(
-        from_raw::Tensor(self), ((LanternObject<torch::TensorOptions>*)options)->get(), ((LanternObject<c10::optional<torch::MemoryFormat>>*)optional<torch::MemoryFormat>(memory_format).get())->get()));
+        from_raw::Tensor(self), from_raw::TensorOptions(options), ((LanternObject<c10::optional<torch::MemoryFormat>>*)optional<torch::MemoryFormat>(memory_format).get())->get()));
   LANTERN_FUNCTION_END
 }
 
@@ -7691,7 +7691,7 @@ void* _lantern_randint_intt_intarrayref_tensoroptions(void* high, void* size, vo
 {
   LANTERN_FUNCTION_START
     return make_unique::Tensor(torch::randint(
-        ((LanternObject<int64_t>*)high)->get(), ((LanternObject<std::vector<int64_t>>*)size)->get(), ((LanternObject<torch::TensorOptions>*)options)->get()));
+        ((LanternObject<int64_t>*)high)->get(), ((LanternObject<std::vector<int64_t>>*)size)->get(), from_raw::TensorOptions(options)));
   LANTERN_FUNCTION_END
 }
 
@@ -7699,7 +7699,7 @@ void* _lantern_randint_intt_intarrayref_generator_tensoroptions(void* high, void
 {
   LANTERN_FUNCTION_START
     return make_unique::Tensor(torch::randint(
-        ((LanternObject<int64_t>*)high)->get(), ((LanternObject<std::vector<int64_t>>*)size)->get(), ((LanternObject<c10::optional<torch::Generator>>*)optional<torch::Generator>(generator).get())->get(), ((LanternObject<torch::TensorOptions>*)options)->get()));
+        ((LanternObject<int64_t>*)high)->get(), ((LanternObject<std::vector<int64_t>>*)size)->get(), ((LanternObject<c10::optional<torch::Generator>>*)optional<torch::Generator>(generator).get())->get(), from_raw::TensorOptions(options)));
   LANTERN_FUNCTION_END
 }
 
@@ -7707,7 +7707,7 @@ void* _lantern_randint_intt_intt_intarrayref_tensoroptions(void* low, void* high
 {
   LANTERN_FUNCTION_START
     return make_unique::Tensor(torch::randint(
-        ((LanternObject<int64_t>*)low)->get(), ((LanternObject<int64_t>*)high)->get(), ((LanternObject<std::vector<int64_t>>*)size)->get(), ((LanternObject<torch::TensorOptions>*)options)->get()));
+        ((LanternObject<int64_t>*)low)->get(), ((LanternObject<int64_t>*)high)->get(), ((LanternObject<std::vector<int64_t>>*)size)->get(), from_raw::TensorOptions(options)));
   LANTERN_FUNCTION_END
 }
 
@@ -7715,7 +7715,7 @@ void* _lantern_randint_intt_intt_intarrayref_generator_tensoroptions(void* low, 
 {
   LANTERN_FUNCTION_START
     return make_unique::Tensor(torch::randint(
-        ((LanternObject<int64_t>*)low)->get(), ((LanternObject<int64_t>*)high)->get(), ((LanternObject<std::vector<int64_t>>*)size)->get(), ((LanternObject<c10::optional<torch::Generator>>*)optional<torch::Generator>(generator).get())->get(), ((LanternObject<torch::TensorOptions>*)options)->get()));
+        ((LanternObject<int64_t>*)low)->get(), ((LanternObject<int64_t>*)high)->get(), ((LanternObject<std::vector<int64_t>>*)size)->get(), ((LanternObject<c10::optional<torch::Generator>>*)optional<torch::Generator>(generator).get())->get(), from_raw::TensorOptions(options)));
   LANTERN_FUNCTION_END
 }
 
@@ -7755,7 +7755,7 @@ void* _lantern_randint_like_tensor_intt_tensoroptions_memoryformat(void* self, v
 {
   LANTERN_FUNCTION_START
     return make_unique::Tensor(torch::randint_like(
-        from_raw::Tensor(self), ((LanternObject<int64_t>*)high)->get(), ((LanternObject<torch::TensorOptions>*)options)->get(), ((LanternObject<c10::optional<torch::MemoryFormat>>*)optional<torch::MemoryFormat>(memory_format).get())->get()));
+        from_raw::Tensor(self), ((LanternObject<int64_t>*)high)->get(), from_raw::TensorOptions(options), ((LanternObject<c10::optional<torch::MemoryFormat>>*)optional<torch::MemoryFormat>(memory_format).get())->get()));
   LANTERN_FUNCTION_END
 }
 
@@ -7763,7 +7763,7 @@ void* _lantern_randint_like_tensor_intt_intt_tensoroptions_memoryformat(void* se
 {
   LANTERN_FUNCTION_START
     return make_unique::Tensor(torch::randint_like(
-        from_raw::Tensor(self), ((LanternObject<int64_t>*)low)->get(), ((LanternObject<int64_t>*)high)->get(), ((LanternObject<torch::TensorOptions>*)options)->get(), ((LanternObject<c10::optional<torch::MemoryFormat>>*)optional<torch::MemoryFormat>(memory_format).get())->get()));
+        from_raw::Tensor(self), ((LanternObject<int64_t>*)low)->get(), ((LanternObject<int64_t>*)high)->get(), from_raw::TensorOptions(options), ((LanternObject<c10::optional<torch::MemoryFormat>>*)optional<torch::MemoryFormat>(memory_format).get())->get()));
   LANTERN_FUNCTION_END
 }
 
@@ -7771,7 +7771,7 @@ void* _lantern_randn_intarrayref_tensoroptions(void* size, void* options)
 {
   LANTERN_FUNCTION_START
     return make_unique::Tensor(torch::randn(
-        ((LanternObject<std::vector<int64_t>>*)size)->get(), ((LanternObject<torch::TensorOptions>*)options)->get()));
+        ((LanternObject<std::vector<int64_t>>*)size)->get(), from_raw::TensorOptions(options)));
   LANTERN_FUNCTION_END
 }
 
@@ -7779,7 +7779,7 @@ void* _lantern_randn_intarrayref_generator_tensoroptions(void* size, void* gener
 {
   LANTERN_FUNCTION_START
     return make_unique::Tensor(torch::randn(
-        ((LanternObject<std::vector<int64_t>>*)size)->get(), ((LanternObject<c10::optional<torch::Generator>>*)optional<torch::Generator>(generator).get())->get(), ((LanternObject<torch::TensorOptions>*)options)->get()));
+        ((LanternObject<std::vector<int64_t>>*)size)->get(), ((LanternObject<c10::optional<torch::Generator>>*)optional<torch::Generator>(generator).get())->get(), from_raw::TensorOptions(options)));
   LANTERN_FUNCTION_END
 }
 
@@ -7787,7 +7787,7 @@ void* _lantern_randn_intarrayref_dimnamelist_tensoroptions(void* size, void* nam
 {
   LANTERN_FUNCTION_START
     return make_unique::Tensor(torch::randn(
-        ((LanternObject<std::vector<int64_t>>*)size)->get(), ((LanternPtr<std::vector<torch::Dimname>>*)names)->get(), ((LanternObject<torch::TensorOptions>*)options)->get()));
+        ((LanternObject<std::vector<int64_t>>*)size)->get(), ((LanternPtr<std::vector<torch::Dimname>>*)names)->get(), from_raw::TensorOptions(options)));
   LANTERN_FUNCTION_END
 }
 
@@ -7795,7 +7795,7 @@ void* _lantern_randn_intarrayref_generator_dimnamelist_tensoroptions(void* size,
 {
   LANTERN_FUNCTION_START
     return make_unique::Tensor(torch::randn(
-        ((LanternObject<std::vector<int64_t>>*)size)->get(), ((LanternObject<c10::optional<torch::Generator>>*)optional<torch::Generator>(generator).get())->get(), ((LanternPtr<std::vector<torch::Dimname>>*)names)->get(), ((LanternObject<torch::TensorOptions>*)options)->get()));
+        ((LanternObject<std::vector<int64_t>>*)size)->get(), ((LanternObject<c10::optional<torch::Generator>>*)optional<torch::Generator>(generator).get())->get(), ((LanternPtr<std::vector<torch::Dimname>>*)names)->get(), from_raw::TensorOptions(options)));
   LANTERN_FUNCTION_END
 }
 
@@ -7819,7 +7819,7 @@ void* _lantern_randn_like_tensor_tensoroptions_memoryformat(void* self, void* op
 {
   LANTERN_FUNCTION_START
     return make_unique::Tensor(torch::randn_like(
-        from_raw::Tensor(self), ((LanternObject<torch::TensorOptions>*)options)->get(), ((LanternObject<c10::optional<torch::MemoryFormat>>*)optional<torch::MemoryFormat>(memory_format).get())->get()));
+        from_raw::Tensor(self), from_raw::TensorOptions(options), ((LanternObject<c10::optional<torch::MemoryFormat>>*)optional<torch::MemoryFormat>(memory_format).get())->get()));
   LANTERN_FUNCTION_END
 }
 
@@ -7827,7 +7827,7 @@ void* _lantern_randperm_intt_tensoroptions(void* n, void* options)
 {
   LANTERN_FUNCTION_START
     return make_unique::Tensor(torch::randperm(
-        ((LanternObject<int64_t>*)n)->get(), ((LanternObject<torch::TensorOptions>*)options)->get()));
+        ((LanternObject<int64_t>*)n)->get(), from_raw::TensorOptions(options)));
   LANTERN_FUNCTION_END
 }
 
@@ -7835,7 +7835,7 @@ void* _lantern_randperm_intt_generator_tensoroptions(void* n, void* generator, v
 {
   LANTERN_FUNCTION_START
     return make_unique::Tensor(torch::randperm(
-        ((LanternObject<int64_t>*)n)->get(), ((LanternObject<c10::optional<torch::Generator>>*)optional<torch::Generator>(generator).get())->get(), ((LanternObject<torch::TensorOptions>*)options)->get()));
+        ((LanternObject<int64_t>*)n)->get(), ((LanternObject<c10::optional<torch::Generator>>*)optional<torch::Generator>(generator).get())->get(), from_raw::TensorOptions(options)));
   LANTERN_FUNCTION_END
 }
 
@@ -7859,7 +7859,7 @@ void* _lantern_range_scalar_scalar_scalar_tensoroptions(void* start, void* end, 
 {
   LANTERN_FUNCTION_START
     return make_unique::Tensor(torch::range(
-        from_raw::Scalar(start), from_raw::Scalar(end), from_raw::Scalar(step), ((LanternObject<torch::TensorOptions>*)options)->get()));
+        from_raw::Scalar(start), from_raw::Scalar(end), from_raw::Scalar(step), from_raw::TensorOptions(options)));
   LANTERN_FUNCTION_END
 }
 
@@ -7867,7 +7867,7 @@ void* _lantern_range_scalar_scalar_tensoroptions(void* start, void* end, void* o
 {
   LANTERN_FUNCTION_START
     return make_unique::Tensor(torch::range(
-        from_raw::Scalar(start), from_raw::Scalar(end), ((LanternObject<torch::TensorOptions>*)options)->get()));
+        from_raw::Scalar(start), from_raw::Scalar(end), from_raw::TensorOptions(options)));
   LANTERN_FUNCTION_END
 }
 
@@ -10419,7 +10419,7 @@ void* _lantern_zeros_intarrayref_dimnamelist_tensoroptions(void* size, void* nam
 {
   LANTERN_FUNCTION_START
     return make_unique::Tensor(torch::zeros(
-        ((LanternObject<std::vector<int64_t>>*)size)->get(), ((LanternPtr<std::vector<torch::Dimname>>*)names)->get(), ((LanternObject<torch::TensorOptions>*)options)->get()));
+        ((LanternObject<std::vector<int64_t>>*)size)->get(), ((LanternPtr<std::vector<torch::Dimname>>*)names)->get(), from_raw::TensorOptions(options)));
   LANTERN_FUNCTION_END
 }
 
@@ -10427,7 +10427,7 @@ void* _lantern_zeros_intarrayref_tensoroptions(void* size, void* options)
 {
   LANTERN_FUNCTION_START
     return make_unique::Tensor(torch::zeros(
-        ((LanternObject<std::vector<int64_t>>*)size)->get(), ((LanternObject<torch::TensorOptions>*)options)->get()));
+        ((LanternObject<std::vector<int64_t>>*)size)->get(), from_raw::TensorOptions(options)));
   LANTERN_FUNCTION_END
 }
 
@@ -10443,7 +10443,7 @@ void* _lantern_zeros_like_tensor_tensoroptions_memoryformat(void* self, void* op
 {
   LANTERN_FUNCTION_START
     return make_unique::Tensor(torch::zeros_like(
-        from_raw::Tensor(self), ((LanternObject<torch::TensorOptions>*)options)->get(), ((LanternObject<c10::optional<torch::MemoryFormat>>*)optional<torch::MemoryFormat>(memory_format).get())->get()));
+        from_raw::Tensor(self), from_raw::TensorOptions(options), ((LanternObject<c10::optional<torch::MemoryFormat>>*)optional<torch::MemoryFormat>(memory_format).get())->get()));
   LANTERN_FUNCTION_END
 }
 
@@ -11099,7 +11099,7 @@ void* _lantern__sparse_csr_tensor_tensor_tensor_tensor_intarrayref_tensoroptions
 {
   LANTERN_FUNCTION_START
     return make_unique::Tensor(torch::_sparse_csr_tensor(
-        from_raw::Tensor(crow_indices), from_raw::Tensor(col_indices), from_raw::Tensor(values), ((LanternObject<std::vector<int64_t>>*)size)->get(), ((LanternObject<torch::TensorOptions>*)options)->get()));
+        from_raw::Tensor(crow_indices), from_raw::Tensor(col_indices), from_raw::Tensor(values), ((LanternObject<std::vector<int64_t>>*)size)->get(), from_raw::TensorOptions(options)));
   LANTERN_FUNCTION_END
 }
 
@@ -11107,7 +11107,7 @@ void* _lantern__sparse_csr_tensor_tensor_tensor_tensor_tensoroptions(void* crow_
 {
   LANTERN_FUNCTION_START
     return make_unique::Tensor(torch::_sparse_csr_tensor(
-        from_raw::Tensor(crow_indices), from_raw::Tensor(col_indices), from_raw::Tensor(values), ((LanternObject<torch::TensorOptions>*)options)->get()));
+        from_raw::Tensor(crow_indices), from_raw::Tensor(col_indices), from_raw::Tensor(values), from_raw::TensorOptions(options)));
   LANTERN_FUNCTION_END
 }
 
@@ -11115,7 +11115,7 @@ void* _lantern_sparse_coo_tensor_intarrayref_tensoroptions(void* size, void* opt
 {
   LANTERN_FUNCTION_START
     return make_unique::Tensor(torch::sparse_coo_tensor(
-        ((LanternObject<std::vector<int64_t>>*)size)->get(), ((LanternObject<torch::TensorOptions>*)options)->get()));
+        ((LanternObject<std::vector<int64_t>>*)size)->get(), from_raw::TensorOptions(options)));
   LANTERN_FUNCTION_END
 }
 
@@ -11123,7 +11123,7 @@ void* _lantern_sparse_coo_tensor_tensor_tensor_tensoroptions(void* indices, void
 {
   LANTERN_FUNCTION_START
     return make_unique::Tensor(torch::sparse_coo_tensor(
-        from_raw::Tensor(indices), from_raw::Tensor(values), ((LanternObject<torch::TensorOptions>*)options)->get()));
+        from_raw::Tensor(indices), from_raw::Tensor(values), from_raw::TensorOptions(options)));
   LANTERN_FUNCTION_END
 }
 
@@ -11131,7 +11131,7 @@ void* _lantern_sparse_coo_tensor_tensor_tensor_intarrayref_tensoroptions(void* i
 {
   LANTERN_FUNCTION_START
     return make_unique::Tensor(torch::sparse_coo_tensor(
-        from_raw::Tensor(indices), from_raw::Tensor(values), ((LanternObject<std::vector<int64_t>>*)size)->get(), ((LanternObject<torch::TensorOptions>*)options)->get()));
+        from_raw::Tensor(indices), from_raw::Tensor(values), ((LanternObject<std::vector<int64_t>>*)size)->get(), from_raw::TensorOptions(options)));
   LANTERN_FUNCTION_END
 }
 
@@ -11139,7 +11139,7 @@ void* _lantern__sparse_coo_tensor_unsafe_tensor_tensor_intarrayref_tensoroptions
 {
   LANTERN_FUNCTION_START
     return make_unique::Tensor(torch::_sparse_coo_tensor_unsafe(
-        from_raw::Tensor(indices), from_raw::Tensor(values), ((LanternObject<std::vector<int64_t>>*)size)->get(), ((LanternObject<torch::TensorOptions>*)options)->get()));
+        from_raw::Tensor(indices), from_raw::Tensor(values), ((LanternObject<std::vector<int64_t>>*)size)->get(), from_raw::TensorOptions(options)));
   LANTERN_FUNCTION_END
 }
 
@@ -11155,7 +11155,7 @@ void* _lantern__sparse_coo_tensor_with_dims_intt_intt_intarrayref_tensoroptions(
 {
   LANTERN_FUNCTION_START
     return make_unique::Tensor(torch::_sparse_coo_tensor_with_dims(
-        ((LanternObject<int64_t>*)sparse_dim)->get(), ((LanternObject<int64_t>*)dense_dim)->get(), ((LanternObject<std::vector<int64_t>>*)size)->get(), ((LanternObject<torch::TensorOptions>*)options)->get()));
+        ((LanternObject<int64_t>*)sparse_dim)->get(), ((LanternObject<int64_t>*)dense_dim)->get(), ((LanternObject<std::vector<int64_t>>*)size)->get(), from_raw::TensorOptions(options)));
   LANTERN_FUNCTION_END
 }
 
@@ -11163,7 +11163,7 @@ void* _lantern__sparse_coo_tensor_with_dims_and_tensors_intt_intt_intarrayref_te
 {
   LANTERN_FUNCTION_START
     return make_unique::Tensor(torch::_sparse_coo_tensor_with_dims_and_tensors(
-        ((LanternObject<int64_t>*)sparse_dim)->get(), ((LanternObject<int64_t>*)dense_dim)->get(), ((LanternObject<std::vector<int64_t>>*)size)->get(), from_raw::Tensor(indices), from_raw::Tensor(values), ((LanternObject<torch::TensorOptions>*)options)->get()));
+        ((LanternObject<int64_t>*)sparse_dim)->get(), ((LanternObject<int64_t>*)dense_dim)->get(), ((LanternObject<std::vector<int64_t>>*)size)->get(), from_raw::Tensor(indices), from_raw::Tensor(values), from_raw::TensorOptions(options)));
   LANTERN_FUNCTION_END
 }
 
@@ -11707,7 +11707,7 @@ void* _lantern_Tensor_to_tensor_tensoroptions_bool_bool_memoryformat(void* self,
 {
   LANTERN_FUNCTION_START
     return make_unique::Tensor(from_raw::Tensor(self).to(
-        ((LanternObject<torch::TensorOptions>*)options)->get(), ((LanternObject<bool>*)non_blocking)->get(), ((LanternObject<bool>*)copy)->get(), ((LanternObject<c10::optional<torch::MemoryFormat>>*)optional<torch::MemoryFormat>(memory_format).get())->get()));
+        from_raw::TensorOptions(options), ((LanternObject<bool>*)non_blocking)->get(), ((LanternObject<bool>*)copy)->get(), ((LanternObject<c10::optional<torch::MemoryFormat>>*)optional<torch::MemoryFormat>(memory_format).get())->get()));
   LANTERN_FUNCTION_END
 }
 
@@ -13211,7 +13211,7 @@ void* _lantern_tril_indices_intt_intt_intt_tensoroptions(void* row, void* col, v
 {
   LANTERN_FUNCTION_START
     return make_unique::Tensor(torch::tril_indices(
-        ((LanternObject<int64_t>*)row)->get(), ((LanternObject<int64_t>*)col)->get(), ((LanternObject<int64_t>*)offset)->get(), ((LanternObject<torch::TensorOptions>*)options)->get()));
+        ((LanternObject<int64_t>*)row)->get(), ((LanternObject<int64_t>*)col)->get(), ((LanternObject<int64_t>*)offset)->get(), from_raw::TensorOptions(options)));
   LANTERN_FUNCTION_END
 }
 
@@ -13219,7 +13219,7 @@ void* _lantern_triu_indices_intt_intt_intt_tensoroptions(void* row, void* col, v
 {
   LANTERN_FUNCTION_START
     return make_unique::Tensor(torch::triu_indices(
-        ((LanternObject<int64_t>*)row)->get(), ((LanternObject<int64_t>*)col)->get(), ((LanternObject<int64_t>*)offset)->get(), ((LanternObject<torch::TensorOptions>*)options)->get()));
+        ((LanternObject<int64_t>*)row)->get(), ((LanternObject<int64_t>*)col)->get(), ((LanternObject<int64_t>*)offset)->get(), from_raw::TensorOptions(options)));
   LANTERN_FUNCTION_END
 }
 
@@ -19467,7 +19467,7 @@ void* _lantern_fft_fftfreq_intt_double_tensoroptions(void* n, void* d, void* opt
 {
   LANTERN_FUNCTION_START
     return make_unique::Tensor(torch::fft_fftfreq(
-        ((LanternObject<int64_t>*)n)->get(), ((LanternObject<double>*)d)->get(), ((LanternObject<torch::TensorOptions>*)options)->get()));
+        ((LanternObject<int64_t>*)n)->get(), ((LanternObject<double>*)d)->get(), from_raw::TensorOptions(options)));
   LANTERN_FUNCTION_END
 }
 
@@ -19483,7 +19483,7 @@ void* _lantern_fft_rfftfreq_intt_double_tensoroptions(void* n, void* d, void* op
 {
   LANTERN_FUNCTION_START
     return make_unique::Tensor(torch::fft_rfftfreq(
-        ((LanternObject<int64_t>*)n)->get(), ((LanternObject<double>*)d)->get(), ((LanternObject<torch::TensorOptions>*)options)->get()));
+        ((LanternObject<int64_t>*)n)->get(), ((LanternObject<double>*)d)->get(), from_raw::TensorOptions(options)));
   LANTERN_FUNCTION_END
 }
 
