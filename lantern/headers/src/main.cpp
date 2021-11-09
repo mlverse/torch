@@ -138,10 +138,6 @@ std::string buildCalls(std::string name, YAML::Node node, size_t start)
         {
           type = "std::vector<double>";
         }
-        else if (type == "TensorList")
-        {
-            type = "std::vector<torch::Tensor>";
-        }
         else if (type == "const c10::List<c10::optional<Tensor>> &")
         {
             type = "c10::List<c10::optional<torch::Tensor>>";
@@ -193,6 +189,10 @@ std::string buildCalls(std::string name, YAML::Node node, size_t start)
         if (type == "Tensor")
         {
             arguments += "from_raw::Tensor(" + call + ")";
+        }
+        else if (type == "TensorList")
+        {
+            arguments += "from_raw::TensorList(" + call + ")";
         }
         else
         {
@@ -304,11 +304,6 @@ std::string buildReturn(YAML::Node node)
         type = "std::vector<void*>";
     }
 
-    if (type == "torch::TensorList")
-    {
-        type = "std::vector<torch::Tensor>";
-    }
-
     return type;
 }
 
@@ -367,6 +362,11 @@ int main(int argc, char *argv[])
                     if (returns == "torch::Tensor")
                     {
                         bodies.push_back("    return make_unique::Tensor(" + functionCall + name + "(");
+                        bodies.push_back("        " + calls + "));");
+                    }
+                    else if (returns == "torch::TensorList")
+                    {
+                        bodies.push_back("    return make_unique::TensorList(" + functionCall + name + "(");
                         bodies.push_back("        " + calls + "));");
                     }
                     else
@@ -435,6 +435,11 @@ int main(int argc, char *argv[])
                     if (returns == "torch::Tensor")
                     {
                         bodies.push_back("    return make_unique::Tensor(" + functionCall + name + "(");
+                        bodies.push_back("        " + calls + "));");
+                    }
+                    else if (returns == "torch::TensorList")
+                    {
+                        bodies.push_back("    return make_unique::TensorList(" + functionCall + name + "(");
                         bodies.push_back("        " + calls + "));");
                     }
                     else
