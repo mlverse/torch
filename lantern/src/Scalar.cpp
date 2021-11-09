@@ -35,7 +35,7 @@ void *_lantern_Scalar_dtype(void *self)
 {
   LANTERN_FUNCTION_START
   auto v = from_raw::Scalar(self);
-  return (void *)new LanternObject<torch::Dtype>(v.type());
+  return make_unique::Dtype(v.type());
   LANTERN_FUNCTION_END
 }
 

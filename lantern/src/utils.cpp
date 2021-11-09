@@ -300,6 +300,10 @@ namespace make_unique {
   {
     return (void*) new LanternPtr<torch::Device>(x);
   }
+  void* Dtype (const torch::Dtype& x)
+  {
+    return make_ptr<torch::Dtype>(x);
+  }
 }
 
 #define LANTERN_FROM_RAW(name, type) \
@@ -314,5 +318,6 @@ namespace from_raw {
   torch::Device& Device (void* x) {
     return reinterpret_cast<LanternPtr<torch::Device>*>(x)->get();
   }
+  LANTERN_FROM_RAW(Dtype, torch::Dtype)
 }
 

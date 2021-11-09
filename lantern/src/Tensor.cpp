@@ -167,7 +167,7 @@ void *_lantern_Tensor_dtype(void *self)
   LANTERN_FUNCTION_START
   torch::Tensor x = from_raw::Tensor(self);;
   torch::Dtype dtype = c10::typeMetaToScalarType(x.dtype());
-  return (void *)new LanternObject<torch::Dtype>(dtype);
+  return make_unique::Dtype(dtype);
   LANTERN_FUNCTION_END
 }
 

@@ -18,7 +18,7 @@ void *_lantern_TensorOptions()
 void *_lantern_TensorOptions_dtype(void *self, void *dtype)
 {
   LANTERN_FUNCTION_START
-  auto out = from_raw::TensorOptions(self).dtype(reinterpret_cast<LanternObject<torch::Dtype> *>(dtype)->get());
+  auto out = from_raw::TensorOptions(self).dtype(from_raw::Dtype(dtype));
   return make_unique::TensorOptions(out);
   LANTERN_FUNCTION_END
 }
