@@ -90,6 +90,7 @@ namespace make_unique {
   void* TensorOptions (const torch::TensorOptions& x);
   void* Device (torch::Device& x);
   void* Dtype (const torch::Dtype& x);
+  void* Dimname (torch::Dimname& x);
 }
 
 #define LANTERN_FROM_RAW_DECL(name, type)                                                 \
@@ -106,4 +107,5 @@ namespace from_raw {
   LANTERN_FROM_RAW_DECL(TensorOptions, torch::TensorOptions)
   LANTERN_FROM_RAW_DECL(Device, torch::Device)
   LANTERN_FROM_RAW_DECL(Dtype, torch::Dtype)
+  LANTERN_FROM_RAW_DECL(Dimname, torch::Dimname)
 }

@@ -304,6 +304,10 @@ namespace make_unique {
   {
     return make_ptr<torch::Dtype>(x);
   }
+  void* Dimname (torch::Dimname& x)
+  {
+    return (void*) new LanternPtr<torch::Dimname>(x);
+  }
 }
 
 #define LANTERN_FROM_RAW(name, type) \
@@ -319,5 +323,8 @@ namespace from_raw {
     return reinterpret_cast<LanternPtr<torch::Device>*>(x)->get();
   }
   LANTERN_FROM_RAW(Dtype, torch::Dtype)
+  torch::Dimname& Dimname (void* x) {
+    return reinterpret_cast<LanternPtr<torch::Dimname>*>(x)->get();
+  }
 }
 
