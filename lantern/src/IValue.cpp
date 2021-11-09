@@ -271,15 +271,15 @@ void* _lantern_IValue_TensorList (void* self)
 {
     LANTERN_FUNCTION_START
     auto self_ = reinterpret_cast<torch::jit::IValue *>(self);
-    return (void *)new LanternObject<std::vector<torch::Tensor>>(self_->toTensorList().vec());
+    return make_unique::TensorList(self_->toTensorList().vec());
     LANTERN_FUNCTION_END
 }
 
 void* _lantern_IValue_from_TensorList (void* self)
 {
     LANTERN_FUNCTION_START
-    auto self_ = reinterpret_cast<LanternObject<std::vector<torch::Tensor>>*>(self);
-    return (void*) new torch::IValue(self_->get());
+    auto self_ = from_raw::TensorList(self);
+    return (void*) new torch::IValue(self_);
     LANTERN_FUNCTION_END
 }
 

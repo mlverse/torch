@@ -99,13 +99,13 @@ void * _lantern_get_state_dict_values (void* ivalue)
     LANTERN_FUNCTION_START
     auto iv = reinterpret_cast<LanternObject<torch::IValue>*>(ivalue)->get();
     auto d = iv.toGenericDict();
-    auto values = new LanternObject<std::vector<torch::Tensor>>;
+    std::vector<torch::Tensor> values;
     for (auto i = d.begin(); i != d.end(); ++i)
     {
         torch::Tensor value = i->value().toTensor();
-        values->get().push_back(value);
+        values.push_back(value);
     }
-    return (void*) values;
+    return make_unique::TensorList(values);
     LANTERN_FUNCTION_END
 }
 

@@ -280,6 +280,10 @@ namespace make_unique {
   {
     return make_ptr<torch::Tensor>(x);
   }
+  void* TensorList (const torch::TensorList& x)
+  {
+    return make_ptr<std::vector<torch::Tensor>>(x.vec());
+  }
 }
 
 #define LANTERN_FROM_RAW(name, type) \
@@ -287,5 +291,6 @@ namespace make_unique {
 
 namespace from_raw {
   LANTERN_FROM_RAW(Tensor, torch::Tensor)
+  LANTERN_FROM_RAW(TensorList, std::vector<torch::Tensor>)
 }
 

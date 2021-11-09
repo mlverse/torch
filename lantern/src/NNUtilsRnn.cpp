@@ -25,7 +25,7 @@ void *_lantern_nn_utils_rnn_pack_sequence(void *sequence, bool enforce_sorted)
 {
     LANTERN_FUNCTION_START
     auto out = torch::nn::utils::rnn::pack_sequence(
-        reinterpret_cast<LanternObject<std::vector<torch::Tensor>> *>(sequence)->get(),
+        from_raw::TensorList(sequence),
         enforce_sorted);
 
     return (void *)new LanternPtr<torch::nn::utils::rnn::PackedSequence>(out);
@@ -45,7 +45,7 @@ void *_lantern_nn_utils_rnn_pad_packed_sequence(void *sequence, bool batch_first
     x.push_back(std::get<0>(out));
     x.push_back(std::get<1>(out));
 
-    return (void *)new LanternObject<std::vector<torch::Tensor>>(x);
+    return make_unique::TensorList(x);
     LANTERN_FUNCTION_END
 }
 
@@ -53,7 +53,7 @@ void *_lantern_nn_utils_rnn_pad_sequence(void *sequence, bool batch_first, doubl
 {
     LANTERN_FUNCTION_START
     auto out = torch::nn::utils::rnn::pad_sequence(
-        reinterpret_cast<LanternObject<std::vector<torch::Tensor>> *>(sequence)->get(),
+        from_raw::TensorList(sequence),
         batch_first,
         padding_value);
 

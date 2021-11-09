@@ -42,12 +42,12 @@ void* jit_named_list_tensors (void* self)
 {
     LANTERN_FUNCTION_START
     auto self_ = reinterpret_cast<T *>(self);
-    auto outputs = new LanternObject<std::vector<torch::Tensor>>();
+    std::vector<torch::Tensor> outputs;
     for (auto el : *self_)
     {
-        outputs->get().push_back(el.value);
+        outputs.push_back(el.value);
     }
-    return (void*) outputs;
+    return make_unique::TensorList(outputs);
     LANTERN_FUNCTION_END
 }
 
