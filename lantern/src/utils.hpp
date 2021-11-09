@@ -86,6 +86,7 @@ namespace make_unique {
   void* Tensor (const torch::Tensor& x);
   void* TensorList (const torch::TensorList& x);
   void* ScalarType (const torch::ScalarType& x);
+  void* Scalar (const torch::Scalar& x);
 }
 
 #define LANTERN_FROM_RAW_DECL(name, type)                                                 \
@@ -98,4 +99,5 @@ namespace from_raw {
   // constructed from them. 
   LANTERN_FROM_RAW_DECL(TensorList, std::vector<torch::Tensor>)
   LANTERN_FROM_RAW_DECL(ScalarType, torch::ScalarType)
+  LANTERN_FROM_RAW_DECL(Scalar, torch::Scalar)
 }

@@ -118,7 +118,7 @@ void _lantern_Tensor_index_put_scalar_ (void* self, void* index, void* rhs)
     LANTERN_FUNCTION_START
     torch::Tensor ten = from_raw::Tensor(self);
     auto i = reinterpret_cast<LanternObject<std::vector<at::indexing::TensorIndex>> *>(index)->get();
-    torch::Scalar r = reinterpret_cast<LanternObject<torch::Scalar> *>(rhs)->get();
+    auto r = from_raw::Scalar(rhs);
     ten.index_put_(i, r);
     LANTERN_FUNCTION_END_VOID
 }

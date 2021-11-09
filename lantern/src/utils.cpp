@@ -288,6 +288,10 @@ namespace make_unique {
   {
     return make_ptr<torch::ScalarType>(x);
   }
+  void* Scalar (const torch::Scalar& x)
+  {
+    return make_ptr<torch::Scalar>(x);
+  }
 }
 
 #define LANTERN_FROM_RAW(name, type) \
@@ -297,5 +301,6 @@ namespace from_raw {
   LANTERN_FROM_RAW(Tensor, torch::Tensor)
   LANTERN_FROM_RAW(TensorList, std::vector<torch::Tensor>)
   LANTERN_FROM_RAW(ScalarType, torch::ScalarType)
+  LANTERN_FROM_RAW(Scalar, torch::Scalar)
 }
 

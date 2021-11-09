@@ -223,15 +223,15 @@ void* _lantern_IValue_Scalar (void* self)
 {
     LANTERN_FUNCTION_START
     auto self_ = reinterpret_cast<torch::jit::IValue *>(self);
-    return (void*) new LanternObject<torch::Scalar>(self_->toScalar());
+    return make_unique::Scalar(self_->toScalar());
     LANTERN_FUNCTION_END
 }
 
 void* _lantern_IValue_from_Scalar (void* self)
 {
     LANTERN_FUNCTION_START
-    auto self_ = reinterpret_cast<LanternObject<torch::Scalar>*>(self);
-    return (void*) new torch::IValue(self_->get());
+    auto self_ = from_raw::Scalar(self);
+    return (void*) new torch::IValue(self_);
     LANTERN_FUNCTION_END
 }
 
