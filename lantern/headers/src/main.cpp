@@ -206,6 +206,10 @@ std::string buildCalls(std::string name, YAML::Node node, size_t start)
         {
             arguments += "from_raw::TensorOptions(" + call + ")";
         }
+        else if (type == "Device")
+        {
+            arguments += "from_raw::Device(" + call + ")";
+        }
         else
         {
             arguments += "((" + lanternObject(type) + "<" + addNamespace(type) + ">*)" +

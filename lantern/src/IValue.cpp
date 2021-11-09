@@ -81,15 +81,15 @@ void* _lantern_IValue_Device (void* self)
     LANTERN_FUNCTION_START
     auto self_ = reinterpret_cast<torch::jit::IValue *>(self);
     torch::Device out = self_->toDevice();
-    return (void*) new LanternPtr<torch::Device>(out);
+    return make_unique::Device(out);
     LANTERN_FUNCTION_END
 }
 
 void* _lantern_IValue_from_Device (void* self)
 {
     LANTERN_FUNCTION_START
-    auto self_ = reinterpret_cast<LanternPtr<torch::Device>*>(self);
-    return (void*) new torch::IValue(self_->get());
+    auto self_ = from_raw::Device(self);
+    return (void*) new torch::IValue(self_);
     LANTERN_FUNCTION_END
 }
 

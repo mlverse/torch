@@ -59,7 +59,7 @@ void *_lantern_Device(const char *type, int64_t index, bool useIndex)
     device = torch::Device(deviceType, deviceIndex);
   }
 
-  return (void *)new LanternPtr<torch::Device>(device);
+  return make_unique::Device(device);
   LANTERN_FUNCTION_END
 }
 
@@ -69,7 +69,7 @@ void* _lantern_OptionalDevice_from_device (void *x, bool is_null)
   c10::optional<torch::Device> out = c10::nullopt;
   if (!is_null)
   {
-    out = reinterpret_cast<LanternPtr<torch::Device>*>(x)->get();
+    out = from_raw::Device(x);
   }
   return (void *) new LanternPtr<c10::optional<torch::Device>>(out);
   LANTERN_FUNCTION_END
@@ -91,7 +91,7 @@ void* _lantern_OptionalDevice (const char *type, int64_t index, bool useIndex, b
 const char *_lantern_Device_type(void *device)
 {
   LANTERN_FUNCTION_START
-  torch::Device type = ((LanternPtr<torch::Device> *)device)->get().type();
+  torch::Device type = from_raw::Device(device).type();
 
   std::string str;
   if (type == torch::DeviceType::CPU)
@@ -148,6 +148,6 @@ const char *_lantern_Device_type(void *device)
 int64_t _lantern_Device_index(void *device)
 {
   LANTERN_FUNCTION_START
-  return ((LanternPtr<torch::Device> *)device)->get().index();
+  return from_raw::Device(device).index();
   LANTERN_FUNCTION_END_RET(0)
 }

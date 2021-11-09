@@ -88,6 +88,7 @@ namespace make_unique {
   void* ScalarType (const torch::ScalarType& x);
   void* Scalar (const torch::Scalar& x);
   void* TensorOptions (const torch::TensorOptions& x);
+  void* Device (torch::Device& x);
 }
 
 #define LANTERN_FROM_RAW_DECL(name, type)                                                 \
@@ -102,4 +103,5 @@ namespace from_raw {
   LANTERN_FROM_RAW_DECL(ScalarType, torch::ScalarType)
   LANTERN_FROM_RAW_DECL(Scalar, torch::Scalar)
   LANTERN_FROM_RAW_DECL(TensorOptions, torch::TensorOptions)
+  LANTERN_FROM_RAW_DECL(Device, torch::Device)
 }

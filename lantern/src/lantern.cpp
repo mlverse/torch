@@ -11715,7 +11715,7 @@ void* _lantern_Tensor_to_tensor_device_scalartype_bool_bool_memoryformat(void* s
 {
   LANTERN_FUNCTION_START
     return make_unique::Tensor(from_raw::Tensor(self).to(
-        ((LanternPtr<torch::Device>*)device)->get(), from_raw::ScalarType(dtype), ((LanternObject<bool>*)non_blocking)->get(), ((LanternObject<bool>*)copy)->get(), ((LanternObject<c10::optional<torch::MemoryFormat>>*)optional<torch::MemoryFormat>(memory_format).get())->get()));
+        from_raw::Device(device), from_raw::ScalarType(dtype), ((LanternObject<bool>*)non_blocking)->get(), ((LanternObject<bool>*)copy)->get(), ((LanternObject<c10::optional<torch::MemoryFormat>>*)optional<torch::MemoryFormat>(memory_format).get())->get()));
   LANTERN_FUNCTION_END
 }
 

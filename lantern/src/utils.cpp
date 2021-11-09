@@ -296,6 +296,10 @@ namespace make_unique {
   {
     return make_ptr<torch::TensorOptions>(x);
   }
+  void* Device (torch::Device& x) 
+  {
+    return (void*) new LanternPtr<torch::Device>(x);
+  }
 }
 
 #define LANTERN_FROM_RAW(name, type) \
@@ -307,5 +311,8 @@ namespace from_raw {
   LANTERN_FROM_RAW(ScalarType, torch::ScalarType)
   LANTERN_FROM_RAW(Scalar, torch::Scalar)
   LANTERN_FROM_RAW(TensorOptions, torch::TensorOptions)
+  torch::Device& Device (void* x) {
+    return reinterpret_cast<LanternPtr<torch::Device>*>(x)->get();
+  }
 }
 

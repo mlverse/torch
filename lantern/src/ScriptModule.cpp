@@ -55,8 +55,8 @@ void _lantern_ScriptModule_train (void* module, bool on)
 void _lantern_ScriptModule_to (void* module, void* device, bool non_blocking)
 {
     auto module_ = reinterpret_cast<torch::jit::script::Module *>(module);
-    auto device_ = reinterpret_cast<LanternPtr<torch::Device>*>(device);
-    module_->to(device_->get(), non_blocking);
+    auto device_ = from_raw::Device(device);
+    module_->to(device_, non_blocking);
 }
 
 void _lantern_ScriptModule_set_optimized (void* module, bool o)

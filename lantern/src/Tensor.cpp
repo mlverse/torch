@@ -176,7 +176,7 @@ void *_lantern_Tensor_device(void *self)
   LANTERN_FUNCTION_START
   torch::Tensor x = from_raw::Tensor(self);;
   torch::Device device = x.device();
-  return (void *)new LanternPtr<torch::Device>(device);
+  return make_unique::Device(device);
   LANTERN_FUNCTION_END
 }
 
