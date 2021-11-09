@@ -11,15 +11,15 @@
 void *_lantern_TensorOptions()
 {
   LANTERN_FUNCTION_START
-  return (void *)new LanternObject<torch::TensorOptions>(torch::TensorOptions());
+  return make_unique::TensorOptions(torch::TensorOptions());
   LANTERN_FUNCTION_END
 }
 
 void *_lantern_TensorOptions_dtype(void *self, void *dtype)
 {
   LANTERN_FUNCTION_START
-  auto out = reinterpret_cast<LanternObject<torch::TensorOptions> *>(self)->get().dtype(reinterpret_cast<LanternObject<torch::Dtype> *>(dtype)->get());
-  return (void *)new LanternObject<torch::TensorOptions>(out);
+  auto out = from_raw::TensorOptions(self).dtype(reinterpret_cast<LanternObject<torch::Dtype> *>(dtype)->get());
+  return make_unique::TensorOptions(out);
   LANTERN_FUNCTION_END
 }
 

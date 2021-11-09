@@ -14,7 +14,7 @@ void *_lantern_from_blob(void *data, int64_t *sizes, size_t sizes_size, void *op
   return make_unique::Tensor(torch::from_blob(
       data,
       std::vector<int64_t>(sizes, sizes + sizes_size),
-      reinterpret_cast<LanternObject<torch::TensorOptions> *>(options)->get()));
+      from_raw::TensorOptions(options)));
   LANTERN_FUNCTION_END
 }
 
@@ -69,7 +69,7 @@ void *_lantern_Tensor_to(void *self, void *options)
 {
   LANTERN_FUNCTION_START
   torch::Tensor x = from_raw::Tensor(self);;
-  torch::TensorOptions y = reinterpret_cast<LanternObject<torch::TensorOptions> *>(options)->get();
+  auto y = from_raw::TensorOptions(options);
   return make_unique::Tensor(x.to(y));
   LANTERN_FUNCTION_END
 }
@@ -227,7 +227,7 @@ void* _lantern_normal_double_double_intarrayref_generator_tensoroptions (double 
   LANTERN_FUNCTION_START
   auto size_ = reinterpret_cast<LanternObject<std::vector<int64_t>>*>(size)->get();
   auto generator_ = reinterpret_cast<LanternObject<torch::Generator>*>(generator)->get();
-  auto options_ = reinterpret_cast<LanternObject<torch::TensorOptions>*>(options)->get();
+  auto options_ = from_raw::TensorOptions(options);
   auto ten = at::normal(mean, std, size_, generator_, options_);
   return make_unique::Tensor(ten);
   LANTERN_FUNCTION_END
