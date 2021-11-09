@@ -3987,7 +3987,7 @@ void* _lantern__rowwise_prune_tensor_tensor_scalartype(void* weight, void* mask,
 {
   LANTERN_FUNCTION_START
     return (void *) new LanternObject<std::vector<void*>>(to_vector(torch::_rowwise_prune(
-        from_raw::Tensor(weight), from_raw::Tensor(mask), ((LanternObject<torch::ScalarType>*)compressed_indices_dtype)->get())));
+        from_raw::Tensor(weight), from_raw::Tensor(mask), from_raw::ScalarType(compressed_indices_dtype))));
   LANTERN_FUNCTION_END
 }
 
@@ -10523,7 +10523,7 @@ void* _lantern__sparse_sum_tensor_scalartype(void* self, void* dtype)
 {
   LANTERN_FUNCTION_START
     return make_unique::Tensor(torch::_sparse_sum(
-        from_raw::Tensor(self), ((LanternObject<torch::ScalarType>*)dtype)->get()));
+        from_raw::Tensor(self), from_raw::ScalarType(dtype)));
   LANTERN_FUNCTION_END
 }
 
@@ -10539,7 +10539,7 @@ void* _lantern__sparse_sum_tensor_intarrayref_scalartype(void* self, void* dim, 
 {
   LANTERN_FUNCTION_START
     return make_unique::Tensor(torch::_sparse_sum(
-        from_raw::Tensor(self), ((LanternObject<std::vector<int64_t>>*)dim)->get(), ((LanternObject<torch::ScalarType>*)dtype)->get()));
+        from_raw::Tensor(self), ((LanternObject<std::vector<int64_t>>*)dim)->get(), from_raw::ScalarType(dtype)));
   LANTERN_FUNCTION_END
 }
 
@@ -10619,7 +10619,7 @@ void* _lantern_norm_tensor_scalar_scalartype(void* self, void* p, void* dtype)
 {
   LANTERN_FUNCTION_START
     return make_unique::Tensor(torch::norm(
-        from_raw::Tensor(self), ((LanternObject<c10::optional<torch::Scalar>>*)optional<torch::Scalar>(p).get())->get(), ((LanternObject<torch::ScalarType>*)dtype)->get()));
+        from_raw::Tensor(self), ((LanternObject<c10::optional<torch::Scalar>>*)optional<torch::Scalar>(p).get())->get(), from_raw::ScalarType(dtype)));
   LANTERN_FUNCTION_END
 }
 
@@ -10627,7 +10627,7 @@ void* _lantern_Tensor_norm_tensor_scalar_scalartype(void* self, void* p, void* d
 {
   LANTERN_FUNCTION_START
     return make_unique::Tensor(from_raw::Tensor(self).norm(
-        ((LanternObject<c10::optional<torch::Scalar>>*)optional<torch::Scalar>(p).get())->get(), ((LanternObject<torch::ScalarType>*)dtype)->get()));
+        ((LanternObject<c10::optional<torch::Scalar>>*)optional<torch::Scalar>(p).get())->get(), from_raw::ScalarType(dtype)));
   LANTERN_FUNCTION_END
 }
 
@@ -10651,7 +10651,7 @@ void* _lantern_norm_tensor_scalar_intarrayref_bool_scalartype(void* self, void* 
 {
   LANTERN_FUNCTION_START
     return make_unique::Tensor(torch::norm(
-        from_raw::Tensor(self), ((LanternObject<c10::optional<torch::Scalar>>*)optional<torch::Scalar>(p).get())->get(), ((LanternObject<std::vector<int64_t>>*)dim)->get(), ((LanternObject<bool>*)keepdim)->get(), ((LanternObject<torch::ScalarType>*)dtype)->get()));
+        from_raw::Tensor(self), ((LanternObject<c10::optional<torch::Scalar>>*)optional<torch::Scalar>(p).get())->get(), ((LanternObject<std::vector<int64_t>>*)dim)->get(), ((LanternObject<bool>*)keepdim)->get(), from_raw::ScalarType(dtype)));
   LANTERN_FUNCTION_END
 }
 
@@ -10659,7 +10659,7 @@ void* _lantern_Tensor_norm_tensor_scalar_intarrayref_bool_scalartype(void* self,
 {
   LANTERN_FUNCTION_START
     return make_unique::Tensor(from_raw::Tensor(self).norm(
-        ((LanternObject<c10::optional<torch::Scalar>>*)optional<torch::Scalar>(p).get())->get(), ((LanternObject<std::vector<int64_t>>*)dim)->get(), ((LanternObject<bool>*)keepdim)->get(), ((LanternObject<torch::ScalarType>*)dtype)->get()));
+        ((LanternObject<c10::optional<torch::Scalar>>*)optional<torch::Scalar>(p).get())->get(), ((LanternObject<std::vector<int64_t>>*)dim)->get(), ((LanternObject<bool>*)keepdim)->get(), from_raw::ScalarType(dtype)));
   LANTERN_FUNCTION_END
 }
 
@@ -10683,7 +10683,7 @@ void* _lantern_norm_out_tensor_tensor_scalar_intarrayref_bool_scalartype(void* o
 {
   LANTERN_FUNCTION_START
     return make_unique::Tensor(torch::norm_out(
-        from_raw::Tensor(out), from_raw::Tensor(self), ((LanternObject<c10::optional<torch::Scalar>>*)optional<torch::Scalar>(p).get())->get(), ((LanternObject<std::vector<int64_t>>*)dim)->get(), ((LanternObject<bool>*)keepdim)->get(), ((LanternObject<torch::ScalarType>*)dtype)->get()));
+        from_raw::Tensor(out), from_raw::Tensor(self), ((LanternObject<c10::optional<torch::Scalar>>*)optional<torch::Scalar>(p).get())->get(), ((LanternObject<std::vector<int64_t>>*)dim)->get(), ((LanternObject<bool>*)keepdim)->get(), from_raw::ScalarType(dtype)));
   LANTERN_FUNCTION_END
 }
 
@@ -10699,7 +10699,7 @@ void* _lantern_norm_tensor_scalar_dimnamelist_bool_scalartype(void* self, void* 
 {
   LANTERN_FUNCTION_START
     return make_unique::Tensor(torch::norm(
-        from_raw::Tensor(self), ((LanternObject<c10::optional<torch::Scalar>>*)optional<torch::Scalar>(p).get())->get(), ((LanternPtr<std::vector<torch::Dimname>>*)dim)->get(), ((LanternObject<bool>*)keepdim)->get(), ((LanternObject<torch::ScalarType>*)dtype)->get()));
+        from_raw::Tensor(self), ((LanternObject<c10::optional<torch::Scalar>>*)optional<torch::Scalar>(p).get())->get(), ((LanternPtr<std::vector<torch::Dimname>>*)dim)->get(), ((LanternObject<bool>*)keepdim)->get(), from_raw::ScalarType(dtype)));
   LANTERN_FUNCTION_END
 }
 
@@ -10707,7 +10707,7 @@ void* _lantern_Tensor_norm_tensor_scalar_dimnamelist_bool_scalartype(void* self,
 {
   LANTERN_FUNCTION_START
     return make_unique::Tensor(from_raw::Tensor(self).norm(
-        ((LanternObject<c10::optional<torch::Scalar>>*)optional<torch::Scalar>(p).get())->get(), ((LanternPtr<std::vector<torch::Dimname>>*)dim)->get(), ((LanternObject<bool>*)keepdim)->get(), ((LanternObject<torch::ScalarType>*)dtype)->get()));
+        ((LanternObject<c10::optional<torch::Scalar>>*)optional<torch::Scalar>(p).get())->get(), ((LanternPtr<std::vector<torch::Dimname>>*)dim)->get(), ((LanternObject<bool>*)keepdim)->get(), from_raw::ScalarType(dtype)));
   LANTERN_FUNCTION_END
 }
 
@@ -10731,7 +10731,7 @@ void* _lantern_norm_out_tensor_tensor_scalar_dimnamelist_bool_scalartype(void* o
 {
   LANTERN_FUNCTION_START
     return make_unique::Tensor(torch::norm_out(
-        from_raw::Tensor(out), from_raw::Tensor(self), ((LanternObject<c10::optional<torch::Scalar>>*)optional<torch::Scalar>(p).get())->get(), ((LanternPtr<std::vector<torch::Dimname>>*)dim)->get(), ((LanternObject<bool>*)keepdim)->get(), ((LanternObject<torch::ScalarType>*)dtype)->get()));
+        from_raw::Tensor(out), from_raw::Tensor(self), ((LanternObject<c10::optional<torch::Scalar>>*)optional<torch::Scalar>(p).get())->get(), ((LanternPtr<std::vector<torch::Dimname>>*)dim)->get(), ((LanternObject<bool>*)keepdim)->get(), from_raw::ScalarType(dtype)));
   LANTERN_FUNCTION_END
 }
 
@@ -11435,7 +11435,7 @@ void* _lantern_quantize_per_tensor_tensor_double_intt_scalartype(void* self, voi
 {
   LANTERN_FUNCTION_START
     return make_unique::Tensor(torch::quantize_per_tensor(
-        from_raw::Tensor(self), ((LanternObject<double>*)scale)->get(), ((LanternObject<int64_t>*)zero_point)->get(), ((LanternObject<torch::ScalarType>*)dtype)->get()));
+        from_raw::Tensor(self), ((LanternObject<double>*)scale)->get(), ((LanternObject<int64_t>*)zero_point)->get(), from_raw::ScalarType(dtype)));
   LANTERN_FUNCTION_END
 }
 
@@ -11443,7 +11443,7 @@ void* _lantern_quantize_per_tensor_tensorlist_tensor_tensor_scalartype(void* ten
 {
   LANTERN_FUNCTION_START
     return make_unique::TensorList(torch::quantize_per_tensor(
-        from_raw::TensorList(tensors), from_raw::Tensor(scales), from_raw::Tensor(zero_points), ((LanternObject<torch::ScalarType>*)dtype)->get()));
+        from_raw::TensorList(tensors), from_raw::Tensor(scales), from_raw::Tensor(zero_points), from_raw::ScalarType(dtype)));
   LANTERN_FUNCTION_END
 }
 
@@ -11451,7 +11451,7 @@ void* _lantern_quantize_per_channel_tensor_tensor_tensor_intt_scalartype(void* s
 {
   LANTERN_FUNCTION_START
     return make_unique::Tensor(torch::quantize_per_channel(
-        from_raw::Tensor(self), from_raw::Tensor(scales), from_raw::Tensor(zero_points), ((LanternObject<int64_t>*)axis)->get(), ((LanternObject<torch::ScalarType>*)dtype)->get()));
+        from_raw::Tensor(self), from_raw::Tensor(scales), from_raw::Tensor(zero_points), ((LanternObject<int64_t>*)axis)->get(), from_raw::ScalarType(dtype)));
   LANTERN_FUNCTION_END
 }
 
@@ -11715,7 +11715,7 @@ void* _lantern_Tensor_to_tensor_device_scalartype_bool_bool_memoryformat(void* s
 {
   LANTERN_FUNCTION_START
     return make_unique::Tensor(from_raw::Tensor(self).to(
-        ((LanternPtr<torch::Device>*)device)->get(), ((LanternObject<torch::ScalarType>*)dtype)->get(), ((LanternObject<bool>*)non_blocking)->get(), ((LanternObject<bool>*)copy)->get(), ((LanternObject<c10::optional<torch::MemoryFormat>>*)optional<torch::MemoryFormat>(memory_format).get())->get()));
+        ((LanternPtr<torch::Device>*)device)->get(), from_raw::ScalarType(dtype), ((LanternObject<bool>*)non_blocking)->get(), ((LanternObject<bool>*)copy)->get(), ((LanternObject<c10::optional<torch::MemoryFormat>>*)optional<torch::MemoryFormat>(memory_format).get())->get()));
   LANTERN_FUNCTION_END
 }
 
@@ -11723,7 +11723,7 @@ void* _lantern_Tensor_to_tensor_scalartype_bool_bool_memoryformat(void* self, vo
 {
   LANTERN_FUNCTION_START
     return make_unique::Tensor(from_raw::Tensor(self).to(
-        ((LanternObject<torch::ScalarType>*)dtype)->get(), ((LanternObject<bool>*)non_blocking)->get(), ((LanternObject<bool>*)copy)->get(), ((LanternObject<c10::optional<torch::MemoryFormat>>*)optional<torch::MemoryFormat>(memory_format).get())->get()));
+        from_raw::ScalarType(dtype), ((LanternObject<bool>*)non_blocking)->get(), ((LanternObject<bool>*)copy)->get(), ((LanternObject<c10::optional<torch::MemoryFormat>>*)optional<torch::MemoryFormat>(memory_format).get())->get()));
   LANTERN_FUNCTION_END
 }
 
@@ -11770,7 +11770,7 @@ void* _lantern_Tensor_item_tensor(void* self)
 void* _lantern_result_type_tensor_tensor(void* tensor, void* other)
 {
   LANTERN_FUNCTION_START
-    return (void *) new LanternObject<torch::ScalarType>(torch::result_type(
+    return make_unique::ScalarType(torch::result_type(
         from_raw::Tensor(tensor), from_raw::Tensor(other)));
   LANTERN_FUNCTION_END
 }
@@ -11778,7 +11778,7 @@ void* _lantern_result_type_tensor_tensor(void* tensor, void* other)
 void* _lantern_result_type_tensor_scalar(void* tensor, void* other)
 {
   LANTERN_FUNCTION_START
-    return (void *) new LanternObject<torch::ScalarType>(torch::result_type(
+    return make_unique::ScalarType(torch::result_type(
         from_raw::Tensor(tensor), ((LanternObject<torch::Scalar>*)other)->get()));
   LANTERN_FUNCTION_END
 }
@@ -11786,7 +11786,7 @@ void* _lantern_result_type_tensor_scalar(void* tensor, void* other)
 void* _lantern_result_type_scalar_tensor(void* scalar, void* tensor)
 {
   LANTERN_FUNCTION_START
-    return (void *) new LanternObject<torch::ScalarType>(torch::result_type(
+    return make_unique::ScalarType(torch::result_type(
         ((LanternObject<torch::Scalar>*)scalar)->get(), from_raw::Tensor(tensor)));
   LANTERN_FUNCTION_END
 }
@@ -11794,7 +11794,7 @@ void* _lantern_result_type_scalar_tensor(void* scalar, void* tensor)
 void* _lantern_result_type_scalar_scalar(void* scalar1, void* scalar2)
 {
   LANTERN_FUNCTION_START
-    return (void *) new LanternObject<torch::ScalarType>(torch::result_type(
+    return make_unique::ScalarType(torch::result_type(
         ((LanternObject<torch::Scalar>*)scalar1)->get(), ((LanternObject<torch::Scalar>*)scalar2)->get()));
   LANTERN_FUNCTION_END
 }
@@ -11803,15 +11803,15 @@ void* _lantern_can_cast_scalartype_scalartype(void* from, void* to)
 {
   LANTERN_FUNCTION_START
     return (void *) new LanternObject<bool>(torch::can_cast(
-        ((LanternObject<torch::ScalarType>*)from)->get(), ((LanternObject<torch::ScalarType>*)to)->get()));
+        from_raw::ScalarType(from), from_raw::ScalarType(to)));
   LANTERN_FUNCTION_END
 }
 
 void* _lantern_promote_types_scalartype_scalartype(void* type1, void* type2)
 {
   LANTERN_FUNCTION_START
-    return (void *) new LanternObject<torch::ScalarType>(torch::promote_types(
-        ((LanternObject<torch::ScalarType>*)type1)->get(), ((LanternObject<torch::ScalarType>*)type2)->get()));
+    return make_unique::ScalarType(torch::promote_types(
+        from_raw::ScalarType(type1), from_raw::ScalarType(type2)));
   LANTERN_FUNCTION_END
 }
 
@@ -12147,7 +12147,7 @@ void* _lantern_Tensor_view_tensor_scalartype(void* self, void* dtype)
 {
   LANTERN_FUNCTION_START
     return make_unique::Tensor(from_raw::Tensor(self).view(
-        ((LanternObject<torch::ScalarType>*)dtype)->get()));
+        from_raw::ScalarType(dtype)));
   LANTERN_FUNCTION_END
 }
 

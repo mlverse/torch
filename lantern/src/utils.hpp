@@ -85,6 +85,7 @@ struct NamedTupleHelper {
 namespace make_unique {
   void* Tensor (const torch::Tensor& x);
   void* TensorList (const torch::TensorList& x);
+  void* ScalarType (const torch::ScalarType& x);
 }
 
 #define LANTERN_FROM_RAW_DECL(name, type)                                                 \
@@ -96,4 +97,5 @@ namespace from_raw {
   // underlying memory. Passing them as vectors is also fine as they are trivially
   // constructed from them. 
   LANTERN_FROM_RAW_DECL(TensorList, std::vector<torch::Tensor>)
+  LANTERN_FROM_RAW_DECL(ScalarType, torch::ScalarType)
 }
