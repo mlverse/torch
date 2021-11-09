@@ -198,6 +198,10 @@ std::string buildCalls(std::string name, YAML::Node node, size_t start)
         {
             arguments += "from_raw::ScalarType(" + call + ")";
         }
+        else if (type == "Scalar")
+        {
+            arguments += "from_raw::Scalar(" + call + ")";
+        }
         else
         {
             arguments += "((" + lanternObject(type) + "<" + addNamespace(type) + ">*)" +
@@ -378,6 +382,11 @@ int main(int argc, char *argv[])
                         bodies.push_back("    return make_unique::ScalarType(" + functionCall + name + "(");
                         bodies.push_back("        " + calls + "));");
                     }
+                    else if (returns == "torch::Scalar")
+                    {
+                        bodies.push_back("    return make_unique::Scalar(" + functionCall + name + "(");
+                        bodies.push_back("        " + calls + "));");
+                    }
                     else
                     {
                         bodies.push_back("    return (void *) new LanternObject<" + returns + ">(" + functionCall + name + "(");
@@ -454,6 +463,11 @@ int main(int argc, char *argv[])
                     else if (returns == "torch::ScalarType")
                     {
                         bodies.push_back("    return make_unique::ScalarType(" + functionCall + name + "(");
+                        bodies.push_back("        " + calls + "));");
+                    }
+                    else if (returns == "torch::Scalar")
+                    {
+                        bodies.push_back("    return make_unique::Scalar(" + functionCall + name + "(");
                         bodies.push_back("        " + calls + "));");
                     }
                     else
