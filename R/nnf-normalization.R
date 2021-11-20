@@ -79,7 +79,7 @@ nnf_local_response_norm <- function(input, size, alpha = 1e-4, beta = 0.75, k = 
     div <- nnf_avg_pool2d(div, c(size, 1), stride = 1)$squeeze(1)
   } else {
     sizes <- input$size()
-    div <- div$view(sizes[1], 1, sizes[2], sizes[3], -1)
+    div <- div$view(c(sizes[1], 1, sizes[2], sizes[3], -1))
     div <- nnf_pad(div, c(0,0,0,0, as.integer(size/2), as.integer((size - 1)/2)))
     div <- nnf_avg_pool3d(div, c(size, 1, 1), stride = 1)$squeeze(1)
     div <- div$view(sizes)
