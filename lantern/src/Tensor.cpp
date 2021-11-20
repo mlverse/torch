@@ -207,9 +207,8 @@ bool _lantern_Tensor_has_names (void * self)
 void* _lantern_Tensor_names (void* self)
 {
   LANTERN_FUNCTION_START
-  torch::Tensor x = from_raw::Tensor(self);;
-  std::vector<torch::Dimname> nms = x.names().vec();
-  return (void *)new LanternPtr<std::vector<torch::Dimname>>(nms);
+  torch::Tensor x = from_raw::Tensor(self);
+  return make_unique::DimnameList(x.names());
   LANTERN_FUNCTION_END
 }
 

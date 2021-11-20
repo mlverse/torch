@@ -131,6 +131,5 @@ void register_callables (DllInfo *dll)
   
   REGISTER_C_CALLABLE(fixme_optional_vector_int64_t)
   REGISTER_C_CALLABLE(fixme_new_string)
-  REGISTER_C_CALLABLE(fixme_new_dimname)
 }
 

@@ -2,8 +2,8 @@
 #include <torch.h>
 
 // [[Rcpp::export]]
-XPtrTorchDimname cpp_torch_dimname(const std::string& str) {
-  XPtrTorchDimname out = lantern_Dimname(str.c_str());
+XPtrTorchDimname cpp_torch_dimname(XPtrTorchstring str) {
+  XPtrTorchDimname out = lantern_Dimname(str.get());
   return XPtrTorchDimname(out);
 }
 

@@ -306,8 +306,13 @@ namespace make_unique {
   }
   void* Dimname (torch::Dimname& x)
   {
-    return (void*) new LanternPtr<torch::Dimname>(x);
+    return (void*) new torch::Dimname(x);
   }
+  void* DimnameList (const torch::DimnameList& x)
+  {
+    return (void*) new std::vector<torch::Dimname>(x.vec());
+  }
+
 }
 
 #define LANTERN_FROM_RAW(name, type) \
@@ -324,7 +329,19 @@ namespace from_raw {
   }
   LANTERN_FROM_RAW(Dtype, torch::Dtype)
   torch::Dimname& Dimname (void* x) {
-    return reinterpret_cast<LanternPtr<torch::Dimname>*>(x)->get();
+    return *reinterpret_cast<torch::Dimname*>(x);
+  }
+  std::vector<torch::Dimname>& DimnameList (void* x) {
+    return *reinterpret_cast<std::vector<torch::Dimname>*>(x);
+  }
+  
+  namespace optional {
+
+    c10::optional<torch::DimnameList> DimnameList (void* x) {
+      if (!x) return c10::nullopt;
+      return *reinterpret_cast<std::vector<torch::Dimname>*>(x);
+    }
+
   }
 }
 

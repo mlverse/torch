@@ -28,7 +28,7 @@ private:
   T *_object;
 
 public:
-  LanternPtr(T &object)
+  LanternPtr(const T &object)
   {
     _object = new T(object);
   }
@@ -48,6 +48,7 @@ public:
   {
     return *_object;
   }
+
 };
 
 // https://pt.stackoverflow.com/a/438284/6036
@@ -91,6 +92,7 @@ namespace make_unique {
   void* Device (torch::Device& x);
   void* Dtype (const torch::Dtype& x);
   void* Dimname (torch::Dimname& x);
+  void* DimnameList (const torch::DimnameList& x);
 }
 
 #define LANTERN_FROM_RAW_DECL(name, type)                                                 \
@@ -108,4 +110,9 @@ namespace from_raw {
   LANTERN_FROM_RAW_DECL(Device, torch::Device)
   LANTERN_FROM_RAW_DECL(Dtype, torch::Dtype)
   LANTERN_FROM_RAW_DECL(Dimname, torch::Dimname)
+  LANTERN_FROM_RAW_DECL(DimnameList, std::vector<torch::Dimname>)
+
+  namespace optional {
+    c10::optional<torch::DimnameList> DimnameList (void* x);
+  }
 }

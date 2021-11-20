@@ -169,8 +169,7 @@ public:
   explicit XPtrTorchDimname (std::shared_ptr<void> x) : XPtrTorch(x) {};
   XPtrTorchDimname (const XPtrTorchDimname& x) : XPtrTorch(x.get_shared()) {};
   explicit XPtrTorchDimname (SEXP x);
-  explicit XPtrTorchDimname (const std::string& x) : 
-    XPtrTorch(fixme_new_dimname(x.c_str()), delete_dimname) {};
+  explicit XPtrTorchDimname (const std::string& x) : XPtrTorchDimname(Rcpp::wrap(x)) {};
   operator SEXP () const;
 };
 

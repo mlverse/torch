@@ -142,10 +142,6 @@ std::string buildCalls(std::string name, YAML::Node node, size_t start)
         {
             type = "c10::List<c10::optional<torch::Tensor>>";
         }
-        else if (type == "DimnameList")
-        {
-            type = "std::vector<torch::Dimname>";
-        }
         else if (type == "Generator *")
         {
             type = "std::shared_ptr<torch::Generator>";
@@ -170,13 +166,14 @@ std::string buildCalls(std::string name, YAML::Node node, size_t start)
             (type != "c10::List<c10::optional<torch::Tensor>>") &
             (type != "c10::optional<torch::Tensor>") &
             (type != "const c10::List<c10::optional<at::Tensor>> &") &
-            (type != "c10::optional<at::Scalar>")
-            )
+            (type != "c10::optional<at::Scalar>"))
         {
             if ((type != "double") & 
                 (type != "IntArrayRef") &
                 (type != "ArrayRef<double>") &
-                type  != "int64_t")
+                type  != "int64_t" &
+                type  != "DimnameList"
+                )
             {
                 call = "optional<" + addNamespace(type) + ">(" + call + ").get()";
             }
@@ -209,6 +206,18 @@ std::string buildCalls(std::string name, YAML::Node node, size_t start)
         else if (type == "Device")
         {
             arguments += "from_raw::Device(" + call + ")";
+        }
+        else if (type == "Dimname")
+        {
+            arguments += "from_raw::Dimname(" + call + ")";
+        }
+        else if (type == "DimnameList")
+        {
+            arguments += "from_raw::DimnameList(" + call + ")";
+        }
+        else if (type == "c10::optional<DimnameList>")
+        {
+            arguments += "from_raw::optional::DimnameList(" + call + ")";
         }
         else
         {
@@ -400,6 +409,11 @@ int main(int argc, char *argv[])
                         bodies.push_back("    return make_unique::TensorOptions(" + functionCall + name + "(");
                         bodies.push_back("        " + calls + "));");
                     }
+                    else if (returns == "torch::DimnameList")
+                    {
+                        bodies.push_back("    return make_unique::DimnameList(" + functionCall + name + "(");
+                        bodies.push_back("        " + calls + "));");
+                    }
                     else
                     {
                         bodies.push_back("    return (void *) new LanternObject<" + returns + ">(" + functionCall + name + "(");
@@ -486,6 +500,11 @@ int main(int argc, char *argv[])
                     else if (returns == "torch::TensorOptions")
                     {
                         bodies.push_back("    return make_unique::TensorOptions(" + functionCall + name + "(");
+                        bodies.push_back("        " + calls + "));");
+                    }
+                    else if (returns == "torch::DimnameList")
+                    {
+                        bodies.push_back("    return make_unique::DimnameList(" + functionCall + name + "(");
                         bodies.push_back("        " + calls + "));");
                     }
                     else

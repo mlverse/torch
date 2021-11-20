@@ -262,8 +262,8 @@ enum IValue_types {
   HOST_API void * lantern_int64_t(int64_t x) {LANTERN_CHECK_LOADED void * ret = _lantern_int64_t(x); LANTERN_HOST_HANDLER return ret;}
   LANTERN_API void *(LANTERN_PTR _lantern_bool)(bool x);
   HOST_API void * lantern_bool(bool x) {LANTERN_CHECK_LOADED void * ret = _lantern_bool(x); LANTERN_HOST_HANDLER return ret;}
-  LANTERN_API void *(LANTERN_PTR _lantern_Dimname)(const char *name);
-  HOST_API void * lantern_Dimname(const char *name) {LANTERN_CHECK_LOADED void * ret = _lantern_Dimname(name); LANTERN_HOST_HANDLER return ret;}
+  LANTERN_API void *(LANTERN_PTR _lantern_Dimname)(void* name);
+  HOST_API void * lantern_Dimname(void* name) {LANTERN_CHECK_LOADED void * ret = _lantern_Dimname(name); LANTERN_HOST_HANDLER return ret;}
   LANTERN_API void *(LANTERN_PTR _lantern_DimnameList)();
   HOST_API void * lantern_DimnameList() {LANTERN_CHECK_LOADED void * ret = _lantern_DimnameList(); LANTERN_HOST_HANDLER return ret;}
   LANTERN_API void(LANTERN_PTR _lantern_DimnameList_push_back)(void *list, void *dimname);

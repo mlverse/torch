@@ -122,14 +122,14 @@ void _lantern_Generator_delete(void *x)
 void _lantern_Dimname_delete(void *x)
 {
   LANTERN_FUNCTION_START
-  lantern_delete<LanternPtr<torch::Dimname>>(x);
+  lantern_delete<torch::Dimname>(x);
   LANTERN_FUNCTION_END_VOID
 }
 
 void _lantern_DimnameList_delete(void *x)
 {
   LANTERN_FUNCTION_START
-  lantern_delete<LanternPtr<std::vector<torch::Dimname>>>(x);
+  lantern_delete<std::vector<torch::Dimname>>(x);
   LANTERN_FUNCTION_END_VOID
 }
 

@@ -514,12 +514,12 @@ BEGIN_RCPP
 END_RCPP
 }
 // cpp_torch_dimname
-XPtrTorchDimname cpp_torch_dimname(const std::string& str);
+XPtrTorchDimname cpp_torch_dimname(XPtrTorchstring str);
 RcppExport SEXP _torch_cpp_torch_dimname(SEXP strSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< const std::string& >::type str(strSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchstring >::type str(strSEXP);
     rcpp_result_gen = Rcpp::wrap(cpp_torch_dimname(str));
     return rcpp_result_gen;
 END_RCPP
