@@ -15,3 +15,8 @@ int cpp_cuda_device_count () {
 int64_t cpp_cuda_current_device() {
   return lantern_cuda_current_device();
 }
+
+// [[Rcpp::export]]
+XPtrTorchvector_int64_t cpp_cuda_get_device_capability(int64_t device) {
+  return lantern_cuda_get_device_capability(device);
+}

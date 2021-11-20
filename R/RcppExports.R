@@ -165,6 +165,10 @@ cpp_cuda_current_device <- function() {
     .Call('_torch_cpp_cuda_current_device', PACKAGE = 'torchpkg')
 }
 
+cpp_cuda_get_device_capability <- function(device) {
+    .Call('_torch_cpp_cuda_get_device_capability', PACKAGE = 'torchpkg', device)
+}
+
 cpp_device_type_to_string <- function(device) {
     .Call('_torch_cpp_device_type_to_string', PACKAGE = 'torchpkg', device)
 }
