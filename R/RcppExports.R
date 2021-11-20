@@ -10593,6 +10593,10 @@ cpp_jit_script_module_save <- function(self, path) {
     invisible(.Call('_torch_cpp_jit_script_module_save', PACKAGE = 'torchpkg', self, path))
 }
 
+cpp_jit_script_module_save_for_mobile <- function(self, path) {
+    invisible(.Call('_torch_cpp_jit_script_module_save_for_mobile', PACKAGE = 'torchpkg', self, path))
+}
+
 test_stack <- function(x) {
     .Call('_torch_test_stack', PACKAGE = 'torchpkg', x)
 }
@@ -10739,6 +10743,10 @@ cpp_jit_load <- function(path) {
 
 cpp_call_jit_script <- function(module, inputs) {
     .Call('_torch_cpp_call_jit_script', PACKAGE = 'torchpkg', module, inputs)
+}
+
+cpp_save_traced_fn_for_mobile <- function(fn, filename) {
+    invisible(.Call('_torch_cpp_save_traced_fn_for_mobile', PACKAGE = 'torchpkg', fn, filename))
 }
 
 cpp_nullptr <- function() {

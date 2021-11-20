@@ -1,5 +1,8 @@
 # torch 0.6.1
 
+## New features
+
+- `jit_save_for_mobile` allows to save a traced model in bytecode form, to be loaded by a `LiteModuleLoader`. (#713)
 - Fixed valgrind errors on CRAN by requiring a more recent version of knitr.
 - Updated LibTorch to version 1.9.1 (#725 @hsbadr)
 - We now check if lantern DLL's are loaded before calling any lantern function. This avoids segfaults when Lantern is not installed. (#723).

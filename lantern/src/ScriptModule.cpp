@@ -231,3 +231,12 @@ void* _lantern_last_executed_optimized_graph_print ()
     return (void*) new std::string(str);
     LANTERN_FUNCTION_END
 }
+
+void _lantern_ScriptModule_save_for_mobile (void* self, void* path)
+{
+  LANTERN_FUNCTION_START
+  auto self_ = reinterpret_cast<torch::jit::script::Module *>(self);
+  auto path_ = reinterpret_cast<LanternObject<std::string>*>(path)->get();
+  self_->_save_for_mobile(path_);
+  LANTERN_FUNCTION_END_VOID
+}
