@@ -18,3 +18,19 @@ test_that("nnf_normalize", {
   )
   
 })
+
+test_that("nnf_local_response_norm", {
+  
+  signal_2d <- torch_randn(32, 5, 24, 24)
+  signal_4d <- torch_randn(16, 5, 7, 7, 7, 7)
+  
+  output_2d <- nnf_local_response_norm(signal_2d, size = 2)
+  output_4d <- nnf_local_response_norm(signal_4d, size = 2)
+  
+  expect_length(output_2d$size(), 4)
+  expect_length(output_4d$size(), 6)
+  
+})
+
+
+

@@ -754,6 +754,13 @@ HOST_API void lantern_traced_fn_save (void* fn, const char * filename)
   LANTERN_HOST_HANDLER;
 }
 
+LANTERN_API void (LANTERN_PTR _lantern_traced_fn_save_for_mobile) (void* fn, const char * filename);
+HOST_API void lantern_traced_fn_save_for_mobile (void* fn, const char * filename)
+{
+  _lantern_traced_fn_save_for_mobile(fn, filename);
+  LANTERN_HOST_HANDLER;
+}
+
 LANTERN_API const char * (LANTERN_PTR _lantern_traced_fn_graph_print) (void* fn);
 HOST_API const char * lantern_traced_fn_graph_print (void* fn)
 {
@@ -2010,6 +2017,14 @@ HOST_API void lantern_ScriptModule_save (void* self, void* path)
   
 }
 
+LANTERN_API void (LANTERN_PTR _lantern_ScriptModule_save_for_mobile) (void* self, void* path);
+HOST_API void lantern_ScriptModule_save_for_mobile (void* self, void* path)
+{
+  _lantern_ScriptModule_save_for_mobile(self, path);
+  LANTERN_HOST_HANDLER;
+  
+}
+
 LANTERN_API void* (LANTERN_PTR _lantern_vector_Scalar_new) ();
 HOST_API void* lantern_vector_Scalar_new ()
 {
@@ -2159,6 +2174,15 @@ HOST_API void* lantern_optional_tensor_value (void* x)
 {
   LANTERN_CHECK_LOADED
   void* ret = _lantern_optional_tensor_value(x);
+  LANTERN_HOST_HANDLER;
+  return ret;
+}
+
+LANTERN_API void* (LANTERN_PTR _lantern_cuda_get_device_capability) (int64_t device);
+HOST_API void* lantern_cuda_get_device_capability (int64_t device)
+{
+  LANTERN_CHECK_LOADED
+  void* ret = _lantern_cuda_get_device_capability(device);
   LANTERN_HOST_HANDLER;
   return ret;
 }
@@ -7591,6 +7615,7 @@ bool lanternInit(const std::string &libPath, std::string *pError)
   LOAD_SYMBOL(_lantern_CompilationUnit_delete);
   LOAD_SYMBOL(_lantern_call_traced_fn);
   LOAD_SYMBOL(_lantern_traced_fn_save);
+  LOAD_SYMBOL(_lantern_traced_fn_save_for_mobile);
   LOAD_SYMBOL(_lantern_traced_fn_graph_print);
   LOAD_SYMBOL(_lantern_Tensor_has_any_zeros);
   LOAD_SYMBOL(_lantern_jit_load);
@@ -7732,6 +7757,7 @@ LOAD_SYMBOL(_lantern_ScriptModule_add_constant);
 LOAD_SYMBOL(_lantern_ScriptModule_find_constant);
 LOAD_SYMBOL(_lantern_ScriptModule_add_method);
 LOAD_SYMBOL(_lantern_ScriptModule_save);
+LOAD_SYMBOL(_lantern_ScriptModule_save_for_mobile);
 LOAD_SYMBOL(_lantern_vector_Scalar_new);
 LOAD_SYMBOL(_lantern_vector_Scalar_push_back);
 LOAD_SYMBOL(_lantern_vector_Scalar_size);
@@ -7749,6 +7775,7 @@ LOAD_SYMBOL(_lantern_OptionalTensorList_size);
 LOAD_SYMBOL(_lantern_OptionalTensorList_at);
 LOAD_SYMBOL(_lantern_OptionalTensorList_at_is_null);
 LOAD_SYMBOL(_lantern_optional_tensor_value);
+LOAD_SYMBOL(_lantern_cuda_get_device_capability);
   /* Autogen Symbols -- Start */
   LOAD_SYMBOL(_lantern__cast_byte_tensor_bool)
   LOAD_SYMBOL(_lantern__cast_char_tensor_bool)

@@ -399,14 +399,14 @@ nnf_nll_loss <- function(input, target, weight = NULL, ignore_index = -100,
     target <- target$contiguous()
     
     if (input$numel() > 0)
-      input <- input$view(n, c, 1, -1)
+      input <- input$view(c(n, c, 1, -1))
     else
-      input <- input$view(n, c, 0, 0)
+      input <- input$view(c(n, c, 0, 0))
     
     if (target$numel() > 0)
-      target <- target$view(n, 1, -1)
+      target <- target$view(c(n, 1, -1))
     else
-      target <- target$view(n, 0, 0)
+      target <- target$view(c(n, 0, 0))
     
     if (reduction != "none") {
       ret <- torch_nll_loss2d(input, target, weight, reduction_enum(reduction),

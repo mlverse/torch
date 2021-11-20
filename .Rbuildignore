@@ -34,7 +34,7 @@ tools/torchgen/.Rbuildignore
 # ^vignettes/using-autograd\.Rmd
 
 # uncomment below for CRAN submission
-^inst/deps/.*
+#^inst/deps/.*
 ^doc$
 ^Meta$
 ^vignettes/rsconnect*
