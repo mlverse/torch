@@ -33,6 +33,13 @@ etm:
   url_docs: https://github.com/bnosac/ETM
   url_cran: https://cloud.r-project.org/web/packages/ETM/index.html
   name: ETM
+innsight:
+  weight: 40
+  desc: 'innsight is an R package that interprets the behavior and explains individual predictions of modern neural networks. Many methods for explaining individual predictions already exist, but hardly any of them are implemented or available in R.'
+  url_git: https://github.com/bips-hb/innsight
+  url_docs: https://bips-hb.github.io/innsight
+  url_cran: https://cran.r-project.org/package=innsight
+  name: innsight
 you:
   weight: 100
   desc: 'If you are developing a torch extension, contact us on GitHub so we can feature it! We welcome all kinds of extensions: datasets, models, or any kind of functionality built on torch!'
