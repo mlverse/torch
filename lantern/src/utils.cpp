@@ -337,6 +337,9 @@ namespace from_raw {
   
   namespace optional {
 
+    // It's OK to return by value here because we are never modifying optional DimnameLists in
+    // place. For consistency we should return by reference, but that would require a few changes
+    // code generation in the R side, in order for R to own the memory in the 'optional' case.
     c10::optional<torch::DimnameList> DimnameList (void* x) {
       if (!x) return c10::nullopt;
       return reinterpret_cast<LanternPtr<std::vector<torch::Dimname>>*>(x)->get();
