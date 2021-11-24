@@ -192,6 +192,7 @@
 <code>jit_save_for_mobile</code> allows to save a traced model in bytecode form, to be loaded by a <code>LiteModuleLoader</code>. (<a href='https://github.com/mlverse/torch/issues/713'>#713</a>)</li>
 <li>Exported <code>is_torch_tensor</code> to check wether an object is a tensor or not. (<a href='https://github.com/mlverse/torch/issues/730'>#730</a>, <a href='https://github.com/rdinnager'>@rdinnager</a>)</li>
 <li>Adds <code>cuda_get_device_properties(device)</code> that allows one to query device capability and other properties. (<a href='https://github.com/mlverse/torch/issues/734'>#734</a>, <a href='https://github.com/rdinnager'>@rdinnager</a>)</li>
+<li>Fixed a bug in <code>.validate_sample</code> for the <code>Distribution</code> class that would incorrectly check for tensors. (<a href='https://github.com/mlverse/torch/issues/739'>#739</a>, <a href='https://github.com/hsbadr'>@hsbadr</a>)</li>
 </ul>
 </div>
     <div id="torch-061" class="section level1">
