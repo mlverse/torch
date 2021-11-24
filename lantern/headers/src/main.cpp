@@ -172,7 +172,8 @@ std::string buildCalls(std::string name, YAML::Node node, size_t start)
                 (type != "IntArrayRef") &
                 (type != "ArrayRef<double>") &
                 type  != "int64_t" &
-                type  != "DimnameList"
+                type  != "DimnameList" &
+                type  != "Generator"
                 )
             {
                 call = "optional<" + addNamespace(type) + ">(" + call + ").get()";
@@ -218,6 +219,14 @@ std::string buildCalls(std::string name, YAML::Node node, size_t start)
         else if (type == "c10::optional<DimnameList>")
         {
             arguments += "from_raw::optional::DimnameList(" + call + ")";
+        }
+        else if (type == "Generator")
+        {
+            arguments += "from_raw::Generator(" + call + ")";
+        }
+        else if (type == "c10::optional<Generator>")
+        {
+            arguments += "from_raw::optional::Generator(" + call + ")";
         }
         else
         {

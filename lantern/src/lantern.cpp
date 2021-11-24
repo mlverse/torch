@@ -339,7 +339,7 @@ void* _lantern__fused_dropout_tensor_double_generator(void* self, void* p, void*
 {
   LANTERN_FUNCTION_START
     return (void *) new LanternObject<std::vector<void*>>(to_vector(torch::_fused_dropout(
-        from_raw::Tensor(self), ((LanternObject<double>*)p)->get(), ((LanternObject<c10::optional<torch::Generator>>*)optional<torch::Generator>(generator).get())->get())));
+        from_raw::Tensor(self), ((LanternObject<double>*)p)->get(), from_raw::optional::Generator(generator))));
   LANTERN_FUNCTION_END
 }
 
@@ -1707,7 +1707,7 @@ void* _lantern_bernoulli_tensor_generator(void* self, void* generator)
 {
   LANTERN_FUNCTION_START
     return make_unique::Tensor(torch::bernoulli(
-        from_raw::Tensor(self), ((LanternObject<c10::optional<torch::Generator>>*)optional<torch::Generator>(generator).get())->get()));
+        from_raw::Tensor(self), from_raw::optional::Generator(generator)));
   LANTERN_FUNCTION_END
 }
 
@@ -1715,7 +1715,7 @@ void* _lantern_Tensor_bernoulli_tensor_generator(void* self, void* generator)
 {
   LANTERN_FUNCTION_START
     return make_unique::Tensor(from_raw::Tensor(self).bernoulli(
-        ((LanternObject<c10::optional<torch::Generator>>*)optional<torch::Generator>(generator).get())->get()));
+        from_raw::optional::Generator(generator)));
   LANTERN_FUNCTION_END
 }
 
@@ -1723,7 +1723,7 @@ void* _lantern_bernoulli_out_tensor_tensor_generator(void* out, void* self, void
 {
   LANTERN_FUNCTION_START
     return make_unique::Tensor(torch::bernoulli_out(
-        from_raw::Tensor(out), from_raw::Tensor(self), ((LanternObject<c10::optional<torch::Generator>>*)optional<torch::Generator>(generator).get())->get()));
+        from_raw::Tensor(out), from_raw::Tensor(self), from_raw::optional::Generator(generator)));
   LANTERN_FUNCTION_END
 }
 
@@ -1731,7 +1731,7 @@ void* _lantern_Tensor_bernoulli__tensor_tensor_generator(void* self, void* p, vo
 {
   LANTERN_FUNCTION_START
     return make_unique::Tensor(from_raw::Tensor(self).bernoulli_(
-        from_raw::Tensor(p), ((LanternObject<c10::optional<torch::Generator>>*)optional<torch::Generator>(generator).get())->get()));
+        from_raw::Tensor(p), from_raw::optional::Generator(generator)));
   LANTERN_FUNCTION_END
 }
 
@@ -1739,7 +1739,7 @@ void* _lantern_Tensor_bernoulli__tensor_double_generator(void* self, void* p, vo
 {
   LANTERN_FUNCTION_START
     return make_unique::Tensor(from_raw::Tensor(self).bernoulli_(
-        ((LanternObject<double>*)p)->get(), ((LanternObject<c10::optional<torch::Generator>>*)optional<torch::Generator>(generator).get())->get()));
+        ((LanternObject<double>*)p)->get(), from_raw::optional::Generator(generator)));
   LANTERN_FUNCTION_END
 }
 
@@ -1747,7 +1747,7 @@ void* _lantern_bernoulli_tensor_double_generator(void* self, void* p, void* gene
 {
   LANTERN_FUNCTION_START
     return make_unique::Tensor(torch::bernoulli(
-        from_raw::Tensor(self), ((LanternObject<double>*)p)->get(), ((LanternObject<c10::optional<torch::Generator>>*)optional<torch::Generator>(generator).get())->get()));
+        from_raw::Tensor(self), ((LanternObject<double>*)p)->get(), from_raw::optional::Generator(generator)));
   LANTERN_FUNCTION_END
 }
 
@@ -1755,7 +1755,7 @@ void* _lantern_Tensor_bernoulli_tensor_double_generator(void* self, void* p, voi
 {
   LANTERN_FUNCTION_START
     return make_unique::Tensor(from_raw::Tensor(self).bernoulli(
-        ((LanternObject<double>*)p)->get(), ((LanternObject<c10::optional<torch::Generator>>*)optional<torch::Generator>(generator).get())->get()));
+        ((LanternObject<double>*)p)->get(), from_raw::optional::Generator(generator)));
   LANTERN_FUNCTION_END
 }
 
@@ -7643,7 +7643,7 @@ void* _lantern_rand_intarrayref_generator_dimnamelist_tensoroptions(void* size, 
 {
   LANTERN_FUNCTION_START
     return make_unique::Tensor(torch::rand(
-        ((LanternObject<std::vector<int64_t>>*)size)->get(), ((LanternObject<c10::optional<torch::Generator>>*)optional<torch::Generator>(generator).get())->get(), from_raw::optional::DimnameList(names), from_raw::TensorOptions(options)));
+        ((LanternObject<std::vector<int64_t>>*)size)->get(), from_raw::optional::Generator(generator), from_raw::optional::DimnameList(names), from_raw::TensorOptions(options)));
   LANTERN_FUNCTION_END
 }
 
@@ -7659,7 +7659,7 @@ void* _lantern_rand_intarrayref_generator_tensoroptions(void* size, void* genera
 {
   LANTERN_FUNCTION_START
     return make_unique::Tensor(torch::rand(
-        ((LanternObject<std::vector<int64_t>>*)size)->get(), ((LanternObject<c10::optional<torch::Generator>>*)optional<torch::Generator>(generator).get())->get(), from_raw::TensorOptions(options)));
+        ((LanternObject<std::vector<int64_t>>*)size)->get(), from_raw::optional::Generator(generator), from_raw::TensorOptions(options)));
   LANTERN_FUNCTION_END
 }
 
@@ -7675,7 +7675,7 @@ void* _lantern_rand_out_tensor_intarrayref_generator(void* out, void* size, void
 {
   LANTERN_FUNCTION_START
     return make_unique::Tensor(torch::rand_out(
-        from_raw::Tensor(out), ((LanternObject<std::vector<int64_t>>*)size)->get(), ((LanternObject<c10::optional<torch::Generator>>*)optional<torch::Generator>(generator).get())->get()));
+        from_raw::Tensor(out), ((LanternObject<std::vector<int64_t>>*)size)->get(), from_raw::optional::Generator(generator)));
   LANTERN_FUNCTION_END
 }
 
@@ -7699,7 +7699,7 @@ void* _lantern_randint_intt_intarrayref_generator_tensoroptions(void* high, void
 {
   LANTERN_FUNCTION_START
     return make_unique::Tensor(torch::randint(
-        ((LanternObject<int64_t>*)high)->get(), ((LanternObject<std::vector<int64_t>>*)size)->get(), ((LanternObject<c10::optional<torch::Generator>>*)optional<torch::Generator>(generator).get())->get(), from_raw::TensorOptions(options)));
+        ((LanternObject<int64_t>*)high)->get(), ((LanternObject<std::vector<int64_t>>*)size)->get(), from_raw::optional::Generator(generator), from_raw::TensorOptions(options)));
   LANTERN_FUNCTION_END
 }
 
@@ -7715,7 +7715,7 @@ void* _lantern_randint_intt_intt_intarrayref_generator_tensoroptions(void* low, 
 {
   LANTERN_FUNCTION_START
     return make_unique::Tensor(torch::randint(
-        ((LanternObject<int64_t>*)low)->get(), ((LanternObject<int64_t>*)high)->get(), ((LanternObject<std::vector<int64_t>>*)size)->get(), ((LanternObject<c10::optional<torch::Generator>>*)optional<torch::Generator>(generator).get())->get(), from_raw::TensorOptions(options)));
+        ((LanternObject<int64_t>*)low)->get(), ((LanternObject<int64_t>*)high)->get(), ((LanternObject<std::vector<int64_t>>*)size)->get(), from_raw::optional::Generator(generator), from_raw::TensorOptions(options)));
   LANTERN_FUNCTION_END
 }
 
@@ -7731,7 +7731,7 @@ void* _lantern_randint_out_tensor_intt_intarrayref_generator(void* out, void* hi
 {
   LANTERN_FUNCTION_START
     return make_unique::Tensor(torch::randint_out(
-        from_raw::Tensor(out), ((LanternObject<int64_t>*)high)->get(), ((LanternObject<std::vector<int64_t>>*)size)->get(), ((LanternObject<c10::optional<torch::Generator>>*)optional<torch::Generator>(generator).get())->get()));
+        from_raw::Tensor(out), ((LanternObject<int64_t>*)high)->get(), ((LanternObject<std::vector<int64_t>>*)size)->get(), from_raw::optional::Generator(generator)));
   LANTERN_FUNCTION_END
 }
 
@@ -7747,7 +7747,7 @@ void* _lantern_randint_out_tensor_intt_intt_intarrayref_generator(void* out, voi
 {
   LANTERN_FUNCTION_START
     return make_unique::Tensor(torch::randint_out(
-        from_raw::Tensor(out), ((LanternObject<int64_t>*)low)->get(), ((LanternObject<int64_t>*)high)->get(), ((LanternObject<std::vector<int64_t>>*)size)->get(), ((LanternObject<c10::optional<torch::Generator>>*)optional<torch::Generator>(generator).get())->get()));
+        from_raw::Tensor(out), ((LanternObject<int64_t>*)low)->get(), ((LanternObject<int64_t>*)high)->get(), ((LanternObject<std::vector<int64_t>>*)size)->get(), from_raw::optional::Generator(generator)));
   LANTERN_FUNCTION_END
 }
 
@@ -7779,7 +7779,7 @@ void* _lantern_randn_intarrayref_generator_tensoroptions(void* size, void* gener
 {
   LANTERN_FUNCTION_START
     return make_unique::Tensor(torch::randn(
-        ((LanternObject<std::vector<int64_t>>*)size)->get(), ((LanternObject<c10::optional<torch::Generator>>*)optional<torch::Generator>(generator).get())->get(), from_raw::TensorOptions(options)));
+        ((LanternObject<std::vector<int64_t>>*)size)->get(), from_raw::optional::Generator(generator), from_raw::TensorOptions(options)));
   LANTERN_FUNCTION_END
 }
 
@@ -7795,7 +7795,7 @@ void* _lantern_randn_intarrayref_generator_dimnamelist_tensoroptions(void* size,
 {
   LANTERN_FUNCTION_START
     return make_unique::Tensor(torch::randn(
-        ((LanternObject<std::vector<int64_t>>*)size)->get(), ((LanternObject<c10::optional<torch::Generator>>*)optional<torch::Generator>(generator).get())->get(), from_raw::optional::DimnameList(names), from_raw::TensorOptions(options)));
+        ((LanternObject<std::vector<int64_t>>*)size)->get(), from_raw::optional::Generator(generator), from_raw::optional::DimnameList(names), from_raw::TensorOptions(options)));
   LANTERN_FUNCTION_END
 }
 
@@ -7811,7 +7811,7 @@ void* _lantern_randn_out_tensor_intarrayref_generator(void* out, void* size, voi
 {
   LANTERN_FUNCTION_START
     return make_unique::Tensor(torch::randn_out(
-        from_raw::Tensor(out), ((LanternObject<std::vector<int64_t>>*)size)->get(), ((LanternObject<c10::optional<torch::Generator>>*)optional<torch::Generator>(generator).get())->get()));
+        from_raw::Tensor(out), ((LanternObject<std::vector<int64_t>>*)size)->get(), from_raw::optional::Generator(generator)));
   LANTERN_FUNCTION_END
 }
 
@@ -7835,7 +7835,7 @@ void* _lantern_randperm_intt_generator_tensoroptions(void* n, void* generator, v
 {
   LANTERN_FUNCTION_START
     return make_unique::Tensor(torch::randperm(
-        ((LanternObject<int64_t>*)n)->get(), ((LanternObject<c10::optional<torch::Generator>>*)optional<torch::Generator>(generator).get())->get(), from_raw::TensorOptions(options)));
+        ((LanternObject<int64_t>*)n)->get(), from_raw::optional::Generator(generator), from_raw::TensorOptions(options)));
   LANTERN_FUNCTION_END
 }
 
@@ -7851,7 +7851,7 @@ void* _lantern_randperm_out_tensor_intt_generator(void* out, void* n, void* gene
 {
   LANTERN_FUNCTION_START
     return make_unique::Tensor(torch::randperm_out(
-        from_raw::Tensor(out), ((LanternObject<int64_t>*)n)->get(), ((LanternObject<c10::optional<torch::Generator>>*)optional<torch::Generator>(generator).get())->get()));
+        from_raw::Tensor(out), ((LanternObject<int64_t>*)n)->get(), from_raw::optional::Generator(generator)));
   LANTERN_FUNCTION_END
 }
 
@@ -8139,7 +8139,7 @@ void* _lantern_rrelu_tensor_scalar_scalar_bool_generator(void* self, void* lower
 {
   LANTERN_FUNCTION_START
     return make_unique::Tensor(torch::rrelu(
-        from_raw::Tensor(self), from_raw::Scalar(lower), from_raw::Scalar(upper), ((LanternObject<bool>*)training)->get(), ((LanternObject<c10::optional<torch::Generator>>*)optional<torch::Generator>(generator).get())->get()));
+        from_raw::Tensor(self), from_raw::Scalar(lower), from_raw::Scalar(upper), ((LanternObject<bool>*)training)->get(), from_raw::optional::Generator(generator)));
   LANTERN_FUNCTION_END
 }
 
@@ -8147,7 +8147,7 @@ void* _lantern_rrelu__tensor_scalar_scalar_bool_generator(void* self, void* lowe
 {
   LANTERN_FUNCTION_START
     return make_unique::Tensor(torch::rrelu_(
-        from_raw::Tensor(self), from_raw::Scalar(lower), from_raw::Scalar(upper), ((LanternObject<bool>*)training)->get(), ((LanternObject<c10::optional<torch::Generator>>*)optional<torch::Generator>(generator).get())->get()));
+        from_raw::Tensor(self), from_raw::Scalar(lower), from_raw::Scalar(upper), ((LanternObject<bool>*)training)->get(), from_raw::optional::Generator(generator)));
   LANTERN_FUNCTION_END
 }
 
@@ -10459,7 +10459,7 @@ void* _lantern__standard_gamma_tensor_generator(void* self, void* generator)
 {
   LANTERN_FUNCTION_START
     return make_unique::Tensor(torch::_standard_gamma(
-        from_raw::Tensor(self), ((LanternObject<c10::optional<torch::Generator>>*)optional<torch::Generator>(generator).get())->get()));
+        from_raw::Tensor(self), from_raw::optional::Generator(generator)));
   LANTERN_FUNCTION_END
 }
 
@@ -10475,7 +10475,7 @@ void* _lantern__sample_dirichlet_tensor_generator(void* self, void* generator)
 {
   LANTERN_FUNCTION_START
     return make_unique::Tensor(torch::_sample_dirichlet(
-        from_raw::Tensor(self), ((LanternObject<c10::optional<torch::Generator>>*)optional<torch::Generator>(generator).get())->get()));
+        from_raw::Tensor(self), from_raw::optional::Generator(generator)));
   LANTERN_FUNCTION_END
 }
 
@@ -10483,7 +10483,7 @@ void* _lantern_poisson_tensor_generator(void* self, void* generator)
 {
   LANTERN_FUNCTION_START
     return make_unique::Tensor(torch::poisson(
-        from_raw::Tensor(self), ((LanternObject<c10::optional<torch::Generator>>*)optional<torch::Generator>(generator).get())->get()));
+        from_raw::Tensor(self), from_raw::optional::Generator(generator)));
   LANTERN_FUNCTION_END
 }
 
@@ -10491,7 +10491,7 @@ void* _lantern_binomial_tensor_tensor_generator(void* count, void* prob, void* g
 {
   LANTERN_FUNCTION_START
     return make_unique::Tensor(torch::binomial(
-        from_raw::Tensor(count), from_raw::Tensor(prob), ((LanternObject<c10::optional<torch::Generator>>*)optional<torch::Generator>(generator).get())->get()));
+        from_raw::Tensor(count), from_raw::Tensor(prob), from_raw::optional::Generator(generator)));
   LANTERN_FUNCTION_END
 }
 
@@ -13043,7 +13043,7 @@ void* _lantern_Tensor_random__tensor_intt_intt_generator(void* self, void* from,
 {
   LANTERN_FUNCTION_START
     return make_unique::Tensor(from_raw::Tensor(self).random_(
-        ((LanternObject<int64_t>*)from)->get(), ((LanternObject<c10::optional<int64_t>>*)to)->get(), ((LanternObject<c10::optional<torch::Generator>>*)optional<torch::Generator>(generator).get())->get()));
+        ((LanternObject<int64_t>*)from)->get(), ((LanternObject<c10::optional<int64_t>>*)to)->get(), from_raw::optional::Generator(generator)));
   LANTERN_FUNCTION_END
 }
 
@@ -13051,7 +13051,7 @@ void* _lantern_Tensor_random__tensor_intt_generator(void* self, void* to, void* 
 {
   LANTERN_FUNCTION_START
     return make_unique::Tensor(from_raw::Tensor(self).random_(
-        ((LanternObject<int64_t>*)to)->get(), ((LanternObject<c10::optional<torch::Generator>>*)optional<torch::Generator>(generator).get())->get()));
+        ((LanternObject<int64_t>*)to)->get(), from_raw::optional::Generator(generator)));
   LANTERN_FUNCTION_END
 }
 
@@ -13059,7 +13059,7 @@ void* _lantern_Tensor_random__tensor_generator(void* self, void* generator)
 {
   LANTERN_FUNCTION_START
     return make_unique::Tensor(from_raw::Tensor(self).random_(
-        ((LanternObject<c10::optional<torch::Generator>>*)optional<torch::Generator>(generator).get())->get()));
+        from_raw::optional::Generator(generator)));
   LANTERN_FUNCTION_END
 }
 
@@ -13067,7 +13067,7 @@ void* _lantern_Tensor_uniform__tensor_double_double_generator(void* self, void* 
 {
   LANTERN_FUNCTION_START
     return make_unique::Tensor(from_raw::Tensor(self).uniform_(
-        ((LanternObject<double>*)from)->get(), ((LanternObject<double>*)to)->get(), ((LanternObject<c10::optional<torch::Generator>>*)optional<torch::Generator>(generator).get())->get()));
+        ((LanternObject<double>*)from)->get(), ((LanternObject<double>*)to)->get(), from_raw::optional::Generator(generator)));
   LANTERN_FUNCTION_END
 }
 
@@ -13075,7 +13075,7 @@ void* _lantern_Tensor_cauchy__tensor_double_double_generator(void* self, void* m
 {
   LANTERN_FUNCTION_START
     return make_unique::Tensor(from_raw::Tensor(self).cauchy_(
-        ((LanternObject<double>*)median)->get(), ((LanternObject<double>*)sigma)->get(), ((LanternObject<c10::optional<torch::Generator>>*)optional<torch::Generator>(generator).get())->get()));
+        ((LanternObject<double>*)median)->get(), ((LanternObject<double>*)sigma)->get(), from_raw::optional::Generator(generator)));
   LANTERN_FUNCTION_END
 }
 
@@ -13083,7 +13083,7 @@ void* _lantern_Tensor_log_normal__tensor_double_double_generator(void* self, voi
 {
   LANTERN_FUNCTION_START
     return make_unique::Tensor(from_raw::Tensor(self).log_normal_(
-        ((LanternObject<double>*)mean)->get(), ((LanternObject<double>*)std)->get(), ((LanternObject<c10::optional<torch::Generator>>*)optional<torch::Generator>(generator).get())->get()));
+        ((LanternObject<double>*)mean)->get(), ((LanternObject<double>*)std)->get(), from_raw::optional::Generator(generator)));
   LANTERN_FUNCTION_END
 }
 
@@ -13091,7 +13091,7 @@ void* _lantern_Tensor_exponential__tensor_double_generator(void* self, void* lam
 {
   LANTERN_FUNCTION_START
     return make_unique::Tensor(from_raw::Tensor(self).exponential_(
-        ((LanternObject<double>*)lambd)->get(), ((LanternObject<c10::optional<torch::Generator>>*)optional<torch::Generator>(generator).get())->get()));
+        ((LanternObject<double>*)lambd)->get(), from_raw::optional::Generator(generator)));
   LANTERN_FUNCTION_END
 }
 
@@ -13099,7 +13099,7 @@ void* _lantern_Tensor_geometric__tensor_double_generator(void* self, void* p, vo
 {
   LANTERN_FUNCTION_START
     return make_unique::Tensor(from_raw::Tensor(self).geometric_(
-        ((LanternObject<double>*)p)->get(), ((LanternObject<c10::optional<torch::Generator>>*)optional<torch::Generator>(generator).get())->get()));
+        ((LanternObject<double>*)p)->get(), from_raw::optional::Generator(generator)));
   LANTERN_FUNCTION_END
 }
 
@@ -14683,7 +14683,7 @@ void* _lantern_multinomial_out_tensor_tensor_intt_bool_generator(void* out, void
 {
   LANTERN_FUNCTION_START
     return make_unique::Tensor(torch::multinomial_out(
-        from_raw::Tensor(out), from_raw::Tensor(self), ((LanternObject<int64_t>*)num_samples)->get(), ((LanternObject<bool>*)replacement)->get(), ((LanternObject<c10::optional<torch::Generator>>*)optional<torch::Generator>(generator).get())->get()));
+        from_raw::Tensor(out), from_raw::Tensor(self), ((LanternObject<int64_t>*)num_samples)->get(), ((LanternObject<bool>*)replacement)->get(), from_raw::optional::Generator(generator)));
   LANTERN_FUNCTION_END
 }
 
@@ -14691,7 +14691,7 @@ void* _lantern_multinomial_tensor_intt_bool_generator(void* self, void* num_samp
 {
   LANTERN_FUNCTION_START
     return make_unique::Tensor(torch::multinomial(
-        from_raw::Tensor(self), ((LanternObject<int64_t>*)num_samples)->get(), ((LanternObject<bool>*)replacement)->get(), ((LanternObject<c10::optional<torch::Generator>>*)optional<torch::Generator>(generator).get())->get()));
+        from_raw::Tensor(self), ((LanternObject<int64_t>*)num_samples)->get(), ((LanternObject<bool>*)replacement)->get(), from_raw::optional::Generator(generator)));
   LANTERN_FUNCTION_END
 }
 
@@ -14699,7 +14699,7 @@ void* _lantern_Tensor_multinomial_tensor_intt_bool_generator(void* self, void* n
 {
   LANTERN_FUNCTION_START
     return make_unique::Tensor(from_raw::Tensor(self).multinomial(
-        ((LanternObject<int64_t>*)num_samples)->get(), ((LanternObject<bool>*)replacement)->get(), ((LanternObject<c10::optional<torch::Generator>>*)optional<torch::Generator>(generator).get())->get()));
+        ((LanternObject<int64_t>*)num_samples)->get(), ((LanternObject<bool>*)replacement)->get(), from_raw::optional::Generator(generator)));
   LANTERN_FUNCTION_END
 }
 
@@ -16043,7 +16043,7 @@ void* _lantern_Tensor_normal__tensor_double_double_generator(void* self, void* m
 {
   LANTERN_FUNCTION_START
     return make_unique::Tensor(from_raw::Tensor(self).normal_(
-        ((LanternObject<double>*)mean)->get(), ((LanternObject<double>*)std)->get(), ((LanternObject<c10::optional<torch::Generator>>*)optional<torch::Generator>(generator).get())->get()));
+        ((LanternObject<double>*)mean)->get(), ((LanternObject<double>*)std)->get(), from_raw::optional::Generator(generator)));
   LANTERN_FUNCTION_END
 }
 
@@ -16051,7 +16051,7 @@ void* _lantern_normal_out_tensor_tensor_double_generator(void* out, void* mean, 
 {
   LANTERN_FUNCTION_START
     return make_unique::Tensor(torch::normal_out(
-        from_raw::Tensor(out), from_raw::Tensor(mean), ((LanternObject<double>*)std)->get(), ((LanternObject<c10::optional<torch::Generator>>*)optional<torch::Generator>(generator).get())->get()));
+        from_raw::Tensor(out), from_raw::Tensor(mean), ((LanternObject<double>*)std)->get(), from_raw::optional::Generator(generator)));
   LANTERN_FUNCTION_END
 }
 
@@ -16059,7 +16059,7 @@ void* _lantern_normal_out_tensor_double_tensor_generator(void* out, void* mean, 
 {
   LANTERN_FUNCTION_START
     return make_unique::Tensor(torch::normal_out(
-        from_raw::Tensor(out), ((LanternObject<double>*)mean)->get(), from_raw::Tensor(std), ((LanternObject<c10::optional<torch::Generator>>*)optional<torch::Generator>(generator).get())->get()));
+        from_raw::Tensor(out), ((LanternObject<double>*)mean)->get(), from_raw::Tensor(std), from_raw::optional::Generator(generator)));
   LANTERN_FUNCTION_END
 }
 
@@ -16067,7 +16067,7 @@ void* _lantern_normal_out_tensor_tensor_tensor_generator(void* out, void* mean, 
 {
   LANTERN_FUNCTION_START
     return make_unique::Tensor(torch::normal_out(
-        from_raw::Tensor(out), from_raw::Tensor(mean), from_raw::Tensor(std), ((LanternObject<c10::optional<torch::Generator>>*)optional<torch::Generator>(generator).get())->get()));
+        from_raw::Tensor(out), from_raw::Tensor(mean), from_raw::Tensor(std), from_raw::optional::Generator(generator)));
   LANTERN_FUNCTION_END
 }
 
@@ -16075,7 +16075,7 @@ void* _lantern_normal_out_tensor_double_double_intarrayref_generator(void* out, 
 {
   LANTERN_FUNCTION_START
     return make_unique::Tensor(torch::normal_out(
-        from_raw::Tensor(out), ((LanternObject<double>*)mean)->get(), ((LanternObject<double>*)std)->get(), ((LanternObject<std::vector<int64_t>>*)size)->get(), ((LanternObject<c10::optional<torch::Generator>>*)optional<torch::Generator>(generator).get())->get()));
+        from_raw::Tensor(out), ((LanternObject<double>*)mean)->get(), ((LanternObject<double>*)std)->get(), ((LanternObject<std::vector<int64_t>>*)size)->get(), from_raw::optional::Generator(generator)));
   LANTERN_FUNCTION_END
 }
 
@@ -17539,7 +17539,7 @@ void* _lantern_rrelu_with_noise_out_tensor_tensor_tensor_scalar_scalar_bool_gene
 {
   LANTERN_FUNCTION_START
     return make_unique::Tensor(torch::rrelu_with_noise_out(
-        from_raw::Tensor(out), from_raw::Tensor(self), from_raw::Tensor(noise), from_raw::Scalar(lower), from_raw::Scalar(upper), ((LanternObject<bool>*)training)->get(), ((LanternObject<c10::optional<torch::Generator>>*)optional<torch::Generator>(generator).get())->get()));
+        from_raw::Tensor(out), from_raw::Tensor(self), from_raw::Tensor(noise), from_raw::Scalar(lower), from_raw::Scalar(upper), ((LanternObject<bool>*)training)->get(), from_raw::optional::Generator(generator)));
   LANTERN_FUNCTION_END
 }
 
@@ -17547,7 +17547,7 @@ void* _lantern_rrelu_with_noise_tensor_tensor_scalar_scalar_bool_generator(void*
 {
   LANTERN_FUNCTION_START
     return make_unique::Tensor(torch::rrelu_with_noise(
-        from_raw::Tensor(self), from_raw::Tensor(noise), from_raw::Scalar(lower), from_raw::Scalar(upper), ((LanternObject<bool>*)training)->get(), ((LanternObject<c10::optional<torch::Generator>>*)optional<torch::Generator>(generator).get())->get()));
+        from_raw::Tensor(self), from_raw::Tensor(noise), from_raw::Scalar(lower), from_raw::Scalar(upper), ((LanternObject<bool>*)training)->get(), from_raw::optional::Generator(generator)));
   LANTERN_FUNCTION_END
 }
 
@@ -17563,7 +17563,7 @@ void* _lantern_rrelu_with_noise__tensor_tensor_scalar_scalar_bool_generator(void
 {
   LANTERN_FUNCTION_START
     return make_unique::Tensor(torch::rrelu_with_noise_(
-        from_raw::Tensor(self), from_raw::Tensor(noise), from_raw::Scalar(lower), from_raw::Scalar(upper), ((LanternObject<bool>*)training)->get(), ((LanternObject<c10::optional<torch::Generator>>*)optional<torch::Generator>(generator).get())->get()));
+        from_raw::Tensor(self), from_raw::Tensor(noise), from_raw::Scalar(lower), from_raw::Scalar(upper), ((LanternObject<bool>*)training)->get(), from_raw::optional::Generator(generator)));
   LANTERN_FUNCTION_END
 }
 

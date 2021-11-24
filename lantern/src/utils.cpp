@@ -312,6 +312,10 @@ namespace make_unique {
   {
     return (void*) new LanternPtr<std::vector<torch::Dimname>>(x.vec());
   }
+  void * Generator (const torch::Generator& x)
+  {
+    return make_ptr<LanternObject<torch::Generator>>(x);
+  }
 
 }
 
@@ -334,6 +338,7 @@ namespace from_raw {
   std::vector<torch::Dimname>& DimnameList (void* x) {
     return reinterpret_cast<LanternPtr<std::vector<torch::Dimname>>*>(x)->get();
   }
+  LANTERN_FROM_RAW(Generator, torch::Generator)
   
   namespace optional {
 
@@ -342,7 +347,12 @@ namespace from_raw {
     // code generation in the R side, in order for R to own the memory in the 'optional' case.
     c10::optional<torch::DimnameList> DimnameList (void* x) {
       if (!x) return c10::nullopt;
-      return reinterpret_cast<LanternPtr<std::vector<torch::Dimname>>*>(x)->get();
+      return from_raw::DimnameList(x);
+    }
+
+    c10::optional<torch::Generator> Generator (void* x) {
+      if (!x) return c10::nullopt;
+      return from_raw::Generator(x);
     }
 
   }
