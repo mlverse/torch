@@ -312,9 +312,13 @@ namespace make_unique {
   {
     return (void*) new LanternPtr<std::vector<torch::Dimname>>(x.vec());
   }
-  void * Generator (const torch::Generator& x)
+  void* Generator (const torch::Generator& x)
   {
     return make_ptr<LanternObject<torch::Generator>>(x);
+  }
+  void* MemoryFormat (const torch::MemoryFormat& x)
+  {
+    return make_ptr<LanternObject<torch::MemoryFormat>>(x);
   }
 
 }
@@ -339,6 +343,7 @@ namespace from_raw {
     return reinterpret_cast<LanternPtr<std::vector<torch::Dimname>>*>(x)->get();
   }
   LANTERN_FROM_RAW(Generator, torch::Generator)
+  LANTERN_FROM_RAW(MemoryFormat, torch::MemoryFormat)
   
   namespace optional {
 

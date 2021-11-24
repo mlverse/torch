@@ -11,28 +11,28 @@
 void *_lantern_MemoryFormat_Contiguous()
 {
   LANTERN_FUNCTION_START
-  return (void *)new LanternObject<torch::MemoryFormat>(torch::MemoryFormat::Contiguous);
+  return make_unique::MemoryFormat(torch::MemoryFormat::Contiguous); 
   LANTERN_FUNCTION_END
 }
 
 void *_lantern_MemoryFormat_Preserve()
 {
   LANTERN_FUNCTION_START
-  return (void *)new LanternObject<torch::MemoryFormat>(torch::MemoryFormat::Preserve);
+  return make_unique::MemoryFormat(torch::MemoryFormat::Preserve);
   LANTERN_FUNCTION_END
 }
 
 void *_lantern_MemoryFormat_ChannelsLast()
 {
   LANTERN_FUNCTION_START
-  return (void *)new LanternObject<torch::MemoryFormat>(torch::MemoryFormat::ChannelsLast);
+  return make_unique::MemoryFormat(torch::MemoryFormat::ChannelsLast);
   LANTERN_FUNCTION_END
 }
 
 const char *_lantern_MemoryFormat_type(void *format)
 {
   LANTERN_FUNCTION_START
-  torch::MemoryFormat y = reinterpret_cast<LanternObject<torch::MemoryFormat> *>(format)->get();
+  auto y = from_raw::MemoryFormat(format);
 
   std::string str;
   if (y == torch::MemoryFormat::Contiguous)

@@ -94,6 +94,7 @@ namespace make_unique {
   void* Dimname (torch::Dimname& x);
   void* DimnameList (const torch::DimnameList& x);
   void* Generator (const torch::Generator& x);
+  void* MemoryFormat (const torch::MemoryFormat& x);
 }
 
 #define LANTERN_FROM_RAW_DECL(name, type)                                                 \
@@ -113,6 +114,7 @@ namespace from_raw {
   LANTERN_FROM_RAW_DECL(Dimname, torch::Dimname)
   LANTERN_FROM_RAW_DECL(DimnameList, std::vector<torch::Dimname>)
   LANTERN_FROM_RAW_DECL(Generator, torch::Generator)
+  LANTERN_FROM_RAW_DECL(MemoryFormat, torch::MemoryFormat)
 
   namespace optional {
     c10::optional<torch::DimnameList> DimnameList (void* x);
