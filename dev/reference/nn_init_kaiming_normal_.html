@@ -86,7 +86,7 @@ normal distribution." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">torch</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.6.0.9000</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.6.1.9000</span>
       </span>
     </div>
 
@@ -227,16 +227,17 @@ or 'leaky_relu' (default).</p></td>
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
-<span class='va'>w</span> <span class='op'>&lt;-</span> <span class='fu'><a href='torch_empty.html'>torch_empty</a></span><span class='op'>(</span><span class='fl'>3</span>, <span class='fl'>5</span><span class='op'>)</span>
-<span class='fu'>nn_init_kaiming_normal_</span><span class='op'>(</span><span class='va'>w</span>, mode <span class='op'>=</span> <span class='st'>"fan_in"</span>, nonlinearity <span class='op'>=</span> <span class='st'>"leaky_relu"</span><span class='op'>)</span>
-
-<span class='op'>}</span>
-</div><div class='output co'>#&gt; torch_tensor
-#&gt;  0.3213  1.0790 -0.0922  0.8000 -0.2388
-#&gt;  0.4175  0.3065 -0.8858  0.0815  0.2334
-#&gt;  0.1558  0.2048  0.8419 -0.5384 -0.3103
-#&gt; [ CPUFloatType{3,5} ]</div></pre>
+    <pre class="examples"><span class='r-in'><span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span></span>
+<span class='r-in'><span class='va'>w</span> <span class='op'>&lt;-</span> <span class='fu'><a href='torch_empty.html'>torch_empty</a></span><span class='op'>(</span><span class='fl'>3</span>, <span class='fl'>5</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'>nn_init_kaiming_normal_</span><span class='op'>(</span><span class='va'>w</span>, mode <span class='op'>=</span> <span class='st'>"fan_in"</span>, nonlinearity <span class='op'>=</span> <span class='st'>"leaky_relu"</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='op'>}</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> torch_tensor</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> -0.7663  0.9746  0.3436  0.4015  1.6151</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  0.5573  0.0691  0.6870  0.5680  0.0735</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> -1.1793 -0.4452  0.0889  0.1107 -0.3437</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [ CPUFloatType{3,5} ]</span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

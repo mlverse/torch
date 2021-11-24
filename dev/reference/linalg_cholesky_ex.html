@@ -101,7 +101,7 @@ If check_errors=TRUE and info contains positive integers, then a RuntimeError is
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">torch</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.6.0.9000</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.6.1.9000</span>
       </span>
     </div>
 
@@ -230,7 +230,7 @@ If <code>check_errors=TRUE</code> and <code>info</code> contains positive intege
     <tr>
       <th>A</th>
       <td><p>(Tensor): the Hermitian <code>n \times n</code> matrix or the batch of such matrices of size
-<code>(*, n, n)</code> where <code><a href='https://rdrr.io/r/base/Arithmetic.html'>*</a></code> is one or more batch dimensions.</p></td>
+<code>(*, n, n)</code> where <code>*</code> is one or more batch dimensions.</p></td>
     </tr>
     <tr>
       <th>check_errors</th>
@@ -272,23 +272,24 @@ If <code>check_errors=TRUE</code> and <code>info</code> contains positive intege
 <code><a href='linalg_vector_norm.html'>linalg_vector_norm</a>()</code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
-<span class='va'>A</span> <span class='op'>&lt;-</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span><span class='op'>(</span><span class='fl'>2</span>, <span class='fl'>2</span><span class='op'>)</span>
-<span class='va'>out</span> <span class='op'>=</span> <span class='fu'>linalg_cholesky_ex</span><span class='op'>(</span><span class='va'>A</span><span class='op'>)</span>
-<span class='va'>out</span>
-
-<span class='op'>}</span>
-</div><div class='output co'>#&gt; $L
-#&gt; torch_tensor
-#&gt; -0.3988  0.0000
-#&gt;  0.4629  2.5087
-#&gt; [ CPUFloatType{2,2} ]
-#&gt; 
-#&gt; $info
-#&gt; torch_tensor
-#&gt; 1
-#&gt; [ CPUIntType{} ]
-#&gt; </div></pre>
+    <pre class="examples"><span class='r-in'><span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span></span>
+<span class='r-in'><span class='va'>A</span> <span class='op'>&lt;-</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span><span class='op'>(</span><span class='fl'>2</span>, <span class='fl'>2</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>out</span> <span class='op'>=</span> <span class='fu'>linalg_cholesky_ex</span><span class='op'>(</span><span class='va'>A</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>out</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='op'>}</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $L</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> torch_tensor</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> -0.5272  0.0000</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  0.1842 -0.6886</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [ CPUFloatType{2,2} ]</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $info</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> torch_tensor</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 1</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [ CPUIntType{} ]</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

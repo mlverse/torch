@@ -84,7 +84,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">torch</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.6.0.9000</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.6.1.9000</span>
       </span>
     </div>
 
@@ -224,25 +224,24 @@ tensor of size 0. If <code>minlength</code> is specified, the number of bins is 
 <p>.. include:: cuda_deterministic.rst</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
-
-<span class='va'>input</span> <span class='op'>=</span> <span class='fu'><a href='torch_randint.html'>torch_randint</a></span><span class='op'>(</span><span class='fl'>0</span>, <span class='fl'>8</span>, <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span><span class='fl'>5</span><span class='op'>)</span>, dtype<span class='op'>=</span><span class='fu'><a href='torch_dtype.html'>torch_int64</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span>
-<span class='va'>weights</span> <span class='op'>=</span> <span class='fu'><a href='torch_linspace.html'>torch_linspace</a></span><span class='op'>(</span><span class='fl'>0</span>, <span class='fl'>1</span>, steps<span class='op'>=</span><span class='fl'>5</span><span class='op'>)</span>
-<span class='va'>input</span>
-<span class='va'>weights</span>
-<span class='fu'>torch_bincount</span><span class='op'>(</span><span class='va'>input</span>, <span class='va'>weights</span><span class='op'>)</span>
-<span class='va'>input</span><span class='op'>$</span><span class='fu'>bincount</span><span class='op'>(</span><span class='va'>weights</span><span class='op'>)</span>
-<span class='op'>}</span>
-</div><div class='output co'>#&gt; torch_tensor
-#&gt;  0.0000
-#&gt;  1.0000
-#&gt;  0.7500
-#&gt;  0.0000
-#&gt;  0.2500
-#&gt;  0.0000
-#&gt;  0.0000
-#&gt;  0.5000
-#&gt; [ CPUFloatType{8} ]</div></pre>
+    <pre class="examples"><span class='r-in'><span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='va'>input</span> <span class='op'>=</span> <span class='fu'><a href='torch_randint.html'>torch_randint</a></span><span class='op'>(</span><span class='fl'>0</span>, <span class='fl'>8</span>, <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span><span class='fl'>5</span><span class='op'>)</span>, dtype<span class='op'>=</span><span class='fu'><a href='torch_dtype.html'>torch_int64</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>weights</span> <span class='op'>=</span> <span class='fu'><a href='torch_linspace.html'>torch_linspace</a></span><span class='op'>(</span><span class='fl'>0</span>, <span class='fl'>1</span>, steps<span class='op'>=</span><span class='fl'>5</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>input</span></span>
+<span class='r-in'><span class='va'>weights</span></span>
+<span class='r-in'><span class='fu'>torch_bincount</span><span class='op'>(</span><span class='va'>input</span>, <span class='va'>weights</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>input</span><span class='op'>$</span><span class='fu'>bincount</span><span class='op'>(</span><span class='va'>weights</span><span class='op'>)</span></span>
+<span class='r-in'><span class='op'>}</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> torch_tensor</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  0.5000</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  1.0000</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  0.0000</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  0.7500</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  0.2500</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  0.0000</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [ CPUFloatType{6} ]</span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

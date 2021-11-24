@@ -84,7 +84,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">torch</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.6.0.9000</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.6.1.9000</span>
       </span>
     </div>
 
@@ -247,46 +247,47 @@ composed of several input planes, sometimes also called "deconvolution".</p>
 <p>See <code><a href='nn_conv_transpose2d.html'>nn_conv_transpose2d()</a></code> for details and output shape.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
-
-<span class='co'># With square kernels and equal stride</span>
-<span class='va'>inputs</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1</span>, <span class='fl'>4</span>, <span class='fl'>5</span>, <span class='fl'>5</span><span class='op'>)</span><span class='op'>)</span>
-<span class='va'>weights</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>4</span>, <span class='fl'>8</span>, <span class='fl'>3</span>, <span class='fl'>3</span><span class='op'>)</span><span class='op'>)</span>
-<span class='fu'><a href='nnf_conv_transpose2d.html'>nnf_conv_transpose2d</a></span><span class='op'>(</span><span class='va'>inputs</span>, <span class='va'>weights</span>, padding<span class='op'>=</span><span class='fl'>1</span><span class='op'>)</span>
-<span class='op'>}</span>
-</div><div class='output co'>#&gt; torch_tensor
-#&gt; (1,1,.,.) = 
-#&gt;    2.2084   5.7687   1.0772   1.1131  -1.0838
-#&gt;  -14.5234   4.9769   0.4075 -10.2337   8.7070
-#&gt;    6.5932  -2.8004  -0.0962   0.6375 -12.7812
-#&gt;   -4.6260 -11.3648  -0.2902   0.7530  14.0718
-#&gt;    0.2043   4.6496  -2.6470  -6.2988  -2.9814
-#&gt; 
-#&gt; (1,2,.,.) = 
-#&gt;   3.9763  7.9557  5.1815  2.2246 -1.1996
-#&gt;   4.0236  1.8994 -1.4677  0.1704  1.2055
-#&gt;   1.2133  4.9989 -3.1000  4.7132  4.9754
-#&gt;   1.9545 -7.4992 -1.2739 -9.7900  2.8281
-#&gt;   0.7401  0.4187  6.3152 -1.7018 -3.2615
-#&gt; 
-#&gt; (1,3,.,.) = 
-#&gt;  -0.2319 -11.1140 -10.4068 -5.1282  5.0192
-#&gt;  -1.2694  4.8905  0.0536 -4.4558 -1.8198
-#&gt;  -8.6035  2.5252  1.8504 -2.8726  4.9954
-#&gt;  -0.6869  2.8148 -12.0716  0.0456 -0.0551
-#&gt;  -2.5588 -3.1471 -5.1269  6.0603  2.3755
-#&gt; 
-#&gt; (1,4,.,.) = 
-#&gt;   5.2613 -3.8073 -5.3855 -5.3284  4.4767
-#&gt;  -6.8691 -0.4941  0.6179  9.0940  3.5565
-#&gt;   0.8232 -5.8839  5.2616  3.0628  5.9305
-#&gt;  -3.1926  0.3544  6.8962  7.0710 -0.7826
-#&gt;  -4.4208 -2.5691 -9.4529 -0.6649  0.3294
-#&gt; 
-#&gt; (1,5,.,.) = 
-#&gt;  -1.2783 -1.1956  1.0974  2.2406  3.3300
-#&gt; ... [the output was truncated (use n=-1 to disable)]
-#&gt; [ CPUFloatType{1,8,5,5} ]</div></pre>
+    <pre class="examples"><span class='r-in'><span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># With square kernels and equal stride</span></span>
+<span class='r-in'><span class='va'>inputs</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1</span>, <span class='fl'>4</span>, <span class='fl'>5</span>, <span class='fl'>5</span><span class='op'>)</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>weights</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>4</span>, <span class='fl'>8</span>, <span class='fl'>3</span>, <span class='fl'>3</span><span class='op'>)</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'><a href='nnf_conv_transpose2d.html'>nnf_conv_transpose2d</a></span><span class='op'>(</span><span class='va'>inputs</span>, <span class='va'>weights</span>, padding<span class='op'>=</span><span class='fl'>1</span><span class='op'>)</span></span>
+<span class='r-in'><span class='op'>}</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> torch_tensor</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> (1,1,.,.) = </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>    7.4924   2.0336  -9.5071  -4.8027   2.6829</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>    1.2048   2.8730  11.6933   3.0934  -0.7411</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>    1.8853  -6.6882  -1.8308  -3.4828   3.2458</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>    0.6661  12.8330  11.6600  -4.4234   5.5957</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   -4.5674   0.9405  -7.6296  -0.2955  -4.5411</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> (1,2,.,.) = </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   4.7107  8.0559  7.7852 -6.2261 -4.9557</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  -0.6180 -13.0497 -7.3630  3.3145 -4.1631</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   0.4414  5.1743 -4.2057 -2.7944 -7.6203</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  -5.1834 -15.3117 -0.9394 -7.6958 -1.5195</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  -2.1637 -2.4515 -0.2531 -6.6796 -2.7721</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> (1,3,.,.) = </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   0.0334 -2.6720  2.7273  0.2592 -0.1205</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   9.0645  8.1567  3.4321  2.0247  4.0648</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  -0.6300  9.8452 -9.4506  2.7217  5.5685</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   8.7772 -10.8584 -1.9353 -8.6578  5.1803</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  -1.0574 -3.3467  3.3546  4.0007  1.9288</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> (1,4,.,.) = </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   0.0381  4.3014  5.2985 -0.1551  0.7490</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   1.0783 -6.5883 -7.7529  1.4618  0.2158</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   6.3085 -1.6067  9.2507  2.5814  1.7966</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  -1.2117 -0.6408 -3.4221  2.0009 -3.0258</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   1.8217 -1.6781 -6.1836 -2.0862 -5.0101</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> (1,5,.,.) = </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  -1.7374  1.3514 -1.8481 -7.4041  1.9797</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> ... [the output was truncated (use n=-1 to disable)]</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [ CPUFloatType{1,8,5,5} ]</span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

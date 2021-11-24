@@ -84,7 +84,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">torch</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.6.0.9000</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.6.1.9000</span>
       </span>
     </div>
 
@@ -227,25 +227,26 @@ broadcastable .</p>
 $$</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
-
-<span class='va'>a</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>3</span><span class='op'>)</span><span class='op'>)</span>
-<span class='va'>a</span>
-<span class='fu'>torch_mul</span><span class='op'>(</span><span class='va'>a</span>, <span class='fl'>100</span><span class='op'>)</span>
-
-
-<span class='va'>a</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>4</span>, <span class='fl'>1</span><span class='op'>)</span><span class='op'>)</span>
-<span class='va'>a</span>
-<span class='va'>b</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1</span>, <span class='fl'>4</span><span class='op'>)</span><span class='op'>)</span>
-<span class='va'>b</span>
-<span class='fu'>torch_mul</span><span class='op'>(</span><span class='va'>a</span>, <span class='va'>b</span><span class='op'>)</span>
-<span class='op'>}</span>
-</div><div class='output co'>#&gt; torch_tensor
-#&gt; -0.4159  0.9345  0.5195 -1.2660
-#&gt; -0.1729  0.3885  0.2160 -0.5264
-#&gt;  0.0143 -0.0322 -0.0179  0.0436
-#&gt; -0.1461  0.3283  0.1825 -0.4447
-#&gt; [ CPUFloatType{4,4} ]</div></pre>
+    <pre class="examples"><span class='r-in'><span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='va'>a</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>3</span><span class='op'>)</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>a</span></span>
+<span class='r-in'><span class='fu'>torch_mul</span><span class='op'>(</span><span class='va'>a</span>, <span class='fl'>100</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='va'>a</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>4</span>, <span class='fl'>1</span><span class='op'>)</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>a</span></span>
+<span class='r-in'><span class='va'>b</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1</span>, <span class='fl'>4</span><span class='op'>)</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>b</span></span>
+<span class='r-in'><span class='fu'>torch_mul</span><span class='op'>(</span><span class='va'>a</span>, <span class='va'>b</span><span class='op'>)</span></span>
+<span class='r-in'><span class='op'>}</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> torch_tensor</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> -0.6106  0.7900 -1.7106  0.6760</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  0.3820 -0.4943  1.0703 -0.4230</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> -0.6663  0.8622 -1.8668  0.7378</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  0.8399 -1.0867  2.3530 -0.9299</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [ CPUFloatType{4,4} ]</span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

@@ -83,7 +83,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">torch</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.6.0.9000</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.6.1.9000</span>
       </span>
     </div>
 
@@ -188,8 +188,25 @@
 <a href="#torch-development-version" class="anchor"></a>torch (development version)<small> Unreleased </small>
 </h1>
 <ul>
-<li>Fixed valgrind errors on CRAN by requiring a more recent version of knitr.</li>
+<li>
+<code>jit_save_for_mobile</code> allows to save a traced model in bytecode form, to be loaded by a <code>LiteModuleLoader</code>. (<a href='https://github.com/mlverse/torch/issues/713'>#713</a>)</li>
+<li>Exported <code>is_torch_tensor</code> to check wether an object is a tensor or not. (<a href='https://github.com/mlverse/torch/issues/730'>#730</a>, <a href='https://github.com/rdinnager'>@rdinnager</a>)</li>
+<li>Adds <code>cuda_get_device_properties(device)</code> that allows one to query device capability and other properties. (<a href='https://github.com/mlverse/torch/issues/734'>#734</a>, <a href='https://github.com/rdinnager'>@rdinnager</a>)</li>
 </ul>
+</div>
+    <div id="torch-061" class="section level1">
+<h1 class="page-header" data-toc-text="0.6.1">
+<a href="#torch-061" class="anchor"></a>torch 0.6.1<small> Unreleased </small>
+</h1>
+<div id="new-features" class="section level2">
+<h2 class="hasAnchor">
+<a href="#new-features" class="anchor"></a>New features</h2>
+<ul>
+<li>Fixed valgrind errors on CRAN by requiring a more recent version of knitr.</li>
+<li>Updated LibTorch to version 1.9.1 (<a href='https://github.com/mlverse/torch/issues/725'>#725</a> <a href='https://github.com/hsbadr'>@hsbadr</a>)</li>
+<li>We now check if lantern DLL’s are loaded before calling any lantern function. This avoids segfaults when Lantern is not installed. (<a href='https://github.com/mlverse/torch/issues/723'>#723</a>).</li>
+</ul>
+</div>
 </div>
     <div id="torch-060" class="section level1">
 <h1 class="page-header" data-toc-text="0.6.0">
@@ -203,12 +220,12 @@
 <code>nn_sequential</code> is now a bare <code>nn_module</code>, allowing to easily inherit from it. This is a breaking change if you used the <code>name</code> argument. The <code>name</code> behavior can be achieved by subclassing; see the tests in the PR. (<a href='https://github.com/mlverse/torch/issues/699'>#699</a>)</li>
 </ul>
 </div>
-<div id="new-features" class="section level2">
+<div id="new-features-1" class="section level2">
 <h2 class="hasAnchor">
-<a href="#new-features" class="anchor"></a>New features</h2>
+<a href="#new-features-1" class="anchor"></a>New features</h2>
 <ul>
 <li>Additional info is showed when printing tensors like if it requires grad and the grad fn. (<a href='https://github.com/mlverse/torch/issues/668'>#668</a>, <a href='https://github.com/mlverse/torch/issues/669'>#669</a>, <a href='https://github.com/mlverse/torch/issues/673'>#673</a>, <a href='https://github.com/mohamed-180'>@mohamed-180</a>)</li>
-<li>We can now subset <code>nn_sequential</code> modules using <code><a href="https://rdrr.io/r/base/Extract.html">[</a></code>. (<a href='https://github.com/mlverse/torch/issues/678'>#678</a>, <a href='https://github.com/mohamed-180'>@mohamed-180</a>)</li>
+<li>We can now subset <code>nn_sequential</code> modules using <code>[</code>. (<a href='https://github.com/mlverse/torch/issues/678'>#678</a>, <a href='https://github.com/mohamed-180'>@mohamed-180</a>)</li>
 <li>We now allow <code>padding='same'</code> and <code>padding='valid'</code> when using convolutions. (<a href='https://github.com/mlverse/torch/issues/679'>#679</a>)</li>
 <li>
 <code>nnf_cross_entropy</code> now uses the ATen <code>cross_entropy</code> operation directly instead of doing logsoftmax + NLLLoss. (<a href='https://github.com/mlverse/torch/issues/680'>#680</a>)</li>
@@ -245,9 +262,9 @@
 <li>Indexing with vectors has a now the same behavior as R indexing, making it easier to understand. Users can still use the old behavior by using <code>torch_index</code> or <code>torch_index_put</code>. (<a href='https://github.com/mlverse/torch/issues/649'>#649</a>)</li>
 </ul>
 </div>
-<div id="new-features-1" class="section level2">
+<div id="new-features-2" class="section level2">
 <h2 class="hasAnchor">
-<a href="#new-features-1" class="anchor"></a>New features</h2>
+<a href="#new-features-2" class="anchor"></a>New features</h2>
 <ul>
 <li>Added support for ScriptModule. Loaded JIT modules now operate as <code>nn_module</code>s. (<a href='https://github.com/mlverse/torch/issues/593'>#593</a>)</li>
 <li>Added a <code>jit_compile</code> function that allows compiling arbitrary TorchScript code into script function that can be serialized and executed. (<a href='https://github.com/mlverse/torch/issues/601'>#601</a>)</li>
@@ -266,7 +283,7 @@
 <a href="#bug-fixes-1" class="anchor"></a>Bug fixes</h2>
 <ul>
 <li>Fixed a bug when using a <code>.getbatch</code> method that didn’t return a <code>torch_tensor</code>. (<a href='https://github.com/mlverse/torch/issues/615'>#615</a>)</li>
-<li>Fixed warning when using <code><a href="https://rdrr.io/r/base/Arithmetic.html">%/%</a></code> caused by a call to deprecated <code>torch_floor_divide</code> (<a href='https://github.com/mlverse/torch/issues/616'>#616</a>)</li>
+<li>Fixed warning when using <code>%/%</code> caused by a call to deprecated <code>torch_floor_divide</code> (<a href='https://github.com/mlverse/torch/issues/616'>#616</a>)</li>
 <li>Improved CUDA version auto-detection (<a href='https://github.com/mlverse/torch/issues/644'>#644</a>)</li>
 </ul>
 </div>
@@ -294,9 +311,9 @@
 <code>torch_multinomial</code> now returns 1-based indexes to comply with 1-based indexing across torch. (<a href='https://github.com/mlverse/torch/issues/588'>#588</a>)</li>
 </ul>
 </div>
-<div id="new-features-2" class="section level2">
+<div id="new-features-3" class="section level2">
 <h2 class="hasAnchor">
-<a href="#new-features-2" class="anchor"></a>New features</h2>
+<a href="#new-features-3" class="anchor"></a>New features</h2>
 <ul>
 <li>Added parameter to multihead attention module to allow output of unaveraged attention weights. (<a href='https://github.com/jonathanbratt'>@jonathanbratt</a> <a href='https://github.com/mlverse/torch/issues/542'>#542</a>)</li>
 <li>We now allow <code>jit_trace</code> functions with more than 1 argument. (<a href='https://github.com/mlverse/torch/issues/544'>#544</a>)</li>
@@ -344,9 +361,9 @@
 <li>Breaking change: <code>torch_arange</code> returns in the closed interval <code>[start, end]</code> instead of the half open <code>[start, end)</code>. This makes it behave similar to R’s <code>seq</code>. (<a href='https://github.com/mlverse/torch/issues/506'>#506</a>)</li>
 </ul>
 </div>
-<div id="new-features-3" class="section level2">
+<div id="new-features-4" class="section level2">
 <h2 class="hasAnchor">
-<a href="#new-features-3" class="anchor"></a>New features</h2>
+<a href="#new-features-4" class="anchor"></a>New features</h2>
 <ul>
 <li>
 <code>torch_split</code> now accepts a list of sizes as well as a fixed size. (<a href='https://github.com/mlverse/torch/issues/429'>#429</a>)</li>
@@ -369,7 +386,7 @@
 <code>nn_lstm</code>, <code>nn_gru</code> and <code>nn_gru</code> can now use cudnn accelerations when available (<a href='https://github.com/mlverse/torch/issues/503'>#503</a>).</li>
 <li>Added Gamma distribution (<a href='https://github.com/mlverse/torch/issues/489'>#489</a>)</li>
 <li>We now respect the TORCH_HOME env var to automatically install torch. (<a href='https://github.com/mlverse/torch/issues/522'>#522</a>)</li>
-<li>Implement comparison operator <code><a href="https://rdrr.io/r/base/Comparison.html">!=</a></code> for torch dtypes. (<a href='https://github.com/mlverse/torch/issues/524'>#524</a>)</li>
+<li>Implement comparison operator <code>!=</code> for torch dtypes. (<a href='https://github.com/mlverse/torch/issues/524'>#524</a>)</li>
 <li>Added Chi-square distribution. (<a href='https://github.com/mlverse/torch/issues/518'>#518</a>)</li>
 <li>Added <code>optimizer</code> function allowing to easily implement custom optimizers. (<a href='https://github.com/mlverse/torch/issues/527'>#527</a>)</li>
 </ul>
@@ -427,9 +444,9 @@
 <code>nn_module$eval()</code> and <code>nn_module$train()</code> now return a callable <code>nn_module</code> instead of a <code>nn_Module</code>. (<a href='https://github.com/mlverse/torch/issues/425'>#425</a>)</li>
 </ul>
 </div>
-<div id="new-features-4" class="section level2">
+<div id="new-features-5" class="section level2">
 <h2 class="hasAnchor">
-<a href="#new-features-4" class="anchor"></a>New features</h2>
+<a href="#new-features-5" class="anchor"></a>New features</h2>
 <ul>
 <li>Added a custom CPU allocator to call <code>gc</code> when torch might need more memory (<a href='https://github.com/mlverse/torch/issues/402'>#402</a>)</li>
 <li>Updated to LibTorch 1.7.1 (<a href='https://github.com/mlverse/torch/issues/412'>#412</a>)</li>
@@ -475,9 +492,9 @@
 <li>Fixed <code>torch_argmax</code>, <code>torch_argmin</code>, <code>x$argmax()</code> and <code>x$argmin()</code> return 1-based indexes. (<a href='https://github.com/mlverse/torch/issues/389'>#389</a>)</li>
 </ul>
 </div>
-<div id="new-features-5" class="section level2">
+<div id="new-features-6" class="section level2">
 <h2 class="hasAnchor">
-<a href="#new-features-5" class="anchor"></a>New features</h2>
+<a href="#new-features-6" class="anchor"></a>New features</h2>
 <ul>
 <li>Added <code>$element_size()</code> method (<a href='https://github.com/dirkschumacher'>@dirkschumacher</a> <a href='https://github.com/mlverse/torch/issues/322'>#322</a>)</li>
 <li>Added <code>$bool()</code> method (<a href='https://github.com/dirkschumacher'>@dirkschumacher</a> <a href='https://github.com/mlverse/torch/issues/323'>#323</a>)</li>
@@ -542,13 +559,13 @@
 <li>Fixed <code>$max</code> and <code>$min</code> to return 1-based indexes. (<a href='https://github.com/mlverse/torch/issues/315'>#315</a>)</li>
 </ul>
 </div>
-<div id="new-features-6" class="section level2">
+<div id="new-features-7" class="section level2">
 <h2 class="hasAnchor">
-<a href="#new-features-6" class="anchor"></a>New features</h2>
+<a href="#new-features-7" class="anchor"></a>New features</h2>
 <ul>
 <li>Expanded the <code>utils_data_default_collate</code> to support converting R objects to torch tensors when needed. (<a href='https://github.com/mlverse/torch/issues/269'>#269</a>)</li>
 <li>Added an <code>as.matrix</code> method for torch Tensors. (<a href='https://github.com/mlverse/torch/issues/282'>#282</a>)</li>
-<li>By default we now truncate the output of <code><a href="https://rdrr.io/r/base/print.html">print(totrch_tensor(1:40))</a></code> if it spans for more than 30 lines. This is useful for not spamming the console or taking very long to print when you print a very large tensor. (<a href='https://github.com/mlverse/torch/issues/283'>#283</a>)</li>
+<li>By default we now truncate the output of <code>print(totrch_tensor(1:40))</code> if it spans for more than 30 lines. This is useful for not spamming the console or taking very long to print when you print a very large tensor. (<a href='https://github.com/mlverse/torch/issues/283'>#283</a>)</li>
 <li>Added the Adadelta optimizer (<a href='https://github.com/krzjoa'>@krzjoa</a> <a href='https://github.com/mlverse/torch/issues/284'>#284</a>)</li>
 <li>Added support for GPU’s on Windows (<a href='https://github.com/mlverse/torch/issues/281'>#281</a>)</li>
 <li>Added the Adagrad optimizer (<a href='https://github.com/krzjoa'>@krzjoa</a> <a href='https://github.com/mlverse/torch/issues/289'>#289</a>)</li>

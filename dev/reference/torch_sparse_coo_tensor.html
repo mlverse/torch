@@ -84,7 +84,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">torch</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.6.0.9000</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.6.1.9000</span>
       </span>
     </div>
 
@@ -238,26 +238,26 @@ coordinates in the indices, and the value at that index is the sum of all duplic
 <code>torch_sparse</code>_.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
-
-<span class='va'>i</span> <span class='op'>=</span> <span class='fu'><a href='torch_tensor.html'>torch_tensor</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/matrix.html'>matrix</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1</span>, <span class='fl'>2</span>, <span class='fl'>2</span>, <span class='fl'>3</span>, <span class='fl'>1</span>, <span class='fl'>3</span><span class='op'>)</span>, ncol <span class='op'>=</span> <span class='fl'>3</span>, byrow <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>, dtype<span class='op'>=</span><span class='fu'><a href='torch_dtype.html'>torch_int64</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span>
-<span class='va'>v</span> <span class='op'>=</span> <span class='fu'><a href='torch_tensor.html'>torch_tensor</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>3</span>, <span class='fl'>4</span>, <span class='fl'>5</span><span class='op'>)</span>, dtype<span class='op'>=</span><span class='fu'><a href='torch_dtype.html'>torch_float32</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span>
-<span class='fu'>torch_sparse_coo_tensor</span><span class='op'>(</span><span class='va'>i</span>, <span class='va'>v</span><span class='op'>)</span>
-<span class='fu'>torch_sparse_coo_tensor</span><span class='op'>(</span><span class='va'>i</span>, <span class='va'>v</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>2</span>, <span class='fl'>4</span><span class='op'>)</span><span class='op'>)</span>
-
-<span class='co'># create empty sparse tensors</span>
-<span class='va'>S</span> <span class='op'>=</span> <span class='fu'>torch_sparse_coo_tensor</span><span class='op'>(</span>
-  <span class='fu'><a href='torch_empty.html'>torch_empty</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1</span>, <span class='fl'>0</span><span class='op'>)</span>, dtype <span class='op'>=</span> <span class='fu'><a href='torch_dtype.html'>torch_int64</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span>, 
-  <span class='fu'><a href='torch_tensor.html'>torch_tensor</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/numeric.html'>numeric</a></span><span class='op'>(</span><span class='op'>)</span>, dtype <span class='op'>=</span> <span class='fu'><a href='torch_dtype.html'>torch_float32</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span>, 
-  <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1</span><span class='op'>)</span>
-<span class='op'>)</span>
-<span class='va'>S</span> <span class='op'>=</span> <span class='fu'>torch_sparse_coo_tensor</span><span class='op'>(</span>
-  <span class='fu'><a href='torch_empty.html'>torch_empty</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1</span>, <span class='fl'>0</span><span class='op'>)</span>, dtype <span class='op'>=</span> <span class='fu'><a href='torch_dtype.html'>torch_int64</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span>, 
-  <span class='fu'><a href='torch_empty.html'>torch_empty</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>0</span>, <span class='fl'>2</span><span class='op'>)</span><span class='op'>)</span>, 
-  <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1</span>, <span class='fl'>2</span><span class='op'>)</span>
-<span class='op'>)</span>
-<span class='op'>}</span>
-</div></pre>
+    <pre class="examples"><span class='r-in'><span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='va'>i</span> <span class='op'>=</span> <span class='fu'><a href='torch_tensor.html'>torch_tensor</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/matrix.html'>matrix</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1</span>, <span class='fl'>2</span>, <span class='fl'>2</span>, <span class='fl'>3</span>, <span class='fl'>1</span>, <span class='fl'>3</span><span class='op'>)</span>, ncol <span class='op'>=</span> <span class='fl'>3</span>, byrow <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>, dtype<span class='op'>=</span><span class='fu'><a href='torch_dtype.html'>torch_int64</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>v</span> <span class='op'>=</span> <span class='fu'><a href='torch_tensor.html'>torch_tensor</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>3</span>, <span class='fl'>4</span>, <span class='fl'>5</span><span class='op'>)</span>, dtype<span class='op'>=</span><span class='fu'><a href='torch_dtype.html'>torch_float32</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'>torch_sparse_coo_tensor</span><span class='op'>(</span><span class='va'>i</span>, <span class='va'>v</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'>torch_sparse_coo_tensor</span><span class='op'>(</span><span class='va'>i</span>, <span class='va'>v</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>2</span>, <span class='fl'>4</span><span class='op'>)</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># create empty sparse tensors</span></span>
+<span class='r-in'><span class='va'>S</span> <span class='op'>=</span> <span class='fu'>torch_sparse_coo_tensor</span><span class='op'>(</span></span>
+<span class='r-in'>  <span class='fu'><a href='torch_empty.html'>torch_empty</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1</span>, <span class='fl'>0</span><span class='op'>)</span>, dtype <span class='op'>=</span> <span class='fu'><a href='torch_dtype.html'>torch_int64</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span>, </span>
+<span class='r-in'>  <span class='fu'><a href='torch_tensor.html'>torch_tensor</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/numeric.html'>numeric</a></span><span class='op'>(</span><span class='op'>)</span>, dtype <span class='op'>=</span> <span class='fu'><a href='torch_dtype.html'>torch_float32</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span>, </span>
+<span class='r-in'>  <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1</span><span class='op'>)</span></span>
+<span class='r-in'><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>S</span> <span class='op'>=</span> <span class='fu'>torch_sparse_coo_tensor</span><span class='op'>(</span></span>
+<span class='r-in'>  <span class='fu'><a href='torch_empty.html'>torch_empty</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1</span>, <span class='fl'>0</span><span class='op'>)</span>, dtype <span class='op'>=</span> <span class='fu'><a href='torch_dtype.html'>torch_int64</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span>, </span>
+<span class='r-in'>  <span class='fu'><a href='torch_empty.html'>torch_empty</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>0</span>, <span class='fl'>2</span><span class='op'>)</span><span class='op'>)</span>, </span>
+<span class='r-in'>  <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1</span>, <span class='fl'>2</span><span class='op'>)</span></span>
+<span class='r-in'><span class='op'>)</span></span>
+<span class='r-in'><span class='op'>}</span></span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

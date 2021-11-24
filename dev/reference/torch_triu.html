@@ -84,7 +84,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">torch</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.6.0.9000</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.6.1.9000</span>
       </span>
     </div>
 
@@ -222,24 +222,25 @@ the main diagonal. The main diagonal are the set of indices
 \(d_{1}, d_{2}\) are the dimensions of the matrix.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
-
-<span class='va'>a</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>3</span>, <span class='fl'>3</span><span class='op'>)</span><span class='op'>)</span>
-<span class='va'>a</span>
-<span class='fu'>torch_triu</span><span class='op'>(</span><span class='va'>a</span><span class='op'>)</span>
-<span class='fu'>torch_triu</span><span class='op'>(</span><span class='va'>a</span>, diagonal<span class='op'>=</span><span class='fl'>1</span><span class='op'>)</span>
-<span class='fu'>torch_triu</span><span class='op'>(</span><span class='va'>a</span>, diagonal<span class='op'>=</span><span class='op'>-</span><span class='fl'>1</span><span class='op'>)</span>
-<span class='va'>b</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>4</span>, <span class='fl'>6</span><span class='op'>)</span><span class='op'>)</span>
-<span class='va'>b</span>
-<span class='fu'>torch_triu</span><span class='op'>(</span><span class='va'>b</span>, diagonal<span class='op'>=</span><span class='fl'>1</span><span class='op'>)</span>
-<span class='fu'>torch_triu</span><span class='op'>(</span><span class='va'>b</span>, diagonal<span class='op'>=</span><span class='op'>-</span><span class='fl'>1</span><span class='op'>)</span>
-<span class='op'>}</span>
-</div><div class='output co'>#&gt; torch_tensor
-#&gt;  0.1183 -1.2201 -1.6379 -0.8345 -0.6006  1.6585
-#&gt; -1.0055  0.6731  1.7695 -1.9702  1.2308 -1.4496
-#&gt;  0.0000  0.4235  0.0366  0.2907 -0.0036 -1.3237
-#&gt;  0.0000  0.0000  1.1350 -0.7921  0.6890 -0.3335
-#&gt; [ CPUFloatType{4,6} ]</div></pre>
+    <pre class="examples"><span class='r-in'><span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='va'>a</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>3</span>, <span class='fl'>3</span><span class='op'>)</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>a</span></span>
+<span class='r-in'><span class='fu'>torch_triu</span><span class='op'>(</span><span class='va'>a</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'>torch_triu</span><span class='op'>(</span><span class='va'>a</span>, diagonal<span class='op'>=</span><span class='fl'>1</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'>torch_triu</span><span class='op'>(</span><span class='va'>a</span>, diagonal<span class='op'>=</span><span class='op'>-</span><span class='fl'>1</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>b</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>4</span>, <span class='fl'>6</span><span class='op'>)</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>b</span></span>
+<span class='r-in'><span class='fu'>torch_triu</span><span class='op'>(</span><span class='va'>b</span>, diagonal<span class='op'>=</span><span class='fl'>1</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'>torch_triu</span><span class='op'>(</span><span class='va'>b</span>, diagonal<span class='op'>=</span><span class='op'>-</span><span class='fl'>1</span><span class='op'>)</span></span>
+<span class='r-in'><span class='op'>}</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> torch_tensor</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  0.1255  0.9601 -0.8939 -0.2425  2.0910 -0.7875</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  0.1680  0.9502  0.7541  1.1234  0.4423  1.5267</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  0.0000  1.4100 -0.8561  0.8196  0.6217 -0.7226</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  0.0000  0.0000  3.0166  1.2805 -0.3537 -1.9467</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [ CPUFloatType{4,6} ]</span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

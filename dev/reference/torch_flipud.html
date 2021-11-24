@@ -84,7 +84,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">torch</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.6.0.9000</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.6.1.9000</span>
       </span>
     </div>
 
@@ -213,16 +213,17 @@
 Rows are preserved, but appear in a different order than before.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
-
-<span class='va'>x</span> <span class='op'>&lt;-</span> <span class='fu'><a href='torch_arange.html'>torch_arange</a></span><span class='op'>(</span>start <span class='op'>=</span> <span class='fl'>1</span>, end <span class='op'>=</span> <span class='fl'>4</span><span class='op'>)</span><span class='op'>$</span><span class='fu'>view</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>2</span>, <span class='fl'>2</span><span class='op'>)</span><span class='op'>)</span>
-<span class='va'>x</span>
-<span class='fu'>torch_flipud</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span>
-<span class='op'>}</span>
-</div><div class='output co'>#&gt; torch_tensor
-#&gt;  3  4
-#&gt;  1  2
-#&gt; [ CPUFloatType{2,2} ]</div></pre>
+    <pre class="examples"><span class='r-in'><span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='va'>x</span> <span class='op'>&lt;-</span> <span class='fu'><a href='torch_arange.html'>torch_arange</a></span><span class='op'>(</span>start <span class='op'>=</span> <span class='fl'>1</span>, end <span class='op'>=</span> <span class='fl'>4</span><span class='op'>)</span><span class='op'>$</span><span class='fu'>view</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>2</span>, <span class='fl'>2</span><span class='op'>)</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>x</span></span>
+<span class='r-in'><span class='fu'>torch_flipud</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span></span>
+<span class='r-in'><span class='op'>}</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> torch_tensor</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  3  4</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  1  2</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [ CPUFloatType{2,2} ]</span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

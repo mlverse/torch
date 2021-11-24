@@ -85,7 +85,7 @@ normal distribution." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">torch</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.6.0.9000</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.6.1.9000</span>
       </span>
     </div>
 
@@ -220,16 +220,17 @@ normal distribution.</p>
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
-<span class='va'>w</span> <span class='op'>&lt;-</span> <span class='fu'><a href='torch_empty.html'>torch_empty</a></span><span class='op'>(</span><span class='fl'>3</span>, <span class='fl'>5</span><span class='op'>)</span>
-<span class='fu'>nn_init_trunc_normal_</span><span class='op'>(</span><span class='va'>w</span><span class='op'>)</span>
-
-<span class='op'>}</span>
-</div><div class='output co'>#&gt; torch_tensor
-#&gt; -0.3357 -0.7730 -0.7844 -0.7047  1.6232
-#&gt;  0.0543 -1.1007  0.1804 -0.4883 -1.0900
-#&gt; -1.4893 -0.1439 -1.1795 -0.6731  0.1692
-#&gt; [ CPUFloatType{3,5} ]</div></pre>
+    <pre class="examples"><span class='r-in'><span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span></span>
+<span class='r-in'><span class='va'>w</span> <span class='op'>&lt;-</span> <span class='fu'><a href='torch_empty.html'>torch_empty</a></span><span class='op'>(</span><span class='fl'>3</span>, <span class='fl'>5</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'>nn_init_trunc_normal_</span><span class='op'>(</span><span class='va'>w</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='op'>}</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> torch_tensor</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> -1.6468  0.8744 -0.1200  1.9911 -1.0228</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  0.9687  0.5494  1.6374  0.8952 -1.5139</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> -0.0283 -0.8164  0.7438 -0.6543  0.5267</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [ CPUFloatType{3,5} ]</span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

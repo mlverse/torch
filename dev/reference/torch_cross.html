@@ -84,7 +84,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">torch</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.6.0.9000</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.6.1.9000</span>
       </span>
     </div>
 
@@ -221,21 +221,22 @@ and <code>other</code>.</p>
 size 3.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
-
-<span class='va'>a</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>4</span>, <span class='fl'>3</span><span class='op'>)</span><span class='op'>)</span>
-<span class='va'>a</span>
-<span class='va'>b</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>4</span>, <span class='fl'>3</span><span class='op'>)</span><span class='op'>)</span>
-<span class='va'>b</span>
-<span class='fu'>torch_cross</span><span class='op'>(</span><span class='va'>a</span>, <span class='va'>b</span>, dim<span class='op'>=</span><span class='fl'>2</span><span class='op'>)</span>
-<span class='fu'>torch_cross</span><span class='op'>(</span><span class='va'>a</span>, <span class='va'>b</span><span class='op'>)</span>
-<span class='op'>}</span>
-</div><div class='output co'>#&gt; torch_tensor
-#&gt;  3.5963 -0.6773 -3.5335
-#&gt;  0.2911 -1.0567 -0.0069
-#&gt;  1.1832 -0.7432  0.3315
-#&gt; -0.1117 -0.0962  0.2357
-#&gt; [ CPUFloatType{4,3} ]</div></pre>
+    <pre class="examples"><span class='r-in'><span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='va'>a</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>4</span>, <span class='fl'>3</span><span class='op'>)</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>a</span></span>
+<span class='r-in'><span class='va'>b</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>4</span>, <span class='fl'>3</span><span class='op'>)</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>b</span></span>
+<span class='r-in'><span class='fu'>torch_cross</span><span class='op'>(</span><span class='va'>a</span>, <span class='va'>b</span>, dim<span class='op'>=</span><span class='fl'>2</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'>torch_cross</span><span class='op'>(</span><span class='va'>a</span>, <span class='va'>b</span><span class='op'>)</span></span>
+<span class='r-in'><span class='op'>}</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> torch_tensor</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  1.0197  1.5307  0.9250</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> -0.3635 -0.0025  0.7523</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> -1.6515 -0.2702  0.4351</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  0.7368 -0.7229  0.1523</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [ CPUFloatType{4,3} ]</span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

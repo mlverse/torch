@@ -84,7 +84,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">torch</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.6.0.9000</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.6.1.9000</span>
       </span>
     </div>
 
@@ -229,19 +229,20 @@ boundaries of the buckets are set by <code>boundaries</code>. Return a new tenso
 as <code>input</code>. If <code>right</code> is FALSE (default), then the left boundary is closed.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
-
-<span class='va'>boundaries</span> <span class='op'>&lt;-</span> <span class='fu'><a href='torch_tensor.html'>torch_tensor</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1</span>, <span class='fl'>3</span>, <span class='fl'>5</span>, <span class='fl'>7</span>, <span class='fl'>9</span><span class='op'>)</span><span class='op'>)</span>
-<span class='va'>boundaries</span>
-<span class='va'>v</span> <span class='op'>&lt;-</span> <span class='fu'><a href='torch_tensor.html'>torch_tensor</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/cbind.html'>rbind</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>3</span>, <span class='fl'>6</span>, <span class='fl'>9</span><span class='op'>)</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>3</span>, <span class='fl'>6</span>, <span class='fl'>9</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span>
-<span class='va'>v</span>
-<span class='fu'>torch_bucketize</span><span class='op'>(</span><span class='va'>v</span>, <span class='va'>boundaries</span><span class='op'>)</span>
-<span class='fu'>torch_bucketize</span><span class='op'>(</span><span class='va'>v</span>, <span class='va'>boundaries</span>, right<span class='op'>=</span><span class='cn'>TRUE</span><span class='op'>)</span>
-<span class='op'>}</span>
-</div><div class='output co'>#&gt; torch_tensor
-#&gt;  2  3  5
-#&gt;  2  3  5
-#&gt; [ CPULongType{2,3} ]</div></pre>
+    <pre class="examples"><span class='r-in'><span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='va'>boundaries</span> <span class='op'>&lt;-</span> <span class='fu'><a href='torch_tensor.html'>torch_tensor</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1</span>, <span class='fl'>3</span>, <span class='fl'>5</span>, <span class='fl'>7</span>, <span class='fl'>9</span><span class='op'>)</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>boundaries</span></span>
+<span class='r-in'><span class='va'>v</span> <span class='op'>&lt;-</span> <span class='fu'><a href='torch_tensor.html'>torch_tensor</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/cbind.html'>rbind</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>3</span>, <span class='fl'>6</span>, <span class='fl'>9</span><span class='op'>)</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>3</span>, <span class='fl'>6</span>, <span class='fl'>9</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>v</span></span>
+<span class='r-in'><span class='fu'>torch_bucketize</span><span class='op'>(</span><span class='va'>v</span>, <span class='va'>boundaries</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'>torch_bucketize</span><span class='op'>(</span><span class='va'>v</span>, <span class='va'>boundaries</span>, right<span class='op'>=</span><span class='cn'>TRUE</span><span class='op'>)</span></span>
+<span class='r-in'><span class='op'>}</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> torch_tensor</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  2  3  5</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  2  3  5</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [ CPULongType{2,3} ]</span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

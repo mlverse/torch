@@ -86,7 +86,7 @@ the full SVD of a matrix
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">torch</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.6.0.9000</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.6.1.9000</span>
       </span>
     </div>
 
@@ -200,7 +200,7 @@ the <strong>full SVD</strong> of a matrix
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>A</th>
-      <td><p>(Tensor): tensor of shape <code>(*, m, n)</code> where <code><a href='https://rdrr.io/r/base/Arithmetic.html'>*</a></code> is zero or more batch dimensions.</p></td>
+      <td><p>(Tensor): tensor of shape <code>(*, m, n)</code> where <code>*</code> is zero or more batch dimensions.</p></td>
     </tr>
     <tr>
       <th>full_matrices</th>
@@ -309,35 +309,36 @@ matrices.</p></li>
 <code><a href='linalg_vector_norm.html'>linalg_vector_norm</a>()</code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
-
-<span class='va'>a</span> <span class='op'>&lt;-</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span><span class='op'>(</span><span class='fl'>5</span>, <span class='fl'>3</span><span class='op'>)</span>
-<span class='fu'>linalg_svd</span><span class='op'>(</span><span class='va'>a</span>, full_matrices<span class='op'>=</span><span class='cn'>FALSE</span><span class='op'>)</span>
-
-<span class='op'>}</span>
-</div><div class='output co'>#&gt; [[1]]
-#&gt; torch_tensor
-#&gt; -0.5481  0.2283 -0.5064
-#&gt;  0.0035  0.4779  0.4611
-#&gt;  0.6831 -0.3405 -0.3443
-#&gt; -0.4625 -0.6377 -0.0941
-#&gt; -0.1377 -0.4438  0.6353
-#&gt; [ CPUFloatType{5,3} ]
-#&gt; 
-#&gt; [[2]]
-#&gt; torch_tensor
-#&gt;  3.0422
-#&gt;  2.2896
-#&gt;  0.6289
-#&gt; [ CPUFloatType{3} ]
-#&gt; 
-#&gt; [[3]]
-#&gt; torch_tensor
-#&gt; -0.6951  0.6738  0.2507
-#&gt; -0.6665 -0.4733 -0.5759
-#&gt; -0.2694 -0.5674  0.7781
-#&gt; [ CPUFloatType{3,3} ]
-#&gt; </div></pre>
+    <pre class="examples"><span class='r-in'><span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='va'>a</span> <span class='op'>&lt;-</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span><span class='op'>(</span><span class='fl'>5</span>, <span class='fl'>3</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'>linalg_svd</span><span class='op'>(</span><span class='va'>a</span>, full_matrices<span class='op'>=</span><span class='cn'>FALSE</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='op'>}</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [[1]]</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> torch_tensor</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> -0.4775  0.3023 -0.2577</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  0.6766  0.6878  0.0170</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  0.3557 -0.4263 -0.7921</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> -0.1470  0.4315 -0.5257</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> -0.4075  0.2600 -0.1717</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [ CPUFloatType{5,3} ]</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [[2]]</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> torch_tensor</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  2.2631</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  1.5472</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  1.2452</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [ CPUFloatType{3} ]</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [[3]]</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> torch_tensor</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  0.6670  0.5418 -0.5114</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  0.7269 -0.6236  0.2875</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> -0.1632 -0.5635 -0.8098</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [ CPUFloatType{3,3} ]</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

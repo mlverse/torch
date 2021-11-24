@@ -84,7 +84,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">torch</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.6.0.9000</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.6.1.9000</span>
       </span>
     </div>
 
@@ -212,19 +212,21 @@ of <code>input</code>.</p>
 $$</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
-
-<span class='va'>a</span> <span class='op'>=</span> <span class='fu'><a href='torch_rand.html'>torch_rand</a></span><span class='op'>(</span><span class='fl'>5</span><span class='op'>)</span>
-<span class='va'>a</span>
-<span class='fu'>torch_log10</span><span class='op'>(</span><span class='va'>a</span><span class='op'>)</span>
-<span class='op'>}</span>
-</div><div class='output co'>#&gt; torch_tensor
-#&gt; -0.1941
-#&gt; -0.3550
-#&gt; -0.8767
-#&gt; -0.0846
-#&gt; -0.0161
-#&gt; [ CPUFloatType{5} ]</div></pre>
+    <pre class="examples"><span class='r-in'><span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='va'>a</span> <span class='op'>=</span> <span class='fu'><a href='torch_rand.html'>torch_rand</a></span><span class='op'>(</span><span class='fl'>5</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>a</span></span>
+<span class='r-in'><span class='fu'>torch_log10</span><span class='op'>(</span><span class='va'>a</span><span class='op'>)</span></span>
+<span class='r-in'><span class='op'>}</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> torch_tensor</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 0.001 *</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> -9.1317</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> -81.0779</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> -241.1631</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> -441.4029</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> -224.6129</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [ CPUFloatType{5} ]</span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

@@ -87,7 +87,7 @@ otherwise." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">torch</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.6.0.9000</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.6.1.9000</span>
       </span>
     </div>
 
@@ -224,7 +224,7 @@ Tensor of size <code>B x T x *</code> otherwise</p>
     <p><code>B</code> is batch size. It is equal to the number of elements in <code>sequences</code>.
 <code>T</code> is length of the longest sequence.
 <code>L</code> is length of the sequence.
-<code><a href='https://rdrr.io/r/base/Arithmetic.html'>*</a></code> is any number of trailing dimensions, including none.</p>
+<code>*</code> is any number of trailing dimensions, including none.</p>
     <h2 class="hasAnchor" id="note"><a class="anchor" href="#note"></a>Note</h2>
 
     <p>This function returns a Tensor of size <code>T x B x *</code> or <code>B x T x *</code>
@@ -232,14 +232,15 @@ where <code>T</code> is the length of the longest sequence. This function assume
 trailing dimensions and type of all the Tensors in sequences are same.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
-<span class='va'>a</span> <span class='op'>&lt;-</span> <span class='fu'><a href='torch_ones.html'>torch_ones</a></span><span class='op'>(</span><span class='fl'>25</span>, <span class='fl'>300</span><span class='op'>)</span>
-<span class='va'>b</span> <span class='op'>&lt;-</span> <span class='fu'><a href='torch_ones.html'>torch_ones</a></span><span class='op'>(</span><span class='fl'>22</span>, <span class='fl'>300</span><span class='op'>)</span>
-<span class='va'>c</span> <span class='op'>&lt;-</span> <span class='fu'><a href='torch_ones.html'>torch_ones</a></span><span class='op'>(</span><span class='fl'>15</span>, <span class='fl'>300</span><span class='op'>)</span>
-<span class='fu'>nn_utils_rnn_pad_sequence</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span><span class='va'>a</span>, <span class='va'>b</span>, <span class='va'>c</span><span class='op'>)</span><span class='op'>)</span><span class='op'>$</span><span class='fu'>size</span><span class='op'>(</span><span class='op'>)</span>
-
-<span class='op'>}</span>
-</div><div class='output co'>#&gt; [1]  25   3 300</div></pre>
+    <pre class="examples"><span class='r-in'><span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span></span>
+<span class='r-in'><span class='va'>a</span> <span class='op'>&lt;-</span> <span class='fu'><a href='torch_ones.html'>torch_ones</a></span><span class='op'>(</span><span class='fl'>25</span>, <span class='fl'>300</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>b</span> <span class='op'>&lt;-</span> <span class='fu'><a href='torch_ones.html'>torch_ones</a></span><span class='op'>(</span><span class='fl'>22</span>, <span class='fl'>300</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>c</span> <span class='op'>&lt;-</span> <span class='fu'><a href='torch_ones.html'>torch_ones</a></span><span class='op'>(</span><span class='fl'>15</span>, <span class='fl'>300</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'>nn_utils_rnn_pad_sequence</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span><span class='va'>a</span>, <span class='va'>b</span>, <span class='va'>c</span><span class='op'>)</span><span class='op'>)</span><span class='op'>$</span><span class='fu'>size</span><span class='op'>(</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='op'>}</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1]  25   3 300</span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

@@ -83,7 +83,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">torch</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.6.0.9000</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.6.1.9000</span>
       </span>
     </div>
 
@@ -4147,6 +4147,12 @@ symmetric positive-definite matrix.</p></td>
       </tr><tr>
         
         <td>
+          <p><code><a href="cuda_get_device_capability.html">cuda_get_device_capability()</a></code> </p>
+        </td>
+        <td><p>Returns the major and minor CUDA capability of <code>device</code></p></td>
+      </tr><tr>
+        
+        <td>
           <p><code><a href="cuda_is_available.html">cuda_is_available()</a></code> </p>
         </td>
         <td><p>Returns a bool indicating if CUDA is currently available.</p></td>
@@ -4181,6 +4187,13 @@ symmetric positive-definite matrix.</p></td>
           <p><code><a href="jit_save.html">jit_save()</a></code> </p>
         </td>
         <td><p>Saves a <code>script_function</code> to a path</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="jit_save_for_mobile.html">jit_save_for_mobile()</a></code> </p>
+        </td>
+        <td><p>Saves a <code>script_function</code> or <code>script_module</code> in bytecode form,
+to be loaded on a mobile device</p></td>
       </tr><tr>
         
         <td>

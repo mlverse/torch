@@ -84,7 +84,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">torch</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.6.0.9000</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.6.1.9000</span>
       </span>
     </div>
 
@@ -196,7 +196,7 @@
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>A</th>
-      <td><p>(Tensor): tensor of shape <code>(*, n, n)</code> where <code><a href='https://rdrr.io/r/base/Arithmetic.html'>*</a></code> is zero or more batch dimensions
+      <td><p>(Tensor): tensor of shape <code>(*, n, n)</code> where <code>*</code> is zero or more batch dimensions
 consisting of invertible matrices.</p></td>
     </tr>
     </table>
@@ -253,17 +253,18 @@ numerically stable algorithm.</p>
 <code><a href='linalg_vector_norm.html'>linalg_vector_norm</a>()</code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
-<span class='va'>A</span> <span class='op'>&lt;-</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span><span class='op'>(</span><span class='fl'>4</span>, <span class='fl'>4</span><span class='op'>)</span>
-<span class='fu'>linalg_inv</span><span class='op'>(</span><span class='va'>A</span><span class='op'>)</span>
-
-<span class='op'>}</span>
-</div><div class='output co'>#&gt; torch_tensor
-#&gt; -1.2840 -1.1712 -0.7432 -2.9598
-#&gt; -0.3638 -0.6288 -0.3068  0.1967
-#&gt; -0.5498  0.2674  0.3668  0.2025
-#&gt;  0.0207 -0.0148  0.4355  0.5008
-#&gt; [ CPUFloatType{4,4} ]</div></pre>
+    <pre class="examples"><span class='r-in'><span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span></span>
+<span class='r-in'><span class='va'>A</span> <span class='op'>&lt;-</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span><span class='op'>(</span><span class='fl'>4</span>, <span class='fl'>4</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'>linalg_inv</span><span class='op'>(</span><span class='va'>A</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='op'>}</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> torch_tensor</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> -1.1228  1.5014  4.3041 -6.2770</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  0.0278  0.2378  0.6302 -0.0038</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  0.0298  0.3796  0.1563 -0.7991</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  0.1883  0.2527  1.6204 -2.1814</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [ CPUFloatType{4,4} ]</span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

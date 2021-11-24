@@ -39,7 +39,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">torch</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.6.0.9000</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.6.1.9000</span>
       </span>
     </div>
 
@@ -254,7 +254,7 @@
 <span class="co">#&gt; [ CPULongType{} ]</span></code></pre></div>
 <p>To be able to iterate over <code>tuxes</code>, we need a data loader (we override the default batch size of <code>1</code>):</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">dl</span> <span class="op">&lt;-</span><span class="va">tuxes</span> <span class="op">%&gt;%</span> <span class="fu"><a href="../reference/dataloader.html">dataloader</a></span><span class="op">(</span>batch_size <span class="op">=</span> <span class="fl">8</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="va">dl</span> <span class="op">&lt;-</span><span class="va">tuxes</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span> <span class="fu"><a href="../reference/dataloader.html">dataloader</a></span><span class="op">(</span>batch_size <span class="op">=</span> <span class="fl">8</span><span class="op">)</span></code></pre></div>
 <p>Calling <code>.length()</code> on a data loader (as opposed to a dataset) will return the number of <code>batches</code> we have:</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">dl</span><span class="op">$</span><span class="fu">.length</span><span class="op">(</span><span class="op">)</span>
@@ -301,10 +301,10 @@
     <span class="va">self</span><span class="op">$</span><span class="va">fc2</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/nn_linear.html">nn_linear</a></span><span class="op">(</span><span class="fl">32</span>, <span class="fl">3</span><span class="op">)</span>
   <span class="op">}</span>,
   forward <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span>
-    <span class="va">x</span> <span class="op">%&gt;%</span> 
-      <span class="va">self</span><span class="op">$</span><span class="fu">fc1</span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span> 
-      <span class="fu"><a href="../reference/nnf_relu.html">nnf_relu</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span> 
-      <span class="va">self</span><span class="op">$</span><span class="fu">fc2</span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+    <span class="va">x</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span> 
+      <span class="va">self</span><span class="op">$</span><span class="fu">fc1</span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span> 
+      <span class="fu"><a href="../reference/nnf_relu.html">nnf_relu</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span> 
+      <span class="va">self</span><span class="op">$</span><span class="fu">fc2</span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span> 
       <span class="fu"><a href="../reference/nnf_log_softmax.html">nnf_log_softmax</a></span><span class="op">(</span>dim <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>
   <span class="op">}</span>
 <span class="op">)</span>
@@ -330,7 +330,7 @@
   
   <span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/sprintf.html">sprintf</a></span><span class="op">(</span><span class="st">"Loss at epoch %d: %3f\n"</span>, <span class="va">epoch</span>, <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">l</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
 <span class="op">}</span>
-<span class="co">#&gt; Loss at epoch 1: 740.228503</span>
+<span class="co">#&gt; Loss at epoch 1: 313.408462</span>
 <span class="co">#&gt; Loss at epoch 2: 2.068251</span>
 <span class="co">#&gt; Loss at epoch 3: 2.068251</span>
 <span class="co">#&gt; Loss at epoch 4: 2.068251</span>

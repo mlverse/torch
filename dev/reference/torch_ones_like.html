@@ -84,7 +84,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">torch</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.6.0.9000</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.6.1.9000</span>
       </span>
     </div>
 
@@ -234,25 +234,26 @@
 
 <p>Returns a tensor filled with the scalar value <code>1</code>, with the same size as
 <code>input</code>. <code>torch_ones_like(input)</code> is equivalent to
-<code><a href='torch_ones.html'>torch_ones(input.size(), dtype=input.dtype, layout=input.layout, device=input.device)</a></code>.</p>
+<code>torch_ones(input.size(), dtype=input.dtype, layout=input.layout, device=input.device)</code>.</p>
     <h2 class="hasAnchor" id="warning"><a class="anchor" href="#warning"></a>Warning</h2>
 
     
 
 <p>As of 0.4, this function does not support an <code>out</code> keyword. As an alternative,
 the old <code>torch_ones_like(input, out=output)</code> is equivalent to
-<code><a href='torch_ones.html'>torch_ones(input.size(), out=output)</a></code>.</p>
+<code>torch_ones(input.size(), out=output)</code>.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
-
-<span class='va'>input</span> <span class='op'>=</span> <span class='fu'><a href='torch_empty.html'>torch_empty</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>2</span>, <span class='fl'>3</span><span class='op'>)</span><span class='op'>)</span>
-<span class='fu'>torch_ones_like</span><span class='op'>(</span><span class='va'>input</span><span class='op'>)</span>
-<span class='op'>}</span>
-</div><div class='output co'>#&gt; torch_tensor
-#&gt;  1  1  1
-#&gt;  1  1  1
-#&gt; [ CPUFloatType{2,3} ]</div></pre>
+    <pre class="examples"><span class='r-in'><span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='va'>input</span> <span class='op'>=</span> <span class='fu'><a href='torch_empty.html'>torch_empty</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>2</span>, <span class='fl'>3</span><span class='op'>)</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'>torch_ones_like</span><span class='op'>(</span><span class='va'>input</span><span class='op'>)</span></span>
+<span class='r-in'><span class='op'>}</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> torch_tensor</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  1  1  1</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  1  1  1</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [ CPUFloatType{2,3} ]</span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

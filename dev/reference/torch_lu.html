@@ -86,7 +86,7 @@ is set to True." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">torch</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.6.0.9000</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.6.1.9000</span>
       </span>
     </div>
 
@@ -220,31 +220,32 @@ elements in the tuple are Tensor, IntTensor. Default: NULL</p></td>
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
-
-<span class='va'>A</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>2</span>, <span class='fl'>3</span>, <span class='fl'>3</span><span class='op'>)</span><span class='op'>)</span>
-<span class='fu'>torch_lu</span><span class='op'>(</span><span class='va'>A</span><span class='op'>)</span>
-
-<span class='op'>}</span>
-</div><div class='output co'>#&gt; [[1]]
-#&gt; torch_tensor
-#&gt; (1,.,.) = 
-#&gt;   0.8114  0.6005  0.1046
-#&gt;  -0.4454  0.3965 -1.7059
-#&gt;  -0.9181 -0.3596 -0.1556
-#&gt; 
-#&gt; (2,.,.) = 
-#&gt;  -0.8521  1.2134 -1.1491
-#&gt;   0.6740 -2.3026  0.2408
-#&gt;  -0.2295  0.2243  1.2387
-#&gt; [ CPUFloatType{2,3,3} ]
-#&gt; 
-#&gt; [[2]]
-#&gt; torch_tensor
-#&gt;  2  2  3
-#&gt;  2  3  3
-#&gt; [ CPUIntType{2,3} ]
-#&gt; </div></pre>
+    <pre class="examples"><span class='r-in'><span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='va'>A</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>2</span>, <span class='fl'>3</span>, <span class='fl'>3</span><span class='op'>)</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'>torch_lu</span><span class='op'>(</span><span class='va'>A</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='op'>}</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [[1]]</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> torch_tensor</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> (1,.,.) = </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  -1.7396 -1.5036 -0.0916</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  -0.6606 -1.6526 -1.4034</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  -0.6924  0.4425  3.7028</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> (2,.,.) = </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  -2.2270 -0.6075 -0.8374</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   0.3886  1.0152 -0.3338</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   0.3100  0.6320  1.2462</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [ CPUFloatType{2,3,3} ]</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [[2]]</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> torch_tensor</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  2  3  3</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  2  2  3</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [ CPUIntType{2,3} ]</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

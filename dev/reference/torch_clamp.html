@@ -84,7 +84,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">torch</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.6.0.9000</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.6.1.9000</span>
       </span>
     </div>
 
@@ -213,7 +213,7 @@
     
 
 
-<p>Clamp all elements in <code>input</code> into the range <code><a href='https://rdrr.io/r/base/Extract.html'>[</a></code> <code>min</code>, <code>max</code> <code>]</code> and return
+<p>Clamp all elements in <code>input</code> into the range <code>[</code> <code>min</code>, <code>max</code> <code>]</code> and return
 a resulting tensor:</p>
 <p>$$
     y_i = \left\{ \begin{array}{ll}
@@ -243,28 +243,29 @@ should be a real number, otherwise it should be an integer.</p>
 should be a real number, otherwise it should be an integer.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
-
-<span class='va'>a</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>4</span><span class='op'>)</span><span class='op'>)</span>
-<span class='va'>a</span>
-<span class='fu'>torch_clamp</span><span class='op'>(</span><span class='va'>a</span>, min<span class='op'>=</span><span class='op'>-</span><span class='fl'>0.5</span>, max<span class='op'>=</span><span class='fl'>0.5</span><span class='op'>)</span>
-
-
-<span class='va'>a</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>4</span><span class='op'>)</span><span class='op'>)</span>
-<span class='va'>a</span>
-<span class='fu'>torch_clamp</span><span class='op'>(</span><span class='va'>a</span>, min<span class='op'>=</span><span class='fl'>0.5</span><span class='op'>)</span>
-
-
-<span class='va'>a</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>4</span><span class='op'>)</span><span class='op'>)</span>
-<span class='va'>a</span>
-<span class='fu'>torch_clamp</span><span class='op'>(</span><span class='va'>a</span>, max<span class='op'>=</span><span class='fl'>0.5</span><span class='op'>)</span>
-<span class='op'>}</span>
-</div><div class='output co'>#&gt; torch_tensor
-#&gt; -1.1070
-#&gt;  0.5000
-#&gt;  0.5000
-#&gt; -1.2030
-#&gt; [ CPUFloatType{4} ]</div></pre>
+    <pre class="examples"><span class='r-in'><span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='va'>a</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>4</span><span class='op'>)</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>a</span></span>
+<span class='r-in'><span class='fu'>torch_clamp</span><span class='op'>(</span><span class='va'>a</span>, min<span class='op'>=</span><span class='op'>-</span><span class='fl'>0.5</span>, max<span class='op'>=</span><span class='fl'>0.5</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='va'>a</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>4</span><span class='op'>)</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>a</span></span>
+<span class='r-in'><span class='fu'>torch_clamp</span><span class='op'>(</span><span class='va'>a</span>, min<span class='op'>=</span><span class='fl'>0.5</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='va'>a</span> <span class='op'>=</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>4</span><span class='op'>)</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>a</span></span>
+<span class='r-in'><span class='fu'>torch_clamp</span><span class='op'>(</span><span class='va'>a</span>, max<span class='op'>=</span><span class='fl'>0.5</span><span class='op'>)</span></span>
+<span class='r-in'><span class='op'>}</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> torch_tensor</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  0.0280</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> -0.1745</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> -0.6275</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  0.4792</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [ CPUFloatType{4} ]</span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

@@ -86,7 +86,7 @@ See reference: Attention Is All You Need" />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">torch</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.6.0.9000</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.6.1.9000</span>
       </span>
     </div>
 
@@ -291,16 +291,16 @@ heads.</p></li>
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
-<span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
-<span class='va'>multihead_attn</span> <span class='op'>=</span> <span class='fu'>nn_multihead_attention</span><span class='op'>(</span><span class='va'>embed_dim</span>, <span class='va'>num_heads</span><span class='op'>)</span>
-<span class='va'>out</span> <span class='op'>&lt;-</span> <span class='fu'>multihead_attn</span><span class='op'>(</span><span class='va'>query</span>, <span class='va'>key</span>, <span class='va'>value</span><span class='op'>)</span>
-<span class='va'>attn_output</span> <span class='op'>&lt;-</span> <span class='va'>out</span><span class='op'>[[</span><span class='fl'>1</span><span class='op'>]</span><span class='op'>]</span>
-<span class='va'>attn_output_weights</span> <span class='op'>&lt;-</span> <span class='va'>out</span><span class='op'>[[</span><span class='fl'>2</span><span class='op'>]</span><span class='op'>]</span>
-<span class='op'>}</span>
-
-<span class='op'>}</span>
-</div></pre>
+    <pre class="examples"><span class='r-in'><span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span></span>
+<span class='r-in'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span></span>
+<span class='r-in'><span class='va'>multihead_attn</span> <span class='op'>=</span> <span class='fu'>nn_multihead_attention</span><span class='op'>(</span><span class='va'>embed_dim</span>, <span class='va'>num_heads</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>out</span> <span class='op'>&lt;-</span> <span class='fu'>multihead_attn</span><span class='op'>(</span><span class='va'>query</span>, <span class='va'>key</span>, <span class='va'>value</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>attn_output</span> <span class='op'>&lt;-</span> <span class='va'>out</span><span class='op'>[[</span><span class='fl'>1</span><span class='op'>]</span><span class='op'>]</span></span>
+<span class='r-in'><span class='va'>attn_output_weights</span> <span class='op'>&lt;-</span> <span class='va'>out</span><span class='op'>[[</span><span class='fl'>2</span><span class='op'>]</span><span class='op'>]</span></span>
+<span class='r-in'><span class='op'>}</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='op'>}</span></span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

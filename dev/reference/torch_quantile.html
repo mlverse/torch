@@ -84,7 +84,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">torch</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.6.0.9000</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.6.1.9000</span>
       </span>
     </div>
 
@@ -239,21 +239,22 @@ If <code>q</code> is a 1D tensor, an extra dimension is prepended to the output 
 size as <code>q</code> which represents the quantiles.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
-
-<span class='va'>a</span> <span class='op'>&lt;-</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1</span>, <span class='fl'>3</span><span class='op'>)</span><span class='op'>)</span>
-<span class='va'>a</span>
-<span class='va'>q</span> <span class='op'>&lt;-</span> <span class='fu'><a href='torch_tensor.html'>torch_tensor</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>0</span>, <span class='fl'>0.5</span>, <span class='fl'>1</span><span class='op'>)</span><span class='op'>)</span>
-<span class='fu'>torch_quantile</span><span class='op'>(</span><span class='va'>a</span>, <span class='va'>q</span><span class='op'>)</span>
-
-
-<span class='va'>a</span> <span class='op'>&lt;-</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>2</span>, <span class='fl'>3</span><span class='op'>)</span><span class='op'>)</span>
-<span class='va'>a</span>
-<span class='va'>q</span> <span class='op'>&lt;-</span> <span class='fu'><a href='torch_tensor.html'>torch_tensor</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>0.25</span>, <span class='fl'>0.5</span>, <span class='fl'>0.75</span><span class='op'>)</span><span class='op'>)</span>
-<span class='fu'>torch_quantile</span><span class='op'>(</span><span class='va'>a</span>, <span class='va'>q</span>, dim<span class='op'>=</span><span class='fl'>1</span>, keepdim<span class='op'>=</span><span class='cn'>TRUE</span><span class='op'>)</span>
-<span class='fu'>torch_quantile</span><span class='op'>(</span><span class='va'>a</span>, <span class='va'>q</span>, dim<span class='op'>=</span><span class='fl'>1</span>, keepdim<span class='op'>=</span><span class='cn'>TRUE</span><span class='op'>)</span><span class='op'>$</span><span class='va'>shape</span>
-<span class='op'>}</span>
-</div><div class='output co'>#&gt; [1] 3 1 3</div></pre>
+    <pre class="examples"><span class='r-in'><span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='torch_is_installed.html'>torch_is_installed</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='va'>a</span> <span class='op'>&lt;-</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1</span>, <span class='fl'>3</span><span class='op'>)</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>a</span></span>
+<span class='r-in'><span class='va'>q</span> <span class='op'>&lt;-</span> <span class='fu'><a href='torch_tensor.html'>torch_tensor</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>0</span>, <span class='fl'>0.5</span>, <span class='fl'>1</span><span class='op'>)</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'>torch_quantile</span><span class='op'>(</span><span class='va'>a</span>, <span class='va'>q</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='va'>a</span> <span class='op'>&lt;-</span> <span class='fu'><a href='torch_randn.html'>torch_randn</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>2</span>, <span class='fl'>3</span><span class='op'>)</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>a</span></span>
+<span class='r-in'><span class='va'>q</span> <span class='op'>&lt;-</span> <span class='fu'><a href='torch_tensor.html'>torch_tensor</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>0.25</span>, <span class='fl'>0.5</span>, <span class='fl'>0.75</span><span class='op'>)</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'>torch_quantile</span><span class='op'>(</span><span class='va'>a</span>, <span class='va'>q</span>, dim<span class='op'>=</span><span class='fl'>1</span>, keepdim<span class='op'>=</span><span class='cn'>TRUE</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'>torch_quantile</span><span class='op'>(</span><span class='va'>a</span>, <span class='va'>q</span>, dim<span class='op'>=</span><span class='fl'>1</span>, keepdim<span class='op'>=</span><span class='cn'>TRUE</span><span class='op'>)</span><span class='op'>$</span><span class='va'>shape</span></span>
+<span class='r-in'><span class='op'>}</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] 3 1 3</span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

@@ -39,7 +39,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">torch</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.6.0.9000</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.6.1.9000</span>
       </span>
     </div>
 
@@ -271,7 +271,7 @@
     <span class="va">y_pred</span> <span class="op">&lt;-</span> <span class="va">x</span><span class="op">$</span><span class="fu">mm</span><span class="op">(</span><span class="va">w1</span><span class="op">)</span><span class="op">$</span><span class="fu">add</span><span class="op">(</span><span class="va">b1</span><span class="op">)</span><span class="op">$</span><span class="fu">clamp</span><span class="op">(</span>min <span class="op">=</span> <span class="fl">0</span><span class="op">)</span><span class="op">$</span><span class="fu">mm</span><span class="op">(</span><span class="va">w2</span><span class="op">)</span><span class="op">$</span><span class="fu">add</span><span class="op">(</span><span class="va">b2</span><span class="op">)</span>
     <span class="co">### -------- compute loss -------- </span>
     <span class="va">loss</span> <span class="op">&lt;-</span> <span class="op">(</span><span class="va">y_pred</span> <span class="op">-</span> <span class="va">y</span><span class="op">)</span><span class="op">$</span><span class="fu">pow</span><span class="op">(</span><span class="fl">2</span><span class="op">)</span><span class="op">$</span><span class="fu">mean</span><span class="op">(</span><span class="op">)</span>
-    <span class="kw">if</span> <span class="op">(</span><span class="va">t</span> <span class="op">%%</span> <span class="fl">10</span> <span class="op">==</span> <span class="fl">0</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="va">t</span>, <span class="fu"><a href="../reference/as_array.html">as_array</a></span><span class="op">(</span><span class="va">loss</span><span class="op">)</span>, <span class="st">"\n"</span><span class="op">)</span>
+    <span class="kw">if</span> <span class="op">(</span><span class="va">t</span> <span class="op"><a href="https://rdrr.io/r/base/Arithmetic.html">%%</a></span> <span class="fl">10</span> <span class="op">==</span> <span class="fl">0</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="va">t</span>, <span class="fu"><a href="../reference/as_array.html">as_array</a></span><span class="op">(</span><span class="va">loss</span><span class="op">)</span>, <span class="st">"\n"</span><span class="op">)</span>
     <span class="co">### -------- Backpropagation -------- </span>
     <span class="co"># compute the gradient of loss with respect to all tensors with requires_grad = True.</span>
     <span class="va">loss</span><span class="op">$</span><span class="fu">backward</span><span class="op">(</span><span class="op">)</span>
@@ -295,26 +295,26 @@
     <span class="op">}</span><span class="op">)</span>
     
 <span class="op">}</span>
-<span class="co">#&gt; 10 37.35306 </span>
-<span class="co">#&gt; 20 34.89959 </span>
-<span class="co">#&gt; 30 32.68298 </span>
-<span class="co">#&gt; 40 30.67442 </span>
-<span class="co">#&gt; 50 28.84664 </span>
-<span class="co">#&gt; 60 27.19251 </span>
-<span class="co">#&gt; 70 25.68865 </span>
-<span class="co">#&gt; 80 24.31191 </span>
-<span class="co">#&gt; 90 23.05585 </span>
-<span class="co">#&gt; 100 21.90562 </span>
-<span class="co">#&gt; 110 20.84741 </span>
-<span class="co">#&gt; 120 19.8712 </span>
-<span class="co">#&gt; 130 18.96923 </span>
-<span class="co">#&gt; 140 18.14347 </span>
-<span class="co">#&gt; 150 17.38552 </span>
-<span class="co">#&gt; 160 16.68346 </span>
-<span class="co">#&gt; 170 16.03342 </span>
-<span class="co">#&gt; 180 15.43075 </span>
-<span class="co">#&gt; 190 14.86923 </span>
-<span class="co">#&gt; 200 14.34457</span></code></pre></div>
+<span class="co">#&gt; 10 29.44756 </span>
+<span class="co">#&gt; 20 27.04563 </span>
+<span class="co">#&gt; 30 24.93572 </span>
+<span class="co">#&gt; 40 23.07985 </span>
+<span class="co">#&gt; 50 21.44888 </span>
+<span class="co">#&gt; 60 20.01111 </span>
+<span class="co">#&gt; 70 18.73517 </span>
+<span class="co">#&gt; 80 17.59601 </span>
+<span class="co">#&gt; 90 16.57495 </span>
+<span class="co">#&gt; 100 15.65404 </span>
+<span class="co">#&gt; 110 14.82335 </span>
+<span class="co">#&gt; 120 14.07575 </span>
+<span class="co">#&gt; 130 13.40318 </span>
+<span class="co">#&gt; 140 12.79334 </span>
+<span class="co">#&gt; 150 12.23771 </span>
+<span class="co">#&gt; 160 11.73162 </span>
+<span class="co">#&gt; 170 11.26849 </span>
+<span class="co">#&gt; 180 10.84695 </span>
+<span class="co">#&gt; 190 10.46096 </span>
+<span class="co">#&gt; 200 10.10477</span></code></pre></div>
 <p>We still manually compute the forward pass, and we still manually update the weights. In the last two chapters of this section, we’ll see how these parts of the logic can be made more modular and reusable, as well.</p>
 </div>
 <div class="footnotes">
