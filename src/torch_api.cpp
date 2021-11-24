@@ -583,7 +583,8 @@ XPtrTorchDimname from_sexp_dimname (SEXP x)
   
   if (TYPEOF(x) == STRSXP && (LENGTH(x) == 1))
   {
-    return XPtrTorchDimname(lantern_Dimname(Rcpp::as<XPtrTorchstring>(x).get()));
+    auto str = Rcpp::as<XPtrTorchstring>(x);
+    return XPtrTorchDimname(lantern_Dimname(str));
   }
   
   Rcpp::stop("Expected a torch_dimname");
