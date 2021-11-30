@@ -130,11 +130,7 @@ std::string buildCalls(std::string name, YAML::Node node, size_t start)
         std::string type = removeAt(node[idx]["dynamic_type"].as<std::string>());
         std::string dtype = removeAt(node[idx]["type"].as<std::string>());
 
-        if (type == "IntArrayRef" & dtype != "c10::optional<IntArrayRef>")
-        {
-            type = "std::vector<int64_t>";
-        }
-        else if (type == "ArrayRef<double>" & dtype != "c10::optional<ArrayRef<double>>")
+        if (type == "ArrayRef<double>" & dtype != "c10::optional<ArrayRef<double>>")
         {
           type = "std::vector<double>";
         }
@@ -227,6 +223,10 @@ std::string buildCalls(std::string name, YAML::Node node, size_t start)
         else if (type == "c10::optional<Generator>")
         {
             arguments += "from_raw::optional::Generator(" + call + ")";
+        }
+        else if (type == "IntArrayRef")
+        {
+            arguments += "from_raw::IntArrayRef(" + call + ")";
         }
         else
         {
@@ -423,6 +423,11 @@ int main(int argc, char *argv[])
                         bodies.push_back("    return make_unique::DimnameList(" + functionCall + name + "(");
                         bodies.push_back("        " + calls + "));");
                     }
+                    else if (returns == "torch::IntArrayRef")
+                    {
+                        bodies.push_back("    return make_unique::IntArrayRef(" + functionCall + name + "(");
+                        bodies.push_back("        " + calls + "));");
+                    }
                     else
                     {
                         bodies.push_back("    return (void *) new LanternObject<" + returns + ">(" + functionCall + name + "(");
@@ -514,6 +519,11 @@ int main(int argc, char *argv[])
                     else if (returns == "torch::DimnameList")
                     {
                         bodies.push_back("    return make_unique::DimnameList(" + functionCall + name + "(");
+                        bodies.push_back("        " + calls + "));");
+                    }
+                    else if (returns == "torch::IntArrayRef")
+                    {
+                        bodies.push_back("    return make_unique::IntArrayRef(" + functionCall + name + "(");
                         bodies.push_back("        " + calls + "));");
                     }
                     else

@@ -264,7 +264,7 @@ void* _lantern_nn_functional_pad_circular (void* input, void* padding)
 {
   LANTERN_FUNCTION_START
   auto input_ = from_raw::Tensor(input);
-  auto padding_ = reinterpret_cast<LanternObject<std::vector<int64_t>>*>(padding)->get();
+  auto padding_ = from_raw::IntArrayRef(padding);
   auto out = torch::nn::functional::_pad_circular(input_, padding_);
   return make_unique::Tensor(out);
   LANTERN_FUNCTION_END
@@ -320,6 +320,10 @@ namespace make_unique {
   {
     return make_ptr<LanternObject<torch::MemoryFormat>>(x);
   }
+  void* IntArrayRef (const torch::IntArrayRef& x)
+  {
+    return make_ptr<std::vector<int64_t>>(x.vec());
+  }
 
 }
 
@@ -344,6 +348,7 @@ namespace from_raw {
   }
   LANTERN_FROM_RAW(Generator, torch::Generator)
   LANTERN_FROM_RAW(MemoryFormat, torch::MemoryFormat)
+  LANTERN_FROM_RAW(IntArrayRef, std::vector<int64_t>)
   
   namespace optional {
 

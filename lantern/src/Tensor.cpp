@@ -224,8 +224,8 @@ bool _lantern_Tensor_has_any_zeros (void * self)
 void* _lantern_normal_double_double_intarrayref_generator_tensoroptions (double mean, double std, void* size, void* generator, void* options)
 {
   LANTERN_FUNCTION_START
-  auto size_ = reinterpret_cast<LanternObject<std::vector<int64_t>>*>(size)->get();
-  auto generator_ = reinterpret_cast<LanternObject<torch::Generator>*>(generator)->get();
+  auto size_ = from_raw::IntArrayRef(size);
+  auto generator_ = from_raw::Generator(generator);
   auto options_ = from_raw::TensorOptions(options);
   auto ten = at::normal(mean, std, size_, generator_, options_);
   return make_unique::Tensor(ten);
