@@ -340,7 +340,7 @@ void* _lantern_IValue_from_NamedTuple (void* self) {
 void* _lantern_IValue_from_TensorDict (void* self)
 {
     LANTERN_FUNCTION_START
-    auto self_ = reinterpret_cast<c10::Dict<std::string, torch::Tensor>*>(self);
-    return (void*) new torch::IValue(*self_);
+    auto self_ = from_raw::TensorDict(self);
+    return (void*) new torch::IValue(self_);
     LANTERN_FUNCTION_END
 }

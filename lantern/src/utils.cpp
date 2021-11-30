@@ -324,11 +324,21 @@ namespace make_unique {
   {
     return make_ptr<std::vector<int64_t>>(x.vec());
   }
+  void * TensorDict (const c10::Dict<std::string,torch::Tensor>& x)
+  {
+    return make_ptr<c10::Dict<std::string,torch::Tensor>>(x);
+  }
 
 }
 
 #define LANTERN_FROM_RAW(name, type) \
   type& name(void* x) {return reinterpret_cast<LanternObject<type>*>(x)->get();}
+
+
+namespace alias {
+  using TensorDict = c10::Dict<std::string,torch::Tensor>;
+}
+
 
 namespace from_raw {
   LANTERN_FROM_RAW(Tensor, torch::Tensor)
@@ -349,6 +359,7 @@ namespace from_raw {
   LANTERN_FROM_RAW(Generator, torch::Generator)
   LANTERN_FROM_RAW(MemoryFormat, torch::MemoryFormat)
   LANTERN_FROM_RAW(IntArrayRef, std::vector<int64_t>)
+  LANTERN_FROM_RAW(TensorDict, alias::TensorDict)
   
   namespace optional {
 

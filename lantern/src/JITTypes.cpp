@@ -188,15 +188,15 @@ void* _lantern_jit_NamedTupleHelper_elements (void* self)
 void* _lantern_jit_TensorDict_new ()
 {
     LANTERN_FUNCTION_START
-    return (void*) new c10::Dict<std::string, torch::Tensor>();
+    return make_unique::TensorDict(alias::TensorDict());
     LANTERN_FUNCTION_END
 }
 
 void _lantern_jit_TensorDict_push_back(void* self, void* key, void* value)
 {
     LANTERN_FUNCTION_START
-    auto self_ = reinterpret_cast<c10::Dict<std::string, torch::Tensor>*>(self);
-    self_->insert(
+    auto self_ = from_raw::TensorDict(self);
+    self_.insert(
         *reinterpret_cast<std::string*>(key),
         from_raw::Tensor(value)
     );

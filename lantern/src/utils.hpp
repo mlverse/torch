@@ -96,10 +96,17 @@ namespace make_unique {
   void* Generator (const torch::Generator& x);
   void* MemoryFormat (const torch::MemoryFormat& x);
   void* IntArrayRef (const torch::IntArrayRef& x);
+  void* IntArrayRef (const torch::IntArrayRef& x);
+  void* TensorDict (const c10::Dict<std::string,torch::Tensor>& x);
 }
 
 #define LANTERN_FROM_RAW_DECL(name, type)                                                 \
   type& name (void* x);                 
+
+namespace alias {
+  using TensorDict = c10::Dict<std::string,torch::Tensor>;
+}
+
 
 namespace from_raw {
   LANTERN_FROM_RAW_DECL(Tensor, torch::Tensor)
@@ -117,6 +124,7 @@ namespace from_raw {
   LANTERN_FROM_RAW_DECL(Generator, torch::Generator)
   LANTERN_FROM_RAW_DECL(MemoryFormat, torch::MemoryFormat)
   LANTERN_FROM_RAW_DECL(IntArrayRef, std::vector<int64_t>)
+  LANTERN_FROM_RAW_DECL(TensorDict, alias::TensorDict)
 
   namespace optional {
     c10::optional<torch::DimnameList> DimnameList (void* x);
