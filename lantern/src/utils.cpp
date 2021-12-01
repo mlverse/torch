@@ -332,6 +332,10 @@ namespace make_unique {
   {
     return (void*) new torch::jit::CompilationUnit(std::move(x));
   }
+  void* QScheme (const torch::QScheme& x)
+  {
+    return make_ptr<torch::QScheme>(x);
+  }
 
 }
 
@@ -366,6 +370,7 @@ namespace from_raw {
   torch::jit::CompilationUnit& CompilationUnit (void* x) {
     return *reinterpret_cast<torch::jit::CompilationUnit*>(x);
   }
+  LANTERN_FROM_RAW(QScheme, torch::QScheme)
   
   namespace optional {
 

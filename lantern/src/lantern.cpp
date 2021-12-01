@@ -11594,7 +11594,7 @@ void* _lantern__make_per_channel_quantized_tensor_tensor_tensor_tensor_intt(void
 void* _lantern_Tensor_qscheme_tensor(void* self)
 {
   LANTERN_FUNCTION_START
-    return (void *) new LanternObject<torch::QScheme>(from_raw::Tensor(self).qscheme(
+    return make_unique::QScheme(from_raw::Tensor(self).qscheme(
         ));
   LANTERN_FUNCTION_END
 }

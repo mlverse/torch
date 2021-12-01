@@ -428,6 +428,11 @@ int main(int argc, char *argv[])
                         bodies.push_back("    return make_unique::IntArrayRef(" + functionCall + name + "(");
                         bodies.push_back("        " + calls + "));");
                     }
+                    else if (returns == "torch::QScheme")
+                    {
+                        bodies.push_back("    return make_unique::QScheme(" + functionCall + name + "(");
+                        bodies.push_back("        " + calls + "));");
+                    }
                     else
                     {
                         bodies.push_back("    return (void *) new LanternObject<" + returns + ">(" + functionCall + name + "(");
@@ -524,6 +529,11 @@ int main(int argc, char *argv[])
                     else if (returns == "torch::IntArrayRef")
                     {
                         bodies.push_back("    return make_unique::IntArrayRef(" + functionCall + name + "(");
+                        bodies.push_back("        " + calls + "));");
+                    }
+                    else if (returns == "torch::QScheme")
+                    {
+                        bodies.push_back("    return make_unique::QScheme(" + functionCall + name + "(");
                         bodies.push_back("        " + calls + "));");
                     }
                     else
