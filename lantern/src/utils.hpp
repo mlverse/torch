@@ -98,6 +98,7 @@ namespace make_unique {
   void* IntArrayRef (const torch::IntArrayRef& x);
   void* IntArrayRef (const torch::IntArrayRef& x);
   void* TensorDict (const c10::Dict<std::string,torch::Tensor>& x);
+  void* CompilationUnit (torch::jit::CompilationUnit& x);
 }
 
 #define LANTERN_FROM_RAW_DECL(name, type)                                                 \
@@ -125,6 +126,7 @@ namespace from_raw {
   LANTERN_FROM_RAW_DECL(MemoryFormat, torch::MemoryFormat)
   LANTERN_FROM_RAW_DECL(IntArrayRef, std::vector<int64_t>)
   LANTERN_FROM_RAW_DECL(TensorDict, alias::TensorDict)
+  LANTERN_FROM_RAW_DECL(CompilationUnit, torch::CompilationUnit)
 
   namespace optional {
     c10::optional<torch::DimnameList> DimnameList (void* x);

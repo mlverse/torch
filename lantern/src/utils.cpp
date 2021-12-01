@@ -328,6 +328,10 @@ namespace make_unique {
   {
     return make_ptr<c10::Dict<std::string,torch::Tensor>>(x);
   }
+  void * CompilationUnit (torch::jit::CompilationUnit& x)
+  {
+    return (void*) new torch::jit::CompilationUnit(std::move(x));
+  }
 
 }
 
@@ -338,7 +342,6 @@ namespace make_unique {
 namespace alias {
   using TensorDict = c10::Dict<std::string,torch::Tensor>;
 }
-
 
 namespace from_raw {
   LANTERN_FROM_RAW(Tensor, torch::Tensor)
@@ -360,6 +363,9 @@ namespace from_raw {
   LANTERN_FROM_RAW(MemoryFormat, torch::MemoryFormat)
   LANTERN_FROM_RAW(IntArrayRef, std::vector<int64_t>)
   LANTERN_FROM_RAW(TensorDict, alias::TensorDict)
+  torch::jit::CompilationUnit& CompilationUnit (void* x) {
+    return *reinterpret_cast<torch::jit::CompilationUnit*>(x);
+  }
   
   namespace optional {
 
