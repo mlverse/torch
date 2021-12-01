@@ -336,6 +336,10 @@ namespace make_unique {
   {
     return make_ptr<torch::QScheme>(x);
   }
+  void* variable_list (const torch::autograd::variable_list& x)
+  {
+    return make_ptr<torch::autograd::variable_list>(x);
+  }
 
 }
 
@@ -371,6 +375,7 @@ namespace from_raw {
     return *reinterpret_cast<torch::jit::CompilationUnit*>(x);
   }
   LANTERN_FROM_RAW(QScheme, torch::QScheme)
+  LANTERN_FROM_RAW(variable_list, torch::autograd::variable_list)
   
   namespace optional {
 

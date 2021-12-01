@@ -100,6 +100,7 @@ namespace make_unique {
   void* TensorDict (const c10::Dict<std::string,torch::Tensor>& x);
   void* CompilationUnit (torch::jit::CompilationUnit& x);
   void* QScheme (const torch::QScheme& x);
+  void* variable_list (const torch::autograd::variable_list& x);
 }
 
 #define LANTERN_FROM_RAW_DECL(name, type)                                                 \
@@ -129,6 +130,7 @@ namespace from_raw {
   LANTERN_FROM_RAW_DECL(TensorDict, alias::TensorDict)
   LANTERN_FROM_RAW_DECL(CompilationUnit, torch::CompilationUnit)
   LANTERN_FROM_RAW_DECL(QScheme, torch::QScheme)
+  LANTERN_FROM_RAW_DECL(variable_list, torch::autograd::variable_list)
 
   namespace optional {
     c10::optional<torch::DimnameList> DimnameList (void* x);

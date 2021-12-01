@@ -101,8 +101,7 @@ void _lantern_Tensor_remove_hook(void *self, unsigned int pos)
 void *_lantern_variable_list_new()
 {
     LANTERN_FUNCTION_START
-    auto out = new LanternObject<torch::autograd::variable_list>();
-    return (void *)out;
+    return make_unique::variable_list({});
     LANTERN_FUNCTION_END
 }
 
@@ -110,14 +109,14 @@ void _lantern_variable_list_push_back(void *self, void *x)
 {
     LANTERN_FUNCTION_START
     auto t = from_raw::Tensor(x);
-    reinterpret_cast<LanternObject<torch::autograd::variable_list> *>(self)->get().push_back(t);
+    from_raw::variable_list(self).push_back(t);
     LANTERN_FUNCTION_END_VOID
 }
 
 void *_lantern_variable_list_get(void *self, int64_t i)
 {
     LANTERN_FUNCTION_START
-    auto s = reinterpret_cast<LanternObject<torch::autograd::variable_list> *>(self)->get();
+    auto s = from_raw::variable_list(self);
     torch::Tensor out = s[i];
     return make_unique::Tensor(out);
     LANTERN_FUNCTION_END
@@ -126,7 +125,7 @@ void *_lantern_variable_list_get(void *self, int64_t i)
 int64_t _lantern_variable_list_size(void *self)
 {
     LANTERN_FUNCTION_START
-    auto s = reinterpret_cast<LanternObject<torch::autograd::variable_list> *>(self)->get();
+    auto s = from_raw::variable_list(self);
     return s.size();
     LANTERN_FUNCTION_END_RET(0)
 }
@@ -135,9 +134,8 @@ void *_lantern_Function_lambda(void *(*fun)(void *, void *, void *), void *custo
 {
     LANTERN_FUNCTION_START
     auto out = [fun, custom](torch::autograd::LanternAutogradContext *ctx, torch::autograd::variable_list inputs) {
-        auto out = (*fun)(custom, (void *)ctx, (void *)new LanternObject<torch::autograd::variable_list>(inputs));
-        auto vl = reinterpret_cast<LanternObject<torch::autograd::variable_list> *>(out)->get();
-        return vl;
+        auto out = (*fun)(custom, (void *)ctx, make_unique::variable_list(inputs));
+        return from_raw::variable_list(out);
     };
     return (void *)new LanternObject<std::function<torch::autograd::variable_list(torch::autograd::LanternAutogradContext *, torch::autograd::variable_list)>>(out);
     LANTERN_FUNCTION_END
@@ -147,11 +145,11 @@ void *_lantern_Function_apply(void *inputs, void *forward, void *backward)
 {
     LANTERN_FUNCTION_START
     auto out = torch::autograd::LanternFunction::apply(
-        reinterpret_cast<LanternObject<torch::autograd::variable_list> *>(inputs)->get(),
+        from_raw::variable_list(inputs),
         reinterpret_cast<LanternObject<std::function<torch::autograd::variable_list(torch::autograd::LanternAutogradContext *, torch::autograd::variable_list)>> *>(forward)->get(),
         reinterpret_cast<LanternObject<std::function<torch::autograd::variable_list(torch::autograd::LanternAutogradContext *, torch::autograd::variable_list)>> *>(backward)->get());
 
-    return (void *)new LanternObject<torch::autograd::variable_list>(out);
+    return make_unique::variable_list(out);
     LANTERN_FUNCTION_END
 }
 
@@ -159,7 +157,7 @@ void _lantern_AutogradContext_save_for_backward(void *self, void *vars)
 {
     LANTERN_FUNCTION_START
     auto ctx = reinterpret_cast<torch::autograd::LanternAutogradContext *>(self);
-    ctx->save_for_backward(reinterpret_cast<LanternObject<torch::autograd::variable_list> *>(vars)->get());
+    ctx->save_for_backward(from_raw::variable_list(vars));
     LANTERN_FUNCTION_END_VOID
 }
 
@@ -167,7 +165,7 @@ void *_lantern_AutogradContext_get_saved_variables(void *self)
 {
     LANTERN_FUNCTION_START
     auto ctx = reinterpret_cast<torch::autograd::LanternAutogradContext *>(self);
-    return (void *)new LanternObject<torch::autograd::variable_list>(ctx->get_saved_variables());
+    return make_unique::variable_list(ctx->get_saved_variables());
     LANTERN_FUNCTION_END
 }
 
@@ -217,8 +215,7 @@ void _lantern_AutogradContext_mark_dirty(void *self, void *inputs)
 {
     LANTERN_FUNCTION_START
     auto ctx = reinterpret_cast<torch::autograd::LanternAutogradContext *>(self);
-    auto vars = reinterpret_cast<LanternObject<torch::autograd::variable_list> *>(inputs)->get();
-    ctx->mark_dirty(vars);
+    ctx->mark_dirty(from_raw::variable_list(inputs));
     LANTERN_FUNCTION_END_VOID
 }
 
@@ -226,8 +223,7 @@ void _lantern_AutogradContext_mark_non_differentiable(void *self, void *outputs)
 {
     LANTERN_FUNCTION_START
     auto ctx = reinterpret_cast<torch::autograd::LanternAutogradContext *>(self);
-    auto vars = reinterpret_cast<LanternObject<torch::autograd::variable_list> *>(outputs)->get();
-    ctx->mark_non_differentiable(vars);
+    ctx->mark_non_differentiable(from_raw::variable_list(outputs));
     LANTERN_FUNCTION_END_VOID
 }
 
@@ -235,8 +231,8 @@ void _lantern_autograd_backward(void *tensors, void *grad_tensors, bool retain_g
 {
     LANTERN_FUNCTION_START
     torch::autograd::backward(
-        ((LanternObject<torch::autograd::variable_list> *)tensors)->get(),
-        ((LanternObject<torch::autograd::variable_list> *)grad_tensors)->get(),
+        from_raw::variable_list(tensors),
+        from_raw::variable_list(grad_tensors),
         retain_graph, create_graph);
     LANTERN_FUNCTION_END_VOID
 }
@@ -246,13 +242,13 @@ void *_lantern_autograd_grad(void *outputs, void *inputs, void *grad_outputs,
 {
     LANTERN_FUNCTION_START
     auto out = torch::autograd::grad(
-        reinterpret_cast<LanternObject<torch::autograd::variable_list> *>(outputs)->get(),
-        reinterpret_cast<LanternObject<torch::autograd::variable_list> *>(inputs)->get(),
-        reinterpret_cast<LanternObject<torch::autograd::variable_list> *>(grad_outputs)->get(),
+        from_raw::variable_list(outputs),
+        from_raw::variable_list(inputs),
+        from_raw::variable_list(grad_outputs),
         retain_graph,
         create_graph,
         allow_unused);
-    return (void *)new LanternObject<torch::autograd::variable_list>(out);
+    return make_unique::variable_list(out);
     LANTERN_FUNCTION_END
 }
 
