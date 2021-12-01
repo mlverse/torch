@@ -10,14 +10,14 @@
 void *_lantern_Layout_strided()
 {
     LANTERN_FUNCTION_START
-    return (void *)new LanternObject<torch::Layout>(torch::kStrided);
+    return make_unique::Layout(torch::kStrided);
     LANTERN_FUNCTION_END
 }
 
 void *_lantern_Layout_sparse()
 {
     LANTERN_FUNCTION_START
-    return (void *)new LanternObject<torch::Layout>(torch::kSparse);
+    return make_unique::Layout(torch::kSparse);
     LANTERN_FUNCTION_END
 }
 
@@ -25,7 +25,7 @@ const char *_lantern_Layout_string(void *x)
 {
     LANTERN_FUNCTION_START
     std::string str;
-    auto l = reinterpret_cast<LanternObject<torch::Layout> *>(x)->get();
+    auto l = from_raw::Layout(x);
     if (l == torch::kStrided)
     {
         str = "strided";
