@@ -232,6 +232,10 @@ std::string buildCalls(std::string name, YAML::Node node, size_t start)
         {
             arguments += "from_raw::Storage(" + call + ")";
         }
+        else if (type == "std::string")
+        {
+            arguments += "from_raw::string(" + call + ")";
+        }
         else
         {
             arguments += "((" + lanternObject(type) + "<" + addNamespace(type) + ">*)" +

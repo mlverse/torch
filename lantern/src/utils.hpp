@@ -103,6 +103,12 @@ namespace make_unique {
   void* variable_list (const torch::autograd::variable_list& x);
   void* Layout (const torch::Layout& x);
   void* Storage (const torch::Storage& x);
+  void* string (const std::string& x);
+
+  namespace vector {
+    void* string (const std::vector<std::string>& x);
+  }
+
 }
 
 #define LANTERN_FROM_RAW_DECL(name, type)                                                 \
@@ -135,9 +141,14 @@ namespace from_raw {
   LANTERN_FROM_RAW_DECL(variable_list, torch::autograd::variable_list)
   LANTERN_FROM_RAW_DECL(Layout, torch::Layout)
   LANTERN_FROM_RAW_DECL(Storage, torch::Storage)
+  LANTERN_FROM_RAW_DECL(string, std::string)
 
   namespace optional {
     c10::optional<torch::DimnameList> DimnameList (void* x);
     c10::optional<torch::Generator> Generator (void* x);
+  }
+
+  namespace vector {
+    LANTERN_FROM_RAW_DECL(string, std::vector<std::string>)
   }
 }

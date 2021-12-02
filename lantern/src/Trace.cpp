@@ -41,7 +41,7 @@ void* _lantern_trace_fn (void* fn, void* inputs, void* compilation_unit, bool st
     std::function<Stack(Stack)> fn_ = reinterpret_cast<LanternObject<std::function<Stack(Stack)>>*>(fn)->get();
     Stack inputs_ = reinterpret_cast<LanternObject<Stack>*>(inputs)->get();
     auto module_ = reinterpret_cast<torch::jit::script::Module *>(module);
-    auto name_ = reinterpret_cast<LanternObject<std::string>*>(name)->get();
+    auto name_ = from_raw::string(name);
 
     std::function<std::string(const torch::autograd::Variable&)> var_fn = [](const torch::autograd::Variable& x) {
         return "";

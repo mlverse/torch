@@ -239,7 +239,7 @@ void* _lantern_IValue_String (void* self)
 {
     LANTERN_FUNCTION_START
     auto self_ = reinterpret_cast<torch::jit::IValue *>(self);
-    return (void *)new LanternObject<std::string>(std::string(self_->toString().get()->string()));
+    return make_unique::string(std::string(self_->toString().get()->string()));
     LANTERN_FUNCTION_END
 }
 

@@ -174,7 +174,7 @@ void _lantern_AutogradContext_set_arguments(void *self, void *names, void *needs
     LANTERN_FUNCTION_START
     auto ctx = reinterpret_cast<torch::autograd::LanternAutogradContext *>(self);
     ctx->set_arguments(
-        *reinterpret_cast<std::vector<std::string> *>(names),
+        from_raw::vector::string(names),
         *reinterpret_cast<std::vector<bool> *>(needs_grad));
     LANTERN_FUNCTION_END_VOID
 }
@@ -183,7 +183,7 @@ void *_lantern_AutogradContext_get_argument_names(void *self)
 {
     LANTERN_FUNCTION_START
     auto ctx = reinterpret_cast<torch::autograd::LanternAutogradContext *>(self);
-    return (void *)new std::vector<std::string>(ctx->get_argument_names());
+    return make_unique::vector::string(ctx->get_argument_names());
     LANTERN_FUNCTION_END
 }
 
@@ -199,7 +199,7 @@ void _lantern_AutogradContext_set_saved_variables_names(void *self, void *names)
 {
     LANTERN_FUNCTION_START
     auto ctx = reinterpret_cast<torch::autograd::LanternAutogradContext *>(self);
-    ctx->set_saved_variables_names(*reinterpret_cast<std::vector<std::string> *>(names));
+    ctx->set_saved_variables_names(from_raw::vector::string(names));
     LANTERN_FUNCTION_END_VOID
 }
 
@@ -207,7 +207,7 @@ void *_lantern_AutogradContext_get_saved_variables_names(void *self)
 {
     LANTERN_FUNCTION_START
     auto ctx = reinterpret_cast<torch::autograd::LanternAutogradContext *>(self);
-    return (void *)new std::vector<std::string>(ctx->get_saved_variables_names());
+    return make_unique::vector::string(ctx->get_saved_variables_names());
     LANTERN_FUNCTION_END
 }
 
@@ -263,6 +263,7 @@ void *_lantern_Tensor_grad_fn(void *self)
 
 const char *_lantern_Node_name(void *self)
 {
+    // TODO: fix to return a pointer to string instead of char*
     LANTERN_FUNCTION_START
     auto str = std::string(reinterpret_cast<torch::autograd::Node *>(self)->name());
     char *cstr = new char[str.length() + 1];

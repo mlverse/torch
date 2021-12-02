@@ -348,6 +348,19 @@ namespace make_unique {
   {
     return make_ptr<torch::Storage>(x);
   }
+  void* string (const std::string& x)
+  {
+    return make_ptr<std::string>(x);
+  }
+
+  namespace vector {
+
+    void* string (const std::vector<std::string>& x)
+    {
+      return make_ptr<std::vector<std::string>>(x);
+    }
+
+  }
 
 }
 
@@ -386,6 +399,7 @@ namespace from_raw {
   LANTERN_FROM_RAW(variable_list, torch::autograd::variable_list)
   LANTERN_FROM_RAW(Layout, torch::Layout)
   LANTERN_FROM_RAW(Storage, torch::Storage)
+  LANTERN_FROM_RAW(string, std::string)
   
   namespace optional {
 
@@ -402,6 +416,10 @@ namespace from_raw {
       return from_raw::Generator(x);
     }
 
+  }
+
+  namespace vector {
+    LANTERN_FROM_RAW(string, std::vector<std::string>)
   }
 }
 

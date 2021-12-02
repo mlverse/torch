@@ -89,12 +89,12 @@ template <class T>
 void* jit_type_names (void* self)
 {
     auto self_ = reinterpret_cast<T *>(self);
-    auto outputs = new std::vector<std::string>();
+    std::vector<std::string> outputs;
     for (auto el : *self_)
     {
-        outputs->push_back(el.name);
+        outputs.push_back(el.name);
     }
-    return (void*) outputs;
+    return make_unique::vector::string(outputs);
 }
 
 void* _lantern_jit_named_parameter_list_names (void* self)

@@ -11,7 +11,7 @@
 void *_lantern_Dimname(void* name)
 {
   LANTERN_FUNCTION_START
-  auto name_ = reinterpret_cast<LanternObject<std::string>*>(name)->get();
+  auto name_ = from_raw::string(name);
   auto nm = torch::Dimname::fromSymbol(torch::Symbol::dimname(name_));
   return make_unique::Dimname(nm);  
   LANTERN_FUNCTION_END
