@@ -12027,7 +12027,7 @@ void* _lantern_Tensor_set__tensor_storage(void* self, void* source)
 {
   LANTERN_FUNCTION_START
     return make_unique::Tensor(from_raw::Tensor(self).set_(
-        ((LanternObject<torch::Storage>*)source)->get()));
+        from_raw::Storage(source)));
   LANTERN_FUNCTION_END
 }
 
@@ -12035,7 +12035,7 @@ void* _lantern_Tensor_set__tensor_storage_intt_intarrayref_intarrayref(void* sel
 {
   LANTERN_FUNCTION_START
     return make_unique::Tensor(from_raw::Tensor(self).set_(
-        ((LanternObject<torch::Storage>*)source)->get(), ((LanternObject<int64_t>*)storage_offset)->get(), from_raw::IntArrayRef(size), from_raw::IntArrayRef(stride)));
+        from_raw::Storage(source), ((LanternObject<int64_t>*)storage_offset)->get(), from_raw::IntArrayRef(size), from_raw::IntArrayRef(stride)));
   LANTERN_FUNCTION_END
 }
 

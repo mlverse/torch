@@ -228,6 +228,10 @@ std::string buildCalls(std::string name, YAML::Node node, size_t start)
         {
             arguments += "from_raw::IntArrayRef(" + call + ")";
         }
+        else if (type == "Storage")
+        {
+            arguments += "from_raw::Storage(" + call + ")";
+        }
         else
         {
             arguments += "((" + lanternObject(type) + "<" + addNamespace(type) + ">*)" +
@@ -235,7 +239,6 @@ std::string buildCalls(std::string name, YAML::Node node, size_t start)
         }
 
         
-
         if (type == "std::shared_ptr<torch::Generator>")
         {
             arguments += ".get()";
@@ -433,6 +436,11 @@ int main(int argc, char *argv[])
                         bodies.push_back("    return make_unique::QScheme(" + functionCall + name + "(");
                         bodies.push_back("        " + calls + "));");
                     }
+                    else if (returns == "torch::Storage")
+                    {
+                        bodies.push_back("    return make_unique::Storage(" + functionCall + name + "(");
+                        bodies.push_back("        " + calls + "));");
+                    }
                     else
                     {
                         bodies.push_back("    return (void *) new LanternObject<" + returns + ">(" + functionCall + name + "(");
@@ -534,6 +542,11 @@ int main(int argc, char *argv[])
                     else if (returns == "torch::QScheme")
                     {
                         bodies.push_back("    return make_unique::QScheme(" + functionCall + name + "(");
+                        bodies.push_back("        " + calls + "));");
+                    }
+                    else if (returns == "torch::Storage")
+                    {
+                        bodies.push_back("    return make_unique::Storage(" + functionCall + name + "(");
                         bodies.push_back("        " + calls + "));");
                     }
                     else

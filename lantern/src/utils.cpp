@@ -344,6 +344,10 @@ namespace make_unique {
   {
     return make_ptr<torch::Layout>(x);
   }
+  void* Storage (const torch::Storage& x)
+  {
+    return make_ptr<torch::Storage>(x);
+  }
 
 }
 
@@ -381,6 +385,7 @@ namespace from_raw {
   LANTERN_FROM_RAW(QScheme, torch::QScheme)
   LANTERN_FROM_RAW(variable_list, torch::autograd::variable_list)
   LANTERN_FROM_RAW(Layout, torch::Layout)
+  LANTERN_FROM_RAW(Storage, torch::Storage)
   
   namespace optional {
 

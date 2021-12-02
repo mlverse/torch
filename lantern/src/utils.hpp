@@ -102,6 +102,7 @@ namespace make_unique {
   void* QScheme (const torch::QScheme& x);
   void* variable_list (const torch::autograd::variable_list& x);
   void* Layout (const torch::Layout& x);
+  void* Storage (const torch::Storage& x);
 }
 
 #define LANTERN_FROM_RAW_DECL(name, type)                                                 \
@@ -133,6 +134,7 @@ namespace from_raw {
   LANTERN_FROM_RAW_DECL(QScheme, torch::QScheme)
   LANTERN_FROM_RAW_DECL(variable_list, torch::autograd::variable_list)
   LANTERN_FROM_RAW_DECL(Layout, torch::Layout)
+  LANTERN_FROM_RAW_DECL(Storage, torch::Storage)
 
   namespace optional {
     c10::optional<torch::DimnameList> DimnameList (void* x);
