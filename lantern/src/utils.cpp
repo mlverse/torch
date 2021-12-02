@@ -111,13 +111,6 @@ void *_lantern_int(int x)
   LANTERN_FUNCTION_END
 }
 
-void *_lantern_int64_t(int64_t x)
-{
-  LANTERN_FUNCTION_START
-  return (void *)new LanternObject<int64_t>(x);
-  LANTERN_FUNCTION_END
-}
-
 void *_lantern_double(double x)
 {
   LANTERN_FUNCTION_START
@@ -322,7 +315,7 @@ namespace make_unique {
   }
   void* IntArrayRef (const torch::IntArrayRef& x)
   {
-    return make_ptr<std::vector<int64_t>>(x.vec());
+    return make_ptr<std::vector<std::int64_t>>(x.vec());
   }
   void * TensorDict (const c10::Dict<std::string,torch::Tensor>& x)
   {
@@ -352,12 +345,20 @@ namespace make_unique {
   {
     return make_ptr<std::string>(x);
   }
+  void* int64_t (const std::int64_t& x)
+  {
+    return make_ptr<std::int64_t>(x);
+  }
 
   namespace vector {
 
     void* string (const std::vector<std::string>& x)
     {
       return make_ptr<std::vector<std::string>>(x);
+    }
+    void* int64_t (const std::vector<std::int64_t>& x)
+    {
+      return make_ptr<std::vector<std::int64_t>>(x);
     }
 
   }
@@ -390,7 +391,7 @@ namespace from_raw {
   }
   LANTERN_FROM_RAW(Generator, torch::Generator)
   LANTERN_FROM_RAW(MemoryFormat, torch::MemoryFormat)
-  LANTERN_FROM_RAW(IntArrayRef, std::vector<int64_t>)
+  LANTERN_FROM_RAW(IntArrayRef, std::vector<std::int64_t>)
   LANTERN_FROM_RAW(TensorDict, alias::TensorDict)
   torch::jit::CompilationUnit& CompilationUnit (void* x) {
     return *reinterpret_cast<torch::jit::CompilationUnit*>(x);
@@ -400,6 +401,7 @@ namespace from_raw {
   LANTERN_FROM_RAW(Layout, torch::Layout)
   LANTERN_FROM_RAW(Storage, torch::Storage)
   LANTERN_FROM_RAW(string, std::string)
+  LANTERN_FROM_RAW(int64_t, std::int64_t)
   
   namespace optional {
 
@@ -420,6 +422,7 @@ namespace from_raw {
 
   namespace vector {
     LANTERN_FROM_RAW(string, std::vector<std::string>)
+    LANTERN_FROM_RAW(int64_t, std::vector<std::int64_t>)
   }
 }
 

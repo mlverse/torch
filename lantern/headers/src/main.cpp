@@ -236,6 +236,10 @@ std::string buildCalls(std::string name, YAML::Node node, size_t start)
         {
             arguments += "from_raw::string(" + call + ")";
         }
+        else if (type == "int64_t")
+        {
+            arguments += "from_raw::int64_t(" + call + ")";
+        }
         else
         {
             arguments += "((" + lanternObject(type) + "<" + addNamespace(type) + ">*)" +
@@ -445,6 +449,11 @@ int main(int argc, char *argv[])
                         bodies.push_back("    return make_unique::Storage(" + functionCall + name + "(");
                         bodies.push_back("        " + calls + "));");
                     }
+                    else if (returns == "int64_t")
+                    {
+                        bodies.push_back("    return make_unique::int64_t(" + functionCall + name + "(");
+                        bodies.push_back("        " + calls + "));");
+                    }
                     else
                     {
                         bodies.push_back("    return (void *) new LanternObject<" + returns + ">(" + functionCall + name + "(");
@@ -551,6 +560,11 @@ int main(int argc, char *argv[])
                     else if (returns == "torch::Storage")
                     {
                         bodies.push_back("    return make_unique::Storage(" + functionCall + name + "(");
+                        bodies.push_back("        " + calls + "));");
+                    }
+                    else if (returns == "int64_t")
+                    {
+                        bodies.push_back("    return make_unique::int64_t(" + functionCall + name + "(");
                         bodies.push_back("        " + calls + "));");
                     }
                     else

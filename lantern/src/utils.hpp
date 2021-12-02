@@ -76,7 +76,7 @@ auto optional(void *x)
 
   auto z = ((LanternObject<T> *)x)->get();
   return std::make_shared<LanternObject<c10::optional<T>>>(z);
-}
+} 
 
 struct NamedTupleHelper {
     std::vector<torch::IValue> elements;
@@ -104,9 +104,11 @@ namespace make_unique {
   void* Layout (const torch::Layout& x);
   void* Storage (const torch::Storage& x);
   void* string (const std::string& x);
+  void* int64_t (const std::int64_t& x);
 
   namespace vector {
     void* string (const std::vector<std::string>& x);
+    void* int64_t (const std::vector<std::int64_t>& x);
   }
 
 }
@@ -134,7 +136,7 @@ namespace from_raw {
   LANTERN_FROM_RAW_DECL(DimnameList, std::vector<torch::Dimname>)
   LANTERN_FROM_RAW_DECL(Generator, torch::Generator)
   LANTERN_FROM_RAW_DECL(MemoryFormat, torch::MemoryFormat)
-  LANTERN_FROM_RAW_DECL(IntArrayRef, std::vector<int64_t>)
+  LANTERN_FROM_RAW_DECL(IntArrayRef, std::vector<std::int64_t>)
   LANTERN_FROM_RAW_DECL(TensorDict, alias::TensorDict)
   LANTERN_FROM_RAW_DECL(CompilationUnit, torch::CompilationUnit)
   LANTERN_FROM_RAW_DECL(QScheme, torch::QScheme)
@@ -142,6 +144,7 @@ namespace from_raw {
   LANTERN_FROM_RAW_DECL(Layout, torch::Layout)
   LANTERN_FROM_RAW_DECL(Storage, torch::Storage)
   LANTERN_FROM_RAW_DECL(string, std::string)
+  LANTERN_FROM_RAW_DECL(int64_t, std::int64_t)
 
   namespace optional {
     c10::optional<torch::DimnameList> DimnameList (void* x);
@@ -150,5 +153,6 @@ namespace from_raw {
 
   namespace vector {
     LANTERN_FROM_RAW_DECL(string, std::vector<std::string>)
+    LANTERN_FROM_RAW_DECL(int64_t, std::vector<std::int64_t>)
   }
 }
