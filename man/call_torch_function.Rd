@@ -34,7 +34,7 @@ if (torch_is_installed()) {
 x <- torch_randn(10, requires_grad = TRUE)
 y <- torch_tanh(x)
 ## calculate backwards gradient using standard torch method
-y$backwards(torch_ones_like(x))
+y$backward(torch_ones_like(x))
 x$grad
 ## we can get the same result by calling the unexported `torch_tanh_backward()`
 ## function. The first argument is 1 to setup the Jacobian-vector product.
