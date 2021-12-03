@@ -240,6 +240,14 @@ std::string buildCalls(std::string name, YAML::Node node, size_t start)
         {
             arguments += "from_raw::int64_t(" + call + ")";
         }
+        else if (type == "bool")
+        {
+            arguments += "from_raw::bool_t(" + call + ")";
+        }
+        else if (type == "double")
+        {
+            arguments += "from_raw::double_t(" + call + ")";
+        }
         else
         {
             arguments += "((" + lanternObject(type) + "<" + addNamespace(type) + ">*)" +
@@ -454,6 +462,16 @@ int main(int argc, char *argv[])
                         bodies.push_back("    return make_unique::int64_t(" + functionCall + name + "(");
                         bodies.push_back("        " + calls + "));");
                     }
+                    else if (returns == "bool")
+                    {
+                        bodies.push_back("    return make_unique::bool_t(" + functionCall + name + "(");
+                        bodies.push_back("        " + calls + "));");
+                    }
+                    else if (returns == "double")
+                    {
+                        bodies.push_back("    return make_unique::double_t(" + functionCall + name + "(");
+                        bodies.push_back("        " + calls + "));");
+                    }
                     else
                     {
                         bodies.push_back("    return (void *) new LanternObject<" + returns + ">(" + functionCall + name + "(");
@@ -565,6 +583,16 @@ int main(int argc, char *argv[])
                     else if (returns == "int64_t")
                     {
                         bodies.push_back("    return make_unique::int64_t(" + functionCall + name + "(");
+                        bodies.push_back("        " + calls + "));");
+                    }
+                    else if (returns == "bool")
+                    {
+                        bodies.push_back("    return make_unique::bool_t(" + functionCall + name + "(");
+                        bodies.push_back("        " + calls + "));");
+                    }
+                    else if (returns == "double")
+                    {
+                        bodies.push_back("    return make_unique::double_t(" + functionCall + name + "(");
                         bodies.push_back("        " + calls + "));");
                     }
                     else

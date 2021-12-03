@@ -105,10 +105,14 @@ namespace make_unique {
   void* Storage (const torch::Storage& x);
   void* string (const std::string& x);
   void* int64_t (const std::int64_t& x);
+  void* bool_t (const bool& x);
+  void* double_t (const double& x);
 
   namespace vector {
     void* string (const std::vector<std::string>& x);
     void* int64_t (const std::vector<std::int64_t>& x);
+    void* double_t (const std::vector<double>& x);
+    void* bool_t (const std::vector<bool>& x);
   }
 
 }
@@ -145,6 +149,8 @@ namespace from_raw {
   LANTERN_FROM_RAW_DECL(Storage, torch::Storage)
   LANTERN_FROM_RAW_DECL(string, std::string)
   LANTERN_FROM_RAW_DECL(int64_t, std::int64_t)
+  LANTERN_FROM_RAW_DECL(bool_t, bool)
+  LANTERN_FROM_RAW_DECL(double_t, double)
 
   namespace optional {
     c10::optional<torch::DimnameList> DimnameList (void* x);
@@ -154,5 +160,7 @@ namespace from_raw {
   namespace vector {
     LANTERN_FROM_RAW_DECL(string, std::vector<std::string>)
     LANTERN_FROM_RAW_DECL(int64_t, std::vector<std::int64_t>)
+    LANTERN_FROM_RAW_DECL(bool_t, std::vector<bool>)
+    LANTERN_FROM_RAW_DECL(double_t, std::vector<double>)
   }
 }

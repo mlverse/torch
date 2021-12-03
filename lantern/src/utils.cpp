@@ -111,6 +111,13 @@ void *_lantern_int(int x)
   LANTERN_FUNCTION_END
 }
 
+void *_lantern_int64_t(int64_t x)
+{
+  LANTERN_FUNCTION_START
+  return (void *)new LanternObject<int64_t>(x);
+  LANTERN_FUNCTION_END
+}
+
 void *_lantern_double(double x)
 {
   LANTERN_FUNCTION_START
@@ -349,6 +356,14 @@ namespace make_unique {
   {
     return make_ptr<std::int64_t>(x);
   }
+  void* double_t (const double& x)
+  {
+    return make_ptr<double>(x);
+  }
+  void* bool_t (const bool& x)
+  {
+    return make_ptr<bool>(x);
+  }
 
   namespace vector {
 
@@ -359,6 +374,14 @@ namespace make_unique {
     void* int64_t (const std::vector<std::int64_t>& x)
     {
       return make_ptr<std::vector<std::int64_t>>(x);
+    }
+    void* bool_t (const std::vector<bool>& x)
+    {
+      return make_ptr<std::vector<bool>>(x);
+    }
+    void* double_t (const std::vector<double>& x)
+    {
+      return make_ptr<std::vector<double>>(x);
     }
 
   }
@@ -402,7 +425,9 @@ namespace from_raw {
   LANTERN_FROM_RAW(Storage, torch::Storage)
   LANTERN_FROM_RAW(string, std::string)
   LANTERN_FROM_RAW(int64_t, std::int64_t)
-  
+  LANTERN_FROM_RAW(bool_t, bool)
+  LANTERN_FROM_RAW(double_t, double)
+
   namespace optional {
 
     // It's OK to return by value here because we are never modifying optional DimnameLists in
@@ -423,6 +448,8 @@ namespace from_raw {
   namespace vector {
     LANTERN_FROM_RAW(string, std::vector<std::string>)
     LANTERN_FROM_RAW(int64_t, std::vector<std::int64_t>)
+    LANTERN_FROM_RAW(bool_t, std::vector<bool>)
+    LANTERN_FROM_RAW(double_t, std::vector<double>)
   }
 }
 
