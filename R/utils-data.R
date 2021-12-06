@@ -140,7 +140,7 @@ dataset_subset <- dataset(
   },
   
   .getitem = function(idx) {
-    
+    return(self$dataset[self$indices[idx]])
   },
   
   .getbatch = function(idx) {
