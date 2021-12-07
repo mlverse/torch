@@ -57,6 +57,7 @@ Collate:
     'tensor.R'
     'autograd.R'
     'backends.R'
+    'call_torch_function.R'
     'codegen-utils.R'
     'compat-purrr.R'
     'compilation_unit.R'
