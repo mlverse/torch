@@ -35,7 +35,10 @@ SEXP operator_sexp_named_tuple_helper (const XPtrTorchNamedTupleHelper* self);
 SEXP operator_sexp_vector_ivalue (const XPtrTorchvector_IValue* self);
 SEXP operator_sexp_generic_dict (const XPtrTorchGenericDict* self);
 SEXP operator_sexp_generic_list (const XPtrTorchGenericList* self);
-
+SEXP operator_sexp_int64_t (const XPtrTorchint64_t* x);
+SEXP operator_sexp_bool (const XPtrTorchbool* x);
+SEXP operator_sexp_double (const XPtrTorchdouble* x);
+  
 XPtrTorchTensor from_sexp_tensor (SEXP x);
 XPtrTorchOptionalTensor from_sexp_optional_tensor (SEXP x);
 XPtrTorchIndexTensor from_sexp_index_tensor (SEXP x);
@@ -71,5 +74,7 @@ XPtrTorchint64_t2 from_sexp_int64_t_2 (SEXP x_);
 XPtrTorchoptional_int64_t2 from_sexp_optional_int64_t_2 (SEXP x_);
 XPtrTorchindex_int64_t from_sexp_index_int64_t (SEXP x_);
 XPtrTorchoptional_index_int64_t from_sexp_optional_index_int64_t (SEXP x_);
+XPtrTorchoptional_bool from_sexp_optional_bool (SEXP x);
+XPtrTorchbool from_sexp_bool (SEXP x);
 
 #endif // TORCH_API

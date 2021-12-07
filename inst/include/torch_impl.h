@@ -340,6 +340,12 @@ XPtrTorchOptionalIndexIntArrayRef::XPtrTorchOptionalIndexIntArrayRef (SEXP x):
 XPtrTorchTensorDict::XPtrTorchTensorDict(SEXP x) :
   XPtrTorchTensorDict{from_sexp_tensor_dict(x)} {}
 
+// int64_t
+
+XPtrTorchint64_t::operator SEXP () const {
+  return operator_sexp_int64_t(this);
+}
+
 // int64_t2
 
 XPtrTorchint64_t2::XPtrTorchint64_t2(SEXP x) :
@@ -349,6 +355,27 @@ XPtrTorchint64_t2::XPtrTorchint64_t2(SEXP x) :
 
 XPtrTorchoptional_int64_t2::XPtrTorchoptional_int64_t2(SEXP x) :
   XPtrTorchoptional_int64_t2{from_sexp_optional_int64_t_2(x)} {}
+
+// bool
+
+XPtrTorchbool::XPtrTorchbool(SEXP x) :
+  XPtrTorchbool{from_sexp_bool(x)} {}
+
+XPtrTorchbool::operator SEXP () const {
+  return operator_sexp_bool(this);
+}
+
+// double
+
+XPtrTorchdouble::operator SEXP () const {
+  return operator_sexp_double(this);
+}
+
+
+// optional_bool
+
+XPtrTorchoptional_bool::XPtrTorchoptional_bool(SEXP x) :
+  XPtrTorchoptional_bool{from_sexp_optional_bool(x)} {}
 
 // index_int64_t
 

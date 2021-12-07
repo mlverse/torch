@@ -304,6 +304,19 @@ public:
   }
 };
 
+class XPtrTorchbool : public XPtrTorch {
+public:
+  operator SEXP () const;
+  XPtrTorchbool (SEXP x_);
+  XPtrTorchbool (void* x) : XPtrTorch(x, delete_bool) {}
+};
+
+class XPtrTorchoptional_bool : public XPtrTorch {
+public:
+  XPtrTorchoptional_bool (SEXP x_);
+  XPtrTorchoptional_bool (void* x) : XPtrTorch(x, delete_optional_bool) {}
+};
+
 class XPtrTorchindex_int64_t {
 public:
   std::shared_ptr<void> ptr;
@@ -443,6 +456,7 @@ public:
 
 class XPtrTorchdouble : public XPtrTorch {
 public:
+  operator SEXP () const;
   XPtrTorchdouble (void* x) : XPtrTorch(x, delete_double) {}
 };
 
@@ -453,14 +467,9 @@ public:
 
 class XPtrTorchint64_t : public XPtrTorch {
 public:
+  operator SEXP () const; 
   XPtrTorchint64_t (void* x) : XPtrTorch(x, delete_int64_t) {}
 };
-
-class XPtrTorchbool : public XPtrTorch {
-public:
-  XPtrTorchbool (void* x) : XPtrTorch(x, delete_bool) {}
-};
-
 
 class XPtrTorchLayout : public XPtrTorch {
 public:

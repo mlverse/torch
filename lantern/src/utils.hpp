@@ -115,6 +115,10 @@ namespace make_unique {
     void* bool_t (const std::vector<bool>& x);
   }
 
+  namespace optional { 
+    void* bool_t (const c10::optional<bool>& x);
+  }
+
 }
 
 #define LANTERN_FROM_RAW_DECL(name, type)                                                 \
@@ -155,6 +159,11 @@ namespace from_raw {
   namespace optional {
     c10::optional<torch::DimnameList> DimnameList (void* x);
     c10::optional<torch::Generator> Generator (void* x);
+    c10::optional<torch::Tensor> Tensor (void* x);
+    c10::optional<double> double_t (void* x);
+    c10::optional<std::int64_t> int64_t (void* x);
+    c10::optional<bool> bool_t (void* x);
+    c10::optional<torch::ScalarType> ScalarType (void* x);
   }
 
   namespace vector {

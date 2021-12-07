@@ -158,6 +158,40 @@ void *_lantern_bool(bool x)
   LANTERN_FUNCTION_END
 }
 
+bool _lantern_bool_get (void* x)
+{
+  LANTERN_FUNCTION_START
+  return from_raw::bool_t(x);
+  LANTERN_FUNCTION_END
+}
+
+int64_t _lantern_int64_t_get(void* x)
+{
+  LANTERN_FUNCTION_START
+  return from_raw::int64_t(x);
+  LANTERN_FUNCTION_END
+}
+
+double _lantern_double_get (void* x) 
+{
+  LANTERN_FUNCTION_START
+  return from_raw::double_t(x);
+  LANTERN_FUNCTION_END
+}
+
+void* _lantern_optional_bool (bool x, bool is_null)
+{
+  LANTERN_FUNCTION_START
+  c10::optional<bool> out;
+  if (is_null)
+    out = c10::nullopt;
+  else
+    out = x;
+
+  return make_unique::optional::bool_t(out);
+  LANTERN_FUNCTION_END
+}
+
 void *_lantern_vector_get(void *x, int i)
 {
   LANTERN_FUNCTION_START
@@ -386,6 +420,15 @@ namespace make_unique {
 
   }
 
+  namespace optional {
+    
+    void* bool_t (const c10::optional<bool>& x)
+    {
+      return make_ptr<c10::optional<bool>>(x);
+    }
+
+  }
+
 }
 
 #define LANTERN_FROM_RAW(name, type) \
@@ -441,6 +484,31 @@ namespace from_raw {
     c10::optional<torch::Generator> Generator (void* x) {
       if (!x) return c10::nullopt;
       return from_raw::Generator(x);
+    }
+
+    c10::optional<torch::Tensor> Tensor (void* x) {
+      if (!x) return c10::nullopt;
+      return *reinterpret_cast<c10::optional<torch::Tensor>*>(x);
+    }
+
+    c10::optional<double> double_t (void* x) {
+      if (!x) return c10::nullopt;
+      return *reinterpret_cast<c10::optional<double>*>(x);
+    }
+
+    c10::optional<std::int64_t> int64_t (void* x) {
+      if (!x) return c10::nullopt;
+      return reinterpret_cast<LanternObject<c10::optional<std::int64_t>>*>(x)->get();
+    }
+
+    c10::optional<bool> bool_t (void* x) {
+      if (!x) return c10::nullopt;
+      return *reinterpret_cast<c10::optional<bool>*>(x);
+    }
+
+    c10::optional<torch::ScalarType> ScalarType (void* x) {
+      if (!x) return c10::nullopt;
+      return *reinterpret_cast<torch::ScalarType*>(x);
     }
 
   }

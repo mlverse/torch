@@ -52,6 +52,7 @@ void delete_storage (void* x);
 void delete_jit_module (void* x);
 void delete_traceable_function (void* x);
 void delete_vector_void (void* x);
+void delete_optional_bool (void* x);
 
 void* fixme_optional_vector_int64_t (int64_t * x, size_t x_size, bool is_null);
 void* fixme_new_string (const char* x);

@@ -1610,6 +1610,11 @@ void delete_qscheme (void* x)
 
 // double
 
+SEXP operator_sexp_double (const XPtrTorchdouble* x)
+{
+  return Rcpp::wrap(lantern_double_get(x->get()));
+}
+
 void delete_double (void* x)
 {
   lantern_double_delete(x);
@@ -1624,6 +1629,11 @@ void delete_variable_list (void* x)
 
 // int64_t
 
+SEXP operator_sexp_int64_t (const XPtrTorchint64_t* x)
+{
+  return Rcpp::wrap(lantern_int64_t_get(x->get()));
+}
+
 void delete_int64_t (void* x)
 {
   lantern_int64_t_delete(x);
@@ -1631,10 +1641,33 @@ void delete_int64_t (void* x)
 
 // bool
 
+XPtrTorchbool from_sexp_bool (SEXP x)
+{
+  return XPtrTorchbool(lantern_bool(Rcpp::as<bool>(x)));
+}
+
+SEXP operator_sexp_bool (const XPtrTorchbool* x)
+{
+  return Rcpp::wrap(lantern_bool_get(x->get()));
+}
+
 void delete_bool (void* x)
 {
   lantern_bool_delete(x);
 }
+
+// optional bool
+
+XPtrTorchoptional_bool from_sexp_optional_bool (SEXP x)
+{
+  return XPtrTorchoptional_bool(lantern_optional_bool(Rcpp::as<bool>(x), TYPEOF(x) == NILSXP));
+}
+
+void delete_optional_bool (void* x)
+{
+  lantern_optional_bool_delete(x);
+}
+
 
 // layout
 

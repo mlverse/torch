@@ -169,7 +169,9 @@ std::string buildCalls(std::string name, YAML::Node node, size_t start)
                 (type != "ArrayRef<double>") &
                 type  != "int64_t" &
                 type  != "DimnameList" &
-                type  != "Generator"
+                type  != "Generator" &
+                type  != "ScalarType" &
+                type  != "bool"
                 )
             {
                 call = "optional<" + addNamespace(type) + ">(" + call + ").get()";
@@ -247,6 +249,26 @@ std::string buildCalls(std::string name, YAML::Node node, size_t start)
         else if (type == "double")
         {
             arguments += "from_raw::double_t(" + call + ")";
+        }
+        else if (type == "c10::optional<double>")
+        {
+            arguments += "from_raw::optional::double_t(" + call + ")";
+        }
+        else if (type == "c10::optional<int64_t>")
+        {
+            arguments += "from_raw::optional::int64_t(" + call + ")";
+        }
+        else if (type == "c10::optional<bool>")
+        {
+            arguments += "from_raw::optional::bool_t(" + call + ")";
+        }
+        else if (type == "c10::optional<torch::Tensor>")
+        {
+            arguments += "from_raw::optional::Tensor(" + call + ")";
+        }
+        else if (type == "c10::optional<ScalarType>")
+        {
+            arguments += "from_raw::optional::ScalarType(" + call + ")";
         }
         else
         {

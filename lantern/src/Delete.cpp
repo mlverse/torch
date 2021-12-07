@@ -28,6 +28,13 @@ void _lantern_bool_delete(void *x)
   LANTERN_FUNCTION_END_VOID
 }
 
+void _lantern_optional_bool_delete (void* x)
+{
+  LANTERN_FUNCTION_START
+  lantern_delete<LanternObject<c10::optional<bool>>>(x);
+  LANTERN_FUNCTION_END_VOID
+}
+
 void _lantern_int64_t_delete(void *x)
 {
   LANTERN_FUNCTION_START

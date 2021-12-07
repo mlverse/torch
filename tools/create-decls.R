@@ -11,6 +11,7 @@ make_decls <- function(decls) {
 LANTERN_API << type >> (LANTERN_PTR << name >>) << args >>;
 HOST_API << type >> << stringr::str_sub(name, 2) >> << args >>
 {
+  LANTERN_CHECK_LOADED
   << ifelse(type!='void', paste(type, 'ret', '='),'') >> << name >>(<< arg_names >>);
   LANTERN_HOST_HANDLER;
   << ifelse(type!='void', 'return ret;', '') >>
@@ -29,9 +30,8 @@ make_load_symbols <- function(decls) {
 
 decls <- readr::read_lines(
   "
-int64_t _lantern_OptionalTensorList_size (void* self)
-void* _lantern_OptionalTensorList_at (void* self, int64_t i)
-bool _lantern_OptionalTensorList_at_is_null (void* self, int64_t i)
+bool _lantern_bool_get (void* x)
+int64_t _lantern_int64_t_get (void* x)
 "  
 )
 

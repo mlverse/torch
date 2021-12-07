@@ -42,16 +42,16 @@ cpp_type <- function(decl) {
       return("void")
 
     if (returns$dynamic_type == "bool")
-      return("bool")
+      return("XPtrTorchbool")
 
     if (returns$dynamic_type == "int64_t")
-      return("int64_t")
+      return("XPtrTorchint64_t")
 
     if (returns$dynamic_type == "TensorList")
       return("XPtrTorchTensorList")
 
     if (returns$dynamic_type == "double")
-      return("double")
+      return("XPtrTorchdouble")
 
     if (returns$dynamic_type == "QScheme")
       return("Rcpp::XPtr<XPtrTorchQScheme>")
@@ -151,8 +151,12 @@ cpp_parameter_type <- function(argument) {
     declaration <- "XPtrTorchTensor"
   }
 
-  if (argument$dynamic_type == "bool") {
-    declaration <- "bool"
+  if (argument$dynamic_type == "bool" && argument$type != "c10::optional<bool>") {
+    declaration <- "XPtrTorchbool"
+  }
+
+  if (argument$dynamic_type == "bool" && argument$type == "c10::optional<bool>") {
+    declaration <- "XPtrTorchoptional_bool"
   }
 
   if (argument$dynamic_type == "DimnameList") {
@@ -299,7 +303,7 @@ cpp_argument_transform <- function(argument) {
   }
 
   if (argument$dynamic_type == "bool") {
-    result <- glue::glue("reinterpret_cast<void*>(&{argument$name})")
+    result <- glue::glue("{argument$name}.get()")
   }
 
   if (argument$dynamic_type == "DimnameList") {
@@ -417,22 +421,6 @@ xptr_return_call <- function(type, dyn_type) {
   }
 }
 
-reinterpret_cast_call <- function(dyn_type) {
-
-  if (dyn_type == "bool")
-    deleter <- "lantern_bool_delete"
-  else if (dyn_type == "double")
-    deleter <- "lantern_double_delete"
-  else if (dyn_type == "int64_t")
-    deleter <- "lantern_int64_t_delete"
-  else
-    stop("no deleter")
-
-  function(call) {
-    glue::glue("reinterpret_and_clean<{dyn_type}, {deleter}>({call})")
-  }
-}
-
 cpp_return_statement <- function(returns) {
 
   if (length(returns) == 1) {
@@ -443,16 +431,16 @@ cpp_return_statement <- function(returns) {
       return(cast_call("XPtrTorchTensor"))
 
     if (returns$dynamic_type == "bool")
-      return(reinterpret_cast_call("bool"))
+      return(cast_call("XPtrTorchbool"))
 
     if (returns$dynamic_type == "int64_t")
-      return(reinterpret_cast_call("int64_t"))
+      return(cast_call("XPtrTorchint64_t"))
 
     if (returns$dynamic_type == "TensorList")
       return(cast_call("XPtrTorchTensorList"))
 
     if (returns$dynamic_type == "double")
-      return(reinterpret_cast_call("double"))
+      return(cast_call("XPtrTorchdouble"))
 
     if (returns$dynamic_type == "QScheme")
       return(xptr_return_call("XPtrTorchQScheme", "QScheme"))
@@ -618,7 +606,7 @@ cpp <- function(path) {
   writeLines(
     c(
       '// This file is auto generated. Dont modify it by hand.',
-      '#include "utils.h"',
+      '#include <torch.h>',
       '',
       methods_code,
       namespace_code
