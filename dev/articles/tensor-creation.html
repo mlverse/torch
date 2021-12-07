@@ -27,6 +27,8 @@
 </script>
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-article">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -45,12 +47,6 @@
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
-<li>
-  <a href="../index.html">
-    <span class="fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
     Articles
@@ -117,7 +113,7 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/mlverse/torch/">
+  <a href="https://github.com/mlverse/torch/" class="external-link">
     <span class="fab fa-github fa-lg"></span>
      
   </a>
@@ -138,7 +134,7 @@
       <h1 data-toc-skip>Creating tensors</h1>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/mlverse/torch/blob/master/vignettes/tensor-creation.Rmd"><code>vignettes/tensor-creation.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/mlverse/torch/blob/HEAD/vignettes/tensor-creation.Rmd" class="external-link"><code>vignettes/tensor-creation.Rmd</code></a></small>
       <div class="hidden name"><code>tensor-creation.Rmd</code></div>
 
     </div>
@@ -146,15 +142,15 @@
     
     
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://torch.mlverse.org/docs">torch</a></span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://torch.mlverse.org/docs" class="external-link">torch</a></span><span class="op">)</span></code></pre></div>
 <p>In this article we describe various ways of creating <code>torch</code> tensors in R.</p>
-<div id="from-r-objects" class="section level2">
-<h2 class="hasAnchor">
-<a href="#from-r-objects" class="anchor"></a>From R objects</h2>
+<div class="section level2">
+<h2 id="from-r-objects">From R objects<a class="anchor" aria-label="anchor" href="#from-r-objects"></a>
+</h2>
 <p>You can create tensors from R objects using the <code>torch_tensor</code> function. The <code>torch_tensor</code> function takes an R vector, matrix or array and creates an equivalent <code>torch_tensor</code>.</p>
 <p>You can see a few examples below:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/torch_tensor.html">torch_tensor</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">2</span>,<span class="fl">3</span><span class="op">)</span><span class="op">)</span>
+<code class="sourceCode R"><span class="fu"><a href="../reference/torch_tensor.html">torch_tensor</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">2</span>,<span class="fl">3</span><span class="op">)</span><span class="op">)</span>
 <span class="co">#&gt; torch_tensor</span>
 <span class="co">#&gt;  1</span>
 <span class="co">#&gt;  2</span>
@@ -162,20 +158,20 @@
 <span class="co">#&gt; [ CPUFloatType{3} ]</span>
 
 <span class="co"># conform to row-major indexing used in torch</span>
-<span class="fu"><a href="../reference/torch_tensor.html">torch_tensor</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span>, ncol <span class="op">=</span> <span class="fl">5</span>, nrow <span class="op">=</span> <span class="fl">2</span>, byrow <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span>
+<span class="fu"><a href="../reference/torch_tensor.html">torch_tensor</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span>, ncol <span class="op">=</span> <span class="fl">5</span>, nrow <span class="op">=</span> <span class="fl">2</span>, byrow <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span>
 <span class="co">#&gt; torch_tensor</span>
 <span class="co">#&gt;   1   2   3   4   5</span>
 <span class="co">#&gt;   6   7   8   9  10</span>
 <span class="co">#&gt; [ CPULongType{2,5} ]</span>
-<span class="fu"><a href="../reference/torch_tensor.html">torch_tensor</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/array.html">array</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html">runif</a></span><span class="op">(</span><span class="fl">12</span><span class="op">)</span>, dim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">2</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
+<span class="fu"><a href="../reference/torch_tensor.html">torch_tensor</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/array.html" class="external-link">array</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html" class="external-link">runif</a></span><span class="op">(</span><span class="fl">12</span><span class="op">)</span>, dim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">2</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
 <span class="co">#&gt; torch_tensor</span>
 <span class="co">#&gt; (1,.,.) = </span>
-<span class="co">#&gt;   0.9192  0.7051  0.5050</span>
-<span class="co">#&gt;   0.5364  0.3530  0.3428</span>
+<span class="co">#&gt;   0.7520  0.2792  0.8530</span>
+<span class="co">#&gt;   0.4567  0.6221  0.3326</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; (2,.,.) = </span>
-<span class="co">#&gt;   0.5863  0.9783  0.7137</span>
-<span class="co">#&gt;   0.2931  0.1320  0.1247</span>
+<span class="co">#&gt;   0.7621  0.2060  0.8903</span>
+<span class="co">#&gt;   0.5472  0.8951  0.3779</span>
 <span class="co">#&gt; [ CPUFloatType{2,2,3} ]</span></code></pre></div>
 <p>By default, we will create tensors in the <code>cpu</code> device, converting their R datatype to the corresponding torch <code>dtype</code>.</p>
 <blockquote>
@@ -200,20 +196,20 @@
 </ul>
 <p>These options are available for all functions that can be used to create new tensors, including the factory functions listed in the next section.</p>
 </div>
-<div id="using-creation-functions" class="section level2">
-<h2 class="hasAnchor">
-<a href="#using-creation-functions" class="anchor"></a>Using creation functions</h2>
+<div class="section level2">
+<h2 id="using-creation-functions">Using creation functions<a class="anchor" aria-label="anchor" href="#using-creation-functions"></a>
+</h2>
 <p>You can also use the <code>torch_*</code> functions listed below to create torch tensors using some algorithm.</p>
 <p>For example, the <code>torch_randn</code> function will create tensors using the normal distribution with mean 0 and standard deviation 1. You can use the <code>...</code> argument to pass the size of the dimensions. For example, the code below will create a normally distributed tensor with shape 5x3.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/torch_randn.html">torch_randn</a></span><span class="op">(</span><span class="fl">5</span>, <span class="fl">3</span><span class="op">)</span>
 <span class="va">x</span>
 <span class="co">#&gt; torch_tensor</span>
-<span class="co">#&gt;  0.0259  0.3541 -0.6699</span>
-<span class="co">#&gt;  1.3895  0.5814  0.5953</span>
-<span class="co">#&gt; -1.3041  0.2738  0.7636</span>
-<span class="co">#&gt; -0.7731  0.2407  0.6228</span>
-<span class="co">#&gt;  0.3883  0.2688  0.9942</span>
+<span class="co">#&gt;  2.0594  1.0810  0.8847</span>
+<span class="co">#&gt;  0.6071 -0.5287  0.2207</span>
+<span class="co">#&gt; -0.5886  0.6821 -0.4003</span>
+<span class="co">#&gt;  0.0249 -0.0104  0.1659</span>
+<span class="co">#&gt;  1.6820  1.4811 -0.8733</span>
 <span class="co">#&gt; [ CPUFloatType{5,3} ]</span></code></pre></div>
 <p>Another example is <code>torch_ones</code>, which creates a tensor filled with ones.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
@@ -251,9 +247,9 @@
 <code>torch_zeros</code>: Returns a tensor filled with all zeros.</li>
 </ul>
 </div>
-<div id="conversion" class="section level2">
-<h2 class="hasAnchor">
-<a href="#conversion" class="anchor"></a>Conversion</h2>
+<div class="section level2">
+<h2 id="conversion">Conversion<a class="anchor" aria-label="anchor" href="#conversion"></a>
+</h2>
 <p>Once a tensor exists you can convert between <code>dtype</code>s and move to a different device with <code>to</code> method. For example:</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/torch_tensor.html">torch_tensor</a></span><span class="op">(</span><span class="fl">1</span><span class="op">)</span>
@@ -283,11 +279,13 @@
 
 
       <footer><div class="copyright">
-  <p>Developed by Daniel Falbel, Javier Luraschi.</p>
+  <p></p>
+<p>Developed by Daniel Falbel, Javier Luraschi.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.1.</p>
 </div>
 
       </footer>
@@ -295,6 +293,8 @@
 
   
 
+
+  
 
   </body>
 </html>

@@ -27,6 +27,8 @@
 </script>
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-article">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -45,12 +47,6 @@
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
-<li>
-  <a href="../index.html">
-    <span class="fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
     Articles
@@ -117,7 +113,7 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/mlverse/torch/">
+  <a href="https://github.com/mlverse/torch/" class="external-link">
     <span class="fab fa-github fa-lg"></span>
      
   </a>
@@ -138,7 +134,7 @@
       <h1 data-toc-skip>Installation</h1>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/mlverse/torch/blob/master/vignettes/installation.Rmd"><code>vignettes/installation.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/mlverse/torch/blob/HEAD/vignettes/installation.Rmd" class="external-link"><code>vignettes/installation.Rmd</code></a></small>
       <div class="hidden name"><code>installation.Rmd</code></div>
 
     </div>
@@ -147,76 +143,76 @@
     
 <p>After the usual R package installation, <code>torch</code> requires installing other 2 libraries: LibTorch and LibLantern. They are automatically installed by detecting information about you OS if you are using <code>torch</code> in interactive mode. If you are running <code>torch</code> in non-interactive environments you need to set the <code>TORCH_INSTALL</code> env var to 1, so it’s automatically installed or manually call <code><a href="../reference/install_torch.html">torch::install_torch()</a></code>.</p>
 <p>We have provide pre-compiled binaries for all major platforms and you can find specific installation instructions below.</p>
-<div id="windows" class="section level2">
-<h2 class="hasAnchor">
-<a href="#windows" class="anchor"></a>Windows</h2>
-<div id="cpu" class="section level3">
-<h3 class="hasAnchor">
-<a href="#cpu" class="anchor"></a>CPU</h3>
+<div class="section level2">
+<h2 id="windows">Windows<a class="anchor" aria-label="anchor" href="#windows"></a>
+</h2>
+<div class="section level3">
+<h3 id="cpu">CPU<a class="anchor" aria-label="anchor" href="#cpu"></a>
+</h3>
 <p>If you don’t have a GPU or want to install the CPU version of <code>torch</code>, you can install with:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"torch"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"torch"</span><span class="op">)</span></code></pre></div>
 <p>Some Windows distributions don’t have the Visual Studio runtime pre-installed and you will observe an error like:</p>
 <pre><code>Error in cpp_lantern_init(normalizePath(install_path())): C:\Users\User\Documents\R\R-4.0.2\library\torch\deps\lantern.dll - The specified module could not be found.</code></pre>
-<p>See <a href="https://github.com/mlverse/torch/issues/246#issuecomment-695097121">here</a> for instructions on how to install it.</p>
+<p>See <a href="https://github.com/mlverse/torch/issues/246#issuecomment-695097121" class="external-link">here</a> for instructions on how to install it.</p>
 </div>
-<div id="gpu" class="section level3">
-<h3 class="hasAnchor">
-<a href="#gpu" class="anchor"></a>GPU</h3>
+<div class="section level3">
+<h3 id="gpu">GPU<a class="anchor" aria-label="anchor" href="#gpu"></a>
+</h3>
 <p>Since version 0.1.1 torch supports GPU installation on Windows. In order to use GPU’s with torch you need to:</p>
 <ul>
-<li><p>Have a CUDA compatible NVIDIA GPU. You can find if you have a CUDA compatible GPU <a href="https://developer.nvidia.com/cuda-gpus#compute">here</a>.</p></li>
-<li><p>Have properly installed the NVIDIA CUDA toolkit version 10.2 or 11.1. For CUDA v11.1, follow the installation instructions <a href="https://docs.nvidia.com/cuda/archive/11.1.1/index.html">here</a>. <strong>Note</strong>: We currently do <strong>not</strong> support the latest CUDA version 11.</p></li>
-<li><p>Have installed cuDNN version 7.6 (if using CUDA v10.2) or cuDNN 8.0 (if using CUDA 11.1). Follow the installation instructions available <a href="https://docs.nvidia.com/deeplearning/cudnn/archives/cudnn-805/install-guide/index.html">here</a>.</p></li>
+<li><p>Have a CUDA compatible NVIDIA GPU. You can find if you have a CUDA compatible GPU <a href="https://developer.nvidia.com/cuda-gpus#compute" class="external-link">here</a>.</p></li>
+<li><p>Have properly installed the NVIDIA CUDA toolkit version 10.2 or 11.1. For CUDA v11.1, follow the installation instructions <a href="https://docs.nvidia.com/cuda/archive/11.1.1/index.html" class="external-link">here</a>. <strong>Note</strong>: We currently do <strong>not</strong> support the latest CUDA version 11.</p></li>
+<li><p>Have installed cuDNN version 7.6 (if using CUDA v10.2) or cuDNN 8.0 (if using CUDA 11.1). Follow the installation instructions available <a href="https://docs.nvidia.com/deeplearning/cudnn/archives/cudnn-805/install-guide/index.html" class="external-link">here</a>.</p></li>
 </ul>
 <p>Once you have installed all pre-requisites you can install <code>torch</code> with:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"torch"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"torch"</span><span class="op">)</span></code></pre></div>
 <p>If you have followed default installation locations we will detect that you have CUDA software installed and automatically download the GPU enabled Lantern binaries. You can also specify the <code>CUDA</code> env var with something like <code>Sys.setenv(CUDA="11.1")</code> if you want to force an specific version of the CUDA toolkit.</p>
 </div>
 </div>
-<div id="macos" class="section level2">
-<h2 class="hasAnchor">
-<a href="#macos" class="anchor"></a>MacOS</h2>
-<div id="cpu-1" class="section level3">
-<h3 class="hasAnchor">
-<a href="#cpu-1" class="anchor"></a>CPU</h3>
+<div class="section level2">
+<h2 id="macos">MacOS<a class="anchor" aria-label="anchor" href="#macos"></a>
+</h2>
+<div class="section level3">
+<h3 id="cpu-1">CPU<a class="anchor" aria-label="anchor" href="#cpu-1"></a>
+</h3>
 <p>We only support CPU builds of torch on MacOS. On MacOS you can install torch with:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"torch"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"torch"</span><span class="op">)</span></code></pre></div>
 </div>
 </div>
-<div id="linux" class="section level2">
-<h2 class="hasAnchor">
-<a href="#linux" class="anchor"></a>Linux</h2>
-<div id="cpu-2" class="section level3">
-<h3 class="hasAnchor">
-<a href="#cpu-2" class="anchor"></a>CPU</h3>
+<div class="section level2">
+<h2 id="linux">Linux<a class="anchor" aria-label="anchor" href="#linux"></a>
+</h2>
+<div class="section level3">
+<h3 id="cpu-2">CPU<a class="anchor" aria-label="anchor" href="#cpu-2"></a>
+</h3>
 <p>To install the cpu version of <code>torch</code> you can run:</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"torch"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"torch"</span><span class="op">)</span></code></pre></div>
 </div>
-<div id="gpu-1" class="section level3">
-<h3 class="hasAnchor">
-<a href="#gpu-1" class="anchor"></a>GPU</h3>
+<div class="section level3">
+<h3 id="gpu-1">GPU<a class="anchor" aria-label="anchor" href="#gpu-1"></a>
+</h3>
 <p>To install the GPU version of <code>torch</code> on linux you must verify that:</p>
 <ul>
-<li><p>You have a NVIDIA CUDA compatible GPU. You can find if you have a CUDA compatible GPU <a href="https://developer.nvidia.com/cuda-gpus#compute">here</a>.</p></li>
-<li><p>You have correctly installed the NVIDIA CUDA Toolkit versions 10.2 or 11.1, follow the instructions <a href="https://docs.nvidia.com/cuda/archive/11.1.1/index.html">here</a>.</p></li>
-<li><p>You have installed cuDNN version 7.6 - (for CUDA 10.2) and 8.0 for CUDA 11.1. Follow the installation instructions available <a href="https://docs.nvidia.com/deeplearning/cudnn/archives/cudnn-805/install-guide/index.html">here</a>.</p></li>
+<li><p>You have a NVIDIA CUDA compatible GPU. You can find if you have a CUDA compatible GPU <a href="https://developer.nvidia.com/cuda-gpus#compute" class="external-link">here</a>.</p></li>
+<li><p>You have correctly installed the NVIDIA CUDA Toolkit versions 10.2 or 11.1, follow the instructions <a href="https://docs.nvidia.com/cuda/archive/11.1.1/index.html" class="external-link">here</a>.</p></li>
+<li><p>You have installed cuDNN version 7.6 - (for CUDA 10.2) and 8.0 for CUDA 11.1. Follow the installation instructions available <a href="https://docs.nvidia.com/deeplearning/cudnn/archives/cudnn-805/install-guide/index.html" class="external-link">here</a>.</p></li>
 </ul>
 <p>Once you have installed all pre-requisites you can install <code>torch</code> with:</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"torch"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"torch"</span><span class="op">)</span></code></pre></div>
 <p>If you have followed default installation locations we will detect that you have CUDA software installed and automatically download the GPU enabled Lantern binaries. You can also specify the <code>CUDA</code> env var with something like <code>Sys.setenv(CUDA="10.2")</code> if you want to force an specific version of the CUDA toolkit.</p>
 </div>
 </div>
-<div id="troubleshooting" class="section level2">
-<h2 class="hasAnchor">
-<a href="#troubleshooting" class="anchor"></a>Troubleshooting</h2>
-<div id="large-file-download-timeout" class="section level3">
-<h3 class="hasAnchor">
-<a href="#large-file-download-timeout" class="anchor"></a>Large file download timeout</h3>
+<div class="section level2">
+<h2 id="troubleshooting">Troubleshooting<a class="anchor" aria-label="anchor" href="#troubleshooting"></a>
+</h2>
+<div class="section level3">
+<h3 id="large-file-download-timeout">Large file download timeout<a class="anchor" aria-label="anchor" href="#large-file-download-timeout"></a>
+</h3>
 <p>If you encounter timeout during library download, or if after a while, downloads end-up with a warning such as:</p>
 <pre><code>Warning messages:
 1: In utils::download.file(library_url, temp_file) :
@@ -228,9 +224,9 @@
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/install_torch.html">install_torch</a></span><span class="op">(</span>timeout <span class="op">=</span> <span class="fl">600</span><span class="op">)</span></code></pre></div>
 </div>
-<div id="file-based-download" class="section level3">
-<h3 class="hasAnchor">
-<a href="#file-based-download" class="anchor"></a>File based download</h3>
+<div class="section level3">
+<h3 id="file-based-download">File based download<a class="anchor" aria-label="anchor" href="#file-based-download"></a>
+</h3>
 <p>In cases where you cannot reach download servers from the machine you intend to install torch on, last resort is to install Torch and Lantern library from files. This is done in 3 steps :</p>
 <p>1- get the download URLs of the files.</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
@@ -255,11 +251,13 @@
 
 
       <footer><div class="copyright">
-  <p>Developed by Daniel Falbel, Javier Luraschi.</p>
+  <p></p>
+<p>Developed by Daniel Falbel, Javier Luraschi.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.1.</p>
 </div>
 
       </footer>
@@ -267,6 +265,8 @@
 
   
 
+
+  
 
   </body>
 </html>

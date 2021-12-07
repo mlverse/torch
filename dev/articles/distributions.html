@@ -27,6 +27,8 @@
 </script>
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-article">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -45,12 +47,6 @@
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
-<li>
-  <a href="../index.html">
-    <span class="fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
     Articles
@@ -117,7 +113,7 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/mlverse/torch/">
+  <a href="https://github.com/mlverse/torch/" class="external-link">
     <span class="fab fa-github fa-lg"></span>
      
   </a>
@@ -138,7 +134,7 @@
       <h1 data-toc-skip>Distributions</h1>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/mlverse/torch/blob/master/vignettes/distributions.Rmd"><code>vignettes/distributions.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/mlverse/torch/blob/HEAD/vignettes/distributions.Rmd" class="external-link"><code>vignettes/distributions.Rmd</code></a></small>
       <div class="hidden name"><code>distributions.Rmd</code></div>
 
     </div>
@@ -146,14 +142,14 @@
     
     
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://torch.mlverse.org/docs">torch</a></span><span class="op">)</span>
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://torch.mlverse.org/docs" class="external-link">torch</a></span><span class="op">)</span>
 <span class="fu"><a href="../reference/torch_manual_seed.html">torch_manual_seed</a></span><span class="op">(</span><span class="fl">1</span><span class="op">)</span> <span class="co"># setting seed for reproducibility</span></code></pre></div>
-<p>This vignette showcases the basic functionality of distributions in torch. Currently the distributions modules are considered ‘work in progress’ and are still experimental features in the torch package. You can see the progress in this <a href="https://github.com/mlverse/torch/issues/479">link</a>.</p>
-<p>The distributions modules in torch are modelled after PyTorch’s <a href="https://pytorch.org/docs/stable/distributions.html#">distributions module</a> which in turn is based on the TensorFlow <a href="https://arxiv.org/abs/1711.10604">Distributions package</a>.</p>
-<p>This vignette is based in the TensorFlow’s distributions <a href="https://www.tensorflow.org/probability/examples/TensorFlow_Distributions_Tutorial#basic_univariate_distributions">tutorial</a>.</p>
-<div id="basic-univariate-distributions" class="section level2">
-<h2 class="hasAnchor">
-<a href="#basic-univariate-distributions" class="anchor"></a>Basic univariate distributions</h2>
+<p>This vignette showcases the basic functionality of distributions in torch. Currently the distributions modules are considered ‘work in progress’ and are still experimental features in the torch package. You can see the progress in this <a href="https://github.com/mlverse/torch/issues/479" class="external-link">link</a>.</p>
+<p>The distributions modules in torch are modelled after PyTorch’s <a href="https://pytorch.org/docs/stable/distributions.html#" class="external-link">distributions module</a> which in turn is based on the TensorFlow <a href="https://arxiv.org/abs/1711.10604" class="external-link">Distributions package</a>.</p>
+<p>This vignette is based in the TensorFlow’s distributions <a href="https://www.tensorflow.org/probability/examples/TensorFlow_Distributions_Tutorial#basic_univariate_distributions" class="external-link">tutorial</a>.</p>
+<div class="section level2">
+<h2 id="basic-univariate-distributions">Basic univariate distributions<a class="anchor" aria-label="anchor" href="#basic-univariate-distributions"></a>
+</h2>
 <p>Let’s start and create a new instance of a normal distribution:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">n</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/distr_normal.html">distr_normal</a></span><span class="op">(</span>loc <span class="op">=</span> <span class="fl">0</span>, scale <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>
@@ -163,15 +159,15 @@
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">n</span><span class="op">$</span><span class="fu">sample</span><span class="op">(</span><span class="op">)</span>
 <span class="co">#&gt; torch_tensor</span>
-<span class="co">#&gt;  0.3247</span>
+<span class="co">#&gt;  0.6535</span>
 <span class="co">#&gt; [ CPUFloatType{1} ]</span></code></pre></div>
 <p>or, draw multiple samples:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">n</span><span class="op">$</span><span class="fu">sample</span><span class="op">(</span><span class="fl">3</span><span class="op">)</span>
 <span class="co">#&gt; torch_tensor</span>
-<span class="co">#&gt;  0.3593</span>
-<span class="co">#&gt;  0.7270</span>
-<span class="co">#&gt; -0.3432</span>
+<span class="co">#&gt;  0.6924</span>
+<span class="co">#&gt; -0.7818</span>
+<span class="co">#&gt; -0.3349</span>
 <span class="co">#&gt; [ CPUFloatType{3,1} ]</span></code></pre></div>
 <p>We can evaluate the log probability of values:</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
@@ -179,23 +175,23 @@
 <span class="co">#&gt; torch_tensor</span>
 <span class="co">#&gt; -0.9189</span>
 <span class="co">#&gt; [ CPUFloatType{1} ]</span>
-<span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">dnorm</a></span><span class="op">(</span><span class="fl">0</span><span class="op">)</span><span class="op">)</span> <span class="co"># equivalent R code</span>
+<span class="fu"><a href="https://rdrr.io/r/base/Log.html" class="external-link">log</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">dnorm</a></span><span class="op">(</span><span class="fl">0</span><span class="op">)</span><span class="op">)</span> <span class="co"># equivalent R code</span>
 <span class="co">#&gt; [1] -0.9189385</span></code></pre></div>
 <p>or, evaluate multiple log probabilities:</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">n</span><span class="op">$</span><span class="fu">log_prob</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">2</span>, <span class="fl">4</span><span class="op">)</span><span class="op">)</span>
+<code class="sourceCode R"><span class="va">n</span><span class="op">$</span><span class="fu">log_prob</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">2</span>, <span class="fl">4</span><span class="op">)</span><span class="op">)</span>
 <span class="co">#&gt; torch_tensor</span>
 <span class="co">#&gt; -0.9189</span>
 <span class="co">#&gt; -2.9189</span>
 <span class="co">#&gt; -8.9189</span>
 <span class="co">#&gt; [ CPUFloatType{3} ]</span></code></pre></div>
 </div>
-<div id="multiple-distributions" class="section level2">
-<h2 class="hasAnchor">
-<a href="#multiple-distributions" class="anchor"></a>Multiple distributions</h2>
+<div class="section level2">
+<h2 id="multiple-distributions">Multiple distributions<a class="anchor" aria-label="anchor" href="#multiple-distributions"></a>
+</h2>
 <p>A distribution can take a tensor as it’s parameters:</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">b</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/distr_bernoulli.html">distr_bernoulli</a></span><span class="op">(</span>probs <span class="op">=</span> <span class="fu"><a href="../reference/torch_tensor.html">torch_tensor</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0.25</span>, <span class="fl">0.5</span>, <span class="fl">0.75</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
+<code class="sourceCode R"><span class="va">b</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/distr_bernoulli.html">distr_bernoulli</a></span><span class="op">(</span>probs <span class="op">=</span> <span class="fu"><a href="../reference/torch_tensor.html">torch_tensor</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.25</span>, <span class="fl">0.5</span>, <span class="fl">0.75</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
 <span class="va">b</span>
 <span class="co">#&gt; torch_Bernoulli ()</span></code></pre></div>
 <p>This object represents 3 independent Bernoulli distributions, one for each element of the tensor.</p>
@@ -219,9 +215,9 @@
 <span class="co">#&gt;  0  0  1</span>
 <span class="co">#&gt; [ CPUFloatType{6,3} ]</span></code></pre></div>
 </div>
-<div id="using-distributions-within-models" class="section level2">
-<h2 class="hasAnchor">
-<a href="#using-distributions-within-models" class="anchor"></a>Using distributions within models</h2>
+<div class="section level2">
+<h2 id="using-distributions-within-models">Using distributions within models<a class="anchor" aria-label="anchor" href="#using-distributions-within-models"></a>
+</h2>
 <p>The <code>log_prob</code> method of distributions can be differentiated, thus, distributions can be used to train models in torch.</p>
 <p>Let’s implement a Gaussian linear model, but first let’s simulate some data</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
@@ -229,7 +225,7 @@
 <span class="va">y</span> <span class="op">&lt;-</span> <span class="fl">2</span><span class="op">*</span><span class="va">x</span> <span class="op">+</span> <span class="fl">1</span> <span class="op">+</span> <span class="fu"><a href="../reference/torch_randn.html">torch_randn</a></span><span class="op">(</span><span class="fl">100</span>, <span class="fl">1</span><span class="op">)</span></code></pre></div>
 <p>and plot:</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span><span class="op">(</span><span class="va">y</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/numeric.html" class="external-link">as.numeric</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/numeric.html" class="external-link">as.numeric</a></span><span class="op">(</span><span class="va">y</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p><img src="distributions_files/figure-html/unnamed-chunk-11-1.png" width="700"></p>
 <p>We can now define our model:</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
@@ -259,8 +255,8 @@
   <span class="va">loss</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/torch_mean.html">torch_mean</a></span><span class="op">(</span><span class="op">-</span><span class="va">d</span><span class="op">$</span><span class="fu">log_prob</span><span class="op">(</span><span class="va">y</span><span class="op">)</span><span class="op">)</span>
   <span class="va">loss</span><span class="op">$</span><span class="fu">backward</span><span class="op">(</span><span class="op">)</span>
   <span class="va">opt</span><span class="op">$</span><span class="fu">step</span><span class="op">(</span><span class="op">)</span>
-  <span class="kw">if</span> <span class="op">(</span><span class="va">i</span> <span class="op"><a href="https://rdrr.io/r/base/Arithmetic.html">%%</a></span> <span class="fl">10</span> <span class="op">==</span> <span class="fl">0</span><span class="op">)</span>
-    <span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="st">"iter: "</span>, <span class="va">i</span>, <span class="st">" loss: "</span>, <span class="va">loss</span><span class="op">$</span><span class="fu">item</span><span class="op">(</span><span class="op">)</span>, <span class="st">"\n"</span><span class="op">)</span>
+  <span class="kw">if</span> <span class="op">(</span><span class="va">i</span> <span class="op"><a href="https://rdrr.io/r/base/Arithmetic.html" class="external-link">%%</a></span> <span class="fl">10</span> <span class="op">==</span> <span class="fl">0</span><span class="op">)</span>
+    <span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"iter: "</span>, <span class="va">i</span>, <span class="st">" loss: "</span>, <span class="va">loss</span><span class="op">$</span><span class="fu">item</span><span class="op">(</span><span class="op">)</span>, <span class="st">"\n"</span><span class="op">)</span>
 <span class="op">}</span>
 <span class="co">#&gt; iter:  10  loss:  1.809854 </span>
 <span class="co">#&gt; iter:  20  loss:  1.606322 </span>
@@ -289,9 +285,9 @@
 <span class="co">#&gt; torch_tensor</span>
 <span class="co">#&gt;  0.9716</span>
 <span class="co">#&gt; [ CPUFloatType{1} ][ requires_grad = TRUE ]</span></code></pre></div>
-<p>and quickly compare with the <code><a href="https://rdrr.io/r/stats/glm.html">glm()</a></code> function:</p>
+<p>and quickly compare with the <code><a href="https://rdrr.io/r/stats/glm.html" class="external-link">glm()</a></code> function:</p>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/glm.html">glm</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span><span class="op">(</span><span class="va">y</span><span class="op">)</span> <span class="op">~</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/glm.html" class="external-link">glm</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/numeric.html" class="external-link">as.numeric</a></span><span class="op">(</span><span class="va">y</span><span class="op">)</span> <span class="op">~</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html" class="external-link">as.numeric</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Call:</span>
 <span class="co">#&gt; glm(formula = as.numeric(y) ~ as.numeric(x))</span>
@@ -328,11 +324,13 @@
 
 
       <footer><div class="copyright">
-  <p>Developed by Daniel Falbel, Javier Luraschi.</p>
+  <p></p>
+<p>Developed by Daniel Falbel, Javier Luraschi.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.1.</p>
 </div>
 
       </footer>
@@ -340,6 +338,8 @@
 
   
 
+
+  
 
   </body>
 </html>

@@ -27,6 +27,8 @@
 </script>
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-article">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -45,12 +47,6 @@
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
-<li>
-  <a href="../../index.html">
-    <span class="fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
     Articles
@@ -117,7 +113,7 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/mlverse/torch/">
+  <a href="https://github.com/mlverse/torch/" class="external-link">
     <span class="fab fa-github fa-lg"></span>
      
   </a>
@@ -138,7 +134,7 @@
       <h1 data-toc-skip>basic-nn-module</h1>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/mlverse/torch/blob/master/vignettes/examples/basic-nn-module.Rmd"><code>vignettes/examples/basic-nn-module.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/mlverse/torch/blob/HEAD/vignettes/examples/basic-nn-module.Rmd" class="external-link"><code>vignettes/examples/basic-nn-module.Rmd</code></a></small>
       <div class="hidden name"><code>basic-nn-module.Rmd</code></div>
 
     </div>
@@ -146,7 +142,7 @@
     
     
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://torch.mlverse.org/docs">torch</a></span><span class="op">)</span>
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://torch.mlverse.org/docs" class="external-link">torch</a></span><span class="op">)</span>
 
 <span class="co"># creates example tensors. x requires_grad = TRUE tells that </span>
 <span class="co"># we are going to take derivatives over it.</span>
@@ -156,7 +152,7 @@
   initialize <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">in_features</span>, <span class="va">out_features</span><span class="op">)</span> <span class="op">{</span>
     
     <span class="co"># just for you to see when this function is called</span>
-    <span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="st">"Calling initialize!"</span><span class="op">)</span> 
+    <span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"Calling initialize!"</span><span class="op">)</span> 
     
     <span class="co"># we use nn_parameter to indicate that those tensors are special</span>
     <span class="co"># and should be treated as parameters by `nn_module`.</span>
@@ -166,59 +162,59 @@
   <span class="op">}</span>,
   <span class="co"># this function is called whenever we call our model on input.</span>
   forward <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span>
-    <span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="st">"Calling forward!"</span><span class="op">)</span>
+    <span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"Calling forward!"</span><span class="op">)</span>
     <span class="fu"><a href="../../reference/torch_mm.html">torch_mm</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">self</span><span class="op">$</span><span class="va">w</span><span class="op">)</span> <span class="op">+</span> <span class="va">self</span><span class="op">$</span><span class="va">b</span>
   <span class="op">}</span>
 <span class="op">)</span>
 
 <span class="va">model</span> <span class="op">&lt;-</span> <span class="fu">dense</span><span class="op">(</span><span class="fl">3</span>, <span class="fl">1</span><span class="op">)</span></code></pre></div>
-<pre><code>## Calling initialize!</code></pre>
+<pre><code><span class="co">## Calling initialize!</span></code></pre>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># you can get all parameters </span>
 <span class="va">model</span><span class="op">$</span><span class="va">parameters</span></code></pre></div>
-<pre><code>## $w
-## torch_tensor
-## -1.0097
-## -0.0573
-##  0.7472
-## [ CPUFloatType{3,1} ][ requires_grad = TRUE ]
-## 
-## $b
-## torch_tensor
-##  0
-## [ CPUFloatType{1} ][ requires_grad = TRUE ]</code></pre>
+<pre><code><span class="co">## $w</span>
+<span class="co">## torch_tensor</span>
+<span class="co">## -0.6588</span>
+<span class="co">##  1.8110</span>
+<span class="co">##  0.4834</span>
+<span class="co">## [ CPUFloatType{3,1} ][ requires_grad = TRUE ]</span>
+<span class="co">## </span>
+<span class="co">## $b</span>
+<span class="co">## torch_tensor</span>
+<span class="co">##  0</span>
+<span class="co">## [ CPUFloatType{1} ][ requires_grad = TRUE ]</span></code></pre>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># or individually</span>
 <span class="va">model</span><span class="op">$</span><span class="va">w</span></code></pre></div>
-<pre><code>## torch_tensor
-## -1.0097
-## -0.0573
-##  0.7472
-## [ CPUFloatType{3,1} ][ requires_grad = TRUE ]</code></pre>
+<pre><code><span class="co">## torch_tensor</span>
+<span class="co">## -0.6588</span>
+<span class="co">##  1.8110</span>
+<span class="co">##  0.4834</span>
+<span class="co">## [ CPUFloatType{3,1} ][ requires_grad = TRUE ]</span></code></pre>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">model</span><span class="op">$</span><span class="va">b</span></code></pre></div>
-<pre><code>## torch_tensor
-##  0
-## [ CPUFloatType{1} ][ requires_grad = TRUE ]</code></pre>
+<pre><code><span class="co">## torch_tensor</span>
+<span class="co">##  0</span>
+<span class="co">## [ CPUFloatType{1} ][ requires_grad = TRUE ]</span></code></pre>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># create an input tensor</span>
 <span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/torch_randn.html">torch_randn</a></span><span class="op">(</span><span class="fl">10</span>, <span class="fl">3</span><span class="op">)</span>
 <span class="va">y_pred</span> <span class="op">&lt;-</span> <span class="fu">model</span><span class="op">(</span><span class="va">x</span><span class="op">)</span></code></pre></div>
-<pre><code>## Calling forward!</code></pre>
+<pre><code><span class="co">## Calling forward!</span></code></pre>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">y_pred</span></code></pre></div>
-<pre><code>## torch_tensor
-## -1.2449
-##  0.6280
-## -2.0668
-## -0.7049
-##  2.1576
-## -0.3484
-## -0.6306
-## -0.4824
-## -2.3400
-## -0.6144
-## [ CPUFloatType{10,1} ][ grad_fn = &lt;AddBackward0&gt; ]</code></pre>
+<pre><code><span class="co">## torch_tensor</span>
+<span class="co">##  3.1652</span>
+<span class="co">##  2.6414</span>
+<span class="co">## -1.3950</span>
+<span class="co">##  0.5980</span>
+<span class="co">##  1.9380</span>
+<span class="co">##  2.5920</span>
+<span class="co">## -1.9082</span>
+<span class="co">##  1.6808</span>
+<span class="co">## -1.1693</span>
+<span class="co">## -1.6553</span>
+<span class="co">## [ CPUFloatType{10,1} ][ grad_fn = &lt;AddBackward0&gt; ]</span></code></pre>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
@@ -230,11 +226,13 @@
 
 
       <footer><div class="copyright">
-  <p>Developed by Daniel Falbel, Javier Luraschi.</p>
+  <p></p>
+<p>Developed by Daniel Falbel, Javier Luraschi.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.1.</p>
 </div>
 
       </footer>
@@ -242,6 +240,8 @@
 
   
 
+
+  
 
   </body>
 </html>

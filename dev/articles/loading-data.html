@@ -27,6 +27,8 @@
 </script>
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-article">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -45,12 +47,6 @@
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
-<li>
-  <a href="../index.html">
-    <span class="fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
     Articles
@@ -117,7 +113,7 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/mlverse/torch/">
+  <a href="https://github.com/mlverse/torch/" class="external-link">
     <span class="fab fa-github fa-lg"></span>
      
   </a>
@@ -138,7 +134,7 @@
       <h1 data-toc-skip>Loading data</h1>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/mlverse/torch/blob/master/vignettes/loading-data.Rmd"><code>vignettes/loading-data.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/mlverse/torch/blob/HEAD/vignettes/loading-data.Rmd" class="external-link"><code>vignettes/loading-data.Rmd</code></a></small>
       <div class="hidden name"><code>loading-data.Rmd</code></div>
 
     </div>
@@ -146,10 +142,10 @@
     
     
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://torch.mlverse.org/docs">torch</a></span><span class="op">)</span></code></pre></div>
-<div id="datasets-and-data-loaders" class="section level2">
-<h2 class="hasAnchor">
-<a href="#datasets-and-data-loaders" class="anchor"></a>Datasets and data loaders</h2>
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://torch.mlverse.org/docs" class="external-link">torch</a></span><span class="op">)</span></code></pre></div>
+<div class="section level2">
+<h2 id="datasets-and-data-loaders">Datasets and data loaders<a class="anchor" aria-label="anchor" href="#datasets-and-data-loaders"></a>
+</h2>
 <p>Central to data ingestion and preprocessing are datasets and data loaders.</p>
 <p><code>torch</code> comes equipped with a bag of datasets related to, mostly, image recognition and natural language processing (e.g., <code>mnist_dataset()</code>), which can be iterated over by means of <code>dataloader</code>s:</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="co"># ...</span></span>
@@ -170,30 +166,30 @@
 <p>Cf. <code>vignettes/examples/mnist-cnn.R</code> for a complete example.</p>
 <p>What if you want to train on a different dataset? In these cases, you subclass <code>Dataset</code>, an abstract container that needs to know how to iterate over the given data. To that purpose, your subclass needs to implement <code>.getitem()</code>, and say what should be returned when the data loader is asking for the next batch.</p>
 <p>In <code>.getitem()</code>, you can implement whatever preprocessing you require. Additionally, you should implement <code>.length()</code>, so users can find out how many items there are in the dataset.</p>
-<p>While this may sound complicated, it is not at all. The base logic is straightforward – complexity will, naturally, correlate with how involved your preprocessing is. To provide you with a simple but functional prototype, here we show how to create your own <code>dataset</code> to train on <a href="https://github.com/allisonhorst/palmerpenguins">Allison Horst's penguins</a>.</p>
+<p>While this may sound complicated, it is not at all. The base logic is straightforward – complexity will, naturally, correlate with how involved your preprocessing is. To provide you with a simple but functional prototype, here we show how to create your own <code>dataset</code> to train on <a href="https://github.com/allisonhorst/palmerpenguins" class="external-link">Allison Horst's penguins</a>.</p>
 </div>
-<div id="a-custom-dataset" class="section level2">
-<h2 class="hasAnchor">
-<a href="#a-custom-dataset" class="anchor"></a>A custom dataset</h2>
+<div class="section level2">
+<h2 id="a-custom-dataset">A custom dataset<a class="anchor" aria-label="anchor" href="#a-custom-dataset"></a>
+</h2>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://allisonhorst.github.io/palmerpenguins/">palmerpenguins</a></span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://magrittr.tidyverse.org">magrittr</a></span><span class="op">)</span>
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://allisonhorst.github.io/palmerpenguins/" class="external-link">palmerpenguins</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://magrittr.tidyverse.org" class="external-link">magrittr</a></span><span class="op">)</span>
 
 <span class="va">penguins</span>
-<span class="co">#&gt; # A tibble: 344 × 8</span>
+<span class="co">#&gt; <span style="color: #949494;"># A tibble: 344 × 8</span></span>
 <span class="co">#&gt;    species island    bill_length_mm bill_depth_mm flipper_length_mm body_mass_g</span>
-<span class="co">#&gt;    &lt;fct&gt;   &lt;fct&gt;              &lt;dbl&gt;         &lt;dbl&gt;             &lt;int&gt;       &lt;int&gt;</span>
-<span class="co">#&gt;  1 Adelie  Torgersen           39.1          18.7               181        3750</span>
-<span class="co">#&gt;  2 Adelie  Torgersen           39.5          17.4               186        3800</span>
-<span class="co">#&gt;  3 Adelie  Torgersen           40.3          18                 195        3250</span>
-<span class="co">#&gt;  4 Adelie  Torgersen           NA            NA                  NA          NA</span>
-<span class="co">#&gt;  5 Adelie  Torgersen           36.7          19.3               193        3450</span>
-<span class="co">#&gt;  6 Adelie  Torgersen           39.3          20.6               190        3650</span>
-<span class="co">#&gt;  7 Adelie  Torgersen           38.9          17.8               181        3625</span>
-<span class="co">#&gt;  8 Adelie  Torgersen           39.2          19.6               195        4675</span>
-<span class="co">#&gt;  9 Adelie  Torgersen           34.1          18.1               193        3475</span>
-<span class="co">#&gt; 10 Adelie  Torgersen           42            20.2               190        4250</span>
-<span class="co">#&gt; # … with 334 more rows, and 2 more variables: sex &lt;fct&gt;, year &lt;int&gt;</span></code></pre></div>
+<span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>              <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>             <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> Adelie  Torgersen           39.1          18.7               181        <span style="text-decoration: underline;">3</span>750</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> Adelie  Torgersen           39.5          17.4               186        <span style="text-decoration: underline;">3</span>800</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> Adelie  Torgersen           40.3          18                 195        <span style="text-decoration: underline;">3</span>250</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> Adelie  Torgersen           <span style="color: #BB0000;">NA</span>            <span style="color: #BB0000;">NA</span>                  <span style="color: #BB0000;">NA</span>          <span style="color: #BB0000;">NA</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> Adelie  Torgersen           36.7          19.3               193        <span style="text-decoration: underline;">3</span>450</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> Adelie  Torgersen           39.3          20.6               190        <span style="text-decoration: underline;">3</span>650</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> Adelie  Torgersen           38.9          17.8               181        <span style="text-decoration: underline;">3</span>625</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> Adelie  Torgersen           39.2          19.6               195        <span style="text-decoration: underline;">4</span>675</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> Adelie  Torgersen           34.1          18.1               193        <span style="text-decoration: underline;">3</span>475</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">10</span> Adelie  Torgersen           42            20.2               190        <span style="text-decoration: underline;">4</span>250</span>
+<span class="co">#&gt; <span style="color: #949494;"># … with 334 more rows, and 2 more variables: sex &lt;fct&gt;, year &lt;int&gt;</span></span></code></pre></div>
 <p><code>Dataset</code>s are R6 classes created using the <code><a href="../reference/dataset.html">dataset()</a></code> constructor. You can pass a <code>name</code> and various member functions. Among those should be <code>initialize()</code>, to create instance variables, <code>.getitem()</code>, to indicate how the data should be returned, and <code>.length()</code>, to say how many items we have.</p>
 <p>In addition, any number of helper functions can be defined.</p>
 <p>Here, we assume the <code>penguins</code> have already been loaded, and all preprocessing consists in removing lines with <code>NA</code> values, transforming <code>factor</code>s to numbers starting from 0, and converting from R data types to <code>torch</code> tensors.</p>
@@ -212,7 +208,7 @@
     <span class="va">x</span> <span class="op">&lt;-</span> <span class="va">self</span><span class="op">$</span><span class="va">data</span><span class="op">[</span><span class="va">index</span>, <span class="fl">2</span><span class="op">:</span><span class="op">-</span><span class="fl">1</span><span class="op">]</span>
     <span class="va">y</span> <span class="op">&lt;-</span> <span class="va">self</span><span class="op">$</span><span class="va">data</span><span class="op">[</span><span class="va">index</span>, <span class="fl">1</span><span class="op">]</span><span class="op">$</span><span class="fu">to</span><span class="op">(</span><span class="fu"><a href="../reference/torch_dtype.html">torch_long</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span>
     
-    <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span><span class="op">)</span>
+    <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span><span class="op">)</span>
   <span class="op">}</span>,
   
   .length <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="op">)</span> <span class="op">{</span>
@@ -221,13 +217,13 @@
   
   prepare_penguin_data <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="op">)</span> <span class="op">{</span>
     
-    <span class="va">input</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/na.fail.html">na.omit</a></span><span class="op">(</span><span class="va">penguins</span><span class="op">)</span> 
+    <span class="va">input</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/na.fail.html" class="external-link">na.omit</a></span><span class="op">(</span><span class="va">penguins</span><span class="op">)</span> 
     <span class="co"># conveniently, the categorical data are already factors</span>
-    <span class="va">input</span><span class="op">$</span><span class="va">species</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span><span class="op">(</span><span class="va">input</span><span class="op">$</span><span class="va">species</span><span class="op">)</span>
-    <span class="va">input</span><span class="op">$</span><span class="va">island</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span><span class="op">(</span><span class="va">input</span><span class="op">$</span><span class="va">island</span><span class="op">)</span>
-    <span class="va">input</span><span class="op">$</span><span class="va">sex</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span><span class="op">(</span><span class="va">input</span><span class="op">$</span><span class="va">sex</span><span class="op">)</span>
+    <span class="va">input</span><span class="op">$</span><span class="va">species</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html" class="external-link">as.numeric</a></span><span class="op">(</span><span class="va">input</span><span class="op">$</span><span class="va">species</span><span class="op">)</span>
+    <span class="va">input</span><span class="op">$</span><span class="va">island</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html" class="external-link">as.numeric</a></span><span class="op">(</span><span class="va">input</span><span class="op">$</span><span class="va">island</span><span class="op">)</span>
+    <span class="va">input</span><span class="op">$</span><span class="va">sex</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html" class="external-link">as.numeric</a></span><span class="op">(</span><span class="va">input</span><span class="op">$</span><span class="va">sex</span><span class="op">)</span>
     
-    <span class="va">input</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">as.matrix</a></span><span class="op">(</span><span class="va">input</span><span class="op">)</span>
+    <span class="va">input</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">as.matrix</a></span><span class="op">(</span><span class="va">input</span><span class="op">)</span>
     <span class="fu"><a href="../reference/torch_tensor.html">torch_tensor</a></span><span class="op">(</span><span class="va">input</span><span class="op">)</span>
   <span class="op">}</span>
 <span class="op">)</span></code></pre></div>
@@ -254,7 +250,7 @@
 <span class="co">#&gt; [ CPULongType{} ]</span></code></pre></div>
 <p>To be able to iterate over <code>tuxes</code>, we need a data loader (we override the default batch size of <code>1</code>):</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">dl</span> <span class="op">&lt;-</span><span class="va">tuxes</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span> <span class="fu"><a href="../reference/dataloader.html">dataloader</a></span><span class="op">(</span>batch_size <span class="op">=</span> <span class="fl">8</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="va">dl</span> <span class="op">&lt;-</span><span class="va">tuxes</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="../reference/dataloader.html">dataloader</a></span><span class="op">(</span>batch_size <span class="op">=</span> <span class="fl">8</span><span class="op">)</span></code></pre></div>
 <p>Calling <code>.length()</code> on a data loader (as opposed to a dataset) will return the number of <code>batches</code> we have:</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">dl</span><span class="op">$</span><span class="fu">.length</span><span class="op">(</span><span class="op">)</span>
@@ -287,11 +283,11 @@
 <span class="co">#&gt;  1</span>
 <span class="co">#&gt;  1</span>
 <span class="co">#&gt; [ CPULongType{8} ]</span></code></pre></div>
-<p>To train a network, we can use <code><a href="https://rdrr.io/pkg/coro/man/collect.html">coro::loop()</a></code> to iterate over batches.</p>
+<p>To train a network, we can use <code><a href="https://rdrr.io/pkg/coro/man/collect.html" class="external-link">coro::loop()</a></code> to iterate over batches.</p>
 </div>
-<div id="training-with-data-loaders" class="section level2">
-<h2 class="hasAnchor">
-<a href="#training-with-data-loaders" class="anchor"></a>Training with data loaders</h2>
+<div class="section level2">
+<h2 id="training-with-data-loaders">Training with data loaders<a class="anchor" aria-label="anchor" href="#training-with-data-loaders"></a>
+</h2>
 <p>Our example network is very simple. (In reality, we would want to treat <code>island</code> as the categorical variable it is, and either one-hot-encode or embed it.)</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">net</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/nn_module.html">nn_module</a></span><span class="op">(</span>
@@ -301,10 +297,10 @@
     <span class="va">self</span><span class="op">$</span><span class="va">fc2</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/nn_linear.html">nn_linear</a></span><span class="op">(</span><span class="fl">32</span>, <span class="fl">3</span><span class="op">)</span>
   <span class="op">}</span>,
   forward <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span>
-    <span class="va">x</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span> 
-      <span class="va">self</span><span class="op">$</span><span class="fu">fc1</span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span> 
-      <span class="fu"><a href="../reference/nnf_relu.html">nnf_relu</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span> 
-      <span class="va">self</span><span class="op">$</span><span class="fu">fc2</span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span> 
+    <span class="va">x</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> 
+      <span class="va">self</span><span class="op">$</span><span class="fu">fc1</span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> 
+      <span class="fu"><a href="../reference/nnf_relu.html">nnf_relu</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> 
+      <span class="va">self</span><span class="op">$</span><span class="fu">fc2</span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> 
       <span class="fu"><a href="../reference/nnf_log_softmax.html">nnf_log_softmax</a></span><span class="op">(</span>dim <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>
   <span class="op">}</span>
 <span class="op">)</span>
@@ -317,20 +313,20 @@
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw">for</span> <span class="op">(</span><span class="va">epoch</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fl">10</span><span class="op">)</span> <span class="op">{</span>
   
-  <span class="va">l</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="op">)</span>
+  <span class="va">l</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">)</span>
   
-  <span class="fu">coro</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/coro/man/collect.html">loop</a></span><span class="op">(</span><span class="kw">for</span> <span class="op">(</span><span class="va">b</span> <span class="kw">in</span> <span class="va">dl</span><span class="op">)</span> <span class="op">{</span>
+  <span class="fu">coro</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/coro/man/collect.html" class="external-link">loop</a></span><span class="op">(</span><span class="kw">for</span> <span class="op">(</span><span class="va">b</span> <span class="kw">in</span> <span class="va">dl</span><span class="op">)</span> <span class="op">{</span>
     <span class="va">optimizer</span><span class="op">$</span><span class="fu">zero_grad</span><span class="op">(</span><span class="op">)</span>
     <span class="va">output</span> <span class="op">&lt;-</span> <span class="fu">model</span><span class="op">(</span><span class="va">b</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">)</span>
     <span class="va">loss</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/nnf_nll_loss.html">nnf_nll_loss</a></span><span class="op">(</span><span class="va">output</span>, <span class="va">b</span><span class="op">[[</span><span class="fl">2</span><span class="op">]</span><span class="op">]</span><span class="op">)</span>
     <span class="va">loss</span><span class="op">$</span><span class="fu">backward</span><span class="op">(</span><span class="op">)</span>
     <span class="va">optimizer</span><span class="op">$</span><span class="fu">step</span><span class="op">(</span><span class="op">)</span>
-    <span class="va">l</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">l</span>, <span class="va">loss</span><span class="op">$</span><span class="fu">item</span><span class="op">(</span><span class="op">)</span><span class="op">)</span>
+    <span class="va">l</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">l</span>, <span class="va">loss</span><span class="op">$</span><span class="fu">item</span><span class="op">(</span><span class="op">)</span><span class="op">)</span>
   <span class="op">}</span><span class="op">)</span>
   
-  <span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/sprintf.html">sprintf</a></span><span class="op">(</span><span class="st">"Loss at epoch %d: %3f\n"</span>, <span class="va">epoch</span>, <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">l</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
+  <span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/sprintf.html" class="external-link">sprintf</a></span><span class="op">(</span><span class="st">"Loss at epoch %d: %3f\n"</span>, <span class="va">epoch</span>, <span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="va">l</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
 <span class="op">}</span>
-<span class="co">#&gt; Loss at epoch 1: 279.162595</span>
+<span class="co">#&gt; Loss at epoch 1: 231.766416</span>
 <span class="co">#&gt; Loss at epoch 2: 2.068251</span>
 <span class="co">#&gt; Loss at epoch 3: 2.068251</span>
 <span class="co">#&gt; Loss at epoch 4: 2.068251</span>
@@ -354,11 +350,13 @@
 
 
       <footer><div class="copyright">
-  <p>Developed by Daniel Falbel, Javier Luraschi.</p>
+  <p></p>
+<p>Developed by Daniel Falbel, Javier Luraschi.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.1.</p>
 </div>
 
       </footer>
@@ -366,6 +364,8 @@
 
   
 
+
+  
 
   </body>
 </html>
