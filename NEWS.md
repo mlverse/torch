@@ -4,6 +4,7 @@
 - Exported `is_torch_tensor` to check wether an object is a tensor or not. (#730, @rdinnager)
 - Adds `cuda_get_device_properties(device)` that allows one to query device capability and other properties. (#734, @rdinnager)
 - Fixed a bug in `.validate_sample` for the `Distribution` class that would incorrectly check for tensors. (#739, @hsbadr)
+- Implemented `call_torch_function()` to allow calling potentially unexported torch core functions. (#743, @rdinnager)
 
 # torch 0.6.1
 
