@@ -78,6 +78,11 @@ auto optional(void *x)
   return std::make_shared<LanternObject<c10::optional<T>>>(z);
 } 
 
+template<class T>
+void* make_ptr (const T& x) {
+  return (void*) std::make_unique<T>(x).release();
+}
+
 struct NamedTupleHelper {
     std::vector<torch::IValue> elements;
     std::vector<std::string> names;
@@ -113,6 +118,12 @@ namespace make_unique {
     void* int64_t (const std::vector<std::int64_t>& x);
     void* double_t (const std::vector<double>& x);
     void* bool_t (const std::vector<bool>& x);
+  }
+
+  template <class... T>
+  void* tuple (std::tuple<T...> x)
+  {
+    return make_ptr<std::vector<void*>>(to_vector(x));
   }
 
   namespace optional { 
@@ -172,4 +183,6 @@ namespace from_raw {
     LANTERN_FROM_RAW_DECL(bool_t, std::vector<bool>)
     LANTERN_FROM_RAW_DECL(double_t, std::vector<double>)
   }
+
+  LANTERN_FROM_RAW_DECL(tuple, std::vector<void*>)
 }

@@ -195,7 +195,7 @@ void* _lantern_optional_bool (bool x, bool is_null)
 void *_lantern_vector_get(void *x, int i)
 {
   LANTERN_FUNCTION_START
-  auto v = reinterpret_cast<LanternObject<std::vector<void *>> *>(x)->get();
+  auto v = from_raw::tuple(x);
   return v.at(i);
   LANTERN_FUNCTION_END
 }
@@ -302,11 +302,6 @@ void* _lantern_nn_functional_pad_circular (void* input, void* padding)
   auto out = torch::nn::functional::_pad_circular(input_, padding_);
   return make_unique::Tensor(out);
   LANTERN_FUNCTION_END
-}
-
-template<class T>
-void* make_ptr (const T& x) {
-  return (void*) std::make_unique<T>(x).release();
 }
 
 namespace make_unique {
@@ -519,5 +514,7 @@ namespace from_raw {
     LANTERN_FROM_RAW(bool_t, std::vector<bool>)
     LANTERN_FROM_RAW(double_t, std::vector<double>)
   }
+
+  LANTERN_FROM_RAW(tuple, std::vector<void*>)
 }
 

@@ -373,12 +373,6 @@ std::string buildReturn(YAML::Node node)
 
         type += addNamespace(removeAt(node[idx]["dynamic_type"].as<std::string>()));
     }
-
-    if (node.size() > 1)
-    {
-        type = "std::vector<void*>";
-    }
-
     return type;
 }
 
@@ -502,8 +496,8 @@ int main(int argc, char *argv[])
                 }
                 else
                 {
-                    bodies.push_back("    return (void *) new LanternObject<" + returns + ">(to_vector(" + functionCall + name + "(");
-                    bodies.push_back("        " + calls + ")));");
+                    bodies.push_back("    return make_unique::tuple(" + functionCall + name + "(");
+                    bodies.push_back("        " + calls + "));");
                 }
             }
             bodies.push_back("  LANTERN_FUNCTION_END");
@@ -625,8 +619,8 @@ int main(int argc, char *argv[])
                 }
                 else
                 {
-                    bodies.push_back("    return (void *) new LanternObject<" + returns + ">(to_vector(" + functionCall + name + "(");
-                    bodies.push_back("        " + calls + ")));");
+                    bodies.push_back("    return make_unique::tuple(" + functionCall + name + "(");
+                    bodies.push_back("        " + calls + "));");
                 }
             }
             if (skipCuda102)
