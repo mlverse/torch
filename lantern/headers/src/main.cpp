@@ -171,7 +171,8 @@ std::string buildCalls(std::string name, YAML::Node node, size_t start)
                 type  != "DimnameList" &
                 type  != "Generator" &
                 type  != "ScalarType" &
-                type  != "bool"
+                type  != "bool" &
+                type  != "std::string"
                 )
             {
                 call = "optional<" + addNamespace(type) + ">(" + call + ").get()";
@@ -273,6 +274,10 @@ std::string buildCalls(std::string name, YAML::Node node, size_t start)
         else if (type == "std::array<bool,2>" || type == "std::array<bool,3>" || type == "std::array<bool,4>")
         {
             arguments += "from_raw::vector::bool_t(" + call + ")";
+        }
+        else if (type == "c10::optional<std::string>")
+        {
+            arguments += "from_raw::optional::string(" + call + ")";
         }
         else
         {

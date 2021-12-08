@@ -150,6 +150,7 @@ namespace make_unique {
 
   namespace optional { 
     void* bool_t (const c10::optional<bool>& x);
+    void* string (const c10::optional<std::string>& x);
   }
 
 }
@@ -197,6 +198,7 @@ namespace from_raw {
     c10::optional<std::int64_t> int64_t (void* x);
     c10::optional<bool> bool_t (void* x);
     c10::optional<torch::ScalarType> ScalarType (void* x);
+    c10::optional<std::string> string (void* x);
   }
 
   namespace vector {

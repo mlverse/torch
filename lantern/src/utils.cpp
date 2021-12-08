@@ -422,6 +422,11 @@ namespace make_unique {
       return make_ptr<c10::optional<bool>>(x);
     }
 
+    void* string (const c10::optional<std::string>& x)
+    {
+      return make_ptr<c10::optional<std::string>>(x);
+    }
+
   }
 
 }
@@ -504,6 +509,12 @@ namespace from_raw {
     c10::optional<torch::ScalarType> ScalarType (void* x) {
       if (!x) return c10::nullopt;
       return *reinterpret_cast<torch::ScalarType*>(x);
+    }
+
+    c10::optional<std::string> string (void* x)
+    {
+      if (!x) return c10::nullopt;
+      return reinterpret_cast<LanternObject<std::string>*>(x)->get();
     }
 
   }

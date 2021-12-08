@@ -236,7 +236,7 @@ cpp_parameter_type <- function(argument) {
   }
 
   if (argument$dynamic_type == "std::string") {
-    declaration <- "std::string"
+    declaration <- "XPtrTorchstring"
   }
 
   if (argument$dynamic_type == "Dimname") {
@@ -379,7 +379,7 @@ cpp_argument_transform <- function(argument) {
   }
 
   if (argument$dynamic_type == "std::string") {
-    result <- glue::glue("XPtrTorchstring(lantern_string_new({argument$name}.c_str())).get()")
+    result <- glue::glue("{argument$name}.get()")
   }
 
   if (argument$dynamic_type == "Dimname") {
