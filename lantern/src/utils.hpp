@@ -199,6 +199,8 @@ namespace from_raw {
     c10::optional<bool> bool_t (void* x);
     c10::optional<torch::ScalarType> ScalarType (void* x);
     c10::optional<std::string> string (void* x);
+    c10::optional<torch::MemoryFormat> MemoryFormat (void* x);
+    c10::optional<torch::Scalar> Scalar (void* x);
   }
 
   namespace vector {

@@ -517,6 +517,16 @@ namespace from_raw {
       return reinterpret_cast<LanternObject<std::string>*>(x)->get();
     }
 
+    c10::optional<torch::MemoryFormat> MemoryFormat (void* x) {
+      if (!x) return c10::nullopt;
+      return from_raw::MemoryFormat(x);
+    }
+
+    c10::optional<torch::Scalar> Scalar (void* x) {
+      if (!x) return c10::nullopt;
+      return from_raw::Scalar(x);
+    }
+
   }
 
   namespace vector {

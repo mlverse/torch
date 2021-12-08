@@ -172,7 +172,9 @@ std::string buildCalls(std::string name, YAML::Node node, size_t start)
                 type  != "Generator" &
                 type  != "ScalarType" &
                 type  != "bool" &
-                type  != "std::string"
+                type  != "std::string" &
+                type  != "MemoryFormat" &
+                type  != "Scalar"
                 )
             {
                 call = "optional<" + addNamespace(type) + ">(" + call + ").get()";
@@ -279,8 +281,17 @@ std::string buildCalls(std::string name, YAML::Node node, size_t start)
         {
             arguments += "from_raw::optional::string(" + call + ")";
         }
+        else if (type == "c10::optional<MemoryFormat>")
+        {
+            arguments += "from_raw::optional::MemoryFormat(" + call + ")";
+        }
+        else if (type == "c10::optional<Scalar>")
+        {
+            arguments += "from_raw::optional::Scalar(" + call + ")";
+        }
         else
         {
+            std::cout << type << std::endl;
             arguments += "((" + lanternObject(type) + "<" + addNamespace(type) + ">*)" +
                      call + ")->get()";
         }
