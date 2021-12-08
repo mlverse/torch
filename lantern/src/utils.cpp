@@ -406,7 +406,7 @@ namespace make_unique {
     }
     void* bool_t (const std::vector<bool>& x)
     {
-      return make_ptr<std::vector<bool>>(x);
+      return make_ptr<Vector<bool>>(x);
     }
     void* double_t (const std::vector<double>& x)
     {
@@ -511,7 +511,7 @@ namespace from_raw {
   namespace vector {
     LANTERN_FROM_RAW(string, std::vector<std::string>)
     LANTERN_FROM_RAW(int64_t, std::vector<std::int64_t>)
-    LANTERN_FROM_RAW(bool_t, std::vector<bool>)
+    LANTERN_FROM_RAW(bool_t, Vector<bool>)
     LANTERN_FROM_RAW(double_t, std::vector<double>)
   }
 

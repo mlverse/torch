@@ -88,6 +88,28 @@ struct NamedTupleHelper {
     std::vector<std::string> names;
 };
 
+
+// a template vector that can be easily converted to array<>
+// with a few default casting for a few different sizes.
+template<typename T>
+class Vector {
+  public:
+    Vector(std::vector<T> x) : x_(x) {}
+    std::vector<T> x_;
+    operator std::array<T,2>() const {
+      return std::array<T,2>{x_[0], x_[1]};
+    }
+    operator std::array<T,3>() const {
+      return std::array<T,3>{x_[0], x_[1], x_[2]};
+    }
+    operator std::array<T,4>() const {
+      return std::array<T,4>{x_[0], x_[1], x_[2], x_[3]};
+    }
+    operator std::vector<T>() const {
+      return x_;
+    }
+};
+
 namespace make_unique {
   void* Tensor (const torch::Tensor& x);
   void* TensorList (const torch::TensorList& x);
@@ -180,7 +202,7 @@ namespace from_raw {
   namespace vector {
     LANTERN_FROM_RAW_DECL(string, std::vector<std::string>)
     LANTERN_FROM_RAW_DECL(int64_t, std::vector<std::int64_t>)
-    LANTERN_FROM_RAW_DECL(bool_t, std::vector<bool>)
+    LANTERN_FROM_RAW_DECL(bool_t, Vector<bool>)
     LANTERN_FROM_RAW_DECL(double_t, std::vector<double>)
   }
 

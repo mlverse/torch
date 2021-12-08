@@ -255,7 +255,7 @@ void _lantern_TraceableFunction_delete (void* x)
 void _lantern_vector_bool_delete(void* x)
 {
   LANTERN_FUNCTION_START;
-  lantern_delete<std::vector<bool>>(x);
+  lantern_delete<Vector<bool>>(x);
   LANTERN_FUNCTION_END_VOID;
 }
 

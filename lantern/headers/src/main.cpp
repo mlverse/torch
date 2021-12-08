@@ -270,6 +270,10 @@ std::string buildCalls(std::string name, YAML::Node node, size_t start)
         {
             arguments += "from_raw::optional::ScalarType(" + call + ")";
         }
+        else if (type == "std::array<bool,2>" || type == "std::array<bool,3>" || type == "std::array<bool,4>")
+        {
+            arguments += "from_raw::vector::bool_t(" + call + ")";
+        }
         else
         {
             arguments += "((" + lanternObject(type) + "<" + addNamespace(type) + ">*)" +
