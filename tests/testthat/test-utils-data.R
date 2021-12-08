@@ -70,6 +70,25 @@ test_that("getbatch will get a vector of integers", {
   expect_true(data()[list(1,2,3,4)])
 })
 
+test_that("subset without getbatch works", {
+  
+  x <- torch_randn(50)
+  
+  ds <- dataset("my_dataset",
+                initialize = function(x) {
+                  self$x <- x
+                },
+                .getitem = function(i) {
+                  self$x[i]
+                },
+                .length = function() { length(self$x)
+                })
+  
+  data <- ds(x)
+  ds_subset <- dataset_subset(data, indices = 20:30)
+  expect_equal(data[20], ds_subset[1])
+  })
+
 test_that("datasets have a custom print method", {
   
   data <- dataset(
