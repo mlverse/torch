@@ -293,6 +293,10 @@ std::string buildCalls(std::string name, YAML::Node node, size_t start)
         {
             arguments += "from_raw::optional::TensorList(" + call + ")";
         }
+        else if (type == "ArrayRef<Scalar>")
+        {
+            arguments += "from_raw::vector::Scalar(" + call + ")";
+        }
         else
         {
             std::cout << type << std::endl;

@@ -3555,7 +3555,7 @@ void* _lantern_gradient_tensor_arrayrefscalar_intt_intt(void* self, void* spacin
 {
   LANTERN_FUNCTION_START
     return make_unique::TensorList(torch::gradient(
-        from_raw::Tensor(self), ((LanternObject<torch::ArrayRef<torch::Scalar>>*)spacing)->get(), from_raw::optional::int64_t(dim), from_raw::int64_t(edge_order)));
+        from_raw::Tensor(self), from_raw::vector::Scalar(spacing), from_raw::optional::int64_t(dim), from_raw::int64_t(edge_order)));
   LANTERN_FUNCTION_END
 }
 
@@ -3563,7 +3563,7 @@ void* _lantern_gradient_tensor_arrayrefscalar_intarrayref_intt(void* self, void*
 {
   LANTERN_FUNCTION_START
     return make_unique::TensorList(torch::gradient(
-        from_raw::Tensor(self), ((LanternObject<torch::ArrayRef<torch::Scalar>>*)spacing)->get(), from_raw::IntArrayRef(dim), from_raw::int64_t(edge_order)));
+        from_raw::Tensor(self), from_raw::vector::Scalar(spacing), from_raw::IntArrayRef(dim), from_raw::int64_t(edge_order)));
   LANTERN_FUNCTION_END
 }
 
@@ -16299,14 +16299,14 @@ void* _lantern__foreach_add_tensorlist_arrayrefscalar(void* tensors, void* scala
 {
   LANTERN_FUNCTION_START
     return make_unique::TensorList(torch::_foreach_add(
-        from_raw::TensorList(tensors), ((LanternObject<torch::ArrayRef<torch::Scalar>>*)scalars)->get()));
+        from_raw::TensorList(tensors), from_raw::vector::Scalar(scalars)));
   LANTERN_FUNCTION_END
 }
 
 void* _lantern__foreach_add__tensorlist_arrayrefscalar(void* self, void* scalars)
 {
   LANTERN_FUNCTION_START
-    torch::_foreach_add_(from_raw::TensorList(self), ((LanternObject<torch::ArrayRef<torch::Scalar>>*)scalars)->get());
+    torch::_foreach_add_(from_raw::TensorList(self), from_raw::vector::Scalar(scalars));
     return NULL;
   LANTERN_FUNCTION_END
 }
@@ -16315,14 +16315,14 @@ void* _lantern__foreach_sub_tensorlist_arrayrefscalar(void* tensors, void* scala
 {
   LANTERN_FUNCTION_START
     return make_unique::TensorList(torch::_foreach_sub(
-        from_raw::TensorList(tensors), ((LanternObject<torch::ArrayRef<torch::Scalar>>*)scalars)->get()));
+        from_raw::TensorList(tensors), from_raw::vector::Scalar(scalars)));
   LANTERN_FUNCTION_END
 }
 
 void* _lantern__foreach_sub__tensorlist_arrayrefscalar(void* self, void* scalars)
 {
   LANTERN_FUNCTION_START
-    torch::_foreach_sub_(from_raw::TensorList(self), ((LanternObject<torch::ArrayRef<torch::Scalar>>*)scalars)->get());
+    torch::_foreach_sub_(from_raw::TensorList(self), from_raw::vector::Scalar(scalars));
     return NULL;
   LANTERN_FUNCTION_END
 }
@@ -16331,14 +16331,14 @@ void* _lantern__foreach_div_tensorlist_arrayrefscalar(void* tensors, void* scala
 {
   LANTERN_FUNCTION_START
     return make_unique::TensorList(torch::_foreach_div(
-        from_raw::TensorList(tensors), ((LanternObject<torch::ArrayRef<torch::Scalar>>*)scalars)->get()));
+        from_raw::TensorList(tensors), from_raw::vector::Scalar(scalars)));
   LANTERN_FUNCTION_END
 }
 
 void* _lantern__foreach_div__tensorlist_arrayrefscalar(void* self, void* scalars)
 {
   LANTERN_FUNCTION_START
-    torch::_foreach_div_(from_raw::TensorList(self), ((LanternObject<torch::ArrayRef<torch::Scalar>>*)scalars)->get());
+    torch::_foreach_div_(from_raw::TensorList(self), from_raw::vector::Scalar(scalars));
     return NULL;
   LANTERN_FUNCTION_END
 }
@@ -16347,14 +16347,14 @@ void* _lantern__foreach_mul_tensorlist_arrayrefscalar(void* tensors, void* scala
 {
   LANTERN_FUNCTION_START
     return make_unique::TensorList(torch::_foreach_mul(
-        from_raw::TensorList(tensors), ((LanternObject<torch::ArrayRef<torch::Scalar>>*)scalars)->get()));
+        from_raw::TensorList(tensors), from_raw::vector::Scalar(scalars)));
   LANTERN_FUNCTION_END
 }
 
 void* _lantern__foreach_mul__tensorlist_arrayrefscalar(void* self, void* scalars)
 {
   LANTERN_FUNCTION_START
-    torch::_foreach_mul_(from_raw::TensorList(self), ((LanternObject<torch::ArrayRef<torch::Scalar>>*)scalars)->get());
+    torch::_foreach_mul_(from_raw::TensorList(self), from_raw::vector::Scalar(scalars));
     return NULL;
   LANTERN_FUNCTION_END
 }
@@ -16834,7 +16834,7 @@ void* _lantern__foreach_addcmul__tensorlist_tensorlist_tensorlist_scalar(void* s
 void* _lantern__foreach_addcdiv__tensorlist_tensorlist_tensorlist_arrayrefscalar(void* self, void* tensor1, void* tensor2, void* scalars)
 {
   LANTERN_FUNCTION_START
-    torch::_foreach_addcdiv_(from_raw::TensorList(self), from_raw::TensorList(tensor1), from_raw::TensorList(tensor2), ((LanternObject<torch::ArrayRef<torch::Scalar>>*)scalars)->get());
+    torch::_foreach_addcdiv_(from_raw::TensorList(self), from_raw::TensorList(tensor1), from_raw::TensorList(tensor2), from_raw::vector::Scalar(scalars));
     return NULL;
   LANTERN_FUNCTION_END
 }
@@ -16842,7 +16842,7 @@ void* _lantern__foreach_addcdiv__tensorlist_tensorlist_tensorlist_arrayrefscalar
 void* _lantern__foreach_addcmul__tensorlist_tensorlist_tensorlist_arrayrefscalar(void* self, void* tensor1, void* tensor2, void* scalars)
 {
   LANTERN_FUNCTION_START
-    torch::_foreach_addcmul_(from_raw::TensorList(self), from_raw::TensorList(tensor1), from_raw::TensorList(tensor2), ((LanternObject<torch::ArrayRef<torch::Scalar>>*)scalars)->get());
+    torch::_foreach_addcmul_(from_raw::TensorList(self), from_raw::TensorList(tensor1), from_raw::TensorList(tensor2), from_raw::vector::Scalar(scalars));
     return NULL;
   LANTERN_FUNCTION_END
 }
@@ -16867,7 +16867,7 @@ void* _lantern__foreach_addcdiv_tensorlist_tensorlist_tensorlist_arrayrefscalar(
 {
   LANTERN_FUNCTION_START
     return make_unique::TensorList(torch::_foreach_addcdiv(
-        from_raw::TensorList(input), from_raw::TensorList(tensor1), from_raw::TensorList(tensor2), ((LanternObject<torch::ArrayRef<torch::Scalar>>*)scalars)->get()));
+        from_raw::TensorList(input), from_raw::TensorList(tensor1), from_raw::TensorList(tensor2), from_raw::vector::Scalar(scalars)));
   LANTERN_FUNCTION_END
 }
 
@@ -16875,7 +16875,7 @@ void* _lantern__foreach_addcmul_tensorlist_tensorlist_tensorlist_arrayrefscalar(
 {
   LANTERN_FUNCTION_START
     return make_unique::TensorList(torch::_foreach_addcmul(
-        from_raw::TensorList(input), from_raw::TensorList(tensor1), from_raw::TensorList(tensor2), ((LanternObject<torch::ArrayRef<torch::Scalar>>*)scalars)->get()));
+        from_raw::TensorList(input), from_raw::TensorList(tensor1), from_raw::TensorList(tensor2), from_raw::vector::Scalar(scalars)));
   LANTERN_FUNCTION_END
 }
 

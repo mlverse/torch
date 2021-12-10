@@ -412,6 +412,10 @@ namespace make_unique {
     {
       return make_ptr<std::vector<double>>(x);
     }
+    void* Scalar (const std::vector<torch::Scalar>& x)
+    {
+      return make_ptr<std::vector<torch::Scalar>>(x);
+    }
 
   }
 
@@ -536,6 +540,7 @@ namespace from_raw {
       return reinterpret_cast<LanternObject<c10::List<c10::optional<torch::Tensor>>>*>(x)->get();
     }
 
+
   }
 
   namespace vector {
@@ -543,6 +548,7 @@ namespace from_raw {
     LANTERN_FROM_RAW(int64_t, std::vector<std::int64_t>)
     LANTERN_FROM_RAW(bool_t, Vector<bool>)
     LANTERN_FROM_RAW(double_t, std::vector<double>)
+    LANTERN_FROM_RAW(Scalar, std::vector<torch::Scalar>)
   }
 
   LANTERN_FROM_RAW(tuple, std::vector<void*>)

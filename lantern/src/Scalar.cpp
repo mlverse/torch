@@ -81,31 +81,28 @@ void *_lantern_Scalar_nullopt()
 void* _lantern_vector_Scalar_new ()
 {
   LANTERN_FUNCTION_START
-  return (void*) new std::vector<torch::Scalar>();
+  return (void*) make_unique::vector::Scalar({});
   LANTERN_FUNCTION_END
 }
 
 void _lantern_vector_Scalar_push_back (void* self, void* value)
 {
   LANTERN_FUNCTION_START
-  auto v = reinterpret_cast<std::vector<torch::Scalar> *>(self);
-  v->push_back(from_raw::Scalar(value));
+  from_raw::vector::Scalar(self).push_back(from_raw::Scalar(value));
   LANTERN_FUNCTION_END_VOID
 }
 
 int64_t _lantern_vector_Scalar_size (void* self)
 {
   LANTERN_FUNCTION_START
-  auto v = reinterpret_cast<std::vector<torch::Scalar> *>(self);
-  return v->size();
+  return from_raw::vector::Scalar(self).size();
   LANTERN_FUNCTION_END
 }
 
 void* _lantern_vector_Scalar_at (void* self, int64_t index)
 {
   LANTERN_FUNCTION_START
-  auto v = reinterpret_cast<std::vector<torch::Scalar> *>(self);
-  return make_unique::Scalar(v->at(index));
+  return make_unique::Scalar(from_raw::vector::Scalar(self).at(index));
   LANTERN_FUNCTION_END
 }
 

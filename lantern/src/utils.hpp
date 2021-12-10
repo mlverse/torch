@@ -140,6 +140,7 @@ namespace make_unique {
     void* int64_t (const std::vector<std::int64_t>& x);
     void* double_t (const std::vector<double>& x);
     void* bool_t (const std::vector<bool>& x);
+    void* Scalar (const std::vector<torch::Scalar>& x);
   }
 
   template <class... T>
@@ -210,6 +211,7 @@ namespace from_raw {
     LANTERN_FROM_RAW_DECL(int64_t, std::vector<std::int64_t>)
     LANTERN_FROM_RAW_DECL(bool_t, Vector<bool>)
     LANTERN_FROM_RAW_DECL(double_t, std::vector<double>)
+    LANTERN_FROM_RAW_DECL(Scalar, std::vector<torch::Scalar>)
   }
 
   LANTERN_FROM_RAW_DECL(tuple, std::vector<void*>)
