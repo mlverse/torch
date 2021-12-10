@@ -427,6 +427,11 @@ namespace make_unique {
       return make_ptr<c10::optional<std::string>>(x);
     }
 
+    void* TensorList (const c10::List<c10::optional<torch::Tensor>>& x)
+    {
+      return make_ptr<LanternObject<c10::List<c10::optional<torch::Tensor>>>>(x);
+    }
+
   }
 
 }
@@ -525,6 +530,10 @@ namespace from_raw {
     c10::optional<torch::Scalar> Scalar (void* x) {
       if (!x) return c10::nullopt;
       return from_raw::Scalar(x);
+    }
+
+    c10::List<c10::optional<torch::Tensor>>& TensorList (void* x) {
+      return reinterpret_cast<LanternObject<c10::List<c10::optional<torch::Tensor>>>*>(x)->get();
     }
 
   }

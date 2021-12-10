@@ -151,6 +151,7 @@ namespace make_unique {
   namespace optional { 
     void* bool_t (const c10::optional<bool>& x);
     void* string (const c10::optional<std::string>& x);
+    void* TensorList (const c10::List<c10::optional<torch::Tensor>>& x);
   }
 
 }
@@ -201,6 +202,7 @@ namespace from_raw {
     c10::optional<std::string> string (void* x);
     c10::optional<torch::MemoryFormat> MemoryFormat (void* x);
     c10::optional<torch::Scalar> Scalar (void* x);
+    c10::List<c10::optional<torch::Tensor>>& TensorList (void* x);
   }
 
   namespace vector {

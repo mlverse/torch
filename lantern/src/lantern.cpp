@@ -5027,7 +5027,7 @@ void* _lantern_index_tensor_constclistcoptionaltensor(void* self, void* indices)
 {
   LANTERN_FUNCTION_START
     return make_unique::Tensor(torch::index(
-        from_raw::Tensor(self), ((LanternObject<c10::List<c10::optional<torch::Tensor>>>*)indices)->get()));
+        from_raw::Tensor(self), from_raw::optional::TensorList(indices)));
   LANTERN_FUNCTION_END
 }
 
@@ -5035,7 +5035,7 @@ void* _lantern_Tensor_index_tensor_constclistcoptionaltensor(void* self, void* i
 {
   LANTERN_FUNCTION_START
     return make_unique::Tensor(from_raw::Tensor(self).index(
-        ((LanternObject<c10::List<c10::optional<torch::Tensor>>>*)indices)->get()));
+        from_raw::optional::TensorList(indices)));
   LANTERN_FUNCTION_END
 }
 
@@ -5091,7 +5091,7 @@ void* _lantern_index_put__tensor_constclistcoptionaltensor_tensor_bool(void* sel
 {
   LANTERN_FUNCTION_START
     return make_unique::Tensor(torch::index_put_(
-        from_raw::Tensor(self), ((LanternObject<c10::List<c10::optional<torch::Tensor>>>*)indices)->get(), from_raw::Tensor(values), from_raw::bool_t(accumulate)));
+        from_raw::Tensor(self), from_raw::optional::TensorList(indices), from_raw::Tensor(values), from_raw::bool_t(accumulate)));
   LANTERN_FUNCTION_END
 }
 
@@ -5099,7 +5099,7 @@ void* _lantern_Tensor_index_put__tensor_constclistcoptionaltensor_tensor_bool(vo
 {
   LANTERN_FUNCTION_START
     return make_unique::Tensor(from_raw::Tensor(self).index_put_(
-        ((LanternObject<c10::List<c10::optional<torch::Tensor>>>*)indices)->get(), from_raw::Tensor(values), from_raw::bool_t(accumulate)));
+        from_raw::optional::TensorList(indices), from_raw::Tensor(values), from_raw::bool_t(accumulate)));
   LANTERN_FUNCTION_END
 }
 
@@ -5107,7 +5107,7 @@ void* _lantern_index_put_tensor_constclistcoptionaltensor_tensor_bool(void* self
 {
   LANTERN_FUNCTION_START
     return make_unique::Tensor(torch::index_put(
-        from_raw::Tensor(self), ((LanternObject<c10::List<c10::optional<torch::Tensor>>>*)indices)->get(), from_raw::Tensor(values), from_raw::bool_t(accumulate)));
+        from_raw::Tensor(self), from_raw::optional::TensorList(indices), from_raw::Tensor(values), from_raw::bool_t(accumulate)));
   LANTERN_FUNCTION_END
 }
 
@@ -5115,7 +5115,7 @@ void* _lantern_Tensor_index_put_tensor_constclistcoptionaltensor_tensor_bool(voi
 {
   LANTERN_FUNCTION_START
     return make_unique::Tensor(from_raw::Tensor(self).index_put(
-        ((LanternObject<c10::List<c10::optional<torch::Tensor>>>*)indices)->get(), from_raw::Tensor(values), from_raw::bool_t(accumulate)));
+        from_raw::optional::TensorList(indices), from_raw::Tensor(values), from_raw::bool_t(accumulate)));
   LANTERN_FUNCTION_END
 }
 
@@ -5123,7 +5123,7 @@ void* _lantern__index_put_impl__tensor_constclistcoptionaltensor_tensor_bool_boo
 {
   LANTERN_FUNCTION_START
     return make_unique::Tensor(torch::_index_put_impl_(
-        from_raw::Tensor(self), ((LanternObject<c10::List<c10::optional<torch::Tensor>>>*)indices)->get(), from_raw::Tensor(values), from_raw::bool_t(accumulate), from_raw::bool_t(unsafe)));
+        from_raw::Tensor(self), from_raw::optional::TensorList(indices), from_raw::Tensor(values), from_raw::bool_t(accumulate), from_raw::bool_t(unsafe)));
   LANTERN_FUNCTION_END
 }
 

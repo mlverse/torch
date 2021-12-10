@@ -289,6 +289,10 @@ std::string buildCalls(std::string name, YAML::Node node, size_t start)
         {
             arguments += "from_raw::optional::Scalar(" + call + ")";
         }
+        else if (type == "c10::List<c10::optional<torch::Tensor>>")
+        {
+            arguments += "from_raw::optional::TensorList(" + call + ")";
+        }
         else
         {
             std::cout << type << std::endl;
