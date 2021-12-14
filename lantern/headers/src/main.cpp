@@ -158,28 +158,9 @@ std::string buildCalls(std::string name, YAML::Node node, size_t start)
         // add optional call if required
         std::string call = node[idx]["name"].as<std::string>();
         if ((dtype.find("c10::optional") != std::string::npos) & 
-            (type != "std::vector<torch::Dimname>") &
             (type != "c10::List<c10::optional<torch::Tensor>>") &
-            (type != "c10::optional<torch::Tensor>") &
-            (type != "const c10::List<c10::optional<at::Tensor>> &") &
-            (type != "c10::optional<at::Scalar>"))
+            (type != "c10::optional<torch::Tensor>"))
         {
-            if ((type != "double") & 
-                (type != "IntArrayRef") &
-                (type != "ArrayRef<double>") &
-                type  != "int64_t" &
-                type  != "DimnameList" &
-                type  != "Generator" &
-                type  != "ScalarType" &
-                type  != "bool" &
-                type  != "std::string" &
-                type  != "MemoryFormat" &
-                type  != "Scalar"
-                )
-            {
-                call = "optional<" + addNamespace(type) + ">(" + call + ").get()";
-            }
-            
             type = "c10::optional<" + type + ">";
         }
 
@@ -315,9 +296,7 @@ std::string buildCalls(std::string name, YAML::Node node, size_t start)
         }
         else
         {
-            std::cout << type << std::endl;
-            arguments += "((" + lanternObject(type) + "<" + addNamespace(type) + ">*)" +
-                     call + ")->get()";
+            throw std::runtime_error("Unknown type " + type);
         }
 
         
@@ -420,6 +399,62 @@ std::string buildReturn(YAML::Node node)
     return type;
 }
 
+std::string getReturnWrapper (std::string returns)
+{
+    if (returns == "torch::Tensor")
+    {
+        return "make_unique::Tensor";
+    }
+    else if (returns == "torch::TensorList")
+    {
+        return "make_unique::TensorList";
+    }
+    else if (returns == "torch::ScalarType")
+    {
+        return "make_unique::ScalarType";
+    }
+    else if (returns == "torch::Scalar")
+    {
+        return "make_unique::Scalar";
+    }
+    else if (returns == "torch::TensorOptions")
+    {
+        return "make_unique::TensorOptions";
+    }
+    else if (returns == "torch::DimnameList")
+    {
+        return "make_unique::DimnameList";
+    }
+    else if (returns == "torch::IntArrayRef")
+    {
+        return "make_unique::IntArrayRef";
+    }
+    else if (returns == "torch::QScheme")
+    {
+        return "make_unique::QScheme";
+    }
+    else if (returns == "torch::Storage")
+    {
+        return "make_unique::Storage";
+    }
+    else if (returns == "int64_t")
+    {
+        return "make_unique::int64_t";
+    }
+    else if (returns == "bool")
+    {
+        return "make_unique::bool_t";
+    }
+    else if (returns == "double")
+    {
+        return "make_unique::double_t";
+    }
+    else
+    {
+        throw std::runtime_error("Unknown return type " + returns);
+    }
+}
+
 int main(int argc, char *argv[])
 {
     if (argc < 4)
@@ -472,71 +507,9 @@ int main(int argc, char *argv[])
             {
                 if (config[idx]["returns"].size() == 1)
                 {
-                    if (returns == "torch::Tensor")
-                    {
-                        bodies.push_back("    return make_unique::Tensor(" + functionCall + name + "(");
-                        bodies.push_back("        " + calls + "));");
-                    }
-                    else if (returns == "torch::TensorList")
-                    {
-                        bodies.push_back("    return make_unique::TensorList(" + functionCall + name + "(");
-                        bodies.push_back("        " + calls + "));");
-                    }
-                    else if (returns == "torch::ScalarType")
-                    {
-                        bodies.push_back("    return make_unique::ScalarType(" + functionCall + name + "(");
-                        bodies.push_back("        " + calls + "));");
-                    }
-                    else if (returns == "torch::Scalar")
-                    {
-                        bodies.push_back("    return make_unique::Scalar(" + functionCall + name + "(");
-                        bodies.push_back("        " + calls + "));");
-                    }
-                    else if (returns == "torch::TensorOptions")
-                    {
-                        bodies.push_back("    return make_unique::TensorOptions(" + functionCall + name + "(");
-                        bodies.push_back("        " + calls + "));");
-                    }
-                    else if (returns == "torch::DimnameList")
-                    {
-                        bodies.push_back("    return make_unique::DimnameList(" + functionCall + name + "(");
-                        bodies.push_back("        " + calls + "));");
-                    }
-                    else if (returns == "torch::IntArrayRef")
-                    {
-                        bodies.push_back("    return make_unique::IntArrayRef(" + functionCall + name + "(");
-                        bodies.push_back("        " + calls + "));");
-                    }
-                    else if (returns == "torch::QScheme")
-                    {
-                        bodies.push_back("    return make_unique::QScheme(" + functionCall + name + "(");
-                        bodies.push_back("        " + calls + "));");
-                    }
-                    else if (returns == "torch::Storage")
-                    {
-                        bodies.push_back("    return make_unique::Storage(" + functionCall + name + "(");
-                        bodies.push_back("        " + calls + "));");
-                    }
-                    else if (returns == "int64_t")
-                    {
-                        bodies.push_back("    return make_unique::int64_t(" + functionCall + name + "(");
-                        bodies.push_back("        " + calls + "));");
-                    }
-                    else if (returns == "bool")
-                    {
-                        bodies.push_back("    return make_unique::bool_t(" + functionCall + name + "(");
-                        bodies.push_back("        " + calls + "));");
-                    }
-                    else if (returns == "double")
-                    {
-                        bodies.push_back("    return make_unique::double_t(" + functionCall + name + "(");
-                        bodies.push_back("        " + calls + "));");
-                    }
-                    else
-                    {
-                        bodies.push_back("    return (void *) new LanternObject<" + returns + ">(" + functionCall + name + "(");
-                        bodies.push_back("        " + calls + "));");
-                    }
+                    auto return_wrapper = getReturnWrapper(returns);
+                    bodies.push_back("    return " + return_wrapper + "(" + functionCall + name + "(");
+                    bodies.push_back("        " + calls + "));");
                 }
                 else
                 {
@@ -595,71 +568,9 @@ int main(int argc, char *argv[])
             {
                 if (config[idx]["returns"].size() == 1)
                 {
-                    if (returns == "torch::Tensor")
-                    {
-                        bodies.push_back("    return make_unique::Tensor(" + functionCall + name + "(");
-                        bodies.push_back("        " + calls + "));");
-                    }
-                    else if (returns == "torch::TensorList")
-                    {
-                        bodies.push_back("    return make_unique::TensorList(" + functionCall + name + "(");
-                        bodies.push_back("        " + calls + "));");
-                    }
-                    else if (returns == "torch::ScalarType")
-                    {
-                        bodies.push_back("    return make_unique::ScalarType(" + functionCall + name + "(");
-                        bodies.push_back("        " + calls + "));");
-                    }
-                    else if (returns == "torch::Scalar")
-                    {
-                        bodies.push_back("    return make_unique::Scalar(" + functionCall + name + "(");
-                        bodies.push_back("        " + calls + "));");
-                    }
-                    else if (returns == "torch::TensorOptions")
-                    {
-                        bodies.push_back("    return make_unique::TensorOptions(" + functionCall + name + "(");
-                        bodies.push_back("        " + calls + "));");
-                    }
-                    else if (returns == "torch::DimnameList")
-                    {
-                        bodies.push_back("    return make_unique::DimnameList(" + functionCall + name + "(");
-                        bodies.push_back("        " + calls + "));");
-                    }
-                    else if (returns == "torch::IntArrayRef")
-                    {
-                        bodies.push_back("    return make_unique::IntArrayRef(" + functionCall + name + "(");
-                        bodies.push_back("        " + calls + "));");
-                    }
-                    else if (returns == "torch::QScheme")
-                    {
-                        bodies.push_back("    return make_unique::QScheme(" + functionCall + name + "(");
-                        bodies.push_back("        " + calls + "));");
-                    }
-                    else if (returns == "torch::Storage")
-                    {
-                        bodies.push_back("    return make_unique::Storage(" + functionCall + name + "(");
-                        bodies.push_back("        " + calls + "));");
-                    }
-                    else if (returns == "int64_t")
-                    {
-                        bodies.push_back("    return make_unique::int64_t(" + functionCall + name + "(");
-                        bodies.push_back("        " + calls + "));");
-                    }
-                    else if (returns == "bool")
-                    {
-                        bodies.push_back("    return make_unique::bool_t(" + functionCall + name + "(");
-                        bodies.push_back("        " + calls + "));");
-                    }
-                    else if (returns == "double")
-                    {
-                        bodies.push_back("    return make_unique::double_t(" + functionCall + name + "(");
-                        bodies.push_back("        " + calls + "));");
-                    }
-                    else
-                    {
-                        bodies.push_back("    return (void *) new LanternObject<" + returns + ">(" + functionCall + name + "(");
-                        bodies.push_back("        " + calls + "));");
-                    }
+                    auto return_wrapper = getReturnWrapper(returns);
+                    bodies.push_back("    return " + return_wrapper + "(" + functionCall + name + "(");
+                    bodies.push_back("        " + calls + "));");
                 }
                 else
                 {
