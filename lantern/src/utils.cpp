@@ -393,6 +393,10 @@ namespace make_unique {
   {
     return make_ptr<bool>(x);
   }
+  void* Stream (const at::Stream& x)
+  {
+    return make_ptr<at::Stream>(x);
+  }
 
   namespace vector {
 
@@ -489,6 +493,7 @@ namespace from_raw {
   LANTERN_FROM_RAW(int64_t, std::int64_t)
   LANTERN_FROM_RAW(bool_t, bool)
   LANTERN_FROM_RAW(double_t, double)
+  LANTERN_FROM_RAW(Stream, at::Stream)
 
   namespace optional {
 

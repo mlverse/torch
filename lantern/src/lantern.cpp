@@ -2683,7 +2683,7 @@ void* _lantern_Tensor_contiguous_tensor_memoryformat(void* self, void* memory_fo
 {
   LANTERN_FUNCTION_START
     return make_unique::Tensor(from_raw::Tensor(self).contiguous(
-        ((LanternObject<torch::MemoryFormat>*)memory_format)->get()));
+        from_raw::MemoryFormat(memory_format)));
   LANTERN_FUNCTION_END
 }
 
@@ -18962,7 +18962,7 @@ void* _lantern_Tensor_isinf_tensor(void* self)
 void* _lantern_Tensor_record_stream_tensor_stream(void* self, void* s)
 {
   LANTERN_FUNCTION_START
-    from_raw::Tensor(self).record_stream(((LanternObject<at::Stream>*)s)->get());
+    from_raw::Tensor(self).record_stream(from_raw::Stream(s));
     return NULL;
   LANTERN_FUNCTION_END
 }

@@ -89,5 +89,5 @@ int64_t _lantern_TensorList_size(void *self)
 void* _lantern_Stream ()
 {
     c10::Stream x = c10::Stream(c10::Stream::Default(),torch::Device(torch::DeviceType::CPU));
-    return (void*) new LanternObject<c10::Stream>(x);
+    return make_unique::Stream(x);
 }

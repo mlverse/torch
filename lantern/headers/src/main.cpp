@@ -305,6 +305,14 @@ std::string buildCalls(std::string name, YAML::Node node, size_t start)
         {
             arguments += "from_raw::optional::DoubleArrayRef(" + call + ")";
         }
+        else if (type == "at::Stream")
+        {
+            arguments += "from_raw::Stream(" + call + ")";
+        }
+        else if (type == "MemoryFormat")
+        {
+            arguments += "from_raw::MemoryFormat(" + call + ")";
+        }
         else
         {
             std::cout << type << std::endl;
