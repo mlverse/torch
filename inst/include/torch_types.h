@@ -252,31 +252,18 @@ public:
   explicit XPtrTorchIndexIntArrayRef (SEXP x);
 };
 
-class XPtrTorchOptionalIntArrayRef {
+class XPtrTorchOptionalDoubleArrayRef: public XPtrTorch {
 public:
-  std::shared_ptr<void> ptr;
-  std::vector<int64_t> data;
-  bool is_null;
-  
-  XPtrTorchOptionalIntArrayRef () {};
-  explicit XPtrTorchOptionalIntArrayRef (SEXP x);
-  
-  XPtrTorchOptionalIntArrayRef (std::vector<int64_t> data_, bool is_null_) {
-    data = data_;
-    ptr = std::shared_ptr<void>(
-      fixme_optional_vector_int64_t(data.data(), data.size(), is_null_),
-      delete_optional_int_array_ref
-    );
-    is_null = is_null_;
-  }
-  
-  XPtrTorchOptionalIntArrayRef (const XPtrTorchOptionalIntArrayRef& x ) : 
-    XPtrTorchOptionalIntArrayRef (x.data, x.is_null) {}
-  
-  void* get() const
-  {
-    return ptr.get();
-  }
+  XPtrTorchOptionalDoubleArrayRef (): XPtrTorch{NULL} {};
+  XPtrTorchOptionalDoubleArrayRef (void* x) : XPtrTorch(x, delete_optional_double_array_ref) {};
+  XPtrTorchOptionalDoubleArrayRef (SEXP x);
+};
+
+class XPtrTorchOptionalIntArrayRef: public XPtrTorch {
+public:
+  XPtrTorchOptionalIntArrayRef () : XPtrTorch{NULL} {};
+  XPtrTorchOptionalIntArrayRef (SEXP x);
+  XPtrTorchOptionalIntArrayRef (void* x) : XPtrTorch(x, delete_optional_int_array_ref) {};
 };  
 
 class XPtrTorchOptionalIndexIntArrayRef : public XPtrTorchOptionalIntArrayRef {

@@ -110,6 +110,39 @@ class Vector {
     }
 };
 
+// a wrapper class for optional<torch::ArrayRef<T>> that owns all of it's memory and
+// can easily be cast to the array ref type.
+template <typename T>
+class OptionalArrayRef {
+  public:
+    std::vector<T> x_;
+    bool is_null;
+    OptionalArrayRef(const c10::optional<torch::ArrayRef<T>>& x) {
+      if (x.has_value()) {
+        x_ = std::vector<T>(x.value().vec());
+        is_null = false;
+      } else {
+        is_null = true;
+      }
+    }
+    OptionalArrayRef(const std::vector<T>& x){
+      if (x.size() == 0) {
+        is_null = true;
+      } else {
+        x_ = x;
+        is_null = false;
+      }
+    }
+    operator c10::optional<torch::ArrayRef<T>>() const {
+      if (is_null) {
+        return c10::nullopt;
+      } else {
+        return torch::ArrayRef<T>(x_);
+      }
+    }
+};
+
+
 namespace make_unique {
   void* Tensor (const torch::Tensor& x);
   void* TensorList (const torch::TensorList& x);
@@ -153,6 +186,8 @@ namespace make_unique {
     void* bool_t (const c10::optional<bool>& x);
     void* string (const c10::optional<std::string>& x);
     void* TensorList (const c10::List<c10::optional<torch::Tensor>>& x);
+    void* IntArrayRef (const c10::optional<torch::IntArrayRef>& x);
+    void* DoubleArrayRef (const c10::optional<torch::ArrayRef<double>>& x);
   }
 
 }
@@ -204,6 +239,8 @@ namespace from_raw {
     c10::optional<torch::MemoryFormat> MemoryFormat (void* x);
     c10::optional<torch::Scalar> Scalar (void* x);
     c10::List<c10::optional<torch::Tensor>>& TensorList (void* x);
+    OptionalArrayRef<std::int64_t>& IntArrayRef (void* x);
+    OptionalArrayRef<double>& DoubleArrayRef (void* x);
   }
 
   namespace vector {

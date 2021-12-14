@@ -76,5 +76,6 @@ XPtrTorchindex_int64_t from_sexp_index_int64_t (SEXP x_);
 XPtrTorchoptional_index_int64_t from_sexp_optional_index_int64_t (SEXP x_);
 XPtrTorchoptional_bool from_sexp_optional_bool (SEXP x);
 XPtrTorchbool from_sexp_bool (SEXP x);
+XPtrTorchOptionalDoubleArrayRef from_sexp_optional_double_array_ref (SEXP x);
 
 #endif // TORCH_API

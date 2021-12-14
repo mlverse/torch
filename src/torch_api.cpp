@@ -1398,6 +1398,39 @@ XPtrTorchIntArrayRef from_sexp_int_array_ref (SEXP x, bool allow_null, bool inde
   return XPtrTorchIntArrayRef(ptr);
 }
 
+// optional double array ref
+
+XPtrTorchOptionalDoubleArrayRef from_sexp_optional_double_array_ref (SEXP x)
+{
+  if (TYPEOF(x) == NILSXP || LENGTH(x) == 0)
+  {
+    return XPtrTorchOptionalDoubleArrayRef(lantern_optional_vector_double(NULL, 0, true));
+  }
+  
+  // handle lists of double
+  std::vector<double> data;
+  if (TYPEOF(x) == VECSXP)
+  {
+    auto tmp = Rcpp::as<Rcpp::List>(x);
+    for (auto i = tmp.begin(); i != tmp.end(); ++i)
+    {
+      data.push_back(Rcpp::as<double>(*i));
+    }
+  }
+  else 
+  {
+    data = Rcpp::as<std::vector<double>>(x);  
+  }
+  
+  return XPtrTorchOptionalDoubleArrayRef(
+    lantern_optional_vector_double(data.data(), data.size(), false));
+}
+
+void delete_optional_double_array_ref (void* x)
+{
+  lantern_optional_vector_double_delete(x);
+}
+
 // optional int array ref
 
 XPtrTorchOptionalIntArrayRef from_sexp_optional_int_array_ref (SEXP x, bool index)
@@ -1446,17 +1479,14 @@ XPtrTorchOptionalIntArrayRef from_sexp_optional_int_array_ref (SEXP x, bool inde
     is_null = false;
   }
   
-  return XPtrTorchOptionalIntArrayRef(data, is_null);
+  return XPtrTorchOptionalIntArrayRef(lantern_optional_vector_int64_t(
+      data.data(), data.size(), is_null
+  ));
 }
 
 void delete_optional_int_array_ref (void* x)
 {
   lantern_optional_vector_int64_t_delete(x);
-}
-
-void* fixme_optional_vector_int64_t (int64_t * x, size_t x_size, bool is_null)
-{
-  return lantern_optional_vector_int64_t(x, x_size, is_null);
 }
 
 // tensor_dict

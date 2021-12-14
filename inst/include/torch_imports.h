@@ -90,6 +90,9 @@ IMPORT_FROM_SEXP(from_sexp_int64_t_2, XPtrTorchint64_t2)
 IMPORT_FROM_SEXP(from_sexp_optional_int64_t_2, XPtrTorchoptional_int64_t2)
 IMPORT_FROM_SEXP(from_sexp_index_int64_t, XPtrTorchindex_int64_t)
 IMPORT_FROM_SEXP(from_sexp_optional_index_int64_t, XPtrTorchoptional_index_int64_t)
+IMPORT_FROM_SEXP(from_sexp_optional_bool, XPtrTorchoptional_bool)    
+IMPORT_FROM_SEXP(from_sexp_bool, XPtrTorchbool)
+IMPORT_FROM_SEXP(from_sexp_optional_double_array_ref, XPtrTorchOptionalDoubleArrayRef)
     
 #define IMPORT_DELETER(name)                                                 \
     void name (void* x)                                                      \
@@ -152,6 +155,8 @@ IMPORT_DELETER(delete_storage)
 IMPORT_DELETER(delete_jit_module)
 IMPORT_DELETER(delete_traceable_function)
 IMPORT_DELETER(delete_vector_void)
+IMPORT_DELETER(delete_optional_bool)
+IMPORT_DELETER(delete_optional_double_array_ref)
 
 XPtrTorchIntArrayRef from_sexp_int_array_ref (SEXP x, bool allow_null, bool index)
 {
@@ -171,15 +176,6 @@ XPtrTorchOptionalIntArrayRef from_sexp_optional_int_array_ref (SEXP x, bool inde
   return fn(x, index);
 }   
   
-void* fixme_optional_vector_int64_t (int64_t * x, size_t x_size, bool is_null)                                                            
-{                                                                                
-  static void* (*fn)(int64_t*, size_t, bool) = NULL;                             
-  if (fn == NULL) {                                                              
-    fn = (void* (*) (int64_t*, size_t, bool)) R_GetCCallable("torch", "fixme_optional_vector_int64_t");
-  }                                                                              
-  return fn(x, x_size, is_null);                                                                  
-}
-
 void* fixme_new_string (const char* x)                                                               
 {                                                                                
   static void* (*fn)(const char *) = NULL;                             

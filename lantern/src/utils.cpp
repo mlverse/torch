@@ -78,7 +78,7 @@ void * _lantern_optional_vector_double(double * x, size_t x_size, bool is_null)
   else 
     out = torch::ArrayRef<double>(x, x + x_size);;
   
-  return (void *)new LanternObject<c10::optional<torch::ArrayRef<double>>>(out);
+  return make_unique::optional::DoubleArrayRef(out);
   LANTERN_FUNCTION_END
 }
 
@@ -92,7 +92,7 @@ void * _lantern_optional_vector_int64_t(int64_t * x, size_t x_size, bool is_null
   else 
     out = torch::ArrayRef<int64_t>(x, x + x_size);
 
-  return (void *)new LanternObject<c10::optional<torch::ArrayRef<int64_t>>>(out);
+  return make_unique::optional::IntArrayRef(out);
   LANTERN_FUNCTION_END
 }
 
@@ -436,6 +436,16 @@ namespace make_unique {
       return make_ptr<LanternObject<c10::List<c10::optional<torch::Tensor>>>>(x);
     }
 
+    void* IntArrayRef (const c10::optional<torch::ArrayRef<std::int64_t>>& x)
+    {
+      return make_ptr<OptionalArrayRef<std::int64_t>>(x);
+    }
+
+    void* DoubleArrayRef (const c10::optional<torch::ArrayRef<double>>& x)
+    {
+      return make_ptr<OptionalArrayRef<double>>(x);
+    }
+
   }
 
 }
@@ -540,6 +550,13 @@ namespace from_raw {
       return reinterpret_cast<LanternObject<c10::List<c10::optional<torch::Tensor>>>*>(x)->get();
     }
 
+    OptionalArrayRef<std::int64_t>& IntArrayRef (void* x) {
+      return reinterpret_cast<LanternObject<OptionalArrayRef<std::int64_t>>*>(x)->get();
+    }
+
+    OptionalArrayRef<double>& DoubleArrayRef (void* x) {
+      return reinterpret_cast<LanternObject<OptionalArrayRef<double>>*>(x)->get();
+    }
 
   }
 

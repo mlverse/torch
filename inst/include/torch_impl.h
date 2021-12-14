@@ -315,6 +315,11 @@ XPtrTorchOptionalIndexTensorList::XPtrTorchOptionalIndexTensorList (SEXP x) :
 XPtrTorchOptionalDevice::XPtrTorchOptionalDevice (SEXP x):
   XPtrTorch{from_sexp_optional_device(x)} {}
 
+// optional double array ref
+
+XPtrTorchOptionalDoubleArrayRef::XPtrTorchOptionalDoubleArrayRef (SEXP x):
+  XPtrTorch{from_sexp_optional_double_array_ref(x)} {}
+
 // int array ref
 
 XPtrTorchIntArrayRef::XPtrTorchIntArrayRef (SEXP x):
@@ -328,7 +333,7 @@ XPtrTorchIndexIntArrayRef::XPtrTorchIndexIntArrayRef (SEXP x):
 // optional int array ref
 
 XPtrTorchOptionalIntArrayRef::XPtrTorchOptionalIntArrayRef (SEXP x):
-  XPtrTorchOptionalIntArrayRef{from_sexp_optional_int_array_ref(x, false)} {};
+  XPtrTorchOptionalIntArrayRef(from_sexp_optional_int_array_ref(x, false)) {};
 
 // optional index int array ref
 

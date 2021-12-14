@@ -75,6 +75,9 @@ void register_callables (DllInfo *dll)
   REGISTER_C_CALLABLE(from_sexp_optional_int64_t_2)
   REGISTER_C_CALLABLE(from_sexp_index_int64_t)
   REGISTER_C_CALLABLE(from_sexp_optional_index_int64_t)
+  REGISTER_C_CALLABLE(from_sexp_optional_bool)
+  REGISTER_C_CALLABLE(from_sexp_bool)
+  REGISTER_C_CALLABLE(from_sexp_optional_double_array_ref)
   
   REGISTER_C_CALLABLE(delete_tensor)
   REGISTER_C_CALLABLE(delete_script_module)
@@ -128,8 +131,9 @@ void register_callables (DllInfo *dll)
   REGISTER_C_CALLABLE(delete_jit_module)
   REGISTER_C_CALLABLE(delete_traceable_function)
   REGISTER_C_CALLABLE(delete_vector_void)
+  REGISTER_C_CALLABLE(delete_optional_bool)
+  REGISTER_C_CALLABLE(delete_optional_double_array_ref)
   
-  REGISTER_C_CALLABLE(fixme_optional_vector_int64_t)
   REGISTER_C_CALLABLE(fixme_new_string)
 }
 

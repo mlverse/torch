@@ -297,6 +297,14 @@ std::string buildCalls(std::string name, YAML::Node node, size_t start)
         {
             arguments += "from_raw::vector::Scalar(" + call + ")";
         }
+        else if (type == "c10::optional<IntArrayRef>")
+        {
+            arguments += "from_raw::optional::IntArrayRef(" + call + ")";
+        }
+        else if (type == "c10::optional<ArrayRef<double>>")
+        {
+            arguments += "from_raw::optional::DoubleArrayRef(" + call + ")";
+        }
         else
         {
             std::cout << type << std::endl;

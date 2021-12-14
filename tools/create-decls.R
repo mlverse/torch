@@ -30,8 +30,7 @@ make_load_symbols <- function(decls) {
 
 decls <- readr::read_lines(
   "
-bool _lantern_bool_get (void* x)
-int64_t _lantern_int64_t_get (void* x)
+void _lantern_optional_vector_double_delete (void* x)
 "  
 )
 

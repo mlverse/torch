@@ -175,8 +175,8 @@ cpp_parameter_type <- function(argument) {
     declaration <- "XPtrTorchIntArrayRef"
   }
 
-  if (argument$dynamic_type == "ArrayRef<double>"&& argument$type == "c10::optional<ArrayRef<double>>") {
-    declaration <- "nullableVector<std::vector<double>>"
+  if (argument$dynamic_type == "ArrayRef<double>" && argument$type == "c10::optional<ArrayRef<double>>") {
+    declaration <- "XPtrTorchOptionalDoubleArrayRef"
   }
 
   if (argument$dynamic_type == "ArrayRef<double>"&& argument$type != "c10::optional<ArrayRef<double>>") {
@@ -327,7 +327,7 @@ cpp_argument_transform <- function(argument) {
   }
 
   if (argument$dynamic_type == "ArrayRef<double>" && argument$type == "c10::optional<ArrayRef<double>>") {
-    result <- glue::glue("lantern_optional_vector_double({argument$name}.x.data(), {argument$name}.x.size(), {argument$name}.is_null)")
+    result <- glue::glue("{argument$name}.get()")
   }
 
   if (argument$dynamic_type == "int64_t") {
