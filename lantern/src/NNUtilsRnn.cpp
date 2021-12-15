@@ -39,7 +39,7 @@ void *_lantern_nn_utils_rnn_pad_packed_sequence(void *sequence, bool batch_first
     auto out = torch::nn::utils::rnn::pad_packed_sequence(
         reinterpret_cast<LanternPtr<torch::nn::utils::rnn::PackedSequence> *>(sequence)->get(),
         batch_first, padding_value,
-        reinterpret_cast<LanternObject<c10::optional<int64_t>> *>(total_length)->get());
+        from_raw::optional::int64_t(total_length));
 
     std::vector<torch::Tensor> x;
     x.push_back(std::get<0>(out));

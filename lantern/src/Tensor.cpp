@@ -52,7 +52,7 @@ void *_lantern_Tensor_permute(void *self, void *dims)
 {
   LANTERN_FUNCTION_START
   torch::Tensor x = from_raw::Tensor(self);
-  std::vector<int64_t> y = reinterpret_cast<LanternObject<std::vector<int64_t>> *>(dims)->get();
+  auto y = from_raw::vector::int64_t(dims);
   return make_unique::Tensor(x.permute(y));
   LANTERN_FUNCTION_END
 }
@@ -237,7 +237,7 @@ void* _lantern_normal_tensor_tensor_generator (void* mean, void* std, void* gene
   LANTERN_FUNCTION_START
   auto mean_ = from_raw::Tensor(mean);
   auto std_ = from_raw::Tensor(std);
-  auto generator_ = reinterpret_cast<LanternObject<torch::Generator>*>(generator)->get();
+  auto generator_ = from_raw::Generator(generator);
   auto ten = at::normal(mean_, std_, generator_);
   return make_unique::Tensor(ten);
   LANTERN_FUNCTION_END
@@ -247,7 +247,7 @@ void* _lantern_normal_double_tensor_generator (double mean, void* std, void* gen
 {
   LANTERN_FUNCTION_START
   auto std_ = from_raw::Tensor(std);
-  auto generator_ = reinterpret_cast<LanternObject<torch::Generator>*>(generator)->get();
+  auto generator_ = from_raw::Generator(generator);
   auto ten = at::normal(mean, std_, generator_);
   return make_unique::Tensor(ten);
   LANTERN_FUNCTION_END
@@ -257,7 +257,7 @@ void* _lantern_normal_tensor_double_generator (void* mean, double std, void* gen
 {
   LANTERN_FUNCTION_START
   auto mean_ = from_raw::Tensor(mean);
-  auto generator_ = reinterpret_cast<LanternObject<torch::Generator>*>(generator)->get();
+  auto generator_ = from_raw::Generator(generator);
   auto ten = at::normal(mean_, std, generator_);
   return make_unique::Tensor(ten);
   LANTERN_FUNCTION_END
@@ -276,19 +276,19 @@ void *_lantern_optional_tensor(void* x, bool is_null)
   }
     
 
-  return (void *)new LanternObject<c10::optional<torch::Tensor>>(out);
+  return make_unique::optional::Tensor(out);
   LANTERN_FUNCTION_END
 }
 
 bool _lantern_optional_tensor_has_value (void*x)
 {
-  auto value = reinterpret_cast<LanternObject<c10::optional<torch::Tensor>>*>(x)->get();
+  auto value = from_raw::optional::Tensor(x);
   return value.has_value();
 }
 
 void* _lantern_optional_tensor_value (void* x)
 {
-  auto value = reinterpret_cast<LanternObject<c10::optional<torch::Tensor>>*>(x)->get();
+  auto value = from_raw::optional::Tensor(x);
   return make_unique::Tensor(value.value());
 }
 

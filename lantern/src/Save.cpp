@@ -74,15 +74,15 @@ void* _lantern_load_state_dict (const char * path)
     LANTERN_FUNCTION_START
     std::ifstream file(path, std::ios::binary);
     std::vector<char> data((std::istreambuf_iterator<char>(file)), std::istreambuf_iterator<char>());
-    torch::IValue ivalue = torch::pickle_load(data);   
-    return (void*) new LanternObject<torch::IValue>(ivalue);
+    torch::IValue ivalue = torch::pickle_load(data); 
+    return make_unique::IValue(ivalue);  
     LANTERN_FUNCTION_END
 }
 
 void* _lantern_get_state_dict_keys (void * ivalue)
 {
     LANTERN_FUNCTION_START
-    auto iv = reinterpret_cast<LanternObject<torch::IValue>*>(ivalue)->get();
+    auto iv = from_raw::IValue(ivalue);
     auto d = iv.toGenericDict();
     auto keys = new std::vector<std::string>;
     for (auto i = d.begin(); i != d.end(); ++i)
@@ -97,7 +97,7 @@ void* _lantern_get_state_dict_keys (void * ivalue)
 void * _lantern_get_state_dict_values (void* ivalue)
 {
     LANTERN_FUNCTION_START
-    auto iv = reinterpret_cast<LanternObject<torch::IValue>*>(ivalue)->get();
+    auto iv = from_raw::IValue(ivalue);
     auto d = iv.toGenericDict();
     std::vector<torch::Tensor> values;
     for (auto i = d.begin(); i != d.end(); ++i)

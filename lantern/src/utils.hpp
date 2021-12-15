@@ -195,6 +195,8 @@ namespace make_unique {
     void* TensorList (const c10::List<c10::optional<torch::Tensor>>& x);
     void* IntArrayRef (const c10::optional<torch::IntArrayRef>& x);
     void* DoubleArrayRef (const c10::optional<torch::ArrayRef<double>>& x);
+    void* Scalar (const c10::optional<torch::Scalar>& x);
+    void* Tensor (const c10::optional<torch::Tensor>& x);
   }
 
 }

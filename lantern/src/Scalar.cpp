@@ -74,7 +74,7 @@ bool _lantern_Scalar_to_bool(void *self)
 void *_lantern_Scalar_nullopt()
 {
   LANTERN_FUNCTION_START
-  return (void *)new LanternObject<c10::optional<torch::Scalar>>(c10::nullopt);
+  return make_unique::optional::Scalar(c10::nullopt);
   LANTERN_FUNCTION_END
 }
 

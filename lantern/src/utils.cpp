@@ -454,6 +454,16 @@ namespace make_unique {
       return make_ptr<OptionalArrayRef<double>>(x);
     }
 
+    void* Scalar (const c10::optional<torch::Scalar>& x)
+    {
+      return make_ptr<c10::optional<torch::Scalar>>(x);
+    }
+
+    void* Tensor (const c10::optional<torch::Tensor>& x)
+    {
+      return make_ptr<c10::optional<torch::Tensor>>(x);
+    }
+
   }
 
 }
