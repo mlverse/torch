@@ -397,6 +397,10 @@ namespace make_unique {
   {
     return make_ptr<at::Stream>(x);
   }
+  void* IValue (const at::IValue& x)
+  {
+    return make_ptr<at::IValue>(x);
+  }
 
   namespace vector {
 
@@ -494,6 +498,7 @@ namespace from_raw {
   LANTERN_FROM_RAW(bool_t, bool)
   LANTERN_FROM_RAW(double_t, double)
   LANTERN_FROM_RAW(Stream, at::Stream)
+  LANTERN_FROM_RAW(IValue, torch::IValue)
 
   namespace optional {
 

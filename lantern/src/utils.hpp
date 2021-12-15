@@ -173,6 +173,7 @@ namespace make_unique {
   void* bool_t (const bool& x);
   void* double_t (const double& x);
   void* Stream (const at::Stream& x);
+  void* IValue (const torch::IValue& x);
 
   namespace vector {
     void* string (const std::vector<std::string>& x);
@@ -233,6 +234,7 @@ namespace from_raw {
   LANTERN_FROM_RAW_DECL(bool_t, bool)
   LANTERN_FROM_RAW_DECL(double_t, double)
   LANTERN_FROM_RAW_DECL(Stream, at::Stream)
+  LANTERN_FROM_RAW_DECL(IValue, torch::IValue)
 
   namespace optional {
     c10::optional<torch::DimnameList> DimnameList (void* x);
