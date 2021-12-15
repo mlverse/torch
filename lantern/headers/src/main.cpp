@@ -455,6 +455,72 @@ std::string getReturnWrapper (std::string returns)
     }
 }
 
+void appendBody (std::vector<std::string>& bodies, YAML::Node fun_node, bool method, bool skipCuda102)
+{
+    std::string name = fun_node["name"].as<std::string>();
+    std::string arguments = buildArguments(name, fun_node["arguments"]);
+    std::string argumentsCalls = buildArgumentsCalls(name, fun_node["arguments"]);
+    std::string function = toFunction(name, fun_node["arguments"]);
+    std::string returns = buildReturn(fun_node["returns"]);
+    
+
+    auto return_node = fun_node["returns"];
+
+    std::string calls;
+    std::string functionCall;
+    if (method) {
+        function = "Tensor_" + function;
+        calls = buildCalls(name, fun_node["arguments"], 1);
+        std::string firstName = fun_node["arguments"][0]["name"].as<std::string>();
+        functionCall = "from_raw::Tensor(" + firstName + ").";       
+    }
+    else
+    {
+        calls = buildCalls(name, fun_node["arguments"], 0);
+        functionCall = "torch::";
+    }
+    
+    bodies.push_back("void* _lantern_" + function + "(" + arguments + ")");
+    bodies.push_back("{");
+    bodies.push_back("  LANTERN_FUNCTION_START"); 
+
+    if (skipCuda102)
+    {
+        bodies.push_back("#ifdef CUDA102");
+        bodies.push_back("    throw \"Not Implemented\";");
+        bodies.push_back("#else");
+    }   
+
+    if (returns == "void" | (return_node.size() == 0))
+    {
+        bodies.push_back("    " + functionCall + name + "(" + calls + ");");
+        bodies.push_back("    return NULL;");
+    }
+    else
+    {
+        if (return_node.size() == 1)
+        {
+            auto return_wrapper = getReturnWrapper(returns);
+            bodies.push_back("    return " + return_wrapper + "(" + functionCall + name + "(");
+            bodies.push_back("        " + calls + "));");
+        }
+        else
+        {
+            bodies.push_back("    return make_unique::tuple(" + functionCall + name + "(");
+            bodies.push_back("        " + calls + "));");
+        }
+    }
+
+    if (skipCuda102)
+    {
+        bodies.push_back("#endif");
+    }
+
+    bodies.push_back("  LANTERN_FUNCTION_END");
+    bodies.push_back("}");
+    bodies.push_back("");
+}
+
 int main(int argc, char *argv[])
 {
     if (argc < 4)
@@ -483,108 +549,28 @@ int main(int argc, char *argv[])
         std::string arguments = buildArguments(name, config[idx]["arguments"]);
         std::string argumentsCalls = buildArgumentsCalls(name, config[idx]["arguments"]);
         std::string function = toFunction(name, config[idx]["arguments"]);
-        std::string returns = buildReturn(config[idx]["returns"]);
 
-        std::string calls = "";
-        std::string functionCall = "";
         if (hasMethodOf(config[idx], "namespace"))
         {
             headers.push_back("  LANTERN_API void* (LANTERN_PTR _lantern_" + function + ")(" + arguments + ");");
             headers.push_back("  HOST_API void* lantern_" + function + "(" + arguments + ") { LANTERN_CHECK_LOADED void* ret = _lantern_" + function + "(" + argumentsCalls + "); LANTERN_HOST_HANDLER return ret; }");
   
-            calls = buildCalls(name, config[idx]["arguments"], 0);
-            functionCall = "torch::";
-
-            bodies.push_back("void* _lantern_" + function + "(" + arguments + ")");
-            bodies.push_back("{");
-            bodies.push_back("  LANTERN_FUNCTION_START");
-            if (returns == "void" | (config[idx]["returns"].size() == 0))
-            {
-                bodies.push_back("    " + functionCall + name + "(" + calls + ");");
-                bodies.push_back("    return NULL;");
-            }
-            else
-            {
-                if (config[idx]["returns"].size() == 1)
-                {
-                    auto return_wrapper = getReturnWrapper(returns);
-                    bodies.push_back("    return " + return_wrapper + "(" + functionCall + name + "(");
-                    bodies.push_back("        " + calls + "));");
-                }
-                else
-                {
-                    bodies.push_back("    return make_unique::tuple(" + functionCall + name + "(");
-                    bodies.push_back("        " + calls + "));");
-                }
-            }
-            bodies.push_back("  LANTERN_FUNCTION_END");
-            bodies.push_back("}");
-            bodies.push_back("");
+            appendBody(bodies, config[idx], false, false);
         }
 
-        calls = "";
-        functionCall = "";
+    
         if (hasMethodOf(config[idx], "Tensor") || name == "stride")
         {
 
             headers.push_back("  LANTERN_API void* (LANTERN_PTR _lantern_Tensor_" + function + ")(" + arguments + ");");
             headers.push_back("  HOST_API void* lantern_Tensor_" + function + "(" + arguments + ") { void* ret = _lantern_Tensor_" + function + "(" + argumentsCalls + "); LANTERN_HOST_HANDLER return ret; }");
   
-            calls = buildCalls(name, config[idx]["arguments"], 1);
-
-            std::string firstType = config[idx]["arguments"][0]["dynamic_type"].as<std::string>();
-            std::string firstName = config[idx]["arguments"][0]["name"].as<std::string>();
-
-            if (firstType == "at::Tensor" || firstType == "Tensor" || firstType == "torch::Tensor")
-            {
-                functionCall = "from_raw::Tensor(" + firstName + ").";
-            }
-            else
-            {
-                functionCall = "((LanternObject<" + addNamespace(firstType) + ">*)" + firstName + ")->get().";
-            }
-
             bool skipCuda102 = function == "true_divide_tensor_scalar" ||
                                function == "true_divide__tensor_scalar" ||
                                function == "true_divide_tensor_tensor" ||
                                function == "true_divide__tensor_tensor";
 
-
-            bodies.push_back("void* _lantern_Tensor_" + function + "(" + arguments + ")");
-            bodies.push_back("{");
-            bodies.push_back("  LANTERN_FUNCTION_START");
-            if (skipCuda102)
-            {
-                bodies.push_back("#ifdef CUDA102");
-                bodies.push_back("    throw \"Not Implemented\";");
-                bodies.push_back("#else");
-            }
-            if (returns == "void" | (config[idx]["returns"].size() == 0))
-            {
-                bodies.push_back("    " + functionCall + name + "(" + calls + ");");
-                bodies.push_back("    return NULL;");
-            }
-            else
-            {
-                if (config[idx]["returns"].size() == 1)
-                {
-                    auto return_wrapper = getReturnWrapper(returns);
-                    bodies.push_back("    return " + return_wrapper + "(" + functionCall + name + "(");
-                    bodies.push_back("        " + calls + "));");
-                }
-                else
-                {
-                    bodies.push_back("    return make_unique::tuple(" + functionCall + name + "(");
-                    bodies.push_back("        " + calls + "));");
-                }
-            }
-            if (skipCuda102)
-            {
-                bodies.push_back("#endif");
-            }
-            bodies.push_back("  LANTERN_FUNCTION_END");
-            bodies.push_back("}");
-            bodies.push_back("");
+            appendBody(bodies, config[idx], true, skipCuda102);
         }
     }
 
