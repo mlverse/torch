@@ -83,6 +83,11 @@ void* make_ptr (const T& x) {
   return (void*) std::make_unique<T>(x).release();
 }
 
+template<class T>
+void* make_ptr () {
+  return (void*) std::make_unique<T>().release();
+}
+
 struct NamedTupleHelper {
     std::vector<torch::IValue> elements;
     std::vector<std::string> names;

@@ -13,7 +13,7 @@ using namespace torch::indexing;
 void *_lantern_TensorIndex_new()
 {
     LANTERN_FUNCTION_START
-    return (void *)new std::vector<at::indexing::TensorIndex>();
+    return make_ptr<std::vector<at::indexing::TensorIndex>>();
     LANTERN_FUNCTION_END
 }
 
@@ -90,7 +90,7 @@ void *_lantern_Slice(void *start, void *end, void *step)
     }
 
     auto out = torch::indexing::Slice(start_, end_, step_);
-    return (void *)new Slice(out);
+    return make_ptr<torch::indexing::Slice>(out);
     LANTERN_FUNCTION_END
 }
 
