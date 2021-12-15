@@ -7,6 +7,7 @@
 #include <torch/torch.h>
 
 #include "utils.hpp"
+#include "Function.h"
 
 template <class T>
 void lantern_delete(void *x)
@@ -157,14 +158,14 @@ void _lantern_variable_list_delete(void *x)
 void _lantern_TensorIndex_delete(void *x)
 {
   LANTERN_FUNCTION_START
-  lantern_delete<LanternObject<std::vector<torch::indexing::TensorIndex>>>(x);
+  lantern_delete<std::vector<torch::indexing::TensorIndex>>(x);
   LANTERN_FUNCTION_END_VOID
 }
 
 void _lantern_Slice_delete(void *x)
 {
   LANTERN_FUNCTION_START
-  lantern_delete<LanternObject<torch::indexing::Slice>>(x);
+  lantern_delete<torch::indexing::Slice>(x);
   LANTERN_FUNCTION_END_VOID
 }
 
@@ -179,6 +180,27 @@ void _lantern_optional_vector_int64_t_delete(void *x)
 {
   LANTERN_FUNCTION_START
   lantern_delete<LanternObject<OptionalArrayRef<std::int64_t>>>(x);
+  LANTERN_FUNCTION_END_VOID
+}
+
+void _lantern_Function_lambda_delete (void* x)
+{
+  LANTERN_FUNCTION_START
+  lantern_delete<std::function<torch::autograd::variable_list(torch::autograd::LanternAutogradContext *, torch::autograd::variable_list)>>(x);
+  LANTERN_FUNCTION_END_VOID
+}
+
+void _lantern_autograd_edge_list_delete (void* x)
+{
+  LANTERN_FUNCTION_START
+  lantern_delete<torch::autograd::edge_list>(x);
+  LANTERN_FUNCTION_END_VOID
+}
+
+void _lantern_autograd_edge_delete (void* x)
+{
+  LANTERN_FUNCTION_START
+  lantern_delete<torch::autograd::Edge>(x);
   LANTERN_FUNCTION_END_VOID
 }
 

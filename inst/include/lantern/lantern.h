@@ -2215,6 +2215,32 @@ HOST_API void lantern_optional_vector_double_delete (void* x)
   LANTERN_HOST_HANDLER;
 }
 
+LANTERN_API void (LANTERN_PTR _lantern_Function_lambda_delete) (void* x);
+HOST_API void lantern_Function_lambda_delete (void* x)
+{
+  LANTERN_CHECK_LOADED
+   _lantern_Function_lambda_delete(x);
+  LANTERN_HOST_HANDLER; 
+}
+
+LANTERN_API void (LANTERN_PTR _lantern_autograd_edge_list_delete) (void* x);
+HOST_API void lantern_autograd_edge_list_delete (void* x)
+{
+  LANTERN_CHECK_LOADED
+   _lantern_autograd_edge_list_delete(x);
+  LANTERN_HOST_HANDLER;
+  
+}
+
+LANTERN_API void (LANTERN_PTR _lantern_autograd_edge_delete) (void* x);
+HOST_API void lantern_autograd_edge_delete (void* x)
+{
+  LANTERN_CHECK_LOADED
+   _lantern_autograd_edge_delete(x);
+  LANTERN_HOST_HANDLER;
+  
+}
+
   /* Autogen Headers -- Start */
   LANTERN_API void* (LANTERN_PTR _lantern__cast_byte_tensor_bool)(void* self, void* non_blocking);
   HOST_API void* lantern__cast_byte_tensor_bool(void* self, void* non_blocking) { LANTERN_CHECK_LOADED void* ret = _lantern__cast_byte_tensor_bool(self, non_blocking); LANTERN_HOST_HANDLER return ret; }
@@ -7807,6 +7833,9 @@ LOAD_SYMBOL(_lantern_bool_get);
 LOAD_SYMBOL(_lantern_int64_t_get);
 LOAD_SYMBOL(_lantern_double_get);
 LOAD_SYMBOL(_lantern_optional_vector_double_delete);
+LOAD_SYMBOL(_lantern_Function_lambda_delete);
+LOAD_SYMBOL(_lantern_autograd_edge_list_delete);
+LOAD_SYMBOL(_lantern_autograd_edge_delete);
   /* Autogen Symbols -- Start */
   LOAD_SYMBOL(_lantern__cast_byte_tensor_bool)
   LOAD_SYMBOL(_lantern__cast_char_tensor_bool)

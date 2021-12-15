@@ -274,6 +274,10 @@ void*  rcpp_call_forward (void* forward, void* ctx, void* inputs) {
 // [[Rcpp::export]]
 Rcpp::XPtr<XPtrTorch> cpp_Function_lambda (Rcpp::Function f)
 {
+  // TODO: this is probably the object that leaks as it doesn't seem to be deleted
+  // to anything. We should probably store a pointer to it in the object return by
+  // lantern_Function_lambda and callback to Rcpp to delete this function when 
+  // the object is deleted.
   auto fun = (void *)new std::function<void*(void *, void*)>([f](void *ctx, void* inputs) {
     LANTERN_CALLBACK_START
     std::packaged_task<void*()> task([f, ctx, inputs]() {
@@ -295,7 +299,7 @@ Rcpp::XPtr<XPtrTorch> cpp_Function_lambda (Rcpp::Function f)
     LANTERN_CALLBACK_END("Unknown error in lambda function.", _lantern_variable_list_new())
   });
   
-  XPtrTorch out = lantern_Function_lambda(&rcpp_call_forward, fun);
+  auto out = XPtrTorch(lantern_Function_lambda(&rcpp_call_forward, fun), lantern_Function_lambda_delete);
   return make_xptr<XPtrTorch>(out);
 }
 
@@ -483,13 +487,17 @@ std::string cpp_autograd_node_name (Rcpp::XPtr<XPtrTorch> self)
 // [[Rcpp::export]]
 Rcpp::List cpp_autograd_node_next_edges (Rcpp::XPtr<XPtrTorch> self)
 {
-  auto next_edges = lantern_Node_next_edges(self->get());
+  auto next_edges = XPtrTorch(lantern_Node_next_edges(self->get()), 
+                              lantern_autograd_edge_list_delete);
   
   Rcpp::List out;
-  auto size = lantern_edge_list_size(next_edges);
+  auto size = lantern_edge_list_size(next_edges.get());
   for (int i = 0; i < size; i ++)
   {
-    out.push_back(make_xptr<XPtrTorch>(lantern_edge_list_at(next_edges, i)));
+    out.push_back(Rcpp::XPtr<XPtrTorch>(new XPtrTorch(
+        lantern_edge_list_at(next_edges.get(), i),
+        lantern_autograd_edge_delete
+    )));
   }
   
   return out;
