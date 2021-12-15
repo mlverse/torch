@@ -100,6 +100,7 @@ template<typename T>
 class Vector {
   public:
     Vector(std::vector<T> x) : x_(x) {}
+    Vector() : x_() {}
     std::vector<T> x_;
     operator std::array<T,2>() const {
       return std::array<T,2>{x_[0], x_[1]};
@@ -113,6 +114,11 @@ class Vector {
     operator std::vector<T>() const {
       return x_;
     }
+    void push_back(T x) {
+      x_.push_back(x);
+    }
+    size_t size() const { return x_.size(); }
+    T at(size_t i) const { return x_.at(i);}
 };
 
 // a wrapper class for optional<torch::ArrayRef<T>> that owns all of it's memory and
@@ -177,9 +183,13 @@ namespace make_unique {
 
   namespace vector {
     void* string (const std::vector<std::string>& x);
+    void* string ();
     void* int64_t (const std::vector<std::int64_t>& x);
+    void* int64_t ();
     void* double_t (const std::vector<double>& x);
+    void* double_t ();
     void* bool_t (const std::vector<bool>& x);
+    void* bool_t ();
     void* Scalar (const std::vector<torch::Scalar>& x);
   }
 
@@ -197,6 +207,8 @@ namespace make_unique {
     void* DoubleArrayRef (const c10::optional<torch::ArrayRef<double>>& x);
     void* Scalar (const c10::optional<torch::Scalar>& x);
     void* Tensor (const c10::optional<torch::Tensor>& x);
+    void* double_t (const c10::optional<double>& x);
+    void* int64_t (const c10::optional<std::int64_t>& x);
   }
 
 }

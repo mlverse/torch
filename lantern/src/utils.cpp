@@ -12,27 +12,27 @@ void *_lantern_vector_int64_t(int64_t *x, size_t x_size)
 {
   LANTERN_FUNCTION_START
   auto out = std::vector<int64_t>(x, x + x_size);
-  return (void *)new LanternObject<std::vector<int64_t>>(out);
+  return make_unique::vector::int64_t(out);
   LANTERN_FUNCTION_END
 }
 
 int64_t _lantern_vector_int64_t_size(void* self)
 {
   LANTERN_FUNCTION_START
-  return reinterpret_cast<std::vector<int64_t> *>(self)->size();
+  return from_raw::vector::int64_t(self).size();
   LANTERN_FUNCTION_END
 }
 
 int64_t _lantern_vector_int64_t_at (void* self, int64_t index)
 {
-  return reinterpret_cast<std::vector<int64_t> *>(self)->at(index);
+  return from_raw::vector::int64_t(self).at(index);
 }
 
 void *_lantern_vector_double(double *x, size_t x_size)
 {
   LANTERN_FUNCTION_START
   auto out = std::vector<double>(x, x + x_size);
-  return (void *)new LanternObject<std::vector<double>>(out);
+  return make_unique::vector::double_t(out);
   LANTERN_FUNCTION_END
 }
 
@@ -96,32 +96,17 @@ void * _lantern_optional_vector_int64_t(int64_t * x, size_t x_size, bool is_null
   LANTERN_FUNCTION_END
 }
 
-void *_lantern_IntArrayRef(int64_t *x, size_t x_size)
-{
-  LANTERN_FUNCTION_START
-  torch::IntArrayRef out = std::vector<int64_t>(x, x + x_size);
-  return (void *)new LanternObject<torch::IntArrayRef>(out);
-  LANTERN_FUNCTION_END
-}
-
-void *_lantern_int(int x)
-{
-  LANTERN_FUNCTION_START
-  return (void *)new LanternObject<int>(x);
-  LANTERN_FUNCTION_END
-}
-
 void *_lantern_int64_t(int64_t x)
 {
   LANTERN_FUNCTION_START
-  return (void *)new LanternObject<int64_t>(x);
+  return make_unique::int64_t(x);
   LANTERN_FUNCTION_END
 }
 
 void *_lantern_double(double x)
 {
   LANTERN_FUNCTION_START
-  return (void *)new LanternObject<double>(x);
+  return make_unique::double_t(x);
   LANTERN_FUNCTION_END
 }
 
@@ -134,7 +119,7 @@ void *_lantern_optional_double(double x, bool is_null)
   else
     out = x;
 
-  return (void *)new LanternObject<c10::optional<double>>(out);
+  return make_unique::optional::double_t(out);
   LANTERN_FUNCTION_END
 }
 
@@ -147,14 +132,14 @@ void *_lantern_optional_int64_t(int64_t x, bool is_null)
   else
     out = x;
 
-  return (void *)new LanternObject<c10::optional<int64_t>>(out);
+  return make_unique::optional::int64_t(out);
   LANTERN_FUNCTION_END
 }
 
 void *_lantern_bool(bool x)
 {
   LANTERN_FUNCTION_START
-  return (void *)new LanternObject<bool>(x);
+  return make_unique::bool_t(x);
   LANTERN_FUNCTION_END
 }
 
@@ -211,28 +196,28 @@ void *_lantern_Tensor_undefined()
 void *_lantern_vector_string_new()
 {
   LANTERN_FUNCTION_START
-  return (void *)new std::vector<std::string>();
+  return make_unique::vector::string();
   LANTERN_FUNCTION_END
 }
 
 void _lantern_vector_string_push_back(void *self, const char *x)
 {
   LANTERN_FUNCTION_START
-  reinterpret_cast<std::vector<std::string> *>(self)->push_back(std::string(x));
+  from_raw::vector::string(self).push_back(std::string(x));
   LANTERN_FUNCTION_END_VOID
 }
 
 int64_t _lantern_vector_string_size(void *self)
 {
   LANTERN_FUNCTION_START
-  return reinterpret_cast<std::vector<std::string> *>(self)->size();
+  return from_raw::vector::string(self).size();
   LANTERN_FUNCTION_END_RET(0)
 }
 
 const char *_lantern_vector_string_at(void *self, int64_t i)
 {
   LANTERN_FUNCTION_START
-  auto str = reinterpret_cast<std::vector<std::string> *>(self)->at(i);
+  auto str = from_raw::vector::string(self).at(i);
   char *cstr = new char[str.length() + 1];
   strcpy(cstr, str.c_str());
   return cstr;
@@ -242,41 +227,41 @@ const char *_lantern_vector_string_at(void *self, int64_t i)
 void *_lantern_vector_bool_new()
 {
   LANTERN_FUNCTION_START
-  return (void *)new std::vector<bool>();
+  return make_unique::vector::bool_t();
   LANTERN_FUNCTION_END
 }
 
 void _lantern_vector_bool_push_back(void *self, bool x)
 {
   LANTERN_FUNCTION_START
-  reinterpret_cast<std::vector<bool> *>(self)->push_back(x);
+  from_raw::vector::bool_t(self).push_back(x);
   LANTERN_FUNCTION_END_VOID
 }
 
 int64_t _lantern_vector_bool_size(void *self)
 {
   LANTERN_FUNCTION_START
-  return reinterpret_cast<std::vector<bool> *>(self)->size();
+  return from_raw::vector::bool_t(self).size();
   LANTERN_FUNCTION_END_RET(0)
 }
 
 bool _lantern_vector_bool_at(void *self, int64_t i)
 {
   LANTERN_FUNCTION_START
-  return reinterpret_cast<std::vector<bool> *>(self)->at(i);
+  return from_raw::vector::bool_t(self).at(i);
   LANTERN_FUNCTION_END_RET(false)
 }
 
 void * _lantern_string_new (const char * value)
 {
   LANTERN_FUNCTION_START
-  return (void *)new LanternObject<std::string>(std::string(value));
+  return make_unique::string(std::string(value));
   LANTERN_FUNCTION_END
 }
 
 const char * _lantern_string_get (void* self)
 {
-  auto str = *reinterpret_cast<std::string*>(self);
+  auto str = from_raw::string(self);
   char *cstr = new char[str.length() + 1];
   strcpy(cstr, str.c_str());
   return cstr;
@@ -408,17 +393,33 @@ namespace make_unique {
     {
       return make_ptr<std::vector<std::string>>(x);
     }
+    void* string ()
+    {
+      return make_ptr<std::vector<std::string>>();
+    }
     void* int64_t (const std::vector<std::int64_t>& x)
     {
       return make_ptr<std::vector<std::int64_t>>(x);
+    }
+    void* int64_t ()
+    {
+      return make_ptr<std::vector<std::int64_t>>();
     }
     void* bool_t (const std::vector<bool>& x)
     {
       return make_ptr<Vector<bool>>(x);
     }
+    void* bool_t ()
+    {
+      return make_ptr<Vector<bool>>();
+    }
     void* double_t (const std::vector<double>& x)
     {
       return make_ptr<std::vector<double>>(x);
+    }
+    void* double_t ()
+    {
+      return make_ptr<std::vector<double>>();
     }
     void* Scalar (const std::vector<torch::Scalar>& x)
     {
@@ -432,6 +433,16 @@ namespace make_unique {
     void* bool_t (const c10::optional<bool>& x)
     {
       return make_ptr<c10::optional<bool>>(x);
+    }
+
+    void* double_t (const c10::optional<double>& x)
+    {
+      return make_ptr<c10::optional<double>>(x);
+    }
+
+    void* int64_t (const c10::optional<std::int64_t>& x)
+    {
+      return make_ptr<c10::optional<std::int64_t>>(x);
     }
 
     void* string (const c10::optional<std::string>& x)

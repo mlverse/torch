@@ -188,8 +188,6 @@ enum IValue_types {
   HOST_API void * lantern_vector_int64_t(int64_t *x, size_t x_size) {LANTERN_CHECK_LOADED void * ret = _lantern_vector_int64_t(x, x_size); LANTERN_HOST_HANDLER return ret;}
   LANTERN_API void *(LANTERN_PTR _lantern_vector_double)(double *x, size_t x_size);
   HOST_API void * lantern_vector_double(double *x, size_t x_size) {LANTERN_CHECK_LOADED void * ret = _lantern_vector_double(x, x_size); LANTERN_HOST_HANDLER return ret;}
-  LANTERN_API void *(LANTERN_PTR _lantern_IntArrayRef)(int64_t *x, size_t x_size);
-  HOST_API void * lantern_IntArrayRef(int64_t *x, size_t x_size) {LANTERN_CHECK_LOADED void * ret = _lantern_IntArrayRef(x, x_size); LANTERN_HOST_HANDLER return ret;}
   LANTERN_API void *(LANTERN_PTR _lantern_MemoryFormat_Contiguous)();
   HOST_API void * lantern_MemoryFormat_Contiguous() {LANTERN_CHECK_LOADED void * ret = _lantern_MemoryFormat_Contiguous(); LANTERN_HOST_HANDLER return ret;}
   LANTERN_API void *(LANTERN_PTR _lantern_MemoryFormat_Preserve)();
@@ -256,8 +254,6 @@ enum IValue_types {
   HOST_API void * lantern_Scalar(void *value, const char *type) {LANTERN_CHECK_LOADED void * ret = _lantern_Scalar(value, type); LANTERN_HOST_HANDLER return ret;}
   LANTERN_API void *(LANTERN_PTR _lantern_vector_get)(void *x, int i);
   HOST_API void * lantern_vector_get(void *x, int i) {LANTERN_CHECK_LOADED void * ret = _lantern_vector_get(x, i); LANTERN_HOST_HANDLER return ret;}
-  LANTERN_API void *(LANTERN_PTR _lantern_int)(int x);
-  HOST_API void * lantern_int(int x) {LANTERN_CHECK_LOADED void * ret = _lantern_int(x); LANTERN_HOST_HANDLER return ret;}
   LANTERN_API void *(LANTERN_PTR _lantern_int64_t)(int64_t x);
   HOST_API void * lantern_int64_t(int64_t x) {LANTERN_CHECK_LOADED void * ret = _lantern_int64_t(x); LANTERN_HOST_HANDLER return ret;}
   LANTERN_API void *(LANTERN_PTR _lantern_bool)(bool x);
@@ -7476,7 +7472,6 @@ bool lanternInit(const std::string &libPath, std::string *pError)
   LOAD_SYMBOL(_lantern_vector_int64_t);
   LOAD_SYMBOL(_lantern_optional_vector_int64_t_delete);
   LOAD_SYMBOL(_lantern_vector_double);
-  LOAD_SYMBOL(_lantern_IntArrayRef);
   LOAD_SYMBOL(_lantern_MemoryFormat_Contiguous);
   LOAD_SYMBOL(_lantern_MemoryFormat_Preserve);
   LOAD_SYMBOL(_lantern_MemoryFormat_ChannelsLast);
@@ -7510,7 +7505,6 @@ bool lanternInit(const std::string &libPath, std::string *pError)
   LOAD_SYMBOL(_lantern_TensorList_size);
   LOAD_SYMBOL(_lantern_Scalar);
   LOAD_SYMBOL(_lantern_vector_get);
-  LOAD_SYMBOL(_lantern_int);
   LOAD_SYMBOL(_lantern_int64_t);
   LOAD_SYMBOL(_lantern_bool);
   LOAD_SYMBOL(_lantern_Dimname);
