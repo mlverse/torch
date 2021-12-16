@@ -328,11 +328,11 @@ namespace make_unique {
   }
   void* Generator (const torch::Generator& x)
   {
-    return make_ptr<LanternObject<torch::Generator>>(x);
+    return make_ptr<torch::Generator>(x);
   }
   void* MemoryFormat (const torch::MemoryFormat& x)
   {
-    return make_ptr<LanternObject<torch::MemoryFormat>>(x);
+    return make_ptr<torch::MemoryFormat>(x);
   }
   void* IntArrayRef (const torch::IntArrayRef& x)
   {
@@ -452,7 +452,7 @@ namespace make_unique {
 
     void* TensorList (const c10::List<c10::optional<torch::Tensor>>& x)
     {
-      return make_ptr<LanternObject<c10::List<c10::optional<torch::Tensor>>>>(x);
+      return make_ptr<c10::List<c10::optional<torch::Tensor>>>(x);
     }
 
     void* IntArrayRef (const c10::optional<torch::ArrayRef<std::int64_t>>& x)
@@ -480,7 +480,7 @@ namespace make_unique {
 }
 
 #define LANTERN_FROM_RAW(name, type) \
-  type& name(void* x) {return reinterpret_cast<LanternObject<type>*>(x)->get();}
+  type& name(void* x) {return *reinterpret_cast<type*>(x);}
 
 
 namespace alias {
@@ -548,7 +548,7 @@ namespace from_raw {
 
     c10::optional<std::int64_t> int64_t (void* x) {
       if (!x) return c10::nullopt;
-      return reinterpret_cast<LanternObject<c10::optional<std::int64_t>>*>(x)->get();
+      return *reinterpret_cast<c10::optional<std::int64_t>*>(x);
     }
 
     c10::optional<bool> bool_t (void* x) {
@@ -564,7 +564,7 @@ namespace from_raw {
     c10::optional<std::string> string (void* x)
     {
       if (!x) return c10::nullopt;
-      return reinterpret_cast<LanternObject<std::string>*>(x)->get();
+      return *reinterpret_cast<std::string*>(x);
     }
 
     c10::optional<torch::MemoryFormat> MemoryFormat (void* x) {
@@ -578,15 +578,15 @@ namespace from_raw {
     }
 
     c10::List<c10::optional<torch::Tensor>>& TensorList (void* x) {
-      return reinterpret_cast<LanternObject<c10::List<c10::optional<torch::Tensor>>>*>(x)->get();
+      return *reinterpret_cast<c10::List<c10::optional<torch::Tensor>>*>(x);
     }
 
     OptionalArrayRef<std::int64_t>& IntArrayRef (void* x) {
-      return reinterpret_cast<LanternObject<OptionalArrayRef<std::int64_t>>*>(x)->get();
+      return *reinterpret_cast<OptionalArrayRef<std::int64_t>*>(x);
     }
 
     OptionalArrayRef<double>& DoubleArrayRef (void* x) {
-      return reinterpret_cast<LanternObject<OptionalArrayRef<double>>*>(x)->get();
+      return *reinterpret_cast<OptionalArrayRef<double>*>(x);
     }
 
   }

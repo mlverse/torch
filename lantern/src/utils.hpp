@@ -1,27 +1,6 @@
 #pragma once
 
 template <class T>
-class LanternObject
-{
-private:
-  T _object;
-
-public:
-  LanternObject(T object) : _object(std::forward<T>(object))
-  {
-  }
-
-  LanternObject()
-  {
-  }
-
-  T &get()
-  {
-    return _object;
-  }
-};
-
-template <class T>
 class LanternPtr
 {
 private:
@@ -64,19 +43,6 @@ std::vector<void *> to_vector(std::tuple<T...> x)
              x);
   return out;
 }
-
-template <class T>
-auto optional(void *x)
-{
-
-  if (x == nullptr)
-  {
-    return std::make_shared<LanternObject<c10::optional<T>>>(c10::nullopt);
-  } 
-
-  auto z = ((LanternObject<T> *)x)->get();
-  return std::make_shared<LanternObject<c10::optional<T>>>(z);
-} 
 
 template<class T>
 void* make_ptr (const T& x) {

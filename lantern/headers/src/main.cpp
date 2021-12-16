@@ -104,18 +104,6 @@ std::string addNamespace(std::string name)
     return name;
 }
 
-std::string lanternObject(std::string type)
-{
-    if (type == "Device" | type == "std::vector<torch::Dimname>")
-    {
-        return "LanternPtr";
-    }
-    else
-    {
-        return "LanternObject";
-    }
-}
-
 std::string buildCalls(std::string name, YAML::Node node, size_t start)
 {
     std::string arguments = "";

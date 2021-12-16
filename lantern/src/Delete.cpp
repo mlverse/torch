@@ -18,91 +18,91 @@ void lantern_delete(void *x)
 void _lantern_Tensor_delete(void *x)
 {
   LANTERN_FUNCTION_START
-  lantern_delete<LanternObject<torch::Tensor>>(x);
+  lantern_delete<torch::Tensor>(x);
   LANTERN_FUNCTION_END_VOID
 }
 
 void _lantern_bool_delete(void *x)
 {
   LANTERN_FUNCTION_START
-  lantern_delete<LanternObject<bool>>(x);
+  lantern_delete<bool>(x);
   LANTERN_FUNCTION_END_VOID
 }
 
 void _lantern_optional_bool_delete (void* x)
 {
   LANTERN_FUNCTION_START
-  lantern_delete<LanternObject<c10::optional<bool>>>(x);
+  lantern_delete<c10::optional<bool>>(x);
   LANTERN_FUNCTION_END_VOID
 }
 
 void _lantern_int64_t_delete(void *x)
 {
   LANTERN_FUNCTION_START
-  lantern_delete<LanternObject<int64_t>>(x);
+  lantern_delete<int64_t>(x);
   LANTERN_FUNCTION_END_VOID
 }
 
 void _lantern_vector_int64_t_delete(void *x)
 {
   LANTERN_FUNCTION_START
-  lantern_delete<LanternObject<std::vector<int64_t>>>(x);
+  lantern_delete<std::vector<int64_t>>(x);
   LANTERN_FUNCTION_END_VOID
 }
 
 void _lantern_TensorList_delete(void *x)
 {
   LANTERN_FUNCTION_START
-  lantern_delete<LanternObject<std::vector<torch::Tensor>>>(x);
+  lantern_delete<std::vector<torch::Tensor>>(x);
   LANTERN_FUNCTION_END_VOID
 }
 
 void _lantern_OptionalTensorList_delete(void* x)
 {
   LANTERN_FUNCTION_START
-  lantern_delete<LanternObject<c10::List<c10::optional<torch::Tensor>>>>(x);
+  lantern_delete<c10::List<c10::optional<torch::Tensor>>>(x);
   LANTERN_FUNCTION_END_VOID
 }
 
 void _lantern_double_delete(void *x)
 {
   LANTERN_FUNCTION_START
-  lantern_delete<LanternObject<double>>(x);
+  lantern_delete<double>(x);
   LANTERN_FUNCTION_END_VOID
 }
 
 void _lantern_QScheme_delete(void *x)
 {
   LANTERN_FUNCTION_START
-  lantern_delete<LanternObject<torch::QScheme>>(x);
+  lantern_delete<torch::QScheme>(x);
   LANTERN_FUNCTION_END_VOID
 }
 
 void _lantern_Scalar_delete(void *x)
 {
   LANTERN_FUNCTION_START
-  lantern_delete<LanternObject<torch::Scalar>>(x);
+  lantern_delete<torch::Scalar>(x);
   LANTERN_FUNCTION_END_VOID
 }
 
 void _lantern_ScalarType_delete(void *x)
 {
   LANTERN_FUNCTION_START
-  lantern_delete<LanternObject<torch::ScalarType>>(x);
+  lantern_delete<torch::ScalarType>(x);
   LANTERN_FUNCTION_END_VOID
 }
 
 void _lantern_TensorOptions_delete(void *x)
 {
   LANTERN_FUNCTION_START
-  lantern_delete<LanternObject<torch::TensorOptions>>(x);
+  lantern_delete<torch::TensorOptions>(x);
   LANTERN_FUNCTION_END_VOID
 }
 
 void _lantern_Dtype_delete(void *x)
 {
   LANTERN_FUNCTION_START
-  lantern_delete<LanternObject<torch::Dtype>>(x);
+  lantern_delete<torch::Dtype>(x);
   LANTERN_FUNCTION_END_VOID
 }
 
@@ -116,14 +116,14 @@ void _lantern_Device_delete(void *x)
 void _lantern_Layout_delete(void *x)
 {
   LANTERN_FUNCTION_START
-  lantern_delete<LanternObject<torch::Layout>>(x);
+  lantern_delete<torch::Layout>(x);
   LANTERN_FUNCTION_END_VOID
 }
 
 void _lantern_Generator_delete(void *x)
 {
   LANTERN_FUNCTION_START
-  lantern_delete<LanternObject<torch::Generator>>(x);
+  lantern_delete<torch::Generator>(x);
   LANTERN_FUNCTION_END_VOID
 }
 
@@ -144,14 +144,14 @@ void _lantern_DimnameList_delete(void *x)
 void _lantern_MemoryFormat_delete(void *x)
 {
   LANTERN_FUNCTION_START
-  lantern_delete<LanternObject<torch::MemoryFormat>>(x);
+  lantern_delete<torch::MemoryFormat>(x);
   LANTERN_FUNCTION_END_VOID
 }
 
 void _lantern_variable_list_delete(void *x)
 {
   LANTERN_FUNCTION_START
-  lantern_delete<LanternObject<torch::autograd::variable_list>>(x);
+  lantern_delete<torch::autograd::variable_list>(x);
   LANTERN_FUNCTION_END_VOID
 }
 
@@ -172,14 +172,14 @@ void _lantern_Slice_delete(void *x)
 void _lantern_optional_int64_t_delete(void *x)
 {
   LANTERN_FUNCTION_START
-  lantern_delete<LanternObject<c10::optional<int64_t>>>(x);
+  lantern_delete<c10::optional<int64_t>>(x);
   LANTERN_FUNCTION_END_VOID
 }
 
 void _lantern_optional_vector_int64_t_delete(void *x)
 {
   LANTERN_FUNCTION_START
-  lantern_delete<LanternObject<OptionalArrayRef<std::int64_t>>>(x);
+  lantern_delete<OptionalArrayRef<std::int64_t>>(x);
   LANTERN_FUNCTION_END_VOID
 }
 
@@ -207,7 +207,7 @@ void _lantern_autograd_edge_delete (void* x)
 void _lantern_optional_vector_double_delete(void *x)
 {
   LANTERN_FUNCTION_START
-  lantern_delete<LanternObject<OptionalArrayRef<double>>>(x);
+  lantern_delete<OptionalArrayRef<double>>(x);
   LANTERN_FUNCTION_END_VOID
 }
 
@@ -221,7 +221,7 @@ void _lantern_PackedSequence_delete(void *x)
 void _lantern_Storage_delete(void *x)
 {
   LANTERN_FUNCTION_START
-  lantern_delete<LanternObject<torch::Storage>>(x);
+  lantern_delete<torch::Storage>(x);
   LANTERN_FUNCTION_END_VOID
 }
 
@@ -249,14 +249,14 @@ void _lantern_vector_string_delete (void * x)
 void _lantern_string_delete (void * x)
 {
   LANTERN_FUNCTION_START
-  lantern_delete<LanternObject<std::string>>(x);
+  lantern_delete<std::string>(x);
   LANTERN_FUNCTION_END_VOID
 }
 
 void _lantern_Stack_delete (void * x)
 {
   LANTERN_FUNCTION_START;
-  lantern_delete<LanternObject<torch::jit::Stack>>(x);
+  lantern_delete<torch::jit::Stack>(x);
   LANTERN_FUNCTION_END_VOID;
 }
 
@@ -277,7 +277,7 @@ void _lantern_JITModule_delete (void* x)
 void _lantern_TraceableFunction_delete (void* x)
 {
   LANTERN_FUNCTION_START;
-  lantern_delete<LanternObject<std::function<torch::jit::Stack(torch::jit::Stack)>>>(x);
+  lantern_delete<std::function<torch::jit::Stack(torch::jit::Stack)>>(x);
   LANTERN_FUNCTION_END_VOID;
 }
 
@@ -298,14 +298,14 @@ void _lantern_vector_void_delete(void* x)
 void _lantern_optional_tensor_delete (void* x)
 {
   LANTERN_FUNCTION_START;
-  lantern_delete<LanternObject<c10::optional<torch::Tensor>>>(x);
+  lantern_delete<c10::optional<torch::Tensor>>(x);
   LANTERN_FUNCTION_END_VOID;
 }
 
 void _lantern_optional_device_delete (void* x)
 {
   LANTERN_FUNCTION_START;
-  lantern_delete<LanternObject<c10::optional<torch::Device>>>(x);
+  lantern_delete<c10::optional<torch::Device>>(x);
   LANTERN_FUNCTION_END_VOID;
 }
 
