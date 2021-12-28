@@ -630,6 +630,37 @@ void delete_dimname_list (void* x)
   lantern_DimnameList_delete(x);
 }
 
+// Optional dimname list
+
+SEXP operator_sexp_optional_dimname_list (const XPtrTorchOptionalDimnameList* self)
+{
+  if (!lantern_optional_dimname_list_has_value(self->get()))
+  {
+    return R_NilValue;
+  }
+  
+  return Rcpp::wrap(XPtrTorchDimnameList(lantern_optional_dimname_list_value(self->get())));
+}
+
+XPtrTorchOptionalDimnameList from_sexp_optional_dimname_list (SEXP x)
+{
+  if (TYPEOF(x) == NILSXP)
+  {
+    return XPtrTorchOptionalDimnameList(lantern_optional_dimname_list(nullptr));
+  }
+  else
+  {
+    return XPtrTorchOptionalDimnameList(lantern_optional_dimname_list(
+      Rcpp::as<XPtrTorchDimnameList>(x).get()
+    ));
+  }
+}
+
+void delete_optional_dimname_list (void* x)
+{
+  lantern_optional_dimname_list_delete(x);
+}
+
 // generator
 
 SEXP operator_sexp_generator (const XPtrTorchGenerator* self)

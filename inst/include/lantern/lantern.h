@@ -134,7 +134,30 @@ enum IValue_types {
     IValueTypeUnknownType
 };
 
+#define LANTERN_TYPE2VOID_DECL(type, name)                            \
+  LANTERN_API type (LANTERN_PTR _##name) (void*);                     \
+  HOST_API type name (void* x) {                                      \
+      LANTERN_CHECK_LOADED                                            \
+      type ret = _##name(x);                                          \
+      LANTERN_HOST_HANDLER return ret;                                \
+  }                                                                     
 
+#define LANTERN_VOID2VOID_DECL(type, name)                            \
+  LANTERN_API type (LANTERN_PTR _##name) (void*);                     \
+  HOST_API type name (void* x) {                                      \
+      LANTERN_CHECK_LOADED                                            \
+      _##name(x);                                          \
+      LANTERN_HOST_HANDLER;                                \
+  }
+
+#define LANTERN_OPTIONAL_DECLS(name)                                  \
+  LANTERN_TYPE2VOID_DECL(void*, lantern_optional_##name)              \
+  LANTERN_TYPE2VOID_DECL(bool, lantern_optional_##name##_has_value)   \
+  LANTERN_TYPE2VOID_DECL(void*, lantern_optional_##name##_value)      \
+  LANTERN_VOID2VOID_DECL(void, lantern_optional_##name##_delete)      \
+
+
+LANTERN_OPTIONAL_DECLS(dimname_list)
 
   LANTERN_API void(LANTERN_PTR lanternConfigure)(int log);
   LANTERN_API const char*(LANTERN_PTR lanternVersion)();
@@ -7435,6 +7458,13 @@ bool laternCloseLibrary(void *pLib, std::string *pError)
   }
 }
 
+#define LANTERN_OPTIONAL_LOAD_SYMBOL(name)          \
+  LOAD_SYMBOL(_lantern_optional_##name);              \
+  LOAD_SYMBOL(_lantern_optional_##name##_has_value);         \
+  LOAD_SYMBOL(_lantern_optional_##name##_value);             \
+  LOAD_SYMBOL(_lantern_optional_##name##_delete);             \
+
+
 bool lanternInit(const std::string &libPath, std::string *pError)
 {
   if (!lanternLoadLibrary(libPath, pError))
@@ -7442,6 +7472,7 @@ bool lanternInit(const std::string &libPath, std::string *pError)
   
   lantern_loaded = true;
 
+  LANTERN_OPTIONAL_LOAD_SYMBOL(dimname_list)
   LOAD_SYMBOL(lanternConfigure);
   LOAD_SYMBOL(lanternVersion);
   LOAD_SYMBOL(lanternSetLastError);

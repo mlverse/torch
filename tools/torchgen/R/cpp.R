@@ -159,8 +159,12 @@ cpp_parameter_type <- function(argument) {
     declaration <- "XPtrTorchoptional_bool"
   }
 
-  if (argument$dynamic_type == "DimnameList") {
+  if (argument$dynamic_type == "DimnameList" && argument$type != "c10::optional<DimnameList>") {
     declaration <-  "XPtrTorchDimnameList"
+  }
+
+  if (argument$dynamic_type == "DimnameList" && argument$type == "c10::optional<DimnameList>") {
+    declaration <-  "XPtrTorchOptionalDimnameList"
   }
 
   if (argument$dynamic_type == "TensorList") {

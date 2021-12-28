@@ -135,6 +135,16 @@ XPtrTorchDimnameList::operator SEXP () const
 XPtrTorchDimnameList::XPtrTorchDimnameList (SEXP x):
   XPtrTorch{from_sexp_dimname_list(x)} {}
 
+// Optional dimame list
+
+XPtrTorchOptionalDimnameList::operator SEXP () const
+{
+  return operator_sexp_optional_dimname_list(this);
+}
+
+XPtrTorchOptionalDimnameList::XPtrTorchOptionalDimnameList (SEXP x):
+  XPtrTorch{from_sexp_optional_dimname_list(x)} {}
+
 // generator
 
 XPtrTorchGenerator::operator SEXP () const

@@ -798,25 +798,25 @@ BEGIN_RCPP
 END_RCPP
 }
 // cpp_torch_method_rename__self_Tensor_names_DimnameList
-XPtrTorchTensor cpp_torch_method_rename__self_Tensor_names_DimnameList(XPtrTorchTensor self, XPtrTorchDimnameList names);
+XPtrTorchTensor cpp_torch_method_rename__self_Tensor_names_DimnameList(XPtrTorchTensor self, XPtrTorchOptionalDimnameList names);
 RcppExport SEXP _torch_cpp_torch_method_rename__self_Tensor_names_DimnameList(SEXP selfSEXP, SEXP namesSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
-    Rcpp::traits::input_parameter< XPtrTorchDimnameList >::type names(namesSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchOptionalDimnameList >::type names(namesSEXP);
     rcpp_result_gen = Rcpp::wrap(cpp_torch_method_rename__self_Tensor_names_DimnameList(self, names));
     return rcpp_result_gen;
 END_RCPP
 }
 // cpp_torch_method_rename_self_Tensor_names_DimnameList
-XPtrTorchTensor cpp_torch_method_rename_self_Tensor_names_DimnameList(XPtrTorchTensor self, XPtrTorchDimnameList names);
+XPtrTorchTensor cpp_torch_method_rename_self_Tensor_names_DimnameList(XPtrTorchTensor self, XPtrTorchOptionalDimnameList names);
 RcppExport SEXP _torch_cpp_torch_method_rename_self_Tensor_names_DimnameList(SEXP selfSEXP, SEXP namesSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
-    Rcpp::traits::input_parameter< XPtrTorchDimnameList >::type names(namesSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchOptionalDimnameList >::type names(namesSEXP);
     rcpp_result_gen = Rcpp::wrap(cpp_torch_method_rename_self_Tensor_names_DimnameList(self, names));
     return rcpp_result_gen;
 END_RCPP
@@ -2881,7 +2881,7 @@ BEGIN_RCPP
 END_RCPP
 }
 // cpp_torch_method_unflatten_self_Tensor_dim_int64_t_sizes_IntArrayRef_names_DimnameList
-XPtrTorchTensor cpp_torch_method_unflatten_self_Tensor_dim_int64_t_sizes_IntArrayRef_names_DimnameList(XPtrTorchTensor self, XPtrTorchindex_int64_t dim, XPtrTorchIntArrayRef sizes, XPtrTorchDimnameList names);
+XPtrTorchTensor cpp_torch_method_unflatten_self_Tensor_dim_int64_t_sizes_IntArrayRef_names_DimnameList(XPtrTorchTensor self, XPtrTorchindex_int64_t dim, XPtrTorchIntArrayRef sizes, XPtrTorchOptionalDimnameList names);
 RcppExport SEXP _torch_cpp_torch_method_unflatten_self_Tensor_dim_int64_t_sizes_IntArrayRef_names_DimnameList(SEXP selfSEXP, SEXP dimSEXP, SEXP sizesSEXP, SEXP namesSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
@@ -2889,7 +2889,7 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
     Rcpp::traits::input_parameter< XPtrTorchindex_int64_t >::type dim(dimSEXP);
     Rcpp::traits::input_parameter< XPtrTorchIntArrayRef >::type sizes(sizesSEXP);
-    Rcpp::traits::input_parameter< XPtrTorchDimnameList >::type names(namesSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchOptionalDimnameList >::type names(namesSEXP);
     rcpp_result_gen = Rcpp::wrap(cpp_torch_method_unflatten_self_Tensor_dim_int64_t_sizes_IntArrayRef_names_DimnameList(self, dim, sizes, names));
     return rcpp_result_gen;
 END_RCPP
@@ -14075,13 +14075,13 @@ BEGIN_RCPP
 END_RCPP
 }
 // cpp_torch_namespace_empty_size_IntArrayRef_names_DimnameList
-XPtrTorchTensor cpp_torch_namespace_empty_size_IntArrayRef_names_DimnameList(XPtrTorchIntArrayRef size, XPtrTorchDimnameList names, XPtrTorchTensorOptions options, XPtrTorchMemoryFormat memory_format);
+XPtrTorchTensor cpp_torch_namespace_empty_size_IntArrayRef_names_DimnameList(XPtrTorchIntArrayRef size, XPtrTorchOptionalDimnameList names, XPtrTorchTensorOptions options, XPtrTorchMemoryFormat memory_format);
 RcppExport SEXP _torch_cpp_torch_namespace_empty_size_IntArrayRef_names_DimnameList(SEXP sizeSEXP, SEXP namesSEXP, SEXP optionsSEXP, SEXP memory_formatSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< XPtrTorchIntArrayRef >::type size(sizeSEXP);
-    Rcpp::traits::input_parameter< XPtrTorchDimnameList >::type names(namesSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchOptionalDimnameList >::type names(namesSEXP);
     Rcpp::traits::input_parameter< XPtrTorchTensorOptions >::type options(optionsSEXP);
     Rcpp::traits::input_parameter< XPtrTorchMemoryFormat >::type memory_format(memory_formatSEXP);
     rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace_empty_size_IntArrayRef_names_DimnameList(size, names, options, memory_format));
@@ -14587,14 +14587,14 @@ BEGIN_RCPP
 END_RCPP
 }
 // cpp_torch_namespace_full_size_IntArrayRef_fill_value_Scalar_names_DimnameList
-XPtrTorchTensor cpp_torch_namespace_full_size_IntArrayRef_fill_value_Scalar_names_DimnameList(XPtrTorchIntArrayRef size, XPtrTorchScalar fill_value, XPtrTorchDimnameList names, XPtrTorchTensorOptions options);
+XPtrTorchTensor cpp_torch_namespace_full_size_IntArrayRef_fill_value_Scalar_names_DimnameList(XPtrTorchIntArrayRef size, XPtrTorchScalar fill_value, XPtrTorchOptionalDimnameList names, XPtrTorchTensorOptions options);
 RcppExport SEXP _torch_cpp_torch_namespace_full_size_IntArrayRef_fill_value_Scalar_names_DimnameList(SEXP sizeSEXP, SEXP fill_valueSEXP, SEXP namesSEXP, SEXP optionsSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< XPtrTorchIntArrayRef >::type size(sizeSEXP);
     Rcpp::traits::input_parameter< XPtrTorchScalar >::type fill_value(fill_valueSEXP);
-    Rcpp::traits::input_parameter< XPtrTorchDimnameList >::type names(namesSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchOptionalDimnameList >::type names(namesSEXP);
     Rcpp::traits::input_parameter< XPtrTorchTensorOptions >::type options(optionsSEXP);
     rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace_full_size_IntArrayRef_fill_value_Scalar_names_DimnameList(size, fill_value, names, options));
     return rcpp_result_gen;
@@ -17994,13 +17994,13 @@ BEGIN_RCPP
 END_RCPP
 }
 // cpp_torch_namespace_ones_size_IntArrayRef_names_DimnameList
-XPtrTorchTensor cpp_torch_namespace_ones_size_IntArrayRef_names_DimnameList(XPtrTorchIntArrayRef size, XPtrTorchDimnameList names, XPtrTorchTensorOptions options);
+XPtrTorchTensor cpp_torch_namespace_ones_size_IntArrayRef_names_DimnameList(XPtrTorchIntArrayRef size, XPtrTorchOptionalDimnameList names, XPtrTorchTensorOptions options);
 RcppExport SEXP _torch_cpp_torch_namespace_ones_size_IntArrayRef_names_DimnameList(SEXP sizeSEXP, SEXP namesSEXP, SEXP optionsSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< XPtrTorchIntArrayRef >::type size(sizeSEXP);
-    Rcpp::traits::input_parameter< XPtrTorchDimnameList >::type names(namesSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchOptionalDimnameList >::type names(namesSEXP);
     Rcpp::traits::input_parameter< XPtrTorchTensorOptions >::type options(optionsSEXP);
     rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace_ones_size_IntArrayRef_names_DimnameList(size, names, options));
     return rcpp_result_gen;
@@ -18374,27 +18374,27 @@ BEGIN_RCPP
 END_RCPP
 }
 // cpp_torch_namespace_rand_size_IntArrayRef_names_DimnameList
-XPtrTorchTensor cpp_torch_namespace_rand_size_IntArrayRef_names_DimnameList(XPtrTorchIntArrayRef size, XPtrTorchDimnameList names, XPtrTorchTensorOptions options);
+XPtrTorchTensor cpp_torch_namespace_rand_size_IntArrayRef_names_DimnameList(XPtrTorchIntArrayRef size, XPtrTorchOptionalDimnameList names, XPtrTorchTensorOptions options);
 RcppExport SEXP _torch_cpp_torch_namespace_rand_size_IntArrayRef_names_DimnameList(SEXP sizeSEXP, SEXP namesSEXP, SEXP optionsSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< XPtrTorchIntArrayRef >::type size(sizeSEXP);
-    Rcpp::traits::input_parameter< XPtrTorchDimnameList >::type names(namesSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchOptionalDimnameList >::type names(namesSEXP);
     Rcpp::traits::input_parameter< XPtrTorchTensorOptions >::type options(optionsSEXP);
     rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace_rand_size_IntArrayRef_names_DimnameList(size, names, options));
     return rcpp_result_gen;
 END_RCPP
 }
 // cpp_torch_namespace_rand_size_IntArrayRef_generator_Generator_names_DimnameList
-XPtrTorchTensor cpp_torch_namespace_rand_size_IntArrayRef_generator_Generator_names_DimnameList(XPtrTorchIntArrayRef size, XPtrTorchGenerator generator, XPtrTorchDimnameList names, XPtrTorchTensorOptions options);
+XPtrTorchTensor cpp_torch_namespace_rand_size_IntArrayRef_generator_Generator_names_DimnameList(XPtrTorchIntArrayRef size, XPtrTorchGenerator generator, XPtrTorchOptionalDimnameList names, XPtrTorchTensorOptions options);
 RcppExport SEXP _torch_cpp_torch_namespace_rand_size_IntArrayRef_generator_Generator_names_DimnameList(SEXP sizeSEXP, SEXP generatorSEXP, SEXP namesSEXP, SEXP optionsSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< XPtrTorchIntArrayRef >::type size(sizeSEXP);
     Rcpp::traits::input_parameter< XPtrTorchGenerator >::type generator(generatorSEXP);
-    Rcpp::traits::input_parameter< XPtrTorchDimnameList >::type names(namesSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchOptionalDimnameList >::type names(namesSEXP);
     Rcpp::traits::input_parameter< XPtrTorchTensorOptions >::type options(optionsSEXP);
     rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace_rand_size_IntArrayRef_generator_Generator_names_DimnameList(size, generator, names, options));
     return rcpp_result_gen;
@@ -18630,27 +18630,27 @@ BEGIN_RCPP
 END_RCPP
 }
 // cpp_torch_namespace_randn_size_IntArrayRef_names_DimnameList
-XPtrTorchTensor cpp_torch_namespace_randn_size_IntArrayRef_names_DimnameList(XPtrTorchIntArrayRef size, XPtrTorchDimnameList names, XPtrTorchTensorOptions options);
+XPtrTorchTensor cpp_torch_namespace_randn_size_IntArrayRef_names_DimnameList(XPtrTorchIntArrayRef size, XPtrTorchOptionalDimnameList names, XPtrTorchTensorOptions options);
 RcppExport SEXP _torch_cpp_torch_namespace_randn_size_IntArrayRef_names_DimnameList(SEXP sizeSEXP, SEXP namesSEXP, SEXP optionsSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< XPtrTorchIntArrayRef >::type size(sizeSEXP);
-    Rcpp::traits::input_parameter< XPtrTorchDimnameList >::type names(namesSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchOptionalDimnameList >::type names(namesSEXP);
     Rcpp::traits::input_parameter< XPtrTorchTensorOptions >::type options(optionsSEXP);
     rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace_randn_size_IntArrayRef_names_DimnameList(size, names, options));
     return rcpp_result_gen;
 END_RCPP
 }
 // cpp_torch_namespace_randn_size_IntArrayRef_generator_Generator_names_DimnameList
-XPtrTorchTensor cpp_torch_namespace_randn_size_IntArrayRef_generator_Generator_names_DimnameList(XPtrTorchIntArrayRef size, XPtrTorchGenerator generator, XPtrTorchDimnameList names, XPtrTorchTensorOptions options);
+XPtrTorchTensor cpp_torch_namespace_randn_size_IntArrayRef_generator_Generator_names_DimnameList(XPtrTorchIntArrayRef size, XPtrTorchGenerator generator, XPtrTorchOptionalDimnameList names, XPtrTorchTensorOptions options);
 RcppExport SEXP _torch_cpp_torch_namespace_randn_size_IntArrayRef_generator_Generator_names_DimnameList(SEXP sizeSEXP, SEXP generatorSEXP, SEXP namesSEXP, SEXP optionsSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< XPtrTorchIntArrayRef >::type size(sizeSEXP);
     Rcpp::traits::input_parameter< XPtrTorchGenerator >::type generator(generatorSEXP);
-    Rcpp::traits::input_parameter< XPtrTorchDimnameList >::type names(namesSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchOptionalDimnameList >::type names(namesSEXP);
     Rcpp::traits::input_parameter< XPtrTorchTensorOptions >::type options(optionsSEXP);
     rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace_randn_size_IntArrayRef_generator_Generator_names_DimnameList(size, generator, names, options));
     return rcpp_result_gen;
@@ -21395,13 +21395,13 @@ BEGIN_RCPP
 END_RCPP
 }
 // cpp_torch_namespace_zeros_size_IntArrayRef_names_DimnameList
-XPtrTorchTensor cpp_torch_namespace_zeros_size_IntArrayRef_names_DimnameList(XPtrTorchIntArrayRef size, XPtrTorchDimnameList names, XPtrTorchTensorOptions options);
+XPtrTorchTensor cpp_torch_namespace_zeros_size_IntArrayRef_names_DimnameList(XPtrTorchIntArrayRef size, XPtrTorchOptionalDimnameList names, XPtrTorchTensorOptions options);
 RcppExport SEXP _torch_cpp_torch_namespace_zeros_size_IntArrayRef_names_DimnameList(SEXP sizeSEXP, SEXP namesSEXP, SEXP optionsSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< XPtrTorchIntArrayRef >::type size(sizeSEXP);
-    Rcpp::traits::input_parameter< XPtrTorchDimnameList >::type names(namesSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchOptionalDimnameList >::type names(namesSEXP);
     Rcpp::traits::input_parameter< XPtrTorchTensorOptions >::type options(optionsSEXP);
     rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace_zeros_size_IntArrayRef_names_DimnameList(size, names, options));
     return rcpp_result_gen;

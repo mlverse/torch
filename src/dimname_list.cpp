@@ -31,7 +31,10 @@ std::vector<std::string> cpp_dimname_list_to_string (XPtrTorchDimnameList x) {
   std::vector<std::string> result;
   
   for (int i = 0; i < size; i++) {
-    result.push_back(lantern_Dimname_to_string(XPtrTorchDimname(lantern_DimnameList_at(x.get(), i)).get()));
+    auto dimname = XPtrTorchDimname(lantern_DimnameList_at(x.get(), i));
+    auto v = lantern_Dimname_to_string(dimname.get());
+    result.push_back(std::string(v));
+    lantern_const_char_delete(v);
   }
 
   return result;

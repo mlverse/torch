@@ -27,6 +27,11 @@ public:
   {
     return *_object;
   }
+  
+  operator T &() const
+  {
+    return *_object;
+  }
 
 };
 
@@ -120,6 +125,32 @@ class OptionalArrayRef {
 };
 
 
+// Objects return from lantern must own all memory necessary to re-use them.
+// This is kind of easy for tensors as heap allocated tensors own all their memory
+// memory. However this is not true for `torch::TensorList` which is just a a reference
+// to a stack allocated vector of tensors. Thus if we simply return `torch::TensorList`
+// we won't be able to reuse it when the stack allocated memory is no longer available.
+// 
+// Types defined in this namespace are wrappers around torch types that don't own their memory
+// thus need a wrapper that can hold the necessary information.
+// Another important thing is that types here must be able to return their objects as references
+// so they can be used in any possible lantern usage - that might include in-place modification
+// of that object.
+namespace self_contained {
+  namespace optional {
+    
+    class DimnameList {
+      public:
+        std::shared_ptr<c10::optional<torch::DimnameList>> x_;
+        std::shared_ptr<std::vector<torch::Dimname>> vec_;
+        DimnameList (const c10::optional<torch::DimnameList>& x);
+        operator c10::optional<torch::DimnameList>&();
+    };
+    
+  }
+}
+
+
 namespace make_unique {
   void* Tensor (const torch::Tensor& x);
   void* TensorList (const torch::TensorList& x);
@@ -175,6 +206,7 @@ namespace make_unique {
     void* Tensor (const c10::optional<torch::Tensor>& x);
     void* double_t (const c10::optional<double>& x);
     void* int64_t (const c10::optional<std::int64_t>& x);
+    void* DimnameList (const c10::optional<torch::DimnameList>& x);
   }
 
 }
@@ -217,7 +249,7 @@ namespace from_raw {
   LANTERN_FROM_RAW_DECL(IValue, torch::IValue)
 
   namespace optional {
-    c10::optional<torch::DimnameList> DimnameList (void* x);
+    LANTERN_FROM_RAW_DECL(DimnameList, c10::optional<torch::DimnameList>)
     c10::optional<torch::Generator> Generator (void* x);
     c10::optional<torch::Tensor> Tensor (void* x);
     c10::optional<double> double_t (void* x);

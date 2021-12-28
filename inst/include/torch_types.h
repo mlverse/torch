@@ -182,6 +182,15 @@ public:
   operator SEXP () const;
 };
 
+class XPtrTorchOptionalDimnameList : public XPtrTorch {
+public:
+  XPtrTorchOptionalDimnameList (void* x) : XPtrTorch(x, delete_optional_dimname_list) {}
+  explicit XPtrTorchOptionalDimnameList (std::shared_ptr<void> x) : XPtrTorch(x) {};
+  XPtrTorchOptionalDimnameList (const XPtrTorchOptionalDimnameList& x) : XPtrTorch(x.get_shared()) {};
+  explicit XPtrTorchOptionalDimnameList (SEXP x);
+  operator SEXP () const;
+};
+
 class XPtrTorchjit_named_parameter_list : public XPtrTorch {
 public:
   XPtrTorchjit_named_parameter_list (void* x) : XPtrTorch(x, delete_jit_named_parameter_list) {}

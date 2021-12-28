@@ -48,13 +48,13 @@ return XPtrTorchTensor(r_out);
 }
 
 // [[Rcpp::export]]
-XPtrTorchTensor cpp_torch_method_rename__self_Tensor_names_DimnameList (XPtrTorchTensor self, XPtrTorchDimnameList names) {
+XPtrTorchTensor cpp_torch_method_rename__self_Tensor_names_DimnameList (XPtrTorchTensor self, XPtrTorchOptionalDimnameList names) {
   auto r_out = lantern_Tensor_rename__tensor_dimnamelist(self.get(), names.get());
 return XPtrTorchTensor(r_out);
 }
 
 // [[Rcpp::export]]
-XPtrTorchTensor cpp_torch_method_rename_self_Tensor_names_DimnameList (XPtrTorchTensor self, XPtrTorchDimnameList names) {
+XPtrTorchTensor cpp_torch_method_rename_self_Tensor_names_DimnameList (XPtrTorchTensor self, XPtrTorchOptionalDimnameList names) {
   auto r_out = lantern_Tensor_rename_tensor_dimnamelist(self.get(), names.get());
 return XPtrTorchTensor(r_out);
 }
@@ -1072,7 +1072,7 @@ return XPtrTorchTensor(r_out);
 }
 
 // [[Rcpp::export]]
-XPtrTorchTensor cpp_torch_method_unflatten_self_Tensor_dim_int64_t_sizes_IntArrayRef_names_DimnameList (XPtrTorchTensor self, XPtrTorchindex_int64_t dim, XPtrTorchIntArrayRef sizes, XPtrTorchDimnameList names) {
+XPtrTorchTensor cpp_torch_method_unflatten_self_Tensor_dim_int64_t_sizes_IntArrayRef_names_DimnameList (XPtrTorchTensor self, XPtrTorchindex_int64_t dim, XPtrTorchIntArrayRef sizes, XPtrTorchOptionalDimnameList names) {
   auto r_out = lantern_Tensor_unflatten_tensor_intt_intarrayref_dimnamelist(self.get(), dim.get(), sizes.get(), names.get());
 return XPtrTorchTensor(r_out);
 }
@@ -6329,7 +6329,7 @@ return XPtrTorchTensor(r_out);
 }
 
 // [[Rcpp::export]]
-XPtrTorchTensor cpp_torch_namespace_empty_size_IntArrayRef_names_DimnameList (XPtrTorchIntArrayRef size, XPtrTorchDimnameList names, XPtrTorchTensorOptions options, XPtrTorchMemoryFormat memory_format) {
+XPtrTorchTensor cpp_torch_namespace_empty_size_IntArrayRef_names_DimnameList (XPtrTorchIntArrayRef size, XPtrTorchOptionalDimnameList names, XPtrTorchTensorOptions options, XPtrTorchMemoryFormat memory_format) {
   auto r_out = lantern_empty_intarrayref_dimnamelist_tensoroptions_memoryformat(size.get(), names.get(), options.get(), memory_format.get());
 return XPtrTorchTensor(r_out);
 }
@@ -6581,7 +6581,7 @@ return XPtrTorchTensor(r_out);
 }
 
 // [[Rcpp::export]]
-XPtrTorchTensor cpp_torch_namespace_full_size_IntArrayRef_fill_value_Scalar_names_DimnameList (XPtrTorchIntArrayRef size, XPtrTorchScalar fill_value, XPtrTorchDimnameList names, XPtrTorchTensorOptions options) {
+XPtrTorchTensor cpp_torch_namespace_full_size_IntArrayRef_fill_value_Scalar_names_DimnameList (XPtrTorchIntArrayRef size, XPtrTorchScalar fill_value, XPtrTorchOptionalDimnameList names, XPtrTorchTensorOptions options) {
   auto r_out = lantern_full_intarrayref_scalar_dimnamelist_tensoroptions(size.get(), fill_value.get(), names.get(), options.get());
 return XPtrTorchTensor(r_out);
 }
@@ -8086,7 +8086,7 @@ return XPtrTorchTensor(r_out);
 }
 
 // [[Rcpp::export]]
-XPtrTorchTensor cpp_torch_namespace_ones_size_IntArrayRef_names_DimnameList (XPtrTorchIntArrayRef size, XPtrTorchDimnameList names, XPtrTorchTensorOptions options) {
+XPtrTorchTensor cpp_torch_namespace_ones_size_IntArrayRef_names_DimnameList (XPtrTorchIntArrayRef size, XPtrTorchOptionalDimnameList names, XPtrTorchTensorOptions options) {
   auto r_out = lantern_ones_intarrayref_dimnamelist_tensoroptions(size.get(), names.get(), options.get());
 return XPtrTorchTensor(r_out);
 }
@@ -8266,13 +8266,13 @@ return XPtrTorchTensor(r_out);
 }
 
 // [[Rcpp::export]]
-XPtrTorchTensor cpp_torch_namespace_rand_size_IntArrayRef_names_DimnameList (XPtrTorchIntArrayRef size, XPtrTorchDimnameList names, XPtrTorchTensorOptions options) {
+XPtrTorchTensor cpp_torch_namespace_rand_size_IntArrayRef_names_DimnameList (XPtrTorchIntArrayRef size, XPtrTorchOptionalDimnameList names, XPtrTorchTensorOptions options) {
   auto r_out = lantern_rand_intarrayref_dimnamelist_tensoroptions(size.get(), names.get(), options.get());
 return XPtrTorchTensor(r_out);
 }
 
 // [[Rcpp::export]]
-XPtrTorchTensor cpp_torch_namespace_rand_size_IntArrayRef_generator_Generator_names_DimnameList (XPtrTorchIntArrayRef size, XPtrTorchGenerator generator, XPtrTorchDimnameList names, XPtrTorchTensorOptions options) {
+XPtrTorchTensor cpp_torch_namespace_rand_size_IntArrayRef_generator_Generator_names_DimnameList (XPtrTorchIntArrayRef size, XPtrTorchGenerator generator, XPtrTorchOptionalDimnameList names, XPtrTorchTensorOptions options) {
   auto r_out = lantern_rand_intarrayref_generator_dimnamelist_tensoroptions(size.get(), generator.get(), names.get(), options.get());
 return XPtrTorchTensor(r_out);
 }
@@ -8380,13 +8380,13 @@ return XPtrTorchTensor(r_out);
 }
 
 // [[Rcpp::export]]
-XPtrTorchTensor cpp_torch_namespace_randn_size_IntArrayRef_names_DimnameList (XPtrTorchIntArrayRef size, XPtrTorchDimnameList names, XPtrTorchTensorOptions options) {
+XPtrTorchTensor cpp_torch_namespace_randn_size_IntArrayRef_names_DimnameList (XPtrTorchIntArrayRef size, XPtrTorchOptionalDimnameList names, XPtrTorchTensorOptions options) {
   auto r_out = lantern_randn_intarrayref_dimnamelist_tensoroptions(size.get(), names.get(), options.get());
 return XPtrTorchTensor(r_out);
 }
 
 // [[Rcpp::export]]
-XPtrTorchTensor cpp_torch_namespace_randn_size_IntArrayRef_generator_Generator_names_DimnameList (XPtrTorchIntArrayRef size, XPtrTorchGenerator generator, XPtrTorchDimnameList names, XPtrTorchTensorOptions options) {
+XPtrTorchTensor cpp_torch_namespace_randn_size_IntArrayRef_generator_Generator_names_DimnameList (XPtrTorchIntArrayRef size, XPtrTorchGenerator generator, XPtrTorchOptionalDimnameList names, XPtrTorchTensorOptions options) {
   auto r_out = lantern_randn_intarrayref_generator_dimnamelist_tensoroptions(size.get(), generator.get(), names.get(), options.get());
 return XPtrTorchTensor(r_out);
 }
@@ -9708,7 +9708,7 @@ return Rcpp::List::create(XPtrTorchTensor(lantern_vector_get(wrap.get(), 0)),XPt
 }
 
 // [[Rcpp::export]]
-XPtrTorchTensor cpp_torch_namespace_zeros_size_IntArrayRef_names_DimnameList (XPtrTorchIntArrayRef size, XPtrTorchDimnameList names, XPtrTorchTensorOptions options) {
+XPtrTorchTensor cpp_torch_namespace_zeros_size_IntArrayRef_names_DimnameList (XPtrTorchIntArrayRef size, XPtrTorchOptionalDimnameList names, XPtrTorchTensorOptions options) {
   auto r_out = lantern_zeros_intarrayref_dimnamelist_tensoroptions(size.get(), names.get(), options.get());
 return XPtrTorchTensor(r_out);
 }

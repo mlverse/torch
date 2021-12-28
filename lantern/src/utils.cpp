@@ -96,6 +96,23 @@ void * _lantern_optional_vector_int64_t(int64_t * x, size_t x_size, bool is_null
   LANTERN_FUNCTION_END
 }
 
+#define LANTERN_OPTIONAL(name, type)                               \
+  void* _lantern_optional_##name (void* obj) {                     \
+    if (!obj) {                                                    \
+      return make_unique::optional::type (c10::nullopt);           \
+    }                                                              \
+    return make_unique::optional::type(from_raw::type (obj));      \
+  }                                                                \
+  bool _lantern_optional_##name##_has_value (void* obj) {          \
+    return from_raw::optional::type(obj).has_value();              \
+  }                                                                \
+  void* _lantern_optional_##name##_value (void* obj) {             \
+    return make_unique::type (from_raw::optional::type(obj).value()); \
+  }                                                               
+
+
+LANTERN_OPTIONAL(dimname_list, DimnameList)
+
 void *_lantern_int64_t(int64_t x)
 {
   LANTERN_FUNCTION_START
@@ -289,6 +306,25 @@ void* _lantern_nn_functional_pad_circular (void* input, void* padding)
   LANTERN_FUNCTION_END
 }
 
+namespace self_contained {
+  namespace optional {
+    
+        DimnameList::DimnameList (const c10::optional<torch::DimnameList>& x) {
+          if (x.has_value()) {
+            vec_ = std::make_shared<std::vector<torch::Dimname>>(x.value().vec());
+            x_ = std::make_shared<c10::optional<torch::DimnameList>>(*vec_);
+          } else {
+            x_ = std::make_shared<c10::optional<torch::DimnameList>>(c10::nullopt);
+          }
+        };
+
+        DimnameList::operator c10::optional<torch::DimnameList>& () {
+          return *x_;
+        };
+    
+  }
+}
+
 namespace make_unique {
   void* Tensor (const torch::Tensor& x)
   {
@@ -475,12 +511,20 @@ namespace make_unique {
       return make_ptr<c10::optional<torch::Tensor>>(x);
     }
 
+    void* DimnameList (const c10::optional<torch::DimnameList>& x)
+    {
+      return make_ptr<self_contained::optional::DimnameList>(x);
+    }
+
   }
 
 }
 
 #define LANTERN_FROM_RAW(name, type) \
   type& name(void* x) {return *reinterpret_cast<type*>(x);}
+
+#define LANTERN_FROM_RAW_WRAPPED(name, wraper_type, type) \
+  type& name(void* x) { return *reinterpret_cast<wraper_type*>(x);}
 
 
 namespace alias {
@@ -493,23 +537,15 @@ namespace from_raw {
   LANTERN_FROM_RAW(ScalarType, torch::ScalarType)
   LANTERN_FROM_RAW(Scalar, torch::Scalar)
   LANTERN_FROM_RAW(TensorOptions, torch::TensorOptions)
-  torch::Device& Device (void* x) {
-    return reinterpret_cast<LanternPtr<torch::Device>*>(x)->get();
-  }
+  LANTERN_FROM_RAW_WRAPPED(Device, LanternPtr<torch::Device>, torch::Device)
   LANTERN_FROM_RAW(Dtype, torch::Dtype)
-  torch::Dimname& Dimname (void* x) {
-    return reinterpret_cast<LanternPtr<torch::Dimname>*>(x)->get();
-  }
-  std::vector<torch::Dimname>& DimnameList (void* x) {
-    return reinterpret_cast<LanternPtr<std::vector<torch::Dimname>>*>(x)->get();
-  }
+  LANTERN_FROM_RAW_WRAPPED(Dimname, LanternPtr<torch::Dimname>, torch::Dimname)
+  LANTERN_FROM_RAW_WRAPPED(DimnameList, LanternPtr<std::vector<torch::Dimname>>, std::vector<torch::Dimname>)
   LANTERN_FROM_RAW(Generator, torch::Generator)
   LANTERN_FROM_RAW(MemoryFormat, torch::MemoryFormat)
   LANTERN_FROM_RAW(IntArrayRef, std::vector<std::int64_t>)
   LANTERN_FROM_RAW(TensorDict, alias::TensorDict)
-  torch::jit::CompilationUnit& CompilationUnit (void* x) {
-    return *reinterpret_cast<torch::jit::CompilationUnit*>(x);
-  }
+  LANTERN_FROM_RAW(CompilationUnit, torch::jit::CompilationUnit)
   LANTERN_FROM_RAW(QScheme, torch::QScheme)
   LANTERN_FROM_RAW(variable_list, torch::autograd::variable_list)
   LANTERN_FROM_RAW(Layout, torch::Layout)
@@ -526,10 +562,10 @@ namespace from_raw {
     // It's OK to return by value here because we are never modifying optional DimnameLists in
     // place. For consistency we should return by reference, but that would require a few changes
     // code generation in the R side, in order for R to own the memory in the 'optional' case.
-    c10::optional<torch::DimnameList> DimnameList (void* x) {
-      if (!x) return c10::nullopt;
-      return from_raw::DimnameList(x);
+    c10::optional<torch::DimnameList>& DimnameList (void * x) {
+      return *reinterpret_cast<self_contained::optional::DimnameList*>(x);
     }
+    //LANTERN_FROM_RAW_WRAPPED(DimnameList, self_contained::optional::DimnameList, c10::optional<torch::DimnameList>)
 
     c10::optional<torch::Generator> Generator (void* x) {
       if (!x) return c10::nullopt;
