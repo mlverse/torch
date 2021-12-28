@@ -224,6 +224,15 @@ public:
   operator SEXP () const;
 };
 
+class XPtrTorchOptionalGenerator : public XPtrTorch {
+public:
+  XPtrTorchOptionalGenerator (void* x) : XPtrTorch(x, delete_optional_generator) {}
+  explicit XPtrTorchOptionalGenerator (std::shared_ptr<void> x) : XPtrTorch(x) {};
+  XPtrTorchOptionalGenerator (const XPtrTorchOptionalGenerator& x) : XPtrTorch(x.get_shared()) {};
+  explicit XPtrTorchOptionalGenerator (SEXP x);
+  operator SEXP () const;
+};
+
 class XPtrTorchMemoryFormat : public XPtrTorch {
 public:
   XPtrTorchMemoryFormat () : XPtrTorch{NULL} {};
@@ -622,6 +631,7 @@ using Tensor = XPtrTorchOptionalTensor;
 using TensorList = XPtrTorchOptionalTensorList;
 using Device = XPtrTorchOptionalDevice;
 using IntArrayRef = XPtrTorchOptionalIntArrayRef;
+using Generator = XPtrTorchOptionalGenerator;
 
 using int64_t2 = XPtrTorchoptional_int64_t2;
 using int64_t = XPtrTorchoptional_int64_t;

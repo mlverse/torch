@@ -158,6 +158,7 @@ enum IValue_types {
 
 
 LANTERN_OPTIONAL_DECLS(dimname_list)
+LANTERN_OPTIONAL_DECLS(generator)
 
   LANTERN_API void(LANTERN_PTR lanternConfigure)(int log);
   LANTERN_API const char*(LANTERN_PTR lanternVersion)();
@@ -7473,6 +7474,7 @@ bool lanternInit(const std::string &libPath, std::string *pError)
   lantern_loaded = true;
 
   LANTERN_OPTIONAL_LOAD_SYMBOL(dimname_list)
+  LANTERN_OPTIONAL_LOAD_SYMBOL(generator)
   LOAD_SYMBOL(lanternConfigure);
   LOAD_SYMBOL(lanternVersion);
   LOAD_SYMBOL(lanternSetLastError);

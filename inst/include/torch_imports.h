@@ -44,6 +44,8 @@ IMPORT_SEXP_OPERATOR(operator_sexp_named_tuple_helper, XPtrTorchNamedTupleHelper
 IMPORT_SEXP_OPERATOR(operator_sexp_vector_ivalue, XPtrTorchvector_IValue)
 IMPORT_SEXP_OPERATOR(operator_sexp_generic_dict, XPtrTorchGenericDict)
 IMPORT_SEXP_OPERATOR(operator_sexp_generic_list, XPtrTorchGenericList)
+IMPORT_SEXP_OPERATOR(operator_sexp_optional_dimname_list, XPtrTorchOptionalDimnameList)
+IMPORT_SEXP_OPERATOR(operator_sexp_optional_generator, XPtrTorchOptionalGenerator)
   
 #define IMPORT_FROM_SEXP(name, type)                                               \
   type name (SEXP x)                                                               \
@@ -93,6 +95,8 @@ IMPORT_FROM_SEXP(from_sexp_optional_index_int64_t, XPtrTorchoptional_index_int64
 IMPORT_FROM_SEXP(from_sexp_optional_bool, XPtrTorchoptional_bool)    
 IMPORT_FROM_SEXP(from_sexp_bool, XPtrTorchbool)
 IMPORT_FROM_SEXP(from_sexp_optional_double_array_ref, XPtrTorchOptionalDoubleArrayRef)
+IMPORT_FROM_SEXP(from_sexp_optional_dimname_list, XPtrTorchOptionalDimnameList)
+IMPORT_FROM_SEXP(from_sexp_optional_generator, XPtrTorchOptionalGenerator)
     
 #define IMPORT_DELETER(name)                                                 \
     void name (void* x)                                                      \
@@ -157,6 +161,8 @@ IMPORT_DELETER(delete_traceable_function)
 IMPORT_DELETER(delete_vector_void)
 IMPORT_DELETER(delete_optional_bool)
 IMPORT_DELETER(delete_optional_double_array_ref)
+IMPORT_DELETER(delete_optional_dimname_list)
+IMPORT_DELETER(delete_optional_generator)
 
 XPtrTorchIntArrayRef from_sexp_int_array_ref (SEXP x, bool allow_null, bool index)
 {

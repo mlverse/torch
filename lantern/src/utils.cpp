@@ -112,6 +112,7 @@ void * _lantern_optional_vector_int64_t(int64_t * x, size_t x_size, bool is_null
 
 
 LANTERN_OPTIONAL(dimname_list, DimnameList)
+LANTERN_OPTIONAL(generator, Generator)
 
 void *_lantern_int64_t(int64_t x)
 {
@@ -321,6 +322,18 @@ namespace self_contained {
         DimnameList::operator c10::optional<torch::DimnameList>& () {
           return *x_;
         };
+
+        Generator::Generator (const c10::optional<torch::Generator>& x) {
+          if (x.has_value()) {
+            x_ = std::make_shared<c10::optional<torch::Generator>>(x.value());
+          } else {
+            x_ = std::make_shared<c10::optional<torch::Generator>>(c10::nullopt);
+          }
+        };
+
+        Generator::operator c10::optional<torch::Generator>& () {
+          return *x_;
+        };
     
   }
 }
@@ -516,6 +529,11 @@ namespace make_unique {
       return make_ptr<self_contained::optional::DimnameList>(x);
     }
 
+    void* Generator (const c10::optional<torch::Generator>& x)
+    {
+      return make_ptr<self_contained::optional::Generator>(x);
+    }
+
   }
 
 }
@@ -562,16 +580,9 @@ namespace from_raw {
     // It's OK to return by value here because we are never modifying optional DimnameLists in
     // place. For consistency we should return by reference, but that would require a few changes
     // code generation in the R side, in order for R to own the memory in the 'optional' case.
-    c10::optional<torch::DimnameList>& DimnameList (void * x) {
-      return *reinterpret_cast<self_contained::optional::DimnameList*>(x);
-    }
-    //LANTERN_FROM_RAW_WRAPPED(DimnameList, self_contained::optional::DimnameList, c10::optional<torch::DimnameList>)
-
-    c10::optional<torch::Generator> Generator (void* x) {
-      if (!x) return c10::nullopt;
-      return from_raw::Generator(x);
-    }
-
+    LANTERN_FROM_RAW_WRAPPED(DimnameList, self_contained::optional::DimnameList, c10::optional<torch::DimnameList>)
+    LANTERN_FROM_RAW_WRAPPED(Generator, self_contained::optional::Generator, c10::optional<torch::Generator>)
+  
     c10::optional<torch::Tensor> Tensor (void* x) {
       if (!x) return c10::nullopt;
       return *reinterpret_cast<c10::optional<torch::Tensor>*>(x);

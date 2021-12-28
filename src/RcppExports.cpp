@@ -1486,52 +1486,52 @@ BEGIN_RCPP
 END_RCPP
 }
 // cpp_torch_method_bernoulli_self_Tensor
-XPtrTorchTensor cpp_torch_method_bernoulli_self_Tensor(XPtrTorchTensor self, XPtrTorchGenerator generator);
+XPtrTorchTensor cpp_torch_method_bernoulli_self_Tensor(XPtrTorchTensor self, XPtrTorchOptionalGenerator generator);
 RcppExport SEXP _torch_cpp_torch_method_bernoulli_self_Tensor(SEXP selfSEXP, SEXP generatorSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
-    Rcpp::traits::input_parameter< XPtrTorchGenerator >::type generator(generatorSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchOptionalGenerator >::type generator(generatorSEXP);
     rcpp_result_gen = Rcpp::wrap(cpp_torch_method_bernoulli_self_Tensor(self, generator));
     return rcpp_result_gen;
 END_RCPP
 }
 // cpp_torch_method_bernoulli__self_Tensor_p_Tensor
-XPtrTorchTensor cpp_torch_method_bernoulli__self_Tensor_p_Tensor(XPtrTorchTensor self, XPtrTorchTensor p, XPtrTorchGenerator generator);
+XPtrTorchTensor cpp_torch_method_bernoulli__self_Tensor_p_Tensor(XPtrTorchTensor self, XPtrTorchTensor p, XPtrTorchOptionalGenerator generator);
 RcppExport SEXP _torch_cpp_torch_method_bernoulli__self_Tensor_p_Tensor(SEXP selfSEXP, SEXP pSEXP, SEXP generatorSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
     Rcpp::traits::input_parameter< XPtrTorchTensor >::type p(pSEXP);
-    Rcpp::traits::input_parameter< XPtrTorchGenerator >::type generator(generatorSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchOptionalGenerator >::type generator(generatorSEXP);
     rcpp_result_gen = Rcpp::wrap(cpp_torch_method_bernoulli__self_Tensor_p_Tensor(self, p, generator));
     return rcpp_result_gen;
 END_RCPP
 }
 // cpp_torch_method_bernoulli__self_Tensor_p_double
-XPtrTorchTensor cpp_torch_method_bernoulli__self_Tensor_p_double(XPtrTorchTensor self, double p, XPtrTorchGenerator generator);
+XPtrTorchTensor cpp_torch_method_bernoulli__self_Tensor_p_double(XPtrTorchTensor self, double p, XPtrTorchOptionalGenerator generator);
 RcppExport SEXP _torch_cpp_torch_method_bernoulli__self_Tensor_p_double(SEXP selfSEXP, SEXP pSEXP, SEXP generatorSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
     Rcpp::traits::input_parameter< double >::type p(pSEXP);
-    Rcpp::traits::input_parameter< XPtrTorchGenerator >::type generator(generatorSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchOptionalGenerator >::type generator(generatorSEXP);
     rcpp_result_gen = Rcpp::wrap(cpp_torch_method_bernoulli__self_Tensor_p_double(self, p, generator));
     return rcpp_result_gen;
 END_RCPP
 }
 // cpp_torch_method_bernoulli_self_Tensor_p_double
-XPtrTorchTensor cpp_torch_method_bernoulli_self_Tensor_p_double(XPtrTorchTensor self, double p, XPtrTorchGenerator generator);
+XPtrTorchTensor cpp_torch_method_bernoulli_self_Tensor_p_double(XPtrTorchTensor self, double p, XPtrTorchOptionalGenerator generator);
 RcppExport SEXP _torch_cpp_torch_method_bernoulli_self_Tensor_p_double(SEXP selfSEXP, SEXP pSEXP, SEXP generatorSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
     Rcpp::traits::input_parameter< double >::type p(pSEXP);
-    Rcpp::traits::input_parameter< XPtrTorchGenerator >::type generator(generatorSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchOptionalGenerator >::type generator(generatorSEXP);
     rcpp_result_gen = Rcpp::wrap(cpp_torch_method_bernoulli_self_Tensor_p_double(self, p, generator));
     return rcpp_result_gen;
 END_RCPP
@@ -7390,7 +7390,7 @@ BEGIN_RCPP
 END_RCPP
 }
 // cpp_torch_method_random__self_Tensor_from_int64_t_to_int64_t
-XPtrTorchTensor cpp_torch_method_random__self_Tensor_from_int64_t_to_int64_t(XPtrTorchTensor self, XPtrTorchint64_t2 from, XPtrTorchoptional_int64_t2 to, XPtrTorchGenerator generator);
+XPtrTorchTensor cpp_torch_method_random__self_Tensor_from_int64_t_to_int64_t(XPtrTorchTensor self, XPtrTorchint64_t2 from, XPtrTorchoptional_int64_t2 to, XPtrTorchOptionalGenerator generator);
 RcppExport SEXP _torch_cpp_torch_method_random__self_Tensor_from_int64_t_to_int64_t(SEXP selfSEXP, SEXP fromSEXP, SEXP toSEXP, SEXP generatorSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
@@ -7398,38 +7398,38 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
     Rcpp::traits::input_parameter< XPtrTorchint64_t2 >::type from(fromSEXP);
     Rcpp::traits::input_parameter< XPtrTorchoptional_int64_t2 >::type to(toSEXP);
-    Rcpp::traits::input_parameter< XPtrTorchGenerator >::type generator(generatorSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchOptionalGenerator >::type generator(generatorSEXP);
     rcpp_result_gen = Rcpp::wrap(cpp_torch_method_random__self_Tensor_from_int64_t_to_int64_t(self, from, to, generator));
     return rcpp_result_gen;
 END_RCPP
 }
 // cpp_torch_method_random__self_Tensor_to_int64_t
-XPtrTorchTensor cpp_torch_method_random__self_Tensor_to_int64_t(XPtrTorchTensor self, XPtrTorchint64_t2 to, XPtrTorchGenerator generator);
+XPtrTorchTensor cpp_torch_method_random__self_Tensor_to_int64_t(XPtrTorchTensor self, XPtrTorchint64_t2 to, XPtrTorchOptionalGenerator generator);
 RcppExport SEXP _torch_cpp_torch_method_random__self_Tensor_to_int64_t(SEXP selfSEXP, SEXP toSEXP, SEXP generatorSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
     Rcpp::traits::input_parameter< XPtrTorchint64_t2 >::type to(toSEXP);
-    Rcpp::traits::input_parameter< XPtrTorchGenerator >::type generator(generatorSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchOptionalGenerator >::type generator(generatorSEXP);
     rcpp_result_gen = Rcpp::wrap(cpp_torch_method_random__self_Tensor_to_int64_t(self, to, generator));
     return rcpp_result_gen;
 END_RCPP
 }
 // cpp_torch_method_random__self_Tensor
-XPtrTorchTensor cpp_torch_method_random__self_Tensor(XPtrTorchTensor self, XPtrTorchGenerator generator);
+XPtrTorchTensor cpp_torch_method_random__self_Tensor(XPtrTorchTensor self, XPtrTorchOptionalGenerator generator);
 RcppExport SEXP _torch_cpp_torch_method_random__self_Tensor(SEXP selfSEXP, SEXP generatorSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
-    Rcpp::traits::input_parameter< XPtrTorchGenerator >::type generator(generatorSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchOptionalGenerator >::type generator(generatorSEXP);
     rcpp_result_gen = Rcpp::wrap(cpp_torch_method_random__self_Tensor(self, generator));
     return rcpp_result_gen;
 END_RCPP
 }
 // cpp_torch_method_uniform__self_Tensor
-XPtrTorchTensor cpp_torch_method_uniform__self_Tensor(XPtrTorchTensor self, double from, double to, XPtrTorchGenerator generator);
+XPtrTorchTensor cpp_torch_method_uniform__self_Tensor(XPtrTorchTensor self, double from, double to, XPtrTorchOptionalGenerator generator);
 RcppExport SEXP _torch_cpp_torch_method_uniform__self_Tensor(SEXP selfSEXP, SEXP fromSEXP, SEXP toSEXP, SEXP generatorSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
@@ -7437,13 +7437,13 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
     Rcpp::traits::input_parameter< double >::type from(fromSEXP);
     Rcpp::traits::input_parameter< double >::type to(toSEXP);
-    Rcpp::traits::input_parameter< XPtrTorchGenerator >::type generator(generatorSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchOptionalGenerator >::type generator(generatorSEXP);
     rcpp_result_gen = Rcpp::wrap(cpp_torch_method_uniform__self_Tensor(self, from, to, generator));
     return rcpp_result_gen;
 END_RCPP
 }
 // cpp_torch_method_cauchy__self_Tensor
-XPtrTorchTensor cpp_torch_method_cauchy__self_Tensor(XPtrTorchTensor self, double median, double sigma, XPtrTorchGenerator generator);
+XPtrTorchTensor cpp_torch_method_cauchy__self_Tensor(XPtrTorchTensor self, double median, double sigma, XPtrTorchOptionalGenerator generator);
 RcppExport SEXP _torch_cpp_torch_method_cauchy__self_Tensor(SEXP selfSEXP, SEXP medianSEXP, SEXP sigmaSEXP, SEXP generatorSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
@@ -7451,13 +7451,13 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
     Rcpp::traits::input_parameter< double >::type median(medianSEXP);
     Rcpp::traits::input_parameter< double >::type sigma(sigmaSEXP);
-    Rcpp::traits::input_parameter< XPtrTorchGenerator >::type generator(generatorSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchOptionalGenerator >::type generator(generatorSEXP);
     rcpp_result_gen = Rcpp::wrap(cpp_torch_method_cauchy__self_Tensor(self, median, sigma, generator));
     return rcpp_result_gen;
 END_RCPP
 }
 // cpp_torch_method_log_normal__self_Tensor
-XPtrTorchTensor cpp_torch_method_log_normal__self_Tensor(XPtrTorchTensor self, double mean, double std, XPtrTorchGenerator generator);
+XPtrTorchTensor cpp_torch_method_log_normal__self_Tensor(XPtrTorchTensor self, double mean, double std, XPtrTorchOptionalGenerator generator);
 RcppExport SEXP _torch_cpp_torch_method_log_normal__self_Tensor(SEXP selfSEXP, SEXP meanSEXP, SEXP stdSEXP, SEXP generatorSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
@@ -7465,33 +7465,33 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
     Rcpp::traits::input_parameter< double >::type mean(meanSEXP);
     Rcpp::traits::input_parameter< double >::type std(stdSEXP);
-    Rcpp::traits::input_parameter< XPtrTorchGenerator >::type generator(generatorSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchOptionalGenerator >::type generator(generatorSEXP);
     rcpp_result_gen = Rcpp::wrap(cpp_torch_method_log_normal__self_Tensor(self, mean, std, generator));
     return rcpp_result_gen;
 END_RCPP
 }
 // cpp_torch_method_exponential__self_Tensor
-XPtrTorchTensor cpp_torch_method_exponential__self_Tensor(XPtrTorchTensor self, double lambd, XPtrTorchGenerator generator);
+XPtrTorchTensor cpp_torch_method_exponential__self_Tensor(XPtrTorchTensor self, double lambd, XPtrTorchOptionalGenerator generator);
 RcppExport SEXP _torch_cpp_torch_method_exponential__self_Tensor(SEXP selfSEXP, SEXP lambdSEXP, SEXP generatorSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
     Rcpp::traits::input_parameter< double >::type lambd(lambdSEXP);
-    Rcpp::traits::input_parameter< XPtrTorchGenerator >::type generator(generatorSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchOptionalGenerator >::type generator(generatorSEXP);
     rcpp_result_gen = Rcpp::wrap(cpp_torch_method_exponential__self_Tensor(self, lambd, generator));
     return rcpp_result_gen;
 END_RCPP
 }
 // cpp_torch_method_geometric__self_Tensor_p_double
-XPtrTorchTensor cpp_torch_method_geometric__self_Tensor_p_double(XPtrTorchTensor self, double p, XPtrTorchGenerator generator);
+XPtrTorchTensor cpp_torch_method_geometric__self_Tensor_p_double(XPtrTorchTensor self, double p, XPtrTorchOptionalGenerator generator);
 RcppExport SEXP _torch_cpp_torch_method_geometric__self_Tensor_p_double(SEXP selfSEXP, SEXP pSEXP, SEXP generatorSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
     Rcpp::traits::input_parameter< double >::type p(pSEXP);
-    Rcpp::traits::input_parameter< XPtrTorchGenerator >::type generator(generatorSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchOptionalGenerator >::type generator(generatorSEXP);
     rcpp_result_gen = Rcpp::wrap(cpp_torch_method_geometric__self_Tensor_p_double(self, p, generator));
     return rcpp_result_gen;
 END_RCPP
@@ -8445,7 +8445,7 @@ BEGIN_RCPP
 END_RCPP
 }
 // cpp_torch_method_multinomial_self_Tensor_num_samples_int64_t
-XPtrTorchTensor cpp_torch_method_multinomial_self_Tensor_num_samples_int64_t(XPtrTorchTensor self, XPtrTorchint64_t2 num_samples, XPtrTorchbool replacement, XPtrTorchGenerator generator);
+XPtrTorchTensor cpp_torch_method_multinomial_self_Tensor_num_samples_int64_t(XPtrTorchTensor self, XPtrTorchint64_t2 num_samples, XPtrTorchbool replacement, XPtrTorchOptionalGenerator generator);
 RcppExport SEXP _torch_cpp_torch_method_multinomial_self_Tensor_num_samples_int64_t(SEXP selfSEXP, SEXP num_samplesSEXP, SEXP replacementSEXP, SEXP generatorSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
@@ -8453,7 +8453,7 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
     Rcpp::traits::input_parameter< XPtrTorchint64_t2 >::type num_samples(num_samplesSEXP);
     Rcpp::traits::input_parameter< XPtrTorchbool >::type replacement(replacementSEXP);
-    Rcpp::traits::input_parameter< XPtrTorchGenerator >::type generator(generatorSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchOptionalGenerator >::type generator(generatorSEXP);
     rcpp_result_gen = Rcpp::wrap(cpp_torch_method_multinomial_self_Tensor_num_samples_int64_t(self, num_samples, replacement, generator));
     return rcpp_result_gen;
 END_RCPP
@@ -9276,7 +9276,7 @@ BEGIN_RCPP
 END_RCPP
 }
 // cpp_torch_method_normal__self_Tensor
-XPtrTorchTensor cpp_torch_method_normal__self_Tensor(XPtrTorchTensor self, double mean, double std, XPtrTorchGenerator generator);
+XPtrTorchTensor cpp_torch_method_normal__self_Tensor(XPtrTorchTensor self, double mean, double std, XPtrTorchOptionalGenerator generator);
 RcppExport SEXP _torch_cpp_torch_method_normal__self_Tensor(SEXP selfSEXP, SEXP meanSEXP, SEXP stdSEXP, SEXP generatorSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
@@ -9284,7 +9284,7 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
     Rcpp::traits::input_parameter< double >::type mean(meanSEXP);
     Rcpp::traits::input_parameter< double >::type std(stdSEXP);
-    Rcpp::traits::input_parameter< XPtrTorchGenerator >::type generator(generatorSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchOptionalGenerator >::type generator(generatorSEXP);
     rcpp_result_gen = Rcpp::wrap(cpp_torch_method_normal__self_Tensor(self, mean, std, generator));
     return rcpp_result_gen;
 END_RCPP
@@ -9679,14 +9679,14 @@ BEGIN_RCPP
 END_RCPP
 }
 // cpp_torch_namespace__fused_dropout_self_Tensor_p_double
-Rcpp::List cpp_torch_namespace__fused_dropout_self_Tensor_p_double(XPtrTorchTensor self, double p, XPtrTorchGenerator generator);
+Rcpp::List cpp_torch_namespace__fused_dropout_self_Tensor_p_double(XPtrTorchTensor self, double p, XPtrTorchOptionalGenerator generator);
 RcppExport SEXP _torch_cpp_torch_namespace__fused_dropout_self_Tensor_p_double(SEXP selfSEXP, SEXP pSEXP, SEXP generatorSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
     Rcpp::traits::input_parameter< double >::type p(pSEXP);
-    Rcpp::traits::input_parameter< XPtrTorchGenerator >::type generator(generatorSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchOptionalGenerator >::type generator(generatorSEXP);
     rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace__fused_dropout_self_Tensor_p_double(self, p, generator));
     return rcpp_result_gen;
 END_RCPP
@@ -11197,39 +11197,39 @@ BEGIN_RCPP
 END_RCPP
 }
 // cpp_torch_namespace_bernoulli_self_Tensor
-XPtrTorchTensor cpp_torch_namespace_bernoulli_self_Tensor(XPtrTorchTensor self, XPtrTorchGenerator generator);
+XPtrTorchTensor cpp_torch_namespace_bernoulli_self_Tensor(XPtrTorchTensor self, XPtrTorchOptionalGenerator generator);
 RcppExport SEXP _torch_cpp_torch_namespace_bernoulli_self_Tensor(SEXP selfSEXP, SEXP generatorSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
-    Rcpp::traits::input_parameter< XPtrTorchGenerator >::type generator(generatorSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchOptionalGenerator >::type generator(generatorSEXP);
     rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace_bernoulli_self_Tensor(self, generator));
     return rcpp_result_gen;
 END_RCPP
 }
 // cpp_torch_namespace_bernoulli_out_out_Tensor_self_Tensor
-XPtrTorchTensor cpp_torch_namespace_bernoulli_out_out_Tensor_self_Tensor(XPtrTorchTensor out, XPtrTorchTensor self, XPtrTorchGenerator generator);
+XPtrTorchTensor cpp_torch_namespace_bernoulli_out_out_Tensor_self_Tensor(XPtrTorchTensor out, XPtrTorchTensor self, XPtrTorchOptionalGenerator generator);
 RcppExport SEXP _torch_cpp_torch_namespace_bernoulli_out_out_Tensor_self_Tensor(SEXP outSEXP, SEXP selfSEXP, SEXP generatorSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< XPtrTorchTensor >::type out(outSEXP);
     Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
-    Rcpp::traits::input_parameter< XPtrTorchGenerator >::type generator(generatorSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchOptionalGenerator >::type generator(generatorSEXP);
     rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace_bernoulli_out_out_Tensor_self_Tensor(out, self, generator));
     return rcpp_result_gen;
 END_RCPP
 }
 // cpp_torch_namespace_bernoulli_self_Tensor_p_double
-XPtrTorchTensor cpp_torch_namespace_bernoulli_self_Tensor_p_double(XPtrTorchTensor self, double p, XPtrTorchGenerator generator);
+XPtrTorchTensor cpp_torch_namespace_bernoulli_self_Tensor_p_double(XPtrTorchTensor self, double p, XPtrTorchOptionalGenerator generator);
 RcppExport SEXP _torch_cpp_torch_namespace_bernoulli_self_Tensor_p_double(SEXP selfSEXP, SEXP pSEXP, SEXP generatorSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
     Rcpp::traits::input_parameter< double >::type p(pSEXP);
-    Rcpp::traits::input_parameter< XPtrTorchGenerator >::type generator(generatorSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchOptionalGenerator >::type generator(generatorSEXP);
     rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace_bernoulli_self_Tensor_p_double(self, p, generator));
     return rcpp_result_gen;
 END_RCPP
@@ -18387,13 +18387,13 @@ BEGIN_RCPP
 END_RCPP
 }
 // cpp_torch_namespace_rand_size_IntArrayRef_generator_Generator_names_DimnameList
-XPtrTorchTensor cpp_torch_namespace_rand_size_IntArrayRef_generator_Generator_names_DimnameList(XPtrTorchIntArrayRef size, XPtrTorchGenerator generator, XPtrTorchOptionalDimnameList names, XPtrTorchTensorOptions options);
+XPtrTorchTensor cpp_torch_namespace_rand_size_IntArrayRef_generator_Generator_names_DimnameList(XPtrTorchIntArrayRef size, XPtrTorchOptionalGenerator generator, XPtrTorchOptionalDimnameList names, XPtrTorchTensorOptions options);
 RcppExport SEXP _torch_cpp_torch_namespace_rand_size_IntArrayRef_generator_Generator_names_DimnameList(SEXP sizeSEXP, SEXP generatorSEXP, SEXP namesSEXP, SEXP optionsSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< XPtrTorchIntArrayRef >::type size(sizeSEXP);
-    Rcpp::traits::input_parameter< XPtrTorchGenerator >::type generator(generatorSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchOptionalGenerator >::type generator(generatorSEXP);
     Rcpp::traits::input_parameter< XPtrTorchOptionalDimnameList >::type names(namesSEXP);
     Rcpp::traits::input_parameter< XPtrTorchTensorOptions >::type options(optionsSEXP);
     rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace_rand_size_IntArrayRef_generator_Generator_names_DimnameList(size, generator, names, options));
@@ -18413,13 +18413,13 @@ BEGIN_RCPP
 END_RCPP
 }
 // cpp_torch_namespace_rand_size_IntArrayRef_generator_Generator
-XPtrTorchTensor cpp_torch_namespace_rand_size_IntArrayRef_generator_Generator(XPtrTorchIntArrayRef size, XPtrTorchGenerator generator, XPtrTorchTensorOptions options);
+XPtrTorchTensor cpp_torch_namespace_rand_size_IntArrayRef_generator_Generator(XPtrTorchIntArrayRef size, XPtrTorchOptionalGenerator generator, XPtrTorchTensorOptions options);
 RcppExport SEXP _torch_cpp_torch_namespace_rand_size_IntArrayRef_generator_Generator(SEXP sizeSEXP, SEXP generatorSEXP, SEXP optionsSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< XPtrTorchIntArrayRef >::type size(sizeSEXP);
-    Rcpp::traits::input_parameter< XPtrTorchGenerator >::type generator(generatorSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchOptionalGenerator >::type generator(generatorSEXP);
     Rcpp::traits::input_parameter< XPtrTorchTensorOptions >::type options(optionsSEXP);
     rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace_rand_size_IntArrayRef_generator_Generator(size, generator, options));
     return rcpp_result_gen;
@@ -18438,14 +18438,14 @@ BEGIN_RCPP
 END_RCPP
 }
 // cpp_torch_namespace_rand_out_out_Tensor_size_IntArrayRef_generator_Generator
-XPtrTorchTensor cpp_torch_namespace_rand_out_out_Tensor_size_IntArrayRef_generator_Generator(XPtrTorchTensor out, XPtrTorchIntArrayRef size, XPtrTorchGenerator generator);
+XPtrTorchTensor cpp_torch_namespace_rand_out_out_Tensor_size_IntArrayRef_generator_Generator(XPtrTorchTensor out, XPtrTorchIntArrayRef size, XPtrTorchOptionalGenerator generator);
 RcppExport SEXP _torch_cpp_torch_namespace_rand_out_out_Tensor_size_IntArrayRef_generator_Generator(SEXP outSEXP, SEXP sizeSEXP, SEXP generatorSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< XPtrTorchTensor >::type out(outSEXP);
     Rcpp::traits::input_parameter< XPtrTorchIntArrayRef >::type size(sizeSEXP);
-    Rcpp::traits::input_parameter< XPtrTorchGenerator >::type generator(generatorSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchOptionalGenerator >::type generator(generatorSEXP);
     rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace_rand_out_out_Tensor_size_IntArrayRef_generator_Generator(out, size, generator));
     return rcpp_result_gen;
 END_RCPP
@@ -18477,14 +18477,14 @@ BEGIN_RCPP
 END_RCPP
 }
 // cpp_torch_namespace_randint_high_int64_t_size_IntArrayRef_generator_Generator
-XPtrTorchTensor cpp_torch_namespace_randint_high_int64_t_size_IntArrayRef_generator_Generator(XPtrTorchint64_t2 high, XPtrTorchIntArrayRef size, XPtrTorchGenerator generator, XPtrTorchTensorOptions options);
+XPtrTorchTensor cpp_torch_namespace_randint_high_int64_t_size_IntArrayRef_generator_Generator(XPtrTorchint64_t2 high, XPtrTorchIntArrayRef size, XPtrTorchOptionalGenerator generator, XPtrTorchTensorOptions options);
 RcppExport SEXP _torch_cpp_torch_namespace_randint_high_int64_t_size_IntArrayRef_generator_Generator(SEXP highSEXP, SEXP sizeSEXP, SEXP generatorSEXP, SEXP optionsSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< XPtrTorchint64_t2 >::type high(highSEXP);
     Rcpp::traits::input_parameter< XPtrTorchIntArrayRef >::type size(sizeSEXP);
-    Rcpp::traits::input_parameter< XPtrTorchGenerator >::type generator(generatorSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchOptionalGenerator >::type generator(generatorSEXP);
     Rcpp::traits::input_parameter< XPtrTorchTensorOptions >::type options(optionsSEXP);
     rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace_randint_high_int64_t_size_IntArrayRef_generator_Generator(high, size, generator, options));
     return rcpp_result_gen;
@@ -18505,7 +18505,7 @@ BEGIN_RCPP
 END_RCPP
 }
 // cpp_torch_namespace_randint_low_int64_t_high_int64_t_size_IntArrayRef_generator_Generator
-XPtrTorchTensor cpp_torch_namespace_randint_low_int64_t_high_int64_t_size_IntArrayRef_generator_Generator(XPtrTorchint64_t2 low, XPtrTorchint64_t2 high, XPtrTorchIntArrayRef size, XPtrTorchGenerator generator, XPtrTorchTensorOptions options);
+XPtrTorchTensor cpp_torch_namespace_randint_low_int64_t_high_int64_t_size_IntArrayRef_generator_Generator(XPtrTorchint64_t2 low, XPtrTorchint64_t2 high, XPtrTorchIntArrayRef size, XPtrTorchOptionalGenerator generator, XPtrTorchTensorOptions options);
 RcppExport SEXP _torch_cpp_torch_namespace_randint_low_int64_t_high_int64_t_size_IntArrayRef_generator_Generator(SEXP lowSEXP, SEXP highSEXP, SEXP sizeSEXP, SEXP generatorSEXP, SEXP optionsSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
@@ -18513,7 +18513,7 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< XPtrTorchint64_t2 >::type low(lowSEXP);
     Rcpp::traits::input_parameter< XPtrTorchint64_t2 >::type high(highSEXP);
     Rcpp::traits::input_parameter< XPtrTorchIntArrayRef >::type size(sizeSEXP);
-    Rcpp::traits::input_parameter< XPtrTorchGenerator >::type generator(generatorSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchOptionalGenerator >::type generator(generatorSEXP);
     Rcpp::traits::input_parameter< XPtrTorchTensorOptions >::type options(optionsSEXP);
     rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace_randint_low_int64_t_high_int64_t_size_IntArrayRef_generator_Generator(low, high, size, generator, options));
     return rcpp_result_gen;
@@ -18533,7 +18533,7 @@ BEGIN_RCPP
 END_RCPP
 }
 // cpp_torch_namespace_randint_out_out_Tensor_high_int64_t_size_IntArrayRef_generator_Generator
-XPtrTorchTensor cpp_torch_namespace_randint_out_out_Tensor_high_int64_t_size_IntArrayRef_generator_Generator(XPtrTorchTensor out, XPtrTorchint64_t2 high, XPtrTorchIntArrayRef size, XPtrTorchGenerator generator);
+XPtrTorchTensor cpp_torch_namespace_randint_out_out_Tensor_high_int64_t_size_IntArrayRef_generator_Generator(XPtrTorchTensor out, XPtrTorchint64_t2 high, XPtrTorchIntArrayRef size, XPtrTorchOptionalGenerator generator);
 RcppExport SEXP _torch_cpp_torch_namespace_randint_out_out_Tensor_high_int64_t_size_IntArrayRef_generator_Generator(SEXP outSEXP, SEXP highSEXP, SEXP sizeSEXP, SEXP generatorSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
@@ -18541,7 +18541,7 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< XPtrTorchTensor >::type out(outSEXP);
     Rcpp::traits::input_parameter< XPtrTorchint64_t2 >::type high(highSEXP);
     Rcpp::traits::input_parameter< XPtrTorchIntArrayRef >::type size(sizeSEXP);
-    Rcpp::traits::input_parameter< XPtrTorchGenerator >::type generator(generatorSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchOptionalGenerator >::type generator(generatorSEXP);
     rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace_randint_out_out_Tensor_high_int64_t_size_IntArrayRef_generator_Generator(out, high, size, generator));
     return rcpp_result_gen;
 END_RCPP
@@ -18561,7 +18561,7 @@ BEGIN_RCPP
 END_RCPP
 }
 // cpp_torch_namespace_randint_out_out_Tensor_low_int64_t_high_int64_t_size_IntArrayRef_generator_Generator
-XPtrTorchTensor cpp_torch_namespace_randint_out_out_Tensor_low_int64_t_high_int64_t_size_IntArrayRef_generator_Generator(XPtrTorchTensor out, XPtrTorchint64_t2 low, XPtrTorchint64_t2 high, XPtrTorchIntArrayRef size, XPtrTorchGenerator generator);
+XPtrTorchTensor cpp_torch_namespace_randint_out_out_Tensor_low_int64_t_high_int64_t_size_IntArrayRef_generator_Generator(XPtrTorchTensor out, XPtrTorchint64_t2 low, XPtrTorchint64_t2 high, XPtrTorchIntArrayRef size, XPtrTorchOptionalGenerator generator);
 RcppExport SEXP _torch_cpp_torch_namespace_randint_out_out_Tensor_low_int64_t_high_int64_t_size_IntArrayRef_generator_Generator(SEXP outSEXP, SEXP lowSEXP, SEXP highSEXP, SEXP sizeSEXP, SEXP generatorSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
@@ -18570,7 +18570,7 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< XPtrTorchint64_t2 >::type low(lowSEXP);
     Rcpp::traits::input_parameter< XPtrTorchint64_t2 >::type high(highSEXP);
     Rcpp::traits::input_parameter< XPtrTorchIntArrayRef >::type size(sizeSEXP);
-    Rcpp::traits::input_parameter< XPtrTorchGenerator >::type generator(generatorSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchOptionalGenerator >::type generator(generatorSEXP);
     rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace_randint_out_out_Tensor_low_int64_t_high_int64_t_size_IntArrayRef_generator_Generator(out, low, high, size, generator));
     return rcpp_result_gen;
 END_RCPP
@@ -18617,13 +18617,13 @@ BEGIN_RCPP
 END_RCPP
 }
 // cpp_torch_namespace_randn_size_IntArrayRef_generator_Generator
-XPtrTorchTensor cpp_torch_namespace_randn_size_IntArrayRef_generator_Generator(XPtrTorchIntArrayRef size, XPtrTorchGenerator generator, XPtrTorchTensorOptions options);
+XPtrTorchTensor cpp_torch_namespace_randn_size_IntArrayRef_generator_Generator(XPtrTorchIntArrayRef size, XPtrTorchOptionalGenerator generator, XPtrTorchTensorOptions options);
 RcppExport SEXP _torch_cpp_torch_namespace_randn_size_IntArrayRef_generator_Generator(SEXP sizeSEXP, SEXP generatorSEXP, SEXP optionsSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< XPtrTorchIntArrayRef >::type size(sizeSEXP);
-    Rcpp::traits::input_parameter< XPtrTorchGenerator >::type generator(generatorSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchOptionalGenerator >::type generator(generatorSEXP);
     Rcpp::traits::input_parameter< XPtrTorchTensorOptions >::type options(optionsSEXP);
     rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace_randn_size_IntArrayRef_generator_Generator(size, generator, options));
     return rcpp_result_gen;
@@ -18643,13 +18643,13 @@ BEGIN_RCPP
 END_RCPP
 }
 // cpp_torch_namespace_randn_size_IntArrayRef_generator_Generator_names_DimnameList
-XPtrTorchTensor cpp_torch_namespace_randn_size_IntArrayRef_generator_Generator_names_DimnameList(XPtrTorchIntArrayRef size, XPtrTorchGenerator generator, XPtrTorchOptionalDimnameList names, XPtrTorchTensorOptions options);
+XPtrTorchTensor cpp_torch_namespace_randn_size_IntArrayRef_generator_Generator_names_DimnameList(XPtrTorchIntArrayRef size, XPtrTorchOptionalGenerator generator, XPtrTorchOptionalDimnameList names, XPtrTorchTensorOptions options);
 RcppExport SEXP _torch_cpp_torch_namespace_randn_size_IntArrayRef_generator_Generator_names_DimnameList(SEXP sizeSEXP, SEXP generatorSEXP, SEXP namesSEXP, SEXP optionsSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< XPtrTorchIntArrayRef >::type size(sizeSEXP);
-    Rcpp::traits::input_parameter< XPtrTorchGenerator >::type generator(generatorSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchOptionalGenerator >::type generator(generatorSEXP);
     Rcpp::traits::input_parameter< XPtrTorchOptionalDimnameList >::type names(namesSEXP);
     Rcpp::traits::input_parameter< XPtrTorchTensorOptions >::type options(optionsSEXP);
     rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace_randn_size_IntArrayRef_generator_Generator_names_DimnameList(size, generator, names, options));
@@ -18669,14 +18669,14 @@ BEGIN_RCPP
 END_RCPP
 }
 // cpp_torch_namespace_randn_out_out_Tensor_size_IntArrayRef_generator_Generator
-XPtrTorchTensor cpp_torch_namespace_randn_out_out_Tensor_size_IntArrayRef_generator_Generator(XPtrTorchTensor out, XPtrTorchIntArrayRef size, XPtrTorchGenerator generator);
+XPtrTorchTensor cpp_torch_namespace_randn_out_out_Tensor_size_IntArrayRef_generator_Generator(XPtrTorchTensor out, XPtrTorchIntArrayRef size, XPtrTorchOptionalGenerator generator);
 RcppExport SEXP _torch_cpp_torch_namespace_randn_out_out_Tensor_size_IntArrayRef_generator_Generator(SEXP outSEXP, SEXP sizeSEXP, SEXP generatorSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< XPtrTorchTensor >::type out(outSEXP);
     Rcpp::traits::input_parameter< XPtrTorchIntArrayRef >::type size(sizeSEXP);
-    Rcpp::traits::input_parameter< XPtrTorchGenerator >::type generator(generatorSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchOptionalGenerator >::type generator(generatorSEXP);
     rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace_randn_out_out_Tensor_size_IntArrayRef_generator_Generator(out, size, generator));
     return rcpp_result_gen;
 END_RCPP
@@ -18707,13 +18707,13 @@ BEGIN_RCPP
 END_RCPP
 }
 // cpp_torch_namespace_randperm_n_int64_t_generator_Generator
-XPtrTorchTensor cpp_torch_namespace_randperm_n_int64_t_generator_Generator(XPtrTorchint64_t2 n, XPtrTorchGenerator generator, XPtrTorchTensorOptions options);
+XPtrTorchTensor cpp_torch_namespace_randperm_n_int64_t_generator_Generator(XPtrTorchint64_t2 n, XPtrTorchOptionalGenerator generator, XPtrTorchTensorOptions options);
 RcppExport SEXP _torch_cpp_torch_namespace_randperm_n_int64_t_generator_Generator(SEXP nSEXP, SEXP generatorSEXP, SEXP optionsSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< XPtrTorchint64_t2 >::type n(nSEXP);
-    Rcpp::traits::input_parameter< XPtrTorchGenerator >::type generator(generatorSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchOptionalGenerator >::type generator(generatorSEXP);
     Rcpp::traits::input_parameter< XPtrTorchTensorOptions >::type options(optionsSEXP);
     rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace_randperm_n_int64_t_generator_Generator(n, generator, options));
     return rcpp_result_gen;
@@ -18732,14 +18732,14 @@ BEGIN_RCPP
 END_RCPP
 }
 // cpp_torch_namespace_randperm_out_out_Tensor_n_int64_t_generator_Generator
-XPtrTorchTensor cpp_torch_namespace_randperm_out_out_Tensor_n_int64_t_generator_Generator(XPtrTorchTensor out, XPtrTorchint64_t2 n, XPtrTorchGenerator generator);
+XPtrTorchTensor cpp_torch_namespace_randperm_out_out_Tensor_n_int64_t_generator_Generator(XPtrTorchTensor out, XPtrTorchint64_t2 n, XPtrTorchOptionalGenerator generator);
 RcppExport SEXP _torch_cpp_torch_namespace_randperm_out_out_Tensor_n_int64_t_generator_Generator(SEXP outSEXP, SEXP nSEXP, SEXP generatorSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< XPtrTorchTensor >::type out(outSEXP);
     Rcpp::traits::input_parameter< XPtrTorchint64_t2 >::type n(nSEXP);
-    Rcpp::traits::input_parameter< XPtrTorchGenerator >::type generator(generatorSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchOptionalGenerator >::type generator(generatorSEXP);
     rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace_randperm_out_out_Tensor_n_int64_t_generator_Generator(out, n, generator));
     return rcpp_result_gen;
 END_RCPP
@@ -18981,7 +18981,7 @@ BEGIN_RCPP
 END_RCPP
 }
 // cpp_torch_namespace_rrelu_self_Tensor
-XPtrTorchTensor cpp_torch_namespace_rrelu_self_Tensor(XPtrTorchTensor self, XPtrTorchScalar lower, XPtrTorchScalar upper, XPtrTorchbool training, XPtrTorchGenerator generator);
+XPtrTorchTensor cpp_torch_namespace_rrelu_self_Tensor(XPtrTorchTensor self, XPtrTorchScalar lower, XPtrTorchScalar upper, XPtrTorchbool training, XPtrTorchOptionalGenerator generator);
 RcppExport SEXP _torch_cpp_torch_namespace_rrelu_self_Tensor(SEXP selfSEXP, SEXP lowerSEXP, SEXP upperSEXP, SEXP trainingSEXP, SEXP generatorSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
@@ -18990,13 +18990,13 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< XPtrTorchScalar >::type lower(lowerSEXP);
     Rcpp::traits::input_parameter< XPtrTorchScalar >::type upper(upperSEXP);
     Rcpp::traits::input_parameter< XPtrTorchbool >::type training(trainingSEXP);
-    Rcpp::traits::input_parameter< XPtrTorchGenerator >::type generator(generatorSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchOptionalGenerator >::type generator(generatorSEXP);
     rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace_rrelu_self_Tensor(self, lower, upper, training, generator));
     return rcpp_result_gen;
 END_RCPP
 }
 // cpp_torch_namespace_rrelu__self_Tensor
-XPtrTorchTensor cpp_torch_namespace_rrelu__self_Tensor(XPtrTorchTensor self, XPtrTorchScalar lower, XPtrTorchScalar upper, XPtrTorchbool training, XPtrTorchGenerator generator);
+XPtrTorchTensor cpp_torch_namespace_rrelu__self_Tensor(XPtrTorchTensor self, XPtrTorchScalar lower, XPtrTorchScalar upper, XPtrTorchbool training, XPtrTorchOptionalGenerator generator);
 RcppExport SEXP _torch_cpp_torch_namespace_rrelu__self_Tensor(SEXP selfSEXP, SEXP lowerSEXP, SEXP upperSEXP, SEXP trainingSEXP, SEXP generatorSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
@@ -19005,7 +19005,7 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< XPtrTorchScalar >::type lower(lowerSEXP);
     Rcpp::traits::input_parameter< XPtrTorchScalar >::type upper(upperSEXP);
     Rcpp::traits::input_parameter< XPtrTorchbool >::type training(trainingSEXP);
-    Rcpp::traits::input_parameter< XPtrTorchGenerator >::type generator(generatorSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchOptionalGenerator >::type generator(generatorSEXP);
     rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace_rrelu__self_Tensor(self, lower, upper, training, generator));
     return rcpp_result_gen;
 END_RCPP
@@ -21457,13 +21457,13 @@ BEGIN_RCPP
 END_RCPP
 }
 // cpp_torch_namespace__standard_gamma_self_Tensor
-XPtrTorchTensor cpp_torch_namespace__standard_gamma_self_Tensor(XPtrTorchTensor self, XPtrTorchGenerator generator);
+XPtrTorchTensor cpp_torch_namespace__standard_gamma_self_Tensor(XPtrTorchTensor self, XPtrTorchOptionalGenerator generator);
 RcppExport SEXP _torch_cpp_torch_namespace__standard_gamma_self_Tensor(SEXP selfSEXP, SEXP generatorSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
-    Rcpp::traits::input_parameter< XPtrTorchGenerator >::type generator(generatorSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchOptionalGenerator >::type generator(generatorSEXP);
     rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace__standard_gamma_self_Tensor(self, generator));
     return rcpp_result_gen;
 END_RCPP
@@ -21482,38 +21482,38 @@ BEGIN_RCPP
 END_RCPP
 }
 // cpp_torch_namespace__sample_dirichlet_self_Tensor
-XPtrTorchTensor cpp_torch_namespace__sample_dirichlet_self_Tensor(XPtrTorchTensor self, XPtrTorchGenerator generator);
+XPtrTorchTensor cpp_torch_namespace__sample_dirichlet_self_Tensor(XPtrTorchTensor self, XPtrTorchOptionalGenerator generator);
 RcppExport SEXP _torch_cpp_torch_namespace__sample_dirichlet_self_Tensor(SEXP selfSEXP, SEXP generatorSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
-    Rcpp::traits::input_parameter< XPtrTorchGenerator >::type generator(generatorSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchOptionalGenerator >::type generator(generatorSEXP);
     rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace__sample_dirichlet_self_Tensor(self, generator));
     return rcpp_result_gen;
 END_RCPP
 }
 // cpp_torch_namespace_poisson_self_Tensor
-XPtrTorchTensor cpp_torch_namespace_poisson_self_Tensor(XPtrTorchTensor self, XPtrTorchGenerator generator);
+XPtrTorchTensor cpp_torch_namespace_poisson_self_Tensor(XPtrTorchTensor self, XPtrTorchOptionalGenerator generator);
 RcppExport SEXP _torch_cpp_torch_namespace_poisson_self_Tensor(SEXP selfSEXP, SEXP generatorSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
-    Rcpp::traits::input_parameter< XPtrTorchGenerator >::type generator(generatorSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchOptionalGenerator >::type generator(generatorSEXP);
     rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace_poisson_self_Tensor(self, generator));
     return rcpp_result_gen;
 END_RCPP
 }
 // cpp_torch_namespace_binomial_count_Tensor_prob_Tensor
-XPtrTorchTensor cpp_torch_namespace_binomial_count_Tensor_prob_Tensor(XPtrTorchTensor count, XPtrTorchTensor prob, XPtrTorchGenerator generator);
+XPtrTorchTensor cpp_torch_namespace_binomial_count_Tensor_prob_Tensor(XPtrTorchTensor count, XPtrTorchTensor prob, XPtrTorchOptionalGenerator generator);
 RcppExport SEXP _torch_cpp_torch_namespace_binomial_count_Tensor_prob_Tensor(SEXP countSEXP, SEXP probSEXP, SEXP generatorSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< XPtrTorchTensor >::type count(countSEXP);
     Rcpp::traits::input_parameter< XPtrTorchTensor >::type prob(probSEXP);
-    Rcpp::traits::input_parameter< XPtrTorchGenerator >::type generator(generatorSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchOptionalGenerator >::type generator(generatorSEXP);
     rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace_binomial_count_Tensor_prob_Tensor(count, prob, generator));
     return rcpp_result_gen;
 END_RCPP
@@ -25478,7 +25478,7 @@ BEGIN_RCPP
 END_RCPP
 }
 // cpp_torch_namespace_multinomial_out_out_Tensor_self_Tensor_num_samples_int64_t
-XPtrTorchTensor cpp_torch_namespace_multinomial_out_out_Tensor_self_Tensor_num_samples_int64_t(XPtrTorchTensor out, XPtrTorchTensor self, XPtrTorchint64_t2 num_samples, XPtrTorchbool replacement, XPtrTorchGenerator generator);
+XPtrTorchTensor cpp_torch_namespace_multinomial_out_out_Tensor_self_Tensor_num_samples_int64_t(XPtrTorchTensor out, XPtrTorchTensor self, XPtrTorchint64_t2 num_samples, XPtrTorchbool replacement, XPtrTorchOptionalGenerator generator);
 RcppExport SEXP _torch_cpp_torch_namespace_multinomial_out_out_Tensor_self_Tensor_num_samples_int64_t(SEXP outSEXP, SEXP selfSEXP, SEXP num_samplesSEXP, SEXP replacementSEXP, SEXP generatorSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
@@ -25487,13 +25487,13 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
     Rcpp::traits::input_parameter< XPtrTorchint64_t2 >::type num_samples(num_samplesSEXP);
     Rcpp::traits::input_parameter< XPtrTorchbool >::type replacement(replacementSEXP);
-    Rcpp::traits::input_parameter< XPtrTorchGenerator >::type generator(generatorSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchOptionalGenerator >::type generator(generatorSEXP);
     rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace_multinomial_out_out_Tensor_self_Tensor_num_samples_int64_t(out, self, num_samples, replacement, generator));
     return rcpp_result_gen;
 END_RCPP
 }
 // cpp_torch_namespace_multinomial_self_Tensor_num_samples_int64_t
-XPtrTorchTensor cpp_torch_namespace_multinomial_self_Tensor_num_samples_int64_t(XPtrTorchTensor self, XPtrTorchint64_t2 num_samples, XPtrTorchbool replacement, XPtrTorchGenerator generator);
+XPtrTorchTensor cpp_torch_namespace_multinomial_self_Tensor_num_samples_int64_t(XPtrTorchTensor self, XPtrTorchint64_t2 num_samples, XPtrTorchbool replacement, XPtrTorchOptionalGenerator generator);
 RcppExport SEXP _torch_cpp_torch_namespace_multinomial_self_Tensor_num_samples_int64_t(SEXP selfSEXP, SEXP num_samplesSEXP, SEXP replacementSEXP, SEXP generatorSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
@@ -25501,7 +25501,7 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
     Rcpp::traits::input_parameter< XPtrTorchint64_t2 >::type num_samples(num_samplesSEXP);
     Rcpp::traits::input_parameter< XPtrTorchbool >::type replacement(replacementSEXP);
-    Rcpp::traits::input_parameter< XPtrTorchGenerator >::type generator(generatorSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchOptionalGenerator >::type generator(generatorSEXP);
     rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace_multinomial_self_Tensor_num_samples_int64_t(self, num_samples, replacement, generator));
     return rcpp_result_gen;
 END_RCPP
@@ -26827,7 +26827,7 @@ BEGIN_RCPP
 END_RCPP
 }
 // cpp_torch_namespace_normal_out_out_Tensor_mean_Tensor_std_double
-XPtrTorchTensor cpp_torch_namespace_normal_out_out_Tensor_mean_Tensor_std_double(XPtrTorchTensor out, XPtrTorchTensor mean, double std, XPtrTorchGenerator generator);
+XPtrTorchTensor cpp_torch_namespace_normal_out_out_Tensor_mean_Tensor_std_double(XPtrTorchTensor out, XPtrTorchTensor mean, double std, XPtrTorchOptionalGenerator generator);
 RcppExport SEXP _torch_cpp_torch_namespace_normal_out_out_Tensor_mean_Tensor_std_double(SEXP outSEXP, SEXP meanSEXP, SEXP stdSEXP, SEXP generatorSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
@@ -26835,13 +26835,13 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< XPtrTorchTensor >::type out(outSEXP);
     Rcpp::traits::input_parameter< XPtrTorchTensor >::type mean(meanSEXP);
     Rcpp::traits::input_parameter< double >::type std(stdSEXP);
-    Rcpp::traits::input_parameter< XPtrTorchGenerator >::type generator(generatorSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchOptionalGenerator >::type generator(generatorSEXP);
     rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace_normal_out_out_Tensor_mean_Tensor_std_double(out, mean, std, generator));
     return rcpp_result_gen;
 END_RCPP
 }
 // cpp_torch_namespace_normal_out_out_Tensor_mean_double_std_Tensor
-XPtrTorchTensor cpp_torch_namespace_normal_out_out_Tensor_mean_double_std_Tensor(XPtrTorchTensor out, double mean, XPtrTorchTensor std, XPtrTorchGenerator generator);
+XPtrTorchTensor cpp_torch_namespace_normal_out_out_Tensor_mean_double_std_Tensor(XPtrTorchTensor out, double mean, XPtrTorchTensor std, XPtrTorchOptionalGenerator generator);
 RcppExport SEXP _torch_cpp_torch_namespace_normal_out_out_Tensor_mean_double_std_Tensor(SEXP outSEXP, SEXP meanSEXP, SEXP stdSEXP, SEXP generatorSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
@@ -26849,13 +26849,13 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< XPtrTorchTensor >::type out(outSEXP);
     Rcpp::traits::input_parameter< double >::type mean(meanSEXP);
     Rcpp::traits::input_parameter< XPtrTorchTensor >::type std(stdSEXP);
-    Rcpp::traits::input_parameter< XPtrTorchGenerator >::type generator(generatorSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchOptionalGenerator >::type generator(generatorSEXP);
     rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace_normal_out_out_Tensor_mean_double_std_Tensor(out, mean, std, generator));
     return rcpp_result_gen;
 END_RCPP
 }
 // cpp_torch_namespace_normal_out_out_Tensor_mean_Tensor_std_Tensor
-XPtrTorchTensor cpp_torch_namespace_normal_out_out_Tensor_mean_Tensor_std_Tensor(XPtrTorchTensor out, XPtrTorchTensor mean, XPtrTorchTensor std, XPtrTorchGenerator generator);
+XPtrTorchTensor cpp_torch_namespace_normal_out_out_Tensor_mean_Tensor_std_Tensor(XPtrTorchTensor out, XPtrTorchTensor mean, XPtrTorchTensor std, XPtrTorchOptionalGenerator generator);
 RcppExport SEXP _torch_cpp_torch_namespace_normal_out_out_Tensor_mean_Tensor_std_Tensor(SEXP outSEXP, SEXP meanSEXP, SEXP stdSEXP, SEXP generatorSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
@@ -26863,13 +26863,13 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< XPtrTorchTensor >::type out(outSEXP);
     Rcpp::traits::input_parameter< XPtrTorchTensor >::type mean(meanSEXP);
     Rcpp::traits::input_parameter< XPtrTorchTensor >::type std(stdSEXP);
-    Rcpp::traits::input_parameter< XPtrTorchGenerator >::type generator(generatorSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchOptionalGenerator >::type generator(generatorSEXP);
     rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace_normal_out_out_Tensor_mean_Tensor_std_Tensor(out, mean, std, generator));
     return rcpp_result_gen;
 END_RCPP
 }
 // cpp_torch_namespace_normal_out_out_Tensor_mean_double_std_double_size_IntArrayRef
-XPtrTorchTensor cpp_torch_namespace_normal_out_out_Tensor_mean_double_std_double_size_IntArrayRef(XPtrTorchTensor out, double mean, double std, XPtrTorchIntArrayRef size, XPtrTorchGenerator generator);
+XPtrTorchTensor cpp_torch_namespace_normal_out_out_Tensor_mean_double_std_double_size_IntArrayRef(XPtrTorchTensor out, double mean, double std, XPtrTorchIntArrayRef size, XPtrTorchOptionalGenerator generator);
 RcppExport SEXP _torch_cpp_torch_namespace_normal_out_out_Tensor_mean_double_std_double_size_IntArrayRef(SEXP outSEXP, SEXP meanSEXP, SEXP stdSEXP, SEXP sizeSEXP, SEXP generatorSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
@@ -26878,7 +26878,7 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< double >::type mean(meanSEXP);
     Rcpp::traits::input_parameter< double >::type std(stdSEXP);
     Rcpp::traits::input_parameter< XPtrTorchIntArrayRef >::type size(sizeSEXP);
-    Rcpp::traits::input_parameter< XPtrTorchGenerator >::type generator(generatorSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchOptionalGenerator >::type generator(generatorSEXP);
     rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace_normal_out_out_Tensor_mean_double_std_double_size_IntArrayRef(out, mean, std, size, generator));
     return rcpp_result_gen;
 END_RCPP
@@ -29158,7 +29158,7 @@ BEGIN_RCPP
 END_RCPP
 }
 // cpp_torch_namespace_rrelu_with_noise_out_out_Tensor_self_Tensor_noise_Tensor
-XPtrTorchTensor cpp_torch_namespace_rrelu_with_noise_out_out_Tensor_self_Tensor_noise_Tensor(XPtrTorchTensor out, XPtrTorchTensor self, XPtrTorchTensor noise, XPtrTorchScalar lower, XPtrTorchScalar upper, XPtrTorchbool training, XPtrTorchGenerator generator);
+XPtrTorchTensor cpp_torch_namespace_rrelu_with_noise_out_out_Tensor_self_Tensor_noise_Tensor(XPtrTorchTensor out, XPtrTorchTensor self, XPtrTorchTensor noise, XPtrTorchScalar lower, XPtrTorchScalar upper, XPtrTorchbool training, XPtrTorchOptionalGenerator generator);
 RcppExport SEXP _torch_cpp_torch_namespace_rrelu_with_noise_out_out_Tensor_self_Tensor_noise_Tensor(SEXP outSEXP, SEXP selfSEXP, SEXP noiseSEXP, SEXP lowerSEXP, SEXP upperSEXP, SEXP trainingSEXP, SEXP generatorSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
@@ -29169,13 +29169,13 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< XPtrTorchScalar >::type lower(lowerSEXP);
     Rcpp::traits::input_parameter< XPtrTorchScalar >::type upper(upperSEXP);
     Rcpp::traits::input_parameter< XPtrTorchbool >::type training(trainingSEXP);
-    Rcpp::traits::input_parameter< XPtrTorchGenerator >::type generator(generatorSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchOptionalGenerator >::type generator(generatorSEXP);
     rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace_rrelu_with_noise_out_out_Tensor_self_Tensor_noise_Tensor(out, self, noise, lower, upper, training, generator));
     return rcpp_result_gen;
 END_RCPP
 }
 // cpp_torch_namespace_rrelu_with_noise_self_Tensor_noise_Tensor
-XPtrTorchTensor cpp_torch_namespace_rrelu_with_noise_self_Tensor_noise_Tensor(XPtrTorchTensor self, XPtrTorchTensor noise, XPtrTorchScalar lower, XPtrTorchScalar upper, XPtrTorchbool training, XPtrTorchGenerator generator);
+XPtrTorchTensor cpp_torch_namespace_rrelu_with_noise_self_Tensor_noise_Tensor(XPtrTorchTensor self, XPtrTorchTensor noise, XPtrTorchScalar lower, XPtrTorchScalar upper, XPtrTorchbool training, XPtrTorchOptionalGenerator generator);
 RcppExport SEXP _torch_cpp_torch_namespace_rrelu_with_noise_self_Tensor_noise_Tensor(SEXP selfSEXP, SEXP noiseSEXP, SEXP lowerSEXP, SEXP upperSEXP, SEXP trainingSEXP, SEXP generatorSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
@@ -29185,7 +29185,7 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< XPtrTorchScalar >::type lower(lowerSEXP);
     Rcpp::traits::input_parameter< XPtrTorchScalar >::type upper(upperSEXP);
     Rcpp::traits::input_parameter< XPtrTorchbool >::type training(trainingSEXP);
-    Rcpp::traits::input_parameter< XPtrTorchGenerator >::type generator(generatorSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchOptionalGenerator >::type generator(generatorSEXP);
     rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace_rrelu_with_noise_self_Tensor_noise_Tensor(self, noise, lower, upper, training, generator));
     return rcpp_result_gen;
 END_RCPP
@@ -29208,7 +29208,7 @@ BEGIN_RCPP
 END_RCPP
 }
 // cpp_torch_namespace_rrelu_with_noise__self_Tensor_noise_Tensor
-XPtrTorchTensor cpp_torch_namespace_rrelu_with_noise__self_Tensor_noise_Tensor(XPtrTorchTensor self, XPtrTorchTensor noise, XPtrTorchScalar lower, XPtrTorchScalar upper, XPtrTorchbool training, XPtrTorchGenerator generator);
+XPtrTorchTensor cpp_torch_namespace_rrelu_with_noise__self_Tensor_noise_Tensor(XPtrTorchTensor self, XPtrTorchTensor noise, XPtrTorchScalar lower, XPtrTorchScalar upper, XPtrTorchbool training, XPtrTorchOptionalGenerator generator);
 RcppExport SEXP _torch_cpp_torch_namespace_rrelu_with_noise__self_Tensor_noise_Tensor(SEXP selfSEXP, SEXP noiseSEXP, SEXP lowerSEXP, SEXP upperSEXP, SEXP trainingSEXP, SEXP generatorSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
@@ -29218,7 +29218,7 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< XPtrTorchScalar >::type lower(lowerSEXP);
     Rcpp::traits::input_parameter< XPtrTorchScalar >::type upper(upperSEXP);
     Rcpp::traits::input_parameter< XPtrTorchbool >::type training(trainingSEXP);
-    Rcpp::traits::input_parameter< XPtrTorchGenerator >::type generator(generatorSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchOptionalGenerator >::type generator(generatorSEXP);
     rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace_rrelu_with_noise__self_Tensor_noise_Tensor(self, noise, lower, upper, training, generator));
     return rcpp_result_gen;
 END_RCPP

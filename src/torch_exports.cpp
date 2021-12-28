@@ -40,7 +40,7 @@ void register_callables (DllInfo *dll)
   REGISTER_C_CALLABLE(operator_sexp_generic_dict)
   REGISTER_C_CALLABLE(operator_sexp_generic_list)
   REGISTER_C_CALLABLE(operator_sexp_optional_dimname_list)
-  
+  REGISTER_C_CALLABLE(operator_sexp_optional_generator)
   
   REGISTER_C_CALLABLE(from_sexp_tensor)
   REGISTER_C_CALLABLE(from_sexp_optional_tensor)
@@ -81,6 +81,7 @@ void register_callables (DllInfo *dll)
   REGISTER_C_CALLABLE(from_sexp_bool)
   REGISTER_C_CALLABLE(from_sexp_optional_double_array_ref)
   REGISTER_C_CALLABLE(from_sexp_optional_dimname_list)
+  REGISTER_C_CALLABLE(from_sexp_optional_generator)
   
   REGISTER_C_CALLABLE(delete_tensor)
   REGISTER_C_CALLABLE(delete_script_module)
@@ -136,6 +137,8 @@ void register_callables (DllInfo *dll)
   REGISTER_C_CALLABLE(delete_vector_void)
   REGISTER_C_CALLABLE(delete_optional_bool)
   REGISTER_C_CALLABLE(delete_optional_double_array_ref)
+  REGISTER_C_CALLABLE(delete_optional_dimname_list)
+  REGISTER_C_CALLABLE(delete_optional_generator)
   
   REGISTER_C_CALLABLE(fixme_new_string)
 }

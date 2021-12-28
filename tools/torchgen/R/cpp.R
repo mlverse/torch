@@ -215,8 +215,12 @@ cpp_parameter_type <- function(argument) {
     declaration <- "XPtrTorchGenerator"
   }
 
-  if (argument$dynamic_type == "Generator") {
+  if (argument$dynamic_type == "Generator" && argument$type != "c10::optional<Generator>") {
     declaration <- "XPtrTorchGenerator"
+  }
+
+  if (argument$dynamic_type == "Generator" && argument$type == "c10::optional<Generator>") {
+    declaration <- "XPtrTorchOptionalGenerator"
   }
 
   if (argument$dynamic_type == "ScalarType") {

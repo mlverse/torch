@@ -155,6 +155,16 @@ XPtrTorchGenerator::operator SEXP () const
 XPtrTorchGenerator::XPtrTorchGenerator (SEXP x):
   XPtrTorch{from_sexp_generator(x)} {}
 
+// optional generator
+
+XPtrTorchOptionalGenerator::operator SEXP () const
+{
+  return operator_sexp_optional_generator(this);
+}
+
+XPtrTorchOptionalGenerator::XPtrTorchOptionalGenerator (SEXP x):
+  XPtrTorch{from_sexp_optional_generator(x)} {}
+
 // memory_format
 
 XPtrTorchMemoryFormat::operator SEXP () const

@@ -146,6 +146,13 @@ namespace self_contained {
         DimnameList (const c10::optional<torch::DimnameList>& x);
         operator c10::optional<torch::DimnameList>&();
     };
+
+    class Generator {
+      public:
+        std::shared_ptr<c10::optional<torch::Generator>> x_;
+        Generator (const c10::optional<torch::Generator>& x);
+        operator c10::optional<torch::Generator>&();
+    };
     
   }
 }
@@ -207,6 +214,7 @@ namespace make_unique {
     void* double_t (const c10::optional<double>& x);
     void* int64_t (const c10::optional<std::int64_t>& x);
     void* DimnameList (const c10::optional<torch::DimnameList>& x);
+    void* Generator (const c10::optional<torch::Generator>& x);
   }
 
 }
@@ -250,7 +258,7 @@ namespace from_raw {
 
   namespace optional {
     LANTERN_FROM_RAW_DECL(DimnameList, c10::optional<torch::DimnameList>)
-    c10::optional<torch::Generator> Generator (void* x);
+    LANTERN_FROM_RAW_DECL(Generator, c10::optional<torch::Generator>)
     c10::optional<torch::Tensor> Tensor (void* x);
     c10::optional<double> double_t (void* x);
     c10::optional<std::int64_t> int64_t (void* x);

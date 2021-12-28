@@ -704,6 +704,35 @@ void delete_generator (void* x)
   lantern_Generator_delete(x);
 }
 
+// optional generator
+
+SEXP operator_sexp_optional_generator (const XPtrTorchOptionalGenerator* self)
+{
+  if (!lantern_optional_generator_has_value(self->get()))
+  {
+    return R_NilValue;
+  }
+  
+  
+  return Rcpp::wrap(XPtrTorchGenerator(lantern_optional_generator_value(self->get())));
+}
+
+XPtrTorchOptionalGenerator from_sexp_optional_generator (SEXP x)
+{
+  // We actualy do the same as we do with non-optional Generator's which is
+  // getting the default LibTorch Generator and pass that.
+  // This is because we want to have full control over the default Generator
+  // to be able to make changes that don't break backward compatibility.
+  return XPtrTorchOptionalGenerator(lantern_optional_generator(
+      Rcpp::as<XPtrTorchGenerator>(x).get()
+  ));
+}
+
+void delete_optional_generator (void* x)
+{
+  lantern_optional_generator_delete(x);
+}
+
 // memory format
 
 SEXP operator_sexp_memory_format (const XPtrTorchMemoryFormat* self)

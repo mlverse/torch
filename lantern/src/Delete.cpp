@@ -148,6 +148,13 @@ void _lantern_optional_dimname_list_delete(void *x)
   LANTERN_FUNCTION_END_VOID
 }
 
+void _lantern_optional_generator_delete (void* x)
+{
+  LANTERN_FUNCTION_START
+  lantern_delete<self_contained::optional::Generator>(x);
+  LANTERN_FUNCTION_END_VOID
+}
+
 void _lantern_MemoryFormat_delete(void *x)
 {
   LANTERN_FUNCTION_START
