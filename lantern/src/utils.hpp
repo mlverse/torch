@@ -153,6 +153,13 @@ namespace self_contained {
         Generator (const c10::optional<torch::Generator>& x);
         operator c10::optional<torch::Generator>&();
     };
+
+    class Tensor {
+      public:
+        std::shared_ptr<c10::optional<torch::Tensor>> x_;
+        Tensor (const c10::optional<torch::Tensor>& x);
+        operator c10::optional<torch::Tensor>&();
+    };
     
   }
 }
@@ -210,11 +217,11 @@ namespace make_unique {
     void* IntArrayRef (const c10::optional<torch::IntArrayRef>& x);
     void* DoubleArrayRef (const c10::optional<torch::ArrayRef<double>>& x);
     void* Scalar (const c10::optional<torch::Scalar>& x);
-    void* Tensor (const c10::optional<torch::Tensor>& x);
     void* double_t (const c10::optional<double>& x);
     void* int64_t (const c10::optional<std::int64_t>& x);
     void* DimnameList (const c10::optional<torch::DimnameList>& x);
     void* Generator (const c10::optional<torch::Generator>& x);
+    void* Tensor (const c10::optional<torch::Tensor>& x);
   }
 
 }
@@ -259,7 +266,7 @@ namespace from_raw {
   namespace optional {
     LANTERN_FROM_RAW_DECL(DimnameList, c10::optional<torch::DimnameList>)
     LANTERN_FROM_RAW_DECL(Generator, c10::optional<torch::Generator>)
-    c10::optional<torch::Tensor> Tensor (void* x);
+    LANTERN_FROM_RAW_DECL(Tensor, c10::optional<torch::Tensor>)
     c10::optional<double> double_t (void* x);
     c10::optional<std::int64_t> int64_t (void* x);
     c10::optional<bool> bool_t (void* x);

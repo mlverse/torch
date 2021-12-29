@@ -113,6 +113,7 @@ void * _lantern_optional_vector_int64_t(int64_t * x, size_t x_size, bool is_null
 
 LANTERN_OPTIONAL(dimname_list, DimnameList)
 LANTERN_OPTIONAL(generator, Generator)
+LANTERN_OPTIONAL(tensor, Tensor)
 
 void *_lantern_int64_t(int64_t x)
 {
@@ -334,6 +335,14 @@ namespace self_contained {
         Generator::operator c10::optional<torch::Generator>& () {
           return *x_;
         };
+
+        Tensor::Tensor (const c10::optional<torch::Tensor>& x) {
+          x_ = std::make_shared<c10::optional<torch::Tensor>>(x);
+        };
+
+        Tensor::operator c10::optional<torch::Tensor>& () {
+          return *x_;
+        };
     
   }
 }
@@ -519,11 +528,6 @@ namespace make_unique {
       return make_ptr<c10::optional<torch::Scalar>>(x);
     }
 
-    void* Tensor (const c10::optional<torch::Tensor>& x)
-    {
-      return make_ptr<c10::optional<torch::Tensor>>(x);
-    }
-
     void* DimnameList (const c10::optional<torch::DimnameList>& x)
     {
       return make_ptr<self_contained::optional::DimnameList>(x);
@@ -532,6 +536,11 @@ namespace make_unique {
     void* Generator (const c10::optional<torch::Generator>& x)
     {
       return make_ptr<self_contained::optional::Generator>(x);
+    }
+
+    void* Tensor (const c10::optional<torch::Tensor>& x)
+    {
+      return make_ptr<self_contained::optional::Tensor>(x);
     }
 
   }
@@ -582,11 +591,7 @@ namespace from_raw {
     // code generation in the R side, in order for R to own the memory in the 'optional' case.
     LANTERN_FROM_RAW_WRAPPED(DimnameList, self_contained::optional::DimnameList, c10::optional<torch::DimnameList>)
     LANTERN_FROM_RAW_WRAPPED(Generator, self_contained::optional::Generator, c10::optional<torch::Generator>)
-  
-    c10::optional<torch::Tensor> Tensor (void* x) {
-      if (!x) return c10::nullopt;
-      return *reinterpret_cast<c10::optional<torch::Tensor>*>(x);
-    }
+    LANTERN_FROM_RAW_WRAPPED(Tensor, self_contained::optional::Tensor, c10::optional<torch::Tensor>)
 
     c10::optional<double> double_t (void* x) {
       if (!x) return c10::nullopt;

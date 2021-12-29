@@ -161,18 +161,12 @@ void delete_tensor (void* x)
 
 SEXP operator_sexp_optional_tensor (const XPtrTorchOptionalTensor* self) 
 {
-  bool has_value = lantern_optional_tensor_has_value(self->get());
-  if (!has_value)
+  if (!lantern_optional_tensor_has_value(self->get()))
   {
     return R_NilValue;
   }
-  else 
-  {
-    auto ten = PROTECT(XPtrTorchTensor(lantern_optional_tensor_value(self->get())));
-    auto sxp = Rcpp::wrap(ten);
-    UNPROTECT(1);
-    return sxp;
-  }
+  
+  return Rcpp::wrap(XPtrTorchTensor(lantern_optional_tensor_value(self->get())));
 }
 
 XPtrTorchOptionalTensor from_sexp_optional_tensor (SEXP x)
@@ -180,11 +174,11 @@ XPtrTorchOptionalTensor from_sexp_optional_tensor (SEXP x)
   const bool is_null = TYPEOF(x) == NILSXP || (TYPEOF(x) == VECSXP && LENGTH(x) == 0);
   if (is_null)
   {
-    return XPtrTorchOptionalTensor(lantern_optional_tensor(nullptr, true));
+    return XPtrTorchOptionalTensor(lantern_optional_tensor(nullptr));
   }
   else
   {
-    return XPtrTorchOptionalTensor(lantern_optional_tensor(XPtrTorchTensor(x).get(), false));
+    return XPtrTorchOptionalTensor(lantern_optional_tensor(Rcpp::as<XPtrTorchTensor>(x).get()));
   }
 }
 

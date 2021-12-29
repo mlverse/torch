@@ -263,35 +263,6 @@ void* _lantern_normal_tensor_double_generator (void* mean, double std, void* gen
   LANTERN_FUNCTION_END
 }
 
-void *_lantern_optional_tensor(void* x, bool is_null)
-{
-  LANTERN_FUNCTION_START
-  c10::optional<torch::Tensor> out;
-  if (is_null)
-    out = c10::nullopt;
-  else
-  {
-    torch::Tensor value = from_raw::Tensor(x);
-    out = value;
-  }
-    
-
-  return make_unique::optional::Tensor(out);
-  LANTERN_FUNCTION_END
-}
-
-bool _lantern_optional_tensor_has_value (void*x)
-{
-  auto value = from_raw::optional::Tensor(x);
-  return value.has_value();
-}
-
-void* _lantern_optional_tensor_value (void* x)
-{
-  auto value = from_raw::optional::Tensor(x);
-  return make_unique::Tensor(value.value());
-}
-
 void _lantern_tensor_set_pyobj (void*x, void* ptr)
 {
   LANTERN_FUNCTION_START

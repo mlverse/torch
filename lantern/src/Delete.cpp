@@ -155,6 +155,13 @@ void _lantern_optional_generator_delete (void* x)
   LANTERN_FUNCTION_END_VOID
 }
 
+void _lantern_optional_tensor_delete (void* x)
+{
+  LANTERN_FUNCTION_START
+  lantern_delete<self_contained::optional::Tensor>(x);
+  LANTERN_FUNCTION_END_VOID
+}
+
 void _lantern_MemoryFormat_delete(void *x)
 {
   LANTERN_FUNCTION_START
@@ -306,13 +313,6 @@ void _lantern_vector_void_delete(void* x)
 {
   LANTERN_FUNCTION_START;
   lantern_delete<std::vector<void*>>(x);
-  LANTERN_FUNCTION_END_VOID;
-}
-
-void _lantern_optional_tensor_delete (void* x)
-{
-  LANTERN_FUNCTION_START;
-  lantern_delete<c10::optional<torch::Tensor>>(x);
   LANTERN_FUNCTION_END_VOID;
 }
 
