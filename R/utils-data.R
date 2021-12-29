@@ -21,8 +21,14 @@ get_init <- function(x) {
   
 }
 
-#' Helper function to create an R6 class that inherits from the abstract `Dataset` class
+
+#' Helper function to create an function that generates R6 instances of class `dataset`
 #' 
+#' The output is a function `f` with class `dataset_generator`. Calling `f()`
+#' creates a new instance of the R6 class `dataset`. The R6 class is stored in the 
+#' enclosing environment of `f` and can also be accessed through `f`s attribute 
+#' `Dataset`.
+
 #' All datasets that represent a map from keys to data samples should subclass this 
 #' class. All subclasses should overwrite the `.getitem()` method, which supports 
 #' fetching a data sample for a given key. Subclasses could also optionally 
