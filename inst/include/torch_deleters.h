@@ -29,7 +29,6 @@ void delete_ivalue (void* x);
 void delete_tuple (void* x);
 void delete_vector_bool (void* x);
 void delete_vector_scalar (void* x);
-void delete_int64_t_2 (void* x);
 void delete_vector_int64_t (void* x);
 void delete_vector_double (void* x);
 void delete_tensor_dict (void* x);

@@ -25,12 +25,12 @@ XPtrTorchTensorList cpp_nn_utils_pad_packed_sequence (
   Rcpp::XPtr<XPtrTorchPackedSequence> sequence,
   bool batch_first,
   double padding_value,
-  Rcpp::XPtr<XPtrTorchoptional_int64_t> total_length
+  XPtrTorchoptional_int64_t total_length
 ) {
   XPtrTorchTensorList out = lantern_nn_utils_rnn_pad_packed_sequence(
     sequence->get(),
     batch_first, padding_value,
-    total_length->get()
+    total_length.get()
   );  
   return out;
 }

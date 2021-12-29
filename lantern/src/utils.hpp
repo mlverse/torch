@@ -167,6 +167,20 @@ namespace self_contained {
         double_t (const c10::optional<double>& x);
         operator c10::optional<double>&();
     };
+
+    class int64_t {
+      public:
+        std::shared_ptr<c10::optional<std::int64_t>> x_;
+        int64_t (const c10::optional<std::int64_t>& x);
+        operator c10::optional<std::int64_t>&();
+    };
+
+    class bool_t {
+      public:
+        std::shared_ptr<c10::optional<bool>> x_;
+        bool_t (const c10::optional<bool>& x);
+        operator c10::optional<bool>&();
+    };
     
   }
 }
@@ -275,8 +289,8 @@ namespace from_raw {
     LANTERN_FROM_RAW_DECL(Generator, c10::optional<torch::Generator>)
     LANTERN_FROM_RAW_DECL(Tensor, c10::optional<torch::Tensor>)
     LANTERN_FROM_RAW_DECL(double_t, c10::optional<double>)
-    c10::optional<std::int64_t> int64_t (void* x);
-    c10::optional<bool> bool_t (void* x);
+    LANTERN_FROM_RAW_DECL(int64_t, c10::optional<std::int64_t>)
+    LANTERN_FROM_RAW_DECL(bool_t, c10::optional<bool>)
     c10::optional<torch::ScalarType> ScalarType (void* x);
     c10::optional<std::string> string (void* x);
     c10::optional<torch::MemoryFormat> MemoryFormat (void* x);

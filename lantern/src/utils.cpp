@@ -115,6 +115,8 @@ LANTERN_OPTIONAL(dimname_list, DimnameList)
 LANTERN_OPTIONAL(generator, Generator)
 LANTERN_OPTIONAL(tensor, Tensor)
 LANTERN_OPTIONAL(double, double_t)
+LANTERN_OPTIONAL(int64_t, int64_t)
+LANTERN_OPTIONAL(bool, bool_t)
 
 void *_lantern_int64_t(int64_t x)
 {
@@ -127,19 +129,6 @@ void *_lantern_double(double x)
 {
   LANTERN_FUNCTION_START
   return make_unique::double_t(x);
-  LANTERN_FUNCTION_END
-}
-
-void *_lantern_optional_int64_t(int64_t x, bool is_null)
-{
-  LANTERN_FUNCTION_START
-  c10::optional<int64_t> out;
-  if (is_null)
-    out = c10::nullopt;
-  else
-    out = x;
-
-  return make_unique::optional::int64_t(out);
   LANTERN_FUNCTION_END
 }
 
@@ -168,19 +157,6 @@ double _lantern_double_get (void* x)
 {
   LANTERN_FUNCTION_START
   return from_raw::double_t(x);
-  LANTERN_FUNCTION_END
-}
-
-void* _lantern_optional_bool (bool x, bool is_null)
-{
-  LANTERN_FUNCTION_START
-  c10::optional<bool> out;
-  if (is_null)
-    out = c10::nullopt;
-  else
-    out = x;
-
-  return make_unique::optional::bool_t(out);
   LANTERN_FUNCTION_END
 }
 
@@ -339,6 +315,22 @@ namespace self_contained {
         double_t::operator c10::optional<double>& () {
           return *x_;
         };
+
+        int64_t::int64_t (const c10::optional<std::int64_t>& x) {
+          x_ = std::make_shared<c10::optional<std::int64_t>>(x);
+        };
+
+        int64_t::operator c10::optional<std::int64_t>& () {
+          return *x_;
+        };
+
+        bool_t::bool_t (const c10::optional<bool>& x) {
+          x_ = std::make_shared<c10::optional<bool>>(x);
+        };
+
+        bool_t::operator c10::optional<bool>& () {
+          return *x_;
+        };
     
   }
 }
@@ -484,16 +476,6 @@ namespace make_unique {
 
   namespace optional {
     
-    void* bool_t (const c10::optional<bool>& x)
-    {
-      return make_ptr<c10::optional<bool>>(x);
-    }
-    
-    void* int64_t (const c10::optional<std::int64_t>& x)
-    {
-      return make_ptr<c10::optional<std::int64_t>>(x);
-    }
-
     void* string (const c10::optional<std::string>& x)
     {
       return make_ptr<c10::optional<std::string>>(x);
@@ -537,6 +519,16 @@ namespace make_unique {
     void* double_t (const c10::optional<double>& x)
     {
       return make_ptr<self_contained::optional::double_t>(x);
+    }
+
+    void* int64_t (const c10::optional<std::int64_t>& x)
+    {
+      return make_ptr<self_contained::optional::int64_t>(x);
+    }
+
+    void* bool_t (const c10::optional<bool>& x)
+    {
+      return make_ptr<self_contained::optional::bool_t>(x);
     }
 
   }
@@ -589,16 +581,8 @@ namespace from_raw {
     LANTERN_FROM_RAW_WRAPPED(Generator, self_contained::optional::Generator, c10::optional<torch::Generator>)
     LANTERN_FROM_RAW_WRAPPED(Tensor, self_contained::optional::Tensor, c10::optional<torch::Tensor>)
     LANTERN_FROM_RAW_WRAPPED(double_t, self_contained::optional::double_t, c10::optional<double>)
-    
-    c10::optional<std::int64_t> int64_t (void* x) {
-      if (!x) return c10::nullopt;
-      return *reinterpret_cast<c10::optional<std::int64_t>*>(x);
-    }
-
-    c10::optional<bool> bool_t (void* x) {
-      if (!x) return c10::nullopt;
-      return *reinterpret_cast<c10::optional<bool>*>(x);
-    }
+    LANTERN_FROM_RAW_WRAPPED(int64_t, self_contained::optional::int64_t, c10::optional<std::int64_t>)
+    LANTERN_FROM_RAW_WRAPPED(bool_t, self_contained::optional::bool_t, c10::optional<bool>)
 
     c10::optional<torch::ScalarType> ScalarType (void* x) {
       if (!x) return c10::nullopt;

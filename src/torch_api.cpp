@@ -1567,50 +1567,34 @@ void delete_tensor_dict (void* x)
   lantern_jit_TensorDict_delete(x);
 }
 
-// int64_t 2
+// optional_int64_t
 
-XPtrTorchint64_t2 from_sexp_int64_t_2 (SEXP x_)
+XPtrTorchoptional_int64_t from_sexp_optional_int64_t (SEXP x)
 {
-  int64_t x;
-  if (LENGTH(x_) == 1)
+  if (TYPEOF(x) == NILSXP || LENGTH(x) == 0)
   {
-    x = Rcpp::as<int64_t>(x_);  
-  } else {
-    Rcpp::stop("Expected a single integer.");
+    return XPtrTorchoptional_int64_t(lantern_optional_int64_t(nullptr));
   }
   
-  return XPtrTorchint64_t2(std::shared_ptr<void>(
-    lantern_int64_t(x), 
-    lantern_int64_t_delete
-  ));
+  return XPtrTorchoptional_int64_t(lantern_optional_int64_t(Rcpp::as<XPtrTorchint64_t>(x).get()));
 }
 
-void delete_int64_t_2 (void* x)
+// [[Rcpp::export]]
+SEXP cpp_test_optional (SEXP x)
 {
-  lantern_vector_int64_t2_delete(x);
+  auto v = Rcpp::as<XPtrTorchoptional_bool>(x);
+  auto k = Rcpp::wrap(v);
+  return k;
 }
 
-// optional_int64_t 2
-
-XPtrTorchoptional_int64_t2 from_sexp_optional_int64_t_2 (SEXP x_)
+SEXP operator_sexp_optional_int64_t (const XPtrTorchoptional_int64_t* x)
 {
-  int64_t x = 0;
-  bool is_null;
-  
-  if (TYPEOF(x_) == NILSXP || LENGTH(x_) == 0)
+  if (!lantern_optional_int64_t_has_value(x->get()))
   {
-    is_null = true;
+    return R_NilValue;
   }
-  else
-  {
-    x = Rcpp::as<int64_t>(x_);  
-    is_null = false;
-  } 
   
-  return XPtrTorchoptional_int64_t2(std::shared_ptr<void>(
-    lantern_optional_int64_t(x, is_null), 
-    lantern_optional_int64_t_delete
-  ));
+  return Rcpp::wrap(XPtrTorchint64_t(lantern_optional_int64_t_value(x->get())));
 }
 
 void delete_optional_int64_t (void* x)
@@ -1655,27 +1639,22 @@ XPtrTorchoptional_index_int64_t from_sexp_optional_index_int64_t (SEXP x_)
   
   if (TYPEOF(x_) == NILSXP || LENGTH(x_) == 0)
   {
-    is_null = true;
-  }
-  else
-  {
-    x = Rcpp::as<int64_t>(x_);  
-    is_null = false;
-    if (x == 0)
-    {
-      Rcpp::stop("Indexing starts at 1 but found a 0.");
-    }
-    
-    if (x > 0)
-    {
-      x = x - 1;
-    }
+    return XPtrTorchoptional_index_int64_t(Rcpp::as<XPtrTorchoptional_int64_t>(x_).get_shared());
   }
   
-  return XPtrTorchoptional_index_int64_t(std::shared_ptr<void>(
-    lantern_optional_int64_t(x, is_null), 
-    lantern_optional_int64_t_delete
-  ));
+  x = Rcpp::as<int64_t>(x_);  
+  if (x == 0)
+  {
+    Rcpp::stop("Indexing starts at 1 but found a 0.");
+  }
+  
+  if (x > 0)
+  {
+    x = x - 1;
+  }
+  
+  return XPtrTorchoptional_index_int64_t(Rcpp::as<XPtrTorchoptional_int64_t>(
+      Rcpp::wrap(x)).get_shared());
 }
 
 // function ptr
@@ -1745,6 +1724,11 @@ void delete_variable_list (void* x)
 
 // int64_t
 
+XPtrTorchint64_t from_sexp_int64_t (SEXP x)
+{
+  return XPtrTorchint64_t(lantern_int64_t(Rcpp::as<int64_t>(x)));
+}
+
 SEXP operator_sexp_int64_t (const XPtrTorchint64_t* x)
 {
   return Rcpp::wrap(lantern_int64_t_get(x->get()));
@@ -1776,7 +1760,22 @@ void delete_bool (void* x)
 
 XPtrTorchoptional_bool from_sexp_optional_bool (SEXP x)
 {
-  return XPtrTorchoptional_bool(lantern_optional_bool(Rcpp::as<bool>(x), TYPEOF(x) == NILSXP));
+  if (TYPEOF(x) == NILSXP)
+  {
+    return XPtrTorchoptional_bool(lantern_optional_bool(nullptr));
+  }
+  
+  return XPtrTorchoptional_bool(lantern_optional_bool(Rcpp::as<XPtrTorchbool>(x).get()));
+}
+
+SEXP operator_sexp_optional_bool (const XPtrTorchoptional_bool* x)
+{
+  if (!lantern_optional_bool_has_value(x->get()))
+  {
+    return R_NilValue;
+  }
+  
+  return Rcpp::wrap(XPtrTorchbool(lantern_optional_bool_value(x->get())));
 }
 
 void delete_optional_bool (void* x)

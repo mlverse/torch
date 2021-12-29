@@ -289,26 +289,6 @@ public:
   explicit XPtrTorchOptionalIndexIntArrayRef (SEXP x);
 };
 
-class XPtrTorchint64_t2 {
-public:
-  std::shared_ptr<void> ptr;
-  explicit XPtrTorchint64_t2 (SEXP x_);
-  explicit XPtrTorchint64_t2 (std::shared_ptr<void> x) : ptr(x) {};
-  void* get () {
-    return ptr.get();
-  }
-};
-
-class XPtrTorchoptional_int64_t2 {
-public:
-  std::shared_ptr<void> ptr;
-  explicit XPtrTorchoptional_int64_t2 (SEXP x_);
-  explicit XPtrTorchoptional_int64_t2 (std::shared_ptr<void> x) : ptr(x) {};
-  void* get () {
-    return ptr.get();
-  }
-};
-
 class XPtrTorchbool : public XPtrTorch {
 public:
   operator SEXP () const;
@@ -320,6 +300,7 @@ class XPtrTorchoptional_bool : public XPtrTorch {
 public:
   XPtrTorchoptional_bool (SEXP x_);
   XPtrTorchoptional_bool (void* x) : XPtrTorch(x, delete_optional_bool) {}
+  operator SEXP () const;
 };
 
 class XPtrTorchindex_int64_t {
@@ -452,11 +433,11 @@ public:
   operator SEXP () const;
 };
 
-#include <Rcpp.h>
-
-class XPtrTorchQScheme : public XPtrTorch {
+class XPtrTorchoptional_int64_t : public XPtrTorch {
 public:
-  XPtrTorchQScheme (void* x) : XPtrTorch (x, delete_qscheme) {}
+  XPtrTorchoptional_int64_t (void* x) : XPtrTorch(x, delete_optional_int64_t) {}
+  operator SEXP () const;
+  XPtrTorchoptional_int64_t (SEXP x);
 };
 
 class XPtrTorchdouble : public XPtrTorch {
@@ -473,6 +454,13 @@ public:
   XPtrTorchOptionaldouble (SEXP x);
 };
 
+#include <Rcpp.h>
+
+class XPtrTorchQScheme : public XPtrTorch {
+public:
+  XPtrTorchQScheme (void* x) : XPtrTorch (x, delete_qscheme) {}
+};
+
 class XPtrTorchvariable_list : public XPtrTorch {
 public:
   XPtrTorchvariable_list (void* x) : XPtrTorch(x, delete_variable_list) {}
@@ -482,6 +470,7 @@ class XPtrTorchint64_t : public XPtrTorch {
 public:
   operator SEXP () const; 
   XPtrTorchint64_t (void* x) : XPtrTorch(x, delete_int64_t) {}
+  XPtrTorchint64_t (SEXP x);
 };
 
 class XPtrTorchLayout : public XPtrTorch {
@@ -494,10 +483,7 @@ public:
   XPtrTorchTensorIndex (void* x) : XPtrTorch(x, delete_tensor_index) {}
 };
 
-class XPtrTorchoptional_int64_t : public XPtrTorch {
-public:
-  XPtrTorchoptional_int64_t (void* x) : XPtrTorch(x, delete_optional_int64_t) {}
-};
+
 
 class XPtrTorchSlice : public XPtrTorch {
 public:
@@ -602,7 +588,6 @@ using variable_list = XPtrTorchvariable_list;
 using Layout = XPtrTorchLayout;
 using Storage = XPtrTorchStorage;
 
-using int64_t2 = XPtrTorchint64_t2;
 using string = XPtrTorchstring;
 using double_t = XPtrTorchdouble;
 using int64_t = XPtrTorchint64_t;
@@ -641,7 +626,6 @@ using Device = XPtrTorchOptionalDevice;
 using IntArrayRef = XPtrTorchOptionalIntArrayRef;
 using Generator = XPtrTorchOptionalGenerator;
 
-using int64_t2 = XPtrTorchoptional_int64_t2;
 using int64_t = XPtrTorchoptional_int64_t;
 
 }

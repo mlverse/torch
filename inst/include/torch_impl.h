@@ -371,15 +371,17 @@ XPtrTorchint64_t::operator SEXP () const {
   return operator_sexp_int64_t(this);
 }
 
-// int64_t2
+XPtrTorchint64_t::XPtrTorchint64_t (SEXP x):
+  XPtrTorchint64_t{from_sexp_int64_t(x)} {}
 
-XPtrTorchint64_t2::XPtrTorchint64_t2(SEXP x) :
-  XPtrTorchint64_t2{from_sexp_int64_t_2(x)} {}
+// optional int64_t
 
-// optional_int64_t2
+XPtrTorchoptional_int64_t::operator SEXP() const {
+  return operator_sexp_optional_int64_t(this);
+}
 
-XPtrTorchoptional_int64_t2::XPtrTorchoptional_int64_t2(SEXP x) :
-  XPtrTorchoptional_int64_t2{from_sexp_optional_int64_t_2(x)} {}
+XPtrTorchoptional_int64_t::XPtrTorchoptional_int64_t (SEXP x):
+  XPtrTorchoptional_int64_t{from_sexp_optional_int64_t(x)} {}
 
 // bool
 
@@ -408,11 +410,14 @@ XPtrTorchOptionaldouble::operator SEXP () const {
 XPtrTorchOptionaldouble::XPtrTorchOptionaldouble (SEXP x):
   XPtrTorchOptionaldouble{from_sexp_optional_double(x)} {}
 
-
 // optional_bool
 
 XPtrTorchoptional_bool::XPtrTorchoptional_bool(SEXP x) :
   XPtrTorchoptional_bool{from_sexp_optional_bool(x)} {}
+
+XPtrTorchoptional_bool::operator SEXP () const {
+  return operator_sexp_optional_bool(this);
+}
 
 // index_int64_t
 

@@ -5610,6 +5610,7 @@ void* _lantern_ldexp_out_tensor_tensor_tensor(void* out, void* self, void* other
 void* _lantern_linspace_scalar_scalar_intt_tensoroptions(void* start, void* end, void* steps, void* options)
 {
   LANTERN_FUNCTION_START
+  std::cout << from_raw::optional::int64_t(steps).value() << std::endl;
     return make_unique::Tensor(torch::linspace(
         from_raw::Scalar(start), from_raw::Scalar(end), from_raw::optional::int64_t(steps), from_raw::TensorOptions(options)));
   LANTERN_FUNCTION_END

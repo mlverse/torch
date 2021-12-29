@@ -13,18 +13,6 @@ Rcpp::XPtr<std::nullptr_t> cpp_nullopt () {
 }
 
 // [[Rcpp::export]]
-Rcpp::XPtr<XPtrTorchoptional_int64_t> cpp_optional_int64_t (Rcpp::Nullable<int64_t> x)
-{
-  XPtrTorchoptional_int64_t out = nullptr;
-  if (x.isNull()) {
-    out = lantern_optional_int64_t(0, true);
-  } else {
-    out = lantern_optional_int64_t(Rcpp::as<int64_t>(x), false);
-  }
-  return make_xptr<XPtrTorchoptional_int64_t>(out);
-}
-
-// [[Rcpp::export]]
 XPtrTorchTensor cpp_tensor_undefined () {
   return XPtrTorchTensor(lantern_Tensor_undefined());
 }

@@ -188,11 +188,11 @@ cpp_parameter_type <- function(argument) {
   }
 
   if (argument$dynamic_type == "int64_t" && !argument$type == "c10::optional<int64_t>") {
-    declaration <- "XPtrTorchint64_t2"
+    declaration <- "XPtrTorchint64_t"
   }
 
   if (argument$dynamic_type == "int64_t" && argument$type == "c10::optional<int64_t>") {
-    declaration <- "XPtrTorchoptional_int64_t2"
+    declaration <- "XPtrTorchoptional_int64_t"
   }
 
   if (argument$dynamic_type == "double" && argument$type == "c10::optional<double>") {
