@@ -160,6 +160,7 @@ enum IValue_types {
 LANTERN_OPTIONAL_DECLS(dimname_list)
 LANTERN_OPTIONAL_DECLS(generator)
 LANTERN_OPTIONAL_DECLS(tensor)
+LANTERN_OPTIONAL_DECLS(double)
 
   LANTERN_API void(LANTERN_PTR lanternConfigure)(int log);
   LANTERN_API const char*(LANTERN_PTR lanternVersion)();
@@ -411,8 +412,6 @@ LANTERN_OPTIONAL_DECLS(tensor)
   HOST_API void lantern_AutogradContext_mark_dirty(void *self, void *inputs) {LANTERN_CHECK_LOADED _lantern_AutogradContext_mark_dirty(self, inputs); LANTERN_HOST_HANDLER }
   LANTERN_API void(LANTERN_PTR _lantern_AutogradContext_mark_non_differentiable)(void *self, void *outputs);
   HOST_API void lantern_AutogradContext_mark_non_differentiable(void *self, void *outputs) {LANTERN_CHECK_LOADED _lantern_AutogradContext_mark_non_differentiable(self, outputs); LANTERN_HOST_HANDLER }
-  LANTERN_API void *(LANTERN_PTR _lantern_optional_double)(double x, bool is_null);
-  HOST_API void * lantern_optional_double(double x, bool is_null) {LANTERN_CHECK_LOADED void * ret = _lantern_optional_double(x, is_null); LANTERN_HOST_HANDLER return ret;}
   LANTERN_API void(LANTERN_PTR _test_grad_fn)();
   HOST_API void test_grad_fn(double x, bool is_null) {LANTERN_CHECK_LOADED _test_grad_fn(); LANTERN_HOST_HANDLER }
   LANTERN_API void *(LANTERN_PTR _lantern_Tensor_grad_fn)(void *self);
@@ -7442,6 +7441,7 @@ bool lanternInit(const std::string &libPath, std::string *pError)
   LANTERN_OPTIONAL_LOAD_SYMBOL(dimname_list)
   LANTERN_OPTIONAL_LOAD_SYMBOL(generator)
   LANTERN_OPTIONAL_LOAD_SYMBOL(tensor)
+  LANTERN_OPTIONAL_LOAD_SYMBOL(double)
   LOAD_SYMBOL(lanternConfigure);
   LOAD_SYMBOL(lanternVersion);
   LOAD_SYMBOL(lanternSetLastError);

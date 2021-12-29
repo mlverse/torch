@@ -396,6 +396,18 @@ XPtrTorchdouble::operator SEXP () const {
   return operator_sexp_double(this);
 }
 
+XPtrTorchdouble::XPtrTorchdouble (SEXP x):
+  XPtrTorchdouble{from_sexp_double(x)} {}
+
+// optional double
+
+XPtrTorchOptionaldouble::operator SEXP () const {
+  return operator_sexp_optional_double(this);
+}
+
+XPtrTorchOptionaldouble::XPtrTorchOptionaldouble (SEXP x):
+  XPtrTorchOptionaldouble{from_sexp_optional_double(x)} {}
+
 
 // optional_bool
 

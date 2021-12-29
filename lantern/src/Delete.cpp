@@ -323,6 +323,13 @@ void _lantern_optional_device_delete (void* x)
   LANTERN_FUNCTION_END_VOID;
 }
 
+void _lantern_optional_double_delete (void* x)
+{
+  LANTERN_FUNCTION_START;
+  lantern_delete<self_contained::optional::double_t>(x);
+  LANTERN_FUNCTION_END_VOID;
+}
+
 void _lantern_jit_named_parameter_list_delete (void* x)
 {
   LANTERN_FUNCTION_START;

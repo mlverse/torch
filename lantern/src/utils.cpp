@@ -114,6 +114,7 @@ void * _lantern_optional_vector_int64_t(int64_t * x, size_t x_size, bool is_null
 LANTERN_OPTIONAL(dimname_list, DimnameList)
 LANTERN_OPTIONAL(generator, Generator)
 LANTERN_OPTIONAL(tensor, Tensor)
+LANTERN_OPTIONAL(double, double_t)
 
 void *_lantern_int64_t(int64_t x)
 {
@@ -126,19 +127,6 @@ void *_lantern_double(double x)
 {
   LANTERN_FUNCTION_START
   return make_unique::double_t(x);
-  LANTERN_FUNCTION_END
-}
-
-void *_lantern_optional_double(double x, bool is_null)
-{
-  LANTERN_FUNCTION_START
-  c10::optional<double> out;
-  if (is_null)
-    out = c10::nullopt;
-  else
-    out = x;
-
-  return make_unique::optional::double_t(out);
   LANTERN_FUNCTION_END
 }
 
@@ -343,6 +331,14 @@ namespace self_contained {
         Tensor::operator c10::optional<torch::Tensor>& () {
           return *x_;
         };
+
+        double_t::double_t (const c10::optional<double>& x) {
+          x_ = std::make_shared<c10::optional<double>>(x);
+        };
+
+        double_t::operator c10::optional<double>& () {
+          return *x_;
+        };
     
   }
 }
@@ -492,12 +488,7 @@ namespace make_unique {
     {
       return make_ptr<c10::optional<bool>>(x);
     }
-
-    void* double_t (const c10::optional<double>& x)
-    {
-      return make_ptr<c10::optional<double>>(x);
-    }
-
+    
     void* int64_t (const c10::optional<std::int64_t>& x)
     {
       return make_ptr<c10::optional<std::int64_t>>(x);
@@ -541,6 +532,11 @@ namespace make_unique {
     void* Tensor (const c10::optional<torch::Tensor>& x)
     {
       return make_ptr<self_contained::optional::Tensor>(x);
+    }
+
+    void* double_t (const c10::optional<double>& x)
+    {
+      return make_ptr<self_contained::optional::double_t>(x);
     }
 
   }
@@ -592,12 +588,8 @@ namespace from_raw {
     LANTERN_FROM_RAW_WRAPPED(DimnameList, self_contained::optional::DimnameList, c10::optional<torch::DimnameList>)
     LANTERN_FROM_RAW_WRAPPED(Generator, self_contained::optional::Generator, c10::optional<torch::Generator>)
     LANTERN_FROM_RAW_WRAPPED(Tensor, self_contained::optional::Tensor, c10::optional<torch::Tensor>)
-
-    c10::optional<double> double_t (void* x) {
-      if (!x) return c10::nullopt;
-      return *reinterpret_cast<c10::optional<double>*>(x);
-    }
-
+    LANTERN_FROM_RAW_WRAPPED(double_t, self_contained::optional::double_t, c10::optional<double>)
+    
     c10::optional<std::int64_t> int64_t (void* x) {
       if (!x) return c10::nullopt;
       return *reinterpret_cast<c10::optional<std::int64_t>*>(x);

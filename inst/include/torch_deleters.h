@@ -56,6 +56,7 @@ void delete_optional_bool (void* x);
 void delete_optional_double_array_ref (void* x);
 void delete_optional_dimname_list (void* x);
 void delete_optional_generator (void* x);
+void delete_optional_double (void* x);
 
 void* fixme_new_string (const char* x);
 void* fixme_new_dimname (const char* x);

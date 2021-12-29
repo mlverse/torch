@@ -463,6 +463,14 @@ class XPtrTorchdouble : public XPtrTorch {
 public:
   operator SEXP () const;
   XPtrTorchdouble (void* x) : XPtrTorch(x, delete_double) {}
+  XPtrTorchdouble (SEXP x);
+};
+
+class XPtrTorchOptionaldouble : public XPtrTorch {
+public:
+  operator SEXP() const;
+  XPtrTorchOptionaldouble (void* x): XPtrTorch(x, delete_optional_double) {}
+  XPtrTorchOptionaldouble (SEXP x);
 };
 
 class XPtrTorchvariable_list : public XPtrTorch {

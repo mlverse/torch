@@ -40,6 +40,7 @@ SEXP operator_sexp_bool (const XPtrTorchbool* x);
 SEXP operator_sexp_double (const XPtrTorchdouble* x);
 SEXP operator_sexp_optional_dimname_list (const XPtrTorchOptionalDimnameList* x);
 SEXP operator_sexp_optional_generator (const XPtrTorchOptionalGenerator* x);
+SEXP operator_sexp_optional_double (const XPtrTorchOptionaldouble* x);
   
 XPtrTorchTensor from_sexp_tensor (SEXP x);
 XPtrTorchOptionalTensor from_sexp_optional_tensor (SEXP x);
@@ -81,5 +82,7 @@ XPtrTorchbool from_sexp_bool (SEXP x);
 XPtrTorchOptionalDoubleArrayRef from_sexp_optional_double_array_ref (SEXP x);
 XPtrTorchOptionalDimnameList from_sexp_optional_dimname_list (SEXP x);
 XPtrTorchOptionalGenerator from_sexp_optional_generator (SEXP x);
+XPtrTorchdouble from_sexp_double (SEXP x);
+XPtrTorchOptionaldouble from_sexp_optional_double (SEXP x);
 
 #endif // TORCH_API

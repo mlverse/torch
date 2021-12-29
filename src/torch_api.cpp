@@ -1699,9 +1699,41 @@ SEXP operator_sexp_double (const XPtrTorchdouble* x)
   return Rcpp::wrap(lantern_double_get(x->get()));
 }
 
+XPtrTorchdouble from_sexp_double (SEXP x)
+{
+  return XPtrTorchdouble(lantern_double(Rcpp::as<double>(x)));
+}
+
 void delete_double (void* x)
 {
   lantern_double_delete(x);
+}
+
+// optional double
+
+SEXP operator_sexp_optional_double (const XPtrTorchOptionaldouble* x)
+{
+  if (!lantern_optional_double_has_value(x->get()))
+  {
+    return R_NilValue;
+  }
+  
+  return Rcpp::wrap(XPtrTorchdouble(lantern_optional_double_value(x->get())));
+}
+
+XPtrTorchOptionaldouble from_sexp_optional_double (SEXP x) 
+{
+  if (TYPEOF(x) == NILSXP || LENGTH(x) == 0)
+  {
+    return XPtrTorchOptionaldouble(lantern_optional_double(nullptr));
+  }
+  
+  return XPtrTorchOptionaldouble(Rcpp::as<XPtrTorchdouble>(x).get());
+}
+
+void delete_optional_double (void* x)
+{
+  lantern_optional_double_delete(x);
 }
 
 // variable_list
