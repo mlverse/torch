@@ -1619,14 +1619,6 @@ XPtrTorchoptional_int64_t from_sexp_optional_int64_t (SEXP x)
   return XPtrTorchoptional_int64_t(lantern_optional_int64_t(Rcpp::as<XPtrTorchint64_t>(x).get()));
 }
 
-// [[Rcpp::export]]
-SEXP cpp_test_optional (SEXP x)
-{
-  auto v = Rcpp::as<XPtrTorchoptional_bool>(x);
-  auto k = Rcpp::wrap(v);
-  return k;
-}
-
 SEXP operator_sexp_optional_int64_t (const XPtrTorchoptional_int64_t* x)
 {
   if (!lantern_optional_int64_t_has_value(x->get()))
@@ -1745,7 +1737,7 @@ XPtrTorchOptionaldouble from_sexp_optional_double (SEXP x)
     return XPtrTorchOptionaldouble(lantern_optional_double(nullptr));
   }
   
-  return XPtrTorchOptionaldouble(Rcpp::as<XPtrTorchdouble>(x).get());
+  return XPtrTorchOptionaldouble(lantern_optional_double(Rcpp::as<XPtrTorchdouble>(x).get()));
 }
 
 void delete_optional_double (void* x)

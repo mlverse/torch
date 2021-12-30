@@ -34926,17 +34926,6 @@ BEGIN_RCPP
     return R_NilValue;
 END_RCPP
 }
-// cpp_test_optional
-SEXP cpp_test_optional(SEXP x);
-RcppExport SEXP _torch_cpp_test_optional(SEXP xSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< SEXP >::type x(xSEXP);
-    rcpp_result_gen = Rcpp::wrap(cpp_test_optional(x));
-    return rcpp_result_gen;
-END_RCPP
-}
 // cpp_trace_function
 Rcpp::XPtr<XPtrTorchFunctionPtr> cpp_trace_function(Rcpp::Function fn, XPtrTorchStack inputs, XPtrTorchCompilationUnit compilation_unit, XPtrTorchstring name, bool strict, XPtrTorchScriptModule module, bool should_mangle, bool manage_memory);
 RcppExport SEXP _torch_cpp_trace_function(SEXP fnSEXP, SEXP inputsSEXP, SEXP compilation_unitSEXP, SEXP nameSEXP, SEXP strictSEXP, SEXP moduleSEXP, SEXP should_mangleSEXP, SEXP manage_memorySEXP) {
@@ -37808,7 +37797,6 @@ static const R_CallMethodDef CallEntries[] = {
     {"_torch_cpp_tensor_list_to_r_list", (DL_FUNC) &_torch_cpp_tensor_list_to_r_list, 1},
     {"_torch_cpp_torch_tensor_options", (DL_FUNC) &_torch_cpp_torch_tensor_options, 5},
     {"_torch_cpp_torch_tensor_options_print", (DL_FUNC) &_torch_cpp_torch_tensor_options_print, 1},
-    {"_torch_cpp_test_optional", (DL_FUNC) &_torch_cpp_test_optional, 1},
     {"_torch_cpp_trace_function", (DL_FUNC) &_torch_cpp_trace_function, 8},
     {"_torch_cpp_save_traced_fn", (DL_FUNC) &_torch_cpp_save_traced_fn, 2},
     {"_torch_cpp_jit_compilation_unit", (DL_FUNC) &_torch_cpp_jit_compilation_unit, 0},
