@@ -214,6 +214,16 @@ XPtrTorchstring::operator SEXP () const
 XPtrTorchstring::XPtrTorchstring(SEXP x) :
   XPtrTorchstring{from_sexp_string(x)} {}
 
+// optional string
+
+XPtrTorchoptional_string::operator SEXP() const 
+{
+  return operator_sexp_optional_string(this);
+}
+
+XPtrTorchoptional_string::XPtrTorchoptional_string (SEXP x):
+  XPtrTorchoptional_string{from_sexp_optional_string(x)} {}
+
 // jit_named_parameter_list
 
 XPtrTorchjit_named_parameter_list::operator SEXP () const 

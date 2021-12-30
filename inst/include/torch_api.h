@@ -44,6 +44,7 @@ SEXP operator_sexp_optional_double (const XPtrTorchOptionaldouble* x);
 SEXP operator_sexp_optional_int64_t (const XPtrTorchoptional_int64_t* x);
 SEXP operator_sexp_optional_bool (const XPtrTorchoptional_bool* x);
 SEXP operator_sexp_optional_scalar_type (const XPtrTorchoptional_scalar_type* x);
+SEXP operator_sexp_optional_string (const XPtrTorchoptional_string* x);
   
 XPtrTorchTensor from_sexp_tensor (SEXP x);
 XPtrTorchOptionalTensor from_sexp_optional_tensor (SEXP x);
@@ -89,5 +90,6 @@ XPtrTorchoptional_int64_t from_sexp_optional_int64_t (SEXP x);
 XPtrTorchint64_t from_sexp_int64_t (SEXP x);
 XPtrTorchScalarType from_sexp_scalar_type (SEXP x);
 XPtrTorchoptional_scalar_type from_sexp_optional_scalar_type (SEXP x);
+XPtrTorchoptional_string from_sexp_optional_string (SEXP x);
 
 #endif // TORCH_API

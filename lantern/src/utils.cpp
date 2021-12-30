@@ -118,6 +118,7 @@ LANTERN_OPTIONAL(double, double_t)
 LANTERN_OPTIONAL(int64_t, int64_t)
 LANTERN_OPTIONAL(bool, bool_t)
 LANTERN_OPTIONAL(scalar_type, ScalarType)
+LANTERN_OPTIONAL(string, string)
 
 void *_lantern_int64_t(int64_t x)
 {
@@ -289,59 +290,6 @@ namespace self_contained {
           return *x_;
         };
 
-        Generator::Generator (const c10::optional<torch::Generator>& x) {
-          if (x.has_value()) {
-            x_ = std::make_shared<c10::optional<torch::Generator>>(x.value());
-          } else {
-            x_ = std::make_shared<c10::optional<torch::Generator>>(c10::nullopt);
-          }
-        };
-
-        Generator::operator c10::optional<torch::Generator>& () {
-          return *x_;
-        };
-
-        Tensor::Tensor (const c10::optional<torch::Tensor>& x) {
-          x_ = std::make_shared<c10::optional<torch::Tensor>>(x);
-        };
-
-        Tensor::operator c10::optional<torch::Tensor>& () {
-          return *x_;
-        };
-
-        double_t::double_t (const c10::optional<double>& x) {
-          x_ = std::make_shared<c10::optional<double>>(x);
-        };
-
-        double_t::operator c10::optional<double>& () {
-          return *x_;
-        };
-
-        int64_t::int64_t (const c10::optional<std::int64_t>& x) {
-          x_ = std::make_shared<c10::optional<std::int64_t>>(x);
-        };
-
-        int64_t::operator c10::optional<std::int64_t>& () {
-          return *x_;
-        };
-
-        bool_t::bool_t (const c10::optional<bool>& x) {
-          x_ = std::make_shared<c10::optional<bool>>(x);
-        };
-
-        bool_t::operator c10::optional<bool>& () {
-          return *x_;
-        };
-
-        ScalarType::ScalarType (const c10::optional<torch::ScalarType>& x)
-        {
-          x_ = std::make_shared<c10::optional<torch::ScalarType>>(x);
-        }
-        
-        ScalarType::operator c10::optional<torch::ScalarType>& () {
-          return *x_;
-        };
-    
   }
 }
 
@@ -488,7 +436,7 @@ namespace make_unique {
     
     void* string (const c10::optional<std::string>& x)
     {
-      return make_ptr<c10::optional<std::string>>(x);
+      return make_ptr<self_contained::optional::string>(x);
     }
 
     void* TensorList (const c10::List<c10::optional<torch::Tensor>>& x)
@@ -599,13 +547,8 @@ namespace from_raw {
     LANTERN_FROM_RAW_WRAPPED(int64_t, self_contained::optional::int64_t, c10::optional<std::int64_t>)
     LANTERN_FROM_RAW_WRAPPED(bool_t, self_contained::optional::bool_t, c10::optional<bool>)
     LANTERN_FROM_RAW_WRAPPED(ScalarType, self_contained::optional::ScalarType, c10::optional<torch::ScalarType>)
-
-    c10::optional<std::string> string (void* x)
-    {
-      if (!x) return c10::nullopt;
-      return *reinterpret_cast<std::string*>(x);
-    }
-
+    LANTERN_FROM_RAW_WRAPPED(string, self_contained::optional::string, c10::optional<std::string>)
+    
     c10::optional<torch::MemoryFormat> MemoryFormat (void* x) {
       if (!x) return c10::nullopt;
       return from_raw::MemoryFormat(x);

@@ -346,6 +346,13 @@ public:
   operator SEXP () const;
 };
 
+class XPtrTorchoptional_string: public XPtrTorch {
+public:
+  XPtrTorchoptional_string (void* x) : XPtrTorch(x, delete_optional_string) {}
+  XPtrTorchoptional_string (SEXP x);
+  operator SEXP () const;
+};
+
 class XPtrTorchStack : public XPtrTorch {
 public:
   XPtrTorchStack (void * x) : XPtrTorch(x, delete_stack) {}

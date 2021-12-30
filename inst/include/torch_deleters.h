@@ -57,6 +57,7 @@ void delete_optional_dimname_list (void* x);
 void delete_optional_generator (void* x);
 void delete_optional_double (void* x);
 void delete_optional_scalar_type (void* x);
+void delete_optional_string (void* x);
 
 void* fixme_new_string (const char* x);
 void* fixme_new_dimname (const char* x);

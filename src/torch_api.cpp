@@ -876,6 +876,35 @@ void* fixme_new_string (const char* x)
   return lantern_string_new(x);
 }
 
+// optional string
+
+SEXP operator_sexp_optional_string (const XPtrTorchoptional_string* x)
+{
+  if (!lantern_optional_string_has_value(x->get()))
+  {
+    return R_NilValue;
+  }
+  
+  return XPtrTorchstring(lantern_optional_string_value(x->get()));
+}
+
+XPtrTorchoptional_string from_sexp_optional_string (SEXP x)
+{
+  if (TYPEOF(x) == NILSXP)
+  {
+    return XPtrTorchoptional_string(lantern_optional_string(nullptr));
+  }
+  
+  return XPtrTorchoptional_string(lantern_optional_string(
+    Rcpp::as<XPtrTorchstring>(x).get()
+  ));
+}
+
+void delete_optional_string (void * x)
+{
+  lantern_optional_string_delete(x);
+}
+
 // jit_named_parameter_list
 
 SEXP operator_sexp_jit_named_parameter_list (const XPtrTorchjit_named_parameter_list* self)

@@ -125,6 +125,19 @@ class OptionalArrayRef {
 };
 
 
+template <typename T>
+class Box {
+  public:
+    std::shared_ptr<T> x_;
+    Box(const T& x) {
+      x_ = std::make_shared<T>(x);
+    }
+    operator T&() {
+      return *x_;
+    }
+};
+
+
 // Objects return from lantern must own all memory necessary to re-use them.
 // This is kind of easy for tensors as heap allocated tensors own all their memory
 // memory. However this is not true for `torch::TensorList` which is just a a reference
@@ -147,47 +160,13 @@ namespace self_contained {
         operator c10::optional<torch::DimnameList>&();
     };
 
-    class Generator {
-      public:
-        std::shared_ptr<c10::optional<torch::Generator>> x_;
-        Generator (const c10::optional<torch::Generator>& x);
-        operator c10::optional<torch::Generator>&();
-    };
-
-    class Tensor {
-      public:
-        std::shared_ptr<c10::optional<torch::Tensor>> x_;
-        Tensor (const c10::optional<torch::Tensor>& x);
-        operator c10::optional<torch::Tensor>&();
-    };
-
-    class double_t {
-      public:
-        std::shared_ptr<c10::optional<double>> x_;
-        double_t (const c10::optional<double>& x);
-        operator c10::optional<double>&();
-    };
-
-    class int64_t {
-      public:
-        std::shared_ptr<c10::optional<std::int64_t>> x_;
-        int64_t (const c10::optional<std::int64_t>& x);
-        operator c10::optional<std::int64_t>&();
-    };
-
-    class bool_t {
-      public:
-        std::shared_ptr<c10::optional<bool>> x_;
-        bool_t (const c10::optional<bool>& x);
-        operator c10::optional<bool>&();
-    };
-
-    class ScalarType {
-      public:
-        std::shared_ptr<c10::optional<torch::ScalarType>> x_;
-        ScalarType (const c10::optional<torch::ScalarType>& x);
-        operator c10::optional<torch::ScalarType>&();
-    };
+    using Generator = Box<c10::optional<torch::Generator>>;
+    using Tensor = Box<c10::optional<torch::Tensor>>;
+    using double_t = Box<c10::optional<double>>;
+    using int64_t = Box<c10::optional<std::int64_t>>;
+    using bool_t = Box<c10::optional<bool>>;
+    using ScalarType = Box<c10::optional<torch::ScalarType>>;
+    using string = Box<c10::optional<std::string>>;
     
   }
 }
@@ -300,7 +279,7 @@ namespace from_raw {
     LANTERN_FROM_RAW_DECL(int64_t, c10::optional<std::int64_t>)
     LANTERN_FROM_RAW_DECL(bool_t, c10::optional<bool>)
     LANTERN_FROM_RAW_DECL(ScalarType, c10::optional<torch::ScalarType>)
-    c10::optional<std::string> string (void* x);
+    LANTERN_FROM_RAW_DECL(string, c10::optional<std::string>)
     c10::optional<torch::MemoryFormat> MemoryFormat (void* x);
     c10::optional<torch::Scalar> Scalar (void* x);
     c10::List<c10::optional<torch::Tensor>>& TensorList (void* x);

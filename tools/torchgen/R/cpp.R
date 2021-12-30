@@ -247,8 +247,12 @@ cpp_parameter_type <- function(argument) {
     declaration <- "XPtrTorchMemoryFormat"
   }
 
-  if (argument$dynamic_type == "std::string") {
+  if (argument$dynamic_type == "std::string" && argument$type != "c10::optional<std::string>") {
     declaration <- "XPtrTorchstring"
+  }
+
+  if (argument$dynamic_type == "std::string" && argument$type == "c10::optional<std::string>") {
+    declaration <- "XPtrTorchoptional_string"
   }
 
   if (argument$dynamic_type == "Dimname") {

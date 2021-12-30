@@ -162,6 +162,13 @@ void _lantern_optional_tensor_delete (void* x)
   LANTERN_FUNCTION_END_VOID
 }
 
+void _lantern_optional_string_delete (void* x)
+{
+  LANTERN_FUNCTION_START
+  lantern_delete<self_contained::optional::string>(x);
+  LANTERN_FUNCTION_END_VOID
+}
+
 void _lantern_optional_scalar_type_delete (void* x) 
 {
   LANTERN_FUNCTION_START
