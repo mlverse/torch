@@ -117,6 +117,7 @@ LANTERN_OPTIONAL(tensor, Tensor)
 LANTERN_OPTIONAL(double, double_t)
 LANTERN_OPTIONAL(int64_t, int64_t)
 LANTERN_OPTIONAL(bool, bool_t)
+LANTERN_OPTIONAL(scalar_type, ScalarType)
 
 void *_lantern_int64_t(int64_t x)
 {
@@ -331,6 +332,15 @@ namespace self_contained {
         bool_t::operator c10::optional<bool>& () {
           return *x_;
         };
+
+        ScalarType::ScalarType (const c10::optional<torch::ScalarType>& x)
+        {
+          x_ = std::make_shared<c10::optional<torch::ScalarType>>(x);
+        }
+        
+        ScalarType::operator c10::optional<torch::ScalarType>& () {
+          return *x_;
+        };
     
   }
 }
@@ -531,6 +541,11 @@ namespace make_unique {
       return make_ptr<self_contained::optional::bool_t>(x);
     }
 
+    void* ScalarType (const c10::optional<torch::ScalarType>& x)
+    {
+      return make_ptr<self_contained::optional::ScalarType>(x);
+    }
+
   }
 
 }
@@ -583,11 +598,7 @@ namespace from_raw {
     LANTERN_FROM_RAW_WRAPPED(double_t, self_contained::optional::double_t, c10::optional<double>)
     LANTERN_FROM_RAW_WRAPPED(int64_t, self_contained::optional::int64_t, c10::optional<std::int64_t>)
     LANTERN_FROM_RAW_WRAPPED(bool_t, self_contained::optional::bool_t, c10::optional<bool>)
-
-    c10::optional<torch::ScalarType> ScalarType (void* x) {
-      if (!x) return c10::nullopt;
-      return *reinterpret_cast<torch::ScalarType*>(x);
-    }
+    LANTERN_FROM_RAW_WRAPPED(ScalarType, self_contained::optional::ScalarType, c10::optional<torch::ScalarType>)
 
     c10::optional<std::string> string (void* x)
     {

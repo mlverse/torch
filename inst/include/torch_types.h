@@ -113,6 +113,14 @@ public:
   XPtrTorchScalarType (void* x) : XPtrTorch (x, delete_scalar_type) {}
   explicit XPtrTorchScalarType (std::shared_ptr<void> x) : XPtrTorch(x) {}
   XPtrTorchScalarType (const XPtrTorchScalarType& x) : XPtrTorch(x.get_shared()) {}
+  XPtrTorchScalarType (SEXP x);
+  operator SEXP () const;
+};
+
+class XPtrTorchoptional_scalar_type : public XPtrTorch {
+public:
+  XPtrTorchoptional_scalar_type (void* x) : XPtrTorch (x, delete_optional_scalar_type) {}
+  XPtrTorchoptional_scalar_type (SEXP x);
   operator SEXP () const;
 };
 

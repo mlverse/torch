@@ -181,6 +181,13 @@ namespace self_contained {
         bool_t (const c10::optional<bool>& x);
         operator c10::optional<bool>&();
     };
+
+    class ScalarType {
+      public:
+        std::shared_ptr<c10::optional<torch::ScalarType>> x_;
+        ScalarType (const c10::optional<torch::ScalarType>& x);
+        operator c10::optional<torch::ScalarType>&();
+    };
     
   }
 }
@@ -243,6 +250,7 @@ namespace make_unique {
     void* DimnameList (const c10::optional<torch::DimnameList>& x);
     void* Generator (const c10::optional<torch::Generator>& x);
     void* Tensor (const c10::optional<torch::Tensor>& x);
+    void* ScalarType (const c10::optional<torch::ScalarType>& x);
   }
 
 }
@@ -291,7 +299,7 @@ namespace from_raw {
     LANTERN_FROM_RAW_DECL(double_t, c10::optional<double>)
     LANTERN_FROM_RAW_DECL(int64_t, c10::optional<std::int64_t>)
     LANTERN_FROM_RAW_DECL(bool_t, c10::optional<bool>)
-    c10::optional<torch::ScalarType> ScalarType (void* x);
+    LANTERN_FROM_RAW_DECL(ScalarType, c10::optional<torch::ScalarType>)
     c10::optional<std::string> string (void* x);
     c10::optional<torch::MemoryFormat> MemoryFormat (void* x);
     c10::optional<torch::Scalar> Scalar (void* x);

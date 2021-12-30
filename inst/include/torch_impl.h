@@ -46,6 +46,18 @@ XPtrTorchScalarType::operator SEXP () const {
   return operator_sexp_scalar_type(this);
 }
 
+XPtrTorchScalarType::XPtrTorchScalarType (SEXP x) :
+  XPtrTorchScalarType{from_sexp_scalar_type(x)} {}
+
+// optional scalar type
+
+XPtrTorchoptional_scalar_type::operator SEXP () const {
+  return operator_sexp_optional_scalar_type(this);
+}
+
+XPtrTorchoptional_scalar_type::XPtrTorchoptional_scalar_type (SEXP x) :
+  XPtrTorchoptional_scalar_type{from_sexp_optional_scalar_type(x)} {}
+
 // scalar
 
 XPtrTorchScalar::operator SEXP () const {

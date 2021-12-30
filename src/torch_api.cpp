@@ -317,9 +317,49 @@ SEXP operator_sexp_scalar_type (const XPtrTorchScalarType* self)
   return xptr; 
 }
 
+XPtrTorchScalarType from_sexp_scalar_type (SEXP x)
+{
+  if (TYPEOF(x) == EXTPTRSXP && Rf_inherits(x, "torch_dtype")) 
+  {
+    auto out = Rcpp::as<Rcpp::XPtr<XPtrTorchScalarType>>(x);
+    return XPtrTorchScalarType( out->get_shared());
+  }
+  
+  Rcpp::stop("Expected a scalar type");
+}
+
 void delete_scalar_type (void* x)
 {
   lantern_ScalarType_delete(x);
+}
+
+// optional scalar type
+
+SEXP operator_sexp_optional_scalar_type (const XPtrTorchoptional_scalar_type* self)
+{
+  if (!lantern_optional_scalar_type_has_value(self->get()))
+  {
+    return R_NilValue;
+  }
+  
+  return XPtrTorchoptional_scalar_type(XPtrTorchScalarType(
+      lantern_optional_scalar_type_value(self->get())).get());
+}
+
+XPtrTorchoptional_scalar_type from_sexp_optional_scalar_type (SEXP x)
+{
+  if (TYPEOF(x) == NILSXP) {
+    return XPtrTorchoptional_scalar_type(lantern_optional_scalar_type(nullptr));
+  }
+  
+  return XPtrTorchoptional_scalar_type(lantern_optional_scalar_type(
+    Rcpp::as<XPtrTorchScalarType>(x).get()
+  ));
+}
+
+void delete_optional_scalar_type (void* x)
+{
+  lantern_optional_scalar_type_delete(x);
 }
 
 // tensor options
@@ -1634,15 +1674,13 @@ XPtrTorchindex_int64_t from_sexp_index_int64_t (SEXP x_)
 
 XPtrTorchoptional_index_int64_t from_sexp_optional_index_int64_t (SEXP x_)
 {
-  int64_t x = 0;
-  bool is_null;
   
   if (TYPEOF(x_) == NILSXP || LENGTH(x_) == 0)
   {
     return XPtrTorchoptional_index_int64_t(Rcpp::as<XPtrTorchoptional_int64_t>(x_).get_shared());
   }
-  
-  x = Rcpp::as<int64_t>(x_);  
+
+  auto x = Rcpp::as<int64_t>(x_);  
   if (x == 0)
   {
     Rcpp::stop("Indexing starts at 1 but found a 0.");
