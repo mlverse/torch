@@ -167,6 +167,8 @@ namespace self_contained {
     using bool_t = Box<c10::optional<bool>>;
     using ScalarType = Box<c10::optional<torch::ScalarType>>;
     using string = Box<c10::optional<std::string>>;
+    using MemoryFormat = Box<c10::optional<torch::MemoryFormat>>;
+    using Scalar = Box<c10::optional<torch::Scalar>>;
     
   }
 }
@@ -230,6 +232,7 @@ namespace make_unique {
     void* Generator (const c10::optional<torch::Generator>& x);
     void* Tensor (const c10::optional<torch::Tensor>& x);
     void* ScalarType (const c10::optional<torch::ScalarType>& x);
+    void* MemoryFormat (const c10::optional<torch::MemoryFormat>& x);
   }
 
 }
@@ -280,8 +283,8 @@ namespace from_raw {
     LANTERN_FROM_RAW_DECL(bool_t, c10::optional<bool>)
     LANTERN_FROM_RAW_DECL(ScalarType, c10::optional<torch::ScalarType>)
     LANTERN_FROM_RAW_DECL(string, c10::optional<std::string>)
-    c10::optional<torch::MemoryFormat> MemoryFormat (void* x);
-    c10::optional<torch::Scalar> Scalar (void* x);
+    LANTERN_FROM_RAW_DECL(MemoryFormat, c10::optional<torch::MemoryFormat>)
+    LANTERN_FROM_RAW_DECL(Scalar, c10::optional<torch::Scalar>)
     c10::List<c10::optional<torch::Tensor>>& TensorList (void* x);
     OptionalArrayRef<std::int64_t>& IntArrayRef (void* x);
     OptionalArrayRef<double>& DoubleArrayRef (void* x);

@@ -231,8 +231,12 @@ cpp_parameter_type <- function(argument) {
     declaration <- "XPtrTorchoptional_scalar_type"
   }
 
-  if (argument$dynamic_type == "Scalar") {
+  if (argument$dynamic_type == "Scalar" && !stringr::str_detect(argument$type, "optional")) {
     declaration <- "XPtrTorchScalar"
+  }
+
+  if (argument$dynamic_type == "Scalar" && stringr::str_detect(argument$type, "optional")) {
+    declaration <- "XPtrTorchoptional_scalar"
   }
 
   if (argument$dynamic_type == "std::array<bool,3>") {
@@ -243,8 +247,12 @@ cpp_parameter_type <- function(argument) {
     declaration <- "std::vector<bool>"
   }
 
-  if (argument$dynamic_type == "MemoryFormat") {
+  if (argument$dynamic_type == "MemoryFormat" && argument$type != "c10::optional<MemoryFormat>") {
     declaration <- "XPtrTorchMemoryFormat"
+  }
+
+  if (argument$dynamic_type == "MemoryFormat" && argument$type == "c10::optional<MemoryFormat>") {
+    declaration <- "XPtrTorchoptional_memory_format"
   }
 
   if (argument$dynamic_type == "std::string" && argument$type != "c10::optional<std::string>") {

@@ -308,6 +308,35 @@ void delete_scalar (void* x)
   lantern_Scalar_delete(x);
 }
 
+// optional scalar
+
+SEXP operator_sexp_optional_scalar (const XPtrTorchoptional_scalar* x)
+{
+  if (!lantern_optional_scalar_has_value(x->get()))
+  {
+    return R_NilValue;
+  }
+  
+  return XPtrTorchScalar(lantern_optional_scalar_value(x->get()));
+}
+
+XPtrTorchoptional_scalar from_sexp_optional_scalar (SEXP x)
+{
+  if (TYPEOF(x) == NILSXP)
+  {
+    return XPtrTorchoptional_scalar(lantern_optional_scalar(nullptr));
+  }
+  
+  return XPtrTorchoptional_scalar(lantern_optional_scalar(
+    Rcpp::as<XPtrTorchScalar>(x).get()
+  ));
+}
+
+void delete_optional_scalar (void* x)
+{
+  lantern_optional_scalar_delete(x);
+}
+
 // scalar type
 
 SEXP operator_sexp_scalar_type (const XPtrTorchScalarType* self)
@@ -794,6 +823,35 @@ XPtrTorchMemoryFormat from_sexp_memory_format (SEXP x)
 void delete_memory_format (void* x)
 {
   lantern_MemoryFormat_delete(x);
+}
+
+// optional mmory format
+
+SEXP operator_sexp_optional_memory_format (const XPtrTorchoptional_memory_format* x)
+{
+  if (!lantern_optional_memory_format_has_value(x->get()))
+  {
+    return R_NilValue;
+  }
+  
+  return XPtrTorchMemoryFormat(lantern_optional_memory_format_value(x->get()));
+}
+
+XPtrTorchoptional_memory_format from_sexp_optional_memory_format (SEXP x)
+{
+  if (TYPEOF(x) == NILSXP)
+  {
+    return XPtrTorchoptional_memory_format(lantern_optional_memory_format(nullptr));
+  }
+  
+  return XPtrTorchoptional_memory_format(lantern_optional_memory_format(
+    Rcpp::as<XPtrTorchMemoryFormat>(x).get()
+  ));
+}
+
+void delete_optional_memory_format (void* x)
+{
+  lantern_optional_memory_format_delete(x);
 }
 
 // vector string

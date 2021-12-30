@@ -456,3 +456,17 @@ void _lantern_vector_Scalar_delete (void* x)
   LANTERN_FUNCTION_END_VOID
 }
 
+void _lantern_optional_memory_format_delete (void* x)
+{
+  LANTERN_FUNCTION_START
+  lantern_delete<self_contained::optional::MemoryFormat>(x);
+  LANTERN_FUNCTION_END_VOID
+}
+
+void _lantern_optional_scalar_delete (void* x)
+{
+  LANTERN_FUNCTION_START
+  lantern_delete<self_contained::optional::Scalar>(x);
+  LANTERN_FUNCTION_END_VOID
+}
+

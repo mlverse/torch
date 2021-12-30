@@ -311,6 +311,20 @@ public:
   operator SEXP () const;
 };
 
+class XPtrTorchoptional_memory_format : public XPtrTorch {
+public:
+  XPtrTorchoptional_memory_format (SEXP x_);
+  XPtrTorchoptional_memory_format (void* x) : XPtrTorch(x, delete_optional_memory_format) {}
+  operator SEXP () const;
+};
+
+class XPtrTorchoptional_scalar : public XPtrTorch {
+public:
+  XPtrTorchoptional_scalar (SEXP x_);
+  XPtrTorchoptional_scalar (void* x) : XPtrTorch(x, delete_optional_scalar) {}
+  operator SEXP () const;
+};
+
 class XPtrTorchindex_int64_t {
 public:
   std::shared_ptr<void> ptr;

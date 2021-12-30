@@ -58,6 +58,8 @@ void delete_optional_generator (void* x);
 void delete_optional_double (void* x);
 void delete_optional_scalar_type (void* x);
 void delete_optional_string (void* x);
+void delete_optional_scalar (void* x);
+void delete_optional_memory_format (void* x);
 
 void* fixme_new_string (const char* x);
 void* fixme_new_dimname (const char* x);

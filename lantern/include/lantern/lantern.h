@@ -165,6 +165,8 @@ LANTERN_OPTIONAL_DECLS(int64_t)
 LANTERN_OPTIONAL_DECLS(bool)
 LANTERN_OPTIONAL_DECLS(scalar_type)
 LANTERN_OPTIONAL_DECLS(string)
+LANTERN_OPTIONAL_DECLS(scalar)
+LANTERN_OPTIONAL_DECLS(memory_format)
 
   LANTERN_API void(LANTERN_PTR lanternConfigure)(int log);
   LANTERN_API const char*(LANTERN_PTR lanternVersion)();
@@ -7429,6 +7431,8 @@ bool lanternInit(const std::string &libPath, std::string *pError)
   LANTERN_OPTIONAL_LOAD_SYMBOL(int64_t)
   LANTERN_OPTIONAL_LOAD_SYMBOL(scalar_type)
   LANTERN_OPTIONAL_LOAD_SYMBOL(string)
+  LANTERN_OPTIONAL_LOAD_SYMBOL(memory_format)
+  LANTERN_OPTIONAL_LOAD_SYMBOL(scalar)
   LOAD_SYMBOL(lanternConfigure);
   LOAD_SYMBOL(lanternVersion);
   LOAD_SYMBOL(lanternSetLastError);

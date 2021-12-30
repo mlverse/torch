@@ -119,6 +119,8 @@ LANTERN_OPTIONAL(int64_t, int64_t)
 LANTERN_OPTIONAL(bool, bool_t)
 LANTERN_OPTIONAL(scalar_type, ScalarType)
 LANTERN_OPTIONAL(string, string)
+LANTERN_OPTIONAL(memory_format, MemoryFormat)
+LANTERN_OPTIONAL(scalar, Scalar)
 
 void *_lantern_int64_t(int64_t x)
 {
@@ -456,7 +458,7 @@ namespace make_unique {
 
     void* Scalar (const c10::optional<torch::Scalar>& x)
     {
-      return make_ptr<c10::optional<torch::Scalar>>(x);
+      return make_ptr<self_contained::optional::Scalar>(x);
     }
 
     void* DimnameList (const c10::optional<torch::DimnameList>& x)
@@ -492,6 +494,11 @@ namespace make_unique {
     void* ScalarType (const c10::optional<torch::ScalarType>& x)
     {
       return make_ptr<self_contained::optional::ScalarType>(x);
+    }
+
+    void* MemoryFormat (const c10::optional<torch::MemoryFormat>& x)
+    {
+      return make_ptr<self_contained::optional::MemoryFormat>(x);
     }
 
   }
@@ -548,16 +555,8 @@ namespace from_raw {
     LANTERN_FROM_RAW_WRAPPED(bool_t, self_contained::optional::bool_t, c10::optional<bool>)
     LANTERN_FROM_RAW_WRAPPED(ScalarType, self_contained::optional::ScalarType, c10::optional<torch::ScalarType>)
     LANTERN_FROM_RAW_WRAPPED(string, self_contained::optional::string, c10::optional<std::string>)
-    
-    c10::optional<torch::MemoryFormat> MemoryFormat (void* x) {
-      if (!x) return c10::nullopt;
-      return from_raw::MemoryFormat(x);
-    }
-
-    c10::optional<torch::Scalar> Scalar (void* x) {
-      if (!x) return c10::nullopt;
-      return from_raw::Scalar(x);
-    }
+    LANTERN_FROM_RAW_WRAPPED(MemoryFormat, self_contained::optional::MemoryFormat, c10::optional<torch::MemoryFormat>)
+    LANTERN_FROM_RAW_WRAPPED(Scalar, self_contained::optional::Scalar, c10::optional<torch::Scalar>)
 
     c10::List<c10::optional<torch::Tensor>>& TensorList (void* x) {
       return *reinterpret_cast<c10::List<c10::optional<torch::Tensor>>*>(x);

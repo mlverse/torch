@@ -67,6 +67,15 @@ XPtrTorchScalar::operator SEXP () const {
 XPtrTorchScalar::XPtrTorchScalar (SEXP x):
   XPtrTorch{from_sexp_scalar(x)} {}
 
+// optional scalar
+
+XPtrTorchoptional_scalar::operator SEXP () const {
+  return operator_sexp_optional_scalar(this);
+}
+
+XPtrTorchoptional_scalar::XPtrTorchoptional_scalar (SEXP x):
+  XPtrTorch{from_sexp_optional_scalar(x)} {}
+
 // tensor options
 
 XPtrTorchTensorOptions::operator SEXP () const 
@@ -186,6 +195,16 @@ XPtrTorchMemoryFormat::operator SEXP () const
 
 XPtrTorchMemoryFormat::XPtrTorchMemoryFormat (SEXP x):
   XPtrTorch{from_sexp_memory_format(x)} {}
+
+// optional memory format
+
+XPtrTorchoptional_memory_format::operator SEXP () const
+{
+  return operator_sexp_optional_memory_format(this);
+}
+
+XPtrTorchoptional_memory_format::XPtrTorchoptional_memory_format (SEXP x):
+  XPtrTorch{from_sexp_optional_memory_format(x)} {}
 
 // vector_string
 
