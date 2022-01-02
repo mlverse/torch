@@ -97,30 +97,26 @@ class Vector {
 template <typename T>
 class OptionalArrayRef {
   public:
-    std::vector<T> x_;
-    bool is_null;
+    std::shared_ptr<std::vector<T>> x_;
+    std::shared_ptr<c10::optional<torch::ArrayRef<T>>> x_ref_;
     OptionalArrayRef(const c10::optional<torch::ArrayRef<T>>& x) {
       if (x.has_value()) {
-        x_ = std::vector<T>(x.value().vec());
-        is_null = false;
+        x_ = std::make_shared<std::vector<T>>(x.value().vec());
+        x_ref_ = std::make_shared<c10::optional<torch::ArrayRef<T>>>(*x_);
       } else {
-        is_null = true;
+        x_ref_ = std::make_shared<c10::optional<torch::ArrayRef<T>>>(c10::nullopt);
       }
     }
     OptionalArrayRef(const std::vector<T>& x){
       if (x.size() == 0) {
-        is_null = true;
+        x_ref_ = std::make_shared<c10::optional<torch::ArrayRef<T>>>(c10::nullopt);
       } else {
-        x_ = x;
-        is_null = false;
+        x_ = std::make_shared<std::vector<T>>(x);
+        x_ref_ = std::make_shared<c10::optional<torch::ArrayRef<T>>>(*x_);
       }
     }
-    operator c10::optional<torch::ArrayRef<T>>() const {
-      if (is_null) {
-        return c10::nullopt;
-      } else {
-        return torch::ArrayRef<T>(x_);
-      }
+    operator c10::optional<torch::ArrayRef<T>> &() {
+      return *x_ref_;
     }
 };
 
@@ -169,6 +165,8 @@ namespace self_contained {
     using string = Box<c10::optional<std::string>>;
     using MemoryFormat = Box<c10::optional<torch::MemoryFormat>>;
     using Scalar = Box<c10::optional<torch::Scalar>>;
+    using IntArrayRef = OptionalArrayRef<std::int64_t>;
+    using DoubleArrayRef = OptionalArrayRef<double>;
     
   }
 }
@@ -285,9 +283,9 @@ namespace from_raw {
     LANTERN_FROM_RAW_DECL(string, c10::optional<std::string>)
     LANTERN_FROM_RAW_DECL(MemoryFormat, c10::optional<torch::MemoryFormat>)
     LANTERN_FROM_RAW_DECL(Scalar, c10::optional<torch::Scalar>)
-    c10::List<c10::optional<torch::Tensor>>& TensorList (void* x);
-    OptionalArrayRef<std::int64_t>& IntArrayRef (void* x);
-    OptionalArrayRef<double>& DoubleArrayRef (void* x);
+    LANTERN_FROM_RAW_DECL(TensorList, c10::List<c10::optional<torch::Tensor>>)
+    LANTERN_FROM_RAW_DECL(IntArrayRef, c10::optional<torch::IntArrayRef>)
+    LANTERN_FROM_RAW_DECL(DoubleArrayRef, c10::optional<torch::ArrayRef<double>>)
   }
 
   namespace vector {

@@ -543,10 +543,6 @@ namespace from_raw {
   LANTERN_FROM_RAW(IValue, torch::IValue)
 
   namespace optional {
-
-    // It's OK to return by value here because we are never modifying optional DimnameLists in
-    // place. For consistency we should return by reference, but that would require a few changes
-    // code generation in the R side, in order for R to own the memory in the 'optional' case.
     LANTERN_FROM_RAW_WRAPPED(DimnameList, self_contained::optional::DimnameList, c10::optional<torch::DimnameList>)
     LANTERN_FROM_RAW_WRAPPED(Generator, self_contained::optional::Generator, c10::optional<torch::Generator>)
     LANTERN_FROM_RAW_WRAPPED(Tensor, self_contained::optional::Tensor, c10::optional<torch::Tensor>)
@@ -557,19 +553,9 @@ namespace from_raw {
     LANTERN_FROM_RAW_WRAPPED(string, self_contained::optional::string, c10::optional<std::string>)
     LANTERN_FROM_RAW_WRAPPED(MemoryFormat, self_contained::optional::MemoryFormat, c10::optional<torch::MemoryFormat>)
     LANTERN_FROM_RAW_WRAPPED(Scalar, self_contained::optional::Scalar, c10::optional<torch::Scalar>)
-
-    c10::List<c10::optional<torch::Tensor>>& TensorList (void* x) {
-      return *reinterpret_cast<c10::List<c10::optional<torch::Tensor>>*>(x);
-    }
-
-    OptionalArrayRef<std::int64_t>& IntArrayRef (void* x) {
-      return *reinterpret_cast<OptionalArrayRef<std::int64_t>*>(x);
-    }
-
-    OptionalArrayRef<double>& DoubleArrayRef (void* x) {
-      return *reinterpret_cast<OptionalArrayRef<double>*>(x);
-    }
-
+    LANTERN_FROM_RAW(TensorList, c10::List<c10::optional<torch::Tensor>>)
+    LANTERN_FROM_RAW_WRAPPED(IntArrayRef, self_contained::optional::IntArrayRef, c10::optional<torch::IntArrayRef>)
+    LANTERN_FROM_RAW_WRAPPED(DoubleArrayRef, self_contained::optional::DoubleArrayRef, c10::optional<torch::ArrayRef<double>>)
   }
 
   namespace vector {

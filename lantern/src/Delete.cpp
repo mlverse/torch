@@ -214,7 +214,7 @@ void _lantern_optional_int64_t_delete(void *x)
 void _lantern_optional_vector_int64_t_delete(void *x)
 {
   LANTERN_FUNCTION_START
-  lantern_delete<OptionalArrayRef<std::int64_t>>(x);
+  lantern_delete<self_contained::optional::IntArrayRef>(x);
   LANTERN_FUNCTION_END_VOID
 }
 
@@ -242,7 +242,7 @@ void _lantern_autograd_edge_delete (void* x)
 void _lantern_optional_vector_double_delete(void *x)
 {
   LANTERN_FUNCTION_START
-  lantern_delete<OptionalArrayRef<double>>(x);
+  lantern_delete<self_contained::optional::DoubleArrayRef>(x);
   LANTERN_FUNCTION_END_VOID
 }
 
