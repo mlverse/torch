@@ -12,7 +12,7 @@ void * _lantern_CompilationUnit_new ()
 {
     LANTERN_FUNCTION_START;
     auto cu = torch::jit::CompilationUnit();
-    return make_unique::CompilationUnit(cu);
+    return make_raw::CompilationUnit(cu);
     LANTERN_FUNCTION_END;
 }
 

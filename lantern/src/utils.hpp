@@ -203,7 +203,7 @@ namespace self_contained {
 }
 
 
-namespace make_unique {
+namespace make_raw {
   void* Tensor (const torch::Tensor& x);
   void* TensorList (const torch::TensorList& x);
   void* ScalarType (const torch::ScalarType& x);

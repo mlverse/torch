@@ -12,7 +12,7 @@ void *_lantern_vector_int64_t(int64_t *x, size_t x_size)
 {
   LANTERN_FUNCTION_START
   auto out = std::vector<int64_t>(x, x + x_size);
-  return make_unique::vector::int64_t(out);
+  return make_raw::vector::int64_t(out);
   LANTERN_FUNCTION_END
 }
 
@@ -32,7 +32,7 @@ void *_lantern_vector_double(double *x, size_t x_size)
 {
   LANTERN_FUNCTION_START
   auto out = std::vector<double>(x, x + x_size);
-  return make_unique::vector::double_t(out);
+  return make_raw::vector::double_t(out);
   LANTERN_FUNCTION_END
 }
 
@@ -43,7 +43,7 @@ void* _lantern_vector_double_new ()
 
 void* _lantern_vector_int64_t_new ()
 {
-  return make_unique::vector::int64_t({});
+  return make_raw::vector::int64_t({});
 }
 
 void _lantern_vector_double_push_back(void* self, double x)
@@ -80,7 +80,7 @@ void * _lantern_optional_vector_double(double * x, size_t x_size, bool is_null)
   else 
     out = torch::ArrayRef<double>(x, x + x_size);;
   
-  return make_unique::optional::DoubleArrayRef(out);
+  return make_raw::optional::DoubleArrayRef(out);
   LANTERN_FUNCTION_END
 }
 
@@ -94,22 +94,22 @@ void * _lantern_optional_vector_int64_t(int64_t * x, size_t x_size, bool is_null
   else 
     out = torch::ArrayRef<int64_t>(x, x + x_size);
 
-  return make_unique::optional::IntArrayRef(out);
+  return make_raw::optional::IntArrayRef(out);
   LANTERN_FUNCTION_END
 }
 
 #define LANTERN_OPTIONAL(name, type)                               \
   void* _lantern_optional_##name (void* obj) {                     \
     if (!obj) {                                                    \
-      return make_unique::optional::type (c10::nullopt);           \
+      return make_raw::optional::type (c10::nullopt);           \
     }                                                              \
-    return make_unique::optional::type(from_raw::type (obj));      \
+    return make_raw::optional::type(from_raw::type (obj));      \
   }                                                                \
   bool _lantern_optional_##name##_has_value (void* obj) {          \
     return from_raw::optional::type(obj).has_value();              \
   }                                                                \
   void* _lantern_optional_##name##_value (void* obj) {             \
-    return make_unique::type (from_raw::optional::type(obj).value()); \
+    return make_raw::type (from_raw::optional::type(obj).value()); \
   }                                                               
 
 
@@ -127,21 +127,21 @@ LANTERN_OPTIONAL(scalar, Scalar)
 void *_lantern_int64_t(int64_t x)
 {
   LANTERN_FUNCTION_START
-  return make_unique::int64_t(x);
+  return make_raw::int64_t(x);
   LANTERN_FUNCTION_END
 }
 
 void *_lantern_double(double x)
 {
   LANTERN_FUNCTION_START
-  return make_unique::double_t(x);
+  return make_raw::double_t(x);
   LANTERN_FUNCTION_END
 }
 
 void *_lantern_bool(bool x)
 {
   LANTERN_FUNCTION_START
-  return make_unique::bool_t(x);
+  return make_raw::bool_t(x);
   LANTERN_FUNCTION_END
 }
 
@@ -178,14 +178,14 @@ void *_lantern_Tensor_undefined()
 {
   LANTERN_FUNCTION_START
   torch::Tensor x = {};
-  return make_unique::Tensor(x);
+  return make_raw::Tensor(x);
   LANTERN_FUNCTION_END
 }
 
 void *_lantern_vector_string_new()
 {
   LANTERN_FUNCTION_START
-  return make_unique::vector::string();
+  return make_raw::vector::string();
   LANTERN_FUNCTION_END
 }
 
@@ -216,7 +216,7 @@ const char *_lantern_vector_string_at(void *self, int64_t i)
 void *_lantern_vector_bool_new()
 {
   LANTERN_FUNCTION_START
-  return make_unique::vector::bool_t();
+  return make_raw::vector::bool_t();
   LANTERN_FUNCTION_END
 }
 
@@ -244,7 +244,7 @@ bool _lantern_vector_bool_at(void *self, int64_t i)
 void * _lantern_string_new (const char * value)
 {
   LANTERN_FUNCTION_START
-  return make_unique::string(std::string(value));
+  return make_raw::string(std::string(value));
   LANTERN_FUNCTION_END
 }
 
@@ -274,7 +274,7 @@ void* _lantern_nn_functional_pad_circular (void* input, void* padding)
   auto input_ = from_raw::Tensor(input);
   auto padding_ = from_raw::IntArrayRef(padding);
   auto out = torch::nn::functional::_pad_circular(input_, padding_);
-  return make_unique::Tensor(out);
+  return make_raw::Tensor(out);
   LANTERN_FUNCTION_END
 }
 
@@ -297,7 +297,7 @@ namespace self_contained {
   }
 }
 
-namespace make_unique {
+namespace make_raw {
   void* Tensor (const torch::Tensor& x)
   {
     return make_ptr<torch::Tensor>(x);

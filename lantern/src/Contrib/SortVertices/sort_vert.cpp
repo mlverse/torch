@@ -62,5 +62,5 @@ void* _lantern_contrib_sort_vertices (void* vertices, void* mask, void* num_vali
         from_raw::Tensor(vertices),
         from_raw::Tensor(mask),
         from_raw::Tensor(num_valid));
-    return make_unique::Tensor(result);
+    return make_raw::Tensor(result);
 }

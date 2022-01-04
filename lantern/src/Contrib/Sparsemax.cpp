@@ -128,6 +128,6 @@ void * _lantern_contrib_torch_sparsemax (void * input, int dim)
     LANTERN_FUNCTION_START
     torch::Tensor t = from_raw::Tensor(input);
     torch::Tensor res = SparseMaxFunction::apply(t, dim);
-    return make_unique::Tensor(res);
+    return make_raw::Tensor(res);
     LANTERN_FUNCTION_END
 }

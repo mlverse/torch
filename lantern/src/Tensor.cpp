@@ -11,7 +11,7 @@
 void *_lantern_from_blob(void *data, int64_t *sizes, size_t sizes_size, void *options)
 {
   LANTERN_FUNCTION_START
-  return make_unique::Tensor(torch::from_blob(
+  return make_raw::Tensor(torch::from_blob(
       data,
       std::vector<int64_t>(sizes, sizes + sizes_size),
       from_raw::TensorOptions(options)));
@@ -44,7 +44,7 @@ void *_lantern_Tensor_clone(void *self)
 {
   LANTERN_FUNCTION_START
   torch::Tensor x = from_raw::Tensor(self);
-  return make_unique::Tensor(x.clone());
+  return make_raw::Tensor(x.clone());
   LANTERN_FUNCTION_END
 }
 
@@ -53,7 +53,7 @@ void *_lantern_Tensor_permute(void *self, void *dims)
   LANTERN_FUNCTION_START
   torch::Tensor x = from_raw::Tensor(self);
   auto y = from_raw::vector::int64_t(dims);
-  return make_unique::Tensor(x.permute(y));
+  return make_raw::Tensor(x.permute(y));
   LANTERN_FUNCTION_END
 }
 
@@ -61,7 +61,7 @@ void *_lantern_Tensor_contiguous(void *self)
 {
   LANTERN_FUNCTION_START
   torch::Tensor x = from_raw::Tensor(self);;
-  return make_unique::Tensor(x.contiguous());
+  return make_raw::Tensor(x.contiguous());
   LANTERN_FUNCTION_END
 }
 
@@ -70,7 +70,7 @@ void *_lantern_Tensor_to(void *self, void *options)
   LANTERN_FUNCTION_START
   torch::Tensor x = from_raw::Tensor(self);;
   auto y = from_raw::TensorOptions(options);
-  return make_unique::Tensor(x.to(y));
+  return make_raw::Tensor(x.to(y));
   LANTERN_FUNCTION_END
 }
 
@@ -78,7 +78,7 @@ void *_lantern_Tensor_set_requires_grad(void *self, bool requires_grad)
 {
   LANTERN_FUNCTION_START
   torch::Tensor x = from_raw::Tensor(self);;
-  return make_unique::Tensor(x.set_requires_grad(requires_grad));
+  return make_raw::Tensor(x.set_requires_grad(requires_grad));
   LANTERN_FUNCTION_END
 }
 
@@ -167,7 +167,7 @@ void *_lantern_Tensor_dtype(void *self)
   LANTERN_FUNCTION_START
   torch::Tensor x = from_raw::Tensor(self);;
   torch::Dtype dtype = c10::typeMetaToScalarType(x.dtype());
-  return make_unique::Dtype(dtype);
+  return make_raw::Dtype(dtype);
   LANTERN_FUNCTION_END
 }
 
@@ -176,7 +176,7 @@ void *_lantern_Tensor_device(void *self)
   LANTERN_FUNCTION_START
   torch::Tensor x = from_raw::Tensor(self);;
   torch::Device device = x.device();
-  return make_unique::Device(device);
+  return make_raw::Device(device);
   LANTERN_FUNCTION_END
 }
 
@@ -208,7 +208,7 @@ void* _lantern_Tensor_names (void* self)
 {
   LANTERN_FUNCTION_START
   torch::Tensor x = from_raw::Tensor(self);
-  return make_unique::DimnameList(x.names());
+  return make_raw::DimnameList(x.names());
   LANTERN_FUNCTION_END
 }
 
@@ -228,7 +228,7 @@ void* _lantern_normal_double_double_intarrayref_generator_tensoroptions (double 
   auto generator_ = from_raw::Generator(generator);
   auto options_ = from_raw::TensorOptions(options);
   auto ten = at::normal(mean, std, size_, generator_, options_);
-  return make_unique::Tensor(ten);
+  return make_raw::Tensor(ten);
   LANTERN_FUNCTION_END
 }
 
@@ -239,7 +239,7 @@ void* _lantern_normal_tensor_tensor_generator (void* mean, void* std, void* gene
   auto std_ = from_raw::Tensor(std);
   auto generator_ = from_raw::Generator(generator);
   auto ten = at::normal(mean_, std_, generator_);
-  return make_unique::Tensor(ten);
+  return make_raw::Tensor(ten);
   LANTERN_FUNCTION_END
 }
 
@@ -249,7 +249,7 @@ void* _lantern_normal_double_tensor_generator (double mean, void* std, void* gen
   auto std_ = from_raw::Tensor(std);
   auto generator_ = from_raw::Generator(generator);
   auto ten = at::normal(mean, std_, generator_);
-  return make_unique::Tensor(ten);
+  return make_raw::Tensor(ten);
   LANTERN_FUNCTION_END
 }
 
@@ -259,7 +259,7 @@ void* _lantern_normal_tensor_double_generator (void* mean, double std, void* gen
   auto mean_ = from_raw::Tensor(mean);
   auto generator_ = from_raw::Generator(generator);
   auto ten = at::normal(mean_, std, generator_);
-  return make_unique::Tensor(ten);
+  return make_raw::Tensor(ten);
   LANTERN_FUNCTION_END
 }
 
