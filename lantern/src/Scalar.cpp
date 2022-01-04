@@ -27,7 +27,7 @@ void *_lantern_Scalar(void *value, const char *type)
     out = *reinterpret_cast<double *>(value);
   }
 
-  return make_unique::Scalar(out);
+  return make_raw::Scalar(out);
   LANTERN_FUNCTION_END
 }
 
@@ -35,7 +35,7 @@ void *_lantern_Scalar_dtype(void *self)
 {
   LANTERN_FUNCTION_START
   auto v = from_raw::Scalar(self);
-  return make_unique::Dtype(v.type());
+  return make_raw::Dtype(v.type());
   LANTERN_FUNCTION_END
 }
 
@@ -74,14 +74,14 @@ bool _lantern_Scalar_to_bool(void *self)
 void *_lantern_Scalar_nullopt()
 {
   LANTERN_FUNCTION_START
-  return make_unique::optional::Scalar(c10::nullopt);
+  return make_raw::optional::Scalar(c10::nullopt);
   LANTERN_FUNCTION_END
 }
 
 void* _lantern_vector_Scalar_new ()
 {
   LANTERN_FUNCTION_START
-  return (void*) make_unique::vector::Scalar({});
+  return (void*) make_raw::vector::Scalar({});
   LANTERN_FUNCTION_END
 }
 
@@ -102,7 +102,7 @@ int64_t _lantern_vector_Scalar_size (void* self)
 void* _lantern_vector_Scalar_at (void* self, int64_t index)
 {
   LANTERN_FUNCTION_START
-  return make_unique::Scalar(from_raw::vector::Scalar(self).at(index));
+  return make_raw::Scalar(from_raw::vector::Scalar(self).at(index));
   LANTERN_FUNCTION_END
 }
 

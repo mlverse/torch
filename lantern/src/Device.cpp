@@ -59,7 +59,7 @@ void *_lantern_Device(const char *type, int64_t index, bool useIndex)
     device = torch::Device(deviceType, deviceIndex);
   }
 
-  return make_unique::Device(device);
+  return make_raw::Device(device);
   LANTERN_FUNCTION_END
 }
 

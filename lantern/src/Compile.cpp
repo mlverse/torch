@@ -10,7 +10,7 @@ void* _lantern_jit_compile (void* source, void* cu)
     LANTERN_FUNCTION_START
     const auto source_ = from_raw::string(source);
     auto result = std::move(*torch::jit::compile(source_).get());
-    return make_unique::CompilationUnit(result);
+    return make_raw::CompilationUnit(result);
     LANTERN_FUNCTION_END
 }
 
@@ -23,7 +23,7 @@ void* _lantern_jit_compile_list_methods (void* cu)
     {
         names.push_back(f->name());
     }
-    return make_unique::vector::string(names);
+    return make_raw::vector::string(names);
     LANTERN_FUNCTION_END
 }
 

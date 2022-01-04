@@ -99,7 +99,7 @@ void *_lantern_Tensor_index(void *self, void *index)
     LANTERN_FUNCTION_START
     torch::Tensor ten = from_raw::Tensor(self);
     torch::Tensor out = ten.index(*reinterpret_cast<std::vector<at::indexing::TensorIndex> *>(index));
-    return make_unique::Tensor(out);
+    return make_raw::Tensor(out);
     LANTERN_FUNCTION_END
 }
 

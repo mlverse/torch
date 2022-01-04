@@ -25,7 +25,7 @@ void* _lantern_Stack_at (void* self, int64_t index)
 {
     LANTERN_FUNCTION_START
     auto self_ = reinterpret_cast<torch::jit::Stack *>(self);
-    return make_unique::IValue(self_->at(index));
+    return make_raw::IValue(self_->at(index));
     LANTERN_FUNCTION_END
 }
 

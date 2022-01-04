@@ -10,14 +10,14 @@
 void *_lantern_Layout_strided()
 {
     LANTERN_FUNCTION_START
-    return make_unique::Layout(torch::kStrided);
+    return make_raw::Layout(torch::kStrided);
     LANTERN_FUNCTION_END
 }
 
 void *_lantern_Layout_sparse()
 {
     LANTERN_FUNCTION_START
-    return make_unique::Layout(torch::kSparse);
+    return make_raw::Layout(torch::kSparse);
     LANTERN_FUNCTION_END
 }
 

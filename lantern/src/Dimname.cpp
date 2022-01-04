@@ -13,14 +13,14 @@ void *_lantern_Dimname(void* name)
   LANTERN_FUNCTION_START
   auto name_ = from_raw::string(name);
   auto nm = torch::Dimname::fromSymbol(torch::Symbol::dimname(name_));
-  return make_unique::Dimname(nm);  
+  return make_raw::Dimname(nm);  
   LANTERN_FUNCTION_END
 }
 
 void *_lantern_DimnameList()
 {
   LANTERN_FUNCTION_START
-  return make_unique::DimnameList({});
+  return make_raw::DimnameList({});
   LANTERN_FUNCTION_END
 }
 
@@ -38,7 +38,7 @@ void *_lantern_DimnameList_at(void *list, int i)
 {
   LANTERN_FUNCTION_START
   torch::Dimname x = from_raw::DimnameList(list).at(i);
-  return make_unique::Dimname(x);
+  return make_raw::Dimname(x);
   LANTERN_FUNCTION_END
 }
 

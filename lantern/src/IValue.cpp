@@ -81,7 +81,7 @@ void* _lantern_IValue_Device (void* self)
     LANTERN_FUNCTION_START
     auto self_ = reinterpret_cast<torch::jit::IValue *>(self);
     torch::Device out = self_->toDevice();
-    return make_unique::Device(out);
+    return make_raw::Device(out);
     LANTERN_FUNCTION_END
 }
 
@@ -112,7 +112,7 @@ void* _lantern_IValue_DoubleList (void* self)
 {
     LANTERN_FUNCTION_START
     auto self_ = reinterpret_cast<torch::jit::IValue *>(self);
-    return make_unique::vector::double_t(self_->toDoubleList().vec());
+    return make_raw::vector::double_t(self_->toDoubleList().vec());
     LANTERN_FUNCTION_END
 }
 
@@ -120,7 +120,7 @@ void* _lantern_IValue_from_DoubleList (void* self)
 {
     LANTERN_FUNCTION_START
     auto self_ = from_raw::vector::double_t(self);
-    return make_unique::IValue(self_);
+    return make_raw::IValue(self_);
     LANTERN_FUNCTION_END
 }
 
@@ -128,7 +128,7 @@ void* _lantern_IValue_Generator (void* self)
 {
     LANTERN_FUNCTION_START
     auto self_ = from_raw::IValue(self);
-    return make_unique::Generator(self_.toGenerator());
+    return make_raw::Generator(self_.toGenerator());
     LANTERN_FUNCTION_END
 }
 
@@ -136,7 +136,7 @@ void* _lantern_IValue_from_Generator (void* self)
 {
     LANTERN_FUNCTION_START
     auto self_ = from_raw::Generator(self);
-    return make_unique::IValue(self_);
+    return make_raw::IValue(self_);
     LANTERN_FUNCTION_END
 }
 
@@ -152,7 +152,7 @@ void* _lantern_IValue_from_GenericDict (void* self)
 {
     LANTERN_FUNCTION_START
     auto self_ = reinterpret_cast<c10::impl::GenericDict*>(self);
-    return make_unique::IValue(*self_);
+    return make_raw::IValue(*self_);
     LANTERN_FUNCTION_END
 }
 
@@ -167,7 +167,7 @@ int64_t _lantern_IValue_Int (void* self)
 void* _lantern_IValue_from_Int (int64_t self)
 {
     LANTERN_FUNCTION_START
-    return make_unique::IValue(self);
+    return make_raw::IValue(self);
     LANTERN_FUNCTION_END
 }
 
@@ -175,7 +175,7 @@ void* _lantern_IValue_IntList (void* self)
 {
     LANTERN_FUNCTION_START
     auto self_ = from_raw::IValue(self);
-    return make_unique::vector::int64_t(self_.toIntList().vec());
+    return make_raw::vector::int64_t(self_.toIntList().vec());
     LANTERN_FUNCTION_END
 }
 
@@ -183,7 +183,7 @@ void* _lantern_IValue_from_IntList (void* self)
 {
     LANTERN_FUNCTION_START
     auto self_ = from_raw::vector::int64_t(self);
-    return make_unique::IValue(self_);
+    return make_raw::IValue(self_);
     LANTERN_FUNCTION_END
 }
 
@@ -199,7 +199,7 @@ void* _lantern_IValue_from_List (void* self)
 {
     LANTERN_FUNCTION_START
     auto self_ = reinterpret_cast<c10::impl::GenericList*>(self);
-    return make_unique::IValue(*self_);
+    return make_raw::IValue(*self_);
     LANTERN_FUNCTION_END
 }
 
@@ -215,7 +215,7 @@ void* _lantern_IValue_from_Module (void* self)
 {
     LANTERN_FUNCTION_START
     auto self_ = reinterpret_cast<torch::jit::script::Module *>(self);
-    return make_unique::IValue(self_->_ivalue());
+    return make_raw::IValue(self_->_ivalue());
     LANTERN_FUNCTION_END
 }
 
@@ -223,7 +223,7 @@ void* _lantern_IValue_Scalar (void* self)
 {
     LANTERN_FUNCTION_START
     auto self_ = from_raw::IValue(self);
-    return make_unique::Scalar(self_.toScalar());
+    return make_raw::Scalar(self_.toScalar());
     LANTERN_FUNCTION_END
 }
 
@@ -231,7 +231,7 @@ void* _lantern_IValue_from_Scalar (void* self)
 {
     LANTERN_FUNCTION_START
     auto self_ = from_raw::Scalar(self);
-    return make_unique::IValue(self_);
+    return make_raw::IValue(self_);
     LANTERN_FUNCTION_END
 }
 
@@ -239,7 +239,7 @@ void* _lantern_IValue_String (void* self)
 {
     LANTERN_FUNCTION_START
     auto self_ = from_raw::IValue(self);
-    return make_unique::string(std::string(self_.toString().get()->string()));
+    return make_raw::string(std::string(self_.toString().get()->string()));
     LANTERN_FUNCTION_END
 }
 
@@ -247,7 +247,7 @@ void* _lantern_IValue_from_String (void* self)
 {
     LANTERN_FUNCTION_START
     auto self_ = from_raw::string(self);
-    return make_unique::IValue(self_);
+    return make_raw::IValue(self_);
     LANTERN_FUNCTION_END
 }
 
@@ -255,7 +255,7 @@ void* _lantern_IValue_Tensor (void* self)
 {
     LANTERN_FUNCTION_START
     auto self_ = from_raw::IValue(self);
-    return make_unique::Tensor(self_.toTensor());
+    return make_raw::Tensor(self_.toTensor());
     LANTERN_FUNCTION_END
 }
 
@@ -263,7 +263,7 @@ void* _lantern_IValue_from_Tensor (void* self)
 {
     LANTERN_FUNCTION_START
     auto self_ = from_raw::Tensor(self);
-    return make_unique::IValue(self_);
+    return make_raw::IValue(self_);
     LANTERN_FUNCTION_END
 }
 
@@ -271,7 +271,7 @@ void* _lantern_IValue_TensorList (void* self)
 {
     LANTERN_FUNCTION_START
     auto self_ = from_raw::IValue(self);
-    return make_unique::TensorList(self_.toTensorList().vec());
+    return make_raw::TensorList(self_.toTensorList().vec());
     LANTERN_FUNCTION_END
 }
 
@@ -279,14 +279,14 @@ void* _lantern_IValue_from_TensorList (void* self)
 {
     LANTERN_FUNCTION_START
     auto self_ = from_raw::TensorList(self);
-    return make_unique::IValue(self_);
+    return make_raw::IValue(self_);
     LANTERN_FUNCTION_END
 }
 
 void* _lantern_IValue_from_None () 
 {
     LANTERN_FUNCTION_START
-    return make_unique::IValue(c10::nullopt);
+    return make_raw::IValue(c10::nullopt);
     LANTERN_FUNCTION_END
 }
 
@@ -316,7 +316,7 @@ void* _lantern_IValue_from_Tuple (void* self)
 {
     LANTERN_FUNCTION_START
     auto self_ = reinterpret_cast<std::vector<torch::IValue>*>(self);
-    return make_unique::IValue(c10::ivalue::Tuple::create(*self_));
+    return make_raw::IValue(c10::ivalue::Tuple::create(*self_));
     LANTERN_FUNCTION_END
 }
 
@@ -334,7 +334,7 @@ void* _lantern_IValue_from_NamedTuple (void* self) {
         c10::TupleType::createNamed(c10::nullopt, self_->names, types)
     );
 
-    return make_unique::IValue(tuple);
+    return make_raw::IValue(tuple);
     LANTERN_FUNCTION_END
 }
 
@@ -342,6 +342,6 @@ void* _lantern_IValue_from_TensorDict (void* self)
 {
     LANTERN_FUNCTION_START
     auto self_ = from_raw::TensorDict(self);
-    return make_unique::IValue(self_);
+    return make_raw::IValue(self_);
     LANTERN_FUNCTION_END
 }

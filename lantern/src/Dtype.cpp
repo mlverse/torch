@@ -11,7 +11,7 @@
 #define LANTERN_DTYPE_FUN(name, type)                    \
   void* _lantern_Dtype_##name ()                           \
   {                                                      \
-    return make_unique::Dtype(torch::type);              \
+    return make_raw::Dtype(torch::type);              \
   }
 
 LANTERN_DTYPE_FUN(float16, kFloat16)
@@ -49,6 +49,6 @@ void *_lantern_get_default_dtype()
 {
   LANTERN_FUNCTION_START
   auto dt = torch::get_default_dtype();
-  return make_unique::Dtype(c10::typeMetaToScalarType(dt));
+  return make_raw::Dtype(c10::typeMetaToScalarType(dt));
   LANTERN_FUNCTION_END
 }

@@ -47,7 +47,7 @@ void* jit_named_list_tensors (void* self)
     {
         outputs.push_back(el.value);
     }
-    return make_unique::TensorList(outputs);
+    return make_raw::TensorList(outputs);
     LANTERN_FUNCTION_END
 }
 
@@ -94,7 +94,7 @@ void* jit_type_names (void* self)
     {
         outputs.push_back(el.name);
     }
-    return make_unique::vector::string(outputs);
+    return make_raw::vector::string(outputs);
 }
 
 void* _lantern_jit_named_parameter_list_names (void* self)
@@ -188,7 +188,7 @@ void* _lantern_jit_NamedTupleHelper_elements (void* self)
 void* _lantern_jit_TensorDict_new ()
 {
     LANTERN_FUNCTION_START
-    return make_unique::TensorDict(alias::TensorDict());
+    return make_raw::TensorDict(alias::TensorDict());
     LANTERN_FUNCTION_END
 }
 

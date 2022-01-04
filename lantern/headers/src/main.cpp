@@ -391,51 +391,51 @@ std::string getReturnWrapper (std::string returns)
 {
     if (returns == "torch::Tensor")
     {
-        return "make_unique::Tensor";
+        return "make_raw::Tensor";
     }
     else if (returns == "torch::TensorList")
     {
-        return "make_unique::TensorList";
+        return "make_raw::TensorList";
     }
     else if (returns == "torch::ScalarType")
     {
-        return "make_unique::ScalarType";
+        return "make_raw::ScalarType";
     }
     else if (returns == "torch::Scalar")
     {
-        return "make_unique::Scalar";
+        return "make_raw::Scalar";
     }
     else if (returns == "torch::TensorOptions")
     {
-        return "make_unique::TensorOptions";
+        return "make_raw::TensorOptions";
     }
     else if (returns == "torch::DimnameList")
     {
-        return "make_unique::DimnameList";
+        return "make_raw::DimnameList";
     }
     else if (returns == "torch::IntArrayRef")
     {
-        return "make_unique::IntArrayRef";
+        return "make_raw::IntArrayRef";
     }
     else if (returns == "torch::QScheme")
     {
-        return "make_unique::QScheme";
+        return "make_raw::QScheme";
     }
     else if (returns == "torch::Storage")
     {
-        return "make_unique::Storage";
+        return "make_raw::Storage";
     }
     else if (returns == "int64_t")
     {
-        return "make_unique::int64_t";
+        return "make_raw::int64_t";
     }
     else if (returns == "bool")
     {
-        return "make_unique::bool_t";
+        return "make_raw::bool_t";
     }
     else if (returns == "double")
     {
-        return "make_unique::double_t";
+        return "make_raw::double_t";
     }
     else
     {
@@ -494,7 +494,7 @@ void appendBody (std::vector<std::string>& bodies, YAML::Node fun_node, bool met
         }
         else
         {
-            bodies.push_back("    return make_unique::tuple(" + functionCall + name + "(");
+            bodies.push_back("    return make_raw::tuple(" + functionCall + name + "(");
             bodies.push_back("        " + calls + "));");
         }
     }

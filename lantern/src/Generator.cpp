@@ -12,14 +12,14 @@ void *_lantern_Generator()
 {
   LANTERN_FUNCTION_START
   auto out = torch::make_generator<torch::CPUGeneratorImpl>(c10::detail::getNonDeterministicRandom());
-  return make_unique::Generator(out);
+  return make_raw::Generator(out);
   LANTERN_FUNCTION_END
 }
 
 void* _lantern_get_default_Generator ()
 {
   LANTERN_FUNCTION_START
-  return make_unique::Generator(at::detail::getDefaultCPUGenerator());
+  return make_raw::Generator(at::detail::getDefaultCPUGenerator());
   LANTERN_FUNCTION_END
 }
 

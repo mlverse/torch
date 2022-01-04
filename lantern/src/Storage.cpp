@@ -12,7 +12,7 @@ void *_lantern_Tensor_storage(void *self)
 {
     LANTERN_FUNCTION_START
     torch::Tensor x = from_raw::Tensor(self);
-    return make_unique::Storage(x.storage());
+    return make_raw::Storage(x.storage());
     LANTERN_FUNCTION_END
 }
 

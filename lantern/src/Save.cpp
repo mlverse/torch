@@ -50,14 +50,14 @@ void * _lantern_tensor_load (const char * s, void* device)
     torch::Tensor t;
     c10::optional<torch::Device> device_ = reinterpret_cast<LanternPtr<c10::optional<torch::Device>>*>(device)->get();
     torch::load(t, stream, device_);
-    return make_unique::Tensor(t);
+    return make_raw::Tensor(t);
     LANTERN_FUNCTION_END
 }
 
 void* _lantern_test_tensor ()
 {
     LANTERN_FUNCTION_START
-    return make_unique::Tensor(torch::ones({5, 5}));
+    return make_raw::Tensor(torch::ones({5, 5}));
     LANTERN_FUNCTION_END
 }
 
@@ -75,7 +75,7 @@ void* _lantern_load_state_dict (const char * path)
     std::ifstream file(path, std::ios::binary);
     std::vector<char> data((std::istreambuf_iterator<char>(file)), std::istreambuf_iterator<char>());
     torch::IValue ivalue = torch::pickle_load(data); 
-    return make_unique::IValue(ivalue);  
+    return make_raw::IValue(ivalue);  
     LANTERN_FUNCTION_END
 }
 
@@ -105,7 +105,7 @@ void * _lantern_get_state_dict_values (void* ivalue)
         torch::Tensor value = i->value().toTensor();
         values.push_back(value);
     }
-    return make_unique::TensorList(values);
+    return make_raw::TensorList(values);
     LANTERN_FUNCTION_END
 }
 
