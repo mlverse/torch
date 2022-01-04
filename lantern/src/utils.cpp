@@ -43,7 +43,7 @@ void* _lantern_vector_double_new ()
 
 void* _lantern_vector_int64_t_new ()
 {
-  return (void *)new std::vector<int64_t>();
+  return make_unique::vector::int64_t({});
 }
 
 void _lantern_vector_double_push_back(void* self, double x)
@@ -53,7 +53,9 @@ void _lantern_vector_double_push_back(void* self, double x)
 
 void _lantern_vector_int64_t_push_back(void* self, int64_t x)
 {
-  reinterpret_cast<std::vector<int64_t>*>(self)->push_back(x);
+  // we should push back using the raw rype exclusevely here. That's to correctly
+  // update both the buffer and the array ref.
+  reinterpret_cast<self_contained::vector::int64_t*>(self)->push_back(x);
 }
 
 double _lantern_vector_double_size(void* self)
@@ -302,7 +304,7 @@ namespace make_unique {
   }
   void* TensorList (const torch::TensorList& x)
   {
-    return make_ptr<std::vector<torch::Tensor>>(x.vec());
+    return make_ptr<self_contained::TensorList>(x.vec());
   }
   void* ScalarType (const torch::ScalarType& x)
   {
@@ -318,7 +320,7 @@ namespace make_unique {
   }
   void* Device (torch::Device& x) 
   {
-    return (void*) new LanternPtr<torch::Device>(x);
+    return make_ptr<self_contained::Device>(x);
   }
   void* Dtype (const torch::Dtype& x)
   {
@@ -326,11 +328,11 @@ namespace make_unique {
   }
   void* Dimname (torch::Dimname& x)
   {
-    return (void*) new LanternPtr<torch::Dimname>(x);
+    return make_ptr<self_contained::Dimname>(x);
   }
   void* DimnameList (const torch::DimnameList& x)
   {
-    return (void*) new LanternPtr<std::vector<torch::Dimname>>(x.vec());
+    return make_ptr<self_contained::DimnameList>(x.vec());
   }
   void* Generator (const torch::Generator& x)
   {
@@ -342,7 +344,7 @@ namespace make_unique {
   }
   void* IntArrayRef (const torch::IntArrayRef& x)
   {
-    return make_ptr<std::vector<std::int64_t>>(x.vec());
+    return make_ptr<self_contained::IntArrayRef>(x.vec());
   }
   void * TensorDict (const c10::Dict<std::string,torch::Tensor>& x)
   {
@@ -405,7 +407,7 @@ namespace make_unique {
     }
     void* int64_t (const std::vector<std::int64_t>& x)
     {
-      return make_ptr<std::vector<std::int64_t>>(x);
+      return make_ptr<self_contained::vector::int64_t>(x);
     }
     void* int64_t ()
     {
@@ -518,17 +520,17 @@ namespace alias {
 
 namespace from_raw {
   LANTERN_FROM_RAW(Tensor, torch::Tensor)
-  LANTERN_FROM_RAW(TensorList, std::vector<torch::Tensor>)
+  LANTERN_FROM_RAW_WRAPPED(TensorList, self_contained::TensorList, torch::TensorList)
   LANTERN_FROM_RAW(ScalarType, torch::ScalarType)
   LANTERN_FROM_RAW(Scalar, torch::Scalar)
   LANTERN_FROM_RAW(TensorOptions, torch::TensorOptions)
-  LANTERN_FROM_RAW_WRAPPED(Device, LanternPtr<torch::Device>, torch::Device)
+  LANTERN_FROM_RAW_WRAPPED(Device, self_contained::Device, torch::Device)
   LANTERN_FROM_RAW(Dtype, torch::Dtype)
-  LANTERN_FROM_RAW_WRAPPED(Dimname, LanternPtr<torch::Dimname>, torch::Dimname)
-  LANTERN_FROM_RAW_WRAPPED(DimnameList, LanternPtr<std::vector<torch::Dimname>>, std::vector<torch::Dimname>)
+  LANTERN_FROM_RAW_WRAPPED(Dimname, self_contained::Dimname, torch::Dimname)
+  LANTERN_FROM_RAW_WRAPPED(DimnameList, self_contained::DimnameList, torch::DimnameList)
   LANTERN_FROM_RAW(Generator, torch::Generator)
   LANTERN_FROM_RAW(MemoryFormat, torch::MemoryFormat)
-  LANTERN_FROM_RAW(IntArrayRef, std::vector<std::int64_t>)
+  LANTERN_FROM_RAW_WRAPPED(IntArrayRef, self_contained::IntArrayRef, torch::IntArrayRef)
   LANTERN_FROM_RAW(TensorDict, alias::TensorDict)
   LANTERN_FROM_RAW(CompilationUnit, torch::jit::CompilationUnit)
   LANTERN_FROM_RAW(QScheme, torch::QScheme)
@@ -560,7 +562,7 @@ namespace from_raw {
 
   namespace vector {
     LANTERN_FROM_RAW(string, std::vector<std::string>)
-    LANTERN_FROM_RAW(int64_t, std::vector<std::int64_t>)
+    LANTERN_FROM_RAW_WRAPPED(int64_t, self_contained::vector::int64_t, std::vector<std::int64_t>)
     LANTERN_FROM_RAW(bool_t, Vector<bool>)
     LANTERN_FROM_RAW(double_t, std::vector<double>)
     LANTERN_FROM_RAW(Scalar, std::vector<torch::Scalar>)

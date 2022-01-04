@@ -28,7 +28,9 @@ void _lantern_DimnameList_push_back(void *list, void *dimname)
 {
   LANTERN_FUNCTION_START
   torch::Dimname nm = from_raw::Dimname(dimname);
-  from_raw::DimnameList(list).push_back(nm);
+  // Extending a DimnameList is not allowed. Thus we need to extend the buffer
+  // and re-create the ArrayRef.
+  reinterpret_cast<self_contained::DimnameList*>(list)->push_back(nm);
   LANTERN_FUNCTION_END_VOID
 }
 

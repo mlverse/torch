@@ -120,6 +120,27 @@ class OptionalArrayRef {
     }
 };
 
+template <typename Type>
+class ArrayBox {
+  public:
+    std::shared_ptr<std::vector<Type>> buffer_;
+    std::shared_ptr<torch::ArrayRef<Type>> x_;
+    ArrayBox(const std::vector<Type>& x) {
+      buffer_ = std::make_shared<std::vector<Type>>(x);
+      x_ = std::make_shared<torch::ArrayRef<Type>>(*buffer_);
+    }
+    operator torch::ArrayRef<Type>&() {
+      return *x_;
+    }
+    operator std::vector<Type>&() {
+      return *buffer_;
+    }
+    void push_back (const Type& x) {
+      buffer_->push_back(x);
+      // We have to re-create the ArrayRef because the underlying buffer has changed.
+      x_ = std::make_shared<torch::ArrayRef<Type>>(*buffer_);
+    }
+};
 
 template <typename T>
 class Box {
@@ -133,7 +154,6 @@ class Box {
     }
 };
 
-
 // Objects return from lantern must own all memory necessary to re-use them.
 // This is kind of easy for tensors as heap allocated tensors own all their memory
 // memory. However this is not true for `torch::TensorList` which is just a a reference
@@ -146,6 +166,17 @@ class Box {
 // so they can be used in any possible lantern usage - that might include in-place modification
 // of that object.
 namespace self_contained {
+
+  using TensorList = ArrayBox<torch::Tensor>;
+  using Device = Box<torch::Device>;
+  using Dimname = Box<torch::Dimname>;
+  using DimnameList = ArrayBox<torch::Dimname>;
+  using IntArrayRef = ArrayBox<std::int64_t>;
+
+  namespace vector {
+    using int64_t = ArrayBox<std::int64_t>;
+  }
+
   namespace optional {
     
     class DimnameList {
@@ -248,17 +279,17 @@ namespace from_raw {
   // TensorLists are passed as std::vector<torch::Tensor> because they don't own the 
   // underlying memory. Passing them as vectors is also fine as they are trivially
   // constructed from them. 
-  LANTERN_FROM_RAW_DECL(TensorList, std::vector<torch::Tensor>)
+  LANTERN_FROM_RAW_DECL(TensorList, torch::TensorList)
   LANTERN_FROM_RAW_DECL(ScalarType, torch::ScalarType)
   LANTERN_FROM_RAW_DECL(Scalar, torch::Scalar)
   LANTERN_FROM_RAW_DECL(TensorOptions, torch::TensorOptions)
   LANTERN_FROM_RAW_DECL(Device, torch::Device)
   LANTERN_FROM_RAW_DECL(Dtype, torch::Dtype)
   LANTERN_FROM_RAW_DECL(Dimname, torch::Dimname)
-  LANTERN_FROM_RAW_DECL(DimnameList, std::vector<torch::Dimname>)
+  LANTERN_FROM_RAW_DECL(DimnameList, torch::DimnameList)
   LANTERN_FROM_RAW_DECL(Generator, torch::Generator)
   LANTERN_FROM_RAW_DECL(MemoryFormat, torch::MemoryFormat)
-  LANTERN_FROM_RAW_DECL(IntArrayRef, std::vector<std::int64_t>)
+  LANTERN_FROM_RAW_DECL(IntArrayRef, torch::IntArrayRef)
   LANTERN_FROM_RAW_DECL(TensorDict, alias::TensorDict)
   LANTERN_FROM_RAW_DECL(CompilationUnit, torch::CompilationUnit)
   LANTERN_FROM_RAW_DECL(QScheme, torch::QScheme)
@@ -291,9 +322,11 @@ namespace from_raw {
   namespace vector {
     LANTERN_FROM_RAW_DECL(string, std::vector<std::string>)
     LANTERN_FROM_RAW_DECL(int64_t, std::vector<std::int64_t>)
-    LANTERN_FROM_RAW_DECL(bool_t, Vector<bool>)
     LANTERN_FROM_RAW_DECL(double_t, std::vector<double>)
     LANTERN_FROM_RAW_DECL(Scalar, std::vector<torch::Scalar>)
+    // This special type is used to allow converting to std::array<>'s 
+    // of multiple different sizes.
+    LANTERN_FROM_RAW_DECL(bool_t, Vector<bool>)
   }
 
   LANTERN_FROM_RAW_DECL(tuple, std::vector<void*>)

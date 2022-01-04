@@ -1078,7 +1078,7 @@ XPtrTorchvector_int64_t from_sexp_vector_int64_t (SEXP x)
 
 void delete_vector_int64_t (void* x)
 {
-  lantern_vector_int64_t2_delete(x);
+  lantern_vector_int64_t_delete(x);
 }
 
 // vector_double

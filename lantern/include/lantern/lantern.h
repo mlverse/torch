@@ -1628,15 +1628,6 @@ HOST_API void lantern_vector_double_delete (void* x)
   
 }
 
-LANTERN_API void (LANTERN_PTR _lantern_vector_int64_t2_delete) (void* x);
-HOST_API void lantern_vector_int64_t2_delete (void* x)
-{
-  LANTERN_CHECK_LOADED
-   _lantern_vector_int64_t2_delete(x);
-  LANTERN_HOST_HANDLER;
-  
-}
-
 LANTERN_API void* (LANTERN_PTR _lantern_vector_double_new) ();
 HOST_API void* lantern_vector_double_new ()
 {
@@ -7748,7 +7739,6 @@ LOAD_SYMBOL(_lantern_vector_int64_t_at);
 LOAD_SYMBOL(_lantern_vector_double_size);
 LOAD_SYMBOL(_lantern_vector_double_at);
 LOAD_SYMBOL(_lantern_vector_double_delete);
-LOAD_SYMBOL(_lantern_vector_int64_t2_delete);
 LOAD_SYMBOL(_lantern_vector_double_new);
 LOAD_SYMBOL(_lantern_vector_int64_t_new);
 LOAD_SYMBOL(_lantern_vector_double_push_back);

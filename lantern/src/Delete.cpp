@@ -46,14 +46,14 @@ void _lantern_int64_t_delete(void *x)
 void _lantern_vector_int64_t_delete(void *x)
 {
   LANTERN_FUNCTION_START
-  lantern_delete<std::vector<int64_t>>(x);
+  lantern_delete<self_contained::IntArrayRef>(x);
   LANTERN_FUNCTION_END_VOID
 }
 
 void _lantern_TensorList_delete(void *x)
 {
   LANTERN_FUNCTION_START
-  lantern_delete<std::vector<torch::Tensor>>(x);
+  lantern_delete<self_contained::TensorList>(x);
   LANTERN_FUNCTION_END_VOID
 }
 
@@ -109,7 +109,7 @@ void _lantern_Dtype_delete(void *x)
 void _lantern_Device_delete(void *x)
 {
   LANTERN_FUNCTION_START
-  lantern_delete<LanternPtr<torch::Device>>(x);
+  lantern_delete<self_contained::Device>(x);
   LANTERN_FUNCTION_END_VOID
 }
 
@@ -130,14 +130,14 @@ void _lantern_Generator_delete(void *x)
 void _lantern_Dimname_delete(void *x)
 {
   LANTERN_FUNCTION_START
-  lantern_delete<LanternPtr<torch::Dimname>>(x);
+  lantern_delete<self_contained::Dimname>(x);
   LANTERN_FUNCTION_END_VOID
 }
 
 void _lantern_DimnameList_delete(void *x)
 {
   LANTERN_FUNCTION_START
-  lantern_delete<LanternPtr<std::vector<torch::Dimname>>>(x);
+  lantern_delete<self_contained::DimnameList>(x);
   LANTERN_FUNCTION_END_VOID
 }
 
@@ -391,13 +391,6 @@ void _lantern_vector_double_delete (void* x)
   LANTERN_FUNCTION_START;
   lantern_delete<std::vector<double>>(x);
   LANTERN_FUNCTION_END_VOID;
-}
-
-void _lantern_vector_int64_t2_delete(void *x)
-{
-  LANTERN_FUNCTION_START
-  lantern_delete<std::vector<int64_t>>(x);
-  LANTERN_FUNCTION_END_VOID
 }
 
 void _lantern_jit_Tuple_delete(void *x)

@@ -27,7 +27,10 @@ void _lantern_TensorList_push_back(void *self, void *x)
 {
     LANTERN_FUNCTION_START
     torch::Tensor ten = from_raw::Tensor(x);
-    from_raw::TensorList(self).push_back(ten);
+    // We need to use the raw object here because this operation is not allowed
+    // from a torch::TensorList directly. This should be the **only** place we 
+    // ever modify the buffer in-place.
+    reinterpret_cast<self_contained::TensorList*>(self)->push_back(ten);
     LANTERN_FUNCTION_END_VOID
 }
 
