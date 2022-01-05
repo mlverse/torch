@@ -333,7 +333,7 @@ void _lantern_vector_void_delete(void* x)
 void _lantern_optional_device_delete (void* x)
 {
   LANTERN_FUNCTION_START;
-  lantern_delete<c10::optional<torch::Device>>(x);
+  lantern_delete<self_contained::optional::Device>(x);
   LANTERN_FUNCTION_END_VOID;
 }
 

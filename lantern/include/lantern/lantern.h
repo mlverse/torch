@@ -134,6 +134,8 @@ enum IValue_types {
     IValueTypeUnknownType
 };
 
+
+
 #define LANTERN_TYPE2VOID_DECL(type, name)                            \
   LANTERN_API type (LANTERN_PTR _##name) (void*);                     \
   HOST_API type name (void* x) {                                      \
@@ -167,6 +169,7 @@ LANTERN_OPTIONAL_DECLS(scalar_type)
 LANTERN_OPTIONAL_DECLS(string)
 LANTERN_OPTIONAL_DECLS(scalar)
 LANTERN_OPTIONAL_DECLS(memory_format)
+LANTERN_OPTIONAL_DECLS(device)
 
   LANTERN_API void(LANTERN_PTR lanternConfigure)(int log);
   LANTERN_API const char*(LANTERN_PTR lanternVersion)();
@@ -973,23 +976,6 @@ HOST_API void* lantern_Stream ()
   void* ret = _lantern_Stream();
   LANTERN_HOST_HANDLER;
   return ret;
-}
-
-LANTERN_API void* (LANTERN_PTR _lantern_OptionalDevice_from_device) (void *x, bool is_null);
-HOST_API void* lantern_OptionalDevice_from_device (void *x, bool is_null)
-{
-  LANTERN_CHECK_LOADED
-  void * ret = _lantern_OptionalDevice_from_device(x, is_null);
-  LANTERN_HOST_HANDLER;
-  return ret;
-}
-
-LANTERN_API void (LANTERN_PTR _lantern_optional_device_delete) (void*x);
-HOST_API void lantern_optional_device_delete (void* x)
-{
-  LANTERN_CHECK_LOADED
-  _lantern_optional_device_delete(x);
-  LANTERN_HOST_HANDLER;
 }
 
 LANTERN_API void (LANTERN_PTR _lantern_tensor_set_pyobj) (void*x, void* ptr);
@@ -7424,6 +7410,7 @@ bool lanternInit(const std::string &libPath, std::string *pError)
   LANTERN_OPTIONAL_LOAD_SYMBOL(string)
   LANTERN_OPTIONAL_LOAD_SYMBOL(memory_format)
   LANTERN_OPTIONAL_LOAD_SYMBOL(scalar)
+  LANTERN_OPTIONAL_LOAD_SYMBOL(device)
   LOAD_SYMBOL(lanternConfigure);
   LOAD_SYMBOL(lanternVersion);
   LOAD_SYMBOL(lanternSetLastError);
@@ -7666,7 +7653,6 @@ bool lanternInit(const std::string &libPath, std::string *pError)
   LOAD_SYMBOL(_lantern_OptionalTensorList);
   LOAD_SYMBOL(_lantern_OptionalTensorList_push_back);
   LOAD_SYMBOL(_lantern_Stream);
-  LOAD_SYMBOL(_lantern_OptionalDevice_from_device);
   LOAD_SYMBOL(_lantern_optional_device_delete);
   LOAD_SYMBOL(_lantern_tensor_set_pyobj);
   LOAD_SYMBOL(_lantern_tensor_get_pyobj);

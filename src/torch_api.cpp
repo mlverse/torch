@@ -1514,11 +1514,11 @@ XPtrTorchOptionalDevice from_sexp_optional_device (SEXP x)
 {
   if (TYPEOF(x) == NILSXP)
   {
-    return XPtrTorchOptionalDevice(lantern_OptionalDevice_from_device(nullptr, true));
+    return XPtrTorchOptionalDevice(lantern_optional_device(nullptr));
   } 
   else 
   {
-    return XPtrTorchOptionalDevice(lantern_OptionalDevice_from_device(from_sexp_device(x).get(), false));
+    return XPtrTorchOptionalDevice(lantern_optional_device(Rcpp::as<XPtrTorchDevice>(x).get()));
   }
 }
 

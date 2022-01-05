@@ -123,6 +123,7 @@ LANTERN_OPTIONAL(scalar_type, ScalarType)
 LANTERN_OPTIONAL(string, string)
 LANTERN_OPTIONAL(memory_format, MemoryFormat)
 LANTERN_OPTIONAL(scalar, Scalar)
+LANTERN_OPTIONAL(device, Device)
 
 void *_lantern_int64_t(int64_t x)
 {
@@ -503,6 +504,11 @@ namespace make_raw {
       return make_ptr<self_contained::optional::MemoryFormat>(x);
     }
 
+    void* Device (const c10::optional<torch::Device>& x)
+    {
+      return make_ptr<self_contained::optional::Device>(x);
+    }
+
   }
 
 }
@@ -558,6 +564,7 @@ namespace from_raw {
     LANTERN_FROM_RAW(TensorList, c10::List<c10::optional<torch::Tensor>>)
     LANTERN_FROM_RAW_WRAPPED(IntArrayRef, self_contained::optional::IntArrayRef, c10::optional<torch::IntArrayRef>)
     LANTERN_FROM_RAW_WRAPPED(DoubleArrayRef, self_contained::optional::DoubleArrayRef, c10::optional<torch::ArrayRef<double>>)
+    LANTERN_FROM_RAW_WRAPPED(Device, self_contained::optional::Device, c10::optional<torch::Device>)
   }
 
   namespace vector {
