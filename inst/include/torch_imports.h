@@ -49,6 +49,13 @@ IMPORT_SEXP_OPERATOR(operator_sexp_optional_generator, XPtrTorchOptionalGenerato
 IMPORT_SEXP_OPERATOR(operator_sexp_optional_double, XPtrTorchOptionaldouble)
 IMPORT_SEXP_OPERATOR(operator_sexp_optional_bool, XPtrTorchoptional_bool)
 IMPORT_SEXP_OPERATOR(operator_sexp_optional_int64_t, XPtrTorchoptional_int64_t)
+IMPORT_SEXP_OPERATOR(operator_sexp_bool, XPtrTorchbool)
+IMPORT_SEXP_OPERATOR(operator_sexp_double, XPtrTorchdouble)
+IMPORT_SEXP_OPERATOR(operator_sexp_int64_t, XPtrTorchint64_t)
+IMPORT_SEXP_OPERATOR(operator_sexp_optional_scalar, XPtrTorchoptional_scalar)
+IMPORT_SEXP_OPERATOR(operator_sexp_optional_string, XPtrTorchoptional_string)
+IMPORT_SEXP_OPERATOR(operator_sexp_optional_scalar_type, XPtrTorchoptional_scalar_type)
+IMPORT_SEXP_OPERATOR(operator_sexp_optional_memory_format, XPtrTorchoptional_memory_format)
   
 #define IMPORT_FROM_SEXP(name, type)                                               \
   type name (SEXP x)                                                               \
@@ -101,6 +108,12 @@ IMPORT_FROM_SEXP(from_sexp_optional_dimname_list, XPtrTorchOptionalDimnameList)
 IMPORT_FROM_SEXP(from_sexp_optional_generator, XPtrTorchOptionalGenerator)
 IMPORT_FROM_SEXP(from_sexp_double, XPtrTorchdouble)
 IMPORT_FROM_SEXP(from_sexp_optional_double, XPtrTorchOptionaldouble)
+IMPORT_FROM_SEXP(from_sexp_int64_t, XPtrTorchint64_t)
+IMPORT_FROM_SEXP(from_sexp_scalar_type, XPtrTorchScalarType)
+IMPORT_FROM_SEXP(from_sexp_optional_scalar, XPtrTorchoptional_scalar)
+IMPORT_FROM_SEXP(from_sexp_optional_string, XPtrTorchoptional_string)
+IMPORT_FROM_SEXP(from_sexp_optional_scalar_type, XPtrTorchoptional_scalar_type)
+IMPORT_FROM_SEXP(from_sexp_optional_memory_format, XPtrTorchoptional_memory_format)
     
 #define IMPORT_DELETER(name)                                                 \
     void name (void* x)                                                      \
@@ -167,6 +180,10 @@ IMPORT_DELETER(delete_optional_double_array_ref)
 IMPORT_DELETER(delete_optional_dimname_list)
 IMPORT_DELETER(delete_optional_generator)
 IMPORT_DELETER(delete_optional_double)
+IMPORT_DELETER(delete_optional_string)
+IMPORT_DELETER(delete_optional_scalar)
+IMPORT_DELETER(delete_optional_scalar_type)
+IMPORT_DELETER(delete_optional_memory_format)
 
 XPtrTorchIntArrayRef from_sexp_int_array_ref (SEXP x, bool allow_null, bool index)
 {
