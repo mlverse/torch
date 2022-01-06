@@ -44,6 +44,18 @@ IMPORT_SEXP_OPERATOR(operator_sexp_named_tuple_helper, XPtrTorchNamedTupleHelper
 IMPORT_SEXP_OPERATOR(operator_sexp_vector_ivalue, XPtrTorchvector_IValue)
 IMPORT_SEXP_OPERATOR(operator_sexp_generic_dict, XPtrTorchGenericDict)
 IMPORT_SEXP_OPERATOR(operator_sexp_generic_list, XPtrTorchGenericList)
+IMPORT_SEXP_OPERATOR(operator_sexp_optional_dimname_list, XPtrTorchOptionalDimnameList)
+IMPORT_SEXP_OPERATOR(operator_sexp_optional_generator, XPtrTorchOptionalGenerator)
+IMPORT_SEXP_OPERATOR(operator_sexp_optional_double, XPtrTorchOptionaldouble)
+IMPORT_SEXP_OPERATOR(operator_sexp_optional_bool, XPtrTorchoptional_bool)
+IMPORT_SEXP_OPERATOR(operator_sexp_optional_int64_t, XPtrTorchoptional_int64_t)
+IMPORT_SEXP_OPERATOR(operator_sexp_bool, XPtrTorchbool)
+IMPORT_SEXP_OPERATOR(operator_sexp_double, XPtrTorchdouble)
+IMPORT_SEXP_OPERATOR(operator_sexp_int64_t, XPtrTorchint64_t)
+IMPORT_SEXP_OPERATOR(operator_sexp_optional_scalar, XPtrTorchoptional_scalar)
+IMPORT_SEXP_OPERATOR(operator_sexp_optional_string, XPtrTorchoptional_string)
+IMPORT_SEXP_OPERATOR(operator_sexp_optional_scalar_type, XPtrTorchoptional_scalar_type)
+IMPORT_SEXP_OPERATOR(operator_sexp_optional_memory_format, XPtrTorchoptional_memory_format)
   
 #define IMPORT_FROM_SEXP(name, type)                                               \
   type name (SEXP x)                                                               \
@@ -86,10 +98,22 @@ IMPORT_FROM_SEXP(from_sexp_vector_double, XPtrTorchvector_double)
 IMPORT_FROM_SEXP(from_sexp_named_tuple_helper, XPtrTorchNamedTupleHelper)
 IMPORT_FROM_SEXP(from_sexp_stack, XPtrTorchStack)
 IMPORT_FROM_SEXP(from_sexp_compilation_unit, XPtrTorchCompilationUnit)
-IMPORT_FROM_SEXP(from_sexp_int64_t_2, XPtrTorchint64_t2)
-IMPORT_FROM_SEXP(from_sexp_optional_int64_t_2, XPtrTorchoptional_int64_t2)
+IMPORT_FROM_SEXP(from_sexp_optional_int64_t, XPtrTorchoptional_int64_t)
 IMPORT_FROM_SEXP(from_sexp_index_int64_t, XPtrTorchindex_int64_t)
 IMPORT_FROM_SEXP(from_sexp_optional_index_int64_t, XPtrTorchoptional_index_int64_t)
+IMPORT_FROM_SEXP(from_sexp_optional_bool, XPtrTorchoptional_bool)    
+IMPORT_FROM_SEXP(from_sexp_bool, XPtrTorchbool)
+IMPORT_FROM_SEXP(from_sexp_optional_double_array_ref, XPtrTorchOptionalDoubleArrayRef)
+IMPORT_FROM_SEXP(from_sexp_optional_dimname_list, XPtrTorchOptionalDimnameList)
+IMPORT_FROM_SEXP(from_sexp_optional_generator, XPtrTorchOptionalGenerator)
+IMPORT_FROM_SEXP(from_sexp_double, XPtrTorchdouble)
+IMPORT_FROM_SEXP(from_sexp_optional_double, XPtrTorchOptionaldouble)
+IMPORT_FROM_SEXP(from_sexp_int64_t, XPtrTorchint64_t)
+IMPORT_FROM_SEXP(from_sexp_scalar_type, XPtrTorchScalarType)
+IMPORT_FROM_SEXP(from_sexp_optional_scalar, XPtrTorchoptional_scalar)
+IMPORT_FROM_SEXP(from_sexp_optional_string, XPtrTorchoptional_string)
+IMPORT_FROM_SEXP(from_sexp_optional_scalar_type, XPtrTorchoptional_scalar_type)
+IMPORT_FROM_SEXP(from_sexp_optional_memory_format, XPtrTorchoptional_memory_format)
     
 #define IMPORT_DELETER(name)                                                 \
     void name (void* x)                                                      \
@@ -130,7 +154,6 @@ IMPORT_DELETER(delete_ivalue)
 IMPORT_DELETER(delete_tuple)
 IMPORT_DELETER(delete_vector_bool)
 IMPORT_DELETER(delete_vector_scalar)
-IMPORT_DELETER(delete_int64_t_2)
 IMPORT_DELETER(delete_vector_double)
 IMPORT_DELETER(delete_tensor_dict)
 IMPORT_DELETER(delete_generic_dict)
@@ -152,6 +175,15 @@ IMPORT_DELETER(delete_storage)
 IMPORT_DELETER(delete_jit_module)
 IMPORT_DELETER(delete_traceable_function)
 IMPORT_DELETER(delete_vector_void)
+IMPORT_DELETER(delete_optional_bool)
+IMPORT_DELETER(delete_optional_double_array_ref)
+IMPORT_DELETER(delete_optional_dimname_list)
+IMPORT_DELETER(delete_optional_generator)
+IMPORT_DELETER(delete_optional_double)
+IMPORT_DELETER(delete_optional_string)
+IMPORT_DELETER(delete_optional_scalar)
+IMPORT_DELETER(delete_optional_scalar_type)
+IMPORT_DELETER(delete_optional_memory_format)
 
 XPtrTorchIntArrayRef from_sexp_int_array_ref (SEXP x, bool allow_null, bool index)
 {
@@ -171,15 +203,6 @@ XPtrTorchOptionalIntArrayRef from_sexp_optional_int_array_ref (SEXP x, bool inde
   return fn(x, index);
 }   
   
-void* fixme_optional_vector_int64_t (int64_t * x, size_t x_size, bool is_null)                                                            
-{                                                                                
-  static void* (*fn)(int64_t*, size_t, bool) = NULL;                             
-  if (fn == NULL) {                                                              
-    fn = (void* (*) (int64_t*, size_t, bool)) R_GetCCallable("torch", "fixme_optional_vector_int64_t");
-  }                                                                              
-  return fn(x, x_size, is_null);                                                                  
-}
-
 void* fixme_new_string (const char* x)                                                               
 {                                                                                
   static void* (*fn)(const char *) = NULL;                             

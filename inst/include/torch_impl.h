@@ -46,6 +46,18 @@ XPtrTorchScalarType::operator SEXP () const {
   return operator_sexp_scalar_type(this);
 }
 
+XPtrTorchScalarType::XPtrTorchScalarType (SEXP x) :
+  XPtrTorchScalarType{from_sexp_scalar_type(x)} {}
+
+// optional scalar type
+
+XPtrTorchoptional_scalar_type::operator SEXP () const {
+  return operator_sexp_optional_scalar_type(this);
+}
+
+XPtrTorchoptional_scalar_type::XPtrTorchoptional_scalar_type (SEXP x) :
+  XPtrTorchoptional_scalar_type{from_sexp_optional_scalar_type(x)} {}
+
 // scalar
 
 XPtrTorchScalar::operator SEXP () const {
@@ -54,6 +66,15 @@ XPtrTorchScalar::operator SEXP () const {
 
 XPtrTorchScalar::XPtrTorchScalar (SEXP x):
   XPtrTorch{from_sexp_scalar(x)} {}
+
+// optional scalar
+
+XPtrTorchoptional_scalar::operator SEXP () const {
+  return operator_sexp_optional_scalar(this);
+}
+
+XPtrTorchoptional_scalar::XPtrTorchoptional_scalar (SEXP x):
+  XPtrTorch{from_sexp_optional_scalar(x)} {}
 
 // tensor options
 
@@ -135,6 +156,16 @@ XPtrTorchDimnameList::operator SEXP () const
 XPtrTorchDimnameList::XPtrTorchDimnameList (SEXP x):
   XPtrTorch{from_sexp_dimname_list(x)} {}
 
+// Optional dimame list
+
+XPtrTorchOptionalDimnameList::operator SEXP () const
+{
+  return operator_sexp_optional_dimname_list(this);
+}
+
+XPtrTorchOptionalDimnameList::XPtrTorchOptionalDimnameList (SEXP x):
+  XPtrTorch{from_sexp_optional_dimname_list(x)} {}
+
 // generator
 
 XPtrTorchGenerator::operator SEXP () const
@@ -145,6 +176,16 @@ XPtrTorchGenerator::operator SEXP () const
 XPtrTorchGenerator::XPtrTorchGenerator (SEXP x):
   XPtrTorch{from_sexp_generator(x)} {}
 
+// optional generator
+
+XPtrTorchOptionalGenerator::operator SEXP () const
+{
+  return operator_sexp_optional_generator(this);
+}
+
+XPtrTorchOptionalGenerator::XPtrTorchOptionalGenerator (SEXP x):
+  XPtrTorch{from_sexp_optional_generator(x)} {}
+
 // memory_format
 
 XPtrTorchMemoryFormat::operator SEXP () const
@@ -154,6 +195,16 @@ XPtrTorchMemoryFormat::operator SEXP () const
 
 XPtrTorchMemoryFormat::XPtrTorchMemoryFormat (SEXP x):
   XPtrTorch{from_sexp_memory_format(x)} {}
+
+// optional memory format
+
+XPtrTorchoptional_memory_format::operator SEXP () const
+{
+  return operator_sexp_optional_memory_format(this);
+}
+
+XPtrTorchoptional_memory_format::XPtrTorchoptional_memory_format (SEXP x):
+  XPtrTorch{from_sexp_optional_memory_format(x)} {}
 
 // vector_string
 
@@ -181,6 +232,16 @@ XPtrTorchstring::operator SEXP () const
 
 XPtrTorchstring::XPtrTorchstring(SEXP x) :
   XPtrTorchstring{from_sexp_string(x)} {}
+
+// optional string
+
+XPtrTorchoptional_string::operator SEXP() const 
+{
+  return operator_sexp_optional_string(this);
+}
+
+XPtrTorchoptional_string::XPtrTorchoptional_string (SEXP x):
+  XPtrTorchoptional_string{from_sexp_optional_string(x)} {}
 
 // jit_named_parameter_list
 
@@ -315,6 +376,11 @@ XPtrTorchOptionalIndexTensorList::XPtrTorchOptionalIndexTensorList (SEXP x) :
 XPtrTorchOptionalDevice::XPtrTorchOptionalDevice (SEXP x):
   XPtrTorch{from_sexp_optional_device(x)} {}
 
+// optional double array ref
+
+XPtrTorchOptionalDoubleArrayRef::XPtrTorchOptionalDoubleArrayRef (SEXP x):
+  XPtrTorch{from_sexp_optional_double_array_ref(x)} {}
+
 // int array ref
 
 XPtrTorchIntArrayRef::XPtrTorchIntArrayRef (SEXP x):
@@ -328,7 +394,7 @@ XPtrTorchIndexIntArrayRef::XPtrTorchIndexIntArrayRef (SEXP x):
 // optional int array ref
 
 XPtrTorchOptionalIntArrayRef::XPtrTorchOptionalIntArrayRef (SEXP x):
-  XPtrTorchOptionalIntArrayRef{from_sexp_optional_int_array_ref(x, false)} {};
+  XPtrTorchOptionalIntArrayRef(from_sexp_optional_int_array_ref(x, false)) {};
 
 // optional index int array ref
 
@@ -340,15 +406,59 @@ XPtrTorchOptionalIndexIntArrayRef::XPtrTorchOptionalIndexIntArrayRef (SEXP x):
 XPtrTorchTensorDict::XPtrTorchTensorDict(SEXP x) :
   XPtrTorchTensorDict{from_sexp_tensor_dict(x)} {}
 
-// int64_t2
+// int64_t
 
-XPtrTorchint64_t2::XPtrTorchint64_t2(SEXP x) :
-  XPtrTorchint64_t2{from_sexp_int64_t_2(x)} {}
+XPtrTorchint64_t::operator SEXP () const {
+  return operator_sexp_int64_t(this);
+}
 
-// optional_int64_t2
+XPtrTorchint64_t::XPtrTorchint64_t (SEXP x):
+  XPtrTorchint64_t{from_sexp_int64_t(x)} {}
 
-XPtrTorchoptional_int64_t2::XPtrTorchoptional_int64_t2(SEXP x) :
-  XPtrTorchoptional_int64_t2{from_sexp_optional_int64_t_2(x)} {}
+// optional int64_t
+
+XPtrTorchoptional_int64_t::operator SEXP() const {
+  return operator_sexp_optional_int64_t(this);
+}
+
+XPtrTorchoptional_int64_t::XPtrTorchoptional_int64_t (SEXP x):
+  XPtrTorchoptional_int64_t{from_sexp_optional_int64_t(x)} {}
+
+// bool
+
+XPtrTorchbool::XPtrTorchbool(SEXP x) :
+  XPtrTorchbool{from_sexp_bool(x)} {}
+
+XPtrTorchbool::operator SEXP () const {
+  return operator_sexp_bool(this);
+}
+
+// double
+
+XPtrTorchdouble::operator SEXP () const {
+  return operator_sexp_double(this);
+}
+
+XPtrTorchdouble::XPtrTorchdouble (SEXP x):
+  XPtrTorchdouble{from_sexp_double(x)} {}
+
+// optional double
+
+XPtrTorchOptionaldouble::operator SEXP () const {
+  return operator_sexp_optional_double(this);
+}
+
+XPtrTorchOptionaldouble::XPtrTorchOptionaldouble (SEXP x):
+  XPtrTorchOptionaldouble{from_sexp_optional_double(x)} {}
+
+// optional_bool
+
+XPtrTorchoptional_bool::XPtrTorchoptional_bool(SEXP x) :
+  XPtrTorchoptional_bool{from_sexp_optional_bool(x)} {}
+
+XPtrTorchoptional_bool::operator SEXP () const {
+  return operator_sexp_optional_bool(this);
+}
 
 // index_int64_t
 

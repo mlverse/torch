@@ -8,31 +8,29 @@
 void* _lantern_jit_compile (void* source, void* cu)
 {
     LANTERN_FUNCTION_START
-    const auto source_ = *reinterpret_cast<std::string*>(source);
-    auto result = new torch::jit::CompilationUnit(std::move(*torch::jit::compile(source_)));
-    return (void*) result;
+    const auto source_ = from_raw::string(source);
+    auto result = std::move(*torch::jit::compile(source_).get());
+    return make_raw::CompilationUnit(result);
     LANTERN_FUNCTION_END
 }
 
 void* _lantern_jit_compile_list_methods (void* cu)
 {
     LANTERN_FUNCTION_START
-    auto cu_ = reinterpret_cast<torch::jit::CompilationUnit*>(cu);
-    auto funs = cu_->get_functions();
+    auto funs = from_raw::CompilationUnit(cu).get_functions();
     std::vector<std::string> names;
     for (const auto& f: funs)
     {
         names.push_back(f->name());
     }
-    return (void*) new std::vector<std::string>(names);
+    return make_raw::vector::string(names);
     LANTERN_FUNCTION_END
 }
 
 void* _lantern_jit_compile_get_method (void* cu, void* name)
 {
     LANTERN_FUNCTION_START
-    auto cu_ = reinterpret_cast<torch::jit::CompilationUnit*>(cu);
-    auto name_ = *reinterpret_cast<std::string*>(name);
-    return (void*) cu_->find_function(name_);
+    auto name_ = from_raw::string(name);
+    return (void*) from_raw::CompilationUnit(cu).find_function(name_);
     LANTERN_FUNCTION_END
 }

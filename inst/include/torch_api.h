@@ -35,7 +35,19 @@ SEXP operator_sexp_named_tuple_helper (const XPtrTorchNamedTupleHelper* self);
 SEXP operator_sexp_vector_ivalue (const XPtrTorchvector_IValue* self);
 SEXP operator_sexp_generic_dict (const XPtrTorchGenericDict* self);
 SEXP operator_sexp_generic_list (const XPtrTorchGenericList* self);
-
+SEXP operator_sexp_int64_t (const XPtrTorchint64_t* x);
+SEXP operator_sexp_bool (const XPtrTorchbool* x);
+SEXP operator_sexp_double (const XPtrTorchdouble* x);
+SEXP operator_sexp_optional_dimname_list (const XPtrTorchOptionalDimnameList* x);
+SEXP operator_sexp_optional_generator (const XPtrTorchOptionalGenerator* x);
+SEXP operator_sexp_optional_double (const XPtrTorchOptionaldouble* x);
+SEXP operator_sexp_optional_int64_t (const XPtrTorchoptional_int64_t* x);
+SEXP operator_sexp_optional_bool (const XPtrTorchoptional_bool* x);
+SEXP operator_sexp_optional_scalar_type (const XPtrTorchoptional_scalar_type* x);
+SEXP operator_sexp_optional_string (const XPtrTorchoptional_string* x);
+SEXP operator_sexp_optional_scalar (const XPtrTorchoptional_scalar* x);
+SEXP operator_sexp_optional_memory_format (const XPtrTorchoptional_memory_format* x);
+  
 XPtrTorchTensor from_sexp_tensor (SEXP x);
 XPtrTorchOptionalTensor from_sexp_optional_tensor (SEXP x);
 XPtrTorchIndexTensor from_sexp_index_tensor (SEXP x);
@@ -67,9 +79,21 @@ XPtrTorchvector_double from_sexp_vector_double (SEXP x);
 XPtrTorchNamedTupleHelper from_sexp_named_tuple_helper (SEXP x);
 XPtrTorchStack from_sexp_stack (SEXP x);
 XPtrTorchCompilationUnit from_sexp_compilation_unit (SEXP x) ;
-XPtrTorchint64_t2 from_sexp_int64_t_2 (SEXP x_);
-XPtrTorchoptional_int64_t2 from_sexp_optional_int64_t_2 (SEXP x_);
 XPtrTorchindex_int64_t from_sexp_index_int64_t (SEXP x_);
 XPtrTorchoptional_index_int64_t from_sexp_optional_index_int64_t (SEXP x_);
+XPtrTorchoptional_bool from_sexp_optional_bool (SEXP x);
+XPtrTorchbool from_sexp_bool (SEXP x);
+XPtrTorchOptionalDoubleArrayRef from_sexp_optional_double_array_ref (SEXP x);
+XPtrTorchOptionalDimnameList from_sexp_optional_dimname_list (SEXP x);
+XPtrTorchOptionalGenerator from_sexp_optional_generator (SEXP x);
+XPtrTorchdouble from_sexp_double (SEXP x);
+XPtrTorchOptionaldouble from_sexp_optional_double (SEXP x);
+XPtrTorchoptional_int64_t from_sexp_optional_int64_t (SEXP x);
+XPtrTorchint64_t from_sexp_int64_t (SEXP x);
+XPtrTorchScalarType from_sexp_scalar_type (SEXP x);
+XPtrTorchoptional_scalar_type from_sexp_optional_scalar_type (SEXP x);
+XPtrTorchoptional_string from_sexp_optional_string (SEXP x);
+XPtrTorchoptional_memory_format from_sexp_optional_memory_format (SEXP x);
+XPtrTorchoptional_scalar from_sexp_optional_scalar (SEXP x);
 
 #endif // TORCH_API

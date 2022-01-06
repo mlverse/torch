@@ -92,6 +92,11 @@ std::string cpp_arg_to_torch_type (SEXP obj, const std::vector<std::string> expe
     return "DimnameList";
   }
   
+  if (e_dimname_list && is_null)
+  {
+    return "DimnameList";
+  }
+  
   
   bool is_numeric = Rf_isNumeric(obj);
   

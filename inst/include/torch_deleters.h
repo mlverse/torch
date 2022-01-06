@@ -29,7 +29,6 @@ void delete_ivalue (void* x);
 void delete_tuple (void* x);
 void delete_vector_bool (void* x);
 void delete_vector_scalar (void* x);
-void delete_int64_t_2 (void* x);
 void delete_vector_int64_t (void* x);
 void delete_vector_double (void* x);
 void delete_tensor_dict (void* x);
@@ -52,8 +51,16 @@ void delete_storage (void* x);
 void delete_jit_module (void* x);
 void delete_traceable_function (void* x);
 void delete_vector_void (void* x);
+void delete_optional_bool (void* x);
+void delete_optional_double_array_ref (void* x);
+void delete_optional_dimname_list (void* x);
+void delete_optional_generator (void* x);
+void delete_optional_double (void* x);
+void delete_optional_scalar_type (void* x);
+void delete_optional_string (void* x);
+void delete_optional_scalar (void* x);
+void delete_optional_memory_format (void* x);
 
-void* fixme_optional_vector_int64_t (int64_t * x, size_t x_size, bool is_null);
 void* fixme_new_string (const char* x);
 void* fixme_new_dimname (const char* x);
 
