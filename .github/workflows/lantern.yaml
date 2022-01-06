@@ -260,31 +260,3 @@ jobs:
           CLI: gsutil
         with:
           args: cp ${{ matrix.artifact }}.zip gs://torch-lantern-builds/${{ github.ref }}/latest/${{ matrix.upload }}-${{ matrix.hw }}${{ matrix.version }}.zip
-  autogen:
-    runs-on: ubuntu-16.04
-    name: autogen (ubuntu-16.04)
-    timeout-minutes: 5
-    steps:
-      - uses: actions/checkout@v2
-      - name: Create environment
-        run: mkdir ${{runner.workspace}}/build
-      - name: Run cmake
-        working-directory: ${{runner.workspace}}/build
-        run: cmake ${{github.workspace}}/lantern/headers
-      - name: Run make
-        working-directory: ${{runner.workspace}}/build
-        run: make
-      - name: Prepare autogen
-        working-directory: ${{runner.workspace}}
-        run: |
-          mkdir output
-          cp ${{github.workspace}}/lantern/src/lantern.cpp output/lantern.cpp
-          cp ${{github.workspace}}/lantern/include/lantern/lantern.h output/lantern.h
-      - name: Run autogen
-        working-directory: ${{runner.workspace}}/build
-        run: ./lanterngen ${{github.workspace}}/lantern/headers/declarations/declarations.yaml ${{runner.workspace}}/output/lantern.cpp ${{runner.workspace}}/output/lantern.h
-      - name: Upload artifacts
-        uses: actions/upload-artifact@v1
-        with:
-          name: Autogen
-          path: ${{runner.workspace}}/output
