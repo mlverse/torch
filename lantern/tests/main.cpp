@@ -43,9 +43,6 @@ int main(int argc, char *argv[])
     std::cout << std::string(lantern_Tensor_StreamInsertion(lantern_vector_get(r, 0))) << std::endl;
     std::cout << std::string(lantern_Tensor_StreamInsertion(lantern_vector_get(r, 1))) << std::endl;
 
-    std::vector<int64_t> sizes(2, 1);
-    void *a = lantern_rand_intarrayref_dimnamelist_tensoroptions(lantern_vector_int64_t(&sizes[0], 1), dimnamelist, lantern_TensorOptions());
-
     // zeros_like
     std::vector<int64_t> x1(2, 2);
     void *t1 = lantern_rand_intarrayref_tensoroptions(lantern_vector_int64_t(&x[0], 2), lantern_TensorOptions());
