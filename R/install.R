@@ -1,4 +1,4 @@
-branch <- "cran/v0.6.1"  
+branch <- "feature/lantern-types"  
 
 install_config <- list(
   "1.9.1" = list(

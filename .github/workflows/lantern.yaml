@@ -6,6 +6,7 @@ on:
       - master
       - 'cran/**'
       - re-add-cuda10.1
+      - feature/lantern-types
 
 jobs:
   build:
