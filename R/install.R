@@ -1,4 +1,4 @@
-branch <- "feature/lantern-types"  
+branch <- "master"  
 
 install_config <- list(
   "1.9.1" = list(

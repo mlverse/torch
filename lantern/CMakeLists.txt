@@ -139,7 +139,8 @@ if(DEFINED ENV{CUDA})
       src/Contrib/SortVertices/sort_vert_kernel.cu
       src/Contrib/SortVertices/sort_vert.cpp
   )
-
+  
+  set_source_files_properties(src/Cuda.cpp PROPERTIES COMPILE_DEFINITIONS __NVCC__)
   cuda_add_library(lantern SHARED ${LANTERN_SRC})
 else()
   set(LANTERN_SRC 

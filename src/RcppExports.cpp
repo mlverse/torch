@@ -490,6 +490,17 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// cpp_cuda_get_device_capability
+XPtrTorchvector_int64_t cpp_cuda_get_device_capability(int64_t device);
+RcppExport SEXP _torch_cpp_cuda_get_device_capability(SEXP deviceSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< int64_t >::type device(deviceSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_cuda_get_device_capability(device));
+    return rcpp_result_gen;
+END_RCPP
+}
 // cpp_device_type_to_string
 std::string cpp_device_type_to_string(Rcpp::XPtr<XPtrTorchDevice> device);
 RcppExport SEXP _torch_cpp_device_type_to_string(SEXP deviceSEXP) {
@@ -34604,6 +34615,17 @@ BEGIN_RCPP
     return R_NilValue;
 END_RCPP
 }
+// cpp_jit_script_module_save_for_mobile
+void cpp_jit_script_module_save_for_mobile(XPtrTorchScriptModule self, XPtrTorchstring path);
+RcppExport SEXP _torch_cpp_jit_script_module_save_for_mobile(SEXP selfSEXP, SEXP pathSEXP) {
+BEGIN_RCPP
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchScriptModule >::type self(selfSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchstring >::type path(pathSEXP);
+    cpp_jit_script_module_save_for_mobile(self, path);
+    return R_NilValue;
+END_RCPP
+}
 // test_stack
 XPtrTorchStack test_stack(XPtrTorchStack x);
 RcppExport SEXP _torch_test_stack(SEXP xSEXP) {
@@ -35022,6 +35044,17 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// cpp_save_traced_fn_for_mobile
+void cpp_save_traced_fn_for_mobile(Rcpp::XPtr<XPtrTorchFunctionPtr> fn, std::string filename);
+RcppExport SEXP _torch_cpp_save_traced_fn_for_mobile(SEXP fnSEXP, SEXP filenameSEXP) {
+BEGIN_RCPP
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< Rcpp::XPtr<XPtrTorchFunctionPtr> >::type fn(fnSEXP);
+    Rcpp::traits::input_parameter< std::string >::type filename(filenameSEXP);
+    cpp_save_traced_fn_for_mobile(fn, filename);
+    return R_NilValue;
+END_RCPP
+}
 // cpp_nullptr
 Rcpp::XPtr<std::nullptr_t> cpp_nullptr();
 RcppExport SEXP _torch_cpp_nullptr() {
@@ -35174,6 +35207,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_torch_cpp_cuda_is_available", (DL_FUNC) &_torch_cpp_cuda_is_available, 0},
     {"_torch_cpp_cuda_device_count", (DL_FUNC) &_torch_cpp_cuda_device_count, 0},
     {"_torch_cpp_cuda_current_device", (DL_FUNC) &_torch_cpp_cuda_current_device, 0},
+    {"_torch_cpp_cuda_get_device_capability", (DL_FUNC) &_torch_cpp_cuda_get_device_capability, 1},
     {"_torch_cpp_device_type_to_string", (DL_FUNC) &_torch_cpp_device_type_to_string, 1},
     {"_torch_cpp_device_index_to_int", (DL_FUNC) &_torch_cpp_device_index_to_int, 1},
     {"_torch_cpp_torch_device", (DL_FUNC) &_torch_cpp_torch_device, 2},
@@ -37780,6 +37814,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_torch_cpp_jit_script_module_add_method", (DL_FUNC) &_torch_cpp_jit_script_module_add_method, 2},
     {"_torch_cpp_jit_script_module_find_constant", (DL_FUNC) &_torch_cpp_jit_script_module_find_constant, 2},
     {"_torch_cpp_jit_script_module_save", (DL_FUNC) &_torch_cpp_jit_script_module_save, 2},
+    {"_torch_cpp_jit_script_module_save_for_mobile", (DL_FUNC) &_torch_cpp_jit_script_module_save_for_mobile, 2},
     {"_torch_test_stack", (DL_FUNC) &_torch_test_stack, 1},
     {"_torch_cpp_Tensor_storage", (DL_FUNC) &_torch_cpp_Tensor_storage, 1},
     {"_torch_cpp_Tensor_has_storage", (DL_FUNC) &_torch_cpp_Tensor_has_storage, 1},
@@ -37816,6 +37851,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_torch_cpp_traced_fn_graph_print", (DL_FUNC) &_torch_cpp_traced_fn_graph_print, 1},
     {"_torch_cpp_jit_load", (DL_FUNC) &_torch_cpp_jit_load, 1},
     {"_torch_cpp_call_jit_script", (DL_FUNC) &_torch_cpp_call_jit_script, 2},
+    {"_torch_cpp_save_traced_fn_for_mobile", (DL_FUNC) &_torch_cpp_save_traced_fn_for_mobile, 2},
     {"_torch_cpp_nullptr", (DL_FUNC) &_torch_cpp_nullptr, 0},
     {"_torch_cpp_nullopt", (DL_FUNC) &_torch_cpp_nullopt, 0},
     {"_torch_cpp_tensor_undefined", (DL_FUNC) &_torch_cpp_tensor_undefined, 0},
