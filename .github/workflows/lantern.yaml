@@ -4,9 +4,7 @@ on:
   push:
     branches:
       - master
-      - 'cran/**'
-      - re-add-cuda10.1
-      - feature/lantern-types
+      - "cran/**"
 
 jobs:
   build:
@@ -69,7 +67,7 @@ jobs:
             artifacts: liblantern.so
             upload: Linux-Cuda-102
           - os: ubuntu-18.04
-            cuda: '11.1'
+            cuda: "11.1"
             library: liblantern.so
             test: ./lanterntest
             make: make
@@ -94,8 +92,8 @@ jobs:
             flavor: Release
             artifacts: lantern.dll
             upload: Windows-Cuda-102
-            cudatoolkit: 'http://developer.download.nvidia.com/compute/cuda/10.2/Prod/local_installers/cuda_10.2.89_441.22_win10.exe'
-            cudnn: 'https://storage.googleapis.com/torch-lantern-builds/cudnn/cudnn-10.2-windows10-x64-v7.6.5.32.zip'
+            cudatoolkit: "http://developer.download.nvidia.com/compute/cuda/10.2/Prod/local_installers/cuda_10.2.89_441.22_win10.exe"
+            cudnn: "https://storage.googleapis.com/torch-lantern-builds/cudnn/cudnn-10.2-windows10-x64-v7.6.5.32.zip"
           - os: windows-2019
             cuda: 11.1
             library: lantern.dll
@@ -109,8 +107,8 @@ jobs:
             flavor: Release
             artifacts: lantern.dll
             upload: Windows-Cuda-111
-            cudatoolkit: 'https://developer.download.nvidia.com/compute/cuda/11.1.1/local_installers/cuda_11.1.1_456.81_win10.exe'
-            cudnn: 'https://storage.googleapis.com/torch-lantern-builds/cudnn/cudnn-11.1-windows-x64-v8.0.5.39.zip'
+            cudatoolkit: "https://developer.download.nvidia.com/compute/cuda/11.1.1/local_installers/cuda_11.1.1_456.81_win10.exe"
+            cudnn: "https://storage.googleapis.com/torch-lantern-builds/cudnn/cudnn-11.1-windows-x64-v8.0.5.39.zip"
     steps:
       - uses: actions/checkout@v2
       - name: Create environment
@@ -171,26 +169,26 @@ jobs:
           Get-Content -Path $env:GITHUB_ENV -TotalCount 5
           Remove-Item cuda.exe
           Get-CimInstance -ClassName Win32_LogicalDisk | Select-Object -Property DeviceID,FreeSpace
-          
+
       - name: Run cmake
         working-directory: ${{runner.workspace}}/build
         run: cmake -DCMAKE_BUILD_TYPE=${{matrix.flavor}} ${{ matrix.cmakevars }} ${{github.workspace}}/lantern
-          
+
       - name: Run make
         working-directory: ${{runner.workspace}}/build
         run: ${{matrix.make}}
-        
+
       - name: Fix library
         working-directory: ${{runner.workspace}}/build
         run: ${{matrix.fixlib}}
-        
+
       - name: Install libs
         working-directory: ${{runner.workspace}}
         run: |
           mkdir artifacts
           cp -R ${{matrix.build}}/${{matrix.artifacts}} artifacts
           rm -r build
-        
+
       - name: Upload artifacts
         uses: actions/upload-artifact@v1
         with:
@@ -202,7 +200,16 @@ jobs:
     runs-on: ubuntu-18.04
     strategy:
       matrix:
-        name: [macOS, Linux, Windows, Cuda102,  Cuda111, WindowsCuda102, WindowsCuda111]
+        name:
+          [
+            macOS,
+            Linux,
+            Windows,
+            Cuda102,
+            Cuda111,
+            WindowsCuda102,
+            WindowsCuda111,
+          ]
         include:
           - name: macOS
             artifact: macOS
