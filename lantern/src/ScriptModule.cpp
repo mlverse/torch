@@ -236,7 +236,7 @@ void _lantern_ScriptModule_save_for_mobile (void* self, void* path)
 {
   LANTERN_FUNCTION_START
   auto self_ = reinterpret_cast<torch::jit::script::Module *>(self);
-  auto path_ = reinterpret_cast<LanternObject<std::string>*>(path)->get();
+  auto path_ = from_raw::string(path);
   self_->_save_for_mobile(path_);
   LANTERN_FUNCTION_END_VOID
 }
