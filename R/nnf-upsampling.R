@@ -114,15 +114,15 @@ nnf_interpolate <- function(input, size = NULL, scale_factor = NULL,
   }
   
   if (input$dim() == 3 && mode == "area") {
-    return(torch_adaptive_avg_pool1d(input = input, output_size = output_size))
+    return(torch_adaptive_avg_pool1d(input, output_size = output_size))
   }
   
   if (input$dim() == 4 && mode == "area") {
-    return(torch_adaptive_avg_pool2d(input = input, output_size = output_size))
+    return(torch_adaptive_avg_pool2d(input, output_size = output_size))
   }
   
   if (input$dim() == 5 && mode == "area") {
-    return(torch_adaptive_avg_pool3d(input = input, output_size = output_size))
+    return(torch_adaptive_avg_pool3d(input, output_size = output_size))
   }
   
   if (input$dim() == 3 && mode == "linear") {

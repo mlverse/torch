@@ -12,10 +12,10 @@ nn_upsample(
 )
 }
 \arguments{
-\item{size}{(int or Tuple\link{int} or Tuple\link{int, int} or Tuple\link{int, int, int}, optional):
+\item{size}{(int or \code{Tuple[int]} or \code{Tuple[int, int]} or \code{Tuple[int, int, int]}, optional):
 output spatial sizes}
 
-\item{scale_factor}{(float or Tuple\link{float} or Tuple\link{float, float} or Tuple\link{float, float, float}, optional):
+\item{scale_factor}{(float or \code{Tuple[float]} or \code{Tuple[float, float]} or \code{Tuple[float, float, float]}, optional):
 multiplier for spatial size. Has to match input size if it is a tuple.}
 
 \item{mode}{(str, optional): the upsampling algorithm: one of \code{'nearest'},

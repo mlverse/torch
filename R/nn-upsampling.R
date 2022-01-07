@@ -12,9 +12,9 @@
 #' One can either give a scale_factor or the target output size to calculate the 
 #' output size. (You cannot give both, as it is ambiguous)
 #' 
-#' @param size (int or Tuple[int] or Tuple[int, int] or Tuple[int, int, int], optional):
+#' @param size (int or `Tuple[int]` or `Tuple[int, int]` or `Tuple[int, int, int]`, optional):
 #'   output spatial sizes
-#' @param scale_factor (float or Tuple[float] or Tuple[float, float] or Tuple[float, float, float], optional):
+#' @param scale_factor (float or `Tuple[float]` or `Tuple[float, float]` or `Tuple[float, float, float]`, optional):
 #'   multiplier for spatial size. Has to match input size if it is a tuple.
 #' @param mode (str, optional): the upsampling algorithm: one of `'nearest'`,
 #'   `'linear'`, `'bilinear'`, `'bicubic'` and `'trilinear'`.
