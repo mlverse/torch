@@ -11,27 +11,32 @@
 void *_lantern_TensorList()
 {
     LANTERN_FUNCTION_START
-    return (void *)new LanternObject<std::vector<torch::Tensor>>();
+    return make_raw::TensorList({});
     LANTERN_FUNCTION_END
 }
 
 void* _lantern_OptionalTensorList ()
 {
     LANTERN_FUNCTION_START
-    return (void*) new LanternObject<c10::List<c10::optional<torch::Tensor>>>();
+    c10::List<c10::optional<torch::Tensor>> list;
+    return make_raw::optional::TensorList(list);
     LANTERN_FUNCTION_END
 }
 
 void _lantern_TensorList_push_back(void *self, void *x)
 {
     LANTERN_FUNCTION_START
-    torch::Tensor ten = reinterpret_cast<LanternObject<torch::Tensor> *>(x)->get();
-    reinterpret_cast<LanternObject<std::vector<torch::Tensor>> *>(self)->get().push_back(ten);
+    torch::Tensor ten = from_raw::Tensor(x);
+    // We need to use the raw object here because this operation is not allowed
+    // from a torch::TensorList directly. This should be the **only** place we 
+    // ever modify the buffer in-place.
+    reinterpret_cast<self_contained::TensorList*>(self)->push_back(ten);
     LANTERN_FUNCTION_END_VOID
 }
 
 void _lantern_OptionalTensorList_push_back (void* self, void* x, bool is_null)
 {
+    // TODO make this take an optional tensor directly.
     LANTERN_FUNCTION_START
     c10::optional<torch::Tensor> tensor;
     if (is_null)
@@ -40,51 +45,52 @@ void _lantern_OptionalTensorList_push_back (void* self, void* x, bool is_null)
     }
     else
     {
-        tensor = reinterpret_cast<LanternObject<torch::Tensor>*>(x)->get();
+        tensor = from_raw::Tensor(x);
     }
-    reinterpret_cast<LanternObject<c10::List<c10::optional<torch::Tensor>>>*>(self)->get().push_back(tensor);
+    
+    from_raw::optional::TensorList(self).push_back(tensor);
     LANTERN_FUNCTION_END_VOID
 }
 
 int64_t _lantern_OptionalTensorList_size (void* self)
 {
     LANTERN_FUNCTION_START
-    return reinterpret_cast<LanternObject<c10::List<c10::optional<torch::Tensor>>>*>(self)->get().size();
+    return from_raw::optional::TensorList(self).size();
     LANTERN_FUNCTION_END
 }
 
 void* _lantern_OptionalTensorList_at (void* self, int64_t i)
 {
     LANTERN_FUNCTION_START
-    auto t = reinterpret_cast<LanternObject<c10::List<c10::optional<torch::Tensor>>>*>(self)->get().get(i);
-    return (void*) new LanternObject<torch::Tensor>(t.value());
+    auto t = from_raw::optional::TensorList(self).get(i);
+    return make_raw::Tensor(t.value());
     LANTERN_FUNCTION_END
 }
 
 bool _lantern_OptionalTensorList_at_is_null (void* self, int64_t i)
 {
     LANTERN_FUNCTION_START
-    return (!reinterpret_cast<LanternObject<c10::List<c10::optional<torch::Tensor>>>*>(self)->get().get(i).has_value());
+    return !from_raw::optional::TensorList(self).get(i).has_value();
     LANTERN_FUNCTION_END
 }
 
 void* _lantern_TensorList_at(void *self, int64_t i)
 {
     LANTERN_FUNCTION_START
-    torch::Tensor out = reinterpret_cast<LanternObject<std::vector<torch::Tensor>> *>(self)->get().at(i);
-    return (void *)new LanternObject<torch::Tensor>(out);
+    torch::Tensor out = from_raw::TensorList(self).at(i);
+    return make_raw::Tensor(out);
     LANTERN_FUNCTION_END
 }
 
 int64_t _lantern_TensorList_size(void *self)
 {
     LANTERN_FUNCTION_START
-    return reinterpret_cast<LanternObject<std::vector<torch::Tensor>> *>(self)->get().size();
+    return from_raw::TensorList(self).size();
     LANTERN_FUNCTION_END_RET(0)
 }
 
 void* _lantern_Stream ()
 {
     c10::Stream x = c10::Stream(c10::Stream::Default(),torch::Device(torch::DeviceType::CPU));
-    return (void*) new LanternObject<c10::Stream>(x);
+    return make_raw::Stream(x);
 }

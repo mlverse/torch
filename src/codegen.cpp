@@ -1,4 +1,4 @@
-#include "torch_types.h"
+#include <torch.h>
 #include <set>
 
 inline std::set<std::string> create_set(const std::vector<std::string> v)
@@ -88,6 +88,11 @@ std::string cpp_arg_to_torch_type (SEXP obj, const std::vector<std::string> expe
   }
   
   if (e_dimname_list && is_character)
+  {
+    return "DimnameList";
+  }
+  
+  if (e_dimname_list && is_null)
   {
     return "DimnameList";
   }

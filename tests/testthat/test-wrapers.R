@@ -189,7 +189,8 @@ test_that("stft", {
   x <- torch_stft(
     input = torch::torch_ones(3000),
     n_fft = 400,
-    center = FALSE
+    center = FALSE,
+    onesided = TRUE
   )
   
   expect_tensor_shape(x, c(201, 27, 2))

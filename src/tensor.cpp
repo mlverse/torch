@@ -1,10 +1,10 @@
 
-#include "torch_types.h"
-#include "utils.h"
+#include <torch.h>
+
 
 // [[Rcpp::export]]
-void cpp_torch_tensor_print (Rcpp::XPtr<XPtrTorchTensor> x, int n) {
-  const char* s = lantern_Tensor_StreamInsertion(x->get());
+void cpp_torch_tensor_print (torch::Tensor x, int n) {
+  const char* s = lantern_Tensor_StreamInsertion(x.get());
   auto s_string = std::string(s);
   lantern_const_char_delete(s); // above statement has deep copied the s string.
   
@@ -53,8 +53,8 @@ void cpp_torch_tensor_print (Rcpp::XPtr<XPtrTorchTensor> x, int n) {
 };
 
 // [[Rcpp::export]]
-Rcpp::XPtr<XPtrTorchDtype> cpp_torch_tensor_dtype(Rcpp::XPtr<XPtrTorchTensor> x) {
-  XPtrTorchDtype out = lantern_Tensor_dtype(x->get());
+Rcpp::XPtr<XPtrTorchDtype> cpp_torch_tensor_dtype(torch::Tensor x) {
+  XPtrTorchDtype out = lantern_Tensor_dtype(x.get());
   return make_xptr<XPtrTorchDtype>(out);
 }
 
@@ -67,11 +67,11 @@ std::vector<int64_t> revert_int_seq (int n) {
 };
 
 template <int RTYPE>
-XPtrTorchTensor tensor_from_r_array (const SEXP x, std::vector<int64_t> dim, std::string dtype) {
+torch::Tensor tensor_from_r_array (const SEXP x, std::vector<int64_t> dim, std::string dtype) {
 
   Rcpp::Vector<RTYPE> vec(x);
 
-  XPtrTorchTensorOptions options = lantern_TensorOptions();
+  torch::TensorOptions options = lantern_TensorOptions();
   
   if (dtype == "double") 
   {
@@ -88,7 +88,7 @@ XPtrTorchTensor tensor_from_r_array (const SEXP x, std::vector<int64_t> dim, std
 
   options = lantern_TensorOptions_device(options.get(), XPtrTorchDevice(lantern_Device("cpu", 0, false)).get());
 
-  XPtrTorchTensor tensor = lantern_from_blob(vec.begin(), &dim[0], dim.size(), options.get());
+  torch::Tensor tensor = lantern_from_blob(vec.begin(), &dim[0], dim.size(), options.get());
 
   if (dim.size() == 1) {
     // if we have a 1-dim vector contigous doesn't trigger a copy, and
@@ -104,11 +104,11 @@ XPtrTorchTensor tensor_from_r_array (const SEXP x, std::vector<int64_t> dim, std
 };
 
 // [[Rcpp::export]]
-XPtrTorchTensor cpp_torch_tensor (SEXP x, std::vector<std::int64_t> dim,
-                                  XPtrTorchTensorOptions options,
+torch::Tensor cpp_torch_tensor (SEXP x, std::vector<std::int64_t> dim,
+                                  torch::TensorOptions options,
                                   bool requires_grad, bool is_integer64) {
   
-  XPtrTorchTensor tensor;
+  torch::Tensor tensor;
 
   if (TYPEOF(x) == INTSXP) 
   {
@@ -137,7 +137,7 @@ XPtrTorchTensor cpp_torch_tensor (SEXP x, std::vector<std::int64_t> dim,
   return tensor;
 }
 
-Rcpp::IntegerVector tensor_dimensions (XPtrTorchTensor x) {
+Rcpp::IntegerVector tensor_dimensions (torch::Tensor x) {
   int64_t ndim = lantern_Tensor_ndimension(x.get());
   Rcpp::IntegerVector dimensions(ndim);
   for (int i = 0; i < ndim; ++i) {
@@ -146,30 +146,30 @@ Rcpp::IntegerVector tensor_dimensions (XPtrTorchTensor x) {
   return dimensions;
 }
 
-Rcpp::List tensor_to_r_array_double (XPtrTorchTensor x) {
-  XPtrTorchTensor ten = lantern_Tensor_contiguous(x.get());
+Rcpp::List tensor_to_r_array_double (torch::Tensor x) {
+  torch::Tensor ten = lantern_Tensor_contiguous(x.get());
   auto d_ptr = lantern_Tensor_data_ptr_double(ten.get());
   Rcpp::Vector<REALSXP> vec(d_ptr, d_ptr + lantern_Tensor_numel(ten.get()));
   return Rcpp::List::create(Rcpp::Named("vec") = vec, Rcpp::Named("dim") = tensor_dimensions(x));
 }
 
-Rcpp::List tensor_to_r_array_uint8_t (XPtrTorchTensor x) {
-  XPtrTorchTensor ten = lantern_Tensor_contiguous(x.get());
+Rcpp::List tensor_to_r_array_uint8_t (torch::Tensor x) {
+  torch::Tensor ten = lantern_Tensor_contiguous(x.get());
   auto d_ptr = lantern_Tensor_data_ptr_uint8_t(ten.get());
   Rcpp::Vector<LGLSXP> vec(d_ptr, d_ptr + lantern_Tensor_numel(ten.get()));
   return Rcpp::List::create(Rcpp::Named("vec") = vec, Rcpp::Named("dim") = tensor_dimensions(x));
 }
 
-Rcpp::List tensor_to_r_array_int32_t (XPtrTorchTensor x) {
-  XPtrTorchTensor ten = lantern_Tensor_contiguous(x.get());
+Rcpp::List tensor_to_r_array_int32_t (torch::Tensor x) {
+  torch::Tensor ten = lantern_Tensor_contiguous(x.get());
   auto d_ptr = lantern_Tensor_data_ptr_int32_t(ten.get());
   Rcpp::Vector<INTSXP> vec(d_ptr, d_ptr + lantern_Tensor_numel(ten.get()));
   return Rcpp::List::create(Rcpp::Named("vec") = vec, Rcpp::Named("dim") = tensor_dimensions(x));
 }
 
-Rcpp::List tensor_to_r_array_int64_t (XPtrTorchTensor x)
+Rcpp::List tensor_to_r_array_int64_t (torch::Tensor x)
 {
-  XPtrTorchTensor ten = lantern_Tensor_contiguous(x.get());
+  torch::Tensor ten = lantern_Tensor_contiguous(x.get());
   auto d_ptr = lantern_Tensor_data_ptr_int64_t(ten.get());
   
   int64_t len = lantern_Tensor_numel(ten.get());
@@ -183,15 +183,15 @@ Rcpp::List tensor_to_r_array_int64_t (XPtrTorchTensor x)
   return Rcpp::List::create(Rcpp::Named("vec") = vec, Rcpp::Named("dim") = tensor_dimensions(x));
 }
 
-Rcpp::List tensor_to_r_array_bool (XPtrTorchTensor x) {
-  XPtrTorchTensor ten = lantern_Tensor_contiguous(x.get());
+Rcpp::List tensor_to_r_array_bool (torch::Tensor x) {
+  torch::Tensor ten = lantern_Tensor_contiguous(x.get());
   auto d_ptr = lantern_Tensor_data_ptr_bool(ten.get());
   Rcpp::Vector<LGLSXP> vec(d_ptr, d_ptr + lantern_Tensor_numel(ten.get()));
   return Rcpp::List::create(Rcpp::Named("vec") = vec, Rcpp::Named("dim") = tensor_dimensions(x));
 }
 
 // [[Rcpp::export]]
-Rcpp::List cpp_as_array (Rcpp::XPtr<XPtrTorchTensor> x) {
+Rcpp::List cpp_as_array (Rcpp::XPtr<torch::Tensor> x) {
   
   auto s = lantern_Dtype_type(XPtrTorchDtype(lantern_Tensor_dtype(x->get())).get());
   auto dtype = std::string(s);
@@ -213,11 +213,11 @@ Rcpp::List cpp_as_array (Rcpp::XPtr<XPtrTorchTensor> x) {
     return tensor_to_r_array_double(*x.get());
   }
   
-  XPtrTorchTensorOptions options = lantern_TensorOptions();
+  torch::TensorOptions options = lantern_TensorOptions();
   
   if (dtype == "Float") {
     options = lantern_TensorOptions_dtype(options.get(), XPtrTorchDtype(lantern_Dtype_float64()).get());
-    return tensor_to_r_array_double(XPtrTorchTensor(lantern_Tensor_to(x->get(), options.get())));
+    return tensor_to_r_array_double(torch::Tensor(lantern_Tensor_to(x->get(), options.get())));
   }
   
   if (dtype == "Long") {
@@ -228,12 +228,12 @@ Rcpp::List cpp_as_array (Rcpp::XPtr<XPtrTorchTensor> x) {
 };
 
 // [[Rcpp::export]]
-int cpp_tensor_element_size (Rcpp::XPtr<XPtrTorchTensor> x) {
+int cpp_tensor_element_size (Rcpp::XPtr<torch::Tensor> x) {
   return lantern_Tensor_element_size(x->get());
 }
 
 // [[Rcpp::export]]
-std::vector<int> cpp_tensor_dim (Rcpp::XPtr<XPtrTorchTensor> x) {
+std::vector<int> cpp_tensor_dim (Rcpp::XPtr<torch::Tensor> x) {
   auto ndim = lantern_Tensor_ndimension(x->get());
   std::vector<int> out;
   for (int i = 0; i < ndim; i++) {
@@ -243,36 +243,36 @@ std::vector<int> cpp_tensor_dim (Rcpp::XPtr<XPtrTorchTensor> x) {
 }
 
 // [[Rcpp::export]]
-int cpp_tensor_numel (Rcpp::XPtr<XPtrTorchTensor> x) {
+int cpp_tensor_numel (Rcpp::XPtr<torch::Tensor> x) {
   return lantern_Tensor_numel(x->get());
 }
 
 // [[Rcpp::export]]
-Rcpp::XPtr<XPtrTorchDevice> cpp_tensor_device (Rcpp::XPtr<XPtrTorchTensor> self) {
+Rcpp::XPtr<XPtrTorchDevice> cpp_tensor_device (Rcpp::XPtr<torch::Tensor> self) {
   XPtrTorchDevice out = lantern_Tensor_device(self->get());
   return make_xptr<XPtrTorchDevice>(out);
 }
 
 // [[Rcpp::export]]
-bool cpp_tensor_is_undefined (Rcpp::XPtr<XPtrTorchTensor> self)
+bool cpp_tensor_is_undefined (Rcpp::XPtr<torch::Tensor> self)
 {
   return lantern_Tensor_is_undefined(self->get());
 }
 
 // [[Rcpp::export]]
-bool cpp_tensor_is_contiguous (Rcpp::XPtr<XPtrTorchTensor> self)
+bool cpp_tensor_is_contiguous (Rcpp::XPtr<torch::Tensor> self)
 {
   return lantern_Tensor_is_contiguous(self->get());
 }
 
 // [[Rcpp::export]]
-bool cpp_tensor_has_names (Rcpp::XPtr<XPtrTorchTensor> self)
+bool cpp_tensor_has_names (Rcpp::XPtr<torch::Tensor> self)
 {
   return lantern_Tensor_has_names(self->get());
 }
 
 // [[Rcpp::export]]
-Rcpp::XPtr<XPtrTorchDimnameList> cpp_tensor_names (Rcpp::XPtr<XPtrTorchTensor> self)
+Rcpp::XPtr<XPtrTorchDimnameList> cpp_tensor_names (Rcpp::XPtr<torch::Tensor> self)
 {
   return make_xptr<XPtrTorchDimnameList>(lantern_Tensor_names(self->get()));
 }
@@ -302,11 +302,11 @@ int cpp_get_num_interop_threads ()
 }
 
 // [[Rcpp::export]]
-XPtrTorchTensor cpp_namespace_normal_double_double (double mean, double std, 
+torch::Tensor cpp_namespace_normal_double_double (double mean, double std, 
                                                                 std::vector<int64_t> size,
                                                                 Rcpp::XPtr<XPtrTorchGenerator> generator,
-                                                                XPtrTorchTensorOptions options) {
-  XPtrTorchTensor out = lantern_normal_double_double_intarrayref_generator_tensoroptions(
+                                                                torch::TensorOptions options) {
+  torch::Tensor out = lantern_normal_double_double_intarrayref_generator_tensoroptions(
     mean, std, 
     XPtrTorchvector_int64_t(lantern_vector_int64_t(size.data(), size.size())).get(),
     generator->get(),
@@ -316,13 +316,13 @@ XPtrTorchTensor cpp_namespace_normal_double_double (double mean, double std,
 }
 
 // [[Rcpp::export]]
-XPtrTorchTensor cpp_namespace_normal_double_tensor (
+torch::Tensor cpp_namespace_normal_double_tensor (
     double mean, 
-    Rcpp::XPtr<XPtrTorchTensor> std,
+    Rcpp::XPtr<torch::Tensor> std,
     Rcpp::XPtr<XPtrTorchGenerator> generator
 )
 {
-  XPtrTorchTensor out = lantern_normal_double_tensor_generator(
+  torch::Tensor out = lantern_normal_double_tensor_generator(
     mean, 
     std->get(), 
     generator->get()
@@ -331,13 +331,13 @@ XPtrTorchTensor cpp_namespace_normal_double_tensor (
 }
 
 // [[Rcpp::export]]
-XPtrTorchTensor cpp_namespace_normal_tensor_double (
-    Rcpp::XPtr<XPtrTorchTensor> mean,
+torch::Tensor cpp_namespace_normal_tensor_double (
+    Rcpp::XPtr<torch::Tensor> mean,
     double std, 
     Rcpp::XPtr<XPtrTorchGenerator> generator
 )
 {
-  XPtrTorchTensor out = lantern_normal_tensor_double_generator(
+  torch::Tensor out = lantern_normal_tensor_double_generator(
     mean->get(), 
     std, 
     generator->get()
@@ -346,13 +346,13 @@ XPtrTorchTensor cpp_namespace_normal_tensor_double (
 }
 
 // [[Rcpp::export]]
-XPtrTorchTensor cpp_namespace_normal_tensor_tensor (
-    Rcpp::XPtr<XPtrTorchTensor> mean,
-    Rcpp::XPtr<XPtrTorchTensor> std, 
+torch::Tensor cpp_namespace_normal_tensor_tensor (
+    Rcpp::XPtr<torch::Tensor> mean,
+    Rcpp::XPtr<torch::Tensor> std, 
     Rcpp::XPtr<XPtrTorchGenerator> generator
 )
 {
-  XPtrTorchTensor out = lantern_normal_tensor_tensor_generator(
+  torch::Tensor out = lantern_normal_tensor_tensor_generator(
     mean->get(), 
     std->get(), 
     generator->get()
@@ -361,8 +361,8 @@ XPtrTorchTensor cpp_namespace_normal_tensor_tensor (
 }
 
 // [[Rcpp::export]]
-XPtrTorchTensor nnf_pad_circular (XPtrTorchTensor input, XPtrTorchIntArrayRef padding)
+torch::Tensor nnf_pad_circular (torch::Tensor input, XPtrTorchIntArrayRef padding)
 {
-  return XPtrTorchTensor(lantern_nn_functional_pad_circular(input.get(), padding.get()));
+  return torch::Tensor(lantern_nn_functional_pad_circular(input.get(), padding.get()));
 }
 

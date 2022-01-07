@@ -151,7 +151,7 @@ nn_utils_rnn_pack_sequence <- function(sequences, enforce_sorted = TRUE) {
 nn_utils_rnn_pad_packed_sequence <- function(sequence, batch_first = FALSE, 
                                              padding_value = 0, total_length = NULL) {
   cpp_nn_utils_pad_packed_sequence(sequence$ptr, batch_first, padding_value, 
-                                        cpp_optional_int64_t(total_length))
+                                   total_length)
 }
 
 #' Pad a list of variable length Tensors with `padding_value`
