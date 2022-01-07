@@ -2,7 +2,7 @@
 % Please edit documentation in R/utils-data.R
 \name{dataset}
 \alias{dataset}
-\title{Helper function to create an R6 class that inherits from the abstract \code{Dataset} class}
+\title{Helper function to create an function that generates R6 instances of class \code{dataset}}
 \usage{
 dataset(
   name = NULL,
@@ -28,6 +28,12 @@ new dataset.}
 
 \item{parent_env}{An environment to use as the parent of newly-created
 objects.}
+}
+\value{
+The output is a function \code{f} with class \code{dataset_generator}. Calling \code{f()}
+creates a new instance of the R6 class \code{dataset}. The R6 class is stored in the
+enclosing environment of \code{f} and can also be accessed through \code{f}s attribute
+\code{Dataset}.
 }
 \description{
 All datasets that represent a map from keys to data samples should subclass this
