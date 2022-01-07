@@ -114,6 +114,10 @@
 <li>Adds <code>cuda_get_device_properties(device)</code> that allows one to query device capability and other properties. (<a href="https://github.com/mlverse/torch/issues/734" class="external-link">#734</a>, <a href="https://github.com/rdinnager" class="external-link">@rdinnager</a>)</li>
 <li>Fixed a bug in <code>.validate_sample</code> for the <code>Distribution</code> class that would incorrectly check for tensors. (<a href="https://github.com/mlverse/torch/issues/739" class="external-link">#739</a>, <a href="https://github.com/hsbadr" class="external-link">@hsbadr</a>)</li>
 <li>Implemented <code><a href="../reference/call_torch_function.html">call_torch_function()</a></code> to allow calling potentially unexported torch core functions. (<a href="https://github.com/mlverse/torch/issues/743" class="external-link">#743</a>, <a href="https://github.com/rdinnager" class="external-link">@rdinnager</a>)</li>
+<li>Now when installing torch all of LibTorch and Lantern headers will be installed within the <code>inst</code> directory. This will allow for packages extending torch to bind directly to its C++ library. (<a href="https://github.com/mlverse/torch/issues/718" class="external-link">#718</a>)</li>
+<li>Refactored the internal Lantern types and Rcpp types and made clearer which are the exported types that can be used in the C++ extensions. (<a href="https://github.com/mlverse/torch/issues/718" class="external-link">#718</a>)</li>
+<li>
+<code>dataset_subset</code> will use the <code>.getbatch</code> method of the wrapped dataset if one is available. (<a href="https://github.com/mlverse/torch/issues/742" class="external-link">#742</a>, <a href="https://github.com/egillax" class="external-link">@egillax</a>)</li>
 </ul></div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="0.6.1" id="torch-061">torch 0.6.1<a class="anchor" aria-label="anchor" href="#torch-061"></a></h2>
