@@ -1,5 +1,5 @@
-#include "torch_types.h"
-#include "utils.h"
+#include <torch.h>
+
 
 // [[Rcpp::export]]
 XPtrTorchCompilationUnit cpp_jit_compile (XPtrTorchstring source)

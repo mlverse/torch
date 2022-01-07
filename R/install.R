@@ -6,7 +6,6 @@ install_config <- list(
       "darwin" = list(
         "libtorch" = list(
           url = "https://download.pytorch.org/libtorch/cpu/libtorch-macos-1.9.1.zip",
-          path = "libtorch/lib",
           filter = ".dylib",
           md5hash = "4715c66a3a2ba2b2de708642c8fbba81"
         ),
@@ -15,7 +14,6 @@ install_config <- list(
       "windows" = list(
         "libtorch" = list(
           url = "https://download.pytorch.org/libtorch/cpu/libtorch-win-shared-with-deps-1.9.1%2Bcpu.zip",
-          path = "libtorch/lib",
           filter = ".dll",
           md5hash = "2a0cf625b8ce397089d77108d7e3f0ba"
         ),
@@ -24,7 +22,6 @@ install_config <- list(
       "linux" = list(
         "libtorch" = list(
           url = "https://download.pytorch.org/libtorch/cpu/libtorch-cxx11-abi-shared-with-deps-1.9.1%2Bcpu.zip",
-          path = "libtorch/lib",
           md5hash = "6e5f236d42572b92d8a44183d60223c3"
         ),
         "liblantern" = sprintf("https://storage.googleapis.com/torch-lantern-builds/refs/heads/%s/latest/Linux-cpu.zip", branch)
@@ -34,7 +31,6 @@ install_config <- list(
       "linux" = list(
         "libtorch" = list(
           url = "https://download.pytorch.org/libtorch/cu102/libtorch-cxx11-abi-shared-with-deps-1.9.1%2Bcu102.zip",
-          path = "libtorch/lib",
           md5hash = "34f5253ca015f4cc6dc8eebd05605ecd"
         ),
         "liblantern" = sprintf("https://storage.googleapis.com/torch-lantern-builds/refs/heads/%s/latest/Linux-gpu-102.zip", branch)
@@ -42,7 +38,6 @@ install_config <- list(
       "windows" = list(
         "libtorch" = list(
           url = "https://download.pytorch.org/libtorch/cu102/libtorch-win-shared-with-deps-1.9.1%2Bcu102.zip",
-          path = "libtorch/lib",
           filter = ".dll",
           md5hash = "55c86b81ef95249695879fc367b6f086"
         ),
@@ -53,7 +48,6 @@ install_config <- list(
       "linux" = list(
         "libtorch" = list(
           url = "https://download.pytorch.org/libtorch/cu111/libtorch-cxx11-abi-shared-with-deps-1.9.1%2Bcu111.zip",
-          path = "libtorch/lib",
           md5hash = "de8f7f922c1fc31b316161d4381dcf15"
         ),
         "liblantern" = sprintf("https://storage.googleapis.com/torch-lantern-builds/refs/heads/%s/latest/Linux-gpu-111.zip", branch)
@@ -61,7 +55,6 @@ install_config <- list(
       "windows" = list(
         "libtorch" = list(
           url = "https://download.pytorch.org/libtorch/cu111/libtorch-win-shared-with-deps-1.9.1%2Bcu111.zip",
-          path = "libtorch/lib",
           filter = ".dll",
           md5hash = "13a2030b4e21a052125cdcb1ca5c4dbc"
         ),
@@ -71,23 +64,29 @@ install_config <- list(
   )
 )
 
-
-install_path <- function(version = "1.9.1") {
+install_path <- function(version = "1.9.0") {
   path <- Sys.getenv("TORCH_HOME")
   if (nzchar(path))
     normalizePath(path, mustWork = FALSE)
   else
-    normalizePath(file.path(system.file("", package = "torch"), "deps"), mustWork = FALSE)
+    normalizePath(file.path(system.file("", package = "torch")), mustWork = FALSE)
+}
+
+#' A simple exported version of install_path
+#' Returns the torch installation path.
+#' @export
+torch_install_path <- function() {
+  install_path()
 }
 
 install_exists <- function() {
   if (!dir.exists(install_path()))
     return(FALSE)
   
-  if (!length(list.files(install_path(), "torch")) > 0)
+  if (!length(list.files(file.path(install_path(), "lib"), "torch")) > 0)
     return(FALSE)
   
-  if (!length(list.files(install_path(), "lantern")) > 0)
+  if (!length(list.files(file.path(install_path(), "lib"), "lantern")) > 0)
     return(FALSE)
   
   TRUE
@@ -101,7 +100,7 @@ torch_is_installed <- function() {
 }
 
 lib_installed <- function(library_name, install_path) {
-  x <- list.files(install_path)
+  x <- list.files(file.path(install_path, "lib"))
   
   if (library_name == "liblantern")
     any(grepl("lantern", x))
@@ -110,14 +109,15 @@ lib_installed <- function(library_name, install_path) {
 }
 
 lantern_install_lib <- function(library_name, library_url, 
-                                install_path, source_path, filter, md5hash) {
+                                install_path, filter, md5hash,
+                                inst_path) {
   library_extension <- paste0(".", tools::file_ext(library_url))
   temp_file <- tempfile(fileext = library_extension)
   temp_path <- tempfile()
   
   utils::download.file(library_url, temp_file)
   on.exit(try(unlink(temp_file)))
-
+  
   if (!is.null(md5hash) && is.character(md5hash) && length(md5hash) == 1) {
     hash <- tools::md5sum(temp_file)
     if (hash != md5hash) {
@@ -133,11 +133,24 @@ lantern_install_lib <- function(library_name, library_url,
   uncompress <- if (identical(library_extension, "tgz")) utils::untar else utils::unzip
   
   uncompress(temp_file, exdir = temp_path)
-  source_files <- dir(file.path(temp_path, source_path), full.names = T)
   
-  if (!is.null(filter)) source_files <- Filter(filter, source_files)
+  file.copy(
+    from = dir(file.path(temp_path, "libtorch/"), full.names = TRUE), 
+    to = file.path(install_path, inst_path), 
+    recursive = TRUE
+  )
   
-  file.copy(source_files, install_path, recursive = TRUE)
+  # if (!is.null(filter)) source_files <- Filter(filter, source_files)
+  # file.copy(source_files, install_path, recursive = TRUE)
+  # 
+  # 
+  # header_files <- dir(file.path(temp_path, "libtorch", "include"), full.names = T)
+  # if (length(header_files) > 0) {
+  #   # also install the include files.
+  #   include_dir <- file.path(system.file("", package = "torch"), "include/")
+  #   if (!dir.exists(include_dir)) dir.create(include_dir, recursive = TRUE)
+  #   file.copy(header_files, include_dir, recursive = TRUE)
+  # }
 }
 
 install_os <- function() {
@@ -167,16 +180,18 @@ lantern_install_libs <- function(version, type, install_path, install_config) {
     
     library_info <- install_info[[library_name]]
     
-    if (!is.list(library_info)) library_info <- list(url = library_info, filter = "", path = "")
+    if (!is.list(library_info)) 
+      library_info <- list(url = library_info, filter = "", inst_path = "lib")
     if (is.null(library_info$filter)) library_info$filter <- ""
+    if (is.null(library_info$inst_path)) library_info$inst_path <- ""
     
     lantern_install_lib(
       library_name = library_name,
       library_url = library_info$url,
       install_path = install_path,
-      source_path = library_info$path,
       filter = function(e) grepl(library_info$filter, e),
-      md5hash = library_info$md5hash
+      md5hash = library_info$md5hash,
+      inst_path = library_info$inst_path
     )
   }
   
@@ -377,4 +392,5 @@ get_install_libs_url <- function(version = "1.9.1", type = install_type(version 
   liblantern <- install_config[[version]][[type]][[install_os()]][["liblantern"]]
   list(libtorch = libtorch, liblantern = liblantern)
 }
+
 

@@ -33,6 +33,10 @@ cpp_tensor_requires_grad <- function(self) {
     .Call('_torch_cpp_tensor_requires_grad', PACKAGE = 'torchpkg', self)
 }
 
+test_tensorlist <- function(x) {
+    .Call('_torch_test_tensorlist', PACKAGE = 'torchpkg', x)
+}
+
 cpp_torch_method__backward_self_Tensor_inputs_TensorList <- function(self, inputs, gradient, retain_graph, create_graph) {
     invisible(.Call('_torch_cpp_torch_method__backward_self_Tensor_inputs_TensorList', PACKAGE = 'torchpkg', self, inputs, gradient, retain_graph, create_graph))
 }
@@ -10713,10 +10717,6 @@ cpp_torch_tensor_options_print <- function(x) {
     invisible(.Call('_torch_cpp_torch_tensor_options_print', PACKAGE = 'torchpkg', x))
 }
 
-test_fun_hello <- function(x) {
-    .Call('_torch_test_fun_hello', PACKAGE = 'torchpkg', x)
-}
-
 cpp_trace_function <- function(fn, inputs, compilation_unit, name, strict = TRUE, module = NULL, should_mangle = TRUE, manage_memory = TRUE) {
     .Call('_torch_cpp_trace_function', PACKAGE = 'torchpkg', fn, inputs, compilation_unit, name, strict, module, should_mangle, manage_memory)
 }
@@ -10757,12 +10757,12 @@ cpp_nullopt <- function() {
     .Call('_torch_cpp_nullopt', PACKAGE = 'torchpkg')
 }
 
-cpp_optional_int64_t <- function(x) {
-    .Call('_torch_cpp_optional_int64_t', PACKAGE = 'torchpkg', x)
-}
-
 cpp_tensor_undefined <- function() {
     .Call('_torch_cpp_tensor_undefined', PACKAGE = 'torchpkg')
+}
+
+to_index_tensor <- function(t) {
+    .Call('_torch_to_index_tensor', PACKAGE = 'torchpkg', t)
 }
 
 cpp_torch_namespace__use_cudnn_rnn_flatten_weight <- function() {

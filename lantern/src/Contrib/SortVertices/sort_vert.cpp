@@ -59,9 +59,8 @@ at::Tensor sort_vertices(at::Tensor vertices, at::Tensor mask, at::Tensor num_va
 void* _lantern_contrib_sort_vertices (void* vertices, void* mask, void* num_valid)
 {
     torch::Tensor result = sort_vertices(
-        reinterpret_cast<LanternObject<torch::Tensor>*>(vertices)->get(),
-        reinterpret_cast<LanternObject<torch::Tensor>*>(mask)->get(),
-        reinterpret_cast<LanternObject<torch::Tensor>*>(num_valid)->get()
-    );
-    return (void*) new LanternObject<torch::Tensor>(result);
+        from_raw::Tensor(vertices),
+        from_raw::Tensor(mask),
+        from_raw::Tensor(num_valid));
+    return make_raw::Tensor(result);
 }

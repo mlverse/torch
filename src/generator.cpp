@@ -1,5 +1,5 @@
-#include "torch_types.h"
-#include "utils.h"
+#include <torch.h>
+
 
 // https://pytorch.org/docs/stable/torch.html#generators
 // https://github.com/pytorch/pytorch/blob/f531815526c69f432e46fadece44f5d3a9b70e30/torch/csrc/Generator.cpp

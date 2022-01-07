@@ -26,6 +26,7 @@ function(retrieve_lib url name)
     endif()
 endfunction()
 
+
 ############################################################
 # Torch
 ############################################################
@@ -70,6 +71,15 @@ endif()
 
 set(CMAKE_PREFIX_PATH ${CMAKE_PREFIX_PATH} "${CMAKE_CURRENT_BINARY_DIR}/libtorch/share/cmake/Torch")
 
+
+find_program(CCACHE_FOUND ccache)
+if(CCACHE_FOUND)
+    message("-- Using ccache")
+    set_property(GLOBAL PROPERTY RULE_LAUNCH_COMPILE ccache)
+    set_property(GLOBAL PROPERTY RULE_LAUNCH_LINK ccache)
+else()
+    message("-- ccache not found.")
+endif(CCACHE_FOUND)
 
 find_package(Torch REQUIRED)
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${TORCH_CXX_FLAGS}")

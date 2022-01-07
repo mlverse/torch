@@ -192,6 +192,15 @@ test_that("index_put_", {
   expect_equal(x[2,2]$item(), 0)
 })
 
+test_that("logit works", {
+  x <- torch_tensor(c(0.5,0.1,0.9))
+  expect_equal_to_tensor(
+    exp(torch_logit(x))/(1 + exp(torch_logit(x))),
+    x,
+    tol = 1e-6
+  )
+})
+
 test_that("tensordot", {
   
   a <- torch_arange(start = 1, end = 60)$reshape(c(3, 4, 5))

@@ -1,10 +1,9 @@
 
-#include "torch_types.h"
-#include "utils.h"
+#include <torch.h>
 
 // [[Rcpp::export]]
-XPtrTorchDimname cpp_torch_dimname(const std::string& str) {
-  XPtrTorchDimname out = lantern_Dimname(str.c_str());
+XPtrTorchDimname cpp_torch_dimname(XPtrTorchstring str) {
+  XPtrTorchDimname out = lantern_Dimname(str.get());
   return XPtrTorchDimname(out);
 }
 
@@ -32,7 +31,10 @@ std::vector<std::string> cpp_dimname_list_to_string (XPtrTorchDimnameList x) {
   std::vector<std::string> result;
   
   for (int i = 0; i < size; i++) {
-    result.push_back(lantern_Dimname_to_string(XPtrTorchDimname(lantern_DimnameList_at(x.get(), i)).get()));
+    auto dimname = XPtrTorchDimname(lantern_DimnameList_at(x.get(), i));
+    auto v = lantern_Dimname_to_string(dimname.get());
+    result.push_back(std::string(v));
+    lantern_const_char_delete(v);
   }
 
   return result;

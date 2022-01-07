@@ -423,6 +423,8 @@ autograd_function <- function(forward, backward) {
         torch_variable_list(res)$ptr
       }
       
+      # TODO: we should probably be able to cache this functions as they shouldn't
+      # need to be recreated everytime we apply the custom function.
       .f_ <- cpp_Function_lambda(.f)
       .b_ <- cpp_Function_lambda(.b)
       
