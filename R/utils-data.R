@@ -44,7 +44,7 @@ get_init <- function(x) {
 #' of observations (eg, subsetting a tensor by multiple indexes at once is faster than
 #' subsetting once for each index), in this case you can implement a `.getbatch` method
 #' that will be used instead of `.getitem` when getting a batch of observations within
-#' the dataloader.
+#' the dataloader. `.getbatch` must work for batches of size larger or equal to 1.
 #' 
 #' @note 
 #' [dataloader()]  by default constructs a index
@@ -84,8 +84,9 @@ print.dataset_generator <- function(x, ...) {
 
 #' @export
 `[.dataset` <- function(x, y) {
-  if (length(y) > 1 && !is.null(x$.getbatch)) {
-    x$.getbatch(as.integer(y))
+  y <- as.integer(y)
+  if (!is.null(x$.getbatch)) {
+    x$.getbatch(y)
   } else {
     x$.getitem(y)
   }
@@ -144,6 +145,9 @@ dataset_subset <- dataset(
   initialize = function(dataset, indices) {
     self$dataset = dataset
     self$indices = indices
+    if (!is.null(dataset$.getbatch)) {
+      self$.getbatch <- self$.getitem
+    }
   },
   
   .getitem = function(idx) {

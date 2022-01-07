@@ -6,6 +6,7 @@ install_config <- list(
       "darwin" = list(
         "libtorch" = list(
           url = "https://download.pytorch.org/libtorch/cpu/libtorch-macos-1.9.1.zip",
+          path = "libtorch/",
           filter = ".dylib",
           md5hash = "4715c66a3a2ba2b2de708642c8fbba81"
         ),
@@ -14,6 +15,7 @@ install_config <- list(
       "windows" = list(
         "libtorch" = list(
           url = "https://download.pytorch.org/libtorch/cpu/libtorch-win-shared-with-deps-1.9.1%2Bcpu.zip",
+          path = "libtorch/",
           filter = ".dll",
           md5hash = "2a0cf625b8ce397089d77108d7e3f0ba"
         ),
@@ -21,6 +23,7 @@ install_config <- list(
       ),
       "linux" = list(
         "libtorch" = list(
+          path = "libtorch/",
           url = "https://download.pytorch.org/libtorch/cpu/libtorch-cxx11-abi-shared-with-deps-1.9.1%2Bcpu.zip",
           md5hash = "6e5f236d42572b92d8a44183d60223c3"
         ),
@@ -30,6 +33,7 @@ install_config <- list(
     "10.2" = list(
       "linux" = list(
         "libtorch" = list(
+          path = "libtorch/",
           url = "https://download.pytorch.org/libtorch/cu102/libtorch-cxx11-abi-shared-with-deps-1.9.1%2Bcu102.zip",
           md5hash = "34f5253ca015f4cc6dc8eebd05605ecd"
         ),
@@ -37,6 +41,7 @@ install_config <- list(
       ),
       "windows" = list(
         "libtorch" = list(
+          path = "libtorch/",
           url = "https://download.pytorch.org/libtorch/cu102/libtorch-win-shared-with-deps-1.9.1%2Bcu102.zip",
           filter = ".dll",
           md5hash = "55c86b81ef95249695879fc367b6f086"
@@ -47,6 +52,7 @@ install_config <- list(
     "11.1" = list(
       "linux" = list(
         "libtorch" = list(
+          path = "libtorch/",
           url = "https://download.pytorch.org/libtorch/cu111/libtorch-cxx11-abi-shared-with-deps-1.9.1%2Bcu111.zip",
           md5hash = "de8f7f922c1fc31b316161d4381dcf15"
         ),
@@ -54,6 +60,7 @@ install_config <- list(
       ),
       "windows" = list(
         "libtorch" = list(
+          path = "libtorch/",
           url = "https://download.pytorch.org/libtorch/cu111/libtorch-win-shared-with-deps-1.9.1%2Bcu111.zip",
           filter = ".dll",
           md5hash = "13a2030b4e21a052125cdcb1ca5c4dbc"
@@ -109,7 +116,7 @@ lib_installed <- function(library_name, install_path) {
 }
 
 lantern_install_lib <- function(library_name, library_url, 
-                                install_path, filter, md5hash,
+                                install_path, source_path, filter, md5hash,
                                 inst_path) {
   library_extension <- paste0(".", tools::file_ext(library_url))
   temp_file <- tempfile(fileext = library_extension)
@@ -135,7 +142,7 @@ lantern_install_lib <- function(library_name, library_url,
   uncompress(temp_file, exdir = temp_path)
   
   file.copy(
-    from = dir(file.path(temp_path, "libtorch/"), full.names = TRUE), 
+    from = dir(file.path(temp_path, source_path), full.names = TRUE), 
     to = file.path(install_path, inst_path), 
     recursive = TRUE
   )
@@ -181,7 +188,7 @@ lantern_install_libs <- function(version, type, install_path, install_config) {
     library_info <- install_info[[library_name]]
     
     if (!is.list(library_info)) 
-      library_info <- list(url = library_info, filter = "", inst_path = "lib")
+      library_info <- list(url = library_info, filter = "", path = "", inst_path = "lib")
     if (is.null(library_info$filter)) library_info$filter <- ""
     if (is.null(library_info$inst_path)) library_info$inst_path <- ""
     
@@ -189,6 +196,7 @@ lantern_install_libs <- function(version, type, install_path, install_config) {
       library_name = library_name,
       library_url = library_info$url,
       install_path = install_path,
+      source_path = library_info$path,
       filter = function(e) grepl(library_info$filter, e),
       md5hash = library_info$md5hash,
       inst_path = library_info$inst_path

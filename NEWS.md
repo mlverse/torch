@@ -7,6 +7,7 @@
 - Implemented `call_torch_function()` to allow calling potentially unexported torch core functions. (#743, @rdinnager)
 - Now when installing torch all of LibTorch and Lantern headers will be installed within the `inst` directory. This will allow for packages extending torch to bind directly to its C++ library. (#718)
 - Refactored the internal Lantern types and Rcpp types and made clearer which are the exported types that can be used in the C++ extensions. (#718)
+- `dataset_subset` will use the `.getbatch` method of the wrapped dataset if one is available. (#742, @egillax)
 
 # torch 0.6.1
 
