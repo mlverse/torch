@@ -110,6 +110,7 @@ Collate:
     'nn-pooling.R'
     'nn-rnn.R'
     'nn-sparse.R'
+    'nn-upsampling.R'
     'nn-utils-clip-grad.R'
     'nn-utils-rnn.R'
     'nn-utils.R'
