@@ -79,6 +79,9 @@ test_that("subset without getbatch works", {
                   self$x <- x
                 },
                 .getitem = function(i) {
+                  if (length(i) > 1)
+                    stop("Can only get a single item!")
+                  
                   self$x[i]
                 },
                 .length = function() { length(self$x)
@@ -87,7 +90,32 @@ test_that("subset without getbatch works", {
   data <- ds(x)
   ds_subset <- dataset_subset(data, indices = 20:30)
   expect_equal(data[20], ds_subset[1])
-  })
+  
+  dl <- dataloader(ds_subset, batch_size = 10)
+  expect_length(coro::collect(dl), 2)
+})
+
+test_that("subset works with getbatch", {
+  
+  x <- torch_randn(50)
+  
+  ds <- dataset("my_dataset",
+                initialize = function(x) {
+                  self$x <- x
+                },
+                .getbatch = function(idx) {
+                  self$x[idx]
+                },
+                .length = function() { length(self$x)
+                })
+  
+  data <- ds(x)
+  ds_subset <- dataset_subset(data, indices = 20:30)
+  expect_equal_to_tensor(data[c(20, 21, 22)], ds_subset[c(1,2,3)])
+  
+  dl <- dataloader(ds_subset, batch_size = 5)
+  expect_length(coro::collect(dl), 3)
+})
 
 test_that("datasets have a custom print method", {
   
