@@ -4,7 +4,7 @@
 \alias{cuda_get_device_capability}
 \title{Returns the major and minor CUDA capability of \code{device}}
 \usage{
-cuda_get_device_capability(device)
+cuda_get_device_capability(device = cuda_current_device())
 }
 \arguments{
 \item{device}{Integer value of the CUDA device to return capabilities of.}
