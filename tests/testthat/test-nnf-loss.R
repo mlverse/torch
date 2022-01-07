@@ -13,7 +13,7 @@ test_that("nnf_mse_loss", {
     nnf_mse_loss(x, y),
     regexp = "target size"
   )
-  
+
 })
 
 test_that("nnf_binary_cross_entropy", {
@@ -23,3 +23,16 @@ test_that("nnf_binary_cross_entropy", {
   
   expect_equal_to_r(nnf_binary_cross_entropy(x, y), 0)
 })
+
+test_that("nnf_nll_loss", {
+  
+  # test branch entered for dim == 3
+  x <- torch_randn(32, 10, 5)
+  y <- torch_randint(1, 10, size = list(32, 5), dtype = torch_long())
+  
+  o <- nnf_nll_loss(x, y)
+  expect_length(o$size(), 0)
+  
+})
+
+

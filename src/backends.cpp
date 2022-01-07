@@ -1,5 +1,5 @@
-#include "torch_types.h"
-#include "utils.h"
+#define TORCH_TYPES_
+#include <torch.h>
 
 // [[Rcpp::export]]
 bool cpp_backends_mkldnn_is_available ()

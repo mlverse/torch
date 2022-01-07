@@ -167,7 +167,7 @@ Distribution <- R6::R6Class(
     #' computed by the `log_prob` method.
     .validate_sample = function(value){
       
-      if (!inherits(value, "torch_Tensor"))
+      if (!inherits(value, "torch_tensor"))
         value_error('The value argument to log_prob must be a Tensor')
       
       event_dim_start <- length(value$size()) - length(private$.event_shape)

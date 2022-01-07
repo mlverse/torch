@@ -23,18 +23,23 @@ tools/torchgen/.Rbuildignore
 ^CRAN-RELEASE$
 
 # remove vignettes from CRAN
-^vignettes/distributions\.Rmd
-^vignettes/extending-autograd\.Rmd
-^vignettes/indexing\.Rmd
-^vignettes/loading-data\.Rmd
-^vignettes/python-to-r\.Rmd
-^vignettes/serialization\.Rmd
-^vignettes/tensor-creation\.Rmd
-^vignettes/torchscript\.Rmd
-^vignettes/using-autograd\.Rmd
+# ^vignettes/distributions\.Rmd
+# ^vignettes/extending-autograd\.Rmd
+# ^vignettes/indexing\.Rmd
+# ^vignettes/loading-data\.Rmd
+# ^vignettes/python-to-r\.Rmd
+# ^vignettes/serialization\.Rmd
+# ^vignettes/tensor-creation\.Rmd
+# ^vignettes/torchscript\.Rmd
+# ^vignettes/using-autograd\.Rmd
 
 # uncomment below for CRAN submission
-^inst/deps/.*
+# ^inst/bin/.*
+# ^inst/include/(?!torch.h|lantern|torch_RcppExports.h|utils.h|torch_impl.h|torch_types.h|torch_api.h|torch_deleters# .h|torch_imports.h).*
+# ^inst/lib/.*
+# ^inst/share/.*
+# ^inst/build-hash
+# ^inst/build-versions
 ^doc$
 ^Meta$
 ^vignettes/rsconnect*

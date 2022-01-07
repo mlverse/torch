@@ -1,7 +1,7 @@
 Package: torch
 Type: Package
 Title: Tensors and Neural Networks with 'GPU' Acceleration
-Version: 0.6.1
+Version: 0.6.1.9000
 Authors@R: c(
     person("Daniel", "Falbel", email = "daniel@rstudio.com", role = c("aut", "cre", "cph")),
     person("Javier", "Luraschi", email = "jluraschi@gmail.com", role = c("aut")),
@@ -9,6 +9,7 @@ Authors@R: c(
     person("Athos", "Damiani", role = c("ctb")),
     person("Christophe", "Regouby", role = c("ctb")),
     person("Krzysztof", "Joachimiak", role = c("ctb")),
+    person("Hamada S.", "Badr", role = c("ctb")),
     person(family = "RStudio", role = c("cph"))
     )
 Description: Provides functionality to define and train neural networks similar to 
@@ -37,7 +38,7 @@ Imports:
     callr,
     cli,
     ellipsis
-RoxygenNote: 7.1.1
+RoxygenNote: 7.1.2
 Roxygen: list(markdown = TRUE)
 Suggests:
     testthat (>= 3.0.0),
@@ -56,6 +57,7 @@ Collate:
     'tensor.R'
     'autograd.R'
     'backends.R'
+    'call_torch_function.R'
     'codegen-utils.R'
     'compat-purrr.R'
     'compilation_unit.R'

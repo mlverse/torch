@@ -11,22 +11,22 @@
 void *_lantern_Generator()
 {
   LANTERN_FUNCTION_START
-  torch::Generator out = torch::make_generator<torch::CPUGeneratorImpl>(c10::detail::getNonDeterministicRandom());
-  return (void *)new LanternObject<torch::Generator>(out);
+  auto out = torch::make_generator<torch::CPUGeneratorImpl>(c10::detail::getNonDeterministicRandom());
+  return make_raw::Generator(out);
   LANTERN_FUNCTION_END
 }
 
 void* _lantern_get_default_Generator ()
 {
   LANTERN_FUNCTION_START
-  return (void *)new LanternObject<torch::Generator>(at::detail::getDefaultCPUGenerator());
+  return make_raw::Generator(at::detail::getDefaultCPUGenerator());
   LANTERN_FUNCTION_END
 }
 
 uint64_t _lantern_Generator_current_seed(void *generator)
 {
   LANTERN_FUNCTION_START
-  auto gen = reinterpret_cast<LanternObject<torch::Generator>*>(generator)->get();
+  auto gen = from_raw::Generator(generator);
   return gen.current_seed();
   LANTERN_FUNCTION_END_RET(0)
 }
@@ -34,7 +34,7 @@ uint64_t _lantern_Generator_current_seed(void *generator)
 void _lantern_Generator_set_current_seed(void *generator, uint64_t seed)
 {
   LANTERN_FUNCTION_START
-  reinterpret_cast<LanternObject<torch::Generator>*>(generator)->get().set_current_seed(seed);
+  from_raw::Generator(generator).set_current_seed(seed);
   LANTERN_FUNCTION_END_VOID
 }
 

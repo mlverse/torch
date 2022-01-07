@@ -1,6 +1,21 @@
+# torch (development version)
+
+- `jit_save_for_mobile` allows to save a traced model in bytecode form, to be loaded by a `LiteModuleLoader`. (#713)
+- Exported `is_torch_tensor` to check wether an object is a tensor or not. (#730, @rdinnager)
+- Adds `cuda_get_device_properties(device)` that allows one to query device capability and other properties. (#734, @rdinnager)
+- Fixed a bug in `.validate_sample` for the `Distribution` class that would incorrectly check for tensors. (#739, @hsbadr)
+- Implemented `call_torch_function()` to allow calling potentially unexported torch core functions. (#743, @rdinnager)
+- Now when installing torch all of LibTorch and Lantern headers will be installed within the `inst` directory. This will allow for packages extending torch to bind directly to its C++ library. (#718)
+- Refactored the internal Lantern types and Rcpp types and made clearer which are the exported types that can be used in the C++ extensions. (#718)
+- `dataset_subset` will use the `.getbatch` method of the wrapped dataset if one is available. (#742, @egillax)
+
 # torch 0.6.1
 
+## New features
+
 - Fixed valgrind errors on CRAN by requiring a more recent version of knitr.
+- Updated LibTorch to version 1.9.1 (#725 @hsbadr)
+- We now check if lantern DLL's are loaded before calling any lantern function. This avoids segfaults when Lantern is not installed. (#723).
 
 # torch 0.6.0
 

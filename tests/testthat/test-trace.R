@@ -450,3 +450,64 @@ test_that("we can include traced module as a submodule and trace", {
   
 })
 
+test_that("can save module for mobile", {
+  
+  Net <- nn_module(
+    "Net",
+    initialize = function() {
+      self$conv1 <- nn_conv2d(1, 32, 3, 1)
+      self$conv2 <- nn_conv2d(32, 64, 3, 1)
+      self$dropout1 <- nn_dropout2d(0.25)
+      self$dropout2 <- nn_dropout2d(0.5)
+      self$fc1 <- nn_linear(9216, 128)
+      self$fc2 <- nn_linear(128, 10)
+    },
+    forward = function(x) {
+      x <- self$conv1(x)
+      x <- nnf_relu(x)
+      x <- self$conv2(x)
+      x <- nnf_relu(x)
+      x <- nnf_max_pool2d(x, 2)
+      x <- self$dropout1(x)
+      x <- torch_flatten(x, start_dim = 2)
+      x <- self$fc1(x)
+      x <- nnf_relu(x)
+      x <- self$dropout2(x)
+      x <- self$fc2(x)
+      output <- nnf_log_softmax(x, dim=1)
+      output
+    }
+  )
+  
+  net <- Net()
+  net$eval()
+  
+  input <- torch_randn(100, 1, 28, 28)
+  out <- net(input)
+  
+  tr_fn <- jit_trace(net, input)
+  
+  tmp <- tempfile("tst", fileext = ".pt")
+  jit_save_for_mobile(tr_fn, tmp)
+  
+  f <- jit_load(tmp)
+  expect_equal_to_tensor(net(input), f(input), tol = 1e-6)
+  
+})
+
+test_that("can save function for mobile", {
+
+  fn <- function(x) {
+    torch_relu(x)
+  }
+  
+  input <- torch_tensor(c(-1, 0, 1))
+  tr_fn <- jit_trace(fn, input)
+  
+  tmp <- tempfile("tst", fileext = ".pt")
+  jit_save_for_mobile(tr_fn, tmp)
+  
+  f <- jit_load(tmp)
+  expect_equal_to_tensor(torch_relu(input), f(input))
+  
+})

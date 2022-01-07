@@ -1,5 +1,5 @@
-#include "torch_types.h"
-#include "utils.h"
+#include <torch.h>
+
 
 // [[Rcpp::export]]
 Rcpp::XPtr<XPtrTorchStorage> cpp_Tensor_storage (Rcpp::XPtr<XPtrTorchTensor> self)

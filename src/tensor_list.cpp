@@ -1,5 +1,4 @@
-#include "torch_types.h"
-#include "utils.h"
+#include <torch.h>
 
 // [[Rcpp::export]]
 XPtrTorchTensorList cpp_torch_tensor_list(const Rcpp::List &x)
@@ -13,27 +12,6 @@ XPtrTorchTensorList cpp_torch_tensor_list(const Rcpp::List &x)
     lantern_TensorList_push_back(out.get(), XPtrTorchTensor(item).get());
   }
 
-  return out;
-}
-
-XPtrTorchOptionalTensorList cpp_torch_optional_tensor_list (const Rcpp::List &x)
-{
-  XPtrTorchOptionalTensorList out = lantern_OptionalTensorList();
-  
-  SEXP item;
-  for (int i = 0; i < x.length(); i++)
-  {
-    item = x.at(i); 
-    if (Rf_isNull(item)) 
-    {
-      lantern_OptionalTensorList_push_back(out.get(), nullptr, true);
-    } 
-    else 
-    {
-      lantern_OptionalTensorList_push_back(out.get(), XPtrTorchTensor(item).get(), false);
-    }
-  }
-  
   return out;
 }
 

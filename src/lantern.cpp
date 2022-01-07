@@ -1,4 +1,4 @@
-#include "torch_types.h"
+#include <torch.h>
 #include "translate_messages.h"
 
 using namespace Rcpp;
@@ -13,6 +13,15 @@ void lantern_host_handler()
     
     throw Rcpp::exception(error_msg.c_str());
   } 
+}
+
+bool lantern_loaded = false;
+void check_lantern_loaded ()
+{
+  if (!lantern_loaded)
+  {
+    throw std::runtime_error("Lantern is not loaded. Please use `install_torch()` to install additional dependencies.");
+  }
 }
 
 // [[Rcpp::export]]
