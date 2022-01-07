@@ -13,7 +13,7 @@ void* _lantern_ScriptModule_new (void* cu, void* name)
     // this pointer shouldn't use the default deleter as its memory is managed in 
     // the R side.
     auto cu_ = std::shared_ptr<torch::CompilationUnit>(
-        reinterpret_cast<torch::CompilationUnit*>(cu), 
+        &from_raw::CompilationUnit(cu),
         [](void* x){}
         );
     auto name_ = *reinterpret_cast<std::string*>(name);
@@ -36,14 +36,14 @@ void* _lantern_ScriptModule_buffers (void* module, bool recurse)
 
 void* _lantern_ScriptModule_forward (void* module, void* inputs)
 {
-    Stack inputs_ = reinterpret_cast<LanternObject<Stack>*>(inputs)->get();
+    Stack inputs_ = *reinterpret_cast<Stack*>(inputs);
     auto module_ = reinterpret_cast<torch::jit::script::Module *>(module);
 
-    auto outputs = new LanternObject<torch::jit::Stack>();
+    auto outputs = torch::jit::Stack();
     auto out = module_->forward(inputs_);
-    outputs->get().push_back(out);  
+    outputs.push_back(out);  
 
-    return (void*) outputs;
+    return make_ptr<torch::jit::Stack>(outputs);
 }
 
 void _lantern_ScriptModule_train (void* module, bool on)
@@ -55,8 +55,8 @@ void _lantern_ScriptModule_train (void* module, bool on)
 void _lantern_ScriptModule_to (void* module, void* device, bool non_blocking)
 {
     auto module_ = reinterpret_cast<torch::jit::script::Module *>(module);
-    auto device_ = reinterpret_cast<LanternPtr<torch::Device>*>(device);
-    module_->to(device_->get(), non_blocking);
+    auto device_ = from_raw::Device(device);
+    module_->to(device_, non_blocking);
 }
 
 void _lantern_ScriptModule_set_optimized (void* module, bool o)
@@ -99,8 +99,8 @@ void _lantern_ScriptModule_register_parameter (void* module, void* name, void* v
 {
     LANTERN_FUNCTION_START
     auto module_ = reinterpret_cast<torch::jit::script::Module *>(module);
-    auto name_ = reinterpret_cast<LanternObject<std::string>*>(name)->get();
-    auto v_ = reinterpret_cast<LanternObject<torch::Tensor>*>(v)->get();
+    auto name_ = from_raw::string(name);
+    auto v_ = from_raw::Tensor(v);
     module_->register_parameter(name_, v_, is_buffer);
     LANTERN_FUNCTION_END_VOID
 }
@@ -109,8 +109,8 @@ void _lantern_ScriptModule_register_buffer (void* module, void* name, void* v)
 {
     LANTERN_FUNCTION_START
     auto module_ = reinterpret_cast<torch::jit::script::Module *>(module);
-    auto name_ = reinterpret_cast<LanternObject<std::string>*>(name)->get();
-    auto v_ = reinterpret_cast<LanternObject<torch::Tensor>*>(v)->get();
+    auto name_ = from_raw::string(name);
+    auto v_ = from_raw::Tensor(v);
     module_->register_buffer(name_, v_);
     LANTERN_FUNCTION_END_VOID
 }
@@ -119,7 +119,7 @@ void _lantern_ScriptModule_register_module (void* self, void* name, void* module
 {
     LANTERN_FUNCTION_START
     auto self_ = reinterpret_cast<torch::jit::script::Module *>(self);
-    auto name_ = reinterpret_cast<LanternObject<std::string>*>(name)->get();
+    auto name_ = from_raw::string(name);
     auto module_ = reinterpret_cast<torch::jit::script::Module *>(module);
     self_->register_module(name_, *module_);
     LANTERN_FUNCTION_END_VOID
@@ -129,7 +129,7 @@ void _lantern_ScriptModule_register_attribute (void* module, void* name, void* t
 {
     LANTERN_FUNCTION_START
     auto module_ = reinterpret_cast<torch::jit::script::Module *>(module);
-    auto name_ = reinterpret_cast<LanternObject<std::string>*>(name)->get();
+    auto name_ = from_raw::string(name);
 
     auto t_ = reinterpret_cast<c10::TypePtr*>(t);
     auto v_ = reinterpret_cast<c10::IValue*>(v);
@@ -142,7 +142,7 @@ void* _lantern_ScriptModule_find_method (void* self, void* basename)
 {
     LANTERN_FUNCTION_START
     auto self_ = reinterpret_cast<torch::jit::script::Module *>(self);
-    auto basename_ = reinterpret_cast<LanternObject<std::string>*>(basename)->get();
+    auto basename_ = from_raw::string(basename);
     auto method = self_->find_method(basename_);
 
     if (!method.has_value())
@@ -196,13 +196,13 @@ void* _lantern_ScriptMethod_call (void* self, void* inputs)
 {
     LANTERN_FUNCTION_START
     auto self_ = *reinterpret_cast<torch::jit::script::Method *>(self);
-    Stack inputs_ = reinterpret_cast<LanternObject<Stack>*>(inputs)->get();
+    Stack inputs_ = *reinterpret_cast<Stack*>(inputs);
     
-    auto outputs = new LanternObject<torch::jit::Stack>();
+    auto outputs = torch::jit::Stack();
     auto out = self_(inputs_);
-    outputs->get().push_back(out);  
+    outputs.push_back(out);  
 
-    return (void*) outputs;
+    return make_ptr<torch::jit::Stack>(outputs);
     LANTERN_FUNCTION_END
 }
 
@@ -210,7 +210,7 @@ void _lantern_ScriptModule_save (void* self, void* path)
 {
     LANTERN_FUNCTION_START
     auto self_ = reinterpret_cast<torch::jit::script::Module *>(self);
-    auto path_ = reinterpret_cast<LanternObject<std::string>*>(path)->get();
+    auto path_ = from_raw::string(path);
     self_->save(path_);
     LANTERN_FUNCTION_END_VOID
 }
@@ -236,7 +236,7 @@ void _lantern_ScriptModule_save_for_mobile (void* self, void* path)
 {
   LANTERN_FUNCTION_START
   auto self_ = reinterpret_cast<torch::jit::script::Module *>(self);
-  auto path_ = reinterpret_cast<LanternObject<std::string>*>(path)->get();
+  auto path_ = from_raw::string(path);
   self_->_save_for_mobile(path_);
   LANTERN_FUNCTION_END_VOID
 }

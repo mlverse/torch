@@ -44,7 +44,7 @@ void* _lantern_cuda_get_device_capability(int64_t device)
     #ifdef __NVCC__
         cudaDeviceProp * devprop = at::cuda::getDeviceProperties(device);
         std::vector<int64_t> cap = {devprop->major, devprop->minor};
-        return (void*) new LanternObject<std::vector<int64_t>>(cap);
+        return make_raw::vector::int64_t(cap);
     #else
         throw std::runtime_error("`cuda_get_device` is only supported on CUDA runtimes.");
     #endif

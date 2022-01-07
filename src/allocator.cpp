@@ -1,5 +1,4 @@
-#include "torch_types.h"
-#include "utils.h"
+#include <torch.h>
 
 void call_r_gc ()
 {

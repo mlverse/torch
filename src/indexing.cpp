@@ -1,5 +1,5 @@
-#include "torch_types.h"
-#include "utils.h"
+#include <torch.h>
+
 
 static R_len_t dots_size(SEXP dots) {
   if (dots == R_UnboundValue) {
@@ -88,9 +88,9 @@ std::vector<Rcpp::RObject> evaluate_slices (std::vector<Rcpp::RObject> quosures,
 void index_append_empty_slice (XPtrTorchTensorIndex& index)
 {
   auto s = XPtrTorchSlice(lantern_Slice(
-    XPtrTorchoptional_int64_t(lantern_optional_int64_t(0, true)).get(), 
-    XPtrTorchoptional_int64_t(lantern_optional_int64_t(0, true)).get(),
-    XPtrTorchoptional_int64_t(lantern_optional_int64_t(1, false)).get()
+    XPtrTorchoptional_int64_t(lantern_optional_int64_t(nullptr)).get(), 
+    XPtrTorchoptional_int64_t(lantern_optional_int64_t(nullptr)).get(),
+    XPtrTorchoptional_int64_t(lantern_optional_int64_t(XPtrTorchint64_t(lantern_int64_t(1)).get())).get()
   ));
   lantern_TensorIndex_append_slice(index.get(), s.get());
 }
@@ -130,9 +130,9 @@ void index_append_ellipsis (XPtrTorchTensorIndex& index)
 void index_append_slice (XPtrTorchTensorIndex& index, SEXP slice)
 {
   Rcpp::List s = slice;
-  XPtrTorchoptional_int64_t start = lantern_optional_int64_t(s["start"], false);
-  XPtrTorchoptional_int64_t end = lantern_optional_int64_t(s["end"], false);
-  XPtrTorchoptional_int64_t step = lantern_optional_int64_t(s["step"], false);
+  auto start = Rcpp::as<XPtrTorchoptional_int64_t>(s["start"]);
+  auto end = Rcpp::as<XPtrTorchoptional_int64_t>(s["end"]);
+  auto step = Rcpp::as<XPtrTorchoptional_int64_t>(s["step"]);
   XPtrTorchSlice l = lantern_Slice(start.get(), end.get(), step.get());
   
   lantern_TensorIndex_append_slice(index.get(), l.get());

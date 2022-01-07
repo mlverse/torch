@@ -27,22 +27,22 @@ void *_lantern_Scalar(void *value, const char *type)
     out = *reinterpret_cast<double *>(value);
   }
 
-  return (void *)new LanternObject<torch::Scalar>(out);
+  return make_raw::Scalar(out);
   LANTERN_FUNCTION_END
 }
 
 void *_lantern_Scalar_dtype(void *self)
 {
   LANTERN_FUNCTION_START
-  auto v = reinterpret_cast<LanternObject<torch::Scalar> *>(self)->get();
-  return (void *)new LanternObject<torch::Dtype>(v.type());
+  auto v = from_raw::Scalar(self);
+  return make_raw::Dtype(v.type());
   LANTERN_FUNCTION_END
 }
 
 float _lantern_Scalar_to_float(void *self)
 {
   LANTERN_FUNCTION_START
-  auto v = reinterpret_cast<LanternObject<torch::Scalar> *>(self)->get();
+  auto v = from_raw::Scalar(self);
   return v.toFloat();
   LANTERN_FUNCTION_END_RET(0.0f)
 }
@@ -50,7 +50,7 @@ float _lantern_Scalar_to_float(void *self)
 int _lantern_Scalar_to_int(void *self)
 {
   LANTERN_FUNCTION_START
-  auto v = reinterpret_cast<LanternObject<torch::Scalar> *>(self)->get();
+  auto v = from_raw::Scalar(self);
   return v.toInt();
   LANTERN_FUNCTION_END_RET(0)
 }
@@ -58,7 +58,7 @@ int _lantern_Scalar_to_int(void *self)
 double _lantern_Scalar_to_double(void *self)
 {
   LANTERN_FUNCTION_START
-  auto v = reinterpret_cast<LanternObject<torch::Scalar> *>(self)->get();
+  auto v = from_raw::Scalar(self);
   return v.toDouble();
   LANTERN_FUNCTION_END_RET(0)
 }
@@ -66,7 +66,7 @@ double _lantern_Scalar_to_double(void *self)
 bool _lantern_Scalar_to_bool(void *self)
 {
   LANTERN_FUNCTION_START
-  auto v = reinterpret_cast<LanternObject<torch::Scalar> *>(self)->get();
+  auto v = from_raw::Scalar(self);
   return v.toBool();
   LANTERN_FUNCTION_END_RET(false)
 }
@@ -74,38 +74,35 @@ bool _lantern_Scalar_to_bool(void *self)
 void *_lantern_Scalar_nullopt()
 {
   LANTERN_FUNCTION_START
-  return (void *)new LanternObject<c10::optional<torch::Scalar>>(c10::nullopt);
+  return make_raw::optional::Scalar(c10::nullopt);
   LANTERN_FUNCTION_END
 }
 
 void* _lantern_vector_Scalar_new ()
 {
   LANTERN_FUNCTION_START
-  return (void*) new std::vector<torch::Scalar>();
+  return (void*) make_raw::vector::Scalar({});
   LANTERN_FUNCTION_END
 }
 
 void _lantern_vector_Scalar_push_back (void* self, void* value)
 {
   LANTERN_FUNCTION_START
-  auto v = reinterpret_cast<std::vector<torch::Scalar> *>(self);
-  v->push_back(reinterpret_cast<LanternObject<torch::Scalar> *>(value)->get());
+  from_raw::vector::Scalar(self).push_back(from_raw::Scalar(value));
   LANTERN_FUNCTION_END_VOID
 }
 
 int64_t _lantern_vector_Scalar_size (void* self)
 {
   LANTERN_FUNCTION_START
-  auto v = reinterpret_cast<std::vector<torch::Scalar> *>(self);
-  return v->size();
+  return from_raw::vector::Scalar(self).size();
   LANTERN_FUNCTION_END
 }
 
 void* _lantern_vector_Scalar_at (void* self, int64_t index)
 {
   LANTERN_FUNCTION_START
-  auto v = reinterpret_cast<std::vector<torch::Scalar> *>(self);
-  return (void *)new LanternObject<torch::Scalar>(v->at(index));
+  return make_raw::Scalar(from_raw::vector::Scalar(self).at(index));
   LANTERN_FUNCTION_END
 }
 

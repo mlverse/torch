@@ -81,15 +81,15 @@ void* _lantern_IValue_Device (void* self)
     LANTERN_FUNCTION_START
     auto self_ = reinterpret_cast<torch::jit::IValue *>(self);
     torch::Device out = self_->toDevice();
-    return (void*) new LanternPtr<torch::Device>(out);
+    return make_raw::Device(out);
     LANTERN_FUNCTION_END
 }
 
 void* _lantern_IValue_from_Device (void* self)
 {
     LANTERN_FUNCTION_START
-    auto self_ = reinterpret_cast<LanternPtr<torch::Device>*>(self);
-    return (void*) new torch::IValue(self_->get());
+    auto self_ = from_raw::Device(self);
+    return (void*) new torch::IValue(self_);
     LANTERN_FUNCTION_END
 }
 
@@ -112,39 +112,39 @@ void* _lantern_IValue_DoubleList (void* self)
 {
     LANTERN_FUNCTION_START
     auto self_ = reinterpret_cast<torch::jit::IValue *>(self);
-    return (void *)new LanternObject<std::vector<double>>(self_->toDoubleList().vec());
+    return make_raw::vector::double_t(self_->toDoubleList().vec());
     LANTERN_FUNCTION_END
 }
 
 void* _lantern_IValue_from_DoubleList (void* self)
 {
     LANTERN_FUNCTION_START
-    auto self_ = reinterpret_cast<LanternObject<std::vector<double>>*>(self);
-    return (void*) new torch::IValue(self_->get());
+    auto self_ = from_raw::vector::double_t(self);
+    return make_raw::IValue(self_);
     LANTERN_FUNCTION_END
 }
 
 void* _lantern_IValue_Generator (void* self)
 {
     LANTERN_FUNCTION_START
-    auto self_ = reinterpret_cast<torch::jit::IValue *>(self);
-    return (void *)new LanternObject<torch::Generator>(self_->toGenerator());
+    auto self_ = from_raw::IValue(self);
+    return make_raw::Generator(self_.toGenerator());
     LANTERN_FUNCTION_END
 }
 
 void* _lantern_IValue_from_Generator (void* self)
 {
     LANTERN_FUNCTION_START
-    auto self_ = reinterpret_cast<LanternObject<torch::Generator>*>(self);
-    return (void*) new torch::IValue(self_);
+    auto self_ = from_raw::Generator(self);
+    return make_raw::IValue(self_);
     LANTERN_FUNCTION_END
 }
 
 void* _lantern_IValue_GenericDict (void* self)
 {
     LANTERN_FUNCTION_START
-    auto self_ = reinterpret_cast<torch::jit::IValue *>(self);
-    return (void*) new c10::impl::GenericDict(self_->toGenericDict());
+    auto self_ = from_raw::IValue(self);
+    return make_ptr<c10::impl::GenericDict>(self_.toGenericDict());
     LANTERN_FUNCTION_END
 }
 
@@ -152,46 +152,46 @@ void* _lantern_IValue_from_GenericDict (void* self)
 {
     LANTERN_FUNCTION_START
     auto self_ = reinterpret_cast<c10::impl::GenericDict*>(self);
-    return (void*) new torch::IValue(*self_);
+    return make_raw::IValue(*self_);
     LANTERN_FUNCTION_END
 }
 
 int64_t _lantern_IValue_Int (void* self)
 {
     LANTERN_FUNCTION_START
-    auto self_ = reinterpret_cast<torch::jit::IValue *>(self);
-    return self_->toInt();
+    auto self_ = from_raw::IValue(self);
+    return self_.toInt();
     LANTERN_FUNCTION_END
 }
 
 void* _lantern_IValue_from_Int (int64_t self)
 {
     LANTERN_FUNCTION_START
-    return (void*) new torch::IValue(self);
+    return make_raw::IValue(self);
     LANTERN_FUNCTION_END
 }
 
 void* _lantern_IValue_IntList (void* self)
 {
     LANTERN_FUNCTION_START
-    auto self_ = reinterpret_cast<torch::jit::IValue *>(self);
-    return (void *)new LanternObject<std::vector<int64_t>>(self_->toIntList().vec());
+    auto self_ = from_raw::IValue(self);
+    return make_raw::vector::int64_t(self_.toIntList().vec());
     LANTERN_FUNCTION_END
 }
 
 void* _lantern_IValue_from_IntList (void* self)
 {
     LANTERN_FUNCTION_START
-    auto self_ = reinterpret_cast<LanternObject<std::vector<int64_t>>*>(self);
-    return (void*) new torch::IValue(self_->get());
+    auto self_ = from_raw::vector::int64_t(self);
+    return make_raw::IValue(self_);
     LANTERN_FUNCTION_END
 }
 
 void* _lantern_IValue_List (void* self)
 {
     LANTERN_FUNCTION_START
-    auto self_ = reinterpret_cast<torch::jit::IValue *>(self);
-    return (void*) new c10::impl::GenericList(self_->toList());
+    auto self_ = from_raw::IValue(self);
+    return make_ptr<c10::impl::GenericList>(self_.toList());
     LANTERN_FUNCTION_END
 }
 
@@ -199,15 +199,15 @@ void* _lantern_IValue_from_List (void* self)
 {
     LANTERN_FUNCTION_START
     auto self_ = reinterpret_cast<c10::impl::GenericList*>(self);
-    return (void*) new torch::IValue(self_);
+    return make_raw::IValue(*self_);
     LANTERN_FUNCTION_END
 }
 
 void* _lantern_IValue_Module (void* self)
 {
     LANTERN_FUNCTION_START
-    auto self_ = reinterpret_cast<torch::jit::IValue *>(self);
-    return (void*) new torch::jit::script::Module(self_->toModule());
+    auto self_ = from_raw::IValue(self);
+    return make_ptr<torch::jit::script::Module>(self_.toModule());
     LANTERN_FUNCTION_END
 }
 
@@ -215,86 +215,86 @@ void* _lantern_IValue_from_Module (void* self)
 {
     LANTERN_FUNCTION_START
     auto self_ = reinterpret_cast<torch::jit::script::Module *>(self);
-    return (void*) new torch::IValue(self_->_ivalue());
+    return make_raw::IValue(self_->_ivalue());
     LANTERN_FUNCTION_END
 }
 
 void* _lantern_IValue_Scalar (void* self)
 {
     LANTERN_FUNCTION_START
-    auto self_ = reinterpret_cast<torch::jit::IValue *>(self);
-    return (void*) new LanternObject<torch::Scalar>(self_->toScalar());
+    auto self_ = from_raw::IValue(self);
+    return make_raw::Scalar(self_.toScalar());
     LANTERN_FUNCTION_END
 }
 
 void* _lantern_IValue_from_Scalar (void* self)
 {
     LANTERN_FUNCTION_START
-    auto self_ = reinterpret_cast<LanternObject<torch::Scalar>*>(self);
-    return (void*) new torch::IValue(self_->get());
+    auto self_ = from_raw::Scalar(self);
+    return make_raw::IValue(self_);
     LANTERN_FUNCTION_END
 }
 
 void* _lantern_IValue_String (void* self)
 {
     LANTERN_FUNCTION_START
-    auto self_ = reinterpret_cast<torch::jit::IValue *>(self);
-    return (void *)new LanternObject<std::string>(std::string(self_->toString().get()->string()));
+    auto self_ = from_raw::IValue(self);
+    return make_raw::string(std::string(self_.toString().get()->string()));
     LANTERN_FUNCTION_END
 }
 
 void* _lantern_IValue_from_String (void* self)
 {
     LANTERN_FUNCTION_START
-    auto self_ = reinterpret_cast<LanternObject<std::string>*>(self);
-    return (void*) new torch::IValue(self_->get());
+    auto self_ = from_raw::string(self);
+    return make_raw::IValue(self_);
     LANTERN_FUNCTION_END
 }
 
 void* _lantern_IValue_Tensor (void* self)
 {
     LANTERN_FUNCTION_START
-    auto self_ = reinterpret_cast<torch::jit::IValue *>(self);
-    return (void *)new LanternObject<torch::Tensor>(self_->toTensor());
+    auto self_ = from_raw::IValue(self);
+    return make_raw::Tensor(self_.toTensor());
     LANTERN_FUNCTION_END
 }
 
 void* _lantern_IValue_from_Tensor (void* self)
 {
     LANTERN_FUNCTION_START
-    auto self_ = reinterpret_cast<LanternObject<torch::Tensor>*>(self);
-    return (void*) new torch::IValue(self_->get());
+    auto self_ = from_raw::Tensor(self);
+    return make_raw::IValue(self_);
     LANTERN_FUNCTION_END
 }
 
 void* _lantern_IValue_TensorList (void* self)
 {
     LANTERN_FUNCTION_START
-    auto self_ = reinterpret_cast<torch::jit::IValue *>(self);
-    return (void *)new LanternObject<std::vector<torch::Tensor>>(self_->toTensorList().vec());
+    auto self_ = from_raw::IValue(self);
+    return make_raw::TensorList(self_.toTensorList().vec());
     LANTERN_FUNCTION_END
 }
 
 void* _lantern_IValue_from_TensorList (void* self)
 {
     LANTERN_FUNCTION_START
-    auto self_ = reinterpret_cast<LanternObject<std::vector<torch::Tensor>>*>(self);
-    return (void*) new torch::IValue(self_->get());
+    auto self_ = from_raw::TensorList(self);
+    return make_raw::IValue(self_);
     LANTERN_FUNCTION_END
 }
 
 void* _lantern_IValue_from_None () 
 {
     LANTERN_FUNCTION_START
-    return (void*) new torch::IValue(c10::nullopt);
+    return make_raw::IValue(c10::nullopt);
     LANTERN_FUNCTION_END
 }
 
 void* _lantern_IValue_Tuple (void* self)
 {
     LANTERN_FUNCTION_START
-    auto self_ = reinterpret_cast<torch::jit::IValue *>(self);
-    auto tuple = self_->toTuple();
+    auto self_ = from_raw::IValue(self);
+    auto tuple = self_.toTuple();
     
     std::vector<std::string> names;
     if (tuple->type()->schema())
@@ -308,7 +308,7 @@ void* _lantern_IValue_Tuple (void* self)
 
     }
 
-    return (void *)new NamedTupleHelper{tuple->elements(), names};
+    return make_ptr<NamedTupleHelper>({tuple->elements(), names});
     LANTERN_FUNCTION_END
 }
 
@@ -316,7 +316,7 @@ void* _lantern_IValue_from_Tuple (void* self)
 {
     LANTERN_FUNCTION_START
     auto self_ = reinterpret_cast<std::vector<torch::IValue>*>(self);
-    return (void*) new torch::IValue(c10::ivalue::Tuple::create(*self_));
+    return make_raw::IValue(c10::ivalue::Tuple::create(*self_));
     LANTERN_FUNCTION_END
 }
 
@@ -333,14 +333,15 @@ void* _lantern_IValue_from_NamedTuple (void* self) {
         self_->elements,
         c10::TupleType::createNamed(c10::nullopt, self_->names, types)
     );
-    return (void*) new torch::IValue(tuple);
+
+    return make_raw::IValue(tuple);
     LANTERN_FUNCTION_END
 }
 
 void* _lantern_IValue_from_TensorDict (void* self)
 {
     LANTERN_FUNCTION_START
-    auto self_ = reinterpret_cast<c10::Dict<std::string, torch::Tensor>*>(self);
-    return (void*) new torch::IValue(*self_);
+    auto self_ = from_raw::TensorDict(self);
+    return make_raw::IValue(self_);
     LANTERN_FUNCTION_END
 }

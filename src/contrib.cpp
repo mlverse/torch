@@ -1,5 +1,4 @@
-#include "torch_types.h"
-#include "utils.h"
+#include <torch.h>
 
 // [[Rcpp::export]]
 XPtrTorchTensor cpp_contrib_torch_sparsemax (Rcpp::XPtr<XPtrTorchTensor> input, int dim)

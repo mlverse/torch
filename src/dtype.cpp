@@ -1,5 +1,4 @@
-#include "torch_types.h"
-#include "utils.h"
+#include <torch.h>
 
 // [[Rcpp::export]]
 std::string cpp_dtype_to_string(XPtrTorchDtype dtype) {
