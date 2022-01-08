@@ -219,7 +219,7 @@ AutogradContext <- R6::R6Class(
       vars <- args[private$.env$.is_torch_tensor]
       other <- args[!private$.env$.is_torch_tensor]
       
-      cpp_autograd_context_save_for_backward(self$ptr, torch_variable_list(vars)$ptr)
+      cpp_autograd_context_save_for_backward(self$ptr, vars)
       private$.env$.other <- other
       
       if (is.null(names(vars)))
@@ -295,8 +295,7 @@ AutogradContext <- R6::R6Class(
     get_saved_variables = function() {
       
       # retrieve variables
-      vars <- variable_list$new(ptr = cpp_autograd_context_get_saved_variables(self$ptr))
-      vars <- vars$to_r()
+      vars <- cpp_autograd_context_get_saved_variables(self$ptr)
       
       nms <- cpp_autograd_context_get_saved_variables_names(self$ptr)
       if (!all(nms == ""))

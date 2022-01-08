@@ -170,18 +170,18 @@ BEGIN_RCPP
 END_RCPP
 }
 // cpp_autograd_context_save_for_backward
-void cpp_autograd_context_save_for_backward(Rcpp::XPtr<XPtrTorch> self, Rcpp::XPtr<XPtrTorchvariable_list> vars);
+void cpp_autograd_context_save_for_backward(Rcpp::XPtr<XPtrTorch> self, torch::variable_list vars);
 RcppExport SEXP _torch_cpp_autograd_context_save_for_backward(SEXP selfSEXP, SEXP varsSEXP) {
 BEGIN_RCPP
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< Rcpp::XPtr<XPtrTorch> >::type self(selfSEXP);
-    Rcpp::traits::input_parameter< Rcpp::XPtr<XPtrTorchvariable_list> >::type vars(varsSEXP);
+    Rcpp::traits::input_parameter< torch::variable_list >::type vars(varsSEXP);
     cpp_autograd_context_save_for_backward(self, vars);
     return R_NilValue;
 END_RCPP
 }
 // cpp_autograd_context_get_saved_variables
-Rcpp::XPtr<XPtrTorchvariable_list> cpp_autograd_context_get_saved_variables(Rcpp::XPtr<XPtrTorch> self);
+torch::variable_list cpp_autograd_context_get_saved_variables(Rcpp::XPtr<XPtrTorch> self);
 RcppExport SEXP _torch_cpp_autograd_context_get_saved_variables(SEXP selfSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
