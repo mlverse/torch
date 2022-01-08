@@ -261,14 +261,17 @@ void*  rcpp_call_forward (void* forward, void* ctx, void* inputs) {
 // [[Rcpp::export]]
 Rcpp::XPtr<XPtrTorch> cpp_Function_lambda (Rcpp::Function f)
 {
-  auto fun = new std::function<void*(void *, void*)>([f](void *ctx, void* inputs) {
+  torch::variable_list* output = new torch::variable_list((void*)nullptr);
+  
+  auto fun = new std::function<void*(void *, void*)>([f, &output](void *ctx, void* inputs) {
     LANTERN_CALLBACK_START
-    std::packaged_task<void*()> task([f, ctx, inputs]() {
-      auto inp = make_xptr<XPtrTorchvariable_list>(inputs);
+    
+    std::packaged_task<void*()> task([f, ctx, inputs, &output]() {
+      auto inp = XPtrTorchvariable_list(inputs);
       auto con = make_xptr<XPtrTorch>(ctx);
       auto r_out = f(con, inp);
-      auto out = Rcpp::as<Rcpp::XPtr<XPtrTorchvariable_list>>(r_out)->get();
-      return out;
+      auto output = new torch::variable_list(Rcpp::as<XPtrTorchvariable_list>(r_out));
+      return output->get();
     });
     
     std::future<void*> result = task.get_future();
@@ -282,10 +285,16 @@ Rcpp::XPtr<XPtrTorch> cpp_Function_lambda (Rcpp::Function f)
     LANTERN_CALLBACK_END("Unknown error in lambda function.", _lantern_variable_list_new())
   });
   
-  auto deleter = [&fun] (void* x) {
+  auto deleter = [&fun, &output] (void* x) {
+    std::cout << "Calling delete" << std::endl;
     lantern_Function_lambda_delete(x);
     // we should delete the `fun` pointer when the object that refers to it gets
     // deleted.
+    if (output)
+    {
+     delete output;
+    }
+    
     delete fun; 
   };
   

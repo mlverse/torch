@@ -375,7 +375,7 @@ autograd_function <- function(forward, backward) {
       
       # create the c++ lambda wrapping the R function
       .f <- function(ctx, inputs) {
-        inputs <- variable_list$new(ptr = inputs)$to_r()
+        
         names(inputs) <- names(.env$variables)
         args <- append(inputs, .env$other)
         
@@ -389,13 +389,12 @@ autograd_function <- function(forward, backward) {
           res <- list(res)
         }
         
-        torch_variable_list(res)$ptr
+        res
       }
       .b <- function(ctx, grad_output) {
         
         # parse pointers to R objects
         ctx <- AutogradContext$new(ctx, .env)
-        grad_output <- variable_list$new(ptr = grad_output)$to_r()
         
         # destructure the grad_output list
         fmls <- rlang::fn_fmls_names(backward)[-1] # remove the context
@@ -419,7 +418,7 @@ autograd_function <- function(forward, backward) {
         
         res <- res[argument_names[argument_needs_grad]]
         
-        torch_variable_list(res)$ptr
+        res
       }
       
       # TODO: we should probably be able to cache this functions as they shouldn't
