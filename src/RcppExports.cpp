@@ -96,15 +96,15 @@ BEGIN_RCPP
 END_RCPP
 }
 // cpp_torch_method__backward_self_Tensor_inputs_TensorList
-void cpp_torch_method__backward_self_Tensor_inputs_TensorList(XPtrTorchTensor self, XPtrTorchTensorList inputs, XPtrTorchOptionalTensor gradient, XPtrTorchoptional_bool retain_graph, XPtrTorchbool create_graph);
+void cpp_torch_method__backward_self_Tensor_inputs_TensorList(torch::Tensor self, torch::TensorList inputs, torch::optional::Tensor gradient, torch::optional::bool_t retain_graph, torch::bool_t create_graph);
 RcppExport SEXP _torch_cpp_torch_method__backward_self_Tensor_inputs_TensorList(SEXP selfSEXP, SEXP inputsSEXP, SEXP gradientSEXP, SEXP retain_graphSEXP, SEXP create_graphSEXP) {
 BEGIN_RCPP
     Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< XPtrTorchTensor >::type self(selfSEXP);
-    Rcpp::traits::input_parameter< XPtrTorchTensorList >::type inputs(inputsSEXP);
-    Rcpp::traits::input_parameter< XPtrTorchOptionalTensor >::type gradient(gradientSEXP);
-    Rcpp::traits::input_parameter< XPtrTorchoptional_bool >::type retain_graph(retain_graphSEXP);
-    Rcpp::traits::input_parameter< XPtrTorchbool >::type create_graph(create_graphSEXP);
+    Rcpp::traits::input_parameter< torch::Tensor >::type self(selfSEXP);
+    Rcpp::traits::input_parameter< torch::TensorList >::type inputs(inputsSEXP);
+    Rcpp::traits::input_parameter< torch::optional::Tensor >::type gradient(gradientSEXP);
+    Rcpp::traits::input_parameter< torch::optional::bool_t >::type retain_graph(retain_graphSEXP);
+    Rcpp::traits::input_parameter< torch::bool_t >::type create_graph(create_graphSEXP);
     cpp_torch_method__backward_self_Tensor_inputs_TensorList(self, inputs, gradient, retain_graph, create_graph);
     return R_NilValue;
 END_RCPP
@@ -157,12 +157,12 @@ BEGIN_RCPP
 END_RCPP
 }
 // cpp_Function_apply
-Rcpp::XPtr<XPtrTorchvariable_list> cpp_Function_apply(Rcpp::XPtr<XPtrTorchvariable_list> inputs, Rcpp::XPtr<XPtrTorch> forward, Rcpp::XPtr<XPtrTorch> backward);
+torch::variable_list cpp_Function_apply(torch::variable_list inputs, Rcpp::XPtr<XPtrTorch> forward, Rcpp::XPtr<XPtrTorch> backward);
 RcppExport SEXP _torch_cpp_Function_apply(SEXP inputsSEXP, SEXP forwardSEXP, SEXP backwardSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< Rcpp::XPtr<XPtrTorchvariable_list> >::type inputs(inputsSEXP);
+    Rcpp::traits::input_parameter< torch::variable_list >::type inputs(inputsSEXP);
     Rcpp::traits::input_parameter< Rcpp::XPtr<XPtrTorch> >::type forward(forwardSEXP);
     Rcpp::traits::input_parameter< Rcpp::XPtr<XPtrTorch> >::type backward(backwardSEXP);
     rcpp_result_gen = Rcpp::wrap(cpp_Function_apply(inputs, forward, backward));
@@ -325,14 +325,14 @@ BEGIN_RCPP
 END_RCPP
 }
 // cpp_autograd_grad
-Rcpp::XPtr<XPtrTorchvariable_list> cpp_autograd_grad(Rcpp::XPtr<XPtrTorchvariable_list> outputs, Rcpp::XPtr<XPtrTorchvariable_list> inputs, Rcpp::XPtr<XPtrTorchvariable_list> grad_outputs, bool retain_graph, bool create_graph, bool allow_unused);
+torch::variable_list cpp_autograd_grad(torch::variable_list outputs, torch::variable_list inputs, torch::variable_list grad_outputs, bool retain_graph, bool create_graph, bool allow_unused);
 RcppExport SEXP _torch_cpp_autograd_grad(SEXP outputsSEXP, SEXP inputsSEXP, SEXP grad_outputsSEXP, SEXP retain_graphSEXP, SEXP create_graphSEXP, SEXP allow_unusedSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< Rcpp::XPtr<XPtrTorchvariable_list> >::type outputs(outputsSEXP);
-    Rcpp::traits::input_parameter< Rcpp::XPtr<XPtrTorchvariable_list> >::type inputs(inputsSEXP);
-    Rcpp::traits::input_parameter< Rcpp::XPtr<XPtrTorchvariable_list> >::type grad_outputs(grad_outputsSEXP);
+    Rcpp::traits::input_parameter< torch::variable_list >::type outputs(outputsSEXP);
+    Rcpp::traits::input_parameter< torch::variable_list >::type inputs(inputsSEXP);
+    Rcpp::traits::input_parameter< torch::variable_list >::type grad_outputs(grad_outputsSEXP);
     Rcpp::traits::input_parameter< bool >::type retain_graph(retain_graphSEXP);
     Rcpp::traits::input_parameter< bool >::type create_graph(create_graphSEXP);
     Rcpp::traits::input_parameter< bool >::type allow_unused(allow_unusedSEXP);

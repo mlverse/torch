@@ -85,25 +85,18 @@ void event_loop_thread(std::atomic<bool> &event_loop_running)
 }
 
 // [[Rcpp::export]]
-void cpp_torch_method__backward_self_Tensor_inputs_TensorList (XPtrTorchTensor self, XPtrTorchTensorList inputs, 
-                                                              XPtrTorchOptionalTensor gradient, 
-                                                              XPtrTorchoptional_bool retain_graph, 
-                                                              XPtrTorchbool create_graph) {
+void cpp_torch_method__backward_self_Tensor_inputs_TensorList (torch::Tensor self, torch::TensorList inputs, 
+                                                              torch::optional::Tensor gradient, 
+                                                              torch::optional::bool_t retain_graph, 
+                                                              torch::bool_t create_graph) {
   
-  auto self_ptr = self.get();
-  auto gradient_ptr = gradient.get();
-  auto inputs_ptr = inputs.get();
-  
-  std::atomic<bool> event_loop_running;
-  
-  event_loop_running = true;
-  
+  std::atomic<bool> event_loop_running(true);
   std::function<void()> backward ([&](){
     
     try
     {
       lantern_Tensor__backward_tensor_tensorlist_tensor_bool_bool(
-        self_ptr, inputs_ptr, gradient_ptr, 
+        self.get(), inputs.get(), gradient.get(), 
         retain_graph.get(), create_graph.get());
     }
     catch (...)
@@ -151,9 +144,7 @@ void cpp_autograd_backward (Rcpp::XPtr<XPtrTorchvariable_list> tensors,
   auto tensors_ = tensors->get();
   auto grad_tensors_ = grad_tensors->get();
   
-  std::atomic<bool> event_loop_running;
-  event_loop_running = true;
-  
+  std::atomic<bool> event_loop_running(true);
   std::function<void()> backward ([&](){
     
     try
@@ -303,12 +294,10 @@ Rcpp::XPtr<XPtrTorch> cpp_Function_lambda (Rcpp::Function f)
 }
 
 // [[Rcpp::export]]
-Rcpp::XPtr<XPtrTorchvariable_list> cpp_Function_apply (Rcpp::XPtr<XPtrTorchvariable_list> inputs,
-                                                       Rcpp::XPtr<XPtrTorch> forward,
-                                                       Rcpp::XPtr<XPtrTorch> backward)
+torch::variable_list cpp_Function_apply (torch::variable_list inputs,
+                                         Rcpp::XPtr<XPtrTorch> forward,
+                                         Rcpp::XPtr<XPtrTorch> backward)
 {
-  
-  auto inputs_ = inputs->get();
   auto forward_ = forward->get();
   auto backward_ = backward->get();
   
@@ -317,12 +306,12 @@ Rcpp::XPtr<XPtrTorchvariable_list> cpp_Function_apply (Rcpp::XPtr<XPtrTorchvaria
   
   std::function<XPtrTorchvariable_list()> apply ([&](){
     
-    XPtrTorchvariable_list out = nullptr;
+    auto out = XPtrTorchvariable_list((void*)nullptr);
     
     try 
     {
       out = XPtrTorchvariable_list(lantern_Function_apply(
-        inputs_,
+        inputs.get(),
         forward_,
         backward_
       ));
@@ -355,13 +344,12 @@ Rcpp::XPtr<XPtrTorchvariable_list> cpp_Function_apply (Rcpp::XPtr<XPtrTorchvaria
   
   event_loop_thread(event_loop_running);
   
-  auto out = result.get();
-  return make_xptr<XPtrTorchvariable_list>(out);
+  return result.get();;
 }
 
 // [[Rcpp::export]]
 void cpp_autograd_context_save_for_backward (Rcpp::XPtr<XPtrTorch> self, 
-                                                              Rcpp::XPtr<XPtrTorchvariable_list> vars)
+                                             Rcpp::XPtr<XPtrTorchvariable_list> vars)
 {
   lantern_AutogradContext_save_for_backward(self->get(), vars->get());
 }
@@ -463,19 +451,19 @@ Rcpp::XPtr<XPtrTorch> cpp_autograd_edge_function(Rcpp::XPtr<XPtrTorch> self)
 }
 
 // [[Rcpp::export]]
-Rcpp::XPtr<XPtrTorchvariable_list> cpp_autograd_grad(Rcpp::XPtr<XPtrTorchvariable_list> outputs,
-                                                     Rcpp::XPtr<XPtrTorchvariable_list> inputs,
-                                                     Rcpp::XPtr<XPtrTorchvariable_list> grad_outputs,
-                                                     bool retain_graph,
-                                                     bool create_graph,
-                                                     bool allow_unused) {
+torch::variable_list cpp_autograd_grad(torch::variable_list outputs,
+                                       torch::variable_list inputs,
+                                       torch::variable_list grad_outputs,
+                                       bool retain_graph,
+                                       bool create_graph,
+                                       bool allow_unused) {
   XPtrTorchvariable_list out = lantern_autograd_grad(
-    outputs->get(),
-    inputs->get(),
-    grad_outputs->get(),
+    outputs.get(),
+    inputs.get(),
+    grad_outputs.get(),
     retain_graph,
     create_graph,
     allow_unused
   );
-  return make_xptr<XPtrTorchvariable_list>(out);
+  return out;
 }   

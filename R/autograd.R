@@ -439,8 +439,7 @@ autograd_function <- function(forward, backward) {
       .env$argument_names <- names(args)
       .env$argument_needs_grad <- names(args) %in% names(.env$variables)
       
-      res <- cpp_Function_apply(torch_variable_list(.env$variables)$ptr, .f_, .b_)
-      res <- variable_list$new(ptr = res)$to_r()
+      res <- cpp_Function_apply(.env$variables, .f_, .b_)
       
       # post processing of results
       if (!.env$forward_returns_list)
@@ -609,12 +608,8 @@ autograd_grad <- function(outputs, inputs, grad_outputs = NULL, retain_graph = c
   if (!is.list(outputs))
     outputs <- list(outputs)
   
-  outputs_ <- torch_variable_list(outputs)
-  
   if (!is.list(inputs))
     inputs <- list(inputs)
-  
-  inputs_ <- torch_variable_list(inputs)
   
   if (is.null(grad_outputs)) {
     grad_outputs <- lapply(
@@ -624,16 +619,13 @@ autograd_grad <- function(outputs, inputs, grad_outputs = NULL, retain_graph = c
   } else if (!is.list(grad_outputs)) {
     grad_outputs <- list(grad_outputs)
   }
-    
-  grad_outputs_ <- torch_variable_list(grad_outputs)
   
-  out <- cpp_autograd_grad(
-    outputs_$ptr,
-    inputs_$ptr,
-    grad_outputs_$ptr,
+  cpp_autograd_grad(
+    outputs,
+    inputs,
+    grad_outputs,
     retain_graph, 
     create_graph, 
     allow_unused
   )
-  variable_list$new(ptr = out)$to_r()
 }

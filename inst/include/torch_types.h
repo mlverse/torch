@@ -495,6 +495,8 @@ public:
 class XPtrTorchvariable_list : public XPtrTorch {
 public:
   XPtrTorchvariable_list (void* x) : XPtrTorch(x, delete_variable_list) {}
+  XPtrTorchvariable_list (SEXP x);
+  operator SEXP () const;
 };
 
 class XPtrTorchint64_t : public XPtrTorch {
@@ -658,6 +660,7 @@ using IntArrayRef = XPtrTorchOptionalIntArrayRef;
 using Generator = XPtrTorchOptionalGenerator;
 
 using int64_t = XPtrTorchoptional_int64_t;
+using bool_t = XPtrTorchoptional_bool;
 
 }
 
