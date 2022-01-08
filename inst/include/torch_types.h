@@ -347,6 +347,8 @@ public:
 
 class XPtrTorchvector_string : public XPtrTorch {
 public:
+  XPtrTorchvector_string (SEXP x);
+  XPtrTorchvector_string (const XPtrTorchvector_string& x) : XPtrTorch(x.get_shared()) {};
   XPtrTorchvector_string (void * x) : XPtrTorch(x, delete_vector_string) {}
   operator SEXP () const;
 };

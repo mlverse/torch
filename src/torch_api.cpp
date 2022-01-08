@@ -871,6 +871,17 @@ SEXP operator_sexp_vector_string (const XPtrTorchvector_string * self)
   return Rcpp::wrap(output);
 }
 
+XPtrTorchvector_string from_sexp_vector_string (SEXP x)
+{
+  XPtrTorchvector_string out = lantern_vector_string_new();
+  auto strings = Rcpp::as<std::vector<std::string>>(x);
+  for (int i = 0; i < strings.size(); i ++)
+  {
+    lantern_vector_string_push_back(out.get(), strings.at(i).c_str());
+  }
+  return out;
+}
+
 void delete_vector_string (void* x)
 {
   lantern_vector_string_delete(x);

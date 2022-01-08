@@ -98,6 +98,7 @@ void register_callables (DllInfo *dll)
   REGISTER_C_CALLABLE(from_sexp_optional_string)
   REGISTER_C_CALLABLE(from_sexp_optional_scalar_type)
   REGISTER_C_CALLABLE(from_sexp_optional_memory_format)
+  REGISTER_C_CALLABLE(from_sexp_vector_string)
   
   REGISTER_C_CALLABLE(delete_tensor)
   REGISTER_C_CALLABLE(delete_script_module)

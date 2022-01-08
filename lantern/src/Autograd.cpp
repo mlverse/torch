@@ -173,9 +173,9 @@ void _lantern_AutogradContext_set_arguments(void *self, void *names, void *needs
 {
     LANTERN_FUNCTION_START
     auto ctx = reinterpret_cast<torch::autograd::LanternAutogradContext *>(self);
-    ctx->set_arguments(
-        from_raw::vector::string(names),
-        *reinterpret_cast<std::vector<bool> *>(needs_grad));
+    auto names_ = from_raw::vector::string(names);
+    auto needs_grad_ = from_raw::vector::bool_t(needs_grad);
+    ctx->set_arguments(names_, needs_grad_);
     LANTERN_FUNCTION_END_VOID
 }
 

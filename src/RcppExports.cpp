@@ -203,19 +203,19 @@ BEGIN_RCPP
 END_RCPP
 }
 // cpp_autograd_context_set_arguments
-void cpp_autograd_context_set_arguments(Rcpp::XPtr<XPtrTorch> self, std::vector<std::string> names, std::vector<bool> needs_grad);
+void cpp_autograd_context_set_arguments(Rcpp::XPtr<XPtrTorch> self, torch::vector::string names, torch::vector::bool_t needs_grad);
 RcppExport SEXP _torch_cpp_autograd_context_set_arguments(SEXP selfSEXP, SEXP namesSEXP, SEXP needs_gradSEXP) {
 BEGIN_RCPP
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< Rcpp::XPtr<XPtrTorch> >::type self(selfSEXP);
-    Rcpp::traits::input_parameter< std::vector<std::string> >::type names(namesSEXP);
-    Rcpp::traits::input_parameter< std::vector<bool> >::type needs_grad(needs_gradSEXP);
+    Rcpp::traits::input_parameter< torch::vector::string >::type names(namesSEXP);
+    Rcpp::traits::input_parameter< torch::vector::bool_t >::type needs_grad(needs_gradSEXP);
     cpp_autograd_context_set_arguments(self, names, needs_grad);
     return R_NilValue;
 END_RCPP
 }
 // cpp_autograd_context_get_argument_names
-std::vector<std::string> cpp_autograd_context_get_argument_names(Rcpp::XPtr<XPtrTorch> self);
+torch::vector::string cpp_autograd_context_get_argument_names(Rcpp::XPtr<XPtrTorch> self);
 RcppExport SEXP _torch_cpp_autograd_context_get_argument_names(SEXP selfSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
@@ -226,7 +226,7 @@ BEGIN_RCPP
 END_RCPP
 }
 // cpp_autograd_context_get_argument_needs_grad
-std::vector<bool> cpp_autograd_context_get_argument_needs_grad(Rcpp::XPtr<XPtrTorch> self);
+torch::vector::bool_t cpp_autograd_context_get_argument_needs_grad(Rcpp::XPtr<XPtrTorch> self);
 RcppExport SEXP _torch_cpp_autograd_context_get_argument_needs_grad(SEXP selfSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
@@ -237,18 +237,18 @@ BEGIN_RCPP
 END_RCPP
 }
 // cpp_autograd_context_set_saved_variables_names
-void cpp_autograd_context_set_saved_variables_names(Rcpp::XPtr<XPtrTorch> self, std::vector<std::string> names);
+void cpp_autograd_context_set_saved_variables_names(Rcpp::XPtr<XPtrTorch> self, torch::vector::string names);
 RcppExport SEXP _torch_cpp_autograd_context_set_saved_variables_names(SEXP selfSEXP, SEXP namesSEXP) {
 BEGIN_RCPP
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< Rcpp::XPtr<XPtrTorch> >::type self(selfSEXP);
-    Rcpp::traits::input_parameter< std::vector<std::string> >::type names(namesSEXP);
+    Rcpp::traits::input_parameter< torch::vector::string >::type names(namesSEXP);
     cpp_autograd_context_set_saved_variables_names(self, names);
     return R_NilValue;
 END_RCPP
 }
 // cpp_autograd_context_get_saved_variables_names
-std::vector<std::string> cpp_autograd_context_get_saved_variables_names(Rcpp::XPtr<XPtrTorch> self);
+torch::vector::string cpp_autograd_context_get_saved_variables_names(Rcpp::XPtr<XPtrTorch> self);
 RcppExport SEXP _torch_cpp_autograd_context_get_saved_variables_names(SEXP selfSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;

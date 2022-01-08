@@ -213,6 +213,9 @@ XPtrTorchvector_string::operator SEXP () const
   return operator_sexp_vector_string(this);
 }
 
+XPtrTorchvector_string::XPtrTorchvector_string (SEXP x):
+  XPtrTorch{from_sexp_vector_string(x)} {}
+
 // vector scalar
 
 XPtrTorchvector_Scalar::operator SEXP () const
