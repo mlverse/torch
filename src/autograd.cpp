@@ -42,20 +42,19 @@ bool cpp_autograd_detect_anomaly_is_enabled ()
 }
 
 // [[Rcpp::export]]
-XPtrTorchTensor cpp_tensor_grad (Rcpp::XPtr<XPtrTorchTensor> self) {
-  auto out = XPtrTorchTensor(lantern_Tensor_grad(self->get()));
-  return out;
+torch::Tensor cpp_tensor_grad (torch::Tensor self) {
+  return torch::Tensor(lantern_Tensor_grad(self.get()));
 }
 
 // [[Rcpp::export]]
-void cpp_tensor_set_grad_ (Rcpp::XPtr<XPtrTorchTensor> self, Rcpp::XPtr<XPtrTorchTensor> new_grad)
+void cpp_tensor_set_grad_ (torch::Tensor self, torch::Tensor new_grad)
 {
-  lantern_Tensor_set_grad_(self->get(), new_grad->get());
+  lantern_Tensor_set_grad_(self.get(), new_grad.get());
 }
 
 // [[Rcpp::export]]
-bool cpp_tensor_requires_grad (Rcpp::XPtr<XPtrTorchTensor> self) {
-  return lantern_Tensor_requires_grad(self->get());
+bool cpp_tensor_requires_grad (torch::Tensor self) {
+  return lantern_Tensor_requires_grad(self.get());
 }
 
 std::deque<std::packaged_task<void*()>> tasks;
@@ -83,12 +82,6 @@ void event_loop_thread(std::atomic<bool> &event_loop_running)
     
   }
   
-}
-
-// [[Rcpp::export]]
-XPtrTorchTensorList test_tensorlist (XPtrTorchTensorList x)
-{
-  return x;
 }
 
 // [[Rcpp::export]]

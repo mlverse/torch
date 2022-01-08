@@ -33,10 +33,6 @@ cpp_tensor_requires_grad <- function(self) {
     .Call('_torch_cpp_tensor_requires_grad', PACKAGE = 'torchpkg', self)
 }
 
-test_tensorlist <- function(x) {
-    .Call('_torch_test_tensorlist', PACKAGE = 'torchpkg', x)
-}
-
 cpp_torch_method__backward_self_Tensor_inputs_TensorList <- function(self, inputs, gradient, retain_graph, create_graph) {
     invisible(.Call('_torch_cpp_torch_method__backward_self_Tensor_inputs_TensorList', PACKAGE = 'torchpkg', self, inputs, gradient, retain_graph, create_graph))
 }
