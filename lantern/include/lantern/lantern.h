@@ -383,8 +383,8 @@ LANTERN_OPTIONAL_DECLS(device)
   HOST_API void lantern_variable_list_delete(void *x) {LANTERN_CHECK_LOADED _lantern_variable_list_delete(x); LANTERN_HOST_HANDLER }
   LANTERN_API int64_t(LANTERN_PTR _lantern_variable_list_size)(void *self);
   HOST_API int64_t lantern_variable_list_size(void *self) {LANTERN_CHECK_LOADED int64_t ret = _lantern_variable_list_size(self); LANTERN_HOST_HANDLER return ret;}
-  LANTERN_API void *(LANTERN_PTR _lantern_Function_lambda)(void *(*fun)(void *, void *, void *), void *custom);
-  HOST_API void * lantern_Function_lambda(void *(*fun)(void *, void *, void *), void *custom) {LANTERN_CHECK_LOADED void * ret = _lantern_Function_lambda(fun, custom); LANTERN_HOST_HANDLER return ret;}
+  LANTERN_API void *(LANTERN_PTR _lantern_Function_lambda)(void *(*fun)(void *, void *, void *), void *custom, void (*delete_out)(void *), void *(*get_ptr)(void *));
+  HOST_API void * lantern_Function_lambda(void *(*fun)(void *, void *, void *), void *custom, void (*delete_out)(void *), void *(*get_ptr)(void *)) {LANTERN_CHECK_LOADED void * ret = _lantern_Function_lambda(fun, custom, delete_out, get_ptr); LANTERN_HOST_HANDLER return ret;}
   LANTERN_API void *(LANTERN_PTR _lantern_Function_apply)(void *inputs, void *forward, void *backward);
   HOST_API void * lantern_Function_apply(void *inputs, void *forward, void *backward) {LANTERN_CHECK_LOADED void * ret = _lantern_Function_apply(inputs, forward, backward); LANTERN_HOST_HANDLER return ret;}
   LANTERN_API void(LANTERN_PTR _lantern_AutogradContext_save_for_backward)(void *self, void *vars);

@@ -258,20 +258,30 @@ void*  rcpp_call_forward (void* forward, void* ctx, void* inputs) {
   return (*reinterpret_cast<std::function<void*(void*, void*)> *>(forward))(ctx, inputs);
 }
 
+void rcpp_delete_variable_list (void* x)
+{
+  delete reinterpret_cast<torch::variable_list*>(x);
+}
+
+void* rcpp_variable_list_ptr (void* x)
+{
+  return reinterpret_cast<torch::variable_list*>(x)->get();
+}
+
 // [[Rcpp::export]]
 Rcpp::XPtr<XPtrTorch> cpp_Function_lambda (Rcpp::Function f)
 {
-  torch::variable_list* output = new torch::variable_list((void*)nullptr);
-  
-  auto fun = new std::function<void*(void *, void*)>([f, &output](void *ctx, void* inputs) {
+  auto fun = new std::function<void*(void *, void*)>([f](void *ctx, void* inputs) {
     LANTERN_CALLBACK_START
     
-    std::packaged_task<void*()> task([f, ctx, inputs, &output]() {
+    std::packaged_task<void*()> task([f, ctx, inputs]() {
       auto inp = XPtrTorchvariable_list(inputs);
       auto con = make_xptr<XPtrTorch>(ctx);
       auto r_out = f(con, inp);
-      auto output = new torch::variable_list(Rcpp::as<XPtrTorchvariable_list>(r_out));
-      return output->get();
+      // A deleter will be called in the Lantern side to make sure this pointer
+      // gets correctly deleted.
+      auto output = new torch::variable_list(Rcpp::as<torch::variable_list>(r_out));
+      return (void*) output;
     });
     
     std::future<void*> result = task.get_future();
@@ -282,23 +292,20 @@ Rcpp::XPtr<XPtrTorch> cpp_Function_lambda (Rcpp::Function f)
     }
     
     return result.get();
-    LANTERN_CALLBACK_END("Unknown error in lambda function.", _lantern_variable_list_new())
+    LANTERN_CALLBACK_END("Unknown error in lambda function.", new torch::variable_list(lantern_variable_list_new()))
   });
   
-  auto deleter = [&fun, &output] (void* x) {
-    std::cout << "Calling delete" << std::endl;
+  auto deleter = [fun] (void* x) {
     lantern_Function_lambda_delete(x);
     // we should delete the `fun` pointer when the object that refers to it gets
     // deleted.
-    if (output)
-    {
-     delete output;
-    }
-    
     delete fun; 
   };
   
-  auto out = XPtrTorch(lantern_Function_lambda(&rcpp_call_forward, (void*)fun), deleter);
+  auto out = XPtrTorch(lantern_Function_lambda(&rcpp_call_forward, (void*)fun,
+                                               &rcpp_delete_variable_list,
+                                               &rcpp_variable_list_ptr), 
+                                               deleter);
   return make_xptr<XPtrTorch>(out);
 }
 

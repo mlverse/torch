@@ -438,6 +438,7 @@ autograd_function <- function(forward, backward) {
       .env$argument_needs_grad <- names(args) %in% names(.env$variables)
       
       res <- cpp_Function_apply(.env$variables, .f_, .b_)
+      rm(.f_); rm(.b_);
       
       # post processing of results
       if (!.env$forward_returns_list)

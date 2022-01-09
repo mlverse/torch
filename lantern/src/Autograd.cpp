@@ -130,12 +130,14 @@ int64_t _lantern_variable_list_size(void *self)
     LANTERN_FUNCTION_END_RET(0)
 }
 
-void *_lantern_Function_lambda(void *(*fun)(void *, void *, void *), void *custom)
+void *_lantern_Function_lambda(void *(*fun)(void *, void *, void *), void *custom, void (delete_out) (void*), void* (*get_ptr) (void*))
 {
     LANTERN_FUNCTION_START
-    auto out = [fun, custom](torch::autograd::LanternAutogradContext *ctx, torch::autograd::variable_list inputs) {
+    auto out = [fun, custom, delete_out, get_ptr](torch::autograd::LanternAutogradContext *ctx, torch::autograd::variable_list inputs) {
         auto out = (*fun)(custom, (void *)ctx, make_raw::variable_list(inputs));
-        return from_raw::variable_list(out);
+        torch::autograd::variable_list res(from_raw::variable_list((*get_ptr)(out))); // copy the output
+        (*delete_out)(out);
+        return res;
     };
     return (void *)new std::function<torch::autograd::variable_list(torch::autograd::LanternAutogradContext *, torch::autograd::variable_list)>(out);
     LANTERN_FUNCTION_END
