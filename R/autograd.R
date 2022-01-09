@@ -374,57 +374,8 @@ autograd_function <- function(forward, backward) {
       .env$forward_returns_list <- TRUE
       
       # create the c++ lambda wrapping the R function
-      .f <- function(ctx, inputs) {
-        
-        names(inputs) <- names(.env$variables)
-        args <- append(inputs, .env$other)
-        
-        args$ctx <- AutogradContext$new(ctx, .env, .env$argument_names, 
-                                        .env$argument_needs_grad)
-        
-        res <- do.call(forward, args)
-        
-        if (!is.list(res)) {
-          .env$forward_returns_list <- FALSE
-          res <- list(res)
-        }
-        
-        res
-      }
-      .b <- function(ctx, grad_output) {
-        
-        # parse pointers to R objects
-        ctx <- AutogradContext$new(ctx, .env)
-        
-        # destructure the grad_output list
-        fmls <- rlang::fn_fmls_names(backward)[-1] # remove the context
-        if (length(grad_output) > length(fmls)) {
-          if (length(fmls) == 1) # and length(grad_output) > 1
-            grad_output <- list(grad_output)
-          else {
-            d <- length(grad_output) - length(fmls)
-            grad_output <- append(
-              grad_output[1:(length(grad_output) - (d + 1))],
-              list(grad_output[(length(grad_output) - d):length(grad_output)])
-            )  
-          }
-        }
-        args <- append(list(ctx), grad_output)
-        res <- do.call(backward, args)
-        
-        needs_grad <- ctx$needs_input_grad
-        argument_names <- names(needs_grad)
-        argument_needs_grad <- as.logical(needs_grad)
-        
-        res <- res[argument_names[argument_needs_grad]]
-        
-        res
-      }
-      
-      # TODO: we should probably be able to cache this functions as they shouldn't
-      # need to be recreated everytime we apply the custom function.
-      .f_ <- cpp_Function_lambda(.f)
-      .b_ <- cpp_Function_lambda(.b)
+      .f_ <- create_f(.env, forward)
+      .b_ <- create_b(.env, backward)
       
       # passing the variables through cpp_Function_apply
       # other arguments are passed through `.env`
@@ -438,7 +389,6 @@ autograd_function <- function(forward, backward) {
       .env$argument_needs_grad <- names(args) %in% names(.env$variables)
       
       res <- cpp_Function_apply(.env$variables, .f_, .b_)
-      rm(.f_); rm(.b_);
       
       # post processing of results
       if (!.env$forward_returns_list)
@@ -447,6 +397,64 @@ autograd_function <- function(forward, backward) {
       res
     })
   )
+}
+
+create_f <- function(.env, forward) {
+  force(.env)
+  force(forward)
+  f <- function(ctx, inputs) {
+    
+    names(inputs) <- names(.env$variables)
+    args <- append(inputs, .env$other)
+    
+    args$ctx <- AutogradContext$new(ctx, .env, .env$argument_names, 
+                                    .env$argument_needs_grad)
+    
+    res <- do.call(forward, args)
+    
+    if (!is.list(res)) {
+      .env$forward_returns_list <- FALSE
+      res <- list(res)
+    }
+    
+    res
+  }
+  cpp_Function_lambda(f)
+}
+
+create_b <- function(.env, backward) {
+  force(.env)
+  force(backward)
+  b <- function(ctx, grad_output) {
+    
+    # parse pointers to R objects
+    ctx <- AutogradContext$new(ctx, .env)
+    
+    # destructure the grad_output list
+    fmls <- rlang::fn_fmls_names(backward)[-1] # remove the context
+    if (length(grad_output) > length(fmls)) {
+      if (length(fmls) == 1) # and length(grad_output) > 1
+        grad_output <- list(grad_output)
+      else {
+        d <- length(grad_output) - length(fmls)
+        grad_output <- append(
+          grad_output[1:(length(grad_output) - (d + 1))],
+          list(grad_output[(length(grad_output) - d):length(grad_output)])
+        )  
+      }
+    }
+    args <- append(list(ctx), grad_output)
+    res <- do.call(backward, args)
+    
+    needs_grad <- ctx$needs_input_grad
+    argument_names <- names(needs_grad)
+    argument_needs_grad <- as.logical(needs_grad)
+    
+    res <- res[argument_names[argument_needs_grad]]
+    
+    res
+  }
+  cpp_Function_lambda(b)
 }
 
 Edge <- R6::R6Class(
