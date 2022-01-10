@@ -314,9 +314,6 @@ torch::variable_list cpp_Function_apply (torch::variable_list inputs,
                                          Rcpp::XPtr<XPtrTorch> forward,
                                          Rcpp::XPtr<XPtrTorch> backward)
 {
-  auto forward_ = forward->get();
-  auto backward_ = backward->get();
-  
   std::atomic<bool> event_loop_running;
   event_loop_running = true;
   
@@ -328,8 +325,8 @@ torch::variable_list cpp_Function_apply (torch::variable_list inputs,
     {
       out = XPtrTorchvariable_list(lantern_Function_apply(
         inputs.get(),
-        forward_,
-        backward_
+        forward->get(),
+        backward->get()
       ));
     }
     catch(std::string& ex)
@@ -360,7 +357,7 @@ torch::variable_list cpp_Function_apply (torch::variable_list inputs,
   
   event_loop_thread(event_loop_running);
   
-  return result.get();;
+  return result.get();
 }
 
 // [[Rcpp::export]]
