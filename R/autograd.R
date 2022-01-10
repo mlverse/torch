@@ -364,22 +364,24 @@ AutogradContext <- R6::R6Class(
 #' 
 #' @export
 autograd_function <- function(forward, backward) {
+  force(forward)
+  force(backward)
   rlang::new_function(
     args = rlang::fn_fmls(forward)[-1],
-    body = rlang::expr({
+    body = quote({
       
       # environment to transfer info from this function to
       # the forward/backward function
       .env <- rlang::new_environment()
       .env$forward_returns_list <- TRUE
-      
+
       # create the c++ lambda wrapping the R function
       .f_ <- create_f(.env, forward)
       .b_ <- create_b(.env, backward)
       
       # passing the variables through cpp_Function_apply
       # other arguments are passed through `.env`
-      args <- rlang::list2(!!!rlang::fn_fmls_syms(forward)[-1])
+      args <- mget(rlang::fn_fmls_names(forward)[-1])
       is_var <- sapply(args, function(arg) {is_torch_tensor(arg) && arg$requires_grad})    
     
       .env$variables <- args[is_var]
