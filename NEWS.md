@@ -9,6 +9,7 @@
 - Refactored the internal Lantern types and Rcpp types and made clearer which are the exported types that can be used in the C++ extensions. (#718)
 - `dataset_subset` will use the `.getbatch` method of the wrapped dataset if one is available. (#742, @egillax)
 - Fixed memory leak when applying custom `autograd_function`s. (#750)
+- `torch_sort` and `Tensor$sort` now return 1-indexed results. (#709, @mohamed-180)
 
 # torch 0.6.1
 

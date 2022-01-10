@@ -22602,8 +22602,8 @@ fun_type = 'namespace'
 }
 
 
-#' @rdname torch_sort
-torch_sort <- function(self, dim = -1L, descending = FALSE, stable) {
+#' @rdname .torch_sort
+.torch_sort <- function(self, dim = -1L, descending = FALSE, stable) {
   args <- mget(x = c("self", "dim", "descending", "stable"))
 expected_types <- list(self = "Tensor", dim = c("int64_t", "Dimname"), descending = "bool", 
     stable = "bool")

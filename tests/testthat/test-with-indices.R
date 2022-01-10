@@ -62,3 +62,12 @@ test_that("argmin", {
   expect_equal(torch_argmin(x, dim = 2, keepdim = TRUE)$shape, c(3,1))
   
 })
+
+test_that("sort", {
+  x <- torch_tensor(sample(1e2))
+  expect_equal_to_r(torch_sort(x)[[2]], order(as.integer(x)))
+  expect_equal_to_r(torch_sort(x, descending = TRUE)[[2]], order(as.integer(x), decreasing = TRUE))
+  
+  expect_equal_to_r(x$sort()[[2]], order(as.integer(x)))
+  expect_equal_to_r(x$sort(descending = TRUE)[[2]], order(as.integer(x), decreasing = TRUE))
+})

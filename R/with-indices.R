@@ -89,3 +89,13 @@ torch_cross_entropy_loss <- function(
   .torch_cross_entropy_loss(self = self, target = target, weight = weight,
                             reduction = reduction, ignore_index = ignore_index)
 }
+
+torch_sort <- function(self, dim = -1L, descending = FALSE, stable) {
+  if (missing(stable)) {
+    out <- .torch_sort(self = self, dim = dim, descending = descending)
+  } else {
+    out <- .torch_sort(self = self, dim = dim, descending = descending, stable = stable)
+  }
+  out[[2]]$add_(1L)
+  out
+}

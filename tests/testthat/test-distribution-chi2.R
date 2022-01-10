@@ -11,7 +11,7 @@ test_that("Chi2 basic test", {
     x$sum()$backward()
     out <- x$sort()
     x <- out[[1]]
-    ind <- out[[2]] + 1L
+    ind <- out[[2]]
     x <- as.array(x$detach())
     actual_grad <- dfs$grad[ind]
     
