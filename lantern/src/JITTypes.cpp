@@ -42,12 +42,12 @@ void* jit_named_list_tensors (void* self)
 {
     LANTERN_FUNCTION_START
     auto self_ = reinterpret_cast<T *>(self);
-    auto outputs = new LanternObject<std::vector<torch::Tensor>>();
+    std::vector<torch::Tensor> outputs;
     for (auto el : *self_)
     {
-        outputs->get().push_back(el.value);
+        outputs.push_back(el.value);
     }
-    return (void*) outputs;
+    return make_raw::TensorList(outputs);
     LANTERN_FUNCTION_END
 }
 
@@ -89,12 +89,12 @@ template <class T>
 void* jit_type_names (void* self)
 {
     auto self_ = reinterpret_cast<T *>(self);
-    auto outputs = new std::vector<std::string>();
+    std::vector<std::string> outputs;
     for (auto el : *self_)
     {
-        outputs->push_back(el.name);
+        outputs.push_back(el.name);
     }
-    return (void*) outputs;
+    return make_raw::vector::string(outputs);
 }
 
 void* _lantern_jit_named_parameter_list_names (void* self)
@@ -188,17 +188,17 @@ void* _lantern_jit_NamedTupleHelper_elements (void* self)
 void* _lantern_jit_TensorDict_new ()
 {
     LANTERN_FUNCTION_START
-    return (void*) new c10::Dict<std::string, torch::Tensor>();
+    return make_raw::TensorDict(alias::TensorDict());
     LANTERN_FUNCTION_END
 }
 
 void _lantern_jit_TensorDict_push_back(void* self, void* key, void* value)
 {
     LANTERN_FUNCTION_START
-    auto self_ = reinterpret_cast<c10::Dict<std::string, torch::Tensor>*>(self);
-    self_->insert(
+    auto self_ = from_raw::TensorDict(self);
+    self_.insert(
         *reinterpret_cast<std::string*>(key),
-        reinterpret_cast<LanternObject<torch::Tensor>*>(value)->get()
+        from_raw::Tensor(value)
     );
     LANTERN_FUNCTION_END_VOID
 }

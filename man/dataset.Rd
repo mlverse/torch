@@ -2,7 +2,7 @@
 % Please edit documentation in R/utils-data.R
 \name{dataset}
 \alias{dataset}
-\title{Helper function to create an R6 class that inherits from the abstract \code{Dataset} class}
+\title{Helper function to create an function that generates R6 instances of class \code{dataset}}
 \usage{
 dataset(
   name = NULL,
@@ -29,6 +29,12 @@ new dataset.}
 \item{parent_env}{An environment to use as the parent of newly-created
 objects.}
 }
+\value{
+The output is a function \code{f} with class \code{dataset_generator}. Calling \code{f()}
+creates a new instance of the R6 class \code{dataset}. The R6 class is stored in the
+enclosing environment of \code{f} and can also be accessed through \code{f}s attribute
+\code{Dataset}.
+}
 \description{
 All datasets that represent a map from keys to data samples should subclass this
 class. All subclasses should overwrite the \code{.getitem()} method, which supports
@@ -50,6 +56,6 @@ Sometimes it's possible to have an optimized implementation to take a batch
 of observations (eg, subsetting a tensor by multiple indexes at once is faster than
 subsetting once for each index), in this case you can implement a \code{.getbatch} method
 that will be used instead of \code{.getitem} when getting a batch of observations within
-the dataloader.
+the dataloader. \code{.getbatch} must work for batches of size larger or equal to 1.
 }
 

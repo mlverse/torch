@@ -1,5 +1,5 @@
-#include "torch_types.h"
-#include "utils.h"
+#include <torch.h>
+
 
 // [[Rcpp::export]]
 XPtrTorchjit_named_parameter_list cpp_jit_script_module_parameters (XPtrTorchScriptModule self, bool recurse)
@@ -145,4 +145,11 @@ void cpp_jit_script_module_save (XPtrTorchScriptModule self,
                                  XPtrTorchstring path)
 {
   lantern_ScriptModule_save(self.get(), path.get());
+}
+
+// [[Rcpp::export]]
+void cpp_jit_script_module_save_for_mobile (XPtrTorchScriptModule self,
+                                 XPtrTorchstring path)
+{
+  lantern_ScriptModule_save_for_mobile(self.get(), path.get());
 }

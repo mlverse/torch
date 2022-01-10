@@ -1,5 +1,5 @@
-#include "torch_types.h"
-#include "utils.h"
+#include <torch.h>
+
 
 void* rcpp_call_hook (void* x, void* hook);
 
@@ -119,4 +119,10 @@ XPtrTorchStack cpp_call_jit_script (Rcpp::XPtr<XPtrTorchJITModule> module,
 {
   XPtrTorchStack out = lantern_call_jit_script(module->get(), inputs.get());
   return out;
+}
+
+// [[Rcpp::export]]
+void cpp_save_traced_fn_for_mobile (Rcpp::XPtr<XPtrTorchFunctionPtr> fn, std::string filename)
+{
+  lantern_traced_fn_save_for_mobile(fn->get(), filename.c_str());
 }

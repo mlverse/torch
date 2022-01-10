@@ -165,6 +165,10 @@ cpp_cuda_current_device <- function() {
     .Call('_torch_cpp_cuda_current_device', PACKAGE = 'torchpkg')
 }
 
+cpp_cuda_get_device_capability <- function(device) {
+    .Call('_torch_cpp_cuda_get_device_capability', PACKAGE = 'torchpkg', device)
+}
+
 cpp_device_type_to_string <- function(device) {
     .Call('_torch_cpp_device_type_to_string', PACKAGE = 'torchpkg', device)
 }
@@ -10589,6 +10593,10 @@ cpp_jit_script_module_save <- function(self, path) {
     invisible(.Call('_torch_cpp_jit_script_module_save', PACKAGE = 'torchpkg', self, path))
 }
 
+cpp_jit_script_module_save_for_mobile <- function(self, path) {
+    invisible(.Call('_torch_cpp_jit_script_module_save_for_mobile', PACKAGE = 'torchpkg', self, path))
+}
+
 test_stack <- function(x) {
     .Call('_torch_test_stack', PACKAGE = 'torchpkg', x)
 }
@@ -10705,10 +10713,6 @@ cpp_torch_tensor_options_print <- function(x) {
     invisible(.Call('_torch_cpp_torch_tensor_options_print', PACKAGE = 'torchpkg', x))
 }
 
-test_fun_hello <- function(x) {
-    .Call('_torch_test_fun_hello', PACKAGE = 'torchpkg', x)
-}
-
 cpp_trace_function <- function(fn, inputs, compilation_unit, name, strict = TRUE, module = NULL, should_mangle = TRUE, manage_memory = TRUE) {
     .Call('_torch_cpp_trace_function', PACKAGE = 'torchpkg', fn, inputs, compilation_unit, name, strict, module, should_mangle, manage_memory)
 }
@@ -10737,6 +10741,10 @@ cpp_call_jit_script <- function(module, inputs) {
     .Call('_torch_cpp_call_jit_script', PACKAGE = 'torchpkg', module, inputs)
 }
 
+cpp_save_traced_fn_for_mobile <- function(fn, filename) {
+    invisible(.Call('_torch_cpp_save_traced_fn_for_mobile', PACKAGE = 'torchpkg', fn, filename))
+}
+
 cpp_nullptr <- function() {
     .Call('_torch_cpp_nullptr', PACKAGE = 'torchpkg')
 }
@@ -10745,12 +10753,12 @@ cpp_nullopt <- function() {
     .Call('_torch_cpp_nullopt', PACKAGE = 'torchpkg')
 }
 
-cpp_optional_int64_t <- function(x) {
-    .Call('_torch_cpp_optional_int64_t', PACKAGE = 'torchpkg', x)
-}
-
 cpp_tensor_undefined <- function() {
     .Call('_torch_cpp_tensor_undefined', PACKAGE = 'torchpkg')
+}
+
+to_index_tensor <- function(t) {
+    .Call('_torch_to_index_tensor', PACKAGE = 'torchpkg', t)
 }
 
 cpp_torch_namespace__use_cudnn_rnn_flatten_weight <- function() {

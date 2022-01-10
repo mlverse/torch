@@ -11,7 +11,8 @@ using namespace torch::jit;
 void * _lantern_CompilationUnit_new ()
 {
     LANTERN_FUNCTION_START;
-    return (void*) new torch::jit::CompilationUnit();
+    auto cu = torch::jit::CompilationUnit();
+    return make_raw::CompilationUnit(cu);
     LANTERN_FUNCTION_END;
 }
 
@@ -21,27 +22,26 @@ void* _lantern_create_traceable_fun (void *(*r_caller)(void *, void *), void* fn
     std::function<Stack(Stack)> tr_fn = [r_caller, fn](Stack x)
     {
         //auto r_fn = *reinterpret_cast<std::function<void*(void*)>*>(fn);
-        auto tmp = LanternObject<Stack>(x);
+        auto tmp = Stack(x);
         void* out = (*r_caller)((void *)(&tmp), fn);
         // if the R function call fails itt will return nullptr by convention.
         if (out == nullptr) 
             throw std::runtime_error("Error in the R function execution.");
 
-        return reinterpret_cast<LanternObject<Stack>*>(out)->get();
+        return *reinterpret_cast<Stack*>(out);
     };
 
-    return (void*) new LanternObject<std::function<Stack(Stack)>>(tr_fn); 
+    return (void*) new std::function<Stack(Stack)>(tr_fn); 
     LANTERN_FUNCTION_END;
 }
 
 void* _lantern_trace_fn (void* fn, void* inputs, void* compilation_unit, bool strict, void* module, void* name, bool should_mangle)
 {
     LANTERN_FUNCTION_START;
-    std::function<Stack(Stack)> fn_ = reinterpret_cast<LanternObject<std::function<Stack(Stack)>>*>(fn)->get();
-    Stack inputs_ = reinterpret_cast<LanternObject<Stack>*>(inputs)->get();
-    CompilationUnit* cu = reinterpret_cast<CompilationUnit*>(compilation_unit);
+    std::function<Stack(Stack)> fn_ = *reinterpret_cast<std::function<Stack(Stack)>*>(fn);
+    Stack inputs_ = *reinterpret_cast<Stack*>(inputs);
     auto module_ = reinterpret_cast<torch::jit::script::Module *>(module);
-    auto name_ = reinterpret_cast<LanternObject<std::string>*>(name)->get();
+    auto name_ = from_raw::string(name);
 
     std::function<std::string(const torch::autograd::Variable&)> var_fn = [](const torch::autograd::Variable& x) {
         return "";
@@ -56,7 +56,8 @@ void* _lantern_trace_fn (void* fn, void* inputs, void* compilation_unit, bool st
         module_
     );
 
-    auto tr_fn = cu->create_function(name_, std::get<0>(traced)->graph, should_mangle);
+    auto tr_fn = from_raw::CompilationUnit(compilation_unit).create_function(
+        name_, std::get<0>(traced)->graph, should_mangle);
     
     return (void*) tr_fn;
     LANTERN_FUNCTION_END;
@@ -66,13 +67,13 @@ void* _lantern_call_traced_fn (void* fn, void* inputs)
 {
     LANTERN_FUNCTION_START
     Function* fn_ = reinterpret_cast<Function *>(fn);
-    Stack inputs_ = reinterpret_cast<LanternObject<Stack>*>(inputs)->get();
+    Stack inputs_ = *reinterpret_cast<Stack*>(inputs);
 
-    auto outputs = new LanternObject<torch::jit::Stack>();
+    auto outputs = torch::jit::Stack();
     auto out = (*fn_)(inputs_);
-    outputs->get().push_back(out);  
+    outputs.push_back(out);  
     
-    return (void*) outputs;
+    return make_ptr<torch::jit::Stack>(outputs);
     LANTERN_FUNCTION_END
 }
 
@@ -126,14 +127,14 @@ void * _lantern_jit_load(const char * path)
 void* _lantern_call_jit_script (void* module, void* inputs)
 {
     LANTERN_FUNCTION_START
-    Stack inputs_ = reinterpret_cast<LanternObject<Stack>*>(inputs)->get();
+    Stack inputs_ = *reinterpret_cast<Stack*>(inputs);
     auto module_ = reinterpret_cast<torch::jit::script::Module *>(module);
 
-    auto outputs = new LanternObject<torch::jit::Stack>();
+    auto outputs = torch::jit::Stack();
     auto out = module_->forward(inputs_);
-    outputs->get().push_back(out);  
+    outputs.push_back(out);  
 
-    return (void*) outputs;
+    return make_ptr<torch::jit::Stack>(outputs);
     LANTERN_FUNCTION_END
 }
 
@@ -179,5 +180,18 @@ void _trace_r_nn_module ()
     LANTERN_FUNCTION_END_VOID;
 }
 
+void _lantern_traced_fn_save_for_mobile (void* fn, const char* filename)
+{
+  LANTERN_FUNCTION_START;
+  Function* fn_ = reinterpret_cast<Function *>(fn);
+  auto filename_ = std::string(filename);
+  
+  Module module("__torch__.PlaceholderModule");
+  
+  module.register_attribute("training", BoolType::get(), true);
+  addFunctionToModule(module, fn_);
+  module._save_for_mobile(filename_);
+  LANTERN_FUNCTION_END_VOID;
+}
 
 

@@ -21,7 +21,8 @@ get_init <- function(x) {
   
 }
 
-#' Helper function to create an R6 class that inherits from the abstract `Dataset` class
+
+#' Helper function to create an function that generates R6 instances of class `dataset`
 #' 
 #' All datasets that represent a map from keys to data samples should subclass this 
 #' class. All subclasses should overwrite the `.getitem()` method, which supports 
@@ -30,6 +31,12 @@ get_init <- function(x) {
 #' (e.g. number of samples) used by many sampler implementations 
 #' and the default options of [dataloader()].
 #' 
+#' @returns 
+#' The output is a function `f` with class `dataset_generator`. Calling `f()`
+#' creates a new instance of the R6 class `dataset`. The R6 class is stored in the 
+#' enclosing environment of `f` and can also be accessed through `f`s attribute 
+#' `Dataset`.
+#' 
 #' @section Get a batch of observations:
 #' 
 #' By default datasets are iterated by returning each observation/item individually.
@@ -37,7 +44,7 @@ get_init <- function(x) {
 #' of observations (eg, subsetting a tensor by multiple indexes at once is faster than
 #' subsetting once for each index), in this case you can implement a `.getbatch` method
 #' that will be used instead of `.getitem` when getting a batch of observations within
-#' the dataloader.
+#' the dataloader. `.getbatch` must work for batches of size larger or equal to 1.
 #' 
 #' @note 
 #' [dataloader()]  by default constructs a index
@@ -77,8 +84,9 @@ print.dataset_generator <- function(x, ...) {
 
 #' @export
 `[.dataset` <- function(x, y) {
-  if (length(y) > 1 && !is.null(x$.getbatch)) {
-    x$.getbatch(as.integer(y))
+  y <- as.integer(y)
+  if (!is.null(x$.getbatch)) {
+    x$.getbatch(y)
   } else {
     x$.getitem(y)
   }
@@ -137,6 +145,9 @@ dataset_subset <- dataset(
   initialize = function(dataset, indices) {
     self$dataset = dataset
     self$indices = indices
+    if (!is.null(dataset$.getbatch)) {
+      self$.getbatch <- self$.getitem
+    }
   },
   
   .getitem = function(idx) {
