@@ -222,6 +222,15 @@ Tensor <- R7Class(
       o <- o$add_(1L, 1L)
       o
     },
+    sort = function(dim = -1L, descending = FALSE, stable) {
+      if (missing(stable)) {
+        o <- private$`_sort`(dim = dim, descending = descending)
+      } else {
+        o <- private$`_sort`(dim = dim, descending = descending, stable = stable)
+      }
+      o[[2]]$add_(1L)
+      o
+    },
     norm = function(p = 2, dim, keepdim = FALSE, dtype) {
       torch_norm(self, p, dim, keepdim, dtype)
     },
