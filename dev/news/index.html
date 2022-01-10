@@ -118,6 +118,9 @@
 <li>Refactored the internal Lantern types and Rcpp types and made clearer which are the exported types that can be used in the C++ extensions. (<a href="https://github.com/mlverse/torch/issues/718" class="external-link">#718</a>)</li>
 <li>
 <code>dataset_subset</code> will use the <code>.getbatch</code> method of the wrapped dataset if one is available. (<a href="https://github.com/mlverse/torch/issues/742" class="external-link">#742</a>, <a href="https://github.com/egillax" class="external-link">@egillax</a>)</li>
+<li>Fixed memory leak when applying custom <code>autograd_function</code>s. (<a href="https://github.com/mlverse/torch/issues/750" class="external-link">#750</a>)</li>
+<li>
+<code>torch_sort</code> and <code>Tensor$sort</code> now return 1-indexed results. (<a href="https://github.com/mlverse/torch/issues/709" class="external-link">#709</a>, <a href="https://github.com/mohamed-180" class="external-link">@mohamed-180</a>)</li>
 </ul></div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="0.6.1" id="torch-061">torch 0.6.1<a class="anchor" aria-label="anchor" href="#torch-061"></a></h2>
