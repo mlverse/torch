@@ -47,6 +47,7 @@ SEXP operator_sexp_optional_scalar_type (const XPtrTorchoptional_scalar_type* x)
 SEXP operator_sexp_optional_string (const XPtrTorchoptional_string* x);
 SEXP operator_sexp_optional_scalar (const XPtrTorchoptional_scalar* x);
 SEXP operator_sexp_optional_memory_format (const XPtrTorchoptional_memory_format* x);
+SEXP operator_sexp_variable_list (const XPtrTorchvariable_list* x);
   
 XPtrTorchTensor from_sexp_tensor (SEXP x);
 XPtrTorchOptionalTensor from_sexp_optional_tensor (SEXP x);
@@ -95,5 +96,7 @@ XPtrTorchoptional_scalar_type from_sexp_optional_scalar_type (SEXP x);
 XPtrTorchoptional_string from_sexp_optional_string (SEXP x);
 XPtrTorchoptional_memory_format from_sexp_optional_memory_format (SEXP x);
 XPtrTorchoptional_scalar from_sexp_optional_scalar (SEXP x);
+XPtrTorchvector_string from_sexp_vector_string (SEXP x);
+XPtrTorchvariable_list from_sexp_variable_list (SEXP x);
 
 #endif // TORCH_API

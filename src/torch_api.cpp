@@ -871,6 +871,17 @@ SEXP operator_sexp_vector_string (const XPtrTorchvector_string * self)
   return Rcpp::wrap(output);
 }
 
+XPtrTorchvector_string from_sexp_vector_string (SEXP x)
+{
+  XPtrTorchvector_string out = lantern_vector_string_new();
+  auto strings = Rcpp::as<std::vector<std::string>>(x);
+  for (int i = 0; i < strings.size(); i ++)
+  {
+    lantern_vector_string_push_back(out.get(), strings.at(i).c_str());
+  }
+  return out;
+}
+
 void delete_vector_string (void* x)
 {
   lantern_vector_string_delete(x);
@@ -1833,6 +1844,32 @@ void delete_optional_double (void* x)
 }
 
 // variable_list
+
+XPtrTorchvariable_list from_sexp_variable_list (SEXP x)
+{
+  auto list = Rcpp::as<Rcpp::List>(x);
+  XPtrTorchvariable_list out = lantern_variable_list_new();
+  
+  for (int i = 0; i < list.length(); i++)
+  {
+    lantern_variable_list_push_back(out.get(), Rcpp::as<XPtrTorchTensor>(list[i]).get());
+  }
+  
+  return out;
+}
+
+SEXP operator_sexp_variable_list (const XPtrTorchvariable_list* self)
+{
+  Rcpp::List out;
+  int64_t sze = lantern_variable_list_size(self->get());
+  
+  for (int64_t i = 0; i < sze; i++)
+  {
+    out.push_back(XPtrTorchTensor(lantern_variable_list_get(self->get(), i)));
+  }
+  
+  return out;
+}
 
 void delete_variable_list (void* x)
 {

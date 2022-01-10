@@ -56,6 +56,7 @@ IMPORT_SEXP_OPERATOR(operator_sexp_optional_scalar, XPtrTorchoptional_scalar)
 IMPORT_SEXP_OPERATOR(operator_sexp_optional_string, XPtrTorchoptional_string)
 IMPORT_SEXP_OPERATOR(operator_sexp_optional_scalar_type, XPtrTorchoptional_scalar_type)
 IMPORT_SEXP_OPERATOR(operator_sexp_optional_memory_format, XPtrTorchoptional_memory_format)
+IMPORT_SEXP_OPERATOR(operator_sexp_variable_list, XPtrTorchvariable_list)
   
 #define IMPORT_FROM_SEXP(name, type)                                               \
   type name (SEXP x)                                                               \
@@ -114,6 +115,8 @@ IMPORT_FROM_SEXP(from_sexp_optional_scalar, XPtrTorchoptional_scalar)
 IMPORT_FROM_SEXP(from_sexp_optional_string, XPtrTorchoptional_string)
 IMPORT_FROM_SEXP(from_sexp_optional_scalar_type, XPtrTorchoptional_scalar_type)
 IMPORT_FROM_SEXP(from_sexp_optional_memory_format, XPtrTorchoptional_memory_format)
+IMPORT_FROM_SEXP(from_sexp_vector_string , XPtrTorchvector_string) 
+IMPORT_FROM_SEXP(from_sexp_variable_list, XPtrTorchvariable_list)
     
 #define IMPORT_DELETER(name)                                                 \
     void name (void* x)                                                      \

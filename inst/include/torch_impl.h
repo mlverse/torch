@@ -40,6 +40,16 @@ XPtrTorchTensorList::operator SEXP () const {
 XPtrTorchTensorList::XPtrTorchTensorList (SEXP x):
   XPtrTorch{from_sexp_tensor_list(x)} {}
 
+// variable_list
+
+XPtrTorchvariable_list::operator SEXP() const
+{
+  return operator_sexp_variable_list(this);
+}
+
+XPtrTorchvariable_list::XPtrTorchvariable_list (SEXP x):
+  XPtrTorch{from_sexp_variable_list(x)} {}
+
 // scalar type
 
 XPtrTorchScalarType::operator SEXP () const {
@@ -212,6 +222,9 @@ XPtrTorchvector_string::operator SEXP () const
 {
   return operator_sexp_vector_string(this);
 }
+
+XPtrTorchvector_string::XPtrTorchvector_string (SEXP x):
+  XPtrTorch{from_sexp_vector_string(x)} {}
 
 // vector scalar
 
