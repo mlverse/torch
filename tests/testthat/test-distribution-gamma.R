@@ -16,7 +16,7 @@ test_that("Gamma distribution - rsample", {
     x$sum()$backward()
     results <- x$sort()
     x <- results[[1]]
-    ind <- results[[2]] + 1
+    ind <- results[[2]]
     ind <- as.array(ind)
     x <- as.array(x$detach())
     
