@@ -67,10 +67,8 @@ When inputs are on a CUDA device, this function synchronizes that device with th
 if \code{p} is one of \verb{('fro', 'nuc', inf, -inf, 1, -1)}.
 }
 \examples{
-if (torch_is_installed()) {
 a <- torch_tensor(rbind(c(1., 0, -1), c(0, 1, 0), c(1, 0, 1)))
 linalg_cond(a)
 linalg_cond(a, "fro")
- 
-}
+
 }

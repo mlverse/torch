@@ -18,10 +18,8 @@ dtype. If the input tensor is not a bool tensor, zeros are treated as \code{FALS
 }
 
 \examples{
-if (torch_is_installed()) {
 
 torch_logical_not(torch_tensor(c(TRUE, FALSE)))
-torch_logical_not(torch_tensor(c(0, 1, -10), dtype=torch_int8()))
-torch_logical_not(torch_tensor(c(0., 1.5, -10.), dtype=torch_double()))
-}
+torch_logical_not(torch_tensor(c(0, 1, -10), dtype = torch_int8()))
+torch_logical_not(torch_tensor(c(0., 1.5, -10.), dtype = torch_double()))
 }

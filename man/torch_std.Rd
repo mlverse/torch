@@ -47,15 +47,13 @@ via the biased estimator. Otherwise, Bessel's correction will be used.
 }
 
 \examples{
-if (torch_is_installed()) {
 
-a = torch_randn(c(1, 3))
+a <- torch_randn(c(1, 3))
 a
 torch_std(a)
 
 
-a = torch_randn(c(4, 4))
+a <- torch_randn(c(4, 4))
 a
-torch_std(a, dim=1)
-}
+torch_std(a, dim = 1)
 }

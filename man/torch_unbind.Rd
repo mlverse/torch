@@ -24,8 +24,6 @@ Returns a tuple of all slices along a given dimension, already without it.
 }
 
 \examples{
-if (torch_is_installed()) {
 
-torch_unbind(torch_tensor(matrix(1:9, ncol = 3, byrow=TRUE)))
-}
+torch_unbind(torch_tensor(matrix(1:9, ncol = 3, byrow = TRUE)))
 }

@@ -15,14 +15,12 @@ Also supports batches of matrices, and if \code{A} is a batch of matrices then
 the output has the same batch dimensions.
 }
 \examples{
-if (torch_is_installed()) {
-a <- torch_randn(3,3)
+a <- torch_randn(3, 3)
 linalg_det(a)
 
-a <- torch_randn(3,3,3)
+a <- torch_randn(3, 3, 3)
 linalg_det(a)
 
-}
 }
 \seealso{
 Other linalg: 

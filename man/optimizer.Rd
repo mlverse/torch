@@ -44,7 +44,6 @@ creation and usage.
 }
 
 \examples{
-if (torch_is_installed()) {
 
 # In this example we will create a custom optimizer
 # that's just a simplified version of the `optim_sgd` function.
@@ -62,10 +61,11 @@ optim_sgd2 <- optimizer(
         group <- self$param_groups[[g]]
         for (p in seq_along(group$params)) {
           param <- group$params[[p]]
-          
-          if (is.null(param$grad) || is_undefined_tensor(param$grad))
+
+          if (is.null(param$grad) || is_undefined_tensor(param$grad)) {
             next
-          
+          }
+
           param$add_(param$grad, alpha = -group$learning_rate)
         }
       }
@@ -83,5 +83,4 @@ for (i in 1:100) {
 }
 all.equal(x$item(), 0, tolerance = 1e-9)
 
-}
 }

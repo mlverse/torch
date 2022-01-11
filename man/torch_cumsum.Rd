@@ -32,10 +32,8 @@ a vector of size N, with elements.
 }
 
 \examples{
-if (torch_is_installed()) {
 
-a = torch_randn(c(10))
+a <- torch_randn(c(10))
 a
-torch_cumsum(a, dim=1)
-}
+torch_cumsum(a, dim = 1)
 }

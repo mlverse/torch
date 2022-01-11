@@ -15,7 +15,6 @@ Modules will be added to it in the order they are passed in the constructor.
 See examples.
 }
 \examples{
-if (torch_is_installed()) {
 
 model <- nn_sequential(
   nn_conv2d(1, 20, 5),
@@ -26,5 +25,4 @@ model <- nn_sequential(
 input <- torch_randn(32, 1, 28, 28)
 output <- model(input)
 
-}
 }

@@ -39,10 +39,8 @@ The boolean option \code{sorted} if \code{TRUE}, will make sure that the returne
 }
 
 \examples{
-if (torch_is_installed()) {
 
-x = torch_arange(1., 6.)
+x <- torch_arange(1., 6.)
 x
 torch_topk(x, 3)
-}
 }

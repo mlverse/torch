@@ -25,8 +25,6 @@ The complementary error function is defined as follows:
 }
 
 \examples{
-if (torch_is_installed()) {
 
 torch_erfc(torch_tensor(c(0, -1., 10.)))
-}
 }

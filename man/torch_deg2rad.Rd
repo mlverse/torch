@@ -21,9 +21,7 @@ converted from angles in degrees to radians.
 }
 
 \examples{
-if (torch_is_installed()) {
 
 a <- torch_tensor(rbind(c(180.0, -180.0), c(360.0, -360.0), c(90.0, -90.0)))
 torch_deg2rad(a)
-}
 }

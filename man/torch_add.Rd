@@ -48,17 +48,15 @@ a real number, otherwise it should be an integer.
 }
 
 \examples{
-if (torch_is_installed()) {
 
-a = torch_randn(c(4))
+a <- torch_randn(c(4))
 a
 torch_add(a, 20)
 
 
-a = torch_randn(c(4))
+a <- torch_randn(c(4))
 a
-b = torch_randn(c(4, 1))
+b <- torch_randn(c(4, 1))
 b
 torch_add(a, b)
-}
 }

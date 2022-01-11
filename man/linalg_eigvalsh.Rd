@@ -42,11 +42,9 @@ The eigenvalues are returned in ascending order.
 }
 }
 \examples{
-if (torch_is_installed()) {
 a <- torch_randn(2, 2)
 linalg_eigvalsh(a)
 
-}
 }
 \seealso{
 \itemize{

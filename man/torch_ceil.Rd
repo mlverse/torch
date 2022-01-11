@@ -25,10 +25,8 @@ the smallest integer greater than or equal to each element.
 }
 
 \examples{
-if (torch_is_installed()) {
 
-a = torch_randn(c(4))
+a <- torch_randn(c(4))
 a
 torch_ceil(a)
-}
 }

@@ -47,11 +47,9 @@ even length and odd signals will not round-trip properly. So, it is recommended
 to always pass the signal length n.
 }
 \examples{
-if (torch_is_installed()) {
 t <- torch_arange(start = 0, end = 4)
 x <- torch_fft_rfft(t)
 torch_fft_irfft(x)
 torch_fft_irfft(x, n = t$numel())
 
-}
 }

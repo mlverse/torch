@@ -24,8 +24,6 @@ Computes the zeroth order modified Bessel function of the first kind for each el
 }
 
 \examples{
-if (torch_is_installed()) {
 
-torch_i0(torch_arange(start = 0, end = 5, dtype=torch_float32()))
-}
+torch_i0(torch_arange(start = 0, end = 5, dtype = torch_float32()))
 }

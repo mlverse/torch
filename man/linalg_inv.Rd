@@ -35,11 +35,9 @@ It is always prefered to use \code{\link[=linalg_solve]{linalg_solve()}} when po
 numerically stable than computing the inverse explicitly.
 }
 \examples{
-if (torch_is_installed()) {
 A <- torch_randn(4, 4)
 linalg_inv(A)
 
-}
 }
 \seealso{
 \code{\link[=linalg_pinv]{linalg_pinv()}} computes the pseudoinverse (Moore-Penrose inverse) of matrices

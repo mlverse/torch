@@ -28,10 +28,8 @@ Returns a new tensor with the natural logarithm of (1 + \code{input}).
 }
 
 \examples{
-if (torch_is_installed()) {
 
-a = torch_randn(c(5))
+a <- torch_randn(c(5))
 a
 torch_log1p(a)
-}
 }

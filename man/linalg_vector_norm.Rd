@@ -55,8 +55,7 @@ supported:\tabular{lll}{
 }
 }
 \examples{
-if (torch_is_installed()) {
-a <- torch_arange(0, 8, dtype=torch_float()) - 4
+a <- torch_arange(0, 8, dtype = torch_float()) - 4
 a
 b <- a$reshape(c(3, 3))
 b
@@ -64,7 +63,6 @@ b
 linalg_vector_norm(a, ord = 3.5)
 linalg_vector_norm(b, ord = 3.5)
 
-}
 }
 \seealso{
 Other linalg: 

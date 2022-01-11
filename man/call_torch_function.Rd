@@ -28,7 +28,6 @@ the documentation for the corresponding function in the Pytorch C++ API. General
 for development and advanced use only.
 }
 \examples{
-if (torch_is_installed()) {
 ## many unexported functions do 'backward' calculations (e.g. derivatives)
 ## These could be used as a part of custom autograd functions for example.
 x <- torch_randn(10, requires_grad = TRUE)
@@ -39,7 +38,6 @@ x$grad
 ## we can get the same result by calling the unexported `torch_tanh_backward()`
 ## function. The first argument is 1 to setup the Jacobian-vector product.
 ## see https://pytorch.org/blog/overview-of-pytorch-autograd-engine/ for details.
-call_torch_function("torch_tanh_backward", 1, y) 
+call_torch_function("torch_tanh_backward", 1, y)
 all.equal(call_torch_function("torch_tanh_backward", 1, y, quiet = TRUE), x$grad)
-}
 }

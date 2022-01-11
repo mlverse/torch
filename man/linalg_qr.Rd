@@ -48,14 +48,12 @@ If \code{A} has shape \verb{(*, m, n)}, denoting \code{k = min(m, n)}
 }
 }
 \examples{
-if (torch_is_installed()) {
 a <- torch_tensor(rbind(c(12., -51, 4), c(6, 167, -68), c(-4, 24, -41)))
 qr <- linalg_qr(a)
 
 torch_mm(qr[[1]], qr[[2]])$round()
 torch_mm(qr[[1]]$t(), qr[[1]])$round()
 
-}
 }
 \seealso{
 Other linalg: 

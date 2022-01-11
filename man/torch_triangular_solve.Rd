@@ -42,12 +42,10 @@ batched outputs \code{X}
 }
 
 \examples{
-if (torch_is_installed()) {
 
-A = torch_randn(c(2, 2))$triu()
+A <- torch_randn(c(2, 2))$triu()
 A
-b = torch_randn(c(2, 3))
+b <- torch_randn(c(2, 3))
 b
 torch_triangular_solve(b, A)
-}
 }

@@ -83,12 +83,10 @@ values, as it also depends on the computaiton of \teqn{\frac{1}{\sigma_i}}.
 }
 
 \examples{
-if (torch_is_installed()) {
 
 a <- torch_randn(5, 3)
-linalg_svd(a, full_matrices=FALSE)
+linalg_svd(a, full_matrices = FALSE)
 
-}
 }
 \seealso{
 \itemize{

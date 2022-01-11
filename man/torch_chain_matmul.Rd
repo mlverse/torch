@@ -24,12 +24,10 @@ If \eqn{N} is 1, then this is a no-op - the original matrix is returned as is.
 }
 
 \examples{
-if (torch_is_installed()) {
 
-a = torch_randn(c(3, 4))
-b = torch_randn(c(4, 5))
-c = torch_randn(c(5, 6))
-d = torch_randn(c(6, 7))
+a <- torch_randn(c(3, 4))
+b <- torch_randn(c(4, 5))
+c <- torch_randn(c(5, 6))
+d <- torch_randn(c(6, 7))
 torch_chain_matmul(list(a, b, c, d))
-}
 }

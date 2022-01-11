@@ -20,8 +20,6 @@ Returns a new tensor with boolean elements representing if each element is \code
 }
 
 \examples{
-if (torch_is_installed()) {
 
 torch_isnan(torch_tensor(c(1, NaN, 2)))
-}
 }

@@ -31,13 +31,11 @@ Calculates log determinant of a square matrix or batches of square matrices.
 }
 
 \examples{
-if (torch_is_installed()) {
 
-A = torch_randn(c(3, 3))
+A <- torch_randn(c(3, 3))
 torch_det(A)
 torch_logdet(A)
 A
 A$det()
 A$det()$log()
-}
 }

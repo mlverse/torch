@@ -29,11 +29,9 @@ Also supports batches of matrices, and if \code{A} is a batch of matrices then
 the output has the same batch dimensions.
 }
 \examples{
-if (torch_is_installed()) {
 a <- torch_eye(10)
 linalg_cholesky(a)
 
-}
 }
 \seealso{
 \itemize{

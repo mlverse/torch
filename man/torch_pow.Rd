@@ -52,9 +52,8 @@ The operation applied is:
 }
 
 \examples{
-if (torch_is_installed()) {
 
-a = torch_randn(c(4))
+a <- torch_randn(c(4))
 a
 torch_pow(a, 2)
 exp <- torch_arange(1, 5)
@@ -67,5 +66,4 @@ torch_pow(a, exp)
 exp <- torch_arange(1, 5)
 base <- 2
 torch_pow(base, exp)
-}
 }

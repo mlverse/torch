@@ -31,12 +31,10 @@ argument below.
 See \link{jit_trace} for more information on tracing.
 }
 \examples{
-if (torch_is_installed()) {
 linear <- nn_linear(10, 1)
 tr_linear <- jit_trace_module(linear, forward = list(torch_randn(10, 10)))
 
 x <- torch_randn(10, 10)
 torch_allclose(linear(x), tr_linear(x))
 
-}
 }

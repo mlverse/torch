@@ -29,7 +29,6 @@ Returns the matrix norm or vector norm of a given tensor.
 }
 
 \examples{
-if (torch_is_installed()) {
 
 a <- torch_arange(1, 9, dtype = torch_float())
 b <- a$reshape(list(3, 3))
@@ -38,5 +37,4 @@ torch_norm(b)
 torch_norm(a, Inf)
 torch_norm(b, Inf)
 
-}
 }

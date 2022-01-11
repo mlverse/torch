@@ -40,7 +40,7 @@ Proposed in \href{https://jmlr.org/papers/v12/duchi11a.html}{Adaptive Subgradien
 \note{
 Update rule:
 \deqn{
-\theta_{t+1} = \theta_{t} - \frac{\eta }{\sqrt{G_{t} + \epsilon}} \odot g_{t} 
+\theta_{t+1} = \theta_{t} - \frac{\eta }{\sqrt{G_{t} + \epsilon}} \odot g_{t}
 }
 The equation above and some remarks quoted
 after \href{https://ruder.io/optimizing-gradient-descent/index.html#adagrad}{\emph{An overview of gradient descent optimization algorithms}}

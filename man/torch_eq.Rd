@@ -26,8 +26,6 @@ broadcastable  with the first argument.
 }
 
 \examples{
-if (torch_is_installed()) {
 
-torch_eq(torch_tensor(c(1,2,3,4)), torch_tensor(c(1, 3, 2, 4)))
-}
+torch_eq(torch_tensor(c(1, 2, 3, 4)), torch_tensor(c(1, 3, 2, 4)))
 }

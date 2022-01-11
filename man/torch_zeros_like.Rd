@@ -46,9 +46,7 @@ the old \code{torch_zeros_like(input, out=output)} is equivalent to
 }
 
 \examples{
-if (torch_is_installed()) {
 
-input = torch_empty(c(2, 3))
+input <- torch_empty(c(2, 3))
 torch_zeros_like(input)
-}
 }

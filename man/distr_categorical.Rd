@@ -41,9 +41,7 @@ will return this normalized value.
 See also: \code{\link[=torch_multinomial]{torch_multinomial()}}
 }
 \examples{
-if (torch_is_installed()) {
 m <- distr_categorical(torch_tensor(c(0.25, 0.25, 0.25, 0.25)))
-m$sample()  # equal probability of 1,2,3,4
+m$sample() # equal probability of 1,2,3,4
 
-}
 }

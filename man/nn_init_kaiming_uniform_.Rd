@@ -30,9 +30,7 @@ described in \verb{Delving deep into rectifiers: Surpassing human-level performa
 uniform distribution.
 }
 \examples{
-if (torch_is_installed()) {
 w <- torch_empty(3, 5)
 nn_init_kaiming_uniform_(w, mode = "fan_in", nonlinearity = "leaky_relu")
 
-}
 }

@@ -34,7 +34,5 @@ step size determined by the target output size.
 The number of output features is equal to the number of input planes.
 }
 \examples{
-if (torch_is_installed()) {
 
-}
 }

@@ -28,9 +28,7 @@ When \code{other} is a tensor, the shapes of \code{input} and
 }
 
 \examples{
-if (torch_is_installed()) {
 
 torch_remainder(torch_tensor(c(-3., -2, -1, 1, 2, 3)), 2)
 torch_remainder(torch_tensor(c(1., 2, 3, 4, 5)), 1.5)
-}
 }

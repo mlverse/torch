@@ -24,8 +24,6 @@ Computes the base two exponential function of \code{input}.
 }
 
 \examples{
-if (torch_is_installed()) {
 
 torch_exp2(torch_tensor(c(0, log2(2.), 3, 4)))
-}
 }

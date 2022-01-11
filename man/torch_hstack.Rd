@@ -23,13 +23,11 @@ along the second axis for all other tensors.
 }
 
 \examples{
-if (torch_is_installed()) {
 
 a <- torch_tensor(c(1, 2, 3))
 b <- torch_tensor(c(4, 5, 6))
-torch_hstack(list(a,b))
-a <- torch_tensor(rbind(1,2,3))
-b <- torch_tensor(rbind(4,5,6))
-torch_hstack(list(a,b))
-}
+torch_hstack(list(a, b))
+a <- torch_tensor(rbind(1, 2, 3))
+b <- torch_tensor(rbind(4, 5, 6))
+torch_hstack(list(a, b))
 }

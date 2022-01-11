@@ -25,9 +25,7 @@ broadcastable .
 }
 
 \examples{
-if (torch_is_installed()) {
 
 eps <- torch_finfo(torch_float32())$eps
 torch_nextafter(torch_tensor(c(1, 2)), torch_tensor(c(2, 1))) == torch_tensor(c(eps + 1, 2 - eps))
-}
 }

@@ -22,12 +22,9 @@ Creates a normal (also called Gaussian) distribution parameterized by
 \code{loc} and \code{scale}.
 }
 \examples{
-if (torch_is_installed()) {
 m <- distr_normal(loc = 0, scale = 1)
-m$sample()  # normally distributed with loc=0 and scale=1
+m$sample() # normally distributed with loc=0 and scale=1
 
-
-}
 }
 \seealso{
 \link{Distribution} for details on the available methods.

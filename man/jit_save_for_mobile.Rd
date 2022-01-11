@@ -19,7 +19,6 @@ Saves a \code{script_function} or \code{script_module} in bytecode form,
 to be loaded on a mobile device
 }
 \examples{
-if (torch_is_installed()) {
 fn <- function(x) {
   torch_relu(x)
 }
@@ -30,5 +29,4 @@ tr_fn <- jit_trace(fn, input)
 tmp <- tempfile("tst", fileext = "pt")
 jit_save_for_mobile(tr_fn, tmp)
 
-}
 }

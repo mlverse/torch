@@ -34,11 +34,9 @@ elementwise, for all elements of \code{input} and \code{other}. The behaviour of
 }
 
 \examples{
-if (torch_is_installed()) {
 
 torch_allclose(torch_tensor(c(10000., 1e-07)), torch_tensor(c(10000.1, 1e-08)))
 torch_allclose(torch_tensor(c(10000., 1e-08)), torch_tensor(c(10000.1, 1e-09)))
 torch_allclose(torch_tensor(c(1.0, NaN)), torch_tensor(c(1.0, NaN)))
-torch_allclose(torch_tensor(c(1.0, NaN)), torch_tensor(c(1.0, NaN)), equal_nan=TRUE)
-}
+torch_allclose(torch_tensor(c(1.0, NaN)), torch_tensor(c(1.0, NaN)), equal_nan = TRUE)
 }

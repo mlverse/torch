@@ -50,10 +50,8 @@ in such cases.
 }
 
 \examples{
-if (torch_is_installed()) {
 
 torch_arange(start = 0, end = 5)
 torch_arange(1, 4)
 torch_arange(1, 2.5, 0.5)
-}
 }

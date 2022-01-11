@@ -23,13 +23,11 @@ tensors have been reshaped by \code{\link[=torch_atleast_3d]{torch_atleast_3d()}
 }
 
 \examples{
-if (torch_is_installed()) {
 
 a <- torch_tensor(c(1, 2, 3))
 b <- torch_tensor(c(4, 5, 6))
-torch_dstack(list(a,b))
-a <- torch_tensor(rbind(1,2,3))
-b <- torch_tensor(rbind(4,5,6))
-torch_dstack(list(a,b))
-}
+torch_dstack(list(a, b))
+a <- torch_tensor(rbind(1, 2, 3))
+b <- torch_tensor(rbind(4, 5, 6))
+torch_dstack(list(a, b))
 }

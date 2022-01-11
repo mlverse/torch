@@ -65,22 +65,20 @@ but they must be broadcastable .
 }
 
 \examples{
-if (torch_is_installed()) {
 
-a = torch_randn(c(1, 3))
+a <- torch_randn(c(1, 3))
 a
 torch_max(a)
 
 
-a = torch_randn(c(4, 4))
+a <- torch_randn(c(4, 4))
 a
 torch_max(a, dim = 1)
 
 
-a = torch_randn(c(4))
+a <- torch_randn(c(4))
 a
-b = torch_randn(c(4))
+b <- torch_randn(c(4))
 b
 torch_max(a, other = b)
-}
 }

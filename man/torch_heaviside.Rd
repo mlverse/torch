@@ -31,12 +31,10 @@ The Heaviside step function is defined as:
 }
 
 \examples{
-if (torch_is_installed()) {
 
 input <- torch_tensor(c(-1.5, 0, 2.0))
 values <- torch_tensor(c(0.5))
 torch_heaviside(input, values)
 values <- torch_tensor(c(1.2, -2.0, 3.5))
 torch_heaviside(input, values)
-}
 }

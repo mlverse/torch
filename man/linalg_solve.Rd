@@ -44,13 +44,11 @@ This function computes \code{X = A$inverse() @ B} in a faster and
 more numerically stable way than performing the computations separately.
 }
 \examples{
-if (torch_is_installed()) {
 A <- torch_randn(3, 3)
 b <- torch_randn(3)
 x <- linalg_solve(A, b)
 torch_allclose(torch_matmul(A, x), b)
 
-}
 }
 \seealso{
 Other linalg: 

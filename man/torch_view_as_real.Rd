@@ -28,12 +28,10 @@ represents the real and imaginary components of complex numbers.
 }
 
 \examples{
-if (torch_is_installed()) {
 
 if (FALSE) {
-x <- torch_randn(4, dtype=torch_cfloat())
-x
-torch_view_as_real(x)
-}
+  x <- torch_randn(4, dtype = torch_cfloat())
+  x
+  torch_view_as_real(x)
 }
 }

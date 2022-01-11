@@ -36,13 +36,11 @@ This function only uses the values strictly below the main diagonal of \code{A}.
 The other values are ignored.
 }
 \examples{
-if (torch_is_installed()) {
 A <- torch_randn(2, 2)
 h_tau <- torch_geqrf(A)
 Q <- linalg_householder_product(h_tau[[1]], h_tau[[2]])
 torch_allclose(Q, linalg_qr(A)[[1]])
 
-}
 }
 \seealso{
 \itemize{

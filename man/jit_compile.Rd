@@ -14,11 +14,10 @@ See the \href{https://pytorch.org/docs/stable/jit_language_reference.html#langua
 documentation on how to write TorchScript code.
 }
 \examples{
-if (torch_is_installed()) {
 comp <- jit_compile("
 def fn (x):
   return torch.abs(x)
-  
+
 def foo (x):
   return torch.sum(x)
 
@@ -27,5 +26,4 @@ def foo (x):
 comp$fn(torch_tensor(-1))
 comp$foo(torch_randn(10))
 
-}
 }
