@@ -35,7 +35,7 @@ jobs:
           - os: windows-latest
             install: 1
             r_version: "3.6"
-            
+
     runs-on: ${{ matrix.os }}
     name: ${{ matrix.os }} (${{ matrix.r_version }})
     timeout-minutes: 120
@@ -66,7 +66,7 @@ jobs:
         run: Rscript -e "install.packages(c('remotes', 'rcmdcheck'))" -e "remotes::install_deps(dependencies = TRUE)"
       - name: Build lantern and get libtorch
         if: matrix.install == 0 || contains( github.event.pull_request.labels.*.name, 'lantern')
-        run: | 
+        run: |
           Rscript tools/buildlantern.R
       - name: Check
         run:  |
@@ -85,7 +85,7 @@ jobs:
   gpu:
     strategy:
       fail-fast: false
-      matrix: 
+      matrix:
         cuda: ["102", "111"]
     runs-on: [self-hosted, linux]
     env:
@@ -103,10 +103,10 @@ jobs:
         run: docker build -f $DOCKER_FILE -t $DOCKER_TAG .
       - name: Run checks
         run: docker run --rm --gpus all -e BUILD_LANTERN $DOCKER_TAG sh torch/tools/check.sh
-  
+
   start-runner:
     runs-on: ubuntu-18.04
-    if: ${{ github.ref == 'refs/heads/master' || contains( github.event.pull_request.labels.*.name, 'win-gpu') }} 
+    if: ${{ github.ref == 'refs/heads/master' || contains( github.event.pull_request.labels.*.name, 'win-gpu') }}
     steps:
     - name: Set up Cloud SDK
       uses: google-github-actions/setup-gcloud@master
@@ -135,12 +135,12 @@ jobs:
         echo 'Add-Type -AssemblyName System.IO.Compression.FileSystem ; [System.IO.Compression.ZipFile]::ExtractToDirectory("$PWD/actions-runner-win-x64-2.277.1.zip", "$PWD")' >> s.ps
         echo "./config.cmd --url https://github.com/mlverse/torch --token ${{ steps.token.outputs.result }} --name 'runner-${{ github.run_number }}' --labels 'run-${{ github.run_number}}' --unattended" >> s.ps
         echo 'Start-Process -FilePath "./run.cmd"' >> s.ps
-        
+
     - name: Show File
       run: |
         cat s.ps
     - name: Create instance
-      run: | 
+      run: |
         gcloud components install beta --quiet
         gcloud beta compute --project=rstudio-cloudml instances create runner-${{github.run_number}} \
           --zone=us-central1-a \
@@ -152,10 +152,10 @@ jobs:
     - name: Wait for runner registration
       run: |
         sleep 2m 30s
-        
+
   delete-runner:
     if: ${{ success() || failure() || cancelled() }}
-    needs: ['windows-gpu', 'start-runner'] 
+    needs: ['windows-gpu', 'start-runner']
     runs-on: ubuntu-18.04
     steps:
     - name: Set up Cloud SDK
@@ -164,7 +164,7 @@ jobs:
         project_id: ${{ secrets.GCP_PROJECT_ID }}
         service_account_key: ${{ secrets.GCP_APPLICATION_CREDENTIALS }}
         export_default_credentials: true
-    
+
     - name: Delete runner instance
       run: |
         gcloud compute --project=rstudio-cloudml instances delete runner-${{github.run_number}} --zone=us-central1-a
@@ -179,17 +179,17 @@ jobs:
             owner: 'mlverse',
             repo: 'torch'
           });
-          
+
           const runner_id = runners.data.runners.filter((runner) => {
             return runner.name === 'runner-${{ github.run_number }}';
           })[0].id
-          
+
           await github.actions.deleteSelfHostedRunnerFromRepo({
             owner: 'mlverse',
             repo: 'torch',
             runner_id: runner_id
           });
- 
+
   windows-gpu:
     needs: ['start-runner']
     strategy:
@@ -197,7 +197,7 @@ jobs:
       matrix:
         r_version: ["release"]
         cuda: ["11.1"]
-            
+
     runs-on: [self-hosted, windows, 'run-${{ github.run_number}}']
     name: 'Windows | CUDA: ${{ matrix.cuda }}'
     timeout-minutes: 120
@@ -208,7 +208,7 @@ jobs:
       TORCH_TEST: 1
       TORCH_INSTALL: 1
       CUDA: ${{ matrix.cuda }}
-      
+
     steps:
       - uses: actions/checkout@v2
       - uses: r-lib/actions/setup-r@master
@@ -216,11 +216,11 @@ jobs:
           r-version: ${{ matrix.r_version }}
       - uses: r-lib/actions/setup-pandoc@master
       - name: Install dependencies
-        run: | 
+        run: |
           Rscript -e "options(repos=structure(c(CRAN='https://cloud.r-project.org/'))); install.packages(c('remotes', 'rcmdcheck', 'fs'))" -e "remotes::install_deps(dependencies = TRUE)"
       - name: Build lantern and get libtorch
         if: contains( github.event.pull_request.labels.*.name, 'lantern')
-        run: | 
+        run: |
           Rscript tools/buildlantern.R
       - name: Check
         run:  |
