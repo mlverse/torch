@@ -8,6 +8,7 @@
 #include "torch_types.h"
 #include "torch_api.h"
 #include "utils.h"
+#include "thread_utils.h"
 #include "torch_impl.h"
 
 #ifdef IMPORT_TORCH
