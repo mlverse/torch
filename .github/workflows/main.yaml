@@ -79,7 +79,9 @@ jobs:
         shell: bash
       - name: Logs
         if: ${{ failure() }}
-        run: cat lantern.log
+        run: if [ -f lantern.log ]; then cat lantern.log; fi
+        shell: bash
+
   gpu:
     strategy:
       fail-fast: false
