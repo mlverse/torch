@@ -3,12 +3,14 @@
 #define __TORCH
 
 #include <Rcpp.h>
+
 #include <memory>
 #include <string>
-#include "torch_types.h"
+
 #include "torch_api.h"
-#include "utils.h"
 #include "torch_impl.h"
+#include "torch_types.h"
+#include "utils.h"
 
 #ifdef IMPORT_TORCH
 
@@ -27,6 +29,5 @@
 #undef TRUE
 #endif
 
-#endif // IMPORT_TORCH
-#endif // __TORCH
-
+#endif  // IMPORT_TORCH
+#endif  // __TORCH

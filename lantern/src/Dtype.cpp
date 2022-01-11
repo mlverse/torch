@@ -2,17 +2,13 @@
 
 #define LANTERN_BUILD
 
-#include "lantern/lantern.h"
-
 #include <torch/torch.h>
 
+#include "lantern/lantern.h"
 #include "utils.hpp"
 
-#define LANTERN_DTYPE_FUN(name, type)                    \
-  void* _lantern_Dtype_##name ()                           \
-  {                                                      \
-    return make_raw::Dtype(torch::type);              \
-  }
+#define LANTERN_DTYPE_FUN(name, type) \
+  void *_lantern_Dtype_##name() { return make_raw::Dtype(torch::type); }
 
 LANTERN_DTYPE_FUN(float16, kFloat16)
 LANTERN_DTYPE_FUN(float32, kFloat32)
@@ -27,8 +23,7 @@ LANTERN_DTYPE_FUN(quint8, kQUInt8)
 LANTERN_DTYPE_FUN(qint8, kQInt8)
 LANTERN_DTYPE_FUN(qint32, kQInt32)
 
-const char *_lantern_Dtype_type(void *dtype)
-{
+const char *_lantern_Dtype_type(void *dtype) {
   LANTERN_FUNCTION_START
   std::string str = toString(from_raw::Dtype(dtype));
   char *cstr = new char[str.length() + 1];
@@ -37,16 +32,14 @@ const char *_lantern_Dtype_type(void *dtype)
   LANTERN_FUNCTION_END
 }
 
-void _lantern_set_default_dtype(void *dtype)
-{
+void _lantern_set_default_dtype(void *dtype) {
   LANTERN_FUNCTION_START
   torch::Dtype dt = from_raw::Dtype(dtype);
   torch::set_default_dtype(c10::scalarTypeToTypeMeta(dt));
   LANTERN_FUNCTION_END_VOID
 }
 
-void *_lantern_get_default_dtype()
-{
+void *_lantern_get_default_dtype() {
   LANTERN_FUNCTION_START
   auto dt = torch::get_default_dtype();
   return make_raw::Dtype(c10::typeMetaToScalarType(dt));

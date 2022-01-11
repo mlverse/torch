@@ -8,25 +8,24 @@ XPtrTorchDimname cpp_torch_dimname(XPtrTorchstring str) {
 }
 
 // [[Rcpp::export]]
-XPtrTorchDimnameList cpp_torch_dimname_list (const Rcpp::List& x) {
+XPtrTorchDimnameList cpp_torch_dimname_list(const Rcpp::List& x) {
   XPtrTorchDimnameList out = lantern_DimnameList();
 
   for (int i = 0; i < x.length(); i++) {
-    lantern_DimnameList_push_back(out.get(), Rcpp::as<Rcpp::XPtr<XPtrTorch>>(x[i])->get());
+    lantern_DimnameList_push_back(out.get(),
+                                  Rcpp::as<Rcpp::XPtr<XPtrTorch>>(x[i])->get());
   }
 
   return XPtrTorchDimnameList(out);
 }
 
 // [[Rcpp::export]]
-std::string cpp_dimname_to_string (XPtrTorchDimname x) {
+std::string cpp_dimname_to_string(XPtrTorchDimname x) {
   return lantern_Dimname_to_string(x.get());
 };
 
-
 // [[Rcpp::export]]
-std::vector<std::string> cpp_dimname_list_to_string (XPtrTorchDimnameList x) {
-
+std::vector<std::string> cpp_dimname_list_to_string(XPtrTorchDimnameList x) {
   int64_t size = lantern_DimnameList_size(x.get());
   std::vector<std::string> result;
 

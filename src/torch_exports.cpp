@@ -1,13 +1,11 @@
+#include <R_ext/Rdynload.h>
 #include <Rcpp.h>
 #include <torch_api.h>
-#include <R_ext/Rdynload.h>
 
-#define REGISTER_C_CALLABLE(f)                                 \
-R_RegisterCCallable("torch", #f, (DL_FUNC) &f);
+#define REGISTER_C_CALLABLE(f) R_RegisterCCallable("torch", #f, (DL_FUNC)&f);
 
 // [[Rcpp::init]]
-void register_callables (DllInfo *dll)
-{
+void register_callables(DllInfo *dll) {
   REGISTER_C_CALLABLE(operator_sexp_tensor)
   REGISTER_C_CALLABLE(operator_sexp_optional_tensor)
   REGISTER_C_CALLABLE(operator_sexp_tensor_list)
@@ -165,4 +163,3 @@ void register_callables (DllInfo *dll)
 
   REGISTER_C_CALLABLE(fixme_new_string)
 }
-

@@ -4,8 +4,8 @@
 // COPYRIGHT HOLDER: Randy Lai
 
 #include <R.h>
-#include <Rinternals.h>
 #include <Rdefines.h>
+#include <Rinternals.h>
 #include <stdio.h>
 
 void check_is_xptr(SEXP s) {
@@ -33,8 +33,6 @@ SEXP set_xptr_protected(SEXP s, SEXP pro) {
 SEXP xptr_address(SEXP s) {
   check_is_xptr(s);
   char* buf[20];
-  sprintf((char*) buf, "%p", R_ExternalPtrAddr(s));
-  return Rf_mkString((char*) buf);
+  sprintf((char*)buf, "%p", R_ExternalPtrAddr(s));
+  return Rf_mkString((char*)buf);
 }
-
-

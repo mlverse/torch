@@ -3,27 +3,25 @@
 #include <algorithm>
 
 // [[Rcpp::export]]
-Rcpp::XPtr<std::nullptr_t> cpp_nullptr () {
+Rcpp::XPtr<std::nullptr_t> cpp_nullptr() {
   return make_xptr<std::nullptr_t>(nullptr);
 }
 
 // [[Rcpp::export]]
-Rcpp::XPtr<std::nullptr_t> cpp_nullopt () {
+Rcpp::XPtr<std::nullptr_t> cpp_nullopt() {
   return make_xptr<std::nullptr_t>(nullptr);
 }
 
 // [[Rcpp::export]]
-XPtrTorchTensor cpp_tensor_undefined () {
+XPtrTorchTensor cpp_tensor_undefined() {
   return XPtrTorchTensor(lantern_Tensor_undefined());
 }
 
 // [[Rcpp::export]]
-XPtrTorchTensor to_index_tensor (XPtrTorchTensor t)
-{
+XPtrTorchTensor to_index_tensor(XPtrTorchTensor t) {
   // check that there's no zeros
   bool zeros = lantern_Tensor_has_any_zeros(t.get());
-  if (zeros)
-  {
+  if (zeros) {
     Rcpp::stop("Indexing starts at 1 but found a 0.");
   }
 
@@ -33,23 +31,21 @@ XPtrTorchTensor to_index_tensor (XPtrTorchTensor t)
 
   // cast from bool to int
   XPtrTorchTensorOptions options = lantern_TensorOptions();
-  options = lantern_TensorOptions_dtype(options.get(), XPtrTorchDtype(lantern_Dtype_int64()).get());
+  options = lantern_TensorOptions_dtype(
+      options.get(), XPtrTorchDtype(lantern_Dtype_int64()).get());
   sign = lantern_Tensor_to(sign.get(), options.get());
 
   // create a 1 scalar
   int al = 1;
-  XPtrTorchScalar alpha = lantern_Scalar((void*) &al, std::string("int").c_str());
-  XPtrTorchTensor zero_index = lantern_Tensor_sub_tensor_tensor_scalar(
-    t.get(),
-    sign.get(),
-    alpha.get()
-  );
+  XPtrTorchScalar alpha =
+      lantern_Scalar((void*)&al, std::string("int").c_str());
+  XPtrTorchTensor zero_index =
+      lantern_Tensor_sub_tensor_tensor_scalar(t.get(), sign.get(), alpha.get());
 
   return zero_index;
 }
 
 // [[Rcpp::export]]
-bool cpp_torch_namespace__use_cudnn_rnn_flatten_weight ()
-{
+bool cpp_torch_namespace__use_cudnn_rnn_flatten_weight() {
   return lantern__use_cudnn_rnn_flatten_weight();
 }
