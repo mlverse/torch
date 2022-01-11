@@ -6,7 +6,7 @@ backends_cudnn_enabled <- function() {
 #' @return Returns whether LibTorch is built with MKL-DNN support.
 #' @export
 backends_mkldnn_is_available <- function() {
-  cpp_backends_mkldnn_is_available()  
+  cpp_backends_mkldnn_is_available()
 }
 
 #' MKL is available

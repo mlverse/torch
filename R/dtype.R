@@ -1,5 +1,5 @@
 torch_dtype <- R7Class(
-  classname = "torch_dtype", 
+  classname = "torch_dtype",
   public = list(
     ptr = NULL,
     initialize = function(ptr = NULL) {
@@ -14,10 +14,11 @@ torch_dtype <- R7Class(
   ),
   active = list(
     is_floating_point = function() {
-      if (cpp_dtype_to_string(self$ptr) %in% c("Float", "Double", "Half"))
+      if (cpp_dtype_to_string(self$ptr) %in% c("Float", "Double", "Half")) {
         TRUE
-      else
+      } else {
         FALSE
+      }
     },
     ptr = function() {
       self
@@ -31,7 +32,7 @@ as.character.torch_dtype <- function(x, ...) {
 }
 
 dtype_from_string <- function(str) {
-  switch (tolower(str),
+  switch(tolower(str),
     "float" = torch_float(),
     "float32" = torch_float32(),
     "float64" = torch_float64(),
@@ -55,9 +56,9 @@ dtype_from_string <- function(str) {
 
 
 #' Torch data types
-#' 
+#'
 #' Returns the correspondent data type.
-#' 
+#'
 #' @name torch_dtype
 #' @rdname torch_dtype
 #' @concept tensor-attributes
@@ -140,20 +141,20 @@ torch_qint32 <- function() torch_dtype$new(cpp_torch_qint32())
 }
 
 #' Check if object is a torch data type
-#' 
+#'
 #' @param x object to check.
 #' @concept tensor-attributes
-#' 
+#'
 #' @export
 is_torch_dtype <- function(x) {
   inherits(x, "torch_dtype")
 }
 
 #' Gets and sets the default floating point dtype.
-#' 
-#' @param d The default floating point dtype to set. Initially set to 
+#'
+#' @param d The default floating point dtype to set. Initially set to
 #'   `torch_float()`.
-#' 
+#'
 #' @rdname default_dtype
 #' @concept tensor-attributes
 #'

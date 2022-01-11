@@ -1,11 +1,13 @@
 #' @export
 `+.torch_tensor` <- function(e1, e2) {
-  if (missing(e2))
+  if (missing(e2)) {
     e2 <- torch_zeros_like(e1)
-  
-  if (!is_torch_tensor(e1))
+  }
+
+  if (!is_torch_tensor(e1)) {
     e1 <- torch_tensor(e1, device = e2$device)
-  
+  }
+
   torch_add(e1, e2)
 }
 
@@ -15,148 +17,156 @@
     e2 <- e1
     e1 <- torch_zeros_like(e1)
   }
-  
-  if (!is_torch_tensor(e1))
+
+  if (!is_torch_tensor(e1)) {
     e1 <- torch_tensor(e1, device = e2$device)
-  
+  }
+
   torch_sub(e1, e2)
 }
 
 #' @export
 `*.torch_tensor` <- function(e1, e2) {
-  
-  if (!is_torch_tensor(e1))
+  if (!is_torch_tensor(e1)) {
     e1 <- torch_tensor(e1, device = e2$device)
-  
+  }
+
   torch_mul(e1, e2)
 }
 
 #' @export
 `/.torch_tensor` <- function(e1, e2) {
-  
-  if (!is_torch_tensor(e1))
+  if (!is_torch_tensor(e1)) {
     e1 <- torch_tensor(e1, device = e2$device)
-  
+  }
+
   torch_div(e1, e2)
 }
 
 #' @export
 `^.torch_tensor` <- function(e1, e2) {
-  
-  if (!is_torch_tensor(e1))
+  if (!is_torch_tensor(e1)) {
     e1 <- torch_tensor(e1, device = e2$device)
-  
+  }
+
   torch_pow(e1, e2)
 }
 
 #' @export
 `%%.torch_tensor` <- function(e1, e2) {
-  
-  if (!is_torch_tensor(e1))
+  if (!is_torch_tensor(e1)) {
     e1 <- torch_tensor(e1, device = e2$device)
-  
+  }
+
   torch_fmod(e1, e2)
 }
 
 #' @export
 `%/%.torch_tensor` <- function(e1, e2) {
-  
-  if (!is_torch_tensor(e1))
+  if (!is_torch_tensor(e1)) {
     e1 <- torch_tensor(e1, device = e2$device)
-  
+  }
+
   torch_div(e1, e2, rounding_mode = "trunc")
 }
 
 #' @export
 `>=.torch_tensor` <- function(e1, e2) {
-  
-  if (!is_torch_tensor(e1))
+  if (!is_torch_tensor(e1)) {
     e1 <- torch_tensor(e1, device = e2$device)
-  
-  if (!is_torch_tensor(e2))
+  }
+
+  if (!is_torch_tensor(e2)) {
     e2 <- torch_tensor(e2, device = e1$device)
-  
+  }
+
   torch_ge(e1, e2)
 }
 
 #' @export
 `>.torch_tensor` <- function(e1, e2) {
-  
-  if (!is_torch_tensor(e1))
+  if (!is_torch_tensor(e1)) {
     e1 <- torch_tensor(e1, device = e2$device)
-  
-  if (!is_torch_tensor(e2))
+  }
+
+  if (!is_torch_tensor(e2)) {
     e2 <- torch_tensor(e2, device = e1$device)
-  
+  }
+
   torch_gt(e1, e2)
 }
 
 #' @export
 `<=.torch_tensor` <- function(e1, e2) {
-  
-  if (!is_torch_tensor(e1))
+  if (!is_torch_tensor(e1)) {
     e1 <- torch_tensor(e1, device = e2$device)
-  
-  if (!is_torch_tensor(e2))
+  }
+
+  if (!is_torch_tensor(e2)) {
     e2 <- torch_tensor(e2, device = e1$device)
-  
+  }
+
   torch_le(e1, e2)
 }
 
 #' @export
 `<.torch_tensor` <- function(e1, e2) {
-  
-  if (!is_torch_tensor(e1))
+  if (!is_torch_tensor(e1)) {
     e1 <- torch_tensor(e1, device = e2$device)
-  
-  if (!is_torch_tensor(e2))
+  }
+
+  if (!is_torch_tensor(e2)) {
     e2 <- torch_tensor(e2, device = e1$device)
-  
+  }
+
   torch_lt(e1, e2)
 }
 
 #' @export
 `==.torch_tensor` <- function(e1, e2) {
-  
-  if (!is_torch_tensor(e1))
+  if (!is_torch_tensor(e1)) {
     e1 <- torch_tensor(e1, device = e2$device)
-  
-  if (!is_torch_tensor(e2))
+  }
+
+  if (!is_torch_tensor(e2)) {
     e2 <- torch_tensor(e2, device = e1$device)
-  
+  }
+
   torch_eq(e1, e2)
 }
 
 #' @export
 `!=.torch_tensor` <- function(e1, e2) {
-  
-  if (!is_torch_tensor(e1))
+  if (!is_torch_tensor(e1)) {
     e1 <- torch_tensor(e1, device = e2$device)
-  
+  }
+
   torch_ne(e1, e2)
 }
 
 #' @export
 `&.torch_tensor` <- function(e1, e2) {
-  
-  if (!is_torch_tensor(e1))
+  if (!is_torch_tensor(e1)) {
     e1 <- torch_tensor(e1, device = e2$device)
-  
-  if (!is_torch_tensor(e2))
+  }
+
+  if (!is_torch_tensor(e2)) {
     e2 <- torch_tensor(e2, device = e1$device)
-  
+  }
+
   torch_logical_and(e1, e2)
 }
 
 #' @export
 `|.torch_tensor` <- function(e1, e2) {
-  
-  if (!is_torch_tensor(e1))
+  if (!is_torch_tensor(e1)) {
     e1 <- torch_tensor(e1, device = e2$device)
-  
-  if (!is_torch_tensor(e2))
+  }
+
+  if (!is_torch_tensor(e2)) {
     e2 <- torch_tensor(e2, device = e1$device)
-  
+  }
+
   torch_logical_or(e1, e2)
 }
 
@@ -233,7 +243,7 @@ cumsum.torch_tensor <- function(x) {
 #' @export
 log.torch_tensor <- function(x, base) {
   if (!missing(base)) {
-    torch_log(x)/torch_log(base)
+    torch_log(x) / torch_log(base)
   } else {
     torch_log(x)
   }
@@ -313,15 +323,15 @@ tanh.torch_tensor <- function(x) {
 
 #' @export
 max.torch_tensor <- function(..., na.rm = FALSE) {
-  if (na.rm) stop('Torch tensors do not have NAs!')
-  l <- list(...) 
+  if (na.rm) stop("Torch tensors do not have NAs!")
+  l <- list(...)
   l_max <- lapply(l, torch_max)
   Reduce(function(x, y) torch_max(x, other = y), l_max)
 }
 
 #' @export
 min.torch_tensor <- function(..., na.rm = FALSE) {
-  if (na.rm) stop('Torch tensors do not have NAs!')
+  if (na.rm) stop("Torch tensors do not have NAs!")
   l <- list(...)
   l_min <- lapply(l, torch_min)
   Reduce(function(x, y) torch_min(x, other = y), l_min)
@@ -329,7 +339,7 @@ min.torch_tensor <- function(..., na.rm = FALSE) {
 
 #' @export
 prod.torch_tensor <- function(..., dim, keepdim = FALSE, na.rm = FALSE) {
-  if (na.rm) stop('Torch tensors do not have NAs!')
+  if (na.rm) stop("Torch tensors do not have NAs!")
   l <- list(...)
   if (length(l) == 1) {
     if (!missing(dim)) {
@@ -345,7 +355,7 @@ prod.torch_tensor <- function(..., dim, keepdim = FALSE, na.rm = FALSE) {
 
 #' @export
 sum.torch_tensor <- function(..., dim, keepdim = FALSE, na.rm = FALSE) {
-  if (na.rm) stop('Torch tensors do not have NAs!')
+  if (na.rm) stop("Torch tensors do not have NAs!")
   l <- list(...)
   if (length(l) == 1) {
     if (!missing(dim)) {
@@ -361,7 +371,7 @@ sum.torch_tensor <- function(..., dim, keepdim = FALSE, na.rm = FALSE) {
 
 #' @export
 mean.torch_tensor <- function(x, dim, keepdim = FALSE, na.rm = FALSE, ...) {
-  if (na.rm) stop('Torch tensors do not have NAs!')
+  if (na.rm) stop("Torch tensors do not have NAs!")
   if (!missing(dim)) {
     torch_mean(x, dim, keepdim)
   } else {

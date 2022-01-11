@@ -3,15 +3,15 @@
 #' TODO: add more unit tests
 
 test_that("Gamma distribution - rsample", {
-  
   num_samples <- 100
-  
+
   for (alpha in c(1e-2, 1e-1, 1e0, 1e1, 1e2, 1e3, 1e4)) {
     alphas <- torch_tensor(
-      rep(alpha, num_samples), dtype = torch_float(), requires_grad = TRUE
+      rep(alpha, num_samples),
+      dtype = torch_float(), requires_grad = TRUE
     )
     betas <- torch_tensor(rep(1, num_samples))
-    
+
     x <- distr_gamma(alphas, betas)$rsample()
     x$sum()$backward()
     results <- x$sort()
@@ -19,10 +19,10 @@ test_that("Gamma distribution - rsample", {
     ind <- results[[2]]
     ind <- as.array(ind)
     x <- as.array(x$detach())
-    
+
     actual_grad <- as.array(alphas$grad[ind])
-    
-    eps <- 0.01 * alpha / (1.0 + alpha ** 0.5)
+
+    eps <- 0.01 * alpha / (1.0 + alpha**0.5)
     cdf_alpha <- (pgamma(x, alpha + eps) - pgamma(x, alpha - eps)) / (2 * eps)
     cdf_x <- dgamma(x, alpha)
     expected_grad <- -cdf_alpha / cdf_x

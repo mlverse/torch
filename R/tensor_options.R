@@ -1,8 +1,7 @@
 
 
-torch_tensor_options <- function(dtype = NULL, layout = NULL, device = NULL, 
+torch_tensor_options <- function(dtype = NULL, layout = NULL, device = NULL,
                                  requires_grad = NULL, pinned_memory = NULL) {
-  
   options <- list(
     dtype = if (is.character(dtype)) dtype else dtype$ptr,
     layout = layout$ptr,
@@ -19,5 +18,5 @@ is_torch_tensor_options <- function(x) {
 }
 
 as_torch_tensor_options <- function(l) {
- do.call(torch_tensor_options, l) 
+  do.call(torch_tensor_options, l)
 }

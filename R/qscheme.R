@@ -12,7 +12,7 @@ QScheme <- R6::R6Class(
 )
 
 #' Creates the corresponding Scheme object
-#' 
+#'
 #' @rdname torch_qscheme
 #' @name torch_qscheme
 #' @concept tensor-attributes
@@ -45,7 +45,7 @@ torch_per_tensor_symmetric <- function() {
 #' Checks if an object is a QScheme
 #'
 #' @param x object to check
-#' 
+#'
 #' @export
 is_torch_qscheme <- function(x) {
   inherits(x, "torch_qscheme")

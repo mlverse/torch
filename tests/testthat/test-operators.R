@@ -1,58 +1,58 @@
 context("operators")
 
 test_that("+ works", {
-  x <- torch_tensor(c(1,2,3,4))
-  expect_equal_to_r(x + x, 2*c(1,2,3,4))
-  expect_equal_to_r(x + 2, c(1,2,3,4) + 2)
-  expect_equal_to_r(2 + x, c(1,2,3,4) + 2)
+  x <- torch_tensor(c(1, 2, 3, 4))
+  expect_equal_to_r(x + x, 2 * c(1, 2, 3, 4))
+  expect_equal_to_r(x + 2, c(1, 2, 3, 4) + 2)
+  expect_equal_to_r(2 + x, c(1, 2, 3, 4) + 2)
 })
 
 test_that("- works", {
-  x <- torch_tensor(c(1,2,3,4))
+  x <- torch_tensor(c(1, 2, 3, 4))
   expect_equal_to_r(x - x, rep(0, 4))
-  expect_equal_to_r(x - 2, c(1,2,3,4) - 2)
-  expect_equal_to_r(2 - x, 2 - c(1,2,3,4))
-  expect_equal_to_r(-x, - c(1,2,3,4))
+  expect_equal_to_r(x - 2, c(1, 2, 3, 4) - 2)
+  expect_equal_to_r(2 - x, 2 - c(1, 2, 3, 4))
+  expect_equal_to_r(-x, -c(1, 2, 3, 4))
 })
 
 test_that("* works", {
-  x <- torch_tensor(c(1,2,3,4))
-  expect_equal_to_r(x*x, c(1,2,3,4)^2)
-  expect_equal_to_r(x * 2, c(1,2,3,4) * 2)
-  expect_equal_to_r(2 * x, c(1,2,3,4) * 2)
+  x <- torch_tensor(c(1, 2, 3, 4))
+  expect_equal_to_r(x * x, c(1, 2, 3, 4)^2)
+  expect_equal_to_r(x * 2, c(1, 2, 3, 4) * 2)
+  expect_equal_to_r(2 * x, c(1, 2, 3, 4) * 2)
 })
 
 test_that("/ works", {
-  x <- torch_tensor(c(1,2,3,4))
-  expect_equal_to_r(x/x, rep(1, 4))
-  expect_equal_to_r(x / 2, c(1,2,3,4) / 2)
-  expect_equal_to_r(12 / x, 12 / c(1,2,3,4))
+  x <- torch_tensor(c(1, 2, 3, 4))
+  expect_equal_to_r(x / x, rep(1, 4))
+  expect_equal_to_r(x / 2, c(1, 2, 3, 4) / 2)
+  expect_equal_to_r(12 / x, 12 / c(1, 2, 3, 4))
 })
 
 test_that("^ works", {
-  x <- torch_tensor(c(1,2,3,4))
-  expect_equal_to_r(x^x, c(1,2,3,4)^c(1,2,3,4))
-  expect_equal_to_r(x^ 2, c(1,2,3,4) ^ 2)
-  expect_equal_to_r(2 ^ x, 2 ^ c(1,2,3,4))
+  x <- torch_tensor(c(1, 2, 3, 4))
+  expect_equal_to_r(x^x, c(1, 2, 3, 4)^c(1, 2, 3, 4))
+  expect_equal_to_r(x^2, c(1, 2, 3, 4)^2)
+  expect_equal_to_r(2^x, 2^c(1, 2, 3, 4))
 })
 
 test_that("%% works", {
-  x <- torch_tensor(c(1,2,3,4))
-  expect_equal_to_r(x %% x, c(1,2,3,4) %% c(1,2,3,4))
-  expect_equal_to_r(x %% 2, c(1,2,3,4) %% 2)
-  expect_equal_to_r(2 %% x, 2 %% c(1,2,3,4))
+  x <- torch_tensor(c(1, 2, 3, 4))
+  expect_equal_to_r(x %% x, c(1, 2, 3, 4) %% c(1, 2, 3, 4))
+  expect_equal_to_r(x %% 2, c(1, 2, 3, 4) %% 2)
+  expect_equal_to_r(2 %% x, 2 %% c(1, 2, 3, 4))
 })
 
 test_that("%/% works", {
-  x <- torch_tensor(c(1,2,3,4))
-  expect_equal_to_r(x %/% x, c(1,2,3,4) %/% c(1,2,3,4))
-  expect_equal_to_r(x %/% 2, c(1,2,3,4) %/% 2)
-  expect_equal_to_r(2 %/% x, 2 %/% c(1,2,3,4))
+  x <- torch_tensor(c(1, 2, 3, 4))
+  expect_equal_to_r(x %/% x, c(1, 2, 3, 4) %/% c(1, 2, 3, 4))
+  expect_equal_to_r(x %/% 2, c(1, 2, 3, 4) %/% 2)
+  expect_equal_to_r(2 %/% x, 2 %/% c(1, 2, 3, 4))
 })
 
 test_that("> works", {
-  x <- torch_tensor(c(2,2))
-  y <- torch_tensor(c(2,3))
+  x <- torch_tensor(c(2, 2))
+  y <- torch_tensor(c(2, 3))
   expect_equal_to_r(x > y, c(FALSE, FALSE))
   expect_equal_to_r(y > x, c(FALSE, TRUE))
   expect_equal_to_r(y > 2, c(FALSE, TRUE))
@@ -60,8 +60,8 @@ test_that("> works", {
 })
 
 test_that(">= works", {
-  x <- torch_tensor(c(2,2))
-  y <- torch_tensor(c(2,3))
+  x <- torch_tensor(c(2, 2))
+  y <- torch_tensor(c(2, 3))
   expect_equal_to_r(x >= y, c(TRUE, FALSE))
   expect_equal_to_r(y >= x, c(TRUE, TRUE))
   expect_equal_to_r(y >= 2, c(TRUE, TRUE))
@@ -69,8 +69,8 @@ test_that(">= works", {
 })
 
 test_that("< works", {
-  x <- torch_tensor(c(2,2))
-  y <- torch_tensor(c(2,3))
+  x <- torch_tensor(c(2, 2))
+  y <- torch_tensor(c(2, 3))
   expect_equal_to_r(x < y, c(FALSE, TRUE))
   expect_equal_to_r(y < x, c(FALSE, FALSE))
   expect_equal_to_r(y < 2, c(FALSE, FALSE))
@@ -78,8 +78,8 @@ test_that("< works", {
 })
 
 test_that("<= works", {
-  x <- torch_tensor(c(2,2))
-  y <- torch_tensor(c(2,3))
+  x <- torch_tensor(c(2, 2))
+  y <- torch_tensor(c(2, 3))
   expect_equal_to_r(x <= y, c(TRUE, TRUE))
   expect_equal_to_r(y <= x, c(TRUE, FALSE))
   expect_equal_to_r(y <= 2, c(TRUE, FALSE))
@@ -87,54 +87,54 @@ test_that("<= works", {
 })
 
 test_that("== works", {
-  x <- torch_tensor(c(1,2))
-  y <- torch_tensor(c(2,2))
+  x <- torch_tensor(c(1, 2))
+  y <- torch_tensor(c(2, 2))
   expect_equal_to_r(x == y, c(FALSE, TRUE))
   expect_equal_to_r(x == 2, c(FALSE, TRUE))
 })
 
 test_that("!= works", {
-  x <- torch_tensor(c(1,2))
-  y <- torch_tensor(c(2,2))
+  x <- torch_tensor(c(1, 2))
+  y <- torch_tensor(c(2, 2))
   expect_equal_to_r(x != y, c(TRUE, FALSE))
   expect_equal_to_r(x != 2, c(TRUE, FALSE))
 })
 
 test_that("& works", {
-  x <- torch_tensor(c(1,2))
-  y <- torch_tensor(c(2,2))
+  x <- torch_tensor(c(1, 2))
+  y <- torch_tensor(c(2, 2))
   expect_equal_to_r(x & y, c(TRUE, TRUE))
   expect_equal_to_r(x & 0, c(FALSE, FALSE))
 })
 
 test_that("| works", {
-  x <- torch_tensor(c(0,2))
-  y <- torch_tensor(c(1,2))
+  x <- torch_tensor(c(0, 2))
+  y <- torch_tensor(c(1, 2))
   expect_equal_to_r(x | y, c(TRUE, TRUE))
   expect_equal_to_r(x | 0, c(FALSE, TRUE))
 })
 
 test_that("! works", {
-  x <- torch_tensor(c(1,2))
-  y <- torch_tensor(c(0,2))
+  x <- torch_tensor(c(1, 2))
+  y <- torch_tensor(c(0, 2))
   expect_equal_to_r(!x, c(FALSE, FALSE))
   expect_equal_to_r(!y, c(TRUE, FALSE))
 })
 
 test_that("dim works", {
-  x <- torch_randn(c(2,2))
-  expect_equal(dim(x), c(2,2))
+  x <- torch_randn(c(2, 2))
+  expect_equal(dim(x), c(2, 2))
 })
 
 test_that("length works", {
-  x <- torch_randn(c(2,2))
+  x <- torch_randn(c(2, 2))
   expect_equal(length(x), 4)
 })
 
 test_that("as.*", {
   x <- array(runif(200), dim = c(10, 5, 2))
   t <- torch_tensor(x)
-  
+
   expect_equal(as.numeric(t), as.numeric(x), tolerance = 1e-5)
   expect_equal(as.integer(t), as.integer(x))
   expect_equal(as.double(t), as.double(x), tolerance = 1e-5)
@@ -224,73 +224,70 @@ test_that("sum works", {
 # GPU tests ---------------------------------------------------------------
 
 test_that("+ works", {
-  
   skip_if_cuda_not_available()
-  
-  x <- torch_tensor(c(1,2,3,4), device = "cuda")
-  expect_equal_to_r(x + x, 2*c(1,2,3,4))
-  expect_equal_to_r(x + 2, c(1,2,3,4) + 2)
-  expect_equal_to_r(2 + x, c(1,2,3,4) + 2)
+
+  x <- torch_tensor(c(1, 2, 3, 4), device = "cuda")
+  expect_equal_to_r(x + x, 2 * c(1, 2, 3, 4))
+  expect_equal_to_r(x + 2, c(1, 2, 3, 4) + 2)
+  expect_equal_to_r(2 + x, c(1, 2, 3, 4) + 2)
 })
 
 test_that("- works", {
-  
   skip_if_cuda_not_available()
-  
-  x <- torch_tensor(c(1,2,3,4), device = "cuda")
+
+  x <- torch_tensor(c(1, 2, 3, 4), device = "cuda")
   expect_equal_to_r(x - x, rep(0, 4))
-  expect_equal_to_r(x - 2, c(1,2,3,4) - 2)
-  expect_equal_to_r(2 - x, 2 - c(1,2,3,4))
-  expect_equal_to_r(-x, - c(1,2,3,4))
+  expect_equal_to_r(x - 2, c(1, 2, 3, 4) - 2)
+  expect_equal_to_r(2 - x, 2 - c(1, 2, 3, 4))
+  expect_equal_to_r(-x, -c(1, 2, 3, 4))
 })
 
 test_that("* works", {
-  
   skip_if_cuda_not_available()
-  
-  x <- torch_tensor(c(1,2,3,4), device = "cuda")
-  expect_equal_to_r(x*x, c(1,2,3,4)^2)
-  expect_equal_to_r(x * 2, c(1,2,3,4) * 2)
-  expect_equal_to_r(2 * x, c(1,2,3,4) * 2)
+
+  x <- torch_tensor(c(1, 2, 3, 4), device = "cuda")
+  expect_equal_to_r(x * x, c(1, 2, 3, 4)^2)
+  expect_equal_to_r(x * 2, c(1, 2, 3, 4) * 2)
+  expect_equal_to_r(2 * x, c(1, 2, 3, 4) * 2)
 })
 
 test_that("/ works", {
   skip_if_cuda_not_available()
-  
-  x <- torch_tensor(c(1,2,3,4), device = "cuda")
-  expect_equal_to_r(x/x, rep(1, 4))
-  expect_equal_to_r(x / 2, c(1,2,3,4) / 2)
-  expect_equal_to_r(12 / x, 12 / c(1,2,3,4))
+
+  x <- torch_tensor(c(1, 2, 3, 4), device = "cuda")
+  expect_equal_to_r(x / x, rep(1, 4))
+  expect_equal_to_r(x / 2, c(1, 2, 3, 4) / 2)
+  expect_equal_to_r(12 / x, 12 / c(1, 2, 3, 4))
 })
 
 test_that("^ works", {
   skip_if_cuda_not_available()
-  x <- torch_tensor(c(1,2,3,4), device = "cuda")
-  expect_equal_to_r(x^x, c(1,2,3,4)^c(1,2,3,4))
-  expect_equal_to_r(x^ 2, c(1,2,3,4) ^ 2)
-  expect_equal_to_r(2 ^ x, 2 ^ c(1,2,3,4))
+  x <- torch_tensor(c(1, 2, 3, 4), device = "cuda")
+  expect_equal_to_r(x^x, c(1, 2, 3, 4)^c(1, 2, 3, 4))
+  expect_equal_to_r(x^2, c(1, 2, 3, 4)^2)
+  expect_equal_to_r(2^x, 2^c(1, 2, 3, 4))
 })
 
 test_that("%% works", {
   skip_if_cuda_not_available()
-  x <- torch_tensor(c(1,2,3,4), device = "cuda")
-  expect_equal_to_r(x %% x, c(1,2,3,4) %% c(1,2,3,4))
-  expect_equal_to_r(x %% 2, c(1,2,3,4) %% 2)
-  expect_equal_to_r(2 %% x, 2 %% c(1,2,3,4))
+  x <- torch_tensor(c(1, 2, 3, 4), device = "cuda")
+  expect_equal_to_r(x %% x, c(1, 2, 3, 4) %% c(1, 2, 3, 4))
+  expect_equal_to_r(x %% 2, c(1, 2, 3, 4) %% 2)
+  expect_equal_to_r(2 %% x, 2 %% c(1, 2, 3, 4))
 })
 
 test_that("%/% works", {
   skip_if_cuda_not_available()
-  x <- torch_tensor(c(1,2,3,4), device = "cuda")
-  expect_equal_to_r(x %/% x, c(1,2,3,4) %/% c(1,2,3,4))
-  expect_equal_to_r(x %/% 2, c(1,2,3,4) %/% 2)
-  expect_equal_to_r(2 %/% x, 2 %/% c(1,2,3,4))
+  x <- torch_tensor(c(1, 2, 3, 4), device = "cuda")
+  expect_equal_to_r(x %/% x, c(1, 2, 3, 4) %/% c(1, 2, 3, 4))
+  expect_equal_to_r(x %/% 2, c(1, 2, 3, 4) %/% 2)
+  expect_equal_to_r(2 %/% x, 2 %/% c(1, 2, 3, 4))
 })
 
 test_that("> works", {
   skip_if_cuda_not_available()
-  x <- torch_tensor(c(2,2), device = "cuda")
-  y <- torch_tensor(c(2,3), device = "cuda")
+  x <- torch_tensor(c(2, 2), device = "cuda")
+  y <- torch_tensor(c(2, 3), device = "cuda")
   expect_equal_to_r(x > y, c(FALSE, FALSE))
   expect_equal_to_r(y > x, c(FALSE, TRUE))
   expect_equal_to_r(y > 2, c(FALSE, TRUE))
@@ -299,8 +296,8 @@ test_that("> works", {
 
 test_that(">= works", {
   skip_if_cuda_not_available()
-  x <- torch_tensor(c(2,2), device = "cuda")
-  y <- torch_tensor(c(2,3), device = "cuda")
+  x <- torch_tensor(c(2, 2), device = "cuda")
+  y <- torch_tensor(c(2, 3), device = "cuda")
   expect_equal_to_r(x >= y, c(TRUE, FALSE))
   expect_equal_to_r(y >= x, c(TRUE, TRUE))
   expect_equal_to_r(y >= 2, c(TRUE, TRUE))
@@ -309,8 +306,8 @@ test_that(">= works", {
 
 test_that("< works", {
   skip_if_cuda_not_available()
-  x <- torch_tensor(c(2,2), device = "cuda")
-  y <- torch_tensor(c(2,3), device = "cuda")
+  x <- torch_tensor(c(2, 2), device = "cuda")
+  y <- torch_tensor(c(2, 3), device = "cuda")
   expect_equal_to_r(x < y, c(FALSE, TRUE))
   expect_equal_to_r(y < x, c(FALSE, FALSE))
   expect_equal_to_r(y < 2, c(FALSE, FALSE))
@@ -319,8 +316,8 @@ test_that("< works", {
 
 test_that("<= works", {
   skip_if_cuda_not_available()
-  x <- torch_tensor(c(2,2), device = "cuda")
-  y <- torch_tensor(c(2,3), device = "cuda")
+  x <- torch_tensor(c(2, 2), device = "cuda")
+  y <- torch_tensor(c(2, 3), device = "cuda")
   expect_equal_to_r(x <= y, c(TRUE, TRUE))
   expect_equal_to_r(y <= x, c(TRUE, FALSE))
   expect_equal_to_r(y <= 2, c(TRUE, FALSE))
@@ -329,51 +326,49 @@ test_that("<= works", {
 
 test_that("== works", {
   skip_if_cuda_not_available()
-  x <- torch_tensor(c(1,2), device = "cuda")
-  y <- torch_tensor(c(2,2), device = "cuda")
+  x <- torch_tensor(c(1, 2), device = "cuda")
+  y <- torch_tensor(c(2, 2), device = "cuda")
   expect_equal_to_r(x == y, c(FALSE, TRUE))
   expect_equal_to_r(x == 2, c(FALSE, TRUE))
 })
 
 test_that("!= works", {
   skip_if_cuda_not_available()
-  x <- torch_tensor(c(1,2), device = "cuda")
-  y <- torch_tensor(c(2,2), device = "cuda")
+  x <- torch_tensor(c(1, 2), device = "cuda")
+  y <- torch_tensor(c(2, 2), device = "cuda")
   expect_equal_to_r(x != y, c(TRUE, FALSE))
   expect_equal_to_r(x != 2, c(TRUE, FALSE))
 })
 
 test_that("& works", {
   skip_if_cuda_not_available()
-  x <- torch_tensor(c(1,2), device = "cuda")
-  y <- torch_tensor(c(2,2), device = "cuda")
+  x <- torch_tensor(c(1, 2), device = "cuda")
+  y <- torch_tensor(c(2, 2), device = "cuda")
   expect_equal_to_r(x & y, c(TRUE, TRUE))
   expect_equal_to_r(x & 0, c(FALSE, FALSE))
 })
 
 test_that("| works", {
   skip_if_cuda_not_available()
-  x <- torch_tensor(c(0,2), device = "cuda")
-  y <- torch_tensor(c(1,2), device = "cuda")
+  x <- torch_tensor(c(0, 2), device = "cuda")
+  y <- torch_tensor(c(1, 2), device = "cuda")
   expect_equal_to_r(x | y, c(TRUE, TRUE))
   expect_equal_to_r(c(TRUE, TRUE) | y, c(TRUE, TRUE))
   expect_equal_to_r(x | 0, c(FALSE, TRUE))
 })
 
 test_that("mean works", {
-  
-  x <- c(1,2,3,4)
-  
+  x <- c(1, 2, 3, 4)
+
   expect_equal_to_r(
     mean(torch_tensor(x)),
     2.5
   )
-  
+
   x <- torch_randn(20, 100)
-  
+
   expect_tensor_shape(mean(x, dim = 1), 100)
   expect_tensor_shape(mean(x, dim = 2), 20)
   expect_tensor_shape(mean(x, dim = 1, keepdim = TRUE), c(1, 100))
   expect_tensor_shape(mean(x, dim = 2, keepdim = TRUE), c(20, 1))
-  
 })
