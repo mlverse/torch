@@ -7,7 +7,7 @@ then
 fi
 
 Rscript -e "if (!require('styler')) install.packages('styler')"
-#Rscript -e 'styler::style_pkg(exclude_files = list.files("./R", pattern = "^gen-*.*|^RcppExports.*"))'
+Rscript -e 'styler::style_pkg(exclude_files = list.files("./R", pattern = "^gen-*.*|^RcppExports.*"))'
 
 find . -type f \( -name 'DESCRIPTION' -o -name "*.R" \) ! -path "*/gen-*.*" ! -path "*/RcppExports.*" -exec sed -i -e 's/[ \t]*$//' {} \;
 
