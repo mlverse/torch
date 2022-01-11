@@ -29,7 +29,7 @@ library(roxygen2)
 .S3method("roxy_tag_rd", "roxy_tag_subsection", function(x, base_path, env) {
   pieces <- stringr::str_split(x$val, ":", n = 2)[[1]]
   title <- stringr::str_split(pieces[1], "\n")[[1]]
-  
+
   if (length(title) > 1) {
     roxygen2:::roxy_tag_warning(x, paste0(
       "Section title spans multiple lines.\n",
@@ -37,7 +37,7 @@ library(roxygen2)
     ))
     return()
   }
-  
+
   roxygen2:::rd_section_section(pieces[1], pieces[2])
 })
 

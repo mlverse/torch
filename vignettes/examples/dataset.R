@@ -17,7 +17,7 @@ library(torch)
 
 df_dataset <- dataset(
   "mydataset",
-  
+
   # the input data to your dataset goes in the initialize function.
   # our dataset will take a dataframe and the name of the response
   # variable.
@@ -25,7 +25,7 @@ df_dataset <- dataset(
     self$df <- df[,-which(names(df) == response_variable)]
     self$response_variable <- df[[response_variable]]
   },
-  
+
   # the .getitem method takes an index as input and returns the
   # corresponding item from the dataset.
   # the index could be anything. the dataframe could have many
@@ -35,19 +35,19 @@ df_dataset <- dataset(
   .getitem = function(index) {
     response <- torch_tensor(self$response_variable[index])
     x <- torch_tensor(as.numeric(self$df[index,]))
-    
+
     # note that the dataloaders will automatically stack tensors
     # creating a new dimension
     list(x = x, y = response)
   },
-  
-  # It's optional, but helpful to define the .length method returning 
-  # the number of elements in the dataset. This is needed if you want 
+
+  # It's optional, but helpful to define the .length method returning
+  # the number of elements in the dataset. This is needed if you want
   # to shuffle your dataset.
   .length = function() {
     length(self$response_variable)
   }
-  
+
 )
 
 

@@ -1,17 +1,17 @@
 Package: torchgen
 Title: Code autogeneration for the torch package
 Version: 1.4.0.1
-Authors@R: 
+Authors@R:
     person(given = "Daniel",
            family = "Falbel",
            role = c("aut", "cre"),
            email = "daniel@rstudio.com")
-Description: This package is used by the 'torch' package to autogenerate 
+Description: This package is used by the 'torch' package to autogenerate
     most of Tensor methods and namespace functions.
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
-Imports: 
+Imports:
     purrr,
     glue,
     yaml,

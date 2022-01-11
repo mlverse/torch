@@ -4,7 +4,7 @@ for (lib in dir(libs_path, pattern = "torch\\.")) {
   file.copy(file.path(libs_path, lib),
             file.path(libs_path, gsub("torch", "torchpkg", lib)),
             overwrite = TRUE)
-  
+
   # Uncomment CRAN release
   # unlink(file.path(libs_path, lib))
 }
@@ -22,7 +22,7 @@ if (inherits(exports_path, "try-error")) {
 }
 
 if (inherits(exports_path, "try-error")) {
-  stop("Could not patch RcppExports.R, looked for files in: \n", 
+  stop("Could not patch RcppExports.R, looked for files in: \n",
        normalizePath(file.path(libs_path, "..", "R", "RcppExports.R"), mustWork = FALSE), "\n",
        normalizePath(file.path(libs_path, "R", "RcppExports.R"), mustWork = FALSE)
   )
