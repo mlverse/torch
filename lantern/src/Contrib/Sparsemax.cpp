@@ -81,11 +81,11 @@ class SparseMaxFunction : public Function<SparseMaxFunction> {
     auto saved = ctx->get_saved_variables();
     auto output = saved[0];
     auto grad_output = grad_outputs[0];
-    
+
     bool needs_reshaping = ctx->saved_data["needs_reshaping"].toBool();
     int dim = ctx->saved_data["dim"].toInt();
     auto original_size = grad_output.sizes().vec();
-    
+
     if (needs_reshaping)
     {
         // transpose batch and nth dim

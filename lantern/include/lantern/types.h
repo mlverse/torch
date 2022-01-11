@@ -96,7 +96,7 @@ namespace make_raw {
     return make_ptr<std::vector<void*>>(to_vector(x));
   }
 
-  namespace optional { 
+  namespace optional {
     void* bool_t (const c10::optional<bool>& x);
     void* string (const c10::optional<std::string>& x);
     void* TensorList (const c10::List<c10::optional<torch::Tensor>>& x);
@@ -116,7 +116,7 @@ namespace make_raw {
 }
 
 #define LANTERN_FROM_RAW_DECL(name, type)                                                 \
-  type& name (void* x);                 
+  type& name (void* x);
 
 namespace alias {
   using TensorDict = c10::Dict<std::string,torch::Tensor>;
@@ -124,9 +124,9 @@ namespace alias {
 
 namespace from_raw {
   LANTERN_FROM_RAW_DECL(Tensor, torch::Tensor)
-  // TensorLists are passed as std::vector<torch::Tensor> because they don't own the 
+  // TensorLists are passed as std::vector<torch::Tensor> because they don't own the
   // underlying memory. Passing them as vectors is also fine as they are trivially
-  // constructed from them. 
+  // constructed from them.
   LANTERN_FROM_RAW_DECL(TensorList, torch::TensorList)
   LANTERN_FROM_RAW_DECL(ScalarType, torch::ScalarType)
   LANTERN_FROM_RAW_DECL(Scalar, torch::Scalar)
@@ -173,7 +173,7 @@ namespace from_raw {
     LANTERN_FROM_RAW_DECL(int64_t, std::vector<std::int64_t>)
     LANTERN_FROM_RAW_DECL(double_t, std::vector<double>)
     LANTERN_FROM_RAW_DECL(Scalar, std::vector<torch::Scalar>)
-    // This special type is used to allow converting to std::array<>'s 
+    // This special type is used to allow converting to std::array<>'s
     // of multiple different sizes.
     LANTERN_FROM_RAW_DECL(bool_t, Vector<bool>)
   }
@@ -256,7 +256,7 @@ class Box {
 // memory. However this is not true for `torch::TensorList` which is just a a reference
 // to a stack allocated vector of tensors. Thus if we simply return `torch::TensorList`
 // we won't be able to reuse it when the stack allocated memory is no longer available.
-// 
+//
 // Types defined in this namespace are wrappers around torch types that don't own their memory
 // thus need a wrapper that can hold the necessary information.
 // Another important thing is that types here must be able to return their objects as references
@@ -275,7 +275,7 @@ namespace self_contained {
   }
 
   namespace optional {
-    
+
     class DimnameList {
       public:
         std::shared_ptr<c10::optional<torch::DimnameList>> x_;
@@ -296,7 +296,7 @@ namespace self_contained {
     using IntArrayRef = OptionalArrayRef<std::int64_t>;
     using DoubleArrayRef = OptionalArrayRef<double>;
     using Device = Box<c10::optional<torch::Device>>;
-    
+
   }
 }
 
@@ -307,7 +307,7 @@ namespace self_contained {
 
 namespace self_contained {
   namespace optional {
-    
+
         DimnameList::DimnameList (const c10::optional<torch::DimnameList>& x) {
           if (x.has_value()) {
             vec_ = std::make_shared<std::vector<torch::Dimname>>(x.value().vec());
@@ -345,7 +345,7 @@ namespace make_raw {
   {
     return make_ptr<torch::TensorOptions>(x);
   }
-  void* Device (torch::Device& x) 
+  void* Device (torch::Device& x)
   {
     return make_ptr<self_contained::Device>(x);
   }
@@ -464,7 +464,7 @@ namespace make_raw {
   }
 
   namespace optional {
-    
+
     void* string (const c10::optional<std::string>& x)
     {
       return make_ptr<self_contained::optional::string>(x);

@@ -20,41 +20,41 @@ void _lantern_set_call_r_gc(void (*fn) ())
     call_r_gc = fn;
 }
 
-namespace c10 
+namespace c10
 {
 struct LanternCPUAllocator final : at::Allocator {
   LanternCPUAllocator() {}
   ~LanternCPUAllocator() override {}
   at::DataPtr allocate(size_t nbytes) const override {
-    
+
     void* data;
 
     {
-        // we register every memory allocation 
+        // we register every memory allocation
         const std::lock_guard<std::mutex> lock(mtx_allocated);
         allocated_memory += nbytes;
     }
 
-    if (std::this_thread::get_id() == MAIN_THREAD_ID) 
+    if (std::this_thread::get_id() == MAIN_THREAD_ID)
     {
 
         // if o the main thread we check if we have allocated 4GB of memory
         // and in this case we call the R garbage collector.
         bool call_gc = false;
         {
-            const std::lock_guard<std::mutex> lock(mtx_allocated); 
+            const std::lock_guard<std::mutex> lock(mtx_allocated);
             if (allocated_memory > threshold_call_gc)
             {
                 call_gc = true;
                 allocated_memory = 0;
             }
         }
-        
-        if (call_gc) 
+
+        if (call_gc)
         {
             (*call_r_gc)();
         }
-        
+
         try
         {
             // try first allocation
@@ -65,11 +65,11 @@ struct LanternCPUAllocator final : at::Allocator {
             // Use R garbage collector and see if we can
             // allocate more memory.
             (*call_r_gc)();
-            
+
             // then try allocating again!
             data = alloc_cpu(nbytes);
         }
-                
+
     }
     else
     {

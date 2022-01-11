@@ -7,7 +7,7 @@ void* rcpp_call_hook (void* x, void* hook);
 Rcpp::XPtr<XPtrTorchFunctionPtr> cpp_trace_function (Rcpp::Function fn, XPtrTorchStack inputs,
                         XPtrTorchCompilationUnit compilation_unit,
                         XPtrTorchstring name,
-                        bool strict = true, 
+                        bool strict = true,
                         XPtrTorchScriptModule module = R_NilValue,
                         bool should_mangle = true,
                         bool manage_memory = true
@@ -15,13 +15,13 @@ Rcpp::XPtr<XPtrTorchFunctionPtr> cpp_trace_function (Rcpp::Function fn, XPtrTorc
 {
   auto output = XPtrTorchStack(lantern_Stack_new());
   std::string error;
-  
+
   std::function<void*(void*)> r_fn = [&error, &fn, &output](void* inputs) {
     // we don't control this memory as it will be controlled by
     // the lantern side function therefore we use a no-op deleter.
     auto inputs_ = XPtrTorchStack(inputs, [](void* x) {});
-    
-    // the R function call and the convertion to a stack might fail and 
+
+    // the R function call and the convertion to a stack might fail and
     // in that case we can't raise the error directly from R, otherwise the
     // tracer is left unfinished and in an error state.
     try
@@ -35,29 +35,29 @@ Rcpp::XPtr<XPtrTorchFunctionPtr> cpp_trace_function (Rcpp::Function fn, XPtrTorc
     }
     return output.get();
   };
-  
+
   std::function<void(void*)> deleter;
   if (manage_memory)
   {
     deleter = [] (void* x) {lantern_FunctionPtr_delete(x);};
   }
-  else 
+  else
   {
     deleter = [](void* x) -> void {};
   }
-  
+
   XPtrTorchTraceableFunction traceable_fn = lantern_create_traceable_fun(&rcpp_call_hook, (void*) &r_fn);
-  
+
   void* tr_fn_ptr;
   try
   {
     tr_fn_ptr = lantern_trace_fn(
-      traceable_fn.get(), 
-      inputs.get(), 
-      compilation_unit.get(), 
-      strict, 
-      module.get(), 
-      name.get(), 
+      traceable_fn.get(),
+      inputs.get(),
+      compilation_unit.get(),
+      strict,
+      module.get(),
+      name.get(),
       should_mangle
     );
   }
@@ -65,16 +65,16 @@ Rcpp::XPtr<XPtrTorchFunctionPtr> cpp_trace_function (Rcpp::Function fn, XPtrTorc
   {
     Rcpp::stop(std::string(e.what()) + std::string(": ") + error);
   }
-  catch (...) 
+  catch (...)
   {
     Rcpp::stop("Unknown error");
   }
-  
+
   auto tr_fn = XPtrTorchFunctionPtr(
-    tr_fn_ptr, 
+    tr_fn_ptr,
     deleter
   );
-  
+
   return make_xptr<XPtrTorchFunctionPtr>(tr_fn);
 }
 
@@ -91,7 +91,7 @@ XPtrTorchCompilationUnit cpp_jit_compilation_unit ()
 }
 
 // [[Rcpp::export]]
-XPtrTorchStack cpp_call_traced_fn (Rcpp::XPtr<XPtrTorchFunctionPtr> fn, 
+XPtrTorchStack cpp_call_traced_fn (Rcpp::XPtr<XPtrTorchFunctionPtr> fn,
                                    XPtrTorchStack inputs)
 {
   XPtrTorchStack out = lantern_call_traced_fn(fn->get(), inputs.get());
@@ -114,7 +114,7 @@ XPtrTorchScriptModule cpp_jit_load (std::string path)
 }
 
 // [[Rcpp::export]]
-XPtrTorchStack cpp_call_jit_script (Rcpp::XPtr<XPtrTorchJITModule> module, 
+XPtrTorchStack cpp_call_jit_script (Rcpp::XPtr<XPtrTorchJITModule> module,
                                                 XPtrTorchStack inputs)
 {
   XPtrTorchStack out = lantern_call_jit_script(module->get(), inputs.get());

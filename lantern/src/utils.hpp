@@ -28,7 +28,7 @@ public:
   {
     return *_object;
   }
-  
+
   operator T &() const
   {
     return *_object;

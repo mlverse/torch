@@ -35,23 +35,23 @@ void* _lantern_QScheme_per_tensor_symmetric () {
 const char * _lantern_QScheme_type(void* x) {
   LANTERN_FUNCTION_START
   auto y = from_raw::QScheme(x);
-  
+
   if (y == torch::QScheme::PER_CHANNEL_AFFINE) {
     return "per_channel_affine";
   }
-  
+
   if (y == torch::QScheme::PER_TENSOR_AFFINE) {
     return "per_tensor_affine";
   }
-  
+
   if (y == torch::QScheme::PER_CHANNEL_SYMMETRIC) {
     return "per_channel_symmetric";
   }
-  
+
   if (y == torch::QScheme::PER_TENSOR_SYMMETRIC) {
     return "per_tensor_symmetric";
   }
-  
+
   return "not handled";
   LANTERN_FUNCTION_END
 }

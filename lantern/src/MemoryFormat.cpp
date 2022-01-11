@@ -11,7 +11,7 @@
 void *_lantern_MemoryFormat_Contiguous()
 {
   LANTERN_FUNCTION_START
-  return make_raw::MemoryFormat(torch::MemoryFormat::Contiguous); 
+  return make_raw::MemoryFormat(torch::MemoryFormat::Contiguous);
   LANTERN_FUNCTION_END
 }
 

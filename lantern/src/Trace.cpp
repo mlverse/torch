@@ -25,13 +25,13 @@ void* _lantern_create_traceable_fun (void *(*r_caller)(void *, void *), void* fn
         auto tmp = Stack(x);
         void* out = (*r_caller)((void *)(&tmp), fn);
         // if the R function call fails itt will return nullptr by convention.
-        if (out == nullptr) 
+        if (out == nullptr)
             throw std::runtime_error("Error in the R function execution.");
 
         return *reinterpret_cast<Stack*>(out);
     };
 
-    return (void*) new std::function<Stack(Stack)>(tr_fn); 
+    return (void*) new std::function<Stack(Stack)>(tr_fn);
     LANTERN_FUNCTION_END;
 }
 
@@ -51,14 +51,14 @@ void* _lantern_trace_fn (void* fn, void* inputs, void* compilation_unit, bool st
         inputs_,
         fn_,
         var_fn,
-        strict, 
+        strict,
         false,
         module_
     );
 
     auto tr_fn = from_raw::CompilationUnit(compilation_unit).create_function(
         name_, std::get<0>(traced)->graph, should_mangle);
-    
+
     return (void*) tr_fn;
     LANTERN_FUNCTION_END;
 }
@@ -71,8 +71,8 @@ void* _lantern_call_traced_fn (void* fn, void* inputs)
 
     auto outputs = torch::jit::Stack();
     auto out = (*fn_)(inputs_);
-    outputs.push_back(out);  
-    
+    outputs.push_back(out);
+
     return make_ptr<torch::jit::Stack>(outputs);
     LANTERN_FUNCTION_END
 }
@@ -95,9 +95,9 @@ void _lantern_traced_fn_save (void* fn, const char* filename)
     LANTERN_FUNCTION_START;
     Function* fn_ = reinterpret_cast<Function *>(fn);
     auto filename_ = std::string(filename);
-    
+
     Module module("__torch__.PlaceholderModule");
-    
+
     module.register_attribute("training", BoolType::get(), true);
     addFunctionToModule(module, fn_);
     module.save(filename_);
@@ -132,7 +132,7 @@ void* _lantern_call_jit_script (void* module, void* inputs)
 
     auto outputs = torch::jit::Stack();
     auto out = module_->forward(inputs_);
-    outputs.push_back(out);  
+    outputs.push_back(out);
 
     return make_ptr<torch::jit::Stack>(outputs);
     LANTERN_FUNCTION_END
@@ -142,7 +142,7 @@ void _trace_r_nn_module ()
 {
     LANTERN_FUNCTION_START;
     auto x = torch::randn({10, 10});
-    
+
     torch::jit::Stack inputs;
     inputs.push_back(x);
 
@@ -166,8 +166,8 @@ void _trace_r_nn_module ()
 
     auto cu = torch::jit::CompilationUnit();
     auto z = cu.create_function("name", std::get<0>(traced)->graph, true);
-    
-    
+
+
     std::cout << "calling JIT" << std::endl;
 
     auto t = std::get<0>(traced);
@@ -185,9 +185,9 @@ void _lantern_traced_fn_save_for_mobile (void* fn, const char* filename)
   LANTERN_FUNCTION_START;
   Function* fn_ = reinterpret_cast<Function *>(fn);
   auto filename_ = std::string(filename);
-  
+
   Module module("__torch__.PlaceholderModule");
-  
+
   module.register_attribute("training", BoolType::get(), true);
   addFunctionToModule(module, fn_);
   module._save_for_mobile(filename_);

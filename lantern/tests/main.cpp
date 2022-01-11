@@ -10,7 +10,7 @@ bool lantern_loaded = false;
 #include "init.h"
 
 void lantern_host_handler() {
-    
+
 }
 
 int main(int argc, char *argv[])

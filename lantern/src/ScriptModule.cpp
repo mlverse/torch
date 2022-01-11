@@ -10,7 +10,7 @@ using namespace torch::jit;
 
 void* _lantern_ScriptModule_new (void* cu, void* name)
 {
-    // this pointer shouldn't use the default deleter as its memory is managed in 
+    // this pointer shouldn't use the default deleter as its memory is managed in
     // the R side.
     auto cu_ = std::shared_ptr<torch::CompilationUnit>(
         &from_raw::CompilationUnit(cu),
@@ -41,7 +41,7 @@ void* _lantern_ScriptModule_forward (void* module, void* inputs)
 
     auto outputs = torch::jit::Stack();
     auto out = module_->forward(inputs_);
-    outputs.push_back(out);  
+    outputs.push_back(out);
 
     return make_ptr<torch::jit::Stack>(outputs);
 }
@@ -156,7 +156,7 @@ void* _lantern_ScriptModule_find_method (void* self, void* basename)
     LANTERN_FUNCTION_END
 }
 
-void _lantern_ScriptModule_add_method (void* self, void* method) 
+void _lantern_ScriptModule_add_method (void* self, void* method)
 {
     LANTERN_FUNCTION_START
     auto self_ = reinterpret_cast<torch::jit::script::Module *>(self);
@@ -197,10 +197,10 @@ void* _lantern_ScriptMethod_call (void* self, void* inputs)
     LANTERN_FUNCTION_START
     auto self_ = *reinterpret_cast<torch::jit::script::Method *>(self);
     Stack inputs_ = *reinterpret_cast<Stack*>(inputs);
-    
+
     auto outputs = torch::jit::Stack();
     auto out = self_(inputs_);
-    outputs.push_back(out);  
+    outputs.push_back(out);
 
     return make_ptr<torch::jit::Stack>(outputs);
     LANTERN_FUNCTION_END

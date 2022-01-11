@@ -23,7 +23,7 @@ const char  * _lantern_tensor_save (void* self)
     torch::save(t, oss);
 
     auto str = std::string(macaron::Base64::Encode(oss.str()));
-    
+
     char *cstr = new char[str.length() + 1];
     strcpy(cstr, str.c_str());
     return cstr;
@@ -40,7 +40,7 @@ std::size_t _lantern_tensor_serialized_size (const char * s)
     LANTERN_FUNCTION_END_RET(0)
 }
 
-void * _lantern_tensor_load (const char * s, void* device) 
+void * _lantern_tensor_load (const char * s, void* device)
 {
     LANTERN_FUNCTION_START
     std::string str;
@@ -74,8 +74,8 @@ void* _lantern_load_state_dict (const char * path)
     LANTERN_FUNCTION_START
     std::ifstream file(path, std::ios::binary);
     std::vector<char> data((std::istreambuf_iterator<char>(file)), std::istreambuf_iterator<char>());
-    torch::IValue ivalue = torch::pickle_load(data); 
-    return make_raw::IValue(ivalue);  
+    torch::IValue ivalue = torch::pickle_load(data);
+    return make_raw::IValue(ivalue);
     LANTERN_FUNCTION_END
 }
 

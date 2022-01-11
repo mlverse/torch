@@ -26,10 +26,10 @@ std::string cpp_dimname_to_string (XPtrTorchDimname x) {
 
 // [[Rcpp::export]]
 std::vector<std::string> cpp_dimname_list_to_string (XPtrTorchDimnameList x) {
-  
+
   int64_t size = lantern_DimnameList_size(x.get());
   std::vector<std::string> result;
-  
+
   for (int i = 0; i < size; i++) {
     auto dimname = XPtrTorchDimname(lantern_DimnameList_at(x.get(), i));
     auto v = lantern_Dimname_to_string(dimname.get());

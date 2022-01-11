@@ -31,7 +31,7 @@ XPtrTorchTensorList cpp_nn_utils_pad_packed_sequence (
     sequence->get(),
     batch_first, padding_value,
     total_length.get()
-  );  
+  );
   return out;
 }
 
@@ -52,7 +52,7 @@ Rcpp::XPtr<XPtrTorchPackedSequence> cpp_nn_utils_PackedSequence_new(Rcpp::XPtr<X
                                                                     Rcpp::XPtr<XPtrTorchTensor> sorted_indices,
                                                                     Rcpp::XPtr<XPtrTorchTensor> unsorted_indices)
 {
-  XPtrTorchPackedSequence out = lantern_nn_utils_rnn_PackedSequence_new( 
+  XPtrTorchPackedSequence out = lantern_nn_utils_rnn_PackedSequence_new(
     data->get(),
     batch_sizes->get(),
     sorted_indices->get(),

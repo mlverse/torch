@@ -9,14 +9,14 @@ XPtrTorchTensorOptions cpp_torch_tensor_options (
     Rcpp::Nullable<bool> requires_grad,
     Rcpp::Nullable<bool> pinned_memory
 ) {
-  
+
   XPtrTorchTensorOptions options(lantern_TensorOptions());
-  
+
   if (dtype_ptr.isNotNull()) {
     auto dtype = * Rcpp::as<Rcpp::XPtr<XPtrTorch>>(dtype_ptr);
     options = lantern_TensorOptions_dtype(options.get(), dtype.get());
   }
-  
+
   if (layout_ptr.isNotNull()) {
     auto layout = * Rcpp::as<Rcpp::XPtr<XPtrTorch>>(layout_ptr);
     options = lantern_TensorOptions_layout(options.get(), layout.get());
@@ -34,11 +34,11 @@ XPtrTorchTensorOptions cpp_torch_tensor_options (
   if (pinned_memory.isNotNull()) {
     options = lantern_TensorOptions_pinned_memory(options.get(), Rcpp::as<bool>(pinned_memory));
   }
-  
+
   return XPtrTorchTensorOptions(options);
 }
 
 // [[Rcpp::export]]
 void cpp_torch_tensor_options_print (Rcpp::XPtr<XPtrTorchTensorOptions> x) {
   lantern_TensorOptions_print(x->get());
-} 
+}

@@ -28,7 +28,7 @@ std::string toCharOnly(std::string str)
 
 std::string removeAt(std::string str)
 {
-    std::regex e ("at::"); 
+    std::regex e ("at::");
     auto result = std::regex_replace (str, e, "");
     return std::regex_replace(result, std::regex("const Scalar &"), "Scalar");
 }
@@ -145,7 +145,7 @@ std::string buildCalls(std::string name, YAML::Node node, size_t start)
 
         // add optional call if required
         std::string call = node[idx]["name"].as<std::string>();
-        if ((dtype.find("c10::optional") != std::string::npos) & 
+        if ((dtype.find("c10::optional") != std::string::npos) &
             (type != "c10::List<c10::optional<torch::Tensor>>") &
             (type != "c10::optional<torch::Tensor>"))
         {
@@ -153,7 +153,7 @@ std::string buildCalls(std::string name, YAML::Node node, size_t start)
         }
 
 
-        
+
         if (type == "Tensor")
         {
             arguments += "from_raw::Tensor(" + call + ")";
@@ -287,7 +287,7 @@ std::string buildCalls(std::string name, YAML::Node node, size_t start)
             throw std::runtime_error("Unknown type " + type);
         }
 
-        
+
         if (type == "std::shared_ptr<torch::Generator>")
         {
             arguments += ".get()";
@@ -450,7 +450,7 @@ void appendBody (std::vector<std::string>& bodies, YAML::Node fun_node, bool met
     std::string argumentsCalls = buildArgumentsCalls(name, fun_node["arguments"]);
     std::string function = toFunction(name, fun_node["arguments"]);
     std::string returns = buildReturn(fun_node["returns"]);
-    
+
 
     auto return_node = fun_node["returns"];
 
@@ -460,24 +460,24 @@ void appendBody (std::vector<std::string>& bodies, YAML::Node fun_node, bool met
         function = "Tensor_" + function;
         calls = buildCalls(name, fun_node["arguments"], 1);
         std::string firstName = fun_node["arguments"][0]["name"].as<std::string>();
-        functionCall = "from_raw::Tensor(" + firstName + ").";       
+        functionCall = "from_raw::Tensor(" + firstName + ").";
     }
     else
     {
         calls = buildCalls(name, fun_node["arguments"], 0);
         functionCall = "torch::";
     }
-    
+
     bodies.push_back("void* _lantern_" + function + "(" + arguments + ")");
     bodies.push_back("{");
-    bodies.push_back("  LANTERN_FUNCTION_START"); 
+    bodies.push_back("  LANTERN_FUNCTION_START");
 
     if (skipCuda102)
     {
         bodies.push_back("#ifdef CUDA102");
         bodies.push_back("    throw \"Not Implemented\";");
         bodies.push_back("#else");
-    }   
+    }
 
     if (returns == "void" | (return_node.size() == 0))
     {
@@ -542,17 +542,17 @@ int main(int argc, char *argv[])
         {
             headers.push_back("  LANTERN_API void* (LANTERN_PTR _lantern_" + function + ")(" + arguments + ");");
             headers.push_back("  HOST_API void* lantern_" + function + "(" + arguments + ") { LANTERN_CHECK_LOADED void* ret = _lantern_" + function + "(" + argumentsCalls + "); LANTERN_HOST_HANDLER return ret; }");
-  
+
             appendBody(bodies, config[idx], false, false);
         }
 
-    
+
         if (hasMethodOf(config[idx], "Tensor") || name == "stride")
         {
 
             headers.push_back("  LANTERN_API void* (LANTERN_PTR _lantern_Tensor_" + function + ")(" + arguments + ");");
             headers.push_back("  HOST_API void* lantern_Tensor_" + function + "(" + arguments + ") { void* ret = _lantern_Tensor_" + function + "(" + argumentsCalls + "); LANTERN_HOST_HANDLER return ret; }");
-  
+
             bool skipCuda102 = function == "true_divide_tensor_scalar" ||
                                function == "true_divide__tensor_scalar" ||
                                function == "true_divide_tensor_tensor" ||

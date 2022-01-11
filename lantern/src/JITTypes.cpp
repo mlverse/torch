@@ -13,7 +13,7 @@ template<class T>
 int jit_type_size (void* self)
 {
    auto self_ = reinterpret_cast<T *>(self);
-   return self_->size(); 
+   return self_->size();
 }
 
 int _lantern_jit_named_parameter_list_size (void* self)
@@ -69,7 +69,7 @@ void* _lantern_jit_named_module_list_module_at (void* self, int64_t index)
 {
     LANTERN_FUNCTION_START
     auto self_ = reinterpret_cast<torch::jit::named_module_list *>(self);
-    
+
     int i = 0;
     torch::jit::script::Module out;
     for (auto el : *self_) {
@@ -78,7 +78,7 @@ void* _lantern_jit_named_module_list_module_at (void* self, int64_t index)
             out = el.value;
             break;
         }
-        i++;    
+        i++;
     }
 
     return (void*) new torch::jit::script::Module(out);

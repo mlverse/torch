@@ -74,12 +74,12 @@ void * _lantern_optional_vector_double(double * x, size_t x_size, bool is_null)
 {
   LANTERN_FUNCTION_START
   c10::optional<torch::ArrayRef<double>> out;
-  
+
   if (is_null)
     out = c10::nullopt;
-  else 
+  else
     out = torch::ArrayRef<double>(x, x + x_size);;
-  
+
   return make_raw::optional::DoubleArrayRef(out);
   LANTERN_FUNCTION_END
 }
@@ -91,7 +91,7 @@ void * _lantern_optional_vector_int64_t(int64_t * x, size_t x_size, bool is_null
 
   if (is_null)
     out = c10::nullopt;
-  else 
+  else
     out = torch::ArrayRef<int64_t>(x, x + x_size);
 
   return make_raw::optional::IntArrayRef(out);
@@ -110,7 +110,7 @@ void * _lantern_optional_vector_int64_t(int64_t * x, size_t x_size, bool is_null
   }                                                                \
   void* _lantern_optional_##name##_value (void* obj) {             \
     return make_raw::type (from_raw::optional::type(obj).value()); \
-  }                                                               
+  }
 
 
 LANTERN_OPTIONAL(dimname_list, DimnameList)
@@ -160,7 +160,7 @@ int64_t _lantern_int64_t_get(void* x)
   LANTERN_FUNCTION_END
 }
 
-double _lantern_double_get (void* x) 
+double _lantern_double_get (void* x)
 {
   LANTERN_FUNCTION_START
   return from_raw::double_t(x);

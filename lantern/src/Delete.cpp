@@ -169,7 +169,7 @@ void _lantern_optional_string_delete (void* x)
   LANTERN_FUNCTION_END_VOID
 }
 
-void _lantern_optional_scalar_type_delete (void* x) 
+void _lantern_optional_scalar_type_delete (void* x)
 {
   LANTERN_FUNCTION_START
   lantern_delete<self_contained::optional::ScalarType>(x);
@@ -205,7 +205,7 @@ void _lantern_Slice_delete(void *x)
 }
 
 void _lantern_optional_int64_t_delete(void *x)
-{   
+{
   LANTERN_FUNCTION_START
   lantern_delete<self_contained::optional::int64_t>(x);
   LANTERN_FUNCTION_END_VOID

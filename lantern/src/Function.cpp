@@ -9,13 +9,13 @@ if (lanternLastError() != NULL) {                                    \
     std::string last = lanternLastError();                           \
     lanternLastErrorClear();                                         \
     throw std::string(last.c_str());                                 \
-} 
+}
 
 inline std::vector<c10::optional<torch::autograd::Variable>> to_optional(torch::autograd::variable_list& output) {
     std::vector<c10::optional<torch::autograd::Variable>> result;
     for (auto& v : output) {
         result.push_back(c10::optional<torch::autograd::Variable>(v));
-    }   
+    }
     return result;
 }
 
@@ -118,7 +118,7 @@ variable_list LanternNode::apply(variable_list &&inputs)
         LLOG("Checking outputs, exception: %s", last.c_str());
         lanternLastErrorClear();
         throw std::runtime_error(last.c_str());
-    } 
+    }
 
     int num_forward_inputs = is_variable_input_.size();
     int num_outputs = outputs.size();

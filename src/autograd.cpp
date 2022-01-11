@@ -26,15 +26,15 @@ void cpp_autograd_set_grad_mode (bool enabled) {
 // [[Rcpp::export]]
 bool cpp_autograd_is_enabled()
 {
-  return lantern_autograd_is_enabled();  
+  return lantern_autograd_is_enabled();
 }
-  
+
 // [[Rcpp::export]]
 void cpp_autograd_set_detect_anomaly (bool enabled)
 {
   lantern_autograd_set_detect_anomaly(enabled);
 }
-  
+
 // [[Rcpp::export]]
 bool cpp_autograd_detect_anomaly_is_enabled ()
 {
@@ -65,38 +65,38 @@ std::mutex backward_tasks_mutex;
 
 void event_loop_thread(std::atomic<bool> &event_loop_running)
 {
-  
+
   while (event_loop_running) {
-    
+
     {
       std::unique_lock<std::mutex> lock(tasks_mutex);
       while (!tasks.empty()) {
         auto task(std::move(tasks.front()));
         tasks.pop_front();
-        
+
         lock.unlock();
         task();
         lock.lock();
       }
     }
-    
+
   }
-  
+
 }
 
 // [[Rcpp::export]]
-void cpp_torch_method__backward_self_Tensor_inputs_TensorList (torch::Tensor self, torch::TensorList inputs, 
-                                                              torch::optional::Tensor gradient, 
-                                                              torch::optional::bool_t retain_graph, 
+void cpp_torch_method__backward_self_Tensor_inputs_TensorList (torch::Tensor self, torch::TensorList inputs,
+                                                              torch::optional::Tensor gradient,
+                                                              torch::optional::bool_t retain_graph,
                                                               torch::bool_t create_graph) {
-  
+
   std::atomic<bool> event_loop_running(true);
   std::function<void()> backward ([&](){
-    
+
     try
     {
       lantern_Tensor__backward_tensor_tensorlist_tensor_bool_bool(
-        self.get(), inputs.get(), gradient.get(), 
+        self.get(), inputs.get(), gradient.get(),
         retain_graph.get(), create_graph.get());
     }
     catch (...)
@@ -105,37 +105,37 @@ void cpp_torch_method__backward_self_Tensor_inputs_TensorList (torch::Tensor sel
       n_tasks = n_tasks - 1;
       throw;
     }
-    
+
     event_loop_running = false;
     n_tasks = n_tasks - 1;
   });
-  
+
   std::packaged_task<void()> task(backward);
   std::future<void> result = task.get_future();
-  
+
   if (n_tasks == 0)
   {
     n_tasks = n_tasks + 1;
     std::thread td (std::move(task));
     td.detach();
-  } 
-  else 
+  }
+  else
   {
     n_tasks = n_tasks + 1;
-    
+
     {
       std::lock_guard<std::mutex> lock(tasks_mutex);
       backward_tasks.push_front(std::move(task));
     }
-    
+
   }
-  
+
   event_loop_thread(event_loop_running);
   result.get();
 }
 
 // [[Rcpp::export]]
-void cpp_autograd_backward (Rcpp::XPtr<XPtrTorchvariable_list> tensors, 
+void cpp_autograd_backward (Rcpp::XPtr<XPtrTorchvariable_list> tensors,
                             Rcpp::XPtr<XPtrTorchvariable_list> grad_tensors,
                             bool retain_graph,
                             bool create_graph
@@ -143,13 +143,13 @@ void cpp_autograd_backward (Rcpp::XPtr<XPtrTorchvariable_list> tensors,
 {
   auto tensors_ = tensors->get();
   auto grad_tensors_ = grad_tensors->get();
-  
+
   std::atomic<bool> event_loop_running(true);
   std::function<void()> backward ([&](){
-    
+
     try
     {
-      lantern_autograd_backward(tensors_, grad_tensors_, retain_graph, 
+      lantern_autograd_backward(tensors_, grad_tensors_, retain_graph,
                                 create_graph);
     }
     catch (...)
@@ -158,41 +158,41 @@ void cpp_autograd_backward (Rcpp::XPtr<XPtrTorchvariable_list> tensors,
       n_tasks = n_tasks - 1;
       throw;
     }
-    
+
     event_loop_running = false;
     n_tasks = n_tasks - 1;
   });
-  
+
   std::packaged_task<void()> task(backward);
   std::future<void> result = task.get_future();
-  
+
   if (n_tasks == 0)
   {
     n_tasks = n_tasks + 1;
     std::thread td (std::move(task));
     td.detach();
-  } 
-  else 
+  }
+  else
   {
     n_tasks = n_tasks + 1;
-    
+
     {
       std::lock_guard<std::mutex> lock(tasks_mutex);
       backward_tasks.push_front(std::move(task));
     }
-    
+
   }
-  
+
   event_loop_thread(event_loop_running);
   result.get();
 }
-  
+
 void*  rcpp_call_hook (void* x, void* hook) {
   return (*reinterpret_cast<std::function<void*(void*)> *>(hook))(x);
 }
 
-// Since hooks are arbitrary R functions, they must run in the main 
-// thread. In order to do it we call `backward` in a different thread 
+// Since hooks are arbitrary R functions, they must run in the main
+// thread. In order to do it we call `backward` in a different thread
 // see `cpp_backward` and leave the main thread free to execute the R
 // calbacks that are pushed to the `event_loop_thread` as `packaged_tasks`
 // in this function.
@@ -204,9 +204,9 @@ void*  rcpp_call_hook (void* x, void* hook) {
 //
 // [[Rcpp::export]]
 unsigned int cpp_tensor_register_hook (Rcpp::XPtr<XPtrTorchTensor> self, Rcpp::Function f) {
-  
+
   auto r_hook = (void *)new std::function<void*(void *)>([f](void *x) {
-    
+
     std::packaged_task<void*()> task([f, x]() {
       LANTERN_CALLBACK_START
       SEXP y = PROTECT(XPtrTorchTensor(x));
@@ -216,34 +216,34 @@ unsigned int cpp_tensor_register_hook (Rcpp::XPtr<XPtrTorchTensor> self, Rcpp::F
       LANTERN_CALLBACK_END("Unknon error in hook.", NULL)
     });
     std::future<void*> result = task.get_future();
-    
+
     {
       std::lock_guard<std::mutex> lock(tasks_mutex);
       tasks.push_front(std::move(task));
     }
-    
+
     std::future_status status;
     do {
       status = result.wait_for(std::chrono::seconds(0));
       if (status == std::future_status::timeout) {
-        
+
         std::unique_lock<std::mutex> lock(backward_tasks_mutex);
         while (!backward_tasks.empty()) {
           auto task(std::move(backward_tasks.front()));
           backward_tasks.pop_front();
-          
+
           // unlock during the task
           lock.unlock();
           task();
           lock.lock();
         }
-        
-      } 
-    } while (status != std::future_status::ready); 
-    
+
+      }
+    } while (status != std::future_status::ready);
+
     return result.get();
   });
-  
+
   auto hook = lantern_new_hook(&rcpp_call_hook, r_hook);
   return lantern_Tensor_register_hook(self->get(), hook);
 }
@@ -273,7 +273,7 @@ Rcpp::XPtr<XPtrTorch> cpp_Function_lambda (Rcpp::Function f)
 {
   auto fun = new std::function<void*(void *, void*)>([f](void *ctx, void* inputs) {
     LANTERN_CALLBACK_START
-    
+
     std::packaged_task<void*()> task([f, ctx, inputs]() {
       auto inp = XPtrTorchvariable_list(inputs);
       auto con = make_xptr<XPtrTorch>(ctx);
@@ -283,28 +283,28 @@ Rcpp::XPtr<XPtrTorch> cpp_Function_lambda (Rcpp::Function f)
       auto output = new torch::variable_list(Rcpp::as<torch::variable_list>(r_out));
       return (void*) output;
     });
-    
+
     std::future<void*> result = task.get_future();
-    
+
     {
       std::lock_guard<std::mutex> lock(tasks_mutex);
       tasks.push_front(std::move(task));
     }
-    
+
     return result.get();
     LANTERN_CALLBACK_END("Unknown error in lambda function.", new torch::variable_list(lantern_variable_list_new()))
   });
-  
+
   auto deleter = [fun] (void* x) {
     lantern_Function_lambda_delete(x);
     // we should delete the `fun` pointer when the object that refers to it gets
     // deleted.
-    delete fun; 
+    delete fun;
   };
-  
+
   auto out = XPtrTorch(lantern_Function_lambda(&rcpp_call_forward, (void*)fun,
                                                &rcpp_delete_variable_list,
-                                               &rcpp_variable_list_ptr), 
+                                               &rcpp_variable_list_ptr),
                                                deleter);
   return make_xptr<XPtrTorch>(out);
 }
@@ -316,12 +316,12 @@ torch::variable_list cpp_Function_apply (torch::variable_list inputs,
 {
   std::atomic<bool> event_loop_running;
   event_loop_running = true;
-  
+
   std::function<XPtrTorchvariable_list()> apply ([&](){
-    
+
     auto out = XPtrTorchvariable_list((void*)nullptr);
-    
-    try 
+
+    try
     {
       out = XPtrTorchvariable_list(lantern_Function_apply(
         inputs.get(),
@@ -344,24 +344,24 @@ torch::variable_list cpp_Function_apply (torch::variable_list inputs,
       event_loop_running = false;
       throw;
     }
-    
+
     event_loop_running = false;
     return out;
   });
-  
+
   std::packaged_task<XPtrTorchvariable_list()> task(apply);
   std::future<XPtrTorchvariable_list> result = task.get_future();
-  
+
   std::thread td (std::move(task));
   td.detach();
-  
+
   event_loop_thread(event_loop_running);
-  
+
   return result.get();
 }
 
 // [[Rcpp::export]]
-void cpp_autograd_context_save_for_backward (Rcpp::XPtr<XPtrTorch> self, 
+void cpp_autograd_context_save_for_backward (Rcpp::XPtr<XPtrTorch> self,
                                              torch::variable_list vars)
 {
   lantern_AutogradContext_save_for_backward(self->get(), vars.get());
@@ -440,9 +440,9 @@ std::string cpp_autograd_node_name (Rcpp::XPtr<XPtrTorch> self)
 // [[Rcpp::export]]
 Rcpp::List cpp_autograd_node_next_edges (Rcpp::XPtr<XPtrTorch> self)
 {
-  auto next_edges = XPtrTorch(lantern_Node_next_edges(self->get()), 
+  auto next_edges = XPtrTorch(lantern_Node_next_edges(self->get()),
                               lantern_autograd_edge_list_delete);
-  
+
   Rcpp::List out;
   auto size = lantern_edge_list_size(next_edges.get());
   for (int i = 0; i < size; i ++)
@@ -452,7 +452,7 @@ Rcpp::List cpp_autograd_node_next_edges (Rcpp::XPtr<XPtrTorch> self)
         lantern_autograd_edge_delete
     )));
   }
-  
+
   return out;
 }
 
@@ -478,4 +478,4 @@ torch::variable_list cpp_autograd_grad(torch::variable_list outputs,
     allow_unused
   );
   return out;
-}   
+}

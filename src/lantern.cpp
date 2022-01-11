@@ -8,11 +8,11 @@ void lantern_host_handler()
   if (lanternLastError() != NULL) {
     std::string last = lanternLastError();
     lanternLastErrorClear();
-    
+
     std::string error_msg = translate_error_message(std::string(last.c_str()));
-    
+
     throw Rcpp::exception(error_msg.c_str());
-  } 
+  }
 }
 
 bool lantern_loaded = false;
@@ -57,7 +57,7 @@ std::string cpp_lantern_last_error() {
   const char* pError = lanternLastError();
   if (pError == NULL)
     return std::string("");
-  
+
   return std::string(pError);
 }
 

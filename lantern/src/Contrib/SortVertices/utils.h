@@ -35,7 +35,7 @@ SOFTWARE.
 #define CHECK_CONTIGUOUS(x)                                                     \
     do {                                                                        \
         TORCH_CHECK(x.is_contiguous(), #x " must ne a contiguous tensor");       \
-    } while (0)                                                                 
+    } while (0)
 
 #define CHECK_IS_INT(x)                                     \
     do {                                                    \
@@ -47,10 +47,10 @@ SOFTWARE.
     do {                                                        \
         TORCH_CHECK(x.scalar_type()==at::ScalarType::Float,    \
                     #x " must be a float tensor");              \
-    } while (0)                                                 
+    } while (0)
 
 #define CHECK_IS_BOOL(x)                                       \
     do {                                                        \
         TORCH_CHECK(x.scalar_type()==at::ScalarType::Bool,    \
                     #x " must be a bool tensor");             \
-    } while (0) 
+    } while (0)

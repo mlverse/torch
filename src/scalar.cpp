@@ -5,26 +5,26 @@ XPtrTorchScalar cpp_torch_scalar (SEXP x) {
 
   XPtrTorchScalar out;
   std::string type;
-  
+
   int i;
   double d;
   bool b;
-  
+
   switch (TYPEOF(x)) {
   case INTSXP:
-    i = Rcpp::as<int>(x); 
+    i = Rcpp::as<int>(x);
     type = "int";
-    out = lantern_Scalar((void*)(&i), type.c_str()); 
+    out = lantern_Scalar((void*)(&i), type.c_str());
     break;
   case REALSXP:
-    d = Rcpp::as<double>(x); 
+    d = Rcpp::as<double>(x);
     type = "double";
-    out = lantern_Scalar((void*)(&d), type.c_str()); 
+    out = lantern_Scalar((void*)(&d), type.c_str());
     break;
   case LGLSXP:
-    b = Rcpp::as<bool>(x); 
+    b = Rcpp::as<bool>(x);
     type = "bool";
-    out = lantern_Scalar((void*)(&b), type.c_str()); 
+    out = lantern_Scalar((void*)(&b), type.c_str());
     break;
   case CHARSXP:
     Rcpp::stop("strings are not handled yet");
@@ -43,7 +43,7 @@ Rcpp::XPtr<XPtrTorchScalarType> cpp_torch_scalar_dtype (Rcpp::XPtr<XPtrTorchScal
 }
 
 // [[Rcpp::export]]
-int cpp_torch_scalar_to_int (Rcpp::XPtr<XPtrTorchScalar> self) 
+int cpp_torch_scalar_to_int (Rcpp::XPtr<XPtrTorchScalar> self)
 {
   return lantern_Scalar_to_int(self->get());
 }

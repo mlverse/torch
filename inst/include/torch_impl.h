@@ -9,7 +9,7 @@ XPtrTorchTensor::operator SEXP () const {
   return operator_sexp_tensor(this);
 }
 
-XPtrTorchTensor::XPtrTorchTensor (SEXP x) : 
+XPtrTorchTensor::XPtrTorchTensor (SEXP x) :
   XPtrTorch{from_sexp_tensor(x)} {}
 
 // optional_torch_tensor
@@ -88,7 +88,7 @@ XPtrTorchoptional_scalar::XPtrTorchoptional_scalar (SEXP x):
 
 // tensor options
 
-XPtrTorchTensorOptions::operator SEXP () const 
+XPtrTorchTensorOptions::operator SEXP () const
 {
   return operator_sexp_tensor_options(this);
 }
@@ -98,7 +98,7 @@ XPtrTorchTensorOptions::XPtrTorchTensorOptions (SEXP x):
 
 // Compilation unit
 
-XPtrTorchCompilationUnit::operator SEXP () const 
+XPtrTorchCompilationUnit::operator SEXP () const
 {
   return operator_sexp_compilation_unit(this);
 }
@@ -108,7 +108,7 @@ XPtrTorchCompilationUnit::XPtrTorchCompilationUnit (SEXP x) :
 
 // device
 
-XPtrTorchDevice::operator SEXP () const 
+XPtrTorchDevice::operator SEXP () const
 {
   return operator_sexp_device(this);
 }
@@ -118,7 +118,7 @@ XPtrTorchDevice::XPtrTorchDevice (SEXP x):
 
 // script module
 
-XPtrTorchScriptModule::operator SEXP () const 
+XPtrTorchScriptModule::operator SEXP () const
 {
   return operator_sexp_script_module(this);
 }
@@ -128,7 +128,7 @@ XPtrTorchScriptModule::XPtrTorchScriptModule (SEXP x):
 
 // script method
 
-XPtrTorchScriptMethod::operator SEXP () const 
+XPtrTorchScriptMethod::operator SEXP () const
 {
   return operator_sexp_script_method(this);
 }
@@ -138,7 +138,7 @@ XPtrTorchScriptMethod::XPtrTorchScriptMethod (SEXP x):
 
 // dtype
 
-XPtrTorchDtype::operator SEXP () const 
+XPtrTorchDtype::operator SEXP () const
 {
   return operator_sexp_dtype(this);
 }
@@ -248,7 +248,7 @@ XPtrTorchstring::XPtrTorchstring(SEXP x) :
 
 // optional string
 
-XPtrTorchoptional_string::operator SEXP() const 
+XPtrTorchoptional_string::operator SEXP() const
 {
   return operator_sexp_optional_string(this);
 }
@@ -258,21 +258,21 @@ XPtrTorchoptional_string::XPtrTorchoptional_string (SEXP x):
 
 // jit_named_parameter_list
 
-XPtrTorchjit_named_parameter_list::operator SEXP () const 
+XPtrTorchjit_named_parameter_list::operator SEXP () const
 {
   return operator_sexp_jit_named_parameter_list(this);
 }
 
 // jit_named_buffer_list
 
-XPtrTorchjit_named_buffer_list::operator SEXP () const 
+XPtrTorchjit_named_buffer_list::operator SEXP () const
 {
   return operator_sexp_jit_named_buffer_list(this);
 }
 
 // jit_named_module_list
 
-XPtrTorchjit_named_module_list::operator SEXP () const 
+XPtrTorchjit_named_module_list::operator SEXP () const
 {
   return operator_sexp_jit_named_module_list(this);
 }
@@ -309,7 +309,7 @@ XPtrTorchvector_double::XPtrTorchvector_double (SEXP x) :
 
 // stack
 
-XPtrTorchStack::operator SEXP () const 
+XPtrTorchStack::operator SEXP () const
 {
   return operator_sexp_stack(this);
 }
@@ -330,7 +330,7 @@ XPtrTorchIValue::XPtrTorchIValue(SEXP x) :
 
 // tuple
 
-XPtrTorchTuple::operator SEXP () const 
+XPtrTorchTuple::operator SEXP () const
 {
   return operator_sexp_tuple(this);
 }
@@ -340,7 +340,7 @@ XPtrTorchTuple::XPtrTorchTuple(SEXP x) :
 
 // named_tuple_helper
 
-XPtrTorchNamedTupleHelper::operator SEXP () const 
+XPtrTorchNamedTupleHelper::operator SEXP () const
 {
   return operator_sexp_named_tuple_helper(this);
 }
@@ -350,7 +350,7 @@ XPtrTorchNamedTupleHelper::XPtrTorchNamedTupleHelper (SEXP x) :
 
 // ivalue
 
-XPtrTorchvector_IValue::operator SEXP () const 
+XPtrTorchvector_IValue::operator SEXP () const
 {
   return operator_sexp_vector_ivalue(this);
 }

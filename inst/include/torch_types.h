@@ -290,7 +290,7 @@ public:
   XPtrTorchOptionalIntArrayRef () : XPtrTorch{NULL} {};
   XPtrTorchOptionalIntArrayRef (SEXP x);
   XPtrTorchOptionalIntArrayRef (void* x) : XPtrTorch(x, delete_optional_int_array_ref) {};
-};  
+};
 
 class XPtrTorchOptionalIndexIntArrayRef : public XPtrTorchOptionalIntArrayRef {
 public:
@@ -501,7 +501,7 @@ public:
 
 class XPtrTorchint64_t : public XPtrTorch {
 public:
-  operator SEXP () const; 
+  operator SEXP () const;
   XPtrTorchint64_t (void* x) : XPtrTorch(x, delete_int64_t) {}
   XPtrTorchint64_t (SEXP x);
 };
@@ -643,7 +643,7 @@ namespace nn
 {
 namespace utils
 {
-namespace rnn 
+namespace rnn
 {
 using PackedSequence = XPtrTorchPackedSequence;
 }
@@ -651,7 +651,7 @@ using PackedSequence = XPtrTorchPackedSequence;
 }
 
 
-namespace optional 
+namespace optional
 {
 using Tensor = XPtrTorchOptionalTensor;
 using TensorList = XPtrTorchOptionalTensorList;
@@ -664,7 +664,7 @@ using bool_t = XPtrTorchoptional_bool;
 
 }
 
-namespace vector 
+namespace vector
 {
 using Tensor = XPtrTorchTensorList;
 using int64_t = XPtrTorchvector_int64_t;
@@ -680,7 +680,7 @@ using IValue = XPtrTorchvector_IValue;
 }
 }
 
-namespace index 
+namespace index
 {
 using Tensor = XPtrTorchIndexTensor;
 using TensorList = XPtrTorchIndexTensorList;

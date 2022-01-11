@@ -40,7 +40,7 @@ int _lantern_IValue_type (void* self)
     if (self_->isTuple()) return IValue_types::IValueTupleType;
     if (self_->isList()) return IValue_types::IValueListType;
     if (self_->isPtrType()) return IValue_types::IValuePtrTypeType;
-    
+
     return IValue_types::IValueTypeUnknownType;
     LANTERN_FUNCTION_END
 }
@@ -283,7 +283,7 @@ void* _lantern_IValue_from_TensorList (void* self)
     LANTERN_FUNCTION_END
 }
 
-void* _lantern_IValue_from_None () 
+void* _lantern_IValue_from_None ()
 {
     LANTERN_FUNCTION_START
     return make_raw::IValue(c10::nullopt);
@@ -295,12 +295,12 @@ void* _lantern_IValue_Tuple (void* self)
     LANTERN_FUNCTION_START
     auto self_ = from_raw::IValue(self);
     auto tuple = self_.toTuple();
-    
+
     std::vector<std::string> names;
     if (tuple->type()->schema())
     {
         auto arguments = tuple->type()->schema()->arguments();
-    
+
         for (const auto& el : arguments)
         {
             names.push_back(el.name());

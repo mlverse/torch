@@ -19,22 +19,22 @@ std::string cpp_generator_current_seed (XPtrTorchGenerator generator) {
 
 // [[Rcpp::export]]
 void cpp_generator_set_current_seed (XPtrTorchGenerator generator, std::string seed) {
-  
+
   uint64_t value;
   std::istringstream iss(seed);
   iss >> value;
-  
+
   lantern_Generator_set_current_seed(generator.get(), value);
 }
 
 // [[Rcpp::export]]
 void cpp_torch_manual_seed (std::string seed)
 {
- 
+
   int64_t value;
   std::istringstream iss(seed);
   iss >> value;
-  
+
   lantern_manual_seed(value);
-  
+
 }

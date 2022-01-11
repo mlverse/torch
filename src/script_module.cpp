@@ -38,8 +38,8 @@ bool cpp_jit_script_module_is_optimized (XPtrTorchScriptModule self)
 }
 
 // [[Rcpp::export]]
-void cpp_jit_script_module_register_parameter (XPtrTorchScriptModule self, 
-                                               XPtrTorchstring name, 
+void cpp_jit_script_module_register_parameter (XPtrTorchScriptModule self,
+                                               XPtrTorchstring name,
                                                XPtrTorchTensor v,
                                                bool is_buffer)
 {
@@ -49,9 +49,9 @@ void cpp_jit_script_module_register_parameter (XPtrTorchScriptModule self,
 // [[Rcpp::export]]
 void cpp_jit_script_module_register_buffer (XPtrTorchScriptModule self,
                                             XPtrTorchstring name,
-                                            XPtrTorchTensor v) 
+                                            XPtrTorchTensor v)
 {
-  lantern_ScriptModule_register_buffer(self.get(), name.get(), v.get());  
+  lantern_ScriptModule_register_buffer(self.get(), name.get(), v.get());
 }
 
 // [[Rcpp::export]]
@@ -63,7 +63,7 @@ void cpp_jit_script_module_register_module (XPtrTorchScriptModule self,
 }
 
 // [[Rcpp::export]]
-void cpp_jit_script_module_to (XPtrTorchScriptModule self, XPtrTorchDevice device, 
+void cpp_jit_script_module_to (XPtrTorchScriptModule self, XPtrTorchDevice device,
                                bool non_blocking)
 {
   lantern_ScriptModule_to(self.get(), device.get(), non_blocking);
@@ -112,7 +112,7 @@ XPtrTorchScriptModule cpp_jit_script_module_new (XPtrTorchCompilationUnit cu, XP
 }
 
 // [[Rcpp::export]]
-void cpp_jit_script_module_add_constant (XPtrTorchScriptModule self, 
+void cpp_jit_script_module_add_constant (XPtrTorchScriptModule self,
                                          XPtrTorchstring name,
                                          XPtrTorchIValue value)
 {
