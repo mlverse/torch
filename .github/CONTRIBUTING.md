@@ -45,7 +45,7 @@ We have many open issues in the [github repo](https://github.com/mlverse/torch/i
 if there's one item that you want to work on, you can comment on it and ask for
 directions.
 
-## Code style
+### Code style
 
 We use `tidyverse` style for R code and `Google` style for C/C++ code. This can be applied using
 `tools/style.sh` script , which also formats the code and removes whitespaces. The script
