@@ -47,9 +47,22 @@ directions.
 
 ### Code style
 
-We use `tidyverse` style for R code and `Google` style for C/C++ code. This can be applied using
-`tools/style.sh` script , which also formats the code and removes whitespaces. The script
-requires `styler` R package (for styling R code) and `clang-format` (for styling C/C++ code).
+*  New R code should follow the [`tidyverse` style guide](https://style.tidyverse.org).
+   You can use the [styler](https://CRAN.R-project.org/package=styler) package to apply these styles,
+   or simply run `tools/style.sh` script, which also formats the code and removes whitespaces.
+   Please don't restyle code that has nothing to do with your PR.
+
+*  New C/C++ code should follow [`Google` style guide](https://google.github.io/styleguide/cppguide.html).
+   You can use the [`clang-format`](https://clang.llvm.org/docs/ClangFormat.html) to apply these styles,
+   or simply run `tools/style.sh` script, which also formats the code and removes whitespaces.
+   Please don't restyle code that has nothing to do with your PR.
+
+*  We use [roxygen2](https://cran.r-project.org/package=roxygen2),
+   with [Markdown syntax](https://cran.r-project.org/web/packages/roxygen2/vignettes/rd-formatting.html),
+   to build all documentation for the package.
+
+*  We use [testthat](https://cran.r-project.org/package=testthat) for unit tests.
+   Contributions with test cases included are easier to accept.
 
 ### Requirements
 
