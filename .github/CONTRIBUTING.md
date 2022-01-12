@@ -1,13 +1,13 @@
 # Contributing to torch
 
-This outlines how to propose a change to torch. 
+This outlines how to propose a change to torch.
 For more detailed info about contributing to this, and other tidyverse packages, please see the
-[**development contributing guide**](https://rstd.io/tidy-contrib). 
+[**development contributing guide**](https://rstd.io/tidy-contrib).
 
 ## Fixing typos
 
-You can fix typos, spelling mistakes, or grammatical errors in the documentation directly using the GitHub web interface, as long as the changes are made in the _source_ file. 
-This generally means you'll need to edit [roxygen2 comments](https://roxygen2.r-lib.org/articles/roxygen2.html) in an `.R`, not a `.Rd` file. 
+You can fix typos, spelling mistakes, or grammatical errors in the documentation directly using the GitHub web interface, as long as the changes are made in the _source_ file.
+This generally means you'll need to edit [roxygen2 comments](https://roxygen2.r-lib.org/articles/roxygen2.html) in an `.R`, not a `.Rd` file.
 You can find the `.R` file that generates the `.Rd` by reading the comment in the first line.
 
 See also the [Documentation] section.
@@ -50,7 +50,7 @@ directions.
 - R installation
 - R Tools for compilation (only on Windows)
 - The `devtools` package
-- CMake to compile lantern binaries 
+- CMake to compile lantern binaries
 
 ### Workflow
 
@@ -65,7 +65,7 @@ source("tools/buildlantern.R")
 This will compile Lantern binaries and download LibTorch and copy the binaries to `deps` folder
 in the working directory.
 
-This command must be run everytime you modify 
+This command must be run everytime you modify
 lantern code. ie. code that lives in `lantern/src`.
 
 You can the run
@@ -74,7 +74,7 @@ You can the run
 devtools::load_all()
 ```
 
-To load torch and test interactively. Or 
+To load torch and test interactively. Or
 
 ```r
 devtools::test()
