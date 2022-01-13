@@ -6,10 +6,14 @@ then
   exit 1
 fi
 
+# Style/format R code
 Rscript -e "if (!require('styler')) install.packages('styler')"
 Rscript -e 'styler::style_pkg(exclude_files = list.files("./R", pattern = "^gen-*.*|^RcppExports.*", full.names = TRUE))'
 
-find . -type f \( -name 'DESCRIPTION' -o -name "*.R" \) ! -path "*/gen-*.*" ! -path "*/RcppExports.*" -exec perl -pi -e 's/[ \t]*$//' {} \;
 
-find . -type f \( -name '*.h' -o -name '*.hpp' -o -name '*.c' -o -name '*.cc' -o -name '*.cpp' -o -name '*.cxx' \) ! -path "*/gen-*.*" ! -path "*/lantern.*"  ! -path "*/RcppExports.*" -exec perl -pi -e 's/[ \t]*$//' {} \;
+# Style/format C/C++ code
 find . -type f \( -name '*.h' -o -name '*.hpp' -o -name '*.c' -o -name '*.cc' -o -name '*.cpp' -o -name '*.cxx' \) ! -path "*/gen-*.*" ! -path "*/lantern.*"  ! -path "*/RcppExports.*" -exec clang-format -style=Google --verbose -i {} \;
+
+# Remove whitespaces
+find . -type f \( -name 'DESCRIPTION' -o -name "*.R" \) ! -path "*/gen-*.*" ! -path "*/RcppExports.*" -exec perl -pi -e 's/[ \t]*$//' {} \;
+find . -type f \( -name '*.h' -o -name '*.hpp' -o -name '*.c' -o -name '*.cc' -o -name '*.cpp' -o -name '*.cxx' \) ! -path "*/gen-*.*" ! -path "*/lantern.*"  ! -path "*/RcppExports.*" -exec perl -pi -e 's/[ \t]*$//' {} \;
