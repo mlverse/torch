@@ -64,12 +64,20 @@ EventLoop<void> gBackwardTasks;
 
 void schedule_backward_task(std::packaged_task<void()>&& task) {
   if (std::this_thread::get_id() == main_thread_id()) {
-    auto f = std::make_shared<std::future<void>>();
-
     // NOTE: pre-C++-14 workaround for "moving" `task` into a lambda, not pretty
     auto const task_sp = std::make_shared<std::packaged_task<void()>>(std::move(task));
 
-    *f = std::async(std::launch::async, [f, task_sp] { (*task_sp)(); });
+    auto const thr_sp = std::make_shared<std::thread>();
+    *thr_sp = std::thread(
+      [task_sp, thr_sp] {
+        auto thr_join_sg = makeScopeGuard([thr_sp] {
+          gTasks.schedule(std::packaged_task<void*()>(
+            [thr_sp]() -> void* { thr_sp->join(); return nullptr; }
+          ));
+        });
+        (*task_sp)();
+      }
+    );
   } else {
     gBackwardTasks.schedule(std::move(task));
   }
@@ -258,7 +266,8 @@ torch::variable_list cpp_Function_apply (torch::variable_list inputs,
   std::packaged_task<XPtrTorchvariable_list()> task(apply);
   auto result_fut = task.get_future();
 
-  auto task_fut = std::async(std::launch::async, std::move(task));
+  auto const thr_sp = std::make_shared<std::thread>(std::move(task));
+  auto thr_join_sg = makeScopeGuard([thr_sp] { thr_sp->join(); });
 
   gTasks.run();
 
