@@ -12,7 +12,13 @@ Rscript -e 'styler::style_pkg(exclude_files = list.files("./R", pattern = "^gen-
 
 
 # Style/format C/C++ code
-find . -type f \( -name '*.h' -o -name '*.hpp' -o -name '*.c' -o -name '*.cc' -o -name '*.cpp' -o -name '*.cxx' \) ! -path "*/gen-*.*" ! -path "*/lantern.*"  ! -path "*/RcppExports.*" ! -path "./check/*" -exec clang-format -style=Google --verbose -i {} \;
+find . -type f \( -name '*.h' -o -name '*.hpp' -o -name '*.c' -o -name '*.cc' -o -name '*.cpp' -o -name '*.cxx' \) \
+  ! -path "*/gen-*.*" ! -path "*/lantern.*"  ! -path "*/RcppExports.*" ! -path "./check/*" \
+  -not -path './lantern/build/*' \
+  -not -path './lantern/headers/build/*' \
+  -not -path "./inst/include/*/*" \
+  -not -path "./revdep/*" \
+  -exec clang-format -style=Google --verbose -i {} \;
 git diff --stat
 
 # Remove whitespaces
@@ -23,7 +29,7 @@ git diff --stat
 # Render documents
 Rscript -e "if (!require('rmarkdown')) install.packages('rmarkdown')"
 Rscript -e "if (!require('roxygen2')) install.packages('roxygen2')"
-Rscript -e 'roxygen2::roxygenize()'
+Rscript tools/document.R
 if [ -f README.Rmd ]; then
   Rscript -e 'rmarkdown::render("README.Rmd", output_format = "md_document")'
 fi
