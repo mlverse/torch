@@ -50,6 +50,10 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
+      - uses: r-lib/actions/pr-fetch@master
+        if: github.event_name == 'pull_request' || github.event.issue.pull_request
+        with:
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
       - uses: r-lib/actions/setup-r@master
         with:
           r-version: ${{ matrix.r_version }}
@@ -101,6 +105,10 @@ jobs:
           git commit -m 'Roxygenize and render documents' || echo 'No changes to commit'
           git push origin || echo "No changes to commit"
         shell: bash
+      - uses: r-lib/actions/pr-push@master
+        if: success() && runner.os == 'Linux' && matrix.r_version == 'release' && (github.event_name == 'pull_request' || github.event.issue.pull_request)
+        with:
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
       - name: Show testthat output
         if: always()
         run: find check -name 'testthat.Rout*' -exec cat '{}' \; || true
