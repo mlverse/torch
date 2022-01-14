@@ -109,6 +109,7 @@ jobs:
         if: success() && runner.os == 'Linux' && matrix.r_version == 'release' && (github.event_name == 'pull_request' || github.event.issue.pull_request)
         with:
           repo-token: ${{ secrets.GITHUB_TOKEN }}
+        continue-on-error: true
       - name: Show testthat output
         if: always()
         run: find check -name 'testthat.Rout*' -exec cat '{}' \; || true
