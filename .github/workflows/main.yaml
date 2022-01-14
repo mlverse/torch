@@ -91,6 +91,7 @@ jobs:
         shell: Rscript {0}
       - name: Style and render documents
         if: success() && runner.os == 'Linux' && matrix.r_version == 'release'
+        if: runner.os == 'Linux' && matrix.r_version == 'release' && startsWith(github.event.comment.body, '/style')
         run:  |
           set -x
           git config --local user.name "$GITHUB_ACTOR"
@@ -114,7 +115,9 @@ jobs:
           git push origin || echo "No changes to commit"
         shell: bash
       - uses: r-lib/actions/pr-push@master
-        if: success() && runner.os == 'Linux' && matrix.r_version == 'release' && (github.event_name == 'pull_request' || github.event.issue.pull_request)
+        if: ${{ success() && runner.os == 'Linux' && matrix.r_version == 'release' && startsWith(github.event.comment.body, '/style') &&
+                ( github.event_name == 'pull_request' || github.event.issue.pull_request ) &&
+                ( github.event.comment.author_association == 'MEMBER' || github.event.comment.author_association == 'OWNER' ) }}
         with:
           repo-token: ${{ secrets.GITHUB_TOKEN }}
         continue-on-error: true
