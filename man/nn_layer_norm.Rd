@@ -56,6 +56,7 @@ evaluation modes.
 }
 
 \examples{
+if (torch_is_installed()) {
 
 input <- torch_randn(20, 5, 10, 10)
 # With Learnable Parameters
@@ -68,5 +69,5 @@ m <- nn_layer_norm(c(10, 10))
 m <- nn_layer_norm(10)
 # Activating the module
 output <- m(input)
-
+}
 }

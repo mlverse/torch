@@ -67,7 +67,6 @@ nn_weighted_loss <- nn_module(
 #' target <- torch_randn(3, 5)
 #' output <- loss(input, target)
 #' output$backward()
-#'
 #' @export
 nn_l1_loss <- nn_module(
   "nn_l1_loss",
@@ -176,7 +175,6 @@ nn_l1_loss <- nn_module(
 #' target <- torch_empty(N, 8, 8, dtype = torch_long())$random_(1, C)
 #' output <- loss(m(conv(data)), target)
 #' output$backward()
-#'
 #' @export
 nn_nll_loss <- nn_module(
   "nn_nll_loss",
@@ -229,7 +227,6 @@ nn_nll_loss <- nn_module(
 #' target <- torch_randn(5, 2)
 #' output <- loss(log_input, target)
 #' output$backward()
-#'
 #' @section Shape:
 #' - Input: \eqn{(N, *)} where \eqn{*} means, any number of additional
 #'   dimensions
@@ -379,7 +376,6 @@ nn_kl_div_loss <- nn_module(
 #' target <- torch_randn(3, 5)
 #' output <- loss(input, target)
 #' output$backward()
-#'
 #' @export
 nn_mse_loss <- nn_module(
   "nn_mse_loss",
@@ -457,7 +453,6 @@ nn_mse_loss <- nn_module(
 #' target <- torch_rand(3)
 #' output <- loss(m(input), target)
 #' output$backward()
-#'
 #' @export
 nn_bce_loss <- nn_module(
   "nn_bce_loss",
@@ -546,7 +541,6 @@ nn_bce_loss <- nn_module(
 #' pos_weight <- torch_ones(64) # All weights are equal to 1
 #' criterion <- nn_bce_with_logits_loss(pos_weight = pos_weight)
 #' criterion(output, target) # -log(sigmoid(1.5))
-#'
 #' @export
 nn_bce_with_logits_loss <- nn_module(
   "nn_bce_with_logits_loss",
@@ -663,7 +657,6 @@ nn_hinge_embedding_loss <- nn_module(
 #' # for target y, only consider labels 4 and 1, not after label -1
 #' y <- torch_tensor(c(4, 1, -1, 2), dtype = torch_long())$view(c(1, 4))
 #' loss(x, y)
-#'
 #' @export
 nn_multilabel_margin_loss <- nn_module(
   "nn_multilabel_margin_loss",
@@ -829,7 +822,6 @@ nn_soft_margin_loss <- nn_module(
 #' target <- torch_randint(low = 1, high = 5, size = 3, dtype = torch_long())
 #' output <- loss(input, target)
 #' output$backward()
-#'
 #' @export
 nn_cross_entropy_loss <- nn_module(
   "nn_crossentropy_loss",
@@ -971,7 +963,6 @@ nn_cosine_embedding_loss <- nn_module(
 #' target <- torch_randn(3)$sign()
 #' output <- loss(input1, input2, target)
 #' output$backward()
-#'
 #' @export
 nn_margin_ranking_loss <- nn_module(
   "nn_margin_ranking_loss",
@@ -1101,7 +1092,6 @@ nn_multi_margin_loss <- nn_module(
 #' negative <- torch_randn(100, 128, requires_grad = TRUE)
 #' output <- triplet_loss(anchor, positive, negative)
 #' output$backward()
-#'
 #' @export
 nn_triplet_margin_loss <- nn_module(
   "nn_triplet_margin_loss",
@@ -1216,7 +1206,6 @@ nn_triplet_margin_loss <- nn_module(
 #' )
 #'
 #' output <- triplet_loss(anchor, positive, negative)
-#'
 #' @export
 nn_triplet_margin_with_distance_loss <- nn_module(
   "nn_triplet_margin_with_distance_loss",
@@ -1331,7 +1320,6 @@ nn_triplet_margin_with_distance_loss <- nn_module(
 #' ctc_loss <- nn_ctc_loss()
 #' loss <- ctc_loss(input, target, input_lengths, target_lengths)
 #' loss$backward()
-#'
 #' @references
 #' A. Graves et al.: Connectionist Temporal Classification:
 #' Labelling Unsegmented Sequence Data with Recurrent Neural Networks:

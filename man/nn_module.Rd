@@ -78,6 +78,7 @@ were implementing the dropout module.
 }
 
 \examples{
+if (torch_is_installed()) {
 model <- nn_module(
   initialize = function() {
     self$conv1 <- nn_conv2d(1, 20, 5)
@@ -91,5 +92,5 @@ model <- nn_module(
     input
   }
 )
-
+}
 }

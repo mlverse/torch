@@ -96,7 +96,6 @@ nn_utils_rnn_pack_padded_sequence <- function(input, lengths, batch_first = FALS
 #' z <- torch_tensor(c(6), dtype = torch_long())
 #'
 #' p <- nn_utils_rnn_pack_sequence(list(x, y, z))
-#'
 #' @param sequences `(list[Tensor])`: A list of sequences of decreasing length.
 #' @param enforce_sorted (bool, optional): if `TRUE`, checks that the input
 #'   contains sequences sorted by length in a decreasing order. If
@@ -129,7 +128,6 @@ nn_utils_rnn_pack_sequence <- function(sequences, enforce_sorted = TRUE) {
 #' )
 #' packed
 #' nn_utils_rnn_pad_packed_sequence(packed, batch_first = TRUE)
-#'
 #' @note
 #' `total_length` is useful to implement the
 #' `pack sequence -> recurrent network -> unpack sequence` pattern in a
@@ -177,7 +175,6 @@ nn_utils_rnn_pad_packed_sequence <- function(sequence, batch_first = FALSE,
 #' b <- torch_ones(22, 300)
 #' c <- torch_ones(15, 300)
 #' nn_utils_rnn_pad_sequence(list(a, b, c))$size()
-#'
 #' @note
 #' This function returns a Tensor of size `T x B x *` or `B x T x *`
 #' where `T` is the length of the longest sequence. This function assumes

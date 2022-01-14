@@ -24,8 +24,9 @@ apply \code{Softmax} to each location \eqn{(Channels, h_i, w_j)}
 }
 
 \examples{
+if (torch_is_installed()) {
 m <- nn_softmax2d()
 input <- torch_randn(2, 3, 12, 13)
 output <- m(input)
-
+}
 }

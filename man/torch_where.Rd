@@ -47,11 +47,16 @@ The operation is defined as:
 }
 
 \examples{
+if (torch_is_installed()) {
+
 \dontrun{
-x <- torch_randn(c(3, 2))
-y <- torch_ones(c(3, 2))
+x = torch_randn(c(3, 2))
+y = torch_ones(c(3, 2))
 x
 torch_where(x > 0, x, y)
 }
 
+
+
+}
 }

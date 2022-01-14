@@ -60,7 +60,6 @@ nn_max_pool_nd <- nn_module(
 #' m <- nn_max_pool1d(3, stride = 2)
 #' input <- torch_randn(20, 16, 50)
 #' output <- m(input)
-#'
 #' @export
 nn_max_pool1d <- nn_module(
   "nn_max_pool1d",
@@ -130,7 +129,6 @@ nn_max_pool1d <- nn_module(
 #' m <- nn_max_pool2d(c(3, 2), stride = c(2, 1))
 #' input <- torch_randn(20, 16, 50, 32)
 #' output <- m(input)
-#'
 #' @export
 nn_max_pool2d <- nn_module(
   "nn_max_pool2d",
@@ -199,7 +197,6 @@ nn_max_pool2d <- nn_module(
 #' m <- nn_max_pool3d(c(3, 2, 2), stride = c(2, 1, 2))
 #' input <- torch_randn(20, 16, 50, 44, 31)
 #' output <- m(input)
-#'
 #' @export
 nn_max_pool3d <- nn_module(
   "nn_max_pool3d",
@@ -258,7 +255,6 @@ nn_max_pool3d <- nn_module(
 #' out <- pool(input)
 #' unpool(out[[1]], out[[2]], output_size = input$size())
 #' unpool(out[[1]], out[[2]])
-#'
 #' @export
 nn_max_unpool1d <- nn_module(
   "nn_max_unpool1d",
@@ -325,7 +321,6 @@ nn_max_unpool1d <- nn_module(
 #'
 #' # specify a different output size than input size
 #' unpool(out[[1]], out[[2]], output_size = c(1, 1, 5, 5))
-#'
 #' @export
 nn_max_unpool2d <- nn_module(
   "nn_max_unpool2d",
@@ -395,7 +390,6 @@ nn_max_unpool2d <- nn_module(
 #' out <- pool(torch_randn(20, 16, 51, 33, 15))
 #' unpooled_output <- unpool(out[[1]], out[[2]])
 #' unpooled_output$size()
-#'
 #' @export
 nn_max_unpool3d <- nn_module(
   "nn_max_unpool3d",
@@ -455,7 +449,6 @@ nn_max_unpool3d <- nn_module(
 #' # pool with window of size=3, stride=2
 #' m <- nn_avg_pool1d(3, stride = 2)
 #' m(torch_randn(1, 1, 8))
-#'
 #' @export
 nn_avg_pool1d <- nn_module(
   "nn_avg_pool1d",
@@ -531,7 +524,6 @@ nn_avg_pool1d <- nn_module(
 #' m <- nn_avg_pool2d(c(3, 2), stride = c(2, 1))
 #' input <- torch_randn(20, 16, 50, 32)
 #' output <- m(input)
-#'
 #' @export
 nn_avg_pool2d <- nn_module(
   "nn_avg_pool2d",
@@ -613,7 +605,6 @@ nn_avg_pool2d <- nn_module(
 #' m <- nn_avg_pool3d(c(3, 2, 2), stride = c(2, 1, 2))
 #' input <- torch_randn(20, 16, 50, 44, 31)
 #' output <- m(input)
-#'
 #' @export
 nn_avg_pool3d <- nn_module(
   "nn_avg_pool3d",
@@ -665,7 +656,6 @@ nn_avg_pool3d <- nn_module(
 # m = nn_fractional_max_pool2d(3, output_ratio=c(0.5, 0.5))
 # input = torch_randn(20, 16, 50, 32)
 # output = m(input)
-#'
 #' @export
 nn_fractional_max_pool2d <- nn_module(
   "nn_fractional_max_pool2d",
@@ -739,7 +729,6 @@ nn_fractional_max_pool2d <- nn_module(
 #' m <- nn_fractional_max_pool3d(3, output_ratio = c(0.5, 0.5, 0.5))
 #' input <- torch_randn(20, 16, 50, 32, 16)
 #' output <- m(input)
-#'
 #' @export
 nn_fractional_max_pool3d <- nn_module(
   "nn_fractional_max_pool3d",
@@ -833,7 +822,6 @@ lp_pool_nd <- nn_module(
 #' m <- nn_lp_pool1d(2, 3, stride = 2)
 #' input <- torch_randn(20, 16, 50)
 #' output <- m(input)
-#'
 #' @export
 nn_lp_pool1d <- nn_module(
   "nn_lp_pool1d",
@@ -893,7 +881,6 @@ nn_lp_pool1d <- nn_module(
 #' m <- nn_lp_pool2d(1.2, c(3, 2), stride = c(2, 1))
 #' input <- torch_randn(20, 16, 50, 32)
 #' output <- m(input)
-#'
 #' @export
 nn_lp_pool2d <- nn_module(
   "nn_lp_pool2d",
@@ -920,7 +907,6 @@ nn_lp_pool2d <- nn_module(
 #' m <- nn_adaptive_max_pool1d(5)
 #' input <- torch_randn(1, 64, 8)
 #' output <- m(input)
-#'
 #' @export
 nn_adaptive_max_pool1d <- nn_module(
   "nn_adaptive_max_pool1d",
@@ -954,7 +940,6 @@ nn_adaptive_max_pool1d <- nn_module(
 #' m <- nn_adaptive_max_pool2d(7)
 #' input <- torch_randn(1, 64, 10, 9)
 #' output <- m(input)
-#'
 #' @export
 nn_adaptive_max_pool2d <- nn_module(
   "nn_adaptive_max_pool2d",
@@ -989,7 +974,6 @@ nn_adaptive_max_pool2d <- nn_module(
 #' m <- nn_adaptive_max_pool3d(7)
 #' input <- torch_randn(1, 64, 10, 9, 8)
 #' output <- m(input)
-#'
 #' @export
 nn_adaptive_max_pool3d <- nn_module(
   "nn_adaptive_max_pool3d",
@@ -1014,7 +998,6 @@ nn_adaptive_max_pool3d <- nn_module(
 #' m <- nn_adaptive_avg_pool1d(5)
 #' input <- torch_randn(1, 64, 8)
 #' output <- m(input)
-#'
 #' @export
 nn_adaptive_avg_pool1d <- nn_module(
   "nn_adaptive_avg_pool1d",
@@ -1045,7 +1028,6 @@ nn_adaptive_avg_pool1d <- nn_module(
 #' m <- nn_adaptive_avg_pool2d(7)
 #' input <- torch_randn(1, 64, 10, 9)
 #' output <- m(input)
-#'
 #' @export
 nn_adaptive_avg_pool2d <- nn_module(
   "nn_adaptive_avg_pool2d",
@@ -1076,7 +1058,6 @@ nn_adaptive_avg_pool2d <- nn_module(
 #' m <- nn_adaptive_avg_pool3d(7)
 #' input <- torch_randn(1, 64, 10, 9, 8)
 #' output <- m(input)
-#'
 #' @export
 nn_adaptive_avg_pool3d <- nn_module(
   "nn_adaptive_avg_pool3d",

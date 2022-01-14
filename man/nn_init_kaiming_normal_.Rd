@@ -30,7 +30,8 @@ described in \verb{Delving deep into rectifiers: Surpassing human-level performa
 normal distribution.
 }
 \examples{
+if (torch_is_installed()) {
 w <- torch_empty(3, 5)
 nn_init_kaiming_normal_(w, mode = "fan_in", nonlinearity = "leaky_relu")
-
+}
 }

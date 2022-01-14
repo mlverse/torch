@@ -19,10 +19,11 @@ the output has the same batch dimensions.
 The singular values are returned in descending order.
 }
 \examples{
+if (torch_is_installed()) {
 A <- torch_randn(5, 3)
 S <- linalg_svdvals(A)
 S
-
+}
 }
 \seealso{
 \code{\link[=linalg_svd]{linalg_svd()}} computes the full singular value decomposition.

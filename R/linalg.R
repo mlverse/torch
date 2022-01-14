@@ -34,7 +34,6 @@
 #'
 #' linalg_norm(a)
 #' linalg_norm(b)
-#'
 #' @export
 linalg_norm <- function(A, ord = NULL, dim = NULL, keepdim = FALSE, dtype = NULL) {
   torch_linalg_norm(self = A, ord = ord, dim = dim, keepdim = keepdim, dtype = dtype)
@@ -70,7 +69,6 @@ linalg_norm <- function(A, ord = NULL, dim = NULL, keepdim = FALSE, dtype = NULL
 #'
 #' linalg_vector_norm(a, ord = 3.5)
 #' linalg_vector_norm(b, ord = 3.5)
-#'
 #' @export
 linalg_vector_norm <- function(A, ord = 2, dim = NULL, keepdim = FALSE, dtype = NULL) {
   torch_linalg_vector_norm(
@@ -106,7 +104,6 @@ linalg_vector_norm <- function(A, ord = 2, dim = NULL, keepdim = FALSE, dtype = 
 #' b <- a$expand(c(2, -1, -1))
 #' linalg_matrix_norm(b)
 #' linalg_matrix_norm(b, dim = c(1, 3))
-#'
 #' @export
 linalg_matrix_norm <- function(A, ord = "fro", dim = c(-2, -1), keepdim = FALSE, dtype = NULL) {
   torch_linalg_matrix_norm(
@@ -132,7 +129,6 @@ linalg_matrix_norm <- function(A, ord = "fro", dim = c(-2, -1), keepdim = FALSE,
 #'
 #' a <- torch_randn(3, 3, 3)
 #' linalg_det(a)
-#'
 #' @family linalg
 #' @export
 linalg_det <- function(A) {
@@ -162,7 +158,6 @@ linalg_det <- function(A) {
 #' @examples
 #' a <- torch_randn(3, 3)
 #' linalg_slogdet(a)
-#'
 #' @family linalg
 #' @export
 linalg_slogdet <- function(A) {
@@ -220,7 +215,6 @@ linalg_slogdet <- function(A) {
 #' a <- torch_tensor(rbind(c(1., 0, -1), c(0, 1, 0), c(1, 0, 1)))
 #' linalg_cond(a)
 #' linalg_cond(a, "fro")
-#'
 #' @export
 linalg_cond <- function(A, p = NULL) {
   torch_linalg_cond(A, p = p)
@@ -264,7 +258,6 @@ linalg_cond <- function(A, p = NULL) {
 #' @examples
 #' a <- torch_eye(10)
 #' linalg_matrix_rank(a)
-#'
 #' @family linalg
 #' @export
 linalg_matrix_rank <- function(A, tol = NULL, hermitian = FALSE) {
@@ -312,7 +305,6 @@ linalg_matrix_rank <- function(A, tol = NULL, hermitian = FALSE) {
 #' @examples
 #' a <- torch_eye(10)
 #' linalg_cholesky(a)
-#'
 #' @family linalg
 #' @export
 linalg_cholesky <- function(A) {
@@ -362,7 +354,6 @@ linalg_cholesky <- function(A) {
 #'
 #' torch_mm(qr[[1]], qr[[2]])$round()
 #' torch_mm(qr[[1]]$t(), qr[[1]])$round()
-#'
 #' @family linalg
 #' @export
 linalg_qr <- function(A, mode = "reduced") {
@@ -428,7 +419,6 @@ linalg_qr <- function(A, mode = "reduced") {
 #' @examples
 #' a <- torch_randn(2, 2)
 #' wv <- linalg_eig(a)
-#'
 #' @family linalg
 #' @export
 linalg_eig <- function(A) {
@@ -460,7 +450,6 @@ linalg_eig <- function(A) {
 #' @examples
 #' a <- torch_randn(2, 2)
 #' w <- linalg_eigvals(a)
-#'
 #' @family linalg
 #' @export
 linalg_eigvals <- function(A) {
@@ -538,7 +527,6 @@ linalg_eigvals <- function(A) {
 #' @examples
 #' a <- torch_randn(2, 2)
 #' linalg_eigh(a)
-#'
 #' @family linalg
 #' @export
 linalg_eigh <- function(A, UPLO = "L") {
@@ -583,7 +571,6 @@ linalg_eigh <- function(A, UPLO = "L") {
 #' @examples
 #' a <- torch_randn(2, 2)
 #' linalg_eigvalsh(a)
-#'
 #' @family linalg
 #' @export
 linalg_eigvalsh <- function(A, UPLO = "L") {
@@ -677,7 +664,6 @@ linalg_eigvalsh <- function(A, UPLO = "L") {
 #'
 #' a <- torch_randn(5, 3)
 #' linalg_svd(a, full_matrices = FALSE)
-#'
 #' @family linalg
 #' @export
 linalg_svd <- function(A, full_matrices = TRUE) {
@@ -703,7 +689,6 @@ linalg_svd <- function(A, full_matrices = TRUE) {
 #' A <- torch_randn(5, 3)
 #' S <- linalg_svdvals(A)
 #' S
-#'
 #' @family linalg
 #' @export
 linalg_svdvals <- function(A) {
@@ -749,7 +734,6 @@ linalg_svdvals <- function(A) {
 #' b <- torch_randn(3)
 #' x <- linalg_solve(A, b)
 #' torch_allclose(torch_matmul(A, x), b)
-#'
 #' @family linalg
 #' @export
 linalg_solve <- function(A, B) {
@@ -841,7 +825,6 @@ linalg_solve <- function(A, B) {
 #'   rbind(c(4, 2, 9), c(2, 0, 3), c(2, 5, 3))
 #' ), dim = 1) # shape (2, 3, 3)
 #' X <- linalg_lstsq(A, B)$solution # A is broadcasted to shape (2, 3, 3)
-#'
 #' @family linalg
 #' @export
 linalg_lstsq <- function(A, B, rcond = NULL, ..., driver = NULL) {
@@ -908,7 +891,6 @@ linalg_lstsq <- function(A, B, rcond = NULL, ..., driver = NULL) {
 #' @examples
 #' A <- torch_randn(4, 4)
 #' linalg_inv(A)
-#'
 #' @family linalg
 #' @export
 linalg_inv <- function(A) {
@@ -958,7 +940,6 @@ linalg_inv <- function(A) {
 #' @examples
 #' A <- torch_randn(3, 5)
 #' linalg_pinv(A)
-#'
 #' @family linalg
 #' @export
 linalg_pinv <- function(A, rcond = 1e-15, hermitian = FALSE) {
@@ -990,7 +971,6 @@ linalg_pinv <- function(A, rcond = 1e-15, hermitian = FALSE) {
 #' @examples
 #' A <- torch_randn(3, 3)
 #' linalg_matrix_power(A, 0)
-#'
 #' @family linalg
 #' @export
 linalg_matrix_power <- function(A, n) {
@@ -1036,7 +1016,6 @@ linalg_matrix_power <- function(A, n) {
 #' @examples
 #'
 #' linalg_multi_dot(list(torch_tensor(c(1, 2)), torch_tensor(c(2, 3))))
-#'
 #' @family linalg
 #' @export
 linalg_multi_dot <- function(tensors) {
@@ -1081,7 +1060,6 @@ linalg_multi_dot <- function(tensors) {
 #' h_tau <- torch_geqrf(A)
 #' Q <- linalg_householder_product(h_tau[[1]], h_tau[[2]])
 #' torch_allclose(Q, linalg_qr(A)[[1]])
-#'
 #' @family linalg
 #' @export
 linalg_householder_product <- function(A, tau) {
@@ -1120,7 +1098,6 @@ linalg_householder_product <- function(A, tau) {
 #' Atensorinv <- linalg_tensorinv(A, 2)
 #' Ainv <- linalg_inv(A)
 #' torch_allclose(Atensorinv, Ainv)
-#'
 #' @family linalg
 #' @export
 linalg_tensorinv <- function(A, ind = 3L) {
@@ -1160,7 +1137,6 @@ linalg_tensorinv <- function(A, ind = 3L) {
 #' X <- linalg_tensorsolve(A, B, dims = c(1, 3))
 #' A <- A$permute(c(2, 4, 5, 1, 3))
 #' torch_allclose(torch_tensordot(A, X, dims = X$ndim), B, atol = 1e-6)
-#'
 #' @family linalg
 #' @export
 linalg_tensorsolve <- function(A, B, dims = NULL) {
@@ -1199,7 +1175,6 @@ linalg_tensorsolve <- function(A, B, dims = NULL) {
 #' A <- torch_randn(2, 2)
 #' out <- linalg_cholesky_ex(A)
 #' out
-#'
 #' @family linalg
 #' @export
 linalg_cholesky_ex <- function(A, check_errors = FALSE) {
@@ -1238,7 +1213,6 @@ linalg_cholesky_ex <- function(A, check_errors = FALSE) {
 #' @examples
 #' A <- torch_randn(3, 3)
 #' out <- linalg_inv_ex(A)
-#'
 #' @family linalg
 #' @importFrom stats setNames
 #' @export

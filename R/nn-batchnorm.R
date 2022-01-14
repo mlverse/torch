@@ -168,7 +168,6 @@ nn_batch_norm_ <- nn_module(
 #' m <- nn_batch_norm1d(100, affine = FALSE)
 #' input <- torch_randn(20, 100)
 #' output <- m(input)
-#'
 #' @export
 nn_batch_norm1d <- nn_module(
   "nn_batch_norm1d",
@@ -242,7 +241,6 @@ nn_batch_norm1d <- nn_module(
 #' m <- nn_batch_norm2d(100, affine = FALSE)
 #' input <- torch_randn(20, 100, 35, 45)
 #' output <- m(input)
-#'
 #' @export
 nn_batch_norm2d <- nn_module(
   "nn_batch_norm2d",
@@ -322,7 +320,6 @@ nn_batch_norm2d <- nn_module(
 #' m <- nn_batch_norm3d(100, affine = FALSE)
 #' input <- torch_randn(20, 100, 35, 45, 55)
 #' output <- m(input)
-#'
 #' @export
 nn_batch_norm3d <- nn_module(
   "nn_batch_norm3d",

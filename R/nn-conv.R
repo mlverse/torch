@@ -162,7 +162,6 @@ nn_conv_nd <- nn_module(
 #' m <- nn_conv1d(16, 33, 3, stride = 2)
 #' input <- torch_randn(20, 16, 50)
 #' output <- m(input)
-#'
 #' @export
 nn_conv1d <- nn_module(
   "nn_conv1d",
@@ -317,7 +316,6 @@ nn_conv1d <- nn_module(
 #' m <- nn_conv2d(16, 33, c(3, 5), stride = c(2, 1), padding = c(4, 2), dilation = c(3, 1))
 #' input <- torch_randn(20, 16, 50, 100)
 #' output <- m(input)
-#'
 #' @export
 nn_conv2d <- nn_module(
   "nn_conv2d",
@@ -462,7 +460,6 @@ nn_conv2d <- nn_module(
 #' m <- nn_conv3d(16, 33, c(3, 5, 2), stride = c(2, 1, 1), padding = c(4, 2, 0))
 #' input <- torch_randn(20, 16, 10, 50, 100)
 #' output <- m(input)
-#'
 #' @export
 nn_conv3d <- nn_module(
   "nn_conv3d",
@@ -662,7 +659,6 @@ nn_conv_transpose_nd <- nn_module(
 #' m <- nn_conv_transpose1d(32, 16, 2)
 #' input <- torch_randn(10, 32, 2)
 #' output <- m(input)
-#'
 #' @export
 nn_conv_transpose1d <- nn_module(
   "nn_conv_transpose1d",
@@ -814,7 +810,6 @@ nn_conv_transpose1d <- nn_module(
 #' h$size()
 #' output <- upsample(h, output_size = input$size())
 #' output$size()
-#'
 #' @export
 nn_conv_transpose2d <- nn_module(
   "nn_conv_transpose2d",

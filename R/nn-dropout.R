@@ -41,7 +41,6 @@ nn_dropout_nd <- nn_module(
 #' m <- nn_dropout(p = 0.2)
 #' input <- torch_randn(20, 16)
 #' output <- m(input)
-#'
 #' @export
 nn_dropout <- nn_module(
   "nn_dropout",
@@ -83,7 +82,6 @@ nn_dropout <- nn_module(
 #' m <- nn_dropout2d(p = 0.2)
 #' input <- torch_randn(20, 16, 32, 32)
 #' output <- m(input)
-#'
 #' @export
 nn_dropout2d <- nn_module(
   "nn_dropout2d",
@@ -126,7 +124,6 @@ nn_dropout2d <- nn_module(
 #' m <- nn_dropout3d(p = 0.2)
 #' input <- torch_randn(20, 16, 4, 32, 32)
 #' output <- m(input)
-#'
 #' @export
 nn_dropout3d <- nn_module(
   "nn_dropout3d",

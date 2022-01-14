@@ -18,8 +18,10 @@ Samples are nonnegative integers, with a pmf given by
 }
 }
 \examples{
+if (torch_is_installed()) {
 m <- distr_poisson(torch_tensor(4))
 m$sample()
+}
 }
 \seealso{
 \link{Distribution} for details on the available methods.

@@ -41,7 +41,6 @@ Chi2 <- add_class_definition(Chi2)
 #' m <- distr_chi2(torch_tensor(1.0))
 #' m$sample() # Chi2 distributed with shape df=1
 #' torch_tensor(0.1046)
-#'
 #' @export
 distr_chi2 <- function(df, validate_args = NULL) {
   Chi2$new(df, validate_args = validate_args)

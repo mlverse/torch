@@ -29,7 +29,6 @@ NULL
 #'     b$backward()
 #'   })
 #' })
-#'
 #' @export
 with_detect_anomaly <- function(code) {
   warn("This mode should be enabled only for debugging as the different tests will slow down your program execution.")
@@ -55,7 +54,6 @@ with_detect_anomaly <- function(code) {
 #' })
 #' x
 #' x$grad
-#'
 #' @export
 with_no_grad <- function(code) {
   current_mode <- cpp_autograd_is_enabled()
@@ -90,7 +88,6 @@ with_no_grad <- function(code) {
 #' })
 #' y$backward()
 #' x$grad
-#'
 #' @export
 with_enable_grad <- function(code) {
   current_mode <- cpp_autograd_is_enabled()
@@ -366,7 +363,6 @@ AutogradContext <- R6::R6Class(
 #'     list(i = grad_output * ctx$saved_variable$result)
 #'   }
 #' )
-#'
 #' @export
 autograd_function <- function(forward, backward) {
   force(forward)
@@ -547,7 +543,6 @@ Tensor$set("active", "grad_fn", function() {
 #' b <- 3 * a
 #'
 #' autograd_backward(list(y, b))
-#'
 #' @export
 autograd_backward <- function(tensors, grad_tensors = NULL, retain_graph = create_graph,
                               create_graph = FALSE) {
@@ -620,7 +615,6 @@ autograd_backward <- function(tensors, grad_tensors = NULL, retain_graph = creat
 #'
 #' o <- autograd_grad(loss, list(w, b))
 #' o
-#'
 #' @export
 autograd_grad <- function(outputs, inputs, grad_outputs = NULL, retain_graph = create_graph,
                           create_graph = FALSE, allow_unused = FALSE) {

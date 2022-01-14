@@ -78,6 +78,7 @@ shape as input.
 }
 
 \examples{
+if (torch_is_installed()) {
 loss <- nn_bce_with_logits_loss()
 input <- torch_randn(3, requires_grad = TRUE)
 target <- torch_empty(3)$random_(1, 2)
@@ -89,5 +90,5 @@ output <- torch_full(c(10, 64), 1.5) # A prediction (logit)
 pos_weight <- torch_ones(64) # All weights are equal to 1
 criterion <- nn_bce_with_logits_loss(pos_weight = pos_weight)
 criterion(output, target) # -log(sigmoid(1.5))
-
+}
 }

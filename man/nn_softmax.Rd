@@ -44,8 +44,9 @@ dimensions
 }
 
 \examples{
+if (torch_is_installed()) {
 m <- nn_softmax(1)
 input <- torch_randn(2, 3)
 output <- m(input)
-
+}
 }

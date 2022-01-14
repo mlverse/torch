@@ -17,7 +17,6 @@
 #'
 #' comp$fn(torch_tensor(-1))
 #' comp$foo(torch_randn(10))
-#'
 #' @export
 jit_compile <- function(source) {
   cpp_jit_compile(source)

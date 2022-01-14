@@ -41,15 +41,17 @@ broadcastable .
 }
 
 \examples{
+if (torch_is_installed()) {
 
-a <- torch_randn(c(3))
+a = torch_randn(c(3))
 a
 torch_mul(a, 100)
 
 
-a <- torch_randn(c(4, 1))
+a = torch_randn(c(4, 1))
 a
-b <- torch_randn(c(1, 4))
+b = torch_randn(c(1, 4))
 b
 torch_mul(a, b)
+}
 }

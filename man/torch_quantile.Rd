@@ -44,6 +44,7 @@ size as \code{q} which represents the quantiles.
 }
 
 \examples{
+if (torch_is_installed()) {
 
 a <- torch_randn(c(1, 3))
 a
@@ -54,6 +55,7 @@ torch_quantile(a, q)
 a <- torch_randn(c(2, 3))
 a
 q <- torch_tensor(c(0.25, 0.5, 0.75))
-torch_quantile(a, q, dim = 1, keepdim = TRUE)
-torch_quantile(a, q, dim = 1, keepdim = TRUE)$shape
+torch_quantile(a, q, dim=1, keepdim=TRUE)
+torch_quantile(a, q, dim=1, keepdim=TRUE)$shape
+}
 }

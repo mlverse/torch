@@ -45,9 +45,10 @@ multiplication orders as follows:
 In this case, multiplying \code{A} and \code{B} first followed by \code{C} is 10 times faster.
 }
 \examples{
+if (torch_is_installed()) {
 
 linalg_multi_dot(list(torch_tensor(c(1, 2)), torch_tensor(c(2, 3))))
-
+}
 }
 \seealso{
 Other linalg: 

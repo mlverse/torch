@@ -34,9 +34,11 @@ Eliminates all but the first element from every consecutive group of equivalent 
 }
 
 \examples{
-x <- torch_tensor(c(1, 1, 2, 2, 3, 1, 1, 2))
-output <- torch_unique_consecutive(x)
+if (torch_is_installed()) {
+x = torch_tensor(c(1, 1, 2, 2, 3, 1, 1, 2))
+output = torch_unique_consecutive(x)
 output
-torch_unique_consecutive(x, return_inverse = TRUE)
-torch_unique_consecutive(x, return_counts = TRUE)
+torch_unique_consecutive(x, return_inverse=TRUE)
+torch_unique_consecutive(x, return_counts=TRUE)
+}
 }

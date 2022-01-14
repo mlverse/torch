@@ -42,11 +42,13 @@ dimensions, so those need to be explicitly specified.
 }
 
 \examples{
+if (torch_is_installed()) {
 
-a <- torch_randn(c(3, 3))
+a = torch_randn(c(3, 3))
 a
 torch_diagonal(a, offset = 0)
 torch_diagonal(a, offset = 1)
-x <- torch_randn(c(2, 5, 4, 2))
-torch_diagonal(x, offset = -1, dim1 = 1, dim2 = 2)
+x = torch_randn(c(2, 5, 4, 2))
+torch_diagonal(x, offset=-1, dim1=1, dim2=2)
+}
 }

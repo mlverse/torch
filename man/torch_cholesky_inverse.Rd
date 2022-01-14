@@ -37,12 +37,15 @@ triangular such that the returned tensor is
 }
 
 \examples{
+if (torch_is_installed()) {
+
 \dontrun{
-a <- torch_randn(c(3, 3))
-a <- torch_mm(a, a$t()) + 1e-05 * torch_eye(3) # make symmetric positive definite
-u <- torch_cholesky(a)
+a = torch_randn(c(3, 3))
+a = torch_mm(a, a$t()) + 1e-05 * torch_eye(3) # make symmetric positive definite
+u = torch_cholesky(a)
 a
 torch_cholesky_inverse(u)
 a$inverse()
+}
 }
 }

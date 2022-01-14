@@ -52,6 +52,7 @@ or as given by \code{output_size} in the call operator
 }
 
 \examples{
+if (torch_is_installed()) {
 
 pool <- nn_max_pool2d(2, stride = 2, return_indices = TRUE)
 unpool <- nn_max_unpool2d(2, stride = 2)
@@ -61,5 +62,5 @@ unpool(out[[1]], out[[2]])
 
 # specify a different output size than input size
 unpool(out[[1]], out[[2]], output_size = c(1, 1, 5, 5))
-
+}
 }

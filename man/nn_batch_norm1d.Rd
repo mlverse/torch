@@ -77,11 +77,12 @@ on \verb{(N, L)} slices, it's common terminology to call this Temporal Batch Nor
 }
 
 \examples{
+if (torch_is_installed()) {
 # With Learnable Parameters
 m <- nn_batch_norm1d(100)
 # Without Learnable Parameters
 m <- nn_batch_norm1d(100, affine = FALSE)
 input <- torch_randn(20, 100)
 output <- m(input)
-
+}
 }

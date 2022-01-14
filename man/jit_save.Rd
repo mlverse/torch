@@ -17,6 +17,7 @@ jit_save(obj, path, ...)
 Saves a \code{script_function} to a path
 }
 \examples{
+if (torch_is_installed()) {
 fn <- function(x) {
   torch_relu(x)
 }
@@ -26,5 +27,5 @@ tr_fn <- jit_trace(fn, input)
 
 tmp <- tempfile("tst", fileext = "pt")
 jit_save(tr_fn, tmp)
-
+}
 }

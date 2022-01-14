@@ -37,28 +37,26 @@ batched outputs \verb{solution, LU}.
 }
 
 \examples{
+if (torch_is_installed()) {
 
-A <- torch_tensor(rbind(
-  c(6.80, -2.11, 5.66, 5.97, 8.23),
-  c(-6.05, -3.30, 5.36, -4.44, 1.08),
-  c(-0.45, 2.58, -2.70, 0.27, 9.04),
-  c(8.32, 2.71, 4.35, -7.17, 2.14),
-  c(-9.67, -5.14, -7.26, 6.08, -6.87)
-))$t()
-B <- torch_tensor(rbind(
-  c(4.02, 6.19, -8.22, -7.57, -3.03),
-  c(-1.56, 4.00, -8.67, 1.75, 2.86),
-  c(9.81, -4.09, -4.57, -8.61, 8.99)
-))$t()
-out <- torch_solve(B, A)
-X <- out[[1]]
-LU <- out[[2]]
+A = torch_tensor(rbind(c(6.80, -2.11,  5.66,  5.97,  8.23),
+                      c(-6.05, -3.30,  5.36, -4.44,  1.08),
+                      c(-0.45,  2.58, -2.70,  0.27,  9.04),
+                      c(8.32,  2.71,  4.35,  -7.17,  2.14),
+                      c(-9.67, -5.14, -7.26,  6.08, -6.87)))$t()
+B = torch_tensor(rbind(c(4.02,  6.19, -8.22, -7.57, -3.03),
+                      c(-1.56,  4.00, -8.67,  1.75,  2.86),
+                      c(9.81, -4.09, -4.57, -8.61,  8.99)))$t()
+out = torch_solve(B, A)
+X = out[[1]]
+LU = out[[2]]
 torch_dist(B, torch_mm(A, X))
 # Batched solver example
-A <- torch_randn(c(2, 3, 1, 4, 4))
-B <- torch_randn(c(2, 3, 1, 4, 6))
-out <- torch_solve(B, A)
-X <- out[[1]]
-LU <- out[[2]]
+A = torch_randn(c(2, 3, 1, 4, 4))
+B = torch_randn(c(2, 3, 1, 4, 6))
+out = torch_solve(B, A)
+X = out[[1]]
+LU = out[[2]]
 torch_dist(B, A$matmul(X))
+}
 }

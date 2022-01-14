@@ -47,21 +47,23 @@ remaining \eqn{m - n} rows of that column.
 }
 
 \examples{
+if (torch_is_installed()) {
 
-A <- torch_tensor(rbind(
-  c(1, 1, 1),
-  c(2, 3, 4),
-  c(3, 5, 2),
-  c(4, 2, 5),
-  c(5, 4, 3)
+A = torch_tensor(rbind(
+ c(1,1,1),
+ c(2,3,4),
+ c(3,5,2),
+ c(4,2,5),
+ c(5,4,3)
 ))
-B <- torch_tensor(rbind(
-  c(-10, -3),
-  c(12, 14),
-  c(14, 12),
-  c(16, 16),
-  c(18, 16)
+B = torch_tensor(rbind(
+ c(-10, -3),
+ c(12, 14),
+ c(14, 12),
+ c(16, 16),
+ c(18, 16)
 ))
-out <- torch_lstsq(B, A)
+out = torch_lstsq(B, A)
 out[[1]]
+}
 }

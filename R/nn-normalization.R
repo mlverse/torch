@@ -53,7 +53,6 @@
 #' m <- nn_layer_norm(10)
 #' # Activating the module
 #' output <- m(input)
-#'
 #' @export
 nn_layer_norm <- nn_module(
   "nn_layer_norm",
@@ -126,7 +125,6 @@ nn_layer_norm <- nn_module(
 #' m <- nn_group_norm(1, 6)
 #' # Activating the module
 #' output <- m(input)
-#'
 #' @export
 nn_group_norm <- nn_module(
   "nn_group_norm",

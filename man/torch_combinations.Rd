@@ -26,10 +26,12 @@ python's \code{itertools.combinations} when \code{with_replacement} is set to \c
 }
 
 \examples{
+if (torch_is_installed()) {
 
-a <- c(1, 2, 3)
-tensor_a <- torch_tensor(a)
+a = c(1, 2, 3)
+tensor_a = torch_tensor(a)
 torch_combinations(tensor_a)
-torch_combinations(tensor_a, r = 3)
-torch_combinations(tensor_a, with_replacement = TRUE)
+torch_combinations(tensor_a, r=3)
+torch_combinations(tensor_a, with_replacement=TRUE)
+}
 }

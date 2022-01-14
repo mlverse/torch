@@ -46,9 +46,11 @@ See \code{\link[=nn_conv_transpose3d]{nn_conv_transpose3d()}} for details and ou
 }
 
 \examples{
+if (torch_is_installed()) {
 \dontrun{
-inputs <- torch_randn(c(20, 16, 50, 10, 20))
-weights <- torch_randn(c(16, 33, 3, 3, 3))
+inputs = torch_randn(c(20, 16, 50, 10, 20))
+weights = torch_randn(c(16, 33, 3, 3, 3))
 nnf_conv_transpose3d(inputs, weights)
+}
 }
 }

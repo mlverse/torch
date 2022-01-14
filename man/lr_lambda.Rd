@@ -24,6 +24,7 @@ Sets the learning rate of each parameter group to the initial lr
 times a given function. When last_epoch=-1, sets initial lr as lr.
 }
 \examples{
+if (torch_is_installed()) {
 # Assuming optimizer has two groups.
 lambda1 <- function(epoch) epoch \%/\% 30
 lambda2 <- function(epoch) 0.95^epoch
@@ -36,4 +37,5 @@ for (epoch in 1:100) {
 }
 }
 
+}
 }

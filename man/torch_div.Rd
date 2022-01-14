@@ -69,15 +69,17 @@ by zero leads to undefined behavior.
 }
 
 \examples{
+if (torch_is_installed()) {
 
-a <- torch_randn(c(5))
+a = torch_randn(c(5))
 a
 torch_div(a, 0.5)
 
 
-a <- torch_randn(c(4, 4))
+a = torch_randn(c(4, 4))
 a
-b <- torch_randn(c(4))
+b = torch_randn(c(4))
 b
 torch_div(a, b)
+}
 }

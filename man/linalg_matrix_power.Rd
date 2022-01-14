@@ -22,9 +22,10 @@ as \code{A}. If \code{n} is negative, it returns the inverse of each matrix
 (if invertible) raised to the power of \code{abs(n)}.
 }
 \examples{
+if (torch_is_installed()) {
 A <- torch_randn(3, 3)
 linalg_matrix_power(A, 0)
-
+}
 }
 \seealso{
 \code{\link[=linalg_solve]{linalg_solve()}} computes \code{A$inverse() \%*\% B} with a

@@ -13,7 +13,6 @@
 #' y <- nnf_elu(x, alpha = 1)
 #' nnf_elu_(x, alpha = 1)
 #' torch_equal(x, y)
-#'
 #' @export
 nnf_elu <- function(input, alpha = 1, inplace = FALSE) {
   if (inplace) {
@@ -43,7 +42,6 @@ nnf_elu_ <- function(input, alpha = 1) {
 #' y <- nnf_selu(x)
 #' nnf_selu_(x)
 #' torch_equal(x, y)
-#'
 #' @export
 nnf_selu <- function(input, inplace = FALSE) {
   if (inplace) {

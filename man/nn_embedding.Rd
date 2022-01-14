@@ -72,6 +72,7 @@ initialized from \eqn{\mathcal{N}(0, 1)}
 }
 
 \examples{
+if (torch_is_installed()) {
 # an Embedding module containing 10 tensors of size 3
 embedding <- nn_embedding(10, 3)
 # a batch of 2 samples of 4 indices each
@@ -81,5 +82,5 @@ embedding(input)
 embedding <- nn_embedding(10, 3, padding_idx = 1)
 input <- torch_tensor(matrix(c(1, 3, 1, 6), nrow = 1), dtype = torch_long())
 embedding(input)
-
+}
 }

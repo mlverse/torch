@@ -31,9 +31,12 @@ Default is "backward" (normalize by 1/n).
 Computes the one dimensional inverse discrete Fourier transform of input.
 }
 \examples{
+if (torch_is_installed()) {
 t <- torch_arange(start = 0, end = 3)
 t
 x <- torch_fft_fft(t, norm = "backward")
 torch_fft_ifft(x)
 
+
+}
 }

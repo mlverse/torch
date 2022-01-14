@@ -21,7 +21,9 @@ All real-valued types are considered real. Complex values are considered real wh
 }
 
 \examples{
+if (torch_is_installed()) {
 if (FALSE) {
-  torch_isreal(torch_tensor(c(1, 1 + 1i, 2 + 0i)))
+torch_isreal(torch_tensor(c(1, 1+1i, 2+0i)))
+}
 }
 }

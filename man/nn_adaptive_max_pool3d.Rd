@@ -20,6 +20,7 @@ The output is of size D x H x W, for any input size.
 The number of output features is equal to the number of input planes.
 }
 \examples{
+if (torch_is_installed()) {
 # target output size of 5x7x9
 m <- nn_adaptive_max_pool3d(c(5, 7, 9))
 input <- torch_randn(1, 64, 8, 9, 10)
@@ -28,5 +29,5 @@ output <- m(input)
 m <- nn_adaptive_max_pool3d(7)
 input <- torch_randn(1, 64, 10, 9, 8)
 output <- m(input)
-
+}
 }

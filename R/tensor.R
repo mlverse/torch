@@ -322,7 +322,6 @@ prep_names <- function(..., self) {
 #' @examples
 #' torch_tensor(c(1, 2, 3, 4))
 #' torch_tensor(c(1, 2, 3, 4), dtype = torch_int())
-#'
 #' @export
 torch_tensor <- function(data, dtype = NULL, device = NULL, requires_grad = FALSE,
                          pin_memory = FALSE) {

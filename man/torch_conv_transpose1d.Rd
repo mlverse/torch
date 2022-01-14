@@ -46,8 +46,10 @@ See \code{\link[=nn_conv_transpose1d]{nn_conv_transpose1d()}}  for details and o
 }
 
 \examples{
+if (torch_is_installed()) {
 
-inputs <- torch_randn(c(20, 16, 50))
-weights <- torch_randn(c(16, 33, 5))
+inputs = torch_randn(c(20, 16, 50))
+weights = torch_randn(c(16, 33, 5))
 nnf_conv_transpose1d(inputs, weights)
+}
 }

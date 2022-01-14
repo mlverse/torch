@@ -46,7 +46,9 @@ the old \code{torch_ones_like(input, out=output)} is equivalent to
 }
 
 \examples{
+if (torch_is_installed()) {
 
-input <- torch_empty(c(2, 3))
+input = torch_empty(c(2, 3))
 torch_ones_like(input)
+}
 }

@@ -30,6 +30,7 @@ Mathematics 2019, 7, 1174.
 }
 
 \examples{
+if (torch_is_installed()) {
 
 a <- torch_randn(c(2, 2, 2))
 a[1, , ] <- torch_eye(2, 2)
@@ -37,6 +38,7 @@ a[2, , ] <- 2 * torch_eye(2, 2)
 a
 torch_matrix_exp(a)
 
-x <- torch_tensor(rbind(c(0, pi / 3), c(-pi / 3, 0)))
+x <- torch_tensor(rbind(c(0, pi/3), c(-pi/3, 0)))
 x$matrix_exp() # should be [[cos(pi/3), sin(pi/3)], [-sin(pi/3), cos(pi/3)]]
+}
 }

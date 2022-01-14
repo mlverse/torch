@@ -265,7 +265,6 @@ MultivariateNormal <- add_class_definition(MultivariateNormal)
 #' @examples
 #' m <- distr_multivariate_normal(torch_zeros(2), torch_eye(2))
 #' m$sample() # normally distributed with mean=`[0,0]` and covariance_matrix=`I`
-#'
 #' @param loc (Tensor): mean of the distribution
 #' @param covariance_matrix (Tensor): positive-definite covariance matrix
 #' @param precision_matrix (Tensor): positive-definite precision matrix

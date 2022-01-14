@@ -60,7 +60,6 @@
 #' input <- torch_tensor(c(-1, 0, 1))
 #' tr_fn <- jit_trace(fn, input)
 #' tr_fn(input)
-#'
 #' @export
 jit_trace <- function(func, ..., strict = TRUE) {
   tr_fn <- make_traceable_fn(func)
@@ -115,7 +114,6 @@ jit_load <- function(path, ...) {
 #'
 #' tmp <- tempfile("tst", fileext = "pt")
 #' jit_save(tr_fn, tmp)
-#'
 #' @export
 jit_save <- function(obj, path, ...) {
   path <- normalizePath(path, mustWork = FALSE)
@@ -275,7 +273,6 @@ create_script_module <- function(mod) {
 #'
 #' x <- torch_randn(10, 10)
 #' torch_allclose(linear(x), tr_linear(x))
-#'
 #' @export
 jit_trace_module <- function(mod, ..., strict = TRUE) {
   inputs <- rlang::list2(...)
@@ -334,7 +331,6 @@ jit_trace_module <- function(mod, ..., strict = TRUE) {
 #'
 #' tmp <- tempfile("tst", fileext = "pt")
 #' jit_save_for_mobile(tr_fn, tmp)
-#'
 #' @export
 jit_save_for_mobile <- function(obj, path, ...) {
   path <- normalizePath(path, mustWork = FALSE)

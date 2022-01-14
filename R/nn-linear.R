@@ -12,7 +12,6 @@ NULL
 #' input <- torch_randn(128, 20)
 #' output <- m(input)
 #' print(output$size())
-#'
 #' @export
 nn_identity <- nn_module(
   "nn_identity",
@@ -54,7 +53,6 @@ nn_identity <- nn_module(
 #' input <- torch_randn(128, 20)
 #' output <- m(input)
 #' print(output$size())
-#'
 #' @export
 nn_linear <- nn_module(
   "nn_linear",
@@ -121,7 +119,6 @@ nn_linear <- nn_module(
 #' input2 <- torch_randn(128, 30)
 #' output <- m(input1, input2)
 #' print(output$size())
-#'
 #' @export
 nn_bilinear <- nn_module(
   "nn_bilinear",

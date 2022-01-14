@@ -45,9 +45,10 @@ It is always prefered to use \code{\link[=linalg_lstsq]{linalg_lstsq()}} when po
 numerically stable than computing the pseudoinverse explicitly.
 }
 \examples{
+if (torch_is_installed()) {
 A <- torch_randn(3, 5)
 linalg_pinv(A)
-
+}
 }
 \seealso{
 \itemize{

@@ -140,7 +140,6 @@ Categorical <- add_class_definition(Categorical)
 #' @examples
 #' m <- distr_categorical(torch_tensor(c(0.25, 0.25, 0.25, 0.25)))
 #' m$sample() # equal probability of 1,2,3,4
-#'
 #' @export
 distr_categorical <- function(probs = NULL, logits = NULL, validate_args = NULL) {
   Categorical$new(probs, logits, validate_args = validate_args)

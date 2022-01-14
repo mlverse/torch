@@ -207,7 +207,7 @@ class OptionalArrayRef {
       x_ref_ = std::make_shared<c10::optional<torch::ArrayRef<T>>>(*x_);
     }
   }
-  operator c10::optional<torch::ArrayRef<T>> &() { return *x_ref_; }
+  operator c10::optional<torch::ArrayRef<T>>&() { return *x_ref_; }
 };
 
 template <typename Type>
@@ -219,8 +219,8 @@ class ArrayBox {
     buffer_ = std::make_shared<std::vector<Type>>(x);
     x_ = std::make_shared<torch::ArrayRef<Type>>(*buffer_);
   }
-  operator torch::ArrayRef<Type> &() { return *x_; }
-  operator std::vector<Type> &() { return *buffer_; }
+  operator torch::ArrayRef<Type>&() { return *x_; }
+  operator std::vector<Type>&() { return *buffer_; }
   void push_back(const Type& x) {
     buffer_->push_back(x);
     // We have to re-create the ArrayRef because the underlying buffer has
@@ -268,7 +268,7 @@ class DimnameList {
   std::shared_ptr<c10::optional<torch::DimnameList>> x_;
   std::shared_ptr<std::vector<torch::Dimname>> vec_;
   DimnameList(const c10::optional<torch::DimnameList>& x);
-  operator c10::optional<torch::DimnameList> &();
+  operator c10::optional<torch::DimnameList>&();
 };
 
 using Generator = Box<c10::optional<torch::Generator>>;
@@ -304,7 +304,7 @@ DimnameList::DimnameList(const c10::optional<torch::DimnameList>& x) {
   }
 };
 
-DimnameList::operator c10::optional<torch::DimnameList> &() { return *x_; };
+DimnameList::operator c10::optional<torch::DimnameList>&() { return *x_; };
 
 }  // namespace optional
 }  // namespace self_contained

@@ -127,8 +127,9 @@ sampled from \eqn{\mathcal{U}(-\sqrt{k}, \sqrt{k})} where
 }
 
 \examples{
+if (torch_is_installed()) {
 m <- nn_conv1d(16, 33, 3, stride = 2)
 input <- torch_randn(20, 16, 50)
 output <- m(input)
-
+}
 }

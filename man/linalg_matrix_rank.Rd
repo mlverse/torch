@@ -45,9 +45,10 @@ If \code{A} is a batch of matrices, \code{tol} is computed this way for every el
 the batch.
 }
 \examples{
+if (torch_is_installed()) {
 a <- torch_eye(10)
 linalg_matrix_rank(a)
-
+}
 }
 \seealso{
 Other linalg: 

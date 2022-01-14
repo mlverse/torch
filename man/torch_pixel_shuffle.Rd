@@ -25,8 +25,10 @@ See \code{~torch.nn.PixelShuffle} for details.
 }
 
 \examples{
+if (torch_is_installed()) {
 
-input <- torch_randn(c(1, 9, 4, 4))
-output <- nnf_pixel_shuffle(input, 3)
+input = torch_randn(c(1, 9, 4, 4))
+output = nnf_pixel_shuffle(input, 3)
 print(output$size())
+}
 }

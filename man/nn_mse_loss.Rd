@@ -53,10 +53,11 @@ dimensions
 }
 
 \examples{
+if (torch_is_installed()) {
 loss <- nn_mse_loss()
 input <- torch_randn(3, 5, requires_grad = TRUE)
 target <- torch_randn(3, 5)
 output <- loss(input, target)
 output$backward()
-
+}
 }

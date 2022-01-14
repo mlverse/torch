@@ -33,9 +33,10 @@ that device with the CPU.
 This function is "experimental" and it may change in a future PyTorch release.
 }
 \examples{
+if (torch_is_installed()) {
 A <- torch_randn(3, 3)
 out <- linalg_inv_ex(A)
-
+}
 }
 \seealso{
 \code{\link[=linalg_inv]{linalg_inv()}} is a NumPy compatible variant that always checks for errors.

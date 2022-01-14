@@ -76,7 +76,6 @@ Device <- R7Class(
 #' # Via string and device ordinal
 #' torch_device("cuda", 0)
 #' torch_device("cpu", 0)
-#'
 #' @export
 torch_device <- function(type, index = NULL) {
   Device$new(type, index)

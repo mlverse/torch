@@ -38,9 +38,11 @@ If \code{input} is a \eqn{(b \times n \times m)} tensor, \code{mat2} is a
 }
 
 \examples{
+if (torch_is_installed()) {
 
-input <- torch_randn(c(10, 3, 4))
-mat2 <- torch_randn(c(10, 4, 5))
-res <- torch_bmm(input, mat2)
+input = torch_randn(c(10, 3, 4))
+mat2 = torch_randn(c(10, 4, 5))
+res = torch_bmm(input, mat2)
 res
+}
 }

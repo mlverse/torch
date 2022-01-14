@@ -46,9 +46,10 @@ not defined. This implementation will set the gradient to zero in this case.
 }
 
 \examples{
+if (torch_is_installed()) {
 # power-2 pool of window of length 3, with stride 2.
 m <- nn_lp_pool1d(2, 3, stride = 2)
 input <- torch_randn(20, 16, 50)
 output <- m(input)
-
+}
 }

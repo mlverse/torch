@@ -22,6 +22,8 @@ Equal
 }
 
 \examples{
+if (torch_is_installed()) {
 
 torch_equal(torch_tensor(c(1, 2)), torch_tensor(c(1, 2)))
+}
 }

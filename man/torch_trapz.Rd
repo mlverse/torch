@@ -32,10 +32,12 @@ As above, but the sample points are spaced uniformly at a distance of \code{dx}.
 }
 
 \examples{
+if (torch_is_installed()) {
 
-y <- torch_randn(list(2, 3))
+y = torch_randn(list(2, 3))
 y
-x <- torch_tensor(matrix(c(1, 3, 4, 1, 2, 3), ncol = 3, byrow = TRUE))
+x = torch_tensor(matrix(c(1, 3, 4, 1, 2, 3), ncol = 3, byrow=TRUE))
 torch_trapz(y, x = x)
 
+}
 }

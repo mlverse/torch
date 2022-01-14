@@ -13,11 +13,12 @@ with_no_grad(code)
 Temporarily modify gradient recording.
 }
 \examples{
+if (torch_is_installed()) {
 x <- torch_tensor(runif(5), requires_grad = TRUE)
 with_no_grad({
   x$sub_(torch_tensor(as.numeric(1:5)))
 })
 x
 x$grad
-
+}
 }

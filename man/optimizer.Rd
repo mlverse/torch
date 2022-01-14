@@ -44,6 +44,7 @@ creation and usage.
 }
 
 \examples{
+if (torch_is_installed()) {
 
 # In this example we will create a custom optimizer
 # that's just a simplified version of the `optim_sgd` function.
@@ -82,5 +83,5 @@ for (i in 1:100) {
   opt$step()
 }
 all.equal(x$item(), 0, tolerance = 1e-9)
-
+}
 }

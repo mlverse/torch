@@ -430,7 +430,6 @@ is_nn_module <- function(x) {
 #'     input
 #'   }
 #' )
-#'
 #' @export
 nn_module <- function(classname = NULL, inherit = nn_Module, ...,
                       private = NULL, active = NULL,
@@ -602,7 +601,6 @@ print.nn_module <- function(x, ...) {
 #' )
 #' input <- torch_randn(32, 1, 28, 28)
 #' output <- model(input)
-#'
 #' @export
 nn_sequential <- module <- nn_module(
   classname = "nn_sequential",
@@ -660,7 +658,6 @@ length.nn_sequential <- function(x) {
 #'     x
 #'   }
 #' )
-#'
 #' @export
 nn_module_list <- nn_module(
   "nn_module_list",

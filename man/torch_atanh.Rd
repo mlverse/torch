@@ -29,8 +29,10 @@ Returns a new tensor with the inverse hyperbolic tangent of the elements of \cod
 }
 
 \examples{
+if (torch_is_installed()) {
 
-a <- torch_randn(c(4))$uniform_(-1, 1)
+a = torch_randn(c(4))$uniform_(-1, 1)
 a
 torch_atanh(a)
+}
 }

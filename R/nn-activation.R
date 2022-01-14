@@ -28,7 +28,6 @@ NULL
 #' m <- nn_threshold(0.1, 20)
 #' input <- torch_randn(2)
 #' output <- m(input)
-#'
 #' @export
 nn_threshold <- nn_module(
   "nn_threshold",
@@ -59,7 +58,6 @@ nn_threshold <- nn_module(
 #' m <- nn_relu()
 #' input <- torch_randn(2)
 #' m(input)
-#'
 #' @export
 nn_relu <- nn_module(
   "nn_relu",
@@ -107,7 +105,6 @@ nn_relu <- nn_module(
 #' m <- nn_rrelu(0.1, 0.3)
 #' input <- torch_randn(2)
 #' m(input)
-#'
 #' @export
 nn_rrelu <- nn_module(
   "nn_rrelu",
@@ -152,7 +149,6 @@ nn_rrelu <- nn_module(
 #' m <- nn_hardtanh(-2, 2)
 #' input <- torch_randn(2)
 #' output <- m(input)
-#'
 #' @export
 nn_hardtanh <- nn_module(
   "nn_hardtanh",
@@ -186,7 +182,6 @@ nn_hardtanh <- nn_module(
 #' m <- nn_relu6()
 #' input <- torch_randn(2)
 #' output <- m(input)
-#'
 #' @export
 nn_relu6 <- nn_module(
   "nn_relu6",
@@ -215,7 +210,6 @@ nn_relu6 <- nn_module(
 #' m <- nn_sigmoid()
 #' input <- torch_randn(2)
 #' output <- m(input)
-#'
 #' @export
 nn_sigmoid <- nn_module(
   "nn_sigmoid",
@@ -247,7 +241,6 @@ nn_sigmoid <- nn_module(
 #' m <- nn_hardsigmoid()
 #' input <- torch_randn(2)
 #' output <- m(input)
-#'
 #' @export
 nn_hardsigmoid <- nn_module(
   "nn_hardsigmoid",
@@ -274,7 +267,6 @@ nn_hardsigmoid <- nn_module(
 #' m <- nn_tanh()
 #' input <- torch_randn(2)
 #' output <- m(input)
-#'
 #' @export
 nn_tanh <- nn_module(
   "nn_tanh",
@@ -341,7 +333,6 @@ nn_hardswish <- nn_module(
 #' m <- nn_elu()
 #' input <- torch_randn(2)
 #' output <- m(input)
-#'
 #' @export
 nn_elu <- nn_module(
   "nn_elu",
@@ -378,7 +369,6 @@ nn_elu <- nn_module(
 #' m <- nn_celu()
 #' input <- torch_randn(2)
 #' output <- m(input)
-#'
 #' @export
 nn_celu <- nn_module(
   "nn_celu",
@@ -416,7 +406,6 @@ nn_celu <- nn_module(
 #' m <- nn_selu()
 #' input <- torch_randn(2)
 #' output <- m(input)
-#'
 #' @export
 #
 nn_selu <- nn_module(
@@ -447,7 +436,6 @@ nn_selu <- nn_module(
 #' m <- nn_glu()
 #' input <- torch_randn(4, 2)
 #' output <- m(input)
-#'
 #' @export
 nn_glu <- nn_module(
   "nn_glue",
@@ -475,7 +463,6 @@ nn_glu <- nn_module(
 #' m <- nn_gelu()
 #' input <- torch_randn(2)
 #' output <- m(input)
-#'
 #' @export
 nn_gelu <- nn_module(
   "nn_gelu",
@@ -511,7 +498,6 @@ nn_gelu <- nn_module(
 #' m <- nn_hardshrink()
 #' input <- torch_randn(2)
 #' output <- m(input)
-#'
 #' @export
 nn_hardshrink <- nn_module(
   "nn_hardshrink",
@@ -554,7 +540,6 @@ nn_hardshrink <- nn_module(
 #' m <- nn_leaky_relu(0.1)
 #' input <- torch_randn(2)
 #' output <- m(input)
-#'
 #' @export
 nn_leaky_relu <- nn_module(
   "nn_leaky_relu",
@@ -584,7 +569,6 @@ nn_leaky_relu <- nn_module(
 #' m <- nn_log_sigmoid()
 #' input <- torch_randn(2)
 #' output <- m(input)
-#'
 #' @export
 nn_log_sigmoid <- nn_module(
   "nn_log_sigmoid",
@@ -619,7 +603,6 @@ nn_log_sigmoid <- nn_module(
 #' m <- nn_softplus()
 #' input <- torch_randn(2)
 #' output <- m(input)
-#'
 #' @export
 nn_softplus <- nn_module(
   "nn_softplus",
@@ -657,7 +640,6 @@ nn_softplus <- nn_module(
 #' m <- nn_softshrink()
 #' input <- torch_randn(2)
 #' output <- m(input)
-#'
 #' @export
 nn_softshrink <- nn_module(
   "nn_softshrink",
@@ -886,7 +868,6 @@ nn_multihead_attention <- nn_module(
 #' m <- nn_prelu()
 #' input <- torch_randn(2)
 #' output <- m(input)
-#'
 #' @export
 nn_prelu <- nn_module(
   "nn_prelu",
@@ -916,7 +897,6 @@ nn_prelu <- nn_module(
 #' m <- nn_softsign()
 #' input <- torch_randn(2)
 #' output <- m(input)
-#'
 #' @export
 nn_softsign <- nn_module(
   "nn_softsign",
@@ -943,7 +923,6 @@ nn_softsign <- nn_module(
 #' m <- nn_tanhshrink()
 #' input <- torch_randn(2)
 #' output <- m(input)
-#'
 #' @export
 nn_tanhshrink <- nn_module(
   "nn_tanhshrink",
@@ -981,7 +960,6 @@ nn_tanhshrink <- nn_module(
 #' m <- nn_softmin(dim = 1)
 #' input <- torch_randn(2, 2)
 #' output <- m(input)
-#'
 #' @export
 nn_softmin <- nn_module(
   "nn_softmin",
@@ -1028,7 +1006,6 @@ nn_softmin <- nn_module(
 #' m <- nn_softmax(1)
 #' input <- torch_randn(2, 3)
 #' output <- m(input)
-#'
 #' @export
 nn_softmax <- nn_module(
   "nn_softmax",
@@ -1058,7 +1035,6 @@ nn_softmax <- nn_module(
 #' m <- nn_softmax2d()
 #' input <- torch_randn(2, 3, 12, 13)
 #' output <- m(input)
-#'
 #' @export
 nn_softmax2d <- nn_module(
   "nn_softmax2d",
@@ -1093,7 +1069,6 @@ nn_softmax2d <- nn_module(
 #' m <- nn_log_softmax(1)
 #' input <- torch_randn(2, 3)
 #' output <- m(input)
-#'
 #' @export
 nn_log_softmax <- nn_module(
   "nn_log_softmax",

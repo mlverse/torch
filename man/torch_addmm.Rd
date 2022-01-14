@@ -43,9 +43,11 @@ For inputs of type \code{FloatTensor} or \code{DoubleTensor}, arguments \code{be
 }
 
 \examples{
+if (torch_is_installed()) {
 
-M <- torch_randn(c(2, 3))
-mat1 <- torch_randn(c(2, 3))
-mat2 <- torch_randn(c(3, 3))
+M = torch_randn(c(2, 3))
+mat1 = torch_randn(c(2, 3))
+mat2 = torch_randn(c(3, 3))
 torch_addmm(M, mat1, mat2)
+}
 }

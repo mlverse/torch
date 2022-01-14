@@ -101,7 +101,6 @@ nn_init_calculate_gain <- function(nonlinearity, param = NULL) {
 #' @examples
 #' w <- torch_empty(3, 5)
 #' nn_init_uniform_(w)
-#'
 #' @export
 nn_init_uniform_ <- function(tensor, a = 0, b = 1) {
   nn_init_no_grad_uniform(tensor, a, b)
@@ -118,7 +117,6 @@ nn_init_uniform_ <- function(tensor, a = 0, b = 1) {
 #' @examples
 #' w <- torch_empty(3, 5)
 #' nn_init_normal_(w)
-#'
 #' @export
 nn_init_normal_ <- function(tensor, mean = 0, std = 1) {
   nn_init_no_grad_normal(tensor, mean, std)
@@ -136,7 +134,6 @@ nn_init_normal_ <- function(tensor, mean = 0, std = 1) {
 #' @examples
 #' w <- torch_empty(3, 5)
 #' nn_init_trunc_normal_(w)
-#'
 #' @export
 nn_init_trunc_normal_ <- function(tensor, mean = 0, std = 1, a = -2, b = 2) {
   nn_init_no_grad_trunc_normal(tensor, mean, std, a, b)
@@ -152,7 +149,6 @@ nn_init_trunc_normal_ <- function(tensor, mean = 0, std = 1, a = -2, b = 2) {
 #' @examples
 #' w <- torch_empty(3, 5)
 #' nn_init_constant_(w, 0.3)
-#'
 #' @export
 nn_init_constant_ <- function(tensor, val) {
   nn_init_no_grad_fill(tensor, val)
@@ -167,7 +163,6 @@ nn_init_constant_ <- function(tensor, val) {
 #' @examples
 #' w <- torch_empty(3, 5)
 #' nn_init_ones_(w)
-#'
 #' @export
 nn_init_ones_ <- function(tensor) {
   nn_init_no_grad_fill(tensor, 1)
@@ -182,7 +177,6 @@ nn_init_ones_ <- function(tensor) {
 #' @examples
 #' w <- torch_empty(3, 5)
 #' nn_init_zeros_(w)
-#'
 #' @export
 nn_init_zeros_ <- function(tensor) {
   nn_init_no_grad_zero(tensor)
@@ -200,7 +194,6 @@ nn_init_zeros_ <- function(tensor) {
 #' @examples
 #' w <- torch_empty(3, 5)
 #' nn_init_eye_(w)
-#'
 #' @export
 nn_init_eye_ <- function(tensor) {
   with_no_grad({
@@ -266,7 +259,6 @@ nn_init_calculate_fan_in_and_fan_out <- function(tensor) {
 #' @examples
 #' w <- torch_empty(3, 5)
 #' nn_init_xavier_uniform_(w)
-#'
 #' @export
 nn_init_xavier_uniform_ <- function(tensor, gain = 1) {
   fans <- nn_init_calculate_fan_in_and_fan_out(tensor)
@@ -290,7 +282,6 @@ nn_init_xavier_uniform_ <- function(tensor, gain = 1) {
 #' @examples
 #' w <- torch_empty(3, 5)
 #' nn_init_xavier_normal_(w)
-#'
 #' @export
 nn_init_xavier_normal_ <- function(tensor, gain = 1) {
   fans <- nn_init_calculate_fan_in_and_fan_out(tensor)
@@ -333,7 +324,6 @@ nn_init_calculate_correct_fan <- function(tensor, mode) {
 #' @examples
 #' w <- torch_empty(3, 5)
 #' nn_init_kaiming_uniform_(w, mode = "fan_in", nonlinearity = "leaky_relu")
-#'
 #' @export
 nn_init_kaiming_uniform_ <- function(tensor, a = 0, mode = "fan_in", nonlinearity = "leaky_relu") {
   fan <- nn_init_calculate_correct_fan(tensor, mode)
@@ -355,7 +345,6 @@ nn_init_kaiming_uniform_ <- function(tensor, a = 0, mode = "fan_in", nonlinearit
 #' @examples
 #' w <- torch_empty(3, 5)
 #' nn_init_kaiming_normal_(w, mode = "fan_in", nonlinearity = "leaky_relu")
-#'
 #' @export
 nn_init_kaiming_normal_ <- function(tensor, a = 0, mode = "fan_in", nonlinearity = "leaky_relu") {
   fan <- nn_init_calculate_correct_fan(tensor, mode)
@@ -378,7 +367,6 @@ nn_init_kaiming_normal_ <- function(tensor, a = 0, mode = "fan_in", nonlinearity
 #' @examples
 #' w <- torch_empty(3, 5)
 #' nn_init_orthogonal_(w)
-#'
 #' @export
 nn_init_orthogonal_ <- function(tensor, gain = 1) {
   rows <- tensor$size(1)

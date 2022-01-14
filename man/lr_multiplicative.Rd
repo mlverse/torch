@@ -24,6 +24,7 @@ Multiply the learning rate of each parameter group by the factor given
 in the specified function. When last_epoch=-1, sets initial lr as lr.
 }
 \examples{
+if (torch_is_installed()) {
 \dontrun{
 lmbda <- function(epoch) 0.95
 scheduler <- lr_multiplicative(optimizer, lr_lambda = lmbda)
@@ -34,4 +35,5 @@ for (epoch in 1:100) {
 }
 }
 
+}
 }

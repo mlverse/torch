@@ -23,8 +23,9 @@ tuple containing the LU factorization and pivots of A. Pivoting is done if pivot
 is set to True.
 }
 \examples{
+if (torch_is_installed()) {
 
 A <- torch_randn(c(2, 3, 3))
 torch_lu(A)
-
+}
 }

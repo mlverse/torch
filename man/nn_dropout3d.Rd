@@ -41,8 +41,9 @@ feature maps and should be used instead.
 }
 
 \examples{
+if (torch_is_installed()) {
 m <- nn_dropout3d(p = 0.2)
 input <- torch_randn(20, 16, 4, 32, 32)
 output <- m(input)
-
+}
 }

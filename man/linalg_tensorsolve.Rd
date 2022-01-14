@@ -27,6 +27,7 @@ If \code{dims} is specified, \code{A} will be reshaped as
 Supports inputs of float, double, cfloat and cdouble dtypes.
 }
 \examples{
+if (torch_is_installed()) {
 A <- torch_eye(2 * 3 * 4)$reshape(c(2 * 3, 4, 2, 3, 4))
 B <- torch_randn(2 * 3, 4)
 X <- linalg_tensorsolve(A, B)
@@ -38,7 +39,7 @@ B <- torch_randn(4, 3, 2)
 X <- linalg_tensorsolve(A, B, dims = c(1, 3))
 A <- A$permute(c(2, 4, 5, 1, 3))
 torch_allclose(torch_tensordot(A, X, dims = X$ndim), B, atol = 1e-6)
-
+}
 }
 \seealso{
 \itemize{

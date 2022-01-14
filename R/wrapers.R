@@ -15,7 +15,6 @@
 #'
 #' A <- torch_randn(c(2, 3, 3))
 #' torch_lu(A)
-#'
 #' @export
 torch_lu <- function(A, pivot = TRUE, get_infos = FALSE, out = NULL) {
   # If get_infos is True, then we don't need to check for errors and vice versa

@@ -23,7 +23,6 @@
 #' input1 <- torch_randn(100, 128)
 #' input2 <- torch_randn(100, 128)
 #' output <- pdist(input1, input2)
-#'
 #' @export
 nn_pairwise_distance <- nn_module(
   "nn_pairwise_distance",

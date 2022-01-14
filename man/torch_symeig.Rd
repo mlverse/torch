@@ -51,19 +51,21 @@ If \code{upper} is \code{FALSE}, then lower triangular portion is used.
 }
 
 \examples{
+if (torch_is_installed()) {
 
-a <- torch_randn(c(5, 5))
-a <- a + a$t() # To make a symmetric
+a = torch_randn(c(5, 5))
+a = a + a$t()  # To make a symmetric
 a
-o <- torch_symeig(a, eigenvectors = TRUE)
-e <- o[[1]]
-v <- o[[2]]
+o = torch_symeig(a, eigenvectors=TRUE)
+e = o[[1]]
+v = o[[2]]
 e
 v
-a_big <- torch_randn(c(5, 2, 2))
-a_big <- a_big + a_big$transpose(-2, -1) # To make a_big symmetric
-o <- a_big$symeig(eigenvectors = TRUE)
-e <- o[[1]]
-v <- o[[2]]
+a_big = torch_randn(c(5, 2, 2))
+a_big = a_big + a_big$transpose(-2, -1)  # To make a_big symmetric
+o = a_big$symeig(eigenvectors=TRUE)
+e = o[[1]]
+v = o[[2]]
 torch_allclose(torch_matmul(v, torch_matmul(e$diag_embed(), v$transpose(-2, -1))), a_big)
+}
 }

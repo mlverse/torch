@@ -37,7 +37,9 @@ output tensor having 1 (or \code{len(dim)}) fewer dimension(s).
 }
 
 \examples{
+if (torch_is_installed()) {
 
-a <- torch_randn(c(3, 3))
+a = torch_randn(c(3, 3))
 torch_logsumexp(a, 1)
+}
 }

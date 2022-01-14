@@ -139,7 +139,6 @@ Normal <- add_class_definition(Normal)
 #' @examples
 #' m <- distr_normal(loc = 0, scale = 1)
 #' m$sample() # normally distributed with loc=0 and scale=1
-#'
 #' @seealso [Distribution] for details on the available methods.
 #' @family distributions
 #' @export

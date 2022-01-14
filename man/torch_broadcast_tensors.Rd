@@ -20,9 +20,11 @@ Broadcasts the given tensors according to broadcasting-semantics.
 }
 
 \examples{
+if (torch_is_installed()) {
 
-x <- torch_arange(0, 3)$view(c(1, 4))
-y <- torch_arange(0, 2)$view(c(3, 1))
-out <- torch_broadcast_tensors(list(x, y))
+x = torch_arange(0, 3)$view(c(1, 4))
+y = torch_arange(0, 2)$view(c(3, 1))
+out = torch_broadcast_tensors(list(x, y))
 out[[1]]
+}
 }

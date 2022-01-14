@@ -54,18 +54,20 @@ should be a real number, otherwise it should be an integer.
 }
 
 \examples{
+if (torch_is_installed()) {
 
-a <- torch_randn(c(4))
+a = torch_randn(c(4))
 a
-torch_clamp(a, min = -0.5, max = 0.5)
+torch_clamp(a, min=-0.5, max=0.5)
 
 
-a <- torch_randn(c(4))
+a = torch_randn(c(4))
 a
-torch_clamp(a, min = 0.5)
+torch_clamp(a, min=0.5)
 
 
-a <- torch_randn(c(4))
+a = torch_randn(c(4))
 a
-torch_clamp(a, max = 0.5)
+torch_clamp(a, max=0.5)
+}
 }

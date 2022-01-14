@@ -53,7 +53,6 @@ NULL
 #' embedding <- nn_embedding(10, 3, padding_idx = 1)
 #' input <- torch_tensor(matrix(c(1, 3, 1, 6), nrow = 1), dtype = torch_long())
 #' embedding(input)
-#'
 #' @export
 nn_embedding <- nn_module(
   "nn_embedding",

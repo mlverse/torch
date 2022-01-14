@@ -43,8 +43,10 @@ See \code{\link[=nn_conv1d]{nn_conv1d()}} for details and output shape.
 }
 
 \examples{
+if (torch_is_installed()) {
 
-filters <- torch_randn(c(33, 16, 3))
-inputs <- torch_randn(c(20, 16, 50))
+filters = torch_randn(c(33, 16, 3))
+inputs = torch_randn(c(20, 16, 50))
 nnf_conv1d(inputs, filters)
+}
 }
