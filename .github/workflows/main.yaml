@@ -90,8 +90,7 @@ jobs:
           rcmdcheck::rcmdcheck(args = c("--no-multiarch", "--no-manual", "--ignore-vignettes"), build_args = c("--no-build-vignettes"), error_on = error_on, check_dir = "check")
         shell: Rscript {0}
       - name: Style and render documents
-        if: success() && runner.os == 'Linux' && matrix.r_version == 'release'
-        if: runner.os == 'Linux' && matrix.r_version == 'release' && startsWith(github.event.comment.body, '/style')
+        if: success() && runner.os == 'Linux' && matrix.r_version == 'release' && startsWith(github.event.comment.body, '/style')
         run:  |
           set -x
           git config --local user.name "$GITHUB_ACTOR"
