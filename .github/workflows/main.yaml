@@ -81,9 +81,9 @@ jobs:
           git config --local user.email "$GITHUB_ACTOR@users.noreply.github.com"
           sudo apt-get install -y clang-format perl || true
           time ./tools/style.sh || true
-          find . -type f \( -name 'DESCRIPTION' -o -name "*.R"\)  ! -path "*/gen-*.*" ! -path "*/lantern.*"  ! -path "*/RcppExports.*" ! -path "./check/*" -exec git add {} \; || true
+          find . -type f \( -name 'DESCRIPTION' -o -name "*.R"\)  ! -path "*/gen-*.*" ! -path "*/lantern.*"  ! -path "*/RcppExports.*" ! -path "./check/*" -printf '%p\n' -exec git add {} \; || true
           git commit -m 'Styling and formatting R code using `styler`' || echo 'No changes to commit'
-          find . -type f \( -name '*.h' -o -name '*.hpp' -o -name '*.c' -o -name '*.cc' -o -name '*.cpp' -o -name '*.cxx' \)  ! -path "*/gen-*.*" ! -path "*/lantern.*"  ! -path "*/RcppExports.*" ! -path "./check/*" -exec git add {} \; || true
+          find . -type f \( -name '*.h' -o -name '*.hpp' -o -name '*.c' -o -name '*.cc' -o -name '*.cpp' -o -name '*.cxx' \)  ! -path "*/gen-*.*" ! -path "*/lantern.*"  ! -path "*/RcppExports.*" ! -path "./check/*" -printf '%p\n' -exec git add {} \; || true
           git commit -m 'Styling and formatting C/C++ code using `clang-format`' || echo 'No changes to commit'
           git add README.md NAMESPACE man/\* || true
           git commit -m 'Roxygenize and render documents' || echo 'No changes to commit'
