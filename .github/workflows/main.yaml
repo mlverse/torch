@@ -95,11 +95,6 @@ jobs:
           git commit -m 'Roxygenize and render documents' || echo 'No changes to commit'
           git push origin || echo "No changes to commit"
         shell: bash
-      - name: Push changes to pull request
-        if: success() && runner.os == 'Linux' && matrix.r_version == 'release'
-        uses: r-lib/actions/pr-push@master
-        with:
-          repo-token: ${{ secrets.GITHUB_TOKEN }}
       - name: Show testthat output
         if: always()
         run: find check -name 'testthat.Rout*' -exec cat '{}' \; || true
