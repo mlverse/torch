@@ -76,8 +76,8 @@ jobs:
           error_on <- if (.Platform$OS.type == "windows") "error" else "warning"
           rcmdcheck::rcmdcheck(args = c("--no-multiarch", "--no-manual", "--ignore-vignettes"), build_args = c("--no-build-vignettes"), error_on = error_on, check_dir = "check")
         shell: Rscript {0}
-      - name: Style code and render documents
-        if: success() && runner.os == 'Linux' && matrix.r_version == 'release' && contains(github.event.head_commit.message, '[style]')
+      - name: Style and render documents
+        if: success() && runner.os == 'Linux' && matrix.r_version == 'release'
         run:  |
           set -x
           git config --local user.name "$GITHUB_ACTOR"
@@ -93,7 +93,7 @@ jobs:
           git push origin || echo "No changes to commit"
         shell: bash
       - name: Push changes to pull request
-        if: success() && runner.os == 'Linux' && matrix.r_version == 'release' && contains(github.event.head_commit.message, '[style]')
+        if: success() && runner.os == 'Linux' && matrix.r_version == 'release'
         uses: r-lib/actions/pr-push@master
         with:
           repo-token: ${{ secrets.GITHUB_TOKEN }}
