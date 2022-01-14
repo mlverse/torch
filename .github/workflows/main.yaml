@@ -68,7 +68,13 @@ jobs:
           options(pkgType = ifelse(grepl("linux", R.version$os), "source", "binary"))
           install.packages(c('remotes', 'rcmdcheck'))
           remotes::install_deps(dependencies = TRUE)
-          remotes::install_cran(c("katex", "knitr", "testthat", "roxygen2"), type = "source")
+          remotes::install_cran(c("katex", "knitr", "roxygen2", "sessioninfo", "testthat"), type = "source")
+        shell: Rscript {0}
+      - name: Print R session information
+        run: |
+          options(width = 100)
+          pkgs <- installed.packages()[, "Package"]
+          sessioninfo::session_info(pkgs, include_base = TRUE)
         shell: Rscript {0}
       - name: Build lantern and get libtorch
         if: matrix.install == 0 || contains( github.event.pull_request.labels.*.name, 'lantern')
