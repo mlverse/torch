@@ -73,6 +73,7 @@ jobs:
           install.packages(c('remotes', 'rcmdcheck'))
           remotes::install_deps(dependencies = TRUE)
           remotes::install_cran(c("katex", "knitr", "roxygen2", "sessioninfo", "testthat"), type = "source")
+          if (!require("Rcpp")) remotes::install_cran("Rcpp")
         shell: Rscript {0}
       - name: Print R session information
         run: |
