@@ -81,7 +81,7 @@ jobs:
           git config --local user.email "$GITHUB_ACTOR@users.noreply.github.com"
           sudo apt-get install -y clang-format perl || true
           time ./tools/style.sh || true
-          if [ -f README.Rmd ]; then Rscript -r 'rmarkdown::render("README.Rmd", output_format = "md_document")'; fi
+          if [ -f README.Rmd ]; then Rscript -e 'rmarkdown::render("README.Rmd", output_format = "md_document")'; fi
           Rscript -e 'roxygen2::roxygenize()'
           find -not -path "./check/*" . -type f \( -name 'DESCRIPTION' -o -name "*.R"\) -exec git add {} \; || true
           git commit -m 'Styling and formatting R code using `styler`' || echo 'No changes to commit'
