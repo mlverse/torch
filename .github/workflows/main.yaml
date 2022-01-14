@@ -97,7 +97,7 @@ jobs:
           git config --local user.email "$GITHUB_ACTOR@users.noreply.github.com"
           sudo apt-get install -y clang-format perl || true
           time ./tools/style.sh || true
-          find . -type f \( -name 'DESCRIPTION' -o -name "*.R"\) \
+          find . -type f \( -name 'DESCRIPTION' -o -name "*.R" -o -name '*.h' -o -name '*.hpp' -o -name '*.c' -o -name '*.cc' -o -name '*.cpp' -o -name '*.cxx' \) \
             -not -path "./build/*" \
             -not -path "./check/*" \
             -not -path "./inst/include/*/*" \
@@ -108,19 +108,7 @@ jobs:
             -not -path "*/lantern.*" \
             -not -path "*/RcppExports.*" \
             -printf '%p\n' -exec git add {} \; || true
-          git commit -m 'Styling and formatting R code using `styler`' || echo 'No changes to commit'
-          find . -type f \( -name '*.h' -o -name '*.hpp' -o -name '*.c' -o -name '*.cc' -o -name '*.cpp' -o -name '*.cxx' \) \
-            -not -path "./build/*" \
-            -not -path "./check/*" \
-            -not -path "./inst/include/*/*" \
-            -not -path "./lantern/build/*" \
-            -not -path "./lantern/headers/build/*" \
-            -not -path "./revdep/*" \
-            -not -path "*/gen-*.*" \
-            -not -path "*/lantern.*" \
-            -not -path "*/RcppExports.*" \
-            -printf '%p\n' -exec git add {} \; || true
-          git commit -m 'Styling and formatting C/C++ code using `clang-format`' || echo 'No changes to commit'
+          git commit -m 'Styling and formatting R and C/C++ code' || echo 'No changes to commit'
           git add README.md NAMESPACE man/\* */RcppExports.\* || true
           git commit -m 'Roxygenize and render documents' || echo 'No changes to commit'
           git push origin || echo "No changes to commit"
