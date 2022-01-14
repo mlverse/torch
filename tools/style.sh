@@ -17,3 +17,11 @@ find -not -path "./check/*" . -type f \( -name '*.h' -o -name '*.hpp' -o -name '
 # Remove whitespaces
 find -not -path "./check/*" . -type f \( -name 'DESCRIPTION' -o -name "*.R" \) ! -path "*/gen-*.*" ! -path "*/RcppExports.*" -exec perl -pi -e 's/[ \t]*$//' {} \;
 find -not -path "./check/*" . -type f \( -name '*.h' -o -name '*.hpp' -o -name '*.c' -o -name '*.cc' -o -name '*.cpp' -o -name '*.cxx' \) ! -path "*/gen-*.*" ! -path "*/lantern.*"  ! -path "*/RcppExports.*" -exec perl -pi -e 's/[ \t]*$//' {} \;
+
+# Render documents
+Rscript -e "if (!require('rmarkdown')) install.packages('rmarkdown')"
+Rscript -e "if (!require('roxygen2')) install.packages('roxygen2')"
+if [ -f README.Rmd ]; then
+  Rscript -e 'rmarkdown::render("README.Rmd", output_format = "md_document")'
+fi
+Rscript -e 'roxygen2::roxygenize()'
