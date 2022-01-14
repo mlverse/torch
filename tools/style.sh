@@ -23,8 +23,8 @@ git diff --stat
 # Render documents
 Rscript -e "if (!require('rmarkdown')) install.packages('rmarkdown')"
 Rscript -e "if (!require('roxygen2')) install.packages('roxygen2')"
+Rscript -e 'roxygen2::roxygenize()'
 if [ -f README.Rmd ]; then
   Rscript -e 'rmarkdown::render("README.Rmd", output_format = "md_document")'
 fi
-Rscript -e 'roxygen2::roxygenize()'
 git diff --stat
