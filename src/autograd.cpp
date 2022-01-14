@@ -53,67 +53,54 @@ bool cpp_tensor_requires_grad(torch::Tensor self) {
   return lantern_Tensor_requires_grad(self.get());
 }
 
-std::deque<std::packaged_task<void*()>> tasks;
-std::deque<std::packaged_task<void()>> backward_tasks;
-std::atomic<int> n_tasks = {0};
-std::mutex tasks_mutex;
-std::mutex backward_tasks_mutex;
+namespace {
 
-void event_loop_thread(std::atomic<bool>& event_loop_running) {
-  while (event_loop_running) {
-    {
-      std::unique_lock<std::mutex> lock(tasks_mutex);
-      while (!tasks.empty()) {
-        auto task(std::move(tasks.front()));
-        tasks.pop_front();
+EventLoop<void*> gTasks;
+EventLoop<void> gBackwardTasks;
 
-        lock.unlock();
-        task();
-        lock.lock();
-      }
-    }
+void schedule_backward_task(std::packaged_task<void()>&& task) {
+  if (std::this_thread::get_id() == main_thread_id()) {
+    // NOTE: pre-C++-14 workaround for "moving" `task` into a lambda, not pretty
+    auto const task_sp =
+        std::make_shared<std::packaged_task<void()>>(std::move(task));
+
+    auto const thr_sp = std::make_shared<std::thread>();
+    *thr_sp = std::thread([task_sp, thr_sp] {
+      auto thr_join_sg = makeScopeGuard([thr_sp] {
+        gTasks.schedule(std::packaged_task<void*()>([thr_sp]() -> void* {
+          thr_sp->join();
+          return nullptr;
+        }));
+      });
+      (*task_sp)();
+    });
+  } else {
+    gBackwardTasks.schedule(std::move(task));
   }
 }
+
+}  // namespace
 
 // [[Rcpp::export]]
 void cpp_torch_method__backward_self_Tensor_inputs_TensorList(
     torch::Tensor self, torch::TensorList inputs,
     torch::optional::Tensor gradient, torch::optional::bool_t retain_graph,
     torch::bool_t create_graph) {
-  std::atomic<bool> event_loop_running(true);
   std::function<void()> backward([&]() {
-    try {
-      lantern_Tensor__backward_tensor_tensorlist_tensor_bool_bool(
-          self.get(), inputs.get(), gradient.get(), retain_graph.get(),
-          create_graph.get());
-    } catch (...) {
-      event_loop_running = false;
-      n_tasks = n_tasks - 1;
-      throw;
-    }
+    auto sg = makeScopeGuard([] { gTasks.stopWhenEmpty(); });
 
-    event_loop_running = false;
-    n_tasks = n_tasks - 1;
+    lantern_Tensor__backward_tensor_tensorlist_tensor_bool_bool(
+        self.get(), inputs.get(), gradient.get(), retain_graph.get(),
+        create_graph.get());
   });
 
   std::packaged_task<void()> task(backward);
-  std::future<void> result = task.get_future();
+  auto result_fut = task.get_future();
 
-  if (n_tasks == 0) {
-    n_tasks = n_tasks + 1;
-    std::thread td(std::move(task));
-    td.detach();
-  } else {
-    n_tasks = n_tasks + 1;
+  schedule_backward_task(std::move(task));
+  gTasks.run();
 
-    {
-      std::lock_guard<std::mutex> lock(tasks_mutex);
-      backward_tasks.push_front(std::move(task));
-    }
-  }
-
-  event_loop_thread(event_loop_running);
-  result.get();
+  result_fut.get();
 }
 
 // [[Rcpp::export]]
@@ -123,39 +110,19 @@ void cpp_autograd_backward(Rcpp::XPtr<XPtrTorchvariable_list> tensors,
   auto tensors_ = tensors->get();
   auto grad_tensors_ = grad_tensors->get();
 
-  std::atomic<bool> event_loop_running(true);
   std::function<void()> backward([&]() {
-    try {
-      lantern_autograd_backward(tensors_, grad_tensors_, retain_graph,
-                                create_graph);
-    } catch (...) {
-      event_loop_running = false;
-      n_tasks = n_tasks - 1;
-      throw;
-    }
+    auto sg = makeScopeGuard([] { gTasks.stopWhenEmpty(); });
 
-    event_loop_running = false;
-    n_tasks = n_tasks - 1;
+    lantern_autograd_backward(tensors_, grad_tensors_, retain_graph,
+                              create_graph);
   });
 
   std::packaged_task<void()> task(backward);
-  std::future<void> result = task.get_future();
+  auto result_fut = task.get_future();
+  schedule_backward_task(std::move(task));
+  gTasks.run();
 
-  if (n_tasks == 0) {
-    n_tasks = n_tasks + 1;
-    std::thread td(std::move(task));
-    td.detach();
-  } else {
-    n_tasks = n_tasks + 1;
-
-    {
-      std::lock_guard<std::mutex> lock(tasks_mutex);
-      backward_tasks.push_front(std::move(task));
-    }
-  }
-
-  event_loop_thread(event_loop_running);
-  result.get();
+  result_fut.get();
 }
 
 void* rcpp_call_hook(void* x, void* hook) {
@@ -165,8 +132,7 @@ void* rcpp_call_hook(void* x, void* hook) {
 // Since hooks are arbitrary R functions, they must run in the main
 // thread. In order to do it we call `backward` in a different thread
 // see `cpp_backward` and leave the main thread free to execute the R
-// calbacks that are pushed to the `event_loop_thread` as `packaged_tasks`
-// in this function.
+// calbacks.
 //
 // However, the R hooks can by themselves call `backward` again and torch
 // does not allow us to use a different thread. so while we are waiting for
@@ -185,31 +151,21 @@ unsigned int cpp_tensor_register_hook(Rcpp::XPtr<XPtrTorchTensor> self,
       return out;
       LANTERN_CALLBACK_END("Unknon error in hook.", NULL)
     });
-    std::future<void*> result = task.get_future();
+    std::future<void*> result_fut = task.get_future();
 
-    {
-      std::lock_guard<std::mutex> lock(tasks_mutex);
-      tasks.push_front(std::move(task));
-    }
+    gTasks.schedule(std::move(task));
 
     std::future_status status;
     do {
-      status = result.wait_for(std::chrono::seconds(0));
+      status = result_fut.wait_for(std::chrono::seconds(0));
       if (status == std::future_status::timeout) {
-        std::unique_lock<std::mutex> lock(backward_tasks_mutex);
-        while (!backward_tasks.empty()) {
-          auto task(std::move(backward_tasks.front()));
-          backward_tasks.pop_front();
-
-          // unlock during the task
-          lock.unlock();
-          task();
-          lock.lock();
-        }
+        gBackwardTasks.stopWhenEmpty();
+        gBackwardTasks.run();
       }
+      std::this_thread::yield();
     } while (status != std::future_status::ready);
 
-    return result.get();
+    return result_fut.get();
   });
 
   auto hook = lantern_new_hook(&rcpp_call_hook, r_hook);
@@ -252,14 +208,11 @@ Rcpp::XPtr<XPtrTorch> cpp_Function_lambda(Rcpp::Function f) {
       return (void*)output;
     });
 
-    std::future<void*> result = task.get_future();
+    auto result_fut = task.get_future();
 
-    {
-      std::lock_guard<std::mutex> lock(tasks_mutex);
-      tasks.push_front(std::move(task));
-    }
+    gTasks.schedule(std::move(task));
 
-    return result.get();
+    return result_fut.get();
     LANTERN_CALLBACK_END("Unknown error in lambda function.",
                          new torch::variable_list(lantern_variable_list_new()))
   });
@@ -282,39 +235,28 @@ Rcpp::XPtr<XPtrTorch> cpp_Function_lambda(Rcpp::Function f) {
 torch::variable_list cpp_Function_apply(torch::variable_list inputs,
                                         Rcpp::XPtr<XPtrTorch> forward,
                                         Rcpp::XPtr<XPtrTorch> backward) {
-  std::atomic<bool> event_loop_running;
-  event_loop_running = true;
-
   std::function<XPtrTorchvariable_list()> apply([&]() {
-    auto out = XPtrTorchvariable_list((void*)nullptr);
+    auto sg = makeScopeGuard([] { gTasks.stopWhenEmpty(); });
 
     try {
-      out = XPtrTorchvariable_list(lantern_Function_apply(
+      return XPtrTorchvariable_list(lantern_Function_apply(
           inputs.get(), forward->get(), backward->get()));
     } catch (std::string& ex) {
-      event_loop_running = false;
       throw Rcpp::exception(ex.c_str());
     } catch (const std::exception& ex) {
-      event_loop_running = false;
       throw Rcpp::exception(ex.what());
-    } catch (...) {
-      event_loop_running = false;
-      throw;
     }
-
-    event_loop_running = false;
-    return out;
   });
 
   std::packaged_task<XPtrTorchvariable_list()> task(apply);
-  std::future<XPtrTorchvariable_list> result = task.get_future();
+  auto result_fut = task.get_future();
 
-  std::thread td(std::move(task));
-  td.detach();
+  auto const thr_sp = std::make_shared<std::thread>(std::move(task));
+  auto thr_join_sg = makeScopeGuard([thr_sp] { thr_sp->join(); });
 
-  event_loop_thread(event_loop_running);
+  gTasks.run();
 
-  return result.get();
+  return result_fut.get();
 }
 
 // [[Rcpp::export]]

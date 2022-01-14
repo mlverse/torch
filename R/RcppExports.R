@@ -10765,6 +10765,10 @@ cpp_torch_namespace__use_cudnn_rnn_flatten_weight <- function() {
     .Call('_torch_cpp_torch_namespace__use_cudnn_rnn_flatten_weight', PACKAGE = 'torchpkg')
 }
 
+cpp_torch_namespace__store_main_thread_id <- function() {
+    invisible(.Call('_torch_cpp_torch_namespace__store_main_thread_id', PACKAGE = 'torchpkg'))
+}
+
 cpp_torch_variable_list <- function(x) {
     .Call('_torch_cpp_torch_variable_list', PACKAGE = 'torchpkg', x)
 }

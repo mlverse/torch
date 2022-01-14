@@ -11,6 +11,8 @@ globalVariables(c("..", "self", "private", "N"))
 }
 
 .onLoad <- function(libname, pkgname) {
+  cpp_torch_namespace__store_main_thread_id()
+
   install_success <- TRUE
   autoinstall <- interactive() ||
     "JPY_PARENT_PID" %in% names(Sys.getenv()) ||

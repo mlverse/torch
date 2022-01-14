@@ -49,3 +49,15 @@ XPtrTorchTensor to_index_tensor(XPtrTorchTensor t) {
 bool cpp_torch_namespace__use_cudnn_rnn_flatten_weight() {
   return lantern__use_cudnn_rnn_flatten_weight();
 }
+
+// [[Rcpp::export]]
+void cpp_torch_namespace__store_main_thread_id() {
+  // called upon package load to remember the thread ID of the main thread
+  main_thread_id();
+}
+
+std::thread::id main_thread_id() noexcept {
+  static const auto tid = std::this_thread::get_id();
+
+  return tid;
+}

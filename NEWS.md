@@ -10,6 +10,7 @@
 - `dataset_subset` will use the `.getbatch` method of the wrapped dataset if one is available. (#742, @egillax)
 - Fixed memory leak when applying custom `autograd_function`s. (#750)
 - `torch_sort` and `Tensor$sort` now return 1-indexed results. (#709, @mohamed-180)
+- Simplified concurrency related constructs in autograd. (#755, @yitao-li)
 - R and C++ code cleanup, styling, and formatting. (#753, @hsbadr)
 
 # torch 0.6.1
