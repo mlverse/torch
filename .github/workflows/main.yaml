@@ -68,7 +68,7 @@ jobs:
           options(pkgType = ifelse(grepl("linux", R.version$os), "source", "binary"))
           install.packages(c('remotes', 'rcmdcheck'))
           remotes::install_deps(dependencies = TRUE)
-          if (R.version$major < 4) remotes::install_cran("katex", type = "source")
+          remotes::install_cran(c("katex", "knitr", "testthat", "roxygen2"), type = "source")
         shell: Rscript {0}
       - name: Build lantern and get libtorch
         if: matrix.install == 0 || contains( github.event.pull_request.labels.*.name, 'lantern')
