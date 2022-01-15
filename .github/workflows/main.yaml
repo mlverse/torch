@@ -112,6 +112,7 @@ jobs:
           git commit -m 'Styling and formatting R and C/C++ code' || echo 'No changes to commit'
           git add README.md NAMESPACE man/\* */RcppExports.\* || true
           git commit -m 'Roxygenize and render documents' || echo 'No changes to commit'
+          git pull --ff-only || true
           git push origin || echo "No changes to commit"
         shell: bash
       - uses: r-lib/actions/pr-push@v2
