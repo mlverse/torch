@@ -50,14 +50,14 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
-      - uses: r-lib/actions/pr-fetch@master
+      - uses: r-lib/actions/pr-fetch@v2
         if: github.event_name == 'pull_request' || github.event.issue.pull_request
         with:
           repo-token: ${{ secrets.GITHUB_TOKEN }}
-      - uses: r-lib/actions/setup-r@master
+      - uses: r-lib/actions/setup-r@v2
         with:
           r-version: ${{ matrix.r_version }}
-      - uses: r-lib/actions/setup-pandoc@master
+      - uses: r-lib/actions/setup-pandoc@v2
       - name: Install system dependencies
         if: runner.os == 'Linux'
         env:
@@ -114,7 +114,7 @@ jobs:
           git commit -m 'Roxygenize and render documents' || echo 'No changes to commit'
           git push origin || echo "No changes to commit"
         shell: bash
-      - uses: r-lib/actions/pr-push@master
+      - uses: r-lib/actions/pr-push@v2
         if: ${{ success() && runner.os == 'Linux' && matrix.r_version == 'release' && startsWith(github.event.comment.body, '/style') &&
                 ( github.event_name == 'pull_request' || github.event.issue.pull_request ) &&
                 ( github.event.comment.author_association == 'MEMBER' || github.event.comment.author_association == 'OWNER' ) }}
@@ -259,10 +259,10 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
-      - uses: r-lib/actions/setup-r@master
+      - uses: r-lib/actions/setup-r@v2
         with:
           r-version: ${{ matrix.r_version }}
-      - uses: r-lib/actions/setup-pandoc@master
+      - uses: r-lib/actions/setup-pandoc@v2
       - name: Install dependencies
         run: |
           Rscript -e "options(repos=structure(c(CRAN='https://cloud.r-project.org/'))); install.packages(c('remotes', 'rcmdcheck', 'fs'))" -e "remotes::install_deps(dependencies = TRUE)"
