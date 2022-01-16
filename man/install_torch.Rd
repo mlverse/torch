@@ -5,7 +5,7 @@
 \title{Install Torch}
 \usage{
 install_torch(
-  version = "1.9.1",
+  version = "1.10.1",
   type = install_type(version = version),
   reinstall = FALSE,
   path = install_path(),
