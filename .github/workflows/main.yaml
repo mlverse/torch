@@ -49,10 +49,6 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
-      - uses: r-lib/actions/pr-fetch@v2
-        if: github.event_name == 'pull_request' || github.event.issue.pull_request
-        with:
-          repo-token: ${{ secrets.GITHUB_TOKEN }}
       - uses: r-lib/actions/setup-r@v2
         with:
           r-version: ${{ matrix.r_version }}
@@ -70,38 +66,6 @@ jobs:
           error_on <- if (.Platform$OS.type == "windows") "error" else "warning"
           rcmdcheck::rcmdcheck(args = c("--no-multiarch", "--no-manual", "--ignore-vignettes"), build_args = c("--no-build-vignettes"), error_on = error_on, check_dir = "check")
         shell: Rscript {0}
-      - name: Style and render documents
-        if: success() && runner.os == 'Linux' && matrix.r_version == 'release' && startsWith(github.event.comment.body, '/style')
-        run:  |
-          set -x
-          git config --local user.name "$GITHUB_ACTOR"
-          git config --local user.email "$GITHUB_ACTOR@users.noreply.github.com"
-          sudo apt-get install -y clang-format perl || true
-          time ./tools/style.sh || true
-          find . -type f \( -name 'DESCRIPTION' -o -name "*.R" -o -name '*.h' -o -name '*.hpp' -o -name '*.c' -o -name '*.cc' -o -name '*.cpp' -o -name '*.cxx' \) \
-            -not -path "./build/*" \
-            -not -path "./check/*" \
-            -not -path "./inst/include/*/*" \
-            -not -path "./lantern/build/*" \
-            -not -path "./lantern/headers/build/*" \
-            -not -path "./revdep/*" \
-            -not -path "*/gen-*.*" \
-            -not -path "*/lantern.*" \
-            -not -path "*/RcppExports.*" \
-            -printf '%p\n' -exec git add {} \; || true
-          git commit -m 'Styling and formatting R and C/C++ code' || echo 'No changes to commit'
-          git add README.md NAMESPACE man/\* */RcppExports.\* || true
-          git commit -m 'Roxygenize and render documents' || echo 'No changes to commit'
-          git pull --ff-only || true
-          git push origin || echo "No changes to commit"
-        shell: bash
-      - uses: r-lib/actions/pr-push@v2
-        if: ${{ success() && runner.os == 'Linux' && matrix.r_version == 'release' && startsWith(github.event.comment.body, '/style') &&
-                ( github.event_name == 'pull_request' || github.event.issue.pull_request ) &&
-                ( github.event.comment.author_association == 'MEMBER' || github.event.comment.author_association == 'OWNER' ) }}
-        with:
-          repo-token: ${{ secrets.GITHUB_TOKEN }}
-        continue-on-error: true
       - name: Show testthat output
         if: always()
         run: find check -name 'testthat.Rout*' -exec cat '{}' \; || true
