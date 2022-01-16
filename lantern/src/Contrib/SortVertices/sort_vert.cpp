@@ -25,12 +25,12 @@ SOFTWARE.
 */
 
 #define LANTERN_BUILD
-#include "sort_vert.h"
 
 #include <torch/torch.h>
 
 #include "../../utils.hpp"
 #include "lantern/lantern.h"
+#include "sort_vert.h"
 #include "utils.h"
 
 void sort_vertices_wrapper(int b, int n, int m, const float* vertices,
