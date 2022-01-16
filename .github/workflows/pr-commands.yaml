@@ -35,7 +35,6 @@ jobs:
           Rscript tools/buildlantern.R
 
       - name: Style and render documents
-        if: success() && runner.os == 'Linux' && matrix.r_version == 'release' && startsWith(github.event.comment.body, '/style')
         run:  |
           set -x
           git config --local user.name "$GITHUB_ACTOR"
