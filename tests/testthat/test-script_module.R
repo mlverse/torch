@@ -130,6 +130,22 @@ test_that("can print the graph", {
   
 })
 
+test_that("training attribute is persisted", {
+  model <- nn_sequential(
+    nn_linear(10, 10),
+    nn_relu(),
+    nn_dropout(),
+    nn_linear(10, 1)
+  )
+  
+  model$eval()
+  model$training
+  test_model <- jit_trace(model, torch_randn(10, 10)) 
+  
+  expect_true(!test_model$training)
+  expect_true(!test_model[["0"]]$training)
+})
+  
 test_that("graph_for", {
   testthat::local_edition(3)
 
@@ -141,4 +157,5 @@ test_that("graph_for", {
   expect_snapshot_output({
     traced$graph_for(torch_randn(10, 10))
   })
+
 })
