@@ -9,7 +9,7 @@ Sampler <- R6::R6Class(
   lock_objects = FALSE,
   public = list(
     initialize = function(data_source) {
-      
+
     },
     .iter = function() {
       not_implemented_error()
@@ -41,7 +41,7 @@ RandomSampler <- R6::R6Class(
   lock_objects = FALSE,
   inherit = Sampler,
   public = list(
-    initialize = function(data_source, replacement=FALSE, num_samples=NULL, generator = NULL) {
+    initialize = function(data_source, replacement = FALSE, num_samples = NULL, generator = NULL) {
       self$data_source <- data_source
       self$replacement <- replacement
       self$.num_samples <- num_samples
@@ -49,12 +49,14 @@ RandomSampler <- R6::R6Class(
     },
     .iter = function() {
       n <- length(self$data_source)
-      
+
       if (self$replacement) {
-        rand_tensor <- torch_randint(low = 1, high = n + 1, size = self$num_samples,
-                                     dtype = torch_long(), generator = self$generator)
+        rand_tensor <- torch_randint(
+          low = 1, high = n + 1, size = self$num_samples,
+          dtype = torch_long(), generator = self$generator
+        )
       } else {
-        rand_tensor <- torch_randperm(n)$add(1L, 1L)#, generator = self$generator)
+        rand_tensor <- torch_randperm(n)$add(1L, 1L) # , generator = self$generator)
       }
       rand_tensor <- as_array(rand_tensor$to(dtype = torch_int()))
       as_iterator(rand_tensor)
@@ -65,10 +67,11 @@ RandomSampler <- R6::R6Class(
   ),
   active = list(
     num_samples = function() {
-      if (is.null(self$.num_samples))
+      if (is.null(self$.num_samples)) {
         length(self$data_source)
-      else
+      } else {
         self$.num_samples
+      }
     }
   )
 )
@@ -86,18 +89,18 @@ BatchSampler <- R6::R6Class(
     .iter = function() {
       coro::generator(function() {
         batch <- list()
-        
-        for(idx in self$sampler) {
+
+        for (idx in self$sampler) {
           batch[[length(batch) + 1]] <- idx
           if (length(batch) == self$batch_size) {
             yield(batch)
             batch <- list()
           }
         }
-        
-        if (length(batch) > 0 && !self$drop_last)
+
+        if (length(batch) > 0 && !self$drop_last) {
           yield(batch)
-        
+        }
       })()
     },
     .length = function() {

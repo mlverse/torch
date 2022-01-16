@@ -41,6 +41,5 @@ a <- torch_ones(25, 300)
 b <- torch_ones(22, 300)
 c <- torch_ones(15, 300)
 nn_utils_rnn_pad_sequence(list(a, b, c))$size()
-
 }
 }

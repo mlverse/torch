@@ -19,12 +19,11 @@ proportional to the avg pooling)}
 }
 \description{
 On each window, the function computed is:
-
+}
+\details{
 \deqn{
   f(X) = \sqrt[p]{\sum_{x \in X} x^{p}}
 }
-}
-\details{
 \itemize{
 \item At p = \eqn{\infty}, one gets Max Pooling
 \item At p = 1, one gets Sum Pooling (which is proportional to Average Pooling)
@@ -49,9 +48,8 @@ not defined. This implementation will set the gradient to zero in this case.
 \examples{
 if (torch_is_installed()) {
 # power-2 pool of window of length 3, with stride 2.
-m <- nn_lp_pool1d(2, 3, stride=2)
+m <- nn_lp_pool1d(2, 3, stride = 2)
 input <- torch_randn(20, 16, 50)
 output <- m(input)
-
 }
 }

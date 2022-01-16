@@ -58,6 +58,5 @@ m <- nn_group_norm(6, 6)
 m <- nn_group_norm(1, 6)
 # Activating the module
 output <- m(input)
-
 }
 }

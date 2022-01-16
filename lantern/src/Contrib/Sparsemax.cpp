@@ -1,39 +1,37 @@
 #define LANTERN_BUILD
-#include "lantern/lantern.h"
 #include <torch/torch.h>
-#include <string>
+
 #include <iostream>
+#include <stdexcept>  // std::out_of_range
+#include <string>
+
 #include "../utils.hpp"
-#include <torch/torch.h>
-#include <stdexcept>      // std::out_of_range
+#include "lantern/lantern.h"
 
 using namespace torch::autograd;
 
 // Inherit from Function
 class SparseMaxFunction : public Function<SparseMaxFunction> {
  public:
-
-  static torch::Tensor forward(AutogradContext *ctx, torch::Tensor input, int dim) {
-
+  static torch::Tensor forward(AutogradContext *ctx, torch::Tensor input,
+                               int dim) {
     auto input_dim = input.dim();
-    if (input_dim <= dim || dim < -input_dim)
-    {
-        throw std::out_of_range("Dimension out of range");
+    if (input_dim <= dim || dim < -input_dim) {
+      throw std::out_of_range("Dimension out of range");
     }
 
     bool needs_reshaping = input_dim > 2;
     auto original_size = input.sizes().vec();
 
-    if (needs_reshaping)
-    {
-        // transpose batch and nth dim
-        input = input.transpose(0, dim);
+    if (needs_reshaping) {
+      // transpose batch and nth dim
+      input = input.transpose(0, dim);
 
-        // Flatten all dimensions except nth dim
-        input = input.reshape({input.size(0), -1});
+      // Flatten all dimensions except nth dim
+      input = input.reshape({input.size(0), -1});
 
-        // Transpose flattened dimensions to 0th dim, nth dim to last dim
-        input = input.transpose(0, -1);
+      // Transpose flattened dimensions to 0th dim, nth dim to last dim
+      input = input.transpose(0, -1);
     }
 
     // Translate by max for numerical stability
@@ -62,16 +60,15 @@ class SparseMaxFunction : public Function<SparseMaxFunction> {
     ctx->saved_data["needs_reshaping"] = needs_reshaping;
     ctx->saved_data["dim"] = dim;
 
-    if (needs_reshaping)
-    {
-        // Tranpose flattened dim to last dim, nth dim to 0th dim
-        output = output.transpose(0, 1);
+    if (needs_reshaping) {
+      // Tranpose flattened dim to last dim, nth dim to 0th dim
+      output = output.transpose(0, 1);
 
-        // Reshape to original size
-        output = output.reshape(original_size);
+      // Reshape to original size
+      output = output.reshape(original_size);
 
-        // Swap batch dim and nth dim
-        output = output.transpose(0, dim);
+      // Swap batch dim and nth dim
+      output = output.transpose(0, dim);
     }
 
     return output;
@@ -81,21 +78,20 @@ class SparseMaxFunction : public Function<SparseMaxFunction> {
     auto saved = ctx->get_saved_variables();
     auto output = saved[0];
     auto grad_output = grad_outputs[0];
-    
+
     bool needs_reshaping = ctx->saved_data["needs_reshaping"].toBool();
     int dim = ctx->saved_data["dim"].toInt();
     auto original_size = grad_output.sizes().vec();
-    
-    if (needs_reshaping)
-    {
-        // transpose batch and nth dim
-        grad_output = grad_output.transpose(0, dim);
 
-        // Flatten all dimensions except nth dim
-        grad_output = grad_output.reshape({grad_output.size(0), -1});
+    if (needs_reshaping) {
+      // transpose batch and nth dim
+      grad_output = grad_output.transpose(0, dim);
 
-        // Transpose flattened dimensions to 0th dim, nth dim to last dim
-        grad_output = grad_output.transpose(0, -1);
+      // Flatten all dimensions except nth dim
+      grad_output = grad_output.reshape({grad_output.size(0), -1});
+
+      // Transpose flattened dimensions to 0th dim, nth dim to last dim
+      grad_output = grad_output.transpose(0, -1);
     }
 
     // Compute gradient
@@ -104,16 +100,15 @@ class SparseMaxFunction : public Function<SparseMaxFunction> {
     auto sum = (grad_output * nonzeros).sum(-1, true) / num_nonzeros;
     auto grad_input = nonzeros * (grad_output - sum.expand_as(grad_output));
 
-    if (needs_reshaping)
-    {
-        // Tranpose flattened dim to last dim, nth dim to 0th dim
-        grad_input = grad_input.transpose(0, 1);
+    if (needs_reshaping) {
+      // Tranpose flattened dim to last dim, nth dim to 0th dim
+      grad_input = grad_input.transpose(0, 1);
 
-        // Reshape to original size
-        grad_input = grad_input.reshape(original_size);
+      // Reshape to original size
+      grad_input = grad_input.reshape(original_size);
 
-        // Swap batch dim and nth dim
-        grad_input = grad_input.transpose(0, dim);
+      // Swap batch dim and nth dim
+      grad_input = grad_input.transpose(0, dim);
     }
 
     auto o = torch::autograd::variable_list(2);
@@ -123,11 +118,10 @@ class SparseMaxFunction : public Function<SparseMaxFunction> {
   }
 };
 
-void * _lantern_contrib_torch_sparsemax (void * input, int dim)
-{
-    LANTERN_FUNCTION_START
-    torch::Tensor t = from_raw::Tensor(input);
-    torch::Tensor res = SparseMaxFunction::apply(t, dim);
-    return make_raw::Tensor(res);
-    LANTERN_FUNCTION_END
+void *_lantern_contrib_torch_sparsemax(void *input, int dim) {
+  LANTERN_FUNCTION_START
+  torch::Tensor t = from_raw::Tensor(input);
+  torch::Tensor res = SparseMaxFunction::apply(t, dim);
+  return make_raw::Tensor(res);
+  LANTERN_FUNCTION_END
 }

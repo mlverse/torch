@@ -91,10 +91,10 @@ of K-dimensional loss.
 
 \examples{
 if (torch_is_installed()) {
-m <- nn_log_softmax(dim=2)
+m <- nn_log_softmax(dim = 2)
 loss <- nn_nll_loss()
 # input is of size N x C = 3 x 5
-input <- torch_randn(3, 5, requires_grad=TRUE)
+input <- torch_randn(3, 5, requires_grad = TRUE)
 # each element in target has to have 0 <= value < C
 target <- torch_tensor(c(2, 1, 5), dtype = torch_long())
 output <- loss(m(input), target)
@@ -107,11 +107,10 @@ loss <- nn_nll_loss()
 # input is of size N x C x height x width
 data <- torch_randn(N, 16, 10, 10)
 conv <- nn_conv2d(16, C, c(3, 3))
-m <- nn_log_softmax(dim=1)
+m <- nn_log_softmax(dim = 1)
 # each element in target has to have 0 <= value < C
-target <- torch_empty(N, 8, 8, dtype=torch_long())$random_(1, C)
+target <- torch_empty(N, 8, 8, dtype = torch_long())$random_(1, C)
 output <- loss(m(conv(data)), target)
 output$backward()
-
 }
 }

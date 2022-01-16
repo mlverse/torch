@@ -18,6 +18,5 @@ many inputs are preserved as possible.
 if (torch_is_installed()) {
 w <- torch_empty(3, 5)
 nn_init_eye_(w)
-
 }
 }

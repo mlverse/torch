@@ -59,10 +59,9 @@ the same shape as the input
 \examples{
 if (torch_is_installed()) {
 loss <- nn_poisson_nll_loss()
-log_input <- torch_randn(5, 2, requires_grad=TRUE)
+log_input <- torch_randn(5, 2, requires_grad = TRUE)
 target <- torch_randn(5, 2)
 output <- loss(log_input, target)
 output$backward()
-
 }
 }

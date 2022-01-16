@@ -27,6 +27,5 @@ tr_fn <- jit_trace(fn, input)
 
 tmp <- tempfile("tst", fileext = "pt")
 jit_save(tr_fn, tmp)
-
 }
 }

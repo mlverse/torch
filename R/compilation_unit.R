@@ -15,7 +15,7 @@ CompilationUnit <- R7Class(
 `$.torch_compilation_unit` <- function(x, name) {
   f <- cpp_jit_compile_get_function(x, name)
   if (is.null(f)) {
-   return(NextMethod("$", x))
+    return(NextMethod("$", x))
   }
   new_script_function(f)
 }

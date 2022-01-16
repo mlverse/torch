@@ -58,8 +58,7 @@ the gradient will be numerically unstable, as it depends on the eigenvalues
 \examples{
 if (torch_is_installed()) {
 a <- torch_randn(2, 2)
-wv = linalg_eig(a)
-
+wv <- linalg_eig(a)
 }
 }
 \seealso{

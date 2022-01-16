@@ -44,6 +44,5 @@ exp2 <- autograd_function(
     list(i = grad_output * ctx$saved_variable$result)
   }
 )
-
 }
 }

@@ -25,7 +25,6 @@ as \code{A}. If \code{n} is negative, it returns the inverse of each matrix
 if (torch_is_installed()) {
 A <- torch_randn(3, 3)
 linalg_matrix_power(A, 0)
-
 }
 }
 \seealso{

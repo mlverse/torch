@@ -31,9 +31,8 @@ the output has the same batch dimensions.
 
 \examples{
 if (torch_is_installed()) {
-a <- torch_randn(3,3)
+a <- torch_randn(3, 3)
 linalg_slogdet(a)
-
 }
 }
 \seealso{

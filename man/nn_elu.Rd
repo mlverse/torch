@@ -32,7 +32,6 @@ dimensions
 if (torch_is_installed()) {
 m <- nn_elu()
 input <- torch_randn(2)
-output <-  m(input)
-
+output <- m(input)
 }
 }

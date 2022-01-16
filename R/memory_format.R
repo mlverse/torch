@@ -6,15 +6,15 @@ MemoryFormat <- R7Class(
       ptr
     },
     print = function() {
-      cat("torch_", cpp_memory_format_to_string(ptr), "_format", sep ="")
+      cat("torch_", cpp_memory_format_to_string(ptr), "_format", sep = "")
     }
   )
 )
 
 #' Memory format
-#' 
+#'
 #' Returns the correspondent memory format.
-#' 
+#'
 #' @name torch_memory_format
 #' @rdname torch_memory_format
 NULL
@@ -43,8 +43,8 @@ torch_channels_last_format <- function() {
 }
 
 #' Check if an object is a memory format
-#' 
-#' @param x object to check 
+#'
+#' @param x object to check
 #'
 #' @export
 is_torch_memory_format <- function(x) {

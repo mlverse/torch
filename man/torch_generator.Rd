@@ -20,6 +20,5 @@ generator$current_seed()
 generator$set_current_seed(1234567L)
 generator$current_seed()
 
-
 }
 }

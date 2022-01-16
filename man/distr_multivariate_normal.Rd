@@ -47,10 +47,7 @@ the corresponding lower triangular matrices using a Cholesky decomposition.
 \examples{
 if (torch_is_installed()) {
 m <- distr_multivariate_normal(torch_zeros(2), torch_eye(2))
-m$sample()  # normally distributed with mean=`[0,0]` and covariance_matrix=`I`
-
-
-
+m$sample() # normally distributed with mean=`[0,0]` and covariance_matrix=`I`
 }
 }
 \seealso{

@@ -1,26 +1,25 @@
 #' Abstract base class for constraints.
-#' 
+#'
 #' A constraint object represents a region over which a variable is valid,
 #' e.g. within which a variable can be optimized.
-#' 
+#'
 Constraint <- R6::R6Class(
   "torch_Constraint",
   lock_objects = FALSE,
-  
   public = list(
-    
-    #' @description 
+
+    #' @description
     #' Returns a byte tensor of `sample_shape + batch_shape` indicating
     #' whether each event in value satisfies this constraint.
-    #' 
+    #'
     #' @param value each event in value will be checked.
-    check = function(value){
+    check = function(value) {
       not_implemented_error()
     },
-    
-    #' @description 
+
+    #' @description
     #' Define the print method for constraints,
-    print = function(){
+    print = function() {
       cat(glue::glue("{class(self)}"))
     }
   )
@@ -28,21 +27,20 @@ Constraint <- R6::R6Class(
 
 #' Placeholder for variables whose support depends on other variables.
 #' These variables obey no simple coordinate-wise constraints.
-#' 
+#'
 #' @noRd
 .Dependent <- R6::R6Class(
   "torch_Dependent",
   lock_objects = FALSE,
   inherit = Constraint,
-  
   public = list(
-    check = function(x){
+    check = function(x) {
       value_error("Cannot determine validity of dependent constraint")
     }
   )
 )
 
-is_dependent <- function(object){
+is_dependent <- function(object) {
   inherits(object, "torch_Dependent")
 }
 
@@ -74,9 +72,8 @@ is_dependent <- function(object){
   "torch_Boolean",
   lock_objects = FALSE,
   inherit = Constraint,
-  
   public = list(
-    check = function(value){
+    check = function(value) {
       (value == 0) | (value == 1)
     }
   )
@@ -88,30 +85,24 @@ is_dependent <- function(object){
   "torch_IntegerInterval",
   lock_objects = FALSE,
   inherit = Constraint,
-  
   public = list(
-    
     lower_bound = NULL,
     upper_bound = NULL,
-    
-    initialize = function(lower_bound, upper_bound){
+    initialize = function(lower_bound, upper_bound) {
       self$lower_bound <- lower_bound
       self$upper_bound <- upper_bound
     },
-    
-    check = function(value){
-      (value %% 1 == 0) & 
-        (self$lower_bound <= value) & 
+    check = function(value) {
+      (value %% 1 == 0) &
+        (self$lower_bound <= value) &
         (value <= self$upper_bound)
     },
-    
-    print = function(){
+    print = function() {
       cat(glue::glue(
-        '{class(self)}: ',
-        '(lower_bound={self$lower_bound}, upper_bound={self$upper_bound})'
+        "{class(self)}: ",
+        "(lower_bound={self$lower_bound}, upper_bound={self$upper_bound})"
       ))
     }
-    
   )
 )
 
@@ -121,22 +112,17 @@ is_dependent <- function(object){
   "torch_IntegerLessThan",
   lock_objects = FALSE,
   inherit = Constraint,
-  
   public = list(
-    
     upper_bound = NULL,
-    
-    initialize = function(upper_bound){
+    initialize = function(upper_bound) {
       self$upper_bound <- upper_bound
     },
-    
-    check = function(value){
+    check = function(value) {
       (value %% 1 == 0) & (value <= self$upper_bound)
     },
-    
-    print = function(){
+    print = function() {
       cat(glue::glue(
-        '{class(self)}: (upper_bound={self$upper_bound})'
+        "{class(self)}: (upper_bound={self$upper_bound})"
       ))
     }
   )
@@ -149,22 +135,17 @@ is_dependent <- function(object){
   "torch_IntegerGreaterThan",
   lock_objects = FALSE,
   inherit = Constraint,
-  
   public = list(
-    
     lower_bound = NULL,
-    
-    initialize = function(lower_bound){
+    initialize = function(lower_bound) {
       self$lower_bound <- lower_bound
     },
-    
-    check = function(value){
+    check = function(value) {
       (value %% 1 == 0) & (value >= self$lower_bound)
     },
-    
-    print = function(){
+    print = function() {
       cat(glue::glue(
-        '{class(self)}: (lower_bound={self$lower_bound})'
+        "{class(self)}: (lower_bound={self$lower_bound})"
       ))
     }
   )
@@ -176,9 +157,8 @@ is_dependent <- function(object){
   "torch_Real",
   lock_objects = FALSE,
   inherit = Constraint,
-  
   public = list(
-    check = function(value){
+    check = function(value) {
       !torch_isnan(value)
     }
   )
@@ -190,22 +170,17 @@ is_dependent <- function(object){
   "torch_GreaterThan",
   lock_objects = FALSE,
   inherit = Constraint,
-  
   public = list(
-    
     lower_bound = NULL,
-    
-    initialize = function(lower_bound){
+    initialize = function(lower_bound) {
       self$lower_bound <- lower_bound
     },
-    
-    check = function(value){
+    check = function(value) {
       self$lower_bound < value
     },
-    
-    print = function(){
+    print = function() {
       cat(glue::glue(
-        '{class(self)}: (lower_bound={self$lower_bound})'
+        "{class(self)}: (lower_bound={self$lower_bound})"
       ))
     }
   )
@@ -217,22 +192,17 @@ is_dependent <- function(object){
   "torch_GreaterThanEq",
   lock_objects = FALSE,
   inherit = Constraint,
-  
   public = list(
-    
     lower_bound = NULL,
-    
-    initialize = function(lower_bound){
+    initialize = function(lower_bound) {
       self$lower_bound <- lower_bound
     },
-    
-    check = function(value){
+    check = function(value) {
       self$lower_bound <= value
     },
-    
-    print = function(){
+    print = function() {
       cat(glue::glue(
-        '{class(self)}: (lower_bound={self$lower_bound})'
+        "{class(self)}: (lower_bound={self$lower_bound})"
       ))
     }
   )
@@ -244,22 +214,17 @@ is_dependent <- function(object){
   "torch_LessThan",
   lock_objects = FALSE,
   inherit = Constraint,
-  
   public = list(
-    
     upper_bound = NULL,
-    
-    initialize = function(upper_bound){
+    initialize = function(upper_bound) {
       self$upper_bound <- lower_bound
     },
-    
-    check = function(value){
+    check = function(value) {
       self$upper_bound < value
     },
-    
-    print = function(){
+    print = function() {
       cat(glue::glue(
-        '{class(self)}: (upper_bound={self$upper_bound})'
+        "{class(self)}: (upper_bound={self$upper_bound})"
       ))
     }
   )
@@ -271,25 +236,20 @@ is_dependent <- function(object){
   "torch_Interval",
   lock_objects = FALSE,
   inherit = Constraint,
-  
   public = list(
-    
     lower_bound = NULL,
     upper_bound = NULL,
-    
-    initialize = function(lower_bound, upper_bound){
+    initialize = function(lower_bound, upper_bound) {
       self$lower_bound <- lower_bound
       self$upper_bound <- upper_bound
     },
-    
-    check = function(value){
-      (self$lower_bound <= value) & 
+    check = function(value) {
+      (self$lower_bound <= value) &
         (value <= self$upper_bound)
     },
-    
-    print = function(){
+    print = function() {
       cat(glue::glue(
-        '(lower_bound={self$lower_bound}, upper_bound={self$upper_bound})'
+        "(lower_bound={self$lower_bound}, upper_bound={self$upper_bound})"
       ))
     }
   )
@@ -301,24 +261,19 @@ is_dependent <- function(object){
   "torch_HalfOpenInterval",
   lock_objects = FALSE,
   inherit = Constraint,
-  
   public = list(
-    
     lower_bound = NULL,
     upper_bound = NULL,
-    
-    initialize = function(lower_bound, upper_bound){
+    initialize = function(lower_bound, upper_bound) {
       self$lower_bound <- lower_bound
       self$upper_bound <- upper_bound
     },
-    
-    check = function(value){
+    check = function(value) {
       (self.$ower_bound <= value) & (value < self$upper_bound)
     },
-    
-    print = function(){
+    print = function() {
       cat(glue::glue(
-        '(lower_bound={self$lower_bound}, upper_bound={self$upper_bound})'
+        "(lower_bound={self$lower_bound}, upper_bound={self$upper_bound})"
       ))
     }
   )
@@ -329,7 +284,7 @@ is_dependent <- function(object){
   inherit = Constraint,
   public = list(
     check = function(value) {
-     linalg_cholesky_ex(value)$info$eq(0)$unsqueeze(1)
+      linalg_cholesky_ex(value)$info$eq(0)$unsqueeze(1)
     }
   )
 )
@@ -340,8 +295,8 @@ is_dependent <- function(object){
   public = list(
     check = function(value) {
       value_tril <- value$tril()
-      lower_triangular <- (value_tril == value)$view(c(head2(value$shape,-2), -1))$min(-1)[[1]]
-      positive_diagonal <- (value$diagonal(dim1=-2, dim2=-1) > 0)$min(-1)[[1]]
+      lower_triangular <- (value_tril == value)$view(c(head2(value$shape, -2), -1))$min(-1)[[1]]
+      positive_diagonal <- (value$diagonal(dim1 = -2, dim2 = -1) > 0)$min(-1)[[1]]
       lower_triangular & positive_diagonal
     }
   )
@@ -353,7 +308,7 @@ is_dependent <- function(object){
   public = list(
     event_dim = 1,
     check = function(value) {
-      torch_all(value >= 0, dim=-1) && ((value$sum(dim = -1) - 1)$abs() < 1e-6)
+      torch_all(value >= 0, dim = -1) && ((value$sum(dim = -1) - 1)$abs() < 1e-6)
     }
   )
 )

@@ -39,9 +39,8 @@ This function is "experimental" and it may change in a future PyTorch release.
 \examples{
 if (torch_is_installed()) {
 A <- torch_randn(2, 2)
-out = linalg_cholesky_ex(A)
+out <- linalg_cholesky_ex(A)
 out
-
 }
 }
 \seealso{

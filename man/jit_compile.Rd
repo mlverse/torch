@@ -18,7 +18,7 @@ if (torch_is_installed()) {
 comp <- jit_compile("
 def fn (x):
   return torch.abs(x)
-  
+
 def foo (x):
   return torch.sum(x)
 
@@ -26,6 +26,5 @@ def foo (x):
 
 comp$fn(torch_tensor(-1))
 comp$foo(torch_randn(10))
-
 }
 }

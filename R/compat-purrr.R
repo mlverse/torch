@@ -85,11 +85,11 @@ pmap <- function(.l, .f, ...) {
 .rlang_purrr_args_recycle <- function(args) {
   lengths <- map_int(args, length)
   n <- max(lengths)
-  
+
   stopifnot(all(lengths == 1L | lengths == n))
   to_recycle <- lengths == 1L
   args[to_recycle] <- map(args[to_recycle], function(x) rep.int(x, n))
-  
+
   args
 }
 
@@ -126,7 +126,7 @@ transpose <- function(.l) {
   } else {
     fields <- set_names(inner_names)
   }
-  
+
   map(fields, function(i) {
     map(.l, .subset2, i)
   })
@@ -134,17 +134,21 @@ transpose <- function(.l) {
 
 every <- function(.x, .p, ...) {
   .p <- as_function(.p, env = global_env())
-  
+
   for (i in seq_along(.x)) {
-    if (!rlang::is_true(.p(.x[[i]], ...))) return(FALSE)
+    if (!rlang::is_true(.p(.x[[i]], ...))) {
+      return(FALSE)
+    }
   }
   TRUE
 }
 some <- function(.x, .p, ...) {
   .p <- as_function(.p, env = global_env())
-  
+
   for (i in seq_along(.x)) {
-    if (rlang::is_true(.p(.x[[i]], ...))) return(TRUE)
+    if (rlang::is_true(.p(.x[[i]], ...))) {
+      return(TRUE)
+    }
   }
   FALSE
 }
@@ -173,7 +177,7 @@ accumulate_right <- function(.x, .f, ..., .init) {
 detect <- function(.x, .f, ..., .right = FALSE, .p = is_true) {
   .p <- as_function(.p, env = global_env())
   .f <- as_function(.f, env = global_env())
-  
+
   for (i in .rlang_purrr_index(.x, .right)) {
     if (.p(.f(.x[[i]], ...))) {
       return(.x[[i]])
@@ -184,7 +188,7 @@ detect <- function(.x, .f, ..., .right = FALSE, .p = is_true) {
 detect_index <- function(.x, .f, ..., .right = FALSE, .p = is_true) {
   .p <- as_function(.p, env = global_env())
   .f <- as_function(.f, env = global_env())
-  
+
   for (i in .rlang_purrr_index(.x, .right)) {
     if (.p(.f(.x[[i]], ...))) {
       return(i)

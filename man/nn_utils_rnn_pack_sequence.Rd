@@ -28,11 +28,10 @@ is \code{TRUE}, the sequences should be sorted in the order of decreasing length
 }
 \examples{
 if (torch_is_installed()) {
-x <- torch_tensor(c(1,2,3), dtype = torch_long())
+x <- torch_tensor(c(1, 2, 3), dtype = torch_long())
 y <- torch_tensor(c(4, 5), dtype = torch_long())
 z <- torch_tensor(c(6), dtype = torch_long())
 
 p <- nn_utils_rnn_pack_sequence(list(x, y, z))
-
 }
 }

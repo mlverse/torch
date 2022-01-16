@@ -28,13 +28,13 @@ nn_avg_pool1d(
 In the simplest case, the output value of the layer with input size \eqn{(N, C, L)},
 output \eqn{(N, C, L_{out})} and \code{kernel_size} \eqn{k}
 can be precisely described as:
-
+}
+\details{
 \deqn{
   \mbox{out}(N_i, C_j, l) = \frac{1}{k} \sum_{m=0}^{k-1}
 \mbox{input}(N_i, C_j, \mbox{stride} \times l + m)
 }
-}
-\details{
+
 If \code{padding} is non-zero, then the input is implicitly zero-padded on both sides
 for \code{padding} number of points.
 
@@ -56,10 +56,9 @@ an \code{int} or a one-element tuple.
 
 \examples{
 if (torch_is_installed()) {
-  
-# pool with window of size=3, stride=2
-m <- nn_avg_pool1d(3, stride=2)
-m(torch_randn(1, 1, 8))
 
+# pool with window of size=3, stride=2
+m <- nn_avg_pool1d(3, stride = 2)
+m(torch_randn(1, 1, 8))
 }
 }

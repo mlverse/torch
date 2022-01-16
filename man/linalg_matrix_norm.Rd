@@ -56,13 +56,12 @@ supported:\tabular{lll}{
 }
 \examples{
 if (torch_is_installed()) {
-a <- torch_arange(0, 8, dtype=torch_float())$reshape(c(3,3))
+a <- torch_arange(0, 8, dtype = torch_float())$reshape(c(3, 3))
 linalg_matrix_norm(a)
 linalg_matrix_norm(a, ord = -1)
 b <- a$expand(c(2, -1, -1))
 linalg_matrix_norm(b)
 linalg_matrix_norm(b, dim = c(1, 3))
-
 }
 }
 \seealso{

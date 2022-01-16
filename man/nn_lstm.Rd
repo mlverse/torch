@@ -129,6 +129,5 @@ input <- torch_randn(5, 3, 10)
 h0 <- torch_randn(2, 3, 20)
 c0 <- torch_randn(2, 3, 20)
 output <- rnn(input, list(h0, c0))
-
 }
 }

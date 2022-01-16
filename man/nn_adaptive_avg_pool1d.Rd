@@ -16,9 +16,8 @@ The number of output features is equal to the number of input planes.
 \examples{
 if (torch_is_installed()) {
 # target output size of 5
-m = nn_adaptive_avg_pool1d(5)
+m <- nn_adaptive_avg_pool1d(5)
 input <- torch_randn(1, 64, 8)
 output <- m(input)
-
 }
 }

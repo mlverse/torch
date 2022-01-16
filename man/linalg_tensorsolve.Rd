@@ -32,14 +32,13 @@ A <- torch_eye(2 * 3 * 4)$reshape(c(2 * 3, 4, 2, 3, 4))
 B <- torch_randn(2 * 3, 4)
 X <- linalg_tensorsolve(A, B)
 X$shape
-torch_allclose(torch_tensordot(A, X, dims=X$ndim), B)
+torch_allclose(torch_tensordot(A, X, dims = X$ndim), B)
 
 A <- torch_randn(6, 4, 4, 3, 2)
 B <- torch_randn(4, 3, 2)
-X <- linalg_tensorsolve(A, B, dims=c(1, 3))
+X <- linalg_tensorsolve(A, B, dims = c(1, 3))
 A <- A$permute(c(2, 4, 5, 1, 3))
-torch_allclose(torch_tensordot(A, X, dims=X$ndim), B, atol=1e-6)
-
+torch_allclose(torch_tensordot(A, X, dims = X$ndim), B, atol = 1e-6)
 }
 }
 \seealso{

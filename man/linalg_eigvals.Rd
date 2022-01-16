@@ -32,7 +32,6 @@ The eigenvalues of a matrix are always well-defined, even when the matrix is not
 if (torch_is_installed()) {
 a <- torch_randn(2, 2)
 w <- linalg_eigvals(a)
-
 }
 }
 \seealso{

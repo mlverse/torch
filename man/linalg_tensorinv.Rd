@@ -30,16 +30,15 @@ numerically stable than computing the pseudoinverse explicitly.
 \examples{
 if (torch_is_installed()) {
 A <- torch_eye(4 * 6)$reshape(c(4, 6, 8, 3))
-Ainv <- linalg_tensorinv(A, ind=3)
+Ainv <- linalg_tensorinv(A, ind = 3)
 Ainv$shape
 B <- torch_randn(4, 6)
 torch_allclose(torch_tensordot(Ainv, B), linalg_tensorsolve(A, B))
 
 A <- torch_randn(4, 4)
-Atensorinv<- linalg_tensorinv(A, 2)
+Atensorinv <- linalg_tensorinv(A, 2)
 Ainv <- linalg_inv(A)
 torch_allclose(Atensorinv, Ainv)
-
 }
 }
 \seealso{

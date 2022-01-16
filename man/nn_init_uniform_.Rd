@@ -20,6 +20,5 @@ Fills the input Tensor with values drawn from the uniform distribution
 if (torch_is_installed()) {
 w <- torch_empty(3, 5)
 nn_init_uniform_(w)
-
 }
 }

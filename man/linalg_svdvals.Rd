@@ -23,7 +23,6 @@ if (torch_is_installed()) {
 A <- torch_randn(5, 3)
 S <- linalg_svdvals(A)
 S
-
 }
 }
 \seealso{

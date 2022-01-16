@@ -69,11 +69,10 @@ otherwise.
 \examples{
 if (torch_is_installed()) {
 triplet_loss <- nn_triplet_margin_loss(margin = 1, p = 2)
-anchor <- torch_randn(100, 128, requires_grad=TRUE)
-positive <- torch_randn(100, 128, requires_grad=TRUE)
-negative <- torch_randn(100, 128, requires_grad=TRUE)
+anchor <- torch_randn(100, 128, requires_grad = TRUE)
+positive <- torch_randn(100, 128, requires_grad = TRUE)
+negative <- torch_randn(100, 128, requires_grad = TRUE)
 output <- triplet_loss(anchor, positive, negative)
 output$backward()
-
 }
 }

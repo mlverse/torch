@@ -83,7 +83,6 @@ m <- nn_batch_norm1d(100)
 # Without Learnable Parameters
 m <- nn_batch_norm1d(100, affine = FALSE)
 input <- torch_randn(20, 100)
-output <- m(input) 
-
+output <- m(input)
 }
 }

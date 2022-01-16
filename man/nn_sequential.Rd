@@ -25,6 +25,5 @@ model <- nn_sequential(
 )
 input <- torch_randn(32, 1, 28, 28)
 output <- model(input)
-
 }
 }

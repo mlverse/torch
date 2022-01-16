@@ -34,7 +34,7 @@ creation and usage.
 \examples{
 if (torch_is_installed()) {
 \dontrun{
-optimizer <- optim_rprop(model$parameters(), lr=0.1)
+optimizer <- optim_rprop(model$parameters(), lr = 0.1)
 optimizer$zero_grad()
 loss_fn(model(input), target)$backward()
 optimizer$step()

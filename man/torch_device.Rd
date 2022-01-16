@@ -32,7 +32,6 @@ torch_device("cuda") # current cuda device
 # Via string and device ordinal
 torch_device("cuda", 0)
 torch_device("cpu", 0)
-
 }
 }
 \concept{tensor-attributtes}

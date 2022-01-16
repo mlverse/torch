@@ -27,7 +27,7 @@ in the specified function. When last_epoch=-1, sets initial lr as lr.
 if (torch_is_installed()) {
 \dontrun{
 lmbda <- function(epoch) 0.95
-scheduler <- lr_multiplicative(optimizer, lr_lambda=lmbda)
+scheduler <- lr_multiplicative(optimizer, lr_lambda = lmbda)
 for (epoch in 1:100) {
   train(...)
   validate(...)

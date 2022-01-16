@@ -83,9 +83,8 @@ if (torch_is_installed()) {
 # With Learnable Parameters
 m <- nn_batch_norm3d(100)
 # Without Learnable Parameters
-m <- nn_batch_norm3d(100, affine=FALSE)
+m <- nn_batch_norm3d(100, affine = FALSE)
 input <- torch_randn(20, 100, 35, 45, 55)
 output <- m(input)
-
 }
 }

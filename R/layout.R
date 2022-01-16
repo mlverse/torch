@@ -28,7 +28,7 @@ torch_sparse_coo <- function() torch_layout$new(cpp_torch_sparse())
 #' Check if an object is a torch layout.
 #'
 #' @param x object to check
-#' 
+#'
 #' @export
 is_torch_layout <- function(x) {
   inherits(x, "torch_layout")

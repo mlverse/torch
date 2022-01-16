@@ -54,7 +54,6 @@ qr <- linalg_qr(a)
 
 torch_mm(qr[[1]], qr[[2]])$round()
 torch_mm(qr[[1]]$t(), qr[[1]])$round()
-
 }
 }
 \seealso{

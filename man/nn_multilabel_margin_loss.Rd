@@ -48,10 +48,9 @@ is the number of classes.
 \examples{
 if (torch_is_installed()) {
 loss <- nn_multilabel_margin_loss()
-x <- torch_tensor(c(0.1, 0.2, 0.4, 0.8))$view(c(1,4))
+x <- torch_tensor(c(0.1, 0.2, 0.4, 0.8))$view(c(1, 4))
 # for target y, only consider labels 4 and 1, not after label -1
-y <- torch_tensor(c(4, 1, -1, 2), dtype = torch_long())$view(c(1,4))
+y <- torch_tensor(c(4, 1, -1, 2), dtype = torch_long())$view(c(1, 4))
 loss(x, y)
-
 }
 }

@@ -15,7 +15,7 @@ autograd_backward(
 \item{tensors}{(list of Tensor) – Tensors of which the derivative will
 be computed.}
 
-\item{grad_tensors}{(list of (Tensor or \verb{NULL)) – The “vector” in the  Jacobian-vector product, usually gradients w.r.t. each element of  corresponding tensors. }NULL\verb{values can be specified for scalar Tensors or  ones that don’t require grad. If a}NULL` value would be acceptable for all
+\item{grad_tensors}{(list of (Tensor or \verb{NULL)) – The “vector” in the Jacobian-vector product, usually gradients w.r.t. each element of corresponding tensors. }NULL\verb{values can be specified for scalar Tensors or ones that don’t require grad. If a}NULL` value would be acceptable for all
 grad_tensors, then this argument is optional.}
 
 \item{retain_graph}{(bool, optional) – If \code{FALSE}, the graph used to compute
@@ -50,6 +50,5 @@ a <- torch_tensor(1, requires_grad = TRUE)
 b <- 3 * a
 
 autograd_backward(list(y, b))
-
 }
 }

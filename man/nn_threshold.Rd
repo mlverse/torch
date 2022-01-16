@@ -19,7 +19,7 @@ Thresholds each element of the input Tensor.
 \details{
 Threshold is defined as:
 \deqn{
-  y = 
+  y =
   \left\{ \begin{array}{ll}
   x, &\mbox{ if } x > \mbox{threshold} \\
   \mbox{value}, &\mbox{ otherwise }
@@ -41,6 +41,5 @@ if (torch_is_installed()) {
 m <- nn_threshold(0.1, 20)
 input <- torch_randn(2)
 output <- m(input)
-
 }
 }

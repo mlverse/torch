@@ -4,7 +4,7 @@ BaseDatasetFetcher <- R6::R6Class(
   public = list(
     initialize = function(dataset, auto_collation, collate_fn, drop_last) {
       self$dataset <- dataset
-      self$auto_collation <-  auto_collation
+      self$auto_collation <- auto_collation
       self$collate_fn <- collate_fn
       self$drop_last <- drop_last
     },
@@ -28,14 +28,15 @@ IterableDatasetFetcher <- R6::R6Class(
         data <- vector(mode = "list", length = length(possibly_batched_index))
         for (i in seq_along(possibly_batched_index)) {
           d <- self$dataset_iter()
-          
-          if (coro::is_exhausted(d))
+
+          if (coro::is_exhausted(d)) {
             break
-          
+          }
+
           data[[i]] <- d
         }
       } else {
-        data <- self$dataset_iter() 
+        data <- self$dataset_iter()
       }
       self$collate_fn(data)
     }

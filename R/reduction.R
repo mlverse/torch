@@ -1,5 +1,5 @@
 #' Creates the reduction objet
-#' 
+#'
 #' @name torch_reduction
 #' @rdname torch_reduction
 #' @concept tensor-attributes
@@ -22,10 +22,11 @@ torch_reduction_mean <- function() cpp_torch_reduction_mean()
 torch_reduction_none <- function() cpp_torch_reduction_none()
 
 reduction_enum <- function(x = c("mean", "sum", "none")) {
-  if (x == "mean")
+  if (x == "mean") {
     torch_reduction_mean()
-  else if (x == "sum")
+  } else if (x == "sum") {
     torch_reduction_sum()
-  else 
+  } else {
     torch_reduction_none()
+  }
 }

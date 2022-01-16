@@ -46,12 +46,13 @@ the data will be transposed into \verb{B x T x *} format.
 }
 \examples{
 if (torch_is_installed()) {
-seq <- torch_tensor(rbind(c(1,2,0), c(3,0,0), c(4,5,6)))        
-lens <- c(2,1,3)
-packed <- nn_utils_rnn_pack_padded_sequence(seq, lens, batch_first = TRUE,
-                                            enforce_sorted = FALSE)
+seq <- torch_tensor(rbind(c(1, 2, 0), c(3, 0, 0), c(4, 5, 6)))
+lens <- c(2, 1, 3)
+packed <- nn_utils_rnn_pack_padded_sequence(seq, lens,
+  batch_first = TRUE,
+  enforce_sorted = FALSE
+)
 packed
-nn_utils_rnn_pad_packed_sequence(packed, batch_first=TRUE)
-
+nn_utils_rnn_pad_packed_sequence(packed, batch_first = TRUE)
 }
 }

@@ -157,7 +157,7 @@ jobs:
           Start-Process ./cuda.exe -argumentlist "-s" -wait
           echo "CUDA=${{ matrix.cuda }}" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8
           echo "CUDA_TOOLKIT_ROOT_DIR=""C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v${{ matrix.cuda }}""" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
-          curl ${{ matrix.cudnn }} --output cudnn.zip --silent --location 
+          curl ${{ matrix.cudnn }} --output cudnn.zip --silent --location
           Expand-Archive -Path cudnn.zip -DestinationPath "C:\cudnn"
           Get-ChildItem -Path "C:\cudnn"
           Get-ChildItem -Path "C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v${{ matrix.cuda }}"

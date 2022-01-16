@@ -18,15 +18,15 @@ modules it contains are properly registered, and will be visible by all
 if (torch_is_installed()) {
 
 my_module <- nn_module(
- initialize = function() {
-   self$linears <- nn_module_list(lapply(1:10, function(x) nn_linear(10, 10)))
- },
- forward = function(x) {
-  for (i in 1:length(self$linears))
-    x <- self$linears[[i]](x)
-  x
- }
+  initialize = function() {
+    self$linears <- nn_module_list(lapply(1:10, function(x) nn_linear(10, 10)))
+  },
+  forward = function(x) {
+    for (i in 1:length(self$linears)) {
+      x <- self$linears[[i]](x)
+    }
+    x
+  }
 )
-
 }
 }

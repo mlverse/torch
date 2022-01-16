@@ -3,14 +3,12 @@ variable_list <- R6::R6Class(
   public = list(
     ptr = NULL,
     initialize = function(x, ptr = NULL) {
-      
       if (!is.null(ptr)) {
         self$ptr <- ptr
         return(NULL)
       }
-      
+
       self$ptr <- cpp_torch_variable_list(lapply(x, function(x) x$ptr))
-      
     },
     to_r = function() {
       x <- cpp_variable_list_to_r_list(self$ptr)

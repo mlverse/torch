@@ -1,18 +1,19 @@
 #include <torch.h>
 
-#include <stack>
-#include <mutex>
 #include <condition_variable>
-#include <future>
 #include <functional>
-#include <utility>
+#include <future>
+#include <mutex>
+#include <stack>
 #include <type_traits>
+#include <utility>
 
 template <typename F>
 class ScopeGuard {
  public:
   explicit ScopeGuard(F&& f) noexcept : f_(std::forward<F>(f)) {}
   ~ScopeGuard() noexcept { f_(); }
+
  private:
   typename std::decay<F>::type f_;
 };
@@ -64,6 +65,7 @@ class EventLoop {
     }
     cv_.notify_one();
   }
+
  private:
   std::mutex mtx_;
   std::condition_variable cv_;
@@ -71,27 +73,27 @@ class EventLoop {
 };
 
 template <class type>
-Rcpp::XPtr<type> make_xptr  (type x) {
-  auto * out = new type(x);
+Rcpp::XPtr<type> make_xptr(type x) {
+  auto* out = new type(x);
   return Rcpp::XPtr<type>(out);
 }
 
 template <class type>
-Rcpp::XPtr<type> make_xptr  (type x, std::string dyn_type) {
-  auto * out = new type(x);
+Rcpp::XPtr<type> make_xptr(type x, std::string dyn_type) {
+  auto* out = new type(x);
   auto ptr = Rcpp::XPtr<type>(out);
   ptr.attr("dynamic_type") = dyn_type;
   return ptr;
 }
 
 template <class type, int n>
-std::array<type, n> std_vector_to_std_array (std::vector<type> x) {
-  std::array<type,n> out;
+std::array<type, n> std_vector_to_std_array(std::vector<type> x) {
+  std::array<type, n> out;
   std::copy_n(x.begin(), n, out.begin());
   return out;
 }
 
-XPtrTorchTensor cpp_tensor_undefined ();
-XPtrTorchTensor to_index_tensor (XPtrTorchTensor t);
+XPtrTorchTensor cpp_tensor_undefined();
+XPtrTorchTensor to_index_tensor(XPtrTorchTensor t);
 
 std::thread::id main_thread_id() noexcept;

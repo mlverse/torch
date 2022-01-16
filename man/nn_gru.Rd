@@ -119,6 +119,5 @@ rnn <- nn_gru(10, 20, 2)
 input <- torch_randn(5, 3, 10)
 h0 <- torch_randn(2, 3, 20)
 output <- rnn(input, h0)
-
 }
 }

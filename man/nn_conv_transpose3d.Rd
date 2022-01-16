@@ -147,9 +147,9 @@ sampled from \eqn{\mathcal{U}(-\sqrt{k}, \sqrt{k})} where
 if (torch_is_installed()) {
 \dontrun{
 # With square kernels and equal stride
-m <- nn_conv_transpose3d(16, 33, 3, stride=2)
+m <- nn_conv_transpose3d(16, 33, 3, stride = 2)
 # non-square kernels and unequal stride and with padding
-m <- nn_conv_transpose3d(16, 33, c(3, 5, 2), stride=c(2, 1, 1), padding=c(0, 4, 2))
+m <- nn_conv_transpose3d(16, 33, c(3, 5, 2), stride = c(2, 1, 1), padding = c(0, 4, 2))
 input <- torch_randn(20, 16, 10, 50, 100)
 output <- m(input)
 }

@@ -47,6 +47,5 @@ m <- nn_linear(20, 30)
 input <- torch_randn(128, 20)
 output <- m(input)
 print(output$size())
-
 }
 }

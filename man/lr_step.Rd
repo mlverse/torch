@@ -30,7 +30,7 @@ if (torch_is_installed()) {
 # lr = 0.005    if 30 <= epoch < 60
 # lr = 0.0005   if 60 <= epoch < 90
 # ...
-scheduler <- lr_step(optimizer, step_size=30, gamma=0.1)
+scheduler <- lr_step(optimizer, step_size = 30, gamma = 0.1)
 for (epoch in 1:100) {
   train(...)
   validate(...)

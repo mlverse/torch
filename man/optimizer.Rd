@@ -62,10 +62,11 @@ optim_sgd2 <- optimizer(
         group <- self$param_groups[[g]]
         for (p in seq_along(group$params)) {
           param <- group$params[[p]]
-          
-          if (is.null(param$grad) || is_undefined_tensor(param$grad))
+
+          if (is.null(param$grad) || is_undefined_tensor(param$grad)) {
             next
-          
+          }
+
           param$add_(param$grad, alpha = -group$learning_rate)
         }
       }
@@ -82,6 +83,5 @@ for (i in 1:100) {
   opt$step()
 }
 all.equal(x$item(), 0, tolerance = 1e-9)
-
 }
 }

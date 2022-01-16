@@ -29,7 +29,7 @@ grad will be freed. Note that in nearly all cases setting this option to \code{T
 not needed and often can be worked around in a much more efficient way.
 Defaults to the value of \code{create_graph}.}
 
-\item{create_graph}{(bool, optional) – If \verb{TRUE, graph of the derivative will  be constructed, allowing to compute higher order derivative products.  Default: }FALSE`.}
+\item{create_graph}{(bool, optional) – If \verb{TRUE, graph of the derivative will be constructed, allowing to compute higher order derivative products. Default: }FALSE`.}
 
 \item{allow_unused}{(bool, optional) – If \code{FALSE}, specifying inputs that were
 not used when computing outputs (and therefore their grad is always zero) is an
@@ -51,11 +51,10 @@ w <- torch_tensor(0.5, requires_grad = TRUE)
 b <- torch_tensor(0.9, requires_grad = TRUE)
 x <- torch_tensor(runif(100))
 y <- 2 * x + 1
-loss <- (y - (w*x + b))^2
+loss <- (y - (w * x + b))^2
 loss <- loss$mean()
 
 o <- autograd_grad(loss, list(w, b))
 o
- 
 }
 }

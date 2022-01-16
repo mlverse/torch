@@ -1,54 +1,66 @@
-torch_max_pool1d_with_indices <- function(self, kernel_size, stride = list(), padding = 0, 
+torch_max_pool1d_with_indices <- function(self, kernel_size, stride = list(), padding = 0,
                                           dilation = 1, ceil_mode = FALSE) {
-  out <- .torch_max_pool1d_with_indices(self, kernel_size, stride, padding, dilation, 
-                                        ceil_mode)
+  out <- .torch_max_pool1d_with_indices(
+    self, kernel_size, stride, padding, dilation,
+    ceil_mode
+  )
   out[[2]]$add_(1L, 1L)
   out
 }
 
-torch_max_pool2d_with_indices <- function(self, kernel_size, stride = list(), padding = 0, 
+torch_max_pool2d_with_indices <- function(self, kernel_size, stride = list(), padding = 0,
                                           dilation = 1, ceil_mode = FALSE) {
-  out <- .torch_max_pool2d_with_indices(self, kernel_size, stride, padding, dilation,
-                                        ceil_mode)
+  out <- .torch_max_pool2d_with_indices(
+    self, kernel_size, stride, padding, dilation,
+    ceil_mode
+  )
   out[[2]]$add_(1L, 1L)
   out
 }
 
-torch_max_pool2d_with_indices_out <- function(out, indices, self, kernel_size, stride = list(), 
+torch_max_pool2d_with_indices_out <- function(out, indices, self, kernel_size, stride = list(),
                                               padding = 0, dilation = 1, ceil_mode = FALSE) {
-  out <- .torch_max_pool2d_with_indices_out(out, indices, self, kernel_size, stride, padding,
-                                     dilation, ceil_mode)
+  out <- .torch_max_pool2d_with_indices_out(
+    out, indices, self, kernel_size, stride, padding,
+    dilation, ceil_mode
+  )
   out[[2]]$add_(1L, 1L)
   out
 }
 
-torch_max_pool3d_with_indices <- function(self, kernel_size, stride = list(), padding = 0, 
+torch_max_pool3d_with_indices <- function(self, kernel_size, stride = list(), padding = 0,
                                           dilation = 1, ceil_mode = FALSE) {
-  out <- .torch_max_pool3d_with_indices(self, kernel_size, stride, padding, dilation,
-                                        ceil_mode)
+  out <- .torch_max_pool3d_with_indices(
+    self, kernel_size, stride, padding, dilation,
+    ceil_mode
+  )
   out[[2]]$add_(1L, 1L)
   out
 }
 
-torch_max_pool3d_with_indices_out <- function(out, indices, self, kernel_size, stride = list(), 
+torch_max_pool3d_with_indices_out <- function(out, indices, self, kernel_size, stride = list(),
                                               padding = 0, dilation = 1, ceil_mode = FALSE) {
-  out <- .torch_max_pool3d_with_indices_out(out, indices, self, kernel_size, stride, 
-                                            padding, dilation, ceil_mode)
+  out <- .torch_max_pool3d_with_indices_out(
+    out, indices, self, kernel_size, stride,
+    padding, dilation, ceil_mode
+  )
   out[[2]]$add_(1L, 1L)
   out
 }
 
 torch_max <- function(self, dim, other, keepdim = FALSE) {
   o <- do.call(.torch_max, as.list(environment()))
-  if (length(o) == 2)
+  if (length(o) == 2) {
     o[[2]]$add_(1L, 1L)
+  }
   o
 }
 
 torch_min <- function(self, dim, other, keepdim = FALSE) {
   o <- do.call(.torch_min, as.list(environment()))
-  if (length(o) == 2)
+  if (length(o) == 2) {
     o[[2]]$add_(1L, 1L)
+  }
   o
 }
 
@@ -79,15 +91,14 @@ torch_argsort <- function(self, dim = -1L, descending = FALSE) {
   .torch_argsort(self = self, dim = dim, descending = descending)$add_(1L, 1L)
 }
 
-torch_cross_entropy_loss <- function(
-  self, target, weight = list(), 
-  reduction = torch_reduction_mean(), 
-  ignore_index = -100L
-) {
-  
+torch_cross_entropy_loss <- function(self, target, weight = list(),
+                                     reduction = torch_reduction_mean(),
+                                     ignore_index = -100L) {
   target <- target$sub(1L, 1L)
-  .torch_cross_entropy_loss(self = self, target = target, weight = weight,
-                            reduction = reduction, ignore_index = ignore_index)
+  .torch_cross_entropy_loss(
+    self = self, target = target, weight = weight,
+    reduction = reduction, ignore_index = ignore_index
+  )
 }
 
 torch_sort <- function(self, dim = -1L, descending = FALSE, stable) {

@@ -31,13 +31,13 @@ nn_avg_pool2d(
 In the simplest case, the output value of the layer with input size \eqn{(N, C, H, W)},
 output \eqn{(N, C, H_{out}, W_{out})} and \code{kernel_size} \eqn{(kH, kW)}
 can be precisely described as:
-
+}
+\details{
 \deqn{
   out(N_i, C_j, h, w)  = \frac{1}{kH * kW} \sum_{m=0}^{kH-1} \sum_{n=0}^{kW-1}
 input(N_i, C_j, stride[0] \times h + m, stride[1] \times w + n)
 }
-}
-\details{
+
 If \code{padding} is non-zero, then the input is implicitly zero-padded on both sides
 for \code{padding} number of points.
 
@@ -67,13 +67,12 @@ and the second \code{int} for the width dimension
 
 \examples{
 if (torch_is_installed()) {
-  
+
 # pool of square window of size=3, stride=2
-m <- nn_avg_pool2d(3, stride=2)
+m <- nn_avg_pool2d(3, stride = 2)
 # pool of non-square window
-m <- nn_avg_pool2d(c(3, 2), stride=c(2, 1))
+m <- nn_avg_pool2d(c(3, 2), stride = c(2, 1))
 input <- torch_randn(20, 16, 50, 32)
 output <- m(input)
-
 }
 }

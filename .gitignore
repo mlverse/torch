@@ -25,6 +25,7 @@ Meta
 build/
 tracedmodule.pt
 revdep
+check/
 inst/*
 !inst/include
 inst/include/*

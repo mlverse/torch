@@ -43,11 +43,10 @@ The loss function for each pair of samples in the mini-batch is:
 \examples{
 if (torch_is_installed()) {
 loss <- nn_margin_ranking_loss()
-input1 <- torch_randn(3, requires_grad=TRUE)
-input2 <- torch_randn(3, requires_grad=TRUE)
+input1 <- torch_randn(3, requires_grad = TRUE)
+input2 <- torch_randn(3, requires_grad = TRUE)
 target <- torch_randn(3)$sign()
 output <- loss(input1, input2, target)
 output$backward()
-
 }
 }

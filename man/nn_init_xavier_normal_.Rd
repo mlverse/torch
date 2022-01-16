@@ -20,6 +20,5 @@ distribution.
 if (torch_is_installed()) {
 w <- torch_empty(3, 5)
 nn_init_xavier_normal_(w)
-
 }
 }

@@ -150,11 +150,10 @@ if (torch_is_installed()) {
 # With square kernels and equal stride
 m <- nn_conv2d(16, 33, 3, stride = 2)
 # non-square kernels and unequal stride and with padding
-m <- nn_conv2d(16, 33, c(3, 5), stride=c(2, 1), padding=c(4, 2))
+m <- nn_conv2d(16, 33, c(3, 5), stride = c(2, 1), padding = c(4, 2))
 # non-square kernels and unequal stride and with padding and dilation
-m <- nn_conv2d(16, 33, c(3, 5), stride=c(2, 1), padding=c(4, 2), dilation=c(3, 1))
+m <- nn_conv2d(16, 33, c(3, 5), stride = c(2, 1), padding = c(4, 2), dilation = c(3, 1))
 input <- torch_randn(20, 16, 50, 100)
-output <- m(input)  
-
+output <- m(input)
 }
 }

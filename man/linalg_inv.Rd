@@ -38,7 +38,6 @@ numerically stable than computing the inverse explicitly.
 if (torch_is_installed()) {
 A <- torch_randn(4, 4)
 linalg_inv(A)
-
 }
 }
 \seealso{

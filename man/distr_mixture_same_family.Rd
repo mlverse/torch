@@ -38,6 +38,5 @@ if (torch_is_installed()) {
 mix <- distr_categorical(torch_ones(5))
 comp <- distr_normal(torch_randn(5), torch_rand(5))
 gmm <- distr_mixture_same_family(mix, comp)
-
 }
 }

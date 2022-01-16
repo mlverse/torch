@@ -36,7 +36,6 @@ This function is "experimental" and it may change in a future PyTorch release.
 if (torch_is_installed()) {
 A <- torch_randn(3, 3)
 out <- linalg_inv_ex(A)
-
 }
 }
 \seealso{

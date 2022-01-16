@@ -90,7 +90,7 @@ heads.
 \examples{
 if (torch_is_installed()) {
 \dontrun{
-multihead_attn = nn_multihead_attention(embed_dim, num_heads)
+multihead_attn <- nn_multihead_attention(embed_dim, num_heads)
 out <- multihead_attn(query, key, value)
 attn_output <- out[[1]]
 attn_output_weights <- out[[2]]

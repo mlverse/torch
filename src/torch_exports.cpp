@@ -1,13 +1,11 @@
+#include <R_ext/Rdynload.h>
 #include <Rcpp.h>
 #include <torch_api.h>
-#include <R_ext/Rdynload.h>
 
-#define REGISTER_C_CALLABLE(f)                                 \
-R_RegisterCCallable("torch", #f, (DL_FUNC) &f);                
+#define REGISTER_C_CALLABLE(f) R_RegisterCCallable("torch", #f, (DL_FUNC)&f);
 
 // [[Rcpp::init]]
-void register_callables (DllInfo *dll)
-{
+void register_callables(DllInfo *dll) {
   REGISTER_C_CALLABLE(operator_sexp_tensor)
   REGISTER_C_CALLABLE(operator_sexp_optional_tensor)
   REGISTER_C_CALLABLE(operator_sexp_tensor_list)
@@ -52,7 +50,7 @@ void register_callables (DllInfo *dll)
   REGISTER_C_CALLABLE(operator_sexp_optional_scalar_type)
   REGISTER_C_CALLABLE(operator_sexp_optional_memory_format)
   REGISTER_C_CALLABLE(operator_sexp_variable_list)
-  
+
   REGISTER_C_CALLABLE(from_sexp_tensor)
   REGISTER_C_CALLABLE(from_sexp_optional_tensor)
   REGISTER_C_CALLABLE(from_sexp_index_tensor)
@@ -101,7 +99,7 @@ void register_callables (DllInfo *dll)
   REGISTER_C_CALLABLE(from_sexp_optional_memory_format)
   REGISTER_C_CALLABLE(from_sexp_vector_string)
   REGISTER_C_CALLABLE(from_sexp_variable_list)
-  
+
   REGISTER_C_CALLABLE(delete_tensor)
   REGISTER_C_CALLABLE(delete_script_module)
   REGISTER_C_CALLABLE(delete_script_method)
@@ -162,7 +160,6 @@ void register_callables (DllInfo *dll)
   REGISTER_C_CALLABLE(delete_optional_scalar)
   REGISTER_C_CALLABLE(delete_optional_scalar_type)
   REGISTER_C_CALLABLE(delete_optional_memory_format)
-  
+
   REGISTER_C_CALLABLE(fixme_new_string)
 }
-

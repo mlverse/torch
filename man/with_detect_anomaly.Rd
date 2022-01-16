@@ -11,6 +11,8 @@ with_detect_anomaly(code)
 }
 \description{
 This does two things:
+}
+\details{
 \itemize{
 \item Running the forward pass with detection enabled will allow the backward
 pass to print the traceback of the forward operation that created the failing
@@ -32,14 +34,11 @@ b <- (x^y)$sum()
 y$add_(1)
 
 try({
-
-b$backward()
-
-with_detect_anomaly({
   b$backward()
-})
 
+  with_detect_anomaly({
+    b$backward()
+  })
 })
-
 }
 }

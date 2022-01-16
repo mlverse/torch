@@ -61,9 +61,8 @@ has a nice visualization of what \code{dilation} does.
 \examples{
 if (torch_is_installed()) {
 # pool of size=3, stride=2
-m <- nn_max_pool1d(3, stride=2)
+m <- nn_max_pool1d(3, stride = 2)
 input <- torch_randn(20, 16, 50)
 output <- m(input)
-
 }
 }

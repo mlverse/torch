@@ -50,18 +50,17 @@ or as given by \code{output_size} in the call operator
 
 \examples{
 if (torch_is_installed()) {
-pool <- nn_max_pool1d(2, stride=2, return_indices=TRUE)
-unpool <- nn_max_unpool1d(2, stride=2)
+pool <- nn_max_pool1d(2, stride = 2, return_indices = TRUE)
+unpool <- nn_max_unpool1d(2, stride = 2)
 
-input <- torch_tensor(array(1:8/1, dim = c(1,1,8)))
+input <- torch_tensor(array(1:8 / 1, dim = c(1, 1, 8)))
 out <- pool(input)
 unpool(out[[1]], out[[2]])
 
 # Example showcasing the use of output_size
-input <- torch_tensor(array(1:8/1, dim = c(1,1,8)))
+input <- torch_tensor(array(1:8 / 1, dim = c(1, 1, 8)))
 out <- pool(input)
-unpool(out[[1]], out[[2]], output_size=input$size())
+unpool(out[[1]], out[[2]], output_size = input$size())
 unpool(out[[1]], out[[2]])
-
 }
 }

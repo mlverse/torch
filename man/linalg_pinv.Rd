@@ -48,7 +48,6 @@ numerically stable than computing the pseudoinverse explicitly.
 if (torch_is_installed()) {
 A <- torch_randn(3, 5)
 linalg_pinv(A)
-
 }
 }
 \seealso{

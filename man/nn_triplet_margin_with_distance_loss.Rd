@@ -92,7 +92,7 @@ negative <- embedding(negative_ids)
 
 # Built-in Distance Function
 triplet_loss <- nn_triplet_margin_with_distance_loss(
-  distance_function=nn_pairwise_distance()
+  distance_function = nn_pairwise_distance()
 )
 output <- triplet_loss(anchor, positive, negative)
 
@@ -102,7 +102,7 @@ l_infinity <- function(x1, x2) {
 }
 
 triplet_loss <- nn_triplet_margin_with_distance_loss(
-  distance_function=l_infinity, margin=1.5
+  distance_function = l_infinity, margin = 1.5
 )
 output <- triplet_loss(anchor, positive, negative)
 
@@ -114,6 +114,5 @@ triplet_loss <- nn_triplet_margin_with_distance_loss(
 )
 
 output <- triplet_loss(anchor, positive, negative)
-
 }
 }

@@ -120,14 +120,16 @@ epochs and steps_per_epoch.
 if (torch_is_installed()) {
 \dontrun{
 data_loader <- dataloader(...)
-optimizer <- optim_sgd(model$parameters, lr=0.1, momentum=0.9)
-scheduler <- lr_one_cycle(optimizer, max_lr=0.01, steps_per_epoch=length(data_loader), 
-                          epochs=10)
+optimizer <- optim_sgd(model$parameters, lr = 0.1, momentum = 0.9)
+scheduler <- lr_one_cycle(optimizer,
+  max_lr = 0.01, steps_per_epoch = length(data_loader),
+  epochs = 10
+)
 
 for (i in 1:epochs) {
   coro::loop(for (batch in data_loader) {
-     train_batch(...)
-     scheduler$step()
+    train_batch(...)
+    scheduler$step()
   })
 }
 }

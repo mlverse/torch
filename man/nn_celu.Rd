@@ -36,6 +36,5 @@ if (torch_is_installed()) {
 m <- nn_celu()
 input <- torch_randn(2)
 output <- m(input)
-
 }
 }

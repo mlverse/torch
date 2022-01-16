@@ -16,8 +16,8 @@
 nnf_instance_norm <- function(input, running_mean = NULL, running_var = NULL,
                               weight = NULL, bias = NULL, use_input_stats = TRUE,
                               momentum = 0.1, eps = 1e-5) {
-  
-  torch_instance_norm(input, weight, bias, running_mean, running_var,
-                      use_input_stats, momentum, eps, FALSE #TODO backend_cudnn_enabled)
+  torch_instance_norm(
+    input, weight, bias, running_mean, running_var,
+    use_input_stats, momentum, eps, FALSE # TODO backend_cudnn_enabled)
   )
 }

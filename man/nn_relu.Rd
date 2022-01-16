@@ -27,6 +27,5 @@ if (torch_is_installed()) {
 m <- nn_relu()
 input <- torch_randn(2)
 m(input)
-
 }
 }

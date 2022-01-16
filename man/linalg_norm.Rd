@@ -26,14 +26,15 @@ will be \code{dtype}. Default: \code{NULL}}
 If \code{A} is complex valued, it computes the norm of \code{A$abs()}
 Supports input of float, double, cfloat and cdouble dtypes.
 Whether this function computes a vector or matrix norm is determined as follows:
+}
+\details{
 \itemize{
 \item If \code{dim} is an int, the vector norm will be computed.
 \item If \code{dim} is a 2-tuple, the matrix norm will be computed.
 \item If \code{dim=NULL} and \code{ord=NULL}, A will be flattened to 1D and the 2-norm of the resulting vector will be computed.
 \item If \code{dim=NULL} and \code{ord!=NULL}, A must be 1D or 2D.
 }
-}
-\details{
+
 \code{ord} defines the norm that is computed. The following norms are
 supported:\tabular{lll}{
    \code{ord} \tab norm for matrices \tab norm for vectors \cr
@@ -52,14 +53,13 @@ supported:\tabular{lll}{
 }
 \examples{
 if (torch_is_installed()) {
-a <- torch_arange(0, 8, dtype=torch_float()) - 4
+a <- torch_arange(0, 8, dtype = torch_float()) - 4
 a
 b <- a$reshape(c(3, 3))
 b
 
 linalg_norm(a)
 linalg_norm(b)
-
 }
 }
 \seealso{

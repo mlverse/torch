@@ -31,15 +31,15 @@ nn_avg_pool3d(
 In the simplest case, the output value of the layer with input size \eqn{(N, C, D, H, W)},
 output \eqn{(N, C, D_{out}, H_{out}, W_{out})} and \code{kernel_size} \eqn{(kD, kH, kW)}
 can be precisely described as:
-
+}
+\details{
 \deqn{
 \begin{array}{ll}
 \mbox{out}(N_i, C_j, d, h, w) = & \sum_{k=0}^{kD-1} \sum_{m=0}^{kH-1} \sum_{n=0}^{kW-1} \\
 & \frac{\mbox{input}(N_i, C_j, \mbox{stride}[0] \times d + k, \mbox{stride}[1] \times h + m, \mbox{stride}[2] \times w + n)}{kD \times kH \times kW}
 \end{array}
 }
-}
-\details{
+
 If \code{padding} is non-zero, then the input is implicitly zero-padded on all three sides
 for \code{padding} number of points.
 
@@ -73,13 +73,12 @@ the second \code{int} for the height dimension and the third \code{int} for the 
 
 \examples{
 if (torch_is_installed()) {
-  
-# pool of square window of size=3, stride=2
-m = nn_avg_pool3d(3, stride=2)
-# pool of non-square window
-m = nn_avg_pool3d(c(3, 2, 2), stride=c(2, 1, 2))
-input = torch_randn(20, 16, 50,44, 31)
-output = m(input)
 
+# pool of square window of size=3, stride=2
+m <- nn_avg_pool3d(3, stride = 2)
+# pool of non-square window
+m <- nn_avg_pool3d(c(3, 2, 2), stride = c(2, 1, 2))
+input <- torch_randn(20, 16, 50, 44, 31)
+output <- m(input)
 }
 }

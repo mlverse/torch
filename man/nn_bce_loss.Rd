@@ -73,10 +73,9 @@ shape as input.
 if (torch_is_installed()) {
 m <- nn_sigmoid()
 loss <- nn_bce_loss()
-input <- torch_randn(3, requires_grad=TRUE)
+input <- torch_randn(3, requires_grad = TRUE)
 target <- torch_rand(3)
 output <- loss(m(input), target)
 output$backward()
-
 }
 }

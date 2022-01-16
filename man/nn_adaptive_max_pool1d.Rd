@@ -22,6 +22,5 @@ if (torch_is_installed()) {
 m <- nn_adaptive_max_pool1d(5)
 input <- torch_randn(1, 64, 8)
 output <- m(input)
-
 }
 }

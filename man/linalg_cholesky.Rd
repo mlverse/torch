@@ -32,7 +32,6 @@ the output has the same batch dimensions.
 if (torch_is_installed()) {
 a <- torch_eye(10)
 linalg_cholesky(a)
-
 }
 }
 \seealso{

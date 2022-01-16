@@ -27,6 +27,5 @@ x <- torch_randn(2, 2)
 y <- nnf_elu(x, alpha = 1)
 nnf_elu_(x, alpha = 1)
 torch_equal(x, y)
-
 }
 }

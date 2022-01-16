@@ -39,7 +39,7 @@ x$grad
 ## we can get the same result by calling the unexported `torch_tanh_backward()`
 ## function. The first argument is 1 to setup the Jacobian-vector product.
 ## see https://pytorch.org/blog/overview-of-pytorch-autograd-engine/ for details.
-call_torch_function("torch_tanh_backward", 1, y) 
+call_torch_function("torch_tanh_backward", 1, y)
 all.equal(call_torch_function("torch_tanh_backward", 1, y, quiet = TRUE), x$grad)
 }
 }
