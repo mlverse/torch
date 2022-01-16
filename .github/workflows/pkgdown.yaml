@@ -18,10 +18,15 @@ jobs:
 
       - uses: r-lib/actions/setup-pandoc@master
 
-      - uses: r-lib/actions/setup-r-dependencies@v2
-        with:
-          extra-packages: any::pkgdown, local::.
-          needs: website
+      - name: Install dependencies
+        run: |
+          install.packages("remotes")
+          remotes::install_deps(dependencies = TRUE)
+          install.packages("pkgdown")
+        shell: Rscript {0}
+
+      - name: Install package
+        run: R CMD INSTALL .
 
       - name: Deploy package
         run: |

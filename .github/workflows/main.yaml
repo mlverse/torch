@@ -40,6 +40,7 @@ jobs:
     name: ${{ matrix.os }} (${{ matrix.r_version }})
     timeout-minutes: 120
     env:
+      R_REMOTES_NO_ERRORS_FROM_WARNINGS: true
       INSTALL_TORCH: ${{ matrix.install }}
       CRAN: ${{ matrix.cran }}
       TORCH_LOG: 2
@@ -53,10 +54,32 @@ jobs:
         with:
           r-version: ${{ matrix.r_version }}
       - uses: r-lib/actions/setup-pandoc@v2
-      - uses: r-lib/actions/setup-r-dependencies@v2
-        with:
-          extra-packages: any::rcmdcheck, any::fs
-          needs: check
+      - name: Install system dependencies
+        if: runner.os == 'Linux'
+        env:
+          RHUB_PLATFORM: linux-x86_64-ubuntu-gcc
+        run: |
+          Rscript -e "install.packages(c('remotes'))" -e "remotes::install_github('r-hub/sysreqs')"
+          sysreqs=$(Rscript -e "cat(sysreqs::sysreq_commands('DESCRIPTION'))")
+          sudo -s eval "$sysreqs"
+      - name: Install dependencies
+        run: |
+          options(install.packages.check.source = "no")
+          options(pkgType = ifelse(grepl("linux", R.version$os), "source", "binary"))
+          install.packages(c('remotes', 'rcmdcheck'))
+          remotes::install_deps(dependencies = TRUE)
+          remotes::install_cran(c("katex", "knitr", "roxygen2", "sessioninfo", "testthat"), type = "source")
+          if (!require("Rcpp")) remotes::install_cran("Rcpp")
+        shell: Rscript {0}
+      - name: Print R session information
+        run: |
+          if (utils::packageVersion("sessioninfo") >= "1.2.1") {
+            sessioninfo::session_info(pkgs = "installed", include_base = TRUE)
+          } else {
+            options(width = 200)
+            sessioninfo::session_info(rownames(installed.packages()), include_base = TRUE)
+          }
+        shell: Rscript {0}
       - name: Build lantern and get libtorch
         if: matrix.install == 0 || contains( github.event.pull_request.labels.*.name, 'lantern')
         run: |
@@ -82,6 +105,7 @@ jobs:
         cuda: ["102", "111"]
     runs-on: [self-hosted, linux]
     env:
+      R_REMOTES_NO_ERRORS_FROM_WARNINGS: true
       CRAN: https://demo.rstudiopm.com/all/__linux__/bionic/latest
       DOCKER_FILE: ${{ format('docker/cuda-{0}', matrix.cuda) }}
       DOCKER_TAG: ${{ format('torch{0}', matrix.cuda) }}
@@ -194,6 +218,7 @@ jobs:
     name: 'Windows | CUDA: ${{ matrix.cuda }}'
     timeout-minutes: 120
     env:
+      R_REMOTES_NO_ERRORS_FROM_WARNINGS: true
       INSTALL_TORCH: 1
       TORCH_LOG: 2
       TORCH_TEST: 1
@@ -206,10 +231,9 @@ jobs:
         with:
           r-version: ${{ matrix.r_version }}
       - uses: r-lib/actions/setup-pandoc@v2
-      - uses: r-lib/actions/setup-r-dependencies@v2
-        with:
-          extra-packages: any::rcmdcheck, any::fs
-          needs: check
+      - name: Install dependencies
+        run: |
+          Rscript -e "options(repos=structure(c(CRAN='https://cloud.r-project.org/'))); install.packages(c('remotes', 'rcmdcheck', 'fs'))" -e "remotes::install_deps(dependencies = TRUE)"
       - name: Build lantern and get libtorch
         if: contains( github.event.pull_request.labels.*.name, 'lantern')
         run: |
