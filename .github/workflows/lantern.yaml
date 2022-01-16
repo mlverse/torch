@@ -78,7 +78,7 @@ jobs:
             fixlib: chrpath -r '$ORIGIN/.' liblantern.so
             flavor: Release
             artifacts: liblantern.so
-            upload: Linux-Cuda-111
+            upload: Linux-Cuda-113
           - os: windows-2019
             cuda: 10.2
             library: lantern.dll
@@ -106,7 +106,7 @@ jobs:
             fixlib:
             flavor: Release
             artifacts: lantern.dll
-            upload: Windows-Cuda-111
+            upload: Windows-Cuda-113
             cudatoolkit: "https://developer.download.nvidia.com/compute/cuda/11.1.1/local_installers/cuda_11.1.1_456.81_win10.exe"
             cudnn: "https://storage.googleapis.com/torch-lantern-builds/cudnn/cudnn-11.1-windows-x64-v8.0.5.39.zip"
     steps:
@@ -206,9 +206,9 @@ jobs:
             Linux,
             Windows,
             Cuda102,
-            Cuda111,
+            Cuda113,
             WindowsCuda102,
-            WindowsCuda111,
+            WindowsCuda113,
           ]
         include:
           - name: macOS
@@ -228,21 +228,21 @@ jobs:
             upload: Linux
             hw: gpu
             version: -102
-          - name: Cuda111
-            artifact: Linux-Cuda-111
+          - name: Cuda113
+            artifact: Linux-Cuda-113
             upload: Linux
             hw: gpu
-            version: -111
+            version: -113
           - name: WindowsCuda102
             artifact: Windows-Cuda-102
             upload: Windows
             hw: gpu
             version: -102
-          - name: WindowsCuda111
-            artifact: Windows-Cuda-111
+          - name: WindowsCuda113
+            artifact: Windows-Cuda-113
             upload: Windows
             hw: gpu
-            version: -111
+            version: -113
     steps:
       - name: Download artifacts
         uses: actions/download-artifact@v1
