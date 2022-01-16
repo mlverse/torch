@@ -156,7 +156,7 @@ this function.</p></dd>
 <span class="r-in"><span class="co">## we can get the same result by calling the unexported `torch_tanh_backward()`</span></span>
 <span class="r-in"><span class="co">## function. The first argument is 1 to setup the Jacobian-vector product.</span></span>
 <span class="r-in"><span class="co">## see https://pytorch.org/blog/overview-of-pytorch-autograd-engine/ for details.</span></span>
-<span class="r-in"><span class="fu">call_torch_function</span><span class="op">(</span><span class="st">"torch_tanh_backward"</span>, <span class="fl">1</span>, <span class="va">y</span><span class="op">)</span> </span>
+<span class="r-in"><span class="fu">call_torch_function</span><span class="op">(</span><span class="st">"torch_tanh_backward"</span>, <span class="fl">1</span>, <span class="va">y</span><span class="op">)</span></span>
 <span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/all.equal.html" class="external-link">all.equal</a></span><span class="op">(</span><span class="fu">call_torch_function</span><span class="op">(</span><span class="st">"torch_tanh_backward"</span>, <span class="fl">1</span>, <span class="va">y</span>, quiet <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>, <span class="va">x</span><span class="op">$</span><span class="va">grad</span><span class="op">)</span></span>
 <span class="r-in"><span class="op">}</span></span>
 <span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Because this function allows access to unexported functions, please use with caution, and</span>

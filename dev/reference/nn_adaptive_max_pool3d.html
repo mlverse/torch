@@ -133,14 +133,13 @@ Useful to pass to <code><a href="nn_max_unpool3d.html">nn_max_unpool3d()</a></co
     <h2>Examples</h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="torch_is_installed.html">torch_is_installed</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
 <span class="r-in"><span class="co"># target output size of 5x7x9</span></span>
-<span class="r-in"><span class="va">m</span> <span class="op">&lt;-</span> <span class="fu">nn_adaptive_max_pool3d</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">5</span>,<span class="fl">7</span>,<span class="fl">9</span><span class="op">)</span><span class="op">)</span></span>
+<span class="r-in"><span class="va">m</span> <span class="op">&lt;-</span> <span class="fu">nn_adaptive_max_pool3d</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">5</span>, <span class="fl">7</span>, <span class="fl">9</span><span class="op">)</span><span class="op">)</span></span>
 <span class="r-in"><span class="va">input</span> <span class="op">&lt;-</span> <span class="fu"><a href="torch_randn.html">torch_randn</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">64</span>, <span class="fl">8</span>, <span class="fl">9</span>, <span class="fl">10</span><span class="op">)</span></span>
 <span class="r-in"><span class="va">output</span> <span class="op">&lt;-</span> <span class="fu">m</span><span class="op">(</span><span class="va">input</span><span class="op">)</span></span>
 <span class="r-in"><span class="co"># target output size of 7x7x7 (cube)</span></span>
 <span class="r-in"><span class="va">m</span> <span class="op">&lt;-</span> <span class="fu">nn_adaptive_max_pool3d</span><span class="op">(</span><span class="fl">7</span><span class="op">)</span></span>
 <span class="r-in"><span class="va">input</span> <span class="op">&lt;-</span> <span class="fu"><a href="torch_randn.html">torch_randn</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">64</span>, <span class="fl">10</span>, <span class="fl">9</span>, <span class="fl">8</span><span class="op">)</span></span>
 <span class="r-in"><span class="va">output</span> <span class="op">&lt;-</span> <span class="fu">m</span><span class="op">(</span><span class="va">input</span><span class="op">)</span></span>
-<span class="r-in"></span>
 <span class="r-in"><span class="op">}</span></span>
 </code></pre></div>
     </div>

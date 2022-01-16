@@ -141,10 +141,10 @@
     <h2>Examples</h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="torch_is_installed.html">torch_is_installed</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
 <span class="r-in"><span class="va">m</span> <span class="op">&lt;-</span> <span class="fu">distr_gamma</span><span class="op">(</span><span class="fu"><a href="torch_tensor.html">torch_tensor</a></span><span class="op">(</span><span class="fl">1.0</span><span class="op">)</span>, <span class="fu"><a href="torch_tensor.html">torch_tensor</a></span><span class="op">(</span><span class="fl">1.0</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">m</span><span class="op">$</span><span class="fu">sample</span><span class="op">(</span><span class="op">)</span>  <span class="co"># Gamma distributed with concentration=1 and rate=1</span></span>
+<span class="r-in"><span class="va">m</span><span class="op">$</span><span class="fu">sample</span><span class="op">(</span><span class="op">)</span> <span class="co"># Gamma distributed with concentration=1 and rate=1</span></span>
 <span class="r-in"><span class="op">}</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> torch_tensor</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  0.2354</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  1.2611</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [ CPUFloatType{1} ]</span>
 </code></pre></div>
     </div>

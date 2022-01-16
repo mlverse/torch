@@ -132,14 +132,13 @@ trailing dimensions are flattened.</p>
     <div id="ref-examples">
     <h2>Examples</h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="torch_is_installed.html">torch_is_installed</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
-<span class="r-in"><span class="va">w</span> <span class="op">&lt;-</span> <span class="fu"><a href="torch_empty.html">torch_empty</a></span><span class="op">(</span><span class="fl">3</span>,<span class="fl">5</span><span class="op">)</span></span>
+<span class="r-in"><span class="va">w</span> <span class="op">&lt;-</span> <span class="fu"><a href="torch_empty.html">torch_empty</a></span><span class="op">(</span><span class="fl">3</span>, <span class="fl">5</span><span class="op">)</span></span>
 <span class="r-in"><span class="fu">nn_init_orthogonal_</span><span class="op">(</span><span class="va">w</span><span class="op">)</span></span>
-<span class="r-in"></span>
 <span class="r-in"><span class="op">}</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> torch_tensor</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> -0.7176  0.3861 -0.2088  0.4969  0.2133</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  0.3545  0.7139  0.4893  0.0111  0.3538</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> -0.5532 -0.2440  0.7224 -0.3305  0.0577</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  0.3176  0.5853 -0.3335  0.6622 -0.0829</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  0.8271 -0.2816  0.3400 -0.0200 -0.3473</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  0.1154 -0.6511 -0.7276  0.1639  0.0812</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [ CPUFloatType{3,5} ]</span>
 </code></pre></div>
     </div>

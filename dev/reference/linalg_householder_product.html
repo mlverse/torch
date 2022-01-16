@@ -188,7 +188,6 @@ However, that function is not supported by autograd.</p></li>
 <span class="r-in"><span class="va">h_tau</span> <span class="op">&lt;-</span> <span class="fu"><a href="torch_geqrf.html">torch_geqrf</a></span><span class="op">(</span><span class="va">A</span><span class="op">)</span></span>
 <span class="r-in"><span class="va">Q</span> <span class="op">&lt;-</span> <span class="fu">linalg_householder_product</span><span class="op">(</span><span class="va">h_tau</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span>, <span class="va">h_tau</span><span class="op">[[</span><span class="fl">2</span><span class="op">]</span><span class="op">]</span><span class="op">)</span></span>
 <span class="r-in"><span class="fu"><a href="torch_allclose.html">torch_allclose</a></span><span class="op">(</span><span class="va">Q</span>, <span class="fu"><a href="linalg_qr.html">linalg_qr</a></span><span class="op">(</span><span class="va">A</span><span class="op">)</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">)</span></span>
-<span class="r-in"></span>
 <span class="r-in"><span class="op">}</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] TRUE</span>
 </code></pre></div>

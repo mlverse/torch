@@ -203,7 +203,7 @@ otherwise.</p></li>
 <span class="r-in"></span>
 <span class="r-in"><span class="co"># Built-in Distance Function</span></span>
 <span class="r-in"><span class="va">triplet_loss</span> <span class="op">&lt;-</span> <span class="fu">nn_triplet_margin_with_distance_loss</span><span class="op">(</span></span>
-<span class="r-in">  distance_function<span class="op">=</span><span class="fu"><a href="nn_pairwise_distance.html">nn_pairwise_distance</a></span><span class="op">(</span><span class="op">)</span></span>
+<span class="r-in">  distance_function <span class="op">=</span> <span class="fu"><a href="nn_pairwise_distance.html">nn_pairwise_distance</a></span><span class="op">(</span><span class="op">)</span></span>
 <span class="r-in"><span class="op">)</span></span>
 <span class="r-in"><span class="va">output</span> <span class="op">&lt;-</span> <span class="fu">triplet_loss</span><span class="op">(</span><span class="va">anchor</span>, <span class="va">positive</span>, <span class="va">negative</span><span class="op">)</span></span>
 <span class="r-in"></span>
@@ -213,7 +213,7 @@ otherwise.</p></li>
 <span class="r-in"><span class="op">}</span></span>
 <span class="r-in"></span>
 <span class="r-in"><span class="va">triplet_loss</span> <span class="op">&lt;-</span> <span class="fu">nn_triplet_margin_with_distance_loss</span><span class="op">(</span></span>
-<span class="r-in">  distance_function<span class="op">=</span><span class="va">l_infinity</span>, margin<span class="op">=</span><span class="fl">1.5</span></span>
+<span class="r-in">  distance_function <span class="op">=</span> <span class="va">l_infinity</span>, margin <span class="op">=</span> <span class="fl">1.5</span></span>
 <span class="r-in"><span class="op">)</span></span>
 <span class="r-in"><span class="va">output</span> <span class="op">&lt;-</span> <span class="fu">triplet_loss</span><span class="op">(</span><span class="va">anchor</span>, <span class="va">positive</span>, <span class="va">negative</span><span class="op">)</span></span>
 <span class="r-in"></span>
@@ -225,7 +225,6 @@ otherwise.</p></li>
 <span class="r-in"><span class="op">)</span></span>
 <span class="r-in"></span>
 <span class="r-in"><span class="va">output</span> <span class="op">&lt;-</span> <span class="fu">triplet_loss</span><span class="op">(</span><span class="va">anchor</span>, <span class="va">positive</span>, <span class="va">negative</span><span class="op">)</span></span>
-<span class="r-in"></span>
 <span class="r-in"><span class="op">}</span></span>
 </code></pre></div>
     </div>

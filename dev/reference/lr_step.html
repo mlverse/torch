@@ -143,7 +143,7 @@ Default: 0.1.</p></dd>
 <span class="r-in"><span class="co"># lr = 0.005    if 30 &lt;= epoch &lt; 60</span></span>
 <span class="r-in"><span class="co"># lr = 0.0005   if 60 &lt;= epoch &lt; 90</span></span>
 <span class="r-in"><span class="co"># ...</span></span>
-<span class="r-in"><span class="va">scheduler</span> <span class="op">&lt;-</span> <span class="fu">lr_step</span><span class="op">(</span><span class="va">optimizer</span>, step_size<span class="op">=</span><span class="fl">30</span>, gamma<span class="op">=</span><span class="fl">0.1</span><span class="op">)</span></span>
+<span class="r-in"><span class="va">scheduler</span> <span class="op">&lt;-</span> <span class="fu">lr_step</span><span class="op">(</span><span class="va">optimizer</span>, step_size <span class="op">=</span> <span class="fl">30</span>, gamma <span class="op">=</span> <span class="fl">0.1</span><span class="op">)</span></span>
 <span class="r-in"><span class="kw">for</span> <span class="op">(</span><span class="va">epoch</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fl">100</span><span class="op">)</span> <span class="op">{</span></span>
 <span class="r-in">  <span class="fu">train</span><span class="op">(</span><span class="va">...</span><span class="op">)</span></span>
 <span class="r-in">  <span class="fu">validate</span><span class="op">(</span><span class="va">...</span><span class="op">)</span></span>

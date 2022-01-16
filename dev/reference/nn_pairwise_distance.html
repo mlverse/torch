@@ -146,11 +146,10 @@ $$</p>
     <div id="ref-examples">
     <h2>Examples</h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="torch_is_installed.html">torch_is_installed</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
-<span class="r-in"><span class="va">pdist</span> <span class="op">&lt;-</span> <span class="fu">nn_pairwise_distance</span><span class="op">(</span>p<span class="op">=</span><span class="fl">2</span><span class="op">)</span></span>
+<span class="r-in"><span class="va">pdist</span> <span class="op">&lt;-</span> <span class="fu">nn_pairwise_distance</span><span class="op">(</span>p <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span>
 <span class="r-in"><span class="va">input1</span> <span class="op">&lt;-</span> <span class="fu"><a href="torch_randn.html">torch_randn</a></span><span class="op">(</span><span class="fl">100</span>, <span class="fl">128</span><span class="op">)</span></span>
 <span class="r-in"><span class="va">input2</span> <span class="op">&lt;-</span> <span class="fu"><a href="torch_randn.html">torch_randn</a></span><span class="op">(</span><span class="fl">100</span>, <span class="fl">128</span><span class="op">)</span></span>
 <span class="r-in"><span class="va">output</span> <span class="op">&lt;-</span> <span class="fu">pdist</span><span class="op">(</span><span class="va">input1</span>, <span class="va">input2</span><span class="op">)</span></span>
-<span class="r-in"></span>
 <span class="r-in"><span class="op">}</span></span>
 </code></pre></div>
     </div>

@@ -161,7 +161,7 @@
 
 <span class="va">df_dataset</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/dataset.html">dataset</a></span><span class="op">(</span>
   <span class="st">"mydataset"</span>,
-  
+
   <span class="co"># the input data to your dataset goes in the initialize function.</span>
   <span class="co"># our dataset will take a dataframe and the name of the response</span>
   <span class="co"># variable.</span>
@@ -169,7 +169,7 @@
     <span class="va">self</span><span class="op">$</span><span class="va">df</span> <span class="op">&lt;-</span> <span class="va">df</span><span class="op">[</span>,<span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/base/which.html" class="external-link">which</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span> <span class="op">==</span> <span class="va">response_variable</span><span class="op">)</span><span class="op">]</span>
     <span class="va">self</span><span class="op">$</span><span class="va">response_variable</span> <span class="op">&lt;-</span> <span class="va">df</span><span class="op">[[</span><span class="va">response_variable</span><span class="op">]</span><span class="op">]</span>
   <span class="op">}</span>,
-  
+
   <span class="co"># the .getitem method takes an index as input and returns the</span>
   <span class="co"># corresponding item from the dataset.</span>
   <span class="co"># the index could be anything. the dataframe could have many</span>
@@ -179,19 +179,19 @@
   .getitem <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">index</span><span class="op">)</span> <span class="op">{</span>
     <span class="va">response</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/torch_tensor.html">torch_tensor</a></span><span class="op">(</span><span class="va">self</span><span class="op">$</span><span class="va">response_variable</span><span class="op">[</span><span class="va">index</span><span class="op">]</span><span class="op">)</span>
     <span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/torch_tensor.html">torch_tensor</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/numeric.html" class="external-link">as.numeric</a></span><span class="op">(</span><span class="va">self</span><span class="op">$</span><span class="va">df</span><span class="op">[</span><span class="va">index</span>,<span class="op">]</span><span class="op">)</span><span class="op">)</span>
-    
+
     <span class="co"># note that the dataloaders will automatically stack tensors</span>
     <span class="co"># creating a new dimension</span>
     <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">x</span>, y <span class="op">=</span> <span class="va">response</span><span class="op">)</span>
   <span class="op">}</span>,
-  
-  <span class="co"># It's optional, but helpful to define the .length method returning </span>
-  <span class="co"># the number of elements in the dataset. This is needed if you want </span>
+
+  <span class="co"># It's optional, but helpful to define the .length method returning</span>
+  <span class="co"># the number of elements in the dataset. This is needed if you want</span>
   <span class="co"># to shuffle your dataset.</span>
   .length <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="op">)</span> <span class="op">{</span>
     <span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">self</span><span class="op">$</span><span class="va">response_variable</span><span class="op">)</span>
   <span class="op">}</span>
-  
+
 <span class="op">)</span>
 
 

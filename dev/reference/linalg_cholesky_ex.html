@@ -195,19 +195,18 @@ If <code>check_errors=TRUE</code> and <code>info</code> contains positive intege
     <h2>Examples</h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="torch_is_installed.html">torch_is_installed</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
 <span class="r-in"><span class="va">A</span> <span class="op">&lt;-</span> <span class="fu"><a href="torch_randn.html">torch_randn</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">2</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">out</span> <span class="op">=</span> <span class="fu">linalg_cholesky_ex</span><span class="op">(</span><span class="va">A</span><span class="op">)</span></span>
+<span class="r-in"><span class="va">out</span> <span class="op">&lt;-</span> <span class="fu">linalg_cholesky_ex</span><span class="op">(</span><span class="va">A</span><span class="op">)</span></span>
 <span class="r-in"><span class="va">out</span></span>
-<span class="r-in"></span>
 <span class="r-in"><span class="op">}</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $L</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> torch_tensor</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  0.7241  0.0000</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> -2.2693 -4.6872</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> -1.3728  0.0000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  0.6577  0.0361</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [ CPUFloatType{2,2} ]</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $info</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> torch_tensor</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [ CPUIntType{} ]</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 </code></pre></div>

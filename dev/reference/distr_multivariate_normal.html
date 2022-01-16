@@ -170,14 +170,11 @@ the corresponding lower triangular matrices using a Cholesky decomposition.</p>
     <h2>Examples</h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="torch_is_installed.html">torch_is_installed</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
 <span class="r-in"><span class="va">m</span> <span class="op">&lt;-</span> <span class="fu">distr_multivariate_normal</span><span class="op">(</span><span class="fu"><a href="torch_zeros.html">torch_zeros</a></span><span class="op">(</span><span class="fl">2</span><span class="op">)</span>, <span class="fu"><a href="torch_eye.html">torch_eye</a></span><span class="op">(</span><span class="fl">2</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">m</span><span class="op">$</span><span class="fu">sample</span><span class="op">(</span><span class="op">)</span>  <span class="co"># normally distributed with mean=`[0,0]` and covariance_matrix=`I`</span></span>
-<span class="r-in"></span>
-<span class="r-in"></span>
-<span class="r-in"></span>
+<span class="r-in"><span class="va">m</span><span class="op">$</span><span class="fu">sample</span><span class="op">(</span><span class="op">)</span> <span class="co"># normally distributed with mean=`[0,0]` and covariance_matrix=`I`</span></span>
 <span class="r-in"><span class="op">}</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> torch_tensor</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  2.0803</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  0.1715</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  0.3464</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> -0.1867</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [ CPUFloatType{2} ]</span>
 </code></pre></div>
     </div>

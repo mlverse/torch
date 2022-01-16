@@ -181,14 +181,13 @@ supported:</p><table class="table table"><tr><td><code>ord</code></td><td>norm f
     <div id="ref-examples">
     <h2>Examples</h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="torch_is_installed.html">torch_is_installed</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
-<span class="r-in"><span class="va">a</span> <span class="op">&lt;-</span> <span class="fu"><a href="torch_arange.html">torch_arange</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">8</span>, dtype<span class="op">=</span><span class="fu"><a href="torch_dtype.html">torch_float</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="op">-</span> <span class="fl">4</span></span>
+<span class="r-in"><span class="va">a</span> <span class="op">&lt;-</span> <span class="fu"><a href="torch_arange.html">torch_arange</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">8</span>, dtype <span class="op">=</span> <span class="fu"><a href="torch_dtype.html">torch_float</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="op">-</span> <span class="fl">4</span></span>
 <span class="r-in"><span class="va">a</span></span>
 <span class="r-in"><span class="va">b</span> <span class="op">&lt;-</span> <span class="va">a</span><span class="op">$</span><span class="fu">reshape</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">3</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span></span>
 <span class="r-in"><span class="va">b</span></span>
 <span class="r-in"></span>
 <span class="r-in"><span class="fu">linalg_vector_norm</span><span class="op">(</span><span class="va">a</span>, ord <span class="op">=</span> <span class="fl">3.5</span><span class="op">)</span></span>
 <span class="r-in"><span class="fu">linalg_vector_norm</span><span class="op">(</span><span class="va">b</span>, ord <span class="op">=</span> <span class="fl">3.5</span><span class="op">)</span></span>
-<span class="r-in"></span>
 <span class="r-in"><span class="op">}</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> torch_tensor</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 5.43449</span>

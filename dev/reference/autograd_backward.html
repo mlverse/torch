@@ -140,7 +140,7 @@ tensors).</p>
 <dd><p>(list of Tensor) – Tensors of which the derivative will
 be computed.</p></dd>
 <dt>grad_tensors</dt>
-<dd><p>(list of (Tensor or <code>NULL)) – The “vector” in the  Jacobian-vector product, usually gradients w.r.t. each element of  corresponding tensors. </code>NULL<code>values can be specified for scalar Tensors or  ones that don’t require grad. If a</code>NULL` value would be acceptable for all
+<dd><p>(list of (Tensor or <code>NULL)) – The “vector” in the Jacobian-vector product, usually gradients w.r.t. each element of corresponding tensors. </code>NULL<code>values can be specified for scalar Tensors or ones that don’t require grad. If a</code>NULL` value would be acceptable for all
 grad_tensors, then this argument is optional.</p></dd>
 <dt>retain_graph</dt>
 <dd><p>(bool, optional) – If <code>FALSE</code>, the graph used to compute
@@ -168,7 +168,6 @@ them before calling it.</p>
 <span class="r-in"><span class="va">b</span> <span class="op">&lt;-</span> <span class="fl">3</span> <span class="op">*</span> <span class="va">a</span></span>
 <span class="r-in"></span>
 <span class="r-in"><span class="fu">autograd_backward</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="va">y</span>, <span class="va">b</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"></span>
 <span class="r-in"><span class="op">}</span></span>
 </code></pre></div>
     </div>

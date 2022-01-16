@@ -129,7 +129,7 @@ documentation on how to write TorchScript code.</p>
 <span class="r-in"><span class="va">comp</span> <span class="op">&lt;-</span> <span class="fu">jit_compile</span><span class="op">(</span><span class="st">"</span>
 <span class="r-in">def fn (x):</span>
 <span class="r-in">  return torch.abs(x)</span>
-<span class="r-in">  </span>
+<span class="r-in"></span>
 <span class="r-in">def foo (x):</span>
 <span class="r-in">  return torch.sum(x)</span>
 <span class="r-in"></span>
@@ -137,10 +137,9 @@ documentation on how to write TorchScript code.</p>
 <span class="r-in"></span>
 <span class="r-in"><span class="va">comp</span><span class="op">$</span><span class="fu">fn</span><span class="op">(</span><span class="fu"><a href="torch_tensor.html">torch_tensor</a></span><span class="op">(</span><span class="op">-</span><span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
 <span class="r-in"><span class="va">comp</span><span class="op">$</span><span class="fu">foo</span><span class="op">(</span><span class="fu"><a href="torch_randn.html">torch_randn</a></span><span class="op">(</span><span class="fl">10</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"></span>
 <span class="r-in"><span class="op">}</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> torch_tensor</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 0.611486</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 0.806885</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [ CPUFloatType{} ]</span>
 </code></pre></div>
     </div>

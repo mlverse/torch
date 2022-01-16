@@ -144,21 +144,21 @@
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://torch.mlverse.org/docs" class="external-link">torch</a></span><span class="op">)</span>
 
-<span class="co"># creates example tensors. x requires_grad = TRUE tells that </span>
+<span class="co"># creates example tensors. x requires_grad = TRUE tells that</span>
 <span class="co"># we are going to take derivatives over it.</span>
 <span class="va">dense</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/nn_module.html">nn_module</a></span><span class="op">(</span>
   clasname <span class="op">=</span> <span class="st">"dense"</span>,
   <span class="co"># the initialize function tuns whenever we instantiate the model</span>
   initialize <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">in_features</span>, <span class="va">out_features</span><span class="op">)</span> <span class="op">{</span>
-    
+
     <span class="co"># just for you to see when this function is called</span>
-    <span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"Calling initialize!"</span><span class="op">)</span> 
-    
+    <span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"Calling initialize!"</span><span class="op">)</span>
+
     <span class="co"># we use nn_parameter to indicate that those tensors are special</span>
     <span class="co"># and should be treated as parameters by `nn_module`.</span>
     <span class="va">self</span><span class="op">$</span><span class="va">w</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/nn_parameter.html">nn_parameter</a></span><span class="op">(</span><span class="fu"><a href="../../reference/torch_randn.html">torch_randn</a></span><span class="op">(</span><span class="va">in_features</span>, <span class="va">out_features</span><span class="op">)</span><span class="op">)</span>
     <span class="va">self</span><span class="op">$</span><span class="va">b</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/nn_parameter.html">nn_parameter</a></span><span class="op">(</span><span class="fu"><a href="../../reference/torch_zeros.html">torch_zeros</a></span><span class="op">(</span><span class="va">out_features</span><span class="op">)</span><span class="op">)</span>
-    
+
   <span class="op">}</span>,
   <span class="co"># this function is called whenever we call our model on input.</span>
   forward <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span>
@@ -170,13 +170,13 @@
 <span class="va">model</span> <span class="op">&lt;-</span> <span class="fu">dense</span><span class="op">(</span><span class="fl">3</span>, <span class="fl">1</span><span class="op">)</span></code></pre></div>
 <pre><code><span class="co">## Calling initialize!</span></code></pre>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># you can get all parameters </span>
+<code class="sourceCode R"><span class="co"># you can get all parameters</span>
 <span class="va">model</span><span class="op">$</span><span class="va">parameters</span></code></pre></div>
 <pre><code><span class="co">## $w</span>
 <span class="co">## torch_tensor</span>
-<span class="co">##  0.0858</span>
-<span class="co">##  0.5945</span>
-<span class="co">## -1.5985</span>
+<span class="co">## -1.4142</span>
+<span class="co">##  0.1362</span>
+<span class="co">## -1.0929</span>
 <span class="co">## [ CPUFloatType{3,1} ][ requires_grad = TRUE ]</span>
 <span class="co">## </span>
 <span class="co">## $b</span>
@@ -187,9 +187,9 @@
 <code class="sourceCode R"><span class="co"># or individually</span>
 <span class="va">model</span><span class="op">$</span><span class="va">w</span></code></pre></div>
 <pre><code><span class="co">## torch_tensor</span>
-<span class="co">##  0.0858</span>
-<span class="co">##  0.5945</span>
-<span class="co">## -1.5985</span>
+<span class="co">## -1.4142</span>
+<span class="co">##  0.1362</span>
+<span class="co">## -1.0929</span>
 <span class="co">## [ CPUFloatType{3,1} ][ requires_grad = TRUE ]</span></code></pre>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">model</span><span class="op">$</span><span class="va">b</span></code></pre></div>
@@ -204,16 +204,16 @@
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">y_pred</span></code></pre></div>
 <pre><code><span class="co">## torch_tensor</span>
-<span class="co">## -1.7080</span>
-<span class="co">##  0.8921</span>
-<span class="co">##  0.5193</span>
-<span class="co">##  0.6189</span>
-<span class="co">## -1.0612</span>
-<span class="co">##  0.8829</span>
-<span class="co">##  2.3842</span>
-<span class="co">## -0.5395</span>
-<span class="co">## -0.6897</span>
-<span class="co">##  0.7909</span>
+<span class="co">## -2.7582</span>
+<span class="co">## -2.7481</span>
+<span class="co">##  3.6532</span>
+<span class="co">## -1.4867</span>
+<span class="co">##  1.3893</span>
+<span class="co">##  1.8396</span>
+<span class="co">## -0.8375</span>
+<span class="co">## -1.3678</span>
+<span class="co">## -0.2009</span>
+<span class="co">## -0.7155</span>
 <span class="co">## [ CPUFloatType{10,1} ][ grad_fn = &lt;AddBackward0&gt; ]</span></code></pre>
   </div>
 

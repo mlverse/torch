@@ -144,7 +144,7 @@ grad will be freed. Note that in nearly all cases setting this option to <code>T
 not needed and often can be worked around in a much more efficient way.
 Defaults to the value of <code>create_graph</code>.</p></dd>
 <dt>create_graph</dt>
-<dd><p>(bool, optional) – If <code>TRUE, graph of the derivative will  be constructed, allowing to compute higher order derivative products.  Default: </code>FALSE`.</p></dd>
+<dd><p>(bool, optional) – If <code>TRUE, graph of the derivative will be constructed, allowing to compute higher order derivative products. Default: </code>FALSE`.</p></dd>
 <dt>allow_unused</dt>
 <dd><p>(bool, optional) – If <code>FALSE</code>, specifying inputs that were
 not used when computing outputs (and therefore their grad is always zero) is an
@@ -164,21 +164,20 @@ will still be computed, and will be accumulated into their <code>.grad</code> at
 <span class="r-in"><span class="va">b</span> <span class="op">&lt;-</span> <span class="fu"><a href="torch_tensor.html">torch_tensor</a></span><span class="op">(</span><span class="fl">0.9</span>, requires_grad <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span class="r-in"><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="torch_tensor.html">torch_tensor</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html" class="external-link">runif</a></span><span class="op">(</span><span class="fl">100</span><span class="op">)</span><span class="op">)</span></span>
 <span class="r-in"><span class="va">y</span> <span class="op">&lt;-</span> <span class="fl">2</span> <span class="op">*</span> <span class="va">x</span> <span class="op">+</span> <span class="fl">1</span></span>
-<span class="r-in"><span class="va">loss</span> <span class="op">&lt;-</span> <span class="op">(</span><span class="va">y</span> <span class="op">-</span> <span class="op">(</span><span class="va">w</span><span class="op">*</span><span class="va">x</span> <span class="op">+</span> <span class="va">b</span><span class="op">)</span><span class="op">)</span><span class="op">^</span><span class="fl">2</span></span>
+<span class="r-in"><span class="va">loss</span> <span class="op">&lt;-</span> <span class="op">(</span><span class="va">y</span> <span class="op">-</span> <span class="op">(</span><span class="va">w</span> <span class="op">*</span> <span class="va">x</span> <span class="op">+</span> <span class="va">b</span><span class="op">)</span><span class="op">)</span><span class="op">^</span><span class="fl">2</span></span>
 <span class="r-in"><span class="va">loss</span> <span class="op">&lt;-</span> <span class="va">loss</span><span class="op">$</span><span class="fu">mean</span><span class="op">(</span><span class="op">)</span></span>
 <span class="r-in"></span>
 <span class="r-in"><span class="va">o</span> <span class="op">&lt;-</span> <span class="fu">autograd_grad</span><span class="op">(</span><span class="va">loss</span>, <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="va">w</span>, <span class="va">b</span><span class="op">)</span><span class="op">)</span></span>
 <span class="r-in"><span class="va">o</span></span>
-<span class="r-in"> </span>
 <span class="r-in"><span class="op">}</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[1]]</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> torch_tensor</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> -1.0738</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> -1.3403</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [ CPUFloatType{1} ]</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[2]]</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> torch_tensor</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> -1.6944</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> -1.8871</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [ CPUFloatType{1} ]</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 </code></pre></div>

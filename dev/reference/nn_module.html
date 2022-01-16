@@ -188,19 +188,18 @@ were implementing the dropout module.</p>
     <h2>Examples</h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="torch_is_installed.html">torch_is_installed</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
 <span class="r-in"><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu">nn_module</span><span class="op">(</span></span>
-<span class="r-in"> initialize <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="op">)</span> <span class="op">{</span></span>
-<span class="r-in">   <span class="va">self</span><span class="op">$</span><span class="va">conv1</span> <span class="op">&lt;-</span> <span class="fu"><a href="nn_conv2d.html">nn_conv2d</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">20</span>, <span class="fl">5</span><span class="op">)</span></span>
-<span class="r-in">   <span class="va">self</span><span class="op">$</span><span class="va">conv2</span> <span class="op">&lt;-</span> <span class="fu"><a href="nn_conv2d.html">nn_conv2d</a></span><span class="op">(</span><span class="fl">20</span>, <span class="fl">20</span>, <span class="fl">5</span><span class="op">)</span></span>
-<span class="r-in"> <span class="op">}</span>,</span>
-<span class="r-in"> forward <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">input</span><span class="op">)</span> <span class="op">{</span></span>
-<span class="r-in">   <span class="va">input</span> <span class="op">&lt;-</span> <span class="va">self</span><span class="op">$</span><span class="fu">conv1</span><span class="op">(</span><span class="va">input</span><span class="op">)</span></span>
-<span class="r-in">   <span class="va">input</span> <span class="op">&lt;-</span> <span class="fu"><a href="nnf_relu.html">nnf_relu</a></span><span class="op">(</span><span class="va">input</span><span class="op">)</span></span>
-<span class="r-in">   <span class="va">input</span> <span class="op">&lt;-</span> <span class="va">self</span><span class="op">$</span><span class="fu">conv2</span><span class="op">(</span><span class="va">input</span><span class="op">)</span></span>
-<span class="r-in">   <span class="va">input</span> <span class="op">&lt;-</span> <span class="fu"><a href="nnf_relu.html">nnf_relu</a></span><span class="op">(</span><span class="va">input</span><span class="op">)</span></span>
-<span class="r-in">   <span class="va">input</span></span>
-<span class="r-in"> <span class="op">}</span></span>
+<span class="r-in">  initialize <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="op">)</span> <span class="op">{</span></span>
+<span class="r-in">    <span class="va">self</span><span class="op">$</span><span class="va">conv1</span> <span class="op">&lt;-</span> <span class="fu"><a href="nn_conv2d.html">nn_conv2d</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">20</span>, <span class="fl">5</span><span class="op">)</span></span>
+<span class="r-in">    <span class="va">self</span><span class="op">$</span><span class="va">conv2</span> <span class="op">&lt;-</span> <span class="fu"><a href="nn_conv2d.html">nn_conv2d</a></span><span class="op">(</span><span class="fl">20</span>, <span class="fl">20</span>, <span class="fl">5</span><span class="op">)</span></span>
+<span class="r-in">  <span class="op">}</span>,</span>
+<span class="r-in">  forward <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">input</span><span class="op">)</span> <span class="op">{</span></span>
+<span class="r-in">    <span class="va">input</span> <span class="op">&lt;-</span> <span class="va">self</span><span class="op">$</span><span class="fu">conv1</span><span class="op">(</span><span class="va">input</span><span class="op">)</span></span>
+<span class="r-in">    <span class="va">input</span> <span class="op">&lt;-</span> <span class="fu"><a href="nnf_relu.html">nnf_relu</a></span><span class="op">(</span><span class="va">input</span><span class="op">)</span></span>
+<span class="r-in">    <span class="va">input</span> <span class="op">&lt;-</span> <span class="va">self</span><span class="op">$</span><span class="fu">conv2</span><span class="op">(</span><span class="va">input</span><span class="op">)</span></span>
+<span class="r-in">    <span class="va">input</span> <span class="op">&lt;-</span> <span class="fu"><a href="nnf_relu.html">nnf_relu</a></span><span class="op">(</span><span class="va">input</span><span class="op">)</span></span>
+<span class="r-in">    <span class="va">input</span></span>
+<span class="r-in">  <span class="op">}</span></span>
 <span class="r-in"><span class="op">)</span></span>
-<span class="r-in"></span>
 <span class="r-in"><span class="op">}</span></span>
 </code></pre></div>
     </div>

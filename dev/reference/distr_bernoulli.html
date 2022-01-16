@@ -154,7 +154,7 @@ and <code>0</code> with probability <code>1 - p</code>.</p>
     <h2>Examples</h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="torch_is_installed.html">torch_is_installed</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
 <span class="r-in"><span class="va">m</span> <span class="op">&lt;-</span> <span class="fu">distr_bernoulli</span><span class="op">(</span><span class="fl">0.3</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">m</span><span class="op">$</span><span class="fu">sample</span><span class="op">(</span><span class="op">)</span>  <span class="co"># 30% chance 1; 70% chance 0</span></span>
+<span class="r-in"><span class="va">m</span><span class="op">$</span><span class="fu">sample</span><span class="op">(</span><span class="op">)</span> <span class="co"># 30% chance 1; 70% chance 0</span></span>
 <span class="r-in"><span class="op">}</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> torch_tensor</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  0</span>

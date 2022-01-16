@@ -13,9 +13,9 @@
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="pkgdown.css" rel="stylesheet">
 <script src="pkgdown.js"></script><link href="extra.css" rel="stylesheet">
 <meta property="og:title" content="Tensors and Neural Networks with GPU Acceleration">
-<meta property="og:description" content="Provides functionality to define and train neural networks similar to 
-    PyTorch by Paszke et al (2019) &lt;arXiv:1912.01703&gt; but written entirely in R 
-    using the libtorch library. Also supports low-level tensor operations and 
+<meta property="og:description" content="Provides functionality to define and train neural networks similar to
+    PyTorch by Paszke et al (2019) &lt;arXiv:1912.01703&gt; but written entirely in R
+    using the libtorch library. Also supports low-level tensor operations and
     GPU acceleration.">
 <meta name="robots" content="noindex">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
@@ -168,12 +168,12 @@
 <span class="va">y</span>
 <span class="co">#&gt; torch_tensor</span>
 <span class="co">#&gt; (1,.,.) = </span>
-<span class="co">#&gt;   0.5955  0.3436</span>
-<span class="co">#&gt;   0.4946  0.4344</span>
+<span class="co">#&gt;   0.7658  0.6123</span>
+<span class="co">#&gt;   0.3150  0.4639</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; (2,.,.) = </span>
-<span class="co">#&gt;   0.9322  0.7824</span>
-<span class="co">#&gt;   0.6503  0.7516</span>
+<span class="co">#&gt;   0.0604  0.0290</span>
+<span class="co">#&gt;   0.9553  0.6541</span>
 <span class="co">#&gt; [ CPUDoubleType{2,2,2} ]</span>
 <span class="fu"><a href="https://rdrr.io/r/base/identical.html" class="external-link">identical</a></span><span class="op">(</span><span class="va">x</span>, <span class="fu"><a href="reference/as_array.html">as_array</a></span><span class="op">(</span><span class="va">y</span><span class="op">)</span><span class="op">)</span>
 <span class="co">#&gt; [1] TRUE</span></code></pre></div>
@@ -227,6 +227,12 @@
 </ul>
 </div>
 
+<div class="community">
+<h2 data-toc-skip>Community</h2>
+<ul class="list-unstyled">
+<li><a href="CONTRIBUTING.html">Contributing guide</a></li>
+</ul>
+</div>
 
 <div class="citation">
 <h2 data-toc-skip>Citation</h2>

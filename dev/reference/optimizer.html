@@ -174,10 +174,11 @@ creation and usage.</p>
 <span class="r-in">        <span class="va">group</span> <span class="op">&lt;-</span> <span class="va">self</span><span class="op">$</span><span class="va">param_groups</span><span class="op">[[</span><span class="va">g</span><span class="op">]</span><span class="op">]</span></span>
 <span class="r-in">        <span class="kw">for</span> <span class="op">(</span><span class="va">p</span> <span class="kw">in</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq_along</a></span><span class="op">(</span><span class="va">group</span><span class="op">$</span><span class="va">params</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
 <span class="r-in">          <span class="va">param</span> <span class="op">&lt;-</span> <span class="va">group</span><span class="op">$</span><span class="va">params</span><span class="op">[[</span><span class="va">p</span><span class="op">]</span><span class="op">]</span></span>
-<span class="r-in">          </span>
-<span class="r-in">          <span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/NULL.html" class="external-link">is.null</a></span><span class="op">(</span><span class="va">param</span><span class="op">$</span><span class="va">grad</span><span class="op">)</span> <span class="op">||</span> <span class="fu"><a href="is_undefined_tensor.html">is_undefined_tensor</a></span><span class="op">(</span><span class="va">param</span><span class="op">$</span><span class="va">grad</span><span class="op">)</span><span class="op">)</span></span>
+<span class="r-in"></span>
+<span class="r-in">          <span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/NULL.html" class="external-link">is.null</a></span><span class="op">(</span><span class="va">param</span><span class="op">$</span><span class="va">grad</span><span class="op">)</span> <span class="op">||</span> <span class="fu"><a href="is_undefined_tensor.html">is_undefined_tensor</a></span><span class="op">(</span><span class="va">param</span><span class="op">$</span><span class="va">grad</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
 <span class="r-in">            <span class="kw">next</span></span>
-<span class="r-in">          </span>
+<span class="r-in">          <span class="op">}</span></span>
+<span class="r-in"></span>
 <span class="r-in">          <span class="va">param</span><span class="op">$</span><span class="fu">add_</span><span class="op">(</span><span class="va">param</span><span class="op">$</span><span class="va">grad</span>, alpha <span class="op">=</span> <span class="op">-</span><span class="va">group</span><span class="op">$</span><span class="va">learning_rate</span><span class="op">)</span></span>
 <span class="r-in">        <span class="op">}</span></span>
 <span class="r-in">      <span class="op">}</span></span>
@@ -194,7 +195,6 @@ creation and usage.</p>
 <span class="r-in">  <span class="va">opt</span><span class="op">$</span><span class="fu">step</span><span class="op">(</span><span class="op">)</span></span>
 <span class="r-in"><span class="op">}</span></span>
 <span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/all.equal.html" class="external-link">all.equal</a></span><span class="op">(</span><span class="va">x</span><span class="op">$</span><span class="fu">item</span><span class="op">(</span><span class="op">)</span>, <span class="fl">0</span>, tolerance <span class="op">=</span> <span class="fl">1e-9</span><span class="op">)</span></span>
-<span class="r-in"></span>
 <span class="r-in"><span class="op">}</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] TRUE</span>
 </code></pre></div>

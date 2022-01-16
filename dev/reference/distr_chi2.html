@@ -142,9 +142,8 @@ This is exactly equivalent to <code>distr_gamma(alpha=0.5*df, beta=0.5)</code></
     <h2>Examples</h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="torch_is_installed.html">torch_is_installed</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
 <span class="r-in"><span class="va">m</span> <span class="op">&lt;-</span> <span class="fu">distr_chi2</span><span class="op">(</span><span class="fu"><a href="torch_tensor.html">torch_tensor</a></span><span class="op">(</span><span class="fl">1.0</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">m</span><span class="op">$</span><span class="fu">sample</span><span class="op">(</span><span class="op">)</span>  <span class="co"># Chi2 distributed with shape df=1</span></span>
+<span class="r-in"><span class="va">m</span><span class="op">$</span><span class="fu">sample</span><span class="op">(</span><span class="op">)</span> <span class="co"># Chi2 distributed with shape df=1</span></span>
 <span class="r-in"><span class="fu"><a href="torch_tensor.html">torch_tensor</a></span><span class="op">(</span><span class="fl">0.1046</span><span class="op">)</span></span>
-<span class="r-in"></span>
 <span class="r-in"><span class="op">}</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> torch_tensor</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  0.1046</span>

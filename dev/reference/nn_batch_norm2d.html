@@ -190,10 +190,9 @@ on <code>(N, H, W)</code> slices, it's common terminology to call this Spatial B
 <span class="r-in"><span class="co"># With Learnable Parameters</span></span>
 <span class="r-in"><span class="va">m</span> <span class="op">&lt;-</span> <span class="fu">nn_batch_norm2d</span><span class="op">(</span><span class="fl">100</span><span class="op">)</span></span>
 <span class="r-in"><span class="co"># Without Learnable Parameters</span></span>
-<span class="r-in"><span class="va">m</span> <span class="op">&lt;-</span> <span class="fu">nn_batch_norm2d</span><span class="op">(</span><span class="fl">100</span>, affine<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span></span>
+<span class="r-in"><span class="va">m</span> <span class="op">&lt;-</span> <span class="fu">nn_batch_norm2d</span><span class="op">(</span><span class="fl">100</span>, affine <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
 <span class="r-in"><span class="va">input</span> <span class="op">&lt;-</span> <span class="fu"><a href="torch_randn.html">torch_randn</a></span><span class="op">(</span><span class="fl">20</span>, <span class="fl">100</span>, <span class="fl">35</span>, <span class="fl">45</span><span class="op">)</span></span>
 <span class="r-in"><span class="va">output</span> <span class="op">&lt;-</span> <span class="fu">m</span><span class="op">(</span><span class="va">input</span><span class="op">)</span></span>
-<span class="r-in"></span>
 <span class="r-in"><span class="op">}</span></span>
 </code></pre></div>
     </div>
