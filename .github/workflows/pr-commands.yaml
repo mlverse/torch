@@ -60,9 +60,6 @@ jobs:
         shell: bash
 
       - uses: r-lib/actions/pr-push@v2
-        if: ${{ success() && runner.os == 'Linux' && matrix.r_version == 'release' && startsWith(github.event.comment.body, '/style') &&
-                ( github.event_name == 'pull_request' || github.event.issue.pull_request ) &&
-                ( github.event.comment.author_association == 'MEMBER' || github.event.comment.author_association == 'OWNER' ) }}
         with:
           repo-token: ${{ secrets.GITHUB_TOKEN }}
         continue-on-error: true
