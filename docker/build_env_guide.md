@@ -13,11 +13,11 @@ The directory structure of this tools as follows.
 
 ```bash
 build_env_tools/
-├── cuda-101
+├── cuda-102
 │   ├── Dockerfile
 │   ├── build_env.sh
 │   └── docker-compose.yml
-└── cuda-111
+└── cuda-113
     ├── Dockerfile
     ├── build_env.sh
     └── docker-compose.yml
@@ -33,8 +33,8 @@ git clone https://github.com/mlverse/torch.git
 
 ### 2. Change directory
 Move into `torch/docker/build_env_tools/cuda-xxx` directory.`xxx` is CUDA version which you would like to use.
-* If you would like to use CUDA 11(CUDA 10), you should move into cuda-111(cuda-101) directory.
-* If you will install CUDA 10 in your machine, you must move into cuda-101 directory.
+* If you would like to use CUDA 11, you should move into cuda-113 directory.
+* If you will install CUDA 10 in your machine, you must move into cuda-102 directory.
 
 
 ```bash
