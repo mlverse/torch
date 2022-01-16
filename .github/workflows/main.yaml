@@ -101,7 +101,7 @@ jobs:
     if: ${{ github.ref == 'refs/heads/master' || contains( github.event.pull_request.labels.*.name, 'win-gpu') }}
     steps:
     - name: Set up Cloud SDK
-      uses: google-github-actions/setup-gcloud@master
+      uses: google-github-actions/setup-gcloud@v0
       with:
         project_id: ${{ secrets.GCP_PROJECT_ID }}
         service_account_key: ${{ secrets.GCP_APPLICATION_CREDENTIALS }}
@@ -151,7 +151,7 @@ jobs:
     runs-on: ubuntu-18.04
     steps:
     - name: Set up Cloud SDK
-      uses: google-github-actions/setup-gcloud@master
+      uses: google-github-actions/setup-gcloud@v0
       with:
         project_id: ${{ secrets.GCP_PROJECT_ID }}
         service_account_key: ${{ secrets.GCP_APPLICATION_CREDENTIALS }}
