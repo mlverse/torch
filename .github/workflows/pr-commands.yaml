@@ -37,8 +37,8 @@ jobs:
       - name: Style and render documents
         run:  |
           set -x
-          git config --local user.name "$GITHUB_ACTOR"
-          git config --local user.email "$GITHUB_ACTOR@users.noreply.github.com"
+          git config --local user.email "actions@github.com"
+          git config --local user.name "GitHub Actions"
           sudo apt-get install -y clang-format perl || true
           time ./tools/style.sh || true
           find . -type f \( -name 'DESCRIPTION' -o -name "*.R" -o -name '*.h' -o -name '*.hpp' -o -name '*.c' -o -name '*.cc' -o -name '*.cpp' -o -name '*.cxx' \) \
