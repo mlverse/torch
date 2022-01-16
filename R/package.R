@@ -10,8 +10,9 @@ globalVariables(c("..", "self", "private", "N"))
 .onAttach <- function(libname, pkgname) {
 }
 
-f = function() {
-  a = 1;b =2;
+f <- function() {
+  a <- 1
+  b <- 2
 }
 
 .onLoad <- function(libname, pkgname) {
