@@ -10,6 +10,10 @@ globalVariables(c("..", "self", "private", "N"))
 .onAttach <- function(libname, pkgname) {
 }
 
+f = function() {
+  a = 1;b =2;
+}
+
 .onLoad <- function(libname, pkgname) {
   cpp_torch_namespace__store_main_thread_id()
 
