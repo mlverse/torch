@@ -287,6 +287,11 @@ cpp_parameter_type <- function(argument) {
     declaration <- "XPtrTorchvector_Scalar"
   }
 
+  # FIXME: Stop if argument$dynamic_type is not handled
+  if (!exists("declaration")) {
+    stop(paste(argument$dynamic_type, "is not handled!"))
+  }
+
   declaration
 }
 
@@ -428,6 +433,11 @@ cpp_argument_transform <- function(argument) {
 
   if (argument$dynamic_type == "ArrayRef<Scalar>") {
     result <- glue::glue("{argument$name}.get()")
+  }
+
+  # FIXME: Stop if argument$dynamic_type is not handled
+  if (!exists("result")) {
+    stop(paste(argument$dynamic_type, "is not handled!"))
   }
 
   result
