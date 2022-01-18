@@ -1,16 +1,7 @@
-
-if (!require(fs, quietly = TRUE)) {
-  install.packages("fs")
-}
-
-if (!require(fs))
-  stop("fs was not correctly installed?")
-
 if (dir.exists("lantern")) {
   cat("Building lantern .... \n")
 
-  if (!fs::dir_exists("lantern/build"))
-    fs::dir_create("lantern/build")
+  dir.create("lantern/build", showWarnings = FALSE, recursive = TRUE)
 
   withr::with_dir("lantern/build", {
     system("cmake ..")
