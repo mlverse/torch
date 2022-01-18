@@ -1,5 +1,6 @@
 lantern_sync <- function(sync_lib = FALSE) {
   
+  lib_dest <- "inst/"
   suppressWarnings(dir.create(lib_dest))
   
   if (!all(tools::md5sum(dir("lantern/include/lantern/", full.names = TRUE)) %in%
@@ -8,7 +9,7 @@ lantern_sync <- function(sync_lib = FALSE) {
   }
 
   if (sync_lib) {
-    lib_dest <- "inst/"
+    
     lib_src <- "lantern/build/liblantern"
 
     if (file.exists(paste0(lib_src, ".dylib"))) {
