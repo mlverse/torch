@@ -1,6 +1,5 @@
 lantern_sync <- function(sync_lib = FALSE) {
-  if (!dir.exists("src/lantern")) dir.create("src/lantern")
-
+  
   if (!all(tools::md5sum(dir("lantern/include/lantern/", full.names = TRUE)) %in%
     tools::md5sum(dir("inst/include/lantern/", full.names = TRUE)))) {
     file.copy(dir("lantern/include/lantern/", full.names = TRUE), "inst/include/lantern/", overwrite = TRUE)
