@@ -160,7 +160,7 @@ lantern_install_lib <- function(library_name, library_url,
   # if (length(header_files) > 0) {
   #   # also install the include files.
   #   include_dir <- file.path(system.file("", package = "torch"), "include/")
-  #   if (!dir.exists(include_dir)) dir.create(include_dir, recursive = TRUE)
+  #   dir.create(include_dir, showWarnings = FALSE, recursive = TRUE)
   #   file.copy(header_files, include_dir, recursive = TRUE)
   # }
 }

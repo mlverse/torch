@@ -233,7 +233,7 @@ jobs:
       - uses: r-lib/actions/setup-pandoc@v2
       - name: Install dependencies
         run: |
-          Rscript -e "options(repos=structure(c(CRAN='https://cloud.r-project.org/'))); install.packages(c('remotes', 'rcmdcheck', 'fs'))" -e "remotes::install_deps(dependencies = TRUE)"
+          Rscript -e "options(repos=structure(c(CRAN='https://cloud.r-project.org/'))); install.packages(c('remotes', 'rcmdcheck'))" -e "remotes::install_deps(dependencies = TRUE)"
       - name: Build lantern and get libtorch
         if: contains( github.event.pull_request.labels.*.name, 'lantern')
         run: |
