@@ -1,15 +1,13 @@
 lantern_sync <- function(sync_lib = FALSE) {
-  
   lib_dest <- "inst/"
   dir.create(lib_dest, showWarnings = FALSE, recursive = TRUE)
-  
+
   if (!all(tools::md5sum(dir("lantern/include/lantern/", full.names = TRUE)) %in%
     tools::md5sum(dir("inst/include/lantern/", full.names = TRUE)))) {
     file.copy(dir("lantern/include/lantern/", full.names = TRUE), "inst/include/lantern/", overwrite = TRUE)
   }
 
   if (sync_lib) {
-    
     lib_src <- "lantern/build/liblantern"
 
     if (file.exists(paste0(lib_src, ".dylib"))) {
