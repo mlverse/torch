@@ -1,7 +1,7 @@
 lantern_sync <- function(sync_lib = FALSE) {
   
   lib_dest <- "inst/"
-  suppressWarnings(dir.create(lib_dest))
+  dir.create(lib_dest, showWarnings = FALSE, recursive = TRUE)
   
   if (!all(tools::md5sum(dir("lantern/include/lantern/", full.names = TRUE)) %in%
     tools::md5sum(dir("inst/include/lantern/", full.names = TRUE)))) {
@@ -20,7 +20,7 @@ lantern_sync <- function(sync_lib = FALSE) {
       path <- list.files("lantern/build/Release/", full.names = TRUE)
     }
 
-    suppressWarnings(dir.create("inst/lib"))
+    dir.create("inst/lib", showWarnings = FALSE, recursive = TRUE)
 
     file.copy(
       path,
