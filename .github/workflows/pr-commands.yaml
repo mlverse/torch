@@ -41,7 +41,7 @@ jobs:
           git config --local user.name "GitHub Actions"
           sudo apt-get install -y clang-format perl || true
           time ./tools/style.sh || true
-          find . -type f \( -name 'DESCRIPTION' -o -name "*.R" -o -name '*.h' -o -name '*.hpp' -o -name '*.c' -o -name '*.cc' -o -name '*.cpp' -o -name '*.cxx' \) \
+          find . -type f \( -name 'DESCRIPTION' -o -regex '.*\.\(R\|h\|hpp\|c\|cc\|cpp\|cxx\)' \) \
             -not -path "./build/*" \
             -not -path "./check/*" \
             -not -path "./inst/include/*/*" \
