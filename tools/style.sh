@@ -12,7 +12,7 @@ Rscript -e 'styler::style_pkg(exclude_files = list.files("./R", pattern = "^gen-
 
 
 # Style/format C/C++ code
-find . -type f \( -name '*.h' -o -name '*.hpp' -o -name '*.c' -o -name '*.cc' -o -name '*.cpp' -o -name '*.cxx' \) \
+find . -type f -regex '.*\.\(h\|hpp\|c\|cc\|cpp\|cxx\)' \
   -not -path "./build/*" \
   -not -path "./check/*" \
   -not -path "./inst/include/*/*" \
@@ -37,7 +37,7 @@ git diff --stat
   -not -path "*/lantern.*" \
   -not -path "*/RcppExports.*" \
   -printf '%p\n' -exec perl -pi -e 's/[ \t]*$//' {} \;
-find . -type f \( -name '*.h' -o -name '*.hpp' -o -name '*.c' -o -name '*.cc' -o -name '*.cpp' -o -name '*.cxx' \) \
+find . -type f -regex '.*\.\(h\|hpp\|c\|cc\|cpp\|cxx\)' \
   -not -path "./build/*" \
   -not -path "./check/*" \
   -not -path "./inst/include/*/*" \
