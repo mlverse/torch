@@ -260,7 +260,17 @@ using Device = Box<torch::Device>;
 using Dimname = Box<torch::Dimname>;
 using DimnameList = ArrayBox<torch::Dimname>;
 using IntArrayRef = ArrayBox<std::int64_t>;
-using string_view = Box<c10::string_view>;
+
+class string_view {
+  public:
+    std::shared_ptr<std::string> s_;
+    std::shared_ptr<c10::string_view> s_view_;
+    string_view (const c10::string_view& x) {
+      s_ = std::make_shared<std::string>(x.data(), x.size());
+      s_view_ = std::make_shared<c10::string_view>(*s_);
+    }
+    operator c10::string_view&() { return *s_view_; }
+};
 
 namespace vector {
 using int64_t = ArrayBox<std::int64_t>;
