@@ -42,6 +42,12 @@ void cpp_torch_method_retain_grad_self_Tensor (XPtrTorchTensor self) {
 }
 
 // [[Rcpp::export]]
+XPtrTorchbool cpp_torch_method_retains_grad_self_Tensor (XPtrTorchTensor self) {
+  auto r_out = lantern_Tensor_retains_grad_tensor(self.get());
+return XPtrTorchbool(r_out);
+}
+
+// [[Rcpp::export]]
 XPtrTorchTensor cpp_torch_method__fw_primal_self_Tensor_level_int64_t (XPtrTorchTensor self, XPtrTorchint64_t level) {
   auto r_out = lantern_Tensor__fw_primal_tensor_intt(self.get(), level.get());
 return XPtrTorchTensor(r_out);
@@ -126,8 +132,50 @@ return XPtrTorchTensor(r_out);
 }
 
 // [[Rcpp::export]]
+XPtrTorchTensor cpp_torch_method__conj_self_Tensor (XPtrTorchTensor self) {
+  auto r_out = lantern_Tensor__conj_tensor(self.get());
+return XPtrTorchTensor(r_out);
+}
+
+// [[Rcpp::export]]
 XPtrTorchTensor cpp_torch_method_conj_self_Tensor (XPtrTorchTensor self) {
   auto r_out = lantern_Tensor_conj_tensor(self.get());
+return XPtrTorchTensor(r_out);
+}
+
+// [[Rcpp::export]]
+XPtrTorchTensor cpp_torch_method__conj_physical_self_Tensor (XPtrTorchTensor self) {
+  auto r_out = lantern_Tensor__conj_physical_tensor(self.get());
+return XPtrTorchTensor(r_out);
+}
+
+// [[Rcpp::export]]
+XPtrTorchTensor cpp_torch_method_conj_physical_self_Tensor (XPtrTorchTensor self) {
+  auto r_out = lantern_Tensor_conj_physical_tensor(self.get());
+return XPtrTorchTensor(r_out);
+}
+
+// [[Rcpp::export]]
+XPtrTorchTensor cpp_torch_method_conj_physical__self_Tensor (XPtrTorchTensor self) {
+  auto r_out = lantern_Tensor_conj_physical__tensor(self.get());
+return XPtrTorchTensor(r_out);
+}
+
+// [[Rcpp::export]]
+XPtrTorchTensor cpp_torch_method_resolve_conj_self_Tensor (XPtrTorchTensor self) {
+  auto r_out = lantern_Tensor_resolve_conj_tensor(self.get());
+return XPtrTorchTensor(r_out);
+}
+
+// [[Rcpp::export]]
+XPtrTorchTensor cpp_torch_method_resolve_neg_self_Tensor (XPtrTorchTensor self) {
+  auto r_out = lantern_Tensor_resolve_neg_tensor(self.get());
+return XPtrTorchTensor(r_out);
+}
+
+// [[Rcpp::export]]
+XPtrTorchTensor cpp_torch_method__neg_view_self_Tensor (XPtrTorchTensor self) {
+  auto r_out = lantern_Tensor__neg_view_tensor(self.get());
 return XPtrTorchTensor(r_out);
 }
 
@@ -702,6 +750,18 @@ return XPtrTorchTensor(r_out);
 }
 
 // [[Rcpp::export]]
+XPtrTorchTensor cpp_torch_method_cov_self_Tensor (XPtrTorchTensor self, XPtrTorchint64_t correction, XPtrTorchOptionalTensor fweights, XPtrTorchOptionalTensor aweights) {
+  auto r_out = lantern_Tensor_cov_tensor_intt_tensor_tensor(self.get(), correction.get(), fweights.get(), aweights.get());
+return XPtrTorchTensor(r_out);
+}
+
+// [[Rcpp::export]]
+XPtrTorchTensor cpp_torch_method_corrcoef_self_Tensor (XPtrTorchTensor self) {
+  auto r_out = lantern_Tensor_corrcoef_tensor(self.get());
+return XPtrTorchTensor(r_out);
+}
+
+// [[Rcpp::export]]
 Rcpp::List cpp_torch_method_cummax_self_Tensor_dim_int64_t (XPtrTorchTensor self, XPtrTorchindex_int64_t dim) {
   auto r_out = lantern_Tensor_cummax_tensor_intt(self.get(), dim.get());
 auto wrap = XPtrTorchvector_void(r_out);
@@ -826,14 +886,14 @@ return XPtrTorchTensor(r_out);
 }
 
 // [[Rcpp::export]]
-XPtrTorchTensor cpp_torch_method_div_self_Tensor_other_Tensor_rounding_mode_stdstring (XPtrTorchTensor self, XPtrTorchTensor other, XPtrTorchoptional_string rounding_mode) {
-  auto r_out = lantern_Tensor_div_tensor_tensor_stdstring(self.get(), other.get(), rounding_mode.get());
+XPtrTorchTensor cpp_torch_method_div_self_Tensor_other_Tensor_rounding_mode_c10string_view (XPtrTorchTensor self, XPtrTorchTensor other, XPtrTorchstring rounding_mode) {
+  auto r_out = lantern_Tensor_div_tensor_tensor_cstringview(self.get(), other.get(), rounding_mode.get());
 return XPtrTorchTensor(r_out);
 }
 
 // [[Rcpp::export]]
-XPtrTorchTensor cpp_torch_method_div__self_Tensor_other_Tensor_rounding_mode_stdstring (XPtrTorchTensor self, XPtrTorchTensor other, XPtrTorchoptional_string rounding_mode) {
-  auto r_out = lantern_Tensor_div__tensor_tensor_stdstring(self.get(), other.get(), rounding_mode.get());
+XPtrTorchTensor cpp_torch_method_div__self_Tensor_other_Tensor_rounding_mode_c10string_view (XPtrTorchTensor self, XPtrTorchTensor other, XPtrTorchstring rounding_mode) {
+  auto r_out = lantern_Tensor_div__tensor_tensor_cstringview(self.get(), other.get(), rounding_mode.get());
 return XPtrTorchTensor(r_out);
 }
 
@@ -850,14 +910,14 @@ return XPtrTorchTensor(r_out);
 }
 
 // [[Rcpp::export]]
-XPtrTorchTensor cpp_torch_method_div_self_Tensor_other_Scalar_rounding_mode_stdstring (XPtrTorchTensor self, XPtrTorchScalar other, XPtrTorchoptional_string rounding_mode) {
-  auto r_out = lantern_Tensor_div_tensor_scalar_stdstring(self.get(), other.get(), rounding_mode.get());
+XPtrTorchTensor cpp_torch_method_div_self_Tensor_other_Scalar_rounding_mode_c10string_view (XPtrTorchTensor self, XPtrTorchScalar other, XPtrTorchstring rounding_mode) {
+  auto r_out = lantern_Tensor_div_tensor_scalar_cstringview(self.get(), other.get(), rounding_mode.get());
 return XPtrTorchTensor(r_out);
 }
 
 // [[Rcpp::export]]
-XPtrTorchTensor cpp_torch_method_div__self_Tensor_other_Scalar_rounding_mode_stdstring (XPtrTorchTensor self, XPtrTorchScalar other, XPtrTorchoptional_string rounding_mode) {
-  auto r_out = lantern_Tensor_div__tensor_scalar_stdstring(self.get(), other.get(), rounding_mode.get());
+XPtrTorchTensor cpp_torch_method_div__self_Tensor_other_Scalar_rounding_mode_c10string_view (XPtrTorchTensor self, XPtrTorchScalar other, XPtrTorchstring rounding_mode) {
+  auto r_out = lantern_Tensor_div__tensor_scalar_cstringview(self.get(), other.get(), rounding_mode.get());
 return XPtrTorchTensor(r_out);
 }
 
@@ -886,26 +946,26 @@ return XPtrTorchTensor(r_out);
 }
 
 // [[Rcpp::export]]
-XPtrTorchTensor cpp_torch_method_divide_self_Tensor_other_Tensor_rounding_mode_stdstring (XPtrTorchTensor self, XPtrTorchTensor other, XPtrTorchoptional_string rounding_mode) {
-  auto r_out = lantern_Tensor_divide_tensor_tensor_stdstring(self.get(), other.get(), rounding_mode.get());
+XPtrTorchTensor cpp_torch_method_divide_self_Tensor_other_Tensor_rounding_mode_c10string_view (XPtrTorchTensor self, XPtrTorchTensor other, XPtrTorchstring rounding_mode) {
+  auto r_out = lantern_Tensor_divide_tensor_tensor_cstringview(self.get(), other.get(), rounding_mode.get());
 return XPtrTorchTensor(r_out);
 }
 
 // [[Rcpp::export]]
-XPtrTorchTensor cpp_torch_method_divide__self_Tensor_other_Tensor_rounding_mode_stdstring (XPtrTorchTensor self, XPtrTorchTensor other, XPtrTorchoptional_string rounding_mode) {
-  auto r_out = lantern_Tensor_divide__tensor_tensor_stdstring(self.get(), other.get(), rounding_mode.get());
+XPtrTorchTensor cpp_torch_method_divide__self_Tensor_other_Tensor_rounding_mode_c10string_view (XPtrTorchTensor self, XPtrTorchTensor other, XPtrTorchstring rounding_mode) {
+  auto r_out = lantern_Tensor_divide__tensor_tensor_cstringview(self.get(), other.get(), rounding_mode.get());
 return XPtrTorchTensor(r_out);
 }
 
 // [[Rcpp::export]]
-XPtrTorchTensor cpp_torch_method_divide_self_Tensor_other_Scalar_rounding_mode_stdstring (XPtrTorchTensor self, XPtrTorchScalar other, XPtrTorchoptional_string rounding_mode) {
-  auto r_out = lantern_Tensor_divide_tensor_scalar_stdstring(self.get(), other.get(), rounding_mode.get());
+XPtrTorchTensor cpp_torch_method_divide_self_Tensor_other_Scalar_rounding_mode_c10string_view (XPtrTorchTensor self, XPtrTorchScalar other, XPtrTorchstring rounding_mode) {
+  auto r_out = lantern_Tensor_divide_tensor_scalar_cstringview(self.get(), other.get(), rounding_mode.get());
 return XPtrTorchTensor(r_out);
 }
 
 // [[Rcpp::export]]
-XPtrTorchTensor cpp_torch_method_divide__self_Tensor_other_Scalar_rounding_mode_stdstring (XPtrTorchTensor self, XPtrTorchScalar other, XPtrTorchoptional_string rounding_mode) {
-  auto r_out = lantern_Tensor_divide__tensor_scalar_stdstring(self.get(), other.get(), rounding_mode.get());
+XPtrTorchTensor cpp_torch_method_divide__self_Tensor_other_Scalar_rounding_mode_c10string_view (XPtrTorchTensor self, XPtrTorchScalar other, XPtrTorchstring rounding_mode) {
+  auto r_out = lantern_Tensor_divide__tensor_scalar_cstringview(self.get(), other.get(), rounding_mode.get());
 return XPtrTorchTensor(r_out);
 }
 
@@ -966,6 +1026,12 @@ return XPtrTorchTensor(r_out);
 // [[Rcpp::export]]
 XPtrTorchTensor cpp_torch_method_new_zeros_self_Tensor_size_IntArrayRef (XPtrTorchTensor self, XPtrTorchIntArrayRef size, XPtrTorchTensorOptions options) {
   auto r_out = lantern_Tensor_new_zeros_tensor_intarrayref_tensoroptions(self.get(), size.get(), options.get());
+return XPtrTorchTensor(r_out);
+}
+
+// [[Rcpp::export]]
+XPtrTorchTensor cpp_torch_method_new_ones_self_Tensor_size_IntArrayRef (XPtrTorchTensor self, XPtrTorchIntArrayRef size, XPtrTorchTensorOptions options) {
+  auto r_out = lantern_Tensor_new_ones_tensor_intarrayref_tensoroptions(self.get(), size.get(), options.get());
 return XPtrTorchTensor(r_out);
 }
 
@@ -1246,6 +1312,18 @@ return XPtrTorchbool(r_out);
 }
 
 // [[Rcpp::export]]
+XPtrTorchbool cpp_torch_method_is_conj_self_Tensor (XPtrTorchTensor self) {
+  auto r_out = lantern_Tensor_is_conj_tensor(self.get());
+return XPtrTorchbool(r_out);
+}
+
+// [[Rcpp::export]]
+XPtrTorchbool cpp_torch_method_is_neg_self_Tensor (XPtrTorchTensor self) {
+  auto r_out = lantern_Tensor_is_neg_tensor(self.get());
+return XPtrTorchbool(r_out);
+}
+
+// [[Rcpp::export]]
 XPtrTorchTensor cpp_torch_method_isreal_self_Tensor (XPtrTorchTensor self) {
   auto r_out = lantern_Tensor_isreal_tensor(self.get());
 return XPtrTorchTensor(r_out);
@@ -1266,6 +1344,12 @@ return XPtrTorchbool(r_out);
 // [[Rcpp::export]]
 XPtrTorchbool cpp_torch_method_is_signed_self_Tensor (XPtrTorchTensor self) {
   auto r_out = lantern_Tensor_is_signed_tensor(self.get());
+return XPtrTorchbool(r_out);
+}
+
+// [[Rcpp::export]]
+XPtrTorchbool cpp_torch_method_is_inference_self_Tensor (XPtrTorchTensor self) {
+  auto r_out = lantern_Tensor_is_inference_tensor(self.get());
 return XPtrTorchbool(r_out);
 }
 
@@ -1458,6 +1542,13 @@ return XPtrTorchTensor(r_out);
 }
 
 // [[Rcpp::export]]
+Rcpp::List cpp_torch_method_aminmax_self_Tensor (XPtrTorchTensor self, XPtrTorchoptional_index_int64_t dim, XPtrTorchbool keepdim) {
+  auto r_out = lantern_Tensor_aminmax_tensor_intt_bool(self.get(), dim.get(), keepdim.get());
+auto wrap = XPtrTorchvector_void(r_out);
+return Rcpp::List::create(XPtrTorchTensor(lantern_vector_get(wrap.get(), 0)),XPtrTorchTensor(lantern_vector_get(wrap.get(), 1)));
+}
+
+// [[Rcpp::export]]
 Rcpp::List cpp_torch_method_max_self_Tensor_dim_int64_t (XPtrTorchTensor self, XPtrTorchindex_int64_t dim, XPtrTorchbool keepdim) {
   auto r_out = lantern_Tensor_max_tensor_intt_bool(self.get(), dim.get(), keepdim.get());
 auto wrap = XPtrTorchvector_void(r_out);
@@ -1492,6 +1583,12 @@ return XPtrTorchTensor(r_out);
 // [[Rcpp::export]]
 XPtrTorchTensor cpp_torch_method_mean_self_Tensor_dim_DimnameList (XPtrTorchTensor self, XPtrTorchDimnameList dim, XPtrTorchbool keepdim, XPtrTorchoptional_scalar_type dtype) {
   auto r_out = lantern_Tensor_mean_tensor_dimnamelist_bool_scalartype(self.get(), dim.get(), keepdim.get(), dtype.get());
+return XPtrTorchTensor(r_out);
+}
+
+// [[Rcpp::export]]
+XPtrTorchTensor cpp_torch_method_nanmean_self_Tensor (XPtrTorchTensor self, XPtrTorchIndexIntArrayRef dim, XPtrTorchbool keepdim, XPtrTorchoptional_scalar_type dtype) {
+  auto r_out = lantern_Tensor_nanmean_tensor_intarrayref_bool_scalartype(self.get(), dim.get(), keepdim.get(), dtype.get());
 return XPtrTorchTensor(r_out);
 }
 
@@ -1696,14 +1793,14 @@ return XPtrTorchTensor(r_out);
 }
 
 // [[Rcpp::export]]
-XPtrTorchbool cpp_torch_method_is_pinned_self_Tensor (XPtrTorchTensor self) {
-  auto r_out = lantern_Tensor_is_pinned_tensor(self.get());
+XPtrTorchbool cpp_torch_method_is_pinned_self_Tensor (XPtrTorchTensor self, XPtrTorchDevice device) {
+  auto r_out = lantern_Tensor_is_pinned_tensor_device(self.get(), device.get());
 return XPtrTorchbool(r_out);
 }
 
 // [[Rcpp::export]]
-XPtrTorchTensor cpp_torch_method_pin_memory_self_Tensor (XPtrTorchTensor self) {
-  auto r_out = lantern_Tensor_pin_memory_tensor(self.get());
+XPtrTorchTensor cpp_torch_method_pin_memory_self_Tensor (XPtrTorchTensor self, XPtrTorchDevice device) {
+  auto r_out = lantern_Tensor_pin_memory_tensor_device(self.get(), device.get());
 return XPtrTorchTensor(r_out);
 }
 
@@ -1786,20 +1883,26 @@ return XPtrTorchTensor(r_out);
 }
 
 // [[Rcpp::export]]
-XPtrTorchTensor cpp_torch_method_repeat_interleave_self_Tensor_repeats_Tensor (XPtrTorchTensor self, XPtrTorchTensor repeats, XPtrTorchoptional_index_int64_t dim) {
-  auto r_out = lantern_Tensor_repeat_interleave_tensor_tensor_intt(self.get(), repeats.get(), dim.get());
+XPtrTorchTensor cpp_torch_method_repeat_interleave_self_Tensor_repeats_Tensor (XPtrTorchTensor self, XPtrTorchTensor repeats, XPtrTorchoptional_index_int64_t dim, XPtrTorchoptional_int64_t output_size) {
+  auto r_out = lantern_Tensor_repeat_interleave_tensor_tensor_intt_intt(self.get(), repeats.get(), dim.get(), output_size.get());
 return XPtrTorchTensor(r_out);
 }
 
 // [[Rcpp::export]]
-XPtrTorchTensor cpp_torch_method_repeat_interleave_self_Tensor_repeats_int64_t (XPtrTorchTensor self, XPtrTorchint64_t repeats, XPtrTorchoptional_index_int64_t dim) {
-  auto r_out = lantern_Tensor_repeat_interleave_tensor_intt_intt(self.get(), repeats.get(), dim.get());
+XPtrTorchTensor cpp_torch_method_repeat_interleave_self_Tensor_repeats_int64_t (XPtrTorchTensor self, XPtrTorchint64_t repeats, XPtrTorchoptional_index_int64_t dim, XPtrTorchoptional_int64_t output_size) {
+  auto r_out = lantern_Tensor_repeat_interleave_tensor_intt_intt_intt(self.get(), repeats.get(), dim.get(), output_size.get());
 return XPtrTorchTensor(r_out);
 }
 
 // [[Rcpp::export]]
 XPtrTorchTensor cpp_torch_method_reshape_self_Tensor_shape_IntArrayRef (XPtrTorchTensor self, XPtrTorchIntArrayRef shape) {
   auto r_out = lantern_Tensor_reshape_tensor_intarrayref(self.get(), shape.get());
+return XPtrTorchTensor(r_out);
+}
+
+// [[Rcpp::export]]
+XPtrTorchTensor cpp_torch_method__reshape_alias_self_Tensor_size_IntArrayRef_stride_IntArrayRef (XPtrTorchTensor self, XPtrTorchIntArrayRef size, XPtrTorchIntArrayRef stride) {
+  auto r_out = lantern_Tensor__reshape_alias_tensor_intarrayref_intarrayref(self.get(), size.get(), stride.get());
 return XPtrTorchTensor(r_out);
 }
 
@@ -2923,14 +3026,20 @@ return XPtrTorchTensor(r_out);
 }
 
 // [[Rcpp::export]]
+XPtrTorchTensor cpp_torch_method_scatter_self_Tensor_dim_int64_t_index_Tensor_src_Tensor (XPtrTorchTensor self, XPtrTorchindex_int64_t dim, XPtrTorchIndexTensor index, XPtrTorchTensor src) {
+  auto r_out = lantern_Tensor_scatter_tensor_intt_tensor_tensor(self.get(), dim.get(), index.get(), src.get());
+return XPtrTorchTensor(r_out);
+}
+
+// [[Rcpp::export]]
 XPtrTorchTensor cpp_torch_method_scatter__self_Tensor_dim_int64_t_index_Tensor_src_Tensor (XPtrTorchTensor self, XPtrTorchindex_int64_t dim, XPtrTorchIndexTensor index, XPtrTorchTensor src) {
   auto r_out = lantern_Tensor_scatter__tensor_intt_tensor_tensor(self.get(), dim.get(), index.get(), src.get());
 return XPtrTorchTensor(r_out);
 }
 
 // [[Rcpp::export]]
-XPtrTorchTensor cpp_torch_method_scatter_self_Tensor_dim_int64_t_index_Tensor_src_Tensor (XPtrTorchTensor self, XPtrTorchindex_int64_t dim, XPtrTorchIndexTensor index, XPtrTorchTensor src) {
-  auto r_out = lantern_Tensor_scatter_tensor_intt_tensor_tensor(self.get(), dim.get(), index.get(), src.get());
+XPtrTorchTensor cpp_torch_method_scatter_self_Tensor_dim_int64_t_index_Tensor_value_Scalar (XPtrTorchTensor self, XPtrTorchindex_int64_t dim, XPtrTorchIndexTensor index, XPtrTorchScalar value) {
+  auto r_out = lantern_Tensor_scatter_tensor_intt_tensor_scalar(self.get(), dim.get(), index.get(), value.get());
 return XPtrTorchTensor(r_out);
 }
 
@@ -2941,8 +3050,26 @@ return XPtrTorchTensor(r_out);
 }
 
 // [[Rcpp::export]]
-XPtrTorchTensor cpp_torch_method_scatter_self_Tensor_dim_int64_t_index_Tensor_value_Scalar (XPtrTorchTensor self, XPtrTorchindex_int64_t dim, XPtrTorchIndexTensor index, XPtrTorchScalar value) {
-  auto r_out = lantern_Tensor_scatter_tensor_intt_tensor_scalar(self.get(), dim.get(), index.get(), value.get());
+XPtrTorchTensor cpp_torch_method_scatter_self_Tensor_dim_int64_t_index_Tensor_src_Tensor_reduce_c10string_view (XPtrTorchTensor self, XPtrTorchindex_int64_t dim, XPtrTorchIndexTensor index, XPtrTorchTensor src, XPtrTorchstring reduce) {
+  auto r_out = lantern_Tensor_scatter_tensor_intt_tensor_tensor_cstringview(self.get(), dim.get(), index.get(), src.get(), reduce.get());
+return XPtrTorchTensor(r_out);
+}
+
+// [[Rcpp::export]]
+XPtrTorchTensor cpp_torch_method_scatter__self_Tensor_dim_int64_t_index_Tensor_src_Tensor_reduce_c10string_view (XPtrTorchTensor self, XPtrTorchindex_int64_t dim, XPtrTorchIndexTensor index, XPtrTorchTensor src, XPtrTorchstring reduce) {
+  auto r_out = lantern_Tensor_scatter__tensor_intt_tensor_tensor_cstringview(self.get(), dim.get(), index.get(), src.get(), reduce.get());
+return XPtrTorchTensor(r_out);
+}
+
+// [[Rcpp::export]]
+XPtrTorchTensor cpp_torch_method_scatter_self_Tensor_dim_int64_t_index_Tensor_value_Scalar_reduce_c10string_view (XPtrTorchTensor self, XPtrTorchindex_int64_t dim, XPtrTorchIndexTensor index, XPtrTorchScalar value, XPtrTorchstring reduce) {
+  auto r_out = lantern_Tensor_scatter_tensor_intt_tensor_scalar_cstringview(self.get(), dim.get(), index.get(), value.get(), reduce.get());
+return XPtrTorchTensor(r_out);
+}
+
+// [[Rcpp::export]]
+XPtrTorchTensor cpp_torch_method_scatter__self_Tensor_dim_int64_t_index_Tensor_value_Scalar_reduce_c10string_view (XPtrTorchTensor self, XPtrTorchindex_int64_t dim, XPtrTorchIndexTensor index, XPtrTorchScalar value, XPtrTorchstring reduce) {
+  auto r_out = lantern_Tensor_scatter__tensor_intt_tensor_scalar_cstringview(self.get(), dim.get(), index.get(), value.get(), reduce.get());
 return XPtrTorchTensor(r_out);
 }
 
@@ -2959,26 +3086,14 @@ return XPtrTorchTensor(r_out);
 }
 
 // [[Rcpp::export]]
-XPtrTorchTensor cpp_torch_method_scatter__self_Tensor_dim_int64_t_index_Tensor_src_Tensor_reduce_stdstring (XPtrTorchTensor self, XPtrTorchindex_int64_t dim, XPtrTorchIndexTensor index, XPtrTorchTensor src, XPtrTorchstring reduce) {
-  auto r_out = lantern_Tensor_scatter__tensor_intt_tensor_tensor_stdstring(self.get(), dim.get(), index.get(), src.get(), reduce.get());
-return XPtrTorchTensor(r_out);
-}
-
-// [[Rcpp::export]]
-XPtrTorchTensor cpp_torch_method_scatter__self_Tensor_dim_int64_t_index_Tensor_value_Scalar_reduce_stdstring (XPtrTorchTensor self, XPtrTorchindex_int64_t dim, XPtrTorchIndexTensor index, XPtrTorchScalar value, XPtrTorchstring reduce) {
-  auto r_out = lantern_Tensor_scatter__tensor_intt_tensor_scalar_stdstring(self.get(), dim.get(), index.get(), value.get(), reduce.get());
+XPtrTorchTensor cpp_torch_method_scatter_add_self_Tensor_dim_int64_t_index_Tensor_src_Tensor (XPtrTorchTensor self, XPtrTorchindex_int64_t dim, XPtrTorchIndexTensor index, XPtrTorchTensor src) {
+  auto r_out = lantern_Tensor_scatter_add_tensor_intt_tensor_tensor(self.get(), dim.get(), index.get(), src.get());
 return XPtrTorchTensor(r_out);
 }
 
 // [[Rcpp::export]]
 XPtrTorchTensor cpp_torch_method_scatter_add__self_Tensor_dim_int64_t_index_Tensor_src_Tensor (XPtrTorchTensor self, XPtrTorchindex_int64_t dim, XPtrTorchIndexTensor index, XPtrTorchTensor src) {
   auto r_out = lantern_Tensor_scatter_add__tensor_intt_tensor_tensor(self.get(), dim.get(), index.get(), src.get());
-return XPtrTorchTensor(r_out);
-}
-
-// [[Rcpp::export]]
-XPtrTorchTensor cpp_torch_method_scatter_add_self_Tensor_dim_int64_t_index_Tensor_src_Tensor (XPtrTorchTensor self, XPtrTorchindex_int64_t dim, XPtrTorchIndexTensor index, XPtrTorchTensor src) {
-  auto r_out = lantern_Tensor_scatter_add_tensor_intt_tensor_tensor(self.get(), dim.get(), index.get(), src.get());
 return XPtrTorchTensor(r_out);
 }
 
@@ -3169,6 +3284,30 @@ return XPtrTorchTensor(r_out);
 }
 
 // [[Rcpp::export]]
+XPtrTorchTensor cpp_torch_method_bitwise_left_shift_self_Tensor_other_Tensor (XPtrTorchTensor self, XPtrTorchTensor other) {
+  auto r_out = lantern_Tensor_bitwise_left_shift_tensor_tensor(self.get(), other.get());
+return XPtrTorchTensor(r_out);
+}
+
+// [[Rcpp::export]]
+XPtrTorchTensor cpp_torch_method_bitwise_left_shift__self_Tensor_other_Tensor (XPtrTorchTensor self, XPtrTorchTensor other) {
+  auto r_out = lantern_Tensor_bitwise_left_shift__tensor_tensor(self.get(), other.get());
+return XPtrTorchTensor(r_out);
+}
+
+// [[Rcpp::export]]
+XPtrTorchTensor cpp_torch_method_bitwise_left_shift_self_Tensor_other_Scalar (XPtrTorchTensor self, XPtrTorchScalar other) {
+  auto r_out = lantern_Tensor_bitwise_left_shift_tensor_scalar(self.get(), other.get());
+return XPtrTorchTensor(r_out);
+}
+
+// [[Rcpp::export]]
+XPtrTorchTensor cpp_torch_method_bitwise_left_shift__self_Tensor_other_Scalar (XPtrTorchTensor self, XPtrTorchScalar other) {
+  auto r_out = lantern_Tensor_bitwise_left_shift__tensor_scalar(self.get(), other.get());
+return XPtrTorchTensor(r_out);
+}
+
+// [[Rcpp::export]]
 XPtrTorchTensor cpp_torch_method___rshift___self_Tensor_other_Scalar (XPtrTorchTensor self, XPtrTorchScalar other) {
   auto r_out = lantern_Tensor___rshift___tensor_scalar(self.get(), other.get());
 return XPtrTorchTensor(r_out);
@@ -3193,6 +3332,30 @@ return XPtrTorchTensor(r_out);
 }
 
 // [[Rcpp::export]]
+XPtrTorchTensor cpp_torch_method_bitwise_right_shift_self_Tensor_other_Tensor (XPtrTorchTensor self, XPtrTorchTensor other) {
+  auto r_out = lantern_Tensor_bitwise_right_shift_tensor_tensor(self.get(), other.get());
+return XPtrTorchTensor(r_out);
+}
+
+// [[Rcpp::export]]
+XPtrTorchTensor cpp_torch_method_bitwise_right_shift__self_Tensor_other_Tensor (XPtrTorchTensor self, XPtrTorchTensor other) {
+  auto r_out = lantern_Tensor_bitwise_right_shift__tensor_tensor(self.get(), other.get());
+return XPtrTorchTensor(r_out);
+}
+
+// [[Rcpp::export]]
+XPtrTorchTensor cpp_torch_method_bitwise_right_shift_self_Tensor_other_Scalar (XPtrTorchTensor self, XPtrTorchScalar other) {
+  auto r_out = lantern_Tensor_bitwise_right_shift_tensor_scalar(self.get(), other.get());
+return XPtrTorchTensor(r_out);
+}
+
+// [[Rcpp::export]]
+XPtrTorchTensor cpp_torch_method_bitwise_right_shift__self_Tensor_other_Scalar (XPtrTorchTensor self, XPtrTorchScalar other) {
+  auto r_out = lantern_Tensor_bitwise_right_shift__tensor_scalar(self.get(), other.get());
+return XPtrTorchTensor(r_out);
+}
+
+// [[Rcpp::export]]
 XPtrTorchTensor cpp_torch_method_tril__self_Tensor (XPtrTorchTensor self, XPtrTorchint64_t diagonal) {
   auto r_out = lantern_Tensor_tril__tensor_intt(self.get(), diagonal.get());
 return XPtrTorchTensor(r_out);
@@ -3211,12 +3374,6 @@ return XPtrTorchTensor(r_out);
 }
 
 // [[Rcpp::export]]
-XPtrTorchTensor cpp_torch_method_renorm__self_Tensor_p_Scalar_dim_int64_t_maxnorm_Scalar (XPtrTorchTensor self, XPtrTorchScalar p, XPtrTorchindex_int64_t dim, XPtrTorchScalar maxnorm) {
-  auto r_out = lantern_Tensor_renorm__tensor_scalar_intt_scalar(self.get(), p.get(), dim.get(), maxnorm.get());
-return XPtrTorchTensor(r_out);
-}
-
-// [[Rcpp::export]]
 XPtrTorchTensor cpp_torch_method_lerp__self_Tensor_end_Tensor_weight_Scalar (XPtrTorchTensor self, XPtrTorchTensor end, XPtrTorchScalar weight) {
   auto r_out = lantern_Tensor_lerp__tensor_tensor_scalar(self.get(), end.get(), weight.get());
 return XPtrTorchTensor(r_out);
@@ -3229,30 +3386,6 @@ return XPtrTorchTensor(r_out);
 }
 
 // [[Rcpp::export]]
-XPtrTorchTensor cpp_torch_method_fmod__self_Tensor_other_Scalar (XPtrTorchTensor self, XPtrTorchScalar other) {
-  auto r_out = lantern_Tensor_fmod__tensor_scalar(self.get(), other.get());
-return XPtrTorchTensor(r_out);
-}
-
-// [[Rcpp::export]]
-XPtrTorchTensor cpp_torch_method_fmod__self_Tensor_other_Tensor (XPtrTorchTensor self, XPtrTorchTensor other) {
-  auto r_out = lantern_Tensor_fmod__tensor_tensor(self.get(), other.get());
-return XPtrTorchTensor(r_out);
-}
-
-// [[Rcpp::export]]
-XPtrTorchTensor cpp_torch_method_remainder__self_Tensor_other_Scalar (XPtrTorchTensor self, XPtrTorchScalar other) {
-  auto r_out = lantern_Tensor_remainder__tensor_scalar(self.get(), other.get());
-return XPtrTorchTensor(r_out);
-}
-
-// [[Rcpp::export]]
-XPtrTorchTensor cpp_torch_method_remainder__self_Tensor_other_Tensor (XPtrTorchTensor self, XPtrTorchTensor other) {
-  auto r_out = lantern_Tensor_remainder__tensor_tensor(self.get(), other.get());
-return XPtrTorchTensor(r_out);
-}
-
-// [[Rcpp::export]]
 XPtrTorchTensor cpp_torch_method_addbmm__self_Tensor_batch1_Tensor_batch2_Tensor (XPtrTorchTensor self, XPtrTorchTensor batch1, XPtrTorchTensor batch2, XPtrTorchScalar beta, XPtrTorchScalar alpha) {
   auto r_out = lantern_Tensor_addbmm__tensor_tensor_tensor_scalar_scalar(self.get(), batch1.get(), batch2.get(), beta.get(), alpha.get());
 return XPtrTorchTensor(r_out);
@@ -3261,12 +3394,6 @@ return XPtrTorchTensor(r_out);
 // [[Rcpp::export]]
 XPtrTorchTensor cpp_torch_method_addbmm_self_Tensor_batch1_Tensor_batch2_Tensor (XPtrTorchTensor self, XPtrTorchTensor batch1, XPtrTorchTensor batch2, XPtrTorchScalar beta, XPtrTorchScalar alpha) {
   auto r_out = lantern_Tensor_addbmm_tensor_tensor_tensor_scalar_scalar(self.get(), batch1.get(), batch2.get(), beta.get(), alpha.get());
-return XPtrTorchTensor(r_out);
-}
-
-// [[Rcpp::export]]
-XPtrTorchTensor cpp_torch_method_addcdiv__self_Tensor_tensor1_Tensor_tensor2_Tensor (XPtrTorchTensor self, XPtrTorchTensor tensor1, XPtrTorchTensor tensor2, XPtrTorchScalar value) {
-  auto r_out = lantern_Tensor_addcdiv__tensor_tensor_tensor_scalar(self.get(), tensor1.get(), tensor2.get(), value.get());
 return XPtrTorchTensor(r_out);
 }
 
@@ -3673,6 +3800,12 @@ return XPtrTorchTensor(r_out);
 }
 
 // [[Rcpp::export]]
+XPtrTorchTensor cpp_torch_method_addcdiv__self_Tensor_tensor1_Tensor_tensor2_Tensor (XPtrTorchTensor self, XPtrTorchTensor tensor1, XPtrTorchTensor tensor2, XPtrTorchScalar value) {
+  auto r_out = lantern_Tensor_addcdiv__tensor_tensor_tensor_scalar(self.get(), tensor1.get(), tensor2.get(), value.get());
+return XPtrTorchTensor(r_out);
+}
+
+// [[Rcpp::export]]
 Rcpp::List cpp_torch_method_lstsq_self_Tensor_A_Tensor (XPtrTorchTensor self, XPtrTorchTensor A) {
   auto r_out = lantern_Tensor_lstsq_tensor_tensor(self.get(), A.get());
 auto wrap = XPtrTorchvector_void(r_out);
@@ -3897,14 +4030,40 @@ return XPtrTorchTensor(r_out);
 }
 
 // [[Rcpp::export]]
+Rcpp::List cpp_torch_method_histogram_self_Tensor_bins_Tensor (XPtrTorchTensor self, XPtrTorchTensor bins, XPtrTorchOptionalTensor weight, XPtrTorchbool density) {
+  auto r_out = lantern_Tensor_histogram_tensor_tensor_tensor_bool(self.get(), bins.get(), weight.get(), density.get());
+auto wrap = XPtrTorchvector_void(r_out);
+return Rcpp::List::create(XPtrTorchTensor(lantern_vector_get(wrap.get(), 0)),XPtrTorchTensor(lantern_vector_get(wrap.get(), 1)));
+}
+
+// [[Rcpp::export]]
+Rcpp::List cpp_torch_method_histogram_self_Tensor_bins_int64_t (XPtrTorchTensor self, XPtrTorchint64_t bins, XPtrTorchOptionalDoubleArrayRef range, XPtrTorchOptionalTensor weight, XPtrTorchbool density) {
+  auto r_out = lantern_Tensor_histogram_tensor_intt_arrayrefdouble_tensor_bool(self.get(), bins.get(), range.get(), weight.get(), density.get());
+auto wrap = XPtrTorchvector_void(r_out);
+return Rcpp::List::create(XPtrTorchTensor(lantern_vector_get(wrap.get(), 0)),XPtrTorchTensor(lantern_vector_get(wrap.get(), 1)));
+}
+
+// [[Rcpp::export]]
 XPtrTorchTensor cpp_torch_method_fmod_self_Tensor_other_Scalar (XPtrTorchTensor self, XPtrTorchScalar other) {
   auto r_out = lantern_Tensor_fmod_tensor_scalar(self.get(), other.get());
 return XPtrTorchTensor(r_out);
 }
 
 // [[Rcpp::export]]
+XPtrTorchTensor cpp_torch_method_fmod__self_Tensor_other_Scalar (XPtrTorchTensor self, XPtrTorchScalar other) {
+  auto r_out = lantern_Tensor_fmod__tensor_scalar(self.get(), other.get());
+return XPtrTorchTensor(r_out);
+}
+
+// [[Rcpp::export]]
 XPtrTorchTensor cpp_torch_method_fmod_self_Tensor_other_Tensor (XPtrTorchTensor self, XPtrTorchTensor other) {
   auto r_out = lantern_Tensor_fmod_tensor_tensor(self.get(), other.get());
+return XPtrTorchTensor(r_out);
+}
+
+// [[Rcpp::export]]
+XPtrTorchTensor cpp_torch_method_fmod__self_Tensor_other_Tensor (XPtrTorchTensor self, XPtrTorchTensor other) {
+  auto r_out = lantern_Tensor_fmod__tensor_tensor(self.get(), other.get());
 return XPtrTorchTensor(r_out);
 }
 
@@ -3963,8 +4122,20 @@ return XPtrTorchTensor(r_out);
 }
 
 // [[Rcpp::export]]
+XPtrTorchTensor cpp_torch_method_remainder__self_Tensor_other_Scalar (XPtrTorchTensor self, XPtrTorchScalar other) {
+  auto r_out = lantern_Tensor_remainder__tensor_scalar(self.get(), other.get());
+return XPtrTorchTensor(r_out);
+}
+
+// [[Rcpp::export]]
 XPtrTorchTensor cpp_torch_method_remainder_self_Tensor_other_Tensor (XPtrTorchTensor self, XPtrTorchTensor other) {
   auto r_out = lantern_Tensor_remainder_tensor_tensor(self.get(), other.get());
+return XPtrTorchTensor(r_out);
+}
+
+// [[Rcpp::export]]
+XPtrTorchTensor cpp_torch_method_remainder__self_Tensor_other_Tensor (XPtrTorchTensor self, XPtrTorchTensor other) {
+  auto r_out = lantern_Tensor_remainder__tensor_tensor(self.get(), other.get());
 return XPtrTorchTensor(r_out);
 }
 
@@ -4041,26 +4212,26 @@ return XPtrTorchTensor(r_out);
 }
 
 // [[Rcpp::export]]
-XPtrTorchTensor cpp_torch_method_quantile_self_Tensor_q_double_dim_int64_t_keepdim_bool_interpolation_stdstring (XPtrTorchTensor self, XPtrTorchdouble q, XPtrTorchoptional_index_int64_t dim, XPtrTorchbool keepdim, XPtrTorchstring interpolation) {
-  auto r_out = lantern_Tensor_quantile_tensor_double_intt_bool_stdstring(self.get(), q.get(), dim.get(), keepdim.get(), interpolation.get());
+XPtrTorchTensor cpp_torch_method_quantile_self_Tensor_q_double_dim_int64_t_keepdim_bool_interpolation_c10string_view (XPtrTorchTensor self, XPtrTorchdouble q, XPtrTorchoptional_index_int64_t dim, XPtrTorchbool keepdim, XPtrTorchstring interpolation) {
+  auto r_out = lantern_Tensor_quantile_tensor_double_intt_bool_cstringview(self.get(), q.get(), dim.get(), keepdim.get(), interpolation.get());
 return XPtrTorchTensor(r_out);
 }
 
 // [[Rcpp::export]]
-XPtrTorchTensor cpp_torch_method_quantile_self_Tensor_q_Tensor_dim_int64_t_keepdim_bool_interpolation_stdstring (XPtrTorchTensor self, XPtrTorchTensor q, XPtrTorchoptional_index_int64_t dim, XPtrTorchbool keepdim, XPtrTorchstring interpolation) {
-  auto r_out = lantern_Tensor_quantile_tensor_tensor_intt_bool_stdstring(self.get(), q.get(), dim.get(), keepdim.get(), interpolation.get());
+XPtrTorchTensor cpp_torch_method_quantile_self_Tensor_q_Tensor_dim_int64_t_keepdim_bool_interpolation_c10string_view (XPtrTorchTensor self, XPtrTorchTensor q, XPtrTorchoptional_index_int64_t dim, XPtrTorchbool keepdim, XPtrTorchstring interpolation) {
+  auto r_out = lantern_Tensor_quantile_tensor_tensor_intt_bool_cstringview(self.get(), q.get(), dim.get(), keepdim.get(), interpolation.get());
 return XPtrTorchTensor(r_out);
 }
 
 // [[Rcpp::export]]
-XPtrTorchTensor cpp_torch_method_nanquantile_self_Tensor_q_double_dim_int64_t_keepdim_bool_interpolation_stdstring (XPtrTorchTensor self, XPtrTorchdouble q, XPtrTorchoptional_index_int64_t dim, XPtrTorchbool keepdim, XPtrTorchstring interpolation) {
-  auto r_out = lantern_Tensor_nanquantile_tensor_double_intt_bool_stdstring(self.get(), q.get(), dim.get(), keepdim.get(), interpolation.get());
+XPtrTorchTensor cpp_torch_method_nanquantile_self_Tensor_q_double_dim_int64_t_keepdim_bool_interpolation_c10string_view (XPtrTorchTensor self, XPtrTorchdouble q, XPtrTorchoptional_index_int64_t dim, XPtrTorchbool keepdim, XPtrTorchstring interpolation) {
+  auto r_out = lantern_Tensor_nanquantile_tensor_double_intt_bool_cstringview(self.get(), q.get(), dim.get(), keepdim.get(), interpolation.get());
 return XPtrTorchTensor(r_out);
 }
 
 // [[Rcpp::export]]
-XPtrTorchTensor cpp_torch_method_nanquantile_self_Tensor_q_Tensor_dim_int64_t_keepdim_bool_interpolation_stdstring (XPtrTorchTensor self, XPtrTorchTensor q, XPtrTorchoptional_index_int64_t dim, XPtrTorchbool keepdim, XPtrTorchstring interpolation) {
-  auto r_out = lantern_Tensor_nanquantile_tensor_tensor_intt_bool_stdstring(self.get(), q.get(), dim.get(), keepdim.get(), interpolation.get());
+XPtrTorchTensor cpp_torch_method_nanquantile_self_Tensor_q_Tensor_dim_int64_t_keepdim_bool_interpolation_c10string_view (XPtrTorchTensor self, XPtrTorchTensor q, XPtrTorchoptional_index_int64_t dim, XPtrTorchbool keepdim, XPtrTorchstring interpolation) {
+  auto r_out = lantern_Tensor_nanquantile_tensor_tensor_intt_bool_cstringview(self.get(), q.get(), dim.get(), keepdim.get(), interpolation.get());
 return XPtrTorchTensor(r_out);
 }
 
@@ -4132,6 +4303,12 @@ return XPtrTorchTensor(r_out);
 // [[Rcpp::export]]
 XPtrTorchTensor cpp_torch_method_renorm_self_Tensor_p_Scalar_dim_int64_t_maxnorm_Scalar (XPtrTorchTensor self, XPtrTorchScalar p, XPtrTorchindex_int64_t dim, XPtrTorchScalar maxnorm) {
   auto r_out = lantern_Tensor_renorm_tensor_scalar_intt_scalar(self.get(), p.get(), dim.get(), maxnorm.get());
+return XPtrTorchTensor(r_out);
+}
+
+// [[Rcpp::export]]
+XPtrTorchTensor cpp_torch_method_renorm__self_Tensor_p_Scalar_dim_int64_t_maxnorm_Scalar (XPtrTorchTensor self, XPtrTorchScalar p, XPtrTorchindex_int64_t dim, XPtrTorchScalar maxnorm) {
+  auto r_out = lantern_Tensor_renorm__tensor_scalar_intt_scalar(self.get(), p.get(), dim.get(), maxnorm.get());
 return XPtrTorchTensor(r_out);
 }
 
@@ -4554,20 +4731,56 @@ return XPtrTorchTensor(r_out);
 }
 
 // [[Rcpp::export]]
+XPtrTorchTensor cpp_torch_namespace__conj_self_Tensor (XPtrTorchTensor self) {
+  auto r_out = lantern__conj_tensor(self.get());
+return XPtrTorchTensor(r_out);
+}
+
+// [[Rcpp::export]]
 XPtrTorchTensor cpp_torch_namespace_conj_self_Tensor (XPtrTorchTensor self) {
   auto r_out = lantern_conj_tensor(self.get());
 return XPtrTorchTensor(r_out);
 }
 
 // [[Rcpp::export]]
-XPtrTorchTensor cpp_torch_namespace_conj_out_out_Tensor_self_Tensor (XPtrTorchTensor out, XPtrTorchTensor self) {
-  auto r_out = lantern_conj_out_tensor_tensor(out.get(), self.get());
+XPtrTorchTensor cpp_torch_namespace__conj_physical_self_Tensor (XPtrTorchTensor self) {
+  auto r_out = lantern__conj_physical_tensor(self.get());
 return XPtrTorchTensor(r_out);
 }
 
 // [[Rcpp::export]]
-XPtrTorchTensor cpp_torch_namespace__conj_self_Tensor (XPtrTorchTensor self) {
-  auto r_out = lantern__conj_tensor(self.get());
+XPtrTorchTensor cpp_torch_namespace_conj_physical_self_Tensor (XPtrTorchTensor self) {
+  auto r_out = lantern_conj_physical_tensor(self.get());
+return XPtrTorchTensor(r_out);
+}
+
+// [[Rcpp::export]]
+XPtrTorchTensor cpp_torch_namespace_conj_physical_out_out_Tensor_self_Tensor (XPtrTorchTensor out, XPtrTorchTensor self) {
+  auto r_out = lantern_conj_physical_out_tensor_tensor(out.get(), self.get());
+return XPtrTorchTensor(r_out);
+}
+
+// [[Rcpp::export]]
+XPtrTorchTensor cpp_torch_namespace_conj_physical__self_Tensor (XPtrTorchTensor self) {
+  auto r_out = lantern_conj_physical__tensor(self.get());
+return XPtrTorchTensor(r_out);
+}
+
+// [[Rcpp::export]]
+XPtrTorchTensor cpp_torch_namespace_resolve_conj_self_Tensor (XPtrTorchTensor self) {
+  auto r_out = lantern_resolve_conj_tensor(self.get());
+return XPtrTorchTensor(r_out);
+}
+
+// [[Rcpp::export]]
+XPtrTorchTensor cpp_torch_namespace_resolve_neg_self_Tensor (XPtrTorchTensor self) {
+  auto r_out = lantern_resolve_neg_tensor(self.get());
+return XPtrTorchTensor(r_out);
+}
+
+// [[Rcpp::export]]
+XPtrTorchTensor cpp_torch_namespace__neg_view_self_Tensor (XPtrTorchTensor self) {
+  auto r_out = lantern__neg_view_tensor(self.get());
 return XPtrTorchTensor(r_out);
 }
 
@@ -4653,6 +4866,18 @@ return XPtrTorchTensor(r_out);
 // [[Rcpp::export]]
 XPtrTorchTensor cpp_torch_namespace__add_relu_out_out_Tensor_self_Tensor_other_Tensor (XPtrTorchTensor out, XPtrTorchTensor self, XPtrTorchTensor other, XPtrTorchScalar alpha) {
   auto r_out = lantern__add_relu_out_tensor_tensor_tensor_scalar(out.get(), self.get(), other.get(), alpha.get());
+return XPtrTorchTensor(r_out);
+}
+
+// [[Rcpp::export]]
+XPtrTorchTensor cpp_torch_namespace__add_relu_self_Tensor_other_Scalar (XPtrTorchTensor self, XPtrTorchScalar other, XPtrTorchScalar alpha) {
+  auto r_out = lantern__add_relu_tensor_scalar_scalar(self.get(), other.get(), alpha.get());
+return XPtrTorchTensor(r_out);
+}
+
+// [[Rcpp::export]]
+XPtrTorchTensor cpp_torch_namespace__add_relu__self_Tensor_other_Scalar (XPtrTorchTensor self, XPtrTorchScalar other, XPtrTorchScalar alpha) {
+  auto r_out = lantern__add_relu__tensor_scalar_scalar(self.get(), other.get(), alpha.get());
 return XPtrTorchTensor(r_out);
 }
 
@@ -5271,20 +5496,8 @@ return XPtrTorchTensor(r_out);
 }
 
 // [[Rcpp::export]]
-XPtrTorchTensor cpp_torch_namespace__bmm_self_Tensor_mat2_Tensor (XPtrTorchTensor self, XPtrTorchTensor mat2, XPtrTorchbool deterministic) {
-  auto r_out = lantern__bmm_tensor_tensor_bool(self.get(), mat2.get(), deterministic.get());
-return XPtrTorchTensor(r_out);
-}
-
-// [[Rcpp::export]]
 XPtrTorchTensor cpp_torch_namespace_bmm_out_out_Tensor_self_Tensor_mat2_Tensor (XPtrTorchTensor out, XPtrTorchTensor self, XPtrTorchTensor mat2) {
   auto r_out = lantern_bmm_out_tensor_tensor_tensor(out.get(), self.get(), mat2.get());
-return XPtrTorchTensor(r_out);
-}
-
-// [[Rcpp::export]]
-XPtrTorchTensor cpp_torch_namespace__bmm_out_out_Tensor_self_Tensor_mat2_Tensor (XPtrTorchTensor out, XPtrTorchTensor self, XPtrTorchTensor mat2, XPtrTorchbool deterministic) {
-  auto r_out = lantern__bmm_out_tensor_tensor_tensor_bool(out.get(), self.get(), mat2.get(), deterministic.get());
 return XPtrTorchTensor(r_out);
 }
 
@@ -5321,6 +5534,30 @@ return XPtrTorchTensor(r_out);
 // [[Rcpp::export]]
 XPtrTorchTensor cpp_torch_namespace_cat_out_out_Tensor_tensors_TensorList_dim_Dimname (XPtrTorchTensor out, XPtrTorchTensorList tensors, XPtrTorchDimname dim) {
   auto r_out = lantern_cat_out_tensor_tensorlist_dimname(out.get(), tensors.get(), dim.get());
+return XPtrTorchTensor(r_out);
+}
+
+// [[Rcpp::export]]
+XPtrTorchTensor cpp_torch_namespace_concat_tensors_TensorList_dim_int64_t (XPtrTorchTensorList tensors, XPtrTorchindex_int64_t dim) {
+  auto r_out = lantern_concat_tensorlist_intt(tensors.get(), dim.get());
+return XPtrTorchTensor(r_out);
+}
+
+// [[Rcpp::export]]
+XPtrTorchTensor cpp_torch_namespace_concat_out_out_Tensor_tensors_TensorList_dim_int64_t (XPtrTorchTensor out, XPtrTorchTensorList tensors, XPtrTorchindex_int64_t dim) {
+  auto r_out = lantern_concat_out_tensor_tensorlist_intt(out.get(), tensors.get(), dim.get());
+return XPtrTorchTensor(r_out);
+}
+
+// [[Rcpp::export]]
+XPtrTorchTensor cpp_torch_namespace_concat_tensors_TensorList_dim_Dimname (XPtrTorchTensorList tensors, XPtrTorchDimname dim) {
+  auto r_out = lantern_concat_tensorlist_dimname(tensors.get(), dim.get());
+return XPtrTorchTensor(r_out);
+}
+
+// [[Rcpp::export]]
+XPtrTorchTensor cpp_torch_namespace_concat_out_out_Tensor_tensors_TensorList_dim_Dimname (XPtrTorchTensor out, XPtrTorchTensorList tensors, XPtrTorchDimname dim) {
+  auto r_out = lantern_concat_out_tensor_tensorlist_dimname(out.get(), tensors.get(), dim.get());
 return XPtrTorchTensor(r_out);
 }
 
@@ -5602,8 +5839,8 @@ return XPtrTorchTensor(r_out);
 }
 
 // [[Rcpp::export]]
-XPtrTorchTensor cpp_torch_namespace__convolution_mode_input_Tensor_weight_Tensor_bias_Tensor_stride_IntArrayRef_padding_stdstring_dilation_IntArrayRef_groups_int64_t (XPtrTorchTensor input, XPtrTorchTensor weight, XPtrTorchOptionalTensor bias, XPtrTorchIntArrayRef stride, XPtrTorchstring padding, XPtrTorchIntArrayRef dilation, XPtrTorchint64_t groups) {
-  auto r_out = lantern__convolution_mode_tensor_tensor_tensor_intarrayref_stdstring_intarrayref_intt(input.get(), weight.get(), bias.get(), stride.get(), padding.get(), dilation.get(), groups.get());
+XPtrTorchTensor cpp_torch_namespace__convolution_mode_input_Tensor_weight_Tensor_bias_Tensor_stride_IntArrayRef_padding_c10string_view_dilation_IntArrayRef_groups_int64_t (XPtrTorchTensor input, XPtrTorchTensor weight, XPtrTorchOptionalTensor bias, XPtrTorchIntArrayRef stride, XPtrTorchstring padding, XPtrTorchIntArrayRef dilation, XPtrTorchint64_t groups) {
+  auto r_out = lantern__convolution_mode_tensor_tensor_tensor_intarrayref_cstringview_intarrayref_intt(input.get(), weight.get(), bias.get(), stride.get(), padding.get(), dilation.get(), groups.get());
 return XPtrTorchTensor(r_out);
 }
 
@@ -5639,20 +5876,20 @@ return XPtrTorchTensor(r_out);
 }
 
 // [[Rcpp::export]]
-XPtrTorchTensor cpp_torch_namespace_conv1d_input_Tensor_weight_Tensor_padding_stdstring (XPtrTorchTensor input, XPtrTorchTensor weight, XPtrTorchOptionalTensor bias, XPtrTorchIntArrayRef stride, XPtrTorchstring padding, XPtrTorchIntArrayRef dilation, XPtrTorchint64_t groups) {
-  auto r_out = lantern_conv1d_tensor_tensor_tensor_intarrayref_stdstring_intarrayref_intt(input.get(), weight.get(), bias.get(), stride.get(), padding.get(), dilation.get(), groups.get());
+XPtrTorchTensor cpp_torch_namespace_conv1d_input_Tensor_weight_Tensor_padding_c10string_view (XPtrTorchTensor input, XPtrTorchTensor weight, XPtrTorchOptionalTensor bias, XPtrTorchIntArrayRef stride, XPtrTorchstring padding, XPtrTorchIntArrayRef dilation, XPtrTorchint64_t groups) {
+  auto r_out = lantern_conv1d_tensor_tensor_tensor_intarrayref_cstringview_intarrayref_intt(input.get(), weight.get(), bias.get(), stride.get(), padding.get(), dilation.get(), groups.get());
 return XPtrTorchTensor(r_out);
 }
 
 // [[Rcpp::export]]
-XPtrTorchTensor cpp_torch_namespace_conv2d_input_Tensor_weight_Tensor_padding_stdstring (XPtrTorchTensor input, XPtrTorchTensor weight, XPtrTorchOptionalTensor bias, XPtrTorchIntArrayRef stride, XPtrTorchstring padding, XPtrTorchIntArrayRef dilation, XPtrTorchint64_t groups) {
-  auto r_out = lantern_conv2d_tensor_tensor_tensor_intarrayref_stdstring_intarrayref_intt(input.get(), weight.get(), bias.get(), stride.get(), padding.get(), dilation.get(), groups.get());
+XPtrTorchTensor cpp_torch_namespace_conv2d_input_Tensor_weight_Tensor_padding_c10string_view (XPtrTorchTensor input, XPtrTorchTensor weight, XPtrTorchOptionalTensor bias, XPtrTorchIntArrayRef stride, XPtrTorchstring padding, XPtrTorchIntArrayRef dilation, XPtrTorchint64_t groups) {
+  auto r_out = lantern_conv2d_tensor_tensor_tensor_intarrayref_cstringview_intarrayref_intt(input.get(), weight.get(), bias.get(), stride.get(), padding.get(), dilation.get(), groups.get());
 return XPtrTorchTensor(r_out);
 }
 
 // [[Rcpp::export]]
-XPtrTorchTensor cpp_torch_namespace_conv3d_input_Tensor_weight_Tensor_padding_stdstring (XPtrTorchTensor input, XPtrTorchTensor weight, XPtrTorchOptionalTensor bias, XPtrTorchIntArrayRef stride, XPtrTorchstring padding, XPtrTorchIntArrayRef dilation, XPtrTorchint64_t groups) {
-  auto r_out = lantern_conv3d_tensor_tensor_tensor_intarrayref_stdstring_intarrayref_intt(input.get(), weight.get(), bias.get(), stride.get(), padding.get(), dilation.get(), groups.get());
+XPtrTorchTensor cpp_torch_namespace_conv3d_input_Tensor_weight_Tensor_padding_c10string_view (XPtrTorchTensor input, XPtrTorchTensor weight, XPtrTorchOptionalTensor bias, XPtrTorchIntArrayRef stride, XPtrTorchstring padding, XPtrTorchIntArrayRef dilation, XPtrTorchint64_t groups) {
+  auto r_out = lantern_conv3d_tensor_tensor_tensor_intarrayref_cstringview_intarrayref_intt(input.get(), weight.get(), bias.get(), stride.get(), padding.get(), dilation.get(), groups.get());
 return XPtrTorchTensor(r_out);
 }
 
@@ -5690,6 +5927,12 @@ return XPtrTorchTensor(r_out);
 // [[Rcpp::export]]
 XPtrTorchTensor cpp_torch_namespace__copy_from_self_Tensor_dst_Tensor (XPtrTorchTensor self, XPtrTorchTensor dst, XPtrTorchbool non_blocking) {
   auto r_out = lantern__copy_from_tensor_tensor_bool(self.get(), dst.get(), non_blocking.get());
+return XPtrTorchTensor(r_out);
+}
+
+// [[Rcpp::export]]
+XPtrTorchTensor cpp_torch_namespace__copy_from_and_resize_self_Tensor_dst_Tensor (XPtrTorchTensor self, XPtrTorchTensor dst) {
+  auto r_out = lantern__copy_from_and_resize_tensor_tensor(self.get(), dst.get());
 return XPtrTorchTensor(r_out);
 }
 
@@ -5744,6 +5987,18 @@ return XPtrTorchTensor(r_out);
 // [[Rcpp::export]]
 XPtrTorchTensor cpp_torch_namespace_count_nonzero_self_Tensor_dim_int64_t (XPtrTorchTensor self, XPtrTorchoptional_index_int64_t dim) {
   auto r_out = lantern_count_nonzero_tensor_intt(self.get(), dim.get());
+return XPtrTorchTensor(r_out);
+}
+
+// [[Rcpp::export]]
+XPtrTorchTensor cpp_torch_namespace_cov_self_Tensor (XPtrTorchTensor self, XPtrTorchint64_t correction, XPtrTorchOptionalTensor fweights, XPtrTorchOptionalTensor aweights) {
+  auto r_out = lantern_cov_tensor_intt_tensor_tensor(self.get(), correction.get(), fweights.get(), aweights.get());
+return XPtrTorchTensor(r_out);
+}
+
+// [[Rcpp::export]]
+XPtrTorchTensor cpp_torch_namespace_corrcoef_self_Tensor (XPtrTorchTensor self) {
+  auto r_out = lantern_corrcoef_tensor(self.get());
 return XPtrTorchTensor(r_out);
 }
 
@@ -5999,6 +6254,18 @@ return XPtrTorchTensor(r_out);
 }
 
 // [[Rcpp::export]]
+XPtrTorchTensor cpp_torch_namespace_cumulative_trapezoid_y_Tensor_x_Tensor (XPtrTorchTensor y, XPtrTorchTensor x, XPtrTorchindex_int64_t dim) {
+  auto r_out = lantern_cumulative_trapezoid_tensor_tensor_intt(y.get(), x.get(), dim.get());
+return XPtrTorchTensor(r_out);
+}
+
+// [[Rcpp::export]]
+XPtrTorchTensor cpp_torch_namespace_cumulative_trapezoid_y_Tensor (XPtrTorchTensor y, XPtrTorchScalar dx, XPtrTorchindex_int64_t dim) {
+  auto r_out = lantern_cumulative_trapezoid_tensor_scalar_intt(y.get(), dx.get(), dim.get());
+return XPtrTorchTensor(r_out);
+}
+
+// [[Rcpp::export]]
 XPtrTorchTensor cpp_torch_namespace_ctc_loss_log_probs_Tensor_targets_Tensor_input_lengths_IntArrayRef_target_lengths_IntArrayRef (XPtrTorchTensor log_probs, XPtrTorchTensor targets, XPtrTorchIntArrayRef input_lengths, XPtrTorchIntArrayRef target_lengths, XPtrTorchint64_t blank, XPtrTorchint64_t reduction, XPtrTorchbool zero_infinity) {
   auto r_out = lantern_ctc_loss_tensor_tensor_intarrayref_intarrayref_intt_intt_bool(log_probs.get(), targets.get(), input_lengths.get(), target_lengths.get(), blank.get(), reduction.get(), zero_infinity.get());
 return XPtrTorchTensor(r_out);
@@ -6048,8 +6315,8 @@ return XPtrTorchTensor(r_out);
 }
 
 // [[Rcpp::export]]
-XPtrTorchTensor cpp_torch_namespace_diagonal_backward_grad_Tensor_input_sizes_IntArrayRef_offset_int64_t_dim1_int64_t_dim2_int64_t (XPtrTorchTensor grad, XPtrTorchIntArrayRef input_sizes, XPtrTorchint64_t offset, XPtrTorchindex_int64_t dim1, XPtrTorchindex_int64_t dim2) {
-  auto r_out = lantern_diagonal_backward_tensor_intarrayref_intt_intt_intt(grad.get(), input_sizes.get(), offset.get(), dim1.get(), dim2.get());
+XPtrTorchTensor cpp_torch_namespace_diagonal_backward_grad_output_Tensor_input_sizes_IntArrayRef_offset_int64_t_dim1_int64_t_dim2_int64_t (XPtrTorchTensor grad_output, XPtrTorchIntArrayRef input_sizes, XPtrTorchint64_t offset, XPtrTorchindex_int64_t dim1, XPtrTorchindex_int64_t dim2) {
+  auto r_out = lantern_diagonal_backward_tensor_intarrayref_intt_intt_intt(grad_output.get(), input_sizes.get(), offset.get(), dim1.get(), dim2.get());
 return XPtrTorchTensor(r_out);
 }
 
@@ -6120,14 +6387,14 @@ return XPtrTorchTensor(r_out);
 }
 
 // [[Rcpp::export]]
-XPtrTorchTensor cpp_torch_namespace_div_self_Tensor_other_Tensor_rounding_mode_stdstring (XPtrTorchTensor self, XPtrTorchTensor other, XPtrTorchoptional_string rounding_mode) {
-  auto r_out = lantern_div_tensor_tensor_stdstring(self.get(), other.get(), rounding_mode.get());
+XPtrTorchTensor cpp_torch_namespace_div_self_Tensor_other_Tensor_rounding_mode_c10string_view (XPtrTorchTensor self, XPtrTorchTensor other, XPtrTorchstring rounding_mode) {
+  auto r_out = lantern_div_tensor_tensor_cstringview(self.get(), other.get(), rounding_mode.get());
 return XPtrTorchTensor(r_out);
 }
 
 // [[Rcpp::export]]
-XPtrTorchTensor cpp_torch_namespace_div_out_out_Tensor_self_Tensor_other_Tensor_rounding_mode_stdstring (XPtrTorchTensor out, XPtrTorchTensor self, XPtrTorchTensor other, XPtrTorchoptional_string rounding_mode) {
-  auto r_out = lantern_div_out_tensor_tensor_tensor_stdstring(out.get(), self.get(), other.get(), rounding_mode.get());
+XPtrTorchTensor cpp_torch_namespace_div_out_out_Tensor_self_Tensor_other_Tensor_rounding_mode_c10string_view (XPtrTorchTensor out, XPtrTorchTensor self, XPtrTorchTensor other, XPtrTorchstring rounding_mode) {
+  auto r_out = lantern_div_out_tensor_tensor_tensor_cstringview(out.get(), self.get(), other.get(), rounding_mode.get());
 return XPtrTorchTensor(r_out);
 }
 
@@ -6138,8 +6405,8 @@ return XPtrTorchTensor(r_out);
 }
 
 // [[Rcpp::export]]
-XPtrTorchTensor cpp_torch_namespace_div_self_Tensor_other_Scalar_rounding_mode_stdstring (XPtrTorchTensor self, XPtrTorchScalar other, XPtrTorchoptional_string rounding_mode) {
-  auto r_out = lantern_div_tensor_scalar_stdstring(self.get(), other.get(), rounding_mode.get());
+XPtrTorchTensor cpp_torch_namespace_div_self_Tensor_other_Scalar_rounding_mode_c10string_view (XPtrTorchTensor self, XPtrTorchScalar other, XPtrTorchstring rounding_mode) {
+  auto r_out = lantern_div_tensor_scalar_cstringview(self.get(), other.get(), rounding_mode.get());
 return XPtrTorchTensor(r_out);
 }
 
@@ -6162,20 +6429,20 @@ return XPtrTorchTensor(r_out);
 }
 
 // [[Rcpp::export]]
-XPtrTorchTensor cpp_torch_namespace_divide_self_Tensor_other_Tensor_rounding_mode_stdstring (XPtrTorchTensor self, XPtrTorchTensor other, XPtrTorchoptional_string rounding_mode) {
-  auto r_out = lantern_divide_tensor_tensor_stdstring(self.get(), other.get(), rounding_mode.get());
+XPtrTorchTensor cpp_torch_namespace_divide_self_Tensor_other_Tensor_rounding_mode_c10string_view (XPtrTorchTensor self, XPtrTorchTensor other, XPtrTorchstring rounding_mode) {
+  auto r_out = lantern_divide_tensor_tensor_cstringview(self.get(), other.get(), rounding_mode.get());
 return XPtrTorchTensor(r_out);
 }
 
 // [[Rcpp::export]]
-XPtrTorchTensor cpp_torch_namespace_divide_out_out_Tensor_self_Tensor_other_Tensor_rounding_mode_stdstring (XPtrTorchTensor out, XPtrTorchTensor self, XPtrTorchTensor other, XPtrTorchoptional_string rounding_mode) {
-  auto r_out = lantern_divide_out_tensor_tensor_tensor_stdstring(out.get(), self.get(), other.get(), rounding_mode.get());
+XPtrTorchTensor cpp_torch_namespace_divide_out_out_Tensor_self_Tensor_other_Tensor_rounding_mode_c10string_view (XPtrTorchTensor out, XPtrTorchTensor self, XPtrTorchTensor other, XPtrTorchstring rounding_mode) {
+  auto r_out = lantern_divide_out_tensor_tensor_tensor_cstringview(out.get(), self.get(), other.get(), rounding_mode.get());
 return XPtrTorchTensor(r_out);
 }
 
 // [[Rcpp::export]]
-XPtrTorchTensor cpp_torch_namespace_divide_self_Tensor_other_Scalar_rounding_mode_stdstring (XPtrTorchTensor self, XPtrTorchScalar other, XPtrTorchoptional_string rounding_mode) {
-  auto r_out = lantern_divide_tensor_scalar_stdstring(self.get(), other.get(), rounding_mode.get());
+XPtrTorchTensor cpp_torch_namespace_divide_self_Tensor_other_Scalar_rounding_mode_c10string_view (XPtrTorchTensor self, XPtrTorchScalar other, XPtrTorchstring rounding_mode) {
+  auto r_out = lantern_divide_tensor_scalar_cstringview(self.get(), other.get(), rounding_mode.get());
 return XPtrTorchTensor(r_out);
 }
 
@@ -6222,8 +6489,8 @@ return XPtrTorchTensor(r_out);
 }
 
 // [[Rcpp::export]]
-XPtrTorchTensor cpp_torch_namespace_einsum_equation_stdstring_tensors_TensorList (XPtrTorchstring equation, XPtrTorchTensorList tensors) {
-  auto r_out = lantern_einsum_stdstring_tensorlist(equation.get(), tensors.get());
+XPtrTorchTensor cpp_torch_namespace_einsum_equation_c10string_view_tensors_TensorList (XPtrTorchstring equation, XPtrTorchTensorList tensors) {
+  auto r_out = lantern_einsum_cstringview_tensorlist(equation.get(), tensors.get());
 return XPtrTorchTensor(r_out);
 }
 
@@ -6353,8 +6620,8 @@ return XPtrTorchTensor(r_out);
 }
 
 // [[Rcpp::export]]
-XPtrTorchTensor cpp_torch_namespace_empty_quantized_size_IntArrayRef_qtensor_Tensor (XPtrTorchIntArrayRef size, XPtrTorchTensor qtensor) {
-  auto r_out = lantern_empty_quantized_intarrayref_tensor(size.get(), qtensor.get());
+XPtrTorchTensor cpp_torch_namespace_empty_quantized_size_IntArrayRef_qtensor_Tensor (XPtrTorchIntArrayRef size, XPtrTorchTensor qtensor, XPtrTorchTensorOptions options, XPtrTorchoptional_memory_format memory_format) {
+  auto r_out = lantern_empty_quantized_intarrayref_tensor_tensoroptions_memoryformat(size.get(), qtensor.get(), options.get(), memory_format.get());
 return XPtrTorchTensor(r_out);
 }
 
@@ -6605,8 +6872,8 @@ return XPtrTorchTensor(r_out);
 }
 
 // [[Rcpp::export]]
-XPtrTorchTensor cpp_torch_namespace_from_file_filename_stdstring (XPtrTorchstring filename, XPtrTorchoptional_bool shared, XPtrTorchoptional_int64_t size, XPtrTorchTensorOptions options) {
-  auto r_out = lantern_from_file_stdstring_bool_intt_tensoroptions(filename.get(), shared.get(), size.get(), options.get());
+XPtrTorchTensor cpp_torch_namespace_from_file_filename_c10string_view (XPtrTorchstring filename, XPtrTorchoptional_bool shared, XPtrTorchoptional_int64_t size, XPtrTorchTensorOptions options) {
+  auto r_out = lantern_from_file_cstringview_bool_intt_tensoroptions(filename.get(), shared.get(), size.get(), options.get());
 return XPtrTorchTensor(r_out);
 }
 
@@ -6896,6 +7163,42 @@ return XPtrTorchTensor(r_out);
 }
 
 // [[Rcpp::export]]
+XPtrTorchTensor cpp_torch_namespace_isin_out_out_Tensor_elements_Tensor_test_elements_Tensor (XPtrTorchTensor out, XPtrTorchTensor elements, XPtrTorchTensor test_elements, XPtrTorchbool assume_unique, XPtrTorchbool invert) {
+  auto r_out = lantern_isin_out_tensor_tensor_tensor_bool_bool(out.get(), elements.get(), test_elements.get(), assume_unique.get(), invert.get());
+return XPtrTorchTensor(r_out);
+}
+
+// [[Rcpp::export]]
+XPtrTorchTensor cpp_torch_namespace_isin_elements_Tensor_test_elements_Tensor (XPtrTorchTensor elements, XPtrTorchTensor test_elements, XPtrTorchbool assume_unique, XPtrTorchbool invert) {
+  auto r_out = lantern_isin_tensor_tensor_bool_bool(elements.get(), test_elements.get(), assume_unique.get(), invert.get());
+return XPtrTorchTensor(r_out);
+}
+
+// [[Rcpp::export]]
+XPtrTorchTensor cpp_torch_namespace_isin_out_out_Tensor_elements_Tensor_test_element_Scalar (XPtrTorchTensor out, XPtrTorchTensor elements, XPtrTorchScalar test_element, XPtrTorchbool assume_unique, XPtrTorchbool invert) {
+  auto r_out = lantern_isin_out_tensor_tensor_scalar_bool_bool(out.get(), elements.get(), test_element.get(), assume_unique.get(), invert.get());
+return XPtrTorchTensor(r_out);
+}
+
+// [[Rcpp::export]]
+XPtrTorchTensor cpp_torch_namespace_isin_elements_Tensor_test_element_Scalar (XPtrTorchTensor elements, XPtrTorchScalar test_element, XPtrTorchbool assume_unique, XPtrTorchbool invert) {
+  auto r_out = lantern_isin_tensor_scalar_bool_bool(elements.get(), test_element.get(), assume_unique.get(), invert.get());
+return XPtrTorchTensor(r_out);
+}
+
+// [[Rcpp::export]]
+XPtrTorchTensor cpp_torch_namespace_isin_out_out_Tensor_element_Scalar_test_elements_Tensor (XPtrTorchTensor out, XPtrTorchScalar element, XPtrTorchTensor test_elements, XPtrTorchbool assume_unique, XPtrTorchbool invert) {
+  auto r_out = lantern_isin_out_tensor_scalar_tensor_bool_bool(out.get(), element.get(), test_elements.get(), assume_unique.get(), invert.get());
+return XPtrTorchTensor(r_out);
+}
+
+// [[Rcpp::export]]
+XPtrTorchTensor cpp_torch_namespace_isin_element_Scalar_test_elements_Tensor (XPtrTorchScalar element, XPtrTorchTensor test_elements, XPtrTorchbool assume_unique, XPtrTorchbool invert) {
+  auto r_out = lantern_isin_scalar_tensor_bool_bool(element.get(), test_elements.get(), assume_unique.get(), invert.get());
+return XPtrTorchTensor(r_out);
+}
+
+// [[Rcpp::export]]
 XPtrTorchTensor cpp_torch_namespace_isnan_self_Tensor (XPtrTorchTensor self) {
   auto r_out = lantern_isnan_tensor(self.get());
 return XPtrTorchTensor(r_out);
@@ -6920,6 +7223,18 @@ return XPtrTorchbool(r_out);
 }
 
 // [[Rcpp::export]]
+XPtrTorchbool cpp_torch_namespace_is_conj_self_Tensor (XPtrTorchTensor self) {
+  auto r_out = lantern_is_conj_tensor(self.get());
+return XPtrTorchbool(r_out);
+}
+
+// [[Rcpp::export]]
+XPtrTorchbool cpp_torch_namespace_is_neg_self_Tensor (XPtrTorchTensor self) {
+  auto r_out = lantern_is_neg_tensor(self.get());
+return XPtrTorchbool(r_out);
+}
+
+// [[Rcpp::export]]
 XPtrTorchTensor cpp_torch_namespace_isreal_self_Tensor (XPtrTorchTensor self) {
   auto r_out = lantern_isreal_tensor(self.get());
 return XPtrTorchTensor(r_out);
@@ -6940,6 +7255,12 @@ return XPtrTorchbool(r_out);
 // [[Rcpp::export]]
 XPtrTorchbool cpp_torch_namespace_is_signed_self_Tensor (XPtrTorchTensor self) {
   auto r_out = lantern_is_signed_tensor(self.get());
+return XPtrTorchbool(r_out);
+}
+
+// [[Rcpp::export]]
+XPtrTorchbool cpp_torch_namespace_is_inference_self_Tensor (XPtrTorchTensor self) {
+  auto r_out = lantern_is_inference_tensor(self.get());
 return XPtrTorchbool(r_out);
 }
 
@@ -7036,6 +7357,12 @@ return XPtrTorchTensor(r_out);
 // [[Rcpp::export]]
 XPtrTorchTensor cpp_torch_namespace_linear_input_Tensor_weight_Tensor (XPtrTorchTensor input, XPtrTorchTensor weight, XPtrTorchOptionalTensor bias) {
   auto r_out = lantern_linear_tensor_tensor_tensor(input.get(), weight.get(), bias.get());
+return XPtrTorchTensor(r_out);
+}
+
+// [[Rcpp::export]]
+XPtrTorchTensor cpp_torch_namespace_linear_out_out_Tensor_input_Tensor_weight_Tensor (XPtrTorchTensor out, XPtrTorchTensor input, XPtrTorchTensor weight, XPtrTorchOptionalTensor bias) {
+  auto r_out = lantern_linear_out_tensor_tensor_tensor_tensor(out.get(), input.get(), weight.get(), bias.get());
 return XPtrTorchTensor(r_out);
 }
 
@@ -7325,8 +7652,20 @@ return XPtrTorchTensor(r_out);
 }
 
 // [[Rcpp::export]]
+XPtrTorchTensor cpp_torch_namespace__log_softmax_out_out_Tensor_self_Tensor_dim_int64_t_half_to_float_bool (XPtrTorchTensor out, XPtrTorchTensor self, XPtrTorchindex_int64_t dim, XPtrTorchbool half_to_float) {
+  auto r_out = lantern__log_softmax_out_tensor_tensor_intt_bool(out.get(), self.get(), dim.get(), half_to_float.get());
+return XPtrTorchTensor(r_out);
+}
+
+// [[Rcpp::export]]
 XPtrTorchTensor cpp_torch_namespace__log_softmax_backward_data_grad_output_Tensor_output_Tensor_dim_int64_t_self_Tensor (XPtrTorchTensor grad_output, XPtrTorchTensor output, XPtrTorchindex_int64_t dim, XPtrTorchTensor self) {
   auto r_out = lantern__log_softmax_backward_data_tensor_tensor_intt_tensor(grad_output.get(), output.get(), dim.get(), self.get());
+return XPtrTorchTensor(r_out);
+}
+
+// [[Rcpp::export]]
+XPtrTorchTensor cpp_torch_namespace__log_softmax_backward_data_out_out_Tensor_grad_output_Tensor_output_Tensor_dim_int64_t_self_Tensor (XPtrTorchTensor out, XPtrTorchTensor grad_output, XPtrTorchTensor output, XPtrTorchindex_int64_t dim, XPtrTorchTensor self) {
+  auto r_out = lantern__log_softmax_backward_data_out_tensor_tensor_tensor_intt_tensor(out.get(), grad_output.get(), output.get(), dim.get(), self.get());
 return XPtrTorchTensor(r_out);
 }
 
@@ -7454,6 +7793,20 @@ return Rcpp::List::create(XPtrTorchTensor(lantern_vector_get(wrap.get(), 0)),XPt
 // [[Rcpp::export]]
 Rcpp::List cpp_torch_namespace__aminmax_self_Tensor_dim_int64_t (XPtrTorchTensor self, XPtrTorchindex_int64_t dim, XPtrTorchbool keepdim) {
   auto r_out = lantern__aminmax_tensor_intt_bool(self.get(), dim.get(), keepdim.get());
+auto wrap = XPtrTorchvector_void(r_out);
+return Rcpp::List::create(XPtrTorchTensor(lantern_vector_get(wrap.get(), 0)),XPtrTorchTensor(lantern_vector_get(wrap.get(), 1)));
+}
+
+// [[Rcpp::export]]
+Rcpp::List cpp_torch_namespace_aminmax_self_Tensor (XPtrTorchTensor self, XPtrTorchoptional_index_int64_t dim, XPtrTorchbool keepdim) {
+  auto r_out = lantern_aminmax_tensor_intt_bool(self.get(), dim.get(), keepdim.get());
+auto wrap = XPtrTorchvector_void(r_out);
+return Rcpp::List::create(XPtrTorchTensor(lantern_vector_get(wrap.get(), 0)),XPtrTorchTensor(lantern_vector_get(wrap.get(), 1)));
+}
+
+// [[Rcpp::export]]
+Rcpp::List cpp_torch_namespace_aminmax_out_min_Tensor_max_Tensor_self_Tensor (XPtrTorchTensor min, XPtrTorchTensor max, XPtrTorchTensor self, XPtrTorchoptional_index_int64_t dim, XPtrTorchbool keepdim) {
+  auto r_out = lantern_aminmax_out_tensor_tensor_tensor_intt_bool(min.get(), max.get(), self.get(), dim.get(), keepdim.get());
 auto wrap = XPtrTorchvector_void(r_out);
 return Rcpp::List::create(XPtrTorchTensor(lantern_vector_get(wrap.get(), 0)),XPtrTorchTensor(lantern_vector_get(wrap.get(), 1)));
 }
@@ -7604,6 +7957,18 @@ return XPtrTorchTensor(r_out);
 // [[Rcpp::export]]
 XPtrTorchTensor cpp_torch_namespace_mean_out_out_Tensor_self_Tensor_dim_DimnameList (XPtrTorchTensor out, XPtrTorchTensor self, XPtrTorchDimnameList dim, XPtrTorchbool keepdim, XPtrTorchoptional_scalar_type dtype) {
   auto r_out = lantern_mean_out_tensor_tensor_dimnamelist_bool_scalartype(out.get(), self.get(), dim.get(), keepdim.get(), dtype.get());
+return XPtrTorchTensor(r_out);
+}
+
+// [[Rcpp::export]]
+XPtrTorchTensor cpp_torch_namespace_nanmean_self_Tensor (XPtrTorchTensor self, XPtrTorchIndexIntArrayRef dim, XPtrTorchbool keepdim, XPtrTorchoptional_scalar_type dtype) {
+  auto r_out = lantern_nanmean_tensor_intarrayref_bool_scalartype(self.get(), dim.get(), keepdim.get(), dtype.get());
+return XPtrTorchTensor(r_out);
+}
+
+// [[Rcpp::export]]
+XPtrTorchTensor cpp_torch_namespace_nanmean_out_out_Tensor_self_Tensor (XPtrTorchTensor out, XPtrTorchTensor self, XPtrTorchIndexIntArrayRef dim, XPtrTorchbool keepdim, XPtrTorchoptional_scalar_type dtype) {
+  auto r_out = lantern_nanmean_out_tensor_tensor_intarrayref_bool_scalartype(out.get(), self.get(), dim.get(), keepdim.get(), dtype.get());
 return XPtrTorchTensor(r_out);
 }
 
@@ -7957,6 +8322,12 @@ return XPtrTorchTensor(r_out);
 }
 
 // [[Rcpp::export]]
+XPtrTorchTensor cpp_torch_namespace_mvlgamma_out_out_Tensor_self_Tensor_p_int64_t (XPtrTorchTensor out, XPtrTorchTensor self, XPtrTorchint64_t p) {
+  auto r_out = lantern_mvlgamma_out_tensor_tensor_intt(out.get(), self.get(), p.get());
+return XPtrTorchTensor(r_out);
+}
+
+// [[Rcpp::export]]
 XPtrTorchTensor cpp_torch_namespace_mvlgamma_self_Tensor_p_int64_t (XPtrTorchTensor self, XPtrTorchint64_t p) {
   auto r_out = lantern_mvlgamma_tensor_intt(self.get(), p.get());
 return XPtrTorchTensor(r_out);
@@ -8208,6 +8579,12 @@ return XPtrTorchTensor(r_out);
 // [[Rcpp::export]]
 XPtrTorchTensor cpp_torch_namespace_channel_shuffle_self_Tensor_groups_int64_t (XPtrTorchTensor self, XPtrTorchint64_t groups) {
   auto r_out = lantern_channel_shuffle_tensor_intt(self.get(), groups.get());
+return XPtrTorchTensor(r_out);
+}
+
+// [[Rcpp::export]]
+XPtrTorchTensor cpp_torch_namespace__pin_memory_self_Tensor (XPtrTorchTensor self, XPtrTorchDevice device) {
+  auto r_out = lantern__pin_memory_tensor_device(self.get(), device.get());
 return XPtrTorchTensor(r_out);
 }
 
@@ -8506,26 +8883,32 @@ return XPtrTorchTensor(r_out);
 }
 
 // [[Rcpp::export]]
-XPtrTorchTensor cpp_torch_namespace_repeat_interleave_repeats_Tensor (XPtrTorchTensor repeats) {
-  auto r_out = lantern_repeat_interleave_tensor(repeats.get());
+XPtrTorchTensor cpp_torch_namespace_repeat_interleave_repeats_Tensor (XPtrTorchTensor repeats, XPtrTorchoptional_int64_t output_size) {
+  auto r_out = lantern_repeat_interleave_tensor_intt(repeats.get(), output_size.get());
 return XPtrTorchTensor(r_out);
 }
 
 // [[Rcpp::export]]
-XPtrTorchTensor cpp_torch_namespace_repeat_interleave_self_Tensor_repeats_Tensor (XPtrTorchTensor self, XPtrTorchTensor repeats, XPtrTorchoptional_index_int64_t dim) {
-  auto r_out = lantern_repeat_interleave_tensor_tensor_intt(self.get(), repeats.get(), dim.get());
+XPtrTorchTensor cpp_torch_namespace_repeat_interleave_self_Tensor_repeats_Tensor (XPtrTorchTensor self, XPtrTorchTensor repeats, XPtrTorchoptional_index_int64_t dim, XPtrTorchoptional_int64_t output_size) {
+  auto r_out = lantern_repeat_interleave_tensor_tensor_intt_intt(self.get(), repeats.get(), dim.get(), output_size.get());
 return XPtrTorchTensor(r_out);
 }
 
 // [[Rcpp::export]]
-XPtrTorchTensor cpp_torch_namespace_repeat_interleave_self_Tensor_repeats_int64_t (XPtrTorchTensor self, XPtrTorchint64_t repeats, XPtrTorchoptional_index_int64_t dim) {
-  auto r_out = lantern_repeat_interleave_tensor_intt_intt(self.get(), repeats.get(), dim.get());
+XPtrTorchTensor cpp_torch_namespace_repeat_interleave_self_Tensor_repeats_int64_t (XPtrTorchTensor self, XPtrTorchint64_t repeats, XPtrTorchoptional_index_int64_t dim, XPtrTorchoptional_int64_t output_size) {
+  auto r_out = lantern_repeat_interleave_tensor_intt_intt_intt(self.get(), repeats.get(), dim.get(), output_size.get());
 return XPtrTorchTensor(r_out);
 }
 
 // [[Rcpp::export]]
 XPtrTorchTensor cpp_torch_namespace_reshape_self_Tensor_shape_IntArrayRef (XPtrTorchTensor self, XPtrTorchIntArrayRef shape) {
   auto r_out = lantern_reshape_tensor_intarrayref(self.get(), shape.get());
+return XPtrTorchTensor(r_out);
+}
+
+// [[Rcpp::export]]
+XPtrTorchTensor cpp_torch_namespace__reshape_alias_self_Tensor_size_IntArrayRef_stride_IntArrayRef (XPtrTorchTensor self, XPtrTorchIntArrayRef size, XPtrTorchIntArrayRef stride) {
+  auto r_out = lantern__reshape_alias_tensor_intarrayref_intarrayref(self.get(), size.get(), stride.get());
 return XPtrTorchTensor(r_out);
 }
 
@@ -8603,8 +8986,20 @@ return Rcpp::List::create(XPtrTorchTensor(lantern_vector_get(wrap.get(), 0)),XPt
 }
 
 // [[Rcpp::export]]
+XPtrTorchTensor cpp_torch_namespace_gelu_out_out_Tensor_self_Tensor (XPtrTorchTensor out, XPtrTorchTensor self) {
+  auto r_out = lantern_gelu_out_tensor_tensor(out.get(), self.get());
+return XPtrTorchTensor(r_out);
+}
+
+// [[Rcpp::export]]
 XPtrTorchTensor cpp_torch_namespace_gelu_self_Tensor (XPtrTorchTensor self) {
   auto r_out = lantern_gelu_tensor(self.get());
+return XPtrTorchTensor(r_out);
+}
+
+// [[Rcpp::export]]
+XPtrTorchTensor cpp_torch_namespace_gelu_backward_out_grad_input_Tensor_grad_Tensor_self_Tensor (XPtrTorchTensor grad_input, XPtrTorchTensor grad, XPtrTorchTensor self) {
+  auto r_out = lantern_gelu_backward_out_tensor_tensor_tensor(grad_input.get(), grad.get(), self.get());
 return XPtrTorchTensor(r_out);
 }
 
@@ -8621,8 +9016,20 @@ return XPtrTorchTensor(r_out);
 }
 
 // [[Rcpp::export]]
+XPtrTorchTensor cpp_torch_namespace_hardshrink_out_out_Tensor_self_Tensor (XPtrTorchTensor out, XPtrTorchTensor self, XPtrTorchScalar lambd) {
+  auto r_out = lantern_hardshrink_out_tensor_tensor_scalar(out.get(), self.get(), lambd.get());
+return XPtrTorchTensor(r_out);
+}
+
+// [[Rcpp::export]]
 XPtrTorchTensor cpp_torch_namespace_hardshrink_self_Tensor (XPtrTorchTensor self, XPtrTorchScalar lambd) {
   auto r_out = lantern_hardshrink_tensor_scalar(self.get(), lambd.get());
+return XPtrTorchTensor(r_out);
+}
+
+// [[Rcpp::export]]
+XPtrTorchTensor cpp_torch_namespace_hardshrink_backward_out_grad_input_Tensor_grad_out_Tensor_self_Tensor_lambd_Scalar (XPtrTorchTensor grad_input, XPtrTorchTensor grad_out, XPtrTorchTensor self, XPtrTorchScalar lambd) {
+  auto r_out = lantern_hardshrink_backward_out_tensor_tensor_tensor_scalar(grad_input.get(), grad_out.get(), self.get(), lambd.get());
 return XPtrTorchTensor(r_out);
 }
 
@@ -8663,8 +9070,8 @@ return XPtrTorchTensor(r_out);
 }
 
 // [[Rcpp::export]]
-XPtrTorchTensor cpp_torch_namespace_select_backward_grad_Tensor_input_sizes_IntArrayRef_dim_int64_t_index_int64_t (XPtrTorchTensor grad, XPtrTorchIntArrayRef input_sizes, XPtrTorchindex_int64_t dim, XPtrTorchindex_int64_t index) {
-  auto r_out = lantern_select_backward_tensor_intarrayref_intt_intt(grad.get(), input_sizes.get(), dim.get(), index.get());
+XPtrTorchTensor cpp_torch_namespace_select_backward_grad_output_Tensor_input_sizes_IntArrayRef_dim_int64_t_index_int64_t (XPtrTorchTensor grad_output, XPtrTorchIntArrayRef input_sizes, XPtrTorchindex_int64_t dim, XPtrTorchindex_int64_t index) {
+  auto r_out = lantern_select_backward_tensor_intarrayref_intt_intt(grad_output.get(), input_sizes.get(), dim.get(), index.get());
 return XPtrTorchTensor(r_out);
 }
 
@@ -8707,6 +9114,12 @@ return XPtrTorchTensor(r_out);
 // [[Rcpp::export]]
 XPtrTorchTensor cpp_torch_namespace_silu_out_out_Tensor_self_Tensor (XPtrTorchTensor out, XPtrTorchTensor self) {
   auto r_out = lantern_silu_out_tensor_tensor(out.get(), self.get());
+return XPtrTorchTensor(r_out);
+}
+
+// [[Rcpp::export]]
+XPtrTorchTensor cpp_torch_namespace_silu_backward_out_grad_input_Tensor_grad_output_Tensor_self_Tensor (XPtrTorchTensor grad_input, XPtrTorchTensor grad_output, XPtrTorchTensor self) {
+  auto r_out = lantern_silu_backward_out_tensor_tensor_tensor(grad_input.get(), grad_output.get(), self.get());
 return XPtrTorchTensor(r_out);
 }
 
@@ -8861,8 +9274,8 @@ return XPtrTorchTensor(r_out);
 }
 
 // [[Rcpp::export]]
-XPtrTorchTensor cpp_torch_namespace_slice_backward_grad_Tensor_input_sizes_IntArrayRef_dim_int64_t_start_int64_t_end_int64_t_step_int64_t (XPtrTorchTensor grad, XPtrTorchIntArrayRef input_sizes, XPtrTorchindex_int64_t dim, XPtrTorchint64_t start, XPtrTorchint64_t end, XPtrTorchint64_t step) {
-  auto r_out = lantern_slice_backward_tensor_intarrayref_intt_intt_intt_intt(grad.get(), input_sizes.get(), dim.get(), start.get(), end.get(), step.get());
+XPtrTorchTensor cpp_torch_namespace_slice_backward_grad_output_Tensor_input_sizes_IntArrayRef_dim_int64_t_start_int64_t_end_int64_t_step_int64_t (XPtrTorchTensor grad_output, XPtrTorchIntArrayRef input_sizes, XPtrTorchindex_int64_t dim, XPtrTorchint64_t start, XPtrTorchint64_t end, XPtrTorchint64_t step) {
+  auto r_out = lantern_slice_backward_tensor_intarrayref_intt_intt_intt_intt(grad_output.get(), input_sizes.get(), dim.get(), start.get(), end.get(), step.get());
 return XPtrTorchTensor(r_out);
 }
 
@@ -8898,8 +9311,20 @@ return XPtrTorchTensor(r_out);
 }
 
 // [[Rcpp::export]]
+XPtrTorchTensor cpp_torch_namespace__softmax_out_out_Tensor_self_Tensor_dim_int64_t_half_to_float_bool (XPtrTorchTensor out, XPtrTorchTensor self, XPtrTorchindex_int64_t dim, XPtrTorchbool half_to_float) {
+  auto r_out = lantern__softmax_out_tensor_tensor_intt_bool(out.get(), self.get(), dim.get(), half_to_float.get());
+return XPtrTorchTensor(r_out);
+}
+
+// [[Rcpp::export]]
 XPtrTorchTensor cpp_torch_namespace__softmax_backward_data_grad_output_Tensor_output_Tensor_dim_int64_t_self_Tensor (XPtrTorchTensor grad_output, XPtrTorchTensor output, XPtrTorchindex_int64_t dim, XPtrTorchTensor self) {
   auto r_out = lantern__softmax_backward_data_tensor_tensor_intt_tensor(grad_output.get(), output.get(), dim.get(), self.get());
+return XPtrTorchTensor(r_out);
+}
+
+// [[Rcpp::export]]
+XPtrTorchTensor cpp_torch_namespace__softmax_backward_data_out_grad_input_Tensor_grad_output_Tensor_output_Tensor_dim_int64_t_self_Tensor (XPtrTorchTensor grad_input, XPtrTorchTensor grad_output, XPtrTorchTensor output, XPtrTorchindex_int64_t dim, XPtrTorchTensor self) {
+  auto r_out = lantern__softmax_backward_data_out_tensor_tensor_tensor_intt_tensor(grad_input.get(), grad_output.get(), output.get(), dim.get(), self.get());
 return XPtrTorchTensor(r_out);
 }
 
@@ -9427,6 +9852,18 @@ return XPtrTorchTensor(r_out);
 // [[Rcpp::export]]
 XPtrTorchTensor cpp_torch_namespace_rot90_self_Tensor (XPtrTorchTensor self, XPtrTorchint64_t k, XPtrTorchIndexIntArrayRef dims) {
   auto r_out = lantern_rot90_tensor_intt_intarrayref(self.get(), k.get(), dims.get());
+return XPtrTorchTensor(r_out);
+}
+
+// [[Rcpp::export]]
+XPtrTorchTensor cpp_torch_namespace_trapezoid_y_Tensor_x_Tensor (XPtrTorchTensor y, XPtrTorchTensor x, XPtrTorchindex_int64_t dim) {
+  auto r_out = lantern_trapezoid_tensor_tensor_intt(y.get(), x.get(), dim.get());
+return XPtrTorchTensor(r_out);
+}
+
+// [[Rcpp::export]]
+XPtrTorchTensor cpp_torch_namespace_trapezoid_y_Tensor (XPtrTorchTensor y, XPtrTorchScalar dx, XPtrTorchindex_int64_t dim) {
+  auto r_out = lantern_trapezoid_tensor_scalar_intt(y.get(), dx.get(), dim.get());
 return XPtrTorchTensor(r_out);
 }
 
@@ -10082,14 +10519,20 @@ return XPtrTorchTensor(r_out);
 }
 
 // [[Rcpp::export]]
-XPtrTorchTensor cpp_torch_namespace__sparse_csr_tensor_crow_indices_Tensor_col_indices_Tensor_values_Tensor_size_IntArrayRef_options_TensorOptions (XPtrTorchTensor crow_indices, XPtrTorchTensor col_indices, XPtrTorchTensor values, XPtrTorchIntArrayRef size, XPtrTorchTensorOptions options) {
-  auto r_out = lantern__sparse_csr_tensor_tensor_tensor_tensor_intarrayref_tensoroptions(crow_indices.get(), col_indices.get(), values.get(), size.get(), options.get());
+XPtrTorchTensor cpp_torch_namespace_sparse_csr_tensor_crow_indices_Tensor_col_indices_Tensor_values_Tensor_size_IntArrayRef_options_TensorOptions (XPtrTorchTensor crow_indices, XPtrTorchTensor col_indices, XPtrTorchTensor values, XPtrTorchIntArrayRef size, XPtrTorchTensorOptions options) {
+  auto r_out = lantern_sparse_csr_tensor_tensor_tensor_tensor_intarrayref_tensoroptions(crow_indices.get(), col_indices.get(), values.get(), size.get(), options.get());
 return XPtrTorchTensor(r_out);
 }
 
 // [[Rcpp::export]]
-XPtrTorchTensor cpp_torch_namespace__sparse_csr_tensor_crow_indices_Tensor_col_indices_Tensor_values_Tensor_options_TensorOptions (XPtrTorchTensor crow_indices, XPtrTorchTensor col_indices, XPtrTorchTensor values, XPtrTorchTensorOptions options) {
-  auto r_out = lantern__sparse_csr_tensor_tensor_tensor_tensor_tensoroptions(crow_indices.get(), col_indices.get(), values.get(), options.get());
+XPtrTorchTensor cpp_torch_namespace_sparse_csr_tensor_crow_indices_Tensor_col_indices_Tensor_values_Tensor_options_TensorOptions (XPtrTorchTensor crow_indices, XPtrTorchTensor col_indices, XPtrTorchTensor values, XPtrTorchTensorOptions options) {
+  auto r_out = lantern_sparse_csr_tensor_tensor_tensor_tensor_tensoroptions(crow_indices.get(), col_indices.get(), values.get(), options.get());
+return XPtrTorchTensor(r_out);
+}
+
+// [[Rcpp::export]]
+XPtrTorchTensor cpp_torch_namespace__sparse_csr_tensor_unsafe_crow_indices_Tensor_col_indices_Tensor_values_Tensor_size_IntArrayRef (XPtrTorchTensor crow_indices, XPtrTorchTensor col_indices, XPtrTorchTensor values, XPtrTorchIntArrayRef size, XPtrTorchTensorOptions options) {
+  auto r_out = lantern__sparse_csr_tensor_unsafe_tensor_tensor_tensor_intarrayref_tensoroptions(crow_indices.get(), col_indices.get(), values.get(), size.get(), options.get());
 return XPtrTorchTensor(r_out);
 }
 
@@ -10123,6 +10566,11 @@ void cpp_torch_namespace__validate_sparse_coo_tensor_args_indices_Tensor_values_
 }
 
 // [[Rcpp::export]]
+void cpp_torch_namespace__validate_sparse_csr_tensor_args_crow_indices_Tensor_col_indices_Tensor_values_Tensor_size_IntArrayRef (XPtrTorchTensor crow_indices, XPtrTorchTensor col_indices, XPtrTorchTensor values, XPtrTorchIntArrayRef size) {
+  lantern__validate_sparse_csr_tensor_args_tensor_tensor_tensor_intarrayref(crow_indices.get(), col_indices.get(), values.get(), size.get());
+}
+
+// [[Rcpp::export]]
 XPtrTorchTensor cpp_torch_namespace__sparse_coo_tensor_with_dims_sparse_dim_int64_t_dense_dim_int64_t_size_IntArrayRef_options_TensorOptions (XPtrTorchint64_t sparse_dim, XPtrTorchint64_t dense_dim, XPtrTorchIntArrayRef size, XPtrTorchTensorOptions options) {
   auto r_out = lantern__sparse_coo_tensor_with_dims_intt_intt_intarrayref_tensoroptions(sparse_dim.get(), dense_dim.get(), size.get(), options.get());
 return XPtrTorchTensor(r_out);
@@ -10132,6 +10580,12 @@ return XPtrTorchTensor(r_out);
 XPtrTorchTensor cpp_torch_namespace__sparse_coo_tensor_with_dims_and_tensors_sparse_dim_int64_t_dense_dim_int64_t_size_IntArrayRef_indices_Tensor_values_Tensor_options_TensorOptions (XPtrTorchint64_t sparse_dim, XPtrTorchint64_t dense_dim, XPtrTorchIntArrayRef size, XPtrTorchIndexTensor indices, XPtrTorchTensor values, XPtrTorchTensorOptions options) {
   auto r_out = lantern__sparse_coo_tensor_with_dims_and_tensors_intt_intt_intarrayref_tensor_tensor_tensoroptions(sparse_dim.get(), dense_dim.get(), size.get(), indices.get(), values.get(), options.get());
 return XPtrTorchTensor(r_out);
+}
+
+// [[Rcpp::export]]
+XPtrTorchTensorList cpp_torch_namespace__to_cpu_tensors_TensorList (XPtrTorchTensorList tensors) {
+  auto r_out = lantern__to_cpu_tensorlist(tensors.get());
+return XPtrTorchTensorList(r_out);
 }
 
 // [[Rcpp::export]]
@@ -10197,6 +10651,12 @@ return XPtrTorchTensor(r_out);
 // [[Rcpp::export]]
 XPtrTorchTensor cpp_torch_namespace_quantize_per_tensor_self_Tensor_scale_double_zero_point_int64_t_dtype_ScalarType (XPtrTorchTensor self, XPtrTorchdouble scale, XPtrTorchint64_t zero_point, XPtrTorchDtype dtype) {
   auto r_out = lantern_quantize_per_tensor_tensor_double_intt_scalartype(self.get(), scale.get(), zero_point.get(), dtype.get());
+return XPtrTorchTensor(r_out);
+}
+
+// [[Rcpp::export]]
+XPtrTorchTensor cpp_torch_namespace_quantize_per_tensor_self_Tensor_scale_Tensor_zero_point_Tensor_dtype_ScalarType (XPtrTorchTensor self, XPtrTorchTensor scale, XPtrTorchTensor zero_point, XPtrTorchDtype dtype) {
+  auto r_out = lantern_quantize_per_tensor_tensor_tensor_tensor_scalartype(self.get(), scale.get(), zero_point.get(), dtype.get());
 return XPtrTorchTensor(r_out);
 }
 
@@ -10279,8 +10739,21 @@ return XPtrTorchTensor(r_out);
 }
 
 // [[Rcpp::export]]
+XPtrTorchTensor cpp_torch_namespace_fake_quantize_per_tensor_affine_self_Tensor_scale_Tensor_zero_point_Tensor_quant_min_int64_t_quant_max_int64_t (XPtrTorchTensor self, XPtrTorchTensor scale, XPtrTorchTensor zero_point, XPtrTorchint64_t quant_min, XPtrTorchint64_t quant_max) {
+  auto r_out = lantern_fake_quantize_per_tensor_affine_tensor_tensor_tensor_intt_intt(self.get(), scale.get(), zero_point.get(), quant_min.get(), quant_max.get());
+return XPtrTorchTensor(r_out);
+}
+
+// [[Rcpp::export]]
 Rcpp::List cpp_torch_namespace_fake_quantize_per_tensor_affine_cachemask_self_Tensor_scale_double_zero_point_int64_t_quant_min_int64_t_quant_max_int64_t (XPtrTorchTensor self, XPtrTorchdouble scale, XPtrTorchint64_t zero_point, XPtrTorchint64_t quant_min, XPtrTorchint64_t quant_max) {
   auto r_out = lantern_fake_quantize_per_tensor_affine_cachemask_tensor_double_intt_intt_intt(self.get(), scale.get(), zero_point.get(), quant_min.get(), quant_max.get());
+auto wrap = XPtrTorchvector_void(r_out);
+return Rcpp::List::create(XPtrTorchTensor(lantern_vector_get(wrap.get(), 0)),XPtrTorchTensor(lantern_vector_get(wrap.get(), 1)));
+}
+
+// [[Rcpp::export]]
+Rcpp::List cpp_torch_namespace__fake_quantize_per_tensor_affine_cachemask_tensor_qparams_self_Tensor_scale_Tensor_zero_point_Tensor_fake_quant_enabled_Tensor_quant_min_int64_t_quant_max_int64_t (XPtrTorchTensor self, XPtrTorchTensor scale, XPtrTorchTensor zero_point, XPtrTorchTensor fake_quant_enabled, XPtrTorchint64_t quant_min, XPtrTorchint64_t quant_max) {
+  auto r_out = lantern__fake_quantize_per_tensor_affine_cachemask_tensor_qparams_tensor_tensor_tensor_tensor_intt_intt(self.get(), scale.get(), zero_point.get(), fake_quant_enabled.get(), quant_min.get(), quant_max.get());
 auto wrap = XPtrTorchvector_void(r_out);
 return Rcpp::List::create(XPtrTorchTensor(lantern_vector_get(wrap.get(), 0)),XPtrTorchTensor(lantern_vector_get(wrap.get(), 1)));
 }
@@ -10337,6 +10810,19 @@ return Rcpp::List::create(XPtrTorchTensor(lantern_vector_get(wrap.get(), 0)),XPt
 }
 
 // [[Rcpp::export]]
+XPtrTorchTensor cpp_torch_namespace_fused_moving_avg_obs_fake_quant_self_Tensor_observer_on_Tensor_fake_quant_on_Tensor_running_min_Tensor_running_max_Tensor_scale_Tensor_zero_point_Tensor_averaging_const_double_quant_min_int64_t_quant_max_int64_t_ch_axis_int64_t (XPtrTorchTensor self, XPtrTorchTensor observer_on, XPtrTorchTensor fake_quant_on, XPtrTorchTensor running_min, XPtrTorchTensor running_max, XPtrTorchTensor scale, XPtrTorchTensor zero_point, XPtrTorchdouble averaging_const, XPtrTorchint64_t quant_min, XPtrTorchint64_t quant_max, XPtrTorchint64_t ch_axis, XPtrTorchbool per_row_fake_quant, XPtrTorchbool symmetric_quant) {
+  auto r_out = lantern_fused_moving_avg_obs_fake_quant_tensor_tensor_tensor_tensor_tensor_tensor_tensor_double_intt_intt_intt_bool_bool(self.get(), observer_on.get(), fake_quant_on.get(), running_min.get(), running_max.get(), scale.get(), zero_point.get(), averaging_const.get(), quant_min.get(), quant_max.get(), ch_axis.get(), per_row_fake_quant.get(), symmetric_quant.get());
+return XPtrTorchTensor(r_out);
+}
+
+// [[Rcpp::export]]
+Rcpp::List cpp_torch_namespace__fused_moving_avg_obs_fq_helper_self_Tensor_observer_on_Tensor_fake_quant_on_Tensor_running_min_Tensor_running_max_Tensor_scale_Tensor_zero_point_Tensor_averaging_const_double_quant_min_int64_t_quant_max_int64_t_ch_axis_int64_t (XPtrTorchTensor self, XPtrTorchTensor observer_on, XPtrTorchTensor fake_quant_on, XPtrTorchTensor running_min, XPtrTorchTensor running_max, XPtrTorchTensor scale, XPtrTorchTensor zero_point, XPtrTorchdouble averaging_const, XPtrTorchint64_t quant_min, XPtrTorchint64_t quant_max, XPtrTorchint64_t ch_axis, XPtrTorchbool per_row_fake_quant, XPtrTorchbool symmetric_quant) {
+  auto r_out = lantern__fused_moving_avg_obs_fq_helper_tensor_tensor_tensor_tensor_tensor_tensor_tensor_double_intt_intt_intt_bool_bool(self.get(), observer_on.get(), fake_quant_on.get(), running_min.get(), running_max.get(), scale.get(), zero_point.get(), averaging_const.get(), quant_min.get(), quant_max.get(), ch_axis.get(), per_row_fake_quant.get(), symmetric_quant.get());
+auto wrap = XPtrTorchvector_void(r_out);
+return Rcpp::List::create(XPtrTorchTensor(lantern_vector_get(wrap.get(), 0)),XPtrTorchTensor(lantern_vector_get(wrap.get(), 1)));
+}
+
+// [[Rcpp::export]]
 Rcpp::List cpp_torch_namespace__choose_qparams_per_tensor_self_Tensor (XPtrTorchTensor self, XPtrTorchbool reduce_range) {
   auto r_out = lantern__choose_qparams_per_tensor_tensor_bool(self.get(), reduce_range.get());
 auto wrap = XPtrTorchvector_void(r_out);
@@ -10357,8 +10843,20 @@ return Rcpp::List::create(XPtrTorchTensor(lantern_vector_get(wrap.get(), 0)),XPt
 }
 
 // [[Rcpp::export]]
+XPtrTorchTensor cpp_torch_namespace__to_copy_self_Tensor (XPtrTorchTensor self, XPtrTorchTensorOptions options, XPtrTorchbool non_blocking, XPtrTorchoptional_memory_format memory_format) {
+  auto r_out = lantern__to_copy_tensor_tensoroptions_bool_memoryformat(self.get(), options.get(), non_blocking.get(), memory_format.get());
+return XPtrTorchTensor(r_out);
+}
+
+// [[Rcpp::export]]
 XPtrTorchTensorList cpp_torch_namespace_meshgrid_tensors_TensorList (XPtrTorchTensorList tensors) {
   auto r_out = lantern_meshgrid_tensorlist(tensors.get());
+return XPtrTorchTensorList(r_out);
+}
+
+// [[Rcpp::export]]
+XPtrTorchTensorList cpp_torch_namespace_meshgrid_tensors_TensorList_indexing_c10string_view (XPtrTorchTensorList tensors, XPtrTorchstring indexing) {
+  auto r_out = lantern_meshgrid_tensorlist_cstringview(tensors.get(), indexing.get());
 return XPtrTorchTensorList(r_out);
 }
 
@@ -10657,8 +11155,44 @@ return XPtrTorchTensor(r_out);
 }
 
 // [[Rcpp::export]]
+XPtrTorchTensor cpp_torch_namespace_scatter_out_out_Tensor_self_Tensor_dim_int64_t_index_Tensor_src_Tensor (XPtrTorchTensor out, XPtrTorchTensor self, XPtrTorchindex_int64_t dim, XPtrTorchIndexTensor index, XPtrTorchTensor src) {
+  auto r_out = lantern_scatter_out_tensor_tensor_intt_tensor_tensor(out.get(), self.get(), dim.get(), index.get(), src.get());
+return XPtrTorchTensor(r_out);
+}
+
+// [[Rcpp::export]]
 XPtrTorchTensor cpp_torch_namespace_scatter_self_Tensor_dim_int64_t_index_Tensor_value_Scalar (XPtrTorchTensor self, XPtrTorchindex_int64_t dim, XPtrTorchIndexTensor index, XPtrTorchScalar value) {
   auto r_out = lantern_scatter_tensor_intt_tensor_scalar(self.get(), dim.get(), index.get(), value.get());
+return XPtrTorchTensor(r_out);
+}
+
+// [[Rcpp::export]]
+XPtrTorchTensor cpp_torch_namespace_scatter_out_out_Tensor_self_Tensor_dim_int64_t_index_Tensor_value_Scalar (XPtrTorchTensor out, XPtrTorchTensor self, XPtrTorchindex_int64_t dim, XPtrTorchIndexTensor index, XPtrTorchScalar value) {
+  auto r_out = lantern_scatter_out_tensor_tensor_intt_tensor_scalar(out.get(), self.get(), dim.get(), index.get(), value.get());
+return XPtrTorchTensor(r_out);
+}
+
+// [[Rcpp::export]]
+XPtrTorchTensor cpp_torch_namespace_scatter_self_Tensor_dim_int64_t_index_Tensor_src_Tensor_reduce_c10string_view (XPtrTorchTensor self, XPtrTorchindex_int64_t dim, XPtrTorchIndexTensor index, XPtrTorchTensor src, XPtrTorchstring reduce) {
+  auto r_out = lantern_scatter_tensor_intt_tensor_tensor_cstringview(self.get(), dim.get(), index.get(), src.get(), reduce.get());
+return XPtrTorchTensor(r_out);
+}
+
+// [[Rcpp::export]]
+XPtrTorchTensor cpp_torch_namespace_scatter_out_out_Tensor_self_Tensor_dim_int64_t_index_Tensor_src_Tensor_reduce_c10string_view (XPtrTorchTensor out, XPtrTorchTensor self, XPtrTorchindex_int64_t dim, XPtrTorchIndexTensor index, XPtrTorchTensor src, XPtrTorchstring reduce) {
+  auto r_out = lantern_scatter_out_tensor_tensor_intt_tensor_tensor_cstringview(out.get(), self.get(), dim.get(), index.get(), src.get(), reduce.get());
+return XPtrTorchTensor(r_out);
+}
+
+// [[Rcpp::export]]
+XPtrTorchTensor cpp_torch_namespace_scatter_self_Tensor_dim_int64_t_index_Tensor_value_Scalar_reduce_c10string_view (XPtrTorchTensor self, XPtrTorchindex_int64_t dim, XPtrTorchIndexTensor index, XPtrTorchScalar value, XPtrTorchstring reduce) {
+  auto r_out = lantern_scatter_tensor_intt_tensor_scalar_cstringview(self.get(), dim.get(), index.get(), value.get(), reduce.get());
+return XPtrTorchTensor(r_out);
+}
+
+// [[Rcpp::export]]
+XPtrTorchTensor cpp_torch_namespace_scatter_out_out_Tensor_self_Tensor_dim_int64_t_index_Tensor_value_Scalar_reduce_c10string_view (XPtrTorchTensor out, XPtrTorchTensor self, XPtrTorchindex_int64_t dim, XPtrTorchIndexTensor index, XPtrTorchScalar value, XPtrTorchstring reduce) {
+  auto r_out = lantern_scatter_out_tensor_tensor_intt_tensor_scalar_cstringview(out.get(), self.get(), dim.get(), index.get(), value.get(), reduce.get());
 return XPtrTorchTensor(r_out);
 }
 
@@ -10677,6 +11211,12 @@ return XPtrTorchTensor(r_out);
 // [[Rcpp::export]]
 XPtrTorchTensor cpp_torch_namespace_scatter_add_self_Tensor_dim_int64_t_index_Tensor_src_Tensor (XPtrTorchTensor self, XPtrTorchindex_int64_t dim, XPtrTorchIndexTensor index, XPtrTorchTensor src) {
   auto r_out = lantern_scatter_add_tensor_intt_tensor_tensor(self.get(), dim.get(), index.get(), src.get());
+return XPtrTorchTensor(r_out);
+}
+
+// [[Rcpp::export]]
+XPtrTorchTensor cpp_torch_namespace_scatter_add_out_out_Tensor_self_Tensor_dim_int64_t_index_Tensor_src_Tensor (XPtrTorchTensor out, XPtrTorchTensor self, XPtrTorchindex_int64_t dim, XPtrTorchIndexTensor index, XPtrTorchTensor src) {
+  auto r_out = lantern_scatter_add_out_tensor_tensor_intt_tensor_tensor(out.get(), self.get(), dim.get(), index.get(), src.get());
 return XPtrTorchTensor(r_out);
 }
 
@@ -10807,6 +11347,36 @@ return XPtrTorchTensor(r_out);
 }
 
 // [[Rcpp::export]]
+XPtrTorchTensor cpp_torch_namespace_bitwise_left_shift_self_Tensor_other_Tensor (XPtrTorchTensor self, XPtrTorchTensor other) {
+  auto r_out = lantern_bitwise_left_shift_tensor_tensor(self.get(), other.get());
+return XPtrTorchTensor(r_out);
+}
+
+// [[Rcpp::export]]
+XPtrTorchTensor cpp_torch_namespace_bitwise_left_shift_out_out_Tensor_self_Tensor_other_Tensor (XPtrTorchTensor out, XPtrTorchTensor self, XPtrTorchTensor other) {
+  auto r_out = lantern_bitwise_left_shift_out_tensor_tensor_tensor(out.get(), self.get(), other.get());
+return XPtrTorchTensor(r_out);
+}
+
+// [[Rcpp::export]]
+XPtrTorchTensor cpp_torch_namespace_bitwise_left_shift_self_Tensor_other_Scalar (XPtrTorchTensor self, XPtrTorchScalar other) {
+  auto r_out = lantern_bitwise_left_shift_tensor_scalar(self.get(), other.get());
+return XPtrTorchTensor(r_out);
+}
+
+// [[Rcpp::export]]
+XPtrTorchTensor cpp_torch_namespace_bitwise_left_shift_out_out_Tensor_self_Tensor_other_Scalar (XPtrTorchTensor out, XPtrTorchTensor self, XPtrTorchScalar other) {
+  auto r_out = lantern_bitwise_left_shift_out_tensor_tensor_scalar(out.get(), self.get(), other.get());
+return XPtrTorchTensor(r_out);
+}
+
+// [[Rcpp::export]]
+XPtrTorchTensor cpp_torch_namespace_bitwise_left_shift_self_Scalar_other_Tensor (XPtrTorchScalar self, XPtrTorchTensor other) {
+  auto r_out = lantern_bitwise_left_shift_scalar_tensor(self.get(), other.get());
+return XPtrTorchTensor(r_out);
+}
+
+// [[Rcpp::export]]
 XPtrTorchTensor cpp_torch_namespace___rshift___self_Tensor_other_Scalar (XPtrTorchTensor self, XPtrTorchScalar other) {
   auto r_out = lantern___rshift___tensor_scalar(self.get(), other.get());
 return XPtrTorchTensor(r_out);
@@ -10815,6 +11385,36 @@ return XPtrTorchTensor(r_out);
 // [[Rcpp::export]]
 XPtrTorchTensor cpp_torch_namespace___rshift___self_Tensor_other_Tensor (XPtrTorchTensor self, XPtrTorchTensor other) {
   auto r_out = lantern___rshift___tensor_tensor(self.get(), other.get());
+return XPtrTorchTensor(r_out);
+}
+
+// [[Rcpp::export]]
+XPtrTorchTensor cpp_torch_namespace_bitwise_right_shift_self_Tensor_other_Tensor (XPtrTorchTensor self, XPtrTorchTensor other) {
+  auto r_out = lantern_bitwise_right_shift_tensor_tensor(self.get(), other.get());
+return XPtrTorchTensor(r_out);
+}
+
+// [[Rcpp::export]]
+XPtrTorchTensor cpp_torch_namespace_bitwise_right_shift_out_out_Tensor_self_Tensor_other_Tensor (XPtrTorchTensor out, XPtrTorchTensor self, XPtrTorchTensor other) {
+  auto r_out = lantern_bitwise_right_shift_out_tensor_tensor_tensor(out.get(), self.get(), other.get());
+return XPtrTorchTensor(r_out);
+}
+
+// [[Rcpp::export]]
+XPtrTorchTensor cpp_torch_namespace_bitwise_right_shift_self_Tensor_other_Scalar (XPtrTorchTensor self, XPtrTorchScalar other) {
+  auto r_out = lantern_bitwise_right_shift_tensor_scalar(self.get(), other.get());
+return XPtrTorchTensor(r_out);
+}
+
+// [[Rcpp::export]]
+XPtrTorchTensor cpp_torch_namespace_bitwise_right_shift_out_out_Tensor_self_Tensor_other_Scalar (XPtrTorchTensor out, XPtrTorchTensor self, XPtrTorchScalar other) {
+  auto r_out = lantern_bitwise_right_shift_out_tensor_tensor_scalar(out.get(), self.get(), other.get());
+return XPtrTorchTensor(r_out);
+}
+
+// [[Rcpp::export]]
+XPtrTorchTensor cpp_torch_namespace_bitwise_right_shift_self_Scalar_other_Tensor (XPtrTorchScalar self, XPtrTorchTensor other) {
+  auto r_out = lantern_bitwise_right_shift_scalar_tensor(self.get(), other.get());
 return XPtrTorchTensor(r_out);
 }
 
@@ -11323,8 +11923,8 @@ return XPtrTorchTensor(r_out);
 }
 
 // [[Rcpp::export]]
-XPtrTorchTensor cpp_torch_namespace_cross_entropy_loss_self_Tensor_target_Tensor (XPtrTorchTensor self, XPtrTorchTensor target, XPtrTorchOptionalTensor weight, XPtrTorchint64_t reduction, XPtrTorchint64_t ignore_index) {
-  auto r_out = lantern_cross_entropy_loss_tensor_tensor_tensor_intt_intt(self.get(), target.get(), weight.get(), reduction.get(), ignore_index.get());
+XPtrTorchTensor cpp_torch_namespace_cross_entropy_loss_self_Tensor_target_Tensor (XPtrTorchTensor self, XPtrTorchTensor target, XPtrTorchOptionalTensor weight, XPtrTorchint64_t reduction, XPtrTorchint64_t ignore_index, XPtrTorchdouble label_smoothing) {
+  auto r_out = lantern_cross_entropy_loss_tensor_tensor_tensor_intt_intt_double(self.get(), target.get(), weight.get(), reduction.get(), ignore_index.get(), label_smoothing.get());
 return XPtrTorchTensor(r_out);
 }
 
@@ -11723,6 +12323,34 @@ return XPtrTorchTensor(r_out);
 }
 
 // [[Rcpp::export]]
+Rcpp::List cpp_torch_namespace_histogram_out_hist_Tensor_bin_edges_Tensor_self_Tensor_bins_Tensor (XPtrTorchTensor hist, XPtrTorchTensor bin_edges, XPtrTorchTensor self, XPtrTorchTensor bins, XPtrTorchOptionalTensor weight, XPtrTorchbool density) {
+  auto r_out = lantern_histogram_out_tensor_tensor_tensor_tensor_tensor_bool(hist.get(), bin_edges.get(), self.get(), bins.get(), weight.get(), density.get());
+auto wrap = XPtrTorchvector_void(r_out);
+return Rcpp::List::create(XPtrTorchTensor(lantern_vector_get(wrap.get(), 0)),XPtrTorchTensor(lantern_vector_get(wrap.get(), 1)));
+}
+
+// [[Rcpp::export]]
+Rcpp::List cpp_torch_namespace_histogram_self_Tensor_bins_Tensor (XPtrTorchTensor self, XPtrTorchTensor bins, XPtrTorchOptionalTensor weight, XPtrTorchbool density) {
+  auto r_out = lantern_histogram_tensor_tensor_tensor_bool(self.get(), bins.get(), weight.get(), density.get());
+auto wrap = XPtrTorchvector_void(r_out);
+return Rcpp::List::create(XPtrTorchTensor(lantern_vector_get(wrap.get(), 0)),XPtrTorchTensor(lantern_vector_get(wrap.get(), 1)));
+}
+
+// [[Rcpp::export]]
+Rcpp::List cpp_torch_namespace_histogram_out_hist_Tensor_bin_edges_Tensor_self_Tensor_bins_int64_t (XPtrTorchTensor hist, XPtrTorchTensor bin_edges, XPtrTorchTensor self, XPtrTorchint64_t bins, XPtrTorchOptionalDoubleArrayRef range, XPtrTorchOptionalTensor weight, XPtrTorchbool density) {
+  auto r_out = lantern_histogram_out_tensor_tensor_tensor_intt_arrayrefdouble_tensor_bool(hist.get(), bin_edges.get(), self.get(), bins.get(), range.get(), weight.get(), density.get());
+auto wrap = XPtrTorchvector_void(r_out);
+return Rcpp::List::create(XPtrTorchTensor(lantern_vector_get(wrap.get(), 0)),XPtrTorchTensor(lantern_vector_get(wrap.get(), 1)));
+}
+
+// [[Rcpp::export]]
+Rcpp::List cpp_torch_namespace_histogram_self_Tensor_bins_int64_t (XPtrTorchTensor self, XPtrTorchint64_t bins, XPtrTorchOptionalDoubleArrayRef range, XPtrTorchOptionalTensor weight, XPtrTorchbool density) {
+  auto r_out = lantern_histogram_tensor_intt_arrayrefdouble_tensor_bool(self.get(), bins.get(), range.get(), weight.get(), density.get());
+auto wrap = XPtrTorchvector_void(r_out);
+return Rcpp::List::create(XPtrTorchTensor(lantern_vector_get(wrap.get(), 0)),XPtrTorchTensor(lantern_vector_get(wrap.get(), 1)));
+}
+
+// [[Rcpp::export]]
 XPtrTorchTensor cpp_torch_namespace_fmod_out_out_Tensor_self_Tensor_other_Scalar (XPtrTorchTensor out, XPtrTorchTensor self, XPtrTorchScalar other) {
   auto r_out = lantern_fmod_out_tensor_tensor_scalar(out.get(), self.get(), other.get());
 return XPtrTorchTensor(r_out);
@@ -11815,6 +12443,12 @@ return XPtrTorchTensor(r_out);
 // [[Rcpp::export]]
 XPtrTorchTensor cpp_torch_namespace_remainder_self_Tensor_other_Tensor (XPtrTorchTensor self, XPtrTorchTensor other) {
   auto r_out = lantern_remainder_tensor_tensor(self.get(), other.get());
+return XPtrTorchTensor(r_out);
+}
+
+// [[Rcpp::export]]
+XPtrTorchTensor cpp_torch_namespace_remainder_self_Scalar_other_Tensor (XPtrTorchScalar self, XPtrTorchTensor other) {
+  auto r_out = lantern_remainder_scalar_tensor(self.get(), other.get());
 return XPtrTorchTensor(r_out);
 }
 
@@ -11951,50 +12585,50 @@ return XPtrTorchTensor(r_out);
 }
 
 // [[Rcpp::export]]
-XPtrTorchTensor cpp_torch_namespace_quantile_out_out_Tensor_self_Tensor_q_double_dim_int64_t_keepdim_bool_interpolation_stdstring (XPtrTorchTensor out, XPtrTorchTensor self, XPtrTorchdouble q, XPtrTorchoptional_index_int64_t dim, XPtrTorchbool keepdim, XPtrTorchstring interpolation) {
-  auto r_out = lantern_quantile_out_tensor_tensor_double_intt_bool_stdstring(out.get(), self.get(), q.get(), dim.get(), keepdim.get(), interpolation.get());
+XPtrTorchTensor cpp_torch_namespace_quantile_out_out_Tensor_self_Tensor_q_double_dim_int64_t_keepdim_bool_interpolation_c10string_view (XPtrTorchTensor out, XPtrTorchTensor self, XPtrTorchdouble q, XPtrTorchoptional_index_int64_t dim, XPtrTorchbool keepdim, XPtrTorchstring interpolation) {
+  auto r_out = lantern_quantile_out_tensor_tensor_double_intt_bool_cstringview(out.get(), self.get(), q.get(), dim.get(), keepdim.get(), interpolation.get());
 return XPtrTorchTensor(r_out);
 }
 
 // [[Rcpp::export]]
-XPtrTorchTensor cpp_torch_namespace_quantile_self_Tensor_q_double_dim_int64_t_keepdim_bool_interpolation_stdstring (XPtrTorchTensor self, XPtrTorchdouble q, XPtrTorchoptional_index_int64_t dim, XPtrTorchbool keepdim, XPtrTorchstring interpolation) {
-  auto r_out = lantern_quantile_tensor_double_intt_bool_stdstring(self.get(), q.get(), dim.get(), keepdim.get(), interpolation.get());
+XPtrTorchTensor cpp_torch_namespace_quantile_self_Tensor_q_double_dim_int64_t_keepdim_bool_interpolation_c10string_view (XPtrTorchTensor self, XPtrTorchdouble q, XPtrTorchoptional_index_int64_t dim, XPtrTorchbool keepdim, XPtrTorchstring interpolation) {
+  auto r_out = lantern_quantile_tensor_double_intt_bool_cstringview(self.get(), q.get(), dim.get(), keepdim.get(), interpolation.get());
 return XPtrTorchTensor(r_out);
 }
 
 // [[Rcpp::export]]
-XPtrTorchTensor cpp_torch_namespace_quantile_out_out_Tensor_self_Tensor_q_Tensor_dim_int64_t_keepdim_bool_interpolation_stdstring (XPtrTorchTensor out, XPtrTorchTensor self, XPtrTorchTensor q, XPtrTorchoptional_index_int64_t dim, XPtrTorchbool keepdim, XPtrTorchstring interpolation) {
-  auto r_out = lantern_quantile_out_tensor_tensor_tensor_intt_bool_stdstring(out.get(), self.get(), q.get(), dim.get(), keepdim.get(), interpolation.get());
+XPtrTorchTensor cpp_torch_namespace_quantile_out_out_Tensor_self_Tensor_q_Tensor_dim_int64_t_keepdim_bool_interpolation_c10string_view (XPtrTorchTensor out, XPtrTorchTensor self, XPtrTorchTensor q, XPtrTorchoptional_index_int64_t dim, XPtrTorchbool keepdim, XPtrTorchstring interpolation) {
+  auto r_out = lantern_quantile_out_tensor_tensor_tensor_intt_bool_cstringview(out.get(), self.get(), q.get(), dim.get(), keepdim.get(), interpolation.get());
 return XPtrTorchTensor(r_out);
 }
 
 // [[Rcpp::export]]
-XPtrTorchTensor cpp_torch_namespace_quantile_self_Tensor_q_Tensor_dim_int64_t_keepdim_bool_interpolation_stdstring (XPtrTorchTensor self, XPtrTorchTensor q, XPtrTorchoptional_index_int64_t dim, XPtrTorchbool keepdim, XPtrTorchstring interpolation) {
-  auto r_out = lantern_quantile_tensor_tensor_intt_bool_stdstring(self.get(), q.get(), dim.get(), keepdim.get(), interpolation.get());
+XPtrTorchTensor cpp_torch_namespace_quantile_self_Tensor_q_Tensor_dim_int64_t_keepdim_bool_interpolation_c10string_view (XPtrTorchTensor self, XPtrTorchTensor q, XPtrTorchoptional_index_int64_t dim, XPtrTorchbool keepdim, XPtrTorchstring interpolation) {
+  auto r_out = lantern_quantile_tensor_tensor_intt_bool_cstringview(self.get(), q.get(), dim.get(), keepdim.get(), interpolation.get());
 return XPtrTorchTensor(r_out);
 }
 
 // [[Rcpp::export]]
-XPtrTorchTensor cpp_torch_namespace_nanquantile_out_out_Tensor_self_Tensor_q_double_dim_int64_t_keepdim_bool_interpolation_stdstring (XPtrTorchTensor out, XPtrTorchTensor self, XPtrTorchdouble q, XPtrTorchoptional_index_int64_t dim, XPtrTorchbool keepdim, XPtrTorchstring interpolation) {
-  auto r_out = lantern_nanquantile_out_tensor_tensor_double_intt_bool_stdstring(out.get(), self.get(), q.get(), dim.get(), keepdim.get(), interpolation.get());
+XPtrTorchTensor cpp_torch_namespace_nanquantile_out_out_Tensor_self_Tensor_q_double_dim_int64_t_keepdim_bool_interpolation_c10string_view (XPtrTorchTensor out, XPtrTorchTensor self, XPtrTorchdouble q, XPtrTorchoptional_index_int64_t dim, XPtrTorchbool keepdim, XPtrTorchstring interpolation) {
+  auto r_out = lantern_nanquantile_out_tensor_tensor_double_intt_bool_cstringview(out.get(), self.get(), q.get(), dim.get(), keepdim.get(), interpolation.get());
 return XPtrTorchTensor(r_out);
 }
 
 // [[Rcpp::export]]
-XPtrTorchTensor cpp_torch_namespace_nanquantile_self_Tensor_q_double_dim_int64_t_keepdim_bool_interpolation_stdstring (XPtrTorchTensor self, XPtrTorchdouble q, XPtrTorchoptional_index_int64_t dim, XPtrTorchbool keepdim, XPtrTorchstring interpolation) {
-  auto r_out = lantern_nanquantile_tensor_double_intt_bool_stdstring(self.get(), q.get(), dim.get(), keepdim.get(), interpolation.get());
+XPtrTorchTensor cpp_torch_namespace_nanquantile_self_Tensor_q_double_dim_int64_t_keepdim_bool_interpolation_c10string_view (XPtrTorchTensor self, XPtrTorchdouble q, XPtrTorchoptional_index_int64_t dim, XPtrTorchbool keepdim, XPtrTorchstring interpolation) {
+  auto r_out = lantern_nanquantile_tensor_double_intt_bool_cstringview(self.get(), q.get(), dim.get(), keepdim.get(), interpolation.get());
 return XPtrTorchTensor(r_out);
 }
 
 // [[Rcpp::export]]
-XPtrTorchTensor cpp_torch_namespace_nanquantile_out_out_Tensor_self_Tensor_q_Tensor_dim_int64_t_keepdim_bool_interpolation_stdstring (XPtrTorchTensor out, XPtrTorchTensor self, XPtrTorchTensor q, XPtrTorchoptional_index_int64_t dim, XPtrTorchbool keepdim, XPtrTorchstring interpolation) {
-  auto r_out = lantern_nanquantile_out_tensor_tensor_tensor_intt_bool_stdstring(out.get(), self.get(), q.get(), dim.get(), keepdim.get(), interpolation.get());
+XPtrTorchTensor cpp_torch_namespace_nanquantile_out_out_Tensor_self_Tensor_q_Tensor_dim_int64_t_keepdim_bool_interpolation_c10string_view (XPtrTorchTensor out, XPtrTorchTensor self, XPtrTorchTensor q, XPtrTorchoptional_index_int64_t dim, XPtrTorchbool keepdim, XPtrTorchstring interpolation) {
+  auto r_out = lantern_nanquantile_out_tensor_tensor_tensor_intt_bool_cstringview(out.get(), self.get(), q.get(), dim.get(), keepdim.get(), interpolation.get());
 return XPtrTorchTensor(r_out);
 }
 
 // [[Rcpp::export]]
-XPtrTorchTensor cpp_torch_namespace_nanquantile_self_Tensor_q_Tensor_dim_int64_t_keepdim_bool_interpolation_stdstring (XPtrTorchTensor self, XPtrTorchTensor q, XPtrTorchoptional_index_int64_t dim, XPtrTorchbool keepdim, XPtrTorchstring interpolation) {
-  auto r_out = lantern_nanquantile_tensor_tensor_intt_bool_stdstring(self.get(), q.get(), dim.get(), keepdim.get(), interpolation.get());
+XPtrTorchTensor cpp_torch_namespace_nanquantile_self_Tensor_q_Tensor_dim_int64_t_keepdim_bool_interpolation_c10string_view (XPtrTorchTensor self, XPtrTorchTensor q, XPtrTorchoptional_index_int64_t dim, XPtrTorchbool keepdim, XPtrTorchstring interpolation) {
+  auto r_out = lantern_nanquantile_tensor_tensor_intt_bool_cstringview(self.get(), q.get(), dim.get(), keepdim.get(), interpolation.get());
 return XPtrTorchTensor(r_out);
 }
 
@@ -12099,8 +12733,20 @@ return XPtrTorchTensor(r_out);
 }
 
 // [[Rcpp::export]]
+XPtrTorchTensor cpp_torch_namespace_all_out_out_Tensor_self_Tensor (XPtrTorchTensor out, XPtrTorchTensor self) {
+  auto r_out = lantern_all_out_tensor_tensor(out.get(), self.get());
+return XPtrTorchTensor(r_out);
+}
+
+// [[Rcpp::export]]
 XPtrTorchTensor cpp_torch_namespace_any_self_Tensor (XPtrTorchTensor self) {
   auto r_out = lantern_any_tensor(self.get());
+return XPtrTorchTensor(r_out);
+}
+
+// [[Rcpp::export]]
+XPtrTorchTensor cpp_torch_namespace_any_out_out_Tensor_self_Tensor (XPtrTorchTensor out, XPtrTorchTensor self) {
+  auto r_out = lantern_any_out_tensor_tensor(out.get(), self.get());
 return XPtrTorchTensor(r_out);
 }
 
@@ -12233,30 +12879,6 @@ return XPtrTorchTensor(r_out);
 // [[Rcpp::export]]
 XPtrTorchTensor cpp_torch_namespace__index_copy__self_Tensor_dim_int64_t_index_Tensor_source_Tensor (XPtrTorchTensor self, XPtrTorchindex_int64_t dim, XPtrTorchIndexTensor index, XPtrTorchTensor source) {
   auto r_out = lantern__index_copy__tensor_intt_tensor_tensor(self.get(), dim.get(), index.get(), source.get());
-return XPtrTorchTensor(r_out);
-}
-
-// [[Rcpp::export]]
-XPtrTorchTensor cpp_torch_namespace__cumsum_self_Tensor_dim_int64_t (XPtrTorchTensor self, XPtrTorchindex_int64_t dim) {
-  auto r_out = lantern__cumsum_tensor_intt(self.get(), dim.get());
-return XPtrTorchTensor(r_out);
-}
-
-// [[Rcpp::export]]
-XPtrTorchTensor cpp_torch_namespace__cumsum_out_out_Tensor_self_Tensor_dim_int64_t (XPtrTorchTensor out, XPtrTorchTensor self, XPtrTorchindex_int64_t dim) {
-  auto r_out = lantern__cumsum_out_tensor_tensor_intt(out.get(), self.get(), dim.get());
-return XPtrTorchTensor(r_out);
-}
-
-// [[Rcpp::export]]
-XPtrTorchTensor cpp_torch_namespace__cumprod_self_Tensor_dim_int64_t (XPtrTorchTensor self, XPtrTorchindex_int64_t dim) {
-  auto r_out = lantern__cumprod_tensor_intt(self.get(), dim.get());
-return XPtrTorchTensor(r_out);
-}
-
-// [[Rcpp::export]]
-XPtrTorchTensor cpp_torch_namespace__cumprod_out_out_Tensor_self_Tensor_dim_int64_t (XPtrTorchTensor out, XPtrTorchTensor self, XPtrTorchindex_int64_t dim) {
-  auto r_out = lantern__cumprod_out_tensor_tensor_intt(out.get(), self.get(), dim.get());
 return XPtrTorchTensor(r_out);
 }
 
@@ -12821,6 +13443,18 @@ return XPtrTorchTensor(r_out);
 }
 
 // [[Rcpp::export]]
+XPtrTorchTensor cpp_torch_namespace__convert_indices_from_coo_to_csr_self_Tensor_size_int64_t (XPtrTorchTensor self, XPtrTorchint64_t size, XPtrTorchbool out_int32) {
+  auto r_out = lantern__convert_indices_from_coo_to_csr_tensor_intt_bool(self.get(), size.get(), out_int32.get());
+return XPtrTorchTensor(r_out);
+}
+
+// [[Rcpp::export]]
+XPtrTorchTensor cpp_torch_namespace__convert_indices_from_coo_to_csr_out_out_Tensor_self_Tensor_size_int64_t (XPtrTorchTensor out, XPtrTorchTensor self, XPtrTorchint64_t size, XPtrTorchbool out_int32) {
+  auto r_out = lantern__convert_indices_from_coo_to_csr_out_tensor_tensor_intt_bool(out.get(), self.get(), size.get(), out_int32.get());
+return XPtrTorchTensor(r_out);
+}
+
+// [[Rcpp::export]]
 XPtrTorchTensor cpp_torch_namespace_mse_loss_out_out_Tensor_self_Tensor_target_Tensor (XPtrTorchTensor out, XPtrTorchTensor self, XPtrTorchTensor target, XPtrTorchint64_t reduction) {
   auto r_out = lantern_mse_loss_out_tensor_tensor_tensor_intt(out.get(), self.get(), target.get(), reduction.get());
 return XPtrTorchTensor(r_out);
@@ -13097,6 +13731,12 @@ return XPtrTorchTensor(r_out);
 }
 
 // [[Rcpp::export]]
+XPtrTorchTensor cpp_torch_namespace_elu_backward_out_grad_input_Tensor_grad_output_Tensor_alpha_Scalar_scale_Scalar_input_scale_Scalar_is_result_bool_self_or_result_Tensor (XPtrTorchTensor grad_input, XPtrTorchTensor grad_output, XPtrTorchScalar alpha, XPtrTorchScalar scale, XPtrTorchScalar input_scale, XPtrTorchbool is_result, XPtrTorchTensor self_or_result) {
+  auto r_out = lantern_elu_backward_out_tensor_tensor_scalar_scalar_scalar_bool_tensor(grad_input.get(), grad_output.get(), alpha.get(), scale.get(), input_scale.get(), is_result.get(), self_or_result.get());
+return XPtrTorchTensor(r_out);
+}
+
+// [[Rcpp::export]]
 XPtrTorchTensor cpp_torch_namespace_elu_backward_grad_output_Tensor_alpha_Scalar_scale_Scalar_input_scale_Scalar_is_result_bool_self_or_result_Tensor (XPtrTorchTensor grad_output, XPtrTorchScalar alpha, XPtrTorchScalar scale, XPtrTorchScalar input_scale, XPtrTorchbool is_result, XPtrTorchTensor self_or_result) {
   auto r_out = lantern_elu_backward_tensor_scalar_scalar_scalar_bool_tensor(grad_output.get(), alpha.get(), scale.get(), input_scale.get(), is_result.get(), self_or_result.get());
 return XPtrTorchTensor(r_out);
@@ -13147,6 +13787,12 @@ return XPtrTorchTensor(r_out);
 // [[Rcpp::export]]
 XPtrTorchTensor cpp_torch_namespace_hardsigmoid__self_Tensor (XPtrTorchTensor self) {
   auto r_out = lantern_hardsigmoid__tensor(self.get());
+return XPtrTorchTensor(r_out);
+}
+
+// [[Rcpp::export]]
+XPtrTorchTensor cpp_torch_namespace_hardsigmoid_backward_out_grad_input_Tensor_grad_output_Tensor_self_Tensor (XPtrTorchTensor grad_input, XPtrTorchTensor grad_output, XPtrTorchTensor self) {
+  auto r_out = lantern_hardsigmoid_backward_out_tensor_tensor_tensor(grad_input.get(), grad_output.get(), self.get());
 return XPtrTorchTensor(r_out);
 }
 
@@ -13219,6 +13865,12 @@ return XPtrTorchTensor(r_out);
 // [[Rcpp::export]]
 XPtrTorchTensor cpp_torch_namespace_leaky_relu_self_Tensor (XPtrTorchTensor self, XPtrTorchScalar negative_slope) {
   auto r_out = lantern_leaky_relu_tensor_scalar(self.get(), negative_slope.get());
+return XPtrTorchTensor(r_out);
+}
+
+// [[Rcpp::export]]
+XPtrTorchTensor cpp_torch_namespace_leaky_relu_backward_out_grad_input_Tensor_grad_output_Tensor_self_Tensor_negative_slope_Scalar_self_is_result_bool (XPtrTorchTensor grad_input, XPtrTorchTensor grad_output, XPtrTorchTensor self, XPtrTorchScalar negative_slope, XPtrTorchbool self_is_result) {
+  auto r_out = lantern_leaky_relu_backward_out_tensor_tensor_tensor_scalar_bool(grad_input.get(), grad_output.get(), self.get(), negative_slope.get(), self_is_result.get());
 return XPtrTorchTensor(r_out);
 }
 
@@ -13711,6 +14363,30 @@ return XPtrTorchTensor(r_out);
 }
 
 // [[Rcpp::export]]
+XPtrTorchTensor cpp_torch_namespace_reflection_pad3d_out_out_Tensor_self_Tensor_padding_IntArrayRef (XPtrTorchTensor out, XPtrTorchTensor self, XPtrTorchIntArrayRef padding) {
+  auto r_out = lantern_reflection_pad3d_out_tensor_tensor_intarrayref(out.get(), self.get(), padding.get());
+return XPtrTorchTensor(r_out);
+}
+
+// [[Rcpp::export]]
+XPtrTorchTensor cpp_torch_namespace_reflection_pad3d_self_Tensor_padding_IntArrayRef (XPtrTorchTensor self, XPtrTorchIntArrayRef padding) {
+  auto r_out = lantern_reflection_pad3d_tensor_intarrayref(self.get(), padding.get());
+return XPtrTorchTensor(r_out);
+}
+
+// [[Rcpp::export]]
+XPtrTorchTensor cpp_torch_namespace_reflection_pad3d_backward_out_grad_input_Tensor_grad_output_Tensor_self_Tensor_padding_IntArrayRef (XPtrTorchTensor grad_input, XPtrTorchTensor grad_output, XPtrTorchTensor self, XPtrTorchIntArrayRef padding) {
+  auto r_out = lantern_reflection_pad3d_backward_out_tensor_tensor_tensor_intarrayref(grad_input.get(), grad_output.get(), self.get(), padding.get());
+return XPtrTorchTensor(r_out);
+}
+
+// [[Rcpp::export]]
+XPtrTorchTensor cpp_torch_namespace_reflection_pad3d_backward_grad_output_Tensor_self_Tensor_padding_IntArrayRef (XPtrTorchTensor grad_output, XPtrTorchTensor self, XPtrTorchIntArrayRef padding) {
+  auto r_out = lantern_reflection_pad3d_backward_tensor_tensor_intarrayref(grad_output.get(), self.get(), padding.get());
+return XPtrTorchTensor(r_out);
+}
+
+// [[Rcpp::export]]
 XPtrTorchTensor cpp_torch_namespace_replication_pad1d_out_out_Tensor_self_Tensor_padding_IntArrayRef (XPtrTorchTensor out, XPtrTorchTensor self, XPtrTorchIntArrayRef padding) {
   auto r_out = lantern_replication_pad1d_out_tensor_tensor_intarrayref(out.get(), self.get(), padding.get());
 return XPtrTorchTensor(r_out);
@@ -14163,39 +14839,27 @@ return Rcpp::List::create(XPtrTorchTensor(lantern_vector_get(wrap.get(), 0)),XPt
 }
 
 // [[Rcpp::export]]
-XPtrTorchTensor cpp_torch_namespace_thnn_conv_depthwise2d_out_out_Tensor_self_Tensor_weight_Tensor_kernel_size_IntArrayRef (XPtrTorchTensor out, XPtrTorchTensor self, XPtrTorchTensor weight, XPtrTorchIntArrayRef kernel_size, XPtrTorchOptionalTensor bias, XPtrTorchIntArrayRef stride, XPtrTorchIntArrayRef padding, XPtrTorchIntArrayRef dilation) {
-  auto r_out = lantern_thnn_conv_depthwise2d_out_tensor_tensor_tensor_intarrayref_tensor_intarrayref_intarrayref_intarrayref(out.get(), self.get(), weight.get(), kernel_size.get(), bias.get(), stride.get(), padding.get(), dilation.get());
+XPtrTorchTensor cpp_torch_namespace__conv_depthwise2d_out_out_Tensor_self_Tensor_weight_Tensor_kernel_size_IntArrayRef_bias_Tensor_stride_IntArrayRef_padding_IntArrayRef_dilation_IntArrayRef (XPtrTorchTensor out, XPtrTorchTensor self, XPtrTorchTensor weight, XPtrTorchIntArrayRef kernel_size, XPtrTorchOptionalTensor bias, XPtrTorchIntArrayRef stride, XPtrTorchIntArrayRef padding, XPtrTorchIntArrayRef dilation) {
+  auto r_out = lantern__conv_depthwise2d_out_tensor_tensor_tensor_intarrayref_tensor_intarrayref_intarrayref_intarrayref(out.get(), self.get(), weight.get(), kernel_size.get(), bias.get(), stride.get(), padding.get(), dilation.get());
 return XPtrTorchTensor(r_out);
 }
 
 // [[Rcpp::export]]
-XPtrTorchTensor cpp_torch_namespace_thnn_conv_depthwise2d_self_Tensor_weight_Tensor_kernel_size_IntArrayRef (XPtrTorchTensor self, XPtrTorchTensor weight, XPtrTorchIntArrayRef kernel_size, XPtrTorchOptionalTensor bias, XPtrTorchIntArrayRef stride, XPtrTorchIntArrayRef padding, XPtrTorchIntArrayRef dilation) {
-  auto r_out = lantern_thnn_conv_depthwise2d_tensor_tensor_intarrayref_tensor_intarrayref_intarrayref_intarrayref(self.get(), weight.get(), kernel_size.get(), bias.get(), stride.get(), padding.get(), dilation.get());
+XPtrTorchTensor cpp_torch_namespace__conv_depthwise2d_self_Tensor_weight_Tensor_kernel_size_IntArrayRef_bias_Tensor_stride_IntArrayRef_padding_IntArrayRef_dilation_IntArrayRef (XPtrTorchTensor self, XPtrTorchTensor weight, XPtrTorchIntArrayRef kernel_size, XPtrTorchOptionalTensor bias, XPtrTorchIntArrayRef stride, XPtrTorchIntArrayRef padding, XPtrTorchIntArrayRef dilation) {
+  auto r_out = lantern__conv_depthwise2d_tensor_tensor_intarrayref_tensor_intarrayref_intarrayref_intarrayref(self.get(), weight.get(), kernel_size.get(), bias.get(), stride.get(), padding.get(), dilation.get());
 return XPtrTorchTensor(r_out);
 }
 
 // [[Rcpp::export]]
-XPtrTorchTensor cpp_torch_namespace_thnn_conv_depthwise2d_forward_out_out_Tensor_self_Tensor_weight_Tensor_kernel_size_IntArrayRef_bias_Tensor_stride_IntArrayRef_padding_IntArrayRef_dilation_IntArrayRef (XPtrTorchTensor out, XPtrTorchTensor self, XPtrTorchTensor weight, XPtrTorchIntArrayRef kernel_size, XPtrTorchOptionalTensor bias, XPtrTorchIntArrayRef stride, XPtrTorchIntArrayRef padding, XPtrTorchIntArrayRef dilation) {
-  auto r_out = lantern_thnn_conv_depthwise2d_forward_out_tensor_tensor_tensor_intarrayref_tensor_intarrayref_intarrayref_intarrayref(out.get(), self.get(), weight.get(), kernel_size.get(), bias.get(), stride.get(), padding.get(), dilation.get());
-return XPtrTorchTensor(r_out);
-}
-
-// [[Rcpp::export]]
-XPtrTorchTensor cpp_torch_namespace_thnn_conv_depthwise2d_forward_self_Tensor_weight_Tensor_kernel_size_IntArrayRef_bias_Tensor_stride_IntArrayRef_padding_IntArrayRef_dilation_IntArrayRef (XPtrTorchTensor self, XPtrTorchTensor weight, XPtrTorchIntArrayRef kernel_size, XPtrTorchOptionalTensor bias, XPtrTorchIntArrayRef stride, XPtrTorchIntArrayRef padding, XPtrTorchIntArrayRef dilation) {
-  auto r_out = lantern_thnn_conv_depthwise2d_forward_tensor_tensor_intarrayref_tensor_intarrayref_intarrayref_intarrayref(self.get(), weight.get(), kernel_size.get(), bias.get(), stride.get(), padding.get(), dilation.get());
-return XPtrTorchTensor(r_out);
-}
-
-// [[Rcpp::export]]
-Rcpp::List cpp_torch_namespace_thnn_conv_depthwise2d_backward_out_grad_input_Tensor_grad_weight_Tensor_grad_output_Tensor_self_Tensor_weight_Tensor_kernel_size_IntArrayRef_stride_IntArrayRef_padding_IntArrayRef_dilation_IntArrayRef (XPtrTorchTensor grad_input, XPtrTorchTensor grad_weight, XPtrTorchTensor grad_output, XPtrTorchTensor self, XPtrTorchTensor weight, XPtrTorchIntArrayRef kernel_size, XPtrTorchIntArrayRef stride, XPtrTorchIntArrayRef padding, XPtrTorchIntArrayRef dilation) {
-  auto r_out = lantern_thnn_conv_depthwise2d_backward_out_tensor_tensor_tensor_tensor_tensor_intarrayref_intarrayref_intarrayref_intarrayref(grad_input.get(), grad_weight.get(), grad_output.get(), self.get(), weight.get(), kernel_size.get(), stride.get(), padding.get(), dilation.get());
+Rcpp::List cpp_torch_namespace__conv_depthwise2d_backward_out_grad_input_Tensor_grad_weight_Tensor_grad_output_Tensor_self_Tensor_weight_Tensor_kernel_size_IntArrayRef_stride_IntArrayRef_padding_IntArrayRef_dilation_IntArrayRef (XPtrTorchTensor grad_input, XPtrTorchTensor grad_weight, XPtrTorchTensor grad_output, XPtrTorchTensor self, XPtrTorchTensor weight, XPtrTorchIntArrayRef kernel_size, XPtrTorchIntArrayRef stride, XPtrTorchIntArrayRef padding, XPtrTorchIntArrayRef dilation) {
+  auto r_out = lantern__conv_depthwise2d_backward_out_tensor_tensor_tensor_tensor_tensor_intarrayref_intarrayref_intarrayref_intarrayref(grad_input.get(), grad_weight.get(), grad_output.get(), self.get(), weight.get(), kernel_size.get(), stride.get(), padding.get(), dilation.get());
 auto wrap = XPtrTorchvector_void(r_out);
 return Rcpp::List::create(XPtrTorchTensor(lantern_vector_get(wrap.get(), 0)),XPtrTorchTensor(lantern_vector_get(wrap.get(), 1)));
 }
 
 // [[Rcpp::export]]
-Rcpp::List cpp_torch_namespace_thnn_conv_depthwise2d_backward_grad_output_Tensor_self_Tensor_weight_Tensor_kernel_size_IntArrayRef_stride_IntArrayRef_padding_IntArrayRef_dilation_IntArrayRef_output_mask_stdarraybool2 (XPtrTorchTensor grad_output, XPtrTorchTensor self, XPtrTorchTensor weight, XPtrTorchIntArrayRef kernel_size, XPtrTorchIntArrayRef stride, XPtrTorchIntArrayRef padding, XPtrTorchIntArrayRef dilation, std::vector<bool> output_mask) {
-  auto r_out = lantern_thnn_conv_depthwise2d_backward_tensor_tensor_tensor_intarrayref_intarrayref_intarrayref_intarrayref_stdarraybool(grad_output.get(), self.get(), weight.get(), kernel_size.get(), stride.get(), padding.get(), dilation.get(), reinterpret_cast<void*>(&output_mask));
+Rcpp::List cpp_torch_namespace__conv_depthwise2d_backward_grad_output_Tensor_self_Tensor_weight_Tensor_kernel_size_IntArrayRef_stride_IntArrayRef_padding_IntArrayRef_dilation_IntArrayRef_output_mask_stdarraybool2 (XPtrTorchTensor grad_output, XPtrTorchTensor self, XPtrTorchTensor weight, XPtrTorchIntArrayRef kernel_size, XPtrTorchIntArrayRef stride, XPtrTorchIntArrayRef padding, XPtrTorchIntArrayRef dilation, std::vector<bool> output_mask) {
+  auto r_out = lantern__conv_depthwise2d_backward_tensor_tensor_tensor_intarrayref_intarrayref_intarrayref_intarrayref_stdarraybool(grad_output.get(), self.get(), weight.get(), kernel_size.get(), stride.get(), padding.get(), dilation.get(), reinterpret_cast<void*>(&output_mask));
 auto wrap = XPtrTorchvector_void(r_out);
 return Rcpp::List::create(XPtrTorchTensor(lantern_vector_get(wrap.get(), 0)),XPtrTorchTensor(lantern_vector_get(wrap.get(), 1)));
 }
@@ -14407,6 +15071,18 @@ return XPtrTorchTensor(r_out);
 }
 
 // [[Rcpp::export]]
+XPtrTorchTensor cpp_torch_namespace_special_ndtri_self_Tensor (XPtrTorchTensor self) {
+  auto r_out = lantern_special_ndtri_tensor(self.get());
+return XPtrTorchTensor(r_out);
+}
+
+// [[Rcpp::export]]
+XPtrTorchTensor cpp_torch_namespace_special_ndtri_out_out_Tensor_self_Tensor (XPtrTorchTensor out, XPtrTorchTensor self) {
+  auto r_out = lantern_special_ndtri_out_tensor_tensor(out.get(), self.get());
+return XPtrTorchTensor(r_out);
+}
+
+// [[Rcpp::export]]
 XPtrTorchTensor cpp_torch_namespace_special_expm1_self_Tensor (XPtrTorchTensor self) {
   auto r_out = lantern_special_expm1_tensor(self.get());
 return XPtrTorchTensor(r_out);
@@ -14427,6 +15103,30 @@ return XPtrTorchTensor(r_out);
 // [[Rcpp::export]]
 XPtrTorchTensor cpp_torch_namespace_special_exp2_out_out_Tensor_self_Tensor (XPtrTorchTensor out, XPtrTorchTensor self) {
   auto r_out = lantern_special_exp2_out_tensor_tensor(out.get(), self.get());
+return XPtrTorchTensor(r_out);
+}
+
+// [[Rcpp::export]]
+XPtrTorchTensor cpp_torch_namespace_special_psi_self_Tensor (XPtrTorchTensor self) {
+  auto r_out = lantern_special_psi_tensor(self.get());
+return XPtrTorchTensor(r_out);
+}
+
+// [[Rcpp::export]]
+XPtrTorchTensor cpp_torch_namespace_special_psi_out_out_Tensor_self_Tensor (XPtrTorchTensor out, XPtrTorchTensor self) {
+  auto r_out = lantern_special_psi_out_tensor_tensor(out.get(), self.get());
+return XPtrTorchTensor(r_out);
+}
+
+// [[Rcpp::export]]
+XPtrTorchTensor cpp_torch_namespace_special_digamma_self_Tensor (XPtrTorchTensor self) {
+  auto r_out = lantern_special_digamma_tensor(self.get());
+return XPtrTorchTensor(r_out);
+}
+
+// [[Rcpp::export]]
+XPtrTorchTensor cpp_torch_namespace_special_digamma_out_out_Tensor_self_Tensor (XPtrTorchTensor out, XPtrTorchTensor self) {
+  auto r_out = lantern_special_digamma_out_tensor_tensor(out.get(), self.get());
 return XPtrTorchTensor(r_out);
 }
 
@@ -14467,6 +15167,18 @@ return XPtrTorchTensor(r_out);
 }
 
 // [[Rcpp::export]]
+XPtrTorchTensor cpp_torch_namespace_special_erfcx_self_Tensor (XPtrTorchTensor self) {
+  auto r_out = lantern_special_erfcx_tensor(self.get());
+return XPtrTorchTensor(r_out);
+}
+
+// [[Rcpp::export]]
+XPtrTorchTensor cpp_torch_namespace_special_erfcx_out_out_Tensor_self_Tensor (XPtrTorchTensor out, XPtrTorchTensor self) {
+  auto r_out = lantern_special_erfcx_out_tensor_tensor(out.get(), self.get());
+return XPtrTorchTensor(r_out);
+}
+
+// [[Rcpp::export]]
 XPtrTorchTensor cpp_torch_namespace_special_erfinv_self_Tensor (XPtrTorchTensor self) {
   auto r_out = lantern_special_erfinv_tensor(self.get());
 return XPtrTorchTensor(r_out);
@@ -14475,6 +15187,18 @@ return XPtrTorchTensor(r_out);
 // [[Rcpp::export]]
 XPtrTorchTensor cpp_torch_namespace_special_erfinv_out_out_Tensor_self_Tensor (XPtrTorchTensor out, XPtrTorchTensor self) {
   auto r_out = lantern_special_erfinv_out_tensor_tensor(out.get(), self.get());
+return XPtrTorchTensor(r_out);
+}
+
+// [[Rcpp::export]]
+XPtrTorchTensor cpp_torch_namespace_special_ndtr_self_Tensor (XPtrTorchTensor self) {
+  auto r_out = lantern_special_ndtr_tensor(self.get());
+return XPtrTorchTensor(r_out);
+}
+
+// [[Rcpp::export]]
+XPtrTorchTensor cpp_torch_namespace_special_ndtr_out_out_Tensor_self_Tensor (XPtrTorchTensor out, XPtrTorchTensor self) {
+  auto r_out = lantern_special_ndtr_out_tensor_tensor(out.get(), self.get());
 return XPtrTorchTensor(r_out);
 }
 
@@ -14515,6 +15239,90 @@ return XPtrTorchTensor(r_out);
 }
 
 // [[Rcpp::export]]
+XPtrTorchTensor cpp_torch_namespace_special_xlogy_self_Tensor_other_Tensor (XPtrTorchTensor self, XPtrTorchTensor other) {
+  auto r_out = lantern_special_xlogy_tensor_tensor(self.get(), other.get());
+return XPtrTorchTensor(r_out);
+}
+
+// [[Rcpp::export]]
+XPtrTorchTensor cpp_torch_namespace_special_xlogy_self_Scalar_other_Tensor (XPtrTorchScalar self, XPtrTorchTensor other) {
+  auto r_out = lantern_special_xlogy_scalar_tensor(self.get(), other.get());
+return XPtrTorchTensor(r_out);
+}
+
+// [[Rcpp::export]]
+XPtrTorchTensor cpp_torch_namespace_special_xlogy_self_Tensor_other_Scalar (XPtrTorchTensor self, XPtrTorchScalar other) {
+  auto r_out = lantern_special_xlogy_tensor_scalar(self.get(), other.get());
+return XPtrTorchTensor(r_out);
+}
+
+// [[Rcpp::export]]
+XPtrTorchTensor cpp_torch_namespace_special_xlogy_out_out_Tensor_self_Tensor_other_Tensor (XPtrTorchTensor out, XPtrTorchTensor self, XPtrTorchTensor other) {
+  auto r_out = lantern_special_xlogy_out_tensor_tensor_tensor(out.get(), self.get(), other.get());
+return XPtrTorchTensor(r_out);
+}
+
+// [[Rcpp::export]]
+XPtrTorchTensor cpp_torch_namespace_special_xlogy_out_out_Tensor_self_Scalar_other_Tensor (XPtrTorchTensor out, XPtrTorchScalar self, XPtrTorchTensor other) {
+  auto r_out = lantern_special_xlogy_out_tensor_scalar_tensor(out.get(), self.get(), other.get());
+return XPtrTorchTensor(r_out);
+}
+
+// [[Rcpp::export]]
+XPtrTorchTensor cpp_torch_namespace_special_xlogy_out_out_Tensor_self_Tensor_other_Scalar (XPtrTorchTensor out, XPtrTorchTensor self, XPtrTorchScalar other) {
+  auto r_out = lantern_special_xlogy_out_tensor_tensor_scalar(out.get(), self.get(), other.get());
+return XPtrTorchTensor(r_out);
+}
+
+// [[Rcpp::export]]
+XPtrTorchTensor cpp_torch_namespace_special_zeta_self_Tensor_other_Tensor (XPtrTorchTensor self, XPtrTorchTensor other) {
+  auto r_out = lantern_special_zeta_tensor_tensor(self.get(), other.get());
+return XPtrTorchTensor(r_out);
+}
+
+// [[Rcpp::export]]
+XPtrTorchTensor cpp_torch_namespace_special_zeta_self_Scalar_other_Tensor (XPtrTorchScalar self, XPtrTorchTensor other) {
+  auto r_out = lantern_special_zeta_scalar_tensor(self.get(), other.get());
+return XPtrTorchTensor(r_out);
+}
+
+// [[Rcpp::export]]
+XPtrTorchTensor cpp_torch_namespace_special_zeta_self_Tensor_other_Scalar (XPtrTorchTensor self, XPtrTorchScalar other) {
+  auto r_out = lantern_special_zeta_tensor_scalar(self.get(), other.get());
+return XPtrTorchTensor(r_out);
+}
+
+// [[Rcpp::export]]
+XPtrTorchTensor cpp_torch_namespace_special_zeta_out_out_Tensor_self_Tensor_other_Tensor (XPtrTorchTensor out, XPtrTorchTensor self, XPtrTorchTensor other) {
+  auto r_out = lantern_special_zeta_out_tensor_tensor_tensor(out.get(), self.get(), other.get());
+return XPtrTorchTensor(r_out);
+}
+
+// [[Rcpp::export]]
+XPtrTorchTensor cpp_torch_namespace_special_zeta_out_out_Tensor_self_Scalar_other_Tensor (XPtrTorchTensor out, XPtrTorchScalar self, XPtrTorchTensor other) {
+  auto r_out = lantern_special_zeta_out_tensor_scalar_tensor(out.get(), self.get(), other.get());
+return XPtrTorchTensor(r_out);
+}
+
+// [[Rcpp::export]]
+XPtrTorchTensor cpp_torch_namespace_special_zeta_out_out_Tensor_self_Tensor_other_Scalar (XPtrTorchTensor out, XPtrTorchTensor self, XPtrTorchScalar other) {
+  auto r_out = lantern_special_zeta_out_tensor_tensor_scalar(out.get(), self.get(), other.get());
+return XPtrTorchTensor(r_out);
+}
+
+// [[Rcpp::export]]
+XPtrTorchTensor cpp_torch_namespace_special_i0_self_Tensor (XPtrTorchTensor self) {
+  auto r_out = lantern_special_i0_tensor(self.get());
+return XPtrTorchTensor(r_out);
+}
+
+// [[Rcpp::export]]
+XPtrTorchTensor cpp_torch_namespace_special_i0_out_out_Tensor_self_Tensor (XPtrTorchTensor out, XPtrTorchTensor self) {
+  auto r_out = lantern_special_i0_out_tensor_tensor(out.get(), self.get());
+return XPtrTorchTensor(r_out);
+}
+
+// [[Rcpp::export]]
 XPtrTorchTensor cpp_torch_namespace_special_i0e_self_Tensor (XPtrTorchTensor self) {
   auto r_out = lantern_special_i0e_tensor(self.get());
 return XPtrTorchTensor(r_out);
@@ -14523,6 +15331,30 @@ return XPtrTorchTensor(r_out);
 // [[Rcpp::export]]
 XPtrTorchTensor cpp_torch_namespace_special_i0e_out_out_Tensor_self_Tensor (XPtrTorchTensor out, XPtrTorchTensor self) {
   auto r_out = lantern_special_i0e_out_tensor_tensor(out.get(), self.get());
+return XPtrTorchTensor(r_out);
+}
+
+// [[Rcpp::export]]
+XPtrTorchTensor cpp_torch_namespace_special_i1_self_Tensor (XPtrTorchTensor self) {
+  auto r_out = lantern_special_i1_tensor(self.get());
+return XPtrTorchTensor(r_out);
+}
+
+// [[Rcpp::export]]
+XPtrTorchTensor cpp_torch_namespace_special_i1_out_out_Tensor_self_Tensor (XPtrTorchTensor out, XPtrTorchTensor self) {
+  auto r_out = lantern_special_i1_out_tensor_tensor(out.get(), self.get());
+return XPtrTorchTensor(r_out);
+}
+
+// [[Rcpp::export]]
+XPtrTorchTensor cpp_torch_namespace_special_i1e_self_Tensor (XPtrTorchTensor self) {
+  auto r_out = lantern_special_i1e_tensor(self.get());
+return XPtrTorchTensor(r_out);
+}
+
+// [[Rcpp::export]]
+XPtrTorchTensor cpp_torch_namespace_special_i1e_out_out_Tensor_self_Tensor (XPtrTorchTensor out, XPtrTorchTensor self) {
+  auto r_out = lantern_special_i1e_out_tensor_tensor(out.get(), self.get());
 return XPtrTorchTensor(r_out);
 }
 
@@ -14539,6 +15371,24 @@ return XPtrTorchTensor(r_out);
 }
 
 // [[Rcpp::export]]
+XPtrTorchTensor cpp_torch_namespace_special_polygamma_out_out_Tensor_n_int64_t_self_Tensor (XPtrTorchTensor out, XPtrTorchint64_t n, XPtrTorchTensor self) {
+  auto r_out = lantern_special_polygamma_out_tensor_intt_tensor(out.get(), n.get(), self.get());
+return XPtrTorchTensor(r_out);
+}
+
+// [[Rcpp::export]]
+XPtrTorchTensor cpp_torch_namespace_special_logsumexp_self_Tensor_dim_IntArrayRef (XPtrTorchTensor self, XPtrTorchIndexIntArrayRef dim, XPtrTorchbool keepdim) {
+  auto r_out = lantern_special_logsumexp_tensor_intarrayref_bool(self.get(), dim.get(), keepdim.get());
+return XPtrTorchTensor(r_out);
+}
+
+// [[Rcpp::export]]
+XPtrTorchTensor cpp_torch_namespace_special_logsumexp_out_out_Tensor_self_Tensor_dim_IntArrayRef (XPtrTorchTensor out, XPtrTorchTensor self, XPtrTorchIndexIntArrayRef dim, XPtrTorchbool keepdim) {
+  auto r_out = lantern_special_logsumexp_out_tensor_tensor_intarrayref_bool(out.get(), self.get(), dim.get(), keepdim.get());
+return XPtrTorchTensor(r_out);
+}
+
+// [[Rcpp::export]]
 XPtrTorchTensor cpp_torch_namespace_special_expit_self_Tensor (XPtrTorchTensor self) {
   auto r_out = lantern_special_expit_tensor(self.get());
 return XPtrTorchTensor(r_out);
@@ -14551,170 +15401,248 @@ return XPtrTorchTensor(r_out);
 }
 
 // [[Rcpp::export]]
-XPtrTorchTensor cpp_torch_namespace_fft_fft_self_Tensor (XPtrTorchTensor self, XPtrTorchoptional_int64_t n, XPtrTorchindex_int64_t dim, XPtrTorchoptional_string norm) {
-  auto r_out = lantern_fft_fft_tensor_intt_intt_stdstring(self.get(), n.get(), dim.get(), norm.get());
+XPtrTorchTensor cpp_torch_namespace_special_sinc_self_Tensor (XPtrTorchTensor self) {
+  auto r_out = lantern_special_sinc_tensor(self.get());
 return XPtrTorchTensor(r_out);
 }
 
 // [[Rcpp::export]]
-XPtrTorchTensor cpp_torch_namespace_fft_fft_out_out_Tensor_self_Tensor (XPtrTorchTensor out, XPtrTorchTensor self, XPtrTorchoptional_int64_t n, XPtrTorchindex_int64_t dim, XPtrTorchoptional_string norm) {
-  auto r_out = lantern_fft_fft_out_tensor_tensor_intt_intt_stdstring(out.get(), self.get(), n.get(), dim.get(), norm.get());
+XPtrTorchTensor cpp_torch_namespace_special_sinc_out_out_Tensor_self_Tensor (XPtrTorchTensor out, XPtrTorchTensor self) {
+  auto r_out = lantern_special_sinc_out_tensor_tensor(out.get(), self.get());
 return XPtrTorchTensor(r_out);
 }
 
 // [[Rcpp::export]]
-XPtrTorchTensor cpp_torch_namespace_fft_ifft_self_Tensor (XPtrTorchTensor self, XPtrTorchoptional_int64_t n, XPtrTorchindex_int64_t dim, XPtrTorchoptional_string norm) {
-  auto r_out = lantern_fft_ifft_tensor_intt_intt_stdstring(self.get(), n.get(), dim.get(), norm.get());
+XPtrTorchTensor cpp_torch_namespace_special_round_self_Tensor (XPtrTorchTensor self) {
+  auto r_out = lantern_special_round_tensor(self.get());
 return XPtrTorchTensor(r_out);
 }
 
 // [[Rcpp::export]]
-XPtrTorchTensor cpp_torch_namespace_fft_ifft_out_out_Tensor_self_Tensor (XPtrTorchTensor out, XPtrTorchTensor self, XPtrTorchoptional_int64_t n, XPtrTorchindex_int64_t dim, XPtrTorchoptional_string norm) {
-  auto r_out = lantern_fft_ifft_out_tensor_tensor_intt_intt_stdstring(out.get(), self.get(), n.get(), dim.get(), norm.get());
+XPtrTorchTensor cpp_torch_namespace_special_round_out_out_Tensor_self_Tensor (XPtrTorchTensor out, XPtrTorchTensor self) {
+  auto r_out = lantern_special_round_out_tensor_tensor(out.get(), self.get());
 return XPtrTorchTensor(r_out);
 }
 
 // [[Rcpp::export]]
-XPtrTorchTensor cpp_torch_namespace_fft_rfft_self_Tensor (XPtrTorchTensor self, XPtrTorchoptional_int64_t n, XPtrTorchindex_int64_t dim, XPtrTorchoptional_string norm) {
-  auto r_out = lantern_fft_rfft_tensor_intt_intt_stdstring(self.get(), n.get(), dim.get(), norm.get());
+XPtrTorchTensor cpp_torch_namespace_special_log1p_self_Tensor (XPtrTorchTensor self) {
+  auto r_out = lantern_special_log1p_tensor(self.get());
 return XPtrTorchTensor(r_out);
 }
 
 // [[Rcpp::export]]
-XPtrTorchTensor cpp_torch_namespace_fft_rfft_out_out_Tensor_self_Tensor (XPtrTorchTensor out, XPtrTorchTensor self, XPtrTorchoptional_int64_t n, XPtrTorchindex_int64_t dim, XPtrTorchoptional_string norm) {
-  auto r_out = lantern_fft_rfft_out_tensor_tensor_intt_intt_stdstring(out.get(), self.get(), n.get(), dim.get(), norm.get());
+XPtrTorchTensor cpp_torch_namespace_special_log1p_out_out_Tensor_self_Tensor (XPtrTorchTensor out, XPtrTorchTensor self) {
+  auto r_out = lantern_special_log1p_out_tensor_tensor(out.get(), self.get());
 return XPtrTorchTensor(r_out);
 }
 
 // [[Rcpp::export]]
-XPtrTorchTensor cpp_torch_namespace_fft_irfft_self_Tensor (XPtrTorchTensor self, XPtrTorchoptional_int64_t n, XPtrTorchindex_int64_t dim, XPtrTorchoptional_string norm) {
-  auto r_out = lantern_fft_irfft_tensor_intt_intt_stdstring(self.get(), n.get(), dim.get(), norm.get());
+XPtrTorchTensor cpp_torch_namespace_special_log_softmax_self_Tensor_dim_int64_t (XPtrTorchTensor self, XPtrTorchindex_int64_t dim, XPtrTorchoptional_scalar_type dtype) {
+  auto r_out = lantern_special_log_softmax_tensor_intt_scalartype(self.get(), dim.get(), dtype.get());
 return XPtrTorchTensor(r_out);
 }
 
 // [[Rcpp::export]]
-XPtrTorchTensor cpp_torch_namespace_fft_irfft_out_out_Tensor_self_Tensor (XPtrTorchTensor out, XPtrTorchTensor self, XPtrTorchoptional_int64_t n, XPtrTorchindex_int64_t dim, XPtrTorchoptional_string norm) {
-  auto r_out = lantern_fft_irfft_out_tensor_tensor_intt_intt_stdstring(out.get(), self.get(), n.get(), dim.get(), norm.get());
+XPtrTorchTensor cpp_torch_namespace_special_gammainc_out_out_Tensor_self_Tensor_other_Tensor (XPtrTorchTensor out, XPtrTorchTensor self, XPtrTorchTensor other) {
+  auto r_out = lantern_special_gammainc_out_tensor_tensor_tensor(out.get(), self.get(), other.get());
 return XPtrTorchTensor(r_out);
 }
 
 // [[Rcpp::export]]
-XPtrTorchTensor cpp_torch_namespace_fft_hfft_self_Tensor (XPtrTorchTensor self, XPtrTorchoptional_int64_t n, XPtrTorchindex_int64_t dim, XPtrTorchoptional_string norm) {
-  auto r_out = lantern_fft_hfft_tensor_intt_intt_stdstring(self.get(), n.get(), dim.get(), norm.get());
+XPtrTorchTensor cpp_torch_namespace_special_gammainc_self_Tensor_other_Tensor (XPtrTorchTensor self, XPtrTorchTensor other) {
+  auto r_out = lantern_special_gammainc_tensor_tensor(self.get(), other.get());
 return XPtrTorchTensor(r_out);
 }
 
 // [[Rcpp::export]]
-XPtrTorchTensor cpp_torch_namespace_fft_hfft_out_out_Tensor_self_Tensor (XPtrTorchTensor out, XPtrTorchTensor self, XPtrTorchoptional_int64_t n, XPtrTorchindex_int64_t dim, XPtrTorchoptional_string norm) {
-  auto r_out = lantern_fft_hfft_out_tensor_tensor_intt_intt_stdstring(out.get(), self.get(), n.get(), dim.get(), norm.get());
+XPtrTorchTensor cpp_torch_namespace_special_gammaincc_out_out_Tensor_self_Tensor_other_Tensor (XPtrTorchTensor out, XPtrTorchTensor self, XPtrTorchTensor other) {
+  auto r_out = lantern_special_gammaincc_out_tensor_tensor_tensor(out.get(), self.get(), other.get());
 return XPtrTorchTensor(r_out);
 }
 
 // [[Rcpp::export]]
-XPtrTorchTensor cpp_torch_namespace_fft_ihfft_self_Tensor (XPtrTorchTensor self, XPtrTorchoptional_int64_t n, XPtrTorchindex_int64_t dim, XPtrTorchoptional_string norm) {
-  auto r_out = lantern_fft_ihfft_tensor_intt_intt_stdstring(self.get(), n.get(), dim.get(), norm.get());
+XPtrTorchTensor cpp_torch_namespace_special_gammaincc_self_Tensor_other_Tensor (XPtrTorchTensor self, XPtrTorchTensor other) {
+  auto r_out = lantern_special_gammaincc_tensor_tensor(self.get(), other.get());
 return XPtrTorchTensor(r_out);
 }
 
 // [[Rcpp::export]]
-XPtrTorchTensor cpp_torch_namespace_fft_ihfft_out_out_Tensor_self_Tensor (XPtrTorchTensor out, XPtrTorchTensor self, XPtrTorchoptional_int64_t n, XPtrTorchindex_int64_t dim, XPtrTorchoptional_string norm) {
-  auto r_out = lantern_fft_ihfft_out_tensor_tensor_intt_intt_stdstring(out.get(), self.get(), n.get(), dim.get(), norm.get());
+XPtrTorchTensor cpp_torch_namespace_special_multigammaln_self_Tensor_p_int64_t (XPtrTorchTensor self, XPtrTorchint64_t p) {
+  auto r_out = lantern_special_multigammaln_tensor_intt(self.get(), p.get());
 return XPtrTorchTensor(r_out);
 }
 
 // [[Rcpp::export]]
-XPtrTorchTensor cpp_torch_namespace_fft_fft2_self_Tensor (XPtrTorchTensor self, XPtrTorchOptionalIntArrayRef s, XPtrTorchIndexIntArrayRef dim, XPtrTorchoptional_string norm) {
-  auto r_out = lantern_fft_fft2_tensor_intarrayref_intarrayref_stdstring(self.get(), s.get(), dim.get(), norm.get());
+XPtrTorchTensor cpp_torch_namespace_special_multigammaln_out_out_Tensor_self_Tensor_p_int64_t (XPtrTorchTensor out, XPtrTorchTensor self, XPtrTorchint64_t p) {
+  auto r_out = lantern_special_multigammaln_out_tensor_tensor_intt(out.get(), self.get(), p.get());
 return XPtrTorchTensor(r_out);
 }
 
 // [[Rcpp::export]]
-XPtrTorchTensor cpp_torch_namespace_fft_fft2_out_out_Tensor_self_Tensor (XPtrTorchTensor out, XPtrTorchTensor self, XPtrTorchOptionalIntArrayRef s, XPtrTorchIndexIntArrayRef dim, XPtrTorchoptional_string norm) {
-  auto r_out = lantern_fft_fft2_out_tensor_tensor_intarrayref_intarrayref_stdstring(out.get(), self.get(), s.get(), dim.get(), norm.get());
+XPtrTorchTensor cpp_torch_namespace_fft_fft_self_Tensor (XPtrTorchTensor self, XPtrTorchoptional_int64_t n, XPtrTorchindex_int64_t dim, XPtrTorchstring norm) {
+  auto r_out = lantern_fft_fft_tensor_intt_intt_cstringview(self.get(), n.get(), dim.get(), norm.get());
 return XPtrTorchTensor(r_out);
 }
 
 // [[Rcpp::export]]
-XPtrTorchTensor cpp_torch_namespace_fft_ifft2_self_Tensor (XPtrTorchTensor self, XPtrTorchOptionalIntArrayRef s, XPtrTorchIndexIntArrayRef dim, XPtrTorchoptional_string norm) {
-  auto r_out = lantern_fft_ifft2_tensor_intarrayref_intarrayref_stdstring(self.get(), s.get(), dim.get(), norm.get());
+XPtrTorchTensor cpp_torch_namespace_fft_fft_out_out_Tensor_self_Tensor (XPtrTorchTensor out, XPtrTorchTensor self, XPtrTorchoptional_int64_t n, XPtrTorchindex_int64_t dim, XPtrTorchstring norm) {
+  auto r_out = lantern_fft_fft_out_tensor_tensor_intt_intt_cstringview(out.get(), self.get(), n.get(), dim.get(), norm.get());
 return XPtrTorchTensor(r_out);
 }
 
 // [[Rcpp::export]]
-XPtrTorchTensor cpp_torch_namespace_fft_ifft2_out_out_Tensor_self_Tensor (XPtrTorchTensor out, XPtrTorchTensor self, XPtrTorchOptionalIntArrayRef s, XPtrTorchIndexIntArrayRef dim, XPtrTorchoptional_string norm) {
-  auto r_out = lantern_fft_ifft2_out_tensor_tensor_intarrayref_intarrayref_stdstring(out.get(), self.get(), s.get(), dim.get(), norm.get());
+XPtrTorchTensor cpp_torch_namespace_fft_ifft_self_Tensor (XPtrTorchTensor self, XPtrTorchoptional_int64_t n, XPtrTorchindex_int64_t dim, XPtrTorchstring norm) {
+  auto r_out = lantern_fft_ifft_tensor_intt_intt_cstringview(self.get(), n.get(), dim.get(), norm.get());
 return XPtrTorchTensor(r_out);
 }
 
 // [[Rcpp::export]]
-XPtrTorchTensor cpp_torch_namespace_fft_rfft2_self_Tensor (XPtrTorchTensor self, XPtrTorchOptionalIntArrayRef s, XPtrTorchIndexIntArrayRef dim, XPtrTorchoptional_string norm) {
-  auto r_out = lantern_fft_rfft2_tensor_intarrayref_intarrayref_stdstring(self.get(), s.get(), dim.get(), norm.get());
+XPtrTorchTensor cpp_torch_namespace_fft_ifft_out_out_Tensor_self_Tensor (XPtrTorchTensor out, XPtrTorchTensor self, XPtrTorchoptional_int64_t n, XPtrTorchindex_int64_t dim, XPtrTorchstring norm) {
+  auto r_out = lantern_fft_ifft_out_tensor_tensor_intt_intt_cstringview(out.get(), self.get(), n.get(), dim.get(), norm.get());
 return XPtrTorchTensor(r_out);
 }
 
 // [[Rcpp::export]]
-XPtrTorchTensor cpp_torch_namespace_fft_rfft2_out_out_Tensor_self_Tensor (XPtrTorchTensor out, XPtrTorchTensor self, XPtrTorchOptionalIntArrayRef s, XPtrTorchIndexIntArrayRef dim, XPtrTorchoptional_string norm) {
-  auto r_out = lantern_fft_rfft2_out_tensor_tensor_intarrayref_intarrayref_stdstring(out.get(), self.get(), s.get(), dim.get(), norm.get());
+XPtrTorchTensor cpp_torch_namespace_fft_rfft_self_Tensor (XPtrTorchTensor self, XPtrTorchoptional_int64_t n, XPtrTorchindex_int64_t dim, XPtrTorchstring norm) {
+  auto r_out = lantern_fft_rfft_tensor_intt_intt_cstringview(self.get(), n.get(), dim.get(), norm.get());
 return XPtrTorchTensor(r_out);
 }
 
 // [[Rcpp::export]]
-XPtrTorchTensor cpp_torch_namespace_fft_irfft2_self_Tensor (XPtrTorchTensor self, XPtrTorchOptionalIntArrayRef s, XPtrTorchIndexIntArrayRef dim, XPtrTorchoptional_string norm) {
-  auto r_out = lantern_fft_irfft2_tensor_intarrayref_intarrayref_stdstring(self.get(), s.get(), dim.get(), norm.get());
+XPtrTorchTensor cpp_torch_namespace_fft_rfft_out_out_Tensor_self_Tensor (XPtrTorchTensor out, XPtrTorchTensor self, XPtrTorchoptional_int64_t n, XPtrTorchindex_int64_t dim, XPtrTorchstring norm) {
+  auto r_out = lantern_fft_rfft_out_tensor_tensor_intt_intt_cstringview(out.get(), self.get(), n.get(), dim.get(), norm.get());
 return XPtrTorchTensor(r_out);
 }
 
 // [[Rcpp::export]]
-XPtrTorchTensor cpp_torch_namespace_fft_irfft2_out_out_Tensor_self_Tensor (XPtrTorchTensor out, XPtrTorchTensor self, XPtrTorchOptionalIntArrayRef s, XPtrTorchIndexIntArrayRef dim, XPtrTorchoptional_string norm) {
-  auto r_out = lantern_fft_irfft2_out_tensor_tensor_intarrayref_intarrayref_stdstring(out.get(), self.get(), s.get(), dim.get(), norm.get());
+XPtrTorchTensor cpp_torch_namespace_fft_irfft_self_Tensor (XPtrTorchTensor self, XPtrTorchoptional_int64_t n, XPtrTorchindex_int64_t dim, XPtrTorchstring norm) {
+  auto r_out = lantern_fft_irfft_tensor_intt_intt_cstringview(self.get(), n.get(), dim.get(), norm.get());
 return XPtrTorchTensor(r_out);
 }
 
 // [[Rcpp::export]]
-XPtrTorchTensor cpp_torch_namespace_fft_fftn_self_Tensor (XPtrTorchTensor self, XPtrTorchOptionalIntArrayRef s, XPtrTorchOptionalIndexIntArrayRef dim, XPtrTorchoptional_string norm) {
-  auto r_out = lantern_fft_fftn_tensor_intarrayref_intarrayref_stdstring(self.get(), s.get(), dim.get(), norm.get());
+XPtrTorchTensor cpp_torch_namespace_fft_irfft_out_out_Tensor_self_Tensor (XPtrTorchTensor out, XPtrTorchTensor self, XPtrTorchoptional_int64_t n, XPtrTorchindex_int64_t dim, XPtrTorchstring norm) {
+  auto r_out = lantern_fft_irfft_out_tensor_tensor_intt_intt_cstringview(out.get(), self.get(), n.get(), dim.get(), norm.get());
 return XPtrTorchTensor(r_out);
 }
 
 // [[Rcpp::export]]
-XPtrTorchTensor cpp_torch_namespace_fft_fftn_out_out_Tensor_self_Tensor (XPtrTorchTensor out, XPtrTorchTensor self, XPtrTorchOptionalIntArrayRef s, XPtrTorchOptionalIndexIntArrayRef dim, XPtrTorchoptional_string norm) {
-  auto r_out = lantern_fft_fftn_out_tensor_tensor_intarrayref_intarrayref_stdstring(out.get(), self.get(), s.get(), dim.get(), norm.get());
+XPtrTorchTensor cpp_torch_namespace_fft_hfft_self_Tensor (XPtrTorchTensor self, XPtrTorchoptional_int64_t n, XPtrTorchindex_int64_t dim, XPtrTorchstring norm) {
+  auto r_out = lantern_fft_hfft_tensor_intt_intt_cstringview(self.get(), n.get(), dim.get(), norm.get());
 return XPtrTorchTensor(r_out);
 }
 
 // [[Rcpp::export]]
-XPtrTorchTensor cpp_torch_namespace_fft_ifftn_self_Tensor (XPtrTorchTensor self, XPtrTorchOptionalIntArrayRef s, XPtrTorchOptionalIndexIntArrayRef dim, XPtrTorchoptional_string norm) {
-  auto r_out = lantern_fft_ifftn_tensor_intarrayref_intarrayref_stdstring(self.get(), s.get(), dim.get(), norm.get());
+XPtrTorchTensor cpp_torch_namespace_fft_hfft_out_out_Tensor_self_Tensor (XPtrTorchTensor out, XPtrTorchTensor self, XPtrTorchoptional_int64_t n, XPtrTorchindex_int64_t dim, XPtrTorchstring norm) {
+  auto r_out = lantern_fft_hfft_out_tensor_tensor_intt_intt_cstringview(out.get(), self.get(), n.get(), dim.get(), norm.get());
 return XPtrTorchTensor(r_out);
 }
 
 // [[Rcpp::export]]
-XPtrTorchTensor cpp_torch_namespace_fft_ifftn_out_out_Tensor_self_Tensor (XPtrTorchTensor out, XPtrTorchTensor self, XPtrTorchOptionalIntArrayRef s, XPtrTorchOptionalIndexIntArrayRef dim, XPtrTorchoptional_string norm) {
-  auto r_out = lantern_fft_ifftn_out_tensor_tensor_intarrayref_intarrayref_stdstring(out.get(), self.get(), s.get(), dim.get(), norm.get());
+XPtrTorchTensor cpp_torch_namespace_fft_ihfft_self_Tensor (XPtrTorchTensor self, XPtrTorchoptional_int64_t n, XPtrTorchindex_int64_t dim, XPtrTorchstring norm) {
+  auto r_out = lantern_fft_ihfft_tensor_intt_intt_cstringview(self.get(), n.get(), dim.get(), norm.get());
 return XPtrTorchTensor(r_out);
 }
 
 // [[Rcpp::export]]
-XPtrTorchTensor cpp_torch_namespace_fft_rfftn_self_Tensor (XPtrTorchTensor self, XPtrTorchOptionalIntArrayRef s, XPtrTorchOptionalIndexIntArrayRef dim, XPtrTorchoptional_string norm) {
-  auto r_out = lantern_fft_rfftn_tensor_intarrayref_intarrayref_stdstring(self.get(), s.get(), dim.get(), norm.get());
+XPtrTorchTensor cpp_torch_namespace_fft_ihfft_out_out_Tensor_self_Tensor (XPtrTorchTensor out, XPtrTorchTensor self, XPtrTorchoptional_int64_t n, XPtrTorchindex_int64_t dim, XPtrTorchstring norm) {
+  auto r_out = lantern_fft_ihfft_out_tensor_tensor_intt_intt_cstringview(out.get(), self.get(), n.get(), dim.get(), norm.get());
 return XPtrTorchTensor(r_out);
 }
 
 // [[Rcpp::export]]
-XPtrTorchTensor cpp_torch_namespace_fft_rfftn_out_out_Tensor_self_Tensor (XPtrTorchTensor out, XPtrTorchTensor self, XPtrTorchOptionalIntArrayRef s, XPtrTorchOptionalIndexIntArrayRef dim, XPtrTorchoptional_string norm) {
-  auto r_out = lantern_fft_rfftn_out_tensor_tensor_intarrayref_intarrayref_stdstring(out.get(), self.get(), s.get(), dim.get(), norm.get());
+XPtrTorchTensor cpp_torch_namespace_fft_fft2_self_Tensor (XPtrTorchTensor self, XPtrTorchOptionalIntArrayRef s, XPtrTorchIndexIntArrayRef dim, XPtrTorchstring norm) {
+  auto r_out = lantern_fft_fft2_tensor_intarrayref_intarrayref_cstringview(self.get(), s.get(), dim.get(), norm.get());
 return XPtrTorchTensor(r_out);
 }
 
 // [[Rcpp::export]]
-XPtrTorchTensor cpp_torch_namespace_fft_irfftn_self_Tensor (XPtrTorchTensor self, XPtrTorchOptionalIntArrayRef s, XPtrTorchOptionalIndexIntArrayRef dim, XPtrTorchoptional_string norm) {
-  auto r_out = lantern_fft_irfftn_tensor_intarrayref_intarrayref_stdstring(self.get(), s.get(), dim.get(), norm.get());
+XPtrTorchTensor cpp_torch_namespace_fft_fft2_out_out_Tensor_self_Tensor (XPtrTorchTensor out, XPtrTorchTensor self, XPtrTorchOptionalIntArrayRef s, XPtrTorchIndexIntArrayRef dim, XPtrTorchstring norm) {
+  auto r_out = lantern_fft_fft2_out_tensor_tensor_intarrayref_intarrayref_cstringview(out.get(), self.get(), s.get(), dim.get(), norm.get());
 return XPtrTorchTensor(r_out);
 }
 
 // [[Rcpp::export]]
-XPtrTorchTensor cpp_torch_namespace_fft_irfftn_out_out_Tensor_self_Tensor (XPtrTorchTensor out, XPtrTorchTensor self, XPtrTorchOptionalIntArrayRef s, XPtrTorchOptionalIndexIntArrayRef dim, XPtrTorchoptional_string norm) {
-  auto r_out = lantern_fft_irfftn_out_tensor_tensor_intarrayref_intarrayref_stdstring(out.get(), self.get(), s.get(), dim.get(), norm.get());
+XPtrTorchTensor cpp_torch_namespace_fft_ifft2_self_Tensor (XPtrTorchTensor self, XPtrTorchOptionalIntArrayRef s, XPtrTorchIndexIntArrayRef dim, XPtrTorchstring norm) {
+  auto r_out = lantern_fft_ifft2_tensor_intarrayref_intarrayref_cstringview(self.get(), s.get(), dim.get(), norm.get());
+return XPtrTorchTensor(r_out);
+}
+
+// [[Rcpp::export]]
+XPtrTorchTensor cpp_torch_namespace_fft_ifft2_out_out_Tensor_self_Tensor (XPtrTorchTensor out, XPtrTorchTensor self, XPtrTorchOptionalIntArrayRef s, XPtrTorchIndexIntArrayRef dim, XPtrTorchstring norm) {
+  auto r_out = lantern_fft_ifft2_out_tensor_tensor_intarrayref_intarrayref_cstringview(out.get(), self.get(), s.get(), dim.get(), norm.get());
+return XPtrTorchTensor(r_out);
+}
+
+// [[Rcpp::export]]
+XPtrTorchTensor cpp_torch_namespace_fft_rfft2_self_Tensor (XPtrTorchTensor self, XPtrTorchOptionalIntArrayRef s, XPtrTorchIndexIntArrayRef dim, XPtrTorchstring norm) {
+  auto r_out = lantern_fft_rfft2_tensor_intarrayref_intarrayref_cstringview(self.get(), s.get(), dim.get(), norm.get());
+return XPtrTorchTensor(r_out);
+}
+
+// [[Rcpp::export]]
+XPtrTorchTensor cpp_torch_namespace_fft_rfft2_out_out_Tensor_self_Tensor (XPtrTorchTensor out, XPtrTorchTensor self, XPtrTorchOptionalIntArrayRef s, XPtrTorchIndexIntArrayRef dim, XPtrTorchstring norm) {
+  auto r_out = lantern_fft_rfft2_out_tensor_tensor_intarrayref_intarrayref_cstringview(out.get(), self.get(), s.get(), dim.get(), norm.get());
+return XPtrTorchTensor(r_out);
+}
+
+// [[Rcpp::export]]
+XPtrTorchTensor cpp_torch_namespace_fft_irfft2_self_Tensor (XPtrTorchTensor self, XPtrTorchOptionalIntArrayRef s, XPtrTorchIndexIntArrayRef dim, XPtrTorchstring norm) {
+  auto r_out = lantern_fft_irfft2_tensor_intarrayref_intarrayref_cstringview(self.get(), s.get(), dim.get(), norm.get());
+return XPtrTorchTensor(r_out);
+}
+
+// [[Rcpp::export]]
+XPtrTorchTensor cpp_torch_namespace_fft_irfft2_out_out_Tensor_self_Tensor (XPtrTorchTensor out, XPtrTorchTensor self, XPtrTorchOptionalIntArrayRef s, XPtrTorchIndexIntArrayRef dim, XPtrTorchstring norm) {
+  auto r_out = lantern_fft_irfft2_out_tensor_tensor_intarrayref_intarrayref_cstringview(out.get(), self.get(), s.get(), dim.get(), norm.get());
+return XPtrTorchTensor(r_out);
+}
+
+// [[Rcpp::export]]
+XPtrTorchTensor cpp_torch_namespace_fft_fftn_self_Tensor (XPtrTorchTensor self, XPtrTorchOptionalIntArrayRef s, XPtrTorchOptionalIndexIntArrayRef dim, XPtrTorchstring norm) {
+  auto r_out = lantern_fft_fftn_tensor_intarrayref_intarrayref_cstringview(self.get(), s.get(), dim.get(), norm.get());
+return XPtrTorchTensor(r_out);
+}
+
+// [[Rcpp::export]]
+XPtrTorchTensor cpp_torch_namespace_fft_fftn_out_out_Tensor_self_Tensor (XPtrTorchTensor out, XPtrTorchTensor self, XPtrTorchOptionalIntArrayRef s, XPtrTorchOptionalIndexIntArrayRef dim, XPtrTorchstring norm) {
+  auto r_out = lantern_fft_fftn_out_tensor_tensor_intarrayref_intarrayref_cstringview(out.get(), self.get(), s.get(), dim.get(), norm.get());
+return XPtrTorchTensor(r_out);
+}
+
+// [[Rcpp::export]]
+XPtrTorchTensor cpp_torch_namespace_fft_ifftn_self_Tensor (XPtrTorchTensor self, XPtrTorchOptionalIntArrayRef s, XPtrTorchOptionalIndexIntArrayRef dim, XPtrTorchstring norm) {
+  auto r_out = lantern_fft_ifftn_tensor_intarrayref_intarrayref_cstringview(self.get(), s.get(), dim.get(), norm.get());
+return XPtrTorchTensor(r_out);
+}
+
+// [[Rcpp::export]]
+XPtrTorchTensor cpp_torch_namespace_fft_ifftn_out_out_Tensor_self_Tensor (XPtrTorchTensor out, XPtrTorchTensor self, XPtrTorchOptionalIntArrayRef s, XPtrTorchOptionalIndexIntArrayRef dim, XPtrTorchstring norm) {
+  auto r_out = lantern_fft_ifftn_out_tensor_tensor_intarrayref_intarrayref_cstringview(out.get(), self.get(), s.get(), dim.get(), norm.get());
+return XPtrTorchTensor(r_out);
+}
+
+// [[Rcpp::export]]
+XPtrTorchTensor cpp_torch_namespace_fft_rfftn_self_Tensor (XPtrTorchTensor self, XPtrTorchOptionalIntArrayRef s, XPtrTorchOptionalIndexIntArrayRef dim, XPtrTorchstring norm) {
+  auto r_out = lantern_fft_rfftn_tensor_intarrayref_intarrayref_cstringview(self.get(), s.get(), dim.get(), norm.get());
+return XPtrTorchTensor(r_out);
+}
+
+// [[Rcpp::export]]
+XPtrTorchTensor cpp_torch_namespace_fft_rfftn_out_out_Tensor_self_Tensor (XPtrTorchTensor out, XPtrTorchTensor self, XPtrTorchOptionalIntArrayRef s, XPtrTorchOptionalIndexIntArrayRef dim, XPtrTorchstring norm) {
+  auto r_out = lantern_fft_rfftn_out_tensor_tensor_intarrayref_intarrayref_cstringview(out.get(), self.get(), s.get(), dim.get(), norm.get());
+return XPtrTorchTensor(r_out);
+}
+
+// [[Rcpp::export]]
+XPtrTorchTensor cpp_torch_namespace_fft_irfftn_self_Tensor (XPtrTorchTensor self, XPtrTorchOptionalIntArrayRef s, XPtrTorchOptionalIndexIntArrayRef dim, XPtrTorchstring norm) {
+  auto r_out = lantern_fft_irfftn_tensor_intarrayref_intarrayref_cstringview(self.get(), s.get(), dim.get(), norm.get());
+return XPtrTorchTensor(r_out);
+}
+
+// [[Rcpp::export]]
+XPtrTorchTensor cpp_torch_namespace_fft_irfftn_out_out_Tensor_self_Tensor (XPtrTorchTensor out, XPtrTorchTensor self, XPtrTorchOptionalIntArrayRef s, XPtrTorchOptionalIndexIntArrayRef dim, XPtrTorchstring norm) {
+  auto r_out = lantern_fft_irfftn_out_tensor_tensor_intarrayref_intarrayref_cstringview(out.get(), self.get(), s.get(), dim.get(), norm.get());
 return XPtrTorchTensor(r_out);
 }
 
@@ -14755,28 +15683,28 @@ return XPtrTorchTensor(r_out);
 }
 
 // [[Rcpp::export]]
-Rcpp::List cpp_torch_namespace_linalg_cholesky_ex_self_Tensor (XPtrTorchTensor self, XPtrTorchbool check_errors) {
-  auto r_out = lantern_linalg_cholesky_ex_tensor_bool(self.get(), check_errors.get());
+Rcpp::List cpp_torch_namespace_linalg_cholesky_ex_self_Tensor (XPtrTorchTensor self, XPtrTorchbool upper, XPtrTorchbool check_errors) {
+  auto r_out = lantern_linalg_cholesky_ex_tensor_bool_bool(self.get(), upper.get(), check_errors.get());
 auto wrap = XPtrTorchvector_void(r_out);
 return Rcpp::List::create(XPtrTorchTensor(lantern_vector_get(wrap.get(), 0)),XPtrTorchTensor(lantern_vector_get(wrap.get(), 1)));
 }
 
 // [[Rcpp::export]]
-Rcpp::List cpp_torch_namespace_linalg_cholesky_ex_out_L_Tensor_info_Tensor_self_Tensor (XPtrTorchTensor L, XPtrTorchTensor info, XPtrTorchTensor self, XPtrTorchbool check_errors) {
-  auto r_out = lantern_linalg_cholesky_ex_out_tensor_tensor_tensor_bool(L.get(), info.get(), self.get(), check_errors.get());
+Rcpp::List cpp_torch_namespace_linalg_cholesky_ex_out_L_Tensor_info_Tensor_self_Tensor (XPtrTorchTensor L, XPtrTorchTensor info, XPtrTorchTensor self, XPtrTorchbool upper, XPtrTorchbool check_errors) {
+  auto r_out = lantern_linalg_cholesky_ex_out_tensor_tensor_tensor_bool_bool(L.get(), info.get(), self.get(), upper.get(), check_errors.get());
 auto wrap = XPtrTorchvector_void(r_out);
 return Rcpp::List::create(XPtrTorchTensor(lantern_vector_get(wrap.get(), 0)),XPtrTorchTensor(lantern_vector_get(wrap.get(), 1)));
 }
 
 // [[Rcpp::export]]
-XPtrTorchTensor cpp_torch_namespace_linalg_cholesky_self_Tensor (XPtrTorchTensor self) {
-  auto r_out = lantern_linalg_cholesky_tensor(self.get());
+XPtrTorchTensor cpp_torch_namespace_linalg_cholesky_self_Tensor (XPtrTorchTensor self, XPtrTorchbool upper) {
+  auto r_out = lantern_linalg_cholesky_tensor_bool(self.get(), upper.get());
 return XPtrTorchTensor(r_out);
 }
 
 // [[Rcpp::export]]
-XPtrTorchTensor cpp_torch_namespace_linalg_cholesky_out_out_Tensor_self_Tensor (XPtrTorchTensor out, XPtrTorchTensor self) {
-  auto r_out = lantern_linalg_cholesky_out_tensor_tensor(out.get(), self.get());
+XPtrTorchTensor cpp_torch_namespace_linalg_cholesky_out_out_Tensor_self_Tensor (XPtrTorchTensor out, XPtrTorchTensor self, XPtrTorchbool upper) {
+  auto r_out = lantern_linalg_cholesky_out_tensor_tensor_bool(out.get(), self.get(), upper.get());
 return XPtrTorchTensor(r_out);
 }
 
@@ -14799,17 +15727,42 @@ return XPtrTorchTensor(r_out);
 }
 
 // [[Rcpp::export]]
-Rcpp::List cpp_torch_namespace_linalg_lstsq_self_Tensor_b_Tensor (XPtrTorchTensor self, XPtrTorchTensor b, XPtrTorchOptionaldouble rcond, XPtrTorchoptional_string driver) {
-  auto r_out = lantern_linalg_lstsq_tensor_tensor_double_stdstring(self.get(), b.get(), rcond.get(), driver.get());
+Rcpp::List cpp_torch_namespace__det_lu_based_helper_self_Tensor (XPtrTorchTensor self) {
+  auto r_out = lantern__det_lu_based_helper_tensor(self.get());
+auto wrap = XPtrTorchvector_void(r_out);
+return Rcpp::List::create(XPtrTorchTensor(lantern_vector_get(wrap.get(), 0)),XPtrTorchTensor(lantern_vector_get(wrap.get(), 1)),XPtrTorchTensor(lantern_vector_get(wrap.get(), 2)));
+}
+
+// [[Rcpp::export]]
+XPtrTorchTensor cpp_torch_namespace__det_lu_based_helper_backward_helper_det_grad_Tensor_det_Tensor_self_Tensor_lu_Tensor_pivs_Tensor (XPtrTorchTensor det_grad, XPtrTorchTensor det, XPtrTorchTensor self, XPtrTorchTensor lu, XPtrTorchTensor pivs) {
+  auto r_out = lantern__det_lu_based_helper_backward_helper_tensor_tensor_tensor_tensor_tensor(det_grad.get(), det.get(), self.get(), lu.get(), pivs.get());
+return XPtrTorchTensor(r_out);
+}
+
+// [[Rcpp::export]]
+Rcpp::List cpp_torch_namespace_linalg_lstsq_self_Tensor_b_Tensor (XPtrTorchTensor self, XPtrTorchTensor b, XPtrTorchOptionaldouble rcond, XPtrTorchstring driver) {
+  auto r_out = lantern_linalg_lstsq_tensor_tensor_double_cstringview(self.get(), b.get(), rcond.get(), driver.get());
 auto wrap = XPtrTorchvector_void(r_out);
 return Rcpp::List::create(XPtrTorchTensor(lantern_vector_get(wrap.get(), 0)),XPtrTorchTensor(lantern_vector_get(wrap.get(), 1)),XPtrTorchTensor(lantern_vector_get(wrap.get(), 2)),XPtrTorchTensor(lantern_vector_get(wrap.get(), 3)));
 }
 
 // [[Rcpp::export]]
-Rcpp::List cpp_torch_namespace_linalg_lstsq_out_solution_Tensor_residuals_Tensor_rank_Tensor_singular_values_Tensor_self_Tensor_b_Tensor (XPtrTorchTensor solution, XPtrTorchTensor residuals, XPtrTorchTensor rank, XPtrTorchTensor singular_values, XPtrTorchTensor self, XPtrTorchTensor b, XPtrTorchOptionaldouble rcond, XPtrTorchoptional_string driver) {
-  auto r_out = lantern_linalg_lstsq_out_tensor_tensor_tensor_tensor_tensor_tensor_double_stdstring(solution.get(), residuals.get(), rank.get(), singular_values.get(), self.get(), b.get(), rcond.get(), driver.get());
+Rcpp::List cpp_torch_namespace_linalg_lstsq_out_solution_Tensor_residuals_Tensor_rank_Tensor_singular_values_Tensor_self_Tensor_b_Tensor (XPtrTorchTensor solution, XPtrTorchTensor residuals, XPtrTorchTensor rank, XPtrTorchTensor singular_values, XPtrTorchTensor self, XPtrTorchTensor b, XPtrTorchOptionaldouble rcond, XPtrTorchstring driver) {
+  auto r_out = lantern_linalg_lstsq_out_tensor_tensor_tensor_tensor_tensor_tensor_double_cstringview(solution.get(), residuals.get(), rank.get(), singular_values.get(), self.get(), b.get(), rcond.get(), driver.get());
 auto wrap = XPtrTorchvector_void(r_out);
 return Rcpp::List::create(XPtrTorchTensor(lantern_vector_get(wrap.get(), 0)),XPtrTorchTensor(lantern_vector_get(wrap.get(), 1)),XPtrTorchTensor(lantern_vector_get(wrap.get(), 2)),XPtrTorchTensor(lantern_vector_get(wrap.get(), 3)));
+}
+
+// [[Rcpp::export]]
+XPtrTorchTensor cpp_torch_namespace_linalg_matmul_self_Tensor_other_Tensor (XPtrTorchTensor self, XPtrTorchTensor other) {
+  auto r_out = lantern_linalg_matmul_tensor_tensor(self.get(), other.get());
+return XPtrTorchTensor(r_out);
+}
+
+// [[Rcpp::export]]
+XPtrTorchTensor cpp_torch_namespace_linalg_matmul_out_out_Tensor_self_Tensor_other_Tensor (XPtrTorchTensor out, XPtrTorchTensor self, XPtrTorchTensor other) {
+  auto r_out = lantern_linalg_matmul_out_tensor_tensor_tensor(out.get(), self.get(), other.get());
+return XPtrTorchTensor(r_out);
 }
 
 // [[Rcpp::export]]
@@ -14854,27 +15807,27 @@ return XPtrTorchTensor(r_out);
 
 // [[Rcpp::export]]
 Rcpp::List cpp_torch_namespace_linalg_eigh_self_Tensor (XPtrTorchTensor self, XPtrTorchstring UPLO) {
-  auto r_out = lantern_linalg_eigh_tensor_stdstring(self.get(), UPLO.get());
+  auto r_out = lantern_linalg_eigh_tensor_cstringview(self.get(), UPLO.get());
 auto wrap = XPtrTorchvector_void(r_out);
 return Rcpp::List::create(XPtrTorchTensor(lantern_vector_get(wrap.get(), 0)),XPtrTorchTensor(lantern_vector_get(wrap.get(), 1)));
 }
 
 // [[Rcpp::export]]
 Rcpp::List cpp_torch_namespace_linalg_eigh_out_eigvals_Tensor_eigvecs_Tensor_self_Tensor (XPtrTorchTensor eigvals, XPtrTorchTensor eigvecs, XPtrTorchTensor self, XPtrTorchstring UPLO) {
-  auto r_out = lantern_linalg_eigh_out_tensor_tensor_tensor_stdstring(eigvals.get(), eigvecs.get(), self.get(), UPLO.get());
+  auto r_out = lantern_linalg_eigh_out_tensor_tensor_tensor_cstringview(eigvals.get(), eigvecs.get(), self.get(), UPLO.get());
 auto wrap = XPtrTorchvector_void(r_out);
 return Rcpp::List::create(XPtrTorchTensor(lantern_vector_get(wrap.get(), 0)),XPtrTorchTensor(lantern_vector_get(wrap.get(), 1)));
 }
 
 // [[Rcpp::export]]
 XPtrTorchTensor cpp_torch_namespace_linalg_eigvalsh_self_Tensor (XPtrTorchTensor self, XPtrTorchstring UPLO) {
-  auto r_out = lantern_linalg_eigvalsh_tensor_stdstring(self.get(), UPLO.get());
+  auto r_out = lantern_linalg_eigvalsh_tensor_cstringview(self.get(), UPLO.get());
 return XPtrTorchTensor(r_out);
 }
 
 // [[Rcpp::export]]
 XPtrTorchTensor cpp_torch_namespace_linalg_eigvalsh_out_out_Tensor_self_Tensor (XPtrTorchTensor out, XPtrTorchTensor self, XPtrTorchstring UPLO) {
-  auto r_out = lantern_linalg_eigvalsh_out_tensor_tensor_stdstring(out.get(), self.get(), UPLO.get());
+  auto r_out = lantern_linalg_eigvalsh_out_tensor_tensor_cstringview(out.get(), self.get(), UPLO.get());
 return XPtrTorchTensor(r_out);
 }
 
@@ -14965,8 +15918,8 @@ return XPtrTorchTensor(r_out);
 }
 
 // [[Rcpp::export]]
-XPtrTorchTensor cpp_torch_namespace_linalg_norm_self_Tensor_ord_stdstring (XPtrTorchTensor self, XPtrTorchstring ord, XPtrTorchOptionalIndexIntArrayRef dim, XPtrTorchbool keepdim, XPtrTorchoptional_scalar_type dtype) {
-  auto r_out = lantern_linalg_norm_tensor_stdstring_intarrayref_bool_scalartype(self.get(), ord.get(), dim.get(), keepdim.get(), dtype.get());
+XPtrTorchTensor cpp_torch_namespace_linalg_norm_self_Tensor_ord_c10string_view (XPtrTorchTensor self, XPtrTorchstring ord, XPtrTorchOptionalIndexIntArrayRef dim, XPtrTorchbool keepdim, XPtrTorchoptional_scalar_type dtype) {
+  auto r_out = lantern_linalg_norm_tensor_cstringview_intarrayref_bool_scalartype(self.get(), ord.get(), dim.get(), keepdim.get(), dtype.get());
 return XPtrTorchTensor(r_out);
 }
 
@@ -14977,8 +15930,8 @@ return XPtrTorchTensor(r_out);
 }
 
 // [[Rcpp::export]]
-XPtrTorchTensor cpp_torch_namespace_linalg_norm_out_out_Tensor_self_Tensor_ord_stdstring (XPtrTorchTensor out, XPtrTorchTensor self, XPtrTorchstring ord, XPtrTorchOptionalIndexIntArrayRef dim, XPtrTorchbool keepdim, XPtrTorchoptional_scalar_type dtype) {
-  auto r_out = lantern_linalg_norm_out_tensor_tensor_stdstring_intarrayref_bool_scalartype(out.get(), self.get(), ord.get(), dim.get(), keepdim.get(), dtype.get());
+XPtrTorchTensor cpp_torch_namespace_linalg_norm_out_out_Tensor_self_Tensor_ord_c10string_view (XPtrTorchTensor out, XPtrTorchTensor self, XPtrTorchstring ord, XPtrTorchOptionalIndexIntArrayRef dim, XPtrTorchbool keepdim, XPtrTorchoptional_scalar_type dtype) {
+  auto r_out = lantern_linalg_norm_out_tensor_tensor_cstringview_intarrayref_bool_scalartype(out.get(), self.get(), ord.get(), dim.get(), keepdim.get(), dtype.get());
 return XPtrTorchTensor(r_out);
 }
 
@@ -15007,14 +15960,14 @@ return XPtrTorchTensor(r_out);
 }
 
 // [[Rcpp::export]]
-XPtrTorchTensor cpp_torch_namespace_linalg_matrix_norm_self_Tensor_ord_stdstring (XPtrTorchTensor self, XPtrTorchstring ord, XPtrTorchIndexIntArrayRef dim, XPtrTorchbool keepdim, XPtrTorchoptional_scalar_type dtype) {
-  auto r_out = lantern_linalg_matrix_norm_tensor_stdstring_intarrayref_bool_scalartype(self.get(), ord.get(), dim.get(), keepdim.get(), dtype.get());
+XPtrTorchTensor cpp_torch_namespace_linalg_matrix_norm_self_Tensor_ord_c10string_view (XPtrTorchTensor self, XPtrTorchstring ord, XPtrTorchIndexIntArrayRef dim, XPtrTorchbool keepdim, XPtrTorchoptional_scalar_type dtype) {
+  auto r_out = lantern_linalg_matrix_norm_tensor_cstringview_intarrayref_bool_scalartype(self.get(), ord.get(), dim.get(), keepdim.get(), dtype.get());
 return XPtrTorchTensor(r_out);
 }
 
 // [[Rcpp::export]]
-XPtrTorchTensor cpp_torch_namespace_linalg_matrix_norm_out_out_Tensor_self_Tensor_ord_stdstring (XPtrTorchTensor out, XPtrTorchTensor self, XPtrTorchstring ord, XPtrTorchIndexIntArrayRef dim, XPtrTorchbool keepdim, XPtrTorchoptional_scalar_type dtype) {
-  auto r_out = lantern_linalg_matrix_norm_out_tensor_tensor_stdstring_intarrayref_bool_scalartype(out.get(), self.get(), ord.get(), dim.get(), keepdim.get(), dtype.get());
+XPtrTorchTensor cpp_torch_namespace_linalg_matrix_norm_out_out_Tensor_self_Tensor_ord_c10string_view (XPtrTorchTensor out, XPtrTorchTensor self, XPtrTorchstring ord, XPtrTorchIndexIntArrayRef dim, XPtrTorchbool keepdim, XPtrTorchoptional_scalar_type dtype) {
+  auto r_out = lantern_linalg_matrix_norm_out_tensor_tensor_cstringview_intarrayref_bool_scalartype(out.get(), self.get(), ord.get(), dim.get(), keepdim.get(), dtype.get());
 return XPtrTorchTensor(r_out);
 }
 
@@ -15057,14 +16010,14 @@ return XPtrTorchTensor(r_out);
 }
 
 // [[Rcpp::export]]
-XPtrTorchTensor cpp_torch_namespace_linalg_cond_self_Tensor_p_stdstring (XPtrTorchTensor self, XPtrTorchstring p) {
-  auto r_out = lantern_linalg_cond_tensor_stdstring(self.get(), p.get());
+XPtrTorchTensor cpp_torch_namespace_linalg_cond_self_Tensor_p_c10string_view (XPtrTorchTensor self, XPtrTorchstring p) {
+  auto r_out = lantern_linalg_cond_tensor_cstringview(self.get(), p.get());
 return XPtrTorchTensor(r_out);
 }
 
 // [[Rcpp::export]]
-XPtrTorchTensor cpp_torch_namespace_linalg_cond_out_out_Tensor_self_Tensor_p_stdstring (XPtrTorchTensor out, XPtrTorchTensor self, XPtrTorchstring p) {
-  auto r_out = lantern_linalg_cond_out_tensor_tensor_stdstring(out.get(), self.get(), p.get());
+XPtrTorchTensor cpp_torch_namespace_linalg_cond_out_out_Tensor_self_Tensor_p_c10string_view (XPtrTorchTensor out, XPtrTorchTensor self, XPtrTorchstring p) {
+  auto r_out = lantern_linalg_cond_out_tensor_tensor_cstringview(out.get(), self.get(), p.get());
 return XPtrTorchTensor(r_out);
 }
 
@@ -15089,12 +16042,6 @@ return XPtrTorchTensor(r_out);
 // [[Rcpp::export]]
 XPtrTorchTensor cpp_torch_namespace_linalg_pinv_out_out_Tensor_self_Tensor_rcond_Tensor (XPtrTorchTensor out, XPtrTorchTensor self, XPtrTorchTensor rcond, XPtrTorchbool hermitian) {
   auto r_out = lantern_linalg_pinv_out_tensor_tensor_tensor_bool(out.get(), self.get(), rcond.get(), hermitian.get());
-return XPtrTorchTensor(r_out);
-}
-
-// [[Rcpp::export]]
-XPtrTorchTensor cpp_torch_namespace__linalg_solve_out_helper__self_Tensor_other_Tensor_infos_Tensor (XPtrTorchTensor self, XPtrTorchTensor other, XPtrTorchTensor infos) {
-  auto r_out = lantern__linalg_solve_out_helper__tensor_tensor_tensor(self.get(), other.get(), infos.get());
 return XPtrTorchTensor(r_out);
 }
 
@@ -15136,21 +16083,21 @@ return XPtrTorchTensor(r_out);
 
 // [[Rcpp::export]]
 Rcpp::List cpp_torch_namespace_linalg_qr_self_Tensor (XPtrTorchTensor self, XPtrTorchstring mode) {
-  auto r_out = lantern_linalg_qr_tensor_stdstring(self.get(), mode.get());
+  auto r_out = lantern_linalg_qr_tensor_cstringview(self.get(), mode.get());
 auto wrap = XPtrTorchvector_void(r_out);
 return Rcpp::List::create(XPtrTorchTensor(lantern_vector_get(wrap.get(), 0)),XPtrTorchTensor(lantern_vector_get(wrap.get(), 1)));
 }
 
 // [[Rcpp::export]]
 Rcpp::List cpp_torch_namespace_linalg_qr_out_Q_Tensor_R_Tensor_self_Tensor (XPtrTorchTensor Q, XPtrTorchTensor R, XPtrTorchTensor self, XPtrTorchstring mode) {
-  auto r_out = lantern_linalg_qr_out_tensor_tensor_tensor_stdstring(Q.get(), R.get(), self.get(), mode.get());
+  auto r_out = lantern_linalg_qr_out_tensor_tensor_tensor_cstringview(Q.get(), R.get(), self.get(), mode.get());
 auto wrap = XPtrTorchvector_void(r_out);
 return Rcpp::List::create(XPtrTorchTensor(lantern_vector_get(wrap.get(), 0)),XPtrTorchTensor(lantern_vector_get(wrap.get(), 1)));
 }
 
 // [[Rcpp::export]]
-Rcpp::List cpp_torch_namespace__linalg_qr_helper_self_Tensor_mode_stdstring (XPtrTorchTensor self, XPtrTorchstring mode) {
-  auto r_out = lantern__linalg_qr_helper_tensor_stdstring(self.get(), mode.get());
+Rcpp::List cpp_torch_namespace__linalg_qr_helper_self_Tensor_mode_c10string_view (XPtrTorchTensor self, XPtrTorchstring mode) {
+  auto r_out = lantern__linalg_qr_helper_tensor_cstringview(self.get(), mode.get());
 auto wrap = XPtrTorchvector_void(r_out);
 return Rcpp::List::create(XPtrTorchTensor(lantern_vector_get(wrap.get(), 0)),XPtrTorchTensor(lantern_vector_get(wrap.get(), 1)));
 }
@@ -15228,14 +16175,14 @@ return XPtrTorchTensor(r_out);
 }
 
 // [[Rcpp::export]]
-XPtrTorchTensor cpp_torch_namespace_segment_reduce_data_Tensor_reduce_stdstring (XPtrTorchTensor data, XPtrTorchstring reduce, XPtrTorchOptionalTensor lengths, XPtrTorchIndexTensor indices, XPtrTorchint64_t axis, XPtrTorchbool unsafe, XPtrTorchoptional_scalar initial) {
-  auto r_out = lantern_segment_reduce_tensor_stdstring_tensor_tensor_intt_bool_scalar(data.get(), reduce.get(), lengths.get(), indices.get(), axis.get(), unsafe.get(), initial.get());
+XPtrTorchTensor cpp_torch_namespace_segment_reduce_data_Tensor_reduce_c10string_view (XPtrTorchTensor data, XPtrTorchstring reduce, XPtrTorchOptionalTensor lengths, XPtrTorchIndexTensor indices, XPtrTorchint64_t axis, XPtrTorchbool unsafe, XPtrTorchoptional_scalar initial) {
+  auto r_out = lantern_segment_reduce_tensor_cstringview_tensor_tensor_intt_bool_scalar(data.get(), reduce.get(), lengths.get(), indices.get(), axis.get(), unsafe.get(), initial.get());
 return XPtrTorchTensor(r_out);
 }
 
 // [[Rcpp::export]]
-XPtrTorchTensor cpp_torch_namespace_segment_reduce_backward_grad_Tensor_output_Tensor_data_Tensor (XPtrTorchTensor grad, XPtrTorchTensor output, XPtrTorchTensor data, XPtrTorchOptionalTensor lengths) {
-  auto r_out = lantern_segment_reduce_backward_tensor_tensor_tensor_tensor(grad.get(), output.get(), data.get(), lengths.get());
+XPtrTorchTensor cpp_torch_namespace__segment_reduce_backward_grad_Tensor_output_Tensor_data_Tensor_reduce_c10string_view (XPtrTorchTensor grad, XPtrTorchTensor output, XPtrTorchTensor data, XPtrTorchstring reduce, XPtrTorchOptionalTensor lengths, XPtrTorchint64_t axis) {
+  auto r_out = lantern__segment_reduce_backward_tensor_tensor_tensor_cstringview_tensor_intt(grad.get(), output.get(), data.get(), reduce.get(), lengths.get(), axis.get());
 return XPtrTorchTensor(r_out);
 }
 
