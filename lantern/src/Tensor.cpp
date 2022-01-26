@@ -256,17 +256,36 @@ void *_lantern_normal_tensor_double_generator(void *mean, double std,
   LANTERN_FUNCTION_END
 }
 
+std::string lantern_name_sig (const c10::impl::PyInterpreter* x) {
+  return "LanternInterpreter";
+}
+
+// global interpreter definition.
+// unlike in python, we currently don't have behaviors where a tensor
+// can be owned by different interpreters.
+c10::impl::PyInterpreter lantern_interpreter(
+  *lantern_name_sig, nullptr, nullptr, nullptr); 
+
 void _lantern_tensor_set_pyobj(void *x, void *ptr) {
   LANTERN_FUNCTION_START
   PyObject *ptr_ = reinterpret_cast<PyObject *>(ptr);
   auto t = from_raw::Tensor(x);
-  t.unsafeGetTensorImpl()->set_pyobj(ptr_);
+  t.unsafeGetTensorImpl()->init_pyobj(
+    &lantern_interpreter, 
+    ptr_,
+    c10::impl::PyInterpreterStatus::TAGGED_BY_US
+  );
   LANTERN_FUNCTION_END_VOID
 }
 
 void *_lantern_tensor_get_pyobj(void *x) {
   LANTERN_FUNCTION_START
   auto t = from_raw::Tensor(x);
-  return t.unsafeGetTensorImpl()->pyobj();
+  auto pyobj = t.unsafeGetTensorImpl()->check_pyobj(&lantern_interpreter);
+  if (pyobj.has_value()) {
+    return pyobj.value();
+  } else {
+    return nullptr;
+  }
   LANTERN_FUNCTION_END
 }
