@@ -250,5 +250,5 @@
        0.0000
        0.6931
        1.0986
-      [ CPUFloatType{3} ][ grad_fn = <LogBackward> ]
+      [ CPUFloatType{3} ][ grad_fn = <LogBackward0> ]
 
