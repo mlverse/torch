@@ -11393,10 +11393,6 @@ cpp_torch_namespace__store_main_thread_id <- function() {
     invisible(.Call('_torch_cpp_torch_namespace__store_main_thread_id', PACKAGE = 'torchpkg'))
 }
 
-test_string_view <- function(x) {
-    invisible(.Call('_torch_test_string_view', PACKAGE = 'torchpkg', x))
-}
-
 cpp_torch_variable_list <- function(x) {
     .Call('_torch_cpp_torch_variable_list', PACKAGE = 'torchpkg', x)
 }
