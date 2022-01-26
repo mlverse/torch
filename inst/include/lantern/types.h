@@ -139,6 +139,7 @@ LANTERN_FROM_RAW_DECL(variable_list, torch::autograd::variable_list)
 LANTERN_FROM_RAW_DECL(Layout, torch::Layout)
 LANTERN_FROM_RAW_DECL(Storage, torch::Storage)
 LANTERN_FROM_RAW_DECL(string, std::string)
+LANTERN_FROM_RAW_DECL(string_view, c10::string_view)
 LANTERN_FROM_RAW_DECL(int64_t, std::int64_t)
 LANTERN_FROM_RAW_DECL(bool_t, bool)
 LANTERN_FROM_RAW_DECL(double_t, double)
@@ -154,6 +155,7 @@ LANTERN_FROM_RAW_DECL(int64_t, c10::optional<std::int64_t>)
 LANTERN_FROM_RAW_DECL(bool_t, c10::optional<bool>)
 LANTERN_FROM_RAW_DECL(ScalarType, c10::optional<torch::ScalarType>)
 LANTERN_FROM_RAW_DECL(string, c10::optional<std::string>)
+LANTERN_FROM_RAW_DECL(string_view, c10::optional<c10::string_view>)
 LANTERN_FROM_RAW_DECL(MemoryFormat, c10::optional<torch::MemoryFormat>)
 LANTERN_FROM_RAW_DECL(Scalar, c10::optional<torch::Scalar>)
 LANTERN_FROM_RAW_DECL(TensorList, c10::List<c10::optional<torch::Tensor>>)
@@ -207,7 +209,7 @@ class OptionalArrayRef {
       x_ref_ = std::make_shared<c10::optional<torch::ArrayRef<T>>>(*x_);
     }
   }
-  operator c10::optional<torch::ArrayRef<T>> &() { return *x_ref_; }
+  operator c10::optional<torch::ArrayRef<T>>&() { return *x_ref_; }
 };
 
 template <typename Type>
@@ -219,8 +221,8 @@ class ArrayBox {
     buffer_ = std::make_shared<std::vector<Type>>(x);
     x_ = std::make_shared<torch::ArrayRef<Type>>(*buffer_);
   }
-  operator torch::ArrayRef<Type> &() { return *x_; }
-  operator std::vector<Type> &() { return *buffer_; }
+  operator torch::ArrayRef<Type>&() { return *x_; }
+  operator std::vector<Type>&() { return *buffer_; }
   void push_back(const Type& x) {
     buffer_->push_back(x);
     // We have to re-create the ArrayRef because the underlying buffer has
@@ -256,6 +258,7 @@ using Device = Box<torch::Device>;
 using Dimname = Box<torch::Dimname>;
 using DimnameList = ArrayBox<torch::Dimname>;
 using IntArrayRef = ArrayBox<std::int64_t>;
+using string_view = Box<c10::string_view>;
 
 namespace vector {
 using int64_t = ArrayBox<std::int64_t>;
@@ -268,7 +271,7 @@ class DimnameList {
   std::shared_ptr<c10::optional<torch::DimnameList>> x_;
   std::shared_ptr<std::vector<torch::Dimname>> vec_;
   DimnameList(const c10::optional<torch::DimnameList>& x);
-  operator c10::optional<torch::DimnameList> &();
+  operator c10::optional<torch::DimnameList>&();
 };
 
 using Generator = Box<c10::optional<torch::Generator>>;
@@ -278,6 +281,7 @@ using int64_t = Box<c10::optional<std::int64_t>>;
 using bool_t = Box<c10::optional<bool>>;
 using ScalarType = Box<c10::optional<torch::ScalarType>>;
 using string = Box<c10::optional<std::string>>;
+using string_view = Box<c10::optional<c10::string_view>>;
 using MemoryFormat = Box<c10::optional<torch::MemoryFormat>>;
 using Scalar = Box<c10::optional<torch::Scalar>>;
 using IntArrayRef = OptionalArrayRef<std::int64_t>;
@@ -304,7 +308,7 @@ DimnameList::DimnameList(const c10::optional<torch::DimnameList>& x) {
   }
 };
 
-DimnameList::operator c10::optional<torch::DimnameList> &() { return *x_; };
+DimnameList::operator c10::optional<torch::DimnameList>&() { return *x_; };
 
 }  // namespace optional
 }  // namespace self_contained
@@ -474,6 +478,7 @@ LANTERN_FROM_RAW(variable_list, torch::autograd::variable_list)
 LANTERN_FROM_RAW(Layout, torch::Layout)
 LANTERN_FROM_RAW(Storage, torch::Storage)
 LANTERN_FROM_RAW(string, std::string)
+LANTERN_FROM_RAW_WRAPPED(string_view, self_contained::string_view, c10::string_view)
 LANTERN_FROM_RAW(int64_t, std::int64_t)
 LANTERN_FROM_RAW(bool_t, bool)
 LANTERN_FROM_RAW(double_t, double)
@@ -497,6 +502,8 @@ LANTERN_FROM_RAW_WRAPPED(ScalarType, self_contained::optional::ScalarType,
                          c10::optional<torch::ScalarType>)
 LANTERN_FROM_RAW_WRAPPED(string, self_contained::optional::string,
                          c10::optional<std::string>)
+LANTERN_FROM_RAW_WRAPPED(string_view, self_contained::optional::string_view,
+                         c10::optional<c10::string_view>)
 LANTERN_FROM_RAW_WRAPPED(MemoryFormat, self_contained::optional::MemoryFormat,
                          c10::optional<torch::MemoryFormat>)
 LANTERN_FROM_RAW_WRAPPED(Scalar, self_contained::optional::Scalar,
