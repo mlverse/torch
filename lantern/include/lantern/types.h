@@ -68,6 +68,7 @@ void* variable_list(const torch::autograd::variable_list& x);
 void* Layout(const torch::Layout& x);
 void* Storage(const torch::Storage& x);
 void* string(const std::string& x);
+void* string_view(const c10::string_view& x);
 void* int64_t(const std::int64_t& x);
 void* bool_t(const bool& x);
 void* double_t(const double& x);
@@ -94,6 +95,7 @@ void* tuple(std::tuple<T...> x) {
 namespace optional {
 void* bool_t(const c10::optional<bool>& x);
 void* string(const c10::optional<std::string>& x);
+void* string_view(const c10::optional<c10::string_view>& x);
 void* TensorList(const c10::List<c10::optional<torch::Tensor>>& x);
 void* IntArrayRef(const c10::optional<torch::IntArrayRef>& x);
 void* DoubleArrayRef(const c10::optional<torch::ArrayRef<double>>& x);
@@ -355,6 +357,9 @@ void* variable_list(const torch::autograd::variable_list& x) {
 void* Layout(const torch::Layout& x) { return make_ptr<torch::Layout>(x); }
 void* Storage(const torch::Storage& x) { return make_ptr<torch::Storage>(x); }
 void* string(const std::string& x) { return make_ptr<std::string>(x); }
+void* string_view(const c10::string_view& x) {
+  return make_ptr<self_contained::string_view>(x);
+}
 void* int64_t(const std::int64_t& x) { return make_ptr<std::int64_t>(x); }
 void* double_t(const double& x) { return make_ptr<double>(x); }
 void* bool_t(const bool& x) { return make_ptr<bool>(x); }
@@ -387,6 +392,10 @@ namespace optional {
 
 void* string(const c10::optional<std::string>& x) {
   return make_ptr<self_contained::optional::string>(x);
+}
+
+void* string_view (const c10::optional<c10::string_view>& x) {
+  return make_ptr<self_contained::optional::string_view>(x);
 }
 
 void* TensorList(const c10::List<c10::optional<torch::Tensor>>& x) {

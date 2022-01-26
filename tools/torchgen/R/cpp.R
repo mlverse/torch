@@ -288,7 +288,7 @@ cpp_parameter_type <- function(argument) {
   }
 
   if (argument$dynamic_type == "c10::string_view") {
-    declaration <- "XPtrTorchstring"
+    declaration <- "XPtrTorchstring_view"
   }
 
   # FIXME: Stop if argument$dynamic_type is not handled

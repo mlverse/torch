@@ -128,6 +128,7 @@ IMPORT_FROM_SEXP(from_sexp_optional_memory_format,
                  XPtrTorchoptional_memory_format)
 IMPORT_FROM_SEXP(from_sexp_vector_string, XPtrTorchvector_string)
 IMPORT_FROM_SEXP(from_sexp_variable_list, XPtrTorchvariable_list)
+IMPORT_FROM_SEXP(from_sexp_string_view, XPtrTorchstring_view)
 
 #define IMPORT_DELETER(name)                                \
   void name(void* x) {                                      \
@@ -197,6 +198,7 @@ IMPORT_DELETER(delete_optional_string)
 IMPORT_DELETER(delete_optional_scalar)
 IMPORT_DELETER(delete_optional_scalar_type)
 IMPORT_DELETER(delete_optional_memory_format)
+IMPORT_DELETER(delete_string_view)
 
 XPtrTorchIntArrayRef from_sexp_int_array_ref(SEXP x, bool allow_null,
                                              bool index) {

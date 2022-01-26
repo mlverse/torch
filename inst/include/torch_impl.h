@@ -209,6 +209,11 @@ XPtrTorchstring::operator SEXP() const { return operator_sexp_string(this); }
 XPtrTorchstring::XPtrTorchstring(SEXP x)
     : XPtrTorchstring{from_sexp_string(x)} {}
 
+// string_view
+
+XPtrTorchstring_view::XPtrTorchstring_view(SEXP x)
+  : XPtrTorchstring_view{from_sexp_string_view(x)} {}
+
 // optional string
 
 XPtrTorchoptional_string::operator SEXP() const {

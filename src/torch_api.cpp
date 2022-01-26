@@ -783,6 +783,16 @@ void delete_string(void* x) { lantern_string_delete(x); }
 
 void* fixme_new_string(const char* x) { return lantern_string_new(x); }
 
+// string_view
+
+XPtrTorchstring_view from_sexp_string_view(SEXP x) {
+  std::string v = Rcpp::as<std::string>(x);
+  return XPtrTorchstring_view(lantern_string_view_new(v.c_str()));
+}
+
+void delete_string_view(void* x) { lantern_string_view_delete(x); }
+
+
 // optional string
 
 SEXP operator_sexp_optional_string(const XPtrTorchoptional_string* x) {

@@ -170,6 +170,7 @@ LANTERN_OPTIONAL_DECLS(string)
 LANTERN_OPTIONAL_DECLS(scalar)
 LANTERN_OPTIONAL_DECLS(memory_format)
 LANTERN_OPTIONAL_DECLS(device)
+LANTERN_OPTIONAL_DECLS(string_view)
 
   LANTERN_API void(LANTERN_PTR lanternConfigure)(int log);
   LANTERN_API const char*(LANTERN_PTR lanternVersion)();
@@ -624,11 +625,28 @@ LANTERN_OPTIONAL_DECLS(device)
     return ret;
   }
 
+  LANTERN_API void* (LANTERN_PTR _lantern_string_view_new) (const char * value);
+  HOST_API void* lantern_string_view_new (const char* value)
+  {
+    LANTERN_CHECK_LOADED
+    void* ret = _lantern_string_view_new(value);
+    LANTERN_HOST_HANDLER;
+    return ret;
+  }
+
   LANTERN_API void (LANTERN_PTR _lantern_string_delete) (void * x);
   HOST_API void lantern_string_delete (void* x)
   {
     LANTERN_CHECK_LOADED
     _lantern_string_delete(x);
+    LANTERN_HOST_HANDLER;
+  }
+
+  LANTERN_API void (LANTERN_PTR _lantern_string_view_delete) (void * x);
+  HOST_API void lantern_string_view_delete (void* x)
+  {
+    LANTERN_CHECK_LOADED
+    _lantern_string_view_delete(x);
     LANTERN_HOST_HANDLER;
   }
 
@@ -7745,6 +7763,7 @@ bool lanternInit(const std::string &libPath, std::string *pError)
   LANTERN_OPTIONAL_LOAD_SYMBOL(memory_format)
   LANTERN_OPTIONAL_LOAD_SYMBOL(scalar)
   LANTERN_OPTIONAL_LOAD_SYMBOL(device)
+  LANTERN_OPTIONAL_LOAD_SYMBOL(string_view)
   LOAD_SYMBOL(lanternConfigure);
   LOAD_SYMBOL(lanternVersion);
   LOAD_SYMBOL(lanternSetLastError);
@@ -7946,7 +7965,9 @@ bool lanternInit(const std::string &libPath, std::string *pError)
   LOAD_SYMBOL(_lantern_Tensor_has_names);
   LOAD_SYMBOL(_lantern_Tensor_names);
   LOAD_SYMBOL(_lantern_string_new);
+  LOAD_SYMBOL(_lantern_string_view_new);
   LOAD_SYMBOL(_lantern_string_delete);
+  LOAD_SYMBOL(_lantern_string_view_delete);
   LOAD_SYMBOL(_lantern_contrib_torch_sparsemax);
   LOAD_SYMBOL(_lantern_set_num_threads);
   LOAD_SYMBOL(_lantern_set_num_interop_threads);

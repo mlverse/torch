@@ -99,6 +99,7 @@ void register_callables(DllInfo *dll) {
   REGISTER_C_CALLABLE(from_sexp_optional_memory_format)
   REGISTER_C_CALLABLE(from_sexp_vector_string)
   REGISTER_C_CALLABLE(from_sexp_variable_list)
+  REGISTER_C_CALLABLE(from_sexp_string_view)
 
   REGISTER_C_CALLABLE(delete_tensor)
   REGISTER_C_CALLABLE(delete_script_module)
@@ -160,6 +161,7 @@ void register_callables(DllInfo *dll) {
   REGISTER_C_CALLABLE(delete_optional_scalar)
   REGISTER_C_CALLABLE(delete_optional_scalar_type)
   REGISTER_C_CALLABLE(delete_optional_memory_format)
+  REGISTER_C_CALLABLE(delete_string_view)
 
   REGISTER_C_CALLABLE(fixme_new_string)
 }
