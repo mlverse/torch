@@ -5,7 +5,7 @@
 \alias{torch_repeat_interleave}
 \title{Repeat_interleave}
 \usage{
-torch_repeat_interleave(self, repeats, dim = NULL)
+torch_repeat_interleave(self, repeats, dim = NULL, output_size = NULL)
 }
 \arguments{
 \item{self}{(Tensor) the input tensor.}
@@ -13,6 +13,10 @@ torch_repeat_interleave(self, repeats, dim = NULL)
 \item{repeats}{(Tensor or int) The number of repetitions for each element.        repeats is broadcasted to fit the shape of the given axis.}
 
 \item{dim}{(int, optional) The dimension along which to repeat values.        By default, use the flattened input array, and return a flat output        array.}
+
+\item{output_size}{(int, optional) – Total output size for the given axis
+( e.g. sum of repeats). If given, it will avoid stream syncronization needed
+to calculate output shape of the tensor.}
 }
 \description{
 Repeat_interleave
