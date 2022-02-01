@@ -287,7 +287,11 @@ cpp_parameter_type <- function(argument) {
     declaration <- "XPtrTorchvector_Scalar"
   }
 
-  if (argument$dynamic_type == "c10::string_view") {
+  if (argument$dynamic_type == "c10::string_view" && argument$type == "c10::optional<c10::string_view>") {
+    declaration <- "XPtrTorchoptional_string_view"
+  }
+
+  if (argument$dynamic_type == "c10::string_view" && argument$type != "c10::optional<c10::string_view>") {
     declaration <- "XPtrTorchstring_view"
   }
 

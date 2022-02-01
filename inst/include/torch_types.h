@@ -405,6 +405,13 @@ public:
   XPtrTorchstring_view(const XPtrTorchstring_view& x) : XPtrTorch(x.get_shared()){};
 };
 
+class XPtrTorchoptional_string_view : public XPtrTorch {
+public:
+  XPtrTorchoptional_string_view(void* x) : XPtrTorch(x, delete_optional_string_view) {}
+  XPtrTorchoptional_string_view(SEXP x);
+  XPtrTorchoptional_string_view(const XPtrTorchstring_view& x) : XPtrTorch(x.get_shared()){};
+};
+
 class XPtrTorchoptional_string : public XPtrTorch {
  public:
   XPtrTorchoptional_string(void* x) : XPtrTorch(x, delete_optional_string) {}

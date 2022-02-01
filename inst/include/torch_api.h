@@ -105,5 +105,6 @@ XPtrTorchoptional_scalar from_sexp_optional_scalar(SEXP x);
 XPtrTorchvector_string from_sexp_vector_string(SEXP x);
 XPtrTorchvariable_list from_sexp_variable_list(SEXP x);
 XPtrTorchstring_view from_sexp_string_view(SEXP x);
+XPtrTorchoptional_string_view from_sexp_optional_string_view(SEXP x);
 
 #endif  // TORCH_API
