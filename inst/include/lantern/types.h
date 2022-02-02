@@ -265,11 +265,8 @@ class string_view {
   public:
     std::shared_ptr<std::string> s_;
     std::shared_ptr<c10::string_view> s_view_;
-    string_view (const c10::string_view& x) {
-      s_ = std::make_shared<std::string>(x.data(), x.size());
-      s_view_ = std::make_shared<c10::string_view>(*s_);
-    }
-    operator c10::string_view&() { return *s_view_; }
+    string_view (const c10::string_view& x);
+    operator c10::string_view&();
 };
 
 namespace vector {
@@ -286,6 +283,14 @@ class DimnameList {
   operator c10::optional<torch::DimnameList>&();
 };
 
+class string_view {
+  public:
+    std::shared_ptr<std::string> s_;
+    std::shared_ptr<c10::optional<c10::string_view>> s_view_;
+    operator c10::optional<c10::string_view>& ();
+    string_view (const c10::optional<c10::string_view>& x);
+};
+
 using Generator = Box<c10::optional<torch::Generator>>;
 using Tensor = Box<c10::optional<torch::Tensor>>;
 using double_t = Box<c10::optional<double>>;
@@ -293,7 +298,6 @@ using int64_t = Box<c10::optional<std::int64_t>>;
 using bool_t = Box<c10::optional<bool>>;
 using ScalarType = Box<c10::optional<torch::ScalarType>>;
 using string = Box<c10::optional<std::string>>;
-using string_view = Box<c10::optional<c10::string_view>>;
 using MemoryFormat = Box<c10::optional<torch::MemoryFormat>>;
 using Scalar = Box<c10::optional<torch::Scalar>>;
 using IntArrayRef = OptionalArrayRef<std::int64_t>;
@@ -309,6 +313,15 @@ using Device = Box<c10::optional<torch::Device>>;
 #ifdef LANTERN_TYPES_IMPL
 
 namespace self_contained {
+
+string_view::string_view (const c10::string_view& x) {
+  s_ = std::make_shared<std::string>(x.data(), x.size());
+  s_view_ = std::make_shared<c10::string_view>(*s_);
+}
+
+string_view::operator c10::string_view&() { return *s_view_; }
+
+
 namespace optional {
 
 DimnameList::DimnameList(const c10::optional<torch::DimnameList>& x) {
@@ -321,6 +334,17 @@ DimnameList::DimnameList(const c10::optional<torch::DimnameList>& x) {
 };
 
 DimnameList::operator c10::optional<torch::DimnameList>&() { return *x_; };
+
+string_view::string_view(const c10::optional<c10::string_view>& x) {
+  if (x.has_value()) {
+    s_ = std::make_shared<std::string>(x.value().data(), x.value().size());
+    s_view_ = std::make_shared<c10::optional<c10::string_view>>(*s_);
+  } else {
+    s_view_ = std::make_shared<c10::optional<c10::string_view>>(c10::nullopt);
+  }
+};
+
+string_view::operator c10::optional<c10::string_view>&() { return *s_view_; };
 
 }  // namespace optional
 }  // namespace self_contained
