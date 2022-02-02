@@ -273,7 +273,7 @@ void _lantern_tensor_set_pyobj(void *x, void *ptr) {
   t.unsafeGetTensorImpl()->init_pyobj(
     &lantern_interpreter, 
     ptr_,
-    c10::impl::PyInterpreterStatus::TAGGED_BY_US
+    c10::impl::PyInterpreterStatus::DEFINITELY_UNINITIALIZED
   );
   LANTERN_FUNCTION_END_VOID
 }
@@ -283,7 +283,7 @@ void *_lantern_tensor_get_pyobj(void *x) {
   auto t = from_raw::Tensor(x);
   auto pyobj = t.unsafeGetTensorImpl()->check_pyobj(&lantern_interpreter);
   if (pyobj.has_value()) {
-    return pyobj.value();
+    return (void*) pyobj.value();
   } else {
     return nullptr;
   }

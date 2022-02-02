@@ -349,12 +349,8 @@ test_that("tensor identity works as expected", {
   z <- x$abs_()
   gctorture(FALSE)
 
-  class(x) <- NULL
-  class(y) <- NULL
-  class(z) <- NULL
-
-  expect_equal(x, y)
-  expect_equal(x, z)
+  expect_equal(rlang::obj_address(x), rlang::obj_address(y))
+  expect_equal(rlang::obj_address(x), rlang::obj_address(z))
 
   rm(x)
   gc()
@@ -364,9 +360,7 @@ test_that("tensor identity works as expected", {
 
   x <- y$abs_()
 
-  class(x) <- NULL
-  class(y) <- NULL
-  expect_equal(x, y)
+  expect_equal(rlang::obj_address(x), rlang::obj_address(y))
 })
 
 test_that("print tensors with grad_fn and requires_grad", {
