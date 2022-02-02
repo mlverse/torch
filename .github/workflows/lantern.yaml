@@ -157,12 +157,13 @@ jobs:
       - name: Free up 24GB of disk space
         if: ${{ matrix.os == 'ubuntu-18.04' }}
         run: sudo rm -rf /usr/share/dotnet
-      - name: Prep cmake cuda 10.2
+      - name: Prep cmake cuda
         if: ${{ (matrix.cuda == '10.2' || matrix.cuda == '11.1' || matrix.cuda == '11.3') && matrix.os == 'ubuntu-18.04'}}
         run: |
           wget --quiet ${{matrix.cuda_toolkit}}
           chmod +x ${{matrix.cuda_toolkit_installer}}
           sudo ./${{matrix.cuda_toolkit_installer}} --silent --toolkit
+          rm ${{matrix.cuda_toolkit_installer}}
           echo "CUDA=${{matrix.cuda}}" >> $GITHUB_ENV
           echo "CUDA_TOOLKIT_ROOT_DIR=/usr/local/cuda" >> $GITHUB_ENV
           dir /usr/local
@@ -172,7 +173,6 @@ jobs:
           sudo cp cuda/lib64/libcudnn* /usr/local/cuda/lib64
           sudo chmod a+r /usr/local/cuda/include/cudnn*.h /usr/local/cuda/lib64/libcudnn*
           rm ${{matrix.cudnn_file}}
-          rm ${{matrix.cuda_toolkit_installer}}
           echo "CUDNN_LIBRARY_PATH=/usr/local/cuda/lib64" >> $GITHUB_ENV
           echo "CUDNN_INCLUDE_PATH=/usr/local/cuda/include" >> $GITHUB_ENV
       - name: Prep cuda (windows)
