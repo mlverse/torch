@@ -63,19 +63,7 @@ jobs:
           sysreqs=$(Rscript -e "cat(sysreqs::sysreq_commands('DESCRIPTION'))")
           sudo -s eval "$sysreqs"
       - name: Install dependencies
-        run: |
-          options(install.packages.check.source = "no")
-          options(pkgType = ifelse(grepl("linux", R.version$os), "source", "binary"))
-          install.packages(c('remotes', 'rcmdcheck'))
-          remotes::install_deps(dependencies = TRUE)
-          remotes::install_cran(c("katex", "knitr", "roxygen2", "sessioninfo", "testthat"), type = "source")
-          if (!require("Rcpp")) remotes::install_cran("Rcpp")
-        shell: Rscript {0}
-      - name: Install rlang from source
-        if: ${{matrix.r_version}} == "3.6"
-        run: |
-          remotes::install_cran("rlang", type = "source")
-        shell: Rscript {0}
+        run: Rscript -e "install.packages(c('remotes', 'rcmdcheck'))" -e "remotes::install_deps(dependencies = TRUE)"
       - name: Print R session information
         run: |
           if (utils::packageVersion("sessioninfo") >= "1.2.1") {
