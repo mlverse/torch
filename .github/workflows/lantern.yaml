@@ -158,7 +158,7 @@ jobs:
         if: ${{ matrix.os == 'ubuntu-18.04' }}
         run: sudo rm -rf /usr/share/dotnet
       - name: Prep cmake cuda 10.2
-        if: ${{ (matrix.cuda == "10.2" || matrix.cuda == "11.1" || matrix.cuda == "11.3") && matrix.os == 'ubuntu-18.04'}}
+        if: ${{ (matrix.cuda == '10.2' || matrix.cuda == '11.1' || matrix.cuda == '11.3') && matrix.os == 'ubuntu-18.04'}}
         run: |
           wget --quiet ${{matrix.cuda_toolkit}}
           chmod +x ${{matrix.cuda_toolkit_installer}}
