@@ -71,6 +71,10 @@ jobs:
           remotes::install_cran(c("katex", "knitr", "roxygen2", "sessioninfo", "testthat"), type = "source")
           if (!require("Rcpp")) remotes::install_cran("Rcpp")
         shell: Rscript {0}
+      - name: Install rlang from source
+        if: matrix.r_version == "3.6"
+        run: |
+          remotes::install_cran("rlang", type = "source")
       - name: Print R session information
         run: |
           if (utils::packageVersion("sessioninfo") >= "1.2.1") {
