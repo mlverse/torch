@@ -72,9 +72,10 @@ jobs:
           if (!require("Rcpp")) remotes::install_cran("Rcpp")
         shell: Rscript {0}
       - name: Install rlang from source
-        if: matrix.r_version == "3.6"
+        if: ${{matrix.r_version}} == "3.6"
         run: |
           remotes::install_cran("rlang", type = "source")
+        shell: Rscript {0}
       - name: Print R session information
         run: |
           if (utils::packageVersion("sessioninfo") >= "1.2.1") {
