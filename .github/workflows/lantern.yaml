@@ -5,6 +5,7 @@ on:
     branches:
       - master
       - "cran/**"
+      - "libtorch1.10"
 
 jobs:
   build:
