@@ -169,8 +169,9 @@ std::string buildCalls(std::string name, YAML::Node node, size_t start) {
       arguments += "from_raw::optional::Tensor(" + call + ")";
     } else if (type == "c10::optional<ScalarType>") {
       arguments += "from_raw::optional::ScalarType(" + call + ")";
-    } else if (type == "std::array<bool,2>" || type == "std::array<bool,3>" ||
-               type == "std::array<bool,4>") {
+    } else if (type == "::std::array<bool,2>" || type == "std::array<bool,3>" ||
+               type == "std::array<bool,4>" || type == "::std::array<bool,4>" || 
+               type == "::std::array<bool,3>") {
       arguments += "from_raw::vector::bool_t(" + call + ")";
     } else if (type == "c10::optional<std::string>") {
       arguments += "from_raw::optional::string(" + call + ")";
@@ -190,6 +191,12 @@ std::string buildCalls(std::string name, YAML::Node node, size_t start) {
       arguments += "from_raw::Stream(" + call + ")";
     } else if (type == "MemoryFormat") {
       arguments += "from_raw::MemoryFormat(" + call + ")";
+    } else if (type == "c10::string_view") {
+      arguments += "from_raw::string_view(" + call + ")";
+    } else if (type == "c10::optional<c10::string_view>") {
+      arguments += "from_raw::optional::string_view(" + call + ")";
+    } else if (type == "c10::optional<Device>") {
+      arguments += "from_raw::optional::Device(" + call + ")";
     } else {
       throw std::runtime_error("Unknown type " + type);
     }
@@ -258,6 +265,11 @@ bool isSupported(YAML::Node node) {
   }
 
   if (node["name"].as<std::string>() == "polygamma") {
+    std::cout << "Skipping (conversion) " << name << std::endl;
+    return false;
+  }
+
+  if (node["name"].as<std::string>() == "special_polygamma") {
     std::cout << "Skipping (conversion) " << name << std::endl;
     return false;
   }
@@ -401,7 +413,7 @@ int main(int argc, char *argv[]) {
       appendBody(bodies, config[idx], false, false);
     }
 
-    if (hasMethodOf(config[idx], "Tensor") || name == "stride") {
+    if (hasMethodOf(config[idx], "Tensor") || name == "stride" && name != "special_polygamma") {
       headers.push_back("  LANTERN_API void* (LANTERN_PTR _lantern_Tensor_" +
                         function + ")(" + arguments + ");");
       headers.push_back("  HOST_API void* lantern_Tensor_" + function + "(" +

@@ -203,7 +203,7 @@ cpp_parameter_type <- function(argument) {
     declaration <- "XPtrTorchdouble"
   }
 
-  if (argument$dynamic_type == "std::array<bool,4>") {
+  if (argument$dynamic_type == "::std::array<bool,4>") {
     declaration <- "std::vector<bool>"
   }
 
@@ -239,11 +239,11 @@ cpp_parameter_type <- function(argument) {
     declaration <- "XPtrTorchoptional_scalar"
   }
 
-  if (argument$dynamic_type == "std::array<bool,3>") {
+  if (argument$dynamic_type == "::std::array<bool,3>") {
     declaration <- "std::vector<bool>"
   }
 
-  if (argument$dynamic_type == "std::array<bool,2>") {
+  if (argument$dynamic_type == "::std::array<bool,2>") {
     declaration <- "std::vector<bool>"
   }
 
@@ -285,6 +285,19 @@ cpp_parameter_type <- function(argument) {
 
   if (argument$dynamic_type == "ArrayRef<Scalar>") {
     declaration <- "XPtrTorchvector_Scalar"
+  }
+
+  if (argument$dynamic_type == "c10::string_view" && argument$type == "c10::optional<c10::string_view>") {
+    declaration <- "XPtrTorchoptional_string_view"
+  }
+
+  if (argument$dynamic_type == "c10::string_view" && argument$type != "c10::optional<c10::string_view>") {
+    declaration <- "XPtrTorchstring_view"
+  }
+
+  # FIXME: Stop if argument$dynamic_type is not handled
+  if (!exists("declaration")) {
+    stop(paste(argument$dynamic_type, "is not handled!"))
   }
 
   declaration
@@ -366,7 +379,7 @@ cpp_argument_transform <- function(argument) {
     result <- glue::glue("{argument$name}.get()")
   }
 
-  if (argument$dynamic_type == "std::array<bool,4>") {
+  if (argument$dynamic_type == "::std::array<bool,4>") {
     result <- glue::glue("reinterpret_cast<void*>(&{argument$name})")
   }
 
@@ -390,11 +403,11 @@ cpp_argument_transform <- function(argument) {
     result <- glue::glue("{argument$name}.get()")
   }
 
-  if (argument$dynamic_type == "std::array<bool,3>") {
+  if (argument$dynamic_type == "::std::array<bool,3>") {
     result <- glue::glue("reinterpret_cast<void*>(&{argument$name})")
   }
 
-  if (argument$dynamic_type == "std::array<bool,2>") {
+  if (argument$dynamic_type == "::std::array<bool,2>") {
     result <- glue::glue("reinterpret_cast<void*>(&{argument$name})")
   }
 
@@ -428,6 +441,15 @@ cpp_argument_transform <- function(argument) {
 
   if (argument$dynamic_type == "ArrayRef<Scalar>") {
     result <- glue::glue("{argument$name}.get()")
+  }
+
+  if (argument$dynamic_type == "c10::string_view") {
+    result <- glue::glue("{argument$name}.get()")
+  }
+
+  # FIXME: Stop if argument$dynamic_type is not handled
+  if (!exists("result")) {
+    stop(paste(argument$dynamic_type, "is not handled!"))
   }
 
   result
@@ -585,6 +607,7 @@ SKIP_R_BINDIND <- c(
   "set_quantizer_", #https://github.com/pytorch/pytorch/blob/5dfcfeebb89304c1e7978cad7ada1227f19303f6/tools/autograd/gen_python_functions.py#L36
   "normal",
   "polygamma",
+  "special_polygamma",
   "_nnpack_available",
   "_backward",
   "_use_cudnn_rnn_flatten_weight",

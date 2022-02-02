@@ -3098,6 +3098,9 @@ NULL
 #' @param self (Tensor) the input tensor.
 #' @param repeats (Tensor or int) The number of repetitions for each element.        repeats is broadcasted to fit the shape of the given axis.
 #' @param dim (int, optional) The dimension along which to repeat values.        By default, use the flattened input array, and return a flat output        array.
+#' @param output_size  (int, optional) – Total output size for the given axis 
+#'  ( e.g. sum of repeats). If given, it will avoid stream syncronization needed 
+#'  to calculate output shape of the tensor.
 #'
 #' @name torch_repeat_interleave
 #'
@@ -4323,8 +4326,6 @@ NULL
 
 #' Meshgrid
 #'
-#' @section TEST :
-#'
 #' Take \eqn{N} tensors, each of which can be either scalar or 1-dimensional
 #' vector, and create \eqn{N} N-dimensional grids, where the \eqn{i} `th` grid is defined by
 #' expanding the \eqn{i} `th` input over dimensions defined by other inputs.
@@ -4332,6 +4333,18 @@ NULL
 #'
 #' @param tensors (list of Tensor) list of scalars or 1 dimensional tensors. Scalars will be
 #'  treated (1,).
+#' @param indexing (str, optional): the indexing mode, either “xy” or “ij”, defaults to “ij”. 
+#'   See warning for future changes.
+#'   If “xy” is selected, the first dimension corresponds to the cardinality of 
+#'   the second input and the second dimension corresponds to the cardinality of the 
+#'   first input.
+#'   If “ij” is selected, the dimensions are in the same order as the cardinality
+#'   of the inputs.
+#'   
+#' @section Warning:
+#' In the future `torch_meshgrid` will transition to indexing=’xy’ as the default.
+#' This [issue](https://github.com/pytorch/pytorch/issues/50276) tracks this issue
+#' with the goal of migrating to NumPy’s behavior.
 #'
 #' @name torch_meshgrid
 #'

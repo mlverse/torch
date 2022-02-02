@@ -4,7 +4,10 @@
 \alias{get_install_libs_url}
 \title{List of files to download}
 \usage{
-get_install_libs_url(version = "1.9.1", type = install_type(version = version))
+get_install_libs_url(
+  version = "1.10.1",
+  type = install_type(version = version)
+)
 }
 \arguments{
 \item{version}{The Torch version to install.}
