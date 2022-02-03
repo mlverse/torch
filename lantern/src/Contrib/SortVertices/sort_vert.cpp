@@ -28,8 +28,6 @@ SOFTWARE.
 
 #include "sort_vert.h"
 
-#include <torch/torch.h>
-
 #include "../../utils.hpp"
 #include "lantern/lantern.h"
 #include "utils.h"
