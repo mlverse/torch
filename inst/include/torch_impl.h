@@ -212,12 +212,12 @@ XPtrTorchstring::XPtrTorchstring(SEXP x)
 // string_view
 
 XPtrTorchstring_view::XPtrTorchstring_view(SEXP x)
-  : XPtrTorchstring_view{from_sexp_string_view(x)} {}
+    : XPtrTorchstring_view{from_sexp_string_view(x)} {}
 
 // optional_string_view
 
 XPtrTorchoptional_string_view::XPtrTorchoptional_string_view(SEXP x)
-  : XPtrTorchoptional_string_view{from_sexp_optional_string_view(x)} {}
+    : XPtrTorchoptional_string_view{from_sexp_optional_string_view(x)} {}
 
 // optional string
 

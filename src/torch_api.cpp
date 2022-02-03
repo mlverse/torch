@@ -792,19 +792,20 @@ XPtrTorchstring_view from_sexp_string_view(SEXP x) {
 
 void delete_string_view(void* x) { lantern_string_view_delete(x); }
 
-
 // optional string view
 
 XPtrTorchoptional_string_view from_sexp_optional_string_view(SEXP x) {
   if (TYPEOF(x) == NILSXP) {
     return XPtrTorchoptional_string_view(lantern_optional_string_view(nullptr));
   }
-  
+
   return XPtrTorchoptional_string_view(
-    lantern_optional_string_view(Rcpp::as<XPtrTorchstring_view>(x).get()));
+      lantern_optional_string_view(Rcpp::as<XPtrTorchstring_view>(x).get()));
 }
 
-void delete_optional_string_view(void* x) { lantern_optional_string_view_delete(x); }
+void delete_optional_string_view(void* x) {
+  lantern_optional_string_view_delete(x);
+}
 
 // optional string
 

@@ -218,7 +218,7 @@ void *_lantern_string_new(const char *value) {
   LANTERN_FUNCTION_END
 }
 
-void* _lantern_string_view_new(const char* value) {
+void *_lantern_string_view_new(const char *value) {
   LANTERN_FUNCTION_START
   return make_raw::string_view(std::string(value));
   LANTERN_FUNCTION_END

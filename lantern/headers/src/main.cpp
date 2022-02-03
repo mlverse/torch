@@ -170,7 +170,7 @@ std::string buildCalls(std::string name, YAML::Node node, size_t start) {
     } else if (type == "c10::optional<ScalarType>") {
       arguments += "from_raw::optional::ScalarType(" + call + ")";
     } else if (type == "::std::array<bool,2>" || type == "std::array<bool,3>" ||
-               type == "std::array<bool,4>" || type == "::std::array<bool,4>" || 
+               type == "std::array<bool,4>" || type == "::std::array<bool,4>" ||
                type == "::std::array<bool,3>") {
       arguments += "from_raw::vector::bool_t(" + call + ")";
     } else if (type == "c10::optional<std::string>") {
@@ -413,7 +413,8 @@ int main(int argc, char *argv[]) {
       appendBody(bodies, config[idx], false, false);
     }
 
-    if (hasMethodOf(config[idx], "Tensor") || name == "stride" && name != "special_polygamma") {
+    if (hasMethodOf(config[idx], "Tensor") ||
+        name == "stride" && name != "special_polygamma") {
       headers.push_back("  LANTERN_API void* (LANTERN_PTR _lantern_Tensor_" +
                         function + ")(" + arguments + ");");
       headers.push_back("  HOST_API void* lantern_Tensor_" + function + "(" +
