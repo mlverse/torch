@@ -54,7 +54,7 @@ install_config <- list(
         "libtorch" = list(
           path = "libtorch/",
           url = "https://download.pytorch.org/libtorch/cu111/libtorch-cxx11-abi-shared-with-deps-1.10.1%2Bcu111.zip",
-          md5hash = "5e0afdd052fa25d150c2ee5bdb64e6fb"
+          md5hash = "8aba033c7eec076ceeb83c22a6ff77c6"
         ),
         "liblantern" = sprintf("https://storage.googleapis.com/torch-lantern-builds/refs/heads/%s/latest/Linux-gpu-111.zip", branch)
       ),
