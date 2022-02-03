@@ -112,7 +112,7 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">torch_repeat_interleave</span><span class="op">(</span><span class="va">self</span>, <span class="va">repeats</span>, dim <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">torch_repeat_interleave</span><span class="op">(</span><span class="va">self</span>, <span class="va">repeats</span>, dim <span class="op">=</span> <span class="cn">NULL</span>, output_size <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -123,6 +123,10 @@
 <dd><p>(Tensor or int) The number of repetitions for each element.        repeats is broadcasted to fit the shape of the given axis.</p></dd>
 <dt>dim</dt>
 <dd><p>(int, optional) The dimension along which to repeat values.        By default, use the flattened input array, and return a flat output        array.</p></dd>
+<dt>output_size</dt>
+<dd><p>(int, optional) – Total output size for the given axis
+( e.g. sum of repeats). If given, it will avoid stream syncronization needed
+to calculate output shape of the tensor.</p></dd>
 </dl></div>
     <div id="repeat-interleave-input-repeats-dim-null-gt-tensor-">
     <h2>repeat_interleave(input, repeats, dim=NULL) -&gt; Tensor </h2>
