@@ -5,21 +5,30 @@
 \alias{torch_meshgrid}
 \title{Meshgrid}
 \usage{
-torch_meshgrid(tensors)
+torch_meshgrid(tensors, indexing)
 }
 \arguments{
 \item{tensors}{(list of Tensor) list of scalars or 1 dimensional tensors. Scalars will be
 treated (1,).}
+
+\item{indexing}{(str, optional): the indexing mode, either “xy” or “ij”, defaults to “ij”.
+See warning for future changes.
+If “xy” is selected, the first dimension corresponds to the cardinality of
+the second input and the second dimension corresponds to the cardinality of the
+first input.
+If “ij” is selected, the dimensions are in the same order as the cardinality
+of the inputs.}
 }
 \description{
-Meshgrid
-}
-\section{TEST }{
-
-
 Take \eqn{N} tensors, each of which can be either scalar or 1-dimensional
 vector, and create \eqn{N} N-dimensional grids, where the \eqn{i} \code{th} grid is defined by
 expanding the \eqn{i} \code{th} input over dimensions defined by other inputs.
+}
+\section{Warning}{
+
+In the future \code{torch_meshgrid} will transition to indexing=’xy’ as the default.
+This \href{https://github.com/pytorch/pytorch/issues/50276}{issue} tracks this issue
+with the goal of migrating to NumPy’s behavior.
 }
 
 \examples{

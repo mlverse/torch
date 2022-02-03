@@ -64,7 +64,11 @@ variable_list LanternFunction::apply(
 
   auto wrapped_outputs = _wrap_outputs(
       args, node->ctx_.get_non_differentiable(), node->ctx_.get_dirty(),
-      to_optional(outputs), is_executable ? node : nullptr);
+      to_optional(outputs), is_executable ? node : nullptr,
+      // TODO: not sure what this function should actually do. Seems to be
+      // related to functorch & co. Hopefully it's not used by the currrent
+      // code.
+      [](variable_list x, variable_list y) { return x; });
 
   node->output_info_.reserve(wrapped_outputs.size());
   for (auto &output : wrapped_outputs) {

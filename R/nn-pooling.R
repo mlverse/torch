@@ -650,12 +650,12 @@ nn_avg_pool3d <- nn_module(
 #'   Useful to pass to [nn_max_unpool2d()]. Default: `FALSE`
 #'
 #' @examples
-# # pool of square window of size=3, and target output size 13x12
-# m = nn_fractional_max_pool2d(3, output_size=c(13, 12))
-# # pool of square window and target output size being half of input image size
-# m = nn_fractional_max_pool2d(3, output_ratio=c(0.5, 0.5))
-# input = torch_randn(20, 16, 50, 32)
-# output = m(input)
+#' # pool of square window of size=3, and target output size 13x12
+#' m <- nn_fractional_max_pool2d(3, output_size = c(13, 12))
+#' # pool of square window and target output size being half of input image size
+#' m <- nn_fractional_max_pool2d(3, output_ratio = c(0.5, 0.5))
+#' input <- torch_randn(20, 16, 50, 32)
+#' output <- m(input)
 #' @export
 nn_fractional_max_pool2d <- nn_module(
   "nn_fractional_max_pool2d",

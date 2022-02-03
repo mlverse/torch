@@ -106,6 +106,7 @@ LANTERN_OPTIONAL(int64_t, int64_t)
 LANTERN_OPTIONAL(bool, bool_t)
 LANTERN_OPTIONAL(scalar_type, ScalarType)
 LANTERN_OPTIONAL(string, string)
+LANTERN_OPTIONAL(string_view, string_view)
 LANTERN_OPTIONAL(memory_format, MemoryFormat)
 LANTERN_OPTIONAL(scalar, Scalar)
 LANTERN_OPTIONAL(device, Device)
@@ -214,6 +215,12 @@ bool _lantern_vector_bool_at(void *self, int64_t i) {
 void *_lantern_string_new(const char *value) {
   LANTERN_FUNCTION_START
   return make_raw::string(std::string(value));
+  LANTERN_FUNCTION_END
+}
+
+void *_lantern_string_view_new(const char *value) {
+  LANTERN_FUNCTION_START
+  return make_raw::string_view(std::string(value));
   LANTERN_FUNCTION_END
 }
 

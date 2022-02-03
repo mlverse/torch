@@ -68,6 +68,7 @@ void* variable_list(const torch::autograd::variable_list& x);
 void* Layout(const torch::Layout& x);
 void* Storage(const torch::Storage& x);
 void* string(const std::string& x);
+void* string_view(const c10::string_view& x);
 void* int64_t(const std::int64_t& x);
 void* bool_t(const bool& x);
 void* double_t(const double& x);
@@ -94,6 +95,7 @@ void* tuple(std::tuple<T...> x) {
 namespace optional {
 void* bool_t(const c10::optional<bool>& x);
 void* string(const c10::optional<std::string>& x);
+void* string_view(const c10::optional<c10::string_view>& x);
 void* TensorList(const c10::List<c10::optional<torch::Tensor>>& x);
 void* IntArrayRef(const c10::optional<torch::IntArrayRef>& x);
 void* DoubleArrayRef(const c10::optional<torch::ArrayRef<double>>& x);
@@ -139,6 +141,7 @@ LANTERN_FROM_RAW_DECL(variable_list, torch::autograd::variable_list)
 LANTERN_FROM_RAW_DECL(Layout, torch::Layout)
 LANTERN_FROM_RAW_DECL(Storage, torch::Storage)
 LANTERN_FROM_RAW_DECL(string, std::string)
+LANTERN_FROM_RAW_DECL(string_view, c10::string_view)
 LANTERN_FROM_RAW_DECL(int64_t, std::int64_t)
 LANTERN_FROM_RAW_DECL(bool_t, bool)
 LANTERN_FROM_RAW_DECL(double_t, double)
@@ -154,6 +157,7 @@ LANTERN_FROM_RAW_DECL(int64_t, c10::optional<std::int64_t>)
 LANTERN_FROM_RAW_DECL(bool_t, c10::optional<bool>)
 LANTERN_FROM_RAW_DECL(ScalarType, c10::optional<torch::ScalarType>)
 LANTERN_FROM_RAW_DECL(string, c10::optional<std::string>)
+LANTERN_FROM_RAW_DECL(string_view, c10::optional<c10::string_view>)
 LANTERN_FROM_RAW_DECL(MemoryFormat, c10::optional<torch::MemoryFormat>)
 LANTERN_FROM_RAW_DECL(Scalar, c10::optional<torch::Scalar>)
 LANTERN_FROM_RAW_DECL(TensorList, c10::List<c10::optional<torch::Tensor>>)
@@ -207,7 +211,7 @@ class OptionalArrayRef {
       x_ref_ = std::make_shared<c10::optional<torch::ArrayRef<T>>>(*x_);
     }
   }
-  operator c10::optional<torch::ArrayRef<T>>&() { return *x_ref_; }
+  operator c10::optional<torch::ArrayRef<T>> &() { return *x_ref_; }
 };
 
 template <typename Type>
@@ -219,8 +223,8 @@ class ArrayBox {
     buffer_ = std::make_shared<std::vector<Type>>(x);
     x_ = std::make_shared<torch::ArrayRef<Type>>(*buffer_);
   }
-  operator torch::ArrayRef<Type>&() { return *x_; }
-  operator std::vector<Type>&() { return *buffer_; }
+  operator torch::ArrayRef<Type> &() { return *x_; }
+  operator std::vector<Type> &() { return *buffer_; }
   void push_back(const Type& x) {
     buffer_->push_back(x);
     // We have to re-create the ArrayRef because the underlying buffer has
@@ -257,6 +261,14 @@ using Dimname = Box<torch::Dimname>;
 using DimnameList = ArrayBox<torch::Dimname>;
 using IntArrayRef = ArrayBox<std::int64_t>;
 
+class string_view {
+ public:
+  std::shared_ptr<std::string> s_;
+  std::shared_ptr<c10::string_view> s_view_;
+  string_view(const c10::string_view& x);
+  operator c10::string_view &();
+};
+
 namespace vector {
 using int64_t = ArrayBox<std::int64_t>;
 }
@@ -268,7 +280,15 @@ class DimnameList {
   std::shared_ptr<c10::optional<torch::DimnameList>> x_;
   std::shared_ptr<std::vector<torch::Dimname>> vec_;
   DimnameList(const c10::optional<torch::DimnameList>& x);
-  operator c10::optional<torch::DimnameList>&();
+  operator c10::optional<torch::DimnameList> &();
+};
+
+class string_view {
+ public:
+  std::shared_ptr<std::string> s_;
+  std::shared_ptr<c10::optional<c10::string_view>> s_view_;
+  operator c10::optional<c10::string_view> &();
+  string_view(const c10::optional<c10::string_view>& x);
 };
 
 using Generator = Box<c10::optional<torch::Generator>>;
@@ -293,6 +313,14 @@ using Device = Box<c10::optional<torch::Device>>;
 #ifdef LANTERN_TYPES_IMPL
 
 namespace self_contained {
+
+string_view::string_view(const c10::string_view& x) {
+  s_ = std::make_shared<std::string>(x.data(), x.size());
+  s_view_ = std::make_shared<c10::string_view>(*s_);
+}
+
+string_view::operator c10::string_view &() { return *s_view_; }
+
 namespace optional {
 
 DimnameList::DimnameList(const c10::optional<torch::DimnameList>& x) {
@@ -304,7 +332,18 @@ DimnameList::DimnameList(const c10::optional<torch::DimnameList>& x) {
   }
 };
 
-DimnameList::operator c10::optional<torch::DimnameList>&() { return *x_; };
+DimnameList::operator c10::optional<torch::DimnameList> &() { return *x_; };
+
+string_view::string_view(const c10::optional<c10::string_view>& x) {
+  if (x.has_value()) {
+    s_ = std::make_shared<std::string>(x.value().data(), x.value().size());
+    s_view_ = std::make_shared<c10::optional<c10::string_view>>(*s_);
+  } else {
+    s_view_ = std::make_shared<c10::optional<c10::string_view>>(c10::nullopt);
+  }
+};
+
+string_view::operator c10::optional<c10::string_view> &() { return *s_view_; };
 
 }  // namespace optional
 }  // namespace self_contained
@@ -351,6 +390,9 @@ void* variable_list(const torch::autograd::variable_list& x) {
 void* Layout(const torch::Layout& x) { return make_ptr<torch::Layout>(x); }
 void* Storage(const torch::Storage& x) { return make_ptr<torch::Storage>(x); }
 void* string(const std::string& x) { return make_ptr<std::string>(x); }
+void* string_view(const c10::string_view& x) {
+  return make_ptr<self_contained::string_view>(x);
+}
 void* int64_t(const std::int64_t& x) { return make_ptr<std::int64_t>(x); }
 void* double_t(const double& x) { return make_ptr<double>(x); }
 void* bool_t(const bool& x) { return make_ptr<bool>(x); }
@@ -383,6 +425,10 @@ namespace optional {
 
 void* string(const c10::optional<std::string>& x) {
   return make_ptr<self_contained::optional::string>(x);
+}
+
+void* string_view(const c10::optional<c10::string_view>& x) {
+  return make_ptr<self_contained::optional::string_view>(x);
 }
 
 void* TensorList(const c10::List<c10::optional<torch::Tensor>>& x) {
@@ -474,6 +520,8 @@ LANTERN_FROM_RAW(variable_list, torch::autograd::variable_list)
 LANTERN_FROM_RAW(Layout, torch::Layout)
 LANTERN_FROM_RAW(Storage, torch::Storage)
 LANTERN_FROM_RAW(string, std::string)
+LANTERN_FROM_RAW_WRAPPED(string_view, self_contained::string_view,
+                         c10::string_view)
 LANTERN_FROM_RAW(int64_t, std::int64_t)
 LANTERN_FROM_RAW(bool_t, bool)
 LANTERN_FROM_RAW(double_t, double)
@@ -497,6 +545,8 @@ LANTERN_FROM_RAW_WRAPPED(ScalarType, self_contained::optional::ScalarType,
                          c10::optional<torch::ScalarType>)
 LANTERN_FROM_RAW_WRAPPED(string, self_contained::optional::string,
                          c10::optional<std::string>)
+LANTERN_FROM_RAW_WRAPPED(string_view, self_contained::optional::string_view,
+                         c10::optional<c10::string_view>)
 LANTERN_FROM_RAW_WRAPPED(MemoryFormat, self_contained::optional::MemoryFormat,
                          c10::optional<torch::MemoryFormat>)
 LANTERN_FROM_RAW_WRAPPED(Scalar, self_contained::optional::Scalar,

@@ -33,6 +33,9 @@ std::string cpp_arg_to_torch_type(SEXP obj,
   if (is_in("std::string", etypes) && is_character) {
     return "std::string";
   }
+  if (is_in("c10::string_view", etypes) && is_character) {
+    return "c10::string_view";
+  }
 
   if (is_in("Scalar", etypes) &&
       (Rf_inherits(obj, "torch_scalar") || is_null)) {
@@ -139,7 +142,7 @@ std::string cpp_arg_to_torch_type(SEXP obj,
     return "const c10::List<c10::optional<Tensor>> &";
   }
 
-  Rcpp::stop("Can't convert argument");
+  Rcpp::stop("Can't convert argument:" + arg_name);
 }
 
 inline std::string cpp_suffix(const std::vector<std::string> arg_names,

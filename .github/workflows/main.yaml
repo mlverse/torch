@@ -63,14 +63,7 @@ jobs:
           sysreqs=$(Rscript -e "cat(sysreqs::sysreq_commands('DESCRIPTION'))")
           sudo -s eval "$sysreqs"
       - name: Install dependencies
-        run: |
-          options(install.packages.check.source = "no")
-          options(pkgType = ifelse(grepl("linux", R.version$os), "source", "binary"))
-          install.packages(c('remotes', 'rcmdcheck'))
-          remotes::install_deps(dependencies = TRUE)
-          remotes::install_cran(c("katex", "knitr", "roxygen2", "sessioninfo", "testthat"), type = "source")
-          if (!require("Rcpp")) remotes::install_cran("Rcpp")
-        shell: Rscript {0}
+        run: Rscript -e "install.packages(c('remotes', 'rcmdcheck'))" -e "remotes::install_deps(dependencies = TRUE)"
       - name: Print R session information
         run: |
           if (utils::packageVersion("sessioninfo") >= "1.2.1") {
@@ -102,7 +95,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        cuda: ["102", "111"]
+        cuda: ["102", "113"]
     runs-on: [self-hosted, linux]
     env:
       R_REMOTES_NO_ERRORS_FROM_WARNINGS: true
@@ -113,6 +106,7 @@ jobs:
       TORCH_INSTALL: 1
       BUILD_LANTERN: ${{ contains( github.event.pull_request.labels.*.name, 'lantern') }}
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
+      DEBIAN_FRONTEND: 'noninteractive'
     steps:
       - uses: actions/checkout@v2
       - name: Build image
