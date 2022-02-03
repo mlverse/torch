@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - master
+      - main
       - "cran/**"
       - "libtorch1.10"
 

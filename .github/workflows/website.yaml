@@ -5,7 +5,7 @@ on:
   workflow_dispatch:
   workflow_run:
     workflows: ["pkgdown"]
-    branches: ["master"]
+    branches: ["master", "main"]
     types:
       - completed
 

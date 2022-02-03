@@ -1,4 +1,4 @@
-branch <- "master"
+branch <- "main"
 
 install_config <- list(
   "1.10.1" = list(

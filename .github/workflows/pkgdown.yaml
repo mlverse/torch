@@ -1,6 +1,8 @@
 on:
   push:
-    branches: master
+    branches: 
+      - master
+      - main
 
 name: pkgdown
 
