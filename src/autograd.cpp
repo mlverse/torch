@@ -193,6 +193,9 @@ void* rcpp_variable_list_ptr(void* x) {
 
 // [[Rcpp::export]]
 Rcpp::XPtr<XPtrTorch> cpp_Function_lambda(Rcpp::Function f) {
+  
+  // TODO: This function should be deleted once the LanternNode that
+  // can call it is deleted.
   auto fun = new std::function<void*(void*, void*)>([f](void* ctx,
                                                         void* inputs) {
     LANTERN_CALLBACK_START
@@ -219,9 +222,6 @@ Rcpp::XPtr<XPtrTorch> cpp_Function_lambda(Rcpp::Function f) {
 
   auto deleter = [fun](void* x) {
     lantern_Function_lambda_delete(x);
-    // we should delete the `fun` pointer when the object that refers to it gets
-    // deleted.
-    delete fun;
   };
 
   auto out = XPtrTorch(lantern_Function_lambda(&rcpp_call_forward, (void*)fun,
