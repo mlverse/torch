@@ -95,7 +95,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        cuda: ["102", "111"]
+        cuda: ["102", "113"]
     runs-on: [self-hosted, linux]
     env:
       R_REMOTES_NO_ERRORS_FROM_WARNINGS: true
