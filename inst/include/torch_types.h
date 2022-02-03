@@ -399,17 +399,20 @@ class XPtrTorchstring : public XPtrTorch {
 };
 
 class XPtrTorchstring_view : public XPtrTorch {
-public:
+ public:
   XPtrTorchstring_view(void* x) : XPtrTorch(x, delete_string_view) {}
   XPtrTorchstring_view(SEXP x);
-  XPtrTorchstring_view(const XPtrTorchstring_view& x) : XPtrTorch(x.get_shared()){};
+  XPtrTorchstring_view(const XPtrTorchstring_view& x)
+      : XPtrTorch(x.get_shared()){};
 };
 
 class XPtrTorchoptional_string_view : public XPtrTorch {
-public:
-  XPtrTorchoptional_string_view(void* x) : XPtrTorch(x, delete_optional_string_view) {}
+ public:
+  XPtrTorchoptional_string_view(void* x)
+      : XPtrTorch(x, delete_optional_string_view) {}
   XPtrTorchoptional_string_view(SEXP x);
-  XPtrTorchoptional_string_view(const XPtrTorchstring_view& x) : XPtrTorch(x.get_shared()){};
+  XPtrTorchoptional_string_view(const XPtrTorchstring_view& x)
+      : XPtrTorch(x.get_shared()){};
 };
 
 class XPtrTorchoptional_string : public XPtrTorch {

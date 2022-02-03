@@ -399,13 +399,13 @@ void _lantern_optional_scalar_delete(void *x) {
   LANTERN_FUNCTION_END_VOID
 }
 
-void _lantern_string_view_delete (void* x) {
+void _lantern_string_view_delete(void *x) {
   LANTERN_FUNCTION_START
   lantern_delete<self_contained::string_view>(x);
   LANTERN_FUNCTION_END_VOID
 }
 
-void _lantern_optional_string_view_delete (void* x) {
+void _lantern_optional_string_view_delete(void *x) {
   LANTERN_FUNCTION_START
   lantern_delete<self_contained::optional::string_view>(x);
   LANTERN_FUNCTION_END_VOID
