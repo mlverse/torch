@@ -106,6 +106,7 @@ jobs:
       TORCH_INSTALL: 1
       BUILD_LANTERN: ${{ contains( github.event.pull_request.labels.*.name, 'lantern') }}
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
+      DEBIAN_FRONTEND: 'noninteractive'
     steps:
       - uses: actions/checkout@v2
       - name: Build image
