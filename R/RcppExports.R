@@ -177,6 +177,10 @@ cpp_cudnn_is_available <- function() {
     .Call('_torch_cpp_cudnn_is_available', PACKAGE = 'torchpkg')
 }
 
+cpp_cuda_memory_stats <- function(device) {
+    .Call('_torch_cpp_cuda_memory_stats', PACKAGE = 'torchpkg', device)
+}
+
 cpp_device_type_to_string <- function(device) {
     .Call('_torch_cpp_device_type_to_string', PACKAGE = 'torchpkg', device)
 }

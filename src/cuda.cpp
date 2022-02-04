@@ -23,3 +23,8 @@ int64_t cpp_cudnn_runtime_version () {
 bool cpp_cudnn_is_available () {
   return lantern_cudnn_is_available();
 }
+
+// [[Rcpp::export]]
+torch::vector::int64_t cpp_cuda_memory_stats(int64_t device) {
+  return torch::vector::int64_t(lantern_cuda_device_stats(device));
+}
