@@ -651,7 +651,7 @@ call_c_function(
   return_types = return_types,
   fun_type = 'method'
 )})
-Tensor$set("public", "allclose", function(other, rtol = 0.000010, atol = 0.000000, equal_nan = FALSE) {  args <- mget(x = c("other", "rtol", "atol", "equal_nan"))
+Tensor$set("public", "allclose", function(other, rtol = 1e-05, atol = 1e-08, equal_nan = FALSE) {  args <- mget(x = c("other", "rtol", "atol", "equal_nan"))
 args <- append(list(self = self), args)
 expected_types <- list(self = "Tensor", other = "Tensor", rtol = "double", atol = "double", 
     equal_nan = "bool")
@@ -1124,7 +1124,7 @@ call_c_function(
   return_types = return_types,
   fun_type = 'method'
 )})
-Tensor$set("public", "bernoulli_", function(p = 0.500000, generator = NULL) {  args <- mget(x = c("p", "generator"))
+Tensor$set("public", "bernoulli_", function(p = 0.5, generator = NULL) {  args <- mget(x = c("p", "generator"))
 args <- append(list(self = self), args)
 expected_types <- list(self = "Tensor", p = c("Tensor", "double"), generator = "Generator")
 nd_args <- c("self", "p")
@@ -2849,7 +2849,7 @@ call_c_function(
   return_types = return_types,
   fun_type = 'method'
 )})
-Tensor$set("public", "hardshrink", function(lambd = 0.500000) {  args <- mget(x = c("lambd"))
+Tensor$set("public", "hardshrink", function(lambd = 0.5) {  args <- mget(x = c("lambd"))
 args <- append(list(self = self), args)
 expected_types <- list(self = "Tensor", lambd = "Scalar")
 nd_args <- "self"
@@ -3404,7 +3404,7 @@ call_c_function(
   return_types = return_types,
   fun_type = 'method'
 )})
-Tensor$set("public", "isclose", function(other, rtol = 0.000010, atol = 0.000000, equal_nan = FALSE) {  args <- mget(x = c("other", "rtol", "atol", "equal_nan"))
+Tensor$set("public", "isclose", function(other, rtol = 1e-05, atol = 1e-08, equal_nan = FALSE) {  args <- mget(x = c("other", "rtol", "atol", "equal_nan"))
 args <- append(list(self = self), args)
 expected_types <- list(self = "Tensor", other = "Tensor", rtol = "double", atol = "double", 
     equal_nan = "bool")
@@ -4923,7 +4923,7 @@ call_c_function(
   return_types = return_types,
   fun_type = 'method'
 )})
-Tensor$set("public", "pinverse", function(rcond = 0.000000) {  args <- mget(x = c("rcond"))
+Tensor$set("public", "pinverse", function(rcond = 1e-15) {  args <- mget(x = c("rcond"))
 args <- append(list(self = self), args)
 expected_types <- list(self = "Tensor", rcond = "double")
 nd_args <- "self"

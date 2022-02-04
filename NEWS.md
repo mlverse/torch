@@ -14,6 +14,7 @@
 - R and C++ code cleanup, styling, and formatting. (#753, @hsbadr)
 - Support for LibTorch 1.10.1 (#758, #763, @hsbadr). See also [release notes](https://github.com/pytorch/pytorch/releases/tag/v1.10.0) for the PyTorch v1.10.
 - Changed default `dim` from `1` to `2` in `nnf_cosine_similarity`. (#769)
+- The default value for arguments of various functions have changed. A bug in the code generation was truncating the default values specially if they were float values that needed more than 6 digit precision. (#770)
 
 # torch 0.6.1
 
