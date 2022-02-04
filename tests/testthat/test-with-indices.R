@@ -3,6 +3,11 @@ test_that("max with indices", {
   m <- torch_max(x, dim = 1)
 
   expect_equal_to_r(m[[2]]$to(dtype = torch_int()), 4)
+  
+  expect_equal_to_r(
+    torch_max(c(2,1), other = c(1,2)),
+    c(2,2)
+  )
 })
 
 test_that("min with indices", {
@@ -10,6 +15,11 @@ test_that("min with indices", {
   m <- torch_min(x, dim = 1)
 
   expect_equal_to_r(m[[2]]$to(dtype = torch_int()), 1)
+  
+  expect_equal_to_r(
+    torch_min(c(2,1), other = c(1,2)),
+    c(1,1)
+  )
 })
 
 test_that("argsort", {

@@ -50,15 +50,16 @@ torch_max_pool3d_with_indices_out <- function(out, indices, self, kernel_size, s
 
 torch_max <- function(self, dim, other, keepdim = FALSE) {
   o <- do.call(.torch_max, as.list(environment()))
-  if (length(o) == 2) {
+  if (is.list(o) && length(o) == 2) {
     o[[2]]$add_(1L, 1L)
   }
   o
 }
 
 torch_min <- function(self, dim, other, keepdim = FALSE) {
-  o <- do.call(.torch_min, as.list(environment()))
-  if (length(o) == 2) {
+  args <- as.list(environment())
+  o <- do.call(.torch_min, args)
+  if (is.list(o) && length(o) == 2) {
     o[[2]]$add_(1L, 1L)
   }
   o
