@@ -433,6 +433,9 @@
     <loc>/reference/nn_embedding.html</loc>
   </url>
   <url>
+    <loc>/reference/nn_flatten.html</loc>
+  </url>
+  <url>
     <loc>/reference/nn_fractional_max_pool2d.html</loc>
   </url>
   <url>
@@ -659,6 +662,9 @@
   </url>
   <url>
     <loc>/reference/nn_triplet_margin_with_distance_loss.html</loc>
+  </url>
+  <url>
+    <loc>/reference/nn_unflatten.html</loc>
   </url>
   <url>
     <loc>/reference/nn_upsample.html</loc>
