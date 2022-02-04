@@ -16,6 +16,7 @@
 - Changed default `dim` from `1` to `2` in `nnf_cosine_similarity`. (#769)
 - The default value for arguments of various functions have changed. A bug in the code generation was truncating the default values specially if they were float values that needed more than 6 digit precision. (#770)
 - Fixed a bug that caused `autograd_grad` to deadlock when used with custom autograd functions. (#771)
+- Fixed a bug in `torch_max` and `torch_min` that would fail with `length=2` Tensors. (#772)
 
 # torch 0.6.1
 
