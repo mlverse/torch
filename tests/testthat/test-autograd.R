@@ -775,3 +775,34 @@ test_that("with detect anomaly", {
     })
   })
 })
+
+test_that("autograd_grad works with custom autograd fucntions", {
+  
+  torch_manual_seed(1)
+  w1 <- torch_randn(4, 3, 5, 5)$requires_grad_()
+  w1$retain_grad()
+  m1 <- exp(w1)$mean()
+  
+  grad1 <- autograd_grad(m1, w1, torch_ones_like(w1))
+  
+  
+  exp2 <- autograd_function(
+    forward = function(ctx, i) {
+      result <- i$exp()
+      ctx$save_for_backward(result = result)
+      result
+    },
+    backward = function(ctx, grad_output) {
+      list(i = grad_output * ctx$saved_variables$result)
+    }
+  )
+  
+  torch_manual_seed(1)
+  w2 <- torch_randn(4, 3, 5, 5)$requires_grad_()
+  w2$retain_grad()
+  m2 <- exp2(w2)$mean()
+  
+  grad2 <- autograd_grad(m2, w2, torch_ones_like(w2))
+  
+  expect_equal_to_tensor(grad1[[1]], grad2[[1]])
+})
