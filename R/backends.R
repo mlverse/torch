@@ -6,6 +6,8 @@ backends_cudnn_is_available <- function() {
   cpp_cudnn_is_available()
 }
 
+backends_cudnn_enabled <- backends_cudnn_is_available
+
 #' CuDNN version
 #' 
 #'@export
