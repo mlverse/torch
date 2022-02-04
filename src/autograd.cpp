@@ -362,8 +362,18 @@ torch::variable_list cpp_autograd_grad(torch::variable_list outputs,
                                        torch::variable_list grad_outputs,
                                        bool retain_graph, bool create_graph,
                                        bool allow_unused) {
-  XPtrTorchvariable_list out =
+  void* out;
+  std::function<void()> grad_fn([&]() {
+    auto sg = makeScopeGuard([] { gTasks.stopWhenEmpty(); });
+    out =
       lantern_autograd_grad(outputs.get(), inputs.get(), grad_outputs.get(),
                             retain_graph, create_graph, allow_unused);
-  return out;
+  });
+  
+  std::packaged_task<void()> task(grad_fn);
+  auto result_fut = task.get_future();
+  schedule_backward_task(std::move(task));
+  gTasks.run();
+  result_fut.get();
+  return torch::variable_list(out);
 }
