@@ -126,6 +126,7 @@
 <li>Support for LibTorch 1.10.1 (<a href="https://github.com/mlverse/torch/issues/758" class="external-link">#758</a>, <a href="https://github.com/mlverse/torch/issues/763" class="external-link">#763</a>, <a href="https://github.com/hsbadr" class="external-link">@hsbadr</a>). See also <a href="https://github.com/pytorch/pytorch/releases/tag/v1.10.0" class="external-link">release notes</a> for the PyTorch v1.10.</li>
 <li>Changed default <code>dim</code> from <code>1</code> to <code>2</code> in <code>nnf_cosine_similarity</code>. (<a href="https://github.com/mlverse/torch/issues/769" class="external-link">#769</a>)</li>
 <li>The default value for arguments of various functions have changed. A bug in the code generation was truncating the default values specially if they were float values that needed more than 6 digit precision. (<a href="https://github.com/mlverse/torch/issues/770" class="external-link">#770</a>)</li>
+<li>Fixed a bug that caused <code>autograd_grad</code> to deadlock when used with custom autograd functions. (<a href="https://github.com/mlverse/torch/issues/771" class="external-link">#771</a>)</li>
 </ul></div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="0.6.1" id="torch-061">torch 0.6.1<a class="anchor" aria-label="anchor" href="#torch-061"></a></h2>
