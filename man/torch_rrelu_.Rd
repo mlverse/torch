@@ -8,7 +8,7 @@
 torch_rrelu_(
   self,
   lower = 0.125,
-  upper = 0.333333,
+  upper = 0.333333333333333,
   training = FALSE,
   generator = NULL
 )
