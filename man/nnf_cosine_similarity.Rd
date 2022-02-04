@@ -4,14 +4,14 @@
 \alias{nnf_cosine_similarity}
 \title{Cosine_similarity}
 \usage{
-nnf_cosine_similarity(x1, x2, dim = 1, eps = 1e-08)
+nnf_cosine_similarity(x1, x2, dim = 2, eps = 1e-08)
 }
 \arguments{
 \item{x1}{(Tensor) First input.}
 
 \item{x2}{(Tensor) Second input (of size matching x1).}
 
-\item{dim}{(int, optional) Dimension of vectors. Default: 1}
+\item{dim}{(int, optional) Dimension of vectors. Default: 2}
 
 \item{eps}{(float, optional) Small value to avoid division by zero.
 Default: 1e-8}
