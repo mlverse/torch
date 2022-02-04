@@ -12,7 +12,8 @@ knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
   eval = identical(Sys.getenv("TORCH_TEST", unset = "0"), "1"),
-  results = "hide"
+  results = "hide",
+  purl = FALSE
 )
 ```
 
