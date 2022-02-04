@@ -178,13 +178,14 @@ r_argument_default <- function(default) {
     return("TRUE")
 
   if (default %in% c("1", "0", "-1", "2", "-2", "100", "-100",
-                     "20"))
+                     "20")) {
     return(paste0(default, "L"))
+  }
 
-  if (default %in% c("0.000010", "0.000000",
-                     "1.000000", "0.500000", "0.010000",
-                     "10.000000", "0.000001", "0.125000",
-                     "0.333333", "9223372036854775807"))
+  if (default %in% c("0.000010", "0.000000", "0", "2", "-2", "100", "-100", "20",
+                     "1.000000", "0.500000", "0.010000", "1", "-1",
+                     "10.000000", "0.000001", "0.125000", "0.333333333333333",
+                     "0.333333", "9223372036854775807", "1e-05", "1e-08", "0.5", "0.01", "1e-15", "10", "1e-06", "0.125"))
     return(default)
 
   if (default == "{}")
@@ -275,6 +276,11 @@ to_1_based <- function(x) {
   out
 }
 
+value_to_char <- function(x) {
+  as.character(x)
+}
+
+
 r_argument_with_default <- function(name, decls) {
 
   default <- purrr::map(decls, ~.x$arguments) %>%
@@ -282,8 +288,8 @@ r_argument_with_default <- function(name, decls) {
     purrr::keep(~.x$name == name) %>%
     purrr::map(~.x$default) %>%
     purrr::discard(is.null) %>%
-    purrr::flatten_chr() %>%
-    unique()
+    #purrr::flatten_chr() %>%
+    sapply(value_to_char)
 
   if (length(default) > 1) {
     default <- default[1]

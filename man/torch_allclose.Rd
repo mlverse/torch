@@ -5,7 +5,7 @@
 \alias{torch_allclose}
 \title{Allclose}
 \usage{
-torch_allclose(self, other, rtol = 1e-05, atol = 0, equal_nan = FALSE)
+torch_allclose(self, other, rtol = 1e-05, atol = 1e-08, equal_nan = FALSE)
 }
 \arguments{
 \item{self}{(Tensor) first tensor to compare}

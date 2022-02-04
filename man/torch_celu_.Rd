@@ -5,7 +5,7 @@
 \alias{torch_celu_}
 \title{Celu_}
 \usage{
-torch_celu_(self, alpha = 1)
+torch_celu_(self, alpha = 1L)
 }
 \arguments{
 \item{self}{the input tensor}

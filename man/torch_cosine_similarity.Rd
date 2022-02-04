@@ -5,7 +5,7 @@
 \alias{torch_cosine_similarity}
 \title{Cosine_similarity}
 \usage{
-torch_cosine_similarity(x1, x2, dim = 2L, eps = 0)
+torch_cosine_similarity(x1, x2, dim = 2L, eps = 1e-08)
 }
 \arguments{
 \item{x1}{(Tensor) First input.}

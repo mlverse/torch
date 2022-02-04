@@ -5,7 +5,7 @@
 \alias{torch_pinverse}
 \title{Pinverse}
 \usage{
-torch_pinverse(self, rcond = 0)
+torch_pinverse(self, rcond = 1e-15)
 }
 \arguments{
 \item{self}{(Tensor) The input tensor of size \eqn{(*, m, n)} where \eqn{*} is zero or more batch dimensions}
