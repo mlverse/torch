@@ -5,6 +5,7 @@
 #include "lantern/lantern.h"
 #ifdef __NVCC__
 #include <ATen/cuda/CUDAContext.h>
+#include <ATen/cuda/detail/CUDAHooks.h>
 #endif
 #include <torch/torch.h>
 
@@ -45,4 +46,12 @@ void* _lantern_cuda_get_device_capability(int64_t device) {
       "`cuda_get_device` is only supported on CUDA runtimes.");
 #endif
   LANTERN_FUNCTION_END
+}
+
+int64_t _lantern_cudnn_runtime_version () {
+  return at::detail::getCUDAHooks().versionCuDNN();
+}
+
+bool _lantern_cudnn_is_available () {
+  return at::detail::getCUDAHooks().hasCuDNN();
 }
