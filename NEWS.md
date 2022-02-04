@@ -13,6 +13,7 @@
 - Simplified concurrency related constructs in autograd. (#755, @yitao-li)
 - R and C++ code cleanup, styling, and formatting. (#753, @hsbadr)
 - Support for LibTorch 1.10.1 (#758, #763, @hsbadr). See also [release notes](https://github.com/pytorch/pytorch/releases/tag/v1.10.0) for the PyTorch v1.10.
+- Changed default `dim` from `1` to `2` in `nnf_cosine_similarity`. (#769)
 
 # torch 0.6.1
 

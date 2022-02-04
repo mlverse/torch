@@ -113,8 +113,10 @@ input_lengths <- torch_full(size = c(N), fill_value = TRUE, dtype = torch_long()
 
 # Initialize random batch of targets (0 = blank, 1:C = classes)
 target_lengths <- torch_randint(low = 1, high = T, size = c(N), dtype = torch_long())
-target <- torch_randint(low = 1, high = C, size = as.integer(sum(target_lengths)), 
-                        dtype = torch_long())
+target <- torch_randint(
+  low = 1, high = C, size = as.integer(sum(target_lengths)),
+  dtype = torch_long()
+)
 ctc_loss <- nn_ctc_loss()
 loss <- ctc_loss(input, target, input_lengths, target_lengths)
 loss$backward()

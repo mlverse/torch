@@ -9,12 +9,12 @@
 #'
 #' @param x1 (Tensor) First input.
 #' @param x2 (Tensor) Second input (of size matching x1).
-#' @param dim (int, optional) Dimension of vectors. Default: 1
+#' @param dim (int, optional) Dimension of vectors. Default: 2
 #' @param eps (float, optional) Small value to avoid division by zero.
 #'   Default: 1e-8
 #'
 #' @export
-nnf_cosine_similarity <- function(x1, x2, dim = 1, eps = 1e-8) {
+nnf_cosine_similarity <- function(x1, x2, dim = 2, eps = 1e-8) {
   torch_cosine_similarity(x1 = x1, x2 = x2, dim = dim, eps = eps)
 }
 

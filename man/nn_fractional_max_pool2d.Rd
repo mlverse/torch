@@ -36,10 +36,10 @@ The number of output features is equal to the number of input planes.
 \examples{
 if (torch_is_installed()) {
 # pool of square window of size=3, and target output size 13x12
-m = nn_fractional_max_pool2d(3, output_size=c(13, 12))
+m <- nn_fractional_max_pool2d(3, output_size = c(13, 12))
 # pool of square window and target output size being half of input image size
-m = nn_fractional_max_pool2d(3, output_ratio=c(0.5, 0.5))
-input = torch_randn(20, 16, 50, 32)
-output = m(input)
+m <- nn_fractional_max_pool2d(3, output_ratio = c(0.5, 0.5))
+input <- torch_randn(20, 16, 50, 32)
+output <- m(input)
 }
 }
