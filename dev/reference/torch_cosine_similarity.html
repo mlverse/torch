@@ -112,7 +112,7 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">torch_cosine_similarity</span><span class="op">(</span><span class="va">x1</span>, <span class="va">x2</span>, dim <span class="op">=</span> <span class="fl">2L</span>, eps <span class="op">=</span> <span class="fl">0</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">torch_cosine_similarity</span><span class="op">(</span><span class="va">x1</span>, <span class="va">x2</span>, dim <span class="op">=</span> <span class="fl">2L</span>, eps <span class="op">=</span> <span class="fl">1e-08</span><span class="op">)</span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -147,36 +147,36 @@ $$</p>
 <span class="r-in"><span class="va">output</span></span>
 <span class="r-in"><span class="op">}</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> torch_tensor</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> -0.1196</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> -0.1695</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  0.0272</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> -0.0133</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> -0.1216</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> -0.0578</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> -0.0516</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  0.0763</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  0.0444</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> -0.0374</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> -0.1089</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  0.1509</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  0.0087</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> -0.0324</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> -0.0333</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  0.0349</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> -0.0780</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> -0.1523</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> -0.0520</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  0.0839</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  0.1138</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> -0.1534</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> -0.0078</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  0.0312</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> -0.1465</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  0.1007</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  0.0628</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  0.1615</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  0.0478</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> -0.0593</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  0.0163</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  0.1788</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> -0.0947</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  0.2223</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> -0.0018</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  0.1337</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  0.0908</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> -0.1010</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> -0.1753</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> -0.0199</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  0.1512</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  0.0443</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  0.1630</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> -0.0481</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> -0.0770</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  0.0567</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  0.0894</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  0.0957</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> -0.0572</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> -0.0929</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> -0.0673</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> -0.0131</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  0.1886</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  0.0547</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> -0.1186</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> -0.0691</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> -0.1433</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> -0.1746</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  0.0186</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> -0.0557</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ... [the output was truncated (use n=-1 to disable)]</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [ CPUFloatType{100} ]</span>
 </code></pre></div>
