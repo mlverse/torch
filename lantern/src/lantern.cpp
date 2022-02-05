@@ -19551,35 +19551,35 @@ void* _lantern_thnn_conv2d_tensor_tensor_intarrayref_tensor_intarrayref_intarray
   LANTERN_FUNCTION_END
 }
 
-void* _lantern_thnn_conv2d_forward_out_tensor_tensor_tensor_tensor_tensor_intarrayref_tensor_intarrayref_intarrayref(void* output, void* finput, void* fgrad_input, void* self, void* weight, void* kernel_size, void* bias, void* stride, void* padding)
+void* _lantern__slow_conv2d_forward_out_tensor_tensor_tensor_tensor_tensor_intarrayref_tensor_intarrayref_intarrayref(void* output, void* finput, void* self, void* weight, void* kernel_size, void* bias, void* stride, void* padding)
 {
   LANTERN_FUNCTION_START
-    return make_raw::tuple(torch::thnn_conv2d_forward_out(
-        from_raw::Tensor(output), from_raw::Tensor(finput), from_raw::Tensor(fgrad_input), from_raw::Tensor(self), from_raw::Tensor(weight), from_raw::IntArrayRef(kernel_size), from_raw::optional::Tensor(bias), from_raw::IntArrayRef(stride), from_raw::IntArrayRef(padding)));
+    return make_raw::tuple(torch::_slow_conv2d_forward_out(
+        from_raw::Tensor(output), from_raw::Tensor(finput), from_raw::Tensor(self), from_raw::Tensor(weight), from_raw::IntArrayRef(kernel_size), from_raw::optional::Tensor(bias), from_raw::IntArrayRef(stride), from_raw::IntArrayRef(padding)));
   LANTERN_FUNCTION_END
 }
 
-void* _lantern_thnn_conv2d_forward_tensor_tensor_intarrayref_tensor_intarrayref_intarrayref(void* self, void* weight, void* kernel_size, void* bias, void* stride, void* padding)
+void* _lantern__slow_conv2d_forward_tensor_tensor_intarrayref_tensor_intarrayref_intarrayref(void* self, void* weight, void* kernel_size, void* bias, void* stride, void* padding)
 {
   LANTERN_FUNCTION_START
-    return make_raw::tuple(torch::thnn_conv2d_forward(
+    return make_raw::tuple(torch::_slow_conv2d_forward(
         from_raw::Tensor(self), from_raw::Tensor(weight), from_raw::IntArrayRef(kernel_size), from_raw::optional::Tensor(bias), from_raw::IntArrayRef(stride), from_raw::IntArrayRef(padding)));
   LANTERN_FUNCTION_END
 }
 
-void* _lantern_thnn_conv2d_backward_out_tensor_tensor_tensor_tensor_tensor_tensor_intarrayref_intarrayref_intarrayref_tensor_tensor(void* grad_input, void* grad_weight, void* grad_bias, void* grad_output, void* self, void* weight, void* kernel_size, void* stride, void* padding, void* finput, void* fgrad_input)
+void* _lantern__slow_conv2d_backward_out_tensor_tensor_tensor_tensor_tensor_tensor_intarrayref_intarrayref_intarrayref_tensor_tensor(void* grad_input, void* grad_weight, void* grad_bias, void* grad_output, void* self, void* weight, void* kernel_size, void* stride, void* padding, void* finput, void* fgrad_input)
 {
   LANTERN_FUNCTION_START
-    return make_raw::tuple(torch::thnn_conv2d_backward_out(
-        from_raw::Tensor(grad_input), from_raw::Tensor(grad_weight), from_raw::Tensor(grad_bias), from_raw::Tensor(grad_output), from_raw::Tensor(self), from_raw::Tensor(weight), from_raw::IntArrayRef(kernel_size), from_raw::IntArrayRef(stride), from_raw::IntArrayRef(padding), from_raw::Tensor(finput), from_raw::Tensor(fgrad_input)));
+    return make_raw::tuple(torch::_slow_conv2d_backward_out(
+        from_raw::Tensor(grad_input), from_raw::Tensor(grad_weight), from_raw::Tensor(grad_bias), from_raw::Tensor(grad_output), from_raw::Tensor(self), from_raw::Tensor(weight), from_raw::IntArrayRef(kernel_size), from_raw::IntArrayRef(stride), from_raw::IntArrayRef(padding), from_raw::Tensor(finput)));
   LANTERN_FUNCTION_END
 }
 
-void* _lantern_thnn_conv2d_backward_tensor_tensor_tensor_intarrayref_intarrayref_intarrayref_tensor_tensor_stdarraybool(void* grad_output, void* self, void* weight, void* kernel_size, void* stride, void* padding, void* finput, void* fgrad_input, void* output_mask)
+void* _lantern__slow_conv2d_backward_tensor_tensor_tensor_intarrayref_intarrayref_intarrayref_tensor_tensor_stdarraybool(void* grad_output, void* self, void* weight, void* kernel_size, void* stride, void* padding, void* finput, void* output_mask)
 {
   LANTERN_FUNCTION_START
-    return make_raw::tuple(torch::thnn_conv2d_backward(
-        from_raw::Tensor(grad_output), from_raw::Tensor(self), from_raw::Tensor(weight), from_raw::IntArrayRef(kernel_size), from_raw::IntArrayRef(stride), from_raw::IntArrayRef(padding), from_raw::Tensor(finput), from_raw::Tensor(fgrad_input), from_raw::vector::bool_t(output_mask)));
+    return make_raw::tuple(torch::_slow_conv2d_backward(
+        from_raw::Tensor(grad_output), from_raw::Tensor(self), from_raw::Tensor(weight), from_raw::IntArrayRef(kernel_size), from_raw::IntArrayRef(stride), from_raw::IntArrayRef(padding), from_raw::Tensor(finput), from_raw::vector::bool_t(output_mask)));
   LANTERN_FUNCTION_END
 }
 
