@@ -14811,29 +14811,29 @@ return XPtrTorchTensor(r_out);
 }
 
 // [[Rcpp::export]]
-Rcpp::List cpp_torch_namespace_thnn_conv2d_forward_out_output_Tensor_finput_Tensor_fgrad_input_Tensor_self_Tensor_weight_Tensor_kernel_size_IntArrayRef_bias_Tensor_stride_IntArrayRef_padding_IntArrayRef (XPtrTorchTensor output, XPtrTorchTensor finput, XPtrTorchTensor fgrad_input, XPtrTorchTensor self, XPtrTorchTensor weight, XPtrTorchIntArrayRef kernel_size, XPtrTorchOptionalTensor bias, XPtrTorchIntArrayRef stride, XPtrTorchIntArrayRef padding) {
-  auto r_out = lantern_thnn_conv2d_forward_out_tensor_tensor_tensor_tensor_tensor_intarrayref_tensor_intarrayref_intarrayref(output.get(), finput.get(), fgrad_input.get(), self.get(), weight.get(), kernel_size.get(), bias.get(), stride.get(), padding.get());
+Rcpp::List cpp_torch_namespace__slow_conv2d_forward_out_output_Tensor_finput_Tensor_self_Tensor_weight_Tensor_kernel_size_IntArrayRef_bias_Tensor_stride_IntArrayRef_padding_IntArrayRef (XPtrTorchTensor output, XPtrTorchTensor finput, XPtrTorchTensor self, XPtrTorchTensor weight, XPtrTorchIntArrayRef kernel_size, XPtrTorchOptionalTensor bias, XPtrTorchIntArrayRef stride, XPtrTorchIntArrayRef padding) {
+  auto r_out = lantern__slow_conv2d_forward_out_tensor_tensor_tensor_tensor_intarrayref_tensor_intarrayref_intarrayref(output.get(), finput.get(), self.get(), weight.get(), kernel_size.get(), bias.get(), stride.get(), padding.get());
+auto wrap = XPtrTorchvector_void(r_out);
+return Rcpp::List::create(XPtrTorchTensor(lantern_vector_get(wrap.get(), 0)),XPtrTorchTensor(lantern_vector_get(wrap.get(), 1)));
+}
+
+// [[Rcpp::export]]
+Rcpp::List cpp_torch_namespace__slow_conv2d_forward_self_Tensor_weight_Tensor_kernel_size_IntArrayRef_bias_Tensor_stride_IntArrayRef_padding_IntArrayRef (XPtrTorchTensor self, XPtrTorchTensor weight, XPtrTorchIntArrayRef kernel_size, XPtrTorchOptionalTensor bias, XPtrTorchIntArrayRef stride, XPtrTorchIntArrayRef padding) {
+  auto r_out = lantern__slow_conv2d_forward_tensor_tensor_intarrayref_tensor_intarrayref_intarrayref(self.get(), weight.get(), kernel_size.get(), bias.get(), stride.get(), padding.get());
+auto wrap = XPtrTorchvector_void(r_out);
+return Rcpp::List::create(XPtrTorchTensor(lantern_vector_get(wrap.get(), 0)),XPtrTorchTensor(lantern_vector_get(wrap.get(), 1)));
+}
+
+// [[Rcpp::export]]
+Rcpp::List cpp_torch_namespace__slow_conv2d_backward_out_grad_input_Tensor_grad_weight_Tensor_grad_bias_Tensor_grad_output_Tensor_self_Tensor_weight_Tensor_kernel_size_IntArrayRef_stride_IntArrayRef_padding_IntArrayRef_finput_Tensor (XPtrTorchTensor grad_input, XPtrTorchTensor grad_weight, XPtrTorchTensor grad_bias, XPtrTorchTensor grad_output, XPtrTorchTensor self, XPtrTorchTensor weight, XPtrTorchIntArrayRef kernel_size, XPtrTorchIntArrayRef stride, XPtrTorchIntArrayRef padding, XPtrTorchTensor finput) {
+  auto r_out = lantern__slow_conv2d_backward_out_tensor_tensor_tensor_tensor_tensor_tensor_intarrayref_intarrayref_intarrayref_tensor(grad_input.get(), grad_weight.get(), grad_bias.get(), grad_output.get(), self.get(), weight.get(), kernel_size.get(), stride.get(), padding.get(), finput.get());
 auto wrap = XPtrTorchvector_void(r_out);
 return Rcpp::List::create(XPtrTorchTensor(lantern_vector_get(wrap.get(), 0)),XPtrTorchTensor(lantern_vector_get(wrap.get(), 1)),XPtrTorchTensor(lantern_vector_get(wrap.get(), 2)));
 }
 
 // [[Rcpp::export]]
-Rcpp::List cpp_torch_namespace_thnn_conv2d_forward_self_Tensor_weight_Tensor_kernel_size_IntArrayRef_bias_Tensor_stride_IntArrayRef_padding_IntArrayRef (XPtrTorchTensor self, XPtrTorchTensor weight, XPtrTorchIntArrayRef kernel_size, XPtrTorchOptionalTensor bias, XPtrTorchIntArrayRef stride, XPtrTorchIntArrayRef padding) {
-  auto r_out = lantern_thnn_conv2d_forward_tensor_tensor_intarrayref_tensor_intarrayref_intarrayref(self.get(), weight.get(), kernel_size.get(), bias.get(), stride.get(), padding.get());
-auto wrap = XPtrTorchvector_void(r_out);
-return Rcpp::List::create(XPtrTorchTensor(lantern_vector_get(wrap.get(), 0)),XPtrTorchTensor(lantern_vector_get(wrap.get(), 1)),XPtrTorchTensor(lantern_vector_get(wrap.get(), 2)));
-}
-
-// [[Rcpp::export]]
-Rcpp::List cpp_torch_namespace_thnn_conv2d_backward_out_grad_input_Tensor_grad_weight_Tensor_grad_bias_Tensor_grad_output_Tensor_self_Tensor_weight_Tensor_kernel_size_IntArrayRef_stride_IntArrayRef_padding_IntArrayRef_finput_Tensor_fgrad_input_Tensor (XPtrTorchTensor grad_input, XPtrTorchTensor grad_weight, XPtrTorchTensor grad_bias, XPtrTorchTensor grad_output, XPtrTorchTensor self, XPtrTorchTensor weight, XPtrTorchIntArrayRef kernel_size, XPtrTorchIntArrayRef stride, XPtrTorchIntArrayRef padding, XPtrTorchTensor finput, XPtrTorchTensor fgrad_input) {
-  auto r_out = lantern_thnn_conv2d_backward_out_tensor_tensor_tensor_tensor_tensor_tensor_intarrayref_intarrayref_intarrayref_tensor_tensor(grad_input.get(), grad_weight.get(), grad_bias.get(), grad_output.get(), self.get(), weight.get(), kernel_size.get(), stride.get(), padding.get(), finput.get(), fgrad_input.get());
-auto wrap = XPtrTorchvector_void(r_out);
-return Rcpp::List::create(XPtrTorchTensor(lantern_vector_get(wrap.get(), 0)),XPtrTorchTensor(lantern_vector_get(wrap.get(), 1)),XPtrTorchTensor(lantern_vector_get(wrap.get(), 2)));
-}
-
-// [[Rcpp::export]]
-Rcpp::List cpp_torch_namespace_thnn_conv2d_backward_grad_output_Tensor_self_Tensor_weight_Tensor_kernel_size_IntArrayRef_stride_IntArrayRef_padding_IntArrayRef_finput_Tensor_fgrad_input_Tensor_output_mask_stdarraybool3 (XPtrTorchTensor grad_output, XPtrTorchTensor self, XPtrTorchTensor weight, XPtrTorchIntArrayRef kernel_size, XPtrTorchIntArrayRef stride, XPtrTorchIntArrayRef padding, XPtrTorchTensor finput, XPtrTorchTensor fgrad_input, std::vector<bool> output_mask) {
-  auto r_out = lantern_thnn_conv2d_backward_tensor_tensor_tensor_intarrayref_intarrayref_intarrayref_tensor_tensor_stdarraybool(grad_output.get(), self.get(), weight.get(), kernel_size.get(), stride.get(), padding.get(), finput.get(), fgrad_input.get(), reinterpret_cast<void*>(&output_mask));
+Rcpp::List cpp_torch_namespace__slow_conv2d_backward_grad_output_Tensor_self_Tensor_weight_Tensor_kernel_size_IntArrayRef_stride_IntArrayRef_padding_IntArrayRef_finput_Tensor_output_mask_stdarraybool3 (XPtrTorchTensor grad_output, XPtrTorchTensor self, XPtrTorchTensor weight, XPtrTorchIntArrayRef kernel_size, XPtrTorchIntArrayRef stride, XPtrTorchIntArrayRef padding, XPtrTorchTensor finput, std::vector<bool> output_mask) {
+  auto r_out = lantern__slow_conv2d_backward_tensor_tensor_tensor_intarrayref_intarrayref_intarrayref_tensor_stdarraybool(grad_output.get(), self.get(), weight.get(), kernel_size.get(), stride.get(), padding.get(), finput.get(), reinterpret_cast<void*>(&output_mask));
 auto wrap = XPtrTorchvector_void(r_out);
 return Rcpp::List::create(XPtrTorchTensor(lantern_vector_get(wrap.get(), 0)),XPtrTorchTensor(lantern_vector_get(wrap.get(), 1)),XPtrTorchTensor(lantern_vector_get(wrap.get(), 2)));
 }
