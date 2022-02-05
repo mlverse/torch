@@ -19551,7 +19551,7 @@ void* _lantern_thnn_conv2d_tensor_tensor_intarrayref_tensor_intarrayref_intarray
   LANTERN_FUNCTION_END
 }
 
-void* _lantern__slow_conv2d_forward_out_tensor_tensor_tensor_tensor_tensor_intarrayref_tensor_intarrayref_intarrayref(void* output, void* finput, void* self, void* weight, void* kernel_size, void* bias, void* stride, void* padding)
+void* _lantern__slow_conv2d_forward_out_tensor_tensor_tensor_tensor_intarrayref_tensor_intarrayref_intarrayref(void* output, void* finput, void* self, void* weight, void* kernel_size, void* bias, void* stride, void* padding)
 {
   LANTERN_FUNCTION_START
     return make_raw::tuple(torch::_slow_conv2d_forward_out(
@@ -19575,7 +19575,7 @@ void* _lantern__slow_conv2d_backward_out_tensor_tensor_tensor_tensor_tensor_tens
   LANTERN_FUNCTION_END
 }
 
-void* _lantern__slow_conv2d_backward_tensor_tensor_tensor_intarrayref_intarrayref_intarrayref_tensor_tensor_stdarraybool(void* grad_output, void* self, void* weight, void* kernel_size, void* stride, void* padding, void* finput, void* output_mask)
+void* _lantern__slow_conv2d_backward_tensor_tensor_tensor_intarrayref_intarrayref_intarrayref_tensor_stdarraybool(void* grad_output, void* self, void* weight, void* kernel_size, void* stride, void* padding, void* finput, void* output_mask)
 {
   LANTERN_FUNCTION_START
     return make_raw::tuple(torch::_slow_conv2d_backward(
