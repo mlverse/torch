@@ -15,11 +15,11 @@ test_that("__and__", {
 test_that("add", {
   x <- torch_tensor(1L, dtype = torch_long())
   expect_equal_to_r(x$add(1L)$to(dtype = torch_int()), 2L)
-  
+
   x <- torch_tensor(1L, dtype = torch_long())
   expect_error(y <- x$add(1L), regexp = NA)
   expect_true(x$dtype == torch_long())
-  
+
   x <- torch_tensor(1)
   expect_equal_to_r(x$add(1), 2)
 })

@@ -24,7 +24,7 @@ test_that("cuda tensors", {
 
 test_that("cuda memory stats work", {
   skip_if_cuda_not_available()
-  
+
   stats <- cuda_memory_stats()
   expect_length(stats, 13)
 })

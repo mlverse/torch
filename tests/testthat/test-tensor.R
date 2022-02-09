@@ -244,11 +244,11 @@ test_that("max and min", {
     x$min(dim = 1, other = 2),
     class = "value_error"
   )
-  
-  
-  x <- torch_tensor(c(1,2))
-  expect_equal_to_r(x$min(other = c(2,1)), c(1,1))
-  expect_equal_to_r(x$max(other = c(2,1)), c(2,2))
+
+
+  x <- torch_tensor(c(1, 2))
+  expect_equal_to_r(x$min(other = c(2, 1)), c(1, 1))
+  expect_equal_to_r(x$max(other = c(2, 1)), c(2, 2))
 })
 
 test_that("element_size works", {
