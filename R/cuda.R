@@ -79,6 +79,9 @@ cuda_memory_stats <- function(device = cuda_current_device()) {
     rlang::abort("CUDA is not available.")
   }
   
+  # quickly allocate some memory to initialize the device
+  torch_tensor(1, device = torch_device("cuda", device))
+  
   stat <- c("current", "peak", "allocated", "freed")
   stat_type <- c("all", "small_pool", "large_pool")
   
@@ -117,9 +120,9 @@ cuda_memory_stats <- function(device = cuda_current_device()) {
   }
   
   result <- list(
-    "num_alloc_retries" = values["num_alloc_retries"],
-    "num_ooms" = values["num_ooms"],
-    "max_split_size" = values["max_split_size"],
+    "num_alloc_retries" = unname(values["num_alloc_retries"]),
+    "num_ooms" = unname(values["num_ooms"]),
+    "max_split_size" = unname(values["max_split_size"]),
     
     "oversize_allocations" = get_stat(values, "oversize_allocations"),
     "oversize_segments" = get_stat(values, "oversize_segments"),
