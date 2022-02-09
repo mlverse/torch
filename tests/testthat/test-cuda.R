@@ -21,3 +21,10 @@ test_that("cuda tensors", {
   expect_equal(x$device$type, "cuda")
   expect_equal(x$device$index, 0)
 })
+
+test_that("cuda memory stats work", {
+  skip_if_cuda_not_available()
+
+  stats <- cuda_memory_stats()
+  expect_length(stats, 13)
+})

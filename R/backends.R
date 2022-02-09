@@ -1,5 +1,26 @@
-backends_cudnn_enabled <- function() {
-  TRUE
+
+#' CuDNN is available
+#'
+#' @export
+backends_cudnn_is_available <- function() {
+  cpp_cudnn_is_available()
+}
+
+backends_cudnn_enabled <- backends_cudnn_is_available
+
+#' CuDNN version
+#'
+#' @export
+backends_cudnn_version <- function() {
+  if (!backends_cudnn_is_available()) {
+    rlang::abort("CuDNN is not available.")
+  }
+
+  v <- cpp_cudnn_runtime_version()
+  major <- trunc(v / 1000)
+  minor <- trunc((v - major * 1000) / 100)
+  patch <- v - major * 1000 - minor * 100
+  numeric_version(paste(major, minor, patch, sep = "."))
 }
 
 #' MKLDNN is available
