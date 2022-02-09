@@ -6,9 +6,10 @@
 #ifdef __NVCC__
 #include <ATen/cuda/CUDAContext.h>
 #include <ATen/cuda/detail/CUDAHooks.h>
+#include <c10/cuda/CUDACachingAllocator.h>
 #endif
 #include <torch/torch.h>
-#include <c10/cuda/CUDACachingAllocator.h>
+
 
 #include "utils.hpp"
 
@@ -58,6 +59,8 @@ bool _lantern_cudnn_is_available () {
 }
 
 void* _lantern_cuda_device_stats (int64_t device) {
+  LANTERN_FUNCTION_START
+#ifdef __NVCC__
   auto stats = c10::cuda::CUDACachingAllocator::getDeviceStats(device);
   std::vector<int64_t> results;
   results.push_back(stats.num_alloc_retries);
@@ -179,4 +182,9 @@ void* _lantern_cuda_device_stats (int64_t device) {
   results.push_back(stats.inactive_split_bytes[2].freed);
 
   return make_raw::vector::int64_t(results);
+#else
+  throw std::runtime_error(
+      "`cuda_device_stats` is only supported on CUDA runtimes.");
+#endif
+  LANTERN_FUNCTION_END
 } 
