@@ -1,2034 +1,2034 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>/CONTRIBUTING.html</loc>
+    <loc>/dev/CONTRIBUTING.html</loc>
   </url>
   <url>
-    <loc>/LICENSE-text.html</loc>
+    <loc>/dev/LICENSE-text.html</loc>
   </url>
   <url>
-    <loc>/LICENSE.html</loc>
+    <loc>/dev/LICENSE.html</loc>
   </url>
   <url>
-    <loc>/articles/distributions.html</loc>
+    <loc>/dev/articles/distributions.html</loc>
   </url>
   <url>
-    <loc>/articles/examples/basic-autograd.html</loc>
+    <loc>/dev/articles/examples/basic-autograd.html</loc>
   </url>
   <url>
-    <loc>/articles/examples/basic-nn-module.html</loc>
+    <loc>/dev/articles/examples/basic-nn-module.html</loc>
   </url>
   <url>
-    <loc>/articles/examples/dataset.html</loc>
+    <loc>/dev/articles/examples/dataset.html</loc>
   </url>
   <url>
-    <loc>/articles/examples/index.html</loc>
+    <loc>/dev/articles/examples/index.html</loc>
   </url>
   <url>
-    <loc>/articles/extending-autograd.html</loc>
+    <loc>/dev/articles/extending-autograd.html</loc>
   </url>
   <url>
-    <loc>/articles/index.html</loc>
+    <loc>/dev/articles/index.html</loc>
   </url>
   <url>
-    <loc>/articles/indexing.html</loc>
+    <loc>/dev/articles/indexing.html</loc>
   </url>
   <url>
-    <loc>/articles/installation.html</loc>
+    <loc>/dev/articles/installation.html</loc>
   </url>
   <url>
-    <loc>/articles/loading-data.html</loc>
+    <loc>/dev/articles/loading-data.html</loc>
   </url>
   <url>
-    <loc>/articles/python-to-r.html</loc>
+    <loc>/dev/articles/python-to-r.html</loc>
   </url>
   <url>
-    <loc>/articles/serialization.html</loc>
+    <loc>/dev/articles/serialization.html</loc>
   </url>
   <url>
-    <loc>/articles/tensor/index.html</loc>
+    <loc>/dev/articles/tensor/index.html</loc>
   </url>
   <url>
-    <loc>/articles/tensor-creation.html</loc>
+    <loc>/dev/articles/tensor-creation.html</loc>
   </url>
   <url>
-    <loc>/articles/torchscript.html</loc>
+    <loc>/dev/articles/torchscript.html</loc>
   </url>
   <url>
-    <loc>/articles/using-autograd.html</loc>
+    <loc>/dev/articles/using-autograd.html</loc>
   </url>
   <url>
-    <loc>/authors.html</loc>
+    <loc>/dev/authors.html</loc>
   </url>
   <url>
-    <loc>/index.html</loc>
+    <loc>/dev/index.html</loc>
   </url>
   <url>
-    <loc>/news/index.html</loc>
+    <loc>/dev/news/index.html</loc>
   </url>
   <url>
-    <loc>/reference/AutogradContext.html</loc>
+    <loc>/dev/reference/AutogradContext.html</loc>
   </url>
   <url>
-    <loc>/reference/Constraint.html</loc>
+    <loc>/dev/reference/Constraint.html</loc>
   </url>
   <url>
-    <loc>/reference/Distribution.html</loc>
+    <loc>/dev/reference/Distribution.html</loc>
   </url>
   <url>
-    <loc>/reference/as_array.html</loc>
+    <loc>/dev/reference/as_array.html</loc>
   </url>
   <url>
-    <loc>/reference/autograd_backward.html</loc>
+    <loc>/dev/reference/autograd_backward.html</loc>
   </url>
   <url>
-    <loc>/reference/autograd_function.html</loc>
+    <loc>/dev/reference/autograd_function.html</loc>
   </url>
   <url>
-    <loc>/reference/autograd_grad.html</loc>
+    <loc>/dev/reference/autograd_grad.html</loc>
   </url>
   <url>
-    <loc>/reference/autograd_set_grad_mode.html</loc>
+    <loc>/dev/reference/autograd_set_grad_mode.html</loc>
   </url>
   <url>
-    <loc>/reference/backends_mkl_is_available.html</loc>
+    <loc>/dev/reference/backends_mkl_is_available.html</loc>
   </url>
   <url>
-    <loc>/reference/backends_mkldnn_is_available.html</loc>
+    <loc>/dev/reference/backends_mkldnn_is_available.html</loc>
   </url>
   <url>
-    <loc>/reference/backends_openmp_is_available.html</loc>
+    <loc>/dev/reference/backends_openmp_is_available.html</loc>
   </url>
   <url>
-    <loc>/reference/broadcast_all.html</loc>
+    <loc>/dev/reference/broadcast_all.html</loc>
   </url>
   <url>
-    <loc>/reference/call_torch_function.html</loc>
+    <loc>/dev/reference/call_torch_function.html</loc>
   </url>
   <url>
-    <loc>/reference/contrib_sort_vertices.html</loc>
+    <loc>/dev/reference/contrib_sort_vertices.html</loc>
   </url>
   <url>
-    <loc>/reference/cuda_current_device.html</loc>
+    <loc>/dev/reference/cuda_current_device.html</loc>
   </url>
   <url>
-    <loc>/reference/cuda_device_count.html</loc>
+    <loc>/dev/reference/cuda_device_count.html</loc>
   </url>
   <url>
-    <loc>/reference/cuda_get_device_capability.html</loc>
+    <loc>/dev/reference/cuda_get_device_capability.html</loc>
   </url>
   <url>
-    <loc>/reference/cuda_is_available.html</loc>
+    <loc>/dev/reference/cuda_is_available.html</loc>
   </url>
   <url>
-    <loc>/reference/dataloader.html</loc>
+    <loc>/dev/reference/dataloader.html</loc>
   </url>
   <url>
-    <loc>/reference/dataloader_make_iter.html</loc>
+    <loc>/dev/reference/dataloader_make_iter.html</loc>
   </url>
   <url>
-    <loc>/reference/dataloader_next.html</loc>
+    <loc>/dev/reference/dataloader_next.html</loc>
   </url>
   <url>
-    <loc>/reference/dataset.html</loc>
+    <loc>/dev/reference/dataset.html</loc>
   </url>
   <url>
-    <loc>/reference/dataset_subset.html</loc>
+    <loc>/dev/reference/dataset_subset.html</loc>
   </url>
   <url>
-    <loc>/reference/default_dtype.html</loc>
+    <loc>/dev/reference/default_dtype.html</loc>
   </url>
   <url>
-    <loc>/reference/distr_bernoulli.html</loc>
+    <loc>/dev/reference/distr_bernoulli.html</loc>
   </url>
   <url>
-    <loc>/reference/distr_categorical.html</loc>
+    <loc>/dev/reference/distr_categorical.html</loc>
   </url>
   <url>
-    <loc>/reference/distr_chi2.html</loc>
+    <loc>/dev/reference/distr_chi2.html</loc>
   </url>
   <url>
-    <loc>/reference/distr_gamma.html</loc>
+    <loc>/dev/reference/distr_gamma.html</loc>
   </url>
   <url>
-    <loc>/reference/distr_mixture_same_family.html</loc>
+    <loc>/dev/reference/distr_mixture_same_family.html</loc>
   </url>
   <url>
-    <loc>/reference/distr_multivariate_normal.html</loc>
+    <loc>/dev/reference/distr_multivariate_normal.html</loc>
   </url>
   <url>
-    <loc>/reference/distr_normal.html</loc>
+    <loc>/dev/reference/distr_normal.html</loc>
   </url>
   <url>
-    <loc>/reference/distr_poisson.html</loc>
+    <loc>/dev/reference/distr_poisson.html</loc>
   </url>
   <url>
-    <loc>/reference/enumerate.dataloader.html</loc>
+    <loc>/dev/reference/enumerate.dataloader.html</loc>
   </url>
   <url>
-    <loc>/reference/enumerate.html</loc>
+    <loc>/dev/reference/enumerate.html</loc>
   </url>
   <url>
-    <loc>/reference/get_install_libs_url.html</loc>
+    <loc>/dev/reference/get_install_libs_url.html</loc>
   </url>
   <url>
-    <loc>/reference/index.html</loc>
+    <loc>/dev/reference/index.html</loc>
   </url>
   <url>
-    <loc>/reference/install_torch.html</loc>
+    <loc>/dev/reference/install_torch.html</loc>
   </url>
   <url>
-    <loc>/reference/install_torch_from_file.html</loc>
+    <loc>/dev/reference/install_torch_from_file.html</loc>
   </url>
   <url>
-    <loc>/reference/is_dataloader.html</loc>
+    <loc>/dev/reference/is_dataloader.html</loc>
   </url>
   <url>
-    <loc>/reference/is_nn_buffer.html</loc>
+    <loc>/dev/reference/is_nn_buffer.html</loc>
   </url>
   <url>
-    <loc>/reference/is_nn_module.html</loc>
+    <loc>/dev/reference/is_nn_module.html</loc>
   </url>
   <url>
-    <loc>/reference/is_nn_parameter.html</loc>
+    <loc>/dev/reference/is_nn_parameter.html</loc>
   </url>
   <url>
-    <loc>/reference/is_optimizer.html</loc>
+    <loc>/dev/reference/is_optimizer.html</loc>
   </url>
   <url>
-    <loc>/reference/is_torch_device.html</loc>
+    <loc>/dev/reference/is_torch_device.html</loc>
   </url>
   <url>
-    <loc>/reference/is_torch_dtype.html</loc>
+    <loc>/dev/reference/is_torch_dtype.html</loc>
   </url>
   <url>
-    <loc>/reference/is_torch_layout.html</loc>
+    <loc>/dev/reference/is_torch_layout.html</loc>
   </url>
   <url>
-    <loc>/reference/is_torch_memory_format.html</loc>
+    <loc>/dev/reference/is_torch_memory_format.html</loc>
   </url>
   <url>
-    <loc>/reference/is_torch_qscheme.html</loc>
+    <loc>/dev/reference/is_torch_qscheme.html</loc>
   </url>
   <url>
-    <loc>/reference/is_undefined_tensor.html</loc>
+    <loc>/dev/reference/is_undefined_tensor.html</loc>
   </url>
   <url>
-    <loc>/reference/jit_compile.html</loc>
+    <loc>/dev/reference/jit_compile.html</loc>
   </url>
   <url>
-    <loc>/reference/jit_load.html</loc>
+    <loc>/dev/reference/jit_load.html</loc>
   </url>
   <url>
-    <loc>/reference/jit_save.html</loc>
+    <loc>/dev/reference/jit_save.html</loc>
   </url>
   <url>
-    <loc>/reference/jit_save_for_mobile.html</loc>
+    <loc>/dev/reference/jit_save_for_mobile.html</loc>
   </url>
   <url>
-    <loc>/reference/jit_scalar.html</loc>
+    <loc>/dev/reference/jit_scalar.html</loc>
   </url>
   <url>
-    <loc>/reference/jit_trace.html</loc>
+    <loc>/dev/reference/jit_trace.html</loc>
   </url>
   <url>
-    <loc>/reference/jit_trace_module.html</loc>
+    <loc>/dev/reference/jit_trace_module.html</loc>
   </url>
   <url>
-    <loc>/reference/jit_tuple.html</loc>
+    <loc>/dev/reference/jit_tuple.html</loc>
   </url>
   <url>
-    <loc>/reference/linalg_cholesky.html</loc>
+    <loc>/dev/reference/linalg_cholesky.html</loc>
   </url>
   <url>
-    <loc>/reference/linalg_cholesky_ex.html</loc>
+    <loc>/dev/reference/linalg_cholesky_ex.html</loc>
   </url>
   <url>
-    <loc>/reference/linalg_cond.html</loc>
+    <loc>/dev/reference/linalg_cond.html</loc>
   </url>
   <url>
-    <loc>/reference/linalg_det.html</loc>
+    <loc>/dev/reference/linalg_det.html</loc>
   </url>
   <url>
-    <loc>/reference/linalg_eig.html</loc>
+    <loc>/dev/reference/linalg_eig.html</loc>
   </url>
   <url>
-    <loc>/reference/linalg_eigh.html</loc>
+    <loc>/dev/reference/linalg_eigh.html</loc>
   </url>
   <url>
-    <loc>/reference/linalg_eigvals.html</loc>
+    <loc>/dev/reference/linalg_eigvals.html</loc>
   </url>
   <url>
-    <loc>/reference/linalg_eigvalsh.html</loc>
+    <loc>/dev/reference/linalg_eigvalsh.html</loc>
   </url>
   <url>
-    <loc>/reference/linalg_householder_product.html</loc>
+    <loc>/dev/reference/linalg_householder_product.html</loc>
   </url>
   <url>
-    <loc>/reference/linalg_inv.html</loc>
+    <loc>/dev/reference/linalg_inv.html</loc>
   </url>
   <url>
-    <loc>/reference/linalg_inv_ex.html</loc>
+    <loc>/dev/reference/linalg_inv_ex.html</loc>
   </url>
   <url>
-    <loc>/reference/linalg_lstsq.html</loc>
+    <loc>/dev/reference/linalg_lstsq.html</loc>
   </url>
   <url>
-    <loc>/reference/linalg_matrix_norm.html</loc>
+    <loc>/dev/reference/linalg_matrix_norm.html</loc>
   </url>
   <url>
-    <loc>/reference/linalg_matrix_power.html</loc>
+    <loc>/dev/reference/linalg_matrix_power.html</loc>
   </url>
   <url>
-    <loc>/reference/linalg_matrix_rank.html</loc>
+    <loc>/dev/reference/linalg_matrix_rank.html</loc>
   </url>
   <url>
-    <loc>/reference/linalg_multi_dot.html</loc>
+    <loc>/dev/reference/linalg_multi_dot.html</loc>
   </url>
   <url>
-    <loc>/reference/linalg_norm.html</loc>
+    <loc>/dev/reference/linalg_norm.html</loc>
   </url>
   <url>
-    <loc>/reference/linalg_pinv.html</loc>
+    <loc>/dev/reference/linalg_pinv.html</loc>
   </url>
   <url>
-    <loc>/reference/linalg_qr.html</loc>
+    <loc>/dev/reference/linalg_qr.html</loc>
   </url>
   <url>
-    <loc>/reference/linalg_slogdet.html</loc>
+    <loc>/dev/reference/linalg_slogdet.html</loc>
   </url>
   <url>
-    <loc>/reference/linalg_solve.html</loc>
+    <loc>/dev/reference/linalg_solve.html</loc>
   </url>
   <url>
-    <loc>/reference/linalg_svd.html</loc>
+    <loc>/dev/reference/linalg_svd.html</loc>
   </url>
   <url>
-    <loc>/reference/linalg_svdvals.html</loc>
+    <loc>/dev/reference/linalg_svdvals.html</loc>
   </url>
   <url>
-    <loc>/reference/linalg_tensorinv.html</loc>
+    <loc>/dev/reference/linalg_tensorinv.html</loc>
   </url>
   <url>
-    <loc>/reference/linalg_tensorsolve.html</loc>
+    <loc>/dev/reference/linalg_tensorsolve.html</loc>
   </url>
   <url>
-    <loc>/reference/linalg_vector_norm.html</loc>
+    <loc>/dev/reference/linalg_vector_norm.html</loc>
   </url>
   <url>
-    <loc>/reference/load_state_dict.html</loc>
+    <loc>/dev/reference/load_state_dict.html</loc>
   </url>
   <url>
-    <loc>/reference/lr_lambda.html</loc>
+    <loc>/dev/reference/lr_lambda.html</loc>
   </url>
   <url>
-    <loc>/reference/lr_multiplicative.html</loc>
+    <loc>/dev/reference/lr_multiplicative.html</loc>
   </url>
   <url>
-    <loc>/reference/lr_one_cycle.html</loc>
+    <loc>/dev/reference/lr_one_cycle.html</loc>
   </url>
   <url>
-    <loc>/reference/lr_scheduler.html</loc>
+    <loc>/dev/reference/lr_scheduler.html</loc>
   </url>
   <url>
-    <loc>/reference/lr_step.html</loc>
+    <loc>/dev/reference/lr_step.html</loc>
   </url>
   <url>
-    <loc>/reference/nn_adaptive_avg_pool1d.html</loc>
+    <loc>/dev/reference/nn_adaptive_avg_pool1d.html</loc>
   </url>
   <url>
-    <loc>/reference/nn_adaptive_avg_pool2d.html</loc>
+    <loc>/dev/reference/nn_adaptive_avg_pool2d.html</loc>
   </url>
   <url>
-    <loc>/reference/nn_adaptive_avg_pool3d.html</loc>
+    <loc>/dev/reference/nn_adaptive_avg_pool3d.html</loc>
   </url>
   <url>
-    <loc>/reference/nn_adaptive_log_softmax_with_loss.html</loc>
+    <loc>/dev/reference/nn_adaptive_log_softmax_with_loss.html</loc>
   </url>
   <url>
-    <loc>/reference/nn_adaptive_max_pool1d.html</loc>
+    <loc>/dev/reference/nn_adaptive_max_pool1d.html</loc>
   </url>
   <url>
-    <loc>/reference/nn_adaptive_max_pool2d.html</loc>
+    <loc>/dev/reference/nn_adaptive_max_pool2d.html</loc>
   </url>
   <url>
-    <loc>/reference/nn_adaptive_max_pool3d.html</loc>
+    <loc>/dev/reference/nn_adaptive_max_pool3d.html</loc>
   </url>
   <url>
-    <loc>/reference/nn_avg_pool1d.html</loc>
+    <loc>/dev/reference/nn_avg_pool1d.html</loc>
   </url>
   <url>
-    <loc>/reference/nn_avg_pool2d.html</loc>
+    <loc>/dev/reference/nn_avg_pool2d.html</loc>
   </url>
   <url>
-    <loc>/reference/nn_avg_pool3d.html</loc>
+    <loc>/dev/reference/nn_avg_pool3d.html</loc>
   </url>
   <url>
-    <loc>/reference/nn_batch_norm1d.html</loc>
+    <loc>/dev/reference/nn_batch_norm1d.html</loc>
   </url>
   <url>
-    <loc>/reference/nn_batch_norm2d.html</loc>
+    <loc>/dev/reference/nn_batch_norm2d.html</loc>
   </url>
   <url>
-    <loc>/reference/nn_batch_norm3d.html</loc>
+    <loc>/dev/reference/nn_batch_norm3d.html</loc>
   </url>
   <url>
-    <loc>/reference/nn_bce_loss.html</loc>
+    <loc>/dev/reference/nn_bce_loss.html</loc>
   </url>
   <url>
-    <loc>/reference/nn_bce_with_logits_loss.html</loc>
+    <loc>/dev/reference/nn_bce_with_logits_loss.html</loc>
   </url>
   <url>
-    <loc>/reference/nn_bilinear.html</loc>
+    <loc>/dev/reference/nn_bilinear.html</loc>
   </url>
   <url>
-    <loc>/reference/nn_buffer.html</loc>
+    <loc>/dev/reference/nn_buffer.html</loc>
   </url>
   <url>
-    <loc>/reference/nn_celu.html</loc>
+    <loc>/dev/reference/nn_celu.html</loc>
   </url>
   <url>
-    <loc>/reference/nn_contrib_sparsemax.html</loc>
+    <loc>/dev/reference/nn_contrib_sparsemax.html</loc>
   </url>
   <url>
-    <loc>/reference/nn_conv1d.html</loc>
+    <loc>/dev/reference/nn_conv1d.html</loc>
   </url>
   <url>
-    <loc>/reference/nn_conv2d.html</loc>
+    <loc>/dev/reference/nn_conv2d.html</loc>
   </url>
   <url>
-    <loc>/reference/nn_conv3d.html</loc>
+    <loc>/dev/reference/nn_conv3d.html</loc>
   </url>
   <url>
-    <loc>/reference/nn_conv_transpose1d.html</loc>
+    <loc>/dev/reference/nn_conv_transpose1d.html</loc>
   </url>
   <url>
-    <loc>/reference/nn_conv_transpose2d.html</loc>
+    <loc>/dev/reference/nn_conv_transpose2d.html</loc>
   </url>
   <url>
-    <loc>/reference/nn_conv_transpose3d.html</loc>
+    <loc>/dev/reference/nn_conv_transpose3d.html</loc>
   </url>
   <url>
-    <loc>/reference/nn_cosine_embedding_loss.html</loc>
+    <loc>/dev/reference/nn_cosine_embedding_loss.html</loc>
   </url>
   <url>
-    <loc>/reference/nn_cross_entropy_loss.html</loc>
+    <loc>/dev/reference/nn_cross_entropy_loss.html</loc>
   </url>
   <url>
-    <loc>/reference/nn_ctc_loss.html</loc>
+    <loc>/dev/reference/nn_ctc_loss.html</loc>
   </url>
   <url>
-    <loc>/reference/nn_dropout.html</loc>
+    <loc>/dev/reference/nn_dropout.html</loc>
   </url>
   <url>
-    <loc>/reference/nn_dropout2d.html</loc>
+    <loc>/dev/reference/nn_dropout2d.html</loc>
   </url>
   <url>
-    <loc>/reference/nn_dropout3d.html</loc>
+    <loc>/dev/reference/nn_dropout3d.html</loc>
   </url>
   <url>
-    <loc>/reference/nn_elu.html</loc>
+    <loc>/dev/reference/nn_elu.html</loc>
   </url>
   <url>
-    <loc>/reference/nn_embedding.html</loc>
+    <loc>/dev/reference/nn_embedding.html</loc>
   </url>
   <url>
-    <loc>/reference/nn_flatten.html</loc>
+    <loc>/dev/reference/nn_flatten.html</loc>
   </url>
   <url>
-    <loc>/reference/nn_fractional_max_pool2d.html</loc>
+    <loc>/dev/reference/nn_fractional_max_pool2d.html</loc>
   </url>
   <url>
-    <loc>/reference/nn_fractional_max_pool3d.html</loc>
+    <loc>/dev/reference/nn_fractional_max_pool3d.html</loc>
   </url>
   <url>
-    <loc>/reference/nn_gelu.html</loc>
+    <loc>/dev/reference/nn_gelu.html</loc>
   </url>
   <url>
-    <loc>/reference/nn_glu.html</loc>
+    <loc>/dev/reference/nn_glu.html</loc>
   </url>
   <url>
-    <loc>/reference/nn_group_norm.html</loc>
+    <loc>/dev/reference/nn_group_norm.html</loc>
   </url>
   <url>
-    <loc>/reference/nn_gru.html</loc>
+    <loc>/dev/reference/nn_gru.html</loc>
   </url>
   <url>
-    <loc>/reference/nn_hardshrink.html</loc>
+    <loc>/dev/reference/nn_hardshrink.html</loc>
   </url>
   <url>
-    <loc>/reference/nn_hardsigmoid.html</loc>
+    <loc>/dev/reference/nn_hardsigmoid.html</loc>
   </url>
   <url>
-    <loc>/reference/nn_hardswish.html</loc>
+    <loc>/dev/reference/nn_hardswish.html</loc>
   </url>
   <url>
-    <loc>/reference/nn_hardtanh.html</loc>
+    <loc>/dev/reference/nn_hardtanh.html</loc>
   </url>
   <url>
-    <loc>/reference/nn_hinge_embedding_loss.html</loc>
+    <loc>/dev/reference/nn_hinge_embedding_loss.html</loc>
   </url>
   <url>
-    <loc>/reference/nn_identity.html</loc>
+    <loc>/dev/reference/nn_identity.html</loc>
   </url>
   <url>
-    <loc>/reference/nn_init_calculate_gain.html</loc>
+    <loc>/dev/reference/nn_init_calculate_gain.html</loc>
   </url>
   <url>
-    <loc>/reference/nn_init_constant_.html</loc>
+    <loc>/dev/reference/nn_init_constant_.html</loc>
   </url>
   <url>
-    <loc>/reference/nn_init_dirac_.html</loc>
+    <loc>/dev/reference/nn_init_dirac_.html</loc>
   </url>
   <url>
-    <loc>/reference/nn_init_eye_.html</loc>
+    <loc>/dev/reference/nn_init_eye_.html</loc>
   </url>
   <url>
-    <loc>/reference/nn_init_kaiming_normal_.html</loc>
+    <loc>/dev/reference/nn_init_kaiming_normal_.html</loc>
   </url>
   <url>
-    <loc>/reference/nn_init_kaiming_uniform_.html</loc>
+    <loc>/dev/reference/nn_init_kaiming_uniform_.html</loc>
   </url>
   <url>
-    <loc>/reference/nn_init_normal_.html</loc>
+    <loc>/dev/reference/nn_init_normal_.html</loc>
   </url>
   <url>
-    <loc>/reference/nn_init_ones_.html</loc>
+    <loc>/dev/reference/nn_init_ones_.html</loc>
   </url>
   <url>
-    <loc>/reference/nn_init_orthogonal_.html</loc>
+    <loc>/dev/reference/nn_init_orthogonal_.html</loc>
   </url>
   <url>
-    <loc>/reference/nn_init_sparse_.html</loc>
+    <loc>/dev/reference/nn_init_sparse_.html</loc>
   </url>
   <url>
-    <loc>/reference/nn_init_trunc_normal_.html</loc>
+    <loc>/dev/reference/nn_init_trunc_normal_.html</loc>
   </url>
   <url>
-    <loc>/reference/nn_init_uniform_.html</loc>
+    <loc>/dev/reference/nn_init_uniform_.html</loc>
   </url>
   <url>
-    <loc>/reference/nn_init_xavier_normal_.html</loc>
+    <loc>/dev/reference/nn_init_xavier_normal_.html</loc>
   </url>
   <url>
-    <loc>/reference/nn_init_xavier_uniform_.html</loc>
+    <loc>/dev/reference/nn_init_xavier_uniform_.html</loc>
   </url>
   <url>
-    <loc>/reference/nn_init_zeros_.html</loc>
+    <loc>/dev/reference/nn_init_zeros_.html</loc>
   </url>
   <url>
-    <loc>/reference/nn_kl_div_loss.html</loc>
+    <loc>/dev/reference/nn_kl_div_loss.html</loc>
   </url>
   <url>
-    <loc>/reference/nn_l1_loss.html</loc>
+    <loc>/dev/reference/nn_l1_loss.html</loc>
   </url>
   <url>
-    <loc>/reference/nn_layer_norm.html</loc>
+    <loc>/dev/reference/nn_layer_norm.html</loc>
   </url>
   <url>
-    <loc>/reference/nn_leaky_relu.html</loc>
+    <loc>/dev/reference/nn_leaky_relu.html</loc>
   </url>
   <url>
-    <loc>/reference/nn_linear.html</loc>
+    <loc>/dev/reference/nn_linear.html</loc>
   </url>
   <url>
-    <loc>/reference/nn_log_sigmoid.html</loc>
+    <loc>/dev/reference/nn_log_sigmoid.html</loc>
   </url>
   <url>
-    <loc>/reference/nn_log_softmax.html</loc>
+    <loc>/dev/reference/nn_log_softmax.html</loc>
   </url>
   <url>
-    <loc>/reference/nn_lp_pool1d.html</loc>
+    <loc>/dev/reference/nn_lp_pool1d.html</loc>
   </url>
   <url>
-    <loc>/reference/nn_lp_pool2d.html</loc>
+    <loc>/dev/reference/nn_lp_pool2d.html</loc>
   </url>
   <url>
-    <loc>/reference/nn_lstm.html</loc>
+    <loc>/dev/reference/nn_lstm.html</loc>
   </url>
   <url>
-    <loc>/reference/nn_margin_ranking_loss.html</loc>
+    <loc>/dev/reference/nn_margin_ranking_loss.html</loc>
   </url>
   <url>
-    <loc>/reference/nn_max_pool1d.html</loc>
+    <loc>/dev/reference/nn_max_pool1d.html</loc>
   </url>
   <url>
-    <loc>/reference/nn_max_pool2d.html</loc>
+    <loc>/dev/reference/nn_max_pool2d.html</loc>
   </url>
   <url>
-    <loc>/reference/nn_max_pool3d.html</loc>
+    <loc>/dev/reference/nn_max_pool3d.html</loc>
   </url>
   <url>
-    <loc>/reference/nn_max_unpool1d.html</loc>
+    <loc>/dev/reference/nn_max_unpool1d.html</loc>
   </url>
   <url>
-    <loc>/reference/nn_max_unpool2d.html</loc>
+    <loc>/dev/reference/nn_max_unpool2d.html</loc>
   </url>
   <url>
-    <loc>/reference/nn_max_unpool3d.html</loc>
+    <loc>/dev/reference/nn_max_unpool3d.html</loc>
   </url>
   <url>
-    <loc>/reference/nn_module.html</loc>
+    <loc>/dev/reference/nn_module.html</loc>
   </url>
   <url>
-    <loc>/reference/nn_module_list.html</loc>
+    <loc>/dev/reference/nn_module_list.html</loc>
   </url>
   <url>
-    <loc>/reference/nn_mse_loss.html</loc>
+    <loc>/dev/reference/nn_mse_loss.html</loc>
   </url>
   <url>
-    <loc>/reference/nn_multi_margin_loss.html</loc>
+    <loc>/dev/reference/nn_multi_margin_loss.html</loc>
   </url>
   <url>
-    <loc>/reference/nn_multihead_attention.html</loc>
+    <loc>/dev/reference/nn_multihead_attention.html</loc>
   </url>
   <url>
-    <loc>/reference/nn_multilabel_margin_loss.html</loc>
+    <loc>/dev/reference/nn_multilabel_margin_loss.html</loc>
   </url>
   <url>
-    <loc>/reference/nn_multilabel_soft_margin_loss.html</loc>
+    <loc>/dev/reference/nn_multilabel_soft_margin_loss.html</loc>
   </url>
   <url>
-    <loc>/reference/nn_nll_loss.html</loc>
+    <loc>/dev/reference/nn_nll_loss.html</loc>
   </url>
   <url>
-    <loc>/reference/nn_pairwise_distance.html</loc>
+    <loc>/dev/reference/nn_pairwise_distance.html</loc>
   </url>
   <url>
-    <loc>/reference/nn_parameter.html</loc>
+    <loc>/dev/reference/nn_parameter.html</loc>
   </url>
   <url>
-    <loc>/reference/nn_poisson_nll_loss.html</loc>
+    <loc>/dev/reference/nn_poisson_nll_loss.html</loc>
   </url>
   <url>
-    <loc>/reference/nn_prelu.html</loc>
+    <loc>/dev/reference/nn_prelu.html</loc>
   </url>
   <url>
-    <loc>/reference/nn_relu.html</loc>
+    <loc>/dev/reference/nn_relu.html</loc>
   </url>
   <url>
-    <loc>/reference/nn_relu6.html</loc>
+    <loc>/dev/reference/nn_relu6.html</loc>
   </url>
   <url>
-    <loc>/reference/nn_rnn.html</loc>
+    <loc>/dev/reference/nn_rnn.html</loc>
   </url>
   <url>
-    <loc>/reference/nn_rrelu.html</loc>
+    <loc>/dev/reference/nn_rrelu.html</loc>
   </url>
   <url>
-    <loc>/reference/nn_selu.html</loc>
+    <loc>/dev/reference/nn_selu.html</loc>
   </url>
   <url>
-    <loc>/reference/nn_sequential.html</loc>
+    <loc>/dev/reference/nn_sequential.html</loc>
   </url>
   <url>
-    <loc>/reference/nn_sigmoid.html</loc>
+    <loc>/dev/reference/nn_sigmoid.html</loc>
   </url>
   <url>
-    <loc>/reference/nn_smooth_l1_loss.html</loc>
+    <loc>/dev/reference/nn_smooth_l1_loss.html</loc>
   </url>
   <url>
-    <loc>/reference/nn_soft_margin_loss.html</loc>
+    <loc>/dev/reference/nn_soft_margin_loss.html</loc>
   </url>
   <url>
-    <loc>/reference/nn_softmax.html</loc>
+    <loc>/dev/reference/nn_softmax.html</loc>
   </url>
   <url>
-    <loc>/reference/nn_softmax2d.html</loc>
+    <loc>/dev/reference/nn_softmax2d.html</loc>
   </url>
   <url>
-    <loc>/reference/nn_softmin.html</loc>
+    <loc>/dev/reference/nn_softmin.html</loc>
   </url>
   <url>
-    <loc>/reference/nn_softplus.html</loc>
+    <loc>/dev/reference/nn_softplus.html</loc>
   </url>
   <url>
-    <loc>/reference/nn_softshrink.html</loc>
+    <loc>/dev/reference/nn_softshrink.html</loc>
   </url>
   <url>
-    <loc>/reference/nn_softsign.html</loc>
+    <loc>/dev/reference/nn_softsign.html</loc>
   </url>
   <url>
-    <loc>/reference/nn_tanh.html</loc>
+    <loc>/dev/reference/nn_tanh.html</loc>
   </url>
   <url>
-    <loc>/reference/nn_tanhshrink.html</loc>
+    <loc>/dev/reference/nn_tanhshrink.html</loc>
   </url>
   <url>
-    <loc>/reference/nn_threshold.html</loc>
+    <loc>/dev/reference/nn_threshold.html</loc>
   </url>
   <url>
-    <loc>/reference/nn_triplet_margin_loss.html</loc>
+    <loc>/dev/reference/nn_triplet_margin_loss.html</loc>
   </url>
   <url>
-    <loc>/reference/nn_triplet_margin_with_distance_loss.html</loc>
+    <loc>/dev/reference/nn_triplet_margin_with_distance_loss.html</loc>
   </url>
   <url>
-    <loc>/reference/nn_unflatten.html</loc>
+    <loc>/dev/reference/nn_unflatten.html</loc>
   </url>
   <url>
-    <loc>/reference/nn_upsample.html</loc>
+    <loc>/dev/reference/nn_upsample.html</loc>
   </url>
   <url>
-    <loc>/reference/nn_utils_clip_grad_norm_.html</loc>
+    <loc>/dev/reference/nn_utils_clip_grad_norm_.html</loc>
   </url>
   <url>
-    <loc>/reference/nn_utils_clip_grad_value_.html</loc>
+    <loc>/dev/reference/nn_utils_clip_grad_value_.html</loc>
   </url>
   <url>
-    <loc>/reference/nn_utils_rnn_pack_padded_sequence.html</loc>
+    <loc>/dev/reference/nn_utils_rnn_pack_padded_sequence.html</loc>
   </url>
   <url>
-    <loc>/reference/nn_utils_rnn_pack_sequence.html</loc>
+    <loc>/dev/reference/nn_utils_rnn_pack_sequence.html</loc>
   </url>
   <url>
-    <loc>/reference/nn_utils_rnn_pad_packed_sequence.html</loc>
+    <loc>/dev/reference/nn_utils_rnn_pad_packed_sequence.html</loc>
   </url>
   <url>
-    <loc>/reference/nn_utils_rnn_pad_sequence.html</loc>
+    <loc>/dev/reference/nn_utils_rnn_pad_sequence.html</loc>
   </url>
   <url>
-    <loc>/reference/nnf_adaptive_avg_pool1d.html</loc>
+    <loc>/dev/reference/nnf_adaptive_avg_pool1d.html</loc>
   </url>
   <url>
-    <loc>/reference/nnf_adaptive_avg_pool2d.html</loc>
+    <loc>/dev/reference/nnf_adaptive_avg_pool2d.html</loc>
   </url>
   <url>
-    <loc>/reference/nnf_adaptive_avg_pool3d.html</loc>
+    <loc>/dev/reference/nnf_adaptive_avg_pool3d.html</loc>
   </url>
   <url>
-    <loc>/reference/nnf_adaptive_max_pool1d.html</loc>
+    <loc>/dev/reference/nnf_adaptive_max_pool1d.html</loc>
   </url>
   <url>
-    <loc>/reference/nnf_adaptive_max_pool2d.html</loc>
+    <loc>/dev/reference/nnf_adaptive_max_pool2d.html</loc>
   </url>
   <url>
-    <loc>/reference/nnf_adaptive_max_pool3d.html</loc>
+    <loc>/dev/reference/nnf_adaptive_max_pool3d.html</loc>
   </url>
   <url>
-    <loc>/reference/nnf_affine_grid.html</loc>
+    <loc>/dev/reference/nnf_affine_grid.html</loc>
   </url>
   <url>
-    <loc>/reference/nnf_alpha_dropout.html</loc>
+    <loc>/dev/reference/nnf_alpha_dropout.html</loc>
   </url>
   <url>
-    <loc>/reference/nnf_avg_pool1d.html</loc>
+    <loc>/dev/reference/nnf_avg_pool1d.html</loc>
   </url>
   <url>
-    <loc>/reference/nnf_avg_pool2d.html</loc>
+    <loc>/dev/reference/nnf_avg_pool2d.html</loc>
   </url>
   <url>
-    <loc>/reference/nnf_avg_pool3d.html</loc>
+    <loc>/dev/reference/nnf_avg_pool3d.html</loc>
   </url>
   <url>
-    <loc>/reference/nnf_batch_norm.html</loc>
+    <loc>/dev/reference/nnf_batch_norm.html</loc>
   </url>
   <url>
-    <loc>/reference/nnf_bilinear.html</loc>
+    <loc>/dev/reference/nnf_bilinear.html</loc>
   </url>
   <url>
-    <loc>/reference/nnf_binary_cross_entropy.html</loc>
+    <loc>/dev/reference/nnf_binary_cross_entropy.html</loc>
   </url>
   <url>
-    <loc>/reference/nnf_binary_cross_entropy_with_logits.html</loc>
+    <loc>/dev/reference/nnf_binary_cross_entropy_with_logits.html</loc>
   </url>
   <url>
-    <loc>/reference/nnf_celu.html</loc>
+    <loc>/dev/reference/nnf_celu.html</loc>
   </url>
   <url>
-    <loc>/reference/nnf_contrib_sparsemax.html</loc>
+    <loc>/dev/reference/nnf_contrib_sparsemax.html</loc>
   </url>
   <url>
-    <loc>/reference/nnf_conv1d.html</loc>
+    <loc>/dev/reference/nnf_conv1d.html</loc>
   </url>
   <url>
-    <loc>/reference/nnf_conv2d.html</loc>
+    <loc>/dev/reference/nnf_conv2d.html</loc>
   </url>
   <url>
-    <loc>/reference/nnf_conv3d.html</loc>
+    <loc>/dev/reference/nnf_conv3d.html</loc>
   </url>
   <url>
-    <loc>/reference/nnf_conv_tbc.html</loc>
+    <loc>/dev/reference/nnf_conv_tbc.html</loc>
   </url>
   <url>
-    <loc>/reference/nnf_conv_transpose1d.html</loc>
+    <loc>/dev/reference/nnf_conv_transpose1d.html</loc>
   </url>
   <url>
-    <loc>/reference/nnf_conv_transpose2d.html</loc>
+    <loc>/dev/reference/nnf_conv_transpose2d.html</loc>
   </url>
   <url>
-    <loc>/reference/nnf_conv_transpose3d.html</loc>
+    <loc>/dev/reference/nnf_conv_transpose3d.html</loc>
   </url>
   <url>
-    <loc>/reference/nnf_cosine_embedding_loss.html</loc>
+    <loc>/dev/reference/nnf_cosine_embedding_loss.html</loc>
   </url>
   <url>
-    <loc>/reference/nnf_cosine_similarity.html</loc>
+    <loc>/dev/reference/nnf_cosine_similarity.html</loc>
   </url>
   <url>
-    <loc>/reference/nnf_cross_entropy.html</loc>
+    <loc>/dev/reference/nnf_cross_entropy.html</loc>
   </url>
   <url>
-    <loc>/reference/nnf_ctc_loss.html</loc>
+    <loc>/dev/reference/nnf_ctc_loss.html</loc>
   </url>
   <url>
-    <loc>/reference/nnf_dropout.html</loc>
+    <loc>/dev/reference/nnf_dropout.html</loc>
   </url>
   <url>
-    <loc>/reference/nnf_dropout2d.html</loc>
+    <loc>/dev/reference/nnf_dropout2d.html</loc>
   </url>
   <url>
-    <loc>/reference/nnf_dropout3d.html</loc>
+    <loc>/dev/reference/nnf_dropout3d.html</loc>
   </url>
   <url>
-    <loc>/reference/nnf_elu.html</loc>
+    <loc>/dev/reference/nnf_elu.html</loc>
   </url>
   <url>
-    <loc>/reference/nnf_embedding.html</loc>
+    <loc>/dev/reference/nnf_embedding.html</loc>
   </url>
   <url>
-    <loc>/reference/nnf_embedding_bag.html</loc>
+    <loc>/dev/reference/nnf_embedding_bag.html</loc>
   </url>
   <url>
-    <loc>/reference/nnf_fold.html</loc>
+    <loc>/dev/reference/nnf_fold.html</loc>
   </url>
   <url>
-    <loc>/reference/nnf_fractional_max_pool2d.html</loc>
+    <loc>/dev/reference/nnf_fractional_max_pool2d.html</loc>
   </url>
   <url>
-    <loc>/reference/nnf_fractional_max_pool3d.html</loc>
+    <loc>/dev/reference/nnf_fractional_max_pool3d.html</loc>
   </url>
   <url>
-    <loc>/reference/nnf_gelu.html</loc>
+    <loc>/dev/reference/nnf_gelu.html</loc>
   </url>
   <url>
-    <loc>/reference/nnf_glu.html</loc>
+    <loc>/dev/reference/nnf_glu.html</loc>
   </url>
   <url>
-    <loc>/reference/nnf_grid_sample.html</loc>
+    <loc>/dev/reference/nnf_grid_sample.html</loc>
   </url>
   <url>
-    <loc>/reference/nnf_group_norm.html</loc>
+    <loc>/dev/reference/nnf_group_norm.html</loc>
   </url>
   <url>
-    <loc>/reference/nnf_gumbel_softmax.html</loc>
+    <loc>/dev/reference/nnf_gumbel_softmax.html</loc>
   </url>
   <url>
-    <loc>/reference/nnf_hardshrink.html</loc>
+    <loc>/dev/reference/nnf_hardshrink.html</loc>
   </url>
   <url>
-    <loc>/reference/nnf_hardsigmoid.html</loc>
+    <loc>/dev/reference/nnf_hardsigmoid.html</loc>
   </url>
   <url>
-    <loc>/reference/nnf_hardswish.html</loc>
+    <loc>/dev/reference/nnf_hardswish.html</loc>
   </url>
   <url>
-    <loc>/reference/nnf_hardtanh.html</loc>
+    <loc>/dev/reference/nnf_hardtanh.html</loc>
   </url>
   <url>
-    <loc>/reference/nnf_hinge_embedding_loss.html</loc>
+    <loc>/dev/reference/nnf_hinge_embedding_loss.html</loc>
   </url>
   <url>
-    <loc>/reference/nnf_instance_norm.html</loc>
+    <loc>/dev/reference/nnf_instance_norm.html</loc>
   </url>
   <url>
-    <loc>/reference/nnf_interpolate.html</loc>
+    <loc>/dev/reference/nnf_interpolate.html</loc>
   </url>
   <url>
-    <loc>/reference/nnf_kl_div.html</loc>
+    <loc>/dev/reference/nnf_kl_div.html</loc>
   </url>
   <url>
-    <loc>/reference/nnf_l1_loss.html</loc>
+    <loc>/dev/reference/nnf_l1_loss.html</loc>
   </url>
   <url>
-    <loc>/reference/nnf_layer_norm.html</loc>
+    <loc>/dev/reference/nnf_layer_norm.html</loc>
   </url>
   <url>
-    <loc>/reference/nnf_leaky_relu.html</loc>
+    <loc>/dev/reference/nnf_leaky_relu.html</loc>
   </url>
   <url>
-    <loc>/reference/nnf_linear.html</loc>
+    <loc>/dev/reference/nnf_linear.html</loc>
   </url>
   <url>
-    <loc>/reference/nnf_local_response_norm.html</loc>
+    <loc>/dev/reference/nnf_local_response_norm.html</loc>
   </url>
   <url>
-    <loc>/reference/nnf_log_softmax.html</loc>
+    <loc>/dev/reference/nnf_log_softmax.html</loc>
   </url>
   <url>
-    <loc>/reference/nnf_logsigmoid.html</loc>
+    <loc>/dev/reference/nnf_logsigmoid.html</loc>
   </url>
   <url>
-    <loc>/reference/nnf_lp_pool1d.html</loc>
+    <loc>/dev/reference/nnf_lp_pool1d.html</loc>
   </url>
   <url>
-    <loc>/reference/nnf_lp_pool2d.html</loc>
+    <loc>/dev/reference/nnf_lp_pool2d.html</loc>
   </url>
   <url>
-    <loc>/reference/nnf_margin_ranking_loss.html</loc>
+    <loc>/dev/reference/nnf_margin_ranking_loss.html</loc>
   </url>
   <url>
-    <loc>/reference/nnf_max_pool1d.html</loc>
+    <loc>/dev/reference/nnf_max_pool1d.html</loc>
   </url>
   <url>
-    <loc>/reference/nnf_max_pool2d.html</loc>
+    <loc>/dev/reference/nnf_max_pool2d.html</loc>
   </url>
   <url>
-    <loc>/reference/nnf_max_pool3d.html</loc>
+    <loc>/dev/reference/nnf_max_pool3d.html</loc>
   </url>
   <url>
-    <loc>/reference/nnf_max_unpool1d.html</loc>
+    <loc>/dev/reference/nnf_max_unpool1d.html</loc>
   </url>
   <url>
-    <loc>/reference/nnf_max_unpool2d.html</loc>
+    <loc>/dev/reference/nnf_max_unpool2d.html</loc>
   </url>
   <url>
-    <loc>/reference/nnf_max_unpool3d.html</loc>
+    <loc>/dev/reference/nnf_max_unpool3d.html</loc>
   </url>
   <url>
-    <loc>/reference/nnf_mse_loss.html</loc>
+    <loc>/dev/reference/nnf_mse_loss.html</loc>
   </url>
   <url>
-    <loc>/reference/nnf_multi_head_attention_forward.html</loc>
+    <loc>/dev/reference/nnf_multi_head_attention_forward.html</loc>
   </url>
   <url>
-    <loc>/reference/nnf_multi_margin_loss.html</loc>
+    <loc>/dev/reference/nnf_multi_margin_loss.html</loc>
   </url>
   <url>
-    <loc>/reference/nnf_multilabel_margin_loss.html</loc>
+    <loc>/dev/reference/nnf_multilabel_margin_loss.html</loc>
   </url>
   <url>
-    <loc>/reference/nnf_multilabel_soft_margin_loss.html</loc>
+    <loc>/dev/reference/nnf_multilabel_soft_margin_loss.html</loc>
   </url>
   <url>
-    <loc>/reference/nnf_nll_loss.html</loc>
+    <loc>/dev/reference/nnf_nll_loss.html</loc>
   </url>
   <url>
-    <loc>/reference/nnf_normalize.html</loc>
+    <loc>/dev/reference/nnf_normalize.html</loc>
   </url>
   <url>
-    <loc>/reference/nnf_one_hot.html</loc>
+    <loc>/dev/reference/nnf_one_hot.html</loc>
   </url>
   <url>
-    <loc>/reference/nnf_pad.html</loc>
+    <loc>/dev/reference/nnf_pad.html</loc>
   </url>
   <url>
-    <loc>/reference/nnf_pairwise_distance.html</loc>
+    <loc>/dev/reference/nnf_pairwise_distance.html</loc>
   </url>
   <url>
-    <loc>/reference/nnf_pdist.html</loc>
+    <loc>/dev/reference/nnf_pdist.html</loc>
   </url>
   <url>
-    <loc>/reference/nnf_pixel_shuffle.html</loc>
+    <loc>/dev/reference/nnf_pixel_shuffle.html</loc>
   </url>
   <url>
-    <loc>/reference/nnf_poisson_nll_loss.html</loc>
+    <loc>/dev/reference/nnf_poisson_nll_loss.html</loc>
   </url>
   <url>
-    <loc>/reference/nnf_prelu.html</loc>
+    <loc>/dev/reference/nnf_prelu.html</loc>
   </url>
   <url>
-    <loc>/reference/nnf_relu.html</loc>
+    <loc>/dev/reference/nnf_relu.html</loc>
   </url>
   <url>
-    <loc>/reference/nnf_relu6.html</loc>
+    <loc>/dev/reference/nnf_relu6.html</loc>
   </url>
   <url>
-    <loc>/reference/nnf_rrelu.html</loc>
+    <loc>/dev/reference/nnf_rrelu.html</loc>
   </url>
   <url>
-    <loc>/reference/nnf_selu.html</loc>
+    <loc>/dev/reference/nnf_selu.html</loc>
   </url>
   <url>
-    <loc>/reference/nnf_sigmoid.html</loc>
+    <loc>/dev/reference/nnf_sigmoid.html</loc>
   </url>
   <url>
-    <loc>/reference/nnf_smooth_l1_loss.html</loc>
+    <loc>/dev/reference/nnf_smooth_l1_loss.html</loc>
   </url>
   <url>
-    <loc>/reference/nnf_soft_margin_loss.html</loc>
+    <loc>/dev/reference/nnf_soft_margin_loss.html</loc>
   </url>
   <url>
-    <loc>/reference/nnf_softmax.html</loc>
+    <loc>/dev/reference/nnf_softmax.html</loc>
   </url>
   <url>
-    <loc>/reference/nnf_softmin.html</loc>
+    <loc>/dev/reference/nnf_softmin.html</loc>
   </url>
   <url>
-    <loc>/reference/nnf_softplus.html</loc>
+    <loc>/dev/reference/nnf_softplus.html</loc>
   </url>
   <url>
-    <loc>/reference/nnf_softshrink.html</loc>
+    <loc>/dev/reference/nnf_softshrink.html</loc>
   </url>
   <url>
-    <loc>/reference/nnf_softsign.html</loc>
+    <loc>/dev/reference/nnf_softsign.html</loc>
   </url>
   <url>
-    <loc>/reference/nnf_tanhshrink.html</loc>
+    <loc>/dev/reference/nnf_tanhshrink.html</loc>
   </url>
   <url>
-    <loc>/reference/nnf_threshold.html</loc>
+    <loc>/dev/reference/nnf_threshold.html</loc>
   </url>
   <url>
-    <loc>/reference/nnf_triplet_margin_loss.html</loc>
+    <loc>/dev/reference/nnf_triplet_margin_loss.html</loc>
   </url>
   <url>
-    <loc>/reference/nnf_triplet_margin_with_distance_loss.html</loc>
+    <loc>/dev/reference/nnf_triplet_margin_with_distance_loss.html</loc>
   </url>
   <url>
-    <loc>/reference/nnf_unfold.html</loc>
+    <loc>/dev/reference/nnf_unfold.html</loc>
   </url>
   <url>
-    <loc>/reference/optim_adadelta.html</loc>
+    <loc>/dev/reference/optim_adadelta.html</loc>
   </url>
   <url>
-    <loc>/reference/optim_adagrad.html</loc>
+    <loc>/dev/reference/optim_adagrad.html</loc>
   </url>
   <url>
-    <loc>/reference/optim_adam.html</loc>
+    <loc>/dev/reference/optim_adam.html</loc>
   </url>
   <url>
-    <loc>/reference/optim_asgd.html</loc>
+    <loc>/dev/reference/optim_asgd.html</loc>
   </url>
   <url>
-    <loc>/reference/optim_lbfgs.html</loc>
+    <loc>/dev/reference/optim_lbfgs.html</loc>
   </url>
   <url>
-    <loc>/reference/optim_required.html</loc>
+    <loc>/dev/reference/optim_required.html</loc>
   </url>
   <url>
-    <loc>/reference/optim_rmsprop.html</loc>
+    <loc>/dev/reference/optim_rmsprop.html</loc>
   </url>
   <url>
-    <loc>/reference/optim_rprop.html</loc>
+    <loc>/dev/reference/optim_rprop.html</loc>
   </url>
   <url>
-    <loc>/reference/optim_sgd.html</loc>
+    <loc>/dev/reference/optim_sgd.html</loc>
   </url>
   <url>
-    <loc>/reference/optimizer.html</loc>
+    <loc>/dev/reference/optimizer.html</loc>
   </url>
   <url>
-    <loc>/reference/pipe.html</loc>
+    <loc>/dev/reference/pipe.html</loc>
   </url>
   <url>
-    <loc>/reference/reexports.html</loc>
+    <loc>/dev/reference/reexports.html</loc>
   </url>
   <url>
-    <loc>/reference/slc.html</loc>
+    <loc>/dev/reference/slc.html</loc>
   </url>
   <url>
-    <loc>/reference/tensor_dataset.html</loc>
+    <loc>/dev/reference/tensor_dataset.html</loc>
   </url>
   <url>
-    <loc>/reference/threads.html</loc>
+    <loc>/dev/reference/threads.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_abs.html</loc>
+    <loc>/dev/reference/torch_abs.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_absolute.html</loc>
+    <loc>/dev/reference/torch_absolute.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_acos.html</loc>
+    <loc>/dev/reference/torch_acos.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_acosh.html</loc>
+    <loc>/dev/reference/torch_acosh.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_adaptive_avg_pool1d.html</loc>
+    <loc>/dev/reference/torch_adaptive_avg_pool1d.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_add.html</loc>
+    <loc>/dev/reference/torch_add.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_addbmm.html</loc>
+    <loc>/dev/reference/torch_addbmm.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_addcdiv.html</loc>
+    <loc>/dev/reference/torch_addcdiv.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_addcmul.html</loc>
+    <loc>/dev/reference/torch_addcmul.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_addmm.html</loc>
+    <loc>/dev/reference/torch_addmm.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_addmv.html</loc>
+    <loc>/dev/reference/torch_addmv.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_addr.html</loc>
+    <loc>/dev/reference/torch_addr.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_allclose.html</loc>
+    <loc>/dev/reference/torch_allclose.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_amax.html</loc>
+    <loc>/dev/reference/torch_amax.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_amin.html</loc>
+    <loc>/dev/reference/torch_amin.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_angle.html</loc>
+    <loc>/dev/reference/torch_angle.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_arange.html</loc>
+    <loc>/dev/reference/torch_arange.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_arccos.html</loc>
+    <loc>/dev/reference/torch_arccos.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_arccosh.html</loc>
+    <loc>/dev/reference/torch_arccosh.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_arcsin.html</loc>
+    <loc>/dev/reference/torch_arcsin.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_arcsinh.html</loc>
+    <loc>/dev/reference/torch_arcsinh.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_arctan.html</loc>
+    <loc>/dev/reference/torch_arctan.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_arctanh.html</loc>
+    <loc>/dev/reference/torch_arctanh.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_argmax.html</loc>
+    <loc>/dev/reference/torch_argmax.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_argmin.html</loc>
+    <loc>/dev/reference/torch_argmin.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_argsort.html</loc>
+    <loc>/dev/reference/torch_argsort.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_as_strided.html</loc>
+    <loc>/dev/reference/torch_as_strided.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_asin.html</loc>
+    <loc>/dev/reference/torch_asin.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_asinh.html</loc>
+    <loc>/dev/reference/torch_asinh.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_atan.html</loc>
+    <loc>/dev/reference/torch_atan.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_atan2.html</loc>
+    <loc>/dev/reference/torch_atan2.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_atanh.html</loc>
+    <loc>/dev/reference/torch_atanh.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_atleast_1d.html</loc>
+    <loc>/dev/reference/torch_atleast_1d.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_atleast_2d.html</loc>
+    <loc>/dev/reference/torch_atleast_2d.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_atleast_3d.html</loc>
+    <loc>/dev/reference/torch_atleast_3d.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_avg_pool1d.html</loc>
+    <loc>/dev/reference/torch_avg_pool1d.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_baddbmm.html</loc>
+    <loc>/dev/reference/torch_baddbmm.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_bartlett_window.html</loc>
+    <loc>/dev/reference/torch_bartlett_window.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_bernoulli.html</loc>
+    <loc>/dev/reference/torch_bernoulli.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_bincount.html</loc>
+    <loc>/dev/reference/torch_bincount.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_bitwise_and.html</loc>
+    <loc>/dev/reference/torch_bitwise_and.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_bitwise_not.html</loc>
+    <loc>/dev/reference/torch_bitwise_not.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_bitwise_or.html</loc>
+    <loc>/dev/reference/torch_bitwise_or.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_bitwise_xor.html</loc>
+    <loc>/dev/reference/torch_bitwise_xor.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_blackman_window.html</loc>
+    <loc>/dev/reference/torch_blackman_window.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_block_diag.html</loc>
+    <loc>/dev/reference/torch_block_diag.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_bmm.html</loc>
+    <loc>/dev/reference/torch_bmm.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_broadcast_tensors.html</loc>
+    <loc>/dev/reference/torch_broadcast_tensors.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_bucketize.html</loc>
+    <loc>/dev/reference/torch_bucketize.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_can_cast.html</loc>
+    <loc>/dev/reference/torch_can_cast.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_cartesian_prod.html</loc>
+    <loc>/dev/reference/torch_cartesian_prod.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_cat.html</loc>
+    <loc>/dev/reference/torch_cat.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_cdist.html</loc>
+    <loc>/dev/reference/torch_cdist.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_ceil.html</loc>
+    <loc>/dev/reference/torch_ceil.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_celu.html</loc>
+    <loc>/dev/reference/torch_celu.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_celu_.html</loc>
+    <loc>/dev/reference/torch_celu_.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_chain_matmul.html</loc>
+    <loc>/dev/reference/torch_chain_matmul.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_channel_shuffle.html</loc>
+    <loc>/dev/reference/torch_channel_shuffle.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_cholesky.html</loc>
+    <loc>/dev/reference/torch_cholesky.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_cholesky_inverse.html</loc>
+    <loc>/dev/reference/torch_cholesky_inverse.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_cholesky_solve.html</loc>
+    <loc>/dev/reference/torch_cholesky_solve.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_chunk.html</loc>
+    <loc>/dev/reference/torch_chunk.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_clamp.html</loc>
+    <loc>/dev/reference/torch_clamp.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_clip.html</loc>
+    <loc>/dev/reference/torch_clip.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_clone.html</loc>
+    <loc>/dev/reference/torch_clone.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_combinations.html</loc>
+    <loc>/dev/reference/torch_combinations.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_complex.html</loc>
+    <loc>/dev/reference/torch_complex.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_conj.html</loc>
+    <loc>/dev/reference/torch_conj.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_conv1d.html</loc>
+    <loc>/dev/reference/torch_conv1d.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_conv2d.html</loc>
+    <loc>/dev/reference/torch_conv2d.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_conv3d.html</loc>
+    <loc>/dev/reference/torch_conv3d.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_conv_tbc.html</loc>
+    <loc>/dev/reference/torch_conv_tbc.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_conv_transpose1d.html</loc>
+    <loc>/dev/reference/torch_conv_transpose1d.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_conv_transpose2d.html</loc>
+    <loc>/dev/reference/torch_conv_transpose2d.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_conv_transpose3d.html</loc>
+    <loc>/dev/reference/torch_conv_transpose3d.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_cos.html</loc>
+    <loc>/dev/reference/torch_cos.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_cosh.html</loc>
+    <loc>/dev/reference/torch_cosh.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_cosine_similarity.html</loc>
+    <loc>/dev/reference/torch_cosine_similarity.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_count_nonzero.html</loc>
+    <loc>/dev/reference/torch_count_nonzero.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_cross.html</loc>
+    <loc>/dev/reference/torch_cross.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_cummax.html</loc>
+    <loc>/dev/reference/torch_cummax.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_cummin.html</loc>
+    <loc>/dev/reference/torch_cummin.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_cumprod.html</loc>
+    <loc>/dev/reference/torch_cumprod.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_cumsum.html</loc>
+    <loc>/dev/reference/torch_cumsum.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_deg2rad.html</loc>
+    <loc>/dev/reference/torch_deg2rad.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_dequantize.html</loc>
+    <loc>/dev/reference/torch_dequantize.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_det.html</loc>
+    <loc>/dev/reference/torch_det.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_device.html</loc>
+    <loc>/dev/reference/torch_device.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_diag.html</loc>
+    <loc>/dev/reference/torch_diag.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_diag_embed.html</loc>
+    <loc>/dev/reference/torch_diag_embed.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_diagflat.html</loc>
+    <loc>/dev/reference/torch_diagflat.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_diagonal.html</loc>
+    <loc>/dev/reference/torch_diagonal.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_diff.html</loc>
+    <loc>/dev/reference/torch_diff.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_digamma.html</loc>
+    <loc>/dev/reference/torch_digamma.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_dist.html</loc>
+    <loc>/dev/reference/torch_dist.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_div.html</loc>
+    <loc>/dev/reference/torch_div.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_divide.html</loc>
+    <loc>/dev/reference/torch_divide.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_dot.html</loc>
+    <loc>/dev/reference/torch_dot.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_dstack.html</loc>
+    <loc>/dev/reference/torch_dstack.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_dtype.html</loc>
+    <loc>/dev/reference/torch_dtype.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_eig.html</loc>
+    <loc>/dev/reference/torch_eig.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_einsum.html</loc>
+    <loc>/dev/reference/torch_einsum.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_empty.html</loc>
+    <loc>/dev/reference/torch_empty.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_empty_like.html</loc>
+    <loc>/dev/reference/torch_empty_like.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_empty_strided.html</loc>
+    <loc>/dev/reference/torch_empty_strided.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_eq.html</loc>
+    <loc>/dev/reference/torch_eq.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_equal.html</loc>
+    <loc>/dev/reference/torch_equal.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_erf.html</loc>
+    <loc>/dev/reference/torch_erf.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_erfc.html</loc>
+    <loc>/dev/reference/torch_erfc.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_erfinv.html</loc>
+    <loc>/dev/reference/torch_erfinv.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_exp.html</loc>
+    <loc>/dev/reference/torch_exp.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_exp2.html</loc>
+    <loc>/dev/reference/torch_exp2.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_expm1.html</loc>
+    <loc>/dev/reference/torch_expm1.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_eye.html</loc>
+    <loc>/dev/reference/torch_eye.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_fft_fft.html</loc>
+    <loc>/dev/reference/torch_fft_fft.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_fft_ifft.html</loc>
+    <loc>/dev/reference/torch_fft_ifft.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_fft_irfft.html</loc>
+    <loc>/dev/reference/torch_fft_irfft.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_fft_rfft.html</loc>
+    <loc>/dev/reference/torch_fft_rfft.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_finfo.html</loc>
+    <loc>/dev/reference/torch_finfo.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_fix.html</loc>
+    <loc>/dev/reference/torch_fix.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_flatten.html</loc>
+    <loc>/dev/reference/torch_flatten.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_flip.html</loc>
+    <loc>/dev/reference/torch_flip.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_fliplr.html</loc>
+    <loc>/dev/reference/torch_fliplr.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_flipud.html</loc>
+    <loc>/dev/reference/torch_flipud.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_floor.html</loc>
+    <loc>/dev/reference/torch_floor.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_floor_divide.html</loc>
+    <loc>/dev/reference/torch_floor_divide.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_fmod.html</loc>
+    <loc>/dev/reference/torch_fmod.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_frac.html</loc>
+    <loc>/dev/reference/torch_frac.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_full.html</loc>
+    <loc>/dev/reference/torch_full.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_full_like.html</loc>
+    <loc>/dev/reference/torch_full_like.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_gather.html</loc>
+    <loc>/dev/reference/torch_gather.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_gcd.html</loc>
+    <loc>/dev/reference/torch_gcd.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_ge.html</loc>
+    <loc>/dev/reference/torch_ge.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_generator.html</loc>
+    <loc>/dev/reference/torch_generator.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_geqrf.html</loc>
+    <loc>/dev/reference/torch_geqrf.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_ger.html</loc>
+    <loc>/dev/reference/torch_ger.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_greater.html</loc>
+    <loc>/dev/reference/torch_greater.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_greater_equal.html</loc>
+    <loc>/dev/reference/torch_greater_equal.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_gt.html</loc>
+    <loc>/dev/reference/torch_gt.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_hamming_window.html</loc>
+    <loc>/dev/reference/torch_hamming_window.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_hann_window.html</loc>
+    <loc>/dev/reference/torch_hann_window.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_heaviside.html</loc>
+    <loc>/dev/reference/torch_heaviside.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_histc.html</loc>
+    <loc>/dev/reference/torch_histc.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_hstack.html</loc>
+    <loc>/dev/reference/torch_hstack.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_hypot.html</loc>
+    <loc>/dev/reference/torch_hypot.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_i0.html</loc>
+    <loc>/dev/reference/torch_i0.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_iinfo.html</loc>
+    <loc>/dev/reference/torch_iinfo.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_imag.html</loc>
+    <loc>/dev/reference/torch_imag.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_index.html</loc>
+    <loc>/dev/reference/torch_index.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_index_put.html</loc>
+    <loc>/dev/reference/torch_index_put.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_index_put_.html</loc>
+    <loc>/dev/reference/torch_index_put_.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_index_select.html</loc>
+    <loc>/dev/reference/torch_index_select.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_install_path.html</loc>
+    <loc>/dev/reference/torch_install_path.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_inverse.html</loc>
+    <loc>/dev/reference/torch_inverse.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_is_complex.html</loc>
+    <loc>/dev/reference/torch_is_complex.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_is_floating_point.html</loc>
+    <loc>/dev/reference/torch_is_floating_point.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_is_installed.html</loc>
+    <loc>/dev/reference/torch_is_installed.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_is_nonzero.html</loc>
+    <loc>/dev/reference/torch_is_nonzero.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_isclose.html</loc>
+    <loc>/dev/reference/torch_isclose.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_isfinite.html</loc>
+    <loc>/dev/reference/torch_isfinite.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_isinf.html</loc>
+    <loc>/dev/reference/torch_isinf.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_isnan.html</loc>
+    <loc>/dev/reference/torch_isnan.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_isneginf.html</loc>
+    <loc>/dev/reference/torch_isneginf.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_isposinf.html</loc>
+    <loc>/dev/reference/torch_isposinf.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_isreal.html</loc>
+    <loc>/dev/reference/torch_isreal.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_istft.html</loc>
+    <loc>/dev/reference/torch_istft.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_kaiser_window.html</loc>
+    <loc>/dev/reference/torch_kaiser_window.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_kthvalue.html</loc>
+    <loc>/dev/reference/torch_kthvalue.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_layout.html</loc>
+    <loc>/dev/reference/torch_layout.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_lcm.html</loc>
+    <loc>/dev/reference/torch_lcm.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_le.html</loc>
+    <loc>/dev/reference/torch_le.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_lerp.html</loc>
+    <loc>/dev/reference/torch_lerp.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_less.html</loc>
+    <loc>/dev/reference/torch_less.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_less_equal.html</loc>
+    <loc>/dev/reference/torch_less_equal.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_lgamma.html</loc>
+    <loc>/dev/reference/torch_lgamma.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_linspace.html</loc>
+    <loc>/dev/reference/torch_linspace.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_load.html</loc>
+    <loc>/dev/reference/torch_load.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_log.html</loc>
+    <loc>/dev/reference/torch_log.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_log10.html</loc>
+    <loc>/dev/reference/torch_log10.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_log1p.html</loc>
+    <loc>/dev/reference/torch_log1p.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_log2.html</loc>
+    <loc>/dev/reference/torch_log2.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_logaddexp.html</loc>
+    <loc>/dev/reference/torch_logaddexp.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_logaddexp2.html</loc>
+    <loc>/dev/reference/torch_logaddexp2.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_logcumsumexp.html</loc>
+    <loc>/dev/reference/torch_logcumsumexp.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_logdet.html</loc>
+    <loc>/dev/reference/torch_logdet.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_logical_and.html</loc>
+    <loc>/dev/reference/torch_logical_and.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_logical_not.html</loc>
+    <loc>/dev/reference/torch_logical_not.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_logical_or.html</loc>
+    <loc>/dev/reference/torch_logical_or.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_logical_xor.html</loc>
+    <loc>/dev/reference/torch_logical_xor.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_logit.html</loc>
+    <loc>/dev/reference/torch_logit.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_logspace.html</loc>
+    <loc>/dev/reference/torch_logspace.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_logsumexp.html</loc>
+    <loc>/dev/reference/torch_logsumexp.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_lstsq.html</loc>
+    <loc>/dev/reference/torch_lstsq.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_lt.html</loc>
+    <loc>/dev/reference/torch_lt.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_lu.html</loc>
+    <loc>/dev/reference/torch_lu.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_lu_solve.html</loc>
+    <loc>/dev/reference/torch_lu_solve.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_manual_seed.html</loc>
+    <loc>/dev/reference/torch_manual_seed.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_masked_select.html</loc>
+    <loc>/dev/reference/torch_masked_select.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_matmul.html</loc>
+    <loc>/dev/reference/torch_matmul.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_matrix_exp.html</loc>
+    <loc>/dev/reference/torch_matrix_exp.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_matrix_power.html</loc>
+    <loc>/dev/reference/torch_matrix_power.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_matrix_rank.html</loc>
+    <loc>/dev/reference/torch_matrix_rank.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_max.html</loc>
+    <loc>/dev/reference/torch_max.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_maximum.html</loc>
+    <loc>/dev/reference/torch_maximum.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_mean.html</loc>
+    <loc>/dev/reference/torch_mean.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_median.html</loc>
+    <loc>/dev/reference/torch_median.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_memory_format.html</loc>
+    <loc>/dev/reference/torch_memory_format.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_meshgrid.html</loc>
+    <loc>/dev/reference/torch_meshgrid.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_min.html</loc>
+    <loc>/dev/reference/torch_min.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_minimum.html</loc>
+    <loc>/dev/reference/torch_minimum.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_mm.html</loc>
+    <loc>/dev/reference/torch_mm.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_mode.html</loc>
+    <loc>/dev/reference/torch_mode.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_movedim.html</loc>
+    <loc>/dev/reference/torch_movedim.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_mul.html</loc>
+    <loc>/dev/reference/torch_mul.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_multinomial.html</loc>
+    <loc>/dev/reference/torch_multinomial.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_multiply.html</loc>
+    <loc>/dev/reference/torch_multiply.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_mv.html</loc>
+    <loc>/dev/reference/torch_mv.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_mvlgamma.html</loc>
+    <loc>/dev/reference/torch_mvlgamma.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_nanquantile.html</loc>
+    <loc>/dev/reference/torch_nanquantile.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_nansum.html</loc>
+    <loc>/dev/reference/torch_nansum.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_narrow.html</loc>
+    <loc>/dev/reference/torch_narrow.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_ne.html</loc>
+    <loc>/dev/reference/torch_ne.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_neg.html</loc>
+    <loc>/dev/reference/torch_neg.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_negative.html</loc>
+    <loc>/dev/reference/torch_negative.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_nextafter.html</loc>
+    <loc>/dev/reference/torch_nextafter.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_nonzero.html</loc>
+    <loc>/dev/reference/torch_nonzero.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_norm.html</loc>
+    <loc>/dev/reference/torch_norm.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_normal.html</loc>
+    <loc>/dev/reference/torch_normal.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_not_equal.html</loc>
+    <loc>/dev/reference/torch_not_equal.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_ones.html</loc>
+    <loc>/dev/reference/torch_ones.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_ones_like.html</loc>
+    <loc>/dev/reference/torch_ones_like.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_orgqr.html</loc>
+    <loc>/dev/reference/torch_orgqr.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_ormqr.html</loc>
+    <loc>/dev/reference/torch_ormqr.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_outer.html</loc>
+    <loc>/dev/reference/torch_outer.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_pdist.html</loc>
+    <loc>/dev/reference/torch_pdist.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_pinverse.html</loc>
+    <loc>/dev/reference/torch_pinverse.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_pixel_shuffle.html</loc>
+    <loc>/dev/reference/torch_pixel_shuffle.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_poisson.html</loc>
+    <loc>/dev/reference/torch_poisson.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_polar.html</loc>
+    <loc>/dev/reference/torch_polar.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_polygamma.html</loc>
+    <loc>/dev/reference/torch_polygamma.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_pow.html</loc>
+    <loc>/dev/reference/torch_pow.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_prod.html</loc>
+    <loc>/dev/reference/torch_prod.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_promote_types.html</loc>
+    <loc>/dev/reference/torch_promote_types.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_qr.html</loc>
+    <loc>/dev/reference/torch_qr.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_qscheme.html</loc>
+    <loc>/dev/reference/torch_qscheme.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_quantile.html</loc>
+    <loc>/dev/reference/torch_quantile.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_quantize_per_channel.html</loc>
+    <loc>/dev/reference/torch_quantize_per_channel.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_quantize_per_tensor.html</loc>
+    <loc>/dev/reference/torch_quantize_per_tensor.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_rad2deg.html</loc>
+    <loc>/dev/reference/torch_rad2deg.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_rand.html</loc>
+    <loc>/dev/reference/torch_rand.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_rand_like.html</loc>
+    <loc>/dev/reference/torch_rand_like.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_randint.html</loc>
+    <loc>/dev/reference/torch_randint.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_randint_like.html</loc>
+    <loc>/dev/reference/torch_randint_like.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_randn.html</loc>
+    <loc>/dev/reference/torch_randn.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_randn_like.html</loc>
+    <loc>/dev/reference/torch_randn_like.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_randperm.html</loc>
+    <loc>/dev/reference/torch_randperm.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_range.html</loc>
+    <loc>/dev/reference/torch_range.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_real.html</loc>
+    <loc>/dev/reference/torch_real.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_reciprocal.html</loc>
+    <loc>/dev/reference/torch_reciprocal.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_reduction.html</loc>
+    <loc>/dev/reference/torch_reduction.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_relu.html</loc>
+    <loc>/dev/reference/torch_relu.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_relu_.html</loc>
+    <loc>/dev/reference/torch_relu_.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_remainder.html</loc>
+    <loc>/dev/reference/torch_remainder.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_renorm.html</loc>
+    <loc>/dev/reference/torch_renorm.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_repeat_interleave.html</loc>
+    <loc>/dev/reference/torch_repeat_interleave.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_reshape.html</loc>
+    <loc>/dev/reference/torch_reshape.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_result_type.html</loc>
+    <loc>/dev/reference/torch_result_type.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_roll.html</loc>
+    <loc>/dev/reference/torch_roll.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_rot90.html</loc>
+    <loc>/dev/reference/torch_rot90.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_round.html</loc>
+    <loc>/dev/reference/torch_round.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_rrelu_.html</loc>
+    <loc>/dev/reference/torch_rrelu_.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_rsqrt.html</loc>
+    <loc>/dev/reference/torch_rsqrt.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_save.html</loc>
+    <loc>/dev/reference/torch_save.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_scalar_tensor.html</loc>
+    <loc>/dev/reference/torch_scalar_tensor.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_searchsorted.html</loc>
+    <loc>/dev/reference/torch_searchsorted.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_selu.html</loc>
+    <loc>/dev/reference/torch_selu.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_selu_.html</loc>
+    <loc>/dev/reference/torch_selu_.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_sgn.html</loc>
+    <loc>/dev/reference/torch_sgn.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_sigmoid.html</loc>
+    <loc>/dev/reference/torch_sigmoid.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_sign.html</loc>
+    <loc>/dev/reference/torch_sign.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_signbit.html</loc>
+    <loc>/dev/reference/torch_signbit.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_sin.html</loc>
+    <loc>/dev/reference/torch_sin.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_sinh.html</loc>
+    <loc>/dev/reference/torch_sinh.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_slogdet.html</loc>
+    <loc>/dev/reference/torch_slogdet.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_solve.html</loc>
+    <loc>/dev/reference/torch_solve.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_sort.html</loc>
+    <loc>/dev/reference/torch_sort.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_sparse_coo_tensor.html</loc>
+    <loc>/dev/reference/torch_sparse_coo_tensor.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_split.html</loc>
+    <loc>/dev/reference/torch_split.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_sqrt.html</loc>
+    <loc>/dev/reference/torch_sqrt.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_square.html</loc>
+    <loc>/dev/reference/torch_square.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_squeeze.html</loc>
+    <loc>/dev/reference/torch_squeeze.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_stack.html</loc>
+    <loc>/dev/reference/torch_stack.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_std.html</loc>
+    <loc>/dev/reference/torch_std.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_std_mean.html</loc>
+    <loc>/dev/reference/torch_std_mean.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_stft.html</loc>
+    <loc>/dev/reference/torch_stft.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_sub.html</loc>
+    <loc>/dev/reference/torch_sub.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_subtract.html</loc>
+    <loc>/dev/reference/torch_subtract.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_sum.html</loc>
+    <loc>/dev/reference/torch_sum.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_svd.html</loc>
+    <loc>/dev/reference/torch_svd.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_symeig.html</loc>
+    <loc>/dev/reference/torch_symeig.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_t.html</loc>
+    <loc>/dev/reference/torch_t.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_take.html</loc>
+    <loc>/dev/reference/torch_take.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_tan.html</loc>
+    <loc>/dev/reference/torch_tan.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_tanh.html</loc>
+    <loc>/dev/reference/torch_tanh.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_tensor.html</loc>
+    <loc>/dev/reference/torch_tensor.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_tensordot.html</loc>
+    <loc>/dev/reference/torch_tensordot.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_threshold_.html</loc>
+    <loc>/dev/reference/torch_threshold_.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_topk.html</loc>
+    <loc>/dev/reference/torch_topk.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_trace.html</loc>
+    <loc>/dev/reference/torch_trace.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_transpose.html</loc>
+    <loc>/dev/reference/torch_transpose.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_trapz.html</loc>
+    <loc>/dev/reference/torch_trapz.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_triangular_solve.html</loc>
+    <loc>/dev/reference/torch_triangular_solve.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_tril.html</loc>
+    <loc>/dev/reference/torch_tril.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_tril_indices.html</loc>
+    <loc>/dev/reference/torch_tril_indices.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_triu.html</loc>
+    <loc>/dev/reference/torch_triu.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_triu_indices.html</loc>
+    <loc>/dev/reference/torch_triu_indices.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_true_divide.html</loc>
+    <loc>/dev/reference/torch_true_divide.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_trunc.html</loc>
+    <loc>/dev/reference/torch_trunc.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_unbind.html</loc>
+    <loc>/dev/reference/torch_unbind.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_unique_consecutive.html</loc>
+    <loc>/dev/reference/torch_unique_consecutive.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_unsafe_chunk.html</loc>
+    <loc>/dev/reference/torch_unsafe_chunk.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_unsafe_split.html</loc>
+    <loc>/dev/reference/torch_unsafe_split.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_unsqueeze.html</loc>
+    <loc>/dev/reference/torch_unsqueeze.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_vander.html</loc>
+    <loc>/dev/reference/torch_vander.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_var.html</loc>
+    <loc>/dev/reference/torch_var.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_var_mean.html</loc>
+    <loc>/dev/reference/torch_var_mean.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_vdot.html</loc>
+    <loc>/dev/reference/torch_vdot.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_view_as_complex.html</loc>
+    <loc>/dev/reference/torch_view_as_complex.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_view_as_real.html</loc>
+    <loc>/dev/reference/torch_view_as_real.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_vstack.html</loc>
+    <loc>/dev/reference/torch_vstack.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_where.html</loc>
+    <loc>/dev/reference/torch_where.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_zeros.html</loc>
+    <loc>/dev/reference/torch_zeros.html</loc>
   </url>
   <url>
-    <loc>/reference/torch_zeros_like.html</loc>
+    <loc>/dev/reference/torch_zeros_like.html</loc>
   </url>
   <url>
-    <loc>/reference/with_detect_anomaly.html</loc>
+    <loc>/dev/reference/with_detect_anomaly.html</loc>
   </url>
   <url>
-    <loc>/reference/with_enable_grad.html</loc>
+    <loc>/dev/reference/with_enable_grad.html</loc>
   </url>
   <url>
-    <loc>/reference/with_no_grad.html</loc>
+    <loc>/dev/reference/with_no_grad.html</loc>
   </url>
 </urlset>
