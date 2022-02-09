@@ -1,3 +1,4 @@
+url: https://torch.mlverse.org/docs/
 destination: docs
 template:
   bootstrap: 5
