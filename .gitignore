@@ -1,6 +1,5 @@
 public/
 src/
-deps/
 lantern
 vignettes
 .Rproj.user
