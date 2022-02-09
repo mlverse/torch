@@ -147,6 +147,6 @@ cuda_memory_summary <- function(device = cuda_current_device()) {
 
 #' @export
 print.cuda_memory_stats <- function(x, ...) {
-  cat(str(result))
-  invisible(result)
+  cat(utils::str(x))
+  invisible(x)
 }
