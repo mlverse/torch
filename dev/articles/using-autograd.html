@@ -107,7 +107,7 @@
     
     
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://torch.mlverse.org/docs" class="external-link">torch</a></span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://torch.mlverse.org/docs">torch</a></span><span class="op">)</span></code></pre></div>
 <p>So far, all we’ve been using from torch is <em>tensors</em>, but we’ve been performing all calculations ourselves – the computing the predictions, the loss, the gradients (and thus, the necessary updates to the weights), and the new weight values. In this chapter, we’ll make a significant change: Namely, we spare ourselves the cumbersome calculation of gradients, and have torch do it for us.</p>
 <p>Before we see that in action, let’s get some more background.</p>
 <div class="section level2">
@@ -256,26 +256,26 @@
     <span class="op">}</span><span class="op">)</span>
     
 <span class="op">}</span>
-<span class="co">#&gt; 10 33.92405 </span>
-<span class="co">#&gt; 20 31.54833 </span>
-<span class="co">#&gt; 30 29.41555 </span>
-<span class="co">#&gt; 40 27.4948 </span>
-<span class="co">#&gt; 50 25.7584 </span>
-<span class="co">#&gt; 60 24.18597 </span>
-<span class="co">#&gt; 70 22.76048 </span>
-<span class="co">#&gt; 80 21.46511 </span>
-<span class="co">#&gt; 90 20.28564 </span>
-<span class="co">#&gt; 100 19.21016 </span>
-<span class="co">#&gt; 110 18.22471 </span>
-<span class="co">#&gt; 120 17.31964 </span>
-<span class="co">#&gt; 130 16.49076 </span>
-<span class="co">#&gt; 140 15.72861 </span>
-<span class="co">#&gt; 150 15.02903 </span>
-<span class="co">#&gt; 160 14.38503 </span>
-<span class="co">#&gt; 170 13.79175 </span>
-<span class="co">#&gt; 180 13.24424 </span>
-<span class="co">#&gt; 190 12.73776 </span>
-<span class="co">#&gt; 200 12.26869</span></code></pre></div>
+<span class="co">#&gt; 10 45.62168 </span>
+<span class="co">#&gt; 20 41.36299 </span>
+<span class="co">#&gt; 30 37.64617 </span>
+<span class="co">#&gt; 40 34.38859 </span>
+<span class="co">#&gt; 50 31.52834 </span>
+<span class="co">#&gt; 60 29.01303 </span>
+<span class="co">#&gt; 70 26.79007 </span>
+<span class="co">#&gt; 80 24.8268 </span>
+<span class="co">#&gt; 90 23.08916 </span>
+<span class="co">#&gt; 100 21.54791 </span>
+<span class="co">#&gt; 110 20.18038 </span>
+<span class="co">#&gt; 120 18.96423 </span>
+<span class="co">#&gt; 130 17.88068 </span>
+<span class="co">#&gt; 140 16.91392 </span>
+<span class="co">#&gt; 150 16.04876 </span>
+<span class="co">#&gt; 160 15.27501 </span>
+<span class="co">#&gt; 170 14.58289 </span>
+<span class="co">#&gt; 180 13.96154 </span>
+<span class="co">#&gt; 190 13.40128 </span>
+<span class="co">#&gt; 200 12.89321</span></code></pre></div>
 <p>We still manually compute the forward pass, and we still manually update the weights. In the last two chapters of this section, we’ll see how these parts of the logic can be made more modular and reusable, as well.</p>
 </div>
 

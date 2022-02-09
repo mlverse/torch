@@ -107,7 +107,7 @@
     
     
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://torch.mlverse.org/docs" class="external-link">torch</a></span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://torch.mlverse.org/docs">torch</a></span><span class="op">)</span></code></pre></div>
 <p>Torch tensors in R are pointers to Tensors allocated by LibTorch. This has one major consequence for serialization. One cannot simply use <code>saveRDS</code> for serializing tensors, as you would save the pointer but not the data itself. When reloading a tensor saved with <code>saveRDS</code> the pointer might have been deleted in LibTorch and you would get wrong results.</p>
 <p>To solve this problem, <code>torch</code> implements specialized functions for serializing tensors to the disk:</p>
 <ul>

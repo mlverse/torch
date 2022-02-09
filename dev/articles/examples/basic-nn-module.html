@@ -107,7 +107,7 @@
     
     
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://torch.mlverse.org/docs" class="external-link">torch</a></span><span class="op">)</span>
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://torch.mlverse.org/docs">torch</a></span><span class="op">)</span>
 
 <span class="co"># creates example tensors. x requires_grad = TRUE tells that</span>
 <span class="co"># we are going to take derivatives over it.</span>
@@ -139,9 +139,9 @@
 <span class="va">model</span><span class="op">$</span><span class="va">parameters</span></code></pre></div>
 <pre><code><span class="co">## $w</span>
 <span class="co">## torch_tensor</span>
-<span class="co">##  0.3383</span>
-<span class="co">## -0.4636</span>
-<span class="co">## -0.2825</span>
+<span class="co">## -0.4846</span>
+<span class="co">## -1.1568</span>
+<span class="co">## -0.9606</span>
 <span class="co">## [ CPUFloatType{3,1} ][ requires_grad = TRUE ]</span>
 <span class="co">## </span>
 <span class="co">## $b</span>
@@ -152,9 +152,9 @@
 <code class="sourceCode R"><span class="co"># or individually</span>
 <span class="va">model</span><span class="op">$</span><span class="va">w</span></code></pre></div>
 <pre><code><span class="co">## torch_tensor</span>
-<span class="co">##  0.3383</span>
-<span class="co">## -0.4636</span>
-<span class="co">## -0.2825</span>
+<span class="co">## -0.4846</span>
+<span class="co">## -1.1568</span>
+<span class="co">## -0.9606</span>
 <span class="co">## [ CPUFloatType{3,1} ][ requires_grad = TRUE ]</span></code></pre>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">model</span><span class="op">$</span><span class="va">b</span></code></pre></div>
@@ -169,16 +169,16 @@
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">y_pred</span></code></pre></div>
 <pre><code><span class="co">## torch_tensor</span>
-<span class="co">##  0.2931</span>
-<span class="co">## -0.4902</span>
-<span class="co">##  0.7292</span>
-<span class="co">## -0.4359</span>
-<span class="co">## -1.6481</span>
-<span class="co">## -0.3719</span>
-<span class="co">## -0.6598</span>
-<span class="co">## -0.9236</span>
-<span class="co">## -0.2358</span>
-<span class="co">##  0.0916</span>
+<span class="co">## -0.5850</span>
+<span class="co">## -0.1562</span>
+<span class="co">##  1.8568</span>
+<span class="co">## -1.8752</span>
+<span class="co">##  2.7181</span>
+<span class="co">##  1.6058</span>
+<span class="co">##  4.1943</span>
+<span class="co">##  1.2561</span>
+<span class="co">## -0.2615</span>
+<span class="co">##  0.9351</span>
 <span class="co">## [ CPUFloatType{10,1} ][ grad_fn = &lt;AddBackward0&gt; ]</span></code></pre>
   </main>
 </div>
