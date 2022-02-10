@@ -145,6 +145,15 @@ BEGIN_RCPP
     return R_NilValue;
 END_RCPP
 }
+// register_lambda_function_deleter
+void register_lambda_function_deleter();
+RcppExport SEXP _torch_register_lambda_function_deleter() {
+BEGIN_RCPP
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    register_lambda_function_deleter();
+    return R_NilValue;
+END_RCPP
+}
 // cpp_Function_lambda
 Rcpp::XPtr<XPtrTorch> cpp_Function_lambda(Rcpp::Function f);
 RcppExport SEXP _torch_cpp_Function_lambda(SEXP fSEXP) {
@@ -37225,6 +37234,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_torch_cpp_autograd_backward", (DL_FUNC) &_torch_cpp_autograd_backward, 4},
     {"_torch_cpp_tensor_register_hook", (DL_FUNC) &_torch_cpp_tensor_register_hook, 2},
     {"_torch_cpp_tensor_remove_hook", (DL_FUNC) &_torch_cpp_tensor_remove_hook, 2},
+    {"_torch_register_lambda_function_deleter", (DL_FUNC) &_torch_register_lambda_function_deleter, 0},
     {"_torch_cpp_Function_lambda", (DL_FUNC) &_torch_cpp_Function_lambda, 1},
     {"_torch_cpp_Function_apply", (DL_FUNC) &_torch_cpp_Function_apply, 3},
     {"_torch_cpp_autograd_context_save_for_backward", (DL_FUNC) &_torch_cpp_autograd_context_save_for_backward, 2},

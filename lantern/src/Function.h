@@ -1,3 +1,4 @@
+#pragma once
 #include <iostream>
 
 #define LANTERN_BUILD
@@ -6,6 +7,8 @@
 
 #include "lantern/lantern.h"
 #include "utils.hpp"
+
+class LanternLambdaFunction;
 
 namespace torch {
 namespace autograd {
@@ -78,8 +81,7 @@ struct LanternNode : public Node {
   std::vector<bool> is_variable_input_;
   std::vector<VariableInfo> input_info_;
   std::vector<VariableInfo> output_info_;
-  std::function<variable_list(LanternAutogradContext *, variable_list)>
-      backward_;
+  std::shared_ptr<LanternLambdaFunction> backward_;
 
   void release_variables() override;
 

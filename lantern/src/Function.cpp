@@ -1,4 +1,5 @@
 #include "Function.h"
+#include "Autograd.h"
 
 #include <torch/csrc/autograd/functions/accumulate_grad.h>
 #include <torch/torch.h>
@@ -31,14 +32,10 @@ variable_list LanternFunction::apply(
   ) {
   std::shared_ptr<LanternNode> node(new LanternNode(), deleteNode);
 
-  auto forward = *reinterpret_cast<std::function<torch::autograd::variable_list(
-          torch::autograd::LanternAutogradContext *,
-          torch::autograd::variable_list)> *>(forward_);
-  auto backward = *reinterpret_cast<std::function<torch::autograd::variable_list(
-      torch::autograd::LanternAutogradContext *,
-      torch::autograd::variable_list)> *>(backward_);
+  auto forward = reinterpret_cast<LanternLambdaFunction *>(forward_);
+  auto backward = reinterpret_cast<LanternLambdaFunction *>(backward_);
 
-  node->backward_ = backward;
+  node->backward_ = std::shared_ptr<LanternLambdaFunction>(backward);
 
   const size_t num_inputs = args.size();
 
@@ -65,7 +62,8 @@ variable_list LanternFunction::apply(
   variable_list outputs;
   {
     AutoGradMode grad_mode(false);
-    outputs = forward(&node->ctx_, args);
+    outputs = (*forward->fn_)(&node->ctx_, args);
+    delete forward;
     LANTERN_ERROR_HANDLE
   }
 
@@ -111,7 +109,7 @@ variable_list LanternNode::apply(variable_list &&inputs) {
     }
   }
 
-  auto outputs = this->backward_(&ctx_, backward_inputs);
+  auto outputs = (*this->backward_->fn_)(&ctx_, backward_inputs);
   LLOG("Checking outputs")
   if (lanternLastError() != NULL) {
     std::string last = lanternLastError();

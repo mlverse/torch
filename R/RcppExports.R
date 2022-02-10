@@ -49,6 +49,10 @@ cpp_tensor_remove_hook <- function(self, pos) {
     invisible(.Call('_torch_cpp_tensor_remove_hook', PACKAGE = 'torchpkg', self, pos))
 }
 
+register_lambda_function_deleter <- function() {
+    invisible(.Call('_torch_register_lambda_function_deleter', PACKAGE = 'torchpkg'))
+}
+
 cpp_Function_lambda <- function(f) {
     .Call('_torch_cpp_Function_lambda', PACKAGE = 'torchpkg', f)
 }
