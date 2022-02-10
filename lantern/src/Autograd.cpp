@@ -140,12 +140,7 @@ void *_lantern_Function_apply(void *inputs, void *forward, void *backward) {
   LANTERN_FUNCTION_START
   auto out = torch::autograd::LanternFunction::apply(
       from_raw::variable_list(inputs),
-      *reinterpret_cast<std::function<torch::autograd::variable_list(
-          torch::autograd::LanternAutogradContext *,
-          torch::autograd::variable_list)> *>(forward),
-      *reinterpret_cast<std::function<torch::autograd::variable_list(
-          torch::autograd::LanternAutogradContext *,
-          torch::autograd::variable_list)> *>(backward));
+      forward, backward);
 
   return make_raw::variable_list(out);
   LANTERN_FUNCTION_END

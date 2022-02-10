@@ -68,10 +68,8 @@ struct LanternAutogradContext {
 struct LanternFunction {
   static variable_list apply(
       variable_list args,
-      std::function<variable_list(LanternAutogradContext *, variable_list)>
-          forward,
-      std::function<variable_list(LanternAutogradContext *, variable_list)>
-          backward);
+      void* forward,
+      void* backward);
 };
 
 struct LanternNode : public Node {

@@ -26,11 +26,18 @@ namespace autograd {
 
 variable_list LanternFunction::apply(
     variable_list args,
-    std::function<variable_list(LanternAutogradContext *, variable_list)>
-        forward,
-    std::function<variable_list(LanternAutogradContext *, variable_list)>
-        backward) {
+    void* forward_,
+    void* backward_
+  ) {
   std::shared_ptr<LanternNode> node(new LanternNode(), deleteNode);
+
+  auto forward = *reinterpret_cast<std::function<torch::autograd::variable_list(
+          torch::autograd::LanternAutogradContext *,
+          torch::autograd::variable_list)> *>(forward_);
+  auto backward = *reinterpret_cast<std::function<torch::autograd::variable_list(
+      torch::autograd::LanternAutogradContext *,
+      torch::autograd::variable_list)> *>(backward_);
+
   node->backward_ = backward;
 
   const size_t num_inputs = args.size();
