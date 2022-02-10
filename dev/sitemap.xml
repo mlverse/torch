@@ -91,6 +91,12 @@
     <loc>https://torch.mlverse.org/docs/dev/reference/autograd_set_grad_mode.html</loc>
   </url>
   <url>
+    <loc>https://torch.mlverse.org/docs/dev/reference/backends_cudnn_is_available.html</loc>
+  </url>
+  <url>
+    <loc>https://torch.mlverse.org/docs/dev/reference/backends_cudnn_version.html</loc>
+  </url>
+  <url>
     <loc>https://torch.mlverse.org/docs/dev/reference/backends_mkl_is_available.html</loc>
   </url>
   <url>
@@ -119,6 +125,9 @@
   </url>
   <url>
     <loc>https://torch.mlverse.org/docs/dev/reference/cuda_is_available.html</loc>
+  </url>
+  <url>
+    <loc>https://torch.mlverse.org/docs/dev/reference/cuda_memory_stats.html</loc>
   </url>
   <url>
     <loc>https://torch.mlverse.org/docs/dev/reference/dataloader.html</loc>
