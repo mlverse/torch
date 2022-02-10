@@ -219,7 +219,7 @@ Rcpp::XPtr<XPtrTorch> cpp_Function_lambda(Rcpp::Function f) {
                          new torch::variable_list(lantern_variable_list_new()))
   });
 
-  auto deleter = [fun](void* x) { lantern_Function_lambda_delete(x); };
+  auto deleter = [](void* x) { lantern_Function_lambda_delete(x); };
 
   auto out = XPtrTorch(lantern_Function_lambda(&rcpp_call_forward, (void*)fun,
                                                &rcpp_delete_variable_list,
