@@ -71,7 +71,7 @@ At a minimum, when using `dataset()` to create a custom `Dataset` class you'll w
   Note that the function will be called extremely frequently, so it's advantageous to make it fast.
 * `.length` - this will return the amount of data in the dataset, which is helpful for users.
 
-## Penguin Example
+## Example of using a custom Dataset
 
 While this may sound complicated the base logic is only a few steps--the complexity often comes from the data itself
 and how involved your preprocessing is. Here we show how to create
