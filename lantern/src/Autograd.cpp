@@ -9,6 +9,7 @@
 #include "Function.h"
 #include "lantern/lantern.h"
 #include "utils.hpp"
+#include "Autograd.h"
 
 void _lantern_autograd_set_grad_mode(bool enabled) {
   LANTERN_FUNCTION_START
@@ -117,6 +118,21 @@ int64_t _lantern_variable_list_size(void *self) {
   LANTERN_FUNCTION_END_RET(0)
 }
 
+void (*delete_lambda_fun)(void*) = nullptr;
+
+void _set_delete_lambda_fun (void (*fun)(void*)) {
+  delete_lambda_fun = fun;
+}
+
+LanternLambdaFunction::LanternLambdaFunction(autograd_fun fn, void *rcpp_fn) {
+  this->fn_ = std::make_shared<autograd_fun>(fn);
+  this->rcpp_fn = std::shared_ptr<void>(rcpp_fn, [](void * x) {
+    if (delete_lambda_fun != nullptr) {
+      (*delete_lambda_fun)(x);
+    }
+  });
+}
+
 void *_lantern_Function_lambda(void *(*fun)(void *, void *, void *),
                                void *custom, void(delete_out)(void *),
                                void *(*get_ptr)(void *)) {
@@ -130,9 +146,7 @@ void *_lantern_Function_lambda(void *(*fun)(void *, void *, void *),
     (*delete_out)(out);
     return res;
   };
-  return (void *)new std::function<torch::autograd::variable_list(
-      torch::autograd::LanternAutogradContext *,
-      torch::autograd::variable_list)>(out);
+  return (void *)new LanternLambdaFunction(out, custom);
   LANTERN_FUNCTION_END
 }
 
@@ -140,12 +154,7 @@ void *_lantern_Function_apply(void *inputs, void *forward, void *backward) {
   LANTERN_FUNCTION_START
   auto out = torch::autograd::LanternFunction::apply(
       from_raw::variable_list(inputs),
-      *reinterpret_cast<std::function<torch::autograd::variable_list(
-          torch::autograd::LanternAutogradContext *,
-          torch::autograd::variable_list)> *>(forward),
-      *reinterpret_cast<std::function<torch::autograd::variable_list(
-          torch::autograd::LanternAutogradContext *,
-          torch::autograd::variable_list)> *>(backward));
+      forward, backward);
 
   return make_raw::variable_list(out);
   LANTERN_FUNCTION_END

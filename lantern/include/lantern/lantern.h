@@ -2255,6 +2255,14 @@ HOST_API void* lantern_cuda_device_stats (int64_t device)
   return ret;
 }
 
+LANTERN_API void (LANTERN_PTR _set_delete_lambda_fun) (void (*fun)(void*));
+HOST_API void set_delete_lambda_fun (void (*fun)(void*))
+{
+  LANTERN_CHECK_LOADED
+  _set_delete_lambda_fun(fun);
+  LANTERN_HOST_HANDLER;
+}
+
   /* Autogen Headers -- Start */
   LANTERN_API void* (LANTERN_PTR _lantern__cast_byte_tensor_bool)(void* self, void* non_blocking);
   HOST_API void* lantern__cast_byte_tensor_bool(void* self, void* non_blocking) { LANTERN_CHECK_LOADED void* ret = _lantern__cast_byte_tensor_bool(self, non_blocking); LANTERN_HOST_HANDLER return ret; }
@@ -8177,6 +8185,7 @@ LOAD_SYMBOL(_lantern_cuda_get_device_capability);
 LOAD_SYMBOL(_lantern_cudnn_runtime_version);
 LOAD_SYMBOL(_lantern_cudnn_is_available);
 LOAD_SYMBOL(_lantern_cuda_device_stats)
+LOAD_SYMBOL(_set_delete_lambda_fun);
   /* Autogen Symbols -- Start */
   LOAD_SYMBOL(_lantern__cast_byte_tensor_bool)
   LOAD_SYMBOL(_lantern__cast_char_tensor_bool)
