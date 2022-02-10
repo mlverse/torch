@@ -6,7 +6,7 @@ on:
       - master
       - main
       - "cran/**"
-      - "libtorch1.10"
+      - "libtorch1.10.2"
 
 jobs:
   build:
