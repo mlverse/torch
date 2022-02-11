@@ -20,6 +20,7 @@
 - Added `nn_flatten` and `nn_unflatten` modules. (#773)
 - Added `cuda_memory_stats()` and `cuda_memory_summary()` to verify the amount of memory torch is using from the GPU. (#774)
 - Added `backends_cudnn_version()` to query the CuDNN version found by torch. (#774)
+- Dataloaders are slightly faster with a new transpose function. (#783)
 
 # torch 0.6.1
 
