@@ -21,10 +21,10 @@ if (torch_is_installed()) {
 input <- torch_randn(2, 50)
 
 m <- nn_sequential(
-        nn_linear(50, 50),
-        nn_unflatten(2, c(2, 5, 5))
-    )
-output = m(input)
+  nn_linear(50, 50),
+  nn_unflatten(2, c(2, 5, 5))
+)
+output <- m(input)
 output$size()
 
 }
