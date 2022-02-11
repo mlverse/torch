@@ -11409,6 +11409,10 @@ cpp_torch_namespace__store_main_thread_id <- function() {
     invisible(.Call('_torch_cpp_torch_namespace__store_main_thread_id', PACKAGE = 'torchpkg'))
 }
 
+transpose2 <- function(x) {
+    .Call('_torch_transpose2', PACKAGE = 'torchpkg', x)
+}
+
 cpp_torch_variable_list <- function(x) {
     .Call('_torch_cpp_torch_variable_list', PACKAGE = 'torchpkg', x)
 }
