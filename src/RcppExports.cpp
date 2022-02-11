@@ -37160,6 +37160,17 @@ BEGIN_RCPP
     return R_NilValue;
 END_RCPP
 }
+// transpose2
+Rcpp::List transpose2(Rcpp::List x);
+RcppExport SEXP _torch_transpose2(SEXP xSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< Rcpp::List >::type x(xSEXP);
+    rcpp_result_gen = Rcpp::wrap(transpose2(x));
+    return rcpp_result_gen;
+END_RCPP
+}
 // cpp_torch_variable_list
 Rcpp::XPtr<XPtrTorchvariable_list> cpp_torch_variable_list(const Rcpp::List& x);
 RcppExport SEXP _torch_cpp_torch_variable_list(SEXP xSEXP) {
@@ -40071,6 +40082,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_torch_to_index_tensor", (DL_FUNC) &_torch_to_index_tensor, 1},
     {"_torch_cpp_torch_namespace__use_cudnn_rnn_flatten_weight", (DL_FUNC) &_torch_cpp_torch_namespace__use_cudnn_rnn_flatten_weight, 0},
     {"_torch_cpp_torch_namespace__store_main_thread_id", (DL_FUNC) &_torch_cpp_torch_namespace__store_main_thread_id, 0},
+    {"_torch_transpose2", (DL_FUNC) &_torch_transpose2, 1},
     {"_torch_cpp_torch_variable_list", (DL_FUNC) &_torch_cpp_torch_variable_list, 1},
     {"_torch_cpp_variable_list_to_r_list", (DL_FUNC) &_torch_cpp_variable_list_to_r_list, 1},
     {"_torch_set_xptr_address", (DL_FUNC) &_torch_set_xptr_address, 2},

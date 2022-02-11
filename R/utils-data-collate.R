@@ -21,14 +21,7 @@ utils_data_default_collate <- function(batch) {
   } else if (is.character(elem) && length(elem) == 1) {
     return(unlist(batch))
   } else if (is.list(elem)) {
-
-    # preserves the element names
-    named_seq <- seq_along(elem)
-    names(named_seq) <- names(elem)
-
-    lapply(named_seq, function(i) {
-      utils_data_default_collate(lapply(batch, function(x) x[[i]]))
-    })
+    lapply(transpose2(batch), utils_data_default_collate)
   } else {
     value_error("Can't collate data of class: '{class(data)}'")
   }
