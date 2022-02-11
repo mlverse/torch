@@ -133,6 +133,19 @@ torch::Tensor torch_tensor_cpp (SEXP x,
   return tensor;
 }
 
+
+// A faster version of `lapply(x, torch_tensor)`.
+// [[Rcpp::export]]
+Rcpp::List list_of_tensors (Rcpp::List x) {
+  int n = x.size();
+  Rcpp::List out(n);
+  for (int i = 0; i < n; i++) {
+    SEXP v = x[i];
+    out[i] = Rcpp::wrap(torch_tensor_cpp(v));
+  }
+  return out;
+}
+
 Rcpp::IntegerVector tensor_dimensions(torch::Tensor x) {
   int64_t ndim = lantern_Tensor_ndimension(x.get());
   Rcpp::IntegerVector dimensions(ndim);

@@ -7,11 +7,7 @@ utils_data_default_collate <- function(batch) {
     # we want arrays, matrix's and vectors (lenght > 1) to be converted to
     # tensors. this is only different fromr torch because there's differentiation
     # between lenght 1 vectors and scalars.
-    return(
-      utils_data_default_collate(
-        lapply(batch, function(x) torch_tensor(x))
-      )
-    )
+    return(utils_data_default_collate(list_of_tensors(batch)))
   } else if (is.integer(elem) && length(elem) == 1) {
     k <- unlist(batch)
     return(torch_tensor(k, dtype = torch_long()))
