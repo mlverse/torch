@@ -11261,8 +11261,12 @@ cpp_torch_tensor_dtype <- function(x) {
     .Call('_torch_cpp_torch_tensor_dtype', PACKAGE = 'torchpkg', x)
 }
 
-cpp_torch_tensor <- function(x, dim, options, requires_grad, is_integer64) {
-    .Call('_torch_cpp_torch_tensor', PACKAGE = 'torchpkg', x, dim, options, requires_grad, is_integer64)
+torch_tensor_cpp <- function(x, dtype, device, requires_grad, pin_memory) {
+    .Call('_torch_torch_tensor_cpp', PACKAGE = 'torchpkg', x, dtype, device, requires_grad, pin_memory)
+}
+
+list_of_tensors <- function(x) {
+    .Call('_torch_list_of_tensors', PACKAGE = 'torchpkg', x)
 }
 
 cpp_as_array <- function(x) {

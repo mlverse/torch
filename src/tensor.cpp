@@ -54,77 +54,96 @@ Rcpp::XPtr<XPtrTorchDtype> cpp_torch_tensor_dtype(torch::Tensor x) {
   return make_xptr<XPtrTorchDtype>(out);
 }
 
-// equivalent to (n-1):0 in R
-std::vector<int64_t> revert_int_seq(int n) {
-  std::vector<int64_t> l(n);
-  std::iota(l.begin(), l.end(), 0);
-  std::reverse(l.begin(), l.end());
-  return l;
-};
-
-template <int RTYPE>
-torch::Tensor tensor_from_r_array(const SEXP x, std::vector<int64_t> dim,
-                                  std::string dtype) {
-  Rcpp::Vector<RTYPE> vec(x);
-
-  torch::TensorOptions options = lantern_TensorOptions();
-
-  if (dtype == "double") {
-    options = lantern_TensorOptions_dtype(
-        options.get(), XPtrTorchDtype(lantern_Dtype_float64()).get());
-  } else if (dtype == "int") {
-    options = lantern_TensorOptions_dtype(
-        options.get(), XPtrTorchDtype(lantern_Dtype_int32()).get());
-  } else if (dtype == "int64") {
-    options = lantern_TensorOptions_dtype(
-        options.get(), XPtrTorchDtype(lantern_Dtype_int64()).get());
+std::vector<int64_t> stride_from_dim (std::vector<int64_t> x) {
+  auto ret = std::vector<int64_t>(x.size());
+  ret[0] = 1;
+  for (int i = 1; i < x.size(); i++) {
+    ret[i] = ret[i-1]*x[i-1];
   }
+  return ret;
+}
 
-  options = lantern_TensorOptions_device(
-      options.get(), XPtrTorchDevice(lantern_Device("cpu", 0, false)).get());
-
-  torch::Tensor tensor =
-      lantern_from_blob(vec.begin(), &dim[0], dim.size(), options.get());
-
+// [[Rcpp::export]]
+torch::Tensor torch_tensor_cpp (SEXP x, 
+                                Rcpp::Nullable<torch::Dtype> dtype,
+                                Rcpp::Nullable<torch::Device> device,
+                                bool requires_grad,
+                                bool pin_memory) {
+  
+  torch::Dtype cdtype;
+  torch::Dtype final_type;
+  
+  switch (TYPEOF(x)) {
+  case INTSXP: {
+    cdtype = lantern_Dtype_int32();
+    final_type = dtype.isNull() ? torch::Dtype(lantern_Dtype_int64()) : Rcpp::as<torch::Dtype>(dtype);
+    break;
+  }
+  case REALSXP: {
+    auto is_int64 = Rf_inherits(x, "integer64");
+    cdtype = is_int64 ? lantern_Dtype_int64() : lantern_Dtype_float64();
+    if (dtype.isNull()) {
+      final_type = is_int64 ? lantern_Dtype_int64() : lantern_Dtype_float32();
+    } else {
+      final_type = Rcpp::as<torch::Dtype>(dtype);
+    }
+    break;
+  }
+  case LGLSXP: {
+    cdtype = lantern_Dtype_int32();
+    final_type = dtype.isNull() ? torch::Dtype(lantern_Dtype_bool()) : Rcpp::as<torch::Dtype>(dtype);
+    break;
+  }
+  default: {
+    Rcpp::stop("R type not handled");
+  }
+  }
+  
+  // We now create the first tensor wrapping the R object. Here we use `cdtype`
+  // For example when the SEXP is a logical vector, it actually store values as
+  // int32 so we first create a int32 tensor and then cast to a boolean.
+  torch::TensorOptions options = lantern_TensorOptions();
+  options = lantern_TensorOptions_dtype(options.get(), cdtype.get());
+  
+  auto d = Rcpp::as<Rcpp::Nullable<std::vector<int64_t>>>(Rf_getAttrib(x, R_DimSymbol));
+  auto dim = d.isNotNull() ? Rcpp::as<std::vector<int64_t>>(d) : std::vector<int64_t>(1, LENGTH(x));
+  auto strides = stride_from_dim(dim);
+  
+  torch::Tensor tensor = lantern_from_blob(DATAPTR(x), 
+                                           &dim[0], dim.size(), 
+                                           &strides[0], strides.size(), 
+                                           options.get());
+  
   if (dim.size() == 1) {
     // if we have a 1-dim vector contigous doesn't trigger a copy, and
     // would be unexpected.
     tensor = lantern_Tensor_clone(tensor.get());
   }
-
-  auto reverse_dim = revert_int_seq(dim.size());
-  tensor = lantern_Tensor_permute(
-      tensor.get(),
-      XPtrTorchvector_int64_t(
-          lantern_vector_int64_t(&reverse_dim[0], reverse_dim.size()))
-          .get());
   tensor = lantern_Tensor_contiguous(tensor.get());
-
-  return tensor;
-};
-
-// [[Rcpp::export]]
-torch::Tensor cpp_torch_tensor(SEXP x, std::vector<std::int64_t> dim,
-                               torch::TensorOptions options, bool requires_grad,
-                               bool is_integer64) {
-  torch::Tensor tensor;
-
-  if (TYPEOF(x) == INTSXP) {
-    tensor = tensor_from_r_array<INTSXP>(x, dim, "int");
-  } else if (TYPEOF(x) == REALSXP && !is_integer64) {
-    tensor = tensor_from_r_array<REALSXP>(x, dim, "double");
-  } else if (TYPEOF(x) == REALSXP && is_integer64) {
-    tensor = tensor_from_r_array<REALSXP>(x, dim, "int64");
-  } else if (TYPEOF(x) == LGLSXP) {
-    tensor = tensor_from_r_array<LGLSXP>(x, dim, "int");
-  } else {
-    Rcpp::stop("R type not handled");
-  };
-
+  
+  // We will now cast to the final options.
+  options = lantern_TensorOptions_dtype(options.get(), final_type.get());
+  if (device.isNotNull()) {
+    options = lantern_TensorOptions_device(options.get(), Rcpp::as<torch::Device>(device).get());
+  }
+  options = lantern_TensorOptions_pinned_memory(options.get(), pin_memory);
   tensor = lantern_Tensor_to(tensor.get(), options.get());
   tensor = lantern_Tensor_set_requires_grad(tensor.get(), requires_grad);
-
+  
   return tensor;
+}
+
+
+// A faster version of `lapply(x, torch_tensor)`.
+// [[Rcpp::export]]
+Rcpp::List list_of_tensors (Rcpp::List x) {
+  int n = x.size();
+  Rcpp::List out(n);
+  for (int i = 0; i < n; i++) {
+    SEXP v = x[i];
+    out[i] = Rcpp::wrap(torch_tensor_cpp(v));
+  }
+  return out;
 }
 
 Rcpp::IntegerVector tensor_dimensions(torch::Tensor x) {

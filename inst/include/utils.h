@@ -95,5 +95,10 @@ std::array<type, n> std_vector_to_std_array(std::vector<type> x) {
 
 XPtrTorchTensor cpp_tensor_undefined();
 XPtrTorchTensor to_index_tensor(XPtrTorchTensor t);
+torch::Tensor torch_tensor_cpp (SEXP x, 
+                                Rcpp::Nullable<torch::Dtype> dtype = R_NilValue,
+                                Rcpp::Nullable<torch::Device> device = R_NilValue,
+                                bool requires_grad = false,
+                                bool pin_memory = false);
 
 std::thread::id main_thread_id() noexcept;

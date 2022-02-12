@@ -184,8 +184,6 @@ LANTERN_OPTIONAL_DECLS(string_view)
   HOST_API const char * lantern_Device_type(void *device) {LANTERN_CHECK_LOADED const char * ret = _lantern_Device_type(device); LANTERN_HOST_HANDLER return ret;}
   LANTERN_API int64_t(LANTERN_PTR _lantern_Device_index)(void *device);
   HOST_API int64_t lantern_Device_index(void *device) {LANTERN_CHECK_LOADED int64_t ret = _lantern_Device_index(device); LANTERN_HOST_HANDLER return ret;}
-  LANTERN_API void *(LANTERN_PTR _lantern_from_blob)(void *data, int64_t *sizes, size_t sizes_size, void *options);
-  HOST_API void * lantern_from_blob(void *data, int64_t *sizes, size_t sizes_size, void *options) {LANTERN_CHECK_LOADED void * ret = _lantern_from_blob(data, sizes, sizes_size, options); LANTERN_HOST_HANDLER return ret;}
   LANTERN_API const char *(LANTERN_PTR _lantern_Tensor_StreamInsertion)(void *x);
   HOST_API const char * lantern_Tensor_StreamInsertion(void *x) {LANTERN_CHECK_LOADED const char * ret = _lantern_Tensor_StreamInsertion(x); LANTERN_HOST_HANDLER return ret;}
   LANTERN_API void *(LANTERN_PTR _lantern_TensorOptions)();
@@ -2261,6 +2259,16 @@ HOST_API void set_delete_lambda_fun (void (*fun)(void*))
   LANTERN_CHECK_LOADED
   _set_delete_lambda_fun(fun);
   LANTERN_HOST_HANDLER;
+}
+
+LANTERN_API void* (LANTERN_PTR _lantern_from_blob) (void* data, int64_t *sizes, size_t sizes_size,
+                          int64_t* strides, size_t strides_size, void* options);
+HOST_API void* lantern_from_blob(void* data, int64_t *sizes, size_t sizes_size,
+                          int64_t* strides, size_t strides_size, void* options) { 
+  LANTERN_CHECK_LOADED
+  void* ret = _lantern_from_blob(data, sizes, sizes_size, strides, strides_size, options);
+  LANTERN_HOST_HANDLER;
+  return ret;
 }
 
   /* Autogen Headers -- Start */
