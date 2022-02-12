@@ -12,7 +12,7 @@
 - `torch_sort` and `Tensor$sort` now return 1-indexed results. (#709, @mohamed-180)
 - Simplified concurrency related constructs in autograd. (#755, @yitao-li)
 - R and C++ code cleanup, styling, and formatting. (#753, @hsbadr)
-- Support for LibTorch 1.10.2 (#758, #763, #775, @hsbadr). See also [release notes](https://github.com/pytorch/pytorch/releases/tag/v1.10.0) for the PyTorch v1.10.
+- Support for LibTorch 1.10.2. See also [release notes](https://github.com/pytorch/pytorch/releases/tag/v1.10.0) for the PyTorch v1.10. (#758, #763, #775, @hsbadr).
 - Changed default `dim` from `1` to `2` in `nnf_cosine_similarity`. (#769)
 - The default value for arguments of various functions have changed. A bug in the code generation was truncating the default values specially if they were float values that needed more than 6 digit precision. (#770)
 - Fixed a bug that caused `autograd_grad` to deadlock when used with custom autograd functions. (#771)
@@ -21,6 +21,7 @@
 - Added `cuda_memory_stats()` and `cuda_memory_summary()` to verify the amount of memory torch is using from the GPU. (#774)
 - Added `backends_cudnn_version()` to query the CuDNN version found by torch. (#774)
 - Dataloaders are slightly faster with a new transpose function. (#783)
+- `torch_tensor` is now a C++ only function slighly increasing performance in a few situations. (#784)
 
 # torch 0.6.1
 
