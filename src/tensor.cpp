@@ -86,7 +86,8 @@ torch::Tensor create_tensor_from_atomic (SEXP x, torch::Dtype cdtype) {
 }
 
 torch::Tensor create_tensor_from_tensor (SEXP x) {
-  return lantern_Tensor_clone(Rcpp::as<torch::Tensor>(x).get());
+  torch::Tensor tensor = lantern_Tensor_clone(Rcpp::as<torch::Tensor>(x).get());
+  return lantern_detach_tensor(tensor.get());
 }
 
 // [[Rcpp::export]]
