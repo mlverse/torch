@@ -92,7 +92,7 @@
 <code>torch_sort</code> and <code>Tensor$sort</code> now return 1-indexed results. (<a href="https://github.com/mlverse/torch/issues/709" class="external-link">#709</a>, <a href="https://github.com/mohamed-180" class="external-link">@mohamed-180</a>)</li>
 <li>Simplified concurrency related constructs in autograd. (<a href="https://github.com/mlverse/torch/issues/755" class="external-link">#755</a>, <a href="https://github.com/yitao-li" class="external-link">@yitao-li</a>)</li>
 <li>R and C++ code cleanup, styling, and formatting. (<a href="https://github.com/mlverse/torch/issues/753" class="external-link">#753</a>, <a href="https://github.com/hsbadr" class="external-link">@hsbadr</a>)</li>
-<li>Support for LibTorch 1.10.2 (<a href="https://github.com/mlverse/torch/issues/758" class="external-link">#758</a>, <a href="https://github.com/mlverse/torch/issues/763" class="external-link">#763</a>, <a href="https://github.com/mlverse/torch/issues/775" class="external-link">#775</a>, <a href="https://github.com/hsbadr" class="external-link">@hsbadr</a>). See also <a href="https://github.com/pytorch/pytorch/releases/tag/v1.10.0" class="external-link">release notes</a> for the PyTorch v1.10.</li>
+<li>Support for LibTorch 1.10.2. See also <a href="https://github.com/pytorch/pytorch/releases/tag/v1.10.0" class="external-link">release notes</a> for the PyTorch v1.10. (<a href="https://github.com/mlverse/torch/issues/758" class="external-link">#758</a>, <a href="https://github.com/mlverse/torch/issues/763" class="external-link">#763</a>, <a href="https://github.com/mlverse/torch/issues/775" class="external-link">#775</a>, <a href="https://github.com/hsbadr" class="external-link">@hsbadr</a>).</li>
 <li>Changed default <code>dim</code> from <code>1</code> to <code>2</code> in <code>nnf_cosine_similarity</code>. (<a href="https://github.com/mlverse/torch/issues/769" class="external-link">#769</a>)</li>
 <li>The default value for arguments of various functions have changed. A bug in the code generation was truncating the default values specially if they were float values that needed more than 6 digit precision. (<a href="https://github.com/mlverse/torch/issues/770" class="external-link">#770</a>)</li>
 <li>Fixed a bug that caused <code>autograd_grad</code> to deadlock when used with custom autograd functions. (<a href="https://github.com/mlverse/torch/issues/771" class="external-link">#771</a>)</li>
@@ -101,6 +101,8 @@
 <li>Added <code><a href="../reference/cuda_memory_stats.html">cuda_memory_stats()</a></code> and <code><a href="../reference/cuda_memory_stats.html">cuda_memory_summary()</a></code> to verify the amount of memory torch is using from the GPU. (<a href="https://github.com/mlverse/torch/issues/774" class="external-link">#774</a>)</li>
 <li>Added <code><a href="../reference/backends_cudnn_version.html">backends_cudnn_version()</a></code> to query the CuDNN version found by torch. (<a href="https://github.com/mlverse/torch/issues/774" class="external-link">#774</a>)</li>
 <li>Dataloaders are slightly faster with a new transpose function. (<a href="https://github.com/mlverse/torch/issues/783" class="external-link">#783</a>)</li>
+<li>
+<code>torch_tensor</code> is now a C++ only function slighly increasing performance in a few situations. (<a href="https://github.com/mlverse/torch/issues/784" class="external-link">#784</a>)</li>
 </ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.6.1" id="torch-061">torch 0.6.1<a class="anchor" aria-label="anchor" href="#torch-061"></a></h2>
