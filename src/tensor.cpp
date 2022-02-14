@@ -63,6 +63,33 @@ std::vector<int64_t> stride_from_dim (std::vector<int64_t> x) {
   return ret;
 }
 
+torch::Tensor create_tensor_from_atomic (SEXP x, torch::Dtype cdtype) {
+  torch::TensorOptions options = lantern_TensorOptions();
+  options = lantern_TensorOptions_dtype(options.get(), cdtype.get());
+  
+  auto d = Rcpp::as<Rcpp::Nullable<std::vector<int64_t>>>(Rf_getAttrib(x, R_DimSymbol));
+  auto dim = d.isNotNull() ? Rcpp::as<std::vector<int64_t>>(d) : std::vector<int64_t>(1, LENGTH(x));
+  auto strides = stride_from_dim(dim);
+  
+  torch::Tensor tensor = lantern_from_blob(DATAPTR(x), 
+                                           &dim[0], dim.size(), 
+                                           &strides[0], strides.size(), 
+                                           options.get());
+  if (dim.size() == 1) {
+    // if we have a 1-dim vector contigous doesn't trigger a copy, and
+    // would be unexpected.
+    tensor = lantern_Tensor_clone(tensor.get());
+  }
+  tensor = lantern_Tensor_contiguous(tensor.get());
+  
+  return tensor;
+}
+
+torch::Tensor create_tensor_from_tensor (SEXP x) {
+  torch::Tensor tensor = lantern_Tensor_clone(Rcpp::as<torch::Tensor>(x).get());
+  return lantern_detach_tensor(tensor.get());
+}
+
 // [[Rcpp::export]]
 torch::Tensor torch_tensor_cpp (SEXP x, 
                                 Rcpp::Nullable<torch::Dtype> dtype,
@@ -94,6 +121,13 @@ torch::Tensor torch_tensor_cpp (SEXP x,
     final_type = dtype.isNull() ? torch::Dtype(lantern_Dtype_bool()) : Rcpp::as<torch::Dtype>(dtype);
     break;
   }
+  case EXTPTRSXP: {
+    if (Rf_inherits(x, "torch_tensor")) {
+      cdtype = lantern_Tensor_dtype(Rcpp::as<torch::Tensor>(x).get());
+      final_type = dtype.isNull() ? cdtype : Rcpp::as<torch::Dtype>(dtype);
+      break;
+    }
+  }
   default: {
     Rcpp::stop("R type not handled");
   }
@@ -102,26 +136,10 @@ torch::Tensor torch_tensor_cpp (SEXP x,
   // We now create the first tensor wrapping the R object. Here we use `cdtype`
   // For example when the SEXP is a logical vector, it actually store values as
   // int32 so we first create a int32 tensor and then cast to a boolean.
-  torch::TensorOptions options = lantern_TensorOptions();
-  options = lantern_TensorOptions_dtype(options.get(), cdtype.get());
-  
-  auto d = Rcpp::as<Rcpp::Nullable<std::vector<int64_t>>>(Rf_getAttrib(x, R_DimSymbol));
-  auto dim = d.isNotNull() ? Rcpp::as<std::vector<int64_t>>(d) : std::vector<int64_t>(1, LENGTH(x));
-  auto strides = stride_from_dim(dim);
-  
-  torch::Tensor tensor = lantern_from_blob(DATAPTR(x), 
-                                           &dim[0], dim.size(), 
-                                           &strides[0], strides.size(), 
-                                           options.get());
-  
-  if (dim.size() == 1) {
-    // if we have a 1-dim vector contigous doesn't trigger a copy, and
-    // would be unexpected.
-    tensor = lantern_Tensor_clone(tensor.get());
-  }
-  tensor = lantern_Tensor_contiguous(tensor.get());
+  torch::Tensor tensor = (TYPEOF(x) != EXTPTRSXP) ? create_tensor_from_atomic(x, cdtype) : create_tensor_from_tensor(x);
   
   // We will now cast to the final options.
+  torch::TensorOptions options = lantern_TensorOptions();
   options = lantern_TensorOptions_dtype(options.get(), final_type.get());
   if (device.isNotNull()) {
     options = lantern_TensorOptions_device(options.get(), Rcpp::as<torch::Device>(device).get());
@@ -131,19 +149,6 @@ torch::Tensor torch_tensor_cpp (SEXP x,
   tensor = lantern_Tensor_set_requires_grad(tensor.get(), requires_grad);
   
   return tensor;
-}
-
-
-// A faster version of `lapply(x, torch_tensor)`.
-// [[Rcpp::export]]
-Rcpp::List list_of_tensors (Rcpp::List x) {
-  int n = x.size();
-  Rcpp::List out(n);
-  for (int i = 0; i < n; i++) {
-    SEXP v = x[i];
-    out[i] = Rcpp::wrap(torch_tensor_cpp(v));
-  }
-  return out;
 }
 
 Rcpp::IntegerVector tensor_dimensions(torch::Tensor x) {
