@@ -1,9 +1,9 @@
 #include "Function.h"
-#include "Autograd.h"
 
 #include <torch/csrc/autograd/functions/accumulate_grad.h>
 #include <torch/torch.h>
 
+#include "Autograd.h"
 #include "lantern/lantern.h"
 
 #define LANTERN_ERROR_HANDLE               \
@@ -25,11 +25,8 @@ inline std::vector<c10::optional<torch::autograd::Variable>> to_optional(
 namespace torch {
 namespace autograd {
 
-variable_list LanternFunction::apply(
-    variable_list args,
-    void* forward_,
-    void* backward_
-  ) {
+variable_list LanternFunction::apply(variable_list args, void *forward_,
+                                     void *backward_) {
   std::shared_ptr<LanternNode> node(new LanternNode(), deleteNode);
 
   auto forward = reinterpret_cast<LanternLambdaFunction *>(forward_);

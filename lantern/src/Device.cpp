@@ -29,6 +29,8 @@ void *_lantern_Device(const char *type, int64_t index, bool useIndex) {
     deviceType = torch::DeviceType::FPGA;
   } else if (deviceName == "xla") {
     deviceType = torch::DeviceType::XLA;
+  } else if (deviceName == "meta") {
+    deviceType = torch::DeviceType::Meta;
   }
 
   torch::Device device = torch::Device(deviceType);
@@ -64,6 +66,8 @@ const char *_lantern_Device_type(void *device) {
     str = "fpga";
   } else if (type == torch::DeviceType::XLA) {
     str = "xla";
+  } else if (type == torch::DeviceType::Meta) {
+    str = "meta";
   } else {
     str = "unknown";
   }
