@@ -13,7 +13,14 @@ Tensor <- R7Class(
     },
     print = function(n = 30) {
       cat("torch_tensor\n")
-      cpp_torch_tensor_print(self$ptr, n)
+      if (!is_meta_device(self$device)) {
+        cpp_torch_tensor_print(self$ptr, n)  
+      } else {
+        cat ("...\n")
+        dtype <- as.character(self$dtype)
+        shape <- paste(self$shape, collapse = ",")
+        cat("[ META", dtype, "Type{",shape, "} ]", sep = "")
+      }
       if (!is_undefined_tensor(self)) {
         if (!is.null(self$ptr$grad_fn)) {
           cat("[ grad_fn = <")
@@ -402,3 +409,4 @@ str.torch_tensor <- function(object, ...) {
 Tensor$set("active", "ptr", function() {
   self
 })
+
