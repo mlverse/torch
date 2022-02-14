@@ -18,7 +18,6 @@ NULL
 #' input <- torch_randn(32, 1, 5, 5)
 #' m <- nn_flatten()
 #' m(input)
-#'
 #' @seealso [nn_unflatten]
 #' @export
 nn_flatten <- nn_module(
@@ -47,7 +46,6 @@ nn_flatten <- nn_module(
 #' )
 #' output <- m(input)
 #' output$size()
-#'
 #' @export
 nn_unflatten <- nn_module(
   "nn_unflatten",

@@ -63,30 +63,30 @@ std::thread::id main_thread_id() noexcept {
 }
 
 // [[Rcpp::export]]
-Rcpp::List transpose2 (Rcpp::List x) {
+Rcpp::List transpose2(Rcpp::List x) {
   auto templ = Rcpp::as<Rcpp::List>(x[0]);
   auto num_elements = templ.length();
-  
+
   auto size = x.length();
   std::vector<Rcpp::List> out;
-  
+
   for (auto i = 0; i < num_elements; i++) {
     out.push_back(Rcpp::List(size));
   }
-  
+
   for (size_t j = 0; j < size; j++) {
     auto el = Rcpp::as<Rcpp::List>(x[j]);
     for (auto i = 0; i < num_elements; i++) {
       out[i][j] = el[i];
     }
   }
-  
+
   Rcpp::List ret;
   for (auto i = 0; i < num_elements; i++) {
     ret.push_back(out[i]);
   }
-  
+
   ret.names() = templ.names();
-  
+
   return ret;
 }

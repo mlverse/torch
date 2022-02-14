@@ -69,10 +69,7 @@ struct LanternAutogradContext {
 };
 
 struct LanternFunction {
-  static variable_list apply(
-      variable_list args,
-      void* forward,
-      void* backward);
+  static variable_list apply(variable_list args, void *forward, void *backward);
 };
 
 struct LanternNode : public Node {
