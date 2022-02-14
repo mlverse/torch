@@ -11,10 +11,9 @@ utils_data_default_collate <- function(batch) {
   if (is_torch_tensor(elem)) {
     return(torch_stack(batch, dim = 1))
   } else if (is_tensor_like(elem)) {
-    # we want arrays, matrix's and vectors (lenght > 1) to be converted to
-    # tensors. this is only different fromr torch because there's differentiation
-    # between lenght 1 vectors and scalars.
-    return(stack_list_of_tensors(batch))
+    # here we rely on tensor like atomic vectors to be cast to torch tensors 
+    # before stacking.
+    return(torch_stack(batch, dim = 1))
   } else if (is.integer(elem) && length(elem) == 1) {
     k <- unlist(batch)
     return(torch_tensor(k, dtype = torch_long()))

@@ -150,21 +150,6 @@ torch::Tensor torch_tensor_cpp (SEXP x,
   return tensor;
 }
 
-
-// A faster version of `torch_stack(lapply(x, torch_tensor), dim = 1)`.
-// [[Rcpp::export]]
-torch::Tensor stack_list_of_tensors (Rcpp::List x) {
-  int n = x.size();
-  torch::TensorList out = lantern_TensorList();
-  torch::int64_t dim(Rcpp::wrap(0)); 
-  for (int i = 0; i < n; i++) {
-    auto v = torch_tensor_cpp(x[i]);
-    lantern_TensorList_push_back(out.get(), v.get());
-  }
-  torch::Tensor res = lantern_stack_tensorlist_intt(out.get(), dim.get());
-  return res;
-}
-
 Rcpp::IntegerVector tensor_dimensions(torch::Tensor x) {
   int64_t ndim = lantern_Tensor_ndimension(x.get());
   Rcpp::IntegerVector dimensions(ndim);

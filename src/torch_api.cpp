@@ -126,7 +126,6 @@ XPtrTorchTensor from_sexp_tensor(SEXP x) {
     return cpp_tensor_undefined();
   }
 
-  // TODO: it would be nice to make it all C++
   if (Rf_isVectorAtomic(x)) {
     return torch_tensor_cpp(x);
   }
