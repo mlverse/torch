@@ -134,16 +134,18 @@ torch::Tensor torch_tensor_cpp (SEXP x,
 }
 
 
-// A faster version of `lapply(x, torch_tensor)`.
+// A faster version of `torch_stack(lapply(x, torch_tensor), dim = 1)`.
 // [[Rcpp::export]]
-Rcpp::List list_of_tensors (Rcpp::List x) {
+torch::Tensor stack_list_of_tensors (Rcpp::List x) {
   int n = x.size();
-  Rcpp::List out(n);
+  torch::TensorList out = lantern_TensorList();
+  torch::int64_t dim(Rcpp::wrap(0)); 
   for (int i = 0; i < n; i++) {
-    SEXP v = x[i];
-    out[i] = Rcpp::wrap(torch_tensor_cpp(v));
+    auto v = torch_tensor_cpp(x[i]);
+    lantern_TensorList_push_back(out.get(), v.get());
   }
-  return out;
+  torch::Tensor res = lantern_stack_tensorlist_intt(out.get(), dim.get());
+  return res;
 }
 
 Rcpp::IntegerVector tensor_dimensions(torch::Tensor x) {
