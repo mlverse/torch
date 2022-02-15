@@ -1,17 +1,19 @@
+is_tensor_like <- function(x) {
+  # we want arrays, matrix's and vectors (lenght > 1) to be converted to
+  # tensors. this is only different from torch because there are native
+  # scalar types in Python
+  has_tensor_like_types <- is.atomic(x) && (!is.character(x))
+  has_tensor_like_types && (length(x) > 1 || is.array(x) || is.matrix(x))
+}
+
 utils_data_default_collate <- function(batch) {
   elem <- batch[[1]]
   if (is_torch_tensor(elem)) {
     return(torch_stack(batch, dim = 1))
-  } else if ((!is.character(elem) && !is.list(elem)) && is.atomic(elem) &&
-    (is.array(elem) || is.matrix(elem) || length(elem) > 1)) {
-    # we want arrays, matrix's and vectors (lenght > 1) to be converted to
-    # tensors. this is only different fromr torch because there's differentiation
-    # between lenght 1 vectors and scalars.
-    return(
-      utils_data_default_collate(
-        lapply(batch, function(x) torch_tensor(x))
-      )
-    )
+  } else if (is_tensor_like(elem)) {
+    # here we rely on tensor like atomic vectors to be cast to torch tensors
+    # before stacking.
+    return(torch_stack(batch, dim = 1))
   } else if (is.integer(elem) && length(elem) == 1) {
     k <- unlist(batch)
     return(torch_tensor(k, dtype = torch_long()))
@@ -21,14 +23,7 @@ utils_data_default_collate <- function(batch) {
   } else if (is.character(elem) && length(elem) == 1) {
     return(unlist(batch))
   } else if (is.list(elem)) {
-
-    # preserves the element names
-    named_seq <- seq_along(elem)
-    names(named_seq) <- names(elem)
-
-    lapply(named_seq, function(i) {
-      utils_data_default_collate(lapply(batch, function(x) x[[i]]))
-    })
+    lapply(transpose2(batch), utils_data_default_collate)
   } else {
     value_error("Can't collate data of class: '{class(data)}'")
   }

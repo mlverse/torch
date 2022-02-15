@@ -394,3 +394,10 @@ test_that("using with optim", {
     gctorture(FALSE)
   })
 })
+
+test_that("can create tensors from tensors", {
+  x <- torch_tensor(1)
+  y <- torch_tensor(x)
+  expect_false(rlang::obj_address(x) == rlang::obj_address(y))
+  expect_equal_to_tensor(x, y)
+})

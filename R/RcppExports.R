@@ -49,6 +49,10 @@ cpp_tensor_remove_hook <- function(self, pos) {
     invisible(.Call('_torch_cpp_tensor_remove_hook', PACKAGE = 'torchpkg', self, pos))
 }
 
+register_lambda_function_deleter <- function() {
+    invisible(.Call('_torch_register_lambda_function_deleter', PACKAGE = 'torchpkg'))
+}
+
 cpp_Function_lambda <- function(f) {
     .Call('_torch_cpp_Function_lambda', PACKAGE = 'torchpkg', f)
 }
@@ -10025,20 +10029,20 @@ cpp_torch_namespace_thnn_conv2d_self_Tensor_weight_Tensor_kernel_size_IntArrayRe
     .Call('_torch_cpp_torch_namespace_thnn_conv2d_self_Tensor_weight_Tensor_kernel_size_IntArrayRef', PACKAGE = 'torchpkg', self, weight, kernel_size, bias, stride, padding)
 }
 
-cpp_torch_namespace_thnn_conv2d_forward_out_output_Tensor_finput_Tensor_fgrad_input_Tensor_self_Tensor_weight_Tensor_kernel_size_IntArrayRef_bias_Tensor_stride_IntArrayRef_padding_IntArrayRef <- function(output, finput, fgrad_input, self, weight, kernel_size, bias, stride, padding) {
-    .Call('_torch_cpp_torch_namespace_thnn_conv2d_forward_out_output_Tensor_finput_Tensor_fgrad_input_Tensor_self_Tensor_weight_Tensor_kernel_size_IntArrayRef_bias_Tensor_stride_IntArrayRef_padding_IntArrayRef', PACKAGE = 'torchpkg', output, finput, fgrad_input, self, weight, kernel_size, bias, stride, padding)
+cpp_torch_namespace__slow_conv2d_forward_out_output_Tensor_finput_Tensor_self_Tensor_weight_Tensor_kernel_size_IntArrayRef_bias_Tensor_stride_IntArrayRef_padding_IntArrayRef <- function(output, finput, self, weight, kernel_size, bias, stride, padding) {
+    .Call('_torch_cpp_torch_namespace__slow_conv2d_forward_out_output_Tensor_finput_Tensor_self_Tensor_weight_Tensor_kernel_size_IntArrayRef_bias_Tensor_stride_IntArrayRef_padding_IntArrayRef', PACKAGE = 'torchpkg', output, finput, self, weight, kernel_size, bias, stride, padding)
 }
 
-cpp_torch_namespace_thnn_conv2d_forward_self_Tensor_weight_Tensor_kernel_size_IntArrayRef_bias_Tensor_stride_IntArrayRef_padding_IntArrayRef <- function(self, weight, kernel_size, bias, stride, padding) {
-    .Call('_torch_cpp_torch_namespace_thnn_conv2d_forward_self_Tensor_weight_Tensor_kernel_size_IntArrayRef_bias_Tensor_stride_IntArrayRef_padding_IntArrayRef', PACKAGE = 'torchpkg', self, weight, kernel_size, bias, stride, padding)
+cpp_torch_namespace__slow_conv2d_forward_self_Tensor_weight_Tensor_kernel_size_IntArrayRef_bias_Tensor_stride_IntArrayRef_padding_IntArrayRef <- function(self, weight, kernel_size, bias, stride, padding) {
+    .Call('_torch_cpp_torch_namespace__slow_conv2d_forward_self_Tensor_weight_Tensor_kernel_size_IntArrayRef_bias_Tensor_stride_IntArrayRef_padding_IntArrayRef', PACKAGE = 'torchpkg', self, weight, kernel_size, bias, stride, padding)
 }
 
-cpp_torch_namespace_thnn_conv2d_backward_out_grad_input_Tensor_grad_weight_Tensor_grad_bias_Tensor_grad_output_Tensor_self_Tensor_weight_Tensor_kernel_size_IntArrayRef_stride_IntArrayRef_padding_IntArrayRef_finput_Tensor_fgrad_input_Tensor <- function(grad_input, grad_weight, grad_bias, grad_output, self, weight, kernel_size, stride, padding, finput, fgrad_input) {
-    .Call('_torch_cpp_torch_namespace_thnn_conv2d_backward_out_grad_input_Tensor_grad_weight_Tensor_grad_bias_Tensor_grad_output_Tensor_self_Tensor_weight_Tensor_kernel_size_IntArrayRef_stride_IntArrayRef_padding_IntArrayRef_finput_Tensor_fgrad_input_Tensor', PACKAGE = 'torchpkg', grad_input, grad_weight, grad_bias, grad_output, self, weight, kernel_size, stride, padding, finput, fgrad_input)
+cpp_torch_namespace__slow_conv2d_backward_out_grad_input_Tensor_grad_weight_Tensor_grad_bias_Tensor_grad_output_Tensor_self_Tensor_weight_Tensor_kernel_size_IntArrayRef_stride_IntArrayRef_padding_IntArrayRef_finput_Tensor <- function(grad_input, grad_weight, grad_bias, grad_output, self, weight, kernel_size, stride, padding, finput) {
+    .Call('_torch_cpp_torch_namespace__slow_conv2d_backward_out_grad_input_Tensor_grad_weight_Tensor_grad_bias_Tensor_grad_output_Tensor_self_Tensor_weight_Tensor_kernel_size_IntArrayRef_stride_IntArrayRef_padding_IntArrayRef_finput_Tensor', PACKAGE = 'torchpkg', grad_input, grad_weight, grad_bias, grad_output, self, weight, kernel_size, stride, padding, finput)
 }
 
-cpp_torch_namespace_thnn_conv2d_backward_grad_output_Tensor_self_Tensor_weight_Tensor_kernel_size_IntArrayRef_stride_IntArrayRef_padding_IntArrayRef_finput_Tensor_fgrad_input_Tensor_output_mask_stdarraybool3 <- function(grad_output, self, weight, kernel_size, stride, padding, finput, fgrad_input, output_mask) {
-    .Call('_torch_cpp_torch_namespace_thnn_conv2d_backward_grad_output_Tensor_self_Tensor_weight_Tensor_kernel_size_IntArrayRef_stride_IntArrayRef_padding_IntArrayRef_finput_Tensor_fgrad_input_Tensor_output_mask_stdarraybool3', PACKAGE = 'torchpkg', grad_output, self, weight, kernel_size, stride, padding, finput, fgrad_input, output_mask)
+cpp_torch_namespace__slow_conv2d_backward_grad_output_Tensor_self_Tensor_weight_Tensor_kernel_size_IntArrayRef_stride_IntArrayRef_padding_IntArrayRef_finput_Tensor_output_mask_stdarraybool3 <- function(grad_output, self, weight, kernel_size, stride, padding, finput, output_mask) {
+    .Call('_torch_cpp_torch_namespace__slow_conv2d_backward_grad_output_Tensor_self_Tensor_weight_Tensor_kernel_size_IntArrayRef_stride_IntArrayRef_padding_IntArrayRef_finput_Tensor_output_mask_stdarraybool3', PACKAGE = 'torchpkg', grad_output, self, weight, kernel_size, stride, padding, finput, output_mask)
 }
 
 cpp_torch_namespace__conv_depthwise2d_out_out_Tensor_self_Tensor_weight_Tensor_kernel_size_IntArrayRef_bias_Tensor_stride_IntArrayRef_padding_IntArrayRef_dilation_IntArrayRef <- function(out, self, weight, kernel_size, bias, stride, padding, dilation) {
@@ -11257,8 +11261,8 @@ cpp_torch_tensor_dtype <- function(x) {
     .Call('_torch_cpp_torch_tensor_dtype', PACKAGE = 'torchpkg', x)
 }
 
-cpp_torch_tensor <- function(x, dim, options, requires_grad, is_integer64) {
-    .Call('_torch_cpp_torch_tensor', PACKAGE = 'torchpkg', x, dim, options, requires_grad, is_integer64)
+torch_tensor_cpp <- function(x, dtype, device, requires_grad, pin_memory) {
+    .Call('_torch_torch_tensor_cpp', PACKAGE = 'torchpkg', x, dtype, device, requires_grad, pin_memory)
 }
 
 cpp_as_array <- function(x) {
@@ -11403,6 +11407,10 @@ cpp_torch_namespace__use_cudnn_rnn_flatten_weight <- function() {
 
 cpp_torch_namespace__store_main_thread_id <- function() {
     invisible(.Call('_torch_cpp_torch_namespace__store_main_thread_id', PACKAGE = 'torchpkg'))
+}
+
+transpose2 <- function(x) {
+    .Call('_torch_transpose2', PACKAGE = 'torchpkg', x)
 }
 
 cpp_torch_variable_list <- function(x) {

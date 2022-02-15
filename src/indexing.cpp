@@ -121,10 +121,6 @@ void index_append_slice(XPtrTorchTensorIndex& index, SEXP slice) {
   lantern_TensorIndex_append_slice(index.get(), l.get());
 }
 
-XPtrTorchTensor cpp_torch_tensor(SEXP x, std::vector<std::int64_t> dim,
-                                 XPtrTorchTensorOptions options,
-                                 bool requires_grad, bool is_integer64);
-
 void index_append_integer_vector(XPtrTorchTensorIndex& index, SEXP slice) {
   Rcpp::NumericVector v(
       LENGTH(slice));  // tmp variable v to avoid changing slice object
@@ -140,12 +136,7 @@ void index_append_integer_vector(XPtrTorchTensorIndex& index, SEXP slice) {
   }
 
   // Create the integer Tensor
-  XPtrTorchTensorOptions options = lantern_TensorOptions();
-  options = lantern_TensorOptions_dtype(
-      options.get(), XPtrTorchDtype(lantern_Dtype_int64()).get());
-  std::vector<int64_t> dim = {LENGTH(slice)};
-
-  XPtrTorchTensor tensor = cpp_torch_tensor(v, dim, options, false, false);
+  auto tensor = torch_tensor_cpp(v, torch::Dtype(lantern_Dtype_int64()));
 
   lantern_TensorIndex_append_tensor(index.get(), tensor.get());
 }
@@ -154,12 +145,7 @@ void index_append_bool_vector(XPtrTorchTensorIndex& index, SEXP slice) {
   Rcpp::LogicalVector v = slice;
 
   // Create the integer Tensor
-  XPtrTorchTensorOptions options = lantern_TensorOptions();
-  options = lantern_TensorOptions_dtype(
-      options.get(), XPtrTorchDtype(lantern_Dtype_bool()).get());
-  std::vector<int64_t> dim = {LENGTH(slice)};
-
-  XPtrTorchTensor tensor = cpp_torch_tensor(v, dim, options, false, false);
+  auto tensor = torch_tensor_cpp(v, torch::Dtype(lantern_Dtype_bool()));
 
   lantern_TensorIndex_append_tensor(index.get(), tensor.get());
 }

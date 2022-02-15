@@ -9,40 +9,18 @@ Tensor <- R7Class(
         return(ptr)
       }
 
-      # infer dtype from data
-      if (is.null(dtype)) {
-        if (is.integer(data)) {
-          dtype <- torch_long()
-        } else if (bit64::is.integer64(data)) {
-          dtype <- torch_long()
-        } else if (is.double(data)) {
-          dtype <- torch_float() # default to float
-        } else if (is.logical(data)) {
-          dtype <- torch_bool()
-        }
-      }
-
-      options <- torch_tensor_options(
-        dtype = dtype, device = device,
-        pinned_memory = pin_memory
-      )
-
-
-      dimension <- dim(data)
-
-      if (is.null(dimension)) {
-        dimension <- length(data)
-      }
-
-
-      cpp_torch_tensor(
-        data, rev(dimension), options,
-        requires_grad, inherits(data, "integer64")
-      )
+      torch_tensor_cpp(data, dtype, device, requires_grad, pin_memory)
     },
     print = function(n = 30) {
       cat("torch_tensor\n")
-      cpp_torch_tensor_print(self$ptr, n)
+      if (is_undefined_tensor(self) || !is_meta_device(self$device)) {
+        cpp_torch_tensor_print(self$ptr, n)  
+      } else {
+        cat("...\n")
+        dtype <- as.character(self$dtype)
+        shape <- paste(self$shape, collapse = ",")
+        cat("[ META", dtype, "Type{", shape, "} ]", sep = "")
+      }
       if (!is_undefined_tensor(self)) {
         if (!is.null(self$ptr$grad_fn)) {
           cat("[ grad_fn = <")
