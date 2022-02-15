@@ -77,34 +77,49 @@
 
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="development version" id="torch-development-version">torch (development version)<a class="anchor" aria-label="anchor" href="#torch-development-version"></a></h2>
+<div class="section level3">
+<h3 id="breaking-changes-development-version">Breaking changes<a class="anchor" aria-label="anchor" href="#breaking-changes-development-version"></a></h3>
+<ul><li>
+<code>torch_sort</code> and <code>Tensor$sort</code> now return 1-indexed results. (<a href="https://github.com/mlverse/torch/issues/709" class="external-link">#709</a>, <a href="https://github.com/mohamed-180" class="external-link">@mohamed-180</a>)</li>
+<li>Support for LibTorch 1.10.2. See also <a href="https://github.com/pytorch/pytorch/releases/tag/v1.10.0" class="external-link">release notes</a> for the PyTorch v1.10. (<a href="https://github.com/mlverse/torch/issues/758" class="external-link">#758</a>, <a href="https://github.com/mlverse/torch/issues/763" class="external-link">#763</a>, <a href="https://github.com/mlverse/torch/issues/775" class="external-link">#775</a>, <a href="https://github.com/hsbadr" class="external-link">@hsbadr</a>).</li>
+<li>Changed default <code>dim</code> from <code>1</code> to <code>2</code> in <code>nnf_cosine_similarity</code>. (<a href="https://github.com/mlverse/torch/issues/769" class="external-link">#769</a>)</li>
+<li>The default value for arguments of various functions have changed. A bug in the code generation was truncating the default values specially if they were float values that needed more than 6 digit precision. (<a href="https://github.com/mlverse/torch/issues/770" class="external-link">#770</a>)</li>
+</ul></div>
+<div class="section level3">
+<h3 id="new-features-development-version">New features<a class="anchor" aria-label="anchor" href="#new-features-development-version"></a></h3>
 <ul><li>
 <code>jit_save_for_mobile</code> allows to save a traced model in bytecode form, to be loaded by a <code>LiteModuleLoader</code>. (<a href="https://github.com/mlverse/torch/issues/713" class="external-link">#713</a>)</li>
 <li>Exported <code>is_torch_tensor</code> to check wether an object is a tensor or not. (<a href="https://github.com/mlverse/torch/issues/730" class="external-link">#730</a>, <a href="https://github.com/rdinnager" class="external-link">@rdinnager</a>)</li>
 <li>Adds <code>cuda_get_device_properties(device)</code> that allows one to query device capability and other properties. (<a href="https://github.com/mlverse/torch/issues/734" class="external-link">#734</a>, <a href="https://github.com/rdinnager" class="external-link">@rdinnager</a>)</li>
-<li>Fixed a bug in <code>.validate_sample</code> for the <code>Distribution</code> class that would incorrectly check for tensors. (<a href="https://github.com/mlverse/torch/issues/739" class="external-link">#739</a>, <a href="https://github.com/hsbadr" class="external-link">@hsbadr</a>)</li>
 <li>Implemented <code><a href="../reference/call_torch_function.html">call_torch_function()</a></code> to allow calling potentially unexported torch core functions. (<a href="https://github.com/mlverse/torch/issues/743" class="external-link">#743</a>, <a href="https://github.com/rdinnager" class="external-link">@rdinnager</a>)</li>
 <li>Now when installing torch all of LibTorch and Lantern headers will be installed within the <code>inst</code> directory. This will allow for packages extending torch to bind directly to its C++ library. (<a href="https://github.com/mlverse/torch/issues/718" class="external-link">#718</a>)</li>
-<li>Refactored the internal Lantern types and Rcpp types and made clearer which are the exported types that can be used in the C++ extensions. (<a href="https://github.com/mlverse/torch/issues/718" class="external-link">#718</a>)</li>
 <li>
 <code>dataset_subset</code> will use the <code>.getbatch</code> method of the wrapped dataset if one is available. (<a href="https://github.com/mlverse/torch/issues/742" class="external-link">#742</a>, <a href="https://github.com/egillax" class="external-link">@egillax</a>)</li>
-<li>Fixed memory leak when applying custom <code>autograd_function</code>s. (<a href="https://github.com/mlverse/torch/issues/750" class="external-link">#750</a>)</li>
-<li>
-<code>torch_sort</code> and <code>Tensor$sort</code> now return 1-indexed results. (<a href="https://github.com/mlverse/torch/issues/709" class="external-link">#709</a>, <a href="https://github.com/mohamed-180" class="external-link">@mohamed-180</a>)</li>
-<li>Simplified concurrency related constructs in autograd. (<a href="https://github.com/mlverse/torch/issues/755" class="external-link">#755</a>, <a href="https://github.com/yitao-li" class="external-link">@yitao-li</a>)</li>
-<li>R and C++ code cleanup, styling, and formatting. (<a href="https://github.com/mlverse/torch/issues/753" class="external-link">#753</a>, <a href="https://github.com/hsbadr" class="external-link">@hsbadr</a>)</li>
-<li>Support for LibTorch 1.10.2. See also <a href="https://github.com/pytorch/pytorch/releases/tag/v1.10.0" class="external-link">release notes</a> for the PyTorch v1.10. (<a href="https://github.com/mlverse/torch/issues/758" class="external-link">#758</a>, <a href="https://github.com/mlverse/torch/issues/763" class="external-link">#763</a>, <a href="https://github.com/mlverse/torch/issues/775" class="external-link">#775</a>, <a href="https://github.com/hsbadr" class="external-link">@hsbadr</a>).</li>
-<li>Changed default <code>dim</code> from <code>1</code> to <code>2</code> in <code>nnf_cosine_similarity</code>. (<a href="https://github.com/mlverse/torch/issues/769" class="external-link">#769</a>)</li>
-<li>The default value for arguments of various functions have changed. A bug in the code generation was truncating the default values specially if they were float values that needed more than 6 digit precision. (<a href="https://github.com/mlverse/torch/issues/770" class="external-link">#770</a>)</li>
-<li>Fixed a bug that caused <code>autograd_grad</code> to deadlock when used with custom autograd functions. (<a href="https://github.com/mlverse/torch/issues/771" class="external-link">#771</a>)</li>
-<li>Fixed a bug in <code>torch_max</code> and <code>torch_min</code> that would fail with <code>length=2</code> Tensors. (<a href="https://github.com/mlverse/torch/issues/772" class="external-link">#772</a>)</li>
 <li>Added <code>nn_flatten</code> and <code>nn_unflatten</code> modules. (<a href="https://github.com/mlverse/torch/issues/773" class="external-link">#773</a>)</li>
 <li>Added <code><a href="../reference/cuda_memory_stats.html">cuda_memory_stats()</a></code> and <code><a href="../reference/cuda_memory_stats.html">cuda_memory_summary()</a></code> to verify the amount of memory torch is using from the GPU. (<a href="https://github.com/mlverse/torch/issues/774" class="external-link">#774</a>)</li>
 <li>Added <code><a href="../reference/backends_cudnn_version.html">backends_cudnn_version()</a></code> to query the CuDNN version found by torch. (<a href="https://github.com/mlverse/torch/issues/774" class="external-link">#774</a>)</li>
+</ul></div>
+<div class="section level3">
+<h3 id="bug-fixes-development-version">Bug fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-development-version"></a></h3>
+<ul><li>Fixed a bug in <code>.validate_sample</code> for the <code>Distribution</code> class that would incorrectly check for tensors. (<a href="https://github.com/mlverse/torch/issues/739" class="external-link">#739</a>, <a href="https://github.com/hsbadr" class="external-link">@hsbadr</a>)</li>
+<li>Fixed memory leak when applying custom <code>autograd_function</code>s. (<a href="https://github.com/mlverse/torch/issues/750" class="external-link">#750</a>)</li>
+<li>Fixed a bug that caused <code>autograd_grad</code> to deadlock when used with custom autograd functions. (<a href="https://github.com/mlverse/torch/issues/771" class="external-link">#771</a>)</li>
+<li>Fixed a bug in <code>torch_max</code> and <code>torch_min</code> that would fail with <code>length=2</code> Tensors. (<a href="https://github.com/mlverse/torch/issues/772" class="external-link">#772</a>)</li>
+</ul></div>
+<div class="section level3">
+<h3 id="documentation-development-version">Documentation<a class="anchor" aria-label="anchor" href="#documentation-development-version"></a></h3>
+<ul><li>Improved the ‘Loading data’ vignette and datasets documentation. (<a href="https://github.com/mlverse/torch/issues/780" class="external-link">#780</a>, <a href="https://github.com/jnolis" class="external-link">@jnolis</a>)</li>
+</ul></div>
+<div class="section level3">
+<h3 id="internal-development-version">Internal<a class="anchor" aria-label="anchor" href="#internal-development-version"></a></h3>
+<ul><li>Refactored the internal Lantern types and Rcpp types and made clearer which are the exported types that can be used in the C++ extensions. (<a href="https://github.com/mlverse/torch/issues/718" class="external-link">#718</a>)</li>
+<li>Simplified concurrency related constructs in autograd. (<a href="https://github.com/mlverse/torch/issues/755" class="external-link">#755</a>, <a href="https://github.com/yitao-li" class="external-link">@yitao-li</a>)</li>
+<li>R and C++ code cleanup, styling, and formatting. (<a href="https://github.com/mlverse/torch/issues/753" class="external-link">#753</a>, <a href="https://github.com/hsbadr" class="external-link">@hsbadr</a>)</li>
 <li>Dataloaders are slightly faster with a new transpose function. (<a href="https://github.com/mlverse/torch/issues/783" class="external-link">#783</a>)</li>
 <li>
 <code>torch_tensor</code> is now a C++ only function slighly increasing performance in a few situations. (<a href="https://github.com/mlverse/torch/issues/784" class="external-link">#784</a>)</li>
-<li>Improved the ‘Loading data’ vignette and datasets documentation. (<a href="https://github.com/mlverse/torch/issues/780" class="external-link">#780</a>, <a href="https://github.com/jnolis" class="external-link">@jnolis</a>)</li>
 </ul></div>
+</div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.6.1" id="torch-061">torch 0.6.1<a class="anchor" aria-label="anchor" href="#torch-061"></a></h2>
 <div class="section level3">
