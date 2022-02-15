@@ -22,6 +22,7 @@
 - Added `backends_cudnn_version()` to query the CuDNN version found by torch. (#774)
 - Dataloaders are slightly faster with a new transpose function. (#783)
 - `torch_tensor` is now a C++ only function slighly increasing performance in a few situations. (#784)
+- Improved the 'Loading data' vignette and datasets documentation. (#780, @jnolis)
 
 # torch 0.6.1
 
