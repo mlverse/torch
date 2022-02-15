@@ -52,10 +52,11 @@ dataset with non-integral indices/keys, a custom sampler must be provided.
 
 
 By default datasets are iterated by returning each observation/item individually.
-Sometimes it's possible to have an optimized implementation to take a batch
+Often it's possible to have an optimized implementation to take a batch
 of observations (eg, subsetting a tensor by multiple indexes at once is faster than
 subsetting once for each index), in this case you can implement a \code{.getbatch} method
 that will be used instead of \code{.getitem} when getting a batch of observations within
-the dataloader. \code{.getbatch} must work for batches of size larger or equal to 1.
+the dataloader. \code{.getbatch} must work for batches of size larger or equal to 1. For more
+on this see the the \code{vignette("loading-data")}.
 }
 
