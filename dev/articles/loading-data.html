@@ -111,9 +111,10 @@
 <div class="section level2">
 <h2 id="datasets-and-data-loaders">Datasets and data loaders<a class="anchor" aria-label="anchor" href="#datasets-and-data-loaders"></a>
 </h2>
-<p>Central to data ingestion and preprocessing are datasets and data loaders.</p>
-<p><code>torch</code> comes equipped with a bag of datasets related to, mostly, image recognition and natural language processing (e.g., <code>mnist_dataset()</code>), which can be iterated over by means of <code>dataloader</code>s:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="co"># ...</span></span>
+<p>Central to data ingestion and preprocessing are datasets and data loaders. A dataset is an object that holds the data to use, while a data loader is an object that will load the data from a dataset providing a way to access subsets of the data. By using datasets and data loaders you will have a process for clearly organizing your data and passing it to other components of the torch package, such as model training.</p>
+<p>Built into <code>torch</code> are premade datasets that are commonly used in machine learning, such as the MNIST handwriting dataset (<code>mnist_dataset()</code>). Most of the prebuilt datasets relate to image recognition and natural language processing.</p>
+<p>Below is an example of how you would use the MNIST dataset with a dataloader. First, the <code>minst_dataset()</code> function is used to create <code>ds</code> which is a <code>Dataset</code> object. Then a dataloader <code>dl</code> is created to query that data. Finally, that dataloader is used in a <code><a href="https://rdrr.io/pkg/coro/man/collect.html" class="external-link">coro::loop()</a></code> to iterate over batches of that data:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="co"># Create a dataset from included data</span></span>
 <span id="cb2-2"><a href="#cb2-2"></a>ds &lt;-<span class="st"> </span><span class="kw">mnist_dataset</span>(</span>
 <span id="cb2-3"><a href="#cb2-3"></a>  dir, </span>
 <span id="cb2-4"><a href="#cb2-4"></a>  <span class="dt">download =</span> <span class="ot">TRUE</span>, </span>
@@ -123,19 +124,66 @@
 <span id="cb2-8"><a href="#cb2-8"></a>  }</span>
 <span id="cb2-9"><a href="#cb2-9"></a>)</span>
 <span id="cb2-10"><a href="#cb2-10"></a></span>
-<span id="cb2-11"><a href="#cb2-11"></a>dl &lt;-<span class="st"> </span><span class="kw">dataloader</span>(ds, <span class="dt">batch_size =</span> <span class="dv">32</span>, <span class="dt">shuffle =</span> <span class="ot">TRUE</span>)</span>
-<span id="cb2-12"><a href="#cb2-12"></a></span>
-<span id="cb2-13"><a href="#cb2-13"></a>coro<span class="op">::</span><span class="kw">loop</span>(<span class="cf">for</span> (b <span class="cf">in</span> dl)) {</span>
-<span id="cb2-14"><a href="#cb2-14"></a><span class="co"># ...</span></span>
-<span id="cb2-15"><a href="#cb2-15"></a>}<span class="er">)</span></span></code></pre></div>
-<p>Cf. <code>vignettes/examples/mnist-cnn.R</code> for a complete example.</p>
-<p>What if you want to train on a different dataset? In these cases, you subclass <code>Dataset</code>, an abstract container that needs to know how to iterate over the given data. To that purpose, your subclass needs to implement <code>.getitem()</code>, and say what should be returned when the data loader is asking for the next batch.</p>
-<p>In <code>.getitem()</code>, you can implement whatever preprocessing you require. Additionally, you should implement <code>.length()</code>, so users can find out how many items there are in the dataset.</p>
-<p>While this may sound complicated, it is not at all. The base logic is straightforward – complexity will, naturally, correlate with how involved your preprocessing is. To provide you with a simple but functional prototype, here we show how to create your own <code>dataset</code> to train on <a href="https://github.com/allisonhorst/palmerpenguins" class="external-link">Allison Horst's penguins</a>.</p>
+<span id="cb2-11"><a href="#cb2-11"></a><span class="co"># Create the loader to query the data in batches</span></span>
+<span id="cb2-12"><a href="#cb2-12"></a>dl &lt;-<span class="st"> </span><span class="kw">dataloader</span>(ds, <span class="dt">batch_size =</span> <span class="dv">32</span>, <span class="dt">shuffle =</span> <span class="ot">TRUE</span>)</span>
+<span id="cb2-13"><a href="#cb2-13"></a></span>
+<span id="cb2-14"><a href="#cb2-14"></a>coro<span class="op">::</span><span class="kw">loop</span>(<span class="cf">for</span> (b <span class="cf">in</span> dl)) {</span>
+<span id="cb2-15"><a href="#cb2-15"></a><span class="co"># use the data from each batch `b` here</span></span>
+<span id="cb2-16"><a href="#cb2-16"></a><span class="co"># ...</span></span>
+<span id="cb2-17"><a href="#cb2-17"></a>}<span class="er">)</span></span></code></pre></div>
+<p>See <code>vignettes/examples/mnist-cnn.R</code> for a complete example.</p>
+<p>In the more common situation where you have a unique set of data that isn’t included with the package you’ll need to make a custom <code>Dataset</code> subclass by using the <code><a href="../reference/dataset.html">dataset()</a></code> function. The custom <code>Dataset</code> subclass is an abstract R6 container for the data. It will need to know some information about the particular dataset, such as how to iterate over it.</p>
+<p>At a minimum, when using <code><a href="../reference/dataset.html">dataset()</a></code> to create a custom <code>Dataset</code> class you’ll want to define the following:</p>
+<ul>
+<li>
+<code>name</code> - for convenience, keep track of what type of data it is</li>
+<li>
+<code>initialize</code> - a member function defining how to create a object with that class. It could have no parameters, for when all objects of that class will be the same, or you can give it specific parameters usually for if different objects should have different data.</li>
+<li>
+<code>.getitem</code> - this member function is called when the dataloader goes to pull a new batch of data. You can include preprocessing in this function if needed. Note that the function will be called extremely frequently, so it’s advantageous to make it fast.</li>
+<li>
+<code>.length</code> - this will return the amount of data in the dataset, which is helpful for users.</li>
+</ul>
 </div>
 <div class="section level2">
-<h2 id="a-custom-dataset">A custom dataset<a class="anchor" aria-label="anchor" href="#a-custom-dataset"></a>
+<h2 id="example-of-using-a-custom-dataset">Example of using a custom Dataset<a class="anchor" aria-label="anchor" href="#example-of-using-a-custom-dataset"></a>
 </h2>
+<p>While this may sound complicated the base logic is only a few steps–the complexity often comes from the data itself and how involved your preprocessing is. Here we show how to create your own <code>Dataset</code> class to train on <a href="https://github.com/allisonhorst/palmerpenguins" class="external-link">Allison Horst's penguins</a>.</p>
+<table style="width:100%;" class="table">
+<colgroup>
+<col width="16%">
+<col width="35%">
+<col width="16%">
+<col width="16%">
+<col width="16%">
+</colgroup>
+<thead><tr class="header">
+<th align="left">Component</th>
+<th align="center">
+<code>Dataset</code> R6 class</th>
+<th align="center">
+<code>Dataset</code> object</th>
+<th align="center">
+<code>DataLoader</code> object</th>
+<th align="center">batch</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="left">Description</td>
+<td align="center">Output of <code><a href="../reference/dataset.html">dataset()</a></code>. When calling <code><a href="../reference/dataset.html">dataset()</a></code> it should have at least a <code>name</code>, <code>initialize</code>, <code>.getitem</code>, and <code>.length</code>. Output is a <code>Dataset</code> generator.</td>
+<td align="center">Object created by using the custom <code>Dataset</code> generator. Actually stores the data</td>
+<td align="center">Object that queries the <code>Dataset</code> object to pull batches of data</td>
+<td align="center">The subsample of data used for things like model training</td>
+</tr>
+<tr class="even">
+<td align="left">Penguin example</td>
+<td align="center"><code>penguins_dataset</code></td>
+<td align="center"><code>tuxes</code></td>
+<td align="center"><code>dl</code></td>
+<td align="center"><code>b</code></td>
+</tr>
+</tbody>
+</table>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://allisonhorst.github.io/palmerpenguins/" class="external-link">palmerpenguins</a></span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://magrittr.tidyverse.org" class="external-link">magrittr</a></span><span class="op">)</span>
@@ -155,7 +203,6 @@
 <span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> Adelie  Torgersen           34.1          18.1               193        <span style="text-decoration: underline;">3</span>475</span>
 <span class="co">#&gt; <span style="color: #BCBCBC;">10</span> Adelie  Torgersen           42            20.2               190        <span style="text-decoration: underline;">4</span>250</span>
 <span class="co">#&gt; <span style="color: #949494;"># … with 334 more rows, and 2 more variables: sex &lt;fct&gt;, year &lt;int&gt;</span></span></code></pre></div>
-<p><code>Dataset</code>s are R6 classes created using the <code><a href="../reference/dataset.html">dataset()</a></code> constructor. You can pass a <code>name</code> and various member functions. Among those should be <code>initialize()</code>, to create instance variables, <code>.getitem()</code>, to indicate how the data should be returned, and <code>.length()</code>, to say how many items we have.</p>
 <p>In addition, any number of helper functions can be defined.</p>
 <p>Here, we assume the <code>penguins</code> have already been loaded, and all preprocessing consists in removing lines with <code>NA</code> values, transforming <code>factor</code>s to numbers starting from 0, and converting from R data types to <code>torch</code> tensors.</p>
 <p>In <code>.getitem</code>, we essentially decide how this data is going to be used: All variables besides <code>species</code> go into <code>x</code>, the predictor, and <code>species</code> will constitute <code>y</code>, the target. Predictor and target are returned in a list, to be accessed as <code>batch[[1]]</code> and <code>batch[[2]]</code> during training.</p>
@@ -215,7 +262,7 @@
 <span class="co">#&gt; [ CPULongType{} ]</span></code></pre></div>
 <p>To be able to iterate over <code>tuxes</code>, we need a data loader (we override the default batch size of <code>1</code>):</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">dl</span> <span class="op">&lt;-</span><span class="va">tuxes</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="../reference/dataloader.html">dataloader</a></span><span class="op">(</span>batch_size <span class="op">=</span> <span class="fl">8</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="va">dl</span> <span class="op">&lt;-</span> <span class="va">tuxes</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="../reference/dataloader.html">dataloader</a></span><span class="op">(</span>batch_size <span class="op">=</span> <span class="fl">8</span><span class="op">)</span></code></pre></div>
 <p>Calling <code>.length()</code> on a data loader (as opposed to a dataset) will return the number of <code>batches</code> we have:</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">dl</span><span class="op">$</span><span class="fu">.length</span><span class="op">(</span><span class="op">)</span>
@@ -249,10 +296,9 @@
 <span class="co">#&gt;  1</span>
 <span class="co">#&gt; [ CPULongType{8} ]</span></code></pre></div>
 <p>To train a network, we can use <code><a href="https://rdrr.io/pkg/coro/man/collect.html" class="external-link">coro::loop()</a></code> to iterate over batches.</p>
-</div>
-<div class="section level2">
-<h2 id="training-with-data-loaders">Training with data loaders<a class="anchor" aria-label="anchor" href="#training-with-data-loaders"></a>
-</h2>
+<div class="section level3">
+<h3 id="training-with-data-loaders">Training with data loaders<a class="anchor" aria-label="anchor" href="#training-with-data-loaders"></a>
+</h3>
 <p>Our example network is very simple. (In reality, we would want to treat <code>island</code> as the categorical variable it is, and either one-hot-encode or embed it.)</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">net</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/nn_module.html">nn_module</a></span><span class="op">(</span>
@@ -291,7 +337,7 @@
   
   <span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/sprintf.html" class="external-link">sprintf</a></span><span class="op">(</span><span class="st">"Loss at epoch %d: %3f\n"</span>, <span class="va">epoch</span>, <span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="va">l</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
 <span class="op">}</span>
-<span class="co">#&gt; Loss at epoch 1: 126.160866</span>
+<span class="co">#&gt; Loss at epoch 1: 816.351075</span>
 <span class="co">#&gt; Loss at epoch 2: 2.068251</span>
 <span class="co">#&gt; Loss at epoch 3: 2.068251</span>
 <span class="co">#&gt; Loss at epoch 4: 2.068251</span>
@@ -301,6 +347,101 @@
 <span class="co">#&gt; Loss at epoch 8: 2.068251</span>
 <span class="co">#&gt; Loss at epoch 9: 2.068251</span>
 <span class="co">#&gt; Loss at epoch 10: 2.068251</span></code></pre></div>
+<p>Through this example we have trained a deep learning model using <code><a href="../reference/dataset.html">dataset()</a></code> to define a custom class and then loaded it in batches with a data loader. By using the dataset and data loader we were able to write code that split the data preprocessing and setup from the model training itself.</p>
+</div>
+</div>
+<div class="section level2">
+<h2 id="notes-on-efficiency">Notes on efficiency<a class="anchor" aria-label="anchor" href="#notes-on-efficiency"></a>
+</h2>
+<p>When using datasets and data loaders you may find that under certain conditions your code is running more slowly than you’d expect. In some situations the overhead of using dataloaders and datasets can impact overall performance. This may change in time as the R/C++ integration of Torch improves, but for now there are some workarounds:</p>
+<div class="section level3">
+<h3 id="use--getbatch-instead-of--getitem">Use <code>.getbatch()</code> instead of <code>.getitem()</code><a class="anchor" aria-label="anchor" href="#use--getbatch-instead-of--getitem"></a>
+</h3>
+<p>By default a dataloader will use the <code>.getitem()</code> member function to pull each single datapoint individually. You can speed this up by switching to using <code>.getbatch()</code> which will pull all the datapoints in a batch at once:</p>
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">penguins_dataset_batching</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/dataset.html">dataset</a></span><span class="op">(</span>
+  
+  name <span class="op">=</span> <span class="st">"penguins_dataset_batching"</span>,
+  
+  initialize <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="op">)</span> <span class="op">{</span>
+    <span class="va">self</span><span class="op">$</span><span class="va">data</span> <span class="op">&lt;-</span> <span class="va">self</span><span class="op">$</span><span class="fu">prepare_penguin_data</span><span class="op">(</span><span class="op">)</span>
+  <span class="op">}</span>,
+  
+  <span class="co"># the only change is that this went from .getitem to .getbatch</span>
+  .getbatch <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">index</span><span class="op">)</span> <span class="op">{</span>
+    
+    <span class="va">x</span> <span class="op">&lt;-</span> <span class="va">self</span><span class="op">$</span><span class="va">data</span><span class="op">[</span><span class="va">index</span>, <span class="fl">2</span><span class="op">:</span><span class="op">-</span><span class="fl">1</span><span class="op">]</span>
+    <span class="va">y</span> <span class="op">&lt;-</span> <span class="va">self</span><span class="op">$</span><span class="va">data</span><span class="op">[</span><span class="va">index</span>, <span class="fl">1</span><span class="op">]</span><span class="op">$</span><span class="fu">to</span><span class="op">(</span><span class="fu"><a href="../reference/torch_dtype.html">torch_long</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span>
+    
+    <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span><span class="op">)</span>
+  <span class="op">}</span>,
+  
+  .length <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="op">)</span> <span class="op">{</span>
+    <span class="va">self</span><span class="op">$</span><span class="va">data</span><span class="op">$</span><span class="fu">size</span><span class="op">(</span><span class="op">)</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span>
+  <span class="op">}</span>,
+  
+  prepare_penguin_data <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="op">)</span> <span class="op">{</span>
+    
+    <span class="va">input</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/na.fail.html" class="external-link">na.omit</a></span><span class="op">(</span><span class="va">penguins</span><span class="op">)</span> 
+    <span class="co"># conveniently, the categorical data are already factors</span>
+    <span class="va">input</span><span class="op">$</span><span class="va">species</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html" class="external-link">as.numeric</a></span><span class="op">(</span><span class="va">input</span><span class="op">$</span><span class="va">species</span><span class="op">)</span>
+    <span class="va">input</span><span class="op">$</span><span class="va">island</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html" class="external-link">as.numeric</a></span><span class="op">(</span><span class="va">input</span><span class="op">$</span><span class="va">island</span><span class="op">)</span>
+    <span class="va">input</span><span class="op">$</span><span class="va">sex</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html" class="external-link">as.numeric</a></span><span class="op">(</span><span class="va">input</span><span class="op">$</span><span class="va">sex</span><span class="op">)</span>
+    
+    <span class="va">input</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">as.matrix</a></span><span class="op">(</span><span class="va">input</span><span class="op">)</span>
+    <span class="fu"><a href="../reference/torch_tensor.html">torch_tensor</a></span><span class="op">(</span><span class="va">input</span><span class="op">)</span>
+  <span class="op">}</span>
+<span class="op">)</span></code></pre></div>
+<p>In many instances the only change is to exactly replace just <code>.getitem</code> with <code>.getbatch</code> since often the <code>.getitem</code> function is written to handle vectors of indices. In this penguins example the <code>.getitem</code> function used the index to select the rows, which will work fine with a vector instead</p>
+</div>
+<div class="section level3">
+<h3 id="remove-dataset-dataloader-and-manually-define-the-function-calls">Remove dataset dataloader and manually define the function calls<a class="anchor" aria-label="anchor" href="#remove-dataset-dataloader-and-manually-define-the-function-calls"></a>
+</h3>
+<p>If switching to <code>.getbatch</code> does not provide the benefit you were expecting you could also remove the <code>dataset</code> entirely and manually pass the data. At this point you are trading readability of your code and convenience for speed.</p>
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">input</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/na.fail.html" class="external-link">na.omit</a></span><span class="op">(</span><span class="va">penguins</span><span class="op">)</span> 
+<span class="co"># conveniently, the categorical data are already factors</span>
+<span class="va">input</span><span class="op">$</span><span class="va">species</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html" class="external-link">as.numeric</a></span><span class="op">(</span><span class="va">input</span><span class="op">$</span><span class="va">species</span><span class="op">)</span>
+<span class="va">input</span><span class="op">$</span><span class="va">island</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html" class="external-link">as.numeric</a></span><span class="op">(</span><span class="va">input</span><span class="op">$</span><span class="va">island</span><span class="op">)</span>
+<span class="va">input</span><span class="op">$</span><span class="va">sex</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html" class="external-link">as.numeric</a></span><span class="op">(</span><span class="va">input</span><span class="op">$</span><span class="va">sex</span><span class="op">)</span>
+
+<span class="va">input</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">as.matrix</a></span><span class="op">(</span><span class="va">input</span><span class="op">)</span>
+<span class="va">input</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/torch_tensor.html">torch_tensor</a></span><span class="op">(</span><span class="va">input</span><span class="op">)</span>
+
+<span class="va">data_x</span> <span class="op">&lt;-</span> <span class="va">input</span><span class="op">[</span>, <span class="fl">2</span><span class="op">:</span><span class="op">-</span><span class="fl">1</span><span class="op">]</span>
+<span class="va">data_y</span> <span class="op">&lt;-</span> <span class="va">input</span><span class="op">[</span>, <span class="fl">1</span><span class="op">]</span><span class="op">$</span><span class="fu">to</span><span class="op">(</span><span class="fu"><a href="../reference/torch_dtype.html">torch_long</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span>
+
+<span class="va">batch_size</span> <span class="op">&lt;-</span> <span class="fl">8</span>
+<span class="va">num_data_points</span> <span class="op">&lt;-</span> <span class="va">data_y</span><span class="op">$</span><span class="fu">size</span><span class="op">(</span><span class="fl">1</span><span class="op">)</span>
+<span class="va">num_batches</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html" class="external-link">floor</a></span><span class="op">(</span><span class="va">num_data_points</span><span class="op">/</span><span class="va">batch_size</span><span class="op">)</span>
+
+<span class="kw">for</span><span class="op">(</span><span class="va">epoch</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fl">10</span><span class="op">)</span><span class="op">{</span>
+
+  <span class="co"># rearrange the data each epoch</span>
+  <span class="va">permute</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/torch_randperm.html">torch_randperm</a></span><span class="op">(</span><span class="va">num_data_points</span><span class="op">)</span> <span class="op">+</span> <span class="fl">1L</span>
+  <span class="va">data_x</span> <span class="op">&lt;-</span> <span class="va">data_x</span><span class="op">[</span><span class="va">permute</span><span class="op">]</span>
+  <span class="va">data_y</span> <span class="op">&lt;-</span> <span class="va">data_y</span><span class="op">[</span><span class="va">permute</span><span class="op">]</span>
+  
+  <span class="co"># manually loop through the batches</span>
+  <span class="kw">for</span><span class="op">(</span><span class="va">batch_idx</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="va">num_batches</span><span class="op">)</span><span class="op">{</span>
+
+    <span class="co"># here index is a vector of the indices in the batch</span>
+    <span class="va">index</span> <span class="op">&lt;-</span> <span class="op">(</span><span class="va">batch_size</span><span class="op">*</span><span class="op">(</span><span class="va">batch_idx</span><span class="op">-</span><span class="fl">1</span><span class="op">)</span> <span class="op">+</span> <span class="fl">1</span><span class="op">)</span><span class="op">:</span><span class="op">(</span><span class="va">batch_idx</span><span class="op">*</span><span class="va">batch_size</span><span class="op">)</span>
+    
+    <span class="va">x</span> <span class="op">&lt;-</span> <span class="va">data_x</span><span class="op">[</span><span class="va">index</span><span class="op">]</span>
+    <span class="va">y</span> <span class="op">&lt;-</span> <span class="va">data_y</span><span class="op">[</span><span class="va">index</span><span class="op">]</span><span class="op">$</span><span class="fu">to</span><span class="op">(</span><span class="fu"><a href="../reference/torch_dtype.html">torch_long</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span>
+
+    <span class="va">optimizer</span><span class="op">$</span><span class="fu">zero_grad</span><span class="op">(</span><span class="op">)</span>
+    <span class="va">output</span> <span class="op">&lt;-</span> <span class="fu">model</span><span class="op">(</span><span class="va">x</span><span class="op">)</span>
+    <span class="va">loss</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/nnf_nll_loss.html">nnf_nll_loss</a></span><span class="op">(</span><span class="va">output</span>, <span class="va">y</span><span class="op">)</span>
+    <span class="va">loss</span><span class="op">$</span><span class="fu">backward</span><span class="op">(</span><span class="op">)</span>
+    <span class="va">optimizer</span><span class="op">$</span><span class="fu">step</span><span class="op">(</span><span class="op">)</span>
+    <span class="va">l</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">l</span>, <span class="va">loss</span><span class="op">$</span><span class="fu">item</span><span class="op">(</span><span class="op">)</span><span class="op">)</span>
+  <span class="op">}</span>
+  
+  <span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/sprintf.html" class="external-link">sprintf</a></span><span class="op">(</span><span class="st">"Loss at epoch %d: %3f\n"</span>, <span class="va">epoch</span>, <span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="va">l</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
+<span class="op">}</span></code></pre></div>
+</div>
 </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
     </nav></aside>
