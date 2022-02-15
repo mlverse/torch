@@ -34,7 +34,7 @@ Imports:
     bit64,
     magrittr,
     tools,
-    coro,
+    coro (>= 1.0.2),
     callr,
     cli,
     ellipsis
