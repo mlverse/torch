@@ -28,3 +28,8 @@ bool cpp_cudnn_is_available () {
 torch::vector::int64_t cpp_cuda_memory_stats(int64_t device) {
   return torch::vector::int64_t(lantern_cuda_device_stats(device));
 }
+
+// [[Rcpp::export]]
+int cpp_cuda_get_runtime_version () {
+  return lantern_cuda_get_runtime_version();
+}

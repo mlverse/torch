@@ -152,3 +152,14 @@ print.cuda_memory_stats <- function(x, ...) {
   cat(str(result))
   invisible(result)
 }
+
+#' Returns the CUDA runtime version
+#' 
+#' @export
+cuda_runtime_version <- function() {
+  v <- cpp_cuda_get_runtime_version()
+  major <- trunc(v/1000)
+  minor <- trunc((v - major*1000)/10)
+  patch <- v - major*1000 - minor*10
+  numeric_version(paste(major, minor, patch, sep = "."))
+}
