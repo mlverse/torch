@@ -35,11 +35,12 @@ tools/torchgen/.Rbuildignore
 
 # uncomment below for CRAN submission
 # ^inst/bin/.*
-# ^inst/include/(?!torch.h|lantern|torch_RcppExports.h|utils.h|torch_impl.h|torch_types.h|torch_api.h|torch_deleters# .h|torch_imports.h).*
+# ^inst/include/(?!torch.h|lantern|torch_RcppExports.h|utils.h|torch_impl.h|torch_types.h|torch_api.h|torch_deleters.h|torch_imports.h).*
 # ^inst/lib/.*
 # ^inst/share/.*
 # ^inst/build-hash
 # ^inst/build-versions
+
 ^doc$
 ^Meta$
 ^vignettes/rsconnect*

@@ -38,6 +38,7 @@ globalVariables(c("..", "self", "private", "N"))
       {
         lantern_start()
         cpp_set_lantern_allocator(getOption("torch.threshold_call_gc", 4000L))
+        register_lambda_function_deleter()
 
         # .generator_null is no longer used. set the option `torch.old_seed_behavior=TRUE` to use it.
         .generator_null <<- torch_generator()

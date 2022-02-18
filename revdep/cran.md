@@ -1,5 +1,3 @@
-This release fixes valgrind errors.
-
 ## revdepcheck results
 
 We checked 13 reverse dependencies, comparing R CMD check results across CRAN and dev versions of this package.
@@ -13,5 +11,3 @@ Issues with CRAN packages are summarised below.
 
 * torchaudio    (NA)
 * torchdatasets (NA)
-
-

@@ -10,7 +10,6 @@
 #endif
 #include <torch/torch.h>
 
-
 #include "utils.hpp"
 
 bool _lantern_cuda_is_available() {
@@ -50,15 +49,15 @@ void* _lantern_cuda_get_device_capability(int64_t device) {
   LANTERN_FUNCTION_END
 }
 
-int64_t _lantern_cudnn_runtime_version () {
+int64_t _lantern_cudnn_runtime_version() {
   return at::detail::getCUDAHooks().versionCuDNN();
 }
 
-bool _lantern_cudnn_is_available () {
+bool _lantern_cudnn_is_available() {
   return at::detail::getCUDAHooks().hasCuDNN();
 }
 
-void* _lantern_cuda_device_stats (int64_t device) {
+void* _lantern_cuda_device_stats(int64_t device) {
   LANTERN_FUNCTION_START
 #ifdef __NVCC__
   auto stats = c10::cuda::CUDACachingAllocator::getDeviceStats(device);
@@ -76,7 +75,7 @@ void* _lantern_cuda_device_stats (int64_t device) {
   results.push_back(stats.oversize_segments.peak);
   results.push_back(stats.oversize_segments.allocated);
   results.push_back(stats.oversize_segments.freed);
-  
+
   results.push_back(stats.allocation[0].current);
   results.push_back(stats.allocation[0].peak);
   results.push_back(stats.allocation[0].allocated);

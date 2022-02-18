@@ -1,13 +1,17 @@
+url: https://torch.mlverse.org/docs/
 destination: docs
 template:
+  bootstrap: 5
+  bslib:
+    primary: "#7e1f77"
   params:
-    bootswatch: united
     ganalytics: UA-178883486-1
     
 development:
   mode: auto
 
 navbar:
+ bg: primary
  structure:
   left:  [home, articles, examples, reference, news]
   right: [github]

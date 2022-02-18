@@ -8,10 +8,11 @@
 #include "utils.hpp"
 
 void *_lantern_from_blob(void *data, int64_t *sizes, size_t sizes_size,
-                         void *options) {
+                         int64_t *strides, size_t strides_size, void *options) {
   LANTERN_FUNCTION_START
   return make_raw::Tensor(
       torch::from_blob(data, std::vector<int64_t>(sizes, sizes + sizes_size),
+                       std::vector<int64_t>(strides, strides + strides_size),
                        from_raw::TensorOptions(options)));
   LANTERN_FUNCTION_END
 }

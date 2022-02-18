@@ -244,11 +244,11 @@ test_that("max and min", {
     x$min(dim = 1, other = 2),
     class = "value_error"
   )
-  
-  
-  x <- torch_tensor(c(1,2))
-  expect_equal_to_r(x$min(other = c(2,1)), c(1,1))
-  expect_equal_to_r(x$max(other = c(2,1)), c(2,2))
+
+
+  x <- torch_tensor(c(1, 2))
+  expect_equal_to_r(x$min(other = c(2, 1)), c(1, 1))
+  expect_equal_to_r(x$max(other = c(2, 1)), c(2, 2))
 })
 
 test_that("element_size works", {
@@ -393,4 +393,11 @@ test_that("using with optim", {
     opt$step()
     gctorture(FALSE)
   })
+})
+
+test_that("can create tensors from tensors", {
+  x <- torch_tensor(1)
+  y <- torch_tensor(x)
+  expect_false(rlang::obj_address(x) == rlang::obj_address(y))
+  expect_equal_to_tensor(x, y)
 })

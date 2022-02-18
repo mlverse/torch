@@ -98,3 +98,16 @@ is_cuda_device <- function(x) {
 is_cpu_device <- function(x) {
   x$type == "cpu"
 }
+
+is_meta_device <- function(x) {
+  force(x)
+  x$type == "meta"
+}
+
+#' @export
+`==.torch_device` <- function(x, y) {
+  if (!is_torch_device(y)) {
+    runtime_error("y is not a torch_device")
+  }
+  x$type == y$type && identical(x$index, y$index)
+}

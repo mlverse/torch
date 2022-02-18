@@ -1,7 +1,7 @@
 Package: torch
 Type: Package
 Title: Tensors and Neural Networks with 'GPU' Acceleration
-Version: 0.6.1.9000
+Version: 0.7.0.9000
 Authors@R: c(
     person("Daniel", "Falbel", email = "daniel@rstudio.com", role = c("aut", "cre", "cph")),
     person("Javier", "Luraschi", email = "jluraschi@gmail.com", role = c("aut")),
@@ -34,7 +34,7 @@ Imports:
     bit64,
     magrittr,
     tools,
-    coro,
+    coro (>= 1.0.2),
     callr,
     cli,
     ellipsis
@@ -103,6 +103,7 @@ Collate:
     'nn-conv.R'
     'nn-distance.R'
     'nn-dropout.R'
+    'nn-flatten.R'
     'nn-init.R'
     'nn-linear.R'
     'nn-loss.R'
