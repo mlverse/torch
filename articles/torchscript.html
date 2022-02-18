@@ -4,14 +4,14 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="description" content="torch">
 <title>TorchScript • torch</title>
-<!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script><!-- Bootstrap --><link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.4.0/united/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script><!-- bootstrap-toc --><link rel="stylesheet" href="../bootstrap-toc.css">
-<script src="../bootstrap-toc.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
+<script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="../deps/bootstrap-5.1.0/bootstrap.min.css" rel="stylesheet">
+<script src="../deps/bootstrap-5.1.0/bootstrap.bundle.min.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
-<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
-<script src="../pkgdown.js"></script><link href="../extra.css" rel="stylesheet">
+<!-- bootstrap-toc --><script src="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.1/dist/bootstrap-toc.min.js"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="../pkgdown.js"></script><link href="../extra.css" rel="stylesheet">
 <meta property="og:title" content="TorchScript">
 <meta property="og:description" content="torch">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
@@ -25,128 +25,89 @@
   gtag('config', 'UA-178883486-1');
 </script>
 </head>
-<body data-spy="scroll" data-target="#toc">
-    <div class="container template-article">
-      <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
-  <div class="container">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <span class="navbar-brand">
-        <a class="navbar-link" href="../index.html">torch</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.6.1</span>
-      </span>
-    </div>
+<body>
+    <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
+    
 
-    <div id="navbar" class="navbar-collapse collapse">
-      <ul class="nav navbar-nav">
-<li>
-  <a href="../index.html">
-    <span class="fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
-<li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-    Articles
-     
-    <span class="caret"></span>
-  </a>
-  <ul class="dropdown-menu" role="menu">
-<li>
-      <a href="../articles/installation.html">Installation</a>
-    </li>
-    <li class="dropdown-header">Tensors</li>
-    <li>
-      <a href="../articles/tensor-creation.html">Creating tensors</a>
-    </li>
-    <li>
-      <a href="../articles/indexing.html">Indexing</a>
-    </li>
-    <li>
-      <a href="../articles/tensor/index.html">Tensor class</a>
-    </li>
-    <li>
-      <a href="../articles/serialization.html">Serialization</a>
-    </li>
-    <li class="dropdown-header">Datasets</li>
-    <li>
-      <a href="../articles/loading-data.html">Loading Data</a>
-    </li>
-    <li class="dropdown-header">Autograd</li>
-    <li>
-      <a href="../articles/using-autograd.html">Using autograd</a>
-    </li>
-    <li>
-      <a href="../articles/extending-autograd.html">Extending autograd</a>
-    </li>
-    <li>
-      <a href="../articles/python-to-r.html">Python models</a>
-    </li>
-  </ul>
-</li>
-<li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-    Examples
-     
-    <span class="caret"></span>
-  </a>
-  <ul class="dropdown-menu" role="menu">
-<li>
-      <a href="../articles/examples/basic-autograd.html">basic-autograd</a>
-    </li>
-    <li>
-      <a href="../articles/examples/basic-nn-module.html">basic-nn-module</a>
-    </li>
-    <li>
-      <a href="../articles/examples/dataset.html">dataset</a>
-    </li>
-  </ul>
-</li>
-<li>
-  <a href="../reference/index.html">Reference</a>
-</li>
-<li>
-  <a href="../news/index.html">Changelog</a>
-</li>
-      </ul>
-<ul class="nav navbar-nav navbar-right">
-<li>
-  <a href="https://github.com/mlverse/torch/">
-    <span class="fab fa-github fa-lg"></span>
-     
-  </a>
-</li>
-      </ul>
-</div>
-<!--/.nav-collapse -->
+    <nav class="navbar fixed-top navbar-dark navbar-expand-lg bg-primary"><div class="container">
+    
+    <a class="navbar-brand me-2" href="../index.html">torch</a>
+
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.7.0</small>
+
+    
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div id="navbar" class="collapse navbar-collapse ms-3">
+      <ul class="navbar-nav me-auto">
+<li class="nav-item dropdown">
+  <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
+  <div class="dropdown-menu" aria-labelledby="dropdown-articles">
+    <a class="dropdown-item" href="../articles/installation.html">Installation</a>
+    <h6 class="dropdown-header" data-toc-skip>Tensors</h6>
+    <a class="dropdown-item" href="../articles/tensor-creation.html">Creating tensors</a>
+    <a class="dropdown-item" href="../articles/indexing.html">Indexing</a>
+    <a class="dropdown-item" href="../articles/tensor/index.html">Tensor class</a>
+    <a class="dropdown-item" href="../articles/serialization.html">Serialization</a>
+    <h6 class="dropdown-header" data-toc-skip>Datasets</h6>
+    <a class="dropdown-item" href="../articles/loading-data.html">Loading Data</a>
+    <h6 class="dropdown-header" data-toc-skip>Autograd</h6>
+    <a class="dropdown-item" href="../articles/using-autograd.html">Using autograd</a>
+    <a class="dropdown-item" href="../articles/extending-autograd.html">Extending autograd</a>
+    <a class="dropdown-item" href="../articles/python-to-r.html">Python models</a>
   </div>
-<!--/.container -->
+</li>
+<li class="nav-item dropdown">
+  <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-examples">Examples</a>
+  <div class="dropdown-menu" aria-labelledby="dropdown-examples">
+    <a class="dropdown-item" href="../articles/examples/basic-autograd.html">basic-autograd</a>
+    <a class="dropdown-item" href="../articles/examples/basic-nn-module.html">basic-nn-module</a>
+    <a class="dropdown-item" href="../articles/examples/dataset.html">dataset</a>
+  </div>
+</li>
+<li class="nav-item">
+  <a class="nav-link" href="../reference/index.html">Reference</a>
+</li>
+<li class="nav-item">
+  <a class="nav-link" href="../news/index.html">Changelog</a>
+</li>
+      </ul>
+<form class="form-inline my-2 my-lg-0" role="search">
+        <input type="search" class="form-control me-sm-2" aria-label="Toggle navigation" name="search-input" data-search-index="../search.json" id="search-input" placeholder="Search for" autocomplete="off">
+</form>
+
+      <ul class="navbar-nav">
+<li class="nav-item">
+  <a class="external-link nav-link" href="https://github.com/mlverse/torch/" aria-label="github">
+    <span class="fab fa fab fa-github fa-lg"></span>
+     
+  </a>
+</li>
+      </ul>
 </div>
-<!--/.navbar -->
 
-      
+    
+  </div>
+</nav><div class="container template-article">
 
-      </header><script src="torchscript_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
-  <div class="col-md-9 contents">
-    <div class="page-header toc-ignore">
-      <h1 data-toc-skip>TorchScript</h1>
+
+
+<script src="torchscript_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
+  <main id="main"><div class="page-header">
+      <img src="" class="logo" alt=""><h1>TorchScript</h1>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/mlverse/torch/blob/master/vignettes/torchscript.Rmd"><code>vignettes/torchscript.Rmd</code></a></small>
-      <div class="hidden name"><code>torchscript.Rmd</code></div>
-
+      <small class="dont-index">Source: <a href="https://github.com/mlverse/torch/blob/HEAD/vignettes/torchscript.Rmd" class="external-link"><code>vignettes/torchscript.Rmd</code></a></small>
+      <div class="d-none name"><code>torchscript.Rmd</code></div>
     </div>
 
     
     
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://torch.mlverse.org/docs">torch</a></span><span class="op">)</span></code></pre></div>
-<p><a href="https://pytorch.org/docs/stable/jit_language_reference.html#language-reference">TorchScript</a> is a statically typed subset of Python that can be interpreted by LibTorch without any Python dependency. The torch R package provides interfaces to create, serialize, load and execute TorchScript programs.</p>
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://torch.mlverse.org/docs">torch</a></span><span class="op">)</span></code></pre></div>
+<p><a href="https://pytorch.org/docs/stable/jit_language_reference.html#language-reference" class="external-link">TorchScript</a> is a statically typed subset of Python that can be interpreted by LibTorch without any Python dependency. The torch R package provides interfaces to create, serialize, load and execute TorchScript programs.</p>
 <p>Advantages of using TorchScript are:</p>
 <ul>
 <li><p>TorchScript code can be invoked in its own interpreter, which is basically a restricted Python interpreter. This interpreter does not acquire the Global Interpreter Lock, and so many requests can be processed on the same instance simultaneously.</p></li>
@@ -154,12 +115,12 @@
 <li><p>TorchScript gives us a representation in which we can do compiler optimizations on the code to make execution more efficient.</p></li>
 <li><p>TorchScript allows us to interface with many backend/device runtimes that require a broader view of the program than individual operators.</p></li>
 </ul>
-<div id="creating-torchscript-programs" class="section level2">
-<h2 class="hasAnchor">
-<a href="#creating-torchscript-programs" class="anchor"></a>Creating TorchScript programs</h2>
-<div id="tracing" class="section level3">
-<h3 class="hasAnchor">
-<a href="#tracing" class="anchor"></a>Tracing</h3>
+<div class="section level2">
+<h2 id="creating-torchscript-programs">Creating TorchScript programs<a class="anchor" aria-label="anchor" href="#creating-torchscript-programs"></a>
+</h2>
+<div class="section level3">
+<h3 id="tracing">Tracing<a class="anchor" aria-label="anchor" href="#tracing"></a>
+</h3>
 <p>TorchScript programs can be created from R using tracing. When using tracing, code is automatically converted into this subset of Python by recording only the actual operators on tensors and simply executing and discarding the other surrounding R code.</p>
 <p>Currently tracing is the only supported way to create TorchScript programs from R code.</p>
 <p>For example, let’s use the <code>jit_trace</code> function to create a TorchScript program. We pass a regular R function and example inputs.</p>
@@ -168,7 +129,7 @@
   <span class="fu"><a href="../reference/torch_relu.html">torch_relu</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>
 <span class="op">}</span>
 
-<span class="va">traced_fn</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/jit_trace.html">jit_trace</a></span><span class="op">(</span><span class="va">fn</span>, <span class="fu"><a href="../reference/torch_tensor.html">torch_tensor</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">1</span>, <span class="fl">0</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<span class="va">traced_fn</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/jit_trace.html">jit_trace</a></span><span class="op">(</span><span class="va">fn</span>, <span class="fu"><a href="../reference/torch_tensor.html">torch_tensor</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">1</span>, <span class="fl">0</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p>The <code>jit_trace</code> function has executed the R function with the example input and recorded all torch operations that occurred during execution to create a <em>graph</em>. <em>graph</em> is how we call the intermediate representation of TorchScript programs, and it can be inspected with:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">traced_fn</span><span class="op">$</span><span class="va">graph</span>
@@ -179,9 +140,9 @@
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">traced_fn</span><span class="op">(</span><span class="fu"><a href="../reference/torch_randn.html">torch_randn</a></span><span class="op">(</span><span class="fl">3</span><span class="op">)</span><span class="op">)</span>
 <span class="co">#&gt; torch_tensor</span>
-<span class="co">#&gt;  1.4243</span>
+<span class="co">#&gt;  0.3837</span>
 <span class="co">#&gt;  0.0000</span>
-<span class="co">#&gt;  1.3047</span>
+<span class="co">#&gt;  2.4086</span>
 <span class="co">#&gt; [ CPUFloatType{3} ]</span></code></pre></div>
 <p>It’s also possible to trace <code>nn_modules()</code> defined in R, for example:</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
@@ -191,9 +152,9 @@
     <span class="va">self</span><span class="op">$</span><span class="va">linear2</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/nn_linear.html">nn_linear</a></span><span class="op">(</span><span class="fl">10</span>, <span class="fl">1</span><span class="op">)</span>
   <span class="op">}</span>,
   forward <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span>
-    <span class="va">x</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span> 
-      <span class="va">self</span><span class="op">$</span><span class="fu">linear1</span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span> 
-      <span class="fu"><a href="../reference/nnf_relu.html">nnf_relu</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span> 
+    <span class="va">x</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> 
+      <span class="va">self</span><span class="op">$</span><span class="fu">linear1</span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> 
+      <span class="fu"><a href="../reference/nnf_relu.html">nnf_relu</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> 
       <span class="va">self</span><span class="op">$</span><span class="fu">linear2</span><span class="op">(</span><span class="op">)</span>
   <span class="op">}</span>
 <span class="op">)</span>
@@ -202,22 +163,22 @@
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">traced_module</span><span class="op">(</span><span class="fu"><a href="../reference/torch_randn.html">torch_randn</a></span><span class="op">(</span><span class="fl">3</span>, <span class="fl">10</span><span class="op">)</span><span class="op">)</span>
 <span class="co">#&gt; torch_tensor</span>
-<span class="co">#&gt; -0.1522</span>
-<span class="co">#&gt; -0.2576</span>
-<span class="co">#&gt; -0.4480</span>
+<span class="co">#&gt;  0.1978</span>
+<span class="co">#&gt;  0.1542</span>
+<span class="co">#&gt;  0.1632</span>
 <span class="co">#&gt; [ CPUFloatType{3,1} ][ grad_fn = &lt;AddBackward0&gt; ]</span></code></pre></div>
-<div id="limitations-of-tracing" class="section level4">
-<h4 class="hasAnchor">
-<a href="#limitations-of-tracing" class="anchor"></a>Limitations of tracing</h4>
+<div class="section level4">
+<h4 id="limitations-of-tracing">Limitations of tracing<a class="anchor" aria-label="anchor" href="#limitations-of-tracing"></a>
+</h4>
 <ol style="list-style-type: decimal">
 <li>Tracing will not record any control flow like if-statements or loops. When this control flow is constant across your module, this is fine and it often inlines the control flow decisions. But sometimes the control flow is actually part of the model itself. For instance, a recurrent network is a loop over the (possibly dynamic) length of an input sequence. For example:</li>
 </ol>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># fn does does an operation for each dimension of a tensor</span>
 <span class="va">fn</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span>
-  <span class="va">x</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span> 
-    <span class="fu"><a href="../reference/torch_unbind.html">torch_unbind</a></span><span class="op">(</span>dim <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span> 
-    <span class="fu"><a href="https://rdrr.io/r/base/lapply.html">lapply</a></span><span class="op">(</span><span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="va">x</span><span class="op">$</span><span class="fu">sum</span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span> 
+  <span class="va">x</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> 
+    <span class="fu"><a href="../reference/torch_unbind.html">torch_unbind</a></span><span class="op">(</span>dim <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> 
+    <span class="fu"><a href="https://rdrr.io/r/base/lapply.html" class="external-link">lapply</a></span><span class="op">(</span><span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="va">x</span><span class="op">$</span><span class="fu">sum</span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> 
     <span class="fu"><a href="../reference/torch_stack.html">torch_stack</a></span><span class="op">(</span>dim <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>
 <span class="op">}</span>
 <span class="co"># we trace using as an example a tensor with size (10, 5, 5)</span>
@@ -234,17 +195,17 @@
 <code class="sourceCode R"><span class="va">traced_dropout</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/jit_trace.html">jit_trace</a></span><span class="op">(</span><span class="fu"><a href="../reference/nn_dropout.html">nn_dropout</a></span><span class="op">(</span><span class="op">)</span>, <span class="fu"><a href="../reference/torch_ones.html">torch_ones</a></span><span class="op">(</span><span class="fl">5</span>,<span class="fl">5</span><span class="op">)</span><span class="op">)</span>
 <span class="fu">traced_dropout</span><span class="op">(</span><span class="fu"><a href="../reference/torch_ones.html">torch_ones</a></span><span class="op">(</span><span class="fl">3</span>,<span class="fl">3</span><span class="op">)</span><span class="op">)</span>
 <span class="co">#&gt; torch_tensor</span>
+<span class="co">#&gt;  2  2  0</span>
 <span class="co">#&gt;  0  2  0</span>
-<span class="co">#&gt;  2  0  2</span>
-<span class="co">#&gt;  0  2  0</span>
+<span class="co">#&gt;  2  0  0</span>
 <span class="co">#&gt; [ CPUFloatType{3,3} ]</span>
 <span class="va">traced_dropout</span><span class="op">$</span><span class="fu">eval</span><span class="op">(</span><span class="op">)</span>
 <span class="co"># even after setting to eval mode, dropout is applied</span>
 <span class="fu">traced_dropout</span><span class="op">(</span><span class="fu"><a href="../reference/torch_ones.html">torch_ones</a></span><span class="op">(</span><span class="fl">3</span>,<span class="fl">3</span><span class="op">)</span><span class="op">)</span>
 <span class="co">#&gt; torch_tensor</span>
-<span class="co">#&gt;  2  2  0</span>
-<span class="co">#&gt;  0  2  2</span>
-<span class="co">#&gt;  0  0  0</span>
+<span class="co">#&gt;  2  2  2</span>
+<span class="co">#&gt;  0  0  2</span>
+<span class="co">#&gt;  2  0  0</span>
 <span class="co">#&gt; [ CPUFloatType{3,3} ]</span></code></pre></div>
 <ol start="3" style="list-style-type: decimal">
 <li>Tracing proegrams can only take tensors and lists of tensors as input and return tensors and lists of tensors. For example:</li>
@@ -256,76 +217,76 @@
 <span class="fu"><a href="../reference/jit_trace.html">jit_trace</a></span><span class="op">(</span><span class="va">fn</span>, <span class="fu"><a href="../reference/torch_tensor.html">torch_tensor</a></span><span class="op">(</span><span class="fl">1</span><span class="op">)</span>, <span class="fl">1</span><span class="op">)</span>
 <span class="co">#&gt; Error in cpp_trace_function(tr_fn, list(...), .compilation_unit, strict, : Only tensors or (possibly nested) dict or tuples of tensors can be inputs to traced functions. Got float</span>
 <span class="co">#&gt; Exception raised from addInput at ../torch/csrc/jit/frontend/tracer.cpp:408 (most recent call first):</span>
-<span class="co">#&gt; frame #0: c10::Error::Error(c10::SourceLocation, std::__1::basic_string&lt;char, std::__1::char_traits&lt;char&gt;, std::__1::allocator&lt;char&gt; &gt;) + 98 (0x10e2cb5f2 in libc10.dylib)</span>
-<span class="co">#&gt; frame #1: c10::detail::torchCheckFail(char const*, char const*, unsigned int, std::__1::basic_string&lt;char, std::__1::char_traits&lt;char&gt;, std::__1::allocator&lt;char&gt; &gt; const&amp;) + 106 (0x10e2c9d6a in libc10.dylib)</span>
-<span class="co">#&gt; frame #2: torch::jit::tracer::addInput(std::__1::shared_ptr&lt;torch::jit::tracer::TracingState&gt; const&amp;, c10::IValue const&amp;, std::__1::shared_ptr&lt;c10::Type&gt; const&amp;, torch::jit::Value*) + 6951 (0x113fa8fe7 in libtorch_cpu.dylib)</span>
-<span class="co">#&gt; frame #3: torch::jit::tracer::addInput(std::__1::shared_ptr&lt;torch::jit::tracer::TracingState&gt; const&amp;, c10::IValue const&amp;, std::__1::shared_ptr&lt;c10::Type&gt; const&amp;, torch::jit::Value*) + 4216 (0x113fa8538 in libtorch_cpu.dylib)</span>
-<span class="co">#&gt; frame #4: torch::jit::tracer::trace(std::__1::vector&lt;c10::IValue, std::__1::allocator&lt;c10::IValue&gt; &gt;, std::__1::function&lt;std::__1::vector&lt;c10::IValue, std::__1::allocator&lt;c10::IValue&gt; &gt; (std::__1::vector&lt;c10::IValue, std::__1::allocator&lt;c10::IValue&gt; &gt;)&gt; const&amp;, std::__1::function&lt;std::__1::basic_string&lt;char, std::__1::char_traits&lt;char&gt;, std::__1::allocator&lt;char&gt; &gt; (at::Tensor const&amp;)&gt;, bool, bool, torch::jit::Module*, std::__1::vector&lt;std::__1::basic_string&lt;char, std::__1::char_traits&lt;char&gt;, std::__1::allocator&lt;char&gt; &gt;, std::__1::allocator&lt;std::__1::basic_string&lt;char, std::__1::char_traits&lt;char&gt;, std::__1::allocator&lt;char&gt; &gt; &gt; &gt; const&amp;) + 1034 (0x113fa5b4a in libtorch_cpu.dylib)</span>
-<span class="co">#&gt; frame #5: _lantern_trace_fn + 533 (0x10e0dc7d5 in liblantern.dylib)</span>
-<span class="co">#&gt; frame #6: cpp_trace_function(Rcpp::Function_Impl&lt;Rcpp::PreserveStorage&gt;, XPtrTorchStack, XPtrTorchCompilationUnit, XPtrTorchstring, bool, XPtrTorchScriptModule, bool, bool) + 547 (0x10d6f9703 in torchpkg.so)</span>
-<span class="co">#&gt; frame #7: _torch_cpp_trace_function + 720 (0x10d577190 in torchpkg.so)</span>
-<span class="co">#&gt; frame #8: R_doDotCall + 2679 (0x107782737 in libR.dylib)</span>
-<span class="co">#&gt; frame #9: do_dotcall + 334 (0x107783bfe in libR.dylib)</span>
-<span class="co">#&gt; frame #10: bcEval + 28581 (0x1077bac05 in libR.dylib)</span>
-<span class="co">#&gt; frame #11: Rf_eval + 385 (0x1077b35b1 in libR.dylib)</span>
-<span class="co">#&gt; frame #12: R_execClosure + 2169 (0x1077d3429 in libR.dylib)</span>
-<span class="co">#&gt; frame #13: Rf_applyClosure + 471 (0x1077d2217 in libR.dylib)</span>
-<span class="co">#&gt; frame #14: bcEval + 26782 (0x1077ba4fe in libR.dylib)</span>
-<span class="co">#&gt; frame #15: Rf_eval + 385 (0x1077b35b1 in libR.dylib)</span>
-<span class="co">#&gt; frame #16: R_execClosure + 2169 (0x1077d3429 in libR.dylib)</span>
-<span class="co">#&gt; frame #17: Rf_applyClosure + 471 (0x1077d2217 in libR.dylib)</span>
-<span class="co">#&gt; frame #18: Rf_eval + 1595 (0x1077b3a6b in libR.dylib)</span>
-<span class="co">#&gt; frame #19: do_eval + 625 (0x1077d7461 in libR.dylib)</span>
-<span class="co">#&gt; frame #20: bcEval + 28581 (0x1077bac05 in libR.dylib)</span>
-<span class="co">#&gt; frame #21: Rf_eval + 385 (0x1077b35b1 in libR.dylib)</span>
-<span class="co">#&gt; frame #22: R_execClosure + 2169 (0x1077d3429 in libR.dylib)</span>
-<span class="co">#&gt; frame #23: Rf_applyClosure + 471 (0x1077d2217 in libR.dylib)</span>
-<span class="co">#&gt; frame #24: bcEval + 26782 (0x1077ba4fe in libR.dylib)</span>
-<span class="co">#&gt; frame #25: Rf_eval + 385 (0x1077b35b1 in libR.dylib)</span>
-<span class="co">#&gt; frame #26: forcePromise + 172 (0x1077d192c in libR.dylib)</span>
-<span class="co">#&gt; frame #27: Rf_eval + 1124 (0x1077b3894 in libR.dylib)</span>
-<span class="co">#&gt; frame #28: do_withVisible + 57 (0x1077d7ad9 in libR.dylib)</span>
-<span class="co">#&gt; frame #29: do_internal + 362 (0x10781b2fa in libR.dylib)</span>
-<span class="co">#&gt; frame #30: bcEval + 29053 (0x1077baddd in libR.dylib)</span>
-<span class="co">#&gt; frame #31: Rf_eval + 385 (0x1077b35b1 in libR.dylib)</span>
-<span class="co">#&gt; frame #32: R_execClosure + 2169 (0x1077d3429 in libR.dylib)</span>
-<span class="co">#&gt; frame #33: Rf_applyClosure + 471 (0x1077d2217 in libR.dylib)</span>
-<span class="co">#&gt; frame #34: bcEval + 26782 (0x1077ba4fe in libR.dylib)</span>
-<span class="co">#&gt; frame #35: Rf_eval + 385 (0x1077b35b1 in libR.dylib)</span>
-<span class="co">#&gt; frame #36: forcePromise + 172 (0x1077d192c in libR.dylib)</span>
-<span class="co">#&gt; frame #37: getvar + 778 (0x1077dcf7a in libR.dylib)</span>
-<span class="co">#&gt; frame #38: bcEval + 15063 (0x1077b7737 in libR.dylib)</span>
-<span class="co">#&gt; frame #39: Rf_eval + 385 (0x1077b35b1 in libR.dylib)</span>
-<span class="co">#&gt; frame #40: R_execClosure + 2169 (0x1077d3429 in libR.dylib)</span>
-<span class="co">#&gt; frame #41: Rf_applyClosure + 471 (0x1077d2217 in libR.dylib)</span>
-<span class="co">#&gt; frame #42: bcEval + 26782 (0x1077ba4fe in libR.dylib)</span>
-<span class="co">#&gt; frame #43: Rf_eval + 385 (0x1077b35b1 in libR.dylib)</span>
-<span class="co">#&gt; frame #44: forcePromise + 172 (0x1077d192c in libR.dylib)</span>
-<span class="co">#&gt; frame #45: getvar + 778 (0x1077dcf7a in libR.dylib)</span>
-<span class="co">#&gt; frame #46: bcEval + 15063 (0x1077b7737 in libR.dylib)</span>
-<span class="co">#&gt; frame #47: Rf_eval + 385 (0x1077b35b1 in libR.dylib)</span>
-<span class="co">#&gt; frame #48: forcePromise + 172 (0x1077d192c in libR.dylib)</span>
-<span class="co">#&gt; frame #49: getvar + 778 (0x1077dcf7a in libR.dylib)</span>
-<span class="co">#&gt; frame #50: bcEval + 15063 (0x1077b7737 in libR.dylib)</span>
-<span class="co">#&gt; frame #51: Rf_eval + 385 (0x1077b35b1 in libR.dylib)</span>
-<span class="co">#&gt; frame #52: forcePromise + 172 (0x1077d192c in libR.dylib)</span>
-<span class="co">#&gt; frame #53: getvar + 778 (0x1077dcf7a in libR.dylib)</span>
-<span class="co">#&gt; frame #54: bcEval + 15063 (0x1077b7737 in libR.dylib)</span>
-<span class="co">#&gt; frame #55: Rf_eval + 385 (0x1077b35b1 in libR.dylib)</span>
-<span class="co">#&gt; frame #56: forcePromise + 172 (0x1077d192c in libR.dylib)</span>
-<span class="co">#&gt; frame #57: getvar + 778 (0x1077dcf7a in libR.dylib)</span>
-<span class="co">#&gt; frame #58: bcEval + 15063 (0x1077b7737 in libR.dylib)</span>
-<span class="co">#&gt; frame #59: Rf_eval + 385 (0x1077b35b1 in libR.dylib)</span>
-<span class="co">#&gt; frame #60: forcePromise + 172 (0x1077d192c in libR.dylib)</span>
-<span class="co">#&gt; frame #61: getvar + 778 (0x1077dcf7a in libR.dylib)</span>
-<span class="co">#&gt; frame #62: bcEval + 15063 (0x1077b7737 in libR.dylib)</span>
-<span class="co">#&gt; frame #63: Rf_eval + 385 (0x1077b35b1 in libR.dylib)</span>
+<span class="co">#&gt; frame #0: c10::Error::Error(c10::SourceLocation, std::__1::basic_string&lt;char, std::__1::char_traits&lt;char&gt;, std::__1::allocator&lt;char&gt; &gt;) + 98 (0x1135cb522 in libc10.dylib)</span>
+<span class="co">#&gt; frame #1: c10::detail::torchCheckFail(char const*, char const*, unsigned int, std::__1::basic_string&lt;char, std::__1::char_traits&lt;char&gt;, std::__1::allocator&lt;char&gt; &gt; const&amp;) + 106 (0x1135c9c3a in libc10.dylib)</span>
+<span class="co">#&gt; frame #2: torch::jit::tracer::addInput(std::__1::shared_ptr&lt;torch::jit::tracer::TracingState&gt; const&amp;, c10::IValue const&amp;, std::__1::shared_ptr&lt;c10::Type&gt; const&amp;, torch::jit::Value*) + 6951 (0x1191e58e7 in libtorch_cpu.dylib)</span>
+<span class="co">#&gt; frame #3: torch::jit::tracer::addInput(std::__1::shared_ptr&lt;torch::jit::tracer::TracingState&gt; const&amp;, c10::IValue const&amp;, std::__1::shared_ptr&lt;c10::Type&gt; const&amp;, torch::jit::Value*) + 4216 (0x1191e4e38 in libtorch_cpu.dylib)</span>
+<span class="co">#&gt; frame #4: torch::jit::tracer::trace(std::__1::vector&lt;c10::IValue, std::__1::allocator&lt;c10::IValue&gt; &gt;, std::__1::function&lt;std::__1::vector&lt;c10::IValue, std::__1::allocator&lt;c10::IValue&gt; &gt; (std::__1::vector&lt;c10::IValue, std::__1::allocator&lt;c10::IValue&gt; &gt;)&gt; const&amp;, std::__1::function&lt;std::__1::basic_string&lt;char, std::__1::char_traits&lt;char&gt;, std::__1::allocator&lt;char&gt; &gt; (at::Tensor const&amp;)&gt;, bool, bool, torch::jit::Module*, std::__1::vector&lt;std::__1::basic_string&lt;char, std::__1::char_traits&lt;char&gt;, std::__1::allocator&lt;char&gt; &gt;, std::__1::allocator&lt;std::__1::basic_string&lt;char, std::__1::char_traits&lt;char&gt;, std::__1::allocator&lt;char&gt; &gt; &gt; &gt; const&amp;) + 1034 (0x1191e244a in libtorch_cpu.dylib)</span>
+<span class="co">#&gt; frame #5: _lantern_trace_fn + 541 (0x1160f146d in liblantern.dylib)</span>
+<span class="co">#&gt; frame #6: cpp_trace_function(Rcpp::Function_Impl&lt;Rcpp::PreserveStorage&gt;, XPtrTorchStack, XPtrTorchCompilationUnit, XPtrTorchstring, bool, XPtrTorchScriptModule, bool, bool) + 547 (0x1156609a3 in torchpkg.so)</span>
+<span class="co">#&gt; frame #7: _torch_cpp_trace_function + 727 (0x1154e4357 in torchpkg.so)</span>
+<span class="co">#&gt; frame #8: R_doDotCall + 2679 (0x10d98d737 in libR.dylib)</span>
+<span class="co">#&gt; frame #9: do_dotcall + 334 (0x10d98ebfe in libR.dylib)</span>
+<span class="co">#&gt; frame #10: bcEval + 28581 (0x10d9c5c05 in libR.dylib)</span>
+<span class="co">#&gt; frame #11: Rf_eval + 385 (0x10d9be5b1 in libR.dylib)</span>
+<span class="co">#&gt; frame #12: R_execClosure + 2169 (0x10d9de429 in libR.dylib)</span>
+<span class="co">#&gt; frame #13: Rf_applyClosure + 471 (0x10d9dd217 in libR.dylib)</span>
+<span class="co">#&gt; frame #14: bcEval + 26782 (0x10d9c54fe in libR.dylib)</span>
+<span class="co">#&gt; frame #15: Rf_eval + 385 (0x10d9be5b1 in libR.dylib)</span>
+<span class="co">#&gt; frame #16: R_execClosure + 2169 (0x10d9de429 in libR.dylib)</span>
+<span class="co">#&gt; frame #17: Rf_applyClosure + 471 (0x10d9dd217 in libR.dylib)</span>
+<span class="co">#&gt; frame #18: Rf_eval + 1595 (0x10d9bea6b in libR.dylib)</span>
+<span class="co">#&gt; frame #19: do_eval + 625 (0x10d9e2461 in libR.dylib)</span>
+<span class="co">#&gt; frame #20: bcEval + 28581 (0x10d9c5c05 in libR.dylib)</span>
+<span class="co">#&gt; frame #21: Rf_eval + 385 (0x10d9be5b1 in libR.dylib)</span>
+<span class="co">#&gt; frame #22: R_execClosure + 2169 (0x10d9de429 in libR.dylib)</span>
+<span class="co">#&gt; frame #23: Rf_applyClosure + 471 (0x10d9dd217 in libR.dylib)</span>
+<span class="co">#&gt; frame #24: bcEval + 26782 (0x10d9c54fe in libR.dylib)</span>
+<span class="co">#&gt; frame #25: Rf_eval + 385 (0x10d9be5b1 in libR.dylib)</span>
+<span class="co">#&gt; frame #26: forcePromise + 172 (0x10d9dc92c in libR.dylib)</span>
+<span class="co">#&gt; frame #27: Rf_eval + 1124 (0x10d9be894 in libR.dylib)</span>
+<span class="co">#&gt; frame #28: do_withVisible + 57 (0x10d9e2ad9 in libR.dylib)</span>
+<span class="co">#&gt; frame #29: do_internal + 362 (0x10da262fa in libR.dylib)</span>
+<span class="co">#&gt; frame #30: bcEval + 29053 (0x10d9c5ddd in libR.dylib)</span>
+<span class="co">#&gt; frame #31: Rf_eval + 385 (0x10d9be5b1 in libR.dylib)</span>
+<span class="co">#&gt; frame #32: R_execClosure + 2169 (0x10d9de429 in libR.dylib)</span>
+<span class="co">#&gt; frame #33: Rf_applyClosure + 471 (0x10d9dd217 in libR.dylib)</span>
+<span class="co">#&gt; frame #34: bcEval + 26782 (0x10d9c54fe in libR.dylib)</span>
+<span class="co">#&gt; frame #35: Rf_eval + 385 (0x10d9be5b1 in libR.dylib)</span>
+<span class="co">#&gt; frame #36: forcePromise + 172 (0x10d9dc92c in libR.dylib)</span>
+<span class="co">#&gt; frame #37: getvar + 778 (0x10d9e7f7a in libR.dylib)</span>
+<span class="co">#&gt; frame #38: bcEval + 15063 (0x10d9c2737 in libR.dylib)</span>
+<span class="co">#&gt; frame #39: Rf_eval + 385 (0x10d9be5b1 in libR.dylib)</span>
+<span class="co">#&gt; frame #40: R_execClosure + 2169 (0x10d9de429 in libR.dylib)</span>
+<span class="co">#&gt; frame #41: Rf_applyClosure + 471 (0x10d9dd217 in libR.dylib)</span>
+<span class="co">#&gt; frame #42: bcEval + 26782 (0x10d9c54fe in libR.dylib)</span>
+<span class="co">#&gt; frame #43: Rf_eval + 385 (0x10d9be5b1 in libR.dylib)</span>
+<span class="co">#&gt; frame #44: forcePromise + 172 (0x10d9dc92c in libR.dylib)</span>
+<span class="co">#&gt; frame #45: getvar + 778 (0x10d9e7f7a in libR.dylib)</span>
+<span class="co">#&gt; frame #46: bcEval + 15063 (0x10d9c2737 in libR.dylib)</span>
+<span class="co">#&gt; frame #47: Rf_eval + 385 (0x10d9be5b1 in libR.dylib)</span>
+<span class="co">#&gt; frame #48: forcePromise + 172 (0x10d9dc92c in libR.dylib)</span>
+<span class="co">#&gt; frame #49: getvar + 778 (0x10d9e7f7a in libR.dylib)</span>
+<span class="co">#&gt; frame #50: bcEval + 15063 (0x10d9c2737 in libR.dylib)</span>
+<span class="co">#&gt; frame #51: Rf_eval + 385 (0x10d9be5b1 in libR.dylib)</span>
+<span class="co">#&gt; frame #52: forcePromise + 172 (0x10d9dc92c in libR.dylib)</span>
+<span class="co">#&gt; frame #53: getvar + 778 (0x10d9e7f7a in libR.dylib)</span>
+<span class="co">#&gt; frame #54: bcEval + 15063 (0x10d9c2737 in libR.dylib)</span>
+<span class="co">#&gt; frame #55: Rf_eval + 385 (0x10d9be5b1 in libR.dylib)</span>
+<span class="co">#&gt; frame #56: forcePromise + 172 (0x10d9dc92c in libR.dylib)</span>
+<span class="co">#&gt; frame #57: getvar + 778 (0x10d9e7f7a in libR.dylib)</span>
+<span class="co">#&gt; frame #58: bcEval + 15063 (0x10d9c2737 in libR.dylib)</span>
+<span class="co">#&gt; frame #59: Rf_eval + 385 (0x10d9be5b1 in libR.dylib)</span>
+<span class="co">#&gt; frame #60: forcePromise + 172 (0x10d9dc92c in libR.dylib)</span>
+<span class="co">#&gt; frame #61: getvar + 778 (0x10d9e7f7a in libR.dylib)</span>
+<span class="co">#&gt; frame #62: bcEval + 15063 (0x10d9c2737 in libR.dylib)</span>
+<span class="co">#&gt; frame #63: Rf_eval + 385 (0x10d9be5b1 in libR.dylib)</span>
 <span class="co">#&gt; :</span></code></pre></div>
 </div>
 </div>
-<div id="compiling-torchscript" class="section level3">
-<h3 class="hasAnchor">
-<a href="#compiling-torchscript" class="anchor"></a>Compiling TorchScript</h3>
+<div class="section level3">
+<h3 id="compiling-torchscript">Compiling TorchScript<a class="anchor" aria-label="anchor" href="#compiling-torchscript"></a>
+</h3>
 <p>It’s also possible to create TorchScript programs by compiling TorchScript code. TorchScript code looks a lot like standard python code. For example:</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">tr</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/jit_compile.html">jit_compile</a></span><span class="op">(</span><span class="st">"
@@ -333,7 +294,7 @@ def fn (x: Tensor):
   return torch.relu(x)
 
 "</span><span class="op">)</span>
-<span class="va">tr</span><span class="op">$</span><span class="fu">fn</span><span class="op">(</span><span class="fu"><a href="../reference/torch_tensor.html">torch_tensor</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">1</span>, <span class="fl">0</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
+<span class="va">tr</span><span class="op">$</span><span class="fu">fn</span><span class="op">(</span><span class="fu"><a href="../reference/torch_tensor.html">torch_tensor</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">1</span>, <span class="fl">0</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
 <span class="co">#&gt; torch_tensor</span>
 <span class="co">#&gt;  0</span>
 <span class="co">#&gt;  0</span>
@@ -341,9 +302,9 @@ def fn (x: Tensor):
 <span class="co">#&gt; [ CPUFloatType{3} ]</span></code></pre></div>
 </div>
 </div>
-<div id="serializing-and-loading" class="section level2">
-<h2 class="hasAnchor">
-<a href="#serializing-and-loading" class="anchor"></a>Serializing and loading</h2>
+<div class="section level2">
+<h2 id="serializing-and-loading">Serializing and loading<a class="anchor" aria-label="anchor" href="#serializing-and-loading"></a>
+</h2>
 <p>TorchScript programs can be serialized using the <code>jit_save</code> function and loaded back from disk with <code>jit_load</code>.</p>
 <p>For example:</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
@@ -355,7 +316,7 @@ def fn (x: Tensor):
 <span class="va">loaded</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/jit_load.html">jit_load</a></span><span class="op">(</span><span class="st">"path.pt"</span><span class="op">)</span></code></pre></div>
 <p>Loaded programs can be executed as usual:</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">loaded</span><span class="op">(</span><span class="fu"><a href="../reference/torch_tensor.html">torch_tensor</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">1</span>, <span class="fl">0</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
+<code class="sourceCode R"><span class="fu">loaded</span><span class="op">(</span><span class="fu"><a href="../reference/torch_tensor.html">torch_tensor</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">1</span>, <span class="fl">0</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
 <span class="co">#&gt; torch_tensor</span>
 <span class="co">#&gt;  0</span>
 <span class="co">#&gt;  0</span>
@@ -364,9 +325,9 @@ def fn (x: Tensor):
 <p><strong>Note</strong> You can load TorchScript programs that were created in libraries different than <code>torch</code> for R. Eg, a TorchScript program can be created in PyTorch with <code>torch.jit.trace</code> or <code>torch.jit.script</code>, and run from R.</p>
 <p>R objects are automatically converted to their TorchScript counterpart following the Types table in this document. However, sometimes it’s necessary to make type annotations with <code><a href="../reference/jit_tuple.html">jit_tuple()</a></code> and <code><a href="../reference/jit_scalar.html">jit_scalar()</a></code> to disambiguate the conversion.</p>
 </div>
-<div id="types" class="section level2">
-<h2 class="hasAnchor">
-<a href="#types" class="anchor"></a>Types</h2>
+<div class="section level2">
+<h2 id="types">Types<a class="anchor" aria-label="anchor" href="#types"></a>
+</h2>
 <p>The following table lists all TorchScript types and how to convert the to and back to R.</p>
 <table class="table">
 <colgroup>
@@ -384,7 +345,7 @@ def fn (x: Tensor):
 </tr>
 <tr class="even">
 <td><code>Tuple[T0, T1, ..., TN]</code></td>
-<td>A <code><a href="https://rdrr.io/r/base/list.html">list()</a></code> containing subtypes <code>T0</code>, <code>T1</code>, etc. wrapped with <code><a href="../reference/jit_tuple.html">jit_tuple()</a></code> .</td>
+<td>A <code><a href="https://rdrr.io/r/base/list.html" class="external-link">list()</a></code> containing subtypes <code>T0</code>, <code>T1</code>, etc. wrapped with <code><a href="../reference/jit_tuple.html">jit_tuple()</a></code> .</td>
 </tr>
 <tr class="odd">
 <td><code>bool</code></td>
@@ -429,31 +390,28 @@ def fn (x: Tensor):
 </tbody>
 </table>
 </div>
-  </div>
-
-  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
-
-        <nav id="toc" data-toggle="toc"><h2 data-toc-skip>Contents</h2>
-    </nav>
-</div>
-
+  </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
+    </nav></aside>
 </div>
 
 
 
-      <footer><div class="copyright">
-  <p>Developed by Daniel Falbel, Javier Luraschi.</p>
+    <footer><div class="pkgdown-footer-left">
+  <p></p>
+<p>Developed by Daniel Falbel, Javier Luraschi.</p>
 </div>
 
-<div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
+<div class="pkgdown-footer-right">
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
 </div>
 
-      </footer>
+    </footer>
 </div>
 
   
 
+  
 
   </body>
 </html>

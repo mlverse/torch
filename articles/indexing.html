@@ -4,14 +4,14 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="description" content="torch">
 <title>Indexing tensors • torch</title>
-<!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script><!-- Bootstrap --><link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.4.0/united/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script><!-- bootstrap-toc --><link rel="stylesheet" href="../bootstrap-toc.css">
-<script src="../bootstrap-toc.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
+<script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="../deps/bootstrap-5.1.0/bootstrap.min.css" rel="stylesheet">
+<script src="../deps/bootstrap-5.1.0/bootstrap.bundle.min.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
-<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
-<script src="../pkgdown.js"></script><link href="../extra.css" rel="stylesheet">
+<!-- bootstrap-toc --><script src="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.1/dist/bootstrap-toc.min.js"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="../pkgdown.js"></script><link href="../extra.css" rel="stylesheet">
 <meta property="og:title" content="Indexing tensors">
 <meta property="og:description" content="torch">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
@@ -25,132 +25,93 @@
   gtag('config', 'UA-178883486-1');
 </script>
 </head>
-<body data-spy="scroll" data-target="#toc">
-    <div class="container template-article">
-      <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
-  <div class="container">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <span class="navbar-brand">
-        <a class="navbar-link" href="../index.html">torch</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.6.1</span>
-      </span>
-    </div>
+<body>
+    <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
+    
 
-    <div id="navbar" class="navbar-collapse collapse">
-      <ul class="nav navbar-nav">
-<li>
-  <a href="../index.html">
-    <span class="fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
-<li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-    Articles
-     
-    <span class="caret"></span>
-  </a>
-  <ul class="dropdown-menu" role="menu">
-<li>
-      <a href="../articles/installation.html">Installation</a>
-    </li>
-    <li class="dropdown-header">Tensors</li>
-    <li>
-      <a href="../articles/tensor-creation.html">Creating tensors</a>
-    </li>
-    <li>
-      <a href="../articles/indexing.html">Indexing</a>
-    </li>
-    <li>
-      <a href="../articles/tensor/index.html">Tensor class</a>
-    </li>
-    <li>
-      <a href="../articles/serialization.html">Serialization</a>
-    </li>
-    <li class="dropdown-header">Datasets</li>
-    <li>
-      <a href="../articles/loading-data.html">Loading Data</a>
-    </li>
-    <li class="dropdown-header">Autograd</li>
-    <li>
-      <a href="../articles/using-autograd.html">Using autograd</a>
-    </li>
-    <li>
-      <a href="../articles/extending-autograd.html">Extending autograd</a>
-    </li>
-    <li>
-      <a href="../articles/python-to-r.html">Python models</a>
-    </li>
-  </ul>
-</li>
-<li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-    Examples
-     
-    <span class="caret"></span>
-  </a>
-  <ul class="dropdown-menu" role="menu">
-<li>
-      <a href="../articles/examples/basic-autograd.html">basic-autograd</a>
-    </li>
-    <li>
-      <a href="../articles/examples/basic-nn-module.html">basic-nn-module</a>
-    </li>
-    <li>
-      <a href="../articles/examples/dataset.html">dataset</a>
-    </li>
-  </ul>
-</li>
-<li>
-  <a href="../reference/index.html">Reference</a>
-</li>
-<li>
-  <a href="../news/index.html">Changelog</a>
-</li>
-      </ul>
-<ul class="nav navbar-nav navbar-right">
-<li>
-  <a href="https://github.com/mlverse/torch/">
-    <span class="fab fa-github fa-lg"></span>
-     
-  </a>
-</li>
-      </ul>
-</div>
-<!--/.nav-collapse -->
+    <nav class="navbar fixed-top navbar-dark navbar-expand-lg bg-primary"><div class="container">
+    
+    <a class="navbar-brand me-2" href="../index.html">torch</a>
+
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.7.0</small>
+
+    
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div id="navbar" class="collapse navbar-collapse ms-3">
+      <ul class="navbar-nav me-auto">
+<li class="active nav-item dropdown">
+  <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
+  <div class="dropdown-menu" aria-labelledby="dropdown-articles">
+    <a class="dropdown-item" href="../articles/installation.html">Installation</a>
+    <h6 class="dropdown-header" data-toc-skip>Tensors</h6>
+    <a class="dropdown-item" href="../articles/tensor-creation.html">Creating tensors</a>
+    <a class="dropdown-item" href="../articles/indexing.html">Indexing</a>
+    <a class="dropdown-item" href="../articles/tensor/index.html">Tensor class</a>
+    <a class="dropdown-item" href="../articles/serialization.html">Serialization</a>
+    <h6 class="dropdown-header" data-toc-skip>Datasets</h6>
+    <a class="dropdown-item" href="../articles/loading-data.html">Loading Data</a>
+    <h6 class="dropdown-header" data-toc-skip>Autograd</h6>
+    <a class="dropdown-item" href="../articles/using-autograd.html">Using autograd</a>
+    <a class="dropdown-item" href="../articles/extending-autograd.html">Extending autograd</a>
+    <a class="dropdown-item" href="../articles/python-to-r.html">Python models</a>
   </div>
-<!--/.container -->
+</li>
+<li class="nav-item dropdown">
+  <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-examples">Examples</a>
+  <div class="dropdown-menu" aria-labelledby="dropdown-examples">
+    <a class="dropdown-item" href="../articles/examples/basic-autograd.html">basic-autograd</a>
+    <a class="dropdown-item" href="../articles/examples/basic-nn-module.html">basic-nn-module</a>
+    <a class="dropdown-item" href="../articles/examples/dataset.html">dataset</a>
+  </div>
+</li>
+<li class="nav-item">
+  <a class="nav-link" href="../reference/index.html">Reference</a>
+</li>
+<li class="nav-item">
+  <a class="nav-link" href="../news/index.html">Changelog</a>
+</li>
+      </ul>
+<form class="form-inline my-2 my-lg-0" role="search">
+        <input type="search" class="form-control me-sm-2" aria-label="Toggle navigation" name="search-input" data-search-index="../search.json" id="search-input" placeholder="Search for" autocomplete="off">
+</form>
+
+      <ul class="navbar-nav">
+<li class="nav-item">
+  <a class="external-link nav-link" href="https://github.com/mlverse/torch/" aria-label="github">
+    <span class="fab fa fab fa-github fa-lg"></span>
+     
+  </a>
+</li>
+      </ul>
 </div>
-<!--/.navbar -->
 
-      
+    
+  </div>
+</nav><div class="container template-article">
 
-      </header><script src="indexing_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
-  <div class="col-md-9 contents">
-    <div class="page-header toc-ignore">
-      <h1 data-toc-skip>Indexing tensors</h1>
+
+
+<script src="indexing_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
+  <main id="main"><div class="page-header">
+      <img src="" class="logo" alt=""><h1>Indexing tensors</h1>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/mlverse/torch/blob/master/vignettes/indexing.Rmd"><code>vignettes/indexing.Rmd</code></a></small>
-      <div class="hidden name"><code>indexing.Rmd</code></div>
-
+      <small class="dont-index">Source: <a href="https://github.com/mlverse/torch/blob/HEAD/vignettes/indexing.Rmd" class="external-link"><code>vignettes/indexing.Rmd</code></a></small>
+      <div class="d-none name"><code>indexing.Rmd</code></div>
     </div>
 
     
     
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://torch.mlverse.org/docs">torch</a></span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://torch.mlverse.org/docs">torch</a></span><span class="op">)</span></code></pre></div>
 <p>In this article we describe the indexing operator for torch tensors and how it compares to the R indexing operator for arrays.</p>
-<p>Torch’s indexing semantics are closer to numpy’s semantics than R’s. You will find a lot of similarities between this article and the <code>numpy</code> indexing article available <a href="https://docs.scipy.org/doc/numpy-1.10.0/user/basics.indexing.html">here</a>.</p>
-<div id="single-element-indexing" class="section level2">
-<h2 class="hasAnchor">
-<a href="#single-element-indexing" class="anchor"></a>Single element indexing</h2>
+<p>Torch’s indexing semantics are closer to numpy’s semantics than R’s. You will find a lot of similarities between this article and the <code>numpy</code> indexing article available <a href="https://docs.scipy.org/doc/numpy-1.10.0/user/basics.indexing.html" class="external-link">here</a>.</p>
+<div class="section level2">
+<h2 id="single-element-indexing">Single element indexing<a class="anchor" aria-label="anchor" href="#single-element-indexing"></a>
+</h2>
 <p>Single element indexing for a 1-D tensors works mostly as expected. Like R, it is 1-based. Unlike R though, it accepts negative indices for indexing from the end of the array. (In R, negative indices are used to remove elements.)</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/torch_tensor.html">torch_tensor</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span><span class="op">)</span>
@@ -164,7 +125,7 @@
 <span class="co">#&gt; [ CPULongType{} ]</span></code></pre></div>
 <p>You can also subset matrices and higher dimensions arrays using the same syntax:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">x</span> <span class="op">&lt;-</span> <span class="va">x</span><span class="op">$</span><span class="fu">reshape</span><span class="op">(</span>shape <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">5</span><span class="op">)</span><span class="op">)</span>
+<code class="sourceCode R"><span class="va">x</span> <span class="op">&lt;-</span> <span class="va">x</span><span class="op">$</span><span class="fu">reshape</span><span class="op">(</span>shape <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">5</span><span class="op">)</span><span class="op">)</span>
 <span class="va">x</span>
 <span class="co">#&gt; torch_tensor</span>
 <span class="co">#&gt;   1   2   3   4   5</span>
@@ -189,9 +150,9 @@
 <span class="co">#&gt;  5</span>
 <span class="co">#&gt; [ CPULongType{5} ]</span></code></pre></div>
 </div>
-<div id="slicing-and-striding" class="section level2">
-<h2 class="hasAnchor">
-<a href="#slicing-and-striding" class="anchor"></a>Slicing and striding</h2>
+<div class="section level2">
+<h2 id="slicing-and-striding">Slicing and striding<a class="anchor" aria-label="anchor" href="#slicing-and-striding"></a>
+</h2>
 <p>It is possible to slice and stride arrays to extract sub-arrays of the same number of dimensions, but of different sizes than the original. This is best illustrated by a few examples:</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/torch_tensor.html">torch_tensor</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span><span class="op">)</span>
@@ -242,7 +203,7 @@
 <span class="co">#&gt;  10</span>
 <span class="co">#&gt; [ CPULongType{6} ]</span></code></pre></div>
 <blockquote>
-<p>Note: the slicing behavior relies on <a href="https://adv-r.hadley.nz/evaluation.html#evaluation">Non Standard Evaluation</a>. It requires that the expression is passed to the <code>[</code> not exactly the resulting R vector.</p>
+<p>Note: the slicing behavior relies on <a href="https://adv-r.hadley.nz/evaluation.html#evaluation" class="external-link">Non Standard Evaluation</a>. It requires that the expression is passed to the <code>[</code> not exactly the resulting R vector.</p>
 </blockquote>
 <p>To allow dynamic dynamic indices, you can create a new slice using the <code>slc</code> function. For example:</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
@@ -261,37 +222,37 @@
 <span class="co">#&gt;  5</span>
 <span class="co">#&gt; [ CPULongType{3} ]</span></code></pre></div>
 </div>
-<div id="getting-the-complete-dimension" class="section level2">
-<h2 class="hasAnchor">
-<a href="#getting-the-complete-dimension" class="anchor"></a>Getting the complete dimension</h2>
+<div class="section level2">
+<h2 id="getting-the-complete-dimension">Getting the complete dimension<a class="anchor" aria-label="anchor" href="#getting-the-complete-dimension"></a>
+</h2>
 <p>Like in R, you can take all elements in a dimension by leaving an index empty.</p>
 <p>Consider a matrix:</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/torch_randn.html">torch_randn</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">3</span><span class="op">)</span>
 <span class="va">x</span>
 <span class="co">#&gt; torch_tensor</span>
-<span class="co">#&gt; -0.1247  1.0235 -0.0020</span>
-<span class="co">#&gt; -0.5360 -0.5432  1.1372</span>
+<span class="co">#&gt;  0.4345  2.2531 -0.8595</span>
+<span class="co">#&gt; -1.8210 -0.9156 -1.1016</span>
 <span class="co">#&gt; [ CPUFloatType{2,3} ]</span></code></pre></div>
 <p>The following syntax will give you the first row:</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">x</span><span class="op">[</span><span class="fl">1</span>,<span class="op">]</span>
 <span class="co">#&gt; torch_tensor</span>
-<span class="co">#&gt; -0.1247</span>
-<span class="co">#&gt;  1.0235</span>
-<span class="co">#&gt; -0.0020</span>
+<span class="co">#&gt;  0.4345</span>
+<span class="co">#&gt;  2.2531</span>
+<span class="co">#&gt; -0.8595</span>
 <span class="co">#&gt; [ CPUFloatType{3} ]</span></code></pre></div>
 <p>And this would give you the first 2 columns:</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">x</span><span class="op">[</span>,<span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">]</span>
 <span class="co">#&gt; torch_tensor</span>
-<span class="co">#&gt; -0.1247  1.0235</span>
-<span class="co">#&gt; -0.5360 -0.5432</span>
+<span class="co">#&gt;  0.4345  2.2531</span>
+<span class="co">#&gt; -1.8210 -0.9156</span>
 <span class="co">#&gt; [ CPUFloatType{2,2} ]</span></code></pre></div>
 </div>
-<div id="dropping-dimensions" class="section level2">
-<h2 class="hasAnchor">
-<a href="#dropping-dimensions" class="anchor"></a>Dropping dimensions</h2>
+<div class="section level2">
+<h2 id="dropping-dimensions">Dropping dimensions<a class="anchor" aria-label="anchor" href="#dropping-dimensions"></a>
+</h2>
 <p>By default, when indexing by a single integer, this dimension will be dropped to avoid the singleton dimension:</p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/torch_randn.html">torch_randn</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">3</span><span class="op">)</span>
@@ -302,12 +263,12 @@
 <code class="sourceCode R"><span class="va">x</span><span class="op">[</span><span class="fl">1</span>,,drop <span class="op">=</span> <span class="cn">FALSE</span><span class="op">]</span><span class="op">$</span><span class="va">shape</span>
 <span class="co">#&gt; [1] 1 3</span></code></pre></div>
 </div>
-<div id="adding-a-new-dimension" class="section level2">
-<h2 class="hasAnchor">
-<a href="#adding-a-new-dimension" class="anchor"></a>Adding a new dimension</h2>
+<div class="section level2">
+<h2 id="adding-a-new-dimension">Adding a new dimension<a class="anchor" aria-label="anchor" href="#adding-a-new-dimension"></a>
+</h2>
 <p>It’s possible to add a new dimension to a tensor using index-like syntax:</p>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/torch_tensor.html">torch_tensor</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">10</span><span class="op">)</span><span class="op">)</span>
+<code class="sourceCode R"><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/torch_tensor.html">torch_tensor</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">10</span><span class="op">)</span><span class="op">)</span>
 <span class="va">x</span><span class="op">$</span><span class="va">shape</span>
 <span class="co">#&gt; [1] 1</span>
 <span class="va">x</span><span class="op">[</span>, <span class="va">newaxis</span><span class="op">]</span><span class="op">$</span><span class="va">shape</span>
@@ -319,12 +280,12 @@
 <code class="sourceCode R"><span class="va">x</span><span class="op">[</span>,<span class="cn">NULL</span><span class="op">]</span><span class="op">$</span><span class="va">shape</span>
 <span class="co">#&gt; [1] 1 1</span></code></pre></div>
 </div>
-<div id="dealing-with-variable-number-of-indices" class="section level2">
-<h2 class="hasAnchor">
-<a href="#dealing-with-variable-number-of-indices" class="anchor"></a>Dealing with variable number of indices</h2>
+<div class="section level2">
+<h2 id="dealing-with-variable-number-of-indices">Dealing with variable number of indices<a class="anchor" aria-label="anchor" href="#dealing-with-variable-number-of-indices"></a>
+</h2>
 <p>Sometimes we don’t know how many dimensions a tensor has, but we do know what to do with the last available dimension, or the first one. To subsume all others, we can use <code>..</code>:</p>
 <div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">z</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/torch_tensor.html">torch_tensor</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">125</span><span class="op">)</span><span class="op">$</span><span class="fu">reshape</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">5</span>,<span class="fl">5</span>,<span class="fl">5</span><span class="op">)</span><span class="op">)</span>
+<code class="sourceCode R"><span class="va">z</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/torch_tensor.html">torch_tensor</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">125</span><span class="op">)</span><span class="op">$</span><span class="fu">reshape</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">5</span>,<span class="fl">5</span>,<span class="fl">5</span><span class="op">)</span><span class="op">)</span>
 <span class="va">z</span><span class="op">[</span><span class="fl">1</span>,<span class="va">..</span><span class="op">]</span>
 <span class="co">#&gt; torch_tensor</span>
 <span class="co">#&gt;   1   2   3   4   5</span>
@@ -342,32 +303,32 @@
 <span class="co">#&gt;  101  106  111  116  121</span>
 <span class="co">#&gt; [ CPULongType{5,5} ]</span></code></pre></div>
 </div>
-<div id="indexing-with-vectors" class="section level2">
-<h2 class="hasAnchor">
-<a href="#indexing-with-vectors" class="anchor"></a>Indexing with vectors</h2>
+<div class="section level2">
+<h2 id="indexing-with-vectors">Indexing with vectors<a class="anchor" aria-label="anchor" href="#indexing-with-vectors"></a>
+</h2>
 <p>Vector indexing is also supported but care must be taken regarding performance as, in general its much less performant than slice based indexing.</p>
 <blockquote>
-<p>Note: Starting from version 0.5.0, vector indexing in torch follows R semantics, prior to that the behavior was similar to <a href="https://numpy.org/doc/stable/reference/arrays.indexing.html#advanced-indexing">numpy’s advanced indexing</a>. To use the old behavior, consider using <code><a href="../reference/torch_index.html">?torch_index</a></code>, <code><a href="../reference/torch_index_put.html">?torch_index_put</a></code> or <code>torch_index_put_</code>.</p>
+<p>Note: Starting from version 0.5.0, vector indexing in torch follows R semantics, prior to that the behavior was similar to <a href="https://numpy.org/doc/stable/reference/arrays.indexing.html#advanced-indexing" class="external-link">numpy’s advanced indexing</a>. To use the old behavior, consider using <code><a href="../reference/torch_index.html">?torch_index</a></code>, <code><a href="../reference/torch_index_put.html">?torch_index_put</a></code> or <code>torch_index_put_</code>.</p>
 </blockquote>
 <div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/torch_randn.html">torch_randn</a></span><span class="op">(</span><span class="fl">4</span>,<span class="fl">4</span><span class="op">)</span>
-<span class="va">x</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">3</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">3</span><span class="op">)</span><span class="op">]</span>
+<span class="va">x</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">3</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">3</span><span class="op">)</span><span class="op">]</span>
 <span class="co">#&gt; torch_tensor</span>
-<span class="co">#&gt; -0.8025  0.2212</span>
-<span class="co">#&gt;  0.5788  0.3573</span>
+<span class="co">#&gt;  0.3352  0.8809</span>
+<span class="co">#&gt; -0.0952 -0.3883</span>
 <span class="co">#&gt; [ CPUFloatType{2,2} ]</span></code></pre></div>
 <p>You can also use boolean vectors, for example:</p>
 <div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">x</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="cn">TRUE</span>, <span class="cn">FALSE</span>, <span class="cn">TRUE</span>, <span class="cn">FALSE</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="cn">TRUE</span>, <span class="cn">FALSE</span>, <span class="cn">TRUE</span>, <span class="cn">FALSE</span><span class="op">)</span><span class="op">]</span>
+<code class="sourceCode R"><span class="va">x</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="cn">TRUE</span>, <span class="cn">FALSE</span>, <span class="cn">TRUE</span>, <span class="cn">FALSE</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="cn">TRUE</span>, <span class="cn">FALSE</span>, <span class="cn">TRUE</span>, <span class="cn">FALSE</span><span class="op">)</span><span class="op">]</span>
 <span class="co">#&gt; torch_tensor</span>
-<span class="co">#&gt; -0.8025  0.2212</span>
-<span class="co">#&gt;  0.5788  0.3573</span>
+<span class="co">#&gt;  0.3352  0.8809</span>
+<span class="co">#&gt; -0.0952 -0.3883</span>
 <span class="co">#&gt; [ CPUFloatType{2,2} ]</span></code></pre></div>
 <p>The above examples also work if the index were long or boolean tensors, instead of R vectors. It’s also possible to index with multi-dimensional boolean tensors:</p>
 <div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/torch_tensor.html">torch_tensor</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/cbind.html">rbind</a></span><span class="op">(</span>
-  <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">2</span>,<span class="fl">3</span><span class="op">)</span>,
-  <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">4</span>,<span class="fl">5</span>,<span class="fl">6</span><span class="op">)</span>
+<code class="sourceCode R"><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/torch_tensor.html">torch_tensor</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">rbind</a></span><span class="op">(</span>
+  <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">2</span>,<span class="fl">3</span><span class="op">)</span>,
+  <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">4</span>,<span class="fl">5</span>,<span class="fl">6</span><span class="op">)</span>
 <span class="op">)</span><span class="op">)</span>
 <span class="va">x</span><span class="op">[</span><span class="va">x</span><span class="op">&gt;</span><span class="fl">3</span><span class="op">]</span>
 <span class="co">#&gt; torch_tensor</span>
@@ -376,31 +337,28 @@
 <span class="co">#&gt;  6</span>
 <span class="co">#&gt; [ CPUFloatType{3} ]</span></code></pre></div>
 </div>
-  </div>
-
-  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
-
-        <nav id="toc" data-toggle="toc"><h2 data-toc-skip>Contents</h2>
-    </nav>
-</div>
-
+  </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
+    </nav></aside>
 </div>
 
 
 
-      <footer><div class="copyright">
-  <p>Developed by Daniel Falbel, Javier Luraschi.</p>
+    <footer><div class="pkgdown-footer-left">
+  <p></p>
+<p>Developed by Daniel Falbel, Javier Luraschi.</p>
 </div>
 
-<div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
+<div class="pkgdown-footer-right">
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
 </div>
 
-      </footer>
+    </footer>
 </div>
 
   
 
+  
 
   </body>
 </html>
