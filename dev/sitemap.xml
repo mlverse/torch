@@ -130,6 +130,9 @@
     <loc>https://torch.mlverse.org/docs/dev/reference/cuda_memory_stats.html</loc>
   </url>
   <url>
+    <loc>https://torch.mlverse.org/docs/dev/reference/cuda_runtime_version.html</loc>
+  </url>
+  <url>
     <loc>https://torch.mlverse.org/docs/dev/reference/dataloader.html</loc>
   </url>
   <url>
