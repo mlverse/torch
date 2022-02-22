@@ -29,7 +29,6 @@ if (torch_is_installed()) {
 input <- torch_randn(32, 1, 5, 5)
 m <- nn_flatten()
 m(input)
-
 }
 }
 \seealso{

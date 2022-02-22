@@ -26,6 +26,5 @@ m <- nn_sequential(
 )
 output <- m(input)
 output$size()
-
 }
 }
