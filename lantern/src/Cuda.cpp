@@ -186,4 +186,17 @@ void* _lantern_cuda_device_stats(int64_t device) {
       "`cuda_device_stats` is only supported on CUDA runtimes.");
 #endif
   LANTERN_FUNCTION_END
+} 
+
+int _lantern_cuda_get_runtime_version () {
+  LANTERN_FUNCTION_START
+#ifdef __NVCC__
+  int runtimeVersion;
+  cudaRuntimeGetVersion(&runtimeVersion);    
+  return runtimeVersion;
+#else
+  throw std::runtime_error(
+          "`cuda_device_stats` is only supported on CUDA runtimes.");
+#endif
+  LANTERN_FUNCTION_END
 }
