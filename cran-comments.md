@@ -1,4 +1,6 @@
-This release fixes valgrind errors.
+Sorry for re-submitting so soon. This version adds a functionality that is needed
+for dependencies that we are planning to submit to CRAN next. Thanks for 
+considering it.
 
 ## revdepcheck results
 

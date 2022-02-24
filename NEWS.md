@@ -1,5 +1,7 @@
 # torch (development version)
 
+## New features
+
 - Added `cuda_runtime_version()` to query the CUDA Tolkit version that torch is using. (#790)
 
 # torch 0.7.0
