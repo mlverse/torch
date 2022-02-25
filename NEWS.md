@@ -1,4 +1,4 @@
-# torch (development version)
+# torch 0.7.2
 
 ## Bug fix
 
