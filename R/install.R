@@ -1,4 +1,4 @@
-branch <- "cran/v0.7.1"
+branch <- "main"
 
 install_config <- list(
   "1.10.2" = list(
