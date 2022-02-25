@@ -22,7 +22,7 @@ tensordot(A, x, dims=x$ndim) == B."><meta name="robots" content="noindex"><!-- m
     
     <a class="navbar-brand me-2" href="../index.html">torch</a>
 
-    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">0.7.0.9000</small>
+    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">0.7.1.9000</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -157,7 +157,7 @@ If <code>NULL</code>, no dimensions are moved. Default: <code>NULL</code>.</p></
 <span class="r-in"><span class="va">A</span> <span class="op">&lt;-</span> <span class="va">A</span><span class="op">$</span><span class="fu">permute</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">4</span>, <span class="fl">5</span>, <span class="fl">1</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span></span>
 <span class="r-in"><span class="fu"><a href="torch_allclose.html">torch_allclose</a></span><span class="op">(</span><span class="fu"><a href="torch_tensordot.html">torch_tensordot</a></span><span class="op">(</span><span class="va">A</span>, <span class="va">X</span>, dims <span class="op">=</span> <span class="va">X</span><span class="op">$</span><span class="va">ndim</span><span class="op">)</span>, <span class="va">B</span>, atol <span class="op">=</span> <span class="fl">1e-6</span><span class="op">)</span></span>
 <span class="r-in"><span class="op">}</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] TRUE</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
