@@ -1,5 +1,9 @@
 # torch (development version)
 
+## Bug fix
+
+- Fixed vignette building on Windows.
+
 # torch 0.7.1
 
 ## New features
