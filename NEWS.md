@@ -1,5 +1,7 @@
 # torch (development version)
 
+- Improved auto-detection of CUDA version on Windows. (#798, @SvenVw)
+
 # torch 0.7.2
 
 ## Bug fix
