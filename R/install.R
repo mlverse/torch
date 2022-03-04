@@ -238,6 +238,13 @@ lantern_install_libs <- function(version, type, install_path, install_config) {
 install_type_windows <- function(version) {
   cuda_version <- NULL
   cuda_path <- Sys.getenv("CUDA_PATH")
+  
+  if (nzchar(cuda_path)) {
+    versions_file <- file.path(cuda_path, "version.txt")
+    if (file.exists(versions_file)) {
+      cuda_version <- gsub("CUDA Version |\\.[0-9]+$", "", readLines(versions_file))
+    }
+  }
 
   # Query nvcc from cuda in cuda_path.
   if (nzchar(cuda_path) && is.null(cuda_version)) {
