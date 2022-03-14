@@ -14,7 +14,7 @@ NULL
 #' This mode should be enabled only for debugging as the different tests
 #' will slow down your program execution.
 #'
-#' @param code Cod that will be execued in the detect anomaly context.
+#' @param code Code that will be executed in the detect anomaly context.
 #'
 #' @examples
 #' x <- torch_randn(2, requires_grad = TRUE)
