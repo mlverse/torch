@@ -45,7 +45,7 @@ get_init <- function(x) {
 #' that will be used instead of `.getitem` when getting a batch of observations within
 #' the dataloader. `.getbatch` must work for batches of size larger or equal to 1. For more
 #' on this see the the `vignette("loading-data")`.
-#' 
+#'
 #' @note
 #' [dataloader()]  by default constructs a index
 #' sampler that yields integral indices.  To make it work with a map-style

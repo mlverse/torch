@@ -14,7 +14,7 @@ Tensor <- R7Class(
     print = function(n = 30) {
       cat("torch_tensor\n")
       if (is_undefined_tensor(self) || !is_meta_device(self$device)) {
-        cpp_torch_tensor_print(self$ptr, n)  
+        cpp_torch_tensor_print(self$ptr, n)
       } else {
         cat("...\n")
         dtype <- as.character(self$dtype)
