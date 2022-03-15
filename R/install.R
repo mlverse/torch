@@ -238,7 +238,7 @@ lantern_install_libs <- function(version, type, install_path, install_config) {
 install_type_windows <- function(version) {
   cuda_version <- NULL
   cuda_path <- Sys.getenv("CUDA_PATH")
-  
+
   if (nzchar(cuda_path)) {
     versions_file <- file.path(cuda_path, "version.txt")
     if (file.exists(versions_file)) {
