@@ -12,6 +12,10 @@ torch_save(obj, path, ...)
 \item{path}{a connection or the name of the file to save.}
 
 \item{...}{not currently used.}
+
+\item{compress}{a logical specifying whether saving to a named file is to use
+"gzip" compression, or one of "gzip", "bzip2" or "xz" to indicate the type of
+compression to be used. Ignored if file is a connection.}
 }
 \description{
 This function is experimental, don't use for long

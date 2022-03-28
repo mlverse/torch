@@ -6,7 +6,9 @@
 #' @param obj the saved object
 #' @param path a connection or the name of the file to save.
 #' @param ... not currently used.
-#'
+#' @param compress a logical specifying whether saving to a named file is to use 
+#'   "gzip" compression, or one of "gzip", "bzip2" or "xz" to indicate the type of 
+#'   compression to be used. Ignored if file is a connection.
 #' @family torch_save
 #' @concept serialization
 #'
@@ -17,15 +19,15 @@ torch_save <- function(obj, path, ...) {
 
 #' @concept serialization
 #' @export
-torch_save.torch_tensor <- function(obj, path, ...) {
+torch_save.torch_tensor <- function(obj, path, ..., compress = TRUE) {
   values <- cpp_tensor_save(obj$ptr)
-  saveRDS(list(values = values, type = "tensor"), file = path)
+  saveRDS(list(values = values, type = "tensor"), file = path, compress = compress)
   invisible(obj)
 }
 
 tensor_to_raw_vector <- function(x) {
   con <- rawConnection(raw(), open = "wr")
-  torch_save(x, con)
+  torch_save(x, con, compress = FALSE)
   r <- rawConnectionValue(con)
   close(con)
   r
@@ -39,15 +41,16 @@ tensor_to_raw_vector_with_class <- function(x) {
 
 #' @concept serialization
 #' @export
-torch_save.nn_module <- function(obj, path, ...) {
+torch_save.nn_module <- function(obj, path, ..., compress = TRUE) {
   state_dict <- obj$state_dict()
   state_raw <- lapply(state_dict, tensor_to_raw_vector)
-  saveRDS(list(module = obj, state_dict = state_raw, type = "module", version = 1), path)
+  saveRDS(list(module = obj, state_dict = state_raw, type = "module", version = 1), 
+          path, compress = compress)
 }
 
 #' @concept serialization
 #' @export
-torch_save.list <- function(obj, path, ...) {
+torch_save.list <- function(obj, path, ..., compress = TRUE) {
   serialize_tensors <- function(x, f) {
     lapply(x, function(x) {
       if (is_torch_tensor(x)) {
@@ -61,7 +64,8 @@ torch_save.list <- function(obj, path, ...) {
   }
 
   serialized <- serialize_tensors(obj)
-  saveRDS(list(values = serialized, type = "list", version = 1), path)
+  saveRDS(list(values = serialized, type = "list", version = 1), path, 
+          compress = compress)
 }
 
 #' Loads a saved object
