@@ -27,7 +27,7 @@ torch_save.torch_tensor <- function(obj, path, ..., compress = TRUE) {
 
 tensor_to_raw_vector <- function(x) {
   con <- rawConnection(raw(), open = "wr")
-  torch_save(x, con, compress = FALSE)
+  torch_save(x, con)
   r <- rawConnectionValue(con)
   close(con)
   r
