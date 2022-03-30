@@ -4,7 +4,7 @@
 \alias{torch_save}
 \title{Saves an object to a disk file.}
 \usage{
-torch_save(obj, path, ...)
+torch_save(obj, path, ..., compress = TRUE)
 }
 \arguments{
 \item{obj}{the saved object}

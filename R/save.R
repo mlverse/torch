@@ -13,7 +13,7 @@
 #' @concept serialization
 #'
 #' @export
-torch_save <- function(obj, path, ...) {
+torch_save <- function(obj, path, ..., compress = TRUE) {
   UseMethod("torch_save")
 }
 
