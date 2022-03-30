@@ -1,14 +1,33 @@
 #include <torch.h>
 
 // [[Rcpp::export]]
-SEXP cpp_tensor_save(Rcpp::XPtr<XPtrTorchTensor> x) {
-  return torch::string(lantern_tensor_save(x->get()));
-}
+SEXP cpp_tensor_save(Rcpp::XPtr<XPtrTorchTensor> x, bool base64) {
+  if (base64) {
+    return torch::string(lantern_tensor_save(x->get(), base64));  
+  } else {
+    torch::string out = lantern_tensor_save(x->get(), base64);
+    
+    const char* v = lantern_string_get(out.get());
+    auto output = std::string(v, lantern_string_size(out.get()));
+    lantern_const_char_delete(v);
+    
+    Rcpp::RawVector raw_vec(output.size());
+    memcpy(&raw_vec[0], output.c_str(), output.size());
+    
+    return raw_vec;
+  }
+} 
 
 // [[Rcpp::export]]
-XPtrTorchTensor cpp_tensor_load(torch::string s, XPtrTorchOptionalDevice device) {
-  XPtrTorchTensor t = lantern_tensor_load(s.get(), device.get());
-  return t;
+XPtrTorchTensor cpp_tensor_load(SEXP input, XPtrTorchOptionalDevice device, bool base64) {
+  if (base64) {
+    torch::string v = Rcpp::as<torch::string>(input);
+    return torch::Tensor(lantern_tensor_load(v.get(), device.get(), base64));
+  } else {
+    auto raw_vec = Rcpp::as<Rcpp::RawVector>(input);
+    torch::string v = std::string((char*)&raw_vec[0], raw_vec.size());
+    return torch::Tensor(lantern_tensor_load(v.get(), device.get(), base64));
+  }
 }
 
 // [[Rcpp::export]]

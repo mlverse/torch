@@ -222,12 +222,12 @@ XPtrTorchOptionalIntArrayRef from_sexp_optional_int_array_ref(SEXP x,
   return fn(x, index);
 }
 
-void* fixme_new_string(const char* x) {
+void* fixme_new_string(const char* x, int size) {
   static void* (*fn)(const char*) = NULL;
   if (fn == NULL) {
     fn = (void* (*)(const char*))R_GetCCallable("torch", "fixme_new_string");
   }
-  return fn(x);
+  return fn(x, size);
 }
 
 void* fixme_new_dimname(const char* x) {

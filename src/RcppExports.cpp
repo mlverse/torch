@@ -36329,25 +36329,27 @@ BEGIN_RCPP
 END_RCPP
 }
 // cpp_tensor_save
-SEXP cpp_tensor_save(Rcpp::XPtr<XPtrTorchTensor> x);
-RcppExport SEXP _torch_cpp_tensor_save(SEXP xSEXP) {
+SEXP cpp_tensor_save(Rcpp::XPtr<XPtrTorchTensor> x, bool base64);
+RcppExport SEXP _torch_cpp_tensor_save(SEXP xSEXP, SEXP base64SEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< Rcpp::XPtr<XPtrTorchTensor> >::type x(xSEXP);
-    rcpp_result_gen = Rcpp::wrap(cpp_tensor_save(x));
+    Rcpp::traits::input_parameter< bool >::type base64(base64SEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_tensor_save(x, base64));
     return rcpp_result_gen;
 END_RCPP
 }
 // cpp_tensor_load
-XPtrTorchTensor cpp_tensor_load(torch::string s, XPtrTorchOptionalDevice device);
-RcppExport SEXP _torch_cpp_tensor_load(SEXP sSEXP, SEXP deviceSEXP) {
+XPtrTorchTensor cpp_tensor_load(SEXP input, XPtrTorchOptionalDevice device, bool base64);
+RcppExport SEXP _torch_cpp_tensor_load(SEXP inputSEXP, SEXP deviceSEXP, SEXP base64SEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< torch::string >::type s(sSEXP);
+    Rcpp::traits::input_parameter< SEXP >::type input(inputSEXP);
     Rcpp::traits::input_parameter< XPtrTorchOptionalDevice >::type device(deviceSEXP);
-    rcpp_result_gen = Rcpp::wrap(cpp_tensor_load(s, device));
+    Rcpp::traits::input_parameter< bool >::type base64(base64SEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_tensor_load(input, device, base64));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -40019,8 +40021,8 @@ static const R_CallMethodDef CallEntries[] = {
     {"_torch_cpp_torch_reduction_mean", (DL_FUNC) &_torch_cpp_torch_reduction_mean, 0},
     {"_torch_cpp_torch_reduction_none", (DL_FUNC) &_torch_cpp_torch_reduction_none, 0},
     {"_torch_cpp_torch_reduction_sum", (DL_FUNC) &_torch_cpp_torch_reduction_sum, 0},
-    {"_torch_cpp_tensor_save", (DL_FUNC) &_torch_cpp_tensor_save, 1},
-    {"_torch_cpp_tensor_load", (DL_FUNC) &_torch_cpp_tensor_load, 2},
+    {"_torch_cpp_tensor_save", (DL_FUNC) &_torch_cpp_tensor_save, 2},
+    {"_torch_cpp_tensor_load", (DL_FUNC) &_torch_cpp_tensor_load, 3},
     {"_torch_cpp_load_state_dict", (DL_FUNC) &_torch_cpp_load_state_dict, 1},
     {"_torch_cpp_torch_scalar", (DL_FUNC) &_torch_cpp_torch_scalar, 1},
     {"_torch_cpp_torch_scalar_dtype", (DL_FUNC) &_torch_cpp_torch_scalar_dtype, 1},

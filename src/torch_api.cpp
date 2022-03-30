@@ -763,8 +763,8 @@ void delete_vector_scalar(void* x) { lantern_vector_Scalar_delete(x); }
 // string
 
 SEXP operator_sexp_string(const XPtrTorchstring* self) {
-  const char* out = lantern_string_get(self->get());
-  auto output = std::string(out);
+  char* out = lantern_string_get(self->get());
+  auto output = std::string(out, lantern_string_size(self->get()));
   lantern_const_char_delete(out);
 
   return Rcpp::wrap(output);
@@ -772,12 +772,12 @@ SEXP operator_sexp_string(const XPtrTorchstring* self) {
 
 XPtrTorchstring from_sexp_string(SEXP x) {
   std::string v = Rcpp::as<std::string>(x);
-  return XPtrTorchstring(lantern_string_new(v.c_str()));
+  return XPtrTorchstring(lantern_string_new(v.c_str(), v.size()));
 }
 
 void delete_string(void* x) { lantern_string_delete(x); }
 
-void* fixme_new_string(const char* x) { return lantern_string_new(x); }
+void* fixme_new_string(const char* x, int size) { return lantern_string_new(x, size); }
 
 // string_view
 

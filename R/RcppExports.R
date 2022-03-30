@@ -11117,12 +11117,12 @@ cpp_torch_reduction_sum <- function() {
     .Call('_torch_cpp_torch_reduction_sum', PACKAGE = 'torchpkg')
 }
 
-cpp_tensor_save <- function(x) {
-    .Call('_torch_cpp_tensor_save', PACKAGE = 'torchpkg', x)
+cpp_tensor_save <- function(x, base64) {
+    .Call('_torch_cpp_tensor_save', PACKAGE = 'torchpkg', x, base64)
 }
 
-cpp_tensor_load <- function(s, device) {
-    .Call('_torch_cpp_tensor_load', PACKAGE = 'torchpkg', s, device)
+cpp_tensor_load <- function(input, device, base64) {
+    .Call('_torch_cpp_tensor_load', PACKAGE = 'torchpkg', input, device, base64)
 }
 
 cpp_load_state_dict <- function(path) {

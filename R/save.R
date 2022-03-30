@@ -17,11 +17,14 @@ torch_save <- function(obj, path, ..., compress = TRUE) {
   UseMethod("torch_save")
 }
 
+ser_version <- 2
+
 #' @concept serialization
 #' @export
 torch_save.torch_tensor <- function(obj, path, ..., compress = TRUE) {
-  values <- cpp_tensor_save(obj$ptr)
-  saveRDS(list(values = values, type = "tensor"), file = path, compress = compress)
+  values <- cpp_tensor_save(obj$ptr, base64 = FALSE)
+  saveRDS(list(values = values, type = "tensor", version = ser_version), 
+          file = path, compress = compress)
   invisible(obj)
 }
 
@@ -44,14 +47,14 @@ tensor_to_raw_vector_with_class <- function(x) {
 torch_save.nn_module <- function(obj, path, ..., compress = TRUE) {
   state_dict <- obj$state_dict()
   state_raw <- lapply(state_dict, tensor_to_raw_vector)
-  saveRDS(list(module = obj, state_dict = state_raw, type = "module", version = 1), 
+  saveRDS(list(module = obj, state_dict = state_raw, type = "module", version = ser_version), 
           path, compress = compress)
 }
 
 #' @export
 torch_save.name <- function(obj, path, ..., compress= TRUE) {
   if (!coro::is_exhausted(obj)) rlang::abort("Cannot save `name` objects.")
-  saveRDS(list(type = "coro::exhausted", version = 1), path, 
+  saveRDS(list(type = "coro::exhausted", version = ser_version), path, 
           compress = compress)
 }
 
@@ -71,7 +74,7 @@ torch_save.list <- function(obj, path, ..., compress = TRUE) {
   }
 
   serialized <- serialize_tensors(obj)
-  saveRDS(list(values = serialized, type = "list", version = 1), path, 
+  saveRDS(list(values = serialized, type = "list", version = ser_version), path, 
           compress = compress)
 }
 
@@ -88,6 +91,13 @@ torch_save.list <- function(obj, path, ..., compress = TRUE) {
 #' @concept serialization
 torch_load <- function(path, device = "cpu") {
   r <- readRDS(path)
+  
+  if (!is.null(r$version) && r$version > ser_version) {
+    rlang::abort(c(x = paste0(
+      "This version of torch can't load files with serialization version > ",
+      ser_version)))
+  }
+  
   if (r$type == "tensor") {
     torch_load_tensor(r, device)
   } else if (r$type == "module") {
@@ -100,7 +110,12 @@ torch_load <- function(path, device = "cpu") {
 }
 
 torch_load_tensor <- function(obj, device = NULL) {
-  Tensor$new(ptr = cpp_tensor_load(obj$values, device))
+  if (is.null(obj$version) || obj$version < 2) {
+    base64 <- TRUE
+  } else {
+    base64 <- FALSE
+  }
+  Tensor$new(ptr = cpp_tensor_load(obj$values, device, base64))
 }
 
 load_tensor_from_raw <- function(x, device) {
