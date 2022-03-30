@@ -48,6 +48,13 @@ torch_save.nn_module <- function(obj, path, ..., compress = TRUE) {
           path, compress = compress)
 }
 
+#' @export
+torch_save.name <- function(obj, path, ..., compress= TRUE) {
+  if (!coro::is_exhausted(obj)) rlang::abort("Cannot save `name` objects.")
+  saveRDS(list(type = "coro::exhausted", version = 1), path, 
+          compress = compress)
+}
+
 #' @concept serialization
 #' @export
 torch_save.list <- function(obj, path, ..., compress = TRUE) {
@@ -87,6 +94,8 @@ torch_load <- function(path, device = "cpu") {
     torch_load_module(r, device)
   } else if (r$type == "list") {
     torch_load_list(r, device)
+  } else if (r$type == "coro::exhausted") {
+    return(coro::exhausted())
   }
 }
 
@@ -172,5 +181,14 @@ internal_update_parameters_and_buffers <- function(m) {
   }
   for (i in seq_along(private$parameters_)) {
     private$parameters_[[i]] <- to_ptr_tensor(private$parameters_[[i]])
+  }
+}
+
+# used to avoid warnings when passing compress by default.
+saveRDS <- function(object, file, compress = TRUE) {
+  if (compress) {
+    base::saveRDS(object, file)
+  } else {
+    base::saveRDS(object, file, compress = compress)
   }
 }
