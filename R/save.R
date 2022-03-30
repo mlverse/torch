@@ -18,12 +18,16 @@ torch_save <- function(obj, path, ..., compress = TRUE) {
 }
 
 ser_version <- 2
+use_ser_version <- function() {
+  getOption("torch.serialization_version", ser_version)
+}
 
 #' @concept serialization
 #' @export
 torch_save.torch_tensor <- function(obj, path, ..., compress = TRUE) {
-  values <- cpp_tensor_save(obj$ptr, base64 = FALSE)
-  saveRDS(list(values = values, type = "tensor", version = ser_version), 
+  version <- use_ser_version()
+  values <- cpp_tensor_save(obj$ptr, base64 = version < 2)
+  saveRDS(list(values = values, type = "tensor", version = version), 
           file = path, compress = compress)
   invisible(obj)
 }
@@ -47,14 +51,14 @@ tensor_to_raw_vector_with_class <- function(x) {
 torch_save.nn_module <- function(obj, path, ..., compress = TRUE) {
   state_dict <- obj$state_dict()
   state_raw <- lapply(state_dict, tensor_to_raw_vector)
-  saveRDS(list(module = obj, state_dict = state_raw, type = "module", version = ser_version), 
-          path, compress = compress)
+  saveRDS(list(module = obj, state_dict = state_raw, type = "module", 
+               version = use_ser_version()), path, compress = compress)
 }
 
 #' @export
 torch_save.name <- function(obj, path, ..., compress= TRUE) {
   if (!coro::is_exhausted(obj)) rlang::abort("Cannot save `name` objects.")
-  saveRDS(list(type = "coro::exhausted", version = ser_version), path, 
+  saveRDS(list(type = "coro::exhausted", version = use_ser_version()), path, 
           compress = compress)
 }
 
@@ -74,8 +78,8 @@ torch_save.list <- function(obj, path, ..., compress = TRUE) {
   }
 
   serialized <- serialize_tensors(obj)
-  saveRDS(list(values = serialized, type = "list", version = ser_version), path, 
-          compress = compress)
+  saveRDS(list(values = serialized, type = "list", version = use_ser_version()), 
+          path, compress = compress)
 }
 
 #' Loads a saved object

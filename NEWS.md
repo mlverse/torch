@@ -1,6 +1,8 @@
 # torch (development version)
 
 - Improved auto-detection of CUDA version on Windows. (#798, @SvenVw)
+- Improved parallel dataloaders performance by using a socket conection to transfer data between workers and the main process. (#803)
+- Serialization is now much faster because we avoid base64 encoding the serialized tensors. As a result, files serialized with newer versions of torch can't be opened with older versions of torch. Set `options(torch.serialization_version = 1)` if you want your file to be readable by older versions. (#803)
 
 # torch 0.7.2
 
