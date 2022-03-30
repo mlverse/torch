@@ -1624,6 +1624,9 @@
     <loc>https://torch.mlverse.org/docs/dev/reference/torch_lu_solve.html</loc>
   </url>
   <url>
+    <loc>https://torch.mlverse.org/docs/dev/reference/torch_lu_unpack.html</loc>
+  </url>
+  <url>
     <loc>https://torch.mlverse.org/docs/dev/reference/torch_manual_seed.html</loc>
   </url>
   <url>
