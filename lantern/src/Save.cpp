@@ -14,7 +14,7 @@ std::string size_t_to_string(std::size_t i) {
   return ss.str();
 }
 
-const char* _lantern_tensor_save(void* self) {
+void* _lantern_tensor_save(void* self) {
   LANTERN_FUNCTION_START
   auto t = from_raw::Tensor(self);
 
@@ -23,9 +23,7 @@ const char* _lantern_tensor_save(void* self) {
 
   auto str = std::string(macaron::Base64::Encode(oss.str()));
 
-  char* cstr = new char[str.length() + 1];
-  strcpy(cstr, str.c_str());
-  return cstr;
+  return make_raw::string(str);
   LANTERN_FUNCTION_END
 }
 
@@ -38,10 +36,10 @@ std::size_t _lantern_tensor_serialized_size(const char* s) {
   LANTERN_FUNCTION_END_RET(0)
 }
 
-void* _lantern_tensor_load(const char* s, void* device) {
+void* _lantern_tensor_load(void* s, void* device) {
   LANTERN_FUNCTION_START
   std::string str;
-  macaron::Base64::Decode(std::string(s), str);
+  macaron::Base64::Decode(from_raw::string(s), str);
   std::istringstream stream(str);
 
   torch::Tensor t;

@@ -36329,7 +36329,7 @@ BEGIN_RCPP
 END_RCPP
 }
 // cpp_tensor_save
-std::string cpp_tensor_save(Rcpp::XPtr<XPtrTorchTensor> x);
+SEXP cpp_tensor_save(Rcpp::XPtr<XPtrTorchTensor> x);
 RcppExport SEXP _torch_cpp_tensor_save(SEXP xSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
@@ -36340,12 +36340,12 @@ BEGIN_RCPP
 END_RCPP
 }
 // cpp_tensor_load
-XPtrTorchTensor cpp_tensor_load(std::string s, XPtrTorchOptionalDevice device);
+XPtrTorchTensor cpp_tensor_load(torch::string s, XPtrTorchOptionalDevice device);
 RcppExport SEXP _torch_cpp_tensor_load(SEXP sSEXP, SEXP deviceSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< std::string >::type s(sSEXP);
+    Rcpp::traits::input_parameter< torch::string >::type s(sSEXP);
     Rcpp::traits::input_parameter< XPtrTorchOptionalDevice >::type device(deviceSEXP);
     rcpp_result_gen = Rcpp::wrap(cpp_tensor_load(s, device));
     return rcpp_result_gen;
