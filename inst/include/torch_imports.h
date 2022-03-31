@@ -223,9 +223,9 @@ XPtrTorchOptionalIntArrayRef from_sexp_optional_int_array_ref(SEXP x,
 }
 
 void* fixme_new_string(const char* x, int size) {
-  static void* (*fn)(const char*) = NULL;
+  static void* (*fn)(const char*, int) = NULL;
   if (fn == NULL) {
-    fn = (void* (*)(const char*))R_GetCCallable("torch", "fixme_new_string");
+    fn = (void* (*)(const char*, int))R_GetCCallable("torch", "fixme_new_string");
   }
   return fn(x, size);
 }
