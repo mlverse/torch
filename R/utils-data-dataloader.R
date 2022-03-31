@@ -328,11 +328,11 @@ MultiProcessingDataLoaderIter <- R6::R6Class(
       # using callr
       private$workers <- list()
       for (i in seq_len(self$.num_workers)) {
-        private$workers[[i]] <- callr::r_session$new()
+        private$workers[[i]] <- r_session$new()
       }
 
       worker_config <- function(id, num_workers, seed, init_fn, globals,
-                                packages) {
+                                packages, socket_port = NULL) {
         library(torch)
         .worker_info <<- list(
           id = id,
@@ -355,6 +355,27 @@ MultiProcessingDataLoaderIter <- R6::R6Class(
         if (!is.null(init_fn)) {
           init_fn(id)
         }
+        
+        .socket_con <<- NULL
+        if (!is.null(socket_port)) {
+          # We need to wait for the main process to start the server, so here we
+          # retry a few times until the conection works.
+          for(i in 1:20) {
+            tr <- try({.socket_con <<- socketConnection(
+              port = socket_port, 
+              blocking = TRUE, 
+              open = "a+b"
+            )}, silent = TRUE) 
+            
+            if (!inherits(tr, "try-error")) break
+            Sys.sleep(0.5)
+            
+            if (i == 20) {
+              rlang::abort("Could not create a connection with the main process.")
+            }
+          }
+        }
+        
       }
 
       fetcher <- self$.dataset_fetcher$fetch
@@ -363,7 +384,7 @@ MultiProcessingDataLoaderIter <- R6::R6Class(
         worker <- private$workers[[i]]
 
         # Creates initial worker configuration
-        worker$run(
+        worker$session$call(
           worker_config,
           args = list(
             id = i,
@@ -371,12 +392,26 @@ MultiProcessingDataLoaderIter <- R6::R6Class(
             seed = sample.int(1e6, 1),
             init_fn = self$.worker_init_fn,
             globals = self$.worker_globals,
-            packages = self$.worker_packages
+            packages = self$.worker_packages,
+            socket_port = worker$port
           )
         )
+        
+        # if using socket connections we need to start them now on the main
+        # process. This will also ensure that the worker config function can
+        # finish correctly.
+        if (worker$using_socket_con) {
+          worker$setup_socket_con()
+        }
+        
+        worker$session$poll_process(-1)
+        status <- worker$session$read() ## just so the worker is marked as idle
+        if (status$code != 200) {
+          runtime_error("Failed starting the worker.")
+        }
 
         # move fetcher to each session
-        worker$run(
+        worker$session$run(
           function(fetcher) {
             fetcher <<- fetcher
           },
@@ -390,19 +425,20 @@ MultiProcessingDataLoaderIter <- R6::R6Class(
       # find first idle worker
       for (worker_id in seq_len(self$.num_workers)) {
         worker <- private$workers[[worker_id]]
-        if (worker$get_state() == "idle") {
+        if (worker$session$get_state() == "idle") {
           break
         }
       }
 
       # send task to the worker
       if (coro::is_exhausted(index)) {
-        worker$call(function() coro::exhausted())
+        worker$session$call(function() {
+          torch:::to_exportable_tensor(coro::exhausted(), .socket_con)
+        })
       } else {
-        worker$call(
-          function(index) torch:::to_exportable_tensor(fetcher(index)),
-          list(index = index)
-        )
+        worker$session$call(function(index) {
+          torch:::to_exportable_tensor(fetcher(index), .socket_con)
+        }, list(index = index))
       }
 
       # adds a reference of that worker to the task list
@@ -414,22 +450,54 @@ MultiProcessingDataLoaderIter <- R6::R6Class(
       task <- private$tasks[[1]]
       private$tasks <- private$tasks[-1]
 
-      # wait for the process to be ready
-      p <- task$poll_process(timeout = self$.timeout)
-      if (p == "timeout") {
-        runtime_error("dataloader worker timed out.")
+      if (!task$using_socket_con) {
+        # wait for the process to be ready
+        p <- task$session$poll_process(timeout = self$.timeout)
+        if (p == "timeout") {
+          runtime_error("dataloader worker timed out.")
+        }
+        # read results
+        result <- task$session$read() 
+        
+        # Raise error that might have hapened in the subprocess.
+        if (!is.null(result$error)) {
+          runtime_error(result$error$message)
+        }
+        
+        data <- result$result
+        from_exportable_tensor(data)
+      } else {
+        
+        socket_select_timeout <- 0.1
+        time_passed <- 0
+        while(!socketSelect(list(task$con), timeout = socket_select_timeout)) {
+          result <- task$session$read()
+          
+          # no result means that the process is still runing, ie, no error
+          # happened.
+          if (!is.null(result)) {
+            # the $error field is not NULL means that an error hapened in the
+            # worker.
+            if (!is.null(result$error)) {
+              runtime_error(result$error$message)
+            } else {
+              # if no error happened and we got a result, it means that the socket
+              # conection is now ready for read. so we avoid reaching timeout.
+              next
+            }
+          }
+          # timeout for the dataloader is in milliseconds.
+          time_passed <- time_passed + socket_select_timeout
+          if (self$.timeout > 0 && (time_passed*1000) > self$.timeout) {
+            runtime_error("dataloader worker timed out.")
+          }
+        }
+        
+        out <- from_exportable_tensor(task$con)
+        # we have to read so the worker becomes idle
+        result <- task$session$read() 
+        out
       }
-
-      # read results
-      result <- task$read()
-
-      # Raise error that might have hapened in the subprocess.
-      if (!is.null(result$error)) {
-        runtime_error(result$error$message)
-      }
-
-      data <- result$result
-      from_exportable_tensor(data)
     },
     .next_data = function() {
       workers <- self$.num_workers
@@ -451,6 +519,11 @@ MultiProcessingDataLoaderIter <- R6::R6Class(
         # TODO
       }
       data
+    },
+    finalize = function() {
+      lapply(private$workers, function(x) {
+        x$close_socket_con()
+      })
     }
   ),
   private = list(
@@ -485,33 +558,22 @@ as_iterator.dataloader <- function(x) {
 
 # takes a tensor and saves it's state in a field so we can
 # reconstruct it after transfering via futures
-to_exportable_tensor <- function(x) {
-  if (is.list(x)) {
-    return(lapply(x, to_exportable_tensor))
+to_exportable_tensor <- function(x, con) {
+  if (is.null(con)) {
+    return(tensor_to_raw_vector(x))
   }
-
-  if (!is_torch_tensor(x)) {
-    return(x)
-  }
-
-  raw <- tensor_to_raw_vector(x)
-  class(raw) <- "exportable_tensor"
-  raw
+  torch_save(x, path = con)
+  TRUE
 }
 
 from_exportable_tensor <- function(x) {
-  if (is.list(x)) {
-    return(lapply(x, from_exportable_tensor))
+  if (!inherits(x, "connection")) {
+    con <- rawConnection(x)
+    on.exit({close(con)})
+  } else {
+    con <- x
   }
-
-  if (!inherits(x, "exportable_tensor")) {
-    return(x)
-  }
-
-  con <- rawConnection(x)
-  r <- readRDS(con)
-  close(con)
-  torch_load_tensor(r)
+  torch_load(con)
 }
 
 walk_fields <- function(env, nms, func) {
@@ -546,4 +608,37 @@ warn_tensor <- function(x, nm) {
   } else if (is.list(x)) {
     imap(x, ~ warn_tensor(.x, paste0(nm, "$", .y)))
   }
+}
+
+
+r_session <- R6::R6Class(
+  "r_session",
+  public = list(
+    port = NULL,
+    con = NULL,
+    session = NULL,
+    using_socket_con = FALSE,
+    initialize = function() {
+      if (use_socket_con()) {
+        self$port <- parallelly::freePort()  
+        self$using_socket_con <- TRUE
+      }
+      self$session <- callr::r_session$new()
+    },
+    setup_socket_con = function() {
+      self$con <- socketConnection(
+        port = self$port, server = TRUE, 
+        blocking = TRUE, open = "a+b")
+    },
+    close_socket_con = function() {
+      if (self$using_socket_con) {
+        try(close(self$con), silent = TRUE)
+        self$con <- NULL
+      }
+    }
+  )
+)
+
+use_socket_con <- function() {
+  getOption("torch.dataloader_use_socket_con", FALSE)
 }

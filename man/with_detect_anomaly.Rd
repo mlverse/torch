@@ -7,7 +7,7 @@
 with_detect_anomaly(code)
 }
 \arguments{
-\item{code}{Cod that will be execued in the detect anomaly context.}
+\item{code}{Code that will be executed in the detect anomaly context.}
 }
 \description{
 This does two things:

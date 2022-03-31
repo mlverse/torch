@@ -6,20 +6,29 @@
 #' @param obj the saved object
 #' @param path a connection or the name of the file to save.
 #' @param ... not currently used.
-#'
+#' @param compress a logical specifying whether saving to a named file is to use 
+#'   "gzip" compression, or one of "gzip", "bzip2" or "xz" to indicate the type of 
+#'   compression to be used. Ignored if file is a connection.
 #' @family torch_save
 #' @concept serialization
 #'
 #' @export
-torch_save <- function(obj, path, ...) {
+torch_save <- function(obj, path, ..., compress = TRUE) {
   UseMethod("torch_save")
+}
+
+ser_version <- 2
+use_ser_version <- function() {
+  getOption("torch.serialization_version", ser_version)
 }
 
 #' @concept serialization
 #' @export
-torch_save.torch_tensor <- function(obj, path, ...) {
-  values <- cpp_tensor_save(obj$ptr)
-  saveRDS(list(values = values, type = "tensor"), file = path)
+torch_save.torch_tensor <- function(obj, path, ..., compress = TRUE) {
+  version <- use_ser_version()
+  values <- cpp_tensor_save(obj$ptr, base64 = version < 2)
+  saveRDS(list(values = values, type = "tensor", version = version), 
+          file = path, compress = compress)
   invisible(obj)
 }
 
@@ -39,15 +48,23 @@ tensor_to_raw_vector_with_class <- function(x) {
 
 #' @concept serialization
 #' @export
-torch_save.nn_module <- function(obj, path, ...) {
+torch_save.nn_module <- function(obj, path, ..., compress = TRUE) {
   state_dict <- obj$state_dict()
   state_raw <- lapply(state_dict, tensor_to_raw_vector)
-  saveRDS(list(module = obj, state_dict = state_raw, type = "module", version = 1), path)
+  saveRDS(list(module = obj, state_dict = state_raw, type = "module", 
+               version = use_ser_version()), path, compress = compress)
+}
+
+#' @export
+torch_save.name <- function(obj, path, ..., compress= TRUE) {
+  if (!coro::is_exhausted(obj)) rlang::abort("Cannot save `name` objects.")
+  saveRDS(list(type = "coro::exhausted", version = use_ser_version()), path, 
+          compress = compress)
 }
 
 #' @concept serialization
 #' @export
-torch_save.list <- function(obj, path, ...) {
+torch_save.list <- function(obj, path, ..., compress = TRUE) {
   serialize_tensors <- function(x, f) {
     lapply(x, function(x) {
       if (is_torch_tensor(x)) {
@@ -61,7 +78,8 @@ torch_save.list <- function(obj, path, ...) {
   }
 
   serialized <- serialize_tensors(obj)
-  saveRDS(list(values = serialized, type = "list", version = 1), path)
+  saveRDS(list(values = serialized, type = "list", version = use_ser_version()), 
+          path, compress = compress)
 }
 
 #' Loads a saved object
@@ -77,17 +95,31 @@ torch_save.list <- function(obj, path, ...) {
 #' @concept serialization
 torch_load <- function(path, device = "cpu") {
   r <- readRDS(path)
+  
+  if (!is.null(r$version) && r$version > ser_version) {
+    rlang::abort(c(x = paste0(
+      "This version of torch can't load files with serialization version > ",
+      ser_version)))
+  }
+  
   if (r$type == "tensor") {
     torch_load_tensor(r, device)
   } else if (r$type == "module") {
     torch_load_module(r, device)
   } else if (r$type == "list") {
     torch_load_list(r, device)
+  } else if (r$type == "coro::exhausted") {
+    return(coro::exhausted())
   }
 }
 
 torch_load_tensor <- function(obj, device = NULL) {
-  Tensor$new(ptr = cpp_tensor_load(obj$values, device))
+  if (is.null(obj$version) || obj$version < 2) {
+    base64 <- TRUE
+  } else {
+    base64 <- FALSE
+  }
+  Tensor$new(ptr = cpp_tensor_load(obj$values, device, base64))
 }
 
 load_tensor_from_raw <- function(x, device) {
@@ -168,5 +200,14 @@ internal_update_parameters_and_buffers <- function(m) {
   }
   for (i in seq_along(private$parameters_)) {
     private$parameters_[[i]] <- to_ptr_tensor(private$parameters_[[i]])
+  }
+}
+
+# used to avoid warnings when passing compress by default.
+saveRDS <- function(object, file, compress = TRUE) {
+  if (compress) {
+    base::saveRDS(object, file)
+  } else {
+    base::saveRDS(object, file, compress = compress)
   }
 }

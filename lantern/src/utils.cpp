@@ -212,9 +212,9 @@ bool _lantern_vector_bool_at(void *self, int64_t i) {
   LANTERN_FUNCTION_END_RET(false)
 }
 
-void *_lantern_string_new(const char *value) {
+void *_lantern_string_new(const char *value, int size) {
   LANTERN_FUNCTION_START
-  return make_raw::string(std::string(value));
+  return make_raw::string(std::string(value, size));
   LANTERN_FUNCTION_END
 }
 
@@ -224,11 +224,15 @@ void *_lantern_string_view_new(const char *value) {
   LANTERN_FUNCTION_END
 }
 
-const char *_lantern_string_get(void *self) {
+char *_lantern_string_get(void *self) {
   auto str = from_raw::string(self);
   char *cstr = new char[str.length() + 1];
-  strcpy(cstr, str.c_str());
+  memcpy(cstr, str.c_str(), str.size());
   return cstr;
+}
+
+int _lantern_string_size(void *self) {
+  return from_raw::string(self).size();
 }
 
 void _lantern_print_stuff(void *x) {

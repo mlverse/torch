@@ -167,7 +167,7 @@ test_that("dataloader works with num_workers", {
   )
 
   dl <- dataloader(ds(), batch_size = 10, num_workers = 2)
-
+  it <- dataloader_make_iter(dl)
   i <- 1
   expect_warning(class = "deprecated", {
     for (batch in enumerate(dl)) {

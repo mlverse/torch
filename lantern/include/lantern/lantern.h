@@ -528,10 +528,10 @@ LANTERN_OPTIONAL_DECLS(string_view)
   HOST_API void lantern_Storage_delete(void *x) {LANTERN_CHECK_LOADED _lantern_Storage_delete(x); LANTERN_HOST_HANDLER }
   LANTERN_API bool(LANTERN_PTR _lantern_Tensor_is_contiguous)(void *self);
   HOST_API bool lantern_Tensor_is_contiguous(void *self) {LANTERN_CHECK_LOADED bool ret = _lantern_Tensor_is_contiguous(self); LANTERN_HOST_HANDLER return ret;}
-  LANTERN_API const char  * (LANTERN_PTR _lantern_tensor_save) (void* self);
-  HOST_API const char  * lantern_tensor_save(void* self) {LANTERN_CHECK_LOADED const char  * ret = _lantern_tensor_save(self); LANTERN_HOST_HANDLER return ret;}
-  LANTERN_API void * (LANTERN_PTR _lantern_tensor_load) (const char * s, void* device);
-  HOST_API void * lantern_tensor_load(const char * s, void* device) {LANTERN_CHECK_LOADED void * ret = _lantern_tensor_load(s, device); LANTERN_HOST_HANDLER return ret;}
+  LANTERN_API void* (LANTERN_PTR _lantern_tensor_save) (void* self, bool base64);
+  HOST_API void* lantern_tensor_save(void* self, bool base64) {LANTERN_CHECK_LOADED void* ret = _lantern_tensor_save(self, base64); LANTERN_HOST_HANDLER return ret;}
+  LANTERN_API void * (LANTERN_PTR _lantern_tensor_load) (void * s, void* device, bool base64);
+  HOST_API void * lantern_tensor_load(void * s, void* device, bool base64) {LANTERN_CHECK_LOADED void * ret = _lantern_tensor_load(s, device, base64); LANTERN_HOST_HANDLER return ret;}
   LANTERN_API void * (LANTERN_PTR _lantern_test_tensor)();
   HOST_API void * lantern_test_tensor() {LANTERN_CHECK_LOADED void * ret = _lantern_test_tensor(); LANTERN_HOST_HANDLER return ret;}
   LANTERN_API void (LANTERN_PTR _lantern_test_print)(void* x); 
@@ -614,11 +614,11 @@ LANTERN_OPTIONAL_DECLS(string_view)
     return ret;
   }
 
-  LANTERN_API void* (LANTERN_PTR _lantern_string_new) (const char * value);
-  HOST_API void* lantern_string_new (const char* value)
+  LANTERN_API void* (LANTERN_PTR _lantern_string_new) (const char * value, int size);
+  HOST_API void* lantern_string_new (const char* value, int size)
   {
     LANTERN_CHECK_LOADED
-    void* ret = _lantern_string_new(value);
+    void* ret = _lantern_string_new(value, size);
     LANTERN_HOST_HANDLER;
     return ret;
   }
@@ -1673,11 +1673,11 @@ HOST_API void lantern_vector_int64_t_push_back (void* self, int64_t x)
   
 }
 
-LANTERN_API const char * (LANTERN_PTR _lantern_string_get) (void* self);
-HOST_API const char * lantern_string_get (void* self)
+LANTERN_API char * (LANTERN_PTR _lantern_string_get) (void* self);
+HOST_API char * lantern_string_get (void* self)
 {
   LANTERN_CHECK_LOADED
-  const char * ret = _lantern_string_get(self);
+  char * ret = _lantern_string_get(self);
   LANTERN_HOST_HANDLER;
   return ret;
 }
@@ -2275,6 +2275,15 @@ HOST_API void* lantern_from_blob(void* data, int64_t *sizes, size_t sizes_size,
                           int64_t* strides, size_t strides_size, void* options) { 
   LANTERN_CHECK_LOADED
   void* ret = _lantern_from_blob(data, sizes, sizes_size, strides, strides_size, options);
+  LANTERN_HOST_HANDLER;
+  return ret;
+}
+
+LANTERN_API int (LANTERN_PTR _lantern_string_size) (void* self);
+HOST_API int lantern_string_size (void* self)
+{
+  LANTERN_CHECK_LOADED
+  int ret = _lantern_string_size(self);
   LANTERN_HOST_HANDLER;
   return ret;
 }
@@ -8203,6 +8212,7 @@ LOAD_SYMBOL(_lantern_cudnn_is_available);
 LOAD_SYMBOL(_lantern_cuda_device_stats);
 LOAD_SYMBOL(_lantern_cuda_get_runtime_version);
 LOAD_SYMBOL(_set_delete_lambda_fun);
+LOAD_SYMBOL(_lantern_string_size);
   /* Autogen Symbols -- Start */
   LOAD_SYMBOL(_lantern__cast_byte_tensor_bool)
   LOAD_SYMBOL(_lantern__cast_char_tensor_bool)

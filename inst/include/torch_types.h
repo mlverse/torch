@@ -394,7 +394,7 @@ class XPtrTorchstring : public XPtrTorch {
   XPtrTorchstring(SEXP x);
   XPtrTorchstring(const XPtrTorchstring& x) : XPtrTorch(x.get_shared()){};
   XPtrTorchstring(std::string x)
-      : XPtrTorchstring(fixme_new_string(x.c_str())){};
+      : XPtrTorchstring(fixme_new_string(x.c_str(), x.size())){};
   operator SEXP() const;
 };
 
