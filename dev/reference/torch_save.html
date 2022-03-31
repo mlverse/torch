@@ -85,7 +85,7 @@ term storage.</p>
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">torch_save</span><span class="op">(</span><span class="va">obj</span>, <span class="va">path</span>, <span class="va">...</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">torch_save</span><span class="op">(</span><span class="va">obj</span>, <span class="va">path</span>, <span class="va">...</span>, compress <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -96,6 +96,10 @@ term storage.</p>
 <dd><p>a connection or the name of the file to save.</p></dd>
 <dt>...</dt>
 <dd><p>not currently used.</p></dd>
+<dt>compress</dt>
+<dd><p>a logical specifying whether saving to a named file is to use
+"gzip" compression, or one of "gzip", "bzip2" or "xz" to indicate the type of
+compression to be used. Ignored if file is a connection.</p></dd>
 </dl></div>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
