@@ -118,8 +118,12 @@ Tensor$set("public", "backward", function(gradient = list(), retain_graph = crea
   
   args <- list(...)
   if (!is.null(args$keep_graph)) {
-    rlang::warn(c("`keep_graph` has been deprecated. Please use `retain_graph` instead.",
-                  "i" = "`keep_graph` will take precedence."))
+    rlang::warn(c(
+      "`keep_graph` has been deprecated. Please use `retain_graph` instead.",
+      "i" = "`keep_graph` will take precedence."),
+      .frequency = "once",
+      .frequency_id = "keep_graph"
+    )
     retain_graph <- keep_graph
   }
   
