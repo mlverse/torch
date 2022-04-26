@@ -87,15 +87,13 @@
 <h2 class="pkg-version" data-toc-text="0.7.2" id="torch-072">torch 0.7.2<a class="anchor" aria-label="anchor" href="#torch-072"></a></h2><p class="text-muted">CRAN release: 2022-02-25</p>
 <div class="section level3">
 <h3 id="bug-fix-0-7-2">Bug fix<a class="anchor" aria-label="anchor" href="#bug-fix-0-7-2"></a></h3>
-<ul><li>Fixed vignette building on Windows.</li>
-</ul></div>
+<ul><li>Fixed vignette building on Windows.</li></ul></div>
 </div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.7.1" id="torch-071">torch 0.7.1<a class="anchor" aria-label="anchor" href="#torch-071"></a></h2><p class="text-muted">CRAN release: 2022-02-25</p>
 <div class="section level3">
 <h3 id="new-features-0-7-1">New features<a class="anchor" aria-label="anchor" href="#new-features-0-7-1"></a></h3>
-<ul><li>Added <code><a href="../reference/cuda_runtime_version.html">cuda_runtime_version()</a></code> to query the CUDA Tolkit version that torch is using. (<a href="https://github.com/mlverse/torch/issues/790" class="external-link">#790</a>)</li>
-</ul></div>
+<ul><li>Added <code><a href="../reference/cuda_runtime_version.html">cuda_runtime_version()</a></code> to query the CUDA Tolkit version that torch is using. (<a href="https://github.com/mlverse/torch/issues/790" class="external-link">#790</a>)</li></ul></div>
 </div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.7.0" id="torch-070">torch 0.7.0<a class="anchor" aria-label="anchor" href="#torch-070"></a></h2><p class="text-muted">CRAN release: 2022-02-18</p>
@@ -130,8 +128,7 @@
 </ul></div>
 <div class="section level3">
 <h3 id="documentation-0-7-0">Documentation<a class="anchor" aria-label="anchor" href="#documentation-0-7-0"></a></h3>
-<ul><li>Improved the ‘Loading data’ vignette and datasets documentation. (<a href="https://github.com/mlverse/torch/issues/780" class="external-link">#780</a>, <a href="https://github.com/jnolis" class="external-link">@jnolis</a>)</li>
-</ul></div>
+<ul><li>Improved the ‘Loading data’ vignette and datasets documentation. (<a href="https://github.com/mlverse/torch/issues/780" class="external-link">#780</a>, <a href="https://github.com/jnolis" class="external-link">@jnolis</a>)</li></ul></div>
 <div class="section level3">
 <h3 id="internal-0-7-0">Internal<a class="anchor" aria-label="anchor" href="#internal-0-7-0"></a></h3>
 <ul><li>Refactored the internal Lantern types and Rcpp types and made clearer which are the exported types that can be used in the C++ extensions. (<a href="https://github.com/mlverse/torch/issues/718" class="external-link">#718</a>)</li>
@@ -156,8 +153,7 @@
 <div class="section level3">
 <h3 id="breaking-changes-0-6-0">Breaking changes<a class="anchor" aria-label="anchor" href="#breaking-changes-0-6-0"></a></h3>
 <ul><li>
-<code>nn_sequential</code> is now a bare <code>nn_module</code>, allowing to easily inherit from it. This is a breaking change if you used the <code>name</code> argument. The <code>name</code> behavior can be achieved by subclassing; see the tests in the PR. (<a href="https://github.com/mlverse/torch/issues/699" class="external-link">#699</a>)</li>
-</ul></div>
+<code>nn_sequential</code> is now a bare <code>nn_module</code>, allowing to easily inherit from it. This is a breaking change if you used the <code>name</code> argument. The <code>name</code> behavior can be achieved by subclassing; see the tests in the PR. (<a href="https://github.com/mlverse/torch/issues/699" class="external-link">#699</a>)</li></ul></div>
 <div class="section level3">
 <h3 id="new-features-0-6-0">New features<a class="anchor" aria-label="anchor" href="#new-features-0-6-0"></a></h3>
 <ul><li>Additional info is showed when printing tensors like if it requires grad and the grad fn. (<a href="https://github.com/mlverse/torch/issues/668" class="external-link">#668</a>, <a href="https://github.com/mlverse/torch/issues/669" class="external-link">#669</a>, <a href="https://github.com/mlverse/torch/issues/673" class="external-link">#673</a>, <a href="https://github.com/mohamed-180" class="external-link">@mohamed-180</a>)</li>
@@ -174,8 +170,7 @@
 </ul></div>
 <div class="section level3">
 <h3 id="documentation-0-6-0">Documentation<a class="anchor" aria-label="anchor" href="#documentation-0-6-0"></a></h3>
-<ul><li>Improved optimizer documentation by adding a ‘Warning’ regarding the creation and usage order. (<a href="https://github.com/mlverse/torch/issues/698" class="external-link">#698</a>)</li>
-</ul></div>
+<ul><li>Improved optimizer documentation by adding a ‘Warning’ regarding the creation and usage order. (<a href="https://github.com/mlverse/torch/issues/698" class="external-link">#698</a>)</li></ul></div>
 </div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.5.0" id="torch-050">torch 0.5.0<a class="anchor" aria-label="anchor" href="#torch-050"></a></h2><p class="text-muted">CRAN release: 2021-08-17</p>
@@ -219,8 +214,7 @@
 <div class="section level3">
 <h3 id="breaking-changes-0-4-0">Breaking changes<a class="anchor" aria-label="anchor" href="#breaking-changes-0-4-0"></a></h3>
 <ul><li>
-<code>torch_multinomial</code> now returns 1-based indexes to comply with 1-based indexing across torch. (<a href="https://github.com/mlverse/torch/issues/588" class="external-link">#588</a>)</li>
-</ul></div>
+<code>torch_multinomial</code> now returns 1-based indexes to comply with 1-based indexing across torch. (<a href="https://github.com/mlverse/torch/issues/588" class="external-link">#588</a>)</li></ul></div>
 <div class="section level3">
 <h3 id="new-features-0-4-0">New features<a class="anchor" aria-label="anchor" href="#new-features-0-4-0"></a></h3>
 <ul><li>Added parameter to multihead attention module to allow output of unaveraged attention weights. (<a href="https://github.com/jonathanbratt" class="external-link">@jonathanbratt</a> <a href="https://github.com/mlverse/torch/issues/542" class="external-link">#542</a>)</li>
@@ -302,8 +296,7 @@
 </ul></div>
 <div class="section level3">
 <h3 id="documentation-0-3-0">Documentation<a class="anchor" aria-label="anchor" href="#documentation-0-3-0"></a></h3>
-<ul><li>Added vignette on reading models from Python (<a href="https://github.com/mlverse/torch/issues/469" class="external-link">#469</a>)</li>
-</ul></div>
+<ul><li>Added vignette on reading models from Python (<a href="https://github.com/mlverse/torch/issues/469" class="external-link">#469</a>)</li></ul></div>
 <div class="section level3">
 <h3 id="internal-changes-0-3-0">Internal changes<a class="anchor" aria-label="anchor" href="#internal-changes-0-3-0"></a></h3>
 <ul><li>Removed the PerformanceReporter from tests to get easier to read stack traces. (<a href="https://github.com/mlverse/torch/issues/449" class="external-link">#449</a>)</li>
@@ -450,7 +443,7 @@
 </div>
 
 <div class="pkgdown-footer-right">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
 </div>
 
     </footer></div>
