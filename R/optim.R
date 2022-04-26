@@ -15,11 +15,11 @@ is_optim_required <- function(x) {
 #'
 #' @export
 is_optimizer <- function(x) {
-  inherits(x, "torch_Optimizer")
+  inherits(x, "torch_optimizer")
 }
 
 Optimizer <- R6::R6Class(
-  "torch_Optimizer",
+  "torch_optimizer",
   lock_objects = FALSE,
   public = list(
     initialize = function(params, defaults) {
@@ -261,6 +261,7 @@ optimizer <- function(name = NULL, inherit = Optimizer, ...,
     private = private,
     active = active,
     parent_env = parent_env,
-    attr_name = "Optimizer"
+    attr_name = "Optimizer",
+    constructor_class = c(name, "torch_optimizer_generator")
   )
 }
