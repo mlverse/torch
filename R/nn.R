@@ -637,6 +637,29 @@ length.nn_sequential <- function(x) {
   nn_sequential(!!!lapply(y, function(i) x[[i]]))
 }
 
+#' Prune top layer(s) of a network
+#'
+#' @param x nn_network to prune
+#' @param head_size number of nn_layers to prune 
+#'
+#' @return a nn_sequential network without the top nn_layer
+#' @export
+#'
+#' @examples
+nn_prune_head <- function(x, head_size) {
+  UseMethod("nn_prune_head")
+}
+
+#' @export
+nn_prune_head.nn_sequential <- function(x, head_size=1L ) {
+  nn_sequential(!!!x$children[1:(length(x)-head_size)])
+  
+}
+#' @export
+nn_prune_head.nn_module <- function(x, head_size=1L ) {
+  nn_sequential(!!!x$children[1:(length(x$children)-head_size)])
+  
+}
 #' Holds submodules in a list.
 #'
 #' [nn_module_list] can be indexed like a regular R list, but
