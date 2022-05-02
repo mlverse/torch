@@ -50,9 +50,7 @@ nn_weighted_loss <- nn_module(
 #' @param reduction (string, optional): Specifies the reduction to apply to the output:
 #'   `'none'` | `'mean'` | `'sum'`. `'none'`: no reduction will be applied,
 #'   `'mean'`: the sum of the output will be divided by the number of
-#'   elements in the output, `'sum'`: the output will be summed. Note: `size_average`
-#'   and `reduce` are in the process of being deprecated, and in the meantime,
-#'   specifying either of those two args will override `reduction`. Default: `'mean'`
+#'   elements in the output, `'sum'`: the output will be summed.
 #'
 #' @section Shape:
 #' - Input: \eqn{(N, *)} where \eqn{*} means, any number of additional
@@ -133,10 +131,7 @@ nn_l1_loss <- nn_module(
 #' @param reduction (string, optional): Specifies the reduction to apply to the output:
 #'   `'none'` | `'mean'` | `'sum'`. `'none'`: no reduction will
 #'   be applied, `'mean'`: the weighted mean of the output is taken,
-#'   `'sum'`: the output will be summed. Note: `size_average`
-#'   and `reduce` are in the process of being deprecated, and in
-#'   the meantime, specifying either of those two args will override
-#'   `reduction`. Default: `'mean'`
+#'   `'sum'`: the output will be summed.
 #' @param ignore_index (int, optional): Specifies a target value that is ignored
 #'   and does not contribute to the input gradient.
 #'
@@ -217,9 +212,7 @@ nn_nll_loss <- nn_module(
 #' @param reduction (string, optional): Specifies the reduction to apply to the output:
 #'   `'none'` | `'mean'` | `'sum'`. `'none'`: no reduction will be applied,
 #'   `'mean'`: the sum of the output will be divided by the number of
-#'   elements in the output, `'sum'`: the output will be summed. Note: `size_average`
-#'   and `reduce` are in the process of being deprecated, and in the meantime,
-#'   specifying either of those two args will override `reduction`. Default: `'mean'`
+#'   elements in the output, `'sum'`: the output will be summed.
 #'
 #' @examples
 #' loss <- nn_poisson_nll_loss()
@@ -361,9 +354,7 @@ nn_kl_div_loss <- nn_module(
 #' @param reduction (string, optional): Specifies the reduction to apply to the output:
 #'  `'none'` | `'mean'` | `'sum'`. `'none'`: no reduction will be applied,
 #'  `'mean'`: the sum of the output will be divided by the number of
-#'  elements in the output, `'sum'`: the output will be summed. Note: `size_average`
-#'  and `reduce` are in the process of being deprecated, and in the meantime,
-#'  specifying either of those two args will override `reduction`. Default: `'mean'`
+#'  elements in the output, `'sum'`: the output will be summed.
 #'
 #' @section Shape:
 #' - Input: \eqn{(N, *)} where \eqn{*} means, any number of additional
@@ -435,9 +426,7 @@ nn_mse_loss <- nn_module(
 #' @param reduction (string, optional): Specifies the reduction to apply to the output:
 #'    `'none'` | `'mean'` | `'sum'`. `'none'`: no reduction will be applied,
 #'    `'mean'`: the sum of the output will be divided by the number of
-#'    elements in the output, `'sum'`: the output will be summed. Note: `size_average`
-#'    and `reduce` are in the process of being deprecated, and in the meantime,
-#'    specifying either of those two args will override `reduction`. Default: `'mean'`
+#'    elements in the output, `'sum'`: the output will be summed.
 #'
 #' @section Shape:
 #' - Input: \eqn{(N, *)} where \eqn{*} means, any number of additional
@@ -517,9 +506,7 @@ nn_bce_loss <- nn_module(
 #' @param reduction (string, optional): Specifies the reduction to apply to the output:
 #'   `'none'` | `'mean'` | `'sum'`. `'none'`: no reduction will be applied,
 #'   `'mean'`: the sum of the output will be divided by the number of
-#'   elements in the output, `'sum'`: the output will be summed. Note: `size_average`
-#'   and `reduce` are in the process of being deprecated, and in the meantime,
-#'   specifying either of those two args will override `reduction`. Default: `'mean'`
+#'   elements in the output, `'sum'`: the output will be summed.
 #' @param pos_weight (Tensor, optional): a weight of positive examples.
 #'   Must be a vector with length equal to the number of classes.
 #'
@@ -591,9 +578,7 @@ nn_bce_with_logits_loss <- nn_module(
 #' @param reduction (string, optional): Specifies the reduction to apply to the output:
 #'  `'none'` | `'mean'` | `'sum'`. `'none'`: no reduction will be applied,
 #'  `'mean'`: the sum of the output will be divided by the number of
-#'  elements in the output, `'sum'`: the output will be summed. Note: `size_average`
-#'  and `reduce` are in the process of being deprecated, and in the meantime,
-#'  specifying either of those two args will override `reduction`. Default: `'mean'`
+#'  elements in the output, `'sum'`: the output will be summed.
 #'
 #' @section Shape:
 #' - Input: \eqn{(*)} where \eqn{*} means, any number of dimensions. The sum operation
@@ -641,9 +626,7 @@ nn_hinge_embedding_loss <- nn_module(
 #' @param reduction (string, optional): Specifies the reduction to apply to the output:
 #'   `'none'` | `'mean'` | `'sum'`. `'none'`: no reduction will be applied,
 #'  `'mean'`: the sum of the output will be divided by the number of
-#'  elements in the output, `'sum'`: the output will be summed. Note: `size_average`
-#'  and `reduce` are in the process of being deprecated, and in the meantime,
-#'  specifying either of those two args will override `reduction`. Default: `'mean'`
+#'  elements in the output, `'sum'`: the output will be summed.
 #'
 #' @section Shape:
 #' - Input: \eqn{(C)} or \eqn{(N, C)} where `N` is the batch size and `C`
@@ -698,9 +681,7 @@ nn_multilabel_margin_loss <- nn_module(
 #' @param reduction (string, optional): Specifies the reduction to apply to the output:
 #'  `'none'` | `'mean'` | `'sum'`. `'none'`: no reduction will be applied,
 #'  `'mean'`: the sum of the output will be divided by the number of
-#'  elements in the output, `'sum'`: the output will be summed. Note: `size_average`
-#'  and `reduce` are in the process of being deprecated, and in the meantime,
-#'  specifying either of those two args will override `reduction`. Default: `'mean'`
+#'  elements in the output, `'sum'`: the output will be summed.
 #'
 #' @section Shape:
 #' - Input: \eqn{(N, *)} where \eqn{*} means, any number of additional
@@ -734,9 +715,7 @@ nn_smooth_l1_loss <- nn_module(
 #' @param reduction (string, optional): Specifies the reduction to apply to the output:
 #'   `'none'` | `'mean'` | `'sum'`. `'none'`: no reduction will be applied,
 #'   `'mean'`: the sum of the output will be divided by the number of
-#'   elements in the output, `'sum'`: the output will be summed. Note: `size_average`
-#'   and `reduce` are in the process of being deprecated, and in the meantime,
-#'   specifying either of those two args will override `reduction`. Default: `'mean'`
+#'   elements in the output, `'sum'`: the output will be summed.
 #'
 #' @section Shape:
 #' - Input: \eqn{(*)} where \eqn{*} means, any number of additional
@@ -799,9 +778,7 @@ nn_soft_margin_loss <- nn_module(
 #' @param reduction (string, optional): Specifies the reduction to apply to the output:
 #'   `'none'` | `'mean'` | `'sum'`. `'none'`: no reduction will be applied,
 #'   `'mean'`: the sum of the output will be divided by the number of
-#'   elements in the output, `'sum'`: the output will be summed. Note: `size_average`
-#'   and `reduce` are in the process of being deprecated, and in the meantime,
-#'   specifying either of those two args will override `reduction`. Default: `'mean'`
+#'   elements in the output, `'sum'`: the output will be summed.
 #'
 #' @section Shape:
 #' - Input: \eqn{(N, C)} where `C = number of classes`, or
@@ -860,9 +837,7 @@ nn_cross_entropy_loss <- nn_module(
 #' @param reduction (string, optional): Specifies the reduction to apply to the output:
 #'   `'none'` | `'mean'` | `'sum'`. `'none'`: no reduction will be applied,
 #'   `'mean'`: the sum of the output will be divided by the number of
-#'   elements in the output, `'sum'`: the output will be summed. Note: `size_average`
-#'   and `reduce` are in the process of being deprecated, and in the meantime,
-#'   specifying either of those two args will override `reduction`. Default: `'mean'`
+#'   elements in the output, `'sum'`: the output will be summed.
 #'
 #' @section Shape:
 #' - Input: \eqn{(N, C)} where `N` is the batch size and `C` is the number of classes.
@@ -907,9 +882,7 @@ nn_multilabel_soft_margin_loss <- nn_module(
 #' @param reduction (string, optional): Specifies the reduction to apply to the output:
 #'   `'none'` | `'mean'` | `'sum'`. `'none'`: no reduction will be applied,
 #'   `'mean'`: the sum of the output will be divided by the number of
-#'   elements in the output, `'sum'`: the output will be summed. Note: `size_average`
-#'   and `reduce` are in the process of being deprecated, and in the meantime,
-#'   specifying either of those two args will override `reduction`. Default: `'mean'`
+#'   elements in the output, `'sum'`: the output will be summed.
 #'
 #' @export
 nn_cosine_embedding_loss <- nn_module(
@@ -946,9 +919,7 @@ nn_cosine_embedding_loss <- nn_module(
 #' @param reduction (string, optional): Specifies the reduction to apply to the output:
 #'   `'none'` | `'mean'` | `'sum'`. `'none'`: no reduction will be applied,
 #'   `'mean'`: the sum of the output will be divided by the number of
-#'   elements in the output, `'sum'`: the output will be summed. Note: `size_average`
-#'   and `reduce` are in the process of being deprecated, and in the meantime,
-#'   specifying either of those two args will override `reduction`. Default: `'mean'`
+#'   elements in the output, `'sum'`: the output will be summed.
 #'
 #' @section Shape:
 #' - Input1: \eqn{(N)} where `N` is the batch size.
@@ -1012,9 +983,7 @@ nn_margin_ranking_loss <- nn_module(
 #' @param reduction (string, optional): Specifies the reduction to apply to the output:
 #'   `'none'` | `'mean'` | `'sum'`. `'none'`: no reduction will be applied,
 #'   `'mean'`: the sum of the output will be divided by the number of
-#'   elements in the output, `'sum'`: the output will be summed. Note: `size_average`
-#'   and `reduce` are in the process of being deprecated, and in the meantime,
-#'   specifying either of those two args will override `reduction`. Default: `'mean'`
+#'   elements in the output, `'sum'`: the output will be summed.
 #'
 #' @export
 nn_multi_margin_loss <- nn_module(
@@ -1076,9 +1045,7 @@ nn_multi_margin_loss <- nn_module(
 #' @param reduction (string, optional): Specifies the reduction to apply to the output:
 #'   `'none'` | `'mean'` | `'sum'`. `'none'`: no reduction will be applied,
 #'   `'mean'`: the sum of the output will be divided by the number of
-#'   elements in the output, `'sum'`: the output will be summed. Note: `size_average`
-#'   and `reduce` are in the process of being deprecated, and in the meantime,
-#'   specifying either of those two args will override `reduction`. Default: `'mean'`
+#'   elements in the output, `'sum'`: the output will be summed.
 #'
 #' @section Shape:
 #' - Input: \eqn{(N, D)} where \eqn{D} is the vector dimension.
