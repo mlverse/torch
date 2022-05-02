@@ -17,10 +17,7 @@ and does not contribute to the input gradient.}
 \item{reduction}{(string, optional): Specifies the reduction to apply to the output:
 \code{'none'} | \code{'mean'} | \code{'sum'}. \code{'none'}: no reduction will
 be applied, \code{'mean'}: the weighted mean of the output is taken,
-\code{'sum'}: the output will be summed. Note: \code{size_average}
-and \code{reduce} are in the process of being deprecated, and in
-the meantime, specifying either of those two args will override
-\code{reduction}. Default: \code{'mean'}}
+\code{'sum'}: the output will be summed.}
 }
 \description{
 The negative log likelihood loss. It is useful to train a classification
