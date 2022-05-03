@@ -185,6 +185,20 @@ test_that("index_put_", {
   expect_equal(x[2, 2]$item(), 0)
 })
 
+test_that("kron", {
+  
+  mat1 <- torch_eye(2)
+  mat2 <- torch_arange(1, 4)$reshape(c(2, 2))
+  out <- torch_kron(mat1, mat2)
+  
+  expected <- rbind(c(1., 2., 0., 0.),
+                    c(3., 4., 0., 0.),
+                    c(0., 0., 1., 2.),
+                    c(0., 0., 3., 4.))
+  
+  expect_equal_to_r(out, expected)
+})
+
 test_that("logit works", {
   x <- torch_tensor(c(0.5, 0.1, 0.9))
   expect_equal_to_tensor(
