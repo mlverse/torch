@@ -5,6 +5,7 @@
 - Serialization is now much faster because we avoid base64 encoding the serialized tensors. As a result, files serialized with newer versions of torch can't be opened with older versions of torch. Set `options(torch.serialization_version = 1)` if you want your file to be readable by older versions. (#803)
 - `keep_graph` now defaults to the value of `create_graph` when calling `$backward()`. We also renamed it to `retain_graph` to match PyTorch. (#811)
 - Optimizers created with `optimizer` now carry the classname in the generator and in instances. Optimizer generators now have the class `torch_optimizer_generator`. The class of torch optimizers has been renamed from `torch_Optimizer` to `torch_optimizer`. (#814)
+- `torch_kron()` is now exported (#818). 
 
 # torch 0.7.2
 
