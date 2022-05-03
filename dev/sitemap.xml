@@ -1537,6 +1537,9 @@
     <loc>https://torch.mlverse.org/docs/dev/reference/torch_kaiser_window.html</loc>
   </url>
   <url>
+    <loc>https://torch.mlverse.org/docs/dev/reference/torch_kron.html</loc>
+  </url>
+  <url>
     <loc>https://torch.mlverse.org/docs/dev/reference/torch_kthvalue.html</loc>
   </url>
   <url>
