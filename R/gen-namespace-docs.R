@@ -7506,4 +7506,13 @@ NULL
 #' @export
 NULL
 
-
+#' Kronecker product
+#'
+#' Computes the Kronecker product of `self` and `other`.
+#' 
+#' @param self (`Tensor`) input Tensor
+#' @param other (`Tensor`) other tensor.
+#' 
+#' @name torch_kron
+#' @export
+NULL
