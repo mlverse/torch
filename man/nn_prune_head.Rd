@@ -12,8 +12,18 @@ nn_prune_head(x, head_size)
 \item{head_size}{number of nn_layers to prune}
 }
 \value{
-a nn_sequential network without the top nn_layer
+a nn_sequential network with the top nn_layer removed
 }
 \description{
-Prune top layer(s) of a network
+Prune \code{head_size} last layers of a nn_module in order to
+replace them by your own head, or in order to use the pruned module
+as a sequential embedding module.
+}
+\examples{
+
+# Remove the classification head of a resnet34 pretrained network
+if (torch_is_installed()) {
+  resnet34 <- torchvision::network_resnet34(pretrained=TRUE)
+  resnet34_headless <- nn_prune_head(resnet34)
+}
 }
