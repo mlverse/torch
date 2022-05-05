@@ -26,9 +26,7 @@ Stirling approximation term
 \item{reduction}{(string, optional): Specifies the reduction to apply to the output:
 \code{'none'} | \code{'mean'} | \code{'sum'}. \code{'none'}: no reduction will be applied,
 \code{'mean'}: the sum of the output will be divided by the number of
-elements in the output, \code{'sum'}: the output will be summed. Note: \code{size_average}
-and \code{reduce} are in the process of being deprecated, and in the meantime,
-specifying either of those two args will override \code{reduction}. Default: \code{'mean'}}
+elements in the output, \code{'sum'}: the output will be summed.}
 }
 \description{
 Negative log likelihood loss with Poisson distribution of target.

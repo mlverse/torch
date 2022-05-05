@@ -6,6 +6,7 @@
 - `keep_graph` now defaults to the value of `create_graph` when calling `$backward()`. We also renamed it to `retain_graph` to match PyTorch. (#811)
 - Optimizers created with `optimizer` now carry the classname in the generator and in instances. Optimizer generators now have the class `torch_optimizer_generator`. The class of torch optimizers has been renamed from `torch_Optimizer` to `torch_optimizer`. (#814)
 - New utility function `nn_prune_head()` to prune top layer(s) of a network (#819 @cregouby)
+- `torch_kron()` is now exported (#818). 
 
 # torch 0.7.2
 
