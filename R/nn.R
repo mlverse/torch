@@ -675,13 +675,14 @@ nn_prune_head.nn_module <- nn_module(
       }
     },
     forward = function(...) {
-      i <- 1
+      first_module <- TRUE
       for (module in private$modules_) {
-        if (i==1) {
+        if (first_module) {
           input <- module(...)
         } else {
           input <- module(input)
         }
+        first_module <- FALSE
       }
       input
     }
