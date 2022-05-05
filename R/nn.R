@@ -665,7 +665,7 @@ nn_prune_head.nn_sequential <- function(x, head_size=1L ) {
 }
 
 #' @export
-nn_prune_head.nn_module <- module <- nn_module(
+nn_prune_head.nn_module <- nn_module(
     classname = "nn_sequential",
     initialize = function(x, head_size=1L) {
       modules <- rlang::list2(!!!x$children[1:(length(x$children)-head_size)])
