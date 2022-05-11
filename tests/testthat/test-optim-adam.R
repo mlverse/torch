@@ -83,3 +83,39 @@ test_that("regression test for #559", {
 
   expect_length(opt$state$map, 2)
 })
+
+test_that("Adam works with high weight decay: regression test for #821", {
+
+  model <- nn_sequential(nn_linear(10, 32),
+                         nn_relu(),
+                         nn_linear(32, 32),
+                         nn_relu(),
+                         nn_linear(32, 32),
+                         nn_relu(),
+                         nn_linear(32, 32),
+                         nn_relu(),
+                         nn_linear(32, 32),
+                         nn_relu(),
+                         nn_linear(32, 1)
+                         )
+  opt <- optim_adam(model$parameters, lr = 0.01, weight_decay = 1e-2)
+  
+  x <- torch_randint(0, 100, size=c(64, 10), dtype=torch_float32())
+  y <- torch_randint(0, 2, size=c(64), dtype=torch_float32())
+  
+  loss <- nn_bce_with_logits_loss()
+  fn <- function() {
+    opt$zero_grad()
+    y_pred <- model(x)$squeeze()
+    l <- loss(y_pred, y)
+    l$backward()
+    l
+  }
+  
+  initial_value <- fn()
+  
+  for (i in seq_len(30)) {
+    opt$step(fn)
+  }
+  expect_true(as_array(fn()) <= as_array(initial_value) / 2)
+} )
