@@ -93,7 +93,7 @@ optim_adam <- optimizer(
       bias_correction2 <- 1 - beta2^state(param)[["step"]]
 
       if (group$weight_decay != 0) {
-        grad$add_(p, alpha = group$weight_decay)
+        grad$add_(param, alpha = group$weight_decay)
       }
 
       # Decay the first and second moment running average coefficient
