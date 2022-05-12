@@ -282,6 +282,19 @@ atan.torch_tensor <- function(x) {
 }
 
 #' @export
+atan2.torch_tensor <- function(x, y) {
+if (!is_torch_tensor(x)) {
+  x <- torch_tensor(x, device = x$device)
+}
+
+if (!is_torch_tensor(y)) {
+  y <- torch_tensor(y, device = y$device)
+}
+
+torch_atan2(x, y)
+}
+
+#' @export
 exp.torch_tensor <- function(x) {
   torch_exp(x)
 }
