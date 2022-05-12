@@ -70,13 +70,22 @@ nnf_embedding <- function(input, weight, padding_idx = NULL, max_norm = NULL, no
 #'  as having the same `offsets`, if those are not `NULL`.
 #' @param include_last_offset (bool, optional) if `TRUE`, the size of offsets is
 #'   equal to the number of bags + 1.
+#' @param padding_idx (int, optional) If given, pads the output with the embedding
+#'   vector at `padding_idx` (initialized to zeros) whenever it encounters the index.
 #'
 #' @export
 nnf_embedding_bag <- function(input, weight, offsets = NULL, max_norm = NULL,
                               norm_type = 2, scale_grad_by_freq = FALSE,
                               mode = "mean", sparse = FALSE, per_sample_weights = NULL,
-                              include_last_offset = FALSE) {
+                              include_last_offset = FALSE, padding_idx = NULL) {
   if (input$dim() == 2) {
+    if (!is.null(offsets)) {
+      value_error("if input is 2D, then offsets has to be NULL")
+    }
+    
+    offsets <- torch_arange(0, input$numel(), input$size(2), 
+                            dtype=input$dtype, device=input$device) 
+      
     input <- input$reshape(-1)
     if (!is.null(per_sample_weights)) {
       per_sample_weights <- per_sample_weights$reshape(-1)
