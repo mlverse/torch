@@ -69,6 +69,9 @@ nn_weighted_loss <- nn_module(
 nn_l1_loss <- nn_module(
   "nn_l1_loss",
   inherit = nn_loss,
+  initialize = function(reduction = "mean") {
+    self$reduction = reduction
+  },
   forward = function(input, target) {
     nnf_l1_loss(input, target, reduction = self$reduction)
   }

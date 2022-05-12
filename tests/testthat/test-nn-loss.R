@@ -107,3 +107,13 @@ test_that("nn_multi_margin_loss", {
 
   expect_length(o$shape, 0)
 })
+
+test_that("nn_l1_loss", {
+  loss <- nn_l1_loss()
+  x <- torch_randn(10)
+  y <- torch_randn(10)
+  expect_equal_to_tensor(
+    loss(x, y),
+    torch_mean(torch_abs(x -y))  
+  )
+})
