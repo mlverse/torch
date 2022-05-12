@@ -536,14 +536,69 @@ test_that("we can subset `nn_sequential`", {
     nn_relu(),
     nn_tanh()
   )
-
+  
   expect_true(inherits(x[[1]], "nn_relu"))
   expect_true(inherits(x[[3]], "nn_relu6"))
-
+  
   y <- x[2:4]
   expect_true(inherits(y, "nn_sequential"))
   expect_true(inherits(y[[1]], "nn_tanh"))
   expect_true(inherits(y[[2]], "nn_relu6"))
+})
+
+test_that("we can prune head of `nn_sequential`", {
+  x <- nn_sequential(
+    nn_relu(),
+    nn_tanh(),
+    nn_relu6(),
+    nn_relu(),
+    nn_tanh(),
+    nn_linear(10,3)
+  )
+  expect_error(prune <- nn_prune_head(x), NA)
+  expect_true(inherits(prune, "nn_sequential"))
+  expect_equal(length(prune), 5)
+})
+
+test_that("we can prune head of `nn_sequential` by 3 layers", {
+  x <- nn_sequential(
+    nn_relu(),
+    nn_tanh(),
+    nn_relu6(),
+    nn_relu(),
+    nn_linear(2,10),
+    nn_batch_norm1d(10),
+    nn_tanh(),
+    nn_linear(10,3)
+  )  
+  expect_error(prune <- nn_prune_head(x, 3), NA)
+  expect_true(inherits(prune, "nn_sequential"))
+  expect_equal(length(prune), 5)
+  expect_true(inherits(prune[[length(prune)]], "nn_linear"))
+})
+
+test_that("we can prune head of `nn_module` network", {
+  my_net <- nn_module(
+    "my_net",
+    initialize = function(n_inputs, n_outputs) {
+      self$linear <- nn_linear(n_inputs, n_outputs)
+      self$head <- nn_linear(n_outputs, 2)
+    },
+    forward = function(x) {
+      x <- self$linear(x)
+      self$head(x)
+    }
+  )
+  
+  x <- my_net(1, 3)
+  
+  expect_error(prune <- nn_prune_head(x, 1), NA)
+  expect_true(inherits(prune, "nn_sequential"))
+  expect_equal(length(prune), 1)
+  expect_true(inherits(prune[[length(prune)]], "nn_linear"))
+  input <- torch::torch_randn(5, 1)
+  out <- prune(input)
+  expect_tensor_shape(out, c(5, 3))
 })
 
 test_that("classes are inherited correctly", {

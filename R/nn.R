@@ -637,6 +637,65 @@ length.nn_sequential <- function(x) {
   nn_sequential(!!!lapply(y, function(i) x[[i]]))
 }
 
+#' Prune top layer(s) of a network
+#'
+#' Prune `head_size` last layers of a nn_module in order to 
+#'  replace them by your own head, or in order to use the pruned module
+#'  as a sequential embedding module.
+#' @param x nn_network to prune
+#' @param head_size number of nn_layers to prune 
+#'
+#' @return a nn_sequential network with the top nn_layer removed
+#' @export
+#'
+#' @examples
+#' if (torch_is_installed()) {
+#' x <- nn_sequential(
+#'   nn_relu(),
+#'   nn_tanh(),
+#'   nn_relu6(),
+#'   nn_relu(),
+#'   nn_linear(2,10),
+#'   nn_batch_norm1d(10),
+#'   nn_tanh(),
+#'   nn_linear(10,3)
+#' )  
+#' prune <- nn_prune_head(x, 3)
+#' prune
+#' }
+nn_prune_head <- function(x, head_size) {
+  UseMethod("nn_prune_head")
+}
+
+#' @export
+nn_prune_head.nn_sequential <- function(x, head_size=1L ) {
+  nn_sequential(!!!x$children[1:(length(x)-head_size)])
+}
+
+#' @export
+nn_prune_head.nn_module <- nn_module(
+    classname = "nn_sequential",
+    initialize = function(x, head_size=1L) {
+      modules <- rlang::list2(!!!x$children[1:(length(x$children)-head_size)])
+      mod_names <- names(modules) 
+      for (i in seq_along(modules)) {
+        self$add_module(name = mod_names[i], module = modules[[i]])
+      }
+    },
+    forward = function(...) {
+      first_module <- TRUE
+      for (module in private$modules_) {
+        if (first_module) {
+          input <- module(...)
+        } else {
+          input <- module(input)
+        }
+        first_module <- FALSE
+      }
+      input
+    }
+  )
+
 #' Holds submodules in a list.
 #'
 #' [nn_module_list] can be indexed like a regular R list, but
