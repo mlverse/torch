@@ -616,6 +616,9 @@
     <loc>https://torch.mlverse.org/docs/dev/reference/nn_prelu.html</loc>
   </url>
   <url>
+    <loc>https://torch.mlverse.org/docs/dev/reference/nn_prune_head.html</loc>
+  </url>
+  <url>
     <loc>https://torch.mlverse.org/docs/dev/reference/nn_relu.html</loc>
   </url>
   <url>

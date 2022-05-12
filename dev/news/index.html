@@ -83,9 +83,11 @@
 <li>
 <code>keep_graph</code> now defaults to the value of <code>create_graph</code> when calling <code>$backward()</code>. We also renamed it to <code>retain_graph</code> to match PyTorch. (<a href="https://github.com/mlverse/torch/issues/811" class="external-link">#811</a>)</li>
 <li>Optimizers created with <code>optimizer</code> now carry the classname in the generator and in instances. Optimizer generators now have the class <code>torch_optimizer_generator</code>. The class of torch optimizers has been renamed from <code>torch_Optimizer</code> to <code>torch_optimizer</code>. (<a href="https://github.com/mlverse/torch/issues/814" class="external-link">#814</a>)</li>
+<li>New utility function <code><a href="../reference/nn_prune_head.html">nn_prune_head()</a></code> to prune top layer(s) of a network (<a href="https://github.com/mlverse/torch/issues/819" class="external-link">#819</a> <a href="https://github.com/cregouby" class="external-link">@cregouby</a>)</li>
 <li>
 <code><a href="../reference/torch_kron.html">torch_kron()</a></code> is now exported (<a href="https://github.com/mlverse/torch/issues/818" class="external-link">#818</a>).</li>
 <li>Fixed bug in weight decay handling in the Adam optimizer. (<a href="https://github.com/mlverse/torch/issues/824" class="external-link">#824</a>, <a href="https://github.com/egillax" class="external-link">@egillax</a>)</li>
+<li>Fixed bug in <code>nn_l1_loss</code>. (<a href="https://github.com/mlverse/torch/issues/825" class="external-link">#825</a>, <a href="https://github.com/sebffischer" class="external-link">@sebffischer</a>)</li>
 </ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.7.2" id="torch-072">torch 0.7.2<a class="anchor" aria-label="anchor" href="#torch-072"></a></h2><p class="text-muted">CRAN release: 2022-02-25</p>
