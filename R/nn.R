@@ -649,11 +649,19 @@ length.nn_sequential <- function(x) {
 #' @export
 #'
 #' @examples
-#' 
-#' # Remove the classification head of a resnet34 pretrained network
 #' if (torch_is_installed()) {
-#'   resnet34 <- torchvision::network_resnet34(pretrained=TRUE)
-#'   resnet34_headless <- nn_prune_head(resnet34)
+#' x <- nn_sequential(
+#'   nn_relu(),
+#'   nn_tanh(),
+#'   nn_relu6(),
+#'   nn_relu(),
+#'   nn_linear(2,10),
+#'   nn_batch_norm1d(10),
+#'   nn_tanh(),
+#'   nn_linear(10,3)
+#' )  
+#' prune <- nn_prune_head(x, 3)
+#' prune
 #' }
 nn_prune_head <- function(x, head_size) {
   UseMethod("nn_prune_head")
