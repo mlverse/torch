@@ -8,6 +8,7 @@
 - New utility function `nn_prune_head()` to prune top layer(s) of a network (#819 @cregouby)
 - `torch_kron()` is now exported (#818). 
 - Fixed bug in weight decay handling in the Adam optimizer. (#824, @egillax)
+- Fixed bug in `nn_l1_loss`. (#825, @sebffischer)
 
 # torch 0.7.2
 
