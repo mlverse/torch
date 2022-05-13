@@ -212,3 +212,28 @@ nn_embedding_bag <- nn_module(
   }
 ) 
 
+nn_embedding_bag$from_pretrained <- function(embeddings, freeze = TRUE, 
+                                             max_norm = NULL,
+                                             norm_type = 2., 
+                                             scale_grad_by_freq = FALSE,
+                                             mode = 'mean', 
+                                             sparse = FALSE, 
+                                             include_last_offset = FALSE,
+                                             padding_idx = NULL) {
+  shape <- embeddings$shape
+  embedding <- nn_embedding_bag(
+    num_embeddings=shape[1],
+    embedding_dim=shape[2],
+    .weight=embeddings,
+    max_norm=max_norm,
+    norm_type=norm_type,
+    scale_grad_by_freq=scale_grad_by_freq,
+    mode=mode,
+    sparse=sparse,
+    include_last_offset=include_last_offset,
+    padding_idx=padding_idx
+  )
+  embedding$weight$requires_grad_(!freeze)
+  embedding
+}
+
