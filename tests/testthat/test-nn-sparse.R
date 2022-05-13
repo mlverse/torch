@@ -61,6 +61,7 @@ test_that("nn_embedding_bag", {
   
   # input = torch.tensor([[1,2,4,5], [4,3,2,9]]) - 1
   # embedding(input)
+  input <- torch_tensor(rbind(c(1, 2, 4, 5), c(4, 3, 2, 9)), dtype = torch_long())
   py_out <- c(0.2744, -0.0194)
   expect_equal_to_r(
     embedding(input),
