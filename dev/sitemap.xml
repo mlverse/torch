@@ -445,6 +445,9 @@
     <loc>https://torch.mlverse.org/docs/dev/reference/nn_embedding.html</loc>
   </url>
   <url>
+    <loc>https://torch.mlverse.org/docs/dev/reference/nn_embedding_bag.html</loc>
+  </url>
+  <url>
     <loc>https://torch.mlverse.org/docs/dev/reference/nn_flatten.html</loc>
   </url>
   <url>
