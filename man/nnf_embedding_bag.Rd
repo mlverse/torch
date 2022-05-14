@@ -14,7 +14,8 @@ nnf_embedding_bag(
   mode = "mean",
   sparse = FALSE,
   per_sample_weights = NULL,
-  include_last_offset = FALSE
+  include_last_offset = FALSE,
+  padding_idx = NULL
 )
 }
 \arguments{
@@ -50,6 +51,9 @@ as having the same \code{offsets}, if those are not \code{NULL}.}
 
 \item{include_last_offset}{(bool, optional) if \code{TRUE}, the size of offsets is
 equal to the number of bags + 1.}
+
+\item{padding_idx}{(int, optional) If given, pads the output with the embedding
+vector at \code{padding_idx} (initialized to zeros) whenever it encounters the index.}
 }
 \description{
 Computes sums, means or maxes of \code{bags} of embeddings, without instantiating the
