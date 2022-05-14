@@ -9,6 +9,7 @@
 - `torch_kron()` is now exported (#818). 
 - Fixed bug in weight decay handling in the Adam optimizer. (#824, @egillax)
 - Fixed bug in `nn_l1_loss`. (#825, @sebffischer)
+- Added `nn_embedding_bag`. (#827, @egillax)
 
 # torch 0.7.2
 
