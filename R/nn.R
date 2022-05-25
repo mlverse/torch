@@ -17,6 +17,7 @@ nn_Module <- R6::R6Class(
   lock_objects = FALSE,
   public = list(
     training = TRUE,
+    initialize = function() {},
     forward = function(...) {
       not_implemented_error("Forward method is not implemented")
     },
