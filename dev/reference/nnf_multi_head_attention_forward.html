@@ -109,7 +109,8 @@ subspaces. See reference: Attention Is All You Need</p>
   k_proj_weight <span class="op">=</span> <span class="cn">NULL</span>,
   v_proj_weight <span class="op">=</span> <span class="cn">NULL</span>,
   static_k <span class="op">=</span> <span class="cn">NULL</span>,
-  static_v <span class="op">=</span> <span class="cn">NULL</span>
+  static_v <span class="op">=</span> <span class="cn">NULL</span>,
+  batch_first <span class="op">=</span> <span class="cn">FALSE</span>
 <span class="op">)</span></code></pre></div>
     </div>
 
@@ -117,13 +118,13 @@ subspaces. See reference: Attention Is All You Need</p>
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
     <dl><dt>query</dt>
 <dd><p>\((L, N, E)\) where L is the target sequence length, N is the batch size, E is
-the embedding dimension.</p></dd>
+the embedding dimension. If batch_first is TRUE, the first two dimensions are transposed.</p></dd>
 <dt>key</dt>
 <dd><p>\((S, N, E)\), where S is the source sequence length, N is the batch size, E is
-the embedding dimension.</p></dd>
+the embedding dimension. If batch_first is TRUE, the first two dimensions are transposed.</p></dd>
 <dt>value</dt>
 <dd><p>\((S, N, E)\) where S is the source sequence length, N is the batch size, E is
-the embedding dimension.</p></dd>
+the embedding dimension. If batch_first is TRUE, the first two dimensions are transposed.</p></dd>
 <dt>embed_dim_to_check</dt>
 <dd><p>total dimension of the model.</p></dd>
 <dt>num_heads</dt>
@@ -180,6 +181,9 @@ which is a combination of q_proj_weight, k_proj_weight, v_proj_weight.</p></dd>
 <dd><p>static key and value used for attention operators.</p></dd>
 <dt>static_v</dt>
 <dd><p>currently undocumented.</p></dd>
+<dt>batch_first</dt>
+<dd><p>Logical; whether to expect query, key, and value to have
+batch as their first parameter, and to return output with batch first.</p></dd>
 </dl></div>
 
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
