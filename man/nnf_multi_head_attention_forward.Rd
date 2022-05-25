@@ -28,18 +28,19 @@ nnf_multi_head_attention_forward(
   k_proj_weight = NULL,
   v_proj_weight = NULL,
   static_k = NULL,
-  static_v = NULL
+  static_v = NULL,
+  batch_first = FALSE
 )
 }
 \arguments{
 \item{query}{\eqn{(L, N, E)} where L is the target sequence length, N is the batch size, E is
-the embedding dimension.}
+the embedding dimension. If batch_first is TRUE, the first two dimensions are transposed.}
 
 \item{key}{\eqn{(S, N, E)}, where S is the source sequence length, N is the batch size, E is
-the embedding dimension.}
+the embedding dimension. If batch_first is TRUE, the first two dimensions are transposed.}
 
 \item{value}{\eqn{(S, N, E)} where S is the source sequence length, N is the batch size, E is
-the embedding dimension.}
+the embedding dimension. If batch_first is TRUE, the first two dimensions are transposed.}
 
 \item{embed_dim_to_check}{total dimension of the model.}
 
@@ -96,6 +97,9 @@ which is a combination of q_proj_weight, k_proj_weight, v_proj_weight.}
 \item{static_k}{static key and value used for attention operators.}
 
 \item{static_v}{currently undocumented.}
+
+\item{batch_first}{Logical; whether to expect query, key, and value to have
+batch as their first parameter, and to return output with batch first.}
 }
 \description{
 Allows the model to jointly attend to information from different representation

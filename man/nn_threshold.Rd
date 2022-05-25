@@ -2,7 +2,7 @@
 % Please edit documentation in R/nn-activation.R
 \name{nn_threshold}
 \alias{nn_threshold}
-\title{Threshoold module}
+\title{Threshold module}
 \usage{
 nn_threshold(threshold, value, inplace = FALSE)
 }

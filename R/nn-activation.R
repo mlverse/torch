@@ -660,7 +660,8 @@ nn_softshrink <- nn_module(
 #' \mbox{where} head_i = \mbox{Attention}(QW_i^Q, KW_i^K, VW_i^V) }
 #'
 #' @param embed_dim total dimension of the model.
-#' @param num_heads parallel attention heads.
+#' @param num_heads parallel attention heads. Note that `embed_dim` will be split 
+#'   across `num_heads` (i.e. each head will have dimension `embed_dim %/% num_heads`).
 #' @param dropout a Dropout layer on attn_output_weights. Default: 0.0.
 #' @param bias add bias as module parameter. Default: True.
 #' @param add_bias_kv add bias to the key and value sequences at dim=0.
@@ -749,6 +750,10 @@ nn_multihead_attention <- nn_module(
     self$num_heads <- num_heads
     self$dropout <- dropout
     self$head_dim <- embed_dim %/% num_heads
+    
+    if ((self$head_dim * num_heads) != self$embed_dim) {
+      value_error("embed_dim must be divisible by num_heads")
+    }
 
     if (!self$qkv_same_embed_dim_) {
       self$q_proj_weight <- nn_parameter(torch_empty(embed_dim, embed_dim))

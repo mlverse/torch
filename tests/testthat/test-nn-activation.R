@@ -59,6 +59,8 @@ test_that("Multihead attention works", {
   
   torch::torch_manual_seed(1)
   attn1 <- nn_multihead_attention(embed_dim = 2, num_heads = 1)
-  expect_equal_to_r(attn1$in_proj_weight[1,], c(-0.1782,  0.4406))
+  expect_equal_to_r(attn1$in_proj_weight[1,], c(-0.1782,  0.4406), tol = 1e-4)
   expect_equal_to_r(attn1$out_proj$weight[1,], c(0.3643, -0.3121), tol = 1e-4)
+  
+  expect_error(nn_multihead_attention(embed_dim = 512, num_heads = 10), regexp="divisible")
 })
