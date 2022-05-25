@@ -481,8 +481,6 @@ nnf_threshold_ <- function(input, threshold, value) {
 #' Allows the model to jointly attend to information from different representation
 #' subspaces. See reference: Attention Is All You Need
 #'
-#' @param query map a query and a set of key-value pairs to an output.
-#'   See "Attention Is All You Need" for more details.
 #' @param embed_dim_to_check  total dimension of the model.
 #' @param num_heads  parallel attention heads.
 #' @param in_proj_weight  input projection weight and bias.
@@ -506,11 +504,11 @@ nnf_threshold_ <- function(input, threshold, value) {
 #' @param q_proj_weight input projection weight and bias.
 #' @param static_k static key and value used for attention operators.
 #' @param query \eqn{(L, N, E)} where L is the target sequence length, N is the batch size, E is
-#'   the embedding dimension.
+#'   the embedding dimension. If batch_first is TRUE, the first two dimensions are transposed.
 #' @param key \eqn{(S, N, E)}, where S is the source sequence length, N is the batch size, E is
-#'   the embedding dimension.
+#'   the embedding dimension. If batch_first is TRUE, the first two dimensions are transposed.
 #' @param value \eqn{(S, N, E)} where S is the source sequence length, N is the batch size, E is
-#'   the embedding dimension.
+#'   the embedding dimension. If batch_first is TRUE, the first two dimensions are transposed.
 #' @param key_padding_mask \eqn{(N, S)} where N is the batch size, S is the source sequence length.
 #'   If a ByteTensor is provided, the non-zero positions will be ignored while the position
 #'   with the zero positions will be unchanged. If a BoolTensor is provided, the positions with the
@@ -531,6 +529,8 @@ nnf_threshold_ <- function(input, threshold, value) {
 #' @param k_proj_weight currently undocumented.
 #' @param v_proj_weight currently undocumented.
 #' @param static_v currently undocumented.
+#' @param batch_first Logical; whether to expect query, key, and value to have 
+#'   batch as their first parameter, and to return output with batch first.
 #'
 #' @export
 nnf_multi_head_attention_forward <- function(query, # type: Tensor
@@ -556,8 +556,14 @@ nnf_multi_head_attention_forward <- function(query, # type: Tensor
                                              k_proj_weight = NULL, # type: Optional[Tensor]
                                              v_proj_weight = NULL, # type: Optional[Tensor]
                                              static_k = NULL, # type: Optional[Tensor]
-                                             static_v = NULL # type: Optional[Tensor])
+                                             static_v = NULL, # type: Optional[Tensor])
+                                             batch_first = FALSE # type: bool
 ) {
+  if (batch_first) {
+    query <- torch_transpose(query, 1, 2)
+    key <- torch_transpose(key, 1, 2)
+    value <- torch_transpose(value, 1, 2)
+  }
   o <- query$size()
   tgt_len <- o[[1]]
   bsz <- o[[2]]
@@ -739,6 +745,10 @@ nnf_multi_head_attention_forward <- function(query, # type: Tensor
   attn_output <- torch_bmm(attn_output_weights, v)
   attn_output <- attn_output$transpose(1, 2)$contiguous()$view(c(tgt_len, bsz, embed_dim))
   attn_output <- nnf_linear(attn_output, out_proj_weight, out_proj_bias)
+  
+  if (batch_first) {
+    attn_output <- torch_transpose(attn_output, 1, 2)
+  }
 
   if (need_weights) {
     attn_output_weights <- attn_output_weights$view(c(

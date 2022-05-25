@@ -12,13 +12,15 @@ nn_multihead_attention(
   add_bias_kv = FALSE,
   add_zero_attn = FALSE,
   kdim = NULL,
-  vdim = NULL
+  vdim = NULL,
+  batch_first = FALSE
 )
 }
 \arguments{
 \item{embed_dim}{total dimension of the model.}
 
-\item{num_heads}{parallel attention heads.}
+\item{num_heads}{parallel attention heads. Note that \code{embed_dim} will be split
+across \code{num_heads} (i.e. each head will have dimension \code{embed_dim \%/\% num_heads}).}
 
 \item{dropout}{a Dropout layer on attn_output_weights. Default: 0.0.}
 
@@ -26,54 +28,62 @@ nn_multihead_attention(
 
 \item{add_bias_kv}{add bias to the key and value sequences at dim=0.}
 
-\item{add_zero_attn}{add a new batch of zeros to the key and
-value sequences at dim=1.}
+\item{add_zero_attn}{add a new batch of zeros to the key and value sequences
+at dim=1.}
 
 \item{kdim}{total number of features in key. Default: \code{NULL}}
 
-\item{vdim}{total number of features in value. Default: \code{NULL}.
-Note: if kdim and vdim are \code{NULL}, they will be set to embed_dim such that
-query, key, and value have the same number of features.}
+\item{vdim}{total number of features in value. Default: \code{NULL}. Note: if kdim
+and vdim are \code{NULL}, they will be set to embed_dim such that query, key,
+and value have the same number of features.}
+
+\item{batch_first}{if \code{TRUE} then the input and output tensors are \eqn{(N,
+  S, E)} instead of \eqn{(S, N, E)}, where N is the batch size, S is the
+sequence length, and E is the embedding dimension.}
 }
 \description{
-Allows the model to jointly attend to information
-from different representation subspaces.
-See reference: Attention Is All You Need
+Allows the model to jointly attend to information from different
+representation subspaces. See reference: Attention Is All You Need
 }
 \details{
-\deqn{
-  \mbox{MultiHead}(Q, K, V) = \mbox{Concat}(head_1,\dots,head_h)W^O
-\mbox{where} head_i = \mbox{Attention}(QW_i^Q, KW_i^K, VW_i^V)
-}
+\deqn{ \mbox{MultiHead}(Q, K, V) = \mbox{Concat}(head_1,\dots,head_h)W^O
+\mbox{where} head_i = \mbox{Attention}(QW_i^Q, KW_i^K, VW_i^V) }
 }
 \section{Shape}{
 
 
 Inputs:
 \itemize{
-\item query: \eqn{(L, N, E)} where L is the target sequence length, N is the batch size, E is
-the embedding dimension.
-\item key: \eqn{(S, N, E)}, where S is the source sequence length, N is the batch size, E is
-the embedding dimension.
-\item value: \eqn{(S, N, E)} where S is the source sequence length, N is the batch size, E is
-the embedding dimension.
-\item key_padding_mask: \eqn{(N, S)} where N is the batch size, S is the source sequence length.
-If a ByteTensor is provided, the non-zero positions will be ignored while the position
-with the zero positions will be unchanged. If a BoolTensor is provided, the positions with the
-value of \code{True} will be ignored while the position with the value of \code{False} will be unchanged.
-\item attn_mask: 2D mask \eqn{(L, S)} where L is the target sequence length, S is the source sequence length.
-3D mask \eqn{(N*num_heads, L, S)} where N is the batch size, L is the target sequence length,
-S is the source sequence length. attn_mask ensure that position i is allowed to attend the unmasked
-positions. If a ByteTensor is provided, the non-zero positions are not allowed to attend
-while the zero positions will be unchanged. If a BoolTensor is provided, positions with \code{True}
-is not allowed to attend while \code{False} values will be unchanged. If a FloatTensor
-is provided, it will be added to the attention weight.
+\item query: \eqn{(L, N, E)} where L is the target sequence length, N is the
+batch size, E is the embedding dimension. (but see the \code{batch_first}
+argument)
+\item key: \eqn{(S, N, E)}, where S is the source sequence length, N is the
+batch size, E is the embedding dimension. (but see the \code{batch_first}
+argument)
+\item value: \eqn{(S, N, E)} where S is the source sequence length,
+N is the batch size, E is the embedding dimension. (but see the
+\code{batch_first} argument)
+\item key_padding_mask: \eqn{(N, S)} where N is the batch size, S is the source
+sequence length. If a ByteTensor is provided, the non-zero positions will
+be ignored while the position with the zero positions will be unchanged. If
+a BoolTensor is provided, the positions with the value of \code{True} will be
+ignored while the position with the value of \code{False} will be unchanged.
+\item attn_mask: 2D mask \eqn{(L, S)} where L is the target sequence length, S
+is the source sequence length. 3D mask \eqn{(N*num_heads, L, S)} where N is
+the batch size, L is the target sequence length, S is the source sequence
+length. attn_mask ensure that position i is allowed to attend the unmasked
+positions. If a ByteTensor is provided, the non-zero positions are not
+allowed to attend while the zero positions will be unchanged. If a
+BoolTensor is provided, positions with \code{True} are not allowed to attend
+while \code{False} values will be unchanged. If a FloatTensor is provided, it
+will be added to the attention weight.
 }
 
 Outputs:
 \itemize{
 \item attn_output: \eqn{(L, N, E)} where L is the target sequence length, N is
-the batch size, E is the embedding dimension.
+the batch size, E is the embedding dimension. (but see the  \code{batch_first}
+argument)
 \item attn_output_weights:
 \itemize{
 \item if \code{avg_weights} is \code{TRUE} (the default), the output attention

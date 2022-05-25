@@ -40,3 +40,34 @@ test_that("Sparsemax", {
     tolerance = 1e-4
   )
 })
+
+test_that("Multihead attention works", {
+  
+  attn1 <- nn_multihead_attention(embed_dim = 10, num_heads = 1)
+  attn2 <- nn_multihead_attention(embed_dim = 10, num_heads = 1, batch_first = TRUE)
+  attn2$load_state_dict(attn1$state_dict())
+  
+  q <- torch_randn(5, 32, 10)
+  k <- torch_randn(5, 32, 10)
+  v <- torch_randn(5, 32, 10)
+  
+  res1 <- attn1(q, k, v)
+  res2 <- attn2(q$transpose(2,1), k$transpose(2,1), v$transpose(2,1))
+  
+  expect_equal_to_tensor(res1[[1]], res2[[1]]$transpose(2,1))
+  expect_equal_to_tensor(res1[[2]], res2[[2]])
+  
+  # comparing to python results.
+  torch::torch_manual_seed(1)
+  attn1 <- nn_multihead_attention(embed_dim = 2, num_heads = 1)
+  x <- torch_randn(1,1,2)
+  out <- attn1(x, x, x)
+  
+  expect_equal_to_r(out[[1]][1,1,], c(0.0736, -0.0599), tol = 1e-4)
+  expect_equal_to_r(out[[2]][1,1,], c(1), tol = 1e-4)
+  expect_equal_to_r(attn1$in_proj_weight[1,], c(-0.1782,  0.4406), tol = 1e-4)
+  expect_equal_to_r(attn1$out_proj$weight[1,], c(0.3643, -0.3121), tol = 1e-4)
+  
+  # raise error when embed_dim is not divisible by num_heads.
+  expect_error(nn_multihead_attention(embed_dim = 512, num_heads = 10), regexp="divisible")
+})
