@@ -40,3 +40,25 @@ test_that("Sparsemax", {
     tolerance = 1e-4
   )
 })
+
+test_that("Multihead attention works", {
+  
+  attn1 <- nn_multihead_attention(embed_dim = 10, num_heads = 1)
+  attn2 <- nn_multihead_attention(embed_dim = 10, num_heads = 1, batch_first = TRUE)
+  attn2$load_state_dict(attn1$state_dict())
+  
+  q <- torch_randn(5, 32, 10)
+  k <- torch_randn(5, 32, 10)
+  v <- torch_randn(5, 32, 10)
+  
+  res1 <- attn1(q, k, v)
+  res2 <- attn2(q$transpose(2,1), k$transpose(2,1), v$transpose(2,1))
+  
+  expect_equal_to_tensor(res1[[1]], res2[[1]]$transpose(2,1))
+  expect_equal_to_tensor(res1[[2]], res2[[2]])
+  
+  torch::torch_manual_seed(1)
+  attn1 <- nn_multihead_attention(embed_dim = 2, num_heads = 1)
+  expect_equal_to_r(attn1$in_proj_weight[1,], c(-0.1782,  0.4406))
+  expect_equal_to_r(attn1$out_proj$weight[1,], c(0.3643, -0.3121), tol = 1e-4)
+})
