@@ -13,6 +13,22 @@ sampler(
   parent_env = parent.frame()
 )
 }
+\arguments{
+\item{name}{(optional) name of the sampler}
+
+\item{inherit}{(optional) you can inherit from other samplers to re-use
+some methods.}
+
+\item{...}{Pass any number of fields or methods. You should at least define
+the \code{initialize} and \code{step} methods. See the examples section.}
+
+\item{private}{(optional) a list of private methods for the sampler}
+
+\item{active}{(optional) a list of active methods for the sampler.}
+
+\item{parent_env}{used to capture the right environment to define the class.
+The default is fine for most situations.}
+}
 \description{
 Samplers can be used with \code{\link[=dataloader]{dataloader()}} when creating batches from a torch
 \code{\link[=dataset]{dataset()}}.

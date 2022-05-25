@@ -27,6 +27,17 @@ Sampler <- R6::R6Class(
 #' - `.iter` returns a function that returns a dataset index everytime it's called.
 #' - `.length` returns the maximum number of samples that can be retrieved from
 #'  that sampler.
+#' 
+#' @param name (optional) name of the sampler
+#' @param inherit (optional) you can inherit from other samplers to re-use
+#'   some methods.
+#' @param ... Pass any number of fields or methods. You should at least define
+#'   the `initialize` and `step` methods. See the examples section.
+#' @param private (optional) a list of private methods for the sampler
+#' @param active (optional) a list of active methods for the sampler.
+#' @param parent_env used to capture the right environment to define the class.
+#'   The default is fine for most situations.
+#'
 #' @export
 sampler <- function(name = NULL, inherit = Sampler, ...,
                     private = NULL, active = NULL,
