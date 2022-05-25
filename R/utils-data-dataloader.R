@@ -45,10 +45,12 @@ dataloader_next <- function(iter, completed = NULL) {
 #' @param shuffle (bool, optional): set to `TRUE` to have the data reshuffled
 #'   at every epoch (default: `FALSE`).
 #' @param sampler (Sampler, optional): defines the strategy to draw samples from
-#'   the dataset. If specified, `shuffle` must be False.
+#'   the dataset. If specified, `shuffle` must be False. Custom samplers can be
+#'   created with [sampler()].
 #' @param batch_sampler (Sampler, optional): like sampler, but returns a batch of
 #'   indices at a time. Mutually exclusive with `batch_size`,
-#'   `shuffle`, `sampler`, and `drop_last`.
+#'   `shuffle`, `sampler`, and `drop_last`. Custom samplers can be created with
+#'   [sampler()].
 #' @param num_workers (int, optional): how many subprocesses to use for data
 #'   loading. 0 means that the data will be loaded in the main process.
 #'   (default: `0`)
@@ -93,6 +95,8 @@ dataloader_next <- function(iter, completed = NULL) {
 #'   global environment.
 #' - the `worker_init` function is ran with an `id` argument.
 #' - the dataset fetcher is copied to the worker.
+#' 
+#' @seealso [dataset()], [sampler()]
 #'
 #'
 #' @export
@@ -155,9 +159,9 @@ DataLoader <- R6::R6Class(
           # TODO
         } else {
           if (shuffle) {
-            sampler <- RandomSampler$new(dataset, generator = generator)
+            sampler <- RandomSampler(dataset, generator = generator)
           } else {
-            sampler <- SequentialSampler$new(dataset)
+            sampler <- SequentialSampler(dataset)
           }
         }
       }
@@ -165,7 +169,7 @@ DataLoader <- R6::R6Class(
       self$.has_getbatch <- !is.null(dataset$.getbatch)
 
       if (!is.null(batch_size) && is.null(batch_sampler)) {
-        batch_sampler <- BatchSampler$new(sampler, batch_size, drop_last)
+        batch_sampler <- BatchSampler(sampler, batch_size, drop_last)
       }
 
       self$batch_size <- batch_size

@@ -31,11 +31,13 @@ dataloader(
 at every epoch (default: \code{FALSE}).}
 
 \item{sampler}{(Sampler, optional): defines the strategy to draw samples from
-the dataset. If specified, \code{shuffle} must be False.}
+the dataset. If specified, \code{shuffle} must be False. Custom samplers can be
+created with \code{\link[=sampler]{sampler()}}.}
 
 \item{batch_sampler}{(Sampler, optional): like sampler, but returns a batch of
 indices at a time. Mutually exclusive with \code{batch_size},
-\code{shuffle}, \code{sampler}, and \code{drop_last}.}
+\code{shuffle}, \code{sampler}, and \code{drop_last}. Custom samplers can be created with
+\code{\link[=sampler]{sampler()}}.}
 
 \item{num_workers}{(int, optional): how many subprocesses to use for data
 loading. 0 means that the data will be loaded in the main process.
@@ -97,3 +99,6 @@ global environment.
 }
 }
 
+\seealso{
+\code{\link[=dataset]{dataset()}}, \code{\link[=sampler]{sampler()}}
+}
