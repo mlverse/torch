@@ -13,6 +13,7 @@
 - It's now possible to modify the gradient of a tensor using the syntax `x$grad <- new_grad`. (#832)
 - `nn_multihead_attention` now supports the `batch_first` option. (#828, @jonthegeek)
 - Nice error message when `embed_dim` is not divisible by `num_heads` in `nn_multihead_attention`. (#828)
+- `sampler()` is now exported allowing to create custom samplers that can be passed to `dataloader()`. (#833)
 
 # torch 0.7.2
 
