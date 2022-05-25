@@ -10,6 +10,7 @@
 - Fixed bug in weight decay handling in the Adam optimizer. (#824, @egillax)
 - Fixed bug in `nn_l1_loss`. (#825, @sebffischer)
 - Added `nn_embedding_bag`. (#827, @egillax)
+- It's now possible to modify the gradient of a tensor using the syntax `x$grad <- new_grad`. (#832)
 
 # torch 0.7.2
 
