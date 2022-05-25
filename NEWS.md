@@ -14,6 +14,7 @@
 - `nn_multihead_attention` now supports the `batch_first` option. (#828, @jonthegeek)
 - Nice error message when `embed_dim` is not divisible by `num_heads` in `nn_multihead_attention`. (#828)
 - `sampler()` is now exported allowing to create custom samplers that can be passed to `dataloader()`. (#833)
+- Creating `nn_module`s without a `initialize` method is now supported. (#834)
 
 # torch 0.7.2
 
