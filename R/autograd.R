@@ -101,8 +101,13 @@ with_enable_grad <- function(code) {
   )(code)
 }
 
-Tensor$set("active", "grad", function() {
-  Tensor$new(ptr = cpp_tensor_grad(self$ptr))
+Tensor$set("active", "grad", function(x) {
+  if (missing(x)) {
+    Tensor$new(ptr = cpp_tensor_grad(self$ptr))
+  } else {
+    self$set_grad_(x)
+    invisible(x)
+  }
 })
 
 Tensor$set("active", "requires_grad", function(requires_grad) {

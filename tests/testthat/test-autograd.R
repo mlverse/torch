@@ -828,3 +828,12 @@ test_that("we autograd_grad doesn't segfault when backward fails", {
     regexp = "GRADFOO"
   )
 })
+
+test_that("can modify the gradient of a tensor", {
+  x <- torch_tensor(2, requires_grad = TRUE)
+  y <- x^3
+  y$backward()
+  expect_equal_to_r(x$grad, 12)
+  x$grad <- x$grad/2
+  expect_equal_to_r(x$grad, 6)
+})
