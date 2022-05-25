@@ -625,3 +625,8 @@ test_that("classes are inherited correctly", {
   n2 <- nn2(10, 10)
   expect_equal(class(n2), c("goodbye", "hello", "nn_linear", "nn_module"))
 })
+
+test_that("empty initializer", {
+  model <- nn_module(forward = function(input) input)
+  expect_equal_to_r(model()(torch_tensor(1)), 1)
+})
