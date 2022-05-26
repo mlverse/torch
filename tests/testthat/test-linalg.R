@@ -69,11 +69,21 @@ test_that("cond works", {
 test_that("matrix_rank works", {
   a <- torch_eye(10)
   expect_equal_to_r(linalg_matrix_rank(a), 10)
-  expect_equal_to_r(linalg_matrix_rank(a, tol = torch_scalar_tensor(0.001)), 10)
+  expect_warning(
+    expect_equal_to_r(linalg_matrix_rank(a, tol = torch_scalar_tensor(0.001)), 10)  
+  )
   expect_equal_to_r(linalg_matrix_rank(a, hermitian = TRUE), 10)
-  expect_equal_to_r(linalg_matrix_rank(a, tol = torch_scalar_tensor(0.001), hermitian = TRUE), 10)
-  expect_equal_to_r(linalg_matrix_rank(a, tol = 0.0001), 10)
-  expect_equal_to_r(linalg_matrix_rank(a, tol = torch_scalar_tensor(0, dtype = torch_float64())), 10)
+  expect_warning(
+    expect_equal_to_r(linalg_matrix_rank(a, tol = torch_scalar_tensor(0.001), hermitian = TRUE), 10)  
+  )
+  expect_warning(
+    expect_equal_to_r(linalg_matrix_rank(a, tol = 0.0001), 10)  
+  )
+  expect_warning(
+    expect_equal_to_r(linalg_matrix_rank(a, tol = torch_scalar_tensor(0, dtype = torch_float64())), 10)  
+  )
+  expect_equal_to_r(linalg_matrix_rank(a, atol = 0.1), 10) 
+  expect_equal_to_r(linalg_matrix_rank(a, rtol = 0.1), 10) 
 })
 
 test_that("cholesky", {
@@ -174,6 +184,9 @@ test_that("pinv", {
     linalg_lstsq(A, B)$solution,
     tolerance = 1e-6
   )
+  
+  expect_warning(linalg_pinv(A, rcond = 1e-15))
+  expect_warning(linalg_pinv(A, rtol = 0, atol = 1e-7), regexp=NA)
 })
 
 test_that("matrix power", {

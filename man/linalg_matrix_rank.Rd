@@ -4,11 +4,22 @@
 \alias{linalg_matrix_rank}
 \title{Computes the numerical rank of a matrix.}
 \usage{
-linalg_matrix_rank(A, tol = NULL, hermitian = FALSE)
+linalg_matrix_rank(
+  A,
+  ...,
+  atol = NULL,
+  rtol = NULL,
+  tol = NULL,
+  hermitian = FALSE
+)
 }
 \arguments{
 \item{A}{(Tensor): tensor of shape \verb{(*, m, n)} where \code{*} is zero or more
 batch dimensions.}
+
+\item{atol}{the absolute tolerance value. When \code{NULL} it’s considered to be zero.}
+
+\item{rtol}{the relative tolerance value. See above for the value it takes when \code{NULL}.}
 
 \item{tol}{(float, Tensor, optional): the tolerance value. See above for
 the value it takes when \code{NULL}. Default: \code{NULL}.}

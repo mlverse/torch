@@ -121,3 +121,10 @@ math_to_rd <- function(tex, ascii = tex, displayMode = TRUE, ..., include_css = 
     structure(rd, class = "Rdtext")
   }
 }
+
+scalar_or_zero <- function(x) {
+  if (is.null(x))
+    0
+  else
+    as.numeric(x)
+}
