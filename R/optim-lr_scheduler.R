@@ -603,7 +603,8 @@ lr_one_cycle <- lr_scheduler(
 #' @param verbose (bool): If `TRUE`, prints a message to stdout for
 #'   each update. Default: `FALSE`.
 #'   
-#' @examples 
+#' @examples
+#' \dontrun{ 
 #' optimizer <- optim_sgd(model$parameters(), lr=0.1, momentum=0.9)
 #' scheduler <- lr_reduce_on_plateau(optimizer, 'min')
 #' for (epoch in 1:10) {
@@ -612,7 +613,7 @@ lr_one_cycle <- lr_scheduler(
 #'  # note that step should be called after validate
 #'  scheduler$step(val_loss)
 #' }
-#'   
+#' }
 #' @export
 lr_reduce_on_plateau <- lr_scheduler(
   "lr_reduce_on_plateau",

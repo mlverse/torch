@@ -61,6 +61,7 @@ quantity and if no improvement is seen for a 'patience' number
 of epochs, the learning rate is reduced.
 }
 \examples{
+\dontrun{ 
 optimizer <- optim_sgd(model$parameters(), lr=0.1, momentum=0.9)
 scheduler <- lr_reduce_on_plateau(optimizer, 'min')
 for (epoch in 1:10) {
@@ -69,5 +70,5 @@ for (epoch in 1:10) {
  # note that step should be called after validate
  scheduler$step(val_loss)
 }
-  
+}
 }
