@@ -1,4 +1,4 @@
-branch <- "main"
+branch <- "libtorch-v1.11.0"
 
 install_config <- list(
   "1.11.0" = list(
