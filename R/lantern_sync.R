@@ -4,7 +4,13 @@ lantern_sync <- function(sync_lib = FALSE) {
 
   if (!all(tools::md5sum(dir("lantern/include/lantern/", full.names = TRUE)) %in%
     tools::md5sum(dir("inst/include/lantern/", full.names = TRUE)))) {
-    file.copy(dir("lantern/include/lantern/", full.names = TRUE), "inst/include/lantern/", overwrite = TRUE)
+    dir.create("inst/include/lantern/", showWarnings = FALSE, recursive = TRUE)
+    files <- dir("lantern/include/lantern/", full.names = TRUE)
+    file.copy(
+      files, 
+      file.path("inst/include/lantern/", basename(files)), 
+      overwrite = TRUE
+    )
   }
 
   if (sync_lib) {
