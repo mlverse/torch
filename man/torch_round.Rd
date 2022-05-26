@@ -5,10 +5,14 @@
 \alias{torch_round}
 \title{Round}
 \usage{
-torch_round(self)
+torch_round(self, decimals)
 }
 \arguments{
 \item{self}{(Tensor) the input tensor.}
+
+\item{decimals}{Number of decimal places to round to (default: 0).
+If decimals is negative, it specifies the number of positions to
+the left of the decimal point.}
 }
 \description{
 Round

@@ -3142,8 +3142,10 @@ NULL
 #'
 #'
 #' @param self (Tensor) the input tensor.
+#' @param decimals Number of decimal places to round to (default: 0). 
+#'  If decimals is negative, it specifies the number of positions to 
+#'  the left of the decimal point.
 #' 
-#'
 #' @name torch_round
 #'
 #' @export
@@ -7403,7 +7405,13 @@ NULL
 #' @param sorted_sequence (Tensor) N-D or 1-D tensor, containing monotonically increasing 
 #'   sequence on the *innermost* dimension.
 #' @param self (Tensor or Scalar) N-D tensor or a Scalar containing the search value(s).
-#'
+#' @param side the same as right but preferred. “left” corresponds to `FALSE` for right 
+#'   and “right” corresponds to `TRUE` for right. It will error if this is set to 
+#'   “left” while right is `TRUE`.
+#' @param sorter if provided, a tensor matching the shape of the unsorted `sorted_sequence` 
+#'   containing a sequence of indices that sort it in the ascending order on the 
+#'   innermost dimension.
+#'   
 #' @inheritParams torch_bucketize
 #' @name torch_searchsorted
 #'
