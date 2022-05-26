@@ -185,10 +185,7 @@ jobs:
             Linux,
             Windows,
             Cuda102,
-            Cuda111,
             Cuda113,
-            WindowsCuda102,
-            WindowsCuda111,
             WindowsCuda113,
           ]
         include:
@@ -209,26 +206,11 @@ jobs:
             upload: Linux
             hw: gpu
             version: -102
-          - name: Cuda111
-            artifact: Linux-Cuda-111
-            upload: Linux
-            hw: gpu
-            version: -111
           - name: Cuda113
             artifact: Linux-Cuda-113
             upload: Linux
             hw: gpu
             version: -113
-          - name: WindowsCuda102
-            artifact: Windows-Cuda-102
-            upload: Windows
-            hw: gpu
-            version: -102
-          - name: WindowsCuda111
-            artifact: Windows-Cuda-111
-            upload: Windows
-            hw: gpu
-            version: -111
           - name: WindowsCuda113
             artifact: Windows-Cuda-113
             upload: Windows
