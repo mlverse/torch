@@ -31,8 +31,15 @@ endfunction()
 # Torch
 ############################################################
 
+if (DEFINED ENV{CUDA} AND NOT '$ENV{CUDA}' STREQUAL '')
+  if (WIN32)
+    find_package(CUDAToolkit)
+  endif()
+  enable_language(CUDA)
+endif()
+
 if(APPLE)
-    if(DEFINED ENV{CUDA})
+    if(DEFINED ENV{CUDA} AND NOT '$ENV{CUDA}' STREQUAL '')
         message(FATAL_ERROR, "CUDA not supported on macos")
     else()
         retrieve_lib("https://download.pytorch.org/libtorch/cpu/libtorch-macos-1.11.0.zip" "libtorch")
@@ -40,9 +47,9 @@ if(APPLE)
 elseif(WIN32)
     if(DEFINED ENV{CUDA} AND '$ENV{CUDA}' STREQUAL '10.1')
         message(FATAL_ERROR, "CUDA 10.1 is no longer supported")
-    if(DEFINED ENV{CUDA} AND '$ENV{CUDA}' STREQUAL '10.2')
+    elseif(DEFINED ENV{CUDA} AND '$ENV{CUDA}' STREQUAL '10.2')
         message(FATAL_ERROR, "CUDA 10.2 is no longer supported")
-    if(DEFINED ENV{CUDA} AND '$ENV{CUDA}' STREQUAL '11.1')
+    elseif(DEFINED ENV{CUDA} AND '$ENV{CUDA}' STREQUAL '11.1')
         message(FATAL_ERROR, "CUDA 11.1 is no longer supported")
     elseif(DEFINED ENV{CUDA} AND '$ENV{CUDA}' STREQUAL '11.3')
         add_compile_definitions(CUDA113)
@@ -87,13 +94,6 @@ endif(CCACHE_FOUND)
 find_package(Torch REQUIRED)
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${TORCH_CXX_FLAGS}")
 
-# see https://github.com/pytorch/pytorch/issues/18607#issuecomment-480665557
-if(WIN32)
-  add_compile_options("/permissive")
-  add_compile_options("/permissive-")
-endif()
-
-
 ############################################################
 # Library
 ############################################################
@@ -135,7 +135,8 @@ set(LANTERN_SRC
 )
 
 
-if(DEFINED ENV{CUDA})
+if(DEFINED ENV{CUDA} AND NOT '$ENV{CUDA}' STREQUAL '')
+ 
   set(LANTERN_SRC 
       ${LANTERN_SRC} 
       src/AllocatorCuda.cpp
@@ -144,7 +145,15 @@ if(DEFINED ENV{CUDA})
   )
   
   set_source_files_properties(src/Cuda.cpp PROPERTIES COMPILE_DEFINITIONS __NVCC__)
-  cuda_add_library(lantern SHARED ${LANTERN_SRC})
+  add_library(lantern SHARED ${LANTERN_SRC})
+
+  if (WIN32)  
+    set_property(TARGET lantern PROPERTY CUDA_SEPARABLE_COMPILATION ON)
+    set_property(TARGET lantern PROPERTY CUDA_STANDARD 17)
+  else()
+    set_property(TARGET lantern PROPERTY CUDA_STANDARD 14)
+  endif()
+  
 else()
   set(LANTERN_SRC 
       ${LANTERN_SRC} 

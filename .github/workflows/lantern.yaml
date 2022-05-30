@@ -10,168 +10,84 @@ on:
 
 jobs:
   build:
-    runs-on: ${{ matrix.os }}
+    runs-on: ${{ matrix.config.os }}
     strategy:
+      fail-fast: false
       matrix:
-        os: [windows-2019, ubuntu-18.04, macos-10.15]
-        cuda: [0]
-        include:
-          - os: windows-2019
-            cuda: 0
-            library: lantern.dll
-            test: "& './lanterntest.exe' "
-            make: "& 'C:/Program Files (x86)/Microsoft Visual Studio/2019/Enterprise/MSBuild/Current/Bin/MSBuild' lantern.sln /t:Build /p:Configuration=Release"
-            build: build/Release
-            cmakevars:
-            libext: .dll
-            exeext: .exe
-            fixlib:
-            flavor: Release
-            artifacts: lantern.dll
-            upload: Windows
-          - os: ubuntu-18.04
-            cuda: 0
-            library: liblantern.so
-            test: ./lanterntest
-            make: make
-            build: build
-            cmakevars:
-            libext:
-            exeext:
-            fixlib: chrpath -r '$ORIGIN/.' liblantern.so
-            flavor: Release
-            artifacts: liblantern.so
-            upload: Linux
-          - os: macos-10.15
-            cuda: 0
-            library: liblantern.dylib
-            test: ./lanterntest
-            make: make
-            build: build
-            cmakevars:
-            libext: .dylib
-            exeext:
-            fixlib: install_name_tool -add_rpath @loader_path/. liblantern.dylib
-            flavor: Release
-            artifacts: liblantern.dylib
-            upload: macOS
-          - os: ubuntu-18.04
-            cuda: "10.2"
-            cuda_toolkit: "http://developer.download.nvidia.com/compute/cuda/10.2/Prod/local_installers/cuda_10.2.89_440.33.01_linux.run"
-            cuda_toolkit_installer: "cuda_10.2.89_440.33.01_linux.run"
-            cudnn: "https://storage.googleapis.com/torch-lantern-builds/cudnn/cudnn-10.2-linux-x64-v7.6.5.32.tgz"
-            cudnn_file: "cudnn-10.2-linux-x64-v7.6.5.32.tgz"
-            library: liblantern.so
-            test: ./lanterntest
-            make: make
-            build: build
-            cmakevars:
-            libext:
-            exeext:
-            fixlib: chrpath -r '$ORIGIN/.' liblantern.so
-            flavor: Release
-            artifacts: liblantern.so
-            upload: Linux-Cuda-102
-          - os: ubuntu-18.04
-            cuda: "11.3"
-            cuda_toolkit: "https://developer.download.nvidia.com/compute/cuda/11.3.1/local_installers/cuda_11.3.1_465.19.01_linux.run"
-            cuda_toolkit_installer: "cuda_11.3.1_465.19.01_linux.run"
-            cudnn: "https://storage.googleapis.com/torch-lantern-builds/cudnn/cudnn-11.3-linux-x64-v8.2.1.32.tgz"
-            cudnn_file: "cudnn-11.3-linux-x64-v8.2.1.32.tgz"
-            library: liblantern.so
-            test: ./lanterntest
-            make: make
-            build: build
-            cmakevars:
-            libext:
-            exeext:
-            fixlib: chrpath -r '$ORIGIN/.' liblantern.so
-            flavor: Release
-            artifacts: liblantern.so
-            upload: Linux-Cuda-113
-          - os: windows-2019
-            cuda: 11.3
-            library: lantern.dll
-            test: "& './lanterntest.exe' "
-            make: "& 'C:/Program Files (x86)/Microsoft Visual Studio/2019/Enterprise/MSBuild/Current/Bin/MSBuild' lantern.sln /t:Build /p:Configuration=Release"
-            build: build/Release
-            cmakevars: '-DCUDA_TOOLKIT_ROOT_DIR="C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v11.3"'
-            libext: .dll
-            exeext: .exe
-            fixlib:
-            flavor: Release
-            artifacts: lantern.dll
-            upload: Windows-Cuda-113
-            cudatoolkit: "https://developer.download.nvidia.com/compute/cuda/11.3.1/local_installers/cuda_11.3.1_465.89_win10.exe"
-            cudnn: "https://storage.googleapis.com/torch-lantern-builds/cudnn/cudnn-11.3-windows-x64-v8.2.1.32.zip"
+        config:
+          - {os: macOS-latest, artifact: "build/liblantern.dylib", upload: "macOS"}
+          - {os: windows-2019, artifact: "build/Release/lantern.dll", upload: "Linux"}
+          - {os: ubuntu-18.04, artifact: "build/liblantern.so", upload: "Windows"}
+          - {os: ubuntu-18.04, artifact: "build/liblantern.so", upload: "Linux-Cuda-113",cuda: '11.3', cuda_patch: "1", cudnn: 'https://storage.googleapis.com/torch-lantern-builds/cudnn/cudnn-11.3-linux-x64-v8.2.1.32.tgz'}
+          - {os: ubuntu-18.04, artifact: "build/liblantern.so", upload: "Linux-Cuda-102", cuda: '10.2', cuda_patch: "89", cudnn: 'https://storage.googleapis.com/torch-lantern-builds/cudnn/cudnn-10.2-linux-x64-v7.6.5.32.tgz'}
+          - {os: windows-2019, artifact: "build/Release/lantern.dll", upload: "Windows-Cuda-113", cuda: '11.3', cuda_patch: "1", cudnn: 'https://storage.googleapis.com/torch-lantern-builds/cudnn/cudnn-11.3-windows-x64-v8.2.1.32.zip'}
+    env:
+      CUDA: ${{matrix.config.cuda}}
+
     steps:
       - uses: actions/checkout@v2
+      
+      - name: Setup cmake
+        uses: jwlawson/actions-setup-cmake@v1.12
+        with:
+          cmake-version: '3.19.x'
+          
       - name: Create environment
-        run: cmake -E make_directory ${{runner.workspace}}/build
-      - name: Free up 24GB of disk space
-        if: ${{ matrix.os == 'ubuntu-18.04' }}
-        run: sudo rm -rf /usr/share/dotnet
-      - name: Prep cmake cuda
-        if: ${{ (matrix.cuda == '10.2' || matrix.cuda == '11.1' || matrix.cuda == '11.3') && matrix.os == 'ubuntu-18.04'}}
+        run: cmake -E make_directory ${{runner.workspace}}/torch/lantern/build
+      
+      - if: ${{matrix.config.cuda != ''}}
+        uses: Jimver/cuda-toolkit@v0.2.5
+        id: cuda-toolkit
+        with:
+          cuda: '${{matrix.config.cuda}}.${{matrix.config.cuda_patch}}'
+          
+      - if: ${{matrix.config.cuda != '' && contains(matrix.config.os, 'windows') }}
+        uses: Jimver/cuda-toolkit@v0.2.5
+        with:
+          cuda: '${{matrix.config.cuda}}.${{matrix.config.cuda_patch}}'
+          sub-packages: '["visual_studio_integration"]'
+
+      - if: ${{ matrix.config.cuda != '' && contains(matrix.config.os, 'ubuntu') }}
         run: |
-          wget --quiet ${{matrix.cuda_toolkit}}
-          chmod +x ${{matrix.cuda_toolkit_installer}}
-          sudo ./${{matrix.cuda_toolkit_installer}} --silent --toolkit
-          rm ${{matrix.cuda_toolkit_installer}}
-          echo "CUDA=${{matrix.cuda}}" >> $GITHUB_ENV
-          echo "CUDA_TOOLKIT_ROOT_DIR=/usr/local/cuda" >> $GITHUB_ENV
-          dir /usr/local
-          wget --quiet ${{matrix.cudnn}}
-          tar -xzvf ${{matrix.cudnn_file}}
-          sudo cp cuda/include/cudnn*.h /usr/local/cuda/include
-          sudo cp cuda/lib64/libcudnn* /usr/local/cuda/lib64
-          sudo chmod a+r /usr/local/cuda/include/cudnn*.h /usr/local/cuda/lib64/libcudnn*
-          rm ${{matrix.cudnn_file}}
-          echo "CUDNN_LIBRARY_PATH=/usr/local/cuda/lib64" >> $GITHUB_ENV
-          echo "CUDNN_INCLUDE_PATH=/usr/local/cuda/include" >> $GITHUB_ENV
-      - name: Prep cuda (windows)
-        if: ${{ (matrix.cuda == 10.2 || matrix.cuda == 11.1 || matrix.cuda == 11.3 ) && matrix.os == 'windows-2019'}}
+          wget --quiet ${{matrix.config.cudnn}} -O cudnn.tgz
+          tar -xzvf cudnn.tgz
+          sudo cp cuda/include/cudnn*.h $CUDA_PATH/include
+          sudo cp cuda/lib64/libcudnn* $CUDA_PATH/lib64
+          sudo chmod a+r $CUDA_PATH/include/cudnn*.h $CUDA_PATH/lib64/libcudnn*
+          rm cudnn.tgz
+          
+      - if: ${{ matrix.config.cuda != '' && contains(matrix.config.os, 'windows') }}
         run: |
-          curl ${{ matrix.cudatoolkit }} --output cuda.exe --silent --location
-          Start-Process ./cuda.exe -argumentlist "-s" -wait
-          echo "CUDA=${{ matrix.cuda }}" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8
-          echo "CUDA_TOOLKIT_ROOT_DIR=""C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v${{ matrix.cuda }}""" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
-          curl ${{ matrix.cudnn }} --output cudnn.zip --silent --location
+          curl ${{ matrix.config.cudnn }} --output cudnn.zip --silent --location
           Expand-Archive -Path cudnn.zip -DestinationPath "C:\cudnn"
           Get-ChildItem -Path "C:\cudnn"
-          Get-ChildItem -Path "C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v${{ matrix.cuda }}"
-          Move-Item -Path "C:\cudnn\cuda\bin\cudnn*.dll" -Destination "C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v${{ matrix.cuda }}\bin"
-          Move-Item -Path "C:\cudnn\cuda\include\cudnn*.h" -Destination "C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v${{ matrix.cuda }}\include"
-          Move-Item -Path "C:\cudnn\cuda\lib\x64\cudnn*.lib" -Destination "C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v${{ matrix.cuda }}\lib\x64"
-          echo "CUDNN_INCLUDE_PATH=""C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v${{ matrix.cuda }}\include""" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
-          echo "CUDNN_LIBRARY_PATH=""C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v${{ matrix.cuda }}\lib\x64""" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
-          Get-Content -Path $env:GITHUB_ENV -TotalCount 5
-          Remove-Item cuda.exe
-          Get-CimInstance -ClassName Win32_LogicalDisk | Select-Object -Property DeviceID,FreeSpace
-
+          Get-ChildItem -Path "${env:CUDA_PATH}"
+          Move-Item -Path "C:\cudnn\cuda\bin\cudnn*.dll" -Destination "${env:CUDA_PATH}\bin"
+          Move-Item -Path "C:\cudnn\cuda\include\cudnn*.h" -Destination "${env:CUDA_PATH}\include"
+          Move-Item -Path "C:\cudnn\cuda\lib\x64\cudnn*.lib" -Destination "${env:CUDA_PATH}\lib\x64"
+          echo "CUDNN_INCLUDE_PATH=""${CUDA_PATH}\include""" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
+          echo "CUDNN_LIBRARY_PATH=""${CUDA_PATH}\lib\x64""" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
+          
       - name: Run cmake
-        working-directory: ${{runner.workspace}}/build
-        run: cmake -DCMAKE_BUILD_TYPE=${{matrix.flavor}} ${{ matrix.cmakevars }} ${{github.workspace}}/lantern
+        working-directory: ${{runner.workspace}}/torch/lantern/build
+        run: |
+          cmake ..
 
       - name: Run make
-        working-directory: ${{runner.workspace}}/build
-        run: ${{matrix.make}}
-
-      - name: Fix library
-        working-directory: ${{runner.workspace}}/build
-        run: ${{matrix.fixlib}}
+        working-directory: ${{runner.workspace}}/torch/lantern/build
+        run: |
+          cmake --build . --config Release --parallel 4
 
       - name: Install libs
         working-directory: ${{runner.workspace}}
         run: |
           mkdir artifacts
-          cp -R ${{matrix.build}}/${{matrix.artifacts}} artifacts
-          rm -r build
+          cp -R torch/lantern/${{matrix.config.artifact}} artifacts
 
       - name: Upload artifacts
         uses: actions/upload-artifact@v1
         with:
-          name: ${{matrix.upload}}
+          name: ${{matrix.config.upload}}
           path: ${{runner.workspace}}/artifacts
 
   upload:
