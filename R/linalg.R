@@ -256,6 +256,7 @@ linalg_cond <- function(A, p = NULL) {
 #' @param rtol the relative tolerance value. See above for the value it takes when `NULL`.
 #' @param hermitian (bool, optional): indicates whether `A` is Hermitian if complex
 #' or symmetric if real. Default: `FALSE`.
+#' @param ... Not currently used.
 #'
 #' @examples
 #' a <- torch_eye(10)
@@ -263,6 +264,7 @@ linalg_cond <- function(A, p = NULL) {
 #' @family linalg
 #' @export
 linalg_matrix_rank <- function(A, ..., atol = NULL, rtol = NULL, tol = NULL, hermitian = FALSE) {
+  ellipsis::check_dots_empty()
   if (!is.null(tol)) {
     warn("`tol` argument is deprecated in favor of `atol` and `rtol`.")
     atol <- tol

@@ -17,6 +17,8 @@ linalg_matrix_rank(
 \item{A}{(Tensor): tensor of shape \verb{(*, m, n)} where \code{*} is zero or more
 batch dimensions.}
 
+\item{...}{Not currently used.}
+
 \item{atol}{the absolute tolerance value. When \code{NULL} it’s considered to be zero.}
 
 \item{rtol}{the relative tolerance value. See above for the value it takes when \code{NULL}.}
