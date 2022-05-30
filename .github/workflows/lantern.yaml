@@ -82,7 +82,7 @@ jobs:
           cp -R torch/lantern/${{matrix.config.artifact}} artifacts
 
       - name: Upload artifacts
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v1
         with:
           name: ${{matrix.config.upload}}
           path: ${{runner.workspace}}/artifacts
@@ -131,7 +131,7 @@ jobs:
             version: -113
     steps:
       - name: Download artifacts
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v1
         with:
           name: ${{ matrix.artifact }}
       - uses: montudor/action-zip@v0.1.0
