@@ -25,29 +25,25 @@ jobs:
       CUDA: ${{matrix.config.cuda}}
 
     steps:
-      - uses: actions/checkout@v2
-      
+      - uses: actions/checkout@v3
+
       - name: Setup cmake
-        uses: jwlawson/actions-setup-cmake@v1.12
+        uses: jwlawson/actions-setup-cmake@v1
         with:
-          cmake-version: '3.19.x'
-          
+          cmake-version: 'latest'
+
       - name: Create environment
         run: cmake -E make_directory ${{runner.workspace}}/torch/lantern/build
-      
-      - if: ${{matrix.config.cuda != ''}}
-        uses: Jimver/cuda-toolkit@v0.2.5
+
+      - name: Install CUDA
+        if: ${{matrix.config.cuda != ''}}
+        uses: Jimver/cuda-toolkit@v0.2.7
         id: cuda-toolkit
         with:
           cuda: '${{matrix.config.cuda}}.${{matrix.config.cuda_patch}}'
-          
-      - if: ${{matrix.config.cuda != '' && contains(matrix.config.os, 'windows') }}
-        uses: Jimver/cuda-toolkit@v0.2.5
-        with:
-          cuda: '${{matrix.config.cuda}}.${{matrix.config.cuda_patch}}'
-          sub-packages: '["visual_studio_integration"]'
 
-      - if: ${{ matrix.config.cuda != '' && contains(matrix.config.os, 'ubuntu') }}
+      - name: Install cuDNN (Linux)
+        if: ${{ matrix.config.cuda != '' && contains(matrix.config.os, 'ubuntu') }}
         run: |
           wget --quiet ${{matrix.config.cudnn}} -O cudnn.tgz
           tar -xzvf cudnn.tgz
@@ -55,8 +51,9 @@ jobs:
           sudo cp cuda/lib64/libcudnn* $CUDA_PATH/lib64
           sudo chmod a+r $CUDA_PATH/include/cudnn*.h $CUDA_PATH/lib64/libcudnn*
           rm cudnn.tgz
-          
-      - if: ${{ matrix.config.cuda != '' && contains(matrix.config.os, 'windows') }}
+
+      - name: Install cuDNN (Windows)
+        if: ${{ matrix.config.cuda != '' && contains(matrix.config.os, 'windows') }}
         run: |
           curl ${{ matrix.config.cudnn }} --output cudnn.zip --silent --location
           Expand-Archive -Path cudnn.zip -DestinationPath "C:\cudnn"
@@ -67,13 +64,13 @@ jobs:
           Move-Item -Path "C:\cudnn\cuda\lib\x64\cudnn*.lib" -Destination "${env:CUDA_PATH}\lib\x64"
           echo "CUDNN_INCLUDE_PATH=""${CUDA_PATH}\include""" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
           echo "CUDNN_LIBRARY_PATH=""${CUDA_PATH}\lib\x64""" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
-          
+
       - name: Run cmake
         working-directory: ${{runner.workspace}}/torch/lantern/build
         run: |
           cmake ..
 
-      - name: Run make
+      - name: Build libs
         working-directory: ${{runner.workspace}}/torch/lantern/build
         run: |
           cmake --build . --config Release --parallel 4
@@ -85,7 +82,7 @@ jobs:
           cp -R torch/lantern/${{matrix.config.artifact}} artifacts
 
       - name: Upload artifacts
-        uses: actions/upload-artifact@v1
+        uses: actions/upload-artifact@v3
         with:
           name: ${{matrix.config.upload}}
           path: ${{runner.workspace}}/artifacts
@@ -134,10 +131,10 @@ jobs:
             version: -113
     steps:
       - name: Download artifacts
-        uses: actions/download-artifact@v1
+        uses: actions/download-artifact@v3
         with:
           name: ${{ matrix.artifact }}
-      - uses: montudor/action-zip@v0.1.0
+      - uses: montudor/action-zip@v1
         with:
           args: zip -j -qq -r ./${{ matrix.artifact }}.zip ./${{ matrix.artifact }}
       - name: Upload to lantern builds
