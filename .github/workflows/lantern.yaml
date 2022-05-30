@@ -134,7 +134,7 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: ${{ matrix.artifact }}
-      - uses: montudor/action-zip@v1
+      - uses: montudor/action-zip@v0.1.0
         with:
           args: zip -j -qq -r ./${{ matrix.artifact }}.zip ./${{ matrix.artifact }}
       - name: Upload to lantern builds
