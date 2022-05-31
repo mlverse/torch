@@ -1,6 +1,7 @@
 #include <iostream>
 #define LANTERN_BUILD
 #include <c10/core/CPUAllocator.h>
+#include <c10/core/impl/alloc_cpu.h>
 #include <torch/torch.h>
 
 #include <thread>

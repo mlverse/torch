@@ -59,7 +59,7 @@ void* _lantern_trace_fn(void* fn, void* inputs, void* compilation_unit,
 
 void* _lantern_call_traced_fn(void* fn, void* inputs) {
   LANTERN_FUNCTION_START
-  Function* fn_ = reinterpret_cast<Function*>(fn);
+  auto fn_ = reinterpret_cast<GraphFunction*>(fn);
   Stack inputs_ = *reinterpret_cast<Stack*>(inputs);
 
   auto outputs = torch::jit::Stack();
@@ -70,7 +70,7 @@ void* _lantern_call_traced_fn(void* fn, void* inputs) {
   LANTERN_FUNCTION_END
 }
 
-void addFunctionToModule(Module& module, const Function* func) {
+void addFunctionToModule(Module& module, const GraphFunction* func) {
   LANTERN_FUNCTION_START
   // Make a graph with a fake self argument
   auto graph = func->graph()->copy();
@@ -85,7 +85,7 @@ void addFunctionToModule(Module& module, const Function* func) {
 
 void _lantern_traced_fn_save(void* fn, const char* filename) {
   LANTERN_FUNCTION_START;
-  Function* fn_ = reinterpret_cast<Function*>(fn);
+  auto fn_ = reinterpret_cast<GraphFunction*>(fn);
   auto filename_ = std::string(filename);
 
   Module module("__torch__.PlaceholderModule");
@@ -98,7 +98,7 @@ void _lantern_traced_fn_save(void* fn, const char* filename) {
 
 const char* _lantern_traced_fn_graph_print(void* fn) {
   LANTERN_FUNCTION_START
-  Function* fn_ = reinterpret_cast<Function*>(fn);
+  auto fn_ = reinterpret_cast<GraphFunction*>(fn);
   std::string str = fn_->graph()->toString();
   char* cstr = new char[str.length() + 1];
   strcpy(cstr, str.c_str());
@@ -165,7 +165,7 @@ void _trace_r_nn_module() {
 
 void _lantern_traced_fn_save_for_mobile(void* fn, const char* filename) {
   LANTERN_FUNCTION_START;
-  Function* fn_ = reinterpret_cast<Function*>(fn);
+  auto fn_ = reinterpret_cast<GraphFunction*>(fn);
   auto filename_ = std::string(filename);
 
   Module module("__torch__.PlaceholderModule");

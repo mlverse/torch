@@ -31,26 +31,31 @@ endfunction()
 # Torch
 ############################################################
 
+if (DEFINED ENV{CUDA} AND NOT '$ENV{CUDA}' STREQUAL '')
+  if (WIN32)
+    find_package(CUDAToolkit)
+  endif()
+  enable_language(CUDA)
+endif()
+
 if(APPLE)
-    if(DEFINED ENV{CUDA})
+    if(DEFINED ENV{CUDA} AND NOT '$ENV{CUDA}' STREQUAL '')
         message(FATAL_ERROR, "CUDA not supported on macos")
     else()
-        retrieve_lib("https://download.pytorch.org/libtorch/cpu/libtorch-macos-1.10.2.zip" "libtorch")
+        retrieve_lib("https://download.pytorch.org/libtorch/cpu/libtorch-macos-1.11.0.zip" "libtorch")
     endif()
 elseif(WIN32)
     if(DEFINED ENV{CUDA} AND '$ENV{CUDA}' STREQUAL '10.1')
         message(FATAL_ERROR, "CUDA 10.1 is no longer supported")
     elseif(DEFINED ENV{CUDA} AND '$ENV{CUDA}' STREQUAL '10.2')
-        add_compile_definitions(CUDA102)
-        retrieve_lib("https://download.pytorch.org/libtorch/cu102/libtorch-win-shared-with-deps-1.10.2%2Bcu102.zip" "libtorch")
+        message(FATAL_ERROR, "CUDA 10.2 is no longer supported")
     elseif(DEFINED ENV{CUDA} AND '$ENV{CUDA}' STREQUAL '11.1')
-        add_compile_definitions(CUDA111)
-        retrieve_lib("https://download.pytorch.org/libtorch/cu111/libtorch-win-shared-with-deps-1.10.2%2Bcu111.zip" "libtorch")
+        message(FATAL_ERROR, "CUDA 11.1 is no longer supported")
     elseif(DEFINED ENV{CUDA} AND '$ENV{CUDA}' STREQUAL '11.3')
         add_compile_definitions(CUDA113)
-        retrieve_lib("https://download.pytorch.org/libtorch/cu113/libtorch-win-shared-with-deps-1.10.2%2Bcu113.zip" "libtorch")
+        retrieve_lib("https://download.pytorch.org/libtorch/cu113/libtorch-win-shared-with-deps-1.11.0%2Bcu113.zip" "libtorch")
     else()
-        retrieve_lib("https://download.pytorch.org/libtorch/cpu/libtorch-win-shared-with-deps-1.10.2%2Bcpu.zip" "libtorch")
+        retrieve_lib("https://download.pytorch.org/libtorch/cpu/libtorch-win-shared-with-deps-1.11.0%2Bcpu.zip" "libtorch")
     endif()
 elseif(UNIX)
     if(DEFINED ENV{CUDA} AND '$ENV{CUDA}' STREQUAL '9.2')
@@ -59,17 +64,16 @@ elseif(UNIX)
         message(FATAL_ERROR, "CUDA 10.1 is no longer supported")
     elseif(DEFINED ENV{CUDA} AND '$ENV{CUDA}' STREQUAL '10.2')
         add_compile_definitions(CUDA102)
-        retrieve_lib("https://download.pytorch.org/libtorch/cu102/libtorch-cxx11-abi-shared-with-deps-1.10.2%2Bcu102.zip" "libtorch")
+        retrieve_lib("https://download.pytorch.org/libtorch/cu102/libtorch-cxx11-abi-shared-with-deps-1.11.0%2Bcu102.zip" "libtorch")
     elseif(DEFINED ENV{CUDA} AND '$ENV{CUDA}' STREQUAL '11.0')
         message(FATAL_ERROR, "CUDA 11.0 is no longer supported")
     elseif(DEFINED ENV{CUDA} AND '$ENV{CUDA}' STREQUAL '11.1')
-        add_compile_definitions(CUDA111)
-        retrieve_lib("https://download.pytorch.org/libtorch/cu111/libtorch-cxx11-abi-shared-with-deps-1.10.2%2Bcu111.zip" "libtorch")
+        message(FATAL_ERROR, "CUDA 11.1 is no longer supported")
     elseif(DEFINED ENV{CUDA} AND '$ENV{CUDA}' STREQUAL '11.3')
         add_compile_definitions(CUDA113)
-        retrieve_lib("https://download.pytorch.org/libtorch/cu113/libtorch-cxx11-abi-shared-with-deps-1.10.2%2Bcu113.zip" "libtorch")
+        retrieve_lib("https://download.pytorch.org/libtorch/cu113/libtorch-cxx11-abi-shared-with-deps-1.11.0%2Bcu113.zip" "libtorch")
     else()
-        retrieve_lib("https://download.pytorch.org/libtorch/cpu/libtorch-cxx11-abi-shared-with-deps-1.10.2%2Bcpu.zip" "libtorch")
+        retrieve_lib("https://download.pytorch.org/libtorch/cpu/libtorch-cxx11-abi-shared-with-deps-1.11.0%2Bcpu.zip" "libtorch")
     endif()
 else()
     message(FATAL_ERROR, "OS not supported.")
@@ -89,13 +93,6 @@ endif(CCACHE_FOUND)
 
 find_package(Torch REQUIRED)
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${TORCH_CXX_FLAGS}")
-
-# see https://github.com/pytorch/pytorch/issues/18607#issuecomment-480665557
-if(WIN32)
-  add_compile_options("/permissive")
-  add_compile_options("/permissive-")
-endif()
-
 
 ############################################################
 # Library
@@ -138,7 +135,8 @@ set(LANTERN_SRC
 )
 
 
-if(DEFINED ENV{CUDA})
+if(DEFINED ENV{CUDA} AND NOT '$ENV{CUDA}' STREQUAL '')
+ 
   set(LANTERN_SRC 
       ${LANTERN_SRC} 
       src/AllocatorCuda.cpp
@@ -147,7 +145,15 @@ if(DEFINED ENV{CUDA})
   )
   
   set_source_files_properties(src/Cuda.cpp PROPERTIES COMPILE_DEFINITIONS __NVCC__)
-  cuda_add_library(lantern SHARED ${LANTERN_SRC})
+  add_library(lantern SHARED ${LANTERN_SRC})
+
+  if (WIN32)  
+    set_property(TARGET lantern PROPERTY CUDA_SEPARABLE_COMPILATION ON)
+    set_property(TARGET lantern PROPERTY CUDA_STANDARD 17)
+  else()
+    set_property(TARGET lantern PROPERTY CUDA_STANDARD 14)
+  endif()
+  
 else()
   set(LANTERN_SRC 
       ${LANTERN_SRC} 

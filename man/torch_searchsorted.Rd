@@ -5,7 +5,14 @@
 \alias{torch_searchsorted}
 \title{Searchsorted}
 \usage{
-torch_searchsorted(sorted_sequence, self, out_int32 = FALSE, right = FALSE)
+torch_searchsorted(
+  sorted_sequence,
+  self,
+  out_int32 = FALSE,
+  right = FALSE,
+  side = NULL,
+  sorter = list()
+)
 }
 \arguments{
 \item{sorted_sequence}{(Tensor) N-D or 1-D tensor, containing monotonically increasing
@@ -23,6 +30,14 @@ return 0 for non-numerical value (eg. nan, inf) or the size of boundaries
 (one pass the last index). In other words, if False, gets the lower bound index
 for each value in input from boundaries. If True, gets the upper bound index
 instead. Default value is False.}
+
+\item{side}{the same as right but preferred. “left” corresponds to \code{FALSE} for right
+and “right” corresponds to \code{TRUE} for right. It will error if this is set to
+“left” while right is \code{TRUE}.}
+
+\item{sorter}{if provided, a tensor matching the shape of the unsorted \code{sorted_sequence}
+containing a sequence of indices that sort it in the ascending order on the
+innermost dimension.}
 }
 \description{
 Searchsorted

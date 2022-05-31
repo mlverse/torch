@@ -292,24 +292,6 @@ fun_type = 'namespace'
 }
 
 
-#' @rdname torch__baddbmm_mkl_
-torch__baddbmm_mkl_ <- function(self, batch1, batch2, beta = 1L, alpha = 1L) {
-  args <- mget(x = c("self", "batch1", "batch2", "beta", "alpha"))
-expected_types <- list(self = "Tensor", batch1 = "Tensor", batch2 = "Tensor", beta = "Scalar", 
-    alpha = "Scalar")
-nd_args <- c("self", "batch1", "batch2")
-return_types <- list(list('Tensor'))
-call_c_function(
-fun_name = '_baddbmm_mkl_',
-args = args,
-expected_types = expected_types,
-nd_args = nd_args,
-return_types = return_types,
-fun_type = 'namespace'
-)
-}
-
-
 #' @rdname torch__batch_norm_impl_index
 torch__batch_norm_impl_index <- function(input, weight, bias, running_mean, running_var, training, momentum, eps, cudnn_enabled) {
   args <- mget(x = c("input", "weight", "bias", "running_mean", "running_var", "training", "momentum", "eps", "cudnn_enabled"))
@@ -696,46 +678,6 @@ fun_type = 'namespace'
 }
 
 
-#' @rdname torch__conv_depthwise2d_backward
-torch__conv_depthwise2d_backward <- function(grad_output, self, weight, kernel_size, stride, padding, dilation, output_mask) {
-  args <- mget(x = c("grad_output", "self", "weight", "kernel_size", "stride", "padding", "dilation", "output_mask"))
-expected_types <- list(grad_output = "Tensor", self = "Tensor", weight = "Tensor", 
-    kernel_size = "IntArrayRef", stride = "IntArrayRef", padding = "IntArrayRef", 
-    dilation = "IntArrayRef", output_mask = "::std::array<bool,2>")
-nd_args <- c("grad_output", "self", "weight", "kernel_size", "stride", "padding", 
-"dilation", "output_mask")
-return_types <- list(list("Tensor", "Tensor"))
-call_c_function(
-fun_name = '_conv_depthwise2d_backward',
-args = args,
-expected_types = expected_types,
-nd_args = nd_args,
-return_types = return_types,
-fun_type = 'namespace'
-)
-}
-
-
-#' @rdname torch__conv_depthwise2d_backward_out
-torch__conv_depthwise2d_backward_out <- function(grad_input, grad_weight, grad_output, self, weight, kernel_size, stride, padding, dilation) {
-  args <- mget(x = c("grad_input", "grad_weight", "grad_output", "self", "weight", "kernel_size", "stride", "padding", "dilation"))
-expected_types <- list(grad_input = "Tensor", grad_weight = "Tensor", grad_output = "Tensor", 
-    self = "Tensor", weight = "Tensor", kernel_size = "IntArrayRef", 
-    stride = "IntArrayRef", padding = "IntArrayRef", dilation = "IntArrayRef")
-nd_args <- c("grad_input", "grad_weight", "grad_output", "self", "weight", 
-"kernel_size", "stride", "padding", "dilation")
-return_types <- list(list("Tensor", "Tensor"))
-call_c_function(
-fun_name = '_conv_depthwise2d_backward_out',
-args = args,
-expected_types = expected_types,
-nd_args = nd_args,
-return_types = return_types,
-fun_type = 'namespace'
-)
-}
-
-
 #' @rdname torch__conv_depthwise2d_out
 torch__conv_depthwise2d_out <- function(out, self, weight, kernel_size, bias, stride, padding, dilation) {
   args <- mget(x = c("out", "self", "weight", "kernel_size", "bias", "stride", "padding", "dilation"))
@@ -790,6 +732,42 @@ fun_type = 'namespace'
 }
 
 
+#' @rdname torch__convert_indices_from_csr_to_coo
+torch__convert_indices_from_csr_to_coo <- function(crow_indices, col_indices, out_int32 = FALSE, transpose = FALSE) {
+  args <- mget(x = c("crow_indices", "col_indices", "out_int32", "transpose"))
+expected_types <- list(crow_indices = "Tensor", col_indices = "Tensor", out_int32 = "bool", 
+    transpose = "bool")
+nd_args <- c("crow_indices", "col_indices")
+return_types <- list(list('Tensor'))
+call_c_function(
+fun_name = '_convert_indices_from_csr_to_coo',
+args = args,
+expected_types = expected_types,
+nd_args = nd_args,
+return_types = return_types,
+fun_type = 'namespace'
+)
+}
+
+
+#' @rdname torch__convert_indices_from_csr_to_coo_out
+torch__convert_indices_from_csr_to_coo_out <- function(out, crow_indices, col_indices, out_int32 = FALSE, transpose = FALSE) {
+  args <- mget(x = c("out", "crow_indices", "col_indices", "out_int32", "transpose"))
+expected_types <- list(out = "Tensor", crow_indices = "Tensor", col_indices = "Tensor", 
+    out_int32 = "bool", transpose = "bool")
+nd_args <- c("out", "crow_indices", "col_indices")
+return_types <- list(list('Tensor'))
+call_c_function(
+fun_name = '_convert_indices_from_csr_to_coo_out',
+args = args,
+expected_types = expected_types,
+nd_args = nd_args,
+return_types = return_types,
+fun_type = 'namespace'
+)
+}
+
+
 #' @rdname torch__convolution
 torch__convolution <- function(input, weight, bias, stride, padding, dilation, transposed, output_padding, groups, benchmark, deterministic, cudnn_enabled, allow_tf32) {
   args <- mget(x = c("input", "weight", "bias", "stride", "padding", "dilation", "transposed", "output_padding", "groups", "benchmark", "deterministic", "cudnn_enabled", "allow_tf32"))
@@ -813,17 +791,14 @@ fun_type = 'namespace'
 
 
 #' @rdname torch__convolution_double_backward
-torch__convolution_double_backward <- function(ggI, ggW, ggb, gO, weight, self, stride, padding, dilation, transposed, output_padding, groups, benchmark, deterministic, cudnn_enabled, allow_tf32, output_mask) {
-  args <- mget(x = c("ggI", "ggW", "ggb", "gO", "weight", "self", "stride", "padding", "dilation", "transposed", "output_padding", "groups", "benchmark", "deterministic", "cudnn_enabled", "allow_tf32", "output_mask"))
+torch__convolution_double_backward <- function(ggI, ggW, ggb, gO, weight, self, stride, padding, dilation, transposed, output_padding, groups, output_mask) {
+  args <- mget(x = c("ggI", "ggW", "ggb", "gO", "weight", "self", "stride", "padding", "dilation", "transposed", "output_padding", "groups", "output_mask"))
 expected_types <- list(ggI = "Tensor", ggW = "Tensor", ggb = "Tensor", gO = "Tensor", 
     weight = "Tensor", self = "Tensor", stride = "IntArrayRef", 
     padding = "IntArrayRef", dilation = "IntArrayRef", transposed = "bool", 
-    output_padding = "IntArrayRef", groups = "int64_t", benchmark = "bool", 
-    deterministic = "bool", cudnn_enabled = "bool", allow_tf32 = "bool", 
-    output_mask = "::std::array<bool,3>")
+    output_padding = "IntArrayRef", groups = "int64_t", output_mask = "::std::array<bool,3>")
 nd_args <- c("ggI", "ggW", "ggb", "gO", "weight", "self", "stride", "padding", 
-"dilation", "transposed", "output_padding", "groups", "benchmark", 
-"deterministic", "cudnn_enabled", "allow_tf32", "output_mask"
+"dilation", "transposed", "output_padding", "groups", "output_mask"
 )
 return_types <- list(list("Tensor", "Tensor", "Tensor"))
 call_c_function(
@@ -847,26 +822,6 @@ nd_args <- c("input", "weight", "bias", "stride", "padding", "dilation",
 return_types <- list(list('Tensor'))
 call_c_function(
 fun_name = '_convolution_mode',
-args = args,
-expected_types = expected_types,
-nd_args = nd_args,
-return_types = return_types,
-fun_type = 'namespace'
-)
-}
-
-
-#' @rdname torch__convolution_nogroup
-torch__convolution_nogroup <- function(input, weight, bias, stride, padding, dilation, transposed, output_padding) {
-  args <- mget(x = c("input", "weight", "bias", "stride", "padding", "dilation", "transposed", "output_padding"))
-expected_types <- list(input = "Tensor", weight = "Tensor", bias = "Tensor", stride = "IntArrayRef", 
-    padding = "IntArrayRef", dilation = "IntArrayRef", transposed = "bool", 
-    output_padding = "IntArrayRef")
-nd_args <- c("input", "weight", "bias", "stride", "padding", "dilation", 
-"transposed", "output_padding")
-return_types <- list(list('Tensor'))
-call_c_function(
-fun_name = '_convolution_nogroup',
 args = args,
 expected_types = expected_types,
 nd_args = nd_args,
@@ -1239,6 +1194,23 @@ nd_args <- c("x", "alpha", "total")
 return_types <- list(list('Tensor'))
 call_c_function(
 fun_name = '_dirichlet_grad',
+args = args,
+expected_types = expected_types,
+nd_args = nd_args,
+return_types = return_types,
+fun_type = 'namespace'
+)
+}
+
+
+#' @rdname torch__efficientzerotensor
+torch__efficientzerotensor <- function(size, options = list()) {
+  args <- mget(x = c("size", "options"))
+expected_types <- list(size = "IntArrayRef", options = "TensorOptions")
+nd_args <- "size"
+return_types <- list(list('Tensor'))
+call_c_function(
+fun_name = '_efficientzerotensor',
 args = args,
 expected_types = expected_types,
 nd_args = nd_args,
@@ -2490,6 +2462,23 @@ fun_type = 'namespace'
 }
 
 
+#' @rdname torch__foreach_norm
+torch__foreach_norm <- function(tensors, ord = 2L) {
+  args <- mget(x = c("tensors", "ord"))
+expected_types <- list(tensors = "TensorList", ord = "Scalar")
+nd_args <- "tensors"
+return_types <- list(list('TensorList'))
+call_c_function(
+fun_name = '_foreach_norm',
+args = args,
+expected_types = expected_types,
+nd_args = nd_args,
+return_types = return_types,
+fun_type = 'namespace'
+)
+}
+
+
 #' @rdname torch__foreach_reciprocal
 torch__foreach_reciprocal <- function(tensors) {
   args <- mget(x = c("tensors"))
@@ -2962,6 +2951,77 @@ fun_type = 'namespace'
 }
 
 
+#' @rdname torch__has_same_storage_numel
+torch__has_same_storage_numel <- function(self, other) {
+  args <- mget(x = c("self", "other"))
+expected_types <- list(self = "Tensor", other = "Tensor")
+nd_args <- c("self", "other")
+return_types <- list(list('bool'))
+call_c_function(
+fun_name = '_has_same_storage_numel',
+args = args,
+expected_types = expected_types,
+nd_args = nd_args,
+return_types = return_types,
+fun_type = 'namespace'
+)
+}
+
+
+#' @rdname torch__histogramdd_bin_edges
+torch__histogramdd_bin_edges <- function(self, bins, range = NULL, weight = list(), density = FALSE) {
+  args <- mget(x = c("self", "bins", "range", "weight", "density"))
+expected_types <- list(self = "Tensor", bins = "IntArrayRef", range = "ArrayRef<double>", 
+    weight = "Tensor", density = "bool")
+nd_args <- c("self", "bins")
+return_types <- list(list('TensorList'))
+call_c_function(
+fun_name = '_histogramdd_bin_edges',
+args = args,
+expected_types = expected_types,
+nd_args = nd_args,
+return_types = return_types,
+fun_type = 'namespace'
+)
+}
+
+
+#' @rdname torch__histogramdd_from_bin_cts
+torch__histogramdd_from_bin_cts <- function(self, bins, range = NULL, weight = list(), density = FALSE) {
+  args <- mget(x = c("self", "bins", "range", "weight", "density"))
+expected_types <- list(self = "Tensor", bins = "IntArrayRef", range = "ArrayRef<double>", 
+    weight = "Tensor", density = "bool")
+nd_args <- c("self", "bins")
+return_types <- list(list('Tensor'))
+call_c_function(
+fun_name = '_histogramdd_from_bin_cts',
+args = args,
+expected_types = expected_types,
+nd_args = nd_args,
+return_types = return_types,
+fun_type = 'namespace'
+)
+}
+
+
+#' @rdname torch__histogramdd_from_bin_tensors
+torch__histogramdd_from_bin_tensors <- function(self, bins, weight = list(), density = FALSE) {
+  args <- mget(x = c("self", "bins", "weight", "density"))
+expected_types <- list(self = "Tensor", bins = "TensorList", weight = "Tensor", 
+    density = "bool")
+nd_args <- c("self", "bins")
+return_types <- list(list('Tensor'))
+call_c_function(
+fun_name = '_histogramdd_from_bin_tensors',
+args = args,
+expected_types = expected_types,
+nd_args = nd_args,
+return_types = return_types,
+fun_type = 'namespace'
+)
+}
+
+
 #' @rdname torch__index_copy_
 torch__index_copy_ <- function(self, dim, index, source) {
   args <- mget(x = c("self", "dim", "index", "source"))
@@ -2997,14 +3057,31 @@ fun_type = 'namespace'
 }
 
 
-#' @rdname torch__inverse_helper
-torch__inverse_helper <- function(self) {
+#' @rdname torch__is_zerotensor
+torch__is_zerotensor <- function(self) {
   args <- mget(x = c("self"))
 expected_types <- list(self = "Tensor")
 nd_args <- "self"
-return_types <- list(list('Tensor'))
+return_types <- list(list('bool'))
 call_c_function(
-fun_name = '_inverse_helper',
+fun_name = '_is_zerotensor',
+args = args,
+expected_types = expected_types,
+nd_args = nd_args,
+return_types = return_types,
+fun_type = 'namespace'
+)
+}
+
+
+#' @rdname torch__linalg_check_errors
+torch__linalg_check_errors <- function(info, api_name, is_matrix) {
+  args <- mget(x = c("info", "api_name", "is_matrix"))
+expected_types <- list(info = "Tensor", api_name = "c10::string_view", is_matrix = "bool")
+nd_args <- c("info", "api_name", "is_matrix")
+return_types <- list(list("void"))
+call_c_function(
+fun_name = '_linalg_check_errors',
 args = args,
 expected_types = expected_types,
 nd_args = nd_args,
@@ -3039,6 +3116,41 @@ nd_args <- c("self", "mode")
 return_types <- list(list("Tensor", "Tensor"))
 call_c_function(
 fun_name = '_linalg_qr_helper',
+args = args,
+expected_types = expected_types,
+nd_args = nd_args,
+return_types = return_types,
+fun_type = 'namespace'
+)
+}
+
+
+#' @rdname torch__linalg_svd
+torch__linalg_svd <- function(A, full_matrices = FALSE, compute_uv = TRUE) {
+  args <- mget(x = c("A", "full_matrices", "compute_uv"))
+expected_types <- list(A = "Tensor", full_matrices = "bool", compute_uv = "bool")
+nd_args <- "A"
+return_types <- list(list("Tensor", "Tensor", "Tensor"))
+call_c_function(
+fun_name = '_linalg_svd',
+args = args,
+expected_types = expected_types,
+nd_args = nd_args,
+return_types = return_types,
+fun_type = 'namespace'
+)
+}
+
+
+#' @rdname torch__linalg_svd_out
+torch__linalg_svd_out <- function(U, S, Vh, A, full_matrices = FALSE, compute_uv = TRUE) {
+  args <- mget(x = c("U", "S", "Vh", "A", "full_matrices", "compute_uv"))
+expected_types <- list(U = "Tensor", S = "Tensor", Vh = "Tensor", A = "Tensor", 
+    full_matrices = "bool", compute_uv = "bool")
+nd_args <- c("U", "S", "Vh", "A")
+return_types <- list(list("Tensor", "Tensor", "Tensor"))
+call_c_function(
+fun_name = '_linalg_svd_out',
 args = args,
 expected_types = expected_types,
 nd_args = nd_args,
@@ -3083,11 +3195,11 @@ fun_type = 'namespace'
 
 
 #' @rdname torch__log_softmax_backward_data
-torch__log_softmax_backward_data <- function(grad_output, output, dim, self) {
-  args <- mget(x = c("grad_output", "output", "dim", "self"))
+torch__log_softmax_backward_data <- function(grad_output, output, dim, input_dtype) {
+  args <- mget(x = c("grad_output", "output", "dim", "input_dtype"))
 expected_types <- list(grad_output = "Tensor", output = "Tensor", dim = "int64_t", 
-    self = "Tensor")
-nd_args <- c("grad_output", "output", "dim", "self")
+    input_dtype = "ScalarType")
+nd_args <- c("grad_output", "output", "dim", "input_dtype")
 return_types <- list(list('Tensor'))
 call_c_function(
 fun_name = '_log_softmax_backward_data',
@@ -3101,11 +3213,11 @@ fun_type = 'namespace'
 
 
 #' @rdname torch__log_softmax_backward_data_out
-torch__log_softmax_backward_data_out <- function(out, grad_output, output, dim, self) {
-  args <- mget(x = c("out", "grad_output", "output", "dim", "self"))
+torch__log_softmax_backward_data_out <- function(out, grad_output, output, dim, input_dtype) {
+  args <- mget(x = c("out", "grad_output", "output", "dim", "input_dtype"))
 expected_types <- list(out = "Tensor", grad_output = "Tensor", output = "Tensor", 
-    dim = "int64_t", self = "Tensor")
-nd_args <- c("out", "grad_output", "output", "dim", "self")
+    dim = "int64_t", input_dtype = "ScalarType")
+nd_args <- c("out", "grad_output", "output", "dim", "input_dtype")
 return_types <- list(list('Tensor'))
 call_c_function(
 fun_name = '_log_softmax_backward_data_out',
@@ -3255,6 +3367,23 @@ fun_type = 'namespace'
 }
 
 
+#' @rdname torch__masked_softmax
+torch__masked_softmax <- function(self, mask) {
+  args <- mget(x = c("self", "mask"))
+expected_types <- list(self = "Tensor", mask = "Tensor")
+nd_args <- c("self", "mask")
+return_types <- list(list('Tensor'))
+call_c_function(
+fun_name = '_masked_softmax',
+args = args,
+expected_types = expected_types,
+nd_args = nd_args,
+return_types = return_types,
+fun_type = 'namespace'
+)
+}
+
+
 #' @rdname torch__mkldnn_reshape
 torch__mkldnn_reshape <- function(self, shape) {
   args <- mget(x = c("self", "shape"))
@@ -3306,6 +3435,25 @@ fun_type = 'namespace'
 }
 
 
+#' @rdname torch__native_multi_head_self_attention
+torch__native_multi_head_self_attention <- function(query, qkv_weight, qkv_bias, proj_weight, proj_bias, mask = list()) {
+  args <- mget(x = c("query", "qkv_weight", "qkv_bias", "proj_weight", "proj_bias", "mask"))
+expected_types <- list(query = "Tensor", qkv_weight = "Tensor", qkv_bias = "Tensor", 
+    proj_weight = "Tensor", proj_bias = "Tensor", mask = "Tensor")
+nd_args <- c("query", "qkv_weight", "qkv_bias", "proj_weight", "proj_bias"
+)
+return_types <- list(list('Tensor'))
+call_c_function(
+fun_name = '_native_multi_head_self_attention',
+args = args,
+expected_types = expected_types,
+nd_args = nd_args,
+return_types = return_types,
+fun_type = 'namespace'
+)
+}
+
+
 #' @rdname torch__neg_view
 torch__neg_view <- function(self) {
   args <- mget(x = c("self"))
@@ -3314,6 +3462,23 @@ nd_args <- "self"
 return_types <- list(list('Tensor'))
 call_c_function(
 fun_name = '_neg_view',
+args = args,
+expected_types = expected_types,
+nd_args = nd_args,
+return_types = return_types,
+fun_type = 'namespace'
+)
+}
+
+
+#' @rdname torch__new_zeros_with_same_feature_meta
+torch__new_zeros_with_same_feature_meta <- function(self, other, self_num_batch_dims = 0L) {
+  args <- mget(x = c("self", "other", "self_num_batch_dims"))
+expected_types <- list(self = "Tensor", other = "Tensor", self_num_batch_dims = "int64_t")
+nd_args <- c("self", "other")
+return_types <- list(list('Tensor'))
+call_c_function(
+fun_name = '_new_zeros_with_same_feature_meta',
 args = args,
 expected_types = expected_types,
 nd_args = nd_args,
@@ -3332,60 +3497,6 @@ nd_args <- c("input", "weight", "bias", "padding")
 return_types <- list(list('Tensor'))
 call_c_function(
 fun_name = '_nnpack_spatial_convolution',
-args = args,
-expected_types = expected_types,
-nd_args = nd_args,
-return_types = return_types,
-fun_type = 'namespace'
-)
-}
-
-
-#' @rdname torch__nnpack_spatial_convolution_backward
-torch__nnpack_spatial_convolution_backward <- function(input, grad_output, weight, padding, output_mask) {
-  args <- mget(x = c("input", "grad_output", "weight", "padding", "output_mask"))
-expected_types <- list(input = "Tensor", grad_output = "Tensor", weight = "Tensor", 
-    padding = "IntArrayRef", output_mask = "::std::array<bool,3>")
-nd_args <- c("input", "grad_output", "weight", "padding", "output_mask")
-return_types <- list(list("Tensor", "Tensor", "Tensor"))
-call_c_function(
-fun_name = '_nnpack_spatial_convolution_backward',
-args = args,
-expected_types = expected_types,
-nd_args = nd_args,
-return_types = return_types,
-fun_type = 'namespace'
-)
-}
-
-
-#' @rdname torch__nnpack_spatial_convolution_backward_input
-torch__nnpack_spatial_convolution_backward_input <- function(input, grad_output, weight, padding) {
-  args <- mget(x = c("input", "grad_output", "weight", "padding"))
-expected_types <- list(input = "Tensor", grad_output = "Tensor", weight = "Tensor", 
-    padding = "IntArrayRef")
-nd_args <- c("input", "grad_output", "weight", "padding")
-return_types <- list(list('Tensor'))
-call_c_function(
-fun_name = '_nnpack_spatial_convolution_backward_input',
-args = args,
-expected_types = expected_types,
-nd_args = nd_args,
-return_types = return_types,
-fun_type = 'namespace'
-)
-}
-
-
-#' @rdname torch__nnpack_spatial_convolution_backward_weight
-torch__nnpack_spatial_convolution_backward_weight <- function(input, weightsize, grad_output, padding) {
-  args <- mget(x = c("input", "weightsize", "grad_output", "padding"))
-expected_types <- list(input = "Tensor", weightsize = "IntArrayRef", grad_output = "Tensor", 
-    padding = "IntArrayRef")
-nd_args <- c("input", "weightsize", "grad_output", "padding")
-return_types <- list(list('Tensor'))
-call_c_function(
-fun_name = '_nnpack_spatial_convolution_backward_weight',
 args = args,
 expected_types = expected_types,
 nd_args = nd_args,
@@ -3656,13 +3767,13 @@ fun_type = 'namespace'
 
 
 #' @rdname torch__slow_conv2d_backward
-torch__slow_conv2d_backward <- function(grad_output, self, weight, kernel_size, stride, padding, finput, output_mask) {
-  args <- mget(x = c("grad_output", "self", "weight", "kernel_size", "stride", "padding", "finput", "output_mask"))
+torch__slow_conv2d_backward <- function(grad_output, self, weight, kernel_size, stride, padding, output_mask) {
+  args <- mget(x = c("grad_output", "self", "weight", "kernel_size", "stride", "padding", "output_mask"))
 expected_types <- list(grad_output = "Tensor", self = "Tensor", weight = "Tensor", 
     kernel_size = "IntArrayRef", stride = "IntArrayRef", padding = "IntArrayRef", 
-    finput = "Tensor", output_mask = "::std::array<bool,3>")
+    output_mask = "::std::array<bool,3>")
 nd_args <- c("grad_output", "self", "weight", "kernel_size", "stride", "padding", 
-"finput", "output_mask")
+"output_mask")
 return_types <- list(list("Tensor", "Tensor", "Tensor"))
 call_c_function(
 fun_name = '_slow_conv2d_backward',
@@ -3676,14 +3787,13 @@ fun_type = 'namespace'
 
 
 #' @rdname torch__slow_conv2d_backward_out
-torch__slow_conv2d_backward_out <- function(grad_input, grad_weight, grad_bias, grad_output, self, weight, kernel_size, stride, padding, finput) {
-  args <- mget(x = c("grad_input", "grad_weight", "grad_bias", "grad_output", "self", "weight", "kernel_size", "stride", "padding", "finput"))
+torch__slow_conv2d_backward_out <- function(grad_input, grad_weight, grad_bias, grad_output, self, weight, kernel_size, stride, padding) {
+  args <- mget(x = c("grad_input", "grad_weight", "grad_bias", "grad_output", "self", "weight", "kernel_size", "stride", "padding"))
 expected_types <- list(grad_input = "Tensor", grad_weight = "Tensor", grad_bias = "Tensor", 
     grad_output = "Tensor", self = "Tensor", weight = "Tensor", 
-    kernel_size = "IntArrayRef", stride = "IntArrayRef", padding = "IntArrayRef", 
-    finput = "Tensor")
+    kernel_size = "IntArrayRef", stride = "IntArrayRef", padding = "IntArrayRef")
 nd_args <- c("grad_input", "grad_weight", "grad_bias", "grad_output", "self", 
-"weight", "kernel_size", "stride", "padding", "finput")
+"weight", "kernel_size", "stride", "padding")
 return_types <- list(list("Tensor", "Tensor", "Tensor"))
 call_c_function(
 fun_name = '_slow_conv2d_backward_out',
@@ -3703,7 +3813,7 @@ expected_types <- list(self = "Tensor", weight = "Tensor", kernel_size = "IntArr
     bias = "Tensor", stride = "IntArrayRef", padding = "IntArrayRef")
 nd_args <- c("self", "weight", "kernel_size", "bias", "stride", "padding"
 )
-return_types <- list(list("Tensor", "Tensor"))
+return_types <- list(list('Tensor'))
 call_c_function(
 fun_name = '_slow_conv2d_forward',
 args = args,
@@ -3716,14 +3826,13 @@ fun_type = 'namespace'
 
 
 #' @rdname torch__slow_conv2d_forward_out
-torch__slow_conv2d_forward_out <- function(output, finput, self, weight, kernel_size, bias, stride, padding) {
-  args <- mget(x = c("output", "finput", "self", "weight", "kernel_size", "bias", "stride", "padding"))
-expected_types <- list(output = "Tensor", finput = "Tensor", self = "Tensor", weight = "Tensor", 
-    kernel_size = "IntArrayRef", bias = "Tensor", stride = "IntArrayRef", 
-    padding = "IntArrayRef")
-nd_args <- c("output", "finput", "self", "weight", "kernel_size", "bias", 
-"stride", "padding")
-return_types <- list(list("Tensor", "Tensor"))
+torch__slow_conv2d_forward_out <- function(output, self, weight, kernel_size, bias, stride, padding) {
+  args <- mget(x = c("output", "self", "weight", "kernel_size", "bias", "stride", "padding"))
+expected_types <- list(output = "Tensor", self = "Tensor", weight = "Tensor", kernel_size = "IntArrayRef", 
+    bias = "Tensor", stride = "IntArrayRef", padding = "IntArrayRef")
+nd_args <- c("output", "self", "weight", "kernel_size", "bias", "stride", 
+"padding")
+return_types <- list(list('Tensor'))
 call_c_function(
 fun_name = '_slow_conv2d_forward_out',
 args = args,
@@ -3824,11 +3933,11 @@ fun_type = 'namespace'
 
 
 #' @rdname torch__softmax_backward_data
-torch__softmax_backward_data <- function(grad_output, output, dim, self) {
-  args <- mget(x = c("grad_output", "output", "dim", "self"))
+torch__softmax_backward_data <- function(grad_output, output, dim, input_dtype) {
+  args <- mget(x = c("grad_output", "output", "dim", "input_dtype"))
 expected_types <- list(grad_output = "Tensor", output = "Tensor", dim = "int64_t", 
-    self = "Tensor")
-nd_args <- c("grad_output", "output", "dim", "self")
+    input_dtype = "ScalarType")
+nd_args <- c("grad_output", "output", "dim", "input_dtype")
 return_types <- list(list('Tensor'))
 call_c_function(
 fun_name = '_softmax_backward_data',
@@ -3842,11 +3951,12 @@ fun_type = 'namespace'
 
 
 #' @rdname torch__softmax_backward_data_out
-torch__softmax_backward_data_out <- function(grad_input, grad_output, output, dim, self) {
-  args <- mget(x = c("grad_input", "grad_output", "output", "dim", "self"))
+torch__softmax_backward_data_out <- function(grad_input, grad_output, output, dim, input_dtype) {
+  args <- mget(x = c("grad_input", "grad_output", "output", "dim", "input_dtype"))
 expected_types <- list(grad_input = "Tensor", grad_output = "Tensor", output = "Tensor", 
-    dim = "int64_t", self = "Tensor")
-nd_args <- c("grad_input", "grad_output", "output", "dim", "self")
+    dim = "int64_t", input_dtype = "ScalarType")
+nd_args <- c("grad_input", "grad_output", "output", "dim", "input_dtype"
+)
 return_types <- list(list('Tensor'))
 call_c_function(
 fun_name = '_softmax_backward_data_out',
@@ -3902,6 +4012,23 @@ nd_args <- c("self", "sparse", "dense")
 return_types <- list(list('Tensor'))
 call_c_function(
 fun_name = '_sparse_addmm',
+args = args,
+expected_types = expected_types,
+nd_args = nd_args,
+return_types = return_types,
+fun_type = 'namespace'
+)
+}
+
+
+#' @rdname torch__sparse_broadcast_to
+torch__sparse_broadcast_to <- function(self, size) {
+  args <- mget(x = c("self", "size"))
+expected_types <- list(self = "Tensor", size = "IntArrayRef")
+nd_args <- c("self", "size")
+return_types <- list(list('Tensor'))
+call_c_function(
+fun_name = '_sparse_broadcast_to',
 args = args,
 expected_types = expected_types,
 nd_args = nd_args,
@@ -4209,23 +4336,6 @@ fun_type = 'namespace'
 }
 
 
-#' @rdname torch__svd_helper
-torch__svd_helper <- function(self, some, compute_uv) {
-  args <- mget(x = c("self", "some", "compute_uv"))
-expected_types <- list(self = "Tensor", some = "bool", compute_uv = "bool")
-nd_args <- c("self", "some", "compute_uv")
-return_types <- list(list("Tensor", "Tensor", "Tensor"))
-call_c_function(
-fun_name = '_svd_helper',
-args = args,
-expected_types = expected_types,
-nd_args = nd_args,
-return_types = return_types,
-fun_type = 'namespace'
-)
-}
-
-
 #' @rdname torch__symeig_helper
 torch__symeig_helper <- function(self, eigenvectors, upper) {
   args <- mget(x = c("self", "eigenvectors", "upper"))
@@ -4302,6 +4412,23 @@ nd_args <- c("self", "other")
 return_types <- list(list('Tensor'))
 call_c_function(
 fun_name = '_test_serialization_subcmul',
+args = args,
+expected_types = expected_types,
+nd_args = nd_args,
+return_types = return_types,
+fun_type = 'namespace'
+)
+}
+
+
+#' @rdname torch__test_warn_in_autograd
+torch__test_warn_in_autograd <- function(self) {
+  args <- mget(x = c("self"))
+expected_types <- list(self = "Tensor")
+nd_args <- "self"
+return_types <- list(list('Tensor'))
+call_c_function(
+fun_name = '_test_warn_in_autograd',
 args = args,
 expected_types = expected_types,
 nd_args = nd_args,
@@ -4456,6 +4583,23 @@ fun_type = 'namespace'
 }
 
 
+#' @rdname torch__torch_cuda_cu_linker_symbol_op
+torch__torch_cuda_cu_linker_symbol_op <- function(self) {
+  args <- mget(x = c("self"))
+expected_types <- list(self = "Tensor")
+nd_args <- "self"
+return_types <- list(list('Tensor'))
+call_c_function(
+fun_name = '_torch_cuda_cu_linker_symbol_op',
+args = args,
+expected_types = expected_types,
+nd_args = nd_args,
+return_types = return_types,
+fun_type = 'namespace'
+)
+}
+
+
 #' @rdname torch__trilinear
 torch__trilinear <- function(i1, i2, i3, expand1, expand2, expand3, sumdim, unroll_dim = 1L) {
   args <- mget(x = c("i1", "i2", "i3", "expand1", "expand2", "expand3", "sumdim", "unroll_dim"))
@@ -4536,6 +4680,386 @@ nd_args <- c("self", "size")
 return_types <- list(list('Tensor'))
 call_c_function(
 fun_name = '_unsafe_view',
+args = args,
+expected_types = expected_types,
+nd_args = nd_args,
+return_types = return_types,
+fun_type = 'namespace'
+)
+}
+
+
+#' @rdname torch__upsample_bicubic2d_aa
+torch__upsample_bicubic2d_aa <- function(input, self, output_size, align_corners, scale_factors, scales_h = NULL, scales_w = NULL) {
+  args <- mget(x = c("input", "self", "output_size", "align_corners", "scale_factors", "scales_h", "scales_w"))
+expected_types <- list(input = "Tensor", self = "Tensor", output_size = "IntArrayRef", 
+    align_corners = "bool", scale_factors = "ArrayRef<double>", 
+    scales_h = "double", scales_w = "double")
+nd_args <- c("input", "self", "output_size", "align_corners", "scale_factors"
+)
+return_types <- list(list('Tensor'))
+call_c_function(
+fun_name = '_upsample_bicubic2d_aa',
+args = args,
+expected_types = expected_types,
+nd_args = nd_args,
+return_types = return_types,
+fun_type = 'namespace'
+)
+}
+
+
+#' @rdname torch__upsample_bicubic2d_aa_backward
+torch__upsample_bicubic2d_aa_backward <- function(grad_output, output_size, input_size, align_corners, scale_factors, scales_h = NULL, scales_w = NULL) {
+  args <- mget(x = c("grad_output", "output_size", "input_size", "align_corners", "scale_factors", "scales_h", "scales_w"))
+expected_types <- list(grad_output = "Tensor", output_size = "IntArrayRef", input_size = "IntArrayRef", 
+    align_corners = "bool", scale_factors = "ArrayRef<double>", 
+    scales_h = "double", scales_w = "double")
+nd_args <- c("grad_output", "output_size", "input_size", "align_corners", 
+"scale_factors")
+return_types <- list(list('Tensor'))
+call_c_function(
+fun_name = '_upsample_bicubic2d_aa_backward',
+args = args,
+expected_types = expected_types,
+nd_args = nd_args,
+return_types = return_types,
+fun_type = 'namespace'
+)
+}
+
+
+#' @rdname torch__upsample_bicubic2d_aa_backward_out
+torch__upsample_bicubic2d_aa_backward_out <- function(grad_input, grad_output, output_size, input_size, align_corners, scales_h = NULL, scales_w = NULL) {
+  args <- mget(x = c("grad_input", "grad_output", "output_size", "input_size", "align_corners", "scales_h", "scales_w"))
+expected_types <- list(grad_input = "Tensor", grad_output = "Tensor", output_size = "IntArrayRef", 
+    input_size = "IntArrayRef", align_corners = "bool", scales_h = "double", 
+    scales_w = "double")
+nd_args <- c("grad_input", "grad_output", "output_size", "input_size", "align_corners"
+)
+return_types <- list(list('Tensor'))
+call_c_function(
+fun_name = '_upsample_bicubic2d_aa_backward_out',
+args = args,
+expected_types = expected_types,
+nd_args = nd_args,
+return_types = return_types,
+fun_type = 'namespace'
+)
+}
+
+
+#' @rdname torch__upsample_bicubic2d_aa_out
+torch__upsample_bicubic2d_aa_out <- function(out, self, output_size, align_corners, scales_h = NULL, scales_w = NULL) {
+  args <- mget(x = c("out", "self", "output_size", "align_corners", "scales_h", "scales_w"))
+expected_types <- list(out = "Tensor", self = "Tensor", output_size = "IntArrayRef", 
+    align_corners = "bool", scales_h = "double", scales_w = "double")
+nd_args <- c("out", "self", "output_size", "align_corners")
+return_types <- list(list('Tensor'))
+call_c_function(
+fun_name = '_upsample_bicubic2d_aa_out',
+args = args,
+expected_types = expected_types,
+nd_args = nd_args,
+return_types = return_types,
+fun_type = 'namespace'
+)
+}
+
+
+#' @rdname torch__upsample_bilinear2d_aa
+torch__upsample_bilinear2d_aa <- function(input, self, output_size, align_corners, scale_factors, scales_h = NULL, scales_w = NULL) {
+  args <- mget(x = c("input", "self", "output_size", "align_corners", "scale_factors", "scales_h", "scales_w"))
+expected_types <- list(input = "Tensor", self = "Tensor", output_size = "IntArrayRef", 
+    align_corners = "bool", scale_factors = "ArrayRef<double>", 
+    scales_h = "double", scales_w = "double")
+nd_args <- c("input", "self", "output_size", "align_corners", "scale_factors"
+)
+return_types <- list(list('Tensor'))
+call_c_function(
+fun_name = '_upsample_bilinear2d_aa',
+args = args,
+expected_types = expected_types,
+nd_args = nd_args,
+return_types = return_types,
+fun_type = 'namespace'
+)
+}
+
+
+#' @rdname torch__upsample_bilinear2d_aa_backward
+torch__upsample_bilinear2d_aa_backward <- function(grad_output, output_size, input_size, align_corners, scale_factors, scales_h = NULL, scales_w = NULL) {
+  args <- mget(x = c("grad_output", "output_size", "input_size", "align_corners", "scale_factors", "scales_h", "scales_w"))
+expected_types <- list(grad_output = "Tensor", output_size = "IntArrayRef", input_size = "IntArrayRef", 
+    align_corners = "bool", scale_factors = "ArrayRef<double>", 
+    scales_h = "double", scales_w = "double")
+nd_args <- c("grad_output", "output_size", "input_size", "align_corners", 
+"scale_factors")
+return_types <- list(list('Tensor'))
+call_c_function(
+fun_name = '_upsample_bilinear2d_aa_backward',
+args = args,
+expected_types = expected_types,
+nd_args = nd_args,
+return_types = return_types,
+fun_type = 'namespace'
+)
+}
+
+
+#' @rdname torch__upsample_bilinear2d_aa_backward_out
+torch__upsample_bilinear2d_aa_backward_out <- function(grad_input, grad_output, output_size, input_size, align_corners, scales_h = NULL, scales_w = NULL) {
+  args <- mget(x = c("grad_input", "grad_output", "output_size", "input_size", "align_corners", "scales_h", "scales_w"))
+expected_types <- list(grad_input = "Tensor", grad_output = "Tensor", output_size = "IntArrayRef", 
+    input_size = "IntArrayRef", align_corners = "bool", scales_h = "double", 
+    scales_w = "double")
+nd_args <- c("grad_input", "grad_output", "output_size", "input_size", "align_corners"
+)
+return_types <- list(list('Tensor'))
+call_c_function(
+fun_name = '_upsample_bilinear2d_aa_backward_out',
+args = args,
+expected_types = expected_types,
+nd_args = nd_args,
+return_types = return_types,
+fun_type = 'namespace'
+)
+}
+
+
+#' @rdname torch__upsample_bilinear2d_aa_out
+torch__upsample_bilinear2d_aa_out <- function(out, self, output_size, align_corners, scales_h = NULL, scales_w = NULL) {
+  args <- mget(x = c("out", "self", "output_size", "align_corners", "scales_h", "scales_w"))
+expected_types <- list(out = "Tensor", self = "Tensor", output_size = "IntArrayRef", 
+    align_corners = "bool", scales_h = "double", scales_w = "double")
+nd_args <- c("out", "self", "output_size", "align_corners")
+return_types <- list(list('Tensor'))
+call_c_function(
+fun_name = '_upsample_bilinear2d_aa_out',
+args = args,
+expected_types = expected_types,
+nd_args = nd_args,
+return_types = return_types,
+fun_type = 'namespace'
+)
+}
+
+
+#' @rdname torch__upsample_nearest_exact1d
+torch__upsample_nearest_exact1d <- function(input, self, output_size, scale_factors, scales = NULL) {
+  args <- mget(x = c("input", "self", "output_size", "scale_factors", "scales"))
+expected_types <- list(input = "Tensor", self = "Tensor", output_size = "IntArrayRef", 
+    scale_factors = "ArrayRef<double>", scales = "double")
+nd_args <- c("input", "self", "output_size", "scale_factors")
+return_types <- list(list('Tensor'))
+call_c_function(
+fun_name = '_upsample_nearest_exact1d',
+args = args,
+expected_types = expected_types,
+nd_args = nd_args,
+return_types = return_types,
+fun_type = 'namespace'
+)
+}
+
+
+#' @rdname torch__upsample_nearest_exact1d_backward
+torch__upsample_nearest_exact1d_backward <- function(grad_output, output_size, input_size, scale_factors, scales = NULL) {
+  args <- mget(x = c("grad_output", "output_size", "input_size", "scale_factors", "scales"))
+expected_types <- list(grad_output = "Tensor", output_size = "IntArrayRef", input_size = "IntArrayRef", 
+    scale_factors = "ArrayRef<double>", scales = "double")
+nd_args <- c("grad_output", "output_size", "input_size", "scale_factors"
+)
+return_types <- list(list('Tensor'))
+call_c_function(
+fun_name = '_upsample_nearest_exact1d_backward',
+args = args,
+expected_types = expected_types,
+nd_args = nd_args,
+return_types = return_types,
+fun_type = 'namespace'
+)
+}
+
+
+#' @rdname torch__upsample_nearest_exact1d_backward_out
+torch__upsample_nearest_exact1d_backward_out <- function(grad_input, grad_output, output_size, input_size, scales = NULL) {
+  args <- mget(x = c("grad_input", "grad_output", "output_size", "input_size", "scales"))
+expected_types <- list(grad_input = "Tensor", grad_output = "Tensor", output_size = "IntArrayRef", 
+    input_size = "IntArrayRef", scales = "double")
+nd_args <- c("grad_input", "grad_output", "output_size", "input_size")
+return_types <- list(list('Tensor'))
+call_c_function(
+fun_name = '_upsample_nearest_exact1d_backward_out',
+args = args,
+expected_types = expected_types,
+nd_args = nd_args,
+return_types = return_types,
+fun_type = 'namespace'
+)
+}
+
+
+#' @rdname torch__upsample_nearest_exact1d_out
+torch__upsample_nearest_exact1d_out <- function(out, self, output_size, scales = NULL) {
+  args <- mget(x = c("out", "self", "output_size", "scales"))
+expected_types <- list(out = "Tensor", self = "Tensor", output_size = "IntArrayRef", 
+    scales = "double")
+nd_args <- c("out", "self", "output_size")
+return_types <- list(list('Tensor'))
+call_c_function(
+fun_name = '_upsample_nearest_exact1d_out',
+args = args,
+expected_types = expected_types,
+nd_args = nd_args,
+return_types = return_types,
+fun_type = 'namespace'
+)
+}
+
+
+#' @rdname torch__upsample_nearest_exact2d
+torch__upsample_nearest_exact2d <- function(input, self, output_size, scale_factors, scales_h = NULL, scales_w = NULL) {
+  args <- mget(x = c("input", "self", "output_size", "scale_factors", "scales_h", "scales_w"))
+expected_types <- list(input = "Tensor", self = "Tensor", output_size = "IntArrayRef", 
+    scale_factors = "ArrayRef<double>", scales_h = "double", 
+    scales_w = "double")
+nd_args <- c("input", "self", "output_size", "scale_factors")
+return_types <- list(list('Tensor'))
+call_c_function(
+fun_name = '_upsample_nearest_exact2d',
+args = args,
+expected_types = expected_types,
+nd_args = nd_args,
+return_types = return_types,
+fun_type = 'namespace'
+)
+}
+
+
+#' @rdname torch__upsample_nearest_exact2d_backward
+torch__upsample_nearest_exact2d_backward <- function(grad_output, output_size, input_size, scale_factors, scales_h = NULL, scales_w = NULL) {
+  args <- mget(x = c("grad_output", "output_size", "input_size", "scale_factors", "scales_h", "scales_w"))
+expected_types <- list(grad_output = "Tensor", output_size = "IntArrayRef", input_size = "IntArrayRef", 
+    scale_factors = "ArrayRef<double>", scales_h = "double", 
+    scales_w = "double")
+nd_args <- c("grad_output", "output_size", "input_size", "scale_factors"
+)
+return_types <- list(list('Tensor'))
+call_c_function(
+fun_name = '_upsample_nearest_exact2d_backward',
+args = args,
+expected_types = expected_types,
+nd_args = nd_args,
+return_types = return_types,
+fun_type = 'namespace'
+)
+}
+
+
+#' @rdname torch__upsample_nearest_exact2d_backward_out
+torch__upsample_nearest_exact2d_backward_out <- function(grad_input, grad_output, output_size, input_size, scales_h = NULL, scales_w = NULL) {
+  args <- mget(x = c("grad_input", "grad_output", "output_size", "input_size", "scales_h", "scales_w"))
+expected_types <- list(grad_input = "Tensor", grad_output = "Tensor", output_size = "IntArrayRef", 
+    input_size = "IntArrayRef", scales_h = "double", scales_w = "double")
+nd_args <- c("grad_input", "grad_output", "output_size", "input_size")
+return_types <- list(list('Tensor'))
+call_c_function(
+fun_name = '_upsample_nearest_exact2d_backward_out',
+args = args,
+expected_types = expected_types,
+nd_args = nd_args,
+return_types = return_types,
+fun_type = 'namespace'
+)
+}
+
+
+#' @rdname torch__upsample_nearest_exact2d_out
+torch__upsample_nearest_exact2d_out <- function(out, self, output_size, scales_h = NULL, scales_w = NULL) {
+  args <- mget(x = c("out", "self", "output_size", "scales_h", "scales_w"))
+expected_types <- list(out = "Tensor", self = "Tensor", output_size = "IntArrayRef", 
+    scales_h = "double", scales_w = "double")
+nd_args <- c("out", "self", "output_size")
+return_types <- list(list('Tensor'))
+call_c_function(
+fun_name = '_upsample_nearest_exact2d_out',
+args = args,
+expected_types = expected_types,
+nd_args = nd_args,
+return_types = return_types,
+fun_type = 'namespace'
+)
+}
+
+
+#' @rdname torch__upsample_nearest_exact3d
+torch__upsample_nearest_exact3d <- function(input, self, output_size, scale_factors, scales_d = NULL, scales_h = NULL, scales_w = NULL) {
+  args <- mget(x = c("input", "self", "output_size", "scale_factors", "scales_d", "scales_h", "scales_w"))
+expected_types <- list(input = "Tensor", self = "Tensor", output_size = "IntArrayRef", 
+    scale_factors = "ArrayRef<double>", scales_d = "double", 
+    scales_h = "double", scales_w = "double")
+nd_args <- c("input", "self", "output_size", "scale_factors")
+return_types <- list(list('Tensor'))
+call_c_function(
+fun_name = '_upsample_nearest_exact3d',
+args = args,
+expected_types = expected_types,
+nd_args = nd_args,
+return_types = return_types,
+fun_type = 'namespace'
+)
+}
+
+
+#' @rdname torch__upsample_nearest_exact3d_backward
+torch__upsample_nearest_exact3d_backward <- function(grad_output, output_size, input_size, scale_factors, scales_d = NULL, scales_h = NULL, scales_w = NULL) {
+  args <- mget(x = c("grad_output", "output_size", "input_size", "scale_factors", "scales_d", "scales_h", "scales_w"))
+expected_types <- list(grad_output = "Tensor", output_size = "IntArrayRef", input_size = "IntArrayRef", 
+    scale_factors = "ArrayRef<double>", scales_d = "double", 
+    scales_h = "double", scales_w = "double")
+nd_args <- c("grad_output", "output_size", "input_size", "scale_factors"
+)
+return_types <- list(list('Tensor'))
+call_c_function(
+fun_name = '_upsample_nearest_exact3d_backward',
+args = args,
+expected_types = expected_types,
+nd_args = nd_args,
+return_types = return_types,
+fun_type = 'namespace'
+)
+}
+
+
+#' @rdname torch__upsample_nearest_exact3d_backward_out
+torch__upsample_nearest_exact3d_backward_out <- function(grad_input, grad_output, output_size, input_size, scales_d = NULL, scales_h = NULL, scales_w = NULL) {
+  args <- mget(x = c("grad_input", "grad_output", "output_size", "input_size", "scales_d", "scales_h", "scales_w"))
+expected_types <- list(grad_input = "Tensor", grad_output = "Tensor", output_size = "IntArrayRef", 
+    input_size = "IntArrayRef", scales_d = "double", scales_h = "double", 
+    scales_w = "double")
+nd_args <- c("grad_input", "grad_output", "output_size", "input_size")
+return_types <- list(list('Tensor'))
+call_c_function(
+fun_name = '_upsample_nearest_exact3d_backward_out',
+args = args,
+expected_types = expected_types,
+nd_args = nd_args,
+return_types = return_types,
+fun_type = 'namespace'
+)
+}
+
+
+#' @rdname torch__upsample_nearest_exact3d_out
+torch__upsample_nearest_exact3d_out <- function(out, self, output_size, scales_d = NULL, scales_h = NULL, scales_w = NULL) {
+  args <- mget(x = c("out", "self", "output_size", "scales_d", "scales_h", "scales_w"))
+expected_types <- list(out = "Tensor", self = "Tensor", output_size = "IntArrayRef", 
+    scales_d = "double", scales_h = "double", scales_w = "double")
+nd_args <- c("out", "self", "output_size")
+return_types <- list(list('Tensor'))
+call_c_function(
+fun_name = '_upsample_nearest_exact3d_out',
 args = args,
 expected_types = expected_types,
 nd_args = nd_args,
@@ -5381,6 +5905,23 @@ fun_type = 'namespace'
 }
 
 
+#' @rdname torch_adjoint
+torch_adjoint <- function(self) {
+  args <- mget(x = c("self"))
+expected_types <- list(self = "Tensor")
+nd_args <- "self"
+return_types <- list(list('Tensor'))
+call_c_function(
+fun_name = 'adjoint',
+args = args,
+expected_types = expected_types,
+nd_args = nd_args,
+return_types = return_types,
+fun_type = 'namespace'
+)
+}
+
+
 #' @rdname torch_affine_grid_generator
 torch_affine_grid_generator <- function(theta, size, align_corners) {
   args <- mget(x = c("theta", "size", "align_corners"))
@@ -5997,6 +6538,40 @@ fun_type = 'namespace'
 }
 
 
+#' @rdname torch_arctan2
+torch_arctan2 <- function(self, other) {
+  args <- mget(x = c("self", "other"))
+expected_types <- list(self = "Tensor", other = "Tensor")
+nd_args <- c("self", "other")
+return_types <- list(list('Tensor'))
+call_c_function(
+fun_name = 'arctan2',
+args = args,
+expected_types = expected_types,
+nd_args = nd_args,
+return_types = return_types,
+fun_type = 'namespace'
+)
+}
+
+
+#' @rdname torch_arctan2_out
+torch_arctan2_out <- function(out, self, other) {
+  args <- mget(x = c("out", "self", "other"))
+expected_types <- list(out = "Tensor", self = "Tensor", other = "Tensor")
+nd_args <- c("out", "self", "other")
+return_types <- list(list('Tensor'))
+call_c_function(
+fun_name = 'arctan2_out',
+args = args,
+expected_types = expected_types,
+nd_args = nd_args,
+return_types = return_types,
+fun_type = 'namespace'
+)
+}
+
+
 #' @rdname torch_arctanh
 torch_arctanh <- function(self) {
   args <- mget(x = c("self"))
@@ -6124,6 +6699,23 @@ nd_args <- c("self", "dim")
 return_types <- list(list('Tensor'))
 call_c_function(
 fun_name = 'argsort',
+args = args,
+expected_types = expected_types,
+nd_args = nd_args,
+return_types = return_types,
+fun_type = 'namespace'
+)
+}
+
+
+#' @rdname torch_argwhere
+torch_argwhere <- function(self) {
+  args <- mget(x = c("self"))
+expected_types <- list(self = "Tensor")
+nd_args <- "self"
+return_types <- list(list('Tensor'))
+call_c_function(
+fun_name = 'argwhere',
 args = args,
 expected_types = expected_types,
 nd_args = nd_args,
@@ -6893,11 +7485,11 @@ fun_type = 'namespace'
 
 
 #' @rdname torch_bilinear
-torch_bilinear <- function(input1, input2, weight, bias) {
+torch_bilinear <- function(input1, input2, weight, bias = list()) {
   args <- mget(x = c("input1", "input2", "weight", "bias"))
 expected_types <- list(input1 = "Tensor", input2 = "Tensor", weight = "Tensor", 
     bias = "Tensor")
-nd_args <- c("input1", "input2", "weight", "bias")
+nd_args <- c("input1", "input2", "weight")
 return_types <- list(list('Tensor'))
 call_c_function(
 fun_name = 'bilinear',
@@ -8290,47 +8882,6 @@ fun_type = 'namespace'
 }
 
 
-#' @rdname torch_conv_depthwise3d_backward
-torch_conv_depthwise3d_backward <- function(grad_output, self, weight, kernel_size, stride, padding, dilation, output_mask) {
-  args <- mget(x = c("grad_output", "self", "weight", "kernel_size", "stride", "padding", "dilation", "output_mask"))
-expected_types <- list(grad_output = "Tensor", self = "Tensor", weight = "Tensor", 
-    kernel_size = "IntArrayRef", stride = "IntArrayRef", padding = "IntArrayRef", 
-    dilation = "IntArrayRef", output_mask = "::std::array<bool,3>")
-nd_args <- c("grad_output", "self", "weight", "kernel_size", "stride", "padding", 
-"dilation", "output_mask")
-return_types <- list(list("Tensor", "Tensor", "Tensor"))
-call_c_function(
-fun_name = 'conv_depthwise3d_backward',
-args = args,
-expected_types = expected_types,
-nd_args = nd_args,
-return_types = return_types,
-fun_type = 'namespace'
-)
-}
-
-
-#' @rdname torch_conv_depthwise3d_backward_out
-torch_conv_depthwise3d_backward_out <- function(grad_input, grad_weight, grad_bias, grad_output, self, weight, kernel_size, stride, padding, dilation) {
-  args <- mget(x = c("grad_input", "grad_weight", "grad_bias", "grad_output", "self", "weight", "kernel_size", "stride", "padding", "dilation"))
-expected_types <- list(grad_input = "Tensor", grad_weight = "Tensor", grad_bias = "Tensor", 
-    grad_output = "Tensor", self = "Tensor", weight = "Tensor", 
-    kernel_size = "IntArrayRef", stride = "IntArrayRef", padding = "IntArrayRef", 
-    dilation = "IntArrayRef")
-nd_args <- c("grad_input", "grad_weight", "grad_bias", "grad_output", "self", 
-"weight", "kernel_size", "stride", "padding", "dilation")
-return_types <- list(list("Tensor", "Tensor", "Tensor"))
-call_c_function(
-fun_name = 'conv_depthwise3d_backward_out',
-args = args,
-expected_types = expected_types,
-nd_args = nd_args,
-return_types = return_types,
-fun_type = 'namespace'
-)
-}
-
-
 #' @rdname torch_conv_tbc
 torch_conv_tbc <- function(self, weight, bias, pad = 0L) {
   args <- mget(x = c("self", "weight", "bias", "pad"))
@@ -8491,6 +9042,28 @@ nd_args <- c("input", "weight", "bias", "stride", "padding", "dilation",
 return_types <- list(list('Tensor'))
 call_c_function(
 fun_name = 'convolution',
+args = args,
+expected_types = expected_types,
+nd_args = nd_args,
+return_types = return_types,
+fun_type = 'namespace'
+)
+}
+
+
+#' @rdname torch_convolution_backward
+torch_convolution_backward <- function(grad_output, input, weight, bias_sizes, stride, padding, dilation, transposed, output_padding, groups, output_mask) {
+  args <- mget(x = c("grad_output", "input", "weight", "bias_sizes", "stride", "padding", "dilation", "transposed", "output_padding", "groups", "output_mask"))
+expected_types <- list(grad_output = "Tensor", input = "Tensor", weight = "Tensor", 
+    bias_sizes = "IntArrayRef", stride = "IntArrayRef", padding = "IntArrayRef", 
+    dilation = "IntArrayRef", transposed = "bool", output_padding = "IntArrayRef", 
+    groups = "int64_t", output_mask = "::std::array<bool,3>")
+nd_args <- c("grad_output", "input", "weight", "bias_sizes", "stride", "padding", 
+"dilation", "transposed", "output_padding", "groups", "output_mask"
+)
+return_types <- list(list("Tensor", "Tensor", "Tensor"))
+call_c_function(
+fun_name = 'convolution_backward',
 args = args,
 expected_types = expected_types,
 nd_args = nd_args,
@@ -8930,13 +9503,13 @@ fun_type = 'namespace'
 
 
 #' @rdname torch_cudnn_convolution
-torch_cudnn_convolution <- function(self, weight, bias, padding, stride, dilation, groups, benchmark, allow_tf32, deterministic) {
-  args <- mget(x = c("self", "weight", "bias", "padding", "stride", "dilation", "groups", "benchmark", "allow_tf32", "deterministic"))
-expected_types <- list(self = "Tensor", weight = "Tensor", bias = "Tensor", padding = "IntArrayRef", 
+torch_cudnn_convolution <- function(self, weight, padding, stride, dilation, groups, benchmark, deterministic, allow_tf32) {
+  args <- mget(x = c("self", "weight", "padding", "stride", "dilation", "groups", "benchmark", "deterministic", "allow_tf32"))
+expected_types <- list(self = "Tensor", weight = "Tensor", padding = "IntArrayRef", 
     stride = "IntArrayRef", dilation = "IntArrayRef", groups = "int64_t", 
-    benchmark = "bool", allow_tf32 = "bool", deterministic = "bool")
-nd_args <- c("self", "weight", "bias", "padding", "stride", "dilation", 
-"groups", "benchmark", "allow_tf32", "deterministic")
+    benchmark = "bool", deterministic = "bool", allow_tf32 = "bool")
+nd_args <- c("self", "weight", "padding", "stride", "dilation", "groups", 
+"benchmark", "deterministic", "allow_tf32")
 return_types <- list(list('Tensor'))
 call_c_function(
 fun_name = 'cudnn_convolution',
@@ -8969,72 +9542,6 @@ fun_type = 'namespace'
 }
 
 
-#' @rdname torch_cudnn_convolution_backward
-torch_cudnn_convolution_backward <- function(self, grad_output, weight, padding, stride, dilation, groups, benchmark, deterministic, allow_tf32, output_mask) {
-  args <- mget(x = c("self", "grad_output", "weight", "padding", "stride", "dilation", "groups", "benchmark", "deterministic", "allow_tf32", "output_mask"))
-expected_types <- list(self = "Tensor", grad_output = "Tensor", weight = "Tensor", 
-    padding = "IntArrayRef", stride = "IntArrayRef", dilation = "IntArrayRef", 
-    groups = "int64_t", benchmark = "bool", deterministic = "bool", 
-    allow_tf32 = "bool", output_mask = "::std::array<bool,2>")
-nd_args <- c("self", "grad_output", "weight", "padding", "stride", "dilation", 
-"groups", "benchmark", "deterministic", "allow_tf32", "output_mask"
-)
-return_types <- list(list("Tensor", "Tensor"))
-call_c_function(
-fun_name = 'cudnn_convolution_backward',
-args = args,
-expected_types = expected_types,
-nd_args = nd_args,
-return_types = return_types,
-fun_type = 'namespace'
-)
-}
-
-
-#' @rdname torch_cudnn_convolution_backward_input
-torch_cudnn_convolution_backward_input <- function(self_size, grad_output, weight, padding, stride, dilation, groups, benchmark, deterministic, allow_tf32) {
-  args <- mget(x = c("self_size", "grad_output", "weight", "padding", "stride", "dilation", "groups", "benchmark", "deterministic", "allow_tf32"))
-expected_types <- list(self_size = "IntArrayRef", grad_output = "Tensor", weight = "Tensor", 
-    padding = "IntArrayRef", stride = "IntArrayRef", dilation = "IntArrayRef", 
-    groups = "int64_t", benchmark = "bool", deterministic = "bool", 
-    allow_tf32 = "bool")
-nd_args <- c("self_size", "grad_output", "weight", "padding", "stride", 
-"dilation", "groups", "benchmark", "deterministic", "allow_tf32"
-)
-return_types <- list(list('Tensor'))
-call_c_function(
-fun_name = 'cudnn_convolution_backward_input',
-args = args,
-expected_types = expected_types,
-nd_args = nd_args,
-return_types = return_types,
-fun_type = 'namespace'
-)
-}
-
-
-#' @rdname torch_cudnn_convolution_backward_weight
-torch_cudnn_convolution_backward_weight <- function(weight_size, grad_output, self, padding, stride, dilation, groups, benchmark, deterministic, allow_tf32) {
-  args <- mget(x = c("weight_size", "grad_output", "self", "padding", "stride", "dilation", "groups", "benchmark", "deterministic", "allow_tf32"))
-expected_types <- list(weight_size = "IntArrayRef", grad_output = "Tensor", self = "Tensor", 
-    padding = "IntArrayRef", stride = "IntArrayRef", dilation = "IntArrayRef", 
-    groups = "int64_t", benchmark = "bool", deterministic = "bool", 
-    allow_tf32 = "bool")
-nd_args <- c("weight_size", "grad_output", "self", "padding", "stride", 
-"dilation", "groups", "benchmark", "deterministic", "allow_tf32"
-)
-return_types <- list(list('Tensor'))
-call_c_function(
-fun_name = 'cudnn_convolution_backward_weight',
-args = args,
-expected_types = expected_types,
-nd_args = nd_args,
-return_types = return_types,
-fun_type = 'namespace'
-)
-}
-
-
 #' @rdname torch_cudnn_convolution_relu
 torch_cudnn_convolution_relu <- function(self, weight, bias, stride, padding, dilation, groups) {
   args <- mget(x = c("self", "weight", "bias", "stride", "padding", "dilation", "groups"))
@@ -9055,83 +9562,17 @@ fun_type = 'namespace'
 
 
 #' @rdname torch_cudnn_convolution_transpose
-torch_cudnn_convolution_transpose <- function(self, weight, bias, padding, output_padding, stride, dilation, groups, benchmark, allow_tf32, deterministic) {
-  args <- mget(x = c("self", "weight", "bias", "padding", "output_padding", "stride", "dilation", "groups", "benchmark", "allow_tf32", "deterministic"))
-expected_types <- list(self = "Tensor", weight = "Tensor", bias = "Tensor", padding = "IntArrayRef", 
+torch_cudnn_convolution_transpose <- function(self, weight, padding, output_padding, stride, dilation, groups, benchmark, deterministic, allow_tf32) {
+  args <- mget(x = c("self", "weight", "padding", "output_padding", "stride", "dilation", "groups", "benchmark", "deterministic", "allow_tf32"))
+expected_types <- list(self = "Tensor", weight = "Tensor", padding = "IntArrayRef", 
     output_padding = "IntArrayRef", stride = "IntArrayRef", dilation = "IntArrayRef", 
-    groups = "int64_t", benchmark = "bool", allow_tf32 = "bool", 
-    deterministic = "bool")
-nd_args <- c("self", "weight", "bias", "padding", "output_padding", "stride", 
-"dilation", "groups", "benchmark", "allow_tf32", "deterministic"
-)
+    groups = "int64_t", benchmark = "bool", deterministic = "bool", 
+    allow_tf32 = "bool")
+nd_args <- c("self", "weight", "padding", "output_padding", "stride", "dilation", 
+"groups", "benchmark", "deterministic", "allow_tf32")
 return_types <- list(list('Tensor'))
 call_c_function(
 fun_name = 'cudnn_convolution_transpose',
-args = args,
-expected_types = expected_types,
-nd_args = nd_args,
-return_types = return_types,
-fun_type = 'namespace'
-)
-}
-
-
-#' @rdname torch_cudnn_convolution_transpose_backward
-torch_cudnn_convolution_transpose_backward <- function(self, grad_output, weight, padding, output_padding, stride, dilation, groups, benchmark, deterministic, allow_tf32, output_mask) {
-  args <- mget(x = c("self", "grad_output", "weight", "padding", "output_padding", "stride", "dilation", "groups", "benchmark", "deterministic", "allow_tf32", "output_mask"))
-expected_types <- list(self = "Tensor", grad_output = "Tensor", weight = "Tensor", 
-    padding = "IntArrayRef", output_padding = "IntArrayRef", 
-    stride = "IntArrayRef", dilation = "IntArrayRef", groups = "int64_t", 
-    benchmark = "bool", deterministic = "bool", allow_tf32 = "bool", 
-    output_mask = "::std::array<bool,2>")
-nd_args <- c("self", "grad_output", "weight", "padding", "output_padding", 
-"stride", "dilation", "groups", "benchmark", "deterministic", 
-"allow_tf32", "output_mask")
-return_types <- list(list("Tensor", "Tensor"))
-call_c_function(
-fun_name = 'cudnn_convolution_transpose_backward',
-args = args,
-expected_types = expected_types,
-nd_args = nd_args,
-return_types = return_types,
-fun_type = 'namespace'
-)
-}
-
-
-#' @rdname torch_cudnn_convolution_transpose_backward_input
-torch_cudnn_convolution_transpose_backward_input <- function(grad_output, weight, padding, stride, dilation, groups, benchmark, deterministic, allow_tf32) {
-  args <- mget(x = c("grad_output", "weight", "padding", "stride", "dilation", "groups", "benchmark", "deterministic", "allow_tf32"))
-expected_types <- list(grad_output = "Tensor", weight = "Tensor", padding = "IntArrayRef", 
-    stride = "IntArrayRef", dilation = "IntArrayRef", groups = "int64_t", 
-    benchmark = "bool", deterministic = "bool", allow_tf32 = "bool")
-nd_args <- c("grad_output", "weight", "padding", "stride", "dilation", "groups", 
-"benchmark", "deterministic", "allow_tf32")
-return_types <- list(list('Tensor'))
-call_c_function(
-fun_name = 'cudnn_convolution_transpose_backward_input',
-args = args,
-expected_types = expected_types,
-nd_args = nd_args,
-return_types = return_types,
-fun_type = 'namespace'
-)
-}
-
-
-#' @rdname torch_cudnn_convolution_transpose_backward_weight
-torch_cudnn_convolution_transpose_backward_weight <- function(weight_size, grad_output, self, padding, stride, dilation, groups, benchmark, deterministic, allow_tf32) {
-  args <- mget(x = c("weight_size", "grad_output", "self", "padding", "stride", "dilation", "groups", "benchmark", "deterministic", "allow_tf32"))
-expected_types <- list(weight_size = "IntArrayRef", grad_output = "Tensor", self = "Tensor", 
-    padding = "IntArrayRef", stride = "IntArrayRef", dilation = "IntArrayRef", 
-    groups = "int64_t", benchmark = "bool", deterministic = "bool", 
-    allow_tf32 = "bool")
-nd_args <- c("weight_size", "grad_output", "self", "padding", "stride", 
-"dilation", "groups", "benchmark", "deterministic", "allow_tf32"
-)
-return_types <- list(list('Tensor'))
-call_c_function(
-fun_name = 'cudnn_convolution_transpose_backward_weight',
 args = args,
 expected_types = expected_types,
 nd_args = nd_args,
@@ -9614,6 +10055,24 @@ nd_args <- c("grad_output", "input_sizes", "offset", "dim1", "dim2")
 return_types <- list(list('Tensor'))
 call_c_function(
 fun_name = 'diagonal_backward',
+args = args,
+expected_types = expected_types,
+nd_args = nd_args,
+return_types = return_types,
+fun_type = 'namespace'
+)
+}
+
+
+#' @rdname torch_diagonal_scatter
+torch_diagonal_scatter <- function(self, src, offset = 0L, dim1 = 1L, dim2 = 2L) {
+  args <- mget(x = c("self", "src", "offset", "dim1", "dim2"))
+expected_types <- list(self = "Tensor", src = "Tensor", offset = "int64_t", dim1 = "int64_t", 
+    dim2 = "int64_t")
+nd_args <- c("self", "src")
+return_types <- list(list('Tensor'))
+call_c_function(
+fun_name = 'diagonal_scatter',
 args = args,
 expected_types = expected_types,
 nd_args = nd_args,
@@ -11110,6 +11569,78 @@ fun_type = 'namespace'
 }
 
 
+#' @rdname torch_fft_hfft2
+torch_fft_hfft2 <- function(self, s = NULL, dim = c(-2,-1), norm = NULL) {
+  args <- mget(x = c("self", "s", "dim", "norm"))
+expected_types <- list(self = "Tensor", s = "IntArrayRef", dim = "IntArrayRef", 
+    norm = "c10::string_view")
+nd_args <- "self"
+return_types <- list(list('Tensor'))
+call_c_function(
+fun_name = 'fft_hfft2',
+args = args,
+expected_types = expected_types,
+nd_args = nd_args,
+return_types = return_types,
+fun_type = 'namespace'
+)
+}
+
+
+#' @rdname torch_fft_hfft2_out
+torch_fft_hfft2_out <- function(out, self, s = NULL, dim = c(-2,-1), norm = NULL) {
+  args <- mget(x = c("out", "self", "s", "dim", "norm"))
+expected_types <- list(out = "Tensor", self = "Tensor", s = "IntArrayRef", dim = "IntArrayRef", 
+    norm = "c10::string_view")
+nd_args <- c("out", "self")
+return_types <- list(list('Tensor'))
+call_c_function(
+fun_name = 'fft_hfft2_out',
+args = args,
+expected_types = expected_types,
+nd_args = nd_args,
+return_types = return_types,
+fun_type = 'namespace'
+)
+}
+
+
+#' @rdname torch_fft_hfftn
+torch_fft_hfftn <- function(self, s = NULL, dim = NULL, norm = NULL) {
+  args <- mget(x = c("self", "s", "dim", "norm"))
+expected_types <- list(self = "Tensor", s = "IntArrayRef", dim = "IntArrayRef", 
+    norm = "c10::string_view")
+nd_args <- "self"
+return_types <- list(list('Tensor'))
+call_c_function(
+fun_name = 'fft_hfftn',
+args = args,
+expected_types = expected_types,
+nd_args = nd_args,
+return_types = return_types,
+fun_type = 'namespace'
+)
+}
+
+
+#' @rdname torch_fft_hfftn_out
+torch_fft_hfftn_out <- function(out, self, s = NULL, dim = NULL, norm = NULL) {
+  args <- mget(x = c("out", "self", "s", "dim", "norm"))
+expected_types <- list(out = "Tensor", self = "Tensor", s = "IntArrayRef", dim = "IntArrayRef", 
+    norm = "c10::string_view")
+nd_args <- c("out", "self")
+return_types <- list(list('Tensor'))
+call_c_function(
+fun_name = 'fft_hfftn_out',
+args = args,
+expected_types = expected_types,
+nd_args = nd_args,
+return_types = return_types,
+fun_type = 'namespace'
+)
+}
+
+
 #' @rdname .torch_fft_ifft
 .torch_fft_ifft <- function(self, n = NULL, dim = -1L, norm = NULL) {
   args <- mget(x = c("self", "n", "dim", "norm"))
@@ -11260,6 +11791,78 @@ nd_args <- c("out", "self")
 return_types <- list(list('Tensor'))
 call_c_function(
 fun_name = 'fft_ihfft_out',
+args = args,
+expected_types = expected_types,
+nd_args = nd_args,
+return_types = return_types,
+fun_type = 'namespace'
+)
+}
+
+
+#' @rdname torch_fft_ihfft2
+torch_fft_ihfft2 <- function(self, s = NULL, dim = c(-2,-1), norm = NULL) {
+  args <- mget(x = c("self", "s", "dim", "norm"))
+expected_types <- list(self = "Tensor", s = "IntArrayRef", dim = "IntArrayRef", 
+    norm = "c10::string_view")
+nd_args <- "self"
+return_types <- list(list('Tensor'))
+call_c_function(
+fun_name = 'fft_ihfft2',
+args = args,
+expected_types = expected_types,
+nd_args = nd_args,
+return_types = return_types,
+fun_type = 'namespace'
+)
+}
+
+
+#' @rdname torch_fft_ihfft2_out
+torch_fft_ihfft2_out <- function(out, self, s = NULL, dim = c(-2,-1), norm = NULL) {
+  args <- mget(x = c("out", "self", "s", "dim", "norm"))
+expected_types <- list(out = "Tensor", self = "Tensor", s = "IntArrayRef", dim = "IntArrayRef", 
+    norm = "c10::string_view")
+nd_args <- c("out", "self")
+return_types <- list(list('Tensor'))
+call_c_function(
+fun_name = 'fft_ihfft2_out',
+args = args,
+expected_types = expected_types,
+nd_args = nd_args,
+return_types = return_types,
+fun_type = 'namespace'
+)
+}
+
+
+#' @rdname torch_fft_ihfftn
+torch_fft_ihfftn <- function(self, s = NULL, dim = NULL, norm = NULL) {
+  args <- mget(x = c("self", "s", "dim", "norm"))
+expected_types <- list(self = "Tensor", s = "IntArrayRef", dim = "IntArrayRef", 
+    norm = "c10::string_view")
+nd_args <- "self"
+return_types <- list(list('Tensor'))
+call_c_function(
+fun_name = 'fft_ihfftn',
+args = args,
+expected_types = expected_types,
+nd_args = nd_args,
+return_types = return_types,
+fun_type = 'namespace'
+)
+}
+
+
+#' @rdname torch_fft_ihfftn_out
+torch_fft_ihfftn_out <- function(out, self, s = NULL, dim = NULL, norm = NULL) {
+  args <- mget(x = c("out", "self", "s", "dim", "norm"))
+expected_types <- list(out = "Tensor", self = "Tensor", s = "IntArrayRef", dim = "IntArrayRef", 
+    norm = "c10::string_view")
+nd_args <- c("out", "self")
+return_types <- list(list('Tensor'))
+call_c_function(
+fun_name = 'fft_ihfftn_out',
 args = args,
 expected_types = expected_types,
 nd_args = nd_args,
@@ -12734,13 +13337,13 @@ fun_type = 'namespace'
 
 
 #' @rdname torch_grid_sampler_2d_backward
-torch_grid_sampler_2d_backward <- function(grad_output, input, grid, interpolation_mode, padding_mode, align_corners) {
-  args <- mget(x = c("grad_output", "input", "grid", "interpolation_mode", "padding_mode", "align_corners"))
+torch_grid_sampler_2d_backward <- function(grad_output, input, grid, interpolation_mode, padding_mode, align_corners, output_mask) {
+  args <- mget(x = c("grad_output", "input", "grid", "interpolation_mode", "padding_mode", "align_corners", "output_mask"))
 expected_types <- list(grad_output = "Tensor", input = "Tensor", grid = "Tensor", 
     interpolation_mode = "int64_t", padding_mode = "int64_t", 
-    align_corners = "bool")
+    align_corners = "bool", output_mask = "::std::array<bool,2>")
 nd_args <- c("grad_output", "input", "grid", "interpolation_mode", "padding_mode", 
-"align_corners")
+"align_corners", "output_mask")
 return_types <- list(list("Tensor", "Tensor"))
 call_c_function(
 fun_name = 'grid_sampler_2d_backward',
@@ -13778,10 +14381,28 @@ torch_index_add <- function(self, dim, index, source, alpha = 1L) {
   args <- mget(x = c("self", "dim", "index", "source", "alpha"))
 expected_types <- list(self = "Tensor", dim = c("int64_t", "Dimname"), index = "Tensor", 
     source = "Tensor", alpha = "Scalar")
-nd_args <- c("self", "dim", "index", "source", "alpha")
+nd_args <- c("self", "dim", "index", "source")
 return_types <- list(list('Tensor'))
 call_c_function(
 fun_name = 'index_add',
+args = args,
+expected_types = expected_types,
+nd_args = nd_args,
+return_types = return_types,
+fun_type = 'namespace'
+)
+}
+
+
+#' @rdname torch_index_add_out
+torch_index_add_out <- function(out, self, dim, index, source, alpha = 1L) {
+  args <- mget(x = c("out", "self", "dim", "index", "source", "alpha"))
+expected_types <- list(out = "Tensor", self = "Tensor", dim = "int64_t", index = "Tensor", 
+    source = "Tensor", alpha = "Scalar")
+nd_args <- c("out", "self", "dim", "index", "source")
+return_types <- list(list('Tensor'))
+call_c_function(
+fun_name = 'index_add_out',
 args = args,
 expected_types = expected_types,
 nd_args = nd_args,
@@ -15084,6 +15705,40 @@ fun_type = 'namespace'
 }
 
 
+#' @rdname torch_linalg_cross
+torch_linalg_cross <- function(self, other, dim = -1L) {
+  args <- mget(x = c("self", "other", "dim"))
+expected_types <- list(self = "Tensor", other = "Tensor", dim = "int64_t")
+nd_args <- c("self", "other")
+return_types <- list(list('Tensor'))
+call_c_function(
+fun_name = 'linalg_cross',
+args = args,
+expected_types = expected_types,
+nd_args = nd_args,
+return_types = return_types,
+fun_type = 'namespace'
+)
+}
+
+
+#' @rdname torch_linalg_cross_out
+torch_linalg_cross_out <- function(out, self, other, dim = -1L) {
+  args <- mget(x = c("out", "self", "other", "dim"))
+expected_types <- list(out = "Tensor", self = "Tensor", other = "Tensor", dim = "int64_t")
+nd_args <- c("out", "self", "other")
+return_types <- list(list('Tensor'))
+call_c_function(
+fun_name = 'linalg_cross_out',
+args = args,
+expected_types = expected_types,
+nd_args = nd_args,
+return_types = return_types,
+fun_type = 'namespace'
+)
+}
+
+
 #' @rdname torch_linalg_det
 torch_linalg_det <- function(self) {
   args <- mget(x = c("self"))
@@ -15109,6 +15764,23 @@ nd_args <- c("out", "self")
 return_types <- list(list('Tensor'))
 call_c_function(
 fun_name = 'linalg_det_out',
+args = args,
+expected_types = expected_types,
+nd_args = nd_args,
+return_types = return_types,
+fun_type = 'namespace'
+)
+}
+
+
+#' @rdname torch_linalg_diagonal
+torch_linalg_diagonal <- function(A, offset = 0L, dim1 = -2L, dim2 = -1L) {
+  args <- mget(x = c("A", "offset", "dim1", "dim2"))
+expected_types <- list(A = "Tensor", offset = "int64_t", dim1 = "int64_t", dim2 = "int64_t")
+nd_args <- "A"
+return_types <- list(list('Tensor'))
+call_c_function(
+fun_name = 'linalg_diagonal',
 args = args,
 expected_types = expected_types,
 nd_args = nd_args,
@@ -15394,6 +16066,75 @@ fun_type = 'namespace'
 }
 
 
+#' @rdname torch_linalg_lu_factor
+torch_linalg_lu_factor <- function(A, pivot = TRUE) {
+  args <- mget(x = c("A", "pivot"))
+expected_types <- list(A = "Tensor", pivot = "bool")
+nd_args <- "A"
+return_types <- list(list("Tensor", "Tensor"))
+call_c_function(
+fun_name = 'linalg_lu_factor',
+args = args,
+expected_types = expected_types,
+nd_args = nd_args,
+return_types = return_types,
+fun_type = 'namespace'
+)
+}
+
+
+#' @rdname torch_linalg_lu_factor_ex
+torch_linalg_lu_factor_ex <- function(A, pivot = TRUE, check_errors = FALSE) {
+  args <- mget(x = c("A", "pivot", "check_errors"))
+expected_types <- list(A = "Tensor", pivot = "bool", check_errors = "bool")
+nd_args <- "A"
+return_types <- list(list("Tensor", "Tensor", "Tensor"))
+call_c_function(
+fun_name = 'linalg_lu_factor_ex',
+args = args,
+expected_types = expected_types,
+nd_args = nd_args,
+return_types = return_types,
+fun_type = 'namespace'
+)
+}
+
+
+#' @rdname torch_linalg_lu_factor_ex_out
+torch_linalg_lu_factor_ex_out <- function(LU, pivots, info, A, pivot = TRUE, check_errors = FALSE) {
+  args <- mget(x = c("LU", "pivots", "info", "A", "pivot", "check_errors"))
+expected_types <- list(LU = "Tensor", pivots = "Tensor", info = "Tensor", A = "Tensor", 
+    pivot = "bool", check_errors = "bool")
+nd_args <- c("LU", "pivots", "info", "A")
+return_types <- list(list("Tensor", "Tensor", "Tensor"))
+call_c_function(
+fun_name = 'linalg_lu_factor_ex_out',
+args = args,
+expected_types = expected_types,
+nd_args = nd_args,
+return_types = return_types,
+fun_type = 'namespace'
+)
+}
+
+
+#' @rdname torch_linalg_lu_factor_out
+torch_linalg_lu_factor_out <- function(LU, pivots, A, pivot = TRUE) {
+  args <- mget(x = c("LU", "pivots", "A", "pivot"))
+expected_types <- list(LU = "Tensor", pivots = "Tensor", A = "Tensor", pivot = "bool")
+nd_args <- c("LU", "pivots", "A")
+return_types <- list(list("Tensor", "Tensor"))
+call_c_function(
+fun_name = 'linalg_lu_factor_out',
+args = args,
+expected_types = expected_types,
+nd_args = nd_args,
+return_types = return_types,
+fun_type = 'namespace'
+)
+}
+
+
 #' @rdname torch_linalg_matmul
 torch_linalg_matmul <- function(self, other) {
   args <- mget(x = c("self", "other"))
@@ -15419,6 +16160,23 @@ nd_args <- c("out", "self", "other")
 return_types <- list(list('Tensor'))
 call_c_function(
 fun_name = 'linalg_matmul_out',
+args = args,
+expected_types = expected_types,
+nd_args = nd_args,
+return_types = return_types,
+fun_type = 'namespace'
+)
+}
+
+
+#' @rdname torch_linalg_matrix_exp
+torch_linalg_matrix_exp <- function(self) {
+  args <- mget(x = c("self"))
+expected_types <- list(self = "Tensor")
+nd_args <- "self"
+return_types <- list(list('Tensor'))
+call_c_function(
+fun_name = 'linalg_matrix_exp',
 args = args,
 expected_types = expected_types,
 nd_args = nd_args,
@@ -15499,11 +16257,12 @@ fun_type = 'namespace'
 
 
 #' @rdname torch_linalg_matrix_rank
-torch_linalg_matrix_rank <- function(input, self, tol = NULL, hermitian = FALSE) {
-  args <- mget(x = c("input", "self", "tol", "hermitian"))
-expected_types <- list(input = "Tensor", self = "Tensor", tol = c("double", "Tensor"
-), hermitian = "bool")
-nd_args <- c("input", "self", "tol")
+torch_linalg_matrix_rank <- function(input, self, atol = list(), tol, rtol = list(), hermitian = FALSE) {
+  args <- mget(x = c("input", "self", "atol", "tol", "rtol", "hermitian"))
+expected_types <- list(input = "Tensor", self = "Tensor", atol = c("Tensor", "double"
+), tol = c("double", "Tensor"), rtol = c("Tensor", "double"), 
+    hermitian = "bool")
+nd_args <- c("input", "self", "atol", "tol", "rtol")
 return_types <- list(list('Tensor'))
 call_c_function(
 fun_name = 'linalg_matrix_rank',
@@ -15517,11 +16276,12 @@ fun_type = 'namespace'
 
 
 #' @rdname torch_linalg_matrix_rank_out
-torch_linalg_matrix_rank_out <- function(out, input, self, tol = NULL, hermitian = FALSE) {
-  args <- mget(x = c("out", "input", "self", "tol", "hermitian"))
-expected_types <- list(out = "Tensor", input = "Tensor", self = "Tensor", tol = c("double", 
-"Tensor"), hermitian = "bool")
-nd_args <- c("out", "input", "self", "tol")
+torch_linalg_matrix_rank_out <- function(out, input, self, atol = list(), tol, rtol = list(), hermitian = FALSE) {
+  args <- mget(x = c("out", "input", "self", "atol", "tol", "rtol", "hermitian"))
+expected_types <- list(out = "Tensor", input = "Tensor", self = "Tensor", atol = c("Tensor", 
+"double"), tol = c("double", "Tensor"), rtol = c("Tensor", "double"
+), hermitian = "bool")
+nd_args <- c("out", "input", "self", "atol", "tol", "rtol")
 return_types <- list(list('Tensor'))
 call_c_function(
 fun_name = 'linalg_matrix_rank_out',
@@ -15605,10 +16365,11 @@ fun_type = 'namespace'
 
 
 #' @rdname torch_linalg_pinv
-torch_linalg_pinv <- function(self, rcond = 1e-15, hermitian = FALSE) {
-  args <- mget(x = c("self", "rcond", "hermitian"))
-expected_types <- list(self = "Tensor", rcond = c("double", "Tensor"), hermitian = "bool")
-nd_args <- c("self", "rcond")
+torch_linalg_pinv <- function(self, atol = list(), rcond, rtol = list(), hermitian = FALSE) {
+  args <- mget(x = c("self", "atol", "rcond", "rtol", "hermitian"))
+expected_types <- list(self = "Tensor", atol = c("Tensor", "double"), rcond = c("double", 
+"Tensor"), rtol = c("Tensor", "double"), hermitian = "bool")
+nd_args <- c("self", "atol", "rcond", "rtol")
 return_types <- list(list('Tensor'))
 call_c_function(
 fun_name = 'linalg_pinv',
@@ -15622,11 +16383,12 @@ fun_type = 'namespace'
 
 
 #' @rdname torch_linalg_pinv_out
-torch_linalg_pinv_out <- function(out, self, rcond = 1e-15, hermitian = FALSE) {
-  args <- mget(x = c("out", "self", "rcond", "hermitian"))
-expected_types <- list(out = "Tensor", self = "Tensor", rcond = c("double", "Tensor"
+torch_linalg_pinv_out <- function(out, self, atol = list(), rcond, rtol = list(), hermitian = FALSE) {
+  args <- mget(x = c("out", "self", "atol", "rcond", "rtol", "hermitian"))
+expected_types <- list(out = "Tensor", self = "Tensor", atol = c("Tensor", "double"
+), rcond = c("double", "Tensor"), rtol = c("Tensor", "double"
 ), hermitian = "bool")
-nd_args <- c("out", "self", "rcond")
+nd_args <- c("out", "self", "atol", "rcond", "rtol")
 return_types <- list(list('Tensor'))
 call_c_function(
 fun_name = 'linalg_pinv_out',
@@ -15741,11 +16503,47 @@ fun_type = 'namespace'
 }
 
 
+#' @rdname torch_linalg_solve_triangular
+torch_linalg_solve_triangular <- function(self, B, upper, left = TRUE, unitriangular = FALSE) {
+  args <- mget(x = c("self", "B", "upper", "left", "unitriangular"))
+expected_types <- list(self = "Tensor", B = "Tensor", upper = "bool", left = "bool", 
+    unitriangular = "bool")
+nd_args <- c("self", "B", "upper")
+return_types <- list(list('Tensor'))
+call_c_function(
+fun_name = 'linalg_solve_triangular',
+args = args,
+expected_types = expected_types,
+nd_args = nd_args,
+return_types = return_types,
+fun_type = 'namespace'
+)
+}
+
+
+#' @rdname torch_linalg_solve_triangular_out
+torch_linalg_solve_triangular_out <- function(out, self, B, upper, left = TRUE, unitriangular = FALSE) {
+  args <- mget(x = c("out", "self", "B", "upper", "left", "unitriangular"))
+expected_types <- list(out = "Tensor", self = "Tensor", B = "Tensor", upper = "bool", 
+    left = "bool", unitriangular = "bool")
+nd_args <- c("out", "self", "B", "upper")
+return_types <- list(list('Tensor'))
+call_c_function(
+fun_name = 'linalg_solve_triangular_out',
+args = args,
+expected_types = expected_types,
+nd_args = nd_args,
+return_types = return_types,
+fun_type = 'namespace'
+)
+}
+
+
 #' @rdname torch_linalg_svd
-torch_linalg_svd <- function(self, full_matrices = TRUE) {
-  args <- mget(x = c("self", "full_matrices"))
-expected_types <- list(self = "Tensor", full_matrices = "bool")
-nd_args <- "self"
+torch_linalg_svd <- function(A, full_matrices = TRUE) {
+  args <- mget(x = c("A", "full_matrices"))
+expected_types <- list(A = "Tensor", full_matrices = "bool")
+nd_args <- "A"
 return_types <- list(list("Tensor", "Tensor", "Tensor"))
 call_c_function(
 fun_name = 'linalg_svd',
@@ -15759,11 +16557,11 @@ fun_type = 'namespace'
 
 
 #' @rdname torch_linalg_svd_out
-torch_linalg_svd_out <- function(U, S, Vh, self, full_matrices = TRUE) {
-  args <- mget(x = c("U", "S", "Vh", "self", "full_matrices"))
-expected_types <- list(U = "Tensor", S = "Tensor", Vh = "Tensor", self = "Tensor", 
+torch_linalg_svd_out <- function(U, S, Vh, A, full_matrices = TRUE) {
+  args <- mget(x = c("U", "S", "Vh", "A", "full_matrices"))
+expected_types <- list(U = "Tensor", S = "Tensor", Vh = "Tensor", A = "Tensor", 
     full_matrices = "bool")
-nd_args <- c("U", "S", "Vh", "self")
+nd_args <- c("U", "S", "Vh", "A")
 return_types <- list(list("Tensor", "Tensor", "Tensor"))
 call_c_function(
 fun_name = 'linalg_svd_out',
@@ -15777,10 +16575,10 @@ fun_type = 'namespace'
 
 
 #' @rdname torch_linalg_svdvals
-torch_linalg_svdvals <- function(input) {
-  args <- mget(x = c("input"))
-expected_types <- list(input = "Tensor")
-nd_args <- "input"
+torch_linalg_svdvals <- function(A) {
+  args <- mget(x = c("A"))
+expected_types <- list(A = "Tensor")
+nd_args <- "A"
 return_types <- list(list('Tensor'))
 call_c_function(
 fun_name = 'linalg_svdvals',
@@ -15794,10 +16592,10 @@ fun_type = 'namespace'
 
 
 #' @rdname torch_linalg_svdvals_out
-torch_linalg_svdvals_out <- function(out, input) {
-  args <- mget(x = c("out", "input"))
-expected_types <- list(out = "Tensor", input = "Tensor")
-nd_args <- c("out", "input")
+torch_linalg_svdvals_out <- function(out, A) {
+  args <- mget(x = c("out", "A"))
+expected_types <- list(out = "Tensor", A = "Tensor")
+nd_args <- c("out", "A")
 return_types <- list(list('Tensor'))
 call_c_function(
 fun_name = 'linalg_svdvals_out',
@@ -15949,10 +16747,10 @@ fun_type = 'namespace'
 
 
 #' @rdname .torch_linspace
-.torch_linspace <- function(start, end, steps = NULL, options = list()) {
+.torch_linspace <- function(start, end, steps, options = list()) {
   args <- mget(x = c("start", "end", "steps", "options"))
 expected_types <- list(start = "Scalar", end = "Scalar", steps = "int64_t", options = "TensorOptions")
-nd_args <- c("start", "end")
+nd_args <- c("start", "end", "steps")
 return_types <- list(list('Tensor'))
 call_c_function(
 fun_name = 'linspace',
@@ -15966,10 +16764,10 @@ fun_type = 'namespace'
 
 
 #' @rdname torch_linspace_out
-torch_linspace_out <- function(out, start, end, steps = NULL) {
+torch_linspace_out <- function(out, start, end, steps) {
   args <- mget(x = c("out", "start", "end", "steps"))
 expected_types <- list(out = "Tensor", start = "Scalar", end = "Scalar", steps = "int64_t")
-nd_args <- c("out", "start", "end")
+nd_args <- c("out", "start", "end", "steps")
 return_types <- list(list('Tensor'))
 call_c_function(
 fun_name = 'linspace_out',
@@ -16649,11 +17447,11 @@ fun_type = 'namespace'
 
 
 #' @rdname .torch_logspace
-.torch_logspace <- function(start, end, steps = NULL, base = 10, options = list()) {
+.torch_logspace <- function(start, end, steps, base = 10, options = list()) {
   args <- mget(x = c("start", "end", "steps", "base", "options"))
 expected_types <- list(start = "Scalar", end = "Scalar", steps = "int64_t", base = "double", 
     options = "TensorOptions")
-nd_args <- c("start", "end")
+nd_args <- c("start", "end", "steps")
 return_types <- list(list('Tensor'))
 call_c_function(
 fun_name = 'logspace',
@@ -16667,11 +17465,11 @@ fun_type = 'namespace'
 
 
 #' @rdname torch_logspace_out
-torch_logspace_out <- function(out, start, end, steps = NULL, base = 10) {
+torch_logspace_out <- function(out, start, end, steps, base = 10) {
   args <- mget(x = c("out", "start", "end", "steps", "base"))
 expected_types <- list(out = "Tensor", start = "Scalar", end = "Scalar", steps = "int64_t", 
     base = "double")
-nd_args <- c("out", "start", "end")
+nd_args <- c("out", "start", "end", "steps")
 return_types <- list(list('Tensor'))
 call_c_function(
 fun_name = 'logspace_out',
@@ -17784,84 +18582,6 @@ fun_type = 'namespace'
 }
 
 
-#' @rdname torch_miopen_convolution_backward
-torch_miopen_convolution_backward <- function(self, grad_output, weight, padding, stride, dilation, groups, benchmark, deterministic, output_mask) {
-  args <- mget(x = c("self", "grad_output", "weight", "padding", "stride", "dilation", "groups", "benchmark", "deterministic", "output_mask"))
-expected_types <- list(self = "Tensor", grad_output = "Tensor", weight = "Tensor", 
-    padding = "IntArrayRef", stride = "IntArrayRef", dilation = "IntArrayRef", 
-    groups = "int64_t", benchmark = "bool", deterministic = "bool", 
-    output_mask = "::std::array<bool,3>")
-nd_args <- c("self", "grad_output", "weight", "padding", "stride", "dilation", 
-"groups", "benchmark", "deterministic", "output_mask")
-return_types <- list(list("Tensor", "Tensor", "Tensor"))
-call_c_function(
-fun_name = 'miopen_convolution_backward',
-args = args,
-expected_types = expected_types,
-nd_args = nd_args,
-return_types = return_types,
-fun_type = 'namespace'
-)
-}
-
-
-#' @rdname torch_miopen_convolution_backward_bias
-torch_miopen_convolution_backward_bias <- function(grad_output) {
-  args <- mget(x = c("grad_output"))
-expected_types <- list(grad_output = "Tensor")
-nd_args <- "grad_output"
-return_types <- list(list('Tensor'))
-call_c_function(
-fun_name = 'miopen_convolution_backward_bias',
-args = args,
-expected_types = expected_types,
-nd_args = nd_args,
-return_types = return_types,
-fun_type = 'namespace'
-)
-}
-
-
-#' @rdname torch_miopen_convolution_backward_input
-torch_miopen_convolution_backward_input <- function(self_size, grad_output, weight, padding, stride, dilation, groups, benchmark, deterministic) {
-  args <- mget(x = c("self_size", "grad_output", "weight", "padding", "stride", "dilation", "groups", "benchmark", "deterministic"))
-expected_types <- list(self_size = "IntArrayRef", grad_output = "Tensor", weight = "Tensor", 
-    padding = "IntArrayRef", stride = "IntArrayRef", dilation = "IntArrayRef", 
-    groups = "int64_t", benchmark = "bool", deterministic = "bool")
-nd_args <- c("self_size", "grad_output", "weight", "padding", "stride", 
-"dilation", "groups", "benchmark", "deterministic")
-return_types <- list(list('Tensor'))
-call_c_function(
-fun_name = 'miopen_convolution_backward_input',
-args = args,
-expected_types = expected_types,
-nd_args = nd_args,
-return_types = return_types,
-fun_type = 'namespace'
-)
-}
-
-
-#' @rdname torch_miopen_convolution_backward_weight
-torch_miopen_convolution_backward_weight <- function(weight_size, grad_output, self, padding, stride, dilation, groups, benchmark, deterministic) {
-  args <- mget(x = c("weight_size", "grad_output", "self", "padding", "stride", "dilation", "groups", "benchmark", "deterministic"))
-expected_types <- list(weight_size = "IntArrayRef", grad_output = "Tensor", self = "Tensor", 
-    padding = "IntArrayRef", stride = "IntArrayRef", dilation = "IntArrayRef", 
-    groups = "int64_t", benchmark = "bool", deterministic = "bool")
-nd_args <- c("weight_size", "grad_output", "self", "padding", "stride", 
-"dilation", "groups", "benchmark", "deterministic")
-return_types <- list(list('Tensor'))
-call_c_function(
-fun_name = 'miopen_convolution_backward_weight',
-args = args,
-expected_types = expected_types,
-nd_args = nd_args,
-return_types = return_types,
-fun_type = 'namespace'
-)
-}
-
-
 #' @rdname torch_miopen_convolution_transpose
 torch_miopen_convolution_transpose <- function(self, weight, bias, padding, output_padding, stride, dilation, groups, benchmark, deterministic) {
   args <- mget(x = c("self", "weight", "bias", "padding", "output_padding", "stride", "dilation", "groups", "benchmark", "deterministic"))
@@ -17882,68 +18602,6 @@ fun_type = 'namespace'
 }
 
 
-#' @rdname torch_miopen_convolution_transpose_backward
-torch_miopen_convolution_transpose_backward <- function(self, grad_output, weight, padding, output_padding, stride, dilation, groups, benchmark, deterministic, output_mask) {
-  args <- mget(x = c("self", "grad_output", "weight", "padding", "output_padding", "stride", "dilation", "groups", "benchmark", "deterministic", "output_mask"))
-expected_types <- list(self = "Tensor", grad_output = "Tensor", weight = "Tensor", 
-    padding = "IntArrayRef", output_padding = "IntArrayRef", 
-    stride = "IntArrayRef", dilation = "IntArrayRef", groups = "int64_t", 
-    benchmark = "bool", deterministic = "bool", output_mask = "::std::array<bool,3>")
-nd_args <- c("self", "grad_output", "weight", "padding", "output_padding", 
-"stride", "dilation", "groups", "benchmark", "deterministic", 
-"output_mask")
-return_types <- list(list("Tensor", "Tensor", "Tensor"))
-call_c_function(
-fun_name = 'miopen_convolution_transpose_backward',
-args = args,
-expected_types = expected_types,
-nd_args = nd_args,
-return_types = return_types,
-fun_type = 'namespace'
-)
-}
-
-
-#' @rdname torch_miopen_convolution_transpose_backward_input
-torch_miopen_convolution_transpose_backward_input <- function(grad_output, weight, padding, stride, dilation, groups, benchmark, deterministic) {
-  args <- mget(x = c("grad_output", "weight", "padding", "stride", "dilation", "groups", "benchmark", "deterministic"))
-expected_types <- list(grad_output = "Tensor", weight = "Tensor", padding = "IntArrayRef", 
-    stride = "IntArrayRef", dilation = "IntArrayRef", groups = "int64_t", 
-    benchmark = "bool", deterministic = "bool")
-nd_args <- c("grad_output", "weight", "padding", "stride", "dilation", "groups", 
-"benchmark", "deterministic")
-return_types <- list(list('Tensor'))
-call_c_function(
-fun_name = 'miopen_convolution_transpose_backward_input',
-args = args,
-expected_types = expected_types,
-nd_args = nd_args,
-return_types = return_types,
-fun_type = 'namespace'
-)
-}
-
-
-#' @rdname torch_miopen_convolution_transpose_backward_weight
-torch_miopen_convolution_transpose_backward_weight <- function(weight_size, grad_output, self, padding, stride, dilation, groups, benchmark, deterministic) {
-  args <- mget(x = c("weight_size", "grad_output", "self", "padding", "stride", "dilation", "groups", "benchmark", "deterministic"))
-expected_types <- list(weight_size = "IntArrayRef", grad_output = "Tensor", self = "Tensor", 
-    padding = "IntArrayRef", stride = "IntArrayRef", dilation = "IntArrayRef", 
-    groups = "int64_t", benchmark = "bool", deterministic = "bool")
-nd_args <- c("weight_size", "grad_output", "self", "padding", "stride", 
-"dilation", "groups", "benchmark", "deterministic")
-return_types <- list(list('Tensor'))
-call_c_function(
-fun_name = 'miopen_convolution_transpose_backward_weight',
-args = args,
-expected_types = expected_types,
-nd_args = nd_args,
-return_types = return_types,
-fun_type = 'namespace'
-)
-}
-
-
 #' @rdname torch_miopen_depthwise_convolution
 torch_miopen_depthwise_convolution <- function(self, weight, bias, padding, stride, dilation, groups, benchmark, deterministic) {
   args <- mget(x = c("self", "weight", "bias", "padding", "stride", "dilation", "groups", "benchmark", "deterministic"))
@@ -17955,67 +18613,6 @@ nd_args <- c("self", "weight", "bias", "padding", "stride", "dilation",
 return_types <- list(list('Tensor'))
 call_c_function(
 fun_name = 'miopen_depthwise_convolution',
-args = args,
-expected_types = expected_types,
-nd_args = nd_args,
-return_types = return_types,
-fun_type = 'namespace'
-)
-}
-
-
-#' @rdname torch_miopen_depthwise_convolution_backward
-torch_miopen_depthwise_convolution_backward <- function(self, grad_output, weight, padding, stride, dilation, groups, benchmark, deterministic, output_mask) {
-  args <- mget(x = c("self", "grad_output", "weight", "padding", "stride", "dilation", "groups", "benchmark", "deterministic", "output_mask"))
-expected_types <- list(self = "Tensor", grad_output = "Tensor", weight = "Tensor", 
-    padding = "IntArrayRef", stride = "IntArrayRef", dilation = "IntArrayRef", 
-    groups = "int64_t", benchmark = "bool", deterministic = "bool", 
-    output_mask = "::std::array<bool,3>")
-nd_args <- c("self", "grad_output", "weight", "padding", "stride", "dilation", 
-"groups", "benchmark", "deterministic", "output_mask")
-return_types <- list(list("Tensor", "Tensor", "Tensor"))
-call_c_function(
-fun_name = 'miopen_depthwise_convolution_backward',
-args = args,
-expected_types = expected_types,
-nd_args = nd_args,
-return_types = return_types,
-fun_type = 'namespace'
-)
-}
-
-
-#' @rdname torch_miopen_depthwise_convolution_backward_input
-torch_miopen_depthwise_convolution_backward_input <- function(self_size, grad_output, weight, padding, stride, dilation, groups, benchmark, deterministic) {
-  args <- mget(x = c("self_size", "grad_output", "weight", "padding", "stride", "dilation", "groups", "benchmark", "deterministic"))
-expected_types <- list(self_size = "IntArrayRef", grad_output = "Tensor", weight = "Tensor", 
-    padding = "IntArrayRef", stride = "IntArrayRef", dilation = "IntArrayRef", 
-    groups = "int64_t", benchmark = "bool", deterministic = "bool")
-nd_args <- c("self_size", "grad_output", "weight", "padding", "stride", 
-"dilation", "groups", "benchmark", "deterministic")
-return_types <- list(list('Tensor'))
-call_c_function(
-fun_name = 'miopen_depthwise_convolution_backward_input',
-args = args,
-expected_types = expected_types,
-nd_args = nd_args,
-return_types = return_types,
-fun_type = 'namespace'
-)
-}
-
-
-#' @rdname torch_miopen_depthwise_convolution_backward_weight
-torch_miopen_depthwise_convolution_backward_weight <- function(weight_size, grad_output, self, padding, stride, dilation, groups, benchmark, deterministic) {
-  args <- mget(x = c("weight_size", "grad_output", "self", "padding", "stride", "dilation", "groups", "benchmark", "deterministic"))
-expected_types <- list(weight_size = "IntArrayRef", grad_output = "Tensor", self = "Tensor", 
-    padding = "IntArrayRef", stride = "IntArrayRef", dilation = "IntArrayRef", 
-    groups = "int64_t", benchmark = "bool", deterministic = "bool")
-nd_args <- c("weight_size", "grad_output", "self", "padding", "stride", 
-"dilation", "groups", "benchmark", "deterministic")
-return_types <- list(list('Tensor'))
-call_c_function(
-fun_name = 'miopen_depthwise_convolution_backward_weight',
 args = args,
 expected_types = expected_types,
 nd_args = nd_args,
@@ -18186,66 +18783,6 @@ nd_args <- c("self", "weight", "bias", "padding", "stride", "dilation",
 return_types <- list(list('Tensor'))
 call_c_function(
 fun_name = 'mkldnn_convolution',
-args = args,
-expected_types = expected_types,
-nd_args = nd_args,
-return_types = return_types,
-fun_type = 'namespace'
-)
-}
-
-
-#' @rdname torch_mkldnn_convolution_backward
-torch_mkldnn_convolution_backward <- function(self, grad_output, weight, padding, stride, dilation, groups, output_mask) {
-  args <- mget(x = c("self", "grad_output", "weight", "padding", "stride", "dilation", "groups", "output_mask"))
-expected_types <- list(self = "Tensor", grad_output = "Tensor", weight = "Tensor", 
-    padding = "IntArrayRef", stride = "IntArrayRef", dilation = "IntArrayRef", 
-    groups = "int64_t", output_mask = "::std::array<bool,3>")
-nd_args <- c("self", "grad_output", "weight", "padding", "stride", "dilation", 
-"groups", "output_mask")
-return_types <- list(list("Tensor", "Tensor", "Tensor"))
-call_c_function(
-fun_name = 'mkldnn_convolution_backward',
-args = args,
-expected_types = expected_types,
-nd_args = nd_args,
-return_types = return_types,
-fun_type = 'namespace'
-)
-}
-
-
-#' @rdname torch_mkldnn_convolution_backward_input
-torch_mkldnn_convolution_backward_input <- function(self_size, grad_output, weight, padding, stride, dilation, groups, bias_defined) {
-  args <- mget(x = c("self_size", "grad_output", "weight", "padding", "stride", "dilation", "groups", "bias_defined"))
-expected_types <- list(self_size = "IntArrayRef", grad_output = "Tensor", weight = "Tensor", 
-    padding = "IntArrayRef", stride = "IntArrayRef", dilation = "IntArrayRef", 
-    groups = "int64_t", bias_defined = "bool")
-nd_args <- c("self_size", "grad_output", "weight", "padding", "stride", 
-"dilation", "groups", "bias_defined")
-return_types <- list(list('Tensor'))
-call_c_function(
-fun_name = 'mkldnn_convolution_backward_input',
-args = args,
-expected_types = expected_types,
-nd_args = nd_args,
-return_types = return_types,
-fun_type = 'namespace'
-)
-}
-
-
-#' @rdname torch_mkldnn_convolution_backward_weights
-torch_mkldnn_convolution_backward_weights <- function(weight_size, grad_output, self, padding, stride, dilation, groups, bias_defined) {
-  args <- mget(x = c("weight_size", "grad_output", "self", "padding", "stride", "dilation", "groups", "bias_defined"))
-expected_types <- list(weight_size = "IntArrayRef", grad_output = "Tensor", self = "Tensor", 
-    padding = "IntArrayRef", stride = "IntArrayRef", dilation = "IntArrayRef", 
-    groups = "int64_t", bias_defined = "bool")
-nd_args <- c("weight_size", "grad_output", "self", "padding", "stride", 
-"dilation", "groups", "bias_defined")
-return_types <- list(list("Tensor", "Tensor"))
-call_c_function(
-fun_name = 'mkldnn_convolution_backward_weights',
 args = args,
 expected_types = expected_types,
 nd_args = nd_args,
@@ -19120,11 +19657,11 @@ fun_type = 'namespace'
 
 
 #' @rdname torch_nanquantile
-torch_nanquantile <- function(self, q, dim = NULL, keepdim = FALSE, interpolation) {
+torch_nanquantile <- function(self, q, dim = NULL, keepdim = FALSE, interpolation = "linear") {
   args <- mget(x = c("self", "q", "dim", "keepdim", "interpolation"))
-expected_types <- list(self = "Tensor", q = c("double", "Tensor"), dim = "int64_t", 
+expected_types <- list(self = "Tensor", q = c("Tensor", "double"), dim = "int64_t", 
     keepdim = "bool", interpolation = "c10::string_view")
-nd_args <- c("self", "q", "dim", "keepdim", "interpolation")
+nd_args <- c("self", "q")
 return_types <- list(list('Tensor'))
 call_c_function(
 fun_name = 'nanquantile',
@@ -19138,11 +19675,11 @@ fun_type = 'namespace'
 
 
 #' @rdname torch_nanquantile_out
-torch_nanquantile_out <- function(out, self, q, dim = NULL, keepdim = FALSE, interpolation) {
+torch_nanquantile_out <- function(out, self, q, dim = NULL, keepdim = FALSE, interpolation = "linear") {
   args <- mget(x = c("out", "self", "q", "dim", "keepdim", "interpolation"))
-expected_types <- list(out = "Tensor", self = "Tensor", q = c("double", "Tensor"
+expected_types <- list(out = "Tensor", self = "Tensor", q = c("Tensor", "double"
 ), dim = "int64_t", keepdim = "bool", interpolation = "c10::string_view")
-nd_args <- c("out", "self", "q", "dim", "keepdim", "interpolation")
+nd_args <- c("out", "self", "q")
 return_types <- list(list('Tensor'))
 call_c_function(
 fun_name = 'nanquantile_out',
@@ -19296,6 +19833,57 @@ nd_args <- c("out", "save_mean", "save_invstd", "input", "weight", "bias",
 return_types <- list(list("Tensor", "Tensor", "Tensor"))
 call_c_function(
 fun_name = 'native_batch_norm_out',
+args = args,
+expected_types = expected_types,
+nd_args = nd_args,
+return_types = return_types,
+fun_type = 'namespace'
+)
+}
+
+
+#' @rdname torch_native_channel_shuffle
+torch_native_channel_shuffle <- function(self, groups) {
+  args <- mget(x = c("self", "groups"))
+expected_types <- list(self = "Tensor", groups = "int64_t")
+nd_args <- c("self", "groups")
+return_types <- list(list('Tensor'))
+call_c_function(
+fun_name = 'native_channel_shuffle',
+args = args,
+expected_types = expected_types,
+nd_args = nd_args,
+return_types = return_types,
+fun_type = 'namespace'
+)
+}
+
+
+#' @rdname torch_native_dropout
+torch_native_dropout <- function(input, p, train) {
+  args <- mget(x = c("input", "p", "train"))
+expected_types <- list(input = "Tensor", p = "double", train = "bool")
+nd_args <- c("input", "p", "train")
+return_types <- list(list("Tensor", "Tensor"))
+call_c_function(
+fun_name = 'native_dropout',
+args = args,
+expected_types = expected_types,
+nd_args = nd_args,
+return_types = return_types,
+fun_type = 'namespace'
+)
+}
+
+
+#' @rdname torch_native_dropout_backward
+torch_native_dropout_backward <- function(grad_output, mask, scale) {
+  args <- mget(x = c("grad_output", "mask", "scale"))
+expected_types <- list(grad_output = "Tensor", mask = "Tensor", scale = "double")
+nd_args <- c("grad_output", "mask", "scale")
+return_types <- list(list('Tensor'))
+call_c_function(
+fun_name = 'native_dropout_backward',
 args = args,
 expected_types = expected_types,
 nd_args = nd_args,
@@ -20681,11 +21269,11 @@ fun_type = 'namespace'
 
 
 #' @rdname torch_quantile
-torch_quantile <- function(self, q, dim = NULL, keepdim = FALSE, interpolation) {
+torch_quantile <- function(self, q, dim = NULL, keepdim = FALSE, interpolation = "linear") {
   args <- mget(x = c("self", "q", "dim", "keepdim", "interpolation"))
-expected_types <- list(self = "Tensor", q = c("double", "Tensor"), dim = "int64_t", 
+expected_types <- list(self = "Tensor", q = c("Tensor", "double"), dim = "int64_t", 
     keepdim = "bool", interpolation = "c10::string_view")
-nd_args <- c("self", "q", "dim", "keepdim", "interpolation")
+nd_args <- c("self", "q")
 return_types <- list(list('Tensor'))
 call_c_function(
 fun_name = 'quantile',
@@ -20699,11 +21287,11 @@ fun_type = 'namespace'
 
 
 #' @rdname torch_quantile_out
-torch_quantile_out <- function(out, self, q, dim = NULL, keepdim = FALSE, interpolation) {
+torch_quantile_out <- function(out, self, q, dim = NULL, keepdim = FALSE, interpolation = "linear") {
   args <- mget(x = c("out", "self", "q", "dim", "keepdim", "interpolation"))
-expected_types <- list(out = "Tensor", self = "Tensor", q = c("double", "Tensor"
+expected_types <- list(out = "Tensor", self = "Tensor", q = c("Tensor", "double"
 ), dim = "int64_t", keepdim = "bool", interpolation = "c10::string_view")
-nd_args <- c("out", "self", "q", "dim", "keepdim", "interpolation")
+nd_args <- c("out", "self", "q")
 return_types <- list(list('Tensor'))
 call_c_function(
 fun_name = 'quantile_out',
@@ -20745,6 +21333,23 @@ nd_args <- c("self", "tensors", "scale", "scales", "zero_point", "zero_points",
 return_types <- list(list('Tensor'), list('TensorList'))
 call_c_function(
 fun_name = 'quantize_per_tensor',
+args = args,
+expected_types = expected_types,
+nd_args = nd_args,
+return_types = return_types,
+fun_type = 'namespace'
+)
+}
+
+
+#' @rdname torch_quantize_per_tensor_dynamic
+torch_quantize_per_tensor_dynamic <- function(self, dtype, reduce_range) {
+  args <- mget(x = c("self", "dtype", "reduce_range"))
+expected_types <- list(self = "Tensor", dtype = "ScalarType", reduce_range = "bool")
+nd_args <- c("self", "dtype", "reduce_range")
+return_types <- list(list('Tensor'))
+call_c_function(
+fun_name = 'quantize_per_tensor_dynamic',
 args = args,
 expected_types = expected_types,
 nd_args = nd_args,
@@ -22049,10 +22654,10 @@ fun_type = 'namespace'
 
 
 #' @rdname torch_round
-torch_round <- function(self) {
-  args <- mget(x = c("self"))
-expected_types <- list(self = "Tensor")
-nd_args <- "self"
+torch_round <- function(self, decimals) {
+  args <- mget(x = c("self", "decimals"))
+expected_types <- list(self = "Tensor", decimals = "int64_t")
+nd_args <- c("self", "decimals")
 return_types <- list(list('Tensor'))
 call_c_function(
 fun_name = 'round',
@@ -22066,10 +22671,10 @@ fun_type = 'namespace'
 
 
 #' @rdname torch_round_
-torch_round_ <- function(self) {
-  args <- mget(x = c("self"))
-expected_types <- list(self = "Tensor")
-nd_args <- "self"
+torch_round_ <- function(self, decimals) {
+  args <- mget(x = c("self", "decimals"))
+expected_types <- list(self = "Tensor", decimals = "int64_t")
+nd_args <- c("self", "decimals")
 return_types <- list(list('Tensor'))
 call_c_function(
 fun_name = 'round_',
@@ -22083,10 +22688,10 @@ fun_type = 'namespace'
 
 
 #' @rdname torch_round_out
-torch_round_out <- function(out, self) {
-  args <- mget(x = c("out", "self"))
-expected_types <- list(out = "Tensor", self = "Tensor")
-nd_args <- c("out", "self")
+torch_round_out <- function(out, self, decimals) {
+  args <- mget(x = c("out", "self", "decimals"))
+expected_types <- list(out = "Tensor", self = "Tensor", decimals = "int64_t")
+nd_args <- c("out", "self", "decimals")
 return_types <- list(list('Tensor'))
 call_c_function(
 fun_name = 'round_out',
@@ -22399,11 +23004,30 @@ fun_type = 'namespace'
 }
 
 
+#' @rdname torch_scatter_reduce
+torch_scatter_reduce <- function(self, dim, index, reduce, output_size = NULL) {
+  args <- mget(x = c("self", "dim", "index", "reduce", "output_size"))
+expected_types <- list(self = "Tensor", dim = "int64_t", index = "Tensor", reduce = "c10::string_view", 
+    output_size = "int64_t")
+nd_args <- c("self", "dim", "index", "reduce")
+return_types <- list(list('Tensor'))
+call_c_function(
+fun_name = 'scatter_reduce',
+args = args,
+expected_types = expected_types,
+nd_args = nd_args,
+return_types = return_types,
+fun_type = 'namespace'
+)
+}
+
+
 #' @rdname torch_searchsorted
-torch_searchsorted <- function(sorted_sequence, self, out_int32 = FALSE, right = FALSE) {
-  args <- mget(x = c("sorted_sequence", "self", "out_int32", "right"))
+torch_searchsorted <- function(sorted_sequence, self, out_int32 = FALSE, right = FALSE, side = NULL, sorter = list()) {
+  args <- mget(x = c("sorted_sequence", "self", "out_int32", "right", "side", "sorter"))
 expected_types <- list(sorted_sequence = "Tensor", self = c("Tensor", "Scalar"), 
-    out_int32 = "bool", right = "bool")
+    out_int32 = "bool", right = "bool", side = "c10::string_view", 
+    sorter = "Tensor")
 nd_args <- c("sorted_sequence", "self")
 return_types <- list(list('Tensor'))
 call_c_function(
@@ -22418,10 +23042,11 @@ fun_type = 'namespace'
 
 
 #' @rdname torch_searchsorted_out
-torch_searchsorted_out <- function(out, sorted_sequence, self, out_int32 = FALSE, right = FALSE) {
-  args <- mget(x = c("out", "sorted_sequence", "self", "out_int32", "right"))
+torch_searchsorted_out <- function(out, sorted_sequence, self, out_int32 = FALSE, right = FALSE, side = NULL, sorter = list()) {
+  args <- mget(x = c("out", "sorted_sequence", "self", "out_int32", "right", "side", "sorter"))
 expected_types <- list(out = "Tensor", sorted_sequence = "Tensor", self = "Tensor", 
-    out_int32 = "bool", right = "bool")
+    out_int32 = "bool", right = "bool", side = "c10::string_view", 
+    sorter = "Tensor")
 nd_args <- c("out", "sorted_sequence", "self")
 return_types <- list(list('Tensor'))
 call_c_function(
@@ -22479,6 +23104,23 @@ nd_args <- c("grad_output", "input_sizes", "dim", "index")
 return_types <- list(list('Tensor'))
 call_c_function(
 fun_name = 'select_backward',
+args = args,
+expected_types = expected_types,
+nd_args = nd_args,
+return_types = return_types,
+fun_type = 'namespace'
+)
+}
+
+
+#' @rdname torch_select_scatter
+torch_select_scatter <- function(self, src, dim, index) {
+  args <- mget(x = c("self", "src", "dim", "index"))
+expected_types <- list(self = "Tensor", src = "Tensor", dim = "int64_t", index = "int64_t")
+nd_args <- c("self", "src", "dim", "index")
+return_types <- list(list('Tensor'))
+call_c_function(
+fun_name = 'select_scatter',
 args = args,
 expected_types = expected_types,
 nd_args = nd_args,
@@ -23001,6 +23643,24 @@ fun_type = 'namespace'
 }
 
 
+#' @rdname torch_slice_scatter
+torch_slice_scatter <- function(self, src, dim = 1L, start = NULL, end = NULL, step = 1L) {
+  args <- mget(x = c("self", "src", "dim", "start", "end", "step"))
+expected_types <- list(self = "Tensor", src = "Tensor", dim = "int64_t", start = "int64_t", 
+    end = "int64_t", step = "int64_t")
+nd_args <- c("self", "src")
+return_types <- list(list('Tensor'))
+call_c_function(
+fun_name = 'slice_scatter',
+args = args,
+expected_types = expected_types,
+nd_args = nd_args,
+return_types = return_types,
+fun_type = 'namespace'
+)
+}
+
+
 #' @rdname torch_slogdet
 torch_slogdet <- function(self) {
   args <- mget(x = c("self"))
@@ -23037,26 +23697,6 @@ fun_type = 'namespace'
 }
 
 
-#' @rdname torch_slow_conv_dilated2d_backward
-torch_slow_conv_dilated2d_backward <- function(grad_output, self, weight, kernel_size, stride, padding, dilation, output_mask) {
-  args <- mget(x = c("grad_output", "self", "weight", "kernel_size", "stride", "padding", "dilation", "output_mask"))
-expected_types <- list(grad_output = "Tensor", self = "Tensor", weight = "Tensor", 
-    kernel_size = "IntArrayRef", stride = "IntArrayRef", padding = "IntArrayRef", 
-    dilation = "IntArrayRef", output_mask = "::std::array<bool,3>")
-nd_args <- c("grad_output", "self", "weight", "kernel_size", "stride", "padding", 
-"dilation", "output_mask")
-return_types <- list(list("Tensor", "Tensor", "Tensor"))
-call_c_function(
-fun_name = 'slow_conv_dilated2d_backward',
-args = args,
-expected_types = expected_types,
-nd_args = nd_args,
-return_types = return_types,
-fun_type = 'namespace'
-)
-}
-
-
 #' @rdname torch_slow_conv_dilated3d
 torch_slow_conv_dilated3d <- function(self, weight, kernel_size, bias = list(), stride = 1L, padding = 0L, dilation = 1L) {
   args <- mget(x = c("self", "weight", "kernel_size", "bias", "stride", "padding", "dilation"))
@@ -23076,26 +23716,6 @@ fun_type = 'namespace'
 }
 
 
-#' @rdname torch_slow_conv_dilated3d_backward
-torch_slow_conv_dilated3d_backward <- function(grad_output, self, weight, kernel_size, stride, padding, dilation, output_mask) {
-  args <- mget(x = c("grad_output", "self", "weight", "kernel_size", "stride", "padding", "dilation", "output_mask"))
-expected_types <- list(grad_output = "Tensor", self = "Tensor", weight = "Tensor", 
-    kernel_size = "IntArrayRef", stride = "IntArrayRef", padding = "IntArrayRef", 
-    dilation = "IntArrayRef", output_mask = "::std::array<bool,3>")
-nd_args <- c("grad_output", "self", "weight", "kernel_size", "stride", "padding", 
-"dilation", "output_mask")
-return_types <- list(list("Tensor", "Tensor", "Tensor"))
-call_c_function(
-fun_name = 'slow_conv_dilated3d_backward',
-args = args,
-expected_types = expected_types,
-nd_args = nd_args,
-return_types = return_types,
-fun_type = 'namespace'
-)
-}
-
-
 #' @rdname torch_slow_conv_transpose2d
 torch_slow_conv_transpose2d <- function(self, weight, kernel_size, bias = list(), stride = 1L, padding = 0L, output_padding = 0L, dilation = 1L) {
   args <- mget(x = c("self", "weight", "kernel_size", "bias", "stride", "padding", "output_padding", "dilation"))
@@ -23106,51 +23726,6 @@ nd_args <- c("self", "weight", "kernel_size")
 return_types <- list(list('Tensor'))
 call_c_function(
 fun_name = 'slow_conv_transpose2d',
-args = args,
-expected_types = expected_types,
-nd_args = nd_args,
-return_types = return_types,
-fun_type = 'namespace'
-)
-}
-
-
-#' @rdname torch_slow_conv_transpose2d_backward
-torch_slow_conv_transpose2d_backward <- function(grad_output, self, weight, kernel_size, stride, padding, output_padding, dilation, columns, ones, output_mask) {
-  args <- mget(x = c("grad_output", "self", "weight", "kernel_size", "stride", "padding", "output_padding", "dilation", "columns", "ones", "output_mask"))
-expected_types <- list(grad_output = "Tensor", self = "Tensor", weight = "Tensor", 
-    kernel_size = "IntArrayRef", stride = "IntArrayRef", padding = "IntArrayRef", 
-    output_padding = "IntArrayRef", dilation = "IntArrayRef", 
-    columns = "Tensor", ones = "Tensor", output_mask = "::std::array<bool,3>")
-nd_args <- c("grad_output", "self", "weight", "kernel_size", "stride", "padding", 
-"output_padding", "dilation", "columns", "ones", "output_mask"
-)
-return_types <- list(list("Tensor", "Tensor", "Tensor"))
-call_c_function(
-fun_name = 'slow_conv_transpose2d_backward',
-args = args,
-expected_types = expected_types,
-nd_args = nd_args,
-return_types = return_types,
-fun_type = 'namespace'
-)
-}
-
-
-#' @rdname torch_slow_conv_transpose2d_backward_out
-torch_slow_conv_transpose2d_backward_out <- function(grad_input, grad_weight, grad_bias, grad_output, self, weight, kernel_size, stride, padding, output_padding, dilation, columns, ones) {
-  args <- mget(x = c("grad_input", "grad_weight", "grad_bias", "grad_output", "self", "weight", "kernel_size", "stride", "padding", "output_padding", "dilation", "columns", "ones"))
-expected_types <- list(grad_input = "Tensor", grad_weight = "Tensor", grad_bias = "Tensor", 
-    grad_output = "Tensor", self = "Tensor", weight = "Tensor", 
-    kernel_size = "IntArrayRef", stride = "IntArrayRef", padding = "IntArrayRef", 
-    output_padding = "IntArrayRef", dilation = "IntArrayRef", 
-    columns = "Tensor", ones = "Tensor")
-nd_args <- c("grad_input", "grad_weight", "grad_bias", "grad_output", "self", 
-"weight", "kernel_size", "stride", "padding", "output_padding", 
-"dilation", "columns", "ones")
-return_types <- list(list("Tensor", "Tensor", "Tensor"))
-call_c_function(
-fun_name = 'slow_conv_transpose2d_backward_out',
 args = args,
 expected_types = expected_types,
 nd_args = nd_args,
@@ -23198,51 +23773,6 @@ fun_type = 'namespace'
 }
 
 
-#' @rdname torch_slow_conv_transpose3d_backward
-torch_slow_conv_transpose3d_backward <- function(grad_output, self, weight, kernel_size, stride, padding, output_padding, dilation, finput, fgrad_input, output_mask) {
-  args <- mget(x = c("grad_output", "self", "weight", "kernel_size", "stride", "padding", "output_padding", "dilation", "finput", "fgrad_input", "output_mask"))
-expected_types <- list(grad_output = "Tensor", self = "Tensor", weight = "Tensor", 
-    kernel_size = "IntArrayRef", stride = "IntArrayRef", padding = "IntArrayRef", 
-    output_padding = "IntArrayRef", dilation = "IntArrayRef", 
-    finput = "Tensor", fgrad_input = "Tensor", output_mask = "::std::array<bool,3>")
-nd_args <- c("grad_output", "self", "weight", "kernel_size", "stride", "padding", 
-"output_padding", "dilation", "finput", "fgrad_input", "output_mask"
-)
-return_types <- list(list("Tensor", "Tensor", "Tensor"))
-call_c_function(
-fun_name = 'slow_conv_transpose3d_backward',
-args = args,
-expected_types = expected_types,
-nd_args = nd_args,
-return_types = return_types,
-fun_type = 'namespace'
-)
-}
-
-
-#' @rdname torch_slow_conv_transpose3d_backward_out
-torch_slow_conv_transpose3d_backward_out <- function(grad_input, grad_weight, grad_bias, grad_output, self, weight, kernel_size, stride, padding, output_padding, dilation, finput, fgrad_input) {
-  args <- mget(x = c("grad_input", "grad_weight", "grad_bias", "grad_output", "self", "weight", "kernel_size", "stride", "padding", "output_padding", "dilation", "finput", "fgrad_input"))
-expected_types <- list(grad_input = "Tensor", grad_weight = "Tensor", grad_bias = "Tensor", 
-    grad_output = "Tensor", self = "Tensor", weight = "Tensor", 
-    kernel_size = "IntArrayRef", stride = "IntArrayRef", padding = "IntArrayRef", 
-    output_padding = "IntArrayRef", dilation = "IntArrayRef", 
-    finput = "Tensor", fgrad_input = "Tensor")
-nd_args <- c("grad_input", "grad_weight", "grad_bias", "grad_output", "self", 
-"weight", "kernel_size", "stride", "padding", "output_padding", 
-"dilation", "finput", "fgrad_input")
-return_types <- list(list("Tensor", "Tensor", "Tensor"))
-call_c_function(
-fun_name = 'slow_conv_transpose3d_backward_out',
-args = args,
-expected_types = expected_types,
-nd_args = nd_args,
-return_types = return_types,
-fun_type = 'namespace'
-)
-}
-
-
 #' @rdname torch_slow_conv_transpose3d_out
 torch_slow_conv_transpose3d_out <- function(out, self, weight, kernel_size, bias = list(), stride = 1L, padding = 0L, output_padding = 0L, dilation = 1L) {
   args <- mget(x = c("out", "self", "weight", "kernel_size", "bias", "stride", "padding", "output_padding", "dilation"))
@@ -23280,48 +23810,6 @@ fun_type = 'namespace'
 }
 
 
-#' @rdname torch_slow_conv3d_backward
-torch_slow_conv3d_backward <- function(grad_output, self, weight, kernel_size, stride, padding, finput, fgrad_input, output_mask) {
-  args <- mget(x = c("grad_output", "self", "weight", "kernel_size", "stride", "padding", "finput", "fgrad_input", "output_mask"))
-expected_types <- list(grad_output = "Tensor", self = "Tensor", weight = "Tensor", 
-    kernel_size = "IntArrayRef", stride = "IntArrayRef", padding = "IntArrayRef", 
-    finput = "Tensor", fgrad_input = "Tensor", output_mask = "::std::array<bool,3>")
-nd_args <- c("grad_output", "self", "weight", "kernel_size", "stride", "padding", 
-"finput", "fgrad_input", "output_mask")
-return_types <- list(list("Tensor", "Tensor", "Tensor"))
-call_c_function(
-fun_name = 'slow_conv3d_backward',
-args = args,
-expected_types = expected_types,
-nd_args = nd_args,
-return_types = return_types,
-fun_type = 'namespace'
-)
-}
-
-
-#' @rdname torch_slow_conv3d_backward_out
-torch_slow_conv3d_backward_out <- function(grad_input, grad_weight, grad_bias, grad_output, self, weight, kernel_size, stride, padding, finput, fgrad_input) {
-  args <- mget(x = c("grad_input", "grad_weight", "grad_bias", "grad_output", "self", "weight", "kernel_size", "stride", "padding", "finput", "fgrad_input"))
-expected_types <- list(grad_input = "Tensor", grad_weight = "Tensor", grad_bias = "Tensor", 
-    grad_output = "Tensor", self = "Tensor", weight = "Tensor", 
-    kernel_size = "IntArrayRef", stride = "IntArrayRef", padding = "IntArrayRef", 
-    finput = "Tensor", fgrad_input = "Tensor")
-nd_args <- c("grad_input", "grad_weight", "grad_bias", "grad_output", "self", 
-"weight", "kernel_size", "stride", "padding", "finput", "fgrad_input"
-)
-return_types <- list(list("Tensor", "Tensor", "Tensor"))
-call_c_function(
-fun_name = 'slow_conv3d_backward_out',
-args = args,
-expected_types = expected_types,
-nd_args = nd_args,
-return_types = return_types,
-fun_type = 'namespace'
-)
-}
-
-
 #' @rdname torch_slow_conv3d_forward
 torch_slow_conv3d_forward <- function(self, weight, kernel_size, bias, stride, padding) {
   args <- mget(x = c("self", "weight", "kernel_size", "bias", "stride", "padding"))
@@ -23329,7 +23817,7 @@ expected_types <- list(self = "Tensor", weight = "Tensor", kernel_size = "IntArr
     bias = "Tensor", stride = "IntArrayRef", padding = "IntArrayRef")
 nd_args <- c("self", "weight", "kernel_size", "bias", "stride", "padding"
 )
-return_types <- list(list("Tensor", "Tensor", "Tensor"))
+return_types <- list(list('Tensor'))
 call_c_function(
 fun_name = 'slow_conv3d_forward',
 args = args,
@@ -23342,14 +23830,13 @@ fun_type = 'namespace'
 
 
 #' @rdname torch_slow_conv3d_forward_out
-torch_slow_conv3d_forward_out <- function(output, finput, fgrad_input, self, weight, kernel_size, bias, stride, padding) {
-  args <- mget(x = c("output", "finput", "fgrad_input", "self", "weight", "kernel_size", "bias", "stride", "padding"))
-expected_types <- list(output = "Tensor", finput = "Tensor", fgrad_input = "Tensor", 
-    self = "Tensor", weight = "Tensor", kernel_size = "IntArrayRef", 
+torch_slow_conv3d_forward_out <- function(output, self, weight, kernel_size, bias, stride, padding) {
+  args <- mget(x = c("output", "self", "weight", "kernel_size", "bias", "stride", "padding"))
+expected_types <- list(output = "Tensor", self = "Tensor", weight = "Tensor", kernel_size = "IntArrayRef", 
     bias = "Tensor", stride = "IntArrayRef", padding = "IntArrayRef")
-nd_args <- c("output", "finput", "fgrad_input", "self", "weight", "kernel_size", 
-"bias", "stride", "padding")
-return_types <- list(list("Tensor", "Tensor", "Tensor"))
+nd_args <- c("output", "self", "weight", "kernel_size", "bias", "stride", 
+"padding")
+return_types <- list(list('Tensor'))
 call_c_function(
 fun_name = 'slow_conv3d_forward_out',
 args = args,
@@ -23574,11 +24061,11 @@ fun_type = 'namespace'
 
 
 #' @rdname torch_softplus_backward
-torch_softplus_backward <- function(grad_output, self, beta, threshold, output) {
-  args <- mget(x = c("grad_output", "self", "beta", "threshold", "output"))
+torch_softplus_backward <- function(grad_output, self, beta, threshold) {
+  args <- mget(x = c("grad_output", "self", "beta", "threshold"))
 expected_types <- list(grad_output = "Tensor", self = "Tensor", beta = "Scalar", 
-    threshold = "Scalar", output = "Tensor")
-nd_args <- c("grad_output", "self", "beta", "threshold", "output")
+    threshold = "Scalar")
+nd_args <- c("grad_output", "self", "beta", "threshold")
 return_types <- list(list('Tensor'))
 call_c_function(
 fun_name = 'softplus_backward',
@@ -23592,12 +24079,11 @@ fun_type = 'namespace'
 
 
 #' @rdname torch_softplus_backward_out
-torch_softplus_backward_out <- function(grad_input, grad_output, self, beta, threshold, output) {
-  args <- mget(x = c("grad_input", "grad_output", "self", "beta", "threshold", "output"))
+torch_softplus_backward_out <- function(grad_input, grad_output, self, beta, threshold) {
+  args <- mget(x = c("grad_input", "grad_output", "self", "beta", "threshold"))
 expected_types <- list(grad_input = "Tensor", grad_output = "Tensor", self = "Tensor", 
-    beta = "Scalar", threshold = "Scalar", output = "Tensor")
-nd_args <- c("grad_input", "grad_output", "self", "beta", "threshold", "output"
-)
+    beta = "Scalar", threshold = "Scalar")
+nd_args <- c("grad_input", "grad_output", "self", "beta", "threshold")
 return_types <- list(list('Tensor'))
 call_c_function(
 fun_name = 'softplus_backward_out',
@@ -23793,6 +24279,42 @@ nd_args <- c("crow_indices", "col_indices", "values", "size", "options")
 return_types <- list(list('Tensor'))
 call_c_function(
 fun_name = 'sparse_csr_tensor',
+args = args,
+expected_types = expected_types,
+nd_args = nd_args,
+return_types = return_types,
+fun_type = 'namespace'
+)
+}
+
+
+#' @rdname torch_sparse_sampled_addmm
+torch_sparse_sampled_addmm <- function(self, mat1, mat2, beta = 1L, alpha = 1L) {
+  args <- mget(x = c("self", "mat1", "mat2", "beta", "alpha"))
+expected_types <- list(self = "Tensor", mat1 = "Tensor", mat2 = "Tensor", beta = "Scalar", 
+    alpha = "Scalar")
+nd_args <- c("self", "mat1", "mat2")
+return_types <- list(list('Tensor'))
+call_c_function(
+fun_name = 'sparse_sampled_addmm',
+args = args,
+expected_types = expected_types,
+nd_args = nd_args,
+return_types = return_types,
+fun_type = 'namespace'
+)
+}
+
+
+#' @rdname torch_sparse_sampled_addmm_out
+torch_sparse_sampled_addmm_out <- function(out, self, mat1, mat2, beta = 1L, alpha = 1L) {
+  args <- mget(x = c("out", "self", "mat1", "mat2", "beta", "alpha"))
+expected_types <- list(out = "Tensor", self = "Tensor", mat1 = "Tensor", mat2 = "Tensor", 
+    beta = "Scalar", alpha = "Scalar")
+nd_args <- c("out", "self", "mat1", "mat2")
+return_types <- list(list('Tensor'))
+call_c_function(
+fun_name = 'sparse_sampled_addmm_out',
 args = args,
 expected_types = expected_types,
 nd_args = nd_args,
@@ -24619,9 +25141,9 @@ fun_type = 'namespace'
 
 
 #' @rdname torch_special_round
-torch_special_round <- function(self) {
-  args <- mget(x = c("self"))
-expected_types <- list(self = "Tensor")
+torch_special_round <- function(self, decimals = 0L) {
+  args <- mget(x = c("self", "decimals"))
+expected_types <- list(self = "Tensor", decimals = "int64_t")
 nd_args <- "self"
 return_types <- list(list('Tensor'))
 call_c_function(
@@ -24636,9 +25158,9 @@ fun_type = 'namespace'
 
 
 #' @rdname torch_special_round_out
-torch_special_round_out <- function(out, self) {
-  args <- mget(x = c("out", "self"))
-expected_types <- list(out = "Tensor", self = "Tensor")
+torch_special_round_out <- function(out, self, decimals = 0L) {
+  args <- mget(x = c("out", "self", "decimals"))
+expected_types <- list(out = "Tensor", self = "Tensor", decimals = "int64_t")
 nd_args <- c("out", "self")
 return_types <- list(list('Tensor'))
 call_c_function(
@@ -24677,6 +25199,23 @@ nd_args <- c("out", "self")
 return_types <- list(list('Tensor'))
 call_c_function(
 fun_name = 'special_sinc_out',
+args = args,
+expected_types = expected_types,
+nd_args = nd_args,
+return_types = return_types,
+fun_type = 'namespace'
+)
+}
+
+
+#' @rdname torch_special_softmax
+torch_special_softmax <- function(self, dim, dtype = NULL) {
+  args <- mget(x = c("self", "dim", "dtype"))
+expected_types <- list(self = "Tensor", dim = "int64_t", dtype = "ScalarType")
+nd_args <- c("self", "dim")
+return_types <- list(list('Tensor'))
+call_c_function(
+fun_name = 'special_softmax',
 args = args,
 expected_types = expected_types,
 nd_args = nd_args,

@@ -224,6 +224,9 @@ r_argument_default <- function(default) {
   if (default == "\"reduced\"")
     return("\"reduced\"")
 
+  if (default == "\"linear\"")
+    return("\"linear\"")
+
   browser()
 }
 

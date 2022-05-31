@@ -15,6 +15,10 @@
 - Nice error message when `embed_dim` is not divisible by `num_heads` in `nn_multihead_attention`. (#828)
 - `sampler()` is now exported allowing to create custom samplers that can be passed to `dataloader()`. (#833)
 - Creating `nn_module`s without a `initialize` method is now supported. (#834)
+- Updated to LibTorch v1.11.0. (#835)
+- Deprecated support for CUDA 10.2 on Windows. (#835)
+- `linalg_matrix_rank` and `linalg_pinv` gained `atol` and `rtol` arguments while deprecating `tol` and `rcond`. (#835)
+
 
 # torch 0.7.2
 

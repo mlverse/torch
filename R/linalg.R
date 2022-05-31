@@ -252,23 +252,29 @@ linalg_cond <- function(A, p = NULL) {
 #'   batch dimensions.
 #' @param tol (float, Tensor, optional): the tolerance value. See above for
 #' the value it takes when `NULL`. Default: `NULL`.
+#' @param atol the absolute tolerance value. When `NULL` it’s considered to be zero. 
+#' @param rtol the relative tolerance value. See above for the value it takes when `NULL`.
 #' @param hermitian (bool, optional): indicates whether `A` is Hermitian if complex
 #' or symmetric if real. Default: `FALSE`.
+#' @param ... Not currently used.
 #'
 #' @examples
 #' a <- torch_eye(10)
 #' linalg_matrix_rank(a)
 #' @family linalg
 #' @export
-linalg_matrix_rank <- function(A, tol = NULL, hermitian = FALSE) {
-  if (is.null(tol)) {
-    torch_linalg_matrix_rank(self = A, tol = tol, hermitian = hermitian)
-  } else {
-    if (!is_torch_tensor(tol)) {
-      tol <- torch_scalar_tensor(tol)
-    }
-    torch_linalg_matrix_rank(input = A, tol = tol, hermitian = hermitian)
+linalg_matrix_rank <- function(A, ..., atol = NULL, rtol = NULL, tol = NULL, hermitian = FALSE) {
+  ellipsis::check_dots_empty()
+  if (!is.null(tol)) {
+    warn("`tol` argument is deprecated in favor of `atol` and `rtol`.")
+    atol <- tol
   }
+  cpp_torch_namespace_linalg_matrix_rank_self_Tensor_atol_double_rtol_double(
+    self = A, 
+    atol = scalar_or_zero(atol), 
+    rtol = scalar_or_zero(rtol), 
+    hermitian = hermitian
+  )
 }
 
 
@@ -933,17 +939,25 @@ linalg_inv <- function(A) {
 #'   If it is a `torch_Tensor`, its shape must be
 #'   broadcastable to that of the singular values of
 #'   `A` as returned by [linalg_svd()].
-#'   Default: `1e-15`.
+#'    Alias for `rtol`. 
+#'   Default: `0`.
 #' @param hermitian (bool, optional): indicates whether `A` is Hermitian if complex
 #'   or symmetric if real. Default: `FALSE`.
+#' @inheritParams linalg_matrix_rank
 #'
 #' @examples
 #' A <- torch_randn(3, 5)
 #' linalg_pinv(A)
 #' @family linalg
 #' @export
-linalg_pinv <- function(A, rcond = 1e-15, hermitian = FALSE) {
-  out <- torch_linalg_pinv(A, rcond = rcond, hermitian = hermitian)
+linalg_pinv <- function(A, rcond = NULL, hermitian = FALSE, atol = NULL, rtol = NULL) {
+  if (!is.null(rcond)) {
+    warn("`rcond` is deprecated in favor of `rtol`.")
+    rtol <- rcond
+  }
+  out <- torch_linalg_pinv(A, hermitian = hermitian,
+                           atol = scalar_or_zero(atol),
+                           rtol = scalar_or_zero(rtol))
   if (length(dim(out)) != length(dim(A))) {
     out <- out$squeeze(1)
   }
