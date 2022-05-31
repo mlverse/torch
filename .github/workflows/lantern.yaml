@@ -16,8 +16,8 @@ jobs:
       matrix:
         config:
           - {os: macOS-latest, artifact: "build/liblantern.dylib", upload: "macOS", fixlib: 'install_name_tool -add_rpath @loader_path/. liblantern.dylib'}
-          - {os: windows-2019, artifact: "build/Release/lantern.dll", upload: "Linux", fixlib: "chrpath -r '$ORIGIN/.' liblantern.so"}
-          - {os: ubuntu-18.04, artifact: "build/liblantern.so", upload: "Windows"}
+          - {os: windows-2019, artifact: "build/Release/lantern.dll", upload: "Windows"}
+          - {os: ubuntu-18.04, artifact: "build/liblantern.so", upload: "Linux", fixlib: "chrpath -r '$ORIGIN/.' liblantern.so"}
           - {os: ubuntu-18.04, artifact: "build/liblantern.so", upload: "Linux-Cuda-113",cuda: '11.3', cuda_patch: "1", cudnn: 'https://storage.googleapis.com/torch-lantern-builds/cudnn/cudnn-11.3-linux-x64-v8.2.1.32.tgz', fixlib: "chrpath -r '$ORIGIN/.' liblantern.so"}
           - {os: ubuntu-18.04, artifact: "build/liblantern.so", upload: "Linux-Cuda-102", cuda: '10.2', cuda_patch: "89", cudnn: 'https://storage.googleapis.com/torch-lantern-builds/cudnn/cudnn-10.2-linux-x64-v7.6.5.32.tgz', fixlib: "chrpath -r '$ORIGIN/.' liblantern.so"}
           - {os: windows-2019, artifact: "build/Release/lantern.dll", upload: "Windows-Cuda-113", cuda: '11.3', cuda_patch: "1", cudnn: 'https://storage.googleapis.com/torch-lantern-builds/cudnn/cudnn-11.3-windows-x64-v8.2.1.32.zip'}
