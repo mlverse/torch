@@ -340,6 +340,9 @@
     <loc>https://torch.mlverse.org/docs/dev/reference/lr_one_cycle.html</loc>
   </url>
   <url>
+    <loc>https://torch.mlverse.org/docs/dev/reference/lr_reduce_on_plateau.html</loc>
+  </url>
+  <url>
     <loc>https://torch.mlverse.org/docs/dev/reference/lr_scheduler.html</loc>
   </url>
   <url>
