@@ -250,3 +250,15 @@ test_that("regression test for #695", {
     as.array(a)[c(1, 3), , c(1, 3)]
   )
 })
+
+test_that("NULL tensor", {
+  
+  x <- torch_tensor(NULL)
+  expect_true(x$dtype == torch_bool())
+  expect_equal(x$shape, 0)
+  
+  # subsetting shouldn't crash
+  expect_error(x[1], regexp = "out of bounds")
+  expect_error(torch_tensor(as.integer(NULL))[1], regexp = "out of bounds")
+  
+})

@@ -128,6 +128,12 @@ torch::Tensor torch_tensor_cpp(SEXP x, Rcpp::Nullable<torch::Dtype> dtype,
         break;
       }
     }
+  case NILSXP: {
+      cdtype = lantern_Dtype_bool();
+      final_type = dtype.isNull() ? torch::Dtype(lantern_Dtype_bool())
+        : Rcpp::as<torch::Dtype>(dtype);
+      break;
+    }
     default: {
       Rcpp::stop("R type not handled");
     }
