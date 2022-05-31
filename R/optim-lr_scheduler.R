@@ -568,3 +568,167 @@ lr_one_cycle <- lr_scheduler(
     as.numeric(lrs)
   }
 )
+
+#' Reduce learning rate on plateau
+#' 
+#' Reduce learning rate when a metric has stopped improving.
+#' Models often benefit from reducing the learning rate by a factor
+#' of 2-10 once learning stagnates. This scheduler reads a metrics
+#' quantity and if no improvement is seen for a 'patience' number
+#' of epochs, the learning rate is reduced.
+#' 
+#' @param optimizer (Optimizer): Wrapped optimizer.
+#' @param mode (str): One of `min`, `max`. In `min` mode, lr will be reduced 
+#' when the quantity monitored has stopped decreasing; in `max` mode it will be 
+#' reduced when the quantity monitored has stopped increasing. Default: 'min'.
+#' @param factor (float): Factor by which the learning rate will be reduced. 
+#' new_lr <- lr * factor. Default: 0.1.
+#' @param patience (int): Number of epochs with no improvement after which 
+#' learning rate will be reduced. For example, if `patience = 2`, then we will 
+#' ignore the first 2 epochs with no improvement, and will only decrease the LR 
+#' after the 3rd epoch if the loss still hasn't improved then. Default: 10.
+#' @param threshold (float):Threshold for measuring the new optimum, to only 
+#' focus on significant changes. Default: 1e-4.
+#' @param threshold_mode (str): One of `rel`, `abs`. In `rel` mode,
+#' dynamic_threshold <- best * ( 1 + threshold ) in 'max' mode 
+#' or best * ( 1 - threshold ) in `min` mode. In `abs` mode, 
+#' dynamic_threshold <- best + threshold in `max` mode or 
+#' best - threshold in `min` mode. Default: 'rel'.
+#' @param cooldown (int): Number of epochs to wait before resuming normal 
+#' operation after lr has been reduced. Default: 0.
+#' @param min_lr (float or list): A scalar or a list of scalars. A lower bound 
+#' on the learning rate of all param groups or each group respectively. Default: 0.
+#' @param eps (float): Minimal decay applied to lr. If the difference between 
+#' new and old lr is smaller than eps, the update is ignored. Default: 1e-8.
+#' @param verbose (bool): If `TRUE`, prints a message to stdout for
+#'   each update. Default: `FALSE`.
+#'   
+#' @examples
+#' \dontrun{ 
+#' optimizer <- optim_sgd(model$parameters(), lr=0.1, momentum=0.9)
+#' scheduler <- lr_reduce_on_plateau(optimizer, 'min')
+#' for (epoch in 1:10) {
+#'  train(...)
+#'  val_loss <- validate(...)
+#'  # note that step should be called after validate
+#'  scheduler$step(val_loss)
+#' }
+#' }
+#' @export
+lr_reduce_on_plateau <- lr_scheduler(
+  "lr_reduce_on_plateau",
+  initialize = function(optimizer, mode='min', factor=0.1, patience=10,
+                         threshold=1e-4, threshold_mode='rel', cooldown=0,
+                         min_lr=0, eps=1e-8, verbose=FALSE) {
+    if (factor>=1.0) {
+      value_error('Factor should be < 1.0')
+    }
+    self$factor <- factor
+    self$optimizer <- optimizer
+    
+    if (is.list(min_lr)) {
+      if (length(min_lr) != length(optimizer$param_groups)) {
+        value_error("expected {length(optimizer$param_groups} min_lrs, got {length(min_lr)}")
+      }
+      self$min_lrs <- list(min_lr)
+    }
+    else {
+      self$min_lrs <- rep(list(min_lr), length(optimizer$param_groups))
+    }
+    self$patience <- patience
+    self$verbose <- verbose
+    self$cooldown <- cooldown
+    self$cooldown_counter <- 0
+    self$mode <- mode
+    self$threshold <- threshold
+    self$threshold_mode <- threshold_mode
+    self$best <- NULL
+    self$num_bad_epochs <- NULL
+    self$mode_worse <- NULL
+    self$eps <- eps
+    self$last_epoch <- 0
+    
+    self$.init_is_better(mode=mode, threshold=threshold, 
+                         threshold_mode=threshold_mode)
+    self$.reset()
+    
+  },
+  step = function(metrics) {
+    current <- as.numeric(metrics)
+    epoch <- self$last_epoch + 1
+    self$last_epoch <- epoch
+    
+    if (self$.is_better(current, self$best)) {
+      self$best <- current
+      self$num_bad_epochs <- 0
+    } else {
+      self$num_bad_epochs <- self$num_bad_epochs + 1
+    }
+    
+    if (self$.in_cooldown()) {
+      self$cooldown_counter <- self$cooldown_counter - 1
+      self$num_bad_epochs <- 0
+    }
+    
+    if (self$num_bad_epochs > self$patience) {
+      self$.reduce_lr(epoch)
+      self$cooldown_counter <- self$cooldown
+      self$num_bad_epochs <- 0
+    }
+    
+    self$.last_lr <- sapply(self$optimizer$param_groups, function(x) x$lr)
+    
+  },
+  .reduce_lr = function(epoch) {
+    for (i in seq_along(self$optimizer$param_groups)) {
+      old_lr <- as.numeric(self$optimizer$param_groups[[i]]$lr)
+      new_lr <- max(old_lr * self$factor, self$min_lrs[[i]])
+      if ((old_lr - new_lr) > self$eps) {
+        self$optimizer$param_groups[[i]]$lr <- new_lr
+        if (self$verbose) {
+          inform(sprintf("Epoch %s: reducing learning rate of group %s to %.4e", epoch, i, new_lr))
+        }
+      }
+      
+    }
+  }, 
+  .in_cooldown = function() {
+    return(self$cooldown_counter > 0)
+  },
+  .is_better = function(a, best) {
+    if ((self$mode == 'min') && (self$threshold_mode == 'rel')) {
+      rel_epsilon <- 1 - self$threshold
+      return(a < (best * rel_epsilon))
+    } else if ((self$mode == 'min') && (self$threshold_mode == 'abs')) {
+      return(a < (best - self$threshold))
+    } else if ((self$mode == 'max') && (self$threshold_mode == 'rel')) {
+      rel_epsilon <- self$threshold  + 1
+      return (a > (best * rel_epsilon))
+    } else {
+      return (a > (best + self$threshold))
+    }
+  },
+  .init_is_better = function(mode, threshold, threshold_mode) {
+    if (!mode %in% list('min', 'max')) {
+      value_error("mode {mode} is unknown!")
+    }
+    if (!threshold_mode %in% list('rel', 'abs')) {
+      value_error("threshold mode {threshold_mode} is unknown!")
+    }
+    if (mode == 'min') {
+      self$mode_worse <- Inf
+    } else {
+      self$mode_worse <- -Inf
+    }
+    
+    self$mode <- mode
+    self$threshold <- threshold
+    self$threshold_mode <- threshold_mode
+  },
+  .reset = function() {
+    self$best <- self$mode_worse
+    self$cooldown_counter <- 0
+    self$num_bad_epochs <- 0
+  }
+  
+)
