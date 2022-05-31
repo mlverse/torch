@@ -82,7 +82,14 @@
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">torch_searchsorted</span><span class="op">(</span><span class="va">sorted_sequence</span>, <span class="va">self</span>, out_int32 <span class="op">=</span> <span class="cn">FALSE</span>, right <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">torch_searchsorted</span><span class="op">(</span>
+  <span class="va">sorted_sequence</span>,
+  <span class="va">self</span>,
+  out_int32 <span class="op">=</span> <span class="cn">FALSE</span>,
+  right <span class="op">=</span> <span class="cn">FALSE</span>,
+  side <span class="op">=</span> <span class="cn">NULL</span>,
+  sorter <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="op">)</span>
+<span class="op">)</span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -103,6 +110,14 @@ return 0 for non-numerical value (eg. nan, inf) or the size of boundaries
 (one pass the last index). In other words, if False, gets the lower bound index
 for each value in input from boundaries. If True, gets the upper bound index
 instead. Default value is False.</p></dd>
+<dt>side</dt>
+<dd><p>the same as right but preferred. “left” corresponds to <code>FALSE</code> for right
+and “right” corresponds to <code>TRUE</code> for right. It will error if this is set to
+“left” while right is <code>TRUE</code>.</p></dd>
+<dt>sorter</dt>
+<dd><p>if provided, a tensor matching the shape of the unsorted <code>sorted_sequence</code>
+containing a sequence of indices that sort it in the ascending order on the
+innermost dimension.</p></dd>
 </dl></div>
     <div class="section level2">
     <h2 id="searchsorted-sorted-sequence-values-out-int-false-right-false-out-none-gt-tensor-">searchsorted(sorted_sequence, values, *, out_int32=FALSE, right=FALSE, out=None) -&gt; Tensor <a class="anchor" aria-label="anchor" href="#searchsorted-sorted-sequence-values-out-int-false-right-false-out-none-gt-tensor-"></a></h2>

@@ -88,7 +88,14 @@ that are greater than the specified <code>tol</code> threshold.</p>
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">linalg_matrix_rank</span><span class="op">(</span><span class="va">A</span>, tol <span class="op">=</span> <span class="cn">NULL</span>, hermitian <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">linalg_matrix_rank</span><span class="op">(</span>
+  <span class="va">A</span>,
+  <span class="va">...</span>,
+  atol <span class="op">=</span> <span class="cn">NULL</span>,
+  rtol <span class="op">=</span> <span class="cn">NULL</span>,
+  tol <span class="op">=</span> <span class="cn">NULL</span>,
+  hermitian <span class="op">=</span> <span class="cn">FALSE</span>
+<span class="op">)</span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -96,6 +103,12 @@ that are greater than the specified <code>tol</code> threshold.</p>
     <dl><dt>A</dt>
 <dd><p>(Tensor): tensor of shape <code>(*, m, n)</code> where <code>*</code> is zero or more
 batch dimensions.</p></dd>
+<dt>...</dt>
+<dd><p>Not currently used.</p></dd>
+<dt>atol</dt>
+<dd><p>the absolute tolerance value. When <code>NULL</code> it’s considered to be zero.</p></dd>
+<dt>rtol</dt>
+<dd><p>the relative tolerance value. See above for the value it takes when <code>NULL</code>.</p></dd>
 <dt>tol</dt>
 <dd><p>(float, Tensor, optional): the tolerance value. See above for
 the value it takes when <code>NULL</code>. Default: <code>NULL</code>.</p></dd>

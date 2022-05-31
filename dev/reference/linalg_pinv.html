@@ -94,7 +94,7 @@ the output has the same batch dimensions.</p>
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">linalg_pinv</span><span class="op">(</span><span class="va">A</span>, rcond <span class="op">=</span> <span class="fl">1e-15</span>, hermitian <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">linalg_pinv</span><span class="op">(</span><span class="va">A</span>, rcond <span class="op">=</span> <span class="cn">NULL</span>, hermitian <span class="op">=</span> <span class="cn">FALSE</span>, atol <span class="op">=</span> <span class="cn">NULL</span>, rtol <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -106,10 +106,15 @@ the output has the same batch dimensions.</p>
 If it is a <code>torch_Tensor</code>, its shape must be
 broadcastable to that of the singular values of
 <code>A</code> as returned by <code><a href="linalg_svd.html">linalg_svd()</a></code>.
-Default: <code>1e-15</code>.</p></dd>
+Alias for <code>rtol</code>.
+Default: <code>0</code>.</p></dd>
 <dt>hermitian</dt>
 <dd><p>(bool, optional): indicates whether <code>A</code> is Hermitian if complex
 or symmetric if real. Default: <code>FALSE</code>.</p></dd>
+<dt>atol</dt>
+<dd><p>the absolute tolerance value. When <code>NULL</code> it’s considered to be zero.</p></dd>
+<dt>rtol</dt>
+<dd><p>the relative tolerance value. See above for the value it takes when <code>NULL</code>.</p></dd>
 </dl></div>
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
@@ -170,11 +175,11 @@ numerically stable algorithm.</p></li>
 <span class="r-in"><span class="fu">linalg_pinv</span><span class="op">(</span><span class="va">A</span><span class="op">)</span></span>
 <span class="r-in"><span class="op">}</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> torch_tensor</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  0.4754 -0.0812 -0.5754</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  0.2997 -0.2769 -0.1213</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  0.5925  0.1463 -0.0201</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  0.3086 -0.1654  0.0277</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  0.2830 -0.2869 -0.0862</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> -0.1734  0.3369 -0.2721</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> -0.3446  0.5480 -1.4993</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  0.6632  0.1361  0.6057</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  0.2282 -0.0372 -0.2271</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> -0.2333  0.0944  0.0647</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [ CPUFloatType{5,3} ]</span>
 </code></pre></div>
     </div>

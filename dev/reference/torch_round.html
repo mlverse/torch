@@ -82,13 +82,17 @@
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">torch_round</span><span class="op">(</span><span class="va">self</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">torch_round</span><span class="op">(</span><span class="va">self</span>, <span class="va">decimals</span><span class="op">)</span></code></pre></div>
     </div>
 
     <div class="section level2">
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
     <dl><dt>self</dt>
 <dd><p>(Tensor) the input tensor.</p></dd>
+<dt>decimals</dt>
+<dd><p>Number of decimal places to round to (default: 0).
+If decimals is negative, it specifies the number of positions to
+the left of the decimal point.</p></dd>
 </dl></div>
     <div class="section level2">
     <h2 id="round-input-out-null-gt-tensor-">round(input, out=NULL) -&gt; Tensor <a class="anchor" aria-label="anchor" href="#round-input-out-null-gt-tensor-"></a></h2>
@@ -108,10 +112,10 @@ to the closest integer.</p>
 <span class="r-in"><span class="fu">torch_round</span><span class="op">(</span><span class="va">a</span><span class="op">)</span></span>
 <span class="r-in"><span class="op">}</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> torch_tensor</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> -1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> -0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> -2</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> -0</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [ CPUFloatType{4} ]</span>
 </code></pre></div>
     </div>
