@@ -74,7 +74,7 @@ jobs:
         working-directory: ${{runner.workspace}}/torch/lantern/build
         run: |
           cmake --build . --config Release --parallel 4
-          ${{matrix.fixlib}}
+          ${{matrix.config.fixlib}}
 
       - name: Install libs
         working-directory: ${{runner.workspace}}
