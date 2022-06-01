@@ -11205,6 +11205,14 @@ cpp_jit_compile_get_function <- function(cu, name) {
     .Call('_torch_cpp_jit_compile_get_function', PACKAGE = 'torchpkg', cu, name)
 }
 
+cpp_jit_get_all_operators_names <- function() {
+    .Call('_torch_cpp_jit_get_all_operators_names', PACKAGE = 'torchpkg')
+}
+
+cpp_jit_get_operator_from_name <- function(x) {
+    .Call('_torch_cpp_jit_get_operator_from_name', PACKAGE = 'torchpkg', x)
+}
+
 cpp_lantern_configure <- function(log) {
     invisible(.Call('_torch_cpp_lantern_configure', PACKAGE = 'torchpkg', log))
 }

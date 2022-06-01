@@ -29,3 +29,13 @@ SEXP cpp_jit_compile_get_function(SEXP cu, XPtrTorchstring name) {
     return R_NilValue;
   }
 }
+
+// [[Rcpp::export]]
+torch::vector::string cpp_jit_get_all_operators_names () {
+  return lantern_jit_get_all_operators_names();
+}
+
+// [[Rcpp::export]]
+torch::string cpp_jit_get_operator_from_name (torch::string x) {
+  return lantern_jit_FunctionSchema_name(lantern_jit_get_operation_schema(x.get()));
+}
