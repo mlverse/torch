@@ -20,6 +20,7 @@
 - `linalg_matrix_rank` and `linalg_pinv` gained `atol` and `rtol` arguments while deprecating `tol` and `rcond`. (#835)
 - Added `lr_reduce_on_plateau` learning rate scheduler. (#836, @egillax)
 - `torch_tensor(NULL)` no longer fails. It now returns a tensor with no dimensions and no data. (#839)
+- Moved error message translations into R, this makes easier to add new ones and update the existing. (#841)
 
 # torch 0.7.2
 
