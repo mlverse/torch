@@ -180,3 +180,35 @@ test_that("movedim", {
     fixed = TRUE
   )
 })
+
+test_that("subsetting empty tensors", {
+  
+  x <- torch_tensor(integer())
+  expect_error(
+    x[1],
+    regexp = "index 1 is out of bounds for dimension 1 with size 0",
+    fixed = TRUE
+  )
+  
+  expect_error(
+    x[-1],
+    regexp = "index -1 is out of bounds for dimension 1 with size 0",
+    fixed = TRUE
+  )
+  
+})
+
+test_that("translate", {
+  
+  x <- torch_tensor(c(2), requires_grad = TRUE)
+  x$register_hook(function(grad) {
+    torch_tensor(1)$sum(dim = 4)
+  })
+  y <- 2 * x
+  expect_error(
+    y$backward(),
+    regexp = "Dimension out of range (expected to be in range of [-1, 1], but got 4)",
+    fixed = TRUE
+  )
+  
+})
