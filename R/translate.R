@@ -5,7 +5,8 @@ translate_error_msg <- function(msg) {
     translate_max_index_msg() %>% 
     translate_index_out_of_range_msg() %>% 
     translate_target_index_msg() %>% 
-    translate_contract_error_msg()
+    translate_contract_error_msg() %>% 
+    translate_null_index_error_msg()
 }
 
 translate_dim_error_msg <- function(msg) {
@@ -35,6 +36,11 @@ translate_target_index_msg <- function(msg) {
 
 translate_contract_error_msg <- function(msg) {
   regex <- "(?:.|\\r?\\n)*contracted dimensions need to match, but first has size [0-9]+ in dim ([0-9]+) and second has size [0-9]+ in dim ([0-9]+)(?:.|\\r?\\n)*"
+  translate_increase_group(msg, regex)
+}
+
+translate_null_index_error_msg <- function(msg) {
+  regex <- "(?:.|\\r?\\n)*index (-?[0-9]+) is out of bounds for dimension ([0-9]+) with size 0"
   translate_increase_group(msg, regex)
 }
 

@@ -180,3 +180,20 @@ test_that("movedim", {
     fixed = TRUE
   )
 })
+
+test_that("subsetting empty tensors", {
+  
+  x <- torch_tensor(integer())
+  expect_error(
+    x[1],
+    regexp = "index 1 is out of bounds for dimension 1 with size 0",
+    fixed = TRUE
+  )
+  
+  expect_error(
+    x[-1],
+    regexp = "index -1 is out of bounds for dimension 1 with size 0",
+    fixed = TRUE
+  )
+  
+})
