@@ -33,6 +33,17 @@ template <typename T>
 class EventLoop {
  public:
   EventLoop() = default;
+  ~EventLoop() {
+    std::unique_lock<std::mutex> lock(mtx_);
+    std::packaged_task<T()> fn;
+    while (!tasks_.empty()){
+      fn = std::move(tasks_.front());
+      tasks_.pop_front();
+      if (fn.valid()) {
+        fn();  
+      }
+    }
+  }
   void run() {
     while (true) {
       std::packaged_task<T()> fn;
