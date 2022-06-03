@@ -401,3 +401,21 @@ test_that("can create tensors from tensors", {
   expect_false(rlang::obj_address(x) == rlang::obj_address(y))
   expect_equal_to_tensor(x, y)
 })
+
+test_that("print complex tensors", {
+  testthat::local_edition(3)
+  x <- torch_complex(torch_randn(10), torch_randn(10))
+  expect_snapshot(
+    print(x)  
+  )
+  
+  x$requires_grad_(TRUE)
+  expect_snapshot(
+    print(x)
+  )
+  
+  y <- 2*x
+  expect_snapshot(
+    print(y)
+  )
+})
