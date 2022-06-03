@@ -341,6 +341,16 @@ as.matrix.torch_tensor <- function(x, ...) {
 }
 
 as_array_impl <- function(x) {
+  
+  if (x$is_complex()) {
+    out <- complex(
+      real = as.array(x$real),
+      imaginary = as.array(x$imag)
+    )
+    dim(out) <- dim(x)
+    return(out)
+  }
+  
   a <- cpp_as_array(x$ptr)
 
   if (length(a$dim) <= 1L) {

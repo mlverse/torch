@@ -191,6 +191,11 @@ as.numeric.torch_tensor <- function(x, ...) {
 }
 
 #' @export
+as.complex.torch_tensor <- function(x, ...) {
+  as.complex(as_array(x))
+}
+
+#' @export
 as.integer.torch_tensor <- function(x, ...) {
   as.integer(as_array(x))
 }
