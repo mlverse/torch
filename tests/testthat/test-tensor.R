@@ -404,6 +404,7 @@ test_that("can create tensors from tensors", {
 
 test_that("print complex tensors", {
   testthat::local_edition(3)
+  skip_on_os("windows")
   x <- torch_complex(torch_randn(10), torch_randn(10))
   expect_snapshot(
     print(x)  
