@@ -424,3 +424,10 @@ str.torch_tensor <- function(object, ...) {
 Tensor$set("active", "ptr", function() {
   self
 })
+
+tensor_to_complex <- function(x) {
+  torch_complex(
+    torch_tensor(Re(x), dtype = torch_double()), 
+    torch_tensor(Im(x), dtype = torch_double())
+  )
+}

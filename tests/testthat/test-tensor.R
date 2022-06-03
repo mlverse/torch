@@ -438,3 +438,21 @@ test_that("complex tensors modifications and acessing", {
   expect_equal_to_tensor(x$imag, imag)
   
 })
+
+test_that("create complex from R", {
+  
+  x <- complex(real = c(0, 1), imaginary = c(1, 1))
+  y <- torch_tensor(x)
+  
+  expect_equal_to_r(y$imag, Im(x))
+  expect_equal_to_r(y$real, Re(x))
+  expect_true(y$dtype == torch_cfloat())
+  
+  x <- complex(real = runif(1), imaginary = runif(1))
+  y <- torch_tensor(x, dtype = torch_cdouble())
+  
+  expect_equal_to_r(y$imag, Im(x))
+  expect_equal_to_r(y$real, Re(x))
+  expect_true(y$dtype == torch_cdouble())
+  
+})

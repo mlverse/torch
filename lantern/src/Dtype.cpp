@@ -22,6 +22,8 @@ LANTERN_DTYPE_FUN(bool, kBool)
 LANTERN_DTYPE_FUN(quint8, kQUInt8)
 LANTERN_DTYPE_FUN(qint8, kQInt8)
 LANTERN_DTYPE_FUN(qint32, kQInt32)
+LANTERN_DTYPE_FUN(cfloat, kComplexFloat)
+LANTERN_DTYPE_FUN(cdouble, kComplexDouble)
 
 const char *_lantern_Dtype_type(void *dtype) {
   LANTERN_FUNCTION_START

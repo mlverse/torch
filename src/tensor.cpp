@@ -91,6 +91,21 @@ torch::Tensor create_tensor_from_tensor(SEXP x) {
   return lantern_detach_tensor(tensor.get());
 }
 
+torch::Tensor create_tensor_from_any(SEXP x, torch::Dtype cdtype) {
+  switch (TYPEOF(x)) {
+  case EXTPTRSXP: {
+    return create_tensor_from_tensor(x);
+  }
+  case CPLXSXP: {
+    Rcpp::Function f = Rcpp::Environment::namespace_env("torch").find("tensor_to_complex");
+    return Rcpp::as<torch::Tensor>(f(x));
+  }
+  default: {
+    return create_tensor_from_atomic(x, cdtype);
+  }
+  }
+}
+
 // [[Rcpp::export]]
 torch::Tensor torch_tensor_cpp(SEXP x, Rcpp::Nullable<torch::Dtype> dtype,
                                Rcpp::Nullable<torch::Device> device,
@@ -128,7 +143,13 @@ torch::Tensor torch_tensor_cpp(SEXP x, Rcpp::Nullable<torch::Dtype> dtype,
         break;
       }
     }
-  case NILSXP: {
+    case CPLXSXP: {
+      cdtype = lantern_Dtype_cdouble();
+      final_type = dtype.isNull() ? torch::Dtype(lantern_Dtype_cfloat())
+        : Rcpp::as<torch::Dtype>(dtype);
+      break;
+    }
+    case NILSXP: {
       cdtype = lantern_Dtype_bool();
       final_type = dtype.isNull() ? torch::Dtype(lantern_Dtype_bool())
         : Rcpp::as<torch::Dtype>(dtype);
@@ -142,9 +163,7 @@ torch::Tensor torch_tensor_cpp(SEXP x, Rcpp::Nullable<torch::Dtype> dtype,
   // We now create the first tensor wrapping the R object. Here we use `cdtype`
   // For example when the SEXP is a logical vector, it actually store values as
   // int32 so we first create a int32 tensor and then cast to a boolean.
-  torch::Tensor tensor = (TYPEOF(x) != EXTPTRSXP)
-                             ? create_tensor_from_atomic(x, cdtype)
-                             : create_tensor_from_tensor(x);
+  auto tensor = create_tensor_from_any(x, cdtype);
 
   // We will now cast to the final options.
   torch::TensorOptions options = lantern_TensorOptions();
