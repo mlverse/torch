@@ -419,3 +419,22 @@ test_that("print complex tensors", {
     print(y)
   )
 })
+
+test_that("complex tensors modifications and acessing", {
+  
+  real <- torch_randn(10, 10)
+  imag <- torch_randn(10, 10)
+  x <- torch_complex(real, imag)
+  
+  expect_equal_to_tensor(x$real, real)
+  expect_equal_to_tensor(x$imag, imag)
+  
+  real <- torch_randn(10, 10)
+  imag <- torch_randn(10, 10)
+  x$real <- real
+  x$imag <- imag
+  
+  expect_equal_to_tensor(x$real, real)
+  expect_equal_to_tensor(x$imag, imag)
+  
+})

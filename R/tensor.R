@@ -276,6 +276,14 @@ Tensor <- R7Class(
     },
     is_leaf = function() {
       private$`_is_leaf`()
+    },
+    real = function(x) {
+      if (missing(x)) return(torch_real(self))
+      self$real$copy_(x)
+    },
+    imag = function(x) {
+      if (missing(x)) return(torch_imag(self))
+      self$imag$copy_(x)
     }
   )
 )
