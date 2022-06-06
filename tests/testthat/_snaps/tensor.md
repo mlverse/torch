@@ -252,3 +252,30 @@
        1.0986
       [ CPUFloatType{3} ][ grad_fn = <LogBackward0> ]
 
+# print complex tensors
+
+    Code
+      print(x)
+    Output
+      torch_tensor
+      ℹ Use `$real` or `$imag` to print the contents of this tensor.
+      [ CPUComplexFloatType{10} ]
+
+---
+
+    Code
+      print(x)
+    Output
+      torch_tensor
+      ℹ Use `$real` or `$imag` to print the contents of this tensor.
+      [ CPUComplexFloatType{10} ][ requires_grad = TRUE ]
+
+---
+
+    Code
+      print(y)
+    Output
+      torch_tensor
+      ℹ Use `$real` or `$imag` to print the contents of this tensor.
+      [ CPUComplexFloatType{10} ][ grad_fn = <MulBackward0> ]
+

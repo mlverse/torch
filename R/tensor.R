@@ -13,7 +13,16 @@ Tensor <- R7Class(
     },
     print = function(n = 30) {
       cat("torch_tensor\n")
-      if (is_undefined_tensor(self) || !is_meta_device(self$device)) {
+      if (torch_is_complex(self) && !is_meta_device(self$device)) {
+        dtype <- as.character(self$dtype)
+        device <- toupper(self$device$type)
+        shape <- paste(self$shape, collapse = ",")
+        cat(cli::cli_format_method(
+          cli::cli_alert_info("Use {.var $real} or {.var $imag} to print the contents of this tensor.")
+        ))
+        cat("\n")
+        cat("[ ", device, dtype, "Type{", shape, "} ]", sep = "")
+      } else if (is_undefined_tensor(self) || !is_meta_device(self$device)) {
         cpp_torch_tensor_print(self$ptr, n)
       } else {
         cat("...\n")
@@ -269,6 +278,14 @@ Tensor <- R7Class(
     },
     is_leaf = function() {
       private$`_is_leaf`()
+    },
+    real = function(x) {
+      if (missing(x)) return(torch_real(self))
+      self$real$copy_(x)
+    },
+    imag = function(x) {
+      if (missing(x)) return(torch_imag(self))
+      self$imag$copy_(x)
     }
   )
 )
@@ -326,6 +343,16 @@ as.matrix.torch_tensor <- function(x, ...) {
 }
 
 as_array_impl <- function(x) {
+  
+  if (x$is_complex()) {
+    out <- complex(
+      real = as.array(x$real),
+      imaginary = as.array(x$imag)
+    )
+    dim(out) <- dim(x)
+    return(out)
+  }
+  
   a <- cpp_as_array(x$ptr)
 
   if (length(a$dim) <= 1L) {
@@ -409,3 +436,10 @@ str.torch_tensor <- function(object, ...) {
 Tensor$set("active", "ptr", function() {
   self
 })
+
+tensor_to_complex <- function(x) {
+  torch_complex(
+    torch_tensor(Re(x), dtype = torch_double()), 
+    torch_tensor(Im(x), dtype = torch_double())
+  )
+}

@@ -6,6 +6,10 @@
 \alias{torch_float}
 \alias{torch_float64}
 \alias{torch_double}
+\alias{torch_cfloat}
+\alias{torch_cfloat32}
+\alias{torch_cdouble}
+\alias{torch_cfloat64}
 \alias{torch_float16}
 \alias{torch_half}
 \alias{torch_uint8}
@@ -29,6 +33,14 @@ torch_float()
 torch_float64()
 
 torch_double()
+
+torch_cfloat()
+
+torch_cfloat32()
+
+torch_cdouble()
+
+torch_cfloat64()
 
 torch_float16()
 

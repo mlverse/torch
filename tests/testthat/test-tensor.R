@@ -401,3 +401,71 @@ test_that("can create tensors from tensors", {
   expect_false(rlang::obj_address(x) == rlang::obj_address(y))
   expect_equal_to_tensor(x, y)
 })
+
+test_that("print complex tensors", {
+  testthat::local_edition(3)
+  skip_on_os("windows")
+  x <- torch_complex(torch_randn(10), torch_randn(10))
+  expect_snapshot(
+    print(x)  
+  )
+  
+  x$requires_grad_(TRUE)
+  expect_snapshot(
+    print(x)
+  )
+  
+  y <- 2*x
+  expect_snapshot(
+    print(y)
+  )
+})
+
+test_that("complex tensors modifications and acessing", {
+  
+  real <- torch_randn(10, 10)
+  imag <- torch_randn(10, 10)
+  x <- torch_complex(real, imag)
+  
+  expect_equal_to_tensor(x$real, real)
+  expect_equal_to_tensor(x$imag, imag)
+  
+  real <- torch_randn(10, 10)
+  imag <- torch_randn(10, 10)
+  x$real <- real
+  x$imag <- imag
+  
+  expect_equal_to_tensor(x$real, real)
+  expect_equal_to_tensor(x$imag, imag)
+  
+})
+
+test_that("create complex from and to R", {
+  
+  x <- complex(real = c(0, 1), imaginary = c(1, 1))
+  y <- torch_tensor(x)
+  
+  expect_equal_to_r(y$imag, Im(x))
+  expect_equal_to_r(y$real, Re(x))
+  expect_true(y$dtype == torch_cfloat())
+  
+  x <- complex(real = runif(1), imaginary = runif(1))
+  y <- torch_tensor(x, dtype = torch_cdouble())
+  
+  expect_equal_to_r(y$imag, Im(x))
+  expect_equal_to_r(y$real, Re(x))
+  expect_true(y$dtype == torch_cdouble())
+  
+  x <- torch_complex(torch_randn(10, 10), torch_randn(10, 10))
+  y <- as.array(x)
+  z <- torch_tensor(y)
+  
+  expect_true(torch_allclose(x, z))
+  
+  x <- torch_complex(1, 1)
+  y <- as.array(x)
+  z <- torch_tensor(y)
+  expect_true(torch_allclose(x, z))
+  expect_equal(as.complex(x), complex(real = 1,imag = 1))
+  
+})

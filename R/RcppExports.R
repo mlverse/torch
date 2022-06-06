@@ -269,6 +269,14 @@ cpp_torch_qint32 <- function() {
     .Call('_torch_cpp_torch_qint32', PACKAGE = 'torchpkg')
 }
 
+cpp_torch_cfloat <- function() {
+    .Call('_torch_cpp_torch_cfloat', PACKAGE = 'torchpkg')
+}
+
+cpp_torch_cdouble <- function() {
+    .Call('_torch_cpp_torch_cdouble', PACKAGE = 'torchpkg')
+}
+
 cpp_set_default_dtype <- function(x) {
     invisible(.Call('_torch_cpp_set_default_dtype', PACKAGE = 'torchpkg', x))
 }

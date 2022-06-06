@@ -749,6 +749,26 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// cpp_torch_cfloat
+torch::Dtype cpp_torch_cfloat();
+RcppExport SEXP _torch_cpp_torch_cfloat() {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_cfloat());
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_torch_cdouble
+torch::Dtype cpp_torch_cdouble();
+RcppExport SEXP _torch_cpp_torch_cdouble() {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_cdouble());
+    return rcpp_result_gen;
+END_RCPP
+}
 // cpp_set_default_dtype
 void cpp_set_default_dtype(XPtrTorchDtype x);
 RcppExport SEXP _torch_cpp_set_default_dtype(SEXP xSEXP) {
@@ -37863,6 +37883,8 @@ static const R_CallMethodDef CallEntries[] = {
     {"_torch_cpp_torch_quint8", (DL_FUNC) &_torch_cpp_torch_quint8, 0},
     {"_torch_cpp_torch_qint8", (DL_FUNC) &_torch_cpp_torch_qint8, 0},
     {"_torch_cpp_torch_qint32", (DL_FUNC) &_torch_cpp_torch_qint32, 0},
+    {"_torch_cpp_torch_cfloat", (DL_FUNC) &_torch_cpp_torch_cfloat, 0},
+    {"_torch_cpp_torch_cdouble", (DL_FUNC) &_torch_cpp_torch_cdouble, 0},
     {"_torch_cpp_set_default_dtype", (DL_FUNC) &_torch_cpp_set_default_dtype, 1},
     {"_torch_cpp_get_default_dtype", (DL_FUNC) &_torch_cpp_get_default_dtype, 0},
     {"_torch_cpp_torch_method_set_data_self_Tensor_new_data_Tensor", (DL_FUNC) &_torch_cpp_torch_method_set_data_self_Tensor_new_data_Tensor, 2},

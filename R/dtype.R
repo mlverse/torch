@@ -78,6 +78,20 @@ torch_float64 <- function() torch_dtype$new(cpp_torch_float64())
 #' @export
 torch_double <- function() torch_dtype$new(cpp_torch_float64())
 
+
+#' @rdname torch_dtype
+#' @export
+torch_cfloat <- function() torch_dtype$new(cpp_torch_cfloat())
+#' @rdname torch_dtype
+#' @export
+torch_cfloat32 <- function() torch_dtype$new(cpp_torch_cfloat())
+#' @rdname torch_dtype
+#' @export
+torch_cdouble <- function() torch_dtype$new(cpp_torch_cdouble())
+#' @rdname torch_dtype
+#' @export
+torch_cfloat64 <- function() torch_dtype$new(cpp_torch_cdouble())
+
 #' @rdname torch_dtype
 #' @export
 torch_float16 <- function() torch_dtype$new(cpp_torch_float16())
@@ -129,6 +143,7 @@ torch_qint8 <- function() torch_dtype$new(cpp_torch_qint8())
 #' @rdname torch_dtype
 #' @export
 torch_qint32 <- function() torch_dtype$new(cpp_torch_qint32())
+
 
 #' @export
 `==.torch_dtype` <- function(e1, e2) {
