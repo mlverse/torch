@@ -21,6 +21,7 @@
 - Added `lr_reduce_on_plateau` learning rate scheduler. (#836, @egillax)
 - `torch_tensor(NULL)` no longer fails. It now returns a tensor with no dimensions and no data. (#839)
 - Moved error message translations into R, this makes easier to add new ones and update the existing. (#841)
+- Improved complex numbers handling, including better printing and support for casting from and to R. (#844)
 
 # torch 0.7.2
 
