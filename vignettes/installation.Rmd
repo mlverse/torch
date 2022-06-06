@@ -42,10 +42,9 @@ Since version 0.1.1 torch supports GPU installation on Windows. In order to use 
 
 -   Have a CUDA compatible NVIDIA GPU. You can find if you have a CUDA compatible GPU [here](https://developer.nvidia.com/cuda-gpus#compute).
 
--   Have properly installed the NVIDIA CUDA toolkit version 10.2 or 11.1. For CUDA v11.1, follow the installation instructions [here](https://docs.nvidia.com/cuda/archive/11.1.1/index.html). **Note**: We currently do **not** support the latest CUDA version 11.
+-   Have properly installed the NVIDIA CUDA toolkit version 11.3. For CUDA v11.3, follow the installation instructions [here](https://docs.nvidia.com/cuda/archive/11.3.1/index.html). **Note**: The version of the CUDA toolkit must match exactly what's mentioed above.
 
--   Have installed cuDNN version 7.6 (if using CUDA v10.2) or cuDNN 8.0 (if using CUDA 11.1). 
-Follow the installation instructions available [here](https://docs.nvidia.com/deeplearning/cudnn/archives/cudnn-805/install-guide/index.html).
+-   Have installed cuDNN version cuDNN 8.4. Follow the installation instructions available [here](https://docs.nvidia.com/deeplearning/cudnn/archives/cudnn-840/install-guide/index.html).
 
 Once you have installed all pre-requisites you can install `torch` with:
 
@@ -53,7 +52,7 @@ Once you have installed all pre-requisites you can install `torch` with:
 install.packages("torch")
 ```
 
-If you have followed default installation locations we will detect that you have CUDA software installed and automatically download the GPU enabled Lantern binaries. You can also specify the `CUDA` env var with something like `Sys.setenv(CUDA="11.1")` if you want to force an specific version of the CUDA toolkit.
+If you have followed default installation locations we will detect that you have CUDA software installed and automatically download the GPU enabled Lantern binaries. You can also specify the `CUDA` env var with something like `Sys.setenv(CUDA="11.3")` if you want to force an specific version of the CUDA toolkit.
 
 ## MacOS
 
@@ -81,9 +80,9 @@ To install the GPU version of `torch` on linux you must verify that:
 
 -   You have a NVIDIA CUDA compatible GPU. You can find if you have a CUDA compatible GPU [here](https://developer.nvidia.com/cuda-gpus#compute).
 
--   You have correctly installed the NVIDIA CUDA Toolkit versions 10.2 or 11.1, follow the instructions [here](https://docs.nvidia.com/cuda/archive/11.1.1/index.html).
+-   You have correctly installed the NVIDIA CUDA Toolkit versions 10.2 or 11.3, follow the instructions [here](https://docs.nvidia.com/cuda/archive/11.3.1/).
 
--   You have installed cuDNN version 7.6 - (for CUDA 10.2) and 8.0 for CUDA 11.1. Follow the installation instructions available [here](https://docs.nvidia.com/deeplearning/cudnn/archives/cudnn-805/install-guide/index.html). 
+-   You have installed cuDNN version 7.6 - (for CUDA 10.2) and 8.4 for CUDA 11.3. Follow the installation instructions available [here](https://docs.nvidia.com/deeplearning/cudnn/archives/cudnn-841/install-guide/index.html). 
 
 Once you have installed all pre-requisites you can install `torch` with:
 
