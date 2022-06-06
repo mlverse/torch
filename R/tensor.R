@@ -14,12 +14,14 @@ Tensor <- R7Class(
     print = function(n = 30) {
       cat("torch_tensor\n")
       if (torch_is_complex(self) && !is_meta_device(self$device)) {
-        dtype <- tail(capture.output(cpp_torch_tensor_print(self, 1)), 1)
+        dtype <- as.character(self$dtype)
+        device <- toupper(self$device$type)
+        shape <- paste(self$shape, collapse = ",")
         cat(cli::cli_format_method(
           cli::cli_alert_info("Use {.var $real} or {.var $imag} to print the contents of this tensor.")
         ))
         cat("\n")
-        cat(dtype)
+        cat("[ ", device, dtype, "Type{", shape, "} ]", sep = "")
       } else if (is_undefined_tensor(self) || !is_meta_device(self$device)) {
         cpp_torch_tensor_print(self$ptr, n)
       } else {
