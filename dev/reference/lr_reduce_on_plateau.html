@@ -149,7 +149,8 @@ each update. Default: <code>FALSE</code>.</p></dd>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span> </span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="torch_is_installed.html">torch_is_installed</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
+<span class="r-in"><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span> </span>
 <span class="r-in"><span class="va">optimizer</span> <span class="op">&lt;-</span> <span class="fu"><a href="optim_sgd.html">optim_sgd</a></span><span class="op">(</span><span class="va">model</span><span class="op">$</span><span class="fu">parameters</span><span class="op">(</span><span class="op">)</span>, lr<span class="op">=</span><span class="fl">0.1</span>, momentum<span class="op">=</span><span class="fl">0.9</span><span class="op">)</span></span>
 <span class="r-in"><span class="va">scheduler</span> <span class="op">&lt;-</span> <span class="fu">lr_reduce_on_plateau</span><span class="op">(</span><span class="va">optimizer</span>, <span class="st">'min'</span><span class="op">)</span></span>
 <span class="r-in"><span class="kw">for</span> <span class="op">(</span><span class="va">epoch</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fl">10</span><span class="op">)</span> <span class="op">{</span></span>
@@ -157,6 +158,7 @@ each update. Default: <code>FALSE</code>.</p></dd>
 <span class="r-in"> <span class="va">val_loss</span> <span class="op">&lt;-</span> <span class="fu">validate</span><span class="op">(</span><span class="va">...</span><span class="op">)</span></span>
 <span class="r-in"> <span class="co"># note that step should be called after validate</span></span>
 <span class="r-in"> <span class="va">scheduler</span><span class="op">$</span><span class="fu">step</span><span class="op">(</span><span class="va">val_loss</span><span class="op">)</span></span>
+<span class="r-in"><span class="op">}</span></span>
 <span class="r-in"><span class="op">}</span></span>
 <span class="r-in"><span class="op">}</span></span>
 </code></pre></div>
