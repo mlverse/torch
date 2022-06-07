@@ -1,27 +1,41 @@
 # torch (development version)
 
+## Breaking changes
+
+- Serialization is now much faster because we avoid base64 encoding the serialized tensors. As a result, files serialized with newer versions of torch can't be opened with older versions of torch. Set `options(torch.serialization_version = 1)` if you want your file to be readable by older versions. (#803)
+- Deprecated support for CUDA 10.2 on Windows. (#835)
+- `linalg_matrix_rank` and `linalg_pinv` gained `atol` and `rtol` arguments while deprecating `tol` and `rcond`. (#835)
+
+## New features
+
 - Improved auto-detection of CUDA version on Windows. (#798, @SvenVw)
 - Improved parallel dataloaders performance by using a socket conection to transfer data between workers and the main process. (#803)
-- Serialization is now much faster because we avoid base64 encoding the serialized tensors. As a result, files serialized with newer versions of torch can't be opened with older versions of torch. Set `options(torch.serialization_version = 1)` if you want your file to be readable by older versions. (#803)
 - `keep_graph` now defaults to the value of `create_graph` when calling `$backward()`. We also renamed it to `retain_graph` to match PyTorch. (#811)
 - Optimizers created with `optimizer` now carry the classname in the generator and in instances. Optimizer generators now have the class `torch_optimizer_generator`. The class of torch optimizers has been renamed from `torch_Optimizer` to `torch_optimizer`. (#814)
 - New utility function `nn_prune_head()` to prune top layer(s) of a network (#819 @cregouby)
-- `torch_kron()` is now exported (#818). 
-- Fixed bug in weight decay handling in the Adam optimizer. (#824, @egillax)
-- Fixed bug in `nn_l1_loss`. (#825, @sebffischer)
+- `torch_kron()` is now exported (#818).
 - Added `nn_embedding_bag`. (#827, @egillax)
-- It's now possible to modify the gradient of a tensor using the syntax `x$grad <- new_grad`. (#832)
 - `nn_multihead_attention` now supports the `batch_first` option. (#828, @jonthegeek)
-- Nice error message when `embed_dim` is not divisible by `num_heads` in `nn_multihead_attention`. (#828)
+- It's now possible to modify the gradient of a tensor using the syntax `x$grad <- new_grad`. (#832)
 - `sampler()` is now exported allowing to create custom samplers that can be passed to `dataloader()`. (#833)
 - Creating `nn_module`s without a `initialize` method is now supported. (#834)
-- Updated to LibTorch v1.11.0. (#835)
-- Deprecated support for CUDA 10.2 on Windows. (#835)
-- `linalg_matrix_rank` and `linalg_pinv` gained `atol` and `rtol` arguments while deprecating `tol` and `rcond`. (#835)
 - Added `lr_reduce_on_plateau` learning rate scheduler. (#836, @egillax)
 - `torch_tensor(NULL)` no longer fails. It now returns a tensor with no dimensions and no data. (#839)
-- Moved error message translations into R, this makes easier to add new ones and update the existing. (#841)
 - Improved complex numbers handling, including better printing and support for casting from and to R. (#844)
+
+## Bug fixes
+
+- Fixed bug in weight decay handling in the Adam optimizer. (#824, @egillax)
+- Fixed bug in `nn_l1_loss`. (#825, @sebffischer)
+
+## Documentation
+
+- Nice error message when `embed_dim` is not divisible by `num_heads` in `nn_multihead_attention`. (#828)
+
+## Internal
+
+- Updated to LibTorch v1.11.0. (#835)
+- Moved error message translations into R, this makes easier to add new ones and update the existing. (#841)
 
 # torch 0.7.2
 
