@@ -77,35 +77,49 @@
 
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="development version" id="torch-development-version">torch (development version)<a class="anchor" aria-label="anchor" href="#torch-development-version"></a></h2>
+<div class="section level3">
+<h3 id="breaking-changes-development-version">Breaking changes<a class="anchor" aria-label="anchor" href="#breaking-changes-development-version"></a></h3>
+<ul><li>Serialization is now much faster because we avoid base64 encoding the serialized tensors. As a result, files serialized with newer versions of torch can’t be opened with older versions of torch. Set <code>options(torch.serialization_version = 1)</code> if you want your file to be readable by older versions. (<a href="https://github.com/mlverse/torch/issues/803" class="external-link">#803</a>)</li>
+<li>Deprecated support for CUDA 10.2 on Windows. (<a href="https://github.com/mlverse/torch/issues/835" class="external-link">#835</a>)</li>
+<li>
+<code>linalg_matrix_rank</code> and <code>linalg_pinv</code> gained <code>atol</code> and <code>rtol</code> arguments while deprecating <code>tol</code> and <code>rcond</code>. (<a href="https://github.com/mlverse/torch/issues/835" class="external-link">#835</a>)</li>
+</ul></div>
+<div class="section level3">
+<h3 id="new-features-development-version">New features<a class="anchor" aria-label="anchor" href="#new-features-development-version"></a></h3>
 <ul><li>Improved auto-detection of CUDA version on Windows. (<a href="https://github.com/mlverse/torch/issues/798" class="external-link">#798</a>, <a href="https://github.com/SvenVw" class="external-link">@SvenVw</a>)</li>
 <li>Improved parallel dataloaders performance by using a socket conection to transfer data between workers and the main process. (<a href="https://github.com/mlverse/torch/issues/803" class="external-link">#803</a>)</li>
-<li>Serialization is now much faster because we avoid base64 encoding the serialized tensors. As a result, files serialized with newer versions of torch can’t be opened with older versions of torch. Set <code>options(torch.serialization_version = 1)</code> if you want your file to be readable by older versions. (<a href="https://github.com/mlverse/torch/issues/803" class="external-link">#803</a>)</li>
 <li>
 <code>keep_graph</code> now defaults to the value of <code>create_graph</code> when calling <code>$backward()</code>. We also renamed it to <code>retain_graph</code> to match PyTorch. (<a href="https://github.com/mlverse/torch/issues/811" class="external-link">#811</a>)</li>
 <li>Optimizers created with <code>optimizer</code> now carry the classname in the generator and in instances. Optimizer generators now have the class <code>torch_optimizer_generator</code>. The class of torch optimizers has been renamed from <code>torch_Optimizer</code> to <code>torch_optimizer</code>. (<a href="https://github.com/mlverse/torch/issues/814" class="external-link">#814</a>)</li>
 <li>New utility function <code><a href="../reference/nn_prune_head.html">nn_prune_head()</a></code> to prune top layer(s) of a network (<a href="https://github.com/mlverse/torch/issues/819" class="external-link">#819</a> <a href="https://github.com/cregouby" class="external-link">@cregouby</a>)</li>
 <li>
 <code><a href="../reference/torch_kron.html">torch_kron()</a></code> is now exported (<a href="https://github.com/mlverse/torch/issues/818" class="external-link">#818</a>).</li>
-<li>Fixed bug in weight decay handling in the Adam optimizer. (<a href="https://github.com/mlverse/torch/issues/824" class="external-link">#824</a>, <a href="https://github.com/egillax" class="external-link">@egillax</a>)</li>
-<li>Fixed bug in <code>nn_l1_loss</code>. (<a href="https://github.com/mlverse/torch/issues/825" class="external-link">#825</a>, <a href="https://github.com/sebffischer" class="external-link">@sebffischer</a>)</li>
 <li>Added <code>nn_embedding_bag</code>. (<a href="https://github.com/mlverse/torch/issues/827" class="external-link">#827</a>, <a href="https://github.com/egillax" class="external-link">@egillax</a>)</li>
-<li>It’s now possible to modify the gradient of a tensor using the syntax <code>x$grad &lt;- new_grad</code>. (<a href="https://github.com/mlverse/torch/issues/832" class="external-link">#832</a>)</li>
 <li>
 <code>nn_multihead_attention</code> now supports the <code>batch_first</code> option. (<a href="https://github.com/mlverse/torch/issues/828" class="external-link">#828</a>, <a href="https://github.com/jonthegeek" class="external-link">@jonthegeek</a>)</li>
-<li>Nice error message when <code>embed_dim</code> is not divisible by <code>num_heads</code> in <code>nn_multihead_attention</code>. (<a href="https://github.com/mlverse/torch/issues/828" class="external-link">#828</a>)</li>
+<li>It’s now possible to modify the gradient of a tensor using the syntax <code>x$grad &lt;- new_grad</code>. (<a href="https://github.com/mlverse/torch/issues/832" class="external-link">#832</a>)</li>
 <li>
 <code><a href="../reference/sampler.html">sampler()</a></code> is now exported allowing to create custom samplers that can be passed to <code><a href="../reference/dataloader.html">dataloader()</a></code>. (<a href="https://github.com/mlverse/torch/issues/833" class="external-link">#833</a>)</li>
 <li>Creating <code>nn_module</code>s without a <code>initialize</code> method is now supported. (<a href="https://github.com/mlverse/torch/issues/834" class="external-link">#834</a>)</li>
-<li>Updated to LibTorch v1.11.0. (<a href="https://github.com/mlverse/torch/issues/835" class="external-link">#835</a>)</li>
-<li>Deprecated support for CUDA 10.2 on Windows. (<a href="https://github.com/mlverse/torch/issues/835" class="external-link">#835</a>)</li>
-<li>
-<code>linalg_matrix_rank</code> and <code>linalg_pinv</code> gained <code>atol</code> and <code>rtol</code> arguments while deprecating <code>tol</code> and <code>rcond</code>. (<a href="https://github.com/mlverse/torch/issues/835" class="external-link">#835</a>)</li>
 <li>Added <code>lr_reduce_on_plateau</code> learning rate scheduler. (<a href="https://github.com/mlverse/torch/issues/836" class="external-link">#836</a>, <a href="https://github.com/egillax" class="external-link">@egillax</a>)</li>
 <li>
 <code>torch_tensor(NULL)</code> no longer fails. It now returns a tensor with no dimensions and no data. (<a href="https://github.com/mlverse/torch/issues/839" class="external-link">#839</a>)</li>
-<li>Moved error message translations into R, this makes easier to add new ones and update the existing. (<a href="https://github.com/mlverse/torch/issues/841" class="external-link">#841</a>)</li>
 <li>Improved complex numbers handling, including better printing and support for casting from and to R. (<a href="https://github.com/mlverse/torch/issues/844" class="external-link">#844</a>)</li>
 </ul></div>
+<div class="section level3">
+<h3 id="bug-fixes-development-version">Bug fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-development-version"></a></h3>
+<ul><li>Fixed bug in weight decay handling in the Adam optimizer. (<a href="https://github.com/mlverse/torch/issues/824" class="external-link">#824</a>, <a href="https://github.com/egillax" class="external-link">@egillax</a>)</li>
+<li>Fixed bug in <code>nn_l1_loss</code>. (<a href="https://github.com/mlverse/torch/issues/825" class="external-link">#825</a>, <a href="https://github.com/sebffischer" class="external-link">@sebffischer</a>)</li>
+</ul></div>
+<div class="section level3">
+<h3 id="documentation-development-version">Documentation<a class="anchor" aria-label="anchor" href="#documentation-development-version"></a></h3>
+<ul><li>Nice error message when <code>embed_dim</code> is not divisible by <code>num_heads</code> in <code>nn_multihead_attention</code>. (<a href="https://github.com/mlverse/torch/issues/828" class="external-link">#828</a>)</li></ul></div>
+<div class="section level3">
+<h3 id="internal-development-version">Internal<a class="anchor" aria-label="anchor" href="#internal-development-version"></a></h3>
+<ul><li>Updated to LibTorch v1.11.0. (<a href="https://github.com/mlverse/torch/issues/835" class="external-link">#835</a>)</li>
+<li>Moved error message translations into R, this makes easier to add new ones and update the existing. (<a href="https://github.com/mlverse/torch/issues/841" class="external-link">#841</a>)</li>
+</ul></div>
+</div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.7.2" id="torch-072">torch 0.7.2<a class="anchor" aria-label="anchor" href="#torch-072"></a></h2><p class="text-muted">CRAN release: 2022-02-25</p>
 <div class="section level3">
