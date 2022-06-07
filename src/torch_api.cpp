@@ -141,9 +141,8 @@ SEXP operator_sexp_optional_tensor(const XPtrTorchOptionalTensor* self) {
   if (!lantern_optional_tensor_has_value(self->get())) {
     return R_NilValue;
   }
-
-  return Rcpp::wrap(
-      XPtrTorchTensor(lantern_optional_tensor_value(self->get())));
+  auto x = torch::Tensor(lantern_optional_tensor_value(self->get()));
+  return x;
 }
 
 XPtrTorchOptionalTensor from_sexp_optional_tensor(SEXP x) {
