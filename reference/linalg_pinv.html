@@ -24,7 +24,7 @@ the output has the same batch dimensions."><!-- mathjax --><script src="https://
     
     <a class="navbar-brand me-2" href="../index.html">torch</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.7.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.8.0</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -94,7 +94,7 @@ the output has the same batch dimensions.</p>
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">linalg_pinv</span><span class="op">(</span><span class="va">A</span>, rcond <span class="op">=</span> <span class="fl">1e-15</span>, hermitian <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">linalg_pinv</span><span class="op">(</span><span class="va">A</span>, rcond <span class="op">=</span> <span class="cn">NULL</span>, hermitian <span class="op">=</span> <span class="cn">FALSE</span>, atol <span class="op">=</span> <span class="cn">NULL</span>, rtol <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -106,10 +106,15 @@ the output has the same batch dimensions.</p>
 If it is a <code>torch_Tensor</code>, its shape must be
 broadcastable to that of the singular values of
 <code>A</code> as returned by <code><a href="linalg_svd.html">linalg_svd()</a></code>.
-Default: <code>1e-15</code>.</p></dd>
+Alias for <code>rtol</code>.
+Default: <code>0</code>.</p></dd>
 <dt>hermitian</dt>
 <dd><p>(bool, optional): indicates whether <code>A</code> is Hermitian if complex
 or symmetric if real. Default: <code>FALSE</code>.</p></dd>
+<dt>atol</dt>
+<dd><p>the absolute tolerance value. When <code>NULL</code> it’s considered to be zero.</p></dd>
+<dt>rtol</dt>
+<dd><p>the relative tolerance value. See above for the value it takes when <code>NULL</code>.</p></dd>
 </dl></div>
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
@@ -170,11 +175,11 @@ numerically stable algorithm.</p></li>
 <span class="r-in"><span class="fu">linalg_pinv</span><span class="op">(</span><span class="va">A</span><span class="op">)</span></span>
 <span class="r-in"><span class="op">}</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> torch_tensor</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> -0.2388 -0.4418 -0.1123</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  0.3966  0.1106  0.2333</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> -0.3953  0.3835  0.2477</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  0.0554  0.0867 -0.2621</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> -0.1905  0.9018  0.0654</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> -0.2427  0.0173  0.0147</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  0.3035 -0.0458 -0.0641</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  0.0197  0.2681 -0.0363</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> -0.0575 -0.1725  0.0138</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  0.4833 -0.7323 -1.0472</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [ CPUFloatType{5,3} ]</span>
 </code></pre></div>
     </div>
@@ -187,7 +192,7 @@ numerically stable algorithm.</p></li>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
 </div>
 
     </footer></div>

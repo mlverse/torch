@@ -33,7 +33,7 @@
     
     <a class="navbar-brand me-2" href="../../index.html">torch</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.7.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.8.0</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -1391,7 +1391,7 @@ f(X=k) = p^{k - 1} (1 - p)
 <h4 id="examples-10">Examples:<a class="anchor" aria-label="anchor" href="#examples-10"></a>
 </h4>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/torch_randn.html">torch_randn</a></span><span class="op">(</span><span class="fl">4</span>, dtype<span class="op">=</span><span class="fu">torch_cfloat</span><span class="op">(</span><span class="op">)</span><span class="op">)</span>
+<code class="sourceCode R"><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/torch_randn.html">torch_randn</a></span><span class="op">(</span><span class="fl">4</span>, dtype<span class="op">=</span><span class="fu"><a href="../../reference/torch_dtype.html">torch_cfloat</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span>
 <span class="va">x</span>
 <span class="va">x</span><span class="op">$</span><span class="va">imag</span></code></pre></div>
 </div>
@@ -2462,7 +2462,7 @@ f(x) = \dfrac{1}{x \sigma \sqrt{2\pi}}\ e^{-\frac{(\ln x - \mu)^2}{2\sigma^2}}
 <h4 id="examples-24">Examples:<a class="anchor" aria-label="anchor" href="#examples-24"></a>
 </h4>
 <div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/torch_randn.html">torch_randn</a></span><span class="op">(</span><span class="fl">4</span>, dtype<span class="op">=</span><span class="fu">torch_cfloat</span><span class="op">(</span><span class="op">)</span><span class="op">)</span>
+<code class="sourceCode R"><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/torch_randn.html">torch_randn</a></span><span class="op">(</span><span class="fl">4</span>, dtype<span class="op">=</span><span class="fu"><a href="../../reference/torch_dtype.html">torch_cfloat</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span>
 <span class="va">x</span>
 <span class="va">x</span><span class="op">$</span><span class="va">real</span></code></pre></div>
 </div>
@@ -3513,7 +3513,7 @@ P(x) = \dfrac{1}{\text{to} - \text{from}}
 
 <div class="pkgdown-footer-right">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
 </div>
 
     </footer>

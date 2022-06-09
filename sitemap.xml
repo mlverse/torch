@@ -343,6 +343,9 @@
     <loc>https://torch.mlverse.org/docs/reference/lr_one_cycle.html</loc>
   </url>
   <url>
+    <loc>https://torch.mlverse.org/docs/reference/lr_reduce_on_plateau.html</loc>
+  </url>
+  <url>
     <loc>https://torch.mlverse.org/docs/reference/lr_scheduler.html</loc>
   </url>
   <url>
@@ -446,6 +449,9 @@
   </url>
   <url>
     <loc>https://torch.mlverse.org/docs/reference/nn_embedding.html</loc>
+  </url>
+  <url>
+    <loc>https://torch.mlverse.org/docs/reference/nn_embedding_bag.html</loc>
   </url>
   <url>
     <loc>https://torch.mlverse.org/docs/reference/nn_flatten.html</loc>
@@ -617,6 +623,9 @@
   </url>
   <url>
     <loc>https://torch.mlverse.org/docs/reference/nn_prelu.html</loc>
+  </url>
+  <url>
+    <loc>https://torch.mlverse.org/docs/reference/nn_prune_head.html</loc>
   </url>
   <url>
     <loc>https://torch.mlverse.org/docs/reference/nn_relu.html</loc>
@@ -1028,6 +1037,9 @@
   </url>
   <url>
     <loc>https://torch.mlverse.org/docs/reference/reexports.html</loc>
+  </url>
+  <url>
+    <loc>https://torch.mlverse.org/docs/reference/sampler.html</loc>
   </url>
   <url>
     <loc>https://torch.mlverse.org/docs/reference/slc.html</loc>
@@ -1540,6 +1552,9 @@
     <loc>https://torch.mlverse.org/docs/reference/torch_kaiser_window.html</loc>
   </url>
   <url>
+    <loc>https://torch.mlverse.org/docs/reference/torch_kron.html</loc>
+  </url>
+  <url>
     <loc>https://torch.mlverse.org/docs/reference/torch_kthvalue.html</loc>
   </url>
   <url>
@@ -1625,6 +1640,9 @@
   </url>
   <url>
     <loc>https://torch.mlverse.org/docs/reference/torch_lu_solve.html</loc>
+  </url>
+  <url>
+    <loc>https://torch.mlverse.org/docs/reference/torch_lu_unpack.html</loc>
   </url>
   <url>
     <loc>https://torch.mlverse.org/docs/reference/torch_manual_seed.html</loc>

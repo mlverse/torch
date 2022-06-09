@@ -33,7 +33,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">torch</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.7.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.8.0</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -130,12 +130,12 @@
 <span class="fu"><a href="../reference/torch_tensor.html">torch_tensor</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/array.html" class="external-link">array</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html" class="external-link">runif</a></span><span class="op">(</span><span class="fl">12</span><span class="op">)</span>, dim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">2</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
 <span class="co">#&gt; torch_tensor</span>
 <span class="co">#&gt; (1,.,.) = </span>
-<span class="co">#&gt;   0.9033  0.5918  0.7076</span>
-<span class="co">#&gt;   0.3192  0.7748  0.5755</span>
+<span class="co">#&gt;   0.2189  0.5449  0.4651</span>
+<span class="co">#&gt;   0.0939  0.8117  0.7643</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; (2,.,.) = </span>
-<span class="co">#&gt;   0.7412  0.5693  0.5732</span>
-<span class="co">#&gt;   0.5785  0.9144  0.0358</span>
+<span class="co">#&gt;   0.9542  0.5434  0.8449</span>
+<span class="co">#&gt;   0.7231  0.5255  0.2825</span>
 <span class="co">#&gt; [ CPUFloatType{2,2,3} ]</span></code></pre></div>
 <p>By default, we will create tensors in the <code>cpu</code> device, converting their R datatype to the corresponding torch <code>dtype</code>.</p>
 <blockquote>
@@ -169,11 +169,11 @@
 <code class="sourceCode R"><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/torch_randn.html">torch_randn</a></span><span class="op">(</span><span class="fl">5</span>, <span class="fl">3</span><span class="op">)</span>
 <span class="va">x</span>
 <span class="co">#&gt; torch_tensor</span>
-<span class="co">#&gt;  0.5579  0.2416 -0.8984</span>
-<span class="co">#&gt;  0.5693 -0.9027 -2.7836</span>
-<span class="co">#&gt; -1.7356 -0.4453 -0.7002</span>
-<span class="co">#&gt; -0.6925  0.9486  0.3937</span>
-<span class="co">#&gt;  0.3937  1.7807 -0.6612</span>
+<span class="co">#&gt;  0.3659 -0.9769 -0.0599</span>
+<span class="co">#&gt;  1.1402 -0.2638 -0.1949</span>
+<span class="co">#&gt;  1.1514  0.6188 -1.0359</span>
+<span class="co">#&gt; -1.4055 -0.8932  0.5965</span>
+<span class="co">#&gt;  1.5086 -0.1052  1.2096</span>
 <span class="co">#&gt; [ CPUFloatType{5,3} ]</span></code></pre></div>
 <p>Another example is <code>torch_ones</code>, which creates a tensor filled with ones.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
@@ -243,7 +243,7 @@
 
 <div class="pkgdown-footer-right">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
 </div>
 
     </footer>
