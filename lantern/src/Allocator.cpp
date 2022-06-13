@@ -48,23 +48,17 @@ struct LanternCPUAllocator final : at::Allocator {
       if (call_gc) {
         (*call_r_gc)(false);
       }
+    }
 
-      try {
-        // try first allocation
-        data = alloc_cpu(nbytes);
-      } catch (...) {
-        // Use R garbage collector and see if we can
-        // allocate more memory.
-        (*call_r_gc)(true);
+    try {
+      // try first allocation
+      data = alloc_cpu(nbytes);
+    } catch (...) {
+      // Use R garbage collector and see if we can
+      // allocate more memory.
+      (*call_r_gc)(true);
 
-        // then try allocating again!
-        data = alloc_cpu(nbytes);
-      }
-
-    } else {
-      // if not on main thread we don't have any custom behavior
-      // because we won't be able to call the R garbage collector
-      // anyway.
+      // then try allocating again!
       data = alloc_cpu(nbytes);
     }
 

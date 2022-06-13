@@ -57,6 +57,7 @@ namespace {
 
 EventLoop<void*> gTasks;
 EventLoop<void> gBackwardTasks;
+std::atomic<bool> backward_is_running(false);
 
 void schedule_backward_task(std::packaged_task<void()>&& task) {
   if (std::this_thread::get_id() == main_thread_id()) {
@@ -81,14 +82,13 @@ void schedule_backward_task(std::packaged_task<void()>&& task) {
 
 }  // namespace
 
-void call_r_gc(bool full);
-
 // [[Rcpp::export]]
 void cpp_torch_method__backward_self_Tensor_inputs_TensorList(
     torch::Tensor self, torch::TensorList inputs,
     torch::optional::Tensor gradient, torch::optional::bool_t retain_graph,
     torch::bool_t create_graph) {
-  call_r_gc(false);
+  backward_is_running = true;
+  auto running_sg = makeScopeGuard([] {backward_is_running = false;});
   std::function<void()> backward([&]() {
     auto sg = makeScopeGuard([] { gTasks.stopWhenEmpty(); });
 
@@ -110,6 +110,8 @@ void cpp_torch_method__backward_self_Tensor_inputs_TensorList(
 void cpp_autograd_backward(Rcpp::XPtr<XPtrTorchvariable_list> tensors,
                            Rcpp::XPtr<XPtrTorchvariable_list> grad_tensors,
                            bool retain_graph, bool create_graph) {
+  backward_is_running = true;
+  auto running_sg = makeScopeGuard([] {backward_is_running = false;});
   auto tensors_ = tensors->get();
   auto grad_tensors_ = grad_tensors->get();
 
@@ -385,4 +387,32 @@ torch::variable_list cpp_autograd_grad(torch::variable_list outputs,
   gTasks.run();
   result_fut.get();
   return torch::variable_list(out);
+}
+
+void call_r_gc(bool full) {
+  if (std::this_thread::get_id() == main_thread_id()) {
+    Rcpp::Function r_gc("gc");
+    r_gc(Rcpp::Named("full") = full);
+    R_RunPendingFinalizers();  
+  } else if (backward_is_running) {
+    // When calling backward, we might be running out of memory, thus we would want to
+    // call `gc`. However, since backward is called from a background thread, that's 
+    // not possible.  This callback allows us to schedule a GC call that will run
+    // in the main thread.
+    std::packaged_task<void*()> task([full]() {
+      LANTERN_CALLBACK_START
+      std::cout << "Calling the garbage colelctor from backward" << std::endl; 
+      call_r_gc(full);
+      LANTERN_CALLBACK_END("Unknon error when calling GC.", NULL)
+        return (void*)nullptr;
+    });
+    std::future<void*> result = task.get_future();
+    gTasks.schedule(std::move(task));
+    result.get();
+  }
+}
+
+// [[Rcpp::export]]
+void cpp_set_lantern_allocator(uint64_t threshold_call_gc = 4000) {
+  set_lantern_allocator(&call_r_gc, threshold_call_gc);
 }

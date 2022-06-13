@@ -14,10 +14,7 @@ namespace c10 {
 class GarbageCollectorCallback : virtual public c10::FreeMemoryCallback {
  public:
   bool Execute() {
-    if (std::this_thread::get_id() == MAIN_THREAD_ID) {
-      (*call_r_gc)(true);
-    }
-
+    (*call_r_gc)(true);
     return true;
   }
 };
