@@ -2,7 +2,7 @@
 
 void call_r_gc() {
   Rcpp::Function r_gc("gc");
-  r_gc(Rcpp::Named("full") = true);
+  r_gc(Rcpp::Named("full") = false);
   R_RunPendingFinalizers();
 }
 

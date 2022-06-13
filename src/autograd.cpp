@@ -81,6 +81,8 @@ void schedule_backward_task(std::packaged_task<void()>&& task) {
 
 }  // namespace
 
+void call_r_gc();
+  
 // [[Rcpp::export]]
 void cpp_torch_method__backward_self_Tensor_inputs_TensorList(
     torch::Tensor self, torch::TensorList inputs,
@@ -98,6 +100,7 @@ void cpp_torch_method__backward_self_Tensor_inputs_TensorList(
   auto result_fut = task.get_future();
 
   schedule_backward_task(std::move(task));
+  call_r_gc();
   gTasks.run();
 
   result_fut.get();
