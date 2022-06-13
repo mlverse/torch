@@ -858,8 +858,8 @@ HOST_API void lantern_TraceableFunction_delete (void* x)
   LANTERN_HOST_HANDLER;
 }
 
-LANTERN_API void (LANTERN_PTR _set_lantern_allocator) (void (*r_gc) (), uint64_t threshold_mb);
-HOST_API void set_lantern_allocator (void (*r_gc) (), uint64_t threshold_mb)
+LANTERN_API void (LANTERN_PTR _set_lantern_allocator) (void (*r_gc) (bool), uint64_t threshold_mb);
+HOST_API void set_lantern_allocator (void (*r_gc) (bool), uint64_t threshold_mb)
 {
   LANTERN_CHECK_LOADED
   _set_lantern_allocator(r_gc, threshold_mb);

@@ -1,8 +1,8 @@
 #include <torch.h>
 
-void call_r_gc() {
+void call_r_gc(bool full) {
   Rcpp::Function r_gc("gc");
-  r_gc(Rcpp::Named("full") = false);
+  r_gc(Rcpp::Named("full") = full);
   R_RunPendingFinalizers();
 }
 
