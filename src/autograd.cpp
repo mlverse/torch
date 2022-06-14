@@ -393,22 +393,17 @@ void call_r_gc(bool full) {
   if (std::this_thread::get_id() == main_thread_id()) {
     Rcpp::Function r_gc("gc");
     r_gc(Rcpp::Named("full") = full);
-    R_RunPendingFinalizers();  
+    R_RunPendingFinalizers(); 
   } else if (backward_is_running) {
     // When calling backward, we might be running out of memory, thus we would want to
     // call `gc`. However, since backward is called from a background thread, that's 
     // not possible.  This callback allows us to schedule a GC call that will run
     // in the main thread.
     std::packaged_task<void*()> task([full]() {
-      LANTERN_CALLBACK_START
-      std::cout << "Calling the garbage colelctor from backward" << std::endl; 
       call_r_gc(full);
-      LANTERN_CALLBACK_END("Unknon error when calling GC.", NULL)
-        return (void*)nullptr;
+      return (void*)nullptr;
     });
-    std::future<void*> result = task.get_future();
     gTasks.schedule(std::move(task));
-    result.get();
   }
 }
 
