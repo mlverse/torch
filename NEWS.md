@@ -1,5 +1,7 @@
 # torch (development version)
 
+- We can now call GC even if from a backward call (ie, from a different thread) which allows for better memory management. (#853)
+
 # torch 0.8.0
 
 ## Breaking changes
