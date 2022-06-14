@@ -95,13 +95,18 @@ the <strong>full SVD</strong> of a matrix
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
     <dl><dt>A</dt>
 <dd><p>(Tensor): tensor of shape <code>(*, m, n)</code> where <code>*</code> is zero or more batch dimensions.</p></dd>
+
+
 <dt>full_matrices</dt>
 <dd><p>(bool, optional): controls whether to compute the full or reduced
 SVD, and consequently, the shape of the returned tensors <code>U</code> and <code>V</code>. Default: <code>TRUE</code>.</p></dd>
+
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
-    <p>A list <code>(U, S, V)</code> which corresponds to , ,  above.
+    
+
+<p>A list <code>(U, S, V)</code> which corresponds to , ,  above.
 <code>S</code> will always be real-valued, even when <code>A</code> is complex.
 It will also be ordered in descending order.
 <code>U</code> and <code>V</code> will have the same dtype as <code>A</code>. The left / right singular vectors will be given by
@@ -207,25 +212,25 @@ matrices.</p></li>
 <span class="r-in"><span class="op">}</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[1]]</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> torch_tensor</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> -0.9311 -0.0323 -0.1242</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> -0.0085  0.3938 -0.5121</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> -0.0652  0.5588 -0.4234</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  0.1841  0.6393  0.3135</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  0.3079 -0.3507 -0.6669</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> -0.2002  0.9324 -0.1887</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  0.3727 -0.0013  0.0306</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  0.7375  0.1798 -0.4537</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  0.4907  0.2036  0.7519</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> -0.1904  0.2383  0.4385</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [ CPUFloatType{5,3} ]</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[2]]</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> torch_tensor</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  2.7010</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  2.1392</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  0.8735</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  3.4730</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  1.0279</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  0.7210</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [ CPUFloatType{3} ]</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[3]]</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> torch_tensor</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  0.0008  0.8678 -0.4969</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  0.9492  0.1558  0.2735</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  0.3148 -0.4719 -0.8236</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  0.7432 -0.3915 -0.5425</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> -0.3818  0.4177 -0.8245</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  0.5494  0.8199  0.1610</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [ CPUFloatType{3,3} ]</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 </code></pre></div>
@@ -239,7 +244,7 @@ matrices.</p></li>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.4.</p>
 </div>
 
     </footer></div>

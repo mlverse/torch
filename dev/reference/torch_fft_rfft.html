@@ -89,12 +89,18 @@
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
     <dl><dt>self</dt>
 <dd><p>(Tensor)  the real input tensor</p></dd>
+
+
 <dt>n</dt>
 <dd><p>(int) Signal length. If given, the input will either be zero-padded
 or trimmed to this length before computing the real FFT.</p></dd>
+
+
 <dt>dim</dt>
 <dd><p>(int, optional) – The dimension along which to take the one
 dimensional real FFT.</p></dd>
+
+
 <dt>norm</dt>
 <dd><p>norm (str, optional) – Normalization mode. For the forward
 transform, these correspond to:</p><ul><li><p>"forward" - normalize by 1/n</p></li>
@@ -105,6 +111,7 @@ normalization mode will apply an overall normalization of 1/n between the
 two transforms. This is required to make irfft() the exact inverse.
 Default is "backward" (no normalization).</p></li>
 </ul></dd>
+
 </dl></div>
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
@@ -134,7 +141,7 @@ To compute the full output, use <code><a href="torch_fft_fft.html">torch_fft_fft
 </div>
 
 <div class="pkgdown-footer-right">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.4.</p>
 </div>
 
     </footer></div>

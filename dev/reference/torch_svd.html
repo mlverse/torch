@@ -89,10 +89,15 @@
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
     <dl><dt>self</dt>
 <dd><p>(Tensor) the input tensor of size \((*, m, n)\) where <code>*</code> is zero or more                    batch dimensions consisting of \(m \times n\) matrices.</p></dd>
+
+
 <dt>some</dt>
 <dd><p>(bool, optional) controls the shape of returned <code>U</code> and <code>V</code></p></dd>
+
+
 <dt>compute_uv</dt>
 <dd><p>(bool, optional) option whether to compute <code>U</code> and <code>V</code> or not</p></dd>
+
 </dl></div>
     <div class="section level2">
     <h2 id="note">Note<a class="anchor" aria-label="anchor" href="#note"></a></h2>
@@ -149,7 +154,7 @@ of shape \((m \times m)\) and \((n \times n)\) respectively. <code>some</code> w
 <span class="r-in"><span class="fu"><a href="torch_dist.html">torch_dist</a></span><span class="op">(</span><span class="va">a_big</span>, <span class="fu"><a href="torch_matmul.html">torch_matmul</a></span><span class="op">(</span><span class="fu"><a href="torch_matmul.html">torch_matmul</a></span><span class="op">(</span><span class="va">u</span>, <span class="fu"><a href="torch_diag_embed.html">torch_diag_embed</a></span><span class="op">(</span><span class="va">s</span><span class="op">)</span><span class="op">)</span>, <span class="va">v</span><span class="op">$</span><span class="fu">transpose</span><span class="op">(</span><span class="op">-</span><span class="fl">2</span>, <span class="op">-</span><span class="fl">1</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
 <span class="r-in"><span class="op">}</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> torch_tensor</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2.54252e-06</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2.14838e-06</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [ CPUFloatType{} ]</span>
 </code></pre></div>
     </div>
@@ -162,7 +167,7 @@ of shape \((m \times m)\) and \((n \times n)\) respectively. <code>some</code> w
 </div>
 
 <div class="pkgdown-footer-right">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.4.</p>
 </div>
 
     </footer></div>

@@ -116,18 +116,25 @@ tensors).</p>
     <dl><dt>tensors</dt>
 <dd><p>(list of Tensor) – Tensors of which the derivative will
 be computed.</p></dd>
+
+
 <dt>grad_tensors</dt>
 <dd><p>(list of (Tensor or <code>NULL)) – The “vector” in the Jacobian-vector product, usually gradients w.r.t. each element of corresponding tensors. </code>NULL<code>values can be specified for scalar Tensors or ones that don’t require grad. If a</code>NULL` value would be acceptable for all
 grad_tensors, then this argument is optional.</p></dd>
+
+
 <dt>retain_graph</dt>
 <dd><p>(bool, optional) – If <code>FALSE</code>, the graph used to compute
 the grad will be freed. Note that in nearly all cases setting this option to
 <code>TRUE</code> is not needed and often can be worked around in a much more efficient
 way. Defaults to the value of <code>create_graph</code>.</p></dd>
+
+
 <dt>create_graph</dt>
 <dd><p>(bool, optional) – If <code>TRUE</code>, graph of the derivative will
 be constructed, allowing to compute higher order derivative products.
 Defaults to <code>FALSE</code>.</p></dd>
+
 </dl></div>
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
@@ -157,7 +164,7 @@ them before calling it.</p>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.4.</p>
 </div>
 
     </footer></div>

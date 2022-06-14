@@ -119,42 +119,74 @@ subspaces. See reference: Attention Is All You Need</p>
     <dl><dt>query</dt>
 <dd><p>\((L, N, E)\) where L is the target sequence length, N is the batch size, E is
 the embedding dimension. If batch_first is TRUE, the first two dimensions are transposed.</p></dd>
+
+
 <dt>key</dt>
 <dd><p>\((S, N, E)\), where S is the source sequence length, N is the batch size, E is
 the embedding dimension. If batch_first is TRUE, the first two dimensions are transposed.</p></dd>
+
+
 <dt>value</dt>
 <dd><p>\((S, N, E)\) where S is the source sequence length, N is the batch size, E is
 the embedding dimension. If batch_first is TRUE, the first two dimensions are transposed.</p></dd>
+
+
 <dt>embed_dim_to_check</dt>
 <dd><p>total dimension of the model.</p></dd>
+
+
 <dt>num_heads</dt>
 <dd><p>parallel attention heads.</p></dd>
+
+
 <dt>in_proj_weight</dt>
 <dd><p>input projection weight and bias.</p></dd>
+
+
 <dt>in_proj_bias</dt>
 <dd><p>currently undocumented.</p></dd>
+
+
 <dt>bias_k</dt>
 <dd><p>bias of the key and value sequences to be added at dim=0.</p></dd>
+
+
 <dt>bias_v</dt>
 <dd><p>currently undocumented.</p></dd>
+
+
 <dt>add_zero_attn</dt>
 <dd><p>add a new batch of zeros to the key and
 value sequences at dim=1.</p></dd>
+
+
 <dt>dropout_p</dt>
 <dd><p>probability of an element to be zeroed.</p></dd>
+
+
 <dt>out_proj_weight</dt>
 <dd><p>the output projection weight and bias.</p></dd>
+
+
 <dt>out_proj_bias</dt>
 <dd><p>currently undocumented.</p></dd>
+
+
 <dt>training</dt>
 <dd><p>apply dropout if is <code>TRUE</code>.</p></dd>
+
+
 <dt>key_padding_mask</dt>
 <dd><p>\((N, S)\) where N is the batch size, S is the source sequence length.
 If a ByteTensor is provided, the non-zero positions will be ignored while the position
 with the zero positions will be unchanged. If a BoolTensor is provided, the positions with the
 value of <code>True</code> will be ignored while the position with the value of <code>False</code> will be unchanged.</p></dd>
+
+
 <dt>need_weights</dt>
 <dd><p>output attn_output_weights.</p></dd>
+
+
 <dt>attn_mask</dt>
 <dd><p>2D mask \((L, S)\) where L is the target sequence length, S is the source sequence length.
 3D mask \((N*num_heads, L, S)\) where N is the batch size, L is the target sequence length,
@@ -163,27 +195,44 @@ positions. If a ByteTensor is provided, the non-zero positions are not allowed t
 while the zero positions will be unchanged. If a BoolTensor is provided, positions with <code>True</code>
 is not allowed to attend while <code>False</code> values will be unchanged. If a FloatTensor
 is provided, it will be added to the attention weight.</p></dd>
+
+
 <dt>avg_weights</dt>
 <dd><p>Logical; whether to average attn_output_weights over the
 attention heads before outputting them. This doesn't change the returned
 value of attn_output; it only affects the returned attention weight matrix.</p></dd>
+
+
 <dt>use_separate_proj_weight</dt>
 <dd><p>the function accept the proj. weights for
 query, key, and value in different forms. If false, in_proj_weight will be used,
 which is a combination of q_proj_weight, k_proj_weight, v_proj_weight.</p></dd>
+
+
 <dt>q_proj_weight</dt>
 <dd><p>input projection weight and bias.</p></dd>
+
+
 <dt>k_proj_weight</dt>
 <dd><p>currently undocumented.</p></dd>
+
+
 <dt>v_proj_weight</dt>
 <dd><p>currently undocumented.</p></dd>
+
+
 <dt>static_k</dt>
 <dd><p>static key and value used for attention operators.</p></dd>
+
+
 <dt>static_v</dt>
 <dd><p>currently undocumented.</p></dd>
+
+
 <dt>batch_first</dt>
 <dd><p>Logical; whether to expect query, key, and value to have
 batch as their first parameter, and to return output with batch first.</p></dd>
+
 </dl></div>
 
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
@@ -195,7 +244,7 @@ batch as their first parameter, and to return output with batch first.</p></dd>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.4.</p>
 </div>
 
     </footer></div>

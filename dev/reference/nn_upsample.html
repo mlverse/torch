@@ -104,18 +104,25 @@ volumetric inputs, we expect a 5D Tensor.</p>
     <dl><dt>size</dt>
 <dd><p>(int or <code>Tuple[int]</code> or <code>Tuple[int, int]</code> or <code>Tuple[int, int, int]</code>, optional):
 output spatial sizes</p></dd>
+
+
 <dt>scale_factor</dt>
 <dd><p>(float or <code>Tuple[float]</code> or <code>Tuple[float, float]</code> or <code>Tuple[float, float, float]</code>, optional):
 multiplier for spatial size. Has to match input size if it is a tuple.</p></dd>
+
+
 <dt>mode</dt>
 <dd><p>(str, optional): the upsampling algorithm: one of <code>'nearest'</code>,
 <code>'linear'</code>, <code>'bilinear'</code>, <code>'bicubic'</code> and <code>'trilinear'</code>.
 Default: <code>'nearest'</code></p></dd>
+
+
 <dt>align_corners</dt>
 <dd><p>(bool, optional): if <code>TRUE</code>, the corner pixels of the input
 and output tensors are aligned, and thus preserving the values at
 those pixels. This only has effect when <code>mode</code> is
 <code>'linear'</code>, <code>'bilinear'</code>, or <code>'trilinear'</code>. Default: <code>FALSE</code></p></dd>
+
 </dl></div>
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
@@ -150,7 +157,7 @@ output size. (You cannot give both, as it is ambiguous)</p>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.4.</p>
 </div>
 
     </footer></div>

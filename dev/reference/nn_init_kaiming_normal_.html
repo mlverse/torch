@@ -100,16 +100,23 @@ normal distribution.</p>
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
     <dl><dt>tensor</dt>
 <dd><p>an n-dimensional <code>torch.Tensor</code></p></dd>
+
+
 <dt>a</dt>
 <dd><p>the negative slope of the rectifier used after this layer (only used
 with <code>'leaky_relu'</code>)</p></dd>
+
+
 <dt>mode</dt>
 <dd><p>either 'fan_in' (default) or 'fan_out'. Choosing 'fan_in' preserves
 the magnitude of the variance of the weights in the forward pass. Choosing
 'fan_out' preserves the magnitudes in the backwards pass.</p></dd>
+
+
 <dt>nonlinearity</dt>
 <dd><p>the non-linear function. recommended to use only with 'relu'
 or 'leaky_relu' (default).</p></dd>
+
 </dl></div>
 
     <div class="section level2">
@@ -119,9 +126,9 @@ or 'leaky_relu' (default).</p></dd>
 <span class="r-in"><span class="fu">nn_init_kaiming_normal_</span><span class="op">(</span><span class="va">w</span>, mode <span class="op">=</span> <span class="st">"fan_in"</span>, nonlinearity <span class="op">=</span> <span class="st">"leaky_relu"</span><span class="op">)</span></span>
 <span class="r-in"><span class="op">}</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> torch_tensor</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> -0.0278  0.0181 -0.2898 -0.5407 -0.8585</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  0.0419  0.2436 -0.8056  0.2078  0.2913</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> -0.9189  0.7758 -1.1468  0.2377  1.2175</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> -0.3426 -1.0531 -1.0809  0.5741  0.2236</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  0.2071 -0.2555 -1.0486 -0.2419  0.4142</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> -0.4491 -0.7450 -0.5701  0.7892  0.7517</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [ CPUFloatType{3,5} ]</span>
 </code></pre></div>
     </div>
@@ -134,7 +141,7 @@ or 'leaky_relu' (default).</p></dd>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.4.</p>
 </div>
 
     </footer></div>

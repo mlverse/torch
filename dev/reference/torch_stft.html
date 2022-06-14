@@ -100,33 +100,52 @@
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
     <dl><dt>input</dt>
 <dd><p>(Tensor) the input tensor</p></dd>
+
+
 <dt>n_fft</dt>
 <dd><p>(int) size of Fourier transform</p></dd>
+
+
 <dt>hop_length</dt>
 <dd><p>(int, optional) the distance between neighboring sliding window
 frames. Default: <code>NULL</code> (treated as equal to <code>floor(n_fft / 4)</code>)</p></dd>
+
+
 <dt>win_length</dt>
 <dd><p>(int, optional) the size of window frame and STFT filter.
 Default: <code>NULL</code>  (treated as equal to <code>n_fft</code>)</p></dd>
+
+
 <dt>window</dt>
 <dd><p>(Tensor, optional) the optional window function.
 Default: <code>NULL</code> (treated as window of all \(1\) s)</p></dd>
+
+
 <dt>center</dt>
 <dd><p>(bool, optional) whether to pad <code>input</code> on both sides so
 that the \(t\)-th frame is centered at time \(t \times \mbox{hop\_length}\).
 Default: <code>TRUE</code></p></dd>
+
+
 <dt>pad_mode</dt>
 <dd><p>(string, optional) controls the padding method used when
 <code>center</code> is <code>TRUE</code>. Default: <code>"reflect"</code></p></dd>
+
+
 <dt>normalized</dt>
 <dd><p>(bool, optional) controls whether to return the normalized
 STFT results Default: <code>FALSE</code></p></dd>
+
+
 <dt>onesided</dt>
 <dd><p>(bool, optional) controls whether to return half of results to
 avoid redundancy Default: <code>TRUE</code></p></dd>
+
+
 <dt>return_complex</dt>
 <dd><p>(bool, optional) controls whether to return complex tensors
 or not.</p></dd>
+
 </dl></div>
     <div class="section level2">
     <h2 id="short-time-fourier-transform-stft-">Short-time Fourier transform (STFT). <a class="anchor" aria-label="anchor" href="#short-time-fourier-transform-stft-"></a></h2>
@@ -202,7 +221,7 @@ previous signature may cause error or return incorrect result.</p>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.4.</p>
 </div>
 
     </footer></div>

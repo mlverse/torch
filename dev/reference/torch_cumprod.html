@@ -89,10 +89,15 @@
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
     <dl><dt>self</dt>
 <dd><p>(Tensor) the input tensor.</p></dd>
+
+
 <dt>dim</dt>
 <dd><p>(int) the dimension to do the operation over</p></dd>
+
+
 <dt>dtype</dt>
 <dd><p>(<code>torch.dtype</code>, optional) the desired data type of returned tensor.        If specified, the input tensor is casted to <code>dtype</code> before the operation        is performed. This is useful for preventing data type overflows. Default: NULL.</p></dd>
+
 </dl></div>
     <div class="section level2">
     <h2 id="cumprod-input-dim-out-null-dtype-null-gt-tensor-">cumprod(input, dim, out=NULL, dtype=NULL) -&gt; Tensor <a class="anchor" aria-label="anchor" href="#cumprod-input-dim-out-null-dtype-null-gt-tensor-"></a></h2>
@@ -117,16 +122,16 @@ $$</p>
 <span class="r-in"><span class="fu">torch_cumprod</span><span class="op">(</span><span class="va">a</span>, dim<span class="op">=</span><span class="fl">1</span><span class="op">)</span></span>
 <span class="r-in"><span class="op">}</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> torch_tensor</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> -1.1242</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> -0.2029</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  0.2582</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> -0.4030</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> -0.0405</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> -0.0265</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  0.0084</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  0.0048</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> -0.0026</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> -1.1687</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  0.5037</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  0.0113</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  0.0028</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  0.0020</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> -0.0005</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> -0.0011</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  0.0002</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  0.0002</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> -0.0003</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [ CPUFloatType{10} ]</span>
 </code></pre></div>
     </div>
@@ -139,7 +144,7 @@ $$</p>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.4.</p>
 </div>
 
     </footer></div>

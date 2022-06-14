@@ -99,24 +99,37 @@
 <dd><p>\((T, N, C)\) where C = number of characters in alphabet including blank,
 T = input length, and N = batch size. The logarithmized probabilities of
 the outputs (e.g. obtained with <a href="nnf_log_softmax.html">nnf_log_softmax</a>).</p></dd>
+
+
 <dt>targets</dt>
 <dd><p>\((N, S)\) or <code>(sum(target_lengths))</code>. Targets cannot be blank.
 In the second form, the targets are assumed to be concatenated.</p></dd>
+
+
 <dt>input_lengths</dt>
 <dd><p>\((N)\). Lengths of the inputs (must each be \(\leq T\))</p></dd>
+
+
 <dt>target_lengths</dt>
 <dd><p>\((N)\). Lengths of the targets</p></dd>
+
+
 <dt>blank</dt>
 <dd><p>(int, optional) Blank label. Default \(0\).</p></dd>
+
+
 <dt>reduction</dt>
 <dd><p>(string, optional) – Specifies the reduction to apply to the
 output: 'none' | 'mean' | 'sum'. 'none': no reduction will be applied, 'mean':
 the sum of the output will be divided by the number of elements in the output,
 'sum': the output will be summed. Default: 'mean'</p></dd>
+
+
 <dt>zero_infinity</dt>
 <dd><p>(bool, optional) Whether to zero infinite losses and the
 associated gradients. Default: <code>FALSE</code> Infinite losses mainly occur when the
 inputs are too short to be aligned to the targets.</p></dd>
+
 </dl></div>
 
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
@@ -128,7 +141,7 @@ inputs are too short to be aligned to the targets.</p></dd>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.4.</p>
 </div>
 
     </footer></div>

@@ -96,16 +96,27 @@
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
     <dl><dt>...</dt>
 <dd><p>(int...) a sequence of integers defining the shape of the output tensor.        Can be a variable number of arguments or a collection like a list or tuple.</p></dd>
+
+
 <dt>names</dt>
 <dd><p>optional dimension names</p></dd>
+
+
 <dt>dtype</dt>
 <dd><p>(<code>torch.dtype</code>, optional) the desired data type of returned tensor.        Default: if <code>NULL</code>, uses a global default (see <code>torch_set_default_tensor_type</code>).</p></dd>
+
+
 <dt>layout</dt>
 <dd><p>(<code>torch.layout</code>, optional) the desired layout of returned Tensor.        Default: <code>torch_strided</code>.</p></dd>
+
+
 <dt>device</dt>
 <dd><p>(<code>torch.device</code>, optional) the desired device of returned tensor.        Default: if <code>NULL</code>, uses the current device for the default tensor type        (see <code>torch_set_default_tensor_type</code>). <code>device</code> will be the CPU        for CPU tensor types and the current CUDA device for CUDA tensor types.</p></dd>
+
+
 <dt>requires_grad</dt>
 <dd><p>(bool, optional) If autograd should record operations on the        returned tensor. Default: <code>FALSE</code>.</p></dd>
+
 </dl></div>
     <div class="section level2">
     <h2 id="rand-size-out-null-dtype-null-layout-torch-strided-device-null-requires-grad-false-gt-tensor-">rand(*size, out=NULL, dtype=NULL, layout=torch.strided, device=NULL, requires_grad=False) -&gt; Tensor <a class="anchor" aria-label="anchor" href="#rand-size-out-null-dtype-null-layout-torch-strided-device-null-requires-grad-false-gt-tensor-"></a></h2>
@@ -125,8 +136,8 @@ on the interval \([0, 1)\)</p>
 <span class="r-in"><span class="fu">torch_rand</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span></span>
 <span class="r-in"><span class="op">}</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> torch_tensor</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  0.7284  0.3945  0.8182</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  0.0135  0.0149  0.0397</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  0.4995  0.2590  0.5583</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  0.2012  0.2179  0.3585</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [ CPUFloatType{2,3} ]</span>
 </code></pre></div>
     </div>
@@ -139,7 +150,7 @@ on the interval \([0, 1)\)</p>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.4.</p>
 </div>
 
     </footer></div>

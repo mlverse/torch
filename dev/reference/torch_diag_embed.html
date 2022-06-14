@@ -89,12 +89,19 @@
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
     <dl><dt>self</dt>
 <dd><p>(Tensor) the input tensor. Must be at least 1-dimensional.</p></dd>
+
+
 <dt>offset</dt>
 <dd><p>(int, optional) which diagonal to consider. Default: 0        (main diagonal).</p></dd>
+
+
 <dt>dim1</dt>
 <dd><p>(int, optional) first dimension with respect to which to        take diagonal. Default: -2.</p></dd>
+
+
 <dt>dim2</dt>
 <dd><p>(int, optional) second dimension with respect to which to        take diagonal. Default: -1.</p></dd>
+
 </dl></div>
     <div class="section level2">
     <h2 id="diag-embed-input-offset-dim-dim-gt-tensor-">diag_embed(input, offset=0, dim1=-2, dim2=-1) -&gt; Tensor <a class="anchor" aria-label="anchor" href="#diag-embed-input-offset-dim-dim-gt-tensor-"></a></h2>
@@ -129,16 +136,16 @@ need to be explicitly specified.</p>
 <span class="r-in"><span class="op">}</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> torch_tensor</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> (1,.,.) = </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   0.0000 -0.5647  0.0000  0.0000</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   0.0000 -0.8928  0.0000  0.0000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   0.0000  0.6631  0.0000  0.0000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   0.0000 -0.9609  0.0000  0.0000</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> (2,.,.) = </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   0.0000  0.0000  0.0154  0.0000</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   0.0000  0.0000  0.3164  0.0000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   0.0000  0.0000 -0.1752  0.0000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   0.0000  0.0000  0.6274  0.0000</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> (3,.,.) = </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   0.0000  0.0000  0.0000  0.1586</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   0.0000  0.0000  0.0000  0.6720</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   0.0000  0.0000  0.0000  1.4828</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   0.0000  0.0000  0.0000 -0.8654</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> (4,.,.) = </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   0  0  0  0</span>
@@ -155,7 +162,7 @@ need to be explicitly specified.</p>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.4.</p>
 </div>
 
     </footer></div>

@@ -98,20 +98,35 @@
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
     <dl><dt>input</dt>
 <dd><p>input tensor of shape \((\mbox{minibatch} , \mbox{in\_channels} , iT , iH , iW)\)</p></dd>
+
+
 <dt>weight</dt>
 <dd><p>filters of shape \((\mbox{in\_channels} , \frac{\mbox{out\_channels}}{\mbox{groups}} , kT , kH , kW)\)</p></dd>
+
+
 <dt>bias</dt>
 <dd><p>optional bias of shape \((\mbox{out\_channels})\). Default: NULL</p></dd>
+
+
 <dt>stride</dt>
 <dd><p>the stride of the convolving kernel. Can be a single number or a      tuple <code>(sT, sH, sW)</code>. Default: 1</p></dd>
+
+
 <dt>padding</dt>
 <dd><p><code>dilation * (kernel_size - 1) - padding</code> zero-padding will be added to both      sides of each dimension in the input. Can be a single number or a tuple      <code>(padT, padH, padW)</code>. Default: 0</p></dd>
+
+
 <dt>output_padding</dt>
 <dd><p>additional size added to one side of each dimension in the      output shape. Can be a single number or a tuple      <code>(out_padT, out_padH, out_padW)</code>. Default: 0</p></dd>
+
+
 <dt>groups</dt>
 <dd><p>split input into groups, \(\mbox{in\_channels}\) should be divisible by the      number of groups. Default: 1</p></dd>
+
+
 <dt>dilation</dt>
 <dd><p>the spacing between kernel elements. Can be a single number or      a tuple <code>(dT, dH, dW)</code>. Default: 1</p></dd>
+
 </dl></div>
     <div class="section level2">
     <h2 id="conv-transpose-d-input-weight-bias-null-stride-padding-output-padding-groups-dilation-gt-tensor-">conv_transpose3d(input, weight, bias=NULL, stride=1, padding=0, output_padding=0, groups=1, dilation=1) -&gt; Tensor <a class="anchor" aria-label="anchor" href="#conv-transpose-d-input-weight-bias-null-stride-padding-output-padding-groups-dilation-gt-tensor-"></a></h2>
@@ -143,7 +158,7 @@ composed of several input planes, sometimes also called "deconvolution"</p>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.4.</p>
 </div>
 
     </footer></div>

@@ -102,28 +102,45 @@ representation subspaces. See reference: Attention Is All You Need</p>
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
     <dl><dt>embed_dim</dt>
 <dd><p>total dimension of the model.</p></dd>
+
+
 <dt>num_heads</dt>
 <dd><p>parallel attention heads. Note that <code>embed_dim</code> will be split
 across <code>num_heads</code> (i.e. each head will have dimension <code>embed_dim %/% num_heads</code>).</p></dd>
+
+
 <dt>dropout</dt>
 <dd><p>a Dropout layer on attn_output_weights. Default: 0.0.</p></dd>
+
+
 <dt>bias</dt>
 <dd><p>add bias as module parameter. Default: True.</p></dd>
+
+
 <dt>add_bias_kv</dt>
 <dd><p>add bias to the key and value sequences at dim=0.</p></dd>
+
+
 <dt>add_zero_attn</dt>
 <dd><p>add a new batch of zeros to the key and value sequences
 at dim=1.</p></dd>
+
+
 <dt>kdim</dt>
 <dd><p>total number of features in key. Default: <code>NULL</code></p></dd>
+
+
 <dt>vdim</dt>
 <dd><p>total number of features in value. Default: <code>NULL</code>. Note: if kdim
 and vdim are <code>NULL</code>, they will be set to embed_dim such that query, key,
 and value have the same number of features.</p></dd>
+
+
 <dt>batch_first</dt>
 <dd><p>if <code>TRUE</code> then the input and output tensors are \((N,
   S, E)\) instead of \((S, N, E)\), where N is the batch size, S is the
 sequence length, and E is the embedding dimension.</p></dd>
+
 </dl></div>
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
@@ -193,7 +210,7 @@ heads.</p></li>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.4.</p>
 </div>
 
     </footer></div>

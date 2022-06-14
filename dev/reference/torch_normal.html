@@ -95,19 +95,28 @@ Normal distributed"><meta name="robots" content="noindex"><!-- mathjax --><scrip
 If this is a <code><a href="torch_tensor.html">torch_tensor()</a></code> then the output has the same dim as <code>mean</code>
 and it represents the per-element mean. If it's a scalar value, it's reused
 for all elements.</p></dd>
+
+
 <dt>std</dt>
 <dd><p>(tensor or scalar double) The standard deviation of the normal
 distribution. If this is a <code><a href="torch_tensor.html">torch_tensor()</a></code> then the output has the same size as <code>std</code>
 and it represents the per-element standard deviation. If it's a scalar value,
 it's reused for all elements.</p></dd>
+
+
 <dt>size</dt>
 <dd><p>(integers, optional) only used if both <code>mean</code> and <code>std</code> are scalars.</p></dd>
+
+
 <dt>generator</dt>
 <dd><p>a random number generator created with <code><a href="torch_generator.html">torch_generator()</a></code>. If <code>NULL</code>
 a default generator is used.</p></dd>
+
+
 <dt>...</dt>
 <dd><p>Tensor option parameters like <code>dtype</code>, <code>layout</code>, and <code>device</code>.
 Can only be used when <code>mean</code> and <code>std</code> are both scalar numerics.</p></dd>
+
 </dl></div>
     <div class="section level2">
     <h2 id="note">Note<a class="anchor" aria-label="anchor" href="#note"></a></h2>
@@ -164,7 +173,7 @@ among all drawn elements. The resulting tensor has size given by <code>size</cod
 <span class="r-in"></span>
 <span class="r-in"><span class="op">}</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> torch_tensor</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> -1.6751 -0.1709  0.4210  2.2814</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  2.4804  0.3697 -2.1080  6.2501</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [ CPUFloatType{1,4} ]</span>
 </code></pre></div>
     </div>
@@ -177,7 +186,7 @@ among all drawn elements. The resulting tensor has size given by <code>size</cod
 </div>
 
 <div class="pkgdown-footer-right">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.4.</p>
 </div>
 
     </footer></div>

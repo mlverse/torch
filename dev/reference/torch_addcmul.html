@@ -89,12 +89,19 @@
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
     <dl><dt>self</dt>
 <dd><p>(Tensor) the tensor to be added</p></dd>
+
+
 <dt>tensor1</dt>
 <dd><p>(Tensor) the tensor to be multiplied</p></dd>
+
+
 <dt>tensor2</dt>
 <dd><p>(Tensor) the tensor to be multiplied</p></dd>
+
+
 <dt>value</dt>
 <dd><p>(Number, optional) multiplier for \(tensor1 .* tensor2\)</p></dd>
+
 </dl></div>
     <div class="section level2">
     <h2 id="addcmul-input-tensor-tensor-value-out-null-gt-tensor-">addcmul(input, tensor1, tensor2, *, value=1, out=NULL) -&gt; Tensor <a class="anchor" aria-label="anchor" href="#addcmul-input-tensor-tensor-value-out-null-gt-tensor-"></a></h2>
@@ -123,9 +130,9 @@ a real number, otherwise an integer.</p>
 <span class="r-in"><span class="fu">torch_addcmul</span><span class="op">(</span><span class="va">t</span>, <span class="va">t1</span>, <span class="va">t2</span>, <span class="fl">0.1</span><span class="op">)</span></span>
 <span class="r-in"><span class="op">}</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> torch_tensor</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  1.0137 -1.3758  0.2896</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  1.0964 -1.2022  0.6615</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  0.9932 -1.4189  0.1975</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  0.9514 -1.3818 -1.6054</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  0.9074 -1.4265 -1.6249</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  0.9396 -1.3938 -1.6106</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [ CPUFloatType{3,3} ]</span>
 </code></pre></div>
     </div>
@@ -138,7 +145,7 @@ a real number, otherwise an integer.</p>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.4.</p>
 </div>
 
     </footer></div>

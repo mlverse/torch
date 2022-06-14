@@ -99,15 +99,23 @@ scale_factor"><meta name="robots" content="noindex"><!-- mathjax --><script src=
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
     <dl><dt>input</dt>
 <dd><p>(Tensor) the input tensor</p></dd>
+
+
 <dt>size</dt>
 <dd><p>(int or <code>Tuple[int]</code> or <code>Tuple[int, int]</code> or <code>Tuple[int, int, int]</code>)
 output spatial size.</p></dd>
+
+
 <dt>scale_factor</dt>
 <dd><p>(float or <code>Tuple[float]</code>) multiplier for spatial size.
 Has to match input size if it is a tuple.</p></dd>
+
+
 <dt>mode</dt>
 <dd><p>(str) algorithm used for upsampling: 'nearest' | 'linear' | 'bilinear'
 | 'bicubic' | 'trilinear' | 'area' Default: 'nearest'</p></dd>
+
+
 <dt>align_corners</dt>
 <dd><p>(bool, optional) Geometrically, we consider the pixels
 of the input and output as squares rather than points. If set to TRUE,
@@ -118,6 +126,8 @@ and the interpolation uses edge value padding for out-of-boundary values,
 making this operation <em>independent</em> of input size when <code>scale_factor</code> is kept
 the same. This only has an effect when <code>mode</code>  is <code>'linear'</code>, <code>'bilinear'</code>,
 <code>'bicubic'</code> or <code>'trilinear'</code>.  Default: <code>False</code></p></dd>
+
+
 <dt>recompute_scale_factor</dt>
 <dd><p>(bool, optional) recompute the scale_factor
 for use in the interpolation calculation.  When <code>scale_factor</code> is passed
@@ -129,6 +139,7 @@ explicitly).  Otherwise, the passed-in `scale_factor` will be used in the
 interpolation computation.  Note that when `scale_factor` is floating-point,
 the recomputed scale_factor may differ from the one passed in due to rounding
 and precision issues.</p></dd>
+
 </dl></div>
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
@@ -150,7 +161,7 @@ expected inputs are 3-D, 4-D or 5-D in shape.</p>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.4.</p>
 </div>
 
     </footer></div>

@@ -97,26 +97,39 @@
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
     <dl><dt>input</dt>
 <dd><p>(LongTensor) Tensor containing indices into the embedding matrix</p></dd>
+
+
 <dt>weight</dt>
 <dd><p>(Tensor) The embedding matrix with number of rows equal to the
 maximum possible index + 1, and number of columns equal to the embedding size</p></dd>
+
+
 <dt>padding_idx</dt>
 <dd><p>(int, optional) If given, pads the output with the embedding
 vector at <code>padding_idx</code> (initialized to zeros) whenever it encounters the index.</p></dd>
+
+
 <dt>max_norm</dt>
 <dd><p>(float, optional) If given, each embedding vector with norm larger
 than <code>max_norm</code> is renormalized to have norm <code>max_norm</code>. Note: this will modify
 <code>weight</code> in-place.</p></dd>
+
+
 <dt>norm_type</dt>
 <dd><p>(float, optional) The p of the p-norm to compute for the <code>max_norm</code>
 option. Default <code>2</code>.</p></dd>
+
+
 <dt>scale_grad_by_freq</dt>
 <dd><p>(boolean, optional) If given, this will scale gradients
 by the inverse of frequency of the words in the mini-batch. Default <code>FALSE</code>.</p></dd>
+
+
 <dt>sparse</dt>
 <dd><p>(bool, optional) If <code>TRUE</code>, gradient w.r.t. <code>weight</code> will be a
 sparse tensor. See Notes under <code>nn_embedding</code> for more details regarding
 sparse gradients.</p></dd>
+
 </dl></div>
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
@@ -134,7 +147,7 @@ and the output is the corresponding word embeddings.</p>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.4.</p>
 </div>
 
     </footer></div>

@@ -89,8 +89,11 @@
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
     <dl><dt>equation</dt>
 <dd><p>(string) The equation is given in terms of lower case letters (indices) to be associated           with each dimension of the operands and result. The left hand side lists the operands           dimensions, separated by commas. There should be one index letter per tensor dimension.           The right hand side follows after <code>-&gt;</code> and gives the indices for the output.           If the <code>-&gt;</code> and right hand side are omitted, it implicitly defined as the alphabetically           sorted list of all indices appearing exactly once in the left hand side.           The indices not apprearing in the output are summed over after multiplying the operands           entries.           If an index appears several times for the same operand, a diagonal is taken.           Ellipses <code>...</code> represent a fixed number of dimensions. If the right hand side is inferred,           the ellipsis dimensions are at the beginning of the output.</p></dd>
+
+
 <dt>tensors</dt>
 <dd><p>(Tensor) The operands to compute the Einstein sum of.</p></dd>
+
 </dl></div>
     <div class="section level2">
     <h2 id="einsum-equation-operands-gt-tensor-">einsum(equation, *operands) -&gt; Tensor <a class="anchor" aria-label="anchor" href="#einsum-equation-operands-gt-tensor-"></a></h2>
@@ -135,7 +138,7 @@ Einstein summation convention.</p>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.4.</p>
 </div>
 
     </footer></div>

@@ -89,14 +89,23 @@
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
     <dl><dt>self</dt>
 <dd><p>(Tensor) the tensor to be added</p></dd>
+
+
 <dt>batch1</dt>
 <dd><p>(Tensor) the first batch of matrices to be multiplied</p></dd>
+
+
 <dt>batch2</dt>
 <dd><p>(Tensor) the second batch of matrices to be multiplied</p></dd>
+
+
 <dt>beta</dt>
 <dd><p>(Number, optional) multiplier for <code>input</code> (\(\beta\))</p></dd>
+
+
 <dt>alpha</dt>
 <dd><p>(Number, optional) multiplier for \(\mbox{batch1} \mathbin{@} \mbox{batch2}\) (\(\alpha\))</p></dd>
+
 </dl></div>
     <div class="section level2">
     <h2 id="baddbmm-input-batch-batch-beta-alpha-out-null-gt-tensor-">baddbmm(input, batch1, batch2, *, beta=1, alpha=1, out=NULL) -&gt; Tensor <a class="anchor" aria-label="anchor" href="#baddbmm-input-batch-batch-beta-alpha-out-null-gt-tensor-"></a></h2>
@@ -132,34 +141,34 @@ For inputs of type <code>FloatTensor</code> or <code>DoubleTensor</code>, argume
 <span class="r-in"><span class="op">}</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> torch_tensor</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> (1,.,.) = </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   0.8360  1.0605 -1.1980 -2.7810  2.3661</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  -3.1059 -0.9389  1.1455 -0.0087  0.6336</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  -1.3378  1.2785  0.6862  2.0903 -1.7530</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   0.1762 -0.2142  2.9163  1.7711 -1.9608</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  -2.0434 -2.0805 -1.7786 -1.3953 -3.4218</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   1.8613  0.2704  1.0799 -0.6334 -0.7527</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> (2,.,.) = </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   1.1252  1.7570 -1.8855  0.6511  0.4995</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  -0.9540  0.1474 -1.1481  3.1527 -4.5760</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   0.5488  1.8626  0.0313 -0.8812  0.1919</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   3.7906 -2.3686 -1.7830 -0.0911 -0.9000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   0.1460  2.4227 -0.4378 -0.9261  0.4304</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  -2.7516  2.6763  0.8342 -0.2858 -0.0454</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> (3,.,.) = </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   1.0138 -0.2866  0.3272 -0.5574 -0.2892</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   0.3736 -2.0697  2.7091  1.1191  1.4951</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   3.7335  0.7423 -1.2353 -1.3439 -0.6322</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  -3.7439  3.6199  0.6228 -0.7925 -0.5265</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   0.6619  1.2501 -4.6104  0.0985 -1.3241</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   0.9118 -2.6145 -1.6455 -0.7721  0.5184</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> (4,.,.) = </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  -3.3913 -1.5122  2.6041  1.0615 -1.0932</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  -1.7428  0.5560  3.2349 -1.7116 -2.8890</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   3.4304  0.7938 -2.8370  0.3030 -0.2949</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  -0.9882 -0.4900 -0.0528  1.4667 -2.0065</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   0.4639 -1.2716 -0.1830 -0.3476  2.4603</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  -1.4092 -0.7834  1.3960  2.1004 -0.9539</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> (5,.,.) = </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  -1.3158 -0.1526 -1.8468  3.4538  0.5475</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  -1.1038 -0.8976 -5.9467 -4.1747 -0.2365</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   0.8025 -1.3337 -1.2681 -0.1188  0.7068</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  -1.2063  0.1516  2.4230  0.2705  0.8454</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   0.5098 -0.4696  0.8529 -1.8547  0.2134</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   3.5172  0.5949  1.1806 -1.4501 -1.8327</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> (6,.,.) = </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   0.3933 -0.3606  2.7791 -0.2033  1.3391</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   1.6823  0.7813  3.6045 -2.9418  5.0070</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   0.5813 -4.9144  0.8077 -0.2317 -2.1099</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  -0.4331 -1.1782  0.7967 -4.5904  4.7394</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   1.9234 -2.1829  0.0448  5.0779 -2.4716</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  -0.0440 -2.5004 -1.2815 -4.0381 -2.9702</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ... [the output was truncated (use n=-1 to disable)]</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [ CPUFloatType{10,3,5} ]</span>
@@ -174,7 +183,7 @@ For inputs of type <code>FloatTensor</code> or <code>DoubleTensor</code>, argume
 </div>
 
 <div class="pkgdown-footer-right">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.4.</p>
 </div>
 
     </footer></div>

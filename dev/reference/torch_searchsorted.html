@@ -97,12 +97,18 @@
     <dl><dt>sorted_sequence</dt>
 <dd><p>(Tensor) N-D or 1-D tensor, containing monotonically increasing
 sequence on the <em>innermost</em> dimension.</p></dd>
+
+
 <dt>self</dt>
 <dd><p>(Tensor or Scalar) N-D tensor or a Scalar containing the search value(s).</p></dd>
+
+
 <dt>out_int32</dt>
 <dd><p>(bool, optional) – indicate the output data type. <code><a href="torch_dtype.html">torch_int32()</a></code>
 if True, <code><a href="torch_dtype.html">torch_int64()</a></code> otherwise. Default value is FALSE, i.e. default output
 data type is <code><a href="torch_dtype.html">torch_int64()</a></code>.</p></dd>
+
+
 <dt>right</dt>
 <dd><p>(bool, optional) – if False, return the first suitable location
 that is found. If True, return the last such index. If no suitable index found,
@@ -110,14 +116,19 @@ return 0 for non-numerical value (eg. nan, inf) or the size of boundaries
 (one pass the last index). In other words, if False, gets the lower bound index
 for each value in input from boundaries. If True, gets the upper bound index
 instead. Default value is False.</p></dd>
+
+
 <dt>side</dt>
 <dd><p>the same as right but preferred. “left” corresponds to <code>FALSE</code> for right
 and “right” corresponds to <code>TRUE</code> for right. It will error if this is set to
 “left” while right is <code>TRUE</code>.</p></dd>
+
+
 <dt>sorter</dt>
 <dd><p>if provided, a tensor matching the shape of the unsorted <code>sorted_sequence</code>
 containing a sequence of indices that sort it in the ascending order on the
 innermost dimension.</p></dd>
+
 </dl></div>
     <div class="section level2">
     <h2 id="searchsorted-sorted-sequence-values-out-int-false-right-false-out-none-gt-tensor-">searchsorted(sorted_sequence, values, *, out_int32=FALSE, right=FALSE, out=None) -&gt; Tensor <a class="anchor" aria-label="anchor" href="#searchsorted-sorted-sequence-values-out-int-false-right-false-out-none-gt-tensor-"></a></h2>
@@ -160,7 +171,7 @@ then the left boundary of <code>sorted_sequence</code> is closed.</p>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.4.</p>
 </div>
 
     </footer></div>

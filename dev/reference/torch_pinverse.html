@@ -89,8 +89,11 @@
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
     <dl><dt>self</dt>
 <dd><p>(Tensor) The input tensor of size \((*, m, n)\) where \(*\) is zero or more batch dimensions</p></dd>
+
+
 <dt>rcond</dt>
 <dd><p>(float) A floating point value to determine the cutoff for small singular values.                   Default: 1e-15</p></dd>
+
 </dl></div>
     <div class="section level2">
     <h2 id="note">Note<a class="anchor" aria-label="anchor" href="#note"></a></h2>
@@ -129,14 +132,14 @@ Please look at <code>Moore-Penrose inverse</code>_ for more details</p>
 <span class="r-in"><span class="op">}</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> torch_tensor</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> (1,.,.) = </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   1.0000e+00 -2.9802e-08  2.2352e-07</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   2.3842e-07  1.0000e+00 -1.3411e-07</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  -5.9605e-08  1.1176e-07  1.0000e+00</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   1.0000e+00 -8.9407e-08  5.9605e-08</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   1.4901e-07  1.0000e+00 -2.0862e-07</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   8.9407e-08 -5.9605e-08  1.0000e+00</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> (2,.,.) = </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   1.0000e+00 -6.3330e-08 -8.9407e-08</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  -1.4901e-07  1.0000e+00 -3.2783e-07</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   2.9802e-08 -1.4901e-08  1.0000e+00</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   1.0000e+00 -1.9185e-07  2.0862e-07</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   5.9605e-08  1.0000e+00 -3.5763e-07</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  -8.9407e-08  3.0547e-07  1.0000e+00</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [ CPUFloatType{2,3,3} ]</span>
 </code></pre></div>
     </div>
@@ -149,7 +152,7 @@ Please look at <code>Moore-Penrose inverse</code>_ for more details</p>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.4.</p>
 </div>
 
     </footer></div>

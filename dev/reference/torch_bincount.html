@@ -89,10 +89,15 @@
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
     <dl><dt>self</dt>
 <dd><p>(Tensor) 1-d int tensor</p></dd>
+
+
 <dt>weights</dt>
 <dd><p>(Tensor) optional, weight for each value in the input tensor.        Should be of same size as input tensor.</p></dd>
+
+
 <dt>minlength</dt>
 <dd><p>(int) optional, minimum number of bins. Should be non-negative.</p></dd>
+
 </dl></div>
     <div class="section level2">
     <h2 id="bincount-input-weights-null-minlength-gt-tensor-">bincount(input, weights=NULL, minlength=0) -&gt; Tensor <a class="anchor" aria-label="anchor" href="#bincount-input-weights-null-minlength-gt-tensor-"></a></h2>
@@ -122,14 +127,12 @@ tensor of size 0. If <code>minlength</code> is specified, the number of bins is 
 <span class="r-in"><span class="va">input</span><span class="op">$</span><span class="fu">bincount</span><span class="op">(</span><span class="va">weights</span><span class="op">)</span></span>
 <span class="r-in"><span class="op">}</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> torch_tensor</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  0.7500</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  0.2500</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  0.0000</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  1.0000</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  0.0000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  1.0000</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  0.0000</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  0.5000</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [ CPUFloatType{7} ]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [ CPUFloatType{5} ]</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
@@ -141,7 +144,7 @@ tensor of size 0. If <code>minlength</code> is specified, the number of bins is 
 </div>
 
 <div class="pkgdown-footer-right">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.4.</p>
 </div>
 
     </footer></div>

@@ -95,13 +95,18 @@ the <strong>full QR decomposition</strong> of a matrix
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
     <dl><dt>A</dt>
 <dd><p>(Tensor): tensor of shape <code>(*, m, n)</code> where <code>*</code> is zero or more batch dimensions.</p></dd>
+
+
 <dt>mode</dt>
 <dd><p>(str, optional): one of <code>'reduced'</code>, <code>'complete'</code>, <code>'r'</code>.
 Controls the shape of the returned tensors. Default: <code>'reduced'</code>.</p></dd>
+
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
-    <p>A list <code>(Q, R)</code>.</p>
+    
+
+<p>A list <code>(Q, R)</code>.</p>
     </div>
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
@@ -178,7 +183,7 @@ The parameter <code>mode</code> chooses between the full and reduced QR decompos
 </div>
 
 <div class="pkgdown-footer-right">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.4.</p>
 </div>
 
     </footer></div>

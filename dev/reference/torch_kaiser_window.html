@@ -97,18 +97,31 @@
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
     <dl><dt>window_length</dt>
 <dd><p>(int) length of the window.</p></dd>
+
+
 <dt>periodic</dt>
 <dd><p>(bool, optional) If TRUE, returns a periodic window suitable for use in spectral analysis.        If FALSE, returns a symmetric window suitable for use in filter design.</p></dd>
+
+
 <dt>beta</dt>
 <dd><p>(float, optional) shape parameter for the window.</p></dd>
+
+
 <dt>dtype</dt>
 <dd><p>(<code>torch.dtype</code>, optional) the desired data type of returned tensor.        Default: if <code>NULL</code>, uses a global default (see <code>torch_set_default_tensor_type</code>). If <code>dtype</code> is not given, infer the data type from the other input        arguments. If any of <code>start</code>, <code>end</code>, or <code>stop</code> are floating-point, the        <code>dtype</code> is inferred to be the default dtype, see        <code>~torch.get_default_dtype</code>. Otherwise, the <code>dtype</code> is inferred to        be <code>torch.int64</code>.</p></dd>
+
+
 <dt>layout</dt>
 <dd><p>(<code>torch.layout</code>, optional) the desired layout of returned Tensor.        Default: <code>torch_strided</code>.</p></dd>
+
+
 <dt>device</dt>
 <dd><p>(<code>torch.device</code>, optional) the desired device of returned tensor.        Default: if <code>NULL</code>, uses the current device for the default tensor type        (see <code>torch_set_default_tensor_type</code>). <code>device</code> will be the CPU        for CPU tensor types and the current CUDA device for CUDA tensor types.</p></dd>
+
+
 <dt>requires_grad</dt>
 <dd><p>(bool, optional) If autograd should record operations on the        returned tensor. Default: <code>FALSE</code>.</p></dd>
+
 </dl></div>
     <div class="section level2">
     <h2 id="note">Note<a class="anchor" aria-label="anchor" href="#note"></a></h2>
@@ -142,7 +155,7 @@ to produce a periodic window as input to functions like <code><a href="torch_stf
 </div>
 
 <div class="pkgdown-footer-right">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.4.</p>
 </div>
 
     </footer></div>

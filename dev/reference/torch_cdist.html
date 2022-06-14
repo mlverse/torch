@@ -89,12 +89,19 @@
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
     <dl><dt>x1</dt>
 <dd><p>(Tensor) input tensor of shape \(B \times P \times M\).</p></dd>
+
+
 <dt>x2</dt>
 <dd><p>(Tensor) input tensor of shape \(B \times R \times M\).</p></dd>
+
+
 <dt>p</dt>
 <dd><p>NA p value for the p-norm distance to calculate between each vector pair        \(\in [0, \infty]\).</p></dd>
+
+
 <dt>compute_mode</dt>
 <dd><p>NA 'use_mm_for_euclid_dist_if_necessary' - will use matrix multiplication approach to calculate        euclidean distance (p = 2) if P &gt; 25 or R &gt; 25        'use_mm_for_euclid_dist' - will always use matrix multiplication approach to calculate        euclidean distance (p = 2)        'donot_use_mm_for_euclid_dist' - will never use matrix multiplication approach to calculate        euclidean distance (p = 2)        Default: use_mm_for_euclid_dist_if_necessary.</p></dd>
+
 </dl></div>
     <div class="section level2">
     <h2 id="test-">TEST <a class="anchor" aria-label="anchor" href="#test-"></a></h2>
@@ -113,7 +120,7 @@
 </div>
 
 <div class="pkgdown-footer-right">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.4.</p>
 </div>
 
     </footer></div>
