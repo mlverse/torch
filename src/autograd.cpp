@@ -53,10 +53,13 @@ bool cpp_tensor_requires_grad(torch::Tensor self) {
   return lantern_Tensor_requires_grad(self.get());
 }
 
+void call_r_gc(bool full);
+
 namespace {
 
 EventLoop<void*> gTasks;
 EventLoop<void> gBackwardTasks;
+std::atomic<bool> backward_is_running(false);
 
 void schedule_backward_task(std::packaged_task<void()>&& task) {
   if (std::this_thread::get_id() == main_thread_id()) {
@@ -86,6 +89,13 @@ void cpp_torch_method__backward_self_Tensor_inputs_TensorList(
     torch::Tensor self, torch::TensorList inputs,
     torch::optional::Tensor gradient, torch::optional::bool_t retain_graph,
     torch::bool_t create_graph) {
+  // since backward can allocate a good amount of memory and we can't reliably
+  // call the GC from inside the backward call, it's a good idea to call GC right
+  // before the backward call. Ideally we would call this asynchronously but that
+  // has caused problems.
+  call_r_gc(false);
+  backward_is_running = true;
+  auto running_sg = makeScopeGuard([] {backward_is_running = false;});
   std::function<void()> backward([&]() {
     auto sg = makeScopeGuard([] { gTasks.stopWhenEmpty(); });
 
@@ -96,7 +106,6 @@ void cpp_torch_method__backward_self_Tensor_inputs_TensorList(
 
   std::packaged_task<void()> task(backward);
   auto result_fut = task.get_future();
-
   schedule_backward_task(std::move(task));
   gTasks.run();
 
@@ -107,6 +116,8 @@ void cpp_torch_method__backward_self_Tensor_inputs_TensorList(
 void cpp_autograd_backward(Rcpp::XPtr<XPtrTorchvariable_list> tensors,
                            Rcpp::XPtr<XPtrTorchvariable_list> grad_tensors,
                            bool retain_graph, bool create_graph) {
+  backward_is_running = true;
+  auto running_sg = makeScopeGuard([] {backward_is_running = false;});
   auto tensors_ = tensors->get();
   auto grad_tensors_ = grad_tensors->get();
 
@@ -211,12 +222,13 @@ Rcpp::XPtr<XPtrTorch> cpp_Function_lambda(Rcpp::Function f) {
 
     std::packaged_task<void*()> task([f, ctx, inputs]() {
       auto inp = XPtrTorchvariable_list(inputs);
-      auto con = make_xptr<XPtrTorch>(ctx);
-      auto r_out = f(con, inp);
+      auto con = PROTECT(make_xptr<XPtrTorch>(ctx));
+      auto r_out = PROTECT(f(con, inp));
       // A deleter will be called in the Lantern side to make sure this pointer
       // gets correctly deleted.
       auto output =
           new torch::variable_list(Rcpp::as<torch::variable_list>(r_out));
+      UNPROTECT(2);
       return (void*)output;
     });
 
@@ -382,4 +394,29 @@ torch::variable_list cpp_autograd_grad(torch::variable_list outputs,
   gTasks.run();
   result_fut.get();
   return torch::variable_list(out);
+}
+
+void call_r_gc(bool full) {
+  if (std::this_thread::get_id() == main_thread_id()) {
+    Rcpp::Function r_gc("gc");
+    r_gc(Rcpp::Named("full") = full);
+    R_RunPendingFinalizers();
+  } else if (backward_is_running) {
+    // When calling backward, we might be running out of memory, thus we would want to
+    // call `gc`. However, since backward is called from a background thread, that's 
+    // not possible.  This callback allows us to schedule a GC call that will run
+    // in the main thread.
+    // The GC is scheduled in hope that it can be executed before the OOM error is
+    // raised, but that's not guaranteed because we can't synchronously call it here.
+    std::packaged_task<void*()> task([full]() {
+      call_r_gc(full);
+      return (void*)nullptr;
+    });
+    gTasks.schedule(std::move(task));
+  }
+}
+
+// [[Rcpp::export]]
+void cpp_set_lantern_allocator(uint64_t threshold_call_gc = 4000) {
+  set_lantern_allocator(&call_r_gc, threshold_call_gc);
 }

@@ -15,10 +15,10 @@ uint64_t allocated_memory;
 uint64_t threshold_call_gc;
 std::mutex mtx_allocated;
 
-void (*call_r_gc)() = nullptr;
+void (*call_r_gc)(bool) = nullptr;
 
 // the R gc must be set whenever liblantern is loaded.
-void _lantern_set_call_r_gc(void (*fn)()) { call_r_gc = fn; }
+void _lantern_set_call_r_gc(void (*fn)(bool)) { call_r_gc = fn; }
 
 namespace c10 {
 struct LanternCPUAllocator final : at::Allocator {
@@ -46,25 +46,19 @@ struct LanternCPUAllocator final : at::Allocator {
       }
 
       if (call_gc) {
-        (*call_r_gc)();
+        (*call_r_gc)(false);
       }
+    }
 
-      try {
-        // try first allocation
-        data = alloc_cpu(nbytes);
-      } catch (...) {
-        // Use R garbage collector and see if we can
-        // allocate more memory.
-        (*call_r_gc)();
+    try {
+      // try first allocation
+      data = alloc_cpu(nbytes);
+    } catch (...) {
+      // Use R garbage collector and see if we can
+      // allocate more memory.
+      (*call_r_gc)(true);
 
-        // then try allocating again!
-        data = alloc_cpu(nbytes);
-      }
-
-    } else {
-      // if not on main thread we don't have any custom behavior
-      // because we won't be able to call the R garbage collector
-      // anyway.
+      // then try allocating again!
       data = alloc_cpu(nbytes);
     }
 
@@ -87,7 +81,7 @@ struct LanternCPUAllocator final : at::Allocator {
 
 auto lantern_allocator = at::LanternCPUAllocator();
 
-void _set_lantern_allocator(void (*r_gc)(), uint64_t threshold_mb) {
+void _set_lantern_allocator(void (*r_gc)(bool), uint64_t threshold_mb) {
   _lantern_set_call_r_gc(r_gc);
   threshold_call_gc = threshold_mb * 1e6;
   c10::SetCPUAllocator(&lantern_allocator, 1);

@@ -12,16 +12,6 @@ Rcpp::Rostream<true>&  Rcpp::Rcout = Rcpp::Rcpp_cout_get();
 Rcpp::Rostream<false>& Rcpp::Rcerr = Rcpp::Rcpp_cerr_get();
 #endif
 
-// cpp_set_lantern_allocator
-void cpp_set_lantern_allocator(uint64_t threshold_call_gc);
-RcppExport SEXP _torch_cpp_set_lantern_allocator(SEXP threshold_call_gcSEXP) {
-BEGIN_RCPP
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< uint64_t >::type threshold_call_gc(threshold_call_gcSEXP);
-    cpp_set_lantern_allocator(threshold_call_gc);
-    return R_NilValue;
-END_RCPP
-}
 // cpp_autograd_set_grad_mode
 void cpp_autograd_set_grad_mode(bool enabled);
 RcppExport SEXP _torch_cpp_autograd_set_grad_mode(SEXP enabledSEXP) {
@@ -347,6 +337,16 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< bool >::type allow_unused(allow_unusedSEXP);
     rcpp_result_gen = Rcpp::wrap(cpp_autograd_grad(outputs, inputs, grad_outputs, retain_graph, create_graph, allow_unused));
     return rcpp_result_gen;
+END_RCPP
+}
+// cpp_set_lantern_allocator
+void cpp_set_lantern_allocator(uint64_t threshold_call_gc);
+RcppExport SEXP _torch_cpp_set_lantern_allocator(SEXP threshold_call_gcSEXP) {
+BEGIN_RCPP
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< uint64_t >::type threshold_call_gc(threshold_call_gcSEXP);
+    cpp_set_lantern_allocator(threshold_call_gc);
+    return R_NilValue;
 END_RCPP
 }
 // cpp_backends_mkldnn_is_available
@@ -37816,7 +37816,6 @@ END_RCPP
 }
 
 static const R_CallMethodDef CallEntries[] = {
-    {"_torch_cpp_set_lantern_allocator", (DL_FUNC) &_torch_cpp_set_lantern_allocator, 1},
     {"_torch_cpp_autograd_set_grad_mode", (DL_FUNC) &_torch_cpp_autograd_set_grad_mode, 1},
     {"_torch_cpp_autograd_is_enabled", (DL_FUNC) &_torch_cpp_autograd_is_enabled, 0},
     {"_torch_cpp_autograd_set_detect_anomaly", (DL_FUNC) &_torch_cpp_autograd_set_detect_anomaly, 1},
@@ -37846,6 +37845,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_torch_cpp_autograd_node_next_edges", (DL_FUNC) &_torch_cpp_autograd_node_next_edges, 1},
     {"_torch_cpp_autograd_edge_function", (DL_FUNC) &_torch_cpp_autograd_edge_function, 1},
     {"_torch_cpp_autograd_grad", (DL_FUNC) &_torch_cpp_autograd_grad, 6},
+    {"_torch_cpp_set_lantern_allocator", (DL_FUNC) &_torch_cpp_set_lantern_allocator, 1},
     {"_torch_cpp_backends_mkldnn_is_available", (DL_FUNC) &_torch_cpp_backends_mkldnn_is_available, 0},
     {"_torch_cpp_backends_mkl_is_available", (DL_FUNC) &_torch_cpp_backends_mkl_is_available, 0},
     {"_torch_cpp_backends_openmp_is_available", (DL_FUNC) &_torch_cpp_backends_openmp_is_available, 0},
