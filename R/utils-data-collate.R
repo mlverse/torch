@@ -20,6 +20,9 @@ utils_data_default_collate <- function(batch) {
   } else if (is.numeric(elem) && length(elem) == 1) {
     k <- unlist(batch)
     return(torch_tensor(k, dtype = torch_float()))
+  }else if (is.logical(elem) && length(elem) == 1){
+    k <- unlist(batch)
+    return(torch_tensor(k, dtype = torch_bool()))
   } else if (is.character(elem) && length(elem) == 1) {
     return(unlist(batch))
   } else if (is.list(elem)) {
