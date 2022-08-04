@@ -69,8 +69,9 @@ globalVariables(c("..", "self", "private", "N"))
       },
       error = function(e) {
         cli::cli_warn(c(
-          "torch failed to start, restart your R session to try again. ",
-          e$message
+          i = "torch failed to start, restart your R session to try again.",
+          i = "You might need to reinstall torch using {.fn install_torch}",
+          x = e$message
         ))
         FALSE
       }
