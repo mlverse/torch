@@ -465,7 +465,15 @@ MultiProcessingDataLoaderIter <- R6::R6Class(
         
         # Raise error that might have hapened in the subprocess.
         if (!is.null(result$error)) {
-          runtime_error(result$error$message)
+          if (packageVersion("callr") >= "3.7.1") {
+            rlang::abort(
+              "Error when getting dataset item.", 
+              parent = result$error, 
+              class = "runtime_error"
+            )
+          } else {
+            runtime_error(result$error$message)  
+          }
         }
         
         data <- result$result
