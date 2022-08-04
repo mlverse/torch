@@ -20,7 +20,8 @@ License: MIT + file LICENSE
 URL: https://torch.mlverse.org/docs, https://github.com/mlverse/torch
 BugReports: https://github.com/mlverse/torch/issues
 Encoding: UTF-8
-SystemRequirements: C++11, LibTorch (https://pytorch.org/)
+SystemRequirements: C++11, LibTorch (https://pytorch.org/); Only x86_64 platforms
+  are currently supported.
 LinkingTo:
     Rcpp
 Imports:
