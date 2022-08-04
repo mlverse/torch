@@ -15,13 +15,13 @@ globalVariables(c("..", "self", "private", "N"))
 
   install_success <- TRUE
   
-  autoinstall <- interactive() ||
+  is_interactive <- interactive() ||
     "JPY_PARENT_PID" %in% names(Sys.getenv()) ||
     identical(getOption("jupyter.in_kernel"), TRUE)
   
   # we only autoinstall if it has not explicitly disabled by setting 
   # TORCH_INSTALL = 0
-  autoinstall <- autoinstall && (Sys.getenv("TORCH_INSTALL", unset = 2) != 0)
+  autoinstall <- is_interactive && (Sys.getenv("TORCH_INSTALL", unset = 2) != 0)
   
   # We can also auto install if TORCH_INSTALL is requested with TORCH_INSTALL=1
   autoinstall <- autoinstall || (Sys.getenv("TORCH_INSTALL", unset = 2) == "1")
@@ -35,12 +35,17 @@ globalVariables(c("..", "self", "private", "N"))
       {
         cli::cli_alert_info("Additional software needs to be {.strong downloaded} and {.strong installed} for torch to work correctly.")
         check_can_autoinstall() # this errors if it's not possible to autoinstall for that system
-        response <- get_confirmation() # this will error of response is not true.
-        if (response) install_torch()
+        if (is_interactive) {
+          get_confirmation() # this will error of response is not true.  
+        }
+        install_torch()
         TRUE
       },
       error = function(e) {
-        warning("Failed to install torch, manually run install_torch().\n ", e$message, call. = FALSE)
+        cli::cli_warn(c(
+          i = "Failed to install torch, manually run install_torch()",
+          x = e$msg
+        ))
         FALSE
       }
     )
