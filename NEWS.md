@@ -3,6 +3,7 @@
 - We can now call GC even if from a backward call (ie, from a different thread) which allows for better memory management. (#853)
 - We now prompt the user before installing torch additional dependencies in interactive environments. This was requested by CRAN maintainers. (#864)
 - Fixed the way errors are passed from dataloaders workers to the main process. Now using new rlang error chaining. (#864)
+- Dataloaders can now handle logical values (#858, @ryan-heslin).
 
 # torch 0.8.0
 
