@@ -30,12 +30,14 @@ globalVariables(c("..", "self", "private", "N"))
   autoinstall <- autoinstall && (!install_exists())
   
   if (autoinstall) {
-    
     install_success <- tryCatch(
       {
         cli::cli_alert_info("Additional software needs to be {.strong downloaded} and {.strong installed} for torch to work correctly.")
         check_can_autoinstall() # this errors if it's not possible to autoinstall for that system
-        if (is_interactive) {
+        # in interactive environments we want to ask the user for permission to
+        # download and install stuff. That's not necessary otherwise because the
+        # user has explicitly asked for installation with `TORCH_INSTALL=1`.
+        if (is_interactive) { 
           get_confirmation() # this will error of response is not true.  
         }
         install_torch()
@@ -44,7 +46,7 @@ globalVariables(c("..", "self", "private", "N"))
       error = function(e) {
         cli::cli_warn(c(
           i = "Failed to install torch, manually run install_torch()",
-          x = e$msg
+          x = e$message
         ))
         FALSE
       }
@@ -66,7 +68,10 @@ globalVariables(c("..", "self", "private", "N"))
         .compilation_unit <<- cpp_jit_compilation_unit()
       },
       error = function(e) {
-        warning("Torch failed to start, restart your R session to try again. ", e$message, call. = FALSE)
+        cli::cli_warn(c(
+          "torch failed to start, restart your R session to try again. ",
+          e$message
+        ))
         FALSE
       }
     )
