@@ -14,19 +14,33 @@ globalVariables(c("..", "self", "private", "N"))
   cpp_torch_namespace__store_main_thread_id()
 
   install_success <- TRUE
+  
   autoinstall <- interactive() ||
     "JPY_PARENT_PID" %in% names(Sys.getenv()) ||
     identical(getOption("jupyter.in_kernel"), TRUE)
-
-  if (!install_exists() && Sys.getenv("TORCH_INSTALL", unset = 2) != 0 &&
-    (autoinstall || Sys.getenv("TORCH_INSTALL", unset = 2) == "1")) {
+  
+  # we only autoinstall if it has not explicitly disabled by setting 
+  # TORCH_INSTALL = 0
+  autoinstall <- autoinstall && (Sys.getenv("TORCH_INSTALL", unset = 2) != 0)
+  
+  # We can also auto install if TORCH_INSTALL is requested with TORCH_INSTALL=1
+  autoinstall <- autoinstall || (Sys.getenv("TORCH_INSTALL", unset = 2) == "1")
+  
+  # we only autoinstall if installation doesn't yet exist.
+  autoinstall <- autoinstall && (!install_exists())
+  
+  if (autoinstall) {
+    
     install_success <- tryCatch(
       {
-        install_torch()
+        cli::cli_alert_info("Additional software needs to be {.strong downloaded} and {.strong installed} for torch to work correctly.")
+        check_can_autoinstall() # this errors if it's not possible to autoinstall for that system
+        response <- get_confirmation() # this will error of response is not true.
+        if (response) install_torch()
         TRUE
       },
       error = function(e) {
-        warning("Failed to install Torch, manually run install_torch().\n ", e$message, call. = FALSE)
+        warning("Failed to install torch, manually run install_torch().\n ", e$message, call. = FALSE)
         FALSE
       }
     )
@@ -63,4 +77,23 @@ release_bullets <- function() {
     "Create the cran/ branch and update the branch variable",
     "Uncomment the indicated line in the .RBuildignore file"
   )
+}
+
+get_confirmation <-  function() {
+  response <- utils::askYesNo(msg = "Do you want to continue?")
+  if (is.na(response) || (!response)) {
+    stop("Aborted.", call. = FALSE)
+  }
+  TRUE
+}
+
+check_can_autoinstall <- function() {
+  if (Sys.info()[["machine"]] != "x86_64") {
+    cli::cli_abort(c(
+      "Currently only {.code x86_64} systems are supported for autoinstallation. ",
+      i = "You can manually compile LibTorch for you architecture following instructions in {.url https://github.com/pytorch/pytorch#from-source}",
+      i = "You can then use {.fn install_torch_from_file} to install manually."
+    ))
+  }
+  TRUE
 }
