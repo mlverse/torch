@@ -485,3 +485,32 @@ test_that("warning tensor", {
     regexp = "parallel dataloader"
   )
 })
+
+test_that("collate works with bool data", {
+  
+  data <- replicate(10, torch_randn(5))
+  
+  example_ds <- dataset(
+    "example_dataset",
+    initialize = function(numbers) {
+      self$numbers <- numbers
+    },
+    .getitem = function(i) {
+      x <- self$numbers[[i]]
+      list(x = x, n = as.array(torch_mean(x) > 0))
+    },
+    .length = function() length(self$numbers)
+  )
+  
+  example_ds_inst <- example_ds(numbers = data)
+  expect_true(is.logical(example_ds_inst[1]$n))
+  
+  example_dl <- dataloader(
+    example_ds_inst,
+    batch_size = 2
+  )
+  
+  out <- coro::collect(example_dl, 1)[[1]]$n
+  expect_true(out$dtype == torch_bool())
+  
+})
