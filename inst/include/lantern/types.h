@@ -74,6 +74,7 @@ void* bool_t(const bool& x);
 void* double_t(const double& x);
 void* Stream(const at::Stream& x);
 void* IValue(const torch::IValue& x);
+void* FunctionSchema (const c10::FunctionSchema& x);
 
 namespace vector {
 void* string(const std::vector<std::string>& x);
@@ -147,6 +148,7 @@ LANTERN_FROM_RAW_DECL(bool_t, bool)
 LANTERN_FROM_RAW_DECL(double_t, double)
 LANTERN_FROM_RAW_DECL(Stream, at::Stream)
 LANTERN_FROM_RAW_DECL(IValue, torch::IValue)
+LANTERN_FROM_RAW_DECL(FunctionSchema, c10::FunctionSchema)
 
 namespace optional {
 LANTERN_FROM_RAW_DECL(DimnameList, c10::optional<torch::DimnameList>)
@@ -398,6 +400,8 @@ void* double_t(const double& x) { return make_ptr<double>(x); }
 void* bool_t(const bool& x) { return make_ptr<bool>(x); }
 void* Stream(const at::Stream& x) { return make_ptr<at::Stream>(x); }
 void* IValue(const at::IValue& x) { return make_ptr<at::IValue>(x); }
+void* FunctionSchema (const c10::FunctionSchema& x) { return make_ptr<c10::FunctionSchema>(x); }
+
 
 namespace vector {
 
@@ -527,6 +531,7 @@ LANTERN_FROM_RAW(bool_t, bool)
 LANTERN_FROM_RAW(double_t, double)
 LANTERN_FROM_RAW(Stream, at::Stream)
 LANTERN_FROM_RAW(IValue, torch::IValue)
+LANTERN_FROM_RAW(FunctionSchema, c10::FunctionSchema)
 
 namespace optional {
 LANTERN_FROM_RAW_WRAPPED(DimnameList, self_contained::optional::DimnameList,

@@ -36559,6 +36559,27 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// cpp_jit_get_all_operators_names
+torch::vector::string cpp_jit_get_all_operators_names();
+RcppExport SEXP _torch_cpp_jit_get_all_operators_names() {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    rcpp_result_gen = Rcpp::wrap(cpp_jit_get_all_operators_names());
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_jit_get_operator_from_name
+torch::string cpp_jit_get_operator_from_name(torch::string x);
+RcppExport SEXP _torch_cpp_jit_get_operator_from_name(SEXP xSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< torch::string >::type x(xSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_jit_get_operator_from_name(x));
+    return rcpp_result_gen;
+END_RCPP
+}
 // cpp_lantern_configure
 void cpp_lantern_configure(int log);
 RcppExport SEXP _torch_cpp_lantern_configure(SEXP logSEXP) {
@@ -40619,6 +40640,8 @@ static const R_CallMethodDef CallEntries[] = {
     {"_torch_cpp_jit_compile", (DL_FUNC) &_torch_cpp_jit_compile, 1},
     {"_torch_cpp_jit_compile_list_methods", (DL_FUNC) &_torch_cpp_jit_compile_list_methods, 1},
     {"_torch_cpp_jit_compile_get_function", (DL_FUNC) &_torch_cpp_jit_compile_get_function, 2},
+    {"_torch_cpp_jit_get_all_operators_names", (DL_FUNC) &_torch_cpp_jit_get_all_operators_names, 0},
+    {"_torch_cpp_jit_get_operator_from_name", (DL_FUNC) &_torch_cpp_jit_get_operator_from_name, 1},
     {"_torch_cpp_lantern_configure", (DL_FUNC) &_torch_cpp_lantern_configure, 1},
     {"_torch_cpp_lantern_version", (DL_FUNC) &_torch_cpp_lantern_version, 0},
     {"_torch_cpp_lantern_init", (DL_FUNC) &_torch_cpp_lantern_init, 1},
