@@ -8,8 +8,8 @@
 <meta name="description" content="torch">
 <title>Serialization • torch</title>
 <script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link href="../deps/bootstrap-5.1.0/bootstrap.min.css" rel="stylesheet">
-<script src="../deps/bootstrap-5.1.0/bootstrap.bundle.min.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
+<link href="../deps/bootstrap-5.1.3/bootstrap.min.css" rel="stylesheet">
+<script src="../deps/bootstrap-5.1.3/bootstrap.bundle.min.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
 <!-- bootstrap-toc --><script src="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.1/dist/bootstrap-toc.min.js"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="../pkgdown.js"></script><link href="../extra.css" rel="stylesheet">
 <meta property="og:title" content="Serialization">
@@ -107,7 +107,7 @@
     
     
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://torch.mlverse.org/docs">torch</a></span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://torch.mlverse.org/docs">torch</a></span><span class="op">)</span></span></code></pre></div>
 <p>Torch tensors in R are pointers to Tensors allocated by LibTorch. This has one major consequence for serialization. One cannot simply use <code>saveRDS</code> for serializing tensors, as you would save the pointer but not the data itself. When reloading a tensor saved with <code>saveRDS</code> the pointer might have been deleted in LibTorch and you would get wrong results.</p>
 <p>To solve this problem, <code>torch</code> implements specialized functions for serializing tensors to the disk:</p>
 <ul>
@@ -122,12 +122,12 @@
 </h2>
 <p>You can save any object of type <code>torch_tensor</code> to the disk using:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/torch_randn.html">torch_randn</a></span><span class="op">(</span><span class="fl">10</span>, <span class="fl">10</span><span class="op">)</span>
-<span class="fu"><a href="../reference/torch_save.html">torch_save</a></span><span class="op">(</span><span class="va">x</span>, <span class="st">"tensor.pt"</span><span class="op">)</span>
-<span class="va">x_</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/torch_load.html">torch_load</a></span><span class="op">(</span><span class="st">"tensor.pt"</span><span class="op">)</span>
-
-<span class="fu"><a href="../reference/torch_allclose.html">torch_allclose</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">x_</span><span class="op">)</span>
-<span class="co">#&gt; [1] TRUE</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/torch_randn.html">torch_randn</a></span><span class="op">(</span><span class="fl">10</span>, <span class="fl">10</span><span class="op">)</span></span>
+<span><span class="fu"><a href="../reference/torch_save.html">torch_save</a></span><span class="op">(</span><span class="va">x</span>, <span class="st">"tensor.pt"</span><span class="op">)</span></span>
+<span><span class="va">x_</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/torch_load.html">torch_load</a></span><span class="op">(</span><span class="st">"tensor.pt"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="../reference/torch_allclose.html">torch_allclose</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">x_</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] TRUE</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="saving-modules">Saving modules<a class="anchor" aria-label="anchor" href="#saving-modules"></a>
@@ -135,27 +135,27 @@
 <p>The <code>torch_save</code> and <code>torch_load</code> functions also work for <code>nn_modules</code> objects.</p>
 <p>When saving an <code>nn_module</code>, all the object is serialized including the model structure and it’s state.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">module</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/nn_module.html">nn_module</a></span><span class="op">(</span>
-  <span class="st">"my_module"</span>,
-  initialize <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="op">)</span> <span class="op">{</span>
-    <span class="va">self</span><span class="op">$</span><span class="va">fc1</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/nn_linear.html">nn_linear</a></span><span class="op">(</span><span class="fl">10</span>, <span class="fl">10</span><span class="op">)</span>
-    <span class="va">self</span><span class="op">$</span><span class="va">fc2</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/nn_linear.html">nn_linear</a></span><span class="op">(</span><span class="fl">10</span>, <span class="fl">1</span><span class="op">)</span>
-  <span class="op">}</span>,
-  forward <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span>
-    <span class="va">x</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> 
-      <span class="va">self</span><span class="op">$</span><span class="fu">fc1</span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> 
-      <span class="va">self</span><span class="op">$</span><span class="fu">fc2</span><span class="op">(</span><span class="op">)</span>
-  <span class="op">}</span>
-<span class="op">)</span>
-
-<span class="va">model</span> <span class="op">&lt;-</span> <span class="fu">module</span><span class="op">(</span><span class="op">)</span>
-<span class="fu"><a href="../reference/torch_save.html">torch_save</a></span><span class="op">(</span><span class="va">model</span>, <span class="st">"model.pt"</span><span class="op">)</span>
-<span class="va">model_</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/torch_load.html">torch_load</a></span><span class="op">(</span><span class="st">"model.pt"</span><span class="op">)</span>
-
-<span class="co"># input tensor</span>
-<span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/torch_randn.html">torch_randn</a></span><span class="op">(</span><span class="fl">50</span>, <span class="fl">10</span><span class="op">)</span>
-<span class="fu"><a href="../reference/torch_allclose.html">torch_allclose</a></span><span class="op">(</span><span class="fu">model</span><span class="op">(</span><span class="va">x</span><span class="op">)</span>, <span class="fu">model_</span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">)</span>
-<span class="co">#&gt; [1] TRUE</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">module</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/nn_module.html">nn_module</a></span><span class="op">(</span></span>
+<span>  <span class="st">"my_module"</span>,</span>
+<span>  initialize <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="op">)</span> <span class="op">{</span></span>
+<span>    <span class="va">self</span><span class="op">$</span><span class="va">fc1</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/nn_linear.html">nn_linear</a></span><span class="op">(</span><span class="fl">10</span>, <span class="fl">10</span><span class="op">)</span></span>
+<span>    <span class="va">self</span><span class="op">$</span><span class="va">fc2</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/nn_linear.html">nn_linear</a></span><span class="op">(</span><span class="fl">10</span>, <span class="fl">1</span><span class="op">)</span></span>
+<span>  <span class="op">}</span>,</span>
+<span>  forward <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span></span>
+<span>    <span class="va">x</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> </span>
+<span>      <span class="va">self</span><span class="op">$</span><span class="fu">fc1</span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> </span>
+<span>      <span class="va">self</span><span class="op">$</span><span class="fu">fc2</span><span class="op">(</span><span class="op">)</span></span>
+<span>  <span class="op">}</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu">module</span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="fu"><a href="../reference/torch_save.html">torch_save</a></span><span class="op">(</span><span class="va">model</span>, <span class="st">"model.pt"</span><span class="op">)</span></span>
+<span><span class="va">model_</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/torch_load.html">torch_load</a></span><span class="op">(</span><span class="st">"model.pt"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># input tensor</span></span>
+<span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/torch_randn.html">torch_randn</a></span><span class="op">(</span><span class="fl">50</span>, <span class="fl">10</span><span class="op">)</span></span>
+<span><span class="fu"><a href="../reference/torch_allclose.html">torch_allclose</a></span><span class="op">(</span><span class="fu">model</span><span class="op">(</span><span class="va">x</span><span class="op">)</span>, <span class="fu">model_</span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] TRUE</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="loading-models-saved-in-python">Loading models saved in python<a class="anchor" aria-label="anchor" href="#loading-models-saved-in-python"></a>
@@ -165,9 +165,9 @@
 <pre><code>torch.save(model, fpath, _use_new_zipfile_serialization=True)</code></pre>
 <p>You can then reload the state dict in R and reload it into the model with:</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">state_dict</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/load_state_dict.html">load_state_dict</a></span><span class="op">(</span><span class="va">fpath</span><span class="op">)</span>
-<span class="va">model</span> <span class="op">&lt;-</span> <span class="fu">Model</span><span class="op">(</span><span class="op">)</span>
-<span class="va">model</span><span class="op">$</span><span class="fu">load_state_dict</span><span class="op">(</span><span class="va">state_dict</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">state_dict</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/load_state_dict.html">load_state_dict</a></span><span class="op">(</span><span class="va">fpath</span><span class="op">)</span></span>
+<span><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu">Model</span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="va">model</span><span class="op">$</span><span class="fu">load_state_dict</span><span class="op">(</span><span class="va">state_dict</span><span class="op">)</span></span></code></pre></div>
 <p>You can find working examples in <code>torchvision</code>. For example <a href="https://github.com/mlverse/torchvision/blob/main/R/models-alexnet.R#L2-L63" class="external-link">this</a> is what we do for the AlexNet model.</p>
 </div>
 <div class="section level2">
@@ -176,24 +176,24 @@
 <p>You can save the state of optimizers so you can continue training from the exact same position.</p>
 <p>In order to this we use the <code>state_dict()</code> and <code><a href="../reference/load_state_dict.html">load_state_dict()</a></code> methods from the optimizer combined with <code>torch_save</code>:</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/nn_linear.html">nn_linear</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">1</span><span class="op">)</span>
-<span class="va">opt</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/optim_adam.html">optim_adam</a></span><span class="op">(</span><span class="va">model</span><span class="op">$</span><span class="va">parameters</span><span class="op">)</span>
-
-<span class="va">train_x</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/torch_randn.html">torch_randn</a></span><span class="op">(</span><span class="fl">100</span>, <span class="fl">1</span><span class="op">)</span>
-<span class="va">train_y</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/torch_randn.html">torch_randn</a></span><span class="op">(</span><span class="fl">100</span>, <span class="fl">1</span><span class="op">)</span>
-
-<span class="va">loss</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/nnf_mse_loss.html">nnf_mse_loss</a></span><span class="op">(</span><span class="fu">model</span><span class="op">(</span><span class="va">train_x</span><span class="op">)</span>, <span class="va">train_y</span><span class="op">)</span>
-<span class="va">loss</span><span class="op">$</span><span class="fu">backward</span><span class="op">(</span><span class="op">)</span>
-<span class="va">opt</span><span class="op">$</span><span class="fu">step</span><span class="op">(</span><span class="op">)</span>
-<span class="co">#&gt; NULL</span>
-
-<span class="co"># Now let's save the optimizer state</span>
-<span class="va">tmp</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempfile</a></span><span class="op">(</span><span class="op">)</span>
-<span class="fu"><a href="../reference/torch_save.html">torch_save</a></span><span class="op">(</span><span class="va">opt</span><span class="op">$</span><span class="fu">state_dict</span><span class="op">(</span><span class="op">)</span>, <span class="va">tmp</span><span class="op">)</span>
-
-<span class="co"># And now let's create a new optimizer and load back</span>
-<span class="va">opt2</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/optim_adam.html">optim_adam</a></span><span class="op">(</span><span class="va">model</span><span class="op">$</span><span class="va">parameters</span><span class="op">)</span>
-<span class="va">opt2</span><span class="op">$</span><span class="fu">load_state_dict</span><span class="op">(</span><span class="fu"><a href="../reference/torch_load.html">torch_load</a></span><span class="op">(</span><span class="va">tmp</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/nn_linear.html">nn_linear</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">1</span><span class="op">)</span></span>
+<span><span class="va">opt</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/optim_adam.html">optim_adam</a></span><span class="op">(</span><span class="va">model</span><span class="op">$</span><span class="va">parameters</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">train_x</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/torch_randn.html">torch_randn</a></span><span class="op">(</span><span class="fl">100</span>, <span class="fl">1</span><span class="op">)</span></span>
+<span><span class="va">train_y</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/torch_randn.html">torch_randn</a></span><span class="op">(</span><span class="fl">100</span>, <span class="fl">1</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">loss</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/nnf_mse_loss.html">nnf_mse_loss</a></span><span class="op">(</span><span class="fu">model</span><span class="op">(</span><span class="va">train_x</span><span class="op">)</span>, <span class="va">train_y</span><span class="op">)</span></span>
+<span><span class="va">loss</span><span class="op">$</span><span class="fu">backward</span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="va">opt</span><span class="op">$</span><span class="fu">step</span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="co">#&gt; NULL</span></span>
+<span></span>
+<span><span class="co"># Now let's save the optimizer state</span></span>
+<span><span class="va">tmp</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempfile</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="fu"><a href="../reference/torch_save.html">torch_save</a></span><span class="op">(</span><span class="va">opt</span><span class="op">$</span><span class="fu">state_dict</span><span class="op">(</span><span class="op">)</span>, <span class="va">tmp</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># And now let's create a new optimizer and load back</span></span>
+<span><span class="va">opt2</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/optim_adam.html">optim_adam</a></span><span class="op">(</span><span class="va">model</span><span class="op">$</span><span class="va">parameters</span><span class="op">)</span></span>
+<span><span class="va">opt2</span><span class="op">$</span><span class="fu">load_state_dict</span><span class="op">(</span><span class="fu"><a href="../reference/torch_load.html">torch_load</a></span><span class="op">(</span><span class="va">tmp</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
     </nav></aside>
@@ -208,7 +208,7 @@
 
 <div class="pkgdown-footer-right">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.4.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
     </footer>

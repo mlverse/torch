@@ -8,8 +8,8 @@
 <meta name="description" content="torch">
 <title>Distributions • torch</title>
 <script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link href="../deps/bootstrap-5.1.0/bootstrap.min.css" rel="stylesheet">
-<script src="../deps/bootstrap-5.1.0/bootstrap.bundle.min.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
+<link href="../deps/bootstrap-5.1.3/bootstrap.min.css" rel="stylesheet">
+<script src="../deps/bootstrap-5.1.3/bootstrap.bundle.min.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
 <!-- bootstrap-toc --><script src="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.1/dist/bootstrap-toc.min.js"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="../pkgdown.js"></script><link href="../extra.css" rel="stylesheet">
 <meta property="og:title" content="Distributions">
@@ -107,8 +107,8 @@
     
     
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://torch.mlverse.org/docs">torch</a></span><span class="op">)</span>
-<span class="fu"><a href="../reference/torch_manual_seed.html">torch_manual_seed</a></span><span class="op">(</span><span class="fl">1</span><span class="op">)</span> <span class="co"># setting seed for reproducibility</span></code></pre></div>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://torch.mlverse.org/docs">torch</a></span><span class="op">)</span></span>
+<span><span class="fu"><a href="../reference/torch_manual_seed.html">torch_manual_seed</a></span><span class="op">(</span><span class="fl">1</span><span class="op">)</span> <span class="co"># setting seed for reproducibility</span></span></code></pre></div>
 <p>This vignette showcases the basic functionality of distributions in torch. Currently the distributions modules are considered ‘work in progress’ and are still experimental features in the torch package. You can see the progress in this <a href="https://github.com/mlverse/torch/issues/479" class="external-link">link</a>.</p>
 <p>The distributions modules in torch are modelled after PyTorch’s <a href="https://pytorch.org/docs/stable/distributions.html#" class="external-link">distributions module</a> which in turn is based on the TensorFlow <a href="https://arxiv.org/abs/1711.10604" class="external-link">Distributions package</a>.</p>
 <p>This vignette is based in the TensorFlow’s distributions <a href="https://www.tensorflow.org/probability/examples/TensorFlow_Distributions_Tutorial#basic_univariate_distributions" class="external-link">tutorial</a>.</p>
@@ -117,68 +117,68 @@
 </h2>
 <p>Let’s start and create a new instance of a normal distribution:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">n</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/distr_normal.html">distr_normal</a></span><span class="op">(</span>loc <span class="op">=</span> <span class="fl">0</span>, scale <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>
-<span class="va">n</span>
-<span class="co">#&gt; torch_Normal ()</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">n</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/distr_normal.html">distr_normal</a></span><span class="op">(</span>loc <span class="op">=</span> <span class="fl">0</span>, scale <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
+<span><span class="va">n</span></span>
+<span><span class="co">#&gt; torch_Normal ()</span></span></code></pre></div>
 <p>We can draw samples from it with:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">n</span><span class="op">$</span><span class="fu">sample</span><span class="op">(</span><span class="op">)</span>
-<span class="co">#&gt; torch_tensor</span>
-<span class="co">#&gt;  0.5167</span>
-<span class="co">#&gt; [ CPUFloatType{1} ]</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">n</span><span class="op">$</span><span class="fu">sample</span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="co">#&gt; torch_tensor</span></span>
+<span><span class="co">#&gt; -0.3003</span></span>
+<span><span class="co">#&gt; [ CPUFloatType{1} ]</span></span></code></pre></div>
 <p>or, draw multiple samples:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">n</span><span class="op">$</span><span class="fu">sample</span><span class="op">(</span><span class="fl">3</span><span class="op">)</span>
-<span class="co">#&gt; torch_tensor</span>
-<span class="co">#&gt;  1.5905</span>
-<span class="co">#&gt; -0.3301</span>
-<span class="co">#&gt;  0.2613</span>
-<span class="co">#&gt; [ CPUFloatType{3,1} ]</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">n</span><span class="op">$</span><span class="fu">sample</span><span class="op">(</span><span class="fl">3</span><span class="op">)</span></span>
+<span><span class="co">#&gt; torch_tensor</span></span>
+<span><span class="co">#&gt;  0.9552</span></span>
+<span><span class="co">#&gt;  0.2682</span></span>
+<span><span class="co">#&gt;  1.9459</span></span>
+<span><span class="co">#&gt; [ CPUFloatType{3,1} ]</span></span></code></pre></div>
 <p>We can evaluate the log probability of values:</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">n</span><span class="op">$</span><span class="fu">log_prob</span><span class="op">(</span><span class="fl">0</span><span class="op">)</span>
-<span class="co">#&gt; torch_tensor</span>
-<span class="co">#&gt; -0.9189</span>
-<span class="co">#&gt; [ CPUFloatType{1} ]</span>
-<span class="fu"><a href="https://rdrr.io/r/base/Log.html" class="external-link">log</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">dnorm</a></span><span class="op">(</span><span class="fl">0</span><span class="op">)</span><span class="op">)</span> <span class="co"># equivalent R code</span>
-<span class="co">#&gt; [1] -0.9189385</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">n</span><span class="op">$</span><span class="fu">log_prob</span><span class="op">(</span><span class="fl">0</span><span class="op">)</span></span>
+<span><span class="co">#&gt; torch_tensor</span></span>
+<span><span class="co">#&gt; -0.9189</span></span>
+<span><span class="co">#&gt; [ CPUFloatType{1} ]</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/Log.html" class="external-link">log</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">dnorm</a></span><span class="op">(</span><span class="fl">0</span><span class="op">)</span><span class="op">)</span> <span class="co"># equivalent R code</span></span>
+<span><span class="co">#&gt; [1] -0.9189385</span></span></code></pre></div>
 <p>or, evaluate multiple log probabilities:</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">n</span><span class="op">$</span><span class="fu">log_prob</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">2</span>, <span class="fl">4</span><span class="op">)</span><span class="op">)</span>
-<span class="co">#&gt; torch_tensor</span>
-<span class="co">#&gt; -0.9189</span>
-<span class="co">#&gt; -2.9189</span>
-<span class="co">#&gt; -8.9189</span>
-<span class="co">#&gt; [ CPUFloatType{3} ]</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">n</span><span class="op">$</span><span class="fu">log_prob</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">2</span>, <span class="fl">4</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co">#&gt; torch_tensor</span></span>
+<span><span class="co">#&gt; -0.9189</span></span>
+<span><span class="co">#&gt; -2.9189</span></span>
+<span><span class="co">#&gt; -8.9189</span></span>
+<span><span class="co">#&gt; [ CPUFloatType{3} ]</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="multiple-distributions">Multiple distributions<a class="anchor" aria-label="anchor" href="#multiple-distributions"></a>
 </h2>
 <p>A distribution can take a tensor as it’s parameters:</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">b</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/distr_bernoulli.html">distr_bernoulli</a></span><span class="op">(</span>probs <span class="op">=</span> <span class="fu"><a href="../reference/torch_tensor.html">torch_tensor</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.25</span>, <span class="fl">0.5</span>, <span class="fl">0.75</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
-<span class="va">b</span>
-<span class="co">#&gt; torch_Bernoulli ()</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">b</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/distr_bernoulli.html">distr_bernoulli</a></span><span class="op">(</span>probs <span class="op">=</span> <span class="fu"><a href="../reference/torch_tensor.html">torch_tensor</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.25</span>, <span class="fl">0.5</span>, <span class="fl">0.75</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">b</span></span>
+<span><span class="co">#&gt; torch_Bernoulli ()</span></span></code></pre></div>
 <p>This object represents 3 independent Bernoulli distributions, one for each element of the tensor.</p>
 <p>We can sample a single observation:</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">b</span><span class="op">$</span><span class="fu">sample</span><span class="op">(</span><span class="op">)</span>
-<span class="co">#&gt; torch_tensor</span>
-<span class="co">#&gt;  0</span>
-<span class="co">#&gt;  1</span>
-<span class="co">#&gt;  1</span>
-<span class="co">#&gt; [ CPUFloatType{3} ]</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">b</span><span class="op">$</span><span class="fu">sample</span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="co">#&gt; torch_tensor</span></span>
+<span><span class="co">#&gt;  0</span></span>
+<span><span class="co">#&gt;  1</span></span>
+<span><span class="co">#&gt;  1</span></span>
+<span><span class="co">#&gt; [ CPUFloatType{3} ]</span></span></code></pre></div>
 <p>or, a batch of <code>n</code> observations:</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">b</span><span class="op">$</span><span class="fu">sample</span><span class="op">(</span><span class="fl">6</span><span class="op">)</span>
-<span class="co">#&gt; torch_tensor</span>
-<span class="co">#&gt;  0  1  0</span>
-<span class="co">#&gt;  0  0  1</span>
-<span class="co">#&gt;  0  0  1</span>
-<span class="co">#&gt;  0  1  1</span>
-<span class="co">#&gt;  0  0  1</span>
-<span class="co">#&gt;  0  0  1</span>
-<span class="co">#&gt; [ CPUFloatType{6,3} ]</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">b</span><span class="op">$</span><span class="fu">sample</span><span class="op">(</span><span class="fl">6</span><span class="op">)</span></span>
+<span><span class="co">#&gt; torch_tensor</span></span>
+<span><span class="co">#&gt;  0  1  0</span></span>
+<span><span class="co">#&gt;  0  0  1</span></span>
+<span><span class="co">#&gt;  0  0  1</span></span>
+<span><span class="co">#&gt;  0  1  1</span></span>
+<span><span class="co">#&gt;  0  0  1</span></span>
+<span><span class="co">#&gt;  0  0  1</span></span>
+<span><span class="co">#&gt; [ CPUFloatType{6,3} ]</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="using-distributions-within-models">Using distributions within models<a class="anchor" aria-label="anchor" href="#using-distributions-within-models"></a>
@@ -186,95 +186,95 @@
 <p>The <code>log_prob</code> method of distributions can be differentiated, thus, distributions can be used to train models in torch.</p>
 <p>Let’s implement a Gaussian linear model, but first let’s simulate some data</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/torch_randn.html">torch_randn</a></span><span class="op">(</span><span class="fl">100</span>, <span class="fl">1</span><span class="op">)</span>
-<span class="va">y</span> <span class="op">&lt;-</span> <span class="fl">2</span><span class="op">*</span><span class="va">x</span> <span class="op">+</span> <span class="fl">1</span> <span class="op">+</span> <span class="fu"><a href="../reference/torch_randn.html">torch_randn</a></span><span class="op">(</span><span class="fl">100</span>, <span class="fl">1</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/torch_randn.html">torch_randn</a></span><span class="op">(</span><span class="fl">100</span>, <span class="fl">1</span><span class="op">)</span></span>
+<span><span class="va">y</span> <span class="op">&lt;-</span> <span class="fl">2</span><span class="op">*</span><span class="va">x</span> <span class="op">+</span> <span class="fl">1</span> <span class="op">+</span> <span class="fu"><a href="../reference/torch_randn.html">torch_randn</a></span><span class="op">(</span><span class="fl">100</span>, <span class="fl">1</span><span class="op">)</span></span></code></pre></div>
 <p>and plot:</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/numeric.html" class="external-link">as.numeric</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/numeric.html" class="external-link">as.numeric</a></span><span class="op">(</span><span class="va">y</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/numeric.html" class="external-link">as.numeric</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/numeric.html" class="external-link">as.numeric</a></span><span class="op">(</span><span class="va">y</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p><img src="distributions_files/figure-html/unnamed-chunk-11-1.png" width="700"></p>
 <p>We can now define our model:</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">GaussianLinear</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/nn_module.html">nn_module</a></span><span class="op">(</span>
-  initialize <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="op">)</span> <span class="op">{</span>
-    <span class="co"># this linear predictor will estimate the mean of the normal distribution</span>
-    <span class="va">self</span><span class="op">$</span><span class="va">linear</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/nn_linear.html">nn_linear</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">1</span><span class="op">)</span>
-    <span class="co"># this parameter will hold the estimate of the variability</span>
-    <span class="va">self</span><span class="op">$</span><span class="va">scale</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/nn_parameter.html">nn_parameter</a></span><span class="op">(</span><span class="fu"><a href="../reference/torch_ones.html">torch_ones</a></span><span class="op">(</span><span class="fl">1</span><span class="op">)</span><span class="op">)</span>
-  <span class="op">}</span>,
-  forward <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span>
-    <span class="co"># we estimate the mean</span>
-    <span class="va">loc</span> <span class="op">&lt;-</span> <span class="va">self</span><span class="op">$</span><span class="fu">linear</span><span class="op">(</span><span class="va">x</span><span class="op">)</span>
-    <span class="co"># return a normal distribution</span>
-    <span class="fu"><a href="../reference/distr_normal.html">distr_normal</a></span><span class="op">(</span><span class="va">loc</span>, <span class="va">self</span><span class="op">$</span><span class="va">scale</span><span class="op">)</span>
-  <span class="op">}</span>
-<span class="op">)</span>
-
-<span class="va">model</span> <span class="op">&lt;-</span> <span class="fu">GaussianLinear</span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">GaussianLinear</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/nn_module.html">nn_module</a></span><span class="op">(</span></span>
+<span>  initialize <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="op">)</span> <span class="op">{</span></span>
+<span>    <span class="co"># this linear predictor will estimate the mean of the normal distribution</span></span>
+<span>    <span class="va">self</span><span class="op">$</span><span class="va">linear</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/nn_linear.html">nn_linear</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">1</span><span class="op">)</span></span>
+<span>    <span class="co"># this parameter will hold the estimate of the variability</span></span>
+<span>    <span class="va">self</span><span class="op">$</span><span class="va">scale</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/nn_parameter.html">nn_parameter</a></span><span class="op">(</span><span class="fu"><a href="../reference/torch_ones.html">torch_ones</a></span><span class="op">(</span><span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
+<span>  <span class="op">}</span>,</span>
+<span>  forward <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span></span>
+<span>    <span class="co"># we estimate the mean</span></span>
+<span>    <span class="va">loc</span> <span class="op">&lt;-</span> <span class="va">self</span><span class="op">$</span><span class="fu">linear</span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
+<span>    <span class="co"># return a normal distribution</span></span>
+<span>    <span class="fu"><a href="../reference/distr_normal.html">distr_normal</a></span><span class="op">(</span><span class="va">loc</span>, <span class="va">self</span><span class="op">$</span><span class="va">scale</span><span class="op">)</span></span>
+<span>  <span class="op">}</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu">GaussianLinear</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <p>We can now train our model with:</p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">opt</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/optim_sgd.html">optim_sgd</a></span><span class="op">(</span><span class="va">model</span><span class="op">$</span><span class="va">parameters</span>, lr <span class="op">=</span> <span class="fl">0.1</span><span class="op">)</span>
-
-<span class="kw">for</span> <span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fl">100</span><span class="op">)</span> <span class="op">{</span>
-  <span class="va">opt</span><span class="op">$</span><span class="fu">zero_grad</span><span class="op">(</span><span class="op">)</span>
-  <span class="va">d</span> <span class="op">&lt;-</span> <span class="fu">model</span><span class="op">(</span><span class="va">x</span><span class="op">)</span>
-  <span class="va">loss</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/torch_mean.html">torch_mean</a></span><span class="op">(</span><span class="op">-</span><span class="va">d</span><span class="op">$</span><span class="fu">log_prob</span><span class="op">(</span><span class="va">y</span><span class="op">)</span><span class="op">)</span>
-  <span class="va">loss</span><span class="op">$</span><span class="fu">backward</span><span class="op">(</span><span class="op">)</span>
-  <span class="va">opt</span><span class="op">$</span><span class="fu">step</span><span class="op">(</span><span class="op">)</span>
-  <span class="kw">if</span> <span class="op">(</span><span class="va">i</span> <span class="op"><a href="https://rdrr.io/r/base/Arithmetic.html" class="external-link">%%</a></span> <span class="fl">10</span> <span class="op">==</span> <span class="fl">0</span><span class="op">)</span>
-    <span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"iter: "</span>, <span class="va">i</span>, <span class="st">" loss: "</span>, <span class="va">loss</span><span class="op">$</span><span class="fu">item</span><span class="op">(</span><span class="op">)</span>, <span class="st">"\n"</span><span class="op">)</span>
-<span class="op">}</span>
-<span class="co">#&gt; iter:  10  loss:  1.809854 </span>
-<span class="co">#&gt; iter:  20  loss:  1.606322 </span>
-<span class="co">#&gt; iter:  30  loss:  1.46065 </span>
-<span class="co">#&gt; iter:  40  loss:  1.399433 </span>
-<span class="co">#&gt; iter:  50  loss:  1.39078 </span>
-<span class="co">#&gt; iter:  60  loss:  1.390136 </span>
-<span class="co">#&gt; iter:  70  loss:  1.390089 </span>
-<span class="co">#&gt; iter:  80  loss:  1.390086 </span>
-<span class="co">#&gt; iter:  90  loss:  1.390085 </span>
-<span class="co">#&gt; iter:  100  loss:  1.390085</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">opt</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/optim_sgd.html">optim_sgd</a></span><span class="op">(</span><span class="va">model</span><span class="op">$</span><span class="va">parameters</span>, lr <span class="op">=</span> <span class="fl">0.1</span><span class="op">)</span></span>
+<span></span>
+<span><span class="kw">for</span> <span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fl">100</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="va">opt</span><span class="op">$</span><span class="fu">zero_grad</span><span class="op">(</span><span class="op">)</span></span>
+<span>  <span class="va">d</span> <span class="op">&lt;-</span> <span class="fu">model</span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
+<span>  <span class="va">loss</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/torch_mean.html">torch_mean</a></span><span class="op">(</span><span class="op">-</span><span class="va">d</span><span class="op">$</span><span class="fu">log_prob</span><span class="op">(</span><span class="va">y</span><span class="op">)</span><span class="op">)</span></span>
+<span>  <span class="va">loss</span><span class="op">$</span><span class="fu">backward</span><span class="op">(</span><span class="op">)</span></span>
+<span>  <span class="va">opt</span><span class="op">$</span><span class="fu">step</span><span class="op">(</span><span class="op">)</span></span>
+<span>  <span class="kw">if</span> <span class="op">(</span><span class="va">i</span> <span class="op"><a href="https://rdrr.io/r/base/Arithmetic.html" class="external-link">%%</a></span> <span class="fl">10</span> <span class="op">==</span> <span class="fl">0</span><span class="op">)</span></span>
+<span>    <span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"iter: "</span>, <span class="va">i</span>, <span class="st">" loss: "</span>, <span class="va">loss</span><span class="op">$</span><span class="fu">item</span><span class="op">(</span><span class="op">)</span>, <span class="st">"\n"</span><span class="op">)</span></span>
+<span><span class="op">}</span></span>
+<span><span class="co">#&gt; iter:  10  loss:  1.809854 </span></span>
+<span><span class="co">#&gt; iter:  20  loss:  1.606322 </span></span>
+<span><span class="co">#&gt; iter:  30  loss:  1.46065 </span></span>
+<span><span class="co">#&gt; iter:  40  loss:  1.399433 </span></span>
+<span><span class="co">#&gt; iter:  50  loss:  1.39078 </span></span>
+<span><span class="co">#&gt; iter:  60  loss:  1.390136 </span></span>
+<span><span class="co">#&gt; iter:  70  loss:  1.390089 </span></span>
+<span><span class="co">#&gt; iter:  80  loss:  1.390086 </span></span>
+<span><span class="co">#&gt; iter:  90  loss:  1.390085 </span></span>
+<span><span class="co">#&gt; iter:  100  loss:  1.390085</span></span></code></pre></div>
 <p>We can see the parameter estimates with:</p>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">model</span><span class="op">$</span><span class="va">parameters</span>
-<span class="co">#&gt; $linear.weight</span>
-<span class="co">#&gt; torch_tensor</span>
-<span class="co">#&gt;  1.9772</span>
-<span class="co">#&gt; [ CPUFloatType{1,1} ][ requires_grad = TRUE ]</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; $linear.bias</span>
-<span class="co">#&gt; torch_tensor</span>
-<span class="co">#&gt;  1.0390</span>
-<span class="co">#&gt; [ CPUFloatType{1} ][ requires_grad = TRUE ]</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; $scale</span>
-<span class="co">#&gt; torch_tensor</span>
-<span class="co">#&gt;  0.9716</span>
-<span class="co">#&gt; [ CPUFloatType{1} ][ requires_grad = TRUE ]</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">model</span><span class="op">$</span><span class="va">parameters</span></span>
+<span><span class="co">#&gt; $linear.weight</span></span>
+<span><span class="co">#&gt; torch_tensor</span></span>
+<span><span class="co">#&gt;  1.9772</span></span>
+<span><span class="co">#&gt; [ CPUFloatType{1,1} ][ requires_grad = TRUE ]</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; $linear.bias</span></span>
+<span><span class="co">#&gt; torch_tensor</span></span>
+<span><span class="co">#&gt;  1.0390</span></span>
+<span><span class="co">#&gt; [ CPUFloatType{1} ][ requires_grad = TRUE ]</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; $scale</span></span>
+<span><span class="co">#&gt; torch_tensor</span></span>
+<span><span class="co">#&gt;  0.9716</span></span>
+<span><span class="co">#&gt; [ CPUFloatType{1} ][ requires_grad = TRUE ]</span></span></code></pre></div>
 <p>and quickly compare with the <code><a href="https://rdrr.io/r/stats/glm.html" class="external-link">glm()</a></code> function:</p>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/glm.html" class="external-link">glm</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/numeric.html" class="external-link">as.numeric</a></span><span class="op">(</span><span class="va">y</span><span class="op">)</span> <span class="op">~</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html" class="external-link">as.numeric</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; Call:</span>
-<span class="co">#&gt; glm(formula = as.numeric(y) ~ as.numeric(x))</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; Deviance Residuals: </span>
-<span class="co">#&gt;     Min       1Q   Median       3Q      Max  </span>
-<span class="co">#&gt; -2.5311  -0.6277  -0.1177   0.5544   3.3037  </span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; Coefficients:</span>
-<span class="co">#&gt;               Estimate Std. Error t value Pr(&gt;|t|)    </span>
-<span class="co">#&gt; (Intercept)    1.03900    0.09844   10.55   &lt;2e-16 ***</span>
-<span class="co">#&gt; as.numeric(x)  1.97723    0.09392   21.05   &lt;2e-16 ***</span>
-<span class="co">#&gt; ---</span>
-<span class="co">#&gt; Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; (Dispersion parameter for gaussian family taken to be 0.963191)</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt;     Null deviance: 521.260  on 99  degrees of freedom</span>
-<span class="co">#&gt; Residual deviance:  94.393  on 98  degrees of freedom</span>
-<span class="co">#&gt; AIC: 284.02</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; Number of Fisher Scoring iterations: 2</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/glm.html" class="external-link">glm</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/numeric.html" class="external-link">as.numeric</a></span><span class="op">(</span><span class="va">y</span><span class="op">)</span> <span class="op">~</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html" class="external-link">as.numeric</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Call:</span></span>
+<span><span class="co">#&gt; glm(formula = as.numeric(y) ~ as.numeric(x))</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Deviance Residuals: </span></span>
+<span><span class="co">#&gt;     Min       1Q   Median       3Q      Max  </span></span>
+<span><span class="co">#&gt; -2.5311  -0.6277  -0.1177   0.5544   3.3037  </span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Coefficients:</span></span>
+<span><span class="co">#&gt;               Estimate Std. Error t value Pr(&gt;|t|)    </span></span>
+<span><span class="co">#&gt; (Intercept)    1.03900    0.09844   10.55   &lt;2e-16 ***</span></span>
+<span><span class="co">#&gt; as.numeric(x)  1.97723    0.09392   21.05   &lt;2e-16 ***</span></span>
+<span><span class="co">#&gt; ---</span></span>
+<span><span class="co">#&gt; Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; (Dispersion parameter for gaussian family taken to be 0.963191)</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;     Null deviance: 521.260  on 99  degrees of freedom</span></span>
+<span><span class="co">#&gt; Residual deviance:  94.393  on 98  degrees of freedom</span></span>
+<span><span class="co">#&gt; AIC: 284.02</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Number of Fisher Scoring iterations: 2</span></span></code></pre></div>
 </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
     </nav></aside>
@@ -289,7 +289,7 @@
 
 <div class="pkgdown-footer-right">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.4.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
     </footer>

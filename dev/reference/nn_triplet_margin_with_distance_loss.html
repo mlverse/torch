@@ -4,7 +4,7 @@ tensors \(a\), \(p\), and \(n\) (representing anchor,
 positive, and negative examples, respectively), and a nonnegative,
 real-valued function ("distance function") used to compute the relationship
 between the anchor and positive example ("positive distance") and the
-anchor and negative example ("negative distance").'><title>Triplet margin with distance loss — nn_triplet_margin_with_distance_loss • torch</title><script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><link href="../deps/bootstrap-5.1.0/bootstrap.min.css" rel="stylesheet"><script src="../deps/bootstrap-5.1.0/bootstrap.bundle.min.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous"><!-- bootstrap-toc --><script src="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.1/dist/bootstrap-toc.min.js"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="../pkgdown.js"></script><link href="../extra.css" rel="stylesheet"><meta property="og:title" content="Triplet margin with distance loss — nn_triplet_margin_with_distance_loss"><meta property="og:description" content='Creates a criterion that measures the triplet loss given input
+anchor and negative example ("negative distance").'><title>Triplet margin with distance loss — nn_triplet_margin_with_distance_loss • torch</title><script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><link href="../deps/bootstrap-5.1.3/bootstrap.min.css" rel="stylesheet"><script src="../deps/bootstrap-5.1.3/bootstrap.bundle.min.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous"><!-- bootstrap-toc --><script src="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.1/dist/bootstrap-toc.min.js"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="../pkgdown.js"></script><link href="../extra.css" rel="stylesheet"><meta property="og:title" content="Triplet margin with distance loss — nn_triplet_margin_with_distance_loss"><meta property="og:description" content='Creates a criterion that measures the triplet loss given input
 tensors \(a\), \(p\), and \(n\) (representing anchor,
 positive, and negative examples, respectively), and a nonnegative,
 real-valued function ("distance function") used to compute the relationship
@@ -97,12 +97,12 @@ anchor and negative example ("negative distance").</p>
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">nn_triplet_margin_with_distance_loss</span><span class="op">(</span>
-  distance_function <span class="op">=</span> <span class="cn">NULL</span>,
-  margin <span class="op">=</span> <span class="fl">1</span>,
-  swap <span class="op">=</span> <span class="cn">FALSE</span>,
-  reduction <span class="op">=</span> <span class="st">"mean"</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">nn_triplet_margin_with_distance_loss</span><span class="op">(</span></span>
+<span>  distance_function <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  margin <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>  swap <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  reduction <span class="op">=</span> <span class="st">"mean"</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -173,41 +173,41 @@ otherwise.</p></li>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="torch_is_installed.html">torch_is_installed</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
-<span class="r-in"><span class="co"># Initialize embeddings</span></span>
-<span class="r-in"><span class="va">embedding</span> <span class="op">&lt;-</span> <span class="fu"><a href="nn_embedding.html">nn_embedding</a></span><span class="op">(</span><span class="fl">1000</span>, <span class="fl">128</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">anchor_ids</span> <span class="op">&lt;-</span> <span class="fu"><a href="torch_randint.html">torch_randint</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">1000</span>, <span class="fl">1</span>, dtype <span class="op">=</span> <span class="fu"><a href="torch_dtype.html">torch_long</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">positive_ids</span> <span class="op">&lt;-</span> <span class="fu"><a href="torch_randint.html">torch_randint</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">1000</span>, <span class="fl">1</span>, dtype <span class="op">=</span> <span class="fu"><a href="torch_dtype.html">torch_long</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">negative_ids</span> <span class="op">&lt;-</span> <span class="fu"><a href="torch_randint.html">torch_randint</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">1000</span>, <span class="fl">1</span>, dtype <span class="op">=</span> <span class="fu"><a href="torch_dtype.html">torch_long</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">anchor</span> <span class="op">&lt;-</span> <span class="fu">embedding</span><span class="op">(</span><span class="va">anchor_ids</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">positive</span> <span class="op">&lt;-</span> <span class="fu">embedding</span><span class="op">(</span><span class="va">positive_ids</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">negative</span> <span class="op">&lt;-</span> <span class="fu">embedding</span><span class="op">(</span><span class="va">negative_ids</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Built-in Distance Function</span></span>
-<span class="r-in"><span class="va">triplet_loss</span> <span class="op">&lt;-</span> <span class="fu">nn_triplet_margin_with_distance_loss</span><span class="op">(</span></span>
-<span class="r-in">  distance_function <span class="op">=</span> <span class="fu"><a href="nn_pairwise_distance.html">nn_pairwise_distance</a></span><span class="op">(</span><span class="op">)</span></span>
-<span class="r-in"><span class="op">)</span></span>
-<span class="r-in"><span class="va">output</span> <span class="op">&lt;-</span> <span class="fu">triplet_loss</span><span class="op">(</span><span class="va">anchor</span>, <span class="va">positive</span>, <span class="va">negative</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Custom Distance Function</span></span>
-<span class="r-in"><span class="va">l_infinity</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x1</span>, <span class="va">x2</span><span class="op">)</span> <span class="op">{</span></span>
-<span class="r-in">  <span class="fu"><a href="torch_max.html">torch_max</a></span><span class="op">(</span><span class="fu"><a href="torch_abs.html">torch_abs</a></span><span class="op">(</span><span class="va">x1</span> <span class="op">-</span> <span class="va">x2</span><span class="op">)</span>, dim <span class="op">=</span> <span class="fl">1</span><span class="op">)</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span></span>
-<span class="r-in"><span class="op">}</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="va">triplet_loss</span> <span class="op">&lt;-</span> <span class="fu">nn_triplet_margin_with_distance_loss</span><span class="op">(</span></span>
-<span class="r-in">  distance_function <span class="op">=</span> <span class="va">l_infinity</span>, margin <span class="op">=</span> <span class="fl">1.5</span></span>
-<span class="r-in"><span class="op">)</span></span>
-<span class="r-in"><span class="va">output</span> <span class="op">&lt;-</span> <span class="fu">triplet_loss</span><span class="op">(</span><span class="va">anchor</span>, <span class="va">positive</span>, <span class="va">negative</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Custom Distance Function (Lambda)</span></span>
-<span class="r-in"><span class="va">triplet_loss</span> <span class="op">&lt;-</span> <span class="fu">nn_triplet_margin_with_distance_loss</span><span class="op">(</span></span>
-<span class="r-in">  distance_function <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span><span class="op">)</span> <span class="op">{</span></span>
-<span class="r-in">    <span class="fl">1</span> <span class="op">-</span> <span class="fu"><a href="nnf_cosine_similarity.html">nnf_cosine_similarity</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span><span class="op">)</span></span>
-<span class="r-in">  <span class="op">}</span></span>
-<span class="r-in"><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="va">output</span> <span class="op">&lt;-</span> <span class="fu">triplet_loss</span><span class="op">(</span><span class="va">anchor</span>, <span class="va">positive</span>, <span class="va">negative</span><span class="op">)</span></span>
-<span class="r-in"><span class="op">}</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="torch_is_installed.html">torch_is_installed</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span><span class="co"># Initialize embeddings</span></span></span>
+<span class="r-in"><span><span class="va">embedding</span> <span class="op">&lt;-</span> <span class="fu"><a href="nn_embedding.html">nn_embedding</a></span><span class="op">(</span><span class="fl">1000</span>, <span class="fl">128</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">anchor_ids</span> <span class="op">&lt;-</span> <span class="fu"><a href="torch_randint.html">torch_randint</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">1000</span>, <span class="fl">1</span>, dtype <span class="op">=</span> <span class="fu"><a href="torch_dtype.html">torch_long</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">positive_ids</span> <span class="op">&lt;-</span> <span class="fu"><a href="torch_randint.html">torch_randint</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">1000</span>, <span class="fl">1</span>, dtype <span class="op">=</span> <span class="fu"><a href="torch_dtype.html">torch_long</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">negative_ids</span> <span class="op">&lt;-</span> <span class="fu"><a href="torch_randint.html">torch_randint</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">1000</span>, <span class="fl">1</span>, dtype <span class="op">=</span> <span class="fu"><a href="torch_dtype.html">torch_long</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">anchor</span> <span class="op">&lt;-</span> <span class="fu">embedding</span><span class="op">(</span><span class="va">anchor_ids</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">positive</span> <span class="op">&lt;-</span> <span class="fu">embedding</span><span class="op">(</span><span class="va">positive_ids</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">negative</span> <span class="op">&lt;-</span> <span class="fu">embedding</span><span class="op">(</span><span class="va">negative_ids</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Built-in Distance Function</span></span></span>
+<span class="r-in"><span><span class="va">triplet_loss</span> <span class="op">&lt;-</span> <span class="fu">nn_triplet_margin_with_distance_loss</span><span class="op">(</span></span></span>
+<span class="r-in"><span>  distance_function <span class="op">=</span> <span class="fu"><a href="nn_pairwise_distance.html">nn_pairwise_distance</a></span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">output</span> <span class="op">&lt;-</span> <span class="fu">triplet_loss</span><span class="op">(</span><span class="va">anchor</span>, <span class="va">positive</span>, <span class="va">negative</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Custom Distance Function</span></span></span>
+<span class="r-in"><span><span class="va">l_infinity</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x1</span>, <span class="va">x2</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="torch_max.html">torch_max</a></span><span class="op">(</span><span class="fu"><a href="torch_abs.html">torch_abs</a></span><span class="op">(</span><span class="va">x1</span> <span class="op">-</span> <span class="va">x2</span><span class="op">)</span>, dim <span class="op">=</span> <span class="fl">1</span><span class="op">)</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">triplet_loss</span> <span class="op">&lt;-</span> <span class="fu">nn_triplet_margin_with_distance_loss</span><span class="op">(</span></span></span>
+<span class="r-in"><span>  distance_function <span class="op">=</span> <span class="va">l_infinity</span>, margin <span class="op">=</span> <span class="fl">1.5</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">output</span> <span class="op">&lt;-</span> <span class="fu">triplet_loss</span><span class="op">(</span><span class="va">anchor</span>, <span class="va">positive</span>, <span class="va">negative</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Custom Distance Function (Lambda)</span></span></span>
+<span class="r-in"><span><span class="va">triplet_loss</span> <span class="op">&lt;-</span> <span class="fu">nn_triplet_margin_with_distance_loss</span><span class="op">(</span></span></span>
+<span class="r-in"><span>  distance_function <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span>    <span class="fl">1</span> <span class="op">-</span> <span class="fu"><a href="nnf_cosine_similarity.html">nnf_cosine_similarity</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="op">}</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">output</span> <span class="op">&lt;-</span> <span class="fu">triplet_loss</span><span class="op">(</span><span class="va">anchor</span>, <span class="va">positive</span>, <span class="va">negative</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
@@ -219,7 +219,7 @@ otherwise.</p></li>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.4.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
     </footer></div>

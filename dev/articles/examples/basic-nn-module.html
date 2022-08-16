@@ -8,8 +8,8 @@
 <meta name="description" content="torch">
 <title>basic-nn-module • torch</title>
 <script src="../../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link href="../../deps/bootstrap-5.1.0/bootstrap.min.css" rel="stylesheet">
-<script src="../../deps/bootstrap-5.1.0/bootstrap.bundle.min.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
+<link href="../../deps/bootstrap-5.1.3/bootstrap.min.css" rel="stylesheet">
+<script src="../../deps/bootstrap-5.1.3/bootstrap.bundle.min.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
 <!-- bootstrap-toc --><script src="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.1/dist/bootstrap-toc.min.js"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="../../pkgdown.js"></script><link href="../../extra.css" rel="stylesheet">
 <meta property="og:title" content="basic-nn-module">
@@ -107,79 +107,79 @@
     
     
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://torch.mlverse.org/docs">torch</a></span><span class="op">)</span>
-
-<span class="co"># creates example tensors. x requires_grad = TRUE tells that</span>
-<span class="co"># we are going to take derivatives over it.</span>
-<span class="va">dense</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/nn_module.html">nn_module</a></span><span class="op">(</span>
-  clasname <span class="op">=</span> <span class="st">"dense"</span>,
-  <span class="co"># the initialize function tuns whenever we instantiate the model</span>
-  initialize <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">in_features</span>, <span class="va">out_features</span><span class="op">)</span> <span class="op">{</span>
-
-    <span class="co"># just for you to see when this function is called</span>
-    <span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"Calling initialize!"</span><span class="op">)</span>
-
-    <span class="co"># we use nn_parameter to indicate that those tensors are special</span>
-    <span class="co"># and should be treated as parameters by `nn_module`.</span>
-    <span class="va">self</span><span class="op">$</span><span class="va">w</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/nn_parameter.html">nn_parameter</a></span><span class="op">(</span><span class="fu"><a href="../../reference/torch_randn.html">torch_randn</a></span><span class="op">(</span><span class="va">in_features</span>, <span class="va">out_features</span><span class="op">)</span><span class="op">)</span>
-    <span class="va">self</span><span class="op">$</span><span class="va">b</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/nn_parameter.html">nn_parameter</a></span><span class="op">(</span><span class="fu"><a href="../../reference/torch_zeros.html">torch_zeros</a></span><span class="op">(</span><span class="va">out_features</span><span class="op">)</span><span class="op">)</span>
-
-  <span class="op">}</span>,
-  <span class="co"># this function is called whenever we call our model on input.</span>
-  forward <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span>
-    <span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"Calling forward!"</span><span class="op">)</span>
-    <span class="fu"><a href="../../reference/torch_mm.html">torch_mm</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">self</span><span class="op">$</span><span class="va">w</span><span class="op">)</span> <span class="op">+</span> <span class="va">self</span><span class="op">$</span><span class="va">b</span>
-  <span class="op">}</span>
-<span class="op">)</span>
-
-<span class="va">model</span> <span class="op">&lt;-</span> <span class="fu">dense</span><span class="op">(</span><span class="fl">3</span>, <span class="fl">1</span><span class="op">)</span></code></pre></div>
-<pre><code><span class="co">## Calling initialize!</span></code></pre>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://torch.mlverse.org/docs">torch</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># creates example tensors. x requires_grad = TRUE tells that</span></span>
+<span><span class="co"># we are going to take derivatives over it.</span></span>
+<span><span class="va">dense</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/nn_module.html">nn_module</a></span><span class="op">(</span></span>
+<span>  clasname <span class="op">=</span> <span class="st">"dense"</span>,</span>
+<span>  <span class="co"># the initialize function tuns whenever we instantiate the model</span></span>
+<span>  initialize <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">in_features</span>, <span class="va">out_features</span><span class="op">)</span> <span class="op">{</span></span>
+<span></span>
+<span>    <span class="co"># just for you to see when this function is called</span></span>
+<span>    <span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"Calling initialize!"</span><span class="op">)</span></span>
+<span></span>
+<span>    <span class="co"># we use nn_parameter to indicate that those tensors are special</span></span>
+<span>    <span class="co"># and should be treated as parameters by `nn_module`.</span></span>
+<span>    <span class="va">self</span><span class="op">$</span><span class="va">w</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/nn_parameter.html">nn_parameter</a></span><span class="op">(</span><span class="fu"><a href="../../reference/torch_randn.html">torch_randn</a></span><span class="op">(</span><span class="va">in_features</span>, <span class="va">out_features</span><span class="op">)</span><span class="op">)</span></span>
+<span>    <span class="va">self</span><span class="op">$</span><span class="va">b</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/nn_parameter.html">nn_parameter</a></span><span class="op">(</span><span class="fu"><a href="../../reference/torch_zeros.html">torch_zeros</a></span><span class="op">(</span><span class="va">out_features</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span>  <span class="op">}</span>,</span>
+<span>  <span class="co"># this function is called whenever we call our model on input.</span></span>
+<span>  forward <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span></span>
+<span>    <span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"Calling forward!"</span><span class="op">)</span></span>
+<span>    <span class="fu"><a href="../../reference/torch_mm.html">torch_mm</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">self</span><span class="op">$</span><span class="va">w</span><span class="op">)</span> <span class="op">+</span> <span class="va">self</span><span class="op">$</span><span class="va">b</span></span>
+<span>  <span class="op">}</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu">dense</span><span class="op">(</span><span class="fl">3</span>, <span class="fl">1</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## Calling initialize!</span></span></code></pre>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># you can get all parameters</span>
-<span class="va">model</span><span class="op">$</span><span class="va">parameters</span></code></pre></div>
-<pre><code><span class="co">## $w</span>
-<span class="co">## torch_tensor</span>
-<span class="co">##  1.5095</span>
-<span class="co">## -0.0900</span>
-<span class="co">## -1.3388</span>
-<span class="co">## [ CPUFloatType{3,1} ][ requires_grad = TRUE ]</span>
-<span class="co">## </span>
-<span class="co">## $b</span>
-<span class="co">## torch_tensor</span>
-<span class="co">##  0</span>
-<span class="co">## [ CPUFloatType{1} ][ requires_grad = TRUE ]</span></code></pre>
+<code class="sourceCode R"><span><span class="co"># you can get all parameters</span></span>
+<span><span class="va">model</span><span class="op">$</span><span class="va">parameters</span></span></code></pre></div>
+<pre><code><span><span class="co">## $w</span></span>
+<span><span class="co">## torch_tensor</span></span>
+<span><span class="co">##  0.9040</span></span>
+<span><span class="co">##  1.4939</span></span>
+<span><span class="co">##  1.1345</span></span>
+<span><span class="co">## [ CPUFloatType{3,1} ][ requires_grad = TRUE ]</span></span>
+<span><span class="co">## </span></span>
+<span><span class="co">## $b</span></span>
+<span><span class="co">## torch_tensor</span></span>
+<span><span class="co">##  0</span></span>
+<span><span class="co">## [ CPUFloatType{1} ][ requires_grad = TRUE ]</span></span></code></pre>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># or individually</span>
-<span class="va">model</span><span class="op">$</span><span class="va">w</span></code></pre></div>
-<pre><code><span class="co">## torch_tensor</span>
-<span class="co">##  1.5095</span>
-<span class="co">## -0.0900</span>
-<span class="co">## -1.3388</span>
-<span class="co">## [ CPUFloatType{3,1} ][ requires_grad = TRUE ]</span></code></pre>
+<code class="sourceCode R"><span><span class="co"># or individually</span></span>
+<span><span class="va">model</span><span class="op">$</span><span class="va">w</span></span></code></pre></div>
+<pre><code><span><span class="co">## torch_tensor</span></span>
+<span><span class="co">##  0.9040</span></span>
+<span><span class="co">##  1.4939</span></span>
+<span><span class="co">##  1.1345</span></span>
+<span><span class="co">## [ CPUFloatType{3,1} ][ requires_grad = TRUE ]</span></span></code></pre>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">model</span><span class="op">$</span><span class="va">b</span></code></pre></div>
-<pre><code><span class="co">## torch_tensor</span>
-<span class="co">##  0</span>
-<span class="co">## [ CPUFloatType{1} ][ requires_grad = TRUE ]</span></code></pre>
+<code class="sourceCode R"><span><span class="va">model</span><span class="op">$</span><span class="va">b</span></span></code></pre></div>
+<pre><code><span><span class="co">## torch_tensor</span></span>
+<span><span class="co">##  0</span></span>
+<span><span class="co">## [ CPUFloatType{1} ][ requires_grad = TRUE ]</span></span></code></pre>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># create an input tensor</span>
-<span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/torch_randn.html">torch_randn</a></span><span class="op">(</span><span class="fl">10</span>, <span class="fl">3</span><span class="op">)</span>
-<span class="va">y_pred</span> <span class="op">&lt;-</span> <span class="fu">model</span><span class="op">(</span><span class="va">x</span><span class="op">)</span></code></pre></div>
-<pre><code><span class="co">## Calling forward!</span></code></pre>
+<code class="sourceCode R"><span><span class="co"># create an input tensor</span></span>
+<span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/torch_randn.html">torch_randn</a></span><span class="op">(</span><span class="fl">10</span>, <span class="fl">3</span><span class="op">)</span></span>
+<span><span class="va">y_pred</span> <span class="op">&lt;-</span> <span class="fu">model</span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## Calling forward!</span></span></code></pre>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">y_pred</span></code></pre></div>
-<pre><code><span class="co">## torch_tensor</span>
-<span class="co">## -0.7753</span>
-<span class="co">##  4.3090</span>
-<span class="co">##  0.8502</span>
-<span class="co">##  1.3063</span>
-<span class="co">## -1.7630</span>
-<span class="co">## -0.8826</span>
-<span class="co">##  2.0615</span>
-<span class="co">## -2.6652</span>
-<span class="co">## -0.6913</span>
-<span class="co">##  0.1135</span>
-<span class="co">## [ CPUFloatType{10,1} ][ grad_fn = &lt;AddBackward0&gt; ]</span></code></pre>
+<code class="sourceCode R"><span><span class="va">y_pred</span></span></code></pre></div>
+<pre><code><span><span class="co">## torch_tensor</span></span>
+<span><span class="co">## -2.3513</span></span>
+<span><span class="co">##  0.3965</span></span>
+<span><span class="co">##  0.2971</span></span>
+<span><span class="co">## -3.3465</span></span>
+<span><span class="co">##  0.2626</span></span>
+<span><span class="co">## -2.1299</span></span>
+<span><span class="co">##  3.4270</span></span>
+<span><span class="co">## -0.5114</span></span>
+<span><span class="co">##  0.6642</span></span>
+<span><span class="co">## -2.6995</span></span>
+<span><span class="co">## [ CPUFloatType{10,1} ][ grad_fn = &lt;AddBackward0&gt; ]</span></span></code></pre>
   </main>
 </div>
 
@@ -192,7 +192,7 @@
 
 <div class="pkgdown-footer-right">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.4.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
     </footer>
