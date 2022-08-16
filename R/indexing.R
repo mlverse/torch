@@ -9,6 +9,8 @@
 #' @examples
 #' x <- torch_randn(10)
 #' x[slc(start = 1, end = 5, step = 2)]
+#' 
+#' @keywords internal
 #' @export
 slc <- function(start, end, step = 1) {
   if (is.infinite(end) && end > 0) {

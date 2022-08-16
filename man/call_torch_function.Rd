@@ -41,5 +41,7 @@ x$grad
 ## see https://pytorch.org/blog/overview-of-pytorch-autograd-engine/ for details.
 call_torch_function("torch_tanh_backward", 1, y)
 all.equal(call_torch_function("torch_tanh_backward", 1, y, quiet = TRUE), x$grad)
+
 }
 }
+\keyword{internal}

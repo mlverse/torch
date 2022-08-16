@@ -120,6 +120,7 @@ reference:
       - starts_with("enumerate")
       - tensor_dataset
       - is_dataloader
+      - sampler
   - title: Distributions
     contents:
       - Distribution
@@ -130,6 +131,7 @@ reference:
       - starts_with("autograd_")
       - with_no_grad
       - with_enable_grad
+      - with_detect_anomaly
       - AutogradContext
   - title: Linear Algebra
     contents:
@@ -148,3 +150,6 @@ reference:
       - install_torch
       - starts_with("install_")
       - get_install_libs_url
+  - title: Contrib
+    contents:
+      - contrib_sort_vertices
