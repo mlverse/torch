@@ -7,6 +7,7 @@ on:
       - main
       - "cran/**"
       - "libtorch-v1.11.0"
+      - "non-abi-2"
 
 jobs:
   build:
@@ -15,14 +16,59 @@ jobs:
       fail-fast: false
       matrix:
         config:
-          - {os: macOS-latest, artifact: "build/liblantern.dylib", upload: "macOS", fixlib: 'install_name_tool -add_rpath @loader_path/. liblantern.dylib'}
-          - {os: windows-2019, artifact: "build/Release/lantern.dll", upload: "Windows"}
-          - {os: ubuntu-18.04, artifact: "build/liblantern.so", upload: "Linux", fixlib: "chrpath -r '$ORIGIN/.' liblantern.so"}
-          - {os: ubuntu-18.04, artifact: "build/liblantern.so", upload: "Linux-Cuda-113",cuda: '11.3', cuda_patch: "1", cudnn: 'https://storage.googleapis.com/torch-lantern-builds/cudnn/cudnn-11.3-linux-x64-v8.2.1.32.tgz', fixlib: "chrpath -r '$ORIGIN/.' liblantern.so"}
-          - {os: ubuntu-18.04, artifact: "build/liblantern.so", upload: "Linux-Cuda-102", cuda: '10.2', cuda_patch: "89", cudnn: 'https://storage.googleapis.com/torch-lantern-builds/cudnn/cudnn-10.2-linux-x64-v7.6.5.32.tgz', fixlib: "chrpath -r '$ORIGIN/.' liblantern.so"}
-          - {os: windows-2019, artifact: "build/Release/lantern.dll", upload: "Windows-Cuda-113", cuda: '11.3', cuda_patch: "1", cudnn: 'https://storage.googleapis.com/torch-lantern-builds/cudnn/cudnn-11.3-windows-x64-v8.2.1.32.zip'}
+          - {
+              os: macOS-latest,
+              artifact: "build/liblantern.dylib",
+              upload: "macOS",
+              fixlib: "install_name_tool -add_rpath @loader_path/. liblantern.dylib",
+            }
+          - {
+              os: windows-2019,
+              artifact: "build/Release/lantern.dll",
+              upload: "Windows",
+            }
+          - {
+              os: ubuntu-18.04,
+              artifact: "build/liblantern.so",
+              upload: "Linux",
+              fixlib: "chrpath -r '$ORIGIN/.' liblantern.so",
+            }
+          - {
+              os: ubuntu-18.04,
+              artifact: "build/liblantern.so",
+              upload: "LinuxNonABI",
+              fixlib: "chrpath -r '$ORIGIN/.' liblantern.so",
+              pre_cxx11_abi: 1,
+            }
+          - {
+              os: ubuntu-18.04,
+              artifact: "build/liblantern.so",
+              upload: "Linux-Cuda-113",
+              cuda: "11.3",
+              cuda_patch: "1",
+              cudnn: "https://storage.googleapis.com/torch-lantern-builds/cudnn/cudnn-11.3-linux-x64-v8.2.1.32.tgz",
+              fixlib: "chrpath -r '$ORIGIN/.' liblantern.so",
+            }
+          - {
+              os: ubuntu-18.04,
+              artifact: "build/liblantern.so",
+              upload: "Linux-Cuda-102",
+              cuda: "10.2",
+              cuda_patch: "89",
+              cudnn: "https://storage.googleapis.com/torch-lantern-builds/cudnn/cudnn-10.2-linux-x64-v7.6.5.32.tgz",
+              fixlib: "chrpath -r '$ORIGIN/.' liblantern.so",
+            }
+          - {
+              os: windows-2019,
+              artifact: "build/Release/lantern.dll",
+              upload: "Windows-Cuda-113",
+              cuda: "11.3",
+              cuda_patch: "1",
+              cudnn: "https://storage.googleapis.com/torch-lantern-builds/cudnn/cudnn-11.3-windows-x64-v8.2.1.32.zip",
+            }
     env:
       CUDA: ${{matrix.config.cuda}}
+      PRECXX11ABI: ${{matrix.config.pre_cxx11_abi}}
 
     steps:
       - uses: actions/checkout@v3
@@ -30,7 +76,7 @@ jobs:
       - name: Setup cmake
         uses: jwlawson/actions-setup-cmake@v1
         with:
-          cmake-version: 'latest'
+          cmake-version: "latest"
 
       - name: Create environment
         run: cmake -E make_directory ${{runner.workspace}}/torch/lantern/build
@@ -40,7 +86,7 @@ jobs:
         uses: Jimver/cuda-toolkit@v0.2.7
         id: cuda-toolkit
         with:
-          cuda: '${{matrix.config.cuda}}.${{matrix.config.cuda_patch}}'
+          cuda: "${{matrix.config.cuda}}.${{matrix.config.cuda_patch}}"
 
       - name: Install cuDNN (Linux)
         if: ${{ matrix.config.cuda != '' && contains(matrix.config.os, 'ubuntu') }}
@@ -94,14 +140,7 @@ jobs:
     strategy:
       matrix:
         name:
-          [
-            macOS,
-            Linux,
-            Windows,
-            Cuda102,
-            Cuda113,
-            WindowsCuda113,
-          ]
+          [macOS, Linux, LinuxNonABI, Windows, Cuda102, Cuda113, WindowsCuda113]
         include:
           - name: macOS
             artifact: macOS
@@ -110,6 +149,10 @@ jobs:
           - name: Linux
             artifact: Linux
             upload: Linux
+            hw: cpu
+          - name: LinuxNonABI
+            artifact: LinuxNonABI
+            upload: LinuxNonABI
             hw: cpu
           - name: Windows
             artifact: Windows
