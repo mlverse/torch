@@ -168,7 +168,7 @@ jobs:
             Cuda102,
             NonABICuda102,
             Cuda113,
-            NonABICuda103,
+            NonABICuda113,
             WindowsCuda113,
           ]
         include:
