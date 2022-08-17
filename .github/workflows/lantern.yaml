@@ -7,6 +7,7 @@ on:
       - main
       - "cran/**"
       - "libtorch-v1.11.0"
+      - "non-abi-2"
 
 jobs:
   build:
@@ -51,11 +52,31 @@ jobs:
           - {
               os: ubuntu-18.04,
               artifact: "build/liblantern.so",
+              upload: "LinuxNonABI-Cuda-113",
+              cuda: "11.3",
+              cuda_patch: "1",
+              cudnn: "https://storage.googleapis.com/torch-lantern-builds/cudnn/cudnn-11.3-linux-x64-v8.2.1.32.tgz",
+              fixlib: "chrpath -r '$ORIGIN/.' liblantern.so",
+              pre_cxx11_abi: 1,
+            }
+          - {
+              os: ubuntu-18.04,
+              artifact: "build/liblantern.so",
               upload: "Linux-Cuda-102",
               cuda: "10.2",
               cuda_patch: "89",
               cudnn: "https://storage.googleapis.com/torch-lantern-builds/cudnn/cudnn-10.2-linux-x64-v7.6.5.32.tgz",
               fixlib: "chrpath -r '$ORIGIN/.' liblantern.so",
+            }
+          - {
+              os: ubuntu-18.04,
+              artifact: "build/liblantern.so",
+              upload: "LinuxNonABI-Cuda-102",
+              cuda: "10.2",
+              cuda_patch: "89",
+              cudnn: "https://storage.googleapis.com/torch-lantern-builds/cudnn/cudnn-10.2-linux-x64-v7.6.5.32.tgz",
+              fixlib: "chrpath -r '$ORIGIN/.' liblantern.so",
+              pre_cxx11_abi: 1,
             }
           - {
               os: windows-2019,
@@ -162,9 +183,19 @@ jobs:
             upload: Linux
             hw: gpu
             version: -102
+          - name: Cuda102
+            artifact: LinuxNonABI-Cuda-102
+            upload: LinuxNonABI
+            hw: gpu
+            version: -102
           - name: Cuda113
             artifact: Linux-Cuda-113
             upload: Linux
+            hw: gpu
+            version: -113
+          - name: Cuda113
+            artifact: LinuxNonABI-Cuda-113
+            upload: LinuxNonABI
             hw: gpu
             version: -113
           - name: WindowsCuda113
