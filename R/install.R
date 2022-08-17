@@ -416,5 +416,19 @@ install_torch_from_file <- function(version = "1.11.0", type = install_type(vers
 get_install_libs_url <- function(version = "1.11.0", type = install_type(version = version)) {
   libtorch <- install_config[[version]][[type]][[install_os()]][["libtorch"]][["url"]]
   liblantern <- install_config[[version]][[type]][[install_os()]][["liblantern"]]
-  list(libtorch = libtorch, liblantern = liblantern)
+  list(
+    libtorch = maybe_get_pre_cxx11_abi_url(libtorch), 
+    liblantern = maybe_get_pre_cxx11_abi_url(liblantern)
+  )
+}
+
+maybe_get_pre_cxx11_abi_url <- function(url) {
+  if (indentical(Sys.getenv("PRECXX11ABI", unset = "0"), "1")) {
+    if (grepl("lantern", url)) {
+      url <- sub("Linux", "LinuxNonABI", url)
+    } else if (grepl("libtorch", url)) {
+      url <- sub("libtorch-cxx11-abi-shared", "libtorch-shared", url)
+    }
+  }
+  url
 }
