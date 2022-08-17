@@ -1,4 +1,4 @@
-branch <- "main"
+branch <- "non-abi-2"
 
 install_config <- list(
   "1.11.0" = list(

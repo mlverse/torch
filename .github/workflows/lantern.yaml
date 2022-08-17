@@ -7,7 +7,6 @@ on:
       - main
       - "cran/**"
       - "libtorch-v1.11.0"
-      - "non-abi-2"
 
 jobs:
   build:
