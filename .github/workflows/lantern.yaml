@@ -160,7 +160,17 @@ jobs:
     strategy:
       matrix:
         name:
-          [macOS, Linux, LinuxNonABI, Windows, Cuda102, Cuda113, WindowsCuda113]
+          [
+            macOS,
+            Linux,
+            LinuxNonABI,
+            Windows,
+            Cuda102,
+            NonABICuda102,
+            Cuda113,
+            NonABICuda103,
+            WindowsCuda113,
+          ]
         include:
           - name: macOS
             artifact: macOS
@@ -183,7 +193,7 @@ jobs:
             upload: Linux
             hw: gpu
             version: -102
-          - name: Cuda102
+          - name: NonABICuda102
             artifact: LinuxNonABI-Cuda-102
             upload: LinuxNonABI
             hw: gpu
@@ -193,7 +203,7 @@ jobs:
             upload: Linux
             hw: gpu
             version: -113
-          - name: Cuda113
+          - name: NonABICuda113
             artifact: LinuxNonABI-Cuda-113
             upload: LinuxNonABI
             hw: gpu
