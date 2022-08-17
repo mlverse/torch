@@ -192,6 +192,15 @@ lantern_install_libs <- function(version, type, install_path, install_config) {
     }
     if (is.null(library_info$filter)) library_info$filter <- ""
     if (is.null(library_info$inst_path)) library_info$inst_path <- ""
+    
+    if (indentical(Sys.getenv("PRECXX11ABI", unset = "0"), "1")) {
+      if (grepl("lantern", library_info$url)) {
+        library_info$url <- sub("Linux", "LinuxNonABI", library_info$url)
+      } else if (grepl("libtorch", library_info$url)) {
+        library_info$url <- sub("libtorch-cxx11-abi-shared", "libtorch-shared", library_info$url)
+      }
+      library_info$md5hash <- NULL
+    }
 
     lantern_install_lib(
       library_name = library_name,
