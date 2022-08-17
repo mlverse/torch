@@ -14,15 +14,15 @@ torch_logdet(self)
 Logdet
 }
 \note{
-\preformatted{Result is `-inf` if `input` has zero log determinant, and is `NaN` if
+\if{html}{\out{<div class="sourceCode">}}\preformatted{Result is `-inf` if `input` has zero log determinant, and is `NaN` if
 `input` has negative determinant.
-}
+}\if{html}{\out{</div>}}
 
-\preformatted{Backward through `logdet` internally uses SVD results when `input`
+\if{html}{\out{<div class="sourceCode">}}\preformatted{Backward through `logdet` internally uses SVD results when `input`
 is not invertible. In this case, double backward through `logdet` will
 be unstable in when `input` doesn't have distinct singular values. See
 `~torch.svd` for details.
-}
+}\if{html}{\out{</div>}}
 }
 \section{logdet(input) -> Tensor }{
 

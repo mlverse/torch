@@ -16,9 +16,9 @@ torch_eig(self, eigenvectors = FALSE)
 Eig
 }
 \note{
-\preformatted{Since eigenvalues and eigenvectors might be complex, backward pass is supported only
+\if{html}{\out{<div class="sourceCode">}}\preformatted{Since eigenvalues and eigenvectors might be complex, backward pass is supported only
 for [`torch_symeig`]
-}
+}\if{html}{\out{</div>}}
 }
 \section{eig(input, eigenvectors=False, out=NULL) -> (Tensor, Tensor) }{
 

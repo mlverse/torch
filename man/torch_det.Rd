@@ -14,11 +14,11 @@ torch_det(self)
 Det
 }
 \note{
-\preformatted{Backward through `det` internally uses SVD results when `input` is
+\if{html}{\out{<div class="sourceCode">}}\preformatted{Backward through `det` internally uses SVD results when `input` is
 not invertible. In this case, double backward through `det` will be
 unstable in when `input` doesn't have distinct singular values. See
 `~torch.svd` for details.
-}
+}\if{html}{\out{</div>}}
 }
 \section{det(input) -> Tensor }{
 

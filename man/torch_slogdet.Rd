@@ -14,14 +14,14 @@ torch_slogdet(self)
 Slogdet
 }
 \note{
-\preformatted{If `input` has zero determinant, this returns `(0, -inf)`.
-}
+\if{html}{\out{<div class="sourceCode">}}\preformatted{If `input` has zero determinant, this returns `(0, -inf)`.
+}\if{html}{\out{</div>}}
 
-\preformatted{Backward through `slogdet` internally uses SVD results when `input`
+\if{html}{\out{<div class="sourceCode">}}\preformatted{Backward through `slogdet` internally uses SVD results when `input`
 is not invertible. In this case, double backward through `slogdet`
 will be unstable in when `input` doesn't have distinct singular values.
 See `~torch.svd` for details.
-}
+}\if{html}{\out{</div>}}
 }
 \section{slogdet(input) -> (Tensor, Tensor) }{
 

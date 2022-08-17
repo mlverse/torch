@@ -31,9 +31,9 @@ torch_tril_indices(
 Tril_indices
 }
 \note{
-\preformatted{When running on CUDA, `row * col` must be less than \eqn{2^{59}} to
+\if{html}{\out{<div class="sourceCode">}}\preformatted{When running on CUDA, `row * col` must be less than \eqn{2^{59}} to
 prevent overflow during calculation.
-}
+}\if{html}{\out{</div>}}
 }
 \section{tril_indices(row, col, offset=0, dtype=torch.long, device='cpu', layout=torch.strided) -> Tensor }{
 

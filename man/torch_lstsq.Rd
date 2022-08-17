@@ -16,8 +16,8 @@ torch_lstsq(self, A)
 Lstsq
 }
 \note{
-\preformatted{The case when \eqn{m < n} is not supported on the GPU.
-}
+\if{html}{\out{<div class="sourceCode">}}\preformatted{The case when \eqn{m < n} is not supported on the GPU.
+}\if{html}{\out{</div>}}
 }
 \section{lstsq(input, A, out=NULL) -> Tensor }{
 
