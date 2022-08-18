@@ -143,21 +143,21 @@ TODO: consider different message</p></dd>
 <div class="section">
 <h3 id="public-methods">Public methods<a class="anchor" aria-label="anchor" href="#public-methods"></a></h3>
 
-<ul><li><p><a href="#method-new"><code>Distribution$new()</code></a></p></li>
-<li><p><a href="#method-expand"><code>Distribution$expand()</code></a></p></li>
-<li><p><a href="#method-sample"><code>Distribution$sample()</code></a></p></li>
-<li><p><a href="#method-rsample"><code>Distribution$rsample()</code></a></p></li>
-<li><p><a href="#method-log_prob"><code>Distribution$log_prob()</code></a></p></li>
-<li><p><a href="#method-cdf"><code>Distribution$cdf()</code></a></p></li>
-<li><p><a href="#method-icdf"><code>Distribution$icdf()</code></a></p></li>
-<li><p><a href="#method-enumerate_support"><code>Distribution$enumerate_support()</code></a></p></li>
-<li><p><a href="#method-entropy"><code>Distribution$entropy()</code></a></p></li>
-<li><p><a href="#method-perplexity"><code>Distribution$perplexity()</code></a></p></li>
-<li><p><a href="#method-.extended_shape"><code>Distribution$.extended_shape()</code></a></p></li>
-<li><p><a href="#method-.validate_sample"><code>Distribution$.validate_sample()</code></a></p></li>
-<li><p><a href="#method-print"><code>Distribution$print()</code></a></p></li>
-<li><p><a href="#method-clone"><code>Distribution$clone()</code></a></p></li>
-</ul></div><p></p><hr><a id="method-new"></a><div class="section">
+<ul><li><p><a href="#method-torch_Distribution-new"><code>Distribution$new()</code></a></p></li>
+<li><p><a href="#method-torch_Distribution-expand"><code>Distribution$expand()</code></a></p></li>
+<li><p><a href="#method-torch_Distribution-sample"><code>Distribution$sample()</code></a></p></li>
+<li><p><a href="#method-torch_Distribution-rsample"><code>Distribution$rsample()</code></a></p></li>
+<li><p><a href="#method-torch_Distribution-log_prob"><code>Distribution$log_prob()</code></a></p></li>
+<li><p><a href="#method-torch_Distribution-cdf"><code>Distribution$cdf()</code></a></p></li>
+<li><p><a href="#method-torch_Distribution-icdf"><code>Distribution$icdf()</code></a></p></li>
+<li><p><a href="#method-torch_Distribution-enumerate_support"><code>Distribution$enumerate_support()</code></a></p></li>
+<li><p><a href="#method-torch_Distribution-entropy"><code>Distribution$entropy()</code></a></p></li>
+<li><p><a href="#method-torch_Distribution-perplexity"><code>Distribution$perplexity()</code></a></p></li>
+<li><p><a href="#method-torch_Distribution-.extended_shape"><code>Distribution$.extended_shape()</code></a></p></li>
+<li><p><a href="#method-torch_Distribution-.validate_sample"><code>Distribution$.validate_sample()</code></a></p></li>
+<li><p><a href="#method-torch_Distribution-print"><code>Distribution$print()</code></a></p></li>
+<li><p><a href="#method-torch_Distribution-clone"><code>Distribution$clone()</code></a></p></li>
+</ul></div><p></p><hr><a id="method-torch_Distribution-new"></a><div class="section">
 <h3 id="method-new-">Method <code>new()</code><a class="anchor" aria-label="anchor" href="#method-new-"></a></h3>
 <p>Initializes a distribution class.</p><div class="section">
 <h4 id="usage">Usage<a class="anchor" aria-label="anchor" href="#usage"></a></h4>
@@ -182,7 +182,7 @@ can be time consuming so you might want to disable it.</p></dd>
 </dl><p></p></div>
 </div>
 
-</div><p></p><hr><a id="method-expand"></a><div class="section">
+</div><p></p><hr><a id="method-torch_Distribution-expand"></a><div class="section">
 <h3 id="method-expand-">Method <code>expand()</code><a class="anchor" aria-label="anchor" href="#method-expand-"></a></h3>
 <p>Returns a new distribution instance (or populates an existing instance
 provided by a derived class) with batch dimensions expanded to batch_shape.
@@ -208,7 +208,7 @@ override <code>expand</code>.</p></dd>
 </dl><p></p></div>
 </div>
 
-</div><p></p><hr><a id="method-sample"></a><div class="section">
+</div><p></p><hr><a id="method-torch_Distribution-sample"></a><div class="section">
 <h3 id="method-sample-">Method <code><a href="https://rdrr.io/r/base/sample.html" class="external-link">sample()</a></code><a class="anchor" aria-label="anchor" href="#method-sample-"></a></h3>
 <p>Generates a <code>sample_shape</code> shaped sample or <code>sample_shape</code> shaped batch of
 samples if the distribution parameters are batched.</p><div class="section">
@@ -225,7 +225,7 @@ samples if the distribution parameters are batched.</p><div class="section">
 </dl><p></p></div>
 </div>
 
-</div><p></p><hr><a id="method-rsample"></a><div class="section">
+</div><p></p><hr><a id="method-torch_Distribution-rsample"></a><div class="section">
 <h3 id="method-rsample-">Method <code>rsample()</code><a class="anchor" aria-label="anchor" href="#method-rsample-"></a></h3>
 <p>Generates a sample_shape shaped reparameterized sample or sample_shape
 shaped batch of reparameterized samples if the distribution parameters
@@ -243,7 +243,7 @@ are batched.</p><div class="section">
 </dl><p></p></div>
 </div>
 
-</div><p></p><hr><a id="method-log_prob"></a><div class="section">
+</div><p></p><hr><a id="method-torch_Distribution-log_prob"></a><div class="section">
 <h3 id="method-log-prob-">Method <code>log_prob()</code><a class="anchor" aria-label="anchor" href="#method-log-prob-"></a></h3>
 <p>Returns the log of the probability density/mass function evaluated at
 <code>value</code>.</p><div class="section">
@@ -260,7 +260,7 @@ are batched.</p><div class="section">
 </dl><p></p></div>
 </div>
 
-</div><p></p><hr><a id="method-cdf"></a><div class="section">
+</div><p></p><hr><a id="method-torch_Distribution-cdf"></a><div class="section">
 <h3 id="method-cdf-">Method <code>cdf()</code><a class="anchor" aria-label="anchor" href="#method-cdf-"></a></h3>
 <p>Returns the cumulative density/mass function evaluated at
 <code>value</code>.</p><div class="section">
@@ -277,7 +277,7 @@ are batched.</p><div class="section">
 </dl><p></p></div>
 </div>
 
-</div><p></p><hr><a id="method-icdf"></a><div class="section">
+</div><p></p><hr><a id="method-torch_Distribution-icdf"></a><div class="section">
 <h3 id="method-icdf-">Method <code>icdf()</code><a class="anchor" aria-label="anchor" href="#method-icdf-"></a></h3>
 <p>Returns the inverse cumulative density/mass function evaluated at
 <code>value</code>.</p>
@@ -298,7 +298,7 @@ of the result will be <code>(cardinality,) + batch_shape + event_shape (where </
 </dl><p></p></div>
 </div>
 
-</div><p></p><hr><a id="method-enumerate_support"></a><div class="section">
+</div><p></p><hr><a id="method-torch_Distribution-enumerate_support"></a><div class="section">
 <h3 id="method-enumerate-support-">Method <code>enumerate_support()</code><a class="anchor" aria-label="anchor" href="#method-enumerate-support-"></a></h3>
 
 <div class="section">
@@ -320,7 +320,7 @@ batch dims to match the distribution's <code>batch_shape</code>.</p></dd>
 <p>Tensor iterating over dimension 0.</p>
 </div>
 
-</div><p></p><hr><a id="method-entropy"></a><div class="section">
+</div><p></p><hr><a id="method-torch_Distribution-entropy"></a><div class="section">
 <h3 id="method-entropy-">Method <code>entropy()</code><a class="anchor" aria-label="anchor" href="#method-entropy-"></a></h3>
 <p>Returns entropy of distribution, batched over batch_shape.</p><div class="section">
 <h4 id="usage-8">Usage<a class="anchor" aria-label="anchor" href="#usage-8"></a></h4>
@@ -332,7 +332,7 @@ batch dims to match the distribution's <code>batch_shape</code>.</p></dd>
 <p>Tensor of shape batch_shape.</p>
 </div>
 
-</div><p></p><hr><a id="method-perplexity"></a><div class="section">
+</div><p></p><hr><a id="method-torch_Distribution-perplexity"></a><div class="section">
 <h3 id="method-perplexity-">Method <code>perplexity()</code><a class="anchor" aria-label="anchor" href="#method-perplexity-"></a></h3>
 <p>Returns perplexity of distribution, batched over batch_shape.</p><div class="section">
 <h4 id="usage-9">Usage<a class="anchor" aria-label="anchor" href="#usage-9"></a></h4>
@@ -344,7 +344,7 @@ batch dims to match the distribution's <code>batch_shape</code>.</p></dd>
 <p>Tensor of shape batch_shape.</p>
 </div>
 
-</div><p></p><hr><a id="method-.extended_shape"></a><div class="section">
+</div><p></p><hr><a id="method-torch_Distribution-.extended_shape"></a><div class="section">
 <h3 id="method-extended-shape-">Method <code>.extended_shape()</code><a class="anchor" aria-label="anchor" href="#method-extended-shape-"></a></h3>
 <p>Returns the size of the sample returned by the distribution, given
 a <code>sample_shape</code>. Note, that the batch and event shapes of a distribution
@@ -363,7 +363,7 @@ returned shape is upcast to (1,).</p><div class="section">
 </dl><p></p></div>
 </div>
 
-</div><p></p><hr><a id="method-.validate_sample"></a><div class="section">
+</div><p></p><hr><a id="method-torch_Distribution-.validate_sample"></a><div class="section">
 <h3 id="method-validate-sample-">Method <code>.validate_sample()</code><a class="anchor" aria-label="anchor" href="#method-validate-sample-"></a></h3>
 <p>Argument validation for distribution methods such as <code>log_prob</code>,
 <code>cdf</code> and <code>icdf</code>. The rightmost dimensions of a value to be
@@ -383,7 +383,7 @@ computed by the <code>log_prob</code> method.</p></dd>
 </dl><p></p></div>
 </div>
 
-</div><p></p><hr><a id="method-print"></a><div class="section">
+</div><p></p><hr><a id="method-torch_Distribution-print"></a><div class="section">
 <h3 id="method-print-">Method <code><a href="https://rdrr.io/r/base/print.html" class="external-link">print()</a></code><a class="anchor" aria-label="anchor" href="#method-print-"></a></h3>
 <p>Prints the distribution instance.</p><div class="section">
 <h4 id="usage-12">Usage<a class="anchor" aria-label="anchor" href="#usage-12"></a></h4>
@@ -391,7 +391,7 @@ computed by the <code>log_prob</code> method.</p></dd>
 </div>
 
 
-</div><p></p><hr><a id="method-clone"></a><div class="section">
+</div><p></p><hr><a id="method-torch_Distribution-clone"></a><div class="section">
 <h3 id="method-clone-">Method <code>clone()</code><a class="anchor" aria-label="anchor" href="#method-clone-"></a></h3>
 <p>The objects of this class are cloneable with this method.</p><div class="section">
 <h4 id="usage-13">Usage<a class="anchor" aria-label="anchor" href="#usage-13"></a></h4>

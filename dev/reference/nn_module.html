@@ -132,11 +132,11 @@ new <code>nn_module</code>.</p>
 
 <p>The initialize function will be called whenever a new instance of the <code>nn_module</code>
 is created. We use the initialize functions to define submodules and parameters
-of the module. For example:</p><div class="sourceCode"><pre><code><span><span class="va">initialize</span> <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">input_size</span>, <span class="va">output_size</span><span class="op">)</span> <span class="op">{</span></span>
-<span>   <span class="va">self</span><span class="op">$</span><span class="va">conv1</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/nn_conv2d.html">nn_conv2d</a></span><span class="op">(</span><span class="va">input_size</span>, <span class="va">output_size</span>, <span class="fl">5</span><span class="op">)</span></span>
-<span>   <span class="va">self</span><span class="op">$</span><span class="va">conv2</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/nn_conv2d.html">nn_conv2d</a></span><span class="op">(</span><span class="va">output_size</span>, <span class="va">output_size</span>, <span class="fl">5</span><span class="op">)</span></span>
-<span><span class="op">}</span></span></code></pre></div>
-
+of the module. For example:</p>
+<p></p><div class="sourceCode"><pre><code><span id="cb1-1"><a href="#cb1-1"></a>initialize =<span class="st"> </span><span class="cf">function</span>(input_size, output_size) {</span>
+<span id="cb1-2"><a href="#cb1-2"></a>   self<span class="op">$</span>conv1 &lt;-<span class="st"> </span><span class="kw">nn_conv2d</span>(input_size, output_size, <span class="dv">5</span>)</span>
+<span id="cb1-3"><a href="#cb1-3"></a>   self<span class="op">$</span>conv2 &lt;-<span class="st"> </span><span class="kw">nn_conv2d</span>(output_size, output_size, <span class="dv">5</span>)</span>
+<span id="cb1-4"><a href="#cb1-4"></a>}</span></code></pre><p></p></div>
 <p>The initialize function can have any number of parameters. All objects
 assigned to <code>self$</code> will be available for other methods that you implement.
 Tensors wrapped with <code><a href="nn_parameter.html">nn_parameter()</a></code> or <code><a href="nn_buffer.html">nn_buffer()</a></code> and submodules are
@@ -152,14 +152,14 @@ have weights, submodules or buffers.</p>
 <p>The forward method is called whenever an instance of <code>nn_module</code> is called.
 This is usually used to implement the computation that the module does with
 the weights ad submodules defined in the <code>initialize</code> function.</p>
-<p>For example:</p><div class="sourceCode"><pre><code><span><span class="va">forward</span> <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">input</span><span class="op">)</span> <span class="op">{</span></span>
-<span>   <span class="va">input</span> <span class="op">&lt;-</span> <span class="va">self</span><span class="op">$</span><span class="fu">conv1</span><span class="op">(</span><span class="va">input</span><span class="op">)</span></span>
-<span>   <span class="va">input</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/nnf_relu.html">nnf_relu</a></span><span class="op">(</span><span class="va">input</span><span class="op">)</span></span>
-<span>   <span class="va">input</span> <span class="op">&lt;-</span> <span class="va">self</span><span class="op">$</span><span class="fu">conv2</span><span class="op">(</span><span class="va">input</span><span class="op">)</span></span>
-<span>   <span class="va">input</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/nnf_relu.html">nnf_relu</a></span><span class="op">(</span><span class="va">input</span><span class="op">)</span></span>
-<span>   <span class="va">input</span></span>
-<span> <span class="op">}</span></span></code></pre></div>
-
+<p>For example:</p>
+<p></p><div class="sourceCode"><pre><code><span id="cb1-1"><a href="#cb1-1"></a>forward =<span class="st"> </span><span class="cf">function</span>(input) {</span>
+<span id="cb1-2"><a href="#cb1-2"></a>   input &lt;-<span class="st"> </span>self<span class="op">$</span><span class="kw">conv1</span>(input)</span>
+<span id="cb1-3"><a href="#cb1-3"></a>   input &lt;-<span class="st"> </span><span class="kw">nnf_relu</span>(input)</span>
+<span id="cb1-4"><a href="#cb1-4"></a>   input &lt;-<span class="st"> </span>self<span class="op">$</span><span class="kw">conv2</span>(input)</span>
+<span id="cb1-5"><a href="#cb1-5"></a>   input &lt;-<span class="st"> </span><span class="kw">nnf_relu</span>(input)</span>
+<span id="cb1-6"><a href="#cb1-6"></a>   input</span>
+<span id="cb1-7"><a href="#cb1-7"></a> }</span></code></pre><p></p></div>
 <p>The <code>forward</code> function can use the <code>self$training</code> attribute to make different
 computations depending wether the model is training or not, for example if you
 were implementing the dropout module.</p>

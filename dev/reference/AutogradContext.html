@@ -110,12 +110,12 @@ Class representing the context."><meta name="robots" content="noindex"><!-- math
 <div class="section">
 <h3 id="public-methods">Public methods<a class="anchor" aria-label="anchor" href="#public-methods"></a></h3>
 
-<ul><li><p><a href="#method-new"><code>AutogradContext$new()</code></a></p></li>
-<li><p><a href="#method-save_for_backward"><code>AutogradContext$save_for_backward()</code></a></p></li>
-<li><p><a href="#method-mark_non_differentiable"><code>AutogradContext$mark_non_differentiable()</code></a></p></li>
-<li><p><a href="#method-mark_dirty"><code>AutogradContext$mark_dirty()</code></a></p></li>
-<li><p><a href="#method-clone"><code>AutogradContext$clone()</code></a></p></li>
-</ul></div><p></p><hr><a id="method-new"></a><div class="section">
+<ul><li><p><a href="#method-torch_autograd_context-new"><code>AutogradContext$new()</code></a></p></li>
+<li><p><a href="#method-torch_autograd_context-save_for_backward"><code>AutogradContext$save_for_backward()</code></a></p></li>
+<li><p><a href="#method-torch_autograd_context-mark_non_differentiable"><code>AutogradContext$mark_non_differentiable()</code></a></p></li>
+<li><p><a href="#method-torch_autograd_context-mark_dirty"><code>AutogradContext$mark_dirty()</code></a></p></li>
+<li><p><a href="#method-torch_autograd_context-clone"><code>AutogradContext$clone()</code></a></p></li>
+</ul></div><p></p><hr><a id="method-torch_autograd_context-new"></a><div class="section">
 <h3 id="method-new-">Method <code>new()</code><a class="anchor" aria-label="anchor" href="#method-new-"></a></h3>
 <p>(Dev related) Initializes the context. Not user related.</p><div class="section">
 <h4 id="usage">Usage<a class="anchor" aria-label="anchor" href="#usage"></a></h4>
@@ -148,7 +148,7 @@ Class representing the context."><meta name="robots" content="noindex"><!-- math
 </dl><p></p></div>
 </div>
 
-</div><p></p><hr><a id="method-save_for_backward"></a><div class="section">
+</div><p></p><hr><a id="method-torch_autograd_context-save_for_backward"></a><div class="section">
 <h3 id="method-save-for-backward-">Method <code>save_for_backward()</code><a class="anchor" aria-label="anchor" href="#method-save-for-backward-"></a></h3>
 <p>Saves given objects for a future call to backward().</p>
 <p>This should be called at most once, and only from inside the <code>forward()</code>
@@ -171,7 +171,7 @@ It's common to pass named arguments.</p></dd>
 </dl><p></p></div>
 </div>
 
-</div><p></p><hr><a id="method-mark_non_differentiable"></a><div class="section">
+</div><p></p><hr><a id="method-torch_autograd_context-mark_non_differentiable"></a><div class="section">
 <h3 id="method-mark-non-differentiable-">Method <code>mark_non_differentiable()</code><a class="anchor" aria-label="anchor" href="#method-mark-non-differentiable-"></a></h3>
 <p>Marks outputs as non-differentiable.</p>
 <p>This should be called at most once, only from inside the <code>forward()</code> method,
@@ -194,7 +194,7 @@ shape as the shape of a corresponding output.</p>
 </dl><p></p></div>
 </div>
 
-</div><p></p><hr><a id="method-mark_dirty"></a><div class="section">
+</div><p></p><hr><a id="method-torch_autograd_context-mark_dirty"></a><div class="section">
 <h3 id="method-mark-dirty-">Method <code>mark_dirty()</code><a class="anchor" aria-label="anchor" href="#method-mark-dirty-"></a></h3>
 <p>Marks given tensors as modified in an in-place operation.</p>
 <p>This should be called at most once, only from inside the <code>forward()</code> method,
@@ -215,7 +215,7 @@ matter whether the function is called before or after modification.</p><div clas
 </dl><p></p></div>
 </div>
 
-</div><p></p><hr><a id="method-clone"></a><div class="section">
+</div><p></p><hr><a id="method-torch_autograd_context-clone"></a><div class="section">
 <h3 id="method-clone-">Method <code>clone()</code><a class="anchor" aria-label="anchor" href="#method-clone-"></a></h3>
 <p>The objects of this class are cloneable with this method.</p><div class="section">
 <h4 id="usage-4">Usage<a class="anchor" aria-label="anchor" href="#usage-4"></a></h4>

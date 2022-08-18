@@ -105,12 +105,9 @@
 </dl></div>
     <div class="section level2">
     <h2 id="note">Note<a class="anchor" aria-label="anchor" href="#note"></a></h2>
-    
-<div class="sourceCode"><pre><code>The rows of `input` do not need to sum to one (in which case we use
-the values as weights), but must be non-negative, finite and have
-a non-zero sum.
-</code></pre></div>
-
+    <p></p><div class="sourceCode"><pre><code><span id="cb1-1"><a href="#cb1-1"></a>The rows of <span class="st">`</span><span class="dt">input</span><span class="st">`</span> do not need to sum to <span class="kw">one</span> (<span class="cf">in</span> which case we use</span>
+<span id="cb1-2"><a href="#cb1-2"></a>the values as weights), but must be non<span class="op">-</span>negative, finite and have</span>
+<span id="cb1-3"><a href="#cb1-3"></a>a non<span class="op">-</span>zero sum.</span></code></pre><p></p></div>
 <p>Indices are ordered from left to right according to when each was sampled
 (first samples are placed in first column).</p>
 <p>If <code>input</code> is a vector, <code>out</code> is a vector of size <code>num_samples</code>.</p>
@@ -119,11 +116,9 @@ a non-zero sum.
 <p>If replacement is <code>TRUE</code>, samples are drawn with replacement.</p>
 <p>If not, they are drawn without replacement, which means that when a
 sample index is drawn for a row, it cannot be drawn again for that row.</p>
-<div class="sourceCode"><pre><code>When drawn without replacement, `num_samples` must be lower than
-number of non-zero elements in `input` (or the min number of non-zero
-elements in each row of `input` if it is a matrix).
-</code></pre></div>
-
+<p></p><div class="sourceCode"><pre><code><span id="cb1-1"><a href="#cb1-1"></a>When drawn without replacement, <span class="st">`</span><span class="dt">num_samples</span><span class="st">`</span> must be lower than</span>
+<span id="cb1-2"><a href="#cb1-2"></a>number of non<span class="op">-</span>zero elements <span class="cf">in</span> <span class="st">`</span><span class="dt">input</span><span class="st">`</span> (or the min number of non<span class="op">-</span>zero</span>
+<span id="cb1-3"><a href="#cb1-3"></a>elements <span class="cf">in</span> each row of <span class="st">`</span><span class="dt">input</span><span class="st">`</span> <span class="cf">if</span> it is a matrix).</span></code></pre><p></p></div>
     </div>
     <div class="section level2">
     <h2 id="multinomial-input-num-samples-replacement-false-generator-null-out-null-gt-longtensor-">multinomial(input, num_samples, replacement=False, *, generator=NULL, out=NULL) -&gt; LongTensor <a class="anchor" aria-label="anchor" href="#multinomial-input-num-samples-replacement-false-generator-null-out-null-gt-longtensor-"></a></h2>
@@ -145,7 +140,7 @@ of tensor <code>input</code>.</p>
 <span class="r-in"><span><span class="op">}</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> torch_tensor</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  2</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  2</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  2</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [ CPULongType{4} ]</span>
