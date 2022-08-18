@@ -8,7 +8,6 @@ on:
     - cron: "0 1 * * *"
   workflow_dispatch:
 
-
 name: Test
 
 jobs:
@@ -24,6 +23,12 @@ jobs:
             install: 0
             r_version: "release"
           - os: ubuntu-18.04
+            install: 1
+            r_version: "4.1"
+            precxxx11abi: 1
+            container: "rstudio/r-base:4.2-centos7"
+            cran: https://packagemanager.rstudio.com/all/__linux__/centos7/latest
+          - os: ubuntu-18.04
             cran: https://demo.rstudiopm.com/all/__linux__/bionic/latest
             install: 1
             r_version: "4.0"
@@ -38,6 +43,7 @@ jobs:
             r_version: "3.6"
 
     runs-on: ${{ matrix.os }}
+    container: ${{ matrix.container }}
     name: ${{ matrix.os }} (${{ matrix.r_version }})
     timeout-minutes: 120
     env:
@@ -48,15 +54,23 @@ jobs:
       TORCH_TEST: 1
       TORCH_INSTALL: 1
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
+      PRECXX11ABI: ${{ matrix.precxxx11abi }}
 
     steps:
       - uses: actions/checkout@v3
       - uses: r-lib/actions/setup-r@v2
+        if: matrix.container == ''
         with:
           r-version: ${{ matrix.r_version }}
       - uses: r-lib/actions/setup-pandoc@v2
+        if: matrix.container == ''
+      - name: Set CRAN mirror
+        if: contains(matrix.container, 'centos')
+        run: |
+          echo "options(repos = c(CRAN = 'https://cran.rstudio.com'))" > .Rprofile
+          sudo yum install -y openssl-devel
       - name: Install system dependencies
-        if: runner.os == 'Linux'
+        if: runner.os == 'Linux' && matrix.container == ''
         env:
           RHUB_PLATFORM: linux-x86_64-ubuntu-gcc
         run: |
@@ -79,7 +93,7 @@ jobs:
         run: |
           Rscript tools/buildlantern.R
       - name: Check
-        run:  |
+        run: |
           error_on <- if (.Platform$OS.type == "windows") "error" else "warning"
           rcmdcheck::rcmdcheck(args = c("--no-multiarch", "--no-manual"), error_on = error_on, check_dir = "check")
         shell: Rscript {0}
@@ -107,7 +121,7 @@ jobs:
       TORCH_INSTALL: 1
       BUILD_LANTERN: ${{ contains( github.event.pull_request.labels.*.name, 'lantern') }}
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
-      DEBIAN_FRONTEND: 'noninteractive'
+      DEBIAN_FRONTEND: "noninteractive"
     steps:
       - uses: actions/checkout@v3
       - name: Build image
@@ -146,7 +160,7 @@ jobs:
   #       echo 'Add-Type -AssemblyName System.IO.Compression.FileSystem ; [System.IO.Compression.ZipFile]::ExtractToDirectory("$PWD/actions-runner-win-x64-2.277.1.zip", "$PWD")' >> s.ps
   #       echo "./config.cmd --url https://github.com/mlverse/torch --token ${{ steps.token.outputs.result }} --name 'runner-${{ github.run_number }}' --labels 'run-${{ github.run_number}}' --unattended" >> s.ps
   #       echo 'Start-Process -FilePath "./run.cmd"' >> s.ps
-  # 
+  #
   #   - name: Show File
   #     run: |
   #       cat s.ps
@@ -163,7 +177,7 @@ jobs:
   #   - name: Wait for runner registration
   #     run: |
   #       sleep 2m 30s
-  # 
+  #
   # delete-runner:
   #   if: ${{ success() || failure() || cancelled() }}
   #   needs: ['windows-gpu', 'start-runner']
@@ -175,7 +189,7 @@ jobs:
   #       project_id: ${{ secrets.GCP_PROJECT_ID }}
   #       service_account_key: ${{ secrets.GCP_APPLICATION_CREDENTIALS }}
   #       export_default_credentials: true
-  # 
+  #
   #   - name: Delete runner instance
   #     run: |
   #       gcloud compute --project=rstudio-cloudml instances delete runner-${{github.run_number}} --zone=us-central1-a
@@ -190,17 +204,17 @@ jobs:
   #           owner: 'mlverse',
   #           repo: 'torch'
   #         });
-  # 
+  #
   #         const runner_id = runners.data.runners.filter((runner) => {
   #           return runner.name === 'runner-${{ github.run_number }}';
   #         })[0].id
-  # 
+  #
   #         await github.actions.deleteSelfHostedRunnerFromRepo({
   #           owner: 'mlverse',
   #           repo: 'torch',
   #           runner_id: runner_id
   #         });
-  # 
+  #
   # windows-gpu:
   #   needs: ['start-runner']
   #   strategy:
@@ -208,7 +222,7 @@ jobs:
   #     matrix:
   #       r_version: ["release"]
   #       cuda: ["11.1"]
-  # 
+  #
   #   runs-on: [self-hosted, windows, 'run-${{ github.run_number}}']
   #   name: 'Windows | CUDA: ${{ matrix.cuda }}'
   #   timeout-minutes: 120
@@ -219,7 +233,7 @@ jobs:
   #     TORCH_TEST: 1
   #     TORCH_INSTALL: 1
   #     CUDA: ${{ matrix.cuda }}
-  # 
+  #
   #   steps:
   #     - uses: actions/checkout@v3
   #     - uses: r-lib/actions/setup-r@v2

@@ -1,4 +1,4 @@
-branch <- "main"
+branch <- "non-abi-2"
 
 install_config <- list(
   "1.11.0" = list(
@@ -192,6 +192,8 @@ lantern_install_libs <- function(version, type, install_path, install_config) {
     }
     if (is.null(library_info$filter)) library_info$filter <- ""
     if (is.null(library_info$inst_path)) library_info$inst_path <- ""
+    
+    library_info <- maybe_switch_precxx11abi(library_info)
 
     lantern_install_lib(
       library_name = library_name,
@@ -333,6 +335,10 @@ install_type <- function(version) {
 #' cases and troubleshooting only.
 #' When timeout error occurs during library archive download, or length of downloaded files differ from
 #' reported length, an increase of the \code{timeout} value should help.
+#' 
+#' Setting the environmanet variable `PRECXX11ABI=1` will trigger the installation of
+#' a Pre-cxx11 ABI installation of LibTorch. This can be useful in environments with
+#' older versions of GLIBC like CentOS7 and older Debian/Ubuntu versions.
 #'
 #' @export
 install_torch <- function(version = "1.11.0", type = install_type(version = version), reinstall = FALSE,
@@ -416,5 +422,30 @@ install_torch_from_file <- function(version = "1.11.0", type = install_type(vers
 get_install_libs_url <- function(version = "1.11.0", type = install_type(version = version)) {
   libtorch <- install_config[[version]][[type]][[install_os()]][["libtorch"]][["url"]]
   liblantern <- install_config[[version]][[type]][[install_os()]][["liblantern"]]
-  list(libtorch = libtorch, liblantern = liblantern)
+  list(
+    libtorch = maybe_get_pre_cxx11_abi_url(libtorch), 
+    liblantern = maybe_get_pre_cxx11_abi_url(liblantern)
+  )
 }
+
+maybe_get_pre_cxx11_abi_url <- function(url) {
+  if (identical(Sys.getenv("PRECXX11ABI", unset = "0"), "1")) {
+    if (grepl("lantern", url)) {
+      url <- sub("Linux", "LinuxNonABI", url)
+    } else if (grepl("libtorch", url)) {
+      url <- sub("libtorch-cxx11-abi-shared", "libtorch-shared", url)
+    }
+  }
+  url
+}
+
+maybe_switch_precxx11abi <- function(library_info) {
+  url <- library_info$url
+  library_info$url <- maybe_get_pre_cxx11_abi_url(library_info$url)
+  # if the URL changed, we can't keep the md5 hash
+  if (!identical(library_info$url, url)) {
+    library_info$md5hash <- NULL
+  }
+  library_info
+}
+
