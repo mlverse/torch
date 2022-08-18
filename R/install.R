@@ -335,6 +335,10 @@ install_type <- function(version) {
 #' cases and troubleshooting only.
 #' When timeout error occurs during library archive download, or length of downloaded files differ from
 #' reported length, an increase of the \code{timeout} value should help.
+#' 
+#' Setting the environmanet variable `PRECXX11ABI=1` will trigger the installation of
+#' a Pre-cxx11 ABI installation of LibTorch. This can be useful in environments with
+#' older versions of GLIBC like CentOS7 and older Debian/Ubuntu versions.
 #'
 #' @export
 install_torch <- function(version = "1.11.0", type = install_type(version = version), reinstall = FALSE,
