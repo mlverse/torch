@@ -24,7 +24,7 @@ jobs:
             r_version: "release"
           - os: ubuntu-18.04
             install: 1
-            r_version: "4.2"
+            r_version: "4.1"
             precxxx11abi: 1
             container: "ubuntu:xenial"
           - os: ubuntu-18.04
