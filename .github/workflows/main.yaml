@@ -68,7 +68,7 @@ jobs:
         if: contains(matrix.container, 'centos')
         run: |
           echo "options(repos = c(CRAN = 'https://cran.rstudio.com'))" > .Rprofile
-          sudo yum install openssl-devel
+          sudo yum install -y openssl-devel
       - name: Install system dependencies
         if: runner.os == 'Linux' && matrix.container == ''
         env:
