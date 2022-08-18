@@ -127,6 +127,9 @@ to avoid loading dependencies automatically. These environment variables are mea
 cases and troubleshooting only.
 When timeout error occurs during library archive download, or length of downloaded files differ from
 reported length, an increase of the <code>timeout</code> value should help.</p>
+<p>Setting the environmanet variable <code>PRECXX11ABI=1</code> will trigger the installation of
+a Pre-cxx11 ABI installation of LibTorch. This can be useful in environments with
+older versions of GLIBC like CentOS7 and older Debian/Ubuntu versions.</p>
     </div>
 
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
