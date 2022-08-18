@@ -16,8 +16,8 @@ torch_matmul(self, other)
 Matmul
 }
 \note{
-\preformatted{The 1-dimensional dot product version of this function does not support an `out` parameter.
-}
+\if{html}{\out{<div class="sourceCode">}}\preformatted{The 1-dimensional dot product version of this function does not support an `out` parameter.
+}\if{html}{\out{</div>}}
 }
 \section{matmul(input, other, out=NULL) -> Tensor }{
 

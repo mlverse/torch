@@ -16,11 +16,11 @@ torch_solve(self, A)
 Solve
 }
 \note{
-\preformatted{Irrespective of the original strides, the returned matrices
+\if{html}{\out{<div class="sourceCode">}}\preformatted{Irrespective of the original strides, the returned matrices
 `solution` and `LU` will be transposed, i.e. with strides like
 `B$contiguous()$transpose(-1, -2)$stride()` and
 `A$contiguous()$transpose(-1, -2)$stride()` respectively.
-}
+}\if{html}{\out{</div>}}
 }
 \section{solve(input, A) -> (Tensor, Tensor) }{
 

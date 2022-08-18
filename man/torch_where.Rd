@@ -18,8 +18,8 @@ torch_where(condition, self, other)
 Where
 }
 \note{
-\preformatted{The tensors `condition`, `x`, `y` must be broadcastable .
-}
+\if{html}{\out{<div class="sourceCode">}}\preformatted{The tensors `condition`, `x`, `y` must be broadcastable .
+}\if{html}{\out{</div>}}
 
 See also \code{\link[=torch_nonzero]{torch_nonzero()}}.
 }

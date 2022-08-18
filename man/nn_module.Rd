@@ -41,11 +41,13 @@ new \code{nn_module}.
 
 The initialize function will be called whenever a new instance of the \code{nn_module}
 is created. We use the initialize functions to define submodules and parameters
-of the module. For example:\preformatted{initialize = function(input_size, output_size) \{
+of the module. For example:
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{initialize = function(input_size, output_size) \{
    self$conv1 <- nn_conv2d(input_size, output_size, 5)
    self$conv2 <- nn_conv2d(output_size, output_size, 5)
 \}
-}
+}\if{html}{\out{</div>}}
 
 The initialize function can have any number of parameters. All objects
 assigned to \verb{self$} will be available for other methods that you implement.
@@ -63,14 +65,16 @@ The forward method is called whenever an instance of \code{nn_module} is called.
 This is usually used to implement the computation that the module does with
 the weights ad submodules defined in the \code{initialize} function.
 
-For example:\preformatted{forward = function(input) \{
+For example:
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{forward = function(input) \{
    input <- self$conv1(input)
    input <- nnf_relu(input)
    input <- self$conv2(input)
    input <- nnf_relu(input)
    input
  \}
-}
+}\if{html}{\out{</div>}}
 
 The \code{forward} function can use the \code{self$training} attribute to make different
 computations depending wether the model is training or not, for example if you

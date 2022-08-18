@@ -45,25 +45,25 @@ TODO: consider different message}
 \section{Methods}{
 \subsection{Public methods}{
 \itemize{
-\item \href{#method-new}{\code{Distribution$new()}}
-\item \href{#method-expand}{\code{Distribution$expand()}}
-\item \href{#method-sample}{\code{Distribution$sample()}}
-\item \href{#method-rsample}{\code{Distribution$rsample()}}
-\item \href{#method-log_prob}{\code{Distribution$log_prob()}}
-\item \href{#method-cdf}{\code{Distribution$cdf()}}
-\item \href{#method-icdf}{\code{Distribution$icdf()}}
-\item \href{#method-enumerate_support}{\code{Distribution$enumerate_support()}}
-\item \href{#method-entropy}{\code{Distribution$entropy()}}
-\item \href{#method-perplexity}{\code{Distribution$perplexity()}}
-\item \href{#method-.extended_shape}{\code{Distribution$.extended_shape()}}
-\item \href{#method-.validate_sample}{\code{Distribution$.validate_sample()}}
-\item \href{#method-print}{\code{Distribution$print()}}
-\item \href{#method-clone}{\code{Distribution$clone()}}
+\item \href{#method-torch_Distribution-new}{\code{Distribution$new()}}
+\item \href{#method-torch_Distribution-expand}{\code{Distribution$expand()}}
+\item \href{#method-torch_Distribution-sample}{\code{Distribution$sample()}}
+\item \href{#method-torch_Distribution-rsample}{\code{Distribution$rsample()}}
+\item \href{#method-torch_Distribution-log_prob}{\code{Distribution$log_prob()}}
+\item \href{#method-torch_Distribution-cdf}{\code{Distribution$cdf()}}
+\item \href{#method-torch_Distribution-icdf}{\code{Distribution$icdf()}}
+\item \href{#method-torch_Distribution-enumerate_support}{\code{Distribution$enumerate_support()}}
+\item \href{#method-torch_Distribution-entropy}{\code{Distribution$entropy()}}
+\item \href{#method-torch_Distribution-perplexity}{\code{Distribution$perplexity()}}
+\item \href{#method-torch_Distribution-.extended_shape}{\code{Distribution$.extended_shape()}}
+\item \href{#method-torch_Distribution-.validate_sample}{\code{Distribution$.validate_sample()}}
+\item \href{#method-torch_Distribution-print}{\code{Distribution$print()}}
+\item \href{#method-torch_Distribution-clone}{\code{Distribution$clone()}}
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-new"></a>}}
-\if{latex}{\out{\hypertarget{method-new}{}}}
+\if{html}{\out{<a id="method-torch_Distribution-new"></a>}}
+\if{latex}{\out{\hypertarget{method-torch_Distribution-new}{}}}
 \subsection{Method \code{new()}}{
 Initializes a distribution class.
 \subsection{Usage}{
@@ -84,8 +84,8 @@ can be time consuming so you might want to disable it.}
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-expand"></a>}}
-\if{latex}{\out{\hypertarget{method-expand}{}}}
+\if{html}{\out{<a id="method-torch_Distribution-expand"></a>}}
+\if{latex}{\out{\hypertarget{method-torch_Distribution-expand}{}}}
 \subsection{Method \code{expand()}}{
 Returns a new distribution instance (or populates an existing instance
 provided by a derived class) with batch dimensions expanded to batch_shape.
@@ -109,8 +109,8 @@ override \code{expand}.}
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-sample"></a>}}
-\if{latex}{\out{\hypertarget{method-sample}{}}}
+\if{html}{\out{<a id="method-torch_Distribution-sample"></a>}}
+\if{latex}{\out{\hypertarget{method-torch_Distribution-sample}{}}}
 \subsection{Method \code{sample()}}{
 Generates a \code{sample_shape} shaped sample or \code{sample_shape} shaped batch of
 samples if the distribution parameters are batched.
@@ -127,8 +127,8 @@ samples if the distribution parameters are batched.
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-rsample"></a>}}
-\if{latex}{\out{\hypertarget{method-rsample}{}}}
+\if{html}{\out{<a id="method-torch_Distribution-rsample"></a>}}
+\if{latex}{\out{\hypertarget{method-torch_Distribution-rsample}{}}}
 \subsection{Method \code{rsample()}}{
 Generates a sample_shape shaped reparameterized sample or sample_shape
 shaped batch of reparameterized samples if the distribution parameters
@@ -146,8 +146,8 @@ are batched.
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-log_prob"></a>}}
-\if{latex}{\out{\hypertarget{method-log_prob}{}}}
+\if{html}{\out{<a id="method-torch_Distribution-log_prob"></a>}}
+\if{latex}{\out{\hypertarget{method-torch_Distribution-log_prob}{}}}
 \subsection{Method \code{log_prob()}}{
 Returns the log of the probability density/mass function evaluated at
 \code{value}.
@@ -164,8 +164,8 @@ Returns the log of the probability density/mass function evaluated at
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-cdf"></a>}}
-\if{latex}{\out{\hypertarget{method-cdf}{}}}
+\if{html}{\out{<a id="method-torch_Distribution-cdf"></a>}}
+\if{latex}{\out{\hypertarget{method-torch_Distribution-cdf}{}}}
 \subsection{Method \code{cdf()}}{
 Returns the cumulative density/mass function evaluated at
 \code{value}.
@@ -182,8 +182,8 @@ Returns the cumulative density/mass function evaluated at
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-icdf"></a>}}
-\if{latex}{\out{\hypertarget{method-icdf}{}}}
+\if{html}{\out{<a id="method-torch_Distribution-icdf"></a>}}
+\if{latex}{\out{\hypertarget{method-torch_Distribution-icdf}{}}}
 \subsection{Method \code{icdf()}}{
 Returns the inverse cumulative density/mass function evaluated at
 \code{value}.
@@ -205,8 +205,8 @@ of the result will be \verb{(cardinality,) + batch_shape + event_shape (where }e
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-enumerate_support"></a>}}
-\if{latex}{\out{\hypertarget{method-enumerate_support}{}}}
+\if{html}{\out{<a id="method-torch_Distribution-enumerate_support"></a>}}
+\if{latex}{\out{\hypertarget{method-torch_Distribution-enumerate_support}{}}}
 \subsection{Method \code{enumerate_support()}}{
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{Distribution$enumerate_support(expand = TRUE)}\if{html}{\out{</div>}}
@@ -225,8 +225,8 @@ Tensor iterating over dimension 0.
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-entropy"></a>}}
-\if{latex}{\out{\hypertarget{method-entropy}{}}}
+\if{html}{\out{<a id="method-torch_Distribution-entropy"></a>}}
+\if{latex}{\out{\hypertarget{method-torch_Distribution-entropy}{}}}
 \subsection{Method \code{entropy()}}{
 Returns entropy of distribution, batched over batch_shape.
 \subsection{Usage}{
@@ -238,8 +238,8 @@ Tensor of shape batch_shape.
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-perplexity"></a>}}
-\if{latex}{\out{\hypertarget{method-perplexity}{}}}
+\if{html}{\out{<a id="method-torch_Distribution-perplexity"></a>}}
+\if{latex}{\out{\hypertarget{method-torch_Distribution-perplexity}{}}}
 \subsection{Method \code{perplexity()}}{
 Returns perplexity of distribution, batched over batch_shape.
 \subsection{Usage}{
@@ -251,8 +251,8 @@ Tensor of shape batch_shape.
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-.extended_shape"></a>}}
-\if{latex}{\out{\hypertarget{method-.extended_shape}{}}}
+\if{html}{\out{<a id="method-torch_Distribution-.extended_shape"></a>}}
+\if{latex}{\out{\hypertarget{method-torch_Distribution-.extended_shape}{}}}
 \subsection{Method \code{.extended_shape()}}{
 Returns the size of the sample returned by the distribution, given
 a \code{sample_shape}. Note, that the batch and event shapes of a distribution
@@ -271,8 +271,8 @@ returned shape is upcast to (1,).
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-.validate_sample"></a>}}
-\if{latex}{\out{\hypertarget{method-.validate_sample}{}}}
+\if{html}{\out{<a id="method-torch_Distribution-.validate_sample"></a>}}
+\if{latex}{\out{\hypertarget{method-torch_Distribution-.validate_sample}{}}}
 \subsection{Method \code{.validate_sample()}}{
 Argument validation for distribution methods such as \code{log_prob},
 \code{cdf} and \code{icdf}. The rightmost dimensions of a value to be
@@ -292,8 +292,8 @@ computed by the \code{log_prob} method.}
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-print"></a>}}
-\if{latex}{\out{\hypertarget{method-print}{}}}
+\if{html}{\out{<a id="method-torch_Distribution-print"></a>}}
+\if{latex}{\out{\hypertarget{method-torch_Distribution-print}{}}}
 \subsection{Method \code{print()}}{
 Prints the distribution instance.
 \subsection{Usage}{
@@ -302,8 +302,8 @@ Prints the distribution instance.
 
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-clone"></a>}}
-\if{latex}{\out{\hypertarget{method-clone}{}}}
+\if{html}{\out{<a id="method-torch_Distribution-clone"></a>}}
+\if{latex}{\out{\hypertarget{method-torch_Distribution-clone}{}}}
 \subsection{Method \code{clone()}}{
 The objects of this class are cloneable with this method.
 \subsection{Usage}{

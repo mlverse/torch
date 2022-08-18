@@ -27,10 +27,12 @@ Unique_consecutive
 \section{TEST }{
 
 
-Eliminates all but the first element from every consecutive group of equivalent elements.\preformatted{.. note:: This function is different from [`torch_unique`] in the sense that this function
+Eliminates all but the first element from every consecutive group of equivalent elements.
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{.. note:: This function is different from [`torch_unique`] in the sense that this function
     only eliminates consecutive duplicate values. This semantics is similar to `std::unique`
     in C++.
-}
+}\if{html}{\out{</div>}}
 }
 
 \examples{

@@ -39,7 +39,7 @@ Imports:
     callr,
     cli,
     ellipsis
-RoxygenNote: 7.1.2
+RoxygenNote: 7.2.1
 Roxygen: list(markdown = TRUE)
 Suggests:
     testthat (>= 3.0.0),

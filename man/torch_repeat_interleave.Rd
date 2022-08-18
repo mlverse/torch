@@ -28,8 +28,10 @@ Repeat elements of a tensor.
 }
 
 \section{Warning}{
-\preformatted{This is different from `torch_Tensor.repeat` but similar to `numpy.repeat`.
-}
+
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{This is different from `torch_Tensor.repeat` but similar to `numpy.repeat`.
+}\if{html}{\out{</div>}}
 }
 
 \section{repeat_interleave(repeats) -> Tensor }{

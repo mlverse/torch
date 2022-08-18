@@ -24,10 +24,12 @@ Gather
 
 Gathers values along an axis specified by \code{dim}.
 
-For a 3-D tensor the output is specified by::\preformatted{out[i][j][k] = input[index[i][j][k]][j][k]  # if dim == 0
+For a 3-D tensor the output is specified by::
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{out[i][j][k] = input[index[i][j][k]][j][k]  # if dim == 0
 out[i][j][k] = input[i][index[i][j][k]][k]  # if dim == 1
 out[i][j][k] = input[i][j][index[i][j][k]]  # if dim == 2
-}
+}\if{html}{\out{</div>}}
 
 If \code{input} is an n-dimensional tensor with size
 \eqn{(x_0, x_1..., x_{i-1}, x_i, x_{i+1}, ..., x_{n-1})}

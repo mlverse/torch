@@ -37,11 +37,11 @@ torch_hamming_window(
 Hamming_window
 }
 \note{
-\preformatted{If `window_length` \eqn{=1}, the returned window contains a single value 1.
-}
+\if{html}{\out{<div class="sourceCode">}}\preformatted{If `window_length` \eqn{=1}, the returned window contains a single value 1.
+}\if{html}{\out{</div>}}
 
-\preformatted{This is a generalized version of `torch_hann_window`.
-}
+\if{html}{\out{<div class="sourceCode">}}\preformatted{This is a generalized version of `torch_hann_window`.
+}\if{html}{\out{</div>}}
 }
 \section{hamming_window(window_length, periodic=TRUE, alpha=0.54, beta=0.46, dtype=NULL, layout=torch.strided, device=NULL, requires_grad=False) -> Tensor }{
 
