@@ -26,7 +26,7 @@ NULL
 #' \theta_{t+1} = \theta_{t} - \frac{\eta }{\sqrt{G_{t} + \epsilon}} \odot g_{t}
 #' }
 #' The equation above and some remarks quoted
-#' after [*An overview of gradient descent optimization algorithms*](https://ruder.io/optimizing-gradient-descent/index.html#adagrad)
+#' after [*An overview of gradient descent optimization algorithms*](https://web.archive.org/web/20220810011734/https://ruder.io/optimizing-gradient-descent/index.html)
 #' by Sebastian Ruder.
 #' @includeRmd man/rmd/optim-note.Rmd note
 #' @export

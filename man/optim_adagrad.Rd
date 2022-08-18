@@ -43,7 +43,7 @@ Update rule:
 \theta_{t+1} = \theta_{t} - \frac{\eta }{\sqrt{G_{t} + \epsilon}} \odot g_{t}
 }
 The equation above and some remarks quoted
-after \href{https://ruder.io/optimizing-gradient-descent/index.html#adagrad}{\emph{An overview of gradient descent optimization algorithms}}
+after \href{https://web.archive.org/web/20220810011734/https://ruder.io/optimizing-gradient-descent/index.html}{\emph{An overview of gradient descent optimization algorithms}}
 by Sebastian Ruder.
 }
 \section{Warning}{
