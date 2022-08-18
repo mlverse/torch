@@ -14,9 +14,9 @@ torch_inverse(self)
 Inverse
 }
 \note{
-\preformatted{Irrespective of the original strides, the returned tensors will be
+\if{html}{\out{<div class="sourceCode">}}\preformatted{Irrespective of the original strides, the returned tensors will be
 transposed, i.e. with strides like `input.contiguous().transpose(-2, -1).stride()`
-}
+}\if{html}{\out{</div>}}
 }
 \section{inverse(input, out=NULL) -> Tensor }{
 

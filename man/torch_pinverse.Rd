@@ -16,15 +16,15 @@ torch_pinverse(self, rcond = 1e-15)
 Pinverse
 }
 \note{
-\preformatted{This method is implemented using the Singular Value Decomposition.
-}
+\if{html}{\out{<div class="sourceCode">}}\preformatted{This method is implemented using the Singular Value Decomposition.
+}\if{html}{\out{</div>}}
 
-\preformatted{The pseudo-inverse is not necessarily a continuous function in the elements of the matrix `[1]`_.
+\if{html}{\out{<div class="sourceCode">}}\preformatted{The pseudo-inverse is not necessarily a continuous function in the elements of the matrix `[1]`_.
 Therefore, derivatives are not always existent, and exist for a constant rank only `[2]`_.
 However, this method is backprop-able due to the implementation by using SVD results, and
 could be unstable. Double-backward will also be unstable due to the usage of SVD internally.
 See `~torch.svd` for more details.
-}
+}\if{html}{\out{</div>}}
 }
 \section{pinverse(input, rcond=1e-15) -> Tensor }{
 

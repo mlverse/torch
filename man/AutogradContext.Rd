@@ -27,16 +27,16 @@ Class representing the context.
 \section{Methods}{
 \subsection{Public methods}{
 \itemize{
-\item \href{#method-new}{\code{AutogradContext$new()}}
-\item \href{#method-save_for_backward}{\code{AutogradContext$save_for_backward()}}
-\item \href{#method-mark_non_differentiable}{\code{AutogradContext$mark_non_differentiable()}}
-\item \href{#method-mark_dirty}{\code{AutogradContext$mark_dirty()}}
-\item \href{#method-clone}{\code{AutogradContext$clone()}}
+\item \href{#method-torch_autograd_context-new}{\code{AutogradContext$new()}}
+\item \href{#method-torch_autograd_context-save_for_backward}{\code{AutogradContext$save_for_backward()}}
+\item \href{#method-torch_autograd_context-mark_non_differentiable}{\code{AutogradContext$mark_non_differentiable()}}
+\item \href{#method-torch_autograd_context-mark_dirty}{\code{AutogradContext$mark_dirty()}}
+\item \href{#method-torch_autograd_context-clone}{\code{AutogradContext$clone()}}
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-new"></a>}}
-\if{latex}{\out{\hypertarget{method-new}{}}}
+\if{html}{\out{<a id="method-torch_autograd_context-new"></a>}}
+\if{latex}{\out{\hypertarget{method-torch_autograd_context-new}{}}}
 \subsection{Method \code{new()}}{
 (Dev related) Initializes the context. Not user related.
 \subsection{Usage}{
@@ -63,8 +63,8 @@ Class representing the context.
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-save_for_backward"></a>}}
-\if{latex}{\out{\hypertarget{method-save_for_backward}{}}}
+\if{html}{\out{<a id="method-torch_autograd_context-save_for_backward"></a>}}
+\if{latex}{\out{\hypertarget{method-torch_autograd_context-save_for_backward}{}}}
 \subsection{Method \code{save_for_backward()}}{
 Saves given objects for a future call to backward().
 
@@ -90,8 +90,8 @@ It's common to pass named arguments.}
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-mark_non_differentiable"></a>}}
-\if{latex}{\out{\hypertarget{method-mark_non_differentiable}{}}}
+\if{html}{\out{<a id="method-torch_autograd_context-mark_non_differentiable"></a>}}
+\if{latex}{\out{\hypertarget{method-torch_autograd_context-mark_non_differentiable}{}}}
 \subsection{Method \code{mark_non_differentiable()}}{
 Marks outputs as non-differentiable.
 
@@ -117,8 +117,8 @@ This is used e.g. for indices returned from a max Function.
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-mark_dirty"></a>}}
-\if{latex}{\out{\hypertarget{method-mark_dirty}{}}}
+\if{html}{\out{<a id="method-torch_autograd_context-mark_dirty"></a>}}
+\if{latex}{\out{\hypertarget{method-torch_autograd_context-mark_dirty}{}}}
 \subsection{Method \code{mark_dirty()}}{
 Marks given tensors as modified in an in-place operation.
 
@@ -141,8 +141,8 @@ matter whether the function is called before or after modification.
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-clone"></a>}}
-\if{latex}{\out{\hypertarget{method-clone}{}}}
+\if{html}{\out{<a id="method-torch_autograd_context-clone"></a>}}
+\if{latex}{\out{\hypertarget{method-torch_autograd_context-clone}{}}}
 \subsection{Method \code{clone()}}{
 The objects of this class are cloneable with this method.
 \subsection{Usage}{

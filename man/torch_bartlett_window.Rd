@@ -31,8 +31,8 @@ torch_bartlett_window(
 Bartlett_window
 }
 \note{
-\preformatted{If `window_length` \eqn{=1}, the returned window contains a single value 1.
-}
+\if{html}{\out{<div class="sourceCode">}}\preformatted{If `window_length` \eqn{=1}, the returned window contains a single value 1.
+}\if{html}{\out{</div>}}
 }
 \section{bartlett_window(window_length, periodic=TRUE, dtype=NULL, layout=torch.strided, device=NULL, requires_grad=False) -> Tensor }{
 

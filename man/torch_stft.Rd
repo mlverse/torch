@@ -54,9 +54,11 @@ Stft
 \section{Short-time Fourier transform (STFT). }{
 
 
-Short-time Fourier transform (STFT).\preformatted{Ignoring the optional batch dimension, this method computes the following
+Short-time Fourier transform (STFT).
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{Ignoring the optional batch dimension, this method computes the following
 expression:
-}
+}\if{html}{\out{</div>}}
 
 \deqn{
         X[m, \omega] = \sum_{k = 0}^{\mbox{win\_length-1}}%
@@ -65,7 +67,9 @@ expression:
 }
 where \eqn{m} is the index of the sliding window, and \eqn{\omega} is
 the frequency that \eqn{0 \leq \omega < \mbox{n\_fft}}. When
-\code{onesided} is the default value \code{TRUE},\preformatted{* `input` must be either a 1-D time sequence or a 2-D batch of time
+\code{onesided} is the default value \code{TRUE},
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{* `input` must be either a 1-D time sequence or a 2-D batch of time
   sequences.
 
 * If `hop_length` is `NULL` (default), it is treated as equal to
@@ -103,7 +107,7 @@ batch size of `input`, \eqn{N} is the number of frequencies where
 STFT is applied, \eqn{T} is the total number of frames used, and each pair
 in the last dimension represents a complex number as the real part and the
 imaginary part.
-}
+}\if{html}{\out{</div>}}
 }
 
 \section{Warning}{

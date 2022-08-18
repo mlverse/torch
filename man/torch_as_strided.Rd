@@ -31,11 +31,13 @@ Create a view of an existing \code{torch_Tensor} \code{input} with specified
 More than one element of a created tensor may refer to a single memory
 location. As a result, in-place operations (especially ones that are
 vectorized) may result in incorrect behavior. If you need to write to
-the tensors, please clone them first.\preformatted{Many PyTorch functions, which return a view of a tensor, are internally
+the tensors, please clone them first.
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{Many PyTorch functions, which return a view of a tensor, are internally
 implemented with this function. Those functions, like
 `torch_Tensor.expand`, are easier to read and are therefore more
 advisable to use.
-}
+}\if{html}{\out{</div>}}
 }
 
 \examples{

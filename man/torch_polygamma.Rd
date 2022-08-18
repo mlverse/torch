@@ -16,8 +16,8 @@ torch_polygamma(n, input)
 Polygamma
 }
 \note{
-\preformatted{This function is not implemented for \eqn{n \geq 2}.
-}
+\if{html}{\out{<div class="sourceCode">}}\preformatted{This function is not implemented for \eqn{n \geq 2}.
+}\if{html}{\out{</div>}}
 }
 \section{polygamma(n, input, out=NULL) -> Tensor }{
 

@@ -20,10 +20,10 @@ torch_multinomial(self, num_samples, replacement = FALSE, generator = NULL)
 Multinomial
 }
 \note{
-\preformatted{The rows of `input` do not need to sum to one (in which case we use
+\if{html}{\out{<div class="sourceCode">}}\preformatted{The rows of `input` do not need to sum to one (in which case we use
 the values as weights), but must be non-negative, finite and have
 a non-zero sum.
-}
+}\if{html}{\out{</div>}}
 
 Indices are ordered from left to right according to when each was sampled
 (first samples are placed in first column).
@@ -38,10 +38,10 @@ If replacement is \code{TRUE}, samples are drawn with replacement.
 If not, they are drawn without replacement, which means that when a
 sample index is drawn for a row, it cannot be drawn again for that row.
 
-\preformatted{When drawn without replacement, `num_samples` must be lower than
+\if{html}{\out{<div class="sourceCode">}}\preformatted{When drawn without replacement, `num_samples` must be lower than
 number of non-zero elements in `input` (or the min number of non-zero
 elements in each row of `input` if it is a matrix).
-}
+}\if{html}{\out{</div>}}
 }
 \section{multinomial(input, num_samples, replacement=False, *, generator=NULL, out=NULL) -> LongTensor }{
 
