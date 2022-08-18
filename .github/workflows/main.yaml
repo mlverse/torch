@@ -64,6 +64,10 @@ jobs:
           r-version: ${{ matrix.r_version }}
       - uses: r-lib/actions/setup-pandoc@v2
         if: matrix.container == ''
+      - name: Set CRAN mirror
+        if: contains(matrix.container, 'centos')
+        run: |
+          echo "options(repos = c(CRAN = "https://cran.rstudio.com"))" > .Rprofile
       - name: Install system dependencies
         if: runner.os == 'Linux'
         env:
