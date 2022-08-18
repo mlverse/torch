@@ -54,7 +54,7 @@ To choose the best driver on CPU consider:
 \item But if you run into memory issues: \code{'gelss'} (full SVD).
 }
 
-See also the \href{https://www.netlib.org/lapack/lug/node27.html}{full description of these drivers}
+See also the \href{https://netlib.org/lapack/lug/node27.html}{full description of these drivers}
 
 \code{rcond} is used to determine the effective rank of the matrices in \code{A}
 when \code{driver} is one of (\code{'gelsy'}, \code{'gelsd'}, \code{'gelss'}).

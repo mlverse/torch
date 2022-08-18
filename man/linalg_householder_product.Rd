@@ -24,7 +24,7 @@ H_1H_2 ... H_k \\\\qquad with \\\\qquad H_i = \\\\mathrm{I}_m - \\\\tau_i v_i v_
 
 where \teqn{\mathrm{I}_m} is the \code{m}-dimensional identity matrix and
 \teqn{v^{H}} is the conjugate transpose when \teqn{v} is complex, and the transpose when \teqn{v} is real-valued.
-See \href{https://www.netlib.org/lapack/lug/node128.html}{Representation of Orthogonal or Unitary Matrices} for
+See \href{https://netlib.org/lapack/lug/node128.html}{Representation of Orthogonal or Unitary Matrices} for
 further details.
 
 Supports inputs of float, double, cfloat and cdouble dtypes.
