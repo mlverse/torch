@@ -67,7 +67,7 @@ jobs:
       - name: Set CRAN mirror
         if: contains(matrix.container, 'centos')
         run: |
-          echo "options(repos = c(CRAN = "https://cran.rstudio.com"))" > .Rprofile
+          echo "options(repos = c(CRAN = 'https://cran.rstudio.com'))" > .Rprofile
       - name: Install system dependencies
         if: runner.os == 'Linux'
         env:
