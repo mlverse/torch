@@ -193,14 +193,7 @@ lantern_install_libs <- function(version, type, install_path, install_config) {
     if (is.null(library_info$filter)) library_info$filter <- ""
     if (is.null(library_info$inst_path)) library_info$inst_path <- ""
     
-    if (identical(Sys.getenv("PRECXX11ABI", unset = "0"), "1")) {
-      if (grepl("lantern", library_info$url)) {
-        library_info$url <- sub("Linux", "LinuxNonABI", library_info$url)
-      } else if (grepl("libtorch", library_info$url)) {
-        library_info$url <- sub("libtorch-cxx11-abi-shared", "libtorch-shared", library_info$url)
-      }
-      library_info$md5hash <- NULL
-    }
+    library_info <- maybe_switch_precxx11abi(library_info)
 
     lantern_install_lib(
       library_name = library_name,
@@ -441,3 +434,14 @@ maybe_get_pre_cxx11_abi_url <- function(url) {
   }
   url
 }
+
+maybe_switch_precxx11abi <- function(library_info) {
+  url <- library_info$url
+  library_info$url <- maybe_get_pre_cxx11_abi_url(library_info$url)
+  # if the URL changed, we can't keep the md5 hash
+  if (!identical(library_info$url, url)) {
+    library_info$md5hash <- NULL
+  }
+  library_info
+}
+
