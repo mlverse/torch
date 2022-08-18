@@ -69,7 +69,7 @@ jobs:
         run: |
           echo "options(repos = c(CRAN = 'https://cran.rstudio.com'))" > .Rprofile
       - name: Install system dependencies
-        if: runner.os == 'Linux'
+        if: runner.os == 'Linux' && matrix.container == ''
         env:
           RHUB_PLATFORM: linux-x86_64-ubuntu-gcc
         run: |
