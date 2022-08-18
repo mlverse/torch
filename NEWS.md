@@ -1,11 +1,22 @@
 # torch (development version)
 
-- We can now call GC even if from a backward call (ie, from a different thread) which allows for better memory management. (#853)
+## Breaking changes
+
 - We now prompt the user before installing torch additional dependencies in interactive environments. This was requested by CRAN maintainers. (#864)
-- Fixed the way errors are passed from dataloaders workers to the main process. Now using new rlang error chaining. (#864)
+
+## New features
+
 - Dataloaders can now handle logical values. (#858, @ryan-heslin)
-- Fix HTML5 Manual information as resquested by CRAN (#869)
 - We now provide builds for Pre CXX11 ABI version of LibTorch. They can be used by setting the environment variable `PRECXX11ABI=1`. This can be useful in environments with older versions of GLIBC. (#870)
+
+## Bug fixes
+
+- Fixed the way errors are passed from dataloaders workers to the main process. Now using new rlang error chaining. (#864)
+
+## Internal
+
+- We can now call GC even if from a backward call (ie, from a different thread) which allows for better memory management. (#853)
+- Fix HTML5 Manual information as resquested by CRAN (#869)
 
 # torch 0.8.0
 
