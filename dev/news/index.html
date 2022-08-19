@@ -16,7 +16,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">torch</a>
 
-    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">0.8.0.9000</small>
+    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">0.8.1.9000</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -75,21 +75,22 @@
       <small>Source: <a href="https://github.com/mlverse/torch/blob/HEAD/NEWS.md" class="external-link"><code>NEWS.md</code></a></small>
     </div>
 
+    <div class="section level2"><h2 class="pkg-version" data-toc-text="development version" id="torch-development-version">torch (development version)<a class="anchor" aria-label="anchor" href="#torch-development-version"></a></h2></div>
     <div class="section level2">
-<h2 class="pkg-version" data-toc-text="development version" id="torch-development-version">torch (development version)<a class="anchor" aria-label="anchor" href="#torch-development-version"></a></h2>
+<h2 class="pkg-version" data-toc-text="0.8.1" id="torch-081">torch 0.8.1<a class="anchor" aria-label="anchor" href="#torch-081"></a></h2><p class="text-muted">CRAN release: 2022-08-19</p>
 <div class="section level3">
-<h3 id="breaking-changes-development-version">Breaking changes<a class="anchor" aria-label="anchor" href="#breaking-changes-development-version"></a></h3>
+<h3 id="breaking-changes-0-8-1">Breaking changes<a class="anchor" aria-label="anchor" href="#breaking-changes-0-8-1"></a></h3>
 <ul><li>We now prompt the user before installing torch additional dependencies in interactive environments. This was requested by CRAN maintainers. (<a href="https://github.com/mlverse/torch/issues/864" class="external-link">#864</a>)</li></ul></div>
 <div class="section level3">
-<h3 id="new-features-development-version">New features<a class="anchor" aria-label="anchor" href="#new-features-development-version"></a></h3>
+<h3 id="new-features-0-8-1">New features<a class="anchor" aria-label="anchor" href="#new-features-0-8-1"></a></h3>
 <ul><li>Dataloaders can now handle logical values. (<a href="https://github.com/mlverse/torch/issues/858" class="external-link">#858</a>, <a href="https://github.com/ryan-heslin" class="external-link">@ryan-heslin</a>)</li>
 <li>We now provide builds for Pre CXX11 ABI version of LibTorch. They can be used by setting the environment variable <code>PRECXX11ABI=1</code>. This can be useful in environments with older versions of GLIBC. (<a href="https://github.com/mlverse/torch/issues/870" class="external-link">#870</a>)</li>
 </ul></div>
 <div class="section level3">
-<h3 id="bug-fixes-development-version">Bug fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-development-version"></a></h3>
+<h3 id="bug-fixes-0-8-1">Bug fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-0-8-1"></a></h3>
 <ul><li>Fixed the way errors are passed from dataloaders workers to the main process. Now using new rlang error chaining. (<a href="https://github.com/mlverse/torch/issues/864" class="external-link">#864</a>)</li></ul></div>
 <div class="section level3">
-<h3 id="internal-development-version">Internal<a class="anchor" aria-label="anchor" href="#internal-development-version"></a></h3>
+<h3 id="internal-0-8-1">Internal<a class="anchor" aria-label="anchor" href="#internal-0-8-1"></a></h3>
 <ul><li>We can now call GC even if from a backward call (ie, from a different thread) which allows for better memory management. (<a href="https://github.com/mlverse/torch/issues/853" class="external-link">#853</a>)</li>
 <li>Fix HTML5 Manual information as resquested by CRAN (<a href="https://github.com/mlverse/torch/issues/869" class="external-link">#869</a>)</li>
 </ul></div>
