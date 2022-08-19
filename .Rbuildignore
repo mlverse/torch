@@ -45,3 +45,4 @@ tools/torchgen/.Rbuildignore
 ^Meta$
 ^vignettes/rsconnect*
 ^revdep$
+^CRAN-SUBMISSION$
