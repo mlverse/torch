@@ -532,6 +532,8 @@ LANTERN_OPTIONAL_DECLS(string_view)
   HOST_API void lantern_Storage_delete(void *x) {LANTERN_CHECK_LOADED _lantern_Storage_delete(x); LANTERN_HOST_HANDLER }
   LANTERN_API bool(LANTERN_PTR _lantern_Tensor_is_contiguous)(void *self);
   HOST_API bool lantern_Tensor_is_contiguous(void *self) {LANTERN_CHECK_LOADED bool ret = _lantern_Tensor_is_contiguous(self); LANTERN_HOST_HANDLER return ret;}
+  LANTERN_API bool(LANTERN_PTR _lantern_Tensor_is_sparse)(void *self);
+  HOST_API bool lantern_Tensor_is_sparse(void *self) {LANTERN_CHECK_LOADED bool ret = _lantern_Tensor_is_sparse(self); LANTERN_HOST_HANDLER return ret;}
   LANTERN_API void* (LANTERN_PTR _lantern_tensor_save) (void* self, bool base64);
   HOST_API void* lantern_tensor_save(void* self, bool base64) {LANTERN_CHECK_LOADED void* ret = _lantern_tensor_save(self, base64); LANTERN_HOST_HANDLER return ret;}
   LANTERN_API void * (LANTERN_PTR _lantern_tensor_load) (void * s, void* device, bool base64);
@@ -8121,6 +8123,7 @@ bool lanternInit(const std::string &libPath, std::string *pError)
   LOAD_SYMBOL(_lantern_Storage_data_ptr);
   LOAD_SYMBOL(_lantern_Storage_delete);
   LOAD_SYMBOL(_lantern_Tensor_is_contiguous);
+  LOAD_SYMBOL(_lantern_Tensor_is_sparse);
   LOAD_SYMBOL(_lantern_tensor_save);
   LOAD_SYMBOL(_lantern_tensor_load);
   LOAD_SYMBOL(_lantern_test_tensor);

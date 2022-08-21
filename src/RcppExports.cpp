@@ -37415,6 +37415,17 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// cpp_tensor_is_sparse
+bool cpp_tensor_is_sparse(Rcpp::XPtr<torch::Tensor> self);
+RcppExport SEXP _torch_cpp_tensor_is_sparse(SEXP selfSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< Rcpp::XPtr<torch::Tensor> >::type self(selfSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_tensor_is_sparse(self));
+    return rcpp_result_gen;
+END_RCPP
+}
 // cpp_tensor_has_names
 bool cpp_tensor_has_names(Rcpp::XPtr<torch::Tensor> self);
 RcppExport SEXP _torch_cpp_tensor_has_names(SEXP selfSEXP) {
@@ -40696,6 +40707,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_torch_cpp_tensor_device", (DL_FUNC) &_torch_cpp_tensor_device, 1},
     {"_torch_cpp_tensor_is_undefined", (DL_FUNC) &_torch_cpp_tensor_is_undefined, 1},
     {"_torch_cpp_tensor_is_contiguous", (DL_FUNC) &_torch_cpp_tensor_is_contiguous, 1},
+    {"_torch_cpp_tensor_is_sparse", (DL_FUNC) &_torch_cpp_tensor_is_sparse, 1},
     {"_torch_cpp_tensor_has_names", (DL_FUNC) &_torch_cpp_tensor_has_names, 1},
     {"_torch_cpp_tensor_names", (DL_FUNC) &_torch_cpp_tensor_names, 1},
     {"_torch_cpp_set_num_threads", (DL_FUNC) &_torch_cpp_set_num_threads, 1},

@@ -191,6 +191,15 @@ bool _lantern_Tensor_is_contiguous(void *self) {
   LANTERN_FUNCTION_END_RET(false)
 }
 
+bool _lantern_Tensor_is_sparse(void *self)
+{
+  LANTERN_FUNCTION_START
+  torch::Tensor x = from_raw::Tensor(self);
+  ;
+  return x.is_sparse();
+  LANTERN_FUNCTION_END_RET(false)
+}
+
 bool _lantern_Tensor_has_names(void *self) {
   LANTERN_FUNCTION_START
   torch::Tensor x = from_raw::Tensor(self);

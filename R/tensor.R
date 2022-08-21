@@ -409,6 +409,15 @@ is_undefined_tensor <- function(x) {
   cpp_tensor_is_undefined(x$ptr)
 }
 
+#' Checks if a tensor is a sparse (e.g. such as created by `torch_sparse_coo_tensor()`)
+#'
+#' @param x tensor to check
+#'
+#' @export
+is_sparse <- function(x) {
+  cpp_tensor_is_sparse(x$ptr)
+}
+
 #' @importFrom bit64 as.integer64
 #' @export
 as.integer64.torch_tensor <- function(x, keep.names = FALSE, ...) {

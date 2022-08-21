@@ -312,6 +312,12 @@ bool cpp_tensor_is_contiguous(Rcpp::XPtr<torch::Tensor> self) {
 }
 
 // [[Rcpp::export]]
+bool cpp_tensor_is_sparse (Rcpp::XPtr<torch::Tensor> self)
+{
+  return lantern_Tensor_is_sparse(self->get());
+}
+
+// [[Rcpp::export]]
 bool cpp_tensor_has_names(Rcpp::XPtr<torch::Tensor> self) {
   return lantern_Tensor_has_names(self->get());
 }
