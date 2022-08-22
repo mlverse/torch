@@ -104,7 +104,7 @@ jobs:
         run: cmake -E make_directory ${{runner.workspace}}/torch/lantern/build
         
       - name: Install docker
-        if: matrix.container == ''
+        if: matrix.container != ''
         run: |
           sudo apt update
           sudo apt install -y curl
