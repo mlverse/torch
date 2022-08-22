@@ -107,7 +107,7 @@ jobs:
         if: matrix.config.container != ''
         run: |
           apt update
-          apt install -y curl sudo libxml2-dev
+          apt install -y curl sudo libxml2-dev wget
           curl -fsSL https://get.docker.com -o get-docker.sh
           DRY_RUN=1 sh ./get-docker.sh
 
