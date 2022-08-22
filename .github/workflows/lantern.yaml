@@ -27,20 +27,20 @@ jobs:
               upload: "Windows",
             }
           - {
-              os: ubuntu-18.04,
+              os: ubuntu-20.04,
               artifact: "build/liblantern.so",
               upload: "Linux",
               fixlib: "chrpath -r '$ORIGIN/.' liblantern.so",
             }
           - {
-              os: ubuntu-18.04,
+              os: ubuntu-20.04,
               artifact: "build/liblantern.so",
               upload: "LinuxNonABI",
               fixlib: "chrpath -r '$ORIGIN/.' liblantern.so",
               pre_cxx11_abi: 1,
             }
           - {
-              os: ubuntu-18.04,
+              os: ubuntu-20.04,
               artifact: "build/liblantern.so",
               upload: "Linux-Cuda-113",
               cuda: "11.3",
@@ -49,7 +49,7 @@ jobs:
               fixlib: "chrpath -r '$ORIGIN/.' liblantern.so",
             }
           - {
-              os: ubuntu-18.04,
+              os: ubuntu-20.04,
               artifact: "build/liblantern.so",
               upload: "LinuxNonABI-Cuda-113",
               cuda: "11.3",
@@ -59,7 +59,7 @@ jobs:
               pre_cxx11_abi: 1,
             }
           - {
-              os: ubuntu-18.04,
+              os: ubuntu-20.04,
               artifact: "build/liblantern.so",
               upload: "Linux-Cuda-102",
               cuda: "10.2",
@@ -68,7 +68,7 @@ jobs:
               fixlib: "chrpath -r '$ORIGIN/.' liblantern.so",
             }
           - {
-              os: ubuntu-18.04,
+              os: ubuntu-20.04,
               artifact: "build/liblantern.so",
               upload: "LinuxNonABI-Cuda-102",
               cuda: "10.2",
@@ -155,7 +155,7 @@ jobs:
 
   upload:
     needs: build
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-20.04
     strategy:
       matrix:
         name:
