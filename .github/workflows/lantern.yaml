@@ -11,6 +11,7 @@ on:
 jobs:
   build:
     runs-on: ${{ matrix.config.os }}
+    container: ${{ matrix.config.container }}
     strategy:
       fail-fast: false
       matrix:
@@ -66,6 +67,7 @@ jobs:
               cuda_patch: "89",
               cudnn: "https://storage.googleapis.com/torch-lantern-builds/cudnn/cudnn-10.2-linux-x64-v7.6.5.32.tgz",
               fixlib: "chrpath -r '$ORIGIN/.' liblantern.so",
+              container: "ubuntu:18.04",
             }
           - {
               os: ubuntu-20.04,
@@ -76,6 +78,7 @@ jobs:
               cudnn: "https://storage.googleapis.com/torch-lantern-builds/cudnn/cudnn-10.2-linux-x64-v7.6.5.32.tgz",
               fixlib: "chrpath -r '$ORIGIN/.' liblantern.so",
               pre_cxx11_abi: 1,
+              container: "ubuntu:18.04"
             }
           - {
               os: windows-2019,
