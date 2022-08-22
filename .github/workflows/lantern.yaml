@@ -106,8 +106,8 @@ jobs:
       - name: Install docker
         if: matrix.config.container != ''
         run: |
-          sudo apt update
-          sudo apt install -y curl
+          apt update
+          apt install -y curl sudo
           curl -fsSL https://get.docker.com -o get-docker.sh
           DRY_RUN=1 sh ./get-docker.sh
 
