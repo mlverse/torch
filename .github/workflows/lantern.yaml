@@ -102,6 +102,11 @@ jobs:
 
       - name: Create environment
         run: cmake -E make_directory ${{runner.workspace}}/torch/lantern/build
+        
+      - name: Install docker
+        run: |
+          curl -fsSL https://get.docker.com -o get-docker.sh
+          DRY_RUN=1 sh ./get-docker.sh
 
       - name: Install CUDA
         if: ${{matrix.config.cuda != ''}}
