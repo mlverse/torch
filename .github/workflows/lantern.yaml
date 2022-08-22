@@ -110,6 +110,7 @@ jobs:
           apt install -y curl sudo libxml2-dev wget
           curl -fsSL https://get.docker.com -o get-docker.sh
           DRY_RUN=1 sh ./get-docker.sh
+          mkdir ${{runner.workspace}}/torch/lantern/build
 
       - name: Install CUDA
         if: ${{matrix.config.cuda != ''}}
