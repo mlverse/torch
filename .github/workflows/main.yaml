@@ -15,20 +15,20 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: ["ubuntu-18.04", "macos-latest", "windows-latest"]
+        os: ["ubuntu-20.04", "macos-latest", "windows-latest"]
         r_version: ["release"]
         include:
-          - os: ubuntu-18.04
+          - os: ubuntu-20.04
             cran: https://demo.rstudiopm.com/all/__linux__/bionic/latest
             install: 0
             r_version: "release"
-          - os: ubuntu-18.04
+          - os: ubuntu-20.04
             install: 1
             r_version: "4.1"
             precxxx11abi: 1
             container: "rstudio/r-base:4.2-centos7"
             cran: https://packagemanager.rstudio.com/all/__linux__/centos7/latest
-          - os: ubuntu-18.04
+          - os: ubuntu-20.04
             cran: https://demo.rstudiopm.com/all/__linux__/bionic/latest
             install: 1
             r_version: "4.0"
@@ -130,7 +130,7 @@ jobs:
         run: docker run --rm --gpus all -e BUILD_LANTERN $DOCKER_TAG sh torch/tools/check.sh
 
   # start-runner:
-  #   runs-on: ubuntu-18.04
+  #   runs-on: ubuntu-20.04
   #   if: ${{ github.ref == 'refs/heads/main' || contains( github.event.pull_request.labels.*.name, 'win-gpu') }}
   #   steps:
   #   - name: Set up Cloud SDK
@@ -181,7 +181,7 @@ jobs:
   # delete-runner:
   #   if: ${{ success() || failure() || cancelled() }}
   #   needs: ['windows-gpu', 'start-runner']
-  #   runs-on: ubuntu-18.04
+  #   runs-on: ubuntu-20.04
   #   steps:
   #   - name: Set up Cloud SDK
   #     uses: google-github-actions/setup-gcloud@v0
