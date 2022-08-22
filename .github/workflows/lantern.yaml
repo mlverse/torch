@@ -110,7 +110,6 @@ jobs:
           apt install -y curl sudo libxml2-dev wget
           curl -fsSL https://get.docker.com -o get-docker.sh
           DRY_RUN=1 sh ./get-docker.sh
-          mkdir ${{runner.workspace}}/torch/lantern/build
 
       - name: Install CUDA
         if: ${{matrix.config.cuda != ''}}
@@ -143,13 +142,14 @@ jobs:
           echo "CUDNN_LIBRARY_PATH=""${CUDA_PATH}\lib\x64""" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
 
       - name: Run cmake
-        working-directory: ${{runner.workspace}}/torch/lantern/build
         run: |
+          mkdir ${{runner.workspace}}/torch/lantern/build
+          cd ${{runner.workspace}}/torch/lantern/build
           cmake ..
 
       - name: Build libs
-        working-directory: ${{runner.workspace}}/torch/lantern/build
         run: |
+          cd ${{runner.workspace}}/torch/lantern/build
           cmake --build . --config Release --parallel 4
           ${{matrix.config.fixlib}}
 
