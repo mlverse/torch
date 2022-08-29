@@ -51,47 +51,8 @@ R7Class <- function(classname = NULL, public = list(), private = list(),
   generator
 }
 
-#' @importFrom rlang env_get
 extract_method <- function(self, name, call = TRUE) {
-
-  # resolve the class environment
-  # every R7 class is registered in the .generators env
-  # so we can find the generator give the class name
-  is_private <- inherits(self, "R7Private")
-  if (is_private) {
-    e <- unclass(self)$pvt
-  } else {
-    e <- .generators[[class(self)[1]]]
-  }
-
-  # gets the object from the class environment
-  o <- env_get(
-    env = e, 
-    nm = name, 
-    inherit = TRUE,
-    default = NULL
-  )
-
-  if (name == "private") {
-    o <- structure(
-      list(
-        env = environment(),
-        pvt = o
-      ),
-      class = c("R7", "R7Private")
-    )
-  }
-  
-  if (!is.function(o)) {
-    return(o)
-  }
-
-  if (is_private) {
-    environment(o) <- unclass(self)$env
-  } else {
-    environment(o) <- rlang::env(.r7_env, self = self, private = self$private)
-  }
-
+  o <- extract_method_c(self, name)
   if (call && isTRUE(attr(o, "active"))) {
     o()
   } else {

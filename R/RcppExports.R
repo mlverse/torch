@@ -11641,6 +11641,10 @@ transpose2 <- function(x) {
     .Call('_torch_transpose2', PACKAGE = 'torchpkg', x)
 }
 
+extract_method_c <- function(self, name) {
+    .Call('_torch_extract_method_c', PACKAGE = 'torchpkg', self, name)
+}
+
 cpp_torch_variable_list <- function(x) {
     .Call('_torch_cpp_torch_variable_list', PACKAGE = 'torchpkg', x)
 }
