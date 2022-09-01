@@ -89,11 +89,6 @@ void cpp_torch_method__backward_self_Tensor_inputs_TensorList(
     torch::Tensor self, torch::TensorList inputs,
     torch::optional::Tensor gradient, torch::optional::bool_t retain_graph,
     torch::bool_t create_graph) {
-  // since backward can allocate a good amount of memory and we can't reliably
-  // call the GC from inside the backward call, it's a good idea to call GC right
-  // before the backward call. Ideally we would call this asynchronously but that
-  // has caused problems.
-  call_r_gc(false);
   backward_is_running = true;
   auto running_sg = makeScopeGuard([] {backward_is_running = false;});
   std::function<void()> backward([&]() {
@@ -401,6 +396,8 @@ void call_r_gc(bool full) {
     Rcpp::Function r_gc("gc");
     r_gc(Rcpp::Named("full") = full);
     R_RunPendingFinalizers();
+    // signal to LibTorch allocator that gc has been called.
+    lantern_set_gc_called(true); 
   } else if (backward_is_running) {
     // When calling backward, we might be running out of memory, thus we would want to
     // call `gc`. However, since backward is called from a background thread, that's 
