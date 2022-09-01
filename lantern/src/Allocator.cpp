@@ -25,13 +25,15 @@ EventLoop<void> delete_tasks;
 // the R gc must be set whenever liblantern is loaded.
 void _lantern_set_call_r_gc(void (*fn)(bool)) { call_r_gc = fn; }
 void _lantern_set_gc_called (bool called) { 
-  if (called) {
+  if (called && delete_tasks.is_running) {
     delete_tasks.stopWhenEmpty();  
   }
 }
 
 void wait_for_gc () { 
-  delete_tasks.run();  
+  if (std::this_thread::get_id() != MAIN_THREAD_ID) {
+    delete_tasks.run();  
+  }
 }
 
 namespace c10 {
