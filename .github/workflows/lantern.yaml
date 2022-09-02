@@ -111,8 +111,6 @@ jobs:
           apt install -y curl sudo libxml2-dev wget
           curl -fsSL https://get.docker.com -o get-docker.sh
           DRY_RUN=1 sh ./get-docker.sh
-          rm -r ${{runner.workspace}}/torch/lantern/build
-          mkdir ${{runner.workspace}}/torch/lantern/build
 
       - name: Install CUDA
         if: ${{matrix.config.cuda != ''}}
@@ -146,12 +144,15 @@ jobs:
 
       - name: Run cmake
         run: |
-          cd ${{runner.workspace}}/torch/lantern/build
+          ls
+          cd lantern
+          mkdir build
+          cd build
           cmake ..
 
       - name: Build libs
         run: |
-          cd ${{runner.workspace}}/torch/lantern/build
+          cd lantern/build
           cmake --build . --config Release --parallel 4
           ${{matrix.config.fixlib}}
 
