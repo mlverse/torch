@@ -121,7 +121,7 @@ SEXP r7_enclos_env (SEXP self, SEXP pvt) {
 #if defined(R_VERSION) && R_VERSION >= R_Version(4, 1, 0)
   SEXP env = PROTECT(R_NewEnv(r7_enclosing_env, 1, 2));
 #else
-  SEXP env = new_env(1, r7_enclosing_env, 2);
+  SEXP env = PROTECT(new_env(1, r7_enclosing_env, 2));
 #endif
   Rf_defineVar(r7_self, self, env);
   Rf_defineVar(r7_private, pvt, env);
