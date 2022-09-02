@@ -99,6 +99,7 @@ SEXP r7_private = Rf_install("private");
 
 SEXP r7_generators = Rcpp::Environment::namespace_env("torch").find(".generators");
 SEXP r7_enclosing_env = Rcpp::Environment::namespace_env("torch").find(".r7_env");
+Rcpp::Function new_env("new.env");
 
 SEXP r7_pvt_class () {
   return Rcpp::CharacterVector({"R7", "R7_private"});
@@ -117,7 +118,11 @@ SEXP r7_get_object_from_env (SEXP env, SEXP name) {
 }
 
 SEXP r7_enclos_env (SEXP self, SEXP pvt) {
+#if defined(R_VERSION) && R_VERSION >= R_Version(4, 1, 0)
   SEXP env = PROTECT(R_NewEnv(r7_enclosing_env, 1, 2));
+#else
+  SEXP env = new_env(1, r7_enclosing_env, 2);
+#endif
   Rf_defineVar(r7_self, self, env);
   Rf_defineVar(r7_private, pvt, env);
   UNPROTECT(1);
