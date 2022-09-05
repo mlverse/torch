@@ -145,6 +145,7 @@ jobs:
       - name: Run cmake
         run: |
           cd lantern
+          mkdir -p build
           cd build
           cmake ..
 
