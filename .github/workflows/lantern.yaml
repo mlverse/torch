@@ -108,9 +108,10 @@ jobs:
         if: matrix.config.container != ''
         run: |
           apt update
-          apt install -y curl sudo libxml2-dev wget
+          apt install -y curl sudo libxml2-dev wget chrpath
           curl -fsSL https://get.docker.com -o get-docker.sh
           DRY_RUN=1 sh ./get-docker.sh
+          mkdir -p lantern/build
 
       - name: Install CUDA
         if: ${{matrix.config.cuda != ''}}
@@ -145,7 +146,6 @@ jobs:
       - name: Run cmake
         run: |
           cd lantern
-          mkdir -p build
           cd build
           cmake ..
 
