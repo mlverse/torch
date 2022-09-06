@@ -453,7 +453,7 @@ r_method_body <- function(decls) {
 
   glue::glue(
     "{r_method_list_of_arguments(decls)}",
-    "args <- append(list(self = self), args)",
+    "args <- c(list(self = self), args)",
     "{r_arguments_expected_types(decls)}",
     "{r_arguments_with_no_default(decls)}",
     "{r_return_types(decls)}",

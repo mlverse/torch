@@ -7,6 +7,7 @@ prepare_method <- function(m, active = FALSE) {
 }
 
 .generators <- new.env(parent = emptyenv())
+.r7_env <- new.env()
 
 #' @importFrom rlang env_bind
 #' @importFrom rlang :=
@@ -50,49 +51,8 @@ R7Class <- function(classname = NULL, public = list(), private = list(),
   generator
 }
 
-
 extract_method <- function(self, name, call = TRUE) {
-
-  # resolve the class environment
-  # every R7 class is registered in the .generators env
-  # so we can find the generator give the class name
-  if (inherits(self, "R7Private")) {
-    e <- unclass(self)$pvt
-  } else {
-    e <- .generators[[class(self)[1]]]
-  }
-
-  # gets the object from the class environment
-  o <- mget(
-    name,
-    envir = e,
-    inherits = TRUE,
-    ifnotfound = list(NULL)
-  )
-  o <- o[[1]]
-
-  if (name == "private") {
-    o <- list(
-      env = environment(),
-      pvt = o
-    )
-    class(o) <- c("R7", "R7Private")
-  }
-
-  if (!is.function(o)) {
-    return(o)
-  }
-
-  if (!inherits(self, "R7Private")) {
-    private <- self$private
-  }
-
-  if (inherits(self, "R7Private")) {
-    environment(o) <- unclass(self)$env
-  } else {
-    environment(o) <- environment()
-  }
-
+  o <- extract_method_c(self, name)
   if (call && isTRUE(attr(o, "active"))) {
     o()
   } else {

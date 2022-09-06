@@ -1,4 +1,4 @@
-branch <- "main"
+branch <- "speed-up-2"
 
 install_config <- list(
   "1.11.0" = list(

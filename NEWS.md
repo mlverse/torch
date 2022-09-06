@@ -1,5 +1,9 @@
 # torch (development version)
 
+- Re-implemented the `$` method for R7 classes in C/C++ to improve speed when calling methods. (#873)
+- Re-implemented garbage collection logic when calling it from inside a `backward()` call. This improves speed because we no longer need to call GC
+everytime backward is called. (#873)
+
 # torch 0.8.1
 
 ## Breaking changes

@@ -15,6 +15,7 @@ class GarbageCollectorCallback : virtual public c10::FreeMemoryCallback {
  public:
   bool Execute() {
     (*call_r_gc)(true);
+    wait_for_gc();
     return true;
   }
 };

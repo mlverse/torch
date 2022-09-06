@@ -14,11 +14,27 @@ const std::thread::id MAIN_THREAD_ID = std::this_thread::get_id();
 uint64_t allocated_memory;
 uint64_t threshold_call_gc;
 std::mutex mtx_allocated;
+std::mutex mtx_gc_called;
+std::condition_variable cv_gc_called;
 
 void (*call_r_gc)(bool) = nullptr;
 
+
+EventLoop<void> delete_tasks;
+
 // the R gc must be set whenever liblantern is loaded.
 void _lantern_set_call_r_gc(void (*fn)(bool)) { call_r_gc = fn; }
+void _lantern_set_gc_called (bool called) { 
+  if (called && delete_tasks.is_running) {
+    delete_tasks.stopWhenEmpty();  
+  }
+}
+
+void wait_for_gc () { 
+  if (std::this_thread::get_id() != MAIN_THREAD_ID) {
+    delete_tasks.run();  
+  }
+}
 
 namespace c10 {
 struct LanternCPUAllocator final : at::Allocator {
@@ -57,7 +73,7 @@ struct LanternCPUAllocator final : at::Allocator {
       // Use R garbage collector and see if we can
       // allocate more memory.
       (*call_r_gc)(true);
-
+      wait_for_gc();
       // then try allocating again!
       data = alloc_cpu(nbytes);
     }

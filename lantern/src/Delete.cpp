@@ -7,10 +7,20 @@
 #include "Function.h"
 #include "lantern/lantern.h"
 #include "utils.hpp"
+#include "AllocatorUtils.h"
+
+extern EventLoop<void> delete_tasks;
 
 template <class T>
 void lantern_delete(void *x) {
-  delete reinterpret_cast<T *>(x);
+  if (!delete_tasks.is_running) {
+    delete reinterpret_cast<T *>(x);  
+  } else {
+    std::packaged_task<void()> task([x]() {
+      delete reinterpret_cast<T *>(x); 
+    });
+    delete_tasks.schedule(std::move(task)); 
+  }
 }
 
 void _lantern_Tensor_delete(void *x) {
