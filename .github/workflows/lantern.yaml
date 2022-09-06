@@ -40,6 +40,7 @@ jobs:
               upload: "LinuxNonABI",
               fixlib: "chrpath -r '$ORIGIN/.' liblantern.so",
               pre_cxx11_abi: 1,
+              container: "ubuntu:18.04",
             }
           - {
               os: ubuntu-20.04,
