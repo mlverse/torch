@@ -2,19 +2,19 @@
 
 #include <set>
 
-inline std::set<std::string> create_set(const std::vector<std::string> v) {
+inline std::set<std::string> create_set(const std::vector<std::string>& v) {
   const std::set<std::string> s(v.begin(), v.end());
   return s;
 }
 
-inline bool is_in(const std::string x, const std::set<std::string> y) {
+inline bool is_in(const std::string& x, const std::set<std::string>& y) {
   return y.find(x) != y.end();
 }
 
 // [[Rcpp::export]]
 std::string cpp_arg_to_torch_type(SEXP obj,
-                                  const std::vector<std::string> expected_types,
-                                  const std::string arg_name) {
+                                  const std::vector<std::string>& expected_types,
+                                  const std::string& arg_name) {
   if (Rf_isSymbol(obj)) {
     return "Missing";
   }
@@ -145,8 +145,8 @@ std::string cpp_arg_to_torch_type(SEXP obj,
   Rcpp::stop("Can't convert argument:" + arg_name);
 }
 
-inline std::string cpp_suffix(const std::vector<std::string> arg_names,
-                              const std::vector<std::string> arg_types) {
+inline std::string cpp_suffix(const std::vector<std::string>& arg_names,
+                              const std::vector<std::string>& arg_types) {
   std::string out;
   int arg_s = arg_names.size();
   for (int i = 0; i < arg_s; i++) {
@@ -157,8 +157,8 @@ inline std::string cpp_suffix(const std::vector<std::string> arg_names,
 }
 
 // [[Rcpp::export]]
-std::string cpp_clean_names(const std::string x,
-                            const std::vector<std::string> r) {
+std::string cpp_clean_names(const std::string& x,
+                            const std::vector<std::string>& r) {
   std::string out = x;
   char replace;
   int r_size = r.size();
@@ -173,10 +173,10 @@ const std::vector<std::string> remove_characters = {
     "'", "\"", "%", "#", ":", ">", "<", ",", " ", "*", "&"};
 
 // [[Rcpp::export]]
-std::string cpp_make_function_name(const std::string method_name,
-                                   const std::vector<std::string> arg_names,
-                                   const std::vector<std::string> arg_types,
-                                   const std::string type) {
+std::string cpp_make_function_name(const std::string& method_name,
+                                   const std::vector<std::string>& arg_names,
+                                   const std::vector<std::string>& arg_types,
+                                   const std::string& type) {
   std::string out = "cpp_torch_" + type + "_" + method_name + "_";
   out += cpp_suffix(arg_names, arg_types);
   out = cpp_clean_names(out, remove_characters);
@@ -184,11 +184,11 @@ std::string cpp_make_function_name(const std::string method_name,
 }
 
 // [[Rcpp::export]]
-std::string create_fn_name(const std::string fun_name,
-                           const std::string fun_type,
-                           const std::vector<std::string> nd_args,
-                           const Rcpp::List args,
-                           const Rcpp::List expected_types) {
+std::string create_fn_name(const std::string& fun_name,
+                           const std::string& fun_type,
+                           const std::vector<std::string>& nd_args,
+                           const Rcpp::List& args,
+                           const Rcpp::List& expected_types) {
   std::vector<std::string> arg_names;
   std::vector<std::string> arg_types;
 
