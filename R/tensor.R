@@ -43,7 +43,7 @@ Tensor <- R7Class(
       invisible(self)
     },
     dim = function() {
-      length(self$size())
+      cpp_tensor_ndim(self)
     },
     size = function(dim) {
       x <- cpp_tensor_dim(self$ptr)
