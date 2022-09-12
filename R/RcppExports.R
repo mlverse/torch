@@ -11505,6 +11505,10 @@ cpp_tensor_dim <- function(x) {
     .Call('_torch_cpp_tensor_dim', PACKAGE = 'torchpkg', x)
 }
 
+cpp_tensor_ndim <- function(x) {
+    .Call('_torch_cpp_tensor_ndim', PACKAGE = 'torchpkg', x)
+}
+
 cpp_tensor_numel <- function(x) {
     .Call('_torch_cpp_tensor_numel', PACKAGE = 'torchpkg', x)
 }
@@ -11639,10 +11643,6 @@ cpp_torch_namespace__store_main_thread_id <- function() {
 
 transpose2 <- function(x) {
     .Call('_torch_transpose2', PACKAGE = 'torchpkg', x)
-}
-
-extract_method_c <- function(self, name) {
-    .Call('_torch_extract_method_c', PACKAGE = 'torchpkg', self, name)
 }
 
 cpp_torch_variable_list <- function(x) {

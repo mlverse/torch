@@ -380,55 +380,55 @@ BEGIN_RCPP
 END_RCPP
 }
 // cpp_arg_to_torch_type
-std::string cpp_arg_to_torch_type(SEXP obj, const std::vector<std::string> expected_types, const std::string arg_name);
+std::string cpp_arg_to_torch_type(SEXP obj, const std::vector<std::string>& expected_types, const std::string& arg_name);
 RcppExport SEXP _torch_cpp_arg_to_torch_type(SEXP objSEXP, SEXP expected_typesSEXP, SEXP arg_nameSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< SEXP >::type obj(objSEXP);
-    Rcpp::traits::input_parameter< const std::vector<std::string> >::type expected_types(expected_typesSEXP);
-    Rcpp::traits::input_parameter< const std::string >::type arg_name(arg_nameSEXP);
+    Rcpp::traits::input_parameter< const std::vector<std::string>& >::type expected_types(expected_typesSEXP);
+    Rcpp::traits::input_parameter< const std::string& >::type arg_name(arg_nameSEXP);
     rcpp_result_gen = Rcpp::wrap(cpp_arg_to_torch_type(obj, expected_types, arg_name));
     return rcpp_result_gen;
 END_RCPP
 }
 // cpp_clean_names
-std::string cpp_clean_names(const std::string x, const std::vector<std::string> r);
+std::string cpp_clean_names(const std::string& x, const std::vector<std::string>& r);
 RcppExport SEXP _torch_cpp_clean_names(SEXP xSEXP, SEXP rSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< const std::string >::type x(xSEXP);
-    Rcpp::traits::input_parameter< const std::vector<std::string> >::type r(rSEXP);
+    Rcpp::traits::input_parameter< const std::string& >::type x(xSEXP);
+    Rcpp::traits::input_parameter< const std::vector<std::string>& >::type r(rSEXP);
     rcpp_result_gen = Rcpp::wrap(cpp_clean_names(x, r));
     return rcpp_result_gen;
 END_RCPP
 }
 // cpp_make_function_name
-std::string cpp_make_function_name(const std::string method_name, const std::vector<std::string> arg_names, const std::vector<std::string> arg_types, const std::string type);
+std::string cpp_make_function_name(const std::string& method_name, const std::vector<std::string>& arg_names, const std::vector<std::string>& arg_types, const std::string& type);
 RcppExport SEXP _torch_cpp_make_function_name(SEXP method_nameSEXP, SEXP arg_namesSEXP, SEXP arg_typesSEXP, SEXP typeSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< const std::string >::type method_name(method_nameSEXP);
-    Rcpp::traits::input_parameter< const std::vector<std::string> >::type arg_names(arg_namesSEXP);
-    Rcpp::traits::input_parameter< const std::vector<std::string> >::type arg_types(arg_typesSEXP);
-    Rcpp::traits::input_parameter< const std::string >::type type(typeSEXP);
+    Rcpp::traits::input_parameter< const std::string& >::type method_name(method_nameSEXP);
+    Rcpp::traits::input_parameter< const std::vector<std::string>& >::type arg_names(arg_namesSEXP);
+    Rcpp::traits::input_parameter< const std::vector<std::string>& >::type arg_types(arg_typesSEXP);
+    Rcpp::traits::input_parameter< const std::string& >::type type(typeSEXP);
     rcpp_result_gen = Rcpp::wrap(cpp_make_function_name(method_name, arg_names, arg_types, type));
     return rcpp_result_gen;
 END_RCPP
 }
 // create_fn_name
-std::string create_fn_name(const std::string fun_name, const std::string fun_type, const std::vector<std::string> nd_args, const Rcpp::List args, const Rcpp::List expected_types);
+std::string create_fn_name(const std::string& fun_name, const std::string& fun_type, const std::vector<std::string>& nd_args, const Rcpp::List& args, const Rcpp::List& expected_types);
 RcppExport SEXP _torch_create_fn_name(SEXP fun_nameSEXP, SEXP fun_typeSEXP, SEXP nd_argsSEXP, SEXP argsSEXP, SEXP expected_typesSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< const std::string >::type fun_name(fun_nameSEXP);
-    Rcpp::traits::input_parameter< const std::string >::type fun_type(fun_typeSEXP);
-    Rcpp::traits::input_parameter< const std::vector<std::string> >::type nd_args(nd_argsSEXP);
-    Rcpp::traits::input_parameter< const Rcpp::List >::type args(argsSEXP);
-    Rcpp::traits::input_parameter< const Rcpp::List >::type expected_types(expected_typesSEXP);
+    Rcpp::traits::input_parameter< const std::string& >::type fun_name(fun_nameSEXP);
+    Rcpp::traits::input_parameter< const std::string& >::type fun_type(fun_typeSEXP);
+    Rcpp::traits::input_parameter< const std::vector<std::string>& >::type nd_args(nd_argsSEXP);
+    Rcpp::traits::input_parameter< const Rcpp::List& >::type args(argsSEXP);
+    Rcpp::traits::input_parameter< const Rcpp::List& >::type expected_types(expected_typesSEXP);
     rcpp_result_gen = Rcpp::wrap(create_fn_name(fun_name, fun_type, nd_args, args, expected_types));
     return rcpp_result_gen;
 END_RCPP
@@ -37371,6 +37371,17 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// cpp_tensor_ndim
+int cpp_tensor_ndim(torch::Tensor x);
+RcppExport SEXP _torch_cpp_tensor_ndim(SEXP xSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< torch::Tensor >::type x(xSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_tensor_ndim(x));
+    return rcpp_result_gen;
+END_RCPP
+}
 // cpp_tensor_numel
 int cpp_tensor_numel(Rcpp::XPtr<torch::Tensor> x);
 RcppExport SEXP _torch_cpp_tensor_numel(SEXP xSEXP) {
@@ -37754,18 +37765,6 @@ BEGIN_RCPP
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< Rcpp::List >::type x(xSEXP);
     rcpp_result_gen = Rcpp::wrap(transpose2(x));
-    return rcpp_result_gen;
-END_RCPP
-}
-// extract_method_c
-SEXP extract_method_c(SEXP self, SEXP name);
-RcppExport SEXP _torch_extract_method_c(SEXP selfSEXP, SEXP nameSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< SEXP >::type self(selfSEXP);
-    Rcpp::traits::input_parameter< SEXP >::type name(nameSEXP);
-    rcpp_result_gen = Rcpp::wrap(extract_method_c(self, name));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -40704,6 +40703,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_torch_cpp_as_array", (DL_FUNC) &_torch_cpp_as_array, 1},
     {"_torch_cpp_tensor_element_size", (DL_FUNC) &_torch_cpp_tensor_element_size, 1},
     {"_torch_cpp_tensor_dim", (DL_FUNC) &_torch_cpp_tensor_dim, 1},
+    {"_torch_cpp_tensor_ndim", (DL_FUNC) &_torch_cpp_tensor_ndim, 1},
     {"_torch_cpp_tensor_numel", (DL_FUNC) &_torch_cpp_tensor_numel, 1},
     {"_torch_cpp_tensor_device", (DL_FUNC) &_torch_cpp_tensor_device, 1},
     {"_torch_cpp_tensor_is_undefined", (DL_FUNC) &_torch_cpp_tensor_is_undefined, 1},
@@ -40738,7 +40738,6 @@ static const R_CallMethodDef CallEntries[] = {
     {"_torch_cpp_torch_namespace__use_cudnn_rnn_flatten_weight", (DL_FUNC) &_torch_cpp_torch_namespace__use_cudnn_rnn_flatten_weight, 0},
     {"_torch_cpp_torch_namespace__store_main_thread_id", (DL_FUNC) &_torch_cpp_torch_namespace__store_main_thread_id, 0},
     {"_torch_transpose2", (DL_FUNC) &_torch_transpose2, 1},
-    {"_torch_extract_method_c", (DL_FUNC) &_torch_extract_method_c, 2},
     {"_torch_cpp_torch_variable_list", (DL_FUNC) &_torch_cpp_torch_variable_list, 1},
     {"_torch_cpp_variable_list_to_r_list", (DL_FUNC) &_torch_cpp_variable_list_to_r_list, 1},
     {"_torch_set_xptr_address", (DL_FUNC) &_torch_set_xptr_address, 2},
