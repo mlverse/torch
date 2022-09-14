@@ -477,7 +477,7 @@ test_that("modules method", {
   )
 })
 
-test_that("lenght for sequential modules", {
+test_that("length for sequential modules", {
   m <- nn_sequential(
     nn_conv2d(10, 10, c(5, 5)),
     nn_conv2d(10, 10, c(5, 5))
