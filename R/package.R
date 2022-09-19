@@ -66,6 +66,7 @@ globalVariables(c("..", "self", "private", "N"))
         .generator_null$set_current_seed(seed = sample(1e5, 1))
 
         .compilation_unit <<- cpp_jit_compilation_unit()
+        initialize_pool()
       },
       error = function(e) {
         cli::cli_warn(c(

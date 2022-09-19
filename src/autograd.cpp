@@ -54,6 +54,13 @@ bool cpp_tensor_requires_grad(torch::Tensor self) {
 }
 
 void call_r_gc(bool full);
+  
+std::shared_ptr<ThreadPool<void>> pool;
+
+// [[Rcpp::export]]
+void initialize_pool () {
+  pool = std::make_shared<ThreadPool<void>>(5);
+}
 
 namespace {
 
@@ -64,19 +71,20 @@ std::atomic<bool> backward_is_running(false);
 void schedule_backward_task(std::packaged_task<void()>&& task) {
   if (std::this_thread::get_id() == main_thread_id()) {
     // NOTE: pre-C++-14 workaround for "moving" `task` into a lambda, not pretty
-    auto const task_sp =
-        std::make_shared<std::packaged_task<void()>>(std::move(task));
-
-    auto const thr_sp = std::make_shared<std::thread>();
-    *thr_sp = std::thread([task_sp, thr_sp] {
-      auto thr_join_sg = makeScopeGuard([thr_sp] {
-        gTasks.schedule(std::packaged_task<void*()>([thr_sp]() -> void* {
-          thr_sp->join();
-          return nullptr;
-        }));
-      });
-      (*task_sp)();
-    });
+    // auto const task_sp =
+    //     std::make_shared<std::packaged_task<void()>>(std::move(task));
+    // 
+    // auto const thr_sp = std::make_shared<std::thread>();
+    // *thr_sp = std::thread([task_sp, thr_sp] {
+    //   auto thr_join_sg = makeScopeGuard([thr_sp] {
+    //     gTasks.schedule(std::packaged_task<void*()>([thr_sp]() -> void* {
+    //       thr_sp->join();
+    //       return nullptr;
+    //     }));
+    //   });
+    //   (*task_sp)();
+    // });
+    pool->push(std::move(task));
   } else {
     gBackwardTasks.schedule(std::move(task));
   }
