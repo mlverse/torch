@@ -55,11 +55,11 @@ bool cpp_tensor_requires_grad(torch::Tensor self) {
 
 void call_r_gc(bool full);
   
-std::shared_ptr<ThreadPool<void>> pool;
+ThreadPool<void>* pool;
 
 // [[Rcpp::export]]
 void initialize_pool () {
-  pool = std::make_shared<ThreadPool<void>>(5);
+  pool = new ThreadPool<void>(5);
 }
 
 namespace {
