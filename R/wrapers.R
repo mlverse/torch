@@ -437,7 +437,7 @@ torch_norm <- function(self, p = 2L, dim, keepdim = FALSE, dtype) {
       dtype = dtype$ptr
     )
 
-    return(Tensor$new(ptr = o))
+    return(o)
   }
 
   if (is.numeric(unlist(dim))) {

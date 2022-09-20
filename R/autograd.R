@@ -103,7 +103,7 @@ with_enable_grad <- function(code) {
 
 Tensor$set("active", "grad", function(x) {
   if (missing(x)) {
-    Tensor$new(ptr = cpp_tensor_grad(self$ptr))
+    cpp_tensor_grad(self)
   } else {
     self$set_grad_(x)
     invisible(x)
