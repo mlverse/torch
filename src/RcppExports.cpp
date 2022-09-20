@@ -85,15 +85,6 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
-// initialize_pool
-void initialize_pool();
-RcppExport SEXP _torch_initialize_pool() {
-BEGIN_RCPP
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    initialize_pool();
-    return R_NilValue;
-END_RCPP
-}
 // cpp_torch_method__backward_self_Tensor_inputs_TensorList
 void cpp_torch_method__backward_self_Tensor_inputs_TensorList(torch::Tensor self, torch::TensorList inputs, torch::optional::Tensor gradient, torch::optional::bool_t retain_graph, torch::bool_t create_graph);
 RcppExport SEXP _torch_cpp_torch_method__backward_self_Tensor_inputs_TensorList(SEXP selfSEXP, SEXP inputsSEXP, SEXP gradientSEXP, SEXP retain_graphSEXP, SEXP create_graphSEXP) {
@@ -37843,7 +37834,6 @@ static const R_CallMethodDef CallEntries[] = {
     {"_torch_cpp_tensor_grad", (DL_FUNC) &_torch_cpp_tensor_grad, 1},
     {"_torch_cpp_tensor_set_grad_", (DL_FUNC) &_torch_cpp_tensor_set_grad_, 2},
     {"_torch_cpp_tensor_requires_grad", (DL_FUNC) &_torch_cpp_tensor_requires_grad, 1},
-    {"_torch_initialize_pool", (DL_FUNC) &_torch_initialize_pool, 0},
     {"_torch_cpp_torch_method__backward_self_Tensor_inputs_TensorList", (DL_FUNC) &_torch_cpp_torch_method__backward_self_Tensor_inputs_TensorList, 5},
     {"_torch_cpp_autograd_backward", (DL_FUNC) &_torch_cpp_autograd_backward, 4},
     {"_torch_cpp_tensor_register_hook", (DL_FUNC) &_torch_cpp_tensor_register_hook, 2},
