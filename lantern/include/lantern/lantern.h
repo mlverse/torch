@@ -2300,6 +2300,24 @@ HOST_API void lantern_set_gc_called (bool called)
   LANTERN_HOST_HANDLER;
 }
 
+LANTERN_API void* (LANTERN_PTR _lantern_torch_show_config) ();
+HOST_API void* lantern_torch_show_config () 
+{
+  LANTERN_CHECK_LOADED
+  auto ret = _lantern_torch_show_config();
+  LANTERN_HOST_HANDLER;
+  return ret;
+}
+
+LANTERN_API void* (LANTERN_PTR _lantern_torch_parallel_info) ();
+HOST_API void* lantern_torch_parallel_info () 
+{
+  LANTERN_CHECK_LOADED
+  auto ret = _lantern_torch_parallel_info();
+  LANTERN_HOST_HANDLER;
+  return ret;
+}
+
   /* Autogen Headers -- Start */
   LANTERN_API void* (LANTERN_PTR _lantern__cast_byte_tensor_bool)(void* self, void* non_blocking);
   HOST_API void* lantern__cast_byte_tensor_bool(void* self, void* non_blocking) { LANTERN_CHECK_LOADED void* ret = _lantern__cast_byte_tensor_bool(self, non_blocking); LANTERN_HOST_HANDLER return ret; }
@@ -8336,6 +8354,8 @@ LOAD_SYMBOL(_lantern_cuda_get_runtime_version);
 LOAD_SYMBOL(_set_delete_lambda_fun);
 LOAD_SYMBOL(_lantern_string_size);
 LOAD_SYMBOL(_lantern_set_gc_called);
+LOAD_SYMBOL(_lantern_torch_show_config);
+LOAD_SYMBOL(_lantern_torch_parallel_info);
   /* Autogen Symbols -- Start */
   LOAD_SYMBOL(_lantern__cast_byte_tensor_bool)
   LOAD_SYMBOL(_lantern__cast_char_tensor_bool)

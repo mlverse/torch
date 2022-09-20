@@ -254,3 +254,13 @@ void *_lantern_nn_functional_pad_circular(void *input, void *padding) {
   return make_raw::Tensor(out);
   LANTERN_FUNCTION_END
 }
+
+void* _lantern_torch_show_config() {
+  auto result = torch::show_config();
+  return make_raw::string(result);
+}
+
+void* _lantern_torch_parallel_info () {
+  auto result = at::get_parallel_info();
+  return make_raw::string(result);
+}

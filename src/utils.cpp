@@ -90,3 +90,13 @@ Rcpp::List transpose2(Rcpp::List x) {
 
   return ret;
 }
+
+// [[Rcpp::export]]
+torch::string cpp_torch_show_config () {
+  return torch::string(lantern_torch_show_config());
+}
+
+// [[Rcpp::export]]
+torch::string cpp_torch_parallel_info () {
+  return torch::string(lantern_torch_parallel_info());
+}

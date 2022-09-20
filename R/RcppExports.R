@@ -11645,6 +11645,14 @@ transpose2 <- function(x) {
     .Call('_torch_transpose2', PACKAGE = 'torchpkg', x)
 }
 
+cpp_torch_show_config <- function() {
+    .Call('_torch_cpp_torch_show_config', PACKAGE = 'torchpkg')
+}
+
+cpp_torch_parallel_info <- function() {
+    .Call('_torch_cpp_torch_parallel_info', PACKAGE = 'torchpkg')
+}
+
 cpp_torch_variable_list <- function(x) {
     .Call('_torch_cpp_torch_variable_list', PACKAGE = 'torchpkg', x)
 }
