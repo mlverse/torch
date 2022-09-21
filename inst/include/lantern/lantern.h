@@ -2318,6 +2318,14 @@ HOST_API void* lantern_torch_parallel_info ()
   return ret;
 }
 
+LANTERN_API void (LANTERN_PTR _lantern_benchmark_debug) ();
+HOST_API void lantern_benchmark_debug () 
+{
+  LANTERN_CHECK_LOADED
+  _lantern_benchmark_debug();
+  LANTERN_HOST_HANDLER;
+}
+
   /* Autogen Headers -- Start */
   LANTERN_API void* (LANTERN_PTR _lantern__cast_byte_tensor_bool)(void* self, void* non_blocking);
   HOST_API void* lantern__cast_byte_tensor_bool(void* self, void* non_blocking) { LANTERN_CHECK_LOADED void* ret = _lantern__cast_byte_tensor_bool(self, non_blocking); LANTERN_HOST_HANDLER return ret; }
@@ -8356,6 +8364,7 @@ LOAD_SYMBOL(_lantern_string_size);
 LOAD_SYMBOL(_lantern_set_gc_called);
 LOAD_SYMBOL(_lantern_torch_show_config);
 LOAD_SYMBOL(_lantern_torch_parallel_info);
+LOAD_SYMBOL(_lantern_benchmark_debug);
   /* Autogen Symbols -- Start */
   LOAD_SYMBOL(_lantern__cast_byte_tensor_bool)
   LOAD_SYMBOL(_lantern__cast_char_tensor_bool)

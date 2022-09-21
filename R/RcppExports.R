@@ -11653,6 +11653,10 @@ cpp_torch_parallel_info <- function() {
     .Call('_torch_cpp_torch_parallel_info', PACKAGE = 'torchpkg')
 }
 
+cpp_benchmark_debug <- function() {
+    invisible(.Call('_torch_cpp_benchmark_debug', PACKAGE = 'torchpkg'))
+}
+
 cpp_torch_variable_list <- function(x) {
     .Call('_torch_cpp_torch_variable_list', PACKAGE = 'torchpkg', x)
 }

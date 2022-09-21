@@ -264,3 +264,139 @@ void* _lantern_torch_parallel_info () {
   auto result = at::get_parallel_info();
   return make_raw::string(result);
 }
+
+#include <thread>
+#include <future>
+
+
+
+namespace mypool {
+
+template <typename T>
+class EventLoop {
+public:
+  EventLoop() = default;
+  ~EventLoop() {
+    std::unique_lock<std::mutex> lock(mtx_);
+    std::packaged_task<T()> fn;
+    while (!tasks_.empty()){
+      fn = std::move(tasks_.front());
+      tasks_.pop_front();
+      if (fn.valid()) {
+        fn();  
+      }
+    }
+  }
+  void run() {
+    while (true) {
+      std::packaged_task<T()> fn;
+      {
+        std::unique_lock<std::mutex> lock(mtx_);
+        if (tasks_.empty()) {
+          cv_.wait(lock, [this] { return !tasks_.empty(); });
+        }
+        fn = std::move(tasks_.front());
+        tasks_.pop_front();
+      }
+      if (!fn.valid()) {
+        // signalled to stop the current run
+        return;
+      }
+      fn();
+    }
+  }
+  void schedule(std::packaged_task<T()>&& task) {
+    {
+      std::unique_lock<std::mutex> lock(mtx_);
+      tasks_.emplace_front(std::move(task));
+    }
+    cv_.notify_one();
+  }
+  void stopWhenEmpty() {
+    {
+      std::unique_lock<std::mutex> lock(mtx_);
+      tasks_.emplace_back();
+    }
+    cv_.notify_one();
+  }
+  
+private:
+  std::mutex mtx_;
+  std::condition_variable cv_;
+  std::deque<std::packaged_task<T()>> tasks_;
+};
+
+template<typename T>
+class ThreadPool {
+public:
+  EventLoop<T> event_loop;
+  std::vector<std::thread> threads;
+  ThreadPool (int n_threads = 5) {
+    for(int i = 0; i < n_threads; i++) {
+      threads.push_back(std::thread([this] () {
+        this->event_loop.run();
+      }));
+    }
+  }
+  void push (std::packaged_task<T()>&& task) {
+    this->event_loop.schedule(std::move(task));
+  }
+};
+
+template <typename F>
+class ScopeGuard {
+public:
+  explicit ScopeGuard(F&& f) noexcept : f_(std::forward<F>(f)) {}
+  ~ScopeGuard() noexcept { f_(); }
+  
+private:
+  typename std::decay<F>::type f_;
+};
+
+// TODO:
+// create a factory function for ScopeGuard that disallows the returned
+// ScopeGuard object to be discarded immediately (but we need to do so in a
+// portable manner, by using the [[nodiscard]] attribute if possible, or
+// whatever its equivalent may be in other compilers that need to build {torch}
+// but don't support [[nodiscard]] yet)
+template <typename F>
+ScopeGuard<F> makeScopeGuard(F&& f) {
+  return ScopeGuard<F>(std::forward<F>(f));
+}
+
+auto pool = new ThreadPool<void>(5);
+EventLoop<void*> gTasks;
+}
+
+void _lantern_benchmark_debug () {
+  
+  auto start = std::chrono::system_clock::now();
+  
+  auto w = torch::randn({784, 512}).requires_grad_(true);
+  auto x = torch::randn({32, 784});
+  
+  for (int i=0; i<2000; i++) {
+    
+    auto loss = torch::sum(torch::mm(x, w));
+    auto task = std::packaged_task<void()>([loss] () {
+      auto sg = mypool::makeScopeGuard([] { mypool::gTasks.stopWhenEmpty(); });
+      loss.backward();
+    });
+    auto fut = task.get_future();
+    mypool::pool->push(std::move(task));
+    // auto th = std::thread([loss] () {
+    //   auto sg = mypool::makeScopeGuard([] { mypool::gTasks.stopWhenEmpty(); });
+    //   loss.backward();
+    // });
+    mypool::gTasks.run();
+    fut.get();
+    w.grad().zero_();
+  }
+  
+  auto end = std::chrono::system_clock::now();
+  auto elapsed =
+    std::chrono::duration_cast<std::chrono::milliseconds>(end - start);
+  
+  std::cout << elapsed.count() << std::endl;
+  
+}
