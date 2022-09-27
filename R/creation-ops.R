@@ -249,16 +249,11 @@ torch_arange <- function(start, end, step = 1, dtype = NULL, layout = torch_stri
     )
   )
   args$start <- start
-
-  eps <- if (is.null(dtype) || ((!dtype == torch_float32()) && (!dtype == torch_float64()))) {
-    torch_finfo(torch_get_default_dtype())$eps
-  } else {
-    torch_finfo(dtype)$eps
-  }
-  args$end <- end + sign(step) * eps
-
+  args$end <- torch_nextafter(end, end + sign(step))
   args$step <- step
-  do.call(.torch_arange, args)
+  
+  ret <- do.call(.torch_arange, args)
+  ret
 }
 
 #' @rdname torch_range
