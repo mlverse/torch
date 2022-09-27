@@ -132,6 +132,12 @@ test_that("arange", {
 
   x <- torch_arange(0, 1, 1, dtype = torch_int64())
   expect_equal(torch_iinfo(x$dtype)$bits, 64)
+  
+  x <- torch_arange(torch_tensor(1), torch_tensor(10), torch_tensor(1))
+  expect_equal(length(x), 10)
+  
+  x <- torch_arange(torch_tensor(10), torch_tensor(1), torch_tensor(-1))
+  expect_equal(length(x), 10)
 
   # deprecated
   expect_warning(x <- torch_range(1, 9))
