@@ -68,6 +68,12 @@
     <a class="dropdown-item" href="../articles/examples/dataset.html">dataset</a>
   </div>
 </li>
+<li class="nav-item dropdown">
+  <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-advanced">Advanced</a>
+  <div class="dropdown-menu" aria-labelledby="dropdown-advanced">
+    <a class="dropdown-item" href="../articles/memory-management.html">Memory management</a>
+  </div>
+</li>
 <li class="nav-item">
   <a class="nav-link" href="../reference/index.html">Reference</a>
 </li>
@@ -131,12 +137,12 @@
 <span><span class="fu"><a href="../reference/torch_tensor.html">torch_tensor</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/array.html" class="external-link">array</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html" class="external-link">runif</a></span><span class="op">(</span><span class="fl">12</span><span class="op">)</span>, dim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">2</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; torch_tensor</span></span>
 <span><span class="co">#&gt; (1,.,.) = </span></span>
-<span><span class="co">#&gt;   0.7232  0.9049  0.0773</span></span>
-<span><span class="co">#&gt;   0.5858  0.9664  0.0904</span></span>
+<span><span class="co">#&gt;   0.7377  0.2927  0.6361</span></span>
+<span><span class="co">#&gt;   0.3912  0.6016  0.1336</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; (2,.,.) = </span></span>
-<span><span class="co">#&gt;   0.0512  0.6654  0.2980</span></span>
-<span><span class="co">#&gt;   0.1522  0.6962  0.1886</span></span>
+<span><span class="co">#&gt;   0.9887  0.8466  0.1180</span></span>
+<span><span class="co">#&gt;   0.6438  0.9924  0.8375</span></span>
 <span><span class="co">#&gt; [ CPUFloatType{2,2,3} ]</span></span></code></pre></div>
 <p>By default, we will create tensors in the <code>cpu</code> device, converting their R datatype to the corresponding torch <code>dtype</code>.</p>
 <blockquote>
@@ -170,11 +176,11 @@
 <code class="sourceCode R"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/torch_randn.html">torch_randn</a></span><span class="op">(</span><span class="fl">5</span>, <span class="fl">3</span><span class="op">)</span></span>
 <span><span class="va">x</span></span>
 <span><span class="co">#&gt; torch_tensor</span></span>
-<span><span class="co">#&gt;  0.9905 -0.9980  0.6092</span></span>
-<span><span class="co">#&gt; -0.9845 -0.5720 -0.5587</span></span>
-<span><span class="co">#&gt; -0.4978 -0.4439  1.4587</span></span>
-<span><span class="co">#&gt;  0.9633  0.8858  0.1360</span></span>
-<span><span class="co">#&gt; -0.4114  0.1178  1.3480</span></span>
+<span><span class="co">#&gt; -0.4505  1.4875 -0.0165</span></span>
+<span><span class="co">#&gt;  0.5212  0.7798  1.1962</span></span>
+<span><span class="co">#&gt;  0.8709  1.1348 -1.3253</span></span>
+<span><span class="co">#&gt;  0.2533  0.8170 -0.9843</span></span>
+<span><span class="co">#&gt;  0.3109  0.2086 -0.8738</span></span>
 <span><span class="co">#&gt; [ CPUFloatType{5,3} ]</span></span></code></pre></div>
 <p>Another example is <code>torch_ones</code>, which creates a tensor filled with ones.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">

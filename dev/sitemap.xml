@@ -40,6 +40,9 @@
     <loc>https://torch.mlverse.org/docs/dev/articles/loading-data.html</loc>
   </url>
   <url>
+    <loc>https://torch.mlverse.org/docs/dev/articles/memory-management.html</loc>
+  </url>
+  <url>
     <loc>https://torch.mlverse.org/docs/dev/articles/python-to-r.html</loc>
   </url>
   <url>
@@ -131,6 +134,9 @@
   </url>
   <url>
     <loc>https://torch.mlverse.org/docs/dev/reference/cuda_runtime_version.html</loc>
+  </url>
+  <url>
+    <loc>https://torch.mlverse.org/docs/dev/reference/cuda_synchronize.html</loc>
   </url>
   <url>
     <loc>https://torch.mlverse.org/docs/dev/reference/dataloader.html</loc>
