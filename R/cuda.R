@@ -19,6 +19,19 @@ cuda_device_count <- function() {
   cpp_cuda_device_count()
 }
 
+#' Waits for all kernels in all streams on a CUDA device to complete.
+#'
+#' @param device device for which to synchronize. It uses the current device
+#'  given by [cuda_current_device()] if no device is specified.
+#'
+#' @export
+cuda_synchronize <- function(device = NULL) {
+  if (is.null(device)) {
+    device <- -1L
+  }
+  cpp_cuda_synchronize(device)
+}
+
 #' Returns the major and minor CUDA capability of `device`
 #'
 #' @param device Integer value of the CUDA device to return capabilities of.

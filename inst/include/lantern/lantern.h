@@ -2328,7 +2328,16 @@ HOST_API void lantern_benchmark_debug ()
 
 LANTERN_API void (LANTERN_PTR _lantern_set_cuda_allocator_thresholds) (double reserved_rate, double allocated_rate, double allocated_reserved_rate);
 HOST_API void lantern_set_cuda_allocator_thresholds (double reserved_rate, double allocated_rate, double allocated_reserved_rate) {
+  LANTERN_CHECK_LOADED
   _lantern_set_cuda_allocator_thresholds(reserved_rate, allocated_rate, allocated_reserved_rate);
+  LANTERN_HOST_HANDLER;
+}
+
+LANTERN_API void (LANTERN_PTR _lantern_cuda_synchronize) (int device_index);
+HOST_API void lantern_cuda_synchronize (int device_index) {
+  LANTERN_CHECK_LOADED
+  _lantern_cuda_synchronize (device_index);
+  LANTERN_HOST_HANDLER;
 }
 
   /* Autogen Headers -- Start */
@@ -8371,6 +8380,7 @@ LOAD_SYMBOL(_lantern_torch_show_config);
 LOAD_SYMBOL(_lantern_torch_parallel_info);
 LOAD_SYMBOL(_lantern_benchmark_debug);
 LOAD_SYMBOL(_lantern_set_cuda_allocator_thresholds);
+LOAD_SYMBOL(_lantern_cuda_synchronize);
   /* Autogen Symbols -- Start */
   LOAD_SYMBOL(_lantern__cast_byte_tensor_bool)
   LOAD_SYMBOL(_lantern__cast_char_tensor_bool)

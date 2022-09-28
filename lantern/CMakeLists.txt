@@ -113,7 +113,7 @@ if(CCACHE_FOUND)
 else()
     message("-- ccache not found.")
 endif(CCACHE_FOUND)
-
+set(USE_MKL 0)
 find_package(Torch REQUIRED)
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${TORCH_CXX_FLAGS}")
 
@@ -192,6 +192,7 @@ target_include_directories(lantern PUBLIC
 )
 
 target_link_libraries(lantern ${TORCH_LIBRARIES})
+
 set_property(TARGET lantern PROPERTY CXX_STANDARD 17)
 
 ############################################################

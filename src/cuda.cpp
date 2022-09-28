@@ -7,6 +7,9 @@ bool cpp_cuda_is_available() { return lantern_cuda_is_available(); }
 int cpp_cuda_device_count() { return lantern_cuda_device_count(); }
 
 // [[Rcpp::export]]
+void cpp_cuda_synchronize(int device) {lantern_cuda_synchronize(device); }
+
+// [[Rcpp::export]]
 int64_t cpp_cuda_current_device() { return lantern_cuda_current_device(); }
 
 // [[Rcpp::export]]
