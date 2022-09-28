@@ -1,6 +1,6 @@
 context("utils-data-sampler")
 
-test_that("sampler's lenght", {
+test_that("sampler's length", {
   x <- torch_randn(1000, 10)
   y <- torch_randn(1000)
   data <- tensor_dataset(x, y)

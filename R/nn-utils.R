@@ -4,7 +4,7 @@ list_with_default <- function(out_size, defaults) {
   }
 
   if (length(defaults) >= length(out_size)) {
-    value_error("Input dimension should be at least {lenght(out_size) + 1}.")
+    value_error("Input dimension should be at least {length(out_size) + 1}.")
   }
 
   defaults <- utils::tail(defaults, length(out_size))

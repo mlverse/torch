@@ -249,14 +249,7 @@ torch_arange <- function(start, end, step = 1, dtype = NULL, layout = torch_stri
     )
   )
   args$start <- start
-
-  eps <- if (is.null(dtype) || ((!dtype == torch_float32()) && (!dtype == torch_float64()))) {
-    torch_finfo(torch_get_default_dtype())$eps
-  } else {
-    torch_finfo(dtype)$eps
-  }
-  args$end <- end + sign(step) * eps
-
+  args$end <- torch_nextafter(end, end + sign(step))
   args$step <- step
   do.call(.torch_arange, args)
 }
@@ -384,11 +377,11 @@ torch_full_like <- function(input, fill_value, dtype = NULL, layout = torch_stri
 #' @export
 torch_scalar_tensor <- function(value, dtype = NULL, device = NULL, requires_grad = FALSE) {
   if (is_torch_tensor(value) && !is.null(value$shape) && sum(value$shape) > 1) {
-    value_error("values must be lenght 1")
+    value_error("values must be length 1")
   }
 
   if (!is_torch_tensor(value) && length(value) > 1) {
-    value_error("value must be a lenght 1 vector")
+    value_error("value must be a length 1 vector")
   }
 
   if (is_torch_tensor(value)) {

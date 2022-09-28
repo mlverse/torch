@@ -55,6 +55,9 @@ torch_logical_not <- function(self) {
 torch_bartlett_window <- function(window_length, periodic = TRUE, dtype = NULL,
                                   layout = torch_strided(), device = NULL,
                                   requires_grad = FALSE) {
+  if (is.null(dtype)) {
+    dtype <- torch_float()
+  }
   opt <- torch_tensor_options(
     dtype = dtype, layout = layout, device = device,
     requires_grad = requires_grad
@@ -69,6 +72,9 @@ torch_bartlett_window <- function(window_length, periodic = TRUE, dtype = NULL,
 torch_blackman_window <- function(window_length, periodic = TRUE, dtype = NULL,
                                   layout = torch_strided(), device = NULL,
                                   requires_grad = FALSE) {
+  if (is.null(dtype)) {
+    dtype <- torch_float()
+  }
   opt <- torch_tensor_options(
     dtype = dtype, layout = layout, device = device,
     requires_grad = requires_grad
@@ -83,6 +89,9 @@ torch_blackman_window <- function(window_length, periodic = TRUE, dtype = NULL,
 torch_hamming_window <- function(window_length, periodic = TRUE, alpha = 0.54,
                                  beta = 0.46, dtype = NULL, layout = torch_strided(),
                                  device = NULL, requires_grad = FALSE) {
+  if (is.null(dtype)) {
+    dtype <- torch_float()
+  }
   opt <- torch_tensor_options(
     dtype = dtype, layout = layout, device = device,
     requires_grad = requires_grad
@@ -397,6 +406,9 @@ torch_dequantize <- function(tensor) {
 #' @rdname torch_kaiser_window
 torch_kaiser_window <- function(window_length, periodic, beta, dtype = torch_float(),
                                 layout = NULL, device = NULL, requires_grad = NULL) {
+  if (is.null(dtype)) {
+    dtype <- torch_float()
+  }
   options <- torch_tensor_options(
     dtype = dtype, layout = layout, device = device,
     requires_grad = requires_grad

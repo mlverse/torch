@@ -22,7 +22,7 @@ Sampler <- R6::R6Class(
 #' Samplers can be used with [dataloader()] when creating batches from a torch
 #' [dataset()].
 #' 
-#' A sampler must implement the `.iter` and `.lenght()` methods.
+#' A sampler must implement the `.iter` and `.length()` methods.
 #' - `initialize` takes in a `data_source`. In general this is a [dataset()].
 #' - `.iter` returns a function that returns a dataset index everytime it's called.
 #' - `.length` returns the maximum number of samples that can be retrieved from
