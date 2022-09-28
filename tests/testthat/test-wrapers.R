@@ -325,3 +325,7 @@ test_that("multinomial works", {
     torch_ones(10)
   )
 })
+
+test_that("blackman_window", {
+  expect_tensor_shape(torch_blackman_window(window_length = 2), 2)
+})
