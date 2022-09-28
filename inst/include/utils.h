@@ -83,6 +83,23 @@ class EventLoop {
   std::deque<std::packaged_task<T()>> tasks_;
 };
 
+template<typename T>
+class ThreadPool {
+public:
+  EventLoop<T> event_loop;
+  std::vector<std::thread> threads;
+  ThreadPool (int n_threads = 5) {
+    for(int i = 0; i < n_threads; i++) {
+      threads.push_back(std::thread([this] () {
+        this->event_loop.run();
+      }));
+    }
+  }
+  void push (std::packaged_task<T()>&& task) {
+    this->event_loop.schedule(std::move(task));
+  }
+};
+
 template <class type>
 Rcpp::XPtr<type> make_xptr(type x) {
   auto* out = new type(x);

@@ -349,6 +349,18 @@ BEGIN_RCPP
     return R_NilValue;
 END_RCPP
 }
+// cpp_set_cuda_allocator_allocator_thresholds
+void cpp_set_cuda_allocator_allocator_thresholds(double reserved_rate, double allocated_rate, double allocated_reserved_rate);
+RcppExport SEXP _torch_cpp_set_cuda_allocator_allocator_thresholds(SEXP reserved_rateSEXP, SEXP allocated_rateSEXP, SEXP allocated_reserved_rateSEXP) {
+BEGIN_RCPP
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< double >::type reserved_rate(reserved_rateSEXP);
+    Rcpp::traits::input_parameter< double >::type allocated_rate(allocated_rateSEXP);
+    Rcpp::traits::input_parameter< double >::type allocated_reserved_rate(allocated_reserved_rateSEXP);
+    cpp_set_cuda_allocator_allocator_thresholds(reserved_rate, allocated_rate, allocated_reserved_rate);
+    return R_NilValue;
+END_RCPP
+}
 // cpp_backends_mkldnn_is_available
 bool cpp_backends_mkldnn_is_available();
 RcppExport SEXP _torch_cpp_backends_mkldnn_is_available() {
@@ -37768,6 +37780,35 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// cpp_torch_show_config
+torch::string cpp_torch_show_config();
+RcppExport SEXP _torch_cpp_torch_show_config() {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_show_config());
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_torch_parallel_info
+torch::string cpp_torch_parallel_info();
+RcppExport SEXP _torch_cpp_torch_parallel_info() {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_parallel_info());
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_benchmark_debug
+void cpp_benchmark_debug();
+RcppExport SEXP _torch_cpp_benchmark_debug() {
+BEGIN_RCPP
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    cpp_benchmark_debug();
+    return R_NilValue;
+END_RCPP
+}
 // cpp_torch_variable_list
 Rcpp::XPtr<XPtrTorchvariable_list> cpp_torch_variable_list(const Rcpp::List& x);
 RcppExport SEXP _torch_cpp_torch_variable_list(SEXP xSEXP) {
@@ -37857,6 +37898,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_torch_cpp_autograd_edge_function", (DL_FUNC) &_torch_cpp_autograd_edge_function, 1},
     {"_torch_cpp_autograd_grad", (DL_FUNC) &_torch_cpp_autograd_grad, 6},
     {"_torch_cpp_set_lantern_allocator", (DL_FUNC) &_torch_cpp_set_lantern_allocator, 1},
+    {"_torch_cpp_set_cuda_allocator_allocator_thresholds", (DL_FUNC) &_torch_cpp_set_cuda_allocator_allocator_thresholds, 3},
     {"_torch_cpp_backends_mkldnn_is_available", (DL_FUNC) &_torch_cpp_backends_mkldnn_is_available, 0},
     {"_torch_cpp_backends_mkl_is_available", (DL_FUNC) &_torch_cpp_backends_mkl_is_available, 0},
     {"_torch_cpp_backends_openmp_is_available", (DL_FUNC) &_torch_cpp_backends_openmp_is_available, 0},
@@ -40738,6 +40780,9 @@ static const R_CallMethodDef CallEntries[] = {
     {"_torch_cpp_torch_namespace__use_cudnn_rnn_flatten_weight", (DL_FUNC) &_torch_cpp_torch_namespace__use_cudnn_rnn_flatten_weight, 0},
     {"_torch_cpp_torch_namespace__store_main_thread_id", (DL_FUNC) &_torch_cpp_torch_namespace__store_main_thread_id, 0},
     {"_torch_transpose2", (DL_FUNC) &_torch_transpose2, 1},
+    {"_torch_cpp_torch_show_config", (DL_FUNC) &_torch_cpp_torch_show_config, 0},
+    {"_torch_cpp_torch_parallel_info", (DL_FUNC) &_torch_cpp_torch_parallel_info, 0},
+    {"_torch_cpp_benchmark_debug", (DL_FUNC) &_torch_cpp_benchmark_debug, 0},
     {"_torch_cpp_torch_variable_list", (DL_FUNC) &_torch_cpp_torch_variable_list, 1},
     {"_torch_cpp_variable_list_to_r_list", (DL_FUNC) &_torch_cpp_variable_list_to_r_list, 1},
     {"_torch_set_xptr_address", (DL_FUNC) &_torch_set_xptr_address, 2},

@@ -54,29 +54,17 @@ bool cpp_tensor_requires_grad(torch::Tensor self) {
 }
 
 void call_r_gc(bool full);
-
+  
 namespace {
 
 EventLoop<void*> gTasks;
 EventLoop<void> gBackwardTasks;
 std::atomic<bool> backward_is_running(false);
+static ThreadPool<void>* pool = new ThreadPool<void>(5);
 
 void schedule_backward_task(std::packaged_task<void()>&& task) {
   if (std::this_thread::get_id() == main_thread_id()) {
-    // NOTE: pre-C++-14 workaround for "moving" `task` into a lambda, not pretty
-    auto const task_sp =
-        std::make_shared<std::packaged_task<void()>>(std::move(task));
-
-    auto const thr_sp = std::make_shared<std::thread>();
-    *thr_sp = std::thread([task_sp, thr_sp] {
-      auto thr_join_sg = makeScopeGuard([thr_sp] {
-        gTasks.schedule(std::packaged_task<void*()>([thr_sp]() -> void* {
-          thr_sp->join();
-          return nullptr;
-        }));
-      });
-      (*task_sp)();
-    });
+    pool->push(std::move(task));
   } else {
     gBackwardTasks.schedule(std::move(task));
   }
@@ -399,12 +387,11 @@ void call_r_gc(bool full) {
     // signal to LibTorch allocator that gc has been called.
     lantern_set_gc_called(true); 
   } else if (backward_is_running) {
-    // When calling backward, we might be running out of memory, thus we would want to
-    // call `gc`. However, since backward is called from a background thread, that's 
-    // not possible.  This callback allows us to schedule a GC call that will run
-    // in the main thread.
-    // The GC is scheduled in hope that it can be executed before the OOM error is
-    // raised, but that's not guaranteed because we can't synchronously call it here.
+    // In this case we schedule a `gc` call into the main thread which shoud
+    // be waiting for taks in an event loop. Note that running `gc` from the
+    // main thread triggers `free` operations in the LibTorch code that are 
+    // mutex locked, so you need to reschedule deleting tensors to the same
+    // thread that might be allocating.
     std::packaged_task<void*()> task([full]() {
       call_r_gc(full);
       return (void*)nullptr;
@@ -416,4 +403,10 @@ void call_r_gc(bool full) {
 // [[Rcpp::export]]
 void cpp_set_lantern_allocator(uint64_t threshold_call_gc = 4000) {
   set_lantern_allocator(&call_r_gc, threshold_call_gc);
+}
+
+// [[Rcpp::export]]
+void cpp_set_cuda_allocator_allocator_thresholds (double reserved_rate, double allocated_rate, 
+                                                  double allocated_reserved_rate) {
+  lantern_set_cuda_allocator_thresholds(reserved_rate, allocated_rate, allocated_reserved_rate);
 }

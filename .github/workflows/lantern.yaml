@@ -8,6 +8,7 @@ on:
       - "cran/**"
       - "libtorch-v1.11.0"
       - "build2"
+      - "pool"
 
 jobs:
   build:

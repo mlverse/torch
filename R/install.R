@@ -1,4 +1,4 @@
-branch <- "main"
+branch <- "pool"
 
 install_config <- list(
   "1.11.0" = list(
@@ -344,7 +344,7 @@ install_type <- function(version) {
 install_torch <- function(version = "1.11.0", type = install_type(version = version), reinstall = FALSE,
                           path = install_path(), timeout = 360, ...) {
   if (reinstall) {
-    unlink(path, recursive = TRUE)
+    unlink(file.path(path, "lib"), recursive = TRUE)
   }
 
   if (!dir.exists(path)) {

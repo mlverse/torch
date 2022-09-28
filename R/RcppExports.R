@@ -121,6 +121,10 @@ cpp_set_lantern_allocator <- function(threshold_call_gc = 4000L) {
     invisible(.Call('_torch_cpp_set_lantern_allocator', PACKAGE = 'torchpkg', threshold_call_gc))
 }
 
+cpp_set_cuda_allocator_allocator_thresholds <- function(reserved_rate, allocated_rate, allocated_reserved_rate) {
+    invisible(.Call('_torch_cpp_set_cuda_allocator_allocator_thresholds', PACKAGE = 'torchpkg', reserved_rate, allocated_rate, allocated_reserved_rate))
+}
+
 cpp_backends_mkldnn_is_available <- function() {
     .Call('_torch_cpp_backends_mkldnn_is_available', PACKAGE = 'torchpkg')
 }
@@ -11643,6 +11647,18 @@ cpp_torch_namespace__store_main_thread_id <- function() {
 
 transpose2 <- function(x) {
     .Call('_torch_transpose2', PACKAGE = 'torchpkg', x)
+}
+
+cpp_torch_show_config <- function() {
+    .Call('_torch_cpp_torch_show_config', PACKAGE = 'torchpkg')
+}
+
+cpp_torch_parallel_info <- function() {
+    .Call('_torch_cpp_torch_parallel_info', PACKAGE = 'torchpkg')
+}
+
+cpp_benchmark_debug <- function() {
+    invisible(.Call('_torch_cpp_benchmark_debug', PACKAGE = 'torchpkg'))
 }
 
 cpp_torch_variable_list <- function(x) {
