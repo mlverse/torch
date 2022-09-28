@@ -13,7 +13,7 @@ development:
 navbar:
  bg: primary
  structure:
-  left:  [home, articles, examples, reference, news]
+  left:  [home, articles, examples, advanced, reference, news]
   right: [github]
  components:
   articles:
@@ -40,6 +40,11 @@ navbar:
        href: articles/extending-autograd.html
      - text: Python models
        href: articles/python-to-r.html
+  advanced:
+    text: Advanced
+    menu:
+      - text: Memory management
+        href: articles/memory-management.html
   examples:
     text: Examples
     menu:

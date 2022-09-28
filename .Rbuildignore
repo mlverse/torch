@@ -46,3 +46,4 @@ tools/torchgen/.Rbuildignore
 ^vignettes/rsconnect*
 ^revdep$
 ^CRAN-SUBMISSION$
+^vignettes/articles$
