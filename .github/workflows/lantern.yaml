@@ -7,6 +7,7 @@ on:
       - main
       - "cran/**"
       - "libtorch-v1.11.0"
+      - "0.8.1-syncronize"
 
 jobs:
   build:
