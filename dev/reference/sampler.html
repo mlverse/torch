@@ -126,7 +126,7 @@ The default is fine for most situations.</p></dd>
 </dl></div>
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
-    <p>A sampler must implement the <code>.iter</code> and <code>.lenght()</code> methods.</p><ul><li><p><code>initialize</code> takes in a <code>data_source</code>. In general this is a <code><a href="dataset.html">dataset()</a></code>.</p></li>
+    <p>A sampler must implement the <code>.iter</code> and <code>.length()</code> methods.</p><ul><li><p><code>initialize</code> takes in a <code>data_source</code>. In general this is a <code><a href="dataset.html">dataset()</a></code>.</p></li>
 <li><p><code>.iter</code> returns a function that returns a dataset index everytime it's called.</p></li>
 <li><p><code>.length</code> returns the maximum number of samples that can be retrieved from
 that sampler.</p></li>
