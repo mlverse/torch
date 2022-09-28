@@ -24,6 +24,7 @@ cuda_device_count <- function() {
 #' @param device device for which to synchronize. It uses the current device
 #'  given by [cuda_current_device()] if no device is specified.
 #'
+#' @export
 cuda_synchronize <- function(device = NULL) {
   if (is.null(device)) {
     device <- -1L
