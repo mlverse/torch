@@ -8,6 +8,7 @@ everytime backward is called. (#873)
 - We now use a thread pool instead of launching a new thread for backward calls. (#883)
 - Implemented options to allow configuring the activation of garbage collection when allocating more CUDA memory. (#883)
 - Fixed bug when using `install_torch(reinstall = TRUE)`. (#883)
+- Added `cuda_synchronize()` to allow synchronization of CUDA operations. (#887)
 
 # torch 0.8.1
 
