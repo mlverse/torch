@@ -387,12 +387,11 @@ void call_r_gc(bool full) {
     // signal to LibTorch allocator that gc has been called.
     lantern_set_gc_called(true); 
   } else if (backward_is_running) {
-    // When calling backward, we might be running out of memory, thus we would want to
-    // call `gc`. However, since backward is called from a background thread, that's 
-    // not possible.  This callback allows us to schedule a GC call that will run
-    // in the main thread.
-    // The GC is scheduled in hope that it can be executed before the OOM error is
-    // raised, but that's not guaranteed because we can't synchronously call it here.
+    // In this case we schedule a `gc` call into the main thread which shoud
+    // be waiting for taks in an event loop. Note that running `gc` from the
+    // main thread triggers `free` operations in the LibTorch code that are 
+    // mutex locked, so you need to reschedule deleting tensors to the same
+    // thread that might be allocating.
     std::packaged_task<void*()> task([full]() {
       call_r_gc(full);
       return (void*)nullptr;
@@ -404,4 +403,10 @@ void call_r_gc(bool full) {
 // [[Rcpp::export]]
 void cpp_set_lantern_allocator(uint64_t threshold_call_gc = 4000) {
   set_lantern_allocator(&call_r_gc, threshold_call_gc);
+}
+
+// [[Rcpp::export]]
+void cpp_set_cuda_allocator_allocator_thresholds (double reserved_rate, double allocated_rate, 
+                                                  double allocated_reserved_rate) {
+  lantern_set_cuda_allocator_thresholds(reserved_rate, allocated_rate, allocated_reserved_rate);
 }

@@ -59,6 +59,11 @@ globalVariables(c("..", "self", "private", "N"))
       {
         lantern_start()
         cpp_set_lantern_allocator(getOption("torch.threshold_call_gc", 4000L))
+        cpp_set_cuda_allocator_allocator_thresholds(
+          getOption("torch.cuda_allocator_reserved_rate", 0.2),
+          getOption("torch.cuda_allocator_allocated_rate", 0.8),
+          getOption("torch.cuda_allocator_allocated_reserved_rate", 0.8)
+        )
         register_lambda_function_deleter()
 
         # .generator_null is no longer used. set the option `torch.old_seed_behavior=TRUE` to use it.

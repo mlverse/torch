@@ -102,3 +102,14 @@ void _set_lantern_allocator(void (*r_gc)(bool), uint64_t threshold_mb) {
   threshold_call_gc = threshold_mb * 1e6;
   c10::SetCPUAllocator(&lantern_allocator, 1);
 }
+
+double cuda_allocator_reserved_rate;
+double cuda_allocator_allocated_rate;
+double cuda_allocator_allocated_reserved_rate;
+
+void _lantern_set_cuda_allocator_thresholds (double reserved_rate, double allocated_rate, 
+                                             double allocated_reserved_rate) {
+  cuda_allocator_reserved_rate = reserved_rate;
+  cuda_allocator_allocated_rate = allocated_rate;
+  cuda_allocator_allocated_reserved_rate = allocated_reserved_rate;
+}

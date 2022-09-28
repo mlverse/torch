@@ -349,6 +349,18 @@ BEGIN_RCPP
     return R_NilValue;
 END_RCPP
 }
+// cpp_set_cuda_allocator_allocator_thresholds
+void cpp_set_cuda_allocator_allocator_thresholds(double reserved_rate, double allocated_rate, double allocated_reserved_rate);
+RcppExport SEXP _torch_cpp_set_cuda_allocator_allocator_thresholds(SEXP reserved_rateSEXP, SEXP allocated_rateSEXP, SEXP allocated_reserved_rateSEXP) {
+BEGIN_RCPP
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< double >::type reserved_rate(reserved_rateSEXP);
+    Rcpp::traits::input_parameter< double >::type allocated_rate(allocated_rateSEXP);
+    Rcpp::traits::input_parameter< double >::type allocated_reserved_rate(allocated_reserved_rateSEXP);
+    cpp_set_cuda_allocator_allocator_thresholds(reserved_rate, allocated_rate, allocated_reserved_rate);
+    return R_NilValue;
+END_RCPP
+}
 // cpp_backends_mkldnn_is_available
 bool cpp_backends_mkldnn_is_available();
 RcppExport SEXP _torch_cpp_backends_mkldnn_is_available() {
@@ -37886,6 +37898,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_torch_cpp_autograd_edge_function", (DL_FUNC) &_torch_cpp_autograd_edge_function, 1},
     {"_torch_cpp_autograd_grad", (DL_FUNC) &_torch_cpp_autograd_grad, 6},
     {"_torch_cpp_set_lantern_allocator", (DL_FUNC) &_torch_cpp_set_lantern_allocator, 1},
+    {"_torch_cpp_set_cuda_allocator_allocator_thresholds", (DL_FUNC) &_torch_cpp_set_cuda_allocator_allocator_thresholds, 3},
     {"_torch_cpp_backends_mkldnn_is_available", (DL_FUNC) &_torch_cpp_backends_mkldnn_is_available, 0},
     {"_torch_cpp_backends_mkl_is_available", (DL_FUNC) &_torch_cpp_backends_mkl_is_available, 0},
     {"_torch_cpp_backends_openmp_is_available", (DL_FUNC) &_torch_cpp_backends_openmp_is_available, 0},

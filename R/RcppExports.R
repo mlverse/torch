@@ -121,6 +121,10 @@ cpp_set_lantern_allocator <- function(threshold_call_gc = 4000L) {
     invisible(.Call('_torch_cpp_set_lantern_allocator', PACKAGE = 'torchpkg', threshold_call_gc))
 }
 
+cpp_set_cuda_allocator_allocator_thresholds <- function(reserved_rate, allocated_rate, allocated_reserved_rate) {
+    invisible(.Call('_torch_cpp_set_cuda_allocator_allocator_thresholds', PACKAGE = 'torchpkg', reserved_rate, allocated_rate, allocated_reserved_rate))
+}
+
 cpp_backends_mkldnn_is_available <- function() {
     .Call('_torch_cpp_backends_mkldnn_is_available', PACKAGE = 'torchpkg')
 }
