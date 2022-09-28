@@ -36,6 +36,12 @@ void _lantern_cuda_show_config() {
   LANTERN_FUNCTION_END_VOID
 }
 
+void _lantern_cuda_synchronize (int device_index) {
+  LANTERN_FUNCTION_START
+  torch::cuda::synchronize(device_index);
+  LANTERN_FUNCTION_END_VOID
+}
+
 void* _lantern_cuda_get_device_capability(int64_t device) {
   LANTERN_FUNCTION_START
 #ifdef __NVCC__

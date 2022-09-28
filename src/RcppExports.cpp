@@ -478,6 +478,16 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// cpp_cuda_synchronize
+void cpp_cuda_synchronize(int device);
+RcppExport SEXP _torch_cpp_cuda_synchronize(SEXP deviceSEXP) {
+BEGIN_RCPP
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< int >::type device(deviceSEXP);
+    cpp_cuda_synchronize(device);
+    return R_NilValue;
+END_RCPP
+}
 // cpp_cuda_current_device
 int64_t cpp_cuda_current_device();
 RcppExport SEXP _torch_cpp_cuda_current_device() {
@@ -37857,6 +37867,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_torch_cpp_contrib_torch_sort_vertices", (DL_FUNC) &_torch_cpp_contrib_torch_sort_vertices, 3},
     {"_torch_cpp_cuda_is_available", (DL_FUNC) &_torch_cpp_cuda_is_available, 0},
     {"_torch_cpp_cuda_device_count", (DL_FUNC) &_torch_cpp_cuda_device_count, 0},
+    {"_torch_cpp_cuda_synchronize", (DL_FUNC) &_torch_cpp_cuda_synchronize, 1},
     {"_torch_cpp_cuda_current_device", (DL_FUNC) &_torch_cpp_cuda_current_device, 0},
     {"_torch_cpp_cuda_get_device_capability", (DL_FUNC) &_torch_cpp_cuda_get_device_capability, 1},
     {"_torch_cpp_cudnn_runtime_version", (DL_FUNC) &_torch_cpp_cudnn_runtime_version, 0},

@@ -165,6 +165,10 @@ cpp_cuda_device_count <- function() {
     .Call('_torch_cpp_cuda_device_count', PACKAGE = 'torchpkg')
 }
 
+cpp_cuda_synchronize <- function(device) {
+    invisible(.Call('_torch_cpp_cuda_synchronize', PACKAGE = 'torchpkg', device))
+}
+
 cpp_cuda_current_device <- function() {
     .Call('_torch_cpp_cuda_current_device', PACKAGE = 'torchpkg')
 }

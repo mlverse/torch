@@ -2292,6 +2292,13 @@ HOST_API int lantern_string_size (void* self)
   return ret;
 }
 
+LANTERN_API void (LANTERN_PTR _lantern_cuda_synchronize) (int device_index);
+HOST_API void lantern_cuda_synchronize (int device_index) {
+  LANTERN_CHECK_LOADED
+  _lantern_cuda_synchronize (device_index);
+  LANTERN_HOST_HANDLER;
+}
+
   /* Autogen Headers -- Start */
   LANTERN_API void* (LANTERN_PTR _lantern__cast_byte_tensor_bool)(void* self, void* non_blocking);
   HOST_API void* lantern__cast_byte_tensor_bool(void* self, void* non_blocking) { LANTERN_CHECK_LOADED void* ret = _lantern__cast_byte_tensor_bool(self, non_blocking); LANTERN_HOST_HANDLER return ret; }
@@ -8327,6 +8334,7 @@ LOAD_SYMBOL(_lantern_cuda_device_stats);
 LOAD_SYMBOL(_lantern_cuda_get_runtime_version);
 LOAD_SYMBOL(_set_delete_lambda_fun);
 LOAD_SYMBOL(_lantern_string_size);
+LOAD_SYMBOL(_lantern_cuda_synchronize);
   /* Autogen Symbols -- Start */
   LOAD_SYMBOL(_lantern__cast_byte_tensor_bool)
   LOAD_SYMBOL(_lantern__cast_char_tensor_bool)
