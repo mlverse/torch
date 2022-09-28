@@ -81,6 +81,9 @@
 <li>Re-implemented garbage collection logic when calling it from inside a <code>backward()</code> call. This improves speed because we no longer need to call GC everytime backward is called. (<a href="https://github.com/mlverse/torch/issues/873" class="external-link">#873</a>)</li>
 <li>Fixed bug in <code>torch_arange</code> that was causing the <code>end</code> value not getting included in the result. (<a href="https://github.com/mlverse/torch/issues/885" class="external-link">#885</a>, <a href="https://github.com/skeydan" class="external-link">@skeydan</a>)</li>
 <li>Fixed bug in window functions by setting a default dtype. (<a href="https://github.com/mlverse/torch/issues/886" class="external-link">#886</a>, <a href="https://github.com/skeydan" class="external-link">@skeydan</a>)</li>
+<li>We now use a thread pool instead of launching a new thread for backward calls. (<a href="https://github.com/mlverse/torch/issues/883" class="external-link">#883</a>)</li>
+<li>Implemented options to allow configuring the activation of garbage collection when allocating more CUDA memory. (<a href="https://github.com/mlverse/torch/issues/883" class="external-link">#883</a>)</li>
+<li>Fixed bug when using <code>install_torch(reinstall = TRUE)</code>. (<a href="https://github.com/mlverse/torch/issues/883" class="external-link">#883</a>)</li>
 </ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.8.1" id="torch-081">torch 0.8.1<a class="anchor" aria-label="anchor" href="#torch-081"></a></h2><p class="text-muted">CRAN release: 2022-08-19</p>

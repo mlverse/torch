@@ -17,7 +17,7 @@ articles:
   tensor-creation: tensor-creation.html
   torchscript: torchscript.html
   using-autograd: using-autograd.html
-last_built: 2022-09-28T15:17Z
+last_built: 2022-09-28T17:02Z
 urls:
   reference: https://torch.mlverse.org/docs/reference
   article: https://torch.mlverse.org/docs/articles
