@@ -377,11 +377,11 @@ torch_full_like <- function(input, fill_value, dtype = NULL, layout = torch_stri
 #' @export
 torch_scalar_tensor <- function(value, dtype = NULL, device = NULL, requires_grad = FALSE) {
   if (is_torch_tensor(value) && !is.null(value$shape) && sum(value$shape) > 1) {
-    value_error("values must be lenght 1")
+    value_error("values must be length 1")
   }
 
   if (!is_torch_tensor(value) && length(value) > 1) {
-    value_error("value must be a lenght 1 vector")
+    value_error("value must be a length 1 vector")
   }
 
   if (is_torch_tensor(value)) {

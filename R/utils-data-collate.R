@@ -1,5 +1,5 @@
 is_tensor_like <- function(x) {
-  # we want arrays, matrix's and vectors (lenght > 1) to be converted to
+  # we want arrays, matrix's and vectors (length > 1) to be converted to
   # tensors. this is only different from torch because there are native
   # scalar types in Python
   has_tensor_like_types <- is.atomic(x) && (!is.character(x))

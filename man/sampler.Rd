@@ -34,7 +34,7 @@ Samplers can be used with \code{\link[=dataloader]{dataloader()}} when creating 
 \code{\link[=dataset]{dataset()}}.
 }
 \details{
-A sampler must implement the \code{.iter} and \code{.lenght()} methods.
+A sampler must implement the \code{.iter} and \code{.length()} methods.
 \itemize{
 \item \code{initialize} takes in a \code{data_source}. In general this is a \code{\link[=dataset]{dataset()}}.
 \item \code{.iter} returns a function that returns a dataset index everytime it's called.
