@@ -10,7 +10,13 @@
 #include "lantern/lantern.h"
 #include "utils.hpp"
 
-bool should_call_gc () {
+enum CallGC {
+  lite,
+  full,
+  no,
+};
+
+CallGC should_call_gc () {
   
   int device;
   C10_CUDA_CHECK(cudaGetDevice(&device));
@@ -19,38 +25,42 @@ bool should_call_gc () {
   size_t device_total;
   C10_CUDA_CHECK(cudaMemGetInfo(&device_free, &device_total));
   
-  
   auto stats = c10::cuda::CUDACachingAllocator::getDeviceStats(device);
   
   auto current_reserved = stats.reserved_bytes[0].current; 
   auto current_allocated = stats.allocated_bytes[0].current;
   
   auto reserved_rate = (double)current_reserved/(double)device_total;
-  if (reserved_rate < 0.2) {
-    return false;
+  if (reserved_rate < cuda_allocator_reserved_rate) {
+    return CallGC::no;
   }
   
   auto allocated_rate = (double)current_allocated/(double)device_total;
-  if (allocated_rate > 0.8) {
-    return true;
+  if (allocated_rate > cuda_allocator_allocated_rate) {
+    return CallGC::full;
   }
   
   auto allocated_over_reserved_rate = (double)current_allocated/(double)current_reserved;
-  if (allocated_over_reserved_rate > 0.8) {
-    return true;
+  if (allocated_over_reserved_rate > cuda_allocator_allocated_reserved_rate) {
+    return CallGC::full;
   }
   
-  return false;
+  return CallGC::lite;
 }
 
 namespace c10 {
 class GarbageCollectorCallback : virtual public c10::FreeMemoryCallback {
  public:
   bool Execute() {
-    if (should_call_gc()) {
-      (*call_r_gc)(true);
-    } else {
+    switch (should_call_gc()) {
+    case CallGC::no:
+      return false;
+    case CallGC::lite:
       (*call_r_gc)(false);  
+      break;
+    case CallGC::full:
+      (*call_r_gc)(true);  
+      break;
     }
     wait_for_gc();
     return true;
