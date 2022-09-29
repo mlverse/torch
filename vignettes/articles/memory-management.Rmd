@@ -75,7 +75,7 @@ calling GC is time consuming).
 To fix this, the torch allocator will call a faster GC in some moments and make a full
 collection in others.
 
-1. We don't make a full collection if the current reserved memory (cached memory)
+1. We don't make any collection if the current reserved memory (cached memory)
    divided by the total GPU memory is smaller than 20%. This can be controlled
    by the `torch.cuda_allocator_reserved_rate` and the default is 0.2.
 2. We make a full collection if the current allocated memory (memory used by tensors)
