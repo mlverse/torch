@@ -171,8 +171,8 @@ cpp_parameter_type <- function(argument) {
     declaration <- "XPtrTorchTensorList"
   }
 
-  if (argument$dynamic_type == "IntArrayRef" && argument$type == "c10::optional<IntArrayRef>") {
-    declaration <- "XPtrTorchOptionalIntArrayRef"
+  if (argument$dynamic_type == "IntArrayRef" && argument$type %in% c("c10::optional<IntArrayRef>", "OptionalIntArrayRef")) {
+    return("XPtrTorchOptionalIntArrayRef")
   }
 
   if (argument$dynamic_type == "IntArrayRef" && argument$type != "c10::optional<IntArrayRef>") {
@@ -367,7 +367,7 @@ cpp_argument_transform <- function(argument) {
     result <- glue::glue("{argument$name}.get()")
   }
 
-  if (argument$dynamic_type == "IntArrayRef" && argument$type == "c10::optional<IntArrayRef>") {
+  if (argument$dynamic_type == "IntArrayRef" && argument$type %in% c("c10::optional<IntArrayRef>", "OptionalIntArrayRef")) {
     result <- glue::glue("{argument$name}.get()")
   }
 
