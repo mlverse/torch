@@ -29,15 +29,15 @@
       %2 : int = prim::Constant[value=1]()
       %bias : Tensor = prim::GetAttr[name="bias"](%self)
       %weight : Tensor = prim::GetAttr[name="weight"](%self)
-      %8 : Tensor = prim::profile[profiled_type=Float(10, 10, strides=[10, 1], requires_grad=1, device=cpu)](%weight)
+      %8 : Tensor = prim::profile[profiled_type=Float(10, 10, strides=[10, 1], requires_grad=1, device=cpu), seen_none=0](%weight)
       %5 : Tensor = aten::t(%8)
-      %9 : Tensor = prim::profile[profiled_type=Float(10, 10, strides=[10, 1], requires_grad=0, device=cpu)](%1)
-      %10 : Tensor = prim::profile[profiled_type=Float(10, 10, strides=[1, 10], requires_grad=1, device=cpu)](%5)
+      %9 : Tensor = prim::profile[profiled_type=Float(10, 10, strides=[10, 1], requires_grad=0, device=cpu), seen_none=0](%1)
+      %10 : Tensor = prim::profile[profiled_type=Float(10, 10, strides=[1, 10], requires_grad=1, device=cpu), seen_none=0](%5)
       %6 : Tensor = aten::mm(%9, %10) # <string>:3:24
-      %11 : Tensor = prim::profile[profiled_type=Float(10, strides=[1], requires_grad=1, device=cpu)](%bias)
-      %12 : Tensor = prim::profile[profiled_type=Float(10, 10, strides=[10, 1], requires_grad=1, device=cpu)](%6)
+      %11 : Tensor = prim::profile[profiled_type=Float(10, strides=[1], requires_grad=1, device=cpu), seen_none=0](%bias)
+      %12 : Tensor = prim::profile[profiled_type=Float(10, 10, strides=[10, 1], requires_grad=1, device=cpu), seen_none=0](%6)
       %7 : Tensor = aten::add(%11, %12, %2) # <string>:3:17
-      %13 : Tensor = prim::profile[profiled_type=Float(10, 10, strides=[10, 1], requires_grad=1, device=cpu)](%7)
+      %13 : Tensor = prim::profile[profiled_type=Float(10, 10, strides=[10, 1], requires_grad=1, device=cpu), seen_none=0](%7)
        = prim::profile()
       return (%13)
 
