@@ -5,7 +5,7 @@
 \alias{torch_nansum}
 \title{Nansum}
 \usage{
-torch_nansum(self, dim, keepdim = FALSE, dtype = NULL)
+torch_nansum(self, dim = list(), keepdim = FALSE, dtype = NULL)
 }
 \arguments{
 \item{self}{(Tensor) the input tensor.}

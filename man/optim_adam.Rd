@@ -34,15 +34,6 @@ algorithm from the paper \href{https://openreview.net/forum?id=ryQu7f-RZ}{On the
 \description{
 It has been proposed in \href{https://arxiv.org/abs/1412.6980}{Adam: A Method for Stochastic Optimization}.
 }
-\section{Warning}{
-If you need to move a model to GPU via \verb{$cuda()}, please do so before
-constructing optimizers for it. Parameters of a model after \verb{$cuda()}
-will be different objects from those before the call. In general, you
-should make sure that the objects pointed to by model parameters subject
-to optimization remain the same over the whole lifecycle of optimizer
-creation and usage.
-}
-
 \examples{
 if (torch_is_installed()) {
 \dontrun{
