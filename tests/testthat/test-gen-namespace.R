@@ -7,9 +7,13 @@ test_that("__and__", {
 })
 
 test_that("__lshift__", {
-  x <- torch_tensor(1)
-  expect_equal_to_tensor(torch___lshift__(x, x), torch_tensor(2))
-  expect_equal_to_tensor(torch___lshift__(x, 1), torch_tensor(2))
+  x <- torch_tensor(c(-1, -2, 3), dtype = torch_int16())
+  y <- torch_tensor(c(1, 0, 3), dtype = torch_int16())
+  expect_true(
+    torch_allclose(
+      torch___lshift__(x, y),
+      torch_tensor(c(-2, -2, 24), dtype = torch_int16())
+    ))
 })
 
 test_that("__or__", {
@@ -19,9 +23,13 @@ test_that("__or__", {
 })
 
 test_that("__rshift__", {
-  x <- torch_tensor(1)
-  expect_equal_to_tensor(torch___rshift__(x, x), torch_tensor(0.5))
-  expect_equal_to_tensor(torch___rshift__(x, 1), torch_tensor(0.5))
+  x <- torch_tensor(c(-2, -7, 31), dtype = torch_int16())
+  y <- torch_tensor(c(1, 0, 3), dtype = torch_int16())
+  expect_true(
+    torch_allclose(
+      torch___rshift__(x, y),
+      torch_tensor(c(-1, -7, 3), dtype = torch_int16())
+    ))
 })
 
 test_that("__xor__", {
