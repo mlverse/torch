@@ -116,7 +116,7 @@ cpp_parameter_type <- function(argument) {
   if (argument$name %in% c("dims", "dims_self", "dims_other", "dim") &&
       argument$dynamic_type == "IntArrayRef")
   {
-    if (argument$type == "c10::optional<IntArrayRef>") {
+    if (argument$type %in% c("c10::optional<IntArrayRef>", "OptionalIntArrayRef")) {
       return("XPtrTorchOptionalIndexIntArrayRef")
     } else {
       return("XPtrTorchIndexIntArrayRef")
