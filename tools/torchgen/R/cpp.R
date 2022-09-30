@@ -640,13 +640,14 @@ SKIP_R_BINDIND <- c(
   "_test_string_default"
 )
 
-SKIP_CPP_BINDING <- c("stft")
+SKIP_CPP_BINDING <- c()
 
 cpp <- function(path) {
 
-  decls <-declarations() %>%
+  decls <- declarations() %>%
     purrr::discard(~.x$name %in% SKIP_R_BINDIND) %>%
-    purrr::discard(~.x$name == "range" && length(.x$arguments) == 3)
+    purrr::discard(~.x$name == "range" && length(.x$arguments) == 3) %>%
+    purrr::discard(~.x$name == "stft" && length(.x$arguments) == 8)
 
   pb <- NULL
 

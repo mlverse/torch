@@ -1801,6 +1801,10 @@ cpp_torch_method_sspaddmm_self_Tensor_mat1_Tensor_mat2_Tensor <- function(self, 
     .Call('_torch_cpp_torch_method_sspaddmm_self_Tensor_mat1_Tensor_mat2_Tensor', PACKAGE = 'torchpkg', self, mat1, mat2, beta, alpha)
 }
 
+cpp_torch_method_stft_self_Tensor_n_fft_int64_t <- function(self, n_fft, hop_length, win_length, window, center, pad_mode, normalized, onesided, return_complex) {
+    .Call('_torch_cpp_torch_method_stft_self_Tensor_n_fft_int64_t', PACKAGE = 'torchpkg', self, n_fft, hop_length, win_length, window, center, pad_mode, normalized, onesided, return_complex)
+}
+
 cpp_torch_method_istft_self_Tensor_n_fft_int64_t <- function(self, n_fft, hop_length, win_length, window, center, normalized, onesided, length, return_complex) {
     .Call('_torch_cpp_torch_method_istft_self_Tensor_n_fft_int64_t', PACKAGE = 'torchpkg', self, n_fft, hop_length, win_length, window, center, normalized, onesided, length, return_complex)
 }
@@ -6667,6 +6671,10 @@ cpp_torch_namespace_dstack_tensors_TensorList <- function(tensors) {
 
 cpp_torch_namespace_dstack_out_out_Tensor_tensors_TensorList <- function(out, tensors) {
     .Call('_torch_cpp_torch_namespace_dstack_out_out_Tensor_tensors_TensorList', PACKAGE = 'torchpkg', out, tensors)
+}
+
+cpp_torch_namespace_stft_self_Tensor_n_fft_int64_t <- function(self, n_fft, hop_length, win_length, window, center, pad_mode, normalized, onesided, return_complex) {
+    .Call('_torch_cpp_torch_namespace_stft_self_Tensor_n_fft_int64_t', PACKAGE = 'torchpkg', self, n_fft, hop_length, win_length, window, center, pad_mode, normalized, onesided, return_complex)
 }
 
 cpp_torch_namespace_istft_self_Tensor_n_fft_int64_t <- function(self, n_fft, hop_length, win_length, window, center, normalized, onesided, length, return_complex) {

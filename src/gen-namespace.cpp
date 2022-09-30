@@ -2281,6 +2281,12 @@ return XPtrTorchTensor(r_out);
 }
 
 // [[Rcpp::export]]
+XPtrTorchTensor cpp_torch_method_stft_self_Tensor_n_fft_int64_t (XPtrTorchTensor self, XPtrTorchint64_t n_fft, XPtrTorchoptional_int64_t hop_length, XPtrTorchoptional_int64_t win_length, XPtrTorchOptionalTensor window, XPtrTorchbool center, XPtrTorchstring_view pad_mode, XPtrTorchbool normalized, XPtrTorchoptional_bool onesided, XPtrTorchoptional_bool return_complex) {
+  auto r_out = lantern_Tensor_stft_tensor_intt_intt_intt_tensor_bool_cstringview_bool_bool_bool(self.get(), n_fft.get(), hop_length.get(), win_length.get(), window.get(), center.get(), pad_mode.get(), normalized.get(), onesided.get(), return_complex.get());
+return XPtrTorchTensor(r_out);
+}
+
+// [[Rcpp::export]]
 XPtrTorchTensor cpp_torch_method_istft_self_Tensor_n_fft_int64_t (XPtrTorchTensor self, XPtrTorchint64_t n_fft, XPtrTorchoptional_int64_t hop_length, XPtrTorchoptional_int64_t win_length, XPtrTorchOptionalTensor window, XPtrTorchbool center, XPtrTorchbool normalized, XPtrTorchoptional_bool onesided, XPtrTorchoptional_int64_t length, XPtrTorchbool return_complex) {
   auto r_out = lantern_Tensor_istft_tensor_intt_intt_intt_tensor_bool_bool_bool_intt_bool(self.get(), n_fft.get(), hop_length.get(), win_length.get(), window.get(), center.get(), normalized.get(), onesided.get(), length.get(), return_complex.get());
 return XPtrTorchTensor(r_out);
@@ -9676,6 +9682,12 @@ return XPtrTorchTensor(r_out);
 // [[Rcpp::export]]
 XPtrTorchTensor cpp_torch_namespace_dstack_out_out_Tensor_tensors_TensorList (XPtrTorchTensor out, XPtrTorchTensorList tensors) {
   auto r_out = lantern_dstack_out_tensor_tensorlist(out.get(), tensors.get());
+return XPtrTorchTensor(r_out);
+}
+
+// [[Rcpp::export]]
+XPtrTorchTensor cpp_torch_namespace_stft_self_Tensor_n_fft_int64_t (XPtrTorchTensor self, XPtrTorchint64_t n_fft, XPtrTorchoptional_int64_t hop_length, XPtrTorchoptional_int64_t win_length, XPtrTorchOptionalTensor window, XPtrTorchbool center, XPtrTorchstring_view pad_mode, XPtrTorchbool normalized, XPtrTorchoptional_bool onesided, XPtrTorchoptional_bool return_complex) {
+  auto r_out = lantern_stft_tensor_intt_intt_intt_tensor_bool_cstringview_bool_bool_bool(self.get(), n_fft.get(), hop_length.get(), win_length.get(), window.get(), center.get(), pad_mode.get(), normalized.get(), onesided.get(), return_complex.get());
 return XPtrTorchTensor(r_out);
 }
 
