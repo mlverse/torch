@@ -120,18 +120,6 @@ test_that("_cast_Short", {
   expect_tensor(torch__cast_Short(x))
 })
 
-test_that("_cat", {
-  x <- torch_tensor(1)
-  expect_tensor(torch__cat(list(x, x)))
-})
-
-test_that("_cat_out", {
-  x <- torch_tensor(1)
-  y <- torch_zeros(2)
-  expect_tensor(torch__cat_out(y, list(x, x)))
-  expect_equal_to_tensor(y, torch_tensor(c(1, 1)))
-})
-
 test_that("_cdist_backward", {
   x <- torch_rand(c(2, 2))
   expect_tensor(torch__cdist_backward(x, x, x, 1, x))
