@@ -250,7 +250,7 @@ void *_lantern_nn_functional_pad_circular(void *input, void *padding) {
   LANTERN_FUNCTION_START
   auto input_ = from_raw::Tensor(input);
   auto padding_ = from_raw::IntArrayRef(padding);
-  auto out = torch::nn::functional::_pad_circular(input_, padding_);
+  auto out = torch::_pad_circular(input_, padding_);
   return make_raw::Tensor(out);
   LANTERN_FUNCTION_END
 }

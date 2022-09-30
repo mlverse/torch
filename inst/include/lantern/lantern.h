@@ -2489,6 +2489,8 @@ HOST_API void lantern_cuda_synchronize (int device_index) {
   HOST_API void* lantern_Tensor_sgn__tensor(void* self) { void* ret = _lantern_Tensor_sgn__tensor(self); LANTERN_HOST_HANDLER return ret; }
   LANTERN_API void* (LANTERN_PTR _lantern_sgn_out_tensor_tensor)(void* out, void* self);
   HOST_API void* lantern_sgn_out_tensor_tensor(void* out, void* self) { LANTERN_CHECK_LOADED void* ret = _lantern_sgn_out_tensor_tensor(out, self); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern_Tensor_chalf_tensor_memoryformat)(void* self, void* memory_format);
+  HOST_API void* lantern_Tensor_chalf_tensor_memoryformat(void* self, void* memory_format) { void* ret = _lantern_Tensor_chalf_tensor_memoryformat(self, memory_format); LANTERN_HOST_HANDLER return ret; }
   LANTERN_API void* (LANTERN_PTR _lantern_real_tensor)(void* self);
   HOST_API void* lantern_real_tensor(void* self) { LANTERN_CHECK_LOADED void* ret = _lantern_real_tensor(self); LANTERN_HOST_HANDLER return ret; }
   LANTERN_API void* (LANTERN_PTR _lantern_imag_tensor)(void* self);
@@ -3081,6 +3083,8 @@ HOST_API void lantern_cuda_synchronize (int device_index) {
   HOST_API void* lantern_conv_transpose2d_tensor_tensor_tensor_intarrayref_intarrayref_intarrayref_intt_intarrayref(void* input, void* weight, void* bias, void* stride, void* padding, void* output_padding, void* groups, void* dilation) { LANTERN_CHECK_LOADED void* ret = _lantern_conv_transpose2d_tensor_tensor_tensor_intarrayref_intarrayref_intarrayref_intt_intarrayref(input, weight, bias, stride, padding, output_padding, groups, dilation); LANTERN_HOST_HANDLER return ret; }
   LANTERN_API void* (LANTERN_PTR _lantern_conv_transpose3d_tensor_tensor_tensor_intarrayref_intarrayref_intarrayref_intt_intarrayref)(void* input, void* weight, void* bias, void* stride, void* padding, void* output_padding, void* groups, void* dilation);
   HOST_API void* lantern_conv_transpose3d_tensor_tensor_tensor_intarrayref_intarrayref_intarrayref_intt_intarrayref(void* input, void* weight, void* bias, void* stride, void* padding, void* output_padding, void* groups, void* dilation) { LANTERN_CHECK_LOADED void* ret = _lantern_conv_transpose3d_tensor_tensor_tensor_intarrayref_intarrayref_intarrayref_intt_intarrayref(input, weight, bias, stride, padding, output_padding, groups, dilation); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern_copy_tensor_tensor_bool)(void* self, void* src, void* non_blocking);
+  HOST_API void* lantern_copy_tensor_tensor_bool(void* self, void* src, void* non_blocking) { LANTERN_CHECK_LOADED void* ret = _lantern_copy_tensor_tensor_bool(self, src, non_blocking); LANTERN_HOST_HANDLER return ret; }
   LANTERN_API void* (LANTERN_PTR _lantern_Tensor_copy__tensor_tensor_bool)(void* self, void* src, void* non_blocking);
   HOST_API void* lantern_Tensor_copy__tensor_tensor_bool(void* self, void* src, void* non_blocking) { void* ret = _lantern_Tensor_copy__tensor_tensor_bool(self, src, non_blocking); LANTERN_HOST_HANDLER return ret; }
   LANTERN_API void* (LANTERN_PTR _lantern__copy_from_tensor_tensor_bool)(void* self, void* dst, void* non_blocking);
@@ -3137,6 +3141,10 @@ HOST_API void lantern_cuda_synchronize (int device_index) {
   HOST_API void* lantern_cudnn_convolution_tensor_tensor_intarrayref_intarrayref_intarrayref_intt_bool_bool_bool(void* self, void* weight, void* padding, void* stride, void* dilation, void* groups, void* benchmark, void* deterministic, void* allow_tf32) { LANTERN_CHECK_LOADED void* ret = _lantern_cudnn_convolution_tensor_tensor_intarrayref_intarrayref_intarrayref_intt_bool_bool_bool(self, weight, padding, stride, dilation, groups, benchmark, deterministic, allow_tf32); LANTERN_HOST_HANDLER return ret; }
   LANTERN_API void* (LANTERN_PTR _lantern_cudnn_convolution_transpose_tensor_tensor_intarrayref_intarrayref_intarrayref_intarrayref_intt_bool_bool_bool)(void* self, void* weight, void* padding, void* output_padding, void* stride, void* dilation, void* groups, void* benchmark, void* deterministic, void* allow_tf32);
   HOST_API void* lantern_cudnn_convolution_transpose_tensor_tensor_intarrayref_intarrayref_intarrayref_intarrayref_intt_bool_bool_bool(void* self, void* weight, void* padding, void* output_padding, void* stride, void* dilation, void* groups, void* benchmark, void* deterministic, void* allow_tf32) { LANTERN_CHECK_LOADED void* ret = _lantern_cudnn_convolution_transpose_tensor_tensor_intarrayref_intarrayref_intarrayref_intarrayref_intt_bool_bool_bool(self, weight, padding, output_padding, stride, dilation, groups, benchmark, deterministic, allow_tf32); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern__mps_convolution_transpose_tensor_tensor_intarrayref_intarrayref_intarrayref_intarrayref_intt)(void* self, void* weight, void* padding, void* output_padding, void* stride, void* dilation, void* groups);
+  HOST_API void* lantern__mps_convolution_transpose_tensor_tensor_intarrayref_intarrayref_intarrayref_intarrayref_intt(void* self, void* weight, void* padding, void* output_padding, void* stride, void* dilation, void* groups) { LANTERN_CHECK_LOADED void* ret = _lantern__mps_convolution_transpose_tensor_tensor_intarrayref_intarrayref_intarrayref_intarrayref_intt(self, weight, padding, output_padding, stride, dilation, groups); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern_mps_convolution_transpose_backward_tensor_tensor_tensor_intarrayref_intarrayref_intarrayref_intarrayref_intt_stdarraybool)(void* self, void* grad_output, void* weight, void* padding, void* output_padding, void* stride, void* dilation, void* groups, void* output_mask);
+  HOST_API void* lantern_mps_convolution_transpose_backward_tensor_tensor_tensor_intarrayref_intarrayref_intarrayref_intarrayref_intt_stdarraybool(void* self, void* grad_output, void* weight, void* padding, void* output_padding, void* stride, void* dilation, void* groups, void* output_mask) { LANTERN_CHECK_LOADED void* ret = _lantern_mps_convolution_transpose_backward_tensor_tensor_tensor_intarrayref_intarrayref_intarrayref_intarrayref_intt_stdarraybool(self, grad_output, weight, padding, output_padding, stride, dilation, groups, output_mask); LANTERN_HOST_HANDLER return ret; }
   LANTERN_API void* (LANTERN_PTR _lantern_cudnn_convolution_relu_tensor_tensor_tensor_intarrayref_intarrayref_intarrayref_intt)(void* self, void* weight, void* bias, void* stride, void* padding, void* dilation, void* groups);
   HOST_API void* lantern_cudnn_convolution_relu_tensor_tensor_tensor_intarrayref_intarrayref_intarrayref_intt(void* self, void* weight, void* bias, void* stride, void* padding, void* dilation, void* groups) { LANTERN_CHECK_LOADED void* ret = _lantern_cudnn_convolution_relu_tensor_tensor_tensor_intarrayref_intarrayref_intarrayref_intt(self, weight, bias, stride, padding, dilation, groups); LANTERN_HOST_HANDLER return ret; }
   LANTERN_API void* (LANTERN_PTR _lantern_cudnn_convolution_add_relu_tensor_tensor_tensor_scalar_tensor_intarrayref_intarrayref_intarrayref_intt)(void* self, void* weight, void* z, void* alpha, void* bias, void* stride, void* padding, void* dilation, void* groups);
@@ -3399,6 +3407,8 @@ HOST_API void lantern_cuda_synchronize (int device_index) {
   HOST_API void* lantern__empty_per_channel_affine_quantized_intarrayref_tensor_tensor_intt_tensoroptions_memoryformat(void* size, void* scales, void* zero_points, void* axis, void* options, void* memory_format) { LANTERN_CHECK_LOADED void* ret = _lantern__empty_per_channel_affine_quantized_intarrayref_tensor_tensor_intt_tensoroptions_memoryformat(size, scales, zero_points, axis, options, memory_format); LANTERN_HOST_HANDLER return ret; }
   LANTERN_API void* (LANTERN_PTR _lantern_Tensor_resize__tensor_intarrayref_memoryformat)(void* self, void* size, void* memory_format);
   HOST_API void* lantern_Tensor_resize__tensor_intarrayref_memoryformat(void* self, void* size, void* memory_format) { void* ret = _lantern_Tensor_resize__tensor_intarrayref_memoryformat(self, size, memory_format); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern__resize_output__tensor_intarrayref_device)(void* self, void* size, void* device);
+  HOST_API void* lantern__resize_output__tensor_intarrayref_device(void* self, void* size, void* device) { LANTERN_CHECK_LOADED void* ret = _lantern__resize_output__tensor_intarrayref_device(self, size, device); LANTERN_HOST_HANDLER return ret; }
   LANTERN_API void* (LANTERN_PTR _lantern_empty_quantized_intarrayref_tensor_tensoroptions_memoryformat)(void* size, void* qtensor, void* options, void* memory_format);
   HOST_API void* lantern_empty_quantized_intarrayref_tensor_tensoroptions_memoryformat(void* size, void* qtensor, void* options, void* memory_format) { LANTERN_CHECK_LOADED void* ret = _lantern_empty_quantized_intarrayref_tensor_tensoroptions_memoryformat(size, qtensor, options, memory_format); LANTERN_HOST_HANDLER return ret; }
   LANTERN_API void* (LANTERN_PTR _lantern_empty_out_tensor_intarrayref_memoryformat)(void* out, void* size, void* memory_format);
@@ -3457,6 +3467,8 @@ HOST_API void lantern_cuda_synchronize (int device_index) {
   HOST_API void* lantern_Tensor_expm1__tensor(void* self) { void* ret = _lantern_Tensor_expm1__tensor(self); LANTERN_HOST_HANDLER return ret; }
   LANTERN_API void* (LANTERN_PTR _lantern_expm1_out_tensor_tensor)(void* out, void* self);
   HOST_API void* lantern_expm1_out_tensor_tensor(void* out, void* self) { LANTERN_CHECK_LOADED void* ret = _lantern_expm1_out_tensor_tensor(out, self); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern_Tensor_expand_tensor_csymintarrayref_bool)(void* self, void* size, void* implicit);
+  HOST_API void* lantern_Tensor_expand_tensor_csymintarrayref_bool(void* self, void* size, void* implicit) { void* ret = _lantern_Tensor_expand_tensor_csymintarrayref_bool(self, size, implicit); LANTERN_HOST_HANDLER return ret; }
   LANTERN_API void* (LANTERN_PTR _lantern_Tensor_expand_tensor_intarrayref_bool)(void* self, void* size, void* implicit);
   HOST_API void* lantern_Tensor_expand_tensor_intarrayref_bool(void* self, void* size, void* implicit) { void* ret = _lantern_Tensor_expand_tensor_intarrayref_bool(self, size, implicit); LANTERN_HOST_HANDLER return ret; }
   LANTERN_API void* (LANTERN_PTR _lantern_Tensor_expand_as_tensor_tensor)(void* self, void* other);
@@ -3489,6 +3501,10 @@ HOST_API void lantern_cuda_synchronize (int device_index) {
   HOST_API void* lantern_Tensor_unflatten_tensor_intt_intarrayref_dimnamelist(void* self, void* dim, void* sizes, void* names) { void* ret = _lantern_Tensor_unflatten_tensor_intt_intarrayref_dimnamelist(self, dim, sizes, names); LANTERN_HOST_HANDLER return ret; }
   LANTERN_API void* (LANTERN_PTR _lantern_Tensor_unflatten_tensor_dimname_intarrayref_dimnamelist)(void* self, void* dim, void* sizes, void* names);
   HOST_API void* lantern_Tensor_unflatten_tensor_dimname_intarrayref_dimnamelist(void* self, void* dim, void* sizes, void* names) { void* ret = _lantern_Tensor_unflatten_tensor_dimname_intarrayref_dimnamelist(self, dim, sizes, names); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern_fill_tensor_scalar)(void* self, void* value);
+  HOST_API void* lantern_fill_tensor_scalar(void* self, void* value) { LANTERN_CHECK_LOADED void* ret = _lantern_fill_tensor_scalar(self, value); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern_fill_tensor_tensor)(void* self, void* value);
+  HOST_API void* lantern_fill_tensor_tensor(void* self, void* value) { LANTERN_CHECK_LOADED void* ret = _lantern_fill_tensor_tensor(self, value); LANTERN_HOST_HANDLER return ret; }
   LANTERN_API void* (LANTERN_PTR _lantern_fill__tensor_scalar)(void* self, void* value);
   HOST_API void* lantern_fill__tensor_scalar(void* self, void* value) { LANTERN_CHECK_LOADED void* ret = _lantern_fill__tensor_scalar(self, value); LANTERN_HOST_HANDLER return ret; }
   LANTERN_API void* (LANTERN_PTR _lantern_Tensor_fill__tensor_scalar)(void* self, void* value);
@@ -3573,8 +3589,8 @@ HOST_API void lantern_cuda_synchronize (int device_index) {
   HOST_API void* lantern__grid_sampler_2d_cpu_fallback_backward_tensor_tensor_tensor_intt_intt_bool(void* grad_output, void* input, void* grid, void* interpolation_mode, void* padding_mode, void* align_corners) { LANTERN_CHECK_LOADED void* ret = _lantern__grid_sampler_2d_cpu_fallback_backward_tensor_tensor_tensor_intt_intt_bool(grad_output, input, grid, interpolation_mode, padding_mode, align_corners); LANTERN_HOST_HANDLER return ret; }
   LANTERN_API void* (LANTERN_PTR _lantern_grid_sampler_3d_tensor_tensor_intt_intt_bool)(void* input, void* grid, void* interpolation_mode, void* padding_mode, void* align_corners);
   HOST_API void* lantern_grid_sampler_3d_tensor_tensor_intt_intt_bool(void* input, void* grid, void* interpolation_mode, void* padding_mode, void* align_corners) { LANTERN_CHECK_LOADED void* ret = _lantern_grid_sampler_3d_tensor_tensor_intt_intt_bool(input, grid, interpolation_mode, padding_mode, align_corners); LANTERN_HOST_HANDLER return ret; }
-  LANTERN_API void* (LANTERN_PTR _lantern_grid_sampler_3d_backward_tensor_tensor_tensor_intt_intt_bool)(void* grad_output, void* input, void* grid, void* interpolation_mode, void* padding_mode, void* align_corners);
-  HOST_API void* lantern_grid_sampler_3d_backward_tensor_tensor_tensor_intt_intt_bool(void* grad_output, void* input, void* grid, void* interpolation_mode, void* padding_mode, void* align_corners) { LANTERN_CHECK_LOADED void* ret = _lantern_grid_sampler_3d_backward_tensor_tensor_tensor_intt_intt_bool(grad_output, input, grid, interpolation_mode, padding_mode, align_corners); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern_grid_sampler_3d_backward_tensor_tensor_tensor_intt_intt_bool_stdarraybool)(void* grad_output, void* input, void* grid, void* interpolation_mode, void* padding_mode, void* align_corners, void* output_mask);
+  HOST_API void* lantern_grid_sampler_3d_backward_tensor_tensor_tensor_intt_intt_bool_stdarraybool(void* grad_output, void* input, void* grid, void* interpolation_mode, void* padding_mode, void* align_corners, void* output_mask) { LANTERN_CHECK_LOADED void* ret = _lantern_grid_sampler_3d_backward_tensor_tensor_tensor_intt_intt_bool_stdarraybool(grad_output, input, grid, interpolation_mode, padding_mode, align_corners, output_mask); LANTERN_HOST_HANDLER return ret; }
   LANTERN_API void* (LANTERN_PTR _lantern_hann_window_intt_tensoroptions)(void* window_length, void* options);
   HOST_API void* lantern_hann_window_intt_tensoroptions(void* window_length, void* options) { LANTERN_CHECK_LOADED void* ret = _lantern_hann_window_intt_tensoroptions(window_length, options); LANTERN_HOST_HANDLER return ret; }
   LANTERN_API void* (LANTERN_PTR _lantern_hann_window_intt_bool_tensoroptions)(void* window_length, void* periodic, void* options);
@@ -3625,6 +3641,8 @@ HOST_API void lantern_cuda_synchronize (int device_index) {
   HOST_API void* lantern_index_tensor_constclistcoptionaltensor(void* self, void* indices) { LANTERN_CHECK_LOADED void* ret = _lantern_index_tensor_constclistcoptionaltensor(self, indices); LANTERN_HOST_HANDLER return ret; }
   LANTERN_API void* (LANTERN_PTR _lantern_Tensor_index_tensor_constclistcoptionaltensor)(void* self, void* indices);
   HOST_API void* lantern_Tensor_index_tensor_constclistcoptionaltensor(void* self, void* indices) { void* ret = _lantern_Tensor_index_tensor_constclistcoptionaltensor(self, indices); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern_index_copy_out_tensor_tensor_intt_tensor_tensor)(void* out, void* self, void* dim, void* index, void* source);
+  HOST_API void* lantern_index_copy_out_tensor_tensor_intt_tensor_tensor(void* out, void* self, void* dim, void* index, void* source) { LANTERN_CHECK_LOADED void* ret = _lantern_index_copy_out_tensor_tensor_intt_tensor_tensor(out, self, dim, index, source); LANTERN_HOST_HANDLER return ret; }
   LANTERN_API void* (LANTERN_PTR _lantern_Tensor_index_copy__tensor_intt_tensor_tensor)(void* self, void* dim, void* index, void* source);
   HOST_API void* lantern_Tensor_index_copy__tensor_intt_tensor_tensor(void* self, void* dim, void* index, void* source) { void* ret = _lantern_Tensor_index_copy__tensor_intt_tensor_tensor(self, dim, index, source); LANTERN_HOST_HANDLER return ret; }
   LANTERN_API void* (LANTERN_PTR _lantern_index_copy_tensor_intt_tensor_tensor)(void* self, void* dim, void* index, void* source);
@@ -3745,8 +3763,6 @@ HOST_API void lantern_cuda_synchronize (int device_index) {
   HOST_API void* lantern_layer_norm_tensor_intarrayref_tensor_tensor_double_bool(void* input, void* normalized_shape, void* weight, void* bias, void* eps, void* cudnn_enable) { LANTERN_CHECK_LOADED void* ret = _lantern_layer_norm_tensor_intarrayref_tensor_tensor_double_bool(input, normalized_shape, weight, bias, eps, cudnn_enable); LANTERN_HOST_HANDLER return ret; }
   LANTERN_API void* (LANTERN_PTR _lantern_native_layer_norm_tensor_intarrayref_tensor_tensor_double)(void* input, void* normalized_shape, void* weight, void* bias, void* eps);
   HOST_API void* lantern_native_layer_norm_tensor_intarrayref_tensor_tensor_double(void* input, void* normalized_shape, void* weight, void* bias, void* eps) { LANTERN_CHECK_LOADED void* ret = _lantern_native_layer_norm_tensor_intarrayref_tensor_tensor_double(input, normalized_shape, weight, bias, eps); LANTERN_HOST_HANDLER return ret; }
-  LANTERN_API void* (LANTERN_PTR _lantern__native_multi_head_self_attention_tensor_tensor_tensor_tensor_tensor_tensor)(void* query, void* qkv_weight, void* qkv_bias, void* proj_weight, void* proj_bias, void* mask);
-  HOST_API void* lantern__native_multi_head_self_attention_tensor_tensor_tensor_tensor_tensor_tensor(void* query, void* qkv_weight, void* qkv_bias, void* proj_weight, void* proj_bias, void* mask) { LANTERN_CHECK_LOADED void* ret = _lantern__native_multi_head_self_attention_tensor_tensor_tensor_tensor_tensor_tensor(query, qkv_weight, qkv_bias, proj_weight, proj_bias, mask); LANTERN_HOST_HANDLER return ret; }
   LANTERN_API void* (LANTERN_PTR _lantern_native_layer_norm_backward_tensor_tensor_intarrayref_tensor_tensor_tensor_tensor_stdarraybool)(void* grad_out, void* input, void* normalized_shape, void* mean, void* rstd, void* weight, void* bias, void* output_mask);
   HOST_API void* lantern_native_layer_norm_backward_tensor_tensor_intarrayref_tensor_tensor_tensor_tensor_stdarraybool(void* grad_out, void* input, void* normalized_shape, void* mean, void* rstd, void* weight, void* bias, void* output_mask) { LANTERN_CHECK_LOADED void* ret = _lantern_native_layer_norm_backward_tensor_tensor_intarrayref_tensor_tensor_tensor_tensor_stdarraybool(grad_out, input, normalized_shape, mean, rstd, weight, bias, output_mask); LANTERN_HOST_HANDLER return ret; }
   LANTERN_API void* (LANTERN_PTR _lantern_nan_to_num_tensor_double_double_double)(void* self, void* nan, void* posinf, void* neginf);
@@ -3763,6 +3779,8 @@ HOST_API void lantern_cuda_synchronize (int device_index) {
   HOST_API void* lantern_linear_tensor_tensor_tensor(void* input, void* weight, void* bias) { LANTERN_CHECK_LOADED void* ret = _lantern_linear_tensor_tensor_tensor(input, weight, bias); LANTERN_HOST_HANDLER return ret; }
   LANTERN_API void* (LANTERN_PTR _lantern_linear_out_tensor_tensor_tensor_tensor)(void* out, void* input, void* weight, void* bias);
   HOST_API void* lantern_linear_out_tensor_tensor_tensor_tensor(void* out, void* input, void* weight, void* bias) { LANTERN_CHECK_LOADED void* ret = _lantern_linear_out_tensor_tensor_tensor_tensor(out, input, weight, bias); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern__mps_linear_tensor_tensor_tensor)(void* self, void* weight, void* bias);
+  HOST_API void* lantern__mps_linear_tensor_tensor_tensor(void* self, void* weight, void* bias) { LANTERN_CHECK_LOADED void* ret = _lantern__mps_linear_tensor_tensor_tensor(self, weight, bias); LANTERN_HOST_HANDLER return ret; }
   LANTERN_API void* (LANTERN_PTR _lantern_mkldnn_linear_tensor_tensor_tensor)(void* self, void* weight, void* bias);
   HOST_API void* lantern_mkldnn_linear_tensor_tensor_tensor(void* self, void* weight, void* bias) { LANTERN_CHECK_LOADED void* ret = _lantern_mkldnn_linear_tensor_tensor_tensor(self, weight, bias); LANTERN_HOST_HANDLER return ret; }
   LANTERN_API void* (LANTERN_PTR _lantern_mkldnn_linear_backward_input_intarrayref_tensor_tensor)(void* input_size, void* grad_output, void* weight);
@@ -3771,6 +3789,12 @@ HOST_API void lantern_cuda_synchronize (int device_index) {
   HOST_API void* lantern_mkldnn_linear_backward_weights_tensor_tensor_tensor_bool(void* grad_output, void* input, void* weight, void* bias_defined) { LANTERN_CHECK_LOADED void* ret = _lantern_mkldnn_linear_backward_weights_tensor_tensor_tensor_bool(grad_output, input, weight, bias_defined); LANTERN_HOST_HANDLER return ret; }
   LANTERN_API void* (LANTERN_PTR _lantern_mkldnn_linear_backward_tensor_tensor_tensor_stdarraybool)(void* self, void* grad_output, void* weight, void* output_mask);
   HOST_API void* lantern_mkldnn_linear_backward_tensor_tensor_tensor_stdarraybool(void* self, void* grad_output, void* weight, void* output_mask) { LANTERN_CHECK_LOADED void* ret = _lantern_mkldnn_linear_backward_tensor_tensor_tensor_stdarraybool(self, grad_output, weight, output_mask); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern__mps_linear_backward_input_intarrayref_tensor_tensor)(void* input_size, void* grad_output, void* weight);
+  HOST_API void* lantern__mps_linear_backward_input_intarrayref_tensor_tensor(void* input_size, void* grad_output, void* weight) { LANTERN_CHECK_LOADED void* ret = _lantern__mps_linear_backward_input_intarrayref_tensor_tensor(input_size, grad_output, weight); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern__mps_linear_backward_weights_tensor_tensor_tensor_bool)(void* grad_output, void* input, void* weight, void* bias_defined);
+  HOST_API void* lantern__mps_linear_backward_weights_tensor_tensor_tensor_bool(void* grad_output, void* input, void* weight, void* bias_defined) { LANTERN_CHECK_LOADED void* ret = _lantern__mps_linear_backward_weights_tensor_tensor_tensor_bool(grad_output, input, weight, bias_defined); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern_mps_linear_backward_tensor_tensor_tensor_stdarraybool)(void* self, void* grad_output, void* weight, void* output_mask);
+  HOST_API void* lantern_mps_linear_backward_tensor_tensor_tensor_stdarraybool(void* self, void* grad_output, void* weight, void* output_mask) { LANTERN_CHECK_LOADED void* ret = _lantern_mps_linear_backward_tensor_tensor_tensor_stdarraybool(self, grad_output, weight, output_mask); LANTERN_HOST_HANDLER return ret; }
   LANTERN_API void* (LANTERN_PTR _lantern_fbgemm_linear_int8_weight_fp32_activation_tensor_tensor_tensor_tensor_scalar_scalar_tensor)(void* input, void* weight, void* packed, void* col_offsets, void* weight_scale, void* weight_zero_point, void* bias);
   HOST_API void* lantern_fbgemm_linear_int8_weight_fp32_activation_tensor_tensor_tensor_tensor_scalar_scalar_tensor(void* input, void* weight, void* packed, void* col_offsets, void* weight_scale, void* weight_zero_point, void* bias) { LANTERN_CHECK_LOADED void* ret = _lantern_fbgemm_linear_int8_weight_fp32_activation_tensor_tensor_tensor_tensor_scalar_scalar_tensor(input, weight, packed, col_offsets, weight_scale, weight_zero_point, bias); LANTERN_HOST_HANDLER return ret; }
   LANTERN_API void* (LANTERN_PTR _lantern_fbgemm_linear_int8_weight_tensor_tensor_tensor_tensor_scalar_scalar_tensor)(void* input, void* weight, void* packed, void* col_offsets, void* weight_scale, void* weight_zero_point, void* bias);
@@ -3889,6 +3913,8 @@ HOST_API void lantern_cuda_synchronize (int device_index) {
   HOST_API void* lantern_log_softmax_tensor_intt_scalartype(void* self, void* dim, void* dtype) { LANTERN_CHECK_LOADED void* ret = _lantern_log_softmax_tensor_intt_scalartype(self, dim, dtype); LANTERN_HOST_HANDLER return ret; }
   LANTERN_API void* (LANTERN_PTR _lantern_Tensor_log_softmax_tensor_intt_scalartype)(void* self, void* dim, void* dtype);
   HOST_API void* lantern_Tensor_log_softmax_tensor_intt_scalartype(void* self, void* dim, void* dtype) { void* ret = _lantern_Tensor_log_softmax_tensor_intt_scalartype(self, dim, dtype); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern_log_softmax_out_tensor_tensor_intt_scalartype)(void* out, void* self, void* dim, void* dtype);
+  HOST_API void* lantern_log_softmax_out_tensor_tensor_intt_scalartype(void* out, void* self, void* dim, void* dtype) { LANTERN_CHECK_LOADED void* ret = _lantern_log_softmax_out_tensor_tensor_intt_scalartype(out, self, dim, dtype); LANTERN_HOST_HANDLER return ret; }
   LANTERN_API void* (LANTERN_PTR _lantern_log_softmax_tensor_dimname_scalartype)(void* self, void* dim, void* dtype);
   HOST_API void* lantern_log_softmax_tensor_dimname_scalartype(void* self, void* dim, void* dtype) { LANTERN_CHECK_LOADED void* ret = _lantern_log_softmax_tensor_dimname_scalartype(self, dim, dtype); LANTERN_HOST_HANDLER return ret; }
   LANTERN_API void* (LANTERN_PTR _lantern_Tensor_log_softmax_tensor_dimname_scalartype)(void* self, void* dim, void* dtype);
@@ -3993,6 +4019,10 @@ HOST_API void lantern_cuda_synchronize (int device_index) {
   HOST_API void* lantern_max_pool1d_tensor_intarrayref_intarrayref_intarrayref_intarrayref_bool(void* self, void* kernel_size, void* stride, void* padding, void* dilation, void* ceil_mode) { LANTERN_CHECK_LOADED void* ret = _lantern_max_pool1d_tensor_intarrayref_intarrayref_intarrayref_intarrayref_bool(self, kernel_size, stride, padding, dilation, ceil_mode); LANTERN_HOST_HANDLER return ret; }
   LANTERN_API void* (LANTERN_PTR _lantern_max_pool2d_tensor_intarrayref_intarrayref_intarrayref_intarrayref_bool)(void* self, void* kernel_size, void* stride, void* padding, void* dilation, void* ceil_mode);
   HOST_API void* lantern_max_pool2d_tensor_intarrayref_intarrayref_intarrayref_intarrayref_bool(void* self, void* kernel_size, void* stride, void* padding, void* dilation, void* ceil_mode) { LANTERN_CHECK_LOADED void* ret = _lantern_max_pool2d_tensor_intarrayref_intarrayref_intarrayref_intarrayref_bool(self, kernel_size, stride, padding, dilation, ceil_mode); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern__mps_max_pool2d_tensor_intarrayref_intarrayref_intarrayref_intarrayref_bool)(void* self, void* kernel_size, void* stride, void* padding, void* dilation, void* ceil_mode);
+  HOST_API void* lantern__mps_max_pool2d_tensor_intarrayref_intarrayref_intarrayref_intarrayref_bool(void* self, void* kernel_size, void* stride, void* padding, void* dilation, void* ceil_mode) { LANTERN_CHECK_LOADED void* ret = _lantern__mps_max_pool2d_tensor_intarrayref_intarrayref_intarrayref_intarrayref_bool(self, kernel_size, stride, padding, dilation, ceil_mode); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern_mps_max_pool2d_backward_tensor_tensor_intarrayref_intarrayref_intarrayref_intarrayref_bool)(void* grad_output, void* self, void* kernel_size, void* stride, void* padding, void* dilation, void* ceil_mode);
+  HOST_API void* lantern_mps_max_pool2d_backward_tensor_tensor_intarrayref_intarrayref_intarrayref_intarrayref_bool(void* grad_output, void* self, void* kernel_size, void* stride, void* padding, void* dilation, void* ceil_mode) { LANTERN_CHECK_LOADED void* ret = _lantern_mps_max_pool2d_backward_tensor_tensor_intarrayref_intarrayref_intarrayref_intarrayref_bool(grad_output, self, kernel_size, stride, padding, dilation, ceil_mode); LANTERN_HOST_HANDLER return ret; }
   LANTERN_API void* (LANTERN_PTR _lantern_mkldnn_max_pool2d_tensor_intarrayref_intarrayref_intarrayref_intarrayref_bool)(void* self, void* kernel_size, void* stride, void* padding, void* dilation, void* ceil_mode);
   HOST_API void* lantern_mkldnn_max_pool2d_tensor_intarrayref_intarrayref_intarrayref_intarrayref_bool(void* self, void* kernel_size, void* stride, void* padding, void* dilation, void* ceil_mode) { LANTERN_CHECK_LOADED void* ret = _lantern_mkldnn_max_pool2d_tensor_intarrayref_intarrayref_intarrayref_intarrayref_bool(self, kernel_size, stride, padding, dilation, ceil_mode); LANTERN_HOST_HANDLER return ret; }
   LANTERN_API void* (LANTERN_PTR _lantern_mkldnn_max_pool2d_backward_tensor_tensor_tensor_intarrayref_intarrayref_intarrayref_intarrayref_bool)(void* grad_output, void* output, void* input, void* kernel_size, void* stride, void* padding, void* dilation, void* ceil_mode);
@@ -4079,6 +4109,10 @@ HOST_API void lantern_cuda_synchronize (int device_index) {
   HOST_API void* lantern_Tensor_amin_tensor_intarrayref_bool(void* self, void* dim, void* keepdim) { void* ret = _lantern_Tensor_amin_tensor_intarrayref_bool(self, dim, keepdim); LANTERN_HOST_HANDLER return ret; }
   LANTERN_API void* (LANTERN_PTR _lantern_amin_out_tensor_tensor_intarrayref_bool)(void* out, void* self, void* dim, void* keepdim);
   HOST_API void* lantern_amin_out_tensor_tensor_intarrayref_bool(void* out, void* self, void* dim, void* keepdim) { LANTERN_CHECK_LOADED void* ret = _lantern_amin_out_tensor_tensor_intarrayref_bool(out, self, dim, keepdim); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern__mps_convolution_tensor_tensor_tensor_intarrayref_intarrayref_intarrayref_intt)(void* self, void* weight, void* bias, void* padding, void* stride, void* dilation, void* groups);
+  HOST_API void* lantern__mps_convolution_tensor_tensor_tensor_intarrayref_intarrayref_intarrayref_intt(void* self, void* weight, void* bias, void* padding, void* stride, void* dilation, void* groups) { LANTERN_CHECK_LOADED void* ret = _lantern__mps_convolution_tensor_tensor_tensor_intarrayref_intarrayref_intarrayref_intt(self, weight, bias, padding, stride, dilation, groups); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern_mps_convolution_backward_tensor_tensor_tensor_intarrayref_intarrayref_intarrayref_intt_stdarraybool)(void* self, void* grad_output, void* weight, void* padding, void* stride, void* dilation, void* groups, void* output_mask);
+  HOST_API void* lantern_mps_convolution_backward_tensor_tensor_tensor_intarrayref_intarrayref_intarrayref_intt_stdarraybool(void* self, void* grad_output, void* weight, void* padding, void* stride, void* dilation, void* groups, void* output_mask) { LANTERN_CHECK_LOADED void* ret = _lantern_mps_convolution_backward_tensor_tensor_tensor_intarrayref_intarrayref_intarrayref_intt_stdarraybool(self, grad_output, weight, padding, stride, dilation, groups, output_mask); LANTERN_HOST_HANDLER return ret; }
   LANTERN_API void* (LANTERN_PTR _lantern_mkldnn_convolution_tensor_tensor_tensor_intarrayref_intarrayref_intarrayref_intt)(void* self, void* weight, void* bias, void* padding, void* stride, void* dilation, void* groups);
   HOST_API void* lantern_mkldnn_convolution_tensor_tensor_tensor_intarrayref_intarrayref_intarrayref_intt(void* self, void* weight, void* bias, void* padding, void* stride, void* dilation, void* groups) { LANTERN_CHECK_LOADED void* ret = _lantern_mkldnn_convolution_tensor_tensor_tensor_intarrayref_intarrayref_intarrayref_intt(self, weight, bias, padding, stride, dilation, groups); LANTERN_HOST_HANDLER return ret; }
   LANTERN_API void* (LANTERN_PTR _lantern_miopen_batch_norm_tensor_tensor_tensor_tensor_tensor_bool_double_double)(void* input, void* weight, void* bias, void* running_mean, void* running_var, void* training, void* exponential_average_factor, void* epsilon);
@@ -4165,6 +4199,10 @@ HOST_API void lantern_cuda_synchronize (int device_index) {
   HOST_API void* lantern_narrow_copy_tensor_intt_intt_intt(void* self, void* dim, void* start, void* length) { LANTERN_CHECK_LOADED void* ret = _lantern_narrow_copy_tensor_intt_intt_intt(self, dim, start, length); LANTERN_HOST_HANDLER return ret; }
   LANTERN_API void* (LANTERN_PTR _lantern_Tensor_narrow_copy_tensor_intt_intt_intt)(void* self, void* dim, void* start, void* length);
   HOST_API void* lantern_Tensor_narrow_copy_tensor_intt_intt_intt(void* self, void* dim, void* start, void* length) { void* ret = _lantern_Tensor_narrow_copy_tensor_intt_intt_intt(self, dim, start, length); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern_narrow_copy_tensor_intt_intt_csymint)(void* self, void* dim, void* start, void* length);
+  HOST_API void* lantern_narrow_copy_tensor_intt_intt_csymint(void* self, void* dim, void* start, void* length) { LANTERN_CHECK_LOADED void* ret = _lantern_narrow_copy_tensor_intt_intt_csymint(self, dim, start, length); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern_Tensor_narrow_copy_tensor_intt_intt_csymint)(void* self, void* dim, void* start, void* length);
+  HOST_API void* lantern_Tensor_narrow_copy_tensor_intt_intt_csymint(void* self, void* dim, void* start, void* length) { void* ret = _lantern_Tensor_narrow_copy_tensor_intt_intt_csymint(self, dim, start, length); LANTERN_HOST_HANDLER return ret; }
   LANTERN_API void* (LANTERN_PTR _lantern_narrow_copy_out_tensor_tensor_intt_intt_intt)(void* out, void* self, void* dim, void* start, void* length);
   HOST_API void* lantern_narrow_copy_out_tensor_tensor_intt_intt_intt(void* out, void* self, void* dim, void* start, void* length) { LANTERN_CHECK_LOADED void* ret = _lantern_narrow_copy_out_tensor_tensor_intt_intt_intt(out, self, dim, start, length); LANTERN_HOST_HANDLER return ret; }
   LANTERN_API void* (LANTERN_PTR _lantern_narrow_tensor_intt_intt_intt)(void* self, void* dim, void* start, void* length);
@@ -4467,14 +4505,16 @@ HOST_API void lantern_cuda_synchronize (int device_index) {
   HOST_API void* lantern_prelu_backward_tensor_tensor_tensor(void* grad_output, void* self, void* weight) { LANTERN_CHECK_LOADED void* ret = _lantern_prelu_backward_tensor_tensor_tensor(grad_output, self, weight); LANTERN_HOST_HANDLER return ret; }
   LANTERN_API void* (LANTERN_PTR _lantern_Tensor_prelu_backward_tensor_tensor_tensor)(void* grad_output, void* self, void* weight);
   HOST_API void* lantern_Tensor_prelu_backward_tensor_tensor_tensor(void* grad_output, void* self, void* weight) { void* ret = _lantern_Tensor_prelu_backward_tensor_tensor_tensor(grad_output, self, weight); LANTERN_HOST_HANDLER return ret; }
-  LANTERN_API void* (LANTERN_PTR _lantern_gelu_out_tensor_tensor)(void* out, void* self);
-  HOST_API void* lantern_gelu_out_tensor_tensor(void* out, void* self) { LANTERN_CHECK_LOADED void* ret = _lantern_gelu_out_tensor_tensor(out, self); LANTERN_HOST_HANDLER return ret; }
-  LANTERN_API void* (LANTERN_PTR _lantern_gelu_tensor)(void* self);
-  HOST_API void* lantern_gelu_tensor(void* self) { LANTERN_CHECK_LOADED void* ret = _lantern_gelu_tensor(self); LANTERN_HOST_HANDLER return ret; }
-  LANTERN_API void* (LANTERN_PTR _lantern_gelu_backward_out_tensor_tensor_tensor)(void* grad_input, void* grad, void* self);
-  HOST_API void* lantern_gelu_backward_out_tensor_tensor_tensor(void* grad_input, void* grad, void* self) { LANTERN_CHECK_LOADED void* ret = _lantern_gelu_backward_out_tensor_tensor_tensor(grad_input, grad, self); LANTERN_HOST_HANDLER return ret; }
-  LANTERN_API void* (LANTERN_PTR _lantern_gelu_backward_tensor_tensor)(void* grad, void* self);
-  HOST_API void* lantern_gelu_backward_tensor_tensor(void* grad, void* self) { LANTERN_CHECK_LOADED void* ret = _lantern_gelu_backward_tensor_tensor(grad, self); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern_gelu_out_tensor_tensor_cstringview)(void* out, void* self, void* approximate);
+  HOST_API void* lantern_gelu_out_tensor_tensor_cstringview(void* out, void* self, void* approximate) { LANTERN_CHECK_LOADED void* ret = _lantern_gelu_out_tensor_tensor_cstringview(out, self, approximate); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern_gelu__tensor_cstringview)(void* self, void* approximate);
+  HOST_API void* lantern_gelu__tensor_cstringview(void* self, void* approximate) { LANTERN_CHECK_LOADED void* ret = _lantern_gelu__tensor_cstringview(self, approximate); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern_gelu_tensor_cstringview)(void* self, void* approximate);
+  HOST_API void* lantern_gelu_tensor_cstringview(void* self, void* approximate) { LANTERN_CHECK_LOADED void* ret = _lantern_gelu_tensor_cstringview(self, approximate); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern_gelu_backward_out_tensor_tensor_tensor_cstringview)(void* grad_input, void* grad_output, void* self, void* approximate);
+  HOST_API void* lantern_gelu_backward_out_tensor_tensor_tensor_cstringview(void* grad_input, void* grad_output, void* self, void* approximate) { LANTERN_CHECK_LOADED void* ret = _lantern_gelu_backward_out_tensor_tensor_tensor_cstringview(grad_input, grad_output, self, approximate); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern_gelu_backward_tensor_tensor_cstringview)(void* grad_output, void* self, void* approximate);
+  HOST_API void* lantern_gelu_backward_tensor_tensor_cstringview(void* grad_output, void* self, void* approximate) { LANTERN_CHECK_LOADED void* ret = _lantern_gelu_backward_tensor_tensor_cstringview(grad_output, self, approximate); LANTERN_HOST_HANDLER return ret; }
   LANTERN_API void* (LANTERN_PTR _lantern_infinitely_differentiable_gelu_backward_tensor_tensor)(void* grad, void* self);
   HOST_API void* lantern_infinitely_differentiable_gelu_backward_tensor_tensor(void* grad, void* self) { LANTERN_CHECK_LOADED void* ret = _lantern_infinitely_differentiable_gelu_backward_tensor_tensor(grad, self); LANTERN_HOST_HANDLER return ret; }
   LANTERN_API void* (LANTERN_PTR _lantern_hardshrink_out_tensor_tensor_scalar)(void* out, void* self, void* lambd);
@@ -4629,6 +4669,8 @@ HOST_API void lantern_cuda_synchronize (int device_index) {
   HOST_API void* lantern_softmax_tensor_intt_scalartype(void* self, void* dim, void* dtype) { LANTERN_CHECK_LOADED void* ret = _lantern_softmax_tensor_intt_scalartype(self, dim, dtype); LANTERN_HOST_HANDLER return ret; }
   LANTERN_API void* (LANTERN_PTR _lantern_Tensor_softmax_tensor_intt_scalartype)(void* self, void* dim, void* dtype);
   HOST_API void* lantern_Tensor_softmax_tensor_intt_scalartype(void* self, void* dim, void* dtype) { void* ret = _lantern_Tensor_softmax_tensor_intt_scalartype(self, dim, dtype); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern_softmax_out_tensor_tensor_intt_scalartype)(void* out, void* self, void* dim, void* dtype);
+  HOST_API void* lantern_softmax_out_tensor_tensor_intt_scalartype(void* out, void* self, void* dim, void* dtype) { LANTERN_CHECK_LOADED void* ret = _lantern_softmax_out_tensor_tensor_intt_scalartype(out, self, dim, dtype); LANTERN_HOST_HANDLER return ret; }
   LANTERN_API void* (LANTERN_PTR _lantern_softmax_tensor_dimname_scalartype)(void* self, void* dim, void* dtype);
   HOST_API void* lantern_softmax_tensor_dimname_scalartype(void* self, void* dim, void* dtype) { LANTERN_CHECK_LOADED void* ret = _lantern_softmax_tensor_dimname_scalartype(self, dim, dtype); LANTERN_HOST_HANDLER return ret; }
   LANTERN_API void* (LANTERN_PTR _lantern_Tensor_softmax_tensor_dimname_scalartype)(void* self, void* dim, void* dtype);
@@ -4649,6 +4691,10 @@ HOST_API void lantern_cuda_synchronize (int device_index) {
   HOST_API void* lantern_split_tensor_intt_intt(void* self, void* split_size, void* dim) { LANTERN_CHECK_LOADED void* ret = _lantern_split_tensor_intt_intt(self, split_size, dim); LANTERN_HOST_HANDLER return ret; }
   LANTERN_API void* (LANTERN_PTR _lantern_Tensor_split_tensor_intt_intt)(void* self, void* split_size, void* dim);
   HOST_API void* lantern_Tensor_split_tensor_intt_intt(void* self, void* split_size, void* dim) { void* ret = _lantern_Tensor_split_tensor_intt_intt(self, split_size, dim); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern_split_tensor_intarrayref_intt)(void* self, void* split_size, void* dim);
+  HOST_API void* lantern_split_tensor_intarrayref_intt(void* self, void* split_size, void* dim) { LANTERN_CHECK_LOADED void* ret = _lantern_split_tensor_intarrayref_intt(self, split_size, dim); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern_Tensor_split_tensor_intarrayref_intt)(void* self, void* split_size, void* dim);
+  HOST_API void* lantern_Tensor_split_tensor_intarrayref_intt(void* self, void* split_size, void* dim) { void* ret = _lantern_Tensor_split_tensor_intarrayref_intt(self, split_size, dim); LANTERN_HOST_HANDLER return ret; }
   LANTERN_API void* (LANTERN_PTR _lantern_unsafe_split_with_sizes_tensor_intarrayref_intt)(void* self, void* split_sizes, void* dim);
   HOST_API void* lantern_unsafe_split_with_sizes_tensor_intarrayref_intt(void* self, void* split_sizes, void* dim) { LANTERN_CHECK_LOADED void* ret = _lantern_unsafe_split_with_sizes_tensor_intarrayref_intt(self, split_sizes, dim); LANTERN_HOST_HANDLER return ret; }
   LANTERN_API void* (LANTERN_PTR _lantern_Tensor_unsafe_split_with_sizes_tensor_intarrayref_intt)(void* self, void* split_sizes, void* dim);
@@ -4729,6 +4775,10 @@ HOST_API void lantern_cuda_synchronize (int device_index) {
   HOST_API void* lantern_stft_tensor_intt_intt_intt_tensor_bool_bool_bool(void* self, void* n_fft, void* hop_length, void* win_length, void* window, void* normalized, void* onesided, void* return_complex) { LANTERN_CHECK_LOADED void* ret = _lantern_stft_tensor_intt_intt_intt_tensor_bool_bool_bool(self, n_fft, hop_length, win_length, window, normalized, onesided, return_complex); LANTERN_HOST_HANDLER return ret; }
   LANTERN_API void* (LANTERN_PTR _lantern_Tensor_stft_tensor_intt_intt_intt_tensor_bool_bool_bool)(void* self, void* n_fft, void* hop_length, void* win_length, void* window, void* normalized, void* onesided, void* return_complex);
   HOST_API void* lantern_Tensor_stft_tensor_intt_intt_intt_tensor_bool_bool_bool(void* self, void* n_fft, void* hop_length, void* win_length, void* window, void* normalized, void* onesided, void* return_complex) { void* ret = _lantern_Tensor_stft_tensor_intt_intt_intt_tensor_bool_bool_bool(self, n_fft, hop_length, win_length, window, normalized, onesided, return_complex); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern_stft_tensor_intt_intt_intt_tensor_bool_cstringview_bool_bool_bool)(void* self, void* n_fft, void* hop_length, void* win_length, void* window, void* center, void* pad_mode, void* normalized, void* onesided, void* return_complex);
+  HOST_API void* lantern_stft_tensor_intt_intt_intt_tensor_bool_cstringview_bool_bool_bool(void* self, void* n_fft, void* hop_length, void* win_length, void* window, void* center, void* pad_mode, void* normalized, void* onesided, void* return_complex) { LANTERN_CHECK_LOADED void* ret = _lantern_stft_tensor_intt_intt_intt_tensor_bool_cstringview_bool_bool_bool(self, n_fft, hop_length, win_length, window, center, pad_mode, normalized, onesided, return_complex); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern_Tensor_stft_tensor_intt_intt_intt_tensor_bool_cstringview_bool_bool_bool)(void* self, void* n_fft, void* hop_length, void* win_length, void* window, void* center, void* pad_mode, void* normalized, void* onesided, void* return_complex);
+  HOST_API void* lantern_Tensor_stft_tensor_intt_intt_intt_tensor_bool_cstringview_bool_bool_bool(void* self, void* n_fft, void* hop_length, void* win_length, void* window, void* center, void* pad_mode, void* normalized, void* onesided, void* return_complex) { void* ret = _lantern_Tensor_stft_tensor_intt_intt_intt_tensor_bool_cstringview_bool_bool_bool(self, n_fft, hop_length, win_length, window, center, pad_mode, normalized, onesided, return_complex); LANTERN_HOST_HANDLER return ret; }
   LANTERN_API void* (LANTERN_PTR _lantern_istft_tensor_intt_intt_intt_tensor_bool_bool_bool_intt_bool)(void* self, void* n_fft, void* hop_length, void* win_length, void* window, void* center, void* normalized, void* onesided, void* length, void* return_complex);
   HOST_API void* lantern_istft_tensor_intt_intt_intt_tensor_bool_bool_bool_intt_bool(void* self, void* n_fft, void* hop_length, void* win_length, void* window, void* center, void* normalized, void* onesided, void* length, void* return_complex) { LANTERN_CHECK_LOADED void* ret = _lantern_istft_tensor_intt_intt_intt_tensor_bool_bool_bool_intt_bool(self, n_fft, hop_length, win_length, window, center, normalized, onesided, length, return_complex); LANTERN_HOST_HANDLER return ret; }
   LANTERN_API void* (LANTERN_PTR _lantern_Tensor_istft_tensor_intt_intt_intt_tensor_bool_bool_bool_intt_bool)(void* self, void* n_fft, void* hop_length, void* win_length, void* window, void* center, void* normalized, void* onesided, void* length, void* return_complex);
@@ -4757,10 +4807,6 @@ HOST_API void lantern_cuda_synchronize (int device_index) {
   HOST_API void* lantern_sum_out_tensor_tensor_intarrayref_bool_scalartype(void* out, void* self, void* dim, void* keepdim, void* dtype) { LANTERN_CHECK_LOADED void* ret = _lantern_sum_out_tensor_tensor_intarrayref_bool_scalartype(out, self, dim, keepdim, dtype); LANTERN_HOST_HANDLER return ret; }
   LANTERN_API void* (LANTERN_PTR _lantern_sum_out_tensor_tensor_dimnamelist_bool_scalartype)(void* out, void* self, void* dim, void* keepdim, void* dtype);
   HOST_API void* lantern_sum_out_tensor_tensor_dimnamelist_bool_scalartype(void* out, void* self, void* dim, void* keepdim, void* dtype) { LANTERN_CHECK_LOADED void* ret = _lantern_sum_out_tensor_tensor_dimnamelist_bool_scalartype(out, self, dim, keepdim, dtype); LANTERN_HOST_HANDLER return ret; }
-  LANTERN_API void* (LANTERN_PTR _lantern_nansum_tensor_scalartype)(void* self, void* dtype);
-  HOST_API void* lantern_nansum_tensor_scalartype(void* self, void* dtype) { LANTERN_CHECK_LOADED void* ret = _lantern_nansum_tensor_scalartype(self, dtype); LANTERN_HOST_HANDLER return ret; }
-  LANTERN_API void* (LANTERN_PTR _lantern_Tensor_nansum_tensor_scalartype)(void* self, void* dtype);
-  HOST_API void* lantern_Tensor_nansum_tensor_scalartype(void* self, void* dtype) { void* ret = _lantern_Tensor_nansum_tensor_scalartype(self, dtype); LANTERN_HOST_HANDLER return ret; }
   LANTERN_API void* (LANTERN_PTR _lantern_nansum_tensor_intarrayref_bool_scalartype)(void* self, void* dim, void* keepdim, void* dtype);
   HOST_API void* lantern_nansum_tensor_intarrayref_bool_scalartype(void* self, void* dim, void* keepdim, void* dtype) { LANTERN_CHECK_LOADED void* ret = _lantern_nansum_tensor_intarrayref_bool_scalartype(self, dim, keepdim, dtype); LANTERN_HOST_HANDLER return ret; }
   LANTERN_API void* (LANTERN_PTR _lantern_Tensor_nansum_tensor_intarrayref_bool_scalartype)(void* self, void* dim, void* keepdim, void* dtype);
@@ -4931,6 +4977,14 @@ HOST_API void lantern_cuda_synchronize (int device_index) {
   HOST_API void* lantern_trapz_tensor_tensor_intt(void* y, void* x, void* dim) { LANTERN_CHECK_LOADED void* ret = _lantern_trapz_tensor_tensor_intt(y, x, dim); LANTERN_HOST_HANDLER return ret; }
   LANTERN_API void* (LANTERN_PTR _lantern_trapz_tensor_double_intt)(void* y, void* dx, void* dim);
   HOST_API void* lantern_trapz_tensor_double_intt(void* y, void* dx, void* dim) { LANTERN_CHECK_LOADED void* ret = _lantern_trapz_tensor_double_intt(y, dx, dim); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern__transform_bias_rescale_qkv_tensor_tensor_intt)(void* qkv, void* qkv_bias, void* num_heads);
+  HOST_API void* lantern__transform_bias_rescale_qkv_tensor_tensor_intt(void* qkv, void* qkv_bias, void* num_heads) { LANTERN_CHECK_LOADED void* ret = _lantern__transform_bias_rescale_qkv_tensor_tensor_intt(qkv, qkv_bias, num_heads); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern__nested_tensor_from_mask_tensor_tensor)(void* t, void* mask);
+  HOST_API void* lantern__nested_tensor_from_mask_tensor_tensor(void* t, void* mask) { LANTERN_CHECK_LOADED void* ret = _lantern__nested_tensor_from_mask_tensor_tensor(t, mask); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern__nested_from_padded_tensor_tensor_bool)(void* padded, void* cpu_nested_shape_example, void* fuse_transform_0213);
+  HOST_API void* lantern__nested_from_padded_tensor_tensor_bool(void* padded, void* cpu_nested_shape_example, void* fuse_transform_0213) { LANTERN_CHECK_LOADED void* ret = _lantern__nested_from_padded_tensor_tensor_bool(padded, cpu_nested_shape_example, fuse_transform_0213); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern__nested_from_padded_and_nested_example_tensor_tensor)(void* padded, void* nt_example);
+  HOST_API void* lantern__nested_from_padded_and_nested_example_tensor_tensor(void* padded, void* nt_example) { LANTERN_CHECK_LOADED void* ret = _lantern__nested_from_padded_and_nested_example_tensor_tensor(padded, nt_example); LANTERN_HOST_HANDLER return ret; }
   LANTERN_API void* (LANTERN_PTR _lantern__trilinear_tensor_tensor_tensor_intarrayref_intarrayref_intarrayref_intarrayref_intt)(void* i1, void* i2, void* i3, void* expand1, void* expand2, void* expand3, void* sumdim, void* unroll_dim);
   HOST_API void* lantern__trilinear_tensor_tensor_tensor_intarrayref_intarrayref_intarrayref_intarrayref_intt(void* i1, void* i2, void* i3, void* expand1, void* expand2, void* expand3, void* sumdim, void* unroll_dim) { LANTERN_CHECK_LOADED void* ret = _lantern__trilinear_tensor_tensor_tensor_intarrayref_intarrayref_intarrayref_intarrayref_intt(i1, i2, i3, expand1, expand2, expand3, sumdim, unroll_dim); LANTERN_HOST_HANDLER return ret; }
   LANTERN_API void* (LANTERN_PTR _lantern_triplet_margin_loss_tensor_tensor_tensor_double_double_double_bool_intt)(void* anchor, void* positive, void* negative, void* margin, void* p, void* eps, void* swap, void* reduction);
@@ -5023,6 +5077,8 @@ HOST_API void lantern_cuda_synchronize (int device_index) {
   HOST_API void* lantern_where_tensor_tensor_tensor(void* condition, void* self, void* other) { LANTERN_CHECK_LOADED void* ret = _lantern_where_tensor_tensor_tensor(condition, self, other); LANTERN_HOST_HANDLER return ret; }
   LANTERN_API void* (LANTERN_PTR _lantern_Tensor_where_tensor_tensor_tensor)(void* condition, void* self, void* other);
   HOST_API void* lantern_Tensor_where_tensor_tensor_tensor(void* condition, void* self, void* other) { void* ret = _lantern_Tensor_where_tensor_tensor_tensor(condition, self, other); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern_where_out_tensor_tensor_tensor_tensor)(void* out, void* condition, void* self, void* other);
+  HOST_API void* lantern_where_out_tensor_tensor_tensor_tensor(void* out, void* condition, void* self, void* other) { LANTERN_CHECK_LOADED void* ret = _lantern_where_out_tensor_tensor_tensor_tensor(out, condition, self, other); LANTERN_HOST_HANDLER return ret; }
   LANTERN_API void* (LANTERN_PTR _lantern_where_tensor_scalar_tensor)(void* condition, void* self, void* other);
   HOST_API void* lantern_where_tensor_scalar_tensor(void* condition, void* self, void* other) { LANTERN_CHECK_LOADED void* ret = _lantern_where_tensor_scalar_tensor(condition, self, other); LANTERN_HOST_HANDLER return ret; }
   LANTERN_API void* (LANTERN_PTR _lantern_where_tensor_tensor_scalar)(void* condition, void* self, void* other);
@@ -5031,16 +5087,14 @@ HOST_API void lantern_cuda_synchronize (int device_index) {
   HOST_API void* lantern_where_tensor_scalar_scalar(void* condition, void* self, void* other) { LANTERN_CHECK_LOADED void* ret = _lantern_where_tensor_scalar_scalar(condition, self, other); LANTERN_HOST_HANDLER return ret; }
   LANTERN_API void* (LANTERN_PTR _lantern_where_tensor)(void* condition);
   HOST_API void* lantern_where_tensor(void* condition) { LANTERN_CHECK_LOADED void* ret = _lantern_where_tensor(condition); LANTERN_HOST_HANDLER return ret; }
-  LANTERN_API void* (LANTERN_PTR _lantern__s_where_tensor_tensor_tensor)(void* condition, void* self, void* other);
-  HOST_API void* lantern__s_where_tensor_tensor_tensor(void* condition, void* self, void* other) { LANTERN_CHECK_LOADED void* ret = _lantern__s_where_tensor_tensor_tensor(condition, self, other); LANTERN_HOST_HANDLER return ret; }
   LANTERN_API void* (LANTERN_PTR _lantern_norm_except_dim_tensor_intt_intt)(void* v, void* pow, void* dim);
   HOST_API void* lantern_norm_except_dim_tensor_intt_intt(void* v, void* pow, void* dim) { LANTERN_CHECK_LOADED void* ret = _lantern_norm_except_dim_tensor_intt_intt(v, pow, dim); LANTERN_HOST_HANDLER return ret; }
   LANTERN_API void* (LANTERN_PTR _lantern__weight_norm_tensor_tensor_intt)(void* v, void* g, void* dim);
   HOST_API void* lantern__weight_norm_tensor_tensor_intt(void* v, void* g, void* dim) { LANTERN_CHECK_LOADED void* ret = _lantern__weight_norm_tensor_tensor_intt(v, g, dim); LANTERN_HOST_HANDLER return ret; }
-  LANTERN_API void* (LANTERN_PTR _lantern__weight_norm_cuda_interface_tensor_tensor_intt)(void* v, void* g, void* dim);
-  HOST_API void* lantern__weight_norm_cuda_interface_tensor_tensor_intt(void* v, void* g, void* dim) { LANTERN_CHECK_LOADED void* ret = _lantern__weight_norm_cuda_interface_tensor_tensor_intt(v, g, dim); LANTERN_HOST_HANDLER return ret; }
-  LANTERN_API void* (LANTERN_PTR _lantern__weight_norm_cuda_interface_backward_tensor_tensor_tensor_tensor_intt)(void* grad_w, void* saved_v, void* saved_g, void* saved_norms, void* dim);
-  HOST_API void* lantern__weight_norm_cuda_interface_backward_tensor_tensor_tensor_tensor_intt(void* grad_w, void* saved_v, void* saved_g, void* saved_norms, void* dim) { LANTERN_CHECK_LOADED void* ret = _lantern__weight_norm_cuda_interface_backward_tensor_tensor_tensor_tensor_intt(grad_w, saved_v, saved_g, saved_norms, dim); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern__weight_norm_interface_tensor_tensor_intt)(void* v, void* g, void* dim);
+  HOST_API void* lantern__weight_norm_interface_tensor_tensor_intt(void* v, void* g, void* dim) { LANTERN_CHECK_LOADED void* ret = _lantern__weight_norm_interface_tensor_tensor_intt(v, g, dim); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern__weight_norm_interface_backward_tensor_tensor_tensor_tensor_intt)(void* grad_w, void* saved_v, void* saved_g, void* saved_norms, void* dim);
+  HOST_API void* lantern__weight_norm_interface_backward_tensor_tensor_tensor_tensor_intt(void* grad_w, void* saved_v, void* saved_g, void* saved_norms, void* dim) { LANTERN_CHECK_LOADED void* ret = _lantern__weight_norm_interface_backward_tensor_tensor_tensor_tensor_intt(grad_w, saved_v, saved_g, saved_norms, dim); LANTERN_HOST_HANDLER return ret; }
   LANTERN_API void* (LANTERN_PTR _lantern__weight_norm_differentiable_backward_tensor_tensor_tensor_tensor_intt)(void* grad_w, void* saved_v, void* saved_g, void* saved_norms, void* dim);
   HOST_API void* lantern__weight_norm_differentiable_backward_tensor_tensor_tensor_tensor_intt(void* grad_w, void* saved_v, void* saved_g, void* saved_norms, void* dim) { LANTERN_CHECK_LOADED void* ret = _lantern__weight_norm_differentiable_backward_tensor_tensor_tensor_tensor_intt(grad_w, saved_v, saved_g, saved_norms, dim); LANTERN_HOST_HANDLER return ret; }
   LANTERN_API void* (LANTERN_PTR _lantern_zeros_intarrayref_dimnamelist_tensoroptions)(void* size, void* names, void* options);
@@ -5079,6 +5133,10 @@ HOST_API void lantern_cuda_synchronize (int device_index) {
   HOST_API void* lantern__sparse_sum_tensor_intarrayref_scalartype(void* self, void* dim, void* dtype) { LANTERN_CHECK_LOADED void* ret = _lantern__sparse_sum_tensor_intarrayref_scalartype(self, dim, dtype); LANTERN_HOST_HANDLER return ret; }
   LANTERN_API void* (LANTERN_PTR _lantern__sparse_sum_backward_tensor_tensor_intarrayref)(void* grad, void* self, void* dim);
   HOST_API void* lantern__sparse_sum_backward_tensor_tensor_intarrayref(void* grad, void* self, void* dim) { LANTERN_CHECK_LOADED void* ret = _lantern__sparse_sum_backward_tensor_tensor_intarrayref(grad, self, dim); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern__sparse_csr_sum_tensor_intarrayref_bool_scalartype)(void* self, void* dim, void* keepdim, void* dtype);
+  HOST_API void* lantern__sparse_csr_sum_tensor_intarrayref_bool_scalartype(void* self, void* dim, void* keepdim, void* dtype) { LANTERN_CHECK_LOADED void* ret = _lantern__sparse_csr_sum_tensor_intarrayref_bool_scalartype(self, dim, keepdim, dtype); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern__sparse_csr_prod_tensor_intarrayref_bool_scalartype)(void* self, void* dim, void* keepdim, void* dtype);
+  HOST_API void* lantern__sparse_csr_prod_tensor_intarrayref_bool_scalartype(void* self, void* dim, void* keepdim, void* dtype) { LANTERN_CHECK_LOADED void* ret = _lantern__sparse_csr_prod_tensor_intarrayref_bool_scalartype(self, dim, keepdim, dtype); LANTERN_HOST_HANDLER return ret; }
   LANTERN_API void* (LANTERN_PTR _lantern__sparse_softmax_tensor_intt_scalartype)(void* self, void* dim, void* dtype);
   HOST_API void* lantern__sparse_softmax_tensor_intt_scalartype(void* self, void* dim, void* dtype) { LANTERN_CHECK_LOADED void* ret = _lantern__sparse_softmax_tensor_intt_scalartype(self, dim, dtype); LANTERN_HOST_HANDLER return ret; }
   LANTERN_API void* (LANTERN_PTR _lantern__sparse_softmax_tensor_dimname_scalartype)(void* self, void* dim, void* dtype);
@@ -5161,6 +5219,8 @@ HOST_API void lantern_cuda_synchronize (int device_index) {
   HOST_API void* lantern_Tensor_resize_as__tensor_tensor_memoryformat(void* self, void* the_template, void* memory_format) { void* ret = _lantern_Tensor_resize_as__tensor_tensor_memoryformat(self, the_template, memory_format); LANTERN_HOST_HANDLER return ret; }
   LANTERN_API void* (LANTERN_PTR _lantern_resize_as_sparse__tensor_tensor)(void* self, void* the_template);
   HOST_API void* lantern_resize_as_sparse__tensor_tensor(void* self, void* the_template) { LANTERN_CHECK_LOADED void* ret = _lantern_resize_as_sparse__tensor_tensor(self, the_template); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern_Tensor_resize_as_sparse__tensor_tensor)(void* self, void* the_template);
+  HOST_API void* lantern_Tensor_resize_as_sparse__tensor_tensor(void* self, void* the_template) { void* ret = _lantern_Tensor_resize_as_sparse__tensor_tensor(self, the_template); LANTERN_HOST_HANDLER return ret; }
   LANTERN_API void* (LANTERN_PTR _lantern_zero__tensor)(void* self);
   HOST_API void* lantern_zero__tensor(void* self) { LANTERN_CHECK_LOADED void* ret = _lantern_zero__tensor(self); LANTERN_HOST_HANDLER return ret; }
   LANTERN_API void* (LANTERN_PTR _lantern_Tensor_zero__tensor)(void* self);
@@ -5205,8 +5265,8 @@ HOST_API void lantern_cuda_synchronize (int device_index) {
   HOST_API void* lantern_Tensor_heaviside__tensor_tensor(void* self, void* values) { void* ret = _lantern_Tensor_heaviside__tensor_tensor(self, values); LANTERN_HOST_HANDLER return ret; }
   LANTERN_API void* (LANTERN_PTR _lantern_rsub_tensor_scalar_scalar)(void* self, void* other, void* alpha);
   HOST_API void* lantern_rsub_tensor_scalar_scalar(void* self, void* other, void* alpha) { LANTERN_CHECK_LOADED void* ret = _lantern_rsub_tensor_scalar_scalar(self, other, alpha); LANTERN_HOST_HANDLER return ret; }
-  LANTERN_API void* (LANTERN_PTR _lantern__sparse_addmm_tensor_tensor_tensor_scalar_scalar)(void* self, void* sparse, void* dense, void* beta, void* alpha);
-  HOST_API void* lantern__sparse_addmm_tensor_tensor_tensor_scalar_scalar(void* self, void* sparse, void* dense, void* beta, void* alpha) { LANTERN_CHECK_LOADED void* ret = _lantern__sparse_addmm_tensor_tensor_tensor_scalar_scalar(self, sparse, dense, beta, alpha); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern__sparse_addmm_tensor_tensor_tensor_scalar_scalar)(void* self, void* mat1, void* mat2, void* beta, void* alpha);
+  HOST_API void* lantern__sparse_addmm_tensor_tensor_tensor_scalar_scalar(void* self, void* mat1, void* mat2, void* beta, void* alpha) { LANTERN_CHECK_LOADED void* ret = _lantern__sparse_addmm_tensor_tensor_tensor_scalar_scalar(self, mat1, mat2, beta, alpha); LANTERN_HOST_HANDLER return ret; }
   LANTERN_API void* (LANTERN_PTR _lantern_sparse_sampled_addmm_out_tensor_tensor_tensor_tensor_scalar_scalar)(void* out, void* self, void* mat1, void* mat2, void* beta, void* alpha);
   HOST_API void* lantern_sparse_sampled_addmm_out_tensor_tensor_tensor_tensor_scalar_scalar(void* out, void* self, void* mat1, void* mat2, void* beta, void* alpha) { LANTERN_CHECK_LOADED void* ret = _lantern_sparse_sampled_addmm_out_tensor_tensor_tensor_tensor_scalar_scalar(out, self, mat1, mat2, beta, alpha); LANTERN_HOST_HANDLER return ret; }
   LANTERN_API void* (LANTERN_PTR _lantern_sparse_sampled_addmm_tensor_tensor_tensor_scalar_scalar)(void* self, void* mat1, void* mat2, void* beta, void* alpha);
@@ -5219,12 +5279,42 @@ HOST_API void lantern_cuda_synchronize (int device_index) {
   HOST_API void* lantern_Tensor_addmm_tensor_tensor_tensor_scalar_scalar(void* self, void* mat1, void* mat2, void* beta, void* alpha) { void* ret = _lantern_Tensor_addmm_tensor_tensor_tensor_scalar_scalar(self, mat1, mat2, beta, alpha); LANTERN_HOST_HANDLER return ret; }
   LANTERN_API void* (LANTERN_PTR _lantern_Tensor_addmm__tensor_tensor_tensor_scalar_scalar)(void* self, void* mat1, void* mat2, void* beta, void* alpha);
   HOST_API void* lantern_Tensor_addmm__tensor_tensor_tensor_scalar_scalar(void* self, void* mat1, void* mat2, void* beta, void* alpha) { void* ret = _lantern_Tensor_addmm__tensor_tensor_tensor_scalar_scalar(self, mat1, mat2, beta, alpha); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern__addmm_activation_out_tensor_tensor_tensor_tensor_scalar_scalar_bool)(void* out, void* self, void* mat1, void* mat2, void* beta, void* alpha, void* use_gelu);
+  HOST_API void* lantern__addmm_activation_out_tensor_tensor_tensor_tensor_scalar_scalar_bool(void* out, void* self, void* mat1, void* mat2, void* beta, void* alpha, void* use_gelu) { LANTERN_CHECK_LOADED void* ret = _lantern__addmm_activation_out_tensor_tensor_tensor_tensor_scalar_scalar_bool(out, self, mat1, mat2, beta, alpha, use_gelu); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern__addmm_activation_tensor_tensor_tensor_scalar_scalar_bool)(void* self, void* mat1, void* mat2, void* beta, void* alpha, void* use_gelu);
+  HOST_API void* lantern__addmm_activation_tensor_tensor_tensor_scalar_scalar_bool(void* self, void* mat1, void* mat2, void* beta, void* alpha, void* use_gelu) { LANTERN_CHECK_LOADED void* ret = _lantern__addmm_activation_tensor_tensor_tensor_scalar_scalar_bool(self, mat1, mat2, beta, alpha, use_gelu); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern_Tensor__addmm_activation_tensor_tensor_tensor_scalar_scalar_bool)(void* self, void* mat1, void* mat2, void* beta, void* alpha, void* use_gelu);
+  HOST_API void* lantern_Tensor__addmm_activation_tensor_tensor_tensor_scalar_scalar_bool(void* self, void* mat1, void* mat2, void* beta, void* alpha, void* use_gelu) { void* ret = _lantern_Tensor__addmm_activation_tensor_tensor_tensor_scalar_scalar_bool(self, mat1, mat2, beta, alpha, use_gelu); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern_sparse_compressed_tensor_tensor_tensor_tensor_intarrayref_tensoroptions)(void* compressed_indices, void* plain_indices, void* values, void* size, void* options);
+  HOST_API void* lantern_sparse_compressed_tensor_tensor_tensor_tensor_intarrayref_tensoroptions(void* compressed_indices, void* plain_indices, void* values, void* size, void* options) { LANTERN_CHECK_LOADED void* ret = _lantern_sparse_compressed_tensor_tensor_tensor_tensor_intarrayref_tensoroptions(compressed_indices, plain_indices, values, size, options); LANTERN_HOST_HANDLER return ret; }
   LANTERN_API void* (LANTERN_PTR _lantern_sparse_csr_tensor_tensor_tensor_tensor_intarrayref_tensoroptions)(void* crow_indices, void* col_indices, void* values, void* size, void* options);
   HOST_API void* lantern_sparse_csr_tensor_tensor_tensor_tensor_intarrayref_tensoroptions(void* crow_indices, void* col_indices, void* values, void* size, void* options) { LANTERN_CHECK_LOADED void* ret = _lantern_sparse_csr_tensor_tensor_tensor_tensor_intarrayref_tensoroptions(crow_indices, col_indices, values, size, options); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern_sparse_csc_tensor_tensor_tensor_tensor_intarrayref_tensoroptions)(void* ccol_indices, void* row_indices, void* values, void* size, void* options);
+  HOST_API void* lantern_sparse_csc_tensor_tensor_tensor_tensor_intarrayref_tensoroptions(void* ccol_indices, void* row_indices, void* values, void* size, void* options) { LANTERN_CHECK_LOADED void* ret = _lantern_sparse_csc_tensor_tensor_tensor_tensor_intarrayref_tensoroptions(ccol_indices, row_indices, values, size, options); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern_sparse_bsr_tensor_tensor_tensor_tensor_intarrayref_tensoroptions)(void* crow_indices, void* col_indices, void* values, void* size, void* options);
+  HOST_API void* lantern_sparse_bsr_tensor_tensor_tensor_tensor_intarrayref_tensoroptions(void* crow_indices, void* col_indices, void* values, void* size, void* options) { LANTERN_CHECK_LOADED void* ret = _lantern_sparse_bsr_tensor_tensor_tensor_tensor_intarrayref_tensoroptions(crow_indices, col_indices, values, size, options); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern_sparse_bsc_tensor_tensor_tensor_tensor_intarrayref_tensoroptions)(void* ccol_indices, void* row_indices, void* values, void* size, void* options);
+  HOST_API void* lantern_sparse_bsc_tensor_tensor_tensor_tensor_intarrayref_tensoroptions(void* ccol_indices, void* row_indices, void* values, void* size, void* options) { LANTERN_CHECK_LOADED void* ret = _lantern_sparse_bsc_tensor_tensor_tensor_tensor_intarrayref_tensoroptions(ccol_indices, row_indices, values, size, options); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern_sparse_compressed_tensor_tensor_tensor_tensor_tensoroptions)(void* compressed_indices, void* plain_indices, void* values, void* options);
+  HOST_API void* lantern_sparse_compressed_tensor_tensor_tensor_tensor_tensoroptions(void* compressed_indices, void* plain_indices, void* values, void* options) { LANTERN_CHECK_LOADED void* ret = _lantern_sparse_compressed_tensor_tensor_tensor_tensor_tensoroptions(compressed_indices, plain_indices, values, options); LANTERN_HOST_HANDLER return ret; }
   LANTERN_API void* (LANTERN_PTR _lantern_sparse_csr_tensor_tensor_tensor_tensor_tensoroptions)(void* crow_indices, void* col_indices, void* values, void* options);
   HOST_API void* lantern_sparse_csr_tensor_tensor_tensor_tensor_tensoroptions(void* crow_indices, void* col_indices, void* values, void* options) { LANTERN_CHECK_LOADED void* ret = _lantern_sparse_csr_tensor_tensor_tensor_tensor_tensoroptions(crow_indices, col_indices, values, options); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern_sparse_csc_tensor_tensor_tensor_tensor_tensoroptions)(void* ccol_indices, void* row_indices, void* values, void* options);
+  HOST_API void* lantern_sparse_csc_tensor_tensor_tensor_tensor_tensoroptions(void* ccol_indices, void* row_indices, void* values, void* options) { LANTERN_CHECK_LOADED void* ret = _lantern_sparse_csc_tensor_tensor_tensor_tensor_tensoroptions(ccol_indices, row_indices, values, options); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern_sparse_bsr_tensor_tensor_tensor_tensor_tensoroptions)(void* crow_indices, void* col_indices, void* values, void* options);
+  HOST_API void* lantern_sparse_bsr_tensor_tensor_tensor_tensor_tensoroptions(void* crow_indices, void* col_indices, void* values, void* options) { LANTERN_CHECK_LOADED void* ret = _lantern_sparse_bsr_tensor_tensor_tensor_tensor_tensoroptions(crow_indices, col_indices, values, options); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern_sparse_bsc_tensor_tensor_tensor_tensor_tensoroptions)(void* ccol_indices, void* row_indices, void* values, void* options);
+  HOST_API void* lantern_sparse_bsc_tensor_tensor_tensor_tensor_tensoroptions(void* ccol_indices, void* row_indices, void* values, void* options) { LANTERN_CHECK_LOADED void* ret = _lantern_sparse_bsc_tensor_tensor_tensor_tensor_tensoroptions(ccol_indices, row_indices, values, options); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern__sparse_compressed_tensor_unsafe_tensor_tensor_tensor_intarrayref_tensoroptions)(void* compressed_indices, void* plain_indices, void* values, void* size, void* options);
+  HOST_API void* lantern__sparse_compressed_tensor_unsafe_tensor_tensor_tensor_intarrayref_tensoroptions(void* compressed_indices, void* plain_indices, void* values, void* size, void* options) { LANTERN_CHECK_LOADED void* ret = _lantern__sparse_compressed_tensor_unsafe_tensor_tensor_tensor_intarrayref_tensoroptions(compressed_indices, plain_indices, values, size, options); LANTERN_HOST_HANDLER return ret; }
   LANTERN_API void* (LANTERN_PTR _lantern__sparse_csr_tensor_unsafe_tensor_tensor_tensor_intarrayref_tensoroptions)(void* crow_indices, void* col_indices, void* values, void* size, void* options);
   HOST_API void* lantern__sparse_csr_tensor_unsafe_tensor_tensor_tensor_intarrayref_tensoroptions(void* crow_indices, void* col_indices, void* values, void* size, void* options) { LANTERN_CHECK_LOADED void* ret = _lantern__sparse_csr_tensor_unsafe_tensor_tensor_tensor_intarrayref_tensoroptions(crow_indices, col_indices, values, size, options); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern__sparse_csc_tensor_unsafe_tensor_tensor_tensor_intarrayref_tensoroptions)(void* ccol_indices, void* row_indices, void* values, void* size, void* options);
+  HOST_API void* lantern__sparse_csc_tensor_unsafe_tensor_tensor_tensor_intarrayref_tensoroptions(void* ccol_indices, void* row_indices, void* values, void* size, void* options) { LANTERN_CHECK_LOADED void* ret = _lantern__sparse_csc_tensor_unsafe_tensor_tensor_tensor_intarrayref_tensoroptions(ccol_indices, row_indices, values, size, options); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern__sparse_bsr_tensor_unsafe_tensor_tensor_tensor_intarrayref_tensoroptions)(void* crow_indices, void* col_indices, void* values, void* size, void* options);
+  HOST_API void* lantern__sparse_bsr_tensor_unsafe_tensor_tensor_tensor_intarrayref_tensoroptions(void* crow_indices, void* col_indices, void* values, void* size, void* options) { LANTERN_CHECK_LOADED void* ret = _lantern__sparse_bsr_tensor_unsafe_tensor_tensor_tensor_intarrayref_tensoroptions(crow_indices, col_indices, values, size, options); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern__sparse_bsc_tensor_unsafe_tensor_tensor_tensor_intarrayref_tensoroptions)(void* ccol_indices, void* row_indices, void* values, void* size, void* options);
+  HOST_API void* lantern__sparse_bsc_tensor_unsafe_tensor_tensor_tensor_intarrayref_tensoroptions(void* ccol_indices, void* row_indices, void* values, void* size, void* options) { LANTERN_CHECK_LOADED void* ret = _lantern__sparse_bsc_tensor_unsafe_tensor_tensor_tensor_intarrayref_tensoroptions(ccol_indices, row_indices, values, size, options); LANTERN_HOST_HANDLER return ret; }
   LANTERN_API void* (LANTERN_PTR _lantern_sparse_coo_tensor_intarrayref_tensoroptions)(void* size, void* options);
   HOST_API void* lantern_sparse_coo_tensor_intarrayref_tensoroptions(void* size, void* options) { LANTERN_CHECK_LOADED void* ret = _lantern_sparse_coo_tensor_intarrayref_tensoroptions(size, options); LANTERN_HOST_HANDLER return ret; }
   LANTERN_API void* (LANTERN_PTR _lantern_sparse_coo_tensor_tensor_tensor_tensoroptions)(void* indices, void* values, void* options);
@@ -5235,8 +5325,16 @@ HOST_API void lantern_cuda_synchronize (int device_index) {
   HOST_API void* lantern__sparse_coo_tensor_unsafe_tensor_tensor_intarrayref_tensoroptions(void* indices, void* values, void* size, void* options) { LANTERN_CHECK_LOADED void* ret = _lantern__sparse_coo_tensor_unsafe_tensor_tensor_intarrayref_tensoroptions(indices, values, size, options); LANTERN_HOST_HANDLER return ret; }
   LANTERN_API void* (LANTERN_PTR _lantern__validate_sparse_coo_tensor_args_tensor_tensor_intarrayref)(void* indices, void* values, void* size);
   HOST_API void* lantern__validate_sparse_coo_tensor_args_tensor_tensor_intarrayref(void* indices, void* values, void* size) { LANTERN_CHECK_LOADED void* ret = _lantern__validate_sparse_coo_tensor_args_tensor_tensor_intarrayref(indices, values, size); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern__validate_sparse_compressed_tensor_args_tensor_tensor_tensor_intarrayref_layout)(void* compressed_indices, void* plain_indices, void* values, void* size, void* layout);
+  HOST_API void* lantern__validate_sparse_compressed_tensor_args_tensor_tensor_tensor_intarrayref_layout(void* compressed_indices, void* plain_indices, void* values, void* size, void* layout) { LANTERN_CHECK_LOADED void* ret = _lantern__validate_sparse_compressed_tensor_args_tensor_tensor_tensor_intarrayref_layout(compressed_indices, plain_indices, values, size, layout); LANTERN_HOST_HANDLER return ret; }
   LANTERN_API void* (LANTERN_PTR _lantern__validate_sparse_csr_tensor_args_tensor_tensor_tensor_intarrayref)(void* crow_indices, void* col_indices, void* values, void* size);
   HOST_API void* lantern__validate_sparse_csr_tensor_args_tensor_tensor_tensor_intarrayref(void* crow_indices, void* col_indices, void* values, void* size) { LANTERN_CHECK_LOADED void* ret = _lantern__validate_sparse_csr_tensor_args_tensor_tensor_tensor_intarrayref(crow_indices, col_indices, values, size); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern__validate_sparse_csc_tensor_args_tensor_tensor_tensor_intarrayref)(void* ccol_indices, void* row_indices, void* values, void* size);
+  HOST_API void* lantern__validate_sparse_csc_tensor_args_tensor_tensor_tensor_intarrayref(void* ccol_indices, void* row_indices, void* values, void* size) { LANTERN_CHECK_LOADED void* ret = _lantern__validate_sparse_csc_tensor_args_tensor_tensor_tensor_intarrayref(ccol_indices, row_indices, values, size); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern__validate_sparse_bsr_tensor_args_tensor_tensor_tensor_intarrayref)(void* crow_indices, void* col_indices, void* values, void* size);
+  HOST_API void* lantern__validate_sparse_bsr_tensor_args_tensor_tensor_tensor_intarrayref(void* crow_indices, void* col_indices, void* values, void* size) { LANTERN_CHECK_LOADED void* ret = _lantern__validate_sparse_bsr_tensor_args_tensor_tensor_tensor_intarrayref(crow_indices, col_indices, values, size); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern__validate_sparse_bsc_tensor_args_tensor_tensor_tensor_intarrayref)(void* ccol_indices, void* row_indices, void* values, void* size);
+  HOST_API void* lantern__validate_sparse_bsc_tensor_args_tensor_tensor_tensor_intarrayref(void* ccol_indices, void* row_indices, void* values, void* size) { LANTERN_CHECK_LOADED void* ret = _lantern__validate_sparse_bsc_tensor_args_tensor_tensor_tensor_intarrayref(ccol_indices, row_indices, values, size); LANTERN_HOST_HANDLER return ret; }
   LANTERN_API void* (LANTERN_PTR _lantern__sparse_coo_tensor_with_dims_intt_intt_intarrayref_tensoroptions)(void* sparse_dim, void* dense_dim, void* size, void* options);
   HOST_API void* lantern__sparse_coo_tensor_with_dims_intt_intt_intarrayref_tensoroptions(void* sparse_dim, void* dense_dim, void* size, void* options) { LANTERN_CHECK_LOADED void* ret = _lantern__sparse_coo_tensor_with_dims_intt_intt_intarrayref_tensoroptions(sparse_dim, dense_dim, size, options); LANTERN_HOST_HANDLER return ret; }
   LANTERN_API void* (LANTERN_PTR _lantern__sparse_coo_tensor_with_dims_and_tensors_intt_intt_intarrayref_tensor_tensor_tensoroptions)(void* sparse_dim, void* dense_dim, void* size, void* indices, void* values, void* options);
@@ -5251,6 +5349,8 @@ HOST_API void lantern_cuda_synchronize (int device_index) {
   HOST_API void* lantern__to_cpu_tensorlist(void* tensors) { LANTERN_CHECK_LOADED void* ret = _lantern__to_cpu_tensorlist(tensors); LANTERN_HOST_HANDLER return ret; }
   LANTERN_API void* (LANTERN_PTR _lantern_Tensor_to_dense_tensor_scalartype)(void* self, void* dtype);
   HOST_API void* lantern_Tensor_to_dense_tensor_scalartype(void* self, void* dtype) { void* ret = _lantern_Tensor_to_dense_tensor_scalartype(self, dtype); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern_Tensor__to_dense_tensor_scalartype)(void* self, void* dtype);
+  HOST_API void* lantern_Tensor__to_dense_tensor_scalartype(void* self, void* dtype) { void* ret = _lantern_Tensor__to_dense_tensor_scalartype(self, dtype); LANTERN_HOST_HANDLER return ret; }
   LANTERN_API void* (LANTERN_PTR _lantern_to_dense_backward_tensor_tensor)(void* grad, void* input);
   HOST_API void* lantern_to_dense_backward_tensor_tensor(void* grad, void* input) { LANTERN_CHECK_LOADED void* ret = _lantern_to_dense_backward_tensor_tensor(grad, input); LANTERN_HOST_HANDLER return ret; }
   LANTERN_API void* (LANTERN_PTR _lantern_Tensor_sparse_dim_tensor)(void* self);
@@ -5283,6 +5383,10 @@ HOST_API void lantern_cuda_synchronize (int device_index) {
   HOST_API void* lantern_Tensor_crow_indices_tensor(void* self) { void* ret = _lantern_Tensor_crow_indices_tensor(self); LANTERN_HOST_HANDLER return ret; }
   LANTERN_API void* (LANTERN_PTR _lantern_Tensor_col_indices_tensor)(void* self);
   HOST_API void* lantern_Tensor_col_indices_tensor(void* self) { void* ret = _lantern_Tensor_col_indices_tensor(self); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern_Tensor_ccol_indices_tensor)(void* self);
+  HOST_API void* lantern_Tensor_ccol_indices_tensor(void* self) { void* ret = _lantern_Tensor_ccol_indices_tensor(self); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern_Tensor_row_indices_tensor)(void* self);
+  HOST_API void* lantern_Tensor_row_indices_tensor(void* self) { void* ret = _lantern_Tensor_row_indices_tensor(self); LANTERN_HOST_HANDLER return ret; }
   LANTERN_API void* (LANTERN_PTR _lantern_hspmm_out_tensor_tensor_tensor)(void* out, void* mat1, void* mat2);
   HOST_API void* lantern_hspmm_out_tensor_tensor_tensor(void* out, void* mat1, void* mat2) { LANTERN_CHECK_LOADED void* ret = _lantern_hspmm_out_tensor_tensor_tensor(out, mat1, mat2); LANTERN_HOST_HANDLER return ret; }
   LANTERN_API void* (LANTERN_PTR _lantern_hspmm_tensor_tensor)(void* mat1, void* mat2);
@@ -5301,6 +5405,14 @@ HOST_API void lantern_cuda_synchronize (int device_index) {
   HOST_API void* lantern_Tensor_to_sparse_tensor_intt(void* self, void* sparse_dim) { void* ret = _lantern_Tensor_to_sparse_tensor_intt(self, sparse_dim); LANTERN_HOST_HANDLER return ret; }
   LANTERN_API void* (LANTERN_PTR _lantern_Tensor_to_sparse_tensor)(void* self);
   HOST_API void* lantern_Tensor_to_sparse_tensor(void* self) { void* ret = _lantern_Tensor_to_sparse_tensor(self); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern_Tensor_to_sparse_csr_tensor)(void* self);
+  HOST_API void* lantern_Tensor_to_sparse_csr_tensor(void* self) { void* ret = _lantern_Tensor_to_sparse_csr_tensor(self); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern_Tensor_to_sparse_csc_tensor)(void* self);
+  HOST_API void* lantern_Tensor_to_sparse_csc_tensor(void* self) { void* ret = _lantern_Tensor_to_sparse_csc_tensor(self); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern_Tensor_to_sparse_bsr_tensor_intarrayref)(void* self, void* blocksize);
+  HOST_API void* lantern_Tensor_to_sparse_bsr_tensor_intarrayref(void* self, void* blocksize) { void* ret = _lantern_Tensor_to_sparse_bsr_tensor_intarrayref(self, blocksize); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern_Tensor_to_sparse_bsc_tensor_intarrayref)(void* self, void* blocksize);
+  HOST_API void* lantern_Tensor_to_sparse_bsc_tensor_intarrayref(void* self, void* blocksize) { void* ret = _lantern_Tensor_to_sparse_bsc_tensor_intarrayref(self, blocksize); LANTERN_HOST_HANDLER return ret; }
   LANTERN_API void* (LANTERN_PTR _lantern_Tensor_to_mkldnn_tensor_scalartype)(void* self, void* dtype);
   HOST_API void* lantern_Tensor_to_mkldnn_tensor_scalartype(void* self, void* dtype) { void* ret = _lantern_Tensor_to_mkldnn_tensor_scalartype(self, dtype); LANTERN_HOST_HANDLER return ret; }
   LANTERN_API void* (LANTERN_PTR _lantern_mkldnn_reorder_conv2d_weight_tensor_intarrayref_intarrayref_intarrayref_intt)(void* self, void* padding, void* stride, void* dilation, void* groups);
@@ -5427,8 +5539,14 @@ HOST_API void lantern_cuda_synchronize (int device_index) {
   HOST_API void* lantern_promote_types_scalartype_scalartype(void* type1, void* type2) { LANTERN_CHECK_LOADED void* ret = _lantern_promote_types_scalartype_scalartype(type1, type2); LANTERN_HOST_HANDLER return ret; }
   LANTERN_API void* (LANTERN_PTR _lantern__local_scalar_dense_tensor)(void* self);
   HOST_API void* lantern__local_scalar_dense_tensor(void* self) { LANTERN_CHECK_LOADED void* ret = _lantern__local_scalar_dense_tensor(self); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern__lstm_mps_tensor_tensorlist_tensorlist_bool_intt_double_bool_bool_bool)(void* input, void* hx, void* params, void* has_biases, void* num_layers, void* dropout, void* train, void* bidirectional, void* batch_first);
+  HOST_API void* lantern__lstm_mps_tensor_tensorlist_tensorlist_bool_intt_double_bool_bool_bool(void* input, void* hx, void* params, void* has_biases, void* num_layers, void* dropout, void* train, void* bidirectional, void* batch_first) { LANTERN_CHECK_LOADED void* ret = _lantern__lstm_mps_tensor_tensorlist_tensorlist_bool_intt_double_bool_bool_bool(input, hx, params, has_biases, num_layers, dropout, train, bidirectional, batch_first); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern_lstm_mps_backward_tensor_tensor_tensor_tensor_tensor_tensor_tensorlist_tensorlist_bool_intt_double_bool_bool_bool)(void* grad_y, void* grad_hy, void* grad_cy, void* z_state, void* cell_state_fwd, void* input, void* hx, void* params, void* has_biases, void* num_layers, void* dropout, void* train, void* bidirectional, void* batch_first);
+  HOST_API void* lantern_lstm_mps_backward_tensor_tensor_tensor_tensor_tensor_tensor_tensorlist_tensorlist_bool_intt_double_bool_bool_bool(void* grad_y, void* grad_hy, void* grad_cy, void* z_state, void* cell_state_fwd, void* input, void* hx, void* params, void* has_biases, void* num_layers, void* dropout, void* train, void* bidirectional, void* batch_first) { LANTERN_CHECK_LOADED void* ret = _lantern_lstm_mps_backward_tensor_tensor_tensor_tensor_tensor_tensor_tensorlist_tensorlist_bool_intt_double_bool_bool_bool(grad_y, grad_hy, grad_cy, z_state, cell_state_fwd, input, hx, params, has_biases, num_layers, dropout, train, bidirectional, batch_first); LANTERN_HOST_HANDLER return ret; }
   LANTERN_API void* (LANTERN_PTR _lantern__thnn_fused_lstm_cell_tensor_tensor_tensor_tensor_tensor)(void* input_gates, void* hidden_gates, void* cx, void* input_bias, void* hidden_bias);
   HOST_API void* lantern__thnn_fused_lstm_cell_tensor_tensor_tensor_tensor_tensor(void* input_gates, void* hidden_gates, void* cx, void* input_bias, void* hidden_bias) { LANTERN_CHECK_LOADED void* ret = _lantern__thnn_fused_lstm_cell_tensor_tensor_tensor_tensor_tensor(input_gates, hidden_gates, cx, input_bias, hidden_bias); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern__thnn_fused_lstm_cell_backward_impl_tensor_tensor_tensor_tensor_tensor_bool)(void* grad_hy, void* grad_cy, void* cx, void* cy, void* workspace, void* has_bias);
+  HOST_API void* lantern__thnn_fused_lstm_cell_backward_impl_tensor_tensor_tensor_tensor_tensor_bool(void* grad_hy, void* grad_cy, void* cx, void* cy, void* workspace, void* has_bias) { LANTERN_CHECK_LOADED void* ret = _lantern__thnn_fused_lstm_cell_backward_impl_tensor_tensor_tensor_tensor_tensor_bool(grad_hy, grad_cy, cx, cy, workspace, has_bias); LANTERN_HOST_HANDLER return ret; }
   LANTERN_API void* (LANTERN_PTR _lantern__thnn_fused_lstm_cell_backward_tensor_tensor_tensor_tensor_tensor_bool)(void* grad_hy, void* grad_cy, void* cx, void* cy, void* workspace, void* has_bias);
   HOST_API void* lantern__thnn_fused_lstm_cell_backward_tensor_tensor_tensor_tensor_tensor_bool(void* grad_hy, void* grad_cy, void* cx, void* cy, void* workspace, void* has_bias) { LANTERN_CHECK_LOADED void* ret = _lantern__thnn_fused_lstm_cell_backward_tensor_tensor_tensor_tensor_tensor_bool(grad_hy, grad_cy, cx, cy, workspace, has_bias); LANTERN_HOST_HANDLER return ret; }
   LANTERN_API void* (LANTERN_PTR _lantern__thnn_differentiable_lstm_cell_backward_tensor_tensor_tensor_tensor_tensor_tensor_tensor_tensor)(void* grad_hy, void* grad_cy, void* input_gates, void* hidden_gates, void* input_bias, void* hidden_bias, void* cx, void* cy);
@@ -5481,10 +5599,14 @@ HOST_API void lantern_cuda_synchronize (int device_index) {
   HOST_API void* lantern_Tensor_set__tensor_storage(void* self, void* source) { void* ret = _lantern_Tensor_set__tensor_storage(self, source); LANTERN_HOST_HANDLER return ret; }
   LANTERN_API void* (LANTERN_PTR _lantern_Tensor_set__tensor_storage_intt_intarrayref_intarrayref)(void* self, void* source, void* storage_offset, void* size, void* stride);
   HOST_API void* lantern_Tensor_set__tensor_storage_intt_intarrayref_intarrayref(void* self, void* source, void* storage_offset, void* size, void* stride) { void* ret = _lantern_Tensor_set__tensor_storage_intt_intarrayref_intarrayref(self, source, storage_offset, size, stride); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern_Tensor_set__tensor_tensor_intt_intarrayref_intarrayref)(void* self, void* source, void* storage_offset, void* size, void* stride);
+  HOST_API void* lantern_Tensor_set__tensor_tensor_intt_intarrayref_intarrayref(void* self, void* source, void* storage_offset, void* size, void* stride) { void* ret = _lantern_Tensor_set__tensor_tensor_intt_intarrayref_intarrayref(self, source, storage_offset, size, stride); LANTERN_HOST_HANDLER return ret; }
   LANTERN_API void* (LANTERN_PTR _lantern_Tensor_set__tensor_tensor)(void* self, void* source);
   HOST_API void* lantern_Tensor_set__tensor_tensor(void* self, void* source) { void* ret = _lantern_Tensor_set__tensor_tensor(self, source); LANTERN_HOST_HANDLER return ret; }
   LANTERN_API void* (LANTERN_PTR _lantern_Tensor_set__tensor)(void* self);
   HOST_API void* lantern_Tensor_set__tensor(void* self) { void* ret = _lantern_Tensor_set__tensor(self); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern_Tensor_lift_tensor)(void* self);
+  HOST_API void* lantern_Tensor_lift_tensor(void* self) { void* ret = _lantern_Tensor_lift_tensor(self); LANTERN_HOST_HANDLER return ret; }
   LANTERN_API void* (LANTERN_PTR _lantern_Tensor_is_set_to_tensor_tensor)(void* self, void* tensor);
   HOST_API void* lantern_Tensor_is_set_to_tensor_tensor(void* self, void* tensor) { void* ret = _lantern_Tensor_is_set_to_tensor_tensor(self, tensor); LANTERN_HOST_HANDLER return ret; }
   LANTERN_API void* (LANTERN_PTR _lantern_Tensor_masked_fill__tensor_tensor_scalar)(void* self, void* mask, void* value);
@@ -5505,8 +5627,10 @@ HOST_API void lantern_cuda_synchronize (int device_index) {
   HOST_API void* lantern_masked_scatter_tensor_tensor_tensor(void* self, void* mask, void* source) { LANTERN_CHECK_LOADED void* ret = _lantern_masked_scatter_tensor_tensor_tensor(self, mask, source); LANTERN_HOST_HANDLER return ret; }
   LANTERN_API void* (LANTERN_PTR _lantern_Tensor_masked_scatter_tensor_tensor_tensor)(void* self, void* mask, void* source);
   HOST_API void* lantern_Tensor_masked_scatter_tensor_tensor_tensor(void* self, void* mask, void* source) { void* ret = _lantern_Tensor_masked_scatter_tensor_tensor_tensor(self, mask, source); LANTERN_HOST_HANDLER return ret; }
-  LANTERN_API void* (LANTERN_PTR _lantern__masked_softmax_tensor_tensor)(void* self, void* mask);
-  HOST_API void* lantern__masked_softmax_tensor_tensor(void* self, void* mask) { LANTERN_CHECK_LOADED void* ret = _lantern__masked_softmax_tensor_tensor(self, mask); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern__masked_softmax_tensor_tensor_intt)(void* self, void* mask, void* dim);
+  HOST_API void* lantern__masked_softmax_tensor_tensor_intt(void* self, void* mask, void* dim) { LANTERN_CHECK_LOADED void* ret = _lantern__masked_softmax_tensor_tensor_intt(self, mask, dim); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern__masked_softmax_backward_tensor_tensor_tensor_intt)(void* grad_output, void* output, void* mask, void* dim);
+  HOST_API void* lantern__masked_softmax_backward_tensor_tensor_tensor_intt(void* grad_output, void* output, void* mask, void* dim) { LANTERN_CHECK_LOADED void* ret = _lantern__masked_softmax_backward_tensor_tensor_tensor_intt(grad_output, output, mask, dim); LANTERN_HOST_HANDLER return ret; }
   LANTERN_API void* (LANTERN_PTR _lantern_Tensor_view_tensor_intarrayref)(void* self, void* size);
   HOST_API void* lantern_Tensor_view_tensor_intarrayref(void* self, void* size) { void* ret = _lantern_Tensor_view_tensor_intarrayref(self, size); LANTERN_HOST_HANDLER return ret; }
   LANTERN_API void* (LANTERN_PTR _lantern_Tensor_view_tensor_scalartype)(void* self, void* dtype);
@@ -5529,6 +5653,14 @@ HOST_API void lantern_cuda_synchronize (int device_index) {
   HOST_API void* lantern_index_add_tensor_dimname_tensor_tensor_scalar(void* self, void* dim, void* index, void* source, void* alpha) { LANTERN_CHECK_LOADED void* ret = _lantern_index_add_tensor_dimname_tensor_tensor_scalar(self, dim, index, source, alpha); LANTERN_HOST_HANDLER return ret; }
   LANTERN_API void* (LANTERN_PTR _lantern_Tensor_index_add_tensor_dimname_tensor_tensor_scalar)(void* self, void* dim, void* index, void* source, void* alpha);
   HOST_API void* lantern_Tensor_index_add_tensor_dimname_tensor_tensor_scalar(void* self, void* dim, void* index, void* source, void* alpha) { void* ret = _lantern_Tensor_index_add_tensor_dimname_tensor_tensor_scalar(self, dim, index, source, alpha); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern_index_reduce_out_tensor_tensor_intt_tensor_tensor_cstringview_bool)(void* out, void* self, void* dim, void* index, void* source, void* reduce, void* include_self);
+  HOST_API void* lantern_index_reduce_out_tensor_tensor_intt_tensor_tensor_cstringview_bool(void* out, void* self, void* dim, void* index, void* source, void* reduce, void* include_self) { LANTERN_CHECK_LOADED void* ret = _lantern_index_reduce_out_tensor_tensor_intt_tensor_tensor_cstringview_bool(out, self, dim, index, source, reduce, include_self); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern_Tensor_index_reduce__tensor_intt_tensor_tensor_cstringview_bool)(void* self, void* dim, void* index, void* source, void* reduce, void* include_self);
+  HOST_API void* lantern_Tensor_index_reduce__tensor_intt_tensor_tensor_cstringview_bool(void* self, void* dim, void* index, void* source, void* reduce, void* include_self) { void* ret = _lantern_Tensor_index_reduce__tensor_intt_tensor_tensor_cstringview_bool(self, dim, index, source, reduce, include_self); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern_index_reduce_tensor_intt_tensor_tensor_cstringview_bool)(void* self, void* dim, void* index, void* source, void* reduce, void* include_self);
+  HOST_API void* lantern_index_reduce_tensor_intt_tensor_tensor_cstringview_bool(void* self, void* dim, void* index, void* source, void* reduce, void* include_self) { LANTERN_CHECK_LOADED void* ret = _lantern_index_reduce_tensor_intt_tensor_tensor_cstringview_bool(self, dim, index, source, reduce, include_self); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern_Tensor_index_reduce_tensor_intt_tensor_tensor_cstringview_bool)(void* self, void* dim, void* index, void* source, void* reduce, void* include_self);
+  HOST_API void* lantern_Tensor_index_reduce_tensor_intt_tensor_tensor_cstringview_bool(void* self, void* dim, void* index, void* source, void* reduce, void* include_self) { void* ret = _lantern_Tensor_index_reduce_tensor_intt_tensor_tensor_cstringview_bool(self, dim, index, source, reduce, include_self); LANTERN_HOST_HANDLER return ret; }
   LANTERN_API void* (LANTERN_PTR _lantern_Tensor_index_fill__tensor_intt_tensor_scalar)(void* self, void* dim, void* index, void* value);
   HOST_API void* lantern_Tensor_index_fill__tensor_intt_tensor_scalar(void* self, void* dim, void* index, void* value) { void* ret = _lantern_Tensor_index_fill__tensor_intt_tensor_scalar(self, dim, index, value); LANTERN_HOST_HANDLER return ret; }
   LANTERN_API void* (LANTERN_PTR _lantern_index_fill_tensor_intt_tensor_scalar)(void* self, void* dim, void* index, void* value);
@@ -5605,10 +5737,14 @@ HOST_API void lantern_cuda_synchronize (int device_index) {
   HOST_API void* lantern_scatter_add_tensor_dimname_tensor_tensor(void* self, void* dim, void* index, void* src) { LANTERN_CHECK_LOADED void* ret = _lantern_scatter_add_tensor_dimname_tensor_tensor(self, dim, index, src); LANTERN_HOST_HANDLER return ret; }
   LANTERN_API void* (LANTERN_PTR _lantern_Tensor_scatter_add_tensor_dimname_tensor_tensor)(void* self, void* dim, void* index, void* src);
   HOST_API void* lantern_Tensor_scatter_add_tensor_dimname_tensor_tensor(void* self, void* dim, void* index, void* src) { void* ret = _lantern_Tensor_scatter_add_tensor_dimname_tensor_tensor(self, dim, index, src); LANTERN_HOST_HANDLER return ret; }
-  LANTERN_API void* (LANTERN_PTR _lantern_scatter_reduce_tensor_intt_tensor_cstringview_intt)(void* self, void* dim, void* index, void* reduce, void* output_size);
-  HOST_API void* lantern_scatter_reduce_tensor_intt_tensor_cstringview_intt(void* self, void* dim, void* index, void* reduce, void* output_size) { LANTERN_CHECK_LOADED void* ret = _lantern_scatter_reduce_tensor_intt_tensor_cstringview_intt(self, dim, index, reduce, output_size); LANTERN_HOST_HANDLER return ret; }
-  LANTERN_API void* (LANTERN_PTR _lantern_Tensor_scatter_reduce_tensor_intt_tensor_cstringview_intt)(void* self, void* dim, void* index, void* reduce, void* output_size);
-  HOST_API void* lantern_Tensor_scatter_reduce_tensor_intt_tensor_cstringview_intt(void* self, void* dim, void* index, void* reduce, void* output_size) { void* ret = _lantern_Tensor_scatter_reduce_tensor_intt_tensor_cstringview_intt(self, dim, index, reduce, output_size); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern_scatter_reduce_tensor_intt_tensor_tensor_cstringview_bool)(void* self, void* dim, void* index, void* src, void* reduce, void* include_self);
+  HOST_API void* lantern_scatter_reduce_tensor_intt_tensor_tensor_cstringview_bool(void* self, void* dim, void* index, void* src, void* reduce, void* include_self) { LANTERN_CHECK_LOADED void* ret = _lantern_scatter_reduce_tensor_intt_tensor_tensor_cstringview_bool(self, dim, index, src, reduce, include_self); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern_Tensor_scatter_reduce_tensor_intt_tensor_tensor_cstringview_bool)(void* self, void* dim, void* index, void* src, void* reduce, void* include_self);
+  HOST_API void* lantern_Tensor_scatter_reduce_tensor_intt_tensor_tensor_cstringview_bool(void* self, void* dim, void* index, void* src, void* reduce, void* include_self) { void* ret = _lantern_Tensor_scatter_reduce_tensor_intt_tensor_tensor_cstringview_bool(self, dim, index, src, reduce, include_self); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern_Tensor_scatter_reduce__tensor_intt_tensor_tensor_cstringview_bool)(void* self, void* dim, void* index, void* src, void* reduce, void* include_self);
+  HOST_API void* lantern_Tensor_scatter_reduce__tensor_intt_tensor_tensor_cstringview_bool(void* self, void* dim, void* index, void* src, void* reduce, void* include_self) { void* ret = _lantern_Tensor_scatter_reduce__tensor_intt_tensor_tensor_cstringview_bool(self, dim, index, src, reduce, include_self); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern_scatter_reduce_out_tensor_tensor_intt_tensor_tensor_cstringview_bool)(void* out, void* self, void* dim, void* index, void* src, void* reduce, void* include_self);
+  HOST_API void* lantern_scatter_reduce_out_tensor_tensor_intt_tensor_tensor_cstringview_bool(void* out, void* self, void* dim, void* index, void* src, void* reduce, void* include_self) { LANTERN_CHECK_LOADED void* ret = _lantern_scatter_reduce_out_tensor_tensor_intt_tensor_tensor_cstringview_bool(out, self, dim, index, src, reduce, include_self); LANTERN_HOST_HANDLER return ret; }
   LANTERN_API void* (LANTERN_PTR _lantern_Tensor_eq__tensor_scalar)(void* self, void* other);
   HOST_API void* lantern_Tensor_eq__tensor_scalar(void* self, void* other) { void* ret = _lantern_Tensor_eq__tensor_scalar(self, other); LANTERN_HOST_HANDLER return ret; }
   LANTERN_API void* (LANTERN_PTR _lantern_Tensor_eq__tensor_tensor)(void* self, void* other);
@@ -5621,6 +5757,8 @@ HOST_API void lantern_cuda_synchronize (int device_index) {
   HOST_API void* lantern_bitwise_and_tensor_scalar(void* self, void* other) { LANTERN_CHECK_LOADED void* ret = _lantern_bitwise_and_tensor_scalar(self, other); LANTERN_HOST_HANDLER return ret; }
   LANTERN_API void* (LANTERN_PTR _lantern_Tensor_bitwise_and_tensor_scalar)(void* self, void* other);
   HOST_API void* lantern_Tensor_bitwise_and_tensor_scalar(void* self, void* other) { void* ret = _lantern_Tensor_bitwise_and_tensor_scalar(self, other); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern_bitwise_and_scalar_tensor)(void* self, void* other);
+  HOST_API void* lantern_bitwise_and_scalar_tensor(void* self, void* other) { LANTERN_CHECK_LOADED void* ret = _lantern_bitwise_and_scalar_tensor(self, other); LANTERN_HOST_HANDLER return ret; }
   LANTERN_API void* (LANTERN_PTR _lantern_bitwise_and_tensor_tensor)(void* self, void* other);
   HOST_API void* lantern_bitwise_and_tensor_tensor(void* self, void* other) { LANTERN_CHECK_LOADED void* ret = _lantern_bitwise_and_tensor_tensor(self, other); LANTERN_HOST_HANDLER return ret; }
   LANTERN_API void* (LANTERN_PTR _lantern_Tensor_bitwise_and_tensor_tensor)(void* self, void* other);
@@ -5649,6 +5787,8 @@ HOST_API void lantern_cuda_synchronize (int device_index) {
   HOST_API void* lantern_bitwise_or_tensor_scalar(void* self, void* other) { LANTERN_CHECK_LOADED void* ret = _lantern_bitwise_or_tensor_scalar(self, other); LANTERN_HOST_HANDLER return ret; }
   LANTERN_API void* (LANTERN_PTR _lantern_Tensor_bitwise_or_tensor_scalar)(void* self, void* other);
   HOST_API void* lantern_Tensor_bitwise_or_tensor_scalar(void* self, void* other) { void* ret = _lantern_Tensor_bitwise_or_tensor_scalar(self, other); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern_bitwise_or_scalar_tensor)(void* self, void* other);
+  HOST_API void* lantern_bitwise_or_scalar_tensor(void* self, void* other) { LANTERN_CHECK_LOADED void* ret = _lantern_bitwise_or_scalar_tensor(self, other); LANTERN_HOST_HANDLER return ret; }
   LANTERN_API void* (LANTERN_PTR _lantern_bitwise_or_tensor_tensor)(void* self, void* other);
   HOST_API void* lantern_bitwise_or_tensor_tensor(void* self, void* other) { LANTERN_CHECK_LOADED void* ret = _lantern_bitwise_or_tensor_tensor(self, other); LANTERN_HOST_HANDLER return ret; }
   LANTERN_API void* (LANTERN_PTR _lantern_Tensor_bitwise_or_tensor_tensor)(void* self, void* other);
@@ -5677,6 +5817,8 @@ HOST_API void lantern_cuda_synchronize (int device_index) {
   HOST_API void* lantern_bitwise_xor_tensor_scalar(void* self, void* other) { LANTERN_CHECK_LOADED void* ret = _lantern_bitwise_xor_tensor_scalar(self, other); LANTERN_HOST_HANDLER return ret; }
   LANTERN_API void* (LANTERN_PTR _lantern_Tensor_bitwise_xor_tensor_scalar)(void* self, void* other);
   HOST_API void* lantern_Tensor_bitwise_xor_tensor_scalar(void* self, void* other) { void* ret = _lantern_Tensor_bitwise_xor_tensor_scalar(self, other); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern_bitwise_xor_scalar_tensor)(void* self, void* other);
+  HOST_API void* lantern_bitwise_xor_scalar_tensor(void* self, void* other) { LANTERN_CHECK_LOADED void* ret = _lantern_bitwise_xor_scalar_tensor(self, other); LANTERN_HOST_HANDLER return ret; }
   LANTERN_API void* (LANTERN_PTR _lantern_bitwise_xor_tensor_tensor)(void* self, void* other);
   HOST_API void* lantern_bitwise_xor_tensor_tensor(void* self, void* other) { LANTERN_CHECK_LOADED void* ret = _lantern_bitwise_xor_tensor_tensor(self, other); LANTERN_HOST_HANDLER return ret; }
   LANTERN_API void* (LANTERN_PTR _lantern_Tensor_bitwise_xor_tensor_tensor)(void* self, void* other);
@@ -6099,8 +6241,8 @@ HOST_API void lantern_cuda_synchronize (int device_index) {
   HOST_API void* lantern_linalg_solve_triangular_out_tensor_tensor_tensor_bool_bool_bool(void* out, void* self, void* B, void* upper, void* left, void* unitriangular) { LANTERN_CHECK_LOADED void* ret = _lantern_linalg_solve_triangular_out_tensor_tensor_tensor_bool_bool_bool(out, self, B, upper, left, unitriangular); LANTERN_HOST_HANDLER return ret; }
   LANTERN_API void* (LANTERN_PTR _lantern_linalg_solve_triangular_tensor_tensor_bool_bool_bool)(void* self, void* B, void* upper, void* left, void* unitriangular);
   HOST_API void* lantern_linalg_solve_triangular_tensor_tensor_bool_bool_bool(void* self, void* B, void* upper, void* left, void* unitriangular) { LANTERN_CHECK_LOADED void* ret = _lantern_linalg_solve_triangular_tensor_tensor_bool_bool_bool(self, B, upper, left, unitriangular); LANTERN_HOST_HANDLER return ret; }
-  LANTERN_API void* (LANTERN_PTR _lantern_Tensor_linalg_solve_triangular_tensor_tensor_bool_bool_bool)(void* self, void* B, void* upper, void* left, void* unitriangular);
-  HOST_API void* lantern_Tensor_linalg_solve_triangular_tensor_tensor_bool_bool_bool(void* self, void* B, void* upper, void* left, void* unitriangular) { void* ret = _lantern_Tensor_linalg_solve_triangular_tensor_tensor_bool_bool_bool(self, B, upper, left, unitriangular); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern_linalg_vander_tensor_intt)(void* x, void* N);
+  HOST_API void* lantern_linalg_vander_tensor_intt(void* x, void* N) { LANTERN_CHECK_LOADED void* ret = _lantern_linalg_vander_tensor_intt(x, N); LANTERN_HOST_HANDLER return ret; }
   LANTERN_API void* (LANTERN_PTR _lantern_symeig_out_tensor_tensor_tensor_bool_bool)(void* e, void* V, void* self, void* eigenvectors, void* upper);
   HOST_API void* lantern_symeig_out_tensor_tensor_tensor_bool_bool(void* e, void* V, void* self, void* eigenvectors, void* upper) { LANTERN_CHECK_LOADED void* ret = _lantern_symeig_out_tensor_tensor_tensor_bool_bool(e, V, self, eigenvectors, upper); LANTERN_HOST_HANDLER return ret; }
   LANTERN_API void* (LANTERN_PTR _lantern_symeig_tensor_bool_bool)(void* self, void* eigenvectors, void* upper);
@@ -6147,14 +6289,6 @@ HOST_API void lantern_cuda_synchronize (int device_index) {
   HOST_API void* lantern_Tensor_cholesky_solve_tensor_tensor_bool(void* self, void* input2, void* upper) { void* ret = _lantern_Tensor_cholesky_solve_tensor_tensor_bool(self, input2, upper); LANTERN_HOST_HANDLER return ret; }
   LANTERN_API void* (LANTERN_PTR _lantern__cholesky_solve_helper_tensor_tensor_bool)(void* self, void* A, void* upper);
   HOST_API void* lantern__cholesky_solve_helper_tensor_tensor_bool(void* self, void* A, void* upper) { LANTERN_CHECK_LOADED void* ret = _lantern__cholesky_solve_helper_tensor_tensor_bool(self, A, upper); LANTERN_HOST_HANDLER return ret; }
-  LANTERN_API void* (LANTERN_PTR _lantern_solve_tensor_tensor)(void* self, void* A);
-  HOST_API void* lantern_solve_tensor_tensor(void* self, void* A) { LANTERN_CHECK_LOADED void* ret = _lantern_solve_tensor_tensor(self, A); LANTERN_HOST_HANDLER return ret; }
-  LANTERN_API void* (LANTERN_PTR _lantern_Tensor_solve_tensor_tensor)(void* self, void* A);
-  HOST_API void* lantern_Tensor_solve_tensor_tensor(void* self, void* A) { void* ret = _lantern_Tensor_solve_tensor_tensor(self, A); LANTERN_HOST_HANDLER return ret; }
-  LANTERN_API void* (LANTERN_PTR _lantern_solve_out_tensor_tensor_tensor_tensor)(void* solution, void* lu, void* self, void* A);
-  HOST_API void* lantern_solve_out_tensor_tensor_tensor_tensor(void* solution, void* lu, void* self, void* A) { LANTERN_CHECK_LOADED void* ret = _lantern_solve_out_tensor_tensor_tensor_tensor(solution, lu, self, A); LANTERN_HOST_HANDLER return ret; }
-  LANTERN_API void* (LANTERN_PTR _lantern__solve_helper_tensor_tensor)(void* self, void* A);
-  HOST_API void* lantern__solve_helper_tensor_tensor(void* self, void* A) { LANTERN_CHECK_LOADED void* ret = _lantern__solve_helper_tensor_tensor(self, A); LANTERN_HOST_HANDLER return ret; }
   LANTERN_API void* (LANTERN_PTR _lantern_cholesky_inverse_tensor_bool)(void* self, void* upper);
   HOST_API void* lantern_cholesky_inverse_tensor_bool(void* self, void* upper) { LANTERN_CHECK_LOADED void* ret = _lantern_cholesky_inverse_tensor_bool(self, upper); LANTERN_HOST_HANDLER return ret; }
   LANTERN_API void* (LANTERN_PTR _lantern_Tensor_cholesky_inverse_tensor_bool)(void* self, void* upper);
@@ -6309,6 +6443,12 @@ HOST_API void lantern_cuda_synchronize (int device_index) {
   HOST_API void* lantern__histogramdd_from_bin_cts_tensor_intarrayref_arrayrefdouble_tensor_bool(void* self, void* bins, void* range, void* weight, void* density) { LANTERN_CHECK_LOADED void* ret = _lantern__histogramdd_from_bin_cts_tensor_intarrayref_arrayrefdouble_tensor_bool(self, bins, range, weight, density); LANTERN_HOST_HANDLER return ret; }
   LANTERN_API void* (LANTERN_PTR _lantern__histogramdd_from_bin_tensors_tensor_tensorlist_tensor_bool)(void* self, void* bins, void* weight, void* density);
   HOST_API void* lantern__histogramdd_from_bin_tensors_tensor_tensorlist_tensor_bool(void* self, void* bins, void* weight, void* density) { LANTERN_CHECK_LOADED void* ret = _lantern__histogramdd_from_bin_tensors_tensor_tensorlist_tensor_bool(self, bins, weight, density); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern_histogramdd_tensor_intarrayref_arrayrefdouble_tensor_bool)(void* self, void* bins, void* range, void* weight, void* density);
+  HOST_API void* lantern_histogramdd_tensor_intarrayref_arrayrefdouble_tensor_bool(void* self, void* bins, void* range, void* weight, void* density) { LANTERN_CHECK_LOADED void* ret = _lantern_histogramdd_tensor_intarrayref_arrayrefdouble_tensor_bool(self, bins, range, weight, density); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern_histogramdd_tensor_intt_arrayrefdouble_tensor_bool)(void* self, void* bins, void* range, void* weight, void* density);
+  HOST_API void* lantern_histogramdd_tensor_intt_arrayrefdouble_tensor_bool(void* self, void* bins, void* range, void* weight, void* density) { LANTERN_CHECK_LOADED void* ret = _lantern_histogramdd_tensor_intt_arrayrefdouble_tensor_bool(self, bins, range, weight, density); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern_histogramdd_tensor_tensorlist_arrayrefdouble_tensor_bool)(void* self, void* bins, void* range, void* weight, void* density);
+  HOST_API void* lantern_histogramdd_tensor_tensorlist_arrayrefdouble_tensor_bool(void* self, void* bins, void* range, void* weight, void* density) { LANTERN_CHECK_LOADED void* ret = _lantern_histogramdd_tensor_tensorlist_arrayrefdouble_tensor_bool(self, bins, range, weight, density); LANTERN_HOST_HANDLER return ret; }
   LANTERN_API void* (LANTERN_PTR _lantern_fmod_out_tensor_tensor_scalar)(void* out, void* self, void* other);
   HOST_API void* lantern_fmod_out_tensor_tensor_scalar(void* out, void* self, void* other) { LANTERN_CHECK_LOADED void* ret = _lantern_fmod_out_tensor_tensor_scalar(out, self, other); LANTERN_HOST_HANDLER return ret; }
   LANTERN_API void* (LANTERN_PTR _lantern_fmod_tensor_scalar)(void* self, void* other);
@@ -6569,16 +6709,10 @@ HOST_API void lantern_cuda_synchronize (int device_index) {
   HOST_API void* lantern_alias_tensor(void* self) { LANTERN_CHECK_LOADED void* ret = _lantern_alias_tensor(self); LANTERN_HOST_HANDLER return ret; }
   LANTERN_API void* (LANTERN_PTR _lantern_Tensor_alias_tensor)(void* self);
   HOST_API void* lantern_Tensor_alias_tensor(void* self) { void* ret = _lantern_Tensor_alias_tensor(self); LANTERN_HOST_HANDLER return ret; }
-  LANTERN_API void* (LANTERN_PTR _lantern__index_copy__tensor_intt_tensor_tensor)(void* self, void* dim, void* index, void* source);
-  HOST_API void* lantern__index_copy__tensor_intt_tensor_tensor(void* self, void* dim, void* index, void* source) { LANTERN_CHECK_LOADED void* ret = _lantern__index_copy__tensor_intt_tensor_tensor(self, dim, index, source); LANTERN_HOST_HANDLER return ret; }
   LANTERN_API void* (LANTERN_PTR _lantern__amp_foreach_non_finite_check_and_unscale__tensorlist_tensor_tensor)(void* self, void* found_inf, void* inv_scale);
   HOST_API void* lantern__amp_foreach_non_finite_check_and_unscale__tensorlist_tensor_tensor(void* self, void* found_inf, void* inv_scale) { LANTERN_CHECK_LOADED void* ret = _lantern__amp_foreach_non_finite_check_and_unscale__tensorlist_tensor_tensor(self, found_inf, inv_scale); LANTERN_HOST_HANDLER return ret; }
   LANTERN_API void* (LANTERN_PTR _lantern__amp_update_scale__tensor_tensor_tensor_double_double_intt)(void* self, void* growth_tracker, void* found_inf, void* scale_growth_factor, void* scale_backoff_factor, void* growth_interval);
   HOST_API void* lantern__amp_update_scale__tensor_tensor_tensor_double_double_intt(void* self, void* growth_tracker, void* found_inf, void* scale_growth_factor, void* scale_backoff_factor, void* growth_interval) { LANTERN_CHECK_LOADED void* ret = _lantern__amp_update_scale__tensor_tensor_tensor_double_double_intt(self, growth_tracker, found_inf, scale_growth_factor, scale_backoff_factor, growth_interval); LANTERN_HOST_HANDLER return ret; }
-  LANTERN_API void* (LANTERN_PTR _lantern__cat_tensorlist_intt)(void* tensors, void* dim);
-  HOST_API void* lantern__cat_tensorlist_intt(void* tensors, void* dim) { LANTERN_CHECK_LOADED void* ret = _lantern__cat_tensorlist_intt(tensors, dim); LANTERN_HOST_HANDLER return ret; }
-  LANTERN_API void* (LANTERN_PTR _lantern__cat_out_tensor_tensorlist_intt)(void* out, void* tensors, void* dim);
-  HOST_API void* lantern__cat_out_tensor_tensorlist_intt(void* out, void* tensors, void* dim) { LANTERN_CHECK_LOADED void* ret = _lantern__cat_out_tensor_tensorlist_intt(out, tensors, dim); LANTERN_HOST_HANDLER return ret; }
   LANTERN_API void* (LANTERN_PTR _lantern__foreach_add_tensorlist_scalar)(void* tensors, void* scalar);
   HOST_API void* lantern__foreach_add_tensorlist_scalar(void* tensors, void* scalar) { LANTERN_CHECK_LOADED void* ret = _lantern__foreach_add_tensorlist_scalar(tensors, scalar); LANTERN_HOST_HANDLER return ret; }
   LANTERN_API void* (LANTERN_PTR _lantern__foreach_add__tensorlist_scalar)(void* self, void* scalar);
@@ -6889,6 +7023,10 @@ HOST_API void lantern_cuda_synchronize (int device_index) {
   HOST_API void* lantern_glu_backward_out_tensor_tensor_tensor_intt(void* grad_input, void* grad_output, void* self, void* dim) { LANTERN_CHECK_LOADED void* ret = _lantern_glu_backward_out_tensor_tensor_tensor_intt(grad_input, grad_output, self, dim); LANTERN_HOST_HANDLER return ret; }
   LANTERN_API void* (LANTERN_PTR _lantern_glu_backward_tensor_tensor_intt)(void* grad_output, void* self, void* dim);
   HOST_API void* lantern_glu_backward_tensor_tensor_intt(void* grad_output, void* self, void* dim) { LANTERN_CHECK_LOADED void* ret = _lantern_glu_backward_tensor_tensor_intt(grad_output, self, dim); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern_glu_jvp_tensor_tensor_tensor_intt)(void* glu, void* x, void* dx, void* dim);
+  HOST_API void* lantern_glu_jvp_tensor_tensor_tensor_intt(void* glu, void* x, void* dx, void* dim) { LANTERN_CHECK_LOADED void* ret = _lantern_glu_jvp_tensor_tensor_tensor_intt(glu, x, dx, dim); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern_glu_backward_jvp_tensor_tensor_tensor_tensor_tensor_intt)(void* grad_x, void* grad_glu, void* x, void* dgrad_glu, void* dx, void* dim);
+  HOST_API void* lantern_glu_backward_jvp_tensor_tensor_tensor_tensor_tensor_intt(void* grad_x, void* grad_glu, void* x, void* dgrad_glu, void* dx, void* dim) { LANTERN_CHECK_LOADED void* ret = _lantern_glu_backward_jvp_tensor_tensor_tensor_tensor_tensor_intt(grad_x, grad_glu, x, dgrad_glu, dx, dim); LANTERN_HOST_HANDLER return ret; }
   LANTERN_API void* (LANTERN_PTR _lantern_hardsigmoid_out_tensor_tensor)(void* out, void* self);
   HOST_API void* lantern_hardsigmoid_out_tensor_tensor(void* out, void* self) { LANTERN_CHECK_LOADED void* ret = _lantern_hardsigmoid_out_tensor_tensor(out, self); LANTERN_HOST_HANDLER return ret; }
   LANTERN_API void* (LANTERN_PTR _lantern_hardsigmoid_tensor)(void* self);
@@ -7053,18 +7191,10 @@ HOST_API void lantern_cuda_synchronize (int device_index) {
   HOST_API void* lantern_max_unpool2d_out_tensor_tensor_tensor_intarrayref(void* out, void* self, void* indices, void* output_size) { LANTERN_CHECK_LOADED void* ret = _lantern_max_unpool2d_out_tensor_tensor_tensor_intarrayref(out, self, indices, output_size); LANTERN_HOST_HANDLER return ret; }
   LANTERN_API void* (LANTERN_PTR _lantern_max_unpool2d_tensor_tensor_intarrayref)(void* self, void* indices, void* output_size);
   HOST_API void* lantern_max_unpool2d_tensor_tensor_intarrayref(void* self, void* indices, void* output_size) { LANTERN_CHECK_LOADED void* ret = _lantern_max_unpool2d_tensor_tensor_intarrayref(self, indices, output_size); LANTERN_HOST_HANDLER return ret; }
-  LANTERN_API void* (LANTERN_PTR _lantern_max_unpool2d_backward_out_tensor_tensor_tensor_tensor_intarrayref)(void* grad_input, void* grad_output, void* self, void* indices, void* output_size);
-  HOST_API void* lantern_max_unpool2d_backward_out_tensor_tensor_tensor_tensor_intarrayref(void* grad_input, void* grad_output, void* self, void* indices, void* output_size) { LANTERN_CHECK_LOADED void* ret = _lantern_max_unpool2d_backward_out_tensor_tensor_tensor_tensor_intarrayref(grad_input, grad_output, self, indices, output_size); LANTERN_HOST_HANDLER return ret; }
-  LANTERN_API void* (LANTERN_PTR _lantern_max_unpool2d_backward_tensor_tensor_tensor_intarrayref)(void* grad_output, void* self, void* indices, void* output_size);
-  HOST_API void* lantern_max_unpool2d_backward_tensor_tensor_tensor_intarrayref(void* grad_output, void* self, void* indices, void* output_size) { LANTERN_CHECK_LOADED void* ret = _lantern_max_unpool2d_backward_tensor_tensor_tensor_intarrayref(grad_output, self, indices, output_size); LANTERN_HOST_HANDLER return ret; }
   LANTERN_API void* (LANTERN_PTR _lantern_max_unpool3d_out_tensor_tensor_tensor_intarrayref_intarrayref_intarrayref)(void* out, void* self, void* indices, void* output_size, void* stride, void* padding);
   HOST_API void* lantern_max_unpool3d_out_tensor_tensor_tensor_intarrayref_intarrayref_intarrayref(void* out, void* self, void* indices, void* output_size, void* stride, void* padding) { LANTERN_CHECK_LOADED void* ret = _lantern_max_unpool3d_out_tensor_tensor_tensor_intarrayref_intarrayref_intarrayref(out, self, indices, output_size, stride, padding); LANTERN_HOST_HANDLER return ret; }
   LANTERN_API void* (LANTERN_PTR _lantern_max_unpool3d_tensor_tensor_intarrayref_intarrayref_intarrayref)(void* self, void* indices, void* output_size, void* stride, void* padding);
   HOST_API void* lantern_max_unpool3d_tensor_tensor_intarrayref_intarrayref_intarrayref(void* self, void* indices, void* output_size, void* stride, void* padding) { LANTERN_CHECK_LOADED void* ret = _lantern_max_unpool3d_tensor_tensor_intarrayref_intarrayref_intarrayref(self, indices, output_size, stride, padding); LANTERN_HOST_HANDLER return ret; }
-  LANTERN_API void* (LANTERN_PTR _lantern_max_unpool3d_backward_out_tensor_tensor_tensor_tensor_intarrayref_intarrayref_intarrayref)(void* grad_input, void* grad_output, void* self, void* indices, void* output_size, void* stride, void* padding);
-  HOST_API void* lantern_max_unpool3d_backward_out_tensor_tensor_tensor_tensor_intarrayref_intarrayref_intarrayref(void* grad_input, void* grad_output, void* self, void* indices, void* output_size, void* stride, void* padding) { LANTERN_CHECK_LOADED void* ret = _lantern_max_unpool3d_backward_out_tensor_tensor_tensor_tensor_intarrayref_intarrayref_intarrayref(grad_input, grad_output, self, indices, output_size, stride, padding); LANTERN_HOST_HANDLER return ret; }
-  LANTERN_API void* (LANTERN_PTR _lantern_max_unpool3d_backward_tensor_tensor_tensor_intarrayref_intarrayref_intarrayref)(void* grad_output, void* self, void* indices, void* output_size, void* stride, void* padding);
-  HOST_API void* lantern_max_unpool3d_backward_tensor_tensor_tensor_intarrayref_intarrayref_intarrayref(void* grad_output, void* self, void* indices, void* output_size, void* stride, void* padding) { LANTERN_CHECK_LOADED void* ret = _lantern_max_unpool3d_backward_tensor_tensor_tensor_intarrayref_intarrayref_intarrayref(grad_output, self, indices, output_size, stride, padding); LANTERN_HOST_HANDLER return ret; }
   LANTERN_API void* (LANTERN_PTR _lantern_reflection_pad1d_out_tensor_tensor_intarrayref)(void* out, void* self, void* padding);
   HOST_API void* lantern_reflection_pad1d_out_tensor_tensor_intarrayref(void* out, void* self, void* padding) { LANTERN_CHECK_LOADED void* ret = _lantern_reflection_pad1d_out_tensor_tensor_intarrayref(out, self, padding); LANTERN_HOST_HANDLER return ret; }
   LANTERN_API void* (LANTERN_PTR _lantern_reflection_pad1d_tensor_intarrayref)(void* self, void* padding);
@@ -7113,6 +7243,12 @@ HOST_API void lantern_cuda_synchronize (int device_index) {
   HOST_API void* lantern_replication_pad3d_backward_out_tensor_tensor_tensor_intarrayref(void* grad_input, void* grad_output, void* self, void* padding) { LANTERN_CHECK_LOADED void* ret = _lantern_replication_pad3d_backward_out_tensor_tensor_tensor_intarrayref(grad_input, grad_output, self, padding); LANTERN_HOST_HANDLER return ret; }
   LANTERN_API void* (LANTERN_PTR _lantern_replication_pad3d_backward_tensor_tensor_intarrayref)(void* grad_output, void* self, void* padding);
   HOST_API void* lantern_replication_pad3d_backward_tensor_tensor_intarrayref(void* grad_output, void* self, void* padding) { LANTERN_CHECK_LOADED void* ret = _lantern_replication_pad3d_backward_tensor_tensor_intarrayref(grad_output, self, padding); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern__pad_circular_tensor_intarrayref)(void* self, void* pad);
+  HOST_API void* lantern__pad_circular_tensor_intarrayref(void* self, void* pad) { LANTERN_CHECK_LOADED void* ret = _lantern__pad_circular_tensor_intarrayref(self, pad); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern__pad_enum_tensor_intarrayref_intt_double)(void* self, void* pad, void* mode, void* value);
+  HOST_API void* lantern__pad_enum_tensor_intarrayref_intt_double(void* self, void* pad, void* mode, void* value) { LANTERN_CHECK_LOADED void* ret = _lantern__pad_enum_tensor_intarrayref_intt_double(self, pad, mode, value); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern_pad_tensor_intarrayref_cstringview_double)(void* self, void* pad, void* mode, void* value);
+  HOST_API void* lantern_pad_tensor_intarrayref_cstringview_double(void* self, void* pad, void* mode, void* value) { LANTERN_CHECK_LOADED void* ret = _lantern_pad_tensor_intarrayref_cstringview_double(self, pad, mode, value); LANTERN_HOST_HANDLER return ret; }
   LANTERN_API void* (LANTERN_PTR _lantern_upsample_linear1d_tensor_intarrayref_bool_arrayrefdouble)(void* input, void* output_size, void* align_corners, void* scale_factors);
   HOST_API void* lantern_upsample_linear1d_tensor_intarrayref_bool_arrayrefdouble(void* input, void* output_size, void* align_corners, void* scale_factors) { LANTERN_CHECK_LOADED void* ret = _lantern_upsample_linear1d_tensor_intarrayref_bool_arrayrefdouble(input, output_size, align_corners, scale_factors); LANTERN_HOST_HANDLER return ret; }
   LANTERN_API void* (LANTERN_PTR _lantern_upsample_linear1d_backward_tensor_intarrayref_intarrayref_bool_arrayrefdouble)(void* grad_output, void* output_size, void* input_size, void* align_corners, void* scale_factors);
@@ -7361,6 +7497,10 @@ HOST_API void lantern_cuda_synchronize (int device_index) {
   HOST_API void* lantern_special_ndtri_tensor(void* self) { LANTERN_CHECK_LOADED void* ret = _lantern_special_ndtri_tensor(self); LANTERN_HOST_HANDLER return ret; }
   LANTERN_API void* (LANTERN_PTR _lantern_special_ndtri_out_tensor_tensor)(void* out, void* self);
   HOST_API void* lantern_special_ndtri_out_tensor_tensor(void* out, void* self) { LANTERN_CHECK_LOADED void* ret = _lantern_special_ndtri_out_tensor_tensor(out, self); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern_special_log_ndtr_tensor)(void* self);
+  HOST_API void* lantern_special_log_ndtr_tensor(void* self) { LANTERN_CHECK_LOADED void* ret = _lantern_special_log_ndtr_tensor(self); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern_special_log_ndtr_out_tensor_tensor)(void* out, void* self);
+  HOST_API void* lantern_special_log_ndtr_out_tensor_tensor(void* out, void* self) { LANTERN_CHECK_LOADED void* ret = _lantern_special_log_ndtr_out_tensor_tensor(out, self); LANTERN_HOST_HANDLER return ret; }
   LANTERN_API void* (LANTERN_PTR _lantern_special_expm1_tensor)(void* self);
   HOST_API void* lantern_special_expm1_tensor(void* self) { LANTERN_CHECK_LOADED void* ret = _lantern_special_expm1_tensor(self); LANTERN_HOST_HANDLER return ret; }
   LANTERN_API void* (LANTERN_PTR _lantern_special_expm1_out_tensor_tensor)(void* out, void* self);
@@ -7599,6 +7739,10 @@ HOST_API void lantern_cuda_synchronize (int device_index) {
   HOST_API void* lantern_linalg_lu_factor_ex_tensor_bool_bool(void* A, void* pivot, void* check_errors) { LANTERN_CHECK_LOADED void* ret = _lantern_linalg_lu_factor_ex_tensor_bool_bool(A, pivot, check_errors); LANTERN_HOST_HANDLER return ret; }
   LANTERN_API void* (LANTERN_PTR _lantern_linalg_lu_factor_ex_out_tensor_tensor_tensor_tensor_bool_bool)(void* LU, void* pivots, void* info, void* A, void* pivot, void* check_errors);
   HOST_API void* lantern_linalg_lu_factor_ex_out_tensor_tensor_tensor_tensor_bool_bool(void* LU, void* pivots, void* info, void* A, void* pivot, void* check_errors) { LANTERN_CHECK_LOADED void* ret = _lantern_linalg_lu_factor_ex_out_tensor_tensor_tensor_tensor_bool_bool(LU, pivots, info, A, pivot, check_errors); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern_linalg_lu_tensor_bool)(void* A, void* pivot);
+  HOST_API void* lantern_linalg_lu_tensor_bool(void* A, void* pivot) { LANTERN_CHECK_LOADED void* ret = _lantern_linalg_lu_tensor_bool(A, pivot); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern_linalg_lu_out_tensor_tensor_tensor_tensor_bool)(void* P, void* L, void* U, void* A, void* pivot);
+  HOST_API void* lantern_linalg_lu_out_tensor_tensor_tensor_tensor_bool(void* P, void* L, void* U, void* A, void* pivot) { LANTERN_CHECK_LOADED void* ret = _lantern_linalg_lu_out_tensor_tensor_tensor_tensor_bool(P, L, U, A, pivot); LANTERN_HOST_HANDLER return ret; }
   LANTERN_API void* (LANTERN_PTR _lantern_linalg_det_tensor)(void* self);
   HOST_API void* lantern_linalg_det_tensor(void* self) { LANTERN_CHECK_LOADED void* ret = _lantern_linalg_det_tensor(self); LANTERN_HOST_HANDLER return ret; }
   LANTERN_API void* (LANTERN_PTR _lantern_linalg_det_out_tensor_tensor)(void* out, void* self);
@@ -7611,6 +7755,18 @@ HOST_API void lantern_cuda_synchronize (int device_index) {
   HOST_API void* lantern__det_lu_based_helper_tensor(void* self) { LANTERN_CHECK_LOADED void* ret = _lantern__det_lu_based_helper_tensor(self); LANTERN_HOST_HANDLER return ret; }
   LANTERN_API void* (LANTERN_PTR _lantern__det_lu_based_helper_backward_helper_tensor_tensor_tensor_tensor_tensor)(void* det_grad, void* det, void* self, void* lu, void* pivs);
   HOST_API void* lantern__det_lu_based_helper_backward_helper_tensor_tensor_tensor_tensor_tensor(void* det_grad, void* det, void* self, void* lu, void* pivs) { LANTERN_CHECK_LOADED void* ret = _lantern__det_lu_based_helper_backward_helper_tensor_tensor_tensor_tensor_tensor(det_grad, det, self, lu, pivs); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern_linalg_ldl_factor_ex_tensor_bool_bool)(void* self, void* hermitian, void* check_errors);
+  HOST_API void* lantern_linalg_ldl_factor_ex_tensor_bool_bool(void* self, void* hermitian, void* check_errors) { LANTERN_CHECK_LOADED void* ret = _lantern_linalg_ldl_factor_ex_tensor_bool_bool(self, hermitian, check_errors); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern_linalg_ldl_factor_ex_out_tensor_tensor_tensor_tensor_bool_bool)(void* LD, void* pivots, void* info, void* self, void* hermitian, void* check_errors);
+  HOST_API void* lantern_linalg_ldl_factor_ex_out_tensor_tensor_tensor_tensor_bool_bool(void* LD, void* pivots, void* info, void* self, void* hermitian, void* check_errors) { LANTERN_CHECK_LOADED void* ret = _lantern_linalg_ldl_factor_ex_out_tensor_tensor_tensor_tensor_bool_bool(LD, pivots, info, self, hermitian, check_errors); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern_linalg_ldl_factor_tensor_bool)(void* self, void* hermitian);
+  HOST_API void* lantern_linalg_ldl_factor_tensor_bool(void* self, void* hermitian) { LANTERN_CHECK_LOADED void* ret = _lantern_linalg_ldl_factor_tensor_bool(self, hermitian); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern_linalg_ldl_factor_out_tensor_tensor_tensor_bool)(void* LD, void* pivots, void* self, void* hermitian);
+  HOST_API void* lantern_linalg_ldl_factor_out_tensor_tensor_tensor_bool(void* LD, void* pivots, void* self, void* hermitian) { LANTERN_CHECK_LOADED void* ret = _lantern_linalg_ldl_factor_out_tensor_tensor_tensor_bool(LD, pivots, self, hermitian); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern_linalg_ldl_solve_tensor_tensor_tensor_bool)(void* LD, void* pivots, void* B, void* hermitian);
+  HOST_API void* lantern_linalg_ldl_solve_tensor_tensor_tensor_bool(void* LD, void* pivots, void* B, void* hermitian) { LANTERN_CHECK_LOADED void* ret = _lantern_linalg_ldl_solve_tensor_tensor_tensor_bool(LD, pivots, B, hermitian); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern_linalg_ldl_solve_out_tensor_tensor_tensor_tensor_bool)(void* out, void* LD, void* pivots, void* B, void* hermitian);
+  HOST_API void* lantern_linalg_ldl_solve_out_tensor_tensor_tensor_tensor_bool(void* out, void* LD, void* pivots, void* B, void* hermitian) { LANTERN_CHECK_LOADED void* ret = _lantern_linalg_ldl_solve_out_tensor_tensor_tensor_tensor_bool(out, LD, pivots, B, hermitian); LANTERN_HOST_HANDLER return ret; }
   LANTERN_API void* (LANTERN_PTR _lantern_linalg_lstsq_tensor_tensor_double_cstringview)(void* self, void* b, void* rcond, void* driver);
   HOST_API void* lantern_linalg_lstsq_tensor_tensor_double_cstringview(void* self, void* b, void* rcond, void* driver) { LANTERN_CHECK_LOADED void* ret = _lantern_linalg_lstsq_tensor_tensor_double_cstringview(self, b, rcond, driver); LANTERN_HOST_HANDLER return ret; }
   LANTERN_API void* (LANTERN_PTR _lantern_linalg_lstsq_out_tensor_tensor_tensor_tensor_tensor_tensor_double_cstringview)(void* solution, void* residuals, void* rank, void* singular_values, void* self, void* b, void* rcond, void* driver);
@@ -7741,10 +7897,10 @@ HOST_API void lantern_cuda_synchronize (int device_index) {
   HOST_API void* lantern_linalg_tensorsolve_tensor_tensor_intarrayref(void* self, void* other, void* dims) { LANTERN_CHECK_LOADED void* ret = _lantern_linalg_tensorsolve_tensor_tensor_intarrayref(self, other, dims); LANTERN_HOST_HANDLER return ret; }
   LANTERN_API void* (LANTERN_PTR _lantern_linalg_tensorsolve_out_tensor_tensor_tensor_intarrayref)(void* out, void* self, void* other, void* dims);
   HOST_API void* lantern_linalg_tensorsolve_out_tensor_tensor_tensor_intarrayref(void* out, void* self, void* other, void* dims) { LANTERN_CHECK_LOADED void* ret = _lantern_linalg_tensorsolve_out_tensor_tensor_tensor_intarrayref(out, self, other, dims); LANTERN_HOST_HANDLER return ret; }
-  LANTERN_API void* (LANTERN_PTR _lantern_linalg_qr_tensor_cstringview)(void* self, void* mode);
-  HOST_API void* lantern_linalg_qr_tensor_cstringview(void* self, void* mode) { LANTERN_CHECK_LOADED void* ret = _lantern_linalg_qr_tensor_cstringview(self, mode); LANTERN_HOST_HANDLER return ret; }
-  LANTERN_API void* (LANTERN_PTR _lantern_linalg_qr_out_tensor_tensor_tensor_cstringview)(void* Q, void* R, void* self, void* mode);
-  HOST_API void* lantern_linalg_qr_out_tensor_tensor_tensor_cstringview(void* Q, void* R, void* self, void* mode) { LANTERN_CHECK_LOADED void* ret = _lantern_linalg_qr_out_tensor_tensor_tensor_cstringview(Q, R, self, mode); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern_linalg_qr_tensor_cstringview)(void* A, void* mode);
+  HOST_API void* lantern_linalg_qr_tensor_cstringview(void* A, void* mode) { LANTERN_CHECK_LOADED void* ret = _lantern_linalg_qr_tensor_cstringview(A, mode); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern_linalg_qr_out_tensor_tensor_tensor_cstringview)(void* Q, void* R, void* A, void* mode);
+  HOST_API void* lantern_linalg_qr_out_tensor_tensor_tensor_cstringview(void* Q, void* R, void* A, void* mode) { LANTERN_CHECK_LOADED void* ret = _lantern_linalg_qr_out_tensor_tensor_tensor_cstringview(Q, R, A, mode); LANTERN_HOST_HANDLER return ret; }
   LANTERN_API void* (LANTERN_PTR _lantern__linalg_qr_helper_tensor_cstringview)(void* self, void* mode);
   HOST_API void* lantern__linalg_qr_helper_tensor_cstringview(void* self, void* mode) { LANTERN_CHECK_LOADED void* ret = _lantern__linalg_qr_helper_tensor_cstringview(self, mode); LANTERN_HOST_HANDLER return ret; }
   LANTERN_API void* (LANTERN_PTR _lantern_linalg_matrix_power_tensor_intt)(void* self, void* n);
@@ -7797,6 +7953,500 @@ HOST_API void lantern_cuda_synchronize (int device_index) {
   HOST_API void* lantern_flatten_dense_tensors_tensorlist(void* tensors) { LANTERN_CHECK_LOADED void* ret = _lantern_flatten_dense_tensors_tensorlist(tensors); LANTERN_HOST_HANDLER return ret; }
   LANTERN_API void* (LANTERN_PTR _lantern_unflatten_dense_tensors_tensor_tensorlist)(void* flat, void* tensors);
   HOST_API void* lantern_unflatten_dense_tensors_tensor_tensorlist(void* flat, void* tensors) { LANTERN_CHECK_LOADED void* ret = _lantern_unflatten_dense_tensors_tensor_tensorlist(flat, tensors); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern_nested_tensor_tensorlist_scalartype_layout_device_bool)(void* list, void* dtype, void* layout, void* device, void* pin_memory);
+  HOST_API void* lantern_nested_tensor_tensorlist_scalartype_layout_device_bool(void* list, void* dtype, void* layout, void* device, void* pin_memory) { LANTERN_CHECK_LOADED void* ret = _lantern_nested_tensor_tensorlist_scalartype_layout_device_bool(list, dtype, layout, device, pin_memory); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern__fw_primal_copy_tensor_intt)(void* self, void* level);
+  HOST_API void* lantern__fw_primal_copy_tensor_intt(void* self, void* level) { LANTERN_CHECK_LOADED void* ret = _lantern__fw_primal_copy_tensor_intt(self, level); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern__make_dual_copy_tensor_tensor_intt)(void* primal, void* tangent, void* level);
+  HOST_API void* lantern__make_dual_copy_tensor_tensor_intt(void* primal, void* tangent, void* level) { LANTERN_CHECK_LOADED void* ret = _lantern__make_dual_copy_tensor_tensor_intt(primal, tangent, level); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern_view_as_real_copy_tensor)(void* self);
+  HOST_API void* lantern_view_as_real_copy_tensor(void* self) { LANTERN_CHECK_LOADED void* ret = _lantern_view_as_real_copy_tensor(self); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern_view_as_complex_copy_tensor)(void* self);
+  HOST_API void* lantern_view_as_complex_copy_tensor(void* self) { LANTERN_CHECK_LOADED void* ret = _lantern_view_as_complex_copy_tensor(self); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern__conj_copy_tensor)(void* self);
+  HOST_API void* lantern__conj_copy_tensor(void* self) { LANTERN_CHECK_LOADED void* ret = _lantern__conj_copy_tensor(self); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern__neg_view_copy_tensor)(void* self);
+  HOST_API void* lantern__neg_view_copy_tensor(void* self) { LANTERN_CHECK_LOADED void* ret = _lantern__neg_view_copy_tensor(self); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern_as_strided_copy_tensor_intarrayref_intarrayref_intt)(void* self, void* size, void* stride, void* storage_offset);
+  HOST_API void* lantern_as_strided_copy_tensor_intarrayref_intarrayref_intt(void* self, void* size, void* stride, void* storage_offset) { LANTERN_CHECK_LOADED void* ret = _lantern_as_strided_copy_tensor_intarrayref_intarrayref_intt(self, size, stride, storage_offset); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern__sparse_broadcast_to_copy_tensor_intarrayref)(void* self, void* size);
+  HOST_API void* lantern__sparse_broadcast_to_copy_tensor_intarrayref(void* self, void* size) { LANTERN_CHECK_LOADED void* ret = _lantern__sparse_broadcast_to_copy_tensor_intarrayref(self, size); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern_diagonal_copy_tensor_intt_intt_intt)(void* self, void* offset, void* dim1, void* dim2);
+  HOST_API void* lantern_diagonal_copy_tensor_intt_intt_intt(void* self, void* offset, void* dim1, void* dim2) { LANTERN_CHECK_LOADED void* ret = _lantern_diagonal_copy_tensor_intt_intt_intt(self, offset, dim1, dim2); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern_expand_copy_tensor_intarrayref_bool)(void* self, void* size, void* implicit);
+  HOST_API void* lantern_expand_copy_tensor_intarrayref_bool(void* self, void* size, void* implicit) { LANTERN_CHECK_LOADED void* ret = _lantern_expand_copy_tensor_intarrayref_bool(self, size, implicit); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern_expand_copy_tensor_csymintarrayref_bool)(void* self, void* size, void* implicit);
+  HOST_API void* lantern_expand_copy_tensor_csymintarrayref_bool(void* self, void* size, void* implicit) { LANTERN_CHECK_LOADED void* ret = _lantern_expand_copy_tensor_csymintarrayref_bool(self, size, implicit); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern_permute_copy_tensor_intarrayref)(void* self, void* dims);
+  HOST_API void* lantern_permute_copy_tensor_intarrayref(void* self, void* dims) { LANTERN_CHECK_LOADED void* ret = _lantern_permute_copy_tensor_intarrayref(self, dims); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern__reshape_alias_copy_tensor_intarrayref_intarrayref)(void* self, void* size, void* stride);
+  HOST_API void* lantern__reshape_alias_copy_tensor_intarrayref_intarrayref(void* self, void* size, void* stride) { LANTERN_CHECK_LOADED void* ret = _lantern__reshape_alias_copy_tensor_intarrayref_intarrayref(self, size, stride); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern_select_copy_tensor_intt_intt)(void* self, void* dim, void* index);
+  HOST_API void* lantern_select_copy_tensor_intt_intt(void* self, void* dim, void* index) { LANTERN_CHECK_LOADED void* ret = _lantern_select_copy_tensor_intt_intt(self, dim, index); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern_detach_copy_tensor)(void* self);
+  HOST_API void* lantern_detach_copy_tensor(void* self) { LANTERN_CHECK_LOADED void* ret = _lantern_detach_copy_tensor(self); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern_slice_copy_tensor_intt_intt_intt_intt)(void* self, void* dim, void* start, void* end, void* step);
+  HOST_API void* lantern_slice_copy_tensor_intt_intt_intt_intt(void* self, void* dim, void* start, void* end, void* step) { LANTERN_CHECK_LOADED void* ret = _lantern_slice_copy_tensor_intt_intt_intt_intt(self, dim, start, end, step); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern_split_copy_tensor_intt_intt)(void* self, void* split_size, void* dim);
+  HOST_API void* lantern_split_copy_tensor_intt_intt(void* self, void* split_size, void* dim) { LANTERN_CHECK_LOADED void* ret = _lantern_split_copy_tensor_intt_intt(self, split_size, dim); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern_split_with_sizes_copy_tensor_intarrayref_intt)(void* self, void* split_sizes, void* dim);
+  HOST_API void* lantern_split_with_sizes_copy_tensor_intarrayref_intt(void* self, void* split_sizes, void* dim) { LANTERN_CHECK_LOADED void* ret = _lantern_split_with_sizes_copy_tensor_intarrayref_intt(self, split_sizes, dim); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern_squeeze_copy_tensor)(void* self);
+  HOST_API void* lantern_squeeze_copy_tensor(void* self) { LANTERN_CHECK_LOADED void* ret = _lantern_squeeze_copy_tensor(self); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern_squeeze_copy_tensor_intt)(void* self, void* dim);
+  HOST_API void* lantern_squeeze_copy_tensor_intt(void* self, void* dim) { LANTERN_CHECK_LOADED void* ret = _lantern_squeeze_copy_tensor_intt(self, dim); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern_t_copy_tensor)(void* self);
+  HOST_API void* lantern_t_copy_tensor(void* self) { LANTERN_CHECK_LOADED void* ret = _lantern_t_copy_tensor(self); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern_transpose_copy_tensor_intt_intt)(void* self, void* dim0, void* dim1);
+  HOST_API void* lantern_transpose_copy_tensor_intt_intt(void* self, void* dim0, void* dim1) { LANTERN_CHECK_LOADED void* ret = _lantern_transpose_copy_tensor_intt_intt(self, dim0, dim1); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern_unsqueeze_copy_tensor_intt)(void* self, void* dim);
+  HOST_API void* lantern_unsqueeze_copy_tensor_intt(void* self, void* dim) { LANTERN_CHECK_LOADED void* ret = _lantern_unsqueeze_copy_tensor_intt(self, dim); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern__indices_copy_tensor)(void* self);
+  HOST_API void* lantern__indices_copy_tensor(void* self) { LANTERN_CHECK_LOADED void* ret = _lantern__indices_copy_tensor(self); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern__values_copy_tensor)(void* self);
+  HOST_API void* lantern__values_copy_tensor(void* self) { LANTERN_CHECK_LOADED void* ret = _lantern__values_copy_tensor(self); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern_indices_copy_tensor)(void* self);
+  HOST_API void* lantern_indices_copy_tensor(void* self) { LANTERN_CHECK_LOADED void* ret = _lantern_indices_copy_tensor(self); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern_values_copy_tensor)(void* self);
+  HOST_API void* lantern_values_copy_tensor(void* self) { LANTERN_CHECK_LOADED void* ret = _lantern_values_copy_tensor(self); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern_crow_indices_copy_tensor)(void* self);
+  HOST_API void* lantern_crow_indices_copy_tensor(void* self) { LANTERN_CHECK_LOADED void* ret = _lantern_crow_indices_copy_tensor(self); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern_col_indices_copy_tensor)(void* self);
+  HOST_API void* lantern_col_indices_copy_tensor(void* self) { LANTERN_CHECK_LOADED void* ret = _lantern_col_indices_copy_tensor(self); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern_ccol_indices_copy_tensor)(void* self);
+  HOST_API void* lantern_ccol_indices_copy_tensor(void* self) { LANTERN_CHECK_LOADED void* ret = _lantern_ccol_indices_copy_tensor(self); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern_row_indices_copy_tensor)(void* self);
+  HOST_API void* lantern_row_indices_copy_tensor(void* self) { LANTERN_CHECK_LOADED void* ret = _lantern_row_indices_copy_tensor(self); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern_unbind_copy_tensor_intt)(void* self, void* dim);
+  HOST_API void* lantern_unbind_copy_tensor_intt(void* self, void* dim) { LANTERN_CHECK_LOADED void* ret = _lantern_unbind_copy_tensor_intt(self, dim); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern_view_copy_tensor_intarrayref)(void* self, void* size);
+  HOST_API void* lantern_view_copy_tensor_intarrayref(void* self, void* size) { LANTERN_CHECK_LOADED void* ret = _lantern_view_copy_tensor_intarrayref(self, size); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern_view_copy_tensor_scalartype)(void* self, void* dtype);
+  HOST_API void* lantern_view_copy_tensor_scalartype(void* self, void* dtype) { LANTERN_CHECK_LOADED void* ret = _lantern_view_copy_tensor_scalartype(self, dtype); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern_unfold_copy_tensor_intt_intt_intt)(void* self, void* dimension, void* size, void* step);
+  HOST_API void* lantern_unfold_copy_tensor_intt_intt_intt(void* self, void* dimension, void* size, void* step) { LANTERN_CHECK_LOADED void* ret = _lantern_unfold_copy_tensor_intt_intt_intt(self, dimension, size, step); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern_alias_copy_tensor)(void* self);
+  HOST_API void* lantern_alias_copy_tensor(void* self) { LANTERN_CHECK_LOADED void* ret = _lantern_alias_copy_tensor(self); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern__fw_primal_copy_out_tensor_tensor_intt)(void* out, void* self, void* level);
+  HOST_API void* lantern__fw_primal_copy_out_tensor_tensor_intt(void* out, void* self, void* level) { LANTERN_CHECK_LOADED void* ret = _lantern__fw_primal_copy_out_tensor_tensor_intt(out, self, level); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern__make_dual_copy_out_tensor_tensor_tensor_intt)(void* out, void* primal, void* tangent, void* level);
+  HOST_API void* lantern__make_dual_copy_out_tensor_tensor_tensor_intt(void* out, void* primal, void* tangent, void* level) { LANTERN_CHECK_LOADED void* ret = _lantern__make_dual_copy_out_tensor_tensor_tensor_intt(out, primal, tangent, level); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern_view_as_real_copy_out_tensor_tensor)(void* out, void* self);
+  HOST_API void* lantern_view_as_real_copy_out_tensor_tensor(void* out, void* self) { LANTERN_CHECK_LOADED void* ret = _lantern_view_as_real_copy_out_tensor_tensor(out, self); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern_view_as_complex_copy_out_tensor_tensor)(void* out, void* self);
+  HOST_API void* lantern_view_as_complex_copy_out_tensor_tensor(void* out, void* self) { LANTERN_CHECK_LOADED void* ret = _lantern_view_as_complex_copy_out_tensor_tensor(out, self); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern__conj_copy_out_tensor_tensor)(void* out, void* self);
+  HOST_API void* lantern__conj_copy_out_tensor_tensor(void* out, void* self) { LANTERN_CHECK_LOADED void* ret = _lantern__conj_copy_out_tensor_tensor(out, self); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern__neg_view_copy_out_tensor_tensor)(void* out, void* self);
+  HOST_API void* lantern__neg_view_copy_out_tensor_tensor(void* out, void* self) { LANTERN_CHECK_LOADED void* ret = _lantern__neg_view_copy_out_tensor_tensor(out, self); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern_as_strided_copy_out_tensor_tensor_intarrayref_intarrayref_intt)(void* out, void* self, void* size, void* stride, void* storage_offset);
+  HOST_API void* lantern_as_strided_copy_out_tensor_tensor_intarrayref_intarrayref_intt(void* out, void* self, void* size, void* stride, void* storage_offset) { LANTERN_CHECK_LOADED void* ret = _lantern_as_strided_copy_out_tensor_tensor_intarrayref_intarrayref_intt(out, self, size, stride, storage_offset); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern__sparse_broadcast_to_copy_out_tensor_tensor_intarrayref)(void* out, void* self, void* size);
+  HOST_API void* lantern__sparse_broadcast_to_copy_out_tensor_tensor_intarrayref(void* out, void* self, void* size) { LANTERN_CHECK_LOADED void* ret = _lantern__sparse_broadcast_to_copy_out_tensor_tensor_intarrayref(out, self, size); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern_diagonal_copy_out_tensor_tensor_intt_intt_intt)(void* out, void* self, void* offset, void* dim1, void* dim2);
+  HOST_API void* lantern_diagonal_copy_out_tensor_tensor_intt_intt_intt(void* out, void* self, void* offset, void* dim1, void* dim2) { LANTERN_CHECK_LOADED void* ret = _lantern_diagonal_copy_out_tensor_tensor_intt_intt_intt(out, self, offset, dim1, dim2); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern_expand_copy_out_tensor_tensor_csymintarrayref_bool)(void* out, void* self, void* size, void* implicit);
+  HOST_API void* lantern_expand_copy_out_tensor_tensor_csymintarrayref_bool(void* out, void* self, void* size, void* implicit) { LANTERN_CHECK_LOADED void* ret = _lantern_expand_copy_out_tensor_tensor_csymintarrayref_bool(out, self, size, implicit); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern_expand_copy_out_tensor_tensor_intarrayref_bool)(void* out, void* self, void* size, void* implicit);
+  HOST_API void* lantern_expand_copy_out_tensor_tensor_intarrayref_bool(void* out, void* self, void* size, void* implicit) { LANTERN_CHECK_LOADED void* ret = _lantern_expand_copy_out_tensor_tensor_intarrayref_bool(out, self, size, implicit); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern_permute_copy_out_tensor_tensor_intarrayref)(void* out, void* self, void* dims);
+  HOST_API void* lantern_permute_copy_out_tensor_tensor_intarrayref(void* out, void* self, void* dims) { LANTERN_CHECK_LOADED void* ret = _lantern_permute_copy_out_tensor_tensor_intarrayref(out, self, dims); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern__reshape_alias_copy_out_tensor_tensor_intarrayref_intarrayref)(void* out, void* self, void* size, void* stride);
+  HOST_API void* lantern__reshape_alias_copy_out_tensor_tensor_intarrayref_intarrayref(void* out, void* self, void* size, void* stride) { LANTERN_CHECK_LOADED void* ret = _lantern__reshape_alias_copy_out_tensor_tensor_intarrayref_intarrayref(out, self, size, stride); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern_select_copy_out_tensor_tensor_intt_intt)(void* out, void* self, void* dim, void* index);
+  HOST_API void* lantern_select_copy_out_tensor_tensor_intt_intt(void* out, void* self, void* dim, void* index) { LANTERN_CHECK_LOADED void* ret = _lantern_select_copy_out_tensor_tensor_intt_intt(out, self, dim, index); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern_detach_copy_out_tensor_tensor)(void* out, void* self);
+  HOST_API void* lantern_detach_copy_out_tensor_tensor(void* out, void* self) { LANTERN_CHECK_LOADED void* ret = _lantern_detach_copy_out_tensor_tensor(out, self); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern_slice_copy_out_tensor_tensor_intt_intt_intt_intt)(void* out, void* self, void* dim, void* start, void* end, void* step);
+  HOST_API void* lantern_slice_copy_out_tensor_tensor_intt_intt_intt_intt(void* out, void* self, void* dim, void* start, void* end, void* step) { LANTERN_CHECK_LOADED void* ret = _lantern_slice_copy_out_tensor_tensor_intt_intt_intt_intt(out, self, dim, start, end, step); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern_split_copy_out_tensorlist_tensor_intt_intt)(void* out, void* self, void* split_size, void* dim);
+  HOST_API void* lantern_split_copy_out_tensorlist_tensor_intt_intt(void* out, void* self, void* split_size, void* dim) { LANTERN_CHECK_LOADED void* ret = _lantern_split_copy_out_tensorlist_tensor_intt_intt(out, self, split_size, dim); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern_split_with_sizes_copy_out_tensorlist_tensor_intarrayref_intt)(void* out, void* self, void* split_sizes, void* dim);
+  HOST_API void* lantern_split_with_sizes_copy_out_tensorlist_tensor_intarrayref_intt(void* out, void* self, void* split_sizes, void* dim) { LANTERN_CHECK_LOADED void* ret = _lantern_split_with_sizes_copy_out_tensorlist_tensor_intarrayref_intt(out, self, split_sizes, dim); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern_squeeze_copy_out_tensor_tensor)(void* out, void* self);
+  HOST_API void* lantern_squeeze_copy_out_tensor_tensor(void* out, void* self) { LANTERN_CHECK_LOADED void* ret = _lantern_squeeze_copy_out_tensor_tensor(out, self); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern_squeeze_copy_out_tensor_tensor_intt)(void* out, void* self, void* dim);
+  HOST_API void* lantern_squeeze_copy_out_tensor_tensor_intt(void* out, void* self, void* dim) { LANTERN_CHECK_LOADED void* ret = _lantern_squeeze_copy_out_tensor_tensor_intt(out, self, dim); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern_t_copy_out_tensor_tensor)(void* out, void* self);
+  HOST_API void* lantern_t_copy_out_tensor_tensor(void* out, void* self) { LANTERN_CHECK_LOADED void* ret = _lantern_t_copy_out_tensor_tensor(out, self); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern_transpose_copy_out_tensor_tensor_intt_intt)(void* out, void* self, void* dim0, void* dim1);
+  HOST_API void* lantern_transpose_copy_out_tensor_tensor_intt_intt(void* out, void* self, void* dim0, void* dim1) { LANTERN_CHECK_LOADED void* ret = _lantern_transpose_copy_out_tensor_tensor_intt_intt(out, self, dim0, dim1); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern_unsqueeze_copy_out_tensor_tensor_intt)(void* out, void* self, void* dim);
+  HOST_API void* lantern_unsqueeze_copy_out_tensor_tensor_intt(void* out, void* self, void* dim) { LANTERN_CHECK_LOADED void* ret = _lantern_unsqueeze_copy_out_tensor_tensor_intt(out, self, dim); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern__indices_copy_out_tensor_tensor)(void* out, void* self);
+  HOST_API void* lantern__indices_copy_out_tensor_tensor(void* out, void* self) { LANTERN_CHECK_LOADED void* ret = _lantern__indices_copy_out_tensor_tensor(out, self); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern__values_copy_out_tensor_tensor)(void* out, void* self);
+  HOST_API void* lantern__values_copy_out_tensor_tensor(void* out, void* self) { LANTERN_CHECK_LOADED void* ret = _lantern__values_copy_out_tensor_tensor(out, self); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern_indices_copy_out_tensor_tensor)(void* out, void* self);
+  HOST_API void* lantern_indices_copy_out_tensor_tensor(void* out, void* self) { LANTERN_CHECK_LOADED void* ret = _lantern_indices_copy_out_tensor_tensor(out, self); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern_values_copy_out_tensor_tensor)(void* out, void* self);
+  HOST_API void* lantern_values_copy_out_tensor_tensor(void* out, void* self) { LANTERN_CHECK_LOADED void* ret = _lantern_values_copy_out_tensor_tensor(out, self); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern_crow_indices_copy_out_tensor_tensor)(void* out, void* self);
+  HOST_API void* lantern_crow_indices_copy_out_tensor_tensor(void* out, void* self) { LANTERN_CHECK_LOADED void* ret = _lantern_crow_indices_copy_out_tensor_tensor(out, self); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern_col_indices_copy_out_tensor_tensor)(void* out, void* self);
+  HOST_API void* lantern_col_indices_copy_out_tensor_tensor(void* out, void* self) { LANTERN_CHECK_LOADED void* ret = _lantern_col_indices_copy_out_tensor_tensor(out, self); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern_unbind_copy_out_tensorlist_tensor_intt)(void* out, void* self, void* dim);
+  HOST_API void* lantern_unbind_copy_out_tensorlist_tensor_intt(void* out, void* self, void* dim) { LANTERN_CHECK_LOADED void* ret = _lantern_unbind_copy_out_tensorlist_tensor_intt(out, self, dim); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern_view_copy_out_tensor_tensor_intarrayref)(void* out, void* self, void* size);
+  HOST_API void* lantern_view_copy_out_tensor_tensor_intarrayref(void* out, void* self, void* size) { LANTERN_CHECK_LOADED void* ret = _lantern_view_copy_out_tensor_tensor_intarrayref(out, self, size); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern_view_copy_out_tensor_tensor_scalartype)(void* out, void* self, void* dtype);
+  HOST_API void* lantern_view_copy_out_tensor_tensor_scalartype(void* out, void* self, void* dtype) { LANTERN_CHECK_LOADED void* ret = _lantern_view_copy_out_tensor_tensor_scalartype(out, self, dtype); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern_unfold_copy_out_tensor_tensor_intt_intt_intt)(void* out, void* self, void* dimension, void* size, void* step);
+  HOST_API void* lantern_unfold_copy_out_tensor_tensor_intt_intt_intt(void* out, void* self, void* dimension, void* size, void* step) { LANTERN_CHECK_LOADED void* ret = _lantern_unfold_copy_out_tensor_tensor_intt_intt_intt(out, self, dimension, size, step); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern_alias_copy_out_tensor_tensor)(void* out, void* self);
+  HOST_API void* lantern_alias_copy_out_tensor_tensor(void* out, void* self) { LANTERN_CHECK_LOADED void* ret = _lantern_alias_copy_out_tensor_tensor(out, self); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern_Tensor_to_padded_tensor_tensor_double_intarrayref)(void* self, void* padding, void* output_size);
+  HOST_API void* lantern_Tensor_to_padded_tensor_tensor_double_intarrayref(void* self, void* padding, void* output_size) { void* ret = _lantern_Tensor_to_padded_tensor_tensor_double_intarrayref(self, padding, output_size); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern_Tensor__nested_tensor_layer_norm_tensor_tensor_tensor_double)(void* self, void* weight, void* bias, void* eps);
+  HOST_API void* lantern_Tensor__nested_tensor_layer_norm_tensor_tensor_tensor_double(void* self, void* weight, void* bias, void* eps) { void* ret = _lantern_Tensor__nested_tensor_layer_norm_tensor_tensor_tensor_double(self, weight, bias, eps); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern__transformer_encoder_layer_fwd_tensor_intt_intt_tensor_tensor_tensor_tensor_bool_bool_double_tensor_tensor_tensor_tensor_tensor_tensor_tensor_tensor_tensor)(void* src, void* embed_dim, void* num_heads, void* qkv_weight, void* qkv_bias, void* proj_weight, void* proj_bias, void* use_gelu, void* norm_first, void* eps, void* norm_weight_1, void* norm_bias_1, void* norm_weight_2, void* norm_bias_2, void* ffn_weight_1, void* ffn_bias_1, void* ffn_weight_2, void* ffn_bias_2, void* mask);
+  HOST_API void* lantern__transformer_encoder_layer_fwd_tensor_intt_intt_tensor_tensor_tensor_tensor_bool_bool_double_tensor_tensor_tensor_tensor_tensor_tensor_tensor_tensor_tensor(void* src, void* embed_dim, void* num_heads, void* qkv_weight, void* qkv_bias, void* proj_weight, void* proj_bias, void* use_gelu, void* norm_first, void* eps, void* norm_weight_1, void* norm_bias_1, void* norm_weight_2, void* norm_bias_2, void* ffn_weight_1, void* ffn_bias_1, void* ffn_weight_2, void* ffn_bias_2, void* mask) { LANTERN_CHECK_LOADED void* ret = _lantern__transformer_encoder_layer_fwd_tensor_intt_intt_tensor_tensor_tensor_tensor_bool_bool_double_tensor_tensor_tensor_tensor_tensor_tensor_tensor_tensor_tensor(src, embed_dim, num_heads, qkv_weight, qkv_bias, proj_weight, proj_bias, use_gelu, norm_first, eps, norm_weight_1, norm_bias_1, norm_weight_2, norm_bias_2, ffn_weight_1, ffn_bias_1, ffn_weight_2, ffn_bias_2, mask); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern__native_multi_head_attention_tensor_tensor_tensor_intt_intt_tensor_tensor_tensor_tensor_tensor_bool_bool)(void* query, void* key, void* value, void* embed_dim, void* num_head, void* qkv_weight, void* qkv_bias, void* proj_weight, void* proj_bias, void* mask, void* need_weights, void* average_attn_weights);
+  HOST_API void* lantern__native_multi_head_attention_tensor_tensor_tensor_intt_intt_tensor_tensor_tensor_tensor_tensor_bool_bool(void* query, void* key, void* value, void* embed_dim, void* num_head, void* qkv_weight, void* qkv_bias, void* proj_weight, void* proj_bias, void* mask, void* need_weights, void* average_attn_weights) { LANTERN_CHECK_LOADED void* ret = _lantern__native_multi_head_attention_tensor_tensor_tensor_intt_intt_tensor_tensor_tensor_tensor_tensor_bool_bool(query, key, value, embed_dim, num_head, qkv_weight, qkv_bias, proj_weight, proj_bias, mask, need_weights, average_attn_weights); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern__add_relu_out_tensor_tensor_scalar_scalar)(void* out, void* self, void* other, void* alpha);
+  HOST_API void* lantern__add_relu_out_tensor_tensor_scalar_scalar(void* out, void* self, void* other, void* alpha) { LANTERN_CHECK_LOADED void* ret = _lantern__add_relu_out_tensor_tensor_scalar_scalar(out, self, other, alpha); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern_add_out_tensor_tensor_scalar_scalar)(void* out, void* self, void* other, void* alpha);
+  HOST_API void* lantern_add_out_tensor_tensor_scalar_scalar(void* out, void* self, void* other, void* alpha) { LANTERN_CHECK_LOADED void* ret = _lantern_add_out_tensor_tensor_scalar_scalar(out, self, other, alpha); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern_bernoulli_out_tensor_tensor_tensor_generator)(void* out, void* self, void* p, void* generator);
+  HOST_API void* lantern_bernoulli_out_tensor_tensor_tensor_generator(void* out, void* self, void* p, void* generator) { LANTERN_CHECK_LOADED void* ret = _lantern_bernoulli_out_tensor_tensor_tensor_generator(out, self, p, generator); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern_bernoulli_functional_tensor_tensor_generator)(void* self, void* p, void* generator);
+  HOST_API void* lantern_bernoulli_functional_tensor_tensor_generator(void* self, void* p, void* generator) { LANTERN_CHECK_LOADED void* ret = _lantern_bernoulli_functional_tensor_tensor_generator(self, p, generator); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern_bernoulli_out_tensor_tensor_double_generator)(void* out, void* self, void* p, void* generator);
+  HOST_API void* lantern_bernoulli_out_tensor_tensor_double_generator(void* out, void* self, void* p, void* generator) { LANTERN_CHECK_LOADED void* ret = _lantern_bernoulli_out_tensor_tensor_double_generator(out, self, p, generator); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern_copy_out_tensor_tensor_tensor_bool)(void* out, void* self, void* src, void* non_blocking);
+  HOST_API void* lantern_copy_out_tensor_tensor_tensor_bool(void* out, void* self, void* src, void* non_blocking) { LANTERN_CHECK_LOADED void* ret = _lantern_copy_out_tensor_tensor_tensor_bool(out, self, src, non_blocking); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern_div_out_tensor_tensor_scalar)(void* out, void* self, void* other);
+  HOST_API void* lantern_div_out_tensor_tensor_scalar(void* out, void* self, void* other) { LANTERN_CHECK_LOADED void* ret = _lantern_div_out_tensor_tensor_scalar(out, self, other); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern_div_out_tensor_tensor_scalar_cstringview)(void* out, void* self, void* other, void* rounding_mode);
+  HOST_API void* lantern_div_out_tensor_tensor_scalar_cstringview(void* out, void* self, void* other, void* rounding_mode) { LANTERN_CHECK_LOADED void* ret = _lantern_div_out_tensor_tensor_scalar_cstringview(out, self, other, rounding_mode); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern_embedding_renorm_out_tensor_tensor_tensor_double_double)(void* out, void* self, void* indices, void* max_norm, void* norm_type);
+  HOST_API void* lantern_embedding_renorm_out_tensor_tensor_tensor_double_double(void* out, void* self, void* indices, void* max_norm, void* norm_type) { LANTERN_CHECK_LOADED void* ret = _lantern_embedding_renorm_out_tensor_tensor_tensor_double_double(out, self, indices, max_norm, norm_type); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern_embedding_renorm_functional_tensor_tensor_double_double)(void* self, void* indices, void* max_norm, void* norm_type);
+  HOST_API void* lantern_embedding_renorm_functional_tensor_tensor_double_double(void* self, void* indices, void* max_norm, void* norm_type) { LANTERN_CHECK_LOADED void* ret = _lantern_embedding_renorm_functional_tensor_tensor_double_double(self, indices, max_norm, norm_type); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern_resize_out_tensor_tensor_intarrayref_memoryformat)(void* out, void* self, void* size, void* memory_format);
+  HOST_API void* lantern_resize_out_tensor_tensor_intarrayref_memoryformat(void* out, void* self, void* size, void* memory_format) { LANTERN_CHECK_LOADED void* ret = _lantern_resize_out_tensor_tensor_intarrayref_memoryformat(out, self, size, memory_format); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern_resize_functional_tensor_intarrayref_memoryformat)(void* self, void* size, void* memory_format);
+  HOST_API void* lantern_resize_functional_tensor_intarrayref_memoryformat(void* self, void* size, void* memory_format) { LANTERN_CHECK_LOADED void* ret = _lantern_resize_functional_tensor_intarrayref_memoryformat(self, size, memory_format); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern__resize_output_out_tensor_tensor_intarrayref_device)(void* out, void* self, void* size, void* device);
+  HOST_API void* lantern__resize_output_out_tensor_tensor_intarrayref_device(void* out, void* self, void* size, void* device) { LANTERN_CHECK_LOADED void* ret = _lantern__resize_output_out_tensor_tensor_intarrayref_device(out, self, size, device); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern__resize_output_functional_tensor_intarrayref_device)(void* self, void* size, void* device);
+  HOST_API void* lantern__resize_output_functional_tensor_intarrayref_device(void* self, void* size, void* device) { LANTERN_CHECK_LOADED void* ret = _lantern__resize_output_functional_tensor_intarrayref_device(self, size, device); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern_fill_out_tensor_tensor_scalar)(void* out, void* self, void* value);
+  HOST_API void* lantern_fill_out_tensor_tensor_scalar(void* out, void* self, void* value) { LANTERN_CHECK_LOADED void* ret = _lantern_fill_out_tensor_tensor_scalar(out, self, value); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern_fill_out_tensor_tensor_tensor)(void* out, void* self, void* value);
+  HOST_API void* lantern_fill_out_tensor_tensor_tensor(void* out, void* self, void* value) { LANTERN_CHECK_LOADED void* ret = _lantern_fill_out_tensor_tensor_tensor(out, self, value); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern_index_put_out_tensor_tensor_constclistcoptionaltensor_tensor_bool)(void* out, void* self, void* indices, void* values, void* accumulate);
+  HOST_API void* lantern_index_put_out_tensor_tensor_constclistcoptionaltensor_tensor_bool(void* out, void* self, void* indices, void* values, void* accumulate) { LANTERN_CHECK_LOADED void* ret = _lantern_index_put_out_tensor_tensor_constclistcoptionaltensor_tensor_bool(out, self, indices, values, accumulate); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern__index_put_impl_out_tensor_tensor_constclistcoptionaltensor_tensor_bool_bool)(void* out, void* self, void* indices, void* values, void* accumulate, void* unsafe);
+  HOST_API void* lantern__index_put_impl_out_tensor_tensor_constclistcoptionaltensor_tensor_bool_bool(void* out, void* self, void* indices, void* values, void* accumulate, void* unsafe) { LANTERN_CHECK_LOADED void* ret = _lantern__index_put_impl_out_tensor_tensor_constclistcoptionaltensor_tensor_bool_bool(out, self, indices, values, accumulate, unsafe); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern__index_put_impl_functional_tensor_constclistcoptionaltensor_tensor_bool_bool)(void* self, void* indices, void* values, void* accumulate, void* unsafe);
+  HOST_API void* lantern__index_put_impl_functional_tensor_constclistcoptionaltensor_tensor_bool_bool(void* self, void* indices, void* values, void* accumulate, void* unsafe) { LANTERN_CHECK_LOADED void* ret = _lantern__index_put_impl_functional_tensor_constclistcoptionaltensor_tensor_bool_bool(self, indices, values, accumulate, unsafe); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern_mul_out_tensor_tensor_scalar)(void* out, void* self, void* other);
+  HOST_API void* lantern_mul_out_tensor_tensor_scalar(void* out, void* self, void* other) { LANTERN_CHECK_LOADED void* ret = _lantern_mul_out_tensor_tensor_scalar(out, self, other); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern_relu_out_tensor_tensor)(void* out, void* self);
+  HOST_API void* lantern_relu_out_tensor_tensor(void* out, void* self) { LANTERN_CHECK_LOADED void* ret = _lantern_relu_out_tensor_tensor(out, self); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern_celu_out_tensor_tensor_scalar)(void* out, void* self, void* alpha);
+  HOST_API void* lantern_celu_out_tensor_tensor_scalar(void* out, void* self, void* alpha) { LANTERN_CHECK_LOADED void* ret = _lantern_celu_out_tensor_tensor_scalar(out, self, alpha); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern__mkldnn_transpose_out_tensor_tensor_intt_intt)(void* out, void* self, void* dim0, void* dim1);
+  HOST_API void* lantern__mkldnn_transpose_out_tensor_tensor_intt_intt(void* out, void* self, void* dim0, void* dim1) { LANTERN_CHECK_LOADED void* ret = _lantern__mkldnn_transpose_out_tensor_tensor_intt_intt(out, self, dim0, dim1); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern_resize_as_out_tensor_tensor_tensor_memoryformat)(void* out, void* self, void* the_template, void* memory_format);
+  HOST_API void* lantern_resize_as_out_tensor_tensor_tensor_memoryformat(void* out, void* self, void* the_template, void* memory_format) { LANTERN_CHECK_LOADED void* ret = _lantern_resize_as_out_tensor_tensor_tensor_memoryformat(out, self, the_template, memory_format); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern_resize_as_functional_tensor_tensor_memoryformat)(void* self, void* the_template, void* memory_format);
+  HOST_API void* lantern_resize_as_functional_tensor_tensor_memoryformat(void* self, void* the_template, void* memory_format) { LANTERN_CHECK_LOADED void* ret = _lantern_resize_as_functional_tensor_tensor_memoryformat(self, the_template, memory_format); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern_resize_as_sparse_out_tensor_tensor_tensor)(void* out, void* self, void* the_template);
+  HOST_API void* lantern_resize_as_sparse_out_tensor_tensor_tensor(void* out, void* self, void* the_template) { LANTERN_CHECK_LOADED void* ret = _lantern_resize_as_sparse_out_tensor_tensor_tensor(out, self, the_template); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern_resize_as_sparse_functional_tensor_tensor)(void* self, void* the_template);
+  HOST_API void* lantern_resize_as_sparse_functional_tensor_tensor(void* self, void* the_template) { LANTERN_CHECK_LOADED void* ret = _lantern_resize_as_sparse_functional_tensor_tensor(self, the_template); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern_zero_out_tensor_tensor)(void* out, void* self);
+  HOST_API void* lantern_zero_out_tensor_tensor(void* out, void* self) { LANTERN_CHECK_LOADED void* ret = _lantern_zero_out_tensor_tensor(out, self); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern_zero_functional_tensor)(void* self);
+  HOST_API void* lantern_zero_functional_tensor(void* self) { LANTERN_CHECK_LOADED void* ret = _lantern_zero_functional_tensor(self); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern_sub_out_tensor_tensor_scalar_scalar)(void* out, void* self, void* other, void* alpha);
+  HOST_API void* lantern_sub_out_tensor_tensor_scalar_scalar(void* out, void* self, void* other, void* alpha) { LANTERN_CHECK_LOADED void* ret = _lantern_sub_out_tensor_tensor_scalar_scalar(out, self, other, alpha); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern_sparse_resize_out_tensor_tensor_intarrayref_intt_intt)(void* out, void* self, void* size, void* sparse_dim, void* dense_dim);
+  HOST_API void* lantern_sparse_resize_out_tensor_tensor_intarrayref_intt_intt(void* out, void* self, void* size, void* sparse_dim, void* dense_dim) { LANTERN_CHECK_LOADED void* ret = _lantern_sparse_resize_out_tensor_tensor_intarrayref_intt_intt(out, self, size, sparse_dim, dense_dim); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern_sparse_resize_functional_tensor_intarrayref_intt_intt)(void* self, void* size, void* sparse_dim, void* dense_dim);
+  HOST_API void* lantern_sparse_resize_functional_tensor_intarrayref_intt_intt(void* self, void* size, void* sparse_dim, void* dense_dim) { LANTERN_CHECK_LOADED void* ret = _lantern_sparse_resize_functional_tensor_intarrayref_intt_intt(self, size, sparse_dim, dense_dim); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern_sparse_resize_and_clear_out_tensor_tensor_intarrayref_intt_intt)(void* out, void* self, void* size, void* sparse_dim, void* dense_dim);
+  HOST_API void* lantern_sparse_resize_and_clear_out_tensor_tensor_intarrayref_intt_intt(void* out, void* self, void* size, void* sparse_dim, void* dense_dim) { LANTERN_CHECK_LOADED void* ret = _lantern_sparse_resize_and_clear_out_tensor_tensor_intarrayref_intt_intt(out, self, size, sparse_dim, dense_dim); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern_sparse_resize_and_clear_functional_tensor_intarrayref_intt_intt)(void* self, void* size, void* sparse_dim, void* dense_dim);
+  HOST_API void* lantern_sparse_resize_and_clear_functional_tensor_intarrayref_intt_intt(void* self, void* size, void* sparse_dim, void* dense_dim) { LANTERN_CHECK_LOADED void* ret = _lantern_sparse_resize_and_clear_functional_tensor_intarrayref_intt_intt(self, size, sparse_dim, dense_dim); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern__coalesced_out_tensor_tensor_bool)(void* out, void* self, void* coalesced);
+  HOST_API void* lantern__coalesced_out_tensor_tensor_bool(void* out, void* self, void* coalesced) { LANTERN_CHECK_LOADED void* ret = _lantern__coalesced_out_tensor_tensor_bool(out, self, coalesced); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern__coalesced_functional_tensor_bool)(void* self, void* coalesced);
+  HOST_API void* lantern__coalesced_functional_tensor_bool(void* self, void* coalesced) { LANTERN_CHECK_LOADED void* ret = _lantern__coalesced_functional_tensor_bool(self, coalesced); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern_copy_sparse_to_sparse_out_tensor_tensor_tensor_bool)(void* out, void* self, void* src, void* non_blocking);
+  HOST_API void* lantern_copy_sparse_to_sparse_out_tensor_tensor_tensor_bool(void* out, void* self, void* src, void* non_blocking) { LANTERN_CHECK_LOADED void* ret = _lantern_copy_sparse_to_sparse_out_tensor_tensor_tensor_bool(out, self, src, non_blocking); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern_copy_sparse_to_sparse_functional_tensor_tensor_bool)(void* self, void* src, void* non_blocking);
+  HOST_API void* lantern_copy_sparse_to_sparse_functional_tensor_tensor_bool(void* self, void* src, void* non_blocking) { LANTERN_CHECK_LOADED void* ret = _lantern_copy_sparse_to_sparse_functional_tensor_tensor_bool(self, src, non_blocking); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern__fused_moving_avg_obs_fq_helper_out_tensor_tensor_tensor_tensor_tensor_tensor_tensor_tensor_tensor_double_intt_intt_intt_bool_bool)(void* out0, void* out1, void* self, void* observer_on, void* fake_quant_on, void* running_min, void* running_max, void* scale, void* zero_point, void* averaging_const, void* quant_min, void* quant_max, void* ch_axis, void* per_row_fake_quant, void* symmetric_quant);
+  HOST_API void* lantern__fused_moving_avg_obs_fq_helper_out_tensor_tensor_tensor_tensor_tensor_tensor_tensor_tensor_tensor_double_intt_intt_intt_bool_bool(void* out0, void* out1, void* self, void* observer_on, void* fake_quant_on, void* running_min, void* running_max, void* scale, void* zero_point, void* averaging_const, void* quant_min, void* quant_max, void* ch_axis, void* per_row_fake_quant, void* symmetric_quant) { LANTERN_CHECK_LOADED void* ret = _lantern__fused_moving_avg_obs_fq_helper_out_tensor_tensor_tensor_tensor_tensor_tensor_tensor_tensor_tensor_double_intt_intt_intt_bool_bool(out0, out1, self, observer_on, fake_quant_on, running_min, running_max, scale, zero_point, averaging_const, quant_min, quant_max, ch_axis, per_row_fake_quant, symmetric_quant); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern__fused_moving_avg_obs_fq_helper_functional_tensor_tensor_tensor_tensor_tensor_tensor_tensor_double_intt_intt_intt_bool_bool)(void* self, void* observer_on, void* fake_quant_on, void* running_min, void* running_max, void* scale, void* zero_point, void* averaging_const, void* quant_min, void* quant_max, void* ch_axis, void* per_row_fake_quant, void* symmetric_quant);
+  HOST_API void* lantern__fused_moving_avg_obs_fq_helper_functional_tensor_tensor_tensor_tensor_tensor_tensor_tensor_double_intt_intt_intt_bool_bool(void* self, void* observer_on, void* fake_quant_on, void* running_min, void* running_max, void* scale, void* zero_point, void* averaging_const, void* quant_min, void* quant_max, void* ch_axis, void* per_row_fake_quant, void* symmetric_quant) { LANTERN_CHECK_LOADED void* ret = _lantern__fused_moving_avg_obs_fq_helper_functional_tensor_tensor_tensor_tensor_tensor_tensor_tensor_double_intt_intt_intt_bool_bool(self, observer_on, fake_quant_on, running_min, running_max, scale, zero_point, averaging_const, quant_min, quant_max, ch_axis, per_row_fake_quant, symmetric_quant); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern_set_out_tensor_tensor_storage)(void* out, void* self, void* source);
+  HOST_API void* lantern_set_out_tensor_tensor_storage(void* out, void* self, void* source) { LANTERN_CHECK_LOADED void* ret = _lantern_set_out_tensor_tensor_storage(out, self, source); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern_set_functional_tensor_storage)(void* self, void* source);
+  HOST_API void* lantern_set_functional_tensor_storage(void* self, void* source) { LANTERN_CHECK_LOADED void* ret = _lantern_set_functional_tensor_storage(self, source); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern_set_out_tensor_tensor_storage_intt_intarrayref_intarrayref)(void* out, void* self, void* source, void* storage_offset, void* size, void* stride);
+  HOST_API void* lantern_set_out_tensor_tensor_storage_intt_intarrayref_intarrayref(void* out, void* self, void* source, void* storage_offset, void* size, void* stride) { LANTERN_CHECK_LOADED void* ret = _lantern_set_out_tensor_tensor_storage_intt_intarrayref_intarrayref(out, self, source, storage_offset, size, stride); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern_set_functional_tensor_storage_intt_intarrayref_intarrayref)(void* self, void* source, void* storage_offset, void* size, void* stride);
+  HOST_API void* lantern_set_functional_tensor_storage_intt_intarrayref_intarrayref(void* self, void* source, void* storage_offset, void* size, void* stride) { LANTERN_CHECK_LOADED void* ret = _lantern_set_functional_tensor_storage_intt_intarrayref_intarrayref(self, source, storage_offset, size, stride); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern_set_out_tensor_tensor_tensor)(void* out, void* self, void* source);
+  HOST_API void* lantern_set_out_tensor_tensor_tensor(void* out, void* self, void* source) { LANTERN_CHECK_LOADED void* ret = _lantern_set_out_tensor_tensor_tensor(out, self, source); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern_set_functional_tensor_tensor)(void* self, void* source);
+  HOST_API void* lantern_set_functional_tensor_tensor(void* self, void* source) { LANTERN_CHECK_LOADED void* ret = _lantern_set_functional_tensor_tensor(self, source); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern_set_out_tensor_tensor)(void* out, void* self);
+  HOST_API void* lantern_set_out_tensor_tensor(void* out, void* self) { LANTERN_CHECK_LOADED void* ret = _lantern_set_out_tensor_tensor(out, self); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern_set_functional_tensor)(void* self);
+  HOST_API void* lantern_set_functional_tensor(void* self) { LANTERN_CHECK_LOADED void* ret = _lantern_set_functional_tensor(self); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern_masked_fill_out_tensor_tensor_tensor_scalar)(void* out, void* self, void* mask, void* value);
+  HOST_API void* lantern_masked_fill_out_tensor_tensor_tensor_scalar(void* out, void* self, void* mask, void* value) { LANTERN_CHECK_LOADED void* ret = _lantern_masked_fill_out_tensor_tensor_tensor_scalar(out, self, mask, value); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern_masked_fill_out_tensor_tensor_tensor_tensor)(void* out, void* self, void* mask, void* value);
+  HOST_API void* lantern_masked_fill_out_tensor_tensor_tensor_tensor(void* out, void* self, void* mask, void* value) { LANTERN_CHECK_LOADED void* ret = _lantern_masked_fill_out_tensor_tensor_tensor_tensor(out, self, mask, value); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern_masked_scatter_out_tensor_tensor_tensor_tensor)(void* out, void* self, void* mask, void* source);
+  HOST_API void* lantern_masked_scatter_out_tensor_tensor_tensor_tensor(void* out, void* self, void* mask, void* source) { LANTERN_CHECK_LOADED void* ret = _lantern_masked_scatter_out_tensor_tensor_tensor_tensor(out, self, mask, source); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern_put_out_tensor_tensor_tensor_tensor_bool)(void* out, void* self, void* index, void* source, void* accumulate);
+  HOST_API void* lantern_put_out_tensor_tensor_tensor_tensor_bool(void* out, void* self, void* index, void* source, void* accumulate) { LANTERN_CHECK_LOADED void* ret = _lantern_put_out_tensor_tensor_tensor_tensor_bool(out, self, index, source, accumulate); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern_index_fill_out_tensor_tensor_intt_tensor_scalar)(void* out, void* self, void* dim, void* index, void* value);
+  HOST_API void* lantern_index_fill_out_tensor_tensor_intt_tensor_scalar(void* out, void* self, void* dim, void* index, void* value) { LANTERN_CHECK_LOADED void* ret = _lantern_index_fill_out_tensor_tensor_intt_tensor_scalar(out, self, dim, index, value); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern_index_fill_out_tensor_tensor_intt_tensor_tensor)(void* out, void* self, void* dim, void* index, void* value);
+  HOST_API void* lantern_index_fill_out_tensor_tensor_intt_tensor_tensor(void* out, void* self, void* dim, void* index, void* value) { LANTERN_CHECK_LOADED void* ret = _lantern_index_fill_out_tensor_tensor_intt_tensor_tensor(out, self, dim, index, value); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern___lshift___out_tensor_tensor_scalar)(void* out, void* self, void* other);
+  HOST_API void* lantern___lshift___out_tensor_tensor_scalar(void* out, void* self, void* other) { LANTERN_CHECK_LOADED void* ret = _lantern___lshift___out_tensor_tensor_scalar(out, self, other); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern___lshift___out_tensor_tensor_tensor)(void* out, void* self, void* other);
+  HOST_API void* lantern___lshift___out_tensor_tensor_tensor(void* out, void* self, void* other) { LANTERN_CHECK_LOADED void* ret = _lantern___lshift___out_tensor_tensor_tensor(out, self, other); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern___rshift___out_tensor_tensor_scalar)(void* out, void* self, void* other);
+  HOST_API void* lantern___rshift___out_tensor_tensor_scalar(void* out, void* self, void* other) { LANTERN_CHECK_LOADED void* ret = _lantern___rshift___out_tensor_tensor_scalar(out, self, other); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern___rshift___out_tensor_tensor_tensor)(void* out, void* self, void* other);
+  HOST_API void* lantern___rshift___out_tensor_tensor_tensor(void* out, void* self, void* other) { LANTERN_CHECK_LOADED void* ret = _lantern___rshift___out_tensor_tensor_tensor(out, self, other); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern_random_out_tensor_tensor_intt_intt_generator)(void* out, void* self, void* from, void* to, void* generator);
+  HOST_API void* lantern_random_out_tensor_tensor_intt_intt_generator(void* out, void* self, void* from, void* to, void* generator) { LANTERN_CHECK_LOADED void* ret = _lantern_random_out_tensor_tensor_intt_intt_generator(out, self, from, to, generator); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern_random_functional_tensor_intt_intt_generator)(void* self, void* from, void* to, void* generator);
+  HOST_API void* lantern_random_functional_tensor_intt_intt_generator(void* self, void* from, void* to, void* generator) { LANTERN_CHECK_LOADED void* ret = _lantern_random_functional_tensor_intt_intt_generator(self, from, to, generator); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern_random_out_tensor_tensor_intt_generator)(void* out, void* self, void* to, void* generator);
+  HOST_API void* lantern_random_out_tensor_tensor_intt_generator(void* out, void* self, void* to, void* generator) { LANTERN_CHECK_LOADED void* ret = _lantern_random_out_tensor_tensor_intt_generator(out, self, to, generator); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern_random_functional_tensor_intt_generator)(void* self, void* to, void* generator);
+  HOST_API void* lantern_random_functional_tensor_intt_generator(void* self, void* to, void* generator) { LANTERN_CHECK_LOADED void* ret = _lantern_random_functional_tensor_intt_generator(self, to, generator); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern_random_out_tensor_tensor_generator)(void* out, void* self, void* generator);
+  HOST_API void* lantern_random_out_tensor_tensor_generator(void* out, void* self, void* generator) { LANTERN_CHECK_LOADED void* ret = _lantern_random_out_tensor_tensor_generator(out, self, generator); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern_random_functional_tensor_generator)(void* self, void* generator);
+  HOST_API void* lantern_random_functional_tensor_generator(void* self, void* generator) { LANTERN_CHECK_LOADED void* ret = _lantern_random_functional_tensor_generator(self, generator); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern_uniform_out_tensor_tensor_double_double_generator)(void* out, void* self, void* from, void* to, void* generator);
+  HOST_API void* lantern_uniform_out_tensor_tensor_double_double_generator(void* out, void* self, void* from, void* to, void* generator) { LANTERN_CHECK_LOADED void* ret = _lantern_uniform_out_tensor_tensor_double_double_generator(out, self, from, to, generator); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern_uniform_functional_tensor_double_double_generator)(void* self, void* from, void* to, void* generator);
+  HOST_API void* lantern_uniform_functional_tensor_double_double_generator(void* self, void* from, void* to, void* generator) { LANTERN_CHECK_LOADED void* ret = _lantern_uniform_functional_tensor_double_double_generator(self, from, to, generator); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern_cauchy_out_tensor_tensor_double_double_generator)(void* out, void* self, void* median, void* sigma, void* generator);
+  HOST_API void* lantern_cauchy_out_tensor_tensor_double_double_generator(void* out, void* self, void* median, void* sigma, void* generator) { LANTERN_CHECK_LOADED void* ret = _lantern_cauchy_out_tensor_tensor_double_double_generator(out, self, median, sigma, generator); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern_cauchy_functional_tensor_double_double_generator)(void* self, void* median, void* sigma, void* generator);
+  HOST_API void* lantern_cauchy_functional_tensor_double_double_generator(void* self, void* median, void* sigma, void* generator) { LANTERN_CHECK_LOADED void* ret = _lantern_cauchy_functional_tensor_double_double_generator(self, median, sigma, generator); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern_log_normal_out_tensor_tensor_double_double_generator)(void* out, void* self, void* mean, void* std, void* generator);
+  HOST_API void* lantern_log_normal_out_tensor_tensor_double_double_generator(void* out, void* self, void* mean, void* std, void* generator) { LANTERN_CHECK_LOADED void* ret = _lantern_log_normal_out_tensor_tensor_double_double_generator(out, self, mean, std, generator); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern_log_normal_functional_tensor_double_double_generator)(void* self, void* mean, void* std, void* generator);
+  HOST_API void* lantern_log_normal_functional_tensor_double_double_generator(void* self, void* mean, void* std, void* generator) { LANTERN_CHECK_LOADED void* ret = _lantern_log_normal_functional_tensor_double_double_generator(self, mean, std, generator); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern_exponential_out_tensor_tensor_double_generator)(void* out, void* self, void* lambd, void* generator);
+  HOST_API void* lantern_exponential_out_tensor_tensor_double_generator(void* out, void* self, void* lambd, void* generator) { LANTERN_CHECK_LOADED void* ret = _lantern_exponential_out_tensor_tensor_double_generator(out, self, lambd, generator); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern_exponential_functional_tensor_double_generator)(void* self, void* lambd, void* generator);
+  HOST_API void* lantern_exponential_functional_tensor_double_generator(void* self, void* lambd, void* generator) { LANTERN_CHECK_LOADED void* ret = _lantern_exponential_functional_tensor_double_generator(self, lambd, generator); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern_geometric_out_tensor_tensor_double_generator)(void* out, void* self, void* p, void* generator);
+  HOST_API void* lantern_geometric_out_tensor_tensor_double_generator(void* out, void* self, void* p, void* generator) { LANTERN_CHECK_LOADED void* ret = _lantern_geometric_out_tensor_tensor_double_generator(out, self, p, generator); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern_geometric_functional_tensor_double_generator)(void* self, void* p, void* generator);
+  HOST_API void* lantern_geometric_functional_tensor_double_generator(void* self, void* p, void* generator) { LANTERN_CHECK_LOADED void* ret = _lantern_geometric_functional_tensor_double_generator(self, p, generator); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern_normal_out_tensor_tensor_double_double_generator)(void* out, void* self, void* mean, void* std, void* generator);
+  HOST_API void* lantern_normal_out_tensor_tensor_double_double_generator(void* out, void* self, void* mean, void* std, void* generator) { LANTERN_CHECK_LOADED void* ret = _lantern_normal_out_tensor_tensor_double_double_generator(out, self, mean, std, generator); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern_normal_functional_tensor_double_double_generator)(void* self, void* mean, void* std, void* generator);
+  HOST_API void* lantern_normal_functional_tensor_double_double_generator(void* self, void* mean, void* std, void* generator) { LANTERN_CHECK_LOADED void* ret = _lantern_normal_functional_tensor_double_double_generator(self, mean, std, generator); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern__amp_foreach_non_finite_check_and_unscale_out_tensorlist_tensorlist_tensor_tensor)(void* out, void* self, void* found_inf, void* inv_scale);
+  HOST_API void* lantern__amp_foreach_non_finite_check_and_unscale_out_tensorlist_tensorlist_tensor_tensor(void* out, void* self, void* found_inf, void* inv_scale) { LANTERN_CHECK_LOADED void* ret = _lantern__amp_foreach_non_finite_check_and_unscale_out_tensorlist_tensorlist_tensor_tensor(out, self, found_inf, inv_scale); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern__amp_foreach_non_finite_check_and_unscale_functional_tensorlist_tensor_tensor)(void* self, void* found_inf, void* inv_scale);
+  HOST_API void* lantern__amp_foreach_non_finite_check_and_unscale_functional_tensorlist_tensor_tensor(void* self, void* found_inf, void* inv_scale) { LANTERN_CHECK_LOADED void* ret = _lantern__amp_foreach_non_finite_check_and_unscale_functional_tensorlist_tensor_tensor(self, found_inf, inv_scale); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern__amp_update_scale_out_tensor_tensor_tensor_tensor_double_double_intt)(void* out, void* self, void* growth_tracker, void* found_inf, void* scale_growth_factor, void* scale_backoff_factor, void* growth_interval);
+  HOST_API void* lantern__amp_update_scale_out_tensor_tensor_tensor_tensor_double_double_intt(void* out, void* self, void* growth_tracker, void* found_inf, void* scale_growth_factor, void* scale_backoff_factor, void* growth_interval) { LANTERN_CHECK_LOADED void* ret = _lantern__amp_update_scale_out_tensor_tensor_tensor_tensor_double_double_intt(out, self, growth_tracker, found_inf, scale_growth_factor, scale_backoff_factor, growth_interval); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern__amp_update_scale_functional_tensor_tensor_tensor_double_double_intt)(void* self, void* growth_tracker, void* found_inf, void* scale_growth_factor, void* scale_backoff_factor, void* growth_interval);
+  HOST_API void* lantern__amp_update_scale_functional_tensor_tensor_tensor_double_double_intt(void* self, void* growth_tracker, void* found_inf, void* scale_growth_factor, void* scale_backoff_factor, void* growth_interval) { LANTERN_CHECK_LOADED void* ret = _lantern__amp_update_scale_functional_tensor_tensor_tensor_double_double_intt(self, growth_tracker, found_inf, scale_growth_factor, scale_backoff_factor, growth_interval); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern__foreach_add_out_tensorlist_tensorlist_scalar)(void* out, void* self, void* scalar);
+  HOST_API void* lantern__foreach_add_out_tensorlist_tensorlist_scalar(void* out, void* self, void* scalar) { LANTERN_CHECK_LOADED void* ret = _lantern__foreach_add_out_tensorlist_tensorlist_scalar(out, self, scalar); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern__foreach_add_functional_tensorlist_scalar)(void* self, void* scalar);
+  HOST_API void* lantern__foreach_add_functional_tensorlist_scalar(void* self, void* scalar) { LANTERN_CHECK_LOADED void* ret = _lantern__foreach_add_functional_tensorlist_scalar(self, scalar); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern__foreach_sub_out_tensorlist_tensorlist_scalar)(void* out, void* self, void* scalar);
+  HOST_API void* lantern__foreach_sub_out_tensorlist_tensorlist_scalar(void* out, void* self, void* scalar) { LANTERN_CHECK_LOADED void* ret = _lantern__foreach_sub_out_tensorlist_tensorlist_scalar(out, self, scalar); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern__foreach_sub_functional_tensorlist_scalar)(void* self, void* scalar);
+  HOST_API void* lantern__foreach_sub_functional_tensorlist_scalar(void* self, void* scalar) { LANTERN_CHECK_LOADED void* ret = _lantern__foreach_sub_functional_tensorlist_scalar(self, scalar); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern__foreach_mul_out_tensorlist_tensorlist_scalar)(void* out, void* self, void* scalar);
+  HOST_API void* lantern__foreach_mul_out_tensorlist_tensorlist_scalar(void* out, void* self, void* scalar) { LANTERN_CHECK_LOADED void* ret = _lantern__foreach_mul_out_tensorlist_tensorlist_scalar(out, self, scalar); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern__foreach_mul_functional_tensorlist_scalar)(void* self, void* scalar);
+  HOST_API void* lantern__foreach_mul_functional_tensorlist_scalar(void* self, void* scalar) { LANTERN_CHECK_LOADED void* ret = _lantern__foreach_mul_functional_tensorlist_scalar(self, scalar); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern__foreach_div_out_tensorlist_tensorlist_scalar)(void* out, void* self, void* scalar);
+  HOST_API void* lantern__foreach_div_out_tensorlist_tensorlist_scalar(void* out, void* self, void* scalar) { LANTERN_CHECK_LOADED void* ret = _lantern__foreach_div_out_tensorlist_tensorlist_scalar(out, self, scalar); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern__foreach_div_functional_tensorlist_scalar)(void* self, void* scalar);
+  HOST_API void* lantern__foreach_div_functional_tensorlist_scalar(void* self, void* scalar) { LANTERN_CHECK_LOADED void* ret = _lantern__foreach_div_functional_tensorlist_scalar(self, scalar); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern__foreach_add_out_tensorlist_tensorlist_tensorlist_scalar)(void* out, void* self, void* other, void* alpha);
+  HOST_API void* lantern__foreach_add_out_tensorlist_tensorlist_tensorlist_scalar(void* out, void* self, void* other, void* alpha) { LANTERN_CHECK_LOADED void* ret = _lantern__foreach_add_out_tensorlist_tensorlist_tensorlist_scalar(out, self, other, alpha); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern__foreach_add_functional_tensorlist_tensorlist_scalar)(void* self, void* other, void* alpha);
+  HOST_API void* lantern__foreach_add_functional_tensorlist_tensorlist_scalar(void* self, void* other, void* alpha) { LANTERN_CHECK_LOADED void* ret = _lantern__foreach_add_functional_tensorlist_tensorlist_scalar(self, other, alpha); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern__foreach_sub_out_tensorlist_tensorlist_tensorlist_scalar)(void* out, void* self, void* other, void* alpha);
+  HOST_API void* lantern__foreach_sub_out_tensorlist_tensorlist_tensorlist_scalar(void* out, void* self, void* other, void* alpha) { LANTERN_CHECK_LOADED void* ret = _lantern__foreach_sub_out_tensorlist_tensorlist_tensorlist_scalar(out, self, other, alpha); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern__foreach_sub_functional_tensorlist_tensorlist_scalar)(void* self, void* other, void* alpha);
+  HOST_API void* lantern__foreach_sub_functional_tensorlist_tensorlist_scalar(void* self, void* other, void* alpha) { LANTERN_CHECK_LOADED void* ret = _lantern__foreach_sub_functional_tensorlist_tensorlist_scalar(self, other, alpha); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern__foreach_mul_out_tensorlist_tensorlist_tensorlist)(void* out, void* self, void* other);
+  HOST_API void* lantern__foreach_mul_out_tensorlist_tensorlist_tensorlist(void* out, void* self, void* other) { LANTERN_CHECK_LOADED void* ret = _lantern__foreach_mul_out_tensorlist_tensorlist_tensorlist(out, self, other); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern__foreach_mul_functional_tensorlist_tensorlist)(void* self, void* other);
+  HOST_API void* lantern__foreach_mul_functional_tensorlist_tensorlist(void* self, void* other) { LANTERN_CHECK_LOADED void* ret = _lantern__foreach_mul_functional_tensorlist_tensorlist(self, other); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern__foreach_div_out_tensorlist_tensorlist_tensorlist)(void* out, void* self, void* other);
+  HOST_API void* lantern__foreach_div_out_tensorlist_tensorlist_tensorlist(void* out, void* self, void* other) { LANTERN_CHECK_LOADED void* ret = _lantern__foreach_div_out_tensorlist_tensorlist_tensorlist(out, self, other); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern__foreach_div_functional_tensorlist_tensorlist)(void* self, void* other);
+  HOST_API void* lantern__foreach_div_functional_tensorlist_tensorlist(void* self, void* other) { LANTERN_CHECK_LOADED void* ret = _lantern__foreach_div_functional_tensorlist_tensorlist(self, other); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern__foreach_add_out_tensorlist_tensorlist_arrayrefscalar)(void* out, void* self, void* scalars);
+  HOST_API void* lantern__foreach_add_out_tensorlist_tensorlist_arrayrefscalar(void* out, void* self, void* scalars) { LANTERN_CHECK_LOADED void* ret = _lantern__foreach_add_out_tensorlist_tensorlist_arrayrefscalar(out, self, scalars); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern__foreach_add_functional_tensorlist_arrayrefscalar)(void* self, void* scalars);
+  HOST_API void* lantern__foreach_add_functional_tensorlist_arrayrefscalar(void* self, void* scalars) { LANTERN_CHECK_LOADED void* ret = _lantern__foreach_add_functional_tensorlist_arrayrefscalar(self, scalars); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern__foreach_sub_out_tensorlist_tensorlist_arrayrefscalar)(void* out, void* self, void* scalars);
+  HOST_API void* lantern__foreach_sub_out_tensorlist_tensorlist_arrayrefscalar(void* out, void* self, void* scalars) { LANTERN_CHECK_LOADED void* ret = _lantern__foreach_sub_out_tensorlist_tensorlist_arrayrefscalar(out, self, scalars); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern__foreach_sub_functional_tensorlist_arrayrefscalar)(void* self, void* scalars);
+  HOST_API void* lantern__foreach_sub_functional_tensorlist_arrayrefscalar(void* self, void* scalars) { LANTERN_CHECK_LOADED void* ret = _lantern__foreach_sub_functional_tensorlist_arrayrefscalar(self, scalars); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern__foreach_div_out_tensorlist_tensorlist_arrayrefscalar)(void* out, void* self, void* scalars);
+  HOST_API void* lantern__foreach_div_out_tensorlist_tensorlist_arrayrefscalar(void* out, void* self, void* scalars) { LANTERN_CHECK_LOADED void* ret = _lantern__foreach_div_out_tensorlist_tensorlist_arrayrefscalar(out, self, scalars); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern__foreach_div_functional_tensorlist_arrayrefscalar)(void* self, void* scalars);
+  HOST_API void* lantern__foreach_div_functional_tensorlist_arrayrefscalar(void* self, void* scalars) { LANTERN_CHECK_LOADED void* ret = _lantern__foreach_div_functional_tensorlist_arrayrefscalar(self, scalars); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern__foreach_mul_out_tensorlist_tensorlist_arrayrefscalar)(void* out, void* self, void* scalars);
+  HOST_API void* lantern__foreach_mul_out_tensorlist_tensorlist_arrayrefscalar(void* out, void* self, void* scalars) { LANTERN_CHECK_LOADED void* ret = _lantern__foreach_mul_out_tensorlist_tensorlist_arrayrefscalar(out, self, scalars); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern__foreach_mul_functional_tensorlist_arrayrefscalar)(void* self, void* scalars);
+  HOST_API void* lantern__foreach_mul_functional_tensorlist_arrayrefscalar(void* self, void* scalars) { LANTERN_CHECK_LOADED void* ret = _lantern__foreach_mul_functional_tensorlist_arrayrefscalar(self, scalars); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern__foreach_zero_out_tensorlist_tensorlist)(void* out, void* self);
+  HOST_API void* lantern__foreach_zero_out_tensorlist_tensorlist(void* out, void* self) { LANTERN_CHECK_LOADED void* ret = _lantern__foreach_zero_out_tensorlist_tensorlist(out, self); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern__foreach_zero_functional_tensorlist)(void* self);
+  HOST_API void* lantern__foreach_zero_functional_tensorlist(void* self) { LANTERN_CHECK_LOADED void* ret = _lantern__foreach_zero_functional_tensorlist(self); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern__foreach_exp_out_tensorlist_tensorlist)(void* out, void* self);
+  HOST_API void* lantern__foreach_exp_out_tensorlist_tensorlist(void* out, void* self) { LANTERN_CHECK_LOADED void* ret = _lantern__foreach_exp_out_tensorlist_tensorlist(out, self); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern__foreach_exp_functional_tensorlist)(void* self);
+  HOST_API void* lantern__foreach_exp_functional_tensorlist(void* self) { LANTERN_CHECK_LOADED void* ret = _lantern__foreach_exp_functional_tensorlist(self); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern__foreach_sqrt_out_tensorlist_tensorlist)(void* out, void* self);
+  HOST_API void* lantern__foreach_sqrt_out_tensorlist_tensorlist(void* out, void* self) { LANTERN_CHECK_LOADED void* ret = _lantern__foreach_sqrt_out_tensorlist_tensorlist(out, self); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern__foreach_sqrt_functional_tensorlist)(void* self);
+  HOST_API void* lantern__foreach_sqrt_functional_tensorlist(void* self) { LANTERN_CHECK_LOADED void* ret = _lantern__foreach_sqrt_functional_tensorlist(self); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern__foreach_abs_out_tensorlist_tensorlist)(void* out, void* self);
+  HOST_API void* lantern__foreach_abs_out_tensorlist_tensorlist(void* out, void* self) { LANTERN_CHECK_LOADED void* ret = _lantern__foreach_abs_out_tensorlist_tensorlist(out, self); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern__foreach_abs_functional_tensorlist)(void* self);
+  HOST_API void* lantern__foreach_abs_functional_tensorlist(void* self) { LANTERN_CHECK_LOADED void* ret = _lantern__foreach_abs_functional_tensorlist(self); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern__foreach_acos_out_tensorlist_tensorlist)(void* out, void* self);
+  HOST_API void* lantern__foreach_acos_out_tensorlist_tensorlist(void* out, void* self) { LANTERN_CHECK_LOADED void* ret = _lantern__foreach_acos_out_tensorlist_tensorlist(out, self); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern__foreach_acos_functional_tensorlist)(void* self);
+  HOST_API void* lantern__foreach_acos_functional_tensorlist(void* self) { LANTERN_CHECK_LOADED void* ret = _lantern__foreach_acos_functional_tensorlist(self); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern__foreach_asin_out_tensorlist_tensorlist)(void* out, void* self);
+  HOST_API void* lantern__foreach_asin_out_tensorlist_tensorlist(void* out, void* self) { LANTERN_CHECK_LOADED void* ret = _lantern__foreach_asin_out_tensorlist_tensorlist(out, self); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern__foreach_asin_functional_tensorlist)(void* self);
+  HOST_API void* lantern__foreach_asin_functional_tensorlist(void* self) { LANTERN_CHECK_LOADED void* ret = _lantern__foreach_asin_functional_tensorlist(self); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern__foreach_atan_out_tensorlist_tensorlist)(void* out, void* self);
+  HOST_API void* lantern__foreach_atan_out_tensorlist_tensorlist(void* out, void* self) { LANTERN_CHECK_LOADED void* ret = _lantern__foreach_atan_out_tensorlist_tensorlist(out, self); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern__foreach_atan_functional_tensorlist)(void* self);
+  HOST_API void* lantern__foreach_atan_functional_tensorlist(void* self) { LANTERN_CHECK_LOADED void* ret = _lantern__foreach_atan_functional_tensorlist(self); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern__foreach_ceil_out_tensorlist_tensorlist)(void* out, void* self);
+  HOST_API void* lantern__foreach_ceil_out_tensorlist_tensorlist(void* out, void* self) { LANTERN_CHECK_LOADED void* ret = _lantern__foreach_ceil_out_tensorlist_tensorlist(out, self); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern__foreach_ceil_functional_tensorlist)(void* self);
+  HOST_API void* lantern__foreach_ceil_functional_tensorlist(void* self) { LANTERN_CHECK_LOADED void* ret = _lantern__foreach_ceil_functional_tensorlist(self); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern__foreach_cos_out_tensorlist_tensorlist)(void* out, void* self);
+  HOST_API void* lantern__foreach_cos_out_tensorlist_tensorlist(void* out, void* self) { LANTERN_CHECK_LOADED void* ret = _lantern__foreach_cos_out_tensorlist_tensorlist(out, self); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern__foreach_cos_functional_tensorlist)(void* self);
+  HOST_API void* lantern__foreach_cos_functional_tensorlist(void* self) { LANTERN_CHECK_LOADED void* ret = _lantern__foreach_cos_functional_tensorlist(self); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern__foreach_cosh_out_tensorlist_tensorlist)(void* out, void* self);
+  HOST_API void* lantern__foreach_cosh_out_tensorlist_tensorlist(void* out, void* self) { LANTERN_CHECK_LOADED void* ret = _lantern__foreach_cosh_out_tensorlist_tensorlist(out, self); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern__foreach_cosh_functional_tensorlist)(void* self);
+  HOST_API void* lantern__foreach_cosh_functional_tensorlist(void* self) { LANTERN_CHECK_LOADED void* ret = _lantern__foreach_cosh_functional_tensorlist(self); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern__foreach_erf_out_tensorlist_tensorlist)(void* out, void* self);
+  HOST_API void* lantern__foreach_erf_out_tensorlist_tensorlist(void* out, void* self) { LANTERN_CHECK_LOADED void* ret = _lantern__foreach_erf_out_tensorlist_tensorlist(out, self); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern__foreach_erf_functional_tensorlist)(void* self);
+  HOST_API void* lantern__foreach_erf_functional_tensorlist(void* self) { LANTERN_CHECK_LOADED void* ret = _lantern__foreach_erf_functional_tensorlist(self); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern__foreach_erfc_out_tensorlist_tensorlist)(void* out, void* self);
+  HOST_API void* lantern__foreach_erfc_out_tensorlist_tensorlist(void* out, void* self) { LANTERN_CHECK_LOADED void* ret = _lantern__foreach_erfc_out_tensorlist_tensorlist(out, self); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern__foreach_erfc_functional_tensorlist)(void* self);
+  HOST_API void* lantern__foreach_erfc_functional_tensorlist(void* self) { LANTERN_CHECK_LOADED void* ret = _lantern__foreach_erfc_functional_tensorlist(self); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern__foreach_expm1_out_tensorlist_tensorlist)(void* out, void* self);
+  HOST_API void* lantern__foreach_expm1_out_tensorlist_tensorlist(void* out, void* self) { LANTERN_CHECK_LOADED void* ret = _lantern__foreach_expm1_out_tensorlist_tensorlist(out, self); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern__foreach_expm1_functional_tensorlist)(void* self);
+  HOST_API void* lantern__foreach_expm1_functional_tensorlist(void* self) { LANTERN_CHECK_LOADED void* ret = _lantern__foreach_expm1_functional_tensorlist(self); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern__foreach_floor_out_tensorlist_tensorlist)(void* out, void* self);
+  HOST_API void* lantern__foreach_floor_out_tensorlist_tensorlist(void* out, void* self) { LANTERN_CHECK_LOADED void* ret = _lantern__foreach_floor_out_tensorlist_tensorlist(out, self); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern__foreach_floor_functional_tensorlist)(void* self);
+  HOST_API void* lantern__foreach_floor_functional_tensorlist(void* self) { LANTERN_CHECK_LOADED void* ret = _lantern__foreach_floor_functional_tensorlist(self); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern__foreach_log_out_tensorlist_tensorlist)(void* out, void* self);
+  HOST_API void* lantern__foreach_log_out_tensorlist_tensorlist(void* out, void* self) { LANTERN_CHECK_LOADED void* ret = _lantern__foreach_log_out_tensorlist_tensorlist(out, self); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern__foreach_log_functional_tensorlist)(void* self);
+  HOST_API void* lantern__foreach_log_functional_tensorlist(void* self) { LANTERN_CHECK_LOADED void* ret = _lantern__foreach_log_functional_tensorlist(self); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern__foreach_log10_out_tensorlist_tensorlist)(void* out, void* self);
+  HOST_API void* lantern__foreach_log10_out_tensorlist_tensorlist(void* out, void* self) { LANTERN_CHECK_LOADED void* ret = _lantern__foreach_log10_out_tensorlist_tensorlist(out, self); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern__foreach_log10_functional_tensorlist)(void* self);
+  HOST_API void* lantern__foreach_log10_functional_tensorlist(void* self) { LANTERN_CHECK_LOADED void* ret = _lantern__foreach_log10_functional_tensorlist(self); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern__foreach_log1p_out_tensorlist_tensorlist)(void* out, void* self);
+  HOST_API void* lantern__foreach_log1p_out_tensorlist_tensorlist(void* out, void* self) { LANTERN_CHECK_LOADED void* ret = _lantern__foreach_log1p_out_tensorlist_tensorlist(out, self); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern__foreach_log1p_functional_tensorlist)(void* self);
+  HOST_API void* lantern__foreach_log1p_functional_tensorlist(void* self) { LANTERN_CHECK_LOADED void* ret = _lantern__foreach_log1p_functional_tensorlist(self); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern__foreach_log2_out_tensorlist_tensorlist)(void* out, void* self);
+  HOST_API void* lantern__foreach_log2_out_tensorlist_tensorlist(void* out, void* self) { LANTERN_CHECK_LOADED void* ret = _lantern__foreach_log2_out_tensorlist_tensorlist(out, self); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern__foreach_log2_functional_tensorlist)(void* self);
+  HOST_API void* lantern__foreach_log2_functional_tensorlist(void* self) { LANTERN_CHECK_LOADED void* ret = _lantern__foreach_log2_functional_tensorlist(self); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern__foreach_neg_out_tensorlist_tensorlist)(void* out, void* self);
+  HOST_API void* lantern__foreach_neg_out_tensorlist_tensorlist(void* out, void* self) { LANTERN_CHECK_LOADED void* ret = _lantern__foreach_neg_out_tensorlist_tensorlist(out, self); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern__foreach_neg_functional_tensorlist)(void* self);
+  HOST_API void* lantern__foreach_neg_functional_tensorlist(void* self) { LANTERN_CHECK_LOADED void* ret = _lantern__foreach_neg_functional_tensorlist(self); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern__foreach_tan_out_tensorlist_tensorlist)(void* out, void* self);
+  HOST_API void* lantern__foreach_tan_out_tensorlist_tensorlist(void* out, void* self) { LANTERN_CHECK_LOADED void* ret = _lantern__foreach_tan_out_tensorlist_tensorlist(out, self); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern__foreach_tan_functional_tensorlist)(void* self);
+  HOST_API void* lantern__foreach_tan_functional_tensorlist(void* self) { LANTERN_CHECK_LOADED void* ret = _lantern__foreach_tan_functional_tensorlist(self); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern__foreach_tanh_out_tensorlist_tensorlist)(void* out, void* self);
+  HOST_API void* lantern__foreach_tanh_out_tensorlist_tensorlist(void* out, void* self) { LANTERN_CHECK_LOADED void* ret = _lantern__foreach_tanh_out_tensorlist_tensorlist(out, self); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern__foreach_tanh_functional_tensorlist)(void* self);
+  HOST_API void* lantern__foreach_tanh_functional_tensorlist(void* self) { LANTERN_CHECK_LOADED void* ret = _lantern__foreach_tanh_functional_tensorlist(self); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern__foreach_sin_out_tensorlist_tensorlist)(void* out, void* self);
+  HOST_API void* lantern__foreach_sin_out_tensorlist_tensorlist(void* out, void* self) { LANTERN_CHECK_LOADED void* ret = _lantern__foreach_sin_out_tensorlist_tensorlist(out, self); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern__foreach_sin_functional_tensorlist)(void* self);
+  HOST_API void* lantern__foreach_sin_functional_tensorlist(void* self) { LANTERN_CHECK_LOADED void* ret = _lantern__foreach_sin_functional_tensorlist(self); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern__foreach_sinh_out_tensorlist_tensorlist)(void* out, void* self);
+  HOST_API void* lantern__foreach_sinh_out_tensorlist_tensorlist(void* out, void* self) { LANTERN_CHECK_LOADED void* ret = _lantern__foreach_sinh_out_tensorlist_tensorlist(out, self); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern__foreach_sinh_functional_tensorlist)(void* self);
+  HOST_API void* lantern__foreach_sinh_functional_tensorlist(void* self) { LANTERN_CHECK_LOADED void* ret = _lantern__foreach_sinh_functional_tensorlist(self); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern__foreach_round_out_tensorlist_tensorlist)(void* out, void* self);
+  HOST_API void* lantern__foreach_round_out_tensorlist_tensorlist(void* out, void* self) { LANTERN_CHECK_LOADED void* ret = _lantern__foreach_round_out_tensorlist_tensorlist(out, self); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern__foreach_round_functional_tensorlist)(void* self);
+  HOST_API void* lantern__foreach_round_functional_tensorlist(void* self) { LANTERN_CHECK_LOADED void* ret = _lantern__foreach_round_functional_tensorlist(self); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern__foreach_lgamma_out_tensorlist_tensorlist)(void* out, void* self);
+  HOST_API void* lantern__foreach_lgamma_out_tensorlist_tensorlist(void* out, void* self) { LANTERN_CHECK_LOADED void* ret = _lantern__foreach_lgamma_out_tensorlist_tensorlist(out, self); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern__foreach_lgamma_functional_tensorlist)(void* self);
+  HOST_API void* lantern__foreach_lgamma_functional_tensorlist(void* self) { LANTERN_CHECK_LOADED void* ret = _lantern__foreach_lgamma_functional_tensorlist(self); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern__foreach_frac_out_tensorlist_tensorlist)(void* out, void* self);
+  HOST_API void* lantern__foreach_frac_out_tensorlist_tensorlist(void* out, void* self) { LANTERN_CHECK_LOADED void* ret = _lantern__foreach_frac_out_tensorlist_tensorlist(out, self); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern__foreach_frac_functional_tensorlist)(void* self);
+  HOST_API void* lantern__foreach_frac_functional_tensorlist(void* self) { LANTERN_CHECK_LOADED void* ret = _lantern__foreach_frac_functional_tensorlist(self); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern__foreach_reciprocal_out_tensorlist_tensorlist)(void* out, void* self);
+  HOST_API void* lantern__foreach_reciprocal_out_tensorlist_tensorlist(void* out, void* self) { LANTERN_CHECK_LOADED void* ret = _lantern__foreach_reciprocal_out_tensorlist_tensorlist(out, self); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern__foreach_reciprocal_functional_tensorlist)(void* self);
+  HOST_API void* lantern__foreach_reciprocal_functional_tensorlist(void* self) { LANTERN_CHECK_LOADED void* ret = _lantern__foreach_reciprocal_functional_tensorlist(self); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern__foreach_sigmoid_out_tensorlist_tensorlist)(void* out, void* self);
+  HOST_API void* lantern__foreach_sigmoid_out_tensorlist_tensorlist(void* out, void* self) { LANTERN_CHECK_LOADED void* ret = _lantern__foreach_sigmoid_out_tensorlist_tensorlist(out, self); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern__foreach_sigmoid_functional_tensorlist)(void* self);
+  HOST_API void* lantern__foreach_sigmoid_functional_tensorlist(void* self) { LANTERN_CHECK_LOADED void* ret = _lantern__foreach_sigmoid_functional_tensorlist(self); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern__foreach_trunc_out_tensorlist_tensorlist)(void* out, void* self);
+  HOST_API void* lantern__foreach_trunc_out_tensorlist_tensorlist(void* out, void* self) { LANTERN_CHECK_LOADED void* ret = _lantern__foreach_trunc_out_tensorlist_tensorlist(out, self); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern__foreach_trunc_functional_tensorlist)(void* self);
+  HOST_API void* lantern__foreach_trunc_functional_tensorlist(void* self) { LANTERN_CHECK_LOADED void* ret = _lantern__foreach_trunc_functional_tensorlist(self); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern__foreach_addcdiv_out_tensorlist_tensorlist_tensorlist_tensorlist_scalar)(void* out, void* self, void* tensor1, void* tensor2, void* value);
+  HOST_API void* lantern__foreach_addcdiv_out_tensorlist_tensorlist_tensorlist_tensorlist_scalar(void* out, void* self, void* tensor1, void* tensor2, void* value) { LANTERN_CHECK_LOADED void* ret = _lantern__foreach_addcdiv_out_tensorlist_tensorlist_tensorlist_tensorlist_scalar(out, self, tensor1, tensor2, value); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern__foreach_addcdiv_functional_tensorlist_tensorlist_tensorlist_scalar)(void* self, void* tensor1, void* tensor2, void* value);
+  HOST_API void* lantern__foreach_addcdiv_functional_tensorlist_tensorlist_tensorlist_scalar(void* self, void* tensor1, void* tensor2, void* value) { LANTERN_CHECK_LOADED void* ret = _lantern__foreach_addcdiv_functional_tensorlist_tensorlist_tensorlist_scalar(self, tensor1, tensor2, value); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern__foreach_addcmul_out_tensorlist_tensorlist_tensorlist_tensorlist_scalar)(void* out, void* self, void* tensor1, void* tensor2, void* value);
+  HOST_API void* lantern__foreach_addcmul_out_tensorlist_tensorlist_tensorlist_tensorlist_scalar(void* out, void* self, void* tensor1, void* tensor2, void* value) { LANTERN_CHECK_LOADED void* ret = _lantern__foreach_addcmul_out_tensorlist_tensorlist_tensorlist_tensorlist_scalar(out, self, tensor1, tensor2, value); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern__foreach_addcmul_functional_tensorlist_tensorlist_tensorlist_scalar)(void* self, void* tensor1, void* tensor2, void* value);
+  HOST_API void* lantern__foreach_addcmul_functional_tensorlist_tensorlist_tensorlist_scalar(void* self, void* tensor1, void* tensor2, void* value) { LANTERN_CHECK_LOADED void* ret = _lantern__foreach_addcmul_functional_tensorlist_tensorlist_tensorlist_scalar(self, tensor1, tensor2, value); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern__foreach_addcdiv_out_tensorlist_tensorlist_tensorlist_tensorlist_arrayrefscalar)(void* out, void* self, void* tensor1, void* tensor2, void* scalars);
+  HOST_API void* lantern__foreach_addcdiv_out_tensorlist_tensorlist_tensorlist_tensorlist_arrayrefscalar(void* out, void* self, void* tensor1, void* tensor2, void* scalars) { LANTERN_CHECK_LOADED void* ret = _lantern__foreach_addcdiv_out_tensorlist_tensorlist_tensorlist_tensorlist_arrayrefscalar(out, self, tensor1, tensor2, scalars); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern__foreach_addcdiv_functional_tensorlist_tensorlist_tensorlist_arrayrefscalar)(void* self, void* tensor1, void* tensor2, void* scalars);
+  HOST_API void* lantern__foreach_addcdiv_functional_tensorlist_tensorlist_tensorlist_arrayrefscalar(void* self, void* tensor1, void* tensor2, void* scalars) { LANTERN_CHECK_LOADED void* ret = _lantern__foreach_addcdiv_functional_tensorlist_tensorlist_tensorlist_arrayrefscalar(self, tensor1, tensor2, scalars); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern__foreach_addcmul_out_tensorlist_tensorlist_tensorlist_tensorlist_arrayrefscalar)(void* out, void* self, void* tensor1, void* tensor2, void* scalars);
+  HOST_API void* lantern__foreach_addcmul_out_tensorlist_tensorlist_tensorlist_tensorlist_arrayrefscalar(void* out, void* self, void* tensor1, void* tensor2, void* scalars) { LANTERN_CHECK_LOADED void* ret = _lantern__foreach_addcmul_out_tensorlist_tensorlist_tensorlist_tensorlist_arrayrefscalar(out, self, tensor1, tensor2, scalars); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern__foreach_addcmul_functional_tensorlist_tensorlist_tensorlist_arrayrefscalar)(void* self, void* tensor1, void* tensor2, void* scalars);
+  HOST_API void* lantern__foreach_addcmul_functional_tensorlist_tensorlist_tensorlist_arrayrefscalar(void* self, void* tensor1, void* tensor2, void* scalars) { LANTERN_CHECK_LOADED void* ret = _lantern__foreach_addcmul_functional_tensorlist_tensorlist_tensorlist_arrayrefscalar(self, tensor1, tensor2, scalars); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern__linalg_inv_out_helper_out_tensor_tensor_tensor_tensor)(void* out, void* self, void* infos_lu, void* infos_getri);
+  HOST_API void* lantern__linalg_inv_out_helper_out_tensor_tensor_tensor_tensor(void* out, void* self, void* infos_lu, void* infos_getri) { LANTERN_CHECK_LOADED void* ret = _lantern__linalg_inv_out_helper_out_tensor_tensor_tensor_tensor(out, self, infos_lu, infos_getri); LANTERN_HOST_HANDLER return ret; }
+  LANTERN_API void* (LANTERN_PTR _lantern__linalg_inv_out_helper_functional_tensor_tensor_tensor)(void* self, void* infos_lu, void* infos_getri);
+  HOST_API void* lantern__linalg_inv_out_helper_functional_tensor_tensor_tensor(void* self, void* infos_lu, void* infos_getri) { LANTERN_CHECK_LOADED void* ret = _lantern__linalg_inv_out_helper_functional_tensor_tensor_tensor(self, infos_lu, infos_getri); LANTERN_HOST_HANDLER return ret; }
   /* Autogen Headers -- End */
 
 #ifdef __cplusplus
@@ -8456,6 +9106,7 @@ LOAD_SYMBOL(_lantern_cuda_synchronize);
   LOAD_SYMBOL(_lantern_Tensor_sgn_tensor)
   LOAD_SYMBOL(_lantern_Tensor_sgn__tensor)
   LOAD_SYMBOL(_lantern_sgn_out_tensor_tensor)
+  LOAD_SYMBOL(_lantern_Tensor_chalf_tensor_memoryformat)
   LOAD_SYMBOL(_lantern_real_tensor)
   LOAD_SYMBOL(_lantern_imag_tensor)
   LOAD_SYMBOL(_lantern__conj_tensor)
@@ -8752,6 +9403,7 @@ LOAD_SYMBOL(_lantern_cuda_synchronize);
   LOAD_SYMBOL(_lantern_conv_transpose1d_tensor_tensor_tensor_intarrayref_intarrayref_intarrayref_intt_intarrayref)
   LOAD_SYMBOL(_lantern_conv_transpose2d_tensor_tensor_tensor_intarrayref_intarrayref_intarrayref_intt_intarrayref)
   LOAD_SYMBOL(_lantern_conv_transpose3d_tensor_tensor_tensor_intarrayref_intarrayref_intarrayref_intt_intarrayref)
+  LOAD_SYMBOL(_lantern_copy_tensor_tensor_bool)
   LOAD_SYMBOL(_lantern_Tensor_copy__tensor_tensor_bool)
   LOAD_SYMBOL(_lantern__copy_from_tensor_tensor_bool)
   LOAD_SYMBOL(_lantern__copy_from_and_resize_tensor_tensor)
@@ -8780,6 +9432,8 @@ LOAD_SYMBOL(_lantern_cuda_synchronize);
   LOAD_SYMBOL(_lantern_cudnn_batch_norm_backward_tensor_tensor_tensor_tensor_tensor_tensor_tensor_double_tensor)
   LOAD_SYMBOL(_lantern_cudnn_convolution_tensor_tensor_intarrayref_intarrayref_intarrayref_intt_bool_bool_bool)
   LOAD_SYMBOL(_lantern_cudnn_convolution_transpose_tensor_tensor_intarrayref_intarrayref_intarrayref_intarrayref_intt_bool_bool_bool)
+  LOAD_SYMBOL(_lantern__mps_convolution_transpose_tensor_tensor_intarrayref_intarrayref_intarrayref_intarrayref_intt)
+  LOAD_SYMBOL(_lantern_mps_convolution_transpose_backward_tensor_tensor_tensor_intarrayref_intarrayref_intarrayref_intarrayref_intt_stdarraybool)
   LOAD_SYMBOL(_lantern_cudnn_convolution_relu_tensor_tensor_tensor_intarrayref_intarrayref_intarrayref_intt)
   LOAD_SYMBOL(_lantern_cudnn_convolution_add_relu_tensor_tensor_tensor_scalar_tensor_intarrayref_intarrayref_intarrayref_intt)
   LOAD_SYMBOL(_lantern_cudnn_grid_sampler_tensor_tensor)
@@ -8911,6 +9565,7 @@ LOAD_SYMBOL(_lantern_cuda_synchronize);
   LOAD_SYMBOL(_lantern__empty_affine_quantized_intarrayref_tensoroptions_double_intt_memoryformat)
   LOAD_SYMBOL(_lantern__empty_per_channel_affine_quantized_intarrayref_tensor_tensor_intt_tensoroptions_memoryformat)
   LOAD_SYMBOL(_lantern_Tensor_resize__tensor_intarrayref_memoryformat)
+  LOAD_SYMBOL(_lantern__resize_output__tensor_intarrayref_device)
   LOAD_SYMBOL(_lantern_empty_quantized_intarrayref_tensor_tensoroptions_memoryformat)
   LOAD_SYMBOL(_lantern_empty_out_tensor_intarrayref_memoryformat)
   LOAD_SYMBOL(_lantern_empty_like_tensor_tensoroptions_memoryformat)
@@ -8940,6 +9595,7 @@ LOAD_SYMBOL(_lantern_cuda_synchronize);
   LOAD_SYMBOL(_lantern_expm1__tensor)
   LOAD_SYMBOL(_lantern_Tensor_expm1__tensor)
   LOAD_SYMBOL(_lantern_expm1_out_tensor_tensor)
+  LOAD_SYMBOL(_lantern_Tensor_expand_tensor_csymintarrayref_bool)
   LOAD_SYMBOL(_lantern_Tensor_expand_tensor_intarrayref_bool)
   LOAD_SYMBOL(_lantern_Tensor_expand_as_tensor_tensor)
   LOAD_SYMBOL(_lantern_eye_intt_tensoroptions)
@@ -8956,6 +9612,8 @@ LOAD_SYMBOL(_lantern_cuda_synchronize);
   LOAD_SYMBOL(_lantern_Tensor_flatten_tensor_dimnamelist_dimname)
   LOAD_SYMBOL(_lantern_Tensor_unflatten_tensor_intt_intarrayref_dimnamelist)
   LOAD_SYMBOL(_lantern_Tensor_unflatten_tensor_dimname_intarrayref_dimnamelist)
+  LOAD_SYMBOL(_lantern_fill_tensor_scalar)
+  LOAD_SYMBOL(_lantern_fill_tensor_tensor)
   LOAD_SYMBOL(_lantern_fill__tensor_scalar)
   LOAD_SYMBOL(_lantern_Tensor_fill__tensor_scalar)
   LOAD_SYMBOL(_lantern_fill__tensor_tensor)
@@ -8998,7 +9656,7 @@ LOAD_SYMBOL(_lantern_cuda_synchronize);
   LOAD_SYMBOL(_lantern__grid_sampler_2d_cpu_fallback_tensor_tensor_intt_intt_bool)
   LOAD_SYMBOL(_lantern__grid_sampler_2d_cpu_fallback_backward_tensor_tensor_tensor_intt_intt_bool)
   LOAD_SYMBOL(_lantern_grid_sampler_3d_tensor_tensor_intt_intt_bool)
-  LOAD_SYMBOL(_lantern_grid_sampler_3d_backward_tensor_tensor_tensor_intt_intt_bool)
+  LOAD_SYMBOL(_lantern_grid_sampler_3d_backward_tensor_tensor_tensor_intt_intt_bool_stdarraybool)
   LOAD_SYMBOL(_lantern_hann_window_intt_tensoroptions)
   LOAD_SYMBOL(_lantern_hann_window_intt_bool_tensoroptions)
   LOAD_SYMBOL(_lantern_hamming_window_intt_tensoroptions)
@@ -9024,6 +9682,7 @@ LOAD_SYMBOL(_lantern_cuda_synchronize);
   LOAD_SYMBOL(_lantern__cufft_clear_plan_cache_intt)
   LOAD_SYMBOL(_lantern_index_tensor_constclistcoptionaltensor)
   LOAD_SYMBOL(_lantern_Tensor_index_tensor_constclistcoptionaltensor)
+  LOAD_SYMBOL(_lantern_index_copy_out_tensor_tensor_intt_tensor_tensor)
   LOAD_SYMBOL(_lantern_Tensor_index_copy__tensor_intt_tensor_tensor)
   LOAD_SYMBOL(_lantern_index_copy_tensor_intt_tensor_tensor)
   LOAD_SYMBOL(_lantern_Tensor_index_copy_tensor_intt_tensor_tensor)
@@ -9084,7 +9743,6 @@ LOAD_SYMBOL(_lantern_cuda_synchronize);
   LOAD_SYMBOL(_lantern_kthvalue_out_tensor_tensor_tensor_intt_dimname_bool)
   LOAD_SYMBOL(_lantern_layer_norm_tensor_intarrayref_tensor_tensor_double_bool)
   LOAD_SYMBOL(_lantern_native_layer_norm_tensor_intarrayref_tensor_tensor_double)
-  LOAD_SYMBOL(_lantern__native_multi_head_self_attention_tensor_tensor_tensor_tensor_tensor_tensor)
   LOAD_SYMBOL(_lantern_native_layer_norm_backward_tensor_tensor_intarrayref_tensor_tensor_tensor_tensor_stdarraybool)
   LOAD_SYMBOL(_lantern_nan_to_num_tensor_double_double_double)
   LOAD_SYMBOL(_lantern_Tensor_nan_to_num_tensor_double_double_double)
@@ -9093,10 +9751,14 @@ LOAD_SYMBOL(_lantern_cuda_synchronize);
   LOAD_SYMBOL(_lantern_nan_to_num_out_tensor_tensor_double_double_double)
   LOAD_SYMBOL(_lantern_linear_tensor_tensor_tensor)
   LOAD_SYMBOL(_lantern_linear_out_tensor_tensor_tensor_tensor)
+  LOAD_SYMBOL(_lantern__mps_linear_tensor_tensor_tensor)
   LOAD_SYMBOL(_lantern_mkldnn_linear_tensor_tensor_tensor)
   LOAD_SYMBOL(_lantern_mkldnn_linear_backward_input_intarrayref_tensor_tensor)
   LOAD_SYMBOL(_lantern_mkldnn_linear_backward_weights_tensor_tensor_tensor_bool)
   LOAD_SYMBOL(_lantern_mkldnn_linear_backward_tensor_tensor_tensor_stdarraybool)
+  LOAD_SYMBOL(_lantern__mps_linear_backward_input_intarrayref_tensor_tensor)
+  LOAD_SYMBOL(_lantern__mps_linear_backward_weights_tensor_tensor_tensor_bool)
+  LOAD_SYMBOL(_lantern_mps_linear_backward_tensor_tensor_tensor_stdarraybool)
   LOAD_SYMBOL(_lantern_fbgemm_linear_int8_weight_fp32_activation_tensor_tensor_tensor_tensor_scalar_scalar_tensor)
   LOAD_SYMBOL(_lantern_fbgemm_linear_int8_weight_tensor_tensor_tensor_tensor_scalar_scalar_tensor)
   LOAD_SYMBOL(_lantern_fbgemm_linear_quantize_weight_tensor)
@@ -9156,6 +9818,7 @@ LOAD_SYMBOL(_lantern_cuda_synchronize);
   LOAD_SYMBOL(_lantern_logspace_out_tensor_scalar_scalar_intt_double)
   LOAD_SYMBOL(_lantern_log_softmax_tensor_intt_scalartype)
   LOAD_SYMBOL(_lantern_Tensor_log_softmax_tensor_intt_scalartype)
+  LOAD_SYMBOL(_lantern_log_softmax_out_tensor_tensor_intt_scalartype)
   LOAD_SYMBOL(_lantern_log_softmax_tensor_dimname_scalartype)
   LOAD_SYMBOL(_lantern_Tensor_log_softmax_tensor_dimname_scalartype)
   LOAD_SYMBOL(_lantern__log_softmax_tensor_intt_bool)
@@ -9208,6 +9871,8 @@ LOAD_SYMBOL(_lantern_cuda_synchronize);
   LOAD_SYMBOL(_lantern_max_pool1d_with_indices_tensor_intarrayref_intarrayref_intarrayref_intarrayref_bool)
   LOAD_SYMBOL(_lantern_max_pool1d_tensor_intarrayref_intarrayref_intarrayref_intarrayref_bool)
   LOAD_SYMBOL(_lantern_max_pool2d_tensor_intarrayref_intarrayref_intarrayref_intarrayref_bool)
+  LOAD_SYMBOL(_lantern__mps_max_pool2d_tensor_intarrayref_intarrayref_intarrayref_intarrayref_bool)
+  LOAD_SYMBOL(_lantern_mps_max_pool2d_backward_tensor_tensor_intarrayref_intarrayref_intarrayref_intarrayref_bool)
   LOAD_SYMBOL(_lantern_mkldnn_max_pool2d_tensor_intarrayref_intarrayref_intarrayref_intarrayref_bool)
   LOAD_SYMBOL(_lantern_mkldnn_max_pool2d_backward_tensor_tensor_tensor_intarrayref_intarrayref_intarrayref_intarrayref_bool)
   LOAD_SYMBOL(_lantern_mkldnn_max_pool3d_tensor_intarrayref_intarrayref_intarrayref_intarrayref_bool)
@@ -9251,6 +9916,8 @@ LOAD_SYMBOL(_lantern_cuda_synchronize);
   LOAD_SYMBOL(_lantern_amin_tensor_intarrayref_bool)
   LOAD_SYMBOL(_lantern_Tensor_amin_tensor_intarrayref_bool)
   LOAD_SYMBOL(_lantern_amin_out_tensor_tensor_intarrayref_bool)
+  LOAD_SYMBOL(_lantern__mps_convolution_tensor_tensor_tensor_intarrayref_intarrayref_intarrayref_intt)
+  LOAD_SYMBOL(_lantern_mps_convolution_backward_tensor_tensor_tensor_intarrayref_intarrayref_intarrayref_intt_stdarraybool)
   LOAD_SYMBOL(_lantern_mkldnn_convolution_tensor_tensor_tensor_intarrayref_intarrayref_intarrayref_intt)
   LOAD_SYMBOL(_lantern_miopen_batch_norm_tensor_tensor_tensor_tensor_tensor_bool_double_double)
   LOAD_SYMBOL(_lantern_miopen_batch_norm_backward_tensor_tensor_tensor_tensor_tensor_tensor_tensor_double)
@@ -9294,6 +9961,8 @@ LOAD_SYMBOL(_lantern_cuda_synchronize);
   LOAD_SYMBOL(_lantern_Tensor_mvlgamma__tensor_intt)
   LOAD_SYMBOL(_lantern_narrow_copy_tensor_intt_intt_intt)
   LOAD_SYMBOL(_lantern_Tensor_narrow_copy_tensor_intt_intt_intt)
+  LOAD_SYMBOL(_lantern_narrow_copy_tensor_intt_intt_csymint)
+  LOAD_SYMBOL(_lantern_Tensor_narrow_copy_tensor_intt_intt_csymint)
   LOAD_SYMBOL(_lantern_narrow_copy_out_tensor_tensor_intt_intt_intt)
   LOAD_SYMBOL(_lantern_narrow_tensor_intt_intt_intt)
   LOAD_SYMBOL(_lantern_Tensor_narrow_tensor_intt_intt_intt)
@@ -9445,10 +10114,11 @@ LOAD_SYMBOL(_lantern_cuda_synchronize);
   LOAD_SYMBOL(_lantern_Tensor_prelu_tensor_tensor)
   LOAD_SYMBOL(_lantern_prelu_backward_tensor_tensor_tensor)
   LOAD_SYMBOL(_lantern_Tensor_prelu_backward_tensor_tensor_tensor)
-  LOAD_SYMBOL(_lantern_gelu_out_tensor_tensor)
-  LOAD_SYMBOL(_lantern_gelu_tensor)
-  LOAD_SYMBOL(_lantern_gelu_backward_out_tensor_tensor_tensor)
-  LOAD_SYMBOL(_lantern_gelu_backward_tensor_tensor)
+  LOAD_SYMBOL(_lantern_gelu_out_tensor_tensor_cstringview)
+  LOAD_SYMBOL(_lantern_gelu__tensor_cstringview)
+  LOAD_SYMBOL(_lantern_gelu_tensor_cstringview)
+  LOAD_SYMBOL(_lantern_gelu_backward_out_tensor_tensor_tensor_cstringview)
+  LOAD_SYMBOL(_lantern_gelu_backward_tensor_tensor_cstringview)
   LOAD_SYMBOL(_lantern_infinitely_differentiable_gelu_backward_tensor_tensor)
   LOAD_SYMBOL(_lantern_hardshrink_out_tensor_tensor_scalar)
   LOAD_SYMBOL(_lantern_hardshrink_tensor_scalar)
@@ -9526,6 +10196,7 @@ LOAD_SYMBOL(_lantern_cuda_synchronize);
   LOAD_SYMBOL(_lantern_Tensor_smm_tensor_tensor)
   LOAD_SYMBOL(_lantern_softmax_tensor_intt_scalartype)
   LOAD_SYMBOL(_lantern_Tensor_softmax_tensor_intt_scalartype)
+  LOAD_SYMBOL(_lantern_softmax_out_tensor_tensor_intt_scalartype)
   LOAD_SYMBOL(_lantern_softmax_tensor_dimname_scalartype)
   LOAD_SYMBOL(_lantern_Tensor_softmax_tensor_dimname_scalartype)
   LOAD_SYMBOL(_lantern__softmax_tensor_intt_bool)
@@ -9536,6 +10207,8 @@ LOAD_SYMBOL(_lantern_cuda_synchronize);
   LOAD_SYMBOL(_lantern_Tensor_unsafe_split_tensor_intt_intt)
   LOAD_SYMBOL(_lantern_split_tensor_intt_intt)
   LOAD_SYMBOL(_lantern_Tensor_split_tensor_intt_intt)
+  LOAD_SYMBOL(_lantern_split_tensor_intarrayref_intt)
+  LOAD_SYMBOL(_lantern_Tensor_split_tensor_intarrayref_intt)
   LOAD_SYMBOL(_lantern_unsafe_split_with_sizes_tensor_intarrayref_intt)
   LOAD_SYMBOL(_lantern_Tensor_unsafe_split_with_sizes_tensor_intarrayref_intt)
   LOAD_SYMBOL(_lantern_split_with_sizes_tensor_intarrayref_intt)
@@ -9576,6 +10249,8 @@ LOAD_SYMBOL(_lantern_cuda_synchronize);
   LOAD_SYMBOL(_lantern_dstack_out_tensor_tensorlist)
   LOAD_SYMBOL(_lantern_stft_tensor_intt_intt_intt_tensor_bool_bool_bool)
   LOAD_SYMBOL(_lantern_Tensor_stft_tensor_intt_intt_intt_tensor_bool_bool_bool)
+  LOAD_SYMBOL(_lantern_stft_tensor_intt_intt_intt_tensor_bool_cstringview_bool_bool_bool)
+  LOAD_SYMBOL(_lantern_Tensor_stft_tensor_intt_intt_intt_tensor_bool_cstringview_bool_bool_bool)
   LOAD_SYMBOL(_lantern_istft_tensor_intt_intt_intt_tensor_bool_bool_bool_intt_bool)
   LOAD_SYMBOL(_lantern_Tensor_istft_tensor_intt_intt_intt_tensor_bool_bool_bool_intt_bool)
   LOAD_SYMBOL(_lantern_stride_tensor_intt)
@@ -9590,8 +10265,6 @@ LOAD_SYMBOL(_lantern_cuda_synchronize);
   LOAD_SYMBOL(_lantern_Tensor_sum_tensor_dimnamelist_bool_scalartype)
   LOAD_SYMBOL(_lantern_sum_out_tensor_tensor_intarrayref_bool_scalartype)
   LOAD_SYMBOL(_lantern_sum_out_tensor_tensor_dimnamelist_bool_scalartype)
-  LOAD_SYMBOL(_lantern_nansum_tensor_scalartype)
-  LOAD_SYMBOL(_lantern_Tensor_nansum_tensor_scalartype)
   LOAD_SYMBOL(_lantern_nansum_tensor_intarrayref_bool_scalartype)
   LOAD_SYMBOL(_lantern_Tensor_nansum_tensor_intarrayref_bool_scalartype)
   LOAD_SYMBOL(_lantern_nansum_out_tensor_tensor_intarrayref_bool_scalartype)
@@ -9677,6 +10350,10 @@ LOAD_SYMBOL(_lantern_cuda_synchronize);
   LOAD_SYMBOL(_lantern_trapezoid_tensor_scalar_intt)
   LOAD_SYMBOL(_lantern_trapz_tensor_tensor_intt)
   LOAD_SYMBOL(_lantern_trapz_tensor_double_intt)
+  LOAD_SYMBOL(_lantern__transform_bias_rescale_qkv_tensor_tensor_intt)
+  LOAD_SYMBOL(_lantern__nested_tensor_from_mask_tensor_tensor)
+  LOAD_SYMBOL(_lantern__nested_from_padded_tensor_tensor_bool)
+  LOAD_SYMBOL(_lantern__nested_from_padded_and_nested_example_tensor_tensor)
   LOAD_SYMBOL(_lantern__trilinear_tensor_tensor_tensor_intarrayref_intarrayref_intarrayref_intarrayref_intt)
   LOAD_SYMBOL(_lantern_triplet_margin_loss_tensor_tensor_tensor_double_double_double_bool_intt)
   LOAD_SYMBOL(_lantern_trunc_tensor)
@@ -9723,15 +10400,15 @@ LOAD_SYMBOL(_lantern_cuda_synchronize);
   LOAD_SYMBOL(_lantern_Tensor_view_as_tensor_tensor)
   LOAD_SYMBOL(_lantern_where_tensor_tensor_tensor)
   LOAD_SYMBOL(_lantern_Tensor_where_tensor_tensor_tensor)
+  LOAD_SYMBOL(_lantern_where_out_tensor_tensor_tensor_tensor)
   LOAD_SYMBOL(_lantern_where_tensor_scalar_tensor)
   LOAD_SYMBOL(_lantern_where_tensor_tensor_scalar)
   LOAD_SYMBOL(_lantern_where_tensor_scalar_scalar)
   LOAD_SYMBOL(_lantern_where_tensor)
-  LOAD_SYMBOL(_lantern__s_where_tensor_tensor_tensor)
   LOAD_SYMBOL(_lantern_norm_except_dim_tensor_intt_intt)
   LOAD_SYMBOL(_lantern__weight_norm_tensor_tensor_intt)
-  LOAD_SYMBOL(_lantern__weight_norm_cuda_interface_tensor_tensor_intt)
-  LOAD_SYMBOL(_lantern__weight_norm_cuda_interface_backward_tensor_tensor_tensor_tensor_intt)
+  LOAD_SYMBOL(_lantern__weight_norm_interface_tensor_tensor_intt)
+  LOAD_SYMBOL(_lantern__weight_norm_interface_backward_tensor_tensor_tensor_tensor_intt)
   LOAD_SYMBOL(_lantern__weight_norm_differentiable_backward_tensor_tensor_tensor_tensor_intt)
   LOAD_SYMBOL(_lantern_zeros_intarrayref_dimnamelist_tensoroptions)
   LOAD_SYMBOL(_lantern__efficientzerotensor_intarrayref_tensoroptions)
@@ -9751,6 +10428,8 @@ LOAD_SYMBOL(_lantern_cuda_synchronize);
   LOAD_SYMBOL(_lantern__sparse_sum_tensor_intarrayref)
   LOAD_SYMBOL(_lantern__sparse_sum_tensor_intarrayref_scalartype)
   LOAD_SYMBOL(_lantern__sparse_sum_backward_tensor_tensor_intarrayref)
+  LOAD_SYMBOL(_lantern__sparse_csr_sum_tensor_intarrayref_bool_scalartype)
+  LOAD_SYMBOL(_lantern__sparse_csr_prod_tensor_intarrayref_bool_scalartype)
   LOAD_SYMBOL(_lantern__sparse_softmax_tensor_intt_scalartype)
   LOAD_SYMBOL(_lantern__sparse_softmax_tensor_dimname_scalartype)
   LOAD_SYMBOL(_lantern__sparse_softmax_tensor_intt_bool)
@@ -9792,6 +10471,7 @@ LOAD_SYMBOL(_lantern_cuda_synchronize);
   LOAD_SYMBOL(_lantern_resize_as__tensor_tensor_memoryformat)
   LOAD_SYMBOL(_lantern_Tensor_resize_as__tensor_tensor_memoryformat)
   LOAD_SYMBOL(_lantern_resize_as_sparse__tensor_tensor)
+  LOAD_SYMBOL(_lantern_Tensor_resize_as_sparse__tensor_tensor)
   LOAD_SYMBOL(_lantern_zero__tensor)
   LOAD_SYMBOL(_lantern_Tensor_zero__tensor)
   LOAD_SYMBOL(_lantern_sub_out_tensor_tensor_tensor_scalar)
@@ -9821,15 +10501,34 @@ LOAD_SYMBOL(_lantern_cuda_synchronize);
   LOAD_SYMBOL(_lantern_addmm_tensor_tensor_tensor_scalar_scalar)
   LOAD_SYMBOL(_lantern_Tensor_addmm_tensor_tensor_tensor_scalar_scalar)
   LOAD_SYMBOL(_lantern_Tensor_addmm__tensor_tensor_tensor_scalar_scalar)
+  LOAD_SYMBOL(_lantern__addmm_activation_out_tensor_tensor_tensor_tensor_scalar_scalar_bool)
+  LOAD_SYMBOL(_lantern__addmm_activation_tensor_tensor_tensor_scalar_scalar_bool)
+  LOAD_SYMBOL(_lantern_Tensor__addmm_activation_tensor_tensor_tensor_scalar_scalar_bool)
+  LOAD_SYMBOL(_lantern_sparse_compressed_tensor_tensor_tensor_tensor_intarrayref_tensoroptions)
   LOAD_SYMBOL(_lantern_sparse_csr_tensor_tensor_tensor_tensor_intarrayref_tensoroptions)
+  LOAD_SYMBOL(_lantern_sparse_csc_tensor_tensor_tensor_tensor_intarrayref_tensoroptions)
+  LOAD_SYMBOL(_lantern_sparse_bsr_tensor_tensor_tensor_tensor_intarrayref_tensoroptions)
+  LOAD_SYMBOL(_lantern_sparse_bsc_tensor_tensor_tensor_tensor_intarrayref_tensoroptions)
+  LOAD_SYMBOL(_lantern_sparse_compressed_tensor_tensor_tensor_tensor_tensoroptions)
   LOAD_SYMBOL(_lantern_sparse_csr_tensor_tensor_tensor_tensor_tensoroptions)
+  LOAD_SYMBOL(_lantern_sparse_csc_tensor_tensor_tensor_tensor_tensoroptions)
+  LOAD_SYMBOL(_lantern_sparse_bsr_tensor_tensor_tensor_tensor_tensoroptions)
+  LOAD_SYMBOL(_lantern_sparse_bsc_tensor_tensor_tensor_tensor_tensoroptions)
+  LOAD_SYMBOL(_lantern__sparse_compressed_tensor_unsafe_tensor_tensor_tensor_intarrayref_tensoroptions)
   LOAD_SYMBOL(_lantern__sparse_csr_tensor_unsafe_tensor_tensor_tensor_intarrayref_tensoroptions)
+  LOAD_SYMBOL(_lantern__sparse_csc_tensor_unsafe_tensor_tensor_tensor_intarrayref_tensoroptions)
+  LOAD_SYMBOL(_lantern__sparse_bsr_tensor_unsafe_tensor_tensor_tensor_intarrayref_tensoroptions)
+  LOAD_SYMBOL(_lantern__sparse_bsc_tensor_unsafe_tensor_tensor_tensor_intarrayref_tensoroptions)
   LOAD_SYMBOL(_lantern_sparse_coo_tensor_intarrayref_tensoroptions)
   LOAD_SYMBOL(_lantern_sparse_coo_tensor_tensor_tensor_tensoroptions)
   LOAD_SYMBOL(_lantern_sparse_coo_tensor_tensor_tensor_intarrayref_tensoroptions)
   LOAD_SYMBOL(_lantern__sparse_coo_tensor_unsafe_tensor_tensor_intarrayref_tensoroptions)
   LOAD_SYMBOL(_lantern__validate_sparse_coo_tensor_args_tensor_tensor_intarrayref)
+  LOAD_SYMBOL(_lantern__validate_sparse_compressed_tensor_args_tensor_tensor_tensor_intarrayref_layout)
   LOAD_SYMBOL(_lantern__validate_sparse_csr_tensor_args_tensor_tensor_tensor_intarrayref)
+  LOAD_SYMBOL(_lantern__validate_sparse_csc_tensor_args_tensor_tensor_tensor_intarrayref)
+  LOAD_SYMBOL(_lantern__validate_sparse_bsr_tensor_args_tensor_tensor_tensor_intarrayref)
+  LOAD_SYMBOL(_lantern__validate_sparse_bsc_tensor_args_tensor_tensor_tensor_intarrayref)
   LOAD_SYMBOL(_lantern__sparse_coo_tensor_with_dims_intt_intt_intarrayref_tensoroptions)
   LOAD_SYMBOL(_lantern__sparse_coo_tensor_with_dims_and_tensors_intt_intt_intarrayref_tensor_tensor_tensoroptions)
   LOAD_SYMBOL(_lantern_Tensor_sparse_resize__tensor_intarrayref_intt_intt)
@@ -9837,6 +10536,7 @@ LOAD_SYMBOL(_lantern_cuda_synchronize);
   LOAD_SYMBOL(_lantern_Tensor_sparse_mask_tensor_tensor)
   LOAD_SYMBOL(_lantern__to_cpu_tensorlist)
   LOAD_SYMBOL(_lantern_Tensor_to_dense_tensor_scalartype)
+  LOAD_SYMBOL(_lantern_Tensor__to_dense_tensor_scalartype)
   LOAD_SYMBOL(_lantern_to_dense_backward_tensor_tensor)
   LOAD_SYMBOL(_lantern_Tensor_sparse_dim_tensor)
   LOAD_SYMBOL(_lantern_Tensor__dimi_tensor)
@@ -9853,6 +10553,8 @@ LOAD_SYMBOL(_lantern_cuda_synchronize);
   LOAD_SYMBOL(_lantern_Tensor_values_tensor)
   LOAD_SYMBOL(_lantern_Tensor_crow_indices_tensor)
   LOAD_SYMBOL(_lantern_Tensor_col_indices_tensor)
+  LOAD_SYMBOL(_lantern_Tensor_ccol_indices_tensor)
+  LOAD_SYMBOL(_lantern_Tensor_row_indices_tensor)
   LOAD_SYMBOL(_lantern_hspmm_out_tensor_tensor_tensor)
   LOAD_SYMBOL(_lantern_hspmm_tensor_tensor)
   LOAD_SYMBOL(_lantern_copy_sparse_to_sparse__tensor_tensor_bool)
@@ -9862,6 +10564,10 @@ LOAD_SYMBOL(_lantern_cuda_synchronize);
   LOAD_SYMBOL(_lantern_Tensor_unbind_tensor_dimname)
   LOAD_SYMBOL(_lantern_Tensor_to_sparse_tensor_intt)
   LOAD_SYMBOL(_lantern_Tensor_to_sparse_tensor)
+  LOAD_SYMBOL(_lantern_Tensor_to_sparse_csr_tensor)
+  LOAD_SYMBOL(_lantern_Tensor_to_sparse_csc_tensor)
+  LOAD_SYMBOL(_lantern_Tensor_to_sparse_bsr_tensor_intarrayref)
+  LOAD_SYMBOL(_lantern_Tensor_to_sparse_bsc_tensor_intarrayref)
   LOAD_SYMBOL(_lantern_Tensor_to_mkldnn_tensor_scalartype)
   LOAD_SYMBOL(_lantern_mkldnn_reorder_conv2d_weight_tensor_intarrayref_intarrayref_intarrayref_intt)
   LOAD_SYMBOL(_lantern_mkldnn_reorder_conv3d_weight_tensor_intarrayref_intarrayref_intarrayref_intt)
@@ -9925,7 +10631,10 @@ LOAD_SYMBOL(_lantern_cuda_synchronize);
   LOAD_SYMBOL(_lantern_can_cast_scalartype_scalartype)
   LOAD_SYMBOL(_lantern_promote_types_scalartype_scalartype)
   LOAD_SYMBOL(_lantern__local_scalar_dense_tensor)
+  LOAD_SYMBOL(_lantern__lstm_mps_tensor_tensorlist_tensorlist_bool_intt_double_bool_bool_bool)
+  LOAD_SYMBOL(_lantern_lstm_mps_backward_tensor_tensor_tensor_tensor_tensor_tensor_tensorlist_tensorlist_bool_intt_double_bool_bool_bool)
   LOAD_SYMBOL(_lantern__thnn_fused_lstm_cell_tensor_tensor_tensor_tensor_tensor)
+  LOAD_SYMBOL(_lantern__thnn_fused_lstm_cell_backward_impl_tensor_tensor_tensor_tensor_tensor_bool)
   LOAD_SYMBOL(_lantern__thnn_fused_lstm_cell_backward_tensor_tensor_tensor_tensor_tensor_bool)
   LOAD_SYMBOL(_lantern__thnn_differentiable_lstm_cell_backward_tensor_tensor_tensor_tensor_tensor_tensor_tensor_tensor)
   LOAD_SYMBOL(_lantern__thnn_fused_gru_cell_tensor_tensor_tensor_tensor_tensor)
@@ -9952,8 +10661,10 @@ LOAD_SYMBOL(_lantern_cuda_synchronize);
   LOAD_SYMBOL(_lantern__pad_packed_sequence_tensor_tensor_bool_scalar_intt)
   LOAD_SYMBOL(_lantern_Tensor_set__tensor_storage)
   LOAD_SYMBOL(_lantern_Tensor_set__tensor_storage_intt_intarrayref_intarrayref)
+  LOAD_SYMBOL(_lantern_Tensor_set__tensor_tensor_intt_intarrayref_intarrayref)
   LOAD_SYMBOL(_lantern_Tensor_set__tensor_tensor)
   LOAD_SYMBOL(_lantern_Tensor_set__tensor)
+  LOAD_SYMBOL(_lantern_Tensor_lift_tensor)
   LOAD_SYMBOL(_lantern_Tensor_is_set_to_tensor_tensor)
   LOAD_SYMBOL(_lantern_Tensor_masked_fill__tensor_tensor_scalar)
   LOAD_SYMBOL(_lantern_masked_fill_tensor_tensor_scalar)
@@ -9964,7 +10675,8 @@ LOAD_SYMBOL(_lantern_cuda_synchronize);
   LOAD_SYMBOL(_lantern_Tensor_masked_scatter__tensor_tensor_tensor)
   LOAD_SYMBOL(_lantern_masked_scatter_tensor_tensor_tensor)
   LOAD_SYMBOL(_lantern_Tensor_masked_scatter_tensor_tensor_tensor)
-  LOAD_SYMBOL(_lantern__masked_softmax_tensor_tensor)
+  LOAD_SYMBOL(_lantern__masked_softmax_tensor_tensor_intt)
+  LOAD_SYMBOL(_lantern__masked_softmax_backward_tensor_tensor_tensor_intt)
   LOAD_SYMBOL(_lantern_Tensor_view_tensor_intarrayref)
   LOAD_SYMBOL(_lantern_Tensor_view_tensor_scalartype)
   LOAD_SYMBOL(_lantern_Tensor_put__tensor_tensor_tensor_bool)
@@ -9976,6 +10688,10 @@ LOAD_SYMBOL(_lantern_cuda_synchronize);
   LOAD_SYMBOL(_lantern_Tensor_index_add_tensor_intt_tensor_tensor_scalar)
   LOAD_SYMBOL(_lantern_index_add_tensor_dimname_tensor_tensor_scalar)
   LOAD_SYMBOL(_lantern_Tensor_index_add_tensor_dimname_tensor_tensor_scalar)
+  LOAD_SYMBOL(_lantern_index_reduce_out_tensor_tensor_intt_tensor_tensor_cstringview_bool)
+  LOAD_SYMBOL(_lantern_Tensor_index_reduce__tensor_intt_tensor_tensor_cstringview_bool)
+  LOAD_SYMBOL(_lantern_index_reduce_tensor_intt_tensor_tensor_cstringview_bool)
+  LOAD_SYMBOL(_lantern_Tensor_index_reduce_tensor_intt_tensor_tensor_cstringview_bool)
   LOAD_SYMBOL(_lantern_Tensor_index_fill__tensor_intt_tensor_scalar)
   LOAD_SYMBOL(_lantern_index_fill_tensor_intt_tensor_scalar)
   LOAD_SYMBOL(_lantern_Tensor_index_fill_tensor_intt_tensor_scalar)
@@ -10014,14 +10730,17 @@ LOAD_SYMBOL(_lantern_cuda_synchronize);
   LOAD_SYMBOL(_lantern_scatter_add_out_tensor_tensor_intt_tensor_tensor)
   LOAD_SYMBOL(_lantern_scatter_add_tensor_dimname_tensor_tensor)
   LOAD_SYMBOL(_lantern_Tensor_scatter_add_tensor_dimname_tensor_tensor)
-  LOAD_SYMBOL(_lantern_scatter_reduce_tensor_intt_tensor_cstringview_intt)
-  LOAD_SYMBOL(_lantern_Tensor_scatter_reduce_tensor_intt_tensor_cstringview_intt)
+  LOAD_SYMBOL(_lantern_scatter_reduce_tensor_intt_tensor_tensor_cstringview_bool)
+  LOAD_SYMBOL(_lantern_Tensor_scatter_reduce_tensor_intt_tensor_tensor_cstringview_bool)
+  LOAD_SYMBOL(_lantern_Tensor_scatter_reduce__tensor_intt_tensor_tensor_cstringview_bool)
+  LOAD_SYMBOL(_lantern_scatter_reduce_out_tensor_tensor_intt_tensor_tensor_cstringview_bool)
   LOAD_SYMBOL(_lantern_Tensor_eq__tensor_scalar)
   LOAD_SYMBOL(_lantern_Tensor_eq__tensor_tensor)
   LOAD_SYMBOL(_lantern_bitwise_and_out_tensor_tensor_tensor)
   LOAD_SYMBOL(_lantern_bitwise_and_out_tensor_tensor_scalar)
   LOAD_SYMBOL(_lantern_bitwise_and_tensor_scalar)
   LOAD_SYMBOL(_lantern_Tensor_bitwise_and_tensor_scalar)
+  LOAD_SYMBOL(_lantern_bitwise_and_scalar_tensor)
   LOAD_SYMBOL(_lantern_bitwise_and_tensor_tensor)
   LOAD_SYMBOL(_lantern_Tensor_bitwise_and_tensor_tensor)
   LOAD_SYMBOL(_lantern_Tensor_bitwise_and__tensor_scalar)
@@ -10036,6 +10755,7 @@ LOAD_SYMBOL(_lantern_cuda_synchronize);
   LOAD_SYMBOL(_lantern_bitwise_or_out_tensor_tensor_scalar)
   LOAD_SYMBOL(_lantern_bitwise_or_tensor_scalar)
   LOAD_SYMBOL(_lantern_Tensor_bitwise_or_tensor_scalar)
+  LOAD_SYMBOL(_lantern_bitwise_or_scalar_tensor)
   LOAD_SYMBOL(_lantern_bitwise_or_tensor_tensor)
   LOAD_SYMBOL(_lantern_Tensor_bitwise_or_tensor_tensor)
   LOAD_SYMBOL(_lantern_Tensor_bitwise_or__tensor_scalar)
@@ -10050,6 +10770,7 @@ LOAD_SYMBOL(_lantern_cuda_synchronize);
   LOAD_SYMBOL(_lantern_bitwise_xor_out_tensor_tensor_scalar)
   LOAD_SYMBOL(_lantern_bitwise_xor_tensor_scalar)
   LOAD_SYMBOL(_lantern_Tensor_bitwise_xor_tensor_scalar)
+  LOAD_SYMBOL(_lantern_bitwise_xor_scalar_tensor)
   LOAD_SYMBOL(_lantern_bitwise_xor_tensor_tensor)
   LOAD_SYMBOL(_lantern_Tensor_bitwise_xor_tensor_tensor)
   LOAD_SYMBOL(_lantern_Tensor_bitwise_xor__tensor_scalar)
@@ -10261,7 +10982,7 @@ LOAD_SYMBOL(_lantern_cuda_synchronize);
   LOAD_SYMBOL(_lantern__linalg_check_errors_tensor_cstringview_bool)
   LOAD_SYMBOL(_lantern_linalg_solve_triangular_out_tensor_tensor_tensor_bool_bool_bool)
   LOAD_SYMBOL(_lantern_linalg_solve_triangular_tensor_tensor_bool_bool_bool)
-  LOAD_SYMBOL(_lantern_Tensor_linalg_solve_triangular_tensor_tensor_bool_bool_bool)
+  LOAD_SYMBOL(_lantern_linalg_vander_tensor_intt)
   LOAD_SYMBOL(_lantern_symeig_out_tensor_tensor_tensor_bool_bool)
   LOAD_SYMBOL(_lantern_symeig_tensor_bool_bool)
   LOAD_SYMBOL(_lantern_Tensor_symeig_tensor_bool_bool)
@@ -10285,10 +11006,6 @@ LOAD_SYMBOL(_lantern_cuda_synchronize);
   LOAD_SYMBOL(_lantern_cholesky_solve_tensor_tensor_bool)
   LOAD_SYMBOL(_lantern_Tensor_cholesky_solve_tensor_tensor_bool)
   LOAD_SYMBOL(_lantern__cholesky_solve_helper_tensor_tensor_bool)
-  LOAD_SYMBOL(_lantern_solve_tensor_tensor)
-  LOAD_SYMBOL(_lantern_Tensor_solve_tensor_tensor)
-  LOAD_SYMBOL(_lantern_solve_out_tensor_tensor_tensor_tensor)
-  LOAD_SYMBOL(_lantern__solve_helper_tensor_tensor)
   LOAD_SYMBOL(_lantern_cholesky_inverse_tensor_bool)
   LOAD_SYMBOL(_lantern_Tensor_cholesky_inverse_tensor_bool)
   LOAD_SYMBOL(_lantern_cholesky_inverse_out_tensor_tensor_bool)
@@ -10366,6 +11083,9 @@ LOAD_SYMBOL(_lantern_cuda_synchronize);
   LOAD_SYMBOL(_lantern__histogramdd_bin_edges_tensor_intarrayref_arrayrefdouble_tensor_bool)
   LOAD_SYMBOL(_lantern__histogramdd_from_bin_cts_tensor_intarrayref_arrayrefdouble_tensor_bool)
   LOAD_SYMBOL(_lantern__histogramdd_from_bin_tensors_tensor_tensorlist_tensor_bool)
+  LOAD_SYMBOL(_lantern_histogramdd_tensor_intarrayref_arrayrefdouble_tensor_bool)
+  LOAD_SYMBOL(_lantern_histogramdd_tensor_intt_arrayrefdouble_tensor_bool)
+  LOAD_SYMBOL(_lantern_histogramdd_tensor_tensorlist_arrayrefdouble_tensor_bool)
   LOAD_SYMBOL(_lantern_fmod_out_tensor_tensor_scalar)
   LOAD_SYMBOL(_lantern_fmod_tensor_scalar)
   LOAD_SYMBOL(_lantern_Tensor_fmod_tensor_scalar)
@@ -10496,11 +11216,8 @@ LOAD_SYMBOL(_lantern_cuda_synchronize);
   LOAD_SYMBOL(_lantern_normal_out_tensor_double_double_intarrayref_generator)
   LOAD_SYMBOL(_lantern_alias_tensor)
   LOAD_SYMBOL(_lantern_Tensor_alias_tensor)
-  LOAD_SYMBOL(_lantern__index_copy__tensor_intt_tensor_tensor)
   LOAD_SYMBOL(_lantern__amp_foreach_non_finite_check_and_unscale__tensorlist_tensor_tensor)
   LOAD_SYMBOL(_lantern__amp_update_scale__tensor_tensor_tensor_double_double_intt)
-  LOAD_SYMBOL(_lantern__cat_tensorlist_intt)
-  LOAD_SYMBOL(_lantern__cat_out_tensor_tensorlist_intt)
   LOAD_SYMBOL(_lantern__foreach_add_tensorlist_scalar)
   LOAD_SYMBOL(_lantern__foreach_add__tensorlist_scalar)
   LOAD_SYMBOL(_lantern__foreach_sub_tensorlist_scalar)
@@ -10656,6 +11373,8 @@ LOAD_SYMBOL(_lantern_cuda_synchronize);
   LOAD_SYMBOL(_lantern_glu_tensor_intt)
   LOAD_SYMBOL(_lantern_glu_backward_out_tensor_tensor_tensor_intt)
   LOAD_SYMBOL(_lantern_glu_backward_tensor_tensor_intt)
+  LOAD_SYMBOL(_lantern_glu_jvp_tensor_tensor_tensor_intt)
+  LOAD_SYMBOL(_lantern_glu_backward_jvp_tensor_tensor_tensor_tensor_tensor_intt)
   LOAD_SYMBOL(_lantern_hardsigmoid_out_tensor_tensor)
   LOAD_SYMBOL(_lantern_hardsigmoid_tensor)
   LOAD_SYMBOL(_lantern_hardsigmoid__tensor)
@@ -10738,12 +11457,8 @@ LOAD_SYMBOL(_lantern_cuda_synchronize);
   LOAD_SYMBOL(_lantern_max_pool3d_with_indices_backward_tensor_tensor_intarrayref_intarrayref_intarrayref_intarrayref_bool_tensor)
   LOAD_SYMBOL(_lantern_max_unpool2d_out_tensor_tensor_tensor_intarrayref)
   LOAD_SYMBOL(_lantern_max_unpool2d_tensor_tensor_intarrayref)
-  LOAD_SYMBOL(_lantern_max_unpool2d_backward_out_tensor_tensor_tensor_tensor_intarrayref)
-  LOAD_SYMBOL(_lantern_max_unpool2d_backward_tensor_tensor_tensor_intarrayref)
   LOAD_SYMBOL(_lantern_max_unpool3d_out_tensor_tensor_tensor_intarrayref_intarrayref_intarrayref)
   LOAD_SYMBOL(_lantern_max_unpool3d_tensor_tensor_intarrayref_intarrayref_intarrayref)
-  LOAD_SYMBOL(_lantern_max_unpool3d_backward_out_tensor_tensor_tensor_tensor_intarrayref_intarrayref_intarrayref)
-  LOAD_SYMBOL(_lantern_max_unpool3d_backward_tensor_tensor_tensor_intarrayref_intarrayref_intarrayref)
   LOAD_SYMBOL(_lantern_reflection_pad1d_out_tensor_tensor_intarrayref)
   LOAD_SYMBOL(_lantern_reflection_pad1d_tensor_intarrayref)
   LOAD_SYMBOL(_lantern_reflection_pad1d_backward_out_tensor_tensor_tensor_intarrayref)
@@ -10768,6 +11483,9 @@ LOAD_SYMBOL(_lantern_cuda_synchronize);
   LOAD_SYMBOL(_lantern_replication_pad3d_tensor_intarrayref)
   LOAD_SYMBOL(_lantern_replication_pad3d_backward_out_tensor_tensor_tensor_intarrayref)
   LOAD_SYMBOL(_lantern_replication_pad3d_backward_tensor_tensor_intarrayref)
+  LOAD_SYMBOL(_lantern__pad_circular_tensor_intarrayref)
+  LOAD_SYMBOL(_lantern__pad_enum_tensor_intarrayref_intt_double)
+  LOAD_SYMBOL(_lantern_pad_tensor_intarrayref_cstringview_double)
   LOAD_SYMBOL(_lantern_upsample_linear1d_tensor_intarrayref_bool_arrayrefdouble)
   LOAD_SYMBOL(_lantern_upsample_linear1d_backward_tensor_intarrayref_intarrayref_bool_arrayrefdouble)
   LOAD_SYMBOL(_lantern_upsample_bilinear2d_tensor_intarrayref_bool_arrayrefdouble)
@@ -10892,6 +11610,8 @@ LOAD_SYMBOL(_lantern_cuda_synchronize);
   LOAD_SYMBOL(_lantern_special_entr_out_tensor_tensor)
   LOAD_SYMBOL(_lantern_special_ndtri_tensor)
   LOAD_SYMBOL(_lantern_special_ndtri_out_tensor_tensor)
+  LOAD_SYMBOL(_lantern_special_log_ndtr_tensor)
+  LOAD_SYMBOL(_lantern_special_log_ndtr_out_tensor_tensor)
   LOAD_SYMBOL(_lantern_special_expm1_tensor)
   LOAD_SYMBOL(_lantern_special_expm1_out_tensor_tensor)
   LOAD_SYMBOL(_lantern_special_exp2_tensor)
@@ -11011,12 +11731,20 @@ LOAD_SYMBOL(_lantern_cuda_synchronize);
   LOAD_SYMBOL(_lantern_linalg_lu_factor_out_tensor_tensor_tensor_bool)
   LOAD_SYMBOL(_lantern_linalg_lu_factor_ex_tensor_bool_bool)
   LOAD_SYMBOL(_lantern_linalg_lu_factor_ex_out_tensor_tensor_tensor_tensor_bool_bool)
+  LOAD_SYMBOL(_lantern_linalg_lu_tensor_bool)
+  LOAD_SYMBOL(_lantern_linalg_lu_out_tensor_tensor_tensor_tensor_bool)
   LOAD_SYMBOL(_lantern_linalg_det_tensor)
   LOAD_SYMBOL(_lantern_linalg_det_out_tensor_tensor)
   LOAD_SYMBOL(_lantern_det_tensor)
   LOAD_SYMBOL(_lantern_Tensor_det_tensor)
   LOAD_SYMBOL(_lantern__det_lu_based_helper_tensor)
   LOAD_SYMBOL(_lantern__det_lu_based_helper_backward_helper_tensor_tensor_tensor_tensor_tensor)
+  LOAD_SYMBOL(_lantern_linalg_ldl_factor_ex_tensor_bool_bool)
+  LOAD_SYMBOL(_lantern_linalg_ldl_factor_ex_out_tensor_tensor_tensor_tensor_bool_bool)
+  LOAD_SYMBOL(_lantern_linalg_ldl_factor_tensor_bool)
+  LOAD_SYMBOL(_lantern_linalg_ldl_factor_out_tensor_tensor_tensor_bool)
+  LOAD_SYMBOL(_lantern_linalg_ldl_solve_tensor_tensor_tensor_bool)
+  LOAD_SYMBOL(_lantern_linalg_ldl_solve_out_tensor_tensor_tensor_tensor_bool)
   LOAD_SYMBOL(_lantern_linalg_lstsq_tensor_tensor_double_cstringview)
   LOAD_SYMBOL(_lantern_linalg_lstsq_out_tensor_tensor_tensor_tensor_tensor_tensor_double_cstringview)
   LOAD_SYMBOL(_lantern_linalg_matmul_tensor_tensor)
@@ -11110,6 +11838,253 @@ LOAD_SYMBOL(_lantern_cuda_synchronize);
   LOAD_SYMBOL(_lantern_pad_sequence_tensorlist_bool_double)
   LOAD_SYMBOL(_lantern_flatten_dense_tensors_tensorlist)
   LOAD_SYMBOL(_lantern_unflatten_dense_tensors_tensor_tensorlist)
+  LOAD_SYMBOL(_lantern_nested_tensor_tensorlist_scalartype_layout_device_bool)
+  LOAD_SYMBOL(_lantern__fw_primal_copy_tensor_intt)
+  LOAD_SYMBOL(_lantern__make_dual_copy_tensor_tensor_intt)
+  LOAD_SYMBOL(_lantern_view_as_real_copy_tensor)
+  LOAD_SYMBOL(_lantern_view_as_complex_copy_tensor)
+  LOAD_SYMBOL(_lantern__conj_copy_tensor)
+  LOAD_SYMBOL(_lantern__neg_view_copy_tensor)
+  LOAD_SYMBOL(_lantern_as_strided_copy_tensor_intarrayref_intarrayref_intt)
+  LOAD_SYMBOL(_lantern__sparse_broadcast_to_copy_tensor_intarrayref)
+  LOAD_SYMBOL(_lantern_diagonal_copy_tensor_intt_intt_intt)
+  LOAD_SYMBOL(_lantern_expand_copy_tensor_intarrayref_bool)
+  LOAD_SYMBOL(_lantern_expand_copy_tensor_csymintarrayref_bool)
+  LOAD_SYMBOL(_lantern_permute_copy_tensor_intarrayref)
+  LOAD_SYMBOL(_lantern__reshape_alias_copy_tensor_intarrayref_intarrayref)
+  LOAD_SYMBOL(_lantern_select_copy_tensor_intt_intt)
+  LOAD_SYMBOL(_lantern_detach_copy_tensor)
+  LOAD_SYMBOL(_lantern_slice_copy_tensor_intt_intt_intt_intt)
+  LOAD_SYMBOL(_lantern_split_copy_tensor_intt_intt)
+  LOAD_SYMBOL(_lantern_split_with_sizes_copy_tensor_intarrayref_intt)
+  LOAD_SYMBOL(_lantern_squeeze_copy_tensor)
+  LOAD_SYMBOL(_lantern_squeeze_copy_tensor_intt)
+  LOAD_SYMBOL(_lantern_t_copy_tensor)
+  LOAD_SYMBOL(_lantern_transpose_copy_tensor_intt_intt)
+  LOAD_SYMBOL(_lantern_unsqueeze_copy_tensor_intt)
+  LOAD_SYMBOL(_lantern__indices_copy_tensor)
+  LOAD_SYMBOL(_lantern__values_copy_tensor)
+  LOAD_SYMBOL(_lantern_indices_copy_tensor)
+  LOAD_SYMBOL(_lantern_values_copy_tensor)
+  LOAD_SYMBOL(_lantern_crow_indices_copy_tensor)
+  LOAD_SYMBOL(_lantern_col_indices_copy_tensor)
+  LOAD_SYMBOL(_lantern_ccol_indices_copy_tensor)
+  LOAD_SYMBOL(_lantern_row_indices_copy_tensor)
+  LOAD_SYMBOL(_lantern_unbind_copy_tensor_intt)
+  LOAD_SYMBOL(_lantern_view_copy_tensor_intarrayref)
+  LOAD_SYMBOL(_lantern_view_copy_tensor_scalartype)
+  LOAD_SYMBOL(_lantern_unfold_copy_tensor_intt_intt_intt)
+  LOAD_SYMBOL(_lantern_alias_copy_tensor)
+  LOAD_SYMBOL(_lantern__fw_primal_copy_out_tensor_tensor_intt)
+  LOAD_SYMBOL(_lantern__make_dual_copy_out_tensor_tensor_tensor_intt)
+  LOAD_SYMBOL(_lantern_view_as_real_copy_out_tensor_tensor)
+  LOAD_SYMBOL(_lantern_view_as_complex_copy_out_tensor_tensor)
+  LOAD_SYMBOL(_lantern__conj_copy_out_tensor_tensor)
+  LOAD_SYMBOL(_lantern__neg_view_copy_out_tensor_tensor)
+  LOAD_SYMBOL(_lantern_as_strided_copy_out_tensor_tensor_intarrayref_intarrayref_intt)
+  LOAD_SYMBOL(_lantern__sparse_broadcast_to_copy_out_tensor_tensor_intarrayref)
+  LOAD_SYMBOL(_lantern_diagonal_copy_out_tensor_tensor_intt_intt_intt)
+  LOAD_SYMBOL(_lantern_expand_copy_out_tensor_tensor_csymintarrayref_bool)
+  LOAD_SYMBOL(_lantern_expand_copy_out_tensor_tensor_intarrayref_bool)
+  LOAD_SYMBOL(_lantern_permute_copy_out_tensor_tensor_intarrayref)
+  LOAD_SYMBOL(_lantern__reshape_alias_copy_out_tensor_tensor_intarrayref_intarrayref)
+  LOAD_SYMBOL(_lantern_select_copy_out_tensor_tensor_intt_intt)
+  LOAD_SYMBOL(_lantern_detach_copy_out_tensor_tensor)
+  LOAD_SYMBOL(_lantern_slice_copy_out_tensor_tensor_intt_intt_intt_intt)
+  LOAD_SYMBOL(_lantern_split_copy_out_tensorlist_tensor_intt_intt)
+  LOAD_SYMBOL(_lantern_split_with_sizes_copy_out_tensorlist_tensor_intarrayref_intt)
+  LOAD_SYMBOL(_lantern_squeeze_copy_out_tensor_tensor)
+  LOAD_SYMBOL(_lantern_squeeze_copy_out_tensor_tensor_intt)
+  LOAD_SYMBOL(_lantern_t_copy_out_tensor_tensor)
+  LOAD_SYMBOL(_lantern_transpose_copy_out_tensor_tensor_intt_intt)
+  LOAD_SYMBOL(_lantern_unsqueeze_copy_out_tensor_tensor_intt)
+  LOAD_SYMBOL(_lantern__indices_copy_out_tensor_tensor)
+  LOAD_SYMBOL(_lantern__values_copy_out_tensor_tensor)
+  LOAD_SYMBOL(_lantern_indices_copy_out_tensor_tensor)
+  LOAD_SYMBOL(_lantern_values_copy_out_tensor_tensor)
+  LOAD_SYMBOL(_lantern_crow_indices_copy_out_tensor_tensor)
+  LOAD_SYMBOL(_lantern_col_indices_copy_out_tensor_tensor)
+  LOAD_SYMBOL(_lantern_unbind_copy_out_tensorlist_tensor_intt)
+  LOAD_SYMBOL(_lantern_view_copy_out_tensor_tensor_intarrayref)
+  LOAD_SYMBOL(_lantern_view_copy_out_tensor_tensor_scalartype)
+  LOAD_SYMBOL(_lantern_unfold_copy_out_tensor_tensor_intt_intt_intt)
+  LOAD_SYMBOL(_lantern_alias_copy_out_tensor_tensor)
+  LOAD_SYMBOL(_lantern_Tensor_to_padded_tensor_tensor_double_intarrayref)
+  LOAD_SYMBOL(_lantern_Tensor__nested_tensor_layer_norm_tensor_tensor_tensor_double)
+  LOAD_SYMBOL(_lantern__transformer_encoder_layer_fwd_tensor_intt_intt_tensor_tensor_tensor_tensor_bool_bool_double_tensor_tensor_tensor_tensor_tensor_tensor_tensor_tensor_tensor)
+  LOAD_SYMBOL(_lantern__native_multi_head_attention_tensor_tensor_tensor_intt_intt_tensor_tensor_tensor_tensor_tensor_bool_bool)
+  LOAD_SYMBOL(_lantern__add_relu_out_tensor_tensor_scalar_scalar)
+  LOAD_SYMBOL(_lantern_add_out_tensor_tensor_scalar_scalar)
+  LOAD_SYMBOL(_lantern_bernoulli_out_tensor_tensor_tensor_generator)
+  LOAD_SYMBOL(_lantern_bernoulli_functional_tensor_tensor_generator)
+  LOAD_SYMBOL(_lantern_bernoulli_out_tensor_tensor_double_generator)
+  LOAD_SYMBOL(_lantern_copy_out_tensor_tensor_tensor_bool)
+  LOAD_SYMBOL(_lantern_div_out_tensor_tensor_scalar)
+  LOAD_SYMBOL(_lantern_div_out_tensor_tensor_scalar_cstringview)
+  LOAD_SYMBOL(_lantern_embedding_renorm_out_tensor_tensor_tensor_double_double)
+  LOAD_SYMBOL(_lantern_embedding_renorm_functional_tensor_tensor_double_double)
+  LOAD_SYMBOL(_lantern_resize_out_tensor_tensor_intarrayref_memoryformat)
+  LOAD_SYMBOL(_lantern_resize_functional_tensor_intarrayref_memoryformat)
+  LOAD_SYMBOL(_lantern__resize_output_out_tensor_tensor_intarrayref_device)
+  LOAD_SYMBOL(_lantern__resize_output_functional_tensor_intarrayref_device)
+  LOAD_SYMBOL(_lantern_fill_out_tensor_tensor_scalar)
+  LOAD_SYMBOL(_lantern_fill_out_tensor_tensor_tensor)
+  LOAD_SYMBOL(_lantern_index_put_out_tensor_tensor_constclistcoptionaltensor_tensor_bool)
+  LOAD_SYMBOL(_lantern__index_put_impl_out_tensor_tensor_constclistcoptionaltensor_tensor_bool_bool)
+  LOAD_SYMBOL(_lantern__index_put_impl_functional_tensor_constclistcoptionaltensor_tensor_bool_bool)
+  LOAD_SYMBOL(_lantern_mul_out_tensor_tensor_scalar)
+  LOAD_SYMBOL(_lantern_relu_out_tensor_tensor)
+  LOAD_SYMBOL(_lantern_celu_out_tensor_tensor_scalar)
+  LOAD_SYMBOL(_lantern__mkldnn_transpose_out_tensor_tensor_intt_intt)
+  LOAD_SYMBOL(_lantern_resize_as_out_tensor_tensor_tensor_memoryformat)
+  LOAD_SYMBOL(_lantern_resize_as_functional_tensor_tensor_memoryformat)
+  LOAD_SYMBOL(_lantern_resize_as_sparse_out_tensor_tensor_tensor)
+  LOAD_SYMBOL(_lantern_resize_as_sparse_functional_tensor_tensor)
+  LOAD_SYMBOL(_lantern_zero_out_tensor_tensor)
+  LOAD_SYMBOL(_lantern_zero_functional_tensor)
+  LOAD_SYMBOL(_lantern_sub_out_tensor_tensor_scalar_scalar)
+  LOAD_SYMBOL(_lantern_sparse_resize_out_tensor_tensor_intarrayref_intt_intt)
+  LOAD_SYMBOL(_lantern_sparse_resize_functional_tensor_intarrayref_intt_intt)
+  LOAD_SYMBOL(_lantern_sparse_resize_and_clear_out_tensor_tensor_intarrayref_intt_intt)
+  LOAD_SYMBOL(_lantern_sparse_resize_and_clear_functional_tensor_intarrayref_intt_intt)
+  LOAD_SYMBOL(_lantern__coalesced_out_tensor_tensor_bool)
+  LOAD_SYMBOL(_lantern__coalesced_functional_tensor_bool)
+  LOAD_SYMBOL(_lantern_copy_sparse_to_sparse_out_tensor_tensor_tensor_bool)
+  LOAD_SYMBOL(_lantern_copy_sparse_to_sparse_functional_tensor_tensor_bool)
+  LOAD_SYMBOL(_lantern__fused_moving_avg_obs_fq_helper_out_tensor_tensor_tensor_tensor_tensor_tensor_tensor_tensor_tensor_double_intt_intt_intt_bool_bool)
+  LOAD_SYMBOL(_lantern__fused_moving_avg_obs_fq_helper_functional_tensor_tensor_tensor_tensor_tensor_tensor_tensor_double_intt_intt_intt_bool_bool)
+  LOAD_SYMBOL(_lantern_set_out_tensor_tensor_storage)
+  LOAD_SYMBOL(_lantern_set_functional_tensor_storage)
+  LOAD_SYMBOL(_lantern_set_out_tensor_tensor_storage_intt_intarrayref_intarrayref)
+  LOAD_SYMBOL(_lantern_set_functional_tensor_storage_intt_intarrayref_intarrayref)
+  LOAD_SYMBOL(_lantern_set_out_tensor_tensor_tensor)
+  LOAD_SYMBOL(_lantern_set_functional_tensor_tensor)
+  LOAD_SYMBOL(_lantern_set_out_tensor_tensor)
+  LOAD_SYMBOL(_lantern_set_functional_tensor)
+  LOAD_SYMBOL(_lantern_masked_fill_out_tensor_tensor_tensor_scalar)
+  LOAD_SYMBOL(_lantern_masked_fill_out_tensor_tensor_tensor_tensor)
+  LOAD_SYMBOL(_lantern_masked_scatter_out_tensor_tensor_tensor_tensor)
+  LOAD_SYMBOL(_lantern_put_out_tensor_tensor_tensor_tensor_bool)
+  LOAD_SYMBOL(_lantern_index_fill_out_tensor_tensor_intt_tensor_scalar)
+  LOAD_SYMBOL(_lantern_index_fill_out_tensor_tensor_intt_tensor_tensor)
+  LOAD_SYMBOL(_lantern___lshift___out_tensor_tensor_scalar)
+  LOAD_SYMBOL(_lantern___lshift___out_tensor_tensor_tensor)
+  LOAD_SYMBOL(_lantern___rshift___out_tensor_tensor_scalar)
+  LOAD_SYMBOL(_lantern___rshift___out_tensor_tensor_tensor)
+  LOAD_SYMBOL(_lantern_random_out_tensor_tensor_intt_intt_generator)
+  LOAD_SYMBOL(_lantern_random_functional_tensor_intt_intt_generator)
+  LOAD_SYMBOL(_lantern_random_out_tensor_tensor_intt_generator)
+  LOAD_SYMBOL(_lantern_random_functional_tensor_intt_generator)
+  LOAD_SYMBOL(_lantern_random_out_tensor_tensor_generator)
+  LOAD_SYMBOL(_lantern_random_functional_tensor_generator)
+  LOAD_SYMBOL(_lantern_uniform_out_tensor_tensor_double_double_generator)
+  LOAD_SYMBOL(_lantern_uniform_functional_tensor_double_double_generator)
+  LOAD_SYMBOL(_lantern_cauchy_out_tensor_tensor_double_double_generator)
+  LOAD_SYMBOL(_lantern_cauchy_functional_tensor_double_double_generator)
+  LOAD_SYMBOL(_lantern_log_normal_out_tensor_tensor_double_double_generator)
+  LOAD_SYMBOL(_lantern_log_normal_functional_tensor_double_double_generator)
+  LOAD_SYMBOL(_lantern_exponential_out_tensor_tensor_double_generator)
+  LOAD_SYMBOL(_lantern_exponential_functional_tensor_double_generator)
+  LOAD_SYMBOL(_lantern_geometric_out_tensor_tensor_double_generator)
+  LOAD_SYMBOL(_lantern_geometric_functional_tensor_double_generator)
+  LOAD_SYMBOL(_lantern_normal_out_tensor_tensor_double_double_generator)
+  LOAD_SYMBOL(_lantern_normal_functional_tensor_double_double_generator)
+  LOAD_SYMBOL(_lantern__amp_foreach_non_finite_check_and_unscale_out_tensorlist_tensorlist_tensor_tensor)
+  LOAD_SYMBOL(_lantern__amp_foreach_non_finite_check_and_unscale_functional_tensorlist_tensor_tensor)
+  LOAD_SYMBOL(_lantern__amp_update_scale_out_tensor_tensor_tensor_tensor_double_double_intt)
+  LOAD_SYMBOL(_lantern__amp_update_scale_functional_tensor_tensor_tensor_double_double_intt)
+  LOAD_SYMBOL(_lantern__foreach_add_out_tensorlist_tensorlist_scalar)
+  LOAD_SYMBOL(_lantern__foreach_add_functional_tensorlist_scalar)
+  LOAD_SYMBOL(_lantern__foreach_sub_out_tensorlist_tensorlist_scalar)
+  LOAD_SYMBOL(_lantern__foreach_sub_functional_tensorlist_scalar)
+  LOAD_SYMBOL(_lantern__foreach_mul_out_tensorlist_tensorlist_scalar)
+  LOAD_SYMBOL(_lantern__foreach_mul_functional_tensorlist_scalar)
+  LOAD_SYMBOL(_lantern__foreach_div_out_tensorlist_tensorlist_scalar)
+  LOAD_SYMBOL(_lantern__foreach_div_functional_tensorlist_scalar)
+  LOAD_SYMBOL(_lantern__foreach_add_out_tensorlist_tensorlist_tensorlist_scalar)
+  LOAD_SYMBOL(_lantern__foreach_add_functional_tensorlist_tensorlist_scalar)
+  LOAD_SYMBOL(_lantern__foreach_sub_out_tensorlist_tensorlist_tensorlist_scalar)
+  LOAD_SYMBOL(_lantern__foreach_sub_functional_tensorlist_tensorlist_scalar)
+  LOAD_SYMBOL(_lantern__foreach_mul_out_tensorlist_tensorlist_tensorlist)
+  LOAD_SYMBOL(_lantern__foreach_mul_functional_tensorlist_tensorlist)
+  LOAD_SYMBOL(_lantern__foreach_div_out_tensorlist_tensorlist_tensorlist)
+  LOAD_SYMBOL(_lantern__foreach_div_functional_tensorlist_tensorlist)
+  LOAD_SYMBOL(_lantern__foreach_add_out_tensorlist_tensorlist_arrayrefscalar)
+  LOAD_SYMBOL(_lantern__foreach_add_functional_tensorlist_arrayrefscalar)
+  LOAD_SYMBOL(_lantern__foreach_sub_out_tensorlist_tensorlist_arrayrefscalar)
+  LOAD_SYMBOL(_lantern__foreach_sub_functional_tensorlist_arrayrefscalar)
+  LOAD_SYMBOL(_lantern__foreach_div_out_tensorlist_tensorlist_arrayrefscalar)
+  LOAD_SYMBOL(_lantern__foreach_div_functional_tensorlist_arrayrefscalar)
+  LOAD_SYMBOL(_lantern__foreach_mul_out_tensorlist_tensorlist_arrayrefscalar)
+  LOAD_SYMBOL(_lantern__foreach_mul_functional_tensorlist_arrayrefscalar)
+  LOAD_SYMBOL(_lantern__foreach_zero_out_tensorlist_tensorlist)
+  LOAD_SYMBOL(_lantern__foreach_zero_functional_tensorlist)
+  LOAD_SYMBOL(_lantern__foreach_exp_out_tensorlist_tensorlist)
+  LOAD_SYMBOL(_lantern__foreach_exp_functional_tensorlist)
+  LOAD_SYMBOL(_lantern__foreach_sqrt_out_tensorlist_tensorlist)
+  LOAD_SYMBOL(_lantern__foreach_sqrt_functional_tensorlist)
+  LOAD_SYMBOL(_lantern__foreach_abs_out_tensorlist_tensorlist)
+  LOAD_SYMBOL(_lantern__foreach_abs_functional_tensorlist)
+  LOAD_SYMBOL(_lantern__foreach_acos_out_tensorlist_tensorlist)
+  LOAD_SYMBOL(_lantern__foreach_acos_functional_tensorlist)
+  LOAD_SYMBOL(_lantern__foreach_asin_out_tensorlist_tensorlist)
+  LOAD_SYMBOL(_lantern__foreach_asin_functional_tensorlist)
+  LOAD_SYMBOL(_lantern__foreach_atan_out_tensorlist_tensorlist)
+  LOAD_SYMBOL(_lantern__foreach_atan_functional_tensorlist)
+  LOAD_SYMBOL(_lantern__foreach_ceil_out_tensorlist_tensorlist)
+  LOAD_SYMBOL(_lantern__foreach_ceil_functional_tensorlist)
+  LOAD_SYMBOL(_lantern__foreach_cos_out_tensorlist_tensorlist)
+  LOAD_SYMBOL(_lantern__foreach_cos_functional_tensorlist)
+  LOAD_SYMBOL(_lantern__foreach_cosh_out_tensorlist_tensorlist)
+  LOAD_SYMBOL(_lantern__foreach_cosh_functional_tensorlist)
+  LOAD_SYMBOL(_lantern__foreach_erf_out_tensorlist_tensorlist)
+  LOAD_SYMBOL(_lantern__foreach_erf_functional_tensorlist)
+  LOAD_SYMBOL(_lantern__foreach_erfc_out_tensorlist_tensorlist)
+  LOAD_SYMBOL(_lantern__foreach_erfc_functional_tensorlist)
+  LOAD_SYMBOL(_lantern__foreach_expm1_out_tensorlist_tensorlist)
+  LOAD_SYMBOL(_lantern__foreach_expm1_functional_tensorlist)
+  LOAD_SYMBOL(_lantern__foreach_floor_out_tensorlist_tensorlist)
+  LOAD_SYMBOL(_lantern__foreach_floor_functional_tensorlist)
+  LOAD_SYMBOL(_lantern__foreach_log_out_tensorlist_tensorlist)
+  LOAD_SYMBOL(_lantern__foreach_log_functional_tensorlist)
+  LOAD_SYMBOL(_lantern__foreach_log10_out_tensorlist_tensorlist)
+  LOAD_SYMBOL(_lantern__foreach_log10_functional_tensorlist)
+  LOAD_SYMBOL(_lantern__foreach_log1p_out_tensorlist_tensorlist)
+  LOAD_SYMBOL(_lantern__foreach_log1p_functional_tensorlist)
+  LOAD_SYMBOL(_lantern__foreach_log2_out_tensorlist_tensorlist)
+  LOAD_SYMBOL(_lantern__foreach_log2_functional_tensorlist)
+  LOAD_SYMBOL(_lantern__foreach_neg_out_tensorlist_tensorlist)
+  LOAD_SYMBOL(_lantern__foreach_neg_functional_tensorlist)
+  LOAD_SYMBOL(_lantern__foreach_tan_out_tensorlist_tensorlist)
+  LOAD_SYMBOL(_lantern__foreach_tan_functional_tensorlist)
+  LOAD_SYMBOL(_lantern__foreach_tanh_out_tensorlist_tensorlist)
+  LOAD_SYMBOL(_lantern__foreach_tanh_functional_tensorlist)
+  LOAD_SYMBOL(_lantern__foreach_sin_out_tensorlist_tensorlist)
+  LOAD_SYMBOL(_lantern__foreach_sin_functional_tensorlist)
+  LOAD_SYMBOL(_lantern__foreach_sinh_out_tensorlist_tensorlist)
+  LOAD_SYMBOL(_lantern__foreach_sinh_functional_tensorlist)
+  LOAD_SYMBOL(_lantern__foreach_round_out_tensorlist_tensorlist)
+  LOAD_SYMBOL(_lantern__foreach_round_functional_tensorlist)
+  LOAD_SYMBOL(_lantern__foreach_lgamma_out_tensorlist_tensorlist)
+  LOAD_SYMBOL(_lantern__foreach_lgamma_functional_tensorlist)
+  LOAD_SYMBOL(_lantern__foreach_frac_out_tensorlist_tensorlist)
+  LOAD_SYMBOL(_lantern__foreach_frac_functional_tensorlist)
+  LOAD_SYMBOL(_lantern__foreach_reciprocal_out_tensorlist_tensorlist)
+  LOAD_SYMBOL(_lantern__foreach_reciprocal_functional_tensorlist)
+  LOAD_SYMBOL(_lantern__foreach_sigmoid_out_tensorlist_tensorlist)
+  LOAD_SYMBOL(_lantern__foreach_sigmoid_functional_tensorlist)
+  LOAD_SYMBOL(_lantern__foreach_trunc_out_tensorlist_tensorlist)
+  LOAD_SYMBOL(_lantern__foreach_trunc_functional_tensorlist)
+  LOAD_SYMBOL(_lantern__foreach_addcdiv_out_tensorlist_tensorlist_tensorlist_tensorlist_scalar)
+  LOAD_SYMBOL(_lantern__foreach_addcdiv_functional_tensorlist_tensorlist_tensorlist_scalar)
+  LOAD_SYMBOL(_lantern__foreach_addcmul_out_tensorlist_tensorlist_tensorlist_tensorlist_scalar)
+  LOAD_SYMBOL(_lantern__foreach_addcmul_functional_tensorlist_tensorlist_tensorlist_scalar)
+  LOAD_SYMBOL(_lantern__foreach_addcdiv_out_tensorlist_tensorlist_tensorlist_tensorlist_arrayrefscalar)
+  LOAD_SYMBOL(_lantern__foreach_addcdiv_functional_tensorlist_tensorlist_tensorlist_arrayrefscalar)
+  LOAD_SYMBOL(_lantern__foreach_addcmul_out_tensorlist_tensorlist_tensorlist_tensorlist_arrayrefscalar)
+  LOAD_SYMBOL(_lantern__foreach_addcmul_functional_tensorlist_tensorlist_tensorlist_arrayrefscalar)
+  LOAD_SYMBOL(_lantern__linalg_inv_out_helper_out_tensor_tensor_tensor_tensor)
+  LOAD_SYMBOL(_lantern__linalg_inv_out_helper_functional_tensor_tensor_tensor)
   /* Autogen Symbols -- End */
 
   return true;

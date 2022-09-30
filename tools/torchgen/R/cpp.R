@@ -295,6 +295,18 @@ cpp_parameter_type <- function(argument) {
     declaration <- "XPtrTorchstring_view"
   }
 
+  if(argument$dynamic_type == "c10::SymIntArrayRef") {
+    declaration <- "XPtrTorchSymIntArrayRef"
+  }
+
+  if(argument$dynamic_type == "c10::SymInt") {
+    declaration <- "XPtrTorchSymIntArrayRef"
+  }
+
+  if(argument$dynamic_type == "Layout") {
+    declaration <- "XPtrTorchLayout"
+  }
+
   # FIXME: Stop if argument$dynamic_type is not handled
   if (!exists("declaration")) {
     stop(paste(argument$dynamic_type, "is not handled!"))
@@ -444,6 +456,18 @@ cpp_argument_transform <- function(argument) {
   }
 
   if (argument$dynamic_type == "c10::string_view") {
+    result <- glue::glue("{argument$name}.get()")
+  }
+
+  if (argument$dynamic_type == "c10::SymIntArrayRef") {
+    result <- glue::glue("{argument$name}.get()")
+  }
+
+  if (argument$dynamic_type == "c10::SymInt") {
+    result <- glue::glue("{argument$name}.get()")
+  }
+
+  if (argument$dynamic_type == "Layout") {
     result <- glue::glue("{argument$name}.get()")
   }
 
@@ -616,7 +640,7 @@ SKIP_R_BINDIND <- c(
   "_test_string_default"
 )
 
-SKIP_CPP_BINDING <- c()
+SKIP_CPP_BINDING <- c("stft")
 
 cpp <- function(path) {
 

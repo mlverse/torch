@@ -197,6 +197,14 @@ std::string buildCalls(std::string name, YAML::Node node, size_t start) {
       arguments += "from_raw::optional::string_view(" + call + ")";
     } else if (type == "c10::optional<Device>") {
       arguments += "from_raw::optional::Device(" + call + ")";
+    } else if (type == "c10::SymIntArrayRef") {
+      arguments += "from_raw::SymIntArrayRef(" + call + ")";
+    } else if (type == "c10::SymInt") {
+      arguments += "from_raw::SymInt(" + call + ")";
+    } else if (type == "Layout") {
+      arguments += "from_raw::Layout(" + call + ")";
+    } else if (type == "c10::optional<Layout>") {
+      arguments += "from_raw::optional::Layout(" + call + ")";
     } else {
       throw std::runtime_error("Unknown type " + type);
     }

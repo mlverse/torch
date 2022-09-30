@@ -5,10 +5,10 @@ install_config <- list(
     "cpu" = list(
       "darwin" = list(
         "libtorch" = list(
-          url = "https://download.pytorch.org/libtorch/cpu/libtorch-macos-1.11.0.zip",
+          url = "https://download.pytorch.org/libtorch/cpu/libtorch-macos-1.12.0.zip",
           path = "libtorch/",
           filter = ".dylib",
-          md5hash = "5b5c2e96d7a944cb014dec46e2f06b82"
+          md5hash = "b01b0c32221fc81ea1c480eab589cac6"
         ),
         "liblantern" = sprintf("https://storage.googleapis.com/torch-lantern-builds/refs/heads/%s/latest/macOS-cpu.zip", branch)
       ),
