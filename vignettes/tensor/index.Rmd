@@ -3075,12 +3075,6 @@ slogdet() -> (Tensor, Tensor)
 
 See `?torch_slogdet`
 
-## solve
-
-solve(A) -> Tensor, Tensor
-
-See `?torch_solve`
-
 ## sort
 
 sort(dim=-1, descending=FALSE) -> (Tensor, LongTensor)
