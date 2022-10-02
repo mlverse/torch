@@ -746,6 +746,11 @@ linalg_solve <- function(A, B) {
   torch_linalg_solve(A, B)
 }
 
+torch_solve <- function(self, A) {
+  deprecated("`torch_solve` is deprecated, use `linalg_solve` instead.")
+  linalg_solve(self, A)
+}
+
 
 #' Computes a solution to the least squares problem of a system of linear equations.
 #'
