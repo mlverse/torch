@@ -23,7 +23,7 @@ test_that("gpu allocator is called", {
   on.exit(untrace(gc))
 
   expect_error({
-    for (i in 1:5) {
+    for (i in 1:500) {
       torch_randn(1e6, 1e7, device = "cuda")
     }
   })
