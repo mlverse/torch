@@ -7,9 +7,13 @@ test_that("__and__", {
 })
 
 test_that("__lshift__", {
-  x <- torch_tensor(1)
-  expect_equal_to_tensor(torch___lshift__(x, x), torch_tensor(2))
-  expect_equal_to_tensor(torch___lshift__(x, 1), torch_tensor(2))
+  x <- torch_tensor(c(-1, -2, 3), dtype = torch_int16())
+  y <- torch_tensor(c(1, 0, 3), dtype = torch_int16())
+  expect_true(
+    torch_allclose(
+      torch___lshift__(x, y),
+      torch_tensor(c(-2, -2, 24), dtype = torch_int16())
+    ))
 })
 
 test_that("__or__", {
@@ -19,9 +23,13 @@ test_that("__or__", {
 })
 
 test_that("__rshift__", {
-  x <- torch_tensor(1)
-  expect_equal_to_tensor(torch___rshift__(x, x), torch_tensor(0.5))
-  expect_equal_to_tensor(torch___rshift__(x, 1), torch_tensor(0.5))
+  x <- torch_tensor(c(-2, -7, 31), dtype = torch_int16())
+  y <- torch_tensor(c(1, 0, 3), dtype = torch_int16())
+  expect_true(
+    torch_allclose(
+      torch___rshift__(x, y),
+      torch_tensor(c(-1, -7, 3), dtype = torch_int16())
+    ))
 })
 
 test_that("__xor__", {
@@ -110,18 +118,6 @@ test_that("_cast_Short", {
   skip("TODO: implement convertions for Short types.")
   x <- torch_tensor(1)
   expect_tensor(torch__cast_Short(x))
-})
-
-test_that("_cat", {
-  x <- torch_tensor(1)
-  expect_tensor(torch__cat(list(x, x)))
-})
-
-test_that("_cat_out", {
-  x <- torch_tensor(1)
-  y <- torch_zeros(2)
-  expect_tensor(torch__cat_out(y, list(x, x)))
-  expect_equal_to_tensor(y, torch_tensor(c(1, 1)))
 })
 
 test_that("_cdist_backward", {

@@ -14,7 +14,7 @@ torch_stft(
   center = TRUE,
   pad_mode = "reflect",
   normalized = FALSE,
-  onesided = TRUE,
+  onesided = NULL,
   return_complex = NULL
 )
 }

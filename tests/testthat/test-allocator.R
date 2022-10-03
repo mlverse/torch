@@ -22,8 +22,15 @@ test_that("gpu allocator is called", {
   })
   on.exit(untrace(gc))
 
+  for (i in 1:10) {
+    torch_randn(10000, 10000, device = "cuda")
+  }
+  expect_true(env$gc_called)
+  
+  env$gc_called <- FALSE
   expect_error({
     torch_randn(1e6, 1e7, device = "cuda")
   })
+  
   expect_true(env$gc_called)
 })

@@ -60,7 +60,7 @@ void* DimnameList(const torch::DimnameList& x);
 void* Generator(const torch::Generator& x);
 void* MemoryFormat(const torch::MemoryFormat& x);
 void* IntArrayRef(const torch::IntArrayRef& x);
-void* IntArrayRef(const torch::IntArrayRef& x);
+void* SymIntArrayRef(const c10::SymIntArrayRef& x);
 void* TensorDict(const c10::Dict<std::string, torch::Tensor>& x);
 void* CompilationUnit(torch::jit::CompilationUnit& x);
 void* QScheme(const torch::QScheme& x);
@@ -147,6 +147,9 @@ LANTERN_FROM_RAW_DECL(bool_t, bool)
 LANTERN_FROM_RAW_DECL(double_t, double)
 LANTERN_FROM_RAW_DECL(Stream, at::Stream)
 LANTERN_FROM_RAW_DECL(IValue, torch::IValue)
+LANTERN_FROM_RAW_DECL(Layout, torch::Layout)
+LANTERN_FROM_RAW_DECL(SymInt, c10::SymInt)
+LANTERN_FROM_RAW_DECL(SymIntArrayRef, c10::SymIntArrayRef)
 
 namespace optional {
 LANTERN_FROM_RAW_DECL(DimnameList, c10::optional<torch::DimnameList>)
@@ -164,6 +167,7 @@ LANTERN_FROM_RAW_DECL(TensorList, c10::List<c10::optional<torch::Tensor>>)
 LANTERN_FROM_RAW_DECL(IntArrayRef, c10::optional<torch::IntArrayRef>)
 LANTERN_FROM_RAW_DECL(DoubleArrayRef, c10::optional<torch::ArrayRef<double>>)
 LANTERN_FROM_RAW_DECL(Device, c10::optional<torch::Device>)
+LANTERN_FROM_RAW_DECL(Layout, c10::optional<torch::Layout>)
 }  // namespace optional
 
 namespace vector {
@@ -215,11 +219,11 @@ class OptionalArrayRef {
 };
 
 template <typename Type>
-class ArrayBox {
+class ArrayBoxImpl {
  public:
   std::shared_ptr<std::vector<Type>> buffer_;
   std::shared_ptr<torch::ArrayRef<Type>> x_;
-  ArrayBox(const std::vector<Type>& x) {
+  ArrayBoxImpl(const std::vector<Type>& x) {
     buffer_ = std::make_shared<std::vector<Type>>(x);
     x_ = std::make_shared<torch::ArrayRef<Type>>(*buffer_);
   }
@@ -232,6 +236,43 @@ class ArrayBox {
     x_ = std::make_shared<torch::ArrayRef<Type>>(*buffer_);
   }
 };
+
+template <typename Type>
+class ArrayBox : public ArrayBoxImpl<Type>{
+  public:
+    ArrayBox(const std::vector<Type>& x) : ArrayBoxImpl<Type>(x) {}
+};
+
+template<typename T>
+std::vector<T> to_int_vec (const std::vector<c10::SymInt> x) {
+  std::vector<int64_t> out;
+  for (auto i : x) {
+    out.push_back(i.expect_int());
+  }
+  return out;
+}
+
+template <>
+class ArrayBox<int64_t> : public ArrayBoxImpl<int64_t> {
+ public:
+  std::shared_ptr<std::vector<c10::SymInt>> sym_buffer_;
+  std::shared_ptr<c10::SymIntArrayRef> sym_;
+  ArrayBox(const std::vector<int64_t>& x) : ArrayBoxImpl<int64_t>(x) {
+    sym_buffer_ = std::make_shared<std::vector<c10::SymInt>>();
+    for (auto i : x) {
+      sym_buffer_->push_back(c10::SymInt(i));
+    }
+    sym_ = std::make_shared<c10::SymIntArrayRef>(*sym_buffer_);
+  }
+  ArrayBox(const std::vector<c10::SymInt>& x) : ArrayBoxImpl<int64_t>(to_int_vec<int64_t>(x)) {
+    sym_buffer_ = std::make_shared<std::vector<c10::SymInt>>(x);
+    sym_ = std::make_shared<c10::SymIntArrayRef>(*sym_buffer_);
+  }
+  operator c10::SymIntArrayRef &() {
+    return *sym_;
+  }
+};
+
 
 template <typename T>
 class Box {
@@ -260,6 +301,7 @@ using Device = Box<torch::Device>;
 using Dimname = Box<torch::Dimname>;
 using DimnameList = ArrayBox<torch::Dimname>;
 using IntArrayRef = ArrayBox<std::int64_t>;
+using SymIntArrayRef = ArrayBox<std::int64_t>;
 
 class string_view {
  public:
@@ -303,6 +345,7 @@ using Scalar = Box<c10::optional<torch::Scalar>>;
 using IntArrayRef = OptionalArrayRef<std::int64_t>;
 using DoubleArrayRef = OptionalArrayRef<double>;
 using Device = Box<c10::optional<torch::Device>>;
+using Layout = Box<c10::optional<torch::Layout>>;
 
 }  // namespace optional
 }  // namespace self_contained
@@ -376,6 +419,9 @@ void* MemoryFormat(const torch::MemoryFormat& x) {
 }
 void* IntArrayRef(const torch::IntArrayRef& x) {
   return make_ptr<self_contained::IntArrayRef>(x.vec());
+}
+void* SymIntArrayRef(const c10::SymIntArrayRef& x) {
+  return make_ptr<self_contained::SymIntArrayRef>(x.vec());
 }
 void* TensorDict(const c10::Dict<std::string, torch::Tensor>& x) {
   return make_ptr<c10::Dict<std::string, torch::Tensor>>(x);
@@ -517,7 +563,6 @@ LANTERN_FROM_RAW(TensorDict, alias::TensorDict)
 LANTERN_FROM_RAW(CompilationUnit, torch::jit::CompilationUnit)
 LANTERN_FROM_RAW(QScheme, torch::QScheme)
 LANTERN_FROM_RAW(variable_list, torch::autograd::variable_list)
-LANTERN_FROM_RAW(Layout, torch::Layout)
 LANTERN_FROM_RAW(Storage, torch::Storage)
 LANTERN_FROM_RAW(string, std::string)
 LANTERN_FROM_RAW_WRAPPED(string_view, self_contained::string_view,
@@ -527,6 +572,9 @@ LANTERN_FROM_RAW(bool_t, bool)
 LANTERN_FROM_RAW(double_t, double)
 LANTERN_FROM_RAW(Stream, at::Stream)
 LANTERN_FROM_RAW(IValue, torch::IValue)
+LANTERN_FROM_RAW(Layout, torch::Layout)
+LANTERN_FROM_RAW(SymInt, c10::SymInt)
+LANTERN_FROM_RAW_WRAPPED(SymIntArrayRef, self_contained::SymIntArrayRef, c10::SymIntArrayRef)
 
 namespace optional {
 LANTERN_FROM_RAW_WRAPPED(DimnameList, self_contained::optional::DimnameList,
@@ -559,6 +607,8 @@ LANTERN_FROM_RAW_WRAPPED(DoubleArrayRef,
                          c10::optional<torch::ArrayRef<double>>)
 LANTERN_FROM_RAW_WRAPPED(Device, self_contained::optional::Device,
                          c10::optional<torch::Device>)
+LANTERN_FROM_RAW_WRAPPED(Layout, self_contained::optional::Layout,
+                         c10::optional<torch::Layout>)
 }  // namespace optional
 
 namespace vector {

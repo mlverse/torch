@@ -293,6 +293,28 @@ class XPtrTorchIntArrayRef : public XPtrTorch {
   // operator SEXP () const;
 };
 
+class XPtrTorchSymIntArrayRef : public XPtrTorch {
+public:
+  XPtrTorchSymIntArrayRef() : XPtrTorch{NULL} {};
+  XPtrTorchSymIntArrayRef(void* x) : XPtrTorch(x, delete_vector_int64_t) {}
+  explicit XPtrTorchSymIntArrayRef(std::shared_ptr<void> x) : XPtrTorch(x){};
+  XPtrTorchSymIntArrayRef(const XPtrTorchSymIntArrayRef& x)
+    : XPtrTorch(x.get_shared()){};
+  explicit XPtrTorchSymIntArrayRef(SEXP x);
+  // operator SEXP () const;
+};
+
+class XPtrTorchSymInt : public XPtrTorch {
+public:
+  XPtrTorchSymInt() : XPtrTorch{NULL} {};
+  XPtrTorchSymInt(void* x) : XPtrTorch(x, delete_vector_int64_t) {}
+  explicit XPtrTorchSymInt(std::shared_ptr<void> x) : XPtrTorch(x){};
+  XPtrTorchSymInt(const XPtrTorchSymInt& x)
+    : XPtrTorch(x.get_shared()){};
+  explicit XPtrTorchSymInt(SEXP x);
+  // operator SEXP () const;
+};
+
 class XPtrTorchFunctionPtr : public XPtrTorch {
  public:
   XPtrTorchFunctionPtr(void* x) : XPtrTorch(x, delete_function_ptr) {}

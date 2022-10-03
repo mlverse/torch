@@ -746,7 +746,6 @@ linalg_solve <- function(A, B) {
   torch_linalg_solve(A, B)
 }
 
-
 #' Computes a solution to the least squares problem of a system of linear equations.
 #'
 #' Letting \teqn{\mathbb{K}} be \teqn{\mathbb{R}} or \teqn{\mathbb{C}},

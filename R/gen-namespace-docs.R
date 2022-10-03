@@ -5307,38 +5307,6 @@ NULL
 #' @export
 NULL
 
-
-#' Solve
-#'
-#' @section solve(input, A) -> (Tensor, Tensor) :
-#'
-#' This function returns the solution to the system of linear
-#' equations represented by \eqn{AX = B} and the LU factorization of
-#' A, in order as a namedtuple `solution, LU`.
-#' 
-#' `LU` contains `L` and `U` factors for LU factorization of `A`.
-#' 
-#' `torch_solve(B, A)` can take in 2D inputs `B, A` or inputs that are
-#' batches of 2D matrices. If the inputs are batches, then returns
-#' batched outputs `solution, LU`.
-#' 
-#' @note
-#' 
-#'     Irrespective of the original strides, the returned matrices
-#'     `solution` and `LU` will be transposed, i.e. with strides like
-#'     `B$contiguous()$transpose(-1, -2)$stride()` and
-#'     `A$contiguous()$transpose(-1, -2)$stride()` respectively.
-#'
-#'
-#' @param self (Tensor) input matrix \eqn{B} of size \eqn{(*, m, k)} , where \eqn{*}                is zero or more batch dimensions.
-#' @param A (Tensor) input square matrix of size \eqn{(*, m, m)}, where                \eqn{*} is zero or more batch dimensions.
-#'
-#' @name torch_solve
-#'
-#' @export
-NULL
-
-
 #' Cholesky_inverse
 #'
 #' @section cholesky_inverse(input, upper=False, out=NULL) -> Tensor :

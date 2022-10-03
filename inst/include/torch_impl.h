@@ -349,6 +349,16 @@ XPtrTorchOptionalDoubleArrayRef::XPtrTorchOptionalDoubleArrayRef(SEXP x)
 XPtrTorchIntArrayRef::XPtrTorchIntArrayRef(SEXP x)
     : XPtrTorch{from_sexp_int_array_ref(x, false, false)} {}
 
+// sym int aray ref
+
+XPtrTorchSymIntArrayRef::XPtrTorchSymIntArrayRef(SEXP x)
+    : XPtrTorch{from_sexp_sym_int_array_ref(x)} {}
+
+// sym int
+
+XPtrTorchSymInt::XPtrTorchSymInt(SEXP x)
+    : XPtrTorch{from_sexp_sym_int(x)} {}
+
 // index int array ref
 
 XPtrTorchIndexIntArrayRef::XPtrTorchIndexIntArrayRef(SEXP x)

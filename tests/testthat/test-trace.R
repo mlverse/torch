@@ -65,7 +65,7 @@ test_that("modules are equivalent", {
   out <- fn(input)
 
   tr_fn <- jit_trace(fn, input)
-  expect_equal_to_tensor(fn(input), tr_fn(input), tolerance = 1e-6)
+  expect_true(torch_allclose(fn(input), tr_fn(input)))
 })
 
 test_that("can save and reload", {
@@ -231,14 +231,14 @@ test_that("trace a nn module", {
   expect_equal_to_tensor(m(torch_tensor(2)), torch_tensor(0))
 
   x <- torch_randn(10, 10)
-  expect_equal_to_tensor(m$testing(x), mod$testing(x))
+  expect_true(torch_allclose(m$testing(x), mod$testing(x)))
   with_no_grad({
     m$linear$weight$zero_()$add_(1)
     mod$linear$weight$zero_()$add_(1)
   })
-  expect_equal_to_tensor(m$testing(x), mod$testing(x))
+  expect_true(torch_allclose(m$testing(x), mod$testing(x)))
 
-  expect_equal_to_tensor(m$test_constant(torch_tensor(2)), torch_tensor(5))
+  expect_true(torch_allclose(m$test_constant(torch_tensor(2)), torch_tensor(5)))
 })
 
 test_that("dont crash when gcing a method", {
@@ -297,14 +297,14 @@ test_that("we can save traced modules", {
   expect_equal_to_tensor(m(torch_tensor(2)), torch_tensor(0))
 
   x <- torch_randn(10, 10)
-  expect_equal_to_tensor(m$testing(x), mod$testing(x))
+  expect_true(torch_allclose(m$testing(x), mod$testing(x)))
   with_no_grad({
     m$linear$weight$zero_()$add_(1)
     mod$linear$weight$zero_()$add_(1)
   })
-  expect_equal_to_tensor(m$testing(x), mod$testing(x))
+  expect_true(torch_allclose(m$testing(x), mod$testing(x), atol=1e-5))
 
-  expect_equal_to_tensor(m$test_constant(torch_tensor(2)), torch_tensor(5))
+  expect_true(torch_allclose(m$test_constant(torch_tensor(2)), torch_tensor(5)))
 })
 
 test_that("trace a module", {

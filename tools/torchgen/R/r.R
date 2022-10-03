@@ -227,6 +227,15 @@ r_argument_default <- function(default) {
   if (default == "\"linear\"")
     return("\"linear\"")
 
+  if (default == "\"none\"")
+    return("\"none\"")
+
+  if (default == "\"constant\"")
+    return("\"constant\"")
+
+  if (default == "\"reflect\"")
+    return("\"reflect\"")
+
   browser()
 }
 

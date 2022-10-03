@@ -261,11 +261,16 @@ std::string lantern_name_sig(const c10::impl::PyInterpreter *x) {
   return "LanternInterpreter";
 }
 
+bool lantern_is_contiguous_sig (const c10::impl::PyInterpreter*, const at::TensorImpl*) {
+  return true;
+}
+
 // global interpreter definition.
 // unlike in python, we currently don't have behaviors where a tensor
 // can be owned by different interpreters.
+
 c10::impl::PyInterpreter lantern_interpreter(*lantern_name_sig, nullptr,
-                                             nullptr, nullptr);
+                                             nullptr, nullptr, *lantern_is_contiguous_sig);
 
 void _lantern_tensor_set_pyobj(void *x, void *ptr) {
   LANTERN_FUNCTION_START

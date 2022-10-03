@@ -96,6 +96,10 @@ std::string cpp_arg_to_torch_type(SEXP obj,
     return "int64_t";
   }
 
+  if (is_in("c10::SymInt", etypes) && ((is_numeric && len == 1) || is_null)) {
+    return "c10::SymInt";
+  }
+
   if (is_in("IntArrayRef", etypes) && is_numeric_or_list_or_null) {
     return "IntArrayRef";
   }

@@ -1331,6 +1331,17 @@ XPtrTorchIntArrayRef from_sexp_int_array_ref(SEXP x, bool allow_null,
   return XPtrTorchIntArrayRef(ptr);
 }
 
+// sym int array ref
+
+XPtrTorchSymIntArrayRef from_sexp_sym_int_array_ref (SEXP x) {
+  return XPtrTorchSymIntArrayRef(from_sexp_int_array_ref(x, false, false).get_shared());
+}
+
+// sym int
+XPtrTorchSymInt from_sexp_sym_int (SEXP x) {
+  return XPtrTorchSymInt((void*)nullptr);
+}
+
 // optional double array ref
 
 XPtrTorchOptionalDoubleArrayRef from_sexp_optional_double_array_ref(SEXP x) {
