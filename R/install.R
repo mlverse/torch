@@ -4,13 +4,24 @@ install_config <- list(
   "1.12.0" = list(
     "cpu" = list(
       "darwin" = list(
-        "libtorch" = list(
-          url = "https://download.pytorch.org/libtorch/cpu/libtorch-macos-1.12.0.zip",
-          path = "libtorch/",
-          filter = ".dylib",
-          md5hash = "b01b0c32221fc81ea1c480eab589cac6"
+        x86_64 = list(
+          "libtorch" = list(
+            url = "https://download.pytorch.org/libtorch/cpu/libtorch-macos-1.12.0.zip",
+            path = "libtorch/",
+            filter = ".dylib",
+            md5hash = "b01b0c32221fc81ea1c480eab589cac6"
+          ),
+          "liblantern" = sprintf("https://storage.googleapis.com/torch-lantern-builds/refs/heads/%s/latest/macOS-cpu.zip", branch)  
         ),
-        "liblantern" = sprintf("https://storage.googleapis.com/torch-lantern-builds/refs/heads/%s/latest/macOS-cpu.zip", branch)
+        aarch64 = list(
+          libtorch = list(
+            url = "https://github.com/mlverse/libtorch-mac-m1/releases/download/LibTorch/libtorch-v1.12.0.zip",
+            path = "libtorch/",
+            filter = ".dylib",
+            md5hash = "90106de5c48c5f00faa3f238a4986b9a"
+          ),
+          "liblantern" = sprintf("https://storage.googleapis.com/torch-lantern-builds/refs/heads/%s/latest/macOS-cpu.zip", branch)  
+        )
       ),
       "windows" = list(
         "libtorch" = list(
@@ -179,6 +190,10 @@ lantern_install_libs <- function(version, type, install_path, install_config) {
   }
 
   install_info <- install_config[[version]][[type]][[current_os]]
+  
+  if (current_os == "darwin") {
+    install_info <- install_info[[R.version$arch]]
+  }
 
   for (library_name in names(install_info)) {
     if (lib_installed(library_name, install_path)) {
