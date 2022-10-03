@@ -31,6 +31,8 @@ void *_lantern_Device(const char *type, int64_t index, bool useIndex) {
     deviceType = torch::DeviceType::XLA;
   } else if (deviceName == "meta") {
     deviceType = torch::DeviceType::Meta;
+  } else if (deviceName == "mps") {
+    deviceType = torch::DeviceType::MPS;
   }
 
   torch::Device device = torch::Device(deviceType);
@@ -68,6 +70,8 @@ const char *_lantern_Device_type(void *device) {
     str = "xla";
   } else if (type == torch::DeviceType::Meta) {
     str = "meta";
+  } else if (type == torch::DeviceType::MPS) {
+    str = "mps";
   } else {
     str = "unknown";
   }

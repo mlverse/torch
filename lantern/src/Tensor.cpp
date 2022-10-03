@@ -1,4 +1,5 @@
 #include <iostream>
+#include <regex>
 
 #define LANTERN_BUILD
 
@@ -29,8 +30,22 @@ const char *_lantern_Tensor_StreamInsertion(void *x) {
     tensor = tensor.dequantize();
   }
 
+  // the stream insertion method seems to cast tensors to float64
+  // before printing and that's not supported by the MPS device
+  // thus we first cast to CPU, print and later do a regex replace
+  // to change the device to MPS.
+  auto is_mps = tensor.device().type() == torch::DeviceType::MPS;
+  if (is_mps) {
+    tensor = tensor.cpu();
+  }
+
   ss << tensor;
   std::string str = ss.str();
+  
+  if (is_mps) {
+    str = std::regex_replace(str, std::regex("CPU"), "MPS");
+  }
+  
   char *cstr = new char[str.length() + 1];
   strcpy(cstr, str.c_str());
   return cstr;
