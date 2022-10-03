@@ -8,7 +8,7 @@ on:
       - "cran/**"
       - "libtorch-v1.12.0"
       - "build2"
-      - "pool"
+      - "m1-mac"
 
 jobs:
   build:
@@ -22,6 +22,12 @@ jobs:
               os: macOS-latest,
               artifact: "build/liblantern.dylib",
               upload: "macOS",
+              fixlib: "install_name_tool -add_rpath @loader_path/. liblantern.dylib",
+            }
+          - {
+              os: [self-hosted, m1],
+              artifact: "build/liblantern.dylib",
+              upload: "macOSArm64",
               fixlib: "install_name_tool -add_rpath @loader_path/. liblantern.dylib",
             }
           - {
