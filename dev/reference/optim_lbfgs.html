@@ -18,7 +18,7 @@ minFunc"><meta name="robots" content="noindex"><!-- mathjax --><script src="http
     
     <a class="navbar-brand me-2" href="../index.html">torch</a>
 
-    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">0.8.1.9000</small>
+    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">0.8.1.9001</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -157,12 +157,6 @@ try reducing the history size, or use a different algorithm.</p>
 groups (there can be only one).</p>
 <p>Right now all parameters have to be on a single device. This will be
 improved in the future.</p>
-<p>If you need to move a model to GPU via <code>$cuda()</code>, please do so before
-constructing optimizers for it. Parameters of a model after <code>$cuda()</code>
-will be different objects from those before the call. In general, you
-should make sure that the objects pointed to by model parameters subject
-to optimization remain the same over the whole lifecycle of optimizer
-creation and usage.</p>
     </div>
 
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>

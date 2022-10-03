@@ -22,7 +22,7 @@ vectors, instead:"><meta name="robots" content="noindex"><!-- mathjax --><script
     
     <a class="navbar-brand me-2" href="../index.html">torch</a>
 
-    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">0.8.1.9000</small>
+    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">0.8.1.9001</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -135,8 +135,7 @@ will be <code>dtype</code>. Default: <code>NULL</code></p></dd>
 <li><p>If <code>dim</code> is an <code>int</code> or a <code>tuple</code>, the norm will be computed over these dimensions
 and the other dimensions will be treated as batch dimensions.</p></li>
 </ul><p>This behavior is for consistency with <code><a href="linalg_norm.html">linalg_norm()</a></code>.</p>
-<p><code>ord</code> defines the norm that is computed. The following norms are
-supported:</p><table class="table table"><tr><td><code>ord</code></td><td>norm for matrices</td><td>norm for vectors</td></tr><tr><td><code>NULL</code> (default)</td><td>Frobenius norm</td><td><code>2</code>-norm (see below)</td></tr><tr><td><code>"fro"</code></td><td>Frobenius norm</td><td>– not supported –</td></tr><tr><td><code>"nuc"</code></td><td>nuclear norm</td><td>– not supported –</td></tr><tr><td><code>Inf</code></td><td><code>max(sum(abs(x), dim=2))</code></td><td><code>max(abs(x))</code></td></tr><tr><td><code>-Inf</code></td><td><code>min(sum(abs(x), dim=2))</code></td><td><code>min(abs(x))</code></td></tr><tr><td><code>0</code></td><td>– not supported –</td><td><code>sum(x != 0)</code></td></tr><tr><td><code>1</code></td><td><code>max(sum(abs(x), dim=1))</code></td><td>as below</td></tr><tr><td><code>-1</code></td><td><code>min(sum(abs(x), dim=1))</code></td><td>as below</td></tr><tr><td><code>2</code></td><td>largest singular value</td><td>as below</td></tr><tr><td><code>-2</code></td><td>smallest singular value</td><td>as below</td></tr><tr><td>other <code>int</code> or <code>float</code></td><td>– not supported –</td><td><code>sum(abs(x)^{ord})^{(1 / ord)}</code></td></tr></table></div>
+    </div>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
     <div class="dont-index"><p>Other linalg: 

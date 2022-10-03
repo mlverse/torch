@@ -20,7 +20,7 @@ On the importance of initialization and momentum in deep learning."><meta name="
     
     <a class="navbar-brand me-2" href="../index.html">torch</a>
 
-    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">0.8.1.9000</small>
+    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">0.8.1.9001</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -156,15 +156,6 @@ p_{t+1} &amp; = p_{t} - v_{t+1}.
 \end{array}
 $$
 The Nesterov version is analogously modified.</p>
-    </div>
-    <div class="section level2">
-    <h2 id="warning">Warning<a class="anchor" aria-label="anchor" href="#warning"></a></h2>
-    <p>If you need to move a model to GPU via <code>$cuda()</code>, please do so before
-constructing optimizers for it. Parameters of a model after <code>$cuda()</code>
-will be different objects from those before the call. In general, you
-should make sure that the objects pointed to by model parameters subject
-to optimization remain the same over the whole lifecycle of optimizer
-creation and usage.</p>
     </div>
 
     <div class="section level2">
