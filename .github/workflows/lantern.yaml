@@ -186,6 +186,7 @@ jobs:
         name:
           [
             macOS,
+            macOSArm64,
             Linux,
             LinuxNonABI,
             Windows,
@@ -199,6 +200,10 @@ jobs:
           - name: macOS
             artifact: macOS
             upload: macOS
+            hw: cpu
+          - name: macOSArm64
+            artifact: macOSArm64
+            upload: macOSArm64
             hw: cpu
           - name: Linux
             artifact: Linux
