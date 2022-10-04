@@ -13,6 +13,16 @@ skip_if_cuda_not_available <- function() {
   }
 }
 
+skip_if_not_m1_mac <- function() {
+  if (!grepl("darwin", R.version$os)) {
+    skip("Not on MacOS")
+  }
+  
+  if (R.version$arch != "aarch64") {
+    skip("Not an M1 Mac")
+  }  
+}
+
 expect_equal_to_tensor <- function(object, expected, ...) {
   expect_equal(as_array(object), as_array(expected), ...)
 }

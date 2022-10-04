@@ -48,6 +48,19 @@ For \code{p} in \verb{(2, -2)}, this function can be computed in terms of the si
 
 In these cases, it is computed using \code{\link[=linalg_svd]{linalg_svd()}}. For these norms, the matrix
 (or every matrix in the batch) \code{A} may have any shape.
+
+\tabular{ll}{
+   \code{p} \tab matrix norm \cr
+   \code{NULL} \tab \code{2}-norm (largest singular value) \cr
+   \code{'fro'} \tab Frobenius norm \cr
+   \code{'nuc'} \tab nuclear norm \cr
+   \code{Inf} \tab \code{max(sum(abs(x), dim=2))} \cr
+   \code{-Inf} \tab \code{min(sum(abs(x), dim=2))} \cr
+   \code{1} \tab \code{max(sum(abs(x), dim=1))} \cr
+   \code{-1} \tab \code{min(sum(abs(x), dim=1))} \cr
+   \code{2} \tab largest singular value \cr
+   \code{-2} \tab smallest singular value \cr
+}
 }
 \note{
 When inputs are on a CUDA device, this function synchronizes that device with the CPU if

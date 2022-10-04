@@ -105,11 +105,13 @@ get_confirmation <-  function() {
 
 check_can_autoinstall <- function() {
   if (!grepl("x86_64", R.version$arch)) {
-    cli::cli_abort(c(
-      "Currently only {.code x86_64} systems are supported for automatic installation. ",
-      i = "You can manually compile LibTorch for you architecture following instructions in {.url https://github.com/pytorch/pytorch#from-source}",
-      i = "You can then use {.fn install_torch_from_file} to install manually."
-    ))
+    if (!grepl("darwin", R.version$os)) {
+      cli::cli_abort(c(
+        "Currently only {.code x86_64} systems are supported for automatic installation. ",
+        i = "You can manually compile LibTorch for you architecture following instructions in {.url https://github.com/pytorch/pytorch#from-source}",
+        i = "You can then use {.fn install_torch_from_file} to install manually."
+      ))
+    }
   }
   TRUE
 }

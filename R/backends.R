@@ -43,3 +43,10 @@ backends_mkl_is_available <- function() {
 backends_openmp_is_available <- function() {
   cpp_backends_openmp_is_available()
 }
+
+#' MPS is available
+#' @return Returns whether LibTorch is built with MPS support.
+#' @export
+backends_mps_is_available <- function() {
+  cpp_backends_mps_is_available()
+}

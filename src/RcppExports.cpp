@@ -391,6 +391,16 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// cpp_backends_mps_is_available
+bool cpp_backends_mps_is_available();
+RcppExport SEXP _torch_cpp_backends_mps_is_available() {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    rcpp_result_gen = Rcpp::wrap(cpp_backends_mps_is_available());
+    return rcpp_result_gen;
+END_RCPP
+}
 // cpp_arg_to_torch_type
 std::string cpp_arg_to_torch_type(SEXP obj, const std::vector<std::string>& expected_types, const std::string& arg_name);
 RcppExport SEXP _torch_cpp_arg_to_torch_type(SEXP objSEXP, SEXP expected_typesSEXP, SEXP arg_nameSEXP) {
@@ -42157,6 +42167,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_torch_cpp_backends_mkldnn_is_available", (DL_FUNC) &_torch_cpp_backends_mkldnn_is_available, 0},
     {"_torch_cpp_backends_mkl_is_available", (DL_FUNC) &_torch_cpp_backends_mkl_is_available, 0},
     {"_torch_cpp_backends_openmp_is_available", (DL_FUNC) &_torch_cpp_backends_openmp_is_available, 0},
+    {"_torch_cpp_backends_mps_is_available", (DL_FUNC) &_torch_cpp_backends_mps_is_available, 0},
     {"_torch_cpp_arg_to_torch_type", (DL_FUNC) &_torch_cpp_arg_to_torch_type, 3},
     {"_torch_cpp_clean_names", (DL_FUNC) &_torch_cpp_clean_names, 2},
     {"_torch_cpp_make_function_name", (DL_FUNC) &_torch_cpp_make_function_name, 4},

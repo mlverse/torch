@@ -1,16 +1,27 @@
-branch <- "libtorch-v1.12.0"
+branch <- "m1-mac"
 
 install_config <- list(
   "1.12.0" = list(
     "cpu" = list(
       "darwin" = list(
-        "libtorch" = list(
-          url = "https://download.pytorch.org/libtorch/cpu/libtorch-macos-1.12.0.zip",
-          path = "libtorch/",
-          filter = ".dylib",
-          md5hash = "b01b0c32221fc81ea1c480eab589cac6"
+        x86_64 = list(
+          "libtorch" = list(
+            url = "https://download.pytorch.org/libtorch/cpu/libtorch-macos-1.12.0.zip",
+            path = "libtorch/",
+            filter = ".dylib",
+            md5hash = "b01b0c32221fc81ea1c480eab589cac6"
+          ),
+          "liblantern" = sprintf("https://storage.googleapis.com/torch-lantern-builds/refs/heads/%s/latest/macOS-cpu.zip", branch)  
         ),
-        "liblantern" = sprintf("https://storage.googleapis.com/torch-lantern-builds/refs/heads/%s/latest/macOS-cpu.zip", branch)
+        aarch64 = list(
+          libtorch = list(
+            url = "https://github.com/mlverse/libtorch-mac-m1/releases/download/LibTorch/libtorch-v1.12.0.zip",
+            path = "libtorch/",
+            filter = ".dylib",
+            md5hash = "bddd13cfaabaf43a66b760df7229c238"
+          ),
+          "liblantern" = sprintf("https://storage.googleapis.com/torch-lantern-builds/refs/heads/%s/latest/macOSArm64-cpu.zip", branch)  
+        )
       ),
       "windows" = list(
         "libtorch" = list(
@@ -179,6 +190,10 @@ lantern_install_libs <- function(version, type, install_path, install_config) {
   }
 
   install_info <- install_config[[version]][[type]][[current_os]]
+  
+  if (current_os == "darwin") {
+    install_info <- install_info[[R.version$arch]]
+  }
 
   for (library_name in names(install_info)) {
     if (lib_installed(library_name, install_path)) {
@@ -420,8 +435,15 @@ install_torch_from_file <- function(version = "1.12.0", type = install_type(vers
 #'
 #' @export
 get_install_libs_url <- function(version = "1.12.0", type = install_type(version = version)) {
-  libtorch <- install_config[[version]][[type]][[install_os()]][["libtorch"]][["url"]]
-  liblantern <- install_config[[version]][[type]][[install_os()]][["liblantern"]]
+  
+  config <- install_config[[version]][[type]][[install_os()]]
+  
+  if (grepl("darwin", install_os())) {
+    config <- config[[R.version$arch]]
+  }
+
+  libtorch <- config[["libtorch"]][["url"]]
+  liblantern <- config[["liblantern"]]
   list(
     libtorch = maybe_get_pre_cxx11_abi_url(libtorch), 
     liblantern = maybe_get_pre_cxx11_abi_url(liblantern)

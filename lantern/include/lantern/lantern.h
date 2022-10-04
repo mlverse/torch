@@ -2340,6 +2340,14 @@ HOST_API void lantern_cuda_synchronize (int device_index) {
   LANTERN_HOST_HANDLER;
 }
 
+LANTERN_API bool (LANTERN_PTR _lantern_backend_has_mps) ();
+HOST_API bool lantern_backend_has_mps () {
+  LANTERN_CHECK_LOADED
+  bool ret = _lantern_backend_has_mps();
+  LANTERN_HOST_HANDLER;
+  return ret;
+}
+
   /* Autogen Headers -- Start */
   LANTERN_API void* (LANTERN_PTR _lantern__cast_byte_tensor_bool)(void* self, void* non_blocking);
   HOST_API void* lantern__cast_byte_tensor_bool(void* self, void* non_blocking) { LANTERN_CHECK_LOADED void* ret = _lantern__cast_byte_tensor_bool(self, non_blocking); LANTERN_HOST_HANDLER return ret; }
@@ -9031,6 +9039,7 @@ LOAD_SYMBOL(_lantern_torch_parallel_info);
 LOAD_SYMBOL(_lantern_benchmark_debug);
 LOAD_SYMBOL(_lantern_set_cuda_allocator_thresholds);
 LOAD_SYMBOL(_lantern_cuda_synchronize);
+LOAD_SYMBOL(_lantern_backend_has_mps);
   /* Autogen Symbols -- Start */
   LOAD_SYMBOL(_lantern__cast_byte_tensor_bool)
   LOAD_SYMBOL(_lantern__cast_char_tensor_bool)
