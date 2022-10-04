@@ -5,7 +5,7 @@
 \title{List of files to download}
 \usage{
 get_install_libs_url(
-  version = "1.12.0",
+  version = "1.12.1",
   type = install_type(version = version)
 )
 }
