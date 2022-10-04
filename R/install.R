@@ -18,7 +18,7 @@ install_config <- list(
             url = "https://github.com/mlverse/libtorch-mac-m1/releases/download/LibTorch/libtorch-v1.12.0.zip",
             path = "libtorch/",
             filter = ".dylib",
-            md5hash = "90106de5c48c5f00faa3f238a4986b9a"
+            md5hash = "bddd13cfaabaf43a66b760df7229c238"
           ),
           "liblantern" = sprintf("https://storage.googleapis.com/torch-lantern-builds/refs/heads/%s/latest/macOSArm64-cpu.zip", branch)  
         )
