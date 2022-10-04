@@ -125,6 +125,15 @@ parameter groups</p></dd>
 <dd><p>(float, optional): weight decay (L2 penalty) (default: 0)</p></dd>
 
 </dl></div>
+    <div class="section level2">
+    <h2 id="warning">Warning<a class="anchor" aria-label="anchor" href="#warning"></a></h2>
+    <p>If you need to move a model to GPU via <code>$cuda()</code>, please do so before
+constructing optimizers for it. Parameters of a model after <code>$cuda()</code>
+will be different objects from those before the call. In general, you
+should make sure that the objects pointed to by model parameters subject
+to optimization remain the same over the whole lifecycle of optimizer
+creation and usage.</p>
+    </div>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
