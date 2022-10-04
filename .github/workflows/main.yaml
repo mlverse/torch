@@ -15,7 +15,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: ["ubuntu-20.04", "macos-latest", "windows-latest", ['self-hosted', 'm1']]
+        os: ["ubuntu-20.04", "macos-latest", "windows-latest"]
         r_version: ["release"]
         include:
           - os: ubuntu-20.04
@@ -33,9 +33,6 @@ jobs:
             install: 1
             r_version: "4.0"
           - os: macos-latest
-            install: 1
-            r_version: "release"
-          - os: ['self-hosted', 'm1']
             install: 1
             r_version: "release"
           - os: windows-latest
@@ -135,6 +132,35 @@ jobs:
         run: docker build -f $DOCKER_FILE -t $DOCKER_TAG .
       - name: Run checks
         run: docker run --rm --gpus all -e BUILD_LANTERN $DOCKER_TAG sh torch/tools/check.sh
+      
+  m1:
+    runs-on: ['self-hosted', 'm1']
+    env:
+      TORCH_TEST: 1
+      TORCH_INSTALL: 1
+      BUILD_LANTERN: ${{ contains( github.event.pull_request.labels.*.name, 'lantern') }}
+      GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
+    steps:
+      - uses: actions/checkout@v3
+      - name: Build lantern and get libtorch
+        if: contains( github.event.pull_request.labels.*.name, 'lantern')
+        run: |
+          Rscript tools/buildlantern.R
+      - name: Install dependencies
+        run: Rscript -e "install.packages(c('remotes', 'rcmdcheck'))" -e "remotes::install_deps(dependencies = TRUE)"
+      - name: Check
+        run: |
+          error_on <- if (.Platform$OS.type == "windows") "error" else "warning"
+          rcmdcheck::rcmdcheck(args = c("--no-multiarch", "--no-manual"), error_on = error_on, check_dir = "check")
+        shell: Rscript {0}
+      - name: Show testthat output
+        if: always()
+        run: find check -name 'testthat.Rout*' -exec cat '{}' \; || true
+        shell: bash
+      - name: Logs
+        if: ${{ failure() }}
+        run: if [ -f lantern.log ]; then cat lantern.log; fi
+        shell: bash
 
   # start-runner:
   #   runs-on: ubuntu-20.04
