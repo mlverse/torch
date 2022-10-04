@@ -1,4 +1,4 @@
-branch <- "libtorch-v1.12.0"
+branch <- "m1-mac"
 
 install_config <- list(
   "1.12.0" = list(
@@ -20,7 +20,7 @@ install_config <- list(
             filter = ".dylib",
             md5hash = "90106de5c48c5f00faa3f238a4986b9a"
           ),
-          "liblantern" = sprintf("https://storage.googleapis.com/torch-lantern-builds/refs/heads/%s/latest/macOS-cpu.zip", branch)  
+          "liblantern" = sprintf("https://storage.googleapis.com/torch-lantern-builds/refs/heads/%s/latest/macOSArm64-cpu.zip", branch)  
         )
       ),
       "windows" = list(
