@@ -34,8 +34,10 @@ const char *_lantern_Tensor_StreamInsertion(void *x) {
   // before printing and that's not supported by the MPS device
   // thus we first cast to CPU, print and later do a regex replace
   // to change the device to MPS.
-
-  auto is_mps = tensor.device().is_mps();
+  auto is_mps = (tensor.dtype() != torch::ScalarType::Undefined);
+  if (is_mps) {
+    is_mps = (tensor.device().is_mps());
+  }
   if (is_mps) {
     tensor = tensor.cpu();
   }
