@@ -435,8 +435,15 @@ install_torch_from_file <- function(version = "1.12.0", type = install_type(vers
 #'
 #' @export
 get_install_libs_url <- function(version = "1.12.0", type = install_type(version = version)) {
-  libtorch <- install_config[[version]][[type]][[install_os()]][["libtorch"]][["url"]]
-  liblantern <- install_config[[version]][[type]][[install_os()]][["liblantern"]]
+  
+  config <- install_config[[version]][[type]][[install_os()]]
+  
+  if (grepl("darwin", install_os())) {
+    config <- config[[R.version$arch]]
+  }
+
+  libtorch <- config[["libtorch"]][["url"]]
+  liblantern <- config[["liblantern"]]
   list(
     libtorch = maybe_get_pre_cxx11_abi_url(libtorch), 
     liblantern = maybe_get_pre_cxx11_abi_url(liblantern)
