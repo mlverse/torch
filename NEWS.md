@@ -10,6 +10,7 @@ everytime backward is called. (#873)
 - Fixed bug when using `install_torch(reinstall = TRUE)`. (#883)
 - Added `cuda_synchronize()` to allow synchronization of CUDA operations. (#887)
 - Updated to LibTorch v1.12.0. (#889)
+- Added support for M1 Macs, including creating Tensors in the MPS device. (#890)
 
 # torch 0.8.1
 
