@@ -54,5 +54,12 @@ groups (there can be only one).
 
 Right now all parameters have to be on a single device. This will be
 improved in the future.
+
+If you need to move a model to GPU via \verb{$cuda()}, please do so before
+constructing optimizers for it. Parameters of a model after \verb{$cuda()}
+will be different objects from those before the call. In general, you
+should make sure that the objects pointed to by model parameters subject
+to optimization remain the same over the whole lifecycle of optimizer
+creation and usage.
 }
 

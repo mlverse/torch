@@ -37,6 +37,23 @@ Also supports batches of matrices: the norm will be computed over the
 dimensions specified by the 2-tuple \code{dim} and the other dimensions will
 be treated as batch dimensions. The output will have the same batch dimensions.
 }
+\details{
+\code{ord} defines the norm that is computed. The following norms are
+supported:\tabular{lll}{
+   \code{ord} \tab norm for matrices \tab norm for vectors \cr
+   \code{NULL} (default) \tab Frobenius norm \tab \code{2}-norm (see below) \cr
+   \code{"fro"} \tab Frobenius norm \tab – not supported – \cr
+   \code{"nuc"} \tab nuclear norm \tab – not supported – \cr
+   \code{Inf} \tab \code{max(sum(abs(x), dim=2))} \tab \code{max(abs(x))} \cr
+   \code{-Inf} \tab \code{min(sum(abs(x), dim=2))} \tab \code{min(abs(x))} \cr
+   \code{0} \tab – not supported – \tab \code{sum(x != 0)} \cr
+   \code{1} \tab \code{max(sum(abs(x), dim=1))} \tab as below \cr
+   \code{-1} \tab \code{min(sum(abs(x), dim=1))} \tab as below \cr
+   \code{2} \tab largest singular value \tab as below \cr
+   \code{-2} \tab smallest singular value \tab as below \cr
+   other \code{int} or \code{float} \tab – not supported – \tab \code{sum(abs(x)^{ord})^{(1 / ord)}} \cr
+}
+}
 \examples{
 if (torch_is_installed()) {
 a <- torch_arange(0, 8, dtype = torch_float())$reshape(c(3, 3))
