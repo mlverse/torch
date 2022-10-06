@@ -1,4 +1,4 @@
-branch <- "libtorch-1.12.1"
+branch <- "mps-allocator"
 
 install_config <- list(
   "1.12.1" = list(
