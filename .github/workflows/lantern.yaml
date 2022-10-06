@@ -6,9 +6,6 @@ on:
       - master
       - main
       - "cran/**"
-      - "libtorch-1.12.1"
-      - "build2"
-      - "mps-allocator"
 
 jobs:
   build:
