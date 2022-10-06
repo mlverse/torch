@@ -14,6 +14,7 @@ lantern_sync <- function(sync_lib = FALSE) {
   }
 
   if (sync_lib) {
+    lib_dest <- install_path()
     lib_src <- "lantern/build/liblantern"
 
     if (file.exists(paste0(lib_src, ".dylib"))) {
@@ -24,7 +25,7 @@ lantern_sync <- function(sync_lib = FALSE) {
       path <- list.files("lantern/build/Release/", full.names = TRUE)
     }
 
-    dir.create("inst/lib", showWarnings = FALSE, recursive = TRUE)
+    dir.create(file.path(lib_dest, "lib"), showWarnings = FALSE, recursive = TRUE)
 
     file.copy(
       path,

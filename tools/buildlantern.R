@@ -9,6 +9,7 @@ if (dir.exists("lantern")) {
   })
 
   # copy lantern
+  source("R/install.R")
   source("R/lantern_sync.R")
   lantern_sync(TRUE)
 

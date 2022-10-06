@@ -1,4 +1,4 @@
-branch <- "libtorch-1.12.1"
+branch <- "mps-allocator"
 
 install_config <- list(
   "1.12.1" = list(
@@ -15,10 +15,10 @@ install_config <- list(
         ),
         aarch64 = list(
           libtorch = list(
-            url = "https://github.com/mlverse/libtorch-mac-m1/releases/download/LibTorch/libtorch-v1.12.1.zip",
+            url = "https://github.com/mlverse/libtorch-mac-m1/releases/download/LibTorch-for-R/libtorch-v1.12.1.zip",
             path = "libtorch/",
             filter = ".dylib",
-            md5hash = "d73b3d80dff28ab0fa647ca488cc3c2e"
+            md5hash = "90be2e718f10bf72280d595cbf5f70ef"
           ),
           "liblantern" = sprintf("https://storage.googleapis.com/torch-lantern-builds/refs/heads/%s/latest/macOSArm64-cpu.zip", branch)  
         )
