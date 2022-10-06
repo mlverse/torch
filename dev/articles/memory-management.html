@@ -114,9 +114,9 @@
     
 <p>Differently from most R objects, tensors created in torch have their memory managed by LibTorch allocators. This means that functions like <code><a href="https://rdrr.io/r/utils/object.size.html" class="external-link">object.size()</a></code> or <code>lobstr::mem_used()</code> do <strong>not</strong> correctly report memory used.</p>
 <p>The R garbage collector is very lazy, and is only called when R needs more memory from the OS. Since R is not aware of large chunks of memory that might be in use by torch tensors, it might not call the garbage collector as often as it would if it knew that tensors are using more memory. It’s common then that, even tensors that are no longer in use by the R session are still alive in the R session (and thus using memory) because they still din’t get garbage collected.</p>
-<p>To solve this problem, the torch package has implemented strategies to automatically call the R garbage collector when LibTorch is allocating more memory. The strategies are different depending on where the memory is being allocated: on the CPU or the GPU (CUDA devices).</p>
+<p>To solve this problem, the torch package has implemented strategies to automatically call the R garbage collector when LibTorch is allocating more memory. The strategies are different depending on where the memory is being allocated: on the CPU, GPU (CUDA devices) or <a href="https://developer.apple.com/documentation/metalperformanceshaders" class="external-link">MPS</a> (on Apple Silicon machines/ or equipped with AMD GPU’s).</p>
 <div class="section level2">
-<h2 id="cpu-memory-management">CPU memory management<a class="anchor" aria-label="anchor" href="#cpu-memory-management"></a>
+<h2 id="cpu">CPU<a class="anchor" aria-label="anchor" href="#cpu"></a>
 </h2>
 <p>On the CPU, torch will possibly call the R garbage collector in two moments:</p>
 <ol style="list-style-type: decimal">
@@ -132,7 +132,7 @@
 </ol>
 </div>
 <div class="section level2">
-<h2 id="cuda-memory-management">CUDA memory management<a class="anchor" aria-label="anchor" href="#cuda-memory-management"></a>
+<h2 id="cuda">CUDA<a class="anchor" aria-label="anchor" href="#cuda"></a>
 </h2>
 <p>CUDA memory tends to be scarcer than CPU memory, also, allocation must be faster otherwise allocation overhead can counterbalance the speed up of GPU. To make allocations very fast and to avoid segmentation, LibTorch uses a caching allocator to manage the GPU memory, ie. once LibTorch allocated CUDA memory it won’t give it back to the operation system, instead it reuses that memory for future allocations. This means that <code>nvidia-smi</code> or <code>nvtop</code> will not report the amount of memory used by tensors, but the memory LibTorch has reserved from the OS. You can use <code><a href="../reference/cuda_memory_stats.html">torch::cuda_memory_summary()</a></code> to query exactly the memory used by LibTorch.</p>
 <p>Like the CPU allocator, torch’s CUDA allocator will also call the R garbage collector in some situations to cleanup tensors that might be dangling. In torch’s implementation the R garbage collector is called whenever reusing a cached block fails. In this case, GC is called and we retry getting a new block. However, unlike in the CPU case, that allocations failures are very rare, reusing a block is not common in programs where LibTorch never reserves a large chunk of memory, causing the GC to be called at almost every allocation (and calling GC is time consuming).</p>
@@ -154,6 +154,11 @@
 <code>garbage_collection_threshold</code> helps actively reclaiming unused GPU memory to avoid triggering expensive sync-and-reclaim-all operation (release_cached_blocks), which can be unfavorable to latency-critical GPU applications (e.g., servers). Upon setting this threshold (e.g., 0.8), the allocator will start reclaiming GPU memory blocks if the GPU memory capacity usage exceeds the threshold (i.e., 80% of the total memory allocated to the GPU application). The algorithm prefers to free old &amp; unused blocks first to avoid freeing blocks that are actively being reused. The threshold value should be between greater than 0.0 and less than 1.0.</li>
 </ul>
 <p>Notice that the garbage collector refered below is not the R garbage collector but LibTorch’s collector, that releases memory from the cache to the OS.</p>
+</div>
+<div class="section level2">
+<h2 id="mps">MPS<a class="anchor" aria-label="anchor" href="#mps"></a>
+</h2>
+<p>Memory management in MPS devices is very similar to the strategy used in CUDA devices, except that here there’s currently no configuration or tuning possible. The R garbage collector will be called whenever there’s no more available memory for the GPU and thus, possibly deleting some Tensors. Allocation is then retried and if it fails, a OOM error is raised.</p>
 </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
     </nav></aside>
