@@ -22,10 +22,10 @@ memory) because they still din't get garbage collected.
 
 To solve this problem, the torch package has implemented strategies to automatically
 call the R garbage collector when LibTorch is allocating more memory. The strategies
-are different depending on where the memory is being allocated: on the CPU or the
-GPU (CUDA devices).
+are different depending on where the memory is being allocated: on the CPU,
+GPU (CUDA devices) or [MPS](https://developer.apple.com/documentation/metalperformanceshaders) (on Apple Silicon machines/ or equipped with AMD GPU's).
 
-## CPU memory management
+## CPU
 
 On the CPU, torch will possibly call the R garbage collector in two moments:
 
@@ -53,7 +53,7 @@ On the CPU, torch will possibly call the R garbage collector in two moments:
    a lot of overhead, so this will probably slow down the program execution.
 
 
-## CUDA memory management
+## CUDA
 
 CUDA memory tends to be scarcer than CPU memory, also, allocation must be faster
 otherwise allocation overhead can counterbalance the speed up of GPU. To make
@@ -97,3 +97,11 @@ as described below. The behavior of caching allocator can be controlled via envi
 - `garbage_collection_threshold` helps actively reclaiming unused GPU memory to avoid triggering expensive sync-and-reclaim-all operation (release_cached_blocks), which can be unfavorable to latency-critical GPU applications (e.g., servers). Upon setting this threshold (e.g., 0.8), the allocator will start reclaiming GPU memory blocks if the GPU memory capacity usage exceeds the threshold (i.e., 80% of the total memory allocated to the GPU application). The algorithm prefers to free old & unused blocks first to avoid freeing blocks that are actively being reused. The threshold value should be between greater than 0.0 and less than 1.0.
 
 Notice that the garbage collector refered below is not the R garbage collector but LibTorch's collector, that releases memory from the cache to the OS.
+
+## MPS
+
+Memory management in MPS devices is very similar to the strategy used in CUDA devices,
+except that here there's currently no configuration or tuning possible. The R garbage
+collector will be called whenever there's no more available memory for the GPU and thus,
+possibly deleting some Tensors. Allocation is then retried and if it fails, a OOM
+error is raised.
