@@ -8,7 +8,7 @@ on:
       - "cran/**"
       - "libtorch-1.12.1"
       - "build2"
-      - "m1-mac"
+      - "mps-allocator"
 
 jobs:
   build:
