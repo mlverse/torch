@@ -45,7 +45,7 @@ if(APPLE)
       if ('${CMAKE_HOST_SYSTEM_PROCESSOR}' STREQUAL 'x86_64')
         retrieve_lib("https://download.pytorch.org/libtorch/cpu/libtorch-macos-1.12.1.zip" "libtorch")
       elseif ('${CMAKE_HOST_SYSTEM_PROCESSOR}' STREQUAL 'arm64')
-        retrieve_lib("https://github.com/mlverse/libtorch-mac-m1/releases/download/LibTorch/libtorch-v1.12.1.zip" "libtorch")
+        retrieve_lib("https://github.com/mlverse/libtorch-mac-m1/releases/download/LibTorch-for-R/libtorch-v1.12.1.zip" "libtorch")
       else()
         message(FATAL_ERROR, "Arch not supported")
       endif()
@@ -163,6 +163,11 @@ set(LANTERN_SRC
     src/Compile.cpp
 )
 
+if(APPLE)
+  if('${CMAKE_HOST_SYSTEM_PROCESSOR}' STREQUAL 'arm64')
+    set(LANTERN_SRC ${LANTERN_SRC} src/AllocatorMPS.cpp)
+  endif()
+endif()
 
 if(DEFINED ENV{CUDA} AND NOT '$ENV{CUDA}' STREQUAL '')
  
