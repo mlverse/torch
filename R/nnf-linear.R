@@ -10,17 +10,7 @@
 #'
 #' @export
 nnf_linear <- function(input, weight, bias = NULL) {
-  if (input$dim() == 2 && !is.null(bias)) {
-    ret <- torch_addmm(bias, input, weight$t())
-  } else {
-    output <- input$matmul(weight$t())
-    if (!is.null(bias)) {
-      output <- output + bias
-    }
-    ret <- output
-  }
-
-  ret
+  torch_linear(input, weight, bias)
 }
 
 #' Bilinear

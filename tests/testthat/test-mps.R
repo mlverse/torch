@@ -14,3 +14,15 @@ test_that("can allocate a bunch of tensors without OOM", {
     for(i in 1:25) x <- torch_randn(10000, 10000, device="mps")  
   })
 })
+
+test_that("can run nn_linear on mps device", {
+  skip_if_not_m1_mac()
+  
+  linear <- nn_linear(10, 1)
+  linear$to(device="mps")
+  
+  x <- torch_randn(10, 10, device='mps')
+  
+  y <- linear(x)
+  expect_tensor(y)
+})
