@@ -4,7 +4,7 @@
 \alias{nnf_pad}
 \title{Pad}
 \usage{
-nnf_pad(input, pad, mode = "constant", value = 0)
+nnf_pad(input, pad, mode = "constant", value = NULL)
 }
 \arguments{
 \item{input}{(Tensor) N-dimensional tensor}

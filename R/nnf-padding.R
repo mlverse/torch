@@ -37,56 +37,6 @@
 #' @param value fill value for 'constant' padding. Default: 0.
 #'
 #' @export
-nnf_pad <- function(input, pad, mode = "constant", value = 0) {
-  if (mode == "constant") {
-    return(torch_constant_pad_nd(input, pad, value))
-  } else {
-    if (input$dim() == 3) {
-      if (mode == "reflect") {
-        return(torch_reflection_pad1d(input, pad))
-      }
-
-      if (mode == "replicate") {
-        return(torch_replication_pad1d(input, pad))
-      }
-
-      if (mode == "circular") {
-        return(nnf_pad_circular(input, pad))
-      }
-
-      not_implemented_error()
-    }
-
-    if (input$dim() == 4) {
-      if (mode == "reflect") {
-        return(torch_reflection_pad2d(input, pad))
-      }
-
-      if (mode == "replicate") {
-        return(torch_replication_pad2d(input, pad))
-      }
-
-      if (mode == "circular") {
-        return(nnf_pad_circular(input, pad))
-      }
-
-      not_implemented_error()
-    }
-
-    if (input$dim() == 5) {
-      if (mode == "reflect") {
-        not_implemented_error()
-      }
-
-      if (mode == "replicate") {
-        return(torch_replication_pad3d(input, pad))
-      }
-
-      if (mode == "circular") {
-        return(nnf_pad_circular(input, pad))
-      }
-    }
-  }
-
-  not_implemented_error("Only 3D, 4D, 5D padding with non-constant padding are supported for now")
+nnf_pad <- function(input, pad, mode = "constant", value = NULL) {
+  torch_pad(input, pad, mode, value)
 }
