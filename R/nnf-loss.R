@@ -371,57 +371,7 @@ nnf_margin_ranking_loss <- function(input1, input2, target, margin = 0,
 #' @export
 nnf_nll_loss <- function(input, target, weight = NULL, ignore_index = -100,
                          reduction = "mean") {
-  dim <- input$dim()
-
-  if (dim < 2) {
-    value_error("Expected 2 or more dimensions, got '{dim}'.")
-  }
-
-  if (dim == 2) {
-    ret <- torch_nll_loss(
-      input, target, weight, reduction_enum(reduction),
-      ignore_index
-    )
-  } else if (dim == 4) {
-    ret <- torch_nll_loss2d(
-      input, target, weight, reduction_enum(reduction),
-      ignore_index
-    )
-  } else {
-    n <- input$size(1)
-    c <- input$size(2)
-    out_size <- c(n, input$size()[-c(1:2)])
-
-    input <- input$contiguous()
-    target <- target$contiguous()
-
-    if (input$numel() > 0) {
-      input <- input$view(c(n, c, 1, -1))
-    } else {
-      input <- input$view(c(n, c, 0, 0))
-    }
-
-    if (target$numel() > 0) {
-      target <- target$view(c(n, 1, -1))
-    } else {
-      target <- target$view(c(n, 0, 0))
-    }
-
-    if (reduction != "none") {
-      ret <- torch_nll_loss2d(
-        input, target, weight, reduction_enum(reduction),
-        ignore_index
-      )
-    } else {
-      out <- torch_nll_loss2d(
-        input, target, weight, reduction_enum(reduction),
-        ignore_index
-      )
-      ret <- out$view(out_size)
-    }
-  }
-
-  ret
+  torch_nll_loss_nd(input, target, weight, reduction_enum(reduction), ignore_index)
 }
 
 #' Cross_entropy

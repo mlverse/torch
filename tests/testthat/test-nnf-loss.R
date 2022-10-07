@@ -29,6 +29,14 @@ test_that("nnf_nll_loss", {
 
   o <- nnf_nll_loss(x, y)
   expect_length(o$size(), 0)
+  
+  # test ignore index
+  x <- torch_randn(2, 10)
+  y <- torch_tensor(c(1, -100), dtype = torch_int64())
+  
+  o <- nnf_nll_loss(x, y)
+  o2 <- nnf_nll_loss(x[1,], y[1])
+  expect_equal_to_tensor(o, o2)
 })
 
 test_that("l1 loss", {
