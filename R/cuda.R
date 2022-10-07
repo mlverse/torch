@@ -154,8 +154,83 @@ cuda_memory_stats <- function(device = cuda_current_device()) {
 #' @rdname cuda_memory_stats
 #' @export
 cuda_memory_summary <- function(device = cuda_current_device()) {
+  if (rlang::is_installed("tabulate")) {
+    tabulate_memory_summary(device)
+  } else {
+    result <- cuda_memory_stats(device)
+    print(result)  
+  }
+}
+
+tabulate_memory_summary <- function(device = cuda_current_device()) {
   result <- cuda_memory_stats(device)
-  print(result)
+  
+  title <- tabulate::tabulate_table()
+  title %>% 
+    tabulate::table_add_row(paste0("CUDA memory summary, device ID ", device))
+  
+  OOM <- tabulate::tabulate_table()
+  OOM %>% 
+    tabulate::table_add_row(c(
+      paste0("CUDA OOMs: ", result$num_ooms),
+      paste0("cudaMalloc retries: ", result$num_alloc_retries) 
+    ))
+  
+  title %>% 
+    tabulate::table_add_row(OOM)
+  
+  metrics <- tabulate::tabulate_table()
+  metrics %>% 
+    tabulate::table_add_row(c("Metric", "Cur Usage", "Peak Usage", "Tot Alloc", "Tot Freed"))
+  
+  i <- 2
+  add_metric_row <- function(table, title, metrics, format) {
+    table %>% 
+      tabulate::table_add_row(c(
+        title, 
+        format(metrics$current),
+        format(metrics$peak),
+        format(metrics$allocated),
+        format(metrics$freed)
+      ))
+    if (i %% 4 != 0)
+      table[i,] %>% tabulate::format_hide_border_bottom()
+    i <<- i+1
+    invisible(table)
+  }
+  
+  add_metric <- function(table, title, metrics, format = prettyunits::pretty_bytes) {
+    table %>% 
+      add_metric_row(title, metrics$all, format) %>% 
+      add_metric_row("from large pool", metrics$large_pool, format) %>% 
+      add_metric_row("from small pool", metrics$small_pool, format)
+    invisible(table)
+  }
+  
+  format_int <- function(x) {
+    format(x, big.mark = ",", scientific = FALSE)
+  }
+  
+  metrics %>% 
+    add_metric("Allocated memory", result$allocated_bytes) %>% 
+    add_metric("Active memory", result$active_bytes) %>% 
+    add_metric("GPU reserved memory", result$reserved_bytes) %>% 
+    add_metric("Allocations", result$allocation, format_int) %>% 
+    add_metric("Active allocs", result$active, format_int) %>% 
+    add_metric("GPU reserved segments", result$segment, format_int)
+  
+  
+  metrics[1,1] %>% tabulate::format_font_align("center")
+  metrics[2,1] %>% tabulate::format_font_align("left")
+  metrics[3,1] %>% tabulate::format_font_align("right")
+  metrics[4,1] %>% tabulate::format_font_align("right")
+  metrics[2,] %>% tabulate::format_hide_border_bottom()
+  metrics[3,] %>% tabulate::format_hide_border_bottom()
+    
+  title %>% 
+    tabulate::table_add_row(metrics)
+  
+  title
 }
 
 #' @export
