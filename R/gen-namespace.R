@@ -9931,8 +9931,8 @@ fun_type = 'namespace'
 }
 
 
-#' @rdname torch_bincount
-torch_bincount <- function(self, weights = list(), minlength = 0L) {
+#' @rdname .torch_bincount
+.torch_bincount <- function(self, weights = list(), minlength = 0L) {
   args <- mget(x = c("self", "weights", "minlength"))
 expected_types <- list(self = "Tensor", weights = "Tensor", minlength = "int64_t")
 nd_args <- "self"

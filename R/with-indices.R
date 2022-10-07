@@ -121,3 +121,8 @@ torch_sort <- function(self, dim = -1L, descending = FALSE, stable) {
   out[[2]]$add_(1L)
   out
 }
+
+torch_bincount <- function(self, weights = list(), minlength = 0L) { 
+  .torch_bincount(self = to_index_tensor(self), weights = weights,
+                  minlength = minlength)
+}
