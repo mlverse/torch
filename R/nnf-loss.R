@@ -11,21 +11,8 @@
 #'
 #' @export
 nnf_l1_loss <- function(input, target, reduction = "mean") {
-  if (target$requires_grad) {
-    ret <- torch_abs(input - target)
-    if (!is.null(reduction)) {
-      if (reduction == "mean") {
-        ret <- torch_mean(ret)
-      } else {
-        ret <- torch_sum(ret)
-      }
-    }
-  } else {
-    expanded <- torch_broadcast_tensors(list(input, target))
-    ret <- torch_l1_loss(expanded[[1]], expanded[[2]], reduction_enum(reduction))
-  }
-
-  ret
+  expanded <- torch_broadcast_tensors(list(input, target))
+  torch_l1_loss(expanded[[1]], expanded[[2]], reduction_enum(reduction))
 }
 
 #' Kl_div

@@ -30,3 +30,13 @@ test_that("nnf_nll_loss", {
   o <- nnf_nll_loss(x, y)
   expect_length(o$size(), 0)
 })
+
+test_that("l1 loss", {
+  input <- torch_randn(3, 5, requires_grad=TRUE)
+  target <- torch_randn(3, 5)
+  output <- nnf_l1_loss(input, target)
+  expect_equal(output$size(), integer(0))
+  output$backward()
+  expect_tensor(input$grad)
+})
+
