@@ -55,7 +55,7 @@ nnf_kl_div <- function(input, target, reduction = "mean") {
 #'
 #' @export
 nnf_mse_loss <- function(input, target, reduction = "mean") {
-  if (!all(target$shape == input$shape)) {
+  if (!identical(target$size(), input$size())) {
     target_shape <- paste0("(", paste(target$shape, collapse = ","), ")")
     input_shape <- paste0("(", paste(input$shape, collapse = ","), ")")
 
@@ -65,22 +65,8 @@ nnf_mse_loss <- function(input, target, reduction = "mean") {
       "Please ensure they have the same size."
     )
   }
-
-  if (target$requires_grad) {
-    ret <- (input - target)^2
-    if (!is.null(reduction)) {
-      if (reduction == "mean") {
-        ret <- torch_mean(ret)
-      } else {
-        ret <- torch_sum(ret)
-      }
-    }
-  } else {
-    expanded <- torch_broadcast_tensors(list(input, target))
-    ret <- torch_mse_loss(expanded[[1]], expanded[[2]], reduction_enum(reduction))
-  }
-
-  ret
+  expanded <- torch_broadcast_tensors(list(input, target))
+  torch_mse_loss(expanded[[1]], expanded[[2]], reduction_enum(reduction))
 }
 
 #' Binary_cross_entropy
