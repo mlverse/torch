@@ -133,7 +133,7 @@ test_that("torch_nll_loss out of bound", {
 
   expect_error(
     torch_nll_loss(x, torch_tensor(0, dtype = torch_long())),
-    regex = "Target 0 is out of bounds.",
+    regex = "Indexing starts at 1 but found a 0.",
     fixed = TRUE
   )
 

@@ -25,10 +25,6 @@ nnf_fold <- function(input, output_size, kernel_size, dilation = 1, padding = 0,
 #'
 #' Extracts sliding local blocks from an batched input tensor.
 #'
-#' @section Warning:
-#'
-#' Currently, only 4-D input tensors (batched image-like tensors) are
-#' supported.
 #'
 #' @section Warning:
 #'
@@ -48,12 +44,8 @@ nnf_fold <- function(input, output_size, kernel_size, dilation = 1, padding = 0,
 #'
 #' @export
 nnf_unfold <- function(input, kernel_size, dilation = 1, padding = 0, stride = 1) {
-  if (input$dim() == 4) {
-    torch_im2col(
-      input, nn_util_pair(kernel_size), nn_util_pair(dilation),
-      nn_util_pair(padding), nn_util_pair(stride)
-    )
-  } else {
-    not_implemented_error("Input Error: Only 4D input Tensors are supported (got {input$dim()}D)")
-  }
+  torch_im2col(
+    input, nn_util_pair(kernel_size), nn_util_pair(dilation),
+    nn_util_pair(padding), nn_util_pair(stride)
+  )
 }

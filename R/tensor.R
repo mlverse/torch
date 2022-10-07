@@ -250,6 +250,9 @@ Tensor <- R7Class(
     },
     view = function(size) {
       private$`_view`(size = size)
+    },
+    bincount = function(weights = list(), minlength = 0L) {
+      to_index_tensor(self)$private$`_bincount`(weights = weights, minlength = minlength)
     }
   ),
   active = list(

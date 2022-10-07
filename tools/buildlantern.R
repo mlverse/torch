@@ -14,7 +14,6 @@ if (dir.exists("lantern")) {
   lantern_sync(TRUE)
 
   # download torch
-  source("R/install.R")
   install_torch(path = normalizePath("inst/"), load = FALSE)
 }
 

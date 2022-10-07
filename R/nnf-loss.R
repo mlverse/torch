@@ -11,21 +11,8 @@
 #'
 #' @export
 nnf_l1_loss <- function(input, target, reduction = "mean") {
-  if (target$requires_grad) {
-    ret <- torch_abs(input - target)
-    if (!is.null(reduction)) {
-      if (reduction == "mean") {
-        ret <- torch_mean(ret)
-      } else {
-        ret <- torch_sum(ret)
-      }
-    }
-  } else {
-    expanded <- torch_broadcast_tensors(list(input, target))
-    ret <- torch_l1_loss(expanded[[1]], expanded[[2]], reduction_enum(reduction))
-  }
-
-  ret
+  expanded <- torch_broadcast_tensors(list(input, target))
+  torch_l1_loss(expanded[[1]], expanded[[2]], reduction_enum(reduction))
 }
 
 #' Kl_div
@@ -68,7 +55,7 @@ nnf_kl_div <- function(input, target, reduction = "mean") {
 #'
 #' @export
 nnf_mse_loss <- function(input, target, reduction = "mean") {
-  if (!all(target$shape == input$shape)) {
+  if (!identical(target$size(), input$size())) {
     target_shape <- paste0("(", paste(target$shape, collapse = ","), ")")
     input_shape <- paste0("(", paste(input$shape, collapse = ","), ")")
 
@@ -78,22 +65,8 @@ nnf_mse_loss <- function(input, target, reduction = "mean") {
       "Please ensure they have the same size."
     )
   }
-
-  if (target$requires_grad) {
-    ret <- (input - target)^2
-    if (!is.null(reduction)) {
-      if (reduction == "mean") {
-        ret <- torch_mean(ret)
-      } else {
-        ret <- torch_sum(ret)
-      }
-    }
-  } else {
-    expanded <- torch_broadcast_tensors(list(input, target))
-    ret <- torch_mse_loss(expanded[[1]], expanded[[2]], reduction_enum(reduction))
-  }
-
-  ret
+  expanded <- torch_broadcast_tensors(list(input, target))
+  torch_mse_loss(expanded[[1]], expanded[[2]], reduction_enum(reduction))
 }
 
 #' Binary_cross_entropy
@@ -215,6 +188,8 @@ nnf_soft_margin_loss <- function(input, target, reduction = "mean") {
 #'
 #' Creates a criterion that optimizes a multi-label one-versus-all loss based on
 #' max-entropy, between input x and target y of size (N, C).
+#' 
+#' @note It takes a one hot encoded target vector as input.
 #'
 #' @inheritParams nnf_l1_loss
 #' @param weight weight tensor to apply on the loss.
@@ -226,8 +201,10 @@ nnf_multilabel_soft_margin_loss <- function(input, target, weight = NULL, reduct
   if (!is.null(weight)) {
     loss <- loss * weight
   }
-
-  loss <- loss$sum(dim = 1) / input$size(2)
+  
+  class_dim <- input$dim() - 1
+  C <- input$size(class_dim)
+  loss <- loss$sum(dim = class_dim) / C
 
   if (reduction == "none") {
     ret <- loss
@@ -394,57 +371,7 @@ nnf_margin_ranking_loss <- function(input1, input2, target, margin = 0,
 #' @export
 nnf_nll_loss <- function(input, target, weight = NULL, ignore_index = -100,
                          reduction = "mean") {
-  dim <- input$dim()
-
-  if (dim < 2) {
-    value_error("Expected 2 or more dimensions, got '{dim}'.")
-  }
-
-  if (dim == 2) {
-    ret <- torch_nll_loss(
-      input, target, weight, reduction_enum(reduction),
-      ignore_index
-    )
-  } else if (dim == 4) {
-    ret <- torch_nll_loss2d(
-      input, target, weight, reduction_enum(reduction),
-      ignore_index
-    )
-  } else {
-    n <- input$size(1)
-    c <- input$size(2)
-    out_size <- c(n, input$size()[-c(1:2)])
-
-    input <- input$contiguous()
-    target <- target$contiguous()
-
-    if (input$numel() > 0) {
-      input <- input$view(c(n, c, 1, -1))
-    } else {
-      input <- input$view(c(n, c, 0, 0))
-    }
-
-    if (target$numel() > 0) {
-      target <- target$view(c(n, 1, -1))
-    } else {
-      target <- target$view(c(n, 0, 0))
-    }
-
-    if (reduction != "none") {
-      ret <- torch_nll_loss2d(
-        input, target, weight, reduction_enum(reduction),
-        ignore_index
-      )
-    } else {
-      out <- torch_nll_loss2d(
-        input, target, weight, reduction_enum(reduction),
-        ignore_index
-      )
-      ret <- out$view(out_size)
-    }
-  }
-
-  ret
+  torch_nll_loss_nd(input, target, weight, reduction_enum(reduction), ignore_index)
 }
 
 #' Cross_entropy

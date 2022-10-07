@@ -78,12 +78,12 @@ torch_argmin <- function(self, dim = NULL, keepdim = FALSE) {
 }
 
 torch_nll_loss <- function(self, target, weight = list(), reduction = torch_reduction_mean(), ignore_index = -100) {
-  target <- target$sub(1L, 1L)
+  target <- to_index_tensor(target)
   .torch_nll_loss(self, target, weight, reduction, ignore_index)
 }
 
 torch_nll_loss2d <- function(self, target, weight = list(), reduction = torch_reduction_mean(), ignore_index = -100) {
-  target <- target$sub(1L, 1L)
+  target <- to_index_tensor(target)
   .torch_nll_loss2d(self, target, weight, reduction, ignore_index)
 }
 
@@ -95,10 +95,20 @@ torch_argsort <- function(self, dim = -1L, descending = FALSE) {
 torch_cross_entropy_loss <- function(self, target, weight = list(),
                                      reduction = torch_reduction_mean(),
                                      ignore_index = -100L) {
-  target <- target$sub(1L, 1L)
+  target <- to_index_tensor(target)
   .torch_cross_entropy_loss(
     self = self, target = target, weight = weight,
     reduction = reduction, ignore_index = ignore_index
+  )
+}
+
+torch_nll_loss_nd <- function(self, target, weight = list(), reduction = torch_reduction_mean(), 
+                               ignore_index = -100L) {
+  target <- to_index_tensor(target)
+  .torch_nll_loss_nd(
+    self = self, target = target, weight = weight, 
+    reduction = reduction, 
+    ignore_index = ignore_index
   )
 }
 
@@ -110,4 +120,9 @@ torch_sort <- function(self, dim = -1L, descending = FALSE, stable) {
   }
   out[[2]]$add_(1L)
   out
+}
+
+torch_bincount <- function(self, weights = list(), minlength = 0L) { 
+  .torch_bincount(self = to_index_tensor(self), weights = weights,
+                  minlength = minlength)
 }
