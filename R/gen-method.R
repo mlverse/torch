@@ -1270,7 +1270,7 @@ call_c_function(
   return_types = return_types,
   fun_type = 'method'
 )})
-Tensor$set("public", "bincount", function(weights = list(), minlength = 0L) {  args <- mget(x = c("weights", "minlength"))
+Tensor$set("private", "_bincount", function(weights = list(), minlength = 0L) {  args <- mget(x = c("weights", "minlength"))
 args <- c(list(self = self), args)
 expected_types <- list(self = "Tensor", weights = "Tensor", minlength = "int64_t")
 nd_args <- "self"

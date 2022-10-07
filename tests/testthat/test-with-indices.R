@@ -80,9 +80,13 @@ test_that("bincount is 1 indexed", {
   x <- torch_tensor(c(1,2,3,1), dtype = torch_int64())
   out <- torch_bincount(x)
   expect_length(out, 3)
+  out <- x$bincount()
+  expect_length(out, 3)
   
   x <- torch_tensor(c(1,2,3,1,0), dtype = torch_int64())
   expect_error({
     out <- torch_bincount(x)  
   }, regexp =  "Indexing starts at 1 but found a 0.")
+  
+  
 })
