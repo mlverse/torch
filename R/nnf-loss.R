@@ -188,6 +188,8 @@ nnf_soft_margin_loss <- function(input, target, reduction = "mean") {
 #'
 #' Creates a criterion that optimizes a multi-label one-versus-all loss based on
 #' max-entropy, between input x and target y of size (N, C).
+#' 
+#' @note It takes a one hot encoded target vector as input.
 #'
 #' @inheritParams nnf_l1_loss
 #' @param weight weight tensor to apply on the loss.
@@ -199,8 +201,10 @@ nnf_multilabel_soft_margin_loss <- function(input, target, weight = NULL, reduct
   if (!is.null(weight)) {
     loss <- loss * weight
   }
-
-  loss <- loss$sum(dim = 1) / input$size(2)
+  
+  class_dim <- input$dim() - 1
+  C <- input$size(class_dim)
+  loss <- loss$sum(dim = class_dim) / C
 
   if (reduction == "none") {
     ret <- loss

@@ -27,3 +27,6 @@ the sum of the output will be divided by the number of elements in the output,
 Creates a criterion that optimizes a multi-label one-versus-all loss based on
 max-entropy, between input x and target y of size (N, C).
 }
+\note{
+It takes a one hot encoded target vector as input.
+}

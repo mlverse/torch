@@ -40,3 +40,16 @@ test_that("l1 loss", {
   expect_tensor(input$grad)
 })
 
+test_that("multilabel margin loss", {
+  x <- torch_tensor(matrix(c(0.1, 0.2, 0.4, 0.8), nrow=1))
+  y <- torch_tensor(matrix(c(4, 1, -1, 2), nrow = 1), dtype = torch_int64())
+  out <- nnf_multilabel_margin_loss(x, y)
+  expect_equal(out$item(), 0.85, tolerance = 1e-6)
+})
+
+test_that("multilabel soft margin loss", {
+  x <- torch_tensor(matrix(c(0.1, 0.2, 0.4, 0.8), nrow=1))
+  y <- torch_tensor(matrix(c(0, 1, 1, 0), nrow = 1), dtype = torch_int64())
+  out <- nnf_multilabel_soft_margin_loss(x, y)
+  expect_equal(out$item(), 0.7567, tolerance = 1e-4)
+})
