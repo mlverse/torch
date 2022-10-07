@@ -23513,8 +23513,8 @@ fun_type = 'namespace'
 }
 
 
-#' @rdname torch_nll_loss_nd
-torch_nll_loss_nd <- function(self, target, weight = list(), reduction = torch_reduction_mean(), ignore_index = -100L) {
+#' @rdname .torch_nll_loss_nd
+.torch_nll_loss_nd <- function(self, target, weight = list(), reduction = torch_reduction_mean(), ignore_index = -100L) {
   args <- mget(x = c("self", "target", "weight", "reduction", "ignore_index"))
 expected_types <- list(self = "Tensor", target = "Tensor", weight = "Tensor", reduction = "int64_t", 
     ignore_index = "int64_t")
