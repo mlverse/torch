@@ -157,12 +157,17 @@ cuda_memory_summary <- function(device = cuda_current_device()) {
   if (rlang::is_installed("tabulate")) {
     tabulate_memory_summary(device)
   } else {
+    cli::cli_warn(
+      .frequency = "once", .frequency_id = "tabulate",
+      "Install the {.var tabulate} package for a better display."
+    )
     result <- cuda_memory_stats(device)
     print(result)  
   }
 }
 
 tabulate_memory_summary <- function(device = cuda_current_device()) {
+  rlang::check_installed("prettyunits")
   result <- cuda_memory_stats(device)
   
   title <- tabulate::tabulate_table()
@@ -174,16 +179,18 @@ tabulate_memory_summary <- function(device = cuda_current_device()) {
     tabulate::table_add_row(c(
       paste0("CUDA OOMs: ", result$num_ooms),
       paste0("cudaMalloc retries: ", result$num_alloc_retries) 
-    ))
+    )) %>% 
+    tabulate::format_hide_border()
   
   title %>% 
     tabulate::table_add_row(OOM)
-  
+    
   metrics <- tabulate::tabulate_table()
   metrics %>% 
     tabulate::table_add_row(c("Metric", "Cur Usage", "Peak Usage", "Tot Alloc", "Tot Freed"))
   
   i <- 2
+  
   add_metric_row <- function(table, title, metrics, format) {
     table %>% 
       tabulate::table_add_row(c(
@@ -193,8 +200,13 @@ tabulate_memory_summary <- function(device = cuda_current_device()) {
         format(metrics$allocated),
         format(metrics$freed)
       ))
-    if (i %% 4 != 0)
-      table[i,] %>% tabulate::format_hide_border_bottom()
+    if ((i+1) %% 3 != 0) {
+      table[i,] %>% tabulate::format_hide_border_top()
+      table[i, 1] %>% tabulate::format_font_align("right")
+    } else {
+      table[i,1] %>% tabulate::format_font_align("left")
+    }
+      
     i <<- i+1
     invisible(table)
   }
@@ -219,18 +231,34 @@ tabulate_memory_summary <- function(device = cuda_current_device()) {
     add_metric("Active allocs", result$active, format_int) %>% 
     add_metric("GPU reserved segments", result$segment, format_int)
   
+  metrics %>% 
+    tabulate::table_add_row(c(
+      "Oversize allocations",
+      sapply(result$oversize_allocations, format_int)
+    ))
   
-  metrics[1,1] %>% tabulate::format_font_align("center")
-  metrics[2,1] %>% tabulate::format_font_align("left")
-  metrics[3,1] %>% tabulate::format_font_align("right")
-  metrics[4,1] %>% tabulate::format_font_align("right")
-  metrics[2,] %>% tabulate::format_hide_border_bottom()
-  metrics[3,] %>% tabulate::format_hide_border_bottom()
-    
+  metrics %>% 
+    tabulate::table_add_row(c(
+      "Oversize GPU segments",
+      sapply(result$oversize_segments, format_int)
+    ))
+  
+  space <- "."
+  
+  metrics[1,] %>% tabulate::format_hide_border_top()
+  metrics[,1] %>% tabulate::format_border_left(value = space)
+  metrics[,1] %>% tabulate::format_corner(value = "-")
+  metrics[,5] %>% tabulate::format_border_right(value = space)
+  metrics[,5] %>% tabulate::format_corner(value="-")
+  
   title %>% 
     tabulate::table_add_row(metrics)
   
-  title
+  title[1,1] %>% tabulate::format_font_align("center")
+  title[2,1] %>% tabulate::format_font_align("center")
+  print(title)
+
+  invisible(result)
 }
 
 #' @export
