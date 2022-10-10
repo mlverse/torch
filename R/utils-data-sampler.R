@@ -60,9 +60,8 @@ SequentialSampler <- sampler(
     self$data_source <- data_source
   },
   .iter = function() {
-    i <- 0
     n <- length(self$data_source)
-    coro::as_iterator(seq_len(n))
+    as_iterator_f(seq_len(n))
   },
   .length = function() {
     length(self$data_source)
@@ -89,7 +88,7 @@ RandomSampler <- sampler(
       rand_tensor <- torch_randperm(n)$add(1L, 1L) # , generator = self$generator)
     }
     rand_tensor <- as_array(rand_tensor$to(dtype = torch_int()))
-    as_iterator(rand_tensor)
+    as_iterator_f(rand_tensor)
   },
   .length = function() {
     self$num_samples
@@ -113,21 +112,20 @@ BatchSampler <- sampler(
     self$drop_last <- drop_last
   },
   .iter = function() {
-    coro::generator(function() {
+    samp <- self$sampler$.iter()
+    function() {
       batch <- list()
-      
-      for (idx in self$sampler) {
-        batch[[length(batch) + 1]] <- idx
-        if (length(batch) == self$batch_size) {
-          yield(batch)
-          batch <- list()
-        }
+      repeat {
+        id <- samp()
+        if (coro::is_exhausted(id)) break
+        batch[[length(batch) + 1]] <- id
+        if (length(batch) == self$batch_size) return(batch)
       }
-      
       if (length(batch) > 0 && !self$drop_last) {
-        yield(batch)
+        return(batch)
       }
-    })()
+      coro::exhausted()
+    }
   },
   .length = function() {
     if (self$drop_last) {
@@ -143,5 +141,17 @@ as_iterator.utils_sampler <- function(x) {
   it <- x$.iter()
   function() {
     it()
+  }
+}
+
+as_iterator_f <- function(x) {
+  n <- length(x)
+  i <- 0L
+  function() {
+    if (i == n) {
+      return(coro::exhausted())
+    }
+    i <<- i + 1L
+    x[i]
   }
 }
