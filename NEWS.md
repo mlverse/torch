@@ -12,7 +12,8 @@ everytime backward is called. (#873)
 - Updated to LibTorch v1.12.1. (#889, #893, #899)
 - Added support for M1 Macs, including creating Tensors in the MPS device. (#890)
 - `torch_bincount` is now 1-based indexed. (#896)
-- A `nnf_` functions have been updated to use a single `torch_` kernel instead of the custom implementation. (#896)
+- A `nnf_` functions have been updated to use a single `torch_` kernel instead of the custom implementation. (#896)]
+- Improved performance of dataloaders. (#900)
 
 # torch 0.8.1
 
