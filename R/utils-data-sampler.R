@@ -59,9 +59,12 @@ SequentialSampler <- sampler(
   initialize = function(data_source) {
     self$data_source <- data_source
   },
-  .iter = function() {
+  .iter_batch = function(batch_size) {
     n <- length(self$data_source)
-    as_iterator_f(seq_len(n))
+    as_batch_iterator(seq_len(n), batch_size)
+  },
+  .iter = function() {
+    self$.iter_batch(1L)
   },
   .length = function() {
     length(self$data_source)
@@ -76,7 +79,7 @@ RandomSampler <- sampler(
     self$.num_samples <- num_samples
     self$generator <- generator
   },
-  .iter = function() {
+  .iter_batch = function(batch_size) {
     n <- length(self$data_source)
     
     if (self$replacement) {
@@ -88,7 +91,10 @@ RandomSampler <- sampler(
       rand_tensor <- torch_randperm(n)$add(1L, 1L) # , generator = self$generator)
     }
     rand_tensor <- as_array(rand_tensor$to(dtype = torch_int()))
-    as_iterator_f(rand_tensor)
+    as_batch_iterator(rand_tensor, batch_size)
+  },
+  .iter = function() {
+    self$.iter_batch(1L)
   },
   .length = function() {
     self$num_samples
@@ -111,7 +117,17 @@ BatchSampler <- sampler(
     self$batch_size <- batch_size
     self$drop_last <- drop_last
   },
-  .iter = function() {
+  .iter_batch_sampler = function() {
+    samp <- self$sampler$.iter_batch(self$batch_size)
+    function() {
+      batch <- samp()
+      if (coro::is_exhausted(batch)) return(batch)
+      if (length(batch) == self$batch_size) return(batch)
+      if (length(batch) > 0 && !self$drop_last) return(batch)
+      coro::exhausted()
+    }
+  },
+  .iter_sampler = function() {
     samp <- self$sampler$.iter()
     function() {
       batch <- list()
@@ -125,6 +141,13 @@ BatchSampler <- sampler(
         return(batch)
       }
       coro::exhausted()
+    }
+  },
+  .iter = function() {
+    if (!is.null(self$sampler$.iter_batch)) {
+      self$.iter_batch_sampler()
+    } else {
+      self$.iter_sampler()
     }
   },
   .length = function() {
@@ -153,5 +176,20 @@ as_iterator_f <- function(x) {
     }
     i <<- i + 1L
     x[i]
+  }
+}
+
+as_batch_iterator <- function(x, batch_size) {
+  n <- length(x)
+  i <- 1L
+  batch_size <- as.integer(batch_size)
+  function() {
+    if (i > n) {
+      return(coro::exhausted())
+    }
+    end <- if ((i + batch_size - 1) > n) n else (i + batch_size - 1)
+    out <- x[seq(i,end)]
+    i <<- i + batch_size
+    out
   }
 }
