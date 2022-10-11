@@ -53,7 +53,7 @@ print.slice <- function(x, ...) {
 )
 
 tensor_slice <- function(tensor, ..., drop = TRUE) {
-  Tensor$new(ptr = Tensor_slice(tensor$ptr, environment(), drop = drop, mask = .d))
+  Tensor_slice(tensor, environment(), drop = drop, mask = .d)
 }
 
 #' @export
