@@ -14,7 +14,6 @@ lantern_sync <- function(sync_lib = FALSE) {
   }
 
   if (sync_lib) {
-    lib_dest <- install_path()
     lib_src <- "lantern/build/liblantern"
 
     if (file.exists(paste0(lib_src, ".dylib"))) {
