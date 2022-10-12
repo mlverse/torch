@@ -1,4 +1,4 @@
-branch <- "mps-allocator"
+branch <- "cuda-116"
 
 install_config <- list(
   "1.12.1" = list(
@@ -68,6 +68,16 @@ install_config <- list(
           md5hash = "a1c302dd40e11f6db269445ec049e5f5"
         ),
         "liblantern" = sprintf("https://storage.googleapis.com/torch-lantern-builds/refs/heads/%s/latest/Windows-gpu-113.zip", branch)
+      )
+    ),
+    "11.6" = list(
+      "linux" = list(
+        "libtorch" = list(
+          path = "libtorch/",
+          url = "https://download.pytorch.org/libtorch/cu116/libtorch-cxx11-abi-shared-with-deps-1.12.1%2Bcu116.zip",
+          md5hash = "7972b17fa957f5d8f079035790b92207"
+        ),
+        "liblantern" = sprintf("https://storage.googleapis.com/torch-lantern-builds/refs/heads/%s/latest/Linux-gpu-116.zip", branch)
       )
     )
   )
