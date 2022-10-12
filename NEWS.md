@@ -14,6 +14,7 @@ everytime backward is called. (#873)
 - `torch_bincount` is now 1-based indexed. (#896)
 - A `nnf_` functions have been updated to use a single `torch_` kernel instead of the custom implementation. (#896)]
 - Improved performance of dataloaders. (#900)
+- Added support for CUDA 11.6 on Linux. (#902)
 
 # torch 0.8.1
 
