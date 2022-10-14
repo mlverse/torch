@@ -2443,7 +2443,7 @@ return XPtrTorchTensor(r_out);
 }
 
 // [[Rcpp::export]]
-XPtrTorchTensor cpp_torch_method_tile_self_Tensor_dims_IntArrayRef (XPtrTorchTensor self, XPtrTorchIndexIntArrayRef dims) {
+XPtrTorchTensor cpp_torch_method_tile_self_Tensor_dims_IntArrayRef (XPtrTorchTensor self, XPtrTorchIntArrayRef dims) {
   auto r_out = lantern_Tensor_tile_tensor_intarrayref(self.get(), dims.get());
 return XPtrTorchTensor(r_out);
 }
@@ -9991,7 +9991,7 @@ return XPtrTorchTensor(r_out);
 }
 
 // [[Rcpp::export]]
-XPtrTorchTensor cpp_torch_namespace_tile_self_Tensor_dims_IntArrayRef (XPtrTorchTensor self, XPtrTorchIndexIntArrayRef dims) {
+XPtrTorchTensor cpp_torch_namespace_tile_self_Tensor_dims_IntArrayRef (XPtrTorchTensor self, XPtrTorchIntArrayRef dims) {
   auto r_out = lantern_tile_tensor_intarrayref(self.get(), dims.get());
 return XPtrTorchTensor(r_out);
 }

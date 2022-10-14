@@ -13,17 +13,7 @@ as_1_based_tensor_list <- function(x) {
 }
 
 as_1_based_tensor <- function(x) {
-  with_no_grad({
-    if (!any(x$shape == 0)) {
-      e <- torch_min(torch_abs(x))$to(dtype = torch_int())
-      if (e$item() == 0) {
-        runtime_error("Indices/Index start at 1 and got a 0.")
-      }
-    }
-
-    out <- x - (x > 0)$to(dtype = x$dtype)
-  })
-  out
+  to_index_tensor(x)
 }
 
 clean_chars <- c("'", "\"", "%", "#", ":", ">", "<", ",", " ", "*", "&")
