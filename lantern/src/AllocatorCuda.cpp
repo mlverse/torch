@@ -70,8 +70,3 @@ class GarbageCollectorCallback : virtual public c10::FreeMemoryCallback {
 REGISTER_FREE_MEMORY_CALLBACK("garbage_collector_callback",
                               GarbageCollectorCallback)
 }  // namespace c10
-
-
-void _lantern_cuda_empty_cache () {
-  c10::cuda::CUDACachingAllocator::emptyCache();
-}
