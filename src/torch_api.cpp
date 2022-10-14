@@ -648,15 +648,12 @@ SEXP operator_sexp_optional_generator(const XPtrTorchOptionalGenerator* self) {
 }
 
 XPtrTorchOptionalGenerator from_sexp_optional_generator(SEXP x) {
-  // We actualy do the same as we do with non-optional Generator's which is
-  // getting the default LibTorch Generator and pass that.
-  // This is because we want to have full control over the default Generator
-  // to be able to make changes that don't break backward compatibility.
-
   Rcpp::Function torch_option =
         Rcpp::Environment::namespace_env("torch").find("torch_option");
 
   if (TYPEOF(x) == NILSXP && !Rcpp::as<bool>(torch_option("old_seed_behavior", false))) {
+    // When we are not using the old seed behavior, we can let LibTorch 
+    // grab the correct generator.
     return XPtrTorchOptionalGenerator(lantern_optional_generator(nullptr));
   } else {
     return XPtrTorchOptionalGenerator(
