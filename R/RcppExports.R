@@ -12877,6 +12877,10 @@ nnf_pad_circular <- function(input, padding) {
     .Call('_torch_nnf_pad_circular', PACKAGE = 'torchpkg', input, padding)
 }
 
+cpp_method_Tensor_is_sparse <- function(x) {
+    .Call('_torch_cpp_method_Tensor_is_sparse', PACKAGE = 'torchpkg', x)
+}
+
 cpp_torch_tensor_list <- function(x) {
     .Call('_torch_cpp_torch_tensor_list', PACKAGE = 'torchpkg', x)
 }

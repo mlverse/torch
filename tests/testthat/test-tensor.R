@@ -486,3 +486,10 @@ test_that("narrow_copy works", {
   expect_equal(y$size(), c(3))
   expect_equal(y, torch_tensor(2:4))
 })
+
+test_that("is_sparse works", {
+  x <- torch_randn(5, 5)
+  expect_false(x$is_sparse())
+  x <- torch_sparse_coo_tensor(rbind(sample(10), sample(10)), rnorm(10))
+  expect_true(x$is_sparse())
+})
