@@ -133,3 +133,22 @@ test_that("datasets have a custom print method", {
 
   expect_output(print(data), regex = "dataset_generator")
 })
+
+test_that("dataset subset adds more classes", {
+  minimal_dataset <- dataset(
+    "minimal",
+    initialize = function() {
+      self$data <- torch_tensor(1:5)
+    },
+    .length = function() {
+      self$data$size()[[1]]
+    }
+  )
+  testing <- minimal_dataset()
+  expect_equal(class(testing), c("minimal", "dataset", "R6"))
+  testing_sub <- dataset_subset(testing, 1:2)
+  expect_equal(
+    class(testing_sub), 
+    c("minimal_subset", "dataset_subset", "minimal", "dataset", "R6")
+  )
+})

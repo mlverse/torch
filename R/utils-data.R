@@ -148,6 +148,9 @@ dataset_subset <- dataset(
     if (!is.null(dataset$.getbatch)) {
       self$.getbatch <- self$.getitem
     }
+    classes <- class(dataset)
+    classes_to_append <- classes[classes != "R6"]
+    class(self) <- c(paste0(classes_to_append, "_subset"), classes)
   },
   .getitem = function(idx) {
     return(self$dataset[self$indices[idx]])
