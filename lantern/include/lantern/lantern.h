@@ -2348,6 +2348,13 @@ HOST_API bool lantern_backend_has_mps () {
   return ret;
 }
 
+LANTERN_API void (LANTERN_PTR _lantern_cuda_empty_cache) ();
+HOST_API void lantern_cuda_empty_cache () {
+  LANTERN_CHECK_LOADED
+  _lantern_cuda_empty_cache();
+  LANTERN_HOST_HANDLER;
+}
+
   /* Autogen Headers -- Start */
   LANTERN_API void* (LANTERN_PTR _lantern__cast_byte_tensor_bool)(void* self, void* non_blocking);
   HOST_API void* lantern__cast_byte_tensor_bool(void* self, void* non_blocking) { LANTERN_CHECK_LOADED void* ret = _lantern__cast_byte_tensor_bool(self, non_blocking); LANTERN_HOST_HANDLER return ret; }
@@ -9040,6 +9047,7 @@ LOAD_SYMBOL(_lantern_benchmark_debug);
 LOAD_SYMBOL(_lantern_set_cuda_allocator_thresholds);
 LOAD_SYMBOL(_lantern_cuda_synchronize);
 LOAD_SYMBOL(_lantern_backend_has_mps);
+LOAD_SYMBOL(_lantern_cuda_empty_cache);
   /* Autogen Symbols -- Start */
   LOAD_SYMBOL(_lantern__cast_byte_tensor_bool)
   LOAD_SYMBOL(_lantern__cast_char_tensor_bool)

@@ -32,3 +32,8 @@ torch::vector::int64_t cpp_cuda_memory_stats(int64_t device) {
 int cpp_cuda_get_runtime_version() {
   return lantern_cuda_get_runtime_version();
 }
+
+// [[Rcpp::export]]
+void cpp_cuda_empty_cache () {
+  lantern_cuda_empty_cache();
+}

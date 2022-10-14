@@ -174,3 +174,17 @@ cuda_runtime_version <- function() {
   patch <- v - major * 1000 - minor * 10
   numeric_version(paste(major, minor, patch, sep = "."))
 }
+
+#' Empty cache
+#' 
+#' Releases all unoccupied cached memory currently held by the caching allocator 
+#' so that those can be used in other GPU application and visible in `nvidia-smi`.
+#' 
+#' @note [cuda_empty_cache()] doesn’t increase the amount of GPU memory available 
+#' for torch. However, it may help reduce fragmentation of GPU memory in certain 
+#' cases. See Memory management article for more details about GPU memory management.
+#' 
+#' @export
+cuda_empty_cache <- function() {
+  cpp_cuda_empty_cache()
+}
