@@ -150,7 +150,7 @@ dataset_subset <- dataset(
     }
     classes <- class(dataset)
     classes_to_append <- classes[classes != "R6"]
-    class(self) <- c(paste0(classes_to_append, "_subset"), classes)
+    class(self) <- c(paste0(classes_to_append, "_subset"), class(self))
   },
   .getitem = function(idx) {
     return(self$dataset[self$indices[idx]])

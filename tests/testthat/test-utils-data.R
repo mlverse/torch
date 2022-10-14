@@ -149,6 +149,6 @@ test_that("dataset subset adds more classes", {
   testing_sub <- dataset_subset(testing, 1:2)
   expect_equal(
     class(testing_sub), 
-    c("minimal_subset", "dataset_subset", "minimal", "dataset", "R6")
+    c("minimal_subset", "dataset_subset", "dataset", "R6")
   )
 })
