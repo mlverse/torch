@@ -4582,7 +4582,7 @@ call_c_function(
   return_types = return_types,
   fun_type = 'method'
 )})
-Tensor$set("public", "movedim", function(source, destination) {  args <- mget(x = c("source", "destination"))
+Tensor$set("private", "_movedim", function(source, destination) {  args <- mget(x = c("source", "destination"))
 args <- c(list(self = self), args)
 expected_types <- list(self = "Tensor", source = c("IntArrayRef", "int64_t"), destination = c("IntArrayRef", 
 "int64_t"))

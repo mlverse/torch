@@ -253,6 +253,9 @@ Tensor <- R7Class(
     },
     bincount = function(weights = list(), minlength = 0L) {
       to_index_tensor(self)$private$`_bincount`(weights = weights, minlength = minlength)
+    },
+    movedim = function(source, destination) {
+      private$`_movedim`(as_1_based_dim(source), as_1_based_dim(destination))
     }
   ),
   active = list(
