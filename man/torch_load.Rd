@@ -18,7 +18,8 @@ Loads a saved object
 }
 \seealso{
 Other torch_save: 
-\code{\link{torch_save}()}
+\code{\link{torch_save}()},
+\code{\link{torch_serialize}()}
 }
 \concept{serialization}
 \concept{torch_save}
