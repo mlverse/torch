@@ -389,5 +389,5 @@ torch::Tensor nnf_pad_circular(torch::Tensor input,
 
 // [[Rcpp::export]]
 bool cpp_method_Tensor_is_sparse (torch::Tensor x) {
-  return lantern_Tensor_is_sparse(x);
+  return lantern_Tensor_is_sparse(x.get());
 }
