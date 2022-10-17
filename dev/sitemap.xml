@@ -127,6 +127,9 @@
     <loc>https://torch.mlverse.org/docs/dev/reference/cuda_device_count.html</loc>
   </url>
   <url>
+    <loc>https://torch.mlverse.org/docs/dev/reference/cuda_empty_cache.html</loc>
+  </url>
+  <url>
     <loc>https://torch.mlverse.org/docs/dev/reference/cuda_get_device_capability.html</loc>
   </url>
   <url>

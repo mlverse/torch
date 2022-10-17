@@ -95,9 +95,17 @@
 <li>Added support for M1 Macs, including creating Tensors in the MPS device. (<a href="https://github.com/mlverse/torch/issues/890" class="external-link">#890</a>)</li>
 <li>
 <code>torch_bincount</code> is now 1-based indexed. (<a href="https://github.com/mlverse/torch/issues/896" class="external-link">#896</a>)</li>
-<li>A <code>nnf_</code> functions have been updated to use a single <code>torch_</code> kernel instead of the custom implementation. (<a href="https://github.com/mlverse/torch/issues/896" class="external-link">#896</a>)]</li>
+<li>A <code>nnf_</code> functions have been updated to use a single <code>torch_</code> kernel instead of the custom implementation. (<a href="https://github.com/mlverse/torch/issues/896" class="external-link">#896</a>)</li>
 <li>Improved performance of dataloaders. (<a href="https://github.com/mlverse/torch/issues/900" class="external-link">#900</a>)</li>
 <li>Added support for CUDA 11.6 on Linux. (<a href="https://github.com/mlverse/torch/issues/902" class="external-link">#902</a>)</li>
+<li>Added <code><a href="../reference/cuda_empty_cache.html">cuda_empty_cache()</a></code> to allow freeing memory from the caching allocator to the system. (<a href="https://github.com/mlverse/torch/issues/903" class="external-link">#903</a>)</li>
+<li>Added <code>$is_sparse()</code> method to check wether a Tensor is sparse or not. (<a href="https://github.com/mlverse/torch/issues/903" class="external-link">#903</a>)</li>
+<li>
+<code>dataset_subset</code> now adds a class to the modified dataset that is the same as the original dataset classes postfixed with <code>_subset</code>. (<a href="https://github.com/mlverse/torch/issues/904" class="external-link">#904</a>)</li>
+<li>The <code>dims</code> argument in <code>torch_tile()</code> is no longer modified, as it’s not meant to be the a 1-based dimension. (<a href="https://github.com/mlverse/torch/issues/905" class="external-link">#905</a>)</li>
+<li>
+<code><a href="../reference/torch_movedim.html">torch_movedim()</a></code> and <code>$movedim()</code> are now both 1-based indexed. (<a href="https://github.com/mlverse/torch/issues/905" class="external-link">#905</a>)</li>
+<li>We now let LibTorch query the default generator, this allows one to use <code><a href="../reference/torch_bernoulli.html">torch_bernoulli()</a></code> with <code>device="gpu"</code>. (<a href="https://github.com/mlverse/torch/issues/906" class="external-link">#906</a>)</li>
 </ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.8.1" id="torch-081">torch 0.8.1<a class="anchor" aria-label="anchor" href="#torch-081"></a></h2><p class="text-muted">CRAN release: 2022-08-19</p>
