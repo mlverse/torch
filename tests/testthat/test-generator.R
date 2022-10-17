@@ -35,3 +35,20 @@ test_that("current behavior is identical to pytorch", {
     expect_equal_to_r(torch_randn(1), -0.364226043224335)
   })
 })
+
+test_that("can use torch bernoulli on cuda.", {
+  # see https://github.com/mlverse/torch/issues/480
+  expect_error({
+    x <- torch_bernoulli(torch_ones(3,3, device="cpu") * 0.5)
+  }, regexp = NA)
+  expect_tensor_shape(x, c(3,3))
+  
+  skip_if_cuda_not_available()
+  
+  expect_error({
+    x <- torch_bernoulli(torch_ones(3,3, device="cuda") * 0.5)
+  }, regexp = NA)
+  expect_tensor_shape(x, c(3,3))
+  
+}) 
+  

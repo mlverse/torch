@@ -368,3 +368,9 @@ test_that("zeros_out", {
   expect_tensor(torch_zeros_out(x, c(2)))
   expect_equal_to_tensor(x, torch_tensor(c(0, 0)))
 })
+
+test_that("tile works correctly", {
+  x <- torch_tensor(c(1, 2, 3))
+  expect_true(length(x$tile(2)) == 6)
+  expect_true(length(torch_tile(x, 2)) == 6)
+})

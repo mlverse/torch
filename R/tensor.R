@@ -256,6 +256,9 @@ Tensor <- R7Class(
     },
     is_sparse = function() {
       cpp_method_Tensor_is_sparse(self)
+    },
+    movedim = function(source, destination) {
+      private$`_movedim`(as_1_based_dim(source), as_1_based_dim(destination))
     }
   ),
   active = list(
