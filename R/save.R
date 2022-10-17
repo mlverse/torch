@@ -94,6 +94,14 @@ torch_save.list <- function(obj, path, ..., compress = TRUE) {
 #' @export
 #' @concept serialization
 torch_load <- function(path, device = "cpu") {
+  
+  if (is.raw(path)) {
+    path <- rawConnection(path)
+    on.exit({
+      close(path)
+    }, add = TRUE)
+  }
+  
   r <- readRDS(path)
   
   if (!is.null(r$version) && r$version > ser_version) {
@@ -111,6 +119,26 @@ torch_load <- function(path, device = "cpu") {
   } else if (r$type == "coro::exhausted") {
     return(coro::exhausted())
   }
+}
+
+#' Serialize a torch object returning a raw object
+#'
+#' It's just a wraper around [torch_save()].
+#' 
+#' @inheritParams torch_save
+#' @param ... Additional arguments passed to [torch_save()]. `obj` and `path` are
+#'   not accepted as they are set by [torch_serialize()].
+#' @returns A raw vector containing the serialized object. Can be reloaded using
+#'   [torch_load()].
+#' @family torch_save
+#' @concept serialization
+torch_serialize <- function(obj, ...) {
+  con <- rawConnection(raw(), open = "wr")
+  on.exit({
+    close(con)
+  }, add = TRUE)
+  torch_save(obj = obj, path = con, ...)
+  rawConnectionValue(con)
 }
 
 torch_load_tensor <- function(obj, device = NULL) {

@@ -269,3 +269,22 @@ test_that("can save and load from lists", {
   expect_equal(l$b$y, 4)
   expect_equal(l$c, 5)
 })
+
+test_that("can use torch_serialize", {
+  
+  model <- nn_linear(10, 10)
+  x <- torch_randn(10, 10)
+  ser <- torch_serialize(model)
+  pred <- model(x)
+  
+  rm(model); gc();
+  
+  model2 <- torch_load(ser)
+  pred2 <- model2(x)
+  
+  expect_true(torch_allclose(pred, pred2))
+  expect_error(regexp = "matched", {
+    ser <- torch_serialize(model2, path = tempfile())  
+  })
+  
+})

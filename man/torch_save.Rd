@@ -23,7 +23,8 @@ term storage.
 }
 \seealso{
 Other torch_save: 
-\code{\link{torch_load}()}
+\code{\link{torch_load}()},
+\code{\link{torch_serialize}()}
 }
 \concept{serialization}
 \concept{torch_save}
