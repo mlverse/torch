@@ -21,6 +21,7 @@ everytime backward is called. (#873)
 - The `dims` argument in `torch_tile()` is no longer modified, as it's not meant to be the a 1-based dimension. (#905)
 - `torch_movedim()` and `$movedim()` are now both 1-based indexed. (#905)
 - We now let LibTorch query the default generator, this allows one to use `torch_bernoulli()` with `device="gpu"`. (#906)
+- Added `torch_serialize()` to allow creating a raw vector from torch objects. (#908)
 
 # torch 0.8.1
 
