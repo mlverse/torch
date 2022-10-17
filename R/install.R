@@ -1,4 +1,4 @@
-branch <- "cuda-116"
+branch <- "empty-cache"
 
 install_config <- list(
   "1.12.1" = list(

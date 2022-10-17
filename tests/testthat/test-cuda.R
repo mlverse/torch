@@ -28,3 +28,16 @@ test_that("cuda memory stats work", {
   stats <- cuda_memory_stats()
   expect_length(stats, 13)
 })
+
+test_that("can empty cache", {
+  skip_if_cuda_not_available()
+
+  x <- torch_randn(1000, 1000, device = "cuda")
+  stats <- cuda_memory_stats()
+  rm(x)
+  gc()
+  cuda_empty_cache()
+  stats_after <- cuda_memory_stats()
+  
+  expect_true(stats_after$reserved_bytes$all$current < stats$reserved_bytes$all$current)
+})

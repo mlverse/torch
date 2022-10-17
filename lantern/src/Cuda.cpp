@@ -206,3 +206,14 @@ int _lantern_cuda_get_runtime_version() {
 #endif
   LANTERN_FUNCTION_END
 }
+
+void _lantern_cuda_empty_cache () {
+  LANTERN_FUNCTION_START
+#ifdef __NVCC__
+  c10::cuda::CUDACachingAllocator::emptyCache();
+#else
+  throw std::runtime_error(
+      "`cuda_empty_cache` is only supported on CUDA runtimes.");
+#endif
+  LANTERN_FUNCTION_END_VOID
+}

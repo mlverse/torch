@@ -254,6 +254,9 @@ Tensor <- R7Class(
     bincount = function(weights = list(), minlength = 0L) {
       to_index_tensor(self)$private$`_bincount`(weights = weights, minlength = minlength)
     },
+    is_sparse = function() {
+      cpp_method_Tensor_is_sparse(self)
+    },
     movedim = function(source, destination) {
       private$`_movedim`(as_1_based_dim(source), as_1_based_dim(destination))
     }

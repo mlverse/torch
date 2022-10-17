@@ -311,3 +311,10 @@ void *_lantern_tensor_get_pyobj(void *x) {
   }
   LANTERN_FUNCTION_END
 }
+
+bool _lantern_Tensor_is_sparse (void* x) {
+  LANTERN_FUNCTION_START
+  auto t = from_raw::Tensor(x);
+  return t.is_sparse();
+  LANTERN_FUNCTION_END_RET(false)
+}

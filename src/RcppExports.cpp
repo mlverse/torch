@@ -572,6 +572,15 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// cpp_cuda_empty_cache
+void cpp_cuda_empty_cache();
+RcppExport SEXP _torch_cpp_cuda_empty_cache() {
+BEGIN_RCPP
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    cpp_cuda_empty_cache();
+    return R_NilValue;
+END_RCPP
+}
 // cpp_device_type_to_string
 std::string cpp_device_type_to_string(Rcpp::XPtr<XPtrTorchDevice> device);
 RcppExport SEXP _torch_cpp_device_type_to_string(SEXP deviceSEXP) {
@@ -41831,6 +41840,17 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// cpp_method_Tensor_is_sparse
+bool cpp_method_Tensor_is_sparse(torch::Tensor x);
+RcppExport SEXP _torch_cpp_method_Tensor_is_sparse(SEXP xSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< torch::Tensor >::type x(xSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_method_Tensor_is_sparse(x));
+    return rcpp_result_gen;
+END_RCPP
+}
 // cpp_torch_tensor_list
 XPtrTorchTensorList cpp_torch_tensor_list(const Rcpp::List& x);
 RcppExport SEXP _torch_cpp_torch_tensor_list(SEXP xSEXP) {
@@ -42183,6 +42203,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_torch_cpp_cudnn_is_available", (DL_FUNC) &_torch_cpp_cudnn_is_available, 0},
     {"_torch_cpp_cuda_memory_stats", (DL_FUNC) &_torch_cpp_cuda_memory_stats, 1},
     {"_torch_cpp_cuda_get_runtime_version", (DL_FUNC) &_torch_cpp_cuda_get_runtime_version, 0},
+    {"_torch_cpp_cuda_empty_cache", (DL_FUNC) &_torch_cpp_cuda_empty_cache, 0},
     {"_torch_cpp_device_type_to_string", (DL_FUNC) &_torch_cpp_device_type_to_string, 1},
     {"_torch_cpp_device_index_to_int", (DL_FUNC) &_torch_cpp_device_index_to_int, 1},
     {"_torch_cpp_torch_device", (DL_FUNC) &_torch_cpp_torch_device, 2},
@@ -45351,6 +45372,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_torch_cpp_namespace_normal_tensor_double", (DL_FUNC) &_torch_cpp_namespace_normal_tensor_double, 3},
     {"_torch_cpp_namespace_normal_tensor_tensor", (DL_FUNC) &_torch_cpp_namespace_normal_tensor_tensor, 3},
     {"_torch_nnf_pad_circular", (DL_FUNC) &_torch_nnf_pad_circular, 2},
+    {"_torch_cpp_method_Tensor_is_sparse", (DL_FUNC) &_torch_cpp_method_Tensor_is_sparse, 1},
     {"_torch_cpp_torch_tensor_list", (DL_FUNC) &_torch_cpp_torch_tensor_list, 1},
     {"_torch_cpp_tensor_list_to_r_list", (DL_FUNC) &_torch_cpp_tensor_list_to_r_list, 1},
     {"_torch_cpp_torch_tensor_options", (DL_FUNC) &_torch_cpp_torch_tensor_options, 5},

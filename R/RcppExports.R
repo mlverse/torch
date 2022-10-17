@@ -201,6 +201,10 @@ cpp_cuda_get_runtime_version <- function() {
     .Call('_torch_cpp_cuda_get_runtime_version', PACKAGE = 'torchpkg')
 }
 
+cpp_cuda_empty_cache <- function() {
+    invisible(.Call('_torch_cpp_cuda_empty_cache', PACKAGE = 'torchpkg'))
+}
+
 cpp_device_type_to_string <- function(device) {
     .Call('_torch_cpp_device_type_to_string', PACKAGE = 'torchpkg', device)
 }
@@ -12871,6 +12875,10 @@ cpp_namespace_normal_tensor_tensor <- function(mean, std, generator) {
 
 nnf_pad_circular <- function(input, padding) {
     .Call('_torch_nnf_pad_circular', PACKAGE = 'torchpkg', input, padding)
+}
+
+cpp_method_Tensor_is_sparse <- function(x) {
+    .Call('_torch_cpp_method_Tensor_is_sparse', PACKAGE = 'torchpkg', x)
 }
 
 cpp_torch_tensor_list <- function(x) {
