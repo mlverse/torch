@@ -12,9 +12,15 @@ everytime backward is called. (#873)
 - Updated to LibTorch v1.12.1. (#889, #893, #899)
 - Added support for M1 Macs, including creating Tensors in the MPS device. (#890)
 - `torch_bincount` is now 1-based indexed. (#896)
-- A `nnf_` functions have been updated to use a single `torch_` kernel instead of the custom implementation. (#896)]
+- A `nnf_` functions have been updated to use a single `torch_` kernel instead of the custom implementation. (#896)
 - Improved performance of dataloaders. (#900)
 - Added support for CUDA 11.6 on Linux. (#902)
+- Added `cuda_empty_cache()` to allow freeing memory from the caching allocator to the system. (#903)
+- Added `$is_sparse()` method to check wether a Tensor is sparse or not. (#903)
+- `dataset_subset` now adds a class to the modified dataset that is the same as the original dataset classes postfixed with `_subset`. (#904)
+- The `dims` argument in `torch_tile()` is no longer modified, as it's not meant to be the a 1-based dimension. (#905)
+- `torch_movedim()` and `$movedim()` are now both 1-based indexed. (#905)
+- We now let LibTorch query the default generator, this allows one to use `torch_bernoulli()` with `device="gpu"`. (#906)
 
 # torch 0.8.1
 
