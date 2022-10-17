@@ -630,3 +630,22 @@ test_that("empty initializer", {
   model <- nn_module(forward = function(input) input)
   expect_equal_to_r(model()(torch_tensor(1)), 1)
 })
+
+test_that("can load state dict of a corrupt module", {
+  local_edition(3)
+  
+  model <- nn_linear(10, 10)
+  tmp <- tempfile(fileext = "rds")
+  saveRDS(model, tmp)
+  rm(model); gc();
+  model <- readRDS(tmp)
+  
+  err <- try({model$parameters$weight$abs()}, silent = TRUE)
+  expect_true(inherits(err, "try-error"))
+  
+  expect_error(regexp = NA, {
+    model$load_state_dict(list(weight = torch_randn(10, 10), bias = torch_randn(10)))  
+  })
+
+  expect_tensor_shape(model(torch_randn(10, 10)), c(10, 10))
+})
