@@ -130,6 +130,8 @@ IMPORT_FROM_SEXP(from_sexp_vector_string, XPtrTorchvector_string)
 IMPORT_FROM_SEXP(from_sexp_variable_list, XPtrTorchvariable_list)
 IMPORT_FROM_SEXP(from_sexp_string_view, XPtrTorchstring_view)
 IMPORT_FROM_SEXP(from_sexp_optional_string_view, XPtrTorchoptional_string_view)
+IMPORT_FROM_SEXP(from_sexp_sym_int_array_ref, XPtrTorchSymIntArrayRef)
+IMPORT_FROM_SEXP(from_sexp_sym_int, XPtrTorchSymInt)
 
 #define IMPORT_DELETER(name)                                \
   void name(void* x) {                                      \
