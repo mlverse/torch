@@ -101,6 +101,8 @@ void register_callables(DllInfo *dll) {
   REGISTER_C_CALLABLE(from_sexp_variable_list)
   REGISTER_C_CALLABLE(from_sexp_string_view)
   REGISTER_C_CALLABLE(from_sexp_optional_string_view)
+  REGISTER_C_CALLABLE(from_sexp_sym_int_array_ref)
+  REGISTER_C_CALLABLE(from_sexp_sym_int)
 
   REGISTER_C_CALLABLE(delete_tensor)
   REGISTER_C_CALLABLE(delete_script_module)
