@@ -101,7 +101,8 @@
 
 
 
-<script src="loading-data_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
+
+<div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="" class="logo" alt=""><h1>Loading data</h1>
             
@@ -120,23 +121,23 @@
 <p>Central to data ingestion and preprocessing are datasets and data loaders. A dataset is an object that holds the data to use, while a data loader is an object that will load the data from a dataset providing a way to access subsets of the data. By using datasets and data loaders you will have a process for clearly organizing your data and passing it to other components of the torch package, such as model training.</p>
 <p>Built into <code>torch</code> are premade datasets that are commonly used in machine learning, such as the MNIST handwriting dataset (<code>mnist_dataset()</code>). Most of the prebuilt datasets relate to image recognition and natural language processing.</p>
 <p>Below is an example of how you would use the MNIST dataset with a dataloader. First, the <code>minst_dataset()</code> function is used to create <code>ds</code> which is a <code>Dataset</code> object. Then a dataloader <code>dl</code> is created to query that data. Finally, that dataloader is used in a <code><a href="https://rdrr.io/pkg/coro/man/collect.html" class="external-link">coro::loop()</a></code> to iterate over batches of that data:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="co"># Create a dataset from included data</span></span>
-<span id="cb2-2"><a href="#cb2-2"></a>ds &lt;-<span class="st"> </span><span class="kw">mnist_dataset</span>(</span>
-<span id="cb2-3"><a href="#cb2-3"></a>  dir, </span>
-<span id="cb2-4"><a href="#cb2-4"></a>  <span class="dt">download =</span> <span class="ot">TRUE</span>, </span>
-<span id="cb2-5"><a href="#cb2-5"></a>  <span class="dt">transform =</span> <span class="cf">function</span>(x) {</span>
-<span id="cb2-6"><a href="#cb2-6"></a>    x &lt;-<span class="st"> </span>x<span class="op">$</span><span class="kw">to</span>(<span class="dt">dtype =</span> <span class="kw">torch_float</span>())<span class="op">/</span><span class="dv">256</span></span>
-<span id="cb2-7"><a href="#cb2-7"></a>    x[newaxis,..]</span>
-<span id="cb2-8"><a href="#cb2-8"></a>  }</span>
-<span id="cb2-9"><a href="#cb2-9"></a>)</span>
-<span id="cb2-10"><a href="#cb2-10"></a></span>
-<span id="cb2-11"><a href="#cb2-11"></a><span class="co"># Create the loader to query the data in batches</span></span>
-<span id="cb2-12"><a href="#cb2-12"></a>dl &lt;-<span class="st"> </span><span class="kw">dataloader</span>(ds, <span class="dt">batch_size =</span> <span class="dv">32</span>, <span class="dt">shuffle =</span> <span class="ot">TRUE</span>)</span>
-<span id="cb2-13"><a href="#cb2-13"></a></span>
-<span id="cb2-14"><a href="#cb2-14"></a>coro<span class="op">::</span><span class="kw">loop</span>(<span class="cf">for</span> (b <span class="cf">in</span> dl)) {</span>
-<span id="cb2-15"><a href="#cb2-15"></a><span class="co"># use the data from each batch `b` here</span></span>
-<span id="cb2-16"><a href="#cb2-16"></a><span class="co"># ...</span></span>
-<span id="cb2-17"><a href="#cb2-17"></a>}<span class="er">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a dataset from included data</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>ds <span class="ot">&lt;-</span> <span class="fu">mnist_dataset</span>(</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  dir, </span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">download =</span> <span class="cn">TRUE</span>, </span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">transform =</span> <span class="cf">function</span>(x) {</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    x <span class="ot">&lt;-</span> x<span class="sc">$</span><span class="fu">to</span>(<span class="at">dtype =</span> <span class="fu">torch_float</span>())<span class="sc">/</span><span class="dv">256</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    x[newaxis,..]</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Create the loader to query the data in batches</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>dl <span class="ot">&lt;-</span> <span class="fu">dataloader</span>(ds, <span class="at">batch_size =</span> <span class="dv">32</span>, <span class="at">shuffle =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>coro<span class="sc">::</span><span class="fu">loop</span>(<span class="cf">for</span> (b <span class="cf">in</span> dl)) {</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a><span class="co"># use the data from each batch `b` here</span></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a><span class="co"># ...</span></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>}<span class="er">)</span></span></code></pre></div>
 <p>See <code>vignettes/examples/mnist-cnn.R</code> for a complete example.</p>
 <p>In the more common situation where you have a unique set of data that isn’t included with the package you’ll need to make a custom <code>Dataset</code> subclass by using the <code><a href="../reference/dataset.html">dataset()</a></code> function. The custom <code>Dataset</code> subclass is an abstract R6 container for the data. It will need to know some information about the particular dataset, such as how to iterate over it.</p>
 <p>At a minimum, when using <code><a href="../reference/dataset.html">dataset()</a></code> to create a custom <code>Dataset</code> class you’ll want to define the following:</p>
@@ -344,7 +345,7 @@
 <span>  </span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/sprintf.html" class="external-link">sprintf</a></span><span class="op">(</span><span class="st">"Loss at epoch %d: %3f\n"</span>, <span class="va">epoch</span>, <span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="va">l</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="op">}</span></span>
-<span><span class="co">#&gt; Loss at epoch 1: 537.835620</span></span>
+<span><span class="co">#&gt; Loss at epoch 1: 381.867697</span></span>
 <span><span class="co">#&gt; Loss at epoch 2: 2.068251</span></span>
 <span><span class="co">#&gt; Loss at epoch 3: 2.068251</span></span>
 <span><span class="co">#&gt; Loss at epoch 4: 2.068251</span></span>

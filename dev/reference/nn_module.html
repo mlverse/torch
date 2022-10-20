@@ -139,10 +139,10 @@ new <code>nn_module</code>.</p>
 <p>The initialize function will be called whenever a new instance of the <code>nn_module</code>
 is created. We use the initialize functions to define submodules and parameters
 of the module. For example:</p>
-<p></p><div class="sourceCode"><pre><code><span id="cb1-1"><a href="#cb1-1"></a>initialize =<span class="st"> </span><span class="cf">function</span>(input_size, output_size) {</span>
-<span id="cb1-2"><a href="#cb1-2"></a>   self<span class="op">$</span>conv1 &lt;-<span class="st"> </span><span class="kw">nn_conv2d</span>(input_size, output_size, <span class="dv">5</span>)</span>
-<span id="cb1-3"><a href="#cb1-3"></a>   self<span class="op">$</span>conv2 &lt;-<span class="st"> </span><span class="kw">nn_conv2d</span>(output_size, output_size, <span class="dv">5</span>)</span>
-<span id="cb1-4"><a href="#cb1-4"></a>}</span></code></pre><p></p></div>
+<p></p><div class="sourceCode"><pre><code><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>initialize <span class="ot">=</span> <span class="cf">function</span>(input_size, output_size) {</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>   self<span class="sc">$</span>conv1 <span class="ot">&lt;-</span> <span class="fu">nn_conv2d</span>(input_size, output_size, <span class="dv">5</span>)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>   self<span class="sc">$</span>conv2 <span class="ot">&lt;-</span> <span class="fu">nn_conv2d</span>(output_size, output_size, <span class="dv">5</span>)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>}</span></code></pre><p></p></div>
 <p>The initialize function can have any number of parameters. All objects
 assigned to <code>self$</code> will be available for other methods that you implement.
 Tensors wrapped with <code><a href="nn_parameter.html">nn_parameter()</a></code> or <code><a href="nn_buffer.html">nn_buffer()</a></code> and submodules are
@@ -159,13 +159,13 @@ have weights, submodules or buffers.</p>
 This is usually used to implement the computation that the module does with
 the weights ad submodules defined in the <code>initialize</code> function.</p>
 <p>For example:</p>
-<p></p><div class="sourceCode"><pre><code><span id="cb1-1"><a href="#cb1-1"></a>forward =<span class="st"> </span><span class="cf">function</span>(input) {</span>
-<span id="cb1-2"><a href="#cb1-2"></a>   input &lt;-<span class="st"> </span>self<span class="op">$</span><span class="kw">conv1</span>(input)</span>
-<span id="cb1-3"><a href="#cb1-3"></a>   input &lt;-<span class="st"> </span><span class="kw">nnf_relu</span>(input)</span>
-<span id="cb1-4"><a href="#cb1-4"></a>   input &lt;-<span class="st"> </span>self<span class="op">$</span><span class="kw">conv2</span>(input)</span>
-<span id="cb1-5"><a href="#cb1-5"></a>   input &lt;-<span class="st"> </span><span class="kw">nnf_relu</span>(input)</span>
-<span id="cb1-6"><a href="#cb1-6"></a>   input</span>
-<span id="cb1-7"><a href="#cb1-7"></a> }</span></code></pre><p></p></div>
+<p></p><div class="sourceCode"><pre><code><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>forward <span class="ot">=</span> <span class="cf">function</span>(input) {</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>   input <span class="ot">&lt;-</span> self<span class="sc">$</span><span class="fu">conv1</span>(input)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>   input <span class="ot">&lt;-</span> <span class="fu">nnf_relu</span>(input)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>   input <span class="ot">&lt;-</span> self<span class="sc">$</span><span class="fu">conv2</span>(input)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>   input <span class="ot">&lt;-</span> <span class="fu">nnf_relu</span>(input)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>   input</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a> }</span></code></pre><p></p></div>
 <p>The <code>forward</code> function can use the <code>self$training</code> attribute to make different
 computations depending wether the model is training or not, for example if you
 were implementing the dropout module.</p>

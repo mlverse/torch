@@ -159,8 +159,8 @@ or not.</p></dd>
 
 
 <p>Short-time Fourier transform (STFT).</p>
-<p></p><div class="sourceCode"><pre><code><span id="cb1-1"><a href="#cb1-1"></a>Ignoring the optional batch dimension, this method computes the following</span>
-<span id="cb1-2"><a href="#cb1-2"></a>expression<span class="op">:</span></span></code></pre><p></p></div>
+<p></p><div class="sourceCode"><pre><code><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>Ignoring the optional batch dimension, this method computes the following</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>expression<span class="sc">:</span></span></code></pre><p></p></div>
 <p>$$
         X[m, \omega] = \sum_{k = 0}^{\mbox{win\_length-1}}%
                             \mbox{window}[k]\ \mbox{input}[m \times \mbox{hop\_length} + k]\ %
@@ -169,44 +169,44 @@ $$
 where \(m\) is the index of the sliding window, and \(\omega\) is
 the frequency that \(0 \leq \omega &lt; \mbox{n\_fft}\). When
 <code>onesided</code> is the default value <code>TRUE</code>,</p>
-<p></p><div class="sourceCode"><pre><code><span id="cb1-1"><a href="#cb1-1"></a><span class="op">*</span><span class="st"> `</span><span class="dt">input</span><span class="st">`</span> must be either a <span class="dv">1</span><span class="op">-</span>D time sequence or a <span class="dv">2</span><span class="op">-</span>D batch of time</span>
-<span id="cb1-2"><a href="#cb1-2"></a>  sequences.</span>
-<span id="cb1-3"><a href="#cb1-3"></a></span>
-<span id="cb1-4"><a href="#cb1-4"></a><span class="op">*</span><span class="st"> </span>If <span class="st">`</span><span class="dt">hop_length</span><span class="st">`</span> is <span class="st">`</span><span class="dt">NULL</span><span class="st">`</span> (default), it is treated as equal to</span>
-<span id="cb1-5"><a href="#cb1-5"></a>  <span class="st">`</span><span class="dt">floor(n_fft / 4)</span><span class="st">`</span>.</span>
-<span id="cb1-6"><a href="#cb1-6"></a></span>
-<span id="cb1-7"><a href="#cb1-7"></a><span class="op">*</span><span class="st"> </span>If <span class="st">`</span><span class="dt">win_length</span><span class="st">`</span> is <span class="st">`</span><span class="dt">NULL</span><span class="st">`</span> (default), it is treated as equal to</span>
-<span id="cb1-8"><a href="#cb1-8"></a>  <span class="st">`</span><span class="dt">n_fft</span><span class="st">`</span>.</span>
-<span id="cb1-9"><a href="#cb1-9"></a></span>
-<span id="cb1-10"><a href="#cb1-10"></a><span class="op">*</span><span class="st"> `</span><span class="dt">window</span><span class="st">`</span> can be a <span class="dv">1</span><span class="op">-</span>D tensor of size <span class="st">`</span><span class="dt">win_length</span><span class="st">`</span>, e.g., from</span>
-<span id="cb1-11"><a href="#cb1-11"></a>  <span class="st">`</span><span class="dt">torch_hann_window</span><span class="st">`</span>. If <span class="st">`</span><span class="dt">window</span><span class="st">`</span> is <span class="st">`</span><span class="dt">NULL</span><span class="st">`</span> (default), it is</span>
-<span id="cb1-12"><a href="#cb1-12"></a>  treated as <span class="cf">if</span> having \eqn{<span class="dv">1</span>} everywhere <span class="cf">in</span> the window. If</span>
-<span id="cb1-13"><a href="#cb1-13"></a>  \eqn{\mbox{win\_length} <span class="op">&lt;</span><span class="st"> </span>\mbox{n\_fft}}, <span class="st">`</span><span class="dt">window</span><span class="st">`</span> will be padded on</span>
-<span id="cb1-14"><a href="#cb1-14"></a>  both sides to length <span class="st">`</span><span class="dt">n_fft</span><span class="st">`</span> before being applied.</span>
-<span id="cb1-15"><a href="#cb1-15"></a></span>
-<span id="cb1-16"><a href="#cb1-16"></a><span class="op">*</span><span class="st"> </span>If <span class="st">`</span><span class="dt">center</span><span class="st">`</span> is <span class="st">`</span><span class="dt">TRUE</span><span class="st">`</span> (default), <span class="st">`</span><span class="dt">input</span><span class="st">`</span> will be padded on</span>
-<span id="cb1-17"><a href="#cb1-17"></a>  both sides so that the \eqn{t}<span class="op">-</span>th frame is centered at time</span>
-<span id="cb1-18"><a href="#cb1-18"></a>  \eqn{t \times \mbox{hop\_length}}. Otherwise, the \eqn{t}<span class="op">-</span>th frame</span>
-<span id="cb1-19"><a href="#cb1-19"></a>  begins at time  \eqn{t \times \mbox{hop\_length}}.</span>
-<span id="cb1-20"><a href="#cb1-20"></a></span>
-<span id="cb1-21"><a href="#cb1-21"></a><span class="op">*</span><span class="st"> `</span><span class="dt">pad_mode</span><span class="st">`</span> determines the padding method used on <span class="st">`</span><span class="dt">input</span><span class="st">`</span> when</span>
-<span id="cb1-22"><a href="#cb1-22"></a>  <span class="st">`</span><span class="dt">center</span><span class="st">`</span> is <span class="st">`</span><span class="dt">TRUE</span><span class="st">`</span>. See <span class="st">`</span><span class="dt">torch_nn.functional.pad</span><span class="st">`</span> <span class="cf">for</span></span>
-<span id="cb1-23"><a href="#cb1-23"></a>  all available options. Default is <span class="st">`</span><span class="dt">"reflect"</span><span class="st">`</span>.</span>
-<span id="cb1-24"><a href="#cb1-24"></a></span>
-<span id="cb1-25"><a href="#cb1-25"></a><span class="op">*</span><span class="st"> </span>If <span class="st">`</span><span class="dt">onesided</span><span class="st">`</span> is <span class="st">`</span><span class="dt">TRUE</span><span class="st">`</span> (default), only values <span class="cf">for</span> \eqn{\omega}</span>
-<span id="cb1-26"><a href="#cb1-26"></a>  <span class="cf">in</span> \eqn{\left[<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">2</span>, \dots, \left\lfloor \frac{\mbox{n\_fft}}{<span class="dv">2</span>} \right\rfloor <span class="op">+</span><span class="st"> </span><span class="dv">1</span>\right]}</span>
-<span id="cb1-27"><a href="#cb1-27"></a>  are returned because the real<span class="op">-</span>to<span class="op">-</span>complex Fourier transform satisfies the</span>
-<span id="cb1-28"><a href="#cb1-28"></a>  conjugate symmetry, i.e., \eqn{X[m, \omega] =<span class="st"> </span>X[m, \mbox{n\_fft} <span class="op">-</span><span class="st"> </span>\omega]<span class="op">^</span><span class="er">*</span>}.</span>
-<span id="cb1-29"><a href="#cb1-29"></a></span>
-<span id="cb1-30"><a href="#cb1-30"></a><span class="op">*</span><span class="st"> </span>If <span class="st">`</span><span class="dt">normalized</span><span class="st">`</span> is <span class="st">`</span><span class="dt">TRUE</span><span class="st">`</span> (default is <span class="st">`</span><span class="dt">FALSE</span><span class="st">`</span>), the <span class="cf">function</span></span>
-<span id="cb1-31"><a href="#cb1-31"></a>  returns the normalized STFT results, i.e., multiplied by \eqn{(\mbox{frame\_length})<span class="op">^</span>{<span class="op">-</span><span class="fl">0.5</span>}}.</span>
-<span id="cb1-32"><a href="#cb1-32"></a></span>
-<span id="cb1-33"><a href="#cb1-33"></a>Returns the real and the imaginary parts together as one tensor of size</span>
-<span id="cb1-34"><a href="#cb1-34"></a>\eqn{(<span class="op">*</span><span class="st"> </span>\times N \times T \times <span class="dv">2</span>)}, where \eqn{<span class="op">*</span>} is the optional</span>
-<span id="cb1-35"><a href="#cb1-35"></a>batch size of <span class="st">`</span><span class="dt">input</span><span class="st">`</span>, \eqn{N} is the number of frequencies where</span>
-<span id="cb1-36"><a href="#cb1-36"></a>STFT is applied, \eqn{T} is the total number of frames used, and each pair</span>
-<span id="cb1-37"><a href="#cb1-37"></a><span class="cf">in</span> the last dimension represents a complex number as the real part and the</span>
-<span id="cb1-38"><a href="#cb1-38"></a>imaginary part.</span></code></pre><p></p></div>
+<p></p><div class="sourceCode"><pre><code><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="sc">*</span> <span class="st">`</span><span class="at">input</span><span class="st">`</span> must be either a <span class="dv">1</span><span class="sc">-</span>D time sequence or a <span class="dv">2</span><span class="sc">-</span>D batch of time</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  sequences.</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="sc">*</span> If <span class="st">`</span><span class="at">hop_length</span><span class="st">`</span> is <span class="st">`</span><span class="at">NULL</span><span class="st">`</span> (default), it is treated as equal to</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  <span class="st">`</span><span class="at">floor(n_fft / 4)</span><span class="st">`</span>.</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="sc">*</span> If <span class="st">`</span><span class="at">win_length</span><span class="st">`</span> is <span class="st">`</span><span class="at">NULL</span><span class="st">`</span> (default), it is treated as equal to</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>  <span class="st">`</span><span class="at">n_fft</span><span class="st">`</span>.</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="sc">*</span> <span class="st">`</span><span class="at">window</span><span class="st">`</span> can be a <span class="dv">1</span><span class="sc">-</span>D tensor of size <span class="st">`</span><span class="at">win_length</span><span class="st">`</span>, e.g., from</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>  <span class="st">`</span><span class="at">torch_hann_window</span><span class="st">`</span>. If <span class="st">`</span><span class="at">window</span><span class="st">`</span> is <span class="st">`</span><span class="at">NULL</span><span class="st">`</span> (default), it is</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>  treated as <span class="cf">if</span> having \eqn{<span class="dv">1</span>} everywhere <span class="cf">in</span> the window. If</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>  \eqn{\mbox{win\_length} <span class="sc">&lt;</span> \mbox{n\_fft}}, <span class="st">`</span><span class="at">window</span><span class="st">`</span> will be padded on</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>  both sides to length <span class="st">`</span><span class="at">n_fft</span><span class="st">`</span> before being applied.</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="sc">*</span> If <span class="st">`</span><span class="at">center</span><span class="st">`</span> is <span class="st">`</span><span class="at">TRUE</span><span class="st">`</span> (default), <span class="st">`</span><span class="at">input</span><span class="st">`</span> will be padded on</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>  both sides so that the \eqn{t}<span class="sc">-</span>th frame is centered at time</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>  \eqn{t \times \mbox{hop\_length}}. Otherwise, the \eqn{t}<span class="sc">-</span>th frame</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>  begins at time  \eqn{t \times \mbox{hop\_length}}.</span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a><span class="sc">*</span> <span class="st">`</span><span class="at">pad_mode</span><span class="st">`</span> determines the padding method used on <span class="st">`</span><span class="at">input</span><span class="st">`</span> when</span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>  <span class="st">`</span><span class="at">center</span><span class="st">`</span> is <span class="st">`</span><span class="at">TRUE</span><span class="st">`</span>. See <span class="st">`</span><span class="at">torch_nn.functional.pad</span><span class="st">`</span> <span class="cf">for</span></span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>  all available options. Default is <span class="st">`</span><span class="at">"reflect"</span><span class="st">`</span>.</span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a><span class="sc">*</span> If <span class="st">`</span><span class="at">onesided</span><span class="st">`</span> is <span class="st">`</span><span class="at">TRUE</span><span class="st">`</span> (default), only values <span class="cf">for</span> \eqn{\omega}</span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>  <span class="cf">in</span> \eqn{\left[<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">2</span>, \dots, \left\lfloor \frac{\mbox{n\_fft}}{<span class="dv">2</span>} \right\rfloor <span class="sc">+</span> <span class="dv">1</span>\right]}</span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>  are returned because the real<span class="sc">-</span>to<span class="sc">-</span>complex Fourier transform satisfies the</span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>  conjugate symmetry, i.e., \eqn{X[m, \omega] <span class="ot">=</span> X[m, \mbox{n\_fft} <span class="sc">-</span> \omega]<span class="sc">^</span><span class="er">*</span>}.</span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a><span class="sc">*</span> If <span class="st">`</span><span class="at">normalized</span><span class="st">`</span> is <span class="st">`</span><span class="at">TRUE</span><span class="st">`</span> (default is <span class="st">`</span><span class="at">FALSE</span><span class="st">`</span>), the <span class="cf">function</span></span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>  returns the normalized STFT results, i.e., multiplied by \eqn{(\mbox{frame\_length})<span class="sc">^</span>{<span class="sc">-</span><span class="fl">0.5</span>}}.</span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a>Returns the real and the imaginary parts together as one tensor of size</span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a>\eqn{(<span class="sc">*</span> \times N \times T \times <span class="dv">2</span>)}, where \eqn{<span class="sc">*</span>} is the optional</span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a>batch size of <span class="st">`</span><span class="at">input</span><span class="st">`</span>, \eqn{N} is the number of frequencies where</span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a>STFT is applied, \eqn{T} is the total number of frames used, and each pair</span>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a><span class="cf">in</span> the last dimension represents a complex number as the real part and the</span>
+<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a>imaginary part.</span></code></pre><p></p></div>
     </div>
     <div class="section level2">
     <h2 id="warning">Warning<a class="anchor" aria-label="anchor" href="#warning"></a></h2>

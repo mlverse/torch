@@ -125,10 +125,10 @@
 location. As a result, in-place operations (especially ones that are
 vectorized) may result in incorrect behavior. If you need to write to
 the tensors, please clone them first.</p>
-<p></p><div class="sourceCode"><pre><code><span id="cb1-1"><a href="#cb1-1"></a>Many PyTorch functions, which return a view of a tensor, are internally</span>
-<span id="cb1-2"><a href="#cb1-2"></a>implemented with this function. Those functions, like</span>
-<span id="cb1-3"><a href="#cb1-3"></a><span class="st">`</span><span class="dt">torch_Tensor.expand</span><span class="st">`</span>, are easier to read and are therefore more</span>
-<span id="cb1-4"><a href="#cb1-4"></a>advisable to use.</span></code></pre><p></p></div>
+<p></p><div class="sourceCode"><pre><code><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>Many PyTorch functions, which return a view of a tensor, are internally</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>implemented with this function. Those functions, like</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="st">`</span><span class="at">torch_Tensor.expand</span><span class="st">`</span>, are easier to read and are therefore more</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>advisable to use.</span></code></pre><p></p></div>
     </div>
 
     <div class="section level2">
@@ -143,8 +143,8 @@ the tensors, please clone them first.</p>
 <span class="r-in"><span><span class="va">t</span></span></span>
 <span class="r-in"><span><span class="op">}</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> torch_tensor</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> -0.1339 -1.3469</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  1.3015 -1.8792</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> -2.3988 -1.3193</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> -0.2050 -1.1787</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [ CPUFloatType{2,2} ]</span>
 </code></pre></div>
     </div>
