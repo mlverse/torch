@@ -131,17 +131,14 @@ nn_Module <- R6::R6Class(
           if (!keepvars) {
             param$detach
           }
-          out[[paste0(prefix, param_name)]] <- param
+          out[[paste0(prefix, param_name)]] <- if (!keepvars) param$detach() else param
         }
       }
 
       for (buf_name in names(private$buffers_)) {
         buf <- private$buffers_[[buf_name]]
         if (!is.null(buf) && !buf_name %in% private$non_persistent_buffers_) {
-          if (!keepvars) {
-            buf$detach()
-          }
-          out[[paste0(prefix, buf_name)]] <- buf
+          out[[paste0(prefix, buf_name)]] <- if (!keepvars) buf$detach() else buf
         }
       }
 

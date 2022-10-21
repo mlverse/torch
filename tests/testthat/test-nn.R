@@ -649,3 +649,11 @@ test_that("can load state dict of a corrupt module", {
 
   expect_tensor_shape(model(torch_randn(10, 10)), c(10, 10))
 })
+
+test_that("make sure state_dict() is detached", {
+  model <- nn_linear(10, 10)
+  state_dict <- model$state_dict()
+  
+  expect_false(state_dict$weight$requires_grad)
+  expect_false(state_dict$bias$requires_grad)
+})
