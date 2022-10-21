@@ -3,7 +3,7 @@ NULL
 
 #' Implements the resilient backpropagation algorithm.
 #'
-#' Proposed first in [RPROP - A Fast Adaptive Learning Algorithm](http://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.52.4576)
+#' Proposed first in [RPROP - A Fast Adaptive Learning Algorithm](https://ieeexplore.ieee.org/document/298623)
 #'
 #' @param params (iterable): iterable of parameters to optimize or lists defining
 #' parameter groups

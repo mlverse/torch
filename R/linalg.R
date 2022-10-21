@@ -774,7 +774,7 @@ linalg_solve <- function(A, B) {
 #' - `'gelsd'` (tridiagonal reduction and SVD)
 #' - But if you run into memory issues: `'gelss'` (full SVD).
 #'
-#' See also the [full description of these drivers](https://www.netlib.org/lapack/lug/node27.html)
+#' See also the [full description of these drivers](https://netlib.org/lapack/lug/node27.html)
 #'
 #' `rcond` is used to determine the effective rank of the matrices in `A`
 #' when `driver` is one of (`'gelsy'`, `'gelsd'`, `'gelss'`).
@@ -1048,7 +1048,7 @@ linalg_multi_dot <- function(tensors) {
 #'
 #' where \teqn{\mathrm{I}_m} is the `m`-dimensional identity matrix and
 #' \teqn{v^{H}} is the conjugate transpose when \teqn{v} is complex, and the transpose when \teqn{v} is real-valued.
-#' See [Representation of Orthogonal or Unitary Matrices](https://www.netlib.org/lapack/lug/node128.html) for
+#' See [Representation of Orthogonal or Unitary Matrices](https://netlib.org/lapack/lug/node128.html) for
 #' further details.
 #'
 #' Supports inputs of float, double, cfloat and cdouble dtypes.

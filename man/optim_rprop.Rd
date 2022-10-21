@@ -20,7 +20,7 @@ are multiplicative increase and decrease factors
 maximal allowed step sizes (default: (1e-6, 50))}
 }
 \description{
-Proposed first in \href{http://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.52.4576}{RPROP - A Fast Adaptive Learning Algorithm}
+Proposed first in \href{https://ieeexplore.ieee.org/document/298623}{RPROP - A Fast Adaptive Learning Algorithm}
 }
 \section{Warning}{
 If you need to move a model to GPU via \verb{$cuda()}, please do so before
