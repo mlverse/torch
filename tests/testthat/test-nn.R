@@ -652,8 +652,10 @@ test_that("can load state dict of a corrupt module", {
 
 test_that("make sure state_dict() is detached", {
   model <- nn_linear(10, 10)
+  model$bias$requires_grad_(FALSE) 
   state_dict <- model$state_dict()
   
-  expect_false(state_dict$weight$requires_grad)
+  expect_true(state_dict$weight$requires_grad)
+  # we should keep the save value of requires grad bt in a detached graph
   expect_false(state_dict$bias$requires_grad)
 })
