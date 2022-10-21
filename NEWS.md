@@ -22,6 +22,7 @@ everytime backward is called. (#873)
 - `torch_movedim()` and `$movedim()` are now both 1-based indexed. (#905)
 - We now let LibTorch query the default generator, this allows one to use `torch_bernoulli()` with `device="gpu"`. (#906)
 - Added `torch_serialize()` to allow creating a raw vector from torch objects. (#908)
+- `nn_module$state_diict()` now detaches output tensors by default. (#916)
 
 # torch 0.8.1
 

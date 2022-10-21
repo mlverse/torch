@@ -131,17 +131,14 @@ nn_Module <- R6::R6Class(
           if (!keepvars) {
             param$detach
           }
-          out[[paste0(prefix, param_name)]] <- param
+          out[[paste0(prefix, param_name)]] <- keepvars_or_detach(param, keepvars)
         }
       }
 
       for (buf_name in names(private$buffers_)) {
         buf <- private$buffers_[[buf_name]]
         if (!is.null(buf) && !buf_name %in% private$non_persistent_buffers_) {
-          if (!keepvars) {
-            buf$detach()
-          }
-          out[[paste0(prefix, buf_name)]] <- buf
+          out[[paste0(prefix, buf_name)]] <- keepvars_or_detach(buf, keepvars)
         }
       }
 
@@ -823,4 +820,14 @@ get_parameter_count <- function(self) {
 
   pars <- sapply(self$parameters, function(x) prod(x$shape))
   sum(pars)
+}
+
+keepvars_or_detach <- function(p, keepvars) {
+  if (!keepvars) {
+    out <- p$detach()
+    out$requires_grad_(p$requires_grad)
+    out
+  } else {
+    p
+  }
 }
