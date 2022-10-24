@@ -34,7 +34,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">torch</a>
 
-    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">0.8.1.9001</small>
+    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">0.9.0.9000</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -131,15 +131,16 @@
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">n</span><span class="op">$</span><span class="fu">sample</span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt; torch_tensor</span></span>
-<span><span class="co">#&gt;  0.3165</span></span>
+<span><span class="co">#&gt; 0.01 *</span></span>
+<span><span class="co">#&gt; -7.2866</span></span>
 <span><span class="co">#&gt; [ CPUFloatType{1} ]</span></span></code></pre></div>
 <p>or, draw multiple samples:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">n</span><span class="op">$</span><span class="fu">sample</span><span class="op">(</span><span class="fl">3</span><span class="op">)</span></span>
 <span><span class="co">#&gt; torch_tensor</span></span>
-<span><span class="co">#&gt; -0.3717</span></span>
-<span><span class="co">#&gt; -0.4105</span></span>
-<span><span class="co">#&gt; -0.9958</span></span>
+<span><span class="co">#&gt; -0.6841</span></span>
+<span><span class="co">#&gt;  0.0060</span></span>
+<span><span class="co">#&gt;  0.7446</span></span>
 <span><span class="co">#&gt; [ CPUFloatType{3,1} ]</span></span></code></pre></div>
 <p>We can evaluate the log probability of values:</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
