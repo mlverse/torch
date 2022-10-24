@@ -83,33 +83,45 @@
 
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="development version" id="torch-development-version">torch (development version)<a class="anchor" aria-label="anchor" href="#torch-development-version"></a></h2>
-<ul><li>Re-implemented the <code>$</code> method for R7 classes in C/C++ to improve speed when calling methods. (<a href="https://github.com/mlverse/torch/issues/873" class="external-link">#873</a>)</li>
-<li>Re-implemented garbage collection logic when calling it from inside a <code>backward()</code> call. This improves speed because we no longer need to call GC everytime backward is called. (<a href="https://github.com/mlverse/torch/issues/873" class="external-link">#873</a>)</li>
-<li>Fixed bug in <code>torch_arange</code> that was causing the <code>end</code> value not getting included in the result. (<a href="https://github.com/mlverse/torch/issues/885" class="external-link">#885</a>, <a href="https://github.com/skeydan" class="external-link">@skeydan</a>)</li>
-<li>Fixed bug in window functions by setting a default dtype. (<a href="https://github.com/mlverse/torch/issues/886" class="external-link">#886</a>, <a href="https://github.com/skeydan" class="external-link">@skeydan</a>)</li>
-<li>We now use a thread pool instead of launching a new thread for backward calls. (<a href="https://github.com/mlverse/torch/issues/883" class="external-link">#883</a>)</li>
-<li>Implemented options to allow configuring the activation of garbage collection when allocating more CUDA memory. (<a href="https://github.com/mlverse/torch/issues/883" class="external-link">#883</a>)</li>
-<li>Fixed bug when using <code>install_torch(reinstall = TRUE)</code>. (<a href="https://github.com/mlverse/torch/issues/883" class="external-link">#883</a>)</li>
-<li>Added <code><a href="../reference/cuda_synchronize.html">cuda_synchronize()</a></code> to allow synchronization of CUDA operations. (<a href="https://github.com/mlverse/torch/issues/887" class="external-link">#887</a>)</li>
-<li>Updated to LibTorch v1.12.1. (<a href="https://github.com/mlverse/torch/issues/889" class="external-link">#889</a>, <a href="https://github.com/mlverse/torch/issues/893" class="external-link">#893</a>, <a href="https://github.com/mlverse/torch/issues/899" class="external-link">#899</a>)</li>
-<li>Added support for M1 Macs, including creating Tensors in the MPS device. (<a href="https://github.com/mlverse/torch/issues/890" class="external-link">#890</a>)</li>
+<div class="section level3">
+<h3 id="breaking-changes-development-version">Breaking changes<a class="anchor" aria-label="anchor" href="#breaking-changes-development-version"></a></h3>
+<ul><li>Updated to LibTorch v1.12.1. (<a href="https://github.com/mlverse/torch/issues/889" class="external-link">#889</a>, <a href="https://github.com/mlverse/torch/issues/893" class="external-link">#893</a>, <a href="https://github.com/mlverse/torch/issues/899" class="external-link">#899</a>)</li>
 <li>
 <code>torch_bincount</code> is now 1-based indexed. (<a href="https://github.com/mlverse/torch/issues/896" class="external-link">#896</a>)</li>
-<li>A <code>nnf_</code> functions have been updated to use a single <code>torch_</code> kernel instead of the custom implementation. (<a href="https://github.com/mlverse/torch/issues/896" class="external-link">#896</a>)</li>
-<li>Improved performance of dataloaders. (<a href="https://github.com/mlverse/torch/issues/900" class="external-link">#900</a>)</li>
+<li>
+<code><a href="../reference/torch_movedim.html">torch_movedim()</a></code> and <code>$movedim()</code> are now both 1-based indexed. (<a href="https://github.com/mlverse/torch/issues/905" class="external-link">#905</a>)</li>
+</ul></div>
+<div class="section level3">
+<h3 id="new-features-development-version">New features<a class="anchor" aria-label="anchor" href="#new-features-development-version"></a></h3>
+<ul><li>Added <code><a href="../reference/cuda_synchronize.html">cuda_synchronize()</a></code> to allow synchronization of CUDA operations. (<a href="https://github.com/mlverse/torch/issues/887" class="external-link">#887</a>)</li>
+<li>Added support for M1 Macs, including creating Tensors in the MPS device. (<a href="https://github.com/mlverse/torch/issues/890" class="external-link">#890</a>)</li>
 <li>Added support for CUDA 11.6 on Linux. (<a href="https://github.com/mlverse/torch/issues/902" class="external-link">#902</a>)</li>
 <li>Added <code><a href="../reference/cuda_empty_cache.html">cuda_empty_cache()</a></code> to allow freeing memory from the caching allocator to the system. (<a href="https://github.com/mlverse/torch/issues/903" class="external-link">#903</a>)</li>
 <li>Added <code>$is_sparse()</code> method to check wether a Tensor is sparse or not. (<a href="https://github.com/mlverse/torch/issues/903" class="external-link">#903</a>)</li>
 <li>
 <code>dataset_subset</code> now adds a class to the modified dataset that is the same as the original dataset classes postfixed with <code>_subset</code>. (<a href="https://github.com/mlverse/torch/issues/904" class="external-link">#904</a>)</li>
-<li>The <code>dims</code> argument in <code>torch_tile()</code> is no longer modified, as it’s not meant to be the a 1-based dimension. (<a href="https://github.com/mlverse/torch/issues/905" class="external-link">#905</a>)</li>
-<li>
-<code><a href="../reference/torch_movedim.html">torch_movedim()</a></code> and <code>$movedim()</code> are now both 1-based indexed. (<a href="https://github.com/mlverse/torch/issues/905" class="external-link">#905</a>)</li>
-<li>We now let LibTorch query the default generator, this allows one to use <code><a href="../reference/torch_bernoulli.html">torch_bernoulli()</a></code> with <code>device="gpu"</code>. (<a href="https://github.com/mlverse/torch/issues/906" class="external-link">#906</a>)</li>
 <li>Added <code><a href="../reference/torch_serialize.html">torch_serialize()</a></code> to allow creating a raw vector from torch objects. (<a href="https://github.com/mlverse/torch/issues/908" class="external-link">#908</a>)</li>
+</ul></div>
+<div class="section level3">
+<h3 id="bug-fixes-development-version">Bug fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-development-version"></a></h3>
+<ul><li>Fixed bug in <code>torch_arange</code> that was causing the <code>end</code> value not getting included in the result. (<a href="https://github.com/mlverse/torch/issues/885" class="external-link">#885</a>, <a href="https://github.com/skeydan" class="external-link">@skeydan</a>)</li>
+<li>Fixed bug in window functions by setting a default dtype. (<a href="https://github.com/mlverse/torch/issues/886" class="external-link">#886</a>, <a href="https://github.com/skeydan" class="external-link">@skeydan</a>)</li>
+<li>Fixed bug when using <code>install_torch(reinstall = TRUE)</code>. (<a href="https://github.com/mlverse/torch/issues/883" class="external-link">#883</a>)</li>
+<li>The <code>dims</code> argument in <code>torch_tile()</code> is no longer modified, as it’s not meant to be the a 1-based dimension. (<a href="https://github.com/mlverse/torch/issues/905" class="external-link">#905</a>)</li>
 <li>
 <code>nn_module$state_diict()</code> now detaches output tensors by default. (<a href="https://github.com/mlverse/torch/issues/916" class="external-link">#916</a>)</li>
 </ul></div>
+<div class="section level3">
+<h3 id="internal-development-version">Internal<a class="anchor" aria-label="anchor" href="#internal-development-version"></a></h3>
+<ul><li>Re-implemented the <code>$</code> method for R7 classes in C/C++ to improve speed when calling methods. (<a href="https://github.com/mlverse/torch/issues/873" class="external-link">#873</a>)</li>
+<li>Re-implemented garbage collection logic when calling it from inside a <code>backward()</code> call. This improves speed because we no longer need to call GC everytime backward is called. (<a href="https://github.com/mlverse/torch/issues/873" class="external-link">#873</a>)</li>
+<li>We now use a thread pool instead of launching a new thread for backward calls. (<a href="https://github.com/mlverse/torch/issues/883" class="external-link">#883</a>)</li>
+<li>Implemented options to allow configuring the activation of garbage collection when allocating more CUDA memory. (<a href="https://github.com/mlverse/torch/issues/883" class="external-link">#883</a>)</li>
+<li>Some <code>nnf_</code> functions have been updated to use a single <code>torch_</code> kernel instead of the custom implementation. (<a href="https://github.com/mlverse/torch/issues/896" class="external-link">#896</a>)</li>
+<li>Improved performance of dataloaders. (<a href="https://github.com/mlverse/torch/issues/900" class="external-link">#900</a>)</li>
+<li>We now let LibTorch query the default generator, this allows one to use <code><a href="../reference/torch_bernoulli.html">torch_bernoulli()</a></code> with <code>device="gpu"</code>. (<a href="https://github.com/mlverse/torch/issues/906" class="external-link">#906</a>)</li>
+</ul></div>
+</div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.8.1" id="torch-081">torch 0.8.1<a class="anchor" aria-label="anchor" href="#torch-081"></a></h2><p class="text-muted">CRAN release: 2022-08-19</p>
 <div class="section level3">

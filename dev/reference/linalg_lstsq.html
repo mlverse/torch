@@ -147,7 +147,7 @@ For CUDA input, the only valid driver is <code>'gels'</code>, which assumes that
 <li><p>If <code>A</code> is not well-conditioned.</p></li>
 <li><p><code>'gelsd'</code> (tridiagonal reduction and SVD)</p></li>
 <li><p>But if you run into memory issues: <code>'gelss'</code> (full SVD).</p></li>
-</ul><p>See also the <a href="https://www.netlib.org/lapack/lug/node27.html" class="external-link">full description of these drivers</a></p>
+</ul><p>See also the <a href="https://netlib.org/lapack/lug/node27.html" class="external-link">full description of these drivers</a></p>
 <p><code>rcond</code> is used to determine the effective rank of the matrices in <code>A</code>
 when <code>driver</code> is one of (<code>'gelsy'</code>, <code>'gelsd'</code>, <code>'gelss'</code>).
 In this case, if  are the singular values of <code>A</code> in decreasing order,
