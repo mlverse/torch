@@ -43,6 +43,9 @@
     <loc>https://torch.mlverse.org/docs/articles/loading-data.html</loc>
   </url>
   <url>
+    <loc>https://torch.mlverse.org/docs/articles/memory-management.html</loc>
+  </url>
+  <url>
     <loc>https://torch.mlverse.org/docs/articles/python-to-r.html</loc>
   </url>
   <url>
@@ -106,6 +109,9 @@
     <loc>https://torch.mlverse.org/docs/reference/backends_mkldnn_is_available.html</loc>
   </url>
   <url>
+    <loc>https://torch.mlverse.org/docs/reference/backends_mps_is_available.html</loc>
+  </url>
+  <url>
     <loc>https://torch.mlverse.org/docs/reference/backends_openmp_is_available.html</loc>
   </url>
   <url>
@@ -124,6 +130,9 @@
     <loc>https://torch.mlverse.org/docs/reference/cuda_device_count.html</loc>
   </url>
   <url>
+    <loc>https://torch.mlverse.org/docs/reference/cuda_empty_cache.html</loc>
+  </url>
+  <url>
     <loc>https://torch.mlverse.org/docs/reference/cuda_get_device_capability.html</loc>
   </url>
   <url>
@@ -134,6 +143,9 @@
   </url>
   <url>
     <loc>https://torch.mlverse.org/docs/reference/cuda_runtime_version.html</loc>
+  </url>
+  <url>
+    <loc>https://torch.mlverse.org/docs/reference/cuda_synchronize.html</loc>
   </url>
   <url>
     <loc>https://torch.mlverse.org/docs/reference/dataloader.html</loc>
@@ -1888,6 +1900,9 @@
     <loc>https://torch.mlverse.org/docs/reference/torch_selu_.html</loc>
   </url>
   <url>
+    <loc>https://torch.mlverse.org/docs/reference/torch_serialize.html</loc>
+  </url>
+  <url>
     <loc>https://torch.mlverse.org/docs/reference/torch_sgn.html</loc>
   </url>
   <url>
@@ -1907,9 +1922,6 @@
   </url>
   <url>
     <loc>https://torch.mlverse.org/docs/reference/torch_slogdet.html</loc>
-  </url>
-  <url>
-    <loc>https://torch.mlverse.org/docs/reference/torch_solve.html</loc>
   </url>
   <url>
     <loc>https://torch.mlverse.org/docs/reference/torch_sort.html</loc>
