@@ -1,0 +1,26 @@
+#torch- img {
+    max-width: 20%;
+    height: auto;
+}
+
+.navbar-dark .navbar-nav .active>.nav-link {
+    background: #65195f;
+    color: #f0f0f0;
+}
+
+.navbar-dark .navbar-nav .nav-link {
+    color: #f0f0f0;
+}
+
+.navbar-dark input[type="search"] {
+    border-color: #fff;
+    background-color: #fff;
+    color: #7e1f77;
+    caret-color: #7e1f77;
+}
+
+body > nav > div > small {
+    background-color: #ced4da;
+    padding: 3px;
+    border-radius: 5px;
+}
