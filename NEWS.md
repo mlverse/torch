@@ -1,5 +1,7 @@
 # torch (development version)
 
+- Added support for nonABI builds on CUDA 11.6. (#919)
+
 # torch 0.9.0
 
 ## Breaking changes
