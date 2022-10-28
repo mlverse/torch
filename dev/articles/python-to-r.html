@@ -116,8 +116,12 @@
 <div class="section level2">
 <h2 id="loading-models-saved-in-python">Loading models saved in python<a class="anchor" aria-label="anchor" href="#loading-models-saved-in-python"></a>
 </h2>
-<p>Currently the only way to load models from python is to rewrite the model architecture in R. All the parameter names must be identical. A complete example from Python to R is shown below. This is an extension of the Serialization vignette.</p>
-<p>An artificial neural net is implemented below in Python. Note the final line which uses torch.save().</p>
+<p>Currently the only way to load models from python is to rewrite the
+model architecture in R. All the parameter names must be identical. A
+complete example from Python to R is shown below. This is an extension
+of the Serialization vignette.</p>
+<p>An artificial neural net is implemented below in Python. Note the
+final line which uses torch.save().</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> torch</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -178,7 +182,9 @@
 <span id="cb1-58"><a href="#cb1-58" aria-hidden="true" tabindex="-1"></a><span class="co">#Note the argument _use_new_zipfile_serialization</span></span>
 <span id="cb1-59"><a href="#cb1-59" aria-hidden="true" tabindex="-1"></a>torch.save(stateDict,f<span class="op">=</span><span class="st">"path/babyTest.pth"</span>,</span>
 <span id="cb1-60"><a href="#cb1-60" aria-hidden="true" tabindex="-1"></a>           _use_new_zipfile_serialization<span class="op">=</span><span class="va">True</span>)</span></code></pre></div>
-<p>Once we have a saved .pth object we can load this into R. An example use case would be training a model in Python then using Shiny to develop a GUI for predictions from a trained model.</p>
+<p>Once we have a saved .pth object we can load this into R. An example
+use case would be training a model in Python then using Shiny to develop
+a GUI for predictions from a trained model.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://torch.mlverse.org/docs">torch</a></span><span class="op">)</span></span>
 <span></span>

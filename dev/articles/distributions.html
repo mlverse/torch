@@ -116,8 +116,12 @@
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://torch.mlverse.org/docs">torch</a></span><span class="op">)</span></span>
 <span><span class="fu"><a href="../reference/torch_manual_seed.html">torch_manual_seed</a></span><span class="op">(</span><span class="fl">1</span><span class="op">)</span> <span class="co"># setting seed for reproducibility</span></span></code></pre></div>
-<p>This vignette showcases the basic functionality of distributions in torch. Currently the distributions modules are considered ‘work in progress’ and are still experimental features in the torch package. You can see the progress in this <a href="https://github.com/mlverse/torch/issues/479" class="external-link">link</a>.</p>
-<p>The distributions modules in torch are modelled after PyTorch’s <a href="https://pytorch.org/docs/stable/distributions.html#" class="external-link">distributions module</a> which in turn is based on the TensorFlow <a href="https://arxiv.org/abs/1711.10604" class="external-link">Distributions package</a>.</p>
+<p>This vignette showcases the basic functionality of distributions in
+torch. Currently the distributions modules are considered ‘work in
+progress’ and are still experimental features in the torch package. You
+can see the progress in this <a href="https://github.com/mlverse/torch/issues/479" class="external-link">link</a>.</p>
+<p>The distributions modules in torch are modelled after PyTorch’s <a href="https://pytorch.org/docs/stable/distributions.html#" class="external-link">distributions
+module</a> which in turn is based on the TensorFlow <a href="https://arxiv.org/abs/1711.10604" class="external-link">Distributions package</a>.</p>
 <p>This vignette is based in the TensorFlow’s distributions <a href="https://www.tensorflow.org/probability/examples/TensorFlow_Distributions_Tutorial#basic_univariate_distributions" class="external-link">tutorial</a>.</p>
 <div class="section level2">
 <h2 id="basic-univariate-distributions">Basic univariate distributions<a class="anchor" aria-label="anchor" href="#basic-univariate-distributions"></a>
@@ -131,16 +135,15 @@
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">n</span><span class="op">$</span><span class="fu">sample</span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt; torch_tensor</span></span>
-<span><span class="co">#&gt; 0.01 *</span></span>
-<span><span class="co">#&gt; -7.2866</span></span>
+<span><span class="co">#&gt; -1.7433</span></span>
 <span><span class="co">#&gt; [ CPUFloatType{1} ]</span></span></code></pre></div>
 <p>or, draw multiple samples:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">n</span><span class="op">$</span><span class="fu">sample</span><span class="op">(</span><span class="fl">3</span><span class="op">)</span></span>
 <span><span class="co">#&gt; torch_tensor</span></span>
-<span><span class="co">#&gt; -0.6841</span></span>
-<span><span class="co">#&gt;  0.0060</span></span>
-<span><span class="co">#&gt;  0.7446</span></span>
+<span><span class="co">#&gt;  0.6243</span></span>
+<span><span class="co">#&gt;  0.8774</span></span>
+<span><span class="co">#&gt;  0.1053</span></span>
 <span><span class="co">#&gt; [ CPUFloatType{3,1} ]</span></span></code></pre></div>
 <p>We can evaluate the log probability of values:</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
@@ -167,7 +170,8 @@
 <code class="sourceCode R"><span><span class="va">b</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/distr_bernoulli.html">distr_bernoulli</a></span><span class="op">(</span>probs <span class="op">=</span> <span class="fu"><a href="../reference/torch_tensor.html">torch_tensor</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.25</span>, <span class="fl">0.5</span>, <span class="fl">0.75</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">b</span></span>
 <span><span class="co">#&gt; torch_Bernoulli ()</span></span></code></pre></div>
-<p>This object represents 3 independent Bernoulli distributions, one for each element of the tensor.</p>
+<p>This object represents 3 independent Bernoulli distributions, one for
+each element of the tensor.</p>
 <p>We can sample a single observation:</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">b</span><span class="op">$</span><span class="fu">sample</span><span class="op">(</span><span class="op">)</span></span>
@@ -191,8 +195,11 @@
 <div class="section level2">
 <h2 id="using-distributions-within-models">Using distributions within models<a class="anchor" aria-label="anchor" href="#using-distributions-within-models"></a>
 </h2>
-<p>The <code>log_prob</code> method of distributions can be differentiated, thus, distributions can be used to train models in torch.</p>
-<p>Let’s implement a Gaussian linear model, but first let’s simulate some data</p>
+<p>The <code>log_prob</code> method of distributions can be
+differentiated, thus, distributions can be used to train models in
+torch.</p>
+<p>Let’s implement a Gaussian linear model, but first let’s simulate
+some data</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/torch_randn.html">torch_randn</a></span><span class="op">(</span><span class="fl">100</span>, <span class="fl">1</span><span class="op">)</span></span>
 <span><span class="va">y</span> <span class="op">&lt;-</span> <span class="fl">2</span><span class="op">*</span><span class="va">x</span> <span class="op">+</span> <span class="fl">1</span> <span class="op">+</span> <span class="fu"><a href="../reference/torch_randn.html">torch_randn</a></span><span class="op">(</span><span class="fl">100</span>, <span class="fl">1</span><span class="op">)</span></span></code></pre></div>
