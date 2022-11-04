@@ -423,7 +423,12 @@ install_torch <- function(version = "1.12.1", type = install_type(version = vers
 #' \code{"libtorch"} is the archive containing all torch modules, and \code{"liblantern"} is the C interface to libtorch
 #' that is used for the R package. Both are highly dependent, and should be checked through \code{"get_install_libs_url()"}
 #'
-#'
+#' @examples
+#' \dontrun{
+#' # on a linux CPU platform after downloading files into /tmp/
+#' install_torch_from_file(libtorch = "file:////tmp/libtorch-cxx11-abi-shared-with-deps-1.12.1%2Bcpu.zip",
+#'                         liblantern = "file:////tmp/Linux-cpu.zip")
+#' }
 #' @export
 install_torch_from_file <- function(version = "1.12.1", type = install_type(version = version), libtorch, liblantern, ...) {
   stopifnot(inherits(url(libtorch), "file"))
