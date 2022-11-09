@@ -6,7 +6,7 @@ title: resources
 
 To get more practice with `torch` , we recommend checking out our `learnr` tutorials in the [torch-learnr](https://github.com/mlverse/torch-learnr) repository.
 
-To stay on top of new developments and releases, we recommend you follow the [RStudio AI Blog](https://blogs.rstudio.com/ai/). There, you'll also find interesting case studies and exciting new contributions from the community.
+To stay on top of new developments and releases, we recommend you follow the [Posit AI Blog](https://blogs.rstudio.com/ai/). There, you'll also find interesting case studies and exciting new contributions from the community.
 
 ## Deep learning
 
