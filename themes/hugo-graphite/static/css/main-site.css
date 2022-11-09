@@ -512,9 +512,9 @@ a {
     flex-shrink: 0; }
   #rStudioFooter .rstudioLogo {
     display: inline-block;
-    height: 25px;
-    width: 75px;
-    background-image: url(images/logoRStudioWhite.svg);
+    height: 20px;
+    width: 65px;
+    background-image: url(images/posit-logo-white-TM.svg);
     background-size: 100% 100%;
     background-repeat: no-repeat;
     vertical-align: middle;
