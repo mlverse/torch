@@ -451,8 +451,10 @@ get_install_libs_url <- function(version = "1.12.1", type = install_type(version
 #' # on a linux CPU platform 
 #' get_install_libs_url(type = "cpu")
 #' # then after making both files available into /tmp/
-#' install_torch_from_file(libtorch = "file:////tmp/libtorch-cxx11-abi-shared-with-deps-1.12.1%2Bcpu.zip",
-#'                         liblantern = "file:////tmp/Linux-cpu.zip")
+#' install_torch_from_file(
+#'   libtorch = "file:////tmp/libtorch-cxx11-abi-shared-with-deps-1.12.1%2Bcpu.zip",
+#'   liblantern = "file:////tmp/Linux-cpu.zip"
+#' )
 #' }
 #' @export
 install_torch_from_file <- function(version = "1.12.1", type = install_type(version = version), libtorch, liblantern, ...) {

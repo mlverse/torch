@@ -45,7 +45,9 @@ that is used for the R package. Both are highly dependent, and should be checked
 # on a linux CPU platform 
 get_install_libs_url(type = "cpu")
 # then after making both files available into /tmp/
-install_torch_from_file(libtorch = "file:////tmp/libtorch-cxx11-abi-shared-with-deps-1.12.1\%2Bcpu.zip",
-                        liblantern = "file:////tmp/Linux-cpu.zip")
+install_torch_from_file(
+  libtorch = "file:////tmp/libtorch-cxx11-abi-shared-with-deps-1.12.1\%2Bcpu.zip",
+  liblantern = "file:////tmp/Linux-cpu.zip"
+)
 }
 }
