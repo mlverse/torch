@@ -507,7 +507,7 @@ fitted <- net %>%
     loss = function(y_hat, y_true) nnf_mse_loss(y_hat, y_true$unsqueeze(2)),
     optimizer = optim_adam
   ) %>%
-  fit(train_dl, epochs = 10, valid_data = test_dl)
+  fit(train_dl, epochs = 10, valid_data = valid_dl)
 ```
 
 As you can see, the network has made good progress -- on both training and validation set. How about the test set? And how good of a fit are the inferred correlations?
