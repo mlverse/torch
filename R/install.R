@@ -235,20 +235,30 @@ lantern_install_libs <- function(version, type, install_path, install_config) {
 }
 
 install_type_windows <- function(version) {
+  verbose <- Sys.getenv("TORCH_VERBOSE_INSTALL")
   cuda_version <- NULL
   cuda_path <- Sys.getenv("CUDA_PATH")
 
   if (nzchar(cuda_path)) {
-    versions_file <- file.path(cuda_path, "version.txt")
+    if (verbose == "1") { message(paste0("CUDA_PATH environment variable is set to ", cuda_path)) }
+    versions_file <- file.path(cuda_path, "version.json")
     if (file.exists(versions_file)) {
-      cuda_version <- gsub("CUDA Version |\\.[0-9]+$", "", readLines(versions_file))
+      if (verbose == "1") { message(paste0(cuda_path, "\\version.json found, extracting CUDA SDK version from it.")) }
+      cuda_version <- stringr::str_extract(readLines(versions_file, n=4)[4], "[0-9]+.[0-9]+")
+      if (verbose == "1") { message(paste0("CUDA version extracted from version.json is ", cuda_version)) }
+    } else {
+      if (verbose == "1") { message(paste0(cuda_path, "\\version.json not found")) }
+      }
+  } else {
+    if (verbose == "1") { message(paste0("CUDA_PATH environment variable not set, installing CPU version")) }
     }
-  }
 
   # Query nvcc from cuda in cuda_path.
-  if (nzchar(cuda_path) && is.null(cuda_version)) {
+  if (nzchar(cuda_path) && is.na(cuda_version)) {
+    if (verbose == "1") { message(paste0("Could not extract version from version.json file, attempting to run nvcc")) }
     nvcc_path <- file.path(cuda_path, "bin", "nvcc.exe")
     cuda_version <- nvcc_version_from_path(nvcc_path)
+    if (verbose == "1") { message(paste0("CUDA version extracted from nvcc is ", cuda_version)) }
   }
 
   if (is.null(cuda_version)) {
