@@ -408,41 +408,11 @@ install_torch <- function(version = "1.12.1", type = install_type(version = vers
 
 #' Install Torch from files
 #'
-#' Installs Torch and its dependencies from files.
+#' List the Torch and Lantern libraries URLs to download as local files in order to proceed with  \code{install_torch_from_file()}.
 #'
-#' @param version The Torch version to install.
-#' @param type The installation type for Torch. Valid values are \code{"cpu"} or the 'CUDA' version.
-#' @param libtorch The installation archive file to use for Torch. Shall be a \code{"file://"} URL scheme.
-#' @param liblantern The installation archive file to use for Lantern. Shall be a \code{"file://"} URL scheme.
-#' @param ... other parameters to be passed to \code{"install_torch()"}
+#' @inheritParams install_torch
 #'
-#' @details
-#'
-#' When \code{"install_torch()"} initiated download is not possible, but installation archive files are
-#' present on local filesystem, \code{"install_torch_from_file()"} can be used as a workaround to installation issue.
-#' \code{"libtorch"} is the archive containing all torch modules, and \code{"liblantern"} is the C interface to libtorch
-#' that is used for the R package. Both are highly dependent, and should be checked through \code{"get_install_libs_url()"}
-#'
-#'
-#' @export
-install_torch_from_file <- function(version = "1.12.1", type = install_type(version = version), libtorch, liblantern, ...) {
-  stopifnot(inherits(url(libtorch), "file"))
-  stopifnot(inherits(url(liblantern), "file"))
-
-  install_config[[version]][[type]][[install_os()]][["libtorch"]][["url"]] <- libtorch
-  install_config[[version]][[type]][[install_os()]][["liblantern"]] <- liblantern
-
-  install_torch(version = version, type = type, install_config = install_config, ...)
-}
-
-#' List of files to download
-#'
-#' List the Torch and Lantern files to download as local files in order to proceed with install_torch_from_file().
-#'
-#' @param version The Torch version to install.
-#' @param type The installation type for Torch. Valid values are \code{"cpu"} or the 'CUDA' version.
-#'
-#'
+#' @rdname install_torch_from_file
 #' @export
 get_install_libs_url <- function(version = "1.12.1", type = install_type(version = version)) {
   
@@ -458,6 +428,48 @@ get_install_libs_url <- function(version = "1.12.1", type = install_type(version
     libtorch = maybe_get_pre_cxx11_abi_url(libtorch), 
     liblantern = maybe_get_pre_cxx11_abi_url(liblantern)
   )
+}
+
+#' Install Torch from files
+#'
+#' Installs Torch and its dependencies from files.
+#'
+#' @inheritParams install_torch
+#' @param libtorch The installation archive file to use for Torch. Shall be a \code{"file://"} URL scheme.
+#' @param liblantern The installation archive file to use for Lantern. Shall be a \code{"file://"} URL scheme.
+#' @param ... other parameters to be passed to \code{"install_torch()"}
+#'
+#' @details
+#'
+#' When \code{"install_torch()"} initiated download is not possible, but installation archive files are
+#' present on local filesystem, \code{"install_torch_from_file()"} can be used as a workaround to installation issue.
+#' \code{"libtorch"} is the archive containing all torch modules, and \code{"liblantern"} is the C interface to libtorch
+#' that is used for the R package. Both are highly dependent, and should be checked through \code{"get_install_libs_url()"}
+#'
+#' @examples
+#' \dontrun{
+#' # on a linux CPU platform 
+#' get_install_libs_url(type = "cpu")
+#' # then after making both files available into /tmp/
+#' install_torch_from_file(
+#'   libtorch = "file:////tmp/libtorch-cxx11-abi-shared-with-deps-1.12.1%2Bcpu.zip",
+#'   liblantern = "file:////tmp/Linux-cpu.zip"
+#' )
+#' }
+#' @export
+install_torch_from_file <- function(version = "1.12.1", type = install_type(version = version), libtorch, liblantern, ...) {
+  stopifnot(inherits(url(libtorch), "file"))
+  stopifnot(inherits(url(liblantern), "file"))
+
+  # reuse install_config structure to update libtorch url and maybe md5 if it is a pre Cxx11
+  library_info <- install_config[[version]][[type]][[install_os()]][["libtorch"]]
+  library_info[["url"]] <- libtorch
+  library_info <- maybe_switch_precxx11abi(library_info)
+  install_config[[version]][[type]][[install_os()]][["libtorch"]] <- library_info
+  # and to update liblantern url
+  install_config[[version]][[type]][[install_os()]][["liblantern"]] <- liblantern
+
+  install_torch(version = version, type = type, install_config = install_config, ...)
 }
 
 maybe_get_pre_cxx11_abi_url <- function(url) {
