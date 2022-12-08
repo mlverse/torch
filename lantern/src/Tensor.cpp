@@ -237,7 +237,7 @@ void *_lantern_normal_double_double_intarrayref_generator_tensoroptions(
     double mean, double std, void *size, void *generator, void *options) {
   LANTERN_FUNCTION_START
   auto size_ = from_raw::IntArrayRef(size);
-  auto generator_ = from_raw::Generator(generator);
+  auto generator_ = from_raw::optional::Generator(generator);
   auto options_ = from_raw::TensorOptions(options);
   auto ten = at::normal(mean, std, size_, generator_, options_);
   return make_raw::Tensor(ten);
@@ -249,7 +249,7 @@ void *_lantern_normal_tensor_tensor_generator(void *mean, void *std,
   LANTERN_FUNCTION_START
   auto mean_ = from_raw::Tensor(mean);
   auto std_ = from_raw::Tensor(std);
-  auto generator_ = from_raw::Generator(generator);
+  auto generator_ = from_raw::optional::Generator(generator);
   auto ten = at::normal(mean_, std_, generator_);
   return make_raw::Tensor(ten);
   LANTERN_FUNCTION_END
@@ -259,7 +259,7 @@ void *_lantern_normal_double_tensor_generator(double mean, void *std,
                                               void *generator) {
   LANTERN_FUNCTION_START
   auto std_ = from_raw::Tensor(std);
-  auto generator_ = from_raw::Generator(generator);
+  auto generator_ = from_raw::optional::Generator(generator);
   auto ten = at::normal(mean, std_, generator_);
   return make_raw::Tensor(ten);
   LANTERN_FUNCTION_END
@@ -269,7 +269,7 @@ void *_lantern_normal_tensor_double_generator(void *mean, double std,
                                               void *generator) {
   LANTERN_FUNCTION_START
   auto mean_ = from_raw::Tensor(mean);
-  auto generator_ = from_raw::Generator(generator);
+  auto generator_ = from_raw::optional::Generator(generator);
   auto ten = at::normal(mean_, std, generator_);
   return make_raw::Tensor(ten);
   LANTERN_FUNCTION_END
