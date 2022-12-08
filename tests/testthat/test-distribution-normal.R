@@ -58,3 +58,14 @@ test_that("Distribution Normal - expand", {
     expect_equal(expanded$batch_shape, expanded_shape)
   }
 })
+
+test_that("can get reproducible results with torch_manual_seed", {
+  dn <- distr_normal(0, 1)
+  # These calls do NOT generate the same value
+  torch_manual_seed(10)
+  x <- dn$sample(1)
+  torch_manual_seed(10)
+  y <- dn$sample(1)
+  
+  expect_equal_to_tensor(x, y)
+})

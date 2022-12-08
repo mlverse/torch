@@ -1,6 +1,7 @@
 # torch (development version)
 
 - Added support for nonABI builds on CUDA 11.6. (#919)
+- Fixed bug that caused `distr_normal$sample()` not being able to generate reproducible results after setting seeds. (#938)
 
 # torch 0.9.0
 

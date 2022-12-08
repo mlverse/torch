@@ -342,41 +342,41 @@ int cpp_get_num_interop_threads() { return lantern_get_num_interop_threads(); }
 // [[Rcpp::export]]
 torch::Tensor cpp_namespace_normal_double_double(
     double mean, double std, std::vector<int64_t> size,
-    Rcpp::XPtr<XPtrTorchGenerator> generator, torch::TensorOptions options) {
+    XPtrTorchOptionalGenerator generator, torch::TensorOptions options) {
   torch::Tensor out =
       lantern_normal_double_double_intarrayref_generator_tensoroptions(
           mean, std,
           XPtrTorchvector_int64_t(
               lantern_vector_int64_t(size.data(), size.size()))
               .get(),
-          generator->get(), options.get());
+          generator.get(), options.get());
   return out;
 }
 
 // [[Rcpp::export]]
 torch::Tensor cpp_namespace_normal_double_tensor(
     double mean, Rcpp::XPtr<torch::Tensor> std,
-    Rcpp::XPtr<XPtrTorchGenerator> generator) {
+    XPtrTorchOptionalGenerator generator) {
   torch::Tensor out = lantern_normal_double_tensor_generator(mean, std->get(),
-                                                             generator->get());
+                                                             generator.get());
   return out;
 }
 
 // [[Rcpp::export]]
 torch::Tensor cpp_namespace_normal_tensor_double(
     Rcpp::XPtr<torch::Tensor> mean, double std,
-    Rcpp::XPtr<XPtrTorchGenerator> generator) {
+    XPtrTorchOptionalGenerator generator) {
   torch::Tensor out = lantern_normal_tensor_double_generator(mean->get(), std,
-                                                             generator->get());
+                                                             generator.get());
   return out;
 }
 
 // [[Rcpp::export]]
 torch::Tensor cpp_namespace_normal_tensor_tensor(
     Rcpp::XPtr<torch::Tensor> mean, Rcpp::XPtr<torch::Tensor> std,
-    Rcpp::XPtr<XPtrTorchGenerator> generator) {
+    XPtrTorchOptionalGenerator generator) {
   torch::Tensor out = lantern_normal_tensor_tensor_generator(
-      mean->get(), std->get(), generator->get());
+      mean->get(), std->get(), generator.get());
   return out;
 }
 

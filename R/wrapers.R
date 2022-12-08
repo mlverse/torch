@@ -512,9 +512,9 @@ torch_normal <- function(mean, std, size = NULL, generator = NULL, ...) {
     }
   }
 
-  if (is.null(generator)) {
-    generator <- .generator_null
-  }
+  # if (is.null(generator)) {
+  #   generator <- .generator_null
+  # }
 
   if (!is_torch_tensor(mean) && !is_torch_tensor(std) && is.null(size)) {
     value_error("size is not set.")
