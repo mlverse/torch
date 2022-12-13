@@ -438,7 +438,7 @@ nn_selu <- nn_module(
 #' output <- m(input)
 #' @export
 nn_glu <- nn_module(
-  "nn_glue",
+  "nn_glu",
   initialize = function(dim = -1) {
     self$dim <- dim
   },
@@ -660,7 +660,7 @@ nn_softshrink <- nn_module(
 #' \mbox{where} head_i = \mbox{Attention}(QW_i^Q, KW_i^K, VW_i^V) }
 #'
 #' @param embed_dim total dimension of the model.
-#' @param num_heads parallel attention heads. Note that `embed_dim` will be split 
+#' @param num_heads parallel attention heads. Note that `embed_dim` will be split
 #'   across `num_heads` (i.e. each head will have dimension `embed_dim %/% num_heads`).
 #' @param dropout a Dropout layer on attn_output_weights. Default: 0.0.
 #' @param bias add bias as module parameter. Default: True.
@@ -680,22 +680,22 @@ nn_softshrink <- nn_module(
 #'   Inputs:
 #'
 #'   - query: \eqn{(L, N, E)} where L is the target sequence length, N is the
-#'   batch size, E is the embedding dimension. (but see the `batch_first` 
+#'   batch size, E is the embedding dimension. (but see the `batch_first`
 #'   argument)
-#'   - key: \eqn{(S, N, E)}, where S is the source sequence length, N is the 
-#'   batch size, E is the embedding dimension. (but see the `batch_first` 
+#'   - key: \eqn{(S, N, E)}, where S is the source sequence length, N is the
+#'   batch size, E is the embedding dimension. (but see the `batch_first`
 #'   argument)
 #'   - value: \eqn{(S, N, E)} where S is the source sequence length,
-#'   N is the batch size, E is the embedding dimension. (but see the 
+#'   N is the batch size, E is the embedding dimension. (but see the
 #'   `batch_first` argument)
-#'   - key_padding_mask: \eqn{(N, S)} where N is the batch size, S is the source 
-#'   sequence length. If a ByteTensor is provided, the non-zero positions will 
-#'   be ignored while the position with the zero positions will be unchanged. If 
-#'   a BoolTensor is provided, the positions with the value of ``True`` will be 
-#'   ignored while the position with the value of ``False`` will be unchanged. 
-#'   - attn_mask: 2D mask \eqn{(L, S)} where L is the target sequence length, S 
-#'   is the source sequence length. 3D mask \eqn{(N*num_heads, L, S)} where N is 
-#'   the batch size, L is the target sequence length, S is the source sequence 
+#'   - key_padding_mask: \eqn{(N, S)} where N is the batch size, S is the source
+#'   sequence length. If a ByteTensor is provided, the non-zero positions will
+#'   be ignored while the position with the zero positions will be unchanged. If
+#'   a BoolTensor is provided, the positions with the value of ``True`` will be
+#'   ignored while the position with the value of ``False`` will be unchanged.
+#'   - attn_mask: 2D mask \eqn{(L, S)} where L is the target sequence length, S
+#'   is the source sequence length. 3D mask \eqn{(N*num_heads, L, S)} where N is
+#'   the batch size, L is the target sequence length, S is the source sequence
 #'   length. attn_mask ensure that position i is allowed to attend the unmasked
 #'   positions. If a ByteTensor is provided, the non-zero positions are not
 #'   allowed to attend while the zero positions will be unchanged. If a
@@ -706,15 +706,15 @@ nn_softshrink <- nn_module(
 #'   Outputs:
 #'
 #'   - attn_output: \eqn{(L, N, E)} where L is the target sequence length, N is
-#'   the batch size, E is the embedding dimension. (but see the  `batch_first` 
-#'   argument) 
-#'   - attn_output_weights: 
-#'     - if ``avg_weights`` is ``TRUE`` (the default), the output attention 
-#'     weights are averaged over the attention heads, giving a tensor of shape 
-#'     \eqn{(N, L, S)} where N is the batch size, L is the target sequence 
-#'     length, S is the source sequence length. 
-#'     - if ``avg_weights`` is ``FALSE``, the attention weight tensor is output 
-#'     as-is, with shape \eqn{(N, H, L, S)}, where H is the number of attention 
+#'   the batch size, E is the embedding dimension. (but see the  `batch_first`
+#'   argument)
+#'   - attn_output_weights:
+#'     - if ``avg_weights`` is ``TRUE`` (the default), the output attention
+#'     weights are averaged over the attention heads, giving a tensor of shape
+#'     \eqn{(N, L, S)} where N is the batch size, L is the target sequence
+#'     length, S is the source sequence length.
+#'     - if ``avg_weights`` is ``FALSE``, the attention weight tensor is output
+#'     as-is, with shape \eqn{(N, H, L, S)}, where H is the number of attention
 #'     heads.
 #'
 #' @examples
@@ -728,8 +728,8 @@ nn_softshrink <- nn_module(
 #' @export
 nn_multihead_attention <- nn_module(
   "nn_multihead_attention",
-  initialize = function(embed_dim, num_heads, dropout = 0., bias = TRUE, 
-                        add_bias_kv = FALSE, add_zero_attn = FALSE, kdim = NULL, 
+  initialize = function(embed_dim, num_heads, dropout = 0., bias = TRUE,
+                        add_bias_kv = FALSE, add_zero_attn = FALSE, kdim = NULL,
                         vdim = NULL, batch_first = FALSE) {
     self$embed_dim <- embed_dim
 
@@ -750,7 +750,7 @@ nn_multihead_attention <- nn_module(
     self$num_heads <- num_heads
     self$dropout <- dropout
     self$head_dim <- embed_dim %/% num_heads
-    
+
     if ((self$head_dim * num_heads) != self$embed_dim) {
       value_error("embed_dim must be divisible by num_heads")
     }
@@ -784,7 +784,7 @@ nn_multihead_attention <- nn_module(
     }
 
     self$add_zero_attn <- add_zero_attn
-    
+
     self$batch_first <- batch_first
 
     self$reset_parameters()
