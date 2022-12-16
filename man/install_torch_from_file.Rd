@@ -41,6 +41,7 @@ present on local filesystem, \code{"install_torch_from_file()"} can be used as a
 that is used for the R package. Both are highly dependent, and should be checked through \code{"get_install_libs_url()"}
 }
 \examples{
+if (torch_is_installed()) {
 \dontrun{
 # on a linux CPU platform 
 get_install_libs_url(type = "cpu")
@@ -49,5 +50,6 @@ install_torch_from_file(
   libtorch = "file:////tmp/libtorch-cxx11-abi-shared-with-deps-1.12.1\%2Bcpu.zip",
   liblantern = "file:////tmp/Linux-cpu.zip"
 )
+}
 }
 }
