@@ -137,7 +137,8 @@ that is used for the R package. Both are highly dependent, and should be checked
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="torch_is_installed.html">torch_is_installed</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
 <span class="r-in"><span><span class="co"># on a linux CPU platform </span></span></span>
 <span class="r-in"><span><span class="fu">get_install_libs_url</span><span class="op">(</span>type <span class="op">=</span> <span class="st">"cpu"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="co"># then after making both files available into /tmp/</span></span></span>
@@ -145,6 +146,7 @@ that is used for the R package. Both are highly dependent, and should be checked
 <span class="r-in"><span>  libtorch <span class="op">=</span> <span class="st">"file:////tmp/libtorch-cxx11-abi-shared-with-deps-1.12.1%2Bcpu.zip"</span>,</span></span>
 <span class="r-in"><span>  liblantern <span class="op">=</span> <span class="st">"file:////tmp/Linux-cpu.zip"</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
 <span class="r-in"><span><span class="op">}</span></span></span>
 </code></pre></div>
     </div>
