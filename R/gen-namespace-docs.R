@@ -1967,6 +1967,41 @@ NULL
 #' @export
 NULL
 
+#' fftfreq
+#'
+#' Computes the discrete Fourier Transform sample frequencies for a signal of size `n`.
+#'
+#' @note 
+#' By convention, `fft()` returns positive frequency terms first, followed by the negative
+#' frequencies in reverse order, so that `f[-i]` for all `0 < i <= n/2`
+#' gives the negative frequency terms. For an FFT of length `n` and with inputs spaced
+#' in length unit `d`, the frequencies are:
+#' `f = [0, 1, ..., (n - 1) // 2, -(n // 2), ..., -1] / (d * n)`
+#' 
+#' @note 
+#' For even lengths, the Nyquist frequency at `f[n/2]` can be thought of as either negative
+#' or positive. `fftfreq()` follows NumPy’s convention of taking it to be negative.
+#'
+#' @param n (integer) – the FFT length
+#' @param d (float, optional) – the sampling length scale. The spacing between individual
+#' samples of the FFT input. The default assumes unit spacing, dividing that result by the
+#' actual spacing gives the result in physical frequency units.
+#' @param out (default: `NULL`) the output tensor
+#' @param dtype (default: `torch_get_default_dtype()`) the desired data type of returned tensor. 
+#' @param layout (default: `torch_strided()`) the desired layout of returned tensor. 
+#' @param device (default: `NULL`) the desired device of returned tensor.  Default:
+#' If `NULL`, uses the current device for the default tensor type. 
+#' @param requires_grad (default: `FALSE`)  If autograd should record operations on the returned tensor.
+#' 
+#' @examples 
+#' torch_fft_fftfreq(5) # Nyquist frequency at f[3] is positive
+#' torch_fft_fftfreq(4) # Nyquist frequency at f[3] is given as negative
+#' 
+#' @name torch_fft_fftfreq
+#'
+#' @export
+NULL
+
 
 #' Inverse
 #'
