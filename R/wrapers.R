@@ -472,6 +472,16 @@ torch_nonzero <- function(self, as_list = FALSE) {
   }
 }
 
+#' @rdname torch_where
+torch_where <- function(condition, self = NULL, other = NULL) {
+  if (is.null(self) && is.null(other)) {
+    out <- torch_nonzero(condition, as_list = TRUE)
+  } else {
+    out <- .torch_where(condition, self, other)
+  }
+  out
+}
+
 #' Normal distributed
 #'
 #' @param mean (tensor or scalar double) Mean of the normal distribution.

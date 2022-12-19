@@ -299,6 +299,12 @@ test_that("normal works", {
   expect_error(torch_normal(1, torch_zeros(2), dtype = torch_float64()), class = "value_error")
 })
 
+test_that("torch_where", {
+  t <- torch_arange(1,5)
+  x <- torch_where(t < 2)
+  expect_equal(as.numeric(x[[1]]), 1)
+})
+
 test_that("polygamma works", {
   a <- torch_tensor(c(1, 0.5))
   r <- torch_polygamma(1, a)
