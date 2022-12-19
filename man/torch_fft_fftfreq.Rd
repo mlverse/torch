@@ -7,7 +7,6 @@
 torch_fft_fftfreq(
   n,
   d = 1,
-  out = NULL,
   dtype = torch_get_default_dtype(),
   layout = torch_strided(),
   device = NULL,
@@ -20,8 +19,6 @@ torch_fft_fftfreq(
 \item{d}{(float, optional) – the sampling length scale. The spacing between individual
 samples of the FFT input. The default assumes unit spacing, dividing that result by the
 actual spacing gives the result in physical frequency units.}
-
-\item{out}{(default: \code{NULL}) the output tensor}
 
 \item{dtype}{(default: \code{torch_get_default_dtype()}) the desired data type of returned tensor.}
 

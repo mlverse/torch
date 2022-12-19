@@ -599,24 +599,13 @@ torch_fft_irfft <- function(self, n = NULL, dim = -1L, norm = NULL) {
 }
 
 #' @rdname torch_fft_fftfreq
-torch_fft_fftfreq <- function(n, d = 1, out = NULL, dtype = torch_get_default_dtype(),
+torch_fft_fftfreq <- function(n, d = 1, dtype = torch_get_default_dtype(),
                                   layout = torch_strided(), device = NULL,
                                   requires_grad = FALSE) {
   opt <- torch_tensor_options(
     dtype = dtype, layout = layout, device = device, requires_grad = requires_grad
   )
-  ret <- .torch_fft_fftfreq(n = n, d = d, options = opt)
-  if (!is.null(out)) {
-    if (length(out) == length(ret)) {
-      out <- ret
-      out
-    } else {
-      stop("Please pass in a tensor of the same shape as the number of frequencies expected.")
-    }
-  } else {
-    ret
-  }
-  
+  .torch_fft_fftfreq(n = n, d = d, options = opt)
 }
 
 torch_broadcast_shapes <- function(...) {

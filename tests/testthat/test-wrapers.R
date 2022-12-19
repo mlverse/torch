@@ -334,10 +334,5 @@ test_that("blackman_window", {
 
 test_that("torch_fft_fftfreq", {
   expect_tensor_shape(torch_fft_fftfreq(5), 5)
-  expect_error(torch_fft_fftfreq(5, out = torch_zeros(4)))
-  
-  out <- torch_zeros(5)
-  loc <- out$storage()$data_ptr()
-  expect_equal(out$storage()$data_ptr(), loc)
 })
 
