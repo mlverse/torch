@@ -1987,7 +1987,7 @@ NULL
 #' samples of the FFT input. The default assumes unit spacing, dividing that result by the
 #' actual spacing gives the result in physical frequency units.
 #' @param dtype (default: [torch_get_default_dtype()]) the desired data type of returned tensor. 
-#' @param layout (default: `torch_strided()`) the desired layout of returned tensor. 
+#' @param layout (default: [torch_strided()]) the desired layout of returned tensor. 
 #' @param device (default: `NULL`) the desired device of returned tensor.  Default:
 #' If `NULL`, uses the current device for the default tensor type. 
 #' @param requires_grad (default: `FALSE`)  If autograd should record operations on the returned tensor.
