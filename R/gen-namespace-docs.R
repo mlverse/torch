@@ -1972,7 +1972,7 @@ NULL
 #' Computes the discrete Fourier Transform sample frequencies for a signal of size `n`.
 #'
 #' @note 
-#' By convention, `fft()` returns positive frequency terms first, followed by the negative
+#' By convention, [torch_fft_fft()] returns positive frequency terms first, followed by the negative
 #' frequencies in reverse order, so that `f[-i]` for all `0 < i <= n/2`
 #' gives the negative frequency terms. For an FFT of length `n` and with inputs spaced
 #' in length unit `d`, the frequencies are:
