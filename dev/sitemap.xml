@@ -1402,6 +1402,9 @@
     <loc>https://torch.mlverse.org/docs/dev/reference/torch_fft_fft.html</loc>
   </url>
   <url>
+    <loc>https://torch.mlverse.org/docs/dev/reference/torch_fft_fftfreq.html</loc>
+  </url>
+  <url>
     <loc>https://torch.mlverse.org/docs/dev/reference/torch_fft_ifft.html</loc>
   </url>
   <url>
