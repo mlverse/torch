@@ -31838,8 +31838,8 @@ fun_type = 'namespace'
 }
 
 
-#' @rdname torch_where
-torch_where <- function(condition, self, other) {
+#' @rdname .torch_where
+.torch_where <- function(condition, self, other) {
   args <- mget(x = c("condition", "self", "other"))
 expected_types <- list(condition = "Tensor", self = c("Tensor", "Scalar"), other = c("Tensor", 
 "Scalar"))

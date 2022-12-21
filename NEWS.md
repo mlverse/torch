@@ -2,7 +2,8 @@
 
 - Added support for nonABI builds on CUDA 11.6. (#919)
 - Fixed bug that caused `distr_normal$sample()` not being able to generate reproducible results after setting seeds. (#938)
-- The `torch_fft_fftfreq()` function is now exported. (#950, @skeydan) 
+- The `torch_fft_fftfreq()` function is now exported. (#950, @skeydan)
+- `torch_where` now returns 1-based indices when it's called with the `condition` argument only. (#951, @skeydan)
 
 # torch 0.9.0
 
