@@ -20,9 +20,9 @@ torch_fft_fftfreq(
 samples of the FFT input. The default assumes unit spacing, dividing that result by the
 actual spacing gives the result in physical frequency units.}
 
-\item{dtype}{(default: \code{torch_get_default_dtype()}) the desired data type of returned tensor.}
+\item{dtype}{(default: \code{\link[=torch_get_default_dtype]{torch_get_default_dtype()}}) the desired data type of returned tensor.}
 
-\item{layout}{(default: \code{torch_strided()}) the desired layout of returned tensor.}
+\item{layout}{(default: \code{\link[=torch_strided]{torch_strided()}}) the desired layout of returned tensor.}
 
 \item{device}{(default: \code{NULL}) the desired device of returned tensor.  Default:
 If \code{NULL}, uses the current device for the default tensor type.}
@@ -33,7 +33,7 @@ If \code{NULL}, uses the current device for the default tensor type.}
 Computes the discrete Fourier Transform sample frequencies for a signal of size \code{n}.
 }
 \note{
-By convention, \code{fft()} returns positive frequency terms first, followed by the negative
+By convention, \code{\link[=torch_fft_fft]{torch_fft_fft()}} returns positive frequency terms first, followed by the negative
 frequencies in reverse order, so that \code{f[-i]} for all \verb{0 < i <= n/2}
 gives the negative frequency terms. For an FFT of length \code{n} and with inputs spaced
 in length unit \code{d}, the frequencies are:
