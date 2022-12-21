@@ -212,3 +212,15 @@ test_that("translate", {
   )
   
 })
+
+test_that("cat", {
+  
+  expect_error(
+    torch_cat(list(torch_randn(8, 2, 7), torch_randn(8, 3, 7)), dim = 1),
+    regex = "Sizes of tensors must match except in dimension 1. Expected size 2 but got size 3 for tensor number 2 in the list.",
+    fixed = TRUE
+  )
+  
+})
+
+
