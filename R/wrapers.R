@@ -608,6 +608,16 @@ torch_fft_irfft <- function(self, n = NULL, dim = -1L, norm = NULL) {
   .torch_fft_irfft(self = self, n = n, dim = dim, norm = norm)
 }
 
+#' @rdname torch_fft_fftfreq
+torch_fft_fftfreq <- function(n, d = 1, dtype = torch_get_default_dtype(),
+                                  layout = torch_strided(), device = NULL,
+                                  requires_grad = FALSE) {
+  opt <- torch_tensor_options(
+    dtype = dtype, layout = layout, device = device, requires_grad = requires_grad
+  )
+  .torch_fft_fftfreq(n = n, d = d, options = opt)
+}
+
 torch_broadcast_shapes <- function(...) {
   shapes <- rlang::list2(...)
   with_no_grad({

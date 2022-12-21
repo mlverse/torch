@@ -341,3 +341,8 @@ test_that("multinomial works", {
 test_that("blackman_window", {
   expect_tensor_shape(torch_blackman_window(window_length = 2), 2)
 })
+
+test_that("torch_fft_fftfreq", {
+  expect_tensor_shape(torch_fft_fftfreq(5), 5)
+})
+

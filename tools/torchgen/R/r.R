@@ -144,7 +144,7 @@ internal_funs <- c("logical_not", "max_pool1d_with_indices", "max_pool2d_with_in
                    "argmax", "argmin", "one_hot", "split",
                    "nonzero", "fft_fft", "fft_ifft", "fft_rfft", "fft_irfft",
                    "multinomial", "norm", "cross_entropy_loss", "sort",
-                   "nll_loss_nd", "bincount",
+                   "nll_loss_nd", "bincount", "fft_fftfreq",
                    "where"
                    )
 
