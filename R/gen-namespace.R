@@ -14153,8 +14153,8 @@ fun_type = 'namespace'
 }
 
 
-#' @rdname torch_fft_fftfreq
-torch_fft_fftfreq <- function(n, d = 1L, options = list()) {
+#' @rdname .torch_fft_fftfreq
+.torch_fft_fftfreq <- function(n, d = 1L, options = list()) {
   args <- mget(x = c("n", "d", "options"))
 expected_types <- list(n = "int64_t", d = "double", options = "TensorOptions")
 nd_args <- "n"
