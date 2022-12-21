@@ -300,9 +300,13 @@ test_that("normal works", {
 })
 
 test_that("torch_where", {
-  t <- torch_arange(1,5)
-  x <- torch_where(t < 2)
-  expect_equal(as.numeric(x[[1]]), 1)
+  t <- torch_arange(1,6)
+  x <- torch_where(t < 3)
+  expect_equal(x[[1]] %>% as.numeric(), c(1,2))
+  t <- torch_arange(1,6)$view(c(2,3))
+  x <- torch_where(t < 3)
+  expect_equal(x[[1]] %>% as.numeric(), c(1,1))
+  expect_equal(x[[2]] %>% as.numeric(), c(1,2))
 })
 
 test_that("polygamma works", {

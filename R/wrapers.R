@@ -475,11 +475,11 @@ torch_nonzero <- function(self, as_list = FALSE) {
 #' @rdname torch_where
 torch_where <- function(condition, self = NULL, other = NULL) {
   if (is.null(self) && is.null(other)) {
-    out <- torch_nonzero(condition, as_list = TRUE)
+    out <- .torch_where(condition)
+    lapply(out, function(x) x + 1L)
   } else {
-    out <- .torch_where(condition, self, other)
+    .torch_where(condition, self, other)
   }
-  out
 }
 
 #' Normal distributed
