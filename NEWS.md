@@ -4,6 +4,7 @@
 - Fixed bug that caused `distr_normal$sample()` not being able to generate reproducible results after setting seeds. (#938)
 - The `torch_fft_fftfreq()` function is now exported. (#950, @skeydan)
 - `torch_where` now returns 1-based indices when it's called with the `condition` argument only. (#951, @skeydan)
+- `torch_cat` error message now correctly reflects 1-based indexing {#952, @skeydan)}
 
 # torch 0.9.0
 

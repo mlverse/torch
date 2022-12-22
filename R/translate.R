@@ -6,7 +6,9 @@ translate_error_msg <- function(msg) {
     translate_index_out_of_range_msg() %>% 
     translate_target_index_msg() %>% 
     translate_contract_error_msg() %>% 
-    translate_null_index_error_msg()
+    translate_null_index_error_msg() %>%
+    translate_tensor_number_error_msg() %>%
+    translate_size_match_error_msg()
 }
 
 translate_dim_error_msg <- function(msg) {
@@ -16,6 +18,16 @@ translate_dim_error_msg <- function(msg) {
 
 translate_dim_size_error_msg <- function(msg) {
   regex <- "(?:.|\\r?\\n)*dimension ([0-9]+) does not have size [0-9]+(?:.|\\r?\\n)*"
+  translate_increase_group(msg, regex)
+}
+
+translate_tensor_number_error_msg <- function(msg) {
+  regex <- "(?:.|\\r?\\n)*Expected size [0-9]+ but got size [0-9]+ for tensor number ([0-9]+) in the list(?:.|\\r?\\n)*"
+  translate_increase_group(msg, regex)
+}
+
+translate_size_match_error_msg <- function(msg) {
+  regex <- "(?:.|\\r?\\n)*Sizes of tensors must match except in dimension ([0-9]+)(?:.|\\r?\\n)*"
   translate_increase_group(msg, regex)
 }
 
