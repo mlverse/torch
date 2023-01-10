@@ -32,7 +32,7 @@ SEXP set_xptr_protected(SEXP s, SEXP pro) {
 // [[Rcpp::export]]
 SEXP xptr_address(SEXP s) {
   check_is_xptr(s);
-  char* buf[20];
-  sprintf((char*)buf, "%p", R_ExternalPtrAddr(s));
-  return Rf_mkString((char*)buf);
+  char buf[20];
+  snprintf(buf, 20, "%p", R_ExternalPtrAddr(s));
+  return Rf_mkString(buf);
 }
