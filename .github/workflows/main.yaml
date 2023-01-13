@@ -116,7 +116,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        cuda: ["10.2", "11.3", "11.6"]
+        cuda: ["10.2", "11.3.0", "11.6.0"]
     
     container:
       image: nvidia/cuda:${{ matrix.cuda }}-cudnn8-devel-ubuntu18.04
@@ -136,7 +136,7 @@ jobs:
 
       - run: |
           apt-get update -y
-          apt-get install -y sudo software-properties-common dialog apt-utils tzdata libpng-dev
+          apt-get install -y sudo software-properties-common dialog apt-utils tzdata libpng-dev language-pack-en_US.UTF-8
           
       - uses: r-lib/actions/setup-r@v2
 
