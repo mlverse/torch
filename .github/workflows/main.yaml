@@ -115,7 +115,7 @@ jobs:
       fail-fast: false
       matrix:
         cuda: ["102", "113", "116"]
-    runs-on: [self-hosted, linux]
+    runs-on: [self-hosted, gce, gpu]
     env:
       R_REMOTES_NO_ERRORS_FROM_WARNINGS: true
       CRAN: https://demo.rstudiopm.com/all/__linux__/bionic/latest
