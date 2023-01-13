@@ -136,7 +136,7 @@ jobs:
 
       - run: |
           apt-get update -y
-          apt-get install -y sudo software-properties-common dialog apt-utils tzdata libpng-dev language-pack-en_US.UTF-8
+          apt-get install -y sudo software-properties-common dialog apt-utils tzdata libpng-dev locales
           
       - uses: r-lib/actions/setup-r@v2
 
