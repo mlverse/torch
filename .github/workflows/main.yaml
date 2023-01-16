@@ -165,7 +165,7 @@ jobs:
       - uses: actions/checkout@v3
       - name: Install pandoc
         run: |
-          brew install pandoc
+          /opt/homebrew/bin/brew install pandoc
 
       - name: Build lantern and get libtorch
         if: contains( github.event.pull_request.labels.*.name, 'lantern')
