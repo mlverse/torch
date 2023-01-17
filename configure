@@ -1,0 +1,11 @@
+#!/usr/bin/env sh
+
+PKG_PATH=$(pwd)
+
+if ! test -z $DEVTOOLS_LOAD; then
+  PKG_PATH="$PKG_PATH/inst"
+fi
+
+cd src
+sed -e "s|@PKG_PATH@|$PKG_PATH|" Makevars.in > Makevars
+

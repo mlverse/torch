@@ -1,4 +1,5 @@
 PKG_CPPFLAGS = -I../inst/include/ -DRCPP_NO_UNWIND_PROTECT
+PKG_PATH = @PKG_PATH@
 
 .PHONY: rename_init lantern
 all: $(SHLIB) rename lantern
@@ -9,7 +10,7 @@ all: $(SHLIB) rename lantern
 lantern:
 	@echo "Building lantern!"
 	mkdir -p lantern/build
-	cd lantern/build && cmake .. -DCMAKE_INSTALL_PREFIX=/Users/dfalbel/Documents/posit/torch/inst && cmake --build . --target install --config Release --parallel 8
+	cd lantern/build && cmake .. -DCMAKE_INSTALL_PREFIX=$(PKG_PATH) && cmake --build . --target install --config Release --parallel 8
 
 rename_init:
 	@echo "Renaming init"
