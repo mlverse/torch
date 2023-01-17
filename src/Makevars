@@ -1,7 +1,15 @@
 PKG_CPPFLAGS = -I../inst/include/ -DRCPP_NO_UNWIND_PROTECT
 
-.PHONY: rename_init
-all: $(SHLIB) rename
+.PHONY: rename_init lantern
+all: $(SHLIB) rename lantern
+
+# TODO: we will need to skip building lantern on CRAN
+# thus this step must probably be conditioned on the existence of 
+# a directory called `lantern`.
+lantern:
+	@echo "Building lantern!"
+	mkdir -p lantern/build
+	cd lantern/build && cmake .. -DCMAKE_INSTALL_PREFIX=/Users/dfalbel/Documents/posit/torch/inst && cmake --build . --target install --config Release --parallel 8
 
 rename_init:
 	@echo "Renaming init"

@@ -207,6 +207,10 @@ add_library(lantern::library ALIAS lantern)
 target_include_directories(lantern PUBLIC
     ${PROJECT_SOURCE_DIR}/include
 )
+set_property(TARGET lantern
+ PROPERTY PUBLIC_HEADER ${PROJECT_SOURCE_DIR}/include/lantern/lantern.h
+ PROPERTY INSTALL_RPATH "@loader_path"
+)
 
 target_link_libraries(lantern ${TORCH_LIBRARIES})
 
@@ -219,6 +223,14 @@ set_property(TARGET lantern PROPERTY CXX_STANDARD 17)
 add_executable(lanterntest
     tests/init.cpp
     tests/main.cpp
+)
+
+set(CPACK_GENERATOR ZIP)
+include(CPack)
+
+install(
+    TARGETS lantern LIBRARY
+    PUBLIC_HEADER DESTINATION include/lantern
 )
 
 target_include_directories(lanterntest PUBLIC
