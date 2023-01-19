@@ -174,6 +174,7 @@ install(
     TARGETS lantern LIBRARY
     PUBLIC_HEADER DESTINATION include/lantern
 )
+install(DIRECTORY ${TORCH_PATH} DESTINATION .)
 
 target_include_directories(lanterntest PUBLIC
     ${PROJECT_SOURCE_DIR}/include
