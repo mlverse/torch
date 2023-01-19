@@ -158,6 +158,36 @@ target_link_libraries(lantern ${TORCH_LIBRARIES})
 
 set_property(TARGET lantern PROPERTY CXX_STANDARD 17)
 
+## CPack
+
+set(CPACK_GENERATOR ZIP)
+
+# query version from the R package DESCRIPTION
+execute_process(
+    COMMAND bash -c "grep 'Version:' DESCRIPTION | cut -d' ' -f2"
+    WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/../..
+    OUTPUT_VARIABLE CPACK_PACKAGE_VERSION
+)
+string(STRIP "${CPACK_PACKAGE_VERSION}" CPACK_PACKAGE_VERSION)
+
+if(DEFINED CUDA_VERSION_NUMBER)
+  set(CPACK_PACKAGE_VERSION ${CPACK_PACKAGE_VERSION}+cu${CUDA_VERSION_NUMBER})
+else()
+  set(CPACK_PACKAGE_VERSION ${CPACK_PACKAGE_VERSION}+cpu)
+endif()
+
+if(APPLE)
+  set(CPACK_PACKAGE_VERSION ${CPACK_PACKAGE_VERSION}+${CMAKE_SYSTEM_PROCESSOR})
+endif()
+
+include(CPack)
+
+install(
+    TARGETS lantern LIBRARY
+    PUBLIC_HEADER DESTINATION include/lantern
+)
+install(DIRECTORY ${TORCH_PATH} DESTINATION .)
+
 ############################################################
 # Tests
 ############################################################
@@ -166,15 +196,6 @@ add_executable(lanterntest
     tests/init.cpp
     tests/main.cpp
 )
-
-set(CPACK_GENERATOR ZIP)
-include(CPack)
-
-install(
-    TARGETS lantern LIBRARY
-    PUBLIC_HEADER DESTINATION include/lantern
-)
-install(DIRECTORY ${TORCH_PATH} DESTINATION .)
 
 target_include_directories(lanterntest PUBLIC
     ${PROJECT_SOURCE_DIR}/include
