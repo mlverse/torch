@@ -6,6 +6,9 @@ if ! test -z $DEVTOOLS_LOAD; then
   PKG_PATH="$PKG_PATH/inst"
 fi
 
-cd src
-sed -e "s|@PKG_PATH@|$PKG_PATH|" Makevars.in > Makevars
+if [[ "$BUILD_LANTERN" != true ]] && [[ "$BUILD_LANTERN" != 1 ]]; then
+  BUILD_LANTERN=""
+fi
 
+cd src
+sed -e "s|@PKG_PATH@|$PKG_PATH|" -e "s|@BUILD_LANTERN@|$BUILD_LANTERN|" Makevars.in > Makevars

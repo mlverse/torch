@@ -1,5 +1,6 @@
 PKG_CPPFLAGS = -I../inst/include/ -DRCPP_NO_UNWIND_PROTECT
 PKG_PATH = @PKG_PATH@
+BUILD_LANTERN=@BUILD_LANTERN@
 
 .PHONY: rename_init lantern
 all: lantern $(SHLIB) rename
@@ -8,16 +9,20 @@ all: lantern $(SHLIB) rename
 # thus this step must probably be conditioned on the existence of 
 # a directory called `lantern`.
 lantern:
+ifdef BUILD_LANTERN
 	@echo "*** Building lantern!"
 	mkdir -p ../build
 	cd ../build && cmake ../src/lantern -DCMAKE_INSTALL_PREFIX=$(PKG_PATH) && cmake --build . --target install --config Release --parallel 8
+else
+	@echo "*** Skip building Lantern. A pre-built binary will be used."
+endif
 
 rename_init:
-	@echo "Renaming init"
+	@echo "*** Renaming init"
 	"${R_HOME}/bin${R_ARCH_BIN}/Rscript" "../tools/renameinit.R"
 
 rename:
-	@echo "Renaming torch lib to torchpkg"
+	@echo "*** Renaming torch lib to torchpkg"
 	"${R_HOME}/bin${R_ARCH_BIN}/Rscript" "../tools/renamelib.R"
 
 # in order to rename SHLIb must be done.
