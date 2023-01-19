@@ -13,9 +13,10 @@ endif()
 
 message(STATUS "TORCH_PATH: ${TORCH_PATH}")
 
-if (DEFINED ENV{CUDA})
-    string(REPLACE "\\." "" ENV{CUDA} CUDA_VERSION_NUMBER)
-    set(CUDA_VERSION, ENV{CUDA})
+if (DEFINED ENV{CUDA} AND NOT "$ENV{CUDA}" STREQUAL "")
+    string(REPLACE "\." "" CUDA_VERSION_NUMBER "$ENV{CUDA}")
+    set(CUDA_VERSION "$ENV{CUDA}")
+    message(STATUS "CUDA VERSION: $ENV{CUDA} | ${CUDA_VERSION} | ${CUDA_VERSION_NUMBER}")
 endif()
 
 if (NOT EXISTS "${TORCH_PATH}")
@@ -59,7 +60,6 @@ if (NOT EXISTS "${TORCH_PATH}")
 endif()
 
 if (DEFINED CUDA_VERSION_NUMBER)
-    message(STATUS "Using CUDA version number: ${CUDA_VERSION} | ${CUDA_VERSION_NUMBER}")
     if (WIN32)
         find_package(CUDAToolkit)
     endif()
