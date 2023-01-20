@@ -5,11 +5,15 @@ on:
     branches:
       - master
       - main
+<<<<<<< HEAD
       - "cran/**"
       - cuda-116
       - empty-cache
       - nonabi116
       - disk
+=======
+      - configure
+>>>>>>> cc91689ea (Produce and upload lantern binary packages)
 
 jobs:
   build:
@@ -21,48 +25,27 @@ jobs:
         config:
           - {
               os: macOS-latest,
-              artifact: "build/liblantern.dylib",
-              upload: "macOS",
-              fixlib: "install_name_tool -add_rpath @loader_path/. liblantern.dylib",
             }
           - {
               os: [self-hosted, m1],
-              artifact: "build/liblantern.dylib",
-              upload: "macOSArm64",
-              fixlib: "install_name_tool -add_rpath @loader_path/. liblantern.dylib",
             }
           - {
               os: windows-2019,
-              artifact: "build/Release/lantern.dll",
-              upload: "Windows",
             }
           - {
               os: ubuntu-20.04,
-              artifact: "build/liblantern.so",
-              upload: "Linux",
-              fixlib: "chrpath -r '$ORIGIN/.' liblantern.so",
               container: "ubuntu:18.04",
             }
           - {
-              os: ubuntu-20.04,
-              artifact: "build/liblantern.so",
-              upload: "LinuxNonABI",
-              fixlib: "chrpath -r '$ORIGIN/.' liblantern.so",
-              pre_cxx11_abi: 1,
-              container: "ubuntu:18.04",
-            }
-          - {
-              os: ubuntu-20.04,
-              artifact: "build/liblantern.so",
-              upload: "Linux-Cuda-116",
+              os: [self-hosted, gce],
               cuda: "11.6",
               cuda_patch: "1",
               cudnn: "https://storage.googleapis.com/torch-lantern-builds/cudnn/cudnn-linux-x86_64-8.6.0.163_cuda11-archive.tgz",
-              fixlib: "chrpath -r '$ORIGIN/.' liblantern.so",
               container: "ubuntu:18.04",
             }
           - {
               os: ubuntu-20.04,
+<<<<<<< HEAD
               artifact: "build/liblantern.so",
               upload: "LinuxNonABI-Cuda-116",
               cuda: "11.6",
@@ -76,47 +59,22 @@ jobs:
               os: [self-hosted, gce, disk],
               artifact: "build/liblantern.so",
               upload: "Linux-Cuda-113",
+=======
+>>>>>>> cc91689ea (Produce and upload lantern binary packages)
               cuda: "11.3",
               cuda_patch: "1",
               cudnn: "https://storage.googleapis.com/torch-lantern-builds/cudnn/cudnn-11.3-linux-x64-v8.2.1.32.tgz",
-              fixlib: "chrpath -r '$ORIGIN/.' liblantern.so",
               container: "ubuntu:18.04",
             }
           - {
               os: ubuntu-20.04,
-              artifact: "build/liblantern.so",
-              upload: "LinuxNonABI-Cuda-113",
-              cuda: "11.3",
-              cuda_patch: "1",
-              cudnn: "https://storage.googleapis.com/torch-lantern-builds/cudnn/cudnn-11.3-linux-x64-v8.2.1.32.tgz",
-              fixlib: "chrpath -r '$ORIGIN/.' liblantern.so",
-              pre_cxx11_abi: 1,
-              container: "ubuntu:18.04",
-            }
-          - {
-              os: ubuntu-20.04,
-              artifact: "build/liblantern.so",
-              upload: "Linux-Cuda-102",
               cuda: "10.2",
               cuda_patch: "89",
               cudnn: "https://storage.googleapis.com/torch-lantern-builds/cudnn/cudnn-10.2-linux-x64-v7.6.5.32.tgz",
-              fixlib: "chrpath -r '$ORIGIN/.' liblantern.so",
-              container: "ubuntu:18.04",
-            }
-          - {
-              os: ubuntu-20.04,
-              artifact: "build/liblantern.so",
-              upload: "LinuxNonABI-Cuda-102",
-              cuda: "10.2",
-              cuda_patch: "89",
-              cudnn: "https://storage.googleapis.com/torch-lantern-builds/cudnn/cudnn-10.2-linux-x64-v7.6.5.32.tgz",
-              fixlib: "chrpath -r '$ORIGIN/.' liblantern.so",
-              pre_cxx11_abi: 1,
               container: "ubuntu:18.04",
             }
           - {
               os: windows-2019,
-              artifact: "build/Release/lantern.dll",
               upload: "Windows-Cuda-113",
               cuda: "11.3",
               cuda_patch: "1",
@@ -127,6 +85,15 @@ jobs:
       PRECXX11ABI: ${{matrix.config.pre_cxx11_abi}}
 
     steps:
+
+      - name: Install system dependencies
+        if: matrix.config.container != ''
+        run: |
+          apt update
+          apt install -y curl sudo libxml2-dev wget chrpath rsync git
+          curl -fsSL https://get.docker.com -o get-docker.sh
+          DRY_RUN=1 sh ./get-docker.sh
+
       - uses: actions/checkout@v3
 
       - name: Setup cmake
@@ -134,21 +101,9 @@ jobs:
         with:
           cmake-version: "latest"
 
-      - name: Create environment
-        run: cmake -E make_directory ${{runner.workspace}}/torch/lantern/build
-        
-      - name: Install docker
-        if: matrix.config.container != ''
-        run: |
-          apt update
-          apt install -y curl sudo libxml2-dev wget chrpath rsync
-          curl -fsSL https://get.docker.com -o get-docker.sh
-          DRY_RUN=1 sh ./get-docker.sh
-          mkdir -p lantern/build
-
       - name: Install CUDA
         if: ${{matrix.config.cuda != ''}}
-        uses: Jimver/cuda-toolkit@v0.2.7
+        uses: Jimver/cuda-toolkit@v0.2.8
         id: cuda-toolkit
         with:
           cuda: "${{matrix.config.cuda}}.${{matrix.config.cuda_patch}}"
@@ -181,127 +136,37 @@ jobs:
           Move-Item -Path "C:\cudnn\cuda\lib\x64\cudnn*.lib" -Destination "${env:CUDA_PATH}\lib\x64"
           echo "CUDNN_INCLUDE_PATH=""${CUDA_PATH}\include""" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
           echo "CUDNN_LIBRARY_PATH=""${CUDA_PATH}\lib\x64""" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
+          Remove-Item -Path cudnn.zip
 
       - name: Run cmake
         run: |
-          cd lantern
+          cd src/lantern/
+          mkdir build
           cd build
           cmake ..
 
       - name: Build libs
+        id: build
         run: |
-          cd lantern/build
-          cmake --build . --config Release --parallel 4
-          ${{matrix.config.fixlib}}
+          cd src/lantern/build
+          cmake --build . --config Release --parallel 4 --target package
+          fname=$(ls . | grep "lantern.*\.zip")
+          echo "fname=$fname" >> $GITHUB_OUTPUT
+        shell: bash
 
-      - name: Install libs
-        working-directory: ${{runner.workspace}}
-        run: |
-          mkdir artifacts
-          cp -R torch/lantern/${{matrix.config.artifact}} artifacts
+      - id: 'auth'
+        uses: 'google-github-actions/auth@v1'
+        with:
+          credentials_json: '${{ secrets.GCP_APPLICATION_CREDENTIALS }}'
 
-      - name: Upload artifacts
-        uses: actions/upload-artifact@v1
+      - id: 'upload-file'
+        uses: 'google-github-actions/upload-cloud-storage@v1'
         with:
-          name: ${{matrix.config.upload}}
-          path: ${{runner.workspace}}/artifacts
+          path: 'src/lantern/build/${{ steps.build.outputs.fname }}'
+          destination: 'torch-lantern-builds/binaries/${{ github.ref }}/${{ github.sha }}/${{ steps.build.outputs.fname }}'
 
-  upload:
-    needs: build
-    runs-on: ubuntu-20.04
-    strategy:
-      matrix:
-        name:
-          [
-            macOS,
-            macOSArm64,
-            Linux,
-            LinuxNonABI,
-            Windows,
-            Cuda102,
-            NonABICuda102,
-            Cuda113,
-            NonABICuda113,
-            WindowsCuda113,
-            Cuda116,
-          ]
-        include:
-          - name: macOS
-            artifact: macOS
-            upload: macOS
-            hw: cpu
-          - name: macOSArm64
-            artifact: macOSArm64
-            upload: macOSArm64
-            hw: cpu
-          - name: Linux
-            artifact: Linux
-            upload: Linux
-            hw: cpu
-          - name: LinuxNonABI
-            artifact: LinuxNonABI
-            upload: LinuxNonABI
-            hw: cpu
-          - name: Windows
-            artifact: Windows
-            upload: Windows
-            hw: cpu
-          - name: Cuda102
-            artifact: Linux-Cuda-102
-            upload: Linux
-            hw: gpu
-            version: -102
-          - name: NonABICuda102
-            artifact: LinuxNonABI-Cuda-102
-            upload: LinuxNonABI
-            hw: gpu
-            version: -102
-          - name: Cuda113
-            artifact: Linux-Cuda-113
-            upload: Linux
-            hw: gpu
-            version: -113
-          - name: NonABICuda113
-            artifact: LinuxNonABI-Cuda-113
-            upload: LinuxNonABI
-            hw: gpu
-            version: -113
-          - name: NonABICuda116
-            artifact: LinuxNonABI-Cuda-116
-            upload: LinuxNonABI
-            hw: gpu
-            version: -116
-          - name: WindowsCuda113
-            artifact: Windows-Cuda-113
-            upload: Windows
-            hw: gpu
-            version: -113
-          - name: Cuda116
-            artifact: Linux-Cuda-116
-            upload: Linux
-            hw: gpu
-            version: -116
-    steps:
-      - name: Download artifacts
-        uses: actions/download-artifact@v1
+      - uses: 'google-github-actions/upload-cloud-storage@v1'
         with:
-          name: ${{ matrix.artifact }}
-      - uses: montudor/action-zip@v0.1.0
-        with:
-          args: zip -j -qq -r ./${{ matrix.artifact }}.zip ./${{ matrix.artifact }}
-      - name: Upload to lantern builds
-        uses: actions-hub/gcloud@master
-        env:
-          PROJECT_ID: ${{ secrets.GCP_PROJECT_ID }}
-          APPLICATION_CREDENTIALS: ${{ secrets.GCP_APPLICATION_CREDENTIALS }}
-          CLI: gsutil
-        with:
-          args: cp ${{ matrix.artifact }}.zip gs://torch-lantern-builds/${{ github.ref }}/${{ github.sha }}/${{ matrix.upload }}-${{ matrix.hw }}${{ matrix.version }}.zip
-      - name: Upload to latest
-        uses: actions-hub/gcloud@master
-        env:
-          PROJECT_ID: ${{ secrets.GCP_PROJECT_ID }}
-          APPLICATION_CREDENTIALS: ${{ secrets.GCP_APPLICATION_CREDENTIALS }}
-          CLI: gsutil
-        with:
-          args: cp ${{ matrix.artifact }}.zip gs://torch-lantern-builds/${{ github.ref }}/latest/${{ matrix.upload }}-${{ matrix.hw }}${{ matrix.version }}.zip
+          path: 'src/lantern/build/${{ steps.build.outputs.fname }}'
+          destination: 'torch-lantern-builds/binaries/${{ github.ref }}/latest/${{ steps.build.outputs.fname }}'
+      
