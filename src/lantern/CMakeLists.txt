@@ -184,7 +184,10 @@ install(
     TARGETS lantern LIBRARY
     PUBLIC_HEADER DESTINATION include/lantern
 )
-install(DIRECTORY ${TORCH_PATH} DESTINATION .)
+
+if (DEFINED BUNDLE_LIBTORCH)
+    install(DIRECTORY ${TORCH_PATH} DESTINATION .)
+endif()
 
 ############################################################
 # Tests
