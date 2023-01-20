@@ -56,6 +56,7 @@ if (NOT EXISTS "${TORCH_PATH}")
     set(TORCH_DOWNLOAD_PATH "${CMAKE_CURRENT_BINARY_DIR}/libtorch.zip")
     file(DOWNLOAD "${TORCH_URL}" "${TORCH_DOWNLOAD_PATH}")
     file(ARCHIVE_EXTRACT INPUT "${TORCH_DOWNLOAD_PATH}"  DESTINATION "${CMAKE_CURRENT_BINARY_DIR}")
+    file(REMOVE "${TORCH_DOWNLOAD_PATH}") # cleanup the zip after extraction to save some space
 
 endif()
 
