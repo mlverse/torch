@@ -1,4 +1,4 @@
-PKG_CPPFLAGS = -I../inst/include/
+PKG_CPPFLAGS = -I../inst/include/ -DRCPP_NO_UNWIND_PROTECT
 
 .PHONY: rename_init
 all: $(SHLIB) rename
