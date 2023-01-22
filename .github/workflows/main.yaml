@@ -163,12 +163,6 @@ jobs:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
     steps:
       - uses: actions/checkout@v3
-      - name: Install R and pandoc
-        run: |
-          brew tap r-lib/rig
-          brew install --cask rig
-          rig add release
-          brew install pandoc
       - uses: r-lib/actions/setup-r-dependencies@v2
         with:
           cache: false
