@@ -9,7 +9,7 @@ tools/torchgen/.Rbuildignore
 ^pkgdown$
 ^revdep$
 ^\.github$
-^lantern$
+^src/lantern/build.*$
 .*\.tmp
 ^vignettes/examples/.*
 ^bench/.*
