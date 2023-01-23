@@ -40,7 +40,7 @@ tools/torchgen/.Rbuildignore
 ^inst/share/.*
 ^inst/build-hash
 ^inst/build-versions
-^src/lantern.*
+^src/lantern/.*
 
 ^doc$
 ^Meta$
