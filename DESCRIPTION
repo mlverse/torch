@@ -38,6 +38,7 @@ Imports:
     coro (>= 1.0.2),
     callr,
     cli,
+    glue,
     ellipsis
 RoxygenNote: 7.2.1
 Roxygen: list(markdown = TRUE)
@@ -46,7 +47,6 @@ Suggests:
     covr,
     knitr (>= 1.36),
     rmarkdown,
-    glue,
     palmerpenguins,
     mvtnorm,
     numDeriv,
