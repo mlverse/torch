@@ -73,7 +73,7 @@ jobs:
               container: "ubuntu:18.04",
             }
           - {
-              os: ['self-hosted', 'gce', 'disk']
+              os: [self-hosted, gce, disk],
               artifact: "build/liblantern.so",
               upload: "Linux-Cuda-113",
               cuda: "11.3",
