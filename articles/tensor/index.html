@@ -8,10 +8,10 @@
 <meta name="description" content="torch">
 <title>Tensor objects • torch</title>
 <script src="../../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link href="../../deps/bootstrap-5.1.3/bootstrap.min.css" rel="stylesheet">
-<script src="../../deps/bootstrap-5.1.3/bootstrap.bundle.min.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
+<link href="../../deps/bootstrap-5.2.2/bootstrap.min.css" rel="stylesheet">
+<script src="../../deps/bootstrap-5.2.2/bootstrap.bundle.min.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
-<!-- bootstrap-toc --><script src="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.1/dist/bootstrap-toc.min.js"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="../../pkgdown.js"></script><link href="../../extra.css" rel="stylesheet">
+<!-- bootstrap-toc --><script src="https://cdn.jsdelivr.net/gh/afeld/bootstrap-toc@v1.0.1/dist/bootstrap-toc.min.js" integrity="sha256-4veVQbu7//Lk5TSmc7YV48MxtMy98e26cf5MrgZYnwo=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="../../pkgdown.js"></script><link href="../../extra.css" rel="stylesheet">
 <meta property="og:title" content="Tensor objects">
 <meta property="og:description" content="torch">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
@@ -33,7 +33,7 @@
     
     <a class="navbar-brand me-2" href="../../index.html">torch</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.9.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.9.1</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -114,13 +114,20 @@
     
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://torch.mlverse.org/docs">torch</a></span><span class="op">)</span></span></code></pre></div>
-<p>Central to torch is the <code>torch_tensor</code> objects. <code>torch_tensor</code>’s are R objects very similar to R6 instances. Tensors have a large amount of methods that can be called using the <code>$</code> operator.</p>
-<p>Following is a list of all methods that can be called by tensor objects and their documentation. You can also look at <a href="https://pytorch.org/docs/stable/tensors.html" class="external-link">PyTorch’s documentation</a> for additional details.</p>
+<p>Central to torch is the <code>torch_tensor</code> objects.
+<code>torch_tensor</code>’s are R objects very similar to R6 instances.
+Tensors have a large amount of methods that can be called using the
+<code>$</code> operator.</p>
+<p>Following is a list of all methods that can be called by tensor
+objects and their documentation. You can also look at <a href="https://pytorch.org/docs/stable/tensors.html" class="external-link">PyTorch’s
+documentation</a> for additional details.</p>
 <div class="section level2">
 <h2 id="numpy_t">numpy_T<a class="anchor" aria-label="anchor" href="#numpy_t"></a>
 </h2>
 <p>Is this Tensor with its dimensions reversed.</p>
-<p>If <code>n</code> is the number of dimensions in <code>x</code>, <code>x$numpy_T()</code> is equivalent to <code>x$permute(n, n-1, ..., 1)</code>.</p>
+<p>If <code>n</code> is the number of dimensions in <code>x</code>,
+<code>x$numpy_T()</code> is equivalent to
+<code>x$permute(n, n-1, ..., 1)</code>.</p>
 </div>
 <div class="section level2">
 <h2 id="abs">abs<a class="anchor" aria-label="anchor" href="#abs"></a>
@@ -174,8 +181,12 @@
 <h2 id="add">add<a class="anchor" aria-label="anchor" href="#add"></a>
 </h2>
 <p>add(other, *, alpha=1) -&gt; Tensor</p>
-<p>Add a scalar or tensor to <code>self</code> tensor. If both <code>alpha</code> and <code>other</code> are specified, each element of <code>other</code> is scaled by <code>alpha</code> before being used.</p>
-<p>When <code>other</code> is a tensor, the shape of <code>other</code> must be broadcastable with the shape of the underlying tensor</p>
+<p>Add a scalar or tensor to <code>self</code> tensor. If both
+<code>alpha</code> and <code>other</code> are specified, each element of
+<code>other</code> is scaled by <code>alpha</code> before being
+used.</p>
+<p>When <code>other</code> is a tensor, the shape of <code>other</code>
+must be broadcastable with the shape of the underlying tensor</p>
 <p>See <code><a href="../../reference/torch_add.html">?torch_add</a></code></p>
 </div>
 <div class="section level2">
@@ -260,11 +271,19 @@
 <h2 id="align_as">align_as<a class="anchor" aria-label="anchor" href="#align_as"></a>
 </h2>
 <p>align_as(other) -&gt; Tensor</p>
-<p>Permutes the dimensions of the <code>self</code> tensor to match the dimension order in the <code>other</code> tensor, adding size-one dims for any new names.</p>
-<p>This operation is useful for explicit broadcasting by names (see examples).</p>
-<p>All of the dims of <code>self</code> must be named in order to use this method. The resulting tensor is a view on the original tensor.</p>
-<p>All dimension names of <code>self</code> must be present in <code>other$names</code>. <code>other</code> may contain named dimensions that are not in <code>self$names</code>; the output tensor has a size-one dimension for each of those new names.</p>
-<p>To align a tensor to a specific order, use <code>$align_to</code>.</p>
+<p>Permutes the dimensions of the <code>self</code> tensor to match the
+dimension order in the <code>other</code> tensor, adding size-one dims
+for any new names.</p>
+<p>This operation is useful for explicit broadcasting by names (see
+examples).</p>
+<p>All of the dims of <code>self</code> must be named in order to use
+this method. The resulting tensor is a view on the original tensor.</p>
+<p>All dimension names of <code>self</code> must be present in
+<code>other$names</code>. <code>other</code> may contain named
+dimensions that are not in <code>self$names</code>; the output tensor
+has a size-one dimension for each of those new names.</p>
+<p>To align a tensor to a specific order, use
+<code>$align_to</code>.</p>
 <div class="section level3">
 <h3 id="examples">Examples:<a class="anchor" aria-label="anchor" href="#examples"></a>
 </h3>
@@ -300,14 +319,22 @@
 <div class="section level2">
 <h2 id="align_to">align_to<a class="anchor" aria-label="anchor" href="#align_to"></a>
 </h2>
-<p>Permutes the dimensions of the <code>self</code> tensor to match the order specified in <code>names</code>, adding size-one dims for any new names.</p>
-<p>All of the dims of <code>self</code> must be named in order to use this method. The resulting tensor is a view on the original tensor.</p>
-<p>All dimension names of <code>self</code> must be present in <code>names</code>. <code>names</code> may contain additional names that are not in <code>self$names</code>; the output tensor has a size-one dimension for each of those new names.</p>
+<p>Permutes the dimensions of the <code>self</code> tensor to match the
+order specified in <code>names</code>, adding size-one dims for any new
+names.</p>
+<p>All of the dims of <code>self</code> must be named in order to use
+this method. The resulting tensor is a view on the original tensor.</p>
+<p>All dimension names of <code>self</code> must be present in
+<code>names</code>. <code>names</code> may contain additional names that
+are not in <code>self$names</code>; the output tensor has a size-one
+dimension for each of those new names.</p>
 <div class="section level3">
 <h3 id="arguments">Arguments:<a class="anchor" aria-label="anchor" href="#arguments"></a>
 </h3>
 <ul>
-<li>names (iterable of str): The desired dimension ordering of the output tensor. May contain up to one Ellipsis that is expanded to all unmentioned dim names of <code>self</code>.</li>
+<li>names (iterable of str): The desired dimension ordering of the
+output tensor. May contain up to one Ellipsis that is expanded to all
+unmentioned dim names of <code>self</code>.</li>
 </ul>
 </div>
 <div class="section level3">
@@ -324,7 +351,8 @@
 <h2 id="all">all<a class="anchor" aria-label="anchor" href="#all"></a>
 </h2>
 <p>all() -&gt; bool</p>
-<p>Returns TRUE if all elements in the tensor are TRUE, FALSE otherwise.</p>
+<p>Returns TRUE if all elements in the tensor are TRUE, FALSE
+otherwise.</p>
 <div class="section level4">
 <h4 id="examples-2">Examples:<a class="anchor" aria-label="anchor" href="#examples-2"></a>
 </h4>
@@ -333,15 +361,21 @@
 <span><span class="va">a</span></span>
 <span><span class="va">a</span><span class="op">$</span><span class="fu">all</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <p>all(dim, keepdim=FALSE, out=NULL) -&gt; Tensor</p>
-<p>Returns TRUE if all elements in each row of the tensor in the given dimension <code>dim</code> are TRUE, FALSE otherwise.</p>
-<p>If <code>keepdim</code> is <code>TRUE</code>, the output tensor is of the same size as <code>input</code> except in the dimension <code>dim</code> where it is of size 1. Otherwise, <code>dim</code> is squeezed (see <code>?torch_squeeze()),</code> resulting in the output tensor having 1 fewer dimension than <code>input</code>.</p>
+<p>Returns TRUE if all elements in each row of the tensor in the given
+dimension <code>dim</code> are TRUE, FALSE otherwise.</p>
+<p>If <code>keepdim</code> is <code>TRUE</code>, the output tensor is of
+the same size as <code>input</code> except in the dimension
+<code>dim</code> where it is of size 1. Otherwise, <code>dim</code> is
+squeezed (see <code>?torch_squeeze()),</code> resulting in the output
+tensor having 1 fewer dimension than <code>input</code>.</p>
 </div>
 <div class="section level4">
 <h4 id="arguments-1">Arguments:<a class="anchor" aria-label="anchor" href="#arguments-1"></a>
 </h4>
 <ul>
 <li>dim (int): the dimension to reduce</li>
-<li>keepdim (bool): whether the output tensor has <code>dim</code> retained or not</li>
+<li>keepdim (bool): whether the output tensor has <code>dim</code>
+retained or not</li>
 <li>out (Tensor, optional): the output tensor</li>
 </ul>
 </div>
@@ -358,7 +392,8 @@
 <div class="section level2">
 <h2 id="allclose">allclose<a class="anchor" aria-label="anchor" href="#allclose"></a>
 </h2>
-<p>allclose(other, rtol=1e-05, atol=1e-08, equal_nan=FALSE) -&gt; Tensor</p>
+<p>allclose(other, rtol=1e-05, atol=1e-08, equal_nan=FALSE) -&gt;
+Tensor</p>
 <p>See <code><a href="../../reference/torch_allclose.html">?torch_allclose</a></code></p>
 </div>
 <div class="section level2">
@@ -371,7 +406,8 @@
 <h2 id="any">any<a class="anchor" aria-label="anchor" href="#any"></a>
 </h2>
 <p>any() -&gt; bool</p>
-<p>Returns TRUE if any elements in the tensor are TRUE, FALSE otherwise.</p>
+<p>Returns TRUE if any elements in the tensor are TRUE, FALSE
+otherwise.</p>
 <div class="section level4">
 <h4 id="examples-4">Examples:<a class="anchor" aria-label="anchor" href="#examples-4"></a>
 </h4>
@@ -380,15 +416,21 @@
 <span><span class="va">a</span></span>
 <span><span class="va">a</span><span class="op">$</span><span class="fu">any</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <p>any(dim, keepdim=FALSE, out=NULL) -&gt; Tensor</p>
-<p>Returns TRUE if any elements in each row of the tensor in the given dimension <code>dim</code> are TRUE, FALSE otherwise.</p>
-<p>If <code>keepdim</code> is <code>TRUE</code>, the output tensor is of the same size as <code>input</code> except in the dimension <code>dim</code> where it is of size 1. Otherwise, <code>dim</code> is squeezed (see <code>?torch_squeeze()),</code> resulting in the output tensor having 1 fewer dimension than <code>input</code>.</p>
+<p>Returns TRUE if any elements in each row of the tensor in the given
+dimension <code>dim</code> are TRUE, FALSE otherwise.</p>
+<p>If <code>keepdim</code> is <code>TRUE</code>, the output tensor is of
+the same size as <code>input</code> except in the dimension
+<code>dim</code> where it is of size 1. Otherwise, <code>dim</code> is
+squeezed (see <code>?torch_squeeze()),</code> resulting in the output
+tensor having 1 fewer dimension than <code>input</code>.</p>
 </div>
 <div class="section level4">
 <h4 id="arguments-2">Arguments:<a class="anchor" aria-label="anchor" href="#arguments-2"></a>
 </h4>
 <ul>
 <li>dim (int): the dimension to reduce</li>
-<li>keepdim (bool): whether the output tensor has <code>dim</code> retained or not</li>
+<li>keepdim (bool): whether the output tensor has <code>dim</code>
+retained or not</li>
 <li>out (Tensor, optional): the output tensor</li>
 </ul>
 </div>
@@ -406,11 +448,14 @@
 <h2 id="apply_">apply_<a class="anchor" aria-label="anchor" href="#apply_"></a>
 </h2>
 <p>apply_(callable) -&gt; Tensor</p>
-<p>Applies the function <code>callable</code> to each element in the tensor, replacing each element with the value returned by <code>callable</code>.</p>
+<p>Applies the function <code>callable</code> to each element in the
+tensor, replacing each element with the value returned by
+<code>callable</code>.</p>
 <div class="section level4">
 <h4 id="note">Note:<a class="anchor" aria-label="anchor" href="#note"></a>
 </h4>
-<p>This function only works with CPU tensors and should not be used in code sections that require high performance.</p>
+<p>This function only works with CPU tensors and should not be used in
+code sections that require high performance.</p>
 </div>
 </div>
 <div class="section level2">
@@ -441,7 +486,10 @@
 <h2 id="as_subclass">as_subclass<a class="anchor" aria-label="anchor" href="#as_subclass"></a>
 </h2>
 <p>as_subclass(cls) -&gt; Tensor</p>
-<p>Makes a <code>cls</code> instance with the same data pointer as <code>self</code>. Changes in the output mirror changes in <code>self</code>, and the output stays attached to the autograd graph. <code>cls</code> must be a subclass of <code>Tensor</code>.</p>
+<p>Makes a <code>cls</code> instance with the same data pointer as
+<code>self</code>. Changes in the output mirror changes in
+<code>self</code>, and the output stays attached to the autograd graph.
+<code>cls</code> must be a subclass of <code>Tensor</code>.</p>
 </div>
 <div class="section level2">
 <h2 id="asin">asin<a class="anchor" aria-label="anchor" href="#asin"></a>
@@ -506,15 +554,34 @@
 <h2 id="backward">backward<a class="anchor" aria-label="anchor" href="#backward"></a>
 </h2>
 <p>Computes the gradient of current tensor w.r.t. graph leaves.</p>
-<p>The graph is differentiated using the chain rule. If the tensor is non-scalar (i.e. its data has more than one element) and requires gradient, the function additionally requires specifying <code>gradient</code>. It should be a tensor of matching type and location, that contains the gradient of the differentiated function w.r.t. <code>self</code>.</p>
-<p>This function accumulates gradients in the leaves - you might need to zero <code>$grad</code> attributes or set them to <code>NULL</code> before calling it. See <code>Default gradient layouts&lt;default-grad-layouts&gt;</code> for details on the memory layout of accumulated gradients.</p>
+<p>The graph is differentiated using the chain rule. If the tensor is
+non-scalar (i.e. its data has more than one element) and requires
+gradient, the function additionally requires specifying
+<code>gradient</code>. It should be a tensor of matching type and
+location, that contains the gradient of the differentiated function
+w.r.t. <code>self</code>.</p>
+<p>This function accumulates gradients in the leaves - you might need to
+zero <code>$grad</code> attributes or set them to <code>NULL</code>
+before calling it. See
+<code>Default gradient layouts&lt;default-grad-layouts&gt;</code> for
+details on the memory layout of accumulated gradients.</p>
 <div class="section level4">
 <h4 id="arguments-3">Arguments:<a class="anchor" aria-label="anchor" href="#arguments-3"></a>
 </h4>
 <ul>
-<li>gradient (Tensor or NULL): Gradient w.r.t. the tensor. If it is a tensor, it will be automatically converted to a Tensor that does not require grad unless <code>create_graph</code> is TRUE. NULL values can be specified for scalar Tensors or ones that don’t require grad. If a NULL value would be acceptable then this argument is optional.</li>
-<li>retain_graph (bool, optional): If <code>FALSE</code>, the graph used to compute the grads will be freed. Note that in nearly all cases setting this option to TRUE is not needed and often can be worked around in a much more efficient way. Defaults to the value of <code>create_graph</code>.</li>
-<li>create_graph (bool, optional): If <code>TRUE</code>, graph of the derivative will be constructed, allowing to compute higher order derivative products. Defaults to <code>FALSE</code>.</li>
+<li>gradient (Tensor or NULL): Gradient w.r.t. the tensor. If it is a
+tensor, it will be automatically converted to a Tensor that does not
+require grad unless <code>create_graph</code> is TRUE. NULL values can
+be specified for scalar Tensors or ones that don’t require grad. If a
+NULL value would be acceptable then this argument is optional.</li>
+<li>retain_graph (bool, optional): If <code>FALSE</code>, the graph used
+to compute the grads will be freed. Note that in nearly all cases
+setting this option to TRUE is not needed and often can be worked around
+in a much more efficient way. Defaults to the value of
+<code>create_graph</code>.</li>
+<li>create_graph (bool, optional): If <code>TRUE</code>, graph of the
+derivative will be constructed, allowing to compute higher order
+derivative products. Defaults to <code>FALSE</code>.</li>
 </ul>
 </div>
 </div>
@@ -534,29 +601,41 @@
 <h2 id="bernoulli">bernoulli<a class="anchor" aria-label="anchor" href="#bernoulli"></a>
 </h2>
 <p>bernoulli(*, generator=NULL) -&gt; Tensor</p>
-<p>Returns a result tensor where each <span class="math inline">\(\texttt{result[i]}\)</span> is independently sampled from <span class="math inline">\(\text{Bernoulli}(\texttt{self[i]})\)</span>. <code>self</code> must have floating point <code>dtype</code>, and the result will have the same <code>dtype</code>.</p>
+<p>Returns a result tensor where each <span class="math inline">\(\texttt{result[i]}\)</span> is independently
+sampled from <span class="math inline">\(\text{Bernoulli}(\texttt{self[i]})\)</span>.
+<code>self</code> must have floating point <code>dtype</code>, and the
+result will have the same <code>dtype</code>.</p>
 <p>See <code><a href="../../reference/torch_bernoulli.html">?torch_bernoulli</a></code></p>
 </div>
 <div class="section level2">
 <h2 id="bernoulli_">bernoulli_<a class="anchor" aria-label="anchor" href="#bernoulli_"></a>
 </h2>
 <p>bernoulli_(p=0.5, *, generator=NULL) -&gt; Tensor</p>
-<p>Fills each location of <code>self</code> with an independent sample from <span class="math inline">\(\text{Bernoulli}(\texttt{p})\)</span>. <code>self</code> can have integral <code>dtype</code>.</p>
+<p>Fills each location of <code>self</code> with an independent sample
+from <span class="math inline">\(\text{Bernoulli}(\texttt{p})\)</span>.
+<code>self</code> can have integral <code>dtype</code>.</p>
 <p>bernoulli_(p_tensor, *, generator=NULL) -&gt; Tensor</p>
-<p><code>p_tensor</code> should be a tensor containing probabilities to be used for drawing the binary random number.</p>
-<p>The <span class="math inline">\(\text{i}^{th}\)</span> element of <code>self</code> tensor will be set to a value sampled from <span class="math inline">\(\text{Bernoulli}(\texttt{p\_tensor[i]})\)</span>.</p>
-<p><code>self</code> can have integral <code>dtype</code>, but <code>p_tensor</code> must have floating point <code>dtype</code>.</p>
-<p>See also <code>$bernoulli</code> and <code><a href="../../reference/torch_bernoulli.html">?torch_bernoulli</a></code></p>
+<p><code>p_tensor</code> should be a tensor containing probabilities to
+be used for drawing the binary random number.</p>
+<p>The <span class="math inline">\(\text{i}^{th}\)</span> element of
+<code>self</code> tensor will be set to a value sampled from <span class="math inline">\(\text{Bernoulli}(\texttt{p\_tensor[i]})\)</span>.</p>
+<p><code>self</code> can have integral <code>dtype</code>, but
+<code>p_tensor</code> must have floating point <code>dtype</code>.</p>
+<p>See also <code>$bernoulli</code> and
+<code><a href="../../reference/torch_bernoulli.html">?torch_bernoulli</a></code></p>
 </div>
 <div class="section level2">
 <h2 id="bfloat16">bfloat16<a class="anchor" aria-label="anchor" href="#bfloat16"></a>
 </h2>
-<p>bfloat16(memory_format=torch_preserve_format) -&gt; Tensor <code>self$bfloat16()</code> is equivalent to <code>self$to(torch_bfloat16)</code>. See [to()].</p>
+<p>bfloat16(memory_format=torch_preserve_format) -&gt; Tensor
+<code>self$bfloat16()</code> is equivalent to
+<code>self$to(torch_bfloat16)</code>. See [to()].</p>
 <div class="section level4">
 <h4 id="arguments-4">Arguments:<a class="anchor" aria-label="anchor" href="#arguments-4"></a>
 </h4>
 <ul>
-<li>memory_format (<code>torch_memory_format</code>, optional): the desired memory format of</li>
+<li>memory_format (<code>torch_memory_format</code>, optional): the
+desired memory format of</li>
 <li>returned Tensor. Default: <code>torch_preserve_format</code>.</li>
 </ul>
 </div>
@@ -625,12 +704,14 @@
 <h2 id="bool">bool<a class="anchor" aria-label="anchor" href="#bool"></a>
 </h2>
 <p>bool(memory_format=torch_preserve_format) -&gt; Tensor</p>
-<p><code>self$bool()</code> is equivalent to <code>self$to(torch_bool)</code>. See [to()].</p>
+<p><code>self$bool()</code> is equivalent to
+<code>self$to(torch_bool)</code>. See [to()].</p>
 <div class="section level4">
 <h4 id="arguments-5">Arguments:<a class="anchor" aria-label="anchor" href="#arguments-5"></a>
 </h4>
 <ul>
-<li>memory_format (<code>torch_memory_format</code>, optional): the desired memory format of</li>
+<li>memory_format (<code>torch_memory_format</code>, optional): the
+desired memory format of</li>
 <li>returned Tensor. Default: <code>torch_preserve_format</code>.</li>
 </ul>
 </div>
@@ -639,12 +720,14 @@
 <h2 id="byte">byte<a class="anchor" aria-label="anchor" href="#byte"></a>
 </h2>
 <p>byte(memory_format=torch_preserve_format) -&gt; Tensor</p>
-<p><code>self$byte()</code> is equivalent to <code>self$to(torch_uint8)</code>. See [to()].</p>
+<p><code>self$byte()</code> is equivalent to
+<code>self$to(torch_uint8)</code>. See [to()].</p>
 <div class="section level4">
 <h4 id="arguments-6">Arguments:<a class="anchor" aria-label="anchor" href="#arguments-6"></a>
 </h4>
 <ul>
-<li>memory_format (<code>torch_memory_format</code>, optional): the desired memory format of</li>
+<li>memory_format (<code>torch_memory_format</code>, optional): the
+desired memory format of</li>
 <li>returned Tensor. Default: <code>torch_preserve_format</code>.</li>
 </ul>
 </div>
@@ -674,12 +757,14 @@ f(x) = \dfrac{1}{\pi} \dfrac{\sigma}{(x - \text{median})^2 + \sigma^2}
 <h2 id="char">char<a class="anchor" aria-label="anchor" href="#char"></a>
 </h2>
 <p>char(memory_format=torch_preserve_format) -&gt; Tensor</p>
-<p><code>self$char()</code> is equivalent to <code>self$to(torch_int8)</code>. See [to()].</p>
+<p><code>self$char()</code> is equivalent to
+<code>self$to(torch_int8)</code>. See [to()].</p>
 <div class="section level4">
 <h4 id="arguments-7">Arguments:<a class="anchor" aria-label="anchor" href="#arguments-7"></a>
 </h4>
 <ul>
-<li>memory_format (<code>torch_memory_format</code>, optional): the desired memory format of</li>
+<li>memory_format (<code>torch_memory_format</code>, optional): the
+desired memory format of</li>
 <li>returned Tensor. Default: <code>torch_preserve_format</code>.</li>
 </ul>
 </div>
@@ -724,7 +809,8 @@ f(x) = \dfrac{1}{\pi} \dfrac{\sigma}{(x - \text{median})^2 + \sigma^2}
 <h2 id="clone">clone<a class="anchor" aria-label="anchor" href="#clone"></a>
 </h2>
 <p>clone(memory_format=torch_preserve_format()) -&gt; Tensor</p>
-<p>Returns a copy of the <code>self</code> tensor. The copy has the same size and data type as <code>self</code>.</p>
+<p>Returns a copy of the <code>self</code> tensor. The copy has the same
+size and data type as <code>self</code>.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/torch_tensor.html">torch_tensor</a></span><span class="op">(</span><span class="fl">1</span><span class="op">)</span></span>
 <span><span class="va">y</span> <span class="op">&lt;-</span> <span class="va">x</span><span class="op">$</span><span class="fu">clone</span><span class="op">(</span><span class="op">)</span></span>
@@ -734,13 +820,17 @@ f(x) = \dfrac{1}{\pi} \dfrac{\sigma}{(x - \text{median})^2 + \sigma^2}
 <div class="section level4">
 <h4 id="note-1">Note:<a class="anchor" aria-label="anchor" href="#note-1"></a>
 </h4>
-<p>Unlike <code>copy_()</code>, this function is recorded in the computation graph. Gradients propagating to the cloned tensor will propagate to the original tensor.</p>
+<p>Unlike <code>copy_()</code>, this function is recorded in the
+computation graph. Gradients propagating to the cloned tensor will
+propagate to the original tensor.</p>
 </div>
 <div class="section level4">
 <h4 id="arguments-8">Arguments:<a class="anchor" aria-label="anchor" href="#arguments-8"></a>
 </h4>
 <ul>
-<li>memory_format (<code>torch_memory_format</code>, optional): the desired memory format of the returned Tensor. Default: <code>torch_preserve_format</code>.</li>
+<li>memory_format (<code>torch_memory_format</code>, optional): the
+desired memory format of the returned Tensor. Default:
+<code>torch_preserve_format</code>.</li>
 </ul>
 </div>
 </div>
@@ -754,12 +844,17 @@ f(x) = \dfrac{1}{\pi} \dfrac{\sigma}{(x - \text{median})^2 + \sigma^2}
 <h2 id="contiguous">contiguous<a class="anchor" aria-label="anchor" href="#contiguous"></a>
 </h2>
 <p>contiguous(memory_format=torch_contiguous_format) -&gt; Tensor</p>
-<p>Returns a contiguous in memory tensor containing the same data as <code>self</code> tensor. If <code>self</code> tensor is already in the specified memory format, this function returns the <code>self</code> tensor.</p>
+<p>Returns a contiguous in memory tensor containing the same data as
+<code>self</code> tensor. If <code>self</code> tensor is already in the
+specified memory format, this function returns the <code>self</code>
+tensor.</p>
 <div class="section level4">
 <h4 id="arguments-9">Arguments:<a class="anchor" aria-label="anchor" href="#arguments-9"></a>
 </h4>
 <ul>
-<li>memory_format (<code>torch_memory_format</code>, optional): the desired memory format of the returned Tensor. Default: <code>torch_contiguous_format</code>.</li>
+<li>memory_format (<code>torch_memory_format</code>, optional): the
+desired memory format of the returned Tensor. Default:
+<code>torch_contiguous_format</code>.</li>
 </ul>
 </div>
 </div>
@@ -767,14 +862,19 @@ f(x) = \dfrac{1}{\pi} \dfrac{\sigma}{(x - \text{median})^2 + \sigma^2}
 <h2 id="copy_">copy_<a class="anchor" aria-label="anchor" href="#copy_"></a>
 </h2>
 <p>copy_(src, non_blocking=FALSE) -&gt; Tensor</p>
-<p>Copies the elements from <code>src</code> into <code>self</code> tensor and returns <code>self</code>.</p>
-<p>The <code>src</code> tensor must be broadcastable with the <code>self</code> tensor. It may be of a different data type or reside on a different device.</p>
+<p>Copies the elements from <code>src</code> into <code>self</code>
+tensor and returns <code>self</code>.</p>
+<p>The <code>src</code> tensor must be broadcastable with the
+<code>self</code> tensor. It may be of a different data type or reside
+on a different device.</p>
 <div class="section level4">
 <h4 id="arguments-10">Arguments:<a class="anchor" aria-label="anchor" href="#arguments-10"></a>
 </h4>
 <ul>
 <li>src (Tensor): the source tensor to copy from</li>
-<li>non_blocking (bool): if <code>TRUE</code> and this copy is between CPU and GPU, the copy may occur asynchronously with respect to the host. For other cases, this argument has no effect.</li>
+<li>non_blocking (bool): if <code>TRUE</code> and this copy is between
+CPU and GPU, the copy may occur asynchronously with respect to the host.
+For other cases, this argument has no effect.</li>
 </ul>
 </div>
 </div>
@@ -807,12 +907,14 @@ f(x) = \dfrac{1}{\pi} \dfrac{\sigma}{(x - \text{median})^2 + \sigma^2}
 </h2>
 <p>cpu(memory_format=torch_preserve_format) -&gt; Tensor</p>
 <p>Returns a copy of this object in CPU memory.</p>
-<p>If this object is already in CPU memory and on the correct device, then no copy is performed and the original object is returned.</p>
+<p>If this object is already in CPU memory and on the correct device,
+then no copy is performed and the original object is returned.</p>
 <div class="section level4">
 <h4 id="arguments-11">Arguments:<a class="anchor" aria-label="anchor" href="#arguments-11"></a>
 </h4>
 <ul>
-<li>memory_format (<code>torch_memory_format</code>, optional): the desired memory format of</li>
+<li>memory_format (<code>torch_memory_format</code>, optional): the
+desired memory format of</li>
 <li>returned Tensor. Default: <code>torch_preserve_format</code>.</li>
 </ul>
 </div>
@@ -826,16 +928,22 @@ f(x) = \dfrac{1}{\pi} \dfrac{\sigma}{(x - \text{median})^2 + \sigma^2}
 <div class="section level2">
 <h2 id="cuda">cuda<a class="anchor" aria-label="anchor" href="#cuda"></a>
 </h2>
-<p>cuda(device=NULL, non_blocking=FALSE, memory_format=torch_preserve_format) -&gt; Tensor</p>
+<p>cuda(device=NULL, non_blocking=FALSE,
+memory_format=torch_preserve_format) -&gt; Tensor</p>
 <p>Returns a copy of this object in CUDA memory.</p>
-<p>If this object is already in CUDA memory and on the correct device, then no copy is performed and the original object is returned.</p>
+<p>If this object is already in CUDA memory and on the correct device,
+then no copy is performed and the original object is returned.</p>
 <div class="section level4">
 <h4 id="arguments-12">Arguments:<a class="anchor" aria-label="anchor" href="#arguments-12"></a>
 </h4>
 <ul>
-<li>device (<code>torch_device</code>): The destination GPU device. Defaults to the current CUDA device.</li>
-<li>non_blocking (bool): If <code>TRUE</code> and the source is in pinned memory, the copy will be asynchronous with respect to the host. Otherwise, the argument has no effect. Default: <code>FALSE</code>.</li>
-<li>memory_format (<code>torch_memory_format</code>, optional): the desired memory format of</li>
+<li>device (<code>torch_device</code>): The destination GPU device.
+Defaults to the current CUDA device.</li>
+<li>non_blocking (bool): If <code>TRUE</code> and the source is in
+pinned memory, the copy will be asynchronous with respect to the host.
+Otherwise, the argument has no effect. Default: <code>FALSE</code>.</li>
+<li>memory_format (<code>torch_memory_format</code>, optional): the
+desired memory format of</li>
 <li>returned Tensor. Default: <code>torch_preserve_format</code>.</li>
 </ul>
 </div>
@@ -868,7 +976,8 @@ f(x) = \dfrac{1}{\pi} \dfrac{\sigma}{(x - \text{median})^2 + \sigma^2}
 <h2 id="data_ptr">data_ptr<a class="anchor" aria-label="anchor" href="#data_ptr"></a>
 </h2>
 <p>data_ptr() -&gt; int</p>
-<p>Returns the address of the first element of <code>self</code> tensor.</p>
+<p>Returns the address of the first element of <code>self</code>
+tensor.</p>
 </div>
 <div class="section level2">
 <h2 id="deg2rad">deg2rad<a class="anchor" aria-label="anchor" href="#deg2rad"></a>
@@ -886,14 +995,17 @@ f(x) = \dfrac{1}{\pi} \dfrac{\sigma}{(x - \text{median})^2 + \sigma^2}
 <h2 id="dense_dim">dense_dim<a class="anchor" aria-label="anchor" href="#dense_dim"></a>
 </h2>
 <p>dense_dim() -&gt; int</p>
-<p>If <code>self</code> is a sparse COO tensor (i.e., with <code>torch_sparse_coo</code> layout), this returns the number of dense dimensions. Otherwise, this throws an error.</p>
+<p>If <code>self</code> is a sparse COO tensor (i.e., with
+<code>torch_sparse_coo</code> layout), this returns the number of dense
+dimensions. Otherwise, this throws an error.</p>
 <p>See also <code>$sparse_dim</code>.</p>
 </div>
 <div class="section level2">
 <h2 id="dequantize">dequantize<a class="anchor" aria-label="anchor" href="#dequantize"></a>
 </h2>
 <p>dequantize() -&gt; Tensor</p>
-<p>Given a quantized Tensor, dequantize it and return the dequantized float Tensor.</p>
+<p>Given a quantized Tensor, dequantize it and return the dequantized
+float Tensor.</p>
 </div>
 <div class="section level2">
 <h2 id="det">det<a class="anchor" aria-label="anchor" href="#det"></a>
@@ -910,15 +1022,25 @@ f(x) = \dfrac{1}{\pi} \dfrac{\sigma}{(x - \text{median})^2 + \sigma^2}
 <h4 id="note-2">Note:<a class="anchor" aria-label="anchor" href="#note-2"></a>
 </h4>
 <p>Returned Tensor shares the same storage with the original one.</p>
-<p>In-place modifications on either of them will be seen, and may trigger errors in correctness checks.</p>
-<p><strong>IMPORTANT NOTE</strong>: Previously, in-place size / stride / storage changes (such as <code>resize_</code> / <code>resize_as_</code> / <code>set_</code> / <code>transpose_</code>) to the returned tensor also update the original tensor. Now, these in-place changes will not update the original tensor anymore, and will instead trigger an error.</p>
-<p>For sparse tensors: In-place indices / values changes (such as <code>zero_</code> / <code>copy_</code> / <code>add_</code>) to the returned tensor will not update the original tensor anymore, and will instead trigger an error.</p>
+<p>In-place modifications on either of them will be seen, and may
+trigger errors in correctness checks.</p>
+<p><strong>IMPORTANT NOTE</strong>: Previously, in-place size / stride /
+storage changes (such as <code>resize_</code> / <code>resize_as_</code>
+/ <code>set_</code> / <code>transpose_</code>) to the returned tensor
+also update the original tensor. Now, these in-place changes will not
+update the original tensor anymore, and will instead trigger an
+error.</p>
+<p>For sparse tensors: In-place indices / values changes (such as
+<code>zero_</code> / <code>copy_</code> / <code>add_</code>) to the
+returned tensor will not update the original tensor anymore, and will
+instead trigger an error.</p>
 </div>
 </div>
 <div class="section level2">
 <h2 id="detach_">detach_<a class="anchor" aria-label="anchor" href="#detach_"></a>
 </h2>
-<p>Detaches the Tensor from the graph that created it, making it a leaf. Views cannot be detached in-place.</p>
+<p>Detaches the Tensor from the graph that created it, making it a leaf.
+Views cannot be detached in-place.</p>
 </div>
 <div class="section level2">
 <h2 id="device">device<a class="anchor" aria-label="anchor" href="#device"></a>
@@ -995,12 +1117,14 @@ f(x) = \dfrac{1}{\pi} \dfrac{\sigma}{(x - \text{median})^2 + \sigma^2}
 <h2 id="double">double<a class="anchor" aria-label="anchor" href="#double"></a>
 </h2>
 <p>double(memory_format=torch_preserve_format) -&gt; Tensor</p>
-<p><code>self$double()</code> is equivalent to <code>self$to(torch_float64)</code>. See [to()].</p>
+<p><code>self$double()</code> is equivalent to
+<code>self$to(torch_float64)</code>. See [to()].</p>
 <div class="section level4">
 <h4 id="arguments-13">Arguments:<a class="anchor" aria-label="anchor" href="#arguments-13"></a>
 </h4>
 <ul>
-<li>memory_format (<code>torch_memory_format</code>, optional): the desired memory format of</li>
+<li>memory_format (<code>torch_memory_format</code>, optional): the
+desired memory format of</li>
 <li>returned Tensor. Default: <code>torch_preserve_format</code>.</li>
 </ul>
 </div>
@@ -1093,10 +1217,18 @@ f(x) = \dfrac{1}{\pi} \dfrac{\sigma}{(x - \text{median})^2 + \sigma^2}
 <h2 id="expand">expand<a class="anchor" aria-label="anchor" href="#expand"></a>
 </h2>
 <p>expand(*sizes) -&gt; Tensor</p>
-<p>Returns a new view of the <code>self</code> tensor with singleton dimensions expanded to a larger size.</p>
-<p>Passing -1 as the size for a dimension means not changing the size of that dimension.</p>
-<p>Tensor can be also expanded to a larger number of dimensions, and the new ones will be appended at the front. For the new dimensions, the size cannot be set to -1.</p>
-<p>Expanding a tensor does not allocate new memory, but only creates a new view on the existing tensor where a dimension of size one is expanded to a larger size by setting the <code>stride</code> to 0. Any dimension of size 1 can be expanded to an arbitrary value without allocating new memory.</p>
+<p>Returns a new view of the <code>self</code> tensor with singleton
+dimensions expanded to a larger size.</p>
+<p>Passing -1 as the size for a dimension means not changing the size of
+that dimension.</p>
+<p>Tensor can be also expanded to a larger number of dimensions, and the
+new ones will be appended at the front. For the new dimensions, the size
+cannot be set to -1.</p>
+<p>Expanding a tensor does not allocate new memory, but only creates a
+new view on the existing tensor where a dimension of size one is
+expanded to a larger size by setting the <code>stride</code> to 0. Any
+dimension of size 1 can be expanded to an arbitrary value without
+allocating new memory.</p>
 <div class="section level4">
 <h4 id="arguments-14">Arguments:<a class="anchor" aria-label="anchor" href="#arguments-14"></a>
 </h4>
@@ -1107,7 +1239,10 @@ f(x) = \dfrac{1}{\pi} \dfrac{\sigma}{(x - \text{median})^2 + \sigma^2}
 <div class="section level4">
 <h4 id="warning-2">Warning:<a class="anchor" aria-label="anchor" href="#warning-2"></a>
 </h4>
-<p>More than one element of an expanded tensor may refer to a single memory location. As a result, in-place operations (especially ones that are vectorized) may result in incorrect behavior. If you need to write to the tensors, please clone them first.</p>
+<p>More than one element of an expanded tensor may refer to a single
+memory location. As a result, in-place operations (especially ones that
+are vectorized) may result in incorrect behavior. If you need to write
+to the tensors, please clone them first.</p>
 </div>
 <div class="section level4">
 <h4 id="examples-7">Examples:<a class="anchor" aria-label="anchor" href="#examples-7"></a>
@@ -1123,8 +1258,11 @@ f(x) = \dfrac{1}{\pi} \dfrac{\sigma}{(x - \text{median})^2 + \sigma^2}
 <h2 id="expand_as">expand_as<a class="anchor" aria-label="anchor" href="#expand_as"></a>
 </h2>
 <p>expand_as(other) -&gt; Tensor</p>
-<p>Expand this tensor to the same size as <code>other</code>. <code>self$expand_as(other)</code> is equivalent to <code>self$expand(other.size())</code>.</p>
-<p>Please see <code>$expand</code> for more information about <code>expand</code>.</p>
+<p>Expand this tensor to the same size as <code>other</code>.
+<code>self$expand_as(other)</code> is equivalent to
+<code>self$expand(other.size())</code>.</p>
+<p>Please see <code>$expand</code> for more information about
+<code>expand</code>.</p>
 <div class="section level4">
 <h4 id="arguments-15">Arguments:<a class="anchor" aria-label="anchor" href="#arguments-15"></a>
 </h4>
@@ -1150,7 +1288,8 @@ f(x) = \dfrac{1}{\pi} \dfrac{\sigma}{(x - \text{median})^2 + \sigma^2}
 <h2 id="exponential_">exponential_<a class="anchor" aria-label="anchor" href="#exponential_"></a>
 </h2>
 <p>exponential_(lambd=1, *, generator=NULL) -&gt; Tensor</p>
-<p>Fills <code>self</code> tensor with elements drawn from the exponential distribution:</p>
+<p>Fills <code>self</code> tensor with elements drawn from the
+exponential distribution:</p>
 <p><span class="math display">\[
 f(x) = \lambda e^{-\lambda x}
 \]</span></p>
@@ -1171,13 +1310,17 @@ f(x) = \lambda e^{-\lambda x}
 <h2 id="fill_diagonal_">fill_diagonal_<a class="anchor" aria-label="anchor" href="#fill_diagonal_"></a>
 </h2>
 <p>fill_diagonal_(fill_value, wrap=FALSE) -&gt; Tensor</p>
-<p>Fill the main diagonal of a tensor that has at least 2-dimensions. When dims&gt;2, all dimensions of input must be of equal length. This function modifies the input tensor in-place, and returns the input tensor.</p>
+<p>Fill the main diagonal of a tensor that has at least 2-dimensions.
+When dims&gt;2, all dimensions of input must be of equal length. This
+function modifies the input tensor in-place, and returns the input
+tensor.</p>
 <div class="section level4">
 <h4 id="arguments-16">Arguments:<a class="anchor" aria-label="anchor" href="#arguments-16"></a>
 </h4>
 <ul>
 <li>fill_value (Scalar): the fill value</li>
-<li>wrap (bool): the diagonal ‘wrapped’ after N columns for tall matrices.</li>
+<li>wrap (bool): the diagonal ‘wrapped’ after N columns for tall
+matrices.</li>
 </ul>
 </div>
 <div class="section level4">
@@ -1220,12 +1363,14 @@ f(x) = \lambda e^{-\lambda x}
 <h2 id="float">float<a class="anchor" aria-label="anchor" href="#float"></a>
 </h2>
 <p>float(memory_format=torch_preserve_format) -&gt; Tensor</p>
-<p><code>self$float()</code> is equivalent to <code>self$to(torch_float32)</code>. See [to()].</p>
+<p><code>self$float()</code> is equivalent to
+<code>self$to(torch_float32)</code>. See [to()].</p>
 <div class="section level4">
 <h4 id="arguments-17">Arguments:<a class="anchor" aria-label="anchor" href="#arguments-17"></a>
 </h4>
 <ul>
-<li>memory_format (<code>torch_memory_format</code>, optional): the desired memory format of</li>
+<li>memory_format (<code>torch_memory_format</code>, optional): the
+desired memory format of</li>
 <li>returned Tensor. Default: <code>torch_preserve_format</code>.</li>
 </ul>
 </div>
@@ -1300,7 +1445,8 @@ f(x) = \lambda e^{-\lambda x}
 <h2 id="geometric_">geometric_<a class="anchor" aria-label="anchor" href="#geometric_"></a>
 </h2>
 <p>geometric_(p, *, generator=NULL) -&gt; Tensor</p>
-<p>Fills <code>self</code> tensor with elements drawn from the geometric distribution:</p>
+<p>Fills <code>self</code> tensor with elements drawn from the geometric
+distribution:</p>
 <p><span class="math display">\[
 f(X=k) = p^{k - 1} (1 - p)
 \]</span></p>
@@ -1321,7 +1467,8 @@ f(X=k) = p^{k - 1} (1 - p)
 <h2 id="get_device">get_device<a class="anchor" aria-label="anchor" href="#get_device"></a>
 </h2>
 <p>get_device() -&gt; Device ordinal (Integer)</p>
-<p>For CUDA tensors, this function returns the device ordinal of the GPU on which the tensor resides. For CPU tensors, an error is thrown.</p>
+<p>For CUDA tensors, this function returns the device ordinal of the GPU
+on which the tensor resides. For CPU tensors, an error is thrown.</p>
 <div class="section level4">
 <h4 id="examples-9">Examples:<a class="anchor" aria-label="anchor" href="#examples-9"></a>
 </h4>
@@ -1334,7 +1481,11 @@ f(X=k) = p^{k - 1} (1 - p)
 <div class="section level2">
 <h2 id="grad">grad<a class="anchor" aria-label="anchor" href="#grad"></a>
 </h2>
-<p>This attribute is <code>NULL</code> by default and becomes a Tensor the first time a call to <code>backward</code> computes gradients for <code>self</code>. The attribute will then contain the gradients computed and future calls to [backward()] will accumulate (add) gradients into it.</p>
+<p>This attribute is <code>NULL</code> by default and becomes a Tensor
+the first time a call to <code>backward</code> computes gradients for
+<code>self</code>. The attribute will then contain the gradients
+computed and future calls to [backward()] will accumulate (add)
+gradients into it.</p>
 </div>
 <div class="section level2">
 <h2 id="gt">gt<a class="anchor" aria-label="anchor" href="#gt"></a>
@@ -1352,12 +1503,14 @@ f(X=k) = p^{k - 1} (1 - p)
 <h2 id="half">half<a class="anchor" aria-label="anchor" href="#half"></a>
 </h2>
 <p>half(memory_format=torch_preserve_format) -&gt; Tensor</p>
-<p><code>self$half()</code> is equivalent to <code>self$to(torch_float16)</code>. See [to()].</p>
+<p><code>self$half()</code> is equivalent to
+<code>self$to(torch_float16)</code>. See [to()].</p>
 <div class="section level4">
 <h4 id="arguments-18">Arguments:<a class="anchor" aria-label="anchor" href="#arguments-18"></a>
 </h4>
 <ul>
-<li>memory_format (<code>torch_memory_format</code>, optional): the desired memory format of</li>
+<li>memory_format (<code>torch_memory_format</code>, optional): the
+desired memory format of</li>
 <li>returned Tensor. Default: <code>torch_preserve_format</code>.</li>
 </ul>
 </div>
@@ -1371,7 +1524,8 @@ f(X=k) = p^{k - 1} (1 - p)
 <div class="section level2">
 <h2 id="has_names">has_names<a class="anchor" aria-label="anchor" href="#has_names"></a>
 </h2>
-<p>Is <code>TRUE</code> if any of this tensor’s dimensions are named. Otherwise, is <code>FALSE</code>.</p>
+<p>Is <code>TRUE</code> if any of this tensor’s dimensions are named.
+Otherwise, is <code>FALSE</code>.</p>
 </div>
 <div class="section level2">
 <h2 id="histc">histc<a class="anchor" aria-label="anchor" href="#histc"></a>
@@ -1388,7 +1542,9 @@ f(X=k) = p^{k - 1} (1 - p)
 <div class="section level2">
 <h2 id="imag">imag<a class="anchor" aria-label="anchor" href="#imag"></a>
 </h2>
-<p>Returns a new tensor containing imaginary values of the <code>self</code> tensor. The returned tensor and <code>self</code> share the same underlying storage.</p>
+<p>Returns a new tensor containing imaginary values of the
+<code>self</code> tensor. The returned tensor and <code>self</code>
+share the same underlying storage.</p>
 <div class="section level4">
 <h4 id="warning-3">Warning:<a class="anchor" aria-label="anchor" href="#warning-3"></a>
 </h4>
@@ -1407,25 +1563,40 @@ f(X=k) = p^{k - 1} (1 - p)
 <h2 id="index_add">index_add<a class="anchor" aria-label="anchor" href="#index_add"></a>
 </h2>
 <p>index_add(tensor1, dim, index, tensor2) -&gt; Tensor</p>
-<p>Out-of-place version of <code>$index_add_</code>. <code>tensor1</code> corresponds to <code>self</code> in <code>$index_add_</code>.</p>
+<p>Out-of-place version of <code>$index_add_</code>.
+<code>tensor1</code> corresponds to <code>self</code> in
+<code>$index_add_</code>.</p>
 </div>
 <div class="section level2">
 <h2 id="index_add_">index_add_<a class="anchor" aria-label="anchor" href="#index_add_"></a>
 </h2>
 <p>index_add_(dim, index, tensor) -&gt; Tensor</p>
-<p>Accumulate the elements of <code>tensor</code> into the <code>self</code> tensor by adding to the indices in the order given in <code>index</code>. For example, if <code>dim == 0</code> and <code>index[i] == j</code>, then the <code>i</code> th row of <code>tensor</code> is added to the <code>j</code> th row of <code>self</code>.</p>
-<p>The <code>dim</code> th dimension of <code>tensor</code> must have the same size as the length of <code>index</code> (which must be a vector), and all other dimensions must match <code>self</code>, or an error will be raised.</p>
+<p>Accumulate the elements of <code>tensor</code> into the
+<code>self</code> tensor by adding to the indices in the order given in
+<code>index</code>. For example, if <code>dim == 0</code> and
+<code>index[i] == j</code>, then the <code>i</code> th row of
+<code>tensor</code> is added to the <code>j</code> th row of
+<code>self</code>.</p>
+<p>The <code>dim</code> th dimension of <code>tensor</code> must have
+the same size as the length of <code>index</code> (which must be a
+vector), and all other dimensions must match <code>self</code>, or an
+error will be raised.</p>
 <div class="section level4">
 <h4 id="note-3">Note:<a class="anchor" aria-label="anchor" href="#note-3"></a>
 </h4>
-<p>In some circumstances when using the CUDA backend with CuDNN, this operator may select a nondeterministic algorithm to increase performance. If this is undesirable, you can try to make the operation deterministic (potentially at a performance cost) by setting <code>torch_backends.cudnn.deterministic = TRUE</code>.</p>
+<p>In some circumstances when using the CUDA backend with CuDNN, this
+operator may select a nondeterministic algorithm to increase
+performance. If this is undesirable, you can try to make the operation
+deterministic (potentially at a performance cost) by setting
+<code>torch_backends.cudnn.deterministic = TRUE</code>.</p>
 </div>
 <div class="section level4">
 <h4 id="arguments-19">Arguments:<a class="anchor" aria-label="anchor" href="#arguments-19"></a>
 </h4>
 <ul>
 <li>dim (int): dimension along which to index</li>
-<li>index (LongTensor): indices of <code>tensor</code> to select from</li>
+<li>index (LongTensor): indices of <code>tensor</code> to select
+from</li>
 <li>tensor (Tensor): the tensor containing values to add</li>
 </ul>
 </div>
@@ -1443,20 +1614,31 @@ f(X=k) = p^{k - 1} (1 - p)
 <h2 id="index_copy">index_copy<a class="anchor" aria-label="anchor" href="#index_copy"></a>
 </h2>
 <p>index_copy(tensor1, dim, index, tensor2) -&gt; Tensor</p>
-<p>Out-of-place version of <code>$index_copy_</code>. <code>tensor1</code> corresponds to <code>self</code> in <code>$index_copy_</code>.</p>
+<p>Out-of-place version of <code>$index_copy_</code>.
+<code>tensor1</code> corresponds to <code>self</code> in
+<code>$index_copy_</code>.</p>
 </div>
 <div class="section level2">
 <h2 id="index_copy_">index_copy_<a class="anchor" aria-label="anchor" href="#index_copy_"></a>
 </h2>
 <p>index_copy_(dim, index, tensor) -&gt; Tensor</p>
-<p>Copies the elements of <code>tensor</code> into the <code>self</code> tensor by selecting the indices in the order given in <code>index</code>. For example, if <code>dim == 0</code> and <code>index[i] == j</code>, then the <code>i</code> th row of <code>tensor</code> is copied to the <code>j</code> th row of <code>self</code>.</p>
-<p>The <code>dim</code> th dimension of <code>tensor</code> must have the same size as the length of <code>index</code> (which must be a vector), and all other dimensions must match <code>self</code>, or an error will be raised.</p>
+<p>Copies the elements of <code>tensor</code> into the <code>self</code>
+tensor by selecting the indices in the order given in
+<code>index</code>. For example, if <code>dim == 0</code> and
+<code>index[i] == j</code>, then the <code>i</code> th row of
+<code>tensor</code> is copied to the <code>j</code> th row of
+<code>self</code>.</p>
+<p>The <code>dim</code> th dimension of <code>tensor</code> must have
+the same size as the length of <code>index</code> (which must be a
+vector), and all other dimensions must match <code>self</code>, or an
+error will be raised.</p>
 <div class="section level4">
 <h4 id="arguments-20">Arguments:<a class="anchor" aria-label="anchor" href="#arguments-20"></a>
 </h4>
 <ul>
 <li>dim (int): dimension along which to index</li>
-<li>index (LongTensor): indices of <code>tensor</code> to select from</li>
+<li>index (LongTensor): indices of <code>tensor</code> to select
+from</li>
 <li>tensor (Tensor): the tensor containing values to copy</li>
 </ul>
 </div>
@@ -1474,19 +1656,24 @@ f(X=k) = p^{k - 1} (1 - p)
 <h2 id="index_fill">index_fill<a class="anchor" aria-label="anchor" href="#index_fill"></a>
 </h2>
 <p>index_fill(tensor1, dim, index, value) -&gt; Tensor</p>
-<p>Out-of-place version of <code>$index_fill_</code>. <code>tensor1</code> corresponds to <code>self</code> in <code>$index_fill_</code>.</p>
+<p>Out-of-place version of <code>$index_fill_</code>.
+<code>tensor1</code> corresponds to <code>self</code> in
+<code>$index_fill_</code>.</p>
 </div>
 <div class="section level2">
 <h2 id="index_fill_">index_fill_<a class="anchor" aria-label="anchor" href="#index_fill_"></a>
 </h2>
 <p>index_fill_(dim, index, val) -&gt; Tensor</p>
-<p>Fills the elements of the <code>self</code> tensor with value <code>val</code> by selecting the indices in the order given in <code>index</code>.</p>
+<p>Fills the elements of the <code>self</code> tensor with value
+<code>val</code> by selecting the indices in the order given in
+<code>index</code>.</p>
 <div class="section level4">
 <h4 id="arguments-21">Arguments:<a class="anchor" aria-label="anchor" href="#arguments-21"></a>
 </h4>
 <ul>
 <li>dim (int): dimension along which to index</li>
-<li>index (LongTensor): indices of <code>self</code> tensor to fill in</li>
+<li>index (LongTensor): indices of <code>self</code> tensor to fill
+in</li>
 <li>val (float): the value to fill with</li>
 </ul>
 </div>
@@ -1503,19 +1690,28 @@ f(X=k) = p^{k - 1} (1 - p)
 <h2 id="index_put">index_put<a class="anchor" aria-label="anchor" href="#index_put"></a>
 </h2>
 <p>index_put(tensor1, indices, value, accumulate=FALSE) -&gt; Tensor</p>
-<p>Out-place version of <code>$index_put_</code>. <code>tensor1</code> corresponds to <code>self</code> in <code>$index_put_</code>.</p>
+<p>Out-place version of <code>$index_put_</code>. <code>tensor1</code>
+corresponds to <code>self</code> in <code>$index_put_</code>.</p>
 </div>
 <div class="section level2">
 <h2 id="index_put_">index_put_<a class="anchor" aria-label="anchor" href="#index_put_"></a>
 </h2>
 <p>index_put_(indices, value, accumulate=FALSE) -&gt; Tensor</p>
-<p>Puts values from the tensor <code>value</code> into the tensor <code>self</code> using the indices specified in <code>indices</code> (which is a tuple of Tensors). The expression <code>tensor.index_put_(indices, value)</code> is equivalent to <code>tensor[indices] = value</code>. Returns <code>self</code>.</p>
-<p>If <code>accumulate</code> is <code>TRUE</code>, the elements in <code>value</code> are added to <code>self</code>. If accumulate is <code>FALSE</code>, the behavior is undefined if indices contain duplicate elements.</p>
+<p>Puts values from the tensor <code>value</code> into the tensor
+<code>self</code> using the indices specified in <code>indices</code>
+(which is a tuple of Tensors). The expression
+<code>tensor.index_put_(indices, value)</code> is equivalent to
+<code>tensor[indices] = value</code>. Returns <code>self</code>.</p>
+<p>If <code>accumulate</code> is <code>TRUE</code>, the elements in
+<code>value</code> are added to <code>self</code>. If accumulate is
+<code>FALSE</code>, the behavior is undefined if indices contain
+duplicate elements.</p>
 <div class="section level4">
 <h4 id="arguments-22">Arguments:<a class="anchor" aria-label="anchor" href="#arguments-22"></a>
 </h4>
 <ul>
-<li>indices (tuple of LongTensor): tensors used to index into <code>self</code>.</li>
+<li>indices (tuple of LongTensor): tensors used to index into
+<code>self</code>.</li>
 <li>value (Tensor): tensor of same dtype as <code>self</code>.</li>
 <li>accumulate (bool): whether to accumulate into self</li>
 </ul>
@@ -1531,24 +1727,29 @@ f(X=k) = p^{k - 1} (1 - p)
 <h2 id="indices">indices<a class="anchor" aria-label="anchor" href="#indices"></a>
 </h2>
 <p>indices() -&gt; Tensor</p>
-<p>If <code>self</code> is a sparse COO tensor (i.e., with <code>torch_sparse_coo</code> layout), this returns a view of the contained indices tensor. Otherwise, this throws an error.</p>
+<p>If <code>self</code> is a sparse COO tensor (i.e., with
+<code>torch_sparse_coo</code> layout), this returns a view of the
+contained indices tensor. Otherwise, this throws an error.</p>
 <p>See also <code>Tensor.values</code>.</p>
 <div class="section level4">
 <h4 id="note-4">Note:<a class="anchor" aria-label="anchor" href="#note-4"></a>
 </h4>
-<p>This method can only be called on a coalesced sparse tensor. See <code>Tensor.coalesce</code> for details.</p>
+<p>This method can only be called on a coalesced sparse tensor. See
+<code>Tensor.coalesce</code> for details.</p>
 </div>
 </div>
 <div class="section level2">
 <h2 id="int">int<a class="anchor" aria-label="anchor" href="#int"></a>
 </h2>
 <p>int(memory_format=torch_preserve_format) -&gt; Tensor</p>
-<p><code>self$int()</code> is equivalent to <code>self$to(torch_int32)</code>. See [to()].</p>
+<p><code>self$int()</code> is equivalent to
+<code>self$to(torch_int32)</code>. See [to()].</p>
 <div class="section level4">
 <h4 id="arguments-23">Arguments:<a class="anchor" aria-label="anchor" href="#arguments-23"></a>
 </h4>
 <ul>
-<li>memory_format (<code>torch_memory_format</code>, optional): the desired memory format of</li>
+<li>memory_format (<code>torch_memory_format</code>, optional): the
+desired memory format of</li>
 <li>returned Tensor. Default: <code>torch_preserve_format</code>.</li>
 </ul>
 </div>
@@ -1557,7 +1758,9 @@ f(X=k) = p^{k - 1} (1 - p)
 <h2 id="int_repr">int_repr<a class="anchor" aria-label="anchor" href="#int_repr"></a>
 </h2>
 <p>int_repr() -&gt; Tensor</p>
-<p>Given a quantized Tensor, <code>self$int_repr()</code> returns a CPU Tensor with uint8_t as data type that stores the underlying uint8_t values of the given Tensor.</p>
+<p>Given a quantized Tensor, <code>self$int_repr()</code> returns a CPU
+Tensor with uint8_t as data type that stores the underlying uint8_t
+values of the given Tensor.</p>
 </div>
 <div class="section level2">
 <h2 id="inverse">inverse<a class="anchor" aria-label="anchor" href="#inverse"></a>
@@ -1568,25 +1771,29 @@ f(X=k) = p^{k - 1} (1 - p)
 <div class="section level2">
 <h2 id="irfft">irfft<a class="anchor" aria-label="anchor" href="#irfft"></a>
 </h2>
-<p>irfft(signal_ndim, normalized=FALSE, onesided=TRUE, signal_sizes=NULL) -&gt; Tensor</p>
+<p>irfft(signal_ndim, normalized=FALSE, onesided=TRUE,
+signal_sizes=NULL) -&gt; Tensor</p>
 <p>See <code>?torch_irfft</code></p>
 </div>
 <div class="section level2">
 <h2 id="is_complex">is_complex<a class="anchor" aria-label="anchor" href="#is_complex"></a>
 </h2>
 <p>is_complex() -&gt; bool</p>
-<p>Returns TRUE if the data type of <code>self</code> is a complex data type.</p>
+<p>Returns TRUE if the data type of <code>self</code> is a complex data
+type.</p>
 </div>
 <div class="section level2">
 <h2 id="is_contiguous">is_contiguous<a class="anchor" aria-label="anchor" href="#is_contiguous"></a>
 </h2>
 <p>is_contiguous(memory_format=torch_contiguous_format) -&gt; bool</p>
-<p>Returns TRUE if <code>self</code> tensor is contiguous in memory in the order specified by memory format.</p>
+<p>Returns TRUE if <code>self</code> tensor is contiguous in memory in
+the order specified by memory format.</p>
 <div class="section level4">
 <h4 id="arguments-24">Arguments:<a class="anchor" aria-label="anchor" href="#arguments-24"></a>
 </h4>
 <ul>
-<li>memory_format (<code>torch_memory_format</code>, optional): Specifies memory allocation</li>
+<li>memory_format (<code>torch_memory_format</code>, optional):
+Specifies memory allocation</li>
 <li>order. Default: <code>torch_contiguous_format</code>.</li>
 </ul>
 </div>
@@ -1594,20 +1801,28 @@ f(X=k) = p^{k - 1} (1 - p)
 <div class="section level2">
 <h2 id="is_cuda">is_cuda<a class="anchor" aria-label="anchor" href="#is_cuda"></a>
 </h2>
-<p>Is <code>TRUE</code> if the Tensor is stored on the GPU, <code>FALSE</code> otherwise.</p>
+<p>Is <code>TRUE</code> if the Tensor is stored on the GPU,
+<code>FALSE</code> otherwise.</p>
 </div>
 <div class="section level2">
 <h2 id="is_floating_point">is_floating_point<a class="anchor" aria-label="anchor" href="#is_floating_point"></a>
 </h2>
 <p>is_floating_point() -&gt; bool</p>
-<p>Returns TRUE if the data type of <code>self</code> is a floating point data type.</p>
+<p>Returns TRUE if the data type of <code>self</code> is a floating
+point data type.</p>
 </div>
 <div class="section level2">
 <h2 id="is_leaf">is_leaf<a class="anchor" aria-label="anchor" href="#is_leaf"></a>
 </h2>
-<p>All Tensors that have <code>requires_grad</code> which is <code>FALSE</code> will be leaf Tensors by convention.</p>
-<p>For Tensors that have <code>requires_grad</code> which is <code>TRUE</code>, they will be leaf Tensors if they were created by the user. This means that they are not the result of an operation and so <code>grad_fn</code> is NULL.</p>
-<p>Only leaf Tensors will have their <code>grad</code> populated during a call to [backward()]. To get <code>grad</code> populated for non-leaf Tensors, you can use [retain_grad()].</p>
+<p>All Tensors that have <code>requires_grad</code> which is
+<code>FALSE</code> will be leaf Tensors by convention.</p>
+<p>For Tensors that have <code>requires_grad</code> which is
+<code>TRUE</code>, they will be leaf Tensors if they were created by the
+user. This means that they are not the result of an operation and so
+<code>grad_fn</code> is NULL.</p>
+<p>Only leaf Tensors will have their <code>grad</code> populated during
+a call to [backward()]. To get <code>grad</code> populated for non-leaf
+Tensors, you can use [retain_grad()].</p>
 <div class="section level4">
 <h4 id="examples-14">Examples:<a class="anchor" aria-label="anchor" href="#examples-14"></a>
 </h4>
@@ -1643,7 +1858,9 @@ f(X=k) = p^{k - 1} (1 - p)
 <div class="section level2">
 <h2 id="is_meta">is_meta<a class="anchor" aria-label="anchor" href="#is_meta"></a>
 </h2>
-<p>Is <code>TRUE</code> if the Tensor is a meta tensor, <code>FALSE</code> otherwise. Meta tensors are like normal tensors, but they carry no data.</p>
+<p>Is <code>TRUE</code> if the Tensor is a meta tensor,
+<code>FALSE</code> otherwise. Meta tensors are like normal tensors, but
+they carry no data.</p>
 </div>
 <div class="section level2">
 <h2 id="is_pinned">is_pinned<a class="anchor" aria-label="anchor" href="#is_pinned"></a>
@@ -1653,13 +1870,15 @@ f(X=k) = p^{k - 1} (1 - p)
 <div class="section level2">
 <h2 id="is_quantized">is_quantized<a class="anchor" aria-label="anchor" href="#is_quantized"></a>
 </h2>
-<p>Is <code>TRUE</code> if the Tensor is quantized, <code>FALSE</code> otherwise.</p>
+<p>Is <code>TRUE</code> if the Tensor is quantized, <code>FALSE</code>
+otherwise.</p>
 </div>
 <div class="section level2">
 <h2 id="is_set_to">is_set_to<a class="anchor" aria-label="anchor" href="#is_set_to"></a>
 </h2>
 <p>is_set_to(tensor) -&gt; bool</p>
-<p>Returns TRUE if this object refers to the same <code>THTensor</code> object from the Torch C API as the given tensor.</p>
+<p>Returns TRUE if this object refers to the same <code>THTensor</code>
+object from the Torch C API as the given tensor.</p>
 </div>
 <div class="section level2">
 <h2 id="is_shared">is_shared<a class="anchor" aria-label="anchor" href="#is_shared"></a>
@@ -1671,12 +1890,14 @@ f(X=k) = p^{k - 1} (1 - p)
 <h2 id="is_signed">is_signed<a class="anchor" aria-label="anchor" href="#is_signed"></a>
 </h2>
 <p>is_signed() -&gt; bool</p>
-<p>Returns TRUE if the data type of <code>self</code> is a signed data type.</p>
+<p>Returns TRUE if the data type of <code>self</code> is a signed data
+type.</p>
 </div>
 <div class="section level2">
 <h2 id="isclose">isclose<a class="anchor" aria-label="anchor" href="#isclose"></a>
 </h2>
-<p>isclose(other, rtol=1e-05, atol=1e-08, equal_nan=FALSE) -&gt; Tensor</p>
+<p>isclose(other, rtol=1e-05, atol=1e-08, equal_nan=FALSE) -&gt;
+Tensor</p>
 <p>See <code><a href="../../reference/torch_isclose.html">?torch_isclose</a></code></p>
 </div>
 <div class="section level2">
@@ -1702,7 +1923,9 @@ f(X=k) = p^{k - 1} (1 - p)
 </h2>
 <p>See <code><a href="../../reference/torch_istft.html">?torch_istft</a></code> ## item</p>
 <p>item() -&gt; number</p>
-<p>Returns the value of this tensor as a standard Python number. This only works for tensors with one element. For other cases, see <code>$tolist</code>.</p>
+<p>Returns the value of this tensor as a standard Python number. This
+only works for tensors with one element. For other cases, see
+<code>$tolist</code>.</p>
 <p>This operation is not differentiable.</p>
 <div class="section level4">
 <h4 id="examples-15">Examples:<a class="anchor" aria-label="anchor" href="#examples-15"></a>
@@ -1806,9 +2029,15 @@ f(X=k) = p^{k - 1} (1 - p)
 <h2 id="log_normal_">log_normal_<a class="anchor" aria-label="anchor" href="#log_normal_"></a>
 </h2>
 <p>log_normal_(mean=1, std=2, *, generator=NULL)</p>
-<p>Fills <code>self</code> tensor with numbers samples from the log-normal distribution parameterized by the given mean <code>\mu</code> and standard deviation <code>\sigma</code>. Note that <code>mean</code> and <code>std</code> are the mean and standard deviation of the underlying normal distribution, and not of the returned distribution:</p>
+<p>Fills <code>self</code> tensor with numbers samples from the
+log-normal distribution parameterized by the given mean <code>\mu</code>
+and standard deviation <code>\sigma</code>. Note that <code>mean</code>
+and <code>std</code> are the mean and standard deviation of the
+underlying normal distribution, and not of the returned
+distribution:</p>
 <p><span class="math display">\[
-f(x) = \dfrac{1}{x \sigma \sqrt{2\pi}}\ e^{-\frac{(\ln x - \mu)^2}{2\sigma^2}}
+f(x) = \dfrac{1}{x \sigma \sqrt{2\pi}}\ e^{-\frac{(\ln x -
+\mu)^2}{2\sigma^2}}
 \]</span></p>
 </div>
 <div class="section level2">
@@ -1893,12 +2122,14 @@ f(x) = \dfrac{1}{x \sigma \sqrt{2\pi}}\ e^{-\frac{(\ln x - \mu)^2}{2\sigma^2}}
 <h2 id="long">long<a class="anchor" aria-label="anchor" href="#long"></a>
 </h2>
 <p>long(memory_format=torch_preserve_format) -&gt; Tensor</p>
-<p><code>self$long()</code> is equivalent to <code>self$to(torch_int64)</code>. See [to()].</p>
+<p><code>self$long()</code> is equivalent to
+<code>self$to(torch_int64)</code>. See [to()].</p>
 <div class="section level4">
 <h4 id="arguments-25">Arguments:<a class="anchor" aria-label="anchor" href="#arguments-25"></a>
 </h4>
 <ul>
-<li>memory_format (<code>torch_memory_format</code>, optional): the desired memory format of</li>
+<li>memory_format (<code>torch_memory_format</code>, optional): the
+desired memory format of</li>
 <li>returned Tensor. Default: <code>torch_preserve_format</code>.</li>
 </ul>
 </div>
@@ -1932,7 +2163,10 @@ f(x) = \dfrac{1}{x \sigma \sqrt{2\pi}}\ e^{-\frac{(\ln x - \mu)^2}{2\sigma^2}}
 <h2 id="map_">map_<a class="anchor" aria-label="anchor" href="#map_"></a>
 </h2>
 <p>map_(tensor, callable)</p>
-<p>Applies <code>callable</code> for each element in <code>self</code> tensor and the given <code>tensor</code> and stores the results in <code>self</code> tensor. <code>self</code> tensor and the given <code>tensor</code> must be broadcastable.</p>
+<p>Applies <code>callable</code> for each element in <code>self</code>
+tensor and the given <code>tensor</code> and stores the results in
+<code>self</code> tensor. <code>self</code> tensor and the given
+<code>tensor</code> must be broadcastable.</p>
 <p>The <code>callable</code> should have the signature:</p>
 <p><code>callable(a, b) -&gt; number</code></p>
 </div>
@@ -1946,7 +2180,10 @@ f(x) = \dfrac{1}{x \sigma \sqrt{2\pi}}\ e^{-\frac{(\ln x - \mu)^2}{2\sigma^2}}
 <h2 id="masked_fill_">masked_fill_<a class="anchor" aria-label="anchor" href="#masked_fill_"></a>
 </h2>
 <p>masked_fill_(mask, value)</p>
-<p>Fills elements of <code>self</code> tensor with <code>value</code> where <code>mask</code> is TRUE. The shape of <code>mask</code> must be <code>broadcastable &lt;broadcasting-semantics&gt;</code> with the shape of the underlying tensor.</p>
+<p>Fills elements of <code>self</code> tensor with <code>value</code>
+where <code>mask</code> is TRUE. The shape of <code>mask</code> must be
+<code>broadcastable &lt;broadcasting-semantics&gt;</code> with the shape
+of the underlying tensor.</p>
 <div class="section level4">
 <h4 id="arguments-26">Arguments:<a class="anchor" aria-label="anchor" href="#arguments-26"></a>
 </h4>
@@ -1966,7 +2203,12 @@ f(x) = \dfrac{1}{x \sigma \sqrt{2\pi}}\ e^{-\frac{(\ln x - \mu)^2}{2\sigma^2}}
 <h2 id="masked_scatter_">masked_scatter_<a class="anchor" aria-label="anchor" href="#masked_scatter_"></a>
 </h2>
 <p>masked_scatter_(mask, source)</p>
-<p>Copies elements from <code>source</code> into <code>self</code> tensor at positions where the <code>mask</code> is TRUE. The shape of <code>mask</code> must be :ref:<code>broadcastable &lt;broadcasting-semantics&gt;</code> with the shape of the underlying tensor. The <code>source</code> should have at least as many elements as the number of ones in <code>mask</code></p>
+<p>Copies elements from <code>source</code> into <code>self</code>
+tensor at positions where the <code>mask</code> is TRUE. The shape of
+<code>mask</code> must be
+:ref:<code>broadcastable &lt;broadcasting-semantics&gt;</code> with the
+shape of the underlying tensor. The <code>source</code> should have at
+least as many elements as the number of ones in <code>mask</code></p>
 <div class="section level4">
 <h4 id="arguments-27">Arguments:<a class="anchor" aria-label="anchor" href="#arguments-27"></a>
 </h4>
@@ -1978,7 +2220,8 @@ f(x) = \dfrac{1}{x \sigma \sqrt{2\pi}}\ e^{-\frac{(\ln x - \mu)^2}{2\sigma^2}}
 <div class="section level4">
 <h4 id="note-5">Note:<a class="anchor" aria-label="anchor" href="#note-5"></a>
 </h4>
-<p>The <code>mask</code> operates on the <code>self</code> tensor, not on the given <code>source</code> tensor.</p>
+<p>The <code>mask</code> operates on the <code>self</code> tensor, not
+on the given <code>source</code> tensor.</p>
 </div>
 </div>
 <div class="section level2">
@@ -2050,7 +2293,8 @@ f(x) = \dfrac{1}{x \sigma \sqrt{2\pi}}\ e^{-\frac{(\ln x - \mu)^2}{2\sigma^2}}
 <div class="section level2">
 <h2 id="multinomial">multinomial<a class="anchor" aria-label="anchor" href="#multinomial"></a>
 </h2>
-<p>multinomial(num_samples, replacement=FALSE, *, generator=NULL) -&gt; Tensor</p>
+<p>multinomial(num_samples, replacement=FALSE, *, generator=NULL) -&gt;
+Tensor</p>
 <p>See <code><a href="../../reference/torch_multinomial.html">?torch_multinomial</a></code></p>
 </div>
 <div class="section level2">
@@ -2075,8 +2319,12 @@ f(x) = \dfrac{1}{x \sigma \sqrt{2\pi}}\ e^{-\frac{(\ln x - \mu)^2}{2\sigma^2}}
 <h2 id="names">names<a class="anchor" aria-label="anchor" href="#names"></a>
 </h2>
 <p>Stores names for each of this tensor’s dimensions.</p>
-<p><code>names[idx]</code> corresponds to the name of tensor dimension <code>idx</code>. Names are either a string if the dimension is named or <code>NULL</code> if the dimension is unnamed.</p>
-<p>Dimension names may contain characters or underscore. Furthermore, a dimension name must be a valid Python variable name (i.e., does not start with underscore).</p>
+<p><code>names[idx]</code> corresponds to the name of tensor dimension
+<code>idx</code>. Names are either a string if the dimension is named or
+<code>NULL</code> if the dimension is unnamed.</p>
+<p>Dimension names may contain characters or underscore. Furthermore, a
+dimension name must be a valid Python variable name (i.e., does not
+start with underscore).</p>
 <p>Tensors may not have two named dimensions with the same name.</p>
 <div class="section level4">
 <h4 id="warning-4">Warning:<a class="anchor" aria-label="anchor" href="#warning-4"></a>
@@ -2102,7 +2350,12 @@ f(x) = \dfrac{1}{x \sigma \sqrt{2\pi}}\ e^{-\frac{(\ln x - \mu)^2}{2\sigma^2}}
 <h2 id="narrow_copy">narrow_copy<a class="anchor" aria-label="anchor" href="#narrow_copy"></a>
 </h2>
 <p>narrow_copy(dimension, start, length) -&gt; Tensor</p>
-<p>Same as <code>Tensor.narrow</code> except returning a copy rather than shared storage. This is primarily for sparse tensors, which do not have a shared-storage narrow method. Calling <code>narrow_copy` with</code>dimemsion &gt; self<span class="math inline">\(sparse_dim()`` will return a copy with the relevant dense dimension narrowed, and ``self\)</span>shape`` updated accordingly.</p>
+<p>Same as <code>Tensor.narrow</code> except returning a copy rather
+than shared storage. This is primarily for sparse tensors, which do not
+have a shared-storage narrow method. Calling
+<code>narrow_copy` with</code>dimemsion &gt; self<span class="math inline">\(sparse_dim()`` will return a copy with the
+relevant dense dimension narrowed, and ``self\)</span>shape`` updated
+accordingly.</p>
 </div>
 <div class="section level2">
 <h2 id="ndim">ndim<a class="anchor" aria-label="anchor" href="#ndim"></a>
@@ -2148,15 +2401,24 @@ f(x) = \dfrac{1}{x \sigma \sqrt{2\pi}}\ e^{-\frac{(\ln x - \mu)^2}{2\sigma^2}}
 <div class="section level2">
 <h2 id="new_empty">new_empty<a class="anchor" aria-label="anchor" href="#new_empty"></a>
 </h2>
-<p>new_empty(size, dtype=NULL, device=NULL, requires_grad=FALSE) -&gt; Tensor</p>
-<p>Returns a Tensor of size <code>size</code> filled with uninitialized data. By default, the returned Tensor has the same <code>torch_dtype</code> and <code>torch_device</code> as this tensor.</p>
+<p>new_empty(size, dtype=NULL, device=NULL, requires_grad=FALSE) -&gt;
+Tensor</p>
+<p>Returns a Tensor of size <code>size</code> filled with uninitialized
+data. By default, the returned Tensor has the same
+<code>torch_dtype</code> and <code>torch_device</code> as this
+tensor.</p>
 <div class="section level4">
 <h4 id="arguments-28">Arguments:<a class="anchor" aria-label="anchor" href="#arguments-28"></a>
 </h4>
 <ul>
-<li>dtype (<code>torch_dtype</code>, optional): the desired type of returned tensor. Default: if NULL, same <code>torch_dtype</code> as this tensor.</li>
-<li>device (<code>torch_device</code>, optional): the desired device of returned tensor. Default: if NULL, same <code>torch_device</code> as this tensor.</li>
-<li>requires_grad (bool, optional): If autograd should record operations on the</li>
+<li>dtype (<code>torch_dtype</code>, optional): the desired type of
+returned tensor. Default: if NULL, same <code>torch_dtype</code> as this
+tensor.</li>
+<li>device (<code>torch_device</code>, optional): the desired device of
+returned tensor. Default: if NULL, same <code>torch_device</code> as
+this tensor.</li>
+<li>requires_grad (bool, optional): If autograd should record operations
+on the</li>
 <li>returned tensor. Default: <code>FALSE</code>.</li>
 </ul>
 </div>
@@ -2171,16 +2433,25 @@ f(x) = \dfrac{1}{x \sigma \sqrt{2\pi}}\ e^{-\frac{(\ln x - \mu)^2}{2\sigma^2}}
 <div class="section level2">
 <h2 id="new_full">new_full<a class="anchor" aria-label="anchor" href="#new_full"></a>
 </h2>
-<p>new_full(size, fill_value, dtype=NULL, device=NULL, requires_grad=FALSE) -&gt; Tensor</p>
-<p>Returns a Tensor of size <code>size</code> filled with <code>fill_value</code>. By default, the returned Tensor has the same <code>torch_dtype</code> and <code>torch_device</code> as this tensor.</p>
+<p>new_full(size, fill_value, dtype=NULL, device=NULL,
+requires_grad=FALSE) -&gt; Tensor</p>
+<p>Returns a Tensor of size <code>size</code> filled with
+<code>fill_value</code>. By default, the returned Tensor has the same
+<code>torch_dtype</code> and <code>torch_device</code> as this
+tensor.</p>
 <div class="section level4">
 <h4 id="arguments-29">Arguments:<a class="anchor" aria-label="anchor" href="#arguments-29"></a>
 </h4>
 <ul>
 <li>fill_value (scalar): the number to fill the output tensor with.</li>
-<li>dtype (<code>torch_dtype</code>, optional): the desired type of returned tensor. Default: if NULL, same <code>torch_dtype</code> as this tensor.</li>
-<li>device (<code>torch_device</code>, optional): the desired device of returned tensor. Default: if NULL, same <code>torch_device</code> as this tensor.</li>
-<li>requires_grad (bool, optional): If autograd should record operations on the</li>
+<li>dtype (<code>torch_dtype</code>, optional): the desired type of
+returned tensor. Default: if NULL, same <code>torch_dtype</code> as this
+tensor.</li>
+<li>device (<code>torch_device</code>, optional): the desired device of
+returned tensor. Default: if NULL, same <code>torch_device</code> as
+this tensor.</li>
+<li>requires_grad (bool, optional): If autograd should record operations
+on the</li>
 <li>returned tensor. Default: <code>FALSE</code>.</li>
 </ul>
 </div>
@@ -2195,17 +2466,27 @@ f(x) = \dfrac{1}{x \sigma \sqrt{2\pi}}\ e^{-\frac{(\ln x - \mu)^2}{2\sigma^2}}
 <div class="section level2">
 <h2 id="new_ones">new_ones<a class="anchor" aria-label="anchor" href="#new_ones"></a>
 </h2>
-<p>new_ones(size, dtype=NULL, device=NULL, requires_grad=FALSE) -&gt; Tensor</p>
-<p>Returns a Tensor of size <code>size</code> filled with <code>1</code>. By default, the returned Tensor has the same <code>torch_dtype</code> and <code>torch_device</code> as this tensor.</p>
+<p>new_ones(size, dtype=NULL, device=NULL, requires_grad=FALSE) -&gt;
+Tensor</p>
+<p>Returns a Tensor of size <code>size</code> filled with
+<code>1</code>. By default, the returned Tensor has the same
+<code>torch_dtype</code> and <code>torch_device</code> as this
+tensor.</p>
 <div class="section level4">
 <h4 id="arguments-30">Arguments:<a class="anchor" aria-label="anchor" href="#arguments-30"></a>
 </h4>
 <ul>
-<li>size (int…): a list, tuple, or <code>torch_Size</code> of integers defining the</li>
+<li>size (int…): a list, tuple, or <code>torch_Size</code> of integers
+defining the</li>
 <li>shape of the output tensor.</li>
-<li>dtype (<code>torch_dtype</code>, optional): the desired type of returned tensor. Default: if NULL, same <code>torch_dtype</code> as this tensor.</li>
-<li>device (<code>torch_device</code>, optional): the desired device of returned tensor. Default: if NULL, same <code>torch_device</code> as this tensor.</li>
-<li>requires_grad (bool, optional): If autograd should record operations on the</li>
+<li>dtype (<code>torch_dtype</code>, optional): the desired type of
+returned tensor. Default: if NULL, same <code>torch_dtype</code> as this
+tensor.</li>
+<li>device (<code>torch_device</code>, optional): the desired device of
+returned tensor. Default: if NULL, same <code>torch_device</code> as
+this tensor.</li>
+<li>requires_grad (bool, optional): If autograd should record operations
+on the</li>
 <li>returned tensor. Default: <code>FALSE</code>.</li>
 </ul>
 </div>
@@ -2220,22 +2501,42 @@ f(x) = \dfrac{1}{x \sigma \sqrt{2\pi}}\ e^{-\frac{(\ln x - \mu)^2}{2\sigma^2}}
 <div class="section level2">
 <h2 id="new_tensor">new_tensor<a class="anchor" aria-label="anchor" href="#new_tensor"></a>
 </h2>
-<p>new_tensor(data, dtype=NULL, device=NULL, requires_grad=FALSE) -&gt; Tensor</p>
-<p>Returns a new Tensor with <code>data</code> as the tensor data. By default, the returned Tensor has the same <code>torch_dtype</code> and <code>torch_device</code> as this tensor.</p>
+<p>new_tensor(data, dtype=NULL, device=NULL, requires_grad=FALSE) -&gt;
+Tensor</p>
+<p>Returns a new Tensor with <code>data</code> as the tensor data. By
+default, the returned Tensor has the same <code>torch_dtype</code> and
+<code>torch_device</code> as this tensor.</p>
 <div class="section level4">
 <h4 id="warning-5">Warning:<a class="anchor" aria-label="anchor" href="#warning-5"></a>
 </h4>
-<p><code>new_tensor</code> always copies <code>data(). If you have a Tensor</code>data` and want to avoid a copy, use [$requires_grad_()] or [$detach()]. If you have a numpy array and want to avoid a copy, use [torch_from_numpy()].</p>
-<p>When data is a tensor <code>x</code>, [new_tensor()()] reads out ‘the data’ from whatever it is passed, and constructs a leaf variable. Therefore <code>tensor$new_tensor(x)</code> is equivalent to <code>x$clone()$detach()</code> and <code>tensor$new_tensor(x, requires_grad=TRUE)</code> is equivalent to <code>x$clone()$detach()$requires_grad_(TRUE)</code>. The equivalents using <code>clone()</code> and <code><a href="https://rdrr.io/r/base/detach.html" class="external-link">detach()</a></code> are recommended.</p>
+<p><code>new_tensor</code> always copies
+<code>data(). If you have a Tensor</code>data` and want to avoid a copy,
+use [<span class="math inline">\(requires_grad_()] or
+[\)</span>detach()]. If you have a numpy array and want to avoid a copy,
+use [torch_from_numpy()].</p>
+<p>When data is a tensor <code>x</code>, [new_tensor()()] reads out ‘the
+data’ from whatever it is passed, and constructs a leaf variable.
+Therefore <code>tensor$new_tensor(x)</code> is equivalent to
+<code>x$clone()$detach()</code> and
+<code>tensor$new_tensor(x, requires_grad=TRUE)</code> is equivalent to
+<code>x$clone()$detach()$requires_grad_(TRUE)</code>. The equivalents
+using <code>clone()</code> and <code><a href="https://rdrr.io/r/base/detach.html" class="external-link">detach()</a></code> are
+recommended.</p>
 </div>
 <div class="section level4">
 <h4 id="arguments-31">Arguments:<a class="anchor" aria-label="anchor" href="#arguments-31"></a>
 </h4>
 <ul>
-<li>data (array_like): The returned Tensor copies <code>data</code>.</li>
-<li>dtype (<code>torch_dtype</code>, optional): the desired type of returned tensor. Default: if NULL, same <code>torch_dtype</code> as this tensor.</li>
-<li>device (<code>torch_device</code>, optional): the desired device of returned tensor. Default: if NULL, same <code>torch_device</code> as this tensor.</li>
-<li>requires_grad (bool, optional): If autograd should record operations on the</li>
+<li>data (array_like): The returned Tensor copies
+<code>data</code>.</li>
+<li>dtype (<code>torch_dtype</code>, optional): the desired type of
+returned tensor. Default: if NULL, same <code>torch_dtype</code> as this
+tensor.</li>
+<li>device (<code>torch_device</code>, optional): the desired device of
+returned tensor. Default: if NULL, same <code>torch_device</code> as
+this tensor.</li>
+<li>requires_grad (bool, optional): If autograd should record operations
+on the</li>
 <li>returned tensor. Default: <code>FALSE</code>.</li>
 </ul>
 </div>
@@ -2251,17 +2552,27 @@ f(x) = \dfrac{1}{x \sigma \sqrt{2\pi}}\ e^{-\frac{(\ln x - \mu)^2}{2\sigma^2}}
 <div class="section level2">
 <h2 id="new_zeros">new_zeros<a class="anchor" aria-label="anchor" href="#new_zeros"></a>
 </h2>
-<p>new_zeros(size, dtype=NULL, device=NULL, requires_grad=FALSE) -&gt; Tensor</p>
-<p>Returns a Tensor of size <code>size</code> filled with <code>0</code>. By default, the returned Tensor has the same <code>torch_dtype</code> and <code>torch_device</code> as this tensor.</p>
+<p>new_zeros(size, dtype=NULL, device=NULL, requires_grad=FALSE) -&gt;
+Tensor</p>
+<p>Returns a Tensor of size <code>size</code> filled with
+<code>0</code>. By default, the returned Tensor has the same
+<code>torch_dtype</code> and <code>torch_device</code> as this
+tensor.</p>
 <div class="section level4">
 <h4 id="arguments-32">Arguments:<a class="anchor" aria-label="anchor" href="#arguments-32"></a>
 </h4>
 <ul>
-<li>size (int…): a list, tuple, or <code>torch_Size</code> of integers defining the</li>
+<li>size (int…): a list, tuple, or <code>torch_Size</code> of integers
+defining the</li>
 <li>shape of the output tensor.</li>
-<li>dtype (<code>torch_dtype</code>, optional): the desired type of returned tensor. Default: if NULL, same <code>torch_dtype</code> as this tensor.</li>
-<li>device (<code>torch_device</code>, optional): the desired device of returned tensor. Default: if NULL, same <code>torch_device</code> as this tensor.</li>
-<li>requires_grad (bool, optional): If autograd should record operations on the</li>
+<li>dtype (<code>torch_dtype</code>, optional): the desired type of
+returned tensor. Default: if NULL, same <code>torch_dtype</code> as this
+tensor.</li>
+<li>device (<code>torch_device</code>, optional): the desired device of
+returned tensor. Default: if NULL, same <code>torch_device</code> as
+this tensor.</li>
+<li>requires_grad (bool, optional): If autograd should record operations
+on the</li>
 <li>returned tensor. Default: <code>FALSE</code>.</li>
 </ul>
 </div>
@@ -2284,7 +2595,9 @@ f(x) = \dfrac{1}{x \sigma \sqrt{2\pi}}\ e^{-\frac{(\ln x - \mu)^2}{2\sigma^2}}
 </h2>
 <p>See <code><a href="../../reference/torch_norm.html">?torch_norm</a></code> ## normal_</p>
 <p>normal_(mean=0, std=1, *, generator=NULL) -&gt; Tensor</p>
-<p>Fills <code>self</code> tensor with elements samples from the normal distribution parameterized by <code>mean</code> and <code>std</code>.</p>
+<p>Fills <code>self</code> tensor with elements samples from the normal
+distribution parameterized by <code>mean</code> and
+<code>std</code>.</p>
 </div>
 <div class="section level2">
 <h2 id="numel">numel<a class="anchor" aria-label="anchor" href="#numel"></a>
@@ -2296,7 +2609,11 @@ f(x) = \dfrac{1}{x \sigma \sqrt{2\pi}}\ e^{-\frac{(\ln x - \mu)^2}{2\sigma^2}}
 <h2 id="numpy">numpy<a class="anchor" aria-label="anchor" href="#numpy"></a>
 </h2>
 <p>numpy() -&gt; numpy.ndarray</p>
-<p>Returns <code>self</code> tensor as a NumPy :class:<code>ndarray</code>. This tensor and the returned <code>ndarray</code> share the same underlying storage. Changes to <code>self</code> tensor will be reflected in the :class:<code>ndarray</code> and vice versa.</p>
+<p>Returns <code>self</code> tensor as a NumPy
+:class:<code>ndarray</code>. This tensor and the returned
+<code>ndarray</code> share the same underlying storage. Changes to
+<code>self</code> tensor will be reflected in the
+:class:<code>ndarray</code> and vice versa.</p>
 </div>
 <div class="section level2">
 <h2 id="orgqr">orgqr<a class="anchor" aria-label="anchor" href="#orgqr"></a>
@@ -2314,7 +2631,8 @@ f(x) = \dfrac{1}{x \sigma \sqrt{2\pi}}\ e^{-\frac{(\ln x - \mu)^2}{2\sigma^2}}
 <h2 id="permute">permute<a class="anchor" aria-label="anchor" href="#permute"></a>
 </h2>
 <p>permute(*dims) -&gt; Tensor</p>
-<p>Returns a view of the original tensor with its dimensions permuted.</p>
+<p>Returns a view of the original tensor with its dimensions
+permuted.</p>
 <div class="section level4">
 <h4 id="arguments-33">Arguments:<a class="anchor" aria-label="anchor" href="#arguments-33"></a>
 </h4>
@@ -2377,8 +2695,13 @@ f(x) = \dfrac{1}{x \sigma \sqrt{2\pi}}\ e^{-\frac{(\ln x - \mu)^2}{2\sigma^2}}
 <h2 id="put_">put_<a class="anchor" aria-label="anchor" href="#put_"></a>
 </h2>
 <p>put_(indices, tensor, accumulate=FALSE) -&gt; Tensor</p>
-<p>Copies the elements from <code>tensor</code> into the positions specified by indices. For the purpose of indexing, the <code>self</code> tensor is treated as if it were a 1-D tensor.</p>
-<p>If <code>accumulate</code> is <code>TRUE</code>, the elements in <code>tensor</code> are added to <code>self</code>. If accumulate is <code>FALSE</code>, the behavior is undefined if indices contain duplicate elements.</p>
+<p>Copies the elements from <code>tensor</code> into the positions
+specified by indices. For the purpose of indexing, the <code>self</code>
+tensor is treated as if it were a 1-D tensor.</p>
+<p>If <code>accumulate</code> is <code>TRUE</code>, the elements in
+<code>tensor</code> are added to <code>self</code>. If accumulate is
+<code>FALSE</code>, the behavior is undefined if indices contain
+duplicate elements.</p>
 <div class="section level4">
 <h4 id="arguments-34">Arguments:<a class="anchor" aria-label="anchor" href="#arguments-34"></a>
 </h4>
@@ -2400,31 +2723,41 @@ f(x) = \dfrac{1}{x \sigma \sqrt{2\pi}}\ e^{-\frac{(\ln x - \mu)^2}{2\sigma^2}}
 <h2 id="q_per_channel_axis">q_per_channel_axis<a class="anchor" aria-label="anchor" href="#q_per_channel_axis"></a>
 </h2>
 <p>q_per_channel_axis() -&gt; int</p>
-<p>Given a Tensor quantized by linear (affine) per-channel quantization, returns the index of dimension on which per-channel quantization is applied.</p>
+<p>Given a Tensor quantized by linear (affine) per-channel quantization,
+returns the index of dimension on which per-channel quantization is
+applied.</p>
 </div>
 <div class="section level2">
 <h2 id="q_per_channel_scales">q_per_channel_scales<a class="anchor" aria-label="anchor" href="#q_per_channel_scales"></a>
 </h2>
 <p>q_per_channel_scales() -&gt; Tensor</p>
-<p>Given a Tensor quantized by linear (affine) per-channel quantization, returns a Tensor of scales of the underlying quantizer. It has the number of elements that matches the corresponding dimensions (from q_per_channel_axis) of the tensor.</p>
+<p>Given a Tensor quantized by linear (affine) per-channel quantization,
+returns a Tensor of scales of the underlying quantizer. It has the
+number of elements that matches the corresponding dimensions (from
+q_per_channel_axis) of the tensor.</p>
 </div>
 <div class="section level2">
 <h2 id="q_per_channel_zero_points">q_per_channel_zero_points<a class="anchor" aria-label="anchor" href="#q_per_channel_zero_points"></a>
 </h2>
 <p>q_per_channel_zero_points() -&gt; Tensor</p>
-<p>Given a Tensor quantized by linear (affine) per-channel quantization, returns a tensor of zero_points of the underlying quantizer. It has the number of elements that matches the corresponding dimensions (from q_per_channel_axis) of the tensor.</p>
+<p>Given a Tensor quantized by linear (affine) per-channel quantization,
+returns a tensor of zero_points of the underlying quantizer. It has the
+number of elements that matches the corresponding dimensions (from
+q_per_channel_axis) of the tensor.</p>
 </div>
 <div class="section level2">
 <h2 id="q_scale">q_scale<a class="anchor" aria-label="anchor" href="#q_scale"></a>
 </h2>
 <p>q_scale() -&gt; float</p>
-<p>Given a Tensor quantized by linear(affine) quantization, returns the scale of the underlying quantizer().</p>
+<p>Given a Tensor quantized by linear(affine) quantization, returns the
+scale of the underlying quantizer().</p>
 </div>
 <div class="section level2">
 <h2 id="q_zero_point">q_zero_point<a class="anchor" aria-label="anchor" href="#q_zero_point"></a>
 </h2>
 <p>q_zero_point() -&gt; int</p>
-<p>Given a Tensor quantized by linear(affine) quantization, returns the zero_point of the underlying quantizer().</p>
+<p>Given a Tensor quantized by linear(affine) quantization, returns the
+zero_point of the underlying quantizer().</p>
 </div>
 <div class="section level2">
 <h2 id="qr">qr<a class="anchor" aria-label="anchor" href="#qr"></a>
@@ -2454,12 +2787,21 @@ f(x) = \dfrac{1}{x \sigma \sqrt{2\pi}}\ e^{-\frac{(\ln x - \mu)^2}{2\sigma^2}}
 <h2 id="random_">random_<a class="anchor" aria-label="anchor" href="#random_"></a>
 </h2>
 <p>random_(from=0, to=NULL, *, generator=NULL) -&gt; Tensor</p>
-<p>Fills <code>self</code> tensor with numbers sampled from the discrete uniform distribution over <code>[from, to - 1]</code>. If not specified, the values are usually only bounded by <code>self</code> tensor’s data type. However, for floating point types, if unspecified, range will be <code>[0, 2^mantissa]</code> to ensure that every value is representable. For example, <code>torch_tensor(1, dtype=torch_double).random_()</code> will be uniform in <code>[0, 2^53]</code>.</p>
+<p>Fills <code>self</code> tensor with numbers sampled from the discrete
+uniform distribution over <code>[from, to - 1]</code>. If not specified,
+the values are usually only bounded by <code>self</code> tensor’s data
+type. However, for floating point types, if unspecified, range will be
+<code>[0, 2^mantissa]</code> to ensure that every value is
+representable. For example,
+<code>torch_tensor(1, dtype=torch_double).random_()</code> will be
+uniform in <code>[0, 2^53]</code>.</p>
 </div>
 <div class="section level2">
 <h2 id="real">real<a class="anchor" aria-label="anchor" href="#real"></a>
 </h2>
-<p>Returns a new tensor containing real values of the <code>self</code> tensor. The returned tensor and <code>self</code> share the same underlying storage.</p>
+<p>Returns a new tensor containing real values of the <code>self</code>
+tensor. The returned tensor and <code>self</code> share the same
+underlying storage.</p>
 <div class="section level4">
 <h4 id="warning-6">Warning:<a class="anchor" aria-label="anchor" href="#warning-6"></a>
 </h4>
@@ -2490,25 +2832,40 @@ f(x) = \dfrac{1}{x \sigma \sqrt{2\pi}}\ e^{-\frac{(\ln x - \mu)^2}{2\sigma^2}}
 <h2 id="record_stream">record_stream<a class="anchor" aria-label="anchor" href="#record_stream"></a>
 </h2>
 <p>record_stream(stream)</p>
-<p>Ensures that the tensor memory is not reused for another tensor until all current work queued on <code>stream</code> are complete.</p>
+<p>Ensures that the tensor memory is not reused for another tensor until
+all current work queued on <code>stream</code> are complete.</p>
 <div class="section level4">
 <h4 id="note-6">Note:<a class="anchor" aria-label="anchor" href="#note-6"></a>
 </h4>
-<p>The caching allocator is aware of only the stream where a tensor was allocated. Due to the awareness, it already correctly manages the life cycle of tensors on only one stream. But if a tensor is used on a stream different from the stream of origin, the allocator might reuse the memory unexpectedly. Calling this method lets the allocator know which streams have used the tensor.</p>
+<p>The caching allocator is aware of only the stream where a tensor was
+allocated. Due to the awareness, it already correctly manages the life
+cycle of tensors on only one stream. But if a tensor is used on a stream
+different from the stream of origin, the allocator might reuse the
+memory unexpectedly. Calling this method lets the allocator know which
+streams have used the tensor.</p>
 </div>
 </div>
 <div class="section level2">
 <h2 id="refine_names">refine_names<a class="anchor" aria-label="anchor" href="#refine_names"></a>
 </h2>
-<p>Refines the dimension names of <code>self</code> according to <code>names</code>.</p>
-<p>Refining is a special case of renaming that “lifts” unnamed dimensions. A <code>NULL</code> dim can be refined to have any name; a named dim can only be refined to have the same name.</p>
-<p>Because named tensors can coexist with unnamed tensors, refining names gives a nice way to write named-tensor-aware code that works with both named and unnamed tensors.</p>
-<p><code>names</code> may contain up to one Ellipsis (<code>...</code>). The Ellipsis is expanded greedily; it is expanded in-place to fill <code>names</code> to the same length as <code>self$dim()</code> using names from the corresponding indices of <code>self$names</code>.</p>
+<p>Refines the dimension names of <code>self</code> according to
+<code>names</code>.</p>
+<p>Refining is a special case of renaming that “lifts” unnamed
+dimensions. A <code>NULL</code> dim can be refined to have any name; a
+named dim can only be refined to have the same name.</p>
+<p>Because named tensors can coexist with unnamed tensors, refining
+names gives a nice way to write named-tensor-aware code that works with
+both named and unnamed tensors.</p>
+<p><code>names</code> may contain up to one Ellipsis (<code>...</code>).
+The Ellipsis is expanded greedily; it is expanded in-place to fill
+<code>names</code> to the same length as <code>self$dim()</code> using
+names from the corresponding indices of <code>self$names</code>.</p>
 <div class="section level4">
 <h4 id="arguments-35">Arguments:<a class="anchor" aria-label="anchor" href="#arguments-35"></a>
 </h4>
 <ul>
-<li>names (iterable of str): The desired names of the output tensor. May contain up to one Ellipsis.</li>
+<li>names (iterable of str): The desired names of the output tensor. May
+contain up to one Ellipsis.</li>
 </ul>
 </div>
 <div class="section level4">
@@ -2524,10 +2881,13 @@ f(x) = \dfrac{1}{x \sigma \sqrt{2\pi}}\ e^{-\frac{(\ln x - \mu)^2}{2\sigma^2}}
 <h2 id="register_hook">register_hook<a class="anchor" aria-label="anchor" href="#register_hook"></a>
 </h2>
 <p>Registers a backward hook.</p>
-<p>The hook will be called every time a gradient with respect to the Tensor is computed. The hook should have the following signature::</p>
+<p>The hook will be called every time a gradient with respect to the
+Tensor is computed. The hook should have the following signature::</p>
 <p>hook(grad) -&gt; Tensor or NULL</p>
-<p>The hook should not modify its argument, but it can optionally return a new gradient which will be used in place of <code>grad</code>.</p>
-<p>This function returns a handle with a method <code>handle$remove()</code> that removes the hook from the module.</p>
+<p>The hook should not modify its argument, but it can optionally return
+a new gradient which will be used in place of <code>grad</code>.</p>
+<p>This function returns a handle with a method
+<code>handle$remove()</code> that removes the hook from the module.</p>
 <div class="section level4">
 <h4 id="example">Example<a class="anchor" aria-label="anchor" href="#example"></a>
 </h4>
@@ -2556,9 +2916,14 @@ f(x) = \dfrac{1}{x \sigma \sqrt{2\pi}}\ e^{-\frac{(\ln x - \mu)^2}{2\sigma^2}}
 </h2>
 <p>Renames dimension names of <code>self</code>.</p>
 <p>There are two main usages:</p>
-<p><code>self$rename(**rename_map)</code> returns a view on tensor that has dims renamed as specified in the mapping <code>rename_map</code>.</p>
-<p><code>self$rename(*names)</code> returns a view on tensor, renaming all dimensions positionally using <code>names</code>. Use <code>self$rename(NULL)</code> to drop names on a tensor.</p>
-<p>One cannot specify both positional args <code>names</code> and keyword args <code>rename_map</code>.</p>
+<p><code>self$rename(**rename_map)</code> returns a view on tensor that
+has dims renamed as specified in the mapping
+<code>rename_map</code>.</p>
+<p><code>self$rename(*names)</code> returns a view on tensor, renaming
+all dimensions positionally using <code>names</code>. Use
+<code>self$rename(NULL)</code> to drop names on a tensor.</p>
+<p>One cannot specify both positional args <code>names</code> and
+keyword args <code>rename_map</code>.</p>
 <div class="section level4">
 <h4 id="examples-26">Examples:<a class="anchor" aria-label="anchor" href="#examples-26"></a>
 </h4>
@@ -2589,12 +2954,14 @@ f(x) = \dfrac{1}{x \sigma \sqrt{2\pi}}\ e^{-\frac{(\ln x - \mu)^2}{2\sigma^2}}
 </h2>
 <p>repeat(*sizes) -&gt; Tensor</p>
 <p>Repeats this tensor along the specified dimensions.</p>
-<p>Unlike <code>$expand</code>, this function copies the tensor’s data.</p>
+<p>Unlike <code>$expand</code>, this function copies the tensor’s
+data.</p>
 <div class="section level4">
 <h4 id="arguments-36">Arguments:<a class="anchor" aria-label="anchor" href="#arguments-36"></a>
 </h4>
 <ul>
-<li>sizes (torch_Size or int…): The number of times to repeat this tensor along each</li>
+<li>sizes (torch_Size or int…): The number of times to repeat this
+tensor along each</li>
 <li>dimension</li>
 </ul>
 </div>
@@ -2616,24 +2983,35 @@ f(x) = \dfrac{1}{x \sigma \sqrt{2\pi}}\ e^{-\frac{(\ln x - \mu)^2}{2\sigma^2}}
 <div class="section level2">
 <h2 id="requires_grad">requires_grad<a class="anchor" aria-label="anchor" href="#requires_grad"></a>
 </h2>
-<p>Is <code>TRUE</code> if gradients need to be computed for this Tensor, <code>FALSE</code> otherwise.</p>
+<p>Is <code>TRUE</code> if gradients need to be computed for this
+Tensor, <code>FALSE</code> otherwise.</p>
 <div class="section level4">
 <h4 id="note-7">Note:<a class="anchor" aria-label="anchor" href="#note-7"></a>
 </h4>
-<p>The fact that gradients need to be computed for a Tensor do not mean that the <code>grad</code> attribute will be populated, see <code>is_leaf</code> for more details.</p>
+<p>The fact that gradients need to be computed for a Tensor do not mean
+that the <code>grad</code> attribute will be populated, see
+<code>is_leaf</code> for more details.</p>
 </div>
 </div>
 <div class="section level2">
 <h2 id="requires_grad_">requires_grad_<a class="anchor" aria-label="anchor" href="#requires_grad_"></a>
 </h2>
 <p>requires_grad_(requires_grad=TRUE) -&gt; Tensor</p>
-<p>Change if autograd should record operations on this tensor: sets this tensor’s <code>requires_grad</code> attribute in-place. Returns this tensor.</p>
-<p>[requires_grad_()]’s main use case is to tell autograd to begin recording operations on a Tensor <code>tensor</code>. If <code>tensor</code> has <code>requires_grad=FALSE</code> (because it was obtained through a DataLoader, or required preprocessing or initialization), <code>tensor.requires_grad_()</code> makes it so that autograd will begin to record operations on <code>tensor</code>.</p>
+<p>Change if autograd should record operations on this tensor: sets this
+tensor’s <code>requires_grad</code> attribute in-place. Returns this
+tensor.</p>
+<p>[requires_grad_()]’s main use case is to tell autograd to begin
+recording operations on a Tensor <code>tensor</code>. If
+<code>tensor</code> has <code>requires_grad=FALSE</code> (because it was
+obtained through a DataLoader, or required preprocessing or
+initialization), <code>tensor.requires_grad_()</code> makes it so that
+autograd will begin to record operations on <code>tensor</code>.</p>
 <div class="section level4">
 <h4 id="arguments-37">Arguments:<a class="anchor" aria-label="anchor" href="#arguments-37"></a>
 </h4>
 <ul>
-<li>requires_grad (bool): If autograd should record operations on this tensor. Default: <code>TRUE</code>.</li>
+<li>requires_grad (bool): If autograd should record operations on this
+tensor. Default: <code>TRUE</code>.</li>
 </ul>
 </div>
 <div class="section level4">
@@ -2658,7 +3036,10 @@ f(x) = \dfrac{1}{x \sigma \sqrt{2\pi}}\ e^{-\frac{(\ln x - \mu)^2}{2\sigma^2}}
 <h2 id="reshape">reshape<a class="anchor" aria-label="anchor" href="#reshape"></a>
 </h2>
 <p>reshape(*shape) -&gt; Tensor</p>
-<p>Returns a tensor with the same data and number of elements as <code>self</code> but with the specified shape. This method returns a view if <code>shape</code> is compatible with the current shape. See <code>$view</code> on when it is possible to return a view.</p>
+<p>Returns a tensor with the same data and number of elements as
+<code>self</code> but with the specified shape. This method returns a
+view if <code>shape</code> is compatible with the current shape. See
+<code>$view</code> on when it is possible to return a view.</p>
 <p>See <code><a href="../../reference/torch_reshape.html">?torch_reshape</a></code></p>
 <div class="section level4">
 <h4 id="arguments-38">Arguments:<a class="anchor" aria-label="anchor" href="#arguments-38"></a>
@@ -2672,8 +3053,13 @@ f(x) = \dfrac{1}{x \sigma \sqrt{2\pi}}\ e^{-\frac{(\ln x - \mu)^2}{2\sigma^2}}
 <h2 id="reshape_as">reshape_as<a class="anchor" aria-label="anchor" href="#reshape_as"></a>
 </h2>
 <p>reshape_as(other) -&gt; Tensor</p>
-<p>Returns this tensor as the same shape as <code>other</code>. <code>self$reshape_as(other)</code> is equivalent to <code>self$reshape(other.sizes())</code>. This method returns a view if <code>other.sizes()</code> is compatible with the current shape. See <code>$view</code> on when it is possible to return a view.</p>
-<p>Please see <code>reshape</code> for more information about <code>reshape</code>.</p>
+<p>Returns this tensor as the same shape as <code>other</code>.
+<code>self$reshape_as(other)</code> is equivalent to
+<code>self$reshape(other.sizes())</code>. This method returns a view if
+<code>other.sizes()</code> is compatible with the current shape. See
+<code>$view</code> on when it is possible to return a view.</p>
+<p>Please see <code>reshape</code> for more information about
+<code>reshape</code>.</p>
 <div class="section level4">
 <h4 id="arguments-39">Arguments:<a class="anchor" aria-label="anchor" href="#arguments-39"></a>
 </h4>
@@ -2686,19 +3072,34 @@ f(x) = \dfrac{1}{x \sigma \sqrt{2\pi}}\ e^{-\frac{(\ln x - \mu)^2}{2\sigma^2}}
 <div class="section level2">
 <h2 id="resize_">resize_<a class="anchor" aria-label="anchor" href="#resize_"></a>
 </h2>
-<p>resize_(*sizes, memory_format=torch_contiguous_format) -&gt; Tensor</p>
-<p>Resizes <code>self</code> tensor to the specified size. If the number of elements is larger than the current storage size, then the underlying storage is resized to fit the new number of elements. If the number of elements is smaller, the underlying storage is not changed. Existing elements are preserved but any new memory is uninitialized.</p>
+<p>resize_(*sizes, memory_format=torch_contiguous_format) -&gt;
+Tensor</p>
+<p>Resizes <code>self</code> tensor to the specified size. If the number
+of elements is larger than the current storage size, then the underlying
+storage is resized to fit the new number of elements. If the number of
+elements is smaller, the underlying storage is not changed. Existing
+elements are preserved but any new memory is uninitialized.</p>
 <div class="section level4">
 <h4 id="warning-7">Warning:<a class="anchor" aria-label="anchor" href="#warning-7"></a>
 </h4>
-<p>This is a low-level method. The storage is reinterpreted as C-contiguous, ignoring the current strides (unless the target size equals the current size, in which case the tensor is left unchanged). For most purposes, you will instead want to use <code>$view()</code>, which checks for contiguity, or <code>$reshape()</code>, which copies data if needed. To change the size in-place with custom strides, see <code>$set_()</code>.</p>
+<p>This is a low-level method. The storage is reinterpreted as
+C-contiguous, ignoring the current strides (unless the target size
+equals the current size, in which case the tensor is left unchanged).
+For most purposes, you will instead want to use <code>$view()</code>,
+which checks for contiguity, or <code>$reshape()</code>, which copies
+data if needed. To change the size in-place with custom strides, see
+<code>$set_()</code>.</p>
 </div>
 <div class="section level4">
 <h4 id="arguments-40">Arguments:<a class="anchor" aria-label="anchor" href="#arguments-40"></a>
 </h4>
 <ul>
 <li>sizes (torch_Size or int…): the desired size</li>
-<li>memory_format (<code>torch_memory_format</code>, optional): the desired memory format of Tensor. Default: <code>torch_contiguous_format</code>. Note that memory format of <code>self</code> is going to be unaffected if <code>self$size()</code> matches <code>sizes</code>.</li>
+<li>memory_format (<code>torch_memory_format</code>, optional): the
+desired memory format of Tensor. Default:
+<code>torch_contiguous_format</code>. Note that memory format of
+<code>self</code> is going to be unaffected if <code>self$size()</code>
+matches <code>sizes</code>.</li>
 </ul>
 </div>
 <div class="section level4">
@@ -2712,13 +3113,20 @@ f(x) = \dfrac{1}{x \sigma \sqrt{2\pi}}\ e^{-\frac{(\ln x - \mu)^2}{2\sigma^2}}
 <div class="section level2">
 <h2 id="resize_as_">resize_as_<a class="anchor" aria-label="anchor" href="#resize_as_"></a>
 </h2>
-<p>resize_as_(tensor, memory_format=torch_contiguous_format) -&gt; Tensor</p>
-<p>Resizes the <code>self</code> tensor to be the same size as the specified <code>tensor</code>. This is equivalent to <code>self$resize_(tensor.size())</code>.</p>
+<p>resize_as_(tensor, memory_format=torch_contiguous_format) -&gt;
+Tensor</p>
+<p>Resizes the <code>self</code> tensor to be the same size as the
+specified <code>tensor</code>. This is equivalent to
+<code>self$resize_(tensor.size())</code>.</p>
 <div class="section level4">
 <h4 id="arguments-41">Arguments:<a class="anchor" aria-label="anchor" href="#arguments-41"></a>
 </h4>
 <ul>
-<li>memory_format (<code>torch_memory_format</code>, optional): the desired memory format of Tensor. Default: <code>torch_contiguous_format</code>. Note that memory format of <code>self</code> is going to be unaffected if <code>self$size()</code> matches <code>tensor.size()</code>.</li>
+<li>memory_format (<code>torch_memory_format</code>, optional): the
+desired memory format of Tensor. Default:
+<code>torch_contiguous_format</code>. Note that memory format of
+<code>self</code> is going to be unaffected if <code>self$size()</code>
+matches <code>tensor.size()</code>.</li>
 </ul>
 </div>
 </div>
@@ -2779,21 +3187,35 @@ f(x) = \dfrac{1}{x \sigma \sqrt{2\pi}}\ e^{-\frac{(\ln x - \mu)^2}{2\sigma^2}}
 <h2 id="scatter_">scatter_<a class="anchor" aria-label="anchor" href="#scatter_"></a>
 </h2>
 <p>scatter_(dim, index, src) -&gt; Tensor</p>
-<p>Writes all values from the tensor <code>src</code> into <code>self</code> at the indices specified in the <code>index</code> tensor. For each value in <code>src</code>, its output index is specified by its index in <code>src</code> for <code>dimension != dim</code> and by the corresponding value in <code>index</code> for <code>dimension = dim</code>.</p>
+<p>Writes all values from the tensor <code>src</code> into
+<code>self</code> at the indices specified in the <code>index</code>
+tensor. For each value in <code>src</code>, its output index is
+specified by its index in <code>src</code> for
+<code>dimension != dim</code> and by the corresponding value in
+<code>index</code> for <code>dimension = dim</code>.</p>
 <p>For a 3-D tensor, <code>self</code> is updated as:</p>
 <pre><code><span><span class="va">self</span><span class="op">[</span><span class="va">index</span><span class="op">[</span><span class="va">i</span><span class="op">]</span><span class="op">[</span><span class="va">j</span><span class="op">]</span><span class="op">[</span><span class="va">k</span><span class="op">]</span><span class="op">]</span><span class="op">[</span><span class="va">j</span><span class="op">]</span><span class="op">[</span><span class="va">k</span><span class="op">]</span> <span class="op">=</span> <span class="va">src</span><span class="op">[</span><span class="va">i</span><span class="op">]</span><span class="op">[</span><span class="va">j</span><span class="op">]</span><span class="op">[</span><span class="va">k</span><span class="op">]</span>  <span class="co"># if dim == 0</span></span>
 <span><span class="va">self</span><span class="op">[</span><span class="va">i</span><span class="op">]</span><span class="op">[</span><span class="va">index</span><span class="op">[</span><span class="va">i</span><span class="op">]</span><span class="op">[</span><span class="va">j</span><span class="op">]</span><span class="op">[</span><span class="va">k</span><span class="op">]</span><span class="op">]</span><span class="op">[</span><span class="va">k</span><span class="op">]</span> <span class="op">=</span> <span class="va">src</span><span class="op">[</span><span class="va">i</span><span class="op">]</span><span class="op">[</span><span class="va">j</span><span class="op">]</span><span class="op">[</span><span class="va">k</span><span class="op">]</span>  <span class="co"># if dim == 1</span></span>
 <span><span class="va">self</span><span class="op">[</span><span class="va">i</span><span class="op">]</span><span class="op">[</span><span class="va">j</span><span class="op">]</span><span class="op">[</span><span class="va">index</span><span class="op">[</span><span class="va">i</span><span class="op">]</span><span class="op">[</span><span class="va">j</span><span class="op">]</span><span class="op">[</span><span class="va">k</span><span class="op">]</span><span class="op">]</span> <span class="op">=</span> <span class="va">src</span><span class="op">[</span><span class="va">i</span><span class="op">]</span><span class="op">[</span><span class="va">j</span><span class="op">]</span><span class="op">[</span><span class="va">k</span><span class="op">]</span>  <span class="co"># if dim == 2</span></span></code></pre>
-<p>This is the reverse operation of the manner described in <code>$gather</code>.</p>
-<p><code>self</code>, <code>index</code> and <code>src</code> (if it is a Tensor) should have same number of dimensions. It is also required that <code>index.size(d) &lt;= src.size(d)</code> for all dimensions <code>d</code>, and that <code>index.size(d) &lt;= self$size(d)</code> for all dimensions <code>d != dim</code>.</p>
-<p>Moreover, as for <code>$gather</code>, the values of <code>index</code> must be between <code>0</code> and <code>self$size(dim) - 1</code> inclusive, and all values in a row along the specified dimension <code>dim</code> must be unique.</p>
+<p>This is the reverse operation of the manner described in
+<code>$gather</code>.</p>
+<p><code>self</code>, <code>index</code> and <code>src</code> (if it is
+a Tensor) should have same number of dimensions. It is also required
+that <code>index.size(d) &lt;= src.size(d)</code> for all dimensions
+<code>d</code>, and that <code>index.size(d) &lt;= self$size(d)</code>
+for all dimensions <code>d != dim</code>.</p>
+<p>Moreover, as for <code>$gather</code>, the values of
+<code>index</code> must be between <code>0</code> and
+<code>self$size(dim) - 1</code> inclusive, and all values in a row along
+the specified dimension <code>dim</code> must be unique.</p>
 <div class="section level4">
 <h4 id="arguments-42">Arguments:<a class="anchor" aria-label="anchor" href="#arguments-42"></a>
 </h4>
 <ul>
 <li>dim (int): the axis along which to index</li>
 <li>index (LongTensor): the indices of elements to scatter,</li>
-<li>can be either empty or the same size of src. When empty, the operation returns identity</li>
+<li>can be either empty or the same size of src. When empty, the
+operation returns identity</li>
 <li>src (Tensor): the source element(s) to scatter,</li>
 <li>incase <code>value</code> is not specified</li>
 <li>value (float): the source element(s) to scatter,</li>
@@ -2827,16 +3249,30 @@ f(x) = \dfrac{1}{x \sigma \sqrt{2\pi}}\ e^{-\frac{(\ln x - \mu)^2}{2\sigma^2}}
 <h2 id="scatter_add_">scatter_add_<a class="anchor" aria-label="anchor" href="#scatter_add_"></a>
 </h2>
 <p>scatter_add_(dim, index, src) -&gt; Tensor</p>
-<p>Adds all values from the tensor <code>other</code> into <code>self</code> at the indices specified in the <code>index</code> tensor in a similar fashion as <code>~$scatter_</code>. For each value in <code>src</code>, it is added to an index in <code>self</code> which is specified by its index in <code>src</code> for <code>dimension != dim</code> and by the corresponding value in <code>index</code> for <code>dimension = dim</code>.</p>
+<p>Adds all values from the tensor <code>other</code> into
+<code>self</code> at the indices specified in the <code>index</code>
+tensor in a similar fashion as <code>~$scatter_</code>. For each value
+in <code>src</code>, it is added to an index in <code>self</code> which
+is specified by its index in <code>src</code> for
+<code>dimension != dim</code> and by the corresponding value in
+<code>index</code> for <code>dimension = dim</code>.</p>
 <p>For a 3-D tensor, <code>self</code> is updated as::</p>
 <pre><code>self[index[i][j][k]][j][k] += src[i][j][k]  # if dim == 0
 self[i][index[i][j][k]][k] += src[i][j][k]  # if dim == 1
 self[i][j][index[i][j][k]] += src[i][j][k]  # if dim == 2</code></pre>
-<p><code>self</code>, <code>index</code> and <code>src</code> should have same number of dimensions. It is also required that <code>index.size(d) &lt;= src.size(d)</code> for all dimensions <code>d</code>, and that <code>index.size(d) &lt;= self$size(d)</code> for all dimensions <code>d != dim</code>.</p>
+<p><code>self</code>, <code>index</code> and <code>src</code> should
+have same number of dimensions. It is also required that
+<code>index.size(d) &lt;= src.size(d)</code> for all dimensions
+<code>d</code>, and that <code>index.size(d) &lt;= self$size(d)</code>
+for all dimensions <code>d != dim</code>.</p>
 <div class="section level4">
 <h4 id="note-8">Note:<a class="anchor" aria-label="anchor" href="#note-8"></a>
 </h4>
-<p>In some circumstances when using the CUDA backend with CuDNN, this operator may select a nondeterministic algorithm to increase performance. If this is undesirable, you can try to make the operation deterministic (potentially at a performance cost) by setting <code>torch_backends.cudnn.deterministic = TRUE</code>.</p>
+<p>In some circumstances when using the CUDA backend with CuDNN, this
+operator may select a nondeterministic algorithm to increase
+performance. If this is undesirable, you can try to make the operation
+deterministic (potentially at a performance cost) by setting
+<code>torch_backends.cudnn.deterministic = TRUE</code>.</p>
 </div>
 <div class="section level4">
 <h4 id="arguments-43">Arguments:<a class="anchor" aria-label="anchor" href="#arguments-43"></a>
@@ -2844,7 +3280,8 @@ self[i][j][index[i][j][k]] += src[i][j][k]  # if dim == 2</code></pre>
 <ul>
 <li>dim (int): the axis along which to index</li>
 <li>index (LongTensor): the indices of elements to scatter and add,</li>
-<li>can be either empty or the same size of src. When empty, the operation returns identity.</li>
+<li>can be either empty or the same size of src. When empty, the
+operation returns identity.</li>
 <li>src (Tensor): the source elements to scatter and add</li>
 </ul>
 </div>
@@ -2861,7 +3298,9 @@ self[i][j][index[i][j][k]] += src[i][j][k]  # if dim == 2</code></pre>
 <h2 id="select">select<a class="anchor" aria-label="anchor" href="#select"></a>
 </h2>
 <p>select(dim, index) -&gt; Tensor</p>
-<p>Slices the <code>self</code> tensor along the selected dimension at the given index. This function returns a view of the original tensor with the given dimension removed.</p>
+<p>Slices the <code>self</code> tensor along the selected dimension at
+the given index. This function returns a view of the original tensor
+with the given dimension removed.</p>
 <div class="section level4">
 <h4 id="arguments-44">Arguments:<a class="anchor" aria-label="anchor" href="#arguments-44"></a>
 </h4>
@@ -2873,22 +3312,31 @@ self[i][j][index[i][j][k]] += src[i][j][k]  # if dim == 2</code></pre>
 <div class="section level4">
 <h4 id="note-9">Note:<a class="anchor" aria-label="anchor" href="#note-9"></a>
 </h4>
-<p><code>select</code> is equivalent to slicing. For example, <code>tensor$select(0, index)</code> is equivalent to <code>tensor[index]</code> and <code>tensor$select(2, index)</code> is equivalent to <code>tensor[:,:,index]</code>.</p>
+<p><code>select</code> is equivalent to slicing. For example,
+<code>tensor$select(0, index)</code> is equivalent to
+<code>tensor[index]</code> and <code>tensor$select(2, index)</code> is
+equivalent to <code>tensor[:,:,index]</code>.</p>
 </div>
 </div>
 <div class="section level2">
 <h2 id="set_">set_<a class="anchor" aria-label="anchor" href="#set_"></a>
 </h2>
-<p>set_(source=NULL, storage_offset=0, size=NULL, stride=NULL) -&gt; Tensor</p>
-<p>Sets the underlying storage, size, and strides. If <code>source</code> is a tensor, <code>self</code> tensor will share the same storage and have the same size and strides as <code>source</code>. Changes to elements in one tensor will be reflected in the other.</p>
+<p>set_(source=NULL, storage_offset=0, size=NULL, stride=NULL) -&gt;
+Tensor</p>
+<p>Sets the underlying storage, size, and strides. If
+<code>source</code> is a tensor, <code>self</code> tensor will share the
+same storage and have the same size and strides as <code>source</code>.
+Changes to elements in one tensor will be reflected in the other.</p>
 <div class="section level4">
 <h4 id="arguments-45">Arguments:<a class="anchor" aria-label="anchor" href="#arguments-45"></a>
 </h4>
 <ul>
 <li>source (Tensor or Storage): the tensor or storage to use</li>
 <li>storage_offset (int, optional): the offset in the storage</li>
-<li>size (torch_Size, optional): the desired size. Defaults to the size of the source.</li>
-<li>stride (tuple, optional): the desired stride. Defaults to C-contiguous strides.</li>
+<li>size (torch_Size, optional): the desired size. Defaults to the size
+of the source.</li>
+<li>stride (tuple, optional): the desired stride. Defaults to
+C-contiguous strides.</li>
 </ul>
 </div>
 </div>
@@ -2896,18 +3344,21 @@ self[i][j][index[i][j][k]] += src[i][j][k]  # if dim == 2</code></pre>
 <h2 id="share_memory_">share_memory_<a class="anchor" aria-label="anchor" href="#share_memory_"></a>
 </h2>
 <p>Moves the underlying storage to shared memory.</p>
-<p>This is a no-op if the underlying storage is already in shared memory and for CUDA tensors. Tensors in shared memory cannot be resized.</p>
+<p>This is a no-op if the underlying storage is already in shared memory
+and for CUDA tensors. Tensors in shared memory cannot be resized.</p>
 </div>
 <div class="section level2">
 <h2 id="short">short<a class="anchor" aria-label="anchor" href="#short"></a>
 </h2>
 <p>short(memory_format=torch_preserve_format) -&gt; Tensor</p>
-<p><code>self$short()</code> is equivalent to <code>self$to(torch_int16)</code>. See [to()].</p>
+<p><code>self$short()</code> is equivalent to
+<code>self$to(torch_int16)</code>. See [to()].</p>
 <div class="section level4">
 <h4 id="arguments-46">Arguments:<a class="anchor" aria-label="anchor" href="#arguments-46"></a>
 </h4>
 <ul>
-<li>memory_format (<code>torch_memory_format</code>, optional): the desired memory format of</li>
+<li>memory_format (<code>torch_memory_format</code>, optional): the
+desired memory format of</li>
 <li>returned Tensor. Default: <code>torch_preserve_format</code>.</li>
 </ul>
 </div>
@@ -2964,7 +3415,8 @@ self[i][j][index[i][j][k]] += src[i][j][k]  # if dim == 2</code></pre>
 <h2 id="size">size<a class="anchor" aria-label="anchor" href="#size"></a>
 </h2>
 <p>size() -&gt; torch_Size</p>
-<p>Returns the size of the <code>self</code> tensor. The returned value is a subclass of <code>tuple</code>.</p>
+<p>Returns the size of the <code>self</code> tensor. The returned value
+is a subclass of <code>tuple</code>.</p>
 <div class="section level4">
 <h4 id="examples-32">Examples:<a class="anchor" aria-label="anchor" href="#examples-32"></a>
 </h4>
@@ -2988,20 +3440,25 @@ self[i][j][index[i][j][k]] += src[i][j][k]  # if dim == 2</code></pre>
 <h2 id="sparse_dim">sparse_dim<a class="anchor" aria-label="anchor" href="#sparse_dim"></a>
 </h2>
 <p>sparse_dim() -&gt; int</p>
-<p>If <code>self</code> is a sparse COO tensor (i.e., with <code>torch_sparse_coo</code> layout), this returns the number of sparse dimensions. Otherwise, this throws an error.</p>
+<p>If <code>self</code> is a sparse COO tensor (i.e., with
+<code>torch_sparse_coo</code> layout), this returns the number of sparse
+dimensions. Otherwise, this throws an error.</p>
 <p>See also <code>Tensor.dense_dim</code>.</p>
 </div>
 <div class="section level2">
 <h2 id="sparse_mask">sparse_mask<a class="anchor" aria-label="anchor" href="#sparse_mask"></a>
 </h2>
 <p>sparse_mask(input, mask) -&gt; Tensor</p>
-<p>Returns a new SparseTensor with values from Tensor <code>input</code> filtered by indices of <code>mask</code> and values are ignored. <code>input</code> and <code>mask</code> must have the same shape.</p>
+<p>Returns a new SparseTensor with values from Tensor <code>input</code>
+filtered by indices of <code>mask</code> and values are ignored.
+<code>input</code> and <code>mask</code> must have the same shape.</p>
 <div class="section level4">
 <h4 id="arguments-47">Arguments:<a class="anchor" aria-label="anchor" href="#arguments-47"></a>
 </h4>
 <ul>
 <li>input (Tensor): an input Tensor</li>
-<li>mask (SparseTensor): a SparseTensor which we filter <code>input</code> based on its indices</li>
+<li>mask (SparseTensor): a SparseTensor which we filter
+<code>input</code> based on its indices</li>
 </ul>
 </div>
 </div>
@@ -3067,7 +3524,8 @@ self[i][j][index[i][j][k]] += src[i][j][k]  # if dim == 2</code></pre>
 <h2 id="storage_offset">storage_offset<a class="anchor" aria-label="anchor" href="#storage_offset"></a>
 </h2>
 <p>storage_offset() -&gt; int</p>
-<p>Returns <code>self</code> tensor’s offset in the underlying storage in terms of number of storage elements (not bytes).</p>
+<p>Returns <code>self</code> tensor’s offset in the underlying storage
+in terms of number of storage elements (not bytes).</p>
 <div class="section level4">
 <h4 id="examples-33">Examples:<a class="anchor" aria-label="anchor" href="#examples-33"></a>
 </h4>
@@ -3088,12 +3546,16 @@ self[i][j][index[i][j][k]] += src[i][j][k]  # if dim == 2</code></pre>
 </h2>
 <p>stride(dim) -&gt; tuple or int</p>
 <p>Returns the stride of <code>self</code> tensor.</p>
-<p>Stride is the jump necessary to go from one element to the next one in the specified dimension <code>dim</code>. A tuple of all strides is returned when no argument is passed in. Otherwise, an integer value is returned as the stride in the particular dimension <code>dim</code>.</p>
+<p>Stride is the jump necessary to go from one element to the next one
+in the specified dimension <code>dim</code>. A tuple of all strides is
+returned when no argument is passed in. Otherwise, an integer value is
+returned as the stride in the particular dimension <code>dim</code>.</p>
 <div class="section level4">
 <h4 id="arguments-48">Arguments:<a class="anchor" aria-label="anchor" href="#arguments-48"></a>
 </h4>
 <ul>
-<li>dim (int, optional): the desired dimension in which stride is required</li>
+<li>dim (int, optional): the desired dimension in which stride is
+required</li>
 </ul>
 </div>
 <div class="section level4">
@@ -3110,8 +3572,13 @@ self[i][j][index[i][j][k]] += src[i][j][k]  # if dim == 2</code></pre>
 <h2 id="sub">sub<a class="anchor" aria-label="anchor" href="#sub"></a>
 </h2>
 <p>sub(other, *, alpha=1) -&gt; Tensor</p>
-<p>Subtracts a scalar or tensor from <code>self</code> tensor. If both <code>alpha</code> and <code>other</code> are specified, each element of <code>other</code> is scaled by <code>alpha</code> before being used.</p>
-<p>When <code>other</code> is a tensor, the shape of <code>other</code> must be <code>broadcastable &lt;broadcasting-semantics&gt;</code> with the shape of the underlying tensor.</p>
+<p>Subtracts a scalar or tensor from <code>self</code> tensor. If both
+<code>alpha</code> and <code>other</code> are specified, each element of
+<code>other</code> is scaled by <code>alpha</code> before being
+used.</p>
+<p>When <code>other</code> is a tensor, the shape of <code>other</code>
+must be <code>broadcastable &lt;broadcasting-semantics&gt;</code> with
+the shape of the underlying tensor.</p>
 </div>
 <div class="section level2">
 <h2 id="sub_">sub_<a class="anchor" aria-label="anchor" href="#sub_"></a>
@@ -3129,12 +3596,14 @@ self[i][j][index[i][j][k]] += src[i][j][k]  # if dim == 2</code></pre>
 <h2 id="sum_to_size">sum_to_size<a class="anchor" aria-label="anchor" href="#sum_to_size"></a>
 </h2>
 <p>sum_to_size(*size) -&gt; Tensor</p>
-<p>Sum <code>this</code> tensor to <code>size</code>. <code>size</code> must be broadcastable to <code>this</code> tensor size.</p>
+<p>Sum <code>this</code> tensor to <code>size</code>. <code>size</code>
+must be broadcastable to <code>this</code> tensor size.</p>
 <div class="section level4">
 <h4 id="arguments-49">Arguments:<a class="anchor" aria-label="anchor" href="#arguments-49"></a>
 </h4>
 <ul>
-<li>size (int…): a sequence of integers defining the shape of the output tensor.</li>
+<li>size (int…): a sequence of integers defining the shape of the output
+tensor.</li>
 </ul>
 </div>
 </div>
@@ -3196,34 +3665,58 @@ self[i][j][index[i][j][k]] += src[i][j][k]  # if dim == 2</code></pre>
 <h2 id="to">to<a class="anchor" aria-label="anchor" href="#to"></a>
 </h2>
 <p>to(*args, **kwargs) -&gt; Tensor</p>
-<p>Performs Tensor dtype and/or device conversion. A <code>torch_dtype</code> and :class:<code>torch_device</code> are inferred from the arguments of <code>self$to(*args, **kwargs)</code>.</p>
+<p>Performs Tensor dtype and/or device conversion. A
+<code>torch_dtype</code> and :class:<code>torch_device</code> are
+inferred from the arguments of
+<code>self$to(*args, **kwargs)</code>.</p>
 <div class="section level4">
 <h4 id="note-10">Note:<a class="anchor" aria-label="anchor" href="#note-10"></a>
 </h4>
-<p>If the <code>self</code> Tensor already has the correct <code>torch_dtype</code> and :class:<code>torch_device</code>, then <code>self</code> is returned. Otherwise, the returned tensor is a copy of <code>self</code> with the desired <code>torch_dtype</code> and :class:<code>torch_device</code>.</p>
+<p>If the <code>self</code> Tensor already has the correct
+<code>torch_dtype</code> and :class:<code>torch_device</code>, then
+<code>self</code> is returned. Otherwise, the returned tensor is a copy
+of <code>self</code> with the desired <code>torch_dtype</code> and
+:class:<code>torch_device</code>.</p>
 <p>Here are the ways to call <code>to</code>:</p>
-<p>to(dtype, non_blocking=FALSE, copy=FALSE, memory_format=torch_preserve_format) -&gt; Tensor</p>
+<p>to(dtype, non_blocking=FALSE, copy=FALSE,
+memory_format=torch_preserve_format) -&gt; Tensor</p>
 <p>Returns a Tensor with the specified <code>dtype</code></p>
 </div>
 <div class="section level4">
 <h4 id="arguments-50">Arguments:<a class="anchor" aria-label="anchor" href="#arguments-50"></a>
 </h4>
 <ul>
-<li>memory_format (<code>torch_memory_format</code>, optional): the desired memory format of returned Tensor. Default: <code>torch_preserve_format</code>.</li>
+<li>memory_format (<code>torch_memory_format</code>, optional): the
+desired memory format of returned Tensor. Default:
+<code>torch_preserve_format</code>.</li>
 </ul>
-<p>to(device=NULL, dtype=NULL, non_blocking=FALSE, copy=FALSE, memory_format=torch_preserve_format) -&gt; Tensor</p>
-<p>Returns a Tensor with the specified <code>device</code> and (optional) <code>dtype</code>. If <code>dtype</code> is <code>NULL</code> it is inferred to be <code>self$dtype</code>. When <code>non_blocking</code>, tries to convert asynchronously with respect to the host if possible, e.g., converting a CPU Tensor with pinned memory to a CUDA Tensor.</p>
-<p>When <code>copy</code> is set, a new Tensor is created even when the Tensor already matches the desired conversion.</p>
+<p>to(device=NULL, dtype=NULL, non_blocking=FALSE, copy=FALSE,
+memory_format=torch_preserve_format) -&gt; Tensor</p>
+<p>Returns a Tensor with the specified <code>device</code> and
+(optional) <code>dtype</code>. If <code>dtype</code> is
+<code>NULL</code> it is inferred to be <code>self$dtype</code>. When
+<code>non_blocking</code>, tries to convert asynchronously with respect
+to the host if possible, e.g., converting a CPU Tensor with pinned
+memory to a CUDA Tensor.</p>
+<p>When <code>copy</code> is set, a new Tensor is created even when the
+Tensor already matches the desired conversion.</p>
 </div>
 <div class="section level4">
 <h4 id="arguments-51">Arguments:<a class="anchor" aria-label="anchor" href="#arguments-51"></a>
 </h4>
 <ul>
-<li>memory_format (<code>torch_memory_format</code>, optional): the desired memory format of returned Tensor. Default: <code>torch_preserve_format</code>.</li>
+<li>memory_format (<code>torch_memory_format</code>, optional): the
+desired memory format of returned Tensor. Default:
+<code>torch_preserve_format</code>.</li>
 </ul>
 <p>function:: to(other, non_blocking=FALSE, copy=FALSE) -&gt; Tensor</p>
-<p>Returns a Tensor with same <code>torch_dtype</code> and :class:<code>torch_device</code> as the Tensor <code>other</code>. When <code>non_blocking</code>, tries to convert asynchronously with respect to the host if possible, e.g., converting a CPU Tensor with pinned memory to a CUDA Tensor.</p>
-<p>When <code>copy</code> is set, a new Tensor is created even when the Tensor already matches the desired conversion.</p>
+<p>Returns a Tensor with same <code>torch_dtype</code> and
+:class:<code>torch_device</code> as the Tensor <code>other</code>. When
+<code>non_blocking</code>, tries to convert asynchronously with respect
+to the host if possible, e.g., converting a CPU Tensor with pinned
+memory to a CUDA Tensor.</p>
+<p>When <code>copy</code> is set, a new Tensor is created even when the
+Tensor already matches the desired conversion.</p>
 </div>
 <div class="section level4">
 <h4 id="examples-35">Examples:<a class="anchor" aria-label="anchor" href="#examples-35"></a>
@@ -3239,17 +3732,21 @@ self[i][j][index[i][j][k]] += src[i][j][k]  # if dim == 2</code></pre>
 <div class="section level2">
 <h2 id="to_mkldnn">to_mkldnn<a class="anchor" aria-label="anchor" href="#to_mkldnn"></a>
 </h2>
-<p>to_mkldnn() -&gt; Tensor Returns a copy of the tensor in <code>torch_mkldnn</code> layout.</p>
+<p>to_mkldnn() -&gt; Tensor Returns a copy of the tensor in
+<code>torch_mkldnn</code> layout.</p>
 </div>
 <div class="section level2">
 <h2 id="to_sparse">to_sparse<a class="anchor" aria-label="anchor" href="#to_sparse"></a>
 </h2>
-<p>to_sparse(sparseDims) -&gt; Tensor Returns a sparse copy of the tensor. PyTorch supports sparse tensors in <code>coordinate format &lt;sparse-docs&gt;</code>.</p>
+<p>to_sparse(sparseDims) -&gt; Tensor Returns a sparse copy of the
+tensor. PyTorch supports sparse tensors in
+<code>coordinate format &lt;sparse-docs&gt;</code>.</p>
 <div class="section level4">
 <h4 id="arguments-52">Arguments:<a class="anchor" aria-label="anchor" href="#arguments-52"></a>
 </h4>
 <ul>
-<li>sparseDims (int, optional): the number of sparse dimensions to include in the new sparse tensor</li>
+<li>sparseDims (int, optional): the number of sparse dimensions to
+include in the new sparse tensor</li>
 </ul>
 </div>
 </div>
@@ -3257,13 +3754,16 @@ self[i][j][index[i][j][k]] += src[i][j][k]  # if dim == 2</code></pre>
 <h2 id="tolist">tolist<a class="anchor" aria-label="anchor" href="#tolist"></a>
 </h2>
 <p>tolist() -&gt; list or number</p>
-<p>Returns the tensor as a (nested) list. For scalars, a standard Python number is returned, just like with <code>$item</code>. Tensors are automatically moved to the CPU first if necessary.</p>
+<p>Returns the tensor as a (nested) list. For scalars, a standard Python
+number is returned, just like with <code>$item</code>. Tensors are
+automatically moved to the CPU first if necessary.</p>
 <p>This operation is not differentiable.</p>
 </div>
 <div class="section level2">
 <h2 id="topk">topk<a class="anchor" aria-label="anchor" href="#topk"></a>
 </h2>
-<p>topk(k, dim=NULL, largest=TRUE, sorted=TRUE) -&gt; (Tensor, LongTensor)</p>
+<p>topk(k, dim=NULL, largest=TRUE, sorted=TRUE) -&gt; (Tensor,
+LongTensor)</p>
 <p>See <code><a href="../../reference/torch_topk.html">?torch_topk</a></code></p>
 </div>
 <div class="section level2">
@@ -3287,7 +3787,8 @@ self[i][j][index[i][j][k]] += src[i][j][k]  # if dim == 2</code></pre>
 <div class="section level2">
 <h2 id="triangular_solve">triangular_solve<a class="anchor" aria-label="anchor" href="#triangular_solve"></a>
 </h2>
-<p>triangular_solve(A, upper=TRUE, transpose=FALSE, unitriangular=FALSE) -&gt; (Tensor, Tensor)</p>
+<p>triangular_solve(A, upper=TRUE, transpose=FALSE, unitriangular=FALSE)
+-&gt; (Tensor, Tensor)</p>
 <p>See [torch_triangular_solve()]</p>
 </div>
 <div class="section level2">
@@ -3341,18 +3842,26 @@ self[i][j][index[i][j][k]] += src[i][j][k]  # if dim == 2</code></pre>
 <div class="section level2">
 <h2 id="type">type<a class="anchor" aria-label="anchor" href="#type"></a>
 </h2>
-<p>type(dtype=NULL, non_blocking=FALSE, **kwargs) -&gt; str or Tensor Returns the type if <code>dtype</code> is not provided, else casts this object to the specified type.</p>
-<p>If this is already of the correct type, no copy is performed and the original object is returned.</p>
+<p>type(dtype=NULL, non_blocking=FALSE, **kwargs) -&gt; str or Tensor
+Returns the type if <code>dtype</code> is not provided, else casts this
+object to the specified type.</p>
+<p>If this is already of the correct type, no copy is performed and the
+original object is returned.</p>
 <div class="section level4">
 <h4 id="arguments-53">Arguments:<a class="anchor" aria-label="anchor" href="#arguments-53"></a>
 </h4>
 <ul>
 <li>dtype (type or string): The desired type</li>
-<li>non_blocking (bool): If <code>TRUE</code>, and the source is in pinned memory</li>
-<li>and destination is on the GPU or vice versa, the copy is performed</li>
-<li>asynchronously with respect to the host. Otherwise, the argument</li>
-<li>has no effect. **kwargs: For compatibility, may contain the key <code>async</code> in place of</li>
-<li>the <code>non_blocking</code> argument. The <code>async</code> arg is deprecated.</li>
+<li>non_blocking (bool): If <code>TRUE</code>, and the source is in
+pinned memory</li>
+<li>and destination is on the GPU or vice versa, the copy is
+performed</li>
+<li>asynchronously with respect to the host. Otherwise, the
+argument</li>
+<li>has no effect. **kwargs: For compatibility, may contain the key
+<code>async</code> in place of</li>
+<li>the <code>non_blocking</code> argument. The <code>async</code> arg
+is deprecated.</li>
 </ul>
 </div>
 </div>
@@ -3361,7 +3870,8 @@ self[i][j][index[i][j][k]] += src[i][j][k]  # if dim == 2</code></pre>
 </h2>
 <p>type_as(tensor) -&gt; Tensor</p>
 <p>Returns this tensor cast to the type of the given tensor.</p>
-<p>This is a no-op if the tensor is already of the correct type. This is equivalent to <code>self$type(tensor.type())</code></p>
+<p>This is a no-op if the tensor is already of the correct type. This is
+equivalent to <code>self$type(tensor.type())</code></p>
 <div class="section level4">
 <h4 id="arguments-54">Arguments:<a class="anchor" aria-label="anchor" href="#arguments-54"></a>
 </h4>
@@ -3379,7 +3889,8 @@ self[i][j][index[i][j][k]] += src[i][j][k]  # if dim == 2</code></pre>
 <div class="section level2">
 <h2 id="unflatten">unflatten<a class="anchor" aria-label="anchor" href="#unflatten"></a>
 </h2>
-<p>Unflattens the named dimension <code>dim</code>, viewing it in the shape specified by <code>namedshape</code>.</p>
+<p>Unflattens the named dimension <code>dim</code>, viewing it in the
+shape specified by <code>namedshape</code>.</p>
 <div class="section level4">
 <h4 id="arguments-55">Arguments:<a class="anchor" aria-label="anchor" href="#arguments-55"></a>
 </h4>
@@ -3392,10 +3903,16 @@ self[i][j][index[i][j][k]] += src[i][j][k]  # if dim == 2</code></pre>
 <h2 id="unfold">unfold<a class="anchor" aria-label="anchor" href="#unfold"></a>
 </h2>
 <p>unfold(dimension, size, step) -&gt; Tensor</p>
-<p>Returns a view of the original tensor which contains all slices of size <code>size</code> from <code>self</code> tensor in the dimension <code>dimension</code>.</p>
+<p>Returns a view of the original tensor which contains all slices of
+size <code>size</code> from <code>self</code> tensor in the dimension
+<code>dimension</code>.</p>
 <p>Step between two slices is given by <code>step</code>.</p>
-<p>If <code>sizedim</code> is the size of dimension <code>dimension</code> for <code>self</code>, the size of dimension <code>dimension</code> in the returned tensor will be <code>(sizedim - size) / step + 1</code>.</p>
-<p>An additional dimension of size <code>size</code> is appended in the returned tensor.</p>
+<p>If <code>sizedim</code> is the size of dimension
+<code>dimension</code> for <code>self</code>, the size of dimension
+<code>dimension</code> in the returned tensor will be
+<code>(sizedim - size) / step + 1</code>.</p>
+<p>An additional dimension of size <code>size</code> is appended in the
+returned tensor.</p>
 <div class="section level4">
 <h4 id="arguments-56">Arguments:<a class="anchor" aria-label="anchor" href="#arguments-56"></a>
 </h4>
@@ -3410,7 +3927,8 @@ self[i][j][index[i][j][k]] += src[i][j][k]  # if dim == 2</code></pre>
 <h2 id="uniform_">uniform_<a class="anchor" aria-label="anchor" href="#uniform_"></a>
 </h2>
 <p>uniform_(from=0, to=1) -&gt; Tensor</p>
-<p>Fills <code>self</code> tensor with numbers sampled from the continuous uniform distribution:</p>
+<p>Fills <code>self</code> tensor with numbers sampled from the
+continuous uniform distribution:</p>
 <p><span class="math display">\[
 P(x) = \dfrac{1}{\text{to} - \text{from}}
 \]</span></p>
@@ -3424,7 +3942,8 @@ P(x) = \dfrac{1}{\text{to} - \text{from}}
 <div class="section level2">
 <h2 id="unique_consecutive">unique_consecutive<a class="anchor" aria-label="anchor" href="#unique_consecutive"></a>
 </h2>
-<p>Eliminates all but the first element from every consecutive group of equivalent elements.</p>
+<p>Eliminates all but the first element from every consecutive group of
+equivalent elements.</p>
 <p>See [torch_unique_consecutive()]</p>
 </div>
 <div class="section level2">
@@ -3443,11 +3962,14 @@ P(x) = \dfrac{1}{\text{to} - \text{from}}
 <h2 id="values">values<a class="anchor" aria-label="anchor" href="#values"></a>
 </h2>
 <p>values() -&gt; Tensor</p>
-<p>If <code>self</code> is a sparse COO tensor (i.e., with <code>torch_sparse_coo</code> layout), this returns a view of the contained values tensor. Otherwise, this throws an error.</p>
+<p>If <code>self</code> is a sparse COO tensor (i.e., with
+<code>torch_sparse_coo</code> layout), this returns a view of the
+contained values tensor. Otherwise, this throws an error.</p>
 <div class="section level4">
 <h4 id="note-11">Note:<a class="anchor" aria-label="anchor" href="#note-11"></a>
 </h4>
-<p>This method can only be called on a coalesced sparse tensor. See <code>Tensor$coalesce</code> for details.</p>
+<p>This method can only be called on a coalesced sparse tensor. See
+<code>Tensor$coalesce</code> for details.</p>
 </div>
 </div>
 <div class="section level2">
@@ -3460,12 +3982,25 @@ P(x) = \dfrac{1}{\text{to} - \text{from}}
 <h2 id="view">view<a class="anchor" aria-label="anchor" href="#view"></a>
 </h2>
 <p>view(*shape) -&gt; Tensor</p>
-<p>Returns a new tensor with the same data as the <code>self</code> tensor but of a different <code>shape</code>.</p>
-<p>The returned tensor shares the same data and must have the same number of elements, but may have a different size. For a tensor to be viewed, the new view size must be compatible with its original size and stride, i.e., each new view dimension must either be a subspace of an original dimension, or only span across original dimensions <code>d, d+1, \dots, d+k</code> that satisfy the following contiguity-like condition that <code>\forall i = d, \dots, d+k-1</code>,</p>
+<p>Returns a new tensor with the same data as the <code>self</code>
+tensor but of a different <code>shape</code>.</p>
+<p>The returned tensor shares the same data and must have the same
+number of elements, but may have a different size. For a tensor to be
+viewed, the new view size must be compatible with its original size and
+stride, i.e., each new view dimension must either be a subspace of an
+original dimension, or only span across original dimensions
+<code>d, d+1, \dots, d+k</code> that satisfy the following
+contiguity-like condition that
+<code>\forall i = d, \dots, d+k-1</code>,</p>
 <p><span class="math display">\[
 \text{stride}[i] = \text{stride}[i+1] \times \text{size}[i+1]
 \]</span></p>
-<p>Otherwise, it will not be possible to view <code>self</code> tensor as <code>shape</code> without copying it (e.g., via <code>contiguous</code>). When it is unclear whether a <code>view</code> can be performed, it is advisable to use :meth:<code>reshape</code>, which returns a view if the shapes are compatible, and copies (equivalent to calling <code>contiguous</code>) otherwise.</p>
+<p>Otherwise, it will not be possible to view <code>self</code> tensor
+as <code>shape</code> without copying it (e.g., via
+<code>contiguous</code>). When it is unclear whether a <code>view</code>
+can be performed, it is advisable to use :meth:<code>reshape</code>,
+which returns a view if the shapes are compatible, and copies
+(equivalent to calling <code>contiguous</code>) otherwise.</p>
 <div class="section level4">
 <h4 id="arguments-57">Arguments:<a class="anchor" aria-label="anchor" href="#arguments-57"></a>
 </h4>
@@ -3478,8 +4013,11 @@ P(x) = \dfrac{1}{\text{to} - \text{from}}
 <h2 id="view_as">view_as<a class="anchor" aria-label="anchor" href="#view_as"></a>
 </h2>
 <p>view_as(other) -&gt; Tensor</p>
-<p>View this tensor as the same size as <code>other</code>. <code>self$view_as(other)</code> is equivalent to <code>self$view(other.size())</code>.</p>
-<p>Please see <code>$view</code> for more information about <code>view</code>.</p>
+<p>View this tensor as the same size as <code>other</code>.
+<code>self$view_as(other)</code> is equivalent to
+<code>self$view(other.size())</code>.</p>
+<p>Please see <code>$view</code> for more information about
+<code>view</code>.</p>
 <div class="section level4">
 <h4 id="arguments-58">Arguments:<a class="anchor" aria-label="anchor" href="#arguments-58"></a>
 </h4>
@@ -3493,7 +4031,9 @@ P(x) = \dfrac{1}{\text{to} - \text{from}}
 <h2 id="where">where<a class="anchor" aria-label="anchor" href="#where"></a>
 </h2>
 <p>where(condition, y) -&gt; Tensor</p>
-<p><code>self$where(condition, y)</code> is equivalent to <code>torch_where(condition, self, y)</code>. See <code><a href="../../reference/torch_where.html">?torch_where</a></code></p>
+<p><code>self$where(condition, y)</code> is equivalent to
+<code>torch_where(condition, self, y)</code>. See
+<code><a href="../../reference/torch_where.html">?torch_where</a></code></p>
 </div>
 <div class="section level2">
 <h2 id="zero_">zero_<a class="anchor" aria-label="anchor" href="#zero_"></a>
@@ -3514,7 +4054,7 @@ P(x) = \dfrac{1}{\text{to} - \text{from}}
 
 <div class="pkgdown-footer-right">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
     </footer>
