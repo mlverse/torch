@@ -21,7 +21,8 @@ tools/torchgen/.Rbuildignore
 ^public/.*
 ^cran-comments\.md$
 ^CRAN-RELEASE$
-^build-lantern.*$
+^build\-lantern.*$
+^src/Makevars$
 
 # remove vignettes from CRAN
 # ^vignettes/distributions\.Rmd
