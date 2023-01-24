@@ -11,10 +11,10 @@ if [[ "$BUILD_LANTERN" != true ]] && [[ "$BUILD_LANTERN" != 1 ]]; then
 fi
 
 if [[ "$BUILD_LANTERN" != "" ]]; then
-  BUILD_LANTERN_CMD="mkdir -p ../build-lantern \&\& cd ../build-lantern \&\& cmake ../src/lantern -DCMAKE_INSTALL_PREFIX=$PKG_PATH \&\& cmake --build . --target install --config Release --parallel 8"
+  LANTERN_TARGET="lantern"
 else
-  BUILD_LANTERN_CMD='@echo "*** Skip building Lantern. A pre-built binary will be used."'
+  LANTERN_TARGET="dummylantern"
 fi
 
 cd src
-sed -e "s|@BUILD_LANTERN_CMD@|$BUILD_LANTERN_CMD|" Makevars.in > Makevars
+sed -e "s|@LANTERN_TARGET@|$LANTERN_TARGET|" -e "s|@PKG_PATH@|$PKG_PATH|" Makevars.in > Makevars
