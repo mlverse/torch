@@ -1,0 +1,48 @@
+name: "Install CudNN libraries"
+description: "Install CudNN libraries on Windows and Linux"
+inputs:
+   cuda_version:
+     required: true
+     description: "The cuda major and minor version."
+
+runs:
+  using: composite
+  steps:
+    - name: CuDNN URL
+      id: cudnn_url
+      run: |
+        CUDNN_URL=$(grep -i "${{ runner.os }}.*${{ inputs.cuda_version }}" "$GITHUB_ACTION_PATH/cudnn-url.txt" | grep -oE "[^ ]*$")
+        echo "cudnn_url=$(echo $CUDNN_URL)" >> $GITHUB_OUTPUT
+      shell: bash
+        
+    - name: Install cuDNN (Linux)
+      if: ${{ runner.os == 'Linux' }}
+      run: |
+        find $CUDA_PATH -maxdepth 2 -type d -ls
+        wget --quiet ${{ steps.cudnn_url.outputs.cudnn_url }} -O cudnn.tgz
+        tar -xzvf cudnn.tgz
+        sudo cp cuda/include/cudnn*.h $CUDA_PATH/include
+        sudo cp cuda/lib64/libcudnn* $CUDA_PATH/lib64 2>/dev/null || :
+        sudo cp cuda/lib/libcudnn* $CUDA_PATH/lib64 2>/dev/null || :
+        sudo chmod a+r $CUDA_PATH/include/cudnn*.h $CUDA_PATH/lib64/libcudnn* 2>/dev/null || :
+        sudo chmod a+r $CUDA_PATH/include/cudnn*.h $CUDA_PATH/lib/libcudnn* 2>/dev/null || :
+        ls $CUDA_PATH/lib/ || true
+        ls $CUDA_PATH/lib64/ || true
+        rm cudnn.tgz
+        find $CUDA_PATH -maxdepth 2 -type d -ls
+      shell: bash
+
+    - name: Install cuDNN (Windows)
+      if: ${{ runner.os == 'Windows' }}
+      run: |
+        curl ${{ steps.cudnn_url.outputs.cudnn_url }} --output cudnn.zip --silent --location
+        Expand-Archive -Path cudnn.zip -DestinationPath "C:\cudnn"
+        Get-ChildItem -Path "C:\cudnn"
+        Get-ChildItem -Path "${env:CUDA_PATH}"
+        Move-Item -Path "C:\cudnn\cuda\bin\cudnn*.dll" -Destination "${env:CUDA_PATH}\bin"
+        Move-Item -Path "C:\cudnn\cuda\include\cudnn*.h" -Destination "${env:CUDA_PATH}\include"
+        Move-Item -Path "C:\cudnn\cuda\lib\x64\cudnn*.lib" -Destination "${env:CUDA_PATH}\lib\x64"
+        echo "CUDNN_INCLUDE_PATH=""${CUDA_PATH}\include""" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
+        echo "CUDNN_LIBRARY_PATH=""${CUDA_PATH}\lib\x64""" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
+        Remove-Item -Path cudnn.zip
+      shell: pwsh

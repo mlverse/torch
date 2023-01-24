@@ -19,6 +19,16 @@ if (DEFINED ENV{CUDA} AND NOT "$ENV{CUDA}" STREQUAL "")
     message(STATUS "CUDA VERSION: $ENV{CUDA} | ${CUDA_VERSION} | ${CUDA_VERSION_NUMBER}")
 endif()
 
+
+if (DEFINED ENV{PRECXX11ABI} AND '$ENV{PRECXX11ABI}' STREQUAL '1')
+    if (NOT UNIX)
+        message(FATAL_ERROR "PRECXX11ABI is only supported on UNIX.")
+    endif()
+    message(STATUS "Building using -D_GLIBCXX_USE_CXX11_ABI=0")
+    add_definitions(-D_GLIBCXX_USE_CXX11_ABI=0)
+    set(PRECXX11ABI 1)
+endif()
+
 if (NOT EXISTS "${TORCH_PATH}")
 
     message(STATUS "TORCH_PATH doesn't exists yet. Downloading a pre-built binary.")
@@ -30,6 +40,12 @@ if (NOT EXISTS "${TORCH_PATH}")
     # find an appropriate torch url
     if (NOT DEFINED TORCH_URL)
         message(STATUS "No `TORCH_URL` is defined. Will use the default URL.")
+
+        set(PRECXX11ABI_URL "cxx11-abi-")
+        if(DEFINED PRECXX11ABI)
+            set(PRECXX11ABI_URL "")
+        endif()
+
         if (APPLE)
             if ('${CMAKE_HOST_SYSTEM_PROCESSOR}' STREQUAL 'x86_64')
                 set(TORCH_URL "https://download.pytorch.org/libtorch/cpu/libtorch-macos-${TORCH_VERSION}.zip")
@@ -44,9 +60,9 @@ if (NOT EXISTS "${TORCH_PATH}")
             endif()
         elseif(UNIX)
             if (DEFINED CUDA_VERSION_NUMBER)
-                set(TORCH_URL "https://download.pytorch.org/libtorch/cu${CUDA_VERSION_NUMBER}/libtorch-cxx11-abi-shared-with-deps-${TORCH_VERSION}%2Bcu${CUDA_VERSION_NUMBER}.zip")
+                set(TORCH_URL "https://download.pytorch.org/libtorch/cu${CUDA_VERSION_NUMBER}/libtorch-${PRECXX11ABI_URL}shared-with-deps-${TORCH_VERSION}%2Bcu${CUDA_VERSION_NUMBER}.zip")
             else()
-                set(TORCH_URL "https://download.pytorch.org/libtorch/cpu/libtorch-cxx11-abi-shared-with-deps-${TORCH_VERSION}%2Bcpu.zip")
+                set(TORCH_URL "https://download.pytorch.org/libtorch/cpu/libtorch-${PRECXX11ABI_URL}shared-with-deps-${TORCH_VERSION}%2Bcpu.zip")
             endif()
         endif()
     endif()
@@ -177,6 +193,10 @@ endif()
 
 if (NOT WIN32)
     set(CPACK_PACKAGE_VERSION ${CPACK_PACKAGE_VERSION}+${CMAKE_SYSTEM_PROCESSOR})
+endif()
+
+if (DEFINED PRECXX11ABI)
+    set(CPACK_PACKAGE_VERSION "${CPACK_PACKAGE_VERSION}+pre-cxx11")
 endif()
 
 include(CPack)

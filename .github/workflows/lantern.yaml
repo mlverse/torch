@@ -14,61 +14,58 @@ on:
 
 jobs:
   build:
-    runs-on: ${{ matrix.config.os }}
-    container: ${{ matrix.config.container }}
+    runs-on: ${{ matrix.config.runner }}
+    container: ${{ matrix.container }}
+    name: "os:${{matrix.config.os}} | v:${{matrix.config.version}} (pre-cxx11: ${{matrix.precxx11abi }})"
     strategy:
       fail-fast: false
       matrix:
-        config:
-          - {
-              os: macOS-latest,
-            }
-          - {
-              os: [self-hosted, m1],
-            }
-          - {
-              os: windows-2019,
-            }
-          - {
-              os: ubuntu-20.04,
-              container: "ubuntu:18.04",
-            }
-          - {
-              os: [self-hosted, gce],
-              cuda: "11.6",
-              cuda_patch: "1",
-              cudnn: "https://storage.googleapis.com/torch-lantern-builds/cudnn/cudnn-linux-x86_64-8.6.0.163_cuda11-archive.tgz",
-              container: "ubuntu:18.04",
-            }
-          - {
-              os: ubuntu-20.04,
-              cuda: "11.3",
-              cuda_patch: "1",
-              cudnn: "https://storage.googleapis.com/torch-lantern-builds/cudnn/cudnn-11.3-linux-x64-v8.2.1.32.tgz",
-              container: "ubuntu:18.04",
-            }
-          - {
-              os: ubuntu-20.04,
-              cuda: "10.2",
-              cuda_patch: "89",
-              cudnn: "https://storage.googleapis.com/torch-lantern-builds/cudnn/cudnn-10.2-linux-x64-v7.6.5.32.tgz",
-              container: "ubuntu:18.04",
-            }
-          - {
-              os: windows-2019,
-              upload: "Windows-Cuda-113",
-              cuda: "11.3",
-              cuda_patch: "1",
-              cudnn: "https://storage.googleapis.com/torch-lantern-builds/cudnn/cudnn-11.3-windows-x64-v8.2.1.32.zip",
-            }
-    env:
-      CUDA: ${{matrix.config.cuda}}
-      PRECXX11ABI: ${{matrix.config.pre_cxx11_abi}}
+        
+        config: 
+          - {os: macOS, version: cpu-intel, runner: macOS-latest}
+          - {os: macOS, version: cpu-m1, runner: [self-hosted, m1]}
+          
+          - {os: ubuntu, version: cpu, runner: ubuntu-latest}
+          - {os: ubuntu, version: cu10.2, runner: ubuntu-latest}
+          - {os: ubuntu, version: cu11.3, runner: ubuntu-latest}
+          - {os: ubuntu, version: cu11.6, runner: [self-hosted, gce, disk]}
 
+          - {os: windows, version: cpu, runner: windows-2019}
+          - {os: windows, version: cu11.3, runner: windows-2019}
+        
+        precxx11abi: [0, 1]
+
+        include:
+          - config: {os: ubuntu}
+            container: ubuntu:18.04
+          
+          # specify the CUDA patch for each major/minor version.
+          # required for cuda installation
+          - config: {version: cu10.2}
+            cuda: 10.2
+            cuda_patch: 89
+          - config: {version: cu11.3}
+            cuda: 11.3
+            cuda_patch: 1
+          - config: {version: cu11.6}
+            cuda: 11.6
+            cuda_patch: 1
+
+        exclude:
+          - config: {os: macOS}
+            precxx11abi: 1
+
+          - config: {os: windows}
+            precxx11abi: 1
+        
+    env:
+      CUDA: ${{ matrix.cuda }}
+      PRECXX11ABI: ${{ matrix.precxx11abi }}
+      
     steps:
 
       - name: Install system dependencies
-        if: matrix.config.container != ''
+        if: matrix.container != ''
         run: |
           apt update
           apt install -y curl sudo libxml2-dev wget chrpath rsync git
@@ -76,49 +73,25 @@ jobs:
           DRY_RUN=1 sh ./get-docker.sh
 
       - uses: actions/checkout@v3
-
+      
       - name: Setup cmake
         uses: jwlawson/actions-setup-cmake@v1
         with:
           cmake-version: "latest"
 
       - name: Install CUDA
-        if: ${{matrix.config.cuda != ''}}
+        if: ${{matrix.cuda != ''}}
         uses: Jimver/cuda-toolkit@v0.2.8
         id: cuda-toolkit
         with:
-          cuda: "${{matrix.config.cuda}}.${{matrix.config.cuda_patch}}"
-
-      - name: Install cuDNN (Linux)
-        if: ${{ matrix.config.cuda != '' && runner.os == 'Linux' }}
-        run: |
-          find $CUDA_PATH -maxdepth 2 -type d -ls
-          wget --quiet ${{matrix.config.cudnn}} -O cudnn.tgz
-          tar -xzvf cudnn.tgz
-          sudo cp cuda/include/cudnn*.h $CUDA_PATH/include
-          sudo cp cuda/lib64/libcudnn* $CUDA_PATH/lib64 2>/dev/null || :
-          sudo cp cuda/lib/libcudnn* $CUDA_PATH/lib64 2>/dev/null || :
-          sudo chmod a+r $CUDA_PATH/include/cudnn*.h $CUDA_PATH/lib64/libcudnn* 2>/dev/null || :
-          sudo chmod a+r $CUDA_PATH/include/cudnn*.h $CUDA_PATH/lib/libcudnn* 2>/dev/null || :
-          ls $CUDA_PATH/lib/ || true
-          ls $CUDA_PATH/lib64/ || true
-          rm cudnn.tgz
-          find $CUDA_PATH -maxdepth 2 -type d -ls
-
-      - name: Install cuDNN (Windows)
-        if: ${{ matrix.config.cuda != '' && runner.os == 'Windows' }}
-        run: |
-          curl ${{ matrix.config.cudnn }} --output cudnn.zip --silent --location
-          Expand-Archive -Path cudnn.zip -DestinationPath "C:\cudnn"
-          Get-ChildItem -Path "C:\cudnn"
-          Get-ChildItem -Path "${env:CUDA_PATH}"
-          Move-Item -Path "C:\cudnn\cuda\bin\cudnn*.dll" -Destination "${env:CUDA_PATH}\bin"
-          Move-Item -Path "C:\cudnn\cuda\include\cudnn*.h" -Destination "${env:CUDA_PATH}\include"
-          Move-Item -Path "C:\cudnn\cuda\lib\x64\cudnn*.lib" -Destination "${env:CUDA_PATH}\lib\x64"
-          echo "CUDNN_INCLUDE_PATH=""${CUDA_PATH}\include""" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
-          echo "CUDNN_LIBRARY_PATH=""${CUDA_PATH}\lib\x64""" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
-          Remove-Item -Path cudnn.zip
-
+          cuda: "${{matrix.cuda}}.${{matrix.cuda_patch}}"
+          
+      - name: Install CuDNN
+        if: ${{ matrix.cuda != '' }}
+        uses: ./.github/actions/install-cudnn
+        with:
+          cuda_version: ${{ matrix.cuda }}
+        
       - name: Run cmake
         run: |
           cd src/lantern/
