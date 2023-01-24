@@ -11,8 +11,8 @@ all: lantern $(SHLIB) rename
 lantern:
 ifdef BUILD_LANTERN
 	@echo "*** Building lantern!"
-	mkdir -p ../build
-	cd ../build && cmake ../src/lantern -DCMAKE_INSTALL_PREFIX=$(PKG_PATH) && cmake --build . --target install --config Release --parallel 8
+	mkdir -p ../build-lantern
+	cd ../build-lantern && cmake ../src/lantern -DCMAKE_INSTALL_PREFIX=$(PKG_PATH) && cmake --build . --target install --config Release --parallel 8
 else
 	@echo "*** Skip building Lantern. A pre-built binary will be used."
 endif
