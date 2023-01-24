@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env sh
 
 PKG_PATH=$(pwd)
 
@@ -6,11 +6,11 @@ if ! test -z $DEVTOOLS_LOAD; then
   PKG_PATH="$PKG_PATH/inst"
 fi
 
-if [[ "$BUILD_LANTERN" != true ]] && [[ "$BUILD_LANTERN" != 1 ]]; then
+if [ "$BUILD_LANTERN" != true ] && [[ "$BUILD_LANTERN" != 1 ]]; then
   BUILD_LANTERN=""
 fi
 
-if [[ "$BUILD_LANTERN" != "" ]]; then
+if [ "$BUILD_LANTERN" != "" ]; then
   LANTERN_TARGET="lantern"
 else
   LANTERN_TARGET="dummylantern"
