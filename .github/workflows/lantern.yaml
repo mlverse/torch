@@ -5,15 +5,12 @@ on:
     branches:
       - master
       - main
-<<<<<<< HEAD
       - "cran/**"
       - cuda-116
       - empty-cache
       - nonabi116
       - disk
-=======
       - configure
->>>>>>> cc91689ea (Produce and upload lantern binary packages)
 
 jobs:
   build:
@@ -45,22 +42,6 @@ jobs:
             }
           - {
               os: ubuntu-20.04,
-<<<<<<< HEAD
-              artifact: "build/liblantern.so",
-              upload: "LinuxNonABI-Cuda-116",
-              cuda: "11.6",
-              cuda_patch: "1",
-              cudnn: "https://storage.googleapis.com/torch-lantern-builds/cudnn/cudnn-linux-x86_64-8.6.0.163_cuda11-archive.tgz",
-              fixlib: "chrpath -r '$ORIGIN/.' liblantern.so",
-              pre_cxx11_abi: 1,
-              container: "ubuntu:18.04",
-            }
-          - {
-              os: [self-hosted, gce, disk],
-              artifact: "build/liblantern.so",
-              upload: "Linux-Cuda-113",
-=======
->>>>>>> cc91689ea (Produce and upload lantern binary packages)
               cuda: "11.3",
               cuda_patch: "1",
               cudnn: "https://storage.googleapis.com/torch-lantern-builds/cudnn/cudnn-11.3-linux-x64-v8.2.1.32.tgz",
