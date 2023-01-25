@@ -10,7 +10,6 @@ on:
       - empty-cache
       - nonabi116
       - disk
-      - configure
 
 jobs:
   build:

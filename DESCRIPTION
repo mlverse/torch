@@ -38,10 +38,11 @@ Imports:
     tools,
     coro (>= 1.0.2),
     callr,
-    cli,
+    cli (>= 3.0.0),
     glue,
-    ellipsis
-RoxygenNote: 7.2.1
+    ellipsis,
+    desc
+RoxygenNote: 7.2.3
 Roxygen: list(markdown = TRUE)
 Suggests:
     testthat (>= 3.0.0),

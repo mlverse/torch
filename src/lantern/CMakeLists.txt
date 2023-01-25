@@ -166,9 +166,19 @@ add_library(lantern::library ALIAS lantern)
 target_include_directories(lantern PUBLIC
     ${PROJECT_SOURCE_DIR}/include
 )
+
+if (APPLE)
+    set_property(TARGET lantern
+        PROPERTY INSTALL_RPATH "@loader_path"
+    )
+elseif(UNIX)
+    set_property(TARGET lantern
+        PROPERTY INSTALL_RPATH "$ORIGIN"
+    )
+endif()
+
 set_property(TARGET lantern
- PROPERTY PUBLIC_HEADER ${PROJECT_SOURCE_DIR}/include/lantern/lantern.h
- PROPERTY INSTALL_RPATH "@loader_path"
+    PROPERTY PUBLIC_HEADER ${PROJECT_SOURCE_DIR}/include/lantern/lantern.h
 )
 
 target_link_libraries(lantern ${TORCH_LIBRARIES})
@@ -202,7 +212,13 @@ endif()
 include(CPack)
 
 install(
-    TARGETS lantern LIBRARY
+    TARGETS lantern
+    # LibTorch currently doesn't use the CPack defaults and installs
+    # everything into `lib` even on Windows. We try to match that so
+    # lantern.dll ends up in the same directory as torch.dll and friends.
+    LIBRARY DESTINATION lib
+    RUNTIME DESTINATION lib
+    ARCHIVE DESTINATION lib
     PUBLIC_HEADER DESTINATION include/lantern
 )
 

@@ -5,24 +5,11 @@
 \alias{install_torch_from_file}
 \title{Install Torch from files}
 \usage{
-get_install_libs_url(
-  version = "1.12.1",
-  type = install_type(version = version)
-)
+get_install_libs_url(version = NA, type = NA)
 
-install_torch_from_file(
-  version = "1.12.1",
-  type = install_type(version = version),
-  libtorch,
-  liblantern,
-  ...
-)
+install_torch_from_file(version = NA, type = NA, libtorch, liblantern, ...)
 }
 \arguments{
-\item{version}{The Torch version to install.}
-
-\item{type}{The installation type for Torch. Valid values are \code{"cpu"} or the 'CUDA' version.}
-
 \item{libtorch}{The installation archive file to use for Torch. Shall be a \code{"file://"} URL scheme.}
 
 \item{liblantern}{The installation archive file to use for Lantern. Shall be a \code{"file://"} URL scheme.}

@@ -6,7 +6,7 @@ if ! test -z $DEVTOOLS_LOAD; then
   PKG_PATH="$PKG_PATH/inst"
 fi
 
-if [ "$BUILD_LANTERN" != true ] && [[ "$BUILD_LANTERN" != 1 ]]; then
+if [ "$BUILD_LANTERN" != true ] && [ "$BUILD_LANTERN" != 1 ]; then
   BUILD_LANTERN=""
 fi
 

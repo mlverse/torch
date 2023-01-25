@@ -11,7 +11,7 @@ all: $(LANTERN_TARGET) $(SHLIB) rename
 lantern:
 	@echo "*** Building lantern!"
 	mkdir -p ../build-lantern
-	cd ../build-lantern && cmake ../src/lantern -DCMAKE_INSTALL_PREFIX=$PKG_PATH && cmake --build . --target install --config Release
+	cd ../build-lantern && cmake ../src/lantern -DCMAKE_INSTALL_PREFIX=$(PKG_PATH) && cmake --build . --target install --config Release
 
 dummylantern:
 	@echo "*** Skip building lantern."

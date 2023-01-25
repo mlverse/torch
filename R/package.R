@@ -27,7 +27,7 @@ globalVariables(c("..", "self", "private", "N"))
   autoinstall <- autoinstall || (Sys.getenv("TORCH_INSTALL", unset = 2) == "1")
   
   # we only autoinstall if installation doesn't yet exist.
-  autoinstall <- autoinstall && (!install_exists())
+  autoinstall <- autoinstall && (!torch_is_installed())
   
   if (autoinstall) {
     install_success <- tryCatch(
@@ -53,7 +53,7 @@ globalVariables(c("..", "self", "private", "N"))
     )
   }
 
-  if (install_exists() && install_success && Sys.getenv("TORCH_LOAD", unset = 1) != 0) {
+  if (torch_is_installed() && install_success && Sys.getenv("TORCH_LOAD", unset = 1) != 0) {
     # in case init fails aallow user to restart session rather than blocking install
     tryCatch(
       {

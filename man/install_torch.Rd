@@ -4,41 +4,33 @@
 \alias{install_torch}
 \title{Install Torch}
 \usage{
-install_torch(
-  version = "1.12.1",
-  type = install_type(version = version),
-  reinstall = FALSE,
-  path = install_path(),
-  timeout = 360,
-  ...
-)
+install_torch(reinstall = FALSE)
 }
 \arguments{
-\item{version}{The Torch version to install.}
-
-\item{type}{The installation type for Torch. Valid values are \code{"cpu"} or the 'CUDA' version.}
-
 \item{reinstall}{Re-install Torch even if its already installed?}
-
-\item{path}{Optional path to install or check for an already existing installation.}
-
-\item{timeout}{Optional timeout in seconds for large file download.}
-
-\item{...}{other optional arguments (like \code{`load`} for manual installation).}
 }
 \description{
 Installs Torch and its dependencies.
 }
 \details{
-When using \code{path} to install in a specific location, make sure the \code{TORCH_HOME} environment
-variable is set to this same path to reuse this installation. The \code{TORCH_INSTALL} environment
+This function is mainly controlled by environment variables that can be used
+to override the defaults:
+\itemize{
+\item \code{TORCH_HOME}: the installation path. By default dependencies are installed
+within the package directory. Eg what's given by \code{system.file(package="torch")}.
+\item \code{TORCH_URL}: A URL, path to a ZIP file or a directory containing a LibTorch version.
+Files will be installed/copied to the \code{TORCH_HOME} directory.
+\item \code{LANTERN_URL}: Same as \code{TORCH_URL} but for the Lantern library.
+\item \code{TORCH_INSTALL_DEBUG}: Setting it to 1, shows debug log messages during installation.
+\item \code{PRECXX11ABI}: Setting it to \code{1} will will trigger the installation of
+a Pre-cxx11 ABI installation of LibTorch. This can be useful in environments with
+older versions of GLIBC like CentOS7 and older Debian/Ubuntu versions.
+}
+
+The \code{TORCH_INSTALL} environment
 variable can be set to \code{0} to prevent auto-installing torch and \code{TORCH_LOAD} set to \code{0}
 to avoid loading dependencies automatically. These environment variables are meant for advanced use
 cases and troubleshooting only.
 When timeout error occurs during library archive download, or length of downloaded files differ from
 reported length, an increase of the \code{timeout} value should help.
-
-Setting the environmanet variable \code{PRECXX11ABI=1} will trigger the installation of
-a Pre-cxx11 ABI installation of LibTorch. This can be useful in environments with
-older versions of GLIBC like CentOS7 and older Debian/Ubuntu versions.
 }
