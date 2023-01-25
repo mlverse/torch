@@ -117,10 +117,10 @@ jobs:
         uses: 'google-github-actions/upload-cloud-storage@v1'
         with:
           path: 'src/lantern/build/${{ steps.build.outputs.fname }}'
-          destination: 'torch-lantern-builds/binaries/${{ github.sha }}/${{ steps.build.outputs.fname }}'
+          destination: 'torch-lantern-builds/binaries/${{ github.sha }}/'
 
       - uses: 'google-github-actions/upload-cloud-storage@v1'
         with:
           path: 'src/lantern/build/${{ steps.build.outputs.fname }}'
-          destination: 'torch-lantern-builds/binaries/${{ github.ref }}/latest/${{ steps.build.outputs.fname }}'
+          destination: 'torch-lantern-builds/binaries/${{ github.ref }}/latest/'
       
