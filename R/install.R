@@ -176,8 +176,6 @@ libtorch_url <- function() {
   url
 }
 
-
-
 lantern_url <- function() {
   url <- Sys.getenv("LANTERN_URL", "")
   
@@ -208,23 +206,37 @@ lantern_url <- function() {
   # in this case the RemoteSha is stored in the package description and
   # we can install directly from it.
   # In the other cases, we download the latest version of the 'branch' variable.
-  base_url <- "https://storage.googleapis.com/torch-lantern-builds/binaries/"
-  remote_sha <- desc::desc(package = "torch")$get("RemoteSha")
-  if (is.na(remote_sha)) {
-    installer_message(c(
-      "Could not find the SHA of the commit that installed the package.",
-      "Using the latest build for the specified branch: {.val {branch}}."
-    ))
-    base_url <- paste0(base_url, "refs/heads/", branch, "/latest/")
-  } else {
-    installer_message(c(
-      "Could find the SHA of the commit that installed the package.",
-      "SHA: {.val {remote_sha}}."
-    ))
-    base_url <- paste0(base_url, remote_sha, "/")
-  }
+  base_url <- Sys.getenv("LANTERN_BASE_URL", "")
+
+  if (!nzchar(base_url)) {
+    base_url <- "https://storage.googleapis.com/torch-lantern-builds/binaries/"
   
-  final_url <- utils::URLencode(paste0(base_url, fname))
+    remote_sha <- Sys.getenv("TORCH_COMMIT_SHA", "")
+    if (!nzchar(remote_sha)) {
+      remote_sha <- desc::desc(package = "torch")$get("RemoteSha")  
+    }
+    
+    if (is.na(remote_sha)) {
+      installer_message(c(
+        "Could not find the SHA of the commit that installed the package.",
+        "Using the latest build for the specified branch: {.val {branch}}."
+      ))
+      base_url <- paste0(base_url, "refs/heads/", branch, "/latest/")
+    } else {
+      installer_message(c(
+        "Could find the SHA of the commit that installed the package.",
+        "SHA: {.val {remote_sha}}."
+      ))
+      base_url <- paste0(base_url, remote_sha, "/")
+    }
+  }
+
+  final_url <- paste0(base_url, fname)
+
+  if (is_url(final_url)) {
+    final_url <- utils::URLencode(final_url)
+  }
+
   installer_message(c(
     "Lantern will be downloaded from the following URL:",
     "{.url {final_url}}"

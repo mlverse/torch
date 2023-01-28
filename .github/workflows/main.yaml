@@ -11,7 +11,14 @@ on:
 name: Test
 
 jobs:
+  
+  lantern:
+    uses: ./.github/workflows/lantern.yaml
+    if: ${{ contains(github.event.pull_request.labels.*.name, 'lantern') }}
+
   check:
+    needs: lantern
+    if: ${{ always() && needs.lantern.result != 'failed' }}
     strategy:
       fail-fast: false
       matrix:
@@ -51,11 +58,23 @@ jobs:
       R_REMOTES_NO_ERRORS_FROM_WARNINGS: true
       TORCH_TEST: 1
       TORCH_INSTALL: 1
-      BUILD_LANTERN: 0
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
       PRECXX11ABI: ${{ matrix.config.precxx11abi }}
 
     steps:
+
+      - name: Download lantern artifacts
+        if: ${{ needs.lantern.result != 'skipped' }}
+        uses: actions/download-artifact@v3
+        with:
+          name: lantern
+          path: ~/Downloads/
+
+      - name: Set base URL for downloading
+        if: ${{ needs.lantern.result != 'skipped' }}
+        run: |
+          echo "LANTERN_BASE_URL=~/Downloads/" >> $GITHUB_ENV
+
       - uses: actions/checkout@v3
       
       - uses: ./.github/actions/setup-r
@@ -79,9 +98,4 @@ jobs:
           error-on: '"error"'
           args: 'c("--no-multiarch", "--no-manual", "--as-cran")'
       
-      - name: Setup tmate session
-        if: ${{ failure() }}
-        uses: mxschmitt/action-tmate@v3
-        with:
-          limit-access-to-actor: true
       
