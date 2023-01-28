@@ -111,5 +111,6 @@ jobs:
         uses: ./.github/actions/upload-gcs
         with:
           fname: ${{ steps.build.outputs.fname }}
+          gcp_credential: ${{ secrets.GCP_APPLICATION_CREDENTIALS }}
 
       

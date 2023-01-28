@@ -4,6 +4,9 @@ inputs:
    fname:
      required: true
      description: "the filename that should be uploaded."
+    gcp_credential:
+      required: true
+      description: "GCP credentials"
 
 runs:
   using: composite
@@ -12,7 +15,7 @@ runs:
     - id: 'auth'
       uses: 'google-github-actions/auth@v1'
       with:
-        credentials_json: '${{ secrets.GCP_APPLICATION_CREDENTIALS }}'
+        credentials_json: ${{ inputs.gcp_credential }}
 
     - id: 'upload-file'
       uses: 'google-github-actions/upload-cloud-storage@v1'
