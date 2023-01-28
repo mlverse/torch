@@ -1,11 +1,6 @@
 name: Lantern
 
 on:
-  push:
-    branches:
-      - master
-      - main
-      - "cran/**"
   workflow_call:
 
 jobs:
@@ -111,22 +106,10 @@ jobs:
           name: lantern
           path: 'src/lantern/build/${{ steps.build.outputs.fname }}'
 
-      - id: 'auth'
-        if: ${{ github.workflow != 'Test' }}
-        uses: 'google-github-actions/auth@v1'
+      - id: 'gcs'
+        if: ${{ github.workflow != 'Test' || github.event_name != 'pull_request'}}
+        uses: ./.github/actions/upload-gcs
         with:
-          credentials_json: '${{ secrets.GCP_APPLICATION_CREDENTIALS }}'
+          fname: ${{ steps.build.outputs.fname }}
 
-      - id: 'upload-file'
-        if: ${{ github.workflow != 'Test' }}
-        uses: 'google-github-actions/upload-cloud-storage@v1'
-        with:
-          path: 'src/lantern/build/${{ steps.build.outputs.fname }}'
-          destination: 'torch-lantern-builds/binaries/${{ github.sha }}/'
-
-      - uses: 'google-github-actions/upload-cloud-storage@v1'
-        if: ${{ github.workflow != 'Test' }}
-        with:
-          path: 'src/lantern/build/${{ steps.build.outputs.fname }}'
-          destination: 'torch-lantern-builds/binaries/${{ github.ref }}/latest/'
       
