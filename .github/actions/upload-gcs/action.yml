@@ -1,10 +1,10 @@
 name: "Uploads lantern artifacts to Google Cloud Storage"
 description: "Uploads lantern artifacts to Google Cloud Storage"
 inputs:
-   fname:
+  fname:
      required: true
      description: "the filename that should be uploaded."
-    gcp_credential:
+  gcp_credential:
       required: true
       description: "GCP credentials"
 
