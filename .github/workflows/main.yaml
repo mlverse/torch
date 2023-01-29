@@ -16,6 +16,7 @@ jobs:
   lantern:
     uses: ./.github/workflows/lantern.yaml
     if: ${{ contains(github.event.pull_request.labels.*.name, 'lantern') || github.event_name != 'pull_request' }}
+    secrets: inherit
 
   check:
     needs: lantern
