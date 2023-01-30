@@ -21,6 +21,10 @@ torch_version <- "1.12.1"
 #' - `PRECXX11ABI`: Setting it to `1` will will trigger the installation of
 #'    a Pre-cxx11 ABI installation of LibTorch. This can be useful in environments with
 #'    older versions of GLIBC like CentOS7 and older Debian/Ubuntu versions.
+#' - `LANTERN_BASE_URL`: The base URL for lantern files. This allows passing a directory
+#'   where lantern binaries are located. The filename is then constructed as usual.
+#' - `TORCH_COMMIT_SHA`: torch repository commit sha to be used when querying lantern
+#'   uploads.
 #' 
 #' The \code{TORCH_INSTALL} environment
 #' variable can be set to \code{0} to prevent auto-installing torch and \code{TORCH_LOAD} set to \code{0}
