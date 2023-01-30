@@ -165,7 +165,7 @@ libtorch_url <- function() {
   }
   kind <- installation_kind()
   if (is_windows()) {
-    url <- glue::glue("https://download.pytorch.org/libtorch/cpu/libtorch-win-shared-with-deps-{torch_version}%2Bcpu.zip")
+    url <- glue::glue("https://download.pytorch.org/libtorch/{kind}/libtorch-win-shared-with-deps-{torch_version}%2B{kind}.zip")
   }
   if (is_linux()) {
     precxx11 <- if(precxx11abi()) "" else "cxx11-abi-"
