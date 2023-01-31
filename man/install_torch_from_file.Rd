@@ -10,6 +10,10 @@ get_install_libs_url(version = NA, type = NA)
 install_torch_from_file(version = NA, type = NA, libtorch, liblantern, ...)
 }
 \arguments{
+\item{version}{Not used}
+
+\item{type}{Not used. This function is deprecated.}
+
 \item{libtorch}{The installation archive file to use for Torch. Shall be a \code{"file://"} URL scheme.}
 
 \item{liblantern}{The installation archive file to use for Lantern. Shall be a \code{"file://"} URL scheme.}

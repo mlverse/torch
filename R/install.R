@@ -519,6 +519,8 @@ is_url <- function(x) {
 #' List the Torch and Lantern libraries URLs to download as local files in order to proceed with  \code{install_torch_from_file()}.
 #'
 #' @inheritParams install_torch
+#' @param version Not used
+#' @param type Not used. This function is deprecated.
 #'
 #' @rdname install_torch_from_file
 #' @export
