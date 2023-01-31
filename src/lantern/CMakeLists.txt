@@ -222,8 +222,14 @@ install(
     PUBLIC_HEADER DESTINATION include/lantern
 )
 
-if (DEFINED BUNDLE_LIBTORCH)
+if (DEFINED BUNDLE_DEPENDENCIES)
     install(DIRECTORY ${TORCH_PATH} DESTINATION .)
+    install(TARGETS lantern RUNTIME_DEPENDENCY_SET lantern_deps)
+    install(RUNTIME_DEPENDENCY_SET lantern_deps 
+		        DESTINATION lib
+		        DIRECTORIES "${TORCH_PATH}/lib/" "${CUDA_TOOLKIT_ROOT_DIR}/bin/"
+		        UNRESOLVED_DEPENDENCIES_VAR unresolved_deps
+		)
 endif()
 
 ############################################################
