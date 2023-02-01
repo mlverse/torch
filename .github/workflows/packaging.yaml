@@ -4,16 +4,16 @@ on:
   workflow_dispatch:
   
 jobs:
-  build:
-   runs-on: ${{ matrix.config.runner }}
-   container: ${{ matrix.container }}
-   strategy:
+  binaries:
+    runs-on: ${{ matrix.config.runner }}
+    container: ${{ matrix.container }}
+    strategy:
       fail-fast: false
       matrix:
         
         config: 
           - {os: windows, version: cu11.3, runner: windows-2019}
-          
+        
         r_version: [release]
           
         include:
