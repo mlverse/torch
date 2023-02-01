@@ -37,15 +37,11 @@ jobs:
       
     steps:
     
-      - name: Install system dependencies
-        if: matrix.container != ''
-        run: |
-          apt update
-          apt install -y curl sudo libxml2-dev wget chrpath rsync git
-          curl -fsSL https://get.docker.com -o get-docker.sh
-          DRY_RUN=1 sh ./get-docker.sh
-            
       - uses: actions/checkout@v3
+      
+      - uses: ./.github/actions/setup-r
+        with:
+          r_version: ${{ matrix.r_version}}
       
       - name: Setup cmake
         uses: jwlawson/actions-setup-cmake@v1
@@ -64,10 +60,6 @@ jobs:
         uses: ./.github/actions/install-cudnn
         with:
           cuda_version: ${{ matrix.cuda }}
-          
-      - uses: ./.github/actions/setup-r
-        with:
-          r_version: ${{ matrix.r_version}}
           
       - uses: r-lib/actions/setup-r-dependencies@v2
         with:
