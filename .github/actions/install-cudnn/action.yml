@@ -18,6 +18,7 @@ runs:
     - name: Install cuDNN (Linux)
       if: ${{ runner.os == 'Linux' }}
       run: |
+        apt-get install -y wget
         find $CUDA_PATH -maxdepth 2 -type d -ls
         wget --quiet ${{ steps.cudnn_url.outputs.cudnn_url }} -O cudnn.tgz
         tar -xzvf cudnn.tgz
