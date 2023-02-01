@@ -67,7 +67,6 @@ jobs:
         id: build
         run: |
           binary_path <- pkgbuild::build(binary = TRUE)
-          cudnn_url=$(echo $CUDNN_URL)" >> $GITHUB_OUTPUT
           cat("binary_path='", path.expand(binary_path), "'\n", sep = "", file = Sys.getenv("GITHUB_OUTPUT"))
         shell: Rscript {0}
         
