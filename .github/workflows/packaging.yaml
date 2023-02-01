@@ -1,0 +1,82 @@
+name: Packaging
+
+on:
+  workflow_dispatch:
+  
+jobs:
+  build:
+   runs-on: ${{ matrix.config.runner }}
+   container: ${{ matrix.container }}
+   strategy:
+      fail-fast: false
+      matrix:
+        
+        config: 
+          - {os: windows, version: cu11.3, runner: windows-2019}
+          
+        r_version: [release]
+          
+        include:
+          
+          - config: {version: cu11.3}
+            cuda: 11.3
+            cuda_patch: 1
+            
+    env:
+      CUDA: ${{ matrix.cuda }}
+      PRECXX11ABI: ${{ matrix.precxx11abi }}
+      CMAKE_FLAGS: "-DBUNDLE_DEPENDENCIES=1"
+      BUILD_LANTERN: 1
+      
+    steps:
+            
+      - uses: actions/checkout@v3
+      
+      - name: Setup cmake
+        uses: jwlawson/actions-setup-cmake@v1
+        with:
+          cmake-version: "latest"
+
+      - name: Install CUDA
+        if: ${{matrix.cuda != ''}}
+        uses: Jimver/cuda-toolkit@v0.2.8
+        id: cuda-toolkit
+        with:
+          cuda: "${{matrix.cuda}}.${{matrix.cuda_patch}}"
+          
+      - name: Install CuDNN
+        if: ${{ matrix.cuda != '' }}
+        uses: ./.github/actions/install-cudnn
+        with:
+          cuda_version: ${{ matrix.cuda }}
+          
+      - uses: ./.github/actions/setup-r
+        with:
+          r_version: ${{ matrix.r_version}}
+          
+      - uses: r-lib/actions/setup-r-dependencies@v2
+        with:
+          cache: false
+          extra-packages: any::rcmdcheck
+          needs: check
+          
+      - name: Build binary package
+        id: build
+        runs: |
+          binary_path <- pkgbuild::build(binary = TRUE)
+          cudnn_url=$(echo $CUDNN_URL)" >> $GITHUB_OUTPUT
+          cat("binary_path='", path.expand(binary_path), "'\n", sep = "", file = Sys.getenv("GITHUB_OUTPUT"))
+        shell: Rscript {0}
+        
+      - id: 'auth'
+        uses: 'google-github-actions/auth@v1'
+        with:
+          credentials_json: ${{ secrets.GCP_APPLICATION_CREDENTIALS }}
+
+      - id: 'upload-file'
+        uses: 'google-github-actions/upload-cloud-storage@v1'
+        with:
+          path: ${{ steps.build.outputs.binary_path }}
+          destination: 'torch-lantern-builds/packages/'
+      
+          
