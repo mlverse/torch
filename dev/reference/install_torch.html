@@ -16,7 +16,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">torch</a>
 
-    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">0.9.0.9000</small>
+    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">0.9.1.9000</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -53,6 +53,7 @@
   <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-advanced">Advanced</a>
   <div class="dropdown-menu" aria-labelledby="dropdown-advanced">
     <a class="dropdown-item" href="../articles/memory-management.html">Memory management</a>
+    <a class="dropdown-item" href="../articles/modifying-source-code.html">Building locally</a>
   </div>
 </li>
 <li class="active nav-item">
@@ -88,54 +89,37 @@
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">install_torch</span><span class="op">(</span></span>
-<span>  version <span class="op">=</span> <span class="st">"1.12.1"</span>,</span>
-<span>  type <span class="op">=</span> <span class="fu">install_type</span><span class="op">(</span>version <span class="op">=</span> <span class="va">version</span><span class="op">)</span>,</span>
-<span>  reinstall <span class="op">=</span> <span class="cn">FALSE</span>,</span>
-<span>  path <span class="op">=</span> <span class="fu">install_path</span><span class="op">(</span><span class="op">)</span>,</span>
-<span>  timeout <span class="op">=</span> <span class="fl">360</span>,</span>
-<span>  <span class="va">...</span></span>
-<span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">install_torch</span><span class="op">(</span>reinstall <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
-    <dl><dt>version</dt>
-<dd><p>The Torch version to install.</p></dd>
-
-
-<dt>type</dt>
-<dd><p>The installation type for Torch. Valid values are <code>"cpu"</code> or the 'CUDA' version.</p></dd>
-
-
-<dt>reinstall</dt>
+    <dl><dt>reinstall</dt>
 <dd><p>Re-install Torch even if its already installed?</p></dd>
-
-
-<dt>path</dt>
-<dd><p>Optional path to install or check for an already existing installation.</p></dd>
-
-
-<dt>timeout</dt>
-<dd><p>Optional timeout in seconds for large file download.</p></dd>
-
-
-<dt>...</dt>
-<dd><p>other optional arguments (like <code>`load`</code> for manual installation).</p></dd>
 
 </dl></div>
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
-    <p>When using <code>path</code> to install in a specific location, make sure the <code>TORCH_HOME</code> environment
-variable is set to this same path to reuse this installation. The <code>TORCH_INSTALL</code> environment
+    <p>This function is mainly controlled by environment variables that can be used
+to override the defaults:</p><ul><li><p><code>TORCH_HOME</code>: the installation path. By default dependencies are installed
+within the package directory. Eg what's given by <code>system.file(package="torch")</code>.</p></li>
+<li><p><code>TORCH_URL</code>: A URL, path to a ZIP file or a directory containing a LibTorch version.
+Files will be installed/copied to the <code>TORCH_HOME</code> directory.</p></li>
+<li><p><code>LANTERN_URL</code>: Same as <code>TORCH_URL</code> but for the Lantern library.</p></li>
+<li><p><code>TORCH_INSTALL_DEBUG</code>: Setting it to 1, shows debug log messages during installation.</p></li>
+<li><p><code>PRECXX11ABI</code>: Setting it to <code>1</code> will will trigger the installation of
+a Pre-cxx11 ABI installation of LibTorch. This can be useful in environments with
+older versions of GLIBC like CentOS7 and older Debian/Ubuntu versions.</p></li>
+<li><p><code>LANTERN_BASE_URL</code>: The base URL for lantern files. This allows passing a directory
+where lantern binaries are located. The filename is then constructed as usual.</p></li>
+<li><p><code>TORCH_COMMIT_SHA</code>: torch repository commit sha to be used when querying lantern
+uploads.</p></li>
+</ul><p>The <code>TORCH_INSTALL</code> environment
 variable can be set to <code>0</code> to prevent auto-installing torch and <code>TORCH_LOAD</code> set to <code>0</code>
 to avoid loading dependencies automatically. These environment variables are meant for advanced use
 cases and troubleshooting only.
 When timeout error occurs during library archive download, or length of downloaded files differ from
 reported length, an increase of the <code>timeout</code> value should help.</p>
-<p>Setting the environmanet variable <code>PRECXX11ABI=1</code> will trigger the installation of
-a Pre-cxx11 ABI installation of LibTorch. This can be useful in environments with
-older versions of GLIBC like CentOS7 and older Debian/Ubuntu versions.</p>
     </div>
 
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>

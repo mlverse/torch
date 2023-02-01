@@ -16,7 +16,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">torch</a>
 
-    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">0.9.0.9000</small>
+    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">0.9.1.9000</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -53,6 +53,7 @@
   <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-advanced">Advanced</a>
   <div class="dropdown-menu" aria-labelledby="dropdown-advanced">
     <a class="dropdown-item" href="../articles/memory-management.html">Memory management</a>
+    <a class="dropdown-item" href="../articles/modifying-source-code.html">Building locally</a>
   </div>
 </li>
 <li class="active nav-item">
@@ -78,7 +79,7 @@
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="" class="logo" alt=""><h1>Where</h1>
-      <small class="dont-index">Source: <a href="https://github.com/mlverse/torch/blob/HEAD/R/gen-namespace-docs.R" class="external-link"><code>R/gen-namespace-docs.R</code></a>, <a href="https://github.com/mlverse/torch/blob/HEAD/R/gen-namespace-examples.R" class="external-link"><code>R/gen-namespace-examples.R</code></a>, <a href="https://github.com/mlverse/torch/blob/HEAD/R/gen-namespace.R" class="external-link"><code>R/gen-namespace.R</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/mlverse/torch/blob/HEAD/R/gen-namespace-docs.R" class="external-link"><code>R/gen-namespace-docs.R</code></a>, <a href="https://github.com/mlverse/torch/blob/HEAD/R/gen-namespace-examples.R" class="external-link"><code>R/gen-namespace-examples.R</code></a>, <a href="https://github.com/mlverse/torch/blob/HEAD/R/wrapers.R" class="external-link"><code>R/wrapers.R</code></a></small>
       <div class="d-none name"><code>torch_where.Rd</code></div>
     </div>
 
@@ -88,7 +89,7 @@
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">torch_where</span><span class="op">(</span><span class="va">condition</span>, <span class="va">self</span>, <span class="va">other</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">torch_where</span><span class="op">(</span><span class="va">condition</span>, self <span class="op">=</span> <span class="cn">NULL</span>, other <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">

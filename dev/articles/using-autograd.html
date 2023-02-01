@@ -34,7 +34,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">torch</a>
 
-    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">0.9.0.9000</small>
+    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">0.9.1.9000</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -72,6 +72,7 @@
   <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-advanced">Advanced</a>
   <div class="dropdown-menu" aria-labelledby="dropdown-advanced">
     <a class="dropdown-item" href="../articles/memory-management.html">Memory management</a>
+    <a class="dropdown-item" href="../articles/modifying-source-code.html">Building locally</a>
   </div>
 </li>
 <li class="nav-item">
@@ -296,26 +297,26 @@ number of lines (that did manual backprop) are gone:</p>
 <span>    <span class="op">}</span><span class="op">)</span></span>
 <span>    </span>
 <span><span class="op">}</span></span>
-<span><span class="co">#&gt; 10 20.635 </span></span>
-<span><span class="co">#&gt; 20 19.681 </span></span>
-<span><span class="co">#&gt; 30 18.78726 </span></span>
-<span><span class="co">#&gt; 40 17.94909 </span></span>
-<span><span class="co">#&gt; 50 17.16112 </span></span>
-<span><span class="co">#&gt; 60 16.42 </span></span>
-<span><span class="co">#&gt; 70 15.72362 </span></span>
-<span><span class="co">#&gt; 80 15.06867 </span></span>
-<span><span class="co">#&gt; 90 14.45258 </span></span>
-<span><span class="co">#&gt; 100 13.87383 </span></span>
-<span><span class="co">#&gt; 110 13.32701 </span></span>
-<span><span class="co">#&gt; 120 12.81201 </span></span>
-<span><span class="co">#&gt; 130 12.32616 </span></span>
-<span><span class="co">#&gt; 140 11.86754 </span></span>
-<span><span class="co">#&gt; 150 11.43436 </span></span>
-<span><span class="co">#&gt; 160 11.02492 </span></span>
-<span><span class="co">#&gt; 170 10.63922 </span></span>
-<span><span class="co">#&gt; 180 10.27453 </span></span>
-<span><span class="co">#&gt; 190 9.929648 </span></span>
-<span><span class="co">#&gt; 200 9.601958</span></span></code></pre></div>
+<span><span class="co">#&gt; 10 60.44322 </span></span>
+<span><span class="co">#&gt; 20 54.93464 </span></span>
+<span><span class="co">#&gt; 30 50.18893 </span></span>
+<span><span class="co">#&gt; 40 46.07805 </span></span>
+<span><span class="co">#&gt; 50 42.49706 </span></span>
+<span><span class="co">#&gt; 60 39.36283 </span></span>
+<span><span class="co">#&gt; 70 36.60401 </span></span>
+<span><span class="co">#&gt; 80 34.16521 </span></span>
+<span><span class="co">#&gt; 90 32.00724 </span></span>
+<span><span class="co">#&gt; 100 30.08516 </span></span>
+<span><span class="co">#&gt; 110 28.36242 </span></span>
+<span><span class="co">#&gt; 120 26.81083 </span></span>
+<span><span class="co">#&gt; 130 25.40633 </span></span>
+<span><span class="co">#&gt; 140 24.12724 </span></span>
+<span><span class="co">#&gt; 150 22.9601 </span></span>
+<span><span class="co">#&gt; 160 21.89469 </span></span>
+<span><span class="co">#&gt; 170 20.91968 </span></span>
+<span><span class="co">#&gt; 180 20.02361 </span></span>
+<span><span class="co">#&gt; 190 19.19825 </span></span>
+<span><span class="co">#&gt; 200 18.43639</span></span></code></pre></div>
 <p>We still manually compute the forward pass, and we still manually
 update the weights. In the last two chapters of this section, we’ll see
 how these parts of the logic can be made more modular and reusable, as

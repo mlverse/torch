@@ -34,7 +34,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">torch</a>
 
-    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">0.9.0.9000</small>
+    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">0.9.1.9000</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -72,6 +72,7 @@
   <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-advanced">Advanced</a>
   <div class="dropdown-menu" aria-labelledby="dropdown-advanced">
     <a class="dropdown-item" href="../articles/memory-management.html">Memory management</a>
+    <a class="dropdown-item" href="../articles/modifying-source-code.html">Building locally</a>
   </div>
 </li>
 <li class="nav-item">
@@ -142,12 +143,12 @@ function takes an R vector, matrix or array and creates an equivalent
 <span><span class="fu"><a href="../reference/torch_tensor.html">torch_tensor</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/array.html" class="external-link">array</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html" class="external-link">runif</a></span><span class="op">(</span><span class="fl">12</span><span class="op">)</span>, dim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">2</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; torch_tensor</span></span>
 <span><span class="co">#&gt; (1,.,.) = </span></span>
-<span><span class="co">#&gt;   0.2035  0.8747  0.5809</span></span>
-<span><span class="co">#&gt;   0.8021  0.3518  0.5018</span></span>
+<span><span class="co">#&gt;   0.0477  0.5140  0.1748</span></span>
+<span><span class="co">#&gt;   0.2886  0.4028  0.0775</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; (2,.,.) = </span></span>
-<span><span class="co">#&gt;   0.4024  0.9400  0.8713</span></span>
-<span><span class="co">#&gt;   0.2525  0.8673  0.6270</span></span>
+<span><span class="co">#&gt;   0.2989  0.8914  0.7987</span></span>
+<span><span class="co">#&gt;   0.1738  0.8867  0.3533</span></span>
 <span><span class="co">#&gt; [ CPUFloatType{2,2,3} ]</span></span></code></pre></div>
 <p>By default, we will create tensors in the <code>cpu</code> device,
 converting their R datatype to the corresponding torch
@@ -195,11 +196,11 @@ distributed tensor with shape 5x3.</p>
 <code class="sourceCode R"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/torch_randn.html">torch_randn</a></span><span class="op">(</span><span class="fl">5</span>, <span class="fl">3</span><span class="op">)</span></span>
 <span><span class="va">x</span></span>
 <span><span class="co">#&gt; torch_tensor</span></span>
-<span><span class="co">#&gt; -0.4593 -0.6806  0.3410</span></span>
-<span><span class="co">#&gt; -0.5791  0.1466  1.7804</span></span>
-<span><span class="co">#&gt; -0.3032  0.2349 -0.4815</span></span>
-<span><span class="co">#&gt; -0.4645 -0.9472  0.0494</span></span>
-<span><span class="co">#&gt;  0.3482 -0.8602 -1.1027</span></span>
+<span><span class="co">#&gt;  0.1268 -1.3703 -0.0258</span></span>
+<span><span class="co">#&gt; -0.8497  0.3510 -0.1504</span></span>
+<span><span class="co">#&gt; -0.2478 -0.5732  1.7696</span></span>
+<span><span class="co">#&gt; -0.7009  0.5103  0.6841</span></span>
+<span><span class="co">#&gt; -0.2451 -0.5213 -0.0762</span></span>
 <span><span class="co">#&gt; [ CPUFloatType{5,3} ]</span></span></code></pre></div>
 <p>Another example is <code>torch_ones</code>, which creates a tensor
 filled with ones.</p>
