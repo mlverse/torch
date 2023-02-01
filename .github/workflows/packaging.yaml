@@ -16,6 +16,7 @@ jobs:
         
         config: 
           - {os: windows, version: cu11.3, runner: windows-2019}
+          - {os: ubuntu, version: cu11.3, runner: [self-hosted, gce, disk]}
         
         r_version: [release]
           
@@ -25,13 +26,23 @@ jobs:
             cuda: 11.3
             cuda_patch: 1
             
+          - config: {os: ubuntu}
+            container: ubuntu:18.04
+            
     env:
       CUDA: ${{ matrix.cuda }}
-      PRECXX11ABI: ${{ matrix.precxx11abi }}
       CMAKE_FLAGS: "-DBUNDLE_DEPENDENCIES=1"
       BUILD_LANTERN: 1
       
     steps:
+    
+      - name: Install system dependencies
+        if: matrix.container != ''
+        run: |
+          apt update
+          apt install -y curl sudo libxml2-dev wget chrpath rsync git
+          curl -fsSL https://get.docker.com -o get-docker.sh
+          DRY_RUN=1 sh ./get-docker.sh
             
       - uses: actions/checkout@v3
       
@@ -68,6 +79,7 @@ jobs:
         run: |
           binary_path <- pkgbuild::build(binary = TRUE)
           cat("binary_path=", path.expand(binary_path), "\n", sep = "", file = Sys.getenv("GITHUB_OUTPUT"))
+          cat("binary_platform=", paste(R.Version()$os,R.Version()$arch,R.Version()$major,R.Version()$minor,sep = "/"),"\n",sep="",file=Sys.getenv("GITHUB_OUTPUT"))
         shell: Rscript {0}
         
       - id: 'auth'
@@ -79,6 +91,6 @@ jobs:
         uses: 'google-github-actions/upload-cloud-storage@v1'
         with:
           path: ${{ steps.build.outputs.binary_path }}
-          destination: 'torch-lantern-builds/packages/'
+          destination: 'torch-lantern-builds/packages/${{ steps.build.outputs.binary_platform }}/'
       
           
