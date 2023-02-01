@@ -67,7 +67,7 @@ jobs:
         id: build
         run: |
           binary_path <- pkgbuild::build(binary = TRUE)
-          cat("binary_path='", path.expand(binary_path), "'\n", sep = "", file = Sys.getenv("GITHUB_OUTPUT"))
+          cat("binary_path=", path.expand(binary_path), "\n", sep = "", file = Sys.getenv("GITHUB_OUTPUT"))
         shell: Rscript {0}
         
       - id: 'auth'
