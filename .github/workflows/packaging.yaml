@@ -33,6 +33,7 @@ jobs:
       CUDA: ${{ matrix.cuda }}
       CMAKE_FLAGS: "-DBUNDLE_DEPENDENCIES=1"
       BUILD_LANTERN: 1
+      DEBIAN_FRONTEND: noninteractive
       
     steps:
     
