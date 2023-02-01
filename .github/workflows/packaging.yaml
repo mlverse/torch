@@ -2,6 +2,9 @@ name: Packaging
 
 on:
   workflow_dispatch:
+  push:
+    branches:
+      - packaging
   
 jobs:
   binaries:
