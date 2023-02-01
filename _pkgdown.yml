@@ -45,6 +45,8 @@ navbar:
     menu:
       - text: Memory management
         href: articles/memory-management.html
+      - text: Building locally
+        href: articles/modifying-source-code.html
   examples:
     text: Examples
     menu:

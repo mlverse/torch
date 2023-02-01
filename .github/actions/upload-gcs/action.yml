@@ -1,0 +1,29 @@
+name: "Uploads lantern artifacts to Google Cloud Storage"
+description: "Uploads lantern artifacts to Google Cloud Storage"
+inputs:
+  fname:
+     required: true
+     description: "the filename that should be uploaded."
+  gcp_credential:
+      required: true
+      description: "GCP credentials"
+
+runs:
+  using: composite
+  steps:
+
+    - id: 'auth'
+      uses: 'google-github-actions/auth@v1'
+      with:
+        credentials_json: ${{ inputs.gcp_credential }}
+
+    - id: 'upload-file'
+      uses: 'google-github-actions/upload-cloud-storage@v1'
+      with:
+        path: 'src/lantern/build/${{ inputs.fname }}'
+        destination: 'torch-lantern-builds/binaries/${{ github.sha }}/'
+
+    - uses: 'google-github-actions/upload-cloud-storage@v1'
+      with:
+        path: 'src/lantern/build/${{ inputs.fname }}'
+        destination: 'torch-lantern-builds/binaries/${{ github.ref }}/latest/'

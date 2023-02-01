@@ -1,0 +1,25 @@
+#!/usr/bin/env sh
+
+PKG_PATH="$R_PACKAGE_DIR"
+
+if ! test -z $DEVTOOLS_LOAD; then
+  PKG_PATH="$(pwd)/inst"
+fi
+
+if test -z "$CMAKE_FLAGS"; then
+  CMAKE_FLAGS=""
+fi
+
+if [ "$BUILD_LANTERN" != true ] && [ "$BUILD_LANTERN" != 1 ]; then
+  BUILD_LANTERN=""
+fi
+
+if [ "$BUILD_LANTERN" != "" ]; then
+  LANTERN_TARGET="lantern"
+  echo "CMAKE_FLAGS: $CMAKE_FLAGS"
+else
+  LANTERN_TARGET="dummylantern"
+fi
+
+cd src
+sed -e "s|@LANTERN_TARGET@|$LANTERN_TARGET|" -e "s|@PKG_PATH@|$PKG_PATH|" -e "s|@CMAKE_FLAGS@|$CMAKE_FLAGS|"  Makevars.in > Makevars

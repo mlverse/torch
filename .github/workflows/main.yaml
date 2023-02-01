@@ -3,6 +3,7 @@ on:
     branches:
       - master
       - main
+      - "cran/**"
   pull_request:
   schedule:
     - cron: "0 1 * * *"
@@ -11,302 +12,92 @@ on:
 name: Test
 
 jobs:
+  
+  lantern:
+    uses: ./.github/workflows/lantern.yaml
+    if: ${{ contains(github.event.pull_request.labels.*.name, 'lantern') || github.event_name != 'pull_request' }}
+    secrets: inherit
+
   check:
+    needs: lantern
+    if: ${{ always() && needs.lantern.result != 'failed' }}
     strategy:
       fail-fast: false
       matrix:
-        os: ["ubuntu-20.04", "macos-latest", "windows-latest"]
-        r_version: ["release"]
-        include:
-          - os: ubuntu-20.04
-            cran: https://demo.rstudiopm.com/all/__linux__/focal/latest
-            install: 0
-            r_version: "release"
-          - os: ubuntu-20.04
-            install: 1
-            r_version: "4.1"
-            precxxx11abi: 1
-            container: "rstudio/r-base:4.2-centos7"
-            cran: https://packagemanager.rstudio.com/all/__linux__/centos7/latest
-          - os: ubuntu-20.04
-            cran: https://demo.rstudiopm.com/all/__linux__/focal/latest
-            install: 1
-            r_version: "4.0"
-          - os: macos-latest
-            install: 1
-            r_version: "release"
-          - os: windows-latest
-            install: 1
-            r_version: "release"
-          - os: windows-latest
-            install: 1
-            r_version: "3.6"
+        config:
+          
+          - {os: macOS, r_version: release, version: cpu-intel, runner: macos-latest}
+          # on m1 the R version is whicherver is installed in the runner machine.
+          - {os: macOS, r_version: '', version: cpu-m1, runner: [self-hosted, m1]}
 
-    runs-on: ${{ matrix.os }}
+          - {os: ubuntu, r_version: release, version: cpu, runner: ubuntu-20.04}
+          # the precxx11abi R version is whichever is specified in the selected container.
+          - {os: centos, r_version: '', version: cpu, runner: ubuntu-20.04, precxx11abi: 1}
+          - {os: ubuntu, r_version: release, version: cu10.2, runner: [self-hosted, gce, gpu]}
+          - {os: ubuntu, r_version: release, version: cu11.3, runner: [self-hosted, gce, gpu]}
+          - {os: ubuntu, r_version: release, version: cu11.6, runner: [self-hosted, gce, gpu]}
+
+          - {os: windows, r_version: release, version: cpu, runner: windows-latest}
+          - {os: windows, r_version: 3.6, version: cpu, runner: windows-latest}
+        
+        include:
+
+          - config: {os: centos, precxx11abi: 1}
+            container: rstudio/r-base:4.2-centos7
+
+          - config: {os: ubuntu, version: cu10.2}
+            container: nvidia/cuda:10.2-cudnn8-devel-ubuntu18.04
+          - config: {os: ubuntu, version: cu11.3}
+            container: nvidia/cuda:11.3.0-cudnn8-devel-ubuntu18.04
+          - config: {os: ubuntu, version: cu11.6}
+            container: nvidia/cuda:11.6.0-cudnn8-devel-ubuntu18.04
+
+    runs-on: ${{ matrix.config.runner }}
     container: ${{ matrix.container }}
-    name: ${{ matrix.os }} (${{ matrix.r_version }})
+    name: "${{ matrix.config.os }} R: ${{ matrix.config.r_version }} - ${{matrix.config.version}} (pre-cxx11: ${{ matrix.config.precxx11abi }})"
     timeout-minutes: 120
     env:
       R_REMOTES_NO_ERRORS_FROM_WARNINGS: true
-      INSTALL_TORCH: ${{ matrix.install }}
-      CRAN: ${{ matrix.cran }}
-      TORCH_LOG: 2
       TORCH_TEST: 1
       TORCH_INSTALL: 1
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
-      PRECXX11ABI: ${{ matrix.precxxx11abi }}
+      PRECXX11ABI: ${{ matrix.config.precxx11abi }}
 
     steps:
-      - uses: actions/checkout@v3
-      - uses: r-lib/actions/setup-r@v2
-        if: matrix.container == ''
+
+      - name: Download lantern artifacts
+        if: ${{ needs.lantern.result != 'skipped' }}
+        uses: actions/download-artifact@v3
         with:
-          r-version: ${{ matrix.r_version }}
-      - uses: r-lib/actions/setup-pandoc@v2
-        if: matrix.container == ''
-      - name: Set CRAN mirror
-        if: contains(matrix.container, 'centos')
-        run: |
-          echo "options(repos = c(CRAN = 'https://cran.rstudio.com'))" > .Rprofile
-          sudo yum install -y openssl-devel
-          
-          wget https://github.com/Kitware/CMake/releases/download/v3.24.1/cmake-3.24.1-linux-x86_64.sh
-          chmod u+x cmake-3.24.1-linux-x86_64.sh
-          ./cmake-3.24.1-linux-x86_64.sh --skip-license --prefix=/usr/local
-      - name: Install system dependencies
-        if: runner.os == 'Linux' && matrix.container == ''
-        env:
-          RHUB_PLATFORM: linux-x86_64-ubuntu-gcc
-        run: |
-          Rscript -e "install.packages(c('remotes'))" -e "remotes::install_github('r-hub/sysreqs')"
-          sysreqs=$(Rscript -e "cat(sysreqs::sysreq_commands('DESCRIPTION'))")
-          sudo -s eval "$sysreqs"
-      - name: Install dependencies
-        run: Rscript -e "install.packages(c('remotes', 'rcmdcheck'))" -e "remotes::install_deps(dependencies = TRUE)"
-      - name: Print R session information
-        run: |
-          if (utils::packageVersion("sessioninfo") >= "1.2.1") {
-            sessioninfo::session_info(pkgs = "installed", include_base = TRUE)
-          } else {
-            options(width = 200)
-            sessioninfo::session_info(rownames(installed.packages()), include_base = TRUE)
-          }
-        shell: Rscript {0}
-      - name: Build lantern and get libtorch
-        if: matrix.install == 0 || contains( github.event.pull_request.labels.*.name, 'lantern')
-        run: |
-          Rscript tools/buildlantern.R
-      - name: Check
-        run: |
-          error_on <- if (.Platform$OS.type == "windows") "error" else "warning"
-          rcmdcheck::rcmdcheck(args = c("--no-multiarch", "--no-manual"), error_on = error_on, check_dir = "check")
-        shell: Rscript {0}
-      - name: Show testthat output
-        if: always()
-        run: find check -name 'testthat.Rout*' -exec cat '{}' \; || true
-        shell: bash
-      - name: Logs
-        if: ${{ failure() }}
-        run: if [ -f lantern.log ]; then cat lantern.log; fi
-        shell: bash
+          name: lantern
+          path: ~/Downloads/
 
-  gpu:
-    runs-on: [self-hosted, gce, gpu]
-    
-    strategy:
-      fail-fast: false
-      matrix:
-        cuda: ["10.2", "11.3.0", "11.6.0"]
-    
-    container:
-      image: nvidia/cuda:${{ matrix.cuda }}-cudnn8-devel-ubuntu18.04
-      options: --gpus all
+      - name: Set base URL for downloading
+        if: ${{ needs.lantern.result != 'skipped' }}
+        run: |
+          echo "LANTERN_BASE_URL=~/Downloads/" >> $GITHUB_ENV
+
+      - uses: actions/checkout@v3
       
-    env:
-      R_REMOTES_NO_ERRORS_FROM_WARNINGS: true
-      CRAN: https://demo.rstudiopm.com/all/__linux__/bionic/latest
-      TORCH_TEST: 1
-      TORCH_INSTALL: 1
-      BUILD_LANTERN: ${{ contains( github.event.pull_request.labels.*.name, 'lantern') }}
-      GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
-      DEBIAN_FRONTEND: "noninteractive"
-    
-    steps:
-      - uses: actions/checkout@v2
-
-      - run: |
-          apt-get update -y
-          apt-get install -y sudo software-properties-common dialog apt-utils tzdata libpng-dev locales
-          
-      - uses: r-lib/actions/setup-r@v2
-
-      - uses: r-lib/actions/setup-pandoc@v2
-
+      - uses: ./.github/actions/setup-r
+        with:
+          r_version: ${{ matrix.config.r_version}}
+      
+      - name: Setup cmake
+        uses: jwlawson/actions-setup-cmake@v1
+        if: ${{ env.BUILD_LANTERN == 1}}
+        with:
+          cmake-version: "latest" 
+      
       - uses: r-lib/actions/setup-r-dependencies@v2
         with:
           cache: false
           extra-packages: any::rcmdcheck
           needs: check
-
-      - name: Check
-        env:
-          _R_CHECK_CRAN_INCOMING_REMOTE_: false
-        run: rcmdcheck::rcmdcheck(args = c("--no-manual", "--as-cran", "--no-multiarch"), error_on = "error", check_dir = "check")
-        shell: Rscript {0}
-      
-  m1:
-    runs-on: ['self-hosted', 'm1']
-    env:
-      TORCH_TEST: 1
-      TORCH_INSTALL: 1
-      BUILD_LANTERN: ${{ contains( github.event.pull_request.labels.*.name, 'lantern') }}
-      GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
-    steps:
-      - uses: actions/checkout@v3
-      - uses: r-lib/actions/setup-r-dependencies@v2
+          
+      - uses: r-lib/actions/check-r-package@v2
         with:
-          cache: false
-          extra-packages: any::rcmdcheck
-          needs: check
-      - name: Build lantern and get libtorch
-        if: contains( github.event.pull_request.labels.*.name, 'lantern')
-        run: |
-          Rscript tools/buildlantern.R
-      - name: Check
-        run: |
-          error_on <- if (.Platform$OS.type == "windows") "error" else "warning"
-          rcmdcheck::rcmdcheck(args = c("--no-multiarch", "--no-manual"), error_on = error_on, check_dir = "check")
-        shell: Rscript {0}
-      - name: Show testthat output
-        if: always()
-        run: find check -name 'testthat.Rout*' -exec cat '{}' \; || true
-        shell: bash
-      - name: Logs
-        if: ${{ failure() }}
-        run: if [ -f lantern.log ]; then cat lantern.log; fi
-        shell: bash
-
-  # start-runner:
-  #   runs-on: ubuntu-20.04
-  #   if: ${{ github.ref == 'refs/heads/main' || contains( github.event.pull_request.labels.*.name, 'win-gpu') }}
-  #   steps:
-  #   - name: Set up Cloud SDK
-  #     uses: google-github-actions/setup-gcloud@v0
-  #     with:
-  #       project_id: ${{ secrets.GCP_PROJECT_ID }}
-  #       service_account_key: ${{ secrets.GCP_APPLICATION_CREDENTIALS }}
-  #       export_default_credentials: true
-  #   - name: Create registration token
-  #     uses: actions/github-script@v3
-  #     id: token
-  #     with:
-  #       github-token: ${{secrets.GH_TOKEN}}
-  #       result-encoding: string
-  #       script: |
-  #         const result = await github.actions.createRegistrationTokenForRepo({
-  #           owner: 'mlverse',
-  #           repo: 'torch'
-  #         });
-  #         console.log(result)
-  #         return result.data.token
-  #   - name: Create the startup script
-  #     run: |
-  #       touch s.ps
-  #       echo "mkdir C:\actions-runner; cd C:\actions-runner" >> s.ps
-  #       echo "Invoke-WebRequest -Uri https://github.com/actions/runner/releases/download/v2.277.1/actions-runner-win-x64-2.277.1.zip -OutFile actions-runner-win-x64-2.277.1.zip" >> s.ps
-  #       echo 'Add-Type -AssemblyName System.IO.Compression.FileSystem ; [System.IO.Compression.ZipFile]::ExtractToDirectory("$PWD/actions-runner-win-x64-2.277.1.zip", "$PWD")' >> s.ps
-  #       echo "./config.cmd --url https://github.com/mlverse/torch --token ${{ steps.token.outputs.result }} --name 'runner-${{ github.run_number }}' --labels 'run-${{ github.run_number}}' --unattended" >> s.ps
-  #       echo 'Start-Process -FilePath "./run.cmd"' >> s.ps
-  #
-  #   - name: Show File
-  #     run: |
-  #       cat s.ps
-  #   - name: Create instance
-  #     run: |
-  #       gcloud components install beta --quiet
-  #       gcloud beta compute --project=rstudio-cloudml instances create runner-${{github.run_number}} \
-  #         --zone=us-central1-a \
-  #         --machine-type=n1-standard-8 \
-  #         --accelerator=type=nvidia-tesla-k80,count=1 \
-  #         --source-machine-image cuda-v8 \
-  #         --network-interface network=default \
-  #         --metadata-from-file windows-startup-script-ps1=s.ps
-  #   - name: Wait for runner registration
-  #     run: |
-  #       sleep 2m 30s
-  #
-  # delete-runner:
-  #   if: ${{ success() || failure() || cancelled() }}
-  #   needs: ['windows-gpu', 'start-runner']
-  #   runs-on: ubuntu-20.04
-  #   steps:
-  #   - name: Set up Cloud SDK
-  #     uses: google-github-actions/setup-gcloud@v0
-  #     with:
-  #       project_id: ${{ secrets.GCP_PROJECT_ID }}
-  #       service_account_key: ${{ secrets.GCP_APPLICATION_CREDENTIALS }}
-  #       export_default_credentials: true
-  #
-  #   - name: Delete runner instance
-  #     run: |
-  #       gcloud compute --project=rstudio-cloudml instances delete runner-${{github.run_number}} --zone=us-central1-a
-  #   - name: Delete runner from GH
-  #     uses: actions/github-script@v3
-  #     id: token
-  #     with:
-  #       github-token: ${{secrets.GH_TOKEN}}
-  #       result-encoding: string
-  #       script: |
-  #         const runners = await github.actions.listSelfHostedRunnersForRepo({
-  #           owner: 'mlverse',
-  #           repo: 'torch'
-  #         });
-  #
-  #         const runner_id = runners.data.runners.filter((runner) => {
-  #           return runner.name === 'runner-${{ github.run_number }}';
-  #         })[0].id
-  #
-  #         await github.actions.deleteSelfHostedRunnerFromRepo({
-  #           owner: 'mlverse',
-  #           repo: 'torch',
-  #           runner_id: runner_id
-  #         });
-  #
-  # windows-gpu:
-  #   needs: ['start-runner']
-  #   strategy:
-  #     fail-fast: false
-  #     matrix:
-  #       r_version: ["release"]
-  #       cuda: ["11.1"]
-  #
-  #   runs-on: [self-hosted, windows, 'run-${{ github.run_number}}']
-  #   name: 'Windows | CUDA: ${{ matrix.cuda }}'
-  #   timeout-minutes: 120
-  #   env:
-  #     R_REMOTES_NO_ERRORS_FROM_WARNINGS: true
-  #     INSTALL_TORCH: 1
-  #     TORCH_LOG: 2
-  #     TORCH_TEST: 1
-  #     TORCH_INSTALL: 1
-  #     CUDA: ${{ matrix.cuda }}
-  #
-  #   steps:
-  #     - uses: actions/checkout@v3
-  #     - uses: r-lib/actions/setup-r@v2
-  #       with:
-  #         r-version: ${{ matrix.r_version }}
-  #     - uses: r-lib/actions/setup-pandoc@v2
-  #     - name: Install dependencies
-  #       run: |
-  #         Rscript -e "options(repos=structure(c(CRAN='https://cloud.r-project.org/'))); install.packages(c('remotes', 'rcmdcheck'))" -e "remotes::install_deps(dependencies = TRUE)"
-  #     - name: Build lantern and get libtorch
-  #       if: contains( github.event.pull_request.labels.*.name, 'lantern')
-  #       run: |
-  #         Rscript tools/buildlantern.R
-  #     - name: Check
-  #       run:  |
-  #         withr::with_makevars(list(MAKEFLAGS="-j8"), {
-  #           rcmdcheck::rcmdcheck(args = c("--no-multiarch", "--no-manual"), error_on = "error", check_dir = "check")
-  #         })
-  #       shell: Rscript {0}
+          error-on: '"error"'
+          args: 'c("--no-multiarch", "--no-manual", "--as-cran")'
+      
+      

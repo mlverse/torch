@@ -1,0 +1,2 @@
+#!/usr/bin/env sh
+CMAKE_FLAGS="-G\"Visual Studio 16\" $CMAKE_FLAGS" sh ./configure

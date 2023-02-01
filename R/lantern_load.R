@@ -1,12 +1,8 @@
 .globals <- new.env(parent = emptyenv())
 .globals$lantern_started <- FALSE
 
-lantern_default <- function() {
-  "1.4.0"
-}
-
-lantern_start <- function(version = lantern_default(), reload = FALSE) {
-  if (!install_exists()) {
+lantern_start <- function(reload = FALSE) {
+  if (!torch_is_installed()) {
     stop("Torch is not installed, please run 'install_torch()'.")
   }
 
@@ -14,7 +10,7 @@ lantern_start <- function(version = lantern_default(), reload = FALSE) {
     return()
   }
 
-  cpp_lantern_init(file.path(install_path(), "lib"))
+  cpp_lantern_init(file.path(torch_install_path(), "lib"))
 
   log_enabled <- as.integer(Sys.getenv("TORCH_LOG", "0"))
   cpp_lantern_configure(log_enabled)
@@ -22,8 +18,3 @@ lantern_start <- function(version = lantern_default(), reload = FALSE) {
   .globals$lantern_started <- TRUE
 }
 
-lantern_test <- function() {
-  lantern_start()
-
-  cpp_lantern_test()
-}

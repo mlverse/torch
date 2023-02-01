@@ -37,3 +37,4 @@ inst/include/*
 !inst/include/torch_deleters.h
 !inst/include/utils.h
 !inst/include/torch_impl.h
+build-lantern/

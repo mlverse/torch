@@ -9,7 +9,7 @@ tools/torchgen/.Rbuildignore
 ^pkgdown$
 ^revdep$
 ^\.github$
-^lantern$
+^src/lantern/build.*$
 .*\.tmp
 ^vignettes/examples/.*
 ^bench/.*
@@ -21,6 +21,9 @@ tools/torchgen/.Rbuildignore
 ^public/.*
 ^cran-comments\.md$
 ^CRAN-RELEASE$
+^build\-lantern.*$
+^src/Makevars$
+^lib/.*lantern
 
 # remove vignettes from CRAN
 # ^vignettes/distributions\.Rmd

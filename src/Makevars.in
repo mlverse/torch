@@ -1,0 +1,30 @@
+PKG_CPPFLAGS = -I../inst/include/ -DRCPP_NO_UNWIND_PROTECT
+PKG_PATH = @PKG_PATH@
+LANTERN_TARGET = @LANTERN_TARGET@
+
+.PHONY: rename_init lantern
+all: $(LANTERN_TARGET) $(SHLIB) rename
+
+# TODO: we will need to skip building lantern on CRAN
+# thus this step must probably be conditioned on the existence of 
+# a directory called `lantern`.
+lantern:
+	@echo "*** Building lantern!"
+	mkdir -p ../build-lantern
+	cd ../build-lantern && cmake ../src/lantern -DCMAKE_INSTALL_PREFIX=$(PKG_PATH) @CMAKE_FLAGS@ && cmake --build . --target install --config Release
+
+dummylantern:
+	@echo "*** Skip building lantern."
+
+rename_init:
+	@echo "*** Renaming init"
+	"${R_HOME}/bin${R_ARCH_BIN}/Rscript" "../tools/renameinit.R"
+
+rename:
+	@echo "*** Renaming torch lib to torchpkg"
+	"${R_HOME}/bin${R_ARCH_BIN}/Rscript" "../tools/renamelib.R"
+
+# in order to rename SHLIb must be done.
+$(SHLIB) : $(LANTERN_TARGET)
+rename : $(SHLIB)
+RcppExports.o : rename_init
