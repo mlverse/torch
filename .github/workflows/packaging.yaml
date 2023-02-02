@@ -15,14 +15,20 @@ jobs:
       matrix:
         
         config: 
-          - {os: windows, version: cu11.3, runner: windows-2019}
-          - {os: ubuntu, version: cu11.3, runner: [self-hosted, gce, disk]}
-        
+          - {os: macOS, version: cpu-intel, runner: macOS-latest}
+          - {os: macOS, version: cpu-m1, runner: [self-hosted, m1]}
+          
+          - {os: ubuntu, version: cpu, runner: ubuntu-latest}
+          - {os: ubuntu, version: cu113, runner: [self-hosted, gce, disk]}
+          
+          - {os: windows, version: cpu, runner: windows-2019}
+          - {os: windows, version: cu113, runner: windows-2019}
+          
         r_version: [release]
           
         include:
           
-          - config: {version: cu11.3}
+          - config: {version: cu113}
             cuda: 11.3
             cuda_patch: 1
             
@@ -32,6 +38,9 @@ jobs:
             
           - config: {os: windows}
             type: 'win.binary'
+            
+          - config: {os: macOS}
+            type: 'mac.binary'
             
     env:
       CUDA: ${{ matrix.cuda }}
