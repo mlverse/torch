@@ -77,7 +77,7 @@ jobs:
           dest_path <- contrib.url("../binaries", type="binary")
           dir.create(dest_path, recursive = TRUE)
           binary_path <- pkgbuild::build(binary = TRUE, dest_path=dest_path)
-          tools::write_PACKAGES(dest_path, type = "${{ matrix.type }}")
+          tools::write_PACKAGES(dest_path, type = "${{ matrix.type }}", addFiles = TRUE)
           cat("pkg_version=", desc::desc_get("Version"), "\n", file = Sys.getenv("GITHUB_OUTPUT"), sep="")
         shell: Rscript {0}
         
