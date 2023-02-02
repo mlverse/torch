@@ -90,6 +90,6 @@ jobs:
         uses: 'google-github-actions/upload-cloud-storage@v1'
         with:
           path: "../binaries"
-          destination: 'torch-lantern-builds/packages/${{ matrix.version }}/${{ steps.build.outputs.pkg_version }}/'
+          destination: 'torch-lantern-builds/packages/${{ matrix.config.version }}/${{ steps.build.outputs.pkg_version }}/'
           parent: false
       
