@@ -16,7 +16,7 @@ jobs:
         
         config: 
           - {os: windows, version: cu11.3, runner: windows-2019}
-          - {os: ubuntu, version: cu11.3, runner: ubuntu-latest}
+          - {os: ubuntu, version: cu11.3, runner: [self-hosted, gce, disk]}
         
         r_version: [release]
           
