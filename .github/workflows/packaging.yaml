@@ -76,7 +76,7 @@ jobs:
         run: |
           dest_path <- contrib.url("../binaries", type="binary")
           dir.create(dest_path, recursive = TRUE)
-          binary_path <- pkgbuild::build(binary = TRUE, dest_path)
+          binary_path <- pkgbuild::build(binary = TRUE, dest_path=dest_path)
           tools::write_PACKAGES(dest_path, type = "${{ matrix.type }}")
         shell: Rscript {0}
         
