@@ -222,7 +222,8 @@ install(
     PUBLIC_HEADER DESTINATION include/lantern
 )
 
-if (DEFINED BUNDLE_DEPENDENCIES)
+option(BUNDLE_DEPENDENCIES "On or off" OFF)
+if (BUNDLE_DEPENDENCIES)
     install(DIRECTORY ${TORCH_PATH} DESTINATION .)
     install(TARGETS lantern RUNTIME_DEPENDENCY_SET lantern_deps)
     install(RUNTIME_DEPENDENCY_SET lantern_deps 

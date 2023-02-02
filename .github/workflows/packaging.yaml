@@ -28,10 +28,14 @@ jobs:
             
           - config: {os: ubuntu}
             container: ubuntu:18.04
+            type: 'source'
+            
+          - config: {os: windows}
+            type: 'win.binary'
             
     env:
       CUDA: ${{ matrix.cuda }}
-      CMAKE_FLAGS: "-DBUNDLE_DEPENDENCIES=1"
+      CMAKE_FLAGS: "-DBUNDLE_DEPENDENCIES=ON"
       BUILD_LANTERN: 1
       DEBIAN_FRONTEND: noninteractive
       
@@ -70,9 +74,10 @@ jobs:
       - name: Build binary package
         id: build
         run: |
-          binary_path <- pkgbuild::build(binary = TRUE)
-          cat("binary_path=", path.expand(binary_path), "\n", sep = "", file = Sys.getenv("GITHUB_OUTPUT"))
-          cat("binary_platform=", paste(R.Version()$os,R.Version()$arch,R.Version()$major,R.Version()$minor,sep = "/"),"\n",sep="",file=Sys.getenv("GITHUB_OUTPUT"),append=TRUE)
+          dest_path <- contrib.url("../binaries", type="binary")
+          dir.create(dest_path, recursive = TRUE)
+          binary_path <- pkgbuild::build(binary = TRUE, dest_path)
+          tools::write_PACKAGES(dest_path, type = "${{ matrix.type }}")
         shell: Rscript {0}
         
       - id: 'auth'
@@ -83,7 +88,8 @@ jobs:
       - id: 'upload-file'
         uses: 'google-github-actions/upload-cloud-storage@v1'
         with:
-          path: ${{ steps.build.outputs.binary_path }}
-          destination: 'torch-lantern-builds/packages/${{ steps.build.outputs.binary_platform }}/'
+          path: "../binaries"
+          destination: 'torch-lantern-builds/packages/${{ matrix.version }}/'
+          parent: false
       
           
