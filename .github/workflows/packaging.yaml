@@ -78,6 +78,7 @@ jobs:
           dir.create(dest_path, recursive = TRUE)
           binary_path <- pkgbuild::build(binary = TRUE, dest_path=dest_path)
           tools::write_PACKAGES(dest_path, type = "${{ matrix.type }}")
+          cat("pkg_version=", desc::desc_get("Version"), "\n", file = Sys.getenv("GITHUB_OUTPUT"), sep="")
         shell: Rscript {0}
         
       - id: 'auth'
@@ -89,7 +90,6 @@ jobs:
         uses: 'google-github-actions/upload-cloud-storage@v1'
         with:
           path: "../binaries"
-          destination: 'torch-lantern-builds/packages/${{ matrix.version }}/'
+          destination: 'torch-lantern-builds/packages/${{ matrix.version }}/${{ steps.build.outputs.pkg_version }}/'
           parent: false
       
-          
