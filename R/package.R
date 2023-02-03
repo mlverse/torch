@@ -1,4 +1,4 @@
-#' @useDynLib torchpkg
+#' @useDynLib torchpkg, .registration = TRUE
 #' @importFrom Rcpp sourceCpp
 NULL
 
