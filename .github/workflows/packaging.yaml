@@ -4,7 +4,10 @@ on:
   workflow_dispatch:
   push:
     branches:
-      - packaging
+      - main
+      - cran/*
+  schedule:
+    - cron: "0 2 * * *"
   
 jobs:
   binaries:
