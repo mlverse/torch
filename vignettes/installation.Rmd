@@ -107,12 +107,17 @@ Packages provided by the CRAN-like repository bundles all necessary for its exec
 including CUDA and CUDNN in the case of the GPU builds. This means that by installing it
 **you agree** with the included software licenses. See PyTorch's [LICENSE](https://github.com/pytorch/pytorch/blob/master/LICENSE) and [CUDA libraries EULA](http://docs.nvidia.com/cuda/eula/#redistribution-rights).
 
+When installing from the pre-built binaries, you **don't need** to manually install
+CUDA or cuDNN. If you have CUDA installed, it doesn't need to match the installation
+*'kind'* chosen below.
+
 To install from the pre-built binaries, you can use the following:
 
 ``` r
+options(timeout = 600) # increasing timeout is recommended since we will be downloading a 2GB file.
 kind <- "cu113" # "cpu", "cu113" are the only currently supported.
 version <- "0.9.1.9000"
-option(repos = c(
+options(repos = c(
   torch = sprintf("https://storage.googleapis.com/torch-lantern-builds/packages/%s/%s/", kind, version),
   CRAN = "https://cloud.r-project.org" # or any other from which you want to install the other R dependencies.
 ))
