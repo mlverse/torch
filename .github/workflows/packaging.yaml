@@ -1,0 +1,107 @@
+name: Packaging
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+      - cran/*
+  schedule:
+    - cron: "0 2 * * *"
+  
+jobs:
+  binaries:
+    runs-on: ${{ matrix.config.runner }}
+    container: ${{ matrix.container }}
+    strategy:
+      fail-fast: false
+      matrix:
+        
+        config: 
+          - {os: macOS, version: cpu-intel, runner: macOS-latest}
+          - {os: macOS, version: cpu-m1, runner: [self-hosted, m1]}
+          
+          - {os: ubuntu, version: cpu, runner: ubuntu-latest}
+          - {os: ubuntu, version: cu113, runner: [self-hosted, gce, disk]}
+          
+          - {os: windows, version: cpu, runner: windows-2019}
+          - {os: windows, version: cu113, runner: windows-2019}
+          
+        r_version: [release]
+          
+        include:
+          
+          - config: {version: cu113}
+            cuda: 11.3
+            cuda_patch: 1
+            
+          - config: {os: ubuntu}
+            container: ubuntu:18.04
+            type: 'source'
+            
+          - config: {os: windows}
+            type: 'win.binary'
+            
+          - config: {os: macOS}
+            type: 'mac.binary'
+            
+    env:
+      CUDA: ${{ matrix.cuda }}
+      CMAKE_FLAGS: "-DBUNDLE_DEPENDENCIES=ON"
+      BUILD_LANTERN: 1
+      DEBIAN_FRONTEND: noninteractive
+      
+    steps:
+    
+      - uses: actions/checkout@v3
+      
+      - uses: ./.github/actions/setup-r
+        with:
+          r_version: ${{ matrix.r_version}}
+      
+      - name: Setup cmake
+        uses: jwlawson/actions-setup-cmake@v1
+        with:
+          cmake-version: "3.25.1"
+
+      - name: Install CUDA
+        if: ${{matrix.cuda != ''}}
+        uses: Jimver/cuda-toolkit@v0.2.8
+        id: cuda-toolkit
+        with:
+          cuda: "${{matrix.cuda}}.${{matrix.cuda_patch}}"
+          
+      - name: Install CuDNN
+        if: ${{ matrix.cuda != '' }}
+        uses: ./.github/actions/install-cudnn
+        with:
+          cuda_version: ${{ matrix.cuda }}
+          
+      - uses: r-lib/actions/setup-r-dependencies@v2
+        with:
+          cache: false
+          extra-packages: any::rcmdcheck
+          needs: check
+          
+      - name: Build binary package
+        id: build
+        run: |
+          dest_path <- contrib.url("../binaries", type="binary")
+          dir.create(dest_path, recursive = TRUE)
+          binary_path <- pkgbuild::build(binary = TRUE, dest_path=dest_path)
+          tools::write_PACKAGES(dest_path, type = "${{ matrix.type }}", addFiles = TRUE)
+          cat("pkg_version=", desc::desc_get("Version"), "\n", file = Sys.getenv("GITHUB_OUTPUT"), sep="")
+        shell: Rscript {0}
+        
+      - id: 'auth'
+        uses: 'google-github-actions/auth@v1'
+        with:
+          credentials_json: ${{ secrets.GCP_APPLICATION_CREDENTIALS }}
+
+      - id: 'upload-file'
+        uses: 'google-github-actions/upload-cloud-storage@v1'
+        with:
+          path: "../binaries"
+          destination: 'torch-lantern-builds/packages/${{ matrix.config.version }}/${{ steps.build.outputs.pkg_version }}/'
+          parent: false
+      

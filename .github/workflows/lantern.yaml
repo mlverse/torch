@@ -68,7 +68,7 @@ jobs:
       - name: Setup cmake
         uses: jwlawson/actions-setup-cmake@v1
         with:
-          cmake-version: "latest"
+          cmake-version: "3.25.1"
 
       - name: Install CUDA
         if: ${{matrix.cuda != ''}}
