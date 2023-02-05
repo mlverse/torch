@@ -205,6 +205,8 @@ std::string buildCalls(std::string name, YAML::Node node, size_t start) {
       arguments += "from_raw::Layout(" + call + ")";
     } else if (type == "c10::optional<Layout>") {
       arguments += "from_raw::optional::Layout(" + call + ")";
+    } else if (type == "const ITensorListRef &") {
+      arguments += "from_raw::TensorList(" + call + ")";
     } else {
       throw std::runtime_error("Unknown type " + type);
     }
