@@ -2364,6 +2364,15 @@ HOST_API bool lantern_Tensor_is_sparse (void* x)
   return ret;
 }
 
+LANTERN_API void* (LANTERN_PTR _lantern_IntArrayRef_get) (void* x);
+HOST_API void* lantern_IntArrayRef_get (void* x)
+{
+  LANTERN_CHECK_LOADED
+  void* ret = _lantern_IntArrayRef_get(x);
+  LANTERN_HOST_HANDLER;
+  return ret;
+}
+
   /* Autogen Headers -- Start */
   LANTERN_API void* (LANTERN_PTR _lantern__cast_byte_tensor_bool)(void* self, void* non_blocking);
   HOST_API void* lantern__cast_byte_tensor_bool(void* self, void* non_blocking) { LANTERN_CHECK_LOADED void* ret = _lantern__cast_byte_tensor_bool(self, non_blocking); LANTERN_HOST_HANDLER return ret; }
@@ -9900,6 +9909,7 @@ LOAD_SYMBOL(_lantern_cuda_synchronize);
 LOAD_SYMBOL(_lantern_backend_has_mps);
 LOAD_SYMBOL(_lantern_cuda_empty_cache);
 LOAD_SYMBOL(_lantern_Tensor_is_sparse);
+LOAD_SYMBOL(_lantern_IntArrayRef_get);
   /* Autogen Symbols -- Start */
   LOAD_SYMBOL(_lantern__cast_byte_tensor_bool)
   LOAD_SYMBOL(_lantern__cast_char_tensor_bool)
