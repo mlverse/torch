@@ -290,7 +290,7 @@ class XPtrTorchIntArrayRef : public XPtrTorch {
   XPtrTorchIntArrayRef(const XPtrTorchIntArrayRef& x)
       : XPtrTorch(x.get_shared()){};
   explicit XPtrTorchIntArrayRef(SEXP x);
-  // operator SEXP () const;
+  operator SEXP () const;
 };
 
 class XPtrTorchSymIntArrayRef : public XPtrTorch {

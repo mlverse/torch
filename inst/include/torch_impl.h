@@ -346,6 +346,8 @@ XPtrTorchOptionalDoubleArrayRef::XPtrTorchOptionalDoubleArrayRef(SEXP x)
 
 // int array ref
 
+XPtrTorchIntArrayRef::operator SEXP() const { return operator_sexp_int_array_ref(this); }
+
 XPtrTorchIntArrayRef::XPtrTorchIntArrayRef(SEXP x)
     : XPtrTorch{from_sexp_int_array_ref(x, false, false)} {}
 

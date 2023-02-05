@@ -64,6 +64,7 @@ IMPORT_SEXP_OPERATOR(operator_sexp_optional_scalar_type,
 IMPORT_SEXP_OPERATOR(operator_sexp_optional_memory_format,
                      XPtrTorchoptional_memory_format)
 IMPORT_SEXP_OPERATOR(operator_sexp_variable_list, XPtrTorchvariable_list)
+IMPORT_SEXP_OPERATOR(operator_sexp_int_array_ref, XPtrTorchIntArrayRef)
 
 #define IMPORT_FROM_SEXP(name, type)                      \
   type name(SEXP x) {                                     \
