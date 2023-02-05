@@ -15,6 +15,13 @@ void *_lantern_vector_int64_t(int64_t *x, size_t x_size) {
   LANTERN_FUNCTION_END
 }
 
+void* _lantern_IntArrayRef_get (void* x) {
+  LANTERN_FUNCTION_START
+  auto v = from_raw::IntArrayRef(x);
+  return make_raw::vector::int64_t(v.vec());
+  LANTERN_FUNCTION_END
+}
+
 int64_t _lantern_vector_int64_t_size(void *self) {
   LANTERN_FUNCTION_START
   return from_raw::vector::int64_t(self).size();
