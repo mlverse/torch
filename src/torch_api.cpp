@@ -1336,6 +1336,10 @@ XPtrTorchIntArrayRef from_sexp_int_array_ref(SEXP x, bool allow_null,
   return XPtrTorchIntArrayRef(ptr);
 }
 
+SEXP operator_sexp_int_array_ref (const XPtrTorchIntArrayRef* x) {
+  return torch::vector::int64_t(lantern_IntArrayRef_get(x->get()));
+}
+
 // sym int array ref
 
 XPtrTorchSymIntArrayRef from_sexp_sym_int_array_ref (SEXP x) {
