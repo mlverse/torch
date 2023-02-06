@@ -2,9 +2,6 @@ name: Lantern
 
 on:
   workflow_call:
-  push:
-    branches:
-      - libtorch/v1.13.1
 
 jobs:
   build:
@@ -20,12 +17,11 @@ jobs:
           - {os: macOS, version: cpu-m1, runner: [self-hosted, m1]}
           
           - {os: ubuntu, version: cpu, runner: ubuntu-latest}
-          - {os: ubuntu, version: cu10.2, runner: ubuntu-latest}
-          - {os: ubuntu, version: cu11.3, runner: ubuntu-latest}
           - {os: ubuntu, version: cu11.6, runner: [self-hosted, gce, disk]}
+          - {os: ubuntu, version: cu11.7, runner: [self-hosted, gce, disk]}
 
           - {os: windows, version: cpu, runner: windows-2019}
-          - {os: windows, version: cu11.3, runner: windows-2019}
+          - {os: windows, version: cu11.7, runner: windows-2019}
         
         precxx11abi: [0, 1]
 
@@ -35,15 +31,12 @@ jobs:
           
           # specify the CUDA patch for each major/minor version.
           # required for cuda installation
-          - config: {version: cu10.2}
-            cuda: 10.2
-            cuda_patch: 89
-          - config: {version: cu11.3}
-            cuda: 11.3
-            cuda_patch: 1
           - config: {version: cu11.6}
             cuda: 11.6
             cuda_patch: 1
+          - config: {version: cu11.7}
+            cuda: 11.7
+            cuda_patch: 0
 
         exclude:
           - config: {os: macOS}
