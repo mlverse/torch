@@ -5,7 +5,7 @@
 \alias{torch_einsum}
 \title{Einsum}
 \usage{
-torch_einsum(equation, tensors)
+torch_einsum(equation, tensors, path = NULL)
 }
 \arguments{
 \item{equation}{(string) The equation is given in terms of lower case letters (indices) to be associated           with each dimension of the operands and result. The left hand side lists the operands           dimensions, separated by commas. There should be one index letter per tensor dimension.           The right hand side follows after \verb{->} and gives the indices for the output.           If the \verb{->} and right hand side are omitted, it implicitly defined as the alphabetically           sorted list of all indices appearing exactly once in the left hand side.           The indices not apprearing in the output are summed over after multiplying the operands           entries.           If an index appears several times for the same operand, a diagonal is taken.           Ellipses \code{...} represent a fixed number of dimensions. If the right hand side is inferred,           the ellipsis dimensions are at the beginning of the output.}
