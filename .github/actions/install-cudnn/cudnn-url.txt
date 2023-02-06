@@ -1,4 +1,6 @@
 windows 11.3    https://storage.googleapis.com/torch-lantern-builds/cudnn/cudnn-11.3-windows-x64-v8.2.1.32.zip
+windows 11.7    https://developer.download.nvidia.com/compute/redist/cudnn/v8.5.0/local_installers/11.7/cudnn-windows-x86_64-8.5.0.96_cuda11-archive.zip
 linux   11.3    https://storage.googleapis.com/torch-lantern-builds/cudnn/cudnn-11.3-linux-x64-v8.2.1.32.tgz
 linux   11.6    https://storage.googleapis.com/torch-lantern-builds/cudnn/cudnn-linux-x86_64-8.6.0.163_cuda11-archive.tgz
 linux   10.2    https://storage.googleapis.com/torch-lantern-builds/cudnn/cudnn-10.2-linux-x64-v7.6.5.32.tgz
+linux   11.7    https://storage.googleapis.com/torch-lantern-builds/cudnn/cudnn-linux-x86_64-8.5.0.96_cuda11-archive.tar.xz
