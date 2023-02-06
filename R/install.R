@@ -1,5 +1,5 @@
-branch <- "configure"
-torch_version <- "1.12.1"
+branch <- "main"
+torch_version <- "1.13.1"
 
 #' Install Torch
 #'
