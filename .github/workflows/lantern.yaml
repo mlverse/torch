@@ -2,6 +2,9 @@ name: Lantern
 
 on:
   workflow_call:
+  push:
+    branches:
+      - libtorch/v1.13.1
 
 jobs:
   build:
