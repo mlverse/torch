@@ -352,7 +352,16 @@ r_argument_expected_types <- function(arg, decls) {
     purrr::flatten() %>%
     purrr::keep(~.x$name == arg) %>%
     purrr::map_chr(~.x$dynamic_type) %>%
+    purrr::map_chr(r_mask_dynamic_type_name) %>%
     unique()
+}
+
+r_mask_dynamic_type_name <- function(dyn_type) {
+  if (dyn_type == "const ITensorListRef &") {
+    return("TensorList")
+  }
+
+  dyn_type
 }
 
 #' @importFrom utils capture.output

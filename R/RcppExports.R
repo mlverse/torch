@@ -4081,12 +4081,12 @@ cpp_torch_namespace__sparse_broadcast_to_self_Tensor_size_IntArrayRef <- functio
     .Call(`_torch_cpp_torch_namespace__sparse_broadcast_to_self_Tensor_size_IntArrayRef`, self, size)
 }
 
-cpp_torch_namespace_cat_tensors_constITensorListRef_dim_int64_t <- function(tensors, dim) {
-    .Call(`_torch_cpp_torch_namespace_cat_tensors_constITensorListRef_dim_int64_t`, tensors, dim)
+cpp_torch_namespace_cat_tensors_TensorList_dim_int64_t <- function(tensors, dim) {
+    .Call(`_torch_cpp_torch_namespace_cat_tensors_TensorList_dim_int64_t`, tensors, dim)
 }
 
-cpp_torch_namespace_cat_out_out_Tensor_tensors_constITensorListRef_dim_int64_t <- function(out, tensors, dim) {
-    .Call(`_torch_cpp_torch_namespace_cat_out_out_Tensor_tensors_constITensorListRef_dim_int64_t`, out, tensors, dim)
+cpp_torch_namespace_cat_out_out_Tensor_tensors_TensorList_dim_int64_t <- function(out, tensors, dim) {
+    .Call(`_torch_cpp_torch_namespace_cat_out_out_Tensor_tensors_TensorList_dim_int64_t`, out, tensors, dim)
 }
 
 cpp_torch_namespace_cat_tensors_TensorList_dim_Dimname <- function(tensors, dim) {

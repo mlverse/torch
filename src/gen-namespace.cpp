@@ -5710,13 +5710,13 @@ return XPtrTorchTensor(r_out);
 }
 
 // [[Rcpp::export]]
-XPtrTorchTensor cpp_torch_namespace_cat_tensors_constITensorListRef_dim_int64_t (XPtrTorchTensorList tensors, XPtrTorchindex_int64_t dim) {
+XPtrTorchTensor cpp_torch_namespace_cat_tensors_TensorList_dim_int64_t (XPtrTorchTensorList tensors, XPtrTorchindex_int64_t dim) {
   auto r_out = lantern_cat_constitensorlistref_intt(tensors.get(), dim.get());
 return XPtrTorchTensor(r_out);
 }
 
 // [[Rcpp::export]]
-XPtrTorchTensor cpp_torch_namespace_cat_out_out_Tensor_tensors_constITensorListRef_dim_int64_t (XPtrTorchTensor out, XPtrTorchTensorList tensors, XPtrTorchindex_int64_t dim) {
+XPtrTorchTensor cpp_torch_namespace_cat_out_out_Tensor_tensors_TensorList_dim_int64_t (XPtrTorchTensor out, XPtrTorchTensorList tensors, XPtrTorchindex_int64_t dim) {
   auto r_out = lantern_cat_out_tensor_constitensorlistref_intt(out.get(), tensors.get(), dim.get());
 return XPtrTorchTensor(r_out);
 }
