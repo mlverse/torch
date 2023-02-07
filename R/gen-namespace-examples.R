@@ -1065,17 +1065,6 @@ NULL
 NULL
 # -> matmul <-
 
-# -> matrix_rank: 041df6e3dfcfe7a231267bb49b944be8 <-
-#'
-#' @name torch_matrix_rank
-#'
-#' @examples
-#' 
-#' a = torch_eye(10)
-#' torch_matrix_rank(a)
-NULL
-# -> matrix_rank <-
-
 # -> matrix_power: 7c31064980c3fed7ea226c1bcc72b8de <-
 #'
 #' @name torch_matrix_power
@@ -2389,31 +2378,6 @@ NULL
 #' torch_addcdiv(t, t1, t2, 0.1)
 NULL
 # -> addcdiv <-
-
-# -> lstsq: 0af50cba3dcf8ffd80ad812162fb7f33 <-
-#'
-#' @name torch_lstsq
-#'
-#' @examples
-#'
-#' A = torch_tensor(rbind(
-#'  c(1,1,1),
-#'  c(2,3,4),
-#'  c(3,5,2),
-#'  c(4,2,5),
-#'  c(5,4,3)
-#' ))
-#' B = torch_tensor(rbind(
-#'  c(-10, -3),
-#'  c(12, 14),
-#'  c(14, 12),
-#'  c(16, 16),
-#'  c(18, 16)
-#' ))
-#' out = torch_lstsq(B, A)
-#' out[[1]]
-NULL
-# -> lstsq <-
 
 # -> triangular_solve: 3a6185e8a4281e12dc6c7873a1484b31 <-
 #'
