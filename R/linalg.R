@@ -899,7 +899,7 @@ linalg_lstsq <- function(A, B, rcond = NULL, ..., driver = NULL) {
 #' @family linalg
 #' @export
 linalg_inv <- function(A) {
-  torch_linalg_inv(self = A)
+  torch_linalg_inv(A)
 }
 
 #' Computes the pseudoinverse (Moore-Penrose inverse) of a matrix.
