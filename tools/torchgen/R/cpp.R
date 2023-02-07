@@ -101,7 +101,8 @@ cpp_function_name <- function(method, type) {
     arg_types[[nm]] <- method$arguments %>%
       purrr::keep(~.x$name == nm)  %>%
       purrr::pluck(1) %>%
-      purrr::pluck("dynamic_type")
+      purrr::pluck("dynamic_type") %>%
+      r_mask_dynamic_type_name()
   }
 
   if (is.null(arg_types))

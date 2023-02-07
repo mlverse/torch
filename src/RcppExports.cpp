@@ -12589,28 +12589,28 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
-// cpp_torch_namespace_cat_tensors_constITensorListRef_dim_int64_t
-XPtrTorchTensor cpp_torch_namespace_cat_tensors_constITensorListRef_dim_int64_t(XPtrTorchTensorList tensors, XPtrTorchindex_int64_t dim);
-RcppExport SEXP _torch_cpp_torch_namespace_cat_tensors_constITensorListRef_dim_int64_t(SEXP tensorsSEXP, SEXP dimSEXP) {
+// cpp_torch_namespace_cat_tensors_TensorList_dim_int64_t
+XPtrTorchTensor cpp_torch_namespace_cat_tensors_TensorList_dim_int64_t(XPtrTorchTensorList tensors, XPtrTorchindex_int64_t dim);
+RcppExport SEXP _torch_cpp_torch_namespace_cat_tensors_TensorList_dim_int64_t(SEXP tensorsSEXP, SEXP dimSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< XPtrTorchTensorList >::type tensors(tensorsSEXP);
     Rcpp::traits::input_parameter< XPtrTorchindex_int64_t >::type dim(dimSEXP);
-    rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace_cat_tensors_constITensorListRef_dim_int64_t(tensors, dim));
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace_cat_tensors_TensorList_dim_int64_t(tensors, dim));
     return rcpp_result_gen;
 END_RCPP
 }
-// cpp_torch_namespace_cat_out_out_Tensor_tensors_constITensorListRef_dim_int64_t
-XPtrTorchTensor cpp_torch_namespace_cat_out_out_Tensor_tensors_constITensorListRef_dim_int64_t(XPtrTorchTensor out, XPtrTorchTensorList tensors, XPtrTorchindex_int64_t dim);
-RcppExport SEXP _torch_cpp_torch_namespace_cat_out_out_Tensor_tensors_constITensorListRef_dim_int64_t(SEXP outSEXP, SEXP tensorsSEXP, SEXP dimSEXP) {
+// cpp_torch_namespace_cat_out_out_Tensor_tensors_TensorList_dim_int64_t
+XPtrTorchTensor cpp_torch_namespace_cat_out_out_Tensor_tensors_TensorList_dim_int64_t(XPtrTorchTensor out, XPtrTorchTensorList tensors, XPtrTorchindex_int64_t dim);
+RcppExport SEXP _torch_cpp_torch_namespace_cat_out_out_Tensor_tensors_TensorList_dim_int64_t(SEXP outSEXP, SEXP tensorsSEXP, SEXP dimSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< XPtrTorchTensor >::type out(outSEXP);
     Rcpp::traits::input_parameter< XPtrTorchTensorList >::type tensors(tensorsSEXP);
     Rcpp::traits::input_parameter< XPtrTorchindex_int64_t >::type dim(dimSEXP);
-    rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace_cat_out_out_Tensor_tensors_constITensorListRef_dim_int64_t(out, tensors, dim));
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_namespace_cat_out_out_Tensor_tensors_TensorList_dim_int64_t(out, tensors, dim));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -49592,8 +49592,8 @@ static const R_CallMethodDef CallEntries[] = {
     {"_torch_cpp_torch_namespace_broadcast_tensors_tensors_TensorList", (DL_FUNC) &_torch_cpp_torch_namespace_broadcast_tensors_tensors_TensorList, 1},
     {"_torch_cpp_torch_namespace_broadcast_to_self_Tensor_size_IntArrayRef", (DL_FUNC) &_torch_cpp_torch_namespace_broadcast_to_self_Tensor_size_IntArrayRef, 2},
     {"_torch_cpp_torch_namespace__sparse_broadcast_to_self_Tensor_size_IntArrayRef", (DL_FUNC) &_torch_cpp_torch_namespace__sparse_broadcast_to_self_Tensor_size_IntArrayRef, 2},
-    {"_torch_cpp_torch_namespace_cat_tensors_constITensorListRef_dim_int64_t", (DL_FUNC) &_torch_cpp_torch_namespace_cat_tensors_constITensorListRef_dim_int64_t, 2},
-    {"_torch_cpp_torch_namespace_cat_out_out_Tensor_tensors_constITensorListRef_dim_int64_t", (DL_FUNC) &_torch_cpp_torch_namespace_cat_out_out_Tensor_tensors_constITensorListRef_dim_int64_t, 3},
+    {"_torch_cpp_torch_namespace_cat_tensors_TensorList_dim_int64_t", (DL_FUNC) &_torch_cpp_torch_namespace_cat_tensors_TensorList_dim_int64_t, 2},
+    {"_torch_cpp_torch_namespace_cat_out_out_Tensor_tensors_TensorList_dim_int64_t", (DL_FUNC) &_torch_cpp_torch_namespace_cat_out_out_Tensor_tensors_TensorList_dim_int64_t, 3},
     {"_torch_cpp_torch_namespace_cat_tensors_TensorList_dim_Dimname", (DL_FUNC) &_torch_cpp_torch_namespace_cat_tensors_TensorList_dim_Dimname, 2},
     {"_torch_cpp_torch_namespace_cat_out_out_Tensor_tensors_TensorList_dim_Dimname", (DL_FUNC) &_torch_cpp_torch_namespace_cat_out_out_Tensor_tensors_TensorList_dim_Dimname, 3},
     {"_torch_cpp_torch_namespace_concat_tensors_TensorList_dim_int64_t", (DL_FUNC) &_torch_cpp_torch_namespace_concat_tensors_TensorList_dim_int64_t, 2},

@@ -12583,8 +12583,7 @@ fun_type = 'namespace'
 #' @rdname torch_cat
 torch_cat <- function(tensors, dim = 1L) {
   args <- mget(x = c("tensors", "dim"))
-expected_types <- list(tensors = c("const ITensorListRef &", "TensorList"), dim = c("int64_t", 
-"Dimname"))
+expected_types <- list(tensors = "TensorList", dim = c("int64_t", "Dimname"))
 nd_args <- c("tensors", "dim")
 return_types <- list(list('Tensor'))
 call_c_function(
@@ -12601,8 +12600,8 @@ fun_type = 'namespace'
 #' @rdname torch_cat_out
 torch_cat_out <- function(out, tensors, dim = 1L) {
   args <- mget(x = c("out", "tensors", "dim"))
-expected_types <- list(out = "Tensor", tensors = c("const ITensorListRef &", "TensorList"
-), dim = c("int64_t", "Dimname"))
+expected_types <- list(out = "Tensor", tensors = "TensorList", dim = c("int64_t", 
+"Dimname"))
 nd_args <- c("out", "tensors", "dim")
 return_types <- list(list('Tensor'))
 call_c_function(
