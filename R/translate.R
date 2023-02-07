@@ -8,7 +8,8 @@ translate_error_msg <- function(msg) {
     translate_contract_error_msg() %>% 
     translate_null_index_error_msg() %>%
     translate_tensor_number_error_msg() %>%
-    translate_size_match_error_msg()
+    translate_size_match_error_msg() %>% 
+    translate_linalg_dim_size()
 }
 
 translate_dim_error_msg <- function(msg) {
@@ -18,6 +19,11 @@ translate_dim_error_msg <- function(msg) {
 
 translate_dim_size_error_msg <- function(msg) {
   regex <- "(?:.|\\r?\\n)*dimension ([0-9]+) does not have size [0-9]+(?:.|\\r?\\n)*"
+  translate_increase_group(msg, regex)
+}
+
+translate_linalg_dim_size <- function(msg) {
+  regex <- "(?:.|\\r?\\n)*inputs dimension ([0-9]+) must have length(?:.|\\r?\\n)*"
   translate_increase_group(msg, regex)
 }
 
