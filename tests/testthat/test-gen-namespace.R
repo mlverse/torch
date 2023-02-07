@@ -130,6 +130,24 @@ test_that("_cholesky_solve_helper", {
   expect_tensor(torch__cholesky_solve_helper(x, x, TRUE))
 })
 
+test_that("torch_cat works as expected", {
+  x <- torch_randn(2,3,4)
+  y <- torch_randn(2,4,4)
+  
+  expect_tensor_shape(
+    torch_cat(list(x, y), dim = 2),
+    c(2, 7, 4)
+  )
+  
+  x <- torch_randn(2,3,4, names = c("A", "B", "C"))
+  y <- torch_randn(2,4,4, names = c("A", "B", "C"))
+  
+  expect_tensor_shape(
+    torch_cat(list(x, y), dim = "B"),
+    c(2, 7, 4)
+  )
+})
+
 test_that("diff works", {
   a <- torch_tensor(c(1, 2, 3))
   expect_equal_to_r(torch_diff(a), c(1, 1))
@@ -208,7 +226,7 @@ test_that("tensordot", {
 test_that("upsample_nearest1d_out", {
   x <- torch_rand(c(2, 2, 2))
   y <- torch_zeros(c(2, 2, 2))
-  expect_tensor(torch_upsample_nearest1d_out(y, x, output_size = c(2)))
+  expect_tensor(torch_upsample_nearest1d_out(y, self = x, output_size = c(2)))
   expect_not_equal_to_tensor(y, torch_zeros(c(2, 2, 2)))
 })
 
@@ -220,7 +238,7 @@ test_that("upsample_nearest1d", {
 test_that("upsample_nearest1d_backward_out", {
   x <- torch_rand(c(2, 2, 2))
   y <- torch_zeros(c(2, 2, 2))
-  expect_tensor(torch_upsample_nearest1d_backward_out(y, x, c(2), c(2, 2, 2)))
+  expect_tensor(torch_upsample_nearest1d_backward_out(grad_input = y, grad_output = x, output_size = c(2), input_size = c(2, 2, 2)))
   expect_not_equal_to_tensor(y, torch_zeros(c(2, 2, 2)))
 })
 
@@ -232,7 +250,7 @@ test_that("upsample_nearest1d_backward", {
 test_that("upsample_nearest2d_out", {
   x <- torch_rand(c(2, 2, 2, 2))
   y <- torch_zeros(c(2, 2, 2, 2))
-  expect_tensor(torch_upsample_nearest2d_out(y, x, output_size = c(2, 2)))
+  expect_tensor(torch_upsample_nearest2d_out(y, self = x, output_size = c(2, 2)))
   expect_not_equal_to_tensor(y, torch_zeros(c(2, 2, 2, 2)))
 })
 
@@ -244,7 +262,7 @@ test_that("upsample_nearest2d", {
 test_that("upsample_nearest2d_backward_out", {
   x <- torch_rand(c(2, 2, 2, 2))
   y <- torch_zeros(c(2, 2, 2, 2))
-  expect_tensor(torch_upsample_nearest2d_backward_out(y, x, c(2, 2), c(2, 2, 2, 2)))
+  expect_tensor(torch_upsample_nearest2d_backward_out(grad_input = y, grad_output = x, output_size = c(2, 2), input_size = c(2, 2, 2, 2)))
   expect_not_equal_to_tensor(y, torch_zeros(c(2, 2, 2, 2)))
 })
 
@@ -256,7 +274,7 @@ test_that("upsample_nearest2d_backward", {
 test_that("upsample_nearest3d_out", {
   x <- torch_rand(c(2, 2, 2, 2, 2))
   y <- torch_zeros(c(2, 2, 2, 2, 2))
-  torch_upsample_nearest3d_out(y, x, output_size = c(2, 2, 2))
+  torch_upsample_nearest3d_out(y, self = x, output_size = c(2, 2, 2))
   expect_tensor(y)
   expect_not_equal_to_tensor(y, torch_zeros(c(2, 2, 2, 2, 2)))
 })
@@ -273,14 +291,14 @@ test_that("upsample_nearest3d_backward", {
 
 test_that("upsample_nearest3d_backward_out", {
   x <- torch_rand(c(2, 2, 2, 2, 2))
-  y <- torch_zeros(1)
-  expect_tensor(torch_upsample_nearest3d_backward_out(y, x, c(2, 2, 2), c(2, 2, 2, 2, 2)))
+  y <- torch_randn(2,2,2,2,2)
+  expect_tensor(torch_upsample_nearest3d_backward_out(grad_input = y, grad_output = x, output_size = c(2, 2, 2), input_size = c(2, 2, 2, 2, 2)))
 })
 
 test_that("upsample_nearest3d_out", {
   x <- torch_rand(c(2, 2, 2, 2, 2))
-  y <- torch_rand(c(2, 2))
-  expect_tensor(torch_upsample_nearest3d_out(y, x, c(2, 2, 2)))
+  y <- torch_rand(c(2, 2, 2, 2, 2))
+  expect_tensor(torch_upsample_nearest3d_out(out = y, self = x, output_size = c(2, 2, 2)))
   expect_tensor(y)
 })
 
@@ -296,14 +314,14 @@ test_that("upsample_trilinear3d_backward", {
 
 test_that("upsample_trilinear3d_backward_out", {
   x <- torch_rand(c(2, 2, 2, 2, 2))
-  y <- torch_zeros(1)
-  expect_tensor(torch_upsample_trilinear3d_backward_out(y, x, c(2, 2, 2), c(2, 2, 2, 2, 2), align_corners = TRUE))
+  y <- torch_zeros(2, 2, 2,2, 2)
+  expect_tensor(torch_upsample_trilinear3d_backward_out(grad_input = y, grad_output = x, output_size = c(2, 2, 2), input_size = c(2, 2, 2, 2, 2), align_corners = TRUE))
 })
 
 test_that("upsample_trilinear3d_out", {
   x <- torch_rand(c(2, 2, 2, 2, 2))
-  y <- torch_rand(c(2, 2))
-  expect_tensor(torch_upsample_trilinear3d_out(y, x, c(2, 2, 2), align_corners = TRUE))
+  y <- torch_rand(c(2, 2, 2, 2, 2))
+  expect_tensor(torch_upsample_trilinear3d_out(y, self = x, output_size = c(2, 2, 2), align_corners = TRUE))
   expect_tensor(y)
 })
 

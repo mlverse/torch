@@ -776,6 +776,22 @@ test_that("with detect anomaly", {
   })
 })
 
+test_that("try and with_detect_anomaly", {
+  
+  x <- torch_randn(2, requires_grad = TRUE)
+  y <- torch_randn(1)
+  b <- (x^y)$sum()
+  y$add_(1)
+  k <- try(silent = TRUE, {
+    b$backward()
+    with_detect_anomaly({
+      b$backward()
+    })
+  })
+  expect_true(inherits(k, "try-error"))
+  
+})
+
 test_that("autograd_grad works with custom autograd fucntions", {
   torch_manual_seed(1)
   w1 <- torch_randn(4, 3, 5, 5)$requires_grad_()
