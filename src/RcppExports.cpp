@@ -48504,15 +48504,6 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
-// cpp_benchmark_debug
-void cpp_benchmark_debug();
-RcppExport SEXP _torch_cpp_benchmark_debug() {
-BEGIN_RCPP
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    cpp_benchmark_debug();
-    return R_NilValue;
-END_RCPP
-}
 // cpp_torch_variable_list
 Rcpp::XPtr<XPtrTorchvariable_list> cpp_torch_variable_list(const Rcpp::List& x);
 RcppExport SEXP _torch_cpp_torch_variable_list(SEXP xSEXP) {
@@ -52232,7 +52223,6 @@ static const R_CallMethodDef CallEntries[] = {
     {"_torch_transpose2", (DL_FUNC) &_torch_transpose2, 1},
     {"_torch_cpp_torch_show_config", (DL_FUNC) &_torch_cpp_torch_show_config, 0},
     {"_torch_cpp_torch_parallel_info", (DL_FUNC) &_torch_cpp_torch_parallel_info, 0},
-    {"_torch_cpp_benchmark_debug", (DL_FUNC) &_torch_cpp_benchmark_debug, 0},
     {"_torch_cpp_torch_variable_list", (DL_FUNC) &_torch_cpp_torch_variable_list, 1},
     {"_torch_cpp_variable_list_to_r_list", (DL_FUNC) &_torch_cpp_variable_list_to_r_list, 1},
     {"_torch_set_xptr_address", (DL_FUNC) &_torch_set_xptr_address, 2},
