@@ -1,7 +1,7 @@
-test_that("Forking doesn't dealock", {
+test_that("Forking doesn't deadlock", {
   skip_on_os(c("windows", "mac"))
   
-  out <- callr::r(function() {
+  out <- callr::r(timeout = 30, function() {
     library(torch)
     testfun <- function (x) {
       lstm <- nn_lstm(50, 50)
