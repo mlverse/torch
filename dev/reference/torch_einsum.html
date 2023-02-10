@@ -16,7 +16,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">torch</a>
 
-    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">0.9.1.9000</small>
+    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">0.9.1.9001</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -89,7 +89,7 @@
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">torch_einsum</span><span class="op">(</span><span class="va">equation</span>, <span class="va">tensors</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">torch_einsum</span><span class="op">(</span><span class="va">equation</span>, <span class="va">tensors</span>, path <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -100,6 +100,16 @@
 
 <dt>tensors</dt>
 <dd><p>(Tensor) The operands to compute the Einstein sum of.</p></dd>
+
+
+<dt>path</dt>
+<dd><p>(int) This function uses <a href="https://optimized-einsum.readthedocs.io/en/stable/" class="external-link">opt_einsum</a> to
+speed up computation or to consume less memory by optimizing contraction order. This optimization
+occurs when there are at least three inputs, since the order does not matter otherwise.
+Note that finding <em>the</em> optimal path is an NP-hard problem, thus, <code>opt_einsum</code> relies
+on different heuristics to achieve near-optimal results. If <code>opt_einsum</code> is not available,
+the default order is to contract from left to right.
+The path argument is used to changed that default, but it should only be set by advanced users.</p></dd>
 
 </dl></div>
     <div class="section level2">
