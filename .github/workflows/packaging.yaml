@@ -22,18 +22,18 @@ jobs:
           - {os: macOS, version: cpu-m1, runner: [self-hosted, m1]}
           
           - {os: ubuntu, version: cpu, runner: ubuntu-latest}
-          - {os: ubuntu, version: cu113, runner: [self-hosted, gce, disk]}
+          - {os: ubuntu, version: cu117, runner: [self-hosted, gce, disk]}
           
           - {os: windows, version: cpu, runner: windows-2019}
-          - {os: windows, version: cu113, runner: windows-2019}
+          - {os: windows, version: cu117, runner: windows-2019}
           
         r_version: [release]
           
         include:
           
-          - config: {version: cu113}
-            cuda: 11.3
-            cuda_patch: 1
+          - config: {version: cu117}
+            cuda: 11.7
+            cuda_patch: 0
             
           - config: {os: ubuntu}
             container: ubuntu:18.04
