@@ -2318,14 +2318,6 @@ HOST_API void* lantern_torch_parallel_info ()
   return ret;
 }
 
-LANTERN_API void (LANTERN_PTR _lantern_benchmark_debug) ();
-HOST_API void lantern_benchmark_debug () 
-{
-  LANTERN_CHECK_LOADED
-  _lantern_benchmark_debug();
-  LANTERN_HOST_HANDLER;
-}
-
 LANTERN_API void (LANTERN_PTR _lantern_set_cuda_allocator_thresholds) (double reserved_rate, double allocated_rate, double allocated_reserved_rate);
 HOST_API void lantern_set_cuda_allocator_thresholds (double reserved_rate, double allocated_rate, double allocated_reserved_rate) {
   LANTERN_CHECK_LOADED
@@ -9903,7 +9895,6 @@ LOAD_SYMBOL(_lantern_string_size);
 LOAD_SYMBOL(_lantern_set_gc_called);
 LOAD_SYMBOL(_lantern_torch_show_config);
 LOAD_SYMBOL(_lantern_torch_parallel_info);
-LOAD_SYMBOL(_lantern_benchmark_debug);
 LOAD_SYMBOL(_lantern_set_cuda_allocator_thresholds);
 LOAD_SYMBOL(_lantern_cuda_synchronize);
 LOAD_SYMBOL(_lantern_backend_has_mps);

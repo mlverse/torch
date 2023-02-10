@@ -14641,10 +14641,6 @@ cpp_torch_parallel_info <- function() {
     .Call(`_torch_cpp_torch_parallel_info`)
 }
 
-cpp_benchmark_debug <- function() {
-    invisible(.Call(`_torch_cpp_benchmark_debug`))
-}
-
 cpp_torch_variable_list <- function(x) {
     .Call(`_torch_cpp_torch_variable_list`, x)
 }
