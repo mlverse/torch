@@ -3,6 +3,7 @@
 - Provide pre-built binaries for torch using a GH Action workflow. (#975)
 - Large refactoring of the build system. (#964)
 - Use native symbol registration instead of dynamic lookup. (#976)
+- Updated to LibTorch v1.13.1 (#977)
 
 # torch 0.9.1
 
