@@ -15,6 +15,6 @@ test_that("Forking doesn't deadlock", {
     parallel::mclapply(1:2, testfun)
   })
   
-  expect_true(length(out), 2)
+  expect_equal(length(out), 2)
   expect_true(is.numeric(out[[1]]))
 })
