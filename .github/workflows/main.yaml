@@ -33,9 +33,8 @@ jobs:
           - {os: ubuntu, r_version: release, version: cpu, runner: ubuntu-20.04}
           # the precxx11abi R version is whichever is specified in the selected container.
           - {os: centos, r_version: '', version: cpu, runner: ubuntu-20.04, precxx11abi: 1}
-          - {os: ubuntu, r_version: release, version: cu10.2, runner: [self-hosted, gce, gpu]}
-          - {os: ubuntu, r_version: release, version: cu11.3, runner: [self-hosted, gce, gpu]}
           - {os: ubuntu, r_version: release, version: cu11.6, runner: [self-hosted, gce, gpu]}
+          - {os: ubuntu, r_version: release, version: cu11.7, runner: [self-hosted, gce, gpu]}
 
           - {os: windows, r_version: release, version: cpu, runner: windows-latest}
           - {os: windows, r_version: 3.6, version: cpu, runner: windows-latest}
@@ -45,12 +44,10 @@ jobs:
           - config: {os: centos, precxx11abi: 1}
             container: rstudio/r-base:4.2-centos7
 
-          - config: {os: ubuntu, version: cu10.2}
-            container: nvidia/cuda:10.2-cudnn8-devel-ubuntu18.04
-          - config: {os: ubuntu, version: cu11.3}
-            container: nvidia/cuda:11.3.0-cudnn8-devel-ubuntu18.04
           - config: {os: ubuntu, version: cu11.6}
             container: nvidia/cuda:11.6.0-cudnn8-devel-ubuntu18.04
+          - config: {os: ubuntu, version: cu11.7}
+            container: nvidia/cuda:11.7.0-cudnn8-devel-ubuntu18.04
 
     runs-on: ${{ matrix.config.runner }}
     container: ${{ matrix.container }}
@@ -70,12 +67,13 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: lantern
-          path: ~/Downloads/
+          path: '${{ runner.temp }}/'
 
       - name: Set base URL for downloading
         if: ${{ needs.lantern.result != 'skipped' }}
         run: |
-          echo "LANTERN_BASE_URL=~/Downloads/" >> $GITHUB_ENV
+          echo "LANTERN_BASE_URL=${{ runner.temp }}/" >> $GITHUB_ENV
+        shell: bash
 
       - uses: actions/checkout@v3
       

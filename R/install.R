@@ -566,7 +566,7 @@ get_install_libs_url <- function(version = NA, type = NA) {
 #' @export
 install_torch_from_file <- function(version = NA, type = NA, libtorch, liblantern, ...) {
   cli::cli_abort(c(
-    "This function is now deprecated. The same results can be achieved with {.fn install_torch()}.",
+    "This function is now deprecated. The same results can be achieved with {.fn install_torch}.",
     i = "Use the envvars {.envvar TORCH_URL} and {.envvar LANTERN_URL} to set the file locations."
   ))
 }

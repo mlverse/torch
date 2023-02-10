@@ -44,10 +44,11 @@ globalVariables(c("..", "self", "private", "N"))
         TRUE
       },
       error = function(e) {
+        msg <- if (is.character(e$message)) e$message else "Unknown error."
         cli::cli_warn(c(
-          i = "Failed to install torch, manually run install_torch()",
-          x = e$message
-        ))
+          i = "Failed to install torch, manually run {.fn install_torch}",
+          x = msg
+        ), parent = e)
         FALSE
       }
     )
@@ -73,11 +74,12 @@ globalVariables(c("..", "self", "private", "N"))
         .compilation_unit <<- cpp_jit_compilation_unit()
       },
       error = function(e) {
+        msg <- if (is.character(e$message)) e$message else "Unknown error."
         cli::cli_warn(c(
           i = "torch failed to start, restart your R session to try again.",
           i = "You might need to reinstall torch using {.fn install_torch}",
-          x = e$message
-        ))
+          x = msg
+        ), parent = e)
         FALSE
       }
     )

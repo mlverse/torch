@@ -18,19 +18,23 @@ runs:
     - name: Install cuDNN (Linux)
       if: ${{ runner.os == 'Linux' }}
       run: |
-        apt-get install -y wget
+        apt-get install -y wget xz-utils
         find $CUDA_PATH -maxdepth 2 -type d -ls
         wget --quiet ${{ steps.cudnn_url.outputs.cudnn_url }} -O cudnn.tgz
-        tar -xzvf cudnn.tgz
-        sudo cp cuda/include/cudnn*.h $CUDA_PATH/include
-        sudo cp cuda/lib64/libcudnn* $CUDA_PATH/lib64 2>/dev/null || :
-        sudo cp cuda/lib/libcudnn* $CUDA_PATH/lib64 2>/dev/null || :
+        mkdir -p cuda
+        tar xf cudnn.tgz -C ./cuda/
+        find cuda -maxdepth 2 -type d -ls || true
+        if [ -d "./cuda/include" ]; then
+          CUDNN_PATH="./cuda"
+        else
+          CUDNN_PATH="./cuda/$(ls cuda)"
+        fi
+        sudo cp $CUDNN_PATH/include/cudnn*.h $CUDA_PATH/include
+        sudo cp $CUDNN_PATH/lib64/libcudnn* $CUDA_PATH/lib64 2>/dev/null || :
+        sudo cp $CUDNN_PATH/lib/libcudnn* $CUDA_PATH/lib64 2>/dev/null || :
         sudo chmod a+r $CUDA_PATH/include/cudnn*.h $CUDA_PATH/lib64/libcudnn* 2>/dev/null || :
         sudo chmod a+r $CUDA_PATH/include/cudnn*.h $CUDA_PATH/lib/libcudnn* 2>/dev/null || :
-        ls $CUDA_PATH/lib/ || true
-        ls $CUDA_PATH/lib64/ || true
         rm cudnn.tgz
-        find $CUDA_PATH -maxdepth 2 -type d -ls
       shell: bash
 
     - name: Install cuDNN (Windows)
@@ -38,11 +42,13 @@ runs:
       run: |
         curl ${{ steps.cudnn_url.outputs.cudnn_url }} --output cudnn.zip --silent --location
         Expand-Archive -Path cudnn.zip -DestinationPath "C:\cudnn"
-        Get-ChildItem -Path "C:\cudnn"
-        Get-ChildItem -Path "${env:CUDA_PATH}"
+        Get-ChildItem -Path "C:\cudnn\"
+        Get-ChildItem -Path "${env:CUDA_PATH}\lib"
+        Get-ChildItem -Path "C:\cudnn\" -Directory | Move-Item -Destination "C:\cudnn\cuda"
+        Get-ChildItem -Path "C:\cudnn\"
         Move-Item -Path "C:\cudnn\cuda\bin\cudnn*.dll" -Destination "${env:CUDA_PATH}\bin"
         Move-Item -Path "C:\cudnn\cuda\include\cudnn*.h" -Destination "${env:CUDA_PATH}\include"
-        Move-Item -Path "C:\cudnn\cuda\lib\x64\cudnn*.lib" -Destination "${env:CUDA_PATH}\lib\x64"
+        Move-Item -Path "C:\cudnn\cuda\lib\cudnn*.lib" -Destination "${env:CUDA_PATH}\lib\x64"
         echo "CUDNN_INCLUDE_PATH=""${CUDA_PATH}\include""" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
         echo "CUDNN_LIBRARY_PATH=""${CUDA_PATH}\lib\x64""" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
         Remove-Item -Path cudnn.zip
