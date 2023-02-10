@@ -60,9 +60,13 @@ namespace {
 EventLoop<void*> gTasks;
 EventLoop<void> gBackwardTasks;
 std::atomic<bool> backward_is_running(false);
-static ThreadPool<void>* pool = new ThreadPool<void>(5);
+static ThreadPool<void>* pool;
 
 void schedule_backward_task(std::packaged_task<void()>&& task) {
+  if (!pool) {
+    pool = new ThreadPool<void>(5);
+  }
+  
   if (std::this_thread::get_id() == main_thread_id()) {
     pool->push(std::move(task));
   } else {
