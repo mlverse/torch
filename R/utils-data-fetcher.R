@@ -29,7 +29,7 @@ IterableDatasetFetcher <- R6::R6Class(
         for (i in seq_along(possibly_batched_index)) {
           d <- self$dataset_iter()
 
-          if (coro::is_exhausted(d)) {
+          if (is_exhausted(d)) {
             break
           }
 

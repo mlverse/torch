@@ -121,7 +121,7 @@ BatchSampler <- sampler(
     samp <- self$sampler$.iter_batch(self$batch_size)
     function() {
       batch <- samp()
-      if (coro::is_exhausted(batch)) return(batch)
+      if (is_exhausted(batch)) return(batch)
       if (length(batch) == self$batch_size) return(batch)
       if (length(batch) > 0 && !self$drop_last) return(batch)
       coro::exhausted()
@@ -133,7 +133,7 @@ BatchSampler <- sampler(
       batch <- list()
       repeat {
         id <- samp()
-        if (coro::is_exhausted(id)) break
+        if (is_exhausted(id)) break
         batch[[length(batch) + 1]] <- id
         if (length(batch) == self$batch_size) return(batch)
       }
