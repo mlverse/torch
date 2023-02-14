@@ -29,7 +29,7 @@ is_dataloader <- function(x) {
 #' @export
 dataloader_next <- function(iter, completed = NULL) {
   res <- iter$.next()
-  if (coro::is_exhausted(res)) {
+  if (is_exhausted(res)) {
     completed
   } else {
     res
@@ -267,6 +267,7 @@ BaseDataLoaderIter <- R6::R6Class(
   )
 )
 
+#' @importFrom coro is_exhausted
 SingleProcessDataLoaderIter <- R6::R6Class(
   classname = "SingleProcessDataLoaderIter",
   inherit = BaseDataLoaderIter,
@@ -289,7 +290,7 @@ SingleProcessDataLoaderIter <- R6::R6Class(
     .next_data = function() {
       index <- self$.next_index()
 
-      if (coro::is_exhausted(index)) {
+      if (is_exhausted(index)) {
         return(coro::exhausted())
       }
 
