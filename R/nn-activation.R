@@ -1118,3 +1118,26 @@ nn_contrib_sparsemax <- nn_module(
     nnf_contrib_sparsemax(input, self$dim)
   }
 )
+
+#' Applies the Sigmoid Linear Unit (SiLU) function, element-wise.
+#' The SiLU function is also known as the swish function.
+#' 
+#' @details 
+#' See [Gaussian Error Linear Units (GELUs)](https://arxiv.org/abs/1606.08415)
+#' where the SiLU (Sigmoid Linear Unit) was originally coined, and see
+#' [Sigmoid-Weighted Linear Units for Neural Network Function Approximation in Reinforcement Learning](https://arxiv.org/abs/1702.03118) 
+#' and [Swish: a Self-Gated Activation Function](https://arxiv.org/abs/1710.05941v1)
+#' where the SiLU was experimented with later.
+#' 
+#' @inheritParams nn_relu
+#'
+#' @export
+nn_silu <- nn_module(
+  "nn_silu",
+  initialize = function(inplace=FALSE) {
+    self$inplace <- inplace
+  },
+  forward = function(input) {
+    nnf_silu(input, self$inplace)
+  }
+)
