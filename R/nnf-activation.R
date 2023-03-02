@@ -801,3 +801,16 @@ nnf_contrib_sparsemax <- function(input, dim = -1) {
 
   Tensor$new(ptr = ptr)
 }
+
+#' Applies the Sigmoid Linear Unit (SiLU) function, element-wise.
+#' See [nn_silu()] for more information.
+#' @seealso [nn_silu()].
+#' @inheritParams nnf_relu
+#' @export
+nnf_silu <- function(input, inplace = FALSE) {
+  if (inplace) {
+    torch_silu_(input)
+  } else {
+    torch_silu(input)
+  }
+}

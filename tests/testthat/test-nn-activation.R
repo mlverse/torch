@@ -71,3 +71,18 @@ test_that("Multihead attention works", {
   # raise error when embed_dim is not divisible by num_heads.
   expect_error(nn_multihead_attention(embed_dim = 512, num_heads = 10), regexp="divisible")
 })
+
+test_that("silu works", {
+  
+  silu <- nn_silu()
+  input <- torch_tensor(c(-1.0, 0.0, 1.0))
+  expected_output <- torch_tensor(c(-0.26894142, 0.0, 0.73105858))
+
+  expect_equal_to_tensor(silu(input), expected_output)
+  
+  silu <- nn_silu(inplace = TRUE)
+  out <- silu(input)
+  
+  expect_equal_to_tensor(input, expected_output)
+  
+})
