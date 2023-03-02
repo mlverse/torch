@@ -658,6 +658,9 @@
     <loc>https://torch.mlverse.org/docs/dev/reference/nn_sigmoid.html</loc>
   </url>
   <url>
+    <loc>https://torch.mlverse.org/docs/dev/reference/nn_silu.html</loc>
+  </url>
+  <url>
     <loc>https://torch.mlverse.org/docs/dev/reference/nn_smooth_l1_loss.html</loc>
   </url>
   <url>
@@ -974,6 +977,9 @@
   </url>
   <url>
     <loc>https://torch.mlverse.org/docs/dev/reference/nnf_sigmoid.html</loc>
+  </url>
+  <url>
+    <loc>https://torch.mlverse.org/docs/dev/reference/nnf_silu.html</loc>
   </url>
   <url>
     <loc>https://torch.mlverse.org/docs/dev/reference/nnf_smooth_l1_loss.html</loc>
