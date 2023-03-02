@@ -4,6 +4,7 @@
 - Large refactoring of the build system. (#964)
 - Use native symbol registration instead of dynamic lookup. (#976)
 - Updated to LibTorch v1.13.1 (#977)
+- Added `nn_silu()` and `nnf_silu()`. (#985)
 
 # torch 0.9.1
 
