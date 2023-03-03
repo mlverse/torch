@@ -221,6 +221,26 @@ nn_Module <- R6::R6Class(
       } else {
         private$buffers_
       }
+    },
+    .replace_values_from_table = function(table) {
+      for (i in seq_along(private$modules_)) {
+        module <- private$modules_[[i]]
+        private$modules_[[i]] <- table[[rlang::obj_address(module)]] %||% module
+      }
+      
+      lapply(private$modules_, function(x) x$.replace_values_from_table(table))
+      
+      for (i in seq_along(private$parameters_)) {
+        par <- private$parameters_[[i]]
+        # par or buf might not be available in `table` if, for some reason they
+        # have already been replaced. This happens for example, when a module 
+        # has the same layer twice. this also applies for modules, they might be duplicated 
+        private$parameters_[[i]] <- table[[xptr_address(par)]] %||% par
+      }
+      for (i in seq_along(private$buffers_)) {
+        buf <- private$buffers_[[i]]
+        private$buffers_[[i]] <- table[[xptr_address(buf)]] %||% buf
+      }
     }
   ),
   private = list(
@@ -454,7 +474,7 @@ nn_module <- function(classname = NULL, inherit = nn_Module, ...,
     active = active,
     parent_env = e
   )
-
+  
   init <- get_init(Module)
 
   fun <- rlang::new_function(
@@ -474,6 +494,39 @@ create_nn_module_callable <- function(instance) {
 
   attr(f, "class") <- instance$.classes
   attr(f, "module") <- instance
+  
+  unlockBinding("clone", instance)
+  on.exit({lockBinding("clone", instance)}, add = TRUE)
+  clone <- instance$clone
+  instance$clone <- function(deep = FALSE, ..., replace_values = TRUE) {
+    if (deep && replace_values) {
+      state_dict <- append(instance$parameters, instance$buffers)
+      names(state_dict) <- sapply(state_dict, xptr_address)
+      
+      state_dict <- state_dict[!duplicated(names(state_dict))]
+      state_dict <- lapply(state_dict, function(x) x$detach()$clone())  
+      
+      # also need to append a clone of the modules to this list.
+      # child modules can be duplicated - and have the same name
+      # child modules are also deep cloned, but we don't need to replace
+      # their values when cloning because we only have to do it once.
+      children <- instance$children
+      names(children) <- sapply(children, rlang::obj_address)
+      children <- children[!duplicated(names(children))]
+      children <- lapply(children, function(x) x$clone(deep = deep, replace_values = FALSE))
+      
+      state_dict <- append(state_dict, children)
+    }
+    
+    cloned_instance <- clone(deep = deep)
+    
+    if (deep && replace_values) {
+      cloned_instance$.replace_values_from_table(state_dict)  
+    }
+    
+    cloned_instance
+  }
+  
   f
 }
 

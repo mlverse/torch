@@ -659,3 +659,51 @@ test_that("make sure state_dict() is detached", {
   # we should keep the save value of requires grad bt in a detached graph
   expect_false(state_dict$bias$requires_grad)
 })
+
+test_that("deep cloning", {
+  
+  x <- nn_linear(1, 1)
+  y <- x$clone(deep = TRUE)
+  
+  expect_true(xptr_address(x$parameters$weight) != xptr_address(y$parameters$weight))
+  
+  
+  module <- nn_module(
+    initialize = function() {
+      self$x <- nn_parameter(torch_tensor(1))
+      self$y <- self$x
+      self$a <- nn_buffer(torch_tensor(1))
+      self$b <- self$a
+    }
+  )
+  
+  x <- module()
+  y <- x$clone(deep = TRUE)
+  
+  expect_true(xptr_address(x$x) != xptr_address(y$x))
+  expect_true(xptr_address(x$y) != xptr_address(y$y))
+  expect_true(xptr_address(y$x) == xptr_address(y$y))
+  
+  expect_true(xptr_address(x$a) != xptr_address(y$a))
+  expect_true(xptr_address(x$b) != xptr_address(y$b))
+  expect_true(xptr_address(y$a) == xptr_address(y$b))
+  
+  module <- nn_module(
+    initialize = function() {
+      self$x <- nn_linear(1, 1)
+      self$y <- self$x
+    }
+  )
+  
+  x <- module()
+  y <- x$clone(deep = TRUE)
+  expect_true(xptr_address(x$x$weight) != xptr_address(y$x$weight))
+  expect_true(xptr_address(x$y$weight) != xptr_address(y$y$weight))
+  expect_true(xptr_address(y$x$weight) == xptr_address(y$y$weight))
+  
+  expect_true(rlang::obj_address(x$x) != rlang::obj_address(y$x))
+  expect_true(rlang::obj_address(y$x) == rlang::obj_address(y$y))
+  
+  # make sure we re-lock binding
+  expect_true(bindingIsLocked("clone", attr(x, "module")))
+})
