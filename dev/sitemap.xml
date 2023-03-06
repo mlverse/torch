@@ -1027,6 +1027,9 @@
     <loc>https://torch.mlverse.org/docs/dev/reference/optim_adam.html</loc>
   </url>
   <url>
+    <loc>https://torch.mlverse.org/docs/dev/reference/optim_adamw.html</loc>
+  </url>
+  <url>
     <loc>https://torch.mlverse.org/docs/dev/reference/optim_asgd.html</loc>
   </url>
   <url>
