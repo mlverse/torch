@@ -26,7 +26,7 @@ Optimizer <- R6::R6Class(
       self$defaults <- defaults
       self$state <- list()
       self$param_groups <- list()
-
+      
       if (is_torch_tensor(params)) {
         param_groups <- list(list(params = list(params)))
       } else if (is.list(params) && is_torch_tensor(params[[1]])) {
@@ -36,23 +36,23 @@ Optimizer <- R6::R6Class(
       } else {
         value_error("Wrong parameters specification.")
       }
-
+      
       for (p in param_groups) {
         self$add_param_group(p)
       }
-
+      
       self$state <- State$new()
     },
     add_param_group = function(param_group) {
       if (!rlang::is_named(param_group)) {
         value_error("param group is not named")
       }
-
+      
       params <- param_group$params
       if (is_torch_tensor(params)) {
         param_group$params <- list(params)
       }
-
+      
       for (param in param_group$params) {
         if (!is_torch_tensor(param)) {
           value_error(
@@ -60,13 +60,13 @@ Optimizer <- R6::R6Class(
             "but one of the params is {class(param)}"
           )
         }
-
+        
         if (!param$is_leaf) {
           value_error("can't optimize a non-leaf Tensor")
         }
       }
-
-
+      
+      
       for (nm in names(self$defaults)) {
         if (is_optim_required(self$defaults[[nm]]) && !nm %in% names(param_group)) {
           value_error(
@@ -77,9 +77,9 @@ Optimizer <- R6::R6Class(
           param_group[[nm]] <- self$defaults[[nm]]
         }
       }
-
+      
       # TODO: check for duplicated parameters
-
+      
       self$param_groups <- append(self$param_groups, list(param_group))
     },
     zero_grad = function() {
@@ -96,72 +96,72 @@ Optimizer <- R6::R6Class(
     state_dict = function() {
       parameters <- unlist(lapply(self$param_groups, function(x) x$params))
       parameters <- lapply(parameters, xptr_address)
-
+      
       state_dict <- self$state$map
       names(state_dict) <- match(names(self$state$map), parameters)
-
+      
       param_groups <- self$param_groups
       param_groups <- lapply(param_groups, function(x) {
         group_param <- lapply(x$params, xptr_address)
         x$params <- match(group_param, parameters)
         x
       })
-
+      
       list(
         param_groups = param_groups,
         state = state_dict
       )
     },
     load_state_dict = function(state_dict) {
-
+      
       # validate the state dict
       if (!length(self$param_groups) == length(state_dict$param_groups)) {
         value_error("Loaded state dict has a different number of parameter groups")
       }
-
+      
       for (i in seq_along(self$param_groups)) {
         if (!length(self$param_groups[[i]]$params) == length(state_dict$param_groups[[i]]$params)) {
           value_error("Loaded state dict has contains a parameter group that doesn't match the size of optimizers group.")
         }
       }
-
+      
       parameters <- unlist(lapply(self$param_groups, function(x) x$params))
-
+      
       # update state
       for (o in names(state_dict$state)) {
         index <- as.integer(o)
         value <- state_dict$state[[o]]
         self$state$set(parameters[[index]], value)
       }
-
+      
       invisible(self)
     }
   ),
   private = list(
     step_helper = function(closure, loop_fun) {
       # a general template for most of the optimizer step function
-      with_no_grad({
-        loss <- NULL
-        if (!is.null(closure)) {
-          with_enable_grad({
-            loss <- closure()
-          })
-        }
-
-        for (g in seq_along(self$param_groups)) {
-          group <- self$param_groups[[g]]
-          for (p in seq_along(group$params)) {
-            param <- group$params[[p]]
-
-            if (is.null(param$grad) || is_undefined_tensor(param$grad)) {
-              next
-            }
-
-            loop_fun(group, param, g, p)
+      local_no_grad()
+      
+      loss <- NULL
+      if (!is.null(closure)) {
+        with_enable_grad({
+          loss <- closure()
+        })
+      }
+      
+      for (g in seq_along(self$param_groups)) {
+        group <- self$param_groups[[g]]
+        for (p in seq_along(group$params)) {
+          param <- group$params[[p]]
+          
+          if (is.null(param$grad) || is_undefined_tensor(param$grad)) {
+            next
           }
+          
+          loop_fun(group, param, g, p)
         }
-        loss
-      })
+      }
+      loss
     }
   )
 )
