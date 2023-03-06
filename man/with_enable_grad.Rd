@@ -2,12 +2,17 @@
 % Please edit documentation in R/autograd.R
 \name{with_enable_grad}
 \alias{with_enable_grad}
+\alias{local_enable_grad}
 \title{Enable grad}
 \usage{
 with_enable_grad(code)
+
+local_enable_grad(.env = parent.frame())
 }
 \arguments{
 \item{code}{code to be executed with gradient recording.}
+
+\item{.env}{The environment to use for scoping.}
 }
 \description{
 Context-manager that enables gradient calculation.
@@ -17,6 +22,11 @@ Enables gradient calculation, if it has been disabled via \link{with_no_grad}.
 This context manager is thread local; it will not affect computation in
 other threads.
 }
+\section{Functions}{
+\itemize{
+\item \code{local_enable_grad()}: Locally enable gradient computations.
+
+}}
 \examples{
 if (torch_is_installed()) {
 
