@@ -92,7 +92,9 @@ Enables gradient calculation, if it has been disabled via <a href="with_no_grad.
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">with_enable_grad</span><span class="op">(</span><span class="va">code</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">with_enable_grad</span><span class="op">(</span><span class="va">code</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">local_enable_grad</span><span class="op">(</span>.env <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sys.parent.html" class="external-link">parent.frame</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -100,12 +102,21 @@ Enables gradient calculation, if it has been disabled via <a href="with_no_grad.
     <dl><dt>code</dt>
 <dd><p>code to be executed with gradient recording.</p></dd>
 
+
+<dt>.env</dt>
+<dd><p>The environment to use for scoping.</p></dd>
+
 </dl></div>
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
     <p>This context manager is thread local; it will not affect computation in
 other threads.</p>
     </div>
+    <div class="section level2">
+    <h2 id="functions">Functions<a class="anchor" aria-label="anchor" href="#functions"></a></h2>
+    
+<ul><li><p><code>local_enable_grad()</code>: Locally enable gradient computations.</p></li>
+</ul></div>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
