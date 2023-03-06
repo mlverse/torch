@@ -6,6 +6,8 @@
 - Updated to LibTorch v1.13.1 (#977)
 - Added `nn_silu()` and `nnf_silu()`. (#985)
 - Added support for deep cloning `nn_module`s. (#986)
+- Added `local_no_grad()` and `local_enable_grad()` as alternatives for the `with_` functions. (#990)
+- Added `optim_adamw` optimizer. (#991)
 
 # torch 0.9.1
 
