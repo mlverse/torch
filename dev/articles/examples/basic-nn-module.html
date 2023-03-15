@@ -18,12 +18,12 @@
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-<![endif]--><!-- Global site tag (gtag.js) - Google Analytics --><script async src="https://www.googletagmanager.com/gtag/js?id=UA-178883486-1"></script><script>
+<![endif]--><!-- Global site tag (gtag.js) - Google Analytics --><script async src="https://www.googletagmanager.com/gtag/js?id=G-9ZJSKW3L0N"></script><script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
 
-  gtag('config', 'UA-178883486-1');
+  gtag('config', 'G-9ZJSKW3L0N');
 </script>
 </head>
 <body>
@@ -147,9 +147,10 @@
 <span><span class="va">model</span><span class="op">$</span><span class="va">parameters</span></span></code></pre></div>
 <pre><code><span><span class="co">## $w</span></span>
 <span><span class="co">## torch_tensor</span></span>
-<span><span class="co">## -0.6931</span></span>
-<span><span class="co">## -1.2484</span></span>
-<span><span class="co">## -0.3056</span></span>
+<span><span class="co">## 0.01 *</span></span>
+<span><span class="co">## -1.0689</span></span>
+<span><span class="co">##  -105.5596</span></span>
+<span><span class="co">##  -97.8305</span></span>
 <span><span class="co">## [ CPUFloatType{3,1} ][ requires_grad = TRUE ]</span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## $b</span></span>
@@ -160,9 +161,10 @@
 <code class="sourceCode R"><span><span class="co"># or individually</span></span>
 <span><span class="va">model</span><span class="op">$</span><span class="va">w</span></span></code></pre></div>
 <pre><code><span><span class="co">## torch_tensor</span></span>
-<span><span class="co">## -0.6931</span></span>
-<span><span class="co">## -1.2484</span></span>
-<span><span class="co">## -0.3056</span></span>
+<span><span class="co">## 0.01 *</span></span>
+<span><span class="co">## -1.0689</span></span>
+<span><span class="co">##  -105.5596</span></span>
+<span><span class="co">##  -97.8305</span></span>
 <span><span class="co">## [ CPUFloatType{3,1} ][ requires_grad = TRUE ]</span></span></code></pre>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">model</span><span class="op">$</span><span class="va">b</span></span></code></pre></div>
@@ -177,16 +179,16 @@
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">y_pred</span></span></code></pre></div>
 <pre><code><span><span class="co">## torch_tensor</span></span>
-<span><span class="co">##  2.9124</span></span>
-<span><span class="co">##  0.8017</span></span>
-<span><span class="co">## -0.7890</span></span>
-<span><span class="co">## -0.8744</span></span>
-<span><span class="co">## -0.2569</span></span>
-<span><span class="co">## -0.9427</span></span>
-<span><span class="co">##  2.7621</span></span>
-<span><span class="co">##  3.7136</span></span>
-<span><span class="co">##  0.6198</span></span>
-<span><span class="co">## -0.0819</span></span>
+<span><span class="co">##  0.7352</span></span>
+<span><span class="co">##  0.3800</span></span>
+<span><span class="co">## -2.0353</span></span>
+<span><span class="co">## -0.2683</span></span>
+<span><span class="co">##  1.9921</span></span>
+<span><span class="co">## -0.4908</span></span>
+<span><span class="co">##  1.3391</span></span>
+<span><span class="co">##  1.4590</span></span>
+<span><span class="co">## -0.3991</span></span>
+<span><span class="co">## -1.3733</span></span>
 <span><span class="co">## [ CPUFloatType{10,1} ][ grad_fn = &lt;AddBackward0&gt; ]</span></span></code></pre>
   </main>
 </div>
