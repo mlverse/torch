@@ -140,6 +140,7 @@ Collate:
     'optim-adadelta.R'
     'optim-adagrad.R'
     'optim-adam.R'
+    'optim-adamw.R'
     'optim-asgd.R'
     'optim-lbfgs.R'
     'optim-lr_scheduler.R'

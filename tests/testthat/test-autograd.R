@@ -853,3 +853,32 @@ test_that("can modify the gradient of a tensor", {
   x$grad <- x$grad/2
   expect_equal_to_r(x$grad, 6)
 })
+
+test_that("local grad functions", {
+  
+  f <- function() {
+    x <- torch_tensor(2, requires_grad = TRUE)
+    y <- x^3
+    y$backward()
+  }
+  
+  fun <- function(f, grad_mode) {
+    if (grad_mode) {
+      local_enable_grad()
+    } else {
+      local_no_grad()
+    }
+    f()
+  }
+  
+  with_no_grad({
+    expect_error(fun(f, TRUE), regex = NA)
+  })
+  expect_error(f(), regex = NA)  
+  
+  with_enable_grad({
+    expect_error(fun(f, FALSE))
+    expect_error(f(), regex = NA)  
+  })
+  
+})

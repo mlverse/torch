@@ -46,6 +46,7 @@ with_detect_anomaly <- function(code) {
 #' Temporarily modify gradient recording.
 #'
 #' @param code code to be executed with no gradient recording.
+#' @param .env The environment to use for scoping.
 #'
 #' @examples
 #' x <- torch_tensor(runif(5), requires_grad = TRUE)
@@ -56,17 +57,15 @@ with_detect_anomaly <- function(code) {
 #' x$grad
 #' @export
 with_no_grad <- function(code) {
-  current_mode <- cpp_autograd_is_enabled()
-  withr::with_(
-    set = function() {
-      cpp_autograd_set_grad_mode(FALSE)
-    },
-    reset = function(old) {
-      cpp_autograd_set_grad_mode(current_mode)
-    }
-  )(code)
+  local_grad_mode(FALSE)
+  force(code)
 }
 
+#' @describeIn with_no_grad Disable autograd until it goes out of scope
+#' @export
+local_no_grad <- function(.env = parent.frame()) {
+  local_grad_mode(FALSE, .env = .env)
+}
 
 #' Enable grad
 #'
@@ -77,6 +76,7 @@ with_no_grad <- function(code) {
 #' other threads.
 #'
 #' @param code code to be executed with gradient recording.
+#' @inheritParams with_no_grad
 #'
 #' @examples
 #'
@@ -90,15 +90,20 @@ with_no_grad <- function(code) {
 #' x$grad
 #' @export
 with_enable_grad <- function(code) {
+  local_grad_mode(TRUE)
+  force(code)
+}
+
+#' @describeIn with_enable_grad Locally enable gradient computations.
+#' @export
+local_enable_grad <- function(.env = parent.frame()) {
+  local_grad_mode(TRUE, .env = .env)
+}
+
+local_grad_mode <- function(enable_grad, .env = parent.frame()) {
   current_mode <- cpp_autograd_is_enabled()
-  withr::with_(
-    set = function() {
-      cpp_autograd_set_grad_mode(TRUE)
-    },
-    reset = function(old) {
-      cpp_autograd_set_grad_mode(current_mode)
-    }
-  )(code)
+  cpp_autograd_set_grad_mode(enable_grad)
+  withr::defer(cpp_autograd_set_grad_mode(current_mode), envir = .env)
 }
 
 Tensor$set("active", "grad", function(x) {

@@ -41,9 +41,9 @@ expect_state_is_updated <- function(opt_fn) {
   y <- 2 * x
   y$backward()
   opt$step()
-  expect_equal(opt$state$get(opt$param_groups[[1]]$params[[1]])$step, 1)
+  expect_equal(as.numeric(opt$state$get(opt$param_groups[[1]]$params[[1]])$step), 1)
   opt$step()
-  expect_equal(opt$state$get(opt$param_groups[[1]]$params[[1]])$step, 2)
+  expect_equal(as.numeric(opt$state$get(opt$param_groups[[1]]$params[[1]])$step), 2)
 
   state <- opt$state_dict()
   x2 <- torch_tensor(1, requires_grad = TRUE)

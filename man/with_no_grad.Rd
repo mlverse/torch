@@ -2,16 +2,26 @@
 % Please edit documentation in R/autograd.R
 \name{with_no_grad}
 \alias{with_no_grad}
+\alias{local_no_grad}
 \title{Temporarily modify gradient recording.}
 \usage{
 with_no_grad(code)
+
+local_no_grad(.env = parent.frame())
 }
 \arguments{
 \item{code}{code to be executed with no gradient recording.}
+
+\item{.env}{The environment to use for scoping.}
 }
 \description{
 Temporarily modify gradient recording.
 }
+\section{Functions}{
+\itemize{
+\item \code{local_no_grad()}: Disable autograd until it goes out of scope
+
+}}
 \examples{
 if (torch_is_installed()) {
 x <- torch_tensor(runif(5), requires_grad = TRUE)
