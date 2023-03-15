@@ -9,7 +9,7 @@ baseurl = "/"
 theme = "hugo-graphite"
 
 # Enable analytics by entering your Google Analytics tracking ID
-googleAnalytics = ""
+googleAnalytics = "G-9ZJSKW3L0N"
 
 relativeurls = false
 languageCode = "en-us"
