@@ -5,7 +5,7 @@ template:
   bslib:
     primary: "#7e1f77"
   params:
-    ganalytics: UA-178883486-1
+    ganalytics: G-9ZJSKW3L0N
     
 development:
   mode: auto
