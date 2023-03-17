@@ -170,12 +170,12 @@ XPtrTorchIndexTensor from_sexp_index_tensor(SEXP x) {
 // tensor_list
 
 SEXP operator_sexp_tensor_list(const XPtrTorchTensorList* self) {
-  Rcpp::List out;
   int64_t sze = lantern_TensorList_size(self->get());
-
+  Rcpp::List out(sze);
+  
   for (int i = 0; i < sze; i++) {
     void* tmp = lantern_TensorList_at(self->get(), i);
-    out.push_back(XPtrTorchTensor(tmp));
+    out[i] = XPtrTorchTensor(tmp);
   }
 
   return out;
