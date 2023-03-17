@@ -8,6 +8,7 @@
 - Added support for deep cloning `nn_module`s. (#986)
 - Added `local_no_grad()` and `local_enable_grad()` as alternatives for the `with_` functions. (#990)
 - Added `optim_adamw` optimizer. (#991)
+- Returning lists of tensors to R is now much faster. (#993)
 
 # torch 0.9.1
 
