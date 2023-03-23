@@ -414,3 +414,8 @@ void cpp_set_cuda_allocator_allocator_thresholds (double reserved_rate, double a
                                                   double allocated_reserved_rate) {
   lantern_set_cuda_allocator_thresholds(reserved_rate, allocated_rate, allocated_reserved_rate);
 }
+
+// [[Rcpp::export]]
+void cpp_autograd_zero_grad (torch::TensorList x) {
+  lantern_autograd_zero_grad(x.get());
+}

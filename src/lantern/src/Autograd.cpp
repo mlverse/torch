@@ -296,6 +296,18 @@ void *_lantern_Edge_function(void *self) {
   LANTERN_FUNCTION_END
 }
 
+void _lantern_autograd_zero_grad (void * self) {
+  LANTERN_FUNCTION_START
+  auto list = from_raw::TensorList(self);
+  for (auto &t : list) {
+    auto grad = t.grad();
+    if (grad.defined()) {
+      grad.zero_();
+    }
+  }
+  LANTERN_FUNCTION_END_VOID
+}
+
 void _test_grad_fn() {
   LANTERN_FUNCTION_START
   auto x = torch::randn({1}, torch::requires_grad());
