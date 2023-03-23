@@ -868,15 +868,15 @@ void delete_jit_named_buffer_list(void* x) {
 SEXP operator_sexp_jit_named_module_list(
     const XPtrTorchjit_named_module_list* self) {
   int size = lantern_jit_named_module_list_size(self->get());
-  Rcpp::List out;
+  Rcpp::List out(size);
 
   if (size == 0) {
     return out;
   }
 
   for (int i = 0; i < size; i++) {
-    out.push_back(XPtrTorchScriptModule(
-        lantern_jit_named_module_list_module_at(self->get(), i)));
+    out[i] = XPtrTorchScriptModule(
+        lantern_jit_named_module_list_module_at(self->get(), i));
   }
 
   XPtrTorchvector_string names =
