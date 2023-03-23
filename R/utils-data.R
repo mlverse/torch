@@ -97,6 +97,7 @@ print.dataset_generator <- function(x, ...) {
 
 #' @export
 `[[.dataset` <- function(x, y) {
+  if (is.character(y)) return(NextMethod("[[", x))
   y <- as.integer(y)
   stopifnot(length(y) == 1L)
   x$.getitem(y)
