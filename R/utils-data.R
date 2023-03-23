@@ -43,8 +43,11 @@ get_init <- function(x) {
 #' of observations (eg, subsetting a tensor by multiple indexes at once is faster than
 #' subsetting once for each index), in this case you can implement a `.getbatch` method
 #' that will be used instead of `.getitem` when getting a batch of observations within
-#' the dataloader. `.getbatch` must work for batches of size larger or equal to 1. For more
-#' on this see the the `vignette("loading-data")`.
+#' the dataloader. `.getbatch` must work for batches of size larger or equal to 1 and 
+#' care must be taken so it doesn't drop the batch dimension when it's queried with 
+#' a length 1 batch index - for instance by using `drop=FALSE`. `.getitem()` is expected
+#' to not include the batch dimension as it's added by the datalaoder.
+#' For more on this see the the `vignette("loading-data")`.
 #'
 #' @note
 #' [dataloader()]  by default constructs a index
@@ -93,6 +96,14 @@ print.dataset_generator <- function(x, ...) {
 }
 
 #' @export
+`[[.dataset` <- function(x, y) {
+  if (is.character(y)) return(NextMethod("[[", x))
+  y <- as.integer(y)
+  stopifnot(length(y) == 1L)
+  x$.getitem(y)
+}
+
+#' @export
 length.dataset <- function(x) {
   x$.length()
 }
@@ -116,17 +127,17 @@ tensor_dataset <- dataset(
 
     self$tensors <- tensors
   },
-  .getitem = function(index) {
+  .getitem = function(index, ..., drop=TRUE) {
     if (is.list(index)) {
       index <- unlist(index)
     }
 
     lapply(self$tensors, function(x) {
-      x[index, ..]
+      x[index, .., drop=drop]
     })
   },
   .getbatch = function(index) {
-    self$.getitem(index)
+    self$.getitem(index, drop=FALSE)
   },
   .length = function() {
     self$tensors[[1]]$shape[1]

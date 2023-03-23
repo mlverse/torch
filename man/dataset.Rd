@@ -56,7 +56,10 @@ Often it's possible to have an optimized implementation to take a batch
 of observations (eg, subsetting a tensor by multiple indexes at once is faster than
 subsetting once for each index), in this case you can implement a \code{.getbatch} method
 that will be used instead of \code{.getitem} when getting a batch of observations within
-the dataloader. \code{.getbatch} must work for batches of size larger or equal to 1. For more
-on this see the the \code{vignette("loading-data")}.
+the dataloader. \code{.getbatch} must work for batches of size larger or equal to 1 and
+care must be taken so it doesn't drop the batch dimension when it's queried with
+a length 1 batch index - for instance by using \code{drop=FALSE}. \code{.getitem()} is expected
+to not include the batch dimension as it's added by the datalaoder.
+For more on this see the the \code{vignette("loading-data")}.
 }
 

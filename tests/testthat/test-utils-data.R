@@ -152,3 +152,23 @@ test_that("dataset subset adds more classes", {
     c("minimal_subset", "dataset_subset", "dataset", "R6")
   )
 })
+
+test_that("dimensions are preserved", {
+  ds <- tensor_dataset(torch_rand(11,3), torch_rand(11,1))
+  loader <- dataloader(ds, batch_size=10, shuffle=TRUE)
+  
+  iter <- dataloader_make_iter(loader)
+  x <- dataloader_next(iter)
+  expect_equal(dim(x[[1]]), c(10, 3))
+  expect_equal(dim(x[[2]]), c(10, 1))
+  
+  x <- dataloader_next(iter)
+  expect_equal(dim(x[[1]]), c(1, 3))
+  expect_equal(dim(x[[2]]), c(1, 1))
+})
+
+test_that("can get a single element using `[[`", {
+  # this should call getitem and drop the batch dimension when possible.
+  ds <- tensor_dataset(torch_rand(11,3), torch_rand(11,1))
+  expect_equal(dim(ds[[1]][[1]]), 3)
+})
