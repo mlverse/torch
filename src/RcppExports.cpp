@@ -48281,17 +48281,6 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
-// cpp_tensor_list_to_r_list
-Rcpp::List cpp_tensor_list_to_r_list(Rcpp::XPtr<XPtrTorchTensorList> x);
-RcppExport SEXP _torch_cpp_tensor_list_to_r_list(SEXP xSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< Rcpp::XPtr<XPtrTorchTensorList> >::type x(xSEXP);
-    rcpp_result_gen = Rcpp::wrap(cpp_tensor_list_to_r_list(x));
-    return rcpp_result_gen;
-END_RCPP
-}
 // cpp_torch_tensor_options
 XPtrTorchTensorOptions cpp_torch_tensor_options(Rcpp::Nullable<Rcpp::XPtr<XPtrTorchDtype>> dtype_ptr, Rcpp::Nullable<Rcpp::XPtr<XPtrTorch>> layout_ptr, Rcpp::Nullable<Rcpp::XPtr<XPtrTorch>> device_ptr, Rcpp::Nullable<bool> requires_grad, Rcpp::Nullable<bool> pinned_memory);
 RcppExport SEXP _torch_cpp_torch_tensor_options(SEXP dtype_ptrSEXP, SEXP layout_ptrSEXP, SEXP device_ptrSEXP, SEXP requires_gradSEXP, SEXP pinned_memorySEXP) {
@@ -52203,7 +52192,6 @@ static const R_CallMethodDef CallEntries[] = {
     {"_torch_nnf_pad_circular", (DL_FUNC) &_torch_nnf_pad_circular, 2},
     {"_torch_cpp_method_Tensor_is_sparse", (DL_FUNC) &_torch_cpp_method_Tensor_is_sparse, 1},
     {"_torch_cpp_torch_tensor_list", (DL_FUNC) &_torch_cpp_torch_tensor_list, 1},
-    {"_torch_cpp_tensor_list_to_r_list", (DL_FUNC) &_torch_cpp_tensor_list_to_r_list, 1},
     {"_torch_cpp_torch_tensor_options", (DL_FUNC) &_torch_cpp_torch_tensor_options, 5},
     {"_torch_cpp_torch_tensor_options_print", (DL_FUNC) &_torch_cpp_torch_tensor_options_print, 1},
     {"_torch_cpp_trace_function", (DL_FUNC) &_torch_cpp_trace_function, 8},

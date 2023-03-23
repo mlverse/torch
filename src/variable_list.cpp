@@ -15,12 +15,13 @@ Rcpp::XPtr<XPtrTorchvariable_list> cpp_torch_variable_list(
 
 // [[Rcpp::export]]
 Rcpp::List cpp_variable_list_to_r_list(Rcpp::XPtr<XPtrTorchvariable_list> x) {
-  Rcpp::List out;
+  
   int64_t sze = lantern_variable_list_size(x->get());
+  Rcpp::List out(sze);
 
   for (int64_t i = 0; i < sze; i++) {
     void *tmp = lantern_variable_list_get(x->get(), i);
-    out.push_back(XPtrTorchTensor(tmp));
+    out[i] = XPtrTorchTensor(tmp);
   }
 
   return out;
