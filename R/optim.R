@@ -84,13 +84,7 @@ Optimizer <- R6::R6Class(
     },
     zero_grad = function() {
       for (group in self$param_groups) {
-        for (p in group$params) {
-          grad <- p$grad
-          if (!is_undefined_tensor(grad)) {
-            grad$detach_()
-            grad$zero_()
-          }
-        }
+        cpp_autograd_zero_grad(group$params)
       }
     },
     state_dict = function() {

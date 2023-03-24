@@ -361,6 +361,16 @@ BEGIN_RCPP
     return R_NilValue;
 END_RCPP
 }
+// cpp_autograd_zero_grad
+void cpp_autograd_zero_grad(torch::TensorList x);
+RcppExport SEXP _torch_cpp_autograd_zero_grad(SEXP xSEXP) {
+BEGIN_RCPP
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< torch::TensorList >::type x(xSEXP);
+    cpp_autograd_zero_grad(x);
+    return R_NilValue;
+END_RCPP
+}
 // cpp_backends_mkldnn_is_available
 bool cpp_backends_mkldnn_is_available();
 RcppExport SEXP _torch_cpp_backends_mkldnn_is_available() {
@@ -48281,17 +48291,6 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
-// cpp_tensor_list_to_r_list
-Rcpp::List cpp_tensor_list_to_r_list(Rcpp::XPtr<XPtrTorchTensorList> x);
-RcppExport SEXP _torch_cpp_tensor_list_to_r_list(SEXP xSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< Rcpp::XPtr<XPtrTorchTensorList> >::type x(xSEXP);
-    rcpp_result_gen = Rcpp::wrap(cpp_tensor_list_to_r_list(x));
-    return rcpp_result_gen;
-END_RCPP
-}
 // cpp_torch_tensor_options
 XPtrTorchTensorOptions cpp_torch_tensor_options(Rcpp::Nullable<Rcpp::XPtr<XPtrTorchDtype>> dtype_ptr, Rcpp::Nullable<Rcpp::XPtr<XPtrTorch>> layout_ptr, Rcpp::Nullable<Rcpp::XPtr<XPtrTorch>> device_ptr, Rcpp::Nullable<bool> requires_grad, Rcpp::Nullable<bool> pinned_memory);
 RcppExport SEXP _torch_cpp_torch_tensor_options(SEXP dtype_ptrSEXP, SEXP layout_ptrSEXP, SEXP device_ptrSEXP, SEXP requires_gradSEXP, SEXP pinned_memorySEXP) {
@@ -48594,6 +48593,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_torch_cpp_autograd_grad", (DL_FUNC) &_torch_cpp_autograd_grad, 6},
     {"_torch_cpp_set_lantern_allocator", (DL_FUNC) &_torch_cpp_set_lantern_allocator, 1},
     {"_torch_cpp_set_cuda_allocator_allocator_thresholds", (DL_FUNC) &_torch_cpp_set_cuda_allocator_allocator_thresholds, 3},
+    {"_torch_cpp_autograd_zero_grad", (DL_FUNC) &_torch_cpp_autograd_zero_grad, 1},
     {"_torch_cpp_backends_mkldnn_is_available", (DL_FUNC) &_torch_cpp_backends_mkldnn_is_available, 0},
     {"_torch_cpp_backends_mkl_is_available", (DL_FUNC) &_torch_cpp_backends_mkl_is_available, 0},
     {"_torch_cpp_backends_openmp_is_available", (DL_FUNC) &_torch_cpp_backends_openmp_is_available, 0},
@@ -52203,7 +52203,6 @@ static const R_CallMethodDef CallEntries[] = {
     {"_torch_nnf_pad_circular", (DL_FUNC) &_torch_nnf_pad_circular, 2},
     {"_torch_cpp_method_Tensor_is_sparse", (DL_FUNC) &_torch_cpp_method_Tensor_is_sparse, 1},
     {"_torch_cpp_torch_tensor_list", (DL_FUNC) &_torch_cpp_torch_tensor_list, 1},
-    {"_torch_cpp_tensor_list_to_r_list", (DL_FUNC) &_torch_cpp_tensor_list_to_r_list, 1},
     {"_torch_cpp_torch_tensor_options", (DL_FUNC) &_torch_cpp_torch_tensor_options, 5},
     {"_torch_cpp_torch_tensor_options_print", (DL_FUNC) &_torch_cpp_torch_tensor_options_print, 1},
     {"_torch_cpp_trace_function", (DL_FUNC) &_torch_cpp_trace_function, 8},
