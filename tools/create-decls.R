@@ -30,8 +30,8 @@ make_load_symbols <- function(decls) {
 
 decls <- readr::read_lines(
   "
-void _lantern_autograd_edge_list_delete (void* x)
-void _lantern_autograd_edge_delete (void* x)
+void _lantern_amp_autocast_decrement_nesting ()
+void _lantern_amp_autocast_clear_cache ()
 "
 )
 

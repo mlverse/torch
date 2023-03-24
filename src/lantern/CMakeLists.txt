@@ -126,6 +126,7 @@ set(LANTERN_SRC
     src/ScriptModule.cpp
     src/IValue.cpp
     src/Compile.cpp
+    src/Amp.cpp
 )
 
 if(APPLE)

@@ -12,6 +12,134 @@ Rcpp::Rostream<true>&  Rcpp::Rcout = Rcpp::Rcpp_cout_get();
 Rcpp::Rostream<false>& Rcpp::Rcerr = Rcpp::Rcpp_cerr_get();
 #endif
 
+// cpp_amp_is_autocast_gpu_enabled
+bool cpp_amp_is_autocast_gpu_enabled();
+RcppExport SEXP _torch_cpp_amp_is_autocast_gpu_enabled() {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    rcpp_result_gen = Rcpp::wrap(cpp_amp_is_autocast_gpu_enabled());
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_amp_is_autocast_cpu_enabled
+bool cpp_amp_is_autocast_cpu_enabled();
+RcppExport SEXP _torch_cpp_amp_is_autocast_cpu_enabled() {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    rcpp_result_gen = Rcpp::wrap(cpp_amp_is_autocast_cpu_enabled());
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_amp_autocast_set_gpu_enabled
+void cpp_amp_autocast_set_gpu_enabled(bool enabled);
+RcppExport SEXP _torch_cpp_amp_autocast_set_gpu_enabled(SEXP enabledSEXP) {
+BEGIN_RCPP
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< bool >::type enabled(enabledSEXP);
+    cpp_amp_autocast_set_gpu_enabled(enabled);
+    return R_NilValue;
+END_RCPP
+}
+// cpp_amp_autocast_set_cpu_enabled
+void cpp_amp_autocast_set_cpu_enabled(bool enabled);
+RcppExport SEXP _torch_cpp_amp_autocast_set_cpu_enabled(SEXP enabledSEXP) {
+BEGIN_RCPP
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< bool >::type enabled(enabledSEXP);
+    cpp_amp_autocast_set_cpu_enabled(enabled);
+    return R_NilValue;
+END_RCPP
+}
+// cpp_amp_autocast_set_gpu_dtype
+void cpp_amp_autocast_set_gpu_dtype(torch::Dtype dtype);
+RcppExport SEXP _torch_cpp_amp_autocast_set_gpu_dtype(SEXP dtypeSEXP) {
+BEGIN_RCPP
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< torch::Dtype >::type dtype(dtypeSEXP);
+    cpp_amp_autocast_set_gpu_dtype(dtype);
+    return R_NilValue;
+END_RCPP
+}
+// cpp_amp_autocast_set_cpu_dtype
+void cpp_amp_autocast_set_cpu_dtype(torch::Dtype dtype);
+RcppExport SEXP _torch_cpp_amp_autocast_set_cpu_dtype(SEXP dtypeSEXP) {
+BEGIN_RCPP
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< torch::Dtype >::type dtype(dtypeSEXP);
+    cpp_amp_autocast_set_cpu_dtype(dtype);
+    return R_NilValue;
+END_RCPP
+}
+// cpp_amp_autocast_set_cache_enabled
+void cpp_amp_autocast_set_cache_enabled(bool enabled);
+RcppExport SEXP _torch_cpp_amp_autocast_set_cache_enabled(SEXP enabledSEXP) {
+BEGIN_RCPP
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< bool >::type enabled(enabledSEXP);
+    cpp_amp_autocast_set_cache_enabled(enabled);
+    return R_NilValue;
+END_RCPP
+}
+// cpp_amp_autocast_is_cache_enabled
+bool cpp_amp_autocast_is_cache_enabled();
+RcppExport SEXP _torch_cpp_amp_autocast_is_cache_enabled() {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    rcpp_result_gen = Rcpp::wrap(cpp_amp_autocast_is_cache_enabled());
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_amp_autocast_get_gpu_dtype
+torch::Dtype cpp_amp_autocast_get_gpu_dtype();
+RcppExport SEXP _torch_cpp_amp_autocast_get_gpu_dtype() {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    rcpp_result_gen = Rcpp::wrap(cpp_amp_autocast_get_gpu_dtype());
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_amp_autocast_get_cpu_dtype
+torch::Dtype cpp_amp_autocast_get_cpu_dtype();
+RcppExport SEXP _torch_cpp_amp_autocast_get_cpu_dtype() {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    rcpp_result_gen = Rcpp::wrap(cpp_amp_autocast_get_cpu_dtype());
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_amp_autocast_increment_nesting
+void cpp_amp_autocast_increment_nesting();
+RcppExport SEXP _torch_cpp_amp_autocast_increment_nesting() {
+BEGIN_RCPP
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    cpp_amp_autocast_increment_nesting();
+    return R_NilValue;
+END_RCPP
+}
+// cpp_amp_autocast_decrease_nesting
+int cpp_amp_autocast_decrease_nesting();
+RcppExport SEXP _torch_cpp_amp_autocast_decrease_nesting() {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    rcpp_result_gen = Rcpp::wrap(cpp_amp_autocast_decrease_nesting());
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_amp_autocast_clear_cache
+void cpp_amp_autocast_clear_cache();
+RcppExport SEXP _torch_cpp_amp_autocast_clear_cache() {
+BEGIN_RCPP
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    cpp_amp_autocast_clear_cache();
+    return R_NilValue;
+END_RCPP
+}
 // cpp_autograd_set_grad_mode
 void cpp_autograd_set_grad_mode(bool enabled);
 RcppExport SEXP _torch_cpp_autograd_set_grad_mode(SEXP enabledSEXP) {
@@ -48562,6 +48690,19 @@ END_RCPP
 }
 
 static const R_CallMethodDef CallEntries[] = {
+    {"_torch_cpp_amp_is_autocast_gpu_enabled", (DL_FUNC) &_torch_cpp_amp_is_autocast_gpu_enabled, 0},
+    {"_torch_cpp_amp_is_autocast_cpu_enabled", (DL_FUNC) &_torch_cpp_amp_is_autocast_cpu_enabled, 0},
+    {"_torch_cpp_amp_autocast_set_gpu_enabled", (DL_FUNC) &_torch_cpp_amp_autocast_set_gpu_enabled, 1},
+    {"_torch_cpp_amp_autocast_set_cpu_enabled", (DL_FUNC) &_torch_cpp_amp_autocast_set_cpu_enabled, 1},
+    {"_torch_cpp_amp_autocast_set_gpu_dtype", (DL_FUNC) &_torch_cpp_amp_autocast_set_gpu_dtype, 1},
+    {"_torch_cpp_amp_autocast_set_cpu_dtype", (DL_FUNC) &_torch_cpp_amp_autocast_set_cpu_dtype, 1},
+    {"_torch_cpp_amp_autocast_set_cache_enabled", (DL_FUNC) &_torch_cpp_amp_autocast_set_cache_enabled, 1},
+    {"_torch_cpp_amp_autocast_is_cache_enabled", (DL_FUNC) &_torch_cpp_amp_autocast_is_cache_enabled, 0},
+    {"_torch_cpp_amp_autocast_get_gpu_dtype", (DL_FUNC) &_torch_cpp_amp_autocast_get_gpu_dtype, 0},
+    {"_torch_cpp_amp_autocast_get_cpu_dtype", (DL_FUNC) &_torch_cpp_amp_autocast_get_cpu_dtype, 0},
+    {"_torch_cpp_amp_autocast_increment_nesting", (DL_FUNC) &_torch_cpp_amp_autocast_increment_nesting, 0},
+    {"_torch_cpp_amp_autocast_decrease_nesting", (DL_FUNC) &_torch_cpp_amp_autocast_decrease_nesting, 0},
+    {"_torch_cpp_amp_autocast_clear_cache", (DL_FUNC) &_torch_cpp_amp_autocast_clear_cache, 0},
     {"_torch_cpp_autograd_set_grad_mode", (DL_FUNC) &_torch_cpp_autograd_set_grad_mode, 1},
     {"_torch_cpp_autograd_is_enabled", (DL_FUNC) &_torch_cpp_autograd_is_enabled, 0},
     {"_torch_cpp_autograd_set_detect_anomaly", (DL_FUNC) &_torch_cpp_autograd_set_detect_anomaly, 1},
