@@ -94,3 +94,154 @@ with_autocast <- function(code, ... , device_type, dtype = NULL, enabled = TRUE,
   local_autocast(device_type, dtype = dtype, enabled = enabled, cache_enabled = cache_enabled)
   force(code)
 }
+
+amp_GradScaler <- R6Class(
+  "AmpGradScaler", 
+  public = list(
+    initialize = function(init_scale=2.^16, growth_factor=2.0, backoff_factor=0.5,
+                          growth_interval=2000, enabled=TRUE) {
+      self$.enabled <- enabled
+      if (self$.enabled) {
+        
+        if (growth_factor <= 1) 
+          cli::cli_abort("{.var growth_factor} should be > 1 but got {.val {growth_factor}}.")
+        
+        if (backoff_factor >= 1)
+          cli::cli_abort("{.var backoff_factor} should be < 1 but got {.val {backoff_factor}}.")
+        
+        self$.init_scale <- init_scale
+        self$.scale <- NULL
+        self$.growth_factor <- growth_factor
+        self$.backoff_factor <- backoff_factor
+        self$.growth_interval <- growth_interval
+        self$.init_growth_tracker <- 0
+        # sel$._growth_tracker will be lazily initialized during the first call to scale()
+        self$.growth_tracker <- NULL
+        self$.per_optimizer_states <- amp_OptState$new()
+      }
+    },
+    scale = function(outputs) {
+      # Short-circuit for the common case.
+      if (inherits(outputs, "torch_tensor")) {
+        if (!outputs$is_cuda)
+          cli::cli_abort("{.var outputs} device must be {.val cuda}, got {.val {outputs$device$type}}.")
+        
+        if (is.null(self$.scale)) {
+          self$.lazy_init_scale_growth_tracker(outputs$device)
+        }
+        
+        return(outputs * self$.scale$to(device = outputs$device, non_blocking = TRUE))
+      }
+      
+      # Invoke the more complex machinery only if we're treating multiple outputs.
+      if (is.list(outputs))
+        lapply(outputs, self$.scale)
+      else
+        cli::cli_abort("{.var outputs} must be a tensor or a list of tensors, got {.cls {class(outputs)}}.")
+    },
+    unscale_ = function(optimizer) {
+      if (!self$.enabled) return(invisible(NULL))
+      self$.check_scale_growth_tracker("unscale_")
+      
+      optimizer_state <- self$.per_optimizer_states[[rlang::obj_address(optimizer)]]
+      
+      if (optimizer_state[["stage"]] == "unscaled") {
+        cli::cli_abort("{.fn unscale_} has already been called on this optimizer since the last {.fn update}.")
+      } else if (optimizer_state[["stage"]] == "stepped") {
+        cli::cli_abort("{.fn unscale_} is being called after {.fn step}.")
+      }
+      
+      # FP32 division can be imprecise for certain compile options, so we carry out the reciprocal in FP64.
+      inv_scale <- self$.scale$double()$reciprocal()$float()
+      found_inf <- torch_full(list(), 0.0, dtype=torch_float32(), device=self$.scale$device)
+      
+      optimizer_state[["found_inf_per_device"]] <- self$.unscale_grads_(optimizer, inv_scale, found_inf, FALSE)
+      optimizer_state[["stage"]] <- "unscaled"
+    },
+    .lazy_init_scale_growth_tracker = function(dev) {
+      if (!is.null(self$.growth_tracker))
+        cli::cli_abort("{.var .growth_tracker} initialized before {.var .scale}")
+      
+      self$.scale <- torch_full(size = list(), self$.init_scale, dtype = torch_float32(), device = dev)
+      self$.growth_tracker <- torch_full(size = list(), self$.init_growth_tracker, dtype = torch_int32(), device = dev)
+    },
+    .check_scale_growth_tracker = function(funcname) {
+      fix = "This may indicate your script did not use scaler.scale(loss or outputs) earlier in the iteration."
+      if (is.null(self$.scale)) {
+        cli::cli_abort(c(
+          "Attempted {.fn {funcname}} but {.var .scale} is {.val NULL}.",
+          fix
+        ))
+      }
+      if (is.null(self$.growth_tracker)) {
+        cli::cli_abort(c(
+          "Attempted {.fn {funcname}} but {.var .growth_tracker} is {.val NULL}.",
+          fix
+        ))
+      }
+      list(self$.scale, self$.growth_tracker)
+    },
+    .unscale_grads = function(optimizer, inv_scale, found_inv, allow_fp16) {
+      local_no_grad()
+      per_device_and_dtype_grads <- list()
+      for (group in optimizer$param_groups) {
+        
+        for (param in group) {
+          if (is.null(param$grad) || is_undefined_tensor(pram$grad)) {
+            next
+          }
+          
+          if (!allow_fp16 && (param$grad$dtype == torch_float16())) {
+            cli::cli_abort("Attempting to unscale FP16 gradients.")
+          }
+          
+          if (param$grad$is_sparse()) {
+            cli::cli_abort("Currently sparse gradients are not supported.")
+          }
+          
+          per_device_and_dtype_grads[[param$device]][[param$dtype]]
+        }
+      }
+      
+      #   for group in optimizer.param_groups:
+      #   for param in group["params"]:
+      #   if param.grad is None:
+      #   continue
+      # if (not allow_fp16) and param.grad.dtype == torch.float16:
+      #   raise ValueError("Attempting to unscale FP16 gradients.")
+      # if param.grad.is_sparse:
+      #   # is_coalesced() == False means the sparse grad has values with duplicate indices.
+      #   # coalesce() deduplicates indices and adds all values that have the same index.
+      #   # For scaled fp16 values, there's a good chance coalescing will cause overflow,
+      #   # so we should check the coalesced _values().
+      #   if param.grad.dtype is torch.float16:
+      #   param.grad = param.grad.coalesce()
+      #   to_unscale = param.grad._values()
+      #   else:
+      #     to_unscale = param.grad
+      #   
+      #   # TODO: is there a way to split by device and dtype without appending in the inner loop?
+      #   per_device_and_dtype_grads[to_unscale.device][to_unscale.dtype].append(to_unscale)
+      #   
+      #   for device, per_dtype_grads in per_device_and_dtype_grads.items():
+      #     for grads in per_dtype_grads.values():
+      #     torch._amp_foreach_non_finite_check_and_unscale_(grads,
+      #                                                      per_device_found_inf.get(device),
+      #                                                      per_device_inv_scale.get(device))
+      
+      
+    }
+  )
+)
+
+
+amp_OptState <- R6::R6Class(
+  "AmpOptState",
+  lock_objects = FALSE,
+  public = list(
+    initialize = function() {
+      self$stage <- "ready"
+      self$found_inf_per_device <- list()
+    }
+  )
+)

@@ -145,6 +145,8 @@ if(DEFINED ENV{CUDA} AND NOT '$ENV{CUDA}' STREQUAL '')
   )
   
   set_source_files_properties(src/Cuda.cpp PROPERTIES COMPILE_DEFINITIONS __NVCC__)
+  set_source_files_properties(src/Amp.cpp  PROPERTIES COMPILE_DEFINITIONS __NVCC__)
+  
   add_library(lantern SHARED ${LANTERN_SRC})
 
   if (WIN32)  

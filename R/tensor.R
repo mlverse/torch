@@ -262,6 +262,9 @@ Tensor <- R7Class(
     },
     float = function() {
       self$to(dtype=torch_float())
+    },
+    double = function() {
+      self$to(dtype=torch_double())
     }
   ),
   active = list(
