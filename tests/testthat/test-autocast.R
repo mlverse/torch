@@ -32,3 +32,22 @@ test_that("with autocast works", {
   expect_true(a$dtype == torch_float())
   
 })
+
+test_that("works on gpu", {
+  
+  skip_if_cuda_not_available()
+  
+  x <- torch_randn(5, 5, dtype = torch_float32(), device="cuda")
+  y <- torch_randn(5, 5, dtype = torch_float32(), device="cuda")
+  with_autocast(device_type="cpu", {
+    z <- torch_mm(x, y)
+    w <- torch_mm(z, x)
+  })
+  
+  expect_equal(w$dtype$.type(), "BFloat16")
+  expect_true(w$device == torch_device("cuda"))
+  
+  a <- torch_mm(x, w$float())
+  expect_true(a$dtype == torch_float())
+  
+})
