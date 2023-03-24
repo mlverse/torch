@@ -95,8 +95,9 @@ with_autocast <- function(code, ... , device_type, dtype = NULL, enabled = TRUE,
   force(code)
 }
 
-amp_GradScaler <- R6Class(
+amp_GradScaler <- R6::R6Class(
   "AmpGradScaler", 
+  lock_objects = FALSE,
   public = list(
     initialize = function(init_scale=2.^16, growth_factor=2.0, backoff_factor=0.5,
                           growth_interval=2000, enabled=TRUE) {
@@ -117,7 +118,7 @@ amp_GradScaler <- R6Class(
         self$.init_growth_tracker <- 0
         # sel$._growth_tracker will be lazily initialized during the first call to scale()
         self$.growth_tracker <- NULL
-        self$.per_optimizer_states <- amp_OptState$new()
+        self$.per_optimizer_states <- list()
       }
     },
     scale = function(outputs) {
@@ -143,7 +144,7 @@ amp_GradScaler <- R6Class(
       if (!self$.enabled) return(invisible(NULL))
       self$.check_scale_growth_tracker("unscale_")
       
-      optimizer_state <- self$.per_optimizer_states[[rlang::obj_address(optimizer)]]
+      optimizer_state <- self$.get_optimizer_state(optimizer)
       
       if (optimizer_state[["stage"]] == "unscaled") {
         cli::cli_abort("{.fn unscale_} has already been called on this optimizer since the last {.fn update}.")
@@ -159,7 +160,11 @@ amp_GradScaler <- R6Class(
       optimizer_state[["stage"]] <- "unscaled"
     },
     step = function(optimizer, ...) {
-      optimizer_state <- self._per_optimizer_states[rlang::obj_address(optimizer)]
+      
+      if (!self$.enabled) return(optimizer$step(...))
+      
+      optimizer_state <- self$.get_optimizer_state(optimizer)
+      
       if (optimizer_sate$stage == "stepped") {
         cli::cli_abort("{.fn step} has already been called since the last {.fn update}.")
       }
@@ -173,8 +178,27 @@ amp_GradScaler <- R6Class(
       retval
     },
     update = function(new_scale = NULL) {
-
-    }
+      res <- self$.check_scale_growth_tracker("update")
+      .scale <- res[[1]]; .growth_tracker <- res[[2]];
+      
+      if (!is.null(new_scale)) {
+        if (is.numeric(new_scale)) {
+          self$.scale$fill_(new_scale)  
+        } else if (inherits(new_scale, "torch_tensor")) {
+          self$.scale$copy_(new_scale)  
+        }
+      } else {
+        cpp_amp_update_scale_(
+          .scale, 
+          .growth_tracker,
+          self$found_inf,
+          self$.growth_factor,
+          self$.backoff_factor,
+          self$.growth_interval
+        )
+      }
+      self$.per_optimizer_states <- list()
+    },
     .lazy_init_scale_growth_tracker = function(dev) {
       if (!is.null(self$.growth_tracker))
         cli::cli_abort("{.var .growth_tracker} initialized before {.var .scale}")
@@ -212,6 +236,12 @@ amp_GradScaler <- R6Class(
       } else {
         invisible(NULL)
       }      
+    },
+    .get_optimizer_state = function(optimizer) {
+      if (is.null(self$.per_optimizer_states[[rlang::obj_address(optimizer)]]))
+        self$.per_optimizer_states[[rlang::obj_address(optimizer)]] <- amp_OptState$new()
+      
+      self$.per_optimizer_states[[rlang::obj_address(optimizer)]]
     }
   )
 )
@@ -223,7 +253,7 @@ amp_OptState <- R6::R6Class(
   public = list(
     initialize = function() {
       self$stage <- "ready"
-      self$found_inf <- FALSE
+      self$found_inf <- 0
     }
   )
 )

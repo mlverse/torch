@@ -104,3 +104,12 @@ int _lantern_amp_foreach_non_finite_check_and_unscale (void* params, void* found
     return found;
     LANTERN_FUNCTION_END_VOID
 }
+
+void _lantern_amp_update_scale_ (void* self, void* growth_tracker, void* found_inf, double scale_growth_factor, double scale_backoff_factor, void* growth_interval) {
+  auto self_ = from_raw::Tensor(self);
+  auto growth_tracker_ = from_raw::Tensor(growth_tracker);
+  auto found_inf_ = from_raw::Tensor(found_inf);
+  auto growth_interval_ = from_raw::int64_t(growth_interval);
+
+  at::_amp_update_scale_(self_, growth_tracker_, found_inf_, scale_growth_factor, scale_backoff_factor, growth_interval_);
+}

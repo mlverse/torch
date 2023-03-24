@@ -51,3 +51,42 @@ test_that("works on gpu", {
   expect_true(a$dtype == torch_float())
   
 })
+
+test_that("grad scalers work correctly", {
+  
+  skip_if_cuda_not_available()
+  device <- torch_device("cuda")
+  
+  # Creates model and optimizer in default precision
+  model <- nn_linear(10, 1)$cuda()
+  optimizer <- optim_sgd(model$parameters, lr = 0.001)
+  
+  # Creates a GradScaler once at the beginning of training.
+  scaler <- amp_GradScaler$new()
+  
+  for (epoch in 1:5) {
+    x <- torch_randn(100, 10, device = device)
+    y <- torch_randn(100, 1, device = device)
+    
+    with_autocast(device_type = "cuda", {
+      output <- model(x)
+      loss <- nnf_mse_loss(output, y)
+    })
+    
+    # Scales loss.  Calls backward() on scaled loss to create scaled gradients.
+    # Backward passes under autocast are not recommended.
+    # Backward ops run in the same dtype autocast chose for corresponding forward ops.
+    scaler$scale(loss)$backward()
+    
+    # scaler.step() first unscales the gradients of the optimizer's assigned params.
+    # If these gradients do not contain infs or NaNs, optimizer.step() is then called,
+    # otherwise, optimizer.step() is skipped.
+    scaler$step(optimizer)
+    
+    # Updates the scale for next iteration.
+    scaler$update()
+  }
+  
+  # no Inf values
+  expect_true(!torch::torch_isinf(model$weight)$any()$item())
+})

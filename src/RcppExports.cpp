@@ -140,6 +140,34 @@ BEGIN_RCPP
     return R_NilValue;
 END_RCPP
 }
+// cpp_amp_foreach_non_finite_check_and_unscale
+bool cpp_amp_foreach_non_finite_check_and_unscale(torch::TensorList params, torch::Tensor inv_scale, torch::Tensor found_inf);
+RcppExport SEXP _torch_cpp_amp_foreach_non_finite_check_and_unscale(SEXP paramsSEXP, SEXP inv_scaleSEXP, SEXP found_infSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< torch::TensorList >::type params(paramsSEXP);
+    Rcpp::traits::input_parameter< torch::Tensor >::type inv_scale(inv_scaleSEXP);
+    Rcpp::traits::input_parameter< torch::Tensor >::type found_inf(found_infSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_amp_foreach_non_finite_check_and_unscale(params, inv_scale, found_inf));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_amp_update_scale_
+void cpp_amp_update_scale_(torch::Tensor scale, torch::Tensor growth_tracker, torch::Tensor found_inf, double scale_growth_factor, double scale_backoff_factor, torch::int64_t growth_interval);
+RcppExport SEXP _torch_cpp_amp_update_scale_(SEXP scaleSEXP, SEXP growth_trackerSEXP, SEXP found_infSEXP, SEXP scale_growth_factorSEXP, SEXP scale_backoff_factorSEXP, SEXP growth_intervalSEXP) {
+BEGIN_RCPP
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< torch::Tensor >::type scale(scaleSEXP);
+    Rcpp::traits::input_parameter< torch::Tensor >::type growth_tracker(growth_trackerSEXP);
+    Rcpp::traits::input_parameter< torch::Tensor >::type found_inf(found_infSEXP);
+    Rcpp::traits::input_parameter< double >::type scale_growth_factor(scale_growth_factorSEXP);
+    Rcpp::traits::input_parameter< double >::type scale_backoff_factor(scale_backoff_factorSEXP);
+    Rcpp::traits::input_parameter< torch::int64_t >::type growth_interval(growth_intervalSEXP);
+    cpp_amp_update_scale_(scale, growth_tracker, found_inf, scale_growth_factor, scale_backoff_factor, growth_interval);
+    return R_NilValue;
+END_RCPP
+}
 // cpp_autograd_set_grad_mode
 void cpp_autograd_set_grad_mode(bool enabled);
 RcppExport SEXP _torch_cpp_autograd_set_grad_mode(SEXP enabledSEXP) {
@@ -48703,6 +48731,8 @@ static const R_CallMethodDef CallEntries[] = {
     {"_torch_cpp_amp_autocast_increment_nesting", (DL_FUNC) &_torch_cpp_amp_autocast_increment_nesting, 0},
     {"_torch_cpp_amp_autocast_decrease_nesting", (DL_FUNC) &_torch_cpp_amp_autocast_decrease_nesting, 0},
     {"_torch_cpp_amp_autocast_clear_cache", (DL_FUNC) &_torch_cpp_amp_autocast_clear_cache, 0},
+    {"_torch_cpp_amp_foreach_non_finite_check_and_unscale", (DL_FUNC) &_torch_cpp_amp_foreach_non_finite_check_and_unscale, 3},
+    {"_torch_cpp_amp_update_scale_", (DL_FUNC) &_torch_cpp_amp_update_scale_, 6},
     {"_torch_cpp_autograd_set_grad_mode", (DL_FUNC) &_torch_cpp_autograd_set_grad_mode, 1},
     {"_torch_cpp_autograd_is_enabled", (DL_FUNC) &_torch_cpp_autograd_is_enabled, 0},
     {"_torch_cpp_autograd_set_detect_anomaly", (DL_FUNC) &_torch_cpp_autograd_set_detect_anomaly, 1},

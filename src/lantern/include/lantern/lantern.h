@@ -2498,6 +2498,15 @@ HOST_API int lantern_amp_foreach_non_finite_check_and_unscale (void* params, voi
   return ret;
 }
 
+LANTERN_API void (LANTERN_PTR _lantern_amp_update_scale_) (void* self, void* growth_tracker, void* found_inf, double scale_growth_factor, double scale_backoff_factor, void* growth_interval);
+HOST_API void lantern_amp_update_scale_ (void* self, void* growth_tracker, void* found_inf, double scale_growth_factor, double scale_backoff_factor, void* growth_interval)
+{
+  LANTERN_CHECK_LOADED
+   _lantern_amp_update_scale_(self, growth_tracker, found_inf, scale_growth_factor, scale_backoff_factor, growth_interval);
+  LANTERN_HOST_HANDLER;
+  
+}
+
   /* Autogen Headers -- Start */
   LANTERN_API void* (LANTERN_PTR _lantern__cast_byte_tensor_bool)(void* self, void* non_blocking);
   HOST_API void* lantern__cast_byte_tensor_bool(void* self, void* non_blocking) { LANTERN_CHECK_LOADED void* ret = _lantern__cast_byte_tensor_bool(self, non_blocking); LANTERN_HOST_HANDLER return ret; }
@@ -10049,6 +10058,7 @@ LOAD_SYMBOL(_lantern_amp_autocast_increment_nesting);
 LOAD_SYMBOL(_lantern_amp_autocast_decrement_nesting);
 LOAD_SYMBOL(_lantern_amp_autocast_clear_cache);
 LOAD_SYMBOL(_lantern_amp_foreach_non_finite_check_and_unscale);
+LOAD_SYMBOL(_lantern_amp_update_scale_);
   /* Autogen Symbols -- Start */
   LOAD_SYMBOL(_lantern__cast_byte_tensor_bool)
   LOAD_SYMBOL(_lantern__cast_char_tensor_bool)
