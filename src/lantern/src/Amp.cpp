@@ -86,19 +86,21 @@ void _lantern_amp_autocast_clear_cache () {
     LANTERN_FUNCTION_END_VOID
 }
 
-void _lantern_amp_foreach_non_finite_check_and_unscale (void* params, void* found_inf, void* inv_scale) {
+int _lantern_amp_foreach_non_finite_check_and_unscale (void* params, void* found_inf, void* inv_scale) 
+  {
     LANTERN_FUNCTION_START
-#ifdef __NVCC__
     auto params_ = from_raw::TensorList(params);
     auto found_inf_ = from_raw::Tensor(found_inf);
     auto inv_scale_ = from_raw::Tensor(inv_scale);
 
+    int found = 0;
     for (auto& param : params_) {
-        const auto grad& = param.grad();
-        at::native::_foreach_non_finite_check_and_unscale_cuda(grad, found_inf_.to(grad.device()), inv_scale_.to(grad.device()));
+        auto grad = param.grad();
+        auto found_inf__ = found_inf_.to(grad.device());
+        auto inv_scale__ = inv_scale_.to(grad.device());
+        at::_amp_foreach_non_finite_check_and_unscale_(grad, found_inf__, inv_scale__);
+        found += found_inf__.sum().item().toInt();
     } 
-#else
-    throw std::runtime_error("Not implemented");
-#endif
+    return found;
     LANTERN_FUNCTION_END_VOID
 }

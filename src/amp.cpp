@@ -65,3 +65,8 @@ int cpp_amp_autocast_decrease_nesting () {
 void cpp_amp_autocast_clear_cache () {
   return lantern_amp_autocast_clear_cache();
 }
+
+// [[Rcpp::export]]
+bool cpp_amp_foreach_non_finite_check_and_unscale (torch::TensorList params, torch::Tensor inv_scale, torch::Tensor found_inf) {
+  return lantern_amp_foreach_non_finite_check_and_unscale(params.get(), inv_scale.get(), found_inf.get());
+}

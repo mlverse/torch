@@ -155,9 +155,26 @@ amp_GradScaler <- R6Class(
       inv_scale <- self$.scale$double()$reciprocal()$float()
       found_inf <- torch_full(list(), 0.0, dtype=torch_float32(), device=self$.scale$device)
       
-      optimizer_state[["found_inf_per_device"]] <- self$.unscale_grads_(optimizer, inv_scale, found_inf, FALSE)
+      optimizer_state[["found_inf"]] <- self$.unscale_grads_(optimizer, inv_scale, found_inf, FALSE)
       optimizer_state[["stage"]] <- "unscaled"
     },
+    step = function(optimizer, ...) {
+      optimizer_state <- self._per_optimizer_states[rlang::obj_address(optimizer)]
+      if (optimizer_sate$stage == "stepped") {
+        cli::cli_abort("{.fn step} has already been called since the last {.fn update}.")
+      }
+
+      if (optimizer_state$stage == "ready") {
+        self$unscale_(optimizer)
+      }
+    
+      retval <- self.maybe_opt_step(optimizer, optimizer_state, ...)
+      optimizer_state$stage <- "stepped"
+      retval
+    },
+    update = function(new_scale = NULL) {
+
+    }
     .lazy_init_scale_growth_tracker = function(dev) {
       if (!is.null(self$.growth_tracker))
         cli::cli_abort("{.var .growth_tracker} initialized before {.var .scale}")
@@ -181,55 +198,20 @@ amp_GradScaler <- R6Class(
       }
       list(self$.scale, self$.growth_tracker)
     },
-    .unscale_grads = function(optimizer, inv_scale, found_inv, allow_fp16) {
+    .unscale_grads = function(optimizer, inv_scale, found_inf, allow_fp16) {
       local_no_grad()
-      per_device_and_dtype_grads <- list()
+      found <- 0
       for (group in optimizer$param_groups) {
-        
-        for (param in group) {
-          if (is.null(param$grad) || is_undefined_tensor(pram$grad)) {
-            next
-          }
-          
-          if (!allow_fp16 && (param$grad$dtype == torch_float16())) {
-            cli::cli_abort("Attempting to unscale FP16 gradients.")
-          }
-          
-          if (param$grad$is_sparse()) {
-            cli::cli_abort("Currently sparse gradients are not supported.")
-          }
-          
-          per_device_and_dtype_grads[[param$device]][[param$dtype]]
-        }
+        found <- found + cpp_amp_foreach_non_finite_check_and_unscale(group$params)
       }
-      
-      #   for group in optimizer.param_groups:
-      #   for param in group["params"]:
-      #   if param.grad is None:
-      #   continue
-      # if (not allow_fp16) and param.grad.dtype == torch.float16:
-      #   raise ValueError("Attempting to unscale FP16 gradients.")
-      # if param.grad.is_sparse:
-      #   # is_coalesced() == False means the sparse grad has values with duplicate indices.
-      #   # coalesce() deduplicates indices and adds all values that have the same index.
-      #   # For scaled fp16 values, there's a good chance coalescing will cause overflow,
-      #   # so we should check the coalesced _values().
-      #   if param.grad.dtype is torch.float16:
-      #   param.grad = param.grad.coalesce()
-      #   to_unscale = param.grad._values()
-      #   else:
-      #     to_unscale = param.grad
-      #   
-      #   # TODO: is there a way to split by device and dtype without appending in the inner loop?
-      #   per_device_and_dtype_grads[to_unscale.device][to_unscale.dtype].append(to_unscale)
-      #   
-      #   for device, per_dtype_grads in per_device_and_dtype_grads.items():
-      #     for grads in per_dtype_grads.values():
-      #     torch._amp_foreach_non_finite_check_and_unscale_(grads,
-      #                                                      per_device_found_inf.get(device),
-      #                                                      per_device_inv_scale.get(device))
-      
-      
+      found
+    },
+    .maybe_opt_step = function(optimizer, optimizer_state, ...) {
+      if (!(optimizer_state$found_inf > 0)) {
+        optimizer$step(...)
+      } else {
+        invisible(NULL)
+      }      
     }
   )
 )
@@ -241,7 +223,7 @@ amp_OptState <- R6::R6Class(
   public = list(
     initialize = function() {
       self$stage <- "ready"
-      self$found_inf_per_device <- list()
+      self$found_inf <- FALSE
     }
   )
 )
