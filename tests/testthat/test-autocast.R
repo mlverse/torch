@@ -55,38 +55,55 @@ test_that("works on gpu", {
 test_that("grad scalers work correctly", {
   
   skip_if_cuda_not_available()
-  device <- torch_device("cuda")
-  
-  # Creates model and optimizer in default precision
-  model <- nn_linear(10, 1)$cuda()
-  optimizer <- optim_sgd(model$parameters, lr = 0.001)
-  
-  # Creates a GradScaler once at the beginning of training.
-  scaler <- amp_GradScaler$new()
-  
-  for (epoch in 1:5) {
-    x <- torch_randn(100, 10, device = device)
-    y <- torch_randn(100, 1, device = device)
-    
-    with_autocast(device_type = "cuda", {
-      output <- model(x)
-      loss <- nnf_mse_loss(output, y)
-    })
-    
-    # Scales loss.  Calls backward() on scaled loss to create scaled gradients.
-    # Backward passes under autocast are not recommended.
-    # Backward ops run in the same dtype autocast chose for corresponding forward ops.
-    scaler$scale(loss)$backward()
-    
-    # scaler.step() first unscales the gradients of the optimizer's assigned params.
-    # If these gradients do not contain infs or NaNs, optimizer.step() is then called,
-    # otherwise, optimizer.step() is skipped.
-    scaler$step(optimizer)
-    
-    # Updates the scale for next iteration.
-    scaler$update()
+
+  make_model <- function(in_size, out_size, num_layers) {
+    layers <- list()
+    for (i in 1:(num_layers - 1)) {
+      layers <- c(layers, list(nn_linear(in_size, in_size), nn_relu()))
+    }
+    layers <- c(layers, list(nn_linear(in_size, out_size)))
+    nn_sequential(!!!layers)$cuda()
   }
+
+  torch_manual_seed(1)
+
+  batch_size = 512 # Try, for example, 128, 256, 513.
+  in_size = 4096
+  out_size = 4096
+  num_layers = 3
+  num_batches = 50
+  epochs = 3
+
+  # Creates data in default precision.
+  # The same data is used for both default and mixed precision trials below.
+  # You don't need to manually change inputs' dtype when enabling mixed precision.
+  data <- lapply(1:num_batches, function(x) torch_randn(batch_size, in_size, device="cuda"))
+  targets <- lapply(1:num_batches, function(x) torch_randn(batch_size, out_size, device="cuda"))
+
+  loss_fn <- nn_mse_loss()$cuda()
   
-  # no Inf values
-  expect_true(!torch::torch_isinf(model$weight)$any()$item())
+  use_amp = TRUE
+
+  net = make_model(in_size, out_size, num_layers)
+  opt = optim_sgd(net$parameters, lr=0.001)
+  scaler = amp_GradScaler$new(enabled=use_amp)
+
+  for (epoch in seq_len(epochs)) {
+    for (i in length(data)) {
+      with_autocast(device_type="cuda", dtype=torch_float16(), enabled=use_amp, {
+        output <- net(data[[i]])
+        loss <- loss_fn(output, targets[[i]])
+      })
+      scaler$scale(loss)$backward()
+      scaler$step(opt)
+      scaler$update()
+      opt$zero_grad() # set_to_none=TRUE here can modestly improve performance
+    }
+  }
+
+  # got the same value as obtained from pytorch
+  expect_equal(
+    sprintf("%1.4f", loss$item()),
+    sprintf("%1.4f", 1.0086909532546997)
+  )
 })

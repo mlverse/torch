@@ -165,7 +165,7 @@ amp_GradScaler <- R6::R6Class(
       
       optimizer_state <- self$.get_optimizer_state(optimizer)
       
-      if (optimizer_sate$stage == "stepped") {
+      if (optimizer_state$stage == "stepped") {
         cli::cli_abort("{.fn step} has already been called since the last {.fn update}.")
       }
 
@@ -173,7 +173,7 @@ amp_GradScaler <- R6::R6Class(
         self$unscale_(optimizer)
       }
     
-      retval <- self.maybe_opt_step(optimizer, optimizer_state, ...)
+      retval <- self$.maybe_opt_step(optimizer, optimizer_state, ...)
       optimizer_state$stage <- "stepped"
       retval
     },
@@ -188,10 +188,11 @@ amp_GradScaler <- R6::R6Class(
           self$.scale$copy_(new_scale)  
         }
       } else {
+        found_infs <- sum(sapply(self$.per_optimizer_states, function(x) x[["found_inf"]]))
         cpp_amp_update_scale_(
           .scale, 
           .growth_tracker,
-          self$found_inf,
+          torch_tensor(found_infs, device=.scale$device),
           self$.growth_factor,
           self$.backoff_factor,
           self$.growth_interval
@@ -222,11 +223,11 @@ amp_GradScaler <- R6::R6Class(
       }
       list(self$.scale, self$.growth_tracker)
     },
-    .unscale_grads = function(optimizer, inv_scale, found_inf, allow_fp16) {
+    .unscale_grads_ = function(optimizer, inv_scale, found_inf, allow_fp16) {
       local_no_grad()
       found <- 0
       for (group in optimizer$param_groups) {
-        found <- found + cpp_amp_foreach_non_finite_check_and_unscale(group$params)
+        found <- found + cpp_amp_foreach_non_finite_check_and_unscale(group$params, inv_scale, found_inf)
       }
       found
     },
