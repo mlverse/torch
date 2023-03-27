@@ -95,6 +95,25 @@ with_autocast <- function(code, ... , device_type, dtype = NULL, enabled = TRUE,
   force(code)
 }
 
+#' Creates a gradient scaler
+#' 
+#' A gradient scaler instance is used to perform dynamic gradient scaling
+#' to avoid gradient underflow when training with mixed precision.
+#' 
+#' @param init_scale a numeric value indicating the initial scale factor.
+#' @param growth_factor a numeric value indicating the growth factor.
+#' @param backoff_factor a numeric value indicating the backoff factor.
+#' @param growth_interval a numeric value indicating the growth interval.
+#' @param enabled a logical value indicating whether the gradient scaler should be enabled.
+#' 
+#' @return A gradient scaler object.
+#' 
+amp_grad_scaler <- function(init_scale = 2^16, growth_factor = 2.0, backoff_factor = 0.5,
+                            growth_interval = 2000, enabled = TRUE) {
+  amp_GradScaler$new(init_scale = init_scale, growth_factor = growth_factor, backoff_factor = backoff_factor,
+                    growth_interval = growth_interval, enabled = enabled)
+}
+
 amp_GradScaler <- R6::R6Class(
   "AmpGradScaler", 
   lock_objects = FALSE,
