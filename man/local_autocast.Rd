@@ -73,3 +73,6 @@ foo <- function(x, y) {
 out <- foo(x, y)
 }
 }
+\seealso{
+\code{\link[=cuda_amp_grad_scaler]{cuda_amp_grad_scaler()}} to perform dynamic gradient scaling.
+}

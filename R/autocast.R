@@ -31,6 +31,7 @@
 #' }
 #' 
 #' out <- foo(x, y)
+#' @seealso [cuda_amp_grad_scaler()] to perform dynamic gradient scaling.
 #' @export
 local_autocast <- function(device_type, dtype = NULL, enabled = TRUE, cache_enabled = NULL, ..., .env = parent.frame()) {
   device <- device_type
@@ -107,8 +108,8 @@ with_autocast <- function(code, ... , device_type, dtype = NULL, enabled = TRUE,
 #' @param enabled a logical value indicating whether the gradient scaler should be enabled.
 #' 
 #' @return A gradient scaler object.
-#' 
-amp_grad_scaler <- function(init_scale = 2^16, growth_factor = 2.0, backoff_factor = 0.5,
+#' @export
+cuda_amp_grad_scaler <- function(init_scale = 2^16, growth_factor = 2.0, backoff_factor = 0.5,
                             growth_interval = 2000, enabled = TRUE) {
   amp_GradScaler$new(init_scale = init_scale, growth_factor = growth_factor, backoff_factor = backoff_factor,
                     growth_interval = growth_interval, enabled = enabled)

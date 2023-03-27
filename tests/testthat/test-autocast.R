@@ -61,7 +61,7 @@ test_that("unscale skipping works", {
   orig_params <- lapply(model$parameters, function(x) x$clone()$detach())
 
   optimizer <- optim_sgd(model$parameters, lr=0.001)
-  scaler <- amp_GradScaler$new(enabled=TRUE, init_scale=128.0)
+  scaler <- cuda_amp_grad_scaler(enabled=TRUE, init_scale=128.0)
   for(i in seq_along(x)) {  
     with_autocast(device_type="cuda", dtype=torch_float16(), {
       output <- model(x[[i]])
@@ -92,7 +92,7 @@ test_that("loss is scaled correctly", {
 
   loss_fn <- nn_mse_loss()$cuda()
 
-  scaler <- amp_GradScaler$new(init_scale = 1000)
+  scaler <- cuda_amp_grad_scaler(init_scale = 1000)
   with_autocast(
     device_type="cuda",
     dtype=torch_float16(),
@@ -132,7 +132,7 @@ test_that("scaling the loss works", {
   expect_true(all(as.matrix(model$weight$grad$cpu()) == 0))
 
   # now we scale the loss and gradients
-  scaler <- amp_GradScaler$new()
+  scaler <- cuda_amp_grad_scaler()
   with_autocast(
     device_type="cuda",
     dtype=torch_float16(),
@@ -207,7 +207,7 @@ test_that("grad scalers work correctly", {
 
   net <- make_model(in_size, out_size, num_layers)
   opt <- optim_sgd(net$parameters, lr=0.1)
-  scaler <- amp_GradScaler$new(enabled=use_scaling)
+  scaler <- cuda_amp_grad_scaler(enabled=use_scaling)
 
   for (epoch in seq_len(epochs)) {
     for (i in seq_along(data)) {
