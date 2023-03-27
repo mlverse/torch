@@ -53,6 +53,8 @@ test_that("works on gpu", {
 })
 
 test_that("unscale skipping works", {
+  skip_if_cuda_not_available()
+  
   model <- nn_linear(2, 2)$cuda()
   x <- lapply(1:50, function(x) torch_randn(2, 2, dtype = torch_float32(), device="cuda"))
   y <- lapply(1:50, function(x) torch_randn(2, 2, dtype = torch_float32(), device="cuda"))
@@ -107,6 +109,7 @@ test_that("loss is scaled correctly", {
 })
 
 test_that("scaling the loss works", {
+  skip_if_cuda_not_available()
 
   model <- nn_linear(2, 2)$cuda()
   for(par in model$parameters) {
@@ -148,6 +151,7 @@ test_that("scaling the loss works", {
 })
 
 test_that("internal cpp_amp_check works", {
+  skip_if_cuda_not_available()
 
   net <- nn_linear(2, 2)$cuda()
   x <- torch_randn(2, 2, device="cuda")
