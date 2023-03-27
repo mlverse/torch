@@ -96,13 +96,13 @@ int _lantern_amp_foreach_non_finite_check_and_unscale (void* params, void* found
     int found = 0;
     for (auto& param : params_) {
         auto grad = param.grad();
-        auto found_inf__ = found_inf_.to(grad.device());
+        auto found_inf__ = torch::zeros({1}, grad.device());
         auto inv_scale__ = inv_scale_.to(grad.device());
         at::_amp_foreach_non_finite_check_and_unscale_(grad, found_inf__, inv_scale__);
         found += found_inf__.sum().item().toInt();
     } 
     return found;
-    LANTERN_FUNCTION_END_VOID
+    LANTERN_FUNCTION_END
 }
 
 void _lantern_amp_update_scale_ (void* self, void* growth_tracker, void* found_inf, double scale_growth_factor, double scale_backoff_factor, void* growth_interval) {

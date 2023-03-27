@@ -122,6 +122,8 @@ amp_GradScaler <- R6::R6Class(
       }
     },
     scale = function(outputs) {
+      if (!self$.enabled) return(outputs)
+
       # Short-circuit for the common case.
       if (inherits(outputs, "torch_tensor")) {
         if (!outputs$is_cuda)
@@ -178,6 +180,8 @@ amp_GradScaler <- R6::R6Class(
       retval
     },
     update = function(new_scale = NULL) {
+      if (!self$.enabled) return(invisible(NULL))
+      
       res <- self$.check_scale_growth_tracker("update")
       .scale <- res[[1]]; .growth_tracker <- res[[2]];
       
@@ -227,22 +231,30 @@ amp_GradScaler <- R6::R6Class(
       local_no_grad()
       found <- 0
       for (group in optimizer$param_groups) {
-        found <- found + cpp_amp_foreach_non_finite_check_and_unscale(group$params, inv_scale, found_inf)
+        found <- found + cpp_amp_foreach_non_finite_check_and_unscale(group$params, found_inf, inv_scale)
       }
       found
     },
     .maybe_opt_step = function(optimizer, optimizer_state, ...) {
-      if (!(optimizer_state$found_inf > 0)) {
+      if (!(self$.check_inf_per_device(optimizer) > 0)) {
         optimizer$step(...)
       } else {
         invisible(NULL)
-      }      
+      }
     },
     .get_optimizer_state = function(optimizer) {
       if (is.null(self$.per_optimizer_states[[rlang::obj_address(optimizer)]]))
         self$.per_optimizer_states[[rlang::obj_address(optimizer)]] <- amp_OptState$new()
       
       self$.per_optimizer_states[[rlang::obj_address(optimizer)]]
+    },
+    .check_inf_per_device = function(optimizer) {
+      optimizer_state <- self$.get_optimizer_state(optimizer)
+      device <- self$.scale$device
+      dummy_inv_scale <- torch_full(list(), 1.0, dtype=torch_float32(), device=device)
+      found_inf <- torch_full(list(), 0.0, dtype=torch_float32(), device=device)
+      optimizer_state[["found_inf"]] <- self$.unscale_grads_(optimizer, dummy_inv_scale, found_inf, TRUE)
+      optimizer_state[["found_inf"]]
     }
   )
 )

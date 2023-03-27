@@ -53,8 +53,8 @@ cpp_amp_autocast_clear_cache <- function() {
     invisible(.Call(`_torch_cpp_amp_autocast_clear_cache`))
 }
 
-cpp_amp_foreach_non_finite_check_and_unscale <- function(params, inv_scale, found_inf) {
-    .Call(`_torch_cpp_amp_foreach_non_finite_check_and_unscale`, params, inv_scale, found_inf)
+cpp_amp_foreach_non_finite_check_and_unscale <- function(params, found_inf, inv_scale) {
+    .Call(`_torch_cpp_amp_foreach_non_finite_check_and_unscale`, params, found_inf, inv_scale)
 }
 
 cpp_amp_update_scale_ <- function(scale, growth_tracker, found_inf, scale_growth_factor, scale_backoff_factor, growth_interval) {

@@ -141,15 +141,15 @@ BEGIN_RCPP
 END_RCPP
 }
 // cpp_amp_foreach_non_finite_check_and_unscale
-bool cpp_amp_foreach_non_finite_check_and_unscale(torch::TensorList params, torch::Tensor inv_scale, torch::Tensor found_inf);
-RcppExport SEXP _torch_cpp_amp_foreach_non_finite_check_and_unscale(SEXP paramsSEXP, SEXP inv_scaleSEXP, SEXP found_infSEXP) {
+int cpp_amp_foreach_non_finite_check_and_unscale(torch::TensorList params, torch::Tensor found_inf, torch::Tensor inv_scale);
+RcppExport SEXP _torch_cpp_amp_foreach_non_finite_check_and_unscale(SEXP paramsSEXP, SEXP found_infSEXP, SEXP inv_scaleSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< torch::TensorList >::type params(paramsSEXP);
-    Rcpp::traits::input_parameter< torch::Tensor >::type inv_scale(inv_scaleSEXP);
     Rcpp::traits::input_parameter< torch::Tensor >::type found_inf(found_infSEXP);
-    rcpp_result_gen = Rcpp::wrap(cpp_amp_foreach_non_finite_check_and_unscale(params, inv_scale, found_inf));
+    Rcpp::traits::input_parameter< torch::Tensor >::type inv_scale(inv_scaleSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_amp_foreach_non_finite_check_and_unscale(params, found_inf, inv_scale));
     return rcpp_result_gen;
 END_RCPP
 }

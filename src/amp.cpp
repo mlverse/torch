@@ -67,8 +67,8 @@ void cpp_amp_autocast_clear_cache () {
 }
 
 // [[Rcpp::export]]
-bool cpp_amp_foreach_non_finite_check_and_unscale (torch::TensorList params, torch::Tensor inv_scale, torch::Tensor found_inf) {
-  return lantern_amp_foreach_non_finite_check_and_unscale(params.get(), inv_scale.get(), found_inf.get());
+int cpp_amp_foreach_non_finite_check_and_unscale (torch::TensorList params, torch::Tensor found_inf, torch::Tensor inv_scale) {
+  return lantern_amp_foreach_non_finite_check_and_unscale(params.get(), found_inf.get(), inv_scale.get());
 }
 
 // [[Rcpp::export]]
