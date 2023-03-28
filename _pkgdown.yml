@@ -140,6 +140,11 @@ reference:
       - with_enable_grad
       - with_detect_anomaly
       - AutogradContext
+  - title: Mixed precision
+    contents:
+      - local_autocast
+      - with_autocast
+      - starts_with("cuda_amp_")
   - title: Linear Algebra
     contents:
       - starts_with("linalg_")
