@@ -124,6 +124,9 @@
     <loc>https://torch.mlverse.org/docs/dev/reference/contrib_sort_vertices.html</loc>
   </url>
   <url>
+    <loc>https://torch.mlverse.org/docs/dev/reference/cuda_amp_grad_scaler.html</loc>
+  </url>
+  <url>
     <loc>https://torch.mlverse.org/docs/dev/reference/cuda_current_device.html</loc>
   </url>
   <url>
@@ -341,6 +344,9 @@
   </url>
   <url>
     <loc>https://torch.mlverse.org/docs/dev/reference/load_state_dict.html</loc>
+  </url>
+  <url>
+    <loc>https://torch.mlverse.org/docs/dev/reference/local_autocast.html</loc>
   </url>
   <url>
     <loc>https://torch.mlverse.org/docs/dev/reference/lr_lambda.html</loc>
