@@ -21,7 +21,7 @@ jobs:
           - {os: macOS, version: cpu-intel, runner: macOS-latest}
           - {os: macOS, version: cpu-m1, runner: [self-hosted, m1]}
           
-          - {os: ubuntu, version: cpu, runner: ubuntu-latest}
+          - {os: ubuntu, version: cpu, runner: [self-hosted, gce, disk]}
           - {os: ubuntu, version: cu117, runner: [self-hosted, gce, disk]}
           
           - {os: windows, version: cpu, runner: windows-2019}

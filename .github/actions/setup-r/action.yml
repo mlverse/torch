@@ -45,7 +45,7 @@ runs:
 
     - name: Setup parallel compilation
       run: |
-        cores=$(Rscript -e "cat(parallel::detectCores())")
+        cores=$(Rscript -e "cat(parallel::detectCores() - 1)")
         path="$HOME/.R/Makevars"
         mkdir -p "$HOME/.R"
         if [ ! -f $path ]
