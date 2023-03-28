@@ -18,16 +18,14 @@ jobs:
       matrix:
         
         config: 
-          - {os: macOS, version: cpu-intel, runner: macOS-latest}
-          - {os: macOS, version: cpu-m1, runner: [self-hosted, m1]}
+          - {r_version: 'release', os: macOS, version: cpu-intel, runner: macOS-latest}
+          - {r_version: '',        os: macOS, version: cpu-m1, runner: [self-hosted, m1]}
           
-          - {os: ubuntu, version: cpu, runner: [self-hosted, gce, disk]}
-          - {os: ubuntu, version: cu117, runner: [self-hosted, gce, disk]}
+          - {r_version: 'release', os: ubuntu, version: cpu, runner: [self-hosted, gce, disk]}
+          - {r_version: 'release', os: ubuntu, version: cu117, runner: [self-hosted, gce, disk]}
           
-          - {os: windows, version: cpu, runner: windows-2019}
-          - {os: windows, version: cu117, runner: windows-2019}
-          
-        r_version: [release]
+          - {r_version: 'release', os: windows, version: cpu, runner: windows-2019}
+          - {r_version: 'release', os: windows, version: cu117, runner: windows-2019}
           
         include:
           
@@ -44,6 +42,7 @@ jobs:
             
           - config: {os: macOS}
             type: 'mac.binary'
+  
             
     env:
       CUDA: ${{ matrix.cuda }}
@@ -57,7 +56,7 @@ jobs:
       
       - uses: ./.github/actions/setup-r
         with:
-          r_version: ${{ matrix.r_version}}
+          r_version: ${{ matrix.config.r_version}}
       
       - name: Setup cmake
         uses: jwlawson/actions-setup-cmake@v1
