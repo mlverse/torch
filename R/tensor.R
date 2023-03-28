@@ -259,6 +259,12 @@ Tensor <- R7Class(
     },
     movedim = function(source, destination) {
       private$`_movedim`(as_1_based_dim(source), as_1_based_dim(destination))
+    },
+    float = function() {
+      self$to(dtype=torch_float())
+    },
+    double = function() {
+      self$to(dtype=torch_double())
     }
   ),
   active = list(

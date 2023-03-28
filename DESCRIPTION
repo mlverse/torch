@@ -57,6 +57,7 @@ VignetteBuilder: knitr
 Collate:
     'R7.R'
     'RcppExports.R'
+    'autocast.R'
     'tensor.R'
     'autograd.R'
     'backends.R'

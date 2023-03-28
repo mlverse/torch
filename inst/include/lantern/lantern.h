@@ -2372,6 +2372,141 @@ HOST_API void lantern_autograd_zero_grad (void * self) {
   LANTERN_HOST_HANDLER;
 }
 
+LANTERN_API bool (LANTERN_PTR _lantern_amp_is_autocast_gpu_enabled) ();
+HOST_API bool lantern_amp_is_autocast_gpu_enabled ()
+{
+  LANTERN_CHECK_LOADED
+  bool ret = _lantern_amp_is_autocast_gpu_enabled();
+  LANTERN_HOST_HANDLER;
+  return ret;
+}
+
+LANTERN_API bool (LANTERN_PTR _lantern_amp_is_autocast_cpu_enabled) ();
+HOST_API bool lantern_amp_is_autocast_cpu_enabled ()
+{
+  LANTERN_CHECK_LOADED
+  bool ret = _lantern_amp_is_autocast_cpu_enabled();
+  LANTERN_HOST_HANDLER;
+  return ret;
+}
+
+LANTERN_API void (LANTERN_PTR _lantern_amp_autocast_set_gpu_enabled) (bool enabled);
+HOST_API void lantern_amp_autocast_set_gpu_enabled (bool enabled)
+{
+  LANTERN_CHECK_LOADED
+   _lantern_amp_autocast_set_gpu_enabled(enabled);
+  LANTERN_HOST_HANDLER;
+  
+}
+
+LANTERN_API void (LANTERN_PTR _lantern_amp_autocast_set_cpu_enabled) (bool enabled);
+HOST_API void lantern_amp_autocast_set_cpu_enabled (bool enabled)
+{
+  LANTERN_CHECK_LOADED
+   _lantern_amp_autocast_set_cpu_enabled(enabled);
+  LANTERN_HOST_HANDLER;
+  
+}
+
+LANTERN_API void (LANTERN_PTR _lantern_amp_autocast_set_gpu_dtype) (void* dtype);
+HOST_API void lantern_amp_autocast_set_gpu_dtype (void* dtype)
+{
+  LANTERN_CHECK_LOADED
+   _lantern_amp_autocast_set_gpu_dtype(dtype);
+  LANTERN_HOST_HANDLER;
+  
+}
+
+LANTERN_API void (LANTERN_PTR _lantern_amp_autocast_set_cpu_dtype) (void* dtype);
+HOST_API void lantern_amp_autocast_set_cpu_dtype (void* dtype)
+{
+  LANTERN_CHECK_LOADED
+   _lantern_amp_autocast_set_cpu_dtype(dtype);
+  LANTERN_HOST_HANDLER;
+  
+}
+
+LANTERN_API void (LANTERN_PTR _lantern_amp_autocast_set_cache_enabled) (bool enabled);
+HOST_API void lantern_amp_autocast_set_cache_enabled (bool enabled)
+{
+  LANTERN_CHECK_LOADED
+   _lantern_amp_autocast_set_cache_enabled(enabled);
+  LANTERN_HOST_HANDLER;
+  
+}
+
+LANTERN_API bool (LANTERN_PTR _lantern_amp_autocast_is_cache_enabled) ();
+HOST_API bool lantern_amp_autocast_is_cache_enabled ()
+{
+  LANTERN_CHECK_LOADED
+  bool ret = _lantern_amp_autocast_is_cache_enabled();
+  LANTERN_HOST_HANDLER;
+  return ret;
+}
+
+LANTERN_API void* (LANTERN_PTR _lantern_amp_autocast_get_gpu_dtype) ();
+HOST_API void* lantern_amp_autocast_get_gpu_dtype ()
+{
+  LANTERN_CHECK_LOADED
+  void* ret = _lantern_amp_autocast_get_gpu_dtype();
+  LANTERN_HOST_HANDLER;
+  return ret;
+}
+
+LANTERN_API void* (LANTERN_PTR _lantern_amp_autocast_get_cpu_dtype) ();
+HOST_API void* lantern_amp_autocast_get_cpu_dtype ()
+{
+  LANTERN_CHECK_LOADED
+  void* ret = _lantern_amp_autocast_get_cpu_dtype();
+  LANTERN_HOST_HANDLER;
+  return ret;
+}
+
+LANTERN_API void (LANTERN_PTR _lantern_amp_autocast_increment_nesting) ();
+HOST_API void lantern_amp_autocast_increment_nesting ()
+{
+  LANTERN_CHECK_LOADED
+   _lantern_amp_autocast_increment_nesting();
+  LANTERN_HOST_HANDLER;
+  
+}
+
+LANTERN_API int (LANTERN_PTR _lantern_amp_autocast_decrement_nesting) ();
+HOST_API int lantern_amp_autocast_decrement_nesting ()
+{
+  LANTERN_CHECK_LOADED
+   int ret = _lantern_amp_autocast_decrement_nesting();
+  LANTERN_HOST_HANDLER;
+  return ret;
+}
+
+LANTERN_API void (LANTERN_PTR _lantern_amp_autocast_clear_cache) ();
+HOST_API void lantern_amp_autocast_clear_cache ()
+{
+  LANTERN_CHECK_LOADED
+   _lantern_amp_autocast_clear_cache();
+  LANTERN_HOST_HANDLER;
+  
+}
+
+LANTERN_API int (LANTERN_PTR _lantern_amp_foreach_non_finite_check_and_unscale) (void* params, void* found_inf, void* inv_scale);
+HOST_API int lantern_amp_foreach_non_finite_check_and_unscale (void* params, void* found_inf, void* inv_scale)
+{
+  LANTERN_CHECK_LOADED
+  int ret = _lantern_amp_foreach_non_finite_check_and_unscale(params, found_inf, inv_scale);
+  LANTERN_HOST_HANDLER;
+  return ret;
+}
+
+LANTERN_API void (LANTERN_PTR _lantern_amp_update_scale_) (void* self, void* growth_tracker, void* found_inf, double scale_growth_factor, double scale_backoff_factor, void* growth_interval);
+HOST_API void lantern_amp_update_scale_ (void* self, void* growth_tracker, void* found_inf, double scale_growth_factor, double scale_backoff_factor, void* growth_interval)
+{
+  LANTERN_CHECK_LOADED
+   _lantern_amp_update_scale_(self, growth_tracker, found_inf, scale_growth_factor, scale_backoff_factor, growth_interval);
+  LANTERN_HOST_HANDLER;
+  
+}
+
   /* Autogen Headers -- Start */
   LANTERN_API void* (LANTERN_PTR _lantern__cast_byte_tensor_bool)(void* self, void* non_blocking);
   HOST_API void* lantern__cast_byte_tensor_bool(void* self, void* non_blocking) { LANTERN_CHECK_LOADED void* ret = _lantern__cast_byte_tensor_bool(self, non_blocking); LANTERN_HOST_HANDLER return ret; }
@@ -9909,6 +10044,21 @@ LOAD_SYMBOL(_lantern_cuda_empty_cache);
 LOAD_SYMBOL(_lantern_Tensor_is_sparse);
 LOAD_SYMBOL(_lantern_IntArrayRef_get);
 LOAD_SYMBOL(_lantern_autograd_zero_grad);
+LOAD_SYMBOL(_lantern_amp_is_autocast_gpu_enabled);
+LOAD_SYMBOL(_lantern_amp_is_autocast_cpu_enabled);
+LOAD_SYMBOL(_lantern_amp_autocast_set_gpu_enabled);
+LOAD_SYMBOL(_lantern_amp_autocast_set_cpu_enabled);
+LOAD_SYMBOL(_lantern_amp_autocast_set_gpu_dtype);
+LOAD_SYMBOL(_lantern_amp_autocast_set_cpu_dtype);
+LOAD_SYMBOL(_lantern_amp_autocast_set_cache_enabled);
+LOAD_SYMBOL(_lantern_amp_autocast_is_cache_enabled);
+LOAD_SYMBOL(_lantern_amp_autocast_get_gpu_dtype);
+LOAD_SYMBOL(_lantern_amp_autocast_get_cpu_dtype);
+LOAD_SYMBOL(_lantern_amp_autocast_increment_nesting);
+LOAD_SYMBOL(_lantern_amp_autocast_decrement_nesting);
+LOAD_SYMBOL(_lantern_amp_autocast_clear_cache);
+LOAD_SYMBOL(_lantern_amp_foreach_non_finite_check_and_unscale);
+LOAD_SYMBOL(_lantern_amp_update_scale_);
   /* Autogen Symbols -- Start */
   LOAD_SYMBOL(_lantern__cast_byte_tensor_bool)
   LOAD_SYMBOL(_lantern__cast_char_tensor_bool)
