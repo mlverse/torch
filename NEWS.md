@@ -11,6 +11,7 @@
 - Returning lists of tensors to R is now much faster. (#993)
 - Dataloaders now preserve the batch dimension when `batch_size=1` is used. (#994)
 - Added support for automatic mixed precision (#996)
+- Added functionality to temporarily modify the torch seed. (#999)
 
 # torch 0.9.1
 
