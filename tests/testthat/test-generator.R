@@ -53,6 +53,7 @@ test_that("can use torch bernoulli on cuda.", {
 }) 
 
 test_that("torch manual seed works for CUDA", {
+  skip_if_cuda_not_available()
   torch_manual_seed(1)
   x <- torch_randn(1, device="cuda")
   
