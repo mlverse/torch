@@ -24,13 +24,12 @@ LANTERN_DTYPE_FUN(qint8, kQInt8)
 LANTERN_DTYPE_FUN(qint32, kQInt32)
 LANTERN_DTYPE_FUN(cfloat, kComplexFloat)
 LANTERN_DTYPE_FUN(cdouble, kComplexDouble)
+LANTERN_DTYPE_FUN(byte, kByte)
 
-const char *_lantern_Dtype_type(void *dtype) {
+void* _lantern_Dtype_type(void *dtype) {
   LANTERN_FUNCTION_START
   std::string str = toString(from_raw::Dtype(dtype));
-  char *cstr = new char[str.length() + 1];
-  strcpy(cstr, str.c_str());
-  return cstr;
+  return make_raw::string(str);
   LANTERN_FUNCTION_END
 }
 

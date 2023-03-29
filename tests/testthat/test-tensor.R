@@ -494,3 +494,15 @@ test_that("is_sparse works", {
   x <- torch_sparse_coo_tensor(rbind(sample(10), sample(10)), rnorm(10))
   expect_true(x$is_sparse())
 })
+
+test_that("can make a byte tensor from a raw vector", {
+  
+  x <- charToRaw("hello world")
+  ten <- torch_tensor(x)
+  
+  expect_equal(ten$dtype$.type(), "Byte")
+  expect_equal(length(x), length(ten))
+  
+  expect_equal(as.array(ten), x)
+  expect_equal(rawToChar(as.array(ten)), "hello world")
+})

@@ -155,6 +155,12 @@ torch::Tensor torch_tensor_cpp(SEXP x, Rcpp::Nullable<torch::Dtype> dtype,
         : Rcpp::as<torch::Dtype>(dtype);
       break;
     }
+    case RAWSXP: {
+      cdtype = lantern_Dtype_byte();
+      final_type = dtype.isNull() ? torch::Dtype(lantern_Dtype_byte())
+        : Rcpp::as<torch::Dtype>(dtype);
+      break;
+    }
     default: {
       Rcpp::stop("R type not handled");
     }
@@ -199,7 +205,7 @@ Rcpp::List tensor_to_r_array_double(torch::Tensor x) {
 Rcpp::List tensor_to_r_array_uint8_t(torch::Tensor x) {
   torch::Tensor ten = lantern_Tensor_contiguous(x.get());
   auto d_ptr = lantern_Tensor_data_ptr_uint8_t(ten.get());
-  Rcpp::Vector<LGLSXP> vec(d_ptr, d_ptr + lantern_Tensor_numel(ten.get()));
+  Rcpp::Vector<RAWSXP> vec(d_ptr, d_ptr + lantern_Tensor_numel(ten.get()));
   return Rcpp::List::create(Rcpp::Named("vec") = vec,
                             Rcpp::Named("dim") = tensor_dimensions(x));
 }
@@ -238,11 +244,9 @@ Rcpp::List tensor_to_r_array_bool(torch::Tensor x) {
 
 // [[Rcpp::export]]
 Rcpp::List cpp_as_array(Rcpp::XPtr<torch::Tensor> x) {
-  auto s =
-      lantern_Dtype_type(XPtrTorchDtype(lantern_Tensor_dtype(x->get())).get());
-  auto dtype = std::string(s);
-  lantern_const_char_delete(s);
-
+  
+  std::string dtype = torch::string(lantern_Dtype_type(XPtrTorchDtype(lantern_Tensor_dtype(x->get())).get()));
+  
   if (dtype == "Byte") {
     return tensor_to_r_array_uint8_t(*x.get());
   }

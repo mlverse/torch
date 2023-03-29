@@ -83,6 +83,13 @@ XPtrTorchOptionalTensorList cpp_torch_optional_tensor_list(const Rcpp::List& x);
 XPtrTorchDevice cpp_torch_device(std::string type,
                                  Rcpp::Nullable<std::int64_t> index);
 
+static inline std::string torch_string_to_string (XPtrTorchstring x) {
+  char* out = lantern_string_get(x.get());
+  auto output = std::string(out, lantern_string_size(x.get()));
+  lantern_const_char_delete(out);
+  return output;
+}
+
 // torch_tensor
 
 SEXP operator_sexp_tensor(const XPtrTorchTensor* self) {
@@ -215,10 +222,8 @@ void delete_tensor_list(void* x) { lantern_TensorList_delete(x); }
 
 SEXP operator_sexp_scalar(const XPtrTorchScalar* self) {
   XPtrTorchScalarType dtype_ptr = lantern_Scalar_dtype(self->get());
-  const char* dtype_c = lantern_Dtype_type(dtype_ptr.get());
-  auto dtype = std::string(dtype_c);
-  lantern_const_char_delete(dtype_c);
-
+  std::string dtype = XPtrTorchstring(lantern_Dtype_type(dtype_ptr.get()));
+  
   Rcpp::RObject output;
   if (dtype == "Double") {
     output = lantern_Scalar_to_double(self->get());
@@ -768,16 +773,17 @@ void delete_vector_scalar(void* x) { lantern_vector_Scalar_delete(x); }
 // string
 
 SEXP operator_sexp_string(const XPtrTorchstring* self) {
-  char* out = lantern_string_get(self->get());
-  auto output = std::string(out, lantern_string_size(self->get()));
-  lantern_const_char_delete(out);
-
+  auto output = torch_string_to_string(*self);
   return Rcpp::wrap(output);
 }
 
 XPtrTorchstring from_sexp_string(SEXP x) {
   std::string v = Rcpp::as<std::string>(x);
   return XPtrTorchstring(lantern_string_new(v.c_str(), v.size()));
+}
+
+std::string operator_string_string (const XPtrTorchstring* self) {
+  return torch_string_to_string(*self);
 }
 
 void delete_string(void* x) { lantern_string_delete(x); }

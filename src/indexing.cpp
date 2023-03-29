@@ -153,11 +153,8 @@ void index_append_bool_vector(XPtrTorchTensorIndex& index, SEXP slice) {
 bool index_append_tensor(XPtrTorchTensorIndex& index, SEXP slice) {
   Rcpp::XPtr<XPtrTorchTensor> t = Rcpp::as<Rcpp::XPtr<XPtrTorchTensor>>(slice);
 
-  auto s =
-      lantern_Dtype_type(XPtrTorchDtype(lantern_Tensor_dtype(t->get())).get());
-  auto type = std::string(s);
-  lantern_const_char_delete(s);
-
+  std::string type = torch::string(lantern_Dtype_type(XPtrTorchDtype(lantern_Tensor_dtype(t->get())).get()));
+  
   // is boolean tensor
   if (type == "Bool") {
     lantern_TensorIndex_append_tensor(index.get(), t->get());
