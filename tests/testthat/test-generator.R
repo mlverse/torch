@@ -85,6 +85,7 @@ test_that("Can use a with context to modify the torch seed temporarily", {
 
 test_that("The above also works for CUDA seeds", {
   skip_if_cuda_not_available()
+  
   torch_manual_seed(1)
   x <- torch_randn(1, device="cuda")
   y <- torch_randn(1)
