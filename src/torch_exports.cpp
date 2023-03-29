@@ -24,6 +24,7 @@ void register_callables(DllInfo *dll) {
   REGISTER_C_CALLABLE(operator_sexp_vector_string)
   REGISTER_C_CALLABLE(operator_sexp_vector_scalar)
   REGISTER_C_CALLABLE(operator_sexp_string)
+  REGISTER_C_CALLABLE(operator_string_string)
   REGISTER_C_CALLABLE(operator_sexp_jit_named_parameter_list)
   REGISTER_C_CALLABLE(operator_sexp_jit_named_buffer_list)
   REGISTER_C_CALLABLE(operator_sexp_jit_named_module_list)

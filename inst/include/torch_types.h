@@ -418,6 +418,7 @@ class XPtrTorchstring : public XPtrTorch {
   XPtrTorchstring(std::string x)
       : XPtrTorchstring(fixme_new_string(x.c_str(), x.size())){};
   operator SEXP() const;
+  operator std::string() const;
 };
 
 class XPtrTorchstring_view : public XPtrTorch {

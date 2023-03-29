@@ -22,6 +22,7 @@ SEXP operator_sexp_memory_format(const XPtrTorchMemoryFormat* self);
 SEXP operator_sexp_vector_string(const XPtrTorchvector_string* self);
 SEXP operator_sexp_vector_scalar(const XPtrTorchvector_Scalar* self);
 SEXP operator_sexp_string(const XPtrTorchstring* self);
+std::string operator_string_string(const XPtrTorchstring* self);
 SEXP operator_sexp_jit_named_parameter_list(
     const XPtrTorchjit_named_parameter_list* self);
 SEXP operator_sexp_jit_named_buffer_list(

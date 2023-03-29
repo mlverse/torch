@@ -205,6 +205,7 @@ XPtrTorchvector_Scalar::XPtrTorchvector_Scalar(SEXP x)
 // string
 
 XPtrTorchstring::operator SEXP() const { return operator_sexp_string(this); }
+XPtrTorchstring::operator std::string() const { return operator_string_string(this); }
 
 XPtrTorchstring::XPtrTorchstring(SEXP x)
     : XPtrTorchstring{from_sexp_string(x)} {}
