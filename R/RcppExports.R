@@ -14229,6 +14229,22 @@ cpp_torch_manual_seed <- function(seed) {
     invisible(.Call(`_torch_cpp_torch_manual_seed`, seed))
 }
 
+cpp_torch_get_rng_state <- function() {
+    .Call(`_torch_cpp_torch_get_rng_state`)
+}
+
+cpp_torch_set_rng_state <- function(state) {
+    invisible(.Call(`_torch_cpp_torch_set_rng_state`, state))
+}
+
+cpp_torch_cuda_get_rng_state <- function(device) {
+    .Call(`_torch_cpp_torch_cuda_get_rng_state`, device)
+}
+
+cpp_torch_cuda_set_rng_state <- function(device, state) {
+    invisible(.Call(`_torch_cpp_torch_cuda_set_rng_state`, device, state))
+}
+
 enquos0 <- function(env) {
     .Call(`_torch_enquos0`, env)
 }

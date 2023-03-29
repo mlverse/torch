@@ -30,7 +30,10 @@ make_load_symbols <- function(decls) {
 
 decls <- readr::read_lines(
   "
-void _lantern_amp_update_scale_ (void* self, void* growth_tracker, void* found_inf, double scale_growth_factor, double scale_backoff_factor, void* growth_interval)
+void _lantern_cuda_set_rng_state (int device, void* state)
+void* _lantern_cuda_get_rng_state (int device)
+void* _lantern_cpu_get_rng_state ()
+void _lantern_cpu_set_rng_state (void* state)
 "
 )
 

@@ -2507,6 +2507,42 @@ HOST_API void lantern_amp_update_scale_ (void* self, void* growth_tracker, void*
   
 }
 
+LANTERN_API void (LANTERN_PTR _lantern_cuda_set_rng_state) (int device, void* state);
+HOST_API void lantern_cuda_set_rng_state (int device, void* state)
+{
+  LANTERN_CHECK_LOADED
+   _lantern_cuda_set_rng_state(device, state);
+  LANTERN_HOST_HANDLER;
+  
+}
+
+LANTERN_API void* (LANTERN_PTR _lantern_cuda_get_rng_state) (int device);
+HOST_API void* lantern_cuda_get_rng_state (int device)
+{
+  LANTERN_CHECK_LOADED
+  void* ret = _lantern_cuda_get_rng_state(device);
+  LANTERN_HOST_HANDLER;
+  return ret;
+}
+
+LANTERN_API void* (LANTERN_PTR _lantern_cpu_get_rng_state) ();
+HOST_API void* lantern_cpu_get_rng_state ()
+{
+  LANTERN_CHECK_LOADED
+  void* ret = _lantern_cpu_get_rng_state();
+  LANTERN_HOST_HANDLER;
+  return ret;
+}
+
+LANTERN_API void (LANTERN_PTR _lantern_cpu_set_rng_state) (void* state);
+HOST_API void lantern_cpu_set_rng_state (void* state)
+{
+  LANTERN_CHECK_LOADED
+   _lantern_cpu_set_rng_state(state);
+  LANTERN_HOST_HANDLER;
+  
+}
+
   /* Autogen Headers -- Start */
   LANTERN_API void* (LANTERN_PTR _lantern__cast_byte_tensor_bool)(void* self, void* non_blocking);
   HOST_API void* lantern__cast_byte_tensor_bool(void* self, void* non_blocking) { LANTERN_CHECK_LOADED void* ret = _lantern__cast_byte_tensor_bool(self, non_blocking); LANTERN_HOST_HANDLER return ret; }
@@ -10059,6 +10095,10 @@ LOAD_SYMBOL(_lantern_amp_autocast_decrement_nesting);
 LOAD_SYMBOL(_lantern_amp_autocast_clear_cache);
 LOAD_SYMBOL(_lantern_amp_foreach_non_finite_check_and_unscale);
 LOAD_SYMBOL(_lantern_amp_update_scale_);
+LOAD_SYMBOL(_lantern_cuda_set_rng_state);
+LOAD_SYMBOL(_lantern_cuda_get_rng_state);
+LOAD_SYMBOL(_lantern_cpu_get_rng_state);
+LOAD_SYMBOL(_lantern_cpu_set_rng_state);
   /* Autogen Symbols -- Start */
   LOAD_SYMBOL(_lantern__cast_byte_tensor_bool)
   LOAD_SYMBOL(_lantern__cast_char_tensor_bool)

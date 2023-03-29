@@ -47335,6 +47335,48 @@ BEGIN_RCPP
     return R_NilValue;
 END_RCPP
 }
+// cpp_torch_get_rng_state
+torch::Tensor cpp_torch_get_rng_state();
+RcppExport SEXP _torch_cpp_torch_get_rng_state() {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_get_rng_state());
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_torch_set_rng_state
+void cpp_torch_set_rng_state(torch::Tensor state);
+RcppExport SEXP _torch_cpp_torch_set_rng_state(SEXP stateSEXP) {
+BEGIN_RCPP
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< torch::Tensor >::type state(stateSEXP);
+    cpp_torch_set_rng_state(state);
+    return R_NilValue;
+END_RCPP
+}
+// cpp_torch_cuda_get_rng_state
+torch::Tensor cpp_torch_cuda_get_rng_state(int device);
+RcppExport SEXP _torch_cpp_torch_cuda_get_rng_state(SEXP deviceSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< int >::type device(deviceSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_cuda_get_rng_state(device));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_torch_cuda_set_rng_state
+void cpp_torch_cuda_set_rng_state(int device, torch::Tensor state);
+RcppExport SEXP _torch_cpp_torch_cuda_set_rng_state(SEXP deviceSEXP, SEXP stateSEXP) {
+BEGIN_RCPP
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< int >::type device(deviceSEXP);
+    Rcpp::traits::input_parameter< torch::Tensor >::type state(stateSEXP);
+    cpp_torch_cuda_set_rng_state(device, state);
+    return R_NilValue;
+END_RCPP
+}
 // enquos0
 std::vector<Rcpp::RObject> enquos0(Rcpp::Environment env);
 RcppExport SEXP _torch_enquos0(SEXP envSEXP) {
@@ -52275,6 +52317,10 @@ static const R_CallMethodDef CallEntries[] = {
     {"_torch_cpp_generator_current_seed", (DL_FUNC) &_torch_cpp_generator_current_seed, 1},
     {"_torch_cpp_generator_set_current_seed", (DL_FUNC) &_torch_cpp_generator_set_current_seed, 2},
     {"_torch_cpp_torch_manual_seed", (DL_FUNC) &_torch_cpp_torch_manual_seed, 1},
+    {"_torch_cpp_torch_get_rng_state", (DL_FUNC) &_torch_cpp_torch_get_rng_state, 0},
+    {"_torch_cpp_torch_set_rng_state", (DL_FUNC) &_torch_cpp_torch_set_rng_state, 1},
+    {"_torch_cpp_torch_cuda_get_rng_state", (DL_FUNC) &_torch_cpp_torch_cuda_get_rng_state, 1},
+    {"_torch_cpp_torch_cuda_set_rng_state", (DL_FUNC) &_torch_cpp_torch_cuda_set_rng_state, 2},
     {"_torch_enquos0", (DL_FUNC) &_torch_enquos0, 1},
     {"_torch_evaluate_slices", (DL_FUNC) &_torch_evaluate_slices, 2},
     {"_torch_Tensor_slice", (DL_FUNC) &_torch_Tensor_slice, 4},
