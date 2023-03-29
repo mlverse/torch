@@ -220,8 +220,10 @@ LANTERN_OPTIONAL_DECLS(string_view)
   HOST_API void * lantern_Dtype_int64() {LANTERN_CHECK_LOADED void * ret = _lantern_Dtype_int64(); LANTERN_HOST_HANDLER return ret;}
   LANTERN_API void *(LANTERN_PTR _lantern_Dtype_bool)();
   HOST_API void * lantern_Dtype_bool() {LANTERN_CHECK_LOADED void * ret = _lantern_Dtype_bool(); LANTERN_HOST_HANDLER return ret;}
-  LANTERN_API const char *(LANTERN_PTR _lantern_Dtype_type)(void *dtype);
-  HOST_API const char * lantern_Dtype_type(void *dtype) {LANTERN_CHECK_LOADED const char * ret = _lantern_Dtype_type(dtype); LANTERN_HOST_HANDLER return ret;}
+  LANTERN_API void *(LANTERN_PTR _lantern_Dtype_byte)();
+  HOST_API void * lantern_Dtype_byte() {LANTERN_CHECK_LOADED void * ret = _lantern_Dtype_byte(); LANTERN_HOST_HANDLER return ret;}
+  LANTERN_API void *(LANTERN_PTR _lantern_Dtype_type)(void *dtype);
+  HOST_API void * lantern_Dtype_type(void *dtype) {LANTERN_CHECK_LOADED void * ret = _lantern_Dtype_type(dtype); LANTERN_HOST_HANDLER return ret;}
   LANTERN_API void *(LANTERN_PTR _lantern_vector_int64_t)(int64_t *x, size_t x_size);
   HOST_API void * lantern_vector_int64_t(int64_t *x, size_t x_size) {LANTERN_CHECK_LOADED void * ret = _lantern_vector_int64_t(x, x_size); LANTERN_HOST_HANDLER return ret;}
   LANTERN_API void *(LANTERN_PTR _lantern_vector_double)(double *x, size_t x_size);
@@ -9707,6 +9709,7 @@ bool lanternInit(const std::string &libPath, std::string *pError)
   LOAD_SYMBOL(_lantern_Dtype_cfloat);
   LOAD_SYMBOL(_lantern_Dtype_cdouble);
   LOAD_SYMBOL(_lantern_Dtype_bool);
+  LOAD_SYMBOL(_lantern_Dtype_byte);
   LOAD_SYMBOL(_lantern_Dtype_type);
   LOAD_SYMBOL(_lantern_vector_int64_t);
   LOAD_SYMBOL(_lantern_optional_vector_int64_t_delete);

@@ -826,7 +826,7 @@ BEGIN_RCPP
 END_RCPP
 }
 // cpp_dtype_to_string
-std::string cpp_dtype_to_string(XPtrTorchDtype dtype);
+torch::string cpp_dtype_to_string(XPtrTorchDtype dtype);
 RcppExport SEXP _torch_cpp_dtype_to_string(SEXP dtypeSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
