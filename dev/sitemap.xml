@@ -1486,6 +1486,9 @@
     <loc>https://torch.mlverse.org/docs/dev/reference/torch_ger.html</loc>
   </url>
   <url>
+    <loc>https://torch.mlverse.org/docs/dev/reference/torch_get_rng_state.html</loc>
+  </url>
+  <url>
     <loc>https://torch.mlverse.org/docs/dev/reference/torch_greater.html</loc>
   </url>
   <url>
