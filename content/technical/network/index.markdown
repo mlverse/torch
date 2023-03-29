@@ -72,7 +72,7 @@ y <- x[, 1, drop = FALSE] * 0.2 - x[, 2, drop = FALSE] * 1.3 - x[, 3, drop = FAL
 
 `torch_randn()` is one of several functions used to initialize tensors of arbitrary shape. Seeing how we're at it, there is another place where we need to do something like this. With neural networks, it's all about the *weights*: those updateable parameters that determine how an intermediate result calculated by layer `n`'s units influences the units in layer `n+1`.
 
-There are two types of weights. The first, the one we often restrict the term *weights* to, is different for each connection. So if we want a hidden layer with 32 units, we need a weight matrix of shape 100 (number of observations) by 32.
+There are two types of weights. The first, the one we often restrict the term *weights* to, is different for each connection. So if we want a hidden layer with 32 units, we need a weight matrix of shape 3 (number of input features) by 32.
 
 That matrix will be updated during training, but we need to initialize it, and that, again, is accomplished using `torch_randn()`:
 
