@@ -73,7 +73,6 @@ void *_lantern_Tensor_permute(void *self, void *dims) {
 void *_lantern_Tensor_contiguous(void *self) {
   LANTERN_FUNCTION_START
   torch::Tensor x = from_raw::Tensor(self);
-  ;
   return make_raw::Tensor(x.contiguous());
   LANTERN_FUNCTION_END
 }
@@ -81,7 +80,6 @@ void *_lantern_Tensor_contiguous(void *self) {
 void *_lantern_Tensor_to(void *self, void *options) {
   LANTERN_FUNCTION_START
   torch::Tensor x = from_raw::Tensor(self);
-  ;
   auto y = from_raw::TensorOptions(options);
   return make_raw::Tensor(x.to(y));
   LANTERN_FUNCTION_END
@@ -90,7 +88,6 @@ void *_lantern_Tensor_to(void *self, void *options) {
 void *_lantern_Tensor_set_requires_grad(void *self, bool requires_grad) {
   LANTERN_FUNCTION_START
   torch::Tensor x = from_raw::Tensor(self);
-  ;
   return make_raw::Tensor(x.set_requires_grad(requires_grad));
   LANTERN_FUNCTION_END
 }
@@ -98,7 +95,6 @@ void *_lantern_Tensor_set_requires_grad(void *self, bool requires_grad) {
 double *_lantern_Tensor_data_ptr_double(void *self) {
   LANTERN_FUNCTION_START
   torch::Tensor x = from_raw::Tensor(self);
-  ;
   return x.data_ptr<double>();
   LANTERN_FUNCTION_END
 }
@@ -106,7 +102,6 @@ double *_lantern_Tensor_data_ptr_double(void *self) {
 uint8_t *_lantern_Tensor_data_ptr_uint8_t(void *self) {
   LANTERN_FUNCTION_START
   torch::Tensor x = from_raw::Tensor(self);
-  ;
   return x.data_ptr<uint8_t>();
   LANTERN_FUNCTION_END
 }
@@ -114,7 +109,6 @@ uint8_t *_lantern_Tensor_data_ptr_uint8_t(void *self) {
 int64_t *_lantern_Tensor_data_ptr_int64_t(void *self) {
   LANTERN_FUNCTION_START
   torch::Tensor x = from_raw::Tensor(self);
-  ;
   return x.data_ptr<int64_t>();
   LANTERN_FUNCTION_END
 }
@@ -122,7 +116,6 @@ int64_t *_lantern_Tensor_data_ptr_int64_t(void *self) {
 int32_t *_lantern_Tensor_data_ptr_int32_t(void *self) {
   LANTERN_FUNCTION_START
   torch::Tensor x = from_raw::Tensor(self);
-  ;
   return x.data_ptr<int32_t>();
   LANTERN_FUNCTION_END
 }
@@ -130,7 +123,6 @@ int32_t *_lantern_Tensor_data_ptr_int32_t(void *self) {
 int16_t *_lantern_Tensor_data_ptr_int16_t(void *self) {
   LANTERN_FUNCTION_START
   torch::Tensor x = from_raw::Tensor(self);
-  ;
   return x.data_ptr<int16_t>();
   LANTERN_FUNCTION_END
 }
@@ -138,7 +130,6 @@ int16_t *_lantern_Tensor_data_ptr_int16_t(void *self) {
 bool *_lantern_Tensor_data_ptr_bool(void *self) {
   LANTERN_FUNCTION_START
   torch::Tensor x = from_raw::Tensor(self);
-  ;
   return x.data_ptr<bool>();
   LANTERN_FUNCTION_END
 }
