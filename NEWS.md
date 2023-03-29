@@ -12,6 +12,7 @@
 - Dataloaders now preserve the batch dimension when `batch_size=1` is used. (#994)
 - Added support for automatic mixed precision (#996)
 - Added functionality to temporarily modify the torch seed. (#999)
+- Support for creating torch tensors from raw vectors and back. (#1003)
 
 # torch 0.9.1
 
