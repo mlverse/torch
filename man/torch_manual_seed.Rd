@@ -2,13 +2,37 @@
 % Please edit documentation in R/generator.R
 \name{torch_manual_seed}
 \alias{torch_manual_seed}
+\alias{local_torch_manual_seed}
+\alias{with_torch_manual_seed}
 \title{Sets the seed for generating random numbers.}
 \usage{
 torch_manual_seed(seed)
+
+local_torch_manual_seed(seed, .env = parent.frame())
+
+with_torch_manual_seed(code, ..., seed)
 }
 \arguments{
 \item{seed}{integer seed.}
+
+\item{.env}{environment that will take the modifications from manual_seed.}
+
+\item{code}{expression to run in the context of the seed}
+
+\item{...}{unused currently.}
 }
 \description{
 Sets the seed for generating random numbers.
+}
+\section{Functions}{
+\itemize{
+\item \code{local_torch_manual_seed()}: Modifies the torch seed in the environment scope.
+
+\item \code{with_torch_manual_seed()}: A with context to change the seed during the function execution.
+
+}}
+\note{
+Currently the \code{local_torch_manual_seed} and \code{with_torch_manual_seed} won't
+work with Tensors in the MPS device. You can sample the tensors on CPU and
+move them to MPS if reproducibility is required.
 }

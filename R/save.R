@@ -147,7 +147,7 @@ torch_load_tensor <- function(obj, device = NULL) {
   } else {
     base64 <- FALSE
   }
-  Tensor$new(ptr = cpp_tensor_load(obj$values, device, base64))
+  cpp_tensor_load(obj$values, device, base64)
 }
 
 load_tensor_from_raw <- function(x, device) {

@@ -34,3 +34,23 @@ void cpp_torch_manual_seed(std::string seed) {
 
   lantern_manual_seed(value);
 }
+
+// [[Rcpp::export]]
+torch::Tensor cpp_torch_get_rng_state () {
+  return torch::Tensor(lantern_cpu_get_rng_state());
+}
+
+// [[Rcpp::export]]
+void cpp_torch_set_rng_state (torch::Tensor state) {
+  lantern_cpu_set_rng_state(state.get());
+}
+
+// [[Rcpp::export]]
+torch::Tensor cpp_torch_cuda_get_rng_state (int device) {
+  return torch::Tensor(lantern_cuda_get_rng_state(device));
+}
+
+// [[Rcpp::export]]
+void cpp_torch_cuda_set_rng_state (int device, torch::Tensor state) {
+  lantern_cuda_set_rng_state(device, state);
+}

@@ -145,6 +145,15 @@ reference:
       - local_autocast
       - with_autocast
       - starts_with("cuda_amp_")
+  - title: Random numbers
+    contents:
+      - torch_manual_seed
+      - with_torch_manual_seed
+      - local_torch_manual_seed
+      - torch_get_rng_state
+      - torch_set_rng_state
+      - cuda_get_rng_state
+      - cuda_set_rng_state
   - title: Linear Algebra
     contents:
       - starts_with("linalg_")

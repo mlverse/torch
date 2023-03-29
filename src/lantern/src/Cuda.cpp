@@ -217,3 +217,17 @@ void _lantern_cuda_empty_cache () {
 #endif
   LANTERN_FUNCTION_END_VOID
 }
+
+void _lantern_cuda_set_rng_state (int device, void* state) {
+  LANTERN_FUNCTION_START
+  auto gen = at::detail::getCUDAHooks().getDefaultCUDAGenerator(device);
+  gen.set_state(from_raw::Tensor(state));
+  LANTERN_FUNCTION_END_VOID
+}
+
+void* _lantern_cuda_get_rng_state (int device) {
+  LANTERN_FUNCTION_START
+  auto gen = at::detail::getCUDAHooks().getDefaultCUDAGenerator(device);
+  return make_raw::Tensor(gen.get_state());
+  LANTERN_FUNCTION_END
+}
