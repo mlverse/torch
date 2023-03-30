@@ -244,9 +244,9 @@ void* fixme_new_dimname(const char* x) {
 std::string operator_string_string(const XPtrTorchstring* self) {                                  
   static std::string (*fn)(const XPtrTorchstring*) = NULL;                       
   if (fn == NULL) {                                            
-    fn = (std::string(*)(const XPtrTorchstring*))R_GetCCallable("torch", operator_string_string); 
-  }                                                            
-  return fn(self);                                             
+    fn = (std::string(*)(const XPtrTorchstring*))R_GetCCallable("torch", "operator_string_string"); 
+  }
+  return fn(self);
 }
 
 #endif  // TORCH_IMPORTS
