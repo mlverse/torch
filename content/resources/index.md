@@ -2,7 +2,6 @@
 title: resources
 ---
 
-## torch
 
 If you're new to `torch`, deep learning, or both, we recommend checking out our comprehensive book [Deep Learning and Scientific Computing with R `torch`](https://skeydan.github.io/Deep-Learning-and-Scientific-Computing-with-R-torch/), available both online and in [print](https://www.taylorfrancis.com/books/mono/10.1201/9781003275923/deep-learning-scientific-computing-torch-sigrid-keydana) form from CRC Press. It covers the basics (tensors, autograd, modules...), then works through popular deep-learning applications such as image segmentation, regression on tabular data, sound classification, and time-series forecasting. (And there's more -- see below.)
 
