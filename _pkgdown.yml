@@ -47,6 +47,8 @@ navbar:
         href: articles/memory-management.html
       - text: Building locally
         href: articles/modifying-source-code.html
+      - text: Automatic Mixed Precision
+        href: articles/amp.html
   examples:
     text: Examples
     menu:
