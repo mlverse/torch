@@ -91,6 +91,7 @@ local_autocast <- function(device_type, dtype = NULL, enabled = TRUE, cache_enab
 }
 
 #' @describeIn local_autocast A with context for automatic mixed precision.
+#' @export
 with_autocast <- function(code, ... , device_type, dtype = NULL, enabled = TRUE, cache_enabled = NULL) {
   local_autocast(device_type, dtype = dtype, enabled = enabled, cache_enabled = cache_enabled)
   force(code)

@@ -6,7 +6,7 @@ title: "Automatic Mixed Precision"
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
-  eval = identical(Sys.getenv("TORCH_TEST", unset = "0"), "1") && cuda_is_available(),
+  eval = identical(Sys.getenv("TORCH_TEST", unset = "0"), "1") && torch::cuda_is_available(),
   purl = FALSE
 )
 ```
@@ -96,7 +96,7 @@ opt <- optim_sgd(net$parameters, lr=0.1)
 
 for (epoch in seq_len(epochs)) {
   for (i in seq_along(data)) {
-    with_autocast({
+    with_autocast(device_type = "cuda", {
       output <- net(data[[i]])
       loss <- loss_fn(output, targets[[i]])  
     })
@@ -121,7 +121,7 @@ scaler <- cuda_amp_grad_scaler()
 
 for (epoch in seq_len(epochs)) {
   for (i in seq_along(data)) {
-    with_autocast({
+    with_autocast(device_type = "cuda", {
       output <- net(data[[i]])
       loss <- loss_fn(output, targets[[i]])  
     })
@@ -139,7 +139,7 @@ for (epoch in seq_len(epochs)) {
 We now write a simple function that allows us to quickly switch between feature 
 so we can benchmark AMP:
 
-```{r}
+```{r, eval=FALSE}
 run <- function(autocast, scale) {
   loss_fn <- nn_mse_loss()$cuda()
   net <- make_model(in_size, out_size, num_layers)
@@ -148,7 +148,7 @@ run <- function(autocast, scale) {
   
   for (epoch in seq_len(epochs)) {
     for (i in seq_along(data)) {
-      with_autocast(enabled = autocast, {
+      with_autocast(enabled = autocast, device_type = "cuda", {
         output <- net(data[[i]])
         loss <- loss_fn(output, targets[[i]])  
       })
@@ -162,7 +162,14 @@ run <- function(autocast, scale) {
   loss$item()
 }
 
+
 system.time({run(autocast = FALSE, scale = FALSE)})
+#>    user  system elapsed 
+#>   3.967   1.644   5.621
 system.time({run(autocast = TRUE, scale = FALSE)})
+#>    user  system elapsed 
+#>   1.857   0.591   2.462
 system.time({run(autocast = TRUE, scale = TRUE)})
+#>    user  system elapsed 
+#>   3.434   0.114   3.550
 ```
