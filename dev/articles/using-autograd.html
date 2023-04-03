@@ -73,6 +73,7 @@
   <div class="dropdown-menu" aria-labelledby="dropdown-advanced">
     <a class="dropdown-item" href="../articles/memory-management.html">Memory management</a>
     <a class="dropdown-item" href="../articles/modifying-source-code.html">Building locally</a>
+    <a class="dropdown-item" href="../articles/amp.html">Automatic Mixed Precision</a>
   </div>
 </li>
 <li class="nav-item">
@@ -297,26 +298,26 @@ number of lines (that did manual backprop) are gone:</p>
 <span>    <span class="op">}</span><span class="op">)</span></span>
 <span>    </span>
 <span><span class="op">}</span></span>
-<span><span class="co">#&gt; 10 60.82801 </span></span>
-<span><span class="co">#&gt; 20 53.64266 </span></span>
-<span><span class="co">#&gt; 30 47.55349 </span></span>
-<span><span class="co">#&gt; 40 42.37402 </span></span>
-<span><span class="co">#&gt; 50 37.96648 </span></span>
-<span><span class="co">#&gt; 60 34.20585 </span></span>
-<span><span class="co">#&gt; 70 30.98785 </span></span>
-<span><span class="co">#&gt; 80 28.22612 </span></span>
-<span><span class="co">#&gt; 90 25.85182 </span></span>
-<span><span class="co">#&gt; 100 23.80787 </span></span>
-<span><span class="co">#&gt; 110 22.03756 </span></span>
-<span><span class="co">#&gt; 120 20.49904 </span></span>
-<span><span class="co">#&gt; 130 19.15808 </span></span>
-<span><span class="co">#&gt; 140 17.98616 </span></span>
-<span><span class="co">#&gt; 150 16.95761 </span></span>
-<span><span class="co">#&gt; 160 16.04887 </span></span>
-<span><span class="co">#&gt; 170 15.24856 </span></span>
-<span><span class="co">#&gt; 180 14.54082 </span></span>
-<span><span class="co">#&gt; 190 13.91079 </span></span>
-<span><span class="co">#&gt; 200 13.34648</span></span></code></pre></div>
+<span><span class="co">#&gt; 10 57.76329 </span></span>
+<span><span class="co">#&gt; 20 50.77866 </span></span>
+<span><span class="co">#&gt; 30 44.93813 </span></span>
+<span><span class="co">#&gt; 40 40.02607 </span></span>
+<span><span class="co">#&gt; 50 35.8766 </span></span>
+<span><span class="co">#&gt; 60 32.35508 </span></span>
+<span><span class="co">#&gt; 70 29.35143 </span></span>
+<span><span class="co">#&gt; 80 26.77988 </span></span>
+<span><span class="co">#&gt; 90 24.56623 </span></span>
+<span><span class="co">#&gt; 100 22.65426 </span></span>
+<span><span class="co">#&gt; 110 20.99423 </span></span>
+<span><span class="co">#&gt; 120 19.54468 </span></span>
+<span><span class="co">#&gt; 130 18.27676 </span></span>
+<span><span class="co">#&gt; 140 17.16581 </span></span>
+<span><span class="co">#&gt; 150 16.18635 </span></span>
+<span><span class="co">#&gt; 160 15.31331 </span></span>
+<span><span class="co">#&gt; 170 14.53212 </span></span>
+<span><span class="co">#&gt; 180 13.82805 </span></span>
+<span><span class="co">#&gt; 190 13.19162 </span></span>
+<span><span class="co">#&gt; 200 12.61374</span></span></code></pre></div>
 <p>We still manually compute the forward pass, and we still manually
 update the weights. In the last two chapters of this section, we’ll see
 how these parts of the logic can be made more modular and reusable, as

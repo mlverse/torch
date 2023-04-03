@@ -58,6 +58,7 @@ uniform distribution."><meta name="robots" content="noindex"><!-- mathjax --><sc
   <div class="dropdown-menu" aria-labelledby="dropdown-advanced">
     <a class="dropdown-item" href="../articles/memory-management.html">Memory management</a>
     <a class="dropdown-item" href="../articles/modifying-source-code.html">Building locally</a>
+    <a class="dropdown-item" href="../articles/amp.html">Automatic Mixed Precision</a>
   </div>
 </li>
 <li class="active nav-item">
@@ -133,9 +134,9 @@ or 'leaky_relu' (default).</p></dd>
 <span class="r-in"><span><span class="fu">nn_init_kaiming_uniform_</span><span class="op">(</span><span class="va">w</span>, mode <span class="op">=</span> <span class="st">"fan_in"</span>, nonlinearity <span class="op">=</span> <span class="st">"leaky_relu"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">}</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> torch_tensor</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> -0.2804  0.8372  1.0593  0.1826 -0.8675</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> -0.0560 -0.5519 -0.1463 -0.8216 -0.2883</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> -1.0254  1.0770  0.2859 -0.1058 -0.7083</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> -0.4213 -0.1164 -0.4016  0.8093 -0.1275</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  1.0125  0.2585 -0.5292  0.8129  0.2615</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> -0.3951 -0.3779  0.3273  1.0865 -0.9289</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [ CPUFloatType{3,5} ]</span>
 </code></pre></div>
     </div>

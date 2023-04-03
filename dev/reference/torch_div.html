@@ -54,6 +54,7 @@
   <div class="dropdown-menu" aria-labelledby="dropdown-advanced">
     <a class="dropdown-item" href="../articles/memory-management.html">Memory management</a>
     <a class="dropdown-item" href="../articles/modifying-source-code.html">Building locally</a>
+    <a class="dropdown-item" href="../articles/amp.html">Automatic Mixed Precision</a>
   </div>
 </li>
 <li class="active nav-item">
@@ -171,10 +172,10 @@ by zero leads to undefined behavior.</p>
 <span class="r-in"><span><span class="fu">torch_div</span><span class="op">(</span><span class="va">a</span>, <span class="va">b</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">}</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> torch_tensor</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  4.8185  0.3813 -1.6971 -2.0802</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> -9.7720  2.8862  2.3936  1.5107</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> -17.2061  1.5593  0.8595  1.1711</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  9.7290  0.1271 -1.7283  2.6413</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  -1.6543  -0.0442   1.7849  -1.7118</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  -0.4230   0.3045  -0.6204  32.3080</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  -2.2043   0.5419   0.0241  32.1234</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   0.1092  -0.1659   2.1302 -46.9627</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [ CPUFloatType{4,4} ]</span>
 </code></pre></div>
     </div>

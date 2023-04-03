@@ -54,6 +54,7 @@
   <div class="dropdown-menu" aria-labelledby="dropdown-advanced">
     <a class="dropdown-item" href="../articles/memory-management.html">Memory management</a>
     <a class="dropdown-item" href="../articles/modifying-source-code.html">Building locally</a>
+    <a class="dropdown-item" href="../articles/amp.html">Automatic Mixed Precision</a>
   </div>
 </li>
 <li class="active nav-item">
@@ -157,34 +158,34 @@ tensor, <code>out</code> will be an \((j \times k \times n \times p)\) tensor.</
 <span class="r-in"><span><span class="op">}</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> torch_tensor</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> (1,.,.) = </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   2.6544  0.8534  0.5055 -1.1260 -0.5652</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   2.6843 -0.0976  1.8373  0.3193 -0.1951</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   3.4881 -6.9103  1.7585  5.0927 -1.3938</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   1.2107 -1.9933  0.7064 -1.2436  1.1962</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   0.2281  0.3725 -0.5968  1.4756 -0.9518</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  -0.8770 -3.8745  0.6301 -1.7164 -0.7970</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> (2,.,.) = </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  -0.6530 -0.5496  2.1626  1.8668  1.4130</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   1.3238 -1.2943  0.1054  0.8401  1.2245</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   1.0576  1.3070 -0.6434 -1.6871 -0.8164</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   0.6345 -3.6043  0.6638 -1.3351  0.1807</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  -1.9993  0.9825 -0.3396 -0.0906 -0.8834</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  -1.7139  5.1907 -0.4566  1.7233 -1.7149</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> (3,.,.) = </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  -1.3206  2.2534 -0.2941 -1.3930  1.1111</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   0.8499 -0.2769 -0.6476 -0.4427 -0.8649</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   1.4153  0.5494  0.4434 -0.5925 -0.3931</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  -3.8278  3.0602 -1.3770  0.6358 -1.1844</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   0.1675  1.5291  0.0458  0.0572  0.6080</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  -0.8358 -6.0343  0.4095 -1.8316 -1.0100</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> (4,.,.) = </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   1.5915  1.3026  1.9420 -0.1758  1.8047</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   0.2836 -3.7648  1.0491  3.0825 -2.0550</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   0.8181 -0.9581  0.1603  0.4519 -1.2739</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  -0.9867  1.8693 -0.6497 -0.0826  1.1107</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   0.8244 -3.0697  0.7470 -0.6267 -0.7570</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  -1.8198 -0.6801 -0.4966  0.3534 -1.8143</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> (5,.,.) = </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   0.1658  0.4304  0.9593  0.0775 -0.4402</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   1.9748 -0.0932 -0.8949 -0.8027  0.7990</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   2.9103 -0.2078  1.1529 -0.0974 -0.9523</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  -0.9320 -0.1237 -0.1582 -0.7247  0.5016</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   1.3752 -4.4394  1.2690 -1.4469 -0.3562</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  -3.1924  4.9318 -1.3515  0.4987  0.4153</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> (6,.,.) = </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  -2.2809  1.5405 -2.7992 -2.0800 -0.3836</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   2.8946 -6.0075  1.0883  4.1974 -1.5287</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  -1.3302 -0.9994  0.2399  1.1511 -0.5887</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  -0.9969 -3.0731  0.3249 -0.7480 -1.6434</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   0.6487 -1.1491  0.0053  0.0187  0.1703</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   1.7757 -0.8563  0.6406  0.4489 -0.4785</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ... [the output was truncated (use n=-1 to disable)]</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [ CPUFloatType{10,3,5} ]</span>
