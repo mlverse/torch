@@ -219,7 +219,7 @@ lantern_url <- function() {
     if (!nzchar(remote_sha)) {
       remote_sha <- try(desc::desc(package = "torch")$get("RemoteSha"))
       if (inherits(remote_sha, "try-error")) {
-        remote_sha <- desc::desc(file = "DESCRIPTION")$get("RemoteSha")
+        remote_sha <- NA
       }
     }
     
