@@ -254,7 +254,7 @@ lantern_url <- function() {
 }
 
 get_package_version <- function() {
-  try(version <- utils::packageVersion("torch"))
+  version <- try(utils::packageVersion("torch"))
   if (!inherits(version, "try-error")) return(as.character(version))
   # assume there's a DESCRIPTION file in current directory
   # used so one can install without the libs without having torch installed.
