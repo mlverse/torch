@@ -5,7 +5,7 @@ PKG_PATH="$R_PACKAGE_DIR"
 if [ "$TORCH_CONFIG_INSTALL" == "1" ]; then
   echo "Installing torch deps, path: $PKG_PATH"
   export TORCH_HOME="$PKG_PATH"
-  COMMAND="source('./R/install.R'); Sys.setenv(TORCH_HOME='$PKG_ENV'); install_torch()"
+  COMMAND="source('./R/install.R'); Sys.setenv(TORCH_HOME='$PKG_PATH'); install_torch()"
   echo $COMMAND
   "${R_HOME}/bin/Rscript" -e "$COMMAND"
 fi
