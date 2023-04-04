@@ -190,7 +190,7 @@ lantern_url <- function() {
   # Otherwise we construct it from available information
   # file name we want to download has the following format:
   # lantern-<pkg-version>+<cpu|cu113>+<arch>+<precxx11>-<os>.zip
-  pkg_version <- as.character(utils::packageVersion("torch"))
+  pkg_version <- get_package_version()
   kind <- installation_kind()
   arch <- architecture()
   precxx11 <- precxx11abi()
@@ -247,6 +247,14 @@ lantern_url <- function() {
   ))
   
   final_url
+}
+
+get_package_version <- function() {
+  try(version <- utils::packageVersion("torch"))
+  if (!inherits(version, "try-error")) return(as.character(version))
+  # assume there's a DESCRIPTION file in current directory
+  # used so one can install without the libs without having torch installed.
+  as.character(read.dcf("DESCRIPTION", fields = "Version"))
 }
 
 os_name <- function() {
