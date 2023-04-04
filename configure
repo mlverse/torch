@@ -7,8 +7,8 @@ if [ "$TORCH_CONFIG_INSTALL" == "1" ]; then
   if test -z TORCH_HOME; then
     TORCH_HOME=$PKG_PATH
   fi
-  echo ls $PKG_PATH/R
-  "${R_HOME}/bin/Rscript" -e "source('$PKG_PATH/R/install.R'); install_torch()"
+  echo ls ./R
+  "${R_HOME}/bin/Rscript" -e "source('./R/install.R'); install_torch()"
 fi
 
 if ! test -z $DEVTOOLS_LOAD; then
