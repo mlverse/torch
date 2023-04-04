@@ -27,7 +27,8 @@ globalVariables(c("..", "self", "private", "N"))
   autoinstall <- autoinstall || (Sys.getenv("TORCH_INSTALL", unset = 2) == "1")
   
   # We can auto install in Posit Connect - if TORCH_INSTALL is not set to zero
-  is_connect <- Sys.getenv("R_CONFIG_ACTIVE") %in% c("rsconnect", "shinyapps")
+  is_connect <- (Sys.getenv("R_CONFIG_ACTIVE") %in% c("rsconnect", "shinyapps")) ||
+    (Sys.getenv("RSTUDIO_PRODUCT") == "CONNECT")
   not_install <- Sys.getenv("TORCH_INSTALL", unset = "2") == "0"
   autoinstall <- autoinstall || (is_connect && !not_install)
   
