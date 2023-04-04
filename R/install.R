@@ -145,6 +145,7 @@ lib_is_installed <- function(libname, install_path) {
 
 inst_path <- function() {
   install_path <- Sys.getenv("TORCH_HOME")
+  installer_message("The TORCH_HOME is: {install_path}")
   if (nzchar(install_path)) return(install_path)
   system.file("", package = "torch")
 }
