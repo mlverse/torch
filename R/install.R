@@ -124,9 +124,9 @@ install_lib <- function(libname, url, reinstall = FALSE) {
     return(invisible(TRUE))
   } 
   
-  rlang::abort(c(
+  cli::cli_abort(c(
     "Installation failed.",
-    "Could not install {.strong {libname}} from {.val {url}}."
+    "Could not install {.strong {libname}} from {.val {url} into {.val {inst_path}}}."
   ))
 }
 
