@@ -217,7 +217,10 @@ lantern_url <- function() {
   
     remote_sha <- Sys.getenv("TORCH_COMMIT_SHA", "")
     if (!nzchar(remote_sha)) {
-      remote_sha <- desc::desc(package = "torch")$get("RemoteSha")  
+      remote_sha <- try(desc::desc(package = "torch")$get("RemoteSha"))
+      if (inherits(remote_sha, "try-error")) {
+        remote_sha <- desc::desc(file = "DESCRIPTION")$get("RemoteSha")
+      }
     }
     
     if (is.na(remote_sha)) {
@@ -250,7 +253,7 @@ lantern_url <- function() {
 }
 
 get_package_version <- function() {
-  try(version <- utils::packageVersion("torch"))
+  try(version <- utils::packageVersion("torch"), quiet = TRUE)
   if (!inherits(version, "try-error")) return(as.character(version))
   # assume there's a DESCRIPTION file in current directory
   # used so one can install without the libs without having torch installed.
