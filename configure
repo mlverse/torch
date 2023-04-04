@@ -5,10 +5,10 @@ PKG_PATH="$R_PACKAGE_DIR"
 if [ "$TORCH_CONFIG_INSTALL" == "1" ]; then
   echo "Installing torch deps, path: $PKG_PATH"
   if test -z TORCH_HOME; then
-    export TORCH_HOME="$PKG_PATH"
+    TORCH_HOME="$PKG_PATH"
   fi
   echo ls ./R
-  "${R_HOME}/bin/Rscript" -e "source('./R/install.R'); install_torch()"
+  TORCH_HOME="$TORCH_HOME" "${R_HOME}/bin/Rscript" -e "source('./R/install.R'); install_torch()"
 fi
 
 if ! test -z $DEVTOOLS_LOAD; then
