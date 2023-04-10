@@ -1,18 +1,29 @@
 # torch (development version)
 
-- Provide pre-built binaries for torch using a GH Action workflow. (#975)
-- Large refactoring of the build system. (#964)
-- Use native symbol registration instead of dynamic lookup. (#976)
+## Breaking changes
+
 - Updated to LibTorch v1.13.1 (#977)
+
+## New features
+
+- Provide pre-built binaries for torch using a GH Action workflow. (#975)
 - Added `nn_silu()` and `nnf_silu()`. (#985)
 - Added support for deep cloning `nn_module`s. (#986)
 - Added `local_no_grad()` and `local_enable_grad()` as alternatives for the `with_` functions. (#990)
 - Added `optim_adamw` optimizer. (#991)
-- Returning lists of tensors to R is now much faster. (#993)
-- Dataloaders now preserve the batch dimension when `batch_size=1` is used. (#994)
 - Added support for automatic mixed precision (#996)
 - Added functionality to temporarily modify the torch seed. (#999)
 - Support for creating torch tensors from raw vectors and back. (#1003)
+
+## Bug fixes
+
+- Dataloaders now preserve the batch dimension when `batch_size=1` is used. (#994)
+
+## Internal
+
+- Large refactoring of the build system. (#964)
+- Use native symbol registration instead of dynamic lookup. (#976)
+- Returning lists of tensors to R is now much faster. (#993)
 
 # torch 0.9.1
 
