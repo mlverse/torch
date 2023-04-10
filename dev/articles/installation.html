@@ -238,7 +238,7 @@ chosen below.</p>
 following:</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">options</a></span><span class="op">(</span>timeout <span class="op">=</span> <span class="fl">600</span><span class="op">)</span> <span class="co"># increasing timeout is recommended since we will be downloading a 2GB file.</span></span>
-<span><span class="va">kind</span> <span class="op">&lt;-</span> <span class="st">"cu113"</span> <span class="co"># "cpu", "cu113" are the only currently supported.</span></span>
+<span><span class="va">kind</span> <span class="op">&lt;-</span> <span class="st">"cu117"</span> <span class="co"># "cpu", "cu117" are the only currently supported.</span></span>
 <span><span class="va">version</span> <span class="op">&lt;-</span> <span class="st">"0.9.1.9000"</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">options</a></span><span class="op">(</span>repos <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
 <span>  torch <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sprintf.html" class="external-link">sprintf</a></span><span class="op">(</span><span class="st">"https://storage.googleapis.com/torch-lantern-builds/packages/%s/%s/"</span>, <span class="va">kind</span>, <span class="va">version</span><span class="op">)</span>,</span>
@@ -273,13 +273,15 @@ intend to install torch on, last resort is to install Torch and Lantern
 library from files. This is done in 3 steps :</p>
 <p>1- get the download URLs of the files.</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/install_torch_from_file.html">get_install_libs_url</a></span><span class="op">(</span>type <span class="op">=</span> <span class="st">"10.2"</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/install_torch_from_file.html">get_install_libs_url</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <p>2- save those files into the machine filesystem. We will use
 <code>/tmp/</code> here as an example .</p>
 <p>3- install torch from files</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/install_torch_from_file.html">install_torch_from_file</a></span><span class="op">(</span>libtorch <span class="op">=</span> <span class="st">"file:///tmp/libtorch-cxx11-abi-shared-with-deps-1.7.1%2Bcu101.zip"</span>,</span>
-<span>                        liblantern <span class="op">=</span> <span class="st">"file:///tmp/Linux-gpu-101.zip"</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="co"># then after making both files available into /tmp/</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/Sys.setenv.html" class="external-link">Sys.setenv</a></span><span class="op">(</span>TORCH_URL<span class="op">=</span><span class="st">"/tmp/libtorch-v1.13.1.zip"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/Sys.setenv.html" class="external-link">Sys.setenv</a></span><span class="op">(</span>LANTERN_URL<span class="op">=</span><span class="st">"/tmp/lantern-0.9.1.9001+cpu+arm64-Darwin.zip"</span><span class="op">)</span></span>
+<span><span class="fu">torch</span><span class="fu">::</span><span class="fu"><a href="../reference/install_torch.html">install_torch</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 </div>
 </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
