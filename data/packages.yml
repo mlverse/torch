@@ -22,8 +22,8 @@ torchvision:
 torchaudio:
   weight: 20
   desc: 'torchaudio is an extension for torch providing audio loading, transformations, common architectures for signal processing, pre-trained weights and access to commonly used datasets.'
-  url_git: https://github.com/curso-r/torchaudio
-  url_docs: https://curso-r.github.io/torchaudio
+  url_git: https://github.com/mlverse/torchaudio
+  url_docs: https://mlverse.github.io/torchaudio/
   url_cran: https://cloud.r-project.org/web/packages/torchaudio/index.html
   name: torchaudio
 etm:

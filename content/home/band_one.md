@@ -8,7 +8,7 @@ col1:
 col2:
   row2: 
     title: torchaudio
-    url: https://curso-r.github.io/torchaudio
+    url: https://mlverse.github.io/torchaudio/
   row3: torchvision
 title: torch for R
 ---
