@@ -531,10 +531,19 @@ get_install_libs_url <- function(version = NA, type = NA) {
   if (!is.na(version)) {
     cli::cli_abort("It's not possible to configure the libtorch version.")
   }
-  list(
+  out <- list(
     libtorch = libtorch_url(), 
     liblantern = lantern_url()
   )
+  
+  if (interactive()) {
+    cli::cli_inform(c(
+      "Follow the links to download the dependencies, then set the {.envvar TORCH_URL} and {.envvar LANTERN_URL} env vars to the file paths.",
+      "LibTorch: {.url {out$libtorch}}",
+      "LibLantern: {.url {out$liblantern}}"
+    ))
+  }
+  invisible(out)
 }
 
 #' Install Torch from files
@@ -556,12 +565,11 @@ get_install_libs_url <- function(version = NA, type = NA) {
 #' @examples
 #' \dontrun{
 #' # on a linux CPU platform 
-#' get_install_libs_url(type = "cpu")
+#' get_install_libs_url()
 #' # then after making both files available into /tmp/
-#' install_torch_from_file(
-#'   libtorch = "file:////tmp/libtorch-cxx11-abi-shared-with-deps-1.12.1%2Bcpu.zip",
-#'   liblantern = "file:////tmp/Linux-cpu.zip"
-#' )
+#' Sys.setenv(TORCH_URL="/tmp/libtorch-v1.13.1.zip")
+#' Sys.setenv(LANTERN_URL="/tmp/lantern-0.9.1.9001+cpu+arm64-Darwin.zip")
+#' torch::install_torch()
 #' }
 #' @export
 install_torch_from_file <- function(version = NA, type = NA, libtorch, liblantern, ...) {
