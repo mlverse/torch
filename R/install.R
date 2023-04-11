@@ -431,7 +431,7 @@ check_supported_cuda_version_linux <- function(version) {
   check_supported_version(version, supported_versions)
 }
 
-check_supported_version <- function(version, supported) {
+check_supported_version <- function(version, supported_versions) {
   if (!is.null(version)) {
     if (!version %in% supported_versions) {
       cli::cli_abort(c(
