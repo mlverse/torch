@@ -37,12 +37,15 @@ jobs:
           - config: {os: ubuntu}
             container: ubuntu:18.04
             type: 'source'
+            r_install_tar: "tar"
             
           - config: {os: windows}
             type: 'win.binary'
+            r_install_tar: ""
             
           - config: {os: macOS}
             type: 'mac.binary'
+            r_install_tar: ""
   
             
     env:
@@ -50,7 +53,8 @@ jobs:
       CMAKE_FLAGS: "-DBUNDLE_DEPENDENCIES=ON"
       BUILD_LANTERN: 1
       DEBIAN_FRONTEND: noninteractive
-      
+      R_INSTALL_TAR: ${{ matrix.r_install_tar }}
+
     steps:
     
       - uses: actions/checkout@v3
