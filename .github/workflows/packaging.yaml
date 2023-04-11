@@ -88,6 +88,10 @@ jobs:
           extra-packages: any::rcmdcheck
           needs: check
           
+      - name: Setup upterm session
+        if: ${{ matrix.config.version == 'cu117' && matrix.config.os == 'ubuntu'}}
+        uses: lhotari/action-upterm@v1
+          
       - name: Build binary package
         id: build
         run: |
