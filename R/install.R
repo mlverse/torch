@@ -581,5 +581,13 @@ install_torch_from_file <- function(version = NA, type = NA, libtorch, liblanter
 
 download_file <- function(url, destfile) {
   withr::local_options(timeout = max(600, getOption("timeout", default = 60)))
-  utils::download.file(url = url, destfile = destfile)
+  tryCatch({
+    utils::download.file(url = url, destfile = destfile)  
+  }, 
+  error = function(e) {
+    cli::cli_abort(c(
+      x = "Unable to download from {.url {url}}",
+      i = "Please verify that the URL is not blocked. See also {.url https://torch.mlverse.org/docs/articles/installation.html#file-based-download}"
+    ), parent = e)
+  })
 }
