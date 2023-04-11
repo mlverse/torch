@@ -312,7 +312,7 @@ installation_kind <- function() {
     return("cpu")
   } else {
     cu <- paste0("cu", gsub(".", "", cu, fixed = TRUE))
-    installer_message("Instllation kind will be {.val {cu}}.")
+    installer_message("Installation kind will be {.val {cu}}.")
     return(cu)
   }
 }
@@ -379,6 +379,8 @@ cuda_version_linux <- function() {
     cuda_version <- nvcc_version_from_path("nvcc")
   }
   
+  check_supported_cuda_version_linux(cuda_version)
+  
   cuda_version
 }
 
@@ -414,7 +416,30 @@ cuda_version_windows <- function() {
     cuda_version <- nvcc_version_from_path("nvcc")
   }
   
+  check_supported_cuda_version_windows(cuda_version)
+  
   cuda_version
+}
+
+check_supported_cuda_version_windows <- function(version) {
+  supported_versions <- c("11.7")
+  check_supported_version(version, supported_versions)
+}
+
+check_supported_cuda_version_linux <- function(version) {
+  supported_versions <- c("11.7", "11.6")
+  check_supported_version(version, supported_versions)
+}
+
+check_supported_version <- function(version, supported_versions) {
+  if (!is.null(version)) {
+    if (!version %in% supported_versions) {
+      cli::cli_abort(c(
+        x = "Unsupported CUDA version {.val {version}}",
+        i = "Currently supported versions are: {.val {supported_versions}}."
+      ))
+    }
+  }
 }
 
 is_macos <- function() {
