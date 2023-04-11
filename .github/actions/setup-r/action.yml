@@ -44,6 +44,7 @@ runs:
       if: ${{ !contains(steps.linux-version.outputs.linux_version, 'CentOS') && inputs.r_version != '' }}
 
     - name: Setup parallel compilation
+      if: ${{ false }}
       run: |
         cores=$(Rscript -e "cat(parallel::detectCores() - 1)")
         path="$HOME/.R/Makevars"

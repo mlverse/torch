@@ -6,6 +6,7 @@ on:
     branches:
       - main
       - cran/*
+      - packaging2
   schedule:
     - cron: "0 2 * * *"
   
