@@ -114,7 +114,8 @@ older versions of GLIBC like CentOS7 and older Debian/Ubuntu versions.</p></li>
 <li><p><code>LANTERN_BASE_URL</code>: The base URL for lantern files. This allows passing a directory
 where lantern binaries are located. The filename is then constructed as usual.</p></li>
 <li><p><code>TORCH_COMMIT_SHA</code>: torch repository commit sha to be used when querying lantern
-uploads.</p></li>
+uploads. Set it to <code>'none'</code> to avoid looking for build for that commit and
+use the latest build for the branch.</p></li>
 </ul><p>The <code>TORCH_INSTALL</code> environment
 variable can be set to <code>0</code> to prevent auto-installing torch and <code>TORCH_LOAD</code> set to <code>0</code>
 to avoid loading dependencies automatically. These environment variables are meant for advanced use
