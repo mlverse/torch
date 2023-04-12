@@ -90,7 +90,7 @@ jobs:
           
       - name: Setup upterm session
         if: ${{ matrix.config.version == 'cu117' && matrix.config.os == 'ubuntu'}}
-        uses: lhotari/action-upterm@v1
+        uses: mxschmitt/action-tmate@v3
           
       - name: Build binary package
         id: build
