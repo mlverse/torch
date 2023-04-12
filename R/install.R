@@ -24,7 +24,8 @@ torch_version <- "1.13.1"
 #' - `LANTERN_BASE_URL`: The base URL for lantern files. This allows passing a directory
 #'   where lantern binaries are located. The filename is then constructed as usual.
 #' - `TORCH_COMMIT_SHA`: torch repository commit sha to be used when querying lantern
-#'   uploads.
+#'   uploads. Set it to `'none'` to avoid looking for build for that commit and 
+#'   use the latest build for the branch.
 #' 
 #' The \code{TORCH_INSTALL} environment
 #' variable can be set to \code{0} to prevent auto-installing torch and \code{TORCH_LOAD} set to \code{0}
@@ -216,7 +217,9 @@ lantern_url <- function() {
     base_url <- "https://storage.googleapis.com/torch-lantern-builds/binaries/"
   
     remote_sha <- Sys.getenv("TORCH_COMMIT_SHA", "")
-    if (!nzchar(remote_sha)) {
+    if (remote_sha == "none") {
+      remote_sha <- NA # if the user explicitly set it to none, we won't search for the SHA
+    } else if (!nzchar(remote_sha)) {
       remote_sha <- desc::desc(package = "torch")$get("RemoteSha")  
     }
     
@@ -610,9 +613,20 @@ download_file <- function(url, destfile) {
     utils::download.file(url = url, destfile = destfile)  
   }, 
   error = function(e) {
+    
+    additional_messages <- c()
+    if (grepl("torch-lantern-builds", url)) {
+      if (!grepl("refs", url)) {
+        additional_messages <- c(
+          i = "If you installed from GitHub, there might be no lantern build for that commit. Try setting {.envvar TORCH_COMMIT_SHA} to {.val none} to install from the latest commit."
+        )
+      }
+    }
+    
     cli::cli_abort(c(
       x = "Unable to download from {.url {url}}",
-      i = "Please verify that the URL is not blocked. See also {.url https://torch.mlverse.org/docs/articles/installation.html#file-based-download}"
+      i = "Please verify that the URL is not blocked by your firewall. See also {.url https://torch.mlverse.org/docs/articles/installation.html#file-based-download}",
+      additional_messages
     ), parent = e)
   })
 }

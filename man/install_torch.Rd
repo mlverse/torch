@@ -28,7 +28,8 @@ older versions of GLIBC like CentOS7 and older Debian/Ubuntu versions.
 \item \code{LANTERN_BASE_URL}: The base URL for lantern files. This allows passing a directory
 where lantern binaries are located. The filename is then constructed as usual.
 \item \code{TORCH_COMMIT_SHA}: torch repository commit sha to be used when querying lantern
-uploads.
+uploads. Set it to \code{'none'} to avoid looking for build for that commit and
+use the latest build for the branch.
 }
 
 The \code{TORCH_INSTALL} environment

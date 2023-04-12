@@ -105,7 +105,7 @@ binaries for CPU (for macOS, Linux and Windows) and GPU (Windows and Linux).
 
 Packages provided by the CRAN-like repository bundles all necessary for its execution,
 including CUDA and CUDNN in the case of the GPU builds. This means that by installing it
-**you agree** with the included software licenses. See PyTorch's [LICENSE](https://github.com/pytorch/pytorch/blob/master/LICENSE) and [CUDA libraries EULA](http://docs.nvidia.com/cuda/eula/#redistribution-rights).
+**you agree** with the included software licenses. See PyTorch's [LICENSE](https://github.com/pytorch/pytorch/blob/master/LICENSE) and [CUDA libraries EULA](https://docs.nvidia.com/cuda/eula/).
 
 When installing from the pre-built binaries, you **don't need** to manually install
 CUDA or cuDNN. If you have CUDA installed, it doesn't need to match the installation
