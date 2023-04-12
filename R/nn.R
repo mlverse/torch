@@ -494,8 +494,7 @@ create_nn_module_callable <- function(instance) {
 
   attr(f, "class") <- instance$.classes
   attr(f, "module") <- instance
-  
-  unlockBinding("clone", instance)
+  rlang::env_binding_unlock(instance, "clone")
   on.exit({lockBinding("clone", instance)}, add = TRUE)
   clone <- instance$clone
   instance$clone <- function(deep = FALSE, ..., replace_values = TRUE) {
