@@ -4,6 +4,10 @@ inputs:
    r_version:
      required: true
      description: "the R version. passed to setup R in some cases."
+   makevars:
+     required: false
+     description: "Use pararllel makevars?"
+     default: true
 
 runs:
   using: composite
@@ -44,6 +48,7 @@ runs:
       if: ${{ !contains(steps.linux-version.outputs.linux_version, 'CentOS') && inputs.r_version != '' }}
 
     - name: Setup parallel compilation
+      if: ${{ inputs.makevars }}
       run: |
         cores=$(Rscript -e "cat(parallel::detectCores() - 1)")
         path="$HOME/.R/Makevars"
