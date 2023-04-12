@@ -115,8 +115,10 @@ To install from the pre-built binaries, you can use the following:
 
 ``` r
 options(timeout = 600) # increasing timeout is recommended since we will be downloading a 2GB file.
-kind <- "cu117" # "cpu", "cu117" are the only currently supported.
-version <- "0.9.1.9000"
+# For Windows and Linux: "cpu", "cu117" are the only currently supported
+# For MacOS the supported are: "cpu-intel" or "cpu-m1"
+kind <- "cu117" 
+version <- "0.10.0"
 options(repos = c(
   torch = sprintf("https://storage.googleapis.com/torch-lantern-builds/packages/%s/%s/", kind, version),
   CRAN = "https://cloud.r-project.org" # or any other from which you want to install the other R dependencies.
