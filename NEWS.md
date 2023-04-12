@@ -1,4 +1,4 @@
-# torch (development version)
+# torch 0.10.0
 
 ## Breaking changes
 
