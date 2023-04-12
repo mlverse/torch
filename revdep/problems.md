@@ -1,87 +1,134 @@
-# torchvisionlib
+# luz
 
 <details>
 
-* Version: 0.2.0
-* GitHub: NA
-* Source code: https://github.com/cran/torchvisionlib
-* Date/Publication: 2022-06-14 17:20:02 UTC
-* Number of recursive dependencies: 36
+* Version: 0.3.1
+* GitHub: https://github.com/mlverse/luz
+* Source code: https://github.com/cran/luz
+* Date/Publication: 2022-09-06 07:10:02 UTC
+* Number of recursive dependencies: 94
 
-Run `revdep_details(, "torchvisionlib")` for more info
+Run `revdepcheck::revdep_details(, "luz")` for more info
 
 </details>
 
 ## Newly broken
 
-*   checking whether package ‘torchvisionlib’ can be installed ... ERROR
+*   checking tests ...
     ```
-    Installation failed.
-    See ‘/Users/dfalbel/Documents/torch/revdep/checks.noindex/torchvisionlib/new/torchvisionlib.Rcheck/00install.out’ for details.
+      Running ‘testthat.R’
+     ERROR
+    Running the tests in ‘tests/testthat.R’ failed.
+    Last 13 lines of output:
+       13.   ├─rlang::with_handlers(...)
+       14.   │ └─base::tryCatch(.expr, interrupt = `<fn>`)
+       15.   │   └─base (local) tryCatchList(expr, classes, parentenv, handlers)
+       16.   │     └─base (local) tryCatchOne(expr, names, parentenv, handlers[[1L]])
+       17.   │       └─base (local) doTryCatch(return(expr), name, parentenv, handler)
+       18.   ├─coro::loop(...)
+       19.   │ └─rlang::eval_bare(loop, env)
+       20.   └─luz (local) step()
+       21.     └─luz:::default_step(ctx)
+       22.       └─luz:::fit_one_batch(ctx)
+       23.         └─ctx$model$backward(ctx$loss_grad)
+      
+      [ FAIL 1 | WARN 50 | SKIP 8 | PASS 151 ]
+      Error: Test failures
+      Execution halted
+    ```
+
+# targets
+
+<details>
+
+* Version: 0.14.3
+* GitHub: https://github.com/ropensci/targets
+* Source code: https://github.com/cran/targets
+* Date/Publication: 2023-03-08 13:40:02 UTC
+* Number of recursive dependencies: 170
+
+Run `revdepcheck::revdep_details(, "targets")` for more info
+
+</details>
+
+## Newly broken
+
+*   R CMD check timed out
+    
+
+# torchvision
+
+<details>
+
+* Version: 0.5.0
+* GitHub: https://github.com/mlverse/torchvision
+* Source code: https://github.com/cran/torchvision
+* Date/Publication: 2023-03-15 12:10:02 UTC
+* Number of recursive dependencies: 43
+
+Run `revdepcheck::revdep_details(, "torchvision")` for more info
+
+</details>
+
+## Newly broken
+
+*   checking examples ...sh: line 1: 72641 Abort trap: 6           LANGUAGE=en _R_CHECK_INTERNALS2_=1 '/Library/Frameworks/R.framework/Versions/4.2-arm64/Resources/bin/R' --vanilla > 'torchvision-Ex.Rout' 2>&1 < 'torchvision-Ex.R'
+    ```
+     ERROR
+    Running examples in ‘torchvision-Ex.R’ failed
+    The error most likely occurred in:
+    
+    > ### Name: draw_bounding_boxes
+    > ### Title: Draws bounding boxes on image.
+    > ### Aliases: draw_bounding_boxes
+    > 
+    > ### ** Examples
+    > 
+    > if (torch::torch_is_installed()) {
+    + image <- torch::torch_randint(170, 250, size = c(3, 360, 360))$to(torch::torch_uint8())
+    + x <- torch::torch_randint(low = 1, high = 160, size = c(12,1))
+    + y <- torch::torch_randint(low = 1, high = 260, size = c(12,1))
+    + boxes <- torch::torch_cat(c(x, y, x + 20, y +  10), dim = 2)
+    + bboxed <- draw_bounding_boxes(image, boxes, colors = "black", fill = TRUE)
+    + tensor_image_browse(bboxed)
+    + }
+    Error : R: UnableToReadFont `helvetica' @ error/annotate.c/RenderFreetype/1396
+    ```
+
+*   checking dependencies in R code ... WARNING
+    ```
+    Missing or unexported object: ‘torch::torch_lstsq’
     ```
 
 ## Newly fixed
 
-*   checking installed package size ... NOTE
+*   checking examples ...sh: line 1: 71953 Abort trap: 6           LANGUAGE=en _R_CHECK_INTERNALS2_=1 '/Library/Frameworks/R.framework/Versions/4.2-arm64/Resources/bin/R' --vanilla > 'torchvision-Ex.Rout' 2>&1 < 'torchvision-Ex.R'
     ```
-      installed size is  8.2Mb
-      sub-directories of 1Mb or more:
-        lib   7.3Mb
+     ERROR
+    Running examples in ‘torchvision-Ex.R’ failed
+    The error most likely occurred in:
+    
+    > ### Name: draw_bounding_boxes
+    > ### Title: Draws bounding boxes on image.
+    > ### Aliases: draw_bounding_boxes
+    > 
+    > ### ** Examples
+    > 
+    ...
+    > if (torch::torch_is_installed()) {
+    + image <- torch::torch_randint(170, 250, size = c(3, 360, 360))$to(torch::torch_uint8())
+    + x <- torch::torch_randint(low = 1, high = 160, size = c(12,1))
+    + y <- torch::torch_randint(low = 1, high = 260, size = c(12,1))
+    + boxes <- torch::torch_cat(c(x, y, x + 20, y +  10), dim = 2)
+    + bboxed <- draw_bounding_boxes(image, boxes, colors = "black", fill = TRUE)
+    + tensor_image_browse(bboxed)
+    + }
+    Unable to revert mtime: /Library/Fonts
+    Error : R: UnableToReadFont `helvetica' @ error/annotate.c/RenderFreetype/1396
     ```
 
-## Installation
+## In both
 
-### Devel
+*   R CMD check timed out
+    
 
-```
-* installing *source* package ‘torchvisionlib’ ...
-** package ‘torchvisionlib’ successfully unpacked and MD5 sums checked
-** using staged installation
-** libs
-ccache clang++ -std=gnu++11 -I"/Library/Frameworks/R.framework/Versions/4.2/Resources/include" -DNDEBUG -I../inst/include/ -I'/Users/dfalbel/Documents/torch/revdep/library.noindex/torchvisionlib/Rcpp/include' -I'/Users/dfalbel/Documents/torch/revdep/library.noindex/torch/new/torch/include' -I/usr/local/include   -fPIC  -Wall -g -O2  -c RcppExports.cpp -o RcppExports.o
-ccache clang++ -std=gnu++11 -I"/Library/Frameworks/R.framework/Versions/4.2/Resources/include" -DNDEBUG -I../inst/include/ -I'/Users/dfalbel/Documents/torch/revdep/library.noindex/torchvisionlib/Rcpp/include' -I'/Users/dfalbel/Documents/torch/revdep/library.noindex/torch/new/torch/include' -I/usr/local/include   -fPIC  -Wall -g -O2  -c exports.cpp -o exports.o
-ccache clang++ -std=gnu++11 -I"/Library/Frameworks/R.framework/Versions/4.2/Resources/include" -DNDEBUG -I../inst/include/ -I'/Users/dfalbel/Documents/torch/revdep/library.noindex/torchvisionlib/Rcpp/include' -I'/Users/dfalbel/Documents/torch/revdep/library.noindex/torch/new/torch/include' -I/usr/local/include   -fPIC  -Wall -g -O2  -c torchvisionlib.cpp -o torchvisionlib.o
-ccache clang++ -std=gnu++11 -I"/Library/Frameworks/R.framework/Versions/4.2/Resources/include" -DNDEBUG -I../inst/include/ -I'/Users/dfalbel/Documents/torch/revdep/library.noindex/torchvisionlib/Rcpp/include' -I'/Users/dfalbel/Documents/torch/revdep/library.noindex/torch/new/torch/include' -I/usr/local/include   -fPIC  -Wall -g -O2  -c torchvisionlib_types.cpp -o torchvisionlib_types.o
-ccache clang++ -std=gnu++11 -dynamiclib -Wl,-headerpad_max_install_names -undefined dynamic_lookup -single_module -multiply_defined suppress -L/Library/Frameworks/R.framework/Versions/4.2/Resources/lib -L/usr/local/lib -o torchvisionlib.so RcppExports.o exports.o torchvisionlib.o torchvisionlib_types.o -F/Library/Frameworks/R.framework/Versions/4.2 -framework R -Wl,-framework -Wl,CoreFoundation
-installing to /Users/dfalbel/Documents/torch/revdep/checks.noindex/torchvisionlib/new/torchvisionlib.Rcheck/00LOCK-torchvisionlib/00new/torchvisionlib/libs
-...
- .onLoad falhou em loadNamespace() para 'torchvisionlib', detalhes:
-  chamada: dyn.load(lib_path("torchvision"), local = FALSE)
-  erro: impossível carregar objeto compartilhado '/Users/dfalbel/Documents/torch/revdep/checks.noindex/torchvisionlib/new/torchvisionlib.Rcheck/00LOCK-torchvisionlib/00new/torchvisionlib//lib/libtorchvision.dylib':
-  dlopen(/Users/dfalbel/Documents/torch/revdep/checks.noindex/torchvisionlib/new/torchvisionlib.Rcheck/00LOCK-torchvisionlib/00new/torchvisionlib//lib/libtorchvision.dylib, 0x000A): Symbol not found: (__ZN2at14RecordFunctionC1ENS_11RecordScopeEb)
-  Referenced from: '/Users/dfalbel/Documents/torch/revdep/checks.noindex/torchvisionlib/new/torchvisionlib.Rcheck/00LOCK-torchvisionlib/00new/torchvisionlib/lib/libtorchvision.dylib'
-  Expected in: '/Users/dfalbel/Documents/torch/lantern/build/libtorch/lib/libtorch_cpu.dylib'
-Erro: loading failed
-Execução interrompida
-ERROR: loading failed
-* removing ‘/Users/dfalbel/Documents/torch/revdep/checks.noindex/torchvisionlib/new/torchvisionlib.Rcheck/torchvisionlib’
-
-
-```
-### CRAN
-
-```
-* installing *source* package ‘torchvisionlib’ ...
-** package ‘torchvisionlib’ successfully unpacked and MD5 sums checked
-** using staged installation
-** libs
-ccache clang++ -std=gnu++11 -I"/Library/Frameworks/R.framework/Versions/4.2/Resources/include" -DNDEBUG -I../inst/include/ -I'/Users/dfalbel/Documents/torch/revdep/library.noindex/torchvisionlib/Rcpp/include' -I'/Users/dfalbel/Documents/torch/revdep/library.noindex/torch/old/torch/include' -I/usr/local/include   -fPIC  -Wall -g -O2  -c RcppExports.cpp -o RcppExports.o
-ccache clang++ -std=gnu++11 -I"/Library/Frameworks/R.framework/Versions/4.2/Resources/include" -DNDEBUG -I../inst/include/ -I'/Users/dfalbel/Documents/torch/revdep/library.noindex/torchvisionlib/Rcpp/include' -I'/Users/dfalbel/Documents/torch/revdep/library.noindex/torch/old/torch/include' -I/usr/local/include   -fPIC  -Wall -g -O2  -c exports.cpp -o exports.o
-ccache clang++ -std=gnu++11 -I"/Library/Frameworks/R.framework/Versions/4.2/Resources/include" -DNDEBUG -I../inst/include/ -I'/Users/dfalbel/Documents/torch/revdep/library.noindex/torchvisionlib/Rcpp/include' -I'/Users/dfalbel/Documents/torch/revdep/library.noindex/torch/old/torch/include' -I/usr/local/include   -fPIC  -Wall -g -O2  -c torchvisionlib.cpp -o torchvisionlib.o
-ccache clang++ -std=gnu++11 -I"/Library/Frameworks/R.framework/Versions/4.2/Resources/include" -DNDEBUG -I../inst/include/ -I'/Users/dfalbel/Documents/torch/revdep/library.noindex/torchvisionlib/Rcpp/include' -I'/Users/dfalbel/Documents/torch/revdep/library.noindex/torch/old/torch/include' -I/usr/local/include   -fPIC  -Wall -g -O2  -c torchvisionlib_types.cpp -o torchvisionlib_types.o
-ccache clang++ -std=gnu++11 -dynamiclib -Wl,-headerpad_max_install_names -undefined dynamic_lookup -single_module -multiply_defined suppress -L/Library/Frameworks/R.framework/Versions/4.2/Resources/lib -L/usr/local/lib -o torchvisionlib.so RcppExports.o exports.o torchvisionlib.o torchvisionlib_types.o -F/Library/Frameworks/R.framework/Versions/4.2 -framework R -Wl,-framework -Wl,CoreFoundation
-installing to /Users/dfalbel/Documents/torch/revdep/checks.noindex/torchvisionlib/old/torchvisionlib.Rcheck/00LOCK-torchvisionlib/00new/torchvisionlib/libs
-...
-** testing if installed package can be loaded from temporary location
-tentando a URL 'https://github.com/mlverse/torchvisionlib/releases/download/v0.2.0/torchvisionlib-0.2.0+cpu-Darwin.zip'
-Content type 'application/octet-stream' length 1508611 bytes (1.4 MB)
-==================================================
-downloaded 1.4 MB
-
-** checking absolute paths in shared objects and dynamic libraries
-** testing if installed package can be loaded from final location
-** testing if installed package keeps a record of temporary installation path
-* DONE (torchvisionlib)
-
-
-```
