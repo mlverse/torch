@@ -24,6 +24,7 @@ jobs:
           
           - {r_version: 'release', os: ubuntu, version: cpu, runner: [self-hosted, gce, disk]}
           - {r_version: 'release', os: ubuntu, version: cu117, runner: [self-hosted, gce, disk]}
+          - {r_version: 'release', os: ubuntu, version: cu116, runner: [self-hosted, gce, disk]}
           
           - {r_version: 'release', os: windows, version: cpu, runner: windows-2019}
           - {r_version: 'release', os: windows, version: cu117, runner: windows-2019}
@@ -33,6 +34,10 @@ jobs:
           - config: {version: cu117}
             cuda: 11.7
             cuda_patch: 0
+          
+          - config: {version: cu116}
+            cuda: 11.6
+            cuda_patch: 1
             
           - config: {os: ubuntu}
             container: ubuntu:18.04
