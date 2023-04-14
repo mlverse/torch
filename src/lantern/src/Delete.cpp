@@ -420,3 +420,27 @@ void _lantern_optional_string_view_delete(void *x) {
   lantern_delete<self_contained::optional::string_view>(x);
   LANTERN_FUNCTION_END_VOID
 }
+
+void _lantern_function_schema_delete(void* x) {
+  LANTERN_FUNCTION_START
+  lantern_delete<torch::jit::FunctionSchema>(x);
+  LANTERN_FUNCTION_END_VOID
+}
+
+void _lantern_function_schema_list_delete(void* x) {
+  LANTERN_FUNCTION_START
+  lantern_delete<std::vector<torch::jit::FunctionSchema>>(x);
+  LANTERN_FUNCTION_END_VOID
+}
+
+void _lantern_function_schema_argument_delete(void* x) {
+  LANTERN_FUNCTION_START
+  lantern_delete<c10::Argument>(x);
+  LANTERN_FUNCTION_END_VOID
+}
+
+void _lantern_function_schema_argument_list_delete(void* x) {
+  LANTERN_FUNCTION_START
+  lantern_delete<std::vector<c10::Argument>>(x);
+  LANTERN_FUNCTION_END_VOID
+}

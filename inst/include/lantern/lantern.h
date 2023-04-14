@@ -552,7 +552,35 @@ LANTERN_OPTIONAL_DECLS(string_view)
   HOST_API void lantern_Tensor_index_put_scalar_ (void* self, void* index, void* rhs) {LANTERN_CHECK_LOADED _lantern_Tensor_index_put_scalar_(self, index, rhs); LANTERN_HOST_HANDLER}
   LANTERN_API void (LANTERN_PTR _lantern_manual_seed) (int64_t seed);
   HOST_API void lantern_manual_seed (int64_t seed) {LANTERN_CHECK_LOADED _lantern_manual_seed(seed); LANTERN_HOST_HANDLER}
-
+  LANTERN_API void(LANTERN_PTR _lantern_function_schema_delete)(void *x);
+  HOST_API void lantern_function_schema_delete(void *x) {LANTERN_CHECK_LOADED _lantern_function_schema_delete(x); LANTERN_HOST_HANDLER }
+  LANTERN_API void(LANTERN_PTR _lantern_function_schema_list_delete)(void *x);
+  HOST_API void lantern_function_schema_list_delete(void *x) {LANTERN_CHECK_LOADED _lantern_function_schema_list_delete(x); LANTERN_HOST_HANDLER }
+  LANTERN_API void(LANTERN_PTR _lantern_function_schema_argument_delete)(void *x);
+  HOST_API void lantern_function_schema_argument_delete(void *x) {LANTERN_CHECK_LOADED _lantern_function_schema_argument_delete(x); LANTERN_HOST_HANDLER }
+  LANTERN_API void(LANTERN_PTR _lantern_function_schema_argument_list_delete)(void *x);
+  HOST_API void lantern_function_schema_argument_list_delete(void *x) {LANTERN_CHECK_LOADED _lantern_function_schema_argument_list_delete(x); LANTERN_HOST_HANDLER }
+  LANTERN_API void*(LANTERN_PTR _lantern_function_schema_name)(void *x);
+  HOST_API void* lantern_function_schema_name(void *x) {LANTERN_CHECK_LOADED _lantern_function_schema_name(x); LANTERN_HOST_HANDLER }
+  LANTERN_API void*(LANTERN_PTR _lantern_function_schema_arguments)(void *x);
+  HOST_API void* lantern_function_schema_arguments(void *x) {LANTERN_CHECK_LOADED _lantern_function_schema_arguments(x); LANTERN_HOST_HANDLER }
+  LANTERN_API int(LANTERN_PTR _lantern_function_schema_num_arguments)(void *x);
+  HOST_API int lantern_function_schema_num_arguments(void *x) {LANTERN_CHECK_LOADED _lantern_function_schema_num_arguments(x); LANTERN_HOST_HANDLER }
+  LANTERN_API int(LANTERN_PTR _lantern_function_schema_list_size)(void *x);
+  HOST_API int lantern_function_schema_list_size(void *x) {LANTERN_CHECK_LOADED _lantern_function_schema_list_size(x); LANTERN_HOST_HANDLER }
+  LANTERN_API void*(LANTERN_PTR _lantern_function_schema_argument_at)(void *x);
+  HOST_API void* lantern_function_schema_argument_at(void *x) {LANTERN_CHECK_LOADED _lantern_function_schema_argument_at(x); LANTERN_HOST_HANDLER }
+  LANTERN_API void*(LANTERN_PTR _lantern_function_schema_argument_name)(void *x);
+  HOST_API void* lantern_function_schema_argument_name(void *x) {LANTERN_CHECK_LOADED _lantern_function_schema_argument_name(x); LANTERN_HOST_HANDLER }
+  LANTERN_API void*(LANTERN_PTR _lantern_function_schema_argument_type)(void *x);
+  HOST_API void* lantern_function_schema_argument_type(void *x) {LANTERN_CHECK_LOADED _lantern_function_schema_argument_type(x); LANTERN_HOST_HANDLER }
+  LANTERN_API void*(LANTERN_PTR _lantern_function_schema_returns)(void *x);
+  HOST_API void* lantern_function_schema_returns(void *x) {LANTERN_CHECK_LOADED _lantern_function_schema_returns(x); LANTERN_HOST_HANDLER }
+  LANTERN_API void*(LANTERN_PTR _lantern_function_schema_return_type)(void *x);
+  HOST_API void* lantern_function_schema_return_type(void *x) {LANTERN_CHECK_LOADED _lantern_function_schema_return_type(x); LANTERN_HOST_HANDLER }
+  LANTERN_API void*(LANTERN_PTR _lantern_function_schema_list_at)(void *x);
+  HOST_API void* lantern_function_schema_list_at(void *x) {LANTERN_CHECK_LOADED _lantern_function_schema_list_at(x); LANTERN_HOST_HANDLER }
+  
   LANTERN_API void* (LANTERN_PTR _lantern_load_state_dict) (const char * path);
   HOST_API void * lantern_load_state_dict (const char * path)
   {
@@ -10099,9 +10127,19 @@ LOAD_SYMBOL(_lantern_amp_autocast_clear_cache);
 LOAD_SYMBOL(_lantern_amp_foreach_non_finite_check_and_unscale);
 LOAD_SYMBOL(_lantern_amp_update_scale_);
 LOAD_SYMBOL(_lantern_cuda_set_rng_state);
-LOAD_SYMBOL(_lantern_cuda_get_rng_state);
-LOAD_SYMBOL(_lantern_cpu_get_rng_state);
-LOAD_SYMBOL(_lantern_cpu_set_rng_state);
+LOAD_SYMBOL(_lantern_function_schema_delete);
+LOAD_SYMBOL(_lantern_function_schema_list_delete);
+LOAD_SYMBOL(_lantern_function_schema_argument_delete);
+LOAD_SYMBOL(_lantern_function_schema_argument_list_delete);
+LOAD_SYMBOL(_lantern_function_schema_name);
+LOAD_SYMBOL(_lantern_function_schema_arguments);
+LOAD_SYMBOL(_lantern_function_schema_num_arguments);
+LOAD_SYMBOL(_lantern_function_schema_list_size);
+LOAD_SYMBOL(_lantern_function_schema_argument_at);
+LOAD_SYMBOL(_lantern_function_schema_argument_name);
+LOAD_SYMBOL(_lantern_function_schema_argument_type);
+LOAD_SYMBOL(_lantern_function_schema_return_type);
+
   /* Autogen Symbols -- Start */
   LOAD_SYMBOL(_lantern__cast_byte_tensor_bool)
   LOAD_SYMBOL(_lantern__cast_char_tensor_bool)
