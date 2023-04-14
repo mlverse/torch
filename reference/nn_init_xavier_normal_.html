@@ -6,12 +6,12 @@ described in Understanding the difficulty of training deep feedforward neural ne
 distribution."><!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-<![endif]--><!-- Global site tag (gtag.js) - Google Analytics --><script async src="https://www.googletagmanager.com/gtag/js?id=UA-178883486-1"></script><script>
+<![endif]--><!-- Global site tag (gtag.js) - Google Analytics --><script async src="https://www.googletagmanager.com/gtag/js?id=G-9ZJSKW3L0N"></script><script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
 
-  gtag('config', 'UA-178883486-1');
+  gtag('config', 'G-9ZJSKW3L0N');
 </script></head><body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
     
@@ -20,7 +20,7 @@ distribution."><!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/li
     
     <a class="navbar-brand me-2" href="../index.html">torch</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.9.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.10.0</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -57,6 +57,8 @@ distribution."><!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/li
   <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-advanced">Advanced</a>
   <div class="dropdown-menu" aria-labelledby="dropdown-advanced">
     <a class="dropdown-item" href="../articles/memory-management.html">Memory management</a>
+    <a class="dropdown-item" href="../articles/modifying-source-code.html">Building locally</a>
+    <a class="dropdown-item" href="../articles/amp.html">Automatic Mixed Precision</a>
   </div>
 </li>
 <li class="active nav-item">
@@ -115,9 +117,9 @@ distribution.</p>
 <span class="r-in"><span><span class="fu">nn_init_xavier_normal_</span><span class="op">(</span><span class="va">w</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">}</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> torch_tensor</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> -0.0169  0.4617  0.2006  0.7462  1.2295</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> -0.4186  0.5580  0.4147  0.2578 -0.4436</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> -0.5734  0.1162 -0.0776  0.1086 -0.2174</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> -0.7259  0.0578 -0.2369 -0.4644 -0.0577</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> -0.3731  0.6058 -0.7072 -0.1382  0.2467</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  0.2904  0.8449 -0.1141  0.5248 -0.6641</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [ CPUFloatType{3,5} ]</span>
 </code></pre></div>
     </div>

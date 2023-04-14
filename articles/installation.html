@@ -17,12 +17,12 @@
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-<![endif]--><!-- Global site tag (gtag.js) - Google Analytics --><script async src="https://www.googletagmanager.com/gtag/js?id=UA-178883486-1"></script><script>
+<![endif]--><!-- Global site tag (gtag.js) - Google Analytics --><script async src="https://www.googletagmanager.com/gtag/js?id=G-9ZJSKW3L0N"></script><script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
 
-  gtag('config', 'UA-178883486-1');
+  gtag('config', 'G-9ZJSKW3L0N');
 </script>
 </head>
 <body>
@@ -33,7 +33,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">torch</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.9.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.10.0</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -71,6 +71,8 @@
   <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-advanced">Advanced</a>
   <div class="dropdown-menu" aria-labelledby="dropdown-advanced">
     <a class="dropdown-item" href="../articles/memory-management.html">Memory management</a>
+    <a class="dropdown-item" href="../articles/modifying-source-code.html">Building locally</a>
+    <a class="dropdown-item" href="../articles/amp.html">Automatic Mixed Precision</a>
   </div>
 </li>
 <li class="nav-item">
@@ -119,6 +121,11 @@ using <code>torch</code> in interactive mode. If you are running
 <code>torch</code> in non-interactive environments you need to set the
 <code>TORCH_INSTALL</code> env var to 1, so it’s automatically installed
 or manually call <code><a href="../reference/install_torch.html">torch::install_torch()</a></code>.</p>
+<p>Starting from torch v0.9.1.9000 it’s possible to install torch from
+pre-built package binaries available in a custom CRAN-like repository.
+This binaries include all shared objects necessary to run torch, thus
+it’s not required to install any additional software. See the <a href="#pre-built"><em>Install from pre-built binaries</em></a> session
+for more information.</p>
 <p>We have provide pre-compiled binaries for all major platforms and you
 can find specific installation instructions below.</p>
 <div class="section level2">
@@ -210,6 +217,37 @@ to force an specific version of the CUDA toolkit.</p>
 </div>
 </div>
 <div class="section level2">
+<h2 id="installing-from-pre-built-binaries">Installing from pre-built binaries<a class="anchor" aria-label="anchor" href="#installing-from-pre-built-binaries"></a>
+</h2>
+<p>As of torch v0.9.1.9000 it’s now possible to install torch from
+pre-built package binaries from a CRAN like repository hosted on Google
+Cloud Storage. We currently provide pre-built binaries for CPU (for
+macOS, Linux and Windows) and GPU (Windows and Linux).</p>
+<p>Packages provided by the CRAN-like repository bundles all necessary
+for its execution, including CUDA and CUDNN in the case of the GPU
+builds. This means that by installing it <strong>you agree</strong> with
+the included software licenses. See PyTorch’s <a href="https://github.com/pytorch/pytorch/blob/master/LICENSE" class="external-link">LICENSE</a>
+and <a href="https://docs.nvidia.com/cuda/eula/" class="external-link">CUDA libraries
+EULA</a>.</p>
+<p>When installing from the pre-built binaries, you <strong>don’t
+need</strong> to manually install CUDA or cuDNN. If you have CUDA
+installed, it doesn’t need to match the installation <em>‘kind’</em>
+chosen below.</p>
+<p>To install from the pre-built binaries, you can use the
+following:</p>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">options</a></span><span class="op">(</span>timeout <span class="op">=</span> <span class="fl">600</span><span class="op">)</span> <span class="co"># increasing timeout is recommended since we will be downloading a 2GB file.</span></span>
+<span><span class="co"># For Windows and Linux: "cpu", "cu117" are the only currently supported</span></span>
+<span><span class="co"># For MacOS the supported are: "cpu-intel" or "cpu-m1"</span></span>
+<span><span class="va">kind</span> <span class="op">&lt;-</span> <span class="st">"cu117"</span> </span>
+<span><span class="va">version</span> <span class="op">&lt;-</span> <span class="st">"0.10.0"</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">options</a></span><span class="op">(</span>repos <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
+<span>  torch <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sprintf.html" class="external-link">sprintf</a></span><span class="op">(</span><span class="st">"https://storage.googleapis.com/torch-lantern-builds/packages/%s/%s/"</span>, <span class="va">kind</span>, <span class="va">version</span><span class="op">)</span>,</span>
+<span>  CRAN <span class="op">=</span> <span class="st">"https://cloud.r-project.org"</span> <span class="co"># or any other from which you want to install the other R dependencies.</span></span>
+<span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"torch"</span><span class="op">)</span></span></code></pre></div>
+</div>
+<div class="section level2">
 <h2 id="troubleshooting">Troubleshooting<a class="anchor" aria-label="anchor" href="#troubleshooting"></a>
 </h2>
 <div class="section level3">
@@ -225,7 +263,7 @@ while, downloads end-up with a warning such as:</p>
 3: Failed to install Torch, manually run install_torch(). download from 'https://download.pytorch.org/libtorch/cpu/libtorch-macos-1.7.1.zip' failed</code></pre>
 <p>This means you encounter a download timeout. then, you should
 increase the timeout value in <code><a href="../reference/install_torch.html">install_torch()</a></code> like</p>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/install_torch.html">install_torch</a></span><span class="op">(</span>timeout <span class="op">=</span> <span class="fl">600</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level3">
@@ -235,14 +273,16 @@ increase the timeout value in <code><a href="../reference/install_torch.html">in
 intend to install torch on, last resort is to install Torch and Lantern
 library from files. This is done in 3 steps :</p>
 <p>1- get the download URLs of the files.</p>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/install_torch_from_file.html">get_install_libs_url</a></span><span class="op">(</span>type <span class="op">=</span> <span class="st">"10.2"</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/install_torch_from_file.html">get_install_libs_url</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <p>2- save those files into the machine filesystem. We will use
 <code>/tmp/</code> here as an example .</p>
 <p>3- install torch from files</p>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/install_torch_from_file.html">install_torch_from_file</a></span><span class="op">(</span>libtorch <span class="op">=</span> <span class="st">"file:///tmp/libtorch-cxx11-abi-shared-with-deps-1.7.1%2Bcu101.zip"</span>,</span>
-<span>                        liblantern <span class="op">=</span> <span class="st">"file:///tmp/Linux-gpu-101.zip"</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># then after making both files available into /tmp/</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/Sys.setenv.html" class="external-link">Sys.setenv</a></span><span class="op">(</span>TORCH_URL<span class="op">=</span><span class="st">"/tmp/libtorch-v1.13.1.zip"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/Sys.setenv.html" class="external-link">Sys.setenv</a></span><span class="op">(</span>LANTERN_URL<span class="op">=</span><span class="st">"/tmp/lantern-0.9.1.9001+cpu+arm64-Darwin.zip"</span><span class="op">)</span></span>
+<span><span class="fu">torch</span><span class="fu">::</span><span class="fu"><a href="../reference/install_torch.html">install_torch</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 </div>
 </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>

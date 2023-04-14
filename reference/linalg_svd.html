@@ -6,12 +6,12 @@ the full SVD of a matrix
 , if k = min(m,n), is defined as"><!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-<![endif]--><!-- Global site tag (gtag.js) - Google Analytics --><script async src="https://www.googletagmanager.com/gtag/js?id=UA-178883486-1"></script><script>
+<![endif]--><!-- Global site tag (gtag.js) - Google Analytics --><script async src="https://www.googletagmanager.com/gtag/js?id=G-9ZJSKW3L0N"></script><script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
 
-  gtag('config', 'UA-178883486-1');
+  gtag('config', 'G-9ZJSKW3L0N');
 </script></head><body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
     
@@ -20,7 +20,7 @@ the full SVD of a matrix
     
     <a class="navbar-brand me-2" href="../index.html">torch</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.9.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.10.0</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -57,6 +57,8 @@ the full SVD of a matrix
   <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-advanced">Advanced</a>
   <div class="dropdown-menu" aria-labelledby="dropdown-advanced">
     <a class="dropdown-item" href="../articles/memory-management.html">Memory management</a>
+    <a class="dropdown-item" href="../articles/modifying-source-code.html">Building locally</a>
+    <a class="dropdown-item" href="../articles/amp.html">Automatic Mixed Precision</a>
   </div>
 </li>
 <li class="active nav-item">
@@ -218,25 +220,25 @@ matrices.</p></li>
 <span class="r-in"><span><span class="op">}</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[1]]</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> torch_tensor</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> -0.8291  0.0169  0.2737</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  0.4114  0.1115  0.2688</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  0.1167  0.9134  0.0261</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> -0.1349  0.0771 -0.9225</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  0.3340 -0.3835 -0.0332</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  0.3207  0.3364 -0.4461</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  0.7267  0.3204  0.3389</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  0.4375 -0.1994  0.3595</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> -0.3915  0.3300  0.7290</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> -0.1559  0.7972 -0.1598</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [ CPUFloatType{5,3} ]</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[2]]</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> torch_tensor</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  2.9801</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  1.8244</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  0.7480</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  2.0685</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  1.6370</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  0.2208</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [ CPUFloatType{3} ]</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[3]]</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> torch_tensor</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> -0.8410  0.4719  0.2646</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> -0.5090 -0.5246 -0.6824</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> -0.1832 -0.7086  0.6814</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  0.3003 -0.8133  0.4983</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> -0.1237  0.4848  0.8658</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  0.9458  0.3217 -0.0450</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [ CPUFloatType{3,3} ]</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 </code></pre></div>
