@@ -5,8 +5,7 @@
 
 [![Lifecycle:
 experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html)
-![R build
-status](https://github.com/mlverse/torch/workflows/Test/badge.svg)
+[![Test](https://github.com/mlverse/torch/actions/workflows/main.yaml/badge.svg)](https://github.com/mlverse/torch/actions/workflows/main.yaml)
 [![CRAN
 status](https://www.r-pkg.org/badges/version/torch)](https://CRAN.R-project.org/package=torch)
 [![](https://cranlogs.r-pkg.org/badges/torch)](https://cran.r-project.org/package=torch)
@@ -26,15 +25,9 @@ You can also install the development version with:
 remotes::install_github("mlverse/torch")
 ```
 
-At the first package load additional software will be installed.
-
-## Installation with Docker
-
-If you would like to install with Docker, please read following
-document.
-
--   [The way of installation with
-    Docker](https://github.com/mlverse/torch/blob/master/docker/build_env_guide.md)
+At the first package load additional software will be installed. See
+also the full [installation
+guide](https://torch.mlverse.org/docs/articles/installation.html) here.
 
 ## Examples
 
@@ -48,12 +41,12 @@ y <- torch_tensor(x, dtype = torch_float64())
 y
 #> torch_tensor
 #> (1,.,.) = 
-#>   0.7658  0.6123
-#>   0.3150  0.4639
+#>   0.6192  0.5800
+#>   0.2488  0.3681
 #> 
 #> (2,.,.) = 
-#>   0.0604  0.0290
-#>   0.9553  0.6541
+#>   0.0042  0.9206
+#>   0.4388  0.5664
 #> [ CPUDoubleType{2,2,2} ]
 identical(x, as_array(y))
 #> [1] TRUE
