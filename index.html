@@ -110,7 +110,7 @@
 <div class="page-header"><h1 id="torch-">torch <a href="https://torch.mlverse.org" class="external-link"><img src="reference/figures/torch.png" align="right" height="139"></a>
 <a class="anchor" aria-label="anchor" href="#torch-"></a>
 </h1></div>
-<p><a href="https://lifecycle.r-lib.org/articles/stages.html" class="external-link"><img src="https://img.shields.io/badge/lifecycle-experimental-orange.svg" alt="Lifecycle: experimental"></a> <img src="https://github.com/mlverse/torch/workflows/Test/badge.svg" alt="R build status"><a href="https://CRAN.R-project.org/package=torch" class="external-link"><img src="https://www.r-pkg.org/badges/version/torch" alt="CRAN status"></a> <a href="https://cran.r-project.org/package=torch" class="external-link"><img src="https://cranlogs.r-pkg.org/badges/torch"></a> <a href="https://discord.com/invite/s3D5cKhBkx" class="external-link"><img src="https://img.shields.io/discord/837019024499277855?logo=discord" alt="Discord"></a></p>
+<p><a href="https://lifecycle.r-lib.org/articles/stages.html" class="external-link"><img src="https://img.shields.io/badge/lifecycle-experimental-orange.svg" alt="Lifecycle: experimental"></a> <a href="https://github.com/mlverse/torch/actions/workflows/main.yaml" class="external-link"><img src="https://github.com/mlverse/torch/actions/workflows/main.yaml/badge.svg" alt="Test"></a> <a href="https://CRAN.R-project.org/package=torch" class="external-link"><img src="https://www.r-pkg.org/badges/version/torch" alt="CRAN status"></a> <a href="https://cran.r-project.org/package=torch" class="external-link"><img src="https://cranlogs.r-pkg.org/badges/torch"></a> <a href="https://discord.com/invite/s3D5cKhBkx" class="external-link"><img src="https://img.shields.io/discord/837019024499277855?logo=discord" alt="Discord"></a></p>
 <div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h2>
@@ -120,15 +120,7 @@
 <p>You can also install the development version with:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"mlverse/torch"</span><span class="op">)</span></span></code></pre></div>
-<p>At the first package load additional software will be installed.</p>
-</div>
-<div class="section level2">
-<h2 id="installation-with-docker">Installation with Docker<a class="anchor" aria-label="anchor" href="#installation-with-docker"></a>
-</h2>
-<p>If you would like to install with Docker, please read following document.</p>
-<ul>
-<li><a href="https://github.com/mlverse/torch/blob/master/docker/build_env_guide.md" class="external-link">The way of installation with Docker</a></li>
-</ul>
+<p>At the first package load additional software will be installed. See also the full <a href="https://torch.mlverse.org/docs/articles/installation.html">installation guide</a> here.</p>
 </div>
 <div class="section level2">
 <h2 id="examples">Examples<a class="anchor" aria-label="anchor" href="#examples"></a>
@@ -141,12 +133,12 @@
 <span><span class="va">y</span></span>
 <span><span class="co">#&gt; torch_tensor</span></span>
 <span><span class="co">#&gt; (1,.,.) = </span></span>
-<span><span class="co">#&gt;   0.7658  0.6123</span></span>
-<span><span class="co">#&gt;   0.3150  0.4639</span></span>
+<span><span class="co">#&gt;   0.6192  0.5800</span></span>
+<span><span class="co">#&gt;   0.2488  0.3681</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; (2,.,.) = </span></span>
-<span><span class="co">#&gt;   0.0604  0.0290</span></span>
-<span><span class="co">#&gt;   0.9553  0.6541</span></span>
+<span><span class="co">#&gt;   0.0042  0.9206</span></span>
+<span><span class="co">#&gt;   0.4388  0.5664</span></span>
 <span><span class="co">#&gt; [ CPUDoubleType{2,2,2} ]</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/identical.html" class="external-link">identical</a></span><span class="op">(</span><span class="va">x</span>, <span class="fu"><a href="reference/as_array.html">as_array</a></span><span class="op">(</span><span class="va">y</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] TRUE</span></span></code></pre></div>

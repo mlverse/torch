@@ -152,12 +152,12 @@ order to use GPU’s with torch you need to:</p>
 <ul>
 <li><p>Have a CUDA compatible NVIDIA GPU. You can find if you have a
 CUDA compatible GPU <a href="https://developer.nvidia.com/cuda-gpus#compute" class="external-link">here</a>.</p></li>
-<li><p>Have properly installed the NVIDIA CUDA toolkit version 11.3. For
-CUDA v11.3, follow the installation instructions <a href="https://docs.nvidia.com/cuda/archive/11.3.1/index.html" class="external-link">here</a>.
+<li><p>Have properly installed the NVIDIA CUDA toolkit version 11.7. For
+CUDA v11.7, follow the installation instructions <a href="https://docs.nvidia.com/cuda/archive/11.7.0/index.html" class="external-link">here</a>.
 <strong>Note</strong>: The version of the CUDA toolkit must match
 exactly what’s mentioed above.</p></li>
-<li><p>Have installed cuDNN version cuDNN 8.4. Follow the installation
-instructions available <a href="https://docs.nvidia.com/deeplearning/cudnn/archives/cudnn-840/install-guide/index.html" class="external-link">here</a>.</p></li>
+<li><p>Have installed cuDNN - a version compatible with CUDA v11.7.
+Follow the installation instructions available <a href="https://developer.nvidia.com/cudnn" class="external-link">here</a>.</p></li>
 </ul>
 <p>Once you have installed all pre-requisites you can install
 <code>torch</code> with:</p>
@@ -166,7 +166,7 @@ instructions available <a href="https://docs.nvidia.com/deeplearning/cudnn/archi
 <p>If you have followed default installation locations we will detect
 that you have CUDA software installed and automatically download the GPU
 enabled Lantern binaries. You can also specify the <code>CUDA</code> env
-var with something like <code>Sys.setenv(CUDA="11.3")</code> if you want
+var with something like <code>Sys.setenv(CUDA="11.7")</code> if you want
 to force an specific version of the CUDA toolkit.</p>
 </div>
 </div>
@@ -201,9 +201,9 @@ verify that:</p>
 <li><p>You have a NVIDIA CUDA compatible GPU. You can find if you have a
 CUDA compatible GPU <a href="https://developer.nvidia.com/cuda-gpus#compute" class="external-link">here</a>.</p></li>
 <li><p>You have correctly installed the NVIDIA CUDA Toolkit versions
-10.2 or 11.3, follow the instructions <a href="https://docs.nvidia.com/cuda/archive/11.3.1/" class="external-link">here</a>.</p></li>
-<li><p>You have installed cuDNN version 7.6 - (for CUDA 10.2) and 8.4
-for CUDA 11.3. Follow the installation instructions available <a href="https://docs.nvidia.com/deeplearning/cudnn/archives/cudnn-841/install-guide/index.html" class="external-link">here</a>.</p></li>
+11.6 or 11.7, follow the instructions <a href="https://docs.nvidia.com/cuda/archive/11.7.0/" class="external-link">here</a>.</p></li>
+<li><p>You have installed cuDNN (a version compatible with your CUDA
+version). Follow the installation instructions available <a href="https://developer.nvidia.com/cudnn" class="external-link">here</a>.</p></li>
 </ul>
 <p>Once you have installed all pre-requisites you can install
 <code>torch</code> with:</p>
@@ -212,7 +212,7 @@ for CUDA 11.3. Follow the installation instructions available <a href="https://d
 <p>If you have followed default installation locations we will detect
 that you have CUDA software installed and automatically download the GPU
 enabled Lantern binaries. You can also specify the <code>CUDA</code> env
-var with something like <code>Sys.setenv(CUDA="10.2")</code> if you want
+var with something like <code>Sys.setenv(CUDA="11.7")</code> if you want
 to force an specific version of the CUDA toolkit.</p>
 </div>
 </div>
