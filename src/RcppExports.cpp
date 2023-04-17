@@ -47472,6 +47472,116 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// cpp_jit_all_operators
+torch::vector::string cpp_jit_all_operators();
+RcppExport SEXP _torch_cpp_jit_all_operators() {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    rcpp_result_gen = Rcpp::wrap(cpp_jit_all_operators());
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_jit_operator_info
+torch::jit::FunctionSchema cpp_jit_operator_info(torch::string name);
+RcppExport SEXP _torch_cpp_jit_operator_info(SEXP nameSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< torch::string >::type name(nameSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_jit_operator_info(name));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_jit_all_schemas_for
+torch::jit::FunctionSchemaList cpp_jit_all_schemas_for(torch::string name);
+RcppExport SEXP _torch_cpp_jit_all_schemas_for(SEXP nameSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< torch::string >::type name(nameSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_jit_all_schemas_for(name));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_jit_execute
+torch::jit::Stack cpp_jit_execute(torch::string name, torch::jit::Stack stack);
+RcppExport SEXP _torch_cpp_jit_execute(SEXP nameSEXP, SEXP stackSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< torch::string >::type name(nameSEXP);
+    Rcpp::traits::input_parameter< torch::jit::Stack >::type stack(stackSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_jit_execute(name, stack));
+    return rcpp_result_gen;
+END_RCPP
+}
+// function_schema_name
+torch::string function_schema_name(XPtrTorchFunctionSchema schema);
+RcppExport SEXP _torch_function_schema_name(SEXP schemaSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchFunctionSchema >::type schema(schemaSEXP);
+    rcpp_result_gen = Rcpp::wrap(function_schema_name(schema));
+    return rcpp_result_gen;
+END_RCPP
+}
+// function_schema_arguments
+torch::jit::ArgumentList function_schema_arguments(XPtrTorchFunctionSchema schema);
+RcppExport SEXP _torch_function_schema_arguments(SEXP schemaSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchFunctionSchema >::type schema(schemaSEXP);
+    rcpp_result_gen = Rcpp::wrap(function_schema_arguments(schema));
+    return rcpp_result_gen;
+END_RCPP
+}
+// function_schema_argument_name
+torch::string function_schema_argument_name(XPtrTorchFunctionSchemaArgument arg);
+RcppExport SEXP _torch_function_schema_argument_name(SEXP argSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchFunctionSchemaArgument >::type arg(argSEXP);
+    rcpp_result_gen = Rcpp::wrap(function_schema_argument_name(arg));
+    return rcpp_result_gen;
+END_RCPP
+}
+// function_schema_argument_type
+torch::string function_schema_argument_type(XPtrTorchFunctionSchemaArgument arg);
+RcppExport SEXP _torch_function_schema_argument_type(SEXP argSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchFunctionSchemaArgument >::type arg(argSEXP);
+    rcpp_result_gen = Rcpp::wrap(function_schema_argument_type(arg));
+    return rcpp_result_gen;
+END_RCPP
+}
+// function_schema_returns
+torch::jit::ArgumentList function_schema_returns(XPtrTorchFunctionSchema schema);
+RcppExport SEXP _torch_function_schema_returns(SEXP schemaSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchFunctionSchema >::type schema(schemaSEXP);
+    rcpp_result_gen = Rcpp::wrap(function_schema_returns(schema));
+    return rcpp_result_gen;
+END_RCPP
+}
+// function_schema_return_type
+torch::string function_schema_return_type(XPtrTorchFunctionSchemaArgument ret);
+RcppExport SEXP _torch_function_schema_return_type(SEXP retSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchFunctionSchemaArgument >::type ret(retSEXP);
+    rcpp_result_gen = Rcpp::wrap(function_schema_return_type(ret));
+    return rcpp_result_gen;
+END_RCPP
+}
 // cpp_lantern_configure
 void cpp_lantern_configure(int log);
 RcppExport SEXP _torch_cpp_lantern_configure(SEXP logSEXP) {
@@ -52329,6 +52439,16 @@ static const R_CallMethodDef CallEntries[] = {
     {"_torch_cpp_jit_compile", (DL_FUNC) &_torch_cpp_jit_compile, 1},
     {"_torch_cpp_jit_compile_list_methods", (DL_FUNC) &_torch_cpp_jit_compile_list_methods, 1},
     {"_torch_cpp_jit_compile_get_function", (DL_FUNC) &_torch_cpp_jit_compile_get_function, 2},
+    {"_torch_cpp_jit_all_operators", (DL_FUNC) &_torch_cpp_jit_all_operators, 0},
+    {"_torch_cpp_jit_operator_info", (DL_FUNC) &_torch_cpp_jit_operator_info, 1},
+    {"_torch_cpp_jit_all_schemas_for", (DL_FUNC) &_torch_cpp_jit_all_schemas_for, 1},
+    {"_torch_cpp_jit_execute", (DL_FUNC) &_torch_cpp_jit_execute, 2},
+    {"_torch_function_schema_name", (DL_FUNC) &_torch_function_schema_name, 1},
+    {"_torch_function_schema_arguments", (DL_FUNC) &_torch_function_schema_arguments, 1},
+    {"_torch_function_schema_argument_name", (DL_FUNC) &_torch_function_schema_argument_name, 1},
+    {"_torch_function_schema_argument_type", (DL_FUNC) &_torch_function_schema_argument_type, 1},
+    {"_torch_function_schema_returns", (DL_FUNC) &_torch_function_schema_returns, 1},
+    {"_torch_function_schema_return_type", (DL_FUNC) &_torch_function_schema_return_type, 1},
     {"_torch_cpp_lantern_configure", (DL_FUNC) &_torch_cpp_lantern_configure, 1},
     {"_torch_cpp_lantern_version", (DL_FUNC) &_torch_cpp_lantern_version, 0},
     {"_torch_cpp_lantern_init", (DL_FUNC) &_torch_cpp_lantern_init, 1},
