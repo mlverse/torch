@@ -95,6 +95,7 @@ Collate:
     'install.R'
     'ivalue.R'
     'jit-compile.R'
+    'jit-execute.R'
     'lantern_load.R'
     'lantern_sync.R'
     'layout.R'
