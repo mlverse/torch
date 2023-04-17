@@ -1139,6 +1139,87 @@ XPtrTorchIValue from_sexp_ivalue(SEXP x) {
 
 void delete_ivalue(void* x) { lantern_IValue_delete(x); }
 
+
+// function schema
+
+void delete_function_schema(void* x) { lantern_function_schema_delete(x); }
+
+XPtrTorchFunctionSchema from_sexp_function_schema(SEXP x) {
+  if (TYPEOF(x) == EXTPTRSXP && Rf_inherits(x, "function_schema")) {
+    auto out = Rcpp::as<Rcpp::XPtr<XPtrTorchFunctionSchema>>(x);
+    return XPtrTorchFunctionSchema(out->get_shared());
+  }
+  Rcpp::stop("Unsupported type. Expected an external pointer.");
+}
+
+XPtrTorchFunctionSchema::operator SEXP() const {
+  auto xptr = make_xptr<XPtrTorchFunctionSchema>(*this);
+  xptr.attr("class") = Rcpp::CharacterVector::create("function_schema", "R7");
+  return xptr;
+}
+
+
+// function schema list
+
+void delete_function_schema_list(void* x) { lantern_function_schema_list_delete(x); }
+
+XPtrTorchFunctionSchemaList from_sexp_function_schema_list(SEXP x) {
+  if (TYPEOF(x) == EXTPTRSXP && Rf_inherits(x, "function_schema_list")) {
+    auto out = Rcpp::as<Rcpp::XPtr<XPtrTorchFunctionSchemaList>>(x);
+    return XPtrTorchFunctionSchemaList(out->get_shared());
+  }
+  Rcpp::stop("Unsupported type. Expected an external pointer.");
+}
+
+SEXP operator_sexp_function_schema_list(const XPtrTorchFunctionSchemaList* self) {
+  int64_t sze = _lantern_function_schema_list_size(self->get());
+  Rcpp::List out(sze);
+  for (int i = 0; i < sze; i++) {
+    void* tmp = _lantern_function_schema_list_at(self->get(), i);
+    out[i] = XPtrTorchFunctionSchema(tmp);
+  }
+  return out;
+}
+
+// function schema argument
+
+void delete_function_schema_argument(void* x) { lantern_function_schema_argument_delete(x); }
+
+XPtrTorchFunctionSchemaArgument from_sexp_function_schema_argument(SEXP x) {
+  if (TYPEOF(x) == EXTPTRSXP && Rf_inherits(x, "function_schema_argument")) {
+    auto out = Rcpp::as<Rcpp::XPtr<XPtrTorchFunctionSchemaArgument>>(x);
+    return XPtrTorchFunctionSchemaArgument(out->get_shared());
+  }
+  Rcpp::stop("Unsupported type. Expected an external pointer.");
+}
+XPtrTorchFunctionSchemaArgument::operator SEXP() const {
+  auto xptr = make_xptr<XPtrTorchFunctionSchemaArgument>(*this);
+  xptr.attr("class") = Rcpp::CharacterVector::create("function_schema_argument", "R7");
+  return xptr;
+}
+
+
+// function schema argument list
+void delete_function_schema_argument_list(void* x) { lantern_function_schema_argument_list_delete(x); }
+
+XPtrTorchFunctionSchemaArgumentList from_sexp_function_schema_argument_list(SEXP x) {
+  if (TYPEOF(x) == EXTPTRSXP && Rf_inherits(x, "function_schema_argument_list")) {
+    auto out = Rcpp::as<Rcpp::XPtr<XPtrTorchFunctionSchemaArgumentList>>(x);
+    return XPtrTorchFunctionSchemaArgumentList(out->get_shared());
+  }
+  Rcpp::stop("Unsupported type. Expected an external pointer.");
+}
+
+SEXP operator_sexp_function_schema_argument_list(const XPtrTorchFunctionSchemaArgumentList* self) {
+  int64_t sze = _lantern_function_schema_num_arguments(self->get());
+  Rcpp::List out(sze);
+  for (int i = 0; i < sze; i++) {
+    void* tmp = _lantern_function_schema_argument_at(self->get(), i);
+    out[i] = XPtrTorchFunctionSchemaArgument(tmp);
+  }
+  return out;
+}
+
 // tuple
 
 SEXP operator_sexp_tuple(const XPtrTorchTuple* self) {
