@@ -552,34 +552,42 @@ LANTERN_OPTIONAL_DECLS(string_view)
   HOST_API void lantern_Tensor_index_put_scalar_ (void* self, void* index, void* rhs) {LANTERN_CHECK_LOADED _lantern_Tensor_index_put_scalar_(self, index, rhs); LANTERN_HOST_HANDLER}
   LANTERN_API void (LANTERN_PTR _lantern_manual_seed) (int64_t seed);
   HOST_API void lantern_manual_seed (int64_t seed) {LANTERN_CHECK_LOADED _lantern_manual_seed(seed); LANTERN_HOST_HANDLER}
-  LANTERN_API void(LANTERN_PTR _lantern_function_schema_delete)(void *x);
-  HOST_API void lantern_function_schema_delete(void *x) {LANTERN_CHECK_LOADED _lantern_function_schema_delete(x); LANTERN_HOST_HANDLER }
-  LANTERN_API void(LANTERN_PTR _lantern_function_schema_list_delete)(void *x);
-  HOST_API void lantern_function_schema_list_delete(void *x) {LANTERN_CHECK_LOADED _lantern_function_schema_list_delete(x); LANTERN_HOST_HANDLER }
-  LANTERN_API void(LANTERN_PTR _lantern_function_schema_argument_delete)(void *x);
-  HOST_API void lantern_function_schema_argument_delete(void *x) {LANTERN_CHECK_LOADED _lantern_function_schema_argument_delete(x); LANTERN_HOST_HANDLER }
-  LANTERN_API void(LANTERN_PTR _lantern_function_schema_argument_list_delete)(void *x);
-  HOST_API void lantern_function_schema_argument_list_delete(void *x) {LANTERN_CHECK_LOADED _lantern_function_schema_argument_list_delete(x); LANTERN_HOST_HANDLER }
-  LANTERN_API void*(LANTERN_PTR _lantern_function_schema_name)(void *x);
-  HOST_API void* lantern_function_schema_name(void *x) {LANTERN_CHECK_LOADED _lantern_function_schema_name(x); LANTERN_HOST_HANDLER }
-  LANTERN_API void*(LANTERN_PTR _lantern_function_schema_arguments)(void *x);
-  HOST_API void* lantern_function_schema_arguments(void *x) {LANTERN_CHECK_LOADED _lantern_function_schema_arguments(x); LANTERN_HOST_HANDLER }
-  LANTERN_API int(LANTERN_PTR _lantern_function_schema_num_arguments)(void *x);
-  HOST_API int lantern_function_schema_num_arguments(void *x) {LANTERN_CHECK_LOADED _lantern_function_schema_num_arguments(x); LANTERN_HOST_HANDLER }
-  LANTERN_API int(LANTERN_PTR _lantern_function_schema_list_size)(void *x);
-  HOST_API int lantern_function_schema_list_size(void *x) {LANTERN_CHECK_LOADED _lantern_function_schema_list_size(x); LANTERN_HOST_HANDLER }
-  LANTERN_API void*(LANTERN_PTR _lantern_function_schema_argument_at)(void *x);
-  HOST_API void* lantern_function_schema_argument_at(void *x) {LANTERN_CHECK_LOADED _lantern_function_schema_argument_at(x); LANTERN_HOST_HANDLER }
-  LANTERN_API void*(LANTERN_PTR _lantern_function_schema_argument_name)(void *x);
-  HOST_API void* lantern_function_schema_argument_name(void *x) {LANTERN_CHECK_LOADED _lantern_function_schema_argument_name(x); LANTERN_HOST_HANDLER }
-  LANTERN_API void*(LANTERN_PTR _lantern_function_schema_argument_type)(void *x);
-  HOST_API void* lantern_function_schema_argument_type(void *x) {LANTERN_CHECK_LOADED _lantern_function_schema_argument_type(x); LANTERN_HOST_HANDLER }
-  LANTERN_API void*(LANTERN_PTR _lantern_function_schema_returns)(void *x);
-  HOST_API void* lantern_function_schema_returns(void *x) {LANTERN_CHECK_LOADED _lantern_function_schema_returns(x); LANTERN_HOST_HANDLER }
-  LANTERN_API void*(LANTERN_PTR _lantern_function_schema_return_type)(void *x);
-  HOST_API void* lantern_function_schema_return_type(void *x) {LANTERN_CHECK_LOADED _lantern_function_schema_return_type(x); LANTERN_HOST_HANDLER }
-  LANTERN_API void*(LANTERN_PTR _lantern_function_schema_list_at)(void *x);
-  HOST_API void* lantern_function_schema_list_at(void *x) {LANTERN_CHECK_LOADED _lantern_function_schema_list_at(x); LANTERN_HOST_HANDLER }
+  LANTERN_API void(LANTERN_PTR _lantern_function_schema_delete)(void* schema);
+  HOST_API void lantern_function_schema_delete(void* schema) {LANTERN_CHECK_LOADED _lantern_function_schema_delete(schema); LANTERN_HOST_HANDLER}
+  LANTERN_API void(LANTERN_PTR _lantern_function_schema_list_delete)(void* schemalist);
+  HOST_API void lantern_function_schema_list_delete(void* schemalist) {LANTERN_CHECK_LOADED _lantern_function_schema_list_delete(schemalist); LANTERN_HOST_HANDLER}
+  LANTERN_API void(LANTERN_PTR _lantern_function_schema_argument_delete)(void* argument);
+  HOST_API void lantern_function_schema_argument_delete(void* argument) {LANTERN_CHECK_LOADED _lantern_function_schema_argument_delete(argument); LANTERN_HOST_HANDLER}
+  LANTERN_API void(LANTERN_PTR _lantern_function_schema_argument_list_delete)(void* arglist);
+  HOST_API void lantern_function_schema_argument_list_delete(void* arglist) {LANTERN_CHECK_LOADED _lantern_function_schema_argument_list_delete(arglist); LANTERN_HOST_HANDLER}
+  LANTERN_API void*(LANTERN_PTR _lantern_function_schema_name)(void* schema);
+  HOST_API void* lantern_function_schema_name(void* schema) {LANTERN_CHECK_LOADED void* ret = _lantern_function_schema_name(schema); LANTERN_HOST_HANDLER return ret;}
+  LANTERN_API void*(LANTERN_PTR _lantern_function_schema_arguments)(void* schema);
+  HOST_API void* lantern_function_schema_arguments(void* schema) {LANTERN_CHECK_LOADED void* ret = _lantern_function_schema_arguments(schema); LANTERN_HOST_HANDLER return ret;}
+  LANTERN_API int(LANTERN_PTR _lantern_function_schema_num_arguments)(void* arglist);
+  HOST_API int lantern_function_schema_num_arguments(void *arglist) {LANTERN_CHECK_LOADED int ret = _lantern_function_schema_num_arguments(arglist); LANTERN_HOST_HANDLER return ret;}
+  LANTERN_API int(LANTERN_PTR _lantern_function_schema_list_size)(void* schemalist);
+  HOST_API int lantern_function_schema_list_size(void* schema_list) {LANTERN_CHECK_LOADED int ret = _lantern_function_schema_list_size(schema_list); LANTERN_HOST_HANDLER return ret;}
+  LANTERN_API void*(LANTERN_PTR _lantern_function_schema_argument_at)(void* arglist, int i);
+  HOST_API void* lantern_function_schema_argument_at(void* arglist, int i) {LANTERN_CHECK_LOADED void* ret = _lantern_function_schema_argument_at(arglist, i); LANTERN_HOST_HANDLER return ret;}
+  LANTERN_API void*(LANTERN_PTR _lantern_function_schema_argument_name)(void* argument);
+  HOST_API void* lantern_function_schema_argument_name(void* argument) {LANTERN_CHECK_LOADED void* ret = _lantern_function_schema_argument_name(argument); LANTERN_HOST_HANDLER return ret;}
+  LANTERN_API void*(LANTERN_PTR _lantern_function_schema_argument_type)(void* argument);
+  HOST_API void* lantern_function_schema_argument_type(void *argument) {LANTERN_CHECK_LOADED void* ret = _lantern_function_schema_argument_type(argument); LANTERN_HOST_HANDLER return ret;}
+  LANTERN_API void*(LANTERN_PTR _lantern_function_schema_returns)(void* schema); 
+  HOST_API void* lantern_function_schema_returns(void* schema) {LANTERN_CHECK_LOADED void* ret = _lantern_function_schema_returns(schema); LANTERN_HOST_HANDLER return ret;}
+  LANTERN_API void*(LANTERN_PTR _lantern_function_schema_return_type)(void* return_);
+  HOST_API void* lantern_function_schema_return_type(void* return_) {LANTERN_CHECK_LOADED void* ret = _lantern_function_schema_return_type(return_); LANTERN_HOST_HANDLER return ret;}
+  LANTERN_API void*(LANTERN_PTR _lantern_function_schema_list_at)(void* schema_list, int i);
+  HOST_API void* lantern_function_schema_list_at(void* schema_list, int i) {LANTERN_CHECK_LOADED void* ret = _lantern_function_schema_list_at(schema_list, i); LANTERN_HOST_HANDLER return ret;}
+  LANTERN_API void*(LANTERN_PTR _lantern_jit_all_operators)();
+  HOST_API void* lantern_jit_all_operators() {LANTERN_CHECK_LOADED void* ret = _lantern_jit_all_operators(); LANTERN_HOST_HANDLER return ret;}
+  LANTERN_API void*(LANTERN_PTR _lantern_jit_operator_info)(void* name);
+  HOST_API void* lantern_jit_operator_info(void* name) {LANTERN_CHECK_LOADED void* ret = _lantern_jit_operator_info(name); LANTERN_HOST_HANDLER return ret;}
+  LANTERN_API void*(LANTERN_PTR _lantern_jit_all_schemas_for)(void* name);
+  HOST_API void* lantern_jit_all_schemas_for(void* name) {LANTERN_CHECK_LOADED void* ret = _lantern_jit_all_schemas_for(name); LANTERN_HOST_HANDLER return ret;}
+  LANTERN_API void*(LANTERN_PTR _lantern_jit_execute)(void* name, void* stack);
+  HOST_API void* lantern_jit_execute(void* name, void* stack) {LANTERN_CHECK_LOADED void* ret = _lantern_jit_execute(name, stack); LANTERN_HOST_HANDLER return ret;}
   
   LANTERN_API void* (LANTERN_PTR _lantern_load_state_dict) (const char * path);
   HOST_API void * lantern_load_state_dict (const char * path)
@@ -10139,6 +10147,7 @@ LOAD_SYMBOL(_lantern_function_schema_argument_at);
 LOAD_SYMBOL(_lantern_function_schema_argument_name);
 LOAD_SYMBOL(_lantern_function_schema_argument_type);
 LOAD_SYMBOL(_lantern_function_schema_return_type);
+LOAD_SYMBOL(_lantern_function_schema_list_at);
 
   /* Autogen Symbols -- Start */
   LOAD_SYMBOL(_lantern__cast_byte_tensor_bool)
