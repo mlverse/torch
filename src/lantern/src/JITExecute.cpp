@@ -109,7 +109,7 @@ void* _lantern_jit_operator_info(void* name) {
 }
 
 // Returns all FunctionSchemas for a specific operator.
-void* _jit_all_schemas_for(void* name) {
+void* _lantern_jit_all_schemas_for(void* name) {
   LANTERN_FUNCTION_START
   const auto& op_name {c10::Symbol::fromQualString(from_raw::string(name))};
   const auto& ops {torch::jit::getAllOperatorsFor(op_name)};
@@ -122,7 +122,7 @@ void* _jit_all_schemas_for(void* name) {
 }
 
 // Executes the requested operation using the first FunctionSchema that matches the given arguments.
-void* _jit_execute(void* name, void* stack) {
+void* _lantern_jit_execute(void* name, void* stack) {
   LANTERN_FUNCTION_START
   const auto& op_name {c10::Symbol::fromQualString(from_raw::string(name))};
   const auto& ops {torch::jit::getAllOperatorsFor(op_name)};

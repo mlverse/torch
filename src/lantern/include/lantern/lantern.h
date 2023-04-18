@@ -10135,6 +10135,9 @@ LOAD_SYMBOL(_lantern_amp_autocast_clear_cache);
 LOAD_SYMBOL(_lantern_amp_foreach_non_finite_check_and_unscale);
 LOAD_SYMBOL(_lantern_amp_update_scale_);
 LOAD_SYMBOL(_lantern_cuda_set_rng_state);
+LOAD_SYMBOL(_lantern_cuda_get_rng_state);
+LOAD_SYMBOL(_lantern_cpu_get_rng_state);
+LOAD_SYMBOL(_lantern_cpu_set_rng_state);
 LOAD_SYMBOL(_lantern_function_schema_delete);
 LOAD_SYMBOL(_lantern_function_schema_list_delete);
 LOAD_SYMBOL(_lantern_function_schema_argument_delete);
@@ -10147,6 +10150,10 @@ LOAD_SYMBOL(_lantern_function_schema_argument_at);
 LOAD_SYMBOL(_lantern_function_schema_argument_name);
 LOAD_SYMBOL(_lantern_function_schema_argument_type);
 LOAD_SYMBOL(_lantern_function_schema_return_type);
+LOAD_SYMBOL(_lantern_jit_all_operators);
+LOAD_SYMBOL(_lantern_jit_execute);
+LOAD_SYMBOL(_lantern_jit_operator_info);
+LOAD_SYMBOL(_lantern_jit_all_schemas_for);
 LOAD_SYMBOL(_lantern_function_schema_list_at);
 
   /* Autogen Symbols -- Start */
