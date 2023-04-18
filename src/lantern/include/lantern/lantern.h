@@ -10150,6 +10150,7 @@ LOAD_SYMBOL(_lantern_function_schema_argument_at);
 LOAD_SYMBOL(_lantern_function_schema_argument_name);
 LOAD_SYMBOL(_lantern_function_schema_argument_type);
 LOAD_SYMBOL(_lantern_function_schema_return_type);
+LOAD_SYMBOL(_lantern_function_schema_returns);
 LOAD_SYMBOL(_lantern_jit_all_operators);
 LOAD_SYMBOL(_lantern_jit_execute);
 LOAD_SYMBOL(_lantern_jit_operator_info);

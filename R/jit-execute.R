@@ -6,7 +6,7 @@ FunctionSchema <- R7Class(
       cat("arguments: ")
       cat(paste(names(self$arguments), self$arguments, sep = " - ", collapse = ", "), "\n")
       cat("returns: ")
-      cat(paste(self$arguments, collapse = ", "))
+      cat(paste(self$returns, collapse = ", "))
     }
   ),
   active = list(
