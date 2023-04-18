@@ -169,12 +169,13 @@ void* _lantern_jit_execute(void* name, void* stack) {
         info += "C10 error is: " + std::string(e.what_without_backtrace());
         info += "\nTrying next.\n";
         LLOG(info.c_str())
-        std::cout << info; // tbd remove!!
+        std::cout << info; // tbd remove at some later time
       }
     }
   if (found) {
     LLOG(("Found matching schema in try: " + std::to_string(tries)).c_str())
   } else {
+    // we return the original Stack (maybe change that logic)
     LLOG("Tried all schemas; none matched.\n")
     std::cout << "Tried all schemas; none matched.\n";
   }

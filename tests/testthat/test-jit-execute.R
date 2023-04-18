@@ -18,17 +18,24 @@ test_that("cpp_jit_execute() works") {
   expect_equal(length(res), 1)
   expect_equal(res[[1]] |> dim(), c(5, 5))
   
-  # matmul, C10 error
-  res <- cpp_jit_execute("aten::matmul", list(torch::torch_ones(4, 5), torch::torch_rand(4, 5)))
-  # tbd: expect error (right now returns original stack)
-  # Q: in case of error, do we clean up stack (in csrc)?
+  # matmul, C10 error: mat1 and mat2 shapes cannot be multiplied (4x5 and 4x5)
+  # currently we return the original Stack (maybe change that logic)
+  stack <- list(torch::torch_ones(4, 5), torch::torch_rand(4, 5))
+  res <- cpp_jit_execute("aten::matmul", stack)
+  expect_equal_to_tensor(stack[[1]], res[[1]])
+  expect_equal_to_tensor(stack[[2]], res[[2]])
+  
+  # matmul, C10 error: Expected Tensor but got GenericList
+  # currently we return the original Stack (maybe change that logic)
+  stack <- list(torch::torch_ones(4, 5), 27)
+  res <- cpp_jit_execute("aten::matmul", stack)
+  expect_equal(stack[[1]], res[[1]])
+  expect_equal(stack[[2]], res[[2]])
   
   # matmul, passing out tensor
   res <- cpp_jit_execute("aten::matmul", list(torch::torch_ones(5, 4), torch::torch_rand(4, 5), torch::torch_zeros(5, 5)))
   expect_equal(length(res), 1)
   expect_equal(res[[1]] |> dim(), c(5, 5))
-  
-  res <- cpp_jit_execute("aten::matmul", list(torch::torch_ones(5, 4), 27))
   
 }
 
