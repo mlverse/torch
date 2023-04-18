@@ -49,7 +49,7 @@ test_that("cpp_jit_all_schemas_for() works") {
 # test_that("explore existing overloads") {
 #   res <- cpp_jit_all_operators()
 #   num_schemas <- table(res) |> as.data.frame()
-#   multiplicities <- num_schemas |> dplyr::group_by(Freq) |> dplyr::summarise(count  = n())
+#   multiplicities <- num_schemas |> dplyr::group_by(Freq) |> dplyr::summarise(count  = dplyr::n())
 #   # Freq count
 #   # 1     1   833
 #   # 2     2   772
