@@ -11,7 +11,7 @@ test_that("cpp_jit_operator_info() works", {
   expect_equal(info$returns[[1]], "TensorType")
 })
 
-test_that("cpp_jit_execute() works") {
+test_that("cpp_jit_execute() works", {
  
   # matmul, default use
   res <- cpp_jit_execute("aten::matmul", list(torch::torch_ones(5, 4), torch::torch_rand(4, 5)))
@@ -37,14 +37,14 @@ test_that("cpp_jit_execute() works") {
   expect_equal(length(res), 1)
   expect_equal(res[[1]] |> dim(), c(5, 5))
   
-}
+})
 
-test_that("cpp_jit_all_schemas_for() works") {
+test_that("cpp_jit_all_schemas_for() works", {
   res <- cpp_jit_all_schemas_for("aten::conv2d")
   expect_equal(setdiff(unname(unlist(res[[2]]$arguments)), unname(unlist(res[[1]]$arguments))), "StringType")
   res <- cpp_jit_all_schemas_for("aten::matmul")
   expect_equal(length(res), 2)
-}
+})
 
 # test_that("explore existing overloads") {
 #   res <- cpp_jit_all_operators()
