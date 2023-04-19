@@ -16,27 +16,22 @@ test_that("cpp_jit_execute() works", {
   # matmul, default use
   res <- cpp_jit_execute("aten::matmul", list(torch::torch_ones(5, 4), torch::torch_rand(4, 5)))
   expect_equal(length(res), 1)
-  expect_equal(res[[1]] |> dim(), c(5, 5))
+  expect_equal(dim(res[[1]]), c(5, 5))
   
   # matmul, C10 error: mat1 and mat2 shapes cannot be multiplied (4x5 and 4x5)
-  # currently we return the original Stack (maybe change that logic)
   stack <- list(torch::torch_ones(4, 5), torch::torch_rand(4, 5))
-  res <- cpp_jit_execute("aten::matmul", stack)
-  expect_equal_to_tensor(stack[[1]], res[[1]])
-  expect_equal_to_tensor(stack[[2]], res[[2]])
+  expect_error(cpp_jit_execute("aten::matmul", stack))
   
   # matmul, C10 error: Expected Tensor but got GenericList
-  # currently we return the original Stack (maybe change that logic)
   stack <- list(torch::torch_ones(4, 5), 27)
-  res <- cpp_jit_execute("aten::matmul", stack)
-  expect_equal(stack[[1]], res[[1]])
-  expect_equal(stack[[2]], res[[2]])
+  expect_error(cpp_jit_execute("aten::matmul", stack))
   
   # matmul, passing out tensor
-  res <- cpp_jit_execute("aten::matmul", list(torch::torch_ones(5, 4), torch::torch_rand(4, 5), torch::torch_zeros(5, 5)))
-  expect_equal(length(res), 1)
-  expect_equal(res[[1]] |> dim(), c(5, 5))
-  
+  t1 <- torch::torch_ones(4, 4)
+  t2 <- torch::torch_eye(4)
+  out <- torch::torch_zeros(4, 4)
+  res <- cpp_jit_execute("aten::matmul", list(t1, t2, out))
+  expect_equal_to_tensor(t1, out)
 })
 
 test_that("cpp_jit_all_schemas_for() works", {
@@ -46,6 +41,7 @@ test_that("cpp_jit_all_schemas_for() works", {
   expect_equal(length(res), 2)
 })
 
+# just leaving in for explorative use in local installations
 # test_that("explore existing overloads") {
 #   res <- cpp_jit_all_operators()
 #   num_schemas <- table(res) |> as.data.frame()

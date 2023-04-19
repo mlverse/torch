@@ -100,9 +100,6 @@ void* _lantern_jit_operator_info(void* name) {
   const auto& op_name {c10::Symbol::fromQualString(from_raw::string(name))};
   const auto& ops {torch::jit::getAllOperatorsFor(op_name)};
   const auto length {ops.size()};
-  if (length > 1) {
-    std::cout << "Returning default schema. Call _jit_all_schemas_for() to get all." << std::endl;
-  }
   const auto& op {ops.front()};
   return make_raw::FunctionSchema(op->schema());
   LANTERN_FUNCTION_END_RET(nullptr)
@@ -169,15 +166,13 @@ void* _lantern_jit_execute(void* name, void* stack) {
         info += "C10 error is: " + std::string(e.what_without_backtrace());
         info += "\nTrying next.\n";
         LLOG(info.c_str())
-        std::cout << info; // tbd remove at some later time
       }
     }
   if (found) {
     LLOG(("Found matching schema in try: " + std::to_string(tries)).c_str())
   } else {
-    // we return the original Stack (maybe change that logic)
     LLOG("Tried all schemas; none matched.\n")
-    std::cout << "Tried all schemas; none matched.\n";
+    throw std::runtime_error("Tried all schemas; none matched.");
   }
   }
   return (void*)std::make_unique<torch::jit::Stack>(stack_).release();
