@@ -163,13 +163,13 @@ void* _lantern_jit_execute(void* name, void* stack) {
         for (const auto& ret : returns) {
           info += "  Type: " + std::string(c10::typeKindToString(ret.type()->kind())) + "\n";
         }
-        info += "C10 error is: " + std::string(e.what_without_backtrace());
+        info += "C10 error is: %s", std::string(e.what_without_backtrace());
         info += "\nTrying next.\n";
-        LLOG(info.c_str())
+        LLOG("%s", info.c_str())
       }
     }
   if (found) {
-    LLOG(("Found matching schema in try: " + std::to_string(tries)).c_str())
+    LLOG(("Found matching schema in try: %s", std::to_string(tries)).c_str())
   } else {
     LLOG("Tried all schemas; none matched.\n")
     throw std::runtime_error("Tried all schemas; none matched.");

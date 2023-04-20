@@ -49,13 +49,13 @@ void check_lantern_loaded();
 extern int lanternLogEnabled;
 #define LLOG(...) if ((lanternLogEnabled & 1) == 1) {              \
   printf("%ld INFO ", time(NULL));                                 \
-  printf("%s", __VA_ARGS__);                                        \
+  printf(__VA_ARGS__);                                        \
   printf("\n");                                                    \
 }                                                                  \
 if ((lanternLogEnabled & 2) == 2) {                                \
   FILE *pFile = fopen("lantern.log", "a");                         \
   fprintf(pFile, "%ld INFO ", time(NULL));                         \
-  fprintf(pFile, "%s", __VA_ARGS__);                               \
+  fprintf(pFile, __VA_ARGS__);                               \
   fprintf(pFile, "\n");                                            \
   fclose(pFile);                                                   \
 }
