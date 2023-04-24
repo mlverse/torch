@@ -464,6 +464,47 @@ class XPtrTorchIValue : public XPtrTorch {
   operator SEXP() const;
 };
 
+class XPtrTorchFunctionSchema : public XPtrTorch {
+public:
+  XPtrTorchFunctionSchema(void* x) : XPtrTorch(x, delete_function_schema) {}
+  explicit XPtrTorchFunctionSchema(std::shared_ptr<void> x) : XPtrTorch(x){};
+  XPtrTorchFunctionSchema(const XPtrTorchFunctionSchema& x)
+    : XPtrTorch(x.get_shared()){};
+  XPtrTorchFunctionSchema(SEXP x);
+  operator SEXP() const;
+};
+
+class XPtrTorchFunctionSchemaList : public XPtrTorch {
+public:
+  XPtrTorchFunctionSchemaList(void* x) : XPtrTorch(x, delete_function_schema_list) {}
+  explicit XPtrTorchFunctionSchemaList(std::shared_ptr<void> x) : XPtrTorch(x){};
+  XPtrTorchFunctionSchemaList(const XPtrTorchFunctionSchemaList& x)
+    : XPtrTorch(x.get_shared()){};
+  XPtrTorchFunctionSchemaList(SEXP x);
+  operator SEXP() const;
+};
+
+class XPtrTorchFunctionSchemaArgument : public XPtrTorch {
+public:
+  XPtrTorchFunctionSchemaArgument(void* x) : XPtrTorch(x, delete_function_schema_argument) {}
+  explicit XPtrTorchFunctionSchemaArgument(std::shared_ptr<void> x) : XPtrTorch(x){};
+  XPtrTorchFunctionSchemaArgument(const XPtrTorchFunctionSchemaArgument& x)
+    : XPtrTorch(x.get_shared()){};
+  XPtrTorchFunctionSchemaArgument(SEXP x);
+  operator SEXP() const;
+};
+
+class XPtrTorchFunctionSchemaArgumentList : public XPtrTorch {
+public:
+  XPtrTorchFunctionSchemaArgumentList(void* x) : XPtrTorch(x, delete_function_schema_argument_list) {}
+  explicit XPtrTorchFunctionSchemaArgumentList(std::shared_ptr<void> x) : XPtrTorch(x){};
+  XPtrTorchFunctionSchemaArgumentList(const XPtrTorchFunctionSchemaArgumentList& x)
+    : XPtrTorch(x.get_shared()){};
+  XPtrTorchFunctionSchemaArgumentList(SEXP x);
+  operator SEXP() const;
+};
+
+
 class XPtrTorchTuple : public XPtrTorch {
  public:
   XPtrTorchTuple(void* x) : XPtrTorch(x, delete_tuple) {}
@@ -627,6 +668,8 @@ class XPtrTorchvector_void : public XPtrTorch {
   XPtrTorchvector_void(void* x) : XPtrTorch(x, delete_vector_void) {}
 };
 
+
+
 template <class T>
 class nullable {
  public:
@@ -767,6 +810,10 @@ using named_module_list = XPtrTorchjit_named_module_list;
 using FunctionPtr = XPtrTorchFunctionPtr;
 using Stack = XPtrTorchStack;
 using IValue = XPtrTorchIValue;
+using FunctionSchema = XPtrTorchFunctionSchema;
+using FunctionSchemaList = XPtrTorchFunctionSchemaList;
+using Argument = XPtrTorchFunctionSchemaArgument;
+using ArgumentList = XPtrTorchFunctionSchemaArgumentList;
 using Tuple = XPtrTorchTuple;
 
 namespace vector {

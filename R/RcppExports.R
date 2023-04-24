@@ -14277,6 +14277,46 @@ cpp_jit_compile_get_function <- function(cu, name) {
     .Call(`_torch_cpp_jit_compile_get_function`, cu, name)
 }
 
+cpp_jit_all_operators <- function() {
+    .Call(`_torch_cpp_jit_all_operators`)
+}
+
+cpp_jit_operator_info <- function(name) {
+    .Call(`_torch_cpp_jit_operator_info`, name)
+}
+
+cpp_jit_all_schemas_for <- function(name) {
+    .Call(`_torch_cpp_jit_all_schemas_for`, name)
+}
+
+cpp_jit_execute <- function(name, stack) {
+    .Call(`_torch_cpp_jit_execute`, name, stack)
+}
+
+function_schema_name <- function(schema) {
+    .Call(`_torch_function_schema_name`, schema)
+}
+
+function_schema_arguments <- function(schema) {
+    .Call(`_torch_function_schema_arguments`, schema)
+}
+
+function_schema_argument_name <- function(arg) {
+    .Call(`_torch_function_schema_argument_name`, arg)
+}
+
+function_schema_argument_type <- function(arg) {
+    .Call(`_torch_function_schema_argument_type`, arg)
+}
+
+function_schema_returns <- function(schema) {
+    .Call(`_torch_function_schema_returns`, schema)
+}
+
+function_schema_return_type <- function(ret) {
+    .Call(`_torch_function_schema_return_type`, ret)
+}
+
 cpp_lantern_configure <- function(log) {
     invisible(.Call(`_torch_cpp_lantern_configure`, log))
 }

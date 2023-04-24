@@ -127,6 +127,7 @@ set(LANTERN_SRC
     src/IValue.cpp
     src/Compile.cpp
     src/Amp.cpp
+    src/JITExecute.cpp
 )
 
 if(APPLE)
