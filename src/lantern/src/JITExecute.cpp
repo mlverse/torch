@@ -169,7 +169,7 @@ void* _lantern_jit_execute(void* name, void* stack) {
       }
     }
   if (found) {
-    LLOG(("Found matching schema in try: %s", std::to_string(tries)).c_str())
+    LLOG("Found matching schema in try: %s", std::to_string(tries).c_str())
   } else {
     LLOG("Tried all schemas; none matched.\n")
     throw std::runtime_error("Tried all schemas; none matched.");
