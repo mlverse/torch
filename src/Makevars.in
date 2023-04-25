@@ -1,6 +1,7 @@
 PKG_CPPFLAGS = -I../inst/include/ -DRCPP_NO_UNWIND_PROTECT
 PKG_PATH = @PKG_PATH@
 LANTERN_TARGET = @LANTERN_TARGET@
+CXX_STD=CXX11
 
 .PHONY: rename_init lantern
 all: $(LANTERN_TARGET) $(SHLIB) rename
