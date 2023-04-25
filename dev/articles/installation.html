@@ -34,7 +34,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">torch</a>
 
-    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">0.9.1.9001</small>
+    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">0.10.0.9000</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -153,12 +153,12 @@ order to use GPU’s with torch you need to:</p>
 <ul>
 <li><p>Have a CUDA compatible NVIDIA GPU. You can find if you have a
 CUDA compatible GPU <a href="https://developer.nvidia.com/cuda-gpus#compute" class="external-link">here</a>.</p></li>
-<li><p>Have properly installed the NVIDIA CUDA toolkit version 11.3. For
-CUDA v11.3, follow the installation instructions <a href="https://docs.nvidia.com/cuda/archive/11.3.1/index.html" class="external-link">here</a>.
+<li><p>Have properly installed the NVIDIA CUDA toolkit version 11.7. For
+CUDA v11.7, follow the installation instructions <a href="https://docs.nvidia.com/cuda/archive/11.7.0/index.html" class="external-link">here</a>.
 <strong>Note</strong>: The version of the CUDA toolkit must match
 exactly what’s mentioed above.</p></li>
-<li><p>Have installed cuDNN version cuDNN 8.4. Follow the installation
-instructions available <a href="https://docs.nvidia.com/deeplearning/cudnn/archives/cudnn-840/install-guide/index.html" class="external-link">here</a>.</p></li>
+<li><p>Have installed cuDNN - a version compatible with CUDA v11.7.
+Follow the installation instructions available <a href="https://developer.nvidia.com/cudnn" class="external-link">here</a>.</p></li>
 </ul>
 <p>Once you have installed all pre-requisites you can install
 <code>torch</code> with:</p>
@@ -167,7 +167,7 @@ instructions available <a href="https://docs.nvidia.com/deeplearning/cudnn/archi
 <p>If you have followed default installation locations we will detect
 that you have CUDA software installed and automatically download the GPU
 enabled Lantern binaries. You can also specify the <code>CUDA</code> env
-var with something like <code>Sys.setenv(CUDA="11.3")</code> if you want
+var with something like <code>Sys.setenv(CUDA="11.7")</code> if you want
 to force an specific version of the CUDA toolkit.</p>
 </div>
 </div>
@@ -202,9 +202,9 @@ verify that:</p>
 <li><p>You have a NVIDIA CUDA compatible GPU. You can find if you have a
 CUDA compatible GPU <a href="https://developer.nvidia.com/cuda-gpus#compute" class="external-link">here</a>.</p></li>
 <li><p>You have correctly installed the NVIDIA CUDA Toolkit versions
-10.2 or 11.3, follow the instructions <a href="https://docs.nvidia.com/cuda/archive/11.3.1/" class="external-link">here</a>.</p></li>
-<li><p>You have installed cuDNN version 7.6 - (for CUDA 10.2) and 8.4
-for CUDA 11.3. Follow the installation instructions available <a href="https://docs.nvidia.com/deeplearning/cudnn/archives/cudnn-841/install-guide/index.html" class="external-link">here</a>.</p></li>
+11.6 or 11.7, follow the instructions <a href="https://docs.nvidia.com/cuda/archive/11.7.0/" class="external-link">here</a>.</p></li>
+<li><p>You have installed cuDNN (a version compatible with your CUDA
+version). Follow the installation instructions available <a href="https://developer.nvidia.com/cudnn" class="external-link">here</a>.</p></li>
 </ul>
 <p>Once you have installed all pre-requisites you can install
 <code>torch</code> with:</p>
@@ -213,7 +213,7 @@ for CUDA 11.3. Follow the installation instructions available <a href="https://d
 <p>If you have followed default installation locations we will detect
 that you have CUDA software installed and automatically download the GPU
 enabled Lantern binaries. You can also specify the <code>CUDA</code> env
-var with something like <code>Sys.setenv(CUDA="10.2")</code> if you want
+var with something like <code>Sys.setenv(CUDA="11.7")</code> if you want
 to force an specific version of the CUDA toolkit.</p>
 </div>
 </div>
@@ -238,8 +238,10 @@ chosen below.</p>
 following:</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">options</a></span><span class="op">(</span>timeout <span class="op">=</span> <span class="fl">600</span><span class="op">)</span> <span class="co"># increasing timeout is recommended since we will be downloading a 2GB file.</span></span>
-<span><span class="va">kind</span> <span class="op">&lt;-</span> <span class="st">"cu117"</span> <span class="co"># "cpu", "cu117" are the only currently supported.</span></span>
-<span><span class="va">version</span> <span class="op">&lt;-</span> <span class="st">"0.9.1.9000"</span></span>
+<span><span class="co"># For Windows and Linux: "cpu", "cu117" are the only currently supported</span></span>
+<span><span class="co"># For MacOS the supported are: "cpu-intel" or "cpu-m1"</span></span>
+<span><span class="va">kind</span> <span class="op">&lt;-</span> <span class="st">"cu117"</span> </span>
+<span><span class="va">version</span> <span class="op">&lt;-</span> <span class="st">"0.10.0"</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">options</a></span><span class="op">(</span>repos <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
 <span>  torch <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sprintf.html" class="external-link">sprintf</a></span><span class="op">(</span><span class="st">"https://storage.googleapis.com/torch-lantern-builds/packages/%s/%s/"</span>, <span class="va">kind</span>, <span class="va">version</span><span class="op">)</span>,</span>
 <span>  CRAN <span class="op">=</span> <span class="st">"https://cloud.r-project.org"</span> <span class="co"># or any other from which you want to install the other R dependencies.</span></span>
