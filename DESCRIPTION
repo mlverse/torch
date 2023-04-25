@@ -138,6 +138,7 @@ Collate:
     'nnf-upsampling.R'
     'nnf-vision.R'
     'operators.R'
+    'ops.R'
     'optim.R'
     'optim-adadelta.R'
     'optim-adagrad.R'
