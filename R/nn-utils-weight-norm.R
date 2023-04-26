@@ -38,12 +38,12 @@
 #' x$weight
 #' 
 #' # the recompute() method recomputes the weight using g and v. It must be called
-#' explicitly inside `forward()`.
+#' # explicitly inside `forward()`.
 #' weight_norm$recompute(x)
 #' 
 #' @export
 nn_utils_weight_norm <- R6::R6Class(
-  "WeightNorm",
+  "nn_utils_weight_norm",
   lock_objects = FALSE,
   public = list(
     name = NULL,

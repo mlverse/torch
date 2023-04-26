@@ -23,16 +23,17 @@ magnitude (e.g. \code{'weight_g'}) and one specifying the direction
 The pytorch Weight normalization is implemented via a hook that recomputes
 the weight tensor from the magnitude and direction before every \code{forward()}
 call. Since torch for R still do not support hooks, the weight recomputation
-need to be done explicitly inside the \code{forwar()} definition trhoug a call of
+need to be done explicitly inside the \code{forward()} definition trough a call of
 the \code{recompute()} method. See examples.
 
 By default, with \code{dim = 0}, the norm is computed independently per output
 channel/plane. To compute a norm over the entire weight tensor, use
 \code{dim = NULL}.
 
-See https://arxiv.org/abs/1602.07868
+@references https://arxiv.org/abs/1602.07868
 }
 \examples{
+if (torch_is_installed()) {
 x = nn_linear(in_features = 20, out_features = 40)
 weight_norm = nn_utils_weight_norm$new(name = 'weight', dim = 2)
 weight_norm$apply(x)
@@ -41,9 +42,10 @@ x$weight_v$size()
 x$weight
 
 # the recompute() method recomputes the weight using g and v. It must be called
-explicitly inside `forward()`.
+# explicitly inside `forward()`.
 weight_norm$recompute(x)
 
+}
 }
 \section{Methods}{
 \subsection{Public methods}{
