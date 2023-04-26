@@ -1,5 +1,5 @@
 #' @export
-ops <- structure(list(), class = "torch_ops")
+jit_ops <- structure(list(), class = "torch_ops")
 
 #' @export
 .DollarNames.torch_ops <- function(x, pattern = "") {

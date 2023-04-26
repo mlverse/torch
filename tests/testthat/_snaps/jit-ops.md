@@ -1,21 +1,21 @@
 # can print ops objects at different levels
 
     Code
-      ops
+      jit_ops
     Output
       Object of class <torch_ops>
 
 ---
 
     Code
-      ops$sparse
+      jit_ops$sparse
     Output
       <torch_ops>: Handle to namespace  sparse 
 
 ---
 
     Code
-      ops$prim$ChunkSizes
+      jit_ops$prim$ChunkSizes
     Output
       function_schema (name = prim::ChunkSizes)
       arguments: <none> 
@@ -24,7 +24,7 @@
 ---
 
     Code
-      ops$aten$fft_fft
+      jit_ops$aten$fft_fft
     Output
       function_schema (name = aten::fft_fft)
       arguments: self - TensorType, n - OptionalType, dim - IntType, norm - OptionalType 
