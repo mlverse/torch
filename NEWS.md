@@ -1,5 +1,9 @@
 # torch (development version)
 
+- Added `nn_utils_weight_norm` (#1025)
+- Started building LibLantern on macOS 11 instead of macOS12 for maximum compatibility. (#1026)
+- Added `CXXSTD` to Makevars to enable C+11 compilation options.
+
 # torch 0.10.0
 
 ## Breaking changes
