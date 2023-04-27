@@ -119,6 +119,7 @@ Collate:
     'nn-upsampling.R'
     'nn-utils-clip-grad.R'
     'nn-utils-rnn.R'
+    'nn-utils-weight-norm.R'
     'nn-utils.R'
     'nn_adaptive.R'
     'nnf-activation.R'
