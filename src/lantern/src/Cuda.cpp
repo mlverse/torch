@@ -221,7 +221,11 @@ void _lantern_cuda_empty_cache () {
 void _lantern_cuda_set_rng_state (int device, void* state) {
   LANTERN_FUNCTION_START
   auto gen = at::detail::getCUDAHooks().getDefaultCUDAGenerator(device);
-  gen.set_state(from_raw::Tensor(state));
+  {
+    // See Note [Acquire lock when using random generators]
+    std::lock_guard<std::mutex> lock(gen.mutex());
+    gen.set_state(from_raw::Tensor(state));
+  }
   LANTERN_FUNCTION_END_VOID
 }
 
