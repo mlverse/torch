@@ -32,6 +32,26 @@ test_that("cpp_jit_execute() works", {
   out <- torch::torch_zeros(4, 4)
   res <- cpp_jit_execute("aten::matmul", list(t1, t2, out))
   expect_equal_to_tensor(t1, out)
+  
+  # split, returning two tensors
+  res_torch <- torch_split(torch::torch_arange(0, 3), 2, 1)
+  res_jit <- cpp_jit_execute("aten::split", list(torch::torch_arange(0, 3), jit_scalar(2L), jit_scalar(0L)))
+  # jit returns results wrapped in one more list
+  expect_equal(length(res_torch), length(res_jit) + 1)
+  expect_equal_to_tensor(res_jit[[1]][[1]], res_torch[[1]])
+  expect_equal_to_tensor(res_jit[[1]][[2]], res_torch[[2]])
+  
+  # split, returning a single tensor
+  res_torch <- torch_split(torch::torch_arange(0, 3), 4, 1)
+  res_jit <- cpp_jit_execute("aten::split", list(torch::torch_arange(0, 3), jit_scalar(4L), jit_scalar(0L)))
+  expect_length(res_jit, 1)
+  expect_equal_to_tensor(res_jit[[1]][[1]], res_torch[[1]])
+  
+  # linalg_qr will always return two tensors, so no outer list
+  m <- torch_eye(5)/5
+  res_torch <- linalg_qr(m)
+  res_jit <- cpp_jit_execute("aten::linalg_qr", list(m, jit_scalar("reduced")))
+  expect_equal_to_tensor(res_torch[[2]], res_jit[[2]])
 })
 
 test_that("cpp_jit_all_schemas_for() works", {

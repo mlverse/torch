@@ -19,7 +19,8 @@ jit_ops <- structure(list(), class = "torch_ops")
     return (structure(list(y), class = "torch_ops"))
   }
   op <- function(...) {
-    cpp_jit_execute(paste(x[[1]], y, sep = "::"), list(...))
+    lst <- cpp_jit_execute(paste(x[[1]], y, sep = "::"), list(...))
+    if (length(lst) == 1) lst[[1]] else lst 
   }
   class(op) <- "torch_ops"
   attr(op, "opname") <- paste0(x[[1]], "::", y)
