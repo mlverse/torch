@@ -250,6 +250,9 @@
     <loc>https://torch.mlverse.org/docs/dev/reference/jit_load.html</loc>
   </url>
   <url>
+    <loc>https://torch.mlverse.org/docs/dev/reference/jit_ops.html</loc>
+  </url>
+  <url>
     <loc>https://torch.mlverse.org/docs/dev/reference/jit_save.html</loc>
   </url>
   <url>
