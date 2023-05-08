@@ -67,12 +67,15 @@ void _lantern_test_print(void* x) {
   LANTERN_FUNCTION_END_VOID
 }
 
+namespace torch::jit {
+IValue pickle_load2(const std::vector<char>& data);
+}
 void* _lantern_load_state_dict(const char* path) {
   LANTERN_FUNCTION_START
   std::ifstream file(path, std::ios::binary);
   std::vector<char> data((std::istreambuf_iterator<char>(file)),
                          std::istreambuf_iterator<char>());
-  torch::IValue ivalue = torch::pickle_load(data);
+  torch::IValue ivalue = torch::jit::pickle_load2(data);
   return make_raw::IValue(ivalue);
   LANTERN_FUNCTION_END
 }
