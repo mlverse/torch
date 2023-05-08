@@ -11,7 +11,7 @@
 #include <string>
 
 #ifdef _WIN32
-#define LANTERN_API extern "C" __declspec(dllexport)
+#define LANTERN_API __declspec(dllexport)
 #else
 #define LANTERN_API
 #endif
