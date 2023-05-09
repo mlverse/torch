@@ -163,6 +163,14 @@ test_that("load a state dict created in python", {
   expect_equal_to_tensor(dict$twos, torch_ones(3, 5) * 2)
 })
 
+test_that("can load a state dict that contains an ordered dict", {
+
+  dict <- load_state_dict(test_path("assets/ordered_dict.pt"))
+  expect_equal(names(dict), c("weight", "bias"))
+  expect_tensor_shape(dict$weight, c(10, 10))
+  expect_tensor_shape(dict$bias, c(10))
+})
+
 test_that("Can load a torch v0.2.1 model", {
   skip_on_os("windows")
 
