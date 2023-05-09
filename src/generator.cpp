@@ -52,5 +52,5 @@ torch::Tensor cpp_torch_cuda_get_rng_state (int device) {
 
 // [[Rcpp::export]]
 void cpp_torch_cuda_set_rng_state (int device, torch::Tensor state) {
-  lantern_cuda_set_rng_state(device, state);
+  lantern_cuda_set_rng_state(device, state.get());
 }
