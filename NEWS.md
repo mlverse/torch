@@ -4,6 +4,7 @@
 - Started building LibLantern on macOS 11 instead of macOS12 for maximum compatibility. (#1026)
 - Added `CXXSTD` to Makevars to enable C+11 compilation options.
 - Added support for reading from ordered state dicts serialized with PyTorch. (#1031)
+- Added `jit_ops` allowing to access JIT operators. (#1023)
 
 # torch 0.10.0
 
