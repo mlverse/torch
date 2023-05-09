@@ -99,8 +99,8 @@ test_that("The above also works for CUDA seeds", {
   w <- torch_randn(1, device="cuda")
   z <- torch_randn(1)
   
-  expect_equal_to_tensor(x, x_)
-  expect_equal_to_tensor(y, y_)
-  expect_equal_to_tensor(z, z_)
-  expect_equal_to_tensor(w, w_)
+  expect_equal_to_tensor(x$cpu(), x_$cpu())
+  expect_equal_to_tensor(y$cpu(), y_$cpu())
+  expect_equal_to_tensor(z$cpu(), z_$cpu())
+  expect_equal_to_tensor(w$cpu(), w_$cpu())
 })
