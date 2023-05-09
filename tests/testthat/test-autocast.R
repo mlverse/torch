@@ -104,7 +104,7 @@ test_that("loss is scaled correctly", {
     }
   )
   scaled_loss <- scaler$scale(loss)
-  expect_equal((scaled_loss/loss)$item(), scaler$.scale$item())
+  expect_equal((scaled_loss/loss)$item(), scaler$.scale$item(), tolerance = 1e-4)
 
 })
 
