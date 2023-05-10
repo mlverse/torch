@@ -116,6 +116,7 @@ is_meta_device <- function(x) {
 #' @param device A torch device to be used by default when creating new tensors.
 #' @param code The code to be evaluated in the modified environment.
 #' @inheritParams local_autocast
+#' @export
 local_device <- function(device, ..., .env = parent.frame()) {
   current_device <- cpp_get_current_default_device()
   cpp_set_default_device(device)
