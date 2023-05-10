@@ -9,7 +9,7 @@ torch_kaiser_window(
   window_length,
   periodic,
   beta,
-  dtype = torch_float(),
+  dtype = NULL,
   layout = NULL,
   device = NULL,
   requires_grad = NULL

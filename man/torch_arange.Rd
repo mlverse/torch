@@ -10,7 +10,7 @@ torch_arange(
   end,
   step = 1,
   dtype = NULL,
-  layout = torch_strided(),
+  layout = NULL,
   device = NULL,
   requires_grad = FALSE
 )

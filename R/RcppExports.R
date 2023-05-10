@@ -14681,14 +14681,6 @@ cpp_torch_tensor_list <- function(x) {
     .Call(`_torch_cpp_torch_tensor_list`, x)
 }
 
-cpp_torch_tensor_options <- function(dtype_ptr, layout_ptr, device_ptr, requires_grad, pinned_memory) {
-    .Call(`_torch_cpp_torch_tensor_options`, dtype_ptr, layout_ptr, device_ptr, requires_grad, pinned_memory)
-}
-
-cpp_torch_tensor_options_print <- function(x) {
-    invisible(.Call(`_torch_cpp_torch_tensor_options_print`, x))
-}
-
 cpp_trace_function <- function(fn, inputs, compilation_unit, name, strict = TRUE, module = NULL, should_mangle = TRUE, manage_memory = TRUE) {
     .Call(`_torch_cpp_trace_function`, fn, inputs, compilation_unit, name, strict, module, should_mangle, manage_memory)
 }

@@ -9,7 +9,7 @@ torch_full_like(
   input,
   fill_value,
   dtype = NULL,
-  layout = torch_strided(),
+  layout = NULL,
   device = NULL,
   requires_grad = FALSE,
   memory_format = torch_preserve_format()

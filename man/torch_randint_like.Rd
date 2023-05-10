@@ -10,7 +10,7 @@ torch_randint_like(
   low,
   high,
   dtype = NULL,
-  layout = torch_strided(),
+  layout = NULL,
   device = NULL,
   requires_grad = FALSE
 )

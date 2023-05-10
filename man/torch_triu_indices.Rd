@@ -9,9 +9,9 @@ torch_triu_indices(
   row,
   col,
   offset = 0,
-  dtype = torch_long(),
-  device = "cpu",
-  layout = torch_strided()
+  dtype = NULL,
+  device = NULL,
+  layout = NULL
 )
 }
 \arguments{

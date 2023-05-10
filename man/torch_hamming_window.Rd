@@ -11,7 +11,7 @@ torch_hamming_window(
   alpha = 0.54,
   beta = 0.46,
   dtype = NULL,
-  layout = torch_strided(),
+  layout = NULL,
   device = NULL,
   requires_grad = FALSE
 )

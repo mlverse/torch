@@ -630,6 +630,10 @@ class XPtrTorchint64_t : public XPtrTorch {
 class XPtrTorchLayout : public XPtrTorch {
  public:
   XPtrTorchLayout(void* x) : XPtrTorch(x, delete_layout) {}
+  operator SEXP() const;
+  XPtrTorchLayout(SEXP x);
+  explicit XPtrTorchLayout(std::shared_ptr<void> x) : XPtrTorch(x){};
+  XPtrTorchLayout() : XPtrTorch{NULL} {}
 };
 
 class XPtrTorchTensorIndex : public XPtrTorch {

@@ -19,10 +19,10 @@ resolve_size <- function(...) {
 }
 
 #' @rdname torch_ones
-torch_ones <- function(..., names = NULL, dtype = NULL, layout = torch_strided(),
+torch_ones <- function(..., names = NULL, dtype = NULL, layout = NULL,
                        device = NULL, requires_grad = FALSE) {
   args <- list(
-    options = torch_tensor_options(
+    options = list(
       dtype = dtype,
       layout = layout,
       device = device,
@@ -35,11 +35,11 @@ torch_ones <- function(..., names = NULL, dtype = NULL, layout = torch_strided()
 }
 
 #' @rdname torch_ones_like
-torch_ones_like <- function(input, dtype = NULL, layout = torch_strided(),
+torch_ones_like <- function(input, dtype = NULL, layout = NULL,
                             device = NULL, requires_grad = FALSE,
                             memory_format = torch_preserve_format()) {
   args <- list(
-    options = torch_tensor_options(
+    options = list(
       dtype = dtype,
       layout = layout,
       device = device,
@@ -52,10 +52,10 @@ torch_ones_like <- function(input, dtype = NULL, layout = torch_strided(),
 }
 
 #' @rdname torch_rand
-torch_rand <- function(..., names = NULL, dtype = NULL, layout = torch_strided(),
+torch_rand <- function(..., names = NULL, dtype = NULL, layout = NULL,
                        device = NULL, requires_grad = FALSE) {
   args <- list(
-    options = torch_tensor_options(
+    options = list(
       dtype = dtype,
       layout = layout,
       device = device,
@@ -68,11 +68,11 @@ torch_rand <- function(..., names = NULL, dtype = NULL, layout = torch_strided()
 }
 
 #' @rdname torch_rand_like
-torch_rand_like <- function(input, dtype = NULL, layout = torch_strided(),
+torch_rand_like <- function(input, dtype = NULL, layout = NULL,
                             device = NULL, requires_grad = FALSE,
                             memory_format = torch_preserve_format()) {
   args <- list(
-    options = torch_tensor_options(
+    options = list(
       dtype = dtype,
       layout = layout,
       device = device,
@@ -85,11 +85,11 @@ torch_rand_like <- function(input, dtype = NULL, layout = torch_strided(),
 }
 
 #' @rdname torch_randint
-torch_randint <- function(low, high, size, generator = NULL, dtype = NULL, layout = torch_strided(),
+torch_randint <- function(low, high, size, generator = NULL, dtype = NULL, layout = NULL,
                           device = NULL, requires_grad = FALSE,
                           memory_format = torch_preserve_format()) {
   args <- list(
-    options = torch_tensor_options(
+    options = list(
       dtype = dtype,
       layout = layout,
       device = device,
@@ -106,10 +106,10 @@ torch_randint <- function(low, high, size, generator = NULL, dtype = NULL, layou
 
 #' @rdname torch_randint_like
 torch_randint_like <- function(input, low, high, dtype = NULL,
-                               layout = torch_strided(),
+                               layout = NULL,
                                device = NULL, requires_grad = FALSE) {
   args <- list(
-    options = torch_tensor_options(
+    options = list(
       dtype = dtype,
       layout = layout,
       device = device,
@@ -124,10 +124,10 @@ torch_randint_like <- function(input, low, high, dtype = NULL,
 }
 
 #' @rdname torch_randn
-torch_randn <- function(..., names = NULL, dtype = NULL, layout = torch_strided(),
+torch_randn <- function(..., names = NULL, dtype = NULL, layout = NULL,
                         device = NULL, requires_grad = FALSE) {
   args <- list(
-    options = torch_tensor_options(
+    options = list(
       dtype = dtype,
       layout = layout,
       device = device,
@@ -140,11 +140,11 @@ torch_randn <- function(..., names = NULL, dtype = NULL, layout = torch_strided(
 }
 
 #' @rdname torch_randn_like
-torch_randn_like <- function(input, dtype = NULL, layout = torch_strided(),
+torch_randn_like <- function(input, dtype = NULL, layout = NULL,
                              device = NULL, requires_grad = FALSE,
                              memory_format = torch_preserve_format()) {
   args <- list(
-    options = torch_tensor_options(
+    options = list(
       dtype = dtype,
       layout = layout,
       device = device,
@@ -157,10 +157,10 @@ torch_randn_like <- function(input, dtype = NULL, layout = torch_strided(),
 }
 
 #' @rdname torch_randperm
-torch_randperm <- function(n, dtype = torch_int64(), layout = torch_strided(),
+torch_randperm <- function(n, dtype = torch_int64(), layout = NULL,
                            device = NULL, requires_grad = FALSE) {
   args <- list(
-    options = torch_tensor_options(
+    options = list(
       dtype = dtype,
       layout = layout,
       device = device,
@@ -172,10 +172,10 @@ torch_randperm <- function(n, dtype = torch_int64(), layout = torch_strided(),
 }
 
 #' @rdname torch_zeros
-torch_zeros <- function(..., names = NULL, dtype = NULL, layout = torch_strided(),
+torch_zeros <- function(..., names = NULL, dtype = NULL, layout = NULL,
                         device = NULL, requires_grad = FALSE) {
   args <- list(
-    options = torch_tensor_options(
+    options = list(
       dtype = dtype,
       layout = layout,
       device = device,
@@ -188,11 +188,11 @@ torch_zeros <- function(..., names = NULL, dtype = NULL, layout = torch_strided(
 }
 
 #' @rdname torch_zeros_like
-torch_zeros_like <- function(input, dtype = NULL, layout = torch_strided(),
+torch_zeros_like <- function(input, dtype = NULL, layout = NULL,
                              device = NULL, requires_grad = FALSE,
                              memory_format = torch_preserve_format()) {
   args <- list(
-    options = torch_tensor_options(
+    options = list(
       dtype = dtype,
       layout = layout,
       device = device,
@@ -205,10 +205,10 @@ torch_zeros_like <- function(input, dtype = NULL, layout = torch_strided(),
 }
 
 #' @rdname torch_empty
-torch_empty <- function(..., names = NULL, dtype = NULL, layout = torch_strided(),
+torch_empty <- function(..., names = NULL, dtype = NULL, layout = NULL,
                         device = NULL, requires_grad = FALSE) {
   args <- list(
-    options = torch_tensor_options(
+    options = list(
       dtype = dtype,
       layout = layout,
       device = device,
@@ -221,11 +221,11 @@ torch_empty <- function(..., names = NULL, dtype = NULL, layout = torch_strided(
 }
 
 #' @rdname torch_empty_like
-torch_empty_like <- function(input, dtype = NULL, layout = torch_strided(),
+torch_empty_like <- function(input, dtype = NULL, layout = NULL,
                              device = NULL, requires_grad = FALSE,
                              memory_format = torch_preserve_format()) {
   args <- list(
-    options = torch_tensor_options(
+    options = list(
       dtype = dtype,
       layout = layout,
       device = device,
@@ -238,10 +238,10 @@ torch_empty_like <- function(input, dtype = NULL, layout = torch_strided(),
 }
 
 #' @rdname torch_arange
-torch_arange <- function(start, end, step = 1, dtype = NULL, layout = torch_strided(),
+torch_arange <- function(start, end, step = 1, dtype = NULL, layout = NULL,
                          device = NULL, requires_grad = FALSE) {
   args <- list(
-    options = torch_tensor_options(
+    options = list(
       dtype = dtype,
       layout = layout,
       device = device,
@@ -255,7 +255,7 @@ torch_arange <- function(start, end, step = 1, dtype = NULL, layout = torch_stri
 }
 
 #' @rdname torch_range
-torch_range <- function(start, end, step = 1, dtype = NULL, layout = torch_strided(),
+torch_range <- function(start, end, step = 1, dtype = NULL, layout = NULL,
                         device = NULL, requires_grad = FALSE) {
   warning("This function is deprecated in favor of torch_arange.")
   torch_arange(
@@ -265,10 +265,10 @@ torch_range <- function(start, end, step = 1, dtype = NULL, layout = torch_strid
 }
 
 #' @rdname torch_linspace
-torch_linspace <- function(start, end, steps = 100, dtype = NULL, layout = torch_strided(),
+torch_linspace <- function(start, end, steps = 100, dtype = NULL, layout = NULL,
                            device = NULL, requires_grad = FALSE) {
   args <- list(
-    options = torch_tensor_options(
+    options = list(
       dtype = dtype,
       layout = layout,
       device = device,
@@ -282,10 +282,10 @@ torch_linspace <- function(start, end, steps = 100, dtype = NULL, layout = torch
 }
 
 #' @rdname torch_logspace
-torch_logspace <- function(start, end, steps = 100, base = 10, dtype = NULL, layout = torch_strided(),
+torch_logspace <- function(start, end, steps = 100, base = 10, dtype = NULL, layout = NULL,
                            device = NULL, requires_grad = FALSE) {
   args <- list(
-    options = torch_tensor_options(
+    options = list(
       dtype = dtype,
       layout = layout,
       device = device,
@@ -300,10 +300,10 @@ torch_logspace <- function(start, end, steps = 100, base = 10, dtype = NULL, lay
 }
 
 #' @rdname torch_eye
-torch_eye <- function(n, m = n, dtype = NULL, layout = torch_strided(),
+torch_eye <- function(n, m = n, dtype = NULL, layout = NULL,
                       device = NULL, requires_grad = FALSE) {
   args <- list(
-    options = torch_tensor_options(
+    options = list(
       dtype = dtype,
       layout = layout,
       device = device,
@@ -316,10 +316,10 @@ torch_eye <- function(n, m = n, dtype = NULL, layout = torch_strided(),
 }
 
 #' @rdname torch_empty_strided
-torch_empty_strided <- function(size, stride, dtype = NULL, layout = torch_strided(),
+torch_empty_strided <- function(size, stride, dtype = NULL, layout = NULL,
                                 device = NULL, requires_grad = FALSE, pin_memory = FALSE) {
   args <- list(
-    options = torch_tensor_options(
+    options = list(
       dtype = dtype,
       layout = layout,
       device = device,
@@ -333,10 +333,10 @@ torch_empty_strided <- function(size, stride, dtype = NULL, layout = torch_strid
 }
 
 #' @rdname torch_full
-torch_full <- function(size, fill_value, names = NULL, dtype = NULL, layout = torch_strided(),
+torch_full <- function(size, fill_value, names = NULL, dtype = NULL, layout = NULL,
                        device = NULL, requires_grad = FALSE) {
   args <- list(
-    options = torch_tensor_options(
+    options = list(
       dtype = dtype,
       layout = layout,
       device = device,
@@ -350,11 +350,11 @@ torch_full <- function(size, fill_value, names = NULL, dtype = NULL, layout = to
 }
 
 #' @rdname torch_full_like
-torch_full_like <- function(input, fill_value, dtype = NULL, layout = torch_strided(),
+torch_full_like <- function(input, fill_value, dtype = NULL, layout = NULL,
                             device = NULL, requires_grad = FALSE,
                             memory_format = torch_preserve_format()) {
   args <- list(
-    options = torch_tensor_options(
+    options = list(
       dtype = dtype,
       layout = layout,
       device = device,

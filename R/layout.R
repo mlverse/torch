@@ -1,4 +1,4 @@
-torch_layout <- R6::R6Class(
+torch_layout <- R7Class(
   classname = "torch_layout",
   public = list(
     ptr = NULL,
