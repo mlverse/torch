@@ -11,7 +11,7 @@ torch_logspace(
   steps = 100,
   base = 10,
   dtype = NULL,
-  layout = torch_strided(),
+  layout = NULL,
   device = NULL,
   requires_grad = FALSE
 )

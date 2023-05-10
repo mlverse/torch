@@ -11,7 +11,7 @@ torch_randint(
   size,
   generator = NULL,
   dtype = NULL,
-  layout = torch_strided(),
+  layout = NULL,
   device = NULL,
   requires_grad = FALSE,
   memory_format = torch_preserve_format()

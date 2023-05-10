@@ -7,8 +7,8 @@
 torch_fft_fftfreq(
   n,
   d = 1,
-  dtype = torch_get_default_dtype(),
-  layout = torch_strided(),
+  dtype = NULL,
+  layout = NULL,
   device = NULL,
   requires_grad = FALSE
 )

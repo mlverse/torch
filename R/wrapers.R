@@ -53,12 +53,9 @@ torch_logical_not <- function(self) {
 
 #' @rdname torch_bartlett_window
 torch_bartlett_window <- function(window_length, periodic = TRUE, dtype = NULL,
-                                  layout = torch_strided(), device = NULL,
+                                  layout = NULL, device = NULL,
                                   requires_grad = FALSE) {
-  if (is.null(dtype)) {
-    dtype <- torch_float()
-  }
-  opt <- torch_tensor_options(
+  opt <- list(
     dtype = dtype, layout = layout, device = device,
     requires_grad = requires_grad
   )
@@ -70,12 +67,9 @@ torch_bartlett_window <- function(window_length, periodic = TRUE, dtype = NULL,
 
 #' @rdname torch_blackman_window
 torch_blackman_window <- function(window_length, periodic = TRUE, dtype = NULL,
-                                  layout = torch_strided(), device = NULL,
+                                  layout = NULL, device = NULL,
                                   requires_grad = FALSE) {
-  if (is.null(dtype)) {
-    dtype <- torch_float()
-  }
-  opt <- torch_tensor_options(
+  opt <- list(
     dtype = dtype, layout = layout, device = device,
     requires_grad = requires_grad
   )
@@ -87,12 +81,9 @@ torch_blackman_window <- function(window_length, periodic = TRUE, dtype = NULL,
 
 #' @rdname torch_hamming_window
 torch_hamming_window <- function(window_length, periodic = TRUE, alpha = 0.54,
-                                 beta = 0.46, dtype = NULL, layout = torch_strided(),
+                                 beta = 0.46, dtype = NULL, layout = NULL,
                                  device = NULL, requires_grad = FALSE) {
-  if (is.null(dtype)) {
-    dtype <- torch_float()
-  }
-  opt <- torch_tensor_options(
+  opt <- list(
     dtype = dtype, layout = layout, device = device,
     requires_grad = requires_grad
   )
@@ -104,13 +95,9 @@ torch_hamming_window <- function(window_length, periodic = TRUE, alpha = 0.54,
 
 #' @rdname torch_hann_window
 torch_hann_window <- function(window_length, periodic = TRUE, dtype = NULL,
-                              layout = torch_strided(), device = NULL,
+                              layout = NULL, device = NULL,
                               requires_grad = FALSE) {
-  if (is.null(dtype)) {
-    dtype <- torch_float()
-  }
-
-  opt <- torch_tensor_options(
+  opt <- list(
     dtype = dtype, layout = layout, device = device,
     requires_grad = requires_grad
   )
@@ -155,7 +142,7 @@ torch_result_type <- function(tensor1, tensor2) {
 #' @rdname torch_sparse_coo_tensor
 torch_sparse_coo_tensor <- function(indices, values, size = NULL, dtype = NULL,
                                     device = NULL, requires_grad = FALSE) {
-  opt <- torch_tensor_options(
+  opt <- list(
     dtype = dtype, device = device,
     requires_grad = requires_grad
   )
@@ -205,16 +192,16 @@ torch_tensordot <- function(a, b, dims = 2) {
 }
 
 #' @rdname torch_tril_indices
-torch_tril_indices <- function(row, col, offset = 0, dtype = torch_long(),
-                               device = "cpu", layout = torch_strided()) {
-  opt <- torch_tensor_options(dtype = dtype, device = device, layout = layout)
+torch_tril_indices <- function(row, col, offset = 0, dtype = NULL,
+                               device = NULL, layout = NULL) {
+  opt <- list(dtype = dtype, device = device, layout = layout)
   .torch_tril_indices(row, col, offset, options = opt)
 }
 
 #' @rdname torch_triu_indices
-torch_triu_indices <- function(row, col, offset = 0, dtype = torch_long(),
-                               device = "cpu", layout = torch_strided()) {
-  opt <- torch_tensor_options(dtype = dtype, device = device, layout = layout)
+torch_triu_indices <- function(row, col, offset = 0, dtype = NULL,
+                               device = NULL, layout = NULL) {
+  opt <- list(dtype = dtype, device = device, layout = layout)
   .torch_triu_indices(row, col, offset, options = opt)
 }
 
@@ -387,12 +374,9 @@ torch_dequantize <- function(tensor) {
 }
 
 #' @rdname torch_kaiser_window
-torch_kaiser_window <- function(window_length, periodic, beta, dtype = torch_float(),
+torch_kaiser_window <- function(window_length, periodic, beta, dtype = NULL,
                                 layout = NULL, device = NULL, requires_grad = NULL) {
-  if (is.null(dtype)) {
-    dtype <- torch_float()
-  }
-  options <- torch_tensor_options(
+  options <- list(
     dtype = dtype, layout = layout, device = device,
     requires_grad = requires_grad
   )
@@ -532,7 +516,7 @@ torch_normal <- function(mean, std, size = NULL, generator = NULL, ...) {
 
   if (!is.null(size)) {
     if (is.list(size)) size <- unlist(size)
-    options <- do.call(torch_tensor_options, list(...))
+    options <- list(...)
     return(Tensor$new(ptr = cpp_namespace_normal_double_double(
       mean = mean,
       std = std,
@@ -609,10 +593,10 @@ torch_fft_irfft <- function(self, n = NULL, dim = -1L, norm = NULL) {
 }
 
 #' @rdname torch_fft_fftfreq
-torch_fft_fftfreq <- function(n, d = 1, dtype = torch_get_default_dtype(),
-                                  layout = torch_strided(), device = NULL,
+torch_fft_fftfreq <- function(n, d = 1, dtype = NULL,
+                                  layout = NULL, device = NULL,
                                   requires_grad = FALSE) {
-  opt <- torch_tensor_options(
+  opt <- list(
     dtype = dtype, layout = layout, device = device, requires_grad = requires_grad
   )
   .torch_fft_fftfreq(n = n, d = d, options = opt)

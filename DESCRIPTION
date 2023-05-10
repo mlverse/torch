@@ -160,7 +160,6 @@ Collate:
     'script_module.R'
     'stack.R'
     'storage.R'
-    'tensor_options.R'
     'threads.R'
     'trace.R'
     'translate.R'

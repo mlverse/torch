@@ -124,6 +124,13 @@ XPtrTorchDtype::operator SEXP() const { return operator_sexp_dtype(this); }
 
 XPtrTorchDtype::XPtrTorchDtype(SEXP x) : XPtrTorch{from_sexp_dtype(x)} {}
 
+// layout
+
+XPtrTorchLayout::operator SEXP() const { return operator_sexp_layout(this); }
+
+XPtrTorchLayout::XPtrTorchLayout(SEXP x) : XPtrTorch{from_sexp_layout(x)} {}
+
+
 // dimname
 
 XPtrTorchDimname::operator SEXP() const { return operator_sexp_dimname(this); }

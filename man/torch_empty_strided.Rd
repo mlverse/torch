@@ -9,7 +9,7 @@ torch_empty_strided(
   size,
   stride,
   dtype = NULL,
-  layout = torch_strided(),
+  layout = NULL,
   device = NULL,
   requires_grad = FALSE,
   pin_memory = FALSE
