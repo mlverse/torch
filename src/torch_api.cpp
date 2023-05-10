@@ -341,6 +341,7 @@ SEXP operator_sexp_tensor_options(const XPtrTorchTensorOptions* self) {
   return xptr;
 }
 
+torch::Device get_current_device ();
 XPtrTorchTensorOptions from_sexp_tensor_options(SEXP x) {
   if (TYPEOF(x) == EXTPTRSXP && Rf_inherits(x, "torch_tensor_options")) {
     auto out = Rcpp::as<Rcpp::XPtr<XPtrTorchTensorOptions>>(x);
@@ -349,8 +350,13 @@ XPtrTorchTensorOptions from_sexp_tensor_options(SEXP x) {
 
   if (TYPEOF(x) == VECSXP) {
     XPtrTorchTensorOptions options(lantern_TensorOptions());
+    
+    if (get_current_device().get()) {
+      options = lantern_TensorOptions_device(options.get(), get_current_device().get());
+    }
+    
     Rcpp::List args = Rcpp::as<Rcpp::List>(x);
-
+    
     if (args.size() == 0) {
       return options;
     }
@@ -358,35 +364,27 @@ XPtrTorchTensorOptions from_sexp_tensor_options(SEXP x) {
     std::vector<std::string> names = args.names();
 
     for (auto i = 0; i < names.size(); ++i) {
-      
       auto name = names[i];
       
       if (TYPEOF(args[name]) == NILSXP) {
         continue;
-      }
-
-      if (name == "dtype") {
+      } else if (name == "dtype") {
         auto dtype = from_sexp_dtype(args[name]);
         options = lantern_TensorOptions_dtype(options.get(), dtype.get());
-      }
-      if (name == "layout") {
+      } else if (name == "layout") {
         auto layout = Rcpp::as<torch::Layout>(args[name]);
         options = lantern_TensorOptions_layout(options.get(), layout.get());
-      }
-      if (name == "device") {
+      } else if (name == "device") {
         auto device = Rcpp::as<torch::Device>(args[name]);
         options = lantern_TensorOptions_device(options.get(), device.get());
-      }
-      if (name == "requires_grad") {
+      } else if (name == "requires_grad") {
         options = lantern_TensorOptions_requires_grad(options.get(),
                                                       Rcpp::as<bool>(args[name]));
-      }
-      if (name == "pinned_memory") {
+      } else if (name == "pinned_memory") {
         options = lantern_TensorOptions_pinned_memory(options.get(),
                                                       Rcpp::as<bool>(args[name]));
       }
     }
-
     return options;
   }
 
