@@ -5,6 +5,8 @@
 - Added `CXXSTD` to Makevars to enable C+11 compilation options.
 - Added support for reading from ordered state dicts serialized with PyTorch. (#1031)
 - Added `jit_ops` allowing to access JIT operators. (#1023)
+- Refactored codepath for TensorOptions and now all tensors initialization are handled by the same codepath. (#1033)
+- Added `with_device` and `local_device` to allow temporarily modify the default device tensors get initialized. (#1034)
 
 # torch 0.10.0
 
