@@ -281,6 +281,14 @@ cpp_torch_device <- function(type, index) {
     .Call(`_torch_cpp_torch_device`, type, index)
 }
 
+cpp_set_default_device <- function(device) {
+    invisible(.Call(`_torch_cpp_set_default_device`, device))
+}
+
+cpp_get_current_default_device <- function() {
+    .Call(`_torch_cpp_get_current_default_device`)
+}
+
 cpp_torch_dimname <- function(str) {
     .Call(`_torch_cpp_torch_dimname`, str)
 }

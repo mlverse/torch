@@ -111,3 +111,23 @@ is_meta_device <- function(x) {
   }
   x$type == y$type && identical(x$index, y$index)
 }
+
+#' Device contexts
+#' @param device A torch device to be used by default when creating new tensors.
+#' @param code The code to be evaluated in the modified environment.
+#' @inheritParams local_autocast
+local_device <- function(device, ..., .env = parent.frame()) {
+  current_device <- cpp_get_current_default_device()
+  cpp_set_default_device(device)
+  
+  withr::defer({
+    cpp_set_default_device(current_device)
+  }, envir = .env)
+}
+
+#' @describeIn local_device Modifies the default device for the selected context.
+#' @export
+with_device <- function(code, ..., device) {
+  local_device(device)
+  force(code)
+}
