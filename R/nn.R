@@ -170,16 +170,31 @@ nn_Module <- R6::R6Class(
         if (key %in% names(state_dict)) {
           input_param <- state_dict[[key]]
           param <- local_state[[name]]
-          with_no_grad({
-            param$copy_(input_param)
-          })
+          if (!self$..refer_to_state_dict..) {
+            with_no_grad({
+              param$copy_(input_param)
+            })  
+          } else {
+            if (name %in% names(persistent_buffers)) {
+              private$buffers_[[name]] <- input_param$requires_grad_(param$requires_grad)
+            } else {
+              private$parameters_[[name]] <- input_param$requires_grad_(param$requires_grad)
+            }
+          }
         } else {
           value_error("Could not find {key} in the state_dict.")
         }
       }
     },
-    load_state_dict = function(state_dict) {
+    load_state_dict = function(state_dict, ..., .refer_to_state_dict = FALSE) {
+      # by default the state dict parameter values are copied into the parameters
+      # of the modules. with `.refer_to_state_dict` you can make the parameters
+      # refer to the tensors in the state dict. USE WITH CAUTION as it's easy to
+      # mess up and link the parametrs of two models that way. This is useful when
+      # you want to initialize the model with the state dict values and will dispose
+      # of the state dict rightly after.
       load <- function(module, state_dict, prefix = "") {
+        module$..refer_to_state_dict.. <- .refer_to_state_dict
         module$.load_from_state_dict(state_dict, prefix)
         for (nm in names(module$.__enclos_env__$private$modules_)) {
           child <- module$.__enclos_env__$private$modules_[[nm]]
