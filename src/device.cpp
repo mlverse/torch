@@ -23,3 +23,30 @@ XPtrTorchDevice cpp_torch_device(std::string type,
 
   return device;
 }
+
+
+// This is used by the TensorOptions initializer to chose a 
+// proper default for the device.
+torch::Device default_device = nullptr;
+
+// [[Rcpp::export]]
+void cpp_set_default_device (SEXP device) {
+  if (TYPEOF(device) == NILSXP) {
+    default_device = nullptr;
+  } else {
+    default_device = Rcpp::as<torch::Device>(device);  
+  }
+}
+
+// [[Rcpp::export]]
+SEXP cpp_get_current_default_device () {
+  if (default_device.get()) {
+    return Rcpp::wrap(default_device);
+  } else {
+    return R_NilValue;
+  }
+}
+
+torch::Device get_current_device () {
+  return default_device;
+}

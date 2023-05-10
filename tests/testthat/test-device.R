@@ -56,3 +56,22 @@ test_that("can print meta tensors", {
   x <- torch_randn(10, 10, device = "meta")
   expect_output(print(x), regexp = "META")
 })
+
+test_that("can modify the device temporarily", {
+  
+  z <- torch_randn(10, 10)
+  with_device(device = "meta", {
+    x <- torch_randn(10, 10)
+    with_device(device = "cpu", {
+      a <- torch_randn(10, 10)
+    })
+    b <- torch_randn(10, 10)
+  })
+  y <- torch_randn(10, 10)
+  
+  expect_equal(x$device$type, "meta")
+  expect_equal(y$device$type, "cpu")
+  expect_equal(z$device$type, "cpu")
+  expect_equal(a$device$type, "cpu")
+  expect_equal(b$device$type, "meta")
+})
