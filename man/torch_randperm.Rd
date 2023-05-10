@@ -8,7 +8,7 @@
 torch_randperm(
   n,
   dtype = torch_int64(),
-  layout = torch_strided(),
+  layout = NULL,
   device = NULL,
   requires_grad = FALSE
 )

@@ -9,7 +9,7 @@ torch_hann_window(
   window_length,
   periodic = TRUE,
   dtype = NULL,
-  layout = torch_strided(),
+  layout = NULL,
   device = NULL,
   requires_grad = FALSE
 )

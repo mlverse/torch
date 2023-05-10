@@ -9,7 +9,7 @@ torch_eye(
   n,
   m = n,
   dtype = NULL,
-  layout = torch_strided(),
+  layout = NULL,
   device = NULL,
   requires_grad = FALSE
 )

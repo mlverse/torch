@@ -10,7 +10,7 @@ torch_linspace(
   end,
   steps = 100,
   dtype = NULL,
-  layout = torch_strided(),
+  layout = NULL,
   device = NULL,
   requires_grad = FALSE
 )
