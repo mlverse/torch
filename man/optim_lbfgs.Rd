@@ -41,6 +41,11 @@ value/parameter changes (default: 1e-9).}
 Implements L-BFGS algorithm, heavily inspired by
 \href{https://www.cs.ubc.ca/~schmidtm/Software/minFunc.html}{minFunc}
 }
+\details{
+This optimizer is different from the others in that in \code{optimizer$step()},
+it needs to be passed a closure that (1) calculates the loss, (2) calls
+\code{backward()} on it, and (3) returns it. See example below.
+}
 \note{
 This is a very memory intensive optimizer (it requires additional
 \code{param_bytes * (history_size + 1)} bytes). If it doesn't fit in memory
@@ -63,3 +68,32 @@ to optimization remain the same over the whole lifecycle of optimizer
 creation and usage.
 }
 
+\examples{
+if (torch_is_installed()) {
+a <- 1
+b <- 5
+rosenbrock <- function(x) {
+  x1 <- x[1]
+  x2 <- x[2]
+  (a - x1)^2 + b * (x2 - x1^2)^2
+}
+ 
+x <- torch_tensor(c(-1, 1), requires_grad = TRUE)
+
+optimizer <- optim_lbfgs(x)
+calc_loss <- function() {
+  optimizer$zero_grad()
+  value <- rosenbrock(x)
+  value$backward()
+  value
+}
+  
+num_iterations <- 2
+for (i in 1:num_iterations) {
+  optimizer$step(calc_loss)
+}
+    
+rosenbrock(x)
+
+}
+}

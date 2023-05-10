@@ -280,6 +280,10 @@ NULL
 #'
 #' Implements L-BFGS algorithm, heavily inspired by
 #' [minFunc](https://www.cs.ubc.ca/~schmidtm/Software/minFunc.html)
+#' 
+#' This optimizer is different from the others in that in `optimizer$step()`,
+#' it needs to be passed a closure that (1) calculates the loss, (2) calls 
+#' `backward()` on it, and (3) returns it. See example below.
 #'
 #' @section Warning:
 #'
@@ -308,6 +312,33 @@ NULL
 #' @inheritParams optim_sgd
 #'
 #' @includeRmd man/rmd/optim-note.Rmd note
+#' 
+#' @examples
+#' a <- 1
+#' b <- 5
+#' rosenbrock <- function(x) {
+#'   x1 <- x[1]
+#'   x2 <- x[2]
+#'   (a - x1)^2 + b * (x2 - x1^2)^2
+#' }
+#'  
+#' x <- torch_tensor(c(-1, 1), requires_grad = TRUE)
+#' 
+#' optimizer <- optim_lbfgs(x)
+#' calc_loss <- function() {
+#'   optimizer$zero_grad()
+#'   value <- rosenbrock(x)
+#'   value$backward()
+#'   value
+#' }
+#'   
+#' num_iterations <- 2
+#' for (i in 1:num_iterations) {
+#'   optimizer$step(calc_loss)
+#' }
+#'     
+#' rosenbrock(x)
+#' 
 #' @export
 optim_lbfgs <- optimizer(
   "optim_lbfgs",
