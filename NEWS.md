@@ -7,6 +7,7 @@
 - Added `jit_ops` allowing to access JIT operators. (#1023)
 - Refactored codepath for TensorOptions and now all tensors initialization are handled by the same codepath. (#1033)
 - Added `with_device` and `local_device` to allow temporarily modify the default device tensors get initialized. (#1034)
+- Improved documentation for LBFGS optimizer. (#1035)
 
 # torch 0.10.0
 
