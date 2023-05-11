@@ -42,7 +42,7 @@ nn_Module <- R6::R6Class(
           private$non_persistent_buffers_ != name
         ]
       } else {
-        private$non_persistent_buffers <- unique(c(
+        private$non_persistent_buffers_ <- unique(c(
           private$non_persistent_buffers_,
           name
         ))
@@ -134,10 +134,10 @@ nn_Module <- R6::R6Class(
           out[[paste0(prefix, param_name)]] <- keepvars_or_detach(param, keepvars)
         }
       }
-
+      
       for (buf_name in names(private$buffers_)) {
         buf <- private$buffers_[[buf_name]]
-        if (!is.null(buf) && !buf_name %in% private$non_persistent_buffers_) {
+        if (!is.null(buf) && !(buf_name %in% private$non_persistent_buffers_)) {
           out[[paste0(prefix, buf_name)]] <- keepvars_or_detach(buf, keepvars)
         }
       }

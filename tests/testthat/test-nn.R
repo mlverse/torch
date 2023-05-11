@@ -768,3 +768,22 @@ test_that("Can initialize a model in the meta device and copy parameters to it",
   
 })
 
+test_that("non persistent buffers work correctly", {
+  module <- nn_module(
+    initialize = function() {
+      self$x <- nn_parameter(torch_tensor(1))
+      self$y <- nn_buffer(torch_tensor(2))
+      self$z <- nn_buffer(torch_tensor(3), persist = FALSE)
+    },
+    forward = function() {
+      self$x + self$y + self$z
+    }
+  )
+  
+  model <- module()
+  expect_true(all(names(model$state_dict()) %in% c("x", "y")))
+  expect_error(
+    model$load_state_dict(list(x = torch_tensor(1), y = torch_tensor(2))),
+    regexp = NA
+  )
+})
