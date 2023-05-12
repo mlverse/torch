@@ -96,7 +96,7 @@
 <span>  <span class="va">size</span>,</span>
 <span>  generator <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  dtype <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  layout <span class="op">=</span> <span class="fu"><a href="torch_layout.html">torch_strided</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  layout <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  device <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  requires_grad <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  memory_format <span class="op">=</span> <span class="fu"><a href="torch_memory_format.html">torch_preserve_format</a></span><span class="op">(</span><span class="op">)</span></span>
@@ -164,8 +164,8 @@ a tensor with dtype <code>torch_int64</code>.</p>
 <span class="r-in"><span><span class="fu">torch_randint</span><span class="op">(</span><span class="fl">3</span>, <span class="fl">10</span>, <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">2</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">}</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> torch_tensor</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  3  4</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  3  8</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  7  4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  8  5</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [ CPUFloatType{2,2} ]</span>
 </code></pre></div>
     </div>

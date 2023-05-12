@@ -93,7 +93,7 @@
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">torch_randperm</span><span class="op">(</span></span>
 <span>  <span class="va">n</span>,</span>
 <span>  dtype <span class="op">=</span> <span class="fu"><a href="torch_dtype.html">torch_int64</a></span><span class="op">(</span><span class="op">)</span>,</span>
-<span>  layout <span class="op">=</span> <span class="fu"><a href="torch_layout.html">torch_strided</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  layout <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  device <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  requires_grad <span class="op">=</span> <span class="cn">FALSE</span></span>
 <span><span class="op">)</span></span></code></pre></div>
@@ -136,10 +136,10 @@
 <span class="r-in"><span><span class="fu">torch_randperm</span><span class="op">(</span><span class="fl">4</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">}</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> torch_tensor</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  2</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  1</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  3</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  0</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [ CPULongType{4} ]</span>
 </code></pre></div>
     </div>

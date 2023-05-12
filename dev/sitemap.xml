@@ -355,6 +355,9 @@
     <loc>https://torch.mlverse.org/docs/dev/reference/local_autocast.html</loc>
   </url>
   <url>
+    <loc>https://torch.mlverse.org/docs/dev/reference/local_device.html</loc>
+  </url>
+  <url>
     <loc>https://torch.mlverse.org/docs/dev/reference/lr_lambda.html</loc>
   </url>
   <url>

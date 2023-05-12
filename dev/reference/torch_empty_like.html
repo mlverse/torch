@@ -93,7 +93,7 @@
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">torch_empty_like</span><span class="op">(</span></span>
 <span>  <span class="va">input</span>,</span>
 <span>  dtype <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  layout <span class="op">=</span> <span class="fu"><a href="torch_layout.html">torch_strided</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  layout <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  device <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  requires_grad <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  memory_format <span class="op">=</span> <span class="fu"><a href="torch_memory_format.html">torch_preserve_format</a></span><span class="op">(</span><span class="op">)</span></span>
@@ -143,8 +143,8 @@
 <span class="r-in"><span><span class="fu"><a href="torch_empty.html">torch_empty</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">3</span><span class="op">)</span>, dtype <span class="op">=</span> <span class="fu"><a href="torch_dtype.html">torch_int64</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">}</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> torch_tensor</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> -4.6546e+18 -4.6873e+18  4.5914e+18</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> -4.7071e+18  4.6136e+18  4.6173e+18</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  5.1778e+09  4.2950e+09  1.4066e+14</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  0.0000e+00  1.4066e+14  4.6207e+18</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [ CPULongType{2,3} ]</span>
 </code></pre></div>
     </div>

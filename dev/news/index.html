@@ -90,6 +90,12 @@
 <li>Added <code>CXXSTD</code> to Makevars to enable C+11 compilation options.</li>
 <li>Added support for reading from ordered state dicts serialized with PyTorch. (<a href="https://github.com/mlverse/torch/issues/1031" class="external-link">#1031</a>)</li>
 <li>Added <code>jit_ops</code> allowing to access JIT operators. (<a href="https://github.com/mlverse/torch/issues/1023" class="external-link">#1023</a>)</li>
+<li>Refactored codepath for TensorOptions and now all tensors initialization are handled by the same codepath. (<a href="https://github.com/mlverse/torch/issues/1033" class="external-link">#1033</a>)</li>
+<li>Added <code>with_device</code> and <code>local_device</code> to allow temporarily modify the default device tensors get initialized. (<a href="https://github.com/mlverse/torch/issues/1034" class="external-link">#1034</a>)</li>
+<li>Improved documentation for LBFGS optimizer. (<a href="https://github.com/mlverse/torch/issues/1035" class="external-link">#1035</a>)</li>
+<li>Added internal argument <code>.refer_to_state_dict</code> to the <code><a href="../reference/load_state_dict.html">load_state_dict()</a></code> <code><a href="../reference/nn_module.html">nn_module()</a></code> method. Allows loading the state dict into the model keeping parmaters as references to that state dict. (<a href="https://github.com/mlverse/torch/issues/1036" class="external-link">#1036</a>)</li>
+<li>Fixed bug related to handling of non-persistent buffers. They would get added to the <code>state_dict()</code> even if they should not. (<a href="https://github.com/mlverse/torch/issues/1036" class="external-link">#1036</a>)</li>
+<li>Fixed a typo in the <code>optim_adamw</code> class name.</li>
 </ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.10.0" id="torch-0100">torch 0.10.0<a class="anchor" aria-label="anchor" href="#torch-0100"></a></h2><p class="text-muted">CRAN release: 2023-04-13</p>
