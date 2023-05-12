@@ -8,6 +8,8 @@
 - Refactored codepath for TensorOptions and now all tensors initialization are handled by the same codepath. (#1033)
 - Added `with_device` and `local_device` to allow temporarily modify the default device tensors get initialized. (#1034)
 - Improved documentation for LBFGS optimizer. (#1035)
+- Added internal argument `.refer_to_state_dict` to the `load_state_dict()` `nn_module()` method. Allows loading the state dict into the model keeping parmaters as references to that state dict. (#1036)
+- Fixed bug related to handling of non-persistent buffers. They would get added to the `state_dict()` even if they should not. (#1036)
 
 # torch 0.10.0
 

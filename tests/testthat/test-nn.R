@@ -707,3 +707,83 @@ test_that("deep cloning", {
   # make sure we re-lock binding
   expect_true(bindingIsLocked("clone", attr(x, "module")))
 })
+
+test_that("Can initialize a model in the meta device and copy parameters to it", {
+  
+  with_device(device="meta", {
+    model <- nn_linear(10,10)
+  })
+  expect_equal(model$weight$device$type, "meta")
+  expect_true(model$weight$requires_grad)
+  model$bias$requires_grad_(FALSE)
+  expect_true(!model$bias$requires_grad)
+  
+  model2 <- nn_linear(10, 10)
+  model$load_state_dict(model2$state_dict(), .refer_to_state_dict = TRUE)
+  expect_equal(model$weight$device$type, "cpu")
+  expect_equal(length(model$parameters), 2)
+  expect_true(model$weight$requires_grad)
+  expect_true(!model$bias$requires_grad)
+  
+  # now let's test with a more complex model that includes a batch_norm.
+  net <- nn_module(
+    "Net",
+    initialize = function() {
+      self$features <- nn_sequential(
+        nn_conv2d(3, 5, kernel_size = 11, stride = 4, padding = 2),
+        nn_relu()
+      )
+      self$avgpool <- nn_max_pool2d(c(6, 6))
+      self$batch_norm <- nn_batch_norm2d(11)
+      self$classifier <- nn_sequential(
+        nn_dropout(),
+        nn_linear(10, 10),
+        nn_relu(),
+        nn_dropout()
+      )
+    },
+    forward = function(x) {
+      x <- self$features(x)
+      x <- self$avgpool(x)
+      x <- torch_flatten(x, start_dim = 2)
+      x <- self$classifier(x)
+    }
+  )
+  
+  with_device(device="meta", {
+    model <- net()  
+  })
+  
+  expect_true(all(sapply(model$parameters, function(x) x$device$type) == "meta"))
+  
+  model2 <- net()
+  model$load_state_dict(model2$state_dict(), .refer_to_state_dict = TRUE)
+  
+  state_dict1 <- model$state_dict()
+  state_dict2 <- model2$state_dict()
+  
+  for(i in seq_along(state_dict1)) {
+    expect_equal_to_tensor(state_dict1[[i]], state_dict2[[i]])
+  }
+  
+})
+
+test_that("non persistent buffers work correctly", {
+  module <- nn_module(
+    initialize = function() {
+      self$x <- nn_parameter(torch_tensor(1))
+      self$y <- nn_buffer(torch_tensor(2))
+      self$z <- nn_buffer(torch_tensor(3), persist = FALSE)
+    },
+    forward = function() {
+      self$x + self$y + self$z
+    }
+  )
+  
+  model <- module()
+  expect_true(all(names(model$state_dict()) %in% c("x", "y")))
+  expect_error(
+    model$load_state_dict(list(x = torch_tensor(1), y = torch_tensor(2))),
+    regexp = NA
+  )
+})
