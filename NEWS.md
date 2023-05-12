@@ -10,6 +10,7 @@
 - Improved documentation for LBFGS optimizer. (#1035)
 - Added internal argument `.refer_to_state_dict` to the `load_state_dict()` `nn_module()` method. Allows loading the state dict into the model keeping parmaters as references to that state dict. (#1036)
 - Fixed bug related to handling of non-persistent buffers. They would get added to the `state_dict()` even if they should not. (#1036)
+- Fixed a typo in the `optim_adamw` class name.
 
 # torch 0.10.0
 

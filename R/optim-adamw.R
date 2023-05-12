@@ -7,7 +7,7 @@
 #'
 #' @export
 optim_adamw <- optimizer(
-  "optim_adawm",
+  "optim_adamw",
   initialize = function(params, lr = 1e-3, betas = c(0.9, 0.999), eps = 1e-8,
                         weight_decay = 1e-2, amsgrad = FALSE) {
     
