@@ -106,7 +106,7 @@ Optimizer <- R6::R6Class(
         state = state_dict
       )
     },
-    load_state_dict = function(state_dict) {
+    load_state_dict = function(state_dict, ..., .refer_to_state_dict = FALSE) {
       
       # validate the state dict
       if (!length(self$param_groups) == length(state_dict$param_groups)) {
@@ -120,11 +120,25 @@ Optimizer <- R6::R6Class(
       }
       
       parameters <- unlist(lapply(self$param_groups, function(x) x$params))
-      
       # update state
       for (o in names(state_dict$state)) {
         index <- as.integer(o)
-        value <- state_dict$state[[o]]
+        value <- state_dict$state[[o]]  
+        # when loading a state dict we shouldn't keep references to it by default
+        # as this leads to hard to debug issues. Here we create copies of all tensors
+        # in the state dict to avoid keeping the references. Note that if the state
+        # in the state dict contains R reference objects such as R6 classes, we won't
+        # try to deep clone them.
+        if (!.refer_to_state_dict) {
+          with_no_grad({
+            value <- lapply(value, function(x) {
+              if (is_torch_tensor(x))
+                torch_empty_like(x)$copy_(x)  
+              else
+                x
+            })
+          })
+        }
         self$state$set(parameters[[index]], value)
       }
       
