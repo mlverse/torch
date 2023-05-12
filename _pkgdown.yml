@@ -114,6 +114,10 @@ reference:
   - title: Neural networks functional module
     contents:
       - starts_with("nnf_")
+  - tile: Device managig
+    contents:
+      - torch_device
+      - local_device
   - title: Optimizers
     contents:
       - optimizer
