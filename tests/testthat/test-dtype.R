@@ -38,3 +38,31 @@ test_that("Default dtype", {
 
   torch_set_default_dtype(torch_float())
 })
+
+test_that("can set select devices using strings", {
+  dtypes <- list(
+    "float32" = torch_float32(),
+    "float" = torch_float(),
+    "float64" = torch_float64(),
+    "double" = torch_double(),
+    "float16" = torch_float16(),
+    "half" = torch_half(),
+    "uint8" = torch_uint8(),
+    "int8" = torch_int8(),
+    "int16" = torch_int16(),
+    "short" = torch_short(),
+    "int32" = torch_int32(),
+    "int" = torch_int(),
+    "int64" = torch_int64(),
+    "long" = torch_long(),
+    "bool" = torch_bool()
+  )
+  
+  for(i in seq_along(dtypes)) {
+    x <- torch_empty(10, 10, dtype = names(dtypes)[i])
+    y <- torch_empty(10, 10, dtype = dtypes[[i]])
+    
+    expect_true(x$device == y$device)  
+  }
+  
+})

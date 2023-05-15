@@ -30,7 +30,7 @@ make_load_symbols <- function(decls) {
 
 decls <- readr::read_lines(
   "
-char* _lantern_Tensor_data_ptr_byte (void *self)
+void* _lantern_Dtype_from_string (void* dtype_str)
 "
 )
 

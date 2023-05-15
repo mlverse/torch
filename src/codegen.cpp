@@ -66,7 +66,9 @@ std::string cpp_arg_to_torch_type(SEXP obj,
   if (e_scalar_type && Rf_inherits(obj, "torch_dtype")) {
     return "ScalarType";
   }
-
+  if (e_scalar_type && is_character) {
+    return "ScalarType";
+  }
   if (e_scalar_type && is_null) {
     return "ScalarType";
   }

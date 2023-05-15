@@ -67,24 +67,41 @@ Tensor <- R7Class(
       cpp_tensor_numel(self$ptr)
     },
     to = function(dtype = NULL, device = NULL, other = NULL, non_blocking = FALSE,
-                  copy = FALSE, memory_format = torch_preserve_format()) {
-      if (!is.null(other)) {
-        args <- list(other = other)
-      } else if (is.null(device)) {
-        args <- list(dtype = dtype)
+                  copy = FALSE, memory_format = NULL) {
+      
+      has_device <- !is.null(device)
+      has_dtype <- !is.null(dtype)
+      has_other <- !is.null(other)
+      
+      if (has_other) {
+        # can't have device and dtype
+        if (has_device || has_dtype) {
+          cli::cli_abort("Had {.arg other} but {.arg device} or {.arg dtype} are non {.val NULL}")
+        }
+        
+        return(private$`_to`(other = other, non_blocking = non_blocking, copy = copy))
+      }
+      
+      if (!has_dtype) {
+        dtype <- self$dtype
+      }
+      
+      if (has_device) {
+        private$`_to`(
+          dtype = dtype, 
+          device = device,
+          non_blocking = non_blocking,
+          copy = copy,
+          memory_format = memory_format
+        )
       } else {
-        args <- list(dtype = dtype, device = device)
+        private$`_to`(
+          dtype = dtype,
+          non_blocking = non_blocking,
+          copy = copy,
+          memory_format = memory_format
+        )
       }
-
-      args$non_blocking <- non_blocking
-      args$copy <- copy
-      args$memory_format <- memory_format
-
-      if (is.null(args$dtype) && is.null(args$other)) {
-        args$dtype <- self$dtype
-      }
-
-      do.call(private$`_to`, args)
     },
     bool = function(memory_format = torch_preserve_format()) {
       self$to(torch_bool(), memory_format = memory_format)

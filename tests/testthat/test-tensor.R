@@ -506,3 +506,12 @@ test_that("can make a byte tensor from a raw vector", {
   expect_equal(as.array(ten), x)
   expect_equal(rawToChar(as.array(ten)), "hello world")
 })
+
+test_that("to can change both device and dtype", {
+  
+  x <- torch_randn(10, 10)
+  y <- x$to(dtype = "double", device = "meta")
+  
+  expect_true(y$dtype == torch_double())
+  expect_true(y$device == torch_device("meta"))
+})
