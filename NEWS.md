@@ -11,6 +11,10 @@
 - Added internal argument `.refer_to_state_dict` to the `load_state_dict()` `nn_module()` method. Allows loading the state dict into the model keeping parmaters as references to that state dict. (#1036)
 - Fixed bug related to handling of non-persistent buffers. They would get added to the `state_dict()` even if they should not. (#1036)
 - Fixed a typo in the `optim_adamw` class name.
+- Fixed `nn_cross_entropy_loss` class name. (#1043)
+- `nnf_gelu()` and `nn_gelu()` gained the `approximate` argument. (#1043)
+- Implemented `!=` for torch devices. (#1042)
+- `load_state_dict()` for optimizers now default to cloning the tensors in the state dict, so they don't keep references to objects in the dict. (#1041)
 
 # torch 0.10.0
 
