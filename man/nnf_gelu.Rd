@@ -4,11 +4,15 @@
 \alias{nnf_gelu}
 \title{Gelu}
 \usage{
-nnf_gelu(input)
+nnf_gelu(input, approximate = "none")
 }
 \arguments{
 \item{input}{(N,*) tensor, where * means, any number of additional
 dimensions}
+
+\item{approximate}{By default it's none, and applies element-wise x*pnorm(x),
+if 'tanh', then GELU is estimated. See \href{https://arxiv.org/abs/1606.08415}{GELU} for
+more info.}
 }
 \description{
 Gelu
