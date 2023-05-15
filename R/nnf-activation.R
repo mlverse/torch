@@ -303,10 +303,13 @@ nnf_glu <- function(input, dim = -1) {
 #' See \href{https://arxiv.org/abs/1606.08415}{Gaussian Error Linear Units (GELUs)}.
 #'
 #' @inheritParams nnf_elu
+#' @param approximate By default it's none, and applies element-wise x*pnorm(x),
+#'   if 'tanh', then GELU is estimated. See [GELU](https://arxiv.org/abs/1606.08415) for
+#'   more info.
 #'
 #' @export
-nnf_gelu <- function(input) {
-  torch_gelu(self = input)
+nnf_gelu <- function(input, approximate = "none") {
+  torch_gelu(self = input, approximate = approximate)
 }
 
 #' Prelu

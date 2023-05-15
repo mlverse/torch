@@ -804,7 +804,7 @@ nn_soft_margin_loss <- nn_module(
 #' output$backward()
 #' @export
 nn_cross_entropy_loss <- nn_module(
-  "nn_crossentropy_loss",
+  "nn_cross_entropy_loss",
   inherit = nn_weighted_loss,
   initialize = function(weight = NULL, ignore_index = -100, reduction = "mean") {
     self$ignore_index <- ignore_index

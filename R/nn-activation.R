@@ -466,9 +466,11 @@ nn_glu <- nn_module(
 #' @export
 nn_gelu <- nn_module(
   "nn_gelu",
-  initialize = function() {},
+  initialize = function(approximate = "none") {
+    self$approximate <- approximate
+  },
   forward = function(input) {
-    nnf_gelu(input)
+    nnf_gelu(input, approximate = self$approximate)
   }
 )
 
