@@ -50,6 +50,7 @@ test_that("can compare devices", {
   x <- torch_tensor(1, device = "cuda:0")
   y <- torch_tensor(1, device = "cpu")
   expect_false(x$device == y$device)
+  expect_true(x$device != y$device)
 })
 
 test_that("can print meta tensors", {

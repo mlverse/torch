@@ -112,6 +112,11 @@ is_meta_device <- function(x) {
   x$type == y$type && identical(x$index, y$index)
 }
 
+#' @export
+`!=.torch_device` <- function(x, y) {
+  !(x == y)
+}
+
 #' Device contexts
 #' @param device A torch device to be used by default when creating new tensors.
 #' @param code The code to be evaluated in the modified environment.
