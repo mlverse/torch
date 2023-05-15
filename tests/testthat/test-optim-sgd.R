@@ -24,3 +24,31 @@ test_that("optim have classes", {
   expect_true(is_optimizer(opt))
   
 })
+
+test_that("copy state between optimizers corecctly", {
+  
+  # start with a tensor and make one step in the optimize
+  x <- torch_tensor(1, requires_grad = TRUE)
+  
+  opt <- optim_adam(x, lr = 0.1)
+  (2*x)$backward()
+  opt$step()
+  opt$zero_grad()
+  
+  # now copy that tensor and its optimizer and make a step
+  with_no_grad({
+    y <- torch_empty(1, requires_grad = TRUE)$copy_(x)  
+  })
+  opt2 <- optim_adam(y, lr = 0.1)
+  opt2$load_state_dict(opt$state_dict())
+  (2*y)$backward()
+  opt2$step()
+  opt2$state_dict()
+  
+  # another step in the original optimizer
+  (2*x)$backward()
+  opt$step()
+  opt$zero_grad()
+  
+  expect_equal_to_tensor(x, y)
+})
