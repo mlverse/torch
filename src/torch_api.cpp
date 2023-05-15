@@ -521,6 +521,11 @@ XPtrTorchDtype from_sexp_dtype(SEXP x) {
     auto out = Rcpp::as<Rcpp::XPtr<XPtrTorchDtype>>(x);
     return XPtrTorchDtype(out->get_shared());
   }
+  
+  if (TYPEOF(x) == STRSXP) {
+    auto dtype_string = Rcpp::as<XPtrTorchstring>(x);
+    return XPtrTorchDtype(lantern_Dtype_from_string(dtype_string.get()));
+  }
 
   if (TYPEOF(x) == NILSXP) {
     return XPtrTorchDtype();
