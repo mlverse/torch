@@ -25,6 +25,7 @@ jit_ops <- structure(list(), class = "torch_ops")
   if (length(x) == 0) {
     unique(sub("::(.)*", "", candidates))
   } else if (length(x) == 1) {
+    if (is.function(x)) return()
     namespace <- x[[1]]
     candidates <- unique(grep(paste0(namespace, "::"), candidates, value = T))
     sub(paste0(namespace, "::"), "", candidates)
