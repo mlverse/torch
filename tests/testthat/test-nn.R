@@ -800,4 +800,5 @@ test_that("can use a named module dict", {
   z <- dict$y(y)
   
   expect_tensor_shape(z, c(100, 1))
+  expect_equal(length(dict$parameters), 4)
 })
