@@ -16,6 +16,7 @@
 - Implemented `!=` for torch devices. (#1042)
 - `load_state_dict()` for optimizers now default to cloning the tensors in the state dict, so they don't keep references to objects in the dict. (#1041)
 - Allows setting the dtype with a string. (#1045)
+- You can now create a named list of modules using `nn_module_dict()`. (#1046)
 
 # torch 0.10.0
 
