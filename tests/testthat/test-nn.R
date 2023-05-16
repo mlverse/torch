@@ -787,3 +787,18 @@ test_that("non persistent buffers work correctly", {
     regexp = NA
   )
 })
+
+test_that("can use a named module dict", {
+  
+  dict <- nn_module_dict(list(
+    x = nn_linear(1, 10),
+    y = nn_linear(10, 1)
+  ))
+  
+  x <- torch_randn(100,1)
+  y <- dict$x(x)
+  z <- dict$y(y)
+  
+  expect_tensor_shape(z, c(100, 1))
+  expect_equal(length(dict$parameters), 4)
+})

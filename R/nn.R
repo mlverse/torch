@@ -768,7 +768,7 @@ nn_prune_head.nn_module <- nn_module(
 #' `nn_module` methods.
 #'
 #' @param modules a list of modules to add
-#'
+#' @seealso [nn_module_dict()]
 #' @examples
 #'
 #' my_module <- nn_module(
@@ -807,6 +807,36 @@ nn_module_list <- nn_module(
     }
   }
 )
+
+#' Container that allows named values
+#' 
+#' @param dict A named list of submodules that will be saved in that module.
+#' @examples
+#' nn_module <- nn_module(
+#'   initialize = function() {
+#'     self$dict <- nn_module_dict(list(
+#'       l1 = nn_linear(10, 20),
+#'       l2 = nn_linear(20, 10)
+#'     ))
+#'   },
+#'   forward = function(x) {
+#'     x <- self$dict$l1(x)
+#'     self$dict$l2(x)
+#'   }
+#' )
+#' @seealso [nn_module_list()]
+#' @export
+nn_module_dict <- nn_module(
+  initialize = function(dict) {
+    if (!rlang::is_named(dict)) cli::cli_abort("All elements in {.arg dict} must be named.")
+    for(nm in names(dict)) {
+      self[[nm]] <- dict[[nm]]
+    } 
+  },
+  forward = function(...) {
+    cli::cli_abort("{.fn nn_module_dict} has {.fn forward} implementation.")
+  }
+) 
 
 #' @export
 `[[.nn_module_list` <- function(x, y) {
