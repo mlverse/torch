@@ -133,3 +133,26 @@ test_that("strong wolfe works", {
 
   expect_gt(ret[[4]], 1)
 })
+
+test_that("strong_wolfe correctly handles nans/infs", {
+  set.seed(777)
+  torch_manual_seed(777)
+  model <- nn_sequential(
+    nn_linear(1, 16),
+    nn_relu(),
+    nn_linear(16,1)
+  )
+  optim <- optim_lbfgs(model$parameters, line_search_fn = "strong_wolfe")
+  fn <- function() {
+    optim$zero_grad()
+    loss <- nnf_mse_loss(model(x), y)
+    loss$backward()
+    loss
+  }
+  x <- torch_arange(1, 100)$unsqueeze(2)
+  y <- 2 * torch_arange(1, 100)$unsqueeze(2)
+  for (i in 5) {
+    optim$step(fn)
+  }
+  expect_true(fn()$item() < 1e-3)
+})

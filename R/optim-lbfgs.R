@@ -24,9 +24,9 @@ NULL
     #   d2 = sqrt(d1^2 - g1*g2);
     #   min_pos = x2 - (x2 - x1)*((g2 + d2 - d1)/(g2 - g1 + 2*d2));
     #   t_new = min(max(min_pos,xmin_bound),xmax_bound);
-    d1 <- g1$item() + g2$item() - 3 * (f1 - f2) / (x1 - x2)
+    d1 <- g1 + g2 - 3 * (f1 - f2) / (x1 - x2)
     d2_square <- d1^2 - g1 * g2
-    if (d2_square$item() >= 0) {
+    if (as.logical(d2_square>= 0)) {
       d2 <- sqrt(d2_square)
       min_pos <- if (x1 <= x2) {
         x2 - (x2 - x1) * ((g2 + d2 - d1) / (g2 - g1 + 2 * d2))
@@ -104,8 +104,8 @@ NULL
   while (ls_iter < max_ls) {
     # sufficient decrease (Armijo) condition violated
     # construct interval between previous (smaller) step size and current
-    if ((f_new > f + c1 * t * gtd$item()) ||
-      (ls_iter > 1 && f_new >= f_prev)) {
+    if (as.logical(f_new > f + c1 * t * gtd) ||
+      as.logical(ls_iter > 1 && f_new >= f_prev)) {
       bracket <- c(t_prev, t)
       bracket_f <- c(f_prev, f_new)
       bracket_g <- c(g_prev, g_new$clone(memory_format = torch_contiguous_format()))
@@ -116,7 +116,7 @@ NULL
 
     # curvature condition satisfied (slope not too steep)
     # return current parameters, no further zoom stage
-    if (abs(gtd_new$item()) <= -c2 * gtd$item()) {
+    if (as.logical(abs(gtd_new) <= -c2 * gtd)) {
       bracket <- c(t)
       bracket_f <- c(f_new)
       bracket_g <- c(g_new)
@@ -127,7 +127,7 @@ NULL
 
     # curvature condition (strong Wolfe 2) violated (gradient positive)
     # construct interval between previous (smaller) step size and current
-    if (gtd_new$item() >= 0) {
+    if (as.logical(gtd_new >= 0)) {
       bracket <- c(t_prev, t)
       bracket_f <- c(f_prev, f_new)
       bracket_g <- c(g_prev, g_new$clone(memory_format = torch_contiguous_format()))
@@ -184,7 +184,7 @@ NULL
 
   while ((done != TRUE) && (ls_iter < max_ls)) {
     # line-search bracket is so small
-    if (abs(bracket[[2]] - bracket[[1]]) * d_norm$item() < tolerance_change) {
+    if (as.logical(abs(bracket[[2]] - bracket[[1]]) * d_norm < tolerance_change)) {
       # cat("Zoom phase: bracket too small", "\n")
       break
     }
@@ -233,8 +233,8 @@ NULL
     ls_iter <- ls_iter + 1
 
     # Armijo condition violated or not lower than lowest point
-    if ((f_new > (f + c1 * t * gtd$item())) ||
-      (f_new >= bracket_f[[low_pos]])) {
+    if (as.logical(f_new > (f + c1 * t * gtd)) ||
+      as.logical(f_new >= bracket_f[[low_pos]])) {
       # cat("Zoom phase: sufficient decrease condition violated", "\n")
       bracket[[high_pos]] <- t
       bracket_f[[high_pos]] <- f_new
@@ -249,10 +249,10 @@ NULL
       }
     } else {
       # Wolfe conditions satisfied
-      if (abs(gtd_new$item()) <= -c2 * gtd$item()) {
+      if (as.logical(abs(gtd_new) <= -c2 * gtd)) {
         done <- TRUE
         # cat("Zoom phase: strong Wolfe condition satisfied", "\n")
-      } else if (gtd_new$item() * (bracket[[high_pos]] - bracket[[low_pos]]) >= 0) {
+      } else if (as.logical(gtd_new * (bracket[[high_pos]] - bracket[[low_pos]]) >= 0)) {
         # old high becomes new low
         bracket[[high_pos]] <- bracket[[low_pos]]
         bracket_f[[high_pos]] <- bracket_f[[low_pos]]
