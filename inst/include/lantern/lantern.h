@@ -589,11 +589,11 @@ LANTERN_OPTIONAL_DECLS(string_view)
   LANTERN_API void*(LANTERN_PTR _lantern_jit_execute)(void* name, void* stack);
   HOST_API void* lantern_jit_execute(void* name, void* stack) {LANTERN_CHECK_LOADED void* ret = _lantern_jit_execute(name, stack); LANTERN_HOST_HANDLER return ret;}
   
-  LANTERN_API void* (LANTERN_PTR _lantern_load_state_dict) (const char * path);
-  HOST_API void * lantern_load_state_dict (const char * path)
+  LANTERN_API void* (LANTERN_PTR _lantern_load_state_dict) (void* path, bool legacy_stream);
+  HOST_API void * lantern_load_state_dict (void* path, bool legacy_stream)
   {
     LANTERN_CHECK_LOADED
-    void * ret = _lantern_load_state_dict(path);
+    void * ret = _lantern_load_state_dict(path, legacy_stream);
     LANTERN_HOST_HANDLER return ret;
   }
 

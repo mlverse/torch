@@ -14461,8 +14461,8 @@ cpp_tensor_load <- function(input, device, base64) {
     .Call(`_torch_cpp_tensor_load`, input, device, base64)
 }
 
-cpp_load_state_dict <- function(path) {
-    .Call(`_torch_cpp_load_state_dict`, path)
+cpp_load_state_dict <- function(path, legacy_stream = FALSE) {
+    .Call(`_torch_cpp_load_state_dict`, path, legacy_stream)
 }
 
 cpp_torch_scalar <- function(x) {

@@ -196,12 +196,15 @@ torch_load_list <- function(obj, device = NULL) {
 #' in pytorch's C++ api.
 #'
 #' @param path to the state dict file
+#' @param legacy_stream if `TRUE` then the state dict is loaded using a
+#'   a legacy way of handling streams.
+#' @param ... additional arguments that are currently not used.
 #'
 #' @return a named list of tensors.
 #'
 #' @export
 #' @concept serialization
-load_state_dict <- function(path) {
+load_state_dict <- function(path, ..., legacy_stream = FALSE) {
   path <- normalizePath(path)
   o <- cpp_load_state_dict(path)
 

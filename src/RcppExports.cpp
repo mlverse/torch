@@ -47971,13 +47971,14 @@ BEGIN_RCPP
 END_RCPP
 }
 // cpp_load_state_dict
-Rcpp::List cpp_load_state_dict(std::string path);
-RcppExport SEXP _torch_cpp_load_state_dict(SEXP pathSEXP) {
+Rcpp::List cpp_load_state_dict(torch::string path, bool legacy_stream);
+RcppExport SEXP _torch_cpp_load_state_dict(SEXP pathSEXP, SEXP legacy_streamSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< std::string >::type path(pathSEXP);
-    rcpp_result_gen = Rcpp::wrap(cpp_load_state_dict(path));
+    Rcpp::traits::input_parameter< torch::string >::type path(pathSEXP);
+    Rcpp::traits::input_parameter< bool >::type legacy_stream(legacy_streamSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_load_state_dict(path, legacy_stream));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -52480,7 +52481,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_torch_cpp_torch_reduction_sum", (DL_FUNC) &_torch_cpp_torch_reduction_sum, 0},
     {"_torch_cpp_tensor_save", (DL_FUNC) &_torch_cpp_tensor_save, 2},
     {"_torch_cpp_tensor_load", (DL_FUNC) &_torch_cpp_tensor_load, 3},
-    {"_torch_cpp_load_state_dict", (DL_FUNC) &_torch_cpp_load_state_dict, 1},
+    {"_torch_cpp_load_state_dict", (DL_FUNC) &_torch_cpp_load_state_dict, 2},
     {"_torch_cpp_torch_scalar", (DL_FUNC) &_torch_cpp_torch_scalar, 1},
     {"_torch_cpp_torch_scalar_dtype", (DL_FUNC) &_torch_cpp_torch_scalar_dtype, 1},
     {"_torch_cpp_torch_scalar_to_int", (DL_FUNC) &_torch_cpp_torch_scalar_to_int, 1},

@@ -157,7 +157,7 @@ test_that("load a state dict created in python", {
   # value = {'ones': ones, 'twos': twos}
   # torch.save(value, "assets/state_dict.pth", _use_new_zipfile_serialization=True)
 
-  dict <- load_state_dict("assets/state_dict.pth")
+  dict <- load_state_dict(test_path("assets/state_dict.pth"))
   expect_equal(names(dict), c("ones", "twos"))
   expect_equal_to_tensor(dict$ones, torch_ones(3, 5))
   expect_equal_to_tensor(dict$twos, torch_ones(3, 5) * 2)
