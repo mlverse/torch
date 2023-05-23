@@ -18,6 +18,7 @@
 - Allows setting the dtype with a string. (#1045)
 - You can now create a named list of modules using `nn_module_dict()`. (#1046)
 - Fixed bug in LBFGS w/ line search. (#1048)
+- Faster `load_state_dict()`, also using less memory. It' possible to use the legacy implementation if required, see PR. (#1051)
 
 # torch 0.10.0
 
