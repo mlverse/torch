@@ -31,8 +31,8 @@ XPtrTorchTensor cpp_tensor_load(SEXP input, XPtrTorchOptionalDevice device, bool
 }
 
 // [[Rcpp::export]]
-Rcpp::List cpp_load_state_dict(std::string path) {
-  XPtrTorchIValue v = lantern_load_state_dict(path.c_str());
+Rcpp::List cpp_load_state_dict(torch::string path, bool legacy_stream = false) {
+  XPtrTorchIValue v = lantern_load_state_dict(path.get(), legacy_stream);
 
   XPtrTorchTensorList values = lantern_get_state_dict_values(v.get());
 

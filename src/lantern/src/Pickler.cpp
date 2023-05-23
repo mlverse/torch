@@ -1451,7 +1451,19 @@ IValue pickle_load2(const std::vector<char>& data) {
       "pickle_load not supported on mobile "
       "(see https://github.com/pytorch/pytorch/pull/30108)");
 #endif
-};
+}
+
+IValue pickle_load3(std::string path) {
+  caffe2::serialize::PyTorchStreamReader reader(path);
+  return readArchiveAndTensors(
+    "data",
+    /*pickle_prefix=*/"",
+    /*tensor_prefix=*/"",
+    /*type_resolver=*/c10::nullopt,
+    /*obj_loader=*/c10::nullopt,
+    /*device=*/c10::nullopt,
+    reader);
+}
 
 IValue unpickle(
     std::function<size_t(char*, size_t)> reader,

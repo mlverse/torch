@@ -4,10 +4,15 @@
 \alias{load_state_dict}
 \title{Load a state dict file}
 \usage{
-load_state_dict(path)
+load_state_dict(path, ..., legacy_stream = FALSE)
 }
 \arguments{
 \item{path}{to the state dict file}
+
+\item{...}{additional arguments that are currently not used.}
+
+\item{legacy_stream}{if \code{TRUE} then the state dict is loaded using a
+a legacy way of handling streams.}
 }
 \value{
 a named list of tensors.
