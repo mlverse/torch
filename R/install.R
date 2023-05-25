@@ -26,6 +26,12 @@ torch_version <- "1.13.1"
 #' - `TORCH_COMMIT_SHA`: torch repository commit sha to be used when querying lantern
 #'   uploads. Set it to `'none'` to avoid looking for build for that commit and 
 #'   use the latest build for the branch.
+#' - `CUDA`: We try to automatically detect the CUDA version installed in your system,
+#'   but you might want to manually set it here. You can also disable CUDA installation
+#'   by setting it to 'cpu'.
+#' - `TORCH_R_VERSION`: The R torch version. It's unlikely that you need to change it,
+#'   but it can be useful if you don't have the R package installed, but want to
+#'   install the dependencies.
 #' 
 #' The \code{TORCH_INSTALL} environment
 #' variable can be set to \code{0} to prevent auto-installing torch and \code{TORCH_LOAD} set to \code{0}
@@ -91,7 +97,7 @@ install_lib <- function(libname, url, reinstall = FALSE) {
   if (grepl("\\.zip$", url) && file.exists(url)) {
     tmp_ex <- tempfile()
     dir.create(tmp_ex)
-    on.exit({unlink(tmp_ex)})
+    on.exit({unlink(tmp_ex)}, add = TRUE)
     
     utils::unzip(url, exdir = tmp_ex)
     url <- tmp_ex
@@ -191,7 +197,7 @@ lantern_url <- function() {
   # Otherwise we construct it from available information
   # file name we want to download has the following format:
   # lantern-<pkg-version>+<cpu|cu113>+<arch>+<precxx11>-<os>.zip
-  pkg_version <- as.character(utils::packageVersion("torch"))
+  pkg_version <- torch_r_version()
   kind <- installation_kind()
   arch <- architecture()
   precxx11 <- precxx11abi()
@@ -250,6 +256,13 @@ lantern_url <- function() {
   ))
   
   final_url
+}
+
+torch_r_version <- function() {
+  version <- Sys.getenv("TORCH_R_VERSION", unset = NULL)
+  if (!is.null(version)) return(version)
+  
+  as.character(utils::packageVersion("torch"))
 }
 
 os_name <- function() {

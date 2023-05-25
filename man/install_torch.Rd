@@ -30,6 +30,12 @@ where lantern binaries are located. The filename is then constructed as usual.
 \item \code{TORCH_COMMIT_SHA}: torch repository commit sha to be used when querying lantern
 uploads. Set it to \code{'none'} to avoid looking for build for that commit and
 use the latest build for the branch.
+\item \code{CUDA}: We try to automatically detect the CUDA version installed in your system,
+but you might want to manually set it here. You can also disable CUDA installation
+by setting it to 'cpu'.
+\item \code{TORCH_R_VERSION}: The R torch version. It's unlikely that you need to change it,
+but it can be useful if you don't have the R package installed, but want to
+install the dependencies.
 }
 
 The \code{TORCH_INSTALL} environment
