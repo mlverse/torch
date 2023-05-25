@@ -183,7 +183,9 @@ elseif(UNIX)
 endif()
 
 set_property(TARGET lantern
-    PROPERTY PUBLIC_HEADER ${PROJECT_SOURCE_DIR}/include/lantern/lantern.h
+    PROPERTY PUBLIC_HEADER 
+    ${PROJECT_SOURCE_DIR}/include/lantern/lantern.h
+    ${PROJECT_SOURCE_DIR}/include/lantern/types.h
 )
 
 target_link_libraries(lantern ${TORCH_LIBRARIES})
