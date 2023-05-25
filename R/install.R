@@ -259,8 +259,8 @@ lantern_url <- function() {
 }
 
 torch_r_version <- function() {
-  version <- Sys.getenv("TORCH_R_VERSION", unset = NULL)
-  if (!is.null(version)) return(version)
+  version <- Sys.getenv("TORCH_R_VERSION", unset = "")
+  if (version != "") return(version)
   
   as.character(utils::packageVersion("torch"))
 }
