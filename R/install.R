@@ -227,6 +227,13 @@ lantern_url <- function() {
       remote_sha <- NA # if the user explicitly set it to none, we won't search for the SHA
     } else if (!nzchar(remote_sha)) {
       remote_sha <- desc::desc(package = "torch")$get("RemoteSha")  
+      
+      # pak adds the package version as the remote_sha when installing from
+      # CRAN which breaks our assumption that it's always a commit sha. 
+      # We identify this case and manually remove it.
+      if (is_package_version(remote_sha)) {
+        remote_sha <- NA
+      }
     }
     
     if (is.na(remote_sha)) {
@@ -642,4 +649,10 @@ download_file <- function(url, destfile) {
       additional_messages
     ), parent = e)
   })
+}
+
+is_package_version <- function(x) {
+  # .standard_regexps()$valid_numeric_version
+  regex <- "([[:digit:]]+[.-])*[[:digit:]]+"
+  grepl(regex, x)
 }
