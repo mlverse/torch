@@ -82,6 +82,7 @@ torch_manual_seed <- function(seed) {
 }
 
 #' @describeIn torch_manual_seed Modifies the torch seed in the environment scope.
+#' @export
 local_torch_manual_seed <- function(seed, .env = parent.frame()) {
   current_state <- list()
   current_state[["cpu"]] <- torch_get_rng_state()
@@ -96,6 +97,7 @@ local_torch_manual_seed <- function(seed, .env = parent.frame()) {
 }
 
 #' @describeIn torch_manual_seed A with context to change the seed during the function execution.
+#' @export
 with_torch_manual_seed <- function(code, ..., seed) {
   ellipsis::check_dots_empty()
   local_torch_manual_seed(seed)
@@ -118,11 +120,13 @@ torch_get_rng_state <- function() {
 }
 
 #' @describeIn torch_get_rng_state Sets the RNG state for the CPU
+#' @export
 torch_set_rng_state <- function(state) {
   cpp_torch_set_rng_state(state)
 }
 
 #' @describeIn torch_get_rng_state Gets the RNG state for CUDA. 
+#' @export
 cuda_get_rng_state <- function(device = NULL) {
   if (!is.null(device)) {
     return(cpp_torch_cuda_get_rng_state(device))
@@ -137,6 +141,7 @@ cuda_get_rng_state <- function(device = NULL) {
 }
 
 #' @describeIn torch_get_rng_state Sets the RNG state for CUDA. 
+#' @export
 cuda_set_rng_state <- function(state, device = NULL) {
   if (!is.null(device)) {
     return(cpp_torch_cuda_set_rng_state(device, state))
