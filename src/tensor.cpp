@@ -263,20 +263,20 @@ Rcpp::List cpp_as_array(Rcpp::XPtr<torch::Tensor> x) {
     return tensor_to_r_array_double(*x.get());
   }
 
+  if (dtype == "Long") {
+    return tensor_to_r_array_int64_t(*x.get());
+  }
+
   torch::TensorOptions options = lantern_TensorOptions();
 
-  if (dtype == "Float") {
+  if (dtype == "Float" || dtype == "Half") {
     options = lantern_TensorOptions_dtype(
         options.get(), XPtrTorchDtype(lantern_Dtype_float64()).get());
     return tensor_to_r_array_double(
         torch::Tensor(lantern_Tensor_to(x->get(), options.get())));
   }
 
-  if (dtype == "Long") {
-    return tensor_to_r_array_int64_t(*x.get());
-  }
-
-  Rcpp::stop("dtype not handled");
+  Rcpp::stop("dtype '" + dtype + "' not handled");
 };
 
 // [[Rcpp::export]]

@@ -282,6 +282,9 @@ Tensor <- R7Class(
     },
     double = function() {
       self$to(dtype=torch_double())
+    },
+    half = function() {
+      self$to(dtype=torch_half())
     }
   ),
   active = list(
@@ -385,7 +388,7 @@ as_array_impl <- function(x) {
     return(out)
   }
   
-  a <- cpp_as_array(x$ptr)
+  a <- cpp_as_array(x)
 
   if (length(a$dim) <= 1L) {
     out <- a$vec
