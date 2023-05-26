@@ -74,6 +74,8 @@ void* bool_t(const bool& x);
 void* double_t(const double& x);
 void* Stream(const at::Stream& x);
 void* IValue(const torch::IValue& x);
+void* FunctionSchema (const c10::FunctionSchema& x);
+void* Argument(const c10::Argument& x);
 
 namespace vector {
 void* string(const std::vector<std::string>& x);
@@ -85,6 +87,8 @@ void* double_t();
 void* bool_t(const std::vector<bool>& x);
 void* bool_t();
 void* Scalar(const std::vector<torch::Scalar>& x);
+void* Argument (const std::vector<c10::Argument>& x);
+void* FunctionSchema (const std::vector<c10::FunctionSchema>& x);
 }  // namespace vector
 
 template <class... T>
@@ -150,6 +154,8 @@ LANTERN_FROM_RAW_DECL(IValue, torch::IValue)
 LANTERN_FROM_RAW_DECL(Layout, torch::Layout)
 LANTERN_FROM_RAW_DECL(SymInt, c10::SymInt)
 LANTERN_FROM_RAW_DECL(SymIntArrayRef, c10::SymIntArrayRef)
+LANTERN_FROM_RAW_DECL(FunctionSchema, c10::FunctionSchema)
+LANTERN_FROM_RAW_DECL(Argument, c10::Argument)
 
 namespace optional {
 LANTERN_FROM_RAW_DECL(DimnameList, c10::optional<torch::DimnameList>)
@@ -178,6 +184,8 @@ LANTERN_FROM_RAW_DECL(Scalar, std::vector<torch::Scalar>)
 // This special type is used to allow converting to std::array<>'s
 // of multiple different sizes.
 LANTERN_FROM_RAW_DECL(bool_t, Vector<bool>)
+LANTERN_FROM_RAW_DECL(Argument, std::vector<c10::Argument>)
+LANTERN_FROM_RAW_DECL(FunctionSchema, std::vector<c10::FunctionSchema>)
 }  // namespace vector
 
 LANTERN_FROM_RAW_DECL(tuple, std::vector<void*>)
@@ -444,6 +452,8 @@ void* double_t(const double& x) { return make_ptr<double>(x); }
 void* bool_t(const bool& x) { return make_ptr<bool>(x); }
 void* Stream(const at::Stream& x) { return make_ptr<at::Stream>(x); }
 void* IValue(const at::IValue& x) { return make_ptr<at::IValue>(x); }
+void* FunctionSchema (const c10::FunctionSchema& x) { return make_ptr<c10::FunctionSchema>(x); }
+void* Argument (const c10::Argument& x) { return make_ptr<c10::Argument>(x); }
 
 namespace vector {
 
@@ -464,6 +474,8 @@ void* double_t() { return make_ptr<std::vector<double>>(); }
 void* Scalar(const std::vector<torch::Scalar>& x) {
   return make_ptr<std::vector<torch::Scalar>>(x);
 }
+void* Argument (const std::vector<c10::Argument>& x) { return make_ptr<std::vector<c10::Argument>>(x); }
+void* FunctionSchema (const std::vector<c10::FunctionSchema>& x) { return make_ptr<std::vector<c10::FunctionSchema>>(x); }
 
 }  // namespace vector
 
@@ -575,6 +587,8 @@ LANTERN_FROM_RAW(IValue, torch::IValue)
 LANTERN_FROM_RAW(Layout, torch::Layout)
 LANTERN_FROM_RAW(SymInt, c10::SymInt)
 LANTERN_FROM_RAW_WRAPPED(SymIntArrayRef, self_contained::SymIntArrayRef, c10::SymIntArrayRef)
+LANTERN_FROM_RAW(FunctionSchema, c10::FunctionSchema)
+LANTERN_FROM_RAW(Argument, c10::Argument)
 
 namespace optional {
 LANTERN_FROM_RAW_WRAPPED(DimnameList, self_contained::optional::DimnameList,
@@ -618,6 +632,8 @@ LANTERN_FROM_RAW_WRAPPED(int64_t, self_contained::vector::int64_t,
 LANTERN_FROM_RAW(bool_t, Vector<bool>)
 LANTERN_FROM_RAW(double_t, std::vector<double>)
 LANTERN_FROM_RAW(Scalar, std::vector<torch::Scalar>)
+LANTERN_FROM_RAW(Argument, std::vector<c10::Argument>)
+LANTERN_FROM_RAW(FunctionSchema, std::vector<c10::FunctionSchema>)
 }  // namespace vector
 
 LANTERN_FROM_RAW(tuple, std::vector<void*>)
