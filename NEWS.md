@@ -19,6 +19,10 @@
 - You can now create a named list of modules using `nn_module_dict()`. (#1046)
 - Fixed bug in LBFGS w/ line search. (#1048)
 - Faster `load_state_dict()`, also using less memory. It' possible to use the legacy implementation if required, see PR. (#1051)
+- Correctly handle the installation when `RemoteSha` is a package version. (#1058)
+- Export helpers for handling RNG state, and temprarily modifying it. (#1057)
+- Added support for converting half tensors into R with `as.numeric()`. (#1056)
+- Added a message asking the user to restart the session after a manual installation with `install_torch()`. (#1055)
 
 # torch 0.10.0
 
