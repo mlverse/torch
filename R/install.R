@@ -6,9 +6,12 @@ torch_version <- "1.13.1"
 #' Installs Torch and its dependencies.
 #'
 #' @param reinstall Re-install Torch even if its already installed?
-#'
-#' @details
+#' @param ... Currently unused.
+#' @param .inform_restart if `TRUE` and running in an `interactive()` session, after
+#'   installation it will print a message to inform the user that the session must
+#'   be restarted for torch to work correctly.
 #' 
+#' @details
 #' This function is mainly controlled by environment variables that can be used
 #' to override the defaults:
 #' 
@@ -41,12 +44,23 @@ torch_version <- "1.13.1"
 #' reported length, an increase of the \code{timeout} value should help.
 #' 
 #' @export
-install_torch <- function(reinstall = FALSE) {
+install_torch <- function(reinstall = FALSE, ..., .inform_restart = TRUE) {
+  ellipsis::check_dots_empty()
+  
+  have_installed <- !torch_is_installed() || reinstall
+  
   liblantern <- lantern_url()
   libtorch <- libtorch_url()
   
   install_lib("torch", libtorch, reinstall)
   install_lib("lantern", liblantern, reinstall)
+  
+  if (.inform_restart && have_installed && interactive()) {
+    cli::cli_inform(c(
+      v = "torch dependencies have been installed.",
+      i = "You must restart your session to use {.pkg torch} correctly."
+    ))
+  }
   
   return(invisible(TRUE))
 }

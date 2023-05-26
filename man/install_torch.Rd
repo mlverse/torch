@@ -4,10 +4,16 @@
 \alias{install_torch}
 \title{Install Torch}
 \usage{
-install_torch(reinstall = FALSE)
+install_torch(reinstall = FALSE, ..., .inform_restart = TRUE)
 }
 \arguments{
 \item{reinstall}{Re-install Torch even if its already installed?}
+
+\item{...}{Currently unused.}
+
+\item{.inform_restart}{if \code{TRUE} and running in an \code{interactive()} session, after
+installation it will print a message to inform the user that the session must
+be restarted for torch to work correctly.}
 }
 \description{
 Installs Torch and its dependencies.

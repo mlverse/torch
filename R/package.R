@@ -40,7 +40,7 @@ globalVariables(c("..", "self", "private", "N"))
         if (is_interactive) { 
           get_confirmation() # this will error of response is not true.  
         }
-        install_torch()
+        install_torch(.inform_restart = FALSE)
         TRUE
       },
       error = function(e) {
