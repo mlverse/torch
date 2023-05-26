@@ -515,3 +515,13 @@ test_that("to can change both device and dtype", {
   expect_true(y$dtype == torch_double())
   expect_true(y$device == torch_device("meta"))
 })
+
+test_that("can convert to half using the method `half()`", {
+  x <- torch_randn(10, 10)
+  y <- x$half()
+
+  expect_true(y$dtype == torch_half())
+
+  x <- torch_tensor(1, dtype="half")
+  expect_equal(as.numeric(x), 1)
+})
