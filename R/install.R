@@ -45,8 +45,6 @@ torch_version <- "1.13.1"
 #' 
 #' @export
 install_torch <- function(reinstall = FALSE, ..., .inform_restart = TRUE) {
-  ellipsis::check_dots_empty()
-  
   have_installed <- !torch_is_installed() || reinstall
   
   liblantern <- lantern_url()
