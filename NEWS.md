@@ -23,6 +23,7 @@
 - Export helpers for handling RNG state, and temprarily modifying it. (#1057)
 - Added support for converting half tensors into R with `as.numeric()`. (#1056)
 - Added a message asking the user to restart the session after a manual installation with `install_torch()`. (#1055)
+- Added new `torch_tensor_from_buffer()` and `buffer_from_torch_tensor()` that allow low level creation of torch tensors. (#1061, #1062)
 
 # torch 0.10.0
 
