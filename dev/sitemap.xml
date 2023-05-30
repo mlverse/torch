@@ -1087,6 +1087,9 @@
     <loc>https://torch.mlverse.org/docs/dev/reference/tensor_dataset.html</loc>
   </url>
   <url>
+    <loc>https://torch.mlverse.org/docs/dev/reference/tensor_from_buffer.html</loc>
+  </url>
+  <url>
     <loc>https://torch.mlverse.org/docs/dev/reference/threads.html</loc>
   </url>
   <url>
