@@ -48356,6 +48356,19 @@ BEGIN_RCPP
     return R_NilValue;
 END_RCPP
 }
+// cpp_tensor_from_buffer
+torch::Tensor cpp_tensor_from_buffer(const SEXP& data, std::vector<int64_t> shape, XPtrTorchTensorOptions options);
+RcppExport SEXP _torch_cpp_tensor_from_buffer(SEXP dataSEXP, SEXP shapeSEXP, SEXP optionsSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< const SEXP& >::type data(dataSEXP);
+    Rcpp::traits::input_parameter< std::vector<int64_t> >::type shape(shapeSEXP);
+    Rcpp::traits::input_parameter< XPtrTorchTensorOptions >::type options(optionsSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_tensor_from_buffer(data, shape, options));
+    return rcpp_result_gen;
+END_RCPP
+}
 // cpp_torch_tensor_dtype
 Rcpp::XPtr<XPtrTorchDtype> cpp_torch_tensor_dtype(torch::Tensor x);
 RcppExport SEXP _torch_cpp_torch_tensor_dtype(SEXP xSEXP) {
@@ -52515,6 +52528,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_torch_cpp_Tensor_has_storage", (DL_FUNC) &_torch_cpp_Tensor_has_storage, 1},
     {"_torch_cpp_Storage_data_ptr", (DL_FUNC) &_torch_cpp_Storage_data_ptr, 1},
     {"_torch_cpp_torch_tensor_print", (DL_FUNC) &_torch_cpp_torch_tensor_print, 2},
+    {"_torch_cpp_tensor_from_buffer", (DL_FUNC) &_torch_cpp_tensor_from_buffer, 3},
     {"_torch_cpp_torch_tensor_dtype", (DL_FUNC) &_torch_cpp_torch_tensor_dtype, 1},
     {"_torch_torch_tensor_cpp", (DL_FUNC) &_torch_torch_tensor_cpp, 5},
     {"_torch_cpp_as_array", (DL_FUNC) &_torch_cpp_as_array, 1},

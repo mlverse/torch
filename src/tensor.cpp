@@ -49,6 +49,19 @@ void cpp_torch_tensor_print(torch::Tensor x, int n) {
 };
 
 // [[Rcpp::export]]
+torch::Tensor cpp_tensor_from_buffer(const SEXP& data, std::vector<int64_t> shape, XPtrTorchTensorOptions options) {
+  return lantern_from_blob(
+    DATAPTR(data), 
+    &shape[0], 
+    shape.size(), 
+    // we use the default strides
+    nullptr,
+    0, 
+    options.get()
+  );
+}
+
+// [[Rcpp::export]]
 Rcpp::XPtr<XPtrTorchDtype> cpp_torch_tensor_dtype(torch::Tensor x) {
   XPtrTorchDtype out = lantern_Tensor_dtype(x.get());
   return make_xptr<XPtrTorchDtype>(out);
