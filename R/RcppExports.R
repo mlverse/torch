@@ -14601,6 +14601,10 @@ cpp_tensor_from_buffer <- function(data, shape, options) {
     .Call(`_torch_cpp_tensor_from_buffer`, data, shape, options)
 }
 
+cpp_buffer_from_tensor <- function(data) {
+    .Call(`_torch_cpp_buffer_from_tensor`, data)
+}
+
 cpp_torch_tensor_dtype <- function(x) {
     .Call(`_torch_cpp_torch_tensor_dtype`, x)
 }

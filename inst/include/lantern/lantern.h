@@ -2590,6 +2590,14 @@ HOST_API void* lantern_Dtype_from_string (void* dtype_str)
   return ret;
 }
 
+LANTERN_API void (LANTERN_PTR _lantern_buffer_from_tensor) (void* tensor, void* buffer, int n);
+HOST_API void lantern_buffer_from_tensor (void* tensor, void* buffer, int n)
+{
+  LANTERN_CHECK_LOADED
+   _lantern_buffer_from_tensor(tensor, buffer, n);
+  LANTERN_HOST_HANDLER; 
+}
+
   /* Autogen Headers -- Start */
   LANTERN_API void* (LANTERN_PTR _lantern__cast_byte_tensor_bool)(void* self, void* non_blocking);
   HOST_API void* lantern__cast_byte_tensor_bool(void* self, void* non_blocking) { LANTERN_CHECK_LOADED void* ret = _lantern__cast_byte_tensor_bool(self, non_blocking); LANTERN_HOST_HANDLER return ret; }
@@ -10166,6 +10174,7 @@ LOAD_SYMBOL(_lantern_jit_operator_info);
 LOAD_SYMBOL(_lantern_jit_all_schemas_for);
 LOAD_SYMBOL(_lantern_function_schema_list_at);
 LOAD_SYMBOL(_lantern_Dtype_from_string);
+LOAD_SYMBOL(_lantern_buffer_from_tensor);
   /* Autogen Symbols -- Start */
   LOAD_SYMBOL(_lantern__cast_byte_tensor_bool)
   LOAD_SYMBOL(_lantern__cast_char_tensor_bool)
