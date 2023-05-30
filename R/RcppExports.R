@@ -14597,6 +14597,10 @@ cpp_torch_tensor_print <- function(x, n) {
     invisible(.Call(`_torch_cpp_torch_tensor_print`, x, n))
 }
 
+cpp_tensor_from_buffer <- function(data, shape, options) {
+    .Call(`_torch_cpp_tensor_from_buffer`, data, shape, options)
+}
+
 cpp_torch_tensor_dtype <- function(x) {
     .Call(`_torch_cpp_torch_tensor_dtype`, x)
 }

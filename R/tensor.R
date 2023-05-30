@@ -478,3 +478,17 @@ tensor_to_complex <- function(x) {
     torch_tensor(Im(x), dtype = torch_double())
   )
 }
+
+#' Creates a tensor from a buffer of memory
+#' 
+#' It creates a tensor without taking ownership of the memory it points to.
+#' You must call `clone` if you want to copy the memory over a new tensor.
+#'
+#' @param buffer An R atomic object containing the data in a contiguous array.
+#' @param shape The shape of the resulting tensor.
+#' @param dtype A torch data type for the tresulting tensor.
+#'
+#' @export
+tensor_from_buffer <- function(buffer, shape, dtype = "float") {
+  cpp_tensor_from_buffer(buffer, shape, list(dtype=dtype))
+}
