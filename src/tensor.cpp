@@ -62,6 +62,15 @@ torch::Tensor cpp_tensor_from_buffer(const SEXP& data, std::vector<int64_t> shap
 }
 
 // [[Rcpp::export]]
+SEXP cpp_buffer_from_tensor (torch::Tensor data) {
+  auto n = lantern_Tensor_numel(data.get()) * lantern_Tensor_element_size(data.get());
+  SEXP buffer = PROTECT(Rf_allocVector(RAWSXP, n = n));
+  lantern_buffer_from_tensor(data.get(), DATAPTR(buffer), n);
+  UNPROTECT(1);
+  return buffer;
+}
+
+// [[Rcpp::export]]
 Rcpp::XPtr<XPtrTorchDtype> cpp_torch_tensor_dtype(torch::Tensor x) {
   XPtrTorchDtype out = lantern_Tensor_dtype(x.get());
   return make_xptr<XPtrTorchDtype>(out);

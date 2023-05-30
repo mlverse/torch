@@ -528,8 +528,15 @@ test_that("can convert to half using the method `half()`", {
 
 test_that("can create tensor from a buffer", {
   x <- runif(10)
-  y <- tensor_from_buffer(x, shape = 10, dtype = "float64")
+  y <- torch_tensor_from_buffer(x, shape = 10, dtype = "float64")
   expect_equal(as.numeric(y), x)
   y$add_(1)
   expect_equal(as.numeric(y), x)
+})
+
+test_that("can create a buffer from a tensor", {
+  x <- torch_randn(10, 10)
+  y <- buffer_from_torch_tensor(x)
+  z <- torch_tensor_from_buffer(y, shape = c(10, 10), dtype="float")
+  expect_true(torch_allclose(x, z))
 })

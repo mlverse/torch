@@ -12,6 +12,7 @@ void *_lantern_from_blob(void *data, int64_t *sizes, size_t sizes_size,
                          int64_t *strides, size_t strides_size, void *options) {
   LANTERN_FUNCTION_START
   if (strides_size == 0) {
+    auto ten = new torch::Tensor();
     return make_raw::Tensor(torch::from_blob(
       data, 
       std::vector<int64_t>(sizes, sizes + sizes_size),
@@ -26,6 +27,14 @@ void *_lantern_from_blob(void *data, int64_t *sizes, size_t sizes_size,
     ));
   }
   LANTERN_FUNCTION_END
+}
+
+void _lantern_buffer_from_tensor (void* tensor, void* buffer, int n) {
+  LANTERN_FUNCTION_START
+  auto t = from_raw::Tensor(tensor);
+  auto data_ptr = t.storage().data_ptr().get();
+  memcpy(buffer, data_ptr, n);
+  LANTERN_FUNCTION_END_VOID
 }
 
 const char *_lantern_Tensor_StreamInsertion(void *x) {

@@ -48369,6 +48369,17 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// cpp_buffer_from_tensor
+SEXP cpp_buffer_from_tensor(torch::Tensor data);
+RcppExport SEXP _torch_cpp_buffer_from_tensor(SEXP dataSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< torch::Tensor >::type data(dataSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_buffer_from_tensor(data));
+    return rcpp_result_gen;
+END_RCPP
+}
 // cpp_torch_tensor_dtype
 Rcpp::XPtr<XPtrTorchDtype> cpp_torch_tensor_dtype(torch::Tensor x);
 RcppExport SEXP _torch_cpp_torch_tensor_dtype(SEXP xSEXP) {
@@ -52529,6 +52540,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_torch_cpp_Storage_data_ptr", (DL_FUNC) &_torch_cpp_Storage_data_ptr, 1},
     {"_torch_cpp_torch_tensor_print", (DL_FUNC) &_torch_cpp_torch_tensor_print, 2},
     {"_torch_cpp_tensor_from_buffer", (DL_FUNC) &_torch_cpp_tensor_from_buffer, 3},
+    {"_torch_cpp_buffer_from_tensor", (DL_FUNC) &_torch_cpp_buffer_from_tensor, 1},
     {"_torch_cpp_torch_tensor_dtype", (DL_FUNC) &_torch_cpp_torch_tensor_dtype, 1},
     {"_torch_torch_tensor_cpp", (DL_FUNC) &_torch_torch_tensor_cpp, 5},
     {"_torch_cpp_as_array", (DL_FUNC) &_torch_cpp_as_array, 1},
