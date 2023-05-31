@@ -493,7 +493,7 @@ torch_tensor_from_buffer <- function(buffer, shape, dtype = "float") {
   cpp_tensor_from_buffer(buffer, shape, list(dtype=dtype))
 }
 
-#' @describeIn tensor_from_buffer Creates a raw vector containing the tensor data. Causes a data copy.
+#' @describeIn torch_tensor_from_buffer Creates a raw vector containing the tensor data. Causes a data copy.
 #' @export
 buffer_from_torch_tensor <- function(tensor) {
   cpp_buffer_from_tensor(tensor)

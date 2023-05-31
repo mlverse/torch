@@ -2,9 +2,12 @@
 % Please edit documentation in R/tensor.R
 \name{torch_tensor_from_buffer}
 \alias{torch_tensor_from_buffer}
+\alias{buffer_from_torch_tensor}
 \title{Creates a tensor from a buffer of memory}
 \usage{
 torch_tensor_from_buffer(buffer, shape, dtype = "float")
+
+buffer_from_torch_tensor(tensor)
 }
 \arguments{
 \item{buffer}{An R atomic object containing the data in a contiguous array.}
@@ -17,3 +20,8 @@ torch_tensor_from_buffer(buffer, shape, dtype = "float")
 It creates a tensor without taking ownership of the memory it points to.
 You must call \code{clone} if you want to copy the memory over a new tensor.
 }
+\section{Functions}{
+\itemize{
+\item \code{buffer_from_torch_tensor()}: Creates a raw vector containing the tensor data. Causes a data copy.
+
+}}

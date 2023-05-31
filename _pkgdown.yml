@@ -77,7 +77,6 @@ reference:
       - matches("torch_.*_like")
       - as_array
       - torch_tensor_from_buffer
-      - buffer_from_torch_tensor
   - title: Tensor attributes
     contents:
       - has_concept("tensor-attributes")
