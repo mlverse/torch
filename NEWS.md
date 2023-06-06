@@ -1,29 +1,43 @@
 # torch (development version)
 
+## Breaking changes
+
+- `load_state_dict()` for optimizers now default to cloning the tensors in the state dict, so they don't keep references to objects in the dict. (#1041)
+
+## New features
+
 - Added `nn_utils_weight_norm` (#1025)
-- Started building LibLantern on macOS 11 instead of macOS12 for maximum compatibility. (#1026)
-- Added `CXXSTD` to Makevars to enable C+11 compilation options.
 - Added support for reading from ordered state dicts serialized with PyTorch. (#1031)
 - Added `jit_ops` allowing to access JIT operators. (#1023)
-- Refactored codepath for TensorOptions and now all tensors initialization are handled by the same codepath. (#1033)
 - Added `with_device` and `local_device` to allow temporarily modify the default device tensors get initialized. (#1034)
+- `nnf_gelu()` and `nn_gelu()` gained the `approximate` argument. (#1043)
+- Implemented `!=` for torch devices. (#1042)
+- Allows setting the dtype with a string. (#1045)
+- You can now create a named list of modules using `nn_module_dict()`. (#1046)
+- Faster `load_state_dict()`, also using less memory. It' possible to use the legacy implementation if required, see PR. (#1051)
+- Export helpers for handling RNG state, and temprarily modifying it. (#1057)
+- Added support for converting half tensors into R with `as.numeric()`. (#1056)
+- Added new `torch_tensor_from_buffer()` and `buffer_from_torch_tensor()` that allow low level creation of torch tensors. (#1061, #1062)
+
+## Documentation
+
 - Improved documentation for LBFGS optimizer. (#1035)
-- Added internal argument `.refer_to_state_dict` to the `load_state_dict()` `nn_module()` method. Allows loading the state dict into the model keeping parmaters as references to that state dict. (#1036)
+- Added a message asking the user to restart the session after a manual installation with `install_torch()`. (#1055)
+
+## Bug fixes
+
 - Fixed bug related to handling of non-persistent buffers. They would get added to the `state_dict()` even if they should not. (#1036)
 - Fixed a typo in the `optim_adamw` class name.
 - Fixed `nn_cross_entropy_loss` class name. (#1043)
-- `nnf_gelu()` and `nn_gelu()` gained the `approximate` argument. (#1043)
-- Implemented `!=` for torch devices. (#1042)
-- `load_state_dict()` for optimizers now default to cloning the tensors in the state dict, so they don't keep references to objects in the dict. (#1041)
-- Allows setting the dtype with a string. (#1045)
-- You can now create a named list of modules using `nn_module_dict()`. (#1046)
 - Fixed bug in LBFGS w/ line search. (#1048)
-- Faster `load_state_dict()`, also using less memory. It' possible to use the legacy implementation if required, see PR. (#1051)
 - Correctly handle the installation when `RemoteSha` is a package version. (#1058)
-- Export helpers for handling RNG state, and temprarily modifying it. (#1057)
-- Added support for converting half tensors into R with `as.numeric()`. (#1056)
-- Added a message asking the user to restart the session after a manual installation with `install_torch()`. (#1055)
-- Added new `torch_tensor_from_buffer()` and `buffer_from_torch_tensor()` that allow low level creation of torch tensors. (#1061, #1062)
+
+## Internal
+
+- Started building LibLantern on macOS 11 instead of macOS12 for maximum compatibility. (#1026)
+- Added `CXXSTD` to Makevars to enable C+11 compilation options.
+- Refactored codepath for TensorOptions and now all tensors initialization are handled by the same codepath. (#1033)
+- Added internal argument `.refer_to_state_dict` to the `load_state_dict()` `nn_module()` method. Allows loading the state dict into the model keeping parmaters as references to that state dict. (#1036)
 
 # torch 0.10.0
 
