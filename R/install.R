@@ -1,4 +1,4 @@
-branch <- "main"
+branch <- "cran/v0.11.0"
 torch_version <- "1.13.1"
 
 #' Install Torch
