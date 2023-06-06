@@ -18,7 +18,7 @@ parameterized by a mean vector and a covariance matrix."><meta name="robots" con
     
     <a class="navbar-brand me-2" href="../index.html">torch</a>
 
-    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">0.10.0.9000</small>
+    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">0.11.0.9000</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -160,10 +160,6 @@ the corresponding lower triangular matrices using a Cholesky decomposition.</p>
 <span class="r-in"><span><span class="va">m</span> <span class="op">&lt;-</span> <span class="fu">distr_multivariate_normal</span><span class="op">(</span><span class="fu"><a href="torch_zeros.html">torch_zeros</a></span><span class="op">(</span><span class="fl">2</span><span class="op">)</span>, <span class="fu"><a href="torch_eye.html">torch_eye</a></span><span class="op">(</span><span class="fl">2</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">m</span><span class="op">$</span><span class="fu">sample</span><span class="op">(</span><span class="op">)</span> <span class="co"># normally distributed with mean=`[0,0]` and covariance_matrix=`I`</span></span></span>
 <span class="r-in"><span><span class="op">}</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> torch_tensor</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> -0.8133</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> -0.6257</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [ CPUFloatType{2} ]</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
