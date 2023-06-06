@@ -448,7 +448,12 @@ XPtrTorchDevice from_sexp_device(SEXP x) {
   Rcpp::stop("Expected a torch_device");
 }
 
-void delete_device(void* x) { lantern_Device_delete(x); }
+void delete_device(void* x) { 
+  // if the device is a nullptr there's no need to call the lantern function.
+  if (x) {
+    lantern_Device_delete(x);   
+  }
+}
 
 // script module
 
