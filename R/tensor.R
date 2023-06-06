@@ -485,6 +485,7 @@ tensor_to_complex <- function(x) {
 #' You must call `clone` if you want to copy the memory over a new tensor.
 #'
 #' @param buffer An R atomic object containing the data in a contiguous array.
+#' @param tensor Tensor object that will be converted into a buffer.
 #' @param shape The shape of the resulting tensor.
 #' @param dtype A torch data type for the tresulting tensor.
 #'

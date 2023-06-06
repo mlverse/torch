@@ -458,6 +458,9 @@ nn_glu <- nn_module(
 #' - Input: \eqn{(N, *)} where `*` means, any number of additional
 #'   dimensions
 #' - Output: \eqn{(N, *)}, same shape as the input
+#' 
+#' @param approximate the gelu approximation algorithm to use: `'none'` or `'tanh'`. 
+#'   Default: `'none'`.
 #'
 #' @examples
 #' m <- nn_gelu()

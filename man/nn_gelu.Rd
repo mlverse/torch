@@ -6,6 +6,10 @@
 \usage{
 nn_gelu(approximate = "none")
 }
+\arguments{
+\item{approximate}{the gelu approximation algorithm to use: \code{'none'} or \code{'tanh'}.
+Default: \code{'none'}.}
+}
 \description{
 Applies the Gaussian Error Linear Units function:
 \deqn{\mbox{GELU}(x) = x * \Phi(x)}

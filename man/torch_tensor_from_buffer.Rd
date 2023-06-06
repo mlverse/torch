@@ -15,6 +15,8 @@ buffer_from_torch_tensor(tensor)
 \item{shape}{The shape of the resulting tensor.}
 
 \item{dtype}{A torch data type for the tresulting tensor.}
+
+\item{tensor}{Tensor object that will be converted into a buffer.}
 }
 \description{
 It creates a tensor without taking ownership of the memory it points to.
