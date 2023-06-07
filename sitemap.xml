@@ -253,6 +253,9 @@
     <loc>https://torch.mlverse.org/docs/reference/jit_load.html</loc>
   </url>
   <url>
+    <loc>https://torch.mlverse.org/docs/reference/jit_ops.html</loc>
+  </url>
+  <url>
     <loc>https://torch.mlverse.org/docs/reference/jit_save.html</loc>
   </url>
   <url>
@@ -353,6 +356,9 @@
   </url>
   <url>
     <loc>https://torch.mlverse.org/docs/reference/local_autocast.html</loc>
+  </url>
+  <url>
+    <loc>https://torch.mlverse.org/docs/reference/local_device.html</loc>
   </url>
   <url>
     <loc>https://torch.mlverse.org/docs/reference/lr_lambda.html</loc>
@@ -613,6 +619,9 @@
     <loc>https://torch.mlverse.org/docs/reference/nn_module.html</loc>
   </url>
   <url>
+    <loc>https://torch.mlverse.org/docs/reference/nn_module_dict.html</loc>
+  </url>
+  <url>
     <loc>https://torch.mlverse.org/docs/reference/nn_module_list.html</loc>
   </url>
   <url>
@@ -734,6 +743,9 @@
   </url>
   <url>
     <loc>https://torch.mlverse.org/docs/reference/nn_utils_rnn_pad_sequence.html</loc>
+  </url>
+  <url>
+    <loc>https://torch.mlverse.org/docs/reference/nn_utils_weight_norm.html</loc>
   </url>
   <url>
     <loc>https://torch.mlverse.org/docs/reference/nnf_adaptive_avg_pool1d.html</loc>
@@ -2006,6 +2018,9 @@
   </url>
   <url>
     <loc>https://torch.mlverse.org/docs/reference/torch_tensor.html</loc>
+  </url>
+  <url>
+    <loc>https://torch.mlverse.org/docs/reference/torch_tensor_from_buffer.html</loc>
   </url>
   <url>
     <loc>https://torch.mlverse.org/docs/reference/torch_tensordot.html</loc>

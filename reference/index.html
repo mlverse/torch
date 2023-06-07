@@ -16,7 +16,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">torch</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.10.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.11.0</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -193,6 +193,11 @@
           <code><a href="as_array.html">as_array()</a></code> 
         </dt>
         <dd>Converts to array</dd>
+      </dl><dl><dt>
+          
+          <code><a href="torch_tensor_from_buffer.html">torch_tensor_from_buffer()</a></code> <code><a href="torch_tensor_from_buffer.html">buffer_from_torch_tensor()</a></code> 
+        </dt>
+        <dd>Creates a tensor from a buffer of memory</dd>
       </dl></div><div class="section level2">
       <h2 id="tensor-attributes">Tensor attributes<a class="anchor" aria-label="anchor" href="#tensor-attributes"></a></h2>
       
@@ -1734,6 +1739,11 @@ Returns the torch installation path.</dd>
         <dd>Converts R objects to a torch tensor</dd>
       </dl><dl><dt>
           
+          <code><a href="torch_tensor_from_buffer.html">torch_tensor_from_buffer()</a></code> <code><a href="torch_tensor_from_buffer.html">buffer_from_torch_tensor()</a></code> 
+        </dt>
+        <dd>Creates a tensor from a buffer of memory</dd>
+      </dl><dl><dt>
+          
           <code><a href="torch_tensordot.html">torch_tensordot()</a></code> 
         </dt>
         <dd>Tensordot</dd>
@@ -2288,6 +2298,11 @@ planes.</dd>
         <dd>Base class for all neural network modules.</dd>
       </dl><dl><dt>
           
+          <code><a href="nn_module_dict.html">nn_module_dict()</a></code> 
+        </dt>
+        <dd>Container that allows named values</dd>
+      </dl><dl><dt>
+          
           <code><a href="nn_module_list.html">nn_module_list()</a></code> 
         </dt>
         <dd>Holds submodules in a list.</dd>
@@ -2493,6 +2508,11 @@ For use with [nn_sequential.</dd>
           <code><a href="nn_utils_rnn_pad_sequence.html">nn_utils_rnn_pad_sequence()</a></code> 
         </dt>
         <dd>Pad a list of variable length Tensors with <code>padding_value</code></dd>
+      </dl><dl><dt>
+          
+          <code><a href="nn_utils_weight_norm.html">nn_utils_weight_norm</a></code> 
+        </dt>
+        <dd>nn_utils_weight_norm</dd>
       </dl><dl><dt>
           
           <code><a href="is_nn_module.html">is_nn_module()</a></code> 
@@ -3010,6 +3030,21 @@ See <code><a href="../reference/nn_silu.html">nn_silu()</a></code> for more info
           <code><a href="nnf_unfold.html">nnf_unfold()</a></code> 
         </dt>
         <dd>Unfold</dd>
+      </dl></div><div id="" class="section level2">
+      
+      
+      
+
+      <dl><dt>
+          
+          <code><a href="torch_device.html">torch_device()</a></code> 
+        </dt>
+        <dd>Create a Device object</dd>
+      </dl><dl><dt>
+          
+          <code><a href="local_device.html">local_device()</a></code> <code><a href="local_device.html">with_device()</a></code> 
+        </dt>
+        <dd>Device contexts</dd>
       </dl></div><div class="section level2">
       <h2 id="optimizers">Optimizers<a class="anchor" aria-label="anchor" href="#optimizers"></a></h2>
       
@@ -3570,6 +3605,11 @@ symmetric positive-definite matrix.</dd>
           <code><a href="jit_load.html">jit_load()</a></code> 
         </dt>
         <dd>Loads a <code>script_function</code> or <code>script_module</code> previously saved with <code>jit_save</code></dd>
+      </dl><dl><dt>
+          
+          <code><a href="jit_ops.html">jit_ops</a></code> 
+        </dt>
+        <dd>Enable idiomatic access to JIT operators from R.</dd>
       </dl><dl><dt>
           
           <code><a href="jit_save.html">jit_save()</a></code> 
