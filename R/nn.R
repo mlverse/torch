@@ -175,10 +175,17 @@ nn_Module <- R6::R6Class(
               param$copy_(input_param)
             })  
           } else {
+            
+            # setting requires grad is ignored if param is not a valid pointer
+            # be careful!
+            if (!is_null_external_pointer(param) && param$requires_grad) {
+              input_param$requires_grad_(param$requires_grad)
+            }
+            
             if (name %in% names(persistent_buffers)) {
-              private$buffers_[[name]] <- input_param$requires_grad_(param$requires_grad)
+              private$buffers_[[name]] <- input_param
             } else {
-              private$parameters_[[name]] <- input_param$requires_grad_(param$requires_grad)
+              private$parameters_[[name]] <- input_param
             }
           }
         } else {

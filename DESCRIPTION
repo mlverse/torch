@@ -41,7 +41,8 @@ Imports:
     cli (>= 3.0.0),
     glue,
     ellipsis,
-    desc
+    desc,
+    safetensors
 RoxygenNote: 7.2.3
 Roxygen: list(markdown = TRUE)
 Suggests:
@@ -173,3 +174,5 @@ Collate:
     'variable_list.R'
     'with-indices.R'
     'wrapers.R'
+Remotes:
+    mlverse/safetensors 
