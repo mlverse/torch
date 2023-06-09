@@ -178,7 +178,7 @@ nn_Module <- R6::R6Class(
             
             # setting requires grad is ignored if param is not a valid pointer
             # be careful!
-            if (!is_null_external_pointer(param) && param$requires_grad) {
+            if (!is_null_external_pointer(param)) {
               input_param$requires_grad_(param$requires_grad)
             }
             
