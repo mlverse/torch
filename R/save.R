@@ -402,7 +402,7 @@ is_rds <- function(con) {
     on.exit({close(con)}, add = TRUE)
   }
   
-  !inherits(try(infoRDS(con), silent = TRUE), "try-error")
+  !inherits(try(readRDS(con), silent = TRUE), "try-error")
 }
 
 create_write_con <- function(path) {
