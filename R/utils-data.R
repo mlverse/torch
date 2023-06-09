@@ -4,6 +4,34 @@ Dataset <- R6::R6Class(
   public = list(
     .getitem = function(index) {
       not_implemented_error()
+    },
+    state_dict = function() {
+      # the default implementation will walk trough the public fields and try to
+      # find tensors. It won't do it recursively, only flat fields will be 
+      # considered.
+      fields <- names(self)
+      tensors <- list()
+      for (f in fields) {
+        value <- .subset2(self, f)
+        if (inherits(value, "torch_tensor")) {
+          tensors[[f]] <- value
+        }
+      }
+      tensors
+    },
+    load_state_dict = function(x, ..., .refer_to_state_dict = FALSE) {
+      # specially when using torch_load, it's possible to optimize by using the
+      # .refer_to_state_dict field, so you don't need an extra copy.
+      # you are not required to implement it, though, but add `...` to the
+      # signature.
+      if (.refer_to_state_dict) {
+        for (nm in names(x)) {
+          assign(nm, x[[nm]], envir = self)
+        }
+        invisible(NULL)
+      } else {
+        cli::cli_abort("Loading the state_dict is only implemented when {.arg .refer_to_state_dict} is {.val TRUE}")
+      }
     }
   )
 )

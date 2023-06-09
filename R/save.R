@@ -73,9 +73,6 @@ torch_save.nn_module <- function(obj, path, ..., compress = TRUE) {
   if (use_ser_version() <= 2) 
     return(legacy_save_nn_module(obj, path, ..., compress))
   
-  con <- create_write_con(path)
-  on.exit({close(con)}, add = TRUE)
-  
   metadata = list(..r = list(
     type = "module", 
     version = use_ser_version()
@@ -83,13 +80,12 @@ torch_save.nn_module <- function(obj, path, ..., compress = TRUE) {
   
   state_dict <- obj$state_dict()
   
-  safetensors::safe_save_file(
-    state_dict, 
-    path = con, 
-    metadata = metadata
+  torch_save_to_file(
+    metadata,
+    obj$state_dict(),
+    obj,
+    path
   )
-  serialize(obj, con = con)
-  flush(con)
   
   invisible(obj)
 }
@@ -121,16 +117,12 @@ torch_save.list <- function(obj, path, ..., compress = TRUE) {
     version = use_ser_version()
   ))
   
-  con <- create_write_con(path)
-  on.exit({close(con)}, add = TRUE)
-  
-  safetensors::safe_save_file(
-    lxt$state_dict, 
-    path = con, 
-    metadata = metadata
+  torch_save_to_file(
+    metadata,
+    lxt$state_dict,
+    lxt$list,
+    path
   )
-  serialize(lxt$list, con = con)
-  flush(con)
   
   invisible(obj)
 }
@@ -191,6 +183,52 @@ legacy_save_torch_list <- function(obj, path, ..., compress = TRUE) {
           path, compress = compress)
 }
 
+#' @concept serialization
+#' @export
+torch_save.dataset <- function(obj, path, ..., compress = TRUE) {
+  torch_save_to_file_with_state_dict(obj, path)
+}
+
+#' @concept serialization
+#' @export
+torch_save.BaseDatasetFetcher <- function(obj, path, ..., compress = TRUE) {
+  torch_save_to_file_with_state_dict(obj, path)
+}
+
+torch_save_to_file_with_state_dict <- function(obj, path) {
+  if (use_ser_version() <= 2) 
+    cli::cli_abort("Serializing objects with class {.cls {class(obj)}} is only supported with serialization version >= 3, got {.val {use_ser_version()}}")
+  
+  metadata = list(..r = list(
+    type = "state_dict", 
+    version = use_ser_version()
+  ))
+  
+  torch_save_to_file(
+    metadata,
+    obj$state_dict(),
+    obj,
+    path
+  )
+  
+  invisible(obj)
+}
+
+torch_save_to_file <- function(metadata, state_dict = list(), object = NULL, path) {
+  con <- create_write_con(path)
+  on.exit({close(con)}, add = TRUE)
+  
+  safetensors::safe_save_file(
+    state_dict, 
+    path = con, 
+    metadata = metadata
+  )
+  if (!is.null(object)) {
+    serialize(object, con = con)  
+  }
+  flush(con)
+}
+
 #' Loads a saved object
 #'
 #' @param path a path to the saved object
@@ -237,7 +275,7 @@ torch_load <- function(path, device = "cpu") {
     return(list_load_state_dict(object, safe))
   }
   
-  if (meta$type == "module") {
+  if (meta$type == "module" || meta$type == "state_dict") {
     object$load_state_dict(safe, .refer_to_state_dict = TRUE)
     return(object)
   }

@@ -354,3 +354,33 @@ test_that("can save module with ser3", {
   expect_true(torch_allclose(module$weight, mod$weight))
   expect_true(torch_allclose(module$bias, mod$bias))
 })
+
+test_that("can save datasets with ser3", {
+  
+  dt <- dataset(
+    initialize = function() {
+      self$x <- torch_randn(10, 10)
+      self$y <- torch_randn(10, 10)
+    },
+    .getitem = function(i) {
+      list(self$x[i,], self$y[i,])
+    },
+    .length = function() {
+      10
+    }
+  )
+  
+  d <- dt()
+  tmp <- tempfile()
+  
+  withr::with_options(c(torch.serialization_version = 3), {
+    torch_save(d, tmp)
+  })
+  
+  d2 <- torch_load(tmp)
+  
+  expect_true(torch_allclose(d$x, d2$x))
+  expect_true(torch_allclose(d$y, d2$y))
+  expect_true(torch_allclose(d[1][[1]], d2[1][[1]]))
+
+})
