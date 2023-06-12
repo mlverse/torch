@@ -28,12 +28,10 @@ torch_save.torch_tensor <- function(obj, path, ..., compress = TRUE) {
   if (use_ser_version() <= 2) 
     return(legacy_save_torch_tensor(obj, path, ..., compress))
   
-  con <- create_write_con(path)
-  on.exit({close(con)}, add = TRUE)
-  
-  safetensors::safe_save_file(
-    list("...unnamed..." = obj), 
-    path = con,
+  torch_save_to_file(
+    state_dict = list("...unnamed..." = obj),
+    object = NULL,
+    path = path,
     metadata = list(
       ..r = list(
         version = use_ser_version(),
@@ -218,11 +216,14 @@ torch_save_to_file <- function(metadata, state_dict = list(), object = NULL, pat
   con <- create_write_con(path)
   on.exit({close(con)}, add = TRUE)
   
+  metadata[["..r"]][["requires_grad"]] <- lapply(state_dict, function(x) x$requires_grad)
+  
   safetensors::safe_save_file(
     state_dict, 
     path = con, 
     metadata = metadata
   )
+  
   if (!is.null(object)) {
     serialize(object, con = con)  
   }
@@ -254,6 +255,12 @@ torch_load <- function(path, device = "cpu") {
   
   safe <- safetensors::safe_load_file(con, device = device, framework = "torch")
   meta <- attr(safe, "metadata")[["__metadata__"]][["..r"]]
+  
+  # recover requires_grad
+  requires_grad <- meta[["requires_grad"]]
+  imap(safe, function(x, nm) {
+    x$requires_grad_(requires_grad[[nm]])
+  })
   
   if (is.null(meta) || is.null(meta$type)) {
     cli::cli_warn(c(
@@ -462,4 +469,3 @@ create_read_con <- function(path) {
     path # path must be a connection in this case.
   }
 }
-  

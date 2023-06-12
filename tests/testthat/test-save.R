@@ -328,7 +328,7 @@ test_that("saving tensor with ser3", {
 test_that("saving lists with ser3", {
   
   z <- torch_randn(10, 10)
-  x <- list(x = torch_randn(10, 10), torch_randn(10, 10), z, z)
+  x <- list(x = torch_randn(10, 10, requires_grad = TRUE), torch_randn(10, 10), z, z)
   tmp <- tempfile()
   withr::with_options(c(torch.serialization_version = 3), {
     torch_save(x, tmp)
@@ -337,7 +337,9 @@ test_that("saving lists with ser3", {
   l <- torch_load(tmp)
   expect_equal(names(l), c("x", "", "", ""))
   expect_true(torch_allclose(l$x, x$x))
+  expect_true(l$x$requires_grad)
   expect_true(torch_allclose(l[[2]], x[[2]]))
+  expect_false(l[[2]]$requires_grad)
   expect_equal(xptr_address(l[[3]]), xptr_address(l[[4]]))
   
 })
