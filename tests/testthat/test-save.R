@@ -309,7 +309,7 @@ test_that("is_rds should't move the connection position", {
   expect_equal(x, "hello world")
   
   x <- torch_serialize(nn_linear(10, 10))
-  expect_true(is_rds(x))
+  expect_true(!is_rds(x))
   expect_true(inherits(torch_load(x), "nn_module"))
 })
 
@@ -384,5 +384,13 @@ test_that("can save datasets with ser3", {
   expect_true(torch_allclose(d$x, d2$x))
   expect_true(torch_allclose(d$y, d2$y))
   expect_true(torch_allclose(d[1][[1]], d2[1][[1]]))
+})
 
+test_that("can save a complex tensor", {
+  z <- torch_randn(10, 10)$to(dtype="cfloat")
+  k <- torch_serialize(z)
+  x <- torch_load(k)
+  
+  expect_true(torch_allclose(x$real, z$real))
+  expect_true(torch_allclose(x$imag, z$imag))
 })

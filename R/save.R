@@ -17,7 +17,7 @@ torch_save <- function(obj, path, ..., compress = TRUE) {
   UseMethod("torch_save")
 }
 
-ser_version <- 2
+ser_version <- 3
 use_ser_version <- function() {
   getOption("torch.serialization_version", ser_version)
 }
@@ -214,9 +214,29 @@ torch_save_to_file_with_state_dict <- function(obj, path) {
 
 torch_save_to_file <- function(metadata, state_dict = list(), object = NULL, path) {
   con <- create_write_con(path)
-  on.exit({close(con)}, add = TRUE)
   
-  metadata[["..r"]][["requires_grad"]] <- lapply(state_dict, function(x) x$requires_grad)
+  metadata[["..r"]][["requires_grad"]] <- list()
+  metadata[["..r"]][["special_dtype"]] <- list()
+  
+  # handles additional metadata necessary to be able to support additional types
+  nms <- names(state_dict)
+  for (i in seq_along(state_dict)) {
+    nm <- nms[i]
+    tensor <- state_dict[[i]]
+    
+    if (tensor$requires_grad) {
+      metadata[["..r"]][["requires_grad"]][[nm]] <- TRUE
+    }
+    
+    dtype <- tensor$dtype$.type()
+    if (dtype %in% c("ComplexHalf", "ComplexFloat", "ComplexDouble")) {
+      metadata[["..r"]][["special_dtype"]][[nm]] <- list(
+        shape = tensor$shape,
+        dtype = tolower(gsub("Complex", "c", dtype))
+      )
+      state_dict[[nm]] <- torch_tensor(buffer_from_torch_tensor(tensor))
+    }
+  }
   
   safetensors::safe_save_file(
     state_dict, 
@@ -246,20 +266,25 @@ torch_load <- function(path, device = "cpu") {
     return(legacy_torch_load(path, device))
   }
   
-  if (!inherits(path, "connection")) {
-    con <- create_read_con(path)
-    on.exit({close(con)}, add = TRUE)  
-  } else {
-    con <- path
-  }
+  con <- create_read_con(path)
   
   safe <- safetensors::safe_load_file(con, device = device, framework = "torch")
   meta <- attr(safe, "metadata")[["__metadata__"]][["..r"]]
   
+  special_dtype <- meta[["special_dtype"]]
+  for(i in seq_along(special_dtype)) {
+    x <- special_dtype[[i]]
+    safe[[i]] <- torch_tensor_from_buffer(
+      buffer_from_torch_tensor(safe[[i]]),
+      shape = x$shape,
+      dtype = x$dtype
+    )
+  }
+  
   # recover requires_grad
   requires_grad <- meta[["requires_grad"]]
-  imap(safe, function(x, nm) {
-    x$requires_grad_(requires_grad[[nm]])
+  imap(requires_grad, function(x, nm) {
+    safe[[nm]]$requires_grad_(x)
   })
   
   if (is.null(meta) || is.null(meta$type)) {
@@ -329,6 +354,17 @@ legacy_torch_load <- function(path, device = "cpu") {
 #' @family torch_save
 #' @concept serialization
 torch_serialize <- function(obj, ...) {
+  if (use_ser_version() < 3)
+    return(legacy_torch_serialize(obj, ...))
+  
+  con <- rawConnection(raw(), open = "wb")
+  on.exit({close(con)}, add = TRUE)
+  
+  torch_save(obj = obj, path = con, ...)
+  rawConnectionValue(con)
+}
+
+legacy_torch_serialize <- function(obj, ...) {
   con <- rawConnection(raw(), open = "wr")
   on.exit({
     close(con)
@@ -451,21 +487,31 @@ is_rds <- function(con) {
 }
 
 create_write_con <- function(path) {
-  if (is.raw(path)) {
-    rawConnection(obj, open = "wb")
-  } else if (is.character(path)) {
+  if (inherits(path, "connection"))
+    return(path)
+  
+  con <- if (is.character(path)) {
     file(path, open = "wb")
   } else {
-    path # path must be a connection in this case.
+    cli::cli_abort("{.arg path} must be a connection or a actual path, got {.cls {class(path)}}.")
   }
+  
+  withr::defer_parent({close(con)})
+  con
 }
 
 create_read_con <- function(path) {
-  if (is.raw(path)) {
-    rawConnection(obj, open = "rb")
+  if (inherits(path, "connection"))
+    return(path)
+  
+  con <- if (is.raw(path)) {
+    rawConnection(path, open = "rb")
   } else if (is.character(path)) {
     file(path, open = "rb")
   } else {
-    path # path must be a connection in this case.
-  }
+    cli::cli_abort("{.arg path} must be a connection, a raw vector or an actual path, got {.cls {class(path)}}.")
+  } 
+  
+  withr::defer_parent({close(con)})
+  con
 }
