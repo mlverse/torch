@@ -174,14 +174,39 @@ test_that("can load a state dict that contains an ordered dict", {
 test_that("Can load a torch v0.2.1 model", {
   skip_on_os("windows")
 
-  tmp <- tempfile("model", fileext = "pt")
-  download.file("https://storage.googleapis.com/torch-lantern-builds/testing-models/v0.2.1.pt", destfile = tmp, mode = "wb")
+  dest <- testthat::test_path("assets/model-v0.2.1.pt")
+  if (!file.exists(dest)) {
+    download.file(
+      "https://storage.googleapis.com/torch-lantern-builds/testing-models/v0.2.1.pt", 
+      destfile = dest, 
+      mode = "wb"
+    )  
+  }
 
-  model <- torch_load(tmp)
+  model <- torch_load(dest)
   x <- torch_randn(32, 1, 28, 28)
 
   expect_error(o <- model(x), regexp = NA)
   expect_tensor_shape(o, c(32, 10))
+})
+
+test_that("Can load a v0.10.0 model", {
+  
+  dest <- testthat::test_path("assets/model-v0.10.0.pt")
+  if (!file.exists(dest)) {
+    download.file(
+      "https://storage.googleapis.com/torch-lantern-builds/testing-models/v0.10.0.pt", 
+      destfile = dest, 
+      mode = "wb"
+    )  
+  }
+  
+  model <- torch_load(dest)
+  x <- torch_randn(32, 1, 28, 28)
+  
+  expect_error(o <- model(x), regexp = NA)
+  expect_tensor_shape(o, c(32, 10))
+  
 })
 
 test_that("requires_grad for tensors is maintained", {
@@ -295,4 +320,102 @@ test_that("can use torch_serialize", {
     ser <- torch_serialize(model2, path = tempfile())  
   })
   
+})
+
+test_that("is_rds should't move the connection position", {
+  raw <- charToRaw("hello world")
+  con <- rawConnection(raw, open = "rb")
+  on.exit({close(con)}, add = TRUE)
+  
+  check <- is_rds(con)
+  expect_equal(check, FALSE)
+  
+  x <- readBin(raw, n = 1, character())
+  expect_equal(x, "hello world")
+  
+  x <- torch_serialize(nn_linear(10, 10))
+  expect_true(!is_rds(x))
+  expect_true(inherits(torch_load(x), "nn_module"))
+})
+
+test_that("saving tensor with ser3", {
+  
+  x <- torch_randn(10, 10)
+  tmp <- tempfile()
+  withr::with_options(c(torch.serialization_version = 3), {
+    torch_save(x, tmp)
+  })
+  y <- torch_load(tmp)
+  expect_true(torch_allclose(x, y))
+
+})
+
+test_that("saving lists with ser3", {
+  
+  z <- torch_randn(10, 10)
+  x <- list(x = torch_randn(10, 10, requires_grad = TRUE), torch_randn(10, 10), z, z)
+  tmp <- tempfile()
+  withr::with_options(c(torch.serialization_version = 3), {
+    torch_save(x, tmp)
+  })
+  
+  l <- torch_load(tmp)
+  expect_equal(names(l), c("x", "", "", ""))
+  expect_true(torch_allclose(l$x, x$x))
+  expect_true(l$x$requires_grad)
+  expect_true(torch_allclose(l[[2]], x[[2]]))
+  expect_false(l[[2]]$requires_grad)
+  expect_equal(xptr_address(l[[3]]), xptr_address(l[[4]]))
+  
+})
+
+test_that("can save module with ser3", {
+  
+  module <- nn_linear(10, 10)
+  tmp <- tempfile()
+  withr::with_options(c(torch.serialization_version = 3), {
+    torch_save(module, tmp)
+  })
+  
+  mod <- torch_load(tmp)
+  expect_true(torch_allclose(module$weight, mod$weight))
+  expect_true(torch_allclose(module$bias, mod$bias))
+})
+
+test_that("can save datasets with ser3", {
+  
+  dt <- dataset(
+    initialize = function() {
+      self$x <- torch_randn(10, 10)
+      self$y <- torch_randn(10, 10)
+    },
+    .getitem = function(i) {
+      list(self$x[i,], self$y[i,])
+    },
+    .length = function() {
+      10
+    }
+  )
+  
+  d <- dt()
+  tmp <- tempfile()
+  
+  withr::with_options(c(torch.serialization_version = 3), {
+    torch_save(d, tmp)
+  })
+  
+  d2 <- torch_load(tmp)
+  
+  expect_true(torch_allclose(d$x, d2$x))
+  expect_true(torch_allclose(d$y, d2$y))
+  expect_true(torch_allclose(d[1][[1]], d2[1][[1]]))
+})
+
+test_that("can save a complex tensor", {
+  z <- torch_randn(10, 10)$to(dtype="cfloat")
+  k <- torch_serialize(z)
+  x <- torch_load(k)
+  
+  expect_true(torch_allclose(x$real, z$real))
+  expect_true(torch_allclose(x$imag, z$imag))
 })

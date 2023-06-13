@@ -10,6 +10,12 @@ BaseDatasetFetcher <- R6::R6Class(
     },
     fetch = function(possibly_batched_index) {
       not_implemented_error()
+    },
+    state_dict = function() {
+      self$dataset$state_dict()
+    },
+    load_state_dict = function(x, ...) {
+      self$dataset$load_state_dict(x, ...)
     }
   )
 )

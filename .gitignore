@@ -38,3 +38,5 @@ inst/include/*
 !inst/include/utils.h
 !inst/include/torch_impl.h
 build-lantern/
+mnist-r
+hello.pt
