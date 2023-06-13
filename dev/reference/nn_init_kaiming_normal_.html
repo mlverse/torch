@@ -133,6 +133,11 @@ or 'leaky_relu' (default).</p></dd>
 <span class="r-in"><span><span class="va">w</span> <span class="op">&lt;-</span> <span class="fu"><a href="torch_empty.html">torch_empty</a></span><span class="op">(</span><span class="fl">3</span>, <span class="fl">5</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu">nn_init_kaiming_normal_</span><span class="op">(</span><span class="va">w</span>, mode <span class="op">=</span> <span class="st">"fan_in"</span>, nonlinearity <span class="op">=</span> <span class="st">"leaky_relu"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">}</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> torch_tensor</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  0.2640  0.3463 -0.1576  0.6195  0.3629</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> -0.9987  1.2950 -0.5523  0.0280 -0.2929</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  0.0115 -0.3720  0.6550 -1.6886 -0.0370</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [ CPUFloatType{3,5} ]</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>

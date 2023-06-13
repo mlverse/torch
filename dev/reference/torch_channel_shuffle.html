@@ -120,6 +120,40 @@ while keeping the original tensor shape.</p>
 <span class="r-in"><span><span class="va">output</span> <span class="op">&lt;-</span> <span class="fu">torch_channel_shuffle</span><span class="op">(</span><span class="va">input</span>, <span class="fl">2</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">output</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">}</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> torch_tensor</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> (1,1,.,.) = </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  -0.0394 -0.5822</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  -1.0939  0.8559</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> (1,2,.,.) = </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  -1.9853 -0.2739</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   0.8345  0.5270</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> (1,3,.,.) = </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  -0.9967  2.6139</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  -1.1564  0.0605</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> (1,4,.,.) = </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  -1.0083  1.0506</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  -0.2770  0.1566</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [ CPUFloatType{1,4,2,2} ]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> torch_tensor</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> (1,1,.,.) = </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  -0.0394 -0.5822</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  -1.0939  0.8559</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> (1,2,.,.) = </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  -0.9967  2.6139</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  -1.1564  0.0605</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> (1,3,.,.) = </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  -1.9853 -0.2739</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   0.8345  0.5270</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> (1,4,.,.) = </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  -1.0083  1.0506</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  -0.2770  0.1566</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [ CPUFloatType{1,4,2,2} ]</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>

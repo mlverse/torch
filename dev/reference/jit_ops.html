@@ -125,6 +125,18 @@ Note, however, that:</p><ul><li><p>all arguments are required (no defaults)</p><
 <span class="r-in"><span><span class="va">jit_ops</span><span class="op">$</span><span class="va">aten</span><span class="op">$</span><span class="fu">split</span><span class="op">(</span><span class="fu">torch</span><span class="fu">::</span><span class="fu"><a href="torch_arange.html">torch_arange</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">3</span><span class="op">)</span>, <span class="fu">torch</span><span class="fu">::</span><span class="fu"><a href="jit_scalar.html">jit_scalar</a></span><span class="op">(</span><span class="fl">2L</span><span class="op">)</span>, <span class="fu">torch</span><span class="fu">::</span><span class="fu"><a href="jit_scalar.html">jit_scalar</a></span><span class="op">(</span><span class="fl">0L</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="op">}</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [[1]]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> torch_tensor</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [ CPUFloatType{2} ]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [[2]]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> torch_tensor</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [ CPUFloatType{2} ]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
