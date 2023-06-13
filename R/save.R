@@ -52,11 +52,7 @@ legacy_save_torch_tensor <- function(obj, path, ..., compress = TRUE) {
 }
 
 tensor_to_raw_vector <- function(x) {
-  con <- rawConnection(raw(), open = "wr")
-  torch_save(x, con)
-  r <- rawConnectionValue(con)
-  close(con)
-  r
+  torch_serialize(x)
 }
 
 tensor_to_raw_vector_with_class <- function(x) {
