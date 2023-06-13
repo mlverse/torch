@@ -1,5 +1,7 @@
 # torch (development version)
 
+- New `torch_save` serialization format. It's ~10x faster and since it's based on safetensors, files can be read with any safetensors implementation. (#1071)
+
 # torch 0.11.0
 
 ## Breaking changes
