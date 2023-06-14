@@ -42,7 +42,8 @@ Imports:
     glue,
     ellipsis,
     desc,
-    safetensors
+    safetensors,
+    jsonlite
 RoxygenNote: 7.2.3
 Roxygen: list(markdown = TRUE)
 Suggests:
