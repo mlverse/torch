@@ -29,15 +29,10 @@ torch_save.torch_tensor <- function(obj, path, ..., compress = TRUE) {
     return(legacy_save_torch_tensor(obj, path, ..., compress))
   
   torch_save_to_file(
+    "tensor",
     state_dict = list("...unnamed..." = obj),
     object = NULL,
-    path = path,
-    metadata = list(
-      ..r = list(
-        version = use_ser_version(),
-        type = "tensor"  
-      )
-    )
+    path = path
   )
   
   invisible(obj)
@@ -67,15 +62,10 @@ torch_save.nn_module <- function(obj, path, ..., compress = TRUE) {
   if (use_ser_version() <= 2) 
     return(legacy_save_nn_module(obj, path, ..., compress))
   
-  metadata = list(..r = list(
-    type = "module", 
-    version = use_ser_version()
-  ))
-  
   state_dict <- obj$state_dict()
   
   torch_save_to_file(
-    metadata,
+    "module",
     obj$state_dict(),
     obj,
     path
@@ -106,13 +96,8 @@ torch_save.list <- function(obj, path, ..., compress = TRUE) {
   
   lxt <- list_state_dict(obj)
   
-  metadata = list(..r = list(
-    type = "list", 
-    version = use_ser_version()
-  ))
-  
   torch_save_to_file(
-    metadata,
+    "list",
     lxt$state_dict,
     lxt$list,
     path
@@ -193,13 +178,8 @@ torch_save_to_file_with_state_dict <- function(obj, path) {
   if (use_ser_version() <= 2) 
     cli::cli_abort("Serializing objects with class {.cls {class(obj)}} is only supported with serialization version >= 3, got {.val {use_ser_version()}}")
   
-  metadata = list(..r = list(
-    type = "state_dict", 
-    version = use_ser_version()
-  ))
-  
   torch_save_to_file(
-    metadata,
+    "state_dict",
     obj$state_dict(),
     obj,
     path
@@ -208,11 +188,17 @@ torch_save_to_file_with_state_dict <- function(obj, path) {
   invisible(obj)
 }
 
-torch_save_to_file <- function(metadata, state_dict = list(), object = NULL, path) {
+torch_save_to_file <- function(type, state_dict = list(), object = NULL, path) {
   con <- create_write_con(path)
   
-  metadata[["..r"]][["requires_grad"]] <- list()
-  metadata[["..r"]][["special_dtype"]] <- list()
+  metadata <- list()
+  metadata[[r_key]] <- list(
+    type = type, 
+    version = use_ser_version()
+  )
+  
+  metadata[[r_key]][["requires_grad"]] <- list()
+  metadata[[r_key]][["special_dtype"]] <- list()
   
   # handles additional metadata necessary to be able to support additional types
   nms <- names(state_dict)
@@ -221,12 +207,12 @@ torch_save_to_file <- function(metadata, state_dict = list(), object = NULL, pat
     tensor <- state_dict[[i]]
     
     if (tensor$requires_grad) {
-      metadata[["..r"]][["requires_grad"]][[nm]] <- TRUE
+      metadata[[r_key]][["requires_grad"]][[nm]] <- TRUE
     }
     
     dtype <- tensor$dtype$.type()
     if (dtype %in% c("ComplexHalf", "ComplexFloat", "ComplexDouble")) {
-      metadata[["..r"]][["special_dtype"]][[nm]] <- list(
+      metadata[[r_key]][["special_dtype"]][[nm]] <- list(
         shape = tensor$shape,
         dtype = tolower(gsub("Complex", "c", dtype))
       )
@@ -234,17 +220,21 @@ torch_save_to_file <- function(metadata, state_dict = list(), object = NULL, pat
     }
   }
   
+  metadata[[r_key]] <- jsonlite::toJSON(metadata[[r_key]], auto_unbox = TRUE)
+  
+  if (!is.null(object)) {
+    state_dict[[r_obj]] <- torch_tensor(serialize(object, con = NULL))
+  }
+  
   safetensors::safe_save_file(
     state_dict, 
     path = con, 
     metadata = metadata
   )
-  
-  if (!is.null(object)) {
-    serialize(object, con = con)  
-  }
-  flush(con)
 }
+
+r_key <- "__r__"
+r_obj <- "__robj__"
 
 #' Loads a saved object
 #'
@@ -265,7 +255,7 @@ torch_load <- function(path, device = "cpu") {
   con <- create_read_con(path)
   
   safe <- safetensors::safe_load_file(con, device = device, framework = "torch")
-  meta <- attr(safe, "metadata")[["__metadata__"]][["..r"]]
+  meta <- jsonlite::fromJSON(attr(safe, "metadata")[["__metadata__"]][[r_key]])
   
   special_dtype <- meta[["special_dtype"]]
   for(i in seq_along(special_dtype)) {
@@ -295,9 +285,8 @@ torch_load <- function(path, device = "cpu") {
     return(safe[[1]])
   }
   
-  max_offset <- attr(safe, "max_offset")
-  seek(con, where = max_offset)
-  object <- unserialize(con)
+  object <- unserialize(buffer_from_torch_tensor(safe[[r_obj]]))
+  safe[r_obj] <- NULL
   
   if (meta$type == "list") {
     return(list_load_state_dict(object, safe))
