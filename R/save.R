@@ -6,8 +6,8 @@
 #' @param obj the saved object
 #' @param path a connection or the name of the file to save.
 #' @param ... not currently used.
-#' @param compress a logical specifying whether saving to a named file is to use 
-#'   "gzip" compression, or one of "gzip", "bzip2" or "xz" to indicate the type of 
+#' @param compress a logical specifying whether saving to a named file is to use
+#'   "gzip" compression, or one of "gzip", "bzip2" or "xz" to indicate the type of
 #'   compression to be used. Ignored if file is a connection.
 #' @family torch_save
 #' @concept serialization
@@ -25,23 +25,23 @@ use_ser_version <- function() {
 #' @concept serialization
 #' @export
 torch_save.torch_tensor <- function(obj, path, ..., compress = TRUE) {
-  if (use_ser_version() <= 2) 
+  if (use_ser_version() <= 2)
     return(legacy_save_torch_tensor(obj, path, ..., compress))
-  
+
   torch_save_to_file(
     "tensor",
     state_dict = list("...unnamed..." = obj),
     object = NULL,
     path = path
   )
-  
+
   invisible(obj)
 }
 
 legacy_save_torch_tensor <- function(obj, path, ..., compress = TRUE) {
   version <- use_ser_version()
   values <- cpp_tensor_save(obj$ptr, base64 = version < 2)
-  saveRDS(list(values = values, type = "tensor", version = version), 
+  saveRDS(list(values = values, type = "tensor", version = version),
           file = path, compress = compress)
   invisible(obj)
 }
@@ -59,50 +59,50 @@ tensor_to_raw_vector_with_class <- function(x) {
 #' @concept serialization
 #' @export
 torch_save.nn_module <- function(obj, path, ..., compress = TRUE) {
-  if (use_ser_version() <= 2) 
+  if (use_ser_version() <= 2)
     return(legacy_save_nn_module(obj, path, ..., compress))
-  
+
   state_dict <- obj$state_dict()
-  
+
   torch_save_to_file(
     "module",
     obj$state_dict(),
     obj,
     path
   )
-  
+
   invisible(obj)
 }
 
 legacy_save_nn_module <- function(obj, path, ..., compress = TRUE) {
   state_dict <- obj$state_dict()
   state_raw <- lapply(state_dict, tensor_to_raw_vector)
-  saveRDS(list(module = obj, state_dict = state_raw, type = "module", 
+  saveRDS(list(module = obj, state_dict = state_raw, type = "module",
                version = use_ser_version()), path, compress = compress)
 }
 
 #' @export
 torch_save.name <- function(obj, path, ..., compress= TRUE) {
   if (!is_exhausted(obj)) rlang::abort("Cannot save `name` objects.")
-  saveRDS(list(type = "coro::exhausted", version = use_ser_version()), path, 
+  saveRDS(list(type = "coro::exhausted", version = use_ser_version()), path,
           compress = compress)
 }
 
 #' @concept serialization
 #' @export
 torch_save.list <- function(obj, path, ..., compress = TRUE) {
-  if (use_ser_version() <= 2) 
+  if (use_ser_version() <= 2)
     return(legacy_save_torch_list(obj, path, ..., compress))
-  
+
   lxt <- list_state_dict(obj)
-  
+
   torch_save_to_file(
     "list",
     lxt$state_dict,
     lxt$list,
     path
   )
-  
+
   invisible(obj)
 }
 
@@ -111,7 +111,7 @@ list_state_dict <- function(l, state_dict) {
   if (miss_dict) {
     state_dict <- new.env(parent = emptyenv())
   }
-  
+
   l <- lapply(l, function(x) {
     if (inherits(x, "torch_tensor")) {
       addr <- xptr_address(x)
@@ -124,9 +124,9 @@ list_state_dict <- function(l, state_dict) {
       x
     }
   })
-  
+
   if (miss_dict) {
-    list(list = l, state_dict = as.list(state_dict))  
+    list(list = l, state_dict = as.list(state_dict))
   } else {
     l
   }
@@ -156,9 +156,9 @@ legacy_save_torch_list <- function(obj, path, ..., compress = TRUE) {
       }
     })
   }
-  
+
   serialized <- serialize_tensors(obj)
-  saveRDS(list(values = serialized, type = "list", version = use_ser_version()), 
+  saveRDS(list(values = serialized, type = "list", version = use_ser_version()),
           path, compress = compress)
 }
 
@@ -175,41 +175,41 @@ torch_save.BaseDatasetFetcher <- function(obj, path, ..., compress = TRUE) {
 }
 
 torch_save_to_file_with_state_dict <- function(obj, path) {
-  if (use_ser_version() <= 2) 
+  if (use_ser_version() <= 2)
     cli::cli_abort("Serializing objects with class {.cls {class(obj)}} is only supported with serialization version >= 3, got {.val {use_ser_version()}}")
-  
+
   torch_save_to_file(
     "state_dict",
     obj$state_dict(),
     obj,
     path
   )
-  
+
   invisible(obj)
 }
 
 torch_save_to_file <- function(type, state_dict = list(), object = NULL, path) {
   con <- create_write_con(path)
-  
+
   metadata <- list()
   metadata[[r_key]] <- list(
-    type = type, 
+    type = type,
     version = use_ser_version()
   )
-  
+
   metadata[[r_key]][["requires_grad"]] <- list()
   metadata[[r_key]][["special_dtype"]] <- list()
-  
+
   # handles additional metadata necessary to be able to support additional types
   nms <- names(state_dict)
   for (i in seq_along(state_dict)) {
     nm <- nms[i]
     tensor <- state_dict[[i]]
-    
+
     if (tensor$requires_grad) {
       metadata[[r_key]][["requires_grad"]][[nm]] <- TRUE
     }
-    
+
     dtype <- tensor$dtype$.type()
     if (dtype %in% c("ComplexHalf", "ComplexFloat", "ComplexDouble")) {
       metadata[[r_key]][["special_dtype"]][[nm]] <- list(
@@ -219,16 +219,16 @@ torch_save_to_file <- function(type, state_dict = list(), object = NULL, path) {
       state_dict[[nm]] <- torch_tensor(buffer_from_torch_tensor(tensor))
     }
   }
-  
+
   metadata[[r_key]] <- jsonlite::toJSON(metadata[[r_key]], auto_unbox = TRUE)
-  
+
   if (!is.null(object)) {
-    state_dict[[r_obj]] <- torch_tensor(serialize(object, con = NULL))
+    state_dict[[r_obj]] <- torch_tensor(serialize(object, connection = NULL))
   }
-  
+
   safetensors::safe_save_file(
-    state_dict, 
-    path = con, 
+    state_dict,
+    path = con,
     metadata = metadata
   )
 }
@@ -251,12 +251,12 @@ torch_load <- function(path, device = "cpu") {
   if (is_rds(path)) {
     return(legacy_torch_load(path, device))
   }
-  
+
   con <- create_read_con(path)
-  
+
   safe <- safetensors::safe_load_file(con, device = device, framework = "torch")
   meta <- jsonlite::fromJSON(attr(safe, "metadata")[["__metadata__"]][[r_key]])
-  
+
   special_dtype <- meta[["special_dtype"]]
   for(i in seq_along(special_dtype)) {
     x <- special_dtype[[i]]
@@ -266,13 +266,13 @@ torch_load <- function(path, device = "cpu") {
       dtype = x$dtype
     )
   }
-  
+
   # recover requires_grad
   requires_grad <- meta[["requires_grad"]]
   imap(requires_grad, function(x, nm) {
     safe[[nm]]$requires_grad_(x)
   })
-  
+
   if (is.null(meta) || is.null(meta$type)) {
     cli::cli_warn(c(
       x = "File not saved with {.fn torch_save}, returning as is.",
@@ -280,23 +280,23 @@ torch_load <- function(path, device = "cpu") {
     ))
     return(safe)
   }
-  
+
   if (meta$type == "tensor") {
     return(safe[[1]])
   }
-  
+
   object <- unserialize(buffer_from_torch_tensor(safe[[r_obj]]))
   safe[r_obj] <- NULL
-  
+
   if (meta$type == "list") {
     return(list_load_state_dict(object, safe))
   }
-  
+
   if (meta$type == "module" || meta$type == "state_dict") {
     object$load_state_dict(safe, .refer_to_state_dict = TRUE)
     return(object)
   }
-  
+
   stop("currently unsuported")
 }
 
@@ -307,15 +307,15 @@ legacy_torch_load <- function(path, device = "cpu") {
       close(path)
     }, add = TRUE)
   }
-  
+
   r <- readRDS(path)
-  
+
   if (!is.null(r$version) && r$version > ser_version) {
     rlang::abort(c(x = paste0(
       "This version of torch can't load files with serialization version > ",
       ser_version)))
   }
-  
+
   if (r$type == "tensor") {
     torch_load_tensor(r, device)
   } else if (r$type == "module") {
@@ -330,7 +330,7 @@ legacy_torch_load <- function(path, device = "cpu") {
 #' Serialize a torch object returning a raw object
 #'
 #' It's just a wraper around [torch_save()].
-#' 
+#'
 #' @inheritParams torch_save
 #' @param ... Additional arguments passed to [torch_save()]. `obj` and `path` are
 #'   not accepted as they are set by [torch_serialize()].
@@ -341,10 +341,10 @@ legacy_torch_load <- function(path, device = "cpu") {
 torch_serialize <- function(obj, ...) {
   if (use_ser_version() < 3)
     return(legacy_torch_serialize(obj, ...))
-  
+
   con <- rawConnection(raw(), open = "wb")
   on.exit({close(con)}, add = TRUE)
-  
+
   torch_save(obj = obj, path = con, ...)
   rawConnectionValue(con)
 }
@@ -467,20 +467,20 @@ is_rds <- function(con) {
     con <- rawConnection(con)
     on.exit({close(con)}, add = TRUE)
   }
-  
+
   !inherits(try(readRDS(con), silent = TRUE), "try-error")
 }
 
 create_write_con <- function(path) {
   if (inherits(path, "connection"))
     return(path)
-  
+
   con <- if (is.character(path)) {
     file(path, open = "wb")
   } else {
     cli::cli_abort("{.arg path} must be a connection or a actual path, got {.cls {class(path)}}.")
   }
-  
+
   withr::defer_parent({close(con)})
   con
 }
@@ -488,15 +488,15 @@ create_write_con <- function(path) {
 create_read_con <- function(path) {
   if (inherits(path, "connection"))
     return(path)
-  
+
   con <- if (is.raw(path)) {
     rawConnection(path, open = "rb")
   } else if (is.character(path)) {
     file(path, open = "rb")
   } else {
     cli::cli_abort("{.arg path} must be a connection, a raw vector or an actual path, got {.cls {class(path)}}.")
-  } 
-  
+  }
+
   withr::defer_parent({close(con)})
   con
 }
