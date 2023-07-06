@@ -39,7 +39,7 @@
   flat_L <- bL$reshape(c(-1, n, n)) # shape = b x n x n
   flat_x <- bx$reshape(c(-1, flat_L$size(1), n)) # shape = c x b x n
   flat_x_swap <- flat_x$permute(c(2, 3, 1)) # shape = b x n x c
-  M_swap <- torch_triangular_solve(flat_x_swap, flat_L, upper = FALSE)[[1]]$pow(2)$sum(-2) # shape = b x c
+  M_swap <- torch_linalg_solve_triangular(flat_L, flat_x_swap, upper = FALSE)$pow(2)$sum(-2) # shape = b x c
   M <- M_swap$t()
 
   # Now we revert the above reshape and permute operators.
@@ -57,10 +57,12 @@
   # Ref: https://nbviewer.jupyter.org/gist/fehiepsi/5ef8e09e61604f10607380467eb82006#Precision-to-scale_tril
   Lf <- linalg_cholesky(torch_flip(P, c(-2, -1)))
   L_inv <- torch_transpose(torch_flip(Lf, c(-2, -1)), -2, -1)
-  torch_triangular_solve(torch_eye(head2(P$shape, -1), dtype = P$dtype, device = P$device),
+  torch_linalg_solve_triangular(
     L_inv,
-    upper = FALSE
-  )[[1]]
+    torch_eye(head2(P$shape, -1), 
+    upper = FALSE,
+    dtype = P$dtype, device = P$device),
+  )
 }
 
 MultivariateNormal <- R6::R6Class(
