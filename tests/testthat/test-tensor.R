@@ -540,3 +540,12 @@ test_that("can create a buffer from a tensor", {
   z <- torch_tensor_from_buffer(y, shape = c(10, 10), dtype="float")
   expect_true(torch_allclose(x, z))
 })
+
+test_that("can copy a mps tensor", {
+  skip_if_not_m1_mac()
+  x <- array(runif(100), dim = c(10, 10))
+  y <- torch_tensor(x, device="mps")
+  x_ <- as.array(y)
+  
+  expect_true(all.equal(x, x_, tolerance = 1e-5))
+})
