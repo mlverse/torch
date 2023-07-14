@@ -86,6 +86,9 @@
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="development version" id="torch-development-version">torch (development version)<a class="anchor" aria-label="anchor" href="#torch-development-version"></a></h2>
 <ul><li>New <code>torch_save</code> serialization format. It’s ~10x faster and since it’s based on safetensors, files can be read with any safetensors implementation. (<a href="https://github.com/mlverse/torch/issues/1071" class="external-link">#1071</a>)</li>
+<li>fix printer of torch device (add new line at the end)</li>
+<li>
+<code>as.array</code> now moves tensors to the cpu before copying data into R. (<a href="https://github.com/mlverse/torch/issues/1080" class="external-link">#1080</a>)</li>
 </ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.11.0" id="torch-0110">torch 0.11.0<a class="anchor" aria-label="anchor" href="#torch-0110"></a></h2><p class="text-muted">CRAN release: 2023-06-06</p>
@@ -613,7 +616,7 @@
 <code>torch_narrow</code>, <code>Tensor$narrow()</code> and <code>Tensor$narrow_copy</code> are now indexed starting at 1. (<a href="https://github.com/mlverse/torch/issues/294" class="external-link">#294</a>)</li>
 <li>
 <code>Tensor$is_leaf</code> is now an active method. (<a href="https://github.com/mlverse/torch/issues/295" class="external-link">#295</a>)</li>
-<li>Fixed bug when passing equations to <code>torch_einsum</code>. (<a href="https://github.com/mlverse/torch/issues/296" class="external-link">#296</a>)<br></li>
+<li>Fixed bug when passing equations to <code>torch_einsum</code>. (<a href="https://github.com/mlverse/torch/issues/296" class="external-link">#296</a>)</li>
 <li>Fixed <code><a href="../reference/nn_module_list.html">nn_module_list()</a></code> to correctly name added modules, otherwise they are not returned when doing <code>state_dict()</code> on it. (<a href="https://github.com/mlverse/torch/issues/300" class="external-link">#300</a>)</li>
 <li>Fixed bug related to random number seeds when using in-place methods. (<a href="https://github.com/mlverse/torch/issues/303" class="external-link">#303</a>)</li>
 <li>Fixed <code>nn_batchnorm*</code> so it returns the same results as PyTorch (<a href="https://github.com/mlverse/torch/issues/302" class="external-link">#302</a>)</li>
