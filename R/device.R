@@ -28,7 +28,7 @@ Device <- R7Class(
         s <- paste0(s, ", index=", self$index, ")")
       }
 
-      cat(s)
+      cat(s, "\n")
     }
   ),
   active = list(
@@ -125,7 +125,7 @@ is_meta_device <- function(x) {
 local_device <- function(device, ..., .env = parent.frame()) {
   current_device <- cpp_get_current_default_device()
   cpp_set_default_device(device)
-  
+
   withr::defer({
     cpp_set_default_device(current_device)
   }, envir = .env)

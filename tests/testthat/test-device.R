@@ -59,7 +59,7 @@ test_that("can print meta tensors", {
 })
 
 test_that("can modify the device temporarily", {
-  
+
   z <- torch_randn(10, 10)
   with_device(device = "meta", {
     x <- torch_randn(10, 10)
@@ -69,10 +69,14 @@ test_that("can modify the device temporarily", {
     b <- torch_randn(10, 10)
   })
   y <- torch_randn(10, 10)
-  
+
   expect_equal(x$device$type, "meta")
   expect_equal(y$device$type, "cpu")
   expect_equal(z$device$type, "cpu")
   expect_equal(a$device$type, "cpu")
   expect_equal(b$device$type, "meta")
+})
+
+test_that("printer works", {
+  expect_equal(capture.output(torch_device("cpu")), "torch_device(type='cpu')>\n")
 })
