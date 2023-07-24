@@ -5,7 +5,13 @@
 \alias{torch_var}
 \title{Var}
 \usage{
-torch_var(self, dim, correction, unbiased = TRUE, keepdim = FALSE)
+torch_var(
+  self,
+  dim = NULL,
+  correction = NULL,
+  unbiased = TRUE,
+  keepdim = FALSE
+)
 }
 \arguments{
 \item{self}{(Tensor) the input tensor.}
