@@ -211,7 +211,7 @@ test_that("logit works", {
   expect_equal_to_tensor(
     exp(torch_logit(x)) / (1 + exp(torch_logit(x))),
     x,
-    tol = 1e-6
+    tolerance = 1e-6
   )
 })
 

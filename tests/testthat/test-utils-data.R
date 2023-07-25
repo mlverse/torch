@@ -131,7 +131,7 @@ test_that("datasets have a custom print method", {
     parent_env = .GlobalEnv
   )
 
-  expect_output(print(data), regex = "dataset_generator")
+  expect_output(print(data), regexp = "dataset_generator")
 })
 
 test_that("dataset subset adds more classes", {

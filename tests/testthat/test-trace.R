@@ -26,8 +26,8 @@ test_that("modules are equivalent", {
     initialize = function() {
       self$conv1 <- nn_conv2d(1, 32, 3, 1)
       self$conv2 <- nn_conv2d(32, 64, 3, 1)
-      self$dropout1 <- nn_dropout2d(0.25)
-      self$dropout2 <- nn_dropout2d(0.5)
+      self$dropout1 <- nn_dropout(0.25)
+      self$dropout2 <- nn_dropout(0.5)
       self$fc1 <- nn_linear(9216, 128)
       self$fc2 <- nn_linear(128, 10)
     },
@@ -313,8 +313,8 @@ test_that("trace a module", {
     initialize = function() {
       self$conv1 <- nn_conv2d(1, 32, 3, 1)
       self$conv2 <- nn_conv2d(32, 64, 3, 1)
-      self$dropout1 <- nn_dropout2d(0.25)
-      self$dropout2 <- nn_dropout2d(0.5)
+      self$dropout1 <- nn_dropout(0.25)
+      self$dropout2 <- nn_dropout(0.5)
       self$fc1 <- nn_linear(9216, 128)
       self$fc2 <- nn_linear(128, 10)
     },
@@ -428,8 +428,8 @@ test_that("can save module for mobile", {
     initialize = function() {
       self$conv1 <- nn_conv2d(1, 32, 3, 1)
       self$conv2 <- nn_conv2d(32, 64, 3, 1)
-      self$dropout1 <- nn_dropout2d(0.25)
-      self$dropout2 <- nn_dropout2d(0.5)
+      self$dropout1 <- nn_dropout(0.25)
+      self$dropout2 <- nn_dropout(0.5)
       self$fc1 <- nn_linear(9216, 128)
       self$fc2 <- nn_linear(128, 10)
     },
@@ -462,7 +462,7 @@ test_that("can save module for mobile", {
   jit_save_for_mobile(tr_fn, tmp)
 
   f <- jit_load(tmp)
-  expect_equal_to_tensor(net(input), f(input), tol = 1e-6)
+  expect_equal_to_tensor(net(input), f(input), tolerance = 1e-6)
 })
 
 test_that("can save function for mobile", {

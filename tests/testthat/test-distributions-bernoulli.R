@@ -99,7 +99,7 @@ test_that("log prob is correct", {
   result <- d$log_prob(x)
   expected <- dbinom(as.numeric(x), 1, prob = as.numeric(probs), log = TRUE)
 
-  expect_equal_to_r(result, expected, tol = 1e-6)
+  expect_equal_to_r(result, expected, tolerance = 1e-6)
 })
 
 test_that("gradients are correct", {

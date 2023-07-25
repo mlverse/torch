@@ -20,7 +20,7 @@ test_that("out of bound error message", {
   for (f in funs) {
     expect_error(
       f(x, dim = 2),
-      regex = "Dimension out of range (expected to be in range of [-1, 1], but got 2)",
+      regexp = "Dimension out of range (expected to be in range of [-1, 1], but got 2)",
       fixed = TRUE
     )
   }
@@ -28,7 +28,7 @@ test_that("out of bound error message", {
   for (f in funs) {
     expect_error(
       f(x, dim = -2),
-      regex = "Dimension out of range (expected to be in range of [-1, 1], but got -2)",
+      regexp = "Dimension out of range (expected to be in range of [-1, 1], but got -2)",
       fixed = TRUE
     )
   }
@@ -38,7 +38,7 @@ test_that("out of bound error message", {
   for (f in funs) {
     expect_error(
       f(x, dim = 11),
-      regex = "Dimension out of range (expected to be in range of [-10, 10], but got 11)",
+      regexp = "Dimension out of range (expected to be in range of [-10, 10], but got 11)",
       fixed = TRUE
     )
   }
@@ -49,7 +49,7 @@ test_that("more than 1 dim", {
 
   expect_error(
     torch_sum(x, dim = c(1, 4)),
-    regex = "Dimension out of range (expected to be in range of [-3, 3], but got 4)",
+    regexp = "Dimension out of range (expected to be in range of [-3, 3], but got 4)",
     fixed = TRUE
   )
 })
@@ -59,13 +59,13 @@ test_that("dim1 & dim2", {
 
   expect_error(
     torch_transpose(x, 3, 1),
-    regex = "Dimension out of range (expected to be in range of [-2, 2], but got 3)",
+    regexp = "Dimension out of range (expected to be in range of [-2, 2], but got 3)",
     fixed = TRUE
   )
 
   expect_error(
     torch_transpose(x, 2, 3),
-    regex = "Dimension out of range (expected to be in range of [-2, 2], but got 3)",
+    regexp = "Dimension out of range (expected to be in range of [-2, 2], but got 3)",
     fixed = TRUE
   )
 
@@ -88,7 +88,7 @@ test_that("dimension x does not have size y", {
 
   expect_error(
     torch_cross(a, b, dim = 1),
-    regex = "inputs dimension 1 must have length 3",
+    regexp = "inputs dimension 1 must have length 3",
     fixed = TRUE
   )
 })
@@ -123,7 +123,7 @@ test_that("index argument", {
 
   expect_error(
     torch_select(x, 1, 4),
-    regex = "index 4 out of range for tensor of size [3] at dimension 1",
+    regexp = "index 4 out of range for tensor of size [3] at dimension 1",
     fixed = TRUE
   )
 })
@@ -133,13 +133,13 @@ test_that("torch_nll_loss out of bound", {
 
   expect_error(
     torch_nll_loss(x, torch_tensor(0, dtype = torch_long())),
-    regex = "Indexing starts at 1 but found a 0.",
+    regexp = "Indexing starts at 1 but found a 0.",
     fixed = TRUE
   )
 
   expect_error(
     torch_nll_loss(x, torch_tensor(6, dtype = torch_long())),
-    regex = "Target 6 is out of bounds.",
+    regexp = "Target 6 is out of bounds.",
     fixed = TRUE
   )
 })
@@ -150,7 +150,7 @@ test_that("tensordot error message", {
 
   expect_error(
     torch_tensordot(a, b, list(c(2, 1), c(1, 3))),
-    regex = "contracted dimensions need to match, but first has size 3 in dim 1 and second has size 2 in dim 3",
+    regexp = "contracted dimensions need to match, but first has size 3 in dim 1 and second has size 2 in dim 3",
     fixed = TRUE
   )
 })
@@ -161,7 +161,7 @@ test_that("embedding returns a better error message", {
 
   expect_error(
     e(x),
-    regex = "Indexing starts at 1 but found a 0."
+    regexp = "Indexing starts at 1 but found a 0."
   )
 })
 
@@ -170,7 +170,7 @@ test_that("movedim", {
 
   expect_error(
     torch_movedim(x, 0, 1),
-    regex = "Dimension is 1-based, but found 0.",
+    regexp = "Dimension is 1-based, but found 0.",
     class = "value_error"
   )
 
@@ -217,7 +217,7 @@ test_that("cat", {
   
   expect_error(
     torch_cat(list(torch_randn(8, 2, 7), torch_randn(8, 3, 7)), dim = 1),
-    regex = "Sizes of tensors must match except in dimension 1. Expected size 2 but got size 3 for tensor number 2 in the list.",
+    regexp = "Sizes of tensors must match except in dimension 1. Expected size 2 but got size 3 for tensor number 2 in the list.",
     fixed = TRUE
   )
   

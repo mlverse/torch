@@ -42,7 +42,7 @@ test_that("lr_one_cycle", {
     }
   })
 
-  expect_equal(o$param_groups[[1]]$lr, 0.1335607, tol = 1e-6)
+  expect_equal(o$param_groups[[1]]$lr, 0.1335607, tolerance = 1e-6)
   expect_error(scheduler$step())
 })
 

@@ -62,7 +62,7 @@ test_that("Integer tensors", {
   expect_s3_class(o, "array")
   expect_equal(dim(o), dim(x))
 
-  x <- as.integer64(.Machine$integer) * 2
+  x <- as.integer64(.Machine$integer.max) * 2
   y <- torch_tensor(x)
   z <- as.integer64(y)
 
@@ -467,7 +467,7 @@ test_that("create complex from and to R", {
   y <- as.array(x)
   z <- torch_tensor(y)
   expect_true(torch_allclose(x, z))
-  expect_equal(as.complex(x), complex(real = 1,imag = 1))
+  expect_equal(as.complex(x), complex(real = 1,imaginary = 1))
   
 })
 

@@ -4,7 +4,7 @@ test_that("local_autocast works", {
   y <- torch_randn(5, 5, dtype = torch_float32())
   
   foo <- function(x, y) {
-    local_autocast(device = "cpu")
+    local_autocast(device_type = "cpu")
     z <- torch_mm(x, y)
     w <- torch_mm(z, x)
     w

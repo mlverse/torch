@@ -70,7 +70,7 @@ test_that("permute", {
 
   expect_error(
     x$permute(c(2, 1, 0)),
-    regex = "Indexing starts at 1 but found a 0.",
+    regexp = "Indexing starts at 1 but found a 0.",
     fixed = TRUE
   )
 })
