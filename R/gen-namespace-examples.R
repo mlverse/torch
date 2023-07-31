@@ -2393,29 +2393,6 @@ NULL
 NULL
 # -> triangular_solve <-
 
-# -> symeig: 27bc25d51797de06954ef84fde11f765 <-
-#'
-#' @name torch_symeig
-#'
-#' @examples
-#'
-#' a = torch_randn(c(5, 5))
-#' a = a + a$t()  # To make a symmetric
-#' a
-#' o = torch_symeig(a, eigenvectors=TRUE)
-#' e = o[[1]]
-#' v = o[[2]]
-#' e
-#' v
-#' a_big = torch_randn(c(5, 2, 2))
-#' a_big = a_big + a_big$transpose(-2, -1)  # To make a_big symmetric
-#' o = a_big$symeig(eigenvectors=TRUE)
-#' e = o[[1]]
-#' v = o[[2]]
-#' torch_allclose(torch_matmul(v, torch_matmul(e$diag_embed(), v$transpose(-2, -1))), a_big)
-NULL
-# -> symeig <-
-
 # -> eig: 94b4710518b0b3d3bf08c75dda217258 <-
 #'
 #' @name torch_eig
