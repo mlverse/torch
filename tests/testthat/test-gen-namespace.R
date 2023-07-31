@@ -215,6 +215,15 @@ test_that("logit works", {
   )
 })
 
+test_that("std works", {
+  x <- torch_randn(10)
+  
+  s <- torch_std(x)
+  r <- sd(as.numeric(x))
+  
+  expect_equal_to_r(s, r, tolerance = 1e-6)
+})
+
 test_that("tensordot", {
   a <- torch_arange(start = 1, end = 60)$reshape(c(3, 4, 5))
   b <- torch_arange(start = 1, end = 24)$reshape(c(4, 3, 2))

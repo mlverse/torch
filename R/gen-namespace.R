@@ -35379,10 +35379,10 @@ fun_type = 'namespace'
 
 
 #' @rdname torch_std
-torch_std <- function(self, dim = NULL, correction = NULL, unbiased = TRUE, keepdim = FALSE) {
-  args <- mget(x = c("self", "dim", "correction", "unbiased", "keepdim"))
+torch_std <- function(self, dim, unbiased = TRUE, keepdim = FALSE) {
+  args <- mget(x = c("self", "dim", "unbiased", "keepdim"))
 expected_types <- list(self = "Tensor", dim = c("IntArrayRef", "DimnameList"), 
-    correction = "int64_t", unbiased = "bool", keepdim = "bool")
+    unbiased = "bool", keepdim = "bool")
 nd_args <- c("self", "dim")
 return_types <- list(list('Tensor'))
 call_c_function(
@@ -35397,10 +35397,10 @@ fun_type = 'namespace'
 
 
 #' @rdname torch_std_mean
-torch_std_mean <- function(self, dim = NULL, correction = NULL, unbiased = TRUE, keepdim = FALSE) {
-  args <- mget(x = c("self", "dim", "correction", "unbiased", "keepdim"))
+torch_std_mean <- function(self, dim, unbiased = TRUE, keepdim = FALSE) {
+  args <- mget(x = c("self", "dim", "unbiased", "keepdim"))
 expected_types <- list(self = "Tensor", dim = c("IntArrayRef", "DimnameList"), 
-    correction = "int64_t", unbiased = "bool", keepdim = "bool")
+    unbiased = "bool", keepdim = "bool")
 nd_args <- c("self", "dim")
 return_types <- list(list("Tensor", "Tensor"))
 call_c_function(
@@ -35414,29 +35414,11 @@ fun_type = 'namespace'
 }
 
 
-#' @rdname torch_std_mean_out
-torch_std_mean_out <- function(out0, out1, self, dim = NULL, correction = NULL, keepdim = FALSE) {
-  args <- mget(x = c("out0", "out1", "self", "dim", "correction", "keepdim"))
-expected_types <- list(out0 = "Tensor", out1 = "Tensor", self = "Tensor", dim = "IntArrayRef", 
-    correction = "int64_t", keepdim = "bool")
-nd_args <- c("out0", "out1", "self")
-return_types <- list(list("Tensor", "Tensor"))
-call_c_function(
-fun_name = 'std_mean_out',
-args = args,
-expected_types = expected_types,
-nd_args = nd_args,
-return_types = return_types,
-fun_type = 'namespace'
-)
-}
-
-
 #' @rdname torch_std_out
-torch_std_out <- function(out, self, dim = NULL, correction = NULL, unbiased = TRUE, keepdim = FALSE) {
-  args <- mget(x = c("out", "self", "dim", "correction", "unbiased", "keepdim"))
+torch_std_out <- function(out, self, dim, unbiased = TRUE, keepdim = FALSE) {
+  args <- mget(x = c("out", "self", "dim", "unbiased", "keepdim"))
 expected_types <- list(out = "Tensor", self = "Tensor", dim = c("IntArrayRef", 
-"DimnameList"), correction = "int64_t", unbiased = "bool", keepdim = "bool")
+"DimnameList"), unbiased = "bool", keepdim = "bool")
 nd_args <- c("out", "self", "dim")
 return_types <- list(list('Tensor'))
 call_c_function(
@@ -37753,10 +37735,10 @@ fun_type = 'namespace'
 
 
 #' @rdname torch_var
-torch_var <- function(self, dim = NULL, correction = NULL, unbiased = TRUE, keepdim = FALSE) {
-  args <- mget(x = c("self", "dim", "correction", "unbiased", "keepdim"))
+torch_var <- function(self, dim, unbiased = TRUE, keepdim = FALSE) {
+  args <- mget(x = c("self", "dim", "unbiased", "keepdim"))
 expected_types <- list(self = "Tensor", dim = c("IntArrayRef", "DimnameList"), 
-    correction = "int64_t", unbiased = "bool", keepdim = "bool")
+    unbiased = "bool", keepdim = "bool")
 nd_args <- c("self", "dim")
 return_types <- list(list('Tensor'))
 call_c_function(
@@ -37771,10 +37753,10 @@ fun_type = 'namespace'
 
 
 #' @rdname torch_var_mean
-torch_var_mean <- function(self, dim = NULL, correction = NULL, unbiased = TRUE, keepdim = FALSE) {
-  args <- mget(x = c("self", "dim", "correction", "unbiased", "keepdim"))
+torch_var_mean <- function(self, dim, unbiased = TRUE, keepdim = FALSE) {
+  args <- mget(x = c("self", "dim", "unbiased", "keepdim"))
 expected_types <- list(self = "Tensor", dim = c("IntArrayRef", "DimnameList"), 
-    correction = "int64_t", unbiased = "bool", keepdim = "bool")
+    unbiased = "bool", keepdim = "bool")
 nd_args <- c("self", "dim")
 return_types <- list(list("Tensor", "Tensor"))
 call_c_function(
@@ -37788,29 +37770,11 @@ fun_type = 'namespace'
 }
 
 
-#' @rdname torch_var_mean_out
-torch_var_mean_out <- function(out0, out1, self, dim = NULL, correction = NULL, keepdim = FALSE) {
-  args <- mget(x = c("out0", "out1", "self", "dim", "correction", "keepdim"))
-expected_types <- list(out0 = "Tensor", out1 = "Tensor", self = "Tensor", dim = "IntArrayRef", 
-    correction = "int64_t", keepdim = "bool")
-nd_args <- c("out0", "out1", "self")
-return_types <- list(list("Tensor", "Tensor"))
-call_c_function(
-fun_name = 'var_mean_out',
-args = args,
-expected_types = expected_types,
-nd_args = nd_args,
-return_types = return_types,
-fun_type = 'namespace'
-)
-}
-
-
 #' @rdname torch_var_out
-torch_var_out <- function(out, self, dim = NULL, correction = NULL, unbiased = TRUE, keepdim = FALSE) {
-  args <- mget(x = c("out", "self", "dim", "correction", "unbiased", "keepdim"))
+torch_var_out <- function(out, self, dim, unbiased = TRUE, keepdim = FALSE) {
+  args <- mget(x = c("out", "self", "dim", "unbiased", "keepdim"))
 expected_types <- list(out = "Tensor", self = "Tensor", dim = c("IntArrayRef", 
-"DimnameList"), correction = "int64_t", unbiased = "bool", keepdim = "bool")
+"DimnameList"), unbiased = "bool", keepdim = "bool")
 nd_args <- c("out", "self", "dim")
 return_types <- list(list('Tensor'))
 call_c_function(

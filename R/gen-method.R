@@ -6457,10 +6457,10 @@ call_c_function(
   return_types = return_types,
   fun_type = 'method'
 )})
-Tensor$set("public", "std", function(dim = NULL, correction = NULL, unbiased = TRUE, keepdim = FALSE) {  args <- mget(x = c("dim", "correction", "unbiased", "keepdim"))
+Tensor$set("public", "std", function(dim, unbiased = TRUE, keepdim = FALSE) {  args <- mget(x = c("dim", "unbiased", "keepdim"))
 args <- c(list(self = self), args)
 expected_types <- list(self = "Tensor", dim = c("IntArrayRef", "DimnameList"), 
-    correction = "int64_t", unbiased = "bool", keepdim = "bool")
+    unbiased = "bool", keepdim = "bool")
 nd_args <- c("self", "dim")
 return_types <- list(list('Tensor'))
 call_c_function(
@@ -7213,10 +7213,10 @@ call_c_function(
   return_types = return_types,
   fun_type = 'method'
 )})
-Tensor$set("public", "var", function(dim = NULL, correction = NULL, unbiased = TRUE, keepdim = FALSE) {  args <- mget(x = c("dim", "correction", "unbiased", "keepdim"))
+Tensor$set("public", "var", function(dim, unbiased = TRUE, keepdim = FALSE) {  args <- mget(x = c("dim", "unbiased", "keepdim"))
 args <- c(list(self = self), args)
 expected_types <- list(self = "Tensor", dim = c("IntArrayRef", "DimnameList"), 
-    correction = "int64_t", unbiased = "bool", keepdim = "bool")
+    unbiased = "bool", keepdim = "bool")
 nd_args <- c("self", "dim")
 return_types <- list(list('Tensor'))
 call_c_function(

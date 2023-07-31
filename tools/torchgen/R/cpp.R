@@ -679,9 +679,7 @@ cpp <- function(path) {
     purrr::discard(~.x$name == "range" && length(.x$arguments) == 3) %>%
     purrr::discard(~.x$name == "range_out" && length(.x$arguments) == 3) %>%
     purrr::discard(~.x$name == "arange" && length(.x$arguments) == 3) %>%
-    purrr::discard(~.x$name == "stft" && length(.x$arguments) == 8) %>%
-    purrr::discard(~str_detect(.x$name, "var") && "correction" %in% map_chr(.x$arguments, ~.x$name)) %>%
-    purrr::discard(~str_detect(.x$name, "std") && "correction" %in% map_chr(.x$arguments, ~.x$name))
+    purrr::discard(~.x$name == "stft" && length(.x$arguments) == 8)
 
   pb <- NULL
 
