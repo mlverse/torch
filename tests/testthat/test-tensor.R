@@ -361,7 +361,7 @@ test_that("tensor identity works as expected", {
   gc()
 
   class(y) <- class(torch_tensor(1))
-  expect_equal_to_r(y, v, tol = 1e-7)
+  expect_equal_to_r(y, v, tolerance = 1e-7)
 
   x <- y$abs_()
 
