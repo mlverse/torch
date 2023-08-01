@@ -393,12 +393,8 @@ void _lantern_tensor_set_pyobj(void *x, void *ptr) {
 void *_lantern_tensor_get_pyobj(void *x) {
   LANTERN_FUNCTION_START
   auto t = from_raw::Tensor(x);
-  auto pyobj = t.unsafeGetTensorImpl()->pyobj_slot()->check_pyobj(&lantern_interpreter);
-  if (pyobj.has_value()) {
-    return (void *)pyobj.value();
-  } else {
-    return nullptr;
-  }
+  auto pyobj = (void*) t.unsafeGetTensorImpl()->pyobj_slot()->_unchecked_untagged_pyobj();
+  return pyobj;
   LANTERN_FUNCTION_END
 }
 
