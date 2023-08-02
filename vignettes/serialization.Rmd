@@ -48,7 +48,7 @@ The `torch_save` and `torch_load` functions also work for `nn_modules` objects.
 
 When saving an `nn_module`, all the object is serialized including the model structure and it's state.
 
-```{r, eval = FALSE}
+```{r}
 module <- nn_module(
   "my_module",
   initialize = function() {
@@ -100,7 +100,7 @@ position.
 In order to this we use the `state_dict()` and `load_state_dict()` methods from
 the optimizer combined with `torch_save`:
 
-```{r, eval = FALSE}
+```{r}
 model <- nn_linear(1, 1)
 opt <- optim_adam(model$parameters)
 
