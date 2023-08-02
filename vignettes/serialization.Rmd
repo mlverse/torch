@@ -100,7 +100,7 @@ position.
 In order to this we use the `state_dict()` and `load_state_dict()` methods from
 the optimizer combined with `torch_save`:
 
-```{r}
+```{r, eval = FALSE}
 model <- nn_linear(1, 1)
 opt <- optim_adam(model$parameters)
 
