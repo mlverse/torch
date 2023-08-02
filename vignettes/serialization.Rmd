@@ -48,7 +48,7 @@ The `torch_save` and `torch_load` functions also work for `nn_modules` objects.
 
 When saving an `nn_module`, all the object is serialized including the model structure and it's state.
 
-```{r}
+```{r, eval = FALSE}
 module <- nn_module(
   "my_module",
   initialize = function() {
