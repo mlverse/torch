@@ -70,6 +70,7 @@ model_ <- torch_load("model.pt")
 x <- torch_randn(50, 10)
 torch_allclose(model(x), model_(x))
 ```
+
 ## Loading models saved in python
 
 Currently the only way to load models from python is to rewrite the model architecture in R. All the parameter names must be identical.
