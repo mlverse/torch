@@ -146,6 +146,12 @@ if(DEFINED ENV{CUDA} AND NOT '$ENV{CUDA}' STREQUAL '')
       src/Contrib/SortVertices/sort_vert.cpp
   )
   
+  # Force compilation for all supported architectures, not only the major ones
+  # which is used by default.
+  if(NOT DEFINED CMAKE_CUDA_ARCHITECTURES)
+    set(CMAKE_CUDA_ARCHITECTURES all)
+  endif()
+  
   set_source_files_properties(src/Cuda.cpp PROPERTIES COMPILE_DEFINITIONS __NVCC__)
   set_source_files_properties(src/Amp.cpp  PROPERTIES COMPILE_DEFINITIONS __NVCC__)
   
