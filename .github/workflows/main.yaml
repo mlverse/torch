@@ -33,7 +33,7 @@ jobs:
           - {os: ubuntu, r_version: release, version: cpu, runner: ubuntu-20.04}
           # the precxx11abi R version is whichever is specified in the selected container.
           - {os: centos, r_version: '', version: cpu, runner: ubuntu-20.04, precxx11abi: 1}
-          - {os: ubuntu, r_version: release, version: cu11.7, runner: [self-hosted, gce, gpu]}
+          - {os: ubuntu, r_version: release, version: cu11.7, runner: [self-hosted, gpu-local]}
 
           - {os: windows, r_version: release, version: cpu, runner: windows-latest}
           - {os: windows, r_version: 3.6, version: cpu, runner: windows-latest}
