@@ -18,11 +18,7 @@ if (DEFINED ENV{CUDA} AND NOT "$ENV{CUDA}" STREQUAL "")
     set(CUDA_VERSION "$ENV{CUDA}")
     message(STATUS "CUDA VERSION: $ENV{CUDA} | ${CUDA_VERSION} | ${CUDA_VERSION_NUMBER}")
     
-    # Force compilation for all supported architectures, not only the major ones
-    # which is used by default.
-    if(NOT DEFINED CMAKE_CUDA_ARCHITECTURES)
-      set(CMAKE_CUDA_ARCHITECTURES all)
-    endif()
+    set(USE_CUDNN 1)
 endif()
 
 
