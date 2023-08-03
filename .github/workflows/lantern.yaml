@@ -34,7 +34,7 @@ jobs:
           # required for cuda installation
           - config: {version: cu11.7}
             cuda: 11.7
-            cuda_patch: 0
+            cuda_patch: 1
 
         exclude:
           - config: {os: macOS}
