@@ -18,7 +18,7 @@ if (DEFINED ENV{CUDA} AND NOT "$ENV{CUDA}" STREQUAL "")
     set(CUDA_VERSION "$ENV{CUDA}")
     message(STATUS "CUDA VERSION: $ENV{CUDA} | ${CUDA_VERSION} | ${CUDA_VERSION_NUMBER}")
     
-    set(USE_CUDNN 1)
+    set(CAFFE2_USE_CUDNN 1)
 endif()
 
 
