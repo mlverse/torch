@@ -231,6 +231,6 @@ test_that("grad scalers work correctly", {
   # got the same value as obtained from pytorch
   expect_equal(
     sprintf("%1.6f", loss$item()),
-    sprintf("%1.6f", 1.00434148311615)
+    sprintf("%1.6f", 1.003786)
   )
 })

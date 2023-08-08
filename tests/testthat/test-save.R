@@ -250,8 +250,10 @@ test_that("can save with a NULL device", {
   model <- nn_linear(10, 10)$cuda()
   tmp <- tempfile("model", fileext = "pt")
   torch_save(model, tmp)
-  model <- torch_load(tmp, device = NULL)
-  expect_equal(model$weight$device$type, "cuda")
+  
+  expect_error({
+    model <- torch_load(tmp, device = NULL)  
+  }, "Unexpected device")
 })
 
 test_that("save on cuda and load on cpu", {
