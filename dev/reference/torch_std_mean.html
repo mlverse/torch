@@ -90,7 +90,7 @@
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">torch_std_mean</span><span class="op">(</span><span class="va">self</span>, <span class="va">dim</span>, <span class="va">correction</span>, unbiased <span class="op">=</span> <span class="cn">TRUE</span>, keepdim <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">torch_std_mean</span><span class="op">(</span><span class="va">self</span>, <span class="va">dim</span>, unbiased <span class="op">=</span> <span class="cn">TRUE</span>, keepdim <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -101,10 +101,6 @@
 
 <dt>dim</dt>
 <dd><p>(int or tuple of ints) the dimension or dimensions to reduce.</p></dd>
-
-
-<dt>correction</dt>
-<dd><p>The type of correction.</p></dd>
 
 
 <dt>unbiased</dt>
@@ -155,18 +151,18 @@ via the biased estimator. Otherwise, Bessel's correction will be used.</p>
 <span class="r-in"><span><span class="op">}</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[1]]</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> torch_tensor</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  0.8980</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  1.1003</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  1.3050</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  0.2667</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  1.4905</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  0.4722</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  1.1133</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  0.3400</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [ CPUFloatType{4} ]</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[2]]</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> torch_tensor</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  1.3854</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  0.0373</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> -0.2630</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> -0.0956</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  0.3852</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  0.0326</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  0.2570</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> -0.6532</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [ CPUFloatType{4} ]</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 </code></pre></div>

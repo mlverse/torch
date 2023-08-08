@@ -90,7 +90,7 @@
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">torch_std</span><span class="op">(</span><span class="va">self</span>, <span class="va">dim</span>, <span class="va">correction</span>, unbiased <span class="op">=</span> <span class="cn">TRUE</span>, keepdim <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">torch_std</span><span class="op">(</span><span class="va">self</span>, <span class="va">dim</span>, unbiased <span class="op">=</span> <span class="cn">TRUE</span>, keepdim <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -103,16 +103,16 @@
 <dd><p>(int or tuple of ints) the dimension or dimensions to reduce.</p></dd>
 
 
-<dt>correction</dt>
-<dd><p>The type of correction.</p></dd>
-
-
 <dt>unbiased</dt>
 <dd><p>(bool) whether to use the unbiased estimation or not</p></dd>
 
 
 <dt>keepdim</dt>
 <dd><p>(bool) whether the output tensor has <code>dim</code> retained or not.</p></dd>
+
+
+<dt>correction</dt>
+<dd><p>The type of correction.</p></dd>
 
 </dl></div>
     <div class="section level2">
@@ -154,10 +154,10 @@ via the biased estimator. Otherwise, Bessel's correction will be used.</p>
 <span class="r-in"><span><span class="fu">torch_std</span><span class="op">(</span><span class="va">a</span>, dim<span class="op">=</span><span class="fl">1</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">}</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> torch_tensor</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  1.1973</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  0.6903</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  0.3832</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  0.8814</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  0.2980</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  0.3141</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  0.9203</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  1.0122</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [ CPUFloatType{4} ]</span>
 </code></pre></div>
     </div>
