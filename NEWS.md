@@ -3,6 +3,8 @@
 - New `torch_save` serialization format. It's ~10x faster and since it's based on safetensors, files can be read with any safetensors implementation. (#1071)
 - fix printer of torch device (add new line at the end)
 - `as.array` now moves tensors to the cpu before copying data into R. (#1080)
+- Updated to LibTorch 2.0.1. (#1085)
+- `torch_load` no longer supports `device=NULL` to load weights in the same device they were saved. (#1085)
 
 # torch 0.11.0
 
