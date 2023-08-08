@@ -19,7 +19,6 @@ jobs:
           - {os: macOS, version: cpu-m1, runner: [self-hosted, m1]}
           
           - {os: ubuntu, version: cpu, runner: ubuntu-latest}
-          - {os: ubuntu, version: cu11.6, runner: [self-hosted, gce, disk]}
           - {os: ubuntu, version: cu11.7, runner: [self-hosted, gce, disk]}
 
           - {os: windows, version: cpu, runner: windows-2019}
@@ -33,12 +32,9 @@ jobs:
           
           # specify the CUDA patch for each major/minor version.
           # required for cuda installation
-          - config: {version: cu11.6}
-            cuda: 11.6
-            cuda_patch: 1
           - config: {version: cu11.7}
             cuda: 11.7
-            cuda_patch: 0
+            cuda_patch: 1
 
         exclude:
           - config: {os: macOS}

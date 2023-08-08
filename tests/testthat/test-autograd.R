@@ -637,7 +637,7 @@ test_that("autograd_grad with non-leafs", {
     o <- autograd_grad(
       fn(x),
       x,
-      grad_output = grad_output,
+      grad_outputs = grad_output,
       create_graph = TRUE
     )
   }
@@ -872,13 +872,13 @@ test_that("local grad functions", {
   }
   
   with_no_grad({
-    expect_error(fun(f, TRUE), regex = NA)
+    expect_error(fun(f, TRUE), regexp = NA)
   })
-  expect_error(f(), regex = NA)  
+  expect_error(f(), regexp = NA)  
   
   with_enable_grad({
     expect_error(fun(f, FALSE))
-    expect_error(f(), regex = NA)  
+    expect_error(f(), regexp = NA)  
   })
   
 })

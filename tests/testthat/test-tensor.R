@@ -62,7 +62,7 @@ test_that("Integer tensors", {
   expect_s3_class(o, "array")
   expect_equal(dim(o), dim(x))
 
-  x <- as.integer64(.Machine$integer) * 2
+  x <- as.integer64(.Machine$integer.max) * 2
   y <- torch_tensor(x)
   z <- as.integer64(y)
 
@@ -361,7 +361,7 @@ test_that("tensor identity works as expected", {
   gc()
 
   class(y) <- class(torch_tensor(1))
-  expect_equal_to_r(y, v, tol = 1e-7)
+  expect_equal_to_r(y, v, tolerance = 1e-7)
 
   x <- y$abs_()
 
@@ -467,7 +467,7 @@ test_that("create complex from and to R", {
   y <- as.array(x)
   z <- torch_tensor(y)
   expect_true(torch_allclose(x, z))
-  expect_equal(as.complex(x), complex(real = 1,imag = 1))
+  expect_equal(as.complex(x), complex(real = 1,imaginary = 1))
   
 })
 

@@ -179,7 +179,8 @@ test_that("stft", {
     input = torch::torch_ones(3000),
     n_fft = 400,
     center = FALSE,
-    onesided = TRUE
+    onesided = TRUE,
+    return_complex = FALSE
   )
 
   expect_tensor_shape(x, c(201, 27, 2))
@@ -189,7 +190,8 @@ test_that("stft", {
   x <- torch::torch_stft(
     input = torch::torch_ones(3000),
     n_fft = 400,
-    center = TRUE
+    center = TRUE,
+    return_complex = FALSE
   )
 
   expect_tensor_shape(x, c(201, 31, 2))
@@ -209,7 +211,8 @@ test_that("stft", {
     input = torch::torch_ones(3000),
     n_fft = 400,
     window = torch_ones(400),
-    center = FALSE
+    center = FALSE,
+    return_complex = FALSE
   )
 
   expect_tensor_shape(x, c(201, 27, 2))

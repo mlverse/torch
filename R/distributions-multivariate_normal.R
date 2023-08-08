@@ -57,12 +57,8 @@
   # Ref: https://nbviewer.jupyter.org/gist/fehiepsi/5ef8e09e61604f10607380467eb82006#Precision-to-scale_tril
   Lf <- linalg_cholesky(torch_flip(P, c(-2, -1)))
   L_inv <- torch_transpose(torch_flip(Lf, c(-2, -1)), -2, -1)
-  torch_linalg_solve_triangular(
-    L_inv,
-    torch_eye(head2(P$shape, -1), 
-    upper = FALSE,
-    dtype = P$dtype, device = P$device),
-  )
+  Id <- torch_eye(head2(P$shape, -1), dtype=P$dtype, device=P$device)
+  torch_linalg_solve_triangular(L_inv, Id, upper = FALSE)
 }
 
 MultivariateNormal <- R6::R6Class(

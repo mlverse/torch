@@ -211,8 +211,17 @@ test_that("logit works", {
   expect_equal_to_tensor(
     exp(torch_logit(x)) / (1 + exp(torch_logit(x))),
     x,
-    tol = 1e-6
+    tolerance = 1e-6
   )
+})
+
+test_that("std works", {
+  x <- torch_randn(10)
+  
+  s <- torch_std(x)
+  r <- sd(as.numeric(x))
+  
+  expect_equal_to_r(s, r, tolerance = 1e-6)
 })
 
 test_that("tensordot", {

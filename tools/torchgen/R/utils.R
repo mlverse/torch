@@ -7,7 +7,7 @@
 #' @export
 declarations <- function() {
 
-  version <- getOption("torchgen.version", default = "1.13.1")
+  version <- getOption("torchgen.version", default = "2.0.1")
   path <- getOption("torchgen.path")
 
   if (is.null(path)) {
@@ -42,7 +42,10 @@ declarations <- function() {
   s$method_of <- c(s$method_of, "Tensor")
   decls[[index]] <- s
 
-  decls
+  # remove argument from var
+  decls %>%
+    purrr::discard(~str_detect(.x$name, "var") && "correction" %in% map_chr(.x$arguments, ~.x$name)) %>%
+    purrr::discard(~str_detect(.x$name, "std") && "correction" %in% map_chr(.x$arguments, ~.x$name))
 }
 
 memoised_declarations <- memoise::memoise(declarations)

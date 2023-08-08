@@ -27,7 +27,7 @@ test_that("log prob  and cdf are equal to reference", {
     c(-0.9189383984, -1.4189383984)
   ))
 
-  expect_equal_to_tensor(result, expected, tol = 1e-5)
+  expect_equal_to_tensor(result, expected, tolerance = 1e-5)
 
   result <- d$cdf(torch_tensor(rbind(c(1, 2), c(0, -1))))
   expected <- torch_tensor(rbind(
@@ -35,7 +35,7 @@ test_that("log prob  and cdf are equal to reference", {
     c(0.5000000000, 0.1586552560)
   ))
 
-  expect_equal_to_tensor(result, expected, tol = 1e-5)
+  expect_equal_to_tensor(result, expected, tolerance = 1e-5)
 })
 
 test_that("gradients are similar to python", {
@@ -51,7 +51,7 @@ test_that("gradients are similar to python", {
   loss <- d$log_prob(torch_tensor(rbind(c(1, 2), c(0, -1))))$mean()
   loss$backward()
 
-  expect_equal_to_r(probs$grad, c(-9.9341050941e-09, 1.4901161194e-08), tol = 1e-6)
-  expect_equal_to_r(loc$grad, c(0.3000000119, 0.1999999881), tol = 1e-6)
-  expect_equal_to_r(scale$grad, c(0.2999999523, 0.1999999881), tol = 1e-6)
+  expect_equal_to_r(probs$grad, c(-9.9341050941e-09, 1.4901161194e-08), tolerance = 1e-6)
+  expect_equal_to_r(loc$grad, c(0.3000000119, 0.1999999881), tolerance = 1e-6)
+  expect_equal_to_r(scale$grad, c(0.2999999523, 0.1999999881), tolerance = 1e-6)
 })

@@ -37,8 +37,8 @@ test_that("save more complicated module", {
     initialize = function() {
       self$conv1 <- nn_conv2d(1, 32, 3, 1)
       self$conv2 <- nn_conv2d(32, 64, 3, 1)
-      self$dropout1 <- nn_dropout2d(0.25)
-      self$dropout2 <- nn_dropout2d(0.5)
+      self$dropout1 <- nn_dropout(0.25)
+      self$dropout2 <- nn_dropout(0.5)
       self$fc1 <- nn_linear(9216, 128)
       self$fc2 <- nn_linear(128, 10)
     },
@@ -186,7 +186,9 @@ test_that("Can load a torch v0.2.1 model", {
   model <- torch_load(dest)
   x <- torch_randn(32, 1, 28, 28)
 
-  expect_error(o <- model(x), regexp = NA)
+  suppressWarnings({
+    expect_error(o <- model(x), regexp = NA)  
+  })
   expect_tensor_shape(o, c(32, 10))
 })
 
@@ -204,7 +206,9 @@ test_that("Can load a v0.10.0 model", {
   model <- torch_load(dest)
   x <- torch_randn(32, 1, 28, 28)
   
-  expect_error(o <- model(x), regexp = NA)
+  suppressWarnings({
+    expect_error(o <- model(x), regexp = NA)  
+  })
   expect_tensor_shape(o, c(32, 10))
   
 })
@@ -246,8 +250,10 @@ test_that("can save with a NULL device", {
   model <- nn_linear(10, 10)$cuda()
   tmp <- tempfile("model", fileext = "pt")
   torch_save(model, tmp)
-  model <- torch_load(tmp, device = NULL)
-  expect_equal(model$weight$device$type, "cuda")
+  
+  expect_error({
+    model <- torch_load(tmp, device = NULL)  
+  }, "Unexpected device")
 })
 
 test_that("save on cuda and load on cpu", {

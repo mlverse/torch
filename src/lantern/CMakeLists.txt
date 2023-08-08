@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.19.2)
 project(lantern)
 
-set(TORCH_VERSION "1.13.1")
+set(TORCH_VERSION "2.0.1")
 
 if (NOT DEFINED TORCH_PATH)
     if (DEFINED ENV{TORCH_PATH})
@@ -17,6 +17,9 @@ if (DEFINED ENV{CUDA} AND NOT "$ENV{CUDA}" STREQUAL "")
     string(REPLACE "\." "" CUDA_VERSION_NUMBER "$ENV{CUDA}")
     set(CUDA_VERSION "$ENV{CUDA}")
     message(STATUS "CUDA VERSION: $ENV{CUDA} | ${CUDA_VERSION} | ${CUDA_VERSION_NUMBER}")
+    
+    set(CAFFE2_USE_CUDNN 1)
+    set(ENV{TORCH_CUDA_ARCH_LIST} "3.7 5.0 5.2 6.0 6.1 7.0 7.5 8.0 8.6+PTX")
 endif()
 
 

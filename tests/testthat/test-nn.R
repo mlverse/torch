@@ -773,7 +773,7 @@ test_that("non persistent buffers work correctly", {
     initialize = function() {
       self$x <- nn_parameter(torch_tensor(1))
       self$y <- nn_buffer(torch_tensor(2))
-      self$z <- nn_buffer(torch_tensor(3), persist = FALSE)
+      self$z <- nn_buffer(torch_tensor(3), persistent = FALSE)
     },
     forward = function() {
       self$x + self$y + self$z

@@ -55,7 +55,7 @@ test_that("multilabel margin loss", {
   # for target y, only consider labels 4 and 1, not after label -1
   y <- torch_tensor(c(4, 1, -1, 2), dtype = torch_long())$view(c(1, 4))
   o <- loss(x, y)
-  expect_equal(as.numeric(o), 0.85, tol = 1e-5)
+  expect_equal(as.numeric(o), 0.85, tolerance = 1e-5)
 
   expect_length(o$shape, 0)
   y <- torch_tensor(c(4, 0, -1, 2), dtype = torch_long())$view(c(1, 4))

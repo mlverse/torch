@@ -5,8 +5,8 @@ test_that("Forking doesn't deadlock", {
     library(torch)
     testfun <- function (x) {
       lstm <- nn_lstm(50, 50)
-      in_data <- torch_tensor(matrix(rnorm(50),1), torch_float())
-      out_data <- torch_tensor(array(rnorm(2500), c(1,50,50)), torch_float())
+      in_data <- torch_randn(1,50,50)
+      out_data <- torch_randn(1,50,50)
       out_pred <- lstm(in_data)[[1]]
       loss <- nnf_mse_loss(out_pred, out_data)
       loss$backward()

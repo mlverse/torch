@@ -3244,12 +3244,6 @@ svd(some=TRUE, compute_uv=TRUE) -> (Tensor, Tensor, Tensor)
 
 See `?torch_svd`
 
-## symeig
-
-symeig(eigenvectors=FALSE, upper=TRUE) -> (Tensor, Tensor)
-
-See `?torch_symeig`
-
 ## t
 
 t() -> Tensor

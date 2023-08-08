@@ -251,6 +251,10 @@ torch_load <- function(path, device = "cpu") {
   if (is_rds(path)) {
     return(legacy_torch_load(path, device))
   }
+  
+  if (is.null(device)) {
+    cli::cli_abort("Unexpected device {.val NULL}")
+  }
 
   con <- create_read_con(path)
 
@@ -285,7 +289,7 @@ torch_load <- function(path, device = "cpu") {
     return(safe[[1]])
   }
 
-  object <- unserialize(buffer_from_torch_tensor(safe[[r_obj]]))
+  object <- unserialize(buffer_from_torch_tensor(safe[[r_obj]]$cpu()))
   safe[r_obj] <- NULL
 
   if (meta$type == "list") {

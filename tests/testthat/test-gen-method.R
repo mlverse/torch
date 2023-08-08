@@ -70,7 +70,21 @@ test_that("permute", {
 
   expect_error(
     x$permute(c(2, 1, 0)),
-    regex = "Indexing starts at 1 but found a 0.",
+    regexp = "Indexing starts at 1 but found a 0.",
     fixed = TRUE
   )
+})
+
+test_that("std works", {
+  x <- torch_randn(10)
+  s <- x$std()
+  r <- sd(as.numeric(x))
+  expect_equal_to_r(s, r, tolerance = 1e-6)
+})
+
+test_that("var works", {
+  x <- torch_randn(10)
+  s <- x$var()
+  r <- var(as.numeric(x))
+  expect_equal_to_r(s, r, tolerance = 1e-6)
 })

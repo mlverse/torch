@@ -66,6 +66,15 @@ void _lantern_TensorIndex_append_int64(void *self, int64_t x) {
   LANTERN_FUNCTION_END_VOID
 }
 
+c10::optional<c10::SymInt> symint_from_optional_int (c10::optional<int64_t> x) {
+  if (x == c10::nullopt) {
+    return c10::nullopt;
+  }
+  else {
+    return c10::SymInt(*x);
+  }
+}
+
 void *_lantern_Slice(void *start, void *end, void *step) {
   LANTERN_FUNCTION_START
   auto start_ = from_raw::optional::int64_t(start);
@@ -83,7 +92,10 @@ void *_lantern_Slice(void *start, void *end, void *step) {
     step_ = None;
   }
 
-  auto out = torch::indexing::Slice(start_, end_, step_);
+
+
+
+  auto out = torch::indexing::Slice(symint_from_optional_int(start_), symint_from_optional_int(end_), symint_from_optional_int(step_));
   return make_ptr<torch::indexing::Slice>(out);
   LANTERN_FUNCTION_END
 }

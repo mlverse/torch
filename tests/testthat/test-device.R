@@ -78,5 +78,8 @@ test_that("can modify the device temporarily", {
 })
 
 test_that("printer works", {
-  expect_equal(capture.output(torch_device("cpu")), "torch_device(type='cpu')>\n")
+  local_edition(3)
+  expect_snapshot_output({
+    print(torch_device("cpu"))
+  })
 })
