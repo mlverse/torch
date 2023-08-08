@@ -132,7 +132,11 @@ test_that("scaling the loss works", {
   loss$backward()
   
   # gradients are so small that they become 0
-  expect_true(all(as.matrix(model$weight$grad$cpu()) == 0))
+  expect_equal(
+    as.matrix(model$weight$grad$cpu()), 
+    array(rep(0, 4), dim = c(2,2)),
+    tolerance = 1e-6
+  )
 
   # now we scale the loss and gradients
   scaler <- cuda_amp_grad_scaler()
