@@ -44,12 +44,6 @@ x
 x[1,3]
 x[1,-1]
 ```
-Note that if one indexes a multidimensional tensor with 
-fewer indices than dimensions, one gets an error, unlike in R that would flatten the array. For example:
-
-```{r, error=TRUE}
-x[1]
-```
 
 ## Slicing and striding
 
