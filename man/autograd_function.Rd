@@ -13,8 +13,10 @@ used to store tensors that can be then retrieved during the backward pass.
 See \link{AutogradContext} for more information about context methods.}
 
 \item{backward}{Defines a formula for differentiating the operation. It must accept
-a context \code{ctx} as the first argument, followed by as many outputs did \code{forward()}
-return, and it should return a named list. Each argument is the gradient w.r.t
+a context \code{ctx} as the first argument, followed by as many outputs ad \code{forward()}
+returned (as a \code{list()}). The names of the arguments don't matter and they are passed
+in the order in which they were returned by \code{forward()}. The function should
+return a named list, where each argument is the gradient w.r.t
 the given output, and each element in the returned list should be the gradient
 w.r.t. the corresponding input. The context can be used to retrieve tensors saved
 during the forward pass. It also has an attribute \code{ctx$needs_input_grad} as a
