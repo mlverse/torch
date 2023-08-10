@@ -44,12 +44,14 @@ x
 x[1,3]
 x[1,-1]
 ```
-Note that if one indexes a multidimensional tensor with 
-fewer indices than dimensions, one gets an error, unlike in R that would flatten the array. For example:
 
-```{r, error=TRUE}
+Note that if one indexes a multidimensional tensor with fewer indices than dimensions, torch's behaviour differs from R,
+which flattens the array. In torch, the missing indices are considered complete slices `:`.
+
+```{r}
 x[1]
 ```
+
 
 ## Slicing and striding
 
@@ -155,7 +157,7 @@ z[..,1]
 
 Vector indexing is also supported but care must be taken regarding performance as, in general its much less performant than slice based indexing.
 
-> Note: Starting from version 0.5.0, vector indexing in torch follows R semantics, 
+> Note: Starting from version 0.5.0, vector indexing in torch follows R semantics,
 prior to that the behavior was similar to [numpy's advanced indexing](https://numpy.org/doc/stable/reference/arrays.indexing.html#advanced-indexing).
 To use the old behavior, consider using `?torch_index`, `?torch_index_put` or `torch_index_put_`.
 
