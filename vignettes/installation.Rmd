@@ -18,7 +18,7 @@ knitr::opts_chunk$set(
 
 After the usual R package installation, `torch` requires installing other 2 libraries: LibTorch and LibLantern. They are automatically installed by detecting information about you OS if you are using `torch` in interactive mode. If you are running `torch` in non-interactive environments you need to set the `TORCH_INSTALL` env var to 1, so it's automatically installed or manually call `torch::install_torch()`.
 
-Starting from torch v0.9.1.9000 it's possible to install torch from pre-built package binaries 
+Starting from torch v0.9.1.9000 it's possible to install torch from pre-built package binaries
 available in a custom CRAN-like repository. This binaries include all shared objects necessary
 to run torch, thus it's not required to install any additional software. See the
 [*Install from pre-built binaries*](#pre-built) session for more information.
@@ -87,7 +87,7 @@ To install the GPU version of `torch` on linux you must verify that:
 
 -   You have correctly installed the NVIDIA CUDA Toolkit versions 11.6 or 11.7, follow the instructions [here](https://docs.nvidia.com/cuda/archive/11.7.0/).
 
--   You have installed cuDNN (a version compatible with your CUDA version). Follow the installation instructions available [here](https://developer.nvidia.com/cudnn). 
+-   You have installed cuDNN (a version compatible with your CUDA version). Follow the installation instructions available [here](https://developer.nvidia.com/cudnn).
 
 Once you have installed all pre-requisites you can install `torch` with:
 
@@ -97,11 +97,11 @@ install.packages("torch")
 
 If you have followed default installation locations we will detect that you have CUDA software installed and automatically download the GPU enabled Lantern binaries. You can also specify the `CUDA` env var with something like `Sys.setenv(CUDA="11.7")` if you want to force an specific version of the CUDA toolkit.
 
-## Installing from pre-built binaries
+## Installing from pre-built binaries {#pre-built}
 
 As of torch v0.9.1.9000 it's now possible to install torch from pre-built package binaries
 from a CRAN like repository hosted on Google Cloud Storage. We currently provide pre-built
-binaries for CPU (for macOS, Linux and Windows) and GPU (Windows and Linux). 
+binaries for CPU (for macOS, Linux and Windows) and GPU (Windows and Linux).
 
 Packages provided by the CRAN-like repository bundles all necessary for its execution,
 including CUDA and CUDNN in the case of the GPU builds. This means that by installing it
@@ -117,7 +117,7 @@ To install from the pre-built binaries, you can use the following:
 options(timeout = 600) # increasing timeout is recommended since we will be downloading a 2GB file.
 # For Windows and Linux: "cpu", "cu117" are the only currently supported
 # For MacOS the supported are: "cpu-intel" or "cpu-m1"
-kind <- "cu117" 
+kind <- "cu117"
 version <- "0.10.0"
 options(repos = c(
   torch = sprintf("https://storage.googleapis.com/torch-lantern-builds/packages/%s/%s/", kind, version),
@@ -139,15 +139,15 @@ Warning messages:
   URL '...': Timeout of 60 seconds was reached
 3: Failed to install Torch, manually run install_torch(). download from 'https://download.pytorch.org/libtorch/cpu/libtorch-macos-1.7.1.zip' failed
 ```
-This means you encounter a download timeout. 
-then, you should increase the timeout value in `install_torch()` like 
+This means you encounter a download timeout.
+then, you should increase the timeout value in `install_torch()` like
 ```{r, eval = FALSE}
 install_torch(timeout = 600)
 ```
 
 ### File based download
 
-In cases where you cannot reach download servers from the machine you intend to install torch on,  last resort is to install Torch and Lantern library from files. This is done in 3 steps : 
+In cases where you cannot reach download servers from the machine you intend to install torch on,  last resort is to install Torch and Lantern library from files. This is done in 3 steps :
 
 1- get the download URLs of the files.
 
