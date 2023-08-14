@@ -6,6 +6,7 @@
 - Updated to LibTorch 2.0.1. (#1085)
 - `torch_load` no longer supports `device=NULL` to load weights in the same device they were saved. (#1085)
 - Added support for CUDA 11.8. (#1089)
+- Fixed segfault caused by comparing a `dtype` with a `NULL`. (#1090)
 
 # torch 0.11.0
 
