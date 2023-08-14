@@ -66,3 +66,12 @@ test_that("can set select devices using strings", {
   }
   
 })
+
+test_that("error when comparing dtypes", {
+  
+  expect_error(
+    NULL == torch_float64(),
+    "not a dtype"
+  )
+  
+})
