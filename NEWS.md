@@ -5,6 +5,7 @@
 - `as.array` now moves tensors to the cpu before copying data into R. (#1080)
 - Updated to LibTorch 2.0.1. (#1085)
 - `torch_load` no longer supports `device=NULL` to load weights in the same device they were saved. (#1085)
+- Added support for CUDA 11.8. (#1089)
 
 # torch 0.11.0
 
