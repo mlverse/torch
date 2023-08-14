@@ -20,9 +20,11 @@ jobs:
           
           - {os: ubuntu, version: cpu, runner: ubuntu-latest}
           - {os: ubuntu, version: cu11.7, runner: [self-hosted, gce, disk]}
+          - {os: ubuntu, version: cu11.8, runner: [self-hosted, gce, disk]}
 
           - {os: windows, version: cpu, runner: windows-2019}
           - {os: windows, version: cu11.7, runner: windows-2019}
+          - {os: windows, version: cu11.8, runner: windows-2019}
         
         precxx11abi: [0, 1]
 
@@ -35,6 +37,10 @@ jobs:
           - config: {version: cu11.7}
             cuda: 11.7
             cuda_patch: 1
+            
+          - config: {version: cu11.8}
+            cuda: 11.8
+            cuda_patch: 0
 
         exclude:
           - config: {os: macOS}
