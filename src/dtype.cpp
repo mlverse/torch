@@ -64,6 +64,11 @@ XPtrTorchDtype cpp_torch_qint32() {
 }
 
 // [[Rcpp::export]]
+torch::Dtype cpp_torch_chalf() {
+  return torch::Dtype(lantern_Dtype_chalf());
+}
+
+// [[Rcpp::export]]
 torch::Dtype cpp_torch_cfloat() {
   return torch::Dtype(lantern_Dtype_cfloat());
 }

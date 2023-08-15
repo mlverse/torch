@@ -357,6 +357,10 @@ cpp_torch_qint32 <- function() {
     .Call(`_torch_cpp_torch_qint32`)
 }
 
+cpp_torch_chalf <- function() {
+    .Call(`_torch_cpp_torch_chalf`)
+}
+
 cpp_torch_cfloat <- function() {
     .Call(`_torch_cpp_torch_cfloat`)
 }

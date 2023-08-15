@@ -200,6 +200,8 @@ LANTERN_OPTIONAL_DECLS(string_view)
   HOST_API void * lantern_TensorOptions_pinned_memory(void *self, bool pinned_memory) {LANTERN_CHECK_LOADED void * ret = _lantern_TensorOptions_pinned_memory(self, pinned_memory); LANTERN_HOST_HANDLER return ret;}
   LANTERN_API void *(LANTERN_PTR _lantern_Dtype_float32)();
   HOST_API void * lantern_Dtype_float32() {LANTERN_CHECK_LOADED void * ret = _lantern_Dtype_float32(); LANTERN_HOST_HANDLER return ret;}
+  LANTERN_API void *(LANTERN_PTR _lantern_Dtype_chalf)();
+  HOST_API void * lantern_Dtype_chalf() {LANTERN_CHECK_LOADED void * ret = _lantern_Dtype_chalf(); LANTERN_HOST_HANDLER return ret;}
   LANTERN_API void *(LANTERN_PTR _lantern_Dtype_cfloat)();
   HOST_API void * lantern_Dtype_cfloat() {LANTERN_CHECK_LOADED void * ret = _lantern_Dtype_cfloat(); LANTERN_HOST_HANDLER return ret;}
   LANTERN_API void *(LANTERN_PTR _lantern_Dtype_cdouble)();
@@ -9813,6 +9815,7 @@ bool lanternInit(const std::string &libPath, std::string *pError)
   LOAD_SYMBOL(_lantern_Dtype_int16);
   LOAD_SYMBOL(_lantern_Dtype_int32);
   LOAD_SYMBOL(_lantern_Dtype_int64);
+  LOAD_SYMBOL(_lantern_Dtype_chalf);
   LOAD_SYMBOL(_lantern_Dtype_cfloat);
   LOAD_SYMBOL(_lantern_Dtype_cdouble);
   LOAD_SYMBOL(_lantern_Dtype_bool);
