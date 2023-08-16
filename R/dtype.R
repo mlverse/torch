@@ -50,7 +50,10 @@ dtype_from_string <- function(str) {
     "bool" = torch_bool(),
     "quint8" = torch_quint8(),
     "qint8" = torch_qint8(),
-    "qint32" = torch_qint32()
+    "qint32" = torch_qint32(),
+    "chalf" = torch_chalf(),
+    "cfloat" = torch_cfloat(),
+    "cdouble" = torch_cdouble()
   )
 }
 
@@ -81,16 +84,24 @@ torch_double <- function() torch_dtype$new(cpp_torch_float64())
 
 #' @rdname torch_dtype
 #' @export
+torch_cfloat32 <- function() torch_dtype$new(cpp_torch_chalf())
+#' @rdname torch_dtype
+#' @export
+torch_chalf <- function() torch_dtype$new(cpp_torch_chalf())
+
+#' @rdname torch_dtype
+#' @export
 torch_cfloat <- function() torch_dtype$new(cpp_torch_cfloat())
 #' @rdname torch_dtype
 #' @export
-torch_cfloat32 <- function() torch_dtype$new(cpp_torch_cfloat())
+torch_cfloat64 <- function() torch_dtype$new(cpp_torch_cfloat())
+
 #' @rdname torch_dtype
 #' @export
 torch_cdouble <- function() torch_dtype$new(cpp_torch_cdouble())
 #' @rdname torch_dtype
 #' @export
-torch_cfloat64 <- function() torch_dtype$new(cpp_torch_cdouble())
+torch_cfloat128 <- function() torch_dtype$new(cpp_torch_cdouble())
 
 #' @rdname torch_dtype
 #' @export
