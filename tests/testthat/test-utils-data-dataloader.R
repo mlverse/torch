@@ -590,3 +590,35 @@ test_that("correctly reports length for iterable datasets that provide length", 
   expect_equal(length(dl), 1)
   
 })
+
+test_that("a case that errors in luz", {
+  
+  get_iterable_ds <- iterable_dataset(
+    "iterable_ds",
+    initialize = function(len = 100, x_size = 10, y_size = 1, fixed_values = FALSE) {
+      self$len <- len
+      self$x <- torch::torch_randn(size = c(len, x_size))
+      self$y <- torch::torch_randn(size = c(len, y_size))
+    },
+    .iter = function() {
+      i <- 0
+      function() {
+        i <<- i + 1
+        
+        if (i > self$len) {
+          return(coro::exhausted())
+        }
+        
+        list(
+          x = self$x[i,..],
+          y = self$y[i,..]
+        )
+      }
+    }
+  )
+  
+  ds <- get_iterable_ds()
+  dl <- dataloader(ds, batch_size = 32)
+  expect_equal(length(coro::collect(dl)), 4)
+  
+})

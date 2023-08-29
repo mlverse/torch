@@ -36,21 +36,17 @@ IterableDatasetFetcher <- R6::R6Class(
           d <- self$dataset_iter()
 
           if (is_exhausted(d)) {
-            if (self$drop_last) {
+            if (self$drop_last || i ==  1) {
               return(coro::exhausted())
             }
             
+            # we drop the null values in that list.
+            data <- data[seq_len(i-1L)]
             break
           }
 
           data[[i]] <- d
         }
-        
-        # no data for the next batch, we return exhausted before trying anything
-        if (i == 1) {
-          return(coro::exhausted())
-        }
-        
       } else {
         data <- self$dataset_iter()
       }
