@@ -36,14 +36,25 @@ IterableDatasetFetcher <- R6::R6Class(
           d <- self$dataset_iter()
 
           if (is_exhausted(d)) {
+            if (self$drop_last) {
+              return(coro::exhausted())
+            }
+            
             break
           }
 
           data[[i]] <- d
         }
+        
+        # no data for the next batch, we return exhausted before trying anything
+        if (i == 1) {
+          return(coro::exhausted())
+        }
+        
       } else {
         data <- self$dataset_iter()
       }
+      
       self$collate_fn(data)
     }
   )

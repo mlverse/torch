@@ -514,3 +514,79 @@ test_that("collate works with bool data", {
   expect_true(out$dtype == torch_bool())
   
 })
+
+test_that("can use dataloaders on iterable datasets", {
+  ids <- iterable_dataset(
+    "ids",
+    initialize = function(n = 320) {
+      self$n <- n
+    },
+    .iter = function() {
+      i <- 0
+      function() {
+        i <<- i + 1
+        if (i <= self$n) {
+          i
+        } else {
+          coro::exhausted()
+        }
+      }
+    }
+  )
+  
+  dl <- dataloader(ids(), batch_size = 32)
+  data <- coro::collect(dl)
+  
+  expect_equal(length(data), 10)
+  expect_equal(data[[10]]$shape, 32)
+  
+  dl <- dataloader(ids(33), batch_size = 32)
+  data <- coro::collect(dl)
+  
+  expect_equal(length(data), 2)
+  expect_equal(data[[2]]$shape, 1)
+  
+  dl <- dataloader(ids(33), batch_size = 32, drop_last = TRUE)
+  data <- coro::collect(dl)
+  
+  expect_equal(length(data), 1)
+  
+  # length can be NA for iterable datasets
+  expect_true(is.na(length(dl)))
+})
+
+test_that("correctly reports length for iterable datasets that provide length", {
+  
+  ids <- iterable_dataset(
+    "ids",
+    initialize = function(n = 320) {
+      self$n <- n
+    },
+    .iter = function() {
+      i <- 0
+      function() {
+        i <<- i + 1
+        if (i <= self$n) {
+          i
+        } else {
+          coro::exhausted()
+        }
+      }
+    },
+    .length = function() {
+      self$n
+    }
+  )
+  
+  expect_equal(length(ids()), 320)
+  
+  dl <- dataloader(ids(), batch_size = 32)
+  expect_equal(length(dl), 10)
+  
+  dl <- dataloader(ids(33), batch_size = 32)
+  expect_equal(length(dl), 2)
+  
+  dl <- dataloader(ids(33), batch_size = 32, drop_last = TRUE)
+  expect_equal(length(dl), 1)
+  
+})
