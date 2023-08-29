@@ -152,11 +152,15 @@ DataLoader <- R6::R6Class(
 
       if (is_map_dataset(dataset)) {
         self$.dataset_kind <- "map"
+      } else if (is_iterable_dataset(dataset)) {
+        self$.dataset_kind <- "iterable"
+      } else {
+        cli::cli_abort("Unknown dataset type with class {.cls {class(dataset)}}")
       }
 
       if (is.null(sampler)) {
         if (self$.dataset_kind == "iterable") {
-          # TODO
+          sampler <- InfiniteSampler()
         } else {
           if (shuffle) {
             sampler <- RandomSampler(dataset, generator = generator)
@@ -200,13 +204,26 @@ DataLoader <- R6::R6Class(
         }
 
         MultiProcessingDataLoaderIter$new(self)
+      } else if (self$.dataset_kind == "iterable") {
+        if (self$num_workers == 0) {
+          return(SingleProcessDataLoaderIter$new(self))
+        }
+        cli::cli_abort("Multi-process dataloader not implemented yet for Iterable datasets.")
       } else {
         not_implemented_error()
       }
     },
     .length = function() {
       if (self$.dataset_kind == "iterable") {
-        not_implemented_error()
+        l <- length(self$dataset)
+        
+        if (is.na(l)) return(l)
+        
+        if (self$drop_last) {
+          return(l %/% self$batch_size)
+        } else {
+          return(as.integer(ceiling(l / self$batch_size)))
+        } 
       } else {
         length(self$.index_sampler)
       }
@@ -283,6 +300,13 @@ SingleProcessDataLoaderIter <- R6::R6Class(
           self$.collate_fn,
           self$.drop_last
         )
+      } else if (self$.dataset_kind == "iterable") {
+        self$.dataset_fetcher <- IterableDatasetFetcher$new(
+          self$.dataset,
+          self$.auto_collation,
+          self$.collate_fn,
+          self$.drop_last
+        )
       } else {
         not_implemented_error()
       }
@@ -294,7 +318,9 @@ SingleProcessDataLoaderIter <- R6::R6Class(
         return(coro::exhausted())
       }
 
+      # data can be exhausted in iterable datasets
       data <- self$.dataset_fetcher$fetch(index)
+      
       if (self$.pin_memory) {
         # TODO
       }

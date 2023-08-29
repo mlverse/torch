@@ -514,3 +514,111 @@ test_that("collate works with bool data", {
   expect_true(out$dtype == torch_bool())
   
 })
+
+test_that("can use dataloaders on iterable datasets", {
+  ids <- iterable_dataset(
+    "ids",
+    initialize = function(n = 320) {
+      self$n <- n
+    },
+    .iter = function() {
+      i <- 0
+      function() {
+        i <<- i + 1
+        if (i <= self$n) {
+          i
+        } else {
+          coro::exhausted()
+        }
+      }
+    }
+  )
+  
+  dl <- dataloader(ids(), batch_size = 32)
+  data <- coro::collect(dl)
+  
+  expect_equal(length(data), 10)
+  expect_equal(data[[10]]$shape, 32)
+  
+  dl <- dataloader(ids(33), batch_size = 32)
+  data <- coro::collect(dl)
+  
+  expect_equal(length(data), 2)
+  expect_equal(data[[2]]$shape, 1)
+  
+  dl <- dataloader(ids(33), batch_size = 32, drop_last = TRUE)
+  data <- coro::collect(dl)
+  
+  expect_equal(length(data), 1)
+  
+  # length can be NA for iterable datasets
+  expect_true(is.na(length(dl)))
+})
+
+test_that("correctly reports length for iterable datasets that provide length", {
+  
+  ids <- iterable_dataset(
+    "ids",
+    initialize = function(n = 320) {
+      self$n <- n
+    },
+    .iter = function() {
+      i <- 0
+      function() {
+        i <<- i + 1
+        if (i <= self$n) {
+          i
+        } else {
+          coro::exhausted()
+        }
+      }
+    },
+    .length = function() {
+      self$n
+    }
+  )
+  
+  expect_equal(length(ids()), 320)
+  
+  dl <- dataloader(ids(), batch_size = 32)
+  expect_equal(length(dl), 10)
+  
+  dl <- dataloader(ids(33), batch_size = 32)
+  expect_equal(length(dl), 2)
+  
+  dl <- dataloader(ids(33), batch_size = 32, drop_last = TRUE)
+  expect_equal(length(dl), 1)
+  
+})
+
+test_that("a case that errors in luz", {
+  
+  get_iterable_ds <- iterable_dataset(
+    "iterable_ds",
+    initialize = function(len = 100, x_size = 10, y_size = 1, fixed_values = FALSE) {
+      self$len <- len
+      self$x <- torch::torch_randn(size = c(len, x_size))
+      self$y <- torch::torch_randn(size = c(len, y_size))
+    },
+    .iter = function() {
+      i <- 0
+      function() {
+        i <<- i + 1
+        
+        if (i > self$len) {
+          return(coro::exhausted())
+        }
+        
+        list(
+          x = self$x[i,..],
+          y = self$y[i,..]
+        )
+      }
+    }
+  )
+  
+  ds <- get_iterable_ds()
+  dl <- dataloader(ds, batch_size = 32)
+  expect_equal(length(coro::collect(dl)), 4)
+  
+})
