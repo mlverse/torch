@@ -31,7 +31,7 @@ void* _lantern_Dtype_from_string (void* dtype_str) {
   LANTERN_FUNCTION_START
   
   if (!dtype_str) {
-    std::runtime_error("Error dtype can't be NULL");
+    throw std::runtime_error("Error dtype can't be NULL");
   }
   
   auto str = from_raw::string(dtype_str);
