@@ -36,6 +36,12 @@ IterableDatasetFetcher <- R6::R6Class(
           d <- self$dataset_iter()
 
           if (is_exhausted(d)) {
+            if (self$drop_last || i ==  1) {
+              return(coro::exhausted())
+            }
+            
+            # we drop the null values in that list.
+            data <- data[seq_len(i-1L)]
             break
           }
 
@@ -44,6 +50,7 @@ IterableDatasetFetcher <- R6::R6Class(
       } else {
         data <- self$dataset_iter()
       }
+      
       self$collate_fn(data)
     }
   )

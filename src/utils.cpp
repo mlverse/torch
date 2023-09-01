@@ -65,9 +65,9 @@ std::thread::id main_thread_id() noexcept {
 // [[Rcpp::export]]
 Rcpp::List transpose2(Rcpp::List x) {
   auto templ = Rcpp::as<Rcpp::List>(x[0]);
-  auto num_elements = templ.length();
+  const auto num_elements = templ.length();
 
-  auto size = x.length();
+  const auto size = x.length();
   std::vector<Rcpp::List> out;
 
   for (auto i = 0; i < num_elements; i++) {
@@ -75,6 +75,9 @@ Rcpp::List transpose2(Rcpp::List x) {
   }
 
   for (size_t j = 0; j < size; j++) {
+    if (Rf_isNull(x[j])) {
+      Rcpp::stop("NULL is not allowed. Expected a list.");
+    }
     auto el = Rcpp::as<Rcpp::List>(x[j]);
     for (auto i = 0; i < num_elements; i++) {
       out[i][j] = el[i];

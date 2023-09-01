@@ -8,6 +8,7 @@
 - Added support for CUDA 11.8. (#1089)
 - Fixed segfault caused by comparing a `dtype` with a `NULL`. (#1090)
 - Fixed incorrect naming of complex data type names, such as `torch_cfloat64`. (#1091)
+- Added support for iterable datasets. (#1095)
 
 # torch 0.11.0
 

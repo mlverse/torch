@@ -159,6 +159,19 @@ BatchSampler <- sampler(
   }
 )
 
+InfiniteSampler <- sampler(
+  "infinite_sampler", 
+  initialize = function() {},
+  .iter = function() {
+    function() {
+      TRUE
+    }
+  },
+  .length = function() {
+    Inf
+  }
+)
+
 #' @export
 as_iterator.utils_sampler <- function(x) {
   it <- x$.iter()
