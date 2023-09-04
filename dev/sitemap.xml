@@ -244,6 +244,9 @@
     <loc>https://torch.mlverse.org/docs/dev/reference/is_undefined_tensor.html</loc>
   </url>
   <url>
+    <loc>https://torch.mlverse.org/docs/dev/reference/iterable_dataset.html</loc>
+  </url>
+  <url>
     <loc>https://torch.mlverse.org/docs/dev/reference/jit_compile.html</loc>
   </url>
   <url>

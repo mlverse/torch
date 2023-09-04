@@ -16,7 +16,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">torch</a>
 
-    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">0.11.0.9000</small>
+    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">0.11.0.9001</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -94,6 +94,8 @@
 <code>torch_load</code> no longer supports <code>device=NULL</code> to load weights in the same device they were saved. (<a href="https://github.com/mlverse/torch/issues/1085" class="external-link">#1085</a>)</li>
 <li>Added support for CUDA 11.8. (<a href="https://github.com/mlverse/torch/issues/1089" class="external-link">#1089</a>)</li>
 <li>Fixed segfault caused by comparing a <code>dtype</code> with a <code>NULL</code>. (<a href="https://github.com/mlverse/torch/issues/1090" class="external-link">#1090</a>)</li>
+<li>Fixed incorrect naming of complex data type names, such as <code>torch_cfloat64</code>. (<a href="https://github.com/mlverse/torch/issues/1091" class="external-link">#1091</a>)</li>
+<li>Added support for iterable datasets. (<a href="https://github.com/mlverse/torch/issues/1095" class="external-link">#1095</a>)</li>
 </ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.11.0" id="torch-0110">torch 0.11.0<a class="anchor" aria-label="anchor" href="#torch-0110"></a></h2><p class="text-muted">CRAN release: 2023-06-06</p>
