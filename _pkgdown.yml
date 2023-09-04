@@ -130,6 +130,7 @@ reference:
   - title: Datasets
     contents: 
       - starts_with("dataset")
+      - iterable_dataset
       - starts_with("dataloader")
       - starts_with("enumerate")
       - tensor_dataset
