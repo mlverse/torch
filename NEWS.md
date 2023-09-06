@@ -9,6 +9,7 @@
 - Fixed segfault caused by comparing a `dtype` with a `NULL`. (#1090)
 - Fixed incorrect naming of complex data type names, such as `torch_cfloat64`. (#1091)
 - Added support for iterable datasets. (#1095)
+- Fixed name of the `out_features` attribute in the `nn_linear` module. (#1097)
 
 # torch 0.11.0
 
