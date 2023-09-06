@@ -311,7 +311,7 @@ test_that("$<-  works for instances", {
   expect_s3_class(model, "nn_module")
   model$mymodule <- nn_linear(2, 2)
   expect_s3_class(model, "nn_module")
-  expect_equal(model$mymodule$out_feature, 2)
+  expect_equal(model$mymodule$out_features, 2)
   model$new_module <- nn_linear(5, 5)
   expect_s3_class(model, "nn_module")
 
@@ -333,7 +333,7 @@ test_that("[[<- works for instances", {
   expect_s3_class(model, "nn_module")
   model[["mymodule"]] <- nn_linear(2, 2)
   expect_s3_class(model, "nn_module")
-  expect_equal(model$mymodule$out_feature, 2)
+  expect_equal(model$mymodule$out_features, 2)
   model[["new_module"]] <- nn_linear(5, 5)
   expect_s3_class(model, "nn_module")
 
