@@ -39,8 +39,10 @@ test_that("copy state between optimizers corecctly", {
   with_no_grad({
     y <- torch_empty(1, requires_grad = TRUE)$copy_(x)  
   })
-  opt2 <- optim_adam(y, lr = 0.1)
+  opt2 <- optim_adam(y, lr = 1) # use a different LR to make sure it is recovered
   opt2$load_state_dict(opt$state_dict())
+  expect_equal(opt2$param_groups[[1]]$lr, 0.1)
+  
   (2*y)$backward()
   opt2$step()
   opt2$state_dict()
