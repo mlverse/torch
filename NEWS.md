@@ -10,6 +10,7 @@
 - Fixed incorrect naming of complex data type names, such as `torch_cfloat64`. (#1091)
 - Added support for iterable datasets. (#1095)
 - Fixed name of the `out_features` attribute in the `nn_linear` module. (#1097)
+- Fixed issues when loading the state dict of optimizers and learning rate schedulers. (#1100)
 
 # torch 0.11.0
 
