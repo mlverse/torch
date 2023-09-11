@@ -142,7 +142,7 @@ test_that("state dict works", {
   
   m <- nn_linear(10, 10)
   o <- optim_sgd(params = m$parameters, lr = 1)
-  scheduler <- lr_step(optimizer = o, step_size = 0.1)
+  scheduler <- lr_step(optimizer = o, step_size = 1)
   
   expect_equal(o$param_groups[[1]]$lr, 1)
   scheduler$step()
@@ -160,7 +160,7 @@ test_that("state dict works", {
   o$load_state_dict(opt_dict)
   expect_equal(o$param_groups[[1]]$lr, 0.1)
   
-  scheduler <- lr_step(optimizer = o, step_size = 0.2) # use a different value
+  scheduler <- lr_step(optimizer = o, step_size = 2) # use a different value
   scheduler$load_state_dict(dict)
   
   scheduler$step()
