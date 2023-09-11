@@ -45,11 +45,18 @@ LRScheduler <- R6::R6Class(
 
       self$last_epoch <- last_epoch
       self$verbose <- verbose
+      
+      self$.step_count <- 0L
       self$step()
     },
     state_dict = function() {
       dict <- as.list(self)
-      dict <- dict[[-which(names(dict) == "optimizer")]]
+      dict <- dict[-which(names(dict) == "optimizer")]
+      
+      # we also drop functions and environments
+      dict <- dict[!sapply(dict, is.function)]
+      dict <- dict[!sapply(dict, is.environment)]
+      
       dict
     },
     load_state_dict = function(state_dict) {
@@ -69,11 +76,12 @@ LRScheduler <- R6::R6Class(
       }
     },
     step = function() {
+      self$.step_count <- self$.step_count + 1L
       self$last_epoch <- self$last_epoch + 1
       values <- self$get_lr()
 
       for (i in seq_along(self$optimizer$param_groups)) {
-        self$optimizer$param_groups[[i]]$lr <- values[i]
+        self$optimizer$param_groups[[i]]$lr <- values[[i]]
         self$print_lr(self$verbose, i, self$optimizer$param_groups[[i]]$lr)
       }
 
@@ -731,4 +739,43 @@ lr_reduce_on_plateau <- lr_scheduler(
     self$num_bad_epochs <- 0
   }
   
+)
+
+#' Set the learning rate of each parameter group using a cosine annealing schedule
+#' 
+#' @param T_max Maximum number of iterations
+#' @param eta_min Minimum learning rate. Default: 0.
+#' @param last_epoch The index of the last epoch
+#' 
+#' @inheritParams lr_reduce_on_plateau
+#' @export
+lr_cosine_annealing <- lr_scheduler(
+  "lr_cosine_annealing",
+  initialize = function(optimizer, T_max, eta_min=0, last_epoch=-1, verbose=FALSE) {
+    self$T_max <- T_max
+    self$eta_min <- eta_min
+    super$initialize(optimizer, last_epoch, verbose)
+  },
+  get_lr = function() {
+    if (self$last_epoch == 0) {
+      return(lapply(self$optimizer$param_groups, function(x) x[["lr"]]))
+    } else if (self$.step_count == 1 && self$last_epoch > 0) {
+      lapply(self$base_lrs, function(group, base_lr) {
+        self$eta_min + 
+          (base_lr - self$eta_min) * 
+          (1 + cos(self$last_epoch * pi / self$T_max)) / 
+          2  
+      })
+    } else if ((self$last_epoch -1 - self$T_max) %% (2 * self$T_max) == 0) {
+      map2(self$optimizer$param_groups, self$base_lrs, function(group, base_lr) {
+        group[["lr"]] + (base_lr - self$eta_min) * (1 - cos(pi / self$T_max)) / 2
+      })
+    } else {
+      lapply(self$optimizer$param_groups, function(group) {
+        (1 + cos(pi * self$last_epoch / self$T_max)) /
+          (1 + cos(pi * (self$last_epoch - 1) / self$T_max)) *
+          (group[['lr']] - self$eta_min) + self$eta_min
+      })
+    }
+  }
 )

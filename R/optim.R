@@ -142,6 +142,15 @@ Optimizer <- R6::R6Class(
         self$state$set(parameters[[index]], value)
       }
       
+      # we must also update the param groups
+      for (i in seq_along(state_dict$param_groups)) {
+        group <- state_dict$param_groups[[i]]
+        for (nm in names(group)) {
+          if (nm == "params") next
+          self$param_groups[[i]][[nm]] <- group[[nm]]    
+        }
+      }
+      
       invisible(self)
     }
   ),

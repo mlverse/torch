@@ -119,3 +119,52 @@ test_that("lr_reduce_on_plateau", {
   }
   expect_equal(o$param_groups[[1]]$lr, 0.09) # matched to pytorch
 })
+
+test_that("lr_cosine_annealing", {
+  
+  m <- nn_linear(10, 10)
+  o <- optim_adam(params = m$parameters, lr = 0.1)
+  scheduler <- lr_cosine_annealing(o, T_max = 1, eta_min = 1e-5)
+  
+  expect_equal(o$param_groups[[1]]$lr, 0.1)
+  
+  
+  scheduler$step()
+  expect_equal(o$param_groups[[1]]$lr, 1e-5)
+  scheduler$step()
+  expect_equal(o$param_groups[[1]]$lr, 0.1)
+  scheduler$step()
+  expect_equal(o$param_groups[[1]]$lr, 1e-5)
+  
+})
+
+test_that("state dict works", {
+  
+  m <- nn_linear(10, 10)
+  o <- optim_sgd(params = m$parameters, lr = 1)
+  scheduler <- lr_step(optimizer = o, step_size = 0.1)
+  
+  expect_equal(o$param_groups[[1]]$lr, 1)
+  scheduler$step()
+  expect_equal(o$param_groups[[1]]$lr, 0.1)
+  
+  dict <- scheduler$state_dict()
+  opt_dict <- o$state_dict()
+  
+  scheduler$step()
+  expect_equal(o$param_groups[[1]]$lr, 0.01)
+  
+  o <- optim_sgd(params = m$parameters, lr = 1)
+  expect_equal(o$param_groups[[1]]$lr, 1)
+  
+  o$load_state_dict(opt_dict)
+  expect_equal(o$param_groups[[1]]$lr, 0.1)
+  
+  scheduler <- lr_step(optimizer = o, step_size = 0.1)
+  scheduler$load_state_dict(dict)
+  
+  scheduler$step()
+  
+  expect_equal(o$param_groups[[1]]$lr, 0.01)
+  
+})
