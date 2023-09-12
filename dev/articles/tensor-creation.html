@@ -144,12 +144,12 @@ function takes an R vector, matrix or array and creates an equivalent
 <span><span class="fu"><a href="../reference/torch_tensor.html">torch_tensor</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/array.html" class="external-link">array</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html" class="external-link">runif</a></span><span class="op">(</span><span class="fl">12</span><span class="op">)</span>, dim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">2</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; torch_tensor</span></span>
 <span><span class="co">#&gt; (1,.,.) = </span></span>
-<span><span class="co">#&gt;   0.9692  0.6726  0.7079</span></span>
-<span><span class="co">#&gt;   0.9104  0.0240  0.7982</span></span>
+<span><span class="co">#&gt;   0.9342  0.5637  0.5005</span></span>
+<span><span class="co">#&gt;   0.1321  0.8970  0.9527</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; (2,.,.) = </span></span>
-<span><span class="co">#&gt;   0.8404  0.8735  0.1630</span></span>
-<span><span class="co">#&gt;   0.7961  0.1929  0.4622</span></span>
+<span><span class="co">#&gt;   0.8244  0.4574  0.2420</span></span>
+<span><span class="co">#&gt;   0.8273  0.9023  0.4060</span></span>
 <span><span class="co">#&gt; [ CPUFloatType{2,2,3} ]</span></span></code></pre></div>
 <p>By default, we will create tensors in the <code>cpu</code> device,
 converting their R datatype to the corresponding torch
@@ -197,11 +197,11 @@ distributed tensor with shape 5x3.</p>
 <code class="sourceCode R"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/torch_randn.html">torch_randn</a></span><span class="op">(</span><span class="fl">5</span>, <span class="fl">3</span><span class="op">)</span></span>
 <span><span class="va">x</span></span>
 <span><span class="co">#&gt; torch_tensor</span></span>
-<span><span class="co">#&gt;  0.0524 -0.0189  0.2777</span></span>
-<span><span class="co">#&gt;  0.7573 -0.6364  0.1018</span></span>
-<span><span class="co">#&gt; -0.8143 -0.4438 -1.0108</span></span>
-<span><span class="co">#&gt; -0.7033  1.7108 -0.9603</span></span>
-<span><span class="co">#&gt;  0.6078  0.4184  0.4188</span></span>
+<span><span class="co">#&gt;  0.0382  0.0140 -0.5890</span></span>
+<span><span class="co">#&gt; -0.5509  0.8077 -0.9347</span></span>
+<span><span class="co">#&gt;  2.1496  0.2097  0.6083</span></span>
+<span><span class="co">#&gt; -0.2804 -0.3263 -0.5785</span></span>
+<span><span class="co">#&gt;  0.4516 -0.1436  1.3032</span></span>
 <span><span class="co">#&gt; [ CPUFloatType{5,3} ]</span></span></code></pre></div>
 <p>Another example is <code>torch_ones</code>, which creates a tensor
 filled with ones.</p>
