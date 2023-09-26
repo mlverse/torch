@@ -1,0 +1,100 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: torch 0.11.0.9002\n"
+"POT-Creation-Date: 2023-09-26 15:31\n"
+"PO-Revision-Date: 2023-09-26 15:59+0200\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: fr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.3.2\n"
+
+msgid "can only set to public, private and active"
+msgstr "ne peut être configuré qu’avec `public`, `private` ou `active"
+
+msgid ""
+"Because this function allows access to unexported functions, please use with "
+"caution, and\n"
+"            only if you are sure know what you are doing. Unexported "
+"functions will expect inputs that\n"
+"            are more C++-like than R-like. For example, they will expect all "
+"indexes to be 0-based instead\n"
+"            of 1-based. In addition unexported functions may be subject to "
+"removal from the API without\n"
+"            warning. Set quiet = TRUE to silence this warning."
+msgstr ""
+"Comme cette fonction ouvre l’accès aux fonctions non-exportées, utilisez-là "
+"avec prudence, et\n"
+"          seulement si vous êtes certains de ce que vous faites. Les "
+"fonctions non-exportées demande des\n"
+"          entrées orientées C++ plus qu’orientées R. Par exemple, elle "
+"reposent sur l’indexation à 0 au lieu de \n"
+"          l’indexation à 1. De plus, les fonctions non-exportées pourront "
+"être supprimées sans préavis. \n"
+"          Configurez `quiet = TRUE` pour faire disparaitre ce message."
+
+msgid "Only functions prefixed with 'torch_' are available from this function."
+msgstr ""
+"Seules les fonctions préfixées par ‘torch_’ sont accessibles depuis cette "
+"fonction."
+
+msgid ""
+"A function of name %s was not found. Please check your spelling and that the "
+"desired function exists."
+msgstr ""
+"Impossible de trouver la fonction nommée %s . Veuillez vérifier "
+"l’orthographe et que la fonction désirée existe bien."
+
+msgid "You should specify a single size argument."
+msgstr "L’argument attendu ne doit comporter qu’une taille."
+
+msgid "This function is deprecated in favor of torch_arange."
+msgstr "Cette fonction est dépréciée et remplacée par ‘torch_arange’."
+
+msgid "device must be an integer between 0 and the number of devices minus 1"
+msgstr ""
+"‘device' doit être un entier entre 0 et le nombre d’éléments retranché de 1"
+
+msgid "type should not include an index because index was passed explicitly"
+msgstr ""
+"‘type' ne doit pas contenir d’index, car l’index a été fourni de manière "
+"explicite"
+
+msgid "bit64 is required to correctly show the seed."
+msgstr ""
+"‘bit64' est nécessaire pour visualiser correctement la graine aléatoire."
+
+msgid "Seed must an integer or integer64."
+msgstr "‘seed’ doit être de type ‘integer' ou ‘integer64’ ."
+
+msgid "Unexpected value"
+msgstr "Valeur inattendue"
+
+msgid "Torch is not installed, please run 'install_torch()'."
+msgstr "‘torch’ n’est pas installé, vous devez lancer ‘install_torch()’."
+
+msgid "not implemented"
+msgstr "non implémenté"
+
+msgid "`x` must be a tensor."
+msgstr "‘X’ doit être un tensor."
+
+msgid "Torch tensors do not have NAs!"
+msgstr "Les tenseurs torch n’ont pas de valeur NA!"
+
+msgid "Aborted."
+msgstr "Abandonné."
+
+msgid "currently unsuported"
+msgstr "non supporté pour le moment"
+
+msgid "argument 'out' must be a list of Tensors."
+msgstr "l’argument ‘out’ doit être une liste de tenseurs."
+
+msgid "expected tuple of"
+msgstr "un tuple de"
+
+msgid "elements but got"
+msgstr "éléments est attendu mais le tuple reçu en contient"

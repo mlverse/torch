@@ -1,0 +1,71 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: torch 0.11.0.9002\n"
+"POT-Creation-Date: 2023-09-26 15:31\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid "can only set to public, private and active"
+msgstr ""
+
+msgid "Because this function allows access to unexported functions, please use with caution, and\n            only if you are sure know what you are doing. Unexported functions will expect inputs that\n            are more C++-like than R-like. For example, they will expect all indexes to be 0-based instead\n            of 1-based. In addition unexported functions may be subject to removal from the API without\n            warning. Set quiet = TRUE to silence this warning."
+msgstr ""
+
+msgid "Only functions prefixed with 'torch_' are available from this function."
+msgstr ""
+
+msgid "A function of name %s was not found. Please check your spelling and that the desired function exists."
+msgstr ""
+
+msgid "You should specify a single size argument."
+msgstr ""
+
+msgid "This function is deprecated in favor of torch_arange."
+msgstr ""
+
+msgid "device must be an integer between 0 and the number of devices minus 1"
+msgstr ""
+
+msgid "type should not include an index because index was passed explicitly"
+msgstr ""
+
+msgid "bit64 is required to correctly show the seed."
+msgstr ""
+
+msgid "Seed must an integer or integer64."
+msgstr ""
+
+msgid "Unexpected value"
+msgstr ""
+
+msgid "Torch is not installed, please run 'install_torch()'."
+msgstr ""
+
+msgid "not implemented"
+msgstr ""
+
+msgid "`x` must be a tensor."
+msgstr ""
+
+msgid "Torch tensors do not have NAs!"
+msgstr ""
+
+msgid "Aborted."
+msgstr ""
+
+msgid "currently unsuported"
+msgstr ""
+
+msgid "argument 'out' must be a list of Tensors."
+msgstr ""
+
+msgid "expected tuple of"
+msgstr ""
+
+msgid "elements but got"
+msgstr ""
