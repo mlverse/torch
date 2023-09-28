@@ -3,17 +3,19 @@ msgstr ""
 "Project-Id-Version: torch 0.11.0.9002\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-09-28 23:44+0200\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
+"PO-Revision-Date: 2023-09-29 00:44+0200\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: fr\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Poedit 3.0.1\n"
 
 #: R7.R:46
 msgid "can only set to public, private and active"
-msgstr ""
+msgstr "ne peut être configuré qu’avec `public`, `private` ou `active`"
 
 #: autograd.R:167
 msgid "<torch_hook>"
@@ -31,24 +33,37 @@ msgid ""
 "removal from the API without\n"
 "            warning. Set quiet = TRUE to silence this warning."
 msgstr ""
+"Comme cette fonction ouvre l’accès aux fonctions non-exportées, utilisez-là "
+"avec prudence, et \n"
+"          seulement si vous êtes certains de ce que vous faites. Les "
+"fonctions non-exportées demandent\n"
+"          des entrées de type C++ plutôt que de type R. Par exemple, elles "
+"reposent sur l’indexation à 0 au lieu de\n"
+"          l’indexation à 1. De plus, les fonctions non-exportées pourront "
+"être supprimées sans préavis. \n"
+"          Configurez `quiet = TRUE` pour faire disparaitre ce message."
 
 #: call_torch_function.R:47
 msgid "Only functions prefixed with 'torch_' are available from this function."
 msgstr ""
+"Seules les fonctions préfixées par ‘torch_’ sont accessibles depuis cette "
+"fonction."
 
 #: call_torch_function.R:54
 msgid ""
 "A function of name %s was not found. Please check your spelling and that the "
 "desired function exists."
 msgstr ""
+"Impossible de trouver la fonction nommée %s . Veuillez vérifier "
+"l’orthographe et que la fonction désirée existe bien."
 
 #: codegen-utils.R:5
 msgid "Dimension is 1-based, but found 0."
-msgstr ""
+msgstr "La dimension doit être indexée à 1. Elle est indexée à 0."
 
 #: codegen-utils.R:40
 msgid "%s does not exist"
-msgstr ""
+msgstr "%s n'existe pas"
 
 #: compilation_unit.R:9
 msgid "<torch_compilation_unit>"
@@ -56,123 +71,133 @@ msgstr ""
 
 #: creation-ops.R:6 creation-ops.R:12
 msgid "You should specify a single size argument."
-msgstr ""
+msgstr "Vous ne devez utiliser qu'un seul argument."
 
 #: creation-ops.R:260
 msgid "This function is deprecated in favor of torch_arange."
-msgstr ""
+msgstr "Cette fonction est dépréciée et remplacée par ‘torch_arange’."
 
 #: creation-ops.R:380
 msgid "values must be length 1"
-msgstr ""
+msgstr "les valeurs doivent être de longueur 1"
 
 #: creation-ops.R:384
 msgid "value must be a length 1 vector"
-msgstr ""
+msgstr "la valeur doit être un vecteur de longueur 1"
 
 #: cuda.R:42
 msgid "device must be an integer between 0 and the number of devices minus 1"
-msgstr ""
+msgstr "‘device' doit être un entier entre 0 et le nombre de devices  moins un"
 
 #: device.R:12
 #, c-format
 msgid "type should not include an index because index was passed explicitly %s"
 msgstr ""
+"‘type' %s ne doit pas contenir d’index, car l’index a déjà été fourni de "
+"manière explicite"
 
 #: device.R:31 jit-execute.R:8 jit-execute.R:10 jit-execute.R:13
 #, c-format
 msgid "%s"
-msgstr ""
+msgstr "%s"
 
 #: device.R:110
 msgid "y is not a torch_device"
-msgstr ""
+msgstr "y n'est pas un device reconnu par torch"
 
 #: distributions-bernoulli.R:21
 msgid "Either `probs` or `logits` must be specified, but not both."
-msgstr ""
+msgstr "Vous pouvez configurer `probs` ou `logits` mais pas les deux."
 
 #: distributions-categorical.R:18
 msgid "Either `probs` or `logits` must be specified but not both."
-msgstr ""
+msgstr "Vous pouvez configurer `probs` ou `logits` mais pas les deux."
 
 #: distributions-categorical.R:23
 msgid "`probs` must be at least one-dimensional."
-msgstr ""
+msgstr "`probs` doit être au minimum à une dimension."
 
 #: distributions-categorical.R:29
 msgid "`logits` must be at least one-dimensional."
-msgstr ""
+msgstr "`logits` doit être au minimum à une dimension."
 
 #: distributions-constraints.R:38
 msgid "Cannot determine validity of dependent constraint"
-msgstr ""
+msgstr "Impossible de déterminer la validité de la constante liée"
 
 #: distributions-constraints.R:60
 msgid "Expected value$dim() >= %s but got %s"
-msgstr ""
+msgstr "La valeur attendue est `value$dim() >= %s` mais on trouve %s"
 
 #: distributions-mixture_same_family.R:20
 msgid "Mixture distribution must be distr_categorical."
-msgstr ""
+msgstr "Les lois de mélange doivent être de type `distr_categorial`."
 
 #: distributions-mixture_same_family.R:24
 msgid "Component distribution must be an instance of torch_Distribution."
 msgstr ""
+"Les lois à composantes  doivent être une instance de `torch_Distribution`."
 
 #: distributions-mixture_same_family.R:32
 msgid ""
 "Mixture distribution component (%s) does not equal "
 "component_distribution$batch_shape[-1] (%s)."
 msgstr ""
+"Les composantes  de la loi de mélange (%s) ne correspond pas à "
+"`component_distribution$batch_shape[-1]`(%s)."
 
 #: distributions-multivariate_normal.R:81
 msgid "loc must be at least one-dimensional."
-msgstr ""
+msgstr "`loc` doit être au minimum à une dimension."
 
 #: distributions-multivariate_normal.R:86
 msgid ""
 "Exactly one of covariance_matrix or precision_matrix or scale_tril may be "
 "specified."
 msgstr ""
+"Vous ne pouvez pas spécifier plus d'un paramètre parmi `covariance_matrix`, "
+"`precision_matrix` et `scale_tril`."
 
 #: distributions-multivariate_normal.R:93
 msgid "scale_tril matrix must be at least two-dimensional"
-msgstr ""
+msgstr "la matrice `scale_tril` doit être au minimum de dimension 2"
 
-#: distributions-multivariate_normal.R:94 distributions-multivariate_normal.R:104 distributions-multivariate_normal.R:116
+#: distributions-multivariate_normal.R:94
+#: distributions-multivariate_normal.R:104
+#: distributions-multivariate_normal.R:116
 msgid "with optional leading batch dimensions"
-msgstr ""
+msgstr "préfixé de manière optionnelle par la taille du batch"
 
 #: distributions-multivariate_normal.R:103
 msgid "covariance_matrix matrix must be at least two-dimensional"
-msgstr ""
+msgstr "`covariance_matrix` doit être au minimum de dimension 2"
 
 #: distributions-multivariate_normal.R:115
 msgid "precision_matrix matrix must be at least two-dimensional"
-msgstr ""
+msgstr "`precision_matrix` doit être au minimum de dimension 2"
 
 #: distributions.R:169
 msgid "The value argument to log_prob must be a Tensor"
-msgstr ""
+msgstr "La valeur de `log_prob` doit être un Tenseur"
 
 #: distributions.R:176
 msgid "The right-most size of value must match event_shape: %s vs %s."
-msgstr ""
+msgstr "La valeur la plus à droite (%s) doit être égale à `event_shape` (%s)"
 
 #: distributions.R:192
 msgid "Value is not broadcastable with batch_shape+event_shape: %s vs %s."
 msgstr ""
+"La valeur %s n'est pas distribuable avev `batch_shape + event_shape = %s `."
 
 #: distributions.R:199
 msgid "The value argument must be within the support"
-msgstr ""
+msgstr "Le paramêtre `value` doit être à l’intérieur du support"
 
 #: distributions.R:275
 msgid ""
 "Subclass %s of %s that defines a custom `initialize()` method must also "
 "define a custom `expand()` method."
-msgstr ""
+msgstr "La sous-classe %s de %s qui définit la méthode."
 
 #: dtype.R:9 layout.R:9 qscheme.R:9
 #, c-format
@@ -441,11 +466,13 @@ msgstr ""
 msgid "'zeros', 'border' and 'reflection'."
 msgstr ""
 
-#: operators.R:331 operators.R:339 operators.R:347 operators.R:363 operators.R:379
+#: operators.R:331 operators.R:339 operators.R:347 operators.R:363
+#: operators.R:379
 msgid "Torch tensors do not have NAs!"
 msgstr ""
 
-#: optim-adadelta.R:51 optim-adagrad.R:38 optim-adam.R:36 optim-asgd.R:32 optim-rmsprop.R:40 optim-rprop.R:30 optim-sgd.R:61
+#: optim-adadelta.R:51 optim-adagrad.R:38 optim-adam.R:36 optim-asgd.R:32
+#: optim-rmsprop.R:40 optim-rprop.R:30 optim-sgd.R:61
 msgid "Invalid learning rate: %s"
 msgstr ""
 

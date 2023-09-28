@@ -79,7 +79,7 @@ jit_trace <- function(func, ..., strict = TRUE) {
   }
 
   if (!rlang::is_closure(func)) {
-    value_error(gettext("jit_trace needs a function or nn_module.")
+    value_error(gettext("jit_trace needs a function or nn_module."))
   }
 
   ptr <- cpp_trace_function(tr_fn, list(...), .compilation_unit, strict, name = "name")

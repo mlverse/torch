@@ -392,7 +392,7 @@ nn_rnn <- nn_module(
     } else if (self$nonlinearity == "relu") {
       mode <- "RNN_RELU"
     } else {
-      value_error(gettext("Unknown nonlinearity '%s'", self$nonlinearity)
+      value_error(gettext("Unknown nonlinearity '%s'", self$nonlinearity))
     }
 
     super$initialize(mode,
