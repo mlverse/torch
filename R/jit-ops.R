@@ -54,10 +54,10 @@ print.torch_ops <- function(x, ...) {
       info <- cpp_jit_operator_info(opname)
       print(info)
     } else if ((typeof(x) == "list") && typeof(x[[1]]) == "character") {
-      cat("<torch_ops>: Handle to namespace ", x[[1]], "\n")
+      cat(gettextf("<torch_ops>: Handle to namespace  %s \n", x[[1]]))
     }
   } else {
-    cat("Object of class <torch_ops>\n")
+    cat(gettext("Object of class <torch_ops>\n"))
   }
 }
 

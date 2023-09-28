@@ -26,10 +26,10 @@ torch_lu <- function(A, pivot = TRUE, get_infos = FALSE, out = NULL) {
     }
 
     if (length(out) - as.integer(get_infos) != 2) {
-      stop(
-        "expected tuple of ", 2 + as.integer(get_infos), " elements but got ",
-        length(out)
-      )
+      stop(gettextf(
+        "expected tuple of %s elements but got %s",
+        2 + as.integer(get_infos), length(out))
+        )
     }
 
     for (i in seq_len(out)) {
@@ -181,7 +181,7 @@ torch_tensordot <- function(a, b, dims = 2) {
     }
 
     if (dims < 1) {
-      runtime_error("tensordot expects dims >= 1, but got {dims}")
+      runtime_error(gettext("tensordot expects dims >= 1, but got %s", dims))
     }
 
     dims_a <- seq(from = -dims, to = -1)

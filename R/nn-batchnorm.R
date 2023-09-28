@@ -174,7 +174,7 @@ nn_batch_norm1d <- nn_module(
   inherit = nn_batch_norm_,
   check_input_dim = function(input) {
     if (input$dim() != 2 && input$dim() != 3) {
-      value_error("expected 2D or 3D input (got {input$dim()}D input)")
+      value_error(gettext("expected 2D or 3D input (got %sD input)", input$dim()))
     }
   }
 )
@@ -247,7 +247,7 @@ nn_batch_norm2d <- nn_module(
   inherit = nn_batch_norm_,
   check_input_dim = function(input) {
     if (input$dim() != 4) {
-      value_error("expected 4D input (got {input$dim()}D input)")
+      value_error(gettext("expected 4D input (got %sD input)", input$dim()))
     }
   }
 )
@@ -326,7 +326,7 @@ nn_batch_norm3d <- nn_module(
   inherit = nn_batch_norm_,
   check_input_dim = function(input) {
     if (input$dim() != 5) {
-      value_error("expected 5D input (got {input$dim()}D input)")
+      value_error(gettext("expected 5D input (got %sD input)", input$dim()))
     }
   }
 )

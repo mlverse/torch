@@ -6,7 +6,7 @@ torch_layout <- R7Class(
       self$ptr <- ptr
     },
     print = function() {
-      cat("torch_", cpp_layout_to_string(self$ptr), sep = "")
+      cat(gettextf("torch_%s", cpp_layout_to_string(self$ptr)))
     }
   )
 )

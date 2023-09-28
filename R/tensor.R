@@ -52,7 +52,7 @@ Tensor <- R7Class(
         return(x)
       }
 
-      if (dim == 0) runtime_error("Indexing starts at 1 and got a 0.")
+      if (dim == 0) runtime_error(gettext("Indexing starts at 1 and got a 0."))
 
       if (dim > 0) {
         x[dim]
@@ -112,7 +112,7 @@ Tensor <- R7Class(
       }
 
       if (!device$type == "cuda") {
-        value_error("You must pass a cuda device.")
+        value_error(gettext("You must pass a cuda device."))
       }
 
       self$to(device = device, non_blocking = non_blocking, memory_format = memory_format)
@@ -177,14 +177,14 @@ Tensor <- R7Class(
     narrow = function(dim, start, length) {
       start <- torch_scalar_tensor(start, dtype = torch_int64())
       if (start$item() == 0) {
-        value_error("start indexing starts at 1")
+        value_error(gettext("start indexing starts at 1"))
       }
       start <- start - 1L
       private$`_narrow`(dim, start, length)
     },
     narrow_copy = function(dim, start, length) {
       if (start == 0) {
-        value_error("start indexing starts at 1")
+        value_error(gettext("start indexing starts at 1"))
       }
       start <- start - 1L
       private$`_narrow_copy`(dim, start, length)
@@ -195,7 +195,7 @@ Tensor <- R7Class(
       }
 
       if (!missing(dim) && !missing(other)) {
-        value_error("Can't set other and dim argumments.")
+        value_error(gettext("Can't set other and dim argumments."))
       }
 
       if (missing(dim)) {
@@ -213,7 +213,7 @@ Tensor <- R7Class(
       }
 
       if (!missing(dim) && !missing(other)) {
-        value_error("Can't set other and dim argumments.")
+        value_error(gettext("Can't set other and dim argumments."))
       }
 
       if (missing(dim)) {
@@ -330,7 +330,7 @@ prep_names <- function(..., self) {
 
   if (rlang::is_named(new_nms)) {
     if (!self$has_names()) {
-      runtime_error("The tensor doesn't have names so you can't rename a dimension.")
+      runtime_error(gettext("The tensor doesn't have names so you can't rename a dimension."))
     }
 
     nms <- self$names
@@ -410,7 +410,7 @@ as_array_impl <- function(x) {
 #' @export
 as_array.torch_tensor <- function(x) {
   if (x$device$type == "cuda") {
-    runtime_error("Can't convert cuda tensor to R. Convert to cpu tensor before.")
+    runtime_error(gettext("Can't convert cuda tensor to R. Convert to cpu tensor before."))
   }
 
   # dequantize before converting

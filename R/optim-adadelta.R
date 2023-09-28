@@ -48,11 +48,11 @@ optim_adadelta <- optimizer(
   "optim_adadelta",
   initialize = function(params, lr = 1.0, rho = 0.9, eps = 1e-6, weight_decay = 0) {
     if (lr < 0) {
-      value_error("Invalid learning rate: {lr}")
+      value_error(gettext("Invalid learning rate: %s", lr))
     }
 
     if (rho < 0 | rho > 1) {
-      value_error("Invalid rho value: {rho}")
+      value_error(gettext("Invalid rho value: %s", rho))
     }
 
     if (eps < 0) {
@@ -60,7 +60,7 @@ optim_adadelta <- optimizer(
     }
 
     if (weight_decay < 0) {
-      value_error("Invalid weight_decay value: {weight_decay}")
+      value_error(gettext("Invalid weight_decay value: %s", weight_decay))
     }
 
     defaults <- list(

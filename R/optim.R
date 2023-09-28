@@ -34,7 +34,7 @@ Optimizer <- R6::R6Class(
       } else if (rlang::is_named(params[[1]])) {
         param_groups <- params
       } else {
-        value_error("Wrong parameters specification.")
+        value_error(gettext("Wrong parameters specification."))
       }
       
       for (p in param_groups) {
@@ -45,7 +45,7 @@ Optimizer <- R6::R6Class(
     },
     add_param_group = function(param_group) {
       if (!rlang::is_named(param_group)) {
-        value_error("param group is not named")
+        value_error(gettext("param group is not named"))
       }
       
       params <- param_group$params
@@ -55,24 +55,24 @@ Optimizer <- R6::R6Class(
       
       for (param in param_group$params) {
         if (!is_torch_tensor(param)) {
-          value_error(
+          value_error(gettext(
             "optimizer can only optimize Tensors, ",
-            "but one of the params is {class(param)}"
-          )
+            "but one of the params is %s", class(param)
+          ))
         }
         
         if (!param$is_leaf) {
-          value_error("can't optimize a non-leaf Tensor")
+          value_error(gettext("can't optimize a non-leaf Tensor"))
         }
       }
       
       
       for (nm in names(self$defaults)) {
         if (is_optim_required(self$defaults[[nm]]) && !nm %in% names(param_group)) {
-          value_error(
+          value_error(gettext(
             "parameter group didn't specify a value of required ",
-            "optimization parameter {nm}"
-          )
+            "optimization parameter %s", nm
+          ))
         } else if (!nm %in% names(param_group)) {
           param_group[[nm]] <- self$defaults[[nm]]
         }
@@ -110,12 +110,12 @@ Optimizer <- R6::R6Class(
       
       # validate the state dict
       if (!length(self$param_groups) == length(state_dict$param_groups)) {
-        value_error("Loaded state dict has a different number of parameter groups")
+        value_error(gettext("Loaded state dict has a different number of parameter groups"))
       }
       
       for (i in seq_along(self$param_groups)) {
         if (!length(self$param_groups[[i]]$params) == length(state_dict$param_groups[[i]]$params)) {
-          value_error("Loaded state dict has contains a parameter group that doesn't match the size of optimizers group.")
+          value_error(gettext("Loaded state dict has contains a parameter group that doesn't match the size of optimizers group."))
         }
       }
       

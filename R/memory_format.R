@@ -6,7 +6,7 @@ MemoryFormat <- R7Class(
       ptr
     },
     print = function() {
-      cat("torch_", cpp_memory_format_to_string(ptr), "_format", sep = "")
+      cat(gettextf("torch_%s_format", cpp_memory_format_to_string(ptr)))
     }
   )
 )

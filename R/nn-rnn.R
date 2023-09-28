@@ -50,7 +50,7 @@ nn_rnn_base <- nn_module(
     } else if (mode == "RNN_RELU") {
       gate_size <- hidden_size
     } else {
-      value_error("Unrecognized RNN mode: {mode}")
+      value_error(gettext("Unrecognized RNN mode: %s", mode))
     }
 
     self$flat_weights_names_ <- list()
@@ -392,7 +392,7 @@ nn_rnn <- nn_module(
     } else if (self$nonlinearity == "relu") {
       mode <- "RNN_RELU"
     } else {
-      value_error("Unknown nonlinearity '{self$nonlinearity}'")
+      value_error(gettext("Unknown nonlinearity '%s'", self$nonlinearity)
     }
 
     super$initialize(mode,

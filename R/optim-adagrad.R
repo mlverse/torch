@@ -35,23 +35,23 @@ optim_adagrad <- optimizer(
   initialize = function(params, lr = 1e-2, lr_decay = 0, weight_decay = 0,
                         initial_accumulator_value = 0, eps = 1e-10) {
     if (lr < 0) {
-      value_error("Invalid learning rate: {lr)}")
+      value_error(gettext("Invalid learning rate: %s", lr))
     }
 
     if (lr_decay < 0) {
-      value_error("Invalid lr_decay value: {lr_decay}")
+      value_error(gettext("Invalid lr_decay value: %s", lr_decay))
     }
 
     if (weight_decay < 0) {
-      value_error("Invalid weight_decay value: {weight_decay}")
+      value_error(gettext("Invalid weight_decay value: %s", weight_decay))
     }
 
     if (initial_accumulator_value < 0) {
-      value_error("Invalid initial_accumulator_value value: {initial_accumulator_value}")
+      value_error(gettext("Invalid initial_accumulator_value value: %s", initial_accumulator_value))
     }
 
     if (eps < 0) {
-      value_error("Invalid epsilon value: {eps}")
+      value_error(gettext("Invalid epsilon value: %s", eps))
     }
 
     defaults <- list(

@@ -5,7 +5,7 @@ nn_dropout_nd <- nn_module(
   "nn_dropout_nd",
   initialize = function(p = 0.5, inplace = FALSE) {
     if (p < 0 || p > 1) {
-      value_error("dropout probability has to be between 0 and 1 but got {p}")
+      value_error(gettext("dropout probability has to be between 0 and 1 but got %s", p))
     }
 
     self$p <- p

@@ -15,18 +15,18 @@ Categorical <- R6::R6Class(
     has_enumerate_support = TRUE,
     initialize = function(probs = NULL, logits = NULL, validate_args = NULL) {
       if (is.null(probs) == is.null(logits)) {
-        value_error("Either probs or logits must be specified but not both.")
+        value_error(gettext("Either `probs` or `logits` must be specified but not both."))
       }
 
       if (!is.null(probs)) {
         if (probs$dim() < 1) {
-          value_error("`probs` must be at least one-dimensional.")
+          value_error(gettext("`probs` must be at least one-dimensional."))
         }
 
         self$.probs <- probs / probs$sum(-1, keepdim = TRUE)
       } else {
         if (logits$dim() < 1) {
-          value_error("`logits` must be at least one-dimensional.")
+          value_error(gettext("`logits` must be at least one-dimensional."))
         }
 
         self$.logits <- logits - logits$logsumexp(dim = -1, keepdim = TRUE)

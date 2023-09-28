@@ -35,7 +35,7 @@ Constraint <- R6::R6Class(
   inherit = Constraint,
   public = list(
     check = function(x) {
-      value_error("Cannot determine validity of dependent constraint")
+      value_error(gettext("Cannot determine validity of dependent constraint"))
     }
   )
 )
@@ -57,7 +57,7 @@ is_dependent <- function(object) {
       result <- self$base_constraint$check(value)
       if (result$dim() < self$reinterpreted_batch_ndims) {
         expected <- self$base_constraint$event_dim + self$reinterpreted_batch_ndims
-        value_error("Expected value$dim() >= {expected} but got {value$dim()}")
+        value_error(gettext("Expected value$dim() >= %s but got %s", expected, value$dim()))
       }
       result <- result$reshape(c(head(result$shape, result$dim() - self$reinterpreted_batch_ndims), -1))
       result <- result$all(dim = -1)

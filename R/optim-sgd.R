@@ -58,19 +58,19 @@ optim_sgd <- optimizer(
   initialize = function(params, lr = optim_required(), momentum = 0, dampening = 0,
                         weight_decay = 0, nesterov = FALSE) {
     if (!is_optim_required(lr) && lr < 0) {
-      value_error("Invalid learning rate: {lr}")
+      value_error(gettext("Invalid learning rate: %s", lr))
     }
 
     if (momentum < 0) {
-      value_error("Invalid momentum value: {momentum}")
+      value_error(gettext("Invalid momentum value: %s", momentum))
     }
 
     if (weight_decay < 0) {
-      value_error("Invalid weight_decay value: {weight_decay}")
+      value_error(gettext("Invalid weight_decay value: %s", weight_decay))
     }
 
     if (nesterov && (momentum <= 0 || dampening != 0)) {
-      value_error("Nesterov momentum requires a momentum and zero dampening")
+      value_error(gettext("Nesterov momentum requires a momentum and zero dampening"))
     }
 
     defaults <- list(

@@ -9,7 +9,7 @@
 #' @export
 jit_tuple <- function(x) {
   if (!is.list(x)) {
-    runtime_error("Argument 'x' must be a list.")
+    runtime_error(gettext("Argument 'x' must be a list."))
   }
 
   class(x) <- c(class(x), "jit_tuple")
@@ -26,7 +26,7 @@ jit_tuple <- function(x) {
 #' @export
 jit_scalar <- function(x) {
   if (!rlang::is_scalar_atomic(x)) {
-    runtime_error("Argument 'x' must be scalar atomic.")
+    runtime_error(gettext("Argument 'x' must be scalar atomic."))
   }
 
   class(x) <- c(class(x), "jit_scalar")

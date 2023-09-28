@@ -213,7 +213,7 @@ nnf_multilabel_soft_margin_loss <- function(input, target, weight = NULL, reduct
   } else if (reduction == "sum") {
     ret <- loss$sum()
   } else {
-    value_error("reduction is not valid.")
+    value_error(gettext("reduction is not valid."))
   }
 
   ret

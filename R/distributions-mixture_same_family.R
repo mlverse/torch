@@ -17,11 +17,11 @@ MixtureSameFamily <- R6::R6Class(
       self$.component_distribution <- component_distribution
 
       if (!inherits(self$.mixture_distribution, "torch_Categorical")) {
-        value_error("Mixture distribution must be distr_categorical.")
+        value_error(gettext("Mixture distribution must be distr_categorical."))
       }
 
       if (!inherits(self$.component_distribution, "torch_Distribution")) {
-        value_error("Component distribution must be an instance of torch_Distribution.")
+        value_error(gettext("Component distribution must be an instance of torch_Distribution."))
       }
 
       cdbs <- head2(self$.component_distribution$batch_shape, -1)
@@ -29,7 +29,7 @@ MixtureSameFamily <- R6::R6Class(
       kc <- tail(self$.component_distribution$batch_shape, 1)
 
       if (!is.null(km) && !is.null(kc) && km != kc) {
-        value_error("Mixture distribution component ({km}) does not equal component_distribution$batch_shape[-1] ({kc}).")
+        value_error(gettext("Mixture distribution component (%s) does not equal component_distribution$batch_shape[-1] (%s).", km, kc))
       }
 
       self$.num_components <- km

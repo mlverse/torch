@@ -7,20 +7,20 @@ nn_conv_nd <- nn_module(
                         padding, dilation, transposed, output_padding,
                         groups, bias, padding_mode) {
     if (in_channels %% groups != 0) {
-      value_error("in_channels must be divisable by groups")
+      value_error(gettext("in_channels must be divisable by groups"))
     }
 
     if (out_channels %% groups != 0) {
-      value_error("out_channels must be divisable by groups")
+      value_error(gettext("out_channels must be divisable by groups"))
     }
 
     valid_padding_modes <- c("zeros", "reflect", "replicate", "circular")
 
     if (!padding_mode %in% valid_padding_modes) {
-      value_error(
-        "padding_mode must be one of [{paste(valid_padding_modes, collapse = ', ')}],",
-        "but got padding_mode='{padding_mode}'."
-      )
+      value_error(gettext(
+        "padding_mode must be one of [%s], but got padding_mode='%s'.",
+        paste(valid_padding_modes, collapse = ', '), padding_mode
+      ))
     }
 
     self$in_channels <- in_channels
@@ -506,7 +506,7 @@ nn_conv_transpose_nd <- nn_module(
                         padding, dilation, transposed, output_padding,
                         groups, bias, padding_mode) {
     if (padding_mode != "zeros") {
-      value_error("Only 'zeros' padding is supported.")
+      value_error(gettext("Only 'zeros' padding is supported."))
     }
 
     super$initialize(
@@ -526,7 +526,8 @@ nn_conv_transpose_nd <- nn_module(
       }
 
       if (length(output_size) != k) {
-        value_error("output_size must have {k} or {k+2} elements (got {length(output_size)})")
+        value_error(gettext("output_size must have %s or %s elements (got %s)",
+                            k, k + 2, length(output_size)))
       }
 
       min_sizes <- list()
@@ -546,11 +547,11 @@ nn_conv_transpose_nd <- nn_module(
         max_size <- max_sizes[[i]]
 
         if (size < min_size || size > max_size) {
-          value_error(
-            "requested an output of size {output_size}, but valid",
-            "sizes range from {min_size} to {max_size} (for an input",
-            "of size {input$size()[-c(1,2)]}"
-          )
+          value_error(gettext(
+            "requested an output of size %s, but valid",
+            "sizes range from %s to %s (for an input of size %s)",
+            output_size, min_size, max_size, input$size()[-c(1,2)]
+          ))
         }
       }
 
@@ -683,7 +684,7 @@ nn_conv_transpose1d <- nn_module(
   },
   forward = function(input, output_size = NULL) {
     if (self$padding_mode != "zeros") {
-      value_error("Only `zeros` padding mode is supported for ConvTranspose1d")
+      value_error(gettext("Only `zeros` padding mode is supported for ConvTranspose1d"))
     }
 
     output_padding <- self$.output_padding(
@@ -840,7 +841,7 @@ nn_conv_transpose2d <- nn_module(
   },
   forward = function(input, output_size = NULL) {
     if (self$padding_mode != "zeros") {
-      value_error("Only `zeros` padding mode is supported for ConvTranspose2d")
+      value_error(gettext("Only `zeros` padding mode is supported for ConvTranspose2d"))
     }
 
     output_padding <- self$.output_padding(
@@ -994,7 +995,7 @@ nn_conv_transpose3d <- nn_module(
   },
   forward = function(input, output_size = NULL) {
     if (self$padding_mode != "zeros") {
-      value_error("Only `zeros` padding mode is supported for ConvTranspose3d")
+      value_error(gettext("Only `zeros` padding mode is supported for ConvTranspose3d"))
     }
 
     output_padding <- self$.output_padding(

@@ -757,7 +757,7 @@ nn_multihead_attention <- nn_module(
     self$head_dim <- embed_dim %/% num_heads
 
     if ((self$head_dim * num_heads) != self$embed_dim) {
-      value_error("embed_dim must be divisible by num_heads")
+      value_error(gettext("embed_dim must be divisible by num_heads"))
     }
 
     if (!self$qkv_same_embed_dim_) {

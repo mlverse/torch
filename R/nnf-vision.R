@@ -93,10 +93,10 @@ nnf_grid_sample <- function(input, grid, mode = c("bilinear", "nearest"),
   } else if (mode == "nearest") {
     mode_enum <- 1
   } else {
-    value_error(
-      "Unknown mode name '{mode}'. Supported modes are 'bilinear'",
-      "and 'nearest'."
-    )
+    value_error(gettext(
+      "Unknown mode name '%s'. Supported modes are 'bilinear'",
+      "and 'nearest'.", mode
+    ))
   }
 
 
@@ -107,10 +107,10 @@ nnf_grid_sample <- function(input, grid, mode = c("bilinear", "nearest"),
   } else if (padding_mode == "reflection") {
     padding_mode_enum <- 2
   } else {
-    value_error(
-      "Unknown padding mode name '{padding_mode}'. Supported modes are",
-      "'zeros', 'border' and 'reflection'."
-    )
+    value_error(gettext(
+      "Unknown padding mode name '%s'. Supported modes are",
+      "'zeros', 'border' and 'reflection'.", padding_mode
+    ))
   }
 
   torch_grid_sampler(

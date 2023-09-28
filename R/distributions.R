@@ -166,16 +166,16 @@ Distribution <- R6::R6Class(
     #' computed by the `log_prob` method.
     .validate_sample = function(value) {
       if (!inherits(value, "torch_tensor")) {
-        value_error("The value argument to log_prob must be a Tensor")
+        value_error(gettext("The value argument to log_prob must be a Tensor"))
       }
 
       event_dim_start <- length(value$size()) - length(private$.event_shape)
 
       if (value$size()[event_dim_start, ] != private$.event_shape) {
-        value_error(
-          "The right-most size of value must match event_shape:
-           {value$size()} vs {private$.event_shape}."
-        )
+        value_error(gettext(
+          "The right-most size of value must match event_shape: %s vs %s.", 
+          value$size(), private$.event_shape
+        ))
       }
 
       actual_shape <- value$size()
@@ -188,15 +188,15 @@ Distribution <- R6::R6Class(
         j <- expected_shape[idx]
 
         if (i != 1 && j != 1 && i != j) {
-          value_error(
-            "Value is not broadcastable with
-             batch_shape+event_shape: {actual_shape} vs {expected_shape}."
-          )
+          value_error(gettext(
+            "Value is not broadcastable with batch_shape+event_shape: %s vs %s.",
+            actual_shape, expected_shape
+          ))
         }
       }
 
       if (!self$support$check(value)$all()) {
-        value_error("The value argument must be within the support")
+        value_error(gettext("The value argument must be within the support"))
       }
     },
 
@@ -271,12 +271,10 @@ Distribution <- R6::R6Class(
     .get_checked_instance = function(cls, .instance = NULL, .args) {
       if (is.null(.instance) && !identical(self$initialize, cls$initialize)) {
         #' TODO: consider different message
-        not_implemented_error(
-          "Subclass {paste0(class(self), collapse = ' ')} of ",
-          "{paste0(class(cls), collapse = ' ')} ",
-          "that defines a custom `initialize()` method ",
-          "must also define a custom `expand()` method."
-        )
+        not_implemented_error(gettext(
+          "Subclass %s of %s that defines a custom `initialize()` method must also define a custom `expand()` method.", 
+          paste0(class(self), collapse = ' '), paste0(class(cls), collapse = ' ')
+        ))
       }
 
       if (is.null(.instance)) {

@@ -67,7 +67,7 @@ jit_trace <- function(func, ..., strict = TRUE) {
 
   if (inherits(func, "nn_module")) {
     if (inherits(func, "nn_module_generator")) {
-      value_error("You must initialize the nn_module before tracing.")
+      value_error(gettext("You must initialize the nn_module before tracing."))
     }
 
     args <- list(
@@ -79,7 +79,7 @@ jit_trace <- function(func, ..., strict = TRUE) {
   }
 
   if (!rlang::is_closure(func)) {
-    value_error("jit_trace needs a function or nn_module.")
+    value_error(gettext("jit_trace needs a function or nn_module.")
   }
 
   ptr <- cpp_trace_function(tr_fn, list(...), .compilation_unit, strict, name = "name")
@@ -123,7 +123,7 @@ jit_save <- function(obj, path, ...) {
   } else if (inherits(obj, "script_module")) {
     obj$..ptr..()$save(path)
   } else {
-    value_error("Only `script_function` or `script_module` can be saved with `jit_save`.")
+    value_error(gettext("Only `script_function` or `script_module` can be saved with `jit_save`."))
   }
 
   invisible(obj)
@@ -182,7 +182,7 @@ new_script_function <- function(ptr) {
 
 #' @export
 print.script_function <- function(x, ...) {
-  cat("<script_function>\n")
+  cat(gettext("<script_function>\n"))
 }
 
 #' @export
@@ -278,18 +278,18 @@ jit_trace_module <- function(mod, ..., strict = TRUE) {
   inputs <- rlang::list2(...)
 
   if (!inherits(mod, "nn_module")) {
-    value_error("`mod` must be a `nn_module()`.")
+    value_error(gettext("`mod` must be a `nn_module()`."))
   }
 
   if (!rlang::is_named(inputs)) {
-    value_error("Arguments passed trough `...` must be named.")
+    value_error(gettext("Arguments passed trough `...` must be named."))
   }
 
   module <- create_script_module(mod)
 
   for (name in names(inputs)) {
     if (!rlang::is_closure(mod[[name]])) {
-      value_error("Method '{name}' does not exist in `mod` and therefore can't be traced.")
+      value_error(gettext("Method '%s' does not exist in `mod` and therefore can't be traced.",name))
     }
 
     inp <- inputs[[name]]
@@ -340,7 +340,7 @@ jit_save_for_mobile <- function(obj, path, ...) {
   } else if (inherits(obj, "script_module")) {
     obj$..ptr..()$save_for_mobile(path)
   } else {
-    value_error("Only `script_function` or `script_module` can be saved with `jit_save`.")
+    value_error(gettext("Only `script_function` or `script_module` can be saved with `jit_save`."))
   }
 
   invisible(obj)

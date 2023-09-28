@@ -33,23 +33,23 @@ optim_adam <- optimizer(
   initialize = function(params, lr = 1e-3, betas = c(0.9, 0.999), eps = 1e-8,
                         weight_decay = 0, amsgrad = FALSE) {
     if (lr < 0) {
-      value_error("Invalid learning rate: {lr}")
+      value_error(gettext("Invalid learning rate: %s", lr))
     }
 
     if (eps < 0) {
-      value_error("Invalid eps: {eps}")
+      value_error(gettext("Invalid eps: %s", eps))
     }
 
     if (betas[[1]] < 0 || betas[[1]] > 1) {
-      value_error("Invalid beta parameter at index 1")
+      value_error(gettext("Invalid beta parameter at index 1"))
     }
 
     if (betas[[2]] < 0 || betas[[2]] > 1) {
-      value_error("Invalid beta parameter at index 2")
+      value_error(gettext("Invalid beta parameter at index 2"))
     }
 
     if (weight_decay < 0) {
-      value_error("Invalid weight decay value: {weight_decay}")
+      value_error(gettext("Invalid weight decay value: %s", weight_decay))
     }
 
     defaults <- list(

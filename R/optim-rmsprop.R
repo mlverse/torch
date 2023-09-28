@@ -37,19 +37,19 @@ optim_rmsprop <- optimizer(
   initialize = function(params, lr = 1e-2, alpha = 0.99, eps = 1e-8,
                         weight_decay = 0, momentum = 0, centered = FALSE) {
     if (lr < 0) {
-      value_error("Invalid learning rate: {lr}")
+      value_error(gettext("Invalid learning rate: %s", lr))
     }
     if (eps < 0) {
-      value_error("Invalid epsilon value: {eps}")
+      value_error(gettext("Invalid epsilon value: %s", eps))
     }
     if (momentum < 0) {
-      value_error("Invalid momentum value: {momentum}")
+      value_error(gettext("Invalid momentum value: %s", momentum))
     }
     if (weight_decay < 0) {
-      value_error("Invalid weight_decay value: {weight_decay}")
+      value_error(gettext("Invalid weight_decay value: %s", weight_decay))
     }
     if (alpha < 0) {
-      value_error("Invalid alpha value: {alpha}")
+      value_error(gettext("Invalid alpha value: %s", alpha))
     }
 
     defaults <- list(

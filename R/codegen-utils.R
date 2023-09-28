@@ -2,7 +2,7 @@ as_1_based_dim <- function(x) {
   x <- as.integer(x)
 
   if (any(x == 0)) {
-    value_error("Dimension is 1-based, but found 0.")
+    value_error(gettext("Dimension is 1-based, but found 0."))
   }
 
   ifelse(x > 0, x - 1, x)
@@ -37,7 +37,7 @@ call_c_function <- function(fun_name, args, expected_types, nd_args, return_type
   f <- getNamespace("torch")[[fun_name]]
 
   if (is.null(f)) {
-    value_error("{fun_name} does not exist")
+    value_error(gettext("%s does not exist", fun_name))
   }
 
   out <- do_call(f, args)

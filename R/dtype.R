@@ -6,7 +6,7 @@ torch_dtype <- R7Class(
       ptr
     },
     print = function() {
-      cat("torch_", self$.type(), "\n", sep = "")
+      cat(gettextf("torch_%s\n", self$.type()))
     },
     .type = function() {
       cpp_dtype_to_string(self$ptr)
@@ -159,7 +159,7 @@ torch_qint32 <- function() torch_dtype$new(cpp_torch_qint32())
 #' @export
 `==.torch_dtype` <- function(e1, e2) {
   if (!is_torch_dtype(e1) || !is_torch_dtype(e2)) {
-    runtime_error("One of the objects is not a dtype. Comparison is not possible.")
+    runtime_error(gettext("One of the objects is not a dtype. Comparison is not possible."))
   }
   cpp_dtype_to_string(e1$ptr) == cpp_dtype_to_string(e2$ptr)
 }

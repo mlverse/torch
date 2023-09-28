@@ -367,10 +367,10 @@ optim_lbfgs <- optimizer(
     super$initialize(params, defaults)
 
     if (length(self$param_groups) != 1) {
-      value_error(
+      value_error(gettext(
         "LBFGS doesn't support per-parameter options ",
         "(parameter groups)"
-      )
+      ))
     }
 
     private$.params <- self$param_groups[[1]][["params"]]
@@ -524,7 +524,7 @@ optim_lbfgs <- optimizer(
 
         if (!is.null(line_search_fn)) {
           if (line_search_fn != "strong_wolfe") {
-            value_error("only strong_wolfe is supported")
+            value_error(gettext("only strong_wolfe is supported"))
           } else {
             x_init <- private$.clone_param()
 

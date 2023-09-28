@@ -995,10 +995,10 @@ nn_multi_margin_loss <- nn_module(
   initialize = function(p = 1, margin = 1, weight = NULL, reduction = "mean") {
     super$initialize(weight = weight, reduction = reduction)
     if (p != 1 && p != 2) {
-      value_error("only p == 1 or p == 2 are supported.")
+      value_error(gettext("only p == 1 or p == 2 are supported."))
     }
     if (!is.null(weight) && weight$dim() != 1) {
-      value_error("weight must be NULL or 1-dimensional")
+      value_error(gettext("weight must be NULL or 1-dimensional"))
     }
     self$p <- p
     self$margin <- margin

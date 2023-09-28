@@ -78,18 +78,18 @@ MultivariateNormal <- R6::R6Class(
     initialize = function(loc, covariance_matrix = NULL, precision_matrix = NULL,
                           scale_tril = NULL, validate_args = NULL) {
       if (loc$dim() < 1) {
-        value_error("loc must be at least one-dimensional.")
+        value_error(gettext("loc must be at least one-dimensional."))
       }
 
       if ((!is.null(covariance_matrix) + !is.null(precision_matrix) +
         !is.null(scale_tril)) != 1) {
-        value_error("Exactly one of covariance_matrix or precision_matrix or scale_tril may be specified.")
+        value_error(gettext("Exactly one of covariance_matrix or precision_matrix or scale_tril may be specified."))
       }
 
 
       if (!is.null(scale_tril)) {
         if (scale_tril$dim() < 2) {
-          value_error(paste0(
+          value_error(gettext(
             "scale_tril matrix must be at least two-dimensional ",
             "with optional leading batch dimensions"
           ))
@@ -99,7 +99,7 @@ MultivariateNormal <- R6::R6Class(
         self$scale_tril <- scale_tril$expand(c(batch_shape, c(-1, -1)))
       } else if (!is.null(covariance_matrix)) {
         if (covariance_matrix$dim() < 2) {
-          value_error(paste0(
+          value_error(gettext(
             "covariance_matrix matrix must be at least two-dimensional ",
             "with optional leading batch dimensions"
           ))
@@ -111,7 +111,7 @@ MultivariateNormal <- R6::R6Class(
         self$covariance_matrix <- covariance_matrix$expand(c(batch_shape, c(-1, -1)))
       } else {
         if (precision_matrix$dim() < 2) {
-          value_error(paste0(
+          value_error(gettext(
             "precision_matrix matrix must be at least two-dimensional ",
             "with optional leading batch dimensions"
           ))

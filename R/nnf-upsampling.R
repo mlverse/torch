@@ -57,14 +57,14 @@ nnf_interpolate <- function(input, size = NULL, scale_factor = NULL,
   # be non-None, and it will be a list (or tuple).
 
   if (!is.null(size) && !is.null(scale_factor)) {
-    value_error("only one of size or scale_factor should be defined")
+    value_error(gettext("only one of size or scale_factor should be defined"))
   } else if (!is.null(size)) {
     scale_factors <- NULL
     if (length(size) == 1) {
       output_size <- rep(size, dim)
     } else {
       if (length(size) != dim) {
-        value_error("size shape must match input shape. Input is {dim}D, size is {length(size)}")
+        value_error(gettext("size shape must match input shape. Input is %sD, size is %s",dim ,length(size)))
       }
       output_size <- size
     }
@@ -74,12 +74,12 @@ nnf_interpolate <- function(input, size = NULL, scale_factor = NULL,
       scale_factors <- rep(scale_factor, dim)
     } else {
       if (length(scale_factor) != dim) {
-        value_error("scale_factor shape must match input shape. Input is {dim}D, size is {length(size)}")
+        value_error(gettext("scale_factor shape must match input shape. Input is %sD, size is %s",dim ,length(size)))
       }
       scale_factors <- scale_factor
     }
   } else {
-    value_error("either size or scale_factor should be defined")
+    value_error(gettext("either size or scale_factor should be defined"))
   }
 
   # "area" mode always requires an explicit size rather than scale factor.

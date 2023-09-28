@@ -15,7 +15,7 @@ ScriptModule <- R7Class(
     },
     register_buffer = function(name, tensor, persistent = TRUE) {
       if (!persistent) {
-        runtime_error("ScriptModule does not support non persistent buffers.")
+        runtime_error(gettext("ScriptModule does not support non persistent buffers."))
       }
       cpp_jit_script_module_register_buffer(self, name, tensor)
       invisible(self)
@@ -26,7 +26,7 @@ ScriptModule <- R7Class(
       }
 
       if (!inherits(module, "torch_script_module")) {
-        runtime_error("Script modules can only register Script modules children.")
+        runtime_error(gettext("Script modules can only register Script modules children."))
       }
 
       if (is.numeric(name)) {
@@ -170,7 +170,7 @@ new_script_module <- function(ptr) {
     inputs <- list(...)
 
     if (is.null(ptr$find_method("forward"))) {
-      runtime_error("Forward is not defined. Methods from submodules of traced modules are not traced. Are you trying to call from a submodule?")
+      runtime_error(gettext("Forward is not defined. Methods from submodules of traced modules are not traced. Are you trying to call from a submodule?"))
     }
 
     out <- cpp_call_jit_script(ptr, inputs)
@@ -191,7 +191,7 @@ ScriptMethod <- R7Class(
       ptr
     },
     print = function() {
-      cat("<script_method>\n")
+      cat(gettext("<script_method>\n"))
     },
     graph_for = function(...) {
       # we only implement python's fallback method which calls the graph and

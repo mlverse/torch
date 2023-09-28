@@ -27,7 +27,7 @@ Scalar <- R7Class(
       f(self$ptr)
     },
     print = function() {
-      cat("torch_scalar\n")
+      cat(gettext("torch_scalar\n"))
     }
   ),
   active = list(

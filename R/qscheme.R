@@ -6,7 +6,7 @@ QScheme <- R6::R6Class(
       self$ptr <- ptr
     },
     print = function() {
-      cat("torch_", cpp_qscheme_to_string(self$ptr), sep = "")
+      cat(gettextf("torch_%s", cpp_qscheme_to_string(self$ptr)))
     }
   )
 )

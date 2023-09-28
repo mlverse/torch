@@ -80,7 +80,7 @@ nnf_embedding_bag <- function(input, weight, offsets = NULL, max_norm = NULL,
                               include_last_offset = FALSE, padding_idx = NULL) {
   if (input$dim() == 2) {
     if (!is.null(offsets)) {
-      value_error("if input is 2D, then offsets has to be NULL")
+      value_error(gettext("if input is 2D, then offsets has to be NULL"))
     }
     
     offsets <- torch_arange(0, input$numel(), input$size(2), 

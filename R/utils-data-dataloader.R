@@ -117,9 +117,9 @@ dataloader <- function(dataset, batch_size = 1, shuffle = FALSE,
     )
 
     if (any(b <- sapply(worker_globals, inherits, "notfound"))) {
-      runtime_error(
-        "Could not find an object with name '{names(worker_globals)[b]}'."
-      )
+      runtime_error(gettext(
+        "Could not find an object with name '%s'.",names(worker_globals)[b]
+      ))
     }
   }
 
@@ -438,7 +438,7 @@ MultiProcessingDataLoaderIter <- R6::R6Class(
         worker$session$poll_process(-1)
         status <- worker$session$read() ## just so the worker is marked as idle
         if (status$code != 200) {
-          runtime_error("Failed starting the worker.")
+          runtime_error(gettext("Failed starting the worker."))
         }
 
         # move fetcher to each session
@@ -485,12 +485,12 @@ MultiProcessingDataLoaderIter <- R6::R6Class(
         # wait for the process to be ready
         p <- task$session$poll_process(timeout = self$.timeout)
         if (p == "timeout") {
-          runtime_error("dataloader worker timed out.")
+          runtime_error(gettext("dataloader worker timed out."))
         }
         # read results
         result <- task$session$read() 
         
-        # Raise error that might have hapened in the subprocess.
+        # Raise error that might have happened in the subprocess.
         if (!is.null(result$error)) {
           if (packageVersion("callr") >= "3.7.1") {
             rlang::abort(
@@ -528,7 +528,7 @@ MultiProcessingDataLoaderIter <- R6::R6Class(
           # timeout for the dataloader is in milliseconds.
           time_passed <- time_passed + socket_select_timeout
           if (self$.timeout > 0 && (time_passed*1000) > self$.timeout) {
-            runtime_error("dataloader worker timed out.")
+            runtime_error(gettext("dataloader worker timed out."))
           }
         }
         

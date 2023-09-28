@@ -274,11 +274,10 @@ unpool_output_size <- function(input, kernel_size, stride, padding, output_size)
     }
 
     if (length(output_size) != length(kernel_size)) {
-      value_error(
-        "output_size should be a sequence containing ",
-        "{length(kernel_size)} or {length(kernel_size) + 2} elements",
-        "but it has a length of '{length(output_size)}'"
-      )
+      value_error(gettext(
+        "output_size should be a sequence containing %s or %s elements but it has a length of '%s'", 
+        length(kernel_size), length(kernel_size) + 2, length(output_size)
+      ))
     }
 
     for (d in seq_along(kernel_size)) {
@@ -449,7 +448,7 @@ nnf_fractional_max_pool3d <- function(input, kernel_size, output_size = NULL, ou
                                       return_indices = FALSE, random_samples = NULL) {
   if (is.null(output_size)) {
     if (is.null(output_ratio)) {
-      value_error("output_ratio should not be NULL if output_size is NULL")
+      value_error(gettext("output_ratio should not be NULL if output_size is NULL"))
     }
 
     output_ratio_ <- nn_util_triple(output_ratio)

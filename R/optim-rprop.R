@@ -27,10 +27,10 @@ optim_rprop <- optimizer(
   "optim_rprop",
   initialize = function(params, lr = 1e-2, etas = c(0.5, 1.2), step_sizes = c(1e-6, 50)) {
     if (lr < 0) {
-      value_error("Invalid learning rate: {lr}")
+      value_error(gettext("Invalid learning rate: %s", lr))
     }
     if (etas[[1]] < 0 || etas[[1]] > 1.0 || etas[[2]] < 1) {
-      value_error("Invalid eta values: {etas[[1]]}, {etas[[2]]}")
+      value_error(gettext("Invalid eta values: %s, %s", etas[[1]], etas[[2]]))
     }
     defaults <- list(lr = lr, etas = etas, step_sizes = step_sizes)
     super$initialize(params, defaults)

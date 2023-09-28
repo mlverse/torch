@@ -795,7 +795,7 @@ nnf_sigmoid <- function(input) {
 #' @export
 nnf_contrib_sparsemax <- function(input, dim = -1) {
   if (!is_torch_tensor(input)) {
-    value_error("Input should be a tensor and got '{class(input)}.")
+    value_error(gettext("Input should be a tensor and got '%s'.", class(input)))
   }
 
   dim <- as_1_based_dim(dim)

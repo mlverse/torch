@@ -3,14 +3,14 @@ FunctionSchema <- R7Class(
   public = list(
     print = function() {
       cat(paste0("function_schema (name = ", self$name, ")\n"))
-      cat("arguments: ")
+      cat(gettext("arguments: "))
       if (!is.null(names(self$arguments))) {
-        cat(paste(names(self$arguments), self$arguments, sep = " - ", collapse = ", "), "\n")
+        cat(gettextf("%s \n", paste(names(self$arguments), self$arguments, sep = " - ", collapse = ", ")))
       } else {
-        cat(paste(self$arguments, collapse = ", "), "\n")
+        cat(gettextf("%s \n", paste(self$arguments, collapse = ", ")))
       }
-      cat("returns: ")
-      cat(paste(self$returns, collapse = ", "), "\n")
+      cat(gettext("returns: "))
+      cat(gettextf("%s \n", paste(self$returns, collapse = ", ")))
     }
   ),
   active = list(

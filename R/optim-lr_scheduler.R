@@ -32,7 +32,7 @@ LRScheduler <- R6::R6Class(
           optimizer$param_groups,
           function(group) {
             if (is.null(group[["initial_lr"]])) {
-              value_error("param 'inital_lr' not is not specified.")
+              value_error(gettext("param 'inital_lr' not is not specified."))
             }
           }
         )
@@ -72,7 +72,7 @@ LRScheduler <- R6::R6Class(
     },
     print_lr = function(is_verbose, group, lr) {
       if (is_verbose) {
-        inform(sprintf("Adjusting learning rate of group %s to %.4f", group, lr))
+        inform(gettext("Adjusting learning rate of group %s to %.4f", group, lr))
       }
     },
     step = function() {
@@ -175,10 +175,10 @@ lr_lambda <- lr_scheduler(
       if (length(lr_lambda) != length(optimizer$param_groups)) {
         i <- length(lr_lambda)
         j <- length(optimizer$param_groups)
-        value_error(
-          "lr_lambda length ({i}) is different from the number of",
-          "optimizer$param_grpups ({j})"
-        )
+        value_error(gettext(
+          "lr_lambda length (%s) is different from the number of",
+          "optimizer$param_grpups (%s)", i, j
+        ))
       }
 
       self$lr_lambdas <- lr_lambda
@@ -233,10 +233,10 @@ lr_multiplicative <- lr_scheduler(
       if (length(lr_lambda) != length(optimizer$param_groups)) {
         i <- length(lr_lambda)
         j <- length(optimizer$param_groups)
-        value_error(
-          "lr_lambda length ({i}) is different from the number of",
-          "optimizer$param_grpups ({j})"
-        )
+        value_error(gettext(
+          "lr_lambda length (%s) is different from the number of",
+          "optimizer$param_grpups (%s)", i, j
+        ))
       }
 
       self$lr_lambdas <- lr_lambda
@@ -422,20 +422,20 @@ lr_one_cycle <- lr_scheduler(
 
     # Validate total_steps
     if (is.null(total_steps) && is.null(epochs) && is.null(steps_per_epoch)) {
-      value_error("You must define either total_steps OR (epochs AND steps_per_epoch)")
+      value_error(gettext("You must define either total_steps OR (epochs AND steps_per_epoch)"))
     } else if (!is.null(total_steps)) {
       if (!is.numeric(total_steps) || total_steps <= 0) {
-        value_error("Expected positive integer total_steps, but got {total_steps}")
+        value_error(gettext("Expected positive integer total_steps, but got %s", total_steps))
       }
 
       self$total_steps <- total_steps
     } else {
       if (!is.numeric(epochs) || epochs <= 0) {
-        value_error("Expected positive integer epochs, but got {epochs}")
+        value_error(gettext("Expected positive integer epochs, but got %s", epochs))
       }
 
       if (!is.numeric(steps_per_epoch) || steps_per_epoch <= 0) {
-        value_error("Expected positive integer steps_per_epoch, but got {steps_per_epoch}")
+        value_error(gettext("Expected positive integer steps_per_epoch, but got %s", steps_per_epoch))
       }
 
       self$total_steps <- epochs * steps_per_epoch
@@ -446,12 +446,12 @@ lr_one_cycle <- lr_scheduler(
 
     # Validate pct_start
     if (!is.numeric(pct_start) || pct_start < 0 || pct_start > 1) {
-      value_error("Expected float between 0 and 1 pct_start, but got {pct_start}")
+      value_error(gettext("Expected float between 0 and 1 pct_start, but got %s", pct_start))
     }
 
     # Validate anneal_strategy
     if (!anneal_strategy %in% c("cos", "linear")) {
-      value_error("anneal_strategy must by one of 'cos' or 'linear', instead got {anneal_strategy}")
+      value_error(gettext("anneal_strategy must by one of 'cos' or 'linear', instead got %s", anneal_strategy))
     } else if (anneal_strategy == "cos") {
       self$anneal_func <- self$.annealing_cos
     } else if (anneal_strategy == "linear") {
@@ -475,7 +475,7 @@ lr_one_cycle <- lr_scheduler(
     if (self$cycle_momentum) {
       if ((!"momentum" %in% names(self$optimizer$defaults)) &&
         !("betas" %in% names(self$optimizer$defaults))) {
-        value_error("optimizer must support momentum with `cycle momentum` enabled")
+        value_error(gettext("optimizer must support momentum with `cycle momentum` enabled"))
       }
 
       self$use_beta1 <- "betas" %in% names(self$optimizer$defaults)
@@ -502,10 +502,10 @@ lr_one_cycle <- lr_scheduler(
   .format_param = function(name, optimizer, param) {
     if (is.list(param) || length(param) > 1) {
       if (length(param) != length(optimizer$param_groups)) {
-        value_error(
-          "expected {length(optimizer$param_groups)} values for {name}",
-          "but got {length(param)}"
-        )
+        value_error(gettext(
+          "expected %s values for %s but got %s", 
+          length(optimizer$param_groups), name, length(param)
+        ))
       }
 
       return(param)
@@ -718,10 +718,10 @@ lr_reduce_on_plateau <- lr_scheduler(
   },
   .init_is_better = function(mode, threshold, threshold_mode) {
     if (!mode %in% list('min', 'max')) {
-      value_error("mode {mode} is unknown!")
+      value_error(gettext("mode %s is unknown!", mode))
     }
     if (!threshold_mode %in% list('rel', 'abs')) {
-      value_error("threshold mode {threshold_mode} is unknown!")
+      value_error(gettext("threshold mode %s is unknown!", threshold_mode))
     }
     if (mode == 'min') {
       self$mode_worse <- Inf

@@ -29,11 +29,11 @@ optim_asgd <- optimizer(
   initialize = function(params, lr = 1e-2, lambda = 1e-4,
                         alpha = 0.75, t0 = 1e6, weight_decay = 0) {
     if (lr < 0) {
-      value_error("Invalid learning rate: {lr}")
+      value_error(gettext("Invalid learning rate: %s", lr))
     }
 
     if (weight_decay < 0) {
-      value_error("Invalid weight_decay value: {weight_decay}")
+      value_error(gettext("Invalid weight decay value: %s", weight_decay))
     }
 
     defaults <- list(

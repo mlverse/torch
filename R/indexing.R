@@ -35,7 +35,7 @@ slc <- function(start, end, step = 1) {
 
 #' @export
 print.slice <- function(x, ...) {
-  cat("<slice>\n")
+  cat(gettext("<slice>\n"))
 }
 
 .d <- list(

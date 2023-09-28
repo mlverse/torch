@@ -103,8 +103,8 @@ nn_Module <- R6::R6Class(
                   memory_format = torch_preserve_format()) {
       if (!is.null(dtype)) {
         if (!dtype$is_floating_point) {
-          value_error("nn.Module.to only accepts floating point '
-                      'dtypes, but got desired dtype {dtype}")
+          value_error(gettext("nn.Module.to only accepts floating point '
+                      'dtypes, but got desired dtype %s", dtype))
         }
       }
 
@@ -189,7 +189,7 @@ nn_Module <- R6::R6Class(
             }
           }
         } else {
-          value_error("Could not find {key} in the state_dict.")
+          value_error(gettext("Could not find %s in the state_dict.", key))
         }
       }
     },
@@ -274,11 +274,11 @@ nn_Module <- R6::R6Class(
   active = list(
     parameters = function(value, recursive = TRUE) {
       if (!missing(value)) {
-        runtime_error(
+        runtime_error(gettext(
           "It's not possible to modify the parameters list.\n",
           " You can modify the parameter in-place or use",
           " `module$parameter_name <- new_value`"
-        )
+        ))
       }
 
       pars <- lapply(private$modules_, function(x) x$parameters)
@@ -290,11 +290,11 @@ nn_Module <- R6::R6Class(
     },
     buffers = function(value) {
       if (!missing(value)) {
-        runtime_error(
+        runtime_error(gettext(
           "It's not possible to modify the buffers list.\n",
           " You can modify the parameter in-place or use",
           " `module$parameter_name <- new_value`"
-        )
+        ))
       }
 
       bufs <- lapply(private$modules_, function(x) x$buffers)
@@ -306,10 +306,10 @@ nn_Module <- R6::R6Class(
     },
     modules = function(value) {
       if (!missing(value)) {
-        runtime_error(
+        runtime_error(gettext(
           "It's not possible to modify the modules list.\n",
           " You can modify the modules in-place"
-        )
+        ))
       }
 
       modules <- lapply(private$modules_, function(x) x$modules)
@@ -326,10 +326,10 @@ nn_Module <- R6::R6Class(
     },
     children = function(value) {
       if (!missing(value)) {
-        runtime_error(
+        runtime_error(gettext(
           "It's not possible to modify the children list.\n",
           " You can modify the modules in-place"
-        )
+        ))
       }
 
       private$modules_

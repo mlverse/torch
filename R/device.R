@@ -9,7 +9,7 @@ Device <- R7Class(
 
       if (grepl(":", type, fixed = TRUE)) {
         if (!is.null(index)) {
-          stop("type should not include an index because index was passed explicitly ", type)
+          stop(gettextf("type should not include an index because index was passed explicitly %s", type))
         }
 
         spl <- strsplit(type, ":", fixed = TRUE)[[1]]
@@ -28,7 +28,7 @@ Device <- R7Class(
         s <- paste0(s, ", index=", self$index, ")")
       }
 
-      cat(s, "\n")
+      cat(gettextf("%s \n", s))
     }
   ),
   active = list(
@@ -107,7 +107,7 @@ is_meta_device <- function(x) {
 #' @export
 `==.torch_device` <- function(x, y) {
   if (!is_torch_device(y)) {
-    runtime_error("y is not a torch_device")
+    runtime_error(gettext("y is not a torch_device"))
   }
   x$type == y$type && identical(x$index, y$index)
 }
