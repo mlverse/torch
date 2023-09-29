@@ -1,8 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: torch 0.11.0.9002\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-09-28 23:44+0200\n"
+"POT-Creation-Date: 2023-09-29 17:32+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -76,7 +75,8 @@ msgstr ""
 
 #: device.R:12
 #, c-format
-msgid "type should not include an index because index was passed explicitly %s"
+msgid ""
+"type '%s' should not include an index because index was passed explicitly."
 msgstr ""
 
 #: device.R:31 jit-execute.R:8 jit-execute.R:10 jit-execute.R:13
@@ -334,11 +334,11 @@ msgid "Unknown nonlinearity '%s'"
 msgstr ""
 
 #: nn-sparse.R:67 nn-sparse.R:70 nn-sparse.R:167 nn-sparse.R:170
-msgid "padding idx must be within num_embeddings"
+msgid "'padding_idx' must be within num_embeddings"
 msgstr ""
 
 #: nn-sparse.R:87 nn-sparse.R:187
-msgid "Shape of weight does not match num_embeddings and embedding_dim"
+msgid "Shape of '.weight' does not match num_embeddings and embedding_dim"
 msgstr ""
 
 #: nn-utils.R:7
@@ -498,7 +498,7 @@ msgid "only strong_wolfe is supported"
 msgstr ""
 
 #: optim-lr_scheduler.R:35
-msgid "param 'inital_lr' not is not specified."
+msgid "parameter 'inital_lr' is not specified."
 msgstr ""
 
 #: optim-lr_scheduler.R:75
