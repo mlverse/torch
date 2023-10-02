@@ -126,3 +126,13 @@ extract_method <- function(self, name, call = TRUE) {
 print.R7 <- function(x, ...) {
   x$print(...)
 }
+
+#' @export
+length.R7 <- function(x) {
+  tryCatch(
+    x$length(), 
+    error = function(err) {
+      cli::cli_abort("{.val length} is not support for objects with class {.cls {class(x)}}")
+    }
+  )
+}
