@@ -181,11 +181,6 @@ dim.torch_tensor <- function(x) {
 }
 
 #' @export
-length.torch_tensor <- function(x) {
-  prod(dim(x))
-}
-
-#' @export
 as.numeric.torch_tensor <- function(x, ...) {
   as.numeric(as_array(x))
 }

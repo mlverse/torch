@@ -172,3 +172,20 @@ test_that("can get a single element using `[[`", {
   ds <- tensor_dataset(torch_rand(11,3), torch_rand(11,1))
   expect_equal(dim(ds[[1]][[1]]), 3)
 })
+
+test_that("can have a dataset named torch_tensor", {
+
+  ds <- dataset("torch_tensor",
+    initialize = function() {
+    },
+    .getitem = function(id) {
+      torch::torch_tensor(1)
+    },
+    .length = function() 1L
+  )
+  
+  expect_no_error({
+    a <- ds()
+  })
+  
+})

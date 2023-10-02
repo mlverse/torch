@@ -45,6 +45,9 @@ Tensor <- R7Class(
     dim = function() {
       cpp_tensor_ndim(self)
     },
+    length = function() {
+      prod(dim(self))
+    },
     size = function(dim) {
       x <- cpp_tensor_dim(self$ptr)
 
