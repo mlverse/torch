@@ -11,6 +11,7 @@
 - Added support for iterable datasets. (#1095)
 - Fixed name of the `out_features` attribute in the `nn_linear` module. (#1097)
 - Fixed issues when loading the state dict of optimizers and learning rate schedulers. (#1100)
+- Fixed bug when cloning `nn_module`s with empty state dicts. (#1108)
 
 # torch 0.11.0
 
