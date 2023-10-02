@@ -78,7 +78,7 @@ nnf_hardswish <- function(input, inplaxce = FALSE) {
 #'
 #' @export
 nnf_hardswish <- function(input, inplace = FALSE) {
-  not_implemented_error("not yet implemented.")
+  not_implemented_error(gettext("not yet implemented."))
 }
 
 #' Hardshrink

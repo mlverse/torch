@@ -105,6 +105,6 @@ nn_adaptive_log_softmax_with_loss <- nn_module(
       osz <- self$cutoffs[i + 1] - self$cutoffs[i]
     }
 
-    not_implemented_error("not yet implemented")
+    not_implemented_error(gettext("not yet implemented"))
   }
 )

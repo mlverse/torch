@@ -270,7 +270,7 @@ rnn.get_cudnn_mode <- function(mode) {
   } else if (mode == "GRU") {
     3L
   } else {
-    not_implemented_error("No cudnn backend for mode '{mode}'")
+    not_implemented_error(gettext("No cudnn backend for mode '%s'", mode))
   }
 }
 

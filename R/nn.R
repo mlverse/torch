@@ -19,7 +19,7 @@ nn_Module <- R6::R6Class(
     training = TRUE,
     initialize = function() {},
     forward = function(...) {
-      not_implemented_error("Forward method is not implemented")
+      not_implemented_error(gettext("Forward method is not implemented"))
     },
     add_module = function(name, module) {
       self$register_module(name, module)

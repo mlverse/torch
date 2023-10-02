@@ -39,7 +39,7 @@ nn_norm_base_ <- nn_module(
     }
   },
   check_input_dim = function(input) {
-    not_implemented_error("not implemented")
+    not_implemented_error(gettext("not implemented"))
   },
   reset_parameters = function() {
     self$reset_running_stats()

@@ -86,7 +86,7 @@ nn_init_calculate_gain <- function(nonlinearity, param = NULL) {
     }
     return(sqrt(2 / (1 + negative_slope^2)))
   } else {
-    not_implemented_error("Unsupported nonlinearity: {nonlinearity}")
+    not_implemented_error(gettext("Unsupported nonlinearity: %s",nonlinearity))
   }
 }
 

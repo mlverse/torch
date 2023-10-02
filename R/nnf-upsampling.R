@@ -141,15 +141,15 @@ nnf_interpolate <- function(input, size = NULL, scale_factor = NULL,
   }
 
   if (input$dim() == 3 && mode == "bilinear") {
-    not_implemented_error("Got 3D input, but bilinear mode needs 4D input")
+    not_implemented_error(gettext("Got 3D input, but bilinear mode needs 4D input"))
   }
 
   if (input$dim() == 3 && mode == "trilinear") {
-    not_implemented_error("Got 3D input, but trilinear mode needs 5D input")
+    not_implemented_error(gettext("Got 3D input, but trilinear mode needs 5D input"))
   }
 
   if (input$dim() == 4 && mode == "linear") {
-    not_implemented_error("Got 4D input, but trilinear mode needs 3D input")
+    not_implemented_error(gettext("Got 4D input, but trilinear mode needs 3D input"))
   }
 
   if (input$dim() == 4 && mode == "bilinear") {
@@ -161,15 +161,15 @@ nnf_interpolate <- function(input, size = NULL, scale_factor = NULL,
   }
 
   if (input$dim() == 4 && mode == "trilinear") {
-    not_implemented_error("Got 4D input, but trilinear mode needs 5D input")
+    not_implemented_error(gettext("Got 4D input, but trilinear mode needs 5D input"))
   }
 
   if (input$dim() == 5 && mode == "linear") {
-    not_implemented_error("Got 5D input, but trilinear mode needs 3D input")
+    not_implemented_error(gettext("Got 5D input, but trilinear mode needs 3D input"))
   }
 
   if (input$dim() == 5 && mode == "bilinear") {
-    not_implemented_error("Got 5D input, but bilinear mode needs 4D input")
+    not_implemented_error(gettext("Got 5D input, but bilinear mode needs 4D input"))
   }
 
   if (input$dim() == 5 && mode == "trilinear") {

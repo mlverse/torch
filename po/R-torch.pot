@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: torch 0.11.0.9002\n"
-"POT-Creation-Date: 2023-09-29 17:32+0200\n"
+"POT-Creation-Date: 2023-10-02 09:03+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -241,6 +241,10 @@ msgstr ""
 msgid "embed_dim must be divisible by num_heads"
 msgstr ""
 
+#: nn-batchnorm.R:42 nn-init.R:229 nn-init.R:421
+msgid "not implemented"
+msgstr ""
+
 #: nn-batchnorm.R:177
 msgid "expected 2D or 3D input (got %sD input)"
 msgstr ""
@@ -301,8 +305,8 @@ msgstr ""
 msgid "dropout probability has to be between 0 and 1 but got %s"
 msgstr ""
 
-#: nn-init.R:229 nn-init.R:421
-msgid "not implemented"
+#: nn-init.R:89
+msgid "Unsupported nonlinearity: %s"
 msgstr ""
 
 #: nn-loss.R:998
@@ -329,6 +333,10 @@ msgstr ""
 msgid "Unrecognized RNN mode: %s"
 msgstr ""
 
+#: nn-rnn.R:273
+msgid "No cudnn backend for mode '%s'"
+msgstr ""
+
 #: nn-rnn.R:395
 msgid "Unknown nonlinearity '%s'"
 msgstr ""
@@ -343,6 +351,10 @@ msgstr ""
 
 #: nn-utils.R:7
 msgid "Input dimension should be at least %s."
+msgstr ""
+
+#: nn.R:22
+msgid "Forward method is not implemented"
 msgstr ""
 
 #: nn.R:106
@@ -387,6 +399,14 @@ msgstr ""
 msgid "`x` must be a tensor."
 msgstr ""
 
+#: nn_adaptive.R:108
+msgid "not yet implemented"
+msgstr ""
+
+#: nnf-activation.R:81
+msgid "not yet implemented."
+msgstr ""
+
 #: nnf-activation.R:798
 msgid "Input should be a tensor and got '%s'."
 msgstr ""
@@ -423,6 +443,30 @@ msgstr ""
 
 #: nnf-upsampling.R:82
 msgid "either size or scale_factor should be defined"
+msgstr ""
+
+#: nnf-upsampling.R:144
+msgid "Got 3D input, but bilinear mode needs 4D input"
+msgstr ""
+
+#: nnf-upsampling.R:148
+msgid "Got 3D input, but trilinear mode needs 5D input"
+msgstr ""
+
+#: nnf-upsampling.R:152
+msgid "Got 4D input, but trilinear mode needs 3D input"
+msgstr ""
+
+#: nnf-upsampling.R:164
+msgid "Got 4D input, but trilinear mode needs 5D input"
+msgstr ""
+
+#: nnf-upsampling.R:168
+msgid "Got 5D input, but trilinear mode needs 3D input"
+msgstr ""
+
+#: nnf-upsampling.R:172
+msgid "Got 5D input, but bilinear mode needs 4D input"
 msgstr ""
 
 #: nnf-vision.R:97
@@ -650,7 +694,7 @@ msgid "start indexing starts at 1"
 msgstr ""
 
 #: tensor.R:198 tensor.R:216
-msgid "Can't set other and dim argumments."
+msgid "Can't set other and dim arguments."
 msgstr ""
 
 #: tensor.R:333

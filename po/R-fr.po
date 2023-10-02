@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: torch 0.11.0.9002\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-09-29 17:32+0200\n"
-"PO-Revision-Date: 2023-09-29 18:30+0200\n"
+"POT-Creation-Date: 2023-10-02 09:03+0200\n"
+"PO-Revision-Date: 2023-10-02 09:09+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: fr\n"
@@ -11,7 +11,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Poedit 3.3.2\n"
+"X-Generator: Poedit 3.0.1\n"
 
 #: R7.R:46
 msgid "can only set to public, private and active"
@@ -269,6 +269,10 @@ msgstr "torch_%s_format"
 msgid "embed_dim must be divisible by num_heads"
 msgstr "‘embed_dim’ doit être divisible par ‘num_heads’"
 
+#: nn-batchnorm.R:42 nn-init.R:229 nn-init.R:421
+msgid "not implemented"
+msgstr "pas implémenté"
+
 #: nn-batchnorm.R:177
 msgid "expected 2D or 3D input (got %sD input)"
 msgstr "tenseur d’entrée attendu en 2D ou 3D (tenseur %sD reçu)"
@@ -335,9 +339,9 @@ msgstr ""
 msgid "dropout probability has to be between 0 and 1 but got %s"
 msgstr "la probabilité de ‘dropout’ doit être entre 0 et 1 (actuellement %s)"
 
-#: nn-init.R:229 nn-init.R:421
-msgid "not implemented"
-msgstr "pas implémenté"
+#: nn-init.R:89
+msgid "Unsupported nonlinearity: %s"
+msgstr "Non-linearité inconnue : %s"
 
 #: nn-loss.R:998
 msgid "only p == 1 or p == 2 are supported."
@@ -363,6 +367,10 @@ msgstr "‘output_ratio’ doit être entre 0 et 1."
 msgid "Unrecognized RNN mode: %s"
 msgstr "Le mode du RNN %s est inconnu"
 
+#: nn-rnn.R:273
+msgid "No cudnn backend for mode '%s'"
+msgstr "Pas de support matériel de cudnn pour le mode '%s'"
+
 #: nn-rnn.R:395
 msgid "Unknown nonlinearity '%s'"
 msgstr "Non-linearité inconnue : %s"
@@ -380,6 +388,10 @@ msgstr ""
 #: nn-utils.R:7
 msgid "Input dimension should be at least %s."
 msgstr "Les dimensions de l’entrée devraient être au moins de %s."
+
+#: nn.R:22
+msgid "Forward method is not implemented"
+msgstr "la méthode 'forward' n'est pas implémentée"
 
 #: nn.R:106
 msgid ""
@@ -425,6 +437,14 @@ msgstr "La liste des enfants n’est pas modifiable."
 msgid "`x` must be a tensor."
 msgstr "‘X’ doit être un tensor."
 
+#: nn_adaptive.R:108
+msgid "not yet implemented"
+msgstr "pas implémenté"
+
+#: nnf-activation.R:81
+msgid "not yet implemented."
+msgstr "pas implémenté"
+
 #: nnf-activation.R:798
 msgid "Input should be a tensor and got '%s'."
 msgstr "L’entrée doit être un tenseur. Actuellement c’est un ‘%s’."
@@ -468,6 +488,30 @@ msgstr ""
 #: nnf-upsampling.R:82
 msgid "either size or scale_factor should be defined"
 msgstr "vous devez définir soit ‘size’ soit ‘scale_factor’"
+
+#: nnf-upsampling.R:144
+msgid "Got 3D input, but bilinear mode needs 4D input"
+msgstr "L'entrée est en 3D, alors que le mode bilinéaire réclame du 4D."
+
+#: nnf-upsampling.R:148
+msgid "Got 3D input, but trilinear mode needs 5D input"
+msgstr "L'entrée est en 3D, alors que le mode trilinéaire réclame du 5D."
+
+#: nnf-upsampling.R:152
+msgid "Got 4D input, but trilinear mode needs 3D input"
+msgstr "L'entrée est en 4D, alors que le mode trilinéaire réclame du 3D."
+
+#: nnf-upsampling.R:164
+msgid "Got 4D input, but trilinear mode needs 5D input"
+msgstr "L'entrée est en 4D, alors que le mode trilinéaire réclame du 5D."
+
+#: nnf-upsampling.R:168
+msgid "Got 5D input, but trilinear mode needs 3D input"
+msgstr "L'entrée est en 5D, alors que le mode trilinéaire réclame du 3D."
+
+#: nnf-upsampling.R:172
+msgid "Got 5D input, but bilinear mode needs 4D input"
+msgstr "L'entrée est en 5D, alors que le mode bilinéaire réclame du 4D."
 
 #: nnf-vision.R:97
 msgid "Unknown mode name '%s'. Supported modes are 'bilinear'"
@@ -711,8 +755,8 @@ msgid "start indexing starts at 1"
 msgstr "‘start’ doit être indexé à 1"
 
 #: tensor.R:198 tensor.R:216
-msgid "Can't set other and dim argumments."
-msgstr "Les arguments ‘dim’ et ‘other’ sont manquants."
+msgid "Can't set other and dim arguments."
+msgstr "Les arguments ‘dim’ et ‘other’ ne peuvent pas être établis."
 
 #: tensor.R:333
 msgid "The tensor doesn't have names so you can't rename a dimension."
