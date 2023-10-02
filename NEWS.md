@@ -13,6 +13,7 @@
 - Fixed issues when loading the state dict of optimizers and learning rate schedulers. (#1100)
 - Fixed bug when cloning `nn_module`s with empty state dicts. (#1108)
 - `distr_multivariate_normal` now correctly handles precision matrix's. (#1110)
+- Moved `length.torch_tensor` implementation to R7 to avoid problems when a torch dataset has the `torch_tensor` class. (#1111)
 
 # torch 0.11.0
 
