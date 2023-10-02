@@ -47,7 +47,7 @@ Since version 0.1.1 torch supports GPU installation on Windows. In order to use 
 
 -   Have a CUDA compatible NVIDIA GPU. You can find if you have a CUDA compatible GPU [here](https://developer.nvidia.com/cuda-gpus#compute).
 
--   Have properly installed the NVIDIA CUDA toolkit version 11.7. For CUDA v11.7, follow the installation instructions [here](https://docs.nvidia.com/cuda/archive/11.7.0/index.html). **Note**: The version of the CUDA toolkit must match exactly what's mentioed above.
+-   Have properly installed the NVIDIA CUDA toolkit version 11.7. For CUDA v11.7, follow the installation instructions [here](https://developer.nvidia.com/cuda-11-7-0-download-archive). **Note**: The version of the CUDA toolkit must match exactly what's mentioed above.
 
 -   Have installed cuDNN - a version compatible with CUDA v11.7. Follow the installation instructions available [here](https://developer.nvidia.com/cudnn).
 

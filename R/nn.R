@@ -522,21 +522,23 @@ create_nn_module_callable <- function(instance) {
   instance$clone <- function(deep = FALSE, ..., replace_values = TRUE) {
     if (deep && replace_values) {
       state_dict <- append(instance$parameters, instance$buffers)
-      names(state_dict) <- sapply(state_dict, xptr_address)
+      if (length(state_dict) > 0) {
+        names(state_dict) <- sapply(state_dict, xptr_address)
       
-      state_dict <- state_dict[!duplicated(names(state_dict))]
-      state_dict <- lapply(state_dict, function(x) x$detach()$clone())  
-      
-      # also need to append a clone of the modules to this list.
-      # child modules can be duplicated - and have the same name
-      # child modules are also deep cloned, but we don't need to replace
-      # their values when cloning because we only have to do it once.
-      children <- instance$children
-      names(children) <- sapply(children, rlang::obj_address)
-      children <- children[!duplicated(names(children))]
-      children <- lapply(children, function(x) x$clone(deep = deep, replace_values = FALSE))
-      
-      state_dict <- append(state_dict, children)
+        state_dict <- state_dict[!duplicated(names(state_dict))]
+        state_dict <- lapply(state_dict, function(x) x$detach()$clone())  
+        
+        # also need to append a clone of the modules to this list.
+        # child modules can be duplicated - and have the same name
+        # child modules are also deep cloned, but we don't need to replace
+        # their values when cloning because we only have to do it once.
+        children <- instance$children
+        names(children) <- sapply(children, rlang::obj_address)
+        children <- children[!duplicated(names(children))]
+        children <- lapply(children, function(x) x$clone(deep = deep, replace_values = FALSE))
+        
+        state_dict <- append(state_dict, children)
+      }
     }
     
     cloned_instance <- clone(deep = deep)

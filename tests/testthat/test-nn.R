@@ -802,3 +802,11 @@ test_that("can use a named module dict", {
   expect_tensor_shape(z, c(100, 1))
   expect_equal(length(dict$parameters), 4)
 })
+
+test_that("can clone a module with no state dict", {
+
+  expect_no_error({
+    nn_relu()$clone(TRUE)
+  })
+  
+})
