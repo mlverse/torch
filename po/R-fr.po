@@ -3,8 +3,8 @@ msgstr ""
 "Project-Id-Version: torch 0.11.0.9002\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-10-02 09:03+0200\n"
-"PO-Revision-Date: 2023-10-02 09:09+0200\n"
-"Last-Translator: \n"
+"PO-Revision-Date: 2023-10-04 00:28+0200\n"
+"Last-Translator: Christophe Regouby <christophe.regouby@free.fr>\n"
 "Language-Team: \n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
@@ -132,12 +132,12 @@ msgstr "La valeur attendue est `value$dim() >= %s` mais on trouve %s"
 
 #: distributions-mixture_same_family.R:20
 msgid "Mixture distribution must be distr_categorical."
-msgstr "Les lois de mélange doivent être de type `distr_categorial`."
+msgstr "La distribution de mélange doitt être de type `distr_categorial`."
 
 #: distributions-mixture_same_family.R:24
 msgid "Component distribution must be an instance of torch_Distribution."
 msgstr ""
-"Les lois à composantes  doivent être une instance de `torch_Distribution`."
+"La distribution composante doit être une instance de `torch_Distribution`."
 
 #: distributions-mixture_same_family.R:32
 msgid ""
