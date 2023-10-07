@@ -89,3 +89,13 @@ test_that("properites", {
   expect_tensor_shape(m$variance, c(2))
   expect_tensor_shape(m$entropy(), 1)
 })
+
+test_that("works with precision matrix", {
+
+  dist <- distr_multivariate_normal(torch_ones(2), precision_matrix = torch_eye(2))
+  
+  expect_no_error({
+    dist$sample(10)
+  })
+  
+})

@@ -82,7 +82,7 @@ MultivariateNormal <- R6::R6Class(
       }
 
       if ((!is.null(covariance_matrix) + !is.null(precision_matrix) +
-        !is.null(scale_tril)) != 1) {
+        !is.null(scale_tril)) != 2) {
         value_error(gettext("Exactly one of covariance_matrix or precision_matrix or scale_tril may be specified."))
       }
 
