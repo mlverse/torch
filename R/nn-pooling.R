@@ -686,7 +686,7 @@ nn_fractional_max_pool2d <- nn_module(
     }
 
     if (!is.null(output_ratio) && !is.null(output_size)) {
-      value_error("both output_size and oytput_ratio are not NULL")
+      value_error("both output_size and output_ratio are not NULL")
     }
 
     if (!is.null(output_ratio)) {
@@ -759,7 +759,7 @@ nn_fractional_max_pool3d <- nn_module(
     }
 
     if (!is.null(output_ratio) && !is.null(output_size)) {
-      value_error("both output_size and oytput_ratio are not NULL")
+      value_error("both output_size and output_ratio are not NULL")
     }
 
     if (!is.null(output_ratio)) {
