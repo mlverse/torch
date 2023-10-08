@@ -35,7 +35,7 @@ optim_adagrad <- optimizer(
   initialize = function(params, lr = 1e-2, lr_decay = 0, weight_decay = 0,
                         initial_accumulator_value = 0, eps = 1e-10) {
     if (lr < 0) {
-      value_error("Invalid learning rate: {lr)}")
+      value_error("Invalid learning rate: {lr}")
     }
 
     if (lr_decay < 0) {

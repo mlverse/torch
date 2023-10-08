@@ -198,7 +198,7 @@ Tensor <- R7Class(
       }
 
       if (!missing(dim) && !missing(other)) {
-        value_error("Can't set other and dim argumments.")
+        value_error("Can't set other and dim arguments.")
       }
 
       if (missing(dim)) {
@@ -216,7 +216,7 @@ Tensor <- R7Class(
       }
 
       if (!missing(dim) && !missing(other)) {
-        value_error("Can't set other and dim argumments.")
+        value_error("Can't set other and dim arguments.")
       }
 
       if (missing(dim)) {
