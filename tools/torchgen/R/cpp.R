@@ -3,7 +3,7 @@ cpp_method <- function(decl) {
   decl %>%
     glue::glue_data(
 "
-// [[Rcpp::export]]
+// [[Rcpp::export(rng=false)]]
 {cpp_type(.)} {cpp_method_name(.)} ({cpp_signature(.)}) {{
   {cpp_method_body(.)}
 }}
@@ -16,7 +16,7 @@ cpp_namespace <- function(decl) {
   decl %>%
     glue::glue_data(
       "
-// [[Rcpp::export]]
+// [[Rcpp::export(rng=false)]]
 {cpp_type(.)} {cpp_namespace_name(.)} ({cpp_signature(.)}) {{
   {cpp_namespace_body(.)}
 }}
