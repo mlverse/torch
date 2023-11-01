@@ -1021,7 +1021,7 @@ nn_multi_margin_loss <- nn_module(
 #' \eqn{(N, D)}.
 #'
 #' The distance swap is described in detail in the paper
-#' [Learning shallow convolutional feature descriptors with triplet losses](http://www.bmva.org/bmvc/2016/papers/paper119/index.html) by
+#' [Learning shallow convolutional feature descriptors with triplet losses](https://paperswithcode.com/paper/learning-local-feature-descriptors-with) by
 #' V. Balntas, E. Riba et al.
 #'
 #' The loss function for each sample in the mini-batch is:
@@ -1042,7 +1042,7 @@ nn_multi_margin_loss <- nn_module(
 #' @param margin (float, optional): Default: \eqn{1}.
 #' @param p (int, optional): The norm degree for pairwise distance. Default: \eqn{2}.
 #' @param swap (bool, optional): The distance swap is described in detail in the paper
-#'   [Learning shallow convolutional feature descriptors with triplet losses](http://www.bmva.org/bmvc/2016/papers/paper119/index.html) by
+#'   [Learning shallow convolutional feature descriptors with triplet losses](https://paperswithcode.com/paper/learning-local-feature-descriptors-with) by
 #'   V. Balntas, E. Riba et al. Default: `FALSE`.
 #' @param eps constant to avoid NaN's
 #' @param reduction (string, optional): Specifies the reduction to apply to the output:
@@ -1127,7 +1127,7 @@ nn_triplet_margin_loss <- nn_module(
 #'   margins penalize cases where the negative examples are not distant enough from the
 #'   anchors, relative to the positives. Default: \eqn{1}.
 #' @param swap (bool, optional): Whether to use the distance swap described in the paper
-#'   [Learning shallow convolutional feature descriptors with triplet losses](http://www.bmva.org/bmvc/2016/papers/paper119/index.html) by
+#'   [Learning shallow convolutional feature descriptors with triplet losses](https://paperswithcode.com/paper/learning-local-feature-descriptors-with) by
 #'   V. Balntas, E. Riba et al. If TRUE, and if the positive example is closer to the
 #'   negative example than the anchor is, swaps the positive example and the anchor in
 #'   the loss computation. Default: `FALSE`.

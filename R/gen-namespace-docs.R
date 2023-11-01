@@ -5410,7 +5410,6 @@ NULL
 #' formed by [torch_geqrf()] that is represented by `(a, tau)` (given by (`input`, `input2`)).
 #' 
 #' This directly calls the underlying LAPACK function `?ormqr`.
-#' See [LAPACK documentation for ormqr](https://www.intel.com/content/www/us/en/docs/onemkl/developer-reference-c/2023-0/overview.html) for further details.
 #'
 #'
 #' @param self (Tensor) the `a` from [`torch_geqrf`].

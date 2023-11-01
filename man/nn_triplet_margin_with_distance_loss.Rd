@@ -22,7 +22,7 @@ margins penalize cases where the negative examples are not distant enough from t
 anchors, relative to the positives. Default: \eqn{1}.}
 
 \item{swap}{(bool, optional): Whether to use the distance swap described in the paper
-\href{http://www.bmva.org/bmvc/2016/papers/paper119/index.html}{Learning shallow convolutional feature descriptors with triplet losses} by
+\href{https://paperswithcode.com/paper/learning-local-feature-descriptors-with}{Learning shallow convolutional feature descriptors with triplet losses} by
 V. Balntas, E. Riba et al. If TRUE, and if the positive example is closer to the
 negative example than the anchor is, swaps the positive example and the anchor in
 the loss computation. Default: \code{FALSE}.}
