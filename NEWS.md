@@ -1,14 +1,22 @@
 # torch (development version)
 
+## Breaking changes
+
 - New `torch_save` serialization format. It's ~10x faster and since it's based on safetensors, files can be read with any safetensors implementation. (#1071)
-- fix printer of torch device (add new line at the end)
-- `as.array` now moves tensors to the cpu before copying data into R. (#1080)
 - Updated to LibTorch 2.0.1. (#1085)
 - `torch_load` no longer supports `device=NULL` to load weights in the same device they were saved. (#1085)
+
+## New features
+
 - Added support for CUDA 11.8. (#1089)
+- Added support for iterable datasets. (#1095)
+
+## Bug fixes
+
+- fix printer of torch device (add new line at the end)
+- `as.array` now moves tensors to the cpu before copying data into R. (#1080)
 - Fixed segfault caused by comparing a `dtype` with a `NULL`. (#1090)
 - Fixed incorrect naming of complex data type names, such as `torch_cfloat64`. (#1091)
-- Added support for iterable datasets. (#1095)
 - Fixed name of the `out_features` attribute in the `nn_linear` module. (#1097)
 - Fixed issues when loading the state dict of optimizers and learning rate schedulers. (#1100)
 - Fixed bug when cloning `nn_module`s with empty state dicts. (#1108)
