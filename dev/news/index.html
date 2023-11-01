@@ -85,17 +85,25 @@
 
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="development version" id="torch-development-version">torch (development version)<a class="anchor" aria-label="anchor" href="#torch-development-version"></a></h2>
+<div class="section level3">
+<h3 id="breaking-changes-development-version">Breaking changes<a class="anchor" aria-label="anchor" href="#breaking-changes-development-version"></a></h3>
 <ul><li>New <code>torch_save</code> serialization format. It’s ~10x faster and since it’s based on safetensors, files can be read with any safetensors implementation. (<a href="https://github.com/mlverse/torch/issues/1071" class="external-link">#1071</a>)</li>
-<li>fix printer of torch device (add new line at the end)</li>
-<li>
-<code>as.array</code> now moves tensors to the cpu before copying data into R. (<a href="https://github.com/mlverse/torch/issues/1080" class="external-link">#1080</a>)</li>
 <li>Updated to LibTorch 2.0.1. (<a href="https://github.com/mlverse/torch/issues/1085" class="external-link">#1085</a>)</li>
 <li>
 <code>torch_load</code> no longer supports <code>device=NULL</code> to load weights in the same device they were saved. (<a href="https://github.com/mlverse/torch/issues/1085" class="external-link">#1085</a>)</li>
-<li>Added support for CUDA 11.8. (<a href="https://github.com/mlverse/torch/issues/1089" class="external-link">#1089</a>)</li>
+</ul></div>
+<div class="section level3">
+<h3 id="new-features-development-version">New features<a class="anchor" aria-label="anchor" href="#new-features-development-version"></a></h3>
+<ul><li>Added support for CUDA 11.8. (<a href="https://github.com/mlverse/torch/issues/1089" class="external-link">#1089</a>)</li>
+<li>Added support for iterable datasets. (<a href="https://github.com/mlverse/torch/issues/1095" class="external-link">#1095</a>)</li>
+</ul></div>
+<div class="section level3">
+<h3 id="bug-fixes-development-version">Bug fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-development-version"></a></h3>
+<ul><li>fix printer of torch device (add new line at the end)</li>
+<li>
+<code>as.array</code> now moves tensors to the cpu before copying data into R. (<a href="https://github.com/mlverse/torch/issues/1080" class="external-link">#1080</a>)</li>
 <li>Fixed segfault caused by comparing a <code>dtype</code> with a <code>NULL</code>. (<a href="https://github.com/mlverse/torch/issues/1090" class="external-link">#1090</a>)</li>
 <li>Fixed incorrect naming of complex data type names, such as <code>torch_cfloat64</code>. (<a href="https://github.com/mlverse/torch/issues/1091" class="external-link">#1091</a>)</li>
-<li>Added support for iterable datasets. (<a href="https://github.com/mlverse/torch/issues/1095" class="external-link">#1095</a>)</li>
 <li>Fixed name of the <code>out_features</code> attribute in the <code>nn_linear</code> module. (<a href="https://github.com/mlverse/torch/issues/1097" class="external-link">#1097</a>)</li>
 <li>Fixed issues when loading the state dict of optimizers and learning rate schedulers. (<a href="https://github.com/mlverse/torch/issues/1100" class="external-link">#1100</a>)</li>
 <li>Fixed bug when cloning <code>nn_module</code>s with empty state dicts. (<a href="https://github.com/mlverse/torch/issues/1108" class="external-link">#1108</a>)</li>
@@ -103,6 +111,7 @@
 <code>distr_multivariate_normal</code> now correctly handles precision matrix’s. (<a href="https://github.com/mlverse/torch/issues/1110" class="external-link">#1110</a>)</li>
 <li>Moved <code>length.torch_tensor</code> implementation to R7 to avoid problems when a torch dataset has the <code>torch_tensor</code> class. (<a href="https://github.com/mlverse/torch/issues/1111" class="external-link">#1111</a>)</li>
 </ul></div>
+</div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.11.0" id="torch-0110">torch 0.11.0<a class="anchor" aria-label="anchor" href="#torch-0110"></a></h2><p class="text-muted">CRAN release: 2023-06-06</p>
 <div class="section level3">
