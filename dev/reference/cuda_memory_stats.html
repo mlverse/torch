@@ -108,14 +108,14 @@ is a non-negative integer.</p>
     <h2 id="core-statistics">Core statistics<a class="anchor" aria-label="anchor" href="#core-statistics"></a></h2>
     
 
-<ul><li><p>"allocated.all,large_pool,small_pool.current,peak,allocated,freed": number of allocation requests received by the memory allocator.</p></li>
-<li><p>"allocated_bytes.all,large_pool,small_pool.current,peak,allocated,freed": amount of allocated memory.</p></li>
-<li><p>"segment.all,large_pool,small_pool.current,peak,allocated,freed": number of reserved segments from cudaMalloc().</p></li>
-<li><p>"reserved_bytes.all,large_pool,small_pool.current,peak,allocated,freed": amount of reserved memory.</p></li>
-<li><p>"active.all,large_pool,small_pool.current,peak,allocated,freed": number of active memory blocks.</p></li>
-<li><p>"active_bytes.all,large_pool,small_pool.current,peak,allocated,freed": amount of active memory.</p></li>
-<li><p>"inactive_split.all,large_pool,small_pool.current,peak,allocated,freed": number of inactive, non-releasable memory blocks.</p></li>
-<li><p>"inactive_split_bytes.all,large_pool,small_pool.current,peak,allocated,freed": amount of inactive, non-releasable memory.</p></li>
+<ul><li><p>"allocated.{all,large_pool,small_pool}.{current,peak,allocated,freed}": number of allocation requests received by the memory allocator.</p></li>
+<li><p>"allocated_bytes.{all,large_pool,small_pool}.{current,peak,allocated,freed}": amount of allocated memory.</p></li>
+<li><p>"segment.{all,large_pool,small_pool}.{current,peak,allocated,freed}": number of reserved segments from cudaMalloc().</p></li>
+<li><p>"reserved_bytes.{all,large_pool,small_pool}.{current,peak,allocated,freed}": amount of reserved memory.</p></li>
+<li><p>"active.{all,large_pool,small_pool}.{current,peak,allocated,freed}": number of active memory blocks.</p></li>
+<li><p>"active_bytes.{all,large_pool,small_pool}.{current,peak,allocated,freed}": amount of active memory.</p></li>
+<li><p>"inactive_split.{all,large_pool,small_pool}.{current,peak,allocated,freed}": number of inactive, non-releasable memory blocks.</p></li>
+<li><p>"inactive_split_bytes.{all,large_pool,small_pool}.{current,peak,allocated,freed}": amount of inactive, non-releasable memory.</p></li>
 </ul><p>For these core statistics, values are broken down as follows.</p>
 <p>Pool type:</p><ul><li><p>all: combined statistics across all memory pools.</p></li>
 <li><p>large_pool: statistics for the large allocation pool (as of October 2019, for size &gt;= 1MB allocations).</p></li>
