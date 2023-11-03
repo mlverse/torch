@@ -58,14 +58,14 @@ paste_for_each <- function(x, y, ...) {
 #' @inheritParams cuda_get_device_capability
 #' @section Core statistics:
 #'
-#' - "allocated.{all,large_pool,small_pool}.{current,peak,allocated,freed}": number of allocation requests received by the memory allocator.
-#' - "allocated_bytes.{all,large_pool,small_pool}.{current,peak,allocated,freed}": amount of allocated memory.
-#' - "segment.{all,large_pool,small_pool}.{current,peak,allocated,freed}": number of reserved segments from cudaMalloc().
-#' - "reserved_bytes.{all,large_pool,small_pool}.{current,peak,allocated,freed}": amount of reserved memory.
-#' - "active.{all,large_pool,small_pool}.{current,peak,allocated,freed}": number of active memory blocks.
-#' - "active_bytes.{all,large_pool,small_pool}.{current,peak,allocated,freed}": amount of active memory.
-#' - "inactive_split.{all,large_pool,small_pool}.{current,peak,allocated,freed}": number of inactive, non-releasable memory blocks.
-#' - "inactive_split_bytes.{all,large_pool,small_pool}.{current,peak,allocated,freed}": amount of inactive, non-releasable memory.
+#' - "allocated.\{all,large_pool,small_pool\}.\{current,peak,allocated,freed\}": number of allocation requests received by the memory allocator.
+#' - "allocated_bytes.\{all,large_pool,small_pool\}.\{current,peak,allocated,freed\}": amount of allocated memory.
+#' - "segment.\{all,large_pool,small_pool\}.\{current,peak,allocated,freed\}": number of reserved segments from cudaMalloc().
+#' - "reserved_bytes.\{all,large_pool,small_pool\}.\{current,peak,allocated,freed\}": amount of reserved memory.
+#' - "active.\{all,large_pool,small_pool\}.\{current,peak,allocated,freed\}": number of active memory blocks.
+#' - "active_bytes.\{all,large_pool,small_pool\}.\{current,peak,allocated,freed\}": amount of active memory.
+#' - "inactive_split.\{all,large_pool,small_pool\}.\{current,peak,allocated,freed\}": number of inactive, non-releasable memory blocks.
+#' - "inactive_split_bytes.\{all,large_pool,small_pool\}.\{current,peak,allocated,freed\}": amount of inactive, non-releasable memory.
 #'
 #' For these core statistics, values are broken down as follows.
 #'

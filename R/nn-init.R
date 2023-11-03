@@ -204,12 +204,12 @@ nn_init_eye_ <- function(tensor) {
 
 #' Dirac initialization
 #'
-#' Fills the {3, 4, 5}-dimensional input `Tensor` with the Dirac
+#' Fills the \{3, 4, 5\}-dimensional input `Tensor` with the Dirac
 #' delta function. Preserves the identity of the inputs in `Convolutional`
 #' layers, where as many input channels are preserved as possible. In case
 #' of groups>1, each group of channels preserves identity.
 #'
-#' @param tensor a {3, 4, 5}-dimensional `torch.Tensor`
+#' @param tensor a \{3, 4, 5\}-dimensional `torch.Tensor`
 #' @param groups (optional) number of groups in the conv layer (default: 1)
 #'
 #' @examples

@@ -3656,7 +3656,6 @@ NULL
 #' @param unbiased (bool) whether to use the unbiased estimation or not
 #' @param dim (int or tuple of ints) the dimension or dimensions to reduce.
 #' @param keepdim (bool) whether the output tensor has `dim` retained or not.
-#' @param correction The type of correction.
 #'
 #' @name torch_std
 #'

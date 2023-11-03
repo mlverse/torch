@@ -19,14 +19,14 @@ is a non-negative integer.
 \section{Core statistics}{
 
 \itemize{
-\item "allocated.{all,large_pool,small_pool}.{current,peak,allocated,freed}": number of allocation requests received by the memory allocator.
-\item "allocated_bytes.{all,large_pool,small_pool}.{current,peak,allocated,freed}": amount of allocated memory.
-\item "segment.{all,large_pool,small_pool}.{current,peak,allocated,freed}": number of reserved segments from cudaMalloc().
-\item "reserved_bytes.{all,large_pool,small_pool}.{current,peak,allocated,freed}": amount of reserved memory.
-\item "active.{all,large_pool,small_pool}.{current,peak,allocated,freed}": number of active memory blocks.
-\item "active_bytes.{all,large_pool,small_pool}.{current,peak,allocated,freed}": amount of active memory.
-\item "inactive_split.{all,large_pool,small_pool}.{current,peak,allocated,freed}": number of inactive, non-releasable memory blocks.
-\item "inactive_split_bytes.{all,large_pool,small_pool}.{current,peak,allocated,freed}": amount of inactive, non-releasable memory.
+\item "allocated.\{all,large_pool,small_pool\}.\{current,peak,allocated,freed\}": number of allocation requests received by the memory allocator.
+\item "allocated_bytes.\{all,large_pool,small_pool\}.\{current,peak,allocated,freed\}": amount of allocated memory.
+\item "segment.\{all,large_pool,small_pool\}.\{current,peak,allocated,freed\}": number of reserved segments from cudaMalloc().
+\item "reserved_bytes.\{all,large_pool,small_pool\}.\{current,peak,allocated,freed\}": amount of reserved memory.
+\item "active.\{all,large_pool,small_pool\}.\{current,peak,allocated,freed\}": number of active memory blocks.
+\item "active_bytes.\{all,large_pool,small_pool\}.\{current,peak,allocated,freed\}": amount of active memory.
+\item "inactive_split.\{all,large_pool,small_pool\}.\{current,peak,allocated,freed\}": number of inactive, non-releasable memory blocks.
+\item "inactive_split_bytes.\{all,large_pool,small_pool\}.\{current,peak,allocated,freed\}": amount of inactive, non-releasable memory.
 }
 
 For these core statistics, values are broken down as follows.
