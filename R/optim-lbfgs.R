@@ -377,226 +377,227 @@ optim_lbfgs <- optimizer(
     private$.numel_cache <- NULL
   },
   step = function(closure) {
-    with_no_grad({
-      closure_ <- function() {
-        with_enable_grad({
-          closure()
-        })
-      }
+    local_no_grad()
+    
+    group <- self$param_groups[[1]]
+    lr <- group[["lr"]]
+    max_iter <- group[["max_iter"]]
+    max_eval <- group[["max_eval"]]
+    tolerance_grad <- group[["tolerance_grad"]]
+    tolerance_change <- group[["tolerance_change"]]
+    line_search_fn <- group[["line_search_fn"]]
+    history_size <- group[["history_size"]]
 
-      group <- self$param_groups[[1]]
-      lr <- group[["lr"]]
-      max_iter <- group[["max_iter"]]
-      max_eval <- group[["max_eval"]]
-      tolerance_grad <- group[["tolerance_grad"]]
-      tolerance_change <- group[["tolerance_change"]]
-      line_search_fn <- group[["line_search_fn"]]
-      history_size <- group[["history_size"]]
+    # NOTE: LBFGS has only global state, but we register it as state for
+    # the first param, because this helps with casting in load_state_dict
+    if (is.null(state(private$.params[[1]]))) {
+      state(private$.params[[1]]) <- new.env(parent = emptyenv())
+      state(private$.params[[1]])[["func_evals"]] <- 0
+      state(private$.params[[1]])[["n_iter"]] <- 0
+    }
+    state <- state(private$.params[[1]])
 
-      # NOTE: LBFGS has only global state, but we register it as state for
-      # the first param, because this helps with casting in load_state_dict
-      if (is.null(state(private$.params[[1]]))) {
-        state(private$.params[[1]]) <- new.env(parent = emptyenv())
-        state(private$.params[[1]])[["func_evals"]] <- 0
-        state(private$.params[[1]])[["n_iter"]] <- 0
-      }
-      state <- state(private$.params[[1]])
-
-      # evaluate initial f(x) and df/dx
-      orig_loss <- closure_()
-      loss <- orig_loss$item()
-      current_evals <- 1
-      state[["func_evals"]] <- state[["func_evals"]] + 1
-
-      flat_grad <- private$.gather_flat_grad()
-      opt_cond <- (flat_grad$abs()$max() <= tolerance_grad)$item()
-
-      if (opt_cond) {
-        return(orig_loss)
-      }
-
-      # tensors cached in state (for tracing)
-      d <- state[["d"]]
-      t <- state[["t"]]
-      old_dirs <- state[["old_dirs"]]
-      old_stps <- state[["old_stps"]]
-      ro <- state[["ro"]]
-      H_diag <- state[["H_diag"]]
-      prev_flat_grad <- state[["prev_flat_grad"]]
-      prev_loss <- state[["prev_loss"]]
-
-      n_iter <- 0
-      # optimize for a max of max_iter iterations
-      while (n_iter < max_iter) {
-        # keep track of nb of iterations
-        n_iter <- n_iter + 1
-        state[["n_iter"]] <- state[["n_iter"]] + 1
-
-        ############################################################
-        # compute gradient descent direction
-        ############################################################
-
-        if (state[["n_iter"]] == 1) {
-          d <- flat_grad$neg()
-          old_dirs <- list()
-          old_stps <- list()
-          ro <- list()
-          H_diag <- 1
-        } else {
-          # do lbfgs update (update memory)
-          y <- flat_grad$sub(prev_flat_grad)
-          s <- d$mul(t)
-          ys <- y$dot(s) # y*s
-
-          if (!is.na(ys$item()) && ys$item() > 1e-10) {
-            # updating memory
-            if (length(old_dirs) == history_size) {
-              # shift history by one (limited-memory)
-              old_dirs <- old_dirs[-1]
-              old_stps <- old_stps[-1]
-              ro <- ro[-1]
-            }
-
-            # store new direction/step
-            old_dirs[[length(old_dirs) + 1]] <- y
-            old_stps[[length(old_stps) + 1]] <- s
-            ro[[length(ro) + 1]] <- 1. / ys
-
-            # update scale of initial Hessian approximation
-            H_diag <- ys / y$dot(y) # (y*y)
-          }
-
-          # compute the approximate (L-BFGS) inverse Hessian
-          # multiplied by the gradient
-          num_old <- length(old_dirs)
-
-          if (is.null(state[["al"]])) {
-            state[["al"]] <- vector(mode = "list", length = history_size)
-          }
-
-          al <- state[["al"]]
-
-          # iteration in L-BFGS loop collapsed to use just one buffer
-          q <- flat_grad$neg()
-          if (num_old >= 1) {
-            for (i in seq(num_old, 1, by = -1)) {
-              al[[i]] <- old_stps[[i]]$dot(q) * ro[[i]]
-              q$add_(old_dirs[[i]], alpha = -al[[i]])
-            }
-          }
-
-          # multiply by initial Hessian
-          # r/d is the final direction
-          d <- r <- torch_mul(q, H_diag)
-          for (i in seq_len(num_old)) {
-            be_i <- old_dirs[[i]]$dot(r) * ro[[i]]
-            r$add_(old_stps[[i]], alpha = al[[i]] - be_i)
-          }
-        }
-
-        if (is.null(prev_flat_grad) || is_undefined_tensor(prev_flat_grad)) {
-          prev_flat_grad <- flat_grad$clone(memory_format = torch_contiguous_format())
-        } else {
-          prev_flat_grad$copy_(flat_grad)
-        }
-        prev_loss <- loss
-
-        ############################################################
-        # compute step length
-        ############################################################
-        # reset initial guess for step size
-        if (state[["n_iter"]] == 1) {
-          t <- min(1., 1. / flat_grad$abs()$sum()$item()) * lr
-        } else {
-          t <- lr
-        }
-
-        # directional derivative
-        gtd <- flat_grad$dot(d) # g * d
-
-        # directional derivative is below tolerance
-        if (!is.na(gtd$item()) && gtd$item() > (-tolerance_change)) {
-          break
-        }
-
-        # optional line search: user function
-        ls_func_evals <- 0
-
-        if (!is.null(line_search_fn)) {
-          if (line_search_fn != "strong_wolfe") {
-            value_error("only strong_wolfe is supported")
-          } else {
-            x_init <- private$.clone_param()
-
-            obj_func <- function(x, t, d) {
-              private$.directional_evaluate(closure_, x, t, d)
-            }
-
-            ret <- .strong_wolfe(obj_func, x_init, t, d, loss, flat_grad, gtd)
-
-            loss <- ret[[1]]$item()
-            flat_grad <- ret[[2]]
-            t <- ret[[3]]
-            ls_func_evals <- ret[[4]]
-
-            private$.add_grad(t, d)
-            opt_cond <- flat_grad$abs()$max()$item() <= tolerance_grad
-          }
-        } else {
-          # no line search, simply move with fixed-step
-          private$.add_grad(t, d)
-          if (n_iter != max_iter) {
-            # re-evaluate function only if not in last iteration
-            # the reason we do this: in a stochastic setting,
-            # no use to re-evaluate that function here
-            loss <- closure_()$item()
-            flat_grad <- private$.gather_flat_grad()
-            opt_cond <- flat_grad$abs()$max()$item() <= tolerance_grad
-            ls_func_evals <- 1
-          }
-        }
-
-        # update func eval
-        current_evals <- current_evals + ls_func_evals
-        state[["func_evals"]] <- state[["func_evals"]] + ls_func_evals
-
-        ############################################################
-        # check conditions
-        ############################################################
-        if (n_iter == max_iter) {
-          break
-        }
-
-        if (current_evals >= max_eval) {
-          break
-        }
-
-        # optimal condition
-        if (!is.na(opt_cond) && opt_cond) {
-          break
-        }
-
-        # lack of progress
-        d_ml <- d$mul(t)$abs()$max()$item()
-        if (!is.na(d_ml) && d_ml <= tolerance_change) {
-          break
-        }
-
-        if (!is.na(loss) && abs(loss - prev_loss) < tolerance_change) {
-          break
-        }
-      }
-
-      state[["d"]] <- d
-      state[["t"]] <- t
-      state[["old_dirs"]] <- old_dirs
-      state[["old_stps"]] <- old_stps
-      state[["ro"]] <- ro
-      state[["H_diag"]] <- H_diag
-      state[["prev_flat_grad"]] <- prev_flat_grad
-      state[["prev_loss"]] <- prev_loss
+    # evaluate initial f(x) and df/dx
+    with_enable_grad({
+      orig_loss <- closure()
     })
 
+    current_evals <- 1
+    state[["func_evals"]] <- state[["func_evals"]] + 1
+
+    flat_grad <- private$.gather_flat_grad()
+    opt_cond <- (flat_grad$abs()$max() <= tolerance_grad)$item()
+
+    if (opt_cond) {
+      return(orig_loss)
+    }
+    loss <- orig_loss$item()
+
+    # tensors cached in state (for tracing)
+    d <- state[["d"]]
+    t <- state[["t"]]
+    old_dirs <- state[["old_dirs"]]
+    old_stps <- state[["old_stps"]]
+    ro <- state[["ro"]]
+    H_diag <- state[["H_diag"]]
+    prev_flat_grad <- state[["prev_flat_grad"]]
+    prev_loss <- state[["prev_loss"]]
+
+    n_iter <- 0
+    # optimize for a max of max_iter iterations
+    while (n_iter < max_iter) {
+      # keep track of nb of iterations
+      n_iter <- n_iter + 1
+      state[["n_iter"]] <- state[["n_iter"]] + 1
+
+      ############################################################
+      # compute gradient descent direction
+      ############################################################
+
+      if (state[["n_iter"]] == 1) {
+        d <- flat_grad$neg()
+        old_dirs <- list()
+        old_stps <- list()
+        ro <- list()
+        H_diag <- 1
+      } else {
+        # do lbfgs update (update memory)
+        y <- flat_grad$sub(prev_flat_grad)
+        s <- d$mul(t)
+        ys <- y$dot(s) # y*s
+
+        ys_it <- ys$item()
+        if (!is.na(ys_it) && ys_it > 1e-10) {
+          # updating memory
+          if (length(old_dirs) == history_size) {
+            # shift history by one (limited-memory)
+            old_dirs <- old_dirs[-1]
+            old_stps <- old_stps[-1]
+            ro <- ro[-1]
+          }
+
+          # store new direction/step
+          old_dirs[[length(old_dirs) + 1]] <- y
+          old_stps[[length(old_stps) + 1]] <- s
+          ro[[length(ro) + 1]] <- 1. / ys
+
+          # update scale of initial Hessian approximation
+          H_diag <- ys / y$dot(y) # (y*y)
+        }
+
+        # compute the approximate (L-BFGS) inverse Hessian
+        # multiplied by the gradient
+        num_old <- length(old_dirs)
+
+        if (is.null(state[["al"]])) {
+          state[["al"]] <- vector(mode = "list", length = history_size)
+        }
+
+        al <- state[["al"]]
+
+        # iteration in L-BFGS loop collapsed to use just one buffer
+        q <- flat_grad$neg()
+        if (num_old >= 1) {
+          for (i in seq(num_old, 1, by = -1)) {
+            al[[i]] <- old_stps[[i]]$dot(q) * ro[[i]]
+            q$add_(old_dirs[[i]], alpha = -al[[i]])
+          }
+        }
+
+        # multiply by initial Hessian
+        # r/d is the final direction
+        d <- r <- torch_mul(q, H_diag)
+        for (i in seq_len(num_old)) {
+          be_i <- old_dirs[[i]]$dot(r) * ro[[i]]
+          r$add_(old_stps[[i]], alpha = al[[i]] - be_i)
+        }
+      }
+
+      if (is.null(prev_flat_grad) || is_undefined_tensor(prev_flat_grad)) {
+        prev_flat_grad <- flat_grad$clone(memory_format = torch_contiguous_format())
+      } else {
+        prev_flat_grad$copy_(flat_grad)
+      }
+      prev_loss <- loss
+
+      ############################################################
+      # compute step length
+      ############################################################
+      # reset initial guess for step size
+      if (state[["n_iter"]] == 1) {
+        t <- min(1., 1. / flat_grad$abs()$sum()$item()) * lr
+      } else {
+        t <- lr
+      }
+
+      # directional derivative
+      gtd <- flat_grad$dot(d) # g * d
+      gtd_it <- gtd$item()
+
+      # directional derivative is below tolerance
+      if (!is.na(gtd_it) && gtd_it > (-tolerance_change)) {
+        break
+      }
+
+      # optional line search: user function
+      ls_func_evals <- 0
+
+      if (!is.null(line_search_fn)) {
+        if (line_search_fn != "strong_wolfe") {
+          value_error("only strong_wolfe is supported")
+        } else {
+          x_init <- private$.clone_param()
+
+          obj_func <- function(x, t, d) {
+            private$.directional_evaluate(closure, x, t, d)
+          }
+
+          ret <- .strong_wolfe(obj_func, x_init, t, d, prev_loss, flat_grad, gtd)
+
+          loss <- ret[[1]]$item()
+          flat_grad <- ret[[2]]
+          t <- ret[[3]]
+          ls_func_evals <- ret[[4]]
+
+          private$.add_grad(t, d)
+          opt_cond <- flat_grad$abs()$max()$item() <= tolerance_grad
+        }
+      } else {
+        # no line search, simply move with fixed-step
+        private$.add_grad(t, d)
+        if (n_iter != max_iter) {
+          # re-evaluate function only if not in last iteration
+          # the reason we do this: in a stochastic setting,
+          # no use to re-evaluate that function here
+          with_enable_grad({
+            loss <- closure()$item()
+          })
+          flat_grad <- private$.gather_flat_grad()
+          opt_cond <- flat_grad$abs()$max()$item() <= tolerance_grad
+          ls_func_evals <- 1
+        }
+      }
+
+      # update func eval
+      current_evals <- current_evals + ls_func_evals
+      state[["func_evals"]] <- state[["func_evals"]] + ls_func_evals
+
+      ############################################################
+      # check conditions
+      ############################################################
+      if (n_iter == max_iter) {
+        break
+      }
+
+      if (current_evals >= max_eval) {
+        break
+      }
+
+      # optimal condition
+      if (!is.na(opt_cond) && opt_cond) {
+        break
+      }
+
+      # lack of progress
+      d_ml <- d$mul(t)$abs()$max()$item()
+      if (!is.na(d_ml) && d_ml <= tolerance_change) {
+        break
+      }
+
+      if (!is.na(loss) && abs(loss - prev_loss) < tolerance_change) {
+        break
+      }
+    }
+
+    state[["d"]] <- d
+    state[["t"]] <- t
+    state[["old_dirs"]] <- old_dirs
+    state[["old_stps"]] <- old_stps
+    state[["ro"]] <- ro
+    state[["H_diag"]] <- H_diag
+    state[["prev_flat_grad"]] <- prev_flat_grad
+    state[["prev_loss"]] <- prev_loss
+    
     orig_loss
   },
   private = list(
@@ -638,7 +639,9 @@ optim_lbfgs <- optimizer(
     },
     .directional_evaluate = function(closure, x, t, d) {
       private$.add_grad(t, d)
-      loss <- closure()$item()
+      with_enable_grad({
+        loss <- closure()$item()
+      })
       flat_grad <- private$.gather_flat_grad()
       private$.set_param(x)
       list(loss, flat_grad)
