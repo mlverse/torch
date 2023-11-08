@@ -132,7 +132,7 @@ length.R7 <- function(x) {
   tryCatch(
     x$length(), 
     error = function(err) {
-      cli::cli_abort("{.val length} is not support for objects with class {.cls {class(x)}}")
+      1 # when no custom length method is implemented, we return 1.
     }
   )
 }
