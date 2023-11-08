@@ -83,3 +83,8 @@ test_that("printer works", {
     print(torch_device("cpu"))
   })
 })
+
+test_that("can query device length", {
+  device <- torch_device("cpu")
+  expect_equal(length(device), 1)
+})
