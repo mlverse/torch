@@ -341,6 +341,8 @@ legacy_torch_load <- function(path, device = "cpu") {
 #' @returns A raw vector containing the serialized object. Can be reloaded using
 #'   [torch_load()].
 #' @family torch_save
+#' 
+#' @export
 #' @concept serialization
 torch_serialize <- function(obj, ...) {
   if (use_ser_version() < 3)
