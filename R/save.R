@@ -258,7 +258,7 @@ torch_load <- function(path, device = "cpu") {
 
   con <- create_read_con(path)
 
-  safe <- safetensors::safe_load_file(con, device = device, framework = "torch")
+  safe <- safetensors::safe_load_file(con, device = as.character(device), framework = "torch")
   meta <- jsonlite::fromJSON(attr(safe, "metadata")[["__metadata__"]][[r_key]])
 
   special_dtype <- meta[["special_dtype"]]
