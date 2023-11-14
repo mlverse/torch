@@ -50,6 +50,15 @@ Device <- R7Class(
   )
 )
 
+#' @export
+as.character.torch_device <- function(x) {
+  chr <- x$type
+  if (!is.null(x$index)) {
+    chr <- paste0(chr, ":", x$index)
+  }
+  chr
+}
+
 #' Create a Device object
 #'
 #' A `torch_device`  is an object representing the device on which a `torch_tensor`
