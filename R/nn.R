@@ -519,6 +519,7 @@ create_nn_module_callable <- function(instance) {
   rlang::env_binding_unlock(instance, "clone")
   on.exit({lockBinding("clone", instance)}, add = TRUE)
   clone <- instance$clone
+  
   instance$clone <- function(deep = FALSE, ..., replace_values = TRUE) {
     if (deep && replace_values) {
       state_dict <- append(instance$parameters, instance$buffers)
@@ -547,7 +548,7 @@ create_nn_module_callable <- function(instance) {
       cloned_instance$.replace_values_from_table(state_dict)  
     }
     
-    cloned_instance
+    create_nn_module_callable(cloned_instance)
   }
   
   f
