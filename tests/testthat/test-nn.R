@@ -666,7 +666,7 @@ test_that("deep cloning", {
   y <- x$clone(deep = TRUE)
   
   expect_true(xptr_address(x$parameters$weight) != xptr_address(y$parameters$weight))
-  
+  expect_equal_to_tensor(x(torch_ones(1,1)), y(torch_ones(1,1)))
   
   module <- nn_module(
     initialize = function() {
