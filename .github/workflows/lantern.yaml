@@ -58,8 +58,8 @@ jobs:
       - name: Install system dependencies
         if: matrix.container != ''
         run: |
-          apt-get update
-          apt-get install -y curl sudo libxml2-dev wget chrpath rsync git
+          DEBIAN_FRONTEND="noninteractive" apt-get update
+          DEBIAN_FRONTEND="noninteractive" apt-get install -y curl sudo libxml2-dev wget chrpath rsync git
           curl -fsSL https://get.docker.com -o get-docker.sh
           DRY_RUN=1 sh ./get-docker.sh
 
