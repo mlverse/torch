@@ -350,7 +350,7 @@ lr_step <- lr_scheduler(
 #' @param pct_start (float): The percentage of the cycle (in number of steps) spent
 #'   increasing the learning rate.
 #'   Default: 0.3
-#' @param anneal_strategy (str): {'cos', 'linear'}
+#' @param anneal_strategy (str): \{'cos', 'linear'\}
 #'   Specifies the annealing strategy: "cos" for cosine annealing, "linear" for
 #'   linear annealing.
 #'   Default: 'cos'

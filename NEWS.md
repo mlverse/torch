@@ -5,6 +5,7 @@
 - New `torch_save` serialization format. It's ~10x faster and since it's based on safetensors, files can be read with any safetensors implementation. (#1071)
 - Updated to LibTorch 2.0.1. (#1085)
 - `torch_load` no longer supports `device=NULL` to load weights in the same device they were saved. (#1085)
+- Lantern binaries and torch pre-built binaries are now built on Ubuntu 20.04. (#1124)
 
 ## New features
 
@@ -22,6 +23,7 @@
 - Fixed bug when cloning `nn_module`s with empty state dicts. (#1108)
 - `distr_multivariate_normal` now correctly handles precision matrix's. (#1110)
 - Moved `length.torch_tensor` implementation to R7 to avoid problems when a torch dataset has the `torch_tensor` class. (#1111)
+- Fixed problem when deep cloning a `nn_module`. (#1123)
 
 # torch 0.11.0
 
