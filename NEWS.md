@@ -5,6 +5,7 @@
 - New `torch_save` serialization format. It's ~10x faster and since it's based on safetensors, files can be read with any safetensors implementation. (#1071)
 - Updated to LibTorch 2.0.1. (#1085)
 - `torch_load` no longer supports `device=NULL` to load weights in the same device they were saved. (#1085)
+- Lantern binaries and torch pre-built binaries are now built on Ubuntu 20.04. (#1124)
 
 ## New features
 
