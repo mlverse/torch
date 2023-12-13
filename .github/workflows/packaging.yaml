@@ -35,7 +35,7 @@ jobs:
             cuda_patch: 0
           
           - config: {os: ubuntu}
-            container: ubuntu:18.04
+            container: ubuntu:20.04
             type: 'source'
             r_install_tar: "tar"
             
