@@ -45,10 +45,10 @@ jobs:
             container: rstudio/r-base:4.2-centos7
             
           - config: {os: ubuntu, version: cu11.7}
-            container: {image: 'nvidia/cuda:11.7.1-cudnn8-devel-ubuntu18.04', options: '--gpus all --runtime=nvidia'}
+            container: {image: 'nvidia/cuda:11.7.1-cudnn8-devel-ubuntu20.04', options: '--gpus all --runtime=nvidia'}
 
           - config: {os: ubuntu, version: cu11.8}
-            container: {image: 'nvidia/cuda:11.8.0-cudnn8-devel-ubuntu18.04', options: '--gpus all --runtime=nvidia'}
+            container: {image: 'nvidia/cuda:11.8.0-cudnn8-devel-ubuntu20.04', options: '--gpus all --runtime=nvidia'}
 
     runs-on: ${{ matrix.config.runner }}
     container: ${{ matrix.container }}
