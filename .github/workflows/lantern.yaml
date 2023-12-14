@@ -19,8 +19,8 @@ jobs:
           - {os: macOS, version: cpu-m1, runner: [self-hosted, m1]}
           
           - {os: ubuntu, version: cpu, runner: ubuntu-latest}
-          - {os: ubuntu, version: cu11.7, runner: [self-hosted, gce, disk]}
-          - {os: ubuntu, version: cu11.8, runner: [self-hosted, gce, disk]}
+          - {os: ubuntu, version: cu11.7, runner: [self-hosted, linux]}
+          - {os: ubuntu, version: cu11.8, runner: [self-hosted, linux]}
 
           - {os: windows, version: cpu, runner: windows-2019}
           - {os: windows, version: cu11.7, runner: windows-2019}
@@ -58,8 +58,8 @@ jobs:
       - name: Install system dependencies
         if: matrix.container != ''
         run: |
-          apt-get update
-          apt-get install -y curl sudo libxml2-dev wget chrpath rsync git
+          DEBIAN_FRONTEND="noninteractive" apt-get update
+          DEBIAN_FRONTEND="noninteractive" apt-get install -y curl sudo libxml2-dev wget chrpath rsync git build-essential
           curl -fsSL https://get.docker.com -o get-docker.sh
           DRY_RUN=1 sh ./get-docker.sh
 

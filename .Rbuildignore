@@ -2,6 +2,7 @@
 ^\.Rproj\.user$
 ^.github.*
 ^.vscode.*
+^.cache.*
 tools/torchgen/.Rbuildignore
 ^README\.Rmd$
 ^_pkgdown\.yml$
@@ -24,6 +25,8 @@ tools/torchgen/.Rbuildignore
 ^build\-lantern.*$
 ^src/Makevars$
 ^lib/.*lantern
+compile_flags.*
+mnist-r.*
 
 # remove vignettes from CRAN
 # ^vignettes/distributions\.Rmd

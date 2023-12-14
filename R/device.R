@@ -51,7 +51,7 @@ Device <- R7Class(
 )
 
 #' @export
-as.character.torch_device <- function(x) {
+as.character.torch_device <- function(x, ...) {
   chr <- x$type
   if (!is.null(x$index)) {
     chr <- paste0(chr, ":", x$index)
