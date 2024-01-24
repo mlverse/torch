@@ -63,7 +63,15 @@ If you have followed default installation locations we will detect that you have
 
 ### CPU
 
-We only support CPU builds of torch on MacOS. On MacOS you can install torch with:
+We support CPU builds of torch on MacOS. On MacOS you can install torch with:
+
+```{r, eval = FALSE}
+install.packages("torch")
+```
+
+### GPU
+
+On Apple Silicon architecture we support GPU through MPS:
 
 ```{r, eval = FALSE}
 install.packages("torch")
