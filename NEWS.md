@@ -1,5 +1,7 @@
 # torch (development version)
 
+- Make sure deep cloning preserve state dict attributes. (#1129)
+
 # torch 0.12.0
 
 ## Breaking changes
