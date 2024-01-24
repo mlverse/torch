@@ -47,6 +47,7 @@ mnist-r.*
 ^inst/build-hash
 ^inst/build-versions
 ^src/lantern/.*
+^tests/testthat/assets/model-v.*
 
 ^doc$
 ^Meta$
