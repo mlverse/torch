@@ -177,9 +177,16 @@ to force an specific version of the CUDA toolkit.</p>
 <div class="section level3">
 <h3 id="cpu-1">CPU<a class="anchor" aria-label="anchor" href="#cpu-1"></a>
 </h3>
-<p>We only support CPU builds of torch on MacOS. On MacOS you can
-install torch with:</p>
+<p>We support CPU builds of torch on MacOS. On MacOS you can install
+torch with:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"torch"</span><span class="op">)</span></span></code></pre></div>
+</div>
+<div class="section level3">
+<h3 id="gpu-1">GPU<a class="anchor" aria-label="anchor" href="#gpu-1"></a>
+</h3>
+<p>On Apple Silicon architecture we support GPU through MPS:</p>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"torch"</span><span class="op">)</span></span></code></pre></div>
 </div>
 </div>
@@ -190,11 +197,11 @@ install torch with:</p>
 <h3 id="cpu-2">CPU<a class="anchor" aria-label="anchor" href="#cpu-2"></a>
 </h3>
 <p>To install the cpu version of <code>torch</code> you can run:</p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"torch"</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level3">
-<h3 id="gpu-1">GPU<a class="anchor" aria-label="anchor" href="#gpu-1"></a>
+<h3 id="gpu-2">GPU<a class="anchor" aria-label="anchor" href="#gpu-2"></a>
 </h3>
 <p>To install the GPU version of <code>torch</code> on linux you must
 verify that:</p>
@@ -208,7 +215,7 @@ version). Follow the installation instructions available <a href="https://develo
 </ul>
 <p>Once you have installed all pre-requisites you can install
 <code>torch</code> with:</p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"torch"</span><span class="op">)</span></span></code></pre></div>
 <p>If you have followed default installation locations we will detect
 that you have CUDA software installed and automatically download the GPU
@@ -236,7 +243,7 @@ installed, it doesn’t need to match the installation <em>‘kind’</em>
 chosen below.</p>
 <p>To install from the pre-built binaries, you can use the
 following:</p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">options</a></span><span class="op">(</span>timeout <span class="op">=</span> <span class="fl">600</span><span class="op">)</span> <span class="co"># increasing timeout is recommended since we will be downloading a 2GB file.</span></span>
 <span><span class="co"># For Windows and Linux: "cpu", "cu117" are the only currently supported</span></span>
 <span><span class="co"># For MacOS the supported are: "cpu-intel" or "cpu-m1"</span></span>
@@ -264,7 +271,7 @@ while, downloads end-up with a warning such as:</p>
 3: Failed to install Torch, manually run install_torch(). download from 'https://download.pytorch.org/libtorch/cpu/libtorch-macos-1.7.1.zip' failed</code></pre>
 <p>This means you encounter a download timeout. then, you should
 increase the timeout value in <code><a href="../reference/install_torch.html">install_torch()</a></code> like</p>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/install_torch.html">install_torch</a></span><span class="op">(</span>timeout <span class="op">=</span> <span class="fl">600</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level3">
@@ -274,12 +281,12 @@ increase the timeout value in <code><a href="../reference/install_torch.html">in
 intend to install torch on, last resort is to install Torch and Lantern
 library from files. This is done in 3 steps :</p>
 <p>1- get the download URLs of the files.</p>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/install_torch_from_file.html">get_install_libs_url</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <p>2- save those files into the machine filesystem. We will use
 <code>/tmp/</code> here as an example .</p>
 <p>3- install torch from files</p>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># then after making both files available into /tmp/</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/Sys.setenv.html" class="external-link">Sys.setenv</a></span><span class="op">(</span>TORCH_URL<span class="op">=</span><span class="st">"/tmp/libtorch-v1.13.1.zip"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/Sys.setenv.html" class="external-link">Sys.setenv</a></span><span class="op">(</span>LANTERN_URL<span class="op">=</span><span class="st">"/tmp/lantern-0.9.1.9001+cpu+arm64-Darwin.zip"</span><span class="op">)</span></span>
