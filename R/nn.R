@@ -256,7 +256,7 @@ nn_Module <- R6::R6Class(
         par <- private$parameters_[[i]]
         # par or buf might not be available in `table` if, for some reason they
         # have already been replaced. This happens for example, when a module 
-        # has the same layer twice. this also applies for modules, they might be duplicated 
+        # has the same layer twice. this also applies for modules, they might be duplicated
         private$parameters_[[i]] <- table[[xptr_address(par)]] %||% par
       }
       for (i in seq_along(private$buffers_)) {
@@ -527,7 +527,11 @@ create_nn_module_callable <- function(instance) {
         names(state_dict) <- sapply(state_dict, xptr_address)
       
         state_dict <- state_dict[!duplicated(names(state_dict))]
-        state_dict <- lapply(state_dict, function(x) x$detach()$clone())  
+        state_dict <- lapply(state_dict, function(x) {
+          out <- x$detach()$clone()
+          attributes(out) <- attributes(x)
+          out
+        })
         
         # also need to append a clone of the modules to this list.
         # child modules can be duplicated - and have the same name
