@@ -247,6 +247,9 @@
     <loc>https://torch.mlverse.org/docs/reference/is_undefined_tensor.html</loc>
   </url>
   <url>
+    <loc>https://torch.mlverse.org/docs/reference/iterable_dataset.html</loc>
+  </url>
+  <url>
     <loc>https://torch.mlverse.org/docs/reference/jit_compile.html</loc>
   </url>
   <url>
@@ -359,6 +362,9 @@
   </url>
   <url>
     <loc>https://torch.mlverse.org/docs/reference/local_device.html</loc>
+  </url>
+  <url>
+    <loc>https://torch.mlverse.org/docs/reference/lr_cosine_annealing.html</loc>
   </url>
   <url>
     <loc>https://torch.mlverse.org/docs/reference/lr_lambda.html</loc>
@@ -2000,9 +2006,6 @@
   </url>
   <url>
     <loc>https://torch.mlverse.org/docs/reference/torch_svd.html</loc>
-  </url>
-  <url>
-    <loc>https://torch.mlverse.org/docs/reference/torch_symeig.html</loc>
   </url>
   <url>
     <loc>https://torch.mlverse.org/docs/reference/torch_t.html</loc>
