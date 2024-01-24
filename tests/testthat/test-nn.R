@@ -706,6 +706,15 @@ test_that("deep cloning", {
   
   # make sure we re-lock binding
   expect_true(bindingIsLocked("clone", attr(x, "module")))
+  
+  # make sure the class of parameters remains
+  a <- nn_linear(1, 1)
+  b <- a$clone(deep = TRUE)
+  
+  expect_equal(
+    attributes(b$parameters$weight),
+    attributes(a$parameters$weight)
+  )
 })
 
 test_that("Can initialize a model in the meta device and copy parameters to it", {
