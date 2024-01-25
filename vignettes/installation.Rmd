@@ -125,7 +125,7 @@ To install from the pre-built binaries, you can use the following:
 options(timeout = 600) # increasing timeout is recommended since we will be downloading a 2GB file.
 # For Windows and Linux: "cpu", "cu117" are the only currently supported
 # For MacOS the supported are: "cpu-intel" or "cpu-m1"
-kind <- "cu117"
+kind <- "cu118"
 version <- available.packages()["torch","Version"]
 options(repos = c(
   torch = sprintf("https://storage.googleapis.com/torch-lantern-builds/packages/%s/%s/", kind, version),
