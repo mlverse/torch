@@ -408,14 +408,14 @@ test_that("print complex tensors", {
   skip_on_os("linux")
   x <- torch_complex(torch_randn(10), torch_randn(10))
   expect_snapshot(
-    print(x)  
+    print(x)
   )
-  
+
   x$requires_grad_(TRUE)
   expect_snapshot(
     print(x)
   )
-  
+
   y <- 2*x
   expect_snapshot(
     print(y)
@@ -423,52 +423,52 @@ test_that("print complex tensors", {
 })
 
 test_that("complex tensors modifications and acessing", {
-  
+
   real <- torch_randn(10, 10)
   imag <- torch_randn(10, 10)
   x <- torch_complex(real, imag)
-  
+
   expect_equal_to_tensor(x$real, real)
   expect_equal_to_tensor(x$imag, imag)
-  
+
   real <- torch_randn(10, 10)
   imag <- torch_randn(10, 10)
   x$real <- real
   x$imag <- imag
-  
+
   expect_equal_to_tensor(x$real, real)
   expect_equal_to_tensor(x$imag, imag)
-  
+
 })
 
 test_that("create complex from and to R", {
-  
+
   x <- complex(real = c(0, 1), imaginary = c(1, 1))
   y <- torch_tensor(x)
-  
+
   expect_equal_to_r(y$imag, Im(x))
   expect_equal_to_r(y$real, Re(x))
   expect_true(y$dtype == torch_cfloat())
-  
+
   x <- complex(real = runif(1), imaginary = runif(1))
   y <- torch_tensor(x, dtype = torch_cdouble())
-  
+
   expect_equal_to_r(y$imag, Im(x))
   expect_equal_to_r(y$real, Re(x))
   expect_true(y$dtype == torch_cdouble())
-  
+
   x <- torch_complex(torch_randn(10, 10), torch_randn(10, 10))
   y <- as.array(x)
   z <- torch_tensor(y)
-  
+
   expect_true(torch_allclose(x, z))
-  
+
   x <- torch_complex(1, 1)
   y <- as.array(x)
   z <- torch_tensor(y)
   expect_true(torch_allclose(x, z))
   expect_equal(as.complex(x), complex(real = 1,imaginary = 1))
-  
+
 })
 
 test_that("expand works", {
@@ -496,22 +496,22 @@ test_that("is_sparse works", {
 })
 
 test_that("can make a byte tensor from a raw vector", {
-  
+
   x <- charToRaw("hello world")
   ten <- torch_tensor(x)
-  
+
   expect_equal(ten$dtype$.type(), "Byte")
   expect_equal(length(x), length(ten))
-  
+
   expect_equal(as.array(ten), x)
   expect_equal(rawToChar(as.array(ten)), "hello world")
 })
 
 test_that("to can change both device and dtype", {
-  
+
   x <- torch_randn(10, 10)
   y <- x$to(dtype = "double", device = "meta")
-  
+
   expect_true(y$dtype == torch_double())
   expect_true(y$device == torch_device("meta"))
 })
@@ -546,6 +546,11 @@ test_that("can copy a mps tensor", {
   x <- array(runif(100), dim = c(10, 10))
   y <- torch_tensor(x, device="mps")
   x_ <- as.array(y)
-  
+
   expect_true(all.equal(x, x_, tolerance = 1e-5))
+})
+
+test_that("cuda tensor can be converted to tensor", {
+  skip_if_cuda_not_available()
+  expect_class(as.array(torch_tensor(1, device = "cuda")), "array")
 })
