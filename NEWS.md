@@ -1,6 +1,7 @@
 # torch (development version)
 
-- Make sure deep cloning preserve class attributes. (#1129)
+- Make sure deep cloning does not alter tensor's metdata like requires_grad and
+class attributes. (#1129)
 
 # torch 0.12.0
 
