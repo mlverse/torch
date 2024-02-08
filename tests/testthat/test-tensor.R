@@ -580,3 +580,9 @@ test_that("requires grad is left unchanged when cloning tensor", {
   expect_true(x_requires_grad$clone()$requires_grad)
   expect_false(x_no_requires_grad$clone()$requires_grad)
 })
+
+test_that("grad_fn and cloning", {
+  x = torch_tensor(1, requires_grad = TRUE)
+  x1 = x$clone2()
+  expect_true(is.null(x1$grad_fn))
+})
