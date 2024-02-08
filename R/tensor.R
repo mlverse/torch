@@ -292,7 +292,6 @@ Tensor <- R7Class(
     clone2 = function() {
       x <- torch_clone(self)
       attributes(x) <- attributes(self)
-      #x$requires_grad_(self$requires_grad)
 
       return(x)
     }
