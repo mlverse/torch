@@ -512,6 +512,9 @@ nn_module <- function(classname = NULL, inherit = nn_Module, ...,
 }
 
 create_nn_module_callable <- function(instance) {
+  if (inherits(instance, "nn_module")) {
+    instance = attr(instance, "module")
+  }
   f <- instance$forward
 
   attr(f, "class") <- instance$.classes
@@ -555,6 +558,7 @@ create_nn_module_callable <- function(instance) {
 
     create_nn_module_callable(cloned_instance)
   }
+
 
   f
 }

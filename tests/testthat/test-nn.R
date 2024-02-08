@@ -824,3 +824,8 @@ test_that("clone preserves requires_grad", {
   lin = nn_linear(1, 1)
   expect_equal(lin$weight$requires_grad, lin$clone(deep = TRUE)$weight$requires_grad)
 })
+
+test_that("can clone module after calling $train() or $eval()", {
+  expect_true(inherits(nn_linear(1, 1)$train()$clone(deep = TRUE), "nn_module"))
+  expect_true(inherits(nn_linear(1, 1)$eval()$clone(deep = TRUE), "nn_module"))
+})
