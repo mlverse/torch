@@ -558,6 +558,7 @@ test_that("cloning works and preserves attributes", {
   x_buf[1] = 2
   expect_false(torch_equal(x_buf, x_buf_clone))
 
+  # parameter
   x_param <- nn_parameter(torch_tensor(1))
   x_param_clone = x_param$clone2()
   expect_equal(attributes(x_param), attributes(x_param_clone))
@@ -565,6 +566,7 @@ test_that("cloning works and preserves attributes", {
   x_param[1] = 2
   expect_false(torch_equal(x_param, x_param_clone))
 
+  # tensor
   x <- torch_tensor(1)
   x_clone <- x$clone2()
   expect_equal(attributes(x_clone), attributes(x))
