@@ -134,7 +134,7 @@ nn_Module <- R6::R6Class(
           out[[paste0(prefix, param_name)]] <- keepvars_or_detach(param, keepvars)
         }
       }
-      
+
       for (buf_name in names(private$buffers_)) {
         buf <- private$buffers_[[buf_name]]
         if (!is.null(buf) && !(buf_name %in% private$non_persistent_buffers_)) {
@@ -173,15 +173,15 @@ nn_Module <- R6::R6Class(
           if (!self$..refer_to_state_dict..) {
             with_no_grad({
               param$copy_(input_param)
-            })  
+            })
           } else {
-            
+
             # setting requires grad is ignored if param is not a valid pointer
             # be careful!
             if (!is_null_external_pointer(param)) {
               input_param$requires_grad_(param$requires_grad)
             }
-            
+
             if (name %in% names(persistent_buffers)) {
               private$buffers_[[name]] <- input_param
             } else {
@@ -249,13 +249,13 @@ nn_Module <- R6::R6Class(
         module <- private$modules_[[i]]
         private$modules_[[i]] <- table[[rlang::obj_address(module)]] %||% module
       }
-      
+
       lapply(private$modules_, function(x) x$.replace_values_from_table(table))
-      
+
       for (i in seq_along(private$parameters_)) {
         par <- private$parameters_[[i]]
         # par or buf might not be available in `table` if, for some reason they
-        # have already been replaced. This happens for example, when a module 
+        # have already been replaced. This happens for example, when a module
         # has the same layer twice. this also applies for modules, they might be duplicated
         private$parameters_[[i]] <- table[[xptr_address(par)]] %||% par
       }
@@ -496,7 +496,7 @@ nn_module <- function(classname = NULL, inherit = nn_Module, ...,
     active = active,
     parent_env = e
   )
-  
+
   init <- get_init(Module)
 
   fun <- rlang::new_function(
@@ -519,20 +519,21 @@ create_nn_module_callable <- function(instance) {
   rlang::env_binding_unlock(instance, "clone")
   on.exit({lockBinding("clone", instance)}, add = TRUE)
   clone <- instance$clone
-  
+
   instance$clone <- function(deep = FALSE, ..., replace_values = TRUE) {
     if (deep && replace_values) {
       state_dict <- append(instance$parameters, instance$buffers)
       if (length(state_dict) > 0) {
         names(state_dict) <- sapply(state_dict, xptr_address)
-      
+
         state_dict <- state_dict[!duplicated(names(state_dict))]
         state_dict <- lapply(state_dict, function(x) {
           out <- x$detach()$clone()
           attributes(out) <- attributes(x)
+          out$requires_grad_(x$requires_grad)
           out
         })
-        
+
         # also need to append a clone of the modules to this list.
         # child modules can be duplicated - and have the same name
         # child modules are also deep cloned, but we don't need to replace
@@ -541,20 +542,20 @@ create_nn_module_callable <- function(instance) {
         names(children) <- sapply(children, rlang::obj_address)
         children <- children[!duplicated(names(children))]
         children <- lapply(children, function(x) x$clone(deep = deep, replace_values = FALSE))
-        
+
         state_dict <- append(state_dict, children)
       }
     }
-    
+
     cloned_instance <- clone(deep = deep)
-    
+
     if (deep && replace_values) {
-      cloned_instance$.replace_values_from_table(state_dict)  
+      cloned_instance$.replace_values_from_table(state_dict)
     }
-    
+
     create_nn_module_callable(cloned_instance)
   }
-  
+
   f
 }
 
@@ -718,11 +719,11 @@ length.nn_sequential <- function(x) {
 
 #' Prune top layer(s) of a network
 #'
-#' Prune `head_size` last layers of a nn_module in order to 
+#' Prune `head_size` last layers of a nn_module in order to
 #'  replace them by your own head, or in order to use the pruned module
 #'  as a sequential embedding module.
 #' @param x nn_network to prune
-#' @param head_size number of nn_layers to prune 
+#' @param head_size number of nn_layers to prune
 #'
 #' @return a nn_sequential network with the top nn_layer removed
 #' @export
@@ -738,7 +739,7 @@ length.nn_sequential <- function(x) {
 #'   nn_batch_norm1d(10),
 #'   nn_tanh(),
 #'   nn_linear(10,3)
-#' )  
+#' )
 #' prune <- nn_prune_head(x, 3)
 #' prune
 #' }
@@ -756,7 +757,7 @@ nn_prune_head.nn_module <- nn_module(
     classname = "nn_sequential",
     initialize = function(x, head_size=1L) {
       modules <- rlang::list2(!!!x$children[1:(length(x$children)-head_size)])
-      mod_names <- names(modules) 
+      mod_names <- names(modules)
       for (i in seq_along(modules)) {
         self$add_module(name = mod_names[i], module = modules[[i]])
       }
@@ -823,7 +824,7 @@ nn_module_list <- nn_module(
 )
 
 #' Container that allows named values
-#' 
+#'
 #' @param dict A named list of submodules that will be saved in that module.
 #' @examples
 #' nn_module <- nn_module(
@@ -845,12 +846,12 @@ nn_module_dict <- nn_module(
     if (!rlang::is_named(dict)) cli::cli_abort("All elements in {.arg dict} must be named.")
     for(nm in names(dict)) {
       self[[nm]] <- dict[[nm]]
-    } 
+    }
   },
   forward = function(...) {
     cli::cli_abort("{.fn nn_module_dict} has {.fn forward} implementation.")
   }
-) 
+)
 
 #' @export
 `[[.nn_module_list` <- function(x, y) {

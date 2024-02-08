@@ -536,10 +536,10 @@ test_that("we can subset `nn_sequential`", {
     nn_relu(),
     nn_tanh()
   )
-  
+
   expect_true(inherits(x[[1]], "nn_relu"))
   expect_true(inherits(x[[3]], "nn_relu6"))
-  
+
   y <- x[2:4]
   expect_true(inherits(y, "nn_sequential"))
   expect_true(inherits(y[[1]], "nn_tanh"))
@@ -570,7 +570,7 @@ test_that("we can prune head of `nn_sequential` by 3 layers", {
     nn_batch_norm1d(10),
     nn_tanh(),
     nn_linear(10,3)
-  )  
+  )
   expect_error(prune <- nn_prune_head(x, 3), NA)
   expect_true(inherits(prune, "nn_sequential"))
   expect_equal(length(prune), 5)
@@ -589,9 +589,9 @@ test_that("we can prune head of `nn_module` network", {
       self$head(x)
     }
   )
-  
+
   x <- my_net(1, 3)
-  
+
   expect_error(prune <- nn_prune_head(x, 1), NA)
   expect_true(inherits(prune, "nn_sequential"))
   expect_equal(length(prune), 1)
@@ -633,18 +633,18 @@ test_that("empty initializer", {
 
 test_that("can load state dict of a corrupt module", {
   local_edition(3)
-  
+
   model <- nn_linear(10, 10)
   tmp <- tempfile(fileext = "rds")
   saveRDS(model, tmp)
   rm(model); gc();
   model <- readRDS(tmp)
-  
+
   err <- try({model$parameters$weight$abs()}, silent = TRUE)
   expect_true(inherits(err, "try-error"))
-  
+
   expect_error(regexp = NA, {
-    model$load_state_dict(list(weight = torch_randn(10, 10), bias = torch_randn(10)))  
+    model$load_state_dict(list(weight = torch_randn(10, 10), bias = torch_randn(10)))
   })
 
   expect_tensor_shape(model(torch_randn(10, 10)), c(10, 10))
@@ -652,22 +652,22 @@ test_that("can load state dict of a corrupt module", {
 
 test_that("make sure state_dict() is detached", {
   model <- nn_linear(10, 10)
-  model$bias$requires_grad_(FALSE) 
+  model$bias$requires_grad_(FALSE)
   state_dict <- model$state_dict()
-  
+
   expect_true(state_dict$weight$requires_grad)
   # we should keep the save value of requires grad bt in a detached graph
   expect_false(state_dict$bias$requires_grad)
 })
 
 test_that("deep cloning", {
-  
+
   x <- nn_linear(1, 1)
   y <- x$clone(deep = TRUE)
-  
+
   expect_true(xptr_address(x$parameters$weight) != xptr_address(y$parameters$weight))
   expect_equal_to_tensor(x(torch_ones(1,1)), y(torch_ones(1,1)))
-  
+
   module <- nn_module(
     initialize = function() {
       self$x <- nn_parameter(torch_tensor(1))
@@ -676,41 +676,41 @@ test_that("deep cloning", {
       self$b <- self$a
     }
   )
-  
+
   x <- module()
   y <- x$clone(deep = TRUE)
-  
+
   expect_true(xptr_address(x$x) != xptr_address(y$x))
   expect_true(xptr_address(x$y) != xptr_address(y$y))
   expect_true(xptr_address(y$x) == xptr_address(y$y))
-  
+
   expect_true(xptr_address(x$a) != xptr_address(y$a))
   expect_true(xptr_address(x$b) != xptr_address(y$b))
   expect_true(xptr_address(y$a) == xptr_address(y$b))
-  
+
   module <- nn_module(
     initialize = function() {
       self$x <- nn_linear(1, 1)
       self$y <- self$x
     }
   )
-  
+
   x <- module()
   y <- x$clone(deep = TRUE)
   expect_true(xptr_address(x$x$weight) != xptr_address(y$x$weight))
   expect_true(xptr_address(x$y$weight) != xptr_address(y$y$weight))
   expect_true(xptr_address(y$x$weight) == xptr_address(y$y$weight))
-  
+
   expect_true(rlang::obj_address(x$x) != rlang::obj_address(y$x))
   expect_true(rlang::obj_address(y$x) == rlang::obj_address(y$y))
-  
+
   # make sure we re-lock binding
   expect_true(bindingIsLocked("clone", attr(x, "module")))
-  
+
   # make sure the class of parameters remains
   a <- nn_linear(1, 1)
   b <- a$clone(deep = TRUE)
-  
+
   expect_equal(
     attributes(b$parameters$weight),
     attributes(a$parameters$weight)
@@ -718,7 +718,7 @@ test_that("deep cloning", {
 })
 
 test_that("Can initialize a model in the meta device and copy parameters to it", {
-  
+
   with_device(device="meta", {
     model <- nn_linear(10,10)
   })
@@ -726,14 +726,14 @@ test_that("Can initialize a model in the meta device and copy parameters to it",
   expect_true(model$weight$requires_grad)
   model$bias$requires_grad_(FALSE)
   expect_true(!model$bias$requires_grad)
-  
+
   model2 <- nn_linear(10, 10)
   model$load_state_dict(model2$state_dict(), .refer_to_state_dict = TRUE)
   expect_equal(model$weight$device$type, "cpu")
   expect_equal(length(model$parameters), 2)
   expect_true(model$weight$requires_grad)
   expect_true(!model$bias$requires_grad)
-  
+
   # now let's test with a more complex model that includes a batch_norm.
   net <- nn_module(
     "Net",
@@ -758,23 +758,23 @@ test_that("Can initialize a model in the meta device and copy parameters to it",
       x <- self$classifier(x)
     }
   )
-  
+
   with_device(device="meta", {
-    model <- net()  
+    model <- net()
   })
-  
+
   expect_true(all(sapply(model$parameters, function(x) x$device$type) == "meta"))
-  
+
   model2 <- net()
   model$load_state_dict(model2$state_dict(), .refer_to_state_dict = TRUE)
-  
+
   state_dict1 <- model$state_dict()
   state_dict2 <- model2$state_dict()
-  
+
   for(i in seq_along(state_dict1)) {
     expect_equal_to_tensor(state_dict1[[i]], state_dict2[[i]])
   }
-  
+
 })
 
 test_that("non persistent buffers work correctly", {
@@ -788,7 +788,7 @@ test_that("non persistent buffers work correctly", {
       self$x + self$y + self$z
     }
   )
-  
+
   model <- module()
   expect_true(all(names(model$state_dict()) %in% c("x", "y")))
   expect_error(
@@ -798,16 +798,16 @@ test_that("non persistent buffers work correctly", {
 })
 
 test_that("can use a named module dict", {
-  
+
   dict <- nn_module_dict(list(
     x = nn_linear(1, 10),
     y = nn_linear(10, 1)
   ))
-  
+
   x <- torch_randn(100,1)
   y <- dict$x(x)
   z <- dict$y(y)
-  
+
   expect_tensor_shape(z, c(100, 1))
   expect_equal(length(dict$parameters), 4)
 })
@@ -817,5 +817,10 @@ test_that("can clone a module with no state dict", {
   expect_no_error({
     nn_relu()$clone(TRUE)
   })
-  
+
+})
+
+test_that("clone preserves requires_grad", {
+  lin = nn_linear(1, 1)
+  expect_equal(lin$weight$requires_grad, lin$clone(deep = TRUE)$weight$requires_grad)
 })

@@ -575,6 +575,6 @@ test_that("cloning works and preserves attributes", {
 test_that("requires grad is left unchanged when cloning tensor", {
   x_requires_grad = torch_tensor(1, requires_grad = TRUE)
   x_no_requires_grad = torch_tensor(1, requires_grad = FALSE)
-  expect_true(x_requires_grad$clone2()$requires_grad)
-  expect_false(x_no_requires_grad$clone2()$requires_grad)
+  expect_true(x_requires_grad$clone()$requires_grad)
+  expect_false(x_no_requires_grad$clone()$requires_grad)
 })
