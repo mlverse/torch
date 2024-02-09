@@ -125,7 +125,7 @@ Tensor$set("active", "requires_grad", function(requires_grad) {
 
 Tensor$set("public", "backward", function(gradient = list(), retain_graph = create_graph,
                                           create_graph = FALSE, inputs = NULL, ...) {
-  
+
   args <- list(...)
   if (!is.null(args$keep_graph)) {
     rlang::warn(c(
@@ -136,7 +136,7 @@ Tensor$set("public", "backward", function(gradient = list(), retain_graph = crea
     )
     retain_graph <- keep_graph
   }
-  
+
   invisible(private$`__backward`(
     gradient = gradient, inputs = inputs, retain_graph = retain_graph,
     create_graph = create_graph
@@ -509,7 +509,7 @@ Node <- R6::R6Class(
       self$ptr <- ptr
     },
     print = function() {
-      cat(cpp_autograd_node_name(self$ptr))
+      cat(cpp_autograd_node_name(self$ptr), "\n")
     }
   ),
   active = list(

@@ -829,3 +829,9 @@ test_that("can clone module after calling $train() or $eval()", {
   expect_true(inherits(nn_linear(1, 1)$train()$clone(deep = TRUE), "nn_module"))
   expect_true(inherits(nn_linear(1, 1)$eval()$clone(deep = TRUE), "nn_module"))
 })
+
+test_that("weights of cloned module don't contain CloneBackward0 grad_fn", {
+  n = nn_linear(1, 1)
+  n1 = n$clone(deep = TRUE)
+  expect_true(is.null(n1$weight$grad_fn))
+})

@@ -584,5 +584,5 @@ test_that("requires grad is left unchanged when cloning tensor", {
 test_that("grad_fn and cloning", {
   x = torch_tensor(1, requires_grad = TRUE)
   x1 = x$clone2()
-  expect_true(is.null(x1$grad_fn))
+  expect_true(grepl(pattern = "CloneBackward0", capture.output(x1$grad_fn), fixed = TRUE))
 })
