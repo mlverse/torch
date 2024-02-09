@@ -1,6 +1,8 @@
 # torch (development version)
 
 - Make sure deep cloning preserve state dict attributes. (#1129)
+- Feature: Added `compare_proxy` method for the `torch_tensor` type, which is
+used in testthat edition 3
 
 # torch 0.12.0
 

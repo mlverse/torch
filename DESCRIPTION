@@ -44,7 +44,7 @@ Imports:
     desc,
     safetensors (>= 0.1.1),
     jsonlite
-RoxygenNote: 7.2.3
+RoxygenNote: 7.3.1
 Roxygen: list(markdown = TRUE)
 Suggests:
     testthat (>= 3.0.0),
@@ -54,7 +54,8 @@ Suggests:
     palmerpenguins,
     mvtnorm,
     numDeriv,
-    katex
+    katex.
+    waldo
 VignetteBuilder: knitr
 Collate:
     'R7.R'
@@ -65,6 +66,7 @@ Collate:
     'backends.R'
     'call_torch_function.R'
     'codegen-utils.R'
+    'compare.R'
     'compat-purrr.R'
     'compilation_unit.R'
     'conditions.R'
