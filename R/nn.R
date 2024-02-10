@@ -449,6 +449,10 @@ is_nn_module <- function(x) {
 #' computations depending wether the model is training or not, for example if you
 #' were implementing the dropout module.
 #'
+#' @section Cloning:
+#' To finalize the clone of a module, you can define a private `finalize_clone()` method which is being called
+#' after calling `$clone()` from the wrapped R6 object.
+#'
 #' @param classname an optional name for the module
 #' @param inherit an optional module to inherit from
 #' @param ... methods implementation
@@ -523,42 +527,52 @@ create_nn_module_callable <- function(instance) {
   on.exit({lockBinding("clone", instance)}, add = TRUE)
   clone <- instance$clone
 
-  instance$clone <- function(deep = FALSE, ..., replace_values = TRUE) {
-    if (deep && replace_values) {
-      state_dict <- append(instance$parameters, instance$buffers)
-      if (length(state_dict) > 0) {
-        names(state_dict) <- sapply(state_dict, xptr_address)
+  # hacky but should do the job
+  # if this is not included, repeated cloning will build up a nested environment structure
+  # and the clone method will call into the parent clone until it reaches the original R6 clone method.
+  if (!("replace_values" %in% formalArgs(clone))) {
+    instance$clone <- function(deep = FALSE, ..., replace_values = TRUE) {
+      if (deep && replace_values) {
+        state_dict <- append(instance$parameters, instance$buffers)
+        if (length(state_dict) > 0) {
+          names(state_dict) <- sapply(state_dict, xptr_address)
 
-        state_dict <- state_dict[!duplicated(names(state_dict))]
-        state_dict <- lapply(state_dict, function(x) {
-          out <- x$detach()$clone()
-          attributes(out) <- attributes(x)
-          out$requires_grad_(x$requires_grad)
-          out
-        })
+          state_dict <- state_dict[!duplicated(names(state_dict))]
+          state_dict <- lapply(state_dict, function(x) {
+            out <- x$detach()$clone()
+            attributes(out) <- attributes(x)
+            out$requires_grad_(x$requires_grad)
+            out
+          })
 
-        # also need to append a clone of the modules to this list.
-        # child modules can be duplicated - and have the same name
-        # child modules are also deep cloned, but we don't need to replace
-        # their values when cloning because we only have to do it once.
-        children <- instance$children
-        names(children) <- sapply(children, rlang::obj_address)
-        children <- children[!duplicated(names(children))]
-        children <- lapply(children, function(x) x$clone(deep = deep, replace_values = FALSE))
+          # also need to append a clone of the modules to this list.
+          # child modules can be duplicated - and have the same name
+          # child modules are also deep cloned, but we don't need to replace
+          # their values when cloning because we only have to do it once.
+          children <- instance$children
+          names(children) <- sapply(children, rlang::obj_address)
+          children <- children[!duplicated(names(children))]
+          children <- lapply(children, function(x) x$clone(deep = deep, replace_values = FALSE))
 
-        state_dict <- append(state_dict, children)
+          state_dict <- append(state_dict, children)
+        }
       }
+
+      cloned_instance <- clone(deep = deep)
+
+      private <- cloned_instance$.__enclos_env__$private
+
+      if (!is.null(private$finalize_clone)) {
+        private$finalize_clone()
+      }
+
+      if (deep && replace_values) {
+        cloned_instance$.replace_values_from_table(state_dict)
+      }
+
+      create_nn_module_callable(cloned_instance)
     }
-
-    cloned_instance <- clone(deep = deep)
-
-    if (deep && replace_values) {
-      cloned_instance$.replace_values_from_table(state_dict)
-    }
-
-    create_nn_module_callable(cloned_instance)
   }
-
 
   f
 }

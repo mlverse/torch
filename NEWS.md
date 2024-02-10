@@ -2,6 +2,8 @@
 
 - Make sure deep cloning does not alter metdata of nn_module and torch_tensor, such as requires_grad and
 class attributes. (#1129)
+* Fixed bug regarding the cloning of cloned modules, which led to increasing
+object sizes
 
 # torch 0.12.0
 

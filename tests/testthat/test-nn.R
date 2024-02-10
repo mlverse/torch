@@ -835,3 +835,28 @@ test_that("weights of cloned module don't contain CloneBackward0 grad_fn", {
   n1 = n$clone(deep = TRUE)
   expect_true(is.null(n1$weight$grad_fn))
 })
+
+test_that("repeated clone works", {
+  n = nn_linear(1, 1)
+  n1 = n$clone(deep = TRUE)
+  n2 = n1$clone(deep = TRUE)
+  expect_identical(attr(n, "module")$clone, attr(n1, "module")$clone)
+  expect_identical(attr(n, "module")$clone, attr(n2, "module")$clone)
+})
+
+test_that("can finalize cloning", {
+  nn_test = nn_module("test", initialize = function() {
+    self$lin = nn_linear(1, 10)
+    },
+    forward = function(x) {
+      self$lin(x)
+    },
+    private = list(
+      finalize_clone = function() {
+        stop("finalize clone")
+      }
+    )
+  )()
+
+  expect_error(nn_test$clone(deep = TRUE), "finalize clone")
+})
