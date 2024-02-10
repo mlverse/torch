@@ -860,3 +860,19 @@ test_that("can finalize cloning", {
 
   expect_error(nn_test$clone(deep = TRUE), "finalize clone")
 })
+
+test_that("children are properly cloned", {
+  nn_test = nn_module("test", initialize = function() {
+    self$l = nn_module_list(list(nn_linear(1, 1)))
+    },
+    forward = function(x) {
+      self$l[[1]](x)
+    }
+  )()
+
+  nn_test1 = nn_test$clone(deep = TRUE)
+  nn_test$clone(deep = TRUE)
+  l1 = nn_test$l$modules[[2]]
+  l2 = nn_test1$l$modules[[2]]
+  expect_false(identical(l1, l2))
+})
