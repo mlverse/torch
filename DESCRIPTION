@@ -54,7 +54,7 @@ Suggests:
     palmerpenguins,
     mvtnorm,
     numDeriv,
-    katex.
+    katex,
     waldo
 VignetteBuilder: knitr
 Collate:
