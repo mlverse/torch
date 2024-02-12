@@ -250,7 +250,7 @@
        0.0000
        0.6931
        1.0986
-      [ CPUFloatType{3} ][ grad_fn = <LogBackward0>]
+      [ CPUFloatType{3} ][ grad_fn = <LogBackward0> ]
 
 # print complex tensors
 
@@ -277,5 +277,5 @@
     Output
       torch_tensor
       ℹ Use `$real` or `$imag` to print the contents of this tensor.
-      [ CPUComplexFloatType{10} ][ grad_fn = <MulBackward0>]
+      [ CPUComplexFloatType{10} ][ grad_fn = <MulBackward0> ]
 
