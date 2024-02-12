@@ -821,7 +821,7 @@ test_that("can clone a module with no state dict", {
 })
 
 test_that("clone preserves requires_grad", {
-  lin = nn_linear(1, 1)
+  lin <- nn_linear(1, 1)
   expect_equal(lin$weight$requires_grad, lin$clone(deep = TRUE)$weight$requires_grad)
 })
 
@@ -831,8 +831,10 @@ test_that("can clone module after calling $train() or $eval()", {
 })
 
 test_that("weights of cloned module don't contain CloneBackward0 grad_fn", {
-  n = nn_linear(1, 1)
-  n1 = n$clone(deep = TRUE)
+  # note that this differs from the cloning of a tensor, which adds the CloneBackward grad_fn
+  # The python equivalent to the $clone() method for nn_modules would be the copy.(deep)copy function in python
+  n <- nn_linear(1, 1)
+  n1 <- n$clone(deep = TRUE)
   expect_true(is.null(n1$weight$grad_fn))
 })
 

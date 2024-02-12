@@ -450,8 +450,7 @@ is_nn_module <- function(x) {
 #' were implementing the dropout module.
 #'
 #' @section Cloning:
-#' To finalize the clone of a module, you can define a private `finalize_clone()` method which is being called
-#' after calling `$clone()` from the wrapped R6 object.
+#' To finalize the cloning of a module, you can define a private `finalize_clone()` method.
 #'
 #' @param classname an optional name for the module
 #' @param inherit an optional module to inherit from
@@ -516,72 +515,73 @@ nn_module <- function(classname = NULL, inherit = nn_Module, ...,
 }
 
 create_nn_module_callable <- function(instance) {
-  if (inherits(instance, "nn_module")) {
-    stop()
-  }
   f <- instance$forward
 
   attr(f, "class") <- instance$.classes
   attr(f, "module") <- instance
+
+  # clone method was already patched, so nothing to do
+  if (!is.null(instance$.__enclos_env__$private$.__clone_r6__)) {
+    return(f)
+  }
+
+  # as R6's clone method is quite restrictive, we here assign the original public $clone() method to the private
+  # field $.__clone_r6__ and create a new patched $clone() method
+  # This circumvents some restrictions in R6, see e.g. this discussion: https://github.com/r-lib/R6/issues/179
   rlang::env_binding_unlock(instance, "clone")
   on.exit({lockBinding("clone", instance)}, add = TRUE)
-  clone <- instance$clone
+  on.exit({lockBinding(".__clone_r6__", instance$.__enclos_env__$private)}, add = TRUE)
+  instance$.__enclos_env__$private$.__clone_r6__ = instance$clone
 
-  # hacky but should do the job
-  # if this is not included, repeated cloning will build up a nested environment structure
-  # and the clone method will call into the parent clone until it reaches the original R6 clone method.
-  if (!("replace_values" %in% formalArgs(clone))) {
-    instance$clone <- function(deep = FALSE, ..., replace_values = TRUE) {
-      collect_state_dict <- function(instance, state_dict) {
-        new_objs <- c(instance$parameters, instance$buffers)
-        names(new_objs) <- sapply(new_objs, xptr_address)
+  instance$clone <- function(deep = FALSE, ..., replace_values = TRUE) {
+    collect_state_dict <- function(instance, state_dict) {
+      new_objs <- c(instance$parameters, instance$buffers)
+      if (length(new_objs)) {
+        names(new_objs) <- map_chr(new_objs, xptr_address)
         state_dict <- append(state_dict, new_objs)
-        # also need to append a clone of the modules to this list.
-        # child modules can be duplicated - and have the same name
-        # child modules are also deep cloned, but we don't need to replace
-        # their values when cloning because we only have to do it once.
-        children <- instance$children
-        if (!length(children)) {
-          return(state_dict)
-        }
-        for (child in children) {
-          state_dict = append(state_dict, collect_state_dict(child, list()))
-          twin = list(child$clone(deep = TRUE, replace_values = FALSE))
-          names(twin) = rlang::obj_address(child)
-          state_dict = append(state_dict, twin)
-        }
+      }
+      # also need to append a clone of the modules to this list.
+      # child modules can be duplicated - and have the same name
+      # child modules are also deep cloned, but we don't need to replace
+      # their values when cloning because we only have to do it once.
+      children <- instance$children
+      if (!length(children)) {
         return(state_dict)
       }
-      if (deep && replace_values) {
-        state_dict <- collect_state_dict(instance, list())
-        state_dict <- state_dict[!duplicated(names(state_dict))]
-        state_dict <- lapply(state_dict, function(x) {
-          if (inherits(x, "nn_module")) {
-            return(x)
-          }
+      state_dict = append(state_dict, reduce(c, map(children, function(child) collect_state_dict(child, list()))))
+      state_dict = append(state_dict, rlang::set_names(children, map_chr(children, rlang::obj_address)))
+      return(state_dict)
+    }
+    if (deep && replace_values) {
+      # this state_dict contains both the parameters and buffers, as well as the children modules (and their
+      # parameters, buffers and children etc.)
+      state_dict <- collect_state_dict(self, list())
+      state_dict <- state_dict[!duplicated(names(state_dict))]
+      state_dict <- map(state_dict, function(x) {
+        if (inherits(x, "nn_module")) {
+          # the values are replaced below, when calling .replace_values_from_table
+          x$clone(deep = deep, replace_values = FALSE)
+        } else { # torch_tensor
           out <- x$detach()$clone()
           attributes(out) <- attributes(x)
           out$requires_grad_(x$requires_grad)
           out
-        })
-      }
-
-
-      cloned_instance <- clone(deep = deep)
-
-      private <- cloned_instance$.__enclos_env__$private
-      if (deep && replace_values) {
-        cloned_instance$.replace_values_from_table(state_dict)
-      }
-
-
-      if (!is.null(private$finalize_clone)) {
-        private$finalize_clone()
-      }
-
-      create_nn_module_callable(cloned_instance)
+        }
+      })
     }
+    cloned_instance <- private$.__clone_r6__(deep = deep)
+
+    if (deep && replace_values) {
+      cloned_instance$.replace_values_from_table(state_dict)
+    }
+
+    if (!is.null(private$finalize_clone)) {
+      private$finalize_clone()
+    }
+
+    create_nn_module_callable(cloned_instance)
   }
+  environment(instance$clone) = instance$.__enclos_env__
 
   f
 }

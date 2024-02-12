@@ -1,9 +1,13 @@
 # torch (development version)
 
-- Make sure deep cloning does not alter metdata of nn_module and torch_tensor, such as requires_grad and
-class attributes. (#1129)
-* Fixed bug regarding the cloning of cloned modules, which led to increasing
-object sizes
+- Make sure deep cloning of tensor and nn_module preserves class attributes and the requires_grad field. (#1129)
+- Fixed that parameters and buffers of children of nn_modules were not cloned
+- Cloned objects no longer reference the object from which they were cloned
+- Fixed bug where nn_module's patched clone method was invalid after a call to
+  the internal `create_nn_module_callable()`
+- Printing of `grad_fn` now appends a new line at the end.
+- Added support for a private `$finalize_clone()` method for `nn_module` which
+ allows to run some code after cloning a module.
 
 # torch 0.12.0
 

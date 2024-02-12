@@ -83,8 +83,7 @@ were implementing the dropout module.
 
 \section{Cloning}{
 
-To finalize the clone of a module, you can define a private \code{finalize_clone()} method which is being called
-after calling \verb{$clone()} from the wrapped R6 object.
+To finalize the cloning of a module, you can define a private \code{finalize_clone()} method.
 }
 
 \examples{
