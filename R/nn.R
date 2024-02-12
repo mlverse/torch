@@ -538,7 +538,6 @@ create_nn_module_callable <- function(instance) {
   instance$clone <- function(deep = FALSE, ..., replace_values = TRUE) {
     collect_state_dict <- function(instance, state_dict) {
       # the parameters and buffers of child modules are retrieved below
-      private <- instance$.__enclos_env__$private
       new_objs <- c(instance$named_parameters(recursive = FALSE), instance$named_buffers(recursive = FALSE))
       if (length(new_objs)) {
         names(new_objs) <- map_chr(new_objs, xptr_address)
