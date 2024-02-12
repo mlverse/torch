@@ -83,7 +83,9 @@ were implementing the dropout module.
 
 \section{Cloning}{
 
-To finalize the cloning of a module, you can define a private \code{finalize_clone()} method.
+To finalize the cloning of a module, you can define a private \code{finalize_deep_clone()} method.
+This method is called on the cloned object when deep-cloning a module, after all the modules, parameters and
+buffers were already cloned.
 }
 
 \examples{

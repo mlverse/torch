@@ -450,7 +450,9 @@ is_nn_module <- function(x) {
 #' were implementing the dropout module.
 #'
 #' @section Cloning:
-#' To finalize the cloning of a module, you can define a private `finalize_clone()` method.
+#' To finalize the cloning of a module, you can define a private `finalize_deep_clone()` method.
+#' This method is called on the cloned object when deep-cloning a module, after all the modules, parameters and
+#' buffers were already cloned.
 #'
 #' @param classname an optional name for the module
 #' @param inherit an optional module to inherit from
@@ -542,8 +544,7 @@ create_nn_module_callable <- function(instance) {
       }
       # also need to append a clone of the modules to this list.
       # child modules can be duplicated - and have the same name
-      # child modules are also deep cloned, but we don't need to replace
-      # their values when cloning because we only have to do it once.
+      # note that we store both the modules, as well as their parameters and buffers in the state_dict
       children <- instance$children
       if (!length(children)) {
         return(state_dict)
@@ -553,17 +554,22 @@ create_nn_module_callable <- function(instance) {
       return(state_dict)
     }
     if (deep && replace_values) {
-      # this state_dict contains both the parameters and buffers, as well as the children modules (and their
-      # parameters, buffers and children etc.)
+      # the state_dict contains all the objects that need to be cloned and for which we also ensure that objects
+      # that were previously equal by reference are still equal
+      # To achieve this, the names of the state dict are the (external pointer) addresses of the objects
+      # BEFORE cloning
       state_dict <- collect_state_dict(self, list())
+      # each unique value must only be cloned once
       state_dict <- state_dict[!duplicated(names(state_dict))]
       state_dict <- map(state_dict, function(x) {
         if (inherits(x, "nn_module")) {
           # the values are replaced below, when calling .replace_values_from_table
           x$clone(deep = deep, replace_values = FALSE)
         } else { # torch_tensor
-          out <- x$detach()$clone()
-          attributes(out) <- attributes(x)
+          # without the detaching, the clone method adds a CloneBackward node which is undessireable when cloning
+          # modules, as the cloned module should be independent from the clonee
+          out <- x$detach()$clone2()
+          # because of the detach() above, we now need to reset the requires_grad field
           out$requires_grad_(x$requires_grad)
           out
         }
@@ -573,10 +579,10 @@ create_nn_module_callable <- function(instance) {
 
     if (deep && replace_values) {
       cloned_instance$.replace_values_from_table(state_dict)
-    }
-
-    if (!is.null(private$finalize_clone)) {
-      private$finalize_clone()
+      cloned_private = cloned_instance$.__enclos_env__$private
+      if (!is.null(cloned_private$finalize_deep_clone)) {
+        cloned_private$finalize_deep_clone()
+      }
     }
 
     create_nn_module_callable(cloned_instance)

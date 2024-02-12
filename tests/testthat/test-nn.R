@@ -823,6 +823,9 @@ test_that("can clone a module with no state dict", {
 test_that("clone preserves requires_grad", {
   lin <- nn_linear(1, 1)
   expect_equal(lin$weight$requires_grad, lin$clone(deep = TRUE)$weight$requires_grad)
+
+  lin$weight$requires_grad_(FALSE)
+  expect_equal(lin$weight$requires_grad, lin$clone(deep = TRUE)$weight$requires_grad)
 })
 
 test_that("can clone module after calling $train() or $eval()", {
@@ -839,42 +842,43 @@ test_that("weights of cloned module don't contain CloneBackward0 grad_fn", {
 })
 
 test_that("repeated clone works", {
-  n = nn_linear(1, 1)
-  n1 = n$clone(deep = TRUE)
-  n2 = n1$clone(deep = TRUE)
+  n <- nn_linear(1, 1)
+  n1 <- n$clone(deep = TRUE)
+  n2 <- n1$clone(deep = TRUE)
   expect_identical(attr(n, "module")$clone, attr(n1, "module")$clone)
   expect_identical(attr(n, "module")$clone, attr(n2, "module")$clone)
 })
 
 test_that("can finalize cloning", {
-  nn_test = nn_module("test", initialize = function() {
-    self$lin = nn_linear(1, 10)
+  nn_test <- nn_module("test", initialize = function() {
+    self$lin <- nn_linear(1, 10)
     },
     forward = function(x) {
       self$lin(x)
     },
     private = list(
-      finalize_clone = function() {
-        stop("finalize clone")
+      finalize_deep_clone = function() {
+        self$new_val <- 1
       }
     )
   )()
 
-  expect_error(nn_test$clone(deep = TRUE), "finalize clone")
+  nn_test1 <- nn_test$clone(deep = TRUE)
+  expect_equal(nn_test1$new_val, 1)
+  expect_false(isTRUE(all.equal(nn_test$new_val, 1)))
 })
 
 test_that("children are properly cloned", {
-  nn_test = nn_module("test", initialize = function() {
-    self$l = nn_module_list(list(nn_linear(1, 1)))
+  nn_test <- nn_module("test", initialize = function() {
+    self$l <- nn_module_list(list(nn_linear(1, 1)))
     },
     forward = function(x) {
       self$l[[1]](x)
     }
   )()
 
-  nn_test1 = nn_test$clone(deep = TRUE)
-  nn_test$clone(deep = TRUE)
-  l1 = nn_test$l$modules[[2]]
-  l2 = nn_test1$l$modules[[2]]
+  nn_test1 <- nn_test$clone(deep = TRUE)
+  l1 <- nn_test$l$modules[[2]]
+  l2 <- nn_test1$l$modules[[2]]
   expect_false(identical(l1, l2))
 })

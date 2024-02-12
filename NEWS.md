@@ -6,7 +6,7 @@
 - Fixed bug where nn_module's patched clone method was invalid after a call to
   the internal `create_nn_module_callable()`
 - Printing of `grad_fn` now appends a new line at the end.
-- Added support for a private `$finalize_clone()` method for `nn_module` which
+- Added support for a private `$finalize_deep_clone()` method for `nn_module` which
  allows to run some code after cloning a module.
 
 # torch 0.12.0
