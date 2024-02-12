@@ -537,7 +537,9 @@ create_nn_module_callable <- function(instance) {
 
   instance$clone <- function(deep = FALSE, ..., replace_values = TRUE) {
     collect_state_dict <- function(instance, state_dict) {
-      new_objs <- c(instance$parameters, instance$buffers)
+      # the parameters and buffers of child modules are retrieved below
+      private <- instance$.__enclos_env__$private
+      new_objs <- c(instance$named_parameters(recursive = FALSE), instance$named_buffers(recursive = FALSE))
       if (length(new_objs)) {
         names(new_objs) <- map_chr(new_objs, xptr_address)
         state_dict <- append(state_dict, new_objs)
@@ -549,7 +551,9 @@ create_nn_module_callable <- function(instance) {
       if (!length(children)) {
         return(state_dict)
       }
-      state_dict = append(state_dict, reduce(c, map(children, function(child) collect_state_dict(child, list()))))
+      for (child in children) {
+        state_dict = collect_state_dict(child, state_dict)
+      }
       state_dict = append(state_dict, rlang::set_names(children, map_chr(children, rlang::obj_address)))
       return(state_dict)
     }
@@ -564,11 +568,15 @@ create_nn_module_callable <- function(instance) {
       state_dict <- map(state_dict, function(x) {
         if (inherits(x, "nn_module")) {
           # the values are replaced below, when calling .replace_values_from_table
+          # this will fail when different submodules contain the same object by reference, but
+          # this needs a solution in R6 and not here
           x$clone(deep = deep, replace_values = FALSE)
         } else { # torch_tensor
           # without the detaching, the clone method adds a CloneBackward node which is undessireable when cloning
           # modules, as the cloned module should be independent from the clonee
           out <- x$detach()$clone2()
+          # we need this, because of https://github.com/mlverse/torch/issues/1136
+          attributes(out) <- attributes(x)
           # because of the detach() above, we now need to reset the requires_grad field
           out$requires_grad_(x$requires_grad)
           out
@@ -587,7 +595,7 @@ create_nn_module_callable <- function(instance) {
 
     create_nn_module_callable(cloned_instance)
   }
-  environment(instance$clone) = instance$.__enclos_env__
+  environment(instance$clone) <- instance$.__enclos_env__
 
   f
 }

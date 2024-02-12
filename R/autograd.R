@@ -508,8 +508,12 @@ Node <- R6::R6Class(
     initialize = function(ptr) {
       self$ptr <- ptr
     },
-    print = function() {
-      cat(cpp_autograd_node_name(self$ptr), "\n")
+    print = function(newline = TRUE) {
+      if (newline) {
+        cat(cpp_autograd_node_name(self$ptr), "\n", sep = "")
+      } else {
+        cat(cpp_autograd_node_name(self$ptr))
+      }
     }
   ),
   active = list(

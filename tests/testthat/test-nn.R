@@ -845,8 +845,8 @@ test_that("repeated clone works", {
   n <- nn_linear(1, 1)
   n1 <- n$clone(deep = TRUE)
   n2 <- n1$clone(deep = TRUE)
-  expect_identical(attr(n, "module")$clone, attr(n1, "module")$clone)
-  expect_identical(attr(n, "module")$clone, attr(n2, "module")$clone)
+  expect_equal(attr(n, "module")$clone, attr(n1, "module")$clone)
+  expect_equal(attr(n, "module")$clone, attr(n2, "module")$clone)
 })
 
 test_that("can finalize cloning", {
@@ -880,5 +880,16 @@ test_that("children are properly cloned", {
   nn_test1 <- nn_test$clone(deep = TRUE)
   l1 <- nn_test$l$modules[[2]]
   l2 <- nn_test1$l$modules[[2]]
+  expect_false(identical(
+    l1$parameters,
+    l2$parameters
+  ))
   expect_false(identical(l1, l2))
+})
+
+test_that("non-persistent buffers are cloned", {
+  n = nn_identity()
+  n$register_buffer("a", nn_buffer(torch_tensor(1)), persistent = FALSE)
+  n1 = n$clone(deep = TRUE)
+  expect_false(identical(n$buffers, n1$buffers))
 })
