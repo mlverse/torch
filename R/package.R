@@ -1,6 +1,5 @@
 #' @useDynLib torchpkg, .registration = TRUE
 #' @importFrom Rcpp sourceCpp
-#' @importFrom methods formalArgs
 NULL
 
 globalVariables(c("..", "self", "private", "N"))
