@@ -553,17 +553,17 @@ test_that("can copy a mps tensor", {
 test_that("cloning works and preserves attributes", {
   # buffer
   x_buf <- nn_buffer(torch_tensor(1))
-  x_buf_clone = x_buf$clone2()
+  x_buf_clone <- x_buf$clone2()
   expect_equal(attributes(x_buf), attributes(x_buf_clone))
-  x_buf[1] = 2
+  x_buf[1] <- 2
   expect_false(torch_equal(x_buf, x_buf_clone))
 
   # parameter
   x_param <- nn_parameter(torch_tensor(1))
-  x_param_clone = x_param$clone2()
+  x_param_clone <- x_param$clone2()
   expect_equal(attributes(x_param), attributes(x_param_clone))
   x_param$requires_grad_(FALSE) # otherwise we cannot modify tensor in-place
-  x_param[1] = 2
+  x_param[1] <- 2
   expect_false(torch_equal(x_param, x_param_clone))
 
   # tensor
@@ -576,14 +576,14 @@ test_that("cloning works and preserves attributes", {
 
 test_that("requires grad is left unchanged when cloning tensor", {
   x_requires_grad = torch_tensor(1, requires_grad = TRUE)
-  x_no_requires_grad = torch_tensor(1, requires_grad = FALSE)
+  x_no_requires_grad <- torch_tensor(1, requires_grad = FALSE)
   expect_true(x_requires_grad$clone()$requires_grad)
   expect_false(x_no_requires_grad$clone()$requires_grad)
 })
 
 test_that("grad_fn and cloning", {
   # this is the same behaviour as shown by PyTorch's .clone() method
-  x = torch_tensor(1, requires_grad = TRUE)
-  x1 = x$clone2()
+  x <- torch_tensor(1, requires_grad = TRUE)
+  x1 <- x$clone2()
   expect_true(grepl(pattern = "CloneBackward0", capture.output(x1$grad_fn), fixed = TRUE))
 })

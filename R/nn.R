@@ -533,7 +533,7 @@ create_nn_module_callable <- function(instance) {
   rlang::env_binding_unlock(instance, "clone")
   on.exit({lockBinding("clone", instance)}, add = TRUE)
   on.exit({lockBinding(".__clone_r6__", instance$.__enclos_env__$private)}, add = TRUE)
-  instance$.__enclos_env__$private$.__clone_r6__ = instance$clone
+  instance$.__enclos_env__$private$.__clone_r6__ <- instance$clone
 
   instance$clone <- function(deep = FALSE, ..., replace_values = TRUE) {
     collect_state_dict <- function(instance, state_dict) {
@@ -552,9 +552,9 @@ create_nn_module_callable <- function(instance) {
         return(state_dict)
       }
       for (child in children) {
-        state_dict = collect_state_dict(child, state_dict)
+        state_dict <- collect_state_dict(child, state_dict)
       }
-      state_dict = append(state_dict, rlang::set_names(children, map_chr(children, rlang::obj_address)))
+      state_dict <- append(state_dict, rlang::set_names(children, map_chr(children, rlang::obj_address)))
       return(state_dict)
     }
     if (deep && replace_values) {
@@ -587,7 +587,7 @@ create_nn_module_callable <- function(instance) {
 
     if (deep && replace_values) {
       cloned_instance$.replace_values_from_table(state_dict)
-      cloned_private = cloned_instance$.__enclos_env__$private
+      cloned_private <- cloned_instance$.__enclos_env__$private
       if (!is.null(cloned_private$finalize_deep_clone)) {
         cloned_private$finalize_deep_clone()
       }

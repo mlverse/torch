@@ -888,8 +888,8 @@ test_that("children are properly cloned", {
 })
 
 test_that("non-persistent buffers are cloned", {
-  n = nn_identity()
+  n <- nn_identity()
   n$register_buffer("a", nn_buffer(torch_tensor(1)), persistent = FALSE)
-  n1 = n$clone(deep = TRUE)
+  n1 <- n$clone(deep = TRUE)
   expect_false(identical(n$buffers, n1$buffers))
 })
