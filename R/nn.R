@@ -985,7 +985,7 @@ clone_module <- function(module, deep = FALSE, ..., replace_values = TRUE) {
     state_dict <- map(state_dict, function(x) {
       if (inherits(x, "nn_module")) {
         # the values are replaced below, when calling .replace_values_from_table
-        # this will fail when different submodules contain the same object by reference, but
+        # this will fail when different submodules contain the same non-torch object by reference (e.g. R6 class), but
         # this needs a solution in R6 and not here
         x$clone(deep = deep, replace_values = FALSE)
       } else { # torch_tensor
