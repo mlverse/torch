@@ -535,64 +535,13 @@ create_nn_module_callable <- function(instance) {
   on.exit({lockBinding(".__clone_r6__", instance$.__enclos_env__$private)}, add = TRUE)
   instance$.__enclos_env__$private$.__clone_r6__ <- instance$clone
 
+  # because the clone method is encapsulated, it cannot access torch's internal functions and we hence need to call
+  # into torch's public API
+  # We even explicitely annotate the namespace, as it might otherwise be the case, that other packages
+  # define their own custom modules and (accidentally) a clone_module function which would lead to this clone_module
+  # function being found before torch's clone_module
   instance$clone <- function(deep = FALSE, ..., replace_values = TRUE) {
-    collect_state_dict <- function(instance, state_dict) {
-      # the parameters and buffers of child modules are retrieved below
-      new_objs <- c(instance$named_parameters(recursive = FALSE), instance$named_buffers(recursive = FALSE))
-      if (length(new_objs)) {
-        names(new_objs) <- map_chr(new_objs, xptr_address)
-        state_dict <- append(state_dict, new_objs)
-      }
-      # also need to append a clone of the modules to this list.
-      # child modules can be duplicated - and have the same name
-      # note that we store both the modules, as well as their parameters and buffers in the state_dict
-      children <- instance$children
-      if (!length(children)) {
-        return(state_dict)
-      }
-      for (child in children) {
-        state_dict <- collect_state_dict(child, state_dict)
-      }
-      state_dict <- append(state_dict, rlang::set_names(children, map_chr(children, rlang::obj_address)))
-      return(state_dict)
-    }
-    if (deep && replace_values) {
-      # the state_dict contains all the objects that need to be cloned and for which we also ensure that objects
-      # that were previously equal by reference are still equal
-      # To achieve this, the names of the state dict are the (external pointer) addresses of the objects
-      # BEFORE cloning
-      state_dict <- collect_state_dict(self, list())
-      # each unique value must only be cloned once
-      state_dict <- state_dict[!duplicated(names(state_dict))]
-      state_dict <- map(state_dict, function(x) {
-        if (inherits(x, "nn_module")) {
-          # the values are replaced below, when calling .replace_values_from_table
-          # this will fail when different submodules contain the same object by reference, but
-          # this needs a solution in R6 and not here
-          x$clone(deep = deep, replace_values = FALSE)
-        } else { # torch_tensor
-          # without the detaching, the clone method adds a CloneBackward node which is undessireable when cloning
-          # modules, as the cloned module should be independent from the clonee
-          out <- x$detach()$clone2()
-          # we need this, because of https://github.com/mlverse/torch/issues/1136
-          attributes(out) <- attributes(x)
-          # because of the detach() above, we now need to reset the requires_grad field
-          out$requires_grad_(x$requires_grad)
-          out
-        }
-      })
-    }
-    cloned_instance <- private$.__clone_r6__(deep = deep)
-
-    if (deep && replace_values) {
-      cloned_instance$.replace_values_from_table(state_dict)
-      cloned_private <- cloned_instance$.__enclos_env__$private
-      if (!is.null(cloned_private$finalize_deep_clone)) {
-        cloned_private$finalize_deep_clone()
-      }
-    }
-
-    create_nn_module_callable(cloned_instance)
+    torch::clone_module(self, deep = deep, ..., replace_values = replace_values)
   }
   environment(instance$clone) <- instance$.__enclos_env__
 
@@ -982,4 +931,84 @@ keepvars_or_detach <- function(p, keepvars) {
   } else {
     p
   }
+}
+collect_state_dict <- function(instance, state_dict) {
+  # the parameters and buffers of child modules are retrieved below
+  new_objs <- c(instance$named_parameters(recursive = FALSE), instance$named_buffers(recursive = FALSE))
+  if (length(new_objs)) {
+    names(new_objs) <- map_chr(new_objs, xptr_address)
+    state_dict <- append(state_dict, new_objs)
+  }
+  # also need to append a clone of the modules to this list.
+  # child modules can be duplicated - and have the same name
+  # note that we store both the modules, as well as their parameters and buffers in the state_dict
+  children <- instance$children
+  if (!length(children)) {
+    return(state_dict)
+  }
+  for (child in children) {
+    state_dict <- collect_state_dict(child, state_dict)
+  }
+  state_dict <- append(state_dict, rlang::set_names(children, map_chr(children, rlang::obj_address)))
+  return(state_dict)
+}
+
+#' @title Clone a torch module.
+#'
+#' @description
+#' Clones a module.
+#'
+#' @param module ([`nn_module`])\cr
+#'   The module to clone
+#' @param deep (`logical(1)`)\cr
+#'   Whether to create a deep clone.
+#' @param ... (any)\cr
+#'   Additional parameters, currently unused.
+#' @param replace_values (`logical(1)`)\cr
+#'   Whether to replace parameters and buffers with the cloned values.
+#'
+#' @export
+#' @examples
+#' clone_module(nn_linear(1, 1), deep = TRUE)
+#' # is the same as
+#' nn_linear(1, 1)$clone(deep = TRUE)
+clone_module <- function(module, deep = FALSE, ..., replace_values = TRUE) {
+  private <- module$.__enclos_env__$private
+  if (deep && replace_values) {
+    # the state_dict contains all the objects that need to be cloned and for which we also ensure that objects
+    # that were previously equal by reference are still equal
+    # To achieve this, the names of the state dict are the (external pointer) addresses of the objects
+    # BEFORE cloning
+    state_dict <- collect_state_dict(module, list())
+    # each unique value must only be cloned once
+    state_dict <- state_dict[!duplicated(names(state_dict))]
+    state_dict <- map(state_dict, function(x) {
+      if (inherits(x, "nn_module")) {
+        # the values are replaced below, when calling .replace_values_from_table
+        # this will fail when different submodules contain the same object by reference, but
+        # this needs a solution in R6 and not here
+        x$clone(deep = deep, replace_values = FALSE)
+      } else { # torch_tensor
+        # without the detaching, the clone method adds a CloneBackward node which is undessireable when cloning
+        # modules, as the cloned module should be independent from the clonee
+        out <- x$detach()$clone2()
+        # we need this, because of https://github.com/mlverse/torch/issues/1136
+        attributes(out) <- attributes(x)
+        # because of the detach() above, we now need to reset the requires_grad field
+        out$requires_grad_(x$requires_grad)
+        out
+      }
+    })
+  }
+  cloned_instance <- private$.__clone_r6__(deep = deep)
+
+  if (deep && replace_values) {
+    cloned_instance$.replace_values_from_table(state_dict)
+    cloned_private <- cloned_instance$.__enclos_env__$private
+    if (!is.null(cloned_private$finalize_deep_clone)) {
+      cloned_private$finalize_deep_clone()
+    }
+  }
+
+  create_nn_module_callable(cloned_instance)
 }
