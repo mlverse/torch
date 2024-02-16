@@ -552,5 +552,6 @@ test_that("can copy a mps tensor", {
 
 test_that("cuda tensor can be converted to tensor", {
   skip_if_cuda_not_available()
-  expect_s3_class(as.array(torch_tensor(1, device = "cuda")), "array")
+  x <- as.array(torch_tensor(1, device = "cuda"))
+  expect_equal(x, 1)
 })
