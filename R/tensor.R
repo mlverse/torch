@@ -289,8 +289,8 @@ Tensor <- R7Class(
     half = function() {
       self$to(dtype=torch_half())
     },
-    clone2 = function() {
-      x <- torch_clone(self)
+    clone = function(...) {
+      x <- private$`_clone`(...)
       x$requires_grad_(self$requires_grad)
       attributes(x) <- attributes(self)
 

@@ -1757,7 +1757,7 @@ call_c_function(
   return_types = return_types,
   fun_type = 'method'
 )})
-Tensor$set("public", "clone", function(memory_format = NULL) {  args <- mget(x = c("memory_format"))
+Tensor$set("private", "_clone", function(memory_format = NULL) {  args <- mget(x = c("memory_format"))
 args <- c(list(self = self), args)
 expected_types <- list(self = "Tensor", memory_format = "MemoryFormat")
 nd_args <- "self"

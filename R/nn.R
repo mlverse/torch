@@ -991,7 +991,7 @@ clone_module <- function(module, deep = FALSE, ..., replace_values = TRUE) {
       } else { # torch_tensor
         # without the detaching, the clone method adds a CloneBackward node which is undessireable when cloning
         # modules, as the cloned module should be independent from the clonee
-        out <- x$detach()$clone2()
+        out <- x$detach()$clone()
         # we need this, because of https://github.com/mlverse/torch/issues/1136
         attributes(out) <- attributes(x)
         # because of the detach() above, we now need to reset the requires_grad field
