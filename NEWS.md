@@ -1,6 +1,7 @@
 # torch (development version)
 
 - Make sure deep cloning preserve state dict attributes. (#1129)
+- Converting torch tensor to R array works when tensor has 'cuda' device (#1130)
 
 # torch 0.12.0
 
