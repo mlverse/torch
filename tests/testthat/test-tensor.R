@@ -89,7 +89,7 @@ test_that("Cuda tensor convertion", {
   skip_if_cuda_not_available()
 
   x <- torch_tensor(1, device = torch_device("cuda"))
-  expect_error(as_array(x), class = "runtime_error")
+  expect_error(as_array(x), regexp = NA)
 
   x <- x$to(dtype = torch_float(), device = torch_device("cpu"))
   expect_equal_to_r(x, 1)
@@ -552,5 +552,5 @@ test_that("can copy a mps tensor", {
 
 test_that("cuda tensor can be converted to tensor", {
   skip_if_cuda_not_available()
-  expect_class(as.array(torch_tensor(1, device = "cuda")), "array")
+  expect_s3_class(as.array(torch_tensor(1, device = "cuda")), "array")
 })
