@@ -419,10 +419,6 @@ as_array_impl <- function(x) {
 
 #' @export
 as_array.torch_tensor <- function(x) {
-  if (x$device$type == "cuda") {
-    runtime_error("Can't convert cuda tensor to R. Convert to cpu tensor before.")
-  }
-
   # dequantize before converting
   if (x$is_quantized()) {
     x <- x$dequantize()
