@@ -16,8 +16,10 @@ test_that("can compare tensors with testthat edition 3", {
     torch_tensor(1),
     torch_tensor(2)
   ))
+})
 
-  skip_if_no_cuda()
+test_that("compare tensors using cuda", {
+  skip_if_cuda_not_available()
 
   expect_failure(expect_equal(
     torch_tensor(1)$cuda(),
