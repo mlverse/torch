@@ -338,21 +338,6 @@ nn_Module <- R6::R6Class(
 )
 
 
-  # as R6's clone method is quite restrictive, we here assign the original public $clone() method to the private
-  # field $.__clone_r6__ and create a new patched $clone() method
-  # This circumvents some restrictions in R6, see e.g. this discussion: https://github.com/r-lib/R6/issues/179
-nn_Module$set("private", ".__clone_r6__", nn_Module$public_methods$clone, overwrite = TRUE)
-# because the clone method is encapsulated (happens during $new()), it cannot access torch's internal functions and we
-# hence need to call into torch's public API
-# We even explicitely annotate the namespace, as it might otherwise be the case, that other packages
-# define their own custom modules and (accidentally) a clone_module function which would lead to this clone_module
-# function being found before torch's clone_module
-nn_Module$set("public", "clone", overwrite = TRUE, value = function(deep = FALSE, ..., replace_values = TRUE) {
-    torch::clone_module(self, deep = deep, ..., replace_values = replace_values)
-  }
-)
-
-
 #' Creates an `nn_parameter`
 #'
 #' Indicates to nn_module that `x` is a parameter
@@ -517,6 +502,23 @@ nn_module <- function(classname = NULL, inherit = nn_Module, ...,
     active = active,
     parent_env = e
   )
+
+  # We can't patch $clone() in nn_Moudle, as the inheriting classes will not inherit the patched $clone() method
+
+  # as R6's clone method is quite restrictive, we here assign the original public $clone() method to the private
+  # field $.__clone_r6__ and create a new patched $clone() method
+  # This circumvents some restrictions in R6, see e.g. this discussion: https://github.com/r-lib/R6/issues/179
+  Module$set("private", ".__clone_r6__", nn_Module$public_methods$clone, overwrite = TRUE)
+  # because the clone method is encapsulated (happens during $new()), it cannot access torch's internal functions and we
+  # hence need to call into torch's public API
+  # We even explicitely annotate the namespace, as it might otherwise be the case, that other packages
+  # define their own custom modules and (accidentally) a clone_module function which would lead to this clone_module
+  # function being found before torch's clone_module
+  Module$set("public", "clone", overwrite = TRUE, value = function(deep = FALSE, ..., replace_values = TRUE) {
+      torch::clone_module(self, deep = deep, ..., replace_values = replace_values)
+    }
+  )
+
 
   init <- get_init(Module)
 
