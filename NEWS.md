@@ -3,6 +3,7 @@
 - Make sure deep cloning preserve state dict attributes. (#1129)
 - A `compare_proxy` method for the `torch_tensor` type was added
   it allows to compare torch tensor's using `testthat::expect_equal()`.
+- Converting torch tensor to R array works when tensor has 'cuda' device (#1130)
 
 # torch 0.12.0
 
