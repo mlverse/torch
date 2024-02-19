@@ -1,6 +1,8 @@
 # torch (development version)
 
 - Make sure deep cloning preserve state dict attributes. (#1129)
+- A `compare_proxy` method for the `torch_tensor` type was added
+  it allows to compare torch tensor's using `testthat::expect_equal()`.
 
 # torch 0.12.0
 
