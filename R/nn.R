@@ -337,6 +337,22 @@ nn_Module <- R6::R6Class(
   )
 )
 
+
+  # as R6's clone method is quite restrictive, we here assign the original public $clone() method to the private
+  # field $.__clone_r6__ and create a new patched $clone() method
+  # This circumvents some restrictions in R6, see e.g. this discussion: https://github.com/r-lib/R6/issues/179
+nn_Module$set("private", ".__clone_r6__", nn_Module$public_methods$clone, overwrite = TRUE)
+# because the clone method is encapsulated (happens during $new()), it cannot access torch's internal functions and we
+# hence need to call into torch's public API
+# We even explicitely annotate the namespace, as it might otherwise be the case, that other packages
+# define their own custom modules and (accidentally) a clone_module function which would lead to this clone_module
+# function being found before torch's clone_module
+nn_Module$set("public", "clone", overwrite = TRUE, value = function(deep = FALSE, ..., replace_values = TRUE) {
+    torch::clone_module(self, deep = deep, ..., replace_values = replace_values)
+  }
+)
+
+
 #' Creates an `nn_parameter`
 #'
 #' Indicates to nn_module that `x` is a parameter
@@ -521,30 +537,6 @@ create_nn_module_callable <- function(instance) {
 
   attr(f, "class") <- instance$.classes
   attr(f, "module") <- instance
-
-  # clone method was already patched, so nothing to do
-  if (!is.null(instance$.__enclos_env__$private$.__clone_r6__)) {
-    return(f)
-  }
-
-  # as R6's clone method is quite restrictive, we here assign the original public $clone() method to the private
-  # field $.__clone_r6__ and create a new patched $clone() method
-  # This circumvents some restrictions in R6, see e.g. this discussion: https://github.com/r-lib/R6/issues/179
-  rlang::env_binding_unlock(instance, "clone")
-  on.exit({lockBinding("clone", instance)}, add = TRUE)
-  on.exit({lockBinding(".__clone_r6__", instance$.__enclos_env__$private)}, add = TRUE)
-  instance$.__enclos_env__$private$.__clone_r6__ <- instance$clone
-
-  # because the clone method is encapsulated, it cannot access torch's internal functions and we hence need to call
-  # into torch's public API
-  # We even explicitely annotate the namespace, as it might otherwise be the case, that other packages
-  # define their own custom modules and (accidentally) a clone_module function which would lead to this clone_module
-  # function being found before torch's clone_module
-  instance$clone <- function(deep = FALSE, ..., replace_values = TRUE) {
-    torch::clone_module(self, deep = deep, ..., replace_values = replace_values)
-  }
-  environment(instance$clone) <- instance$.__enclos_env__
-
   f
 }
 
