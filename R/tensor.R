@@ -291,7 +291,6 @@ Tensor <- R7Class(
     },
     clone = function(...) {
       x <- private$`_clone`(...)
-      x$requires_grad_(self$requires_grad)
       attributes(x) <- attributes(self)
 
       return(x)
