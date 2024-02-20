@@ -550,6 +550,44 @@ test_that("can copy a mps tensor", {
   expect_true(all.equal(x, x_, tolerance = 1e-5))
 })
 
+test_that("cloning works and preserves attributes", {
+  # buffer
+  x_buf <- nn_buffer(torch_tensor(1))
+  x_buf_clone <- x_buf$clone()
+  expect_equal(attributes(x_buf), attributes(x_buf_clone))
+  x_buf[1] <- 2
+  expect_false(torch_equal(x_buf, x_buf_clone))
+
+  # parameter
+  x_param <- nn_parameter(torch_tensor(1))
+  x_param_clone <- x_param$clone()
+  expect_equal(attributes(x_param), attributes(x_param_clone))
+  x_param$requires_grad_(FALSE) # otherwise we cannot modify tensor in-place
+  x_param[1] <- 2
+  expect_false(torch_equal(x_param, x_param_clone))
+
+  # tensor
+  x <- torch_tensor(1)
+  x_clone <- x$clone()
+  expect_equal(attributes(x_clone), attributes(x))
+  x[1] <- 2
+  expect_false(torch_equal(x_clone, x))
+})
+
+test_that("requires grad is left unchanged when cloning tensor", {
+  x_requires_grad = torch_tensor(1, requires_grad = TRUE)
+  x_no_requires_grad <- torch_tensor(1, requires_grad = FALSE)
+  expect_true(x_requires_grad$clone()$requires_grad)
+  expect_false(x_no_requires_grad$clone()$requires_grad)
+})
+
+test_that("grad_fn and cloning", {
+  # this is the same behaviour as shown by PyTorch's .clone() method
+  x <- torch_tensor(1, requires_grad = TRUE)
+  x1 <- x$clone()
+  expect_true(grepl(pattern = "CloneBackward0", capture.output(x1$grad_fn), fixed = TRUE))
+})
+
 test_that("cuda tensor can be converted to tensor", {
   skip_if_cuda_not_available()
   x <- as.array(torch_tensor(1, device = "cuda"))
