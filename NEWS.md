@@ -1,5 +1,6 @@
 # torch (development version)
 
+- Bugfix: calling `$detach()` on a tensor now preserves attributes (#1136)
 - Make sure deep cloning of tensor and nn_module preserves class attributes and the requires_grad field. (#1129)
 - Fixed that parameters and buffers of children of nn_modules were not cloned
 - Cloned objects no longer reference the object from which they were cloned

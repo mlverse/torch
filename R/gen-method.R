@@ -2161,7 +2161,7 @@ call_c_function(
   return_types = return_types,
   fun_type = 'method'
 )})
-Tensor$set("public", "detach", function() {  args <- list()
+Tensor$set("private", "_detach", function() {  args <- list()
 args <- c(list(self = self), args)
 expected_types <- list(self = "Tensor")
 nd_args <- "self"
