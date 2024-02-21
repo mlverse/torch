@@ -15,7 +15,7 @@ Categorical <- R6::R6Class(
     has_enumerate_support = TRUE,
     initialize = function(probs = NULL, logits = NULL, validate_args = NULL) {
       if (is.null(probs) == is.null(logits)) {
-        value_error("Either probs or logits must be specified but not both.")
+        value_error("Either `probs` or `logits` must be specified, but not both.")
       }
 
       if (!is.null(probs)) {

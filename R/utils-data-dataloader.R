@@ -490,7 +490,7 @@ MultiProcessingDataLoaderIter <- R6::R6Class(
         # read results
         result <- task$session$read() 
         
-        # Raise error that might have hapened in the subprocess.
+        # Raise error that might have happened in the subprocess.
         if (!is.null(result$error)) {
           if (packageVersion("callr") >= "3.7.1") {
             rlang::abort(

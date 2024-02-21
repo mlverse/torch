@@ -45,7 +45,7 @@ Optimizer <- R6::R6Class(
     },
     add_param_group = function(param_group) {
       if (!rlang::is_named(param_group)) {
-        value_error("param group is not named")
+        value_error("`param_group` is not named")
       }
       
       params <- param_group$params
