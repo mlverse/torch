@@ -593,3 +593,8 @@ test_that("cuda tensor can be converted to tensor", {
   x <- as.array(torch_tensor(1, device = "cuda"))
   expect_equal(x, 1)
 })
+
+test_that("detach preserves attributes (#1136)", {
+  x <- nn_parameter(torch_tensor(1)$requires_grad_(TRUE))
+  expect_true(inherits(x$detach(), "nn_parameter"))
+})

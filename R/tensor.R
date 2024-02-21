@@ -294,6 +294,12 @@ Tensor <- R7Class(
       attributes(x) <- attributes(self)
 
       return(x)
+    },
+    detach = function(...) {
+      x <- private$`_detach`(...)
+      attributes(x) <- attributes(self)
+
+      return(x)
     }
   ),
   active = list(
