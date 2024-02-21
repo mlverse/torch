@@ -42,23 +42,15 @@ The examples should consist of an `.R` file and an `.Rmd` with the same
 name that just renders the code.
 
 See
-[basic-nn-module.R](https://github.com/mlverse/torch/blob/master/vignettes/examples/basic-nn-module.R)
+[mnist-mlp.R](https://github.com/mlverse/torch/blob/master/vignettes/examples/mnist-mlp.R)
 and
-[basic-nn-module.Rmd](https://github.com/mlverse/torch/blob/master/vignettes/examples/basic-nn-module.Rmd)
+[mnist-mlp.Rmd](https://github.com/mlverse/torch/blob/master/vignettes/examples/mnist-mlp.Rmd)
 for an example.
 
 It's important that one can run the example without manually downloading
 any dataset/file. You should also add an entry to the [`_pkgdown.yaml`
 file](https://github.com/mlverse/torch/blob/master/_pkgdown.yml#L24-L25)
 for your example.
-
-## Translations
-
-We welcome translations. This consist in providing a translation file of all the package messages in a local language to help new users of {torch}.  
-One simple way to proceed is to use the help of {potool} package to 
-1. create your choosen language translation file - let's say Spanish which code is `sp` - `potools::po_create(dir = ".", languages = "sp")`. 
-2. use a text editor to fulfill the translations in the newly created `po/R-sp.po` file.
-The complete process is well explained in the potool [vignette for translators](https://michaelchirico.github.io/potools/articles/translators.html)
 
 ## Code contributions
 
