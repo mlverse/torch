@@ -51,6 +51,7 @@ test_that("grad_fn is respected", {
 
 test_that("compare tensors using cuda", {
   skip_if_cuda_not_available()
+  testthat::local_edition(3)
 
   expect_failure(expect_equal(
     torch_tensor(1)$cuda(),
