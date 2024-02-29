@@ -152,6 +152,8 @@ reference:
     contents:
       - local_autocast
       - with_autocast
+      - set_autocast
+      - unset_autocast
       - starts_with("cuda_amp_")
   - title: Random numbers
     contents:
