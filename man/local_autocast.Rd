@@ -3,6 +3,8 @@
 \name{local_autocast}
 \alias{local_autocast}
 \alias{with_autocast}
+\alias{set_autocast}
+\alias{unset_autocast}
 \title{Autocast context manager}
 \usage{
 local_autocast(
@@ -22,6 +24,10 @@ with_autocast(
   enabled = TRUE,
   cache_enabled = NULL
 )
+
+set_autocast(device_type, dtype = NULL, enabled = TRUE, cache_enabled = NULL)
+
+unset_autocast(context)
 }
 \arguments{
 \item{device_type}{a character string indicating whether to use 'cuda' or 'cpu' device}
@@ -37,6 +43,8 @@ with_autocast(
 \item{.env}{The environment to use for scoping.}
 
 \item{code}{code to be executed with no gradient recording.}
+
+\item{context}{Returned by \code{set_autocast} and should be passed when unsetting it.}
 }
 \description{
 Allow regions of your code to run in mixed precision.
@@ -56,6 +64,10 @@ corresponding forward ops.
 \section{Functions}{
 \itemize{
 \item \code{with_autocast()}: A with context for automatic mixed precision.
+
+\item \code{set_autocast()}: Set the autocast context. For advanced users only.
+
+\item \code{unset_autocast()}: Unset the autocast context.
 
 }}
 \examples{
