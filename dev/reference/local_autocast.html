@@ -112,7 +112,11 @@ to improve performance while maintaining accuracy.</p>
 <span>  dtype <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  enabled <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  cache_enabled <span class="op">=</span> <span class="cn">NULL</span></span>
-<span><span class="op">)</span></span></code></pre></div>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">set_autocast</span><span class="op">(</span><span class="va">device_type</span>, dtype <span class="op">=</span> <span class="cn">NULL</span>, enabled <span class="op">=</span> <span class="cn">TRUE</span>, cache_enabled <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">unset_autocast</span><span class="op">(</span><span class="va">context</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -144,6 +148,10 @@ to improve performance while maintaining accuracy.</p>
 <dt>code</dt>
 <dd><p>code to be executed with no gradient recording.</p></dd>
 
+
+<dt>context</dt>
+<dd><p>Returned by <code>set_autocast</code> and should be passed when unsetting it.</p></dd>
+
 </dl></div>
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
@@ -159,6 +167,8 @@ corresponding forward ops.</p>
     <h2 id="functions">Functions<a class="anchor" aria-label="anchor" href="#functions"></a></h2>
     
 <ul><li><p><code>with_autocast()</code>: A with context for automatic mixed precision.</p></li>
+<li><p><code>set_autocast()</code>: Set the autocast context. For advanced users only.</p></li>
+<li><p><code>unset_autocast()</code>: Unset the autocast context.</p></li>
 </ul></div>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>

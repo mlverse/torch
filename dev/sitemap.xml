@@ -124,6 +124,9 @@
     <loc>https://torch.mlverse.org/docs/dev/reference/call_torch_function.html</loc>
   </url>
   <url>
+    <loc>https://torch.mlverse.org/docs/dev/reference/clone_module.html</loc>
+  </url>
+  <url>
     <loc>https://torch.mlverse.org/docs/dev/reference/contrib_sort_vertices.html</loc>
   </url>
   <url>

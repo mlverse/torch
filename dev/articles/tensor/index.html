@@ -2514,9 +2514,9 @@ default, the returned Tensor has the same <code>torch_dtype</code> and
 </h4>
 <p><code>new_tensor</code> always copies
 <code>data(). If you have a Tensor</code>data` and want to avoid a copy,
-use [<span class="math inline">\(requires_grad_()] or
-[\)</span>detach()]. If you have a numpy array and want to avoid a copy,
-use [torch_from_numpy()].</p>
+use [<span class="math inline">\(requires_grad_()]
+or [\)</span>detach()]. If you have a numpy array and want to avoid a
+copy, use [torch_from_numpy()].</p>
 <p>When data is a tensor <code>x</code>, [new_tensor()()] reads out ‘the
 data’ from whatever it is passed, and constructs a leaf variable.
 Therefore <code>tensor$new_tensor(x)</code> is equivalent to

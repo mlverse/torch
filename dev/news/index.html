@@ -85,8 +85,17 @@
 
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="development version" id="torch-development-version">torch (development version)<a class="anchor" aria-label="anchor" href="#torch-development-version"></a></h2>
-<ul><li>Make sure deep cloning preserve state dict attributes. (<a href="https://github.com/mlverse/torch/issues/1129" class="external-link">#1129</a>)</li>
+<ul><li>Bugfix: calling <code>$detach()</code> on a tensor now preserves attributes (<a href="https://github.com/mlverse/torch/issues/1136" class="external-link">#1136</a>)</li>
+<li>Make sure deep cloning of tensor and nn_module preserves class attributes and the requires_grad field. (<a href="https://github.com/mlverse/torch/issues/1129" class="external-link">#1129</a>)</li>
+<li>Fixed that parameters and buffers of children of nn_modules were not cloned</li>
+<li>Cloned objects no longer reference the object from which they were cloned</li>
+<li>Fixed bug where nn_module’s patched clone method was invalid after a call to the internal <code>create_nn_module_callable()</code>
+</li>
+<li>Printing of <code>grad_fn</code> now appends a new line at the end.</li>
+<li>Added support for a private <code>$finalize_deep_clone()</code> method for <code>nn_module</code> which allows to run some code after cloning a module.</li>
+<li>Make sure deep cloning preserve state dict attributes. (<a href="https://github.com/mlverse/torch/issues/1129" class="external-link">#1129</a>)</li>
 <li>Converting torch tensor to R array works when tensor has ‘cuda’ device (<a href="https://github.com/mlverse/torch/issues/1130" class="external-link">#1130</a>)</li>
+<li>Added separate setter and unsetter for the autocast context instead of only allowing <code><a href="../reference/local_autocast.html">local_autocast()</a></code>. (<a href="https://github.com/mlverse/torch/issues/1142" class="external-link">#1142</a>)</li>
 </ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.12.0" id="torch-0120">torch 0.12.0<a class="anchor" aria-label="anchor" href="#torch-0120"></a></h2><p class="text-muted">CRAN release: 2023-12-15</p>

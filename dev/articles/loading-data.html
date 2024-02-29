@@ -136,23 +136,23 @@ create <code>ds</code> which is a <code>Dataset</code> object. Then a
 dataloader <code>dl</code> is created to query that data. Finally, that
 dataloader is used in a <code><a href="https://rdrr.io/pkg/coro/man/collect.html" class="external-link">coro::loop()</a></code> to iterate over
 batches of that data:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a dataset from included data</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>ds <span class="ot">&lt;-</span> <span class="fu">mnist_dataset</span>(</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  dir, </span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">download =</span> <span class="cn">TRUE</span>, </span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">transform =</span> <span class="cf">function</span>(x) {</span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    x <span class="ot">&lt;-</span> x<span class="sc">$</span><span class="fu">to</span>(<span class="at">dtype =</span> <span class="fu">torch_float</span>())<span class="sc">/</span><span class="dv">256</span></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    x[newaxis,..]</span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Create the loader to query the data in batches</span></span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>dl <span class="ot">&lt;-</span> <span class="fu">dataloader</span>(ds, <span class="at">batch_size =</span> <span class="dv">32</span>, <span class="at">shuffle =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>coro<span class="sc">::</span><span class="fu">loop</span>(<span class="cf">for</span> (b <span class="cf">in</span> dl)) {</span>
-<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a><span class="co"># use the data from each batch `b` here</span></span>
-<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a><span class="co"># ...</span></span>
-<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>}<span class="er">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a><span class="co"># Create a dataset from included data</span></span>
+<span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a>ds <span class="ot">&lt;-</span> <span class="fu">mnist_dataset</span>(</span>
+<span id="cb2-3"><a href="#cb2-3" tabindex="-1"></a>  dir, </span>
+<span id="cb2-4"><a href="#cb2-4" tabindex="-1"></a>  <span class="at">download =</span> <span class="cn">TRUE</span>, </span>
+<span id="cb2-5"><a href="#cb2-5" tabindex="-1"></a>  <span class="at">transform =</span> <span class="cf">function</span>(x) {</span>
+<span id="cb2-6"><a href="#cb2-6" tabindex="-1"></a>    x <span class="ot">&lt;-</span> x<span class="sc">$</span><span class="fu">to</span>(<span class="at">dtype =</span> <span class="fu">torch_float</span>())<span class="sc">/</span><span class="dv">256</span></span>
+<span id="cb2-7"><a href="#cb2-7" tabindex="-1"></a>    x[newaxis,..]</span>
+<span id="cb2-8"><a href="#cb2-8" tabindex="-1"></a>  }</span>
+<span id="cb2-9"><a href="#cb2-9" tabindex="-1"></a>)</span>
+<span id="cb2-10"><a href="#cb2-10" tabindex="-1"></a></span>
+<span id="cb2-11"><a href="#cb2-11" tabindex="-1"></a><span class="co"># Create the loader to query the data in batches</span></span>
+<span id="cb2-12"><a href="#cb2-12" tabindex="-1"></a>dl <span class="ot">&lt;-</span> <span class="fu">dataloader</span>(ds, <span class="at">batch_size =</span> <span class="dv">32</span>, <span class="at">shuffle =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb2-13"><a href="#cb2-13" tabindex="-1"></a></span>
+<span id="cb2-14"><a href="#cb2-14" tabindex="-1"></a>coro<span class="sc">::</span><span class="fu">loop</span>(<span class="cf">for</span> (b <span class="cf">in</span> dl)) {</span>
+<span id="cb2-15"><a href="#cb2-15" tabindex="-1"></a><span class="co"># use the data from each batch `b` here</span></span>
+<span id="cb2-16"><a href="#cb2-16" tabindex="-1"></a><span class="co"># ...</span></span>
+<span id="cb2-17"><a href="#cb2-17" tabindex="-1"></a>}<span class="er">)</span></span></code></pre></div>
 <p>See <code>vignettes/examples/mnist-cnn.R</code> for a complete
 example.</p>
 <p>In the more common situation where you have a unique set of data that
@@ -400,7 +400,7 @@ one-hot-encode or embed it.)</p>
 <span>  </span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/sprintf.html" class="external-link">sprintf</a></span><span class="op">(</span><span class="st">"Loss at epoch %d: %3f\n"</span>, <span class="va">epoch</span>, <span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="va">l</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="op">}</span></span>
-<span><span class="co">#&gt; Loss at epoch 1: 26993.611795</span></span>
+<span><span class="co">#&gt; Loss at epoch 1: 259.060806</span></span>
 <span><span class="co">#&gt; Loss at epoch 2: 2.068251</span></span>
 <span><span class="co">#&gt; Loss at epoch 3: 2.068251</span></span>
 <span><span class="co">#&gt; Loss at epoch 4: 2.068251</span></span>

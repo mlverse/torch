@@ -204,6 +204,7 @@ back to the leaf nodes:</p>
 <span><span class="va">out</span><span class="op">$</span><span class="va">grad_fn</span><span class="op">$</span><span class="va">next_functions</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">$</span><span class="va">next_functions</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">$</span><span class="va">next_functions</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">$</span><span class="va">next_functions</span></span>
 <span><span class="co">#&gt; [[1]]</span></span>
 <span><span class="co">#&gt; torch::autograd::AccumulateGrad</span></span>
+<span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; [[2]]</span></span>
 <span><span class="co">#&gt; AddBackward1</span></span>
 <span><span class="co"># here we arrive at the other leaf node (AccumulateGrad for x2)</span></span>
@@ -298,26 +299,26 @@ number of lines (that did manual backprop) are gone:</p>
 <span>    <span class="op">}</span><span class="op">)</span></span>
 <span>    </span>
 <span><span class="op">}</span></span>
-<span><span class="co">#&gt; 10 92.95773 </span></span>
-<span><span class="co">#&gt; 20 83.69292 </span></span>
-<span><span class="co">#&gt; 30 75.57014 </span></span>
-<span><span class="co">#&gt; 40 68.43358 </span></span>
-<span><span class="co">#&gt; 50 62.13106 </span></span>
-<span><span class="co">#&gt; 60 56.56405 </span></span>
-<span><span class="co">#&gt; 70 51.62218 </span></span>
-<span><span class="co">#&gt; 80 47.23429 </span></span>
-<span><span class="co">#&gt; 90 43.3205 </span></span>
-<span><span class="co">#&gt; 100 39.81849 </span></span>
-<span><span class="co">#&gt; 110 36.67553 </span></span>
-<span><span class="co">#&gt; 120 33.85219 </span></span>
-<span><span class="co">#&gt; 130 31.31136 </span></span>
-<span><span class="co">#&gt; 140 29.03587 </span></span>
-<span><span class="co">#&gt; 150 26.98339 </span></span>
-<span><span class="co">#&gt; 160 25.12688 </span></span>
-<span><span class="co">#&gt; 170 23.44533 </span></span>
-<span><span class="co">#&gt; 180 21.92094 </span></span>
-<span><span class="co">#&gt; 190 20.53737 </span></span>
-<span><span class="co">#&gt; 200 19.27913</span></span></code></pre></div>
+<span><span class="co">#&gt; 10 64.20922 </span></span>
+<span><span class="co">#&gt; 20 59.38092 </span></span>
+<span><span class="co">#&gt; 30 55.03096 </span></span>
+<span><span class="co">#&gt; 40 51.11751 </span></span>
+<span><span class="co">#&gt; 50 47.58265 </span></span>
+<span><span class="co">#&gt; 60 44.37131 </span></span>
+<span><span class="co">#&gt; 70 41.45682 </span></span>
+<span><span class="co">#&gt; 80 38.80973 </span></span>
+<span><span class="co">#&gt; 90 36.39493 </span></span>
+<span><span class="co">#&gt; 100 34.19078 </span></span>
+<span><span class="co">#&gt; 110 32.18141 </span></span>
+<span><span class="co">#&gt; 120 30.34106 </span></span>
+<span><span class="co">#&gt; 130 28.65022 </span></span>
+<span><span class="co">#&gt; 140 27.09362 </span></span>
+<span><span class="co">#&gt; 150 25.66351 </span></span>
+<span><span class="co">#&gt; 160 24.34002 </span></span>
+<span><span class="co">#&gt; 170 23.1112 </span></span>
+<span><span class="co">#&gt; 180 21.97915 </span></span>
+<span><span class="co">#&gt; 190 20.92905 </span></span>
+<span><span class="co">#&gt; 200 19.95377</span></span></code></pre></div>
 <p>We still manually compute the forward pass, and we still manually
 update the weights. In the last two chapters of this section, we’ll see
 how these parts of the logic can be made more modular and reusable, as
