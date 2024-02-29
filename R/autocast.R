@@ -35,9 +35,9 @@
 #' @seealso [cuda_amp_grad_scaler()] to perform dynamic gradient scaling.
 #' @export
 local_autocast <- function(device_type, dtype = NULL, enabled = TRUE, cache_enabled = NULL, ..., .env = parent.frame()) {
-  context <- set_local_autocast(device_type, dtype = dtype, enabled = enabled, cache_enabled = cache_enabled)
+  context <- set_autocast(device_type, dtype = dtype, enabled = enabled, cache_enabled = cache_enabled)
   withr::defer({
-    unset_local_autocast(context)
+    unset_autocast(context)
   }, envir = .env)
 }
 
