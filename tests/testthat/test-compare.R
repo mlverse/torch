@@ -1,4 +1,4 @@
-skip_if(getRversion() <= "0.4.0")
+skip_if(getRversion() <= "4.0.0")
 
 test_that("comparison takes requires_grad into account", {
   testthat::local_edition(3)
