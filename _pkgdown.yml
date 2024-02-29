@@ -87,6 +87,7 @@ reference:
   - title: Serialization
     contents:
       - has_concept("serialization")
+      - clone_module
   - title: Mathematical operations on tensors
     contents:
       - starts_with("torch_")
