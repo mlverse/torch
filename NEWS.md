@@ -11,6 +11,7 @@
  allows to run some code after cloning a module.
 - Make sure deep cloning preserve state dict attributes. (#1129)
 - Converting torch tensor to R array works when tensor has 'cuda' device (#1130)
+- Added separate setter and unsetter for the autocast context instead of only allowing `local_autocast()`. (#1142)
 
 # torch 0.12.0
 
