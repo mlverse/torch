@@ -10,6 +10,8 @@
 - Added support for a private `$finalize_deep_clone()` method for `nn_module` which
  allows to run some code after cloning a module.
 - Make sure deep cloning preserve state dict attributes. (#1129)
+- A `compare_proxy` method for the `torch_tensor` type was added
+  it allows to compare torch tensors using `testthat::expect_equal()`.
 - Converting torch tensor to R array works when tensor has 'cuda' device (#1130)
 - Added separate setter and unsetter for the autocast context instead of only allowing `local_autocast()`. (#1142)
 

@@ -66,6 +66,7 @@ Collate:
     'backends.R'
     'call_torch_function.R'
     'codegen-utils.R'
+    'compare.R'
     'compat-purrr.R'
     'compilation_unit.R'
     'conditions.R'

@@ -11,6 +11,7 @@ globalVariables(c("..", "self", "private", "N"))
 }
 
 .onLoad <- function(libname, pkgname) {
+  register_s3_method("waldo", "compare_proxy", "torch_tensor")
   cpp_torch_namespace__store_main_thread_id()
 
   install_success <- TRUE
