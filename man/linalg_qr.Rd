@@ -77,6 +77,7 @@ Other linalg:
 \code{\link{linalg_pinv}()},
 \code{\link{linalg_slogdet}()},
 \code{\link{linalg_solve}()},
+\code{\link{linalg_solve_triangular}()},
 \code{\link{linalg_svd}()},
 \code{\link{linalg_svdvals}()},
 \code{\link{linalg_tensorinv}()},

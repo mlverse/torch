@@ -264,3 +264,12 @@ test_that("linalg_inv_ex", {
     linalg_inv(A)
   )
 })
+
+test_that("linalg_solve_triangular works", {
+  a <- torch_randn(3,3)$triu_()
+  b <- torch_randn(3,4)
+  expect_error(
+    x <- linalg_solve_triangular(a, b, upper = TRUE),
+    regexp = NA
+  )
+})
