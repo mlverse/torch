@@ -340,6 +340,9 @@
     <loc>https://torch.mlverse.org/docs/dev/reference/linalg_solve.html</loc>
   </url>
   <url>
+    <loc>https://torch.mlverse.org/docs/dev/reference/linalg_solve_triangular.html</loc>
+  </url>
+  <url>
     <loc>https://torch.mlverse.org/docs/dev/reference/linalg_svd.html</loc>
   </url>
   <url>
