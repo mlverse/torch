@@ -1235,3 +1235,16 @@ linalg_inv_ex <- function(A, check_errors = FALSE) {
     c("inverse", "info")
   )
 }
+
+#' Triangular solve
+#' @param A tensor of shape `(*, n, n)` or `(*, k, k)` if `left=TRUE`) where `*` is zero or more batch dimensions.
+#' @param B right-hand side tensor of shape `(*, n, k)`
+#' @param upper whether A is an upper or lower triangular matrix.
+#' @param left wheter to solve the system AX=B or XA=B
+#' @param unitriangular if `TRUE`, the diagonal elements of A are assumed to be all equal to 1. 
+#' @family linalg
+#' @export
+linalg_solve_triangular <- function(A, B, ..., upper, left = TRUE, unitriangular = FALSE) {
+  ellipsis::check_dots_empty()
+  torch_linalg_solve_triangular(A, B, upper, left, unitriangular)
+}
