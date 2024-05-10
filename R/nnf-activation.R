@@ -649,8 +649,8 @@ nnf_multi_head_attention_forward <- function(query, # type: Tensor
   } else {
     if (!is.null(in_proj_bias)) {
       q <- nnf_linear(query, q_proj_weight, in_proj_bias[1:embed_dim])
-      k <- nnf_linear(key, k_proj_weight, in_proj_bias[embed_dim:(embed_dim * 2)])
-      v <- nnf_linear(value, v_proj_weight, in_proj_bias[(embed_dim * 2):N])
+      k <- nnf_linear(key, k_proj_weight, in_proj_bias[(embed_dim + 1):(embed_dim * 2)])
+      v <- nnf_linear(value, v_proj_weight, in_proj_bias[(embed_dim * 2 + 1):N])
     } else {
       q <- nnf_linear(query, q_proj_weight, in_proj_bias)
       k <- nnf_linear(key, k_proj_weight, in_proj_bias)
