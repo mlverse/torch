@@ -8,7 +8,7 @@ name: pkgdown
 
 jobs:
   pkgdown:
-    runs-on: macOS-latest
+    runs-on: macOS-13
     env:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
       TORCH_TEST: 1
