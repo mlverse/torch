@@ -26,7 +26,7 @@ jobs:
       matrix:
         config:
           
-          - {os: macOS, r_version: release, version: cpu-intel, runner: macos-latest}
+          - {os: macOS, r_version: release, version: cpu-intel, runner: macos-13}
           # on m1 the R version is whicherver is installed in the runner machine.
           - {os: macOS, r_version: '', version: cpu-m1, runner: [self-hosted, m1]}
 

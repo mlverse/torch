@@ -19,7 +19,7 @@ jobs:
       matrix:
         
         config: 
-          - {r_version: 'release', os: macOS, version: cpu-intel, runner: macOS-latest}
+          - {r_version: 'release', os: macOS, version: cpu-intel, runner: macOS-13}
           - {r_version: '',        os: macOS, version: cpu-m1, runner: [self-hosted, m1]}
           
           - {r_version: 'release', os: ubuntu, version: cpu, runner: [self-hosted, linux]}
