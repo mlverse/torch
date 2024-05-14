@@ -259,23 +259,24 @@ index empty.</p>
 <code class="sourceCode R"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/torch_randn.html">torch_randn</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">3</span><span class="op">)</span></span>
 <span><span class="va">x</span></span>
 <span><span class="co">#&gt; torch_tensor</span></span>
-<span><span class="co">#&gt; -0.4353 -0.7460 -0.1295</span></span>
-<span><span class="co">#&gt; -0.4578  0.6650  0.3487</span></span>
+<span><span class="co">#&gt;  0.0960 -1.1972 -1.2719</span></span>
+<span><span class="co">#&gt;  0.3526  0.9360  1.3592</span></span>
 <span><span class="co">#&gt; [ CPUFloatType{2,3} ]</span></span></code></pre></div>
 <p>The following syntax will give you the first row:</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">x</span><span class="op">[</span><span class="fl">1</span>,<span class="op">]</span></span>
 <span><span class="co">#&gt; torch_tensor</span></span>
-<span><span class="co">#&gt; -0.4353</span></span>
-<span><span class="co">#&gt; -0.7460</span></span>
-<span><span class="co">#&gt; -0.1295</span></span>
+<span><span class="co">#&gt; 0.01 *</span></span>
+<span><span class="co">#&gt;  9.5950</span></span>
+<span><span class="co">#&gt; -119.7241</span></span>
+<span><span class="co">#&gt; -127.1853</span></span>
 <span><span class="co">#&gt; [ CPUFloatType{3} ]</span></span></code></pre></div>
 <p>And this would give you the first 2 columns:</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">x</span><span class="op">[</span>,<span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">]</span></span>
 <span><span class="co">#&gt; torch_tensor</span></span>
-<span><span class="co">#&gt; -0.4353 -0.7460</span></span>
-<span><span class="co">#&gt; -0.4578  0.6650</span></span>
+<span><span class="co">#&gt;  0.0960 -1.1972</span></span>
+<span><span class="co">#&gt;  0.3526  0.9360</span></span>
 <span><span class="co">#&gt; [ CPUFloatType{2,2} ]</span></span></code></pre></div>
 </div>
 <div class="section level2">
@@ -354,15 +355,15 @@ advanced indexing</a>. To use the old behavior, consider using
 <code class="sourceCode R"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/torch_randn.html">torch_randn</a></span><span class="op">(</span><span class="fl">4</span>,<span class="fl">4</span><span class="op">)</span></span>
 <span><span class="va">x</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">3</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">3</span><span class="op">)</span><span class="op">]</span></span>
 <span><span class="co">#&gt; torch_tensor</span></span>
-<span><span class="co">#&gt;  0.8696  0.1484</span></span>
-<span><span class="co">#&gt;  0.5729  0.5944</span></span>
+<span><span class="co">#&gt;  0.3386 -1.2836</span></span>
+<span><span class="co">#&gt;  0.8642 -0.1970</span></span>
 <span><span class="co">#&gt; [ CPUFloatType{2,2} ]</span></span></code></pre></div>
 <p>You can also use boolean vectors, for example:</p>
 <div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">x</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="cn">TRUE</span>, <span class="cn">FALSE</span>, <span class="cn">TRUE</span>, <span class="cn">FALSE</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="cn">TRUE</span>, <span class="cn">FALSE</span>, <span class="cn">TRUE</span>, <span class="cn">FALSE</span><span class="op">)</span><span class="op">]</span></span>
 <span><span class="co">#&gt; torch_tensor</span></span>
-<span><span class="co">#&gt;  0.8696  0.1484</span></span>
-<span><span class="co">#&gt;  0.5729  0.5944</span></span>
+<span><span class="co">#&gt;  0.3386 -1.2836</span></span>
+<span><span class="co">#&gt;  0.8642 -0.1970</span></span>
 <span><span class="co">#&gt; [ CPUFloatType{2,2} ]</span></span></code></pre></div>
 <p>The above examples also work if the index were long or boolean
 tensors, instead of R vectors. It’s also possible to index with

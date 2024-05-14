@@ -98,6 +98,7 @@
 <li>A <code>compare_proxy</code> method for the <code>torch_tensor</code> type was added it allows to compare torch tensors using <code><a href="https://testthat.r-lib.org/reference/equality-expectations.html" class="external-link">testthat::expect_equal()</a></code>.</li>
 <li>Converting torch tensor to R array works when tensor has ‘cuda’ device (<a href="https://github.com/mlverse/torch/issues/1130" class="external-link">#1130</a>)</li>
 <li>Added separate setter and unsetter for the autocast context instead of only allowing <code><a href="../reference/local_autocast.html">local_autocast()</a></code>. (<a href="https://github.com/mlverse/torch/issues/1142" class="external-link">#1142</a>)</li>
+<li>Fixed a bug in <code><a href="../reference/torch_arange.html">torch_arange()</a></code> causing it to return 1:(n-1) values when specific request <code>dtype = torch_int64()</code> (<a href="https://github.com/mlverse/torch/issues/1160" class="external-link">#1160</a>)</li>
 </ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.12.0" id="torch-0120">torch 0.12.0<a class="anchor" aria-label="anchor" href="#torch-0120"></a></h2><p class="text-muted">CRAN release: 2023-12-15</p>
