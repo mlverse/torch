@@ -46,9 +46,9 @@ the embedding dimension. If batch_first is TRUE, the first two dimensions are tr
 
 \item{num_heads}{parallel attention heads.}
 
-\item{in_proj_weight}{input projection weight and bias.}
+\item{in_proj_weight}{input projection weight.}
 
-\item{in_proj_bias}{currently undocumented.}
+\item{in_proj_bias}{input projection bias.}
 
 \item{bias_k}{bias of the key and value sequences to be added at dim=0.}
 
@@ -59,9 +59,9 @@ value sequences at dim=1.}
 
 \item{dropout_p}{probability of an element to be zeroed.}
 
-\item{out_proj_weight}{the output projection weight and bias.}
+\item{out_proj_weight}{the output projection weight.}
 
-\item{out_proj_bias}{currently undocumented.}
+\item{out_proj_bias}{output projection bias.}
 
 \item{training}{apply dropout if is \code{TRUE}.}
 
