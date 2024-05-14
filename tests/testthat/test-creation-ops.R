@@ -139,6 +139,20 @@ test_that("arange", {
   x <- torch_arange(torch_tensor(10), torch_tensor(1), torch_tensor(-1))
   expect_equal(length(x), 10)
 
+  x <- torch_arange(1, 10, dtype = torch_int64())
+  expect_equal(length(x), 10)
+
+  x <- torch_arange(10L)
+  expect_equal(length(x), 10)
+  expect_true(x$dtype == torch_int64())
+
+  x <- torch_arange(10)
+  expect_equal(length(x), 10)
+  expect_true(x$dtype == torch_float32())
+
+  x <- torch_arange(0L, 5L)
+  expect_identical(as.array(x), 0:5)
+
   # deprecated
   expect_warning(x <- torch_range(1, 9))
   expect_equal(x$size(1), 9)
