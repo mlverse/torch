@@ -15,6 +15,7 @@
   it allows to compare torch tensors using `testthat::expect_equal()`.
 - Converting torch tensor to R array works when tensor has 'cuda' device (#1130)
 - Added separate setter and unsetter for the autocast context instead of only allowing `local_autocast()`. (#1142)
+- Fixed a bug in `torch_arange()` causing it to return 1:(n-1) values when specific request `dtype = torch_int64()` (#1160)
 
 # torch 0.12.0
 
