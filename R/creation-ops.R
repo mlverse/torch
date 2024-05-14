@@ -238,7 +238,7 @@ torch_empty_like <- function(input, dtype = NULL, layout = NULL,
 }
 
 #' @rdname torch_arange
-torch_arange <- function(start, end, step = 1, dtype = NULL, layout = NULL,
+torch_arange <- function(start, end, step = 1L, dtype = NULL, layout = NULL,
                          device = NULL, requires_grad = FALSE) {
   args <- list(
     options = list(
@@ -248,8 +248,22 @@ torch_arange <- function(start, end, step = 1, dtype = NULL, layout = NULL,
       requires_grad = requires_grad
     )
   )
+
+  if (missing(end)) {
+    end <- start
+    start <- 1L
+  }
+
+  if (is.null(dtype) && is.integer(start) && is.integer(end) && is.integer(step)) {
+    dtype <- torch_int64()
+  }
+
   args$start <- start
-  args$end <- torch_nextafter(end, end + sign(step))
+  args$end <- if (is_integer_dtype(dtype)) {
+    end + as.integer(sign(step))
+  } else {
+    torch_nextafter(end, end + sign(step))
+  }
   args$step <- step
   do.call(.torch_arange, args)
 }
