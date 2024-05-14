@@ -85,7 +85,8 @@
 
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="development version" id="torch-development-version">torch (development version)<a class="anchor" aria-label="anchor" href="#torch-development-version"></a></h2>
-<ul><li>Bugfix: calling <code>$detach()</code> on a tensor now preserves attributes (<a href="https://github.com/mlverse/torch/issues/1136" class="external-link">#1136</a>)</li>
+<ul><li>Fix a bug on using input projection initialization bias in <code>nnf_multi_head_attention_forward</code> (<a href="https://github.com/mlverse/torch/issues/1154" class="external-link">#1154</a> <a href="https://github.com/cregouby" class="external-link">@cregouby</a>)</li>
+<li>Bugfix: calling <code>$detach()</code> on a tensor now preserves attributes (<a href="https://github.com/mlverse/torch/issues/1136" class="external-link">#1136</a>)</li>
 <li>Make sure deep cloning of tensor and nn_module preserves class attributes and the requires_grad field. (<a href="https://github.com/mlverse/torch/issues/1129" class="external-link">#1129</a>)</li>
 <li>Fixed that parameters and buffers of children of nn_modules were not cloned</li>
 <li>Cloned objects no longer reference the object from which they were cloned</li>
