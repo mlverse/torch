@@ -115,5 +115,11 @@ jobs:
         with:
           fname: ${{ steps.build.outputs.fname }}
           gcp_credential: ${{ secrets.GCP_APPLICATION_CREDENTIALS }}
+      
+      - id: 's3'
+        if: ${{ github.workflow != 'Test' || github.event_name != 'pull_request'}}
+        uses: ./.github/actions/upload-s3
+        with:
+          fname: ${{ steps.build.outputs.fname }}
 
       
