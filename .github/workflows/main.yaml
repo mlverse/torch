@@ -4,6 +4,7 @@ on:
       - master
       - main
       - "cran/**"
+      - "s3"
   pull_request:
   schedule:
     - cron: "0 1 * * *"

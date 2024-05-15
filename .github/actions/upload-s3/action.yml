@@ -1,0 +1,24 @@
+name: "Uploads lantern artifacts to S3"
+description: "Uploads lantern artifacts to S3"
+inputs:
+  fname:
+     required: true
+     description: "the filename that should be uploaded."
+
+runs:
+  using: composite
+  steps:
+
+    - id: 'auth'
+      uses: aws-actions/configure-aws-credentials@master
+      with:
+        role-to-assume: ${{ secrets.AWS_ROLE_TO_ASSUME }}
+        aws-region: ${{ secrets.AWS_REGION }}
+
+    - id: 'upload-file'
+      run: |
+        aws s3 cp src/lantern/build/${{ inputs.fname }} s3://torch-binaries/binaries/${{ github.sha }}/${{ inputs.fname }}
+
+    - id: 'upload-latest'
+      run: |
+        aws s3 cp src/lantern/build/${{ inputs.fname }} s3://torch-binaries/binaries/${{ github.ref }}/latest/${{ inputs.fname }}
