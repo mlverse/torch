@@ -24,7 +24,9 @@ runs:
     - id: 'upload-file'
       run: |
         aws s3 cp src/lantern/build/${{ inputs.fname }} s3://torch-binaries/binaries/${{ github.sha }}/${{ inputs.fname }}
+      shell: bash
 
     - id: 'upload-latest'
       run: |
         aws s3 cp src/lantern/build/${{ inputs.fname }} s3://torch-binaries/binaries/${{ github.ref }}/latest/${{ inputs.fname }}
+      shell: bash
