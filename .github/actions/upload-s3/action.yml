@@ -17,6 +17,8 @@ runs:
 
     - id: install-aws-cli
       uses: unfor19/install-aws-cli-action@v1
+      with:
+          version: 2
 
     - id: 'auth'
       uses: aws-actions/configure-aws-credentials@master
