@@ -15,6 +15,9 @@ runs:
   using: composite
   steps:
 
+    - id: install-aws-cli
+      uses: unfor19/install-aws-cli-action@v1
+
     - id: 'auth'
       uses: aws-actions/configure-aws-credentials@master
       with:
