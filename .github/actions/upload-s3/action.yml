@@ -2,8 +2,14 @@ name: "Uploads lantern artifacts to S3"
 description: "Uploads lantern artifacts to S3"
 inputs:
   fname:
-     required: true
-     description: "the filename that should be uploaded."
+    required: true
+    description: "the filename that should be uploaded."
+  aws_role_to_assume:
+    required: true
+    description: "Role ARN to be assumed"
+  aws_region:
+    required: true
+    description: "Region id to be used"
 
 runs:
   using: composite
@@ -12,8 +18,8 @@ runs:
     - id: 'auth'
       uses: aws-actions/configure-aws-credentials@master
       with:
-        role-to-assume: ${{ secrets.AWS_ROLE_TO_ASSUME }}
-        aws-region: ${{ secrets.AWS_REGION }}
+        role-to-assume: ${{ inputs.aws_role_to_assume }}
+        aws-region: ${{ inputs.aws_region }}
 
     - id: 'upload-file'
       run: |

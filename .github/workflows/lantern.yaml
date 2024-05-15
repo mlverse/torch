@@ -121,5 +121,7 @@ jobs:
         uses: ./.github/actions/upload-s3
         with:
           fname: ${{ steps.build.outputs.fname }}
+          aws_role_to_assume: ${{ secrets.AWS_ROLE_TO_ASSUME }}
+          aws_region: ${{ secrets.AWS_REGION }}
 
       
