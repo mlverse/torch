@@ -128,7 +128,7 @@ options(timeout = 600) # increasing timeout is recommended since we will be down
 kind <- "cu118"
 version <- available.packages()["torch","Version"]
 options(repos = c(
-  torch = sprintf("https://storage.googleapis.com/torch-lantern-builds/packages/%s/%s/", kind, version),
+  torch = sprintf("https://torch-cdn.mlverse.org/packages/%s/%s/", kind, version),
   CRAN = "https://cloud.r-project.org" # or any other from which you want to install the other R dependencies.
 ))
 install.packages("torch")
