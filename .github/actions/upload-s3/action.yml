@@ -15,10 +15,20 @@ runs:
   using: composite
   steps:
 
-    - id: install-aws-cli
-      uses: unfor19/install-aws-cli-action@v1
-      with:
-          version: 2
+    - id: 'linux-install'
+      if: runner.os == 'Linux'
+      run: |
+        curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+        unzip awscliv2.zip
+        sudo ./aws/install
+      shell: bash
+
+    - id: 'macos-install'
+      if: runner.os == 'macOS'
+      run: |
+        curl "https://awscli.amazonaws.com/AWSCLIV2.pkg" -o "AWSCLIV2.pkg"
+        sudo installer -pkg AWSCLIV2.pkg -target /
+      shell: bash
 
     - id: 'auth'
       uses: aws-actions/configure-aws-credentials@master
