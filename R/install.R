@@ -639,10 +639,19 @@ install_torch_from_file <- function(version = NA, type = NA, libtorch, liblanter
   ))
 }
 
+# CloudFront doesn't support URL's containing the '+' sign.
+# Unfortunatelly thhe default `utils::URLencode` doesn't really 
+# encode the + sign. We use this very minimal encoder function to 
+# correctly encode the url.
+simple_encode <- function(url) {
+  gsub("+", "%2b", fixed = TRUE, x = url)
+}
+
 download_file <- function(url, destfile) {
   withr::local_options(timeout = max(600, getOption("timeout", default = 60)))
+  url <- simple_encode(url)
   tryCatch({
-    utils::download.file(url = utils::URLencode(url), destfile = destfile)  
+    utils::download.file(url = url, destfile = destfile)  
   }, 
   error = function(e) {
     
