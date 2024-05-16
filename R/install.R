@@ -642,7 +642,7 @@ install_torch_from_file <- function(version = NA, type = NA, libtorch, liblanter
 download_file <- function(url, destfile) {
   withr::local_options(timeout = max(600, getOption("timeout", default = 60)))
   tryCatch({
-    utils::download.file(url = url, destfile = destfile)  
+    utils::download.file(url = utils::URLencode(url), destfile = destfile)  
   }, 
   error = function(e) {
     
