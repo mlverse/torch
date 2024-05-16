@@ -116,4 +116,6 @@ jobs:
         with:
           path: "../binaries"
           destination: 's3://torch-binaries/packages/${{ matrix.config.version }}/${{ steps.build.outputs.pkg_version }}/'
+          aws_role_to_assume: ${{ secrets.AWS_ROLE_TO_ASSUME }}
+          aws_region: ${{ secrets.AWS_REGION }}
       
