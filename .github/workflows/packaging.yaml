@@ -12,6 +12,9 @@ on:
     - cron: "0 2 * * *"
   
 jobs:
+  permissions:
+      id-token: write
+      contents: read
   binaries:
     runs-on: ${{ matrix.config.runner }}
     container: ${{ matrix.container }}
