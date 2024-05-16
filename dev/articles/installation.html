@@ -250,7 +250,7 @@ following:</p>
 <span><span class="va">kind</span> <span class="op">&lt;-</span> <span class="st">"cu118"</span></span>
 <span><span class="va">version</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/available.packages.html" class="external-link">available.packages</a></span><span class="op">(</span><span class="op">)</span><span class="op">[</span><span class="st">"torch"</span>,<span class="st">"Version"</span><span class="op">]</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">options</a></span><span class="op">(</span>repos <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
-<span>  torch <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sprintf.html" class="external-link">sprintf</a></span><span class="op">(</span><span class="st">"https://storage.googleapis.com/torch-lantern-builds/packages/%s/%s/"</span>, <span class="va">kind</span>, <span class="va">version</span><span class="op">)</span>,</span>
+<span>  torch <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sprintf.html" class="external-link">sprintf</a></span><span class="op">(</span><span class="st">"https://torch-cdn.mlverse.org/packages/%s/%s/"</span>, <span class="va">kind</span>, <span class="va">version</span><span class="op">)</span>,</span>
 <span>  CRAN <span class="op">=</span> <span class="st">"https://cloud.r-project.org"</span> <span class="co"># or any other from which you want to install the other R dependencies.</span></span>
 <span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"torch"</span><span class="op">)</span></span></code></pre></div>
@@ -291,6 +291,26 @@ library from files. This is done in 3 steps :</p>
 <span><span class="fu"><a href="https://rdrr.io/r/base/Sys.setenv.html" class="external-link">Sys.setenv</a></span><span class="op">(</span>TORCH_URL<span class="op">=</span><span class="st">"/tmp/libtorch-v1.13.1.zip"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/Sys.setenv.html" class="external-link">Sys.setenv</a></span><span class="op">(</span>LANTERN_URL<span class="op">=</span><span class="st">"/tmp/lantern-0.9.1.9001+cpu+arm64-Darwin.zip"</span><span class="op">)</span></span>
 <span><span class="fu">torch</span><span class="fu">::</span><span class="fu"><a href="../reference/install_torch.html">install_torch</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+</div>
+<div class="section level3">
+<h3 id="installing-older-versions">Installing older versions<a class="anchor" aria-label="anchor" href="#installing-older-versions"></a>
+</h3>
+<p>As of v0.13.0 torch shifted from using Google Cloud Storage service
+to AWS S3 as the storage service for the required Lantern binaries.</p>
+<p>We will keep the files in the GCS bucket for as long as possible, but
+we might need to remove them at some point in time. Those files have
+been backed up in the new AWS S3 bucket using the same file structure,
+so if torch tries to download some from a URL starting with
+<code>https://storage.googleapis.com/torch-lantern-builds</code>, you
+should now replace it with
+<code>https://torch-cdn.mlverse.org</code>.</p>
+<p>For torch versions between v0.10.0 and v0.12.0 (both included), you
+should be able to set the environment variable
+<code>LANTERN_BASE_URL=https://torch-cdn.mlverse.org/binaries/</code> to
+point to the new address of the binaries. For older versions of torch,
+you might need to manually download the file from the new address and
+extract it to the expected <code>TORCH_HOME</code> directory. Feel free
+to open an issue on GitHub if you need help with this.</p>
 </div>
 </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
