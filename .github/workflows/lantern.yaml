@@ -8,6 +8,9 @@ jobs:
     runs-on: ${{ matrix.config.runner }}
     container: ${{ matrix.container }}
     name: "os:${{matrix.config.os}} | v:${{matrix.config.version}} (pre-cxx11: ${{matrix.precxx11abi }})"
+    permissions:
+      id-token: write
+      contents: read
     strategy:
       fail-fast: false
       matrix:
@@ -105,12 +108,13 @@ jobs:
         with:
           name: lantern
           path: 'src/lantern/build/${{ steps.build.outputs.fname }}'
-
-      - id: 'gcs'
+      
+      - id: 's3'
         if: ${{ github.workflow != 'Test' || github.event_name != 'pull_request'}}
-        uses: ./.github/actions/upload-gcs
+        uses: ./.github/actions/upload-s3
         with:
           fname: ${{ steps.build.outputs.fname }}
-          gcp_credential: ${{ secrets.GCP_APPLICATION_CREDENTIALS }}
+          aws_role_to_assume: ${{ secrets.AWS_ROLE_TO_ASSUME }}
+          aws_region: ${{ secrets.AWS_REGION }}
 
       
