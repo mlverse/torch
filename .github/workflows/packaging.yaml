@@ -102,18 +102,6 @@ jobs:
           cat("pkg_version=", desc::desc_get("Version"), "\n", file = Sys.getenv("GITHUB_OUTPUT"), sep="")
         shell: Rscript {0}
         
-      - id: 'auth'
-        uses: 'google-github-actions/auth@v1'
-        with:
-          credentials_json: ${{ secrets.GCP_APPLICATION_CREDENTIALS }}
-
-      - id: 'upload-file'
-        uses: 'google-github-actions/upload-cloud-storage@v1'
-        with:
-          path: "../binaries"
-          destination: 'torch-lantern-builds/packages/${{ matrix.config.version }}/${{ steps.build.outputs.pkg_version }}/'
-          parent: false
-
       - id: 'upload-s3'
         uses: ./.github/actions/upload-dir-to-s3
         with:

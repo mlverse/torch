@@ -108,13 +108,6 @@ jobs:
         with:
           name: lantern
           path: 'src/lantern/build/${{ steps.build.outputs.fname }}'
-
-      - id: 'gcs'
-        if: ${{ github.workflow != 'Test' || github.event_name != 'pull_request'}}
-        uses: ./.github/actions/upload-gcs
-        with:
-          fname: ${{ steps.build.outputs.fname }}
-          gcp_credential: ${{ secrets.GCP_APPLICATION_CREDENTIALS }}
       
       - id: 's3'
         if: ${{ github.workflow != 'Test' || github.event_name != 'pull_request'}}
