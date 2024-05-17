@@ -187,7 +187,7 @@ libtorch_url <- function() {
     url <- glue::glue("https://download.pytorch.org/libtorch/{kind}/libtorch-win-shared-with-deps-{torch_version}%2B{kind}.zip")
   }
   if (is_linux()) {
-    precxx11 <- if(precxx11abi()) "" else "cxx11-abi-"
+    precxx11 <- ifelse(precxx11abi(), "", "cxx11-abi-")
     url <- glue::glue("https://download.pytorch.org/libtorch/{kind}/libtorch-{precxx11}shared-with-deps-{torch_version}%2B{kind}.zip")
   }
   
