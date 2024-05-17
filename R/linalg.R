@@ -1242,6 +1242,7 @@ linalg_inv_ex <- function(A, check_errors = FALSE) {
 #' @param upper whether A is an upper or lower triangular matrix.
 #' @param left wheter to solve the system AX=B or XA=B
 #' @param unitriangular if `TRUE`, the diagonal elements of A are assumed to be all equal to 1. 
+#' @param ... Currently ignored.
 #' @family linalg
 #' @export
 linalg_solve_triangular <- function(A, B, ..., upper, left = TRUE, unitriangular = FALSE) {
