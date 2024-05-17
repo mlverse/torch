@@ -43,7 +43,7 @@ jobs:
         include:
 
           - config: {os: centos, precxx11abi: 1}
-            container: rstudio/r-base:4.2-centos7
+            container: rstudio/r-base:4.4-centos7
             
           - config: {os: ubuntu, version: cu11.7}
             container: {image: 'nvidia/cuda:11.7.1-cudnn8-devel-ubuntu20.04', options: '--gpus all --runtime=nvidia'}
