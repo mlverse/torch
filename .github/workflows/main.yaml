@@ -95,7 +95,13 @@ jobs:
           cache: false
           extra-packages: any::rcmdcheck
           needs: check
-          
+      
+      - run: |
+          install.packages("torch")
+          library(torch)
+          torch_randn(10, 10)
+        shell: Rscript {0}
+ 
       - uses: r-lib/actions/check-r-package@v2
         with:
           error-on: '"error"'
