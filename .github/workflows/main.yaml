@@ -97,6 +97,8 @@ jobs:
           needs: check
       
       - run: |
+          Sys.getenv("PRECXX11ABI")
+          Sys.setenv("PRECXX11ABI" = 1)
           pkgbuild::build()
         shell: Rscript {0}
  
