@@ -38,7 +38,7 @@ jobs:
 
           - config: {os: ubuntu}
             precxxabi: 1
-            container: ubuntu:18.04
+            container: ubuntu:16.04
           
           # specify the CUDA patch for each major/minor version.
           # required for cuda installation
