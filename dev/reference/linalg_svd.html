@@ -185,16 +185,16 @@ for Hermitian and symmetric matrices.</p></li>
 <li><p><code><a href="linalg_qr.html">linalg_qr()</a></code> for another (much faster) decomposition that works on general
 matrices.</p></li>
 </ul><p>Other linalg: 
-<code><a href="linalg_cholesky.html">linalg_cholesky</a>()</code>,
 <code><a href="linalg_cholesky_ex.html">linalg_cholesky_ex</a>()</code>,
+<code><a href="linalg_cholesky.html">linalg_cholesky</a>()</code>,
 <code><a href="linalg_det.html">linalg_det</a>()</code>,
-<code><a href="linalg_eig.html">linalg_eig</a>()</code>,
 <code><a href="linalg_eigh.html">linalg_eigh</a>()</code>,
-<code><a href="linalg_eigvals.html">linalg_eigvals</a>()</code>,
 <code><a href="linalg_eigvalsh.html">linalg_eigvalsh</a>()</code>,
+<code><a href="linalg_eigvals.html">linalg_eigvals</a>()</code>,
+<code><a href="linalg_eig.html">linalg_eig</a>()</code>,
 <code><a href="linalg_householder_product.html">linalg_householder_product</a>()</code>,
-<code><a href="linalg_inv.html">linalg_inv</a>()</code>,
 <code><a href="linalg_inv_ex.html">linalg_inv_ex</a>()</code>,
+<code><a href="linalg_inv.html">linalg_inv</a>()</code>,
 <code><a href="linalg_lstsq.html">linalg_lstsq</a>()</code>,
 <code><a href="linalg_matrix_norm.html">linalg_matrix_norm</a>()</code>,
 <code><a href="linalg_matrix_power.html">linalg_matrix_power</a>()</code>,
@@ -204,8 +204,8 @@ matrices.</p></li>
 <code><a href="linalg_pinv.html">linalg_pinv</a>()</code>,
 <code><a href="linalg_qr.html">linalg_qr</a>()</code>,
 <code><a href="linalg_slogdet.html">linalg_slogdet</a>()</code>,
-<code><a href="linalg_solve.html">linalg_solve</a>()</code>,
 <code><a href="linalg_solve_triangular.html">linalg_solve_triangular</a>()</code>,
+<code><a href="linalg_solve.html">linalg_solve</a>()</code>,
 <code><a href="linalg_svdvals.html">linalg_svdvals</a>()</code>,
 <code><a href="linalg_tensorinv.html">linalg_tensorinv</a>()</code>,
 <code><a href="linalg_tensorsolve.html">linalg_tensorsolve</a>()</code>,
@@ -221,25 +221,25 @@ matrices.</p></li>
 <span class="r-in"><span><span class="op">}</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[1]]</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> torch_tensor</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  0.9891 -0.0617  0.1180</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  0.0780 -0.3170 -0.6539</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  0.0846  0.0867 -0.7128</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> -0.0676 -0.8999  0.1906</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  0.0629  0.2799  0.1191</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> -0.7656  0.3731  0.3322</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  0.4751 -0.1220  0.6381</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  0.3652  0.5066  0.1562</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> -0.1608 -0.2040  0.6766</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> -0.1700 -0.7400 -0.0173</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [ CPUFloatType{5,3} ]</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[2]]</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> torch_tensor</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  3.3798</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  2.5786</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  1.5703</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  5.0357</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  1.3409</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  0.7055</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [ CPUFloatType{3} ]</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[3]]</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> torch_tensor</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> -0.1631 -0.6850 -0.7101</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> -0.6607 -0.4587  0.5942</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  0.7327 -0.5661  0.3777</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> -0.1497  0.4336 -0.8886</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  0.9748  0.2153 -0.0591</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> -0.1657  0.8750  0.4549</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [ CPUFloatType{3,3} ]</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 </code></pre></div>
