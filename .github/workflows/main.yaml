@@ -97,9 +97,7 @@ jobs:
           needs: check
       
       - run: |
-          install.packages("torch")
-          library(torch)
-          torch_randn(10, 10)
+          pkgbuild::build()
         shell: Rscript {0}
  
       - uses: r-lib/actions/check-r-package@v2
