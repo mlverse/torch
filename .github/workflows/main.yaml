@@ -4,7 +4,6 @@ on:
       - master
       - main
       - "cran/**"
-      - "s3"
   pull_request:
   schedule:
     - cron: "0 1 * * *"
@@ -95,7 +94,13 @@ jobs:
           cache: false
           extra-packages: any::rcmdcheck
           needs: check
-          
+      
+      - run: |
+          Sys.getenv("PRECXX11ABI")
+          Sys.setenv("PRECXX11ABI" = 1)
+          pkgbuild::build()
+        shell: Rscript {0}
+ 
       - uses: r-lib/actions/check-r-package@v2
         with:
           error-on: '"error"'
