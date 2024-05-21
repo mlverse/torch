@@ -14,7 +14,7 @@ Authors@R: c(
     person(family = "RStudio", role = c("cph"))
     )
 Description: Provides functionality to define and train neural networks similar to
-    'PyTorch' by Paszke et al (2019) <arXiv:1912.01703> but written entirely in R
+    'PyTorch' by Paszke et al (2019) <doi:10.48550/arXiv.1912.01703> but written entirely in R
     using the 'libtorch' library. Also supports low-level tensor operations and
     'GPU' acceleration.
 License: MIT + file LICENSE
