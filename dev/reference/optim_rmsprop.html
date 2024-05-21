@@ -137,7 +137,7 @@ weight_decay (float, optional): weight decay (L2 penalty) (default: 0)</p></dd>
     <div class="section level2">
     <h2 id="note">Note<a class="anchor" aria-label="anchor" href="#note"></a></h2>
     <p>The centered version first appears in
-<a href="https://arxiv.org/pdf/1308.0850v5.pdf" class="external-link">Generating Sequences With Recurrent Neural Networks</a>.
+<a href="https://arxiv.org/pdf/1308.0850v5" class="external-link">Generating Sequences With Recurrent Neural Networks</a>.
 The implementation here takes the square root of the gradient average before
 adding epsilon (note that TensorFlow interchanges these two operations). The effective
 learning rate is thus \(\alpha/(\sqrt{v} + \epsilon)\) where \(\alpha\)
