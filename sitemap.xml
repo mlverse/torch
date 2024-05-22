@@ -127,6 +127,9 @@
     <loc>https://torch.mlverse.org/docs/reference/call_torch_function.html</loc>
   </url>
   <url>
+    <loc>https://torch.mlverse.org/docs/reference/clone_module.html</loc>
+  </url>
+  <url>
     <loc>https://torch.mlverse.org/docs/reference/contrib_sort_vertices.html</loc>
   </url>
   <url>
@@ -338,6 +341,9 @@
   </url>
   <url>
     <loc>https://torch.mlverse.org/docs/reference/linalg_solve.html</loc>
+  </url>
+  <url>
+    <loc>https://torch.mlverse.org/docs/reference/linalg_solve_triangular.html</loc>
   </url>
   <url>
     <loc>https://torch.mlverse.org/docs/reference/linalg_svd.html</loc>
