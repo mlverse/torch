@@ -1,4 +1,6 @@
-# torch (development version)
+# torch (development version) 
+
+- Fix french translation (#1176 @cregouby)
 
 # torch 0.13.0
 
