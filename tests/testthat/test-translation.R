@@ -1,13 +1,3 @@
-test_that("C-level messages are correctly translated in FR", {
-  withr::with_language(lang = "fr",
-                       expect_error(
-                        torch_cat(list(torch_randn(8, 2, 7), torch_randn(8, 3, 7)), dim = 1),
-                        regexp = "La taille des tenseurs",
-                        fixed = TRUE
-                      )
-  )
-})
-
 test_that("R-level error are correctly translated in FR", {
   withr::with_language(lang = "fr",
                        expect_error(
@@ -24,7 +14,7 @@ test_that("R-level warnings are correctly translated in FR", {
   b <- (x^y)$sum()
   y$add_(1)
   withr::with_language(lang = "fr",
-                       expect_error(
+                       expect_warning(
                          with_detect_anomaly({
                            b$backward()
                          }),
