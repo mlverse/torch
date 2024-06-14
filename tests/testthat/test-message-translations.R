@@ -1,21 +1,26 @@
-test_that("R-level message for nn_conv1d padding_mode value_error() get translated in french", {
-  testthat::skip_on_ci()
-  testthat::skip_on_cran()
+test_that("R-level error messages are correctly translated in FR", {
   withr::with_language(lang = "fr",
                        expect_error(
-                         nn_conv1d(3, 3, 2, 1, padding_mode = "bad_padding"),
-                         regexp = "‘padding_mode’ doit être pris parmi "
-                       )
+                          torch_scalar_tensor(torch_randn(8, 2, 7)),
+                        regexp = "les valeurs doivent être de longueur 1",
+                        fixed = TRUE
+                      )
   )
 })
 
-test_that("R-level message for runtime_error() get translated in french", {
-  testthat::skip_on_ci()
-  testthat::skip_on_cran()
+test_that("R-level warning messages are correctly translated in FR", {
+  x <- torch_randn(2, requires_grad = TRUE)
+  y <- torch_randn(1)
+  b <- (x^y)$sum()
+  y$add_(1)
   withr::with_language(lang = "fr",
-                       expect_error(
-                         jit_tuple(c(7,3)),
-                         regexp = "L’argument ‘x’ doit être une liste."
-                       )
+                       expect_warning(
+                         with_detect_anomaly({
+                           b$backward()
+                         }),
+                        regexp = "Ce mode ne doit être activé qu'en cas de débogage",
+                        fixed = TRUE
+                      )
   )
 })
+
