@@ -1,4 +1,4 @@
-test_that("nn_conv1d padding_mode value_error() get translated in french", {
+test_that("R-level message for nn_conv1d padding_mode value_error() get translated in french", {
   testthat::skip_on_ci()
   testthat::skip_on_cran()
   withr::with_language(lang = "fr",
@@ -9,7 +9,7 @@ test_that("nn_conv1d padding_mode value_error() get translated in french", {
   )
 })
 
-test_that("runtime_error() get translated in french", {
+test_that("R-level message for runtime_error() get translated in french", {
   testthat::skip_on_ci()
   testthat::skip_on_cran()
   withr::with_language(lang = "fr",
