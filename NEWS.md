@@ -1,5 +1,28 @@
-# torch (development version)
+# torch (development version) 
 
+## Bug fixes
+
+- Fix french translation (#1176 @cregouby)
+
+# torch 0.13.0
+
+## Breaking changes
+
+- lantern is now distributed over a different URL (https://torch-cdn.mlverse.org). 
+  For most users this shouldn't have any effect, unless you need special authorization
+  to access some URL's. (#1162)
+
+## New features
+
+- Added support for a private `$finalize_deep_clone()` method for `nn_module` which
+ allows to run some code after cloning a module.
+- A `compare_proxy` method for the `torch_tensor` type was added
+  it allows to compare torch tensors using `testthat::expect_equal()`.
+- Converting torch tensor to R array works when tensor has 'cuda' device (#1130)
+
+## Bug fixes
+
+- Fix a bug on using input projection initialization bias in `nnf_multi_head_attention_forward` (#1154 @cregouby)
 - Bugfix: calling `$detach()` on a tensor now preserves attributes (#1136)
 - Make sure deep cloning of tensor and nn_module preserves class attributes and the requires_grad field. (#1129)
 - Fixed that parameters and buffers of children of nn_modules were not cloned
@@ -7,13 +30,9 @@
 - Fixed bug where nn_module's patched clone method was invalid after a call to
   the internal `create_nn_module_callable()`
 - Printing of `grad_fn` now appends a new line at the end.
-- Added support for a private `$finalize_deep_clone()` method for `nn_module` which
- allows to run some code after cloning a module.
 - Make sure deep cloning preserve state dict attributes. (#1129)
-- A `compare_proxy` method for the `torch_tensor` type was added
-  it allows to compare torch tensors using `testthat::expect_equal()`.
-- Converting torch tensor to R array works when tensor has 'cuda' device (#1130)
 - Added separate setter and unsetter for the autocast context instead of only allowing `local_autocast()`. (#1142)
+- Fixed a bug in `torch_arange()` causing it to return 1:(n-1) values when specific request `dtype = torch_int64()` (#1160)
 
 # torch 0.12.0
 
