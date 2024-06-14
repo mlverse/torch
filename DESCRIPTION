@@ -1,7 +1,7 @@
 Package: torch
 Type: Package
 Title: Tensors and Neural Networks with 'GPU' Acceleration
-Version: 0.12.0.9000
+Version: 0.13.0
 Authors@R: c(
     person("Daniel", "Falbel", email = "daniel@rstudio.com", role = c("aut", "cre", "cph")),
     person("Javier", "Luraschi", email = "jluraschi@gmail.com", role = c("aut")),
@@ -14,7 +14,7 @@ Authors@R: c(
     person(family = "RStudio", role = c("cph"))
     )
 Description: Provides functionality to define and train neural networks similar to
-    'PyTorch' by Paszke et al (2019) <arXiv:1912.01703> but written entirely in R
+    'PyTorch' by Paszke et al (2019) <doi:10.48550/arXiv.1912.01703> but written entirely in R
     using the 'libtorch' library. Also supports low-level tensor operations and
     'GPU' acceleration.
 License: MIT + file LICENSE

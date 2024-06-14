@@ -1,0 +1,46 @@
+name: "Uploads packaging artifacts to S3"
+description: "Uploads lantern artifacts to S3"
+inputs:
+  path:
+    required: true
+    description: "the dir path that should be uploaded."
+  destination:
+    required: true
+    description: "the s3 destination of the files"
+  aws_role_to_assume:
+    required: true
+    description: "Role ARN to be assumed"
+  aws_region:
+    required: true
+    description: "Region id to be used"
+
+runs:
+  using: composite
+  steps:
+
+    - id: 'linux-install'
+      if: runner.os == 'Linux'
+      run: |
+        sudo apt install -y unzip
+        curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+        unzip awscliv2.zip
+        sudo ./aws/install
+      shell: bash
+
+    - id: 'macos-install'
+      if: runner.os == 'macOS'
+      run: |
+        curl "https://awscli.amazonaws.com/AWSCLIV2.pkg" -o "AWSCLIV2.pkg"
+        sudo installer -pkg AWSCLIV2.pkg -target /
+      shell: bash
+
+    - id: 'auth'
+      uses: aws-actions/configure-aws-credentials@master
+      with:
+        role-to-assume: ${{ inputs.aws_role_to_assume }}
+        aws-region: ${{ inputs.aws_region }}
+
+    - id: 'upload-file'
+      run: |
+        aws s3 cp ${{ inputs.path }} ${{ inputs.destination }} --recursive
+      shell: bash
