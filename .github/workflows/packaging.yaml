@@ -7,11 +7,15 @@ on:
       - main
       - cran/*
       - packaging3
+      - s3
   schedule:
     - cron: "0 2 * * *"
   
 jobs:
   binaries:
+    permissions:
+      id-token: write
+      contents: read
     runs-on: ${{ matrix.config.runner }}
     container: ${{ matrix.container }}
     strategy:
@@ -19,7 +23,7 @@ jobs:
       matrix:
         
         config: 
-          - {r_version: 'release', os: macOS, version: cpu-intel, runner: macOS-latest}
+          - {r_version: 'release', os: macOS, version: cpu-intel, runner: macOS-13}
           - {r_version: '',        os: macOS, version: cpu-m1, runner: [self-hosted, m1]}
           
           - {r_version: 'release', os: ubuntu, version: cpu, runner: [self-hosted, linux]}
@@ -98,15 +102,11 @@ jobs:
           cat("pkg_version=", desc::desc_get("Version"), "\n", file = Sys.getenv("GITHUB_OUTPUT"), sep="")
         shell: Rscript {0}
         
-      - id: 'auth'
-        uses: 'google-github-actions/auth@v1'
-        with:
-          credentials_json: ${{ secrets.GCP_APPLICATION_CREDENTIALS }}
-
-      - id: 'upload-file'
-        uses: 'google-github-actions/upload-cloud-storage@v1'
+      - id: 'upload-s3'
+        uses: ./.github/actions/upload-dir-to-s3
         with:
           path: "../binaries"
-          destination: 'torch-lantern-builds/packages/${{ matrix.config.version }}/${{ steps.build.outputs.pkg_version }}/'
-          parent: false
+          destination: 's3://torch-binaries/packages/${{ matrix.config.version }}/${{ steps.build.outputs.pkg_version }}/'
+          aws_role_to_assume: ${{ secrets.AWS_ROLE_TO_ASSUME }}
+          aws_region: ${{ secrets.AWS_REGION }}
       

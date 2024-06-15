@@ -177,7 +177,7 @@ test_that("Can load a torch v0.2.1 model", {
   dest <- testthat::test_path("assets/model-v0.2.1.pt")
   if (!file.exists(dest)) {
     download.file(
-      "https://storage.googleapis.com/torch-lantern-builds/testing-models/v0.2.1.pt", 
+      "https://torch-cdn.mlverse.org/testing-models/v0.2.1.pt", 
       destfile = dest, 
       mode = "wb"
     )  
@@ -197,7 +197,7 @@ test_that("Can load a v0.10.0 model", {
   dest <- testthat::test_path("assets/model-v0.10.0.pt")
   if (!file.exists(dest)) {
     download.file(
-      "https://storage.googleapis.com/torch-lantern-builds/testing-models/v0.10.0.pt", 
+      "https://torch-cdn.mlverse.org/testing-models/v0.10.0.pt", 
       destfile = dest, 
       mode = "wb"
     )  

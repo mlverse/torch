@@ -43,7 +43,7 @@ std::vector<Rcpp::RObject> enquos0(Rcpp::Environment env) {
 
 void list2env(Rcpp::Environment e, Rcpp::List mask) {
   std::vector<std::string> nms = mask.names();
-  for (int i = 0; i < nms.size(); i++) {
+  for (auto i = 0; i < nms.size(); i++) {
     e.assign(nms[i], mask[nms[i]]);
   }
 }
@@ -58,7 +58,7 @@ std::vector<Rcpp::RObject> evaluate_slices(std::vector<Rcpp::RObject> quosures,
   SEXP quosure_e;
   SEXP quosure_c;
   SEXP na = Rcpp::LogicalVector::create(NA_LOGICAL);
-  for (int i = 0; i < quosures.size(); i++) {
+  for (auto i = 0; i < quosures.size(); i++) {
     quosure = quosures[i];
     quosure_c = quosure[0];
     quosure_e = quosure[1];
@@ -283,7 +283,7 @@ std::vector<XPtrTorchTensorIndex> slices_to_index(
   SEXP slice;
   int num_dim = 0;
   bool has_ellipsis = false;
-  for (int i = 0; i < slices.size(); i++) {
+  for (auto i = 0; i < slices.size(); i++) {
     slice = slices[i];
     auto info = index_append_sexp(index, slice, drop);
 

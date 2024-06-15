@@ -146,7 +146,10 @@ void delete_tensor(void* x) { lantern_Tensor_delete(x); }
 
 SEXP operator_sexp_optional_tensor(const XPtrTorchOptionalTensor* self) {
   if (!lantern_optional_tensor_has_value(self->get())) {
-    return R_NilValue;
+    // even though we shouldnt need to protect RNilValue, it makes rchk checks happy :)
+    SEXP result = PROTECT(R_NilValue);
+    UNPROTECT(1);
+    return result;
   }
   auto x = torch::Tensor(lantern_optional_tensor_value(self->get()));
   return x;
