@@ -37,7 +37,6 @@ jobs:
           - {os: ubuntu, r_version: release, version: cu11.8, runner: [self-hosted, gpu-local]}
 
           - {os: windows, r_version: release, version: cpu, runner: windows-latest}
-          - {os: windows, r_version: 3.6, version: cpu, runner: windows-latest}
         
         include:
 
