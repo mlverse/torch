@@ -44,11 +44,10 @@ install.packages("torchvision")
 library(torchvision)
 ```
 
-Finally, there is an evolving package, named `torchdatasets` , that wraps datasets in a convenient format, rendering them immediately usable from `torch`. Let's get this as well, as we're going to use one of the datasets it provides.
+Finally, we install `torchdatasets` , that wraps datasets in a convenient format, rendering them immediately usable from `torch`. Let's get this as well, as we're going to use one of the datasets it provides.
 
 ```{r, eval=FALSE}
-remotes::install_github("mlverse/torchdatasets")
-
+install.packages("torchdatasets)
 ```
 
 ```{r}
