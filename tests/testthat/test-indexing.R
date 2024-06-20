@@ -116,9 +116,13 @@ test_that("subset assignment", {
 
 test_that("indexing with R boolean vectors", {
   x <- torch_tensor(c(1, 2))
-  expect_equal_to_r(x[TRUE], matrix(c(1, 2), nrow = 1))
-  expect_equal_to_r(x[FALSE], matrix(data = 1, ncol = 2, nrow = 0))
   expect_equal_to_r(x[c(TRUE, FALSE)], 1)
+  x <- torch_tensor(c(1))
+  expect_equal_to_r(x[TRUE], 1)
+
+  x <- torch_zeros(2, 2)
+  expect_equal(dim(x[c(TRUE, FALSE),]), c(1,2))
+  expect_equal(dim(x[c(TRUE, FALSE),c(TRUE, FALSE)]), c(1,1))
 })
 
 test_that("indexing with long tensors", {

@@ -1,5 +1,5 @@
 value_error <- function(..., env = rlang::caller_env()) {
-    rlang::abort(glue::glue(gettext(...), .envir = env), class = "value_error")
+    rlang::abort(glue::glue(gettext(...)[[1]], .envir = env), class = "value_error")
 }
 
 type_error <- function(..., env = rlang::caller_env()) {
