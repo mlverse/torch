@@ -228,12 +228,6 @@ index_info index_append_sexp(XPtrTorchTensorIndex& index, SEXP slice,
     }
   }
 
-  // scalar boolean
-  if (TYPEOF(slice) == LGLSXP && LENGTH(slice) == 1) {
-    index_append_scalar_bool(index, slice);
-    return {1, false, false};
-  }
-
   // the fill sybol was passed. in this case we add the ellipsis ...
   if (Rf_inherits(slice, "fill")) {
     index_append_ellipsis(index);
@@ -259,7 +253,7 @@ index_info index_append_sexp(XPtrTorchTensorIndex& index, SEXP slice,
     return {1, true, false};
   }
 
-  if (TYPEOF(slice) == LGLSXP && LENGTH(slice) > 1) {
+  if (TYPEOF(slice) == LGLSXP) {
     index_append_bool_vector(index, slice);
     return {1, true, false};
   }
