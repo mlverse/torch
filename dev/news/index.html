@@ -16,7 +16,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">torch</a>
 
-    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">0.12.0.9000</small>
+    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">0.13.0.9000</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -85,18 +85,21 @@
 
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="development version" id="torch-development-version">torch (development version)<a class="anchor" aria-label="anchor" href="#torch-development-version"></a></h2>
+</div>
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="0.13.0" id="torch-0130">torch 0.13.0<a class="anchor" aria-label="anchor" href="#torch-0130"></a></h2><p class="text-muted">CRAN release: 2024-05-21</p>
 <div class="section level3">
-<h3 id="breaking-changes-development-version">Breaking changes<a class="anchor" aria-label="anchor" href="#breaking-changes-development-version"></a></h3>
+<h3 id="breaking-changes-0-13-0">Breaking changes<a class="anchor" aria-label="anchor" href="#breaking-changes-0-13-0"></a></h3>
 <ul><li>lantern is now distributed over a different URL (<a href="https://torch-cdn.mlverse.org" class="external-link uri">https://torch-cdn.mlverse.org</a>). For most users this shouldn’t have any effect, unless you need special authorization to access some URL’s. (<a href="https://github.com/mlverse/torch/issues/1162" class="external-link">#1162</a>)</li>
 </ul></div>
 <div class="section level3">
-<h3 id="new-features-development-version">New features<a class="anchor" aria-label="anchor" href="#new-features-development-version"></a></h3>
+<h3 id="new-features-0-13-0">New features<a class="anchor" aria-label="anchor" href="#new-features-0-13-0"></a></h3>
 <ul><li>Added support for a private <code>$finalize_deep_clone()</code> method for <code>nn_module</code> which allows to run some code after cloning a module.</li>
 <li>A <code>compare_proxy</code> method for the <code>torch_tensor</code> type was added it allows to compare torch tensors using <code><a href="https://testthat.r-lib.org/reference/equality-expectations.html" class="external-link">testthat::expect_equal()</a></code>.</li>
 <li>Converting torch tensor to R array works when tensor has ‘cuda’ device (<a href="https://github.com/mlverse/torch/issues/1130" class="external-link">#1130</a>)</li>
 </ul></div>
 <div class="section level3">
-<h3 id="bug-fixes-development-version">Bug fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-development-version"></a></h3>
+<h3 id="bug-fixes-0-13-0">Bug fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-0-13-0"></a></h3>
 <ul><li>Fix a bug on using input projection initialization bias in <code>nnf_multi_head_attention_forward</code> (<a href="https://github.com/mlverse/torch/issues/1154" class="external-link">#1154</a> <a href="https://github.com/cregouby" class="external-link">@cregouby</a>)</li>
 <li>Bugfix: calling <code>$detach()</code> on a tensor now preserves attributes (<a href="https://github.com/mlverse/torch/issues/1136" class="external-link">#1136</a>)</li>
 <li>Make sure deep cloning of tensor and nn_module preserves class attributes and the requires_grad field. (<a href="https://github.com/mlverse/torch/issues/1129" class="external-link">#1129</a>)</li>
