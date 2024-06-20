@@ -26,6 +26,13 @@ torchaudio:
   url_docs: https://mlverse.github.io/torchaudio/
   url_cran: https://cloud.r-project.org/web/packages/torchaudio/index.html
   name: torchaudio
+torchdatasets:
+  weight: 21
+  desc: 'torchdatasets is an extension for torch providing access to commonly used datasets for deep learning. It includes datasets for computer vision, audio, text and tabular data.'
+  url_git: https://github.com/mlverse/torchdatasets
+  url_docs: https://mlverse.github.io/torchdatasets/
+  url_cran: https://cloud.r-project.org/web/packages/torchdatasets/index.html
+  name: torchdatasets
 etm:
   weight: 30
   desc: 'ETM is a generative topic model combining traditional topic models (LDA) with word embeddings (word2vec). It models each word with a categorical distribution whose natural parameter is the inner product between a word embedding and an embedding of its assigned topic.'
