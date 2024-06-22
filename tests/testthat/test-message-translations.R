@@ -15,10 +15,8 @@ test_that("R-level warning messages are correctly translated in FR", {
   y$add_(1)
   withr::with_language(lang = "fr",
                        expect_warning(
-                         with_detect_anomaly({
-                           b$backward()
-                         }),
-                        regexp = "Ce mode ne doit être activé qu'en cas de débogage",
+                         nnf_mse_loss(torch_randn(5), torch_randn(5, 1)),
+                        regexp = "est différente de taille de l'entrée",
                         fixed = TRUE
                       )
   )
