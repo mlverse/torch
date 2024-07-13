@@ -30,7 +30,7 @@ Imports:
     Rcpp,
     R6,
     withr,
-    rlang,
+    rlang (>= 1.0.0),
     methods,
     utils,
     stats,
@@ -41,7 +41,6 @@ Imports:
     callr,
     cli (>= 3.0.0),
     glue,
-    ellipsis,
     desc,
     safetensors (>= 0.1.1),
     jsonlite
