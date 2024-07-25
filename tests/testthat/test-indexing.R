@@ -266,3 +266,24 @@ test_that("NULL tensor", {
   expect_error(torch_tensor(as.integer(NULL))[1], regexp = "out of bounds")
   
 })
+
+test_that("works with numeric /logic matrix", {
+  # Regression test for: https://github.com/mlverse/torch/issues/1181
+  x <- torch_randn(4, 4)
+  y <- rbind(c(1, 1), c(1,2))
+  
+  expect_true(
+    torch_allclose(
+      x[y],
+      x[torch_tensor(y, dtype = "long")]
+    )
+  )
+  
+  expect_true(
+    torch_allclose(
+      x[x > 0],
+      x[as.array(x>0)]
+    )
+  )
+  
+})

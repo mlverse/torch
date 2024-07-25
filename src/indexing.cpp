@@ -249,13 +249,26 @@ index_info index_append_sexp(XPtrTorchTensorIndex& index, SEXP slice,
   // if it's a numeric vector
   if ((TYPEOF(slice) == REALSXP || TYPEOF(slice) == INTSXP) &&
       LENGTH(slice) > 1) {
-    index_append_integer_vector(index, slice);
-    return {1, true, false};
+    // if it's a numeric vector but has a dim attribute, we convert the value to a Tensor
+    // before adding it to the index.
+    const SEXP dims = Rf_getAttrib(slice, R_DimSymbol);
+    if (Rf_isNull(dims)) {
+      index_append_integer_vector(index, slice);
+      return {1, true, false};
+    }
+    // If the slice has a dim attribute, we convert it to a tensor and let the code
+    // continue to add it to the index.
+    slice = torch_tensor_cpp(slice, torch::Dtype(lantern_Dtype_int64()));
   }
 
   if (TYPEOF(slice) == LGLSXP) {
-    index_append_bool_vector(index, slice);
-    return {1, true, false};
+    const SEXP dims = Rf_getAttrib(slice, R_DimSymbol);
+    if (Rf_isNull(dims)) {
+      index_append_bool_vector(index, slice);
+      return {1, true, false};  
+    }
+    /// convert to tensor a let it go
+    slice = torch_tensor_cpp(slice, torch::Dtype(lantern_Dtype_bool()));
   }
 
   if (Rf_inherits(slice, "torch_tensor")) {
