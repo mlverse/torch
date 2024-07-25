@@ -251,7 +251,7 @@ index_info index_append_sexp(XPtrTorchTensorIndex& index, SEXP slice,
       LENGTH(slice) > 1) {
     // if it's a numeric vector but has a dim attribute, we convert the value to a Tensor
     // before adding it to the index.
-    const SEXP dims = Rf_getAttrib(slice, R_DimSymbol);
+    const auto dims = Rcpp::RObject(Rf_getAttrib(slice, R_DimSymbol));
     if (Rf_isNull(dims)) {
       index_append_integer_vector(index, slice);
       return {1, true, false};
@@ -262,7 +262,7 @@ index_info index_append_sexp(XPtrTorchTensorIndex& index, SEXP slice,
   }
 
   if (TYPEOF(slice) == LGLSXP) {
-    const SEXP dims = Rf_getAttrib(slice, R_DimSymbol);
+    const auto dims = Rcpp::RObject(Rf_getAttrib(slice, R_DimSymbol));
     if (Rf_isNull(dims)) {
       index_append_bool_vector(index, slice);
       return {1, true, false};  
