@@ -285,5 +285,22 @@ test_that("works with numeric /logic matrix", {
       x[as.array(x>0)]
     )
   )
+
+  # also test if it works when the tensor is in a different device
+  skip_if_not_m1_mac()
+  x <- x$to(device-"mps")
   
+  expect_true(
+    torch_allclose(
+      x[y],
+      x[torch_tensor(y, dtype = "long")]
+    )
+  )
+  
+  expect_true(
+    torch_allclose(
+      x[x > 0],
+      x[as.array(x>0)]
+    )
+  )
 })
