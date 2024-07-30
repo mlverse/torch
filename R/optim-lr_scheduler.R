@@ -32,7 +32,7 @@ LRScheduler <- R6::R6Class(
           optimizer$param_groups,
           function(group) {
             if (is.null(group[["initial_lr"]])) {
-              value_error("param 'inital_lr' not is not specified.")
+              value_error("param 'inital_lr' is not specified.")
             }
           }
         )
