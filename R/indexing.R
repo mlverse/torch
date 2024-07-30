@@ -50,7 +50,7 @@ print.slice <- function(x, ...) {
   N = .Machine$integer.max,
   newaxis = NULL,
   `..` = structure(list(), class = "fill")
-)
+) 
 
 tensor_slice <- function(tensor, ..., drop = TRUE) {
   Tensor_slice(tensor, environment(), drop = drop, mask = .d)
