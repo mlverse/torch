@@ -288,7 +288,7 @@ test_that("works with numeric /logic matrix", {
 
   # also test if it works when the tensor is in a different device
   skip_if_not_m1_mac()
-  x <- x$to(device-"mps")
+  x <- x$to(device="mps")
   
   expect_true(
     torch_allclose(
