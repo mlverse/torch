@@ -341,7 +341,7 @@ std::vector<XPtrTorchTensorIndex> slices_to_index(
 XPtrTorchTensor Tensor_slice(XPtrTorchTensor self, Rcpp::Environment e,
                              bool drop, Rcpp::List mask) {
   auto dots = evaluate_slices(enquos0(e), mask);
-  auto device = torch::Device(lantern_Tensor_device(self));
+  auto device = torch::Device(lantern_Tensor_device(self.get()));
   auto index = slices_to_index(dots, drop, device);
   XPtrTorchTensor out = self;
   for (auto& ind : index) {
@@ -353,10 +353,10 @@ XPtrTorchTensor Tensor_slice(XPtrTorchTensor self, Rcpp::Environment e,
 XPtrTorchScalar cpp_torch_scalar(SEXP x);
 
 // [[Rcpp::export]]
-void Tensor_slice_put(Rcpp::XPtr<XPtrTorchTensor> self, Rcpp::Environment e,
+void Tensor_slice_put(XPtrTorchTensor self, Rcpp::Environment e,
                       SEXP rhs, Rcpp::List mask) {
   auto dots = evaluate_slices(enquos0(e), mask);
-  auto device = torch::Device(lantern_Tensor_device(self));
+  auto device = torch::Device(lantern_Tensor_device(self.get()));
   auto indexes = slices_to_index(dots, true, device);
 
   if (indexes.size() > 1) {
@@ -371,13 +371,13 @@ void Tensor_slice_put(Rcpp::XPtr<XPtrTorchTensor> self, Rcpp::Environment e,
        TYPEOF(rhs) == LGLSXP || TYPEOF(rhs) == STRSXP) &&
       LENGTH(rhs) == 1) {
     auto s = cpp_torch_scalar(rhs);
-    lantern_Tensor_index_put_scalar_(self->get(), index.get(), s.get());
+    lantern_Tensor_index_put_scalar_(self.get(), index.get(), s.get());
     return;
   }
 
   if (Rf_inherits(rhs, "torch_tensor")) {
     Rcpp::XPtr<XPtrTorchTensor> t = Rcpp::as<Rcpp::XPtr<XPtrTorchTensor>>(rhs);
-    lantern_Tensor_index_put_tensor_(self->get(), index.get(), t->get());
+    lantern_Tensor_index_put_tensor_(self.get(), index.get(), t->get());
     return;
   }
 
