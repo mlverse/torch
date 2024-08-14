@@ -156,7 +156,6 @@ bool *_lantern_Tensor_data_ptr_bool(void *self) {
 int64_t _lantern_Tensor_numel(void *self) {
   LANTERN_FUNCTION_START
   torch::Tensor x = from_raw::Tensor(self);
-  ;
   return x.numel();
   LANTERN_FUNCTION_END_RET(0)
 }
@@ -164,7 +163,6 @@ int64_t _lantern_Tensor_numel(void *self) {
 int64_t _lantern_Tensor_element_size(void *self) {
   LANTERN_FUNCTION_START
   torch::Tensor x = from_raw::Tensor(self);
-  ;
   return x.element_size();
   LANTERN_FUNCTION_END_RET(0)
 }
@@ -172,7 +170,6 @@ int64_t _lantern_Tensor_element_size(void *self) {
 int64_t _lantern_Tensor_ndimension(void *self) {
   LANTERN_FUNCTION_START
   torch::Tensor x = from_raw::Tensor(self);
-  ;
   return x.ndimension();
   LANTERN_FUNCTION_END_RET(0)
 }
@@ -180,7 +177,6 @@ int64_t _lantern_Tensor_ndimension(void *self) {
 int64_t _lantern_Tensor_size(void *self, int64_t i) {
   LANTERN_FUNCTION_START
   torch::Tensor x = from_raw::Tensor(self);
-  ;
   return x.size(i);
   LANTERN_FUNCTION_END_RET(0)
 }
@@ -188,7 +184,6 @@ int64_t _lantern_Tensor_size(void *self, int64_t i) {
 void *_lantern_Tensor_dtype(void *self) {
   LANTERN_FUNCTION_START
   torch::Tensor x = from_raw::Tensor(self);
-  ;
   torch::Dtype dtype = c10::typeMetaToScalarType(x.dtype());
   return make_raw::Dtype(dtype);
   LANTERN_FUNCTION_END
@@ -197,7 +192,6 @@ void *_lantern_Tensor_dtype(void *self) {
 void *_lantern_Tensor_device(void *self) {
   LANTERN_FUNCTION_START
   torch::Tensor x = from_raw::Tensor(self);
-  ;
   torch::Device device = x.device();
   return make_raw::Device(device);
   LANTERN_FUNCTION_END
@@ -238,7 +232,6 @@ void *_lantern_Tensor_names(void *self) {
 bool _lantern_Tensor_has_any_zeros(void *self) {
   LANTERN_FUNCTION_START
   torch::Tensor x = from_raw::Tensor(self);
-  ;
   return (x == 0).any().item().toBool();
   LANTERN_FUNCTION_END
 }

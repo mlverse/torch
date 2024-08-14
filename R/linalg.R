@@ -264,7 +264,7 @@ linalg_cond <- function(A, p = NULL) {
 #' @family linalg
 #' @export
 linalg_matrix_rank <- function(A, ..., atol = NULL, rtol = NULL, tol = NULL, hermitian = FALSE) {
-  ellipsis::check_dots_empty()
+  rlang::check_dots_empty()
   if (!is.null(tol)) {
     warn("`tol` argument is deprecated in favor of `atol` and `rtol`.")
     atol <- tol
@@ -833,7 +833,7 @@ linalg_solve <- function(A, B) {
 #' @family linalg
 #' @export
 linalg_lstsq <- function(A, B, rcond = NULL, ..., driver = NULL) {
-  ellipsis::check_dots_empty()
+  rlang::check_dots_empty()
 
   args <- list(
     self = A,
@@ -1246,6 +1246,6 @@ linalg_inv_ex <- function(A, check_errors = FALSE) {
 #' @family linalg
 #' @export
 linalg_solve_triangular <- function(A, B, ..., upper, left = TRUE, unitriangular = FALSE) {
-  ellipsis::check_dots_empty()
+  rlang::check_dots_empty()
   torch_linalg_solve_triangular(A, B, upper, left, unitriangular)
 }
