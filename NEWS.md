@@ -1,5 +1,9 @@
 # torch (development version)
 
+## Bug fixes
+
+- `torch_iinfo()` now support all integer dtypes (#1190 @cregouby)
+
 # torch 0.13.0
 
 ## Breaking changes
