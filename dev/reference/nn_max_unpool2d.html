@@ -41,6 +41,7 @@ in which all non-maximal values are set to zero."><meta name="robots" content="n
     <li><a class="dropdown-item" href="../articles/using-autograd.html">Using autograd</a></li>
     <li><a class="dropdown-item" href="../articles/extending-autograd.html">Extending autograd</a></li>
     <li><a class="dropdown-item" href="../articles/python-to-r.html">Python models</a></li>
+    <li><a class="dropdown-item" href="../articles/torchscript.html">Jit Compilation</a></li>
   </ul></li>
 <li class="nav-item dropdown">
   <button class="nav-link dropdown-toggle" type="button" id="dropdown-examples" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Examples</button>
@@ -145,9 +146,9 @@ or as given by <code>output_size</code> in the call operator</p></li>
 <span class="r-in"><span><span class="op">}</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> torch_tensor</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> (1,1,.,.) = </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   0.0000  0.0000  0.0000  0.0000  1.9960</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   0.0000  1.1730  0.0000  0.0000  0.0000</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   0.0000  0.0000  1.2904  0.0000  0.4805</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   0.0000  0.9760  0.0000  0.0000  0.0000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   0.0000  0.5556  0.0000  0.0000  0.0000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   0.0000  0.0000  0.0000 -0.0340  0.3139</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   0.0000  0.0000  0.0000  0.0000  0.0000</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   0.0000  0.0000  0.0000  0.0000  0.0000</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [ CPUFloatType{1,1,5,5} ]</span>

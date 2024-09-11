@@ -53,6 +53,7 @@
     <li><a class="dropdown-item" href="../articles/using-autograd.html">Using autograd</a></li>
     <li><a class="dropdown-item" href="../articles/extending-autograd.html">Extending autograd</a></li>
     <li><a class="dropdown-item" href="../articles/python-to-r.html">Python models</a></li>
+    <li><a class="dropdown-item" href="../articles/torchscript.html">Jit Compilation</a></li>
   </ul>
 </li>
 <li class="nav-item dropdown">
@@ -282,26 +283,26 @@ number of lines (that did manual backprop) are gone:</p>
 <span>    <span class="op">}</span><span class="op">)</span></span>
 <span>    </span>
 <span><span class="op">}</span></span>
-<span><span class="co">#&gt; 10 26.53452 </span></span>
-<span><span class="co">#&gt; 20 25.57098 </span></span>
-<span><span class="co">#&gt; 30 24.6908 </span></span>
-<span><span class="co">#&gt; 40 23.88682 </span></span>
-<span><span class="co">#&gt; 50 23.14441 </span></span>
-<span><span class="co">#&gt; 60 22.45378 </span></span>
-<span><span class="co">#&gt; 70 21.81084 </span></span>
-<span><span class="co">#&gt; 80 21.22026 </span></span>
-<span><span class="co">#&gt; 90 20.66768 </span></span>
-<span><span class="co">#&gt; 100 20.14715 </span></span>
-<span><span class="co">#&gt; 110 19.656 </span></span>
-<span><span class="co">#&gt; 120 19.191 </span></span>
-<span><span class="co">#&gt; 130 18.74983 </span></span>
-<span><span class="co">#&gt; 140 18.33073 </span></span>
-<span><span class="co">#&gt; 150 17.93036 </span></span>
-<span><span class="co">#&gt; 160 17.54737 </span></span>
-<span><span class="co">#&gt; 170 17.18155 </span></span>
-<span><span class="co">#&gt; 180 16.82955 </span></span>
-<span><span class="co">#&gt; 190 16.48938 </span></span>
-<span><span class="co">#&gt; 200 16.1631</span></span></code></pre></div>
+<span><span class="co">#&gt; 10 82.86427 </span></span>
+<span><span class="co">#&gt; 20 75.59435 </span></span>
+<span><span class="co">#&gt; 30 69.11338 </span></span>
+<span><span class="co">#&gt; 40 63.33597 </span></span>
+<span><span class="co">#&gt; 50 58.17996 </span></span>
+<span><span class="co">#&gt; 60 53.5742 </span></span>
+<span><span class="co">#&gt; 70 49.43124 </span></span>
+<span><span class="co">#&gt; 80 45.73639 </span></span>
+<span><span class="co">#&gt; 90 42.40023 </span></span>
+<span><span class="co">#&gt; 100 39.35601 </span></span>
+<span><span class="co">#&gt; 110 36.58958 </span></span>
+<span><span class="co">#&gt; 120 34.07597 </span></span>
+<span><span class="co">#&gt; 130 31.79597 </span></span>
+<span><span class="co">#&gt; 140 29.7239 </span></span>
+<span><span class="co">#&gt; 150 27.82378 </span></span>
+<span><span class="co">#&gt; 160 26.08191 </span></span>
+<span><span class="co">#&gt; 170 24.4841 </span></span>
+<span><span class="co">#&gt; 180 23.01965 </span></span>
+<span><span class="co">#&gt; 190 21.66864 </span></span>
+<span><span class="co">#&gt; 200 20.42724</span></span></code></pre></div>
 <p>We still manually compute the forward pass, and we still manually
 update the weights. In the last two chapters of this section, we’ll see
 how these parts of the logic can be made more modular and reusable, as

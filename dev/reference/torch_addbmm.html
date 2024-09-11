@@ -35,6 +35,7 @@
     <li><a class="dropdown-item" href="../articles/using-autograd.html">Using autograd</a></li>
     <li><a class="dropdown-item" href="../articles/extending-autograd.html">Extending autograd</a></li>
     <li><a class="dropdown-item" href="../articles/python-to-r.html">Python models</a></li>
+    <li><a class="dropdown-item" href="../articles/torchscript.html">Jit Compilation</a></li>
   </ul></li>
 <li class="nav-item dropdown">
   <button class="nav-link dropdown-toggle" type="button" id="dropdown-examples" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Examples</button>
@@ -130,9 +131,9 @@ must be real numbers, otherwise they should be integers.</p>
 <span class="r-in"><span><span class="fu">torch_addbmm</span><span class="op">(</span><span class="va">M</span>, <span class="va">batch1</span>, <span class="va">batch2</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">}</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> torch_tensor</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  -6.1933   9.1583  -5.8213  11.2705   4.2702</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   4.2729  -0.4043   1.3232  -4.0212 -11.7582</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   3.0265 -17.8031   7.3270  -7.9049  -2.9073</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> -10.1526  -6.2576   1.4161  -9.3651  -1.3566</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   3.6350  -1.7537  -0.5283  -7.1892  -4.7664</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  -1.1080  -3.0451  -2.1786  -2.9195   9.3063</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [ CPUFloatType{3,5} ]</span>
 </code></pre></div>
     </div>

@@ -35,6 +35,7 @@
     <li><a class="dropdown-item" href="../articles/using-autograd.html">Using autograd</a></li>
     <li><a class="dropdown-item" href="../articles/extending-autograd.html">Extending autograd</a></li>
     <li><a class="dropdown-item" href="../articles/python-to-r.html">Python models</a></li>
+    <li><a class="dropdown-item" href="../articles/torchscript.html">Jit Compilation</a></li>
   </ul></li>
 <li class="nav-item dropdown">
   <button class="nav-link dropdown-toggle" type="button" id="dropdown-examples" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Examples</button>
@@ -154,10 +155,10 @@ by zero leads to undefined behavior.</p>
 <span class="r-in"><span><span class="fu">torch_div</span><span class="op">(</span><span class="va">a</span>, <span class="va">b</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">}</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> torch_tensor</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> -0.3100  1.9960  0.9464 -0.2281</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  0.9078  1.1670 -0.0502 -0.0932</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  1.1172  1.3783  0.0127  0.7777</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> -0.1515 -2.1321  0.7009  0.2265</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  -0.3443   1.2075  -1.8985 -21.8181</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  -1.4211   0.9198  -3.2910  46.5008</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   8.8556  -0.0263   2.7641  -4.1053</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   0.1694   2.4205  -0.1753 -28.7604</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [ CPUFloatType{4,4} ]</span>
 </code></pre></div>
     </div>

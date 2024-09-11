@@ -35,6 +35,7 @@
     <li><a class="dropdown-item" href="../articles/using-autograd.html">Using autograd</a></li>
     <li><a class="dropdown-item" href="../articles/extending-autograd.html">Extending autograd</a></li>
     <li><a class="dropdown-item" href="../articles/python-to-r.html">Python models</a></li>
+    <li><a class="dropdown-item" href="../articles/torchscript.html">Jit Compilation</a></li>
   </ul></li>
 <li class="nav-item dropdown">
   <button class="nav-link dropdown-toggle" type="button" id="dropdown-examples" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Examples</button>
@@ -119,9 +120,9 @@ of <code>index</code>; other dimensions have the same size as in the original te
 <span class="r-in"><span><span class="fu">torch_index_select</span><span class="op">(</span><span class="va">x</span>, <span class="fl">2</span>, <span class="va">indices</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">}</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> torch_tensor</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  0.1830  0.1617</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> -0.3962  0.8099</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> -1.0311  0.7565</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  0.4785 -1.7101</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  1.6548 -0.9152</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  0.3228 -0.5947</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [ CPUFloatType{3,2} ]</span>
 </code></pre></div>
     </div>

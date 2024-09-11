@@ -35,6 +35,7 @@
     <li><a class="dropdown-item" href="../articles/using-autograd.html">Using autograd</a></li>
     <li><a class="dropdown-item" href="../articles/extending-autograd.html">Extending autograd</a></li>
     <li><a class="dropdown-item" href="../articles/python-to-r.html">Python models</a></li>
+    <li><a class="dropdown-item" href="../articles/torchscript.html">Jit Compilation</a></li>
   </ul></li>
 <li class="nav-item dropdown">
   <button class="nav-link dropdown-toggle" type="button" id="dropdown-examples" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Examples</button>
@@ -120,9 +121,9 @@ a real number, otherwise an integer.</p>
 <span class="r-in"><span><span class="fu">torch_addcmul</span><span class="op">(</span><span class="va">t</span>, <span class="va">t1</span>, <span class="va">t2</span>, <span class="fl">0.1</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">}</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> torch_tensor</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  0.6056 -0.1551  0.1283</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  0.3173 -0.1020 -0.1215</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  0.6276 -0.1592  0.1474</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> -0.6526 -0.4039  0.7003</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> -0.6851 -0.4149  0.7272</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> -0.5540 -0.3705  0.6187</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [ CPUFloatType{3,3} ]</span>
 </code></pre></div>
     </div>

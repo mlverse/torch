@@ -35,6 +35,7 @@
     <li><a class="dropdown-item" href="../articles/using-autograd.html">Using autograd</a></li>
     <li><a class="dropdown-item" href="../articles/extending-autograd.html">Extending autograd</a></li>
     <li><a class="dropdown-item" href="../articles/python-to-r.html">Python models</a></li>
+    <li><a class="dropdown-item" href="../articles/torchscript.html">Jit Compilation</a></li>
   </ul></li>
 <li class="nav-item dropdown">
   <button class="nav-link dropdown-toggle" type="button" id="dropdown-examples" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Examples</button>
@@ -104,9 +105,9 @@ If \(N\) is 1, then this is a no-op - the original matrix is returned as is.</p>
 <span class="r-in"><span><span class="fu">torch_chain_matmul</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="va">a</span>, <span class="va">b</span>, <span class="va">c</span>, <span class="va">d</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">}</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> torch_tensor</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  -8.1261  -4.0173 -12.1663  -1.4129   3.1673  18.4244  -7.7334</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   9.6709   0.1552   9.8292   0.8855  -3.6004 -16.0006   2.9938</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   6.4252  -2.3720  17.2895   3.7712  -1.9210 -15.7591   0.9570</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  -0.7293  -1.5321   8.3099  -2.0448 -10.9486  19.4150 -18.3870</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   4.8052  -0.2870 -10.0675   1.8867   2.3193 -21.0344   8.0632</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  -3.4445  -1.5114   6.3363  -0.3672  -5.2833  18.2929 -11.6036</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [ CPUFloatType{3,7} ]</span>
 </code></pre></div>
     </div>

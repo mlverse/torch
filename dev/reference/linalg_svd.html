@@ -39,6 +39,7 @@ the full SVD of a matrix
     <li><a class="dropdown-item" href="../articles/using-autograd.html">Using autograd</a></li>
     <li><a class="dropdown-item" href="../articles/extending-autograd.html">Extending autograd</a></li>
     <li><a class="dropdown-item" href="../articles/python-to-r.html">Python models</a></li>
+    <li><a class="dropdown-item" href="../articles/torchscript.html">Jit Compilation</a></li>
   </ul></li>
 <li class="nav-item dropdown">
   <button class="nav-link dropdown-toggle" type="button" id="dropdown-examples" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Examples</button>
@@ -201,25 +202,25 @@ matrices.</p></li>
 <span class="r-in"><span><span class="op">}</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[1]]</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> torch_tensor</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  0.0282  0.7746 -0.1237</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> -0.5304  0.1250 -0.6297</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> -0.7686  0.1425  0.6174</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> -0.2071 -0.5938 -0.0648</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> -0.2901 -0.1068 -0.4503</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  0.1055  0.7401  0.2257</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  0.4220  0.0426  0.7706</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  0.1200  0.5224 -0.5002</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> -0.7007 -0.0968  0.2481</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> -0.5526  0.4100  0.2085</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [ CPUFloatType{5,3} ]</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[2]]</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> torch_tensor</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  2.7557</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  2.2623</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  0.3785</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  4.3390</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  1.6133</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  0.3552</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [ CPUFloatType{3} ]</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[3]]</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> torch_tensor</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  0.9255  0.1011  0.3650</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> -0.0914  0.9949 -0.0438</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> -0.3675  0.0072  0.9300</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> -0.1323  0.6303  0.7650</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  0.6238  0.6527 -0.4299</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> -0.7703  0.4203 -0.4795</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [ CPUFloatType{3,3} ]</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 </code></pre></div>

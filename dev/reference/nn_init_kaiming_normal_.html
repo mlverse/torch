@@ -39,6 +39,7 @@ normal distribution."><meta name="robots" content="noindex"><!-- Global site tag
     <li><a class="dropdown-item" href="../articles/using-autograd.html">Using autograd</a></li>
     <li><a class="dropdown-item" href="../articles/extending-autograd.html">Extending autograd</a></li>
     <li><a class="dropdown-item" href="../articles/python-to-r.html">Python models</a></li>
+    <li><a class="dropdown-item" href="../articles/torchscript.html">Jit Compilation</a></li>
   </ul></li>
 <li class="nav-item dropdown">
   <button class="nav-link dropdown-toggle" type="button" id="dropdown-examples" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Examples</button>
@@ -116,9 +117,9 @@ or 'leaky_relu' (default).</p></dd>
 <span class="r-in"><span><span class="fu">nn_init_kaiming_normal_</span><span class="op">(</span><span class="va">w</span>, mode <span class="op">=</span> <span class="st">"fan_in"</span>, nonlinearity <span class="op">=</span> <span class="st">"leaky_relu"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">}</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> torch_tensor</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> -0.6059 -0.4063  0.0655  0.6161 -0.2044</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> -0.3237  0.2387  1.0877 -0.4768 -0.3689</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  0.6222 -1.0251 -0.1764 -0.1467  0.0400</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> -0.6743 -0.5150 -1.1612  0.5479  0.3223</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  2.0576  0.8770 -0.5395  0.3598 -0.5496</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  0.0054 -0.8834 -0.4474  0.1236 -0.3089</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [ CPUFloatType{3,5} ]</span>
 </code></pre></div>
     </div>
