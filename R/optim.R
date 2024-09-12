@@ -82,9 +82,9 @@ Optimizer <- R6::R6Class(
       
       self$param_groups <- append(self$param_groups, list(param_group))
     },
-    zero_grad = function() {
+    zero_grad = function(set_to_none = FALSE) {
       for (group in self$param_groups) {
-        cpp_autograd_zero_grad(group$params)
+        cpp_autograd_zero_grad(group$params, set_to_none)
       }
     },
     state_dict = function() {

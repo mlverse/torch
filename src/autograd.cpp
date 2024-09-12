@@ -416,6 +416,6 @@ void cpp_set_cuda_allocator_allocator_thresholds (double reserved_rate, double a
 }
 
 // [[Rcpp::export]]
-void cpp_autograd_zero_grad (torch::TensorList x) {
-  lantern_autograd_zero_grad(x.get());
+void cpp_autograd_zero_grad (torch::TensorList x, bool set_to_none) {
+  lantern_autograd_zero_grad(x.get(), set_to_none);
 }
