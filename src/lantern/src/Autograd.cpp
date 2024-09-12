@@ -299,15 +299,15 @@ void *_lantern_Edge_function(void *self) {
 void _lantern_autograd_zero_grad (void * self, bool set_to_none) {
   LANTERN_FUNCTION_START
   auto list = from_raw::TensorList(self);
-  for (auto &t : list) {
-    auto grad = t.grad();
-    if (grad.defined()) {
-      if (set_to_none) {
-        grad.reset();
-      } else {
-        grad.zero_();
+  for (auto &p : list) {
+    if (p.mutable_grad().defined()) {
+        p.mutable_grad().detach_();
+        if (set_to_none) {
+          p.mutable_grad().reset();
+        } else {
+          p.mutable_grad().zero_();
+        }
       }
-    }
   }
   LANTERN_FUNCTION_END_VOID
 }
