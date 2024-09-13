@@ -71,7 +71,7 @@ jobs:
           curl -fsSL https://get.docker.com -o get-docker.sh
           DRY_RUN=1 sh ./get-docker.sh
 
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v2
       
       - name: Setup cmake
         uses: jwlawson/actions-setup-cmake@v1
