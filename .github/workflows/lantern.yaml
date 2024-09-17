@@ -38,9 +38,7 @@ jobs:
 
           - config: {os: ubuntu}
             precxx11abi: 1
-            container: ubuntu:18.04
-            env: 
-              ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION: true
+            container: ubuntu:20.04
           
           # specify the CUDA patch for each major/minor version.
           # required for cuda installation
