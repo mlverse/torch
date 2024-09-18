@@ -38,7 +38,7 @@ jobs:
 
           - config: {os: ubuntu}
             precxx11abi: 1
-            container: ubuntu:18.04
+            container: ubuntu:20.04
           
           # specify the CUDA patch for each major/minor version.
           # required for cuda installation
@@ -71,7 +71,7 @@ jobs:
           curl -fsSL https://get.docker.com -o get-docker.sh
           DRY_RUN=1 sh ./get-docker.sh
 
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       
       - name: Setup cmake
         uses: jwlawson/actions-setup-cmake@v1
