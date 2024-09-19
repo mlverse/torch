@@ -486,12 +486,12 @@ nnf_threshold_ <- function(input, threshold, value) {
 #'
 #' @param embed_dim_to_check  total dimension of the model.
 #' @param num_heads  parallel attention heads.
-#' @param in_proj_weight  input projection weight and bias.
+#' @param in_proj_weight  input projection weight.
 #' @param bias_k bias of the key and value sequences to be added at dim=0.
 #' @param add_zero_attn  add a new batch of zeros to the key and
 #'   value sequences at dim=1.
 #' @param dropout_p  probability of an element to be zeroed.
-#' @param out_proj_weight the output projection weight and bias.
+#' @param out_proj_weight the output projection weight.
 #' @param training  apply dropout if is `TRUE`.
 #' @param key_padding_mask  if provided, specified padding elements in the key will
 #'   be ignored by the attention. This is an binary mask. When the value is True
@@ -526,9 +526,9 @@ nnf_threshold_ <- function(input, threshold, value) {
 #' @param avg_weights Logical; whether to average attn_output_weights over the
 #'   attention heads before outputting them. This doesn't change the returned
 #'   value of attn_output; it only affects the returned attention weight matrix.
-#' @param in_proj_bias currently undocumented.
+#' @param in_proj_bias input projection bias.
 #' @param bias_v currently undocumented.
-#' @param out_proj_bias currently undocumented.
+#' @param out_proj_bias output projection bias.
 #' @param k_proj_weight currently undocumented.
 #' @param v_proj_weight currently undocumented.
 #' @param static_v currently undocumented.
@@ -649,8 +649,8 @@ nnf_multi_head_attention_forward <- function(query, # type: Tensor
   } else {
     if (!is.null(in_proj_bias)) {
       q <- nnf_linear(query, q_proj_weight, in_proj_bias[1:embed_dim])
-      k <- nnf_linear(key, k_proj_weight, in_proj_bias[embed_dim:(embed_dim * 2)])
-      v <- nnf_linear(value, v_proj_weight, in_proj_bias[(embed_dim * 2):N])
+      k <- nnf_linear(key, k_proj_weight, in_proj_bias[(embed_dim + 1):(embed_dim * 2)])
+      v <- nnf_linear(value, v_proj_weight, in_proj_bias[(embed_dim * 2 + 1):N])
     } else {
       q <- nnf_linear(query, q_proj_weight, in_proj_bias)
       k <- nnf_linear(key, k_proj_weight, in_proj_bias)

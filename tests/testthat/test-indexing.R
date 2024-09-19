@@ -116,9 +116,13 @@ test_that("subset assignment", {
 
 test_that("indexing with R boolean vectors", {
   x <- torch_tensor(c(1, 2))
-  expect_equal_to_r(x[TRUE], matrix(c(1, 2), nrow = 1))
-  expect_equal_to_r(x[FALSE], matrix(data = 1, ncol = 2, nrow = 0))
   expect_equal_to_r(x[c(TRUE, FALSE)], 1)
+  x <- torch_tensor(c(1))
+  expect_equal_to_r(x[TRUE], 1)
+
+  x <- torch_zeros(2, 2)
+  expect_equal(dim(x[c(TRUE, FALSE),]), c(1,2))
+  expect_equal(dim(x[c(TRUE, FALSE),c(TRUE, FALSE)]), c(1,1))
 })
 
 test_that("indexing with long tensors", {
@@ -261,4 +265,42 @@ test_that("NULL tensor", {
   expect_error(x[1], regexp = "out of bounds")
   expect_error(torch_tensor(as.integer(NULL))[1], regexp = "out of bounds")
   
+})
+
+test_that("works with numeric /logic matrix", {
+  # Regression test for: https://github.com/mlverse/torch/issues/1181
+  x <- torch_randn(4, 4)
+  y <- rbind(c(1, 1), c(1,2))
+  
+  expect_true(
+    torch_allclose(
+      x[y],
+      x[torch_tensor(y, dtype = "long")]
+    )
+  )
+  
+  expect_true(
+    torch_allclose(
+      x[x > 0],
+      x[as.array(x>0)]
+    )
+  )
+
+  # also test if it works when the tensor is in a different device
+  skip_if_not_m1_mac()
+  x <- x$to(device="mps")
+  
+  expect_true(
+    torch_allclose(
+      x[y],
+      x[torch_tensor(y, dtype = "long")]
+    )
+  )
+  
+  expect_true(
+    torch_allclose(
+      x[x > 0],
+      x[as.array(x>0)]
+    )
+  )
 })

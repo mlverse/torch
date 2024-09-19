@@ -7,11 +7,11 @@ nn_conv_nd <- nn_module(
                         padding, dilation, transposed, output_padding,
                         groups, bias, padding_mode) {
     if (in_channels %% groups != 0) {
-      value_error("in_channels must be divisable by groups")
+      value_error("`in_channels` must be divisible by groups")
     }
 
     if (out_channels %% groups != 0) {
-      value_error("out_channels must be divisable by groups")
+      value_error("`out_channels` must be divisible by groups")
     }
 
     valid_padding_modes <- c("zeros", "reflect", "replicate", "circular")
@@ -506,7 +506,7 @@ nn_conv_transpose_nd <- nn_module(
                         padding, dilation, transposed, output_padding,
                         groups, bias, padding_mode) {
     if (padding_mode != "zeros") {
-      value_error("Only 'zeros' padding is supported.")
+      value_error("Only `zeros` padding is supported.")
     }
 
     super$initialize(

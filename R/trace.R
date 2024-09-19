@@ -63,7 +63,7 @@
 #' @export
 jit_trace <- function(func, ..., strict = TRUE) {
   tr_fn <- make_traceable_fn(func)
-  ellipsis::check_dots_unnamed() # we do not support named arguments
+  rlang::check_dots_unnamed() # we do not support named arguments
 
   if (inherits(func, "nn_module")) {
     if (inherits(func, "nn_module_generator")) {

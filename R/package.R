@@ -11,24 +11,25 @@ globalVariables(c("..", "self", "private", "N"))
 }
 
 .onLoad <- function(libname, pkgname) {
+  register_s3_method("waldo", "compare_proxy", "torch_tensor")
   cpp_torch_namespace__store_main_thread_id()
 
   install_success <- TRUE
-  
+
   is_interactive <- interactive() ||
     "JPY_PARENT_PID" %in% names(Sys.getenv()) ||
     identical(getOption("jupyter.in_kernel"), TRUE)
-  
-  # we only autoinstall if it has not explicitly disabled by setting 
+
+  # we only autoinstall if it has not explicitly disabled by setting
   # TORCH_INSTALL = 0
   autoinstall <- is_interactive && (Sys.getenv("TORCH_INSTALL", unset = 2) != 0)
-  
+
   # We can also auto install if TORCH_INSTALL is requested with TORCH_INSTALL=1
   autoinstall <- autoinstall || (Sys.getenv("TORCH_INSTALL", unset = 2) == "1")
-  
+
   # we only autoinstall if installation doesn't yet exist.
   autoinstall <- autoinstall && (!torch_is_installed())
-  
+
   if (autoinstall) {
     install_success <- tryCatch(
       {
@@ -37,8 +38,8 @@ globalVariables(c("..", "self", "private", "N"))
         # in interactive environments we want to ask the user for permission to
         # download and install stuff. That's not necessary otherwise because the
         # user has explicitly asked for installation with `TORCH_INSTALL=1`.
-        if (is_interactive) { 
-          get_confirmation() # this will error of response is not true.  
+        if (is_interactive) {
+          get_confirmation() # this will error of response is not true.
         }
         install_torch(.inform_restart = FALSE)
         TRUE

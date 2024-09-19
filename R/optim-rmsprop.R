@@ -18,7 +18,7 @@ NULL
 #'
 #' @note
 #' The centered version first appears in
-#' [Generating Sequences With Recurrent Neural Networks](https://arxiv.org/pdf/1308.0850v5.pdf).
+#' [Generating Sequences With Recurrent Neural Networks](https://arxiv.org/pdf/1308.0850v5).
 #' The implementation here takes the square root of the gradient average before
 #' adding epsilon (note that TensorFlow interchanges these two operations). The effective
 #' learning rate is thus \eqn{\alpha/(\sqrt{v} + \epsilon)} where \eqn{\alpha}

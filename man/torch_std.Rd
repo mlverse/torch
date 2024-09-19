@@ -15,8 +15,6 @@ torch_std(self, dim, unbiased = TRUE, keepdim = FALSE)
 \item{unbiased}{(bool) whether to use the unbiased estimation or not}
 
 \item{keepdim}{(bool) whether the output tensor has \code{dim} retained or not.}
-
-\item{correction}{The type of correction.}
 }
 \description{
 Std

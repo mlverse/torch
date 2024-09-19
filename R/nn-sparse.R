@@ -64,10 +64,10 @@ nn_embedding <- nn_module(
 
     if (!is.null(padding_idx)) {
       if (padding_idx > 0 && padding_idx > num_embeddings) {
-        value_error("padding idx must be within num_embeddings")
+        value_error("`padding_idx` must be within num_embeddings")
       } else if (padding_idx < 0) {
         if (padding_idx <= (-num_embeddings)) {
-          value_error("padding idx must be within num_embeddings")
+          value_error("`padding_idx` must be within num_embeddings")
         }
 
         padding_idx <- self$num_embeddings + padding_idx
@@ -84,7 +84,7 @@ nn_embedding <- nn_module(
       self$reset_parameters()
     } else {
       if (!all(.weight$size() == c(num_embeddings, embedding_dim))) {
-        value_error("Shape of weight does not match num_embeddings and embedding_dim")
+        value_error("Shape of `.weight` does not match num_embeddings and embedding_dim")
       }
 
       self$weight <- nn_parameter(.weight)
@@ -164,10 +164,10 @@ nn_embedding_bag <- nn_module(
     self$embedding_dim <- embedding_dim
     if (!is.null(padding_idx)) {
       if (padding_idx > 0 && padding_idx > num_embeddings) {
-        value_error("padding idx must be within num_embeddings")
+        value_error("`padding_idx` must be within num_embeddings")
       } else if (padding_idx < 0) {
         if (padding_idx <= (-num_embeddings)) {
-          value_error("padding idx must be within num_embeddings")
+          value_error("`padding_idx` must be within num_embeddings")
         }
         
         padding_idx <- self$num_embeddings + padding_idx
@@ -184,7 +184,7 @@ nn_embedding_bag <- nn_module(
       self$reset_parameters()
     } else {
       if (!all(.weight$size() == c(num_embeddings, embedding_dim))) {
-        value_error("Shape of weight does not match num_embeddings and embedding_dim")
+        value_error("Shape of `.weight` does not match num_embeddings and embedding_dim")
       }
       
       self$weight <- nn_parameter(.weight)

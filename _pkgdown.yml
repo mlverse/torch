@@ -40,6 +40,8 @@ navbar:
        href: articles/extending-autograd.html
      - text: Python models
        href: articles/python-to-r.html
+     - text: Jit Compilation
+       href: articles/torchscript.html
   advanced:
     text: Advanced
     menu:
@@ -87,6 +89,7 @@ reference:
   - title: Serialization
     contents:
       - has_concept("serialization")
+      - clone_module
   - title: Mathematical operations on tensors
     contents:
       - starts_with("torch_")
@@ -152,6 +155,8 @@ reference:
     contents:
       - local_autocast
       - with_autocast
+      - set_autocast
+      - unset_autocast
       - starts_with("cuda_amp_")
   - title: Random numbers
     contents:

@@ -31,7 +31,7 @@ x <- nn_sequential(
   nn_batch_norm1d(10),
   nn_tanh(),
   nn_linear(10,3)
-)  
+)
 prune <- nn_prune_head(x, 3)
 prune
 }

@@ -18,6 +18,7 @@
 #' @param dtype a torch data type indicating whether to use `torch_float16()` or `torch_bfloat16()`.
 #' @param cache_enabled a logical value indicating whether the weight cache inside autocast should be enabled.
 #' @param ... currently unused.
+#' @param context Returned by `set_autocast` and should be passed when unsetting it.
 #' @inheritParams with_no_grad
 #' @examples 
 #' x <- torch_randn(5, 5, dtype = torch_float32())
@@ -34,6 +35,22 @@
 #' @seealso [cuda_amp_grad_scaler()] to perform dynamic gradient scaling.
 #' @export
 local_autocast <- function(device_type, dtype = NULL, enabled = TRUE, cache_enabled = NULL, ..., .env = parent.frame()) {
+  context <- set_autocast(device_type, dtype = dtype, enabled = enabled, cache_enabled = cache_enabled)
+  withr::defer({
+    unset_autocast(context)
+  }, envir = .env)
+}
+
+#' @describeIn local_autocast A with context for automatic mixed precision.
+#' @export
+with_autocast <- function(code, ... , device_type, dtype = NULL, enabled = TRUE, cache_enabled = NULL) {
+  local_autocast(device_type, dtype = dtype, enabled = enabled, cache_enabled = cache_enabled)
+  force(code)
+}
+
+#' @describeIn local_autocast Set the autocast context. For advanced users only.
+#' @export
+set_autocast <- function(device_type, dtype = NULL, enabled = TRUE, cache_enabled = NULL) {
   device <- device_type
   
   fast_dtype <- if (!is.null(dtype)) {
@@ -73,28 +90,35 @@ local_autocast <- function(device_type, dtype = NULL, enabled = TRUE, cache_enab
   prev_cache_enabled <- cpp_amp_autocast_is_cache_enabled()
   cpp_amp_autocast_set_cache_enabled(cache_enabled)
   
-  withr::defer({
-    if (device == "cpu") {
-      if (cpp_amp_autocast_decrease_nesting() == 0) {
-        cpp_amp_autocast_clear_cache()
-      }
-      cpp_amp_autocast_set_cpu_enabled(prev_enabled)
-      cpp_amp_autocast_set_cpu_dtype(prev_fast_dtype)
-    } else if (device == "cuda") {
-      if (cpp_amp_autocast_decrease_nesting() == 0) {
-        cpp_amp_autocast_clear_cache()
-      }
-      cpp_amp_autocast_set_gpu_enabled(prev_enabled)
-      cpp_amp_autocast_set_gpu_dtype(prev_fast_dtype)
-    }
-  }, envir = .env)
+  list(
+    device = device,
+    enabled = prev_enabled,
+    fast_dtype = prev_fast_dtype,
+    cache_enabled = prev_cache_enabled
+  )
 }
 
-#' @describeIn local_autocast A with context for automatic mixed precision.
+#' @describeIn local_autocast Unset the autocast context.
 #' @export
-with_autocast <- function(code, ... , device_type, dtype = NULL, enabled = TRUE, cache_enabled = NULL) {
-  local_autocast(device_type, dtype = dtype, enabled = enabled, cache_enabled = cache_enabled)
-  force(code)
+unset_autocast <- function(context) {
+  device <- context$device
+  prev_enabled <- context$enabled
+  prev_fast_dtype <- context$fast_dtype
+  prev_cache_enabled <- context$cache_enabled
+  
+  if (device == "cpu") {
+    if (cpp_amp_autocast_decrease_nesting() == 0) {
+      cpp_amp_autocast_clear_cache()
+    }
+    cpp_amp_autocast_set_cpu_enabled(prev_enabled)
+    cpp_amp_autocast_set_cpu_dtype(prev_fast_dtype)
+  } else if (device == "cuda") {
+    if (cpp_amp_autocast_decrease_nesting() == 0) {
+      cpp_amp_autocast_clear_cache()
+    }
+    cpp_amp_autocast_set_gpu_enabled(prev_enabled)
+    cpp_amp_autocast_set_gpu_dtype(prev_fast_dtype)
+  }
 }
 
 #' Creates a gradient scaler

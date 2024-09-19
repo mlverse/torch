@@ -7,12 +7,12 @@
 nn_init_dirac_(tensor, groups = 1)
 }
 \arguments{
-\item{tensor}{a {3, 4, 5}-dimensional \code{torch.Tensor}}
+\item{tensor}{a \{3, 4, 5\}-dimensional \code{torch.Tensor}}
 
 \item{groups}{(optional) number of groups in the conv layer (default: 1)}
 }
 \description{
-Fills the {3, 4, 5}-dimensional input \code{Tensor} with the Dirac
+Fills the \{3, 4, 5\}-dimensional input \code{Tensor} with the Dirac
 delta function. Preserves the identity of the inputs in \code{Convolutional}
 layers, where as many input channels are preserved as possible. In case
 of groups>1, each group of channels preserves identity.

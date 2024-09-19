@@ -187,7 +187,7 @@ libtorch_url <- function() {
     url <- glue::glue("https://download.pytorch.org/libtorch/{kind}/libtorch-win-shared-with-deps-{torch_version}%2B{kind}.zip")
   }
   if (is_linux()) {
-    precxx11 <- if(precxx11abi()) "" else "cxx11-abi-"
+    precxx11 <- ifelse(precxx11abi(), "", "cxx11-abi-")
     url <- glue::glue("https://download.pytorch.org/libtorch/{kind}/libtorch-{precxx11}shared-with-deps-{torch_version}%2B{kind}.zip")
   }
   
@@ -232,7 +232,7 @@ lantern_url <- function() {
   base_url <- Sys.getenv("LANTERN_BASE_URL", "")
 
   if (!nzchar(base_url)) {
-    base_url <- "https://storage.googleapis.com/torch-lantern-builds/binaries/"
+    base_url <- "https://torch-cdn.mlverse.org/binaries/"
   
     remote_sha <- Sys.getenv("TORCH_COMMIT_SHA", "")
     if (remote_sha == "none") {

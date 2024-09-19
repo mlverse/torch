@@ -3,6 +3,7 @@
 // YEAR: 2017
 // COPYRIGHT HOLDER: Randy Lai
 
+#include <Rcpp.h>
 #include <R.h>
 #include <Rdefines.h>
 #include <Rinternals.h>
@@ -10,7 +11,8 @@
 
 void check_is_xptr(SEXP s) {
   if (TYPEOF(s) != EXTPTRSXP) {
-    error("expect an externalptr");
+    // using stop instead of error avoids noRemap check errors
+    Rcpp::stop("expect an externalptr");
   }
 }
 

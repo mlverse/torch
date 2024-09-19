@@ -126,3 +126,13 @@ extract_method <- function(self, name, call = TRUE) {
 print.R7 <- function(x, ...) {
   x$print(...)
 }
+
+#' @export
+length.R7 <- function(x) {
+  tryCatch(
+    x$length(), 
+    error = function(err) {
+      1 # when no custom length method is implemented, we return 1.
+    }
+  )
+}

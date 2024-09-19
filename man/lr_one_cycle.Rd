@@ -46,7 +46,7 @@ Default: NULL}
 increasing the learning rate.
 Default: 0.3}
 
-\item{anneal_strategy}{(str): {'cos', 'linear'}
+\item{anneal_strategy}{(str): \{'cos', 'linear'\}
 Specifies the annealing strategy: "cos" for cosine annealing, "linear" for
 linear annealing.
 Default: 'cos'}

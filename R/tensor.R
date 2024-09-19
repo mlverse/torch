@@ -33,7 +33,7 @@ Tensor <- R7Class(
       if (!is_undefined_tensor(self)) {
         if (!is.null(self$ptr$grad_fn)) {
           cat("[ grad_fn = <")
-          cat(self$ptr$grad_fn$print())
+          cat(self$ptr$grad_fn$print(newline = FALSE))
           cat("> ]")
         } else if (self$ptr$requires_grad && is.null(self$ptr$grad_fn)) {
           cat("[ requires_grad = TRUE ]")
@@ -44,6 +44,9 @@ Tensor <- R7Class(
     },
     dim = function() {
       cpp_tensor_ndim(self)
+    },
+    length = function() {
+      prod(dim(self))
     },
     size = function(dim) {
       x <- cpp_tensor_dim(self$ptr)
@@ -68,27 +71,27 @@ Tensor <- R7Class(
     },
     to = function(dtype = NULL, device = NULL, other = NULL, non_blocking = FALSE,
                   copy = FALSE, memory_format = NULL) {
-      
+
       has_device <- !is.null(device)
       has_dtype <- !is.null(dtype)
       has_other <- !is.null(other)
-      
+
       if (has_other) {
         # can't have device and dtype
         if (has_device || has_dtype) {
           cli::cli_abort("Had {.arg other} but {.arg device} or {.arg dtype} are non {.val NULL}")
         }
-        
+
         return(private$`_to`(other = other, non_blocking = non_blocking, copy = copy))
       }
-      
+
       if (!has_dtype) {
         dtype <- self$dtype
       }
-      
+
       if (has_device) {
         private$`_to`(
-          dtype = dtype, 
+          dtype = dtype,
           device = device,
           non_blocking = non_blocking,
           copy = copy,
@@ -195,7 +198,7 @@ Tensor <- R7Class(
       }
 
       if (!missing(dim) && !missing(other)) {
-        value_error("Can't set other and dim argumments.")
+        value_error("Can't set other and dim arguments.")
       }
 
       if (missing(dim)) {
@@ -213,7 +216,7 @@ Tensor <- R7Class(
       }
 
       if (!missing(dim) && !missing(other)) {
-        value_error("Can't set other and dim argumments.")
+        value_error("Can't set other and dim arguments.")
       }
 
       if (missing(dim)) {
@@ -285,6 +288,18 @@ Tensor <- R7Class(
     },
     half = function() {
       self$to(dtype=torch_half())
+    },
+    clone = function(...) {
+      x <- private$`_clone`(...)
+      attributes(x) <- attributes(self)
+
+      return(x)
+    },
+    detach = function(...) {
+      x <- private$`_detach`(...)
+      attributes(x) <- attributes(self)
+
+      return(x)
     }
   ),
   active = list(
@@ -380,7 +395,7 @@ as.matrix.torch_tensor <- function(x, ...) {
 as_array_impl <- function(x) {
   # move tensor to cpu before copying to R
   x <- x$cpu()
-  
+
   if (x$is_complex()) {
     out <- complex(
       real = as.array(x$real),
@@ -389,7 +404,7 @@ as_array_impl <- function(x) {
     dim(out) <- dim(x)
     return(out)
   }
-  
+
   a <- cpp_as_array(x)
 
   if (length(a$dim) <= 1L) {
@@ -409,10 +424,6 @@ as_array_impl <- function(x) {
 
 #' @export
 as_array.torch_tensor <- function(x) {
-  if (x$device$type == "cuda") {
-    runtime_error("Can't convert cuda tensor to R. Convert to cpu tensor before.")
-  }
-
   # dequantize before converting
   if (x$is_quantized()) {
     x <- x$dequantize()
@@ -476,13 +487,13 @@ Tensor$set("active", "ptr", function() {
 
 tensor_to_complex <- function(x) {
   torch_complex(
-    torch_tensor(Re(x), dtype = torch_double()), 
+    torch_tensor(Re(x), dtype = torch_double()),
     torch_tensor(Im(x), dtype = torch_double())
   )
 }
 
 #' Creates a tensor from a buffer of memory
-#' 
+#'
 #' It creates a tensor without taking ownership of the memory it points to.
 #' You must call `clone` if you want to copy the memory over a new tensor.
 #'

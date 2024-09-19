@@ -43,11 +43,14 @@ See [here](https://github.com/mlverse/torch/issues/246#issuecomment-695097121) f
 
 ### GPU
 
+torch has very specific requirements in terms of CUDA and CUDNN versions it supports. We recomment installing torch
+using pre-built binaries. See (#pre-built) for more information.
+
 Since version 0.1.1 torch supports GPU installation on Windows. In order to use GPU's with torch you need to:
 
 -   Have a CUDA compatible NVIDIA GPU. You can find if you have a CUDA compatible GPU [here](https://developer.nvidia.com/cuda-gpus#compute).
 
--   Have properly installed the NVIDIA CUDA toolkit version 11.7. For CUDA v11.7, follow the installation instructions [here](https://docs.nvidia.com/cuda/archive/11.7.0/index.html). **Note**: The version of the CUDA toolkit must match exactly what's mentioed above.
+-   Have properly installed the NVIDIA CUDA toolkit version 11.7. For CUDA v11.7, follow the installation instructions [here](https://developer.nvidia.com/cuda-11-7-0-download-archive). **Note**: The version of the CUDA toolkit must match exactly what's mentioed above.
 
 -   Have installed cuDNN - a version compatible with CUDA v11.7. Follow the installation instructions available [here](https://developer.nvidia.com/cudnn).
 
@@ -63,7 +66,15 @@ If you have followed default installation locations we will detect that you have
 
 ### CPU
 
-We only support CPU builds of torch on MacOS. On MacOS you can install torch with:
+We support CPU builds of torch on MacOS. On MacOS you can install torch with:
+
+```{r, eval = FALSE}
+install.packages("torch")
+```
+
+### GPU
+
+On Apple Silicon architecture we support GPU through MPS:
 
 ```{r, eval = FALSE}
 install.packages("torch")
@@ -80,6 +91,9 @@ install.packages("torch")
 ```
 
 ### GPU
+
+torch has very specific requirements in terms of CUDA and CUDNN versions it supports. We recomment installing torch
+using pre-built binaries. See (#pre-built) for more information.
 
 To install the GPU version of `torch` on linux you must verify that:
 
@@ -117,10 +131,10 @@ To install from the pre-built binaries, you can use the following:
 options(timeout = 600) # increasing timeout is recommended since we will be downloading a 2GB file.
 # For Windows and Linux: "cpu", "cu117" are the only currently supported
 # For MacOS the supported are: "cpu-intel" or "cpu-m1"
-kind <- "cu117"
+kind <- "cu118"
 version <- available.packages()["torch","Version"]
 options(repos = c(
-  torch = sprintf("https://storage.googleapis.com/torch-lantern-builds/packages/%s/%s/", kind, version),
+  torch = sprintf("https://torch-cdn.mlverse.org/packages/%s/%s/", kind, version),
   CRAN = "https://cloud.r-project.org" # or any other from which you want to install the other R dependencies.
 ))
 install.packages("torch")
@@ -165,3 +179,14 @@ Sys.setenv(TORCH_URL="/tmp/libtorch-v1.13.1.zip")
 Sys.setenv(LANTERN_URL="/tmp/lantern-0.9.1.9001+cpu+arm64-Darwin.zip")
 torch::install_torch()
 ```
+
+### Installing older versions
+
+As of v0.13.0 torch shifted from using Google Cloud Storage service to AWS S3 as the storage service for the required Lantern binaries.
+
+We will keep the files in the GCS bucket for as long as possible, but we might need to remove them at some point in time.
+Those files have been backed up in the new AWS S3 bucket using the same file structure, so if torch tries to download some from a URL starting with
+`https://storage.googleapis.com/torch-lantern-builds`, you should now replace it with `https://torch-cdn.mlverse.org`.
+
+For torch versions between v0.10.0 and v0.12.0 (both included), you should be able to set the environment variable `LANTERN_BASE_URL=https://torch-cdn.mlverse.org/binaries/` to point to the new address of the binaries.
+For older versions of torch, you might need to manually download the file from the new address and extract it to the expected `TORCH_HOME` directory. Feel free to open an issue on GitHub if you need help with this.

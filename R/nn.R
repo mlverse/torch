@@ -134,7 +134,7 @@ nn_Module <- R6::R6Class(
           out[[paste0(prefix, param_name)]] <- keepvars_or_detach(param, keepvars)
         }
       }
-      
+
       for (buf_name in names(private$buffers_)) {
         buf <- private$buffers_[[buf_name]]
         if (!is.null(buf) && !(buf_name %in% private$non_persistent_buffers_)) {
@@ -173,15 +173,15 @@ nn_Module <- R6::R6Class(
           if (!self$..refer_to_state_dict..) {
             with_no_grad({
               param$copy_(input_param)
-            })  
+            })
           } else {
-            
+
             # setting requires grad is ignored if param is not a valid pointer
             # be careful!
             if (!is_null_external_pointer(param)) {
               input_param$requires_grad_(param$requires_grad)
             }
-            
+
             if (name %in% names(persistent_buffers)) {
               private$buffers_[[name]] <- input_param
             } else {
@@ -249,14 +249,14 @@ nn_Module <- R6::R6Class(
         module <- private$modules_[[i]]
         private$modules_[[i]] <- table[[rlang::obj_address(module)]] %||% module
       }
-      
+
       lapply(private$modules_, function(x) x$.replace_values_from_table(table))
-      
+
       for (i in seq_along(private$parameters_)) {
         par <- private$parameters_[[i]]
         # par or buf might not be available in `table` if, for some reason they
-        # have already been replaced. This happens for example, when a module 
-        # has the same layer twice. this also applies for modules, they might be duplicated 
+        # have already been replaced. This happens for example, when a module
+        # has the same layer twice. this also applies for modules, they might be duplicated
         private$parameters_[[i]] <- table[[xptr_address(par)]] %||% par
       }
       for (i in seq_along(private$buffers_)) {
@@ -336,6 +336,7 @@ nn_Module <- R6::R6Class(
     }
   )
 )
+
 
 #' Creates an `nn_parameter`
 #'
@@ -449,6 +450,11 @@ is_nn_module <- function(x) {
 #' computations depending wether the model is training or not, for example if you
 #' were implementing the dropout module.
 #'
+#' @section Cloning:
+#' To finalize the cloning of a module, you can define a private `finalize_deep_clone()` method.
+#' This method is called on the cloned object when deep-cloning a module, after all the modules, parameters and
+#' buffers were already cloned.
+#'
 #' @param classname an optional name for the module
 #' @param inherit an optional module to inherit from
 #' @param ... methods implementation
@@ -496,7 +502,24 @@ nn_module <- function(classname = NULL, inherit = nn_Module, ...,
     active = active,
     parent_env = e
   )
-  
+
+  # We can't patch $clone() in nn_Moudle, as the inheriting classes will not inherit the patched $clone() method
+
+  # as R6's clone method is quite restrictive, we here assign the original public $clone() method to the private
+  # field $.__clone_r6__ and create a new patched $clone() method
+  # This circumvents some restrictions in R6, see e.g. this discussion: https://github.com/r-lib/R6/issues/179
+  Module$set("private", ".__clone_r6__", nn_Module$public_methods$clone, overwrite = TRUE)
+  # because the clone method is encapsulated (happens during $new()), it cannot access torch's internal functions and we
+  # hence need to call into torch's public API
+  # We even explicitely annotate the namespace, as it might otherwise be the case, that other packages
+  # define their own custom modules and (accidentally) a clone_module function which would lead to this clone_module
+  # function being found before torch's clone_module
+  Module$set("public", "clone", overwrite = TRUE, value = function(deep = FALSE, ..., replace_values = TRUE) {
+      torch::clone_module(self, deep = deep, ..., replace_values = replace_values)
+    }
+  )
+
+
   init <- get_init(Module)
 
   fun <- rlang::new_function(
@@ -516,38 +539,6 @@ create_nn_module_callable <- function(instance) {
 
   attr(f, "class") <- instance$.classes
   attr(f, "module") <- instance
-  rlang::env_binding_unlock(instance, "clone")
-  on.exit({lockBinding("clone", instance)}, add = TRUE)
-  clone <- instance$clone
-  instance$clone <- function(deep = FALSE, ..., replace_values = TRUE) {
-    if (deep && replace_values) {
-      state_dict <- append(instance$parameters, instance$buffers)
-      names(state_dict) <- sapply(state_dict, xptr_address)
-      
-      state_dict <- state_dict[!duplicated(names(state_dict))]
-      state_dict <- lapply(state_dict, function(x) x$detach()$clone())  
-      
-      # also need to append a clone of the modules to this list.
-      # child modules can be duplicated - and have the same name
-      # child modules are also deep cloned, but we don't need to replace
-      # their values when cloning because we only have to do it once.
-      children <- instance$children
-      names(children) <- sapply(children, rlang::obj_address)
-      children <- children[!duplicated(names(children))]
-      children <- lapply(children, function(x) x$clone(deep = deep, replace_values = FALSE))
-      
-      state_dict <- append(state_dict, children)
-    }
-    
-    cloned_instance <- clone(deep = deep)
-    
-    if (deep && replace_values) {
-      cloned_instance$.replace_values_from_table(state_dict)  
-    }
-    
-    cloned_instance
-  }
-  
   f
 }
 
@@ -711,11 +702,11 @@ length.nn_sequential <- function(x) {
 
 #' Prune top layer(s) of a network
 #'
-#' Prune `head_size` last layers of a nn_module in order to 
+#' Prune `head_size` last layers of a nn_module in order to
 #'  replace them by your own head, or in order to use the pruned module
 #'  as a sequential embedding module.
 #' @param x nn_network to prune
-#' @param head_size number of nn_layers to prune 
+#' @param head_size number of nn_layers to prune
 #'
 #' @return a nn_sequential network with the top nn_layer removed
 #' @export
@@ -731,7 +722,7 @@ length.nn_sequential <- function(x) {
 #'   nn_batch_norm1d(10),
 #'   nn_tanh(),
 #'   nn_linear(10,3)
-#' )  
+#' )
 #' prune <- nn_prune_head(x, 3)
 #' prune
 #' }
@@ -749,7 +740,7 @@ nn_prune_head.nn_module <- nn_module(
     classname = "nn_sequential",
     initialize = function(x, head_size=1L) {
       modules <- rlang::list2(!!!x$children[1:(length(x$children)-head_size)])
-      mod_names <- names(modules) 
+      mod_names <- names(modules)
       for (i in seq_along(modules)) {
         self$add_module(name = mod_names[i], module = modules[[i]])
       }
@@ -816,7 +807,7 @@ nn_module_list <- nn_module(
 )
 
 #' Container that allows named values
-#' 
+#'
 #' @param dict A named list of submodules that will be saved in that module.
 #' @examples
 #' nn_module <- nn_module(
@@ -838,12 +829,12 @@ nn_module_dict <- nn_module(
     if (!rlang::is_named(dict)) cli::cli_abort("All elements in {.arg dict} must be named.")
     for(nm in names(dict)) {
       self[[nm]] <- dict[[nm]]
-    } 
+    }
   },
   forward = function(...) {
     cli::cli_abort("{.fn nn_module_dict} has {.fn forward} implementation.")
   }
-) 
+)
 
 #' @export
 `[[.nn_module_list` <- function(x, y) {
@@ -934,4 +925,84 @@ keepvars_or_detach <- function(p, keepvars) {
   } else {
     p
   }
+}
+collect_state_dict <- function(instance, state_dict) {
+  # the parameters and buffers of child modules are retrieved below
+  new_objs <- c(instance$named_parameters(recursive = FALSE), instance$named_buffers(recursive = FALSE))
+  if (length(new_objs)) {
+    names(new_objs) <- map_chr(new_objs, xptr_address)
+    state_dict <- append(state_dict, new_objs)
+  }
+  # also need to append a clone of the modules to this list.
+  # child modules can be duplicated - and have the same name
+  # note that we store both the modules, as well as their parameters and buffers in the state_dict
+  children <- instance$children
+  if (!length(children)) {
+    return(state_dict)
+  }
+  for (child in children) {
+    state_dict <- collect_state_dict(child, state_dict)
+  }
+  state_dict <- append(state_dict, rlang::set_names(children, map_chr(children, rlang::obj_address)))
+  return(state_dict)
+}
+
+#' @title Clone a torch module.
+#'
+#' @description
+#' Clones a module.
+#'
+#' @param module ([`nn_module`])\cr
+#'   The module to clone
+#' @param deep (`logical(1)`)\cr
+#'   Whether to create a deep clone.
+#' @param ... (any)\cr
+#'   Additional parameters, currently unused.
+#' @param replace_values (`logical(1)`)\cr
+#'   Whether to replace parameters and buffers with the cloned values.
+#'
+#' @export
+#' @examples
+#' clone_module(nn_linear(1, 1), deep = TRUE)
+#' # is the same as
+#' nn_linear(1, 1)$clone(deep = TRUE)
+clone_module <- function(module, deep = FALSE, ..., replace_values = TRUE) {
+  private <- module$.__enclos_env__$private
+  if (deep && replace_values) {
+    # the state_dict contains all the objects that need to be cloned and for which we also ensure that objects
+    # that were previously equal by reference are still equal
+    # To achieve this, the names of the state dict are the (external pointer) addresses of the objects
+    # BEFORE cloning
+    state_dict <- collect_state_dict(module, list())
+    # each unique value must only be cloned once
+    state_dict <- state_dict[!duplicated(names(state_dict))]
+    state_dict <- map(state_dict, function(x) {
+      if (inherits(x, "nn_module")) {
+        # the values are replaced below, when calling .replace_values_from_table
+        # this will fail when different submodules contain the same non-torch object by reference (e.g. R6 class), but
+        # this needs a solution in R6 and not here
+        x$clone(deep = deep, replace_values = FALSE)
+      } else { # torch_tensor
+        # without the detaching, the clone method adds a CloneBackward node which is undessireable when cloning
+        # modules, as the cloned module should be independent from the clonee
+        out <- x$detach()$clone()
+        # we need this, because of https://github.com/mlverse/torch/issues/1136
+        attributes(out) <- attributes(x)
+        # because of the detach() above, we now need to reset the requires_grad field
+        out$requires_grad_(x$requires_grad)
+        out
+      }
+    })
+  }
+  cloned_instance <- private$.__clone_r6__(deep = deep)
+
+  if (deep && replace_values) {
+    cloned_instance$.replace_values_from_table(state_dict)
+    cloned_private <- cloned_instance$.__enclos_env__$private
+    if (!is.null(cloned_private$finalize_deep_clone)) {
+      cloned_private$finalize_deep_clone()
+    }
+  }
+
+  create_nn_module_callable(cloned_instance)
 }

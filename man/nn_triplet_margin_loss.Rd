@@ -20,7 +20,7 @@ nn_triplet_margin_loss(
 \item{eps}{constant to avoid NaN's}
 
 \item{swap}{(bool, optional): The distance swap is described in detail in the paper
-\href{http://www.bmva.org/bmvc/2016/papers/paper119/index.html}{Learning shallow convolutional feature descriptors with triplet losses} by
+\href{https://paperswithcode.com/paper/learning-local-feature-descriptors-with}{Learning shallow convolutional feature descriptors with triplet losses} by
 V. Balntas, E. Riba et al. Default: \code{FALSE}.}
 
 \item{reduction}{(string, optional): Specifies the reduction to apply to the output:
@@ -37,7 +37,7 @@ is composed by \code{a}, \code{p} and \code{n} (i.e., \code{anchor}, \verb{posit
 }
 \details{
 The distance swap is described in detail in the paper
-\href{http://www.bmva.org/bmvc/2016/papers/paper119/index.html}{Learning shallow convolutional feature descriptors with triplet losses} by
+\href{https://paperswithcode.com/paper/learning-local-feature-descriptors-with}{Learning shallow convolutional feature descriptors with triplet losses} by
 V. Balntas, E. Riba et al.
 
 The loss function for each sample in the mini-batch is:

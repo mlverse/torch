@@ -21,7 +21,7 @@ numerical stability (default: 1e-6)}
 \item{weight_decay}{(float, optional): weight decay (L2 penalty) (default: 0)}
 }
 \description{
-It has been proposed in \href{https://arxiv.org/pdf/1212.5701.pdf}{ADADELTA: An Adaptive Learning Rate Method}
+It has been proposed in \href{https://arxiv.org/pdf/1212.5701}{ADADELTA: An Adaptive Learning Rate Method}
 }
 \note{
 According to the original paper, decaying average of the squared gradients

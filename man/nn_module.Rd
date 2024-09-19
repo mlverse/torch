@@ -81,6 +81,13 @@ computations depending wether the model is training or not, for example if you
 were implementing the dropout module.
 }
 
+\section{Cloning}{
+
+To finalize the cloning of a module, you can define a private \code{finalize_deep_clone()} method.
+This method is called on the cloned object when deep-cloning a module, after all the modules, parameters and
+buffers were already cloned.
+}
+
 \examples{
 if (torch_is_installed()) {
 model <- nn_module(

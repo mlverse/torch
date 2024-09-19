@@ -179,6 +179,10 @@ is_torch_dtype <- function(x) {
   inherits(x, "torch_dtype")
 }
 
+is_integer_dtype <- function(x) {
+  is_torch_dtype(x) && (cpp_dtype_to_string(x) %in% c("Int", "Short", "Long", "Char", "Byte"))
+}
+
 #' Gets and sets the default floating point dtype.
 #'
 #' @param d The default floating point dtype to set. Initially set to

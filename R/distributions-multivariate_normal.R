@@ -81,8 +81,7 @@ MultivariateNormal <- R6::R6Class(
         value_error("loc must be at least one-dimensional.")
       }
 
-      if ((!is.null(covariance_matrix) + !is.null(precision_matrix) +
-        !is.null(scale_tril)) != 1) {
+      if ((is.null(covariance_matrix) + is.null(precision_matrix) + is.null(scale_tril)) != 2) {
         value_error("Exactly one of covariance_matrix or precision_matrix or scale_tril may be specified.")
       }
 

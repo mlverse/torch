@@ -264,7 +264,7 @@ linalg_cond <- function(A, p = NULL) {
 #' @family linalg
 #' @export
 linalg_matrix_rank <- function(A, ..., atol = NULL, rtol = NULL, tol = NULL, hermitian = FALSE) {
-  ellipsis::check_dots_empty()
+  rlang::check_dots_empty()
   if (!is.null(tol)) {
     warn("`tol` argument is deprecated in favor of `atol` and `rtol`.")
     atol <- tol
@@ -833,7 +833,7 @@ linalg_solve <- function(A, B) {
 #' @family linalg
 #' @export
 linalg_lstsq <- function(A, B, rcond = NULL, ..., driver = NULL) {
-  ellipsis::check_dots_empty()
+  rlang::check_dots_empty()
 
   args <- list(
     self = A,
@@ -1234,4 +1234,18 @@ linalg_inv_ex <- function(A, check_errors = FALSE) {
     torch_linalg_inv_ex(A, check_errors = check_errors),
     c("inverse", "info")
   )
+}
+
+#' Triangular solve
+#' @param A tensor of shape `(*, n, n)` or `(*, k, k)` if `left=TRUE`) where `*` is zero or more batch dimensions.
+#' @param B right-hand side tensor of shape `(*, n, k)`
+#' @param upper whether A is an upper or lower triangular matrix.
+#' @param left wheter to solve the system AX=B or XA=B
+#' @param unitriangular if `TRUE`, the diagonal elements of A are assumed to be all equal to 1. 
+#' @param ... Currently ignored.
+#' @family linalg
+#' @export
+linalg_solve_triangular <- function(A, B, ..., upper, left = TRUE, unitriangular = FALSE) {
+  rlang::check_dots_empty()
+  torch_linalg_solve_triangular(A, B, upper, left, unitriangular)
 }

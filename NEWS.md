@@ -1,16 +1,65 @@
 # torch (development version)
 
+## Bug fixes
+
+- `torch_iinfo()` now support all integer dtypes (#1190 @cregouby)
+
+# torch 0.13.0
+
+## Breaking changes
+
+- lantern is now distributed over a different URL (https://torch-cdn.mlverse.org). 
+  For most users this shouldn't have any effect, unless you need special authorization
+  to access some URL's. (#1162)
+
+## New features
+
+- Added support for a private `$finalize_deep_clone()` method for `nn_module` which
+ allows to run some code after cloning a module.
+- A `compare_proxy` method for the `torch_tensor` type was added
+  it allows to compare torch tensors using `testthat::expect_equal()`.
+- Converting torch tensor to R array works when tensor has 'cuda' device (#1130)
+
+## Bug fixes
+
+- Fix a bug on using input projection initialization bias in `nnf_multi_head_attention_forward` (#1154 @cregouby)
+- Bugfix: calling `$detach()` on a tensor now preserves attributes (#1136)
+- Make sure deep cloning of tensor and nn_module preserves class attributes and the requires_grad field. (#1129)
+- Fixed that parameters and buffers of children of nn_modules were not cloned
+- Cloned objects no longer reference the object from which they were cloned
+- Fixed bug where nn_module's patched clone method was invalid after a call to
+  the internal `create_nn_module_callable()`
+- Printing of `grad_fn` now appends a new line at the end.
+- Make sure deep cloning preserve state dict attributes. (#1129)
+- Added separate setter and unsetter for the autocast context instead of only allowing `local_autocast()`. (#1142)
+- Fixed a bug in `torch_arange()` causing it to return 1:(n-1) values when specific request `dtype = torch_int64()` (#1160)
+
+# torch 0.12.0
+
+## Breaking changes
+
 - New `torch_save` serialization format. It's ~10x faster and since it's based on safetensors, files can be read with any safetensors implementation. (#1071)
-- fix printer of torch device (add new line at the end)
-- `as.array` now moves tensors to the cpu before copying data into R. (#1080)
 - Updated to LibTorch 2.0.1. (#1085)
 - `torch_load` no longer supports `device=NULL` to load weights in the same device they were saved. (#1085)
+- Lantern binaries and torch pre-built binaries are now built on Ubuntu 20.04. (#1124)
+
+## New features
+
 - Added support for CUDA 11.8. (#1089)
+- Added support for iterable datasets. (#1095)
+
+## Bug fixes
+
+- fix printer of torch device (add new line at the end)
+- `as.array` now moves tensors to the cpu before copying data into R. (#1080)
 - Fixed segfault caused by comparing a `dtype` with a `NULL`. (#1090)
 - Fixed incorrect naming of complex data type names, such as `torch_cfloat64`. (#1091)
-- Added support for iterable datasets. (#1095)
 - Fixed name of the `out_features` attribute in the `nn_linear` module. (#1097)
 - Fixed issues when loading the state dict of optimizers and learning rate schedulers. (#1100)
+- Fixed bug when cloning `nn_module`s with empty state dicts. (#1108)
+- `distr_multivariate_normal` now correctly handles precision matrix's. (#1110)
+- Moved `length.torch_tensor` implementation to R7 to avoid problems when a torch dataset has the `torch_tensor` class. (#1111)
+- Fixed problem when deep cloning a `nn_module`. (#1123)
 
 # torch 0.11.0
 
