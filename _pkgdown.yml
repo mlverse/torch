@@ -40,6 +40,8 @@ navbar:
        href: articles/extending-autograd.html
      - text: Python models
        href: articles/python-to-r.html
+     - text: Jit Compilation
+       href: articles/torchscript.html
   advanced:
     text: Advanced
     menu:
