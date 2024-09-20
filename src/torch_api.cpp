@@ -7,7 +7,10 @@
 
 static inline void tensor_finalizer(SEXP ptr) {
   auto xptr = Rcpp::as<Rcpp::XPtr<XPtrTorchTensor>>(ptr);
-  lantern_tensor_set_pyobj(xptr->get(), nullptr);
+  // When the the xptr is released, we might call this function with an invalid ptr.
+  if (xptr.get()) {
+    lantern_tensor_set_pyobj(xptr->get(), nullptr);
+  }
 }
 
 static inline bool rlang_is_named(SEXP x) {
@@ -140,7 +143,9 @@ XPtrTorchTensor from_sexp_tensor(SEXP x) {
   Rcpp::stop("Expected a torch_tensor.");
 }
 
-void delete_tensor(void* x) { lantern_Tensor_delete(x); }
+void delete_tensor(void* x) { 
+  lantern_Tensor_delete(x); 
+}
 
 // optional_torch_tensor
 
