@@ -518,12 +518,13 @@ BEGIN_RCPP
 END_RCPP
 }
 // cpp_autograd_zero_grad
-void cpp_autograd_zero_grad(torch::TensorList x);
-RcppExport SEXP _torch_cpp_autograd_zero_grad(SEXP xSEXP) {
+void cpp_autograd_zero_grad(torch::TensorList x, bool set_to_none);
+RcppExport SEXP _torch_cpp_autograd_zero_grad(SEXP xSEXP, SEXP set_to_noneSEXP) {
 BEGIN_RCPP
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< torch::TensorList >::type x(xSEXP);
-    cpp_autograd_zero_grad(x);
+    Rcpp::traits::input_parameter< bool >::type set_to_none(set_to_noneSEXP);
+    cpp_autograd_zero_grad(x, set_to_none);
     return R_NilValue;
 END_RCPP
 }
@@ -45647,7 +45648,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_torch_cpp_autograd_grad", (DL_FUNC) &_torch_cpp_autograd_grad, 6},
     {"_torch_cpp_set_lantern_allocator", (DL_FUNC) &_torch_cpp_set_lantern_allocator, 1},
     {"_torch_cpp_set_cuda_allocator_allocator_thresholds", (DL_FUNC) &_torch_cpp_set_cuda_allocator_allocator_thresholds, 3},
-    {"_torch_cpp_autograd_zero_grad", (DL_FUNC) &_torch_cpp_autograd_zero_grad, 1},
+    {"_torch_cpp_autograd_zero_grad", (DL_FUNC) &_torch_cpp_autograd_zero_grad, 2},
     {"_torch_cpp_backends_mkldnn_is_available", (DL_FUNC) &_torch_cpp_backends_mkldnn_is_available, 0},
     {"_torch_cpp_backends_mkl_is_available", (DL_FUNC) &_torch_cpp_backends_mkl_is_available, 0},
     {"_torch_cpp_backends_openmp_is_available", (DL_FUNC) &_torch_cpp_backends_openmp_is_available, 0},

@@ -2405,10 +2405,10 @@ HOST_API void* lantern_IntArrayRef_get (void* x)
   return ret;
 }
 
-LANTERN_API void (LANTERN_PTR _lantern_autograd_zero_grad) (void * self);
-HOST_API void lantern_autograd_zero_grad (void * self) {
+LANTERN_API void (LANTERN_PTR _lantern_autograd_zero_grad) (void * self, bool set_to_none);
+HOST_API void lantern_autograd_zero_grad (void * self, bool set_to_none) {
   LANTERN_CHECK_LOADED
-  _lantern_autograd_zero_grad(self);
+  _lantern_autograd_zero_grad(self, set_to_none);
   LANTERN_HOST_HANDLER;
 }
 

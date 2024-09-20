@@ -54,3 +54,15 @@ test_that("copy state between optimizers corecctly", {
   
   expect_equal_to_tensor(x, y)
 })
+
+test_that("zero_grad set_to_none", {
+  # start with a tensor and make one step in the optimize
+  x <- torch_tensor(1, requires_grad = TRUE)
+
+  opt <- optim_sgd(x, lr = 0.1)
+  (2*x)$backward()
+  opt$step()
+  opt$zero_grad(set_to_none = TRUE)
+  
+  expect_true(is_undefined_tensor(x$grad))
+})

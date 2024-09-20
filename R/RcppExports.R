@@ -185,8 +185,8 @@ cpp_set_cuda_allocator_allocator_thresholds <- function(reserved_rate, allocated
     invisible(.Call(`_torch_cpp_set_cuda_allocator_allocator_thresholds`, reserved_rate, allocated_rate, allocated_reserved_rate))
 }
 
-cpp_autograd_zero_grad <- function(x) {
-    invisible(.Call(`_torch_cpp_autograd_zero_grad`, x))
+cpp_autograd_zero_grad <- function(x, set_to_none) {
+    invisible(.Call(`_torch_cpp_autograd_zero_grad`, x, set_to_none))
 }
 
 cpp_backends_mkldnn_is_available <- function() {
