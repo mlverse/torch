@@ -1,4 +1,8 @@
-# torch (development version)
+# torch (development version) 
+
+## Bug fixes
+
+- Fix french translation (#1176 @cregouby)
 
 ## Bug fixes
 
