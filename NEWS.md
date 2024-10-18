@@ -4,6 +4,10 @@
 
 - Fix french translation (#1176 @cregouby)
 
+## Bug fixes
+
+- `torch_iinfo()` now support all integer dtypes (#1190 @cregouby)
+
 # torch 0.13.0
 
 ## Breaking changes
