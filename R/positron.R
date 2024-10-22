@@ -15,7 +15,6 @@ register_positron_methods <- function() {
   }
 
   tryCatch({
-    stop("hello world")
     register_positron_methods_impl()
   }, error = function(err) {
     cli::cli_warn("Failed to register Positron methods.", parent = err)
@@ -36,9 +35,6 @@ register_positron_methods_impl <- function() {
   })
 
   register_ark_method("ark_positron_variable_get_children", "nn_module", function(x, ...) {
-    list(
-      modules = new_
-    )
     x$parameters
   })
   
