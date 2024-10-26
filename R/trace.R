@@ -5,7 +5,6 @@
 #' recording the operations performed on all the tensors.
 #'
 #' The resulting recording of a standalone function produces a `script_function`.
-#' In the future we will also support tracing `nn_modules`.
 #'
 #' @section Warning:
 #'
