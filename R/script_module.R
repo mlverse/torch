@@ -1,3 +1,78 @@
+ScriptModule <- R7Class(
+  "torch_script_module",
+  public = list(
+    ptr = NULL,
+    initialize = function(ptr) {
+      ptr
+    },
+    train = function(mode = TRUE) {
+      cpp_jit_script_module_train(self, mode)
+      invisible(self)
+    },
+    register_parameter = function(name, param) {
+      cpp_jit_script_module_register_parameter(self, name, param, FALSE)
+      invisible(self)
+    },
+    register_buffer = function(name, tensor, persistent = TRUE) {
+      if (!persistent) {
+        runtime_error("ScriptModule does not support non persistent buffers.")
+      }
+      cpp_jit_script_module_register_buffer(self, name, tensor)
+      invisible(self)
+    },
+    register_module = function(name, module) {
+      if (inherits(module, "script_module")) {
+        module <- module$..ptr..()
+      }
+
+      if (!inherits(module, "torch_script_module")) {
+        runtime_error("Script modules can only register Script modules children.")
+      }
+
+      if (is.numeric(name)) {
+        name <- as.character(name)
+      }
+
+      cpp_jit_script_module_register_module(self, name, module)
+      invisible(self)
+    },
+    add_constant = function(name, value) {
+      cpp_jit_script_module_add_constant(self, name, value)
+      invisible(self)
+    },
+    to = function(device, non_blocking = FALSE) {
+      cpp_jit_script_module_to(self, device, non_blocking)
+      invisible(self)
+    },
+    find_method = function(name) {
+      cpp_jit_script_module_find_method(self, name)
+    },
+    find_constant = function(name) {
+      cpp_jit_script_module_find_constant(self, name)
+    },
+    save = function(path) {
+      cpp_jit_script_module_save(self, path)
+    },
+    save_for_mobile = function(path) {
+      cpp_jit_script_module_save_for_mobile(self, path)
+    }
+  ),
+  active = list(
+    parameters = function() {
+      cpp_jit_script_module_parameters(self, TRUE)
+    },
+    is_training = function() {
+      cpp_jit_script_module_is_training(self)
+    },
+    buffers = function() {
+      cpp_jit_script_module_buffers(self, TRUE)
+    },
+    modules = function() {
+      cpp_jit_script_module_children(self)
+    }
+  )
+)
+
 nn_ScriptModule <- R6::R6Class(
   inherit = nn_Module,
   lock_objects = FALSE,
