@@ -325,6 +325,14 @@ cpp_parameter_type <- function(argument) {
     declaration <- "XPtrTorchTensorList"
   }
 
+  if (argument$dynamic_type == "const c10::List<::std::optional<Tensor>> &") {
+    declaration <- "XPtrTorchOptionalTensorList"
+  }
+
+  if (argument$dynamic_type == "DeviceIndex") {
+    declaration <- "int"
+  }
+
   # FIXME: Stop if argument$dynamic_type is not handled
   if (!exists("declaration")) {
     stop(paste(argument$dynamic_type, "is not handled!"))
@@ -494,6 +502,14 @@ cpp_argument_transform <- function(argument) {
 
   if (argument$dynamic_type == "const ITensorListRef &") {
     result <- glue::glue("{argument$name}.get()")
+  }
+
+  if (argument$dynamic_type == "const c10::List<::std::optional<Tensor>> &") {
+    result <- glue::glue("{argument$name}.get()")
+  }
+
+  if (argument$dynamic_type == "DeviceIndex") {
+    result <- glue::glue("{argument$name}")
   }
 
   # FIXME: Stop if argument$dynamic_type is not handled
@@ -667,10 +683,21 @@ SKIP_R_BINDIND <- c(
   "_use_cudnn_rnn_flatten_weight",
   "is_vulkan_available",
   "_test_ambiguous_defaults",
-  "_test_string_default"
+  "_test_string_default",
+  "_cufft_get_plan_cache_size",
+  "_cufft_get_plan_cache_max_size",
+  "_cufft_set_plan_cache_max_size",
+  "_cufft_clear_plan_cache",
+  "sym_size",
+  "sym_numel",
+  "sym_stride",
+  "sym_storage_offset",
+  "_make_dep_token"
 )
 
-SKIP_CPP_BINDING <- c()
+SKIP_CPP_BINDING <- c(
+  "_cufft_get_plan_cache_size"
+)
 
 cpp <- function(path) {
 

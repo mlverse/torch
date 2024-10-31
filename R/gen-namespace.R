@@ -510,13 +510,30 @@ fun_type = 'namespace'
 
 
 #' @rdname torch__assert_async
-torch__assert_async <- function(self) {
-  args <- mget(x = c("self"))
-expected_types <- list(self = "Tensor")
-nd_args <- "self"
+torch__assert_async <- function(self, assert_msg) {
+  args <- mget(x = c("self", "assert_msg"))
+expected_types <- list(self = "Tensor", assert_msg = "c10::string_view")
+nd_args <- c("self", "assert_msg")
 return_types <- list(list("void"))
 call_c_function(
 fun_name = '_assert_async',
+args = args,
+expected_types = expected_types,
+nd_args = nd_args,
+return_types = return_types,
+fun_type = 'namespace'
+)
+}
+
+
+#' @rdname torch__assert_scalar
+torch__assert_scalar <- function(self, assert_msg) {
+  args <- mget(x = c("self", "assert_msg"))
+expected_types <- list(self = "Scalar", assert_msg = "c10::string_view")
+nd_args <- c("self", "assert_msg")
+return_types <- list(list("void"))
+call_c_function(
+fun_name = '_assert_scalar',
 args = args,
 expected_types = expected_types,
 nd_args = nd_args,
@@ -577,6 +594,104 @@ nd_args <- c("impl_index", "input", "grad_output", "weight", "running_mean",
 return_types <- list(list("Tensor", "Tensor", "Tensor"))
 call_c_function(
 fun_name = '_batch_norm_impl_index_backward',
+args = args,
+expected_types = expected_types,
+nd_args = nd_args,
+return_types = return_types,
+fun_type = 'namespace'
+)
+}
+
+
+#' @rdname torch__batch_norm_no_update
+torch__batch_norm_no_update <- function(input, weight, bias, running_mean, running_var, momentum, eps) {
+  args <- mget(x = c("input", "weight", "bias", "running_mean", "running_var", "momentum", "eps"))
+expected_types <- list(input = "Tensor", weight = "Tensor", bias = "Tensor", running_mean = "Tensor", 
+    running_var = "Tensor", momentum = "double", eps = "double")
+nd_args <- c("input", "weight", "bias", "running_mean", "running_var", "momentum", 
+"eps")
+return_types <- list(list("Tensor", "Tensor", "Tensor", "Tensor"))
+call_c_function(
+fun_name = '_batch_norm_no_update',
+args = args,
+expected_types = expected_types,
+nd_args = nd_args,
+return_types = return_types,
+fun_type = 'namespace'
+)
+}
+
+
+#' @rdname torch__batch_norm_no_update_out
+torch__batch_norm_no_update_out <- function(out0, out1, out2, out3, input, weight, bias, running_mean, running_var, momentum, eps) {
+  args <- mget(x = c("out0", "out1", "out2", "out3", "input", "weight", "bias", "running_mean", "running_var", "momentum", "eps"))
+expected_types <- list(out0 = "Tensor", out1 = "Tensor", out2 = "Tensor", out3 = "Tensor", 
+    input = "Tensor", weight = "Tensor", bias = "Tensor", running_mean = "Tensor", 
+    running_var = "Tensor", momentum = "double", eps = "double")
+nd_args <- c("out0", "out1", "out2", "out3", "input", "weight", "bias", 
+"running_mean", "running_var", "momentum", "eps")
+return_types <- list(list("Tensor", "Tensor", "Tensor", "Tensor"))
+call_c_function(
+fun_name = '_batch_norm_no_update_out',
+args = args,
+expected_types = expected_types,
+nd_args = nd_args,
+return_types = return_types,
+fun_type = 'namespace'
+)
+}
+
+
+#' @rdname torch__batch_norm_with_update
+torch__batch_norm_with_update <- function(input, weight, bias, running_mean, running_var, momentum, eps) {
+  args <- mget(x = c("input", "weight", "bias", "running_mean", "running_var", "momentum", "eps"))
+expected_types <- list(input = "Tensor", weight = "Tensor", bias = "Tensor", running_mean = "Tensor", 
+    running_var = "Tensor", momentum = "double", eps = "double")
+nd_args <- c("input", "weight", "bias", "running_mean", "running_var", "momentum", 
+"eps")
+return_types <- list(list("Tensor", "Tensor", "Tensor", "Tensor"))
+call_c_function(
+fun_name = '_batch_norm_with_update',
+args = args,
+expected_types = expected_types,
+nd_args = nd_args,
+return_types = return_types,
+fun_type = 'namespace'
+)
+}
+
+
+#' @rdname torch__batch_norm_with_update_functional
+torch__batch_norm_with_update_functional <- function(input, weight, bias, running_mean, running_var, momentum, eps) {
+  args <- mget(x = c("input", "weight", "bias", "running_mean", "running_var", "momentum", "eps"))
+expected_types <- list(input = "Tensor", weight = "Tensor", bias = "Tensor", running_mean = "Tensor", 
+    running_var = "Tensor", momentum = "double", eps = "double")
+nd_args <- c("input", "weight", "bias", "running_mean", "running_var", "momentum", 
+"eps")
+return_types <- list(list("Tensor", "Tensor", "Tensor", "Tensor", "Tensor", "Tensor"))
+call_c_function(
+fun_name = '_batch_norm_with_update_functional',
+args = args,
+expected_types = expected_types,
+nd_args = nd_args,
+return_types = return_types,
+fun_type = 'namespace'
+)
+}
+
+
+#' @rdname torch__batch_norm_with_update_out
+torch__batch_norm_with_update_out <- function(out, save_mean, save_invstd, reserve, input, weight, bias, running_mean, running_var, momentum, eps) {
+  args <- mget(x = c("out", "save_mean", "save_invstd", "reserve", "input", "weight", "bias", "running_mean", "running_var", "momentum", "eps"))
+expected_types <- list(out = "Tensor", save_mean = "Tensor", save_invstd = "Tensor", 
+    reserve = "Tensor", input = "Tensor", weight = "Tensor", 
+    bias = "Tensor", running_mean = "Tensor", running_var = "Tensor", 
+    momentum = "double", eps = "double")
+nd_args <- c("out", "save_mean", "save_invstd", "reserve", "input", "weight", 
+"bias", "running_mean", "running_var", "momentum", "eps")
+return_types <- list(list("Tensor", "Tensor", "Tensor", "Tensor"))
+call_c_function(
+fun_name = '_batch_norm_with_update_out',
 args = args,
 expected_types = expected_types,
 nd_args = nd_args,
@@ -844,14 +959,32 @@ fun_type = 'namespace'
 }
 
 
-#' @rdname torch__chunk_grad_outputs_efficient_attention
-torch__chunk_grad_outputs_efficient_attention <- function(query, key, value, is_causal = FALSE) {
-  args <- mget(x = c("query", "key", "value", "is_causal"))
-expected_types <- list(query = "Tensor", key = "Tensor", value = "Tensor", is_causal = "bool")
-nd_args <- c("query", "key", "value")
-return_types <- list(list('bool'))
+#' @rdname torch__chunk_cat
+torch__chunk_cat <- function(tensors, dim, num_chunks) {
+  args <- mget(x = c("tensors", "dim", "num_chunks"))
+expected_types <- list(tensors = "TensorList", dim = "int64_t", num_chunks = "int64_t")
+nd_args <- c("tensors", "dim", "num_chunks")
+return_types <- list(list('Tensor'))
 call_c_function(
-fun_name = '_chunk_grad_outputs_efficient_attention',
+fun_name = '_chunk_cat',
+args = args,
+expected_types = expected_types,
+nd_args = nd_args,
+return_types = return_types,
+fun_type = 'namespace'
+)
+}
+
+
+#' @rdname torch__chunk_cat_out
+torch__chunk_cat_out <- function(out, tensors, dim, num_chunks) {
+  args <- mget(x = c("out", "tensors", "dim", "num_chunks"))
+expected_types <- list(out = "Tensor", tensors = "TensorList", dim = "int64_t", 
+    num_chunks = "int64_t")
+nd_args <- c("out", "tensors", "dim", "num_chunks")
+return_types <- list(list('Tensor'))
+call_c_function(
+fun_name = '_chunk_cat_out',
 args = args,
 expected_types = expected_types,
 nd_args = nd_args,
@@ -1158,6 +1291,23 @@ fun_type = 'namespace'
 }
 
 
+#' @rdname torch__convert_weight_to_int4pack
+torch__convert_weight_to_int4pack <- function(self, innerKTiles) {
+  args <- mget(x = c("self", "innerKTiles"))
+expected_types <- list(self = "Tensor", innerKTiles = "int64_t")
+nd_args <- c("self", "innerKTiles")
+return_types <- list(list('Tensor'))
+call_c_function(
+fun_name = '_convert_weight_to_int4pack',
+args = args,
+expected_types = expected_types,
+nd_args = nd_args,
+return_types = return_types,
+fun_type = 'namespace'
+)
+}
+
+
 #' @rdname torch__convolution
 torch__convolution <- function(input, weight, bias, stride, padding, dilation, transposed, output_padding, groups, benchmark, deterministic, cudnn_enabled, allow_tf32) {
   args <- mget(x = c("input", "weight", "bias", "stride", "padding", "dilation", "transposed", "output_padding", "groups", "benchmark", "deterministic", "cudnn_enabled", "allow_tf32"))
@@ -1303,6 +1453,60 @@ nd_args <- c("out", "self", "dst")
 return_types <- list(list('Tensor'))
 call_c_function(
 fun_name = '_copy_from_out',
+args = args,
+expected_types = expected_types,
+nd_args = nd_args,
+return_types = return_types,
+fun_type = 'namespace'
+)
+}
+
+
+#' @rdname torch__cslt_compress
+torch__cslt_compress <- function(input) {
+  args <- mget(x = c("input"))
+expected_types <- list(input = "Tensor")
+nd_args <- "input"
+return_types <- list(list('Tensor'))
+call_c_function(
+fun_name = '_cslt_compress',
+args = args,
+expected_types = expected_types,
+nd_args = nd_args,
+return_types = return_types,
+fun_type = 'namespace'
+)
+}
+
+
+#' @rdname torch__cslt_sparse_mm
+torch__cslt_sparse_mm <- function(compressed_A, dense_B, bias = list(), alpha = list(), out_dtype = NULL, transpose_result = FALSE, alg_id = 0L) {
+  args <- mget(x = c("compressed_A", "dense_B", "bias", "alpha", "out_dtype", "transpose_result", "alg_id"))
+expected_types <- list(compressed_A = "Tensor", dense_B = "Tensor", bias = "Tensor", 
+    alpha = "Tensor", out_dtype = "ScalarType", transpose_result = "bool", 
+    alg_id = "int64_t")
+nd_args <- c("compressed_A", "dense_B")
+return_types <- list(list('Tensor'))
+call_c_function(
+fun_name = '_cslt_sparse_mm',
+args = args,
+expected_types = expected_types,
+nd_args = nd_args,
+return_types = return_types,
+fun_type = 'namespace'
+)
+}
+
+
+#' @rdname torch__cslt_sparse_mm_search
+torch__cslt_sparse_mm_search <- function(compressed_A, dense_B, bias = list(), alpha = list(), out_dtype = NULL, transpose_result = FALSE) {
+  args <- mget(x = c("compressed_A", "dense_B", "bias", "alpha", "out_dtype", "transpose_result"))
+expected_types <- list(compressed_A = "Tensor", dense_B = "Tensor", bias = "Tensor", 
+    alpha = "Tensor", out_dtype = "ScalarType", transpose_result = "bool")
+nd_args <- c("compressed_A", "dense_B")
+return_types <- list(list('int64_t'))
+call_c_function(
+fun_name = '_cslt_sparse_mm_search',
 args = args,
 expected_types = expected_types,
 nd_args = nd_args,
@@ -1616,74 +1820,6 @@ fun_type = 'namespace'
 }
 
 
-#' @rdname torch__cufft_clear_plan_cache
-torch__cufft_clear_plan_cache <- function(device_index) {
-  args <- mget(x = c("device_index"))
-expected_types <- list(device_index = "int64_t")
-nd_args <- "device_index"
-return_types <- list(list("void"))
-call_c_function(
-fun_name = '_cufft_clear_plan_cache',
-args = args,
-expected_types = expected_types,
-nd_args = nd_args,
-return_types = return_types,
-fun_type = 'namespace'
-)
-}
-
-
-#' @rdname torch__cufft_get_plan_cache_max_size
-torch__cufft_get_plan_cache_max_size <- function(device_index) {
-  args <- mget(x = c("device_index"))
-expected_types <- list(device_index = "int64_t")
-nd_args <- "device_index"
-return_types <- list(list('int64_t'))
-call_c_function(
-fun_name = '_cufft_get_plan_cache_max_size',
-args = args,
-expected_types = expected_types,
-nd_args = nd_args,
-return_types = return_types,
-fun_type = 'namespace'
-)
-}
-
-
-#' @rdname torch__cufft_get_plan_cache_size
-torch__cufft_get_plan_cache_size <- function(device_index) {
-  args <- mget(x = c("device_index"))
-expected_types <- list(device_index = "int64_t")
-nd_args <- "device_index"
-return_types <- list(list('int64_t'))
-call_c_function(
-fun_name = '_cufft_get_plan_cache_size',
-args = args,
-expected_types = expected_types,
-nd_args = nd_args,
-return_types = return_types,
-fun_type = 'namespace'
-)
-}
-
-
-#' @rdname torch__cufft_set_plan_cache_max_size
-torch__cufft_set_plan_cache_max_size <- function(device_index, max_size) {
-  args <- mget(x = c("device_index", "max_size"))
-expected_types <- list(device_index = "int64_t", max_size = "int64_t")
-nd_args <- c("device_index", "max_size")
-return_types <- list(list("void"))
-call_c_function(
-fun_name = '_cufft_set_plan_cache_max_size',
-args = args,
-expected_types = expected_types,
-nd_args = nd_args,
-return_types = return_types,
-fun_type = 'namespace'
-)
-}
-
-
 #' @rdname torch__cummax_helper
 torch__cummax_helper <- function(self, values, indices, dim) {
   args <- mget(x = c("self", "values", "indices", "dim"))
@@ -1789,13 +1925,20 @@ fun_type = 'namespace'
 
 
 #' @rdname torch__efficient_attention_backward
-torch__efficient_attention_backward <- function(grad_out_, query, key, value, out, logsumexp, is_causal = FALSE, chunk_grad_outputs = FALSE) {
-  args <- mget(x = c("grad_out_", "query", "key", "value", "out", "logsumexp", "is_causal", "chunk_grad_outputs"))
+torch__efficient_attention_backward <- function(grad_out_, query, key, value, bias, out, cu_seqlens_q, cu_seqlens_k, max_seqlen_q, max_seqlen_k, logsumexp, dropout_p, philox_seed, philox_offset, custom_mask_type, bias_requires_grad, scale = NULL, num_splits_key = NULL, window_size = NULL, shared_storage_dqdkdv = FALSE) {
+  args <- mget(x = c("grad_out_", "query", "key", "value", "bias", "out", "cu_seqlens_q", "cu_seqlens_k", "max_seqlen_q", "max_seqlen_k", "logsumexp", "dropout_p", "philox_seed", "philox_offset", "custom_mask_type", "bias_requires_grad", "scale", "num_splits_key", "window_size", "shared_storage_dqdkdv"))
 expected_types <- list(grad_out_ = "Tensor", query = "Tensor", key = "Tensor", 
-    value = "Tensor", out = "Tensor", logsumexp = "Tensor", is_causal = "bool", 
-    chunk_grad_outputs = "bool")
-nd_args <- c("grad_out_", "query", "key", "value", "out", "logsumexp")
-return_types <- list(list("Tensor", "Tensor", "Tensor"))
+    value = "Tensor", bias = "Tensor", out = "Tensor", cu_seqlens_q = "Tensor", 
+    cu_seqlens_k = "Tensor", max_seqlen_q = "int64_t", max_seqlen_k = "int64_t", 
+    logsumexp = "Tensor", dropout_p = "double", philox_seed = "Tensor", 
+    philox_offset = "Tensor", custom_mask_type = "int64_t", bias_requires_grad = "bool", 
+    scale = "double", num_splits_key = "int64_t", window_size = "int64_t", 
+    shared_storage_dqdkdv = "bool")
+nd_args <- c("grad_out_", "query", "key", "value", "bias", "out", "cu_seqlens_q", 
+"cu_seqlens_k", "max_seqlen_q", "max_seqlen_k", "logsumexp", 
+"dropout_p", "philox_seed", "philox_offset", "custom_mask_type", 
+"bias_requires_grad")
+return_types <- list(list("Tensor", "Tensor", "Tensor", "Tensor"))
 call_c_function(
 fun_name = '_efficient_attention_backward',
 args = args,
@@ -1808,14 +1951,17 @@ fun_type = 'namespace'
 
 
 #' @rdname torch__efficient_attention_forward
-torch__efficient_attention_forward <- function(query, key, value, cu_seqlens_q, cu_seqlens_k, max_seqlen_q, compute_log_sumexp = FALSE, causal = FALSE) {
-  args <- mget(x = c("query", "key", "value", "cu_seqlens_q", "cu_seqlens_k", "max_seqlen_q", "compute_log_sumexp", "causal"))
-expected_types <- list(query = "Tensor", key = "Tensor", value = "Tensor", cu_seqlens_q = "Tensor", 
-    cu_seqlens_k = "Tensor", max_seqlen_q = "int64_t", compute_log_sumexp = "bool", 
-    causal = "bool")
-nd_args <- c("query", "key", "value", "cu_seqlens_q", "cu_seqlens_k", "max_seqlen_q"
+torch__efficient_attention_forward <- function(query, key, value, bias, cu_seqlens_q, cu_seqlens_k, max_seqlen_q, max_seqlen_k, dropout_p, custom_mask_type, compute_log_sumexp = FALSE, scale = NULL, seqlen_k = list(), window_size = NULL) {
+  args <- mget(x = c("query", "key", "value", "bias", "cu_seqlens_q", "cu_seqlens_k", "max_seqlen_q", "max_seqlen_k", "dropout_p", "custom_mask_type", "compute_log_sumexp", "scale", "seqlen_k", "window_size"))
+expected_types <- list(query = "Tensor", key = "Tensor", value = "Tensor", bias = "Tensor", 
+    cu_seqlens_q = "Tensor", cu_seqlens_k = "Tensor", max_seqlen_q = "int64_t", 
+    max_seqlen_k = "int64_t", dropout_p = "double", custom_mask_type = "int64_t", 
+    compute_log_sumexp = "bool", scale = "double", seqlen_k = "Tensor", 
+    window_size = "int64_t")
+nd_args <- c("query", "key", "value", "bias", "cu_seqlens_q", "cu_seqlens_k", 
+"max_seqlen_q", "max_seqlen_k", "dropout_p", "custom_mask_type"
 )
-return_types <- list(list("Tensor", "Tensor"))
+return_types <- list(list("Tensor", "Tensor", "Tensor", "Tensor", "int64_t", "int64_t"))
 call_c_function(
 fun_name = '_efficient_attention_forward',
 args = args,
@@ -2441,14 +2587,33 @@ fun_type = 'namespace'
 }
 
 
+#' @rdname torch__fill_mem_eff_dropout_mask_
+torch__fill_mem_eff_dropout_mask_ <- function(self, dropout_p, seed, offset) {
+  args <- mget(x = c("self", "dropout_p", "seed", "offset"))
+expected_types <- list(self = "Tensor", dropout_p = "double", seed = "int64_t", 
+    offset = "int64_t")
+nd_args <- c("self", "dropout_p", "seed", "offset")
+return_types <- list(list('Tensor'))
+call_c_function(
+fun_name = '_fill_mem_eff_dropout_mask_',
+args = args,
+expected_types = expected_types,
+nd_args = nd_args,
+return_types = return_types,
+fun_type = 'namespace'
+)
+}
+
+
 #' @rdname torch__flash_attention_backward
-torch__flash_attention_backward <- function(grad_out, query, key, value, out, logsumexp, cum_seq_q, cum_seq_k, max_q, max_k, dropout_p, is_causal, philox_seed, philox_offset) {
-  args <- mget(x = c("grad_out", "query", "key", "value", "out", "logsumexp", "cum_seq_q", "cum_seq_k", "max_q", "max_k", "dropout_p", "is_causal", "philox_seed", "philox_offset"))
+torch__flash_attention_backward <- function(grad_out, query, key, value, out, logsumexp, cum_seq_q, cum_seq_k, max_q, max_k, dropout_p, is_causal, philox_seed, philox_offset, scale = NULL, window_size_left = NULL, window_size_right = NULL) {
+  args <- mget(x = c("grad_out", "query", "key", "value", "out", "logsumexp", "cum_seq_q", "cum_seq_k", "max_q", "max_k", "dropout_p", "is_causal", "philox_seed", "philox_offset", "scale", "window_size_left", "window_size_right"))
 expected_types <- list(grad_out = "Tensor", query = "Tensor", key = "Tensor", value = "Tensor", 
     out = "Tensor", logsumexp = "Tensor", cum_seq_q = "Tensor", 
     cum_seq_k = "Tensor", max_q = "int64_t", max_k = "int64_t", 
-    dropout_p = "double", is_causal = "bool", philox_seed = "int64_t", 
-    philox_offset = "int64_t")
+    dropout_p = "double", is_causal = "bool", philox_seed = "Tensor", 
+    philox_offset = "Tensor", scale = "double", window_size_left = "int64_t", 
+    window_size_right = "int64_t")
 nd_args <- c("grad_out", "query", "key", "value", "out", "logsumexp", "cum_seq_q", 
 "cum_seq_k", "max_q", "max_k", "dropout_p", "is_causal", "philox_seed", 
 "philox_offset")
@@ -2465,14 +2630,16 @@ fun_type = 'namespace'
 
 
 #' @rdname torch__flash_attention_forward
-torch__flash_attention_forward <- function(query, key, value, cum_seq_q, cum_seq_k, max_q, max_k, dropout_p, is_causal, return_debug_mask) {
-  args <- mget(x = c("query", "key", "value", "cum_seq_q", "cum_seq_k", "max_q", "max_k", "dropout_p", "is_causal", "return_debug_mask"))
+torch__flash_attention_forward <- function(query, key, value, cum_seq_q, cum_seq_k, max_q, max_k, dropout_p, is_causal, return_debug_mask, scale = NULL, window_size_left = NULL, window_size_right = NULL, seqused_k = list(), alibi_slopes = list()) {
+  args <- mget(x = c("query", "key", "value", "cum_seq_q", "cum_seq_k", "max_q", "max_k", "dropout_p", "is_causal", "return_debug_mask", "scale", "window_size_left", "window_size_right", "seqused_k", "alibi_slopes"))
 expected_types <- list(query = "Tensor", key = "Tensor", value = "Tensor", cum_seq_q = "Tensor", 
     cum_seq_k = "Tensor", max_q = "int64_t", max_k = "int64_t", 
-    dropout_p = "double", is_causal = "bool", return_debug_mask = "bool")
+    dropout_p = "double", is_causal = "bool", return_debug_mask = "bool", 
+    scale = "double", window_size_left = "int64_t", window_size_right = "int64_t", 
+    seqused_k = "Tensor", alibi_slopes = "Tensor")
 nd_args <- c("query", "key", "value", "cum_seq_q", "cum_seq_k", "max_q", 
 "max_k", "dropout_p", "is_causal", "return_debug_mask")
-return_types <- list(list("Tensor", "Tensor", "int64_t", "int64_t", "Tensor"))
+return_types <- list(list("Tensor", "Tensor", "Tensor", "Tensor", "Tensor"))
 call_c_function(
 fun_name = '_flash_attention_forward',
 args = args,
@@ -2624,8 +2791,8 @@ fun_type = 'namespace'
 #' @rdname torch__foreach_add
 torch__foreach_add <- function(self, other, scalar, scalars, alpha = 1L) {
   args <- mget(x = c("self", "other", "scalar", "scalars", "alpha"))
-expected_types <- list(self = "TensorList", other = "TensorList", scalar = "Scalar", 
-    scalars = "ArrayRef<Scalar>", alpha = "Scalar")
+expected_types <- list(self = "TensorList", other = c("TensorList", "Tensor"), 
+    scalar = "Scalar", scalars = "ArrayRef<Scalar>", alpha = "Scalar")
 nd_args <- c("self", "other", "scalar", "scalars")
 return_types <- list(list('TensorList'))
 call_c_function(
@@ -2642,8 +2809,8 @@ fun_type = 'namespace'
 #' @rdname torch__foreach_add_
 torch__foreach_add_ <- function(self, other, scalar, scalars, alpha = 1L) {
   args <- mget(x = c("self", "other", "scalar", "scalars", "alpha"))
-expected_types <- list(self = "TensorList", other = "TensorList", scalar = "Scalar", 
-    scalars = "ArrayRef<Scalar>", alpha = "Scalar")
+expected_types <- list(self = "TensorList", other = c("TensorList", "Tensor"), 
+    scalar = "Scalar", scalars = "ArrayRef<Scalar>", alpha = "Scalar")
 nd_args <- c("self", "other", "scalar", "scalars")
 return_types <- list(list("void"))
 call_c_function(
@@ -2660,8 +2827,8 @@ fun_type = 'namespace'
 #' @rdname torch__foreach_add_out
 torch__foreach_add_out <- function(out, self, other, scalar, scalars, alpha = 1L) {
   args <- mget(x = c("out", "self", "other", "scalar", "scalars", "alpha"))
-expected_types <- list(out = "TensorList", self = "TensorList", other = "TensorList", 
-    scalar = "Scalar", scalars = "ArrayRef<Scalar>", alpha = "Scalar")
+expected_types <- list(out = "TensorList", self = "TensorList", other = c("TensorList", 
+"Tensor"), scalar = "Scalar", scalars = "ArrayRef<Scalar>", alpha = "Scalar")
 nd_args <- c("out", "self", "other", "scalar", "scalars")
 return_types <- list(list("void"))
 call_c_function(
@@ -3046,6 +3213,58 @@ fun_type = 'namespace'
 }
 
 
+#' @rdname torch__foreach_copy
+torch__foreach_copy <- function(self, src, non_blocking = FALSE) {
+  args <- mget(x = c("self", "src", "non_blocking"))
+expected_types <- list(self = "TensorList", src = "TensorList", non_blocking = "bool")
+nd_args <- c("self", "src")
+return_types <- list(list('TensorList'))
+call_c_function(
+fun_name = '_foreach_copy',
+args = args,
+expected_types = expected_types,
+nd_args = nd_args,
+return_types = return_types,
+fun_type = 'namespace'
+)
+}
+
+
+#' @rdname torch__foreach_copy_
+torch__foreach_copy_ <- function(self, src, non_blocking = FALSE) {
+  args <- mget(x = c("self", "src", "non_blocking"))
+expected_types <- list(self = "TensorList", src = "TensorList", non_blocking = "bool")
+nd_args <- c("self", "src")
+return_types <- list(list("void"))
+call_c_function(
+fun_name = '_foreach_copy_',
+args = args,
+expected_types = expected_types,
+nd_args = nd_args,
+return_types = return_types,
+fun_type = 'namespace'
+)
+}
+
+
+#' @rdname torch__foreach_copy_out
+torch__foreach_copy_out <- function(out, self, src, non_blocking = FALSE) {
+  args <- mget(x = c("out", "self", "src", "non_blocking"))
+expected_types <- list(out = "TensorList", self = "TensorList", src = "TensorList", 
+    non_blocking = "bool")
+nd_args <- c("out", "self", "src")
+return_types <- list(list("void"))
+call_c_function(
+fun_name = '_foreach_copy_out',
+args = args,
+expected_types = expected_types,
+nd_args = nd_args,
+return_types = return_types,
+fun_type = 'namespace'
+)
+}
+
+
 #' @rdname torch__foreach_cos
 torch__foreach_cos <- function(self) {
   args <- mget(x = c("self"))
@@ -3151,8 +3370,8 @@ fun_type = 'namespace'
 #' @rdname torch__foreach_div
 torch__foreach_div <- function(self, other, scalar, scalars) {
   args <- mget(x = c("self", "other", "scalar", "scalars"))
-expected_types <- list(self = "TensorList", other = "TensorList", scalar = "Scalar", 
-    scalars = "ArrayRef<Scalar>")
+expected_types <- list(self = "TensorList", other = c("TensorList", "Tensor"), 
+    scalar = "Scalar", scalars = "ArrayRef<Scalar>")
 nd_args <- c("self", "other", "scalar", "scalars")
 return_types <- list(list('TensorList'))
 call_c_function(
@@ -3169,8 +3388,8 @@ fun_type = 'namespace'
 #' @rdname torch__foreach_div_
 torch__foreach_div_ <- function(self, other, scalar, scalars) {
   args <- mget(x = c("self", "other", "scalar", "scalars"))
-expected_types <- list(self = "TensorList", other = "TensorList", scalar = "Scalar", 
-    scalars = "ArrayRef<Scalar>")
+expected_types <- list(self = "TensorList", other = c("TensorList", "Tensor"), 
+    scalar = "Scalar", scalars = "ArrayRef<Scalar>")
 nd_args <- c("self", "other", "scalar", "scalars")
 return_types <- list(list("void"))
 call_c_function(
@@ -3187,8 +3406,8 @@ fun_type = 'namespace'
 #' @rdname torch__foreach_div_out
 torch__foreach_div_out <- function(out, self, other, scalar, scalars) {
   args <- mget(x = c("out", "self", "other", "scalar", "scalars"))
-expected_types <- list(out = "TensorList", self = "TensorList", other = "TensorList", 
-    scalar = "Scalar", scalars = "ArrayRef<Scalar>")
+expected_types <- list(out = "TensorList", self = "TensorList", other = c("TensorList", 
+"Tensor"), scalar = "Scalar", scalars = "ArrayRef<Scalar>")
 nd_args <- c("out", "self", "other", "scalar", "scalars")
 return_types <- list(list("void"))
 call_c_function(
@@ -3817,6 +4036,40 @@ fun_type = 'namespace'
 }
 
 
+#' @rdname torch__foreach_max
+torch__foreach_max <- function(self) {
+  args <- mget(x = c("self"))
+expected_types <- list(self = "TensorList")
+nd_args <- "self"
+return_types <- list(list('TensorList'))
+call_c_function(
+fun_name = '_foreach_max',
+args = args,
+expected_types = expected_types,
+nd_args = nd_args,
+return_types = return_types,
+fun_type = 'namespace'
+)
+}
+
+
+#' @rdname torch__foreach_max_out
+torch__foreach_max_out <- function(out, self) {
+  args <- mget(x = c("out", "self"))
+expected_types <- list(out = "TensorList", self = "TensorList")
+nd_args <- c("out", "self")
+return_types <- list(list("void"))
+call_c_function(
+fun_name = '_foreach_max_out',
+args = args,
+expected_types = expected_types,
+nd_args = nd_args,
+return_types = return_types,
+fun_type = 'namespace'
+)
+}
+
+
 #' @rdname torch__foreach_maximum
 torch__foreach_maximum <- function(self, other, scalar, scalars) {
   args <- mget(x = c("self", "other", "scalar", "scalars"))
@@ -3928,8 +4181,8 @@ fun_type = 'namespace'
 #' @rdname torch__foreach_mul
 torch__foreach_mul <- function(self, other, scalar, scalars) {
   args <- mget(x = c("self", "other", "scalar", "scalars"))
-expected_types <- list(self = "TensorList", other = "TensorList", scalar = "Scalar", 
-    scalars = "ArrayRef<Scalar>")
+expected_types <- list(self = "TensorList", other = c("TensorList", "Tensor"), 
+    scalar = "Scalar", scalars = "ArrayRef<Scalar>")
 nd_args <- c("self", "other", "scalar", "scalars")
 return_types <- list(list('TensorList'))
 call_c_function(
@@ -3946,8 +4199,8 @@ fun_type = 'namespace'
 #' @rdname torch__foreach_mul_
 torch__foreach_mul_ <- function(self, other, scalar, scalars) {
   args <- mget(x = c("self", "other", "scalar", "scalars"))
-expected_types <- list(self = "TensorList", other = "TensorList", scalar = "Scalar", 
-    scalars = "ArrayRef<Scalar>")
+expected_types <- list(self = "TensorList", other = c("TensorList", "Tensor"), 
+    scalar = "Scalar", scalars = "ArrayRef<Scalar>")
 nd_args <- c("self", "other", "scalar", "scalars")
 return_types <- list(list("void"))
 call_c_function(
@@ -3964,8 +4217,8 @@ fun_type = 'namespace'
 #' @rdname torch__foreach_mul_out
 torch__foreach_mul_out <- function(out, self, other, scalar, scalars) {
   args <- mget(x = c("out", "self", "other", "scalar", "scalars"))
-expected_types <- list(out = "TensorList", self = "TensorList", other = "TensorList", 
-    scalar = "Scalar", scalars = "ArrayRef<Scalar>")
+expected_types <- list(out = "TensorList", self = "TensorList", other = c("TensorList", 
+"Tensor"), scalar = "Scalar", scalars = "ArrayRef<Scalar>")
 nd_args <- c("out", "self", "other", "scalar", "scalars")
 return_types <- list(list("void"))
 call_c_function(
@@ -4031,9 +4284,9 @@ fun_type = 'namespace'
 
 
 #' @rdname torch__foreach_norm
-torch__foreach_norm <- function(self, ord = 2L) {
-  args <- mget(x = c("self", "ord"))
-expected_types <- list(self = "TensorList", ord = "Scalar")
+torch__foreach_norm <- function(self, ord = 2L, dtype = NULL) {
+  args <- mget(x = c("self", "ord", "dtype"))
+expected_types <- list(self = "TensorList", ord = "Scalar", dtype = "ScalarType")
 nd_args <- "self"
 return_types <- list(list('TensorList'))
 call_c_function(
@@ -4048,13 +4301,68 @@ fun_type = 'namespace'
 
 
 #' @rdname torch__foreach_norm_out
-torch__foreach_norm_out <- function(out, self, ord = 2L) {
-  args <- mget(x = c("out", "self", "ord"))
-expected_types <- list(out = "TensorList", self = "TensorList", ord = "Scalar")
+torch__foreach_norm_out <- function(out, self, ord = 2L, dtype = NULL) {
+  args <- mget(x = c("out", "self", "ord", "dtype"))
+expected_types <- list(out = "TensorList", self = "TensorList", ord = "Scalar", 
+    dtype = "ScalarType")
 nd_args <- c("out", "self")
 return_types <- list(list("void"))
 call_c_function(
 fun_name = '_foreach_norm_out',
+args = args,
+expected_types = expected_types,
+nd_args = nd_args,
+return_types = return_types,
+fun_type = 'namespace'
+)
+}
+
+
+#' @rdname torch__foreach_pow
+torch__foreach_pow <- function(self, exponent) {
+  args <- mget(x = c("self", "exponent"))
+expected_types <- list(self = c("TensorList", "Scalar"), exponent = c("TensorList", 
+"Scalar", "ArrayRef<Scalar>"))
+nd_args <- c("self", "exponent")
+return_types <- list(list('TensorList'))
+call_c_function(
+fun_name = '_foreach_pow',
+args = args,
+expected_types = expected_types,
+nd_args = nd_args,
+return_types = return_types,
+fun_type = 'namespace'
+)
+}
+
+
+#' @rdname torch__foreach_pow_
+torch__foreach_pow_ <- function(self, exponent) {
+  args <- mget(x = c("self", "exponent"))
+expected_types <- list(self = "TensorList", exponent = c("TensorList", "Scalar", 
+"ArrayRef<Scalar>"))
+nd_args <- c("self", "exponent")
+return_types <- list(list("void"))
+call_c_function(
+fun_name = '_foreach_pow_',
+args = args,
+expected_types = expected_types,
+nd_args = nd_args,
+return_types = return_types,
+fun_type = 'namespace'
+)
+}
+
+
+#' @rdname torch__foreach_pow_out
+torch__foreach_pow_out <- function(out, self, exponent) {
+  args <- mget(x = c("out", "self", "exponent"))
+expected_types <- list(out = "TensorList", self = "TensorList", exponent = c("TensorList", 
+"Scalar", "ArrayRef<Scalar>"))
+nd_args <- c("out", "self", "exponent")
+return_types <- list(list("void"))
+call_c_function(
+fun_name = '_foreach_pow_out',
 args = args,
 expected_types = expected_types,
 nd_args = nd_args,
@@ -4208,6 +4516,57 @@ nd_args <- c("out", "self")
 return_types <- list(list("void"))
 call_c_function(
 fun_name = '_foreach_sigmoid_out',
+args = args,
+expected_types = expected_types,
+nd_args = nd_args,
+return_types = return_types,
+fun_type = 'namespace'
+)
+}
+
+
+#' @rdname torch__foreach_sign
+torch__foreach_sign <- function(self) {
+  args <- mget(x = c("self"))
+expected_types <- list(self = "TensorList")
+nd_args <- "self"
+return_types <- list(list('TensorList'))
+call_c_function(
+fun_name = '_foreach_sign',
+args = args,
+expected_types = expected_types,
+nd_args = nd_args,
+return_types = return_types,
+fun_type = 'namespace'
+)
+}
+
+
+#' @rdname torch__foreach_sign_
+torch__foreach_sign_ <- function(self) {
+  args <- mget(x = c("self"))
+expected_types <- list(self = "TensorList")
+nd_args <- "self"
+return_types <- list(list("void"))
+call_c_function(
+fun_name = '_foreach_sign_',
+args = args,
+expected_types = expected_types,
+nd_args = nd_args,
+return_types = return_types,
+fun_type = 'namespace'
+)
+}
+
+
+#' @rdname torch__foreach_sign_out
+torch__foreach_sign_out <- function(out, self) {
+  args <- mget(x = c("out", "self"))
+expected_types <- list(out = "TensorList", self = "TensorList")
+nd_args <- c("out", "self")
+return_types <- list(list("void"))
+call_c_function(
+fun_name = '_foreach_sign_out',
 args = args,
 expected_types = expected_types,
 nd_args = nd_args,
@@ -4628,12 +4987,143 @@ fun_type = 'namespace'
 }
 
 
+#' @rdname torch__functional_assert_async
+torch__functional_assert_async <- function(self, assert_msg, dep_token) {
+  args <- mget(x = c("self", "assert_msg", "dep_token"))
+expected_types <- list(self = "Tensor", assert_msg = "c10::string_view", dep_token = "Tensor")
+nd_args <- c("self", "assert_msg", "dep_token")
+return_types <- list(list('Tensor'))
+call_c_function(
+fun_name = '_functional_assert_async',
+args = args,
+expected_types = expected_types,
+nd_args = nd_args,
+return_types = return_types,
+fun_type = 'namespace'
+)
+}
+
+
+#' @rdname torch__functional_assert_scalar
+torch__functional_assert_scalar <- function(self, assert_msg, dep_token) {
+  args <- mget(x = c("self", "assert_msg", "dep_token"))
+expected_types <- list(self = "Scalar", assert_msg = "c10::string_view", dep_token = "Tensor")
+nd_args <- c("self", "assert_msg", "dep_token")
+return_types <- list(list('Tensor'))
+call_c_function(
+fun_name = '_functional_assert_scalar',
+args = args,
+expected_types = expected_types,
+nd_args = nd_args,
+return_types = return_types,
+fun_type = 'namespace'
+)
+}
+
+
+#' @rdname torch__functional_sym_constrain_range
+torch__functional_sym_constrain_range <- function(size, min, max, dep_token) {
+  args <- mget(x = c("size", "min", "max", "dep_token"))
+expected_types <- list(size = "Scalar", min = "int64_t", max = "int64_t", dep_token = "Tensor")
+nd_args <- c("size", "min", "max", "dep_token")
+return_types <- list(list('Tensor'))
+call_c_function(
+fun_name = '_functional_sym_constrain_range',
+args = args,
+expected_types = expected_types,
+nd_args = nd_args,
+return_types = return_types,
+fun_type = 'namespace'
+)
+}
+
+
+#' @rdname torch__functional_sym_constrain_range_for_size
+torch__functional_sym_constrain_range_for_size <- function(size, min, max, dep_token) {
+  args <- mget(x = c("size", "min", "max", "dep_token"))
+expected_types <- list(size = "Scalar", min = "int64_t", max = "int64_t", dep_token = "Tensor")
+nd_args <- c("size", "min", "max", "dep_token")
+return_types <- list(list('Tensor'))
+call_c_function(
+fun_name = '_functional_sym_constrain_range_for_size',
+args = args,
+expected_types = expected_types,
+nd_args = nd_args,
+return_types = return_types,
+fun_type = 'namespace'
+)
+}
+
+
+#' @rdname torch__fused_adagrad
+torch__fused_adagrad <- function(self, grads, state_sums, state_steps, lr, lr_decay, weight_decay, eps, maximize, grad_scale = list(), found_inf = list()) {
+  args <- mget(x = c("self", "grads", "state_sums", "state_steps", "lr", "lr_decay", "weight_decay", "eps", "maximize", "grad_scale", "found_inf"))
+expected_types <- list(self = "TensorList", grads = "TensorList", state_sums = "TensorList", 
+    state_steps = "TensorList", lr = "double", lr_decay = "double", 
+    weight_decay = "double", eps = "double", maximize = "bool", 
+    grad_scale = "Tensor", found_inf = "Tensor")
+nd_args <- c("self", "grads", "state_sums", "state_steps", "lr", "lr_decay", 
+"weight_decay", "eps", "maximize")
+return_types <- list(list("TensorList", "TensorList", "TensorList", "TensorList"))
+call_c_function(
+fun_name = '_fused_adagrad',
+args = args,
+expected_types = expected_types,
+nd_args = nd_args,
+return_types = return_types,
+fun_type = 'namespace'
+)
+}
+
+
+#' @rdname torch__fused_adagrad_
+torch__fused_adagrad_ <- function(self, grads, state_sums, state_steps, lr, lr_decay, weight_decay, eps, maximize, grad_scale = list(), found_inf = list()) {
+  args <- mget(x = c("self", "grads", "state_sums", "state_steps", "lr", "lr_decay", "weight_decay", "eps", "maximize", "grad_scale", "found_inf"))
+expected_types <- list(self = "TensorList", grads = "TensorList", state_sums = "TensorList", 
+    state_steps = "TensorList", lr = "double", lr_decay = "double", 
+    weight_decay = "double", eps = "double", maximize = "bool", 
+    grad_scale = "Tensor", found_inf = "Tensor")
+nd_args <- c("self", "grads", "state_sums", "state_steps", "lr", "lr_decay", 
+"weight_decay", "eps", "maximize")
+return_types <- list(list("void"))
+call_c_function(
+fun_name = '_fused_adagrad_',
+args = args,
+expected_types = expected_types,
+nd_args = nd_args,
+return_types = return_types,
+fun_type = 'namespace'
+)
+}
+
+
+#' @rdname torch__fused_adagrad_out
+torch__fused_adagrad_out <- function(out, self, grads, state_sums, state_steps, lr, lr_decay, weight_decay, eps, maximize, grad_scale = list(), found_inf = list()) {
+  args <- mget(x = c("out", "self", "grads", "state_sums", "state_steps", "lr", "lr_decay", "weight_decay", "eps", "maximize", "grad_scale", "found_inf"))
+expected_types <- list(out = "TensorList", self = "TensorList", grads = "TensorList", 
+    state_sums = "TensorList", state_steps = "TensorList", lr = "double", 
+    lr_decay = "double", weight_decay = "double", eps = "double", 
+    maximize = "bool", grad_scale = "Tensor", found_inf = "Tensor")
+nd_args <- c("out", "self", "grads", "state_sums", "state_steps", "lr", 
+"lr_decay", "weight_decay", "eps", "maximize")
+return_types <- list(list("void"))
+call_c_function(
+fun_name = '_fused_adagrad_out',
+args = args,
+expected_types = expected_types,
+nd_args = nd_args,
+return_types = return_types,
+fun_type = 'namespace'
+)
+}
+
+
 #' @rdname torch__fused_adam
 torch__fused_adam <- function(self, grads, exp_avgs, exp_avg_sqs, max_exp_avg_sqs, state_steps, lr, beta1, beta2, weight_decay, eps, amsgrad, maximize, grad_scale = list(), found_inf = list()) {
   args <- mget(x = c("self", "grads", "exp_avgs", "exp_avg_sqs", "max_exp_avg_sqs", "state_steps", "lr", "beta1", "beta2", "weight_decay", "eps", "amsgrad", "maximize", "grad_scale", "found_inf"))
 expected_types <- list(self = "TensorList", grads = "TensorList", exp_avgs = "TensorList", 
     exp_avg_sqs = "TensorList", max_exp_avg_sqs = "TensorList", 
-    state_steps = "TensorList", lr = "double", beta1 = "double", 
+    state_steps = "TensorList", lr = c("double", "Tensor"), beta1 = "double", 
     beta2 = "double", weight_decay = "double", eps = "double", 
     amsgrad = "bool", maximize = "bool", grad_scale = "Tensor", 
     found_inf = "Tensor")
@@ -4657,7 +5147,7 @@ torch__fused_adam_ <- function(self, grads, exp_avgs, exp_avg_sqs, max_exp_avg_s
   args <- mget(x = c("self", "grads", "exp_avgs", "exp_avg_sqs", "max_exp_avg_sqs", "state_steps", "lr", "beta1", "beta2", "weight_decay", "eps", "amsgrad", "maximize", "grad_scale", "found_inf"))
 expected_types <- list(self = "TensorList", grads = "TensorList", exp_avgs = "TensorList", 
     exp_avg_sqs = "TensorList", max_exp_avg_sqs = "TensorList", 
-    state_steps = "TensorList", lr = "double", beta1 = "double", 
+    state_steps = "TensorList", lr = c("double", "Tensor"), beta1 = "double", 
     beta2 = "double", weight_decay = "double", eps = "double", 
     amsgrad = "bool", maximize = "bool", grad_scale = "Tensor", 
     found_inf = "Tensor")
@@ -4681,7 +5171,7 @@ torch__fused_adam_out <- function(out, self, grads, exp_avgs, exp_avg_sqs, max_e
   args <- mget(x = c("out", "self", "grads", "exp_avgs", "exp_avg_sqs", "max_exp_avg_sqs", "state_steps", "lr", "beta1", "beta2", "weight_decay", "eps", "amsgrad", "maximize", "grad_scale", "found_inf"))
 expected_types <- list(out = "TensorList", self = "TensorList", grads = "TensorList", 
     exp_avgs = "TensorList", exp_avg_sqs = "TensorList", max_exp_avg_sqs = "TensorList", 
-    state_steps = "TensorList", lr = "double", beta1 = "double", 
+    state_steps = "TensorList", lr = c("double", "Tensor"), beta1 = "double", 
     beta2 = "double", weight_decay = "double", eps = "double", 
     amsgrad = "bool", maximize = "bool", grad_scale = "Tensor", 
     found_inf = "Tensor")
@@ -4705,7 +5195,7 @@ torch__fused_adamw <- function(self, grads, exp_avgs, exp_avg_sqs, max_exp_avg_s
   args <- mget(x = c("self", "grads", "exp_avgs", "exp_avg_sqs", "max_exp_avg_sqs", "state_steps", "lr", "beta1", "beta2", "weight_decay", "eps", "amsgrad", "maximize", "grad_scale", "found_inf"))
 expected_types <- list(self = "TensorList", grads = "TensorList", exp_avgs = "TensorList", 
     exp_avg_sqs = "TensorList", max_exp_avg_sqs = "TensorList", 
-    state_steps = "TensorList", lr = "double", beta1 = "double", 
+    state_steps = "TensorList", lr = c("double", "Tensor"), beta1 = "double", 
     beta2 = "double", weight_decay = "double", eps = "double", 
     amsgrad = "bool", maximize = "bool", grad_scale = "Tensor", 
     found_inf = "Tensor")
@@ -4729,7 +5219,7 @@ torch__fused_adamw_ <- function(self, grads, exp_avgs, exp_avg_sqs, max_exp_avg_
   args <- mget(x = c("self", "grads", "exp_avgs", "exp_avg_sqs", "max_exp_avg_sqs", "state_steps", "lr", "beta1", "beta2", "weight_decay", "eps", "amsgrad", "maximize", "grad_scale", "found_inf"))
 expected_types <- list(self = "TensorList", grads = "TensorList", exp_avgs = "TensorList", 
     exp_avg_sqs = "TensorList", max_exp_avg_sqs = "TensorList", 
-    state_steps = "TensorList", lr = "double", beta1 = "double", 
+    state_steps = "TensorList", lr = c("double", "Tensor"), beta1 = "double", 
     beta2 = "double", weight_decay = "double", eps = "double", 
     amsgrad = "bool", maximize = "bool", grad_scale = "Tensor", 
     found_inf = "Tensor")
@@ -4753,7 +5243,7 @@ torch__fused_adamw_out <- function(out, self, grads, exp_avgs, exp_avg_sqs, max_
   args <- mget(x = c("out", "self", "grads", "exp_avgs", "exp_avg_sqs", "max_exp_avg_sqs", "state_steps", "lr", "beta1", "beta2", "weight_decay", "eps", "amsgrad", "maximize", "grad_scale", "found_inf"))
 expected_types <- list(out = "TensorList", self = "TensorList", grads = "TensorList", 
     exp_avgs = "TensorList", exp_avg_sqs = "TensorList", max_exp_avg_sqs = "TensorList", 
-    state_steps = "TensorList", lr = "double", beta1 = "double", 
+    state_steps = "TensorList", lr = c("double", "Tensor"), beta1 = "double", 
     beta2 = "double", weight_decay = "double", eps = "double", 
     amsgrad = "bool", maximize = "bool", grad_scale = "Tensor", 
     found_inf = "Tensor")
@@ -4877,14 +5367,80 @@ fun_type = 'namespace'
 
 
 #' @rdname torch__fused_sdp_choice
-torch__fused_sdp_choice <- function(query, key, value, attn_mask = list(), dropout_p = 0L, is_causal = FALSE) {
-  args <- mget(x = c("query", "key", "value", "attn_mask", "dropout_p", "is_causal"))
+torch__fused_sdp_choice <- function(query, key, value, attn_mask = list(), dropout_p = 0L, is_causal = FALSE, scale = NULL, enable_gqa = FALSE) {
+  args <- mget(x = c("query", "key", "value", "attn_mask", "dropout_p", "is_causal", "scale", "enable_gqa"))
 expected_types <- list(query = "Tensor", key = "Tensor", value = "Tensor", attn_mask = "Tensor", 
-    dropout_p = "double", is_causal = "bool")
+    dropout_p = "double", is_causal = "bool", scale = "double", 
+    enable_gqa = "bool")
 nd_args <- c("query", "key", "value")
 return_types <- list(list('int64_t'))
 call_c_function(
 fun_name = '_fused_sdp_choice',
+args = args,
+expected_types = expected_types,
+nd_args = nd_args,
+return_types = return_types,
+fun_type = 'namespace'
+)
+}
+
+
+#' @rdname torch__fused_sgd
+torch__fused_sgd <- function(self, grads, momentum_buffer_list, weight_decay, momentum, lr, dampening, nesterov, maximize, is_first_step, grad_scale = list(), found_inf = list()) {
+  args <- mget(x = c("self", "grads", "momentum_buffer_list", "weight_decay", "momentum", "lr", "dampening", "nesterov", "maximize", "is_first_step", "grad_scale", "found_inf"))
+expected_types <- list(self = "TensorList", grads = "TensorList", momentum_buffer_list = "TensorList", 
+    weight_decay = "double", momentum = "double", lr = c("double", 
+    "Tensor"), dampening = "double", nesterov = "bool", maximize = "bool", 
+    is_first_step = "bool", grad_scale = "Tensor", found_inf = "Tensor")
+nd_args <- c("self", "grads", "momentum_buffer_list", "weight_decay", "momentum", 
+"lr", "dampening", "nesterov", "maximize", "is_first_step")
+return_types <- list(list("TensorList", "TensorList", "TensorList"))
+call_c_function(
+fun_name = '_fused_sgd',
+args = args,
+expected_types = expected_types,
+nd_args = nd_args,
+return_types = return_types,
+fun_type = 'namespace'
+)
+}
+
+
+#' @rdname torch__fused_sgd_
+torch__fused_sgd_ <- function(self, grads, momentum_buffer_list, weight_decay, momentum, lr, dampening, nesterov, maximize, is_first_step, grad_scale = list(), found_inf = list()) {
+  args <- mget(x = c("self", "grads", "momentum_buffer_list", "weight_decay", "momentum", "lr", "dampening", "nesterov", "maximize", "is_first_step", "grad_scale", "found_inf"))
+expected_types <- list(self = "TensorList", grads = "TensorList", momentum_buffer_list = "TensorList", 
+    weight_decay = "double", momentum = "double", lr = c("double", 
+    "Tensor"), dampening = "double", nesterov = "bool", maximize = "bool", 
+    is_first_step = "bool", grad_scale = "Tensor", found_inf = "Tensor")
+nd_args <- c("self", "grads", "momentum_buffer_list", "weight_decay", "momentum", 
+"lr", "dampening", "nesterov", "maximize", "is_first_step")
+return_types <- list(list("void"))
+call_c_function(
+fun_name = '_fused_sgd_',
+args = args,
+expected_types = expected_types,
+nd_args = nd_args,
+return_types = return_types,
+fun_type = 'namespace'
+)
+}
+
+
+#' @rdname torch__fused_sgd_out
+torch__fused_sgd_out <- function(out, self, grads, momentum_buffer_list, weight_decay, momentum, lr, dampening, nesterov, maximize, is_first_step, grad_scale = list(), found_inf = list()) {
+  args <- mget(x = c("out", "self", "grads", "momentum_buffer_list", "weight_decay", "momentum", "lr", "dampening", "nesterov", "maximize", "is_first_step", "grad_scale", "found_inf"))
+expected_types <- list(out = "TensorList", self = "TensorList", grads = "TensorList", 
+    momentum_buffer_list = "TensorList", weight_decay = "double", 
+    momentum = "double", lr = c("double", "Tensor"), dampening = "double", 
+    nesterov = "bool", maximize = "bool", is_first_step = "bool", 
+    grad_scale = "Tensor", found_inf = "Tensor")
+nd_args <- c("out", "self", "grads", "momentum_buffer_list", "weight_decay", 
+"momentum", "lr", "dampening", "nesterov", "maximize", "is_first_step"
+)
+return_types <- list(list("void"))
+call_c_function(
+fun_name = '_fused_sgd_out',
 args = args,
 expected_types = expected_types,
 nd_args = nd_args,
@@ -5148,7 +5704,7 @@ fun_type = 'namespace'
 #' @rdname torch__index_put_impl
 torch__index_put_impl <- function(self, indices, values, accumulate = FALSE, unsafe = FALSE) {
   args <- mget(x = c("self", "indices", "values", "accumulate", "unsafe"))
-expected_types <- list(self = "Tensor", indices = "const c10::List<c10::optional<Tensor>> &", 
+expected_types <- list(self = "Tensor", indices = "const c10::List<::std::optional<Tensor>> &", 
     values = "Tensor", accumulate = "bool", unsafe = "bool")
 nd_args <- c("self", "indices", "values")
 return_types <- list(list('Tensor'))
@@ -5166,7 +5722,7 @@ fun_type = 'namespace'
 #' @rdname torch__index_put_impl_
 torch__index_put_impl_ <- function(self, indices, values, accumulate = FALSE, unsafe = FALSE) {
   args <- mget(x = c("self", "indices", "values", "accumulate", "unsafe"))
-expected_types <- list(self = "Tensor", indices = "const c10::List<c10::optional<Tensor>> &", 
+expected_types <- list(self = "Tensor", indices = "const c10::List<::std::optional<Tensor>> &", 
     values = "Tensor", accumulate = "bool", unsafe = "bool")
 nd_args <- c("self", "indices", "values")
 return_types <- list(list('Tensor'))
@@ -5184,7 +5740,7 @@ fun_type = 'namespace'
 #' @rdname torch__index_put_impl_out
 torch__index_put_impl_out <- function(out, self, indices, values, accumulate = FALSE, unsafe = FALSE) {
   args <- mget(x = c("out", "self", "indices", "values", "accumulate", "unsafe"))
-expected_types <- list(out = "Tensor", self = "Tensor", indices = "const c10::List<c10::optional<Tensor>> &", 
+expected_types <- list(out = "Tensor", self = "Tensor", indices = "const c10::List<::std::optional<Tensor>> &", 
     values = "Tensor", accumulate = "bool", unsafe = "bool")
 nd_args <- c("out", "self", "indices", "values")
 return_types <- list(list('Tensor'))
@@ -5224,6 +5780,40 @@ nd_args <- c("out", "self")
 return_types <- list(list('Tensor'))
 call_c_function(
 fun_name = '_indices_copy_out',
+args = args,
+expected_types = expected_types,
+nd_args = nd_args,
+return_types = return_types,
+fun_type = 'namespace'
+)
+}
+
+
+#' @rdname torch__int_mm
+torch__int_mm <- function(self, mat2) {
+  args <- mget(x = c("self", "mat2"))
+expected_types <- list(self = "Tensor", mat2 = "Tensor")
+nd_args <- c("self", "mat2")
+return_types <- list(list('Tensor'))
+call_c_function(
+fun_name = '_int_mm',
+args = args,
+expected_types = expected_types,
+nd_args = nd_args,
+return_types = return_types,
+fun_type = 'namespace'
+)
+}
+
+
+#' @rdname torch__int_mm_out
+torch__int_mm_out <- function(out, self, mat2) {
+  args <- mget(x = c("out", "self", "mat2"))
+expected_types <- list(out = "Tensor", self = "Tensor", mat2 = "Tensor")
+nd_args <- c("out", "self", "mat2")
+return_types <- list(list('Tensor'))
+call_c_function(
+fun_name = '_int_mm_out',
 args = args,
 expected_types = expected_types,
 nd_args = nd_args,
@@ -5275,6 +5865,41 @@ nd_args <- "self"
 return_types <- list(list('bool'))
 call_c_function(
 fun_name = '_is_zerotensor',
+args = args,
+expected_types = expected_types,
+nd_args = nd_args,
+return_types = return_types,
+fun_type = 'namespace'
+)
+}
+
+
+#' @rdname torch__jagged_to_padded_dense_forward
+torch__jagged_to_padded_dense_forward <- function(values, offsets, max_lengths, padding_value = 0L) {
+  args <- mget(x = c("values", "offsets", "max_lengths", "padding_value"))
+expected_types <- list(values = "Tensor", offsets = "TensorList", max_lengths = "IntArrayRef", 
+    padding_value = "double")
+nd_args <- c("values", "offsets", "max_lengths")
+return_types <- list(list('Tensor'))
+call_c_function(
+fun_name = '_jagged_to_padded_dense_forward',
+args = args,
+expected_types = expected_types,
+nd_args = nd_args,
+return_types = return_types,
+fun_type = 'namespace'
+)
+}
+
+
+#' @rdname torch__lazy_clone
+torch__lazy_clone <- function(self) {
+  args <- mget(x = c("self"))
+expected_types <- list(self = "Tensor")
+nd_args <- "self"
+return_types <- list(list('Tensor'))
+call_c_function(
+fun_name = '_lazy_clone',
 args = args,
 expected_types = expected_types,
 nd_args = nd_args,
@@ -5361,6 +5986,23 @@ nd_args <- c("eigenvalues", "eigenvectors", "A")
 return_types <- list(list("Tensor", "Tensor"))
 call_c_function(
 fun_name = '_linalg_eigh_out',
+args = args,
+expected_types = expected_types,
+nd_args = nd_args,
+return_types = return_types,
+fun_type = 'namespace'
+)
+}
+
+
+#' @rdname torch__linalg_eigvals
+torch__linalg_eigvals <- function(self) {
+  args <- mget(x = c("self"))
+expected_types <- list(self = "Tensor")
+nd_args <- "self"
+return_types <- list(list('Tensor'))
+call_c_function(
+fun_name = '_linalg_eigvals',
 args = args,
 expected_types = expected_types,
 nd_args = nd_args,
@@ -5883,6 +6525,24 @@ fun_type = 'namespace'
 }
 
 
+#' @rdname torch__mixed_dtypes_linear
+torch__mixed_dtypes_linear <- function(input, weight, scale, bias = list(), activation = NULL) {
+  args <- mget(x = c("input", "weight", "scale", "bias", "activation"))
+expected_types <- list(input = "Tensor", weight = "Tensor", scale = "Tensor", bias = "Tensor", 
+    activation = "c10::string_view")
+nd_args <- c("input", "weight", "scale")
+return_types <- list(list('Tensor'))
+call_c_function(
+fun_name = '_mixed_dtypes_linear',
+args = args,
+expected_types = expected_types,
+nd_args = nd_args,
+return_types = return_types,
+fun_type = 'namespace'
+)
+}
+
+
 #' @rdname torch__mkldnn_reshape
 torch__mkldnn_reshape <- function(self, shape) {
   args <- mget(x = c("self", "shape"))
@@ -6087,6 +6747,45 @@ fun_type = 'namespace'
 }
 
 
+#' @rdname torch__native_batch_norm_legit_no_training
+torch__native_batch_norm_legit_no_training <- function(input, weight, bias, running_mean, running_var, momentum, eps) {
+  args <- mget(x = c("input", "weight", "bias", "running_mean", "running_var", "momentum", "eps"))
+expected_types <- list(input = "Tensor", weight = "Tensor", bias = "Tensor", running_mean = "Tensor", 
+    running_var = "Tensor", momentum = "double", eps = "double")
+nd_args <- c("input", "weight", "bias", "running_mean", "running_var", "momentum", 
+"eps")
+return_types <- list(list("Tensor", "Tensor", "Tensor"))
+call_c_function(
+fun_name = '_native_batch_norm_legit_no_training',
+args = args,
+expected_types = expected_types,
+nd_args = nd_args,
+return_types = return_types,
+fun_type = 'namespace'
+)
+}
+
+
+#' @rdname torch__native_batch_norm_legit_no_training_out
+torch__native_batch_norm_legit_no_training_out <- function(out0, out1, out2, input, weight, bias, running_mean, running_var, momentum, eps) {
+  args <- mget(x = c("out0", "out1", "out2", "input", "weight", "bias", "running_mean", "running_var", "momentum", "eps"))
+expected_types <- list(out0 = "Tensor", out1 = "Tensor", out2 = "Tensor", input = "Tensor", 
+    weight = "Tensor", bias = "Tensor", running_mean = "Tensor", 
+    running_var = "Tensor", momentum = "double", eps = "double")
+nd_args <- c("out0", "out1", "out2", "input", "weight", "bias", "running_mean", 
+"running_var", "momentum", "eps")
+return_types <- list(list("Tensor", "Tensor", "Tensor"))
+call_c_function(
+fun_name = '_native_batch_norm_legit_no_training_out',
+args = args,
+expected_types = expected_types,
+nd_args = nd_args,
+return_types = return_types,
+fun_type = 'namespace'
+)
+}
+
+
 #' @rdname torch__native_batch_norm_legit_out
 torch__native_batch_norm_legit_out <- function(out, save_mean, save_invstd, input, weight, bias, running_mean, running_var, training, momentum, eps) {
   args <- mget(x = c("out", "save_mean", "save_invstd", "input", "weight", "bias", "running_mean", "running_var", "training", "momentum", "eps"))
@@ -6099,52 +6798,6 @@ nd_args <- c("out", "save_mean", "save_invstd", "input", "weight", "bias",
 return_types <- list(list("Tensor", "Tensor", "Tensor"))
 call_c_function(
 fun_name = '_native_batch_norm_legit_out',
-args = args,
-expected_types = expected_types,
-nd_args = nd_args,
-return_types = return_types,
-fun_type = 'namespace'
-)
-}
-
-
-#' @rdname torch__native_decoder_only_multi_head_attention
-torch__native_decoder_only_multi_head_attention <- function(query, key, value, embed_dim, num_head, qkv_weight, qkv_bias, proj_weight, proj_bias, mask = list(), incr_key = list(), incr_value = list(), need_weights = TRUE, average_attn_weights = TRUE) {
-  args <- mget(x = c("query", "key", "value", "embed_dim", "num_head", "qkv_weight", "qkv_bias", "proj_weight", "proj_bias", "mask", "incr_key", "incr_value", "need_weights", "average_attn_weights"))
-expected_types <- list(query = "Tensor", key = "Tensor", value = "Tensor", embed_dim = "int64_t", 
-    num_head = "int64_t", qkv_weight = "Tensor", qkv_bias = "Tensor", 
-    proj_weight = "Tensor", proj_bias = "Tensor", mask = "Tensor", 
-    incr_key = "Tensor", incr_value = "Tensor", need_weights = "bool", 
-    average_attn_weights = "bool")
-nd_args <- c("query", "key", "value", "embed_dim", "num_head", "qkv_weight", 
-"qkv_bias", "proj_weight", "proj_bias")
-return_types <- list(list("Tensor", "Tensor", "Tensor", "Tensor"))
-call_c_function(
-fun_name = '_native_decoder_only_multi_head_attention',
-args = args,
-expected_types = expected_types,
-nd_args = nd_args,
-return_types = return_types,
-fun_type = 'namespace'
-)
-}
-
-
-#' @rdname torch__native_decoder_only_multi_head_attention_out
-torch__native_decoder_only_multi_head_attention_out <- function(out0, out1, out2, out3, query, key, value, embed_dim, num_head, qkv_weight, qkv_bias, proj_weight, proj_bias, mask = list(), incr_key = list(), incr_value = list(), need_weights = TRUE, average_attn_weights = TRUE) {
-  args <- mget(x = c("out0", "out1", "out2", "out3", "query", "key", "value", "embed_dim", "num_head", "qkv_weight", "qkv_bias", "proj_weight", "proj_bias", "mask", "incr_key", "incr_value", "need_weights", "average_attn_weights"))
-expected_types <- list(out0 = "Tensor", out1 = "Tensor", out2 = "Tensor", out3 = "Tensor", 
-    query = "Tensor", key = "Tensor", value = "Tensor", embed_dim = "int64_t", 
-    num_head = "int64_t", qkv_weight = "Tensor", qkv_bias = "Tensor", 
-    proj_weight = "Tensor", proj_bias = "Tensor", mask = "Tensor", 
-    incr_key = "Tensor", incr_value = "Tensor", need_weights = "bool", 
-    average_attn_weights = "bool")
-nd_args <- c("out0", "out1", "out2", "out3", "query", "key", "value", "embed_dim", 
-"num_head", "qkv_weight", "qkv_bias", "proj_weight", "proj_bias"
-)
-return_types <- list(list("Tensor", "Tensor", "Tensor", "Tensor"))
-call_c_function(
-fun_name = '_native_decoder_only_multi_head_attention_out',
 args = args,
 expected_types = expected_types,
 nd_args = nd_args,
@@ -6248,6 +6901,23 @@ fun_type = 'namespace'
 }
 
 
+#' @rdname torch__nested_compute_contiguous_strides_offsets
+torch__nested_compute_contiguous_strides_offsets <- function(nested_size) {
+  args <- mget(x = c("nested_size"))
+expected_types <- list(nested_size = "Tensor")
+nd_args <- "nested_size"
+return_types <- list(list("Tensor", "Tensor"))
+call_c_function(
+fun_name = '_nested_compute_contiguous_strides_offsets',
+args = args,
+expected_types = expected_types,
+nd_args = nd_args,
+return_types = return_types,
+fun_type = 'namespace'
+)
+}
+
+
 #' @rdname torch__nested_from_padded
 torch__nested_from_padded <- function(padded, cpu_nested_shape_example, fuse_transform_0213 = FALSE) {
   args <- mget(x = c("padded", "cpu_nested_shape_example", "fuse_transform_0213"))
@@ -6309,6 +6979,159 @@ nd_args <- c("out", "padded", "cpu_nested_shape_example")
 return_types <- list(list('Tensor'))
 call_c_function(
 fun_name = '_nested_from_padded_out',
+args = args,
+expected_types = expected_types,
+nd_args = nd_args,
+return_types = return_types,
+fun_type = 'namespace'
+)
+}
+
+
+#' @rdname torch__nested_get_jagged_dummy
+torch__nested_get_jagged_dummy <- function(any) {
+  args <- mget(x = c("any"))
+expected_types <- list(any = "Tensor")
+nd_args <- "any"
+return_types <- list(list('Tensor'))
+call_c_function(
+fun_name = '_nested_get_jagged_dummy',
+args = args,
+expected_types = expected_types,
+nd_args = nd_args,
+return_types = return_types,
+fun_type = 'namespace'
+)
+}
+
+
+#' @rdname torch__nested_get_lengths
+torch__nested_get_lengths <- function(self) {
+  args <- mget(x = c("self"))
+expected_types <- list(self = "Tensor")
+nd_args <- "self"
+return_types <- list(list('Tensor'))
+call_c_function(
+fun_name = '_nested_get_lengths',
+args = args,
+expected_types = expected_types,
+nd_args = nd_args,
+return_types = return_types,
+fun_type = 'namespace'
+)
+}
+
+
+#' @rdname torch__nested_get_max_seqlen
+torch__nested_get_max_seqlen <- function(self) {
+  args <- mget(x = c("self"))
+expected_types <- list(self = "Tensor")
+nd_args <- "self"
+return_types <- list(list('Tensor'))
+call_c_function(
+fun_name = '_nested_get_max_seqlen',
+args = args,
+expected_types = expected_types,
+nd_args = nd_args,
+return_types = return_types,
+fun_type = 'namespace'
+)
+}
+
+
+#' @rdname torch__nested_get_min_seqlen
+torch__nested_get_min_seqlen <- function(self) {
+  args <- mget(x = c("self"))
+expected_types <- list(self = "Tensor")
+nd_args <- "self"
+return_types <- list(list('Tensor'))
+call_c_function(
+fun_name = '_nested_get_min_seqlen',
+args = args,
+expected_types = expected_types,
+nd_args = nd_args,
+return_types = return_types,
+fun_type = 'namespace'
+)
+}
+
+
+#' @rdname torch__nested_get_offsets
+torch__nested_get_offsets <- function(self) {
+  args <- mget(x = c("self"))
+expected_types <- list(self = "Tensor")
+nd_args <- "self"
+return_types <- list(list('Tensor'))
+call_c_function(
+fun_name = '_nested_get_offsets',
+args = args,
+expected_types = expected_types,
+nd_args = nd_args,
+return_types = return_types,
+fun_type = 'namespace'
+)
+}
+
+
+#' @rdname torch__nested_get_ragged_idx
+torch__nested_get_ragged_idx <- function(self) {
+  args <- mget(x = c("self"))
+expected_types <- list(self = "Tensor")
+nd_args <- "self"
+return_types <- list(list('int64_t'))
+call_c_function(
+fun_name = '_nested_get_ragged_idx',
+args = args,
+expected_types = expected_types,
+nd_args = nd_args,
+return_types = return_types,
+fun_type = 'namespace'
+)
+}
+
+
+#' @rdname torch__nested_get_values
+torch__nested_get_values <- function(self) {
+  args <- mget(x = c("self"))
+expected_types <- list(self = "Tensor")
+nd_args <- "self"
+return_types <- list(list('Tensor'))
+call_c_function(
+fun_name = '_nested_get_values',
+args = args,
+expected_types = expected_types,
+nd_args = nd_args,
+return_types = return_types,
+fun_type = 'namespace'
+)
+}
+
+
+#' @rdname torch__nested_get_values_copy
+torch__nested_get_values_copy <- function(self) {
+  args <- mget(x = c("self"))
+expected_types <- list(self = "Tensor")
+nd_args <- "self"
+return_types <- list(list('Tensor'))
+call_c_function(
+fun_name = '_nested_get_values_copy',
+args = args,
+expected_types = expected_types,
+nd_args = nd_args,
+return_types = return_types,
+fun_type = 'namespace'
+)
+}
+
+
+#' @rdname torch__nested_get_values_copy_out
+torch__nested_get_values_copy_out <- function(out, self) {
+  args <- mget(x = c("out", "self"))
+expected_types <- list(out = "Tensor", self = "Tensor")
+nd_args <- c("out", "self")
+return_types <- list(list('Tensor'))
+call_c_function(
+fun_name = '_nested_get_values_copy_out',
 args = args,
 expected_types = expected_types,
 nd_args = nd_args,
@@ -6474,6 +7297,23 @@ fun_type = 'namespace'
 }
 
 
+#' @rdname torch__nested_tensor_storage_offsets_out
+torch__nested_tensor_storage_offsets_out <- function(out, self) {
+  args <- mget(x = c("out", "self"))
+expected_types <- list(out = "Tensor", self = "Tensor")
+nd_args <- c("out", "self")
+return_types <- list(list('Tensor'))
+call_c_function(
+fun_name = '_nested_tensor_storage_offsets_out',
+args = args,
+expected_types = expected_types,
+nd_args = nd_args,
+return_types = return_types,
+fun_type = 'namespace'
+)
+}
+
+
 #' @rdname torch__nested_tensor_strides_out
 torch__nested_tensor_strides_out <- function(out, self) {
   args <- mget(x = c("out", "self"))
@@ -6495,7 +7335,7 @@ fun_type = 'namespace'
 torch__nested_view_from_buffer <- function(self, nested_size, nested_strides, offsets) {
   args <- mget(x = c("self", "nested_size", "nested_strides", "offsets"))
 expected_types <- list(self = "Tensor", nested_size = "Tensor", nested_strides = "Tensor", 
-    offsets = "IntArrayRef")
+    offsets = "Tensor")
 nd_args <- c("self", "nested_size", "nested_strides", "offsets")
 return_types <- list(list('Tensor'))
 call_c_function(
@@ -6513,7 +7353,7 @@ fun_type = 'namespace'
 torch__nested_view_from_buffer_copy <- function(self, nested_size, nested_strides, offsets) {
   args <- mget(x = c("self", "nested_size", "nested_strides", "offsets"))
 expected_types <- list(self = "Tensor", nested_size = "Tensor", nested_strides = "Tensor", 
-    offsets = "IntArrayRef")
+    offsets = "Tensor")
 nd_args <- c("self", "nested_size", "nested_strides", "offsets")
 return_types <- list(list('Tensor'))
 call_c_function(
@@ -6531,11 +7371,66 @@ fun_type = 'namespace'
 torch__nested_view_from_buffer_copy_out <- function(out, self, nested_size, nested_strides, offsets) {
   args <- mget(x = c("out", "self", "nested_size", "nested_strides", "offsets"))
 expected_types <- list(out = "Tensor", self = "Tensor", nested_size = "Tensor", 
-    nested_strides = "Tensor", offsets = "IntArrayRef")
+    nested_strides = "Tensor", offsets = "Tensor")
 nd_args <- c("out", "self", "nested_size", "nested_strides", "offsets")
 return_types <- list(list('Tensor'))
 call_c_function(
 fun_name = '_nested_view_from_buffer_copy_out',
+args = args,
+expected_types = expected_types,
+nd_args = nd_args,
+return_types = return_types,
+fun_type = 'namespace'
+)
+}
+
+
+#' @rdname torch__nested_view_from_jagged
+torch__nested_view_from_jagged <- function(self, offsets, dummy, lengths = list(), ragged_idx = 1L, min_seqlen = list(), max_seqlen = list()) {
+  args <- mget(x = c("self", "offsets", "dummy", "lengths", "ragged_idx", "min_seqlen", "max_seqlen"))
+expected_types <- list(self = "Tensor", offsets = "Tensor", dummy = "Tensor", lengths = "Tensor", 
+    ragged_idx = "int64_t", min_seqlen = "Tensor", max_seqlen = "Tensor")
+nd_args <- c("self", "offsets", "dummy")
+return_types <- list(list('Tensor'))
+call_c_function(
+fun_name = '_nested_view_from_jagged',
+args = args,
+expected_types = expected_types,
+nd_args = nd_args,
+return_types = return_types,
+fun_type = 'namespace'
+)
+}
+
+
+#' @rdname torch__nested_view_from_jagged_copy
+torch__nested_view_from_jagged_copy <- function(self, offsets, dummy, lengths = list(), ragged_idx = 1L, min_seqlen = list(), max_seqlen = list()) {
+  args <- mget(x = c("self", "offsets", "dummy", "lengths", "ragged_idx", "min_seqlen", "max_seqlen"))
+expected_types <- list(self = "Tensor", offsets = "Tensor", dummy = "Tensor", lengths = "Tensor", 
+    ragged_idx = "int64_t", min_seqlen = "Tensor", max_seqlen = "Tensor")
+nd_args <- c("self", "offsets", "dummy")
+return_types <- list(list('Tensor'))
+call_c_function(
+fun_name = '_nested_view_from_jagged_copy',
+args = args,
+expected_types = expected_types,
+nd_args = nd_args,
+return_types = return_types,
+fun_type = 'namespace'
+)
+}
+
+
+#' @rdname torch__nested_view_from_jagged_copy_out
+torch__nested_view_from_jagged_copy_out <- function(out, self, offsets, dummy, lengths = list(), ragged_idx = 1L, min_seqlen = list(), max_seqlen = list()) {
+  args <- mget(x = c("out", "self", "offsets", "dummy", "lengths", "ragged_idx", "min_seqlen", "max_seqlen"))
+expected_types <- list(out = "Tensor", self = "Tensor", offsets = "Tensor", dummy = "Tensor", 
+    lengths = "Tensor", ragged_idx = "int64_t", min_seqlen = "Tensor", 
+    max_seqlen = "Tensor")
+nd_args <- c("out", "self", "offsets", "dummy")
+return_types <- list(list('Tensor'))
+call_c_function(
+fun_name = '_nested_view_from_jagged_copy_out',
 args = args,
 expected_types = expected_types,
 nd_args = nd_args,
@@ -6722,6 +7617,23 @@ fun_type = 'namespace'
 }
 
 
+#' @rdname torch__padded_dense_to_jagged_forward
+torch__padded_dense_to_jagged_forward <- function(dense, offsets, total_L = NULL) {
+  args <- mget(x = c("dense", "offsets", "total_L"))
+expected_types <- list(dense = "Tensor", offsets = "TensorList", total_L = "int64_t")
+nd_args <- c("dense", "offsets")
+return_types <- list(list('Tensor'))
+call_c_function(
+fun_name = '_padded_dense_to_jagged_forward',
+args = args,
+expected_types = expected_types,
+nd_args = nd_args,
+return_types = return_types,
+fun_type = 'namespace'
+)
+}
+
+
 #' @rdname torch__pdist_backward
 torch__pdist_backward <- function(grad, self, p, pdist) {
   args <- mget(x = c("grad", "self", "p", "pdist"))
@@ -6850,6 +7762,40 @@ nd_args <- c("grad_output", "self", "weight")
 return_types <- list(list("Tensor", "Tensor"))
 call_c_function(
 fun_name = '_prelu_kernel_backward',
+args = args,
+expected_types = expected_types,
+nd_args = nd_args,
+return_types = return_types,
+fun_type = 'namespace'
+)
+}
+
+
+#' @rdname torch__print
+torch__print <- function(s) {
+  args <- mget(x = c("s"))
+expected_types <- list(s = "c10::string_view")
+nd_args <- "s"
+return_types <- list(list("void"))
+call_c_function(
+fun_name = '_print',
+args = args,
+expected_types = expected_types,
+nd_args = nd_args,
+return_types = return_types,
+fun_type = 'namespace'
+)
+}
+
+
+#' @rdname torch__propagate_xla_data
+torch__propagate_xla_data <- function(input, output) {
+  args <- mget(x = c("input", "output"))
+expected_types <- list(input = "Tensor", output = "Tensor")
+nd_args <- c("input", "output")
+return_types <- list(list("void"))
+call_c_function(
+fun_name = '_propagate_xla_data',
 args = args,
 expected_types = expected_types,
 nd_args = nd_args,
@@ -7030,6 +7976,23 @@ fun_type = 'namespace'
 }
 
 
+#' @rdname torch__safe_softmax
+torch__safe_softmax <- function(self, dim, dtype = NULL) {
+  args <- mget(x = c("self", "dim", "dtype"))
+expected_types <- list(self = "Tensor", dim = "int64_t", dtype = "ScalarType")
+nd_args <- c("self", "dim")
+return_types <- list(list('Tensor'))
+call_c_function(
+fun_name = '_safe_softmax',
+args = args,
+expected_types = expected_types,
+nd_args = nd_args,
+return_types = return_types,
+fun_type = 'namespace'
+)
+}
+
+
 #' @rdname torch__sample_dirichlet
 torch__sample_dirichlet <- function(self, generator = NULL) {
   args <- mget(x = c("self", "generator"))
@@ -7081,29 +8044,12 @@ fun_type = 'namespace'
 }
 
 
-#' @rdname torch__scaled_dot_product_attention
-torch__scaled_dot_product_attention <- function(query, key, value, attn_mask = list(), dropout_p = 0L, need_attn_weights = FALSE, is_causal = FALSE) {
-  args <- mget(x = c("query", "key", "value", "attn_mask", "dropout_p", "need_attn_weights", "is_causal"))
-expected_types <- list(query = "Tensor", key = "Tensor", value = "Tensor", attn_mask = "Tensor", 
-    dropout_p = "double", need_attn_weights = "bool", is_causal = "bool")
-nd_args <- c("query", "key", "value")
-return_types <- list(list("Tensor", "Tensor"))
-call_c_function(
-fun_name = '_scaled_dot_product_attention',
-args = args,
-expected_types = expected_types,
-nd_args = nd_args,
-return_types = return_types,
-fun_type = 'namespace'
-)
-}
-
-
 #' @rdname torch__scaled_dot_product_attention_math
-torch__scaled_dot_product_attention_math <- function(query, key, value, attn_mask = list(), dropout_p = 0L, is_causal = FALSE, dropout_mask = list()) {
-  args <- mget(x = c("query", "key", "value", "attn_mask", "dropout_p", "is_causal", "dropout_mask"))
+torch__scaled_dot_product_attention_math <- function(query, key, value, attn_mask = list(), dropout_p = 0L, is_causal = FALSE, dropout_mask = list(), scale = NULL, enable_gqa = FALSE) {
+  args <- mget(x = c("query", "key", "value", "attn_mask", "dropout_p", "is_causal", "dropout_mask", "scale", "enable_gqa"))
 expected_types <- list(query = "Tensor", key = "Tensor", value = "Tensor", attn_mask = "Tensor", 
-    dropout_p = "double", is_causal = "bool", dropout_mask = "Tensor")
+    dropout_p = "double", is_causal = "bool", dropout_mask = "Tensor", 
+    scale = "double", enable_gqa = "bool")
 nd_args <- c("query", "key", "value")
 return_types <- list(list("Tensor", "Tensor"))
 call_c_function(
@@ -7117,13 +8063,75 @@ fun_type = 'namespace'
 }
 
 
-#' @rdname torch__scaled_dot_product_efficient_attention
-torch__scaled_dot_product_efficient_attention <- function(query, key, value, compute_log_sumexp, is_causal = FALSE) {
-  args <- mget(x = c("query", "key", "value", "compute_log_sumexp", "is_causal"))
-expected_types <- list(query = "Tensor", key = "Tensor", value = "Tensor", compute_log_sumexp = "bool", 
-    is_causal = "bool")
-nd_args <- c("query", "key", "value", "compute_log_sumexp")
+#' @rdname torch__scaled_dot_product_attention_math_for_mps
+torch__scaled_dot_product_attention_math_for_mps <- function(query, key, value, attn_mask = list(), dropout_p = 0L, is_causal = FALSE, dropout_mask = list(), scale = NULL) {
+  args <- mget(x = c("query", "key", "value", "attn_mask", "dropout_p", "is_causal", "dropout_mask", "scale"))
+expected_types <- list(query = "Tensor", key = "Tensor", value = "Tensor", attn_mask = "Tensor", 
+    dropout_p = "double", is_causal = "bool", dropout_mask = "Tensor", 
+    scale = "double")
+nd_args <- c("query", "key", "value")
 return_types <- list(list("Tensor", "Tensor"))
+call_c_function(
+fun_name = '_scaled_dot_product_attention_math_for_mps',
+args = args,
+expected_types = expected_types,
+nd_args = nd_args,
+return_types = return_types,
+fun_type = 'namespace'
+)
+}
+
+
+#' @rdname torch__scaled_dot_product_cudnn_attention
+torch__scaled_dot_product_cudnn_attention <- function(query, key, value, attn_bias, compute_log_sumexp, dropout_p = 0L, is_causal = FALSE, return_debug_mask = FALSE, scale = NULL) {
+  args <- mget(x = c("query", "key", "value", "attn_bias", "compute_log_sumexp", "dropout_p", "is_causal", "return_debug_mask", "scale"))
+expected_types <- list(query = "Tensor", key = "Tensor", value = "Tensor", attn_bias = "Tensor", 
+    compute_log_sumexp = "bool", dropout_p = "double", is_causal = "bool", 
+    return_debug_mask = "bool", scale = "double")
+nd_args <- c("query", "key", "value", "attn_bias", "compute_log_sumexp")
+return_types <- list(list("Tensor", "Tensor", "Tensor", "Tensor", "int64_t", "int64_t",     "Tensor", "Tensor", "Tensor"))
+call_c_function(
+fun_name = '_scaled_dot_product_cudnn_attention',
+args = args,
+expected_types = expected_types,
+nd_args = nd_args,
+return_types = return_types,
+fun_type = 'namespace'
+)
+}
+
+
+#' @rdname torch__scaled_dot_product_cudnn_attention_backward
+torch__scaled_dot_product_cudnn_attention_backward <- function(grad_out, query, key, value, out, logsumexp, philox_seed, philox_offset, attn_bias, cum_seq_q, cum_seq_k, max_q, max_k, dropout_p, is_causal, scale = NULL) {
+  args <- mget(x = c("grad_out", "query", "key", "value", "out", "logsumexp", "philox_seed", "philox_offset", "attn_bias", "cum_seq_q", "cum_seq_k", "max_q", "max_k", "dropout_p", "is_causal", "scale"))
+expected_types <- list(grad_out = "Tensor", query = "Tensor", key = "Tensor", value = "Tensor", 
+    out = "Tensor", logsumexp = "Tensor", philox_seed = "Tensor", 
+    philox_offset = "Tensor", attn_bias = "Tensor", cum_seq_q = "Tensor", 
+    cum_seq_k = "Tensor", max_q = "int64_t", max_k = "int64_t", 
+    dropout_p = "double", is_causal = "bool", scale = "double")
+nd_args <- c("grad_out", "query", "key", "value", "out", "logsumexp", "philox_seed", 
+"philox_offset", "attn_bias", "cum_seq_q", "cum_seq_k", "max_q", 
+"max_k", "dropout_p", "is_causal")
+return_types <- list(list("Tensor", "Tensor", "Tensor"))
+call_c_function(
+fun_name = '_scaled_dot_product_cudnn_attention_backward',
+args = args,
+expected_types = expected_types,
+nd_args = nd_args,
+return_types = return_types,
+fun_type = 'namespace'
+)
+}
+
+
+#' @rdname torch__scaled_dot_product_efficient_attention
+torch__scaled_dot_product_efficient_attention <- function(query, key, value, attn_bias, compute_log_sumexp, dropout_p = 0L, is_causal = FALSE, scale = NULL) {
+  args <- mget(x = c("query", "key", "value", "attn_bias", "compute_log_sumexp", "dropout_p", "is_causal", "scale"))
+expected_types <- list(query = "Tensor", key = "Tensor", value = "Tensor", attn_bias = "Tensor", 
+    compute_log_sumexp = "bool", dropout_p = "double", is_causal = "bool", 
+    scale = "double")
+nd_args <- c("query", "key", "value", "attn_bias", "compute_log_sumexp")
+return_types <- list(list("Tensor", "Tensor", "Tensor", "Tensor"))
 call_c_function(
 fun_name = '_scaled_dot_product_efficient_attention',
 args = args,
@@ -7136,13 +8144,17 @@ fun_type = 'namespace'
 
 
 #' @rdname torch__scaled_dot_product_efficient_attention_backward
-torch__scaled_dot_product_efficient_attention_backward <- function(grad_out_, query, key, value, out, logsumexp, is_causal = FALSE, chunk_grad_outputs = FALSE) {
-  args <- mget(x = c("grad_out_", "query", "key", "value", "out", "logsumexp", "is_causal", "chunk_grad_outputs"))
+torch__scaled_dot_product_efficient_attention_backward <- function(grad_out_, query, key, value, attn_bias, out, logsumexp, philox_seed, philox_offset, dropout_p, grad_input_mask, is_causal = FALSE, scale = NULL) {
+  args <- mget(x = c("grad_out_", "query", "key", "value", "attn_bias", "out", "logsumexp", "philox_seed", "philox_offset", "dropout_p", "grad_input_mask", "is_causal", "scale"))
 expected_types <- list(grad_out_ = "Tensor", query = "Tensor", key = "Tensor", 
-    value = "Tensor", out = "Tensor", logsumexp = "Tensor", is_causal = "bool", 
-    chunk_grad_outputs = "bool")
-nd_args <- c("grad_out_", "query", "key", "value", "out", "logsumexp")
-return_types <- list(list("Tensor", "Tensor", "Tensor"))
+    value = "Tensor", attn_bias = "Tensor", out = "Tensor", logsumexp = "Tensor", 
+    philox_seed = "Tensor", philox_offset = "Tensor", dropout_p = "double", 
+    grad_input_mask = "::std::array<bool,4>", is_causal = "bool", 
+    scale = "double")
+nd_args <- c("grad_out_", "query", "key", "value", "attn_bias", "out", "logsumexp", 
+"philox_seed", "philox_offset", "dropout_p", "grad_input_mask"
+)
+return_types <- list(list("Tensor", "Tensor", "Tensor", "Tensor"))
 call_c_function(
 fun_name = '_scaled_dot_product_efficient_attention_backward',
 args = args,
@@ -7155,12 +8167,12 @@ fun_type = 'namespace'
 
 
 #' @rdname torch__scaled_dot_product_flash_attention
-torch__scaled_dot_product_flash_attention <- function(query, key, value, dropout_p = 0L, is_causal = FALSE, return_debug_mask = FALSE) {
-  args <- mget(x = c("query", "key", "value", "dropout_p", "is_causal", "return_debug_mask"))
+torch__scaled_dot_product_flash_attention <- function(query, key, value, dropout_p = 0L, is_causal = FALSE, return_debug_mask = FALSE, scale = NULL) {
+  args <- mget(x = c("query", "key", "value", "dropout_p", "is_causal", "return_debug_mask", "scale"))
 expected_types <- list(query = "Tensor", key = "Tensor", value = "Tensor", dropout_p = "double", 
-    is_causal = "bool", return_debug_mask = "bool")
+    is_causal = "bool", return_debug_mask = "bool", scale = "double")
 nd_args <- c("query", "key", "value")
-return_types <- list(list("Tensor", "Tensor", "Tensor", "Tensor", "int64_t", "int64_t",     "int64_t", "int64_t", "Tensor"))
+return_types <- list(list("Tensor", "Tensor", "Tensor", "Tensor", "int64_t", "int64_t",     "Tensor", "Tensor", "Tensor"))
 call_c_function(
 fun_name = '_scaled_dot_product_flash_attention',
 args = args,
@@ -7173,19 +8185,138 @@ fun_type = 'namespace'
 
 
 #' @rdname torch__scaled_dot_product_flash_attention_backward
-torch__scaled_dot_product_flash_attention_backward <- function(grad_out, query, key, value, out, logsumexp, cum_seq_q, cum_seq_k, max_q, max_k, dropout_p, is_causal, philox_seed, philox_offset) {
-  args <- mget(x = c("grad_out", "query", "key", "value", "out", "logsumexp", "cum_seq_q", "cum_seq_k", "max_q", "max_k", "dropout_p", "is_causal", "philox_seed", "philox_offset"))
+torch__scaled_dot_product_flash_attention_backward <- function(grad_out, query, key, value, out, logsumexp, cum_seq_q, cum_seq_k, max_q, max_k, dropout_p, is_causal, philox_seed, philox_offset, scale = NULL) {
+  args <- mget(x = c("grad_out", "query", "key", "value", "out", "logsumexp", "cum_seq_q", "cum_seq_k", "max_q", "max_k", "dropout_p", "is_causal", "philox_seed", "philox_offset", "scale"))
 expected_types <- list(grad_out = "Tensor", query = "Tensor", key = "Tensor", value = "Tensor", 
     out = "Tensor", logsumexp = "Tensor", cum_seq_q = "Tensor", 
     cum_seq_k = "Tensor", max_q = "int64_t", max_k = "int64_t", 
-    dropout_p = "double", is_causal = "bool", philox_seed = "int64_t", 
-    philox_offset = "int64_t")
+    dropout_p = "double", is_causal = "bool", philox_seed = "Tensor", 
+    philox_offset = "Tensor", scale = "double")
 nd_args <- c("grad_out", "query", "key", "value", "out", "logsumexp", "cum_seq_q", 
 "cum_seq_k", "max_q", "max_k", "dropout_p", "is_causal", "philox_seed", 
 "philox_offset")
 return_types <- list(list("Tensor", "Tensor", "Tensor"))
 call_c_function(
 fun_name = '_scaled_dot_product_flash_attention_backward',
+args = args,
+expected_types = expected_types,
+nd_args = nd_args,
+return_types = return_types,
+fun_type = 'namespace'
+)
+}
+
+
+#' @rdname torch__scaled_dot_product_flash_attention_for_cpu
+torch__scaled_dot_product_flash_attention_for_cpu <- function(query, key, value, dropout_p = 0L, is_causal = FALSE, attn_mask = list(), scale = NULL) {
+  args <- mget(x = c("query", "key", "value", "dropout_p", "is_causal", "attn_mask", "scale"))
+expected_types <- list(query = "Tensor", key = "Tensor", value = "Tensor", dropout_p = "double", 
+    is_causal = "bool", attn_mask = "Tensor", scale = "double")
+nd_args <- c("query", "key", "value")
+return_types <- list(list("Tensor", "Tensor"))
+call_c_function(
+fun_name = '_scaled_dot_product_flash_attention_for_cpu',
+args = args,
+expected_types = expected_types,
+nd_args = nd_args,
+return_types = return_types,
+fun_type = 'namespace'
+)
+}
+
+
+#' @rdname torch__scaled_dot_product_flash_attention_for_cpu_backward
+torch__scaled_dot_product_flash_attention_for_cpu_backward <- function(grad_out, query, key, value, out, logsumexp, dropout_p, is_causal, attn_mask = list(), scale = NULL) {
+  args <- mget(x = c("grad_out", "query", "key", "value", "out", "logsumexp", "dropout_p", "is_causal", "attn_mask", "scale"))
+expected_types <- list(grad_out = "Tensor", query = "Tensor", key = "Tensor", value = "Tensor", 
+    out = "Tensor", logsumexp = "Tensor", dropout_p = "double", 
+    is_causal = "bool", attn_mask = "Tensor", scale = "double")
+nd_args <- c("grad_out", "query", "key", "value", "out", "logsumexp", "dropout_p", 
+"is_causal")
+return_types <- list(list("Tensor", "Tensor", "Tensor"))
+call_c_function(
+fun_name = '_scaled_dot_product_flash_attention_for_cpu_backward',
+args = args,
+expected_types = expected_types,
+nd_args = nd_args,
+return_types = return_types,
+fun_type = 'namespace'
+)
+}
+
+
+#' @rdname torch__scaled_dot_product_fused_attention_overrideable
+torch__scaled_dot_product_fused_attention_overrideable <- function(query, key, value, attn_bias = list(), dropout_p = 0L, is_causal = FALSE, return_debug_mask = FALSE, scale = NULL) {
+  args <- mget(x = c("query", "key", "value", "attn_bias", "dropout_p", "is_causal", "return_debug_mask", "scale"))
+expected_types <- list(query = "Tensor", key = "Tensor", value = "Tensor", attn_bias = "Tensor", 
+    dropout_p = "double", is_causal = "bool", return_debug_mask = "bool", 
+    scale = "double")
+nd_args <- c("query", "key", "value")
+return_types <- list(list("Tensor", "Tensor", "Tensor", "Tensor", "int64_t", "int64_t",     "Tensor", "Tensor", "Tensor"))
+call_c_function(
+fun_name = '_scaled_dot_product_fused_attention_overrideable',
+args = args,
+expected_types = expected_types,
+nd_args = nd_args,
+return_types = return_types,
+fun_type = 'namespace'
+)
+}
+
+
+#' @rdname torch__scaled_dot_product_fused_attention_overrideable_backward
+torch__scaled_dot_product_fused_attention_overrideable_backward <- function(grad_out, query, key, value, attn_bias, grad_input_mask, out, logsumexp, cum_seq_q, cum_seq_k, max_q, max_k, dropout_p, is_causal, philox_seed, philox_offset, scale = NULL) {
+  args <- mget(x = c("grad_out", "query", "key", "value", "attn_bias", "grad_input_mask", "out", "logsumexp", "cum_seq_q", "cum_seq_k", "max_q", "max_k", "dropout_p", "is_causal", "philox_seed", "philox_offset", "scale"))
+expected_types <- list(grad_out = "Tensor", query = "Tensor", key = "Tensor", value = "Tensor", 
+    attn_bias = "Tensor", grad_input_mask = "::std::array<bool,4>", 
+    out = "Tensor", logsumexp = "Tensor", cum_seq_q = "Tensor", 
+    cum_seq_k = "Tensor", max_q = "int64_t", max_k = "int64_t", 
+    dropout_p = "double", is_causal = "bool", philox_seed = "Tensor", 
+    philox_offset = "Tensor", scale = "double")
+nd_args <- c("grad_out", "query", "key", "value", "attn_bias", "grad_input_mask", 
+"out", "logsumexp", "cum_seq_q", "cum_seq_k", "max_q", "max_k", 
+"dropout_p", "is_causal", "philox_seed", "philox_offset")
+return_types <- list(list("Tensor", "Tensor", "Tensor", "Tensor"))
+call_c_function(
+fun_name = '_scaled_dot_product_fused_attention_overrideable_backward',
+args = args,
+expected_types = expected_types,
+nd_args = nd_args,
+return_types = return_types,
+fun_type = 'namespace'
+)
+}
+
+
+#' @rdname torch__scaled_mm
+torch__scaled_mm <- function(self, mat2, scale_a, scale_b, bias = list(), scale_result = list(), out_dtype = NULL, use_fast_accum = FALSE) {
+  args <- mget(x = c("self", "mat2", "scale_a", "scale_b", "bias", "scale_result", "out_dtype", "use_fast_accum"))
+expected_types <- list(self = "Tensor", mat2 = "Tensor", scale_a = "Tensor", scale_b = "Tensor", 
+    bias = "Tensor", scale_result = "Tensor", out_dtype = "ScalarType", 
+    use_fast_accum = "bool")
+nd_args <- c("self", "mat2", "scale_a", "scale_b")
+return_types <- list(list('Tensor'))
+call_c_function(
+fun_name = '_scaled_mm',
+args = args,
+expected_types = expected_types,
+nd_args = nd_args,
+return_types = return_types,
+fun_type = 'namespace'
+)
+}
+
+
+#' @rdname torch__scaled_mm_out
+torch__scaled_mm_out <- function(out, self, mat2, scale_a, scale_b, bias = list(), scale_result = list(), out_dtype = NULL, use_fast_accum = FALSE) {
+  args <- mget(x = c("out", "self", "mat2", "scale_a", "scale_b", "bias", "scale_result", "out_dtype", "use_fast_accum"))
+expected_types <- list(out = "Tensor", self = "Tensor", mat2 = "Tensor", scale_a = "Tensor", 
+    scale_b = "Tensor", bias = "Tensor", scale_result = "Tensor", 
+    out_dtype = "ScalarType", use_fast_accum = "bool")
+nd_args <- c("out", "self", "mat2", "scale_a", "scale_b")
+return_types <- list(list('Tensor'))
+call_c_function(
+fun_name = '_scaled_mm_out',
 args = args,
 expected_types = expected_types,
 nd_args = nd_args,
@@ -7613,11 +8744,30 @@ fun_type = 'namespace'
 }
 
 
+#' @rdname torch__sparse_compressed_tensor_with_dims
+torch__sparse_compressed_tensor_with_dims <- function(nnz, dense_dim, size, blocksize, index_dtype, options) {
+  args <- mget(x = c("nnz", "dense_dim", "size", "blocksize", "index_dtype", "options"))
+expected_types <- list(nnz = "int64_t", dense_dim = "int64_t", size = "IntArrayRef", 
+    blocksize = "IntArrayRef", index_dtype = "ScalarType", options = "TensorOptions")
+nd_args <- c("nnz", "dense_dim", "size", "blocksize", "index_dtype", "options"
+)
+return_types <- list(list('Tensor'))
+call_c_function(
+fun_name = '_sparse_compressed_tensor_with_dims',
+args = args,
+expected_types = expected_types,
+nd_args = nd_args,
+return_types = return_types,
+fun_type = 'namespace'
+)
+}
+
+
 #' @rdname torch__sparse_coo_tensor_unsafe
-torch__sparse_coo_tensor_unsafe <- function(indices, values, size, options = list()) {
-  args <- mget(x = c("indices", "values", "size", "options"))
+torch__sparse_coo_tensor_unsafe <- function(indices, values, size, options = list(), is_coalesced = NULL) {
+  args <- mget(x = c("indices", "values", "size", "options", "is_coalesced"))
 expected_types <- list(indices = "Tensor", values = "Tensor", size = "IntArrayRef", 
-    options = "TensorOptions")
+    options = "TensorOptions", is_coalesced = "bool")
 nd_args <- c("indices", "values", "size")
 return_types <- list(list('Tensor'))
 call_c_function(
@@ -7650,10 +8800,11 @@ fun_type = 'namespace'
 
 
 #' @rdname torch__sparse_coo_tensor_with_dims_and_tensors
-torch__sparse_coo_tensor_with_dims_and_tensors <- function(sparse_dim, dense_dim, size, indices, values, options) {
-  args <- mget(x = c("sparse_dim", "dense_dim", "size", "indices", "values", "options"))
+torch__sparse_coo_tensor_with_dims_and_tensors <- function(sparse_dim, dense_dim, size, indices, values, options, is_coalesced = NULL) {
+  args <- mget(x = c("sparse_dim", "dense_dim", "size", "indices", "values", "options", "is_coalesced"))
 expected_types <- list(sparse_dim = "int64_t", dense_dim = "int64_t", size = "IntArrayRef", 
-    indices = "Tensor", values = "Tensor", options = "TensorOptions")
+    indices = "Tensor", values = "Tensor", options = "TensorOptions", 
+    is_coalesced = "bool")
 nd_args <- c("sparse_dim", "dense_dim", "size", "indices", "values", "options"
 )
 return_types <- list(list('Tensor'))
@@ -7669,10 +8820,11 @@ fun_type = 'namespace'
 
 
 #' @rdname torch__sparse_coo_tensor_with_dims_and_tensors_out
-torch__sparse_coo_tensor_with_dims_and_tensors_out <- function(out, sparse_dim, dense_dim, size, indices, values) {
-  args <- mget(x = c("out", "sparse_dim", "dense_dim", "size", "indices", "values"))
+torch__sparse_coo_tensor_with_dims_and_tensors_out <- function(out, sparse_dim, dense_dim, size, indices, values, is_coalesced = NULL) {
+  args <- mget(x = c("out", "sparse_dim", "dense_dim", "size", "indices", "values", "is_coalesced"))
 expected_types <- list(out = "Tensor", sparse_dim = "int64_t", dense_dim = "int64_t", 
-    size = "IntArrayRef", indices = "Tensor", values = "Tensor")
+    size = "IntArrayRef", indices = "Tensor", values = "Tensor", 
+    is_coalesced = "bool")
 nd_args <- c("out", "sparse_dim", "dense_dim", "size", "indices", "values"
 )
 return_types <- list(list('Tensor'))
@@ -7884,6 +9036,23 @@ fun_type = 'namespace'
 }
 
 
+#' @rdname torch__sparse_mask_projection_out
+torch__sparse_mask_projection_out <- function(out, self, mask, accumulate_matches = FALSE) {
+  args <- mget(x = c("out", "self", "mask", "accumulate_matches"))
+expected_types <- list(out = "Tensor", self = "Tensor", mask = "Tensor", accumulate_matches = "bool")
+nd_args <- c("out", "self", "mask")
+return_types <- list(list('Tensor'))
+call_c_function(
+fun_name = '_sparse_mask_projection_out',
+args = args,
+expected_types = expected_types,
+nd_args = nd_args,
+return_types = return_types,
+fun_type = 'namespace'
+)
+}
+
+
 #' @rdname torch__sparse_mm
 torch__sparse_mm <- function(sparse, dense, reduce) {
   args <- mget(x = c("sparse", "dense", "reduce"))
@@ -7928,6 +9097,111 @@ nd_args <- c("self", "grad_out", "weight", "reduce", "arg_out", "output_mask"
 return_types <- list(list("Tensor", "Tensor"))
 call_c_function(
 fun_name = '_sparse_mm_reduce_impl_backward',
+args = args,
+expected_types = expected_types,
+nd_args = nd_args,
+return_types = return_types,
+fun_type = 'namespace'
+)
+}
+
+
+#' @rdname torch__sparse_semi_structured_addmm
+torch__sparse_semi_structured_addmm <- function(input, mat1, mat1_meta, mat2, alpha = 1L, beta = 1L, out_dtype = NULL) {
+  args <- mget(x = c("input", "mat1", "mat1_meta", "mat2", "alpha", "beta", "out_dtype"))
+expected_types <- list(input = "Tensor", mat1 = "Tensor", mat1_meta = "Tensor", 
+    mat2 = "Tensor", alpha = "Scalar", beta = "Scalar", out_dtype = "ScalarType")
+nd_args <- c("input", "mat1", "mat1_meta", "mat2")
+return_types <- list(list('Tensor'))
+call_c_function(
+fun_name = '_sparse_semi_structured_addmm',
+args = args,
+expected_types = expected_types,
+nd_args = nd_args,
+return_types = return_types,
+fun_type = 'namespace'
+)
+}
+
+
+#' @rdname torch__sparse_semi_structured_apply
+torch__sparse_semi_structured_apply <- function(input, thread_masks) {
+  args <- mget(x = c("input", "thread_masks"))
+expected_types <- list(input = "Tensor", thread_masks = "Tensor")
+nd_args <- c("input", "thread_masks")
+return_types <- list(list("Tensor", "Tensor"))
+call_c_function(
+fun_name = '_sparse_semi_structured_apply',
+args = args,
+expected_types = expected_types,
+nd_args = nd_args,
+return_types = return_types,
+fun_type = 'namespace'
+)
+}
+
+
+#' @rdname torch__sparse_semi_structured_apply_dense
+torch__sparse_semi_structured_apply_dense <- function(input, thread_masks) {
+  args <- mget(x = c("input", "thread_masks"))
+expected_types <- list(input = "Tensor", thread_masks = "Tensor")
+nd_args <- c("input", "thread_masks")
+return_types <- list(list('Tensor'))
+call_c_function(
+fun_name = '_sparse_semi_structured_apply_dense',
+args = args,
+expected_types = expected_types,
+nd_args = nd_args,
+return_types = return_types,
+fun_type = 'namespace'
+)
+}
+
+
+#' @rdname torch__sparse_semi_structured_linear
+torch__sparse_semi_structured_linear <- function(input, weight, meta, bias = list(), activation = NULL, out_dtype = NULL) {
+  args <- mget(x = c("input", "weight", "meta", "bias", "activation", "out_dtype"))
+expected_types <- list(input = "Tensor", weight = "Tensor", meta = "Tensor", bias = "Tensor", 
+    activation = "c10::string_view", out_dtype = "ScalarType")
+nd_args <- c("input", "weight", "meta")
+return_types <- list(list('Tensor'))
+call_c_function(
+fun_name = '_sparse_semi_structured_linear',
+args = args,
+expected_types = expected_types,
+nd_args = nd_args,
+return_types = return_types,
+fun_type = 'namespace'
+)
+}
+
+
+#' @rdname torch__sparse_semi_structured_mm
+torch__sparse_semi_structured_mm <- function(mat1, mat1_meta, mat2, out_dtype = NULL) {
+  args <- mget(x = c("mat1", "mat1_meta", "mat2", "out_dtype"))
+expected_types <- list(mat1 = "Tensor", mat1_meta = "Tensor", mat2 = "Tensor", 
+    out_dtype = "ScalarType")
+nd_args <- c("mat1", "mat1_meta", "mat2")
+return_types <- list(list('Tensor'))
+call_c_function(
+fun_name = '_sparse_semi_structured_mm',
+args = args,
+expected_types = expected_types,
+nd_args = nd_args,
+return_types = return_types,
+fun_type = 'namespace'
+)
+}
+
+
+#' @rdname torch__sparse_semi_structured_tile
+torch__sparse_semi_structured_tile <- function(input, algorithm = "", use_cutlass = TRUE) {
+  args <- mget(x = c("input", "algorithm", "use_cutlass"))
+expected_types <- list(input = "Tensor", algorithm = "c10::string_view", use_cutlass = "bool")
+nd_args <- "input"
+return_types <- list(list("Tensor", "Tensor", "Tensor", "Tensor", "Tensor"))
+call_c_function(
+fun_name = '_sparse_semi_structured_tile',
 args = args,
 expected_types = expected_types,
 nd_args = nd_args,
@@ -8146,6 +9420,23 @@ fun_type = 'namespace'
 }
 
 
+#' @rdname torch__spsolve
+torch__spsolve <- function(A, B, left = TRUE) {
+  args <- mget(x = c("A", "B", "left"))
+expected_types <- list(A = "Tensor", B = "Tensor", left = "bool")
+nd_args <- c("A", "B")
+return_types <- list(list('Tensor'))
+call_c_function(
+fun_name = '_spsolve',
+args = args,
+expected_types = expected_types,
+nd_args = nd_args,
+return_types = return_types,
+fun_type = 'namespace'
+)
+}
+
+
 #' @rdname torch__stack
 torch__stack <- function(tensors, dim = 1L) {
   args <- mget(x = c("tensors", "dim"))
@@ -8350,6 +9641,40 @@ fun_type = 'namespace'
 }
 
 
+#' @rdname torch__test_functorch_fallback
+torch__test_functorch_fallback <- function(self, other) {
+  args <- mget(x = c("self", "other"))
+expected_types <- list(self = "Tensor", other = "Tensor")
+nd_args <- c("self", "other")
+return_types <- list(list('Tensor'))
+call_c_function(
+fun_name = '_test_functorch_fallback',
+args = args,
+expected_types = expected_types,
+nd_args = nd_args,
+return_types = return_types,
+fun_type = 'namespace'
+)
+}
+
+
+#' @rdname torch__test_functorch_fallback_out
+torch__test_functorch_fallback_out <- function(out, self, other) {
+  args <- mget(x = c("out", "self", "other"))
+expected_types <- list(out = "Tensor", self = "Tensor", other = "Tensor")
+nd_args <- c("out", "self", "other")
+return_types <- list(list('Tensor'))
+call_c_function(
+fun_name = '_test_functorch_fallback_out',
+args = args,
+expected_types = expected_types,
+nd_args = nd_args,
+return_types = return_types,
+fun_type = 'namespace'
+)
+}
+
+
 #' @rdname torch__test_optional_filled_intlist
 torch__test_optional_filled_intlist <- function(values, addends) {
   args <- mget(x = c("values", "addends"))
@@ -8443,6 +9768,23 @@ nd_args <- c("out", "values", "addends")
 return_types <- list(list('Tensor'))
 call_c_function(
 fun_name = '_test_optional_intlist_out',
+args = args,
+expected_types = expected_types,
+nd_args = nd_args,
+return_types = return_types,
+fun_type = 'namespace'
+)
+}
+
+
+#' @rdname torch__test_parallel_materialize
+torch__test_parallel_materialize <- function(self, num_parallel, skip_first = FALSE) {
+  args <- mget(x = c("self", "num_parallel", "skip_first"))
+expected_types <- list(self = "Tensor", num_parallel = "int64_t", skip_first = "bool")
+nd_args <- c("self", "num_parallel")
+return_types <- list(list('Tensor'))
+call_c_function(
+fun_name = '_test_parallel_materialize',
 args = args,
 expected_types = expected_types,
 nd_args = nd_args,
@@ -8764,13 +10106,118 @@ fun_type = 'namespace'
 
 
 #' @rdname torch__to_dense_out
-torch__to_dense_out <- function(out, self, dtype = NULL) {
-  args <- mget(x = c("out", "self", "dtype"))
-expected_types <- list(out = "Tensor", self = "Tensor", dtype = "ScalarType")
+torch__to_dense_out <- function(out, self, dtype = NULL, masked_grad = NULL) {
+  args <- mget(x = c("out", "self", "dtype", "masked_grad"))
+expected_types <- list(out = "Tensor", self = "Tensor", dtype = "ScalarType", masked_grad = "bool")
 nd_args <- c("out", "self")
 return_types <- list(list('Tensor'))
 call_c_function(
 fun_name = '_to_dense_out',
+args = args,
+expected_types = expected_types,
+nd_args = nd_args,
+return_types = return_types,
+fun_type = 'namespace'
+)
+}
+
+
+#' @rdname torch__to_sparse_bsc_out
+torch__to_sparse_bsc_out <- function(out, self, blocksize, dense_dim = NULL) {
+  args <- mget(x = c("out", "self", "blocksize", "dense_dim"))
+expected_types <- list(out = "Tensor", self = "Tensor", blocksize = "IntArrayRef", 
+    dense_dim = "int64_t")
+nd_args <- c("out", "self", "blocksize")
+return_types <- list(list('Tensor'))
+call_c_function(
+fun_name = '_to_sparse_bsc_out',
+args = args,
+expected_types = expected_types,
+nd_args = nd_args,
+return_types = return_types,
+fun_type = 'namespace'
+)
+}
+
+
+#' @rdname torch__to_sparse_bsr_out
+torch__to_sparse_bsr_out <- function(out, self, blocksize, dense_dim = NULL) {
+  args <- mget(x = c("out", "self", "blocksize", "dense_dim"))
+expected_types <- list(out = "Tensor", self = "Tensor", blocksize = "IntArrayRef", 
+    dense_dim = "int64_t")
+nd_args <- c("out", "self", "blocksize")
+return_types <- list(list('Tensor'))
+call_c_function(
+fun_name = '_to_sparse_bsr_out',
+args = args,
+expected_types = expected_types,
+nd_args = nd_args,
+return_types = return_types,
+fun_type = 'namespace'
+)
+}
+
+
+#' @rdname torch__to_sparse_csc_out
+torch__to_sparse_csc_out <- function(out, self, dense_dim = NULL) {
+  args <- mget(x = c("out", "self", "dense_dim"))
+expected_types <- list(out = "Tensor", self = "Tensor", dense_dim = "int64_t")
+nd_args <- c("out", "self")
+return_types <- list(list('Tensor'))
+call_c_function(
+fun_name = '_to_sparse_csc_out',
+args = args,
+expected_types = expected_types,
+nd_args = nd_args,
+return_types = return_types,
+fun_type = 'namespace'
+)
+}
+
+
+#' @rdname torch__to_sparse_csr_out
+torch__to_sparse_csr_out <- function(out, self, dense_dim = NULL) {
+  args <- mget(x = c("out", "self", "dense_dim"))
+expected_types <- list(out = "Tensor", self = "Tensor", dense_dim = "int64_t")
+nd_args <- c("out", "self")
+return_types <- list(list('Tensor'))
+call_c_function(
+fun_name = '_to_sparse_csr_out',
+args = args,
+expected_types = expected_types,
+nd_args = nd_args,
+return_types = return_types,
+fun_type = 'namespace'
+)
+}
+
+
+#' @rdname torch__to_sparse_out
+torch__to_sparse_out <- function(out, self, layout = NULL, sparse_dim, blocksize = NULL, dense_dim = NULL) {
+  args <- mget(x = c("out", "self", "layout", "sparse_dim", "blocksize", "dense_dim"))
+expected_types <- list(out = "Tensor", self = "Tensor", layout = "Layout", sparse_dim = "int64_t", 
+    blocksize = "IntArrayRef", dense_dim = "int64_t")
+nd_args <- c("out", "self", "sparse_dim")
+return_types <- list(list('Tensor'))
+call_c_function(
+fun_name = '_to_sparse_out',
+args = args,
+expected_types = expected_types,
+nd_args = nd_args,
+return_types = return_types,
+fun_type = 'namespace'
+)
+}
+
+
+#' @rdname torch__to_sparse_semi_structured
+torch__to_sparse_semi_structured <- function(dense) {
+  args <- mget(x = c("dense"))
+expected_types <- list(dense = "Tensor")
+nd_args <- "dense"
+return_types <- list(list("Tensor", "Tensor"))
+call_c_function(
+fun_name = '_to_sparse_semi_structured',
 args = args,
 expected_types = expected_types,
 nd_args = nd_args,
@@ -8806,59 +10253,6 @@ nd_args <- c("out0", "out1", "out2", "qkv", "qkv_bias", "num_heads")
 return_types <- list(list("Tensor", "Tensor", "Tensor"))
 call_c_function(
 fun_name = '_transform_bias_rescale_qkv_out',
-args = args,
-expected_types = expected_types,
-nd_args = nd_args,
-return_types = return_types,
-fun_type = 'namespace'
-)
-}
-
-
-#' @rdname torch__transformer_decoder_only_layer_fwd
-torch__transformer_decoder_only_layer_fwd <- function(src, embed_dim, num_heads, qkv_weight, qkv_bias, proj_weight, proj_bias, use_gelu, norm_first, eps, norm_weight_1, norm_bias_1, norm_weight_2, norm_bias_2, ffn_weight_1, ffn_bias_1, ffn_weight_2, ffn_bias_2, mask = list(), incr_key = list(), incr_value = list()) {
-  args <- mget(x = c("src", "embed_dim", "num_heads", "qkv_weight", "qkv_bias", "proj_weight", "proj_bias", "use_gelu", "norm_first", "eps", "norm_weight_1", "norm_bias_1", "norm_weight_2", "norm_bias_2", "ffn_weight_1", "ffn_bias_1", "ffn_weight_2", "ffn_bias_2", "mask", "incr_key", "incr_value"))
-expected_types <- list(src = "Tensor", embed_dim = "int64_t", num_heads = "int64_t", 
-    qkv_weight = "Tensor", qkv_bias = "Tensor", proj_weight = "Tensor", 
-    proj_bias = "Tensor", use_gelu = "bool", norm_first = "bool", 
-    eps = "double", norm_weight_1 = "Tensor", norm_bias_1 = "Tensor", 
-    norm_weight_2 = "Tensor", norm_bias_2 = "Tensor", ffn_weight_1 = "Tensor", 
-    ffn_bias_1 = "Tensor", ffn_weight_2 = "Tensor", ffn_bias_2 = "Tensor", 
-    mask = "Tensor", incr_key = "Tensor", incr_value = "Tensor")
-nd_args <- c("src", "embed_dim", "num_heads", "qkv_weight", "qkv_bias", 
-"proj_weight", "proj_bias", "use_gelu", "norm_first", "eps", 
-"norm_weight_1", "norm_bias_1", "norm_weight_2", "norm_bias_2", 
-"ffn_weight_1", "ffn_bias_1", "ffn_weight_2", "ffn_bias_2")
-return_types <- list(list("Tensor", "Tensor", "Tensor"))
-call_c_function(
-fun_name = '_transformer_decoder_only_layer_fwd',
-args = args,
-expected_types = expected_types,
-nd_args = nd_args,
-return_types = return_types,
-fun_type = 'namespace'
-)
-}
-
-
-#' @rdname torch__transformer_decoder_only_layer_fwd_out
-torch__transformer_decoder_only_layer_fwd_out <- function(out0, out1, out2, src, embed_dim, num_heads, qkv_weight, qkv_bias, proj_weight, proj_bias, use_gelu, norm_first, eps, norm_weight_1, norm_bias_1, norm_weight_2, norm_bias_2, ffn_weight_1, ffn_bias_1, ffn_weight_2, ffn_bias_2, mask = list(), incr_key = list(), incr_value = list()) {
-  args <- mget(x = c("out0", "out1", "out2", "src", "embed_dim", "num_heads", "qkv_weight", "qkv_bias", "proj_weight", "proj_bias", "use_gelu", "norm_first", "eps", "norm_weight_1", "norm_bias_1", "norm_weight_2", "norm_bias_2", "ffn_weight_1", "ffn_bias_1", "ffn_weight_2", "ffn_bias_2", "mask", "incr_key", "incr_value"))
-expected_types <- list(out0 = "Tensor", out1 = "Tensor", out2 = "Tensor", src = "Tensor", 
-    embed_dim = "int64_t", num_heads = "int64_t", qkv_weight = "Tensor", 
-    qkv_bias = "Tensor", proj_weight = "Tensor", proj_bias = "Tensor", 
-    use_gelu = "bool", norm_first = "bool", eps = "double", norm_weight_1 = "Tensor", 
-    norm_bias_1 = "Tensor", norm_weight_2 = "Tensor", norm_bias_2 = "Tensor", 
-    ffn_weight_1 = "Tensor", ffn_bias_1 = "Tensor", ffn_weight_2 = "Tensor", 
-    ffn_bias_2 = "Tensor", mask = "Tensor", incr_key = "Tensor", 
-    incr_value = "Tensor")
-nd_args <- c("out0", "out1", "out2", "src", "embed_dim", "num_heads", "qkv_weight", 
-"qkv_bias", "proj_weight", "proj_bias", "use_gelu", "norm_first", 
-"eps", "norm_weight_1", "norm_bias_1", "norm_weight_2", "norm_bias_2", 
-"ffn_weight_1", "ffn_bias_1", "ffn_weight_2", "ffn_bias_2")
-return_types <- list(list("Tensor", "Tensor", "Tensor"))
-call_c_function(
-fun_name = '_transformer_decoder_only_layer_fwd_out',
 args = args,
 expected_types = expected_types,
 nd_args = nd_args,
@@ -9115,6 +10509,77 @@ nd_args <- c("dual", "level")
 return_types <- list(list("Tensor", "Tensor"))
 call_c_function(
 fun_name = '_unpack_dual',
+args = args,
+expected_types = expected_types,
+nd_args = nd_args,
+return_types = return_types,
+fun_type = 'namespace'
+)
+}
+
+
+#' @rdname torch__unsafe_index
+torch__unsafe_index <- function(self, indices) {
+  args <- mget(x = c("self", "indices"))
+expected_types <- list(self = "Tensor", indices = "const c10::List<::std::optional<Tensor>> &")
+nd_args <- c("self", "indices")
+return_types <- list(list('Tensor'))
+call_c_function(
+fun_name = '_unsafe_index',
+args = args,
+expected_types = expected_types,
+nd_args = nd_args,
+return_types = return_types,
+fun_type = 'namespace'
+)
+}
+
+
+#' @rdname torch__unsafe_index_put
+torch__unsafe_index_put <- function(self, indices, values, accumulate = FALSE) {
+  args <- mget(x = c("self", "indices", "values", "accumulate"))
+expected_types <- list(self = "Tensor", indices = "const c10::List<::std::optional<Tensor>> &", 
+    values = "Tensor", accumulate = "bool")
+nd_args <- c("self", "indices", "values")
+return_types <- list(list('Tensor'))
+call_c_function(
+fun_name = '_unsafe_index_put',
+args = args,
+expected_types = expected_types,
+nd_args = nd_args,
+return_types = return_types,
+fun_type = 'namespace'
+)
+}
+
+
+#' @rdname torch__unsafe_masked_index
+torch__unsafe_masked_index <- function(self, mask, indices, fill) {
+  args <- mget(x = c("self", "mask", "indices", "fill"))
+expected_types <- list(self = "Tensor", mask = "Tensor", indices = "const c10::List<::std::optional<Tensor>> &", 
+    fill = "Scalar")
+nd_args <- c("self", "mask", "indices", "fill")
+return_types <- list(list('Tensor'))
+call_c_function(
+fun_name = '_unsafe_masked_index',
+args = args,
+expected_types = expected_types,
+nd_args = nd_args,
+return_types = return_types,
+fun_type = 'namespace'
+)
+}
+
+
+#' @rdname torch__unsafe_masked_index_put_accumulate
+torch__unsafe_masked_index_put_accumulate <- function(self, mask, indices, values) {
+  args <- mget(x = c("self", "mask", "indices", "values"))
+expected_types <- list(self = "Tensor", mask = "Tensor", indices = "const c10::List<::std::optional<Tensor>> &", 
+    values = "Tensor")
+nd_args <- c("self", "mask", "indices", "values")
+return_types <- list(list('Tensor'))
+call_c_function(
+fun_name = '_unsafe_masked_index_put_accumulate',
 args = args,
 expected_types = expected_types,
 nd_args = nd_args,
@@ -9625,9 +11090,10 @@ fun_type = 'namespace'
 
 
 #' @rdname torch__validate_sparse_coo_tensor_args
-torch__validate_sparse_coo_tensor_args <- function(indices, values, size) {
-  args <- mget(x = c("indices", "values", "size"))
-expected_types <- list(indices = "Tensor", values = "Tensor", size = "IntArrayRef")
+torch__validate_sparse_coo_tensor_args <- function(indices, values, size, is_coalesced = NULL) {
+  args <- mget(x = c("indices", "values", "size", "is_coalesced"))
+expected_types <- list(indices = "Tensor", values = "Tensor", size = "IntArrayRef", 
+    is_coalesced = "bool")
 nd_args <- c("indices", "values", "size")
 return_types <- list(list("void"))
 call_c_function(
@@ -9702,6 +11168,41 @@ nd_args <- c("out", "self")
 return_types <- list(list('Tensor'))
 call_c_function(
 fun_name = '_values_copy_out',
+args = args,
+expected_types = expected_types,
+nd_args = nd_args,
+return_types = return_types,
+fun_type = 'namespace'
+)
+}
+
+
+#' @rdname torch__weight_int4pack_mm
+torch__weight_int4pack_mm <- function(self, mat2, qGroupSize, qScaleAndZeros) {
+  args <- mget(x = c("self", "mat2", "qGroupSize", "qScaleAndZeros"))
+expected_types <- list(self = "Tensor", mat2 = "Tensor", qGroupSize = "int64_t", 
+    qScaleAndZeros = "Tensor")
+nd_args <- c("self", "mat2", "qGroupSize", "qScaleAndZeros")
+return_types <- list(list('Tensor'))
+call_c_function(
+fun_name = '_weight_int4pack_mm',
+args = args,
+expected_types = expected_types,
+nd_args = nd_args,
+return_types = return_types,
+fun_type = 'namespace'
+)
+}
+
+
+#' @rdname torch__weight_int8pack_mm
+torch__weight_int8pack_mm <- function(self, mat2, scales) {
+  args <- mget(x = c("self", "mat2", "scales"))
+expected_types <- list(self = "Tensor", mat2 = "Tensor", scales = "Tensor")
+nd_args <- c("self", "mat2", "scales")
+return_types <- list(list('Tensor'))
+call_c_function(
+fun_name = '_weight_int8pack_mm',
 args = args,
 expected_types = expected_types,
 nd_args = nd_args,
@@ -9809,6 +11310,44 @@ nd_args <- c("out0", "out1", "v", "g")
 return_types <- list(list("Tensor", "Tensor"))
 call_c_function(
 fun_name = '_weight_norm_interface_out',
+args = args,
+expected_types = expected_types,
+nd_args = nd_args,
+return_types = return_types,
+fun_type = 'namespace'
+)
+}
+
+
+#' @rdname torch__wrapped_linear_prepack
+torch__wrapped_linear_prepack <- function(weight, weight_scale, weight_zero_point, bias) {
+  args <- mget(x = c("weight", "weight_scale", "weight_zero_point", "bias"))
+expected_types <- list(weight = "Tensor", weight_scale = "Tensor", weight_zero_point = "Tensor", 
+    bias = "Tensor")
+nd_args <- c("weight", "weight_scale", "weight_zero_point", "bias")
+return_types <- list(list('Tensor'))
+call_c_function(
+fun_name = '_wrapped_linear_prepack',
+args = args,
+expected_types = expected_types,
+nd_args = nd_args,
+return_types = return_types,
+fun_type = 'namespace'
+)
+}
+
+
+#' @rdname torch__wrapped_quantized_linear_prepacked
+torch__wrapped_quantized_linear_prepacked <- function(input, input_scale, input_zero_point, packed_weight, output_scale, output_zero_point, out_channel) {
+  args <- mget(x = c("input", "input_scale", "input_zero_point", "packed_weight", "output_scale", "output_zero_point", "out_channel"))
+expected_types <- list(input = "Tensor", input_scale = "Tensor", input_zero_point = "Tensor", 
+    packed_weight = "Tensor", output_scale = "Tensor", output_zero_point = "Tensor", 
+    out_channel = "int64_t")
+nd_args <- c("input", "input_scale", "input_zero_point", "packed_weight", 
+"output_scale", "output_zero_point", "out_channel")
+return_types <- list(list('Tensor'))
+call_c_function(
+fun_name = '_wrapped_quantized_linear_prepacked',
 args = args,
 expected_types = expected_types,
 nd_args = nd_args,
@@ -10669,9 +12208,10 @@ fun_type = 'namespace'
 
 
 #' @rdname torch_all
-torch_all <- function(self, dim, keepdim = FALSE) {
+torch_all <- function(self, dim = NULL, keepdim = FALSE) {
   args <- mget(x = c("self", "dim", "keepdim"))
-expected_types <- list(self = "Tensor", dim = c("int64_t", "Dimname"), keepdim = "bool")
+expected_types <- list(self = "Tensor", dim = c("int64_t", "IntArrayRef", "Dimname"
+), keepdim = "bool")
 nd_args <- c("self", "dim")
 return_types <- list(list('Tensor'))
 call_c_function(
@@ -10686,10 +12226,10 @@ fun_type = 'namespace'
 
 
 #' @rdname torch_all_out
-torch_all_out <- function(out, self, dim, keepdim = FALSE) {
+torch_all_out <- function(out, self, dim = NULL, keepdim = FALSE) {
   args <- mget(x = c("out", "self", "dim", "keepdim"))
-expected_types <- list(out = "Tensor", self = "Tensor", dim = c("int64_t", "Dimname"
-), keepdim = "bool")
+expected_types <- list(out = "Tensor", self = "Tensor", dim = c("int64_t", "IntArrayRef", 
+"Dimname"), keepdim = "bool")
 nd_args <- c("out", "self", "dim")
 return_types <- list(list('Tensor'))
 call_c_function(
@@ -10893,9 +12433,10 @@ fun_type = 'namespace'
 
 
 #' @rdname torch_any
-torch_any <- function(self, dim, keepdim = FALSE) {
+torch_any <- function(self, dim = NULL, keepdim = FALSE) {
   args <- mget(x = c("self", "dim", "keepdim"))
-expected_types <- list(self = "Tensor", dim = c("int64_t", "Dimname"), keepdim = "bool")
+expected_types <- list(self = "Tensor", dim = c("int64_t", "IntArrayRef", "Dimname"
+), keepdim = "bool")
 nd_args <- c("self", "dim")
 return_types <- list(list('Tensor'))
 call_c_function(
@@ -10910,10 +12451,10 @@ fun_type = 'namespace'
 
 
 #' @rdname torch_any_out
-torch_any_out <- function(out, self, dim, keepdim = FALSE) {
+torch_any_out <- function(out, self, dim = NULL, keepdim = FALSE) {
   args <- mget(x = c("out", "self", "dim", "keepdim"))
-expected_types <- list(out = "Tensor", self = "Tensor", dim = c("int64_t", "Dimname"
-), keepdim = "bool")
+expected_types <- list(out = "Tensor", self = "Tensor", dim = c("int64_t", "IntArrayRef", 
+"Dimname"), keepdim = "bool")
 nd_args <- c("out", "self", "dim")
 return_types <- list(list('Tensor'))
 call_c_function(
@@ -12085,14 +13626,36 @@ fun_type = 'namespace'
 }
 
 
+#' @rdname torch_batch_norm_backward
+torch_batch_norm_backward <- function(grad_out, input, weight, running_mean, running_var, save_mean, save_var, update, eps, output_mask, reserve) {
+  args <- mget(x = c("grad_out", "input", "weight", "running_mean", "running_var", "save_mean", "save_var", "update", "eps", "output_mask", "reserve"))
+expected_types <- list(grad_out = "Tensor", input = "Tensor", weight = "Tensor", 
+    running_mean = "Tensor", running_var = "Tensor", save_mean = "Tensor", 
+    save_var = "Tensor", update = "bool", eps = "double", output_mask = "::std::array<bool,3>", 
+    reserve = "Tensor")
+nd_args <- c("grad_out", "input", "weight", "running_mean", "running_var", 
+"save_mean", "save_var", "update", "eps", "output_mask", "reserve"
+)
+return_types <- list(list("Tensor", "Tensor", "Tensor"))
+call_c_function(
+fun_name = 'batch_norm_backward',
+args = args,
+expected_types = expected_types,
+nd_args = nd_args,
+return_types = return_types,
+fun_type = 'namespace'
+)
+}
+
+
 #' @rdname torch_batch_norm_backward_elemt
-torch_batch_norm_backward_elemt <- function(grad_out, input, mean, invstd, weight, mean_dy, mean_dy_xmu, count) {
-  args <- mget(x = c("grad_out", "input", "mean", "invstd", "weight", "mean_dy", "mean_dy_xmu", "count"))
+torch_batch_norm_backward_elemt <- function(grad_out, input, mean, invstd, weight, sum_dy, sum_dy_xmu, count) {
+  args <- mget(x = c("grad_out", "input", "mean", "invstd", "weight", "sum_dy", "sum_dy_xmu", "count"))
 expected_types <- list(grad_out = "Tensor", input = "Tensor", mean = "Tensor", 
-    invstd = "Tensor", weight = "Tensor", mean_dy = "Tensor", 
-    mean_dy_xmu = "Tensor", count = "Tensor")
-nd_args <- c("grad_out", "input", "mean", "invstd", "weight", "mean_dy", 
-"mean_dy_xmu", "count")
+    invstd = "Tensor", weight = "Tensor", sum_dy = "Tensor", 
+    sum_dy_xmu = "Tensor", count = "Tensor")
+nd_args <- c("grad_out", "input", "mean", "invstd", "weight", "sum_dy", 
+"sum_dy_xmu", "count")
 return_types <- list(list('Tensor'))
 call_c_function(
 fun_name = 'batch_norm_backward_elemt',
@@ -12106,13 +13669,13 @@ fun_type = 'namespace'
 
 
 #' @rdname torch_batch_norm_backward_elemt_out
-torch_batch_norm_backward_elemt_out <- function(out, grad_out, input, mean, invstd, weight, mean_dy, mean_dy_xmu, count) {
-  args <- mget(x = c("out", "grad_out", "input", "mean", "invstd", "weight", "mean_dy", "mean_dy_xmu", "count"))
+torch_batch_norm_backward_elemt_out <- function(out, grad_out, input, mean, invstd, weight, sum_dy, sum_dy_xmu, count) {
+  args <- mget(x = c("out", "grad_out", "input", "mean", "invstd", "weight", "sum_dy", "sum_dy_xmu", "count"))
 expected_types <- list(out = "Tensor", grad_out = "Tensor", input = "Tensor", mean = "Tensor", 
-    invstd = "Tensor", weight = "Tensor", mean_dy = "Tensor", 
-    mean_dy_xmu = "Tensor", count = "Tensor")
-nd_args <- c("out", "grad_out", "input", "mean", "invstd", "weight", "mean_dy", 
-"mean_dy_xmu", "count")
+    invstd = "Tensor", weight = "Tensor", sum_dy = "Tensor", 
+    sum_dy_xmu = "Tensor", count = "Tensor")
+nd_args <- c("out", "grad_out", "input", "mean", "invstd", "weight", "sum_dy", 
+"sum_dy_xmu", "count")
 return_types <- list(list('Tensor'))
 call_c_function(
 fun_name = 'batch_norm_backward_elemt_out',
@@ -12967,10 +14530,10 @@ fun_type = 'namespace'
 
 
 #' @rdname torch_can_cast
-torch_can_cast <- function(from, to) {
-  args <- mget(x = c("from", "to"))
-expected_types <- list(from = "ScalarType", to = "ScalarType")
-nd_args <- c("from", "to")
+torch_can_cast <- function(from_, to) {
+  args <- mget(x = c("from_", "to"))
+expected_types <- list(from_ = "ScalarType", to = "ScalarType")
+nd_args <- c("from_", "to")
 return_types <- list(list('bool'))
 call_c_function(
 fun_name = 'can_cast',
@@ -16446,6 +18009,40 @@ fun_type = 'namespace'
 }
 
 
+#' @rdname torch_empty_permuted
+torch_empty_permuted <- function(size, physical_layout, options = list()) {
+  args <- mget(x = c("size", "physical_layout", "options"))
+expected_types <- list(size = "IntArrayRef", physical_layout = "IntArrayRef", options = "TensorOptions")
+nd_args <- c("size", "physical_layout")
+return_types <- list(list('Tensor'))
+call_c_function(
+fun_name = 'empty_permuted',
+args = args,
+expected_types = expected_types,
+nd_args = nd_args,
+return_types = return_types,
+fun_type = 'namespace'
+)
+}
+
+
+#' @rdname torch_empty_permuted_out
+torch_empty_permuted_out <- function(out, size, physical_layout) {
+  args <- mget(x = c("out", "size", "physical_layout"))
+expected_types <- list(out = "Tensor", size = "IntArrayRef", physical_layout = "IntArrayRef")
+nd_args <- c("out", "size", "physical_layout")
+return_types <- list(list('Tensor'))
+call_c_function(
+fun_name = 'empty_permuted_out',
+args = args,
+expected_types = expected_types,
+nd_args = nd_args,
+return_types = return_types,
+fun_type = 'namespace'
+)
+}
+
+
 #' @rdname torch_empty_quantized
 torch_empty_quantized <- function(size, qtensor, options = list(), memory_format = NULL) {
   args <- mget(x = c("size", "qtensor", "options", "memory_format"))
@@ -18339,7 +19936,8 @@ fun_type = 'namespace'
 #' @rdname torch_floor_divide_out
 torch_floor_divide_out <- function(out, self, other) {
   args <- mget(x = c("out", "self", "other"))
-expected_types <- list(out = "Tensor", self = "Tensor", other = "Tensor")
+expected_types <- list(out = "Tensor", self = "Tensor", other = c("Tensor", "Scalar"
+))
 nd_args <- c("out", "self", "other")
 return_types <- list(list('Tensor'))
 call_c_function(
@@ -20606,7 +22204,7 @@ fun_type = 'namespace'
 #' @rdname torch_index
 torch_index <- function(self, indices) {
   args <- mget(x = c("self", "indices"))
-expected_types <- list(self = "Tensor", indices = "const c10::List<c10::optional<Tensor>> &")
+expected_types <- list(self = "Tensor", indices = "const c10::List<::std::optional<Tensor>> &")
 nd_args <- c("self", "indices")
 return_types <- list(list('Tensor'))
 call_c_function(
@@ -20731,7 +22329,7 @@ fun_type = 'namespace'
 #' @rdname torch_index_out
 torch_index_out <- function(out, self, indices) {
   args <- mget(x = c("out", "self", "indices"))
-expected_types <- list(out = "Tensor", self = "Tensor", indices = "const c10::List<c10::optional<Tensor>> &")
+expected_types <- list(out = "Tensor", self = "Tensor", indices = "const c10::List<::std::optional<Tensor>> &")
 nd_args <- c("out", "self", "indices")
 return_types <- list(list('Tensor'))
 call_c_function(
@@ -20748,7 +22346,7 @@ fun_type = 'namespace'
 #' @rdname torch_index_put
 torch_index_put <- function(self, indices, values, accumulate = FALSE) {
   args <- mget(x = c("self", "indices", "values", "accumulate"))
-expected_types <- list(self = "Tensor", indices = "const c10::List<c10::optional<Tensor>> &", 
+expected_types <- list(self = "Tensor", indices = "const c10::List<::std::optional<Tensor>> &", 
     values = "Tensor", accumulate = "bool")
 nd_args <- c("self", "indices", "values")
 return_types <- list(list('Tensor'))
@@ -20766,7 +22364,7 @@ fun_type = 'namespace'
 #' @rdname torch_index_put_
 torch_index_put_ <- function(self, indices, values, accumulate = FALSE) {
   args <- mget(x = c("self", "indices", "values", "accumulate"))
-expected_types <- list(self = "Tensor", indices = "const c10::List<c10::optional<Tensor>> &", 
+expected_types <- list(self = "Tensor", indices = "const c10::List<::std::optional<Tensor>> &", 
     values = "Tensor", accumulate = "bool")
 nd_args <- c("self", "indices", "values")
 return_types <- list(list('Tensor'))
@@ -20784,7 +22382,7 @@ fun_type = 'namespace'
 #' @rdname torch_index_put_out
 torch_index_put_out <- function(out, self, indices, values, accumulate = FALSE) {
   args <- mget(x = c("out", "self", "indices", "values", "accumulate"))
-expected_types <- list(out = "Tensor", self = "Tensor", indices = "const c10::List<c10::optional<Tensor>> &", 
+expected_types <- list(out = "Tensor", self = "Tensor", indices = "const c10::List<::std::optional<Tensor>> &", 
     values = "Tensor", accumulate = "bool")
 nd_args <- c("out", "self", "indices", "values")
 return_types <- list(list('Tensor'))
@@ -23532,7 +25130,8 @@ fun_type = 'namespace'
 #' @rdname .torch_linspace
 .torch_linspace <- function(start, end, steps, options = list()) {
   args <- mget(x = c("start", "end", "steps", "options"))
-expected_types <- list(start = "Scalar", end = "Scalar", steps = "int64_t", options = "TensorOptions")
+expected_types <- list(start = c("Scalar", "Tensor"), end = c("Scalar", "Tensor"
+), steps = "int64_t", options = "TensorOptions")
 nd_args <- c("start", "end", "steps")
 return_types <- list(list('Tensor'))
 call_c_function(
@@ -23549,7 +25148,8 @@ fun_type = 'namespace'
 #' @rdname torch_linspace_out
 torch_linspace_out <- function(out, start, end, steps) {
   args <- mget(x = c("out", "start", "end", "steps"))
-expected_types <- list(out = "Tensor", start = "Scalar", end = "Scalar", steps = "int64_t")
+expected_types <- list(out = "Tensor", start = c("Scalar", "Tensor"), end = c("Scalar", 
+"Tensor"), steps = "int64_t")
 nd_args <- c("out", "start", "end", "steps")
 return_types <- list(list('Tensor'))
 call_c_function(
@@ -24284,8 +25884,8 @@ fun_type = 'namespace'
 #' @rdname .torch_logspace
 .torch_logspace <- function(start, end, steps, base = 10, options = list()) {
   args <- mget(x = c("start", "end", "steps", "base", "options"))
-expected_types <- list(start = "Scalar", end = "Scalar", steps = "int64_t", base = "double", 
-    options = "TensorOptions")
+expected_types <- list(start = c("Scalar", "Tensor"), end = c("Scalar", "Tensor"
+), steps = "int64_t", base = "double", options = "TensorOptions")
 nd_args <- c("start", "end", "steps")
 return_types <- list(list('Tensor'))
 call_c_function(
@@ -24302,8 +25902,8 @@ fun_type = 'namespace'
 #' @rdname torch_logspace_out
 torch_logspace_out <- function(out, start, end, steps, base = 10) {
   args <- mget(x = c("out", "start", "end", "steps", "base"))
-expected_types <- list(out = "Tensor", start = "Scalar", end = "Scalar", steps = "int64_t", 
-    base = "double")
+expected_types <- list(out = "Tensor", start = c("Scalar", "Tensor"), end = c("Scalar", 
+"Tensor"), steps = "int64_t", base = "double")
 nd_args <- c("out", "start", "end", "steps")
 return_types <- list(list('Tensor'))
 call_c_function(
@@ -24608,6 +26208,23 @@ nd_args <- c("self", "mask", "source")
 return_types <- list(list('Tensor'))
 call_c_function(
 fun_name = 'masked_scatter',
+args = args,
+expected_types = expected_types,
+nd_args = nd_args,
+return_types = return_types,
+fun_type = 'namespace'
+)
+}
+
+
+#' @rdname torch_masked_scatter_backward
+torch_masked_scatter_backward <- function(grad_output, mask, sizes) {
+  args <- mget(x = c("grad_output", "mask", "sizes"))
+expected_types <- list(grad_output = "Tensor", mask = "Tensor", sizes = "IntArrayRef")
+nd_args <- c("grad_output", "mask", "sizes")
+return_types <- list(list('Tensor'))
+call_c_function(
+fun_name = 'masked_scatter_backward',
 args = args,
 expected_types = expected_types,
 nd_args = nd_args,
@@ -26237,10 +27854,10 @@ fun_type = 'namespace'
 
 
 #' @rdname torch_mkldnn_reorder_conv3d_weight
-torch_mkldnn_reorder_conv3d_weight <- function(self, padding = 0L, stride = 1L, dilation = 1L, groups = 1L) {
-  args <- mget(x = c("self", "padding", "stride", "dilation", "groups"))
+torch_mkldnn_reorder_conv3d_weight <- function(self, padding = 0L, stride = 1L, dilation = 1L, groups = 1L, input_size = NULL) {
+  args <- mget(x = c("self", "padding", "stride", "dilation", "groups", "input_size"))
 expected_types <- list(self = "Tensor", padding = "IntArrayRef", stride = "IntArrayRef", 
-    dilation = "IntArrayRef", groups = "int64_t")
+    dilation = "IntArrayRef", groups = "int64_t", input_size = "IntArrayRef")
 nd_args <- "self"
 return_types <- list(list('Tensor'))
 call_c_function(
@@ -26255,10 +27872,11 @@ fun_type = 'namespace'
 
 
 #' @rdname torch_mkldnn_reorder_conv3d_weight_out
-torch_mkldnn_reorder_conv3d_weight_out <- function(out, self, padding = 0L, stride = 1L, dilation = 1L, groups = 1L) {
-  args <- mget(x = c("out", "self", "padding", "stride", "dilation", "groups"))
+torch_mkldnn_reorder_conv3d_weight_out <- function(out, self, padding = 0L, stride = 1L, dilation = 1L, groups = 1L, input_size = NULL) {
+  args <- mget(x = c("out", "self", "padding", "stride", "dilation", "groups", "input_size"))
 expected_types <- list(out = "Tensor", self = "Tensor", padding = "IntArrayRef", 
-    stride = "IntArrayRef", dilation = "IntArrayRef", groups = "int64_t")
+    stride = "IntArrayRef", dilation = "IntArrayRef", groups = "int64_t", 
+    input_size = "IntArrayRef")
 nd_args <- c("out", "self")
 return_types <- list(list('Tensor'))
 call_c_function(
@@ -28205,6 +29823,40 @@ fun_type = 'namespace'
 }
 
 
+#' @rdname torch_nonzero_static
+torch_nonzero_static <- function(self, size, fill_value = -1L) {
+  args <- mget(x = c("self", "size", "fill_value"))
+expected_types <- list(self = "Tensor", size = "int64_t", fill_value = "int64_t")
+nd_args <- c("self", "size")
+return_types <- list(list('Tensor'))
+call_c_function(
+fun_name = 'nonzero_static',
+args = args,
+expected_types = expected_types,
+nd_args = nd_args,
+return_types = return_types,
+fun_type = 'namespace'
+)
+}
+
+
+#' @rdname torch_nonzero_static_out
+torch_nonzero_static_out <- function(out, self, size, fill_value = -1L) {
+  args <- mget(x = c("out", "self", "size", "fill_value"))
+expected_types <- list(out = "Tensor", self = "Tensor", size = "int64_t", fill_value = "int64_t")
+nd_args <- c("out", "self", "size")
+return_types <- list(list('Tensor'))
+call_c_function(
+fun_name = 'nonzero_static_out',
+args = args,
+expected_types = expected_types,
+nd_args = nd_args,
+return_types = return_types,
+fun_type = 'namespace'
+)
+}
+
+
 #' @rdname .torch_norm
 .torch_norm <- function(self, p = 2L, dim, keepdim = FALSE, dtype) {
   args <- mget(x = c("self", "p", "dim", "keepdim", "dtype"))
@@ -28588,9 +30240,10 @@ fun_type = 'namespace'
 
 
 #' @rdname torch_pad_sequence
-torch_pad_sequence <- function(sequences, batch_first = FALSE, padding_value = 0L) {
-  args <- mget(x = c("sequences", "batch_first", "padding_value"))
-expected_types <- list(sequences = "TensorList", batch_first = "bool", padding_value = "double")
+torch_pad_sequence <- function(sequences, batch_first = FALSE, padding_value = 0L, padding_side = "right") {
+  args <- mget(x = c("sequences", "batch_first", "padding_value", "padding_side"))
+expected_types <- list(sequences = "TensorList", batch_first = "bool", padding_value = "double", 
+    padding_side = "c10::string_view")
 nd_args <- "sequences"
 return_types <- list(list('Tensor'))
 call_c_function(
@@ -29484,6 +31137,43 @@ nd_args <- c("out", "self", "kernel_size")
 return_types <- list(list('Tensor'))
 call_c_function(
 fun_name = 'quantized_max_pool2d_out',
+args = args,
+expected_types = expected_types,
+nd_args = nd_args,
+return_types = return_types,
+fun_type = 'namespace'
+)
+}
+
+
+#' @rdname torch_quantized_max_pool3d
+torch_quantized_max_pool3d <- function(self, kernel_size, stride = list(), padding = 0L, dilation = 1L, ceil_mode = FALSE) {
+  args <- mget(x = c("self", "kernel_size", "stride", "padding", "dilation", "ceil_mode"))
+expected_types <- list(self = "Tensor", kernel_size = "IntArrayRef", stride = "IntArrayRef", 
+    padding = "IntArrayRef", dilation = "IntArrayRef", ceil_mode = "bool")
+nd_args <- c("self", "kernel_size")
+return_types <- list(list('Tensor'))
+call_c_function(
+fun_name = 'quantized_max_pool3d',
+args = args,
+expected_types = expected_types,
+nd_args = nd_args,
+return_types = return_types,
+fun_type = 'namespace'
+)
+}
+
+
+#' @rdname torch_quantized_max_pool3d_out
+torch_quantized_max_pool3d_out <- function(out, self, kernel_size, stride = list(), padding = 0L, dilation = 1L, ceil_mode = FALSE) {
+  args <- mget(x = c("out", "self", "kernel_size", "stride", "padding", "dilation", "ceil_mode"))
+expected_types <- list(out = "Tensor", self = "Tensor", kernel_size = "IntArrayRef", 
+    stride = "IntArrayRef", padding = "IntArrayRef", dilation = "IntArrayRef", 
+    ceil_mode = "bool")
+nd_args <- c("out", "self", "kernel_size")
+return_types <- list(list('Tensor'))
+call_c_function(
+fun_name = 'quantized_max_pool3d_out',
 args = args,
 expected_types = expected_types,
 nd_args = nd_args,
@@ -30816,6 +32506,24 @@ fun_type = 'namespace'
 }
 
 
+#' @rdname torch_rms_norm
+torch_rms_norm <- function(input, normalized_shape, weight = list(), eps = NULL) {
+  args <- mget(x = c("input", "normalized_shape", "weight", "eps"))
+expected_types <- list(input = "Tensor", normalized_shape = "IntArrayRef", weight = "Tensor", 
+    eps = "double")
+nd_args <- c("input", "normalized_shape")
+return_types <- list(list('Tensor'))
+call_c_function(
+fun_name = 'rms_norm',
+args = args,
+expected_types = expected_types,
+nd_args = nd_args,
+return_types = return_types,
+fun_type = 'namespace'
+)
+}
+
+
 #' @rdname torch_rnn_relu
 torch_rnn_relu <- function(data, input, batch_sizes, hx, params, has_biases, num_layers, dropout, train, batch_first, bidirectional) {
   args <- mget(x = c("data", "input", "batch_sizes", "hx", "params", "has_biases", "num_layers", "dropout", "train", "batch_first", "bidirectional"))
@@ -31334,10 +33042,11 @@ fun_type = 'namespace'
 
 
 #' @rdname torch_scaled_dot_product_attention
-torch_scaled_dot_product_attention <- function(query, key, value, attn_mask = list(), dropout_p = 0L, is_causal = FALSE) {
-  args <- mget(x = c("query", "key", "value", "attn_mask", "dropout_p", "is_causal"))
+torch_scaled_dot_product_attention <- function(query, key, value, attn_mask = list(), dropout_p = 0L, is_causal = FALSE, scale = NULL, enable_gqa = FALSE) {
+  args <- mget(x = c("query", "key", "value", "attn_mask", "dropout_p", "is_causal", "scale", "enable_gqa"))
 expected_types <- list(query = "Tensor", key = "Tensor", value = "Tensor", attn_mask = "Tensor", 
-    dropout_p = "double", is_causal = "bool")
+    dropout_p = "double", is_causal = "bool", scale = "double", 
+    enable_gqa = "bool")
 nd_args <- c("query", "key", "value")
 return_types <- list(list('Tensor'))
 call_c_function(
@@ -32261,6 +33970,24 @@ fun_type = 'namespace'
 }
 
 
+#' @rdname torch_slice_inverse
+torch_slice_inverse <- function(self, src, dim = 1L, start = NULL, end = NULL, step = 1L) {
+  args <- mget(x = c("self", "src", "dim", "start", "end", "step"))
+expected_types <- list(self = "Tensor", src = "Tensor", dim = "int64_t", start = "int64_t", 
+    end = "int64_t", step = "int64_t")
+nd_args <- c("self", "src")
+return_types <- list(list('Tensor'))
+call_c_function(
+fun_name = 'slice_inverse',
+args = args,
+expected_types = expected_types,
+nd_args = nd_args,
+return_types = return_types,
+fun_type = 'namespace'
+)
+}
+
+
 #' @rdname torch_slice_scatter
 torch_slice_scatter <- function(self, src, dim = 1L, start = NULL, end = NULL, step = 1L) {
   args <- mget(x = c("self", "src", "dim", "start", "end", "step"))
@@ -32982,10 +34709,10 @@ fun_type = 'namespace'
 
 
 #' @rdname .torch_sparse_coo_tensor
-.torch_sparse_coo_tensor <- function(indices, values, size, options = list()) {
-  args <- mget(x = c("indices", "values", "size", "options"))
+.torch_sparse_coo_tensor <- function(indices, values, size, options = list(), is_coalesced = NULL) {
+  args <- mget(x = c("indices", "values", "size", "options", "is_coalesced"))
 expected_types <- list(indices = "Tensor", values = "Tensor", size = "IntArrayRef", 
-    options = "TensorOptions")
+    options = "TensorOptions", is_coalesced = "bool")
 nd_args <- c("indices", "values", "size", "options")
 return_types <- list(list('Tensor'))
 call_c_function(
@@ -35643,6 +37370,40 @@ fun_type = 'namespace'
 }
 
 
+#' @rdname torch_sym_constrain_range
+torch_sym_constrain_range <- function(size, min = NULL, max = NULL) {
+  args <- mget(x = c("size", "min", "max"))
+expected_types <- list(size = "Scalar", min = "int64_t", max = "int64_t")
+nd_args <- "size"
+return_types <- list(list("void"))
+call_c_function(
+fun_name = 'sym_constrain_range',
+args = args,
+expected_types = expected_types,
+nd_args = nd_args,
+return_types = return_types,
+fun_type = 'namespace'
+)
+}
+
+
+#' @rdname torch_sym_constrain_range_for_size
+torch_sym_constrain_range_for_size <- function(size, min = NULL, max = NULL) {
+  args <- mget(x = c("size", "min", "max"))
+expected_types <- list(size = "Scalar", min = "int64_t", max = "int64_t")
+nd_args <- "size"
+return_types <- list(list("void"))
+call_c_function(
+fun_name = 'sym_constrain_range_for_size',
+args = args,
+expected_types = expected_types,
+nd_args = nd_args,
+return_types = return_types,
+fun_type = 'namespace'
+)
+}
+
+
 #' @rdname torch_t
 torch_t <- function(self) {
   args <- mget(x = c("self"))
@@ -36093,9 +37854,9 @@ fun_type = 'namespace'
 
 
 #' @rdname torch_to_dense_backward
-torch_to_dense_backward <- function(grad, input) {
-  args <- mget(x = c("grad", "input"))
-expected_types <- list(grad = "Tensor", input = "Tensor")
+torch_to_dense_backward <- function(grad, input, masked_grad = NULL) {
+  args <- mget(x = c("grad", "input", "masked_grad"))
+expected_types <- list(grad = "Tensor", input = "Tensor", masked_grad = "bool")
 nd_args <- c("grad", "input")
 return_types <- list(list('Tensor'))
 call_c_function(
@@ -36151,94 +37912,6 @@ nd_args <- c("out", "self", "padding")
 return_types <- list(list('Tensor'))
 call_c_function(
 fun_name = 'to_padded_tensor_out',
-args = args,
-expected_types = expected_types,
-nd_args = nd_args,
-return_types = return_types,
-fun_type = 'namespace'
-)
-}
-
-
-#' @rdname torch_to_sparse_bsc_out
-torch_to_sparse_bsc_out <- function(out, self, blocksize, dense_dim = NULL) {
-  args <- mget(x = c("out", "self", "blocksize", "dense_dim"))
-expected_types <- list(out = "Tensor", self = "Tensor", blocksize = "IntArrayRef", 
-    dense_dim = "int64_t")
-nd_args <- c("out", "self", "blocksize")
-return_types <- list(list('Tensor'))
-call_c_function(
-fun_name = 'to_sparse_bsc_out',
-args = args,
-expected_types = expected_types,
-nd_args = nd_args,
-return_types = return_types,
-fun_type = 'namespace'
-)
-}
-
-
-#' @rdname torch_to_sparse_bsr_out
-torch_to_sparse_bsr_out <- function(out, self, blocksize, dense_dim = NULL) {
-  args <- mget(x = c("out", "self", "blocksize", "dense_dim"))
-expected_types <- list(out = "Tensor", self = "Tensor", blocksize = "IntArrayRef", 
-    dense_dim = "int64_t")
-nd_args <- c("out", "self", "blocksize")
-return_types <- list(list('Tensor'))
-call_c_function(
-fun_name = 'to_sparse_bsr_out',
-args = args,
-expected_types = expected_types,
-nd_args = nd_args,
-return_types = return_types,
-fun_type = 'namespace'
-)
-}
-
-
-#' @rdname torch_to_sparse_csc_out
-torch_to_sparse_csc_out <- function(out, self, dense_dim = NULL) {
-  args <- mget(x = c("out", "self", "dense_dim"))
-expected_types <- list(out = "Tensor", self = "Tensor", dense_dim = "int64_t")
-nd_args <- c("out", "self")
-return_types <- list(list('Tensor'))
-call_c_function(
-fun_name = 'to_sparse_csc_out',
-args = args,
-expected_types = expected_types,
-nd_args = nd_args,
-return_types = return_types,
-fun_type = 'namespace'
-)
-}
-
-
-#' @rdname torch_to_sparse_csr_out
-torch_to_sparse_csr_out <- function(out, self, dense_dim = NULL) {
-  args <- mget(x = c("out", "self", "dense_dim"))
-expected_types <- list(out = "Tensor", self = "Tensor", dense_dim = "int64_t")
-nd_args <- c("out", "self")
-return_types <- list(list('Tensor'))
-call_c_function(
-fun_name = 'to_sparse_csr_out',
-args = args,
-expected_types = expected_types,
-nd_args = nd_args,
-return_types = return_types,
-fun_type = 'namespace'
-)
-}
-
-
-#' @rdname torch_to_sparse_out
-torch_to_sparse_out <- function(out, self, layout = NULL, sparse_dim, blocksize = NULL, dense_dim = NULL) {
-  args <- mget(x = c("out", "self", "layout", "sparse_dim", "blocksize", "dense_dim"))
-expected_types <- list(out = "Tensor", self = "Tensor", layout = "Layout", sparse_dim = "int64_t", 
-    blocksize = "IntArrayRef", dense_dim = "int64_t")
-nd_args <- c("out", "self", "sparse_dim")
-return_types <- list(list('Tensor'))
-call_c_function(
-fun_name = 'to_sparse_out',
 args = args,
 expected_types = expected_types,
 nd_args = nd_args,
