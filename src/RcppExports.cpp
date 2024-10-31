@@ -45345,6 +45345,16 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// torch_tensor_free
+void torch_tensor_free(Rcpp::XPtr<torch::Tensor> x);
+RcppExport SEXP _torch_torch_tensor_free(SEXP xSEXP) {
+BEGIN_RCPP
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< Rcpp::XPtr<torch::Tensor> >::type x(xSEXP);
+    torch_tensor_free(x);
+    return R_NilValue;
+END_RCPP
+}
 // cpp_torch_tensor_list
 XPtrTorchTensorList cpp_torch_tensor_list(const Rcpp::List& x);
 RcppExport SEXP _torch_cpp_torch_tensor_list(SEXP xSEXP) {
@@ -49285,6 +49295,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_torch_cpp_namespace_normal_tensor_tensor", (DL_FUNC) &_torch_cpp_namespace_normal_tensor_tensor, 3},
     {"_torch_nnf_pad_circular", (DL_FUNC) &_torch_nnf_pad_circular, 2},
     {"_torch_cpp_method_Tensor_is_sparse", (DL_FUNC) &_torch_cpp_method_Tensor_is_sparse, 1},
+    {"_torch_torch_tensor_free", (DL_FUNC) &_torch_torch_tensor_free, 1},
     {"_torch_cpp_torch_tensor_list", (DL_FUNC) &_torch_cpp_torch_tensor_list, 1},
     {"_torch_cpp_trace_function", (DL_FUNC) &_torch_cpp_trace_function, 8},
     {"_torch_cpp_save_traced_fn", (DL_FUNC) &_torch_cpp_save_traced_fn, 2},

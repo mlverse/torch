@@ -14733,6 +14733,10 @@ cpp_method_Tensor_is_sparse <- function(x) {
     .Call(`_torch_cpp_method_Tensor_is_sparse`, x)
 }
 
+torch_tensor_free <- function(x) {
+    invisible(.Call(`_torch_torch_tensor_free`, x))
+}
+
 cpp_torch_tensor_list <- function(x) {
     .Call(`_torch_cpp_torch_tensor_list`, x)
 }
