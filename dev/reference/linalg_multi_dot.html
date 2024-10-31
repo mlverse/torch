@@ -105,7 +105,7 @@ computing the optimal matrix multiplication order.</p>
 <code>a * b * c</code>. Given matrices <code>A</code>, <code>B</code>, <code>C</code> with shapes <code>(10, 100)</code>,
 <code>(100, 5)</code>, <code>(5, 50)</code> respectively, we can calculate the cost of different
 multiplication orders as follows:</p>
-<p><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/katex@0.16.3/dist/katex.min.css" data-external="1"><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mtable rowspacing="0.25em" columnalign="right left right" columnspacing="0em 1em"><mtr><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow><mi mathvariant="normal">cost</mi><mo>⁡</mo><mo stretchy="false">(</mo><mo stretchy="false">(</mo><mi>A</mi><mi>B</mi><mo stretchy="false">)</mo><mi>C</mi><mo stretchy="false">)</mo></mrow></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow><mrow></mrow><mo>=</mo><mn>10</mn><mo>×</mo><mn>100</mn><mo>×</mo><mn>5</mn><mo>+</mo><mn>10</mn><mo>×</mo><mn>5</mn><mo>×</mo><mn>50</mn><mo>=</mo><mn>7500</mn><mtext> </mtext><mi mathvariant="normal">cost</mi><mo>⁡</mo><mo stretchy="false">(</mo><mi>A</mi><mo stretchy="false">(</mo><mi>B</mi><mi>C</mi><mo stretchy="false">)</mo><mo stretchy="false">)</mo></mrow></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow><mo>=</mo><mn>10</mn><mo>×</mo><mn>100</mn><mo>×</mo><mn>50</mn><mo>+</mo><mn>100</mn><mo>×</mo><mn>5</mn><mo>×</mo><mn>50</mn><mo>=</mo><mn>75000</mn></mrow></mstyle></mtd></mtr></mtable><annotation encoding="application/x-tex">
+<p><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" data-external="1"><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mtable rowspacing="0.25em" columnalign="right left right" columnspacing="0em 1em"><mtr><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow><mi mathvariant="normal">cost</mi><mo>⁡</mo><mo stretchy="false">(</mo><mo stretchy="false">(</mo><mi>A</mi><mi>B</mi><mo stretchy="false">)</mo><mi>C</mi><mo stretchy="false">)</mo></mrow></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow><mrow></mrow><mo>=</mo><mn>10</mn><mo>×</mo><mn>100</mn><mo>×</mo><mn>5</mn><mo>+</mo><mn>10</mn><mo>×</mo><mn>5</mn><mo>×</mo><mn>50</mn><mo>=</mo><mn>7500</mn><mtext> </mtext><mi mathvariant="normal">cost</mi><mo>⁡</mo><mo stretchy="false">(</mo><mi>A</mi><mo stretchy="false">(</mo><mi>B</mi><mi>C</mi><mo stretchy="false">)</mo><mo stretchy="false">)</mo></mrow></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow><mo>=</mo><mn>10</mn><mo>×</mo><mn>100</mn><mo>×</mo><mn>50</mn><mo>+</mo><mn>100</mn><mo>×</mo><mn>5</mn><mo>×</mo><mn>50</mn><mo>=</mo><mn>75000</mn></mrow></mstyle></mtd></mtr></mtable><annotation encoding="application/x-tex">
 \begin{align*}
 \operatorname{cost}((AB)C) &amp;= 10 \times 100 \times 5 + 10 \times 5 \times 50 = 7500 \
 \operatorname{cost}(A(BC)) &amp;= 10 \times 100 \times 50 + 100 \times 5 \times 50 = 75000
@@ -116,16 +116,16 @@ multiplication orders as follows:</p>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
     <div class="dont-index"><p>Other linalg:
-<code><a href="linalg_cholesky_ex.html">linalg_cholesky_ex</a>()</code>,
 <code><a href="linalg_cholesky.html">linalg_cholesky</a>()</code>,
+<code><a href="linalg_cholesky_ex.html">linalg_cholesky_ex</a>()</code>,
 <code><a href="linalg_det.html">linalg_det</a>()</code>,
-<code><a href="linalg_eigh.html">linalg_eigh</a>()</code>,
-<code><a href="linalg_eigvalsh.html">linalg_eigvalsh</a>()</code>,
-<code><a href="linalg_eigvals.html">linalg_eigvals</a>()</code>,
 <code><a href="linalg_eig.html">linalg_eig</a>()</code>,
+<code><a href="linalg_eigh.html">linalg_eigh</a>()</code>,
+<code><a href="linalg_eigvals.html">linalg_eigvals</a>()</code>,
+<code><a href="linalg_eigvalsh.html">linalg_eigvalsh</a>()</code>,
 <code><a href="linalg_householder_product.html">linalg_householder_product</a>()</code>,
-<code><a href="linalg_inv_ex.html">linalg_inv_ex</a>()</code>,
 <code><a href="linalg_inv.html">linalg_inv</a>()</code>,
+<code><a href="linalg_inv_ex.html">linalg_inv_ex</a>()</code>,
 <code><a href="linalg_lstsq.html">linalg_lstsq</a>()</code>,
 <code><a href="linalg_matrix_norm.html">linalg_matrix_norm</a>()</code>,
 <code><a href="linalg_matrix_power.html">linalg_matrix_power</a>()</code>,
@@ -134,10 +134,10 @@ multiplication orders as follows:</p>
 <code><a href="linalg_pinv.html">linalg_pinv</a>()</code>,
 <code><a href="linalg_qr.html">linalg_qr</a>()</code>,
 <code><a href="linalg_slogdet.html">linalg_slogdet</a>()</code>,
-<code><a href="linalg_solve_triangular.html">linalg_solve_triangular</a>()</code>,
 <code><a href="linalg_solve.html">linalg_solve</a>()</code>,
-<code><a href="linalg_svdvals.html">linalg_svdvals</a>()</code>,
+<code><a href="linalg_solve_triangular.html">linalg_solve_triangular</a>()</code>,
 <code><a href="linalg_svd.html">linalg_svd</a>()</code>,
+<code><a href="linalg_svdvals.html">linalg_svdvals</a>()</code>,
 <code><a href="linalg_tensorinv.html">linalg_tensorinv</a>()</code>,
 <code><a href="linalg_tensorsolve.html">linalg_tensorsolve</a>()</code>,
 <code><a href="linalg_vector_norm.html">linalg_vector_norm</a>()</code></p></div>
@@ -163,7 +163,7 @@ multiplication orders as follows:</p>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.1.</p>
 </div>
 
     </footer></div>

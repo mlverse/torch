@@ -603,7 +603,7 @@
 <h2 class="pkg-version" data-toc-text="0.2.0" id="torch-020">torch 0.2.0<a class="anchor" aria-label="anchor" href="#torch-020"></a></h2><p class="text-muted">CRAN release: 2020-12-15</p>
 <div class="section level3">
 <h3 id="breaking-changes-0-2-0">Breaking changes<a class="anchor" aria-label="anchor" href="#breaking-changes-0-2-0"></a></h3>
-<ul><li>Dataloaders now returns a <code><a href="https://rdrr.io/pkg/coro/man/iterator.html" class="external-link">coro::exhausted</a></code> intead of raising <code>stop_iteration_error</code> when the dataloader exceeds. (<a href="https://github.com/mlverse/torch/issues/366" class="external-link">#366</a>)</li>
+<ul><li>Dataloaders now returns a <code><a href="https://coro.r-lib.org/reference/iterator.html" class="external-link">coro::exhausted</a></code> intead of raising <code>stop_iteration_error</code> when the dataloader exceeds. (<a href="https://github.com/mlverse/torch/issues/366" class="external-link">#366</a>)</li>
 <li>Fixed bug that would happen with functions that need to transform tensors from 0-based to 1-based in the GPU. (<a href="https://github.com/mlverse/torch/issues/317" class="external-link">#317</a>)</li>
 <li>Fixed <code>torch_argsort</code> and <code>x$argsort</code> to return 1-based indexes (<a href="https://github.com/mlverse/torch/issues/342" class="external-link">#342</a>)</li>
 <li>Fixed <code>torch_argmax</code>, <code>torch_argmin</code>, <code>x$argmax()</code> and <code>x$argmin()</code> return 1-based indexes. (<a href="https://github.com/mlverse/torch/issues/389" class="external-link">#389</a>)</li>
@@ -701,7 +701,7 @@
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.1.</p>
 </div>
 
     </footer></div>

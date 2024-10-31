@@ -118,7 +118,7 @@ image recognition and natural language processing.</p>
 dataloader. First, the <code>minst_dataset()</code> function is used to
 create <code>ds</code> which is a <code>Dataset</code> object. Then a
 dataloader <code>dl</code> is created to query that data. Finally, that
-dataloader is used in a <code><a href="https://rdrr.io/pkg/coro/man/collect.html" class="external-link">coro::loop()</a></code> to iterate over
+dataloader is used in a <code><a href="https://coro.r-lib.org/reference/collect.html" class="external-link">coro::loop()</a></code> to iterate over
 batches of that data:</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a><span class="co"># Create a dataset from included data</span></span>
 <span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a>ds <span class="ot">&lt;-</span> <span class="fu">mnist_dataset</span>(</span>
@@ -339,7 +339,7 @@ dataset) will return the number of <code>batches</code> we have:</p>
 <span><span class="co">#&gt;  1</span></span>
 <span><span class="co">#&gt;  1</span></span>
 <span><span class="co">#&gt; [ CPULongType{8} ]</span></span></code></pre></div>
-<p>To train a network, we can use <code><a href="https://rdrr.io/pkg/coro/man/collect.html" class="external-link">coro::loop()</a></code> to iterate
+<p>To train a network, we can use <code><a href="https://coro.r-lib.org/reference/collect.html" class="external-link">coro::loop()</a></code> to iterate
 over batches.</p>
 <div class="section level3">
 <h3 id="training-with-data-loaders">Training with data loaders<a class="anchor" aria-label="anchor" href="#training-with-data-loaders"></a>
@@ -373,7 +373,7 @@ one-hot-encode or embed it.)</p>
 <span>  </span>
 <span>  <span class="va">l</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">)</span></span>
 <span>  </span>
-<span>  <span class="fu">coro</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/coro/man/collect.html" class="external-link">loop</a></span><span class="op">(</span><span class="kw">for</span> <span class="op">(</span><span class="va">b</span> <span class="kw">in</span> <span class="va">dl</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="fu">coro</span><span class="fu">::</span><span class="fu"><a href="https://coro.r-lib.org/reference/collect.html" class="external-link">loop</a></span><span class="op">(</span><span class="kw">for</span> <span class="op">(</span><span class="va">b</span> <span class="kw">in</span> <span class="va">dl</span><span class="op">)</span> <span class="op">{</span></span>
 <span>    <span class="va">optimizer</span><span class="op">$</span><span class="fu">zero_grad</span><span class="op">(</span><span class="op">)</span></span>
 <span>    <span class="va">output</span> <span class="op">&lt;-</span> <span class="fu">model</span><span class="op">(</span><span class="va">b</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">)</span></span>
 <span>    <span class="va">loss</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/nnf_nll_loss.html">nnf_nll_loss</a></span><span class="op">(</span><span class="va">output</span>, <span class="va">b</span><span class="op">[[</span><span class="fl">2</span><span class="op">]</span><span class="op">]</span><span class="op">)</span></span>
@@ -384,7 +384,7 @@ one-hot-encode or embed it.)</p>
 <span>  </span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/sprintf.html" class="external-link">sprintf</a></span><span class="op">(</span><span class="st">"Loss at epoch %d: %3f\n"</span>, <span class="va">epoch</span>, <span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="va">l</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="op">}</span></span>
-<span><span class="co">#&gt; Loss at epoch 1: 133.233182</span></span>
+<span><span class="co">#&gt; Loss at epoch 1: 125.060698</span></span>
 <span><span class="co">#&gt; Loss at epoch 2: 2.068251</span></span>
 <span><span class="co">#&gt; Loss at epoch 3: 2.068251</span></span>
 <span><span class="co">#&gt; Loss at epoch 4: 2.068251</span></span>
@@ -520,7 +520,7 @@ readability of your code and convenience for speed.</p>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.1.</p>
 </div>
 
     </footer>

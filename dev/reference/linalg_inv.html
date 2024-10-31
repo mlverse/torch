@@ -85,14 +85,14 @@ consisting of invertible matrices.</p></dd>
 </dl></div>
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
-    <p>Letting  be  or ,
-for a matrix ,
-its <strong>inverse matrix</strong>  (if it exists) is defined as</p>
-<p><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/katex@0.16.3/dist/katex.min.css" data-external="1"><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msup><mi>A</mi><mrow><mo>−</mo><mn>1</mn></mrow></msup><mi>A</mi><mo>=</mo><mi>A</mi><msup><mi>A</mi><mrow><mo>−</mo><mn>1</mn></mrow></msup><mo>=</mo><msub><mi mathvariant="normal">I</mi><mi>n</mi></msub></mrow><annotation encoding="application/x-tex">
+    <p>Letting K be R or C,
+for a matrix A  K^n  n,
+its <strong>inverse matrix</strong> A^-1  K^n  n (if it exists) is defined as</p>
+<p><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" data-external="1"><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msup><mi>A</mi><mrow><mo>−</mo><mn>1</mn></mrow></msup><mi>A</mi><mo>=</mo><mi>A</mi><msup><mi>A</mi><mrow><mo>−</mo><mn>1</mn></mrow></msup><mo>=</mo><msub><mi mathvariant="normal">I</mi><mi>n</mi></msub></mrow><annotation encoding="application/x-tex">
 A^{-1}A = AA^{-1} = \mathrm{I}_n
 </annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8641em;"></span><span class="mord"><span class="mord mathnormal">A</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8641em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">−</span><span class="mord mtight">1</span></span></span></span></span></span></span></span></span><span class="mord mathnormal">A</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.8641em;"></span><span class="mord mathnormal">A</span><span class="mord"><span class="mord mathnormal">A</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8641em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">−</span><span class="mord mtight">1</span></span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.8333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathrm">I</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">n</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span></span>
-where  is the <code>n</code>-dimensional identity matrix.</p>
-<p>The inverse matrix exists if and only if  is invertible. In this case,
+where I_n is the <code>n</code>-dimensional identity matrix.</p>
+<p>The inverse matrix exists if and only if A is invertible. In this case,
 the inverse is unique.
 Supports input of float, double, cfloat and cdouble dtypes.
 Also supports batches of matrices, and if <code>A</code> is a batch of matrices
@@ -109,13 +109,13 @@ of any shape.
 <code><a href="linalg_solve.html">linalg_solve()</a></code> computes <code>A$inv() %*% B</code> with a
 numerically stable algorithm.</p>
 <p>Other linalg:
-<code><a href="linalg_cholesky_ex.html">linalg_cholesky_ex</a>()</code>,
 <code><a href="linalg_cholesky.html">linalg_cholesky</a>()</code>,
+<code><a href="linalg_cholesky_ex.html">linalg_cholesky_ex</a>()</code>,
 <code><a href="linalg_det.html">linalg_det</a>()</code>,
-<code><a href="linalg_eigh.html">linalg_eigh</a>()</code>,
-<code><a href="linalg_eigvalsh.html">linalg_eigvalsh</a>()</code>,
-<code><a href="linalg_eigvals.html">linalg_eigvals</a>()</code>,
 <code><a href="linalg_eig.html">linalg_eig</a>()</code>,
+<code><a href="linalg_eigh.html">linalg_eigh</a>()</code>,
+<code><a href="linalg_eigvals.html">linalg_eigvals</a>()</code>,
+<code><a href="linalg_eigvalsh.html">linalg_eigvalsh</a>()</code>,
 <code><a href="linalg_householder_product.html">linalg_householder_product</a>()</code>,
 <code><a href="linalg_inv_ex.html">linalg_inv_ex</a>()</code>,
 <code><a href="linalg_lstsq.html">linalg_lstsq</a>()</code>,
@@ -127,10 +127,10 @@ numerically stable algorithm.</p>
 <code><a href="linalg_pinv.html">linalg_pinv</a>()</code>,
 <code><a href="linalg_qr.html">linalg_qr</a>()</code>,
 <code><a href="linalg_slogdet.html">linalg_slogdet</a>()</code>,
-<code><a href="linalg_solve_triangular.html">linalg_solve_triangular</a>()</code>,
 <code><a href="linalg_solve.html">linalg_solve</a>()</code>,
-<code><a href="linalg_svdvals.html">linalg_svdvals</a>()</code>,
+<code><a href="linalg_solve_triangular.html">linalg_solve_triangular</a>()</code>,
 <code><a href="linalg_svd.html">linalg_svd</a>()</code>,
+<code><a href="linalg_svdvals.html">linalg_svdvals</a>()</code>,
 <code><a href="linalg_tensorinv.html">linalg_tensorinv</a>()</code>,
 <code><a href="linalg_tensorsolve.html">linalg_tensorsolve</a>()</code>,
 <code><a href="linalg_vector_norm.html">linalg_vector_norm</a>()</code></p></div>
@@ -143,10 +143,10 @@ numerically stable algorithm.</p>
 <span class="r-in"><span><span class="fu">linalg_inv</span><span class="op">(</span><span class="va">A</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">}</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> torch_tensor</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  1.0109  3.4731 -1.8833  3.2231</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  0.1769  2.7677 -1.4762  2.0178</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  0.2256  0.7859 -0.1238  0.0819</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  0.5782  0.0883 -1.0209  0.7435</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> -4.4665  0.2591  0.0137  1.3864</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  2.8748  0.2449  1.0594 -1.2168</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> -3.3342  0.0152 -0.0648  1.3911</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  9.0878 -0.9094 -0.1166 -3.3508</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [ CPUFloatType{4,4} ]</span>
 </code></pre></div>
     </div>
@@ -159,7 +159,7 @@ numerically stable algorithm.</p>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.1.</p>
 </div>
 
     </footer></div>
