@@ -64,7 +64,6 @@ if ((lanternLogEnabled & 2) == 2) {                                \
 extern std::string *pLanternLastError;
 #endif
 #define LANTERN_FUNCTION_START                                     \
-  LLOG("Entering %s", __func__)                                    \
   try {
 #define LANTERN_FUNCTION_END_RET(ret)                              \
 } catch(const std::exception& ex) {                                \
