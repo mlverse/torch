@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.19.2)
 project(lantern)
 
-set(TORCH_VERSION "2.0.1")
+set(TORCH_VERSION "2.5.1")
 
 if (NOT DEFINED TORCH_PATH)
     if (DEFINED ENV{TORCH_PATH})
