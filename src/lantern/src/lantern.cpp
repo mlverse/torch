@@ -1,11 +1,8 @@
+#include <torch/torch.h>
 #include <iostream>
 
 #define LANTERN_BUILD
-
 #include "lantern/lantern.h"
-
-#include <torch/torch.h>
-
 #include "utils.hpp"
 
 int lanternLogEnabled = 0;
