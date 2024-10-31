@@ -154,6 +154,7 @@ Collate:
     'optim-rmsprop.R'
     'optim-rprop.R'
     'optim-sgd.R'
+    'positron.R'
     'package.R'
     'qscheme.R'
     'quantization.R'
