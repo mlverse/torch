@@ -7,6 +7,7 @@
 #define WIN32_LEAN_AND_MEAN 1
 #include <windows.h>
 #undef max
+#undef min
 #endif
 
 #ifndef HOST_API
@@ -49,13 +50,13 @@ void check_lantern_loaded();
 
 extern int lanternLogEnabled;
 #define LLOG(...) if ((lanternLogEnabled & 1) == 1) {              \
-  printf("%ld INFO ", time(NULL));                                 \
+  printf("%lld INFO ", (long long)time(NULL));                                 \
   printf(__VA_ARGS__);                                        \
   printf("\n");                                                    \
 }                                                                  \
 if ((lanternLogEnabled & 2) == 2) {                                \
   FILE *pFile = fopen("lantern.log", "a");                         \
-  fprintf(pFile, "%ld INFO ", time(NULL));                         \
+  fprintf(pFile, "%lld INFO ", (long long)time(NULL));                         \
   fprintf(pFile, __VA_ARGS__);                               \
   fprintf(pFile, "\n");                                            \
   fclose(pFile);                                                   \
