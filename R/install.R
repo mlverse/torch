@@ -176,11 +176,7 @@ libtorch_url <- function() {
   
   if (is_macos()) {
     arch <- architecture()
-    if (arch == "x86_64") {
-      url <- glue::glue("https://download.pytorch.org/libtorch/cpu/libtorch-macos-{torch_version}.zip") 
-    } else if (arch == "arm64") {
-      url <- glue::glue("https://github.com/mlverse/libtorch-mac-m1/releases/download/LibTorch-for-R/libtorch-v{torch_version}.zip") 
-    }
+    url <- glue::glue("https://github.com/mlverse/libtorch-mac-m1/releases/download/LibTorch-for-R/libtorch-{arch}-v{torch_version}.zip") 
   }
   kind <- installation_kind()
   if (is_windows()) {
