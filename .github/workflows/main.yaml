@@ -32,7 +32,6 @@ jobs:
 
           - {os: ubuntu, r_version: release, version: cpu, runner: ubuntu-20.04}
           - {os: ubuntu, r_version: release, version: cpu, runner: ubuntu-20.04, precxx11abi: 1}
-          - {os: ubuntu, r_version: release, version: cu11.7, runner: [self-hosted, gpu-local]}
           - {os: ubuntu, r_version: release, version: cu11.8, runner: [self-hosted, gpu-local]}
 
           - {os: windows, r_version: release, version: cpu, runner: windows-latest}
