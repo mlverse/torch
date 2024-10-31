@@ -40,7 +40,7 @@ namespace c10 {
 struct LanternCPUAllocator final : at::Allocator {
   LanternCPUAllocator() {}
   ~LanternCPUAllocator() override {}
-  at::DataPtr allocate(size_t nbytes) const override {
+  at::DataPtr allocate(size_t nbytes) override {
     void* data;
 
     {
@@ -88,6 +88,10 @@ struct LanternCPUAllocator final : at::Allocator {
     }
     profiledCPUMemoryReporter().Delete(ptr);
     free_cpu(ptr);
+  }
+
+  void copy_data(void* dest, const void* src, std::size_t count) const override {
+    default_copy_data(dest, src, count);
   }
 
   at::DeleterFnPtr raw_deleter() const override { return &ReportAndDelete; }

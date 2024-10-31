@@ -98,120 +98,130 @@ std::string buildCalls(std::string name, YAML::Node node, size_t start) {
       arguments += ", ";
     }
 
-    std::string type = removeAt(node[idx]["dynamic_type"].as<std::string>());
-    std::string dtype = removeAt(node[idx]["type"].as<std::string>());
+    std::string dtype = removeAt(node[idx]["dynamic_type"].as<std::string>());
+    std::string type = removeAt(node[idx]["type"].as<std::string>());
 
-    if (type == "ArrayRef<double>" &
-        dtype != "c10::optional<ArrayRef<double>>") {
-      type = "std::vector<double>";
-    } else if (type == "const c10::List<c10::optional<Tensor>> &") {
-      type = "c10::List<c10::optional<torch::Tensor>>";
-    } else if (type == "Generator *") {
-      type = "std::shared_ptr<torch::Generator>";
-    } else if (type == "Stream") {
-      type = "at::Stream";
-    } else if (dtype == "const c10::optional<Tensor> &") {
-      type = "c10::optional<torch::Tensor>";
-    } else if (type == "const at::Scalar &" &&
-               dtype == "const c10::optional<at::Scalar> &") {
-      type = "c10::optional<at::Scalar>";
+    if (dtype == "ArrayRef<double>" &
+        type != "c10::optional<ArrayRef<double>>") {
+      dtype = "std::vector<double>";
+    } else if (dtype == "const c10::List<c10::optional<Tensor>> &") {
+      dtype = "c10::List<c10::optional<torch::Tensor>>";
+    } else if (dtype == "Generator *") {
+      dtype = "std::shared_ptr<torch::Generator>";
+    } else if (dtype == "Stream") {
+      dtype = "at::Stream";
+    } else if (type == "const c10::optional<Tensor> &") {
+      dtype = "c10::optional<torch::Tensor>";
+    } else if (dtype == "const at::Scalar &" &&
+               type == "const c10::optional<at::Scalar> &") {
+      dtype = "c10::optional<at::Scalar>";
     }
 
     // add optional call if required
     std::string call = node[idx]["name"].as<std::string>();
-    if ((dtype.find("c10::optional") != std::string::npos) &
-        (type != "c10::List<c10::optional<torch::Tensor>>") &
-        (type != "c10::optional<torch::Tensor>")) {
-      type = "c10::optional<" + type + ">";
+    if ((type.find("c10::optional") != std::string::npos) &
+        (dtype != "c10::List<c10::optional<torch::Tensor>>") &
+        (dtype != "c10::optional<torch::Tensor>")) {
+      dtype = "c10::optional<" + dtype + ">";
     }
 
-    if (type == "Tensor") {
-      arguments += "from_raw::Tensor(" + call + ")";
-    } else if (type == "TensorList") {
-      arguments += "from_raw::TensorList(" + call + ")";
-    } else if (type == "ScalarType") {
-      arguments += "from_raw::ScalarType(" + call + ")";
-    } else if (type == "Scalar") {
-      arguments += "from_raw::Scalar(" + call + ")";
-    } else if (type == "TensorOptions") {
-      arguments += "from_raw::TensorOptions(" + call + ")";
-    } else if (type == "Device") {
-      arguments += "from_raw::Device(" + call + ")";
-    } else if (type == "Dimname") {
-      arguments += "from_raw::Dimname(" + call + ")";
-    } else if (type == "DimnameList") {
-      arguments += "from_raw::DimnameList(" + call + ")";
-    } else if (type == "c10::optional<DimnameList>") {
-      arguments += "from_raw::optional::DimnameList(" + call + ")";
-    } else if (type == "Generator") {
-      arguments += "from_raw::Generator(" + call + ")";
-    } else if (type == "c10::optional<Generator>") {
-      arguments += "from_raw::optional::Generator(" + call + ")";
-    } else if (type == "IntArrayRef") {
-      arguments += "from_raw::IntArrayRef(" + call + ")";
-    } else if (type == "Storage") {
-      arguments += "from_raw::Storage(" + call + ")";
-    } else if (type == "std::string") {
-      arguments += "from_raw::string(" + call + ")";
-    } else if (type == "int64_t") {
-      arguments += "from_raw::int64_t(" + call + ")";
-    } else if (type == "bool") {
-      arguments += "from_raw::bool_t(" + call + ")";
-    } else if (type == "double") {
-      arguments += "from_raw::double_t(" + call + ")";
-    } else if (type == "c10::optional<double>") {
-      arguments += "from_raw::optional::double_t(" + call + ")";
-    } else if (type == "c10::optional<int64_t>") {
+    if (type == "::std::optional<int64_t>") {
       arguments += "from_raw::optional::int64_t(" + call + ")";
-    } else if (type == "c10::optional<bool>") {
-      arguments += "from_raw::optional::bool_t(" + call + ")";
-    } else if (type == "c10::optional<torch::Tensor>") {
-      arguments += "from_raw::optional::Tensor(" + call + ")";
-    } else if (type == "c10::optional<ScalarType>") {
-      arguments += "from_raw::optional::ScalarType(" + call + ")";
-    } else if (type == "::std::array<bool,2>" || type == "std::array<bool,3>" ||
-               type == "std::array<bool,4>" || type == "::std::array<bool,4>" ||
-               type == "::std::array<bool,3>") {
-      arguments += "from_raw::vector::bool_t(" + call + ")";
-    } else if (type == "c10::optional<std::string>") {
-      arguments += "from_raw::optional::string(" + call + ")";
-    } else if (type == "c10::optional<MemoryFormat>") {
-      arguments += "from_raw::optional::MemoryFormat(" + call + ")";
-    } else if (type == "c10::optional<Scalar>") {
+    } else if (type == "const ::std::optional<Scalar> &") {
       arguments += "from_raw::optional::Scalar(" + call + ")";
-    } else if (type == "c10::List<c10::optional<torch::Tensor>>") {
-      arguments += "from_raw::optional::TensorList(" + call + ")";
-    } else if (type == "ArrayRef<Scalar>") {
-      arguments += "from_raw::vector::Scalar(" + call + ")";
-    } else if (type == "c10::optional<IntArrayRef>") {
-      arguments += "from_raw::optional::IntArrayRef(" + call + ")";
-    } else if (type == "c10::optional<ArrayRef<double>>") {
-      arguments += "from_raw::optional::DoubleArrayRef(" + call + ")";
-    } else if (type == "at::Stream") {
-      arguments += "from_raw::Stream(" + call + ")";
-    } else if (type == "MemoryFormat") {
-      arguments += "from_raw::MemoryFormat(" + call + ")";
-    } else if (type == "c10::string_view") {
-      arguments += "from_raw::string_view(" + call + ")";
-    } else if (type == "c10::optional<c10::string_view>") {
-      arguments += "from_raw::optional::string_view(" + call + ")";
-    } else if (type == "c10::optional<Device>") {
-      arguments += "from_raw::optional::Device(" + call + ")";
-    } else if (type == "c10::SymIntArrayRef") {
-      arguments += "from_raw::SymIntArrayRef(" + call + ")";
-    } else if (type == "c10::SymInt") {
-      arguments += "from_raw::SymInt(" + call + ")";
-    } else if (type == "Layout") {
-      arguments += "from_raw::Layout(" + call + ")";
-    } else if (type == "c10::optional<Layout>") {
-      arguments += "from_raw::optional::Layout(" + call + ")";
-    } else if (type == "const ITensorListRef &") {
+    } else if (dtype == "Tensor") {
+      arguments += "from_raw::Tensor(" + call + ")";
+    } else if (dtype == "TensorList") {
       arguments += "from_raw::TensorList(" + call + ")";
+    } else if (dtype == "ScalarType") {
+      arguments += "from_raw::ScalarType(" + call + ")";
+    } else if (dtype == "Scalar") {
+      arguments += "from_raw::Scalar(" + call + ")";
+    } else if (dtype == "TensorOptions") {
+      arguments += "from_raw::TensorOptions(" + call + ")";
+    } else if (dtype == "Device") {
+      arguments += "from_raw::Device(" + call + ")";
+    } else if (dtype == "Dimname") {
+      arguments += "from_raw::Dimname(" + call + ")";
+    } else if (dtype == "DimnameList") {
+      arguments += "from_raw::DimnameList(" + call + ")";
+    } else if (dtype == "c10::optional<DimnameList>") {
+      arguments += "from_raw::optional::DimnameList(" + call + ")";
+    } else if (dtype == "Generator") {
+      arguments += "from_raw::Generator(" + call + ")";
+    } else if (dtype == "c10::optional<Generator>") {
+      arguments += "from_raw::optional::Generator(" + call + ")";
+    } else if (dtype == "IntArrayRef") {
+      arguments += "from_raw::IntArrayRef(" + call + ")";
+    } else if (dtype == "Storage") {
+      arguments += "from_raw::Storage(" + call + ")";
+    } else if (dtype == "std::string") {
+      arguments += "from_raw::string(" + call + ")";
+    } else if (dtype == "int64_t") {
+      arguments += "from_raw::int64_t(" + call + ")";
+    } else if (dtype == "bool") {
+      arguments += "from_raw::bool_t(" + call + ")";
+    } else if (dtype == "double") {
+      arguments += "from_raw::double_t(" + call + ")";
+    } else if (dtype == "c10::optional<double>") {
+      arguments += "from_raw::optional::double_t(" + call + ")";
+    } else if (dtype == "c10::optional<int64_t>") {
+      arguments += "from_raw::optional::int64_t(" + call + ")";
+    } else if (dtype == "c10::optional<bool>") {
+      arguments += "from_raw::optional::bool_t(" + call + ")";
+    } else if (dtype == "c10::optional<torch::Tensor>") {
+      arguments += "from_raw::optional::Tensor(" + call + ")";
+    } else if (dtype == "c10::optional<ScalarType>") {
+      arguments += "from_raw::optional::ScalarType(" + call + ")";
+    } else if (dtype == "::std::array<bool,2>" || dtype == "std::array<bool,3>" ||
+               dtype == "std::array<bool,4>" || dtype == "::std::array<bool,4>" ||
+               dtype == "::std::array<bool,3>") {
+      arguments += "from_raw::vector::bool_t(" + call + ")";
+    } else if (dtype == "c10::optional<std::string>") {
+      arguments += "from_raw::optional::string(" + call + ")";
+    } else if (dtype == "c10::optional<MemoryFormat>") {
+      arguments += "from_raw::optional::MemoryFormat(" + call + ")";
+    } else if (dtype == "c10::optional<Scalar>") {
+      arguments += "from_raw::optional::Scalar(" + call + ")";
+    } else if (dtype == "c10::List<c10::optional<torch::Tensor>>") {
+      arguments += "from_raw::optional::TensorList(" + call + ")";
+    } else if (dtype == "ArrayRef<Scalar>") {
+      arguments += "from_raw::vector::Scalar(" + call + ")";
+    } else if (dtype == "c10::optional<IntArrayRef>") {
+      arguments += "from_raw::optional::IntArrayRef(" + call + ")";
+    } else if (dtype == "c10::optional<ArrayRef<double>>") {
+      arguments += "from_raw::optional::DoubleArrayRef(" + call + ")";
+    } else if (dtype == "at::Stream") {
+      arguments += "from_raw::Stream(" + call + ")";
+    } else if (dtype == "MemoryFormat") {
+      arguments += "from_raw::MemoryFormat(" + call + ")";
+    } else if (dtype == "c10::string_view") {
+      arguments += "from_raw::string_view(" + call + ")";
+    } else if (dtype == "c10::optional<c10::string_view>") {
+      arguments += "from_raw::optional::string_view(" + call + ")";
+    } else if (dtype == "c10::optional<Device>") {
+      arguments += "from_raw::optional::Device(" + call + ")";
+    } else if (dtype == "c10::SymIntArrayRef") {
+      arguments += "from_raw::SymIntArrayRef(" + call + ")";
+    } else if (dtype == "c10::SymInt") {
+      arguments += "from_raw::SymInt(" + call + ")";
+    } else if (dtype == "Layout") {
+      arguments += "from_raw::Layout(" + call + ")";
+    } else if (dtype == "c10::optional<Layout>") {
+      arguments += "from_raw::optional::Layout(" + call + ")";
+    } else if (dtype == "const ITensorListRef &") {
+      arguments += "from_raw::TensorList(" + call + ")";
+    } else if (dtype == "DeviceIndex") {
+      arguments += "from_raw::DeviceIndex(" + call + ")";
+    } else if (dtype == "const c10::List<::std::optional<Tensor>> &") {
+      arguments += "from_raw::optional::TensorList(" + call + ")";
+    } else if (dtype == "std::vector<double>") {
+      arguments += "from_raw::vector::double_t(" + call + ")";
     } else {
-      throw std::runtime_error("Unknown type " + type);
+      throw std::runtime_error("Unknown type " + dtype);
     }
 
-    if (type == "std::shared_ptr<torch::Generator>") {
+    if (dtype == "std::shared_ptr<torch::Generator>") {
       arguments += ".get()";
     }
   }
@@ -281,6 +291,10 @@ bool isSupported(YAML::Node node) {
 
   if (node["name"].as<std::string>() == "special_polygamma") {
     std::cout << "Skipping (conversion) " << name << std::endl;
+    return false;
+  }
+
+  if (name == "sym_size" || name == "sym_numel" || name == "sym_stride" || name == "sym_storage_offset") {
     return false;
   }
 
@@ -411,6 +425,10 @@ int main(int argc, char *argv[]) {
     std::string argumentsCalls =
         buildArgumentsCalls(name, config[idx]["arguments"]);
     std::string function = toFunction(name, config[idx]["arguments"]);
+
+    if (name == "gradient") {
+      std::cout << "gradient!" << std::endl;
+    }
 
     if (hasMethodOf(config[idx], "namespace")) {
       headers.push_back("  LANTERN_API void* (LANTERN_PTR _lantern_" +

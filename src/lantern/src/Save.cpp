@@ -1,8 +1,10 @@
 #include <iostream>
+#include <fstream>
 
 #define LANTERN_BUILD
 
 #include <torch/torch.h>
+#include <torch/csrc/jit/serialization/import_read.h>
 
 #include "base64.hpp"
 #include "lantern/lantern.h"
@@ -67,10 +69,6 @@ void _lantern_test_print(void* x) {
   LANTERN_FUNCTION_END_VOID
 }
 
-namespace torch::jit {
-IValue pickle_load2(const std::vector<char>& data);
-IValue pickle_load3(std::string path);
-}
 void* _lantern_load_state_dict(void* path, bool legacy_stream) {
   LANTERN_FUNCTION_START
   auto path_ = from_raw::string(path);
@@ -80,9 +78,18 @@ void* _lantern_load_state_dict(void* path, bool legacy_stream) {
     std::ifstream file(path_.c_str(), std::ios::binary);
     std::vector<char> data((std::istreambuf_iterator<char>(file)),
                            std::istreambuf_iterator<char>());
-    ivalue = torch::jit::pickle_load2(data);
+    ivalue = torch::pickle_load(data);
   } else {
-    ivalue = torch::jit::pickle_load3(path_);
+    caffe2::serialize::PyTorchStreamReader reader(path_);
+    ivalue = torch::jit::readArchiveAndTensors(
+      "data",
+      /*pickle_prefix=*/"",
+      /*tensor_prefix=*/"",
+      /*type_resolver=*/c10::nullopt,
+      /*obj_loader=*/c10::nullopt,
+      /*device=*/c10::nullopt,
+      reader
+    );
   }
   
   return make_raw::IValue(ivalue);
