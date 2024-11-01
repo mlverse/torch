@@ -153,7 +153,7 @@ if(DEFINED ENV{CUDA} AND NOT '$ENV{CUDA}' STREQUAL '')
     set_property(TARGET lantern PROPERTY CUDA_SEPARABLE_COMPILATION ON)
     set_property(TARGET lantern PROPERTY CUDA_STANDARD 17)
   else()
-    set_property(TARGET lantern PROPERTY CUDA_STANDARD 14)
+    set_property(TARGET lantern PROPERTY CUDA_STANDARD 17)
   endif()
   
 else()
