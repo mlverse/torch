@@ -47,6 +47,10 @@ jobs:
           - config: {version: cu12.4}
             cuda: 12.4
             cuda_patch: 0
+            subpackages: '[]'
+
+          - config: {os: 'windows'}
+            subpackages: '["nvcc", "nvtx"]'
 
         exclude:
           - config: {os: macOS}
@@ -83,17 +87,13 @@ jobs:
         with:
           cuda: "${{matrix.cuda}}.${{matrix.cuda_patch}}"
           log-file-suffix: '${{matrix.cuda}}.${{matrix.cuda_patch}}.${{matrix.precxx11abi}}.txt'
+          sub-packages: '${{matrix.subpackages}}'
           
       - name: Install CuDNN
         if: ${{ matrix.cuda != '' }}
         uses: ./.github/actions/install-cudnn
         with:
           cuda_version: ${{ matrix.cuda }}
-
-      - if: matrix.os == 'windows'
-        name: Install NVTX
-        run: |
-          python3 -m pip install nvtx
 
       - name: Run cmake
         run: |
