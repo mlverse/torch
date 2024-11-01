@@ -82,6 +82,7 @@ jobs:
         id: cuda-toolkit
         with:
           cuda: "${{matrix.cuda}}.${{matrix.cuda_patch}}"
+          log-file-suffix: '${{matrix.cuda}}.${{matrix.cuda_patch}}.${{matrix.precxx11abi}}.txt'
           
       - name: Install CuDNN
         if: ${{ matrix.cuda != '' }}
