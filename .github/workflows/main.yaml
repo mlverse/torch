@@ -38,9 +38,6 @@ jobs:
         
         include:
           
-          - config: {os: ubuntu, version: cu11.7}
-            container: {image: 'nvidia/cuda:11.7.1-cudnn8-devel-ubuntu20.04', options: '--gpus all --runtime=nvidia'}
-
           - config: {os: ubuntu, version: cu11.8}
             container: {image: 'nvidia/cuda:11.8.0-cudnn8-devel-ubuntu20.04', options: '--gpus all --runtime=nvidia'}
 
