@@ -89,7 +89,12 @@ jobs:
         uses: ./.github/actions/install-cudnn
         with:
           cuda_version: ${{ matrix.cuda }}
-        
+
+      - if: matrix.os == 'windows'
+        name: Install NVTX
+        run: |
+          python3 -m pip install nvtx
+
       - name: Run cmake
         run: |
           cd src/lantern/
