@@ -78,6 +78,21 @@ endif()
 if (DEFINED CUDA_VERSION_NUMBER)
     if (WIN32)
         find_package(CUDAToolkit)
+        # Workaround issue with PyTorch NVTX headers
+        # See https://discuss.pytorch.org/t/failed-to-find-nvtoolsext/179635/13?u=dfalbel
+        if(CUDA_VERSION_NUMBER VERSION_GREATER_EQUAL 12)
+            message(STATUS "PyTorch NVTX headers workaround: Yes")
+            # only do this if nvToolsExt is not defined and CUDA::nvtx3 exists
+            if(NOT TARGET CUDA::nvToolsExt AND TARGET CUDA::nvtx3)
+                add_library(CUDA::nvToolsExt INTERFACE IMPORTED)
+                # ensure that PyTorch is told to use NVTX3 headers
+                target_compile_definitions(
+                    CUDA::nvToolsExt INTERFACE
+                    TORCH_CUDA_USE_NVTX3
+                )
+                target_link_libraries(CUDA::nvToolsExt INTERFACE CUDA::nvtx3)
+            endif()
+        endif()
     endif()
     enable_language(CUDA)
     add_compile_definitions("CUDA${CUDA_VERSION_NUMBER}")

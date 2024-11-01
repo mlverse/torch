@@ -90,10 +90,6 @@ jobs:
         with:
           cuda_version: ${{ matrix.cuda }}
 
-      - if: ${{ matrix.config.os == 'windows' }}
-        run: |
-          python3 -m pip install nvtx
-
       - name: Run cmake
         run: |
           cd src/lantern/
