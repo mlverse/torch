@@ -171,7 +171,9 @@ XPtrTorchOptionalTensor from_sexp_optional_tensor(SEXP x) {
   }
 }
 
-void delete_optional_tensor(void* x) { lantern_optional_tensor_delete(x); }
+void delete_optional_tensor(void* x) { 
+  lantern_optional_tensor_delete(x); 
+}
 
 // index tensor
 
@@ -217,7 +219,7 @@ XPtrTorchTensorList from_sexp_tensor_list(SEXP x) {
   }
 
   if (Rf_isNull(x)) {
-    Rcpp::List tmp;  // create an empty list
+    Rcpp::List tmp(0);  // create an empty list
     return cpp_torch_tensor_list(tmp);
   }
 
