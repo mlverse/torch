@@ -98,6 +98,12 @@ public:
   void push (std::packaged_task<T()>&& task) {
     this->event_loop.schedule(std::move(task));
   }
+  ~ThreadPool() {
+    this->event_loop.stopWhenEmpty();
+    for(auto& thread : threads) {
+      thread.join();
+    }
+  }
 };
 
 template <class type>

@@ -60,7 +60,6 @@ namespace {
 static EventLoop<void*> gTasks;
 static EventLoop<void> gBackwardTasks;
 static std::atomic<bool> backward_is_running(false);
-//static ThreadPool<void>* pool;
 
 void schedule_backward_task(std::packaged_task<void()>&& task) {
   static ThreadPool<void> pool(5);
