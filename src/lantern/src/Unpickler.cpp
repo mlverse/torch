@@ -15,17 +15,201 @@
 #include <torch/csrc/utils/byte_order.h>
 #include <string>
 #include <utility>
+#include <ATen/core/ivalue.h>
+#include <c10/util/ArrayRef.h>
+#include <caffe2/serialize/inline_container.h>
+#include <torch/csrc/Export.h>
+#include <torch/csrc/jit/frontend/script_type_parser.h>
+#include <torch/csrc/jit/serialization/pickler.h>
 
 namespace torch {
 namespace jit {
 
-class LanternUnpickler : public torch::jit::Unpickler {
-public:
-    void readGlobal(const std::string& module_name, const std::string& class_name);
-    PickleOpCode readInstruction();
-    void run();
-    IValue parse_ivalue();
-    using torch::jit::Unpickler::Unpickler;
+using TypeResolver =
+    std::function<c10::StrongTypePtr(const c10::QualifiedName&)>;
+
+using ObjLoader = std::function<
+    c10::intrusive_ptr<c10::ivalue::Object>(const at::StrongTypePtr&, IValue)>;
+
+class DeserializationStorageContext;
+
+// [unpickler refactor] there is some cruft around PickleOpCode::BUILD,
+// PickleOpCode::NEWOBJ, and the last_opcode_ member below that should be
+// deleted at some point, the Pickler doesn't produce it and it's only around to
+// support models saved before 1.1
+class LanternUnpickler {
+  AT_DISALLOW_COPY_AND_ASSIGN(LanternUnpickler);
+
+  using TypeParserT = c10::TypePtr (*)(const std::string&);
+
+ public:
+  // tensors inside the pickle are references to the tensor_table.
+  // class_resolver is to resolve strong class type, type_resolver_ is
+  // to resolve any JIT type. class_resolver and type_resolver are not merged
+  // here because some use cases need to get strong class type that
+  // type_resolver_ can not return.
+  // NOLINTNEXTLINE(cppcoreguidelines-pro-type-member-init)
+  LanternUnpickler(
+      std::function<size_t(char*, size_t)> reader,
+      TypeResolver type_resolver,
+      c10::ArrayRef<at::Tensor> tensor_table,
+      TypeParserT type_parser = defaultTypeParser)
+      : reader_(std::move(reader)),
+        tensor_table_(tensor_table),
+        type_resolver_(std::move(type_resolver)),
+        use_storage_device_(false),
+        type_parser_(type_parser),
+        version_(caffe2::serialize::kProducedFileFormatVersion) {}
+
+  // NOLINTNEXTLINE(cppcoreguidelines-pro-type-member-init)
+  LanternUnpickler(
+      std::function<size_t(char*, size_t)> reader,
+      TypeResolver type_resolver,
+      c10::ArrayRef<at::Tensor> tensor_table,
+      ObjLoader obj_loader,
+      TypeParserT type_parser = defaultTypeParser)
+      : reader_(std::move(reader)),
+        tensor_table_(tensor_table),
+        type_resolver_(std::move(type_resolver)),
+        obj_loader_(std::move(obj_loader)),
+        use_storage_device_(false),
+        type_parser_(type_parser),
+        version_(caffe2::serialize::kProducedFileFormatVersion) {}
+
+  // tensors inside the pickle contain meta-data, the raw tensor
+  // dead is retrieved by calling `read_record`.
+  // NOLINTNEXTLINE(cppcoreguidelines-pro-type-member-init)
+  LanternUnpickler(
+      std::function<size_t(char*, size_t)> reader,
+      TypeResolver type_resolver,
+      ObjLoader obj_loader,
+      std::function<at::DataPtr(const std::string&)> read_record,
+      std::optional<at::Device> device,
+      bool use_storage_device = false,
+      TypeParserT type_parser = defaultTypeParser,
+      std::shared_ptr<DeserializationStorageContext> storage_context = nullptr)
+      : reader_(std::move(reader)),
+        tensor_table_(),
+        type_resolver_(std::move(type_resolver)),
+        obj_loader_(std::move(obj_loader)),
+        read_record_(std::move(read_record)),
+        device_(device),
+        use_storage_device_(use_storage_device),
+        type_parser_(type_parser),
+        storage_context_(std::move(storage_context)),
+        version_(caffe2::serialize::kProducedFileFormatVersion) {}
+
+  // consume the pickle stream, producing an IValue from the contents.
+  // Type Tags: the pickler will restore the type tags on
+  // List and Dict objects when possible IValue is an Object.
+  // Otherwise, Dict and List objects will end up with Any as their tag.
+  // If you know the type of the ivalue, tags can be restored with
+  // restoreAccurateTypeTags
+  IValue parse_ivalue();
+
+  // [type tag serialization]
+  // This is used to determine whether to restore type tags be recursively
+  // descending into the returned stack object (if version_number <= 2), or
+  // if version_number >= 3, to use the type strings included in the pickle
+  // archive for container types. By default this is set to
+  // `kProducedFileFormatVersion` so unless you're loading a pickle file
+  // from alongside a corresponding `version` file, you don't need to set
+  // the version manually.
+  void set_version(uint64_t version_number) {
+    version_ = version_number;
+  }
+
+  static c10::TypePtr defaultTypeParser(const std::string& str) {
+    ScriptTypeParser parser;
+    return parser.parseType(str);
+  }
+
+ private:
+  // No arguments ensures that a template argument must be specified
+  // so that the number of bytes read / type read is explicit
+  template <typename T>
+  T read() {
+    T item;
+    if (sizeof(T) <= buffer_remaining_) {
+      // Fast path: entirely from buffer.
+      memcpy(&item, buffer_.data() + buffer_pos_, sizeof(T));
+      buffer_remaining_ -= sizeof(T);
+      buffer_pos_ += sizeof(T);
+    } else {
+      // Don't over-template the slow path, to avoid code size bloat.
+      readSlowWithBuffer(reinterpret_cast<char*>(&item), sizeof(T));
+    }
+    return item;
+  }
+  void readSlowWithBuffer(char* dest, size_t sz);
+  std::string readBytes(size_t num_bytes);
+
+  double readFloat();
+  void readGlobal(
+      const std::string& module_name,
+      const std::string& class_name);
+  void rebuildTensor(bool quantized);
+  void rebuildTensorFromTypeV2();
+  void rebuildSparseTensor();
+#ifdef USE_DISTRIBUTED
+  void rebuildRRef();
+#endif
+  PickleOpCode readInstruction();
+  PickleOpCode readOpCode() {
+    return static_cast<PickleOpCode>(read<uint8_t>());
+  }
+  std::string readString();
+  void readList(IValue list_ivalue);
+  void readListElements(IValue list_ivalue, size_t start);
+  void setInput(size_t memo_id);
+  void run();
+
+  // Returns the number of bytes read. This should statefully
+  // remember the position. Don't call reader_ directly.
+  std::function<size_t(char*, size_t)> reader_;
+  // Small buffer to avoid calling reader_ on a per-byte basis.
+  std::array<char, 256> buffer_;
+  size_t buffer_pos_{0};
+  size_t buffer_remaining_{0};
+
+  std::vector<IValue> stack_;
+
+  // globals are represented on the stack as IValue integer indices
+  // into this list
+  std::vector<std::function<void(void)>> globals_;
+  std::vector<IValue> memo_table_;
+  std::vector<size_t> marks_;
+  c10::ArrayRef<at::Tensor> tensor_table_;
+
+  // When deserializing types on lists and dicts, cache the type here
+  // so we don't have to parse the same type multiple times. Strings
+  // are already de-duplicated and replaced with BINGETs in the
+  // pickler, so we can just use the actual data pointer of each string.
+  std::unordered_map<std::string, c10::TypePtr> type_cache_;
+
+  // optionally nullptr, needs to be present for creating classes
+  TypeResolver type_resolver_;
+  ObjLoader obj_loader_;
+  IValue empty_tuple_;
+
+  std::function<at::DataPtr(const std::string&)> read_record_;
+  std::optional<at::Device> device_;
+  // When set to true, Unpickler will ignore the pickled device and use the
+  // device of the DataPtr returned by the read_record_ function. The default
+  // value of this flag is false.
+  const bool use_storage_device_;
+
+  TypeParserT type_parser_{defaultTypeParser};
+
+  // Used for torch.package to enable sharing of storages across
+  // ScriptModules and eager modules
+  std::shared_ptr<DeserializationStorageContext> storage_context_;
+
+  // See [type tag serialization]
+  uint64_t version_;
+
+  // See [NOTE] skip_next_read_global
+  uint8_t skip_next_read_global = 0;
 };
 
 static void restoreAccurateTypeTagsIfPossible(const IValue& root) {
@@ -257,6 +441,44 @@ static void restoreContainerTypeTags(
     TORCH_CHECK(
         false, "Unknown type for tag restoration: " + type->annotation_str());
   }
+}
+
+inline bool is_valid_python_id_char(char c) {
+  return c == '_' || c == '.' || (c >= '0' && c <= '9') ||
+      (c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z');
+}
+
+std::string LanternUnpickler::readString() {
+  std::string ss;
+  while (true) {
+    auto* const bufferStart = buffer_.data() + buffer_pos_;
+    const auto bufferLeft = buffer_.size() - buffer_pos_;
+    char* const newlinePtr =
+        static_cast<char*>(memchr(bufferStart, '\n', bufferLeft));
+    if (newlinePtr) {
+      // read up to newline and we are done.
+      auto const charsRead = newlinePtr - bufferStart;
+      ss.append(bufferStart, charsRead);
+      buffer_remaining_ -= charsRead + 1;
+      buffer_pos_ += charsRead + 1;
+      break;
+    } else {
+      // read whole buffer, refill
+      for (const char* p = bufferStart; p < bufferStart + bufferLeft; ++p) {
+        // Simple check just in case there is no terminating '\n'
+        TORCH_CHECK(
+            is_valid_python_id_char(*p),
+            "Found character '",
+            int(uint8_t(*p)),
+            "' in string, ",
+            "strings must be qualified Python identifiers");
+      }
+      ss.append(bufferStart, bufferLeft);
+      buffer_remaining_ = reader_(buffer_.data(), buffer_.size());
+      buffer_pos_ = 0;
+    }
+  }
+  return ss;
 }
 
 void LanternUnpickler::readGlobal(
@@ -900,6 +1122,341 @@ IValue LanternUnpickler::parse_ivalue() {
     restoreAccurateTypeTagsIfPossible(stack_[0]);
   }
   return stack_[0];
+}
+
+void LanternUnpickler::rebuildTensorFromTypeV2() {
+  // [NOTE] skip_next_read_global
+  // When rebuilding Tensor with Python Attr or Subclassed Tensor,
+  // we receive `(func, type(self), args, state)` on stack for
+  // `rebuildTensorFromTypeV2`.
+  // Thus next call to readGlobal corresponds to `func` which is
+  // the function to rebuild the base tensor.
+  // The call after `func` to readGlobal corresponds to `type` of the
+  // Tensor where we raise warning if the type is not `torch.Tensor`.
+  this->skip_next_read_global = 2;
+  auto curr_globals_idx = globals_.size();
+  globals_.emplace_back([this, curr_globals_idx] {
+    // args is a tuple with following data
+    //  (function to rebuild base tensor, type of tensor,
+    //   arguments to construct base tensor, Python State (as dict))
+    auto args = pop(stack_).toTuple();
+    size_t tup_idx = 0;
+    const auto args_elems = args->elements();
+    auto base_tensor_args = args_elems.at(tup_idx + 2).toTuple();
+    auto py_state = args_elems.at(tup_idx + 3).toGenericDict();
+    if (!py_state.empty()) {
+      TORCH_WARN(
+          "Loading Tensor with Python attributes will return at::Tensor with Python attributes being discarded");
+    }
+    // This calls the function to rebuild the
+    // base tensor.
+    // Eg. `rebuildTensor`, `rebuildSpareTensor`.
+    stack_.emplace_back(base_tensor_args);
+    globals_[curr_globals_idx + 1]();
+    stack_.emplace_back(pop(stack_));
+  });
+}
+
+#ifdef USE_RPC
+void LanternUnpickler::rebuildRRef() {
+  globals_.emplace_back([this] {
+    // It is the same as how rref is unpickled in python,
+    // see PyRRef::unpickle
+    auto tuple = std::move(stack_.back()).toTuple();
+    const auto& args = tuple->elements();
+    stack_.pop_back();
+    TORCH_INTERNAL_ASSERT(
+        args.size() == distributed::rpc::RFD_TUPLE_SIZE,
+        "Pickled RRefForkData must contain 7 numbers.");
+    auto ownerId =
+        static_cast<int16_t>(args.at(distributed::rpc::OWNER_IDX).toInt());
+    // const reference will extend the lifetime of the temporary variable
+    const auto& rrefId = distributed::rpc::RRefId(
+        static_cast<int16_t>(args.at(distributed::rpc::RREFID_ON_IDX).toInt()),
+        static_cast<int64_t>(args.at(distributed::rpc::RREFID_ID_IDX).toInt()));
+    const auto& forkId = distributed::rpc::RRefId(
+        static_cast<int16_t>(args.at(distributed::rpc::FORKID_ON_IDX).toInt()),
+        static_cast<int64_t>(args.at(distributed::rpc::FORKID_ID_IDX).toInt()));
+    auto parent =
+        static_cast<int16_t>(args.at(distributed::rpc::PARENT_IDX).toInt());
+    const auto& typeStr = static_cast<std::string>(
+        args.at(distributed::rpc::TYPE_IDX).toStringRef());
+    auto rrefForkData = distributed::rpc::RRefForkData(
+        ownerId, rrefId, forkId, parent, typeStr);
+    auto& ctx = distributed::rpc::RRefContext::getInstance();
+    c10::intrusive_ptr<distributed::rpc::RRef> rref;
+    TORCH_INTERNAL_ASSERT(
+        type_resolver_ != nullptr, "type_resolver_ is nullptr.");
+    at::StrongTypePtr type = type_resolver_(c10::QualifiedName(typeStr));
+    rref = ctx.getOrCreateRRef(rrefForkData, type.type_);
+    ctx.notifyOwnerAndParentOfFork(
+        rrefForkData.forkId_, rrefForkData.parent_, rref);
+    stack_.emplace_back(
+        c10::static_intrusive_pointer_cast<c10::RRefInterface>(rref));
+  });
+  stack_.emplace_back(int64_t(globals_.size() - 1));
+  return;
+}
+#endif
+
+void LanternUnpickler::readSlowWithBuffer(char* dest, size_t sz) {
+  // First, read any partial from buffer (may be 0).
+  // We explicitly assume that sz > buffer_remaining_,
+  // and that sz is never bigger than buffer_.size().
+  AT_ASSERT(sz > buffer_remaining_);
+  const size_t from_old_buf = buffer_remaining_;
+  if (from_old_buf != 0) {
+    memcpy(dest, buffer_.data() + buffer_pos_, from_old_buf);
+  }
+  const size_t needed = sz - from_old_buf;
+  // Full read into the buffer. The calls here all explicitly
+  // assume that one buffer will be enough for any sz.
+  AT_ASSERT(sz <= buffer_.size());
+  buffer_remaining_ = reader_(buffer_.data(), buffer_.size());
+  if (buffer_remaining_ < needed) {
+    TORCH_CHECK(false, "Unexpected end of pickler archive.");
+  }
+  memcpy(dest + from_old_buf, buffer_.data(), needed);
+  buffer_pos_ = needed; // assignment (0'ed from read)
+  buffer_remaining_ -= needed;
+}
+
+// Read a number of bytes from the input stream
+std::string LanternUnpickler::readBytes(size_t length) {
+  std::string data;
+  static const size_t kSmallString = 64;
+  TORCH_CHECK(
+      length <= data.max_size(),
+      "Parsing error: can't read ",
+      length,
+      " bytes to a string");
+  if (length <= buffer_remaining_) {
+    // Fast-path: entirely in buffer.
+    data.assign(buffer_.data() + buffer_pos_, length);
+    buffer_pos_ += length;
+    buffer_remaining_ -= length;
+  } else if (length <= kSmallString) {
+    // If the string is smallish, do a full buffer read,
+    // and read out of that buffer.
+    data.resize(length);
+    readSlowWithBuffer(&data[0], length);
+  } else {
+    // Otherwise, for larger strings, read what we can from
+    // the buffer, and then read directly to the destination.
+    const size_t from_old_buf = buffer_remaining_;
+    if (from_old_buf != 0) {
+      data.reserve(length);
+      data.append(buffer_.data() + buffer_pos_, from_old_buf);
+    }
+    data.resize(length);
+    const size_t needed = length - from_old_buf;
+    size_t nread = reader_(&data[from_old_buf], needed);
+    if (nread != needed) {
+      TORCH_CHECK(false, "Unexpected end of pickler archive.");
+    }
+    buffer_remaining_ = 0;
+    // buffer_pos_ has no meaning with buffer_remaining_ == 0.
+  }
+  return data;
+}
+
+void LanternUnpickler::readListElements(IValue list_ivalue, size_t start) {
+  auto num_elements = stack_.size() - start;
+  auto elements = c10::ArrayRef<IValue>(stack_).slice(start);
+  if (list_ivalue.isIntList()) {
+    auto list = std::move(list_ivalue).toIntList();
+    list.reserve(num_elements);
+    for (const auto& elem : elements) {
+      list.emplace_back(elem.toInt());
+    }
+  } else if (list_ivalue.isTensorList()) {
+    auto list = std::move(list_ivalue).toTensorList();
+    list.reserve(num_elements);
+    for (const auto& elem : elements) {
+      list.emplace_back(elem.toTensor());
+    }
+  } else if (list_ivalue.isDoubleList()) {
+    auto list = std::move(list_ivalue).toDoubleList();
+    list.reserve(num_elements);
+    for (const auto& elem : elements) {
+      list.emplace_back(elem.toDouble());
+    }
+  } else if (list_ivalue.isBoolList()) {
+    auto list = std::move(list_ivalue).toBoolList();
+    list.reserve(num_elements);
+    for (const auto& elem : elements) {
+      list.push_back(elem.toBool());
+    }
+  } else if (list_ivalue.isList()) {
+    auto list = std::move(list_ivalue).toList();
+    list.reserve(num_elements);
+    for (const auto& elem : elements) {
+      list.emplace_back(elem);
+    }
+  } else {
+    TORCH_CHECK(false, "Unknown IValue list kind: ", list_ivalue.tagKind());
+  }
+  stack_.erase(
+      stack_.begin() + static_cast<std::ptrdiff_t>(start), stack_.end());
+}
+
+// Pop all the list items off of the stack and append them to the list at
+// the corresponding MARK
+void LanternUnpickler::readList(IValue list_ivalue) {
+  TORCH_CHECK(!marks_.empty(), "Parsing error: marks_ is empty");
+  size_t start = marks_.back();
+  marks_.pop_back();
+  readListElements(std::move(list_ivalue), start);
+}
+
+double LanternUnpickler::readFloat() {
+  AT_ASSERT(sizeof(double) == 8);
+  double big_endian = read<double>();
+#if __BYTE_ORDER__ == __ORDER_LITTLE_ENDIAN__
+  double little_endian = 0;
+
+  // Pickle floats are big endian, so reverse the bytes
+  auto big_endian_ptr = reinterpret_cast<const char*>(&big_endian);
+  std::reverse_copy(
+      big_endian_ptr,
+      big_endian_ptr + sizeof(big_endian),
+      reinterpret_cast<char*>(&little_endian));
+
+  return little_endian;
+#elif __BYTE_ORDER__ == __ORDER_BIG_ENDIAN__
+  return big_endian;
+#else
+#error Unexpected or undefined __BYTE_ORDER__
+#endif
+}
+
+static std::vector<int64_t> tupleToIntList(const IValue& v) {
+  return fmap(v.toTupleRef().elements(), [](const IValue& v) -> int64_t {
+    return v.toInt();
+  });
+}
+
+void LanternUnpickler::rebuildTensor(bool quantized) {
+  globals_.emplace_back([this, quantized] {
+    auto tup = pop(stack_).toTuple();
+    const auto& elements = tup->elements();
+    size_t idx = 0;
+    auto& storage_tensor = elements.at(idx++).toTensor();
+    int64_t storage_offset = elements.at(idx++).toInt();
+    std::vector<int64_t> size = tupleToIntList(elements.at(idx++));
+    std::vector<int64_t> stride = tupleToIntList(elements.at(idx++));
+    at::Tensor result;
+    if (quantized) {
+      auto qparams_tuple = elements.at(idx++).toTuple();
+      const auto& qparams = qparams_tuple->elements();
+      auto qscheme = static_cast<at::QScheme>(qparams.at(0).toInt());
+      switch (qscheme) {
+        case at::kPerTensorAffine: {
+          double q_scale = qparams.at(1).toDouble();
+          int64_t q_zero_point = qparams.at(2).toInt();
+          result = at::_empty_affine_quantized(
+              {0}, storage_tensor.options(), q_scale, q_zero_point);
+        } break;
+        case at::kPerChannelAffineFloatQParams:
+        case at::kPerChannelAffine: {
+          const auto& scales = qparams.at(1).toTensor();
+          const auto& zero_points = qparams.at(2).toTensor();
+          int64_t axis = qparams.at(3).toInt();
+          result = at::_empty_per_channel_affine_quantized(
+              {0}, scales, zero_points, axis, storage_tensor.options());
+        } break;
+        default:
+          TORCH_CHECK(
+              false,
+              "Unsupported tensor quantization type in serialization ",
+              toString(qscheme));
+          break;
+      }
+    } else {
+      result = at::empty({0}, storage_tensor.options());
+    }
+    bool requires_grad = elements.at(idx++).toBool();
+    idx++; // backwards hooks is empty
+    at::TensorImpl* impl = result.unsafeGetTensorImpl();
+    impl->set_storage_keep_dtype(storage_tensor.storage());
+    impl->set_storage_offset(storage_offset);
+    impl->set_sizes_and_strides(size, stride);
+    result = autograd::make_variable(result, requires_grad);
+
+    // Handle if math_bits were pickled.
+    // See `args` of _reduce_ex_internal
+    // for a regular tensor (final else case).
+    // Tensors pickled before this patch didn't
+    // have this argument for storing MathBits,
+    // in that case, we do nothing.
+    // NOTE: `math_bits` is the 7th arg.
+    // NOTE: This is only meant for regular tensor and not quantized
+    //       which also has 7 args serialized.
+    if (!quantized && elements.size() == 7) {
+      auto math_bits = elements.at(idx++).toGenericDict();
+      torch::jit::setTensorMetadata(result, math_bits);
+    }
+
+    stack_.emplace_back(std::move(result));
+  });
+}
+
+void LanternUnpickler::rebuildSparseTensor() {
+  globals_.emplace_back([this] {
+    auto tup = pop(stack_).toTuple();
+    const auto& elements = tup->elements();
+    size_t idx = 0;
+    auto layout = elements.at(idx++).toInt();
+    at::Tensor result;
+    switch (layout) {
+      case static_cast<int>(c10::Layout::Sparse): {
+        std::vector<int64_t> size = tupleToIntList(elements.at(idx++));
+        bool requires_grad = elements.at(idx++).toBool();
+        auto& indices_tensor = elements.at(idx++).toTensor();
+        auto& values_tensor = elements.at(idx++).toTensor();
+        auto options = values_tensor.options()
+                           .layout(c10::Layout::Sparse)
+                           .requires_grad(requires_grad);
+        result = at::_sparse_coo_tensor_unsafe(
+            indices_tensor, values_tensor, size, options);
+        result = autograd::make_variable(result, options.requires_grad());
+        break;
+      }
+      case static_cast<int>(c10::Layout::SparseCsr): {
+        std::vector<int64_t> size = tupleToIntList(elements.at(idx++));
+        bool requires_grad = elements.at(idx++).toBool();
+        auto& crow_indices = elements.at(idx++).toTensor();
+        auto& col_indices = elements.at(idx++).toTensor();
+        auto& values_tensor = elements.at(idx++).toTensor();
+        auto options = values_tensor.options()
+                           .layout(c10::Layout::SparseCsr)
+                           .requires_grad(requires_grad);
+        result = at::_sparse_csr_tensor_unsafe(
+            crow_indices, col_indices, values_tensor, size, options);
+        result =
+            autograd::make_variable(std::move(result), options.requires_grad());
+        break;
+      }
+      default:
+        TORCH_CHECK(
+            false,
+            "Unsupported sparse tensor layout type in serialization ",
+            static_cast<c10::Layout>(layout));
+        break;
+    }
+    stack_.emplace_back(std::move(result));
+  });
+}
+
+void LanternUnpickler::setInput(size_t memo_id) {
+  AT_ASSERT(!stack_.empty());
+  if (memo_id >= memo_table_.size()) {
+    memo_table_.insert(
+        memo_table_.end(), memo_id - memo_table_.size(), IValue());
+    memo_table_.push_back(stack_.back());
+  } else {
+    memo_table_[memo_id] = stack_.back();
+  }
 }
 
 } // namespace jit
