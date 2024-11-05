@@ -188,7 +188,7 @@ void restoreAccurateTypeTags(const IValue& root, const TypePtr& type_tag) {
   }
 }
 
-LANTERN_API IValue lantern_read_pickle(
+IValue lantern_read_pickle(
     const std::string& archive_name,
     caffe2::serialize::PyTorchStreamReader& stream_reader) {
   std::string picklename = archive_name + ".pkl";
