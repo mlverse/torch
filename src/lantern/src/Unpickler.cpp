@@ -4,9 +4,10 @@
 #include <ATen/core/jit_type_base.h>
 #include <c10/util/Optional.h>
 #include <torch/csrc/jit/ir/ir.h>
-#define private public
 #include <torch/csrc/jit/serialization/unpickler.h>
-#undef private
+#ifdef USE_RPC
+#include <torch/csrc/distributed/rpc/rref_context.h>
+#endif
 #include <torch/csrc/jit/api/function_impl.h>
 #include <torch/csrc/jit/mobile/type_parser.h>
 #include <torch/csrc/jit/serialization/pickler.h>
