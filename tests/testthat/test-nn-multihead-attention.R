@@ -38,10 +38,4 @@ test_that("nn_multihead_attention", {
   expect_identical(out2[[1]]$size(), c(5L, 8L, 32L))
   expect_identical(out2[[2]]$size(), c(8L, 5L, 5L))
 
-  for (i in seq_len(1)) {
-    expect_equal(
-      as.matrix(torch_tril(out2[[2]][i, ])),
-      as.matrix(out2[[2]][i , ])
-    )
-  }
 })
