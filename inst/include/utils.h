@@ -101,7 +101,7 @@ public:
   ~ThreadPool() {
     this->event_loop.stopWhenEmpty();
     for(auto& thread : threads) {
-      thread.join();
+      thread.detach();
     }
   }
 };
