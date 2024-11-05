@@ -9,6 +9,7 @@
 #include "base64.hpp"
 #include "lantern/lantern.h"
 #include "utils.hpp"
+#include "Unpickler.h"
 
 std::string size_t_to_string(std::size_t i) {
   std::stringstream ss;
@@ -81,15 +82,7 @@ void* _lantern_load_state_dict(void* path, bool legacy_stream) {
     ivalue = torch::pickle_load(data);
   } else {
     caffe2::serialize::PyTorchStreamReader reader(path_);
-    ivalue = torch::jit::readArchiveAndTensors(
-      "data",
-      /*pickle_prefix=*/"",
-      /*tensor_prefix=*/"",
-      /*type_resolver=*/c10::nullopt,
-      /*obj_loader=*/c10::nullopt,
-      /*device=*/c10::nullopt,
-      reader
-    );
+    ivalue = torch::jit::lantern_read_pickle("data", reader);
   }
   
   return make_raw::IValue(ivalue);

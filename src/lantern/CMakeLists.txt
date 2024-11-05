@@ -142,6 +142,7 @@ set(LANTERN_SRC
     src/Compile.cpp
     src/Amp.cpp
     src/JITExecute.cpp
+    src/Unpickler.cpp
 )
 
 if(APPLE)
