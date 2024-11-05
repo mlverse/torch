@@ -5,7 +5,7 @@
 #include <c10/util/Optional.h>
 #include <torch/csrc/jit/ir/ir.h>
 #define private public
-#include "Unpickler.h"
+#include <torch/csrc/jit/serialization/unpickler.h>
 #undef private
 #include <torch/csrc/jit/api/function_impl.h>
 #include <torch/csrc/jit/mobile/type_parser.h>
@@ -18,6 +18,15 @@
 
 namespace torch {
 namespace jit {
+
+class LanternUnpickler : public torch::jit::Unpickler {
+public:
+    void readGlobal(const std::string& module_name, const std::string& class_name);
+    PickleOpCode readInstruction();
+    void run();
+    IValue parse_ivalue();
+    using torch::jit::Unpickler::Unpickler;
+};
 
 static void restoreAccurateTypeTagsIfPossible(const IValue& root) {
   if (root.isObject()) {
