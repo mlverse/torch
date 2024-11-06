@@ -50,8 +50,13 @@ class EventLoop {
       {
         std::unique_lock<std::mutex> lock(mtx_);
         if (tasks_.empty()) {
-          cv_.wait(lock, [this] { return !tasks_.empty(); });
+          cv_.wait(lock, [this] { return stop_requested_ || !tasks_.empty(); });
         }
+        
+        if (stop_requested_ && tasks_.empty()) {
+          return;
+        }
+      
         fn = std::move(tasks_.front());
         tasks_.pop_front();
       }
@@ -76,10 +81,15 @@ class EventLoop {
     }
     cv_.notify_one();
   }
+  void stop() {
+    stop_requested_ = true;
+    cv_.notify_all();
+  }
 
  private:
   std::mutex mtx_;
   std::condition_variable cv_;
+  std::atomic<bool> stop_requested_{false};
   std::deque<std::packaged_task<T()>> tasks_;
 };
 
@@ -99,9 +109,9 @@ public:
     this->event_loop.schedule(std::move(task));
   }
   ~ThreadPool() {
-    this->event_loop.stopWhenEmpty();
+    event_loop.stop();
     for(auto& thread : threads) {
-      thread.detach();
+      thread.join();
     }
   }
 };
