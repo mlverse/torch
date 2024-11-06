@@ -43,8 +43,9 @@ Imports:
     glue,
     desc,
     safetensors (>= 0.1.1),
-    jsonlite
-RoxygenNote: 7.3.1
+    jsonlite,
+    scales
+RoxygenNote: 7.3.2
 Roxygen: list(markdown = TRUE)
 Suggests:
     testthat (>= 3.0.0),
