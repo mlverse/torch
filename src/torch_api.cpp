@@ -1434,7 +1434,10 @@ XPtrTorchIntArrayRef from_sexp_int_array_ref(SEXP x, bool allow_null,
     if (allow_null) {
       return nullptr;
     } else {
-      Rcpp::stop("Expected a list of integers and found NULL.");
+      // this is required by torch_count_nonzero to keep its behavior of not requiring the dim
+      // argument.
+      std::vector<int64_t> vec(0);
+      return XPtrTorchIntArrayRef(lantern_vector_int64_t(vec.data(), vec.size()));
     }
   }
 
