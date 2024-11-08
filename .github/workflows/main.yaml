@@ -75,7 +75,7 @@ jobs:
       - uses: ./.github/actions/setup-r
         with:
           r_version: ${{ matrix.config.r_version}}
-      
+
       - name: Setup cmake
         uses: jwlawson/actions-setup-cmake@v1
         if: ${{ env.BUILD_LANTERN == 1}}
@@ -87,12 +87,10 @@ jobs:
           cache: false
           extra-packages: any::rcmdcheck
           needs: check
-      
-      - run: |
-          Sys.getenv("PRECXX11ABI")
-          Sys.setenv("PRECXX11ABI" = 1)
-          pkgbuild::build()
-        shell: Rscript {0}
+
+      - name: Session info
+        run: |
+          Rscript -e "sessionInfo()"
  
       - uses: r-lib/actions/check-r-package@v2
         with:
