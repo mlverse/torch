@@ -10022,11 +10022,11 @@ bool lanternLoadLibrary(const std::string &libPath, std::string *pError)
 
   pLibrary = (void *)::LoadLibraryEx(libFile.c_str(), NULL, LOAD_LIBRARY_SEARCH_DEFAULT_DIRS);
 #elif defined(__APPLE__) || defined(__MACH__)
-  pLibrary = ::dlopen(libFile.c_str(), RTLD_NOW | RTLD_GLOBAL);
+  pLibrary = ::dlopen(libFile.c_str(), RTLD_NOW);
 #else
   // On Linux use RTLD_DEEPBIND to avoid conflicts and make sure libtorch calls into
   // the bundled MKL BLAS.
-  pLibrary = dlopen(libFile.c_str(), RTLD_NOW | RTLD_GLOBAL | RTLD_DEEPBIND);
+  pLibrary = dlopen(libFile.c_str(), RTLD_NOW | RTLD_DEEPBIND);
 #endif
   if (pLibrary == NULL)
   {
