@@ -97,22 +97,5 @@ jobs:
           error-on: '"error"'
           args: 'c("--no-multiarch", "--no-manual", "--as-cran")'
 
-      - if: failure()
-        run: |
-          if (!rlang::is_installed("torch")) {
-            install.packages("remotes")
-            remotes::install_local()
-          }
-          value <- torch_ones(10, 2, 2)
-          print(value)
-          ex <- linalg_cholesky_ex(value)
-          info <- info$eq(0)
-          print(info)
-          eq <- info$eq(0)
-          print(eq)          
-          uns <- eq$unsqueeze(1)
-          print(uns)
-          print(as.array(uns))
-        shell: Rscript {0}
       
       
