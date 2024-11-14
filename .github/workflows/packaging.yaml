@@ -6,7 +6,7 @@ on:
     branches:
       - main
       - cran/*
-      - packaging3
+      - fix/packaging
       - s3
   schedule:
     - cron: "0 2 * * *"
@@ -23,20 +23,20 @@ jobs:
       matrix:
         
         config: 
-          - {r_version: 'release', os: macOS, version: cpu-intel, runner: macOS-13}
-          - {r_version: '',        os: macOS, version: cpu-m1, runner: [self-hosted, m1]}
+          - {r_version: 'release', os: macOS, version: cpu-intel, runner: macos-13}
+          - {r_version: '',        os: macOS, version: cpu-m1, runner: macos-latest}
           
           - {r_version: 'release', os: ubuntu, version: cpu, runner: [self-hosted, linux]}
-          - {r_version: 'release', os: ubuntu, version: cu118, runner: [self-hosted, linux]}
+          - {r_version: 'release', os: ubuntu, version: cu124, runner: [self-hosted, linux]}
           
-          - {r_version: 'release', os: windows, version: cpu, runner: windows-2019}
-          - {r_version: 'release', os: windows, version: cu118, runner: windows-2019}
+          - {r_version: 'release', os: windows, version: cpu, runner: windows-latest}
+          - {r_version: 'release', os: windows, version: cu124, runner: windows-latest}
           
         include:
           
-          - config: {version: cu118}
-            cuda: 11.8
-            cuda_patch: 0
+          - config: {version: cu124}
+            cuda: 12.4
+            cuda_patch: 1
           
           - config: {os: ubuntu}
             container: ubuntu:20.04
