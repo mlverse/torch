@@ -1,3 +1,5 @@
+#include <c10/core/Backend.h>
+#include <c10/core/DeviceType.h>
 #define LANTERN_BUILD
 #include <torch/torch.h>
 #include <ATen/autocast_mode.h>
@@ -6,39 +8,39 @@
 
 bool _lantern_amp_is_autocast_gpu_enabled() {
   LANTERN_FUNCTION_START
-  return at::autocast::is_enabled();
+  return at::autocast::is_autocast_enabled(torch::DeviceType::CUDA);
   LANTERN_FUNCTION_END
 }
 
 bool _lantern_amp_is_autocast_cpu_enabled() {
   LANTERN_FUNCTION_START
-  return at::autocast::is_cpu_enabled();
+  return at::autocast::is_autocast_enabled(torch::DeviceType::CPU);
   LANTERN_FUNCTION_END
 }
 
 void _lantern_amp_autocast_set_gpu_enabled(bool enabled) {
   LANTERN_FUNCTION_START
-  at::autocast::set_enabled(enabled);
+  at::autocast::set_autocast_enabled(torch::DeviceType::CUDA, enabled);
   LANTERN_FUNCTION_END_VOID
 }
 
 void _lantern_amp_autocast_set_cpu_enabled(bool enabled) {
   LANTERN_FUNCTION_START
-  at::autocast::set_cpu_enabled(enabled);
+  at::autocast::set_autocast_enabled(torch::DeviceType::CPU, enabled);
   LANTERN_FUNCTION_END_VOID
 }
 
 void _lantern_amp_autocast_set_gpu_dtype (void* dtype) {
     LANTERN_FUNCTION_START
     auto scalar_type = from_raw::ScalarType(dtype);
-    at::autocast::set_autocast_gpu_dtype(scalar_type);
+    at::autocast::set_autocast_dtype(torch::DeviceType::CUDA,scalar_type);
     LANTERN_FUNCTION_END_VOID
 }
 
 void _lantern_amp_autocast_set_cpu_dtype (void* dtype) {
     LANTERN_FUNCTION_START
     auto scalar_type = from_raw::ScalarType(dtype);
-    at::autocast::set_autocast_cpu_dtype(scalar_type);
+    at::autocast::set_autocast_dtype(torch::DeviceType::CPU, scalar_type);
     LANTERN_FUNCTION_END_VOID
 }
 
@@ -56,16 +58,16 @@ bool _lantern_amp_autocast_is_cache_enabled() {
 
 void* _lantern_amp_autocast_get_gpu_dtype () {
     LANTERN_FUNCTION_START
-    auto scalar_type = at::autocast::get_autocast_gpu_dtype();
+    auto scalar_type = at::autocast::get_autocast_dtype(torch::DeviceType::CUDA);
     return make_raw::ScalarType(scalar_type);
-    LANTERN_FUNCTION_END_VOID
+    LANTERN_FUNCTION_END
 }
 
 void* _lantern_amp_autocast_get_cpu_dtype () {
     LANTERN_FUNCTION_START
-    auto scalar_type = at::autocast::get_autocast_cpu_dtype();
+    auto scalar_type = at::autocast::get_autocast_dtype(torch::DeviceType::CPU);
     return make_raw::ScalarType(scalar_type);
-    LANTERN_FUNCTION_END_VOID
+    LANTERN_FUNCTION_END
 }
 
 void _lantern_amp_autocast_increment_nesting () {

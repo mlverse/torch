@@ -4450,7 +4450,7 @@ NULL
 #' described in the type promotion documentation .
 #'
 #'
-#' @param from (dtype) The original `torch_dtype`.
+#' @param from_ (dtype) The original `torch_dtype`.
 #' @param to (dtype) The target `torch_dtype`.
 #'
 #' @name torch_can_cast
