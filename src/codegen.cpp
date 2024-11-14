@@ -15,6 +15,7 @@ inline bool is_in(const std::string& x, const std::set<std::string>& y) {
 std::string cpp_arg_to_torch_type(SEXP obj,
                                   const std::vector<std::string>& expected_types,
                                   const std::string& arg_name) {
+                                  
   if (Rf_isSymbol(obj)) {
     return "Missing";
   }
@@ -98,16 +99,20 @@ std::string cpp_arg_to_torch_type(SEXP obj,
 
   bool is_numeric_or_list_or_null = is_numeric || is_list || is_null;
 
-  if (is_in("int64_t", etypes) && ((is_numeric && len == 1) || is_null)) {
+  if (is_in("int64_t", etypes) && ((is_numeric && len == 1))) {
+    return "int64_t";
+  }
+
+  if (is_in("IntArrayRef", etypes) && is_numeric_or_list_or_null) {
+    return "IntArrayRef";
+  }
+
+  if (is_in("int64_t", etypes) && is_null) {
     return "int64_t";
   }
 
   if (is_in("c10::SymInt", etypes) && ((is_numeric && len == 1) || is_null)) {
     return "c10::SymInt";
-  }
-
-  if (is_in("IntArrayRef", etypes) && is_numeric_or_list_or_null) {
-    return "IntArrayRef";
   }
 
   if (is_in("ArrayRef<double>", etypes) && (is_numeric || is_null)) {
@@ -116,6 +121,11 @@ std::string cpp_arg_to_torch_type(SEXP obj,
 
   if (is_in("double", etypes) && ((is_numeric && len == 1) || is_null)) {
     return "double";
+  }
+
+  if (is_in("TensorList", etypes) &&
+      (is_list || is_tensor || is_null || is_numeric)) {
+    return "TensorList";
   }
 
   bool is_logical = Rf_isLogical(obj);
@@ -128,11 +138,6 @@ std::string cpp_arg_to_torch_type(SEXP obj,
        is_in("std::array<bool,2>", etypes)) &&
       is_logical) {
     return "std::array<bool," + std::to_string(len) + ">";
-  }
-
-  if (is_in("TensorList", etypes) &&
-      (is_list || is_tensor || is_null || is_numeric)) {
-    return "TensorList";
   }
 
   if (is_in("Generator", etypes) && is_null) {
@@ -150,6 +155,10 @@ std::string cpp_arg_to_torch_type(SEXP obj,
 
   if (is_in("const c10::List<c10::optional<Tensor>> &", etypes) && is_list) {
     return "const c10::List<c10::optional<Tensor>> &";
+  }
+
+  if (is_in("const c10::List<::std::optional<Tensor>> &", etypes) && is_list) {
+    return "const c10::List<::std::optional<Tensor>> &";
   }
 
   Rcpp::stop("Can't convert argument:" + arg_name);
@@ -205,6 +214,11 @@ std::string create_fn_name(const std::string& fun_name,
   std::string type;
   for (auto x : nd_args) {
     type = cpp_arg_to_torch_type(args[x], expected_types[x], x);
+    //std::cout << "arg_name: " << x << ": " << type << std::endl;
+    for (auto y : Rcpp::as<std::vector<std::string>>(expected_types[x])) {
+      //std::cout << "expected_types: " << y << std::endl;
+    }
+    
     if (type != "Missing") {
       arg_names.push_back(x);
       arg_types.push_back(type);

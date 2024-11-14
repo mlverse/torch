@@ -1,5 +1,5 @@
 branch <- "main"
-torch_version <- "2.0.1"
+torch_version <- "2.5.1"
 
 #' Install Torch
 #'
@@ -176,11 +176,7 @@ libtorch_url <- function() {
   
   if (is_macos()) {
     arch <- architecture()
-    if (arch == "x86_64") {
-      url <- glue::glue("https://download.pytorch.org/libtorch/cpu/libtorch-macos-{torch_version}.zip") 
-    } else if (arch == "arm64") {
-      url <- glue::glue("https://github.com/mlverse/libtorch-mac-m1/releases/download/LibTorch-for-R/libtorch-v{torch_version}.zip") 
-    }
+    url <- glue::glue("https://github.com/mlverse/libtorch-mac-m1/releases/download/LibTorch-for-R/libtorch-{arch}-v{torch_version}.zip") 
   }
   kind <- installation_kind()
   if (is_windows()) {
@@ -457,12 +453,12 @@ cuda_version_windows <- function() {
 }
 
 check_supported_cuda_version_windows <- function(version) {
-  supported_versions <- c("11.7", "11.8")
+  supported_versions <- c("11.8", "12.4")
   check_supported_version(version, supported_versions)
 }
 
 check_supported_cuda_version_linux <- function(version) {
-  supported_versions <- c("11.7", "11.8")
+  supported_versions <- c("11.8", "12.4")
   check_supported_version(version, supported_versions)
 }
 

@@ -29,7 +29,7 @@ register_positron_methods_impl <- function() {
   register_ark_method("ark_positron_variable_display_value", "nn_module", function(x, ...) {
     paste0(
       "nn_module (",
-      scales::comma(torch:::get_parameter_count(attr(x, "module"))),
+      scales::comma(get_parameter_count(attr(x, "module"))),
       " parameters)"
     )
   })

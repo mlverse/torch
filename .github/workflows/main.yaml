@@ -32,18 +32,14 @@ jobs:
 
           - {os: ubuntu, r_version: release, version: cpu, runner: ubuntu-20.04}
           - {os: ubuntu, r_version: release, version: cpu, runner: ubuntu-20.04, precxx11abi: 1}
-          - {os: ubuntu, r_version: release, version: cu11.7, runner: [self-hosted, gpu-local]}
-          - {os: ubuntu, r_version: release, version: cu11.8, runner: [self-hosted, gpu-local]}
+          - {os: ubuntu, r_version: release, version: cu12.4, runner: [self-hosted, gpu-local]}
 
           - {os: windows, r_version: release, version: cpu, runner: windows-latest}
         
         include:
           
-          - config: {os: ubuntu, version: cu11.7}
-            container: {image: 'nvidia/cuda:11.7.1-cudnn8-devel-ubuntu20.04', options: '--gpus all --runtime=nvidia'}
-
-          - config: {os: ubuntu, version: cu11.8}
-            container: {image: 'nvidia/cuda:11.8.0-cudnn8-devel-ubuntu20.04', options: '--gpus all --runtime=nvidia'}
+          - config: {os: ubuntu, version: cu12.4}
+            container: {image: 'nvidia/cuda:12.4.1-cudnn-devel-ubuntu20.04', options: '--gpus all --runtime=nvidia'}
 
     runs-on: ${{ matrix.config.runner }}
     container: ${{ matrix.container }}
@@ -79,7 +75,7 @@ jobs:
       - uses: ./.github/actions/setup-r
         with:
           r_version: ${{ matrix.config.r_version}}
-      
+
       - name: Setup cmake
         uses: jwlawson/actions-setup-cmake@v1
         if: ${{ env.BUILD_LANTERN == 1}}
@@ -91,16 +87,15 @@ jobs:
           cache: false
           extra-packages: any::rcmdcheck
           needs: check
-      
-      - run: |
-          Sys.getenv("PRECXX11ABI")
-          Sys.setenv("PRECXX11ABI" = 1)
-          pkgbuild::build()
-        shell: Rscript {0}
- 
+
+      - name: Session info
+        run: |
+          Rscript -e "sessionInfo()"
+
       - uses: r-lib/actions/check-r-package@v2
         with:
           error-on: '"error"'
           args: 'c("--no-multiarch", "--no-manual", "--as-cran")'
+
       
       

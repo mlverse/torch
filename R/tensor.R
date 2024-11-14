@@ -89,6 +89,10 @@ Tensor <- R7Class(
         dtype <- self$dtype
       }
 
+      if (is.null(memory_format)) {
+        memory_format <- torch_preserve_format()
+      }
+
       if (has_device) {
         private$`_to`(
           dtype = dtype,

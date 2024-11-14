@@ -128,7 +128,7 @@ cpp_parameter_type <- function(argument) {
       argument$name %in% c("dims", "dims_self", "dims_other", "dim") &&
       argument$dynamic_type == "IntArrayRef")
   {
-    if (argument$type %in% c("c10::optional<IntArrayRef>", "OptionalIntArrayRef")) {
+    if ((argument$type %in% c("c10::optional<IntArrayRef>", "OptionalIntArrayRef")) || argument$is_nullable) {
       return("XPtrTorchOptionalIndexIntArrayRef")
     } else {
       return("XPtrTorchIndexIntArrayRef")
@@ -138,7 +138,7 @@ cpp_parameter_type <- function(argument) {
   if (indexing_special_cases(argument) &&
       argument$name %in% c("dim", "dim0", "dim1", "dim2", "start_dim", "end_dim", "index") &&
       argument$dynamic_type == "int64_t") {
-    if (argument$type == "c10::optional<int64_t>")
+    if (argument$type == "c10::optional<int64_t>" || argument$is_nullable)
       return("XPtrTorchoptional_index_int64_t")
     else
       return("XPtrTorchindex_int64_t")
@@ -146,18 +146,18 @@ cpp_parameter_type <- function(argument) {
 
   if (indexing_special_cases(argument) &&
       argument$name == "indices" &&
-      argument$dynamic_type == "TensorList") {
+      argument$dynamic_type == "TensorList" &&
+      !argument$is_nullable) {
     return("XPtrTorchIndexTensorList")
   }
 
   if (indexing_special_cases(argument) &&
       argument$name == "indices" &&
-      argument$dynamic_type == "const c10::List<c10::optional<Tensor>> &") {
+      argument$is_nullable) {
     return("XPtrTorchOptionalIndexTensorList")
   }
 
-  if (argument$dynamic_type == "Tensor" &&
-      argument$type == "const c10::optional<Tensor> &") {
+  if (argument$dynamic_type == "Tensor" && argument$is_nullable) {
     return("XPtrTorchOptionalTensor")
   }
 
@@ -165,19 +165,19 @@ cpp_parameter_type <- function(argument) {
     declaration <- "XPtrTorchTensor"
   }
 
-  if (argument$dynamic_type == "bool" && argument$type != "c10::optional<bool>") {
+  if (argument$dynamic_type == "bool" && !argument$is_nullable) {
     declaration <- "XPtrTorchbool"
   }
 
-  if (argument$dynamic_type == "bool" && argument$type == "c10::optional<bool>") {
+  if (argument$dynamic_type == "bool" && argument$is_nullable) {
     declaration <- "XPtrTorchoptional_bool"
   }
 
-  if (argument$dynamic_type == "DimnameList" && argument$type != "c10::optional<DimnameList>") {
+  if (argument$dynamic_type == "DimnameList" && !argument$is_nullable) {
     declaration <-  "XPtrTorchDimnameList"
   }
 
-  if (argument$dynamic_type == "DimnameList" && argument$type == "c10::optional<DimnameList>") {
+  if (argument$dynamic_type == "DimnameList" && argument$is_nullable) {
     declaration <-  "XPtrTorchOptionalDimnameList"
   }
 
@@ -185,35 +185,35 @@ cpp_parameter_type <- function(argument) {
     declaration <- "XPtrTorchTensorList"
   }
 
-  if (argument$dynamic_type == "IntArrayRef" && argument$type %in% c("c10::optional<IntArrayRef>", "OptionalIntArrayRef")) {
+  if (argument$dynamic_type == "IntArrayRef" && ((argument$type %in% c("c10::optional<IntArrayRef>", "OptionalIntArrayRef")) || argument$is_nullable)) {
     return("XPtrTorchOptionalIntArrayRef")
   }
 
-  if (argument$dynamic_type == "IntArrayRef" && argument$type != "c10::optional<IntArrayRef>") {
+  if (argument$dynamic_type == "IntArrayRef" && !argument$is_nullable) {
     declaration <- "XPtrTorchIntArrayRef"
   }
 
-  if (argument$dynamic_type == "ArrayRef<double>" && argument$type == "c10::optional<ArrayRef<double>>") {
+  if (argument$dynamic_type == "ArrayRef<double>" && argument$is_nullable) {
     declaration <- "XPtrTorchOptionalDoubleArrayRef"
   }
 
-  if (argument$dynamic_type == "ArrayRef<double>"&& argument$type != "c10::optional<ArrayRef<double>>") {
+  if (argument$dynamic_type == "ArrayRef<double>" && !argument$is_nullable) {
     declaration <- "std::vector<double>"
   }
 
-  if (argument$dynamic_type == "int64_t" && !argument$type == "c10::optional<int64_t>") {
+  if (argument$dynamic_type == "int64_t" && !argument$is_nullable) {
     declaration <- "XPtrTorchint64_t"
   }
 
-  if (argument$dynamic_type == "int64_t" && argument$type == "c10::optional<int64_t>") {
+  if (argument$dynamic_type == "int64_t" && argument$is_nullable) {
     declaration <- "XPtrTorchoptional_int64_t"
   }
 
-  if (argument$dynamic_type == "double" && argument$type == "c10::optional<double>") {
+  if (argument$dynamic_type == "double" && argument$is_nullable) {
     declaration <- "XPtrTorchOptionaldouble"
   }
 
-  if (argument$dynamic_type == "double" && !argument$type == "c10::optional<double>") {
+  if (argument$dynamic_type == "double" && !argument$is_nullable) {
     declaration <- "XPtrTorchdouble"
   }
 
@@ -229,27 +229,27 @@ cpp_parameter_type <- function(argument) {
     declaration <- "XPtrTorchGenerator"
   }
 
-  if (argument$dynamic_type == "Generator" && argument$type != "c10::optional<Generator>") {
+  if (argument$dynamic_type == "Generator" && !argument$is_nullable) {
     declaration <- "XPtrTorchGenerator"
   }
 
-  if (argument$dynamic_type == "Generator" && argument$type == "c10::optional<Generator>") {
+  if (argument$dynamic_type == "Generator" && argument$is_nullable) {
     declaration <- "XPtrTorchOptionalGenerator"
   }
 
-  if (argument$dynamic_type == "ScalarType" && argument$type != "c10::optional<ScalarType>") {
+  if (argument$dynamic_type == "ScalarType" && !argument$is_nullable) {
     declaration <- "XPtrTorchDtype"
   }
 
-  if (argument$dynamic_type == "ScalarType" && argument$type == "c10::optional<ScalarType>") {
+  if (argument$dynamic_type == "ScalarType" && argument$is_nullable) {
     declaration <- "XPtrTorchoptional_scalar_type"
   }
 
-  if (argument$dynamic_type == "Scalar" && !stringr::str_detect(argument$type, "optional")) {
+  if (argument$dynamic_type == "Scalar" && !argument$is_nullable) {
     declaration <- "XPtrTorchScalar"
   }
 
-  if (argument$dynamic_type == "Scalar" && stringr::str_detect(argument$type, "optional")) {
+  if (argument$dynamic_type == "Scalar" && argument$is_nullable) {
     declaration <- "XPtrTorchoptional_scalar"
   }
 
@@ -261,19 +261,19 @@ cpp_parameter_type <- function(argument) {
     declaration <- "std::vector<bool>"
   }
 
-  if (argument$dynamic_type == "MemoryFormat" && argument$type != "c10::optional<MemoryFormat>") {
+  if (argument$dynamic_type == "MemoryFormat" && !argument$is_nullable) {
     declaration <- "XPtrTorchMemoryFormat"
   }
 
-  if (argument$dynamic_type == "MemoryFormat" && argument$type == "c10::optional<MemoryFormat>") {
+  if (argument$dynamic_type == "MemoryFormat" && argument$is_nullable) {
     declaration <- "XPtrTorchoptional_memory_format"
   }
 
-  if (argument$dynamic_type == "std::string" && argument$type != "c10::optional<std::string>") {
+  if (argument$dynamic_type == "std::string" && !argument$is_nullable) {
     declaration <- "XPtrTorchstring"
   }
 
-  if (argument$dynamic_type == "std::string" && argument$type == "c10::optional<std::string>") {
+  if (argument$dynamic_type == "std::string" && argument$is_nullable) {
     declaration <- "XPtrTorchoptional_string"
   }
 
@@ -301,11 +301,11 @@ cpp_parameter_type <- function(argument) {
     declaration <- "XPtrTorchvector_Scalar"
   }
 
-  if (argument$dynamic_type == "c10::string_view" && argument$type == "c10::optional<c10::string_view>") {
+  if (argument$dynamic_type == "c10::string_view" && argument$is_nullable) {
     declaration <- "XPtrTorchoptional_string_view"
   }
 
-  if (argument$dynamic_type == "c10::string_view" && argument$type != "c10::optional<c10::string_view>") {
+  if (argument$dynamic_type == "c10::string_view" && !argument$is_nullable) {
     declaration <- "XPtrTorchstring_view"
   }
 
@@ -323,6 +323,14 @@ cpp_parameter_type <- function(argument) {
 
   if (argument$dynamic_type == "const ITensorListRef &") {
     declaration <- "XPtrTorchTensorList"
+  }
+
+  if (argument$dynamic_type == "const c10::List<::std::optional<Tensor>> &") {
+    declaration <- "XPtrTorchOptionalTensorList"
+  }
+
+  if (argument$dynamic_type == "DeviceIndex") {
+    declaration <- "int"
   }
 
   # FIXME: Stop if argument$dynamic_type is not handled
@@ -384,19 +392,19 @@ cpp_argument_transform <- function(argument) {
     result <- glue::glue("{argument$name}.get()")
   }
 
-  if (argument$dynamic_type == "IntArrayRef" && argument$type != "c10::optional<IntArrayRef>") {
+  if (argument$dynamic_type == "IntArrayRef" && !argument$is_nullable) {
     result <- glue::glue("{argument$name}.get()")
   }
 
-  if (argument$dynamic_type == "IntArrayRef" && argument$type %in% c("c10::optional<IntArrayRef>", "OptionalIntArrayRef")) {
+  if (argument$dynamic_type == "IntArrayRef" && argument$is_nullable) {
     result <- glue::glue("{argument$name}.get()")
   }
 
-  if (argument$dynamic_type == "ArrayRef<double>" && argument$type != "c10::optional<ArrayRef<double>>") {
+  if (argument$dynamic_type == "ArrayRef<double>" && !argument$is_nullable) {
     result <- glue::glue("lantern_vector_double({argument$name}.data(), {argument$name}.size())")
   }
 
-  if (argument$dynamic_type == "ArrayRef<double>" && argument$type == "c10::optional<ArrayRef<double>>") {
+  if (argument$dynamic_type == "ArrayRef<double>" && argument$is_nullable) {
     result <- glue::glue("{argument$name}.get()")
   }
 
@@ -404,11 +412,11 @@ cpp_argument_transform <- function(argument) {
     result <- glue::glue("{argument$name}.get()")
   }
 
-  if (argument$dynamic_type == "double" && !argument$type == "c10::optional<double>") {
+  if (argument$dynamic_type == "double" && !argument$is_nullable) {
     result <- glue::glue("{argument$name}.get()")
   }
 
-  if (argument$dynamic_type == "double" && argument$type == "c10::optional<double>") {
+  if (argument$dynamic_type == "double" && argument$is_nullable) {
     result <- glue::glue("{argument$name}.get()")
   }
 
@@ -494,6 +502,14 @@ cpp_argument_transform <- function(argument) {
 
   if (argument$dynamic_type == "const ITensorListRef &") {
     result <- glue::glue("{argument$name}.get()")
+  }
+
+  if (argument$dynamic_type == "const c10::List<::std::optional<Tensor>> &") {
+    result <- glue::glue("{argument$name}.get()")
+  }
+
+  if (argument$dynamic_type == "DeviceIndex") {
+    result <- glue::glue("{argument$name}")
   }
 
   # FIXME: Stop if argument$dynamic_type is not handled
@@ -667,10 +683,21 @@ SKIP_R_BINDIND <- c(
   "_use_cudnn_rnn_flatten_weight",
   "is_vulkan_available",
   "_test_ambiguous_defaults",
-  "_test_string_default"
+  "_test_string_default",
+  "_cufft_get_plan_cache_size",
+  "_cufft_get_plan_cache_max_size",
+  "_cufft_set_plan_cache_max_size",
+  "_cufft_clear_plan_cache",
+  "sym_size",
+  "sym_numel",
+  "sym_stride",
+  "sym_storage_offset",
+  "_make_dep_token"
 )
 
-SKIP_CPP_BINDING <- c()
+SKIP_CPP_BINDING <- c(
+  "_cufft_get_plan_cache_size"
+)
 
 cpp <- function(path) {
 

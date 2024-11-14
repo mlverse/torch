@@ -237,6 +237,22 @@ r_argument_default <- function(default) {
 
   if (default == "\"reflect\"")
     return("\"reflect\"")
+  
+  if (default == "::std::nullopt") {
+    return("NULL")
+  }
+
+  if (default == "c10::MemoryFormContiguous") {
+    return("torch_contiguous_format()")
+  }
+
+  if (default == '""') {
+    return('""')
+  }
+
+  if (default == '"right"') {
+    return('"right"')
+  }
 
   browser()
 }

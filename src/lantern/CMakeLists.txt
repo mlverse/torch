@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.19.2)
 project(lantern)
 
-set(TORCH_VERSION "2.0.1")
+set(TORCH_VERSION "2.5.1")
 
 if (NOT DEFINED TORCH_PATH)
     if (DEFINED ENV{TORCH_PATH})
@@ -19,7 +19,7 @@ if (DEFINED ENV{CUDA} AND NOT "$ENV{CUDA}" STREQUAL "")
     message(STATUS "CUDA VERSION: $ENV{CUDA} | ${CUDA_VERSION} | ${CUDA_VERSION_NUMBER}")
     
     set(CAFFE2_USE_CUDNN 1)
-    set(ENV{TORCH_CUDA_ARCH_LIST} "3.7 5.0 5.2 6.0 6.1 7.0 7.5 8.0 8.6+PTX")
+    set(ENV{TORCH_CUDA_ARCH_LIST} "5.0 5.2 6.0 6.1 7.0 7.5 8.0 8.6 9.0+PTX")
 endif()
 
 
@@ -50,11 +50,7 @@ if (NOT EXISTS "${TORCH_PATH}")
         endif()
 
         if (APPLE)
-            if ('${CMAKE_HOST_SYSTEM_PROCESSOR}' STREQUAL 'x86_64')
-                set(TORCH_URL "https://download.pytorch.org/libtorch/cpu/libtorch-macos-${TORCH_VERSION}.zip")
-            elseif('${CMAKE_HOST_SYSTEM_PROCESSOR}' STREQUAL 'arm64')    
-                set(TORCH_URL "https://github.com/mlverse/libtorch-mac-m1/releases/download/LibTorch-for-R/libtorch-v${TORCH_VERSION}.zip")
-            endif()
+            set(TORCH_URL "https://github.com/mlverse/libtorch-mac-m1/releases/download/LibTorch-for-R/libtorch-${CMAKE_HOST_SYSTEM_PROCESSOR}-v${TORCH_VERSION}.zip")
         elseif(WIN32)
             if (DEFINED CUDA_VERSION_NUMBER)    
                 set(TORCH_URL "https://download.pytorch.org/libtorch/cu${CUDA_VERSION_NUMBER}/libtorch-win-shared-with-deps-${TORCH_VERSION}%2Bcu${CUDA_VERSION_NUMBER}.zip")
@@ -82,6 +78,21 @@ endif()
 if (DEFINED CUDA_VERSION_NUMBER)
     if (WIN32)
         find_package(CUDAToolkit)
+        # Workaround issue with PyTorch NVTX headers
+        # See https://discuss.pytorch.org/t/failed-to-find-nvtoolsext/179635/13?u=dfalbel
+        if(CUDA_VERSION_NUMBER VERSION_GREATER_EQUAL 12)
+            message(STATUS "PyTorch NVTX headers workaround: Yes")
+            # only do this if nvToolsExt is not defined and CUDA::nvtx3 exists
+            if(NOT TARGET CUDA::nvToolsExt AND TARGET CUDA::nvtx3)
+                add_library(CUDA::nvToolsExt INTERFACE IMPORTED)
+                # ensure that PyTorch is told to use NVTX3 headers
+                target_compile_definitions(
+                    CUDA::nvToolsExt INTERFACE
+                    TORCH_CUDA_USE_NVTX3
+                )
+                target_link_libraries(CUDA::nvToolsExt INTERFACE CUDA::nvtx3)
+            endif()
+        endif()
     endif()
     enable_language(CUDA)
     add_compile_definitions("CUDA${CUDA_VERSION_NUMBER}")
@@ -131,7 +142,7 @@ set(LANTERN_SRC
     src/Compile.cpp
     src/Amp.cpp
     src/JITExecute.cpp
-    src/Pickler.cpp
+    src/Unpickler.cpp
 )
 
 if(APPLE)
@@ -158,7 +169,7 @@ if(DEFINED ENV{CUDA} AND NOT '$ENV{CUDA}' STREQUAL '')
     set_property(TARGET lantern PROPERTY CUDA_SEPARABLE_COMPILATION ON)
     set_property(TARGET lantern PROPERTY CUDA_STANDARD 17)
   else()
-    set_property(TARGET lantern PROPERTY CUDA_STANDARD 14)
+    set_property(TARGET lantern PROPERTY CUDA_STANDARD 17)
   endif()
   
 else()

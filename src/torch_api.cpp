@@ -171,7 +171,9 @@ XPtrTorchOptionalTensor from_sexp_optional_tensor(SEXP x) {
   }
 }
 
-void delete_optional_tensor(void* x) { lantern_optional_tensor_delete(x); }
+void delete_optional_tensor(void* x) { 
+  lantern_optional_tensor_delete(x); 
+}
 
 // index tensor
 
@@ -217,7 +219,7 @@ XPtrTorchTensorList from_sexp_tensor_list(SEXP x) {
   }
 
   if (Rf_isNull(x)) {
-    Rcpp::List tmp;  // create an empty list
+    Rcpp::List tmp(0);  // create an empty list
     return cpp_torch_tensor_list(tmp);
   }
 
@@ -1432,7 +1434,10 @@ XPtrTorchIntArrayRef from_sexp_int_array_ref(SEXP x, bool allow_null,
     if (allow_null) {
       return nullptr;
     } else {
-      Rcpp::stop("Expected a list of integers and found NULL.");
+      // this is required by torch_count_nonzero to keep its behavior of not requiring the dim
+      // argument.
+      std::vector<int64_t> vec(0);
+      return XPtrTorchIntArrayRef(lantern_vector_int64_t(vec.data(), vec.size()));
     }
   }
 
