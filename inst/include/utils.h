@@ -98,6 +98,7 @@ class ThreadPool {
 public:
   EventLoop<T> event_loop;
   std::vector<std::thread> threads;
+
   ThreadPool (int n_threads = 5) {
     for(int i = 0; i < n_threads; i++) {
       threads.push_back(std::thread([this] () {
@@ -108,11 +109,15 @@ public:
   void push (std::packaged_task<T()>&& task) {
     this->event_loop.schedule(std::move(task));
   }
-  ~ThreadPool() {
+  void stop() {
     event_loop.stop();
     for(auto& thread : threads) {
       thread.join();
     }
+    threads.clear();
+  }
+  ~ThreadPool() {
+    stop();
   }
 };
 

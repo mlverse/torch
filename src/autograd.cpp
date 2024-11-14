@@ -1,3 +1,4 @@
+#include <memory>
 #include <torch.h>
 
 #include <deque>
@@ -62,10 +63,17 @@ static EventLoop<void> gBackwardTasks;
 static std::atomic<bool> backward_is_running(false);
 
 void schedule_backward_task(std::packaged_task<void()>&& task) {
-  static ThreadPool<void> pool(5);
+  // This needs to be a pointer because on Windows, disposing of this objects
+  // when the process exits causes a crash.
+  static auto pool = std::unique_ptr<ThreadPool<void>, std::function<void(ThreadPool<void>*)>>(
+    new ThreadPool<void>(5), 
+    [](auto p) {
+      p->stop();
+    }
+  );
   
   if (std::this_thread::get_id() == main_thread_id()) {
-    pool.push(std::move(task));
+    pool->push(std::move(task));
   } else {
     gBackwardTasks.schedule(std::move(task));
   }
