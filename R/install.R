@@ -582,7 +582,7 @@ is_url <- function(x) {
 #' @export
 get_install_libs_url <- function(version = NA, type = NA) {
   if (!is.na(type)) {
-    cli::cli_abort("Please use the env vars describe in {.fn install_torch} to configure the installation type.")
+    cli::cli_abort("Please use the env vars described in {.fn install_torch} to configure the installation type.")
   }
   if (!is.na(version)) {
     cli::cli_abort("It's not possible to configure the libtorch version.")

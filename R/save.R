@@ -83,7 +83,7 @@ legacy_save_nn_module <- function(obj, path, ..., compress = TRUE) {
 
 #' @export
 torch_save.name <- function(obj, path, ..., compress= TRUE) {
-  if (!is_exhausted(obj)) rlang::abort("Cannot save `name` objects.")
+  if (!is_exhausted(obj)) rlang::abort("Cannot save `name` object.")
   saveRDS(list(type = "coro::exhausted", version = use_ser_version()), path,
           compress = compress)
 }
@@ -484,7 +484,7 @@ create_write_con <- function(path) {
   con <- if (is.character(path)) {
     file(path, open = "wb")
   } else {
-    cli::cli_abort("{.arg path} must be a connection or a actual path, got {.cls {class(path)}}.")
+    cli::cli_abort("{.arg path} must be a connection or an actual path, got {.cls {class(path)}}.")
   }
 
   withr::defer_parent({close(con)})
