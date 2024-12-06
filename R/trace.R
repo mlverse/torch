@@ -288,7 +288,7 @@ jit_trace_module <- function(mod, ..., strict = TRUE) {
 
   module <- create_script_module(mod)
 
-  if (any(grepl("^\\.train\\.$|^\\.eval\\.", names(inputs)))) {
+  if (any(grepl("^\\.train\\.|^\\.eval\\.", names(inputs)))) {
     value_error("Prefixes .train. and .eval. are reserved.")
   }
 
