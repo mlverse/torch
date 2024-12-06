@@ -135,7 +135,16 @@ enum IValue_types {
     IValueTypeUnknownType
 };
 
+extern "C" struct adamw_options {
+    double lr;
+    double weight_decay;
+    double betas[2];
+    double eps;
+    bool amsgrad;
 
+    adamw_options() = default;
+    adamw_options(long x) { }
+};
 
 #define LANTERN_TYPE2VOID_DECL(type, name)                            \
   LANTERN_API type (LANTERN_PTR _##name) (void*);                     \
@@ -2599,6 +2608,110 @@ HOST_API void lantern_buffer_from_tensor (void* tensor, void* buffer, int n)
   LANTERN_CHECK_LOADED
    _lantern_buffer_from_tensor(tensor, buffer, n);
   LANTERN_HOST_HANDLER; 
+}
+
+LANTERN_API void* (LANTERN_PTR _ignite_adamw) (void* params, double lr, double beta1, double beta2, double eps, double weight_decay, bool amsgrad);
+HOST_API void* ignite_adamw (void* params, double lr, double beta1, double beta2, double eps, double weight_decay, bool amsgrad) {
+  LANTERN_CHECK_LOADED
+  void* ret = _ignite_adamw(params, lr, beta1, beta2, eps, weight_decay, amsgrad);
+  LANTERN_HOST_HANDLER; 
+  return ret;
+}
+
+LANTERN_API void (LANTERN_PTR _lantern_optim_adamw_delete) (void* x);
+HOST_API void lantern_optim_adamw_delete (void* x) {
+  LANTERN_CHECK_LOADED
+   _lantern_optim_adamw_delete(x);
+  LANTERN_HOST_HANDLER; 
+}
+
+LANTERN_API void* (LANTERN_PTR _ignite_adamw_get_param_groups) (void* groups);
+HOST_API void* ignite_adamw_get_param_groups (void* groups)
+{
+  LANTERN_CHECK_LOADED
+  void* ret = _ignite_adamw_get_param_groups(groups);
+  LANTERN_HOST_HANDLER;
+  return ret;
+}
+
+LANTERN_API int (LANTERN_PTR _ignite_adamw_param_groups_size) (void* groups);
+HOST_API int ignite_adamw_param_groups_size (void* groups)
+{
+  LANTERN_CHECK_LOADED
+  int ret = _ignite_adamw_param_groups_size(groups);
+  LANTERN_HOST_HANDLER;
+  return ret;
+}
+
+LANTERN_API void* (LANTERN_PTR _ignite_optim_get_param_group_params) (void* groups, int i);
+HOST_API void* ignite_optim_get_param_group_params (void* groups, int i)
+{
+  LANTERN_CHECK_LOADED
+  void* ret = _ignite_optim_get_param_group_params(groups, i);
+  LANTERN_HOST_HANDLER;
+  return ret;
+}
+
+LANTERN_API adamw_options (LANTERN_PTR _ignite_adamw_get_param_group_options) (void* groups, int i);
+HOST_API adamw_options ignite_adamw_get_param_group_options (void* groups, int i)
+{
+  LANTERN_CHECK_LOADED
+  adamw_options ret = _ignite_adamw_get_param_group_options(groups, i);
+  LANTERN_HOST_HANDLER;
+  return ret;
+}
+
+LANTERN_API void (LANTERN_PTR _ignite_adamw_set_param_group_options) (void* opt, int i, adamw_options options);
+HOST_API void ignite_adamw_set_param_group_options (void* opt, int i, adamw_options options)
+{
+  LANTERN_CHECK_LOADED
+   _ignite_adamw_set_param_group_options(opt, i, options);
+  LANTERN_HOST_HANDLER;
+  
+}
+
+LANTERN_API void* (LANTERN_PTR _ignite_adamw_get_states) (void* optim);
+HOST_API void* ignite_adamw_get_states (void* optim)
+{
+  LANTERN_CHECK_LOADED
+  void* ret = _ignite_adamw_get_states(optim);
+  LANTERN_HOST_HANDLER;
+  return ret;
+}
+
+LANTERN_API void (LANTERN_PTR _ignite_adamw_set_states) (void* optim, void* states_);
+HOST_API void ignite_adamw_set_states (void* optim, void* states_)
+{
+  LANTERN_CHECK_LOADED
+   _ignite_adamw_set_states(optim, states_);
+  LANTERN_HOST_HANDLER;
+  
+}
+
+LANTERN_API void (LANTERN_PTR _ignite_adamw_step) (void* optim);
+HOST_API void ignite_adamw_step (void* optim)
+{
+  LANTERN_CHECK_LOADED
+   _ignite_adamw_step(optim);
+  LANTERN_HOST_HANDLER;
+  
+}
+
+LANTERN_API void (LANTERN_PTR _ignite_adamw_zero_grad) (void* optim);
+HOST_API void ignite_adamw_zero_grad (void* optim)
+{
+  LANTERN_CHECK_LOADED
+   _ignite_adamw_zero_grad(optim);
+  LANTERN_HOST_HANDLER;
+  
+}
+
+LANTERN_API void (LANTERN_PTR _lantern_vector_optim_optimizer_group_delete) (void* x);
+HOST_API void lantern_vector_optim_optimizer_group_delete (void* x)
+{
+  LANTERN_CHECK_LOADED
+   _lantern_vector_optim_optimizer_group_delete(x);
+  LANTERN_HOST_HANDLER;
 }
 
   /* Autogen Headers -- Start */
@@ -10545,6 +10658,18 @@ LOAD_SYMBOL(_lantern_jit_all_schemas_for);
 LOAD_SYMBOL(_lantern_function_schema_list_at);
 LOAD_SYMBOL(_lantern_Dtype_from_string);
 LOAD_SYMBOL(_lantern_buffer_from_tensor);
+LOAD_SYMBOL(_lantern_optim_adamw_delete);
+LOAD_SYMBOL(_lantern_vector_optim_optimizer_group_delete);
+LOAD_SYMBOL(_ignite_adamw);
+LOAD_SYMBOL(_ignite_adamw_get_param_groups);
+LOAD_SYMBOL(_ignite_adamw_param_groups_size);
+LOAD_SYMBOL(_ignite_optim_get_param_group_params);
+LOAD_SYMBOL(_ignite_adamw_get_param_group_options);
+LOAD_SYMBOL(_ignite_adamw_set_param_group_options);
+LOAD_SYMBOL(_ignite_adamw_get_states);
+LOAD_SYMBOL(_ignite_adamw_set_states);
+LOAD_SYMBOL(_ignite_adamw_step);
+LOAD_SYMBOL(_ignite_adamw_zero_grad);
   /* Autogen Symbols -- Start */
   LOAD_SYMBOL(_lantern__cast_byte_tensor_bool)
   LOAD_SYMBOL(_lantern__cast_char_tensor_bool)

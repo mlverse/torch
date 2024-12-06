@@ -672,7 +672,25 @@ class XPtrTorchvector_void : public XPtrTorch {
   XPtrTorchvector_void(void* x) : XPtrTorch(x, delete_vector_void) {}
 };
 
+class optim_adamw {
+public:
+  std::shared_ptr<void> ptr;
+  optim_adamw (void* x);
+  optim_adamw (std::shared_ptr<void> x) : ptr(x) {}
+  optim_adamw (SEXP x);
+  operator SEXP () const;
+  void* get ();
+};
 
+class optim_param_groups {
+public:
+  std::shared_ptr<void> ptr;
+  optim_param_groups (void* x);
+  optim_param_groups (std::shared_ptr<void> x) : ptr(x) {}
+  optim_param_groups (SEXP x);
+  operator SEXP () const;
+  void* get ();
+};
 
 template <class T>
 class nullable {
