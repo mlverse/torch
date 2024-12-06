@@ -1776,3 +1776,37 @@ void delete_traceable_function(void* x) { lantern_TraceableFunction_delete(x); }
 // vector_void
 
 void delete_vector_void(void* x) { lantern_vector_void_delete(x); }
+
+// optims
+
+void rcpp_delete_optim_adamw (void* x) {
+  lantern_optim_adamw_delete(x);
+}
+
+void* optim_adamw::get() {
+  return ptr.get();
+}
+optim_adamw::operator SEXP () const {
+  auto xptr = make_xptr<optim_adamw>(*this);
+  xptr.attr("class") = Rcpp::CharacterVector::create("optim_ignite_adamw");
+  return xptr;
+}
+optim_adamw::optim_adamw (SEXP x) : optim_adamw{Rcpp::as<Rcpp::XPtr<optim_adamw>>(x)->ptr} {}
+optim_adamw::optim_adamw (void* x) : ptr(x, rcpp_delete_optim_adamw) {};
+
+void rcpp_delete_optim_param_groups (void* x) {
+  lantern_vector_optim_optimizer_group_delete(x);
+}
+
+void* optim_param_groups::get() {
+  return ptr.get();
+}
+optim_param_groups::operator SEXP () const {
+  auto xptr = make_xptr<optim_param_groups>(*this);
+  xptr.attr("class") = Rcpp::CharacterVector::create("optim_ignite_param_groups");
+  return xptr;
+}
+
+optim_param_groups::optim_param_groups (SEXP x) : optim_param_groups{Rcpp::as<Rcpp::XPtr<optim_param_groups>>(x)->ptr} {}
+optim_param_groups::optim_param_groups (void* x) : ptr(x, rcpp_delete_optim_param_groups) {};
+

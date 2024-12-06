@@ -14889,6 +14889,42 @@ cpp_torch_cuda_set_rng_state <- function(device, state) {
     invisible(.Call(`_torch_cpp_torch_cuda_set_rng_state`, device, state))
 }
 
+rcpp_ignite_adamw <- function(params, lr, beta1, beta2, eps, weight_decay, amsgrad) {
+    .Call(`_torch_rcpp_ignite_adamw`, params, lr, beta1, beta2, eps, weight_decay, amsgrad)
+}
+
+rcpp_ignite_adamw_get_param_groups <- function(groups) {
+    .Call(`_torch_rcpp_ignite_adamw_get_param_groups`, groups)
+}
+
+rcpp_ignite_adamw_param_groups_size <- function(groups) {
+    .Call(`_torch_rcpp_ignite_adamw_param_groups_size`, groups)
+}
+
+rcpp_ignite_optim_get_param_group_params <- function(groups, i) {
+    .Call(`_torch_rcpp_ignite_optim_get_param_group_params`, groups, i)
+}
+
+rcpp_ignite_adamw_get_states <- function(opt) {
+    .Call(`_torch_rcpp_ignite_adamw_get_states`, opt)
+}
+
+rcpp_ignite_adamw_set_states <- function(opt, states) {
+    invisible(.Call(`_torch_rcpp_ignite_adamw_set_states`, opt, states))
+}
+
+rcpp_ignite_adamw_step <- function(opt) {
+    invisible(.Call(`_torch_rcpp_ignite_adamw_step`, opt))
+}
+
+rcpp_ignite_adamw_zero_grad <- function(opt) {
+    invisible(.Call(`_torch_rcpp_ignite_adamw_zero_grad`, opt))
+}
+
+rcpp_as_list_adamw_param_groups <- function(groups) {
+    .Call(`_torch_rcpp_as_list_adamw_param_groups`, groups)
+}
+
 enquos0 <- function(env) {
     .Call(`_torch_enquos0`, env)
 }

@@ -143,6 +143,7 @@ set(LANTERN_SRC
     src/Amp.cpp
     src/JITExecute.cpp
     src/Unpickler.cpp
+    src/Ignite.cpp
 )
 
 if(APPLE)
