@@ -283,8 +283,14 @@ jit_trace_module <- function(mod, ..., strict = TRUE) {
   if (!rlang::is_named(inputs)) {
     value_error("Arguments passed trough `...` must be named.")
   }
+  was_training = mod$training
+  on.exit({mod$train(was_training)}, add = TRUE)
 
   module <- create_script_module(mod)
+
+  if (any(grepl("^.__train__$|^.__eval__", names(inputs)))) {
+    value_error("Prefixes .__train__ and .__eval__ are reserved.")
+  }
 
   for (name in names(inputs)) {
     if (!rlang::is_closure(mod[[name]])) {
@@ -297,18 +303,39 @@ jit_trace_module <- function(mod, ..., strict = TRUE) {
     }
 
     tr_fn <- make_traceable_fn(mod[[name]])
-    ptr <- cpp_trace_function(
+    mod$train()
+    ptr_train <- cpp_trace_function(
       fn = tr_fn,
       inputs = inp,
       compilation_unit = .compilation_unit,
       strict = strict,
       module = module$..ptr..(),
-      name = name,
+      name = paste0(".__train__", name),
       should_mangle = TRUE,
       manage_memory = FALSE
     )
-    cpp_jit_script_module_add_method(module$..ptr..(), ptr)
+    mod$eval()
+    ptr_eval <- cpp_trace_function(
+      fn = tr_fn,
+      inputs = inp,
+      compilation_unit = .compilation_unit,
+      strict = strict,
+      module = module$..ptr..(),
+      name = paste0(".__eval__", name),
+      should_mangle = TRUE,
+      manage_memory = FALSE
+    )
+    cpp_jit_script_module_add_method(module$..ptr..(), ptr_eval)
+    cpp_jit_script_module_add_method(module$..ptr..(), ptr_train)
+    f = function(...) NULL
+    body(f) = substitute(if (self$training) TRAIN_CALL else EVAL_CALL, list(
+      TRAIN_CALL = parse(text = sprintf("self$.__train__%s(...)", name)),
+      EVAL_CALL = parse(text = sprintf("self$.__eval__%s(...)", name))
+    ))
+    environment(f) = module$.__enclos_env__
+    module[[name]] = f
   }
+  module$train(was_training)
 
   module
 }

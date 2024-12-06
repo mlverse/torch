@@ -479,3 +479,60 @@ test_that("can save function for mobile", {
   f <- jit_load(tmp)
   expect_equal_to_tensor(torch_relu(input), f(input))
 })
+
+test_that("trace-jitted module respects 'train' and 'eval'", {
+  x = torch_randn(1)
+  n = nn_module("nn_custom",
+    initialize = function() {
+      self$x = nn_parameter(torch_tensor(1))
+    },
+    forward = function(x) {
+      if (self$training) {
+        self$x
+      } else {
+        self$x - 1
+      }
+    }
+  )()
+  njit = jit_trace(n, x)
+
+  # 1. mode is respected
+  njit$train()
+  expect_equal(njit(x), torch_tensor(1))
+  njit$eval()
+  expect_equal(njit(x), torch_tensor(0))
+  # 2. parameters are shared between networks
+  njit$parameters[[1]]$requires_grad_(FALSE)
+  njit$parameters[[1]]$add_(1)
+  njit$train()
+  expect_equal(njit(x), torch_tensor(2))
+  njit$eval()
+  expect_equal(njit(x), torch_tensor(1))
+
+  # 3. correct error message is thrown
+  n2 = nn_module("nn_custom",
+    initialize = function() {
+      self$x = nn_parameter(torch_tensor(1))
+    },
+    .__train__forward = function(x) {
+      if (self$training) {
+        self$x
+      } else {
+        self$x - 1
+      }
+    }
+  )()
+
+  expect_error(jit_trace(n2, list(.__train__forward = torch_tensor(1))), "reserved")
+  expect_error(jit_trace(n2, list(.__eval__forward = torch_tensor(1))), "reserved")
+
+  # 4. train-eval mode of jitted model is correct and original module untouched
+  n$train()
+  njit = jit_trace(n, x)
+  expect_true(n$training)
+  expect_true(njit$training)
+  n$eval()
+  jit_trace(n, x)
+  expect_false(n$training)
+  expect_false(njit$training)
+})
