@@ -310,7 +310,7 @@ jit_trace_module <- function(mod, ..., strict = TRUE) {
       compilation_unit = .compilation_unit,
       strict = strict,
       module = module$..ptr..(),
-      name = paste0("train.", name),
+      name = paste0("internal.train.", name),
       should_mangle = TRUE,
       manage_memory = FALSE
     )
@@ -321,7 +321,7 @@ jit_trace_module <- function(mod, ..., strict = TRUE) {
       compilation_unit = .compilation_unit,
       strict = strict,
       module = module$..ptr..(),
-      name = paste0("eval.", name),
+      name = paste0("internal.eval.", name),
       should_mangle = TRUE,
       manage_memory = FALSE
     )
