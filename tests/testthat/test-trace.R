@@ -481,7 +481,7 @@ test_that("can save function for mobile", {
 })
 
 test_that("trace-jitted module respects 'train' and 'eval'", {
-  x = torch_randn(1)
+  x = torch_tensor(1)
   n = nn_module("nn_custom",
     initialize = function() {
       self$x = nn_parameter(torch_tensor(1))
