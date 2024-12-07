@@ -344,6 +344,7 @@ jit_trace_module <- function(mod, ..., strict = TRUE) {
       tmp[[name]] = f
       lockBinding(name, tmp)
     } else {
+      mod$train(was_training)
       tr_fn <- make_traceable_fn(mod[[name]])
       ptr <- cpp_trace_function(
         fn = tr_fn,
