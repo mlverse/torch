@@ -94,7 +94,12 @@ jit_trace <- function(func, ..., strict = TRUE) {
 #' @export
 jit_load <- function(path, ...) {
   path <- normalizePath(path, mustWork = TRUE)
-  cpp_jit_load(path)
+  out = cpp_jit_load(path)
+  if (is.null(out$..ptr..()$find_method("Xtrainforward"))) {
+    # this was a function and no module
+    return(out$forward)
+  }
+  return(out)
 }
 
 #' Saves a `script_function` to a path
@@ -335,9 +340,11 @@ jit_trace_module <- function(mod, ..., strict = TRUE) {
     ))
     tmp = attr(module, "module")
     environment(f) = tmp$.__enclos_env__
-    unlockBinding(name, tmp)
-    tmp[[name]] = f
-    lockBinding(name, tmp)
+    if (!is.null(tmp[[name]])) {
+      unlockBinding(name, tmp)
+      tmp[[name]] = f
+      lockBinding(name, tmp)
+    }
   }
   module$train(was_training)
 

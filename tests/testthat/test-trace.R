@@ -515,7 +515,8 @@ test_that("trace-jitted module respects 'train' and 'eval'", {
       self$x = nn_parameter(torch_tensor(1))
     },
     Xtrainforward = function(x) x,
-    Xevalforward = function(x) x
+    Xevalforward = function(x) x,
+    forward = function(x) x * 1
   )()
 
   expect_error(jit_trace(n2, list(Xtrainforward = torch_tensor(1))), "reserved")
