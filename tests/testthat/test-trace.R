@@ -462,6 +462,8 @@ test_that("can save module for mobile", {
   jit_save_for_mobile(tr_fn, tmp)
 
   f <- jit_load(tmp)
+  net$eval()
+  f$eval()
   expect_equal_to_tensor(net(input), f(input), tolerance = 1e-6)
 })
 
@@ -519,8 +521,8 @@ test_that("trace-jitted module respects 'train' and 'eval'", {
     forward = function(x) x * 1
   )()
 
-  expect_error(jit_trace(n2, list(Xtrainforward = torch_tensor(1))), "reserved")
-  expect_error(jit_trace(n2, list(Xevalforward = torch_tensor(1))), "reserved")
+  expect_error(jit_trace_module(n2, Xtrainforward = torch_tensor(1)), "reserved")
+  expect_error(jit_trace_module(n2, Xevalforward = torch_tensor(1)), "reserved")
 
   # 4. train-eval mode of jitted model is correct and original module untouched
   n$train()

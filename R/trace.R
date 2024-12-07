@@ -294,7 +294,7 @@ jit_trace_module <- function(mod, ..., strict = TRUE) {
   module <- create_script_module(mod)
 
   # there are some specific constraints on how methods for these modules can be named
-  if (any(grepl("^X(train|eval)\\.", names(inputs)))) {
+  if (any(grepl("^X(train|eval)", names(inputs)))) {
     value_error("Prefixes Xtrain and Xeval are reserved.")
   }
 
@@ -307,49 +307,63 @@ jit_trace_module <- function(mod, ..., strict = TRUE) {
     if (!is.list(inp)) {
       inp <- list(inp)
     }
-
-    tr_fn <- make_traceable_fn(mod[[name]])
-    mod$train()
-    ptr_train <- cpp_trace_function(
-      fn = tr_fn,
-      inputs = inp,
-      compilation_unit = .compilation_unit,
-      strict = strict,
-      module = module$..ptr..(),
-      name = paste0("Xtrain", name),
-      should_mangle = TRUE,
-      manage_memory = FALSE
-    )
-    mod$eval()
-    ptr_eval <- cpp_trace_function(
-      fn = tr_fn,
-      inputs = inp,
-      compilation_unit = .compilation_unit,
-      strict = strict,
-      module = module$..ptr..(),
-      name = paste0("Xeval", name),
-      should_mangle = TRUE,
-      manage_memory = FALSE
-    )
-    cpp_jit_script_module_add_method(module$..ptr..(), ptr_eval)
-    cpp_jit_script_module_add_method(module$..ptr..(), ptr_train)
-    f = function(...) NULL
-    body(f) = substitute(if (self$training) TRAIN_CALL else EVAL_CALL, list(
-      TRAIN_CALL = parse(text = sprintf("self$Xtrain%s(...)", name))[[1]],
-      EVAL_CALL = parse(text = sprintf("self$Xeval%s(...)", name))[[1]]
-    ))
-    tmp = attr(module, "module")
-    environment(f) = tmp$.__enclos_env__
-    if (!is.null(tmp[[name]])) {
+    if (name == "forward") {
+      tr_fn <- make_traceable_fn(mod[[name]])
+      mod$train()
+      ptr_train <- cpp_trace_function(
+        fn = tr_fn,
+        inputs = inp,
+        compilation_unit = .compilation_unit,
+        strict = strict,
+        module = module$..ptr..(),
+        name = paste0("Xtrain", name),
+        should_mangle = TRUE,
+        manage_memory = FALSE
+      )
+      mod$eval()
+      ptr_eval <- cpp_trace_function(
+        fn = tr_fn,
+        inputs = inp,
+        compilation_unit = .compilation_unit,
+        strict = strict,
+        module = module$..ptr..(),
+        name = paste0("Xeval", name),
+        should_mangle = TRUE,
+        manage_memory = FALSE
+      )
+      cpp_jit_script_module_add_method(module$..ptr..(), ptr_eval)
+      cpp_jit_script_module_add_method(module$..ptr..(), ptr_train)
+      f = function(...) NULL
+      body(f) = substitute(if (self$training) TRAIN_CALL else EVAL_CALL, list(
+        TRAIN_CALL = parse(text = sprintf("self$Xtrain%s(...)", name))[[1]],
+        EVAL_CALL = parse(text = sprintf("self$Xeval%s(...)", name))[[1]]
+      ))
+      tmp = attr(module, "module")
+      environment(f) = tmp$.__enclos_env__
       unlockBinding(name, tmp)
       tmp[[name]] = f
       lockBinding(name, tmp)
+    } else {
+      tr_fn <- make_traceable_fn(mod[[name]])
+      ptr <- cpp_trace_function(
+        fn = tr_fn,
+        inputs = inp,
+        compilation_unit = .compilation_unit,
+        strict = strict,
+        module = module$..ptr..(),
+        name = name,
+        should_mangle = TRUE,
+        manage_memory = FALSE
+      )
+      cpp_jit_script_module_add_method(module$..ptr..(), ptr)
     }
+
   }
   module$train(was_training)
 
   module
 }
+
 
 #' Saves a `script_function` or `script_module` in bytecode form,
 #' to be loaded on a mobile device
