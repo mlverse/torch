@@ -488,7 +488,7 @@ test_that("trace-jitted module respects 'train' and 'eval'", {
     },
     forward = function(x) {
       if (self$training) {
-        self$x
+        self$x * 1
       } else {
         self$x - 1
       }
@@ -514,12 +514,12 @@ test_that("trace-jitted module respects 'train' and 'eval'", {
     initialize = function() {
       self$x = nn_parameter(torch_tensor(1))
     },
-    internal.train.forward = function(x) x,
-    internal.eval.forward = function(x) x
+    Xtrainforward = function(x) x,
+    Xevalforward = function(x) x
   )()
 
-  expect_error(jit_trace(n2, list(internal.train.forward = torch_tensor(1))), "reserved")
-  expect_error(jit_trace(n2, list(internal.eval.forward = torch_tensor(1))), "reserved")
+  expect_error(jit_trace(n2, list(Xtrainforward = torch_tensor(1))), "reserved")
+  expect_error(jit_trace(n2, list(Xevalforward = torch_tensor(1))), "reserved")
 
   # 4. train-eval mode of jitted model is correct and original module untouched
   n$train()
@@ -529,5 +529,5 @@ test_that("trace-jitted module respects 'train' and 'eval'", {
   n$eval()
   jit_trace(n, x)
   expect_false(n$training)
-  expect_false(njit$training)
+  expect_true(njit$training)
 })

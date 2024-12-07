@@ -288,8 +288,9 @@ jit_trace_module <- function(mod, ..., strict = TRUE) {
 
   module <- create_script_module(mod)
 
-  if (any(grepl("^internal\\.train\\.|^internal\\.eval\\.", names(inputs)))) {
-    value_error("Prefixes internal.train. and internal.eval. are reserved.")
+  # there are some specific constraints on how methods for these modules can be named
+  if (any(grepl("^X(train|eval)\\.", names(inputs)))) {
+    value_error("Prefixes Xtrain and Xeval are reserved.")
   }
 
   for (name in names(inputs)) {
@@ -310,7 +311,7 @@ jit_trace_module <- function(mod, ..., strict = TRUE) {
       compilation_unit = .compilation_unit,
       strict = strict,
       module = module$..ptr..(),
-      name = paste0("internal.train.", name),
+      name = paste0("Xtrain", name),
       should_mangle = TRUE,
       manage_memory = FALSE
     )
@@ -321,7 +322,7 @@ jit_trace_module <- function(mod, ..., strict = TRUE) {
       compilation_unit = .compilation_unit,
       strict = strict,
       module = module$..ptr..(),
-      name = paste0("internal.eval.", name),
+      name = paste0("Xeval", name),
       should_mangle = TRUE,
       manage_memory = FALSE
     )
@@ -329,11 +330,14 @@ jit_trace_module <- function(mod, ..., strict = TRUE) {
     cpp_jit_script_module_add_method(module$..ptr..(), ptr_train)
     f = function(...) NULL
     body(f) = substitute(if (self$training) TRAIN_CALL else EVAL_CALL, list(
-      TRAIN_CALL = parse(text = sprintf("self$internal.train.%s(...)", name)),
-      EVAL_CALL = parse(text = sprintf("self$internal.eval.%s(...)", name))
+      TRAIN_CALL = parse(text = sprintf("self$Xtrain%s(...)", name))[[1]],
+      EVAL_CALL = parse(text = sprintf("self$Xeval%s(...)", name))[[1]]
     ))
-    environment(f) = module$.__enclos_env__
-    module[[name]] = f
+    tmp = attr(module, "module")
+    environment(f) = tmp$.__enclos_env__
+    unlockBinding(name, tmp)
+    tmp[[name]] = f
+    lockBinding(name, tmp)
   }
   module$train(was_training)
 

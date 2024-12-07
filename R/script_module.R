@@ -167,19 +167,19 @@ nn_ScriptModule <- R6::R6Class(
 
 new_script_module <- function(ptr) {
   f <- function(...) {
-    inputs <- list(...)
-
-    if (is.null(ptr$find_method("forward"))) {
+    f = if (self$training) {
+      ptr$find_method("Xtrainforward")
+    } else {
+      ptr$find_method("Xevalforward")
+    }
+    if (is.null(f)) {
       runtime_error("Forward is not defined. Methods from submodules of traced modules are not traced. Are you trying to call from a submodule?")
     }
-
-    out <- cpp_call_jit_script(ptr, inputs)
-    # calling the traced function always returns a stack
-    # with a single element.
-    out[[1]]
+    f(...)
   }
   class(f) <- c("script_module", "nn_module")
-  attr(f, "module") <- nn_ScriptModule$new(ptr = ptr)
+  self <- nn_ScriptModule$new(ptr = ptr)
+  attr(f, "module") <- self
   f
 }
 
