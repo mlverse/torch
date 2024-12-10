@@ -530,12 +530,12 @@ test_that("trace-jitted module respects 'train' and 'eval'", {
   expect_true(n$training)
   expect_true(njit$training)
   # the training field and attribute are synced
-  cpp_jit_script_module_is_training(njit$..ptr..(), njit$training)
-  n$train()
+  cpp_jit_script_module_is_training(njit$..ptr..())
+  n$eval()
   jit_trace(n, x)
   expect_false(n$training)
   expect_true(njit$training)
-  cpp_jit_script_module_is_training(njit$..ptr..(), njit$training)
+  cpp_jit_script_module_is_training(njit$..ptr..())
 })
 
 test_that("train, eval, is_training, training work", {

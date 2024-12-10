@@ -94,12 +94,7 @@ jit_trace <- function(func, ..., strict = TRUE) {
 #' @export
 jit_load <- function(path, ...) {
   path <- normalizePath(path, mustWork = TRUE)
-  out = cpp_jit_load(path)
-  if (is.null(out$..ptr..()$find_method("Xtrainforward"))) {
-    # this was a function and no module
-    return(out$forward)
-  }
-  return(out)
+  cpp_jit_load(path)
 }
 
 #' Saves a `script_function` to a path

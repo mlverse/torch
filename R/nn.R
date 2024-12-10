@@ -277,7 +277,7 @@ nn_Module <- R6::R6Class(
         if (!(length(rhs) == 1 && is.logical(rhs) && !is.na(rhs))) {
           value_error("Field `training` must be a logical flag.")
         }
-        private$training_ = TRUE
+        private$training_ = rhs
       }
       private$training_
     },
