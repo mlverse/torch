@@ -2,13 +2,11 @@
 
 ## Bug fixes
 
-- Fix french translation (#1176 @cregouby)
-
-## Bug fixes
-
 - `torch_iinfo()` now support all integer dtypes (#1190 @cregouby)
 - Fixed float key_padding_mask in `nnf_multi_head_attention_forward()` (#1205)
 - Updated to LibTorch v2.5.1 (#1204)
+- Fix french translation (#1176 @cregouby)
+- Trace jitted modules now respect 'train' and 'eval' mode (#1211)
 
 # torch 0.13.0
 

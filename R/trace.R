@@ -94,7 +94,12 @@ jit_trace <- function(func, ..., strict = TRUE) {
 #' @export
 jit_load <- function(path, ...) {
   path <- normalizePath(path, mustWork = TRUE)
-  cpp_jit_load(path)
+  out = cpp_jit_load(path)
+  if (is.null(out$..ptr..()$find_method("Xtrainforward"))) {
+    # this was a function and no module
+    return(out$forward)
+  }
+  return(out)
 }
 
 #' Saves a `script_function` to a path
@@ -283,8 +288,15 @@ jit_trace_module <- function(mod, ..., strict = TRUE) {
   if (!rlang::is_named(inputs)) {
     value_error("Arguments passed trough `...` must be named.")
   }
+  was_training = mod$training
+  on.exit({mod$train(was_training)}, add = TRUE)
 
   module <- create_script_module(mod)
+
+  # there are some specific constraints on how methods for these modules can be named
+  if (any(grepl("^X(train|eval)", names(inputs)))) {
+    value_error("Prefixes Xtrain and Xeval are reserved.")
+  }
 
   for (name in names(inputs)) {
     if (!rlang::is_closure(mod[[name]])) {
@@ -295,23 +307,55 @@ jit_trace_module <- function(mod, ..., strict = TRUE) {
     if (!is.list(inp)) {
       inp <- list(inp)
     }
+    if (name == "forward") {
+      tr_fn <- make_traceable_fn(mod[[name]])
+      mod$train()
+      ptr_train <- cpp_trace_function(
+        fn = tr_fn,
+        inputs = inp,
+        compilation_unit = .compilation_unit,
+        strict = strict,
+        module = module$..ptr..(),
+        name = paste0("Xtrain", name),
+        should_mangle = TRUE,
+        manage_memory = FALSE
+      )
+      mod$eval()
+      ptr_eval <- cpp_trace_function(
+        fn = tr_fn,
+        inputs = inp,
+        compilation_unit = .compilation_unit,
+        strict = strict,
+        module = module$..ptr..(),
+        name = paste0("Xeval", name),
+        should_mangle = TRUE,
+        manage_memory = FALSE
+      )
+      cpp_jit_script_module_add_method(module$..ptr..(), ptr_eval)
+      cpp_jit_script_module_add_method(module$..ptr..(), ptr_train)
+      cpp_jit_script_module_add_forward(module$..ptr..())
+    } else {
+      mod$train(was_training)
+      tr_fn <- make_traceable_fn(mod[[name]])
+      ptr <- cpp_trace_function(
+        fn = tr_fn,
+        inputs = inp,
+        compilation_unit = .compilation_unit,
+        strict = strict,
+        module = module$..ptr..(),
+        name = name,
+        should_mangle = TRUE,
+        manage_memory = FALSE
+      )
+      cpp_jit_script_module_add_method(module$..ptr..(), ptr)
+    }
 
-    tr_fn <- make_traceable_fn(mod[[name]])
-    ptr <- cpp_trace_function(
-      fn = tr_fn,
-      inputs = inp,
-      compilation_unit = .compilation_unit,
-      strict = strict,
-      module = module$..ptr..(),
-      name = name,
-      should_mangle = TRUE,
-      manage_memory = FALSE
-    )
-    cpp_jit_script_module_add_method(module$..ptr..(), ptr)
   }
+  module$train(was_training)
 
   module
 }
+
 
 #' Saves a `script_function` or `script_module` in bytecode form,
 #' to be loaded on a mobile device

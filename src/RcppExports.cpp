@@ -47019,6 +47019,16 @@ BEGIN_RCPP
     return R_NilValue;
 END_RCPP
 }
+// cpp_jit_script_module_add_forward
+void cpp_jit_script_module_add_forward(XPtrTorchScriptModule self);
+RcppExport SEXP _torch_cpp_jit_script_module_add_forward(SEXP selfSEXP) {
+BEGIN_RCPP
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchScriptModule >::type self(selfSEXP);
+    cpp_jit_script_module_add_forward(self);
+    return R_NilValue;
+END_RCPP
+}
 // cpp_jit_script_module_find_constant
 SEXP cpp_jit_script_module_find_constant(XPtrTorchScriptModule self, XPtrTorchstring name);
 RcppExport SEXP _torch_cpp_jit_script_module_find_constant(SEXP selfSEXP, SEXP nameSEXP) {
@@ -51452,6 +51462,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_torch_cpp_jit_script_module_new", (DL_FUNC) &_torch_cpp_jit_script_module_new, 2},
     {"_torch_cpp_jit_script_module_add_constant", (DL_FUNC) &_torch_cpp_jit_script_module_add_constant, 3},
     {"_torch_cpp_jit_script_module_add_method", (DL_FUNC) &_torch_cpp_jit_script_module_add_method, 2},
+    {"_torch_cpp_jit_script_module_add_forward", (DL_FUNC) &_torch_cpp_jit_script_module_add_forward, 1},
     {"_torch_cpp_jit_script_module_find_constant", (DL_FUNC) &_torch_cpp_jit_script_module_find_constant, 2},
     {"_torch_cpp_jit_script_module_save", (DL_FUNC) &_torch_cpp_jit_script_module_save, 2},
     {"_torch_cpp_jit_script_module_save_for_mobile", (DL_FUNC) &_torch_cpp_jit_script_module_save_for_mobile, 2},

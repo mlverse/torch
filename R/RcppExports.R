@@ -15201,6 +15201,10 @@ cpp_jit_script_module_add_method <- function(self, method) {
     invisible(.Call(`_torch_cpp_jit_script_module_add_method`, self, method))
 }
 
+cpp_jit_script_module_add_forward <- function(self) {
+    invisible(.Call(`_torch_cpp_jit_script_module_add_forward`, self))
+}
+
 cpp_jit_script_module_find_constant <- function(self, name) {
     .Call(`_torch_cpp_jit_script_module_find_constant`, self, name)
 }
