@@ -28,11 +28,6 @@ void* _lantern_ScriptModule_new(void* cu, void* name) {
       self.training = x[0]
       return x
   )");
-  // module->define(R"(
-  //   def train(self, x: List[bool]) -> List[bool]:
-  //     self.training = x[0]
-  //     return x
-  // )");
 
   module->define(R"(
     def eval(self) -> List[bool]:
