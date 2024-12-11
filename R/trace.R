@@ -351,7 +351,6 @@ jit_trace_module <- function(mod, ..., strict = TRUE) {
   module
 }
 
-
 #' Saves a `script_function` or `script_module` in bytecode form,
 #' to be loaded on a mobile device
 #'
