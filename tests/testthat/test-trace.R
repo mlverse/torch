@@ -6,7 +6,7 @@ test_that("simnple tracing works", {
   input <- torch_tensor(c(-1, 0, 1))
   tr_fn <- jit_trace(fn, input)
 
-  expect_equal_to_tensor(tr_fn(input), fn(input))
+expect_equal_to_tensor(tr_fn(input), fn(input))
 })
 
 test_that("print the graph works", {
@@ -516,13 +516,13 @@ test_that("trace-jitted module respects 'train' and 'eval'", {
     initialize = function() {
       self$x = nn_parameter(torch_tensor(1))
     },
-    Xtrainforward = function(x) x,
-    Xevalforward = function(x) x,
+    trainforward = function(x) x,
+    evalforward = function(x) x,
     forward = function(x) x * 1
   )()
 
-  expect_error(jit_trace_module(n2, Xtrainforward = torch_tensor(1)), "reserved")
-  expect_error(jit_trace_module(n2, Xevalforward = torch_tensor(1)), "reserved")
+  expect_error(jit_trace_module(n2, trainforward = torch_tensor(1)), "reserved")
+  expect_error(jit_trace_module(n2, evalforward = torch_tensor(1)), "reserved")
 
   # 4. train-eval mode of jitted model is correct and original module untouched
   n$train()

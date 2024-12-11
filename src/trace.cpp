@@ -8,7 +8,13 @@ Rcpp::XPtr<XPtrTorchFunctionPtr> cpp_trace_function(
     XPtrTorchCompilationUnit compilation_unit, XPtrTorchstring name,
     bool strict = true, XPtrTorchScriptModule module = R_NilValue,
     bool should_mangle = true, bool manage_memory = true) {
+
+  // to create a qualified name, the module must be present.
+  // if we don't qualify the names, calling jit_save will fail,
+  // when calling it on jit-traced modules
+  bool qualified_name = (module.get() != nullptr);
   auto output = XPtrTorchStack(lantern_Stack_new());
+
   std::string error;
 
   std::function<void*(void*)> r_fn = [&error, &fn, &output](void* inputs) {
@@ -42,7 +48,7 @@ Rcpp::XPtr<XPtrTorchFunctionPtr> cpp_trace_function(
   try {
     tr_fn_ptr = lantern_trace_fn(traceable_fn.get(), inputs.get(),
                                  compilation_unit.get(), strict, module.get(),
-                                 name.get(), should_mangle);
+                                 name.get(), should_mangle, qualified_name);
   } catch (const std::exception& e) {
     Rcpp::stop(std::string(e.what()) + std::string(": ") + error);
   } catch (...) {

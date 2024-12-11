@@ -35,7 +35,7 @@ void* _lantern_create_traceable_fun(void* (*r_caller)(void*, void*), void* fn) {
 
 void* _lantern_trace_fn(void* fn, void* inputs, void* compilation_unit,
                         bool strict, void* module, void* name,
-                        bool should_mangle) {
+                        bool should_mangle, bool qualified_name) {
   LANTERN_FUNCTION_START;
   std::function<Stack(Stack)> fn_ =
       *reinterpret_cast<std::function<Stack(Stack)>*>(fn);
@@ -49,13 +49,13 @@ void* _lantern_trace_fn(void* fn, void* inputs, void* compilation_unit,
   auto traced =
       torch::jit::tracer::trace(inputs_, fn_, var_fn, strict, false, module_);
 
-  const auto name2 = QualifiedName(*module_->type()->name(), name_);
+  const auto name2 = qualified_name
+    ? QualifiedName(*module_->type()->name(), name_)
+    : name_;
 
   auto tr_fn =
       from_raw::CompilationUnit(compilation_unit)
           .create_function(name2, std::get<0>(traced)->graph, should_mangle);
-
-  std::cout << tr_fn->qualname().qualifiedName();
 
   return (void*)tr_fn;
   LANTERN_FUNCTION_END;

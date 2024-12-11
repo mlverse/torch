@@ -61,7 +61,6 @@
 #' tr_fn(input)
 #' @export
 jit_trace <- function(func, ..., strict = TRUE) {
-  tr_fn <- make_traceable_fn(func)
   rlang::check_dots_unnamed() # we do not support named arguments
 
   if (inherits(func, "nn_module")) {
@@ -80,6 +79,7 @@ jit_trace <- function(func, ..., strict = TRUE) {
   if (!rlang::is_closure(func)) {
     value_error("jit_trace needs a function or nn_module.")
   }
+  tr_fn <- make_traceable_fn(func)
 
   ptr <- cpp_trace_function(tr_fn, list(...), .compilation_unit, strict, name = "name")
   new_script_function(ptr)
@@ -288,10 +288,9 @@ jit_trace_module <- function(mod, ..., strict = TRUE) {
 
   module <- create_script_module(mod)
 
-  # there are some specific constraints on how methods for these modules can be named
-  # if (any(grepl("^X(train|eval)", names(inputs)))) {
-  #   value_error("Prefixes Xtrain and Xeval are reserved.")
-  # }
+  if ("evalforward" %in% names(inputs) || "trainforward" %in% names(inputs)) {
+    value_error("Methods `evalforward` and `trainforward` are reserved.")
+  }
 
   for (name in names(inputs)) {
     if (!rlang::is_closure(mod[[name]])) {
@@ -311,8 +310,8 @@ jit_trace_module <- function(mod, ..., strict = TRUE) {
         compilation_unit = .compilation_unit,
         strict = strict,
         module = module$..ptr..(),
-        name = paste0("train", name),
-        should_mangle = FALSE,
+        name = "trainforward",
+        should_mangle = TRUE,
         manage_memory = FALSE
       )
       mod$eval()
@@ -322,13 +321,14 @@ jit_trace_module <- function(mod, ..., strict = TRUE) {
         compilation_unit = .compilation_unit,
         strict = strict,
         module = module$..ptr..(),
-        name = paste0("eval", name),
-        should_mangle = FALSE,
+        name = "evalforward",
+        should_mangle = TRUE,
         manage_memory = FALSE
       )
       cpp_jit_script_module_add_method(module$..ptr..(), ptr_eval)
       cpp_jit_script_module_add_method(module$..ptr..(), ptr_train)
-      cpp_jit_script_module_add_forward(module$..ptr..())
+      list_output = is.list(with_no_grad(do.call(mod[[name]], inp)))
+      cpp_jit_script_module_add_forward(module$..ptr..(), list_output)
     } else {
       mod$train(was_training)
       tr_fn <- make_traceable_fn(mod[[name]])
@@ -346,7 +346,7 @@ jit_trace_module <- function(mod, ..., strict = TRUE) {
     }
 
   }
-  # module$train(was_training)
+  module$train(was_training)
 
   module
 }

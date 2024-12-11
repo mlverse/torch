@@ -120,8 +120,8 @@ void cpp_jit_script_module_add_method(XPtrTorchScriptModule self,
 }
 
 // [[Rcpp::export]]
-void cpp_jit_script_module_add_forward(XPtrTorchScriptModule self) {
-  lantern_ScriptModule_add_forward(self.get());
+void cpp_jit_script_module_add_forward(XPtrTorchScriptModule self, bool list_output) {
+  lantern_ScriptModule_add_forward(self.get(), list_output);
 }
 
 // [[Rcpp::export]]

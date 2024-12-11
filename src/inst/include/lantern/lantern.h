@@ -797,11 +797,11 @@ HOST_API void* lantern_create_traceable_fun (void *(*r_caller)(void *, void *), 
   return ret;
 }
 
-LANTERN_API void* (LANTERN_PTR _lantern_trace_fn) (void* fn, void* inputs, void* compilation_unit, bool strict, void* module, void* name, bool should_mangle);
-HOST_API void* lantern_trace_fn (void* fn, void* inputs, void* compilation_unit, bool strict, void* module, void* name, bool should_mangle)
+LANTERN_API void* (LANTERN_PTR _lantern_trace_fn) (void* fn, void* inputs, void* compilation_unit, bool strict, void* module, void* name, bool should_mangle, bool qualified_name);
+HOST_API void* lantern_trace_fn (void* fn, void* inputs, void* compilation_unit, bool strict, void* module, void* name, bool should_mangle, bool qualified_name)
 {
   LANTERN_CHECK_LOADED
-  void* ret = _lantern_trace_fn(fn, inputs, compilation_unit, strict, module, name, should_mangle);
+  void* ret = _lantern_trace_fn(fn, inputs, compilation_unit, strict, module, name, should_mangle, qualified_name);
   LANTERN_HOST_HANDLER;
   return ret;
 }
@@ -2041,11 +2041,11 @@ HOST_API void lantern_ScriptModule_add_method (void* self, void* method)
   LANTERN_HOST_HANDLER;
   
 }
-LANTERN_API void (LANTERN_PTR _lantern_ScriptModule_add_forward) (void* self);
-HOST_API void lantern_ScriptModule_add_forward (void* self)
+LANTERN_API void (LANTERN_PTR _lantern_ScriptModule_add_forward) (void* self, bool list_output);
+HOST_API void lantern_ScriptModule_add_forward (void* self, bool list_output)
 {
   LANTERN_CHECK_LOADED
-   _lantern_ScriptModule_add_forward(self);
+   _lantern_ScriptModule_add_forward(self, list_output);
   LANTERN_HOST_HANDLER;
   
 }
