@@ -8,8 +8,8 @@
 <title>Using autograd • torch</title>
 <script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
-<script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.4.2/css/all.min.css" rel="stylesheet">
-<link href="../deps/font-awesome-6.4.2/css/v4-shims.min.css" rel="stylesheet">
+<script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
+<link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
 <script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><link href="../extra.css" rel="stylesheet">
 <meta property="og:title" content="Using autograd">
 <meta name="robots" content="noindex">
@@ -283,26 +283,26 @@ number of lines (that did manual backprop) are gone:</p>
 <span>    <span class="op">}</span><span class="op">)</span></span>
 <span>    </span>
 <span><span class="op">}</span></span>
-<span><span class="co">#&gt; 10 26.63307 </span></span>
-<span><span class="co">#&gt; 20 24.74724 </span></span>
-<span><span class="co">#&gt; 30 23.06739 </span></span>
-<span><span class="co">#&gt; 40 21.56063 </span></span>
-<span><span class="co">#&gt; 50 20.19774 </span></span>
-<span><span class="co">#&gt; 60 18.96272 </span></span>
-<span><span class="co">#&gt; 70 17.84861 </span></span>
-<span><span class="co">#&gt; 80 16.84098 </span></span>
-<span><span class="co">#&gt; 90 15.92963 </span></span>
-<span><span class="co">#&gt; 100 15.10488 </span></span>
-<span><span class="co">#&gt; 110 14.35444 </span></span>
-<span><span class="co">#&gt; 120 13.66979 </span></span>
-<span><span class="co">#&gt; 130 13.04375 </span></span>
-<span><span class="co">#&gt; 140 12.46632 </span></span>
-<span><span class="co">#&gt; 150 11.93609 </span></span>
-<span><span class="co">#&gt; 160 11.44676 </span></span>
-<span><span class="co">#&gt; 170 10.99628 </span></span>
-<span><span class="co">#&gt; 180 10.58087 </span></span>
-<span><span class="co">#&gt; 190 10.19584 </span></span>
-<span><span class="co">#&gt; 200 9.838849</span></span></code></pre></div>
+<span><span class="co">#&gt; 10 89.95445 </span></span>
+<span><span class="co">#&gt; 20 76.18085 </span></span>
+<span><span class="co">#&gt; 30 65.11192 </span></span>
+<span><span class="co">#&gt; 40 56.20388 </span></span>
+<span><span class="co">#&gt; 50 48.99087 </span></span>
+<span><span class="co">#&gt; 60 43.08361 </span></span>
+<span><span class="co">#&gt; 70 38.22657 </span></span>
+<span><span class="co">#&gt; 80 34.25237 </span></span>
+<span><span class="co">#&gt; 90 30.97911 </span></span>
+<span><span class="co">#&gt; 100 28.24382 </span></span>
+<span><span class="co">#&gt; 110 25.94159 </span></span>
+<span><span class="co">#&gt; 120 23.9936 </span></span>
+<span><span class="co">#&gt; 130 22.33525 </span></span>
+<span><span class="co">#&gt; 140 20.91141 </span></span>
+<span><span class="co">#&gt; 150 19.68343 </span></span>
+<span><span class="co">#&gt; 160 18.61778 </span></span>
+<span><span class="co">#&gt; 170 17.68056 </span></span>
+<span><span class="co">#&gt; 180 16.85657 </span></span>
+<span><span class="co">#&gt; 190 16.12856 </span></span>
+<span><span class="co">#&gt; 200 15.48132</span></span></code></pre></div>
 <p>We still manually compute the forward pass, and we still manually
 update the weights. In the last two chapters of this section, we’ll see
 how these parts of the logic can be made more modular and reusable, as
