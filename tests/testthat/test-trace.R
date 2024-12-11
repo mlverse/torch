@@ -6,7 +6,7 @@ test_that("simnple tracing works", {
   input <- torch_tensor(c(-1, 0, 1))
   tr_fn <- jit_trace(fn, input)
 
-expect_equal_to_tensor(tr_fn(input), fn(input))
+ expect_equal_to_tensor(tr_fn(input), fn(input))
 })
 
 test_that("print the graph works", {
@@ -462,8 +462,6 @@ test_that("can save module for mobile", {
   jit_save_for_mobile(tr_fn, tmp)
 
   f <- jit_load(tmp)
-  net$eval()
-  f$eval()
   expect_equal_to_tensor(net(input), f(input), tolerance = 1e-6)
 })
 
