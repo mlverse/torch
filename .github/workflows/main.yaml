@@ -27,7 +27,7 @@ jobs:
         config:
           
           - {os: macOS, r_version: release, version: cpu-intel, runner: macos-13}
-          - {os: macOS, r_version: release, version: cpu-m1, runner: macos-13}
+          - {os: macOS, r_version: release, version: cpu-m1, runner: macos-latest}
 
           - {os: ubuntu, r_version: release, version: cpu, runner: ubuntu-20.04}
           - {os: ubuntu, r_version: release, version: cpu, runner: ubuntu-20.04, precxx11abi: 1}
