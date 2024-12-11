@@ -289,9 +289,9 @@ jit_trace_module <- function(mod, ..., strict = TRUE) {
   module <- create_script_module(mod)
 
   # there are some specific constraints on how methods for these modules can be named
-  if (any(grepl("^X(train|eval)", names(inputs)))) {
-    value_error("Prefixes Xtrain and Xeval are reserved.")
-  }
+  # if (any(grepl("^X(train|eval)", names(inputs)))) {
+  #   value_error("Prefixes Xtrain and Xeval are reserved.")
+  # }
 
   for (name in names(inputs)) {
     if (!rlang::is_closure(mod[[name]])) {
@@ -311,8 +311,8 @@ jit_trace_module <- function(mod, ..., strict = TRUE) {
         compilation_unit = .compilation_unit,
         strict = strict,
         module = module$..ptr..(),
-        name = paste0("Xtrain", name),
-        should_mangle = TRUE,
+        name = paste0("train", name),
+        should_mangle = FALSE,
         manage_memory = FALSE
       )
       mod$eval()
@@ -322,8 +322,8 @@ jit_trace_module <- function(mod, ..., strict = TRUE) {
         compilation_unit = .compilation_unit,
         strict = strict,
         module = module$..ptr..(),
-        name = paste0("Xeval", name),
-        should_mangle = TRUE,
+        name = paste0("eval", name),
+        should_mangle = FALSE,
         manage_memory = FALSE
       )
       cpp_jit_script_module_add_method(module$..ptr..(), ptr_eval)
@@ -339,14 +339,14 @@ jit_trace_module <- function(mod, ..., strict = TRUE) {
         strict = strict,
         module = module$..ptr..(),
         name = name,
-        should_mangle = TRUE,
+        should_mangle = FALSE,
         manage_memory = FALSE
       )
       cpp_jit_script_module_add_method(module$..ptr..(), ptr)
     }
 
   }
-  module$train(was_training)
+  # module$train(was_training)
 
   module
 }

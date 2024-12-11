@@ -49,9 +49,13 @@ void* _lantern_trace_fn(void* fn, void* inputs, void* compilation_unit,
   auto traced =
       torch::jit::tracer::trace(inputs_, fn_, var_fn, strict, false, module_);
 
+  const auto name2 = QualifiedName(*module_->type()->name(), name_);
+
   auto tr_fn =
       from_raw::CompilationUnit(compilation_unit)
-          .create_function(name_, std::get<0>(traced)->graph, should_mangle);
+          .create_function(name2, std::get<0>(traced)->graph, should_mangle);
+
+  std::cout << tr_fn->qualname().qualifiedName();
 
   return (void*)tr_fn;
   LANTERN_FUNCTION_END;

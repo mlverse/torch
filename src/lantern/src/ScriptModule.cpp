@@ -184,9 +184,9 @@ void _lantern_ScriptModule_add_forward(void* self) {
   self_->define(R"(
     def forward(self, x) -> Tensor:
       if self.training:
-        return self.Xtrainforward(x)
+        return self.trainforward(x)
       else:
-        return self.Xevalforward(x)
+        return self.evalforward(x)
   )");
   LANTERN_FUNCTION_END_VOID
 }
