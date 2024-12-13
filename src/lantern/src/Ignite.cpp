@@ -22,7 +22,7 @@ void* _ignite_adamw(void* params, double lr, double beta1, double beta2,
 void* _ignite_adamw_get_param_groups(void* groups) {
   auto optim = reinterpret_cast<torch::optim::AdamW*>(groups);
   auto param_groups = optim->param_groups();
-  return new std::vector<torch::optim::OptimizerParamGroup>(param_groups);
+  return (void*) new std::vector<torch::optim::OptimizerParamGroup>(param_groups);
 }
 
 int _ignite_adamw_param_groups_size(void* groups) {
@@ -33,10 +33,10 @@ int _ignite_adamw_param_groups_size(void* groups) {
 
 void* _ignite_optim_get_param_group_params(void* groups, int i) {
   auto param_groups = reinterpret_cast<std::vector<torch::optim::OptimizerParamGroup>*>(groups);
-  auto params = param_groups->at(i).params();
-  std::cout << "params size: " << params.size() << std::endl;
+  auto group = param_groups->at(i);
+  auto params = group.params();
+
   auto out= make_raw::TensorList(params); 
-  std::cout << "out created" << std::endl;
   return out;
 }
 

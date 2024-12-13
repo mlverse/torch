@@ -1,3 +1,4 @@
+#include "torch_api.h"
 #include "torch_types.h"
 #include <torch.h>
 
@@ -38,13 +39,13 @@ void rcpp_ignite_adamw_zero_grad (optim_adamw opt) {
 
 // [[Rcpp::export]]
 Rcpp::List rcpp_as_list_adamw_param_groups (optim_param_groups groups) {
-  auto x = groups.get();
-  int size = rcpp_ignite_adamw_param_groups_size(x);
+  int size = rcpp_ignite_adamw_param_groups_size(groups);
+  
   Rcpp::List lst = Rcpp::List::create();
   for (int i = 0; i < size; i++) {
     Rcpp::List lst_inner = Rcpp::List::create();
     auto params = rcpp_ignite_optim_get_param_group_params(groups, i);
-    auto y = ignite_adamw_get_param_group_options(x, i);;
+    auto y = ignite_adamw_get_param_group_options(groups.get(), i);
     lst_inner["params"] = params;
     lst_inner["lr"] = y.lr;
     lst_inner["weight_decay"] = y.weight_decay;
