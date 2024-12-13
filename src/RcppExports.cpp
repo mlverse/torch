@@ -46149,6 +46149,110 @@ BEGIN_RCPP
     return R_NilValue;
 END_RCPP
 }
+// rcpp_ignite_adamw
+optim_adamw rcpp_ignite_adamw(torch::TensorList params, double lr, double beta1, double beta2, double eps, double weight_decay, bool amsgrad);
+RcppExport SEXP _torch_rcpp_ignite_adamw(SEXP paramsSEXP, SEXP lrSEXP, SEXP beta1SEXP, SEXP beta2SEXP, SEXP epsSEXP, SEXP weight_decaySEXP, SEXP amsgradSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< torch::TensorList >::type params(paramsSEXP);
+    Rcpp::traits::input_parameter< double >::type lr(lrSEXP);
+    Rcpp::traits::input_parameter< double >::type beta1(beta1SEXP);
+    Rcpp::traits::input_parameter< double >::type beta2(beta2SEXP);
+    Rcpp::traits::input_parameter< double >::type eps(epsSEXP);
+    Rcpp::traits::input_parameter< double >::type weight_decay(weight_decaySEXP);
+    Rcpp::traits::input_parameter< bool >::type amsgrad(amsgradSEXP);
+    rcpp_result_gen = Rcpp::wrap(rcpp_ignite_adamw(params, lr, beta1, beta2, eps, weight_decay, amsgrad));
+    return rcpp_result_gen;
+END_RCPP
+}
+// rcpp_ignite_adamw_get_param_groups
+optim_param_groups rcpp_ignite_adamw_get_param_groups(optim_adamw groups);
+RcppExport SEXP _torch_rcpp_ignite_adamw_get_param_groups(SEXP groupsSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< optim_adamw >::type groups(groupsSEXP);
+    rcpp_result_gen = Rcpp::wrap(rcpp_ignite_adamw_get_param_groups(groups));
+    return rcpp_result_gen;
+END_RCPP
+}
+// rcpp_ignite_adamw_param_groups_size
+int rcpp_ignite_adamw_param_groups_size(optim_param_groups groups);
+RcppExport SEXP _torch_rcpp_ignite_adamw_param_groups_size(SEXP groupsSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< optim_param_groups >::type groups(groupsSEXP);
+    rcpp_result_gen = Rcpp::wrap(rcpp_ignite_adamw_param_groups_size(groups));
+    return rcpp_result_gen;
+END_RCPP
+}
+// rcpp_ignite_optim_get_param_group_params
+torch::TensorList rcpp_ignite_optim_get_param_group_params(optim_param_groups groups, int i);
+RcppExport SEXP _torch_rcpp_ignite_optim_get_param_group_params(SEXP groupsSEXP, SEXP iSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< optim_param_groups >::type groups(groupsSEXP);
+    Rcpp::traits::input_parameter< int >::type i(iSEXP);
+    rcpp_result_gen = Rcpp::wrap(rcpp_ignite_optim_get_param_group_params(groups, i));
+    return rcpp_result_gen;
+END_RCPP
+}
+// rcpp_ignite_adamw_get_states
+torch::TensorList rcpp_ignite_adamw_get_states(optim_adamw opt);
+RcppExport SEXP _torch_rcpp_ignite_adamw_get_states(SEXP optSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< optim_adamw >::type opt(optSEXP);
+    rcpp_result_gen = Rcpp::wrap(rcpp_ignite_adamw_get_states(opt));
+    return rcpp_result_gen;
+END_RCPP
+}
+// rcpp_ignite_adamw_set_states
+void rcpp_ignite_adamw_set_states(optim_adamw opt, torch::TensorList states);
+RcppExport SEXP _torch_rcpp_ignite_adamw_set_states(SEXP optSEXP, SEXP statesSEXP) {
+BEGIN_RCPP
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< optim_adamw >::type opt(optSEXP);
+    Rcpp::traits::input_parameter< torch::TensorList >::type states(statesSEXP);
+    rcpp_ignite_adamw_set_states(opt, states);
+    return R_NilValue;
+END_RCPP
+}
+// rcpp_ignite_adamw_step
+void rcpp_ignite_adamw_step(optim_adamw opt);
+RcppExport SEXP _torch_rcpp_ignite_adamw_step(SEXP optSEXP) {
+BEGIN_RCPP
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< optim_adamw >::type opt(optSEXP);
+    rcpp_ignite_adamw_step(opt);
+    return R_NilValue;
+END_RCPP
+}
+// rcpp_ignite_adamw_zero_grad
+void rcpp_ignite_adamw_zero_grad(optim_adamw opt);
+RcppExport SEXP _torch_rcpp_ignite_adamw_zero_grad(SEXP optSEXP) {
+BEGIN_RCPP
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< optim_adamw >::type opt(optSEXP);
+    rcpp_ignite_adamw_zero_grad(opt);
+    return R_NilValue;
+END_RCPP
+}
+// rcpp_as_list_adamw_param_groups
+Rcpp::List rcpp_as_list_adamw_param_groups(optim_param_groups groups);
+RcppExport SEXP _torch_rcpp_as_list_adamw_param_groups(SEXP groupsSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< optim_param_groups >::type groups(groupsSEXP);
+    rcpp_result_gen = Rcpp::wrap(rcpp_as_list_adamw_param_groups(groups));
+    return rcpp_result_gen;
+END_RCPP
+}
 // enquos0
 std::vector<Rcpp::RObject> enquos0(Rcpp::Environment env);
 RcppExport SEXP _torch_enquos0(SEXP envSEXP) {
@@ -51374,6 +51478,15 @@ static const R_CallMethodDef CallEntries[] = {
     {"_torch_cpp_torch_set_rng_state", (DL_FUNC) &_torch_cpp_torch_set_rng_state, 1},
     {"_torch_cpp_torch_cuda_get_rng_state", (DL_FUNC) &_torch_cpp_torch_cuda_get_rng_state, 1},
     {"_torch_cpp_torch_cuda_set_rng_state", (DL_FUNC) &_torch_cpp_torch_cuda_set_rng_state, 2},
+    {"_torch_rcpp_ignite_adamw", (DL_FUNC) &_torch_rcpp_ignite_adamw, 7},
+    {"_torch_rcpp_ignite_adamw_get_param_groups", (DL_FUNC) &_torch_rcpp_ignite_adamw_get_param_groups, 1},
+    {"_torch_rcpp_ignite_adamw_param_groups_size", (DL_FUNC) &_torch_rcpp_ignite_adamw_param_groups_size, 1},
+    {"_torch_rcpp_ignite_optim_get_param_group_params", (DL_FUNC) &_torch_rcpp_ignite_optim_get_param_group_params, 2},
+    {"_torch_rcpp_ignite_adamw_get_states", (DL_FUNC) &_torch_rcpp_ignite_adamw_get_states, 1},
+    {"_torch_rcpp_ignite_adamw_set_states", (DL_FUNC) &_torch_rcpp_ignite_adamw_set_states, 2},
+    {"_torch_rcpp_ignite_adamw_step", (DL_FUNC) &_torch_rcpp_ignite_adamw_step, 1},
+    {"_torch_rcpp_ignite_adamw_zero_grad", (DL_FUNC) &_torch_rcpp_ignite_adamw_zero_grad, 1},
+    {"_torch_rcpp_as_list_adamw_param_groups", (DL_FUNC) &_torch_rcpp_as_list_adamw_param_groups, 1},
     {"_torch_enquos0", (DL_FUNC) &_torch_enquos0, 1},
     {"_torch_evaluate_slices", (DL_FUNC) &_torch_evaluate_slices, 2},
     {"_torch_Tensor_slice", (DL_FUNC) &_torch_Tensor_slice, 4},
