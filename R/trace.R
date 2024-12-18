@@ -339,7 +339,7 @@ jit_trace_module <- function(mod, ..., strict = TRUE) {
         strict = strict,
         module = module$..ptr..(),
         name = name,
-        should_mangle = FALSE,
+        should_mangle = TRUE,
         manage_memory = FALSE
       )
       cpp_jit_script_module_add_method(module$..ptr..(), ptr)
