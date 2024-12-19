@@ -38,6 +38,7 @@ jobs:
           
           - config: {os: ubuntu, version: cu12.4}
             container: {image: 'nvidia/cuda:12.4.1-cudnn-devel-ubuntu20.04', options: '--gpus all --runtime=nvidia'}
+            cuda_enabled: 1
 
     runs-on: ${{ matrix.config.runner }}
     container: ${{ matrix.container }}
@@ -48,6 +49,7 @@ jobs:
       R_REMOTES_NO_ERRORS_FROM_WARNINGS: true
       TORCH_TEST: 1
       TORCH_INSTALL: 1
+      TORCH_TEST_CUDA: ${{ matrix.cuda_enabled }}
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
       PRECXX11ABI: ${{ matrix.config.precxx11abi }}
       ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION: true

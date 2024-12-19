@@ -41,3 +41,10 @@ test_that("can empty cache", {
   
   expect_true(stats_after$reserved_bytes$all$current < stats$reserved_bytes$all$current)
 })
+
+test_that("cuda is really available", {
+  # a stop gap test that makes sure cuda is available when it should be
+  if (Sys.getenv("TORCH_TEST_CUDA", "0") == "1") {
+    expect_true(cuda_is_available())
+  }
+})
