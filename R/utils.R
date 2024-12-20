@@ -93,16 +93,16 @@ torch_option <- function(option, default = NULL) {
 }
 
 math_to_rd_impl <- function(tex, ascii = tex, displayMode = TRUE, ..., include_css = TRUE) {
-  
+
   if (in_pkgdown()) {
     html <- katex::katex_html(tex,
                               include_css = include_css, displayMode = displayMode, ...,
                               preview = FALSE
-    )  
+    )
   } else {
     html <- "<p>Math could not be displayed. Please visit the package website.</p>"
   }
-  
+
   html_out <- paste("\\if{html}{\\out{", html, "}}", sep = "\n")
   # We won't show the equations in latex mode because of limitted support.
   latex_out <- paste("\\if{latex,text}{\\out{", ascii, "}}", sep = "\n")

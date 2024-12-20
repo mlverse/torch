@@ -1,3 +1,4 @@
+#include <ostream>
 #include <torch/optim/adamw.h>
 #define LANTERN_BUILD
 #include <torch/torch.h>
@@ -19,8 +20,8 @@ void* _ignite_adamw(void* params, double lr, double beta1, double beta2,
   return (void*) new torch::optim::AdamW(params_.vec(), options);
 }
 
-void* _ignite_adamw_get_param_groups(void* groups) {
-  auto optim = reinterpret_cast<torch::optim::AdamW*>(groups);
+void* _ignite_adamw_get_param_groups(void* opt) {
+  auto optim = reinterpret_cast<torch::optim::AdamW*>(opt);
   auto param_groups = optim->param_groups();
   return (void*) new std::vector<torch::optim::OptimizerParamGroup>(param_groups);
 }
@@ -36,7 +37,7 @@ void* _ignite_optim_get_param_group_params(void* groups, int i) {
   auto group = param_groups->at(i);
   auto params = group.params();
 
-  auto out= make_raw::TensorList(params); 
+  auto out= make_raw::TensorList(params);
   return out;
 }
 
@@ -44,8 +45,9 @@ void* _ignite_optim_get_param_group_params(void* groups, int i) {
 // [[torch::export(rcpp = FALSE, register_types=list(c("adamw_options", "AdamWOptions", "adamw_options", "adamw_options")))]]
 adamw_options _ignite_adamw_get_param_group_options(void* groups, int i) {
   auto param_groups = reinterpret_cast<std::vector<torch::optim::OptimizerParamGroup>*>(groups);
-  auto options = param_groups->at(i).options();
-  auto& x = static_cast<torch::optim::AdamWOptions&>(options);
+  // TODO: Check why -> .at(i) does not work
+  auto g = (*param_groups)[i];
+  auto& x = static_cast<torch::optim::AdamWOptions&>(g.options());
 
   auto betas = x.betas();
   adamw_options opts;
@@ -55,6 +57,7 @@ adamw_options _ignite_adamw_get_param_group_options(void* groups, int i) {
   opts.betas[1] = std::get<1>(betas);
   opts.eps = x.eps();
   opts.amsgrad = x.amsgrad();
+
   return opts;
 }
 
@@ -88,12 +91,12 @@ void* _ignite_adamw_get_states(void* optim) {
   for (const auto& group : opt->param_groups()) {
     // For each parameter in the group
     for (const auto& param : group.params()) {
-      
+
       // Look up this parameter's state in the optimizer's state map
       // The state map is a flat_hash_map that maps parameter keys to their optimizer states
       auto state_it = opt->state().find(param.unsafeGetTensorImpl());
 
-      if (state_it != opt->state().end()) {
+      if (state_it != opt->state().end()) { // TODO: Check what this does exactly
         // If state exists for this parameter:
         // 1. Get raw pointer to the OptimizerParamState from the unique_ptr
         // 2. Cast it to AdamWParamState since we know this is an AdamW optimizer
@@ -104,15 +107,20 @@ void* _ignite_adamw_get_states(void* optim) {
         // but we want ownership
         tensors.push_back(adamw_state->exp_avg().clone());
         tensors.push_back(adamw_state->exp_avg_sq().clone());
-        tensors.push_back(adamw_state->max_exp_avg_sq().clone());
+        // check if amsgrad is true, then clone, otherwise set to empty tensor
+        if (adamw_state->max_exp_avg_sq().defined()) {
+          tensors.push_back(adamw_state->max_exp_avg_sq().clone());
+        } else {
+          tensors.push_back(torch::Tensor());
+        }
         tensors.push_back(torch::scalar_tensor(adamw_state->step(), torch::kLong));
       } else {
-        // This parameter should have state - error if not found
-        throw std::runtime_error("State not found for parameter");
+        // this is the case where the parameter is not trained, we still include it in the state
+        // as undefined tensors to simplify the state handling.
+        tensors.insert(tensors.end(), 4, torch::Tensor());
       }
     }
   }
-  std::cout << "tensors size: " << tensors.size() << std::endl;
   return make_raw::TensorList(tensors);
 }
 
@@ -127,15 +135,21 @@ void _ignite_adamw_set_states(void* optim, void* states_) {
       // TODO: Check whether this actually does what we want
       if (state_it != opt->state().end()) {
         auto* current_state = static_cast<torch::optim::AdamWParamState*>(state_it->second.get());
-        current_state->exp_avg(states[i]);
-        current_state->exp_avg_sq(states[i + 1]);
-        current_state->max_exp_avg_sq(states[i + 2]);
-        auto step = states[i + 3];
-        // convert step from torch::kLong to int64_t
-        current_state->step(step.item<int64_t>());
-      } else {
-        // runtime error
-        throw std::runtime_error("State not found");
+        if (states[i].defined()) {
+          current_state->exp_avg(states[i]);
+        }
+        if (states[i + 1].defined()) {
+          current_state->exp_avg_sq(states[i + 1]);
+        }
+        // is only defined if amsgrad = TRUE
+        if (states[i + 2].defined()) {
+          current_state->max_exp_avg_sq(states[i + 2]);
+        }
+        if (states[i + 3].defined()) {
+          auto step = states[i + 3];
+          // convert step from torch::kLong to int64_t
+          current_state->step(step.item<int64_t>());
+        }
       }
     }
     i += 4;

@@ -11,7 +11,7 @@ expect_optim_works <- function(optim, defaults) {
 
   w <- torch_randn(10, 1, requires_grad = TRUE)
   z <- torch_randn(10, 1, requires_grad = TRUE)
-  defaults[["params"]] <- list(w, z)
+  defaults[["params"]] <- list(w)
   opt <- do.call(optim, defaults)
 
   fn <- function() {
@@ -41,16 +41,18 @@ expect_state_is_updated <- function(opt_fn) {
   y <- 2 * x
   y$backward()
   opt$step()
-  expect_equal(as.numeric(opt$state$get(opt$param_groups[[1]]$params[[1]])$step), 1)
+  expect_equal(as.numeric(opt$state_dict()$state[[1]]$step), 1)
   opt$step()
-  expect_equal(as.numeric(opt$state$get(opt$param_groups[[1]]$params[[1]])$step), 2)
+  expect_equal(as.numeric(opt$state_dict()$state[[1]]$step), 2)
 
   state <- opt$state_dict()
   x2 <- torch_tensor(1, requires_grad = TRUE)
   opt2 <- opt_fn(x)
   opt2$load_state_dict(state)
 
-  for (i in seq_along(opt$state$map)) {
-    expect_equal(opt2$state$map[[i]], opt$state$map[[i]])
+  x1 = unlist(opt2$state_dict()$state)
+  x2 = unlist(opt$state_dict()$state)
+  for (i in seq_along(x1)) {
+    expect_equal(x1[[i]], x2[[i]])
   }
 }

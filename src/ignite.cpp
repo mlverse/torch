@@ -8,8 +8,8 @@ optim_adamw rcpp_ignite_adamw (torch::TensorList params, double lr, double beta1
 }
 
 // [[Rcpp::export]]
-optim_param_groups rcpp_ignite_adamw_get_param_groups (optim_adamw groups) {
-  return ignite_adamw_get_param_groups(groups.get());
+optim_param_groups rcpp_ignite_adamw_get_param_groups (optim_adamw opt) {
+  return ignite_adamw_get_param_groups(opt.get());
 }
 // [[Rcpp::export]]
 int rcpp_ignite_adamw_param_groups_size (optim_param_groups groups) {
@@ -40,7 +40,7 @@ void rcpp_ignite_adamw_zero_grad (optim_adamw opt) {
 // [[Rcpp::export]]
 Rcpp::List rcpp_as_list_adamw_param_groups (optim_param_groups groups) {
   int size = rcpp_ignite_adamw_param_groups_size(groups);
-  
+
   Rcpp::List lst = Rcpp::List::create();
   for (int i = 0; i < size; i++) {
     Rcpp::List lst_inner = Rcpp::List::create();
@@ -56,4 +56,21 @@ Rcpp::List rcpp_as_list_adamw_param_groups (optim_param_groups groups) {
     lst.push_back(lst_inner);
   }
   return lst;
+}
+
+// [[Rcpp::export]]
+void rcpp_ignite_adamw_set_param_group_options(optim_adamw opt, Rcpp::List list) {
+  for (int i = 0; i < list.length(); i++) {
+    Rcpp::List group_options = list[i];
+    adamw_options opts;
+    opts.lr = group_options["lr"];
+
+    Rcpp::NumericVector betas = group_options["betas"];
+    opts.betas[0] = betas[0];
+    opts.betas[1] = betas[1];
+    opts.eps = group_options["eps"];
+    opts.weight_decay = group_options["weight_decay"];
+    opts.amsgrad = group_options["amsgrad"];
+    ignite_adamw_set_param_group_options(opt.get(), i, opts);
+  }
 }

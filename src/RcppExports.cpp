@@ -46167,13 +46167,13 @@ BEGIN_RCPP
 END_RCPP
 }
 // rcpp_ignite_adamw_get_param_groups
-optim_param_groups rcpp_ignite_adamw_get_param_groups(optim_adamw groups);
-RcppExport SEXP _torch_rcpp_ignite_adamw_get_param_groups(SEXP groupsSEXP) {
+optim_param_groups rcpp_ignite_adamw_get_param_groups(optim_adamw opt);
+RcppExport SEXP _torch_rcpp_ignite_adamw_get_param_groups(SEXP optSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< optim_adamw >::type groups(groupsSEXP);
-    rcpp_result_gen = Rcpp::wrap(rcpp_ignite_adamw_get_param_groups(groups));
+    Rcpp::traits::input_parameter< optim_adamw >::type opt(optSEXP);
+    rcpp_result_gen = Rcpp::wrap(rcpp_ignite_adamw_get_param_groups(opt));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -46251,6 +46251,17 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< optim_param_groups >::type groups(groupsSEXP);
     rcpp_result_gen = Rcpp::wrap(rcpp_as_list_adamw_param_groups(groups));
     return rcpp_result_gen;
+END_RCPP
+}
+// rcpp_ignite_adamw_set_param_group_options
+void rcpp_ignite_adamw_set_param_group_options(optim_adamw opt, Rcpp::List list);
+RcppExport SEXP _torch_rcpp_ignite_adamw_set_param_group_options(SEXP optSEXP, SEXP listSEXP) {
+BEGIN_RCPP
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< optim_adamw >::type opt(optSEXP);
+    Rcpp::traits::input_parameter< Rcpp::List >::type list(listSEXP);
+    rcpp_ignite_adamw_set_param_group_options(opt, list);
+    return R_NilValue;
 END_RCPP
 }
 // enquos0
@@ -51487,6 +51498,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_torch_rcpp_ignite_adamw_step", (DL_FUNC) &_torch_rcpp_ignite_adamw_step, 1},
     {"_torch_rcpp_ignite_adamw_zero_grad", (DL_FUNC) &_torch_rcpp_ignite_adamw_zero_grad, 1},
     {"_torch_rcpp_as_list_adamw_param_groups", (DL_FUNC) &_torch_rcpp_as_list_adamw_param_groups, 1},
+    {"_torch_rcpp_ignite_adamw_set_param_group_options", (DL_FUNC) &_torch_rcpp_ignite_adamw_set_param_group_options, 2},
     {"_torch_enquos0", (DL_FUNC) &_torch_enquos0, 1},
     {"_torch_evaluate_slices", (DL_FUNC) &_torch_evaluate_slices, 2},
     {"_torch_Tensor_slice", (DL_FUNC) &_torch_Tensor_slice, 4},

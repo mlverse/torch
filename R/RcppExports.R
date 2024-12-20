@@ -14893,8 +14893,8 @@ rcpp_ignite_adamw <- function(params, lr, beta1, beta2, eps, weight_decay, amsgr
     .Call(`_torch_rcpp_ignite_adamw`, params, lr, beta1, beta2, eps, weight_decay, amsgrad)
 }
 
-rcpp_ignite_adamw_get_param_groups <- function(groups) {
-    .Call(`_torch_rcpp_ignite_adamw_get_param_groups`, groups)
+rcpp_ignite_adamw_get_param_groups <- function(opt) {
+    .Call(`_torch_rcpp_ignite_adamw_get_param_groups`, opt)
 }
 
 rcpp_ignite_adamw_param_groups_size <- function(groups) {
@@ -14923,6 +14923,10 @@ rcpp_ignite_adamw_zero_grad <- function(opt) {
 
 rcpp_as_list_adamw_param_groups <- function(groups) {
     .Call(`_torch_rcpp_as_list_adamw_param_groups`, groups)
+}
+
+rcpp_ignite_adamw_set_param_group_options <- function(opt, list) {
+    invisible(.Call(`_torch_rcpp_ignite_adamw_set_param_group_options`, opt, list))
 }
 
 enquos0 <- function(env) {
