@@ -25,10 +25,9 @@ jobs:
       fail-fast: false
       matrix:
         config:
-          
           - {os: macOS, r_version: release, version: cpu-intel, runner: macos-13}
-          - {os: macOS, r_version: release, version: cpu-m1, runner: macos-latest}
-
+          # on m1 the R version is whicherver is installed in the runner machine.
+          - {os: macOS, r_version: '', version: cpu-m1, runner: [self-hosted, m1]}
           - {os: ubuntu, r_version: release, version: cpu, runner: ubuntu-20.04}
           - {os: ubuntu, r_version: release, version: cpu, runner: ubuntu-20.04, precxx11abi: 1}
           - {os: ubuntu, r_version: release, version: cu12.4, runner: [self-hosted, gpu-local]}
