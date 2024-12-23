@@ -59,26 +59,6 @@ test_that("optim_adamw", {
   expect_state_is_updated(optim_ignite_adamw)
 })
 
-make_adamw = function(...) {
-  n = torch::nn_linear(1, 1)
-
-  n$parameters[[1]]
-
-  o = optim_ignite_adamw(n$parameters, ...)
-
-  s = function() {
-    x = torch_randn(10, 1)
-    y = torch_randn(10, 1)
-    loss = mean((n(x) - y)^2)
-    loss$backward()
-    o$step()
-    o$zero_grad()
-  }
-  s()
-  s()
-  o$state_dict()
-}
-
 test_that("constructor arguments are passed to the optimizer", {
   n = nn_linear(1, 1)
   lr = 0.123
@@ -113,4 +93,44 @@ test_that("can change param groups", {
   expect_equal(o$param_groups[[1]]$amsgrad, FALSE)
   o$param_groups[[1]]$amsgrad = TRUE
   expect_equal(o$param_groups[[1]]$amsgrad, TRUE)
+})
+
+test_that("can initialize optimizer with different options per param group", {
+  defaults = list(lr = 0.1, betas = c(0.9, 0.999), eps = 1e-8, weight_decay = 0, amsgrad = FALSE)
+  # set args1 to slightly different values than defaults
+  args1 = list(lr = 0.11, betas = c(0.91, 0.9991), eps = 1e-81, weight_decay = 0.1, amsgrad = TRUE)
+  args2 = list(lr = 0.12, betas = c(0.92, 0.9992), eps = 1e-82, weight_decay = 0.2, amsgrad = FALSE)
+
+  pgs = list(
+    c(list(params = list(torch_tensor(1))), args1),
+    c(list(params = list(torch_tensor(2))), args2),
+    c(list(params = list(torch_tensor(3))))
+  )
+
+  o = do.call(optim_ignite_adamw, args = c(list(params = pgs), defaults))
+  pgs = o$param_groups
+  pgs[[1]]$params = NULL
+  pgs[[2]]$params = NULL
+  pgs[[3]]$params = NULL
+  expect_equal(pgs[[1]], args1[names(pgs[[1]])])
+  expect_equal(pgs[[2]], args2[names(pgs[[2]])])
+  expect_equal(pgs[[3]], defaults[names(pgs[[3]])])
+})
+
+test_that("can add a param group", {
+  # TODO: Check that the parameter is also optimized
+})
+
+test_that("error handling when loading state dict", {
+  o = make_ignite_adamw()
+  expect_error(o$load_state_dict(list()), "must be a list with elements")
+  sd1 = o$state_dict()
+  sd1 = list(param_groups = sd1$param_groups, state = sd1$state[1])
+  expect_error(o$load_state_dict(sd1), "The number of states in the state dict")
+  sd2 = o$state_dict()
+  sd2$state[[1]]$exp_avg = NULL
+  expect_error(o$load_state_dict(sd2), "The i-th state has elements with names exp_avg")
+  sd3 = o$state_dict()
+  sd3$param_groups[[1]]$lr = NULL
+  expect_error(o$load_state_dict(sd3), "but got params, weight_decay")
 })

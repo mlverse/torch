@@ -38,6 +38,18 @@ void rcpp_ignite_adamw_zero_grad (optim_adamw opt) {
 }
 
 // [[Rcpp::export]]
+void rcpp_ignite_adamw_add_param_group(optim_adamw opt, torch::TensorList params, double lr, double beta1, double beta2, double eps, double weight_decay, bool amsgrad) {
+  adamw_options options;
+  options.lr = lr;
+  options.betas[0] = beta1;
+  options.betas[1] = beta2;
+  options.eps = eps;
+  options.weight_decay = weight_decay;
+  options.amsgrad = amsgrad;
+  return ignite_adamw_add_param_group(opt.get(), params.get(), options);
+}
+
+// [[Rcpp::export]]
 Rcpp::List rcpp_as_list_adamw_param_groups (optim_param_groups groups) {
   int size = rcpp_ignite_adamw_param_groups_size(groups);
 

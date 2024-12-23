@@ -14921,6 +14921,10 @@ rcpp_ignite_adamw_zero_grad <- function(opt) {
     invisible(.Call(`_torch_rcpp_ignite_adamw_zero_grad`, opt))
 }
 
+rcpp_ignite_adamw_add_param_group <- function(opt, params, lr, beta1, beta2, eps, weight_decay, amsgrad) {
+    invisible(.Call(`_torch_rcpp_ignite_adamw_add_param_group`, opt, params, lr, beta1, beta2, eps, weight_decay, amsgrad))
+}
+
 rcpp_as_list_adamw_param_groups <- function(groups) {
     .Call(`_torch_rcpp_as_list_adamw_param_groups`, groups)
 }

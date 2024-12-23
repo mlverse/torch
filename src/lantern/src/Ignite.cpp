@@ -41,6 +41,22 @@ void* _ignite_optim_get_param_group_params(void* groups, int i) {
   return out;
 }
 
+void _ignite_adamw_add_param_group(void* optim, void* params, adamw_options options) {
+  auto optim_ = reinterpret_cast<torch::optim::AdamW*>(optim);
+  auto params_ = from_raw::TensorList(params);
+  auto options_ = torch::optim::AdamWOptions(options.lr)
+    .betas(std::make_tuple(options.betas[0], options.betas[1]))
+    .eps(options.eps)
+    .weight_decay(options.weight_decay)
+    .amsgrad(options.amsgrad);
+  // need to create an OptimizerParamGroup that is then added
+  // create a std::unique_ptr for the options
+  // create unique ptr for options
+  auto options_ptr = std::make_unique<torch::optim::AdamWOptions>(options_);
+  auto group = torch::optim::OptimizerParamGroup(params_.vec(), std::move(options_ptr));
+  optim_->add_param_group(group);
+}
+
 // We don't need to call this from R as it is just used on the Rcpp side
 // [[torch::export(rcpp = FALSE, register_types=list(c("adamw_options", "AdamWOptions", "adamw_options", "adamw_options")))]]
 adamw_options _ignite_adamw_get_param_group_options(void* groups, int i) {
@@ -150,32 +166,12 @@ void _ignite_adamw_set_states(void* optim, void* states_) {
           // convert step from torch::kLong to int64_t
           current_state->step(step.item<int64_t>());
         }
-      }
+        i += 4;
+      } // don't increment i, as there was no state for the param
     }
-    i += 4;
   }
 }
 
-
-// [[torch::export(register_types=list(c("script_module", "ScriptModule", "void*", "Rcpp::XPtr<XPtrTorchScriptModule>"), c("torch_stack", "TorchStack", "void*", "XPtrTorchStack"), c("optim", "Optim", "void*", "ignite::optim")))]]
-// std::vector<torch::Tensor> ignite_opt_step(script_module network, script_module loss_fn, torch_stack input, torch::Tensor target, optim_adamw optimizer) {
-//   // TODO: optim_adamw -> optim
-//   optimizer->zero_grad();
-
-//   auto out = (*network)(*input);
-//   auto loss_inputs = new torch::jit::Stack();
-//   loss_inputs->push_back(out);
-//   loss_inputs->push_back(target);
-
-//   auto loss = (*loss_fn)(*loss_inputs);
-//   loss.toTensor().backward();
-//   optimizer->step();
-
-//   std::vector<torch::Tensor> result;
-//   result.push_back(loss.toTensor());
-//   result.push_back(out.toTensor());
-//   return result;
-// }
 
 void _ignite_adamw_step(void* optim) {
   auto opt = reinterpret_cast<torch::optim::AdamW*>(optim);
