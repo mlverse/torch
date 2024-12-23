@@ -14909,8 +14909,8 @@ rcpp_ignite_adamw_get_states <- function(opt) {
     .Call(`_torch_rcpp_ignite_adamw_get_states`, opt)
 }
 
-rcpp_ignite_adamw_set_states <- function(opt, states) {
-    invisible(.Call(`_torch_rcpp_ignite_adamw_set_states`, opt, states))
+rcpp_ignite_adamw_set_states <- function(opt, params, states) {
+    invisible(.Call(`_torch_rcpp_ignite_adamw_set_states`, opt, params, states))
 }
 
 rcpp_ignite_adamw_step <- function(opt) {
@@ -14919,6 +14919,10 @@ rcpp_ignite_adamw_step <- function(opt) {
 
 rcpp_ignite_adamw_zero_grad <- function(opt) {
     invisible(.Call(`_torch_rcpp_ignite_adamw_zero_grad`, opt))
+}
+
+rcpp_ignite_adamw_parameters_with_state <- function(opt) {
+    .Call(`_torch_rcpp_ignite_adamw_parameters_with_state`, opt)
 }
 
 rcpp_ignite_adamw_add_param_group <- function(opt, params, lr, beta1, beta2, eps, weight_decay, amsgrad) {

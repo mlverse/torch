@@ -130,45 +130,58 @@ void* _ignite_adamw_get_states(void* optim) {
           tensors.push_back(torch::Tensor());
         }
         tensors.push_back(torch::scalar_tensor(adamw_state->step(), torch::kLong));
-      } else {
-        // this is the case where the parameter is not trained, we still include it in the state
-        // as undefined tensors to simplify the state handling.
-        tensors.insert(tensors.end(), 4, torch::Tensor());
       }
     }
   }
   return make_raw::TensorList(tensors);
 }
 
-void _ignite_adamw_set_states(void* optim, void* states_) {
+void* _ignite_adamw_parameters_with_state(void* optim) {
   auto opt = reinterpret_cast<torch::optim::AdamW*>(optim);
-  auto states = from_raw::TensorList(states_);
-  size_t i = 0;
+  auto params_with_states = std::vector<torch::Tensor>();
+
   for (const auto& group : opt->param_groups()) {
     for (const auto& param : group.params()) {
-
-      auto state_it = opt->state().find(param.unsafeGetTensorImpl());
-      // TODO: Check whether this actually does what we want
-      if (state_it != opt->state().end()) {
-        auto* current_state = static_cast<torch::optim::AdamWParamState*>(state_it->second.get());
-        if (states[i].defined()) {
-          current_state->exp_avg(states[i]);
-        }
-        if (states[i + 1].defined()) {
-          current_state->exp_avg_sq(states[i + 1]);
-        }
-        // is only defined if amsgrad = TRUE
-        if (states[i + 2].defined()) {
-          current_state->max_exp_avg_sq(states[i + 2]);
-        }
-        if (states[i + 3].defined()) {
-          auto step = states[i + 3];
-          // convert step from torch::kLong to int64_t
-          current_state->step(step.item<int64_t>());
-        }
-        i += 4;
-      } // don't increment i, as there was no state for the param
+      if (opt->state().find(param.unsafeGetTensorImpl()) != opt->state().end()) {
+        params_with_states.push_back(param);
+      }
     }
+  }
+  return make_raw::TensorList(params_with_states);
+}
+
+
+void _ignite_adamw_set_states(void* optim, void* params,void* states_) {
+  auto opt = reinterpret_cast<torch::optim::AdamW*>(optim);
+  auto states = from_raw::TensorList(states_);
+  auto params_ = from_raw::TensorList(params);
+
+  size_t i = 0;
+  for (const auto& param : params_) {
+    auto state_it = opt->state().find(param.unsafeGetTensorImpl());
+    if (state_it == opt->state().end()) {
+      // initialize a new state
+      auto new_state = std::make_unique<torch::optim::AdamWParamState>();
+      opt->state()[param.unsafeGetTensorImpl()] = std::move(new_state);
+      state_it = opt->state().find(param.unsafeGetTensorImpl());
+    }
+    auto* current_state = static_cast<torch::optim::AdamWParamState*>(state_it->second.get());
+    if (states[i].defined()) {
+      current_state->exp_avg(states[i]);
+    }
+    if (states[i + 1].defined()) {
+      current_state->exp_avg_sq(states[i + 1]);
+    }
+    // is only defined if amsgrad = TRUE
+    if (states[i + 2].defined()) {
+      current_state->max_exp_avg_sq(states[i + 2]);
+    }
+    if (states[i + 3].defined()) {
+      auto step = states[i + 3];
+      // convert step from torch::kLong to int64_t
+      current_state->step(step.item<int64_t>());
+    }
+    i += 4;
   }
 }
 

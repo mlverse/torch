@@ -35,23 +35,22 @@ extract_ignite_state_dict = function(self, states, nms) {
     # But we don't want to return them as part of the state dict.
     # Therefore, we unlist all the parameters and store the indices in the state dict.
     param_groups = self$param_groups
-    addresses <- sapply(unlist(lapply(param_groups, function(x) x$params)), torch:::xptr_address)
+    addresses <- sapply(unlist(lapply(param_groups, function(x) x$params)), xptr_address)
     param_groups = lapply(param_groups, function(group) {
-      group_param <- sapply(group$params, torch:::xptr_address)
+      group_param <- sapply(group$params, xptr_address)
       group$params <- match(group_param, addresses)
       group
     })
-    states = lapply(seq(1, length(states) - length(nms) + 1, by = length(nms)), function(i) {
-      current_state = states[i:(i + length(nms) - 1)]
-      if (all(sapply(current_state, cpp_tensor_is_undefined))) {
-        return(NULL)
-      }
-      # the parameter has no state
-      set_names(current_state, nms)
-    })
-    states = Filter(function(x) !is.null(x), states)
-    if (is.null(states)) states <- list()
-
+    if (length(states)) {
+      states = lapply(seq(1, length(states) - length(nms) + 1, by = length(nms)), function(i) {
+        set_names(states[i:(i + length(nms) - 1)], nms)
+      })
+    }
+    params_with_state = rcpp_ignite_adamw_parameters_with_state(self$ptr)
+    params_with_state_addrs = sapply(params_with_state, xptr_address)
+    ids = as.character(match(params_with_state_addrs, addresses))
+    states = set_names(states, ids)
+    # match them with the existing parameters
     list(
       param_groups = param_groups,
       state = states
@@ -104,22 +103,24 @@ optim_ignite_adamw <- optimizer_ignite(
     if (!is.list(state_dict) || !all(c("param_groups", "state") %in% names(state_dict))) {
       value_error("The `state_dict` must be a list with elements 'param_groups' and 'state'.")
     }
-    self$param_groups = state_dict$param_groups
     states = state_dict$state
     prev_states = self$state_dict()$state
-    if (length(states) != length(prev_states)) {
-      value_error("The number of states in the state dict {length(states)} does not match the number of states in the optimizer {length(prev_states)}.")
+    if (!(all(names(prev_states) %in% names(states)))) {
+      value_error("To-be loaded state dict is missing states for parameters {paste(setdiff(names(prev_states), names(states)), collapse = ', ')}.")
     }
-    walk(seq_along(states), function(i) {
+    walk(as.character(seq_along(prev_states)), function(i) {
       if (!identical(names(states[[i]]), names(prev_states[[i]]))) {
-        value_error("The i-th state has elements with names {paste0(names(prev_states[[i]]), collapse = ', ')} but got {paste0(names(states[[i]]), collapse = ', ')}.")
+        value_error("The {i}-th state has elements with names {paste0(names(prev_states[[i]]), collapse = ', ')} but got {paste0(names(states[[i]]), collapse = ', ')}.")
       }
     })
-    rcpp_ignite_adamw_set_states(self$ptr, unlist(states))
+    params = unlist(lapply(self$param_groups, function(x) x$params))
+    params = params[as.integer(names(states))]
+    self$param_groups = state_dict$param_groups
+    rcpp_ignite_adamw_set_states(self$ptr, params, unlist(states))
     invisible(self)
   },
   step = function(closure = NULL) {
-    loss = if (!is.null(closure)) {
+    loss <- if (!is.null(closure)) {
       with_enable_grad(closure())
     }
     rcpp_ignite_adamw_step(self$ptr)
@@ -145,17 +146,24 @@ optim_ignite_adamw <- optimizer_ignite(
   },
   active = list(
     param_groups = function(rhs) {
+
       if (!missing(rhs)) {
-        prev_param_groups = self$param_groups
+        prev_param_groups = self$state_dict()$param_groups
         if (!is.list(rhs) && length(rhs) == length(prev_param_groups)) {
           value_error("Parameter groups must be a list of the same length as the number of parameter groups.")
         }
+
         walk(seq_along(prev_param_groups), function(i) {
           prev_param_group = prev_param_groups[[i]]
           new_param_group = rhs[[i]]
           if (!is_permutation(names(new_param_group), names(prev_param_group))) {
             value_error("Parameter groups must have names {paste0(names(prev_param_group), collapse = ', ')} but got {paste0(names(new_param_group), collapse = ', ')}.")
           }
+
+          if (!identical(prev_param_group$params, new_param_group$params)) {
+            value_error("Cannot change the indices of the parameter group, use `$add_param_group()` to add a new parameter group.")
+          }
+
           rcpp_ignite_adamw_set_param_group_options(self$ptr, rhs)
         })
       }

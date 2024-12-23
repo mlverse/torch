@@ -24,8 +24,8 @@ torch::TensorList rcpp_ignite_adamw_get_states (optim_adamw opt) {
   return ignite_adamw_get_states(opt.get());
 }
 // [[Rcpp::export]]
-void rcpp_ignite_adamw_set_states (optim_adamw opt, torch::TensorList states) {
-   ignite_adamw_set_states(opt.get(), states.get());
+void rcpp_ignite_adamw_set_states (optim_adamw opt, torch::TensorList params, torch::TensorList states) {
+   ignite_adamw_set_states(opt.get(), params.get(), states.get());
 }
 
 // [[Rcpp::export]]
@@ -35,6 +35,11 @@ void rcpp_ignite_adamw_step (optim_adamw opt) {
 // [[Rcpp::export]]
 void rcpp_ignite_adamw_zero_grad (optim_adamw opt) {
    ignite_adamw_zero_grad(opt.get());
+}
+
+// [[Rcpp::export]]
+torch::TensorList rcpp_ignite_adamw_parameters_with_state(optim_adamw opt) {
+  return ignite_adamw_parameters_with_state(opt.get());
 }
 
 // [[Rcpp::export]]

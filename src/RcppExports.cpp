@@ -46212,13 +46212,14 @@ BEGIN_RCPP
 END_RCPP
 }
 // rcpp_ignite_adamw_set_states
-void rcpp_ignite_adamw_set_states(optim_adamw opt, torch::TensorList states);
-RcppExport SEXP _torch_rcpp_ignite_adamw_set_states(SEXP optSEXP, SEXP statesSEXP) {
+void rcpp_ignite_adamw_set_states(optim_adamw opt, torch::TensorList params, torch::TensorList states);
+RcppExport SEXP _torch_rcpp_ignite_adamw_set_states(SEXP optSEXP, SEXP paramsSEXP, SEXP statesSEXP) {
 BEGIN_RCPP
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< optim_adamw >::type opt(optSEXP);
+    Rcpp::traits::input_parameter< torch::TensorList >::type params(paramsSEXP);
     Rcpp::traits::input_parameter< torch::TensorList >::type states(statesSEXP);
-    rcpp_ignite_adamw_set_states(opt, states);
+    rcpp_ignite_adamw_set_states(opt, params, states);
     return R_NilValue;
 END_RCPP
 }
@@ -46240,6 +46241,17 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< optim_adamw >::type opt(optSEXP);
     rcpp_ignite_adamw_zero_grad(opt);
     return R_NilValue;
+END_RCPP
+}
+// rcpp_ignite_adamw_parameters_with_state
+torch::TensorList rcpp_ignite_adamw_parameters_with_state(optim_adamw opt);
+RcppExport SEXP _torch_rcpp_ignite_adamw_parameters_with_state(SEXP optSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< optim_adamw >::type opt(optSEXP);
+    rcpp_result_gen = Rcpp::wrap(rcpp_ignite_adamw_parameters_with_state(opt));
+    return rcpp_result_gen;
 END_RCPP
 }
 // rcpp_ignite_adamw_add_param_group
@@ -51511,9 +51523,10 @@ static const R_CallMethodDef CallEntries[] = {
     {"_torch_rcpp_ignite_adamw_param_groups_size", (DL_FUNC) &_torch_rcpp_ignite_adamw_param_groups_size, 1},
     {"_torch_rcpp_ignite_optim_get_param_group_params", (DL_FUNC) &_torch_rcpp_ignite_optim_get_param_group_params, 2},
     {"_torch_rcpp_ignite_adamw_get_states", (DL_FUNC) &_torch_rcpp_ignite_adamw_get_states, 1},
-    {"_torch_rcpp_ignite_adamw_set_states", (DL_FUNC) &_torch_rcpp_ignite_adamw_set_states, 2},
+    {"_torch_rcpp_ignite_adamw_set_states", (DL_FUNC) &_torch_rcpp_ignite_adamw_set_states, 3},
     {"_torch_rcpp_ignite_adamw_step", (DL_FUNC) &_torch_rcpp_ignite_adamw_step, 1},
     {"_torch_rcpp_ignite_adamw_zero_grad", (DL_FUNC) &_torch_rcpp_ignite_adamw_zero_grad, 1},
+    {"_torch_rcpp_ignite_adamw_parameters_with_state", (DL_FUNC) &_torch_rcpp_ignite_adamw_parameters_with_state, 1},
     {"_torch_rcpp_ignite_adamw_add_param_group", (DL_FUNC) &_torch_rcpp_ignite_adamw_add_param_group, 8},
     {"_torch_rcpp_as_list_adamw_param_groups", (DL_FUNC) &_torch_rcpp_as_list_adamw_param_groups, 1},
     {"_torch_rcpp_ignite_adamw_set_param_group_options", (DL_FUNC) &_torch_rcpp_ignite_adamw_set_param_group_options, 2},

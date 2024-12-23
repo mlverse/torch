@@ -35,6 +35,7 @@ test_that("un-optimized parameters and state dict", {
   sd = opt$state_dict()
   expect_equal(names(sd), c("param_groups", "state"))
   states = sd$state
+  expect_equal(names(states), "1")
   # all parameters are included in the state dict even when they don't have a state.
   expect_false(cpp_tensor_is_undefined(states[[1]]$exp_avg))
   expect_false(cpp_tensor_is_undefined(states[[1]]$exp_avg_sq))
@@ -102,12 +103,23 @@ test_that("can initialize optimizer with different options per param group", {
   args2 = list(lr = 0.12, betas = c(0.92, 0.9992), eps = 1e-82, weight_decay = 0.2, amsgrad = FALSE)
 
   pgs = list(
-    c(list(params = list(torch_tensor(1))), args1),
-    c(list(params = list(torch_tensor(2))), args2),
-    c(list(params = list(torch_tensor(3))))
+    c(list(params = list(torch_tensor(1, requires_grad = TRUE))), args1),
+    c(list(params = list(torch_tensor(2, requires_grad = TRUE))), args2),
+    c(list(params = list(torch_tensor(3, requires_grad = TRUE))))
   )
 
   o = do.call(optim_ignite_adamw, args = c(list(params = pgs), defaults))
+  expect_equal(o$state_dict()$state, set_names(list(), character()))
+  step = function() {
+    o$zero_grad()
+    ((pgs[[1]]$params[[1]] * pgs[[2]]$params[[1]] * pgs[[3]]$params[[1]] * torch_tensor(1) - torch_tensor(2))^2)$backward()
+    o$step()
+  }
+  replicate(3, step())
+  sd = o$state_dict()
+  expect_equal(sd$param_groups[[1]]$params, 1)
+  expect_equal(sd$param_groups[[2]]$params, 2)
+  expect_equal(sd$param_groups[[3]]$params, 3)
   pgs = o$param_groups
   pgs[[1]]$params = NULL
   pgs[[2]]$params = NULL
@@ -126,11 +138,20 @@ test_that("error handling when loading state dict", {
   expect_error(o$load_state_dict(list()), "must be a list with elements")
   sd1 = o$state_dict()
   sd1 = list(param_groups = sd1$param_groups, state = sd1$state[1])
-  expect_error(o$load_state_dict(sd1), "The number of states in the state dict")
+  expect_error(o$load_state_dict(sd1), "To-be loaded state dict is missing states for parameters 2.", fixed = TRUE)
   sd2 = o$state_dict()
   sd2$state[[1]]$exp_avg = NULL
-  expect_error(o$load_state_dict(sd2), "The i-th state has elements with names exp_avg")
+  expect_error(o$load_state_dict(sd2), "The 1-th state has elements with names exp_avg")
   sd3 = o$state_dict()
   sd3$param_groups[[1]]$lr = NULL
   expect_error(o$load_state_dict(sd3), "but got params, weight_decay")
+})
+
+test_that("can corectly load state dict for newly created optimizer", {
+  old = make_ignite_adamw()
+  new = make_ignite_adamw(steps = 0)
+  new$load_state_dict(old$state_dict())
+  expect_equal(old$state_dict(), new$state_dict())
+  # tensor is copied
+  expect_false(identical(old$state_dict()$state$`1`$exp_avg_sq, new$state_dict()$state$`1`$exp_avg_sq))
 })

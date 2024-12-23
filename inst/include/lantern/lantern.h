@@ -2686,11 +2686,11 @@ HOST_API void* ignite_adamw_get_states (void* optim)
   return ret;
 }
 
-LANTERN_API void (LANTERN_PTR _ignite_adamw_set_states) (void* optim, void* states_);
-HOST_API void ignite_adamw_set_states (void* optim, void* states_)
+LANTERN_API void (LANTERN_PTR _ignite_adamw_set_states) (void* optim, void* params, void* states_);
+HOST_API void ignite_adamw_set_states (void* optim, void* params, void* states_)
 {
   LANTERN_CHECK_LOADED
-   _ignite_adamw_set_states(optim, states_);
+   _ignite_adamw_set_states(optim, params, states_);
   LANTERN_HOST_HANDLER;
 
 }
@@ -2702,6 +2702,16 @@ HOST_API void ignite_adamw_step (void* optim)
    _ignite_adamw_step(optim);
   LANTERN_HOST_HANDLER;
 
+}
+
+
+LANTERN_API void* (LANTERN_PTR _ignite_adamw_parameters_with_state) (void* optim);
+HOST_API void* ignite_adamw_parameters_with_state (void* optim)
+{
+  LANTERN_CHECK_LOADED
+  void* ret = _ignite_adamw_parameters_with_state(optim);
+  LANTERN_HOST_HANDLER;
+  return ret;
 }
 
 LANTERN_API void (LANTERN_PTR _ignite_adamw_zero_grad) (void* optim);
@@ -10668,6 +10678,7 @@ LOAD_SYMBOL(_lantern_buffer_from_tensor);
 LOAD_SYMBOL(_lantern_optim_adamw_delete);
 LOAD_SYMBOL(_lantern_vector_optim_optimizer_group_delete);
 LOAD_SYMBOL(_ignite_adamw);
+LOAD_SYMBOL(_ignite_adamw_parameters_with_state);
 LOAD_SYMBOL(_ignite_adamw_get_param_groups);
 LOAD_SYMBOL(_ignite_adamw_add_param_group);
 LOAD_SYMBOL(_ignite_adamw_param_groups_size);

@@ -1,5 +1,5 @@
 make_optimizer_maker = function(optimizer_fn) {
-  function(...) {
+  function(..., steps = 2) {
     n = nn_linear(1, 1)
     o = optimizer_fn(n$parameters, ...)
     x = torch_randn(10, 1)
@@ -10,8 +10,7 @@ make_optimizer_maker = function(optimizer_fn) {
       loss$backward()
       o$step()
     }
-    s()
-    s()
+    replicate(steps, s())
     o
   }
 }
