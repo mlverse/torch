@@ -14889,8 +14889,8 @@ cpp_torch_cuda_set_rng_state <- function(device, state) {
     invisible(.Call(`_torch_cpp_torch_cuda_set_rng_state`, device, state))
 }
 
-rcpp_ignite_adamw <- function(params, lr, beta1, beta2, eps, weight_decay, amsgrad) {
-    .Call(`_torch_rcpp_ignite_adamw`, params, lr, beta1, beta2, eps, weight_decay, amsgrad)
+rcpp_ignite_adamw <- function(params, lr, betas, eps, weight_decay, amsgrad) {
+    .Call(`_torch_rcpp_ignite_adamw`, params, lr, betas, eps, weight_decay, amsgrad)
 }
 
 rcpp_ignite_adamw_get_param_groups <- function(opt) {
@@ -14925,8 +14925,8 @@ rcpp_ignite_adamw_parameters_with_state <- function(opt) {
     .Call(`_torch_rcpp_ignite_adamw_parameters_with_state`, opt)
 }
 
-rcpp_ignite_adamw_add_param_group <- function(opt, params, lr, beta1, beta2, eps, weight_decay, amsgrad) {
-    invisible(.Call(`_torch_rcpp_ignite_adamw_add_param_group`, opt, params, lr, beta1, beta2, eps, weight_decay, amsgrad))
+rcpp_ignite_adamw_add_param_group <- function(opt, params, lr, betas, eps, weight_decay, amsgrad) {
+    invisible(.Call(`_torch_rcpp_ignite_adamw_add_param_group`, opt, params, lr, betas, eps, weight_decay, amsgrad))
 }
 
 rcpp_as_list_adamw_param_groups <- function(groups) {

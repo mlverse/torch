@@ -46150,19 +46150,18 @@ BEGIN_RCPP
 END_RCPP
 }
 // rcpp_ignite_adamw
-optim_adamw rcpp_ignite_adamw(torch::TensorList params, double lr, double beta1, double beta2, double eps, double weight_decay, bool amsgrad);
-RcppExport SEXP _torch_rcpp_ignite_adamw(SEXP paramsSEXP, SEXP lrSEXP, SEXP beta1SEXP, SEXP beta2SEXP, SEXP epsSEXP, SEXP weight_decaySEXP, SEXP amsgradSEXP) {
+optim_adamw rcpp_ignite_adamw(torch::TensorList params, double lr, Rcpp::DoubleVector betas, double eps, double weight_decay, bool amsgrad);
+RcppExport SEXP _torch_rcpp_ignite_adamw(SEXP paramsSEXP, SEXP lrSEXP, SEXP betasSEXP, SEXP epsSEXP, SEXP weight_decaySEXP, SEXP amsgradSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< torch::TensorList >::type params(paramsSEXP);
     Rcpp::traits::input_parameter< double >::type lr(lrSEXP);
-    Rcpp::traits::input_parameter< double >::type beta1(beta1SEXP);
-    Rcpp::traits::input_parameter< double >::type beta2(beta2SEXP);
+    Rcpp::traits::input_parameter< Rcpp::DoubleVector >::type betas(betasSEXP);
     Rcpp::traits::input_parameter< double >::type eps(epsSEXP);
     Rcpp::traits::input_parameter< double >::type weight_decay(weight_decaySEXP);
     Rcpp::traits::input_parameter< bool >::type amsgrad(amsgradSEXP);
-    rcpp_result_gen = Rcpp::wrap(rcpp_ignite_adamw(params, lr, beta1, beta2, eps, weight_decay, amsgrad));
+    rcpp_result_gen = Rcpp::wrap(rcpp_ignite_adamw(params, lr, betas, eps, weight_decay, amsgrad));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -46255,19 +46254,18 @@ BEGIN_RCPP
 END_RCPP
 }
 // rcpp_ignite_adamw_add_param_group
-void rcpp_ignite_adamw_add_param_group(optim_adamw opt, torch::TensorList params, double lr, double beta1, double beta2, double eps, double weight_decay, bool amsgrad);
-RcppExport SEXP _torch_rcpp_ignite_adamw_add_param_group(SEXP optSEXP, SEXP paramsSEXP, SEXP lrSEXP, SEXP beta1SEXP, SEXP beta2SEXP, SEXP epsSEXP, SEXP weight_decaySEXP, SEXP amsgradSEXP) {
+void rcpp_ignite_adamw_add_param_group(optim_adamw opt, torch::TensorList params, double lr, Rcpp::DoubleVector betas, double eps, double weight_decay, bool amsgrad);
+RcppExport SEXP _torch_rcpp_ignite_adamw_add_param_group(SEXP optSEXP, SEXP paramsSEXP, SEXP lrSEXP, SEXP betasSEXP, SEXP epsSEXP, SEXP weight_decaySEXP, SEXP amsgradSEXP) {
 BEGIN_RCPP
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< optim_adamw >::type opt(optSEXP);
     Rcpp::traits::input_parameter< torch::TensorList >::type params(paramsSEXP);
     Rcpp::traits::input_parameter< double >::type lr(lrSEXP);
-    Rcpp::traits::input_parameter< double >::type beta1(beta1SEXP);
-    Rcpp::traits::input_parameter< double >::type beta2(beta2SEXP);
+    Rcpp::traits::input_parameter< Rcpp::DoubleVector >::type betas(betasSEXP);
     Rcpp::traits::input_parameter< double >::type eps(epsSEXP);
     Rcpp::traits::input_parameter< double >::type weight_decay(weight_decaySEXP);
     Rcpp::traits::input_parameter< bool >::type amsgrad(amsgradSEXP);
-    rcpp_ignite_adamw_add_param_group(opt, params, lr, beta1, beta2, eps, weight_decay, amsgrad);
+    rcpp_ignite_adamw_add_param_group(opt, params, lr, betas, eps, weight_decay, amsgrad);
     return R_NilValue;
 END_RCPP
 }
@@ -51518,7 +51516,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_torch_cpp_torch_set_rng_state", (DL_FUNC) &_torch_cpp_torch_set_rng_state, 1},
     {"_torch_cpp_torch_cuda_get_rng_state", (DL_FUNC) &_torch_cpp_torch_cuda_get_rng_state, 1},
     {"_torch_cpp_torch_cuda_set_rng_state", (DL_FUNC) &_torch_cpp_torch_cuda_set_rng_state, 2},
-    {"_torch_rcpp_ignite_adamw", (DL_FUNC) &_torch_rcpp_ignite_adamw, 7},
+    {"_torch_rcpp_ignite_adamw", (DL_FUNC) &_torch_rcpp_ignite_adamw, 6},
     {"_torch_rcpp_ignite_adamw_get_param_groups", (DL_FUNC) &_torch_rcpp_ignite_adamw_get_param_groups, 1},
     {"_torch_rcpp_ignite_adamw_param_groups_size", (DL_FUNC) &_torch_rcpp_ignite_adamw_param_groups_size, 1},
     {"_torch_rcpp_ignite_optim_get_param_group_params", (DL_FUNC) &_torch_rcpp_ignite_optim_get_param_group_params, 2},
@@ -51527,7 +51525,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_torch_rcpp_ignite_adamw_step", (DL_FUNC) &_torch_rcpp_ignite_adamw_step, 1},
     {"_torch_rcpp_ignite_adamw_zero_grad", (DL_FUNC) &_torch_rcpp_ignite_adamw_zero_grad, 1},
     {"_torch_rcpp_ignite_adamw_parameters_with_state", (DL_FUNC) &_torch_rcpp_ignite_adamw_parameters_with_state, 1},
-    {"_torch_rcpp_ignite_adamw_add_param_group", (DL_FUNC) &_torch_rcpp_ignite_adamw_add_param_group, 8},
+    {"_torch_rcpp_ignite_adamw_add_param_group", (DL_FUNC) &_torch_rcpp_ignite_adamw_add_param_group, 7},
     {"_torch_rcpp_as_list_adamw_param_groups", (DL_FUNC) &_torch_rcpp_as_list_adamw_param_groups, 1},
     {"_torch_rcpp_ignite_adamw_set_param_group_options", (DL_FUNC) &_torch_rcpp_ignite_adamw_set_param_group_options, 2},
     {"_torch_enquos0", (DL_FUNC) &_torch_enquos0, 1},

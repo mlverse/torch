@@ -3,7 +3,9 @@
 #include <torch.h>
 
 // [[Rcpp::export]]
-optim_adamw rcpp_ignite_adamw (torch::TensorList params, double lr, double beta1, double beta2, double eps, double weight_decay, bool amsgrad) {
+optim_adamw rcpp_ignite_adamw (torch::TensorList params, double lr, Rcpp::DoubleVector betas, double eps, double weight_decay, bool amsgrad) {
+  double beta1 = betas[0];
+  double beta2 = betas[1];
   return  ignite_adamw(params.get(), lr, beta1, beta2, eps, weight_decay, amsgrad);
 }
 
@@ -11,18 +13,22 @@ optim_adamw rcpp_ignite_adamw (torch::TensorList params, double lr, double beta1
 optim_param_groups rcpp_ignite_adamw_get_param_groups (optim_adamw opt) {
   return ignite_adamw_get_param_groups(opt.get());
 }
+
 // [[Rcpp::export]]
 int rcpp_ignite_adamw_param_groups_size (optim_param_groups groups) {
   return ignite_adamw_param_groups_size(groups.get());
 }
+
 // [[Rcpp::export]]
 torch::TensorList rcpp_ignite_optim_get_param_group_params (optim_param_groups groups, int i) {
   return ignite_optim_get_param_group_params(groups.get(), i);
 }
+
 // [[Rcpp::export]]
 torch::TensorList rcpp_ignite_adamw_get_states (optim_adamw opt) {
   return ignite_adamw_get_states(opt.get());
 }
+
 // [[Rcpp::export]]
 void rcpp_ignite_adamw_set_states (optim_adamw opt, torch::TensorList params, torch::TensorList states) {
    ignite_adamw_set_states(opt.get(), params.get(), states.get());
@@ -43,11 +49,11 @@ torch::TensorList rcpp_ignite_adamw_parameters_with_state(optim_adamw opt) {
 }
 
 // [[Rcpp::export]]
-void rcpp_ignite_adamw_add_param_group(optim_adamw opt, torch::TensorList params, double lr, double beta1, double beta2, double eps, double weight_decay, bool amsgrad) {
+void rcpp_ignite_adamw_add_param_group(optim_adamw opt, torch::TensorList params, double lr, Rcpp::DoubleVector betas, double eps, double weight_decay, bool amsgrad) {
   adamw_options options;
   options.lr = lr;
-  options.betas[0] = beta1;
-  options.betas[1] = beta2;
+  options.betas[0] = betas[0];
+  options.betas[1] = betas[1];
   options.eps = eps;
   options.weight_decay = weight_decay;
   options.amsgrad = amsgrad;

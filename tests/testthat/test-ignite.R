@@ -1,10 +1,3 @@
-# Edge cases to test:
-# - some parameters are only present for specific optimizer arguments (e.g. amsgrad)
-#   also check that it works when amsgrad is TRUE for one param but FALSE for another
-# - Some parameters are not trained at all
-# In both cases above we need to ensure that the state is not corrupted
-# most importantly, that the training can resume after loading the optimizer state.
-
 test_that("un-optimized parameters and state dict", {
   w_true <- torch_randn(10, 1)
   x <- torch_randn(100, 10)
@@ -116,6 +109,10 @@ test_that("can initialize optimizer with different options per param group", {
     o$step()
   }
   replicate(3, step())
+  pgs = o$param_groups
+  expect_false(torch_equal(pgs[[1]]$params[[1]], torch_tensor(1)))
+  expect_false(torch_equal(pgs[[2]]$params[[1]], torch_tensor(2)))
+  expect_false(torch_equal(pgs[[3]]$params[[1]], torch_tensor(3)))
   sd = o$state_dict()
   expect_equal(sd$param_groups[[1]]$params, 1)
   expect_equal(sd$param_groups[[2]]$params, 2)
@@ -129,8 +126,17 @@ test_that("can initialize optimizer with different options per param group", {
   expect_equal(pgs[[3]], defaults[names(pgs[[3]])])
 })
 
+test_that("params must have length > 1", {
+  expect_error(optim_ignite_adamw(list()), "must have length")
+})
+
 test_that("can add a param group", {
-  # TODO: Check that the parameter is also optimized
+  o = optim_ignite_adamw(list(torch_tensor(1)), lr = 5)
+  o$add_param_group(list(params = list(torch_tensor(2)), lr = 10))
+  expect_equal(o$param_groups[[1]]$params[[1]], torch_tensor(1))
+  expect_equal(o$param_groups[[1]]$lr, 5)
+  expect_equal(o$param_groups[[2]]$params[[1]], torch_tensor(2))
+  expect_equal(o$param_groups[[2]]$lr, 10)
 })
 
 test_that("error handling when loading state dict", {

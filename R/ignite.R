@@ -1,23 +1,8 @@
 #' @title Abstract Base Class for LibTorch Optimizers
 #' @description
-#' Abstract base class for creating optimizers implemented in C++.
-#' It is assumed that `self$ptr` is a pointer to the optimizer.
-#' Failing to implement this contract will lead to undefined behavior and possibly segfaults when
-#' this expected, e.g. by the [`Igniter`] class.
-#' @section Sharp Edges:
-#' A difference to the `optimizer` class is that the parameters are stored as an unnamed list.
-#' @inheritParams torch::optimizer
-#' @section State Dict:
-#' The `$state_dict()` method returns a list with two elements:
-#' - `param_groups`: A list of parameter groups.
-#'   Each parameter group contains a field:
-#'   - `params`: An integer vector indicating the indices of the parameters in the optimizer.
-#'   - other arbitrary fields such as `lr`, `weight_decay`, etc.
-#' - `states`: A list of optimizer states. The length of this list is the same as the number of parameters.
-#'    The structure of the optimizer states is specific to the optimizer.
-#' @section Loading State Dict:
-#' The `$load_state_dict()` method loads the state dict.
+#' Abstract base class for wrapping LibTorch C++ optimizers.
 #' @export
+#' @include optim.R utils-data.R
 optimizer_ignite = function (name = NULL, ..., private = NULL,
   active = NULL, parent_env = parent.frame()) {
   optimizer(
@@ -57,14 +42,26 @@ extract_ignite_state_dict = function(self, states, nms) {
     )
 }
 
-#' @export
-#' @title SGD Optimizer as implemented in LibTorch
+#' @title LibTorch implementation of AdamW
+#' @inherit optim_adamw description
+#' @section Methods:
+#' TODO:
+#' @section Fields:
 #' @inheritParams torch::optim_adam
 #' @export
+#'
+#' @examples
+#' \dontrun{
+#' optimizer <- optim_ignite_adamw(model$parameters(), lr = 0.1)
+#' optimizer$zero_grad()
+#' loss_fn(model(input), target)$backward()
+#' optimizer$step()
+#' }
 optim_ignite_adamw <- optimizer_ignite(
   "optim_ignite_adamw",
   initialize = function(params, lr = 1e-3, betas = c(0.9, 0.999), eps = 1e-8,
-                       weight_decay = 1e-2, amsgrad = FALSE) {
+    weight_decay = 1e-2, amsgrad = FALSE) {
+
     assert_adamw_params(lr, betas, eps, weight_decay, amsgrad)
     self$defaults <- list(lr = lr, betas = betas, eps = eps, weight_decay = weight_decay, amsgrad = amsgrad)
     if (!length(params)) {
@@ -80,18 +77,12 @@ optim_ignite_adamw <- optimizer_ignite(
 
     if (is.list(params) && is.list(params[[1]]$params)) {
       opts = helper(params[[1]])
-      opts$beta1 = opts$betas[1]
-      opts$beta2 = opts$betas[2]
-      opts$betas = NULL
       self$ptr <- do.call(rcpp_ignite_adamw, c(list(params = params[[1]]$params), opts))
       for (pg in params[-1]) {
         self$add_param_group(pg)
       }
     } else {
       defaults = self$defaults
-      defaults$beta1 = defaults$betas[1]
-      defaults$beta2 = defaults$betas[2]
-      defaults$betas = NULL
       self$ptr <- do.call(rcpp_ignite_adamw, c(list(params = params), defaults))
     }
   },
@@ -139,9 +130,6 @@ optim_ignite_adamw <- optimizer_ignite(
     # insert defaults into param_group
     param_group = c(param_group, self$defaults[!(names(self$defaults) %in% names(param_group))])
     do.call(assert_adamw_params, param_group)
-    param_group$beta1 = param_group$betas[1]
-    param_group$beta2 = param_group$betas[2]
-    param_group$betas = NULL
     do.call(rcpp_ignite_adamw_add_param_group, c(list(opt = self$ptr, params = params), param_group))
   },
   active = list(

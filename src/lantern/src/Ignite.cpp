@@ -166,21 +166,15 @@ void _ignite_adamw_set_states(void* optim, void* params,void* states_) {
       state_it = opt->state().find(param.unsafeGetTensorImpl());
     }
     auto* current_state = static_cast<torch::optim::AdamWParamState*>(state_it->second.get());
-    if (states[i].defined()) {
-      current_state->exp_avg(states[i]);
-    }
-    if (states[i + 1].defined()) {
-      current_state->exp_avg_sq(states[i + 1]);
-    }
+    current_state->exp_avg(states[i]);
+    current_state->exp_avg_sq(states[i + 1]);
     // is only defined if amsgrad = TRUE
     if (states[i + 2].defined()) {
       current_state->max_exp_avg_sq(states[i + 2]);
     }
-    if (states[i + 3].defined()) {
-      auto step = states[i + 3];
-      // convert step from torch::kLong to int64_t
-      current_state->step(step.item<int64_t>());
-    }
+    auto step = states[i + 3];
+    // convert step from torch::kLong to int64_t
+    current_state->step(step.item<int64_t>());
     i += 4;
   }
 }

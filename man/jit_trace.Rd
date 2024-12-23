@@ -36,7 +36,6 @@ recording the operations performed on all the tensors.
 }
 \details{
 The resulting recording of a standalone function produces a \code{script_function}.
-In the future we will also support tracing \code{nn_modules}.
 }
 \note{
 Scripting is not yet supported in R.
