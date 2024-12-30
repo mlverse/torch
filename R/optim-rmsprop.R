@@ -16,6 +16,7 @@ NULL
 #' weight_decay (float, optional): weight decay (L2 penalty) (default: 0)
 #' @param weight_decay optional weight decay penalty. (default: 0)
 #'
+#' @include optim.R
 #' @note
 #' The centered version first appears in
 #' [Generating Sequences With Recurrent Neural Networks](https://arxiv.org/pdf/1308.0850v5).

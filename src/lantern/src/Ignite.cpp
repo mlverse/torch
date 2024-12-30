@@ -21,6 +21,7 @@ void* _ignite_adamw(void* params, double lr, double beta1, double beta2,
 }
 
 void* _ignite_adamw_get_param_groups(void* opt) {
+  // TODO: I think we can just cast to optimizer here so we need only one implementation
   auto optim = reinterpret_cast<torch::optim::AdamW*>(opt);
   auto param_groups = optim->param_groups();
   return (void*) new std::vector<torch::optim::OptimizerParamGroup>(param_groups);

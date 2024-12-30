@@ -5,6 +5,7 @@
 #'
 #' @inheritParams optim_adam
 #'
+#' @include optim.R
 #' @export
 optim_adamw <- optimizer(
   "optim_adamw",

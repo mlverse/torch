@@ -1,6 +1,6 @@
 #' Dummy value indicating a required value.
 #'
-#' export
+#' @export
 optim_required <- function() {
   structure(list(), class = "optim_required")
 }
@@ -267,6 +267,7 @@ state <- function(self) {
 #' }
 #' all.equal(x$item(), 0, tolerance = 1e-9)
 #' @includeRmd man/rmd/optim-note.Rmd note
+#' @include utils-data.R
 #' @export
 optimizer <- function(name = NULL, inherit = Optimizer, ...,
                       private = NULL, active = NULL,

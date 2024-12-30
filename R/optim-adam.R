@@ -19,6 +19,7 @@ NULL
 #'
 #' @includeRmd man/rmd/optim-note.Rmd note
 #'
+#' @include optim.R
 #' @examples
 #' \dontrun{
 #' optimizer <- optim_adam(model$parameters(), lr = 0.1)

@@ -52,6 +52,7 @@ NULL
 #' optimizer$step()
 #' }
 #'
+#' @include optim.R
 #' @export
 optim_sgd <- optimizer(
   "optim_sgd",

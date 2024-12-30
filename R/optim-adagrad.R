@@ -20,6 +20,7 @@ NULL
 #' The main downside of this method is the fact that learning rate may be
 #' getting small too fast, so that at some point a model cannot learn anymore.
 #'
+#' @include optim.R
 #' @note
 #' Update rule:
 #' \deqn{
