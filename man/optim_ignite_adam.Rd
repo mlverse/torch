@@ -9,7 +9,7 @@ optim_ignite_adam(
   lr = 0.001,
   betas = c(0.9, 0.999),
   eps = 1e-08,
-  weight_decay = 0.01,
+  weight_decay = 0,
   amsgrad = FALSE
 )
 }

@@ -6,10 +6,10 @@
 \usage{
 optim_ignite_rmsprop(
   params,
-  lr = 0.001,
+  lr = 0.01,
   alpha = 0.99,
   eps = 1e-08,
-  weight_decay = 0.01,
+  weight_decay = 0,
   momentum = 0,
   centered = FALSE
 )

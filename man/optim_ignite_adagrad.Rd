@@ -6,9 +6,9 @@
 \usage{
 optim_ignite_adagrad(
   params,
-  lr = 0.001,
+  lr = 0.01,
   lr_decay = 0,
-  weight_decay = 0.01,
+  weight_decay = 0,
   initial_accumulator_value = 0,
   eps = 1e-10
 )

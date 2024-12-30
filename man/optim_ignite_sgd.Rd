@@ -6,10 +6,10 @@
 \usage{
 optim_ignite_sgd(
   params,
-  lr = 0.001,
-  momentum = 0.9,
+  lr = optim_required(),
+  momentum = 0,
   dampening = 0,
-  weight_decay = 0.01,
+  weight_decay = 0,
   nesterov = FALSE
 )
 }

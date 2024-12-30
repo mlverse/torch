@@ -181,7 +181,8 @@ optimizer_ignite = function (name = NULL, ..., private = NULL,
 #' }
 optim_ignite_adagrad <- optimizer_ignite(
   "optim_ignite_adagrad",
-  initialize = function(params, lr = 1e-3, lr_decay = 0, weight_decay = 1e-2, initial_accumulator_value = 0, eps = 1e-10) {
+  initialize = function(params, lr = 1e-2, lr_decay = 0, weight_decay = 0,
+    initial_accumulator_value = 0, eps = 1e-10) {
     super$initialize(params, defaults = list(lr = lr, lr_decay = lr_decay, weight_decay = weight_decay, initial_accumulator_value = initial_accumulator_value, eps = eps))
   },
   state_dict = function() {
@@ -219,8 +220,8 @@ optim_ignite_adagrad <- optimizer_ignite(
 #' }
 optim_ignite_rmsprop <- optimizer_ignite(
   "optim_ignite_rmsprop",
-  initialize = function(params, lr = 1e-3, alpha = 0.99, eps = 1e-8,
-    weight_decay = 1e-2, momentum = 0, centered = FALSE) {
+  initialize = function(params, lr = 1e-2, alpha = 0.99, eps = 1e-8,
+    weight_decay = 0, momentum = 0, centered = FALSE) {
     super$initialize(params, defaults = list(lr = lr, alpha = alpha, eps = eps, weight_decay = weight_decay, momentum = momentum, centered = centered))
   },
   state_dict = function() {
@@ -258,8 +259,8 @@ optim_ignite_rmsprop <- optimizer_ignite(
 #' }
 optim_ignite_sgd <- optimizer_ignite(
   "optim_ignite_sgd",
-  initialize = function(params, lr = 1e-3, momentum = 0.9, dampening = 0,
-    weight_decay = 1e-2, nesterov = FALSE) {
+  initialize = function(params, lr = optim_required(), momentum = 0, dampening = 0,
+    weight_decay = 0, nesterov = FALSE) {
     super$initialize(params, defaults = list(lr = lr, momentum = momentum, dampening = dampening, weight_decay = weight_decay, nesterov = nesterov))
   },
   state_dict = function() {
@@ -298,7 +299,7 @@ optim_ignite_sgd <- optimizer_ignite(
 optim_ignite_adam <- optimizer_ignite(
   "optim_ignite_adam",
   initialize = function(params, lr = 1e-3, betas = c(0.9, 0.999), eps = 1e-8,
-    weight_decay = 1e-2, amsgrad = FALSE) {
+    weight_decay = 0, amsgrad = FALSE) {
     super$initialize(params, defaults = list(lr = lr, betas = betas, eps = eps, weight_decay = weight_decay, amsgrad = amsgrad))
   },
   state_dict = function() {
