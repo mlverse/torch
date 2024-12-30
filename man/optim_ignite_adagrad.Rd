@@ -7,22 +7,18 @@
 optim_ignite_adagrad(
   params,
   lr = 0.001,
-  momentum = 0.9,
-  dampening = 0,
+  lr_decay = 0,
   weight_decay = 0.01,
-  nesterov = FALSE
+  initial_accumulator_value = 0,
+  eps = 1e-10
 )
 }
 \description{
 Proposed in \href{https://jmlr.org/papers/v12/duchi11a.html}{Adaptive Subgradient Methods for Online Learning and Stochastic Optimization}
 }
-\section{Methods}{
+\section{Fields and Methods}{
 
-TODO:
-}
-
-\section{Fields}{
-
+See \code{\link{OptimizerIgnite}}.
 }
 
 \examples{

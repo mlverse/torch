@@ -273,7 +273,7 @@ nn_Module <- R6::R6Class(
   ),
   active = list(
     parameters = function(value, recursive = TRUE) {
-      if (!missing(value)) {
+      if (!missing(value) && !identical()) {
         runtime_error(
           "It's not possible to modify the parameters list.\n",
           " You can modify the parameter in-place or use",

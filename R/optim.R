@@ -155,6 +155,9 @@ Optimizer <- R6::R6Class(
     }
   ),
   private = list(
+    deep_clone = function(name, value) {
+      stop("OptimizerIgnite cannot be deep cloned")
+    },
     step_helper = function(closure, loop_fun) {
       # a general template for most of the optimizer step function
       local_no_grad()

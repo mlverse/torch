@@ -28,7 +28,6 @@ expect_optim_works <- function(optim, defaults) {
     opt$step(fn)
   }
 
-
   expect_true(as_array(fn()) <= as_array(initial_value) / 2)
 
   opt$state_dict()
@@ -41,9 +40,14 @@ expect_state_is_updated <- function(opt_fn) {
   y <- 2 * x
   y$backward()
   opt$step()
-  expect_equal(as.numeric(opt$state_dict()$state[[1]]$step), 1)
+  # not all ignite optimizers have a step counter
+  if (!is.null(opt$state_dict()$state[[1]]$step)) {
+    expect_equal(as.numeric(opt$state_dict()$state[[1]]$step), 1)
+  }
   opt$step()
-  expect_equal(as.numeric(opt$state_dict()$state[[1]]$step), 2)
+  if (!is.null(opt$state_dict()$state[[1]]$step)) {
+    expect_equal(as.numeric(opt$state_dict()$state[[1]]$step), 2)
+  }
 
   state <- opt$state_dict()
   x2 <- torch_tensor(1, requires_grad = TRUE)

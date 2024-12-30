@@ -17,13 +17,9 @@ optim_ignite_adamw(
 For further details regarding the algorithm we refer to
 \href{https://arxiv.org/abs/1711.05101}{Decoupled Weight Decay Regularization}
 }
-\section{Methods}{
+\section{Fields and Methods}{
 
-TODO:
-}
-
-\section{Fields}{
-
+See \code{\link{OptimizerIgnite}}.
 }
 
 \examples{

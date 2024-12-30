@@ -57,7 +57,7 @@ void _ignite_optim_zero_grad(void* optim) {
 
 // adagrad
 
-torch::optim::AdagradOptions _ignite_adagrad_options(double lr, double lr_decay, double weight_decay, double initial_accumulator_value, double eps) {
+torch::optim::AdagradOptions _ignite_adagrad_options(double lr, double lr_decay, double weight_decay, double eps, double initial_accumulator_value) {
   return torch::optim::AdagradOptions(lr)
     .lr_decay(lr_decay)
     .weight_decay(weight_decay)
@@ -65,16 +65,16 @@ torch::optim::AdagradOptions _ignite_adagrad_options(double lr, double lr_decay,
     .eps(eps);
 }
 
-void* _ignite_adagrad(void* params, double lr, double lr_decay, double weight_decay, double initial_accumulator_value, double eps) {
+void* _ignite_adagrad(void* params, double lr, double lr_decay, double weight_decay, double eps, double initial_accumulator_value) {
   auto params_ = from_raw::TensorList(params);
-  auto options = _ignite_adagrad_options(lr, lr_decay, weight_decay, initial_accumulator_value, eps);
+  auto options = _ignite_adagrad_options(lr, lr_decay, weight_decay, eps, initial_accumulator_value);
   return (void*) new torch::optim::Adagrad(params_.vec(), options);
 }
 
 void _ignite_adagrad_add_param_group(void* optim, void* params, adagrad_options options) {
   auto optim_ = reinterpret_cast<torch::optim::Adagrad*>(optim);
   auto params_ = from_raw::TensorList(params);
-  auto options_ = _ignite_adagrad_options(options.lr, options.lr_decay, options.weight_decay, options.initial_accumulator_value, options.eps);
+  auto options_ = _ignite_adagrad_options(options.lr, options.lr_decay, options.weight_decay, options.eps, options.initial_accumulator_value);
 
   auto options_ptr = std::make_unique<torch::optim::AdagradOptions>(options_);
   auto group = torch::optim::OptimizerParamGroup(params_.vec(), std::move(options_ptr));
@@ -112,7 +112,6 @@ void* _ignite_adagrad_get_states(void* optim) {
       if (state_it != opt->state().end()) { 
         auto base_state = state_it->second.get();
         auto adagrad_state = static_cast<torch::optim::AdagradParamState*>(base_state);
-        // TODO: Maybe make this conditional.
         tensors.push_back(adagrad_state->sum().clone());
         tensors.push_back(torch::scalar_tensor(adagrad_state->step(), torch::kLong));
       }
@@ -143,25 +142,25 @@ void _ignite_adagrad_set_states(void* optim, void* params, void* states_) {
 
 // adam
 
-void* _ignite_adam(void* params, double lr, double beta1, double beta2,
-                        double eps, double weight_decay, bool amsgrad) {
-  auto params_ = from_raw::TensorList(params);
-  auto options = torch::optim::AdamOptions(lr)
+torch::optim::AdamOptions _ignite_adam_options(double lr, double beta1, double beta2, double eps, double weight_decay, bool amsgrad) {
+  return torch::optim::AdamOptions(lr)
     .betas(std::make_tuple(beta1, beta2))
     .eps(eps)
     .weight_decay(weight_decay)
     .amsgrad(amsgrad);
+}
+
+void* _ignite_adam(void* params, double lr, double beta1, double beta2,
+                        double eps, double weight_decay, bool amsgrad) {
+  auto params_ = from_raw::TensorList(params);
+  auto options = _ignite_adam_options(lr, beta1, beta2, eps, weight_decay, amsgrad);
   return (void*) new torch::optim::Adam(params_.vec(), options);
 }
 
 void _ignite_adam_add_param_group(void* optim, void* params, adam_options options) {
   auto optim_ = reinterpret_cast<torch::optim::Adam*>(optim);
   auto params_ = from_raw::TensorList(params);
-  auto options_ = torch::optim::AdamOptions(options.lr)
-    .betas(std::make_tuple(options.betas[0], options.betas[1]))
-    .eps(options.eps)
-    .weight_decay(options.weight_decay)
-    .amsgrad(options.amsgrad);
+  auto options_ = _ignite_adam_options(options.lr, options.betas[0], options.betas[1], options.eps, options.weight_decay, options.amsgrad);
   auto options_ptr = std::make_unique<torch::optim::AdamOptions>(options_); 
   auto group = torch::optim::OptimizerParamGroup(params_.vec(), std::move(options_ptr));
   optim_->add_param_group(group);
@@ -172,7 +171,7 @@ adam_options _ignite_adam_get_param_group_options(void* groups, int i) {
   auto g = (*param_groups)[i];
   auto& x = static_cast<torch::optim::AdamOptions&>(g.options());
 
-  adam_options opts { x.lr(), std::get<0>(x.betas()), std::get<1>(x.betas()), x.eps(), x.weight_decay(), x.amsgrad() }  ;
+  adam_options opts { x.lr(), x.weight_decay(),  std::get<0>(x.betas()), std::get<1>(x.betas()), x.eps(), x.amsgrad() }  ;
   return opts;
 }
 
@@ -194,7 +193,7 @@ void* _ignite_adam_get_states(void* optim) {
   for (const auto& group : opt->param_groups()) {
     for (const auto& param : group.params()) {
       auto state_it = opt->state().find(param.unsafeGetTensorImpl());
-      if (state_it != opt->state().end()) { // TODO: Check what this does exactly
+      if (state_it != opt->state().end()) {
         auto base_state = state_it->second.get(); // Get raw pointer from unique_ptr
         auto adam_state = static_cast<torch::optim::AdamParamState*>(base_state);
         tensors.push_back(adam_state->exp_avg().clone());
@@ -238,15 +237,19 @@ void _ignite_adam_set_states(void* optim, void* params,void* states_) {
 
 // adamw
 
-void* _ignite_adamw(void* params, double lr, double beta1, double beta2,
-                        double eps, double weight_decay, bool amsgrad) {
-  auto params_ = from_raw::TensorList(params);
-
-  auto options = torch::optim::AdamWOptions(lr)
+torch::optim::AdamWOptions _ignite_adamw_options(double lr, double beta1, double beta2, double eps, double weight_decay, bool amsgrad) {
+  return torch::optim::AdamWOptions(lr)
     .betas(std::make_tuple(beta1, beta2))
     .eps(eps)
     .weight_decay(weight_decay)
     .amsgrad(amsgrad);
+}
+
+void* _ignite_adamw(void* params, double lr, double beta1, double beta2,
+                        double eps, double weight_decay, bool amsgrad) {
+  auto params_ = from_raw::TensorList(params);
+
+  auto options = _ignite_adamw_options(lr, beta1, beta2, eps, weight_decay, amsgrad);
 
   return (void*) new torch::optim::AdamW(params_.vec(), options);
 }
@@ -254,11 +257,7 @@ void* _ignite_adamw(void* params, double lr, double beta1, double beta2,
 void _ignite_adamw_add_param_group(void* optim, void* params, adamw_options options) {
   auto optim_ = reinterpret_cast<torch::optim::AdamW*>(optim);
   auto params_ = from_raw::TensorList(params);
-  auto options_ = torch::optim::AdamWOptions(options.lr)
-    .betas(std::make_tuple(options.betas[0], options.betas[1]))
-    .eps(options.eps)
-    .weight_decay(options.weight_decay)
-    .amsgrad(options.amsgrad);
+  auto options_ = _ignite_adamw_options(options.lr, options.betas[0], options.betas[1], options.eps, options.weight_decay, options.amsgrad);
   // need to create an OptimizerParamGroup that is then added
   // create a std::unique_ptr for the options
   // create unique ptr for options
@@ -365,26 +364,28 @@ void _ignite_adamw_set_states(void* optim, void* params,void* states_) {
 
 // rmsprop
 
-void* _ignite_rmsprop(void* params, double lr, double alpha, double eps, double weight_decay, double momentum, bool centered) {
-  auto params_ = from_raw::TensorList(params);
-  auto options = torch::optim::RMSpropOptions(lr)
+torch::optim::RMSpropOptions _ignite_rmsprop_options(double lr, double alpha, double eps, double weight_decay, double momentum, bool centered) {
+  return torch::optim::RMSpropOptions(lr)
     .alpha(alpha)
     .eps(eps)
     .weight_decay(weight_decay)
     .momentum(momentum)
     .centered(centered);
+}
+
+void* _ignite_rmsprop(void* params, double lr, double alpha, double eps, double weight_decay, double momentum, bool centered) {
+  auto params_ = from_raw::TensorList(params);
+  auto options = _ignite_rmsprop_options(lr, alpha, eps, weight_decay, momentum, centered);
   return (void*) new torch::optim::RMSprop(params_.vec(), options);
 }
 
 void _ignite_rmsprop_add_param_group(void* optim, void* params, rmsprop_options options) {
   auto optim_ = reinterpret_cast<torch::optim::RMSprop*>(optim);
   auto params_ = from_raw::TensorList(params);
-  auto options_ = torch::optim::RMSpropOptions(options.lr)
-    .alpha(options.alpha)
-    .eps(options.eps)
-    .weight_decay(options.weight_decay)
-    .momentum(options.momentum)
-    .centered(options.centered);
+  auto options_ = _ignite_rmsprop_options(options.lr, options.alpha, options.eps, options.weight_decay, options.momentum, options.centered);
+  auto options_ptr = std::make_unique<torch::optim::RMSpropOptions>(options_);
+  auto group = torch::optim::OptimizerParamGroup(params_.vec(), std::move(options_ptr));
+  optim_->add_param_group(group);
 }
 
 rmsprop_options _ignite_rmsprop_get_param_group_options(void* groups, int i) {
@@ -418,13 +419,12 @@ void* _ignite_rmsprop_get_states(void* optim) {
       if (state_it != opt->state().end()) {
         auto base_state = state_it->second.get(); // Get raw pointer from unique_ptr
         auto rmsprop_state = static_cast<torch::optim::RMSpropParamState*>(base_state);
-        // TODO: Maybe some conditionals are needed
         if (rmsprop_state->grad_avg().defined()) {
           tensors.push_back(rmsprop_state->grad_avg().clone());
         } else {
           tensors.push_back(torch::Tensor());
         }
-          tensors.push_back(rmsprop_state->square_avg().clone());
+        tensors.push_back(rmsprop_state->square_avg().clone());
         if (rmsprop_state->momentum_buffer().defined()) {
           tensors.push_back(rmsprop_state->momentum_buffer().clone());
         } else {
@@ -462,24 +462,24 @@ void _ignite_rmsprop_set_states(void* optim, void* params, void* states_) {
 
 // sgd
 
-void* _ignite_sgd(void* params, double lr, double momentum, double dampening, double weight_decay, bool nesterov) {
-  auto params_ = from_raw::TensorList(params);
-  auto options = torch::optim::SGDOptions(lr)
+torch::optim::SGDOptions _ignite_sgd_options(double lr, double momentum, double dampening, double weight_decay, bool nesterov) {
+  return torch::optim::SGDOptions(lr)
     .momentum(momentum)
     .dampening(dampening)
     .weight_decay(weight_decay)
     .nesterov(nesterov);
+}
+
+void* _ignite_sgd(void* params, double lr, double momentum, double dampening, double weight_decay, bool nesterov) {
+  auto params_ = from_raw::TensorList(params);
+  auto options = _ignite_sgd_options(lr, momentum, dampening, weight_decay, nesterov);
   return (void*) new torch::optim::SGD(params_.vec(), options);
 }
 
 void _ignite_sgd_add_param_group(void* optim, void* params, sgd_options options) {
   auto optim_ = reinterpret_cast<torch::optim::SGD*>(optim);
   auto params_ = from_raw::TensorList(params);
-  auto options_ = torch::optim::SGDOptions(options.lr)
-    .momentum(options.momentum)
-    .dampening(options.dampening)
-    .weight_decay(options.weight_decay)
-    .nesterov(options.nesterov);
+  auto options_ = _ignite_sgd_options(options.lr, options.momentum, options.dampening, options.weight_decay, options.nesterov);
 
   auto options_ptr = std::make_unique<torch::optim::SGDOptions>(options_);
   auto group = torch::optim::OptimizerParamGroup(params_.vec(), std::move(options_ptr));

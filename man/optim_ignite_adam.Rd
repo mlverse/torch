@@ -16,13 +16,9 @@ optim_ignite_adam(
 \description{
 It has been proposed in \href{https://arxiv.org/abs/1412.6980}{Adam: A Method for Stochastic Optimization}.
 }
-\section{Methods}{
+\section{Fields and Methods}{
 
-TODO:
-}
-
-\section{Fields}{
-
+See \code{\link{OptimizerIgnite}}.
 }
 
 \examples{

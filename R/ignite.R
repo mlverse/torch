@@ -1,8 +1,19 @@
+#' @title Abstract Base Class for LibTorch Optimizers
+#' @description 
+#' Abstract base class for wrapping LibTorch C++ optimizers.
 #' @include optim.R utils-data.R optim-adamw.R RcppExports.R
+#' @export
 OptimizerIgnite <- R6::R6Class(
   "OptimizerIgnite",
   inherit = Optimizer,
   public = list(
+    #' @description
+    #' Initializes the optimizer with the specified parameters and defaults.
+    #' @param params (`list()`)\cr
+    #' Either a list of tensors or a list of parameter groups, each containing the `params` to optimizer
+    #' as well as the optimizer options such as the learning rate, weight decay, etc.
+    #' @param defaults (`list()`)\cr
+    #' A list of default optimizer options.
     initialize = function(params, defaults) {
       do.call(private$.assert_params, defaults)
       self$defaults <- defaults
@@ -29,15 +40,27 @@ OptimizerIgnite <- R6::R6Class(
         self$ptr <- do.call(private$.optim, c(list(params = params), defaults))
       }
     },
+    #' @description
+    #' Returns the state dictionary containing the current state of the optimizer.
+    #' The returned `list()` contains two lists:
+    #' * `param_groups`: The parameter groups of the optimizer (`lr`, ...) as well as to which
+    #'   parameters they are applied (`params`, integer indices)
+    #' * `state`: The states of the optimizer. The names are the indices of the parameters to which
+    #'   they belong, converted to character.
+    #' @return (`list()`)
     state_dict = function() {
       stop("Abstract method")
     },
+    #' @description
+    #' Loads the state dictionary into the optimizer.
+    #' @param state_dict (`list()`)\cr
+    #' The state dictionary to load into the optimizer.
     load_state_dict = function(state_dict) {
       if (!is.list(state_dict) || !all(c("param_groups", "state") %in% names(state_dict))) {
         value_error("The `state_dict` must be a list with elements 'param_groups' and 'state'.")
       }
-      states = state_dict$state
-      prev_states = self$state_dict()$state
+      states <- state_dict$state
+      prev_states <- self$state_dict()$state
       if (!(all(names(prev_states) %in% names(states)))) {
         value_error("To-be loaded state dict is missing states for parameters {paste(setdiff(names(prev_states), names(states)), collapse = ', ')}.")
       }
@@ -46,12 +69,18 @@ OptimizerIgnite <- R6::R6Class(
           value_error("The {i}-th state has elements with names {paste0(names(prev_states[[i]]), collapse = ', ')} but got {paste0(names(states[[i]]), collapse = ', ')}.")
         }
       })
-      params = unlist(lapply(self$param_groups, function(x) x$params))
-      params = params[as.integer(names(states))]
-      self$param_groups = state_dict$param_groups
+      params <- unlist(lapply(self$param_groups, function(x) x$params))
+      params <- params[as.integer(names(states))]
+      self$param_groups <- state_dict$param_groups
       private$.set_states(self$ptr, params, unlist(states))
       invisible(self)
     },
+    #' @description
+    #' Performs a single optimization step.
+    #' @param closure (`function()`)\cr
+    #' A closure that conducts the forward pass and returns the loss.
+    #' @return (`numeric()`)\cr
+    #' The loss.
     step = function(closure = NULL) {
       loss <- if (!is.null(closure)) {
         with_enable_grad(closure())
@@ -59,32 +88,42 @@ OptimizerIgnite <- R6::R6Class(
       rcpp_ignite_optim_step(self$ptr)
       return(loss)
     },
+    #' @description
+    #' Zeros out the gradients of the parameters.
     zero_grad = function() {
       rcpp_ignite_optim_zero_grad(self$ptr)
     },
+    #' @description
+    #' Adds a new parameter group to the optimizer.
+    #' @param param_group (`list()`)\cr
+    #'   A parameter group to add to the optimizer.
+    #'   This should contain the `params` to optimize as well as the optimizer options.
+    #'   For all options that are not specified, the defaults are used.
     add_param_group = function(param_group) {
       params <- param_group$params
       # check that params is list of tensors
       if (!is.list(params) || !all(sapply(params, is_torch_tensor))) {
         value_error("The `params` must be a list of tensors.")
       }
-      param_group$params = NULL
+      param_group$params <- NULL
       # insert defaults into param_group
-      param_group = c(param_group, self$defaults[!(names(self$defaults) %in% names(param_group))])
+      param_group <- c(param_group, self$defaults[!(names(self$defaults) %in% names(param_group))])
       do.call(private$.assert_params, param_group)
       do.call(private$.add_param_group, c(list(opt = self$ptr, params = params), param_group))
     }
   ),
   active = list(
+    #' @description
+    #' The parameter groups of the optimizer.
     param_groups = function(rhs) {
       if (!missing(rhs)) {
-        prev_param_groups = self$state_dict()$param_groups
+        prev_param_groups <- self$state_dict()$param_groups
         if (!is.list(rhs) && length(rhs) == length(prev_param_groups)) {
           value_error("Parameter groups must be a list of the same length as the number of parameter groups.")
         }
         walk(seq_along(prev_param_groups), function(i) {
-          prev_param_group = prev_param_groups[[i]]
-          new_param_group = rhs[[i]]
+          prev_param_group <- prev_param_groups[[i]]
+          new_param_group <- rhs[[i]]
           if (!is_permutation(names(new_param_group), names(prev_param_group))) {
             value_error("Parameter groups must have names {paste0(names(prev_param_group), collapse = ', ')} but got {paste0(names(new_param_group), collapse = ', ')}.")
           }
@@ -128,9 +167,8 @@ optimizer_ignite = function (name = NULL, ..., private = NULL,
 
 #' @title LibTorch implementation of Adagrad        
 #' @inherit optim_adagrad  description
-#' @section Methods:
-#' TODO:
-#' @section Fields:
+#' @section Fields and Methods:
+#' See [`OptimizerIgnite`].
 #' @inheritParams torch::optim_adagrad
 #' @export
 #' @include optim-adagrad.R
@@ -143,9 +181,8 @@ optimizer_ignite = function (name = NULL, ..., private = NULL,
 #' }
 optim_ignite_adagrad <- optimizer_ignite(
   "optim_ignite_adagrad",
-  initialize = function(params, lr = 1e-3, momentum = 0.9, dampening = 0,
-    weight_decay = 1e-2, nesterov = FALSE) {
-    super$initialize(params, defaults = list(lr = lr, momentum = momentum, dampening = dampening, weight_decay = weight_decay, nesterov = nesterov))
+  initialize = function(params, lr = 1e-3, lr_decay = 0, weight_decay = 1e-2, initial_accumulator_value = 0, eps = 1e-10) {
+    super$initialize(params, defaults = list(lr = lr, lr_decay = lr_decay, weight_decay = weight_decay, initial_accumulator_value = initial_accumulator_value, eps = eps))
   },
   state_dict = function() {
     extract_ignite_state_dict(self, rcpp_ignite_adagrad_get_states(self$ptr), c("sum", "step"))
@@ -167,9 +204,8 @@ optim_ignite_adagrad <- optimizer_ignite(
 
 #' @title LibTorch implementation of RMSprop
 #' @inherit optim_rmsprop  description
-#' @section Methods:
-#' TODO:
-#' @section Fields:
+#' @section Fields and Methods:
+#' See [`OptimizerIgnite`].
 #' @inheritParams torch::optim_rmsprop
 #' @export
 #'
@@ -188,7 +224,7 @@ optim_ignite_rmsprop <- optimizer_ignite(
     super$initialize(params, defaults = list(lr = lr, alpha = alpha, eps = eps, weight_decay = weight_decay, momentum = momentum, centered = centered))
   },
   state_dict = function() {
-    extract_ignite_state_dict(self, rcpp_ignite_rmsprop_get_states(self$ptr), c("exp_avg", "exp_avg_sq", "max_exp_avg_sq", "step"))
+    extract_ignite_state_dict(self, rcpp_ignite_rmsprop_get_states(self$ptr), c("grad_avg", "square_avg", "momentum_buffer", "step"))
   },
   private = list(
     .optim = function(params, ...) {
@@ -207,9 +243,8 @@ optim_ignite_rmsprop <- optimizer_ignite(
 
 #' @title LibTorch implementation of SGD
 #' @inherit optim_sgd  description
-#' @section Methods:
-#' TODO:
-#' @section Fields:
+#' @section Fields and Methods:
+#' See [`OptimizerIgnite`].
 #' @inheritParams torch::optim_sgd
 #' @export
 #'
@@ -247,9 +282,8 @@ optim_ignite_sgd <- optimizer_ignite(
 
 #' @title LibTorch implementation of Adam
 #' @inherit optim_adam description
-#' @section Methods:
-#' TODO:
-#' @section Fields:
+#' @section Fields and Methods:
+#' See [`OptimizerIgnite`].
 #' @inheritParams torch::optim_adam
 #' @export
 #'
@@ -288,10 +322,9 @@ optim_ignite_adam <- optimizer_ignite(
 
 #' @title LibTorch implementation of AdamW
 #' @inherit optim_adamw description
-#' @section Methods:
-#' TODO:
-#' @section Fields:
-#' @inheritParams torch::optim_adam
+#' @section Fields and Methods:
+#' See [`OptimizerIgnite`].
+#' @inheritParams torch::optim_adamw
 #' @export
 #'
 #' @include optim-adamw.R
@@ -342,7 +375,7 @@ extract_ignite_state_dict <- function(self, states, nms) {
     # the param_groups actually contain the parameters that are optimized.
     # But we don't want to return them as part of the state dict.
     # Therefore, we unlist all the parameters and store the indices in the state dict.
-    param_groups = self$param_groups
+    param_groups <- self$param_groups
     addresses <- sapply(unlist(lapply(param_groups, function(x) x$params)), xptr_address)
     param_groups = lapply(param_groups, function(group) {
       group_param <- sapply(group$params, xptr_address)
@@ -350,14 +383,14 @@ extract_ignite_state_dict <- function(self, states, nms) {
       group
     })
     if (length(states)) {
-      states = lapply(seq(1, length(states) - length(nms) + 1, by = length(nms)), function(i) {
+      states <- lapply(seq(1, length(states) - length(nms) + 1, by = length(nms)), function(i) {
         set_names(states[i:(i + length(nms) - 1)], nms)
       })
     }
-    params_with_state = rcpp_ignite_optim_parameters_with_state(self$ptr)
-    params_with_state_addrs = sapply(params_with_state, xptr_address)
-    ids = as.character(match(params_with_state_addrs, addresses))
-    states = set_names(states, ids)
+    params_with_state <- rcpp_ignite_optim_parameters_with_state(self$ptr)
+    params_with_state_addrs <- sapply(params_with_state, xptr_address)
+    ids <- as.character(match(params_with_state_addrs, addresses))
+    states <- set_names(states, ids)
     # match them with the existing parameters
     list(
       param_groups = param_groups,

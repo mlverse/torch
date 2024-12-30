@@ -18,13 +18,9 @@ Implements stochastic gradient descent (optionally with momentum).
 Nesterov momentum is based on the formula from
 On the importance of initialization and momentum in deep learning.
 }
-\section{Methods}{
+\section{Fields and Methods}{
 
-TODO:
-}
-
-\section{Fields}{
-
+See \code{\link{OptimizerIgnite}}.
 }
 
 \examples{

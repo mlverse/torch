@@ -46,78 +46,80 @@ test_that("un-optimized parameters and state dict", {
 })
 
 test_that("adam", {
-  expect_optim_works(optim_ignite_adam, list(lr = 0.1))
-  expect_optim_works(optim_ignite_adam, list(lr = 0.1, weight_decay = 0))
-  expect_optim_works(optim_ignite_adam, list(lr = 0.1, weight_decay = 1e-5, amsgrad = TRUE))
-  expect_optim_works(optim_ignite_adam, list(lr = 0.1, weight_decay = 1e-5, amsgrad = FALSE))
+  defaults <- sample_adam_params()
+  expect_optim_works(optim_ignite_adam, defaults)
   expect_state_is_updated(optim_ignite_adam)
-})
-
-test_that("sgd", {
-  expect_optim_works(optim_ignite_sgd, list(lr = 0.1, momentum = 0.9))
-  expect_optim_works(optim_ignite_sgd, list(lr = 0.1, momentum = 0))
+  o <- do.call(make_ignite_adam, defaults)
+  if (length(o$state_dict()$state)) {
+    expect_equal(names(o$state_dict()$state), c("1", "2"))
+    expect_true(is_permutation(names(o$state_dict()$state[[1]]), c("exp_avg", "exp_avg_sq", "max_exp_avg_sq", "step")))
+  }
+  expect_equal(o$param_groups[[1]][-1L][names(defaults)], defaults)
+  expect_ignite_can_change_param_groups(optim_ignite_adam)
+  expect_ignite_can_add_param_group(optim_ignite_adam)
+  do.call(expect_state_dict_works, c(list(optim_ignite_adam), defaults))
 })
 
 test_that("adamw", {
-  expect_optim_works(optim_ignite_adamw, list(lr = 0.1))
-  expect_optim_works(optim_ignite_adamw, list(lr = 0.1, weight_decay = 0))
-  expect_optim_works(optim_ignite_adamw, list(lr = 0.1, weight_decay = 1e-5, amsgrad = TRUE))
-  expect_optim_works(optim_ignite_adamw, list(lr = 0.1, weight_decay = 1e-5, amsgrad = FALSE))
+  defaults <- sample_adamw_params()
+  expect_optim_works(optim_ignite_adamw, defaults)
   expect_state_is_updated(optim_ignite_adamw)
+  o <- do.call(make_ignite_adamw, defaults)
+  if (length(o$state_dict()$state)) {
+    expect_equal(names(o$state_dict()$state), c("1", "2"))
+    expect_true(is_permutation(names(o$state_dict()$state[[1]]), c("exp_avg", "exp_avg_sq", "max_exp_avg_sq", "step")))
+  }
+  expect_equal(o$param_groups[[1]][-1L][names(defaults)], defaults)
+  expect_ignite_can_change_param_groups(optim_ignite_adamw)
+  expect_ignite_can_add_param_group(optim_ignite_adamw)
+  do.call(expect_state_dict_works, c(list(optim_ignite_adamw), defaults))
+})
+
+test_that("sgd", {
+  defaults <- sample_sgd_params()
+  expect_state_is_updated(optim_ignite_sgd)
+  o <- do.call(make_ignite_sgd, defaults)
+  if (length(o$state_dict()$state)) {
+    expect_equal(names(o$state_dict()$state), c("1", "2"))
+    expect_true(is_permutation(names(o$state_dict()$state[[1]]), "momentum_buffer"))
+  }
+  expect_equal(o$param_groups[[1]][-1L][names(defaults)], defaults)
+  expect_ignite_can_change_param_groups(optim_ignite_sgd)
+  expect_ignite_can_add_param_group(optim_ignite_sgd)
+  do.call(expect_state_dict_works, c(list(optim_ignite_sgd), defaults))
 })
 
 test_that("rmsprop", {
-  expect_optim_works(optim_ignite_rmsprop, list(lr = 0.1))
-  expect_optim_works(optim_ignite_rmsprop, list(lr = 0.1, weight_decay = 0))
-  expect_optim_works(optim_ignite_rmsprop, list(lr = 0.1, weight_decay = 1e-5, amsgrad = TRUE))
-  expect_optim_works(optim_ignite_rmsprop, list(lr = 0.1, weight_decay = 1e-5, amsgrad = FALSE))
+  defaults <- sample_rmsprop_params()
+  expect_optim_works(optim_ignite_rmsprop, defaults)
   expect_state_is_updated(optim_ignite_rmsprop)
+  o <- do.call(make_ignite_rmsprop, defaults)
+  if (length(o$state_dict()$state)) {
+    expect_equal(names(o$state_dict()$state), c("1", "2"))
+    expect_true(is_permutation(names(o$state_dict()$state[[1]]), c("grad_avg", "square_avg", "momentum_buffer", "step")))
+  }
+  expect_equal(o$param_groups[[1]][-1L][names(defaults)], defaults)
+  expect_ignite_can_change_param_groups(optim_ignite_rmsprop)
+  expect_ignite_can_add_param_group(optim_ignite_rmsprop)
+  do.call(expect_state_dict_works, c(list(optim_ignite_rmsprop), defaults))
 })
 
 test_that("adagrad", {
-  expect_optim_works(optim_ignite_adagrad, list(lr = 0.1))
-  expect_optim_works(optim_ignite_adagrad, list(lr = 0.1, weight_decay = 0))
-  expect_optim_works(optim_ignite_rmsprop, list(lr = 0.1, weight_decay = 1e-5, amsgrad = TRUE))
+  defaults <- sample_adagrad_params()
+  expect_optim_works(optim_ignite_adagrad, defaults)
   expect_state_is_updated(optim_ignite_adagrad)
+  o <- do.call(make_ignite_adagrad, defaults)
+  if (length(o$state_dict()$state)) {
+    expect_equal(names(o$state_dict()$state), c("1", "2"))
+    expect_true(is_permutation(names(o$state_dict()$state[[1]]), c("step", "sum")))
+  }
+  expect_equal(o$param_groups[[1]][-1L][names(defaults)], defaults)
+  expect_ignite_can_change_param_groups(optim_ignite_adagrad)
+  expect_ignite_can_add_param_group(optim_ignite_adagrad)
+  do.call(expect_state_dict_works, c(list(optim_ignite_adagrad), defaults))
 })
 
-test_that("constructor arguments are passed to the optimizer", {
-  n = nn_linear(1, 1)
-  lr = 0.123
-  weight_decay = 0.456
-  betas = c(0.789, 0.444)
-  eps = 0.0111
-
-  o1 = optim_ignite_adamw(nn_linear(1, 1)$parameters,
-    lr = lr, weight_decay = weight_decay, betas = betas, eps = eps, amsgrad = TRUE)
-  expect_equal(length(o1$param_groups), 1L)
-  expect_equal(o1$param_groups[[1]][-1],
-    list(lr = lr, weight_decay = weight_decay, betas = betas, eps = eps, amsgrad = TRUE))
-
-  o2 = optim_ignite_adamw(nn_linear(1, 1)$parameters,
-    lr = lr, weight_decay = weight_decay, betas = betas, eps = eps, amsgrad = FALSE)
-  expect_equal(length(o2$param_groups), 1L)
-  expect_equal(o2$param_groups[[1]][-1],
-    list(lr = lr, weight_decay = weight_decay, betas = betas, eps = eps, amsgrad = FALSE))
-})
-
-test_that("can change param groups", {
-  o = optim_adamw(nn_linear(1, 1)$parameters)
-  o$param_groups[[1]]$lr = 19
-  expect_equal(o$param_groups[[1]]$lr, 19)
-  o$param_groups[[1]]$betas = c(0.22, 0.33)
-  expect_equal(o$param_groups[[1]]$betas, c(0.22, 0.33))
-  o$param_groups[[1]]$eps = 0.5
-  expect_equal(o$param_groups[[1]]$eps, 0.5)
-  o$param_groups[[1]]$weight_decay = 0.77
-  expect_equal(o$param_groups[[1]]$weight_decay, 0.77)
-  o$param_groups[[1]]$amsgrad = FALSE
-  expect_equal(o$param_groups[[1]]$amsgrad, FALSE)
-  o$param_groups[[1]]$amsgrad = TRUE
-  expect_equal(o$param_groups[[1]]$amsgrad, TRUE)
-})
-
-test_that("can initialize optimizer with different options per param group", {
+test_that("base class: can initialize optimizer with different options per param group", {
   defaults = list(lr = 0.1, betas = c(0.9, 0.999), eps = 1e-8, weight_decay = 0, amsgrad = FALSE)
   # set args1 to slightly different values than defaults
   args1 = list(lr = 0.11, betas = c(0.91, 0.9991), eps = 1e-81, weight_decay = 0.1, amsgrad = TRUE)
@@ -154,17 +156,8 @@ test_that("can initialize optimizer with different options per param group", {
   expect_equal(pgs[[3]], defaults[names(pgs[[3]])])
 })
 
-test_that("params must have length > 1", {
+test_that("base class: params must have length > 1", {
   expect_error(optim_ignite_adamw(list()), "must have length")
-})
-
-test_that("optim: can add a param group", {
-  o = optim_ignite_adamw(list(torch_tensor(1)), lr = 5)
-  o$add_param_group(list(params = list(torch_tensor(2)), lr = 10))
-  expect_equal(o$param_groups[[1]]$params[[1]], torch_tensor(1))
-  expect_equal(o$param_groups[[1]]$lr, 5)
-  expect_equal(o$param_groups[[2]]$params[[1]], torch_tensor(2))
-  expect_equal(o$param_groups[[2]]$lr, 10)
 })
 
 test_that("base class: error handling when loading state dict", {
@@ -181,11 +174,7 @@ test_that("base class: error handling when loading state dict", {
   expect_error(o$load_state_dict(sd3), "but got params, weight_decay")
 })
 
-test_that("base class: can corectly load state dict for newly created optimizer", {
-  old = make_ignite_adamw()
-  new = make_ignite_adamw(steps = 0)
-  new$load_state_dict(old$state_dict())
-  expect_equal(old$state_dict(), new$state_dict())
-  # tensor is copied
-  expect_false(identical(old$state_dict()$state$`1`[[1]], new$state_dict()$state$`1`[[1]]))
+test_that("deep cloning not possible", {
+  o = make_ignite_adamw(steps = 0)
+  expect_error(o$clone(deep = TRUE), "OptimizerIgnite cannot be deep cloned")
 })
