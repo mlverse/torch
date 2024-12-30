@@ -483,7 +483,7 @@ void _ignite_sgd_add_param_group(void* optim, void* params, sgd_options options)
 
   auto options_ptr = std::make_unique<torch::optim::SGDOptions>(options_);
   auto group = torch::optim::OptimizerParamGroup(params_.vec(), std::move(options_ptr));
-  optim_->add_param_group(torch::optim::OptimizerParamGroup(params_.vec(), std::move(options_ptr)));
+  optim_->add_param_group(group);
 }
 
 sgd_options _ignite_sgd_get_param_group_options(void* groups, int i) {

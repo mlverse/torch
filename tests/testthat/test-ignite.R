@@ -45,12 +45,40 @@ test_that("un-optimized parameters and state dict", {
   }
 })
 
-test_that("optim_adamw", {
+test_that("adam", {
+  expect_optim_works(optim_ignite_adam, list(lr = 0.1))
+  expect_optim_works(optim_ignite_adam, list(lr = 0.1, weight_decay = 0))
+  expect_optim_works(optim_ignite_adam, list(lr = 0.1, weight_decay = 1e-5, amsgrad = TRUE))
+  expect_optim_works(optim_ignite_adam, list(lr = 0.1, weight_decay = 1e-5, amsgrad = FALSE))
+  expect_state_is_updated(optim_ignite_adam)
+})
+
+test_that("sgd", {
+  expect_optim_works(optim_ignite_sgd, list(lr = 0.1, momentum = 0.9))
+  expect_optim_works(optim_ignite_sgd, list(lr = 0.1, momentum = 0))
+})
+
+test_that("adamw", {
   expect_optim_works(optim_ignite_adamw, list(lr = 0.1))
   expect_optim_works(optim_ignite_adamw, list(lr = 0.1, weight_decay = 0))
   expect_optim_works(optim_ignite_adamw, list(lr = 0.1, weight_decay = 1e-5, amsgrad = TRUE))
   expect_optim_works(optim_ignite_adamw, list(lr = 0.1, weight_decay = 1e-5, amsgrad = FALSE))
   expect_state_is_updated(optim_ignite_adamw)
+})
+
+test_that("rmsprop", {
+  expect_optim_works(optim_ignite_rmsprop, list(lr = 0.1))
+  expect_optim_works(optim_ignite_rmsprop, list(lr = 0.1, weight_decay = 0))
+  expect_optim_works(optim_ignite_rmsprop, list(lr = 0.1, weight_decay = 1e-5, amsgrad = TRUE))
+  expect_optim_works(optim_ignite_rmsprop, list(lr = 0.1, weight_decay = 1e-5, amsgrad = FALSE))
+  expect_state_is_updated(optim_ignite_rmsprop)
+})
+
+test_that("adagrad", {
+  expect_optim_works(optim_ignite_adagrad, list(lr = 0.1))
+  expect_optim_works(optim_ignite_adagrad, list(lr = 0.1, weight_decay = 0))
+  expect_optim_works(optim_ignite_rmsprop, list(lr = 0.1, weight_decay = 1e-5, amsgrad = TRUE))
+  expect_state_is_updated(optim_ignite_adagrad)
 })
 
 test_that("constructor arguments are passed to the optimizer", {
@@ -130,7 +158,7 @@ test_that("params must have length > 1", {
   expect_error(optim_ignite_adamw(list()), "must have length")
 })
 
-test_that("can add a param group", {
+test_that("optim: can add a param group", {
   o = optim_ignite_adamw(list(torch_tensor(1)), lr = 5)
   o$add_param_group(list(params = list(torch_tensor(2)), lr = 10))
   expect_equal(o$param_groups[[1]]$params[[1]], torch_tensor(1))
@@ -139,7 +167,7 @@ test_that("can add a param group", {
   expect_equal(o$param_groups[[2]]$lr, 10)
 })
 
-test_that("error handling when loading state dict", {
+test_that("base class: error handling when loading state dict", {
   o = make_ignite_adamw()
   expect_error(o$load_state_dict(list()), "must be a list with elements")
   sd1 = o$state_dict()
@@ -153,11 +181,11 @@ test_that("error handling when loading state dict", {
   expect_error(o$load_state_dict(sd3), "but got params, weight_decay")
 })
 
-test_that("can corectly load state dict for newly created optimizer", {
+test_that("base class: can corectly load state dict for newly created optimizer", {
   old = make_ignite_adamw()
   new = make_ignite_adamw(steps = 0)
   new$load_state_dict(old$state_dict())
   expect_equal(old$state_dict(), new$state_dict())
   # tensor is copied
-  expect_false(identical(old$state_dict()$state$`1`$exp_avg_sq, new$state_dict()$state$`1`$exp_avg_sq))
+  expect_false(identical(old$state_dict()$state$`1`[[1]], new$state_dict()$state$`1`[[1]]))
 })
