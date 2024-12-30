@@ -58,22 +58,7 @@ optim_sgd <- optimizer(
   "optim_sgd",
   initialize = function(params, lr = optim_required(), momentum = 0, dampening = 0,
                         weight_decay = 0, nesterov = FALSE) {
-    if (!is_optim_required(lr) && lr < 0) {
-      value_error("Invalid learning rate: {lr}")
-    }
-
-    if (momentum < 0) {
-      value_error("Invalid momentum value: {momentum}")
-    }
-
-    if (weight_decay < 0) {
-      value_error("Invalid weight_decay value: {weight_decay}")
-    }
-
-    if (nesterov && (momentum <= 0 || dampening != 0)) {
-      value_error("Nesterov momentum requires a momentum and zero dampening")
-    }
-
+    assert_sgd_params(lr, momentum, dampening, weight_decay, nesterov)
     defaults <- list(
       lr = lr, momentum = momentum, dampening = dampening,
       weight_decay = weight_decay, nesterov = nesterov
@@ -112,3 +97,22 @@ optim_sgd <- optimizer(
     })
   }
 )
+
+
+assert_sgd_params <- function(lr, momentum, dampening, weight_decay, nesterov) {
+  if (!is_optim_required(lr) && lr < 0) {
+    value_error("Invalid learning rate: {lr}")
+  }
+
+  if (momentum < 0) {
+    value_error("Invalid momentum value: {momentum}")
+  }
+
+  if (weight_decay < 0) {
+    value_error("Invalid weight_decay value: {weight_decay}")
+  }
+
+  if (nesterov && (momentum <= 0 || dampening != 0)) {
+    value_error("Nesterov momentum requires a momentum and zero dampening")
+  }
+}

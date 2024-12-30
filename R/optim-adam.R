@@ -33,25 +33,7 @@ optim_adam <- optimizer(
   "optim_adam",
   initialize = function(params, lr = 1e-3, betas = c(0.9, 0.999), eps = 1e-8,
                         weight_decay = 0, amsgrad = FALSE) {
-    if (lr < 0) {
-      value_error("Invalid learning rate: {lr}")
-    }
-
-    if (eps < 0) {
-      value_error("Invalid eps: {eps}")
-    }
-
-    if (betas[[1]] < 0 || betas[[1]] > 1) {
-      value_error("Invalid beta parameter at index 1")
-    }
-
-    if (betas[[2]] < 0 || betas[[2]] > 1) {
-      value_error("Invalid beta parameter at index 2")
-    }
-
-    if (weight_decay < 0) {
-      value_error("Invalid weight decay value: {weight_decay}")
-    }
+    assert_adam_params(lr, betas, eps, weight_decay, amsgrad)
 
     defaults <- list(
       lr = lr, betas = betas, eps = eps, weight_decay = weight_decay,
@@ -117,3 +99,26 @@ optim_adam <- optimizer(
     private$step_helper(closure, loop_fun)
   }
 )
+
+
+assert_adam_params <- function(lr, betas, eps, weight_decay, amsgrad) {
+  if (lr < 0) {
+    value_error("Invalid learning rate: {lr}")
+  }
+
+  if (eps < 0) {
+    value_error("Invalid eps: {eps}")
+  }
+
+  if (betas[[1]] < 0 || betas[[1]] > 1) {
+    value_error("Invalid beta parameter at index 1")
+  }
+
+  if (betas[[2]] < 0 || betas[[2]] > 1) {
+    value_error("Invalid beta parameter at index 2")
+  }
+
+  if (weight_decay < 0) {
+    value_error("Invalid weight decay value: {weight_decay}")
+  }
+}

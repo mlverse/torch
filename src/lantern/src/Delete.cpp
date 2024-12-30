@@ -451,6 +451,30 @@ void _lantern_optim_adamw_delete(void* x) {
   LANTERN_FUNCTION_END_VOID
 }
 
+void _lantern_optim_adam_delete(void* x) {
+  LANTERN_FUNCTION_START
+  lantern_delete<torch::optim::Adam>(x);
+  LANTERN_FUNCTION_END_VOID
+}
+
+void _lantern_optim_adagrad_delete(void* x) {
+  LANTERN_FUNCTION_START
+  lantern_delete<torch::optim::Adagrad>(x);
+  LANTERN_FUNCTION_END_VOID
+}
+
+void _lantern_optim_sgd_delete(void* x) {
+  LANTERN_FUNCTION_START
+  lantern_delete<torch::optim::SGD>(x);
+  LANTERN_FUNCTION_END_VOID
+}
+
+void _lantern_optim_rmsprop_delete(void* x) {
+  LANTERN_FUNCTION_START
+  lantern_delete<torch::optim::RMSprop>(x);
+  LANTERN_FUNCTION_END_VOID
+}
+
 void _lantern_vector_optim_optimizer_group_delete (void* x) {
   LANTERN_FUNCTION_START
   lantern_delete<std::vector<torch::optim::OptimizerParamGroup>>(x);

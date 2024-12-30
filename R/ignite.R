@@ -1,4 +1,4 @@
-#' @include optim.R utils-data.R optim-adamw.R
+#' @include optim.R utils-data.R optim-adamw.R RcppExports.R
 OptimizerIgnite <- R6::R6Class(
   "OptimizerIgnite",
   inherit = Optimizer,
@@ -56,11 +56,11 @@ OptimizerIgnite <- R6::R6Class(
       loss <- if (!is.null(closure)) {
         with_enable_grad(closure())
       }
-      private$.step(self$ptr)
+      rcpp_ignite_optim_step(self$ptr)
       return(loss)
     },
     zero_grad = function() {
-      private$.zero_grad(self$ptr)
+      rcpp_ignite_optim_zero_grad(self$ptr)
     },
     add_param_group = function(param_group) {
       params <- param_group$params
@@ -101,12 +101,10 @@ OptimizerIgnite <- R6::R6Class(
   ),
   private = list(
     .optim = function(params, ...) stop("Abstract method"),
-    .step = function(ptr) stop("Abstract method"),
     .set_states = function(ptr, params, states) stop("Abstract method"),
     .add_param_group = function(ptr, params, options) stop("Abstract method"),
     .assert_params = function(...) stop("Abstract method"),
     .set_param_group_options = function(ptr, options) stop("Abstract method"),
-    .zero_grad = function(ptr) stop("Abstract method"),
     .get_param_groups = function(ptr) stop("Abstract method")
   )
 )
@@ -128,6 +126,166 @@ optimizer_ignite = function (name = NULL, ..., private = NULL,
   )
 }
 
+#' @title LibTorch implementation of Adagrad        
+#' @inherit optim_adagrad  description
+#' @section Methods:
+#' TODO:
+#' @section Fields:
+#' @inheritParams torch::optim_adagrad
+#' @export
+#' @include optim-adagrad.R
+#' @examples
+#' \dontrun{
+#' optimizer <- optim_ignite_adagrad(model$parameters(), lr = 0.1)
+#' optimizer$zero_grad()
+#' loss_fn(model(input), target)$backward()
+#' optimizer$step()
+#' }
+optim_ignite_adagrad <- optimizer_ignite(
+  "optim_ignite_adagrad",
+  initialize = function(params, lr = 1e-3, momentum = 0.9, dampening = 0,
+    weight_decay = 1e-2, nesterov = FALSE) {
+    super$initialize(params, defaults = list(lr = lr, momentum = momentum, dampening = dampening, weight_decay = weight_decay, nesterov = nesterov))
+  },
+  state_dict = function() {
+    extract_ignite_state_dict(self, rcpp_ignite_adagrad_get_states(self$ptr), c("sum", "step"))
+  },
+  private = list(
+    .optim = function(params, ...) {
+      rcpp_ignite_adagrad(params = params, ...)
+    },
+
+    .set_states = rcpp_ignite_adagrad_set_states,
+    .add_param_group = rcpp_ignite_adagrad_add_param_group,
+    .assert_params = assert_adagrad_params,
+    .set_param_group_options = rcpp_ignite_adagrad_set_param_group_options,
+    .get_param_groups = function(ptr) {
+      rcpp_as_list_adagrad_param_groups(rcpp_ignite_optim_get_param_groups(ptr))
+    }
+  )
+)
+
+#' @title LibTorch implementation of RMSprop
+#' @inherit optim_rmsprop  description
+#' @section Methods:
+#' TODO:
+#' @section Fields:
+#' @inheritParams torch::optim_rmsprop
+#' @export
+#'
+#' @include optim-rmsprop.R
+#' @examples
+#' \dontrun{
+#' optimizer <- optim_ignite_rmsprop(model$parameters(), lr = 0.1)
+#' optimizer$zero_grad()
+#' loss_fn(model(input), target)$backward()
+#' optimizer$step()
+#' }
+optim_ignite_rmsprop <- optimizer_ignite(
+  "optim_ignite_rmsprop",
+  initialize = function(params, lr = 1e-3, alpha = 0.99, eps = 1e-8,
+    weight_decay = 1e-2, momentum = 0, centered = FALSE) {
+    super$initialize(params, defaults = list(lr = lr, alpha = alpha, eps = eps, weight_decay = weight_decay, momentum = momentum, centered = centered))
+  },
+  state_dict = function() {
+    extract_ignite_state_dict(self, rcpp_ignite_rmsprop_get_states(self$ptr), c("exp_avg", "exp_avg_sq", "max_exp_avg_sq", "step"))
+  },
+  private = list(
+    .optim = function(params, ...) {
+      rcpp_ignite_rmsprop(params = params, ...)
+    },
+
+    .set_states = rcpp_ignite_rmsprop_set_states,
+    .add_param_group = rcpp_ignite_rmsprop_add_param_group,
+    .assert_params = assert_rmsprop_params,
+    .set_param_group_options = rcpp_ignite_rmsprop_set_param_group_options,
+    .get_param_groups = function(ptr) {
+      rcpp_as_list_rmsprop_param_groups(rcpp_ignite_optim_get_param_groups(ptr))
+    }
+  )
+)
+
+#' @title LibTorch implementation of SGD
+#' @inherit optim_sgd  description
+#' @section Methods:
+#' TODO:
+#' @section Fields:
+#' @inheritParams torch::optim_sgd
+#' @export
+#'
+#' @include optim-sgd.R
+#' @examples
+#' \dontrun{
+#' optimizer <- optim_ignite_sgd(model$parameters(), lr = 0.1)
+#' optimizer$zero_grad()
+#' loss_fn(model(input), target)$backward()
+#' optimizer$step()
+#' }
+optim_ignite_sgd <- optimizer_ignite(
+  "optim_ignite_sgd",
+  initialize = function(params, lr = 1e-3, momentum = 0.9, dampening = 0,
+    weight_decay = 1e-2, nesterov = FALSE) {
+    super$initialize(params, defaults = list(lr = lr, momentum = momentum, dampening = dampening, weight_decay = weight_decay, nesterov = nesterov))
+  },
+  state_dict = function() {
+    extract_ignite_state_dict(self, rcpp_ignite_sgd_get_states(self$ptr), "momentum_buffer")
+  },
+  private = list(
+    .optim = function(params, ...) {
+      rcpp_ignite_sgd(params = params, ...)
+    },
+
+    .set_states = rcpp_ignite_sgd_set_states,
+    .add_param_group = rcpp_ignite_sgd_add_param_group,
+    .assert_params = assert_sgd_params,
+    .set_param_group_options = rcpp_ignite_sgd_set_param_group_options,
+    .get_param_groups = function(ptr) {
+      rcpp_as_list_sgd_param_groups(rcpp_ignite_optim_get_param_groups(ptr))
+    }
+  )
+)
+
+#' @title LibTorch implementation of Adam
+#' @inherit optim_adam description
+#' @section Methods:
+#' TODO:
+#' @section Fields:
+#' @inheritParams torch::optim_adam
+#' @export
+#'
+#' @include optim-adam.R
+#' @examples
+#' \dontrun{
+#' optimizer <- optim_ignite_adam(model$parameters(), lr = 0.1)
+#' optimizer$zero_grad()
+#' loss_fn(model(input), target)$backward()
+#' optimizer$step()
+#' }
+optim_ignite_adam <- optimizer_ignite(
+  "optim_ignite_adam",
+  initialize = function(params, lr = 1e-3, betas = c(0.9, 0.999), eps = 1e-8,
+    weight_decay = 1e-2, amsgrad = FALSE) {
+    super$initialize(params, defaults = list(lr = lr, betas = betas, eps = eps, weight_decay = weight_decay, amsgrad = amsgrad))
+  },
+  state_dict = function() {
+    extract_ignite_state_dict(self, rcpp_ignite_adam_get_states(self$ptr),
+      c("exp_avg", "exp_avg_sq", "max_exp_avg_sq", "step"))
+  },
+  private = list(
+    .optim = function(params, ...) {
+      rcpp_ignite_adam(params = params, ...)
+    },
+
+    .set_states = rcpp_ignite_adam_set_states,
+    .add_param_group = rcpp_ignite_adam_add_param_group,
+    .assert_params = assert_adam_params,
+    .set_param_group_options = rcpp_ignite_adam_set_param_group_options,
+    .get_param_groups = function(ptr) {
+      rcpp_as_list_adam_param_groups(rcpp_ignite_optim_get_param_groups(ptr))
+    }
+  )
+)
+
 #' @title LibTorch implementation of AdamW
 #' @inherit optim_adamw description
 #' @section Methods:
@@ -136,6 +294,7 @@ optimizer_ignite = function (name = NULL, ..., private = NULL,
 #' @inheritParams torch::optim_adam
 #' @export
 #'
+#' @include optim-adamw.R
 #' @examples
 #' \dontrun{
 #' optimizer <- optim_ignite_adamw(model$parameters(), lr = 0.1)
@@ -157,14 +316,14 @@ optim_ignite_adamw <- optimizer_ignite(
     .optim = function(params, ...) {
       rcpp_ignite_adamw(params = params, ...)
     },
-    .step = rcpp_ignite_adamw_step,
+    .step = rcpp_ignite_optim_step,
     .set_states = rcpp_ignite_adamw_set_states,
     .add_param_group = rcpp_ignite_adamw_add_param_group,
     .assert_params = assert_adamw_params,
     .set_param_group_options = rcpp_ignite_adamw_set_param_group_options,
-    .zero_grad = rcpp_ignite_adamw_zero_grad,
+    .zero_grad = rcpp_ignite_optim_zero_grad,
     .get_param_groups = function(ptr) {
-      rcpp_as_list_adamw_param_groups(rcpp_ignite_adamw_get_param_groups(ptr))
+      rcpp_as_list_adamw_param_groups(rcpp_ignite_optim_get_param_groups(ptr))
     }
   )
 )
@@ -195,7 +354,7 @@ extract_ignite_state_dict <- function(self, states, nms) {
         set_names(states[i:(i + length(nms) - 1)], nms)
       })
     }
-    params_with_state = rcpp_ignite_adamw_parameters_with_state(self$ptr)
+    params_with_state = rcpp_ignite_optim_parameters_with_state(self$ptr)
     params_with_state_addrs = sapply(params_with_state, xptr_address)
     ids = as.character(match(params_with_state_addrs, addresses))
     states = set_names(states, ids)

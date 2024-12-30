@@ -141,10 +141,41 @@ extern "C" struct adamw_options {
     double betas[2];
     double eps;
     bool amsgrad;
-
-    adamw_options() = default;
-    adamw_options(long x) { }
 };
+
+extern "C" struct adagrad_options {
+    double lr;
+    double lr_decay;
+    double weight_decay;
+    double initial_accumulator_value;
+    double eps;
+};
+
+extern "C" struct adam_options {
+  double lr;
+  double weight_decay;
+  double betas[2];
+  double eps;
+  bool amsgrad;
+};
+
+extern "C" struct rmsprop_options {
+  double lr;
+  double alpha;
+  double eps;
+  double weight_decay;
+  double momentum;
+  bool centered;
+};
+
+extern "C" struct sgd_options {
+  double lr;
+  double momentum;
+  double dampening;
+  double weight_decay;
+  bool nesterov;
+};
+
 
 #define LANTERN_TYPE2VOID_DECL(type, name)                            \
   LANTERN_API type (LANTERN_PTR _##name) (void*);                     \
@@ -2610,6 +2641,238 @@ HOST_API void lantern_buffer_from_tensor (void* tensor, void* buffer, int n)
   LANTERN_HOST_HANDLER;
 }
 
+LANTERN_API void* (LANTERN_PTR _ignite_adagrad) (void* params, double lr, double lr_decay, double weight_decay, double eps, double initial_accumulator_value);
+HOST_API void* ignite_adagrad (void* params, double lr, double lr_decay, double weight_decay, double eps, double initial_accumulator_value) {
+  LANTERN_CHECK_LOADED
+  void* ret = _ignite_adagrad(params, lr, lr_decay, weight_decay, eps, initial_accumulator_value);
+  LANTERN_HOST_HANDLER;
+  return ret;
+}
+
+LANTERN_API void (LANTERN_PTR _ignite_adagrad_add_param_group) (void* optim, void* params, adagrad_options options);
+HOST_API void ignite_adagrad_add_param_group (void* optim, void* params, adagrad_options options) {
+  LANTERN_CHECK_LOADED
+  _ignite_adagrad_add_param_group(optim, params, options);
+  LANTERN_HOST_HANDLER;
+}
+
+LANTERN_API adagrad_options (LANTERN_PTR _ignite_adagrad_get_param_group_options) (void* groups, int i);
+HOST_API adagrad_options ignite_adagrad_get_param_group_options (void* groups, int i)
+{
+  LANTERN_CHECK_LOADED
+  adagrad_options ret = _ignite_adagrad_get_param_group_options(groups, i);
+  LANTERN_HOST_HANDLER;
+  return ret;
+}
+
+LANTERN_API void (LANTERN_PTR _ignite_adagrad_set_param_group_options) (void* opt, int i, adagrad_options options);
+HOST_API void ignite_adagrad_set_param_group_options (void* opt, int i, adagrad_options options)
+{
+  LANTERN_CHECK_LOADED
+   _ignite_adagrad_set_param_group_options(opt, i, options);
+  LANTERN_HOST_HANDLER;
+
+}
+
+LANTERN_API void* (LANTERN_PTR _ignite_adagrad_get_states) (void* optim);
+HOST_API void* ignite_adagrad_get_states (void* optim)
+{
+  LANTERN_CHECK_LOADED
+  void* ret = _ignite_adagrad_get_states(optim);
+  LANTERN_HOST_HANDLER;
+  return ret;
+}
+
+LANTERN_API void (LANTERN_PTR _ignite_adagrad_set_states) (void* optim, void* params, void* states_);
+HOST_API void ignite_adagrad_set_states (void* optim, void* params, void* states_)
+{
+  LANTERN_CHECK_LOADED
+   _ignite_adagrad_set_states(optim, params, states_);
+  LANTERN_HOST_HANDLER;
+
+}
+
+LANTERN_API void (LANTERN_PTR _lantern_optim_adagrad_delete) (void* x);
+HOST_API void lantern_optim_adagrad_delete (void* x) {
+  LANTERN_CHECK_LOADED
+   _lantern_optim_adagrad_delete(x);
+  LANTERN_HOST_HANDLER;
+}
+
+LANTERN_API void* (LANTERN_PTR _ignite_rmsprop) (void* params, double lr, double alpha, double eps, double weight_decay, double momentum, bool centered);
+HOST_API void* ignite_rmsprop (void* params, double lr, double alpha, double eps, double weight_decay, double momentum, bool centered) {
+  LANTERN_CHECK_LOADED
+  void* ret = _ignite_rmsprop(params, lr, alpha, eps, weight_decay, momentum, centered);
+  LANTERN_HOST_HANDLER;
+  return ret;
+}
+
+LANTERN_API void (LANTERN_PTR _ignite_rmsprop_add_param_group) (void* optim, void* params, rmsprop_options options);
+HOST_API void ignite_rmsprop_add_param_group (void* optim, void* params, rmsprop_options options) {
+  LANTERN_CHECK_LOADED
+  _ignite_rmsprop_add_param_group(optim, params, options);
+  LANTERN_HOST_HANDLER;
+}
+
+LANTERN_API rmsprop_options (LANTERN_PTR _ignite_rmsprop_get_param_group_options) (void* groups, int i);
+HOST_API rmsprop_options ignite_rmsprop_get_param_group_options (void* groups, int i)
+{
+  LANTERN_CHECK_LOADED
+  rmsprop_options ret = _ignite_rmsprop_get_param_group_options(groups, i);
+  LANTERN_HOST_HANDLER;
+  return ret;
+}
+
+LANTERN_API void (LANTERN_PTR _ignite_rmsprop_set_param_group_options) (void* opt, int i, rmsprop_options options);
+HOST_API void ignite_rmsprop_set_param_group_options (void* opt, int i, rmsprop_options options)
+{
+  LANTERN_CHECK_LOADED
+   _ignite_rmsprop_set_param_group_options(opt, i, options);
+  LANTERN_HOST_HANDLER;
+
+}
+
+LANTERN_API void* (LANTERN_PTR _ignite_rmsprop_get_states) (void* optim);
+HOST_API void* ignite_rmsprop_get_states (void* optim)
+{
+  LANTERN_CHECK_LOADED
+  void* ret = _ignite_rmsprop_get_states(optim);
+  LANTERN_HOST_HANDLER;
+  return ret;
+}
+
+LANTERN_API void (LANTERN_PTR _ignite_rmsprop_set_states) (void* optim, void* params, void* states_);
+HOST_API void ignite_rmsprop_set_states (void* optim, void* params, void* states_)
+{
+  LANTERN_CHECK_LOADED
+   _ignite_rmsprop_set_states(optim, params, states_);
+  LANTERN_HOST_HANDLER;
+
+}
+
+LANTERN_API void (LANTERN_PTR _lantern_optim_rmsprop_delete) (void* x);
+HOST_API void lantern_optim_rmsprop_delete (void* x) {
+  LANTERN_CHECK_LOADED
+   _lantern_optim_rmsprop_delete(x);
+  LANTERN_HOST_HANDLER;
+}
+
+LANTERN_API void* (LANTERN_PTR _ignite_adam) (void* params, double lr, double beta1, double beta2, double eps, double weight_decay, bool amsgrad);
+HOST_API void* ignite_adam (void* params, double lr, double beta1, double beta2, double eps, double weight_decay, bool amsgrad) {
+  LANTERN_CHECK_LOADED
+  void* ret = _ignite_adam(params, lr, beta1, beta2, eps, weight_decay, amsgrad);
+  LANTERN_HOST_HANDLER;
+  return ret;
+}
+
+LANTERN_API void (LANTERN_PTR _ignite_adam_add_param_group) (void* optim, void* params, adam_options options);
+HOST_API void ignite_adam_add_param_group (void* optim, void* params, adam_options options) {
+  LANTERN_CHECK_LOADED
+  _ignite_adam_add_param_group(optim, params, options);
+  LANTERN_HOST_HANDLER;
+}
+
+LANTERN_API adam_options (LANTERN_PTR _ignite_adam_get_param_group_options) (void* groups, int i);
+HOST_API adam_options ignite_adam_get_param_group_options (void* groups, int i)
+{
+  LANTERN_CHECK_LOADED
+  adam_options ret = _ignite_adam_get_param_group_options(groups, i);
+  LANTERN_HOST_HANDLER;
+  return ret;
+}
+
+LANTERN_API void (LANTERN_PTR _ignite_adam_set_param_group_options) (void* opt, int i, adam_options options);
+HOST_API void ignite_adam_set_param_group_options (void* opt, int i, adam_options options)
+{
+  LANTERN_CHECK_LOADED
+   _ignite_adam_set_param_group_options(opt, i, options);
+  LANTERN_HOST_HANDLER;
+
+}
+
+LANTERN_API void* (LANTERN_PTR _ignite_adam_get_states) (void* optim);
+HOST_API void* ignite_adam_get_states (void* optim)
+{
+  LANTERN_CHECK_LOADED
+  void* ret = _ignite_adam_get_states(optim);
+  LANTERN_HOST_HANDLER;
+  return ret;
+}
+
+LANTERN_API void (LANTERN_PTR _ignite_adam_set_states) (void* optim, void* params, void* states_);
+HOST_API void ignite_adam_set_states (void* optim, void* params, void* states_)
+{
+  LANTERN_CHECK_LOADED
+   _ignite_adam_set_states(optim, params, states_);
+  LANTERN_HOST_HANDLER;
+
+}
+
+LANTERN_API void (LANTERN_PTR _lantern_optim_adam_delete) (void* x);
+HOST_API void lantern_optim_adam_delete (void* x) {
+  LANTERN_CHECK_LOADED
+   _lantern_optim_adam_delete(x);
+  LANTERN_HOST_HANDLER;
+}
+
+LANTERN_API void* (LANTERN_PTR _ignite_sgd) (void* params, double lr, double momentum, double dampening, double weight_decay, bool nesterov);
+HOST_API void* ignite_sgd (void* params, double lr, double momentum, double dampening, double weight_decay, bool nesterov) {
+  LANTERN_CHECK_LOADED
+  void* ret = _ignite_sgd(params, lr, momentum, dampening, weight_decay, nesterov);
+  LANTERN_HOST_HANDLER;
+  return ret;
+}
+
+LANTERN_API void (LANTERN_PTR _ignite_sgd_add_param_group) (void* optim, void* params, sgd_options options);
+HOST_API void ignite_sgd_add_param_group (void* optim, void* params, sgd_options options) {
+  LANTERN_CHECK_LOADED
+  _ignite_sgd_add_param_group(optim, params, options);
+  LANTERN_HOST_HANDLER;
+}
+
+LANTERN_API sgd_options (LANTERN_PTR _ignite_sgd_get_param_group_options) (void* groups, int i);
+HOST_API sgd_options ignite_sgd_get_param_group_options (void* groups, int i)
+{
+  LANTERN_CHECK_LOADED
+  sgd_options ret = _ignite_sgd_get_param_group_options(groups, i);
+  LANTERN_HOST_HANDLER;
+  return ret;
+}
+
+LANTERN_API void (LANTERN_PTR _ignite_sgd_set_param_group_options) (void* opt, int i, sgd_options options);
+HOST_API void ignite_sgd_set_param_group_options (void* opt, int i, sgd_options options)
+{
+  LANTERN_CHECK_LOADED
+   _ignite_sgd_set_param_group_options(opt, i, options);
+  LANTERN_HOST_HANDLER;
+
+}
+
+LANTERN_API void* (LANTERN_PTR _ignite_sgd_get_states) (void* optim);
+HOST_API void* ignite_sgd_get_states (void* optim)
+{
+  LANTERN_CHECK_LOADED
+  void* ret = _ignite_sgd_get_states(optim);
+  LANTERN_HOST_HANDLER;
+  return ret;
+}
+
+LANTERN_API void (LANTERN_PTR _ignite_sgd_set_states) (void* optim, void* params, void* states_);
+HOST_API void ignite_sgd_set_states (void* optim, void* params, void* states_)
+{
+  LANTERN_CHECK_LOADED
+   _ignite_sgd_set_states(optim, params, states_);
+  LANTERN_HOST_HANDLER;
+
+}
+
+LANTERN_API void (LANTERN_PTR _lantern_optim_sgd_delete) (void* x);
+HOST_API void lantern_optim_sgd_delete (void* x) {
+  LANTERN_CHECK_LOADED
+   _lantern_optim_sgd_delete(x);
+  LANTERN_HOST_HANDLER;
+}
+
 LANTERN_API void* (LANTERN_PTR _ignite_adamw) (void* params, double lr, double beta1, double beta2, double eps, double weight_decay, bool amsgrad);
 HOST_API void* ignite_adamw (void* params, double lr, double beta1, double beta2, double eps, double weight_decay, bool amsgrad) {
   LANTERN_CHECK_LOADED
@@ -2623,40 +2886,6 @@ HOST_API void ignite_adamw_add_param_group (void* optim, void* params, adamw_opt
   LANTERN_CHECK_LOADED
   _ignite_adamw_add_param_group(optim, params, options);
   LANTERN_HOST_HANDLER;
-}
-
-LANTERN_API void (LANTERN_PTR _lantern_optim_adamw_delete) (void* x);
-HOST_API void lantern_optim_adamw_delete (void* x) {
-  LANTERN_CHECK_LOADED
-   _lantern_optim_adamw_delete(x);
-  LANTERN_HOST_HANDLER;
-}
-
-LANTERN_API void* (LANTERN_PTR _ignite_adamw_get_param_groups) (void* groups);
-HOST_API void* ignite_adamw_get_param_groups (void* groups)
-{
-  LANTERN_CHECK_LOADED
-  void* ret = _ignite_adamw_get_param_groups(groups);
-  LANTERN_HOST_HANDLER;
-  return ret;
-}
-
-LANTERN_API int (LANTERN_PTR _ignite_adamw_param_groups_size) (void* groups);
-HOST_API int ignite_adamw_param_groups_size (void* groups)
-{
-  LANTERN_CHECK_LOADED
-  int ret = _ignite_adamw_param_groups_size(groups);
-  LANTERN_HOST_HANDLER;
-  return ret;
-}
-
-LANTERN_API void* (LANTERN_PTR _ignite_optim_get_param_group_params) (void* groups, int i);
-HOST_API void* ignite_optim_get_param_group_params (void* groups, int i)
-{
-  LANTERN_CHECK_LOADED
-  void* ret = _ignite_optim_get_param_group_params(groups, i);
-  LANTERN_HOST_HANDLER;
-  return ret;
 }
 
 LANTERN_API adamw_options (LANTERN_PTR _ignite_adamw_get_param_group_options) (void* groups, int i);
@@ -2695,30 +2924,65 @@ HOST_API void ignite_adamw_set_states (void* optim, void* params, void* states_)
 
 }
 
-LANTERN_API void (LANTERN_PTR _ignite_adamw_step) (void* optim);
-HOST_API void ignite_adamw_step (void* optim)
-{
+LANTERN_API void (LANTERN_PTR _lantern_optim_adamw_delete) (void* x);
+HOST_API void lantern_optim_adamw_delete (void* x) {
   LANTERN_CHECK_LOADED
-   _ignite_adamw_step(optim);
+   _lantern_optim_adamw_delete(x);
   LANTERN_HOST_HANDLER;
-
 }
 
-
-LANTERN_API void* (LANTERN_PTR _ignite_adamw_parameters_with_state) (void* optim);
-HOST_API void* ignite_adamw_parameters_with_state (void* optim)
+LANTERN_API void* (LANTERN_PTR _ignite_optim_get_param_groups) (void* groups);
+HOST_API void* ignite_optim_get_param_groups (void* groups)
 {
   LANTERN_CHECK_LOADED
-  void* ret = _ignite_adamw_parameters_with_state(optim);
+  void* ret = _ignite_optim_get_param_groups(groups);
   LANTERN_HOST_HANDLER;
   return ret;
 }
 
-LANTERN_API void (LANTERN_PTR _ignite_adamw_zero_grad) (void* optim);
-HOST_API void ignite_adamw_zero_grad (void* optim)
+LANTERN_API int (LANTERN_PTR _ignite_optim_param_groups_size) (void* groups);
+HOST_API int ignite_optim_param_groups_size (void* groups)
 {
   LANTERN_CHECK_LOADED
-   _ignite_adamw_zero_grad(optim);
+  int ret = _ignite_optim_param_groups_size(groups);
+  LANTERN_HOST_HANDLER;
+  return ret;
+}
+
+LANTERN_API void* (LANTERN_PTR _ignite_optim_get_param_group_params) (void* groups, int i);
+HOST_API void* ignite_optim_get_param_group_params (void* groups, int i)
+{
+  LANTERN_CHECK_LOADED
+  void* ret = _ignite_optim_get_param_group_params(groups, i);
+  LANTERN_HOST_HANDLER;
+  return ret;
+}
+
+
+LANTERN_API void (LANTERN_PTR _ignite_optim_step) (void* optim);
+HOST_API void ignite_optim_step (void* optim)
+{
+  LANTERN_CHECK_LOADED
+   _ignite_optim_step(optim);
+  LANTERN_HOST_HANDLER;
+
+}
+
+
+LANTERN_API void* (LANTERN_PTR _ignite_optim_parameters_with_state) (void* optim);
+HOST_API void* ignite_adamw_parameters_with_state (void* optim)
+{
+  LANTERN_CHECK_LOADED
+  void* ret = _ignite_optim_parameters_with_state(optim);
+  LANTERN_HOST_HANDLER;
+  return ret;
+}
+
+LANTERN_API void (LANTERN_PTR _ignite_optim_zero_grad) (void* optim);
+HOST_API void ignite_optim_zero_grad (void* optim)
+{
+  LANTERN_CHECK_LOADED
+   _ignite_optim_zero_grad(optim);
   LANTERN_HOST_HANDLER;
 
 }
@@ -10678,17 +10942,41 @@ LOAD_SYMBOL(_lantern_buffer_from_tensor);
 LOAD_SYMBOL(_lantern_optim_adamw_delete);
 LOAD_SYMBOL(_lantern_vector_optim_optimizer_group_delete);
 LOAD_SYMBOL(_ignite_adamw);
-LOAD_SYMBOL(_ignite_adamw_parameters_with_state);
-LOAD_SYMBOL(_ignite_adamw_get_param_groups);
 LOAD_SYMBOL(_ignite_adamw_add_param_group);
-LOAD_SYMBOL(_ignite_adamw_param_groups_size);
-LOAD_SYMBOL(_ignite_optim_get_param_group_params);
 LOAD_SYMBOL(_ignite_adamw_get_param_group_options);
 LOAD_SYMBOL(_ignite_adamw_set_param_group_options);
 LOAD_SYMBOL(_ignite_adamw_get_states);
 LOAD_SYMBOL(_ignite_adamw_set_states);
-LOAD_SYMBOL(_ignite_adamw_step);
-LOAD_SYMBOL(_ignite_adamw_zero_grad);
+LOAD_SYMBOL(_ignite_adam);
+LOAD_SYMBOL(_ignite_adam_add_param_group);
+LOAD_SYMBOL(_ignite_adam_get_param_group_options);
+LOAD_SYMBOL(_ignite_adam_set_param_group_options);
+LOAD_SYMBOL(_ignite_adam_get_states);
+LOAD_SYMBOL(_ignite_adam_set_states);
+LOAD_SYMBOL(_ignite_sgd);
+LOAD_SYMBOL(_ignite_sgd_add_param_group);
+LOAD_SYMBOL(_ignite_sgd_get_param_group_options);
+LOAD_SYMBOL(_ignite_sgd_set_param_group_options);
+LOAD_SYMBOL(_ignite_sgd_get_states);
+LOAD_SYMBOL(_ignite_sgd_set_states);
+LOAD_SYMBOL(_ignite_rmsprop);
+LOAD_SYMBOL(_ignite_rmsprop_add_param_group);
+LOAD_SYMBOL(_ignite_rmsprop_get_param_group_options);
+LOAD_SYMBOL(_ignite_rmsprop_set_param_group_options);
+LOAD_SYMBOL(_ignite_rmsprop_get_states);
+LOAD_SYMBOL(_ignite_rmsprop_set_states);
+LOAD_SYMBOL(_ignite_adagrad);
+LOAD_SYMBOL(_ignite_adagrad_add_param_group);
+LOAD_SYMBOL(_ignite_adagrad_get_param_group_options);
+LOAD_SYMBOL(_ignite_adagrad_set_param_group_options);
+LOAD_SYMBOL(_ignite_adagrad_get_states);
+LOAD_SYMBOL(_ignite_adagrad_set_states);
+LOAD_SYMBOL(_ignite_optim_parameters_with_state);
+LOAD_SYMBOL(_ignite_optim_get_param_groups);
+LOAD_SYMBOL(_ignite_optim_param_groups_size);
+LOAD_SYMBOL(_ignite_optim_get_param_group_params);
+LOAD_SYMBOL(_ignite_optim_step);
+LOAD_SYMBOL(_ignite_optim_zero_grad);
   /* Autogen Symbols -- Start */
   LOAD_SYMBOL(_lantern__cast_byte_tensor_bool)
   LOAD_SYMBOL(_lantern__cast_char_tensor_bool)
