@@ -1,5 +1,8 @@
 #include <torch.h>
 
+#define TORCH_PRCODE(x) CDR(x)
+#define TORCH_PRENV(x) TAG(x)
+
 static R_len_t dots_size(SEXP dots) {
   if (dots == R_UnboundValue) {
     // No dots at all in the environment
@@ -14,7 +17,7 @@ static R_len_t dots_size(SEXP dots) {
 
 // [[Rcpp::export]]
 std::vector<Rcpp::RObject> enquos0(Rcpp::Environment env) {
-  SEXP dots = Rf_findVarInFrame3(env, R_DotsSymbol, TRUE);
+  SEXP dots = Rf_findVarInFrame(env, R_DotsSymbol);
   std::vector<Rcpp::RObject> out;
   R_len_t size = dots_size(dots);
 
@@ -27,13 +30,13 @@ std::vector<Rcpp::RObject> enquos0(Rcpp::Environment env) {
     el = CAR(node);
 
     while (true) {
-      SEXP code = PRCODE(el);
+      SEXP code = TORCH_PRCODE(el);
       if (TYPEOF(code) != PROMSXP) break;
       el = code;
     }
 
-    c = PRCODE(el);
-    e = PRENV(el);
+    c = TORCH_PRCODE(el);
+    e = TORCH_PRENV(el);
 
     out.push_back(Rcpp::List::create(c, e));
   }
