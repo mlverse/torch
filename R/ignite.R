@@ -1,5 +1,5 @@
 #' @title Abstract Base Class for LibTorch Optimizers
-#' @description 
+#' @description
 #' Abstract base class for wrapping LibTorch C++ optimizers.
 #' @include optim.R utils-data.R optim-adamw.R RcppExports.R
 #' @export

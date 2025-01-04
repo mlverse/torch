@@ -116,7 +116,6 @@ void rcpp_ignite_adam_set_states (optim_adam opt, torch::TensorList params, torc
    ignite_adam_set_states(opt.get(), params.get(), states.get());
 }
 
-
 // [[Rcpp::export]]
 void rcpp_ignite_adam_add_param_group(optim_adam opt, torch::TensorList params, double lr, Rcpp::DoubleVector betas, double eps, double weight_decay, bool amsgrad) {
   adam_options options;
