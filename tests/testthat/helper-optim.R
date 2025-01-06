@@ -11,7 +11,7 @@ expect_optim_works <- function(optim, defaults) {
 
   w <- torch_randn(10, 1, requires_grad = TRUE)
   z <- torch_randn(10, 1, requires_grad = TRUE)
-  defaults[["params"]] <- list(w)
+  defaults[["params"]] <- list(w, z)
   opt <- do.call(optim, defaults)
 
   fn <- function() {

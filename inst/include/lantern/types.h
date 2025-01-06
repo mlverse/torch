@@ -92,10 +92,6 @@ void* Argument (const std::vector<c10::Argument>& x);
 void* FunctionSchema (const std::vector<c10::FunctionSchema>& x);
 }  // namespace vector
 
-// namespace optim {
-//   void* AdamW(const torch::optim::AdamW& x);
-// }
-
 template <class... T>
 void* tuple(std::tuple<T...> x) {
   return make_ptr<std::vector<void*>>(to_vector(x));
@@ -484,12 +480,6 @@ void* Argument (const std::vector<c10::Argument>& x) { return make_ptr<std::vect
 void* FunctionSchema (const std::vector<c10::FunctionSchema>& x) { return make_ptr<std::vector<c10::FunctionSchema>>(x); }
 
 }  // namespace vector
-
-// namespace optim {
-//   void* AdamW(const torch::optim::AdamW& x) {
-//     return make_ptr<torch::optim::AdamW>(move(x));
-//   }
-// }
 
 namespace optional {
 
