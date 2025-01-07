@@ -87,9 +87,9 @@ expect_state_dict_works <- function(optimizer_fn, ...) {
   expect_equal(w1, w2)
 }
 
-expect_ignite_can_change_param_groups <- function(optimizer_fn) {
+expect_ignite_can_change_param_groups <- function(optimizer_fn, ...) {
   n <- nn_linear(1, 1)
-  o <- optimizer_fn(n$parameters)
+  o <- optimizer_fn(n$parameters, ...)
   for (nm in names(o$param_groups[-1L])) {
     if (is.numeric(o$param_groups[[nm]])) {
       o$param_groups[[nm]] = o$param_groups[[nm]] * 0.1
@@ -103,7 +103,7 @@ expect_ignite_can_change_param_groups <- function(optimizer_fn) {
   }
 }
 
-expect_ignite_can_add_param_group <- function(optimizer_fn) {
+expect_ignite_can_add_param_group <- function(optimizer_fn, ...) {
   n <- nn_linear(1, 1)
   o <- optimizer_fn(n$parameters, lr = 0.1)
   n1 = nn_linear(1, 1)

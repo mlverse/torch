@@ -77,14 +77,14 @@ test_that("adamw", {
 
 test_that("sgd", {
   defaults <- sample_sgd_params()
-  expect_state_is_updated(optim_ignite_sgd)
+  expect_state_is_updated(optim_ignite_sgd, lr = 0.1, momentum = 0.9)
   o <- do.call(make_ignite_sgd, defaults)
   if (length(o$state_dict()$state)) {
     expect_equal(names(o$state_dict()$state), c("1", "2"))
     expect_true(is_permutation(names(o$state_dict()$state[[1]]), "momentum_buffer"))
   }
   expect_equal(o$param_groups[[1]][-1L][names(defaults)], defaults)
-  expect_ignite_can_change_param_groups(optim_ignite_sgd)
+  expect_ignite_can_change_param_groups(optim_ignite_sgd, lr = 0.1)
   expect_ignite_can_add_param_group(optim_ignite_sgd)
   do.call(expect_state_dict_works, c(list(optim_ignite_sgd), defaults))
 })

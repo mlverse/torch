@@ -33,9 +33,9 @@ expect_optim_works <- function(optim, defaults) {
   opt$state_dict()
 }
 
-expect_state_is_updated <- function(opt_fn) {
+expect_state_is_updated <- function(opt_fn, ...) {
   x <- torch_tensor(1, requires_grad = TRUE)
-  opt <- opt_fn(x)
+  opt <- opt_fn(x, ...)
   opt$zero_grad()
   y <- 2 * x
   y$backward()
@@ -51,7 +51,7 @@ expect_state_is_updated <- function(opt_fn) {
 
   state <- opt$state_dict()
   x2 <- torch_tensor(1, requires_grad = TRUE)
-  opt2 <- opt_fn(x)
+  opt2 <- opt_fn(x, ...)
   opt2$load_state_dict(state)
 
   x1 = unlist(opt2$state_dict()$state)

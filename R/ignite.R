@@ -165,7 +165,7 @@ optimizer_ignite = function (name = NULL, ..., private = NULL,
   )
 }
 
-#' @title LibTorch implementation of Adagrad        
+#' @title LibTorch implementation of Adagrad
 #' @inherit optim_adagrad  description
 #' @section Fields and Methods:
 #' See [`OptimizerIgnite`].
@@ -270,7 +270,6 @@ optim_ignite_sgd <- optimizer_ignite(
     .optim = function(params, ...) {
       rcpp_ignite_sgd(params = params, ...)
     },
-
     .set_states = rcpp_ignite_sgd_set_states,
     .add_param_group = rcpp_ignite_sgd_add_param_group,
     .assert_params = assert_sgd_params,

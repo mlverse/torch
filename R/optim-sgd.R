@@ -100,7 +100,9 @@ optim_sgd <- optimizer(
 
 
 assert_sgd_params <- function(lr, momentum, dampening, weight_decay, nesterov) {
-  if (!is_optim_required(lr) && lr < 0) {
+  if (is_optim_required(lr)) {
+    value_error("Need to specify a learning rate")
+  } else if (lr < 0) {
     value_error("Invalid learning rate: {lr}")
   }
 
