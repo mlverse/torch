@@ -13,6 +13,24 @@ optim_ignite_adam(
   amsgrad = FALSE
 )
 }
+\arguments{
+\item{params}{(iterable): iterable of parameters to optimize or dicts defining
+parameter groups}
+
+\item{lr}{(float, optional): learning rate (default: 1e-3)}
+
+\item{betas}{(\code{Tuple[float, float]}, optional): coefficients used for computing
+running averages of gradient and its square (default: (0.9, 0.999))}
+
+\item{eps}{(float, optional): term added to the denominator to improve
+numerical stability (default: 1e-8)}
+
+\item{weight_decay}{(float, optional): weight decay (L2 penalty) (default: 0)}
+
+\item{amsgrad}{(boolean, optional): whether to use the AMSGrad variant of this
+algorithm from the paper \href{https://openreview.net/forum?id=ryQu7f-RZ}{On the Convergence of Adam and Beyond}
+(default: FALSE)}
+}
 \description{
 It has been proposed in \href{https://arxiv.org/abs/1412.6980}{Adam: A Method for Stochastic Optimization}.
 }

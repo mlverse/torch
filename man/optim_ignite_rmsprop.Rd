@@ -14,6 +14,24 @@ optim_ignite_rmsprop(
   centered = FALSE
 )
 }
+\arguments{
+\item{params}{(iterable): iterable of parameters to optimize or list defining parameter groups}
+
+\item{lr}{(float, optional): learning rate (default: 1e-2)}
+
+\item{alpha}{(float, optional): smoothing constant (default: 0.99)}
+
+\item{eps}{(float, optional): term added to the denominator to improve
+numerical stability (default: 1e-8)}
+
+\item{weight_decay}{optional weight decay penalty. (default: 0)}
+
+\item{momentum}{(float, optional): momentum factor (default: 0)}
+
+\item{centered}{(bool, optional) : if \code{TRUE}, compute the centered RMSProp,
+the gradient is normalized by an estimation of its variance
+weight_decay (float, optional): weight decay (L2 penalty) (default: 0)}
+}
 \description{
 Proposed by G. Hinton in his course.
 }

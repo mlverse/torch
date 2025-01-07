@@ -151,6 +151,7 @@ OptimizerIgnite <- R6::R6Class(
 #' @title Abstract Base Class for LibTorch Optimizers
 #' @description
 #' Abstract base class for wrapping LibTorch C++ optimizers.
+#' @inheritParams optimizer
 #' @export
 #' @include optim.R utils-data.R
 optimizer_ignite = function (name = NULL, ..., private = NULL,
@@ -169,7 +170,7 @@ optimizer_ignite = function (name = NULL, ..., private = NULL,
 #' @inherit optim_adagrad  description
 #' @section Fields and Methods:
 #' See [`OptimizerIgnite`].
-#' @inheritParams torch::optim_adagrad
+#' @inheritParams optim_adagrad
 #' @export
 #' @include optim-adagrad.R
 #' @examples
@@ -207,7 +208,7 @@ optim_ignite_adagrad <- optimizer_ignite(
 #' @inherit optim_rmsprop  description
 #' @section Fields and Methods:
 #' See [`OptimizerIgnite`].
-#' @inheritParams torch::optim_rmsprop
+#' @inheritParams optim_rmsprop
 #' @export
 #'
 #' @include optim-rmsprop.R
@@ -246,7 +247,7 @@ optim_ignite_rmsprop <- optimizer_ignite(
 #' @inherit optim_sgd  description
 #' @section Fields and Methods:
 #' See [`OptimizerIgnite`].
-#' @inheritParams torch::optim_sgd
+#' @inheritParams optim_sgd
 #' @export
 #'
 #' @include optim-sgd.R
@@ -284,7 +285,7 @@ optim_ignite_sgd <- optimizer_ignite(
 #' @inherit optim_adam description
 #' @section Fields and Methods:
 #' See [`OptimizerIgnite`].
-#' @inheritParams torch::optim_adam
+#' @inheritParams optim_adam
 #' @export
 #'
 #' @include optim-adam.R
@@ -324,7 +325,7 @@ optim_ignite_adam <- optimizer_ignite(
 #' @inherit optim_adamw description
 #' @section Fields and Methods:
 #' See [`OptimizerIgnite`].
-#' @inheritParams torch::optim_adamw
+#' @inheritParams optim_adamw
 #' @export
 #'
 #' @include optim-adamw.R

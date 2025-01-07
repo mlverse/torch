@@ -13,6 +13,20 @@ optim_ignite_sgd(
   nesterov = FALSE
 )
 }
+\arguments{
+\item{params}{(iterable): iterable of parameters to optimize or dicts defining
+parameter groups}
+
+\item{lr}{(float): learning rate}
+
+\item{momentum}{(float, optional): momentum factor (default: 0)}
+
+\item{dampening}{(float, optional): dampening for momentum (default: 0)}
+
+\item{weight_decay}{(float, optional): weight decay (L2 penalty) (default: 0)}
+
+\item{nesterov}{(bool, optional): enables Nesterov momentum (default: FALSE)}
+}
 \description{
 Implements stochastic gradient descent (optionally with momentum).
 Nesterov momentum is based on the formula from
