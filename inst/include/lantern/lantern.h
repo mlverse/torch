@@ -93,7 +93,7 @@ extern std::string *pLanternLastError;
   LLOG("Error in %s", __func__)                                    \
   pLanternLastError = new std::string("Unknown error. ");          \
 }
- 
+
 #ifdef __cplusplus
 extern "C"
 {
@@ -135,6 +135,46 @@ enum IValue_types {
     IValueTypeUnknownType
 };
 
+extern "C" struct adamw_options {
+    double lr;
+    double weight_decay;
+    double betas[2];
+    double eps;
+    bool amsgrad;
+};
+
+extern "C" struct adagrad_options {
+    double lr;
+    double lr_decay;
+    double weight_decay;
+    double initial_accumulator_value;
+    double eps;
+};
+
+extern "C" struct adam_options {
+  double lr;
+  double weight_decay;
+  double betas[2];
+  double eps;
+  bool amsgrad;
+};
+
+extern "C" struct rmsprop_options {
+  double lr;
+  double alpha;
+  double eps;
+  double weight_decay;
+  double momentum;
+  bool centered;
+};
+
+extern "C" struct sgd_options {
+  double lr;
+  double momentum;
+  double dampening;
+  double weight_decay;
+  bool nesterov;
+};
 
 
 #define LANTERN_TYPE2VOID_DECL(type, name)                            \
@@ -143,7 +183,7 @@ enum IValue_types {
       LANTERN_CHECK_LOADED                                            \
       type ret = _##name(x);                                          \
       LANTERN_HOST_HANDLER return ret;                                \
-  }                                                                     
+  }
 
 #define LANTERN_VOID2VOID_DECL(type, name)                            \
   LANTERN_API type (LANTERN_PTR _##name) (void*);                     \
@@ -543,12 +583,12 @@ LANTERN_OPTIONAL_DECLS(string_view)
   HOST_API void * lantern_tensor_load(void * s, void* device, bool base64) {LANTERN_CHECK_LOADED void * ret = _lantern_tensor_load(s, device, base64); LANTERN_HOST_HANDLER return ret;}
   LANTERN_API void * (LANTERN_PTR _lantern_test_tensor)();
   HOST_API void * lantern_test_tensor() {LANTERN_CHECK_LOADED void * ret = _lantern_test_tensor(); LANTERN_HOST_HANDLER return ret;}
-  LANTERN_API void (LANTERN_PTR _lantern_test_print)(void* x); 
+  LANTERN_API void (LANTERN_PTR _lantern_test_print)(void* x);
   HOST_API void lantern_test_print(void* x) {LANTERN_CHECK_LOADED _lantern_test_print(x); LANTERN_HOST_HANDLER }
   LANTERN_API size_t (LANTERN_PTR _lantern_tensor_serialized_size) (const char * s);
   HOST_API size_t lantern_tensor_serialized_size(const char * s) {LANTERN_CHECK_LOADED size_t ret = _lantern_tensor_serialized_size(s); LANTERN_HOST_HANDLER return ret;}
   LANTERN_API void (LANTERN_PTR _lantern_const_char_delete) (const char * x);
-  HOST_API void lantern_const_char_delete(const char * x) {LANTERN_CHECK_LOADED _lantern_const_char_delete(x); LANTERN_HOST_HANDLER}  
+  HOST_API void lantern_const_char_delete(const char * x) {LANTERN_CHECK_LOADED _lantern_const_char_delete(x); LANTERN_HOST_HANDLER}
   LANTERN_API void (LANTERN_PTR _lantern_Tensor_index_put_tensor_) (void* self, void* index, void* rhs);
   HOST_API void lantern_Tensor_index_put_tensor_ (void* self, void* index, void* rhs) {LANTERN_CHECK_LOADED _lantern_Tensor_index_put_tensor_(self, index, rhs); LANTERN_HOST_HANDLER}
   LANTERN_API void (LANTERN_PTR _lantern_Tensor_index_put_scalar_) (void* self, void* index, void* rhs);
@@ -577,7 +617,7 @@ LANTERN_OPTIONAL_DECLS(string_view)
   HOST_API void* lantern_function_schema_argument_name(void* argument) {LANTERN_CHECK_LOADED void* ret = _lantern_function_schema_argument_name(argument); LANTERN_HOST_HANDLER return ret;}
   LANTERN_API void*(LANTERN_PTR _lantern_function_schema_argument_type)(void* argument);
   HOST_API void* lantern_function_schema_argument_type(void *argument) {LANTERN_CHECK_LOADED void* ret = _lantern_function_schema_argument_type(argument); LANTERN_HOST_HANDLER return ret;}
-  LANTERN_API void*(LANTERN_PTR _lantern_function_schema_returns)(void* schema); 
+  LANTERN_API void*(LANTERN_PTR _lantern_function_schema_returns)(void* schema);
   HOST_API void* lantern_function_schema_returns(void* schema) {LANTERN_CHECK_LOADED void* ret = _lantern_function_schema_returns(schema); LANTERN_HOST_HANDLER return ret;}
   LANTERN_API void*(LANTERN_PTR _lantern_function_schema_return_type)(void* return_);
   HOST_API void* lantern_function_schema_return_type(void* return_) {LANTERN_CHECK_LOADED void* ret = _lantern_function_schema_return_type(return_); LANTERN_HOST_HANDLER return ret;}
@@ -591,7 +631,7 @@ LANTERN_OPTIONAL_DECLS(string_view)
   HOST_API void* lantern_jit_all_schemas_for(void* name) {LANTERN_CHECK_LOADED void* ret = _lantern_jit_all_schemas_for(name); LANTERN_HOST_HANDLER return ret;}
   LANTERN_API void*(LANTERN_PTR _lantern_jit_execute)(void* name, void* stack);
   HOST_API void* lantern_jit_execute(void* name, void* stack) {LANTERN_CHECK_LOADED void* ret = _lantern_jit_execute(name, stack); LANTERN_HOST_HANDLER return ret;}
-  
+
   LANTERN_API void* (LANTERN_PTR _lantern_load_state_dict) (void* path, bool legacy_stream);
   HOST_API void * lantern_load_state_dict (void* path, bool legacy_stream)
   {
@@ -916,11 +956,11 @@ HOST_API void lantern_vector_bool_delete (void* x)
 }
 
 LANTERN_API void* (LANTERN_PTR _lantern_normal_double_double_intarrayref_generator_tensoroptions) (double mean, double std, void* size, void* generator, void* options);
-HOST_API void* lantern_normal_double_double_intarrayref_generator_tensoroptions (double mean, double std, void* size, void* generator, void* options) 
+HOST_API void* lantern_normal_double_double_intarrayref_generator_tensoroptions (double mean, double std, void* size, void* generator, void* options)
 {
   LANTERN_CHECK_LOADED
   void* ret = _lantern_normal_double_double_intarrayref_generator_tensoroptions(mean, std, size, generator, options);
-  LANTERN_HOST_HANDLER 
+  LANTERN_HOST_HANDLER
   return ret;
 }
 
@@ -929,7 +969,7 @@ HOST_API void* lantern_normal_tensor_tensor_generator (void* mean, void* std, vo
 {
   LANTERN_CHECK_LOADED
   void* ret = _lantern_normal_tensor_tensor_generator(mean, std, generator);
-  LANTERN_HOST_HANDLER 
+  LANTERN_HOST_HANDLER
   return ret;
 }
 
@@ -938,7 +978,7 @@ HOST_API void* lantern_normal_double_tensor_generator (double mean, void* std, v
 {
   LANTERN_CHECK_LOADED
   void* ret = _lantern_normal_double_tensor_generator(mean, std, generator);
-  LANTERN_HOST_HANDLER 
+  LANTERN_HOST_HANDLER
   return ret;
 }
 
@@ -947,7 +987,7 @@ HOST_API void* lantern_normal_tensor_double_generator (void* mean, double std, v
 {
   LANTERN_CHECK_LOADED
   void* ret = _lantern_normal_tensor_double_generator(mean, std, generator);
-  LANTERN_HOST_HANDLER 
+  LANTERN_HOST_HANDLER
   return ret;
 }
 
@@ -1122,7 +1162,7 @@ HOST_API void lantern_ScriptModule_train (void* module, bool on)
   LANTERN_CHECK_LOADED
    _lantern_ScriptModule_train(module, on);
   LANTERN_HOST_HANDLER;
-  
+
 }
 
 LANTERN_API void (LANTERN_PTR _lantern_ScriptModule_to) (void* module, void* device, bool non_blocking);
@@ -1139,7 +1179,7 @@ HOST_API void lantern_ScriptModule_set_optimized (void* module, bool o)
   LANTERN_CHECK_LOADED
    _lantern_ScriptModule_set_optimized(module, o);
   LANTERN_HOST_HANDLER;
-  
+
 }
 
 LANTERN_API bool (LANTERN_PTR _lantern_ScriptModule_is_training) (void* module);
@@ -1202,7 +1242,7 @@ HOST_API void lantern_jit_named_module_list_delete (void* x)
   LANTERN_CHECK_LOADED
    _lantern_jit_named_module_list_delete(x);
   LANTERN_HOST_HANDLER;
-  
+
 }
 
 LANTERN_API void (LANTERN_PTR _lantern_ScriptModule_register_parameter) (void* module, void* name, void* v, bool is_buffer);
@@ -1211,7 +1251,7 @@ HOST_API void lantern_ScriptModule_register_parameter (void* module, void* name,
   LANTERN_CHECK_LOADED
    _lantern_ScriptModule_register_parameter(module, name, v, is_buffer);
   LANTERN_HOST_HANDLER;
-  
+
 }
 
 LANTERN_API void (LANTERN_PTR _lantern_ScriptModule_register_buffer) (void* module, void* name, void* v);
@@ -1220,7 +1260,7 @@ HOST_API void lantern_ScriptModule_register_buffer (void* module, void* name, vo
   LANTERN_CHECK_LOADED
    _lantern_ScriptModule_register_buffer(module, name, v);
   LANTERN_HOST_HANDLER;
-  
+
 }
 
 LANTERN_API void (LANTERN_PTR _lantern_ScriptModule_register_module) (void* self, void* name, void* module);
@@ -1229,7 +1269,7 @@ HOST_API void lantern_ScriptModule_register_module (void* self, void* name, void
   LANTERN_CHECK_LOADED
    _lantern_ScriptModule_register_module(self, name, module);
   LANTERN_HOST_HANDLER;
-  
+
 }
 
 LANTERN_API void (LANTERN_PTR _lantern_ScriptModule_register_attribute) (void* module, void* name, void* t, void* v, bool is_param, bool is_buffer);
@@ -1238,7 +1278,7 @@ HOST_API void lantern_ScriptModule_register_attribute (void* module, void* name,
   LANTERN_CHECK_LOADED
    _lantern_ScriptModule_register_attribute(module, name, t, v, is_param, is_buffer);
   LANTERN_HOST_HANDLER;
-  
+
 }
 
 LANTERN_API void* (LANTERN_PTR _lantern_jit_named_buffer_list_names) (void* self);
@@ -1283,7 +1323,7 @@ HOST_API void lantern_jit_named_buffer_list_delete (void* x)
   LANTERN_CHECK_LOADED
    _lantern_jit_named_buffer_list_delete(x);
   LANTERN_HOST_HANDLER;
-  
+
 }
 
 LANTERN_API void* (LANTERN_PTR _lantern_ScriptModule_children) (void* module);
@@ -1301,7 +1341,7 @@ HOST_API void lantern_jit_ScriptMethod_delete (void* x)
   LANTERN_CHECK_LOADED
    _lantern_jit_ScriptMethod_delete(x);
   LANTERN_HOST_HANDLER;
-  
+
 }
 
 LANTERN_API void* (LANTERN_PTR _lantern_ScriptModule_find_method) (void* self, void* basename);
@@ -1481,7 +1521,7 @@ HOST_API void lantern_GenericDict_delete (void* x)
   LANTERN_CHECK_LOADED
    _lantern_GenericDict_delete(x);
   LANTERN_HOST_HANDLER;
-  
+
 }
 
 LANTERN_API void (LANTERN_PTR _lantern_GenericList_delete) (void* x);
@@ -1490,7 +1530,7 @@ HOST_API void lantern_GenericList_delete (void* x)
   LANTERN_CHECK_LOADED
    _lantern_GenericList_delete(x);
   LANTERN_HOST_HANDLER;
-  
+
 }
 
 LANTERN_API void* (LANTERN_PTR _lantern_Stack_at) (void* self, int64_t index);
@@ -1679,7 +1719,7 @@ HOST_API void lantern_vector_double_delete (void* x)
   LANTERN_CHECK_LOADED
    _lantern_vector_double_delete(x);
   LANTERN_HOST_HANDLER;
-  
+
 }
 
 LANTERN_API void* (LANTERN_PTR _lantern_vector_double_new) ();
@@ -1706,7 +1746,7 @@ HOST_API void lantern_vector_double_push_back (void* self, double x)
   LANTERN_CHECK_LOADED
    _lantern_vector_double_push_back(self, x);
   LANTERN_HOST_HANDLER;
-  
+
 }
 
 LANTERN_API void (LANTERN_PTR _lantern_vector_int64_t_push_back) (void* self, int64_t x);
@@ -1715,7 +1755,7 @@ HOST_API void lantern_vector_int64_t_push_back (void* self, int64_t x)
   LANTERN_CHECK_LOADED
    _lantern_vector_int64_t_push_back(self, x);
   LANTERN_HOST_HANDLER;
-  
+
 }
 
 LANTERN_API char * (LANTERN_PTR _lantern_string_get) (void* self);
@@ -1733,7 +1773,7 @@ HOST_API void lantern_jit_Tuple_delete (void *x)
   LANTERN_CHECK_LOADED
    _lantern_jit_Tuple_delete(x);
   LANTERN_HOST_HANDLER;
-  
+
 }
 
 LANTERN_API void* (LANTERN_PTR _lantern_IValue_from_Tuple) (void* self);
@@ -1760,7 +1800,7 @@ HOST_API void lantern_jit_Tuple_push_back (void* self, void* element)
   LANTERN_CHECK_LOADED
    _lantern_jit_Tuple_push_back(self, element);
   LANTERN_HOST_HANDLER;
-  
+
 }
 
 LANTERN_API int64_t (LANTERN_PTR _lantern_jit_Tuple_size) (void* self);
@@ -1787,7 +1827,7 @@ HOST_API void lantern_jit_TensorDict_delete (void *x)
   LANTERN_CHECK_LOADED
    _lantern_jit_TensorDict_delete(x);
   LANTERN_HOST_HANDLER;
-  
+
 }
 
 LANTERN_API void (LANTERN_PTR _lantern_jit_GenericDict_delete) (void *x);
@@ -1796,7 +1836,7 @@ HOST_API void lantern_jit_GenericDict_delete (void *x)
   LANTERN_CHECK_LOADED
    _lantern_jit_GenericDict_delete(x);
   LANTERN_HOST_HANDLER;
-  
+
 }
 
 LANTERN_API void (LANTERN_PTR _lantern_jit_GenericList_delete) (void *x);
@@ -1805,7 +1845,7 @@ HOST_API void lantern_jit_GenericList_delete (void *x)
   LANTERN_CHECK_LOADED
    _lantern_jit_GenericList_delete(x);
   LANTERN_HOST_HANDLER;
-  
+
 }
 
 LANTERN_API void* (LANTERN_PTR _lantern_jit_TensorDict_new) ();
@@ -1823,7 +1863,7 @@ HOST_API void lantern_jit_TensorDict_push_back (void* self, void* key, void* val
   LANTERN_CHECK_LOADED
    _lantern_jit_TensorDict_push_back(self, key, value);
   LANTERN_HOST_HANDLER;
-  
+
 }
 
 LANTERN_API void* (LANTERN_PTR _lantern_jit_GenericDict_keys) (void* self);
@@ -1877,7 +1917,7 @@ HOST_API void lantern_jit_vector_IValue_delete (void* x)
   LANTERN_CHECK_LOADED
    _lantern_jit_vector_IValue_delete(x);
   LANTERN_HOST_HANDLER;
-  
+
 }
 
 LANTERN_API int64_t (LANTERN_PTR _lantern_jit_vector_IValue_size) (void* self);
@@ -1913,7 +1953,7 @@ HOST_API void lantern_jit_NamedTuple_push_back (void* self, void* name, void* el
   LANTERN_CHECK_LOADED
    _lantern_jit_NamedTuple_push_back(self, name, element);
   LANTERN_HOST_HANDLER;
-  
+
 }
 
 LANTERN_API void* (LANTERN_PTR _lantern_jit_NamedTupleHelper_keys) (void* self);
@@ -1949,7 +1989,7 @@ HOST_API void lantern_NamedTupleHelper_delete (void* x)
   LANTERN_CHECK_LOADED
    _lantern_NamedTupleHelper_delete(x);
   LANTERN_HOST_HANDLER;
-  
+
 }
 
 LANTERN_API void (LANTERN_PTR _lantern_Stack_push_back_IValue) (void* self, void* x);
@@ -1958,7 +1998,7 @@ HOST_API void lantern_Stack_push_back_IValue (void* self, void* x)
   LANTERN_CHECK_LOADED
    _lantern_Stack_push_back_IValue(self, x);
   LANTERN_HOST_HANDLER;
-  
+
 }
 
 LANTERN_API void (LANTERN_PTR _lantern_FunctionPtr_delete) (void* x);
@@ -1967,7 +2007,7 @@ HOST_API void lantern_FunctionPtr_delete (void* x)
   LANTERN_CHECK_LOADED
    _lantern_FunctionPtr_delete(x);
   LANTERN_HOST_HANDLER;
-  
+
 }
 
 LANTERN_API void* (LANTERN_PTR _lantern_IValue_from_None) ();
@@ -2021,7 +2061,7 @@ HOST_API void lantern_ScriptModule_add_constant (void* self, void* name, void* v
   LANTERN_CHECK_LOADED
    _lantern_ScriptModule_add_constant(self, name, value);
   LANTERN_HOST_HANDLER;
-  
+
 }
 
 LANTERN_API void* (LANTERN_PTR _lantern_ScriptModule_find_constant) (void* self, void* name);
@@ -2039,7 +2079,7 @@ HOST_API void lantern_ScriptModule_add_method (void* self, void* method)
   LANTERN_CHECK_LOADED
    _lantern_ScriptModule_add_method(self, method);
   LANTERN_HOST_HANDLER;
-  
+
 }
 LANTERN_API void (LANTERN_PTR _lantern_ScriptModule_add_forward) (void* self, bool list_output);
 HOST_API void lantern_ScriptModule_add_forward (void* self, bool list_output)
@@ -2056,7 +2096,7 @@ HOST_API void lantern_ScriptModule_save (void* self, void* path)
   LANTERN_CHECK_LOADED
    _lantern_ScriptModule_save(self, path);
   LANTERN_HOST_HANDLER;
-  
+
 }
 
 LANTERN_API void (LANTERN_PTR _lantern_ScriptModule_save_for_mobile) (void* self, void* path);
@@ -2064,7 +2104,7 @@ HOST_API void lantern_ScriptModule_save_for_mobile (void* self, void* path)
 {
   _lantern_ScriptModule_save_for_mobile(self, path);
   LANTERN_HOST_HANDLER;
-  
+
 }
 
 LANTERN_API void* (LANTERN_PTR _lantern_vector_Scalar_new) ();
@@ -2082,7 +2122,7 @@ HOST_API void lantern_vector_Scalar_push_back (void* self, void* value)
   LANTERN_CHECK_LOADED
    _lantern_vector_Scalar_push_back(self, value);
   LANTERN_HOST_HANDLER;
-  
+
 }
 
 LANTERN_API int64_t (LANTERN_PTR _lantern_vector_Scalar_size) (void* self);
@@ -2109,7 +2149,7 @@ HOST_API void lantern_vector_Scalar_delete (void* x)
   LANTERN_CHECK_LOADED
    _lantern_vector_Scalar_delete(x);
   LANTERN_HOST_HANDLER;
-  
+
 }
 
 LANTERN_API void* (LANTERN_PTR _lantern_contrib_sort_vertices) (void* vertices, void* mask, void* num_valid);
@@ -2136,7 +2176,7 @@ HOST_API void lantern_autograd_set_detect_anomaly (bool enabled)
   LANTERN_CHECK_LOADED
    _lantern_autograd_set_detect_anomaly(enabled);
   LANTERN_HOST_HANDLER;
-  
+
 }
 
 LANTERN_API bool (LANTERN_PTR _lantern_autograd_detect_anomaly_is_enabled) ();
@@ -2181,7 +2221,7 @@ HOST_API void lantern_OptionalTensorList_delete (void* x)
   LANTERN_CHECK_LOADED
    _lantern_OptionalTensorList_delete(x);
   LANTERN_HOST_HANDLER;
-  
+
 }
 
 LANTERN_API int64_t (LANTERN_PTR _lantern_OptionalTensorList_size) (void* self);
@@ -2251,7 +2291,7 @@ HOST_API void lantern_Function_lambda_delete (void* x)
 {
   LANTERN_CHECK_LOADED
    _lantern_Function_lambda_delete(x);
-  LANTERN_HOST_HANDLER; 
+  LANTERN_HOST_HANDLER;
 }
 
 LANTERN_API void (LANTERN_PTR _lantern_autograd_edge_list_delete) (void* x);
@@ -2325,7 +2365,7 @@ HOST_API void set_delete_lambda_fun (void (*fun)(void*))
 LANTERN_API void* (LANTERN_PTR _lantern_from_blob) (void* data, int64_t *sizes, size_t sizes_size,
                           int64_t* strides, size_t strides_size, void* options);
 HOST_API void* lantern_from_blob(void* data, int64_t *sizes, size_t sizes_size,
-                          int64_t* strides, size_t strides_size, void* options) { 
+                          int64_t* strides, size_t strides_size, void* options) {
   LANTERN_CHECK_LOADED
   void* ret = _lantern_from_blob(data, sizes, sizes_size, strides, strides_size, options);
   LANTERN_HOST_HANDLER;
@@ -2342,7 +2382,7 @@ HOST_API int lantern_string_size (void* self)
 }
 
 LANTERN_API void (LANTERN_PTR _lantern_set_gc_called) (bool called);
-HOST_API void lantern_set_gc_called (bool called) 
+HOST_API void lantern_set_gc_called (bool called)
 {
   LANTERN_CHECK_LOADED
   _lantern_set_gc_called(called);
@@ -2350,7 +2390,7 @@ HOST_API void lantern_set_gc_called (bool called)
 }
 
 LANTERN_API void* (LANTERN_PTR _lantern_torch_show_config) ();
-HOST_API void* lantern_torch_show_config () 
+HOST_API void* lantern_torch_show_config ()
 {
   LANTERN_CHECK_LOADED
   void* ret = _lantern_torch_show_config();
@@ -2359,7 +2399,7 @@ HOST_API void* lantern_torch_show_config ()
 }
 
 LANTERN_API void* (LANTERN_PTR _lantern_torch_parallel_info) ();
-HOST_API void* lantern_torch_parallel_info () 
+HOST_API void* lantern_torch_parallel_info ()
 {
   LANTERN_CHECK_LOADED
   void* ret = _lantern_torch_parallel_info();
@@ -2445,7 +2485,7 @@ HOST_API void lantern_amp_autocast_set_gpu_enabled (bool enabled)
   LANTERN_CHECK_LOADED
    _lantern_amp_autocast_set_gpu_enabled(enabled);
   LANTERN_HOST_HANDLER;
-  
+
 }
 
 LANTERN_API void (LANTERN_PTR _lantern_amp_autocast_set_cpu_enabled) (bool enabled);
@@ -2454,7 +2494,7 @@ HOST_API void lantern_amp_autocast_set_cpu_enabled (bool enabled)
   LANTERN_CHECK_LOADED
    _lantern_amp_autocast_set_cpu_enabled(enabled);
   LANTERN_HOST_HANDLER;
-  
+
 }
 
 LANTERN_API void (LANTERN_PTR _lantern_amp_autocast_set_gpu_dtype) (void* dtype);
@@ -2463,7 +2503,7 @@ HOST_API void lantern_amp_autocast_set_gpu_dtype (void* dtype)
   LANTERN_CHECK_LOADED
    _lantern_amp_autocast_set_gpu_dtype(dtype);
   LANTERN_HOST_HANDLER;
-  
+
 }
 
 LANTERN_API void (LANTERN_PTR _lantern_amp_autocast_set_cpu_dtype) (void* dtype);
@@ -2472,7 +2512,7 @@ HOST_API void lantern_amp_autocast_set_cpu_dtype (void* dtype)
   LANTERN_CHECK_LOADED
    _lantern_amp_autocast_set_cpu_dtype(dtype);
   LANTERN_HOST_HANDLER;
-  
+
 }
 
 LANTERN_API void (LANTERN_PTR _lantern_amp_autocast_set_cache_enabled) (bool enabled);
@@ -2481,7 +2521,7 @@ HOST_API void lantern_amp_autocast_set_cache_enabled (bool enabled)
   LANTERN_CHECK_LOADED
    _lantern_amp_autocast_set_cache_enabled(enabled);
   LANTERN_HOST_HANDLER;
-  
+
 }
 
 LANTERN_API bool (LANTERN_PTR _lantern_amp_autocast_is_cache_enabled) ();
@@ -2517,7 +2557,7 @@ HOST_API void lantern_amp_autocast_increment_nesting ()
   LANTERN_CHECK_LOADED
    _lantern_amp_autocast_increment_nesting();
   LANTERN_HOST_HANDLER;
-  
+
 }
 
 LANTERN_API int (LANTERN_PTR _lantern_amp_autocast_decrement_nesting) ();
@@ -2535,7 +2575,7 @@ HOST_API void lantern_amp_autocast_clear_cache ()
   LANTERN_CHECK_LOADED
    _lantern_amp_autocast_clear_cache();
   LANTERN_HOST_HANDLER;
-  
+
 }
 
 LANTERN_API int (LANTERN_PTR _lantern_amp_foreach_non_finite_check_and_unscale) (void* params, void* found_inf, void* inv_scale);
@@ -2553,7 +2593,7 @@ HOST_API void lantern_amp_update_scale_ (void* self, void* growth_tracker, void*
   LANTERN_CHECK_LOADED
    _lantern_amp_update_scale_(self, growth_tracker, found_inf, scale_growth_factor, scale_backoff_factor, growth_interval);
   LANTERN_HOST_HANDLER;
-  
+
 }
 
 LANTERN_API void (LANTERN_PTR _lantern_cuda_set_rng_state) (int device, void* state);
@@ -2562,7 +2602,7 @@ HOST_API void lantern_cuda_set_rng_state (int device, void* state)
   LANTERN_CHECK_LOADED
    _lantern_cuda_set_rng_state(device, state);
   LANTERN_HOST_HANDLER;
-  
+
 }
 
 LANTERN_API void* (LANTERN_PTR _lantern_cuda_get_rng_state) (int device);
@@ -2589,7 +2629,7 @@ HOST_API void lantern_cpu_set_rng_state (void* state)
   LANTERN_CHECK_LOADED
    _lantern_cpu_set_rng_state(state);
   LANTERN_HOST_HANDLER;
-  
+
 }
 
 LANTERN_API void* (LANTERN_PTR _lantern_Dtype_from_string) (void* dtype_str);
@@ -2606,7 +2646,361 @@ HOST_API void lantern_buffer_from_tensor (void* tensor, void* buffer, int n)
 {
   LANTERN_CHECK_LOADED
    _lantern_buffer_from_tensor(tensor, buffer, n);
-  LANTERN_HOST_HANDLER; 
+  LANTERN_HOST_HANDLER;
+}
+
+LANTERN_API void* (LANTERN_PTR _ignite_adagrad) (void* params, double lr, double lr_decay, double weight_decay, double eps, double initial_accumulator_value);
+HOST_API void* ignite_adagrad (void* params, double lr, double lr_decay, double weight_decay, double eps, double initial_accumulator_value) {
+  LANTERN_CHECK_LOADED
+  void* ret = _ignite_adagrad(params, lr, lr_decay, weight_decay, eps, initial_accumulator_value);
+  LANTERN_HOST_HANDLER;
+  return ret;
+}
+
+LANTERN_API void (LANTERN_PTR _ignite_adagrad_add_param_group) (void* optim, void* params, adagrad_options options);
+HOST_API void ignite_adagrad_add_param_group (void* optim, void* params, adagrad_options options) {
+  LANTERN_CHECK_LOADED
+  _ignite_adagrad_add_param_group(optim, params, options);
+  LANTERN_HOST_HANDLER;
+}
+
+LANTERN_API adagrad_options (LANTERN_PTR _ignite_adagrad_get_param_group_options) (void* groups, int i);
+HOST_API adagrad_options ignite_adagrad_get_param_group_options (void* groups, int i)
+{
+  LANTERN_CHECK_LOADED
+  adagrad_options ret = _ignite_adagrad_get_param_group_options(groups, i);
+  LANTERN_HOST_HANDLER;
+  return ret;
+}
+
+LANTERN_API void (LANTERN_PTR _ignite_adagrad_set_param_group_options) (void* opt, int i, adagrad_options options);
+HOST_API void ignite_adagrad_set_param_group_options (void* opt, int i, adagrad_options options)
+{
+  LANTERN_CHECK_LOADED
+   _ignite_adagrad_set_param_group_options(opt, i, options);
+  LANTERN_HOST_HANDLER;
+
+}
+
+LANTERN_API void* (LANTERN_PTR _ignite_adagrad_get_states) (void* optim);
+HOST_API void* ignite_adagrad_get_states (void* optim)
+{
+  LANTERN_CHECK_LOADED
+  void* ret = _ignite_adagrad_get_states(optim);
+  LANTERN_HOST_HANDLER;
+  return ret;
+}
+
+LANTERN_API void (LANTERN_PTR _ignite_adagrad_set_states) (void* optim, void* params, void* states_);
+HOST_API void ignite_adagrad_set_states (void* optim, void* params, void* states_)
+{
+  LANTERN_CHECK_LOADED
+   _ignite_adagrad_set_states(optim, params, states_);
+  LANTERN_HOST_HANDLER;
+
+}
+
+LANTERN_API void (LANTERN_PTR _lantern_optim_adagrad_delete) (void* x);
+HOST_API void lantern_optim_adagrad_delete (void* x) {
+  LANTERN_CHECK_LOADED
+   _lantern_optim_adagrad_delete(x);
+  LANTERN_HOST_HANDLER;
+}
+
+LANTERN_API void* (LANTERN_PTR _ignite_rmsprop) (void* params, double lr, double alpha, double eps, double weight_decay, double momentum, bool centered);
+HOST_API void* ignite_rmsprop (void* params, double lr, double alpha, double eps, double weight_decay, double momentum, bool centered) {
+  LANTERN_CHECK_LOADED
+  void* ret = _ignite_rmsprop(params, lr, alpha, eps, weight_decay, momentum, centered);
+  LANTERN_HOST_HANDLER;
+  return ret;
+}
+
+LANTERN_API void (LANTERN_PTR _ignite_rmsprop_add_param_group) (void* optim, void* params, rmsprop_options options);
+HOST_API void ignite_rmsprop_add_param_group (void* optim, void* params, rmsprop_options options) {
+  LANTERN_CHECK_LOADED
+  _ignite_rmsprop_add_param_group(optim, params, options);
+  LANTERN_HOST_HANDLER;
+}
+
+LANTERN_API rmsprop_options (LANTERN_PTR _ignite_rmsprop_get_param_group_options) (void* groups, int i);
+HOST_API rmsprop_options ignite_rmsprop_get_param_group_options (void* groups, int i)
+{
+  LANTERN_CHECK_LOADED
+  rmsprop_options ret = _ignite_rmsprop_get_param_group_options(groups, i);
+  LANTERN_HOST_HANDLER;
+  return ret;
+}
+
+LANTERN_API void (LANTERN_PTR _ignite_rmsprop_set_param_group_options) (void* opt, int i, rmsprop_options options);
+HOST_API void ignite_rmsprop_set_param_group_options (void* opt, int i, rmsprop_options options)
+{
+  LANTERN_CHECK_LOADED
+   _ignite_rmsprop_set_param_group_options(opt, i, options);
+  LANTERN_HOST_HANDLER;
+
+}
+
+LANTERN_API void* (LANTERN_PTR _ignite_rmsprop_get_states) (void* optim);
+HOST_API void* ignite_rmsprop_get_states (void* optim)
+{
+  LANTERN_CHECK_LOADED
+  void* ret = _ignite_rmsprop_get_states(optim);
+  LANTERN_HOST_HANDLER;
+  return ret;
+}
+
+LANTERN_API void (LANTERN_PTR _ignite_rmsprop_set_states) (void* optim, void* params, void* states_);
+HOST_API void ignite_rmsprop_set_states (void* optim, void* params, void* states_)
+{
+  LANTERN_CHECK_LOADED
+   _ignite_rmsprop_set_states(optim, params, states_);
+  LANTERN_HOST_HANDLER;
+
+}
+
+LANTERN_API void (LANTERN_PTR _lantern_optim_rmsprop_delete) (void* x);
+HOST_API void lantern_optim_rmsprop_delete (void* x) {
+  LANTERN_CHECK_LOADED
+   _lantern_optim_rmsprop_delete(x);
+  LANTERN_HOST_HANDLER;
+}
+
+LANTERN_API void* (LANTERN_PTR _ignite_adam) (void* params, double lr, double beta1, double beta2, double eps, double weight_decay, bool amsgrad);
+HOST_API void* ignite_adam (void* params, double lr, double beta1, double beta2, double eps, double weight_decay, bool amsgrad) {
+  LANTERN_CHECK_LOADED
+  void* ret = _ignite_adam(params, lr, beta1, beta2, eps, weight_decay, amsgrad);
+  LANTERN_HOST_HANDLER;
+  return ret;
+}
+
+LANTERN_API void (LANTERN_PTR _ignite_adam_add_param_group) (void* optim, void* params, adam_options options);
+HOST_API void ignite_adam_add_param_group (void* optim, void* params, adam_options options) {
+  LANTERN_CHECK_LOADED
+  _ignite_adam_add_param_group(optim, params, options);
+  LANTERN_HOST_HANDLER;
+}
+
+LANTERN_API adam_options (LANTERN_PTR _ignite_adam_get_param_group_options) (void* groups, int i);
+HOST_API adam_options ignite_adam_get_param_group_options (void* groups, int i)
+{
+  LANTERN_CHECK_LOADED
+  adam_options ret = _ignite_adam_get_param_group_options(groups, i);
+  LANTERN_HOST_HANDLER;
+  return ret;
+}
+
+LANTERN_API void (LANTERN_PTR _ignite_adam_set_param_group_options) (void* opt, int i, adam_options options);
+HOST_API void ignite_adam_set_param_group_options (void* opt, int i, adam_options options)
+{
+  LANTERN_CHECK_LOADED
+   _ignite_adam_set_param_group_options(opt, i, options);
+  LANTERN_HOST_HANDLER;
+
+}
+
+LANTERN_API void* (LANTERN_PTR _ignite_adam_get_states) (void* optim);
+HOST_API void* ignite_adam_get_states (void* optim)
+{
+  LANTERN_CHECK_LOADED
+  void* ret = _ignite_adam_get_states(optim);
+  LANTERN_HOST_HANDLER;
+  return ret;
+}
+
+LANTERN_API void (LANTERN_PTR _ignite_adam_set_states) (void* optim, void* params, void* states_);
+HOST_API void ignite_adam_set_states (void* optim, void* params, void* states_)
+{
+  LANTERN_CHECK_LOADED
+   _ignite_adam_set_states(optim, params, states_);
+  LANTERN_HOST_HANDLER;
+
+}
+
+LANTERN_API void (LANTERN_PTR _lantern_optim_adam_delete) (void* x);
+HOST_API void lantern_optim_adam_delete (void* x) {
+  LANTERN_CHECK_LOADED
+   _lantern_optim_adam_delete(x);
+  LANTERN_HOST_HANDLER;
+}
+
+LANTERN_API void* (LANTERN_PTR _ignite_sgd) (void* params, double lr, double momentum, double dampening, double weight_decay, bool nesterov);
+HOST_API void* ignite_sgd (void* params, double lr, double momentum, double dampening, double weight_decay, bool nesterov) {
+  LANTERN_CHECK_LOADED
+  void* ret = _ignite_sgd(params, lr, momentum, dampening, weight_decay, nesterov);
+  LANTERN_HOST_HANDLER;
+  return ret;
+}
+
+LANTERN_API void (LANTERN_PTR _ignite_sgd_add_param_group) (void* optim, void* params, sgd_options options);
+HOST_API void ignite_sgd_add_param_group (void* optim, void* params, sgd_options options) {
+  LANTERN_CHECK_LOADED
+  _ignite_sgd_add_param_group(optim, params, options);
+  LANTERN_HOST_HANDLER;
+}
+
+LANTERN_API sgd_options (LANTERN_PTR _ignite_sgd_get_param_group_options) (void* groups, int i);
+HOST_API sgd_options ignite_sgd_get_param_group_options (void* groups, int i)
+{
+  LANTERN_CHECK_LOADED
+  sgd_options ret = _ignite_sgd_get_param_group_options(groups, i);
+  LANTERN_HOST_HANDLER;
+  return ret;
+}
+
+LANTERN_API void (LANTERN_PTR _ignite_sgd_set_param_group_options) (void* opt, int i, sgd_options options);
+HOST_API void ignite_sgd_set_param_group_options (void* opt, int i, sgd_options options)
+{
+  LANTERN_CHECK_LOADED
+   _ignite_sgd_set_param_group_options(opt, i, options);
+  LANTERN_HOST_HANDLER;
+
+}
+
+LANTERN_API void* (LANTERN_PTR _ignite_sgd_get_states) (void* optim);
+HOST_API void* ignite_sgd_get_states (void* optim)
+{
+  LANTERN_CHECK_LOADED
+  void* ret = _ignite_sgd_get_states(optim);
+  LANTERN_HOST_HANDLER;
+  return ret;
+}
+
+LANTERN_API void (LANTERN_PTR _ignite_sgd_set_states) (void* optim, void* params, void* states_);
+HOST_API void ignite_sgd_set_states (void* optim, void* params, void* states_)
+{
+  LANTERN_CHECK_LOADED
+   _ignite_sgd_set_states(optim, params, states_);
+  LANTERN_HOST_HANDLER;
+
+}
+
+LANTERN_API void (LANTERN_PTR _lantern_optim_sgd_delete) (void* x);
+HOST_API void lantern_optim_sgd_delete (void* x) {
+  LANTERN_CHECK_LOADED
+   _lantern_optim_sgd_delete(x);
+  LANTERN_HOST_HANDLER;
+}
+
+LANTERN_API void* (LANTERN_PTR _ignite_adamw) (void* params, double lr, double beta1, double beta2, double eps, double weight_decay, bool amsgrad);
+HOST_API void* ignite_adamw (void* params, double lr, double beta1, double beta2, double eps, double weight_decay, bool amsgrad) {
+  LANTERN_CHECK_LOADED
+  void* ret = _ignite_adamw(params, lr, beta1, beta2, eps, weight_decay, amsgrad);
+  LANTERN_HOST_HANDLER;
+  return ret;
+}
+
+LANTERN_API void (LANTERN_PTR _ignite_adamw_add_param_group) (void* optim, void* params, adamw_options options);
+HOST_API void ignite_adamw_add_param_group (void* optim, void* params, adamw_options options) {
+  LANTERN_CHECK_LOADED
+  _ignite_adamw_add_param_group(optim, params, options);
+  LANTERN_HOST_HANDLER;
+}
+
+LANTERN_API adamw_options (LANTERN_PTR _ignite_adamw_get_param_group_options) (void* groups, int i);
+HOST_API adamw_options ignite_adamw_get_param_group_options (void* groups, int i)
+{
+  LANTERN_CHECK_LOADED
+  adamw_options ret = _ignite_adamw_get_param_group_options(groups, i);
+  LANTERN_HOST_HANDLER;
+  return ret;
+}
+
+LANTERN_API void (LANTERN_PTR _ignite_adamw_set_param_group_options) (void* opt, int i, adamw_options options);
+HOST_API void ignite_adamw_set_param_group_options (void* opt, int i, adamw_options options)
+{
+  LANTERN_CHECK_LOADED
+   _ignite_adamw_set_param_group_options(opt, i, options);
+  LANTERN_HOST_HANDLER;
+
+}
+
+LANTERN_API void* (LANTERN_PTR _ignite_adamw_get_states) (void* optim);
+HOST_API void* ignite_adamw_get_states (void* optim)
+{
+  LANTERN_CHECK_LOADED
+  void* ret = _ignite_adamw_get_states(optim);
+  LANTERN_HOST_HANDLER;
+  return ret;
+}
+
+LANTERN_API void (LANTERN_PTR _ignite_adamw_set_states) (void* optim, void* params, void* states_);
+HOST_API void ignite_adamw_set_states (void* optim, void* params, void* states_)
+{
+  LANTERN_CHECK_LOADED
+   _ignite_adamw_set_states(optim, params, states_);
+  LANTERN_HOST_HANDLER;
+
+}
+
+LANTERN_API void (LANTERN_PTR _lantern_optim_adamw_delete) (void* x);
+HOST_API void lantern_optim_adamw_delete (void* x) {
+  LANTERN_CHECK_LOADED
+   _lantern_optim_adamw_delete(x);
+  LANTERN_HOST_HANDLER;
+}
+
+LANTERN_API void* (LANTERN_PTR _ignite_optim_get_param_groups) (void* groups);
+HOST_API void* ignite_optim_get_param_groups (void* groups)
+{
+  LANTERN_CHECK_LOADED
+  void* ret = _ignite_optim_get_param_groups(groups);
+  LANTERN_HOST_HANDLER;
+  return ret;
+}
+
+LANTERN_API int (LANTERN_PTR _ignite_optim_param_groups_size) (void* groups);
+HOST_API int ignite_optim_param_groups_size (void* groups)
+{
+  LANTERN_CHECK_LOADED
+  int ret = _ignite_optim_param_groups_size(groups);
+  LANTERN_HOST_HANDLER;
+  return ret;
+}
+
+LANTERN_API void* (LANTERN_PTR _ignite_optim_get_param_group_params) (void* groups, int i);
+HOST_API void* ignite_optim_get_param_group_params (void* groups, int i)
+{
+  LANTERN_CHECK_LOADED
+  void* ret = _ignite_optim_get_param_group_params(groups, i);
+  LANTERN_HOST_HANDLER;
+  return ret;
+}
+
+
+LANTERN_API void (LANTERN_PTR _ignite_optim_step) (void* optim);
+HOST_API void ignite_optim_step (void* optim)
+{
+  LANTERN_CHECK_LOADED
+   _ignite_optim_step(optim);
+  LANTERN_HOST_HANDLER;
+
+}
+
+
+LANTERN_API void* (LANTERN_PTR _ignite_optim_parameters_with_state) (void* optim);
+HOST_API void* ignite_adamw_parameters_with_state (void* optim)
+{
+  LANTERN_CHECK_LOADED
+  void* ret = _ignite_optim_parameters_with_state(optim);
+  LANTERN_HOST_HANDLER;
+  return ret;
+}
+
+LANTERN_API void (LANTERN_PTR _ignite_optim_zero_grad) (void* optim);
+HOST_API void ignite_optim_zero_grad (void* optim)
+{
+  LANTERN_CHECK_LOADED
+   _ignite_optim_zero_grad(optim);
+  LANTERN_HOST_HANDLER;
+
+}
+
+LANTERN_API void (LANTERN_PTR _lantern_vector_optim_optimizer_group_delete) (void* x);
+HOST_API void lantern_vector_optim_optimizer_group_delete (void* x)
+{
+  LANTERN_CHECK_LOADED
+   _lantern_vector_optim_optimizer_group_delete(x);
+  LANTERN_HOST_HANDLER;
 }
 
   /* Autogen Headers -- Start */
@@ -10096,7 +10490,7 @@ bool lanternInit(const std::string &libPath, std::string *pError)
 {
   if (!lanternLoadLibrary(libPath, pError))
     return false;
-  
+
   lantern_loaded = true;
 
   LANTERN_OPTIONAL_LOAD_SYMBOL(dimname_list)
@@ -10554,6 +10948,48 @@ LOAD_SYMBOL(_lantern_jit_all_schemas_for);
 LOAD_SYMBOL(_lantern_function_schema_list_at);
 LOAD_SYMBOL(_lantern_Dtype_from_string);
 LOAD_SYMBOL(_lantern_buffer_from_tensor);
+LOAD_SYMBOL(_lantern_optim_adamw_delete);
+LOAD_SYMBOL(_lantern_optim_adam_delete);
+LOAD_SYMBOL(_lantern_optim_adagrad_delete);
+LOAD_SYMBOL(_lantern_optim_sgd_delete);
+LOAD_SYMBOL(_lantern_optim_rmsprop_delete);
+LOAD_SYMBOL(_lantern_vector_optim_optimizer_group_delete);
+LOAD_SYMBOL(_ignite_adamw);
+LOAD_SYMBOL(_ignite_adamw_add_param_group);
+LOAD_SYMBOL(_ignite_adamw_get_param_group_options);
+LOAD_SYMBOL(_ignite_adamw_set_param_group_options);
+LOAD_SYMBOL(_ignite_adamw_get_states);
+LOAD_SYMBOL(_ignite_adamw_set_states);
+LOAD_SYMBOL(_ignite_adam);
+LOAD_SYMBOL(_ignite_adam_add_param_group);
+LOAD_SYMBOL(_ignite_adam_get_param_group_options);
+LOAD_SYMBOL(_ignite_adam_set_param_group_options);
+LOAD_SYMBOL(_ignite_adam_get_states);
+LOAD_SYMBOL(_ignite_adam_set_states);
+LOAD_SYMBOL(_ignite_sgd);
+LOAD_SYMBOL(_ignite_sgd_add_param_group);
+LOAD_SYMBOL(_ignite_sgd_get_param_group_options);
+LOAD_SYMBOL(_ignite_sgd_set_param_group_options);
+LOAD_SYMBOL(_ignite_sgd_get_states);
+LOAD_SYMBOL(_ignite_sgd_set_states);
+LOAD_SYMBOL(_ignite_rmsprop);
+LOAD_SYMBOL(_ignite_rmsprop_add_param_group);
+LOAD_SYMBOL(_ignite_rmsprop_get_param_group_options);
+LOAD_SYMBOL(_ignite_rmsprop_set_param_group_options);
+LOAD_SYMBOL(_ignite_rmsprop_get_states);
+LOAD_SYMBOL(_ignite_rmsprop_set_states);
+LOAD_SYMBOL(_ignite_adagrad);
+LOAD_SYMBOL(_ignite_adagrad_add_param_group);
+LOAD_SYMBOL(_ignite_adagrad_get_param_group_options);
+LOAD_SYMBOL(_ignite_adagrad_set_param_group_options);
+LOAD_SYMBOL(_ignite_adagrad_get_states);
+LOAD_SYMBOL(_ignite_adagrad_set_states);
+LOAD_SYMBOL(_ignite_optim_parameters_with_state);
+LOAD_SYMBOL(_ignite_optim_get_param_groups);
+LOAD_SYMBOL(_ignite_optim_param_groups_size);
+LOAD_SYMBOL(_ignite_optim_get_param_group_params);
+LOAD_SYMBOL(_ignite_optim_step);
+LOAD_SYMBOL(_ignite_optim_zero_grad);
   /* Autogen Symbols -- Start */
   LOAD_SYMBOL(_lantern__cast_byte_tensor_bool)
   LOAD_SYMBOL(_lantern__cast_char_tensor_bool)

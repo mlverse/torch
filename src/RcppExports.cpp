@@ -46149,6 +46149,458 @@ BEGIN_RCPP
     return R_NilValue;
 END_RCPP
 }
+// rcpp_ignite_optim_get_param_groups
+optim_param_groups rcpp_ignite_optim_get_param_groups(optim_adamw opt);
+RcppExport SEXP _torch_rcpp_ignite_optim_get_param_groups(SEXP optSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< optim_adamw >::type opt(optSEXP);
+    rcpp_result_gen = Rcpp::wrap(rcpp_ignite_optim_get_param_groups(opt));
+    return rcpp_result_gen;
+END_RCPP
+}
+// rcpp_ignite_optim_param_groups_size
+int rcpp_ignite_optim_param_groups_size(optim_param_groups groups);
+RcppExport SEXP _torch_rcpp_ignite_optim_param_groups_size(SEXP groupsSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< optim_param_groups >::type groups(groupsSEXP);
+    rcpp_result_gen = Rcpp::wrap(rcpp_ignite_optim_param_groups_size(groups));
+    return rcpp_result_gen;
+END_RCPP
+}
+// rcpp_ignite_optim_get_param_group_params
+torch::TensorList rcpp_ignite_optim_get_param_group_params(optim_param_groups groups, int i);
+RcppExport SEXP _torch_rcpp_ignite_optim_get_param_group_params(SEXP groupsSEXP, SEXP iSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< optim_param_groups >::type groups(groupsSEXP);
+    Rcpp::traits::input_parameter< int >::type i(iSEXP);
+    rcpp_result_gen = Rcpp::wrap(rcpp_ignite_optim_get_param_group_params(groups, i));
+    return rcpp_result_gen;
+END_RCPP
+}
+// rcpp_ignite_optim_step
+void rcpp_ignite_optim_step(optim_adamw opt);
+RcppExport SEXP _torch_rcpp_ignite_optim_step(SEXP optSEXP) {
+BEGIN_RCPP
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< optim_adamw >::type opt(optSEXP);
+    rcpp_ignite_optim_step(opt);
+    return R_NilValue;
+END_RCPP
+}
+// rcpp_ignite_optim_zero_grad
+void rcpp_ignite_optim_zero_grad(optim_adamw opt);
+RcppExport SEXP _torch_rcpp_ignite_optim_zero_grad(SEXP optSEXP) {
+BEGIN_RCPP
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< optim_adamw >::type opt(optSEXP);
+    rcpp_ignite_optim_zero_grad(opt);
+    return R_NilValue;
+END_RCPP
+}
+// rcpp_ignite_optim_parameters_with_state
+torch::TensorList rcpp_ignite_optim_parameters_with_state(optim_adamw opt);
+RcppExport SEXP _torch_rcpp_ignite_optim_parameters_with_state(SEXP optSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< optim_adamw >::type opt(optSEXP);
+    rcpp_result_gen = Rcpp::wrap(rcpp_ignite_optim_parameters_with_state(opt));
+    return rcpp_result_gen;
+END_RCPP
+}
+// rcpp_ignite_adamw
+optim_adamw rcpp_ignite_adamw(torch::TensorList params, double lr, Rcpp::DoubleVector betas, double eps, double weight_decay, bool amsgrad);
+RcppExport SEXP _torch_rcpp_ignite_adamw(SEXP paramsSEXP, SEXP lrSEXP, SEXP betasSEXP, SEXP epsSEXP, SEXP weight_decaySEXP, SEXP amsgradSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< torch::TensorList >::type params(paramsSEXP);
+    Rcpp::traits::input_parameter< double >::type lr(lrSEXP);
+    Rcpp::traits::input_parameter< Rcpp::DoubleVector >::type betas(betasSEXP);
+    Rcpp::traits::input_parameter< double >::type eps(epsSEXP);
+    Rcpp::traits::input_parameter< double >::type weight_decay(weight_decaySEXP);
+    Rcpp::traits::input_parameter< bool >::type amsgrad(amsgradSEXP);
+    rcpp_result_gen = Rcpp::wrap(rcpp_ignite_adamw(params, lr, betas, eps, weight_decay, amsgrad));
+    return rcpp_result_gen;
+END_RCPP
+}
+// rcpp_ignite_adamw_get_states
+torch::TensorList rcpp_ignite_adamw_get_states(optim_adamw opt);
+RcppExport SEXP _torch_rcpp_ignite_adamw_get_states(SEXP optSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< optim_adamw >::type opt(optSEXP);
+    rcpp_result_gen = Rcpp::wrap(rcpp_ignite_adamw_get_states(opt));
+    return rcpp_result_gen;
+END_RCPP
+}
+// rcpp_ignite_adamw_set_states
+void rcpp_ignite_adamw_set_states(optim_adamw opt, torch::TensorList params, torch::TensorList states);
+RcppExport SEXP _torch_rcpp_ignite_adamw_set_states(SEXP optSEXP, SEXP paramsSEXP, SEXP statesSEXP) {
+BEGIN_RCPP
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< optim_adamw >::type opt(optSEXP);
+    Rcpp::traits::input_parameter< torch::TensorList >::type params(paramsSEXP);
+    Rcpp::traits::input_parameter< torch::TensorList >::type states(statesSEXP);
+    rcpp_ignite_adamw_set_states(opt, params, states);
+    return R_NilValue;
+END_RCPP
+}
+// rcpp_ignite_adamw_add_param_group
+void rcpp_ignite_adamw_add_param_group(optim_adamw opt, torch::TensorList params, double lr, Rcpp::DoubleVector betas, double eps, double weight_decay, bool amsgrad);
+RcppExport SEXP _torch_rcpp_ignite_adamw_add_param_group(SEXP optSEXP, SEXP paramsSEXP, SEXP lrSEXP, SEXP betasSEXP, SEXP epsSEXP, SEXP weight_decaySEXP, SEXP amsgradSEXP) {
+BEGIN_RCPP
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< optim_adamw >::type opt(optSEXP);
+    Rcpp::traits::input_parameter< torch::TensorList >::type params(paramsSEXP);
+    Rcpp::traits::input_parameter< double >::type lr(lrSEXP);
+    Rcpp::traits::input_parameter< Rcpp::DoubleVector >::type betas(betasSEXP);
+    Rcpp::traits::input_parameter< double >::type eps(epsSEXP);
+    Rcpp::traits::input_parameter< double >::type weight_decay(weight_decaySEXP);
+    Rcpp::traits::input_parameter< bool >::type amsgrad(amsgradSEXP);
+    rcpp_ignite_adamw_add_param_group(opt, params, lr, betas, eps, weight_decay, amsgrad);
+    return R_NilValue;
+END_RCPP
+}
+// rcpp_as_list_adamw_param_groups
+Rcpp::List rcpp_as_list_adamw_param_groups(optim_param_groups groups);
+RcppExport SEXP _torch_rcpp_as_list_adamw_param_groups(SEXP groupsSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< optim_param_groups >::type groups(groupsSEXP);
+    rcpp_result_gen = Rcpp::wrap(rcpp_as_list_adamw_param_groups(groups));
+    return rcpp_result_gen;
+END_RCPP
+}
+// rcpp_ignite_adamw_set_param_group_options
+void rcpp_ignite_adamw_set_param_group_options(optim_adamw opt, Rcpp::List list);
+RcppExport SEXP _torch_rcpp_ignite_adamw_set_param_group_options(SEXP optSEXP, SEXP listSEXP) {
+BEGIN_RCPP
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< optim_adamw >::type opt(optSEXP);
+    Rcpp::traits::input_parameter< Rcpp::List >::type list(listSEXP);
+    rcpp_ignite_adamw_set_param_group_options(opt, list);
+    return R_NilValue;
+END_RCPP
+}
+// rcpp_ignite_adam
+optim_adam rcpp_ignite_adam(torch::TensorList params, double lr, Rcpp::DoubleVector betas, double eps, double weight_decay, bool amsgrad);
+RcppExport SEXP _torch_rcpp_ignite_adam(SEXP paramsSEXP, SEXP lrSEXP, SEXP betasSEXP, SEXP epsSEXP, SEXP weight_decaySEXP, SEXP amsgradSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< torch::TensorList >::type params(paramsSEXP);
+    Rcpp::traits::input_parameter< double >::type lr(lrSEXP);
+    Rcpp::traits::input_parameter< Rcpp::DoubleVector >::type betas(betasSEXP);
+    Rcpp::traits::input_parameter< double >::type eps(epsSEXP);
+    Rcpp::traits::input_parameter< double >::type weight_decay(weight_decaySEXP);
+    Rcpp::traits::input_parameter< bool >::type amsgrad(amsgradSEXP);
+    rcpp_result_gen = Rcpp::wrap(rcpp_ignite_adam(params, lr, betas, eps, weight_decay, amsgrad));
+    return rcpp_result_gen;
+END_RCPP
+}
+// rcpp_ignite_adam_get_states
+torch::TensorList rcpp_ignite_adam_get_states(optim_adam opt);
+RcppExport SEXP _torch_rcpp_ignite_adam_get_states(SEXP optSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< optim_adam >::type opt(optSEXP);
+    rcpp_result_gen = Rcpp::wrap(rcpp_ignite_adam_get_states(opt));
+    return rcpp_result_gen;
+END_RCPP
+}
+// rcpp_ignite_adam_set_states
+void rcpp_ignite_adam_set_states(optim_adam opt, torch::TensorList params, torch::TensorList states);
+RcppExport SEXP _torch_rcpp_ignite_adam_set_states(SEXP optSEXP, SEXP paramsSEXP, SEXP statesSEXP) {
+BEGIN_RCPP
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< optim_adam >::type opt(optSEXP);
+    Rcpp::traits::input_parameter< torch::TensorList >::type params(paramsSEXP);
+    Rcpp::traits::input_parameter< torch::TensorList >::type states(statesSEXP);
+    rcpp_ignite_adam_set_states(opt, params, states);
+    return R_NilValue;
+END_RCPP
+}
+// rcpp_ignite_adam_add_param_group
+void rcpp_ignite_adam_add_param_group(optim_adam opt, torch::TensorList params, double lr, Rcpp::DoubleVector betas, double eps, double weight_decay, bool amsgrad);
+RcppExport SEXP _torch_rcpp_ignite_adam_add_param_group(SEXP optSEXP, SEXP paramsSEXP, SEXP lrSEXP, SEXP betasSEXP, SEXP epsSEXP, SEXP weight_decaySEXP, SEXP amsgradSEXP) {
+BEGIN_RCPP
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< optim_adam >::type opt(optSEXP);
+    Rcpp::traits::input_parameter< torch::TensorList >::type params(paramsSEXP);
+    Rcpp::traits::input_parameter< double >::type lr(lrSEXP);
+    Rcpp::traits::input_parameter< Rcpp::DoubleVector >::type betas(betasSEXP);
+    Rcpp::traits::input_parameter< double >::type eps(epsSEXP);
+    Rcpp::traits::input_parameter< double >::type weight_decay(weight_decaySEXP);
+    Rcpp::traits::input_parameter< bool >::type amsgrad(amsgradSEXP);
+    rcpp_ignite_adam_add_param_group(opt, params, lr, betas, eps, weight_decay, amsgrad);
+    return R_NilValue;
+END_RCPP
+}
+// rcpp_as_list_adam_param_groups
+Rcpp::List rcpp_as_list_adam_param_groups(optim_param_groups groups);
+RcppExport SEXP _torch_rcpp_as_list_adam_param_groups(SEXP groupsSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< optim_param_groups >::type groups(groupsSEXP);
+    rcpp_result_gen = Rcpp::wrap(rcpp_as_list_adam_param_groups(groups));
+    return rcpp_result_gen;
+END_RCPP
+}
+// rcpp_ignite_adam_set_param_group_options
+void rcpp_ignite_adam_set_param_group_options(optim_adam opt, Rcpp::List list);
+RcppExport SEXP _torch_rcpp_ignite_adam_set_param_group_options(SEXP optSEXP, SEXP listSEXP) {
+BEGIN_RCPP
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< optim_adam >::type opt(optSEXP);
+    Rcpp::traits::input_parameter< Rcpp::List >::type list(listSEXP);
+    rcpp_ignite_adam_set_param_group_options(opt, list);
+    return R_NilValue;
+END_RCPP
+}
+// rcpp_ignite_sgd
+optim_sgd rcpp_ignite_sgd(torch::TensorList params, double lr, double momentum, double dampening, double weight_decay, bool nesterov);
+RcppExport SEXP _torch_rcpp_ignite_sgd(SEXP paramsSEXP, SEXP lrSEXP, SEXP momentumSEXP, SEXP dampeningSEXP, SEXP weight_decaySEXP, SEXP nesterovSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< torch::TensorList >::type params(paramsSEXP);
+    Rcpp::traits::input_parameter< double >::type lr(lrSEXP);
+    Rcpp::traits::input_parameter< double >::type momentum(momentumSEXP);
+    Rcpp::traits::input_parameter< double >::type dampening(dampeningSEXP);
+    Rcpp::traits::input_parameter< double >::type weight_decay(weight_decaySEXP);
+    Rcpp::traits::input_parameter< bool >::type nesterov(nesterovSEXP);
+    rcpp_result_gen = Rcpp::wrap(rcpp_ignite_sgd(params, lr, momentum, dampening, weight_decay, nesterov));
+    return rcpp_result_gen;
+END_RCPP
+}
+// rcpp_ignite_sgd_get_states
+torch::TensorList rcpp_ignite_sgd_get_states(optim_sgd opt);
+RcppExport SEXP _torch_rcpp_ignite_sgd_get_states(SEXP optSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< optim_sgd >::type opt(optSEXP);
+    rcpp_result_gen = Rcpp::wrap(rcpp_ignite_sgd_get_states(opt));
+    return rcpp_result_gen;
+END_RCPP
+}
+// rcpp_ignite_sgd_set_states
+void rcpp_ignite_sgd_set_states(optim_sgd opt, torch::TensorList params, torch::TensorList states);
+RcppExport SEXP _torch_rcpp_ignite_sgd_set_states(SEXP optSEXP, SEXP paramsSEXP, SEXP statesSEXP) {
+BEGIN_RCPP
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< optim_sgd >::type opt(optSEXP);
+    Rcpp::traits::input_parameter< torch::TensorList >::type params(paramsSEXP);
+    Rcpp::traits::input_parameter< torch::TensorList >::type states(statesSEXP);
+    rcpp_ignite_sgd_set_states(opt, params, states);
+    return R_NilValue;
+END_RCPP
+}
+// rcpp_ignite_sgd_add_param_group
+void rcpp_ignite_sgd_add_param_group(optim_sgd opt, torch::TensorList params, double lr, double momentum, double dampening, double weight_decay, bool nesterov);
+RcppExport SEXP _torch_rcpp_ignite_sgd_add_param_group(SEXP optSEXP, SEXP paramsSEXP, SEXP lrSEXP, SEXP momentumSEXP, SEXP dampeningSEXP, SEXP weight_decaySEXP, SEXP nesterovSEXP) {
+BEGIN_RCPP
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< optim_sgd >::type opt(optSEXP);
+    Rcpp::traits::input_parameter< torch::TensorList >::type params(paramsSEXP);
+    Rcpp::traits::input_parameter< double >::type lr(lrSEXP);
+    Rcpp::traits::input_parameter< double >::type momentum(momentumSEXP);
+    Rcpp::traits::input_parameter< double >::type dampening(dampeningSEXP);
+    Rcpp::traits::input_parameter< double >::type weight_decay(weight_decaySEXP);
+    Rcpp::traits::input_parameter< bool >::type nesterov(nesterovSEXP);
+    rcpp_ignite_sgd_add_param_group(opt, params, lr, momentum, dampening, weight_decay, nesterov);
+    return R_NilValue;
+END_RCPP
+}
+// rcpp_as_list_sgd_param_groups
+Rcpp::List rcpp_as_list_sgd_param_groups(optim_param_groups groups);
+RcppExport SEXP _torch_rcpp_as_list_sgd_param_groups(SEXP groupsSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< optim_param_groups >::type groups(groupsSEXP);
+    rcpp_result_gen = Rcpp::wrap(rcpp_as_list_sgd_param_groups(groups));
+    return rcpp_result_gen;
+END_RCPP
+}
+// rcpp_ignite_sgd_set_param_group_options
+void rcpp_ignite_sgd_set_param_group_options(optim_sgd opt, Rcpp::List list);
+RcppExport SEXP _torch_rcpp_ignite_sgd_set_param_group_options(SEXP optSEXP, SEXP listSEXP) {
+BEGIN_RCPP
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< optim_sgd >::type opt(optSEXP);
+    Rcpp::traits::input_parameter< Rcpp::List >::type list(listSEXP);
+    rcpp_ignite_sgd_set_param_group_options(opt, list);
+    return R_NilValue;
+END_RCPP
+}
+// rcpp_ignite_rmsprop
+optim_rmsprop rcpp_ignite_rmsprop(torch::TensorList params, double lr, double alpha, double eps, double weight_decay, double momentum, bool centered);
+RcppExport SEXP _torch_rcpp_ignite_rmsprop(SEXP paramsSEXP, SEXP lrSEXP, SEXP alphaSEXP, SEXP epsSEXP, SEXP weight_decaySEXP, SEXP momentumSEXP, SEXP centeredSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< torch::TensorList >::type params(paramsSEXP);
+    Rcpp::traits::input_parameter< double >::type lr(lrSEXP);
+    Rcpp::traits::input_parameter< double >::type alpha(alphaSEXP);
+    Rcpp::traits::input_parameter< double >::type eps(epsSEXP);
+    Rcpp::traits::input_parameter< double >::type weight_decay(weight_decaySEXP);
+    Rcpp::traits::input_parameter< double >::type momentum(momentumSEXP);
+    Rcpp::traits::input_parameter< bool >::type centered(centeredSEXP);
+    rcpp_result_gen = Rcpp::wrap(rcpp_ignite_rmsprop(params, lr, alpha, eps, weight_decay, momentum, centered));
+    return rcpp_result_gen;
+END_RCPP
+}
+// rcpp_ignite_rmsprop_get_states
+torch::TensorList rcpp_ignite_rmsprop_get_states(optim_rmsprop opt);
+RcppExport SEXP _torch_rcpp_ignite_rmsprop_get_states(SEXP optSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< optim_rmsprop >::type opt(optSEXP);
+    rcpp_result_gen = Rcpp::wrap(rcpp_ignite_rmsprop_get_states(opt));
+    return rcpp_result_gen;
+END_RCPP
+}
+// rcpp_ignite_rmsprop_set_states
+void rcpp_ignite_rmsprop_set_states(optim_rmsprop opt, torch::TensorList params, torch::TensorList states);
+RcppExport SEXP _torch_rcpp_ignite_rmsprop_set_states(SEXP optSEXP, SEXP paramsSEXP, SEXP statesSEXP) {
+BEGIN_RCPP
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< optim_rmsprop >::type opt(optSEXP);
+    Rcpp::traits::input_parameter< torch::TensorList >::type params(paramsSEXP);
+    Rcpp::traits::input_parameter< torch::TensorList >::type states(statesSEXP);
+    rcpp_ignite_rmsprop_set_states(opt, params, states);
+    return R_NilValue;
+END_RCPP
+}
+// rcpp_ignite_rmsprop_add_param_group
+void rcpp_ignite_rmsprop_add_param_group(optim_rmsprop opt, torch::TensorList params, double lr, double alpha, double eps, double weight_decay, double momentum, bool centered);
+RcppExport SEXP _torch_rcpp_ignite_rmsprop_add_param_group(SEXP optSEXP, SEXP paramsSEXP, SEXP lrSEXP, SEXP alphaSEXP, SEXP epsSEXP, SEXP weight_decaySEXP, SEXP momentumSEXP, SEXP centeredSEXP) {
+BEGIN_RCPP
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< optim_rmsprop >::type opt(optSEXP);
+    Rcpp::traits::input_parameter< torch::TensorList >::type params(paramsSEXP);
+    Rcpp::traits::input_parameter< double >::type lr(lrSEXP);
+    Rcpp::traits::input_parameter< double >::type alpha(alphaSEXP);
+    Rcpp::traits::input_parameter< double >::type eps(epsSEXP);
+    Rcpp::traits::input_parameter< double >::type weight_decay(weight_decaySEXP);
+    Rcpp::traits::input_parameter< double >::type momentum(momentumSEXP);
+    Rcpp::traits::input_parameter< bool >::type centered(centeredSEXP);
+    rcpp_ignite_rmsprop_add_param_group(opt, params, lr, alpha, eps, weight_decay, momentum, centered);
+    return R_NilValue;
+END_RCPP
+}
+// rcpp_as_list_rmsprop_param_groups
+Rcpp::List rcpp_as_list_rmsprop_param_groups(optim_param_groups groups);
+RcppExport SEXP _torch_rcpp_as_list_rmsprop_param_groups(SEXP groupsSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< optim_param_groups >::type groups(groupsSEXP);
+    rcpp_result_gen = Rcpp::wrap(rcpp_as_list_rmsprop_param_groups(groups));
+    return rcpp_result_gen;
+END_RCPP
+}
+// rcpp_ignite_rmsprop_set_param_group_options
+void rcpp_ignite_rmsprop_set_param_group_options(optim_rmsprop opt, Rcpp::List list);
+RcppExport SEXP _torch_rcpp_ignite_rmsprop_set_param_group_options(SEXP optSEXP, SEXP listSEXP) {
+BEGIN_RCPP
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< optim_rmsprop >::type opt(optSEXP);
+    Rcpp::traits::input_parameter< Rcpp::List >::type list(listSEXP);
+    rcpp_ignite_rmsprop_set_param_group_options(opt, list);
+    return R_NilValue;
+END_RCPP
+}
+// rcpp_ignite_adagrad
+optim_adagrad rcpp_ignite_adagrad(torch::TensorList params, double lr, double lr_decay, double weight_decay, double eps, double initial_accumulator_value);
+RcppExport SEXP _torch_rcpp_ignite_adagrad(SEXP paramsSEXP, SEXP lrSEXP, SEXP lr_decaySEXP, SEXP weight_decaySEXP, SEXP epsSEXP, SEXP initial_accumulator_valueSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< torch::TensorList >::type params(paramsSEXP);
+    Rcpp::traits::input_parameter< double >::type lr(lrSEXP);
+    Rcpp::traits::input_parameter< double >::type lr_decay(lr_decaySEXP);
+    Rcpp::traits::input_parameter< double >::type weight_decay(weight_decaySEXP);
+    Rcpp::traits::input_parameter< double >::type eps(epsSEXP);
+    Rcpp::traits::input_parameter< double >::type initial_accumulator_value(initial_accumulator_valueSEXP);
+    rcpp_result_gen = Rcpp::wrap(rcpp_ignite_adagrad(params, lr, lr_decay, weight_decay, eps, initial_accumulator_value));
+    return rcpp_result_gen;
+END_RCPP
+}
+// rcpp_ignite_adagrad_get_states
+torch::TensorList rcpp_ignite_adagrad_get_states(optim_adagrad opt);
+RcppExport SEXP _torch_rcpp_ignite_adagrad_get_states(SEXP optSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< optim_adagrad >::type opt(optSEXP);
+    rcpp_result_gen = Rcpp::wrap(rcpp_ignite_adagrad_get_states(opt));
+    return rcpp_result_gen;
+END_RCPP
+}
+// rcpp_ignite_adagrad_set_states
+void rcpp_ignite_adagrad_set_states(optim_adagrad opt, torch::TensorList params, torch::TensorList states);
+RcppExport SEXP _torch_rcpp_ignite_adagrad_set_states(SEXP optSEXP, SEXP paramsSEXP, SEXP statesSEXP) {
+BEGIN_RCPP
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< optim_adagrad >::type opt(optSEXP);
+    Rcpp::traits::input_parameter< torch::TensorList >::type params(paramsSEXP);
+    Rcpp::traits::input_parameter< torch::TensorList >::type states(statesSEXP);
+    rcpp_ignite_adagrad_set_states(opt, params, states);
+    return R_NilValue;
+END_RCPP
+}
+// rcpp_ignite_adagrad_add_param_group
+void rcpp_ignite_adagrad_add_param_group(optim_adagrad opt, torch::TensorList params, double lr, double lr_decay, double weight_decay, double eps, double initial_accumulator_value);
+RcppExport SEXP _torch_rcpp_ignite_adagrad_add_param_group(SEXP optSEXP, SEXP paramsSEXP, SEXP lrSEXP, SEXP lr_decaySEXP, SEXP weight_decaySEXP, SEXP epsSEXP, SEXP initial_accumulator_valueSEXP) {
+BEGIN_RCPP
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< optim_adagrad >::type opt(optSEXP);
+    Rcpp::traits::input_parameter< torch::TensorList >::type params(paramsSEXP);
+    Rcpp::traits::input_parameter< double >::type lr(lrSEXP);
+    Rcpp::traits::input_parameter< double >::type lr_decay(lr_decaySEXP);
+    Rcpp::traits::input_parameter< double >::type weight_decay(weight_decaySEXP);
+    Rcpp::traits::input_parameter< double >::type eps(epsSEXP);
+    Rcpp::traits::input_parameter< double >::type initial_accumulator_value(initial_accumulator_valueSEXP);
+    rcpp_ignite_adagrad_add_param_group(opt, params, lr, lr_decay, weight_decay, eps, initial_accumulator_value);
+    return R_NilValue;
+END_RCPP
+}
+// rcpp_as_list_adagrad_param_groups
+Rcpp::List rcpp_as_list_adagrad_param_groups(optim_param_groups groups);
+RcppExport SEXP _torch_rcpp_as_list_adagrad_param_groups(SEXP groupsSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< optim_param_groups >::type groups(groupsSEXP);
+    rcpp_result_gen = Rcpp::wrap(rcpp_as_list_adagrad_param_groups(groups));
+    return rcpp_result_gen;
+END_RCPP
+}
+// rcpp_ignite_adagrad_set_param_group_options
+void rcpp_ignite_adagrad_set_param_group_options(optim_adagrad opt, Rcpp::List list);
+RcppExport SEXP _torch_rcpp_ignite_adagrad_set_param_group_options(SEXP optSEXP, SEXP listSEXP) {
+BEGIN_RCPP
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< optim_adagrad >::type opt(optSEXP);
+    Rcpp::traits::input_parameter< Rcpp::List >::type list(listSEXP);
+    rcpp_ignite_adagrad_set_param_group_options(opt, list);
+    return R_NilValue;
+END_RCPP
+}
 // enquos0
 std::vector<Rcpp::RObject> enquos0(Rcpp::Environment env);
 RcppExport SEXP _torch_enquos0(SEXP envSEXP) {
@@ -51385,6 +51837,42 @@ static const R_CallMethodDef CallEntries[] = {
     {"_torch_cpp_torch_set_rng_state", (DL_FUNC) &_torch_cpp_torch_set_rng_state, 1},
     {"_torch_cpp_torch_cuda_get_rng_state", (DL_FUNC) &_torch_cpp_torch_cuda_get_rng_state, 1},
     {"_torch_cpp_torch_cuda_set_rng_state", (DL_FUNC) &_torch_cpp_torch_cuda_set_rng_state, 2},
+    {"_torch_rcpp_ignite_optim_get_param_groups", (DL_FUNC) &_torch_rcpp_ignite_optim_get_param_groups, 1},
+    {"_torch_rcpp_ignite_optim_param_groups_size", (DL_FUNC) &_torch_rcpp_ignite_optim_param_groups_size, 1},
+    {"_torch_rcpp_ignite_optim_get_param_group_params", (DL_FUNC) &_torch_rcpp_ignite_optim_get_param_group_params, 2},
+    {"_torch_rcpp_ignite_optim_step", (DL_FUNC) &_torch_rcpp_ignite_optim_step, 1},
+    {"_torch_rcpp_ignite_optim_zero_grad", (DL_FUNC) &_torch_rcpp_ignite_optim_zero_grad, 1},
+    {"_torch_rcpp_ignite_optim_parameters_with_state", (DL_FUNC) &_torch_rcpp_ignite_optim_parameters_with_state, 1},
+    {"_torch_rcpp_ignite_adamw", (DL_FUNC) &_torch_rcpp_ignite_adamw, 6},
+    {"_torch_rcpp_ignite_adamw_get_states", (DL_FUNC) &_torch_rcpp_ignite_adamw_get_states, 1},
+    {"_torch_rcpp_ignite_adamw_set_states", (DL_FUNC) &_torch_rcpp_ignite_adamw_set_states, 3},
+    {"_torch_rcpp_ignite_adamw_add_param_group", (DL_FUNC) &_torch_rcpp_ignite_adamw_add_param_group, 7},
+    {"_torch_rcpp_as_list_adamw_param_groups", (DL_FUNC) &_torch_rcpp_as_list_adamw_param_groups, 1},
+    {"_torch_rcpp_ignite_adamw_set_param_group_options", (DL_FUNC) &_torch_rcpp_ignite_adamw_set_param_group_options, 2},
+    {"_torch_rcpp_ignite_adam", (DL_FUNC) &_torch_rcpp_ignite_adam, 6},
+    {"_torch_rcpp_ignite_adam_get_states", (DL_FUNC) &_torch_rcpp_ignite_adam_get_states, 1},
+    {"_torch_rcpp_ignite_adam_set_states", (DL_FUNC) &_torch_rcpp_ignite_adam_set_states, 3},
+    {"_torch_rcpp_ignite_adam_add_param_group", (DL_FUNC) &_torch_rcpp_ignite_adam_add_param_group, 7},
+    {"_torch_rcpp_as_list_adam_param_groups", (DL_FUNC) &_torch_rcpp_as_list_adam_param_groups, 1},
+    {"_torch_rcpp_ignite_adam_set_param_group_options", (DL_FUNC) &_torch_rcpp_ignite_adam_set_param_group_options, 2},
+    {"_torch_rcpp_ignite_sgd", (DL_FUNC) &_torch_rcpp_ignite_sgd, 6},
+    {"_torch_rcpp_ignite_sgd_get_states", (DL_FUNC) &_torch_rcpp_ignite_sgd_get_states, 1},
+    {"_torch_rcpp_ignite_sgd_set_states", (DL_FUNC) &_torch_rcpp_ignite_sgd_set_states, 3},
+    {"_torch_rcpp_ignite_sgd_add_param_group", (DL_FUNC) &_torch_rcpp_ignite_sgd_add_param_group, 7},
+    {"_torch_rcpp_as_list_sgd_param_groups", (DL_FUNC) &_torch_rcpp_as_list_sgd_param_groups, 1},
+    {"_torch_rcpp_ignite_sgd_set_param_group_options", (DL_FUNC) &_torch_rcpp_ignite_sgd_set_param_group_options, 2},
+    {"_torch_rcpp_ignite_rmsprop", (DL_FUNC) &_torch_rcpp_ignite_rmsprop, 7},
+    {"_torch_rcpp_ignite_rmsprop_get_states", (DL_FUNC) &_torch_rcpp_ignite_rmsprop_get_states, 1},
+    {"_torch_rcpp_ignite_rmsprop_set_states", (DL_FUNC) &_torch_rcpp_ignite_rmsprop_set_states, 3},
+    {"_torch_rcpp_ignite_rmsprop_add_param_group", (DL_FUNC) &_torch_rcpp_ignite_rmsprop_add_param_group, 8},
+    {"_torch_rcpp_as_list_rmsprop_param_groups", (DL_FUNC) &_torch_rcpp_as_list_rmsprop_param_groups, 1},
+    {"_torch_rcpp_ignite_rmsprop_set_param_group_options", (DL_FUNC) &_torch_rcpp_ignite_rmsprop_set_param_group_options, 2},
+    {"_torch_rcpp_ignite_adagrad", (DL_FUNC) &_torch_rcpp_ignite_adagrad, 6},
+    {"_torch_rcpp_ignite_adagrad_get_states", (DL_FUNC) &_torch_rcpp_ignite_adagrad_get_states, 1},
+    {"_torch_rcpp_ignite_adagrad_set_states", (DL_FUNC) &_torch_rcpp_ignite_adagrad_set_states, 3},
+    {"_torch_rcpp_ignite_adagrad_add_param_group", (DL_FUNC) &_torch_rcpp_ignite_adagrad_add_param_group, 7},
+    {"_torch_rcpp_as_list_adagrad_param_groups", (DL_FUNC) &_torch_rcpp_as_list_adagrad_param_groups, 1},
+    {"_torch_rcpp_ignite_adagrad_set_param_group_options", (DL_FUNC) &_torch_rcpp_ignite_adagrad_set_param_group_options, 2},
     {"_torch_enquos0", (DL_FUNC) &_torch_enquos0, 1},
     {"_torch_evaluate_slices", (DL_FUNC) &_torch_evaluate_slices, 2},
     {"_torch_Tensor_slice", (DL_FUNC) &_torch_Tensor_slice, 4},
