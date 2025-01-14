@@ -2,13 +2,14 @@
 
 ## Bug fixes
 
-- Fix french translation (#1176 @cregouby)
-
-## Bug fixes
-
 - `torch_iinfo()` now support all integer dtypes (#1190 @cregouby)
 - Fixed float key_padding_mask in `nnf_multi_head_attention_forward()` (#1205)
 - Updated to LibTorch v2.5.1 (#1204)
+- Fix french translation (#1176 @cregouby)
+- Feature: Faster optimizers (`optim_ignite_<name>()`) are available: Adam, AdamW, Adagrad, RMSprop,SGD.
+  These can be used as drop-in replacements for `optim_<name>` but are considerably
+  faster as they wrap the LibTorch implementation of the optimizer.
+  The biggest speed differences can be observed for complex optimizers such as `AdamW`.
 
 # torch 0.13.0
 

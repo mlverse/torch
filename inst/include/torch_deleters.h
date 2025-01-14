@@ -66,6 +66,11 @@ void delete_optional_scalar(void* x);
 void delete_optional_memory_format(void* x);
 void delete_string_view(void* x);
 void delete_optional_string_view(void* x);
+void delete_optim_adamw(void* x);
+void delete_optim_adam(void* x);
+void delete_optim_sgd(void* x);
+void delete_optim_rmsprop(void* x);
+void delete_optim_adagrad(void* x);
 
 void* fixme_new_string(const char* x, int size);
 void* fixme_new_dimname(const char* x);

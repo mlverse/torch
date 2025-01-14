@@ -7,5 +7,5 @@
 optim_required()
 }
 \description{
-export
+Dummy value indicating a required value.
 }
