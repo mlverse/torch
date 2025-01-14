@@ -5,7 +5,7 @@ set(TORCH_VERSION "2.5.1")
 
 if (NOT DEFINED TORCH_PATH)
     if (DEFINED ENV{TORCH_PATH})
-        set(TORCH_PATH "ENV{TORCH_PATH}")
+        set(TORCH_PATH "$ENV{TORCH_PATH}")
     else()
         set(TORCH_PATH "${CMAKE_CURRENT_BINARY_DIR}/libtorch/")
     endif()
@@ -37,7 +37,7 @@ if (NOT EXISTS "${TORCH_PATH}")
     message(STATUS "TORCH_PATH doesn't exists yet. Downloading a pre-built binary.")
 
     if(DEFINED ENV{TORCH_URL})
-        set(TORCH_URL "ENV{TORCH_URL}")
+        set(TORCH_URL "$ENV{TORCH_URL}")
     endif()
 
     # find an appropriate torch url
