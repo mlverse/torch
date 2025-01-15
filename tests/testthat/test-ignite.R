@@ -86,15 +86,6 @@ test_that("adamw", {
   prev <- o$state_dict()
   o$load_state_dict(torch_load(torch_serialize(o$state_dict())))
   expect_equal(prev, o$state_dict())
-  o$param_groups[[1L]]$amsgrad <- TRUE
-
-  # now we check whether an uninitialized state parameter can be created later
-  step <- function() {
-    ((o$param_groups[[1]][[1]][[1]] * o$param_groups[[1]][[1]][[2]] * torch_tensor(1) - torch_tensor(2))^2)$backward()
-  }
-  step()
-  step()
-  (o$param_groups[[1L]]$amsgrad)
 })
 
 test_that("sgd", {
@@ -206,12 +197,6 @@ test_that("base class: params must have length > 1", {
   expect_error(optim_ignite_adamw(list()), "must have length")
 })
 
-test_that("can change values of param groups in optimizer", {
-  o <- make_ignite_adamw(amsgrad = TRUE)
-  o$param_groups[[1]]$amsgrad <- FALSE
-  expect_false(o$param_groups[[1]]$amsgrad)
-})
-
 test_that("base class: can change values of param_groups", {
   o = optim_ignite_adamw(list(torch_tensor(1, requires_grad = TRUE)), lr = 0.1)
   o$param_groups[[1]]$lr = 1
@@ -237,7 +222,28 @@ test_that("base class: error handling when loading state dict", {
   expect_error(o$load_state_dict(sd3), "but got params, weight_decay")
 })
 
-test_that("deep cloning not possible", {
+test_that("base class: deep cloning not possible", {
   o = make_ignite_adamw(steps = 0)
   expect_error(o$clone(deep = TRUE), "OptimizerIgnite cannot be deep cloned")
+})
+
+test_that("base class: changing the learning rate has an effect", {
+  n1 = nn_linear(1, 1)
+  n2 = n1$clone(deep = TRUE)
+  o1 = optim_sgd(n1$parameters, lr = 0.1)
+  o2 = optim_sgd(n2$parameters, lr = 0.1)
+
+  s = function(n, o) {
+    o$zero_grad()
+    ((n(torch_tensor(1)) - torch_tensor(1))^2)$backward()
+    o$step()
+  }
+
+  s(n1, o1)
+  s(n2, o2)
+  expect_true(torch_equal(n1$parameters[[1]], n2$parameters[[1]]) && torch_equal(n1$parameters[[2]], n2$parameters[[2]]))
+  o1$param_groups[[1]]$lr = 0.2
+  s(n1, o1)
+  s(n2, o2)
+  expect_false(torch_equal(n1$parameters[[1]], n2$parameters[[1]]) && torch_equal(n1$parameters[[2]], n2$parameters[[2]]))
 })
