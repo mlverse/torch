@@ -51,6 +51,8 @@ navbar:
         href: articles/modifying-source-code.html
       - text: Automatic Mixed Precision
         href: articles/amp.html
+      - text: Modifying source code
+        href: articles/modifying-source-code.html
   examples:
     text: Examples
     menu:
