@@ -508,6 +508,9 @@ tensor_to_complex <- function(x) {
 #'
 #' @export
 torch_tensor_from_buffer <- function(buffer, shape, dtype = "float") {
+  if (!is.integer(shape)) {
+    shape <- as.integer(shape)
+  }
   cpp_tensor_from_buffer(buffer, shape, list(dtype=dtype))
 }
 
