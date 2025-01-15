@@ -30,10 +30,10 @@ test_that("un-optimized parameters and state dict", {
   states = sd$state
   expect_equal(names(states), "1")
   # all parameters are included in the state dict even when they don't have a state.
-  expect_false(cpp_tensor_is_undefined(states[[1]]$exp_avg))
-  expect_false(cpp_tensor_is_undefined(states[[1]]$exp_avg_sq))
-  expect_true(cpp_tensor_is_undefined(states[[1]]$max_exp_avg_sq))
-  expect_false(cpp_tensor_is_undefined(states[[1]]$step))
+  expect_false(is.null(states[[1]]$exp_avg))
+  expect_false(is.null(states[[1]]$exp_avg_sq))
+  expect_false(is.null(states[[1]]$max_exp_avg_sq))
+  expect_false(is.null(states[[1]]$step))
   opt$load_state_dict(sd)
   x1 = unlist(states)
   x2 = unlist(opt$state_dict()$state)
@@ -58,6 +58,12 @@ test_that("adam", {
   expect_ignite_can_change_param_groups(optim_ignite_adam)
   expect_ignite_can_add_param_group(optim_ignite_adam)
   do.call(expect_state_dict_works, c(list(optim_ignite_adam), defaults))
+  # can save adam even when one of the tensors in the state is undefined in C++
+  defaults$amsgrad <- FALSE
+  o <- do.call(make_ignite_adam, defaults)
+  prev <- o$state_dict()
+  o$load_state_dict(torch_load(torch_serialize(o$state_dict())))
+  expect_equal(prev, o$state_dict())
 })
 
 test_that("adamw", {
@@ -73,6 +79,22 @@ test_that("adamw", {
   expect_ignite_can_change_param_groups(optim_ignite_adamw)
   expect_ignite_can_add_param_group(optim_ignite_adamw)
   do.call(expect_state_dict_works, c(list(optim_ignite_adamw), defaults))
+
+  # can save adamw even when one of the tensors in the state is undefined in C++
+  defaults$amsgrad <- FALSE
+  o <- do.call(make_ignite_adamw, defaults)
+  prev <- o$state_dict()
+  o$load_state_dict(torch_load(torch_serialize(o$state_dict())))
+  expect_equal(prev, o$state_dict())
+  o$param_groups[[1L]]$amsgrad <- TRUE
+
+  # now we check whether an uninitialized state parameter can be created later
+  step <- function() {
+    ((o$param_groups[[1]][[1]][[1]] * o$param_groups[[1]][[1]][[2]] * torch_tensor(1) - torch_tensor(2))^2)$backward()
+  }
+  step()
+  step()
+  (o$param_groups[[1L]]$amsgrad)
 })
 
 test_that("sgd", {
@@ -87,6 +109,20 @@ test_that("sgd", {
   expect_ignite_can_change_param_groups(optim_ignite_sgd, lr = 0.1)
   expect_ignite_can_add_param_group(optim_ignite_sgd)
   do.call(expect_state_dict_works, c(list(optim_ignite_sgd), defaults))
+  o$load_state_dict(torch_load(torch_serialize(o$state_dict())))
+
+  # saving of state dict
+  defaults$momentum = FALSE
+  o <- do.call(make_ignite_sgd, defaults)
+  prev <- o$state_dict()
+  o$load_state_dict(torch_load(torch_serialize(o$state_dict())))
+  expect_equal(prev, o$state_dict())
+
+  defaults$momentum = TRUE
+  o <- do.call(make_ignite_sgd, defaults)
+  prev <- o$state_dict()
+  o$load_state_dict(torch_load(torch_serialize(o$state_dict())))
+  expect_equal(prev, o$state_dict())
 })
 
 test_that("rmsprop", {
@@ -102,6 +138,11 @@ test_that("rmsprop", {
   expect_ignite_can_change_param_groups(optim_ignite_rmsprop)
   expect_ignite_can_add_param_group(optim_ignite_rmsprop)
   do.call(expect_state_dict_works, c(list(optim_ignite_rmsprop), defaults))
+
+  o <- do.call(make_ignite_rmsprop, defaults)
+  prev <- o$state_dict()
+  o$load_state_dict(torch_load(torch_serialize(o$state_dict())))
+  expect_equal(prev, o$state_dict())
 })
 
 test_that("adagrad", {
@@ -117,6 +158,11 @@ test_that("adagrad", {
   expect_ignite_can_change_param_groups(optim_ignite_adagrad)
   expect_ignite_can_add_param_group(optim_ignite_adagrad)
   do.call(expect_state_dict_works, c(list(optim_ignite_adagrad), defaults))
+
+  o <- do.call(make_ignite_adagrad, defaults)
+  prev <- o$state_dict()
+  o$load_state_dict(torch_load(torch_serialize(o$state_dict())))
+  expect_equal(prev, o$state_dict())
 })
 
 test_that("base class: can initialize optimizer with different options per param group", {
@@ -159,6 +205,23 @@ test_that("base class: can initialize optimizer with different options per param
 test_that("base class: params must have length > 1", {
   expect_error(optim_ignite_adamw(list()), "must have length")
 })
+
+test_that("can change values of param groups in optimizer", {
+  o <- make_ignite_adamw(amsgrad = TRUE)
+  o$param_groups[[1]]$amsgrad <- FALSE
+  expect_false(o$param_groups[[1]]$amsgrad)
+})
+
+test_that("base class: can change values of param_groups", {
+  o = optim_ignite_adamw(list(torch_tensor(1, requires_grad = TRUE)), lr = 0.1)
+  o$param_groups[[1]]$lr = 1
+  expect_equal(o$param_groups[[1]]$lr, 1)
+  o$param_groups[[1]]$amsgrad = FALSE
+  expect_true(!o$param_groups[[1]]$amsgrad)
+  o$param_groups[[1]]$amsgrad = TRUE
+  expect_false(!o$param_groups[[1]]$amsgrad)
+})
+
 
 test_that("base class: error handling when loading state dict", {
   o = make_ignite_adamw()
