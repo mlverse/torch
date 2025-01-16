@@ -376,7 +376,6 @@ is_permutation <- function(vec1, vec2) {
   if (length(vec1) != length(vec2)) {
     return(FALSE)
   }
-
   # Check if sorted elements are the same
   identical(sort(vec1), sort(vec2))
 }
