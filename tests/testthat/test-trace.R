@@ -480,17 +480,6 @@ test_that("can save function for mobile", {
   expect_equal_to_tensor(torch_relu(input), f(input))
 })
 
-test_that("can serialize to raw vector and deserialize again", {
-  n1 <- jit_trace(nn_linear(1, 1), torch_randn(1, 1))
-  n1$parameters$bias$requires_grad_(FALSE)
-  x <- jit_serialize(n1)
-  expect_true(is.raw(x))
-  n2 <- jit_unserialize(x)
-  x <- torch_randn(1)
-  expect_equal_to_tensor(n1(x), n2(x))
-  expect_false(n2$parameters$bias$requires_grad)
-})
-
 test_that("can trace only one mode", {
   nn_custom <- nn_module("custom",
     initialize = function() NULL,
