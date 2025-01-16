@@ -75,14 +75,12 @@ expect_state_dict_works <- function(optimizer_fn, ...) {
     }
     replicate(2, s())
     if (load) {
-      o$load_state_dict(o$state_dict())
+      o$load_state_dict(torch_load(torch_serialize(o$state_dict())))
     }
     replicate(2, s())
     return(n$parameters)
   }
-  torch_manual_seed(123)
   w1 <- f(load = TRUE)
-  torch_manual_seed(123)
   w2 <- f(load = FALSE)
   expect_equal(w1, w2)
 }
