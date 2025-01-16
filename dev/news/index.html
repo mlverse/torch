@@ -48,6 +48,7 @@
   <ul class="dropdown-menu" aria-labelledby="dropdown-advanced"><li><a class="dropdown-item" href="../articles/memory-management.html">Memory management</a></li>
     <li><a class="dropdown-item" href="../articles/modifying-source-code.html">Building locally</a></li>
     <li><a class="dropdown-item" href="../articles/amp.html">Automatic Mixed Precision</a></li>
+    <li><a class="dropdown-item" href="../articles/modifying-source-code.html">Modifying source code</a></li>
   </ul></li>
 <li class="nav-item"><a class="nav-link" href="../reference/index.html">Reference</a></li>
 <li class="active nav-item"><a class="nav-link" href="../news/index.html">Changelog</a></li>
@@ -68,14 +69,12 @@
 <h2 class="pkg-version" data-toc-text="development version" id="torch-development-version">torch (development version)<a class="anchor" aria-label="anchor" href="#torch-development-version"></a></h2>
 <div class="section level3">
 <h3 id="bug-fixes-development-version">Bug fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-development-version"></a></h3>
-<ul><li>Fix french translation (<a href="https://github.com/mlverse/torch/issues/1176" class="external-link">#1176</a> <a href="https://github.com/cregouby" class="external-link">@cregouby</a>)</li>
-</ul></div>
-<div class="section level3">
-<h3 id="bug-fixes-development-version-1">Bug fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-development-version-1"></a></h3>
 <ul><li>
 <code><a href="../reference/torch_iinfo.html">torch_iinfo()</a></code> now support all integer dtypes (<a href="https://github.com/mlverse/torch/issues/1190" class="external-link">#1190</a> <a href="https://github.com/cregouby" class="external-link">@cregouby</a>)</li>
 <li>Fixed float key_padding_mask in <code><a href="../reference/nnf_multi_head_attention_forward.html">nnf_multi_head_attention_forward()</a></code> (<a href="https://github.com/mlverse/torch/issues/1205" class="external-link">#1205</a>)</li>
 <li>Updated to LibTorch v2.5.1 (<a href="https://github.com/mlverse/torch/issues/1204" class="external-link">#1204</a>)</li>
+<li>Fix french translation (<a href="https://github.com/mlverse/torch/issues/1176" class="external-link">#1176</a> <a href="https://github.com/cregouby" class="external-link">@cregouby</a>)</li>
+<li>Feature: Faster optimizers (<code>optim_ignite_&lt;name&gt;()</code>) are available: Adam, AdamW, Adagrad, RMSprop,SGD. These can be used as drop-in replacements for <code>optim_&lt;name&gt;</code> but are considerably faster as they wrap the LibTorch implementation of the optimizer. The biggest speed differences can be observed for complex optimizers such as <code>AdamW</code>.</li>
 </ul></div>
 </div>
     <div class="section level2">

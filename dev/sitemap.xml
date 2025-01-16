@@ -27,6 +27,7 @@
 <url><loc>https://torch.mlverse.org/docs/dev/reference/AutogradContext.html</loc></url>
 <url><loc>https://torch.mlverse.org/docs/dev/reference/Constraint.html</loc></url>
 <url><loc>https://torch.mlverse.org/docs/dev/reference/Distribution.html</loc></url>
+<url><loc>https://torch.mlverse.org/docs/dev/reference/OptimizerIgnite.html</loc></url>
 <url><loc>https://torch.mlverse.org/docs/dev/reference/as_array.html</loc></url>
 <url><loc>https://torch.mlverse.org/docs/dev/reference/autograd_backward.html</loc></url>
 <url><loc>https://torch.mlverse.org/docs/dev/reference/autograd_function.html</loc></url>
@@ -354,12 +355,18 @@
 <url><loc>https://torch.mlverse.org/docs/dev/reference/optim_adam.html</loc></url>
 <url><loc>https://torch.mlverse.org/docs/dev/reference/optim_adamw.html</loc></url>
 <url><loc>https://torch.mlverse.org/docs/dev/reference/optim_asgd.html</loc></url>
+<url><loc>https://torch.mlverse.org/docs/dev/reference/optim_ignite_adagrad.html</loc></url>
+<url><loc>https://torch.mlverse.org/docs/dev/reference/optim_ignite_adam.html</loc></url>
+<url><loc>https://torch.mlverse.org/docs/dev/reference/optim_ignite_adamw.html</loc></url>
+<url><loc>https://torch.mlverse.org/docs/dev/reference/optim_ignite_rmsprop.html</loc></url>
+<url><loc>https://torch.mlverse.org/docs/dev/reference/optim_ignite_sgd.html</loc></url>
 <url><loc>https://torch.mlverse.org/docs/dev/reference/optim_lbfgs.html</loc></url>
 <url><loc>https://torch.mlverse.org/docs/dev/reference/optim_required.html</loc></url>
 <url><loc>https://torch.mlverse.org/docs/dev/reference/optim_rmsprop.html</loc></url>
 <url><loc>https://torch.mlverse.org/docs/dev/reference/optim_rprop.html</loc></url>
 <url><loc>https://torch.mlverse.org/docs/dev/reference/optim_sgd.html</loc></url>
 <url><loc>https://torch.mlverse.org/docs/dev/reference/optimizer.html</loc></url>
+<url><loc>https://torch.mlverse.org/docs/dev/reference/optimizer_ignite.html</loc></url>
 <url><loc>https://torch.mlverse.org/docs/dev/reference/pipe.html</loc></url>
 <url><loc>https://torch.mlverse.org/docs/dev/reference/reexports.html</loc></url>
 <url><loc>https://torch.mlverse.org/docs/dev/reference/sampler.html</loc></url>
