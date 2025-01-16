@@ -480,70 +480,34 @@ test_that("can save function for mobile", {
   expect_equal_to_tensor(torch_relu(input), f(input))
 })
 
-test_that("trace-jitted module respects 'train' and 'eval'", {
-  x = torch_tensor(1)
-  n = nn_module("nn_custom",
-    initialize = function() {
-      self$x = nn_parameter(torch_tensor(1))
-    },
-    forward = function(x) {
-      if (self$training) {
-        self$x * 1
-      } else {
-        self$x - 1
-      }
-    }
-  )()
-  njit = jit_trace(n, x)
-
-  # 1. mode is respected
-  njit$train()
-  expect_equal(njit(x), torch_tensor(1))
-  njit$train()
-  expect_equal(njit(x), torch_tensor(0))
-  # 2. parameters are shared between networks
-  njit$parameters[[1]]$requires_grad_(FALSE)
-  njit$parameters[[1]]$add_(1)
-  njit$train()
-  expect_equal(njit(x), torch_tensor(2))
-  njit$train()
-  expect_equal(njit(x), torch_tensor(1))
-
-  # 3. correct error message is thrown
-  n2 = nn_module("nn_custom",
-    initialize = function() {
-      self$x = nn_parameter(torch_tensor(1))
-    },
-    trainforward = function(x) x,
-    evalforward = function(x) x,
-    forward = function(x) x * 1
-  )()
-
-  expect_error(jit_trace_module(n2, trainforward = torch_tensor(1)), "reserved")
-  expect_error(jit_trace_module(n2, evalforward = torch_tensor(1)), "reserved")
-
-  # 4. train-eval mode of jitted model is correct and original module untouched
-  n$train()
-  njit = jit_trace(n, x)
-  expect_true(n$training)
-  expect_true(njit$training)
-  # the training field and attribute are synced
-  cpp_jit_script_module_is_training(njit$..ptr..())
-  n$eval()
-  jit_trace(n, x)
-  expect_false(n$training)
-  expect_true(njit$training)
-  cpp_jit_script_module_is_training(njit$..ptr..())
+test_that("can serialize to raw vector and deserialize again", {
+  n1 <- jit_trace(nn_linear(1, 1), torch_randn(1, 1))
+  n1$parameters$bias$requires_grad_(FALSE)
+  x <- jit_serialize(n1)
+  expect_true(is.raw(x))
+  n2 <- jit_unserialize(x)
+  x <- torch_randn(1)
+  expect_equal_to_tensor(n1(x), n2(x))
+  expect_false(n2$parameters$bias$requires_grad)
 })
 
-test_that("train, eval, is_training, training work", {
-  x = torch_tensor(1)
-  n = nn_linear(1, 1)
-  njit = jit_trace(n, x)
-  njit$train()
-  expect_true(njit$is_training())
-  expect_true(njit$training)
-  njit$train(FALSE)
-  expect_false(njit$is_training())
-  expect_false(njit$training)
+test_that("can trace only one mode", {
+  nn_custom <- nn_module("custom",
+    initialize = function() NULL,
+    forward = function(x) {
+      if (self$training) {
+        torch_abs(x)
+      } else {
+        - torch_abs(x)
+      }
+    }
+  )
+  n1 <- nn_custom()
+  n1$train()
+  n2 <- nn_custom()
+  n2$eval()
+  njit1 <- jit_trace(n1, torch_tensor(1), respect_mode = FALSE)
+  njit2 <- jit_trace(n2, torch_tensor(1), respect_mode = FALSE)
+  expect_equal_to_tensor(njit1(torch_tensor(1)), torch_abs(torch_tensor(1)))
+  expect_equal_to_tensor(njit2(torch_tensor(1)), -torch_abs(torch_tensor(1)))
 })

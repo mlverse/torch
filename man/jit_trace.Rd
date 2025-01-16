@@ -4,7 +4,7 @@
 \alias{jit_trace}
 \title{Trace a function and return an executable \code{script_function}.}
 \usage{
-jit_trace(func, ..., strict = TRUE)
+jit_trace(func, ..., strict = TRUE, respect_mode = TRUE)
 }
 \arguments{
 \item{func}{An R function that will be run with \code{example_inputs}. func arguments
@@ -24,6 +24,12 @@ turn this off when you want the tracer to record your mutable container types
 (currently list/dict) and you are sure that the container you are using in
 your problem is a constant structure and does not get used as control flow
 (\code{if}, \code{for}) conditions.}
+
+\item{respect_mode}{(\code{logical(1)})\cr
+Whether the forward method of the resulting module should respect the mode ('train' or 'eval').
+If \code{TRUE} (default), both passes will be jitted and be available as methods \code{trainforward} and \code{evalforward}.
+The \code{forward} method will then select the appropriate method based on the mode of the module.
+If \code{FALSE}, only the current mode of the module will be jitted.}
 }
 \value{
 An \code{script_function} if \code{func} is a function and \code{script_module} if
