@@ -129,6 +129,8 @@ reference:
       - optimizer
       - starts_with("optim_")
       - is_optimizer
+      - optimizer_ignite
+      - OptimizerIgnite
   - title: Learning rate schedulers
     contents:
       - starts_with("lr_")
