@@ -157,7 +157,7 @@ jit_serialize <- function(obj) {
 #' model2 <- jit_unserialize(serialized)
 jit_unserialize <- function(obj) {
   if (!is.raw(obj)) {
-    value_error("`obj` must be a raw vector.")
+    value_error("`obj` to be deserialized must be a raw vector.")
   }
   cpp_jit_script_module_unserialize(obj)
 }
