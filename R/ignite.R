@@ -117,7 +117,8 @@ OptimizerIgnite <- R6::R6Class(
     #' The parameter groups of the optimizer.
     param_groups = function(rhs) {
       if (!missing(rhs)) {
-        prev_param_groups <- self$state_dict()$param_groups
+        prev_param_groups <- self$param_groups
+        all_params = unlist(lapply(prev_param_groups, function(x) x$params))
         if (!is.list(rhs) && length(rhs) == length(prev_param_groups)) {
           value_error("Parameter groups must be a list of the same length as the number of parameter groups.")
         }
@@ -128,8 +129,16 @@ OptimizerIgnite <- R6::R6Class(
             value_error("Parameter groups must have names {paste0(names(prev_param_group), collapse = ', ')} but got {paste0(names(new_param_group), collapse = ', ')}.")
           }
 
-          if (!identical(prev_param_group$params, new_param_group$params)) {
-            value_error("Cannot change the indices of the parameter group, use `$add_param_group()` to add a new parameter group.")
+          param_cmp_value = if (is.integer(new_param_group$params)) {
+            all_params[new_param_group$params]
+          } else {
+            new_param_group$params
+          }
+
+          if (!identical(prev_param_group$params, param_cmp_value)) {
+            print(prev_param_group$params)
+            print(new_param_group$params)
+            value_error("Cannot change the parameter groups, use `$add_param_group()` to add a new parameter group.")
           }
 
           private$.set_param_group_options(self$ptr, rhs)
@@ -367,7 +376,6 @@ is_permutation <- function(vec1, vec2) {
   if (length(vec1) != length(vec2)) {
     return(FALSE)
   }
-
   # Check if sorted elements are the same
   identical(sort(vec1), sort(vec2))
 }

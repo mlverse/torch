@@ -1,5 +1,6 @@
 #include <ostream>
 #include <torch/optim/adamw.h>
+#include <torch/types.h>
 #define LANTERN_BUILD
 #include <torch/torch.h>
 #include "lantern/lantern.h"
@@ -113,7 +114,7 @@ void* _ignite_adagrad_get_states(void* optim) {
         auto base_state = state_it->second.get();
         auto adagrad_state = static_cast<torch::optim::AdagradParamState*>(base_state);
         tensors.push_back(adagrad_state->sum().clone());
-        tensors.push_back(torch::scalar_tensor(adagrad_state->step(), torch::kLong));
+        tensors.push_back(torch::tensor({adagrad_state->step()}, torch::kLong));
       }
     }
   }
@@ -201,9 +202,9 @@ void* _ignite_adam_get_states(void* optim) {
         if (adam_state->max_exp_avg_sq().defined()) {
           tensors.push_back(adam_state->max_exp_avg_sq().clone());
         } else {
-          tensors.push_back(torch::Tensor());
+          tensors.push_back(torch::empty(0, torch::kFloat32));
         }
-        tensors.push_back(torch::scalar_tensor(adam_state->step(), torch::kLong));
+        tensors.push_back(torch::tensor({adam_state->step()}, torch::kLong));
       }
     }
   }
@@ -226,7 +227,7 @@ void _ignite_adam_set_states(void* optim, void* params,void* states_) {
     auto* current_state = static_cast<torch::optim::AdamParamState*>(state_it->second.get());
     current_state->exp_avg(states[i]);
     current_state->exp_avg_sq(states[i + 1]);
-    if (states[i + 2].defined()) {
+    if (states[i + 2].numel() != 0) {
       current_state->max_exp_avg_sq(states[i + 2]);
     }
     auto step = states[i + 3];
@@ -324,9 +325,9 @@ void* _ignite_adamw_get_states(void* optim) {
         if (adamw_state->max_exp_avg_sq().defined()) {
           tensors.push_back(adamw_state->max_exp_avg_sq().clone());
         } else {
-          tensors.push_back(torch::Tensor());
+          tensors.push_back(torch::empty(0, torch::kFloat32));
         }
-        tensors.push_back(torch::scalar_tensor(adamw_state->step(), torch::kLong));
+        tensors.push_back(torch::tensor({adamw_state->step()}, torch::kLong));
       }
     }
   }
@@ -422,15 +423,15 @@ void* _ignite_rmsprop_get_states(void* optim) {
         if (rmsprop_state->grad_avg().defined()) {
           tensors.push_back(rmsprop_state->grad_avg().clone());
         } else {
-          tensors.push_back(torch::Tensor());
+          tensors.push_back(torch::empty(0, torch::kFloat32));
         }
         tensors.push_back(rmsprop_state->square_avg().clone());
         if (rmsprop_state->momentum_buffer().defined()) {
           tensors.push_back(rmsprop_state->momentum_buffer().clone());
         } else {
-          tensors.push_back(torch::Tensor());
+          tensors.push_back(torch::empty(0, torch::kFloat32));
         }
-        tensors.push_back(torch::scalar_tensor(rmsprop_state->step(), torch::kLong));
+        tensors.push_back(torch::tensor({rmsprop_state->step()}, torch::kLong));
       }
     }
   }
@@ -451,9 +452,13 @@ void _ignite_rmsprop_set_states(void* optim, void* params, void* states_) {
       state_it = opt->state().find(param.unsafeGetTensorImpl());
     }
     auto* current_state = static_cast<torch::optim::RMSpropParamState*>(state_it->second.get());
-    current_state->grad_avg(states[i]);
+    if (states[i].numel() != 0) {
+      current_state->grad_avg(states[i]);
+    }
     current_state->square_avg(states[i + 1]);
-    current_state->momentum_buffer(states[i + 2]);
+    if (states[i + 2].numel() != 0) {
+      current_state->momentum_buffer(states[i + 2]);
+    }
     auto step = states[i + 3];
     current_state->step(step.item<int64_t>());
     i += 4;
@@ -519,7 +524,7 @@ void* _ignite_sgd_get_states(void* optim) {
         if (sgd_state->momentum_buffer().defined()) {
           tensors.push_back(sgd_state->momentum_buffer().clone());
         } else {
-          tensors.push_back(torch::Tensor());
+          tensors.push_back(torch::empty(0, torch::kFloat32));
         }
       }
     }
