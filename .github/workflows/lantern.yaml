@@ -108,7 +108,7 @@ jobs:
 
       - id: artifact
         if: ${{ github.workflow == 'Test' }}
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: lantern
           path: 'src/lantern/build/${{ steps.build.outputs.fname }}'
