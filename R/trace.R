@@ -128,6 +128,23 @@ jit_save <- function(obj, path, ...) {
   invisible(obj)
 }
 
+jit_serialize <- function(obj) {
+  if (inherits(obj, "script_function")) {
+    obj$serialize()
+  } else if (inherits(obj, "script_module")) {
+    obj$..ptr..()$serialize()
+  } else {
+    value_error("Only `script_function` or `script_module` can be serialized with `jit_serialize`.")
+  }
+}
+
+jit_unserialize <- function(obj) {
+  if (!is.raw(obj)) {
+    value_error("`obj` must be a raw vector.")
+  }
+  cpp_jit_script_module_unserialize(obj)
+}
+
 ScriptFunction <- R6::R6Class(
   "ScriptFunction",
   public = list(

@@ -2091,6 +2091,25 @@ HOST_API void lantern_ScriptModule_save (void* self, void* path)
 
 }
 
+LANTERN_API void* (LANTERN_PTR _lantern_ScriptModule_serialize) (void* self);
+HOST_API void* lantern_ScriptModule_serialize (void* self)
+{
+  LANTERN_CHECK_LOADED
+  void* ret = _lantern_ScriptModule_serialize(self);
+  LANTERN_HOST_HANDLER;
+  return ret;
+}
+
+LANTERN_API void* (LANTERN_PTR _lantern_ScriptModule_unserialize) (void* self);
+HOST_API void* lantern_ScriptModule_unserialize (void* self)
+{
+  LANTERN_CHECK_LOADED
+  void* ret = _lantern_ScriptModule_unserialize(self);
+  LANTERN_HOST_HANDLER;
+  return ret;
+}
+
+
 LANTERN_API void (LANTERN_PTR _lantern_ScriptModule_save_for_mobile) (void* self, void* path);
 HOST_API void lantern_ScriptModule_save_for_mobile (void* self, void* path)
 {
@@ -10859,6 +10878,8 @@ LOAD_SYMBOL(_lantern_ScriptModule_add_constant);
 LOAD_SYMBOL(_lantern_ScriptModule_find_constant);
 LOAD_SYMBOL(_lantern_ScriptModule_add_method);
 LOAD_SYMBOL(_lantern_ScriptModule_save);
+LOAD_SYMBOL(_lantern_ScriptModule_serialize);
+LOAD_SYMBOL(_lantern_ScriptModule_unserialize);
 LOAD_SYMBOL(_lantern_ScriptModule_save_for_mobile);
 LOAD_SYMBOL(_lantern_vector_Scalar_new);
 LOAD_SYMBOL(_lantern_vector_Scalar_push_back);
