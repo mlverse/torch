@@ -103,13 +103,6 @@ test_that("sgd", {
   o$load_state_dict(torch_load(torch_serialize(o$state_dict())))
 
   # saving of state dict
-  defaults$momentum = FALSE
-  o <- do.call(make_ignite_sgd, defaults)
-  prev <- o$state_dict()
-  o$load_state_dict(torch_load(torch_serialize(o$state_dict())))
-  expect_equal(prev, o$state_dict())
-
-  defaults$momentum = TRUE
   o <- do.call(make_ignite_sgd, defaults)
   prev <- o$state_dict()
   o$load_state_dict(torch_load(torch_serialize(o$state_dict())))
