@@ -128,16 +128,33 @@ jit_save <- function(obj, path, ...) {
   invisible(obj)
 }
 
+#' @title Serialize a Script Module
+#' @description
+#' Serializes a script module and returns it as a raw vector.
+#' You can read the object again using [`jit_unserialize`].
+#' @param obj (`script_module`)\cr
+#'   Model to be serialized.
+#' @return `raw()`
+#' @examples
+#' model <- jit_trace(nn_linear(1, 1), torch_randn(1))
+#' serialized <- jit_serialize(model)
 jit_serialize <- function(obj) {
-  if (inherits(obj, "script_function")) {
-    obj$serialize()
-  } else if (inherits(obj, "script_module")) {
+  if (inherits(obj, "script_module")) {
     obj$..ptr..()$serialize()
   } else {
-    value_error("Only `script_function` or `script_module` can be serialized with `jit_serialize`.")
+    value_error("Only `script_module` can be serialized with `jit_serialize`.")
   }
 }
 
+#' @title Unserialize a Script Module
+#' @description
+#' Unserializes a script module from a raw vector (generated with [`jit_seriaize`]`).
+#' @param obj (`raw`)\cr
+#'   Serialized model.
+#' @return `script_module`
+#' model <- jit_trace(nn_linear(1, 1), torch_randn(1))
+#' serialized <- jit_serialize(model)
+#' model2 <- jit_unserialize(serialized)
 jit_unserialize <- function(obj) {
   if (!is.raw(obj)) {
     value_error("`obj` must be a raw vector.")
