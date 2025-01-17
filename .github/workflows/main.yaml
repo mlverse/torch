@@ -59,7 +59,7 @@ jobs:
 
       - name: Download lantern artifacts
         if: ${{ needs.lantern.result != 'skipped' }}
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: lantern
           path: '${{ runner.temp }}/'
@@ -70,7 +70,7 @@ jobs:
           echo "LANTERN_BASE_URL=${{ runner.temp }}/" >> $GITHUB_ENV
         shell: bash
 
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       
       - uses: ./.github/actions/setup-r
         with:
