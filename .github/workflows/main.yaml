@@ -61,8 +61,9 @@ jobs:
         if: ${{ needs.lantern.result != 'skipped' }}
         uses: actions/download-artifact@v4
         with:
-          name: lantern
+          pattern: lantern-*
           path: '${{ runner.temp }}/'
+          merge-multiple: true
 
       - name: Set base URL for downloading
         if: ${{ needs.lantern.result != 'skipped' }}
