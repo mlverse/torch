@@ -138,6 +138,7 @@ jit_save <- function(obj, path, ...) {
 #' @examples
 #' model <- jit_trace(nn_linear(1, 1), torch_randn(1))
 #' serialized <- jit_serialize(model)
+#' @export
 jit_serialize <- function(obj) {
   if (inherits(obj, "script_module")) {
     obj$..ptr..()$serialize()
@@ -155,6 +156,7 @@ jit_serialize <- function(obj) {
 #' model <- jit_trace(nn_linear(1, 1), torch_randn(1))
 #' serialized <- jit_serialize(model)
 #' model2 <- jit_unserialize(serialized)
+#' @export
 jit_unserialize <- function(obj) {
   if (!is.raw(obj)) {
     value_error("`obj` to be deserialized must be a raw vector.")
