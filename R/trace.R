@@ -209,9 +209,11 @@ module_ignored_names <- c(
   "register_parameter", "register_module", "add_module"
 )
 
-
+module_names <- new.env()
 make_script_module_name <- function(x) {
-  paste0(class(x)[1], "_", paste(sample(letters, 24, replace = TRUE), collapse = ""))
+  new_name <- make.unique(c(names(module_names), class(x)[1]), sep = "")[length(module_names) + 1L]
+  module_names[[new_name]] <- NULL
+  new_name
 }
 
 create_script_module <- function(mod) {
