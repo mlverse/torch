@@ -69,7 +69,7 @@ jobs:
           makevars: true
       
       - name: Setup cmake
-        uses: jwlawson/actions-setup-cmake@v1
+        uses: jwlawson/actions-setup-cmake@v2
         with:
           cmake-version: "3.25.1"
 
