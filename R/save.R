@@ -251,7 +251,7 @@ torch_load <- function(path, device = "cpu") {
   if (is_rds(path)) {
     return(legacy_torch_load(path, device))
   }
-  
+
   if (is.null(device)) {
     cli::cli_abort("Unexpected device {.val NULL}")
   }
@@ -333,6 +333,7 @@ legacy_torch_load <- function(path, device = "cpu") {
 
 #' Serialize a torch object returning a raw object
 #'
+
 #' It's just a wraper around [torch_save()].
 #'
 #' @inheritParams torch_save
@@ -341,7 +342,7 @@ legacy_torch_load <- function(path, device = "cpu") {
 #' @returns A raw vector containing the serialized object. Can be reloaded using
 #'   [torch_load()].
 #' @family torch_save
-#' 
+#'
 #' @export
 #' @concept serialization
 torch_serialize <- function(obj, ...) {
