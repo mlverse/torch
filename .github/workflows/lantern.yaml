@@ -78,7 +78,7 @@ jobs:
 
       - name: Install CUDA
         if: ${{matrix.cuda != ''}}
-        uses: Jimver/cuda-toolkit@v0.2.18
+        uses: Jimver/cuda-toolkit@v0.2.19
         id: cuda-toolkit
         with:
           cuda: "${{matrix.cuda}}.${{matrix.cuda_patch}}"
