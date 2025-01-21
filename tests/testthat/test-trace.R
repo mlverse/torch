@@ -490,3 +490,11 @@ test_that("can serialize to raw vector and deserialize again", {
   expect_equal_to_tensor(n1(x), n2(x))
   expect_false(n2$parameters$bias$requires_grad)
 })
+
+test_that("can define the same method during difference trace-jitting passes (#1246)", {
+  n <- nn_linear(1, 1)
+  x <- torch_tensor(1)
+  nj1 <- withr::with_seed(1, jit_trace(n, x))
+  nj2 <- expect_error(withr::with_seed(1, jit_trace(n, x)), regexp = NA)
+  expect_equal(n(x), n(x))
+})

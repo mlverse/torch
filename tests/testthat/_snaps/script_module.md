@@ -1,6 +1,6 @@
 # can print the graph
 
-    graph(%self : __torch__.nn_linear_ydgabwknrsauujvnjgioueiy,
+    graph(%self : __torch__.nn_linear,
           %3 : Float(10, 10, strides=[10, 1], requires_grad=0, device=cpu)):
       %bias : Tensor = prim::GetAttr[name="bias"](%self)
       %weight : Tensor = prim::GetAttr[name="weight"](%self)
@@ -9,7 +9,7 @@
 
 ---
 
-    graph(%self : __torch__.nn_linear_ydgabwknrsauujvnjgioueiy,
+    graph(%self : __torch__.nn_linear,
           %3 : Float(10, 10, strides=[10, 1], requires_grad=0, device=cpu)):
       %bias : Tensor = prim::GetAttr[name="bias"](%self)
       %weight : Tensor = prim::GetAttr[name="weight"](%self)
@@ -18,7 +18,7 @@
 
 # graph_for
 
-    graph(%self : __torch__.nn_linear_neebjyloatcfjjfottzlywfy,
+    graph(%self : __torch__.nn_linear1,
           %1 : Tensor):
       %bias : Tensor = prim::GetAttr[name="bias"](%self)
       %weight : Tensor = prim::GetAttr[name="weight"](%self)
@@ -32,7 +32,7 @@
 
 ---
 
-    graph(%self : __torch__.nn_linear_neebjyloatcfjjfottzlywfy,
+    graph(%self : __torch__.nn_linear1,
           %1 : Tensor):
       %bias : Tensor = prim::GetAttr[name="bias"](%self)
       %weight : Tensor = prim::GetAttr[name="weight"](%self)
