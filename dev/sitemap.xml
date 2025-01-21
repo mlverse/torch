@@ -678,6 +678,7 @@
 <url><loc>https://torch.mlverse.org/docs/dev/reference/torch_svd.html</loc></url>
 <url><loc>https://torch.mlverse.org/docs/dev/reference/torch_t.html</loc></url>
 <url><loc>https://torch.mlverse.org/docs/dev/reference/torch_take.html</loc></url>
+<url><loc>https://torch.mlverse.org/docs/dev/reference/torch_take_along_dim.html</loc></url>
 <url><loc>https://torch.mlverse.org/docs/dev/reference/torch_tan.html</loc></url>
 <url><loc>https://torch.mlverse.org/docs/dev/reference/torch_tanh.html</loc></url>
 <url><loc>https://torch.mlverse.org/docs/dev/reference/torch_tensor.html</loc></url>
