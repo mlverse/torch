@@ -11,6 +11,7 @@
   These can be used as drop-in replacements for `optim_<name>` but are considerably
   faster as they wrap the LibTorch implementation of the optimizer.
   The biggest speed differences can be observed for complex optimizers such as `AdamW`.
+* Fix: Avoid name clashes between multiple calls to `jit_trace` (#1246)
 
 # torch 0.13.0
 
