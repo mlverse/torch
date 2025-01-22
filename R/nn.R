@@ -16,7 +16,6 @@ nn_Module <- R6::R6Class(
   classname = "nn_Module",
   lock_objects = FALSE,
   public = list(
-    training = TRUE,
     initialize = function() {},
     forward = function(...) {
       not_implemented_error("Forward method is not implemented")
@@ -266,12 +265,22 @@ nn_Module <- R6::R6Class(
     }
   ),
   private = list(
+    training_ = TRUE,
     parameters_ = list(),
     buffers_ = list(),
     modules_ = list(),
     non_persistent_buffers_ = character()
   ),
   active = list(
+    training = function(rhs) {
+      if (!missing(rhs)) {
+        if (!(length(rhs) == 1 && is.logical(rhs) && !is.na(rhs))) {
+          value_error("Field `training` must be a logical flag.")
+        }
+        private$training_ = rhs
+      }
+      private$training_
+    },
     parameters = function(value, recursive = TRUE) {
       if (!missing(value)) {
         runtime_error(

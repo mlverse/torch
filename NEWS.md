@@ -6,6 +6,7 @@
 - Fixed float key_padding_mask in `nnf_multi_head_attention_forward()` (#1205)
 - Updated to LibTorch v2.5.1 (#1204)
 - Fix french translation (#1176 @cregouby)
+- Trace jitted modules now respect 'train' and 'eval' mode (#1211)
 - Feature: Faster optimizers (`optim_ignite_<name>()`) are available: Adam, AdamW, Adagrad, RMSprop,SGD.
   These can be used as drop-in replacements for `optim_<name>` but are considerably
   faster as they wrap the LibTorch implementation of the optimizer.

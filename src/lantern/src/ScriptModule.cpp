@@ -15,8 +15,33 @@ void* _lantern_ScriptModule_new(void* cu, void* name) {
   // the R side.
   auto cu_ = std::shared_ptr<torch::CompilationUnit>(
       &from_raw::CompilationUnit(cu), [](void* x) {});
+
   auto name_ = *reinterpret_cast<std::string*>(name);
-  return (void*)new torch::jit::Module(name_, cu_);
+  auto module = new torch::jit::Module(name_, cu_);
+
+  // for trace jitted models, we add a custom forward method that respects
+  // the train/eval mode
+  module->register_attribute("training", torch::BoolType::get(), true);
+  module->define(R"(
+  def train(self, x: Optional[List[bool]] = None) -> List[bool]:
+      if x is None:
+          x = [True]  # Default value
+      self.training = x[0]
+      return x
+  )");
+
+  module->define(R"(
+    def eval(self) -> List[bool]:
+      self.training = False
+      return [False]
+  )");
+
+  module->define(R"(
+    def is_training(self) -> List[bool]:
+      return [self.training]
+  )");
+
+  return (void*) module;
 }
 
 void* _lantern_ScriptModule_parameters(void* module, bool recurse) {
@@ -146,6 +171,30 @@ void _lantern_ScriptModule_add_method(void* self, void* method) {
   auto self_ = reinterpret_cast<torch::jit::script::Module*>(self);
   auto method_ = reinterpret_cast<torch::jit::Function*>(method);
   self_->type()->addMethod(method_);
+  LANTERN_FUNCTION_END_VOID
+}
+
+void _lantern_ScriptModule_add_forward(void* self, bool list_output) {
+  LANTERN_FUNCTION_START
+  auto self_ = reinterpret_cast<torch::jit::script::Module*>(self);
+  if (list_output) {
+    self_->define(R"(
+      def forward(self, x) -> List[Tensor]:
+        if self.training:
+          return self.trainforward(x)
+        else:
+          return self.evalforward(x)
+    )");
+  } else {
+    self_->define(R"(
+      def forward(self, x) -> Tensor:
+        if self.training:
+          return self.trainforward(x)
+        else:
+          return self.evalforward(x)
+    )");
+    
+  }
   LANTERN_FUNCTION_END_VOID
 }
 

@@ -64,6 +64,9 @@ ScriptModule <- R7Class(
     parameters = function() {
       cpp_jit_script_module_parameters(self, TRUE)
     },
+    training = function() {
+      self$is_training()
+    },
     is_training = function() {
       cpp_jit_script_module_is_training(self)
     },
@@ -150,6 +153,9 @@ nn_ScriptModule <- R6::R6Class(
   active = list(
     graph = function() {
       self$forward$graph
+    },
+    training = function() {
+      self$is_training()
     }
   )
 )

@@ -6,7 +6,7 @@ test_that("simnple tracing works", {
   input <- torch_tensor(c(-1, 0, 1))
   tr_fn <- jit_trace(fn, input)
 
-  expect_equal_to_tensor(tr_fn(input), fn(input))
+ expect_equal_to_tensor(tr_fn(input), fn(input))
 })
 
 test_that("print the graph works", {
@@ -478,6 +478,33 @@ test_that("can save function for mobile", {
 
   f <- jit_load(tmp)
   expect_equal_to_tensor(torch_relu(input), f(input))
+})
+
+test_that("can trace only one mode", {
+  nn_custom <- nn_module("custom",
+    initialize = function() NULL,
+    forward = function(x) {
+      if (self$training) {
+        torch_abs(x)
+      } else {
+        - torch_abs(x)
+      }
+    }
+  )
+  n1 <- nn_custom()
+  n1$train()
+  n2 <- nn_custom()
+  n2$eval()
+  njit1 <- jit_trace(n1, torch_tensor(1), respect_mode = FALSE)
+  njit2 <- jit_trace(n2, torch_tensor(1), respect_mode = FALSE)
+  njit1$train()
+  expect_equal_to_tensor(njit1(torch_tensor(1)), torch_abs(torch_tensor(1)))
+  njit1$eval()
+  expect_equal_to_tensor(njit1(torch_tensor(1)), torch_abs(torch_tensor(1)))
+  njit2$train()
+  expect_equal_to_tensor(njit2(torch_tensor(1)), -torch_abs(torch_tensor(1)))
+  njit2$eval()
+  expect_equal_to_tensor(njit2(torch_tensor(1)), -torch_abs(torch_tensor(1)))
 })
 
 test_that("can serialize to raw vector and deserialize again", {
