@@ -47505,6 +47505,28 @@ BEGIN_RCPP
     return R_NilValue;
 END_RCPP
 }
+// cpp_jit_script_module_serialize
+SEXP cpp_jit_script_module_serialize(XPtrTorchScriptModule self);
+RcppExport SEXP _torch_cpp_jit_script_module_serialize(SEXP selfSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrTorchScriptModule >::type self(selfSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_jit_script_module_serialize(self));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_jit_script_module_unserialize
+SEXP cpp_jit_script_module_unserialize(SEXP input);
+RcppExport SEXP _torch_cpp_jit_script_module_unserialize(SEXP inputSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< SEXP >::type input(inputSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_jit_script_module_unserialize(input));
+    return rcpp_result_gen;
+END_RCPP
+}
 // cpp_jit_script_module_save_for_mobile
 void cpp_jit_script_module_save_for_mobile(XPtrTorchScriptModule self, XPtrTorchstring path);
 RcppExport SEXP _torch_cpp_jit_script_module_save_for_mobile(SEXP selfSEXP, SEXP pathSEXP) {
@@ -51954,6 +51976,8 @@ static const R_CallMethodDef CallEntries[] = {
     {"_torch_cpp_jit_script_module_add_forward", (DL_FUNC) &_torch_cpp_jit_script_module_add_forward, 2},
     {"_torch_cpp_jit_script_module_find_constant", (DL_FUNC) &_torch_cpp_jit_script_module_find_constant, 2},
     {"_torch_cpp_jit_script_module_save", (DL_FUNC) &_torch_cpp_jit_script_module_save, 2},
+    {"_torch_cpp_jit_script_module_serialize", (DL_FUNC) &_torch_cpp_jit_script_module_serialize, 1},
+    {"_torch_cpp_jit_script_module_unserialize", (DL_FUNC) &_torch_cpp_jit_script_module_unserialize, 1},
     {"_torch_cpp_jit_script_module_save_for_mobile", (DL_FUNC) &_torch_cpp_jit_script_module_save_for_mobile, 2},
     {"_torch_test_stack", (DL_FUNC) &_torch_test_stack, 1},
     {"_torch_cpp_Tensor_storage", (DL_FUNC) &_torch_cpp_Tensor_storage, 1},

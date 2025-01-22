@@ -15357,6 +15357,14 @@ cpp_jit_script_module_save <- function(self, path) {
     invisible(.Call(`_torch_cpp_jit_script_module_save`, self, path))
 }
 
+cpp_jit_script_module_serialize <- function(self) {
+    .Call(`_torch_cpp_jit_script_module_serialize`, self)
+}
+
+cpp_jit_script_module_unserialize <- function(input) {
+    .Call(`_torch_cpp_jit_script_module_unserialize`, input)
+}
+
 cpp_jit_script_module_save_for_mobile <- function(self, path) {
     invisible(.Call(`_torch_cpp_jit_script_module_save_for_mobile`, self, path))
 }

@@ -507,6 +507,17 @@ test_that("can trace only one mode", {
   expect_equal_to_tensor(njit2(torch_tensor(1)), -torch_abs(torch_tensor(1)))
 })
 
+test_that("can serialize to raw vector and deserialize again", {
+  n1 <- jit_trace(nn_linear(1, 1), torch_randn(1, 1))
+  n1$parameters$bias$requires_grad_(FALSE)
+  x <- jit_serialize(n1)
+  expect_true(is.raw(x))
+  n2 <- jit_unserialize(x)
+  x <- torch_randn(1)
+  expect_equal_to_tensor(n1(x), n2(x))
+  expect_false(n2$parameters$bias$requires_grad)
+})
+
 test_that("can define the same method during difference trace-jitting passes (#1246)", {
   n <- nn_linear(1, 1)
   x <- torch_tensor(1)

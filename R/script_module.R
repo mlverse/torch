@@ -53,6 +53,9 @@ ScriptModule <- R7Class(
     save = function(path) {
       cpp_jit_script_module_save(self, path)
     },
+    serialize = function(path) {
+      cpp_jit_script_module_serialize(self)
+    },
     save_for_mobile = function(path) {
       cpp_jit_script_module_save_for_mobile(self, path)
     }

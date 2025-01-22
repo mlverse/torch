@@ -1,3 +1,4 @@
+#include <torch/csrc/jit/serialization/import.h>
 #define LANTERN_BUILD
 #include <torch/csrc/jit/frontend/tracer.h>
 #include <torch/script.h>  // One-stop header.
@@ -238,6 +239,26 @@ void _lantern_ScriptModule_save(void* self, void* path) {
   auto path_ = from_raw::string(path);
   self_->save(path_);
   LANTERN_FUNCTION_END_VOID
+}
+
+void* _lantern_ScriptModule_serialize(void* self) {
+  LANTERN_FUNCTION_START
+  auto self_ = reinterpret_cast<torch::jit::script::Module*>(self);
+  std::ostringstream oss(std::ios::binary);
+  self_->save(oss);
+  auto str = std::string(oss.str());
+  return make_raw::string(str);
+  LANTERN_FUNCTION_END
+}
+
+void* _lantern_ScriptModule_unserialize(void* s) {
+  LANTERN_FUNCTION_START
+  auto str = from_raw::string(s);
+  std::istringstream input_stream(str);
+  torch::jit::script::Module module;
+  module = torch::jit::load(input_stream);
+  return (void*)new torch::jit::script::Module(module);
+  LANTERN_FUNCTION_END
 }
 
 void* _lantern_ScriptMethod_graph_print(void* self) {
