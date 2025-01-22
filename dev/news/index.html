@@ -74,6 +74,7 @@
 <li>Fixed float key_padding_mask in <code><a href="../reference/nnf_multi_head_attention_forward.html">nnf_multi_head_attention_forward()</a></code> (<a href="https://github.com/mlverse/torch/issues/1205" class="external-link">#1205</a>)</li>
 <li>Updated to LibTorch v2.5.1 (<a href="https://github.com/mlverse/torch/issues/1204" class="external-link">#1204</a>)</li>
 <li>Fix french translation (<a href="https://github.com/mlverse/torch/issues/1176" class="external-link">#1176</a> <a href="https://github.com/cregouby" class="external-link">@cregouby</a>)</li>
+<li>Trace jitted modules now respect ‘train’ and ‘eval’ mode (<a href="https://github.com/mlverse/torch/issues/1211" class="external-link">#1211</a>)</li>
 <li>Feature: Faster optimizers (<code>optim_ignite_&lt;name&gt;()</code>) are available: Adam, AdamW, Adagrad, RMSprop,SGD. These can be used as drop-in replacements for <code>optim_&lt;name&gt;</code> but are considerably faster as they wrap the LibTorch implementation of the optimizer. The biggest speed differences can be observed for complex optimizers such as <code>AdamW</code>.</li>
 <li>Fix: Avoid name clashes between multiple calls to <code>jit_trace</code> (<a href="https://github.com/mlverse/torch/issues/1246" class="external-link">#1246</a>)</li>
 </ul></div>

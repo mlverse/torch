@@ -89,9 +89,11 @@
 <url><loc>https://torch.mlverse.org/docs/dev/reference/jit_save.html</loc></url>
 <url><loc>https://torch.mlverse.org/docs/dev/reference/jit_save_for_mobile.html</loc></url>
 <url><loc>https://torch.mlverse.org/docs/dev/reference/jit_scalar.html</loc></url>
+<url><loc>https://torch.mlverse.org/docs/dev/reference/jit_serialize.html</loc></url>
 <url><loc>https://torch.mlverse.org/docs/dev/reference/jit_trace.html</loc></url>
 <url><loc>https://torch.mlverse.org/docs/dev/reference/jit_trace_module.html</loc></url>
 <url><loc>https://torch.mlverse.org/docs/dev/reference/jit_tuple.html</loc></url>
+<url><loc>https://torch.mlverse.org/docs/dev/reference/jit_unserialize.html</loc></url>
 <url><loc>https://torch.mlverse.org/docs/dev/reference/linalg_cholesky.html</loc></url>
 <url><loc>https://torch.mlverse.org/docs/dev/reference/linalg_cholesky_ex.html</loc></url>
 <url><loc>https://torch.mlverse.org/docs/dev/reference/linalg_cond.html</loc></url>

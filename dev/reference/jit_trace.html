@@ -78,7 +78,7 @@ recording the operations performed on all the tensors.</p>
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">jit_trace</span><span class="op">(</span><span class="va">func</span>, <span class="va">...</span>, strict <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">jit_trace</span><span class="op">(</span><span class="va">func</span>, <span class="va">...</span>, strict <span class="op">=</span> <span class="cn">TRUE</span>, respect_mode <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -107,6 +107,14 @@ turn this off when you want the tracer to record your mutable container types
 (currently list/dict) and you are sure that the container you are using in
 your problem is a constant structure and does not get used as control flow
 (<code>if</code>, <code>for</code>) conditions.</p></dd>
+
+
+<dt id="arg-respect-mode">respect_mode<a class="anchor" aria-label="anchor" href="#arg-respect-mode"></a></dt>
+<dd><p>(<code>logical(1)</code>)<br>
+Whether the forward method of the resulting module should respect the mode ('train' or 'eval').
+If <code>TRUE</code> (default), both passes will be jitted and be available as methods <code>trainforward</code> and <code>evalforward</code>.
+The <code>forward</code> method will then select the appropriate method based on the mode of the module.
+If <code>FALSE</code>, only the current mode of the module will be jitted.</p></dd>
 
 </dl></div>
     <div class="section level2">
