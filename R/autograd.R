@@ -164,7 +164,7 @@ torch_hook <- R6::R6Class(
       cpp_tensor_remove_hook(self$x$ptr, self$pos)
     },
     print = function() {
-      cat("<torch_hook>")
+      cat("<torch_hook>\n")
     }
   )
 )

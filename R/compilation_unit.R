@@ -6,7 +6,7 @@ CompilationUnit <- R7Class(
       cpp_jit_compilation_unit()
     },
     print = function() {
-      cat("<torch_compilation_unit>")
+      cat("<torch_compilation_unit>\n")
     }
   )
 )
