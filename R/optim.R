@@ -18,6 +18,12 @@ is_optimizer <- function(x) {
   inherits(x, "torch_optimizer")
 }
 
+#' @export
+print.torch_optimizer_generator <- function(x, ...) {
+  x <- attr(x, "Optimizer")
+  print(x)
+}
+
 Optimizer <- R6::R6Class(
   "torch_optimizer",
   lock_objects = FALSE,
