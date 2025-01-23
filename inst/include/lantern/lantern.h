@@ -2081,14 +2081,6 @@ HOST_API void lantern_ScriptModule_add_method (void* self, void* method)
   LANTERN_HOST_HANDLER;
 
 }
-LANTERN_API void (LANTERN_PTR _lantern_ScriptModule_add_forward) (void* self, bool list_output);
-HOST_API void lantern_ScriptModule_add_forward (void* self, bool list_output)
-{
-  LANTERN_CHECK_LOADED
-   _lantern_ScriptModule_add_forward(self, list_output);
-  LANTERN_HOST_HANDLER;
-  
-}
 
 LANTERN_API void (LANTERN_PTR _lantern_ScriptModule_save) (void* self, void* path);
 HOST_API void lantern_ScriptModule_save (void* self, void* path)
@@ -10885,7 +10877,6 @@ LOAD_SYMBOL(_lantern_ScriptModule_new);
 LOAD_SYMBOL(_lantern_ScriptModule_add_constant);
 LOAD_SYMBOL(_lantern_ScriptModule_find_constant);
 LOAD_SYMBOL(_lantern_ScriptModule_add_method);
-LOAD_SYMBOL(_lantern_ScriptModule_add_forward);
 LOAD_SYMBOL(_lantern_ScriptModule_save);
 LOAD_SYMBOL(_lantern_ScriptModule_serialize);
 LOAD_SYMBOL(_lantern_ScriptModule_unserialize);

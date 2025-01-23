@@ -120,11 +120,6 @@ void cpp_jit_script_module_add_method(XPtrTorchScriptModule self,
 }
 
 // [[Rcpp::export]]
-void cpp_jit_script_module_add_forward(XPtrTorchScriptModule self, bool list_output) {
-  lantern_ScriptModule_add_forward(self.get(), list_output);
-}
-
-// [[Rcpp::export]]
 SEXP cpp_jit_script_module_find_constant(XPtrTorchScriptModule self,
                                          XPtrTorchstring name) {
   void* ret = lantern_ScriptModule_find_constant(self.get(), name.get());
