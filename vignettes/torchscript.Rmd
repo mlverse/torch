@@ -75,17 +75,21 @@ module <- nn_module(
     self$linear2 <- nn_linear(10, 1)
   },
   forward = function(x) {
-    x %>% 
-      self$linear1() %>% 
-      nnf_relu() %>% 
+    x %>%
+      self$linear1() %>%
+      nnf_relu() %>%
       self$linear2()
   }
 )
 traced_module <- jit_trace(module(), torch_randn(10, 10))
 ```
 
-When using `jit_trace` with a `nn_module` only the `forward` method is traced. You
-can use the `jit_trace_module` function to pass example inputs to other methods.
+When using `jit_trace` with a `nn_module` only the `forward` method is traced.
+However, by default, one pass will be conducted in 'train' mode, and another
+one in 'eval' mode, which is different from the PyTorch behavior.
+One can opt out of this by specifying `respect_mode = FALSE` which will only
+trace the forward pass in the mode the network is currently in.
+You can use the `jit_trace_module` function to pass example inputs to other methods.
 Traced modules look like normal `nn_modules()`, and can be called the same way:
 
 ```{r}
@@ -100,8 +104,8 @@ traced_module(torch_randn(3, 10))
 # fn does does an operation for each dimension of a tensor
 fn <- function(x) {
   x %>% 
-    torch_unbind(dim = 1) %>% 
-    lapply(function(x) x$sum()) %>% 
+    torch_unbind(dim = 1) %>%
+    lapply(function(x) x$sum()) %>%
     torch_stack(dim = 1)
 }
 # we trace using as an example a tensor with size (10, 5, 5)
