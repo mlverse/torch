@@ -22,3 +22,4 @@ torch can be used as a backend in various high-level modeling frameworks such as
 |---------------------------------------------|------------|--------------------------------------------------------------------------------------------------------|
 | [tabnet](https://github.com/mlverse/tabnet) | tidymodels | classification/regression/time series via ([modeltime](https://github.com/business-science/modeltime)) |
 | [brulee](https://github.com/tidymodels/brulee) | brulee | classification/regression |
+| [mlr3torch](https://github.com/mlr-org/mlr3torch) | mlr3torch | classification/regression |
