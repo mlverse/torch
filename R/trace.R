@@ -155,7 +155,7 @@ jit_serialize <- function(obj) {
 
 #' @title Unserialize a Script Module
 #' @description
-#' Unserializes a script module from a raw vector (generated with [`jit_seriaize`]`).
+#' Unserializes a script module from a raw vector (generated with [`jit_serialize`]`).
 #' @param obj (`raw`)\cr
 #'   Serialized model.
 #' @return `script_module`

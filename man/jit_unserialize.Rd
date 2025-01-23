@@ -17,5 +17,5 @@ serialized <- jit_serialize(model)
 model2 <- jit_unserialize(serialized)
 }
 \description{
-Unserializes a script module from a raw vector (generated with \code{\link{jit_seriaize}}`).
+Unserializes a script module from a raw vector (generated with \code{\link{jit_serialize}}`).
 }
