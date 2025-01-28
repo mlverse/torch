@@ -174,30 +174,6 @@ void _lantern_ScriptModule_add_method(void* self, void* method) {
   LANTERN_FUNCTION_END_VOID
 }
 
-void _lantern_ScriptModule_add_forward(void* self, bool list_output) {
-  LANTERN_FUNCTION_START
-  auto self_ = reinterpret_cast<torch::jit::script::Module*>(self);
-  if (list_output) {
-    self_->define(R"(
-      def forward(self, x) -> List[Tensor]:
-        if self.training:
-          return self.trainforward(x)
-        else:
-          return self.evalforward(x)
-    )");
-  } else {
-    self_->define(R"(
-      def forward(self, x) -> Tensor:
-        if self.training:
-          return self.trainforward(x)
-        else:
-          return self.evalforward(x)
-    )");
-    
-  }
-  LANTERN_FUNCTION_END_VOID
-}
-
 void _lantern_ScriptModule_add_constant(void* self, void* name, void* value) {
   LANTERN_FUNCTION_START
   auto self_ = reinterpret_cast<torch::jit::script::Module*>(self);

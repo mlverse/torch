@@ -30,8 +30,8 @@
 #' choice. If you trace such models, you may silently get incorrect results on
 #' subsequent invocations of the model. The tracer will try to emit warnings when
 #' doing something that may cause an incorrect trace to be produced.
+#' For scripting, see [`jit_compile`].
 #'
-#' @note Scripting is not yet supported in R.
 #'
 #' @param func An R function that will be run with `example_inputs`. func arguments
 #'   and return values must be tensors or (possibly nested) lists that contain tensors.
@@ -49,10 +49,13 @@
 #'   your problem is a constant structure and does not get used as control flow
 #'   (`if`, `for`) conditions.
 #' @param respect_mode (`logical(1)`)\cr
-#'   Whether the forward method of the resulting module should respect the mode ('train' or 'eval').
-#'   If `TRUE` (default), both passes will be jitted and be available as methods `trainforward` and `evalforward`.
-#'   The `forward` method will then select the appropriate method based on the mode of the module.
-#'   If `FALSE`, only the current mode of the module will be jitted.
+#'   Whether both modes ('train' or 'eval') should be traced. If `TRUE` (default),
+#'   the underlying C++ ScriptModule will have two methods `trainforward()` and
+#'   `evalforward()`.
+#'   The `$forward()` method of the R torch module will then select either based
+#'   on the mode.
+#'   If `FALSE`, only the current mode of the module will be jitted and hence only
+#'   one `forward()` method exists.
 #'
 #' @returns An `script_function` if `func` is a function and `script_module` if
 #'   `func` is a `nn_module()`.
@@ -215,6 +218,7 @@ new_script_function <- function(ptr) {
     # calling the traced function always returns a stack
     # with a single element.
     out[[1]]
+
   }
   class(f) <- "script_function"
   attr(f, "ScriptFunction") <- ScriptFunction$new(ptr = ptr)
@@ -335,6 +339,7 @@ jit_trace_module <- function(mod, ..., strict = TRUE, respect_mode = TRUE) {
 
   module <- create_script_module(mod)
 
+
   if ("evalforward" %in% names(inputs) || "trainforward" %in% names(inputs)) {
     value_error("Methods `evalforward` and `trainforward` are reserved.")
   }
@@ -375,7 +380,6 @@ jit_trace_module <- function(mod, ..., strict = TRUE, respect_mode = TRUE) {
       cpp_jit_script_module_add_method(module$..ptr..(), ptr_eval)
       cpp_jit_script_module_add_method(module$..ptr..(), ptr_train)
       list_output = is.list(with_no_grad(do.call(mod[[name]], inp)))
-      cpp_jit_script_module_add_forward(module$..ptr..(), list_output)
     } else {
       mod$train(was_training)
       tr_fn <- make_traceable_fn(mod[[name]])
@@ -393,6 +397,10 @@ jit_trace_module <- function(mod, ..., strict = TRUE, respect_mode = TRUE) {
     }
 
   }
+  if (respect_mode) {
+    module$.__enclos_env__$private$update_forward_to_respect_mode()
+  }
+
   module$train(was_training)
 
   module

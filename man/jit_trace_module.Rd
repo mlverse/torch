@@ -21,10 +21,13 @@ your problem is a constant structure and does not get used as control flow
 (\code{if}, \code{for}) conditions.}
 
 \item{respect_mode}{(\code{logical(1)})\cr
-Whether the forward method of the resulting module should respect the mode ('train' or 'eval').
-If \code{TRUE} (default), both passes will be jitted and be available as methods \code{trainforward} and \code{evalforward}.
-The \code{forward} method will then select the appropriate method based on the mode of the module.
-If \code{FALSE}, only the current mode of the module will be jitted.}
+Whether both modes ('train' or 'eval') should be traced. If \code{TRUE} (default),
+the underlying C++ ScriptModule will have two methods \code{trainforward()} and
+\code{evalforward()}.
+The \verb{$forward()} method of the R torch module will then select either based
+on the mode.
+If \code{FALSE}, only the current mode of the module will be jitted and hence only
+one \code{forward()} method exists.}
 }
 \description{
 Trace a module and return an executable ScriptModule that will be optimized
