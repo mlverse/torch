@@ -212,7 +212,7 @@ test_that("base class: error handling when loading state dict", {
   expect_error(o$load_state_dict(sd2), "The 1-th state has elements with names exp_avg")
   sd3 = o$state_dict()
   sd3$param_groups[[1]]$lr = NULL
-  expect_error(o$load_state_dict(sd3), "but got params, weight_decay")
+  expect_error(o$load_state_dict(sd3), "must include names 'params")
 })
 
 test_that("base class: deep cloning not possible", {
@@ -239,4 +239,31 @@ test_that("base class: changing the learning rate has an effect", {
   s(n1, o1)
   s(n2, o2)
   expect_false(torch_equal(n1$parameters[[1]], n2$parameters[[1]]) && torch_equal(n1$parameters[[2]], n2$parameters[[2]]))
+})
+
+
+test_that("can specify additional param_groups", {
+  o = optim_ignite_adamw(list(torch_tensor(1, requires_grad = TRUE)), lr = 0.1)
+  o$param_groups[[1]]$initial_lr = 0.2
+  expect_equal(o$param_groups[[1]]$initial_lr, 0.2)
+  expect_equal(o$state_dict()$param_groups[[1]]$initial_lr, 0.2)
+  o$param_groups[[1]]$initial_lr = 0.3
+  expect_equal(o$param_groups[[1]]$initial_lr, 0.3)
+  expect_equal(o$state_dict()$param_groups[[1]]$initial_lr, 0.3)
+
+  o$param_groups[[1]]$initial_lr = NULL
+  expect_equal(o$param_groups[[1]]$initial_lr, NULL)
+  expect_equal(o$state_dict()$param_groups[[1]]$initial_lr, NULL)
+
+  o = optim_ignite_adamw(params = list(
+    list(params = list(torch_tensor(1, requires_grad = TRUE)), lr = 0.1),
+    list(params = list(torch_tensor(1, requires_grad = TRUE)), lr = 0.2)
+  ))
+
+  o$param_groups[[1]]$initial_lr = 0.1
+  o$param_groups[[2]]$initial_lr = 0.2
+  expect_equal(o$param_groups[[1]]$initial_lr, 0.1)
+  expect_equal(o$param_groups[[2]]$initial_lr, 0.2)
+  expect_equal(o$state_dict()$param_groups[[1]]$initial_lr, 0.1)
+  expect_equal(o$state_dict()$param_groups[[2]]$initial_lr, 0.2)
 })
