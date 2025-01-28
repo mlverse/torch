@@ -112,10 +112,13 @@ your problem is a constant structure and does not get used as control flow
 
 <dt id="arg-respect-mode">respect_mode<a class="anchor" aria-label="anchor" href="#arg-respect-mode"></a></dt>
 <dd><p>(<code>logical(1)</code>)<br>
-Whether the forward method of the resulting module should respect the mode ('train' or 'eval').
-If <code>TRUE</code> (default), both passes will be jitted and be available as methods <code>trainforward</code> and <code>evalforward</code>.
-The <code>forward</code> method will then select the appropriate method based on the mode of the module.
-If <code>FALSE</code>, only the current mode of the module will be jitted.</p></dd>
+Whether both modes ('train' or 'eval') should be traced. If <code>TRUE</code> (default),
+the underlying C++ ScriptModule will have two methods <code>trainforward()</code> and
+<code>evalforward()</code>.
+The <code>$forward()</code> method of the R torch module will then select either based
+on the mode.
+If <code>FALSE</code>, only the current mode of the module will be jitted and hence only
+one <code>forward()</code> method exists.</p></dd>
 
 </dl></div>
     <div class="section level2">
