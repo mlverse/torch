@@ -73,6 +73,11 @@ jobs:
         shell: bash
 
       - uses: actions/checkout@v4
+
+      - if: ${{ env.TORCH_TEST_CUDA == 1 }}
+        shell: bash
+        run: |
+          nvidia-smi
       
       - uses: ./.github/actions/setup-r
         with:
