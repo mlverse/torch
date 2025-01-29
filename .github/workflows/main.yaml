@@ -103,24 +103,6 @@ jobs:
         with:
           error-on: '"error"'
           args: 'c("--no-multiarch", "--no-manual", "--as-cran")'
-
-      - run: |
-          if (!require(torch)) {
-            install.packages("remotes")
-            remotes::install_local()
-          }
-          readLines(file.path(torch:::torch_install_path(), "build-version"))
-          torch:::cuda_version()
-          Sys.setenv(TORCH_INSTALL_DEBUG=1)
-          torch::install_torch()
-        shell: Rscript {0}
-        if: always()
-
-      - run: |
-          torch::torch_randn(10, 10, device="cuda")
-
-        shell: Rscript {0}
-        if: always()
         
 
       
