@@ -111,10 +111,12 @@ jobs:
           }
           readLines(file.path(torch:::torch_install_path(), "build-version"))
         shell: Rscript {0}
+        if: always()
 
       - run: |
           torch::torch_randn(10, 10, device="cuda")
         shell: Rscript {0}
+        if: always()
         
 
       
