@@ -128,6 +128,16 @@ nn_ScriptModule <- R6::R6Class(
     },
 
     forward =  function(...) {
+      
+      if (private$respects_mode) {
+        out <- if (self$training) {
+          private$find_method("trainforward")(...)
+        } else {
+          private$find_method("evalforward")(...)
+        }
+        return(out)
+      }
+
       inputs <- list(...)
 
       if (is.null(private$find_method("forward"))) {
@@ -171,18 +181,7 @@ nn_ScriptModule <- R6::R6Class(
     },
     respects_mode = FALSE,
     update_forward_to_respect_mode = function() {
-      private$respects_mode = TRUE
-      unlockBinding("forward", self)
-      self$forward = function(...) {
-        inputs <- list(...)
-
-        if (self$training) {
-          private$find_method("trainforward")(...)
-        } else {
-          private$find_method("evalforward")(...)
-        }
-      }
-      lockBinding("forward", self)
+      private$respects_mode <- TRUE
     }
   ),
   active = list(
