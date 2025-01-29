@@ -7,11 +7,11 @@
 torch_take_along_dim(self, indices, dim = NULL)
 }
 \arguments{
+\item{self}{the input tensor.}
+
 \item{indices}{the indices into input. Must have long dtype.}
 
 \item{dim}{the dimension to select along. Default is \code{NULL}.}
-
-\item{input}{the input tensor.}
 }
 \description{
 Selects values from input at the 1-dimensional indices from indices along the given dim.

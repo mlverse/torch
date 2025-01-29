@@ -7488,7 +7488,7 @@ NULL
 #' Functions that return indices along a dimension, like [torch_argmax()] and [torch_argsort()], 
 #' are designed to work with this function. See the examples below.
 #' 
-#' @param input the input tensor.
+#' @param self the input tensor.
 #' @param indices the indices into input. Must have long dtype.
 #' @param dim the dimension to select along. Default is `NULL`.
 #' 
