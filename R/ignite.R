@@ -29,6 +29,8 @@ OptimizerIgnite <- R6::R6Class(
         opts
       }
 
+      private$.additional_param_groups <- list(list())
+
       if (is.list(params) && is.list(params[[1]]$params)) {
         opts <- helper(params[[1]])
         self$ptr <- do.call(private$.optim, c(list(params = params[[1]]$params), opts))
@@ -49,7 +51,7 @@ OptimizerIgnite <- R6::R6Class(
     #'   they belong, converted to character.
     #' @return (`list()`)
     state_dict = function() {
-      stop("Abstract method")
+      extract_ignite_state_dict(self, private$.get_states(self$ptr), private$.state_names)
     },
     #' @description
     #' Loads the state dictionary into the optimizer.
@@ -110,6 +112,7 @@ OptimizerIgnite <- R6::R6Class(
       param_group <- c(param_group, self$defaults[!(names(self$defaults) %in% names(param_group))])
       do.call(private$.assert_params, param_group)
       do.call(private$.add_param_group, c(list(opt = self$ptr, params = params), param_group))
+      private$.additional_param_groups[[length(private$.additional_param_groups) + 1]] <- list()
     }
   ),
   active = list(
@@ -117,6 +120,7 @@ OptimizerIgnite <- R6::R6Class(
     #' The parameter groups of the optimizer.
     param_groups = function(rhs) {
       if (!missing(rhs)) {
+        cpp_names <- c("params", private$.config_names)
         prev_param_groups <- self$param_groups
         all_params = unlist(lapply(prev_param_groups, function(x) x$params))
         if (!is.list(rhs) && length(rhs) == length(prev_param_groups)) {
@@ -125,32 +129,35 @@ OptimizerIgnite <- R6::R6Class(
         walk(seq_along(prev_param_groups), function(i) {
           prev_param_group <- prev_param_groups[[i]]
           new_param_group <- rhs[[i]]
-          if (!is_permutation(names(new_param_group), names(prev_param_group))) {
-            value_error("Parameter groups must have names {paste0(names(prev_param_group), collapse = ', ')} but got {paste0(names(new_param_group), collapse = ', ')}.")
+          if (!is_subset(cpp_names, names(new_param_group))) {
+            value_error("Parameter groups must include names '{paste0(cpp_names, collapse = ', ')}' but only included '{paste0(names(new_param_group), collapse = ', ')}'.")
           }
-
+          new_param_group_additional <- new_param_group[!(names(new_param_group) %in% cpp_names)]
+          private$.additional_param_groups[[i]] <- new_param_group_additional
           param_cmp_value = if (is.integer(new_param_group$params)) {
             all_params[new_param_group$params]
           } else {
             new_param_group$params
           }
-
           if (!identical(prev_param_group$params, param_cmp_value)) {
-            print(prev_param_group$params)
-            print(new_param_group$params)
             value_error("Cannot change the parameter groups, use `$add_param_group()` to add a new parameter group.")
           }
-
-          private$.set_param_group_options(self$ptr, rhs)
         })
+        # the possible additional param groups are simply ignored
+        private$.set_param_group_options(self$ptr, rhs)
       }
-      private$.get_param_groups(self$ptr)
+      pgs = private$.get_param_groups(self$ptr)
+      lapply(seq_along(pgs), function(i) {
+        c(pgs[[i]], private$.additional_param_groups[[i]])
+      })
     }
   ),
   private = list(
+    .additional_param_groups = NULL,
     .optim = function(params, ...) stop("Abstract method"),
     .set_states = function(ptr, params, states) stop("Abstract method"),
     .add_param_group = function(ptr, params, options) stop("Abstract method"),
+    .get_states = function(ptr) stop("Abstract method"),
     .assert_params = function(...) stop("Abstract method"),
     .set_param_group_options = function(ptr, options) stop("Abstract method"),
     .get_param_groups = function(ptr) stop("Abstract method")
@@ -195,14 +202,13 @@ optim_ignite_adagrad <- optimizer_ignite(
     initial_accumulator_value = 0, eps = 1e-10) {
     super$initialize(params, defaults = list(lr = lr, lr_decay = lr_decay, weight_decay = weight_decay, initial_accumulator_value = initial_accumulator_value, eps = eps))
   },
-  state_dict = function() {
-    extract_ignite_state_dict(self, rcpp_ignite_adagrad_get_states(self$ptr), c("sum", "step"))
-  },
   private = list(
     .optim = function(params, ...) {
       rcpp_ignite_adagrad(params = params, ...)
     },
-
+    .get_states = rcpp_ignite_adagrad_get_states,
+    .state_names = c("sum", "step"),
+    .config_names = c("lr", "lr_decay", "weight_decay", "initial_accumulator_value", "eps"),
     .set_states = rcpp_ignite_adagrad_set_states,
     .add_param_group = rcpp_ignite_adagrad_add_param_group,
     .assert_params = assert_adagrad_params,
@@ -234,14 +240,13 @@ optim_ignite_rmsprop <- optimizer_ignite(
     weight_decay = 0, momentum = 0, centered = FALSE) {
     super$initialize(params, defaults = list(lr = lr, alpha = alpha, eps = eps, weight_decay = weight_decay, momentum = momentum, centered = centered))
   },
-  state_dict = function() {
-    extract_ignite_state_dict(self, rcpp_ignite_rmsprop_get_states(self$ptr), c("grad_avg", "square_avg", "momentum_buffer", "step"))
-  },
   private = list(
     .optim = function(params, ...) {
       rcpp_ignite_rmsprop(params = params, ...)
     },
-
+    .get_states = rcpp_ignite_rmsprop_get_states,
+    .state_names = c("grad_avg", "square_avg", "momentum_buffer", "step"),
+    .config_names = c("lr", "alpha", "eps", "weight_decay", "momentum", "centered"),
     .set_states = rcpp_ignite_rmsprop_set_states,
     .add_param_group = rcpp_ignite_rmsprop_add_param_group,
     .assert_params = assert_rmsprop_params,
@@ -273,13 +278,13 @@ optim_ignite_sgd <- optimizer_ignite(
     weight_decay = 0, nesterov = FALSE) {
     super$initialize(params, defaults = list(lr = lr, momentum = momentum, dampening = dampening, weight_decay = weight_decay, nesterov = nesterov))
   },
-  state_dict = function() {
-    extract_ignite_state_dict(self, rcpp_ignite_sgd_get_states(self$ptr), "momentum_buffer")
-  },
   private = list(
     .optim = function(params, ...) {
       rcpp_ignite_sgd(params = params, ...)
     },
+    .get_states = rcpp_ignite_sgd_get_states,
+    .state_names = "momentum_buffer",
+    .config_names = c("lr", "momentum", "dampening", "weight_decay", "nesterov"),
     .set_states = rcpp_ignite_sgd_set_states,
     .add_param_group = rcpp_ignite_sgd_add_param_group,
     .assert_params = assert_sgd_params,
@@ -311,15 +316,13 @@ optim_ignite_adam <- optimizer_ignite(
     weight_decay = 0, amsgrad = FALSE) {
     super$initialize(params, defaults = list(lr = lr, betas = betas, eps = eps, weight_decay = weight_decay, amsgrad = amsgrad))
   },
-  state_dict = function() {
-    extract_ignite_state_dict(self, rcpp_ignite_adam_get_states(self$ptr),
-      c("exp_avg", "exp_avg_sq", "max_exp_avg_sq", "step"))
-  },
   private = list(
     .optim = function(params, ...) {
       rcpp_ignite_adam(params = params, ...)
     },
-
+    .get_states = rcpp_ignite_adam_get_states,
+    .config_names = c("lr", "betas", "eps", "weight_decay", "amsgrad"),
+    .state_names = c("exp_avg", "exp_avg_sq", "max_exp_avg_sq", "step"),
     .set_states = rcpp_ignite_adam_set_states,
     .add_param_group = rcpp_ignite_adam_add_param_group,
     .assert_params = assert_adam_params,
@@ -351,15 +354,13 @@ optim_ignite_adamw <- optimizer_ignite(
     weight_decay = 1e-2, amsgrad = FALSE) {
     super$initialize(params, defaults = list(lr = lr, betas = betas, eps = eps, weight_decay = weight_decay, amsgrad = amsgrad))
   },
-  state_dict = function() {
-    extract_ignite_state_dict(self, rcpp_ignite_adamw_get_states(self$ptr),
-      c("exp_avg", "exp_avg_sq", "max_exp_avg_sq", "step"))
-  },
   private = list(
     .optim = function(params, ...) {
       rcpp_ignite_adamw(params = params, ...)
     },
-    .step = rcpp_ignite_optim_step,
+    .get_states = rcpp_ignite_adamw_get_states,
+    .config_names = c("lr", "betas", "eps", "weight_decay", "amsgrad"),
+    .state_names = c("exp_avg", "exp_avg_sq", "max_exp_avg_sq", "step"),
     .set_states = rcpp_ignite_adamw_set_states,
     .add_param_group = rcpp_ignite_adamw_add_param_group,
     .assert_params = assert_adamw_params,
@@ -370,6 +371,10 @@ optim_ignite_adamw <- optimizer_ignite(
     }
   )
 )
+
+is_subset <- function(vec1, vec2) {
+  all(vec1 %in% vec2)
+}
 
 is_permutation <- function(vec1, vec2) {
   # Check if lengths are the same
