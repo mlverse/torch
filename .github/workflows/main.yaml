@@ -27,7 +27,8 @@ jobs:
         config:
           - {os: macOS, r_version: release, version: cpu-intel, runner: macos-13}
           # on m1 the R version is whicherver is installed in the runner machine.
-          - {os: macOS, r_version: '', version: cpu-m1, runner: [self-hosted, m1]}
+          - {os: macOS, r_version: '', version: cpu-m1, runner: [self-hosted, macOS, ARM64]}
+
           - {os: ubuntu, r_version: release, version: cpu, runner: ubuntu-20.04}
           - {os: ubuntu, r_version: release, version: cpu, runner: ubuntu-20.04, precxx11abi: 1}
           - {os: ubuntu, r_version: release, version: cu12.4, runner: [self-hosted, gpu-local]}
@@ -38,6 +39,7 @@ jobs:
           
           - config: {os: ubuntu, version: cu12.4}
             container: {image: 'nvidia/cuda:12.4.1-cudnn-devel-ubuntu20.04', options: '--gpus all --runtime=nvidia'}
+            cuda_enabled: 1
 
     runs-on: ${{ matrix.config.runner }}
     container: ${{ matrix.container }}
@@ -48,6 +50,7 @@ jobs:
       R_REMOTES_NO_ERRORS_FROM_WARNINGS: true
       TORCH_TEST: 1
       TORCH_INSTALL: 1
+      TORCH_TEST_CUDA: ${{ matrix.cuda_enabled }}
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
       PRECXX11ABI: ${{ matrix.config.precxx11abi }}
       ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION: true
@@ -70,6 +73,11 @@ jobs:
         shell: bash
 
       - uses: actions/checkout@v4
+
+      - if: ${{ env.TORCH_TEST_CUDA == 1 }}
+        shell: bash
+        run: |
+          nvidia-smi
       
       - uses: ./.github/actions/setup-r
         with:
@@ -95,6 +103,7 @@ jobs:
         with:
           error-on: '"error"'
           args: 'c("--no-multiarch", "--no-manual", "--as-cran")'
+        
 
       
       
