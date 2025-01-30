@@ -398,7 +398,7 @@ jit_trace_module <- function(mod, ..., strict = TRUE, respect_mode = TRUE) {
 
   }
   if (respect_mode) {
-    module$.__enclos_env__$private$update_forward_to_respect_mode()
+    module$.__enclos_env__$private$respect_mode()
   }
 
   module$train(was_training)

@@ -180,7 +180,7 @@ nn_ScriptModule <- R6::R6Class(
       private$ptr$find_method(name)
     },
     respects_mode = FALSE,
-    update_forward_to_respect_mode = function() {
+    respect_mode = function() {
       private$respects_mode <- TRUE
     }
   ),
@@ -223,7 +223,7 @@ new_script_module <- function(ptr) {
   }
   if (!is.null(ptr$find_method("trainforward")) && !is.null(ptr$find_method("evalforward")) &&
     is.null(ptr$find_method("forward"))) {
-    module$.__enclos_env__$private$update_forward_to_respect_mode()
+    module$.__enclos_env__$private$respect_mode()
   }
   class(f) <- c("script_module", "nn_module")
   attr(f, "module") <- module
