@@ -1,3 +1,5 @@
+# torch 0.14.0
+
 # torch (development version) 
 
 ## Bug fixes
