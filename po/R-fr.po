@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: torch 0.14.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-01-30 23:24+0100\n"
-"PO-Revision-Date: 2025-01-31 00:05+0100\n"
+"PO-Revision-Date: 2025-01-31 00:19+0100\n"
 "Last-Translator: Christophe Regouby <christophe.regouby@free.fr>\n"
 "Language-Team: \n"
 "Language: fr_FR\n"
@@ -429,7 +429,7 @@ msgid ""
 "Parameter groups must include names '{paste0(cpp_names, collapse = ', ')}' "
 "but only included '{paste0(names(new_param_group), collapse = ', ')}'."
 msgstr ""
-"Les groupes de paramêtres doivent contenir les noms'{paste0(cpp_names, "
+"Les groupes de paramêtres doivent contenir les noms '{paste0(cpp_names, "
 "collapse = ', ')}', actuellement, c'est '{paste0(names(new_param_group), "
 "collapse = ', ')}'."
 
@@ -1215,7 +1215,8 @@ msgstr ""
 
 #: optim-lr_scheduler.R:697
 msgid "Epoch %s: reducing learning rate of group %s to %.4e"
-msgstr "Ajustement du ‘learning_rate’ du groupe %s à la valeur %.4f"
+msgstr ""
+"Époque %s : réduction du ‘learning_rate’ du groupe %s à la valeur %.4e."
 
 #: optim-lr_scheduler.R:721
 msgid "mode {mode} is unknown!"
@@ -1289,7 +1290,7 @@ msgstr ""
 
 #: optim.R:165
 msgid "OptimizerIgnite cannot be deep cloned"
-msgstr "OptimizerIgnite le peut pas être cloné en mode \"deep clone\"."
+msgstr "OptimizerIgnite ne peut pas être cloné en profondeur"
 
 #: package.R:54
 msgid "Failed to install torch, manually run {.fn install_torch}"
@@ -1460,9 +1461,7 @@ msgstr ""
 
 #: trace.R:155
 msgid "Only `script_module` can be serialized with `jit_serialize`."
-msgstr ""
-"‘jit_save’ n’est disponible que pour une ‘script_function’ ou un "
-"‘script_module’."
+msgstr "On ne peut sérialiser que des `script_module` avec `jit_serialize`."
 
 #: trace.R:171
 msgid "`obj` to be deserialized must be a raw vector."
