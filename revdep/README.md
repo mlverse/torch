@@ -2,57 +2,57 @@
 
 |field    |value                             |
 |:--------|:---------------------------------|
-|version  |R version 4.2.2 (2022-10-31)      |
-|os       |macOS Ventura 13.1                |
+|version  |R version 4.4.1 (2024-06-14)      |
+|os       |macOS 15.1.1                      |
 |system   |aarch64, darwin20                 |
 |ui       |X11                               |
 |language |(EN)                              |
 |collate  |en_US.UTF-8                       |
 |ctype    |en_US.UTF-8                       |
-|tz       |Europe/Rome                       |
-|date     |2023-06-06                        |
+|tz       |America/Sao_Paulo                 |
+|date     |2025-01-30                        |
 |pandoc   |2.19.2 @ /opt/homebrew/bin/pandoc |
 
 # Dependencies
 
-|package   |old    |new         |Δ  |
-|:---------|:------|:-----------|:--|
-|torch     |0.10.0 |0.10.0.9000 |*  |
-|bit       |4.0.5  |4.0.5       |   |
-|bit64     |4.0.5  |4.0.5       |   |
-|callr     |3.7.3  |3.7.3       |   |
-|cli       |3.6.1  |3.6.1       |   |
-|coro      |1.0.3  |1.0.3       |   |
-|desc      |1.4.2  |1.4.2       |   |
-|ellipsis  |0.3.2  |0.3.2       |   |
-|glue      |1.6.2  |1.6.2       |   |
-|magrittr  |2.0.3  |2.0.3       |   |
-|processx  |3.8.1  |3.8.1       |   |
-|ps        |1.7.5  |1.7.5       |   |
-|R6        |2.5.1  |2.5.1       |   |
-|Rcpp      |1.0.10 |1.0.10      |   |
-|rlang     |1.1.1  |1.1.1       |   |
-|rprojroot |2.0.3  |2.0.3       |   |
-|withr     |2.5.0  |2.5.0       |   |
+|package      |old     |new     |Δ  |
+|:------------|:-------|:-------|:--|
+|torch        |0.13.0  |0.14.0  |*  |
+|bit          |4.5.0.1 |4.5.0.1 |   |
+|bit64        |4.6.0-1 |4.6.0-1 |   |
+|callr        |3.7.6   |3.7.6   |   |
+|cli          |3.6.3   |3.6.3   |   |
+|colorspace   |NA      |2.1-1   |*  |
+|coro         |1.1.0   |1.1.0   |   |
+|desc         |1.4.3   |1.4.3   |   |
+|ellipsis     |0.3.2   |NA      |*  |
+|farver       |NA      |2.1.2   |*  |
+|glue         |1.8.0   |1.8.0   |   |
+|jsonlite     |1.8.9   |1.8.9   |   |
+|labeling     |NA      |0.4.3   |*  |
+|lifecycle    |NA      |1.0.4   |*  |
+|magrittr     |2.0.3   |2.0.3   |   |
+|munsell      |NA      |0.5.1   |*  |
+|processx     |3.8.5   |3.8.5   |   |
+|ps           |1.8.1   |1.8.1   |   |
+|R6           |2.5.1   |2.5.1   |   |
+|RColorBrewer |NA      |1.1-3   |*  |
+|Rcpp         |1.0.14  |1.0.14  |   |
+|rlang        |1.1.5   |1.1.5   |   |
+|safetensors  |0.1.2   |0.1.2   |   |
+|scales       |NA      |1.3.0   |*  |
+|viridisLite  |NA      |0.4.2   |*  |
+|withr        |3.0.2   |3.0.2   |   |
 
 # Revdeps
 
-## Failed to check (8)
-
-|package       |version |error       |warning |note |
-|:-------------|:-------|:-----------|:-------|:----|
-|PLNmodels     |1.0.1   |1           |        |     |
-|proteus       |1.1.0   |1           |        |     |
-|scDHA         |1.2.1   |1           |        |     |
-|sits          |1.4.0   |1           |        |     |
-|SPQR          |0.1.0   |1           |        |     |
-|[targets](failures.md#targets)|1.1.3   |__+1__      |        |     |
-|torchdatasets |0.3.0   |1           |        |     |
-|[torchvision](failures.md#torchvision)|0.5.1   |1 -1 __+1__ |        |     |
-
-## New problems (1)
+## Failed to check (5)
 
 |package        |version |error  |warning |note |
 |:--------------|:-------|:------|:-------|:----|
-|[torchvisionlib](problems.md#torchvisionlib)|0.4.0   |__+1__ |        |     |
+|COTAN          |2.6.2   |2      |        |3    |
+|proteus        |1.1.4   |1      |        |     |
+|tabnet         |0.6.0   |2      |        |     |
+|torchdatasets  |0.3.1   |1      |        |     |
+|[torchvisionlib](failures.md#torchvisionlib)|0.5.0   |__+1__ |        |     |
 
