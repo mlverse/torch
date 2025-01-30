@@ -180,5 +180,3 @@ Collate:
     'variable_list.R'
     'with-indices.R'
     'wrapers.R'
-Remotes:
-    RcppCore/Rcpp
