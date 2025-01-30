@@ -11,7 +11,7 @@ linalg_tensorsolve(A, B, dims = NULL)
 
 \item{B}{(Tensor): the solution}
 
-\item{dims}{(Tuple\link{int}, optional): dimensions of \code{A} to be moved.
+\item{dims}{(\code{Tuple[int]}, optional): dimensions of \code{A} to be moved.
 If \code{NULL}, no dimensions are moved. Default: \code{NULL}.}
 }
 \description{

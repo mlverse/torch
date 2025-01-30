@@ -12,7 +12,7 @@ controlled using \code{dim}.}
 
 \item{ord}{(int, float, inf, -inf, 'fro', 'nuc', optional): order of norm. Default: \code{2}}
 
-\item{dim}{(int, Tuple\link{int}, optional): dimensions over which to compute
+\item{dim}{(int, \code{Tuple[int]}, optional): dimensions over which to compute
 the vector or matrix norm. See above for the behavior when \code{dim=NULL}.
 Default: \code{NULL}}
 
