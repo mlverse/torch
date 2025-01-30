@@ -69,6 +69,11 @@ test_that("nn_sequential", {
   expect_s3_class(model, "nn_module")
 })
 
+test_that("nn_sequential only accepts modules", {
+  expect_error(nn_sequential(identity), "but got object of type")
+  expect_error(nn_sequential(nn_linear), "must be initialized")
+})
+
 test_that("nn_module_list", {
   x <- nn_module_list(list(
     nn_linear(10, 100),

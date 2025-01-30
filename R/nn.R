@@ -28,6 +28,14 @@ nn_Module <- R6::R6Class(
         name <- as.character(name)
       }
 
+      if (!inherits(module, "nn_module")) {
+        cli::cli_abort("Expected {.cls nn_module} but got object of type {.cls {class(module)}}")
+      }
+
+      if (inherits(module, "nn_module_generator")) {
+        cli::cli_abort("Module {.str {name}} must be initialized")
+      }
+
       private$modules_[[name]] <- module
     },
     register_parameter = function(name, param) {
@@ -674,7 +682,7 @@ print.nn_module <- function(x, ...) {
 #' input <- torch_randn(32, 1, 28, 28)
 #' output <- model(input)
 #' @export
-nn_sequential <- module <- nn_module(
+nn_sequential <- nn_module(
   classname = "nn_sequential",
   initialize = function(...) {
     modules <- rlang::list2(...)
