@@ -1,9 +1,9 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: torch 0.13.0.9000\n"
+"Project-Id-Version: torch 0.14.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-08-14 15:35+0200\n"
-"PO-Revision-Date: 2024-08-14 20:16+0200\n"
+"POT-Creation-Date: 2025-01-30 23:24+0100\n"
+"PO-Revision-Date: 2025-01-31 00:19+0100\n"
 "Last-Translator: Christophe Regouby <christophe.regouby@free.fr>\n"
 "Language-Team: \n"
 "Language: fr_FR\n"
@@ -11,7 +11,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Poedit 3.4.3\n"
+"X-Generator: Poedit 3.5\n"
 
 #: R7.R:46
 msgid "can only set to public, private and active"
@@ -205,7 +205,7 @@ msgstr "‘device' doit être un entier entre 0 et le nombre de devices  moins u
 
 #: cuda.R:92
 msgid "CUDA is not available."
-msgstr "CUDA n'est pas disponible"
+msgstr "CUDA n'est pas disponible."
 
 #: device.R:12
 msgid "type should not include an index because index was passed explicitly"
@@ -229,6 +229,10 @@ msgstr "`probs` doit être au minimum à une dimension."
 msgid "`logits` must be at least one-dimensional."
 msgstr "`logits` doit être au minimum à une dimension."
 
+#: distributions-constraints.R:23
+msgid "{class(self)}"
+msgstr ""
+
 #: distributions-constraints.R:38
 msgid "Cannot determine validity of dependent constraint"
 msgstr "Impossible de déterminer la validité de la constante liée"
@@ -238,6 +242,24 @@ msgid "Expected value$dim() >= {expected} but got {value$dim()}"
 msgstr ""
 "La valeur attendue est `value$dim() >= {expected}`. La valeur fournie est "
 "{value$dim()}"
+
+#: distributions-constraints.R:102
+msgid "{class(self)}:"
+msgstr ""
+
+#: distributions-constraints.R:103 distributions-constraints.R:252
+#: distributions-constraints.R:276
+msgid "(lower_bound={self$lower_bound}, upper_bound={self$upper_bound})"
+msgstr ""
+
+#: distributions-constraints.R:125 distributions-constraints.R:227
+msgid "{class(self)}: (upper_bound={self$upper_bound})"
+msgstr ""
+
+#: distributions-constraints.R:148 distributions-constraints.R:183
+#: distributions-constraints.R:205
+msgid "{class(self)}: (lower_bound={self$lower_bound})"
+msgstr ""
 
 #: distributions-mixture_same_family.R:20
 msgid "Mixture distribution must be distr_categorical."
@@ -320,6 +342,10 @@ msgstr ""
 msgid "The value argument must be within the support"
 msgstr "Le paramêtre `value` doit être à l’intérieur du support"
 
+#: distributions.R:220
+msgid "{class_name} ({args_string})"
+msgstr ""
+
 #: distributions.R:275
 msgid "Subclass {paste0(class(self), collapse = ' ')} of"
 msgstr "La classe dérivée {paste0(class(self), collapse = ' ')} de"
@@ -358,6 +384,77 @@ msgstr ""
 "La taille attendue pour {.var state} ({.val {length(state)}}) doit être le "
 "nombre de périphériques CUDA, soit ({.val {cuda_device_count()}})."
 
+#: ignite.R:24
+msgid "The `params` must have length > 0."
+msgstr "L'argument `params` doit être de longueur > 0."
+
+#: ignite.R:62
+msgid ""
+"The `state_dict` must be a list with elements 'param_groups' and 'state'."
+msgstr ""
+"L'argument `state_dict` doit être une liste avec les éléments 'param_groups' "
+"et 'state'."
+
+#: ignite.R:67
+msgid ""
+"To-be loaded state dict is missing states for parameters "
+"{paste(setdiff(names(prev_states), names(states)), collapse = ', ')}."
+msgstr ""
+"Il manque l'état des paramêtres suivants au `state dict` sur le point d'être "
+"chargé: {paste(setdiff(names(prev_states), names(states)), collapse = ', ')}."
+
+#: ignite.R:71
+msgid ""
+"The {i}-th state has elements with names {paste0(names(prev_states[[i]]), "
+"collapse = ', ')} but got {paste0(names(states[[i]]), collapse = ', ')}."
+msgstr ""
+"Le {i}-ème état des éléments només était {paste0(names(prev_states[[i]]), "
+"collapse = ', ')}, actuellement c'est {paste0(names(states[[i]]), collapse = "
+"', ')}."
+
+#: ignite.R:108
+msgid "The `params` must be a list of tensors."
+msgstr "les paramêtres ‘params’ doivent être une liste de tenseurs."
+
+#: ignite.R:127
+msgid ""
+"Parameter groups must be a list of the same length as the number of "
+"parameter groups."
+msgstr ""
+"Le dictionnaire d’état chargé en mémoire a un nombre de groupes de "
+"paramètres différent"
+
+#: ignite.R:133
+msgid ""
+"Parameter groups must include names '{paste0(cpp_names, collapse = ', ')}' "
+"but only included '{paste0(names(new_param_group), collapse = ', ')}'."
+msgstr ""
+"Les groupes de paramêtres doivent contenir les noms '{paste0(cpp_names, "
+"collapse = ', ')}', actuellement, c'est '{paste0(names(new_param_group), "
+"collapse = ', ')}'."
+
+#: ignite.R:143
+msgid ""
+"Cannot change the parameter groups, use `$add_param_group()` to add a new "
+"parameter group."
+msgstr ""
+"On ne peut pas changer les groupes de paramêtres. Il faut utiliser `"
+"$add_param_group()` pour ajouter un nouveau groupe de paramêtres."
+
+#: ignite.R:157 ignite.R:158 ignite.R:159 ignite.R:160 ignite.R:161
+#: ignite.R:162 ignite.R:163
+msgid "Abstract method"
+msgstr "<script_method>"
+
+#: install.R:58
+msgid "torch dependencies have been installed."
+msgstr "Les dépendances de torch ont été installées."
+
+#: install.R:59
+msgid "You must restart your session to use {.pkg torch} correctly."
+msgstr ""
+"Vous devez redémarrer votre session pour utiliser {.pkg torch} correctement."
+
 #: install.R:147
 msgid "Installation failed."
 msgstr "L'installation a échoué."
@@ -366,41 +463,79 @@ msgstr "L'installation a échoué."
 msgid "Could not install {.strong {libname}} from {.val {url}}."
 msgstr "Impossible d'installer {.strong {libname}} depuis {.val {url}}."
 
-#: install.R:321
+#: install.R:179
+msgid ""
+"https://github.com/mlverse/libtorch-mac-m1/releases/download/LibTorch-for-R/"
+"libtorch-{arch}-v{torch_version}.zip"
+msgstr ""
+
+#: install.R:183
+msgid ""
+"https://download.pytorch.org/libtorch/{kind}/libtorch-win-shared-with-deps-"
+"{torch_version}%2B{kind}.zip"
+msgstr ""
+
+#: install.R:187
+msgid ""
+"https://download.pytorch.org/libtorch/{kind}/libtorch-{precxx11}shared-with-"
+"deps-{torch_version}%2B{kind}.zip"
+msgstr ""
+
+#: install.R:317
 msgid "Architecture {.val {arch}} is not supported in this OS."
 msgstr ""
 "L'architecture {.val {arch} n'est pas disponible pour ce système "
 "d'exploitation."
 
-#: install.R:325
+#: install.R:321
 msgid "Unsupported architecture {.val {arch}}."
 msgstr "L'architecture {.val {arch}} n'est pas disponible."
 
-#: install.R:473
+#: install.R:469
 msgid "Unsupported CUDA version {.val {version}}"
 msgstr "La version {.val {version}} n'est pas compatible."
 
-#: install.R:474
+#: install.R:470
 msgid "Currently supported versions are: {.val {supported_versions}}."
 msgstr "Les versions compatibles sont: {.val {supported_versions}}."
 
-#: install.R:542
+#: install.R:529
+msgid "torch_install"
+msgstr ""
+
+#: install.R:538
 msgid "Unexpected value"
 msgstr "Valeur inattendue"
 
-#: install.R:589
+#: install.R:585
 msgid ""
-"Please use the env vars describe in {.fn install_torch} to configure the "
+"Please use the env vars described in {.fn install_torch} to configure the "
 "installation type."
 msgstr ""
 "Merci d'utiliser les variables d'environnement comme expliqué dans {.fn "
 "install_torch} pour configurer le type d'installation."
 
-#: install.R:592
+#: install.R:588
 msgid "It's not possible to configure the libtorch version."
 msgstr "La version de libtorch n'est pas configurable."
 
-#: install.R:637
+#: install.R:597
+msgid ""
+"Follow the links to download the dependencies, then set the {.envvar "
+"TORCH_URL} and {.envvar LANTERN_URL} env vars to the file paths."
+msgstr ""
+"Utilisez les variables d'environnement {.envvar TORCH_URL} et {.envvar "
+"LANTERN_URL} pour configurer l'emplacement des fichiers."
+
+#: install.R:598
+msgid "LibTorch: {.url {out$libtorch}}"
+msgstr ""
+
+#: install.R:599
+msgid "LibLantern: {.url {out$liblantern}}"
+msgstr ""
+
+#: install.R:633
 msgid ""
 "This function is now deprecated. The same results can be achieved with {.fn "
 "install_torch}."
@@ -408,7 +543,7 @@ msgstr ""
 "Cette fonction est dépréciée. Vous obtenez les mêmes résultats en utilisant "
 "{.fn install_torch}."
 
-#: install.R:638
+#: install.R:634
 msgid ""
 "Use the envvars {.envvar TORCH_URL} and {.envvar LANTERN_URL} to set the "
 "file locations."
@@ -416,11 +551,11 @@ msgstr ""
 "Utilisez les variables d'environnement {.envvar TORCH_URL} et {.envvar "
 "LANTERN_URL} pour configurer l'emplacement des fichiers."
 
-#: install.R:659
+#: install.R:655
 msgid "Unable to download from {.url {url}}"
 msgstr "Impossible de télécharger depuis {.url {url}}"
 
-#: install.R:660
+#: install.R:656
 msgid ""
 "Please verify that the URL is not blocked by your firewall. See also {.url "
 "https://torch.mlverse.org/docs/articles/installation.html#file-based-"
@@ -591,6 +726,22 @@ msgstr "`num_layers={num_layers}`."
 msgid "Unrecognized RNN mode: {mode}"
 msgstr "Le mode du RNN {mode} est inconnu"
 
+#: nn-rnn.R:84
+msgid "weight_ih_l{layer}{suffix}"
+msgstr ""
+
+#: nn-rnn.R:85
+msgid "weight_hh_l{layer}{suffix}"
+msgstr ""
+
+#: nn-rnn.R:89
+msgid "bias_ih_l{layer}{suffix}"
+msgstr ""
+
+#: nn-rnn.R:90
+msgid "bias_hh_l{layer}{suffix}"
+msgstr ""
+
 #: nn-rnn.R:273
 msgid "No cudnn backend for mode '{mode}'"
 msgstr "Pas de support matériel de cudnn pour le mode '{mode}'"
@@ -614,11 +765,21 @@ msgid "Input dimension should be at least {length(out_size) + 1}."
 msgstr ""
 "Les dimensions de l’entrée devraient être au moins de {length(out_size) + 1}."
 
-#: nn.R:22
+#: nn.R:21
 msgid "Forward method is not implemented"
 msgstr "la méthode 'forward' n'est pas implémentée."
 
-#: nn.R:106
+#: nn.R:32
+msgid "Expected {.cls nn_module} but got object of type {.cls {class(module)}}"
+msgstr ""
+"Un {.cls nn_module} est attendu, actuellement, c'est un objet de type {.cls "
+"{class(module)}}."
+
+#: nn.R:36
+msgid "Module {.str {name}} must be initialized"
+msgstr "Le module {.str {name}} doit être initialisé."
+
+#: nn.R:113
 msgid ""
 "nn.Module.to only accepts floating point '\n"
 "                      'dtypes, but got desired dtype {dtype}"
@@ -626,47 +787,51 @@ msgstr ""
 "nn.Module.to n’accepte que des tenseurs de `dtypes float`, le type actuel "
 "est {dtype}."
 
-#: nn.R:192
+#: nn.R:199
 msgid "Could not find {key} in the state_dict."
 msgstr "Impossible de trouver {key} dans ‘state_dict’."
 
-#: nn.R:278
+#: nn.R:286
+msgid "Field `training` must be a logical flag."
+msgstr "Le paramêtre `training` doit être un booléen."
+
+#: nn.R:295
 msgid "It's not possible to modify the parameters list."
 msgstr "La liste des paramètres n’est pas modifiable."
 
-#: nn.R:279 nn.R:295
+#: nn.R:296 nn.R:312
 msgid "You can modify the parameter in-place or use"
 msgstr "Vous pouvez modifier le paramètre à la volée ou bien utiliser"
 
-#: nn.R:280 nn.R:296
+#: nn.R:297 nn.R:313
 msgid "`module$parameter_name <- new_value`"
 msgstr "`module$parameter_name <- new_value`"
 
-#: nn.R:294
+#: nn.R:311
 msgid "It's not possible to modify the buffers list."
 msgstr "La liste des tampons n’est pas modifiable."
 
-#: nn.R:310
+#: nn.R:327
 msgid "It's not possible to modify the modules list."
 msgstr "La liste des modules n’est pas modifiable."
 
-#: nn.R:311 nn.R:331
+#: nn.R:328 nn.R:348
 msgid "You can modify the modules in-place"
 msgstr "Vous pouvez modifier les modules à la volée ou bien utiliser"
 
-#: nn.R:330
+#: nn.R:347
 msgid "It's not possible to modify the children list."
 msgstr "La liste des enfants n’est pas modifiable."
 
-#: nn.R:352
+#: nn.R:369
 msgid "`x` must be a tensor."
 msgstr "‘X’ doit être un tensor."
 
-#: nn.R:829
+#: nn.R:846
 msgid "All elements in {.arg dict} must be named."
 msgstr "Les éléments de {.arg dict} doivent tous être nommés."
 
-#: nn.R:835
+#: nn.R:852
 msgid "{.fn nn_module_dict} has {.fn forward} implementation."
 msgstr "{.fn nn_module_dict} dispose d'une implémentation de {.fn forward}"
 
@@ -678,7 +843,7 @@ msgstr "pas implémenté"
 msgid "not yet implemented."
 msgstr "pas encore implémenté."
 
-#: nnf-activation.R:798
+#: nnf-activation.R:802
 msgid "Input should be a tensor and got '{class(input)}."
 msgstr "L’entrée doit être un tenseur. Actuellement c’est un ‘{class(input)}’."
 
@@ -897,66 +1062,66 @@ msgstr "‘zeros’, ‘border’ et ‘reflection’."
 msgid "Torch tensors do not have NAs!"
 msgstr "Les tenseurs torch n’ont pas de valeur NA!"
 
-#: optim-adadelta.R:51 optim-adagrad.R:38 optim-adam.R:36 optim-adamw.R:15
-#: optim-asgd.R:32 optim-rmsprop.R:40 optim-rprop.R:30 optim-sgd.R:61
+#: optim-adadelta.R:52 optim-adagrad.R:110 optim-adam.R:106 optim-adamw.R:90
+#: optim-asgd.R:33 optim-rmsprop.R:105 optim-rprop.R:30 optim-sgd.R:106
 msgid "Invalid learning rate: {lr}"
 msgstr "‘learning_rate’ invalide: {lr}"
 
-#: optim-adadelta.R:55
+#: optim-adadelta.R:56
 msgid "Invalid rho value: {rho}"
 msgstr "Valeur de ‘rho’ invalide: {rho}"
 
-#: optim-adadelta.R:59 optim-adagrad.R:54 optim-adamw.R:19 optim-rmsprop.R:43
+#: optim-adadelta.R:60 optim-adagrad.R:126 optim-adamw.R:93 optim-rmsprop.R:108
 msgid "Invalid epsilon value: {eps}"
 msgstr "Valeur de ‘epsilon’ invalide: {eps}"
 
-#: optim-adadelta.R:63 optim-adagrad.R:46 optim-adamw.R:31 optim-asgd.R:36
-#: optim-rmsprop.R:49 optim-sgd.R:69
+#: optim-adadelta.R:64 optim-adagrad.R:118 optim-adamw.R:102 optim-asgd.R:37
+#: optim-rmsprop.R:114 optim-sgd.R:114
 msgid "Invalid weight_decay value: {weight_decay}"
 msgstr "Valeur de ‘weight_decay’ invalide: {weight_decay}"
 
-#: optim-adagrad.R:42
+#: optim-adagrad.R:114
 msgid "Invalid lr_decay value: {lr_decay}"
 msgstr "Valeur de ‘lr_decay’ invalide: {lr_decay}"
 
-#: optim-adagrad.R:50
+#: optim-adagrad.R:122
 msgid "Invalid initial_accumulator_value value: {initial_accumulator_value}"
 msgstr ""
 "Valeur de ‘initial_accumulator_value’ invalide: {initial_accumulator_value}"
 
-#: optim-adam.R:40
+#: optim-adam.R:110
 msgid "Invalid eps: {eps}"
 msgstr "Valeur de ‘ops’ invalide: {eps}"
 
-#: optim-adam.R:44
+#: optim-adam.R:114
 msgid "Invalid beta parameter at index 1"
 msgstr "Paramètre ‘beta’ invalide à l’index 1"
 
-#: optim-adam.R:48
+#: optim-adam.R:118
 msgid "Invalid beta parameter at index 2"
 msgstr "Paramètre ‘beta’ invalide à l’index 2"
 
-#: optim-adam.R:52
+#: optim-adam.R:122
 msgid "Invalid weight decay value: {weight_decay}"
 msgstr "Valeur de ‘weight decay’ invalide: {weight_decay}"
 
-#: optim-adamw.R:23
+#: optim-adamw.R:96
 msgid "Invalid betas[1] parameter value: {beta[1]}"
 msgstr "Le paramètre `betas[1]` a une valeur invalide: {beta[1]}"
 
-#: optim-adamw.R:27
+#: optim-adamw.R:99
 msgid "Invalid betas[2] parameter value: {beta[2]}"
 msgstr "Le paramètre `betas[2]` a une valeur invalide: {beta[2]}"
 
-#: optim-lbfgs.R:371
+#: optim-lbfgs.R:372
 msgid "LBFGS doesn't support per-parameter options"
 msgstr "LBFGS ne permet pas les options pour chaque paramètre"
 
-#: optim-lbfgs.R:372
+#: optim-lbfgs.R:373
 msgid "(parameter groups)"
 msgstr "(parameter groups)"
 
-#: optim-lbfgs.R:527
+#: optim-lbfgs.R:528
 msgid "only strong_wolfe is supported"
 msgstr "seul ’strong_wolfe’ est disponible"
 
@@ -967,6 +1132,10 @@ msgstr "n'est pas un optimiseur"
 #: optim-lr_scheduler.R:35
 msgid "param 'inital_lr' is not specified."
 msgstr "Le paramêtre ‘initial_lr ’ n’est pas fourni."
+
+#: optim-lr_scheduler.R:75
+msgid "Adjusting learning rate of group %s to %.4f"
+msgstr "Ajustement du ‘learning_rate’ du groupe %s à la valeur %.4f"
 
 #: optim-lr_scheduler.R:179 optim-lr_scheduler.R:237
 msgid "lr_lambda length ({i}) is different from the number of"
@@ -1044,6 +1213,11 @@ msgstr ""
 "{length(optimizer$param_groups} attendu pour `min_lrs`, actuellement c'est "
 "{length(min_lr)}"
 
+#: optim-lr_scheduler.R:697
+msgid "Epoch %s: reducing learning rate of group %s to %.4e"
+msgstr ""
+"Époque %s : réduction du ‘learning_rate’ du groupe %s à la valeur %.4e."
+
 #: optim-lr_scheduler.R:721
 msgid "mode {mode} is unknown!"
 msgstr "le mode {mode} est inconnu!"
@@ -1052,11 +1226,11 @@ msgstr "le mode {mode} est inconnu!"
 msgid "threshold mode {threshold_mode} is unknown!"
 msgstr "le mode de ’threshod’ {threshold_mode} est inconnu!"
 
-#: optim-rmsprop.R:46 optim-sgd.R:65
+#: optim-rmsprop.R:111 optim-sgd.R:110
 msgid "Invalid momentum value: {momentum}"
 msgstr "Valeur de momentum invalide: {momentum}"
 
-#: optim-rmsprop.R:52
+#: optim-rmsprop.R:117
 msgid "Invalid alpha value: {alpha}"
 msgstr "Valeur de alpha invalide: {alpha}"
 
@@ -1064,45 +1238,49 @@ msgstr "Valeur de alpha invalide: {alpha}"
 msgid "Invalid eta values: {etas[[1]]}, {etas[[2]]}"
 msgstr "Valeurs de ‘eta’ invalides: {etas[[1]]}, {etas[[2]]}"
 
-#: optim-sgd.R:73
+#: optim-sgd.R:104
+msgid "Need to specify a learning rate"
+msgstr "Un `learning_rate` est nécessaire."
+
+#: optim-sgd.R:118
 msgid "Nesterov momentum requires a momentum and zero dampening"
 msgstr "Le Nesterov momentum a besoin d’un momentum et de ‘zero dampening’"
 
-#: optim.R:37
+#: optim.R:43
 msgid "Wrong parameters specification."
 msgstr "Spécification des paramètres erronée."
 
-#: optim.R:48
+#: optim.R:54
 msgid "`param_group` is not named"
 msgstr "le groupe de paramètres n’est pas nommé"
 
-#: optim.R:59
+#: optim.R:65
 msgid "optimizer can only optimize Tensors,"
 msgstr "l’optimiseur ne peut optimiser que des tenseurs,"
 
-#: optim.R:60
+#: optim.R:66
 msgid "but one of the params is {class(param)}"
 msgstr "mais un des paramètres est {class(param)}"
 
-#: optim.R:65
+#: optim.R:71
 msgid "can't optimize a non-leaf Tensor"
 msgstr "Impossible d’optimiser un tenseur non-feuille"
 
-#: optim.R:73
+#: optim.R:79
 msgid "parameter group didn't specify a value of required"
 msgstr "Il manque une valeur au groupe de paramètres "
 
-#: optim.R:74
+#: optim.R:80
 msgid "optimization parameter {nm}"
 msgstr "pour le paramètre d’optimisation {nm}"
 
-#: optim.R:113
+#: optim.R:119
 msgid "Loaded state dict has a different number of parameter groups"
 msgstr ""
 "Le dictionnaire d’état chargé en mémoire a un nombre de groupes de "
 "paramètres different"
 
-#: optim.R:118
+#: optim.R:124
 msgid ""
 "Loaded state dict has contains a parameter group that doesn't match the size "
 "of optimizers group."
@@ -1110,18 +1288,37 @@ msgstr ""
 "Le dictionnaire d’état chargé en mémoire contient un groupes de paramètres "
 "dont la taille ne correspond pas à celle du groupe de l’optimiseur."
 
-#: package.R:104
+#: optim.R:165
+msgid "OptimizerIgnite cannot be deep cloned"
+msgstr "OptimizerIgnite ne peut pas être cloné en profondeur"
+
+#: package.R:54
+msgid "Failed to install torch, manually run {.fn install_torch}"
+msgstr ""
+"L'installation de torch a échoué, vous devez lancer l'installation manuelle "
+"avec {.fn install_torch}."
+
+#: package.R:84
+msgid "torch failed to start, restart your R session to try again."
+msgstr "torch n'a pas pu démarrer. Redémarrez la session R puis réessayer."
+
+#: package.R:85
+msgid "You might need to reinstall torch using {.fn install_torch}"
+msgstr ""
+"Vous devriez relancer l'installation de torch avec {.fn install_torch}."
+
+#: package.R:108
 msgid "Aborted."
 msgstr "Abandonné."
 
-#: package.R:113
+#: package.R:117
 msgid ""
 "Currently only {.code x86_64} systems are supported for automatic "
 "installation."
 msgstr ""
 "L'installation automatique n'existe que pour les systèmes {.code x86_64}."
 
-#: package.R:114
+#: package.R:118
 msgid ""
 "You can manually compile LibTorch for you architecture following "
 "instructions in {.url https://github.com/pytorch/pytorch#from-source}"
@@ -1130,14 +1327,18 @@ msgstr ""
 "suivant les instructions de {.url https://github.com/pytorch/pytorch#from-"
 "source}"
 
-#: package.R:115
+#: package.R:119
 msgid "You can then use {.fn install_torch_from_file} to install manually."
 msgstr ""
 "Vous pouvez ensuite utiliser {.fn install_torch_from_file} pour une "
 "installation manuelle."
 
+#: positron.R:20
+msgid "Failed to register Positron methods."
+msgstr "Impossible de consigner les méthodes Positron."
+
 #: save.R:86
-msgid "Cannot save `name` objects."
+msgid "Cannot save `name` object."
 msgstr "Impossible de sauvegarder l'objet de type `name`."
 
 #: save.R:179
@@ -1153,6 +1354,16 @@ msgstr ""
 msgid "Unexpected device {.val NULL}"
 msgstr "Périphérique `device` inattendu: {.val NULL}"
 
+#: save.R:282
+msgid "File not saved with {.fn torch_save}, returning as is."
+msgstr ""
+"Le fichier n'a pas été enregistré avec {.fn torch_save}, il reste inchangé."
+
+#: save.R:283
+msgid "Use {.fn safetensors::safe_load_file} to silence this warning."
+msgstr ""
+"Utilisez {.fn safetensors::safe_load_file} pour faire taire ce message."
+
 #: save.R:304
 msgid "currently unsuported"
 msgstr "non disponible pour le moment"
@@ -1163,14 +1374,14 @@ msgstr ""
 "Cette version de torch ne peut pas lire des fichiers avec une version de "
 "sérialisation >"
 
-#: save.R:487
+#: save.R:488
 msgid ""
-"{.arg path} must be a connection or a actual path, got {.cls {class(path)}}."
+"{.arg path} must be a connection or an actual path, got {.cls {class(path)}}."
 msgstr ""
 "{.arg path} doit être une connexion ou un chemin existant. Ici, c'est un {."
 "cls {class(path)}}."
 
-#: save.R:503
+#: save.R:504
 msgid ""
 "{.arg path} must be a connection, a raw vector or an actual path, got {.cls "
 "{class(path)}}."
@@ -1188,7 +1399,7 @@ msgstr ""
 "Les modules de Scripts ne peuvent enregistrer comme fils que d’autre modules "
 "de Script."
 
-#: script_module.R:173
+#: script_module.R:144
 msgid ""
 "Forward is not defined. Methods from submodules of traced modules are not "
 "traced. Are you trying to call from a submodule?"
@@ -1207,25 +1418,25 @@ msgstr ""
 "{.arg other} est incompatible avec {.arg device} ou {.arg dtype} non {.val "
 "NULL}."
 
-#: tensor.R:118
+#: tensor.R:122
 msgid "You must pass a cuda device."
 msgstr "Vous devez fournir un équipement cuda."
 
-#: tensor.R:183 tensor.R:190 wrapers.R:234
+#: tensor.R:187 tensor.R:194 wrapers.R:234
 msgid "start indexing starts at 1"
 msgstr "‘start’ doit être indexé à 1"
 
-#: tensor.R:201 tensor.R:219
+#: tensor.R:205 tensor.R:223
 msgid "Can't set other and dim arguments."
 msgstr ""
 "Les arguments ‘dim’ et ‘other’ ne peuvent pas être présents simultanément."
 
-#: tensor.R:348
+#: tensor.R:352
 msgid "The tensor doesn't have names so you can't rename a dimension."
 msgstr ""
 "Le tenseur n’a pas de nom, donc vous ne pouvez pas renommer une dimension."
 
-#: tensor.R:435
+#: tensor.R:439
 msgid ""
 "Converting integers > .Machine$integer.max is undefined and returns wrong "
 "results. Use as.integer64(x)"
@@ -1234,38 +1445,54 @@ msgstr ""
 "pas définie et renvoie des résultats erronés. Veuillez utiliser `as."
 "integer64(x)`"
 
-#: trace.R:70
+#: trace.R:76
 msgid "You must initialize the nn_module before tracing."
 msgstr "Vous devez initialiser le ‘nn_module’ avant de pouvoir le tracer."
 
-#: trace.R:82
+#: trace.R:89
 msgid "jit_trace needs a function or nn_module."
 msgstr "‘jit_trace’ n’est disponible que pour une fonction ou un ‘nn_module’."
 
-#: trace.R:126 trace.R:343
+#: trace.R:134 trace.R:435
 msgid "Only `script_function` or `script_module` can be saved with `jit_save`."
 msgstr ""
 "‘jit_save’ n’est disponible que pour une ‘script_function’ ou un "
 "‘script_module’."
 
-#: trace.R:281
+#: trace.R:155
+msgid "Only `script_module` can be serialized with `jit_serialize`."
+msgstr "On ne peut sérialiser que des `script_module` avec `jit_serialize`."
+
+#: trace.R:171
+msgid "`obj` to be deserialized must be a raw vector."
+msgstr "l' objet `obj` à désérialiser doit être un vecteur brut."
+
+#: trace.R:327
 msgid "`mod` must be a `nn_module()`."
 msgstr "‘mod' doit être un `nn_module()`."
 
-#: trace.R:285
+#: trace.R:331
+msgid "`respect_mode` must be a logical(1)."
+msgstr "‘respect_mode' doit être un booléen."
+
+#: trace.R:335
 msgid "Arguments passed trough `...` must be named."
 msgstr "Les arguments passés via ‘…’ doivent tous être nommés."
 
-#: trace.R:292
+#: trace.R:344
+msgid "Methods `evalforward` and `trainforward` are reserved."
+msgstr "Les méthodes `evalforward` et `trainforward` sont réservées."
+
+#: trace.R:349
 msgid "Method '{name}' does not exist in `mod` and therefore can't be traced."
 msgstr ""
 "La méthode ‘{name}’ n’existe pas dans ‘mod’ et donc ne peut pas être tracée."
 
-#: type-info.R:30
+#: type-info.R:42
 msgid "dtype must be an integer type."
 msgstr "le `dtype` doit être un entier."
 
-#: type-info.R:69
+#: type-info.R:81
 msgid "dtype must be a float type."
 msgstr "le `dtype` doit être un réel (`float`)."
 
@@ -1437,18 +1664,9 @@ msgstr "Merci de faire remonter un bug dans Github."
 #~ msgid ","
 #~ msgstr ","
 
-#~ msgid "Adjusting learning rate of group %s to %.4f"
-#~ msgstr "Ajustement du ‘learning_rate’ du groupe %s à la valeur %.4f"
-
 #~ msgid "expected %s values for %s but got %s"
 #~ msgstr ""
 #~ "`%s` valeurs sont attendues pour `%s`, actuellement `%s` sont présentes."
-
-#~ msgid "torch_scalar"
-#~ msgstr "torch_scalar"
-
-#~ msgid "<script_method>"
-#~ msgstr "<script_method>"
 
 #~ msgid "<script_function>"
 #~ msgstr "<script_function>"
