@@ -48,6 +48,11 @@ void check_lantern_loaded();
 #include <stdio.h>
 #include <string>
 
+// For OS's that do not support RTLD_DEEPBIND
+#ifndef RTLD_DEEPBIND
+#define RTLD_DEEPBIND 0
+#endif
+
 extern int lanternLogEnabled;
 #define LLOG(...) if ((lanternLogEnabled & 1) == 1) {              \
   printf("%lld INFO ", (long long)time(NULL));                                 \
