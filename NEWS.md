@@ -1,3 +1,9 @@
+# torch 0.14.1
+
+Bug fixes:
+
+- Fixed issue when compiling on non-glibc Linux distributions that don't implement `RTLD_DEEPBIND` (#1268)
+
 # torch 0.14.0
 
 ## Breaking changes
