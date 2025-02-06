@@ -76,6 +76,9 @@
 <li class="nav-item"><a class="nav-link" href="../news/index.html">Changelog</a></li>
       </ul>
 <ul class="navbar-nav">
+<li class="nav-item"><form class="form-inline" role="search">
+ <input class="form-control" type="search" name="search-input" id="search-input" autocomplete="off" aria-label="Search site" placeholder="Search for" data-search-index="../search.json">
+</form></li>
 <li class="nav-item"><a class="external-link nav-link" href="https://github.com/mlverse/torch/" aria-label="GitHub"><span class="fa fab fa-github fa-lg"></span></a></li>
       </ul>
 </div>
@@ -181,11 +184,11 @@ distributed tensor with shape 5x3.</p>
 <code class="sourceCode R"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/torch_randn.html">torch_randn</a></span><span class="op">(</span><span class="fl">5</span>, <span class="fl">3</span><span class="op">)</span></span>
 <span><span class="va">x</span></span>
 <span><span class="co">#&gt; torch_tensor</span></span>
-<span><span class="co">#&gt;  0.1784  0.8510 -0.0694</span></span>
-<span><span class="co">#&gt; -0.6980  0.0882  0.6709</span></span>
-<span><span class="co">#&gt; -1.1351  1.6649  0.5218</span></span>
-<span><span class="co">#&gt; -0.5869  0.3552 -0.3375</span></span>
-<span><span class="co">#&gt;  1.5373 -0.9501 -0.7484</span></span>
+<span><span class="co">#&gt; -0.1624 -0.1127  1.3481</span></span>
+<span><span class="co">#&gt; -0.3711  0.3872  0.4161</span></span>
+<span><span class="co">#&gt; -0.1163 -1.6271 -1.0445</span></span>
+<span><span class="co">#&gt; -0.5347  0.0149 -0.9758</span></span>
+<span><span class="co">#&gt; -0.6413  1.4198  0.3510</span></span>
 <span><span class="co">#&gt; [ CPUFloatType{5,3} ]</span></span></code></pre></div>
 <p>Another example is <code>torch_ones</code>, which creates a tensor
 filled with ones.</p>
