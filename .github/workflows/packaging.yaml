@@ -26,8 +26,8 @@ jobs:
           - {r_version: 'release', os: ubuntu, version: cpu, runner: [self-hosted, linux]}
           - {r_version: 'release', os: ubuntu, version: cu124, runner: [self-hosted, linux]}
           
-          - {r_version: 'release', os: windows, version: cpu, runner: windows-latest}
-          - {r_version: 'release', os: windows, version: cu124, runner: windows-latest}
+          - {r_version: 'release', os: windows, version: cpu, runner: windows-2019}
+          - {r_version: 'release', os: windows, version: cu124, runner: windows-2019}
           
         include:
           
@@ -88,7 +88,7 @@ jobs:
           cache: false
           extra-packages: any::rcmdcheck
           needs: check
-          
+           
       - name: Build binary package
         id: build
         run: |
