@@ -15,7 +15,7 @@ to an input sequence."><meta name="robots" content="noindex"><!-- Global site ta
 
     <a class="navbar-brand me-2" href="../index.html">torch</a>
 
-    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">0.14.0.9000</small>
+    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">0.14.1.9000</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -54,7 +54,9 @@ to an input sequence."><meta name="robots" content="noindex"><!-- Global site ta
   </ul></li>
 <li class="active nav-item"><a class="nav-link" href="../reference/index.html">Reference</a></li>
 <li class="nav-item"><a class="nav-link" href="../news/index.html">Changelog</a></li>
-      </ul><ul class="navbar-nav"><li class="nav-item"><a class="external-link nav-link" href="https://github.com/mlverse/torch/" aria-label="GitHub"><span class="fa fab fa-github fa-lg"></span></a></li>
+      </ul><ul class="navbar-nav"><li class="nav-item"><form class="form-inline" role="search">
+ <input class="form-control" type="search" name="search-input" id="search-input" autocomplete="off" aria-label="Search site" placeholder="Search for" data-search-index="../search.json"></form></li>
+<li class="nav-item"><a class="external-link nav-link" href="https://github.com/mlverse/torch/" aria-label="GitHub"><span class="fa fab fa-github fa-lg"></span></a></li>
       </ul></div>
 
 
@@ -227,65 +229,65 @@ where \(k = \frac{1}{\mbox{hidden\_size}}\)</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[1]]</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> torch_tensor</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> (1,.,.) = </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  Columns 1 to 9  0.7476  0.4275 -0.0417  0.6036 -0.2578 -0.3476  0.0492  0.5993  0.4194</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   0.0311 -0.6092  0.2812 -0.1382 -0.7496 -0.8898  0.0645  0.0712  0.8694</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   0.3744  0.1836 -0.2693 -0.1892 -0.5772  0.5898  0.2189  0.4049 -0.4576</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  Columns 1 to 9  0.7754 -0.8548  0.7097 -0.0961  0.7656  0.1631 -0.3695 -0.3829  0.4809</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  -0.7146 -0.7205  0.9403 -0.0389  0.1820 -0.5056 -0.0271 -0.3054  0.7505</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   0.5431 -0.1942 -0.1136  0.4057 -0.0261 -0.0013 -0.1351  0.4097  0.4199</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Columns 10 to 18  0.8267 -0.1600 -0.7369  0.1783  0.3791  0.1177  0.7215  0.8178 -0.8141</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   0.1640  0.0491  0.1658  0.7923  0.1290  0.2001  0.0125  0.5591 -0.8979</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  -0.3121 -0.1789 -0.3211  0.3211  0.4768  0.9330  0.2577  0.8387 -0.2680</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Columns 10 to 18 -0.8575  0.6066 -0.0643 -0.5784 -0.6362 -0.1394  0.6446  0.8988 -0.5711</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  -0.6493  0.2853 -0.7589 -0.1696  0.0826 -0.1406  0.2922  0.5704  0.5002</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  -0.5803  0.2476  0.5452  0.6453  0.2534  0.5497  0.7876  0.3512 -0.2600</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Columns 19 to 20 -0.7946 -0.4037</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  -0.8203  0.2888</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  -0.0074  0.5056</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Columns 19 to 20  0.2145 -0.5552</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   0.5487 -0.1303</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   0.8092  0.4505</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> (2,.,.) = </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  Columns 1 to 9  0.0140 -0.5432  0.1697 -0.0357 -0.4225  0.0367  0.4799  0.5602  0.6787</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  -0.1058  0.3761 -0.2960  0.2940  0.3990  0.1458 -0.5543  0.6189 -0.1064</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   0.2934  0.2359  0.0600 -0.2762  0.4334 -0.2421  0.1211  0.3767  0.2034</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  Columns 1 to 9 -0.3730  0.2112  0.1516  0.8117  0.2229 -0.0799  0.2559 -0.2653  0.1745</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  -0.4223  0.6325  0.4614  0.6531  0.1507 -0.5178 -0.2873  0.3835 -0.1538</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   0.4148  0.1793 -0.4103 -0.5014 -0.0225  0.3196 -0.4779 -0.5709 -0.1342</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Columns 10 to 18 -0.4430 -0.2206 -0.2418 -0.0227  0.4113 -0.3394 -0.2217  0.3140 -0.3454</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  -0.2138 -0.2991 -0.3644 -0.1925  0.5787 -0.3629 -0.4272  0.0841 -0.7657</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   0.0578  0.1021 -0.1930  0.5278 -0.3018 -0.0755 -0.3450  0.3165  0.1462</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Columns 10 to 18 -0.2168  0.5136 -0.2002  0.1704  0.2747 -0.4510  0.0749  0.1729 -0.7166</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  -0.3510  0.6753 -0.1932  0.5421  0.2095 -0.2746 -0.1608  0.1066  0.1460</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   0.3569  0.5451  0.1761 -0.3510  0.3633  0.2692 -0.0391 -0.3002 -0.3516</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Columns 19 to 20  0.1970  0.2345</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  -0.1180  0.1774</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   0.3090 -0.4423</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Columns 19 to 20 -0.0950  0.2545</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   0.0706  0.3255</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  -0.5060  0.5024</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> (3,.,.) = </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  Columns 1 to 9  0.2137  0.4052 -0.4171  0.0129  0.2435  0.1310 -0.7075  0.4233 -0.4562</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   0.2921 -0.1958  0.2090  0.0102  0.0914 -0.2889  0.0784  0.0912  0.2043</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   0.0545 -0.0631  0.0114 -0.3829 -0.1405  0.4625  0.4001  0.1629  0.1966</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  Columns 1 to 9 -0.2754  0.2067  0.5718  0.2320  0.2666 -0.1544 -0.5329  0.1555 -0.1981</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   0.6554  0.1856 -0.1056 -0.1683  0.1514 -0.2504 -0.3160  0.1891 -0.4861</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  -0.2640  0.3358  0.0997 -0.0060  0.5555 -0.2563 -0.5964 -0.2630  0.0978</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ... [the output was truncated (use n=-1 to disable)]</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [ CPUFloatType{5,3,20} ][ grad_fn = &lt;StackBackward0&gt; ]</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[2]]</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> torch_tensor</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> (1,.,.) = </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  Columns 1 to 9  0.7647  0.4919  0.0856  0.1568  0.2261  0.1800  0.1608  0.0070 -0.1376</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   0.5022  0.3301 -0.5028  0.0280 -0.2772  0.3481  0.0749  0.2549  0.0984</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  -0.1751  0.4828  0.2531  0.5315 -0.7016 -0.3782 -0.2993 -0.4828 -0.1954</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  Columns 1 to 9  0.6309 -0.0756 -0.1954 -0.7897 -0.5440 -0.2093  0.0421 -0.6463 -0.1044</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  -0.6433 -0.0689 -0.0801 -0.6995  0.0123  0.2210  0.0941 -0.3493 -0.1064</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  -0.5519 -0.0147 -0.1904  0.4936 -0.7405 -0.0278  0.2822  0.0578 -0.3908</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Columns 10 to 18 -0.8475  0.1736 -0.5669  0.6044  0.6313  0.5899  0.7044 -0.5361 -0.8546</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  -0.3833  0.4914 -0.0284 -0.4370  0.4517 -0.5618 -0.2262 -0.6305  0.5720</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   0.5284 -0.1176  0.3468 -0.3029  0.1740  0.2581  0.1959  0.1222 -0.3952</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Columns 10 to 18  0.6401  0.6406 -0.7079  0.2418  0.8836 -0.4527  0.5725  0.0996  0.1874</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  -0.4200  0.3236  0.2092  0.6568  0.5050 -0.1443  0.6861 -0.1488 -0.2557</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   0.9041  0.6110  0.7476  0.0070  0.8849 -0.7975  0.0085  0.9102  0.8068</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Columns 19 to 20  0.4547  0.0724</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  -0.7249 -0.2026</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   0.1438 -0.1457</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Columns 19 to 20 -0.8046 -0.7886</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  -0.7813 -0.8374</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  -0.1135 -0.2346</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> (2,.,.) = </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  Columns 1 to 9  0.0724  0.0397 -0.1633  0.3692 -0.1484  0.2094 -0.1787  0.2488  0.0494</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   0.1510  0.1280  0.0049 -0.2332  0.0474  0.2811  0.2759 -0.0906  0.4234</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   0.0377  0.1676 -0.0946 -0.2001  0.0984 -0.4348 -0.0788  0.6135  0.1535</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  Columns 1 to 9  0.4778  0.4679  0.5077  0.0020  0.5588 -0.2152 -0.0429  0.0459  0.1339</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  -0.3129  0.2194  0.2619  0.1806  0.5099 -0.6119 -0.3235 -0.2867  0.3745</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  -0.2889 -0.3929  0.0592 -0.0166  0.6520 -0.1484 -0.3781  0.2017  0.1046</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Columns 10 to 18 -0.5567 -0.0867 -0.3872  0.1427  0.3592 -0.0197  0.0353  0.3399 -0.3485</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  -0.4220  0.0417 -0.1302  0.1933  0.2539 -0.0149  0.2937  0.6859 -0.4621</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  -0.2402  0.1561  0.0854  0.5152  0.0987 -0.1343 -0.0623 -0.0993 -0.5634</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Columns 10 to 18  0.0992  0.0418 -0.1755  0.5789 -0.2412 -0.2597 -0.0562  0.3504 -0.1953</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  -0.2188  0.3267 -0.6617  0.3666 -0.0091 -0.1257 -0.2039  0.2252 -0.5302</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   0.0766  0.1467 -0.2801  0.2498 -0.0318 -0.1632  0.0308  0.2566  0.1087</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Columns 19 to 20 -0.2041  0.7005</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  -0.3511 -0.1944</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   0.1319 -0.0550</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Columns 19 to 20  0.1436  0.1595</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  -0.2673  0.2551</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   0.2399  0.3857</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [ CPUFloatType{2,3,20} ][ grad_fn = &lt;StackBackward0&gt; ]</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 </code></pre></div>

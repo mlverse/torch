@@ -29,7 +29,7 @@
 
     <a class="navbar-brand me-2" href="../../index.html">torch</a>
 
-    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">0.14.0.9000</small>
+    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">0.14.1.9000</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -77,6 +77,9 @@
 <li class="nav-item"><a class="nav-link" href="../../news/index.html">Changelog</a></li>
       </ul>
 <ul class="navbar-nav">
+<li class="nav-item"><form class="form-inline" role="search">
+ <input class="form-control" type="search" name="search-input" id="search-input" autocomplete="off" aria-label="Search site" placeholder="Search for" data-search-index="../../search.json">
+</form></li>
 <li class="nav-item"><a class="external-link nav-link" href="https://github.com/mlverse/torch/" aria-label="GitHub"><span class="fa fab fa-github fa-lg"></span></a></li>
       </ul>
 </div>
@@ -133,9 +136,9 @@
 <span><span class="va">model</span><span class="op">$</span><span class="va">parameters</span></span></code></pre></div>
 <pre><code><span><span class="co">## $w</span></span>
 <span><span class="co">## torch_tensor</span></span>
-<span><span class="co">## -1.4613</span></span>
-<span><span class="co">## -0.2894</span></span>
-<span><span class="co">## -0.0946</span></span>
+<span><span class="co">##  0.5247</span></span>
+<span><span class="co">##  0.8426</span></span>
+<span><span class="co">##  0.4392</span></span>
 <span><span class="co">## [ CPUFloatType{3,1} ][ requires_grad = TRUE ]</span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## $b</span></span>
@@ -146,9 +149,9 @@
 <code class="sourceCode R"><span><span class="co"># or individually</span></span>
 <span><span class="va">model</span><span class="op">$</span><span class="va">w</span></span></code></pre></div>
 <pre><code><span><span class="co">## torch_tensor</span></span>
-<span><span class="co">## -1.4613</span></span>
-<span><span class="co">## -0.2894</span></span>
-<span><span class="co">## -0.0946</span></span>
+<span><span class="co">##  0.5247</span></span>
+<span><span class="co">##  0.8426</span></span>
+<span><span class="co">##  0.4392</span></span>
 <span><span class="co">## [ CPUFloatType{3,1} ][ requires_grad = TRUE ]</span></span></code></pre>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">model</span><span class="op">$</span><span class="va">b</span></span></code></pre></div>
@@ -163,16 +166,16 @@
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">y_pred</span></span></code></pre></div>
 <pre><code><span><span class="co">## torch_tensor</span></span>
-<span><span class="co">##  2.5062</span></span>
-<span><span class="co">##  0.5388</span></span>
-<span><span class="co">## -0.4377</span></span>
-<span><span class="co">## -0.1523</span></span>
-<span><span class="co">##  1.4292</span></span>
-<span><span class="co">## -2.0190</span></span>
-<span><span class="co">##  1.9473</span></span>
-<span><span class="co">## -1.8903</span></span>
-<span><span class="co">## -2.2253</span></span>
-<span><span class="co">## -0.9934</span></span>
+<span><span class="co">##  1.1742</span></span>
+<span><span class="co">## -0.7074</span></span>
+<span><span class="co">##  0.9309</span></span>
+<span><span class="co">##  2.1144</span></span>
+<span><span class="co">##  0.5848</span></span>
+<span><span class="co">## -0.7340</span></span>
+<span><span class="co">##  0.2738</span></span>
+<span><span class="co">## -1.5001</span></span>
+<span><span class="co">## -1.2710</span></span>
+<span><span class="co">## -0.3619</span></span>
 <span><span class="co">## [ CPUFloatType{10,1} ][ grad_fn = &lt;AddBackward0&gt; ]</span></span></code></pre>
   </main>
 </div>
