@@ -32,11 +32,6 @@ if (DEFINED ENV{PRECXX11ABI} AND '$ENV{PRECXX11ABI}' STREQUAL '1')
     set(PRECXX11ABI 1)
 endif()
 
-# Statically link to the C++ runtime to avoid issues with mismatched runtime libraries
-if (WIN32)
-    set(CMAKE_MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>")
-endif()
-
 if (NOT EXISTS "${TORCH_PATH}")
 
     message(STATUS "TORCH_PATH doesn't exists yet. Downloading a pre-built binary.")
