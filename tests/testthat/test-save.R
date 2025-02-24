@@ -425,3 +425,10 @@ test_that("can save a complex tensor", {
   expect_true(torch_allclose(x$real, z$real))
   expect_true(torch_allclose(x$imag, z$imag))
 })
+
+test_that("can load a scalar tensor", {
+  x <- torch_scalar_tensor(1)
+  k <- torch_serialize(x)
+  y <- torch_load(k)
+  expect_true(torch_allclose(x, y))
+})

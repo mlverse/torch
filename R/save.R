@@ -83,7 +83,7 @@ legacy_save_nn_module <- function(obj, path, ..., compress = TRUE) {
 
 #' @export
 torch_save.name <- function(obj, path, ..., compress= TRUE) {
-  if (!is_exhausted(obj)) rlang::abort("Cannot save `name` objects.")
+  if (!is_exhausted(obj)) rlang::abort("Cannot save `name` object.")
   saveRDS(list(type = "coro::exhausted", version = use_ser_version()), path,
           compress = compress)
 }
@@ -251,7 +251,7 @@ torch_load <- function(path, device = "cpu") {
   if (is_rds(path)) {
     return(legacy_torch_load(path, device))
   }
-  
+
   if (is.null(device)) {
     cli::cli_abort("Unexpected device {.val NULL}")
   }
@@ -333,6 +333,7 @@ legacy_torch_load <- function(path, device = "cpu") {
 
 #' Serialize a torch object returning a raw object
 #'
+
 #' It's just a wraper around [torch_save()].
 #'
 #' @inheritParams torch_save
@@ -341,7 +342,7 @@ legacy_torch_load <- function(path, device = "cpu") {
 #' @returns A raw vector containing the serialized object. Can be reloaded using
 #'   [torch_load()].
 #' @family torch_save
-#' 
+#'
 #' @export
 #' @concept serialization
 torch_serialize <- function(obj, ...) {
@@ -484,7 +485,7 @@ create_write_con <- function(path) {
   con <- if (is.character(path)) {
     file(path, open = "wb")
   } else {
-    cli::cli_abort("{.arg path} must be a connection or a actual path, got {.cls {class(path)}}.")
+    cli::cli_abort("{.arg path} must be a connection or an actual path, got {.cls {class(path)}}.")
   }
 
   withr::defer_parent({close(con)})

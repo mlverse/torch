@@ -35,6 +35,7 @@ NULL
 #' \end{array}
 #' }
 #'
+#' @include optim.R
 #' @examples
 #' \dontrun{
 #' optimizer <- optim_adadelta(model$parameters, lr = 0.1)

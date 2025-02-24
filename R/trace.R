@@ -5,7 +5,6 @@
 #' recording the operations performed on all the tensors.
 #'
 #' The resulting recording of a standalone function produces a `script_function`.
-#' In the future we will also support tracing `nn_modules`.
 #'
 #' @section Warning:
 #'
@@ -31,8 +30,8 @@
 #' choice. If you trace such models, you may silently get incorrect results on
 #' subsequent invocations of the model. The tracer will try to emit warnings when
 #' doing something that may cause an incorrect trace to be produced.
+#' For scripting, see [`jit_compile`].
 #'
-#' @note Scripting is not yet supported in R.
 #'
 #' @param func An R function that will be run with `example_inputs`. func arguments
 #'   and return values must be tensors or (possibly nested) lists that contain tensors.
@@ -49,6 +48,14 @@
 #'   (currently list/dict) and you are sure that the container you are using in
 #'   your problem is a constant structure and does not get used as control flow
 #'   (`if`, `for`) conditions.
+#' @param respect_mode (`logical(1)`)\cr
+#'   Whether both modes ('train' or 'eval') should be traced. If `TRUE` (default),
+#'   the underlying C++ ScriptModule will have two methods `trainforward()` and
+#'   `evalforward()`.
+#'   The `$forward()` method of the R torch module will then select either based
+#'   on the mode.
+#'   If `FALSE`, only the current mode of the module will be jitted and hence only
+#'   one `forward()` method exists.
 #'
 #' @returns An `script_function` if `func` is a function and `script_module` if
 #'   `func` is a `nn_module()`.
@@ -61,8 +68,7 @@
 #' tr_fn <- jit_trace(fn, input)
 #' tr_fn(input)
 #' @export
-jit_trace <- function(func, ..., strict = TRUE) {
-  tr_fn <- make_traceable_fn(func)
+jit_trace <- function(func, ..., strict = TRUE, respect_mode = TRUE) {
   rlang::check_dots_unnamed() # we do not support named arguments
 
   if (inherits(func, "nn_module")) {
@@ -73,7 +79,8 @@ jit_trace <- function(func, ..., strict = TRUE) {
     args <- list(
       mod = func,
       forward = rlang::list2(...),
-      strict = strict
+      strict = strict,
+      respect_mode = respect_mode
     )
     return(do.call(jit_trace_module, args))
   }
@@ -81,6 +88,7 @@ jit_trace <- function(func, ..., strict = TRUE) {
   if (!rlang::is_closure(func)) {
     value_error("jit_trace needs a function or nn_module.")
   }
+  tr_fn <- make_traceable_fn(func)
 
   ptr <- cpp_trace_function(tr_fn, list(...), .compilation_unit, strict, name = "name")
   new_script_function(ptr)
@@ -129,6 +137,42 @@ jit_save <- function(obj, path, ...) {
   invisible(obj)
 }
 
+#' @title Serialize a Script Module
+#' @description
+#' Serializes a script module and returns it as a raw vector.
+#' You can read the object again using [`jit_unserialize`].
+#' @param obj (`script_module`)\cr
+#'   Model to be serialized.
+#' @return `raw()`
+#' @examples
+#' model <- jit_trace(nn_linear(1, 1), torch_randn(1))
+#' serialized <- jit_serialize(model)
+#' @export
+jit_serialize <- function(obj) {
+  if (inherits(obj, "script_module")) {
+    obj$..ptr..()$serialize()
+  } else {
+    value_error("Only `script_module` can be serialized with `jit_serialize`.")
+  }
+}
+
+#' @title Unserialize a Script Module
+#' @description
+#' Unserializes a script module from a raw vector (generated with [`jit_serialize`]`).
+#' @param obj (`raw`)\cr
+#'   Serialized model.
+#' @return `script_module`
+#' model <- jit_trace(nn_linear(1, 1), torch_randn(1))
+#' serialized <- jit_serialize(model)
+#' model2 <- jit_unserialize(serialized)
+#' @export
+jit_unserialize <- function(obj) {
+  if (!is.raw(obj)) {
+    value_error("`obj` to be deserialized must be a raw vector.")
+  }
+  cpp_jit_script_module_unserialize(obj)
+}
+
 ScriptFunction <- R6::R6Class(
   "ScriptFunction",
   public = list(
@@ -174,6 +218,7 @@ new_script_function <- function(ptr) {
     # calling the traced function always returns a stack
     # with a single element.
     out[[1]]
+
   }
   class(f) <- "script_function"
   attr(f, "ScriptFunction") <- ScriptFunction$new(ptr = ptr)
@@ -210,9 +255,11 @@ module_ignored_names <- c(
   "register_parameter", "register_module", "add_module"
 )
 
-
+module_names <- new.env()
 make_script_module_name <- function(x) {
-  paste0(class(x)[1], "_", paste(sample(letters, 24, replace = TRUE), collapse = ""))
+  new_name <- make.unique(c(names(module_names), class(x)[1]), sep = "")[length(module_names) + 1L]
+  module_names[[new_name]] <- NULL
+  new_name
 }
 
 create_script_module <- function(mod) {
@@ -264,7 +311,6 @@ create_script_module <- function(mod) {
 #' @param ... A named list containing sample inputs indexed by method names
 #'   in mod. The inputs will be passed to methods whose names correspond to inputs
 #'   keys while tracing. `list('forward'=example_forward_input, 'method2'=example_method2_input)`.
-#'
 #' @inheritParams jit_trace
 #'
 #' @examples
@@ -274,18 +320,29 @@ create_script_module <- function(mod) {
 #' x <- torch_randn(10, 10)
 #' torch_allclose(linear(x), tr_linear(x))
 #' @export
-jit_trace_module <- function(mod, ..., strict = TRUE) {
+jit_trace_module <- function(mod, ..., strict = TRUE, respect_mode = TRUE) {
   inputs <- rlang::list2(...)
 
   if (!inherits(mod, "nn_module")) {
     value_error("`mod` must be a `nn_module()`.")
   }
 
+  if (!rlang::is_logical(respect_mode) && length(respect_mode) != 1) {
+    value_error("`respect_mode` must be a logical(1).")
+  }
+
   if (!rlang::is_named(inputs)) {
     value_error("Arguments passed trough `...` must be named.")
   }
+  was_training = mod$training
+  on.exit({mod$train(was_training)}, add = TRUE)
 
   module <- create_script_module(mod)
+
+
+  if ("evalforward" %in% names(inputs) || "trainforward" %in% names(inputs)) {
+    value_error("Methods `evalforward` and `trainforward` are reserved.")
+  }
 
   for (name in names(inputs)) {
     if (!rlang::is_closure(mod[[name]])) {
@@ -296,20 +353,55 @@ jit_trace_module <- function(mod, ..., strict = TRUE) {
     if (!is.list(inp)) {
       inp <- list(inp)
     }
+    if (name == "forward" && respect_mode) {
+      tr_fn <- make_traceable_fn(mod[[name]])
+      mod$train()
+      ptr_train <- cpp_trace_function(
+        fn = tr_fn,
+        inputs = inp,
+        compilation_unit = .compilation_unit,
+        strict = strict,
+        module = module$..ptr..(),
+        name = "trainforward",
+        should_mangle = TRUE,
+        manage_memory = FALSE
+      )
+      mod$eval()
+      ptr_eval <- cpp_trace_function(
+        fn = tr_fn,
+        inputs = inp,
+        compilation_unit = .compilation_unit,
+        strict = strict,
+        module = module$..ptr..(),
+        name = "evalforward",
+        should_mangle = TRUE,
+        manage_memory = FALSE
+      )
+      cpp_jit_script_module_add_method(module$..ptr..(), ptr_eval)
+      cpp_jit_script_module_add_method(module$..ptr..(), ptr_train)
+      list_output = is.list(with_no_grad(do.call(mod[[name]], inp)))
+    } else {
+      mod$train(was_training)
+      tr_fn <- make_traceable_fn(mod[[name]])
+      ptr <- cpp_trace_function(
+        fn = tr_fn,
+        inputs = inp,
+        compilation_unit = .compilation_unit,
+        strict = strict,
+        module = module$..ptr..(),
+        name = name,
+        should_mangle = TRUE,
+        manage_memory = FALSE
+      )
+      cpp_jit_script_module_add_method(module$..ptr..(), ptr)
+    }
 
-    tr_fn <- make_traceable_fn(mod[[name]])
-    ptr <- cpp_trace_function(
-      fn = tr_fn,
-      inputs = inp,
-      compilation_unit = .compilation_unit,
-      strict = strict,
-      module = module$..ptr..(),
-      name = name,
-      should_mangle = TRUE,
-      manage_memory = FALSE
-    )
-    cpp_jit_script_module_add_method(module$..ptr..(), ptr)
   }
+  if (respect_mode) {
+    module$.__enclos_env__$private$respect_mode()
+  }
+
+  module$train(was_training)
 
   module
 }

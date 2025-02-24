@@ -35,7 +35,7 @@ runs:
       shell: bash
 
     - id: 'auth'
-      uses: aws-actions/configure-aws-credentials@master
+      uses: aws-actions/configure-aws-credentials@v4
       with:
         role-to-assume: ${{ inputs.aws_role_to_assume }}
         aws-region: ${{ inputs.aws_region }}

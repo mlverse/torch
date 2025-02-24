@@ -1,8 +1,33 @@
-# torch (development version)
+# torch 0.14.2
+
+- Fixed a regression causing torch to crash on Windows if used within RStudio.
+
+# torch 0.14.1
+
+Bug fixes:
+
+- Fixed issue when compiling on non-glibc Linux distributions that don't implement `RTLD_DEEPBIND` (#1268)
+
+# torch 0.14.0
+
+## Breaking changes
+
+- Updated to LibTorch v2.5.1 (#1204) -- potentially breaking change!
+
+## New features
+
+- Feature: Faster optimizers (`optim_ignite_<name>()`) are available: Adam, AdamW, Adagrad, RMSprop,SGD.
+  These can be used as drop-in replacements for `optim_<name>` but are considerably
+  faster as they wrap the LibTorch implementation of the optimizer.
+  The biggest speed differences can be observed for complex optimizers such as `AdamW`.
 
 ## Bug fixes
 
 - `torch_iinfo()` now support all integer dtypes (#1190 @cregouby)
+- Fixed float key_padding_mask in `nnf_multi_head_attention_forward()` (#1205)
+- Fix french translation (#1176 @cregouby)
+- Trace jitted modules now respect 'train' and 'eval' mode (#1211)
+* Fix: Avoid name clashes between multiple calls to `jit_trace` (#1246)
 
 # torch 0.13.0
 

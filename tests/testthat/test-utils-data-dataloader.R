@@ -290,6 +290,10 @@ test_that("can return tensors in multiworker dataloaders", {
 })
 
 test_that("can make reproducible runs", {
+  # TODO: see https://github.com/r-lib/callr/issues/295
+  # We can't really change when we acquire the seeds because that would break existing code too.
+  skip_on_os("windows")
+  
   if (cuda_is_available()) {
     skip_on_os("windows")
   }

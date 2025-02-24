@@ -4450,7 +4450,7 @@ NULL
 #' described in the type promotion documentation .
 #'
 #'
-#' @param from (dtype) The original `torch_dtype`.
+#' @param from_ (dtype) The original `torch_dtype`.
 #' @param to (dtype) The target `torch_dtype`.
 #'
 #' @name torch_can_cast
@@ -7477,5 +7477,29 @@ NULL
 #' @param other (`Tensor`) other tensor.
 #' 
 #' @name torch_kron
+#' @export
+NULL
+
+
+#' Selects values from input at the 1-dimensional indices from indices along the given dim.
+#' 
+#' @note If dim is `NULL`, the input array is treated as if it has been flattened to 1d.
+#' 
+#' Functions that return indices along a dimension, like [torch_argmax()] and [torch_argsort()], 
+#' are designed to work with this function. See the examples below.
+#' 
+#' @param self the input tensor.
+#' @param indices the indices into input. Must have long dtype.
+#' @param dim the dimension to select along. Default is `NULL`.
+#' 
+#' @name torch_take_along_dim
+#' @examples
+#' t <- torch_tensor(matrix(c(10, 30, 20, 60, 40, 50), nrow = 2))
+#' max_idx <- torch_argmax(t)
+#' torch_take_along_dim(t, max_idx)
+#' 
+#' sorted_idx <- torch_argsort(t, dim=2)
+#' torch_take_along_dim(t, sorted_idx, dim=2)
+#' 
 #' @export
 NULL

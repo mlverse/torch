@@ -13,7 +13,7 @@ test_that("positive definite", {
   x <- torch_randn(10, 2, 2)
   expect_tensor_shape(constraint_positive_definite$check(x), c(1, 10))
 
-  x <- torch_ones(10, 2, 2)
+  x <- torch_diag_embed(-1*torch_ones(10, 2, 2), offset = 0, -2, -1)[,1,,]
   expect_equal_to_r(constraint_positive_definite$check(x), matrix(FALSE, nrow = 1, ncol = 10))
 
   x <- torch_eye(2, 2)$unsqueeze(1)

@@ -728,10 +728,14 @@ nnf_multi_head_attention_forward <- function(query, # type: Tensor
 
   if (!is.null(key_padding_mask)) {
     attn_output_weights <- attn_output_weights$view(c(bsz, num_heads, tgt_len, src_len))
-    attn_output_weights <- attn_output_weights$masked_fill(
-      key_padding_mask$unsqueeze(2)$unsqueeze(3),
-      -Inf
-    )
+    if (key_padding_mask$dtype == torch_bool()) {
+      attn_output_weights <- attn_output_weights$masked_fill(
+        key_padding_mask$unsqueeze(2)$unsqueeze(3),
+        -Inf
+      )
+    } else {
+      attn_output_weights <- attn_output_weights + key_padding_mask$unsqueeze(2)$unsqueeze(3)
+    }
     attn_output_weights <- attn_output_weights$view(c(
       bsz * num_heads,
       tgt_len,

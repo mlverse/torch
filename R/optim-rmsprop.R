@@ -16,6 +16,7 @@ NULL
 #' weight_decay (float, optional): weight decay (L2 penalty) (default: 0)
 #' @param weight_decay optional weight decay penalty. (default: 0)
 #'
+#' @include optim.R
 #' @note
 #' The centered version first appears in
 #' [Generating Sequences With Recurrent Neural Networks](https://arxiv.org/pdf/1308.0850v5).
@@ -36,21 +37,7 @@ optim_rmsprop <- optimizer(
   "optim_rmsprop",
   initialize = function(params, lr = 1e-2, alpha = 0.99, eps = 1e-8,
                         weight_decay = 0, momentum = 0, centered = FALSE) {
-    if (lr < 0) {
-      value_error("Invalid learning rate: {lr}")
-    }
-    if (eps < 0) {
-      value_error("Invalid epsilon value: {eps}")
-    }
-    if (momentum < 0) {
-      value_error("Invalid momentum value: {momentum}")
-    }
-    if (weight_decay < 0) {
-      value_error("Invalid weight_decay value: {weight_decay}")
-    }
-    if (alpha < 0) {
-      value_error("Invalid alpha value: {alpha}")
-    }
+    assert_rmsprop_params(lr, alpha, eps, weight_decay, momentum, centered)
 
     defaults <- list(
       lr = lr, alpha = alpha, eps = eps, weight_decay = weight_decay,
@@ -112,3 +99,21 @@ optim_rmsprop <- optimizer(
     })
   }
 )
+
+assert_rmsprop_params <- function(lr, alpha, eps, weight_decay, momentum, centered) {   
+  if (lr < 0) {
+    value_error("Invalid learning rate: {lr}")
+  }
+  if (eps < 0) {
+    value_error("Invalid epsilon value: {eps}")
+  }
+  if (momentum < 0) {
+    value_error("Invalid momentum value: {momentum}")
+  }
+  if (weight_decay < 0) {
+    value_error("Invalid weight_decay value: {weight_decay}")
+  }
+  if (alpha < 0) {
+    value_error("Invalid alpha value: {alpha}")
+  }
+}

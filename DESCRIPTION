@@ -1,7 +1,7 @@
 Package: torch
 Type: Package
 Title: Tensors and Neural Networks with 'GPU' Acceleration
-Version: 0.13.0.9000
+Version: 0.14.2
 Authors@R: c(
     person("Daniel", "Falbel", email = "daniel@rstudio.com", role = c("aut", "cre", "cph")),
     person("Javier", "Luraschi", email = "jluraschi@gmail.com", role = c("aut")),
@@ -11,6 +11,7 @@ Authors@R: c(
     person("Krzysztof", "Joachimiak", role = c("ctb")),
     person("Hamada S.", "Badr", role = c("ctb")),
     person("Sebastian", "Fischer", role = c("ctb")),
+    person("Maximilian", "Pichler", role = c("ctb")),
     person(family = "RStudio", role = c("cph"))
     )
 Description: Provides functionality to define and train neural networks similar to
@@ -43,8 +44,9 @@ Imports:
     glue,
     desc,
     safetensors (>= 0.1.1),
-    jsonlite
-RoxygenNote: 7.3.1
+    jsonlite,
+    scales
+RoxygenNote: 7.3.2
 Roxygen: list(markdown = TRUE)
 Suggests:
     testthat (>= 3.0.0),
@@ -94,6 +96,14 @@ Collate:
     'gen-namespace.R'
     'generator.R'
     'help.R'
+    'utils-data.R'
+    'optim.R'
+    'optim-adam.R'
+    'optim-sgd.R'
+    'optim-rmsprop.R'
+    'optim-adagrad.R'
+    'optim-adamw.R'
+    'ignite.R'
     'indexing.R'
     'install.R'
     'ivalue.R'
@@ -105,7 +115,6 @@ Collate:
     'layout.R'
     'linalg.R'
     'memory_format.R'
-    'utils-data.R'
     'nn.R'
     'nn-activation.R'
     'nn-batchnorm.R'
@@ -143,17 +152,12 @@ Collate:
     'nnf-upsampling.R'
     'nnf-vision.R'
     'operators.R'
-    'optim.R'
     'optim-adadelta.R'
-    'optim-adagrad.R'
-    'optim-adam.R'
-    'optim-adamw.R'
     'optim-asgd.R'
     'optim-lbfgs.R'
     'optim-lr_scheduler.R'
-    'optim-rmsprop.R'
     'optim-rprop.R'
-    'optim-sgd.R'
+    'positron.R'
     'package.R'
     'qscheme.R'
     'quantization.R'

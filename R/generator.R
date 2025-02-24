@@ -10,7 +10,7 @@ Generator <- R7Class(
       cpp_torch_generator()
     },
     print = function() {
-      cat("torch_generator()")
+      cat("torch_generator()\n")
     },
     current_seed = function() {
       if (!requireNamespace("bit64")) {

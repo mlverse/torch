@@ -1,3 +1,4 @@
+#include <c10/core/Device.h>
 #include <torch/torch.h>
 
 // https://pt.stackoverflow.com/a/438284/6036
@@ -156,6 +157,7 @@ LANTERN_FROM_RAW_DECL(SymInt, c10::SymInt)
 LANTERN_FROM_RAW_DECL(SymIntArrayRef, c10::SymIntArrayRef)
 LANTERN_FROM_RAW_DECL(FunctionSchema, c10::FunctionSchema)
 LANTERN_FROM_RAW_DECL(Argument, c10::Argument)
+LANTERN_FROM_RAW_DECL(DeviceIndex, at::DeviceIndex)
 
 namespace optional {
 LANTERN_FROM_RAW_DECL(DimnameList, c10::optional<torch::DimnameList>)
@@ -589,6 +591,7 @@ LANTERN_FROM_RAW(SymInt, c10::SymInt)
 LANTERN_FROM_RAW_WRAPPED(SymIntArrayRef, self_contained::SymIntArrayRef, c10::SymIntArrayRef)
 LANTERN_FROM_RAW(FunctionSchema, c10::FunctionSchema)
 LANTERN_FROM_RAW(Argument, c10::Argument)
+LANTERN_FROM_RAW(DeviceIndex, at::DeviceIndex)
 
 namespace optional {
 LANTERN_FROM_RAW_WRAPPED(DimnameList, self_contained::optional::DimnameList,

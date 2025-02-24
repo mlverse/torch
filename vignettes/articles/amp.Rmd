@@ -27,7 +27,7 @@ In torch, the AMP implementation involves 2 steps:
 
 1. Allow the model to use different implementations of operations so it can use
    half-precision.
-2. Using loss scaling to preserver small gradient values that might be too small
+2. Using loss scaling to preserve small gradient values that might be too small
    due to using half-precision.
    
 The first step, can also be used to speedup inference pipelines.

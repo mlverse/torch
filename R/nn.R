@@ -16,7 +16,6 @@ nn_Module <- R6::R6Class(
   classname = "nn_Module",
   lock_objects = FALSE,
   public = list(
-    training = TRUE,
     initialize = function() {},
     forward = function(...) {
       not_implemented_error("Forward method is not implemented")
@@ -27,6 +26,14 @@ nn_Module <- R6::R6Class(
     register_module = function(name, module) {
       if (is.numeric(name)) {
         name <- as.character(name)
+      }
+
+      if (!inherits(module, "nn_module")) {
+        cli::cli_abort("Expected {.cls nn_module} but got object of type {.cls {class(module)}}")
+      }
+
+      if (inherits(module, "nn_module_generator")) {
+        cli::cli_abort("Module {.str {name}} must be initialized")
       }
 
       private$modules_[[name]] <- module
@@ -266,12 +273,22 @@ nn_Module <- R6::R6Class(
     }
   ),
   private = list(
+    training_ = TRUE,
     parameters_ = list(),
     buffers_ = list(),
     modules_ = list(),
     non_persistent_buffers_ = character()
   ),
   active = list(
+    training = function(rhs) {
+      if (!missing(rhs)) {
+        if (!(length(rhs) == 1 && is.logical(rhs) && !is.na(rhs))) {
+          value_error("Field `training` must be a logical flag.")
+        }
+        private$training_ = rhs
+      }
+      private$training_
+    },
     parameters = function(value, recursive = TRUE) {
       if (!missing(value)) {
         runtime_error(
@@ -665,7 +682,7 @@ print.nn_module <- function(x, ...) {
 #' input <- torch_randn(32, 1, 28, 28)
 #' output <- model(input)
 #' @export
-nn_sequential <- module <- nn_module(
+nn_sequential <- nn_module(
   classname = "nn_sequential",
   initialize = function(...) {
     modules <- rlang::list2(...)

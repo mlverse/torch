@@ -11,7 +11,7 @@ linalg_tensorsolve(A, B, dims = NULL)
 
 \item{B}{(Tensor): the solution}
 
-\item{dims}{(Tuple\link{int}, optional): dimensions of \code{A} to be moved.
+\item{dims}{(\code{Tuple[int]}, optional): dimensions of \code{A} to be moved.
 If \code{NULL}, no dimensions are moved. Default: \code{NULL}.}
 }
 \description{
@@ -48,16 +48,16 @@ torch_allclose(torch_tensordot(A, X, dims = X$ndim), B, atol = 1e-6)
 }
 
 Other linalg: 
-\code{\link{linalg_cholesky_ex}()},
 \code{\link{linalg_cholesky}()},
+\code{\link{linalg_cholesky_ex}()},
 \code{\link{linalg_det}()},
-\code{\link{linalg_eigh}()},
-\code{\link{linalg_eigvalsh}()},
-\code{\link{linalg_eigvals}()},
 \code{\link{linalg_eig}()},
+\code{\link{linalg_eigh}()},
+\code{\link{linalg_eigvals}()},
+\code{\link{linalg_eigvalsh}()},
 \code{\link{linalg_householder_product}()},
-\code{\link{linalg_inv_ex}()},
 \code{\link{linalg_inv}()},
+\code{\link{linalg_inv_ex}()},
 \code{\link{linalg_lstsq}()},
 \code{\link{linalg_matrix_norm}()},
 \code{\link{linalg_matrix_power}()},
@@ -67,10 +67,10 @@ Other linalg:
 \code{\link{linalg_pinv}()},
 \code{\link{linalg_qr}()},
 \code{\link{linalg_slogdet}()},
-\code{\link{linalg_solve_triangular}()},
 \code{\link{linalg_solve}()},
-\code{\link{linalg_svdvals}()},
+\code{\link{linalg_solve_triangular}()},
 \code{\link{linalg_svd}()},
+\code{\link{linalg_svdvals}()},
 \code{\link{linalg_tensorinv}()},
 \code{\link{linalg_vector_norm}()}
 }

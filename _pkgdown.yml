@@ -14,7 +14,7 @@ navbar:
  bg: primary
  structure:
   left:  [home, articles, examples, advanced, reference, news]
-  right: [github]
+  right: [search, github]
  components:
   articles:
     text: Articles
@@ -51,6 +51,8 @@ navbar:
         href: articles/modifying-source-code.html
       - text: Automatic Mixed Precision
         href: articles/amp.html
+      - text: Modifying source code
+        href: articles/modifying-source-code.html
   examples:
     text: Examples
     menu:
@@ -127,6 +129,8 @@ reference:
       - optimizer
       - starts_with("optim_")
       - is_optimizer
+      - optimizer_ignite
+      - OptimizerIgnite
   - title: Learning rate schedulers
     contents:
       - starts_with("lr_")

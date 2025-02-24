@@ -4,7 +4,7 @@
 \alias{jit_trace_module}
 \title{Trace a module}
 \usage{
-jit_trace_module(mod, ..., strict = TRUE)
+jit_trace_module(mod, ..., strict = TRUE, respect_mode = TRUE)
 }
 \arguments{
 \item{mod}{A torch \code{nn_module()}  containing methods whose names are specified
@@ -19,6 +19,15 @@ turn this off when you want the tracer to record your mutable container types
 (currently list/dict) and you are sure that the container you are using in
 your problem is a constant structure and does not get used as control flow
 (\code{if}, \code{for}) conditions.}
+
+\item{respect_mode}{(\code{logical(1)})\cr
+Whether both modes ('train' or 'eval') should be traced. If \code{TRUE} (default),
+the underlying C++ ScriptModule will have two methods \code{trainforward()} and
+\code{evalforward()}.
+The \verb{$forward()} method of the R torch module will then select either based
+on the mode.
+If \code{FALSE}, only the current mode of the module will be jitted and hence only
+one \code{forward()} method exists.}
 }
 \description{
 Trace a module and return an executable ScriptModule that will be optimized

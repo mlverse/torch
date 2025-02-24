@@ -18,16 +18,16 @@ jobs:
         config: 
           # when changing supported versions here, please modify supported versions
           # in install.R
-          - {os: macOS, version: cpu-intel, runner: macos-12}
+          - {os: macOS, version: cpu-intel, runner: macos-13}
           - {os: macOS, version: cpu-m1, runner: [self-hosted, m1]}
           
           - {os: ubuntu, version: cpu, runner: ubuntu-latest}
-          - {os: ubuntu, version: cu11.7, runner: [self-hosted, linux]}
           - {os: ubuntu, version: cu11.8, runner: [self-hosted, linux]}
+          - {os: ubuntu, version: cu12.4, runner: [self-hosted, linux]}
 
           - {os: windows, version: cpu, runner: windows-2019}
-          - {os: windows, version: cu11.7, runner: windows-2019}
           - {os: windows, version: cu11.8, runner: windows-2019}
+          - {os: windows, version: cu12.4, runner: windows-2019}
         
         precxx11abi: [0, 1]
 
@@ -39,16 +39,14 @@ jobs:
           - config: {os: ubuntu}
             precxx11abi: 1
             container: ubuntu:20.04
-          
-          # specify the CUDA patch for each major/minor version.
-          # required for cuda installation
-          - config: {version: cu11.7}
-            cuda: 11.7
-            cuda_patch: 1
             
           - config: {version: cu11.8}
             cuda: 11.8
             cuda_patch: 0
+          
+          - config: {version: cu12.4}
+            cuda: 12.4
+            cuda_patch: 1
 
         exclude:
           - config: {os: macOS}
@@ -74,23 +72,24 @@ jobs:
       - uses: actions/checkout@v4
       
       - name: Setup cmake
-        uses: jwlawson/actions-setup-cmake@v1
+        uses: jwlawson/actions-setup-cmake@v2
         with:
           cmake-version: "3.25.1"
 
       - name: Install CUDA
         if: ${{matrix.cuda != ''}}
-        uses: Jimver/cuda-toolkit@v0.2.10
+        uses: Jimver/cuda-toolkit@v0.2.21
         id: cuda-toolkit
         with:
           cuda: "${{matrix.cuda}}.${{matrix.cuda_patch}}"
+          log-file-suffix: '${{matrix.cuda}}.${{matrix.cuda_patch}}.${{matrix.precxx11abi}}.txt'
           
       - name: Install CuDNN
         if: ${{ matrix.cuda != '' }}
         uses: ./.github/actions/install-cudnn
         with:
           cuda_version: ${{ matrix.cuda }}
-        
+
       - name: Run cmake
         run: |
           cd src/lantern/
@@ -109,9 +108,9 @@ jobs:
 
       - id: artifact
         if: ${{ github.workflow == 'Test' }}
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
-          name: lantern
+          name: ${{ steps.build.outputs.fname }}
           path: 'src/lantern/build/${{ steps.build.outputs.fname }}'
       
       - id: 's3'

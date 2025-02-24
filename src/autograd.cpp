@@ -1,3 +1,4 @@
+#include <memory>
 #include <torch.h>
 
 #include <deque>
@@ -57,15 +58,19 @@ void call_r_gc(bool full);
   
 namespace {
 
-EventLoop<void*> gTasks;
-EventLoop<void> gBackwardTasks;
-std::atomic<bool> backward_is_running(false);
-static ThreadPool<void>* pool;
+static EventLoop<void*> gTasks;
+static EventLoop<void> gBackwardTasks;
+static std::atomic<bool> backward_is_running(false);
 
 void schedule_backward_task(std::packaged_task<void()>&& task) {
-  if (!pool) {
-    pool = new ThreadPool<void>(5);
-  }
+  // This needs to be a pointer because on Windows, disposing of this objects
+  // when the process exits causes a crash.
+  static auto pool = std::unique_ptr<ThreadPool<void>, std::function<void(ThreadPool<void>*)>>(
+    new ThreadPool<void>(5), 
+    [](auto p) {
+      p->stop();
+    }
+  );
   
   if (std::this_thread::get_id() == main_thread_id()) {
     pool->push(std::move(task));
@@ -85,7 +90,6 @@ void cpp_torch_method__backward_self_Tensor_inputs_TensorList(
   auto running_sg = makeScopeGuard([] {backward_is_running = false;});
   std::function<void()> backward([&]() {
     auto sg = makeScopeGuard([] { gTasks.stopWhenEmpty(); });
-
     lantern_Tensor__backward_tensor_tensorlist_tensor_bool_bool(
         self.get(), inputs.get(), gradient.get(), retain_graph.get(),
         create_graph.get());
@@ -416,6 +420,6 @@ void cpp_set_cuda_allocator_allocator_thresholds (double reserved_rate, double a
 }
 
 // [[Rcpp::export]]
-void cpp_autograd_zero_grad (torch::TensorList x) {
-  lantern_autograd_zero_grad(x.get());
+void cpp_autograd_zero_grad (torch::TensorList x, bool set_to_none) {
+  lantern_autograd_zero_grad(x.get(), set_to_none);
 }

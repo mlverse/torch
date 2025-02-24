@@ -6,7 +6,7 @@ test_that("simnple tracing works", {
   input <- torch_tensor(c(-1, 0, 1))
   tr_fn <- jit_trace(fn, input)
 
-  expect_equal_to_tensor(tr_fn(input), fn(input))
+ expect_equal_to_tensor(tr_fn(input), fn(input))
 })
 
 test_that("print the graph works", {
@@ -108,7 +108,7 @@ test_that("can output a list of tensors", {
     list(x, x + 1)
   }
   x <- torch_tensor(1)
-  tr_fn <- jit_trace(fn, x)
+  tr_fn <- jit_trace(fn, x, strict = FALSE)
   expect_equal_to_tensor(fn(x)[[1]], tr_fn(x)[[1]])
   expect_equal_to_tensor(fn(x)[[2]], tr_fn(x)[[2]])
 })
@@ -121,7 +121,7 @@ test_that("fn can take more than 1 argument", {
   x <- torch_tensor(1)
   y <- torch_tensor(2)
 
-  tr_fn <- jit_trace(fn, x, y)
+  tr_fn <- jit_trace(fn, x, y, strict = FALSE)
   expect_equal_to_tensor(fn(x, y)[[1]], tr_fn(x, y)[[1]])
   expect_equal_to_tensor(fn(x, y)[[2]], tr_fn(x, y)[[2]])
 
@@ -478,4 +478,50 @@ test_that("can save function for mobile", {
 
   f <- jit_load(tmp)
   expect_equal_to_tensor(torch_relu(input), f(input))
+})
+
+test_that("can trace only one mode", {
+  nn_custom <- nn_module("custom",
+    initialize = function() NULL,
+    forward = function(x) {
+      if (self$training) {
+        torch_abs(x)
+      } else {
+        - torch_abs(x)
+      }
+    }
+  )
+  n1 <- nn_custom()
+  n1$train()
+  n2 <- nn_custom()
+  n2$eval()
+  njit1 <- jit_trace(n1, torch_tensor(1), respect_mode = FALSE)
+  njit2 <- jit_trace(n2, torch_tensor(1), respect_mode = FALSE)
+  njit1$train()
+  expect_equal_to_tensor(njit1(torch_tensor(1)), torch_abs(torch_tensor(1)))
+  njit1$eval()
+  expect_equal_to_tensor(njit1(torch_tensor(1)), torch_abs(torch_tensor(1)))
+  njit2$train()
+  expect_equal_to_tensor(njit2(torch_tensor(1)), -torch_abs(torch_tensor(1)))
+  njit2$eval()
+  expect_equal_to_tensor(njit2(torch_tensor(1)), -torch_abs(torch_tensor(1)))
+})
+
+test_that("can serialize to raw vector and deserialize again", {
+  n1 <- jit_trace(nn_linear(1, 1), torch_randn(1, 1))
+  n1$parameters$bias$requires_grad_(FALSE)
+  x <- jit_serialize(n1)
+  expect_true(is.raw(x))
+  n2 <- jit_unserialize(x)
+  x <- torch_randn(1)
+  expect_equal_to_tensor(n1(x), n2(x))
+  expect_false(n2$parameters$bias$requires_grad)
+})
+
+test_that("can define the same method during difference trace-jitting passes (#1246)", {
+  n <- nn_linear(1, 1)
+  x <- torch_tensor(1)
+  nj1 <- withr::with_seed(1, jit_trace(n, x))
+  nj2 <- expect_error(withr::with_seed(1, jit_trace(n, x)), regexp = NA)
+  expect_equal(n(x), n(x))
 })

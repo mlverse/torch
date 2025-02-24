@@ -6,12 +6,12 @@ LANTERN_TARGET = @LANTERN_TARGET@
 all: $(LANTERN_TARGET) $(SHLIB) rename
 
 # TODO: we will need to skip building lantern on CRAN
-# thus this step must probably be conditioned on the existence of 
+# thus this step must probably be conditioned on the existence of
 # a directory called `lantern`.
 lantern:
 	@echo "*** Building lantern!"
 	mkdir -p ../build-lantern
-	cd ../build-lantern && cmake ../src/lantern -DCMAKE_INSTALL_PREFIX=$(PKG_PATH) -DCMAKE_INSTALL_MESSAGE="LAZY" @CMAKE_FLAGS@ && cmake --build . --target install --config Release
+	cd ../build-lantern && cmake ../src/lantern -DCMAKE_INSTALL_PREFIX=$(PKG_PATH) -DCMAKE_INSTALL_MESSAGE="LAZY" @CMAKE_FLAGS@ && cmake --build . --parallel 8 --target install --config Release
 
 dummylantern:
 	@echo "*** Skip building lantern."

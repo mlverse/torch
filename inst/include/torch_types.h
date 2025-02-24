@@ -672,7 +672,65 @@ class XPtrTorchvector_void : public XPtrTorch {
   XPtrTorchvector_void(void* x) : XPtrTorch(x, delete_vector_void) {}
 };
 
+class optim_adamw {
+public:
+  std::shared_ptr<void> ptr;
+  optim_adamw (void* x);
+  optim_adamw (std::shared_ptr<void> x) : ptr(x) {}
+  optim_adamw (SEXP x);
+  operator SEXP () const;
+  void* get ();
+};
 
+class optim_adam {
+public:
+  std::shared_ptr<void> ptr;
+  optim_adam (void* x);
+  optim_adam (std::shared_ptr<void> x) : ptr(x) {}
+  optim_adam (SEXP x);
+  operator SEXP () const;
+  void* get ();
+};
+
+class optim_adagrad {
+public:
+  std::shared_ptr<void> ptr;
+  optim_adagrad (void* x);
+  optim_adagrad (std::shared_ptr<void> x) : ptr(x) {}
+  optim_adagrad (SEXP x);
+  operator SEXP () const;
+  void* get ();
+};
+
+class optim_sgd {
+public:
+  std::shared_ptr<void> ptr;
+  optim_sgd (void* x);
+  optim_sgd (std::shared_ptr<void> x) : ptr(x) {}
+  optim_sgd (SEXP x);
+  operator SEXP () const;
+  void* get ();
+};
+
+class optim_rmsprop {
+public:
+  std::shared_ptr<void> ptr;
+  optim_rmsprop (void* x);
+  optim_rmsprop (std::shared_ptr<void> x) : ptr(x) {}
+  optim_rmsprop (SEXP x);
+  operator SEXP () const;
+  void* get ();
+};
+
+class optim_param_groups {
+public:
+  std::shared_ptr<void> ptr;
+  optim_param_groups (void* x);
+  optim_param_groups (std::shared_ptr<void> x) : ptr(x) {}
+  optim_param_groups (SEXP x);
+  operator SEXP () const;
+  void* get ();
+};
 
 template <class T>
 class nullable {

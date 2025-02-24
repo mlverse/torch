@@ -4,10 +4,7 @@ on:
   workflow_dispatch:
   push:
     branches:
-      - main
       - cran/*
-      - packaging3
-      - s3
   schedule:
     - cron: "0 2 * * *"
   
@@ -23,20 +20,20 @@ jobs:
       matrix:
         
         config: 
-          - {r_version: 'release', os: macOS, version: cpu-intel, runner: macOS-13}
-          - {r_version: '',        os: macOS, version: cpu-m1, runner: [self-hosted, m1]}
+          - {r_version: 'release', os: macOS, version: cpu-intel, runner: macos-13}
+          - {r_version: 'release', os: macOS, version: cpu-m1, runner: macos-latest}
           
           - {r_version: 'release', os: ubuntu, version: cpu, runner: [self-hosted, linux]}
-          - {r_version: 'release', os: ubuntu, version: cu118, runner: [self-hosted, linux]}
+          - {r_version: 'release', os: ubuntu, version: cu124, runner: [self-hosted, linux]}
           
           - {r_version: 'release', os: windows, version: cpu, runner: windows-2019}
-          - {r_version: 'release', os: windows, version: cu118, runner: windows-2019}
+          - {r_version: 'release', os: windows, version: cu124, runner: windows-2019}
           
         include:
           
-          - config: {version: cu118}
-            cuda: 11.8
-            cuda_patch: 0
+          - config: {version: cu124}
+            cuda: 12.4
+            cuda_patch: 1
           
           - config: {os: ubuntu}
             container: ubuntu:20.04
@@ -69,13 +66,13 @@ jobs:
           makevars: true
       
       - name: Setup cmake
-        uses: jwlawson/actions-setup-cmake@v1
+        uses: jwlawson/actions-setup-cmake@v2
         with:
           cmake-version: "3.25.1"
 
       - name: Install CUDA
         if: ${{matrix.cuda != ''}}
-        uses: Jimver/cuda-toolkit@v0.2.10
+        uses: Jimver/cuda-toolkit@v0.2.21
         id: cuda-toolkit
         with:
           cuda: "${{matrix.cuda}}.${{matrix.cuda_patch}}"
@@ -91,7 +88,7 @@ jobs:
           cache: false
           extra-packages: any::rcmdcheck
           needs: check
-          
+           
       - name: Build binary package
         id: build
         run: |

@@ -12,7 +12,7 @@ controlled using \code{dim}.}
 
 \item{ord}{(int, float, inf, -inf, 'fro', 'nuc', optional): order of norm. Default: \code{2}}
 
-\item{dim}{(int, Tuple\link{int}, optional): dimensions over which to compute
+\item{dim}{(int, \code{Tuple[int]}, optional): dimensions over which to compute
 the vector or matrix norm. See above for the behavior when \code{dim=NULL}.
 Default: \code{NULL}}
 
@@ -67,16 +67,16 @@ linalg_vector_norm(b, ord = 3.5)
 }
 \seealso{
 Other linalg: 
-\code{\link{linalg_cholesky_ex}()},
 \code{\link{linalg_cholesky}()},
+\code{\link{linalg_cholesky_ex}()},
 \code{\link{linalg_det}()},
-\code{\link{linalg_eigh}()},
-\code{\link{linalg_eigvalsh}()},
-\code{\link{linalg_eigvals}()},
 \code{\link{linalg_eig}()},
+\code{\link{linalg_eigh}()},
+\code{\link{linalg_eigvals}()},
+\code{\link{linalg_eigvalsh}()},
 \code{\link{linalg_householder_product}()},
-\code{\link{linalg_inv_ex}()},
 \code{\link{linalg_inv}()},
+\code{\link{linalg_inv_ex}()},
 \code{\link{linalg_lstsq}()},
 \code{\link{linalg_matrix_norm}()},
 \code{\link{linalg_matrix_power}()},
@@ -86,10 +86,10 @@ Other linalg:
 \code{\link{linalg_pinv}()},
 \code{\link{linalg_qr}()},
 \code{\link{linalg_slogdet}()},
-\code{\link{linalg_solve_triangular}()},
 \code{\link{linalg_solve}()},
-\code{\link{linalg_svdvals}()},
+\code{\link{linalg_solve_triangular}()},
 \code{\link{linalg_svd}()},
+\code{\link{linalg_svdvals}()},
 \code{\link{linalg_tensorinv}()},
 \code{\link{linalg_tensorsolve}()}
 }

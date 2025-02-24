@@ -137,6 +137,27 @@ void cpp_jit_script_module_save(XPtrTorchScriptModule self,
 }
 
 // [[Rcpp::export]]
+SEXP cpp_jit_script_module_serialize(XPtrTorchScriptModule self) {
+  torch::string out = lantern_ScriptModule_serialize(self.get());
+
+  const char* v = lantern_string_get(out.get());
+  auto output = std::string(v, lantern_string_size(out.get()));
+  lantern_const_char_delete(v);
+
+  Rcpp::RawVector raw_vec(output.size());
+  memcpy(&raw_vec[0], output.c_str(), output.size());
+
+  return raw_vec;
+}
+
+// [[Rcpp::export]]
+SEXP cpp_jit_script_module_unserialize(SEXP input) {
+  auto raw_vec = Rcpp::as<Rcpp::RawVector>(input);
+  torch::string v = std::string((char*)&raw_vec[0], raw_vec.size());
+  return XPtrTorchScriptModule(lantern_ScriptModule_unserialize(v.get()));
+}
+
+// [[Rcpp::export]]
 void cpp_jit_script_module_save_for_mobile(XPtrTorchScriptModule self,
                                            XPtrTorchstring path) {
   lantern_ScriptModule_save_for_mobile(self.get(), path.get());

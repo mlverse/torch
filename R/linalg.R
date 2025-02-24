@@ -15,7 +15,7 @@
 #'
 #' @param A (Tensor): tensor of shape `(*, n)` or `(*, m, n)` where `*` is zero or more batch dimensions
 #' @param ord (int, float, inf, -inf, 'fro', 'nuc', optional): order of norm. Default: `NULL`
-#' @param dim (int, Tuple[int], optional): dimensions over which to compute
+#' @param dim (int, `Tuple[int]`, optional): dimensions over which to compute
 #'   the vector or matrix norm. See above for the behavior when `dim=NULL`.
 #'   Default: `NULL`
 #' @param keepdim (bool, optional): If set to `TRUE`, the reduced dimensions are retained
@@ -1135,7 +1135,7 @@ linalg_tensorinv <- function(A, ind = 3L) {
 #'
 #' @param A (Tensor): tensor to solve for.
 #' @param B (Tensor): the solution
-#' @param dims (Tuple[int], optional): dimensions of `A` to be moved.
+#' @param dims (`Tuple[int]`, optional): dimensions of `A` to be moved.
 #' If `NULL`, no dimensions are moved. Default: `NULL`.
 #'
 #' @examples

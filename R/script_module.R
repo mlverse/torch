@@ -53,6 +53,9 @@ ScriptModule <- R7Class(
     save = function(path) {
       cpp_jit_script_module_save(self, path)
     },
+    serialize = function(path) {
+      cpp_jit_script_module_serialize(self)
+    },
     save_for_mobile = function(path) {
       cpp_jit_script_module_save_for_mobile(self, path)
     }
@@ -60,6 +63,9 @@ ScriptModule <- R7Class(
   active = list(
     parameters = function() {
       cpp_jit_script_module_parameters(self, TRUE)
+    },
+    training = function() {
+      self$is_training()
     },
     is_training = function() {
       cpp_jit_script_module_is_training(self)
@@ -120,6 +126,29 @@ nn_ScriptModule <- R6::R6Class(
         env = private
       )
     },
+
+    forward =  function(...) {
+      
+      if (private$respects_mode) {
+        out <- if (self$training) {
+          private$find_method("trainforward")(...)
+        } else {
+          private$find_method("evalforward")(...)
+        }
+        return(out)
+      }
+
+      inputs <- list(...)
+
+      if (is.null(private$find_method("forward"))) {
+        runtime_error("Forward is not defined. Methods from submodules of traced modules are not traced. Are you trying to call from a submodule?")
+      }
+
+      out <- cpp_call_jit_script(private$ptr, inputs)
+      # calling the traced function always returns a stack
+      # with a single element.
+      out[[1]]
+    },
     register_parameter = function(name, param) {
       private$ptr$register_parameter(name, param)
     },
@@ -133,7 +162,14 @@ nn_ScriptModule <- R6::R6Class(
       private$ptr$add_constant(name, value)
     },
     graph_for = function(...) {
-      self$forward$graph_for(...)
+      if (!private$respects_mode) {
+        return(private$find_method("forward")$graph_for(...))
+      }
+      if (self$training) {
+        private$find_method("trainforward")$graph_for(...)
+      } else {
+        private$find_method("evalforward")$graph_for(...)
+      }
     },
     ..ptr.. = function() {
       private$ptr
@@ -142,11 +178,26 @@ nn_ScriptModule <- R6::R6Class(
   private = list(
     find_method = function(name) {
       private$ptr$find_method(name)
+    },
+    respects_mode = FALSE,
+    respect_mode = function() {
+      private$respects_mode <- TRUE
     }
   ),
   active = list(
     graph = function() {
-      self$forward$graph
+      if (!private$respects_mode) {
+        return(private$find_method("forward")$graph)
+      }
+      if (self$training) {
+        private$find_method("trainforward")$graph
+      } else {
+        private$find_method("evalforward")$graph
+        
+      }
+    },
+    training = function() {
+      self$is_training()
     }
   )
 )
@@ -166,20 +217,16 @@ nn_ScriptModule <- R6::R6Class(
 }
 
 new_script_module <- function(ptr) {
+  module <- nn_ScriptModule$new(ptr = ptr)
   f <- function(...) {
-    inputs <- list(...)
-
-    if (is.null(ptr$find_method("forward"))) {
-      runtime_error("Forward is not defined. Methods from submodules of traced modules are not traced. Are you trying to call from a submodule?")
-    }
-
-    out <- cpp_call_jit_script(ptr, inputs)
-    # calling the traced function always returns a stack
-    # with a single element.
-    out[[1]]
+    module$forward(...)
+  }
+  if (!is.null(ptr$find_method("trainforward")) && !is.null(ptr$find_method("evalforward")) &&
+    is.null(ptr$find_method("forward"))) {
+    module$.__enclos_env__$private$respect_mode()
   }
   class(f) <- c("script_module", "nn_module")
-  attr(f, "module") <- nn_ScriptModule$new(ptr = ptr)
+  attr(f, "module") <- module
   f
 }
 
