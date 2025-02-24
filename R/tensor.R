@@ -386,6 +386,11 @@ as_array <- function(x) {
   UseMethod("as_array", x)
 }
 
+# Makes `as_array()` behave like `as.array()`.
+as_array.default <- function(x) {
+  base::as.array.default(x)
+}  
+
 #' @export
 as.array.torch_tensor <- function(x, ...) {
   as_array(x)
