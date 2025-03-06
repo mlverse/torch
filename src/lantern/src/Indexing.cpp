@@ -137,6 +137,7 @@ void _lantern_Tensor_index_put_scalar_(void *self, void *index, void *rhs) {
   LANTERN_FUNCTION_START
   torch::Tensor ten = from_raw::Tensor(self);
   auto i = *reinterpret_cast<std::vector<at::indexing::TensorIndex> *>(index);
+  // We don't want to support two tensors in the index because the behavior is very different from R's
   check_multiple_tensors(i);
   auto r = from_raw::Scalar(rhs);
   ten.index_put_(i, r);
