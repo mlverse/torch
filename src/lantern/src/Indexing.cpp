@@ -109,10 +109,25 @@ void *_lantern_Tensor_index(void *self, void *index) {
   LANTERN_FUNCTION_END
 }
 
+void check_multiple_tensors(std::vector<at::indexing::TensorIndex> i) {
+  bool has_tensor = false;
+  for (auto x: i) {
+    auto is_tensor = x.is_tensor();
+    if (has_tensor && is_tensor) {
+      throw std::invalid_argument("Only one tensor is allowed in the index");
+    }
+    if (is_tensor) {
+      has_tensor = true;
+    }
+  }
+}
+
 void _lantern_Tensor_index_put_tensor_(void *self, void *index, void *rhs) {
   LANTERN_FUNCTION_START
   torch::Tensor ten = from_raw::Tensor(self);
   auto i = *reinterpret_cast<std::vector<at::indexing::TensorIndex> *>(index);
+  // We don't want to support two tensors in the index because the behavior is very different from R's
+  check_multiple_tensors(i);
   torch::Tensor r = from_raw::Tensor(rhs);
   ten.index_put_(i, r);
   LANTERN_FUNCTION_END_VOID
@@ -122,6 +137,7 @@ void _lantern_Tensor_index_put_scalar_(void *self, void *index, void *rhs) {
   LANTERN_FUNCTION_START
   torch::Tensor ten = from_raw::Tensor(self);
   auto i = *reinterpret_cast<std::vector<at::indexing::TensorIndex> *>(index);
+  check_multiple_tensors(i);
   auto r = from_raw::Scalar(rhs);
   ten.index_put_(i, r);
   LANTERN_FUNCTION_END_VOID
