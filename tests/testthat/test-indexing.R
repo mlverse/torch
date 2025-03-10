@@ -114,6 +114,44 @@ test_that("subset assignment", {
   expect_equal_to_r(x[1:2], c(0, 0))
 })
 
+test_that("Subset assignment, scalar + tensor", {
+  x <- torch_randn(3,2)
+  x_r <- as.array(x)
+  
+  mask <- torch_tensor(c(TRUE, FALSE, TRUE))
+  y <- torch_tensor(c(1, 2))
+  x[mask, 1] <- y
+
+  x_r[c(TRUE, FALSE, TRUE), 1] <- c(1,2)
+  expect_equal_to_r(x, x_r)
+
+  # make sure it works in the reverse order
+  x <- torch_randn(2,3)
+  x_r <- as.array(x)
+
+  mask <- torch_tensor(c(TRUE, FALSE, TRUE))
+  y <- torch_tensor(c(1, 2))
+  x[1, mask] <- y
+
+  x_r[1, c(TRUE, FALSE, TRUE)] <- c(1,2)
+  expect_equal_to_r(x, x_r)
+})
+
+test_that("subset assignment tensor x tensor", {
+  x <- torch_randn(3, 2)
+  x_r <- as.array(x)
+  
+  expect_error(
+    x[torch_tensor(c(1L,3L)), torch_tensor(c(1L,2L))] <- 2,
+    "Only one tensor is allowed in the index"
+  )
+
+  expect_error(
+    x[torch_tensor(c(1L,3L)), torch_tensor(c(1L,2L))] <- torch_tensor(2),
+    "Only one tensor is allowed in the index"
+  )
+})
+
 test_that("indexing with R boolean vectors", {
   x <- torch_tensor(c(1, 2))
   expect_equal_to_r(x[c(TRUE, FALSE)], 1)

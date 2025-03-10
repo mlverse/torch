@@ -287,7 +287,7 @@ index_info index_append_sexp(XPtrTorchTensorIndex& index, SEXP slice,
 }
 
 std::vector<XPtrTorchTensorIndex> slices_to_index(
-    std::vector<Rcpp::RObject> slices, bool drop, torch::Device device) {
+    std::vector<Rcpp::RObject> slices, bool drop, torch::Device device, bool is_put = false) {
   std::vector<XPtrTorchTensorIndex> output;
   XPtrTorchTensorIndex index = lantern_TensorIndex_new();
   SEXP slice;
@@ -302,7 +302,7 @@ std::vector<XPtrTorchTensorIndex> slices_to_index(
     }
 
     num_dim += info.dim;
-    if (info.vector) {
+    if (info.vector && !is_put) {
       bool last_dim = i >= (slices.size() - 1);
       // we add an ellipsis to get all the other dimensions and append it to the
       // output vector. we only append if it's not the last dimension too.
@@ -360,7 +360,7 @@ void Tensor_slice_put(XPtrTorchTensor self, Rcpp::Environment e,
                       SEXP rhs, Rcpp::List mask) {
   auto dots = evaluate_slices(enquos0(e), mask);
   auto device = torch::Device(lantern_Tensor_device(self.get()));
-  auto indexes = slices_to_index(dots, true, device);
+  auto indexes = slices_to_index(dots, true, device, true);
 
   if (indexes.size() > 1) {
     Rcpp::stop(
