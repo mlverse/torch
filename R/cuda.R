@@ -188,3 +188,77 @@ cuda_runtime_version <- function() {
 cuda_empty_cache <- function() {
   cpp_cuda_empty_cache()
 }
+
+#' Enable Recording of Memory Allocation Stack Traces
+#'
+#' Enables recording of stack traces associated with memory allocations, allowing
+#' users to identify the source of memory allocation in CUDA snapshots.
+#'
+#' Alongside tracking stack traces for each current allocation and free event,
+#' this function can also keep a historical log of all allocation and free events.
+#'
+#' Use `cuda_memory_snapshot()` to retrieve recorded information. Visualization
+#' can be performed using [pytorch.org/memory_viz](https://pytorch.org/memory_viz).
+#'
+#' @param enabled Character or NULL; controls memory history recording:
+#'   - `NULL`: Disable recording memory history.
+#'   - `'state'`: Record currently allocated memory information.
+#'   - `'all'`: Record history of all alloc/free events (default).
+#'
+#' @param context Character or NULL; controls traceback recording:
+#'   - `NULL`: Do not record any tracebacks.
+#'   - `'state'`: Record tracebacks for currently allocated memory.
+#'   - `'alloc'`: Additionally record tracebacks for allocation events.
+#'   - `'all'`: Additionally record tracebacks for free events (default).
+#'
+#' @param stacks Character; defines the stack trace frames included:
+#'   - `'python'`: Include Python, TorchScript, and inductor frames.
+#'   - `'all'`: Additionally include C++ frames (default).
+#'
+#' @param max_entries Integer; maximum number of alloc/free events to retain.
+#'
+#' @return None; function invoked for side effects.
+#' @examples
+#' \dontrun{
+#' cuda_record_memory_history(enabled = 'all', context = 'all', stacks = 'all', max_entries = 10000)
+#' }
+#' @export
+cuda_record_memory_history <- function(enabled, context = "all", stacks = "all", max_entries = 1) {
+  cpp_cuda_record_memory_history(enabled, context, stacks, as.integer(max_entries))
+}
+
+#' Capture CUDA Memory State Snapshot
+#'
+#' Saves a snapshot of the CUDA memory state at the time it was called. The resulting
+#' binary output is in pickle format and can be visualized using the interactive snapshot
+#' viewer available at [pytorch.org/memory_viz](https://pytorch.org/memory_viz).
+#'
+#' @return Raw binary data representing the snapshot in pickle format.
+#' @examples
+#' \dontrun{
+#' snapshot <- cuda_memory_snapshot()
+#' }
+#' @export
+cuda_memory_snapshot <- function() {
+  cpp_cuda_memory_snapshot()
+}
+
+#' Save CUDA Memory State Snapshot to File
+#'
+#' Calls `cuda_memory_snapshot()` and saves the resulting binary snapshot
+#' to a specified file using `writeBin`. The resulting file can be visualized using the interactive 
+#' snapshot viewer available at [pytorch.org/memory_viz](https://pytorch.org/memory_viz).
+#'
+#' @param filepath Character; the path to the file where the snapshot will be saved.
+#'
+#' @return None; snapshot is saved directly to the file.
+#' @examples
+#' \dontrun{
+#' cuda_dump_memory_snapshot("snapshot.bin")
+#' }
+cuda_dump_memory_snapshot <- function(filepath) {
+  snapshot <- cuda_memory_snapshot()
+  con <- file(filepath, "wb")
+  on.exit(close(con))
+  writeBin(snapshot, con)
+}
