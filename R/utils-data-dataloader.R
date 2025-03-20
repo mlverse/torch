@@ -558,15 +558,15 @@ MultiProcessingDataLoaderIter <- R6::R6Class(
         # TODO
       }
       data
-    },
+    }
+  ),
+  private = list(
+    tasks = list(),
     finalize = function() {
       lapply(private$workers, function(x) {
         x$close_socket_con()
       })
     }
-  ),
-  private = list(
-    tasks = list()
   )
 )
 
