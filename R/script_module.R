@@ -128,7 +128,7 @@ nn_ScriptModule <- R6::R6Class(
     },
 
     forward =  function(...) {
-      
+
       if (private$respects_mode) {
         out <- if (self$training) {
           private$find_method("trainforward")(...)
@@ -177,8 +177,14 @@ nn_ScriptModule <- R6::R6Class(
   ),
   private = list(
     find_method = function(name) {
-      private$ptr$find_method(name)
+      # find method is slow, hence we cache it:
+      # https://github.com/mlverse/torch/issues/1298
+      if (name %in% names(private$.method_cache)) {
+        return(private$.method_cache[[name]])
+      }
+      private$.method_cache[[name]] <-  private$ptr$find_method(name)
     },
+    .method_cache = list(),
     respects_mode = FALSE,
     respect_mode = function() {
       private$respects_mode <- TRUE
@@ -193,7 +199,7 @@ nn_ScriptModule <- R6::R6Class(
         private$find_method("trainforward")$graph
       } else {
         private$find_method("evalforward")$graph
-        
+
       }
     },
     training = function() {
