@@ -45,12 +45,7 @@ ScriptModule <- R7Class(
       invisible(self)
     },
     find_method = function(name) {
-      # find method is slow, hence we cache it:
-      # https://github.com/mlverse/torch/issues/1298
-      if (name %in% names(private$.method_cache)) {
-        return(private$.method_cache[[name]])
-      }
-      private$.method_cache[[name]] <- cpp_jit_script_module_find_method(self, name)
+      cpp_jit_script_module_find_method(self, name)
     },
     find_constant = function(name) {
       cpp_jit_script_module_find_constant(self, name)
@@ -81,9 +76,6 @@ ScriptModule <- R7Class(
     modules = function() {
       cpp_jit_script_module_children(self)
     }
-  ),
-  private = list(
-    .method_cache = list()
   )
 )
 
@@ -185,8 +177,14 @@ nn_ScriptModule <- R6::R6Class(
   ),
   private = list(
     find_method = function(name) {
-      private$ptr$find_method(name)
+      # find method is slow, hence we cache it:
+      # https://github.com/mlverse/torch/issues/1298
+      if (name %in% names(private$.method_cache)) {
+        return(private$.method_cache[[name]])
+      }
+      private$.method_cache[[name]] <-  private$ptr$find_method(name)
     },
+    .method_cache = list(),
     respects_mode = FALSE,
     respect_mode = function() {
       private$respects_mode <- TRUE

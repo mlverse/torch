@@ -525,3 +525,11 @@ test_that("can define the same method during difference trace-jitting passes (#1
   nj2 <- expect_error(withr::with_seed(1, jit_trace(n, x)), regexp = NA)
   expect_equal(n(x), n(x))
 })
+
+test_that("caching works", {
+  x = torch_tensor(1)
+  njit = jit_trace(nn_linear(1, 1), x)
+  njit(x)
+  expect_true("trainforward" %in% names(njit$.__enclos_env__$private$.method_cache))
+  expect_true(inherits(njit(x), "torch_tensor"))
+})
