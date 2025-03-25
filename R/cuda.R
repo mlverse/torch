@@ -200,22 +200,27 @@ cuda_empty_cache <- function() {
 #' Use `cuda_memory_snapshot()` to retrieve recorded information. Visualization
 #' can be performed using [pytorch.org/memory_viz](https://pytorch.org/memory_viz).
 #'
-#' @param enabled Character or NULL; controls memory history recording:
-#'   - `NULL`: Disable recording memory history.
-#'   - `'state'`: Record currently allocated memory information.
-#'   - `'all'`: Record history of all alloc/free events (default).
+#' @param enabled Character or \code{NULL}. Controls memory history recording. Options:
+#'   \describe{
+#'     \item{\code{NULL}}{Disable recording of memory history.}
+#'     \item{\code{"state"}}{Record currently allocated memory information.}
+#'     \item{\code{"all"}}{Record the history of all allocation and free events (default).}
+#'   }
 #'
-#' @param context Character or NULL; controls traceback recording:
-#'   - `NULL`: Do not record any tracebacks.
-#'   - `'state'`: Record tracebacks for currently allocated memory.
-#'   - `'alloc'`: Additionally record tracebacks for allocation events.
-#'   - `'all'`: Additionally record tracebacks for free events (default).
+#' @param context Character or \code{NULL}. Controls traceback recording. Options:
+#'   \describe{
+#'     \item{\code{NULL}}{Do not record any tracebacks.}
+#'     \item{\code{"state"}}{Record tracebacks for currently allocated memory.}
+#'     \item{\code{"alloc"}}{Record tracebacks for allocation events.}
+#'     \item{\code{"all"}}{Record tracebacks for both allocation and free events (default).}
+#'   }
 #'
-#' @param stacks Character; defines the stack trace frames included:
-#'   - `'python'`: Include Python, TorchScript, and inductor frames.
-#'   - `'all'`: Additionally include C++ frames (default).
+#' @param stacks Character. Defines the stack trace frames to include. Options:
+#'   \describe{
+#'     \item{\code{"all"}}{Include all frames (default).}
+#'   }
 #'
-#' @param max_entries Integer; maximum number of alloc/free events to retain.
+#' @param max_entries Integer. The maximum number of allocation/free events to retain.
 #'
 #' @return None; function invoked for side effects.
 #' @examples
@@ -256,6 +261,7 @@ cuda_memory_snapshot <- function() {
 #' \dontrun{
 #' cuda_dump_memory_snapshot("snapshot.bin")
 #' }
+#' @export
 cuda_dump_memory_snapshot <- function(filepath) {
   snapshot <- cuda_memory_snapshot()
   con <- file(filepath, "wb")
