@@ -13,7 +13,7 @@ nn_weighted_loss <- nn_module(
   inherit = nn_loss,
   initialize = function(weight = NULL, reduction = "mean") {
     super$initialize(reduction)
-    self$register_buffer("weight", torch_tensor(weight))
+    self$register_buffer("weight", if (!is.null(weight)) torch_tensor(weight))
   }
 )
 
