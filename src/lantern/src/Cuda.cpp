@@ -7,6 +7,7 @@
 #include <ATen/cuda/CUDAContext.h>
 #include <ATen/cuda/detail/CUDAHooks.h>
 #include <c10/cuda/CUDACachingAllocator.h>
+#include <torch/csrc/cuda/memory_snapshot.h>
 #endif
 #include <torch/torch.h>
 
@@ -233,5 +234,27 @@ void* _lantern_cuda_get_rng_state (int device) {
   LANTERN_FUNCTION_START
   auto gen = at::detail::getCUDAHooks().getDefaultCUDAGenerator(device);
   return make_raw::Tensor(gen.get_state());
+  LANTERN_FUNCTION_END
+}
+
+void _lantern_cuda_record_memory_history(const std::string* enabled, const std::string* context, const std::string& stacks, size_t max_entries) {
+  LANTERN_FUNCTION_START
+#ifdef __NVCC__
+  torch::cuda::_record_memory_history(enabled ? std::make_optional(*enabled) : std::nullopt, context ? std::make_optional(*context) : std::nullopt, stacks, max_entries);
+#else
+  throw std::runtime_error(
+      "`cuda_record_memory_history` is only supported on CUDA runtimes.");
+#endif
+  LANTERN_FUNCTION_END_VOID
+}
+
+void* _lantern_cuda_memory_snapshot() {
+  LANTERN_FUNCTION_START
+#ifdef __NVCC__
+  return make_raw::string(torch::cuda::_memory_snapshot_pickled());
+#else
+  throw std::runtime_error(
+      "`cuda_memory_snapshot` is only supported on CUDA runtimes.");
+#endif
   LANTERN_FUNCTION_END
 }

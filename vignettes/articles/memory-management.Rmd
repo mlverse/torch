@@ -89,6 +89,32 @@ collection in others.
 These options can help tuning allocation performance depending on the program you
 are running.
 
+### CUDA Memory Snapshots
+
+To assist debugging CUDA memory usage, R torch provides functionality for generating
+CUDA memory snapshots, similar to the [PyTorch Python implementation](https://pytorch.org/docs/stable/torch_cuda_memory.html).
+Snapshots record the state of allocated CUDA memory at any point in time, and
+optionally records the history of allocation events that led up to that snapshot.
+
+To generate a snapshot:
+
+```
+# Enable memory history recording, capturing tracebacks and allocation events
+cuda_record_memory_history(enabled = "all", max_entries = 1e6)
+
+# Run your code
+
+# Save a snapshot file
+cuda_dump_memory_snapshot("my_snapshot.pickle")
+```
+
+Generated snapshots can be visualized interactively using the official PyTorch
+Memory Visualizer at [pytorch.org/memory_viz](pytorch.org/memory_viz). Simply drag
+and drop your saved snapshot (.pickle) into the visualizer, which runs locally in
+your browser without uploading any data.
+
+### LibTorch CUDA Allocation Options
+
 Besides the R specific options you can set LibTorch options via environment variables
 as described below. The behavior of caching allocator can be controlled via environment variable PYTORCH_CUDA_ALLOC_CONF. The format is `PYTORCH_CUDA_ALLOC_CONF=<option>:<value>,<option2><value2>..`. Available options:
 
