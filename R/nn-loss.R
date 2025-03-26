@@ -13,6 +13,9 @@ nn_weighted_loss <- nn_module(
   inherit = nn_loss,
   initialize = function(weight = NULL, reduction = "mean") {
     super$initialize(reduction)
+    if (!is.null(weight) && !inherits(weight, "torch_tensor")) {
+      weight = torch_tensor(weight)
+    }
     self$register_buffer("weight", weight)
   }
 )
