@@ -237,10 +237,13 @@ void* _lantern_cuda_get_rng_state (int device) {
   LANTERN_FUNCTION_END
 }
 
-void _lantern_cuda_record_memory_history(const std::string* enabled, const std::string* context, const std::string& stacks, size_t max_entries) {
+void _lantern_cuda_record_memory_history(void* enabled, void* context, void* stacks, size_t max_entries) {
   LANTERN_FUNCTION_START
 #ifdef __NVCC__
-  torch::cuda::_record_memory_history(enabled ? std::make_optional(*enabled) : std::nullopt, context ? std::make_optional(*context) : std::nullopt, stacks, max_entries);
+  auto enabled_str = enabled ? from_raw::string(enabled) : std::string();
+  auto context_str = context ? from_raw::string(context) : std::string();
+  auto stacks_str  = from_raw::string(stacks);
+  torch::cuda::_record_memory_history(enabled ? std::make_optional(enabled_str) : std::nullopt, context ? std::make_optional(context_str) : std::nullopt, stacks_str, max_entries);
 #else
   throw std::runtime_error(
       "`cuda_record_memory_history` is only supported on CUDA runtimes.");

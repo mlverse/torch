@@ -2452,8 +2452,8 @@ HOST_API void lantern_cuda_empty_cache () {
   LANTERN_HOST_HANDLER;
 }
 
-LANTERN_API void (LANTERN_PTR _lantern_cuda_record_memory_history) (const std::string* enabled, const std::string* context, const std::string& stacks, size_t max_entries);
-HOST_API void lantern_cuda_record_memory_history (const std::string* enabled, const std::string* context, const std::string& stacks, size_t max_entries) {
+LANTERN_API void (LANTERN_PTR _lantern_cuda_record_memory_history) (void* enabled, void* context, void* stacks, size_t max_entries);
+HOST_API void lantern_cuda_record_memory_history (void* enabled, void* context, void* stacks, size_t max_entries) {
   LANTERN_CHECK_LOADED
   _lantern_cuda_record_memory_history(enabled, context, stacks, max_entries);
   LANTERN_HOST_HANDLER;

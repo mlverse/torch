@@ -40,18 +40,18 @@ void cpp_cuda_empty_cache () {
 
 // [[Rcpp::export]]
 void cpp_cuda_record_memory_history(Rcpp::Nullable<std::string> enabled, Rcpp::Nullable<std::string> context, std::string stacks, size_t max_entries) {
-  const std::string* en_ptr = nullptr;
-  const std::string* ctx_ptr = nullptr;
+  void* en_ptr = nullptr;
+  void* ctx_ptr = nullptr;
   std::string en_str, ctx_str;
   if (enabled.isNotNull()) {
     en_str = Rcpp::as<std::string>(enabled);
-    en_ptr = &en_str;
+    en_ptr = (void*)&en_str;
   }
   if (context.isNotNull()) {
     ctx_str = Rcpp::as<std::string>(context);
-    ctx_ptr = &ctx_str;
+    ctx_ptr = (void*)&ctx_str;
   }
-  lantern_cuda_record_memory_history(en_ptr, ctx_ptr, stacks, max_entries);
+  lantern_cuda_record_memory_history(en_ptr, ctx_ptr, (void*)&stacks, max_entries);
 }
 
 // [[Rcpp::export]]
