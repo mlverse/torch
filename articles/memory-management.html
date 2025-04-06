@@ -195,6 +195,30 @@ default is 0.8.</li>
 </ol>
 <p>These options can help tuning allocation performance depending on the
 program you are running.</p>
+<div class="section level3">
+<h3 id="cuda-memory-snapshots">CUDA Memory Snapshots<a class="anchor" aria-label="anchor" href="#cuda-memory-snapshots"></a>
+</h3>
+<p>To assist debugging CUDA memory usage, R torch provides functionality
+for generating CUDA memory snapshots, similar to the <a href="https://pytorch.org/docs/stable/torch_cuda_memory.html" class="external-link">PyTorch
+Python implementation</a>. Snapshots record the state of allocated CUDA
+memory at any point in time, and optionally records the history of
+allocation events that led up to that snapshot.</p>
+<p>To generate a snapshot:</p>
+<pre><code><span><span class="co"># Enable memory history recording, capturing tracebacks and allocation events</span></span>
+<span><span class="fu"><a href="../reference/cuda_record_memory_history.html">cuda_record_memory_history</a></span><span class="op">(</span>enabled <span class="op">=</span> <span class="st">"all"</span>, max_entries <span class="op">=</span> <span class="fl">1e6</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Run your code</span></span>
+<span></span>
+<span><span class="co"># Save a snapshot file</span></span>
+<span><span class="fu"><a href="../reference/cuda_dump_memory_snapshot.html">cuda_dump_memory_snapshot</a></span><span class="op">(</span><span class="st">"my_snapshot.pickle"</span><span class="op">)</span></span></code></pre>
+<p>Generated snapshots can be visualized interactively using the
+official PyTorch Memory Visualizer at <a href="pytorch.org/memory_viz">pytorch.org/memory_viz</a>. Simply drag
+and drop your saved snapshot (.pickle) into the visualizer, which runs
+locally in your browser without uploading any data.</p>
+</div>
+<div class="section level3">
+<h3 id="libtorch-cuda-allocation-options">LibTorch CUDA Allocation Options<a class="anchor" aria-label="anchor" href="#libtorch-cuda-allocation-options"></a>
+</h3>
 <p>Besides the R specific options you can set LibTorch options via
 environment variables as described below. The behavior of caching
 allocator can be controlled via environment variable
@@ -241,6 +265,7 @@ greater than 0.0 and less than 1.0.</li>
 <p>Notice that the garbage collector refered below is not the R garbage
 collector but LibTorch’s collector, that releases memory from the cache
 to the OS.</p>
+</div>
 </div>
 <div class="section level2">
 <h2 id="mps">MPS<a class="anchor" aria-label="anchor" href="#mps"></a>
