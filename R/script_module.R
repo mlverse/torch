@@ -128,26 +128,12 @@ nn_ScriptModule <- R6::R6Class(
     },
 
     forward =  function(...) {
-
-      if (private$respects_mode) {
-        out <- if (self$training) {
-          private$find_method("trainforward")(...)
-        } else {
-          private$find_method("evalforward")(...)
-        }
-        return(out)
-      }
-
-      inputs <- list(...)
-
-      if (is.null(private$find_method("forward"))) {
+      if (is.null(private$.forward)) {
         runtime_error("Forward is not defined. Methods from submodules of traced modules are not traced. Are you trying to call from a submodule?")
       }
-
-      out <- cpp_call_jit_script(private$ptr, inputs)
-      # calling the traced function always returns a stack
-      # with a single element.
-      out[[1]]
+      # we need to call into private method .forward because we can't change the forward method without
+      # calling unlockBinding() which causes issues on CRAN
+      private$.forward(...)
     },
     register_parameter = function(name, param) {
       private$ptr$register_parameter(name, param)
@@ -162,7 +148,7 @@ nn_ScriptModule <- R6::R6Class(
       private$ptr$add_constant(name, value)
     },
     graph_for = function(...) {
-      if (!private$respects_mode) {
+      if (!private$.respects_mode()) {
         return(private$find_method("forward")$graph_for(...))
       }
       if (self$training) {
@@ -177,22 +163,35 @@ nn_ScriptModule <- R6::R6Class(
   ),
   private = list(
     find_method = function(name) {
-      # find method is slow, hence we cache it:
-      # https://github.com/mlverse/torch/issues/1298
-      if (name %in% names(private$.method_cache)) {
-        return(private$.method_cache[[name]])
-      }
-      private$.method_cache[[name]] <-  private$ptr$find_method(name)
+      private$ptr$find_method(name)
     },
-    .method_cache = list(),
-    respects_mode = FALSE,
-    respect_mode = function() {
-      private$respects_mode <- TRUE
+    .update_forward = function(respect_mode) {
+      # don't change without benchmark
+      # https://github.com/mlverse/torch/issues/1304
+      private$.forward <- if (respect_mode) {
+        is_training <- self$is_training
+        evalforward <- self$evalforward
+        trainforward <- self$trainforward
+        function(...) {
+          if (is_training()) {
+            trainforward(...)
+          } else {
+            evalforward(...)
+          }
+        }
+      } else {
+        private$ptr$find_method("forward")
+      }
+    },
+    .respects_mode = function() {
+      is.null(private$ptr$find_method("forward")) &&
+        !is.null(private$ptr$find_method("evalforward")) &&
+        !is.null(private$ptr$find_method("trainforward"))
     }
   ),
   active = list(
     graph = function() {
-      if (!private$respects_mode) {
+      if (!private$.respects_mode()) {
         return(private$find_method("forward")$graph)
       }
       if (self$training) {
@@ -224,13 +223,13 @@ nn_ScriptModule <- R6::R6Class(
 
 new_script_module <- function(ptr) {
   module <- nn_ScriptModule$new(ptr = ptr)
-  f <- function(...) {
-    module$forward(...)
-  }
-  if (!is.null(ptr$find_method("trainforward")) && !is.null(ptr$find_method("evalforward")) &&
-    is.null(ptr$find_method("forward"))) {
-    module$.__enclos_env__$private$respect_mode()
-  }
+  respect_mode <- !is.null(ptr$find_method("trainforward")) && !is.null(ptr$find_method("evalforward")) &&
+      is.null(ptr$find_method("forward"))
+
+  module$.__enclos_env__$private$.update_forward(respect_mode = respect_mode)
+
+  f <- module$forward
+
   class(f) <- c("script_module", "nn_module")
   attr(f, "module") <- module
   f

@@ -395,11 +395,8 @@ jit_trace_module <- function(mod, ..., strict = TRUE, respect_mode = TRUE) {
       )
       cpp_jit_script_module_add_method(module$..ptr..(), ptr)
     }
-
   }
-  if (respect_mode) {
-    module$.__enclos_env__$private$respect_mode()
-  }
+  module$.__enclos_env__$private$.update_forward(respect_mode)
 
   module$train(was_training)
 

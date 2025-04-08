@@ -68,9 +68,6 @@ cpp_type <- function(decl) {
   } else {
     return("Rcpp::List")
   }
-
-  browser()
-
 }
 
 cpp_method_name <- function(decl) {
@@ -565,8 +562,6 @@ cpp_return_statement <- function(returns) {
     if (returns$dynamic_type == "IntArrayRef")
       return(cast_call("XPtrTorchIntArrayRef"))
 
-    browser()
-
   } else {
 
     calls <- purrr::map_chr(
@@ -721,7 +716,6 @@ cpp <- function(path) {
       pb$tick()
       res <- cpp_method(x)
       if (length(res) != 1)
-        browser()
       res
     })
 
