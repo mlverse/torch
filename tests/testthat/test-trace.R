@@ -381,6 +381,8 @@ test_that("we get a good error message when trying to call a method from a submo
 
   m <- jit_trace(module(), torch_randn(100, 10))
 
+  f = m$linear$forward
+
   expect_error(
     m$linear(torch_randn(10, 10)),
     regexp = "Methods from submodules of traced modules are not traced"
@@ -524,12 +526,4 @@ test_that("can define the same method during difference trace-jitting passes (#1
   nj1 <- withr::with_seed(1, jit_trace(n, x))
   nj2 <- expect_error(withr::with_seed(1, jit_trace(n, x)), regexp = NA)
   expect_equal(n(x), n(x))
-})
-
-test_that("caching works", {
-  x = torch_tensor(1)
-  njit = jit_trace(nn_linear(1, 1), x)
-  njit(x)
-  expect_true("trainforward" %in% names(njit$.__enclos_env__$private$.method_cache))
-  expect_true(inherits(njit(x), "torch_tensor"))
 })

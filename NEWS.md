@@ -3,6 +3,7 @@
 # torch 0.14.2
 
 - Fixed a regression causing torch to crash on Windows if used within RStudio.
+- perf: Significantly reduce overhead when calling into jit-modules (#1304)
 
 # torch 0.14.1
 
@@ -35,7 +36,7 @@ Bug fixes:
 
 ## Breaking changes
 
-- lantern is now distributed over a different URL (https://torch-cdn.mlverse.org). 
+- lantern is now distributed over a different URL (https://torch-cdn.mlverse.org).
   For most users this shouldn't have any effect, unless you need special authorization
   to access some URL's. (#1162)
 
