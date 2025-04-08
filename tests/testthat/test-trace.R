@@ -381,8 +381,6 @@ test_that("we get a good error message when trying to call a method from a submo
 
   m <- jit_trace(module(), torch_randn(100, 10))
 
-  f = m$linear$forward
-
   expect_error(
     m$linear(torch_randn(10, 10)),
     regexp = "Methods from submodules of traced modules are not traced"
