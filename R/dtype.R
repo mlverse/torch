@@ -109,6 +109,9 @@ torch_float16 <- function() torch_dtype$new(cpp_torch_float16())
 #' @rdname torch_dtype
 #' @export
 torch_half <- function() torch_dtype$new(cpp_torch_float16())
+#' @rdname torch_dtype
+#' @export
+torch_bfloat16 <- function() torch_dtype$new(cpp_torch_bfloat16())
 
 #' @rdname torch_dtype
 #' @export
