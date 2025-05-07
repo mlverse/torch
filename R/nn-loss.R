@@ -1341,10 +1341,9 @@ nn_ctc_loss <- nn_module(
 #' where the goal is optimizing the ROC curve. Note that the targets \eqn{label_tensor} should be factor
 #' level of the binary outcome, i.e. with values `1L` and `2L`.
 #' @references
-#' J. Hillman, T. Dylan Hocking: Optimizing ROC Curves with a Sort-Based 
+#' J. Hillman, T.D. Hocking: Optimizing ROC Curves with a Sort-Based 
 #' Surrogate Loss for Binary Classification and Changepoint Detection
 #' https://jmlr.org/papers/volume24/21-0751/21-0751.pdf
-#'
 #'
 #' @examplesIf torch_is_installed()
 #' loss <- nn_aum_loss()
