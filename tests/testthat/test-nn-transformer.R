@@ -5,7 +5,7 @@ test_that("TransformerEncoderLayer produces output of correct shape", {
   layer <- nn_transformer_encoder_layer(d_model = 8, nhead = 2, dim_feedforward = 16)
   input <- torch_randn(5, 3, 8)  # (seq_len=5, batch=3, features=8)
   output <- layer(input)
-  expect_tensor(output, min_dims = 3)
+  expect_tensor(output)
   expect_equal(dim(output), dim(input))  # output shape should match input shape
 })
 
@@ -125,6 +125,6 @@ test_that("Modules are serializable and gradients flow", {
   loss$backward()
   # Check that at least one parameter has non-null gradient
   grads <- lapply(model$parameters, function(p) p$grad)
-  has_grad <- any(sapply(grads, function(g) { !is_undefined(g) && torch_numel(g) > 0 }))
+  has_grad <- any(sapply(grads, function(g) { !is_undefined_tensor(g) && g$numel() > 0 }))
   expect_true(has_grad)
 })

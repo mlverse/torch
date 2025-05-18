@@ -178,8 +178,8 @@ nn_transformer_encoder <- nn_module(
   forward = function(src, mask = NULL, src_key_padding_mask = NULL, is_causal = FALSE) {
     output <- src
     # Pass through each encoder layer in sequence
-    for (layer in self$layers) {
-      output <- layer(output, src_mask = mask, src_key_padding_mask = src_key_padding_mask, 
+    for (i in seq_along(self$layers)) {
+      output <- self$layers[[i]](output, src_mask = mask, src_key_padding_mask = src_key_padding_mask, 
                       is_causal = is_causal)
     }
     # Apply final normalization if provided
