@@ -4,14 +4,14 @@ NULL
 
 #' Transformer Encoder Layer Module (R torch)
 #'
-#' Implements a single transformer encoder layer as in PyTorch, including 
+#' Implements a single transformer encoder layer as in PyTorch, including
 #' self-attention, feed-forward network, residual connections, and layer normalization.
 #'
 #' @param d_model (integer) the number of expected features in the input.
 #' @param nhead (integer) the number of heads in the multihead attention.
 #' @param dim_feedforward (integer) the dimension of the feed-forward network model. Default: 2048.
 #' @param dropout (numeric) the dropout probability for both attention and feed-forward networks. Default: 0.1.
-#' @param activation (character or function) the activation function of the intermediate layer. 
+#' @param activation (character or function) the activation function of the intermediate layer.
 #'   Can be `"relu"` or `"gelu"` or an R function mapping a tensor to a tensor. Default: "relu".
 #' @param layer_norm_eps (numeric) the epsilon value for layer normalization. Default: 1e-5.
 #' @param batch_first (logical) if TRUE, inputs are (batch, seq, feature) instead of (seq, batch, feature). Default: FALSE.
@@ -19,20 +19,20 @@ NULL
 #' @param bias (logical) if FALSE, the Linear layers and LayerNorm will not learn additive bias (LayerNorm will have no affine params). Default: TRUE.
 #'
 #' @section Details:
-#' This module is equivalent to `torch::nn_transformer_encoder_layer` in PyTorch, with identical default arguments and behavior. 
-#' It consists of a multi-head self-attention (`self_attn`), followed by a feed-forward network (two linear layers with an activation in between), each part having residual connections and dropout. 
+#' This module is equivalent to `torch::nn_transformer_encoder_layer` in PyTorch, with identical default arguments and behavior.
+#' It consists of a multi-head self-attention (`self_attn`), followed by a feed-forward network (two linear layers with an activation in between), each part having residual connections and dropout.
 #' Two LayerNorm layers (`norm1`, `norm2`) are used either in pre-norm or post-norm fashion based on `norm_first`.
 #'
-#' The `forward()` method supports an optional `src_mask` (attention mask) and `src_key_padding_mask` to mask out positions, and an `is_causal` flag for auto-regressive masking. 
+#' The `forward()` method supports an optional `src_mask` (attention mask) and `src_key_padding_mask` to mask out positions, and an `is_causal` flag for auto-regressive masking.
 #' If `is_causal=TRUE`, a causal mask will be applied (equivalent to a lower-triangular attention mask), which should not be combined with an explicit `src_mask`.
 #'
 #' @returns An `nn_module` object of class `nn_transformer_encoder_layer`. Calling the module on an input tensor returns the output tensor of the same shape.
 #'
 #' @examples
 #' if (torch_is_installed()) {
-#'   layer <- nn_transformer_encoder_layer(d_model=16, nhead=4)
-#'   x <- torch_randn(10, 2, 16)  # (sequence, batch, features)
-#'   y <- layer(x)  # output has shape (10, 2, 16)
+#'   layer <- nn_transformer_encoder_layer(d_model = 16, nhead = 4)
+#'   x <- torch_randn(10, 2, 16) # (sequence, batch, features)
+#'   y <- layer(x) # output has shape (10, 2, 16)
 #' }
 #' @export
 nn_transformer_encoder_layer <- nn_module(
@@ -42,24 +42,30 @@ nn_transformer_encoder_layer <- nn_module(
                         batch_first = FALSE, norm_first = FALSE, bias = TRUE) {
     # Save flags
     self$norm_first <- norm_first
-    
+
     # Multi-head self-attention module
-    self$self_attn <- nn_multihead_attention(embed_dim = d_model, num_heads = nhead,
-                                             dropout = dropout, bias = bias, batch_first = batch_first)
+    self$self_attn <- nn_multihead_attention(
+      embed_dim = d_model, num_heads = nhead,
+      dropout = dropout, bias = bias, batch_first = batch_first
+    )
     # Feed-forward network components
     self$linear1 <- nn_linear(d_model, dim_feedforward, bias = bias)
     self$linear2 <- nn_linear(dim_feedforward, d_model, bias = bias)
     # Dropout layers
-    self$dropout <- nn_dropout(dropout)    # used between linear1 and linear2
-    self$dropout1 <- nn_dropout(dropout)   # used after self-attention
-    self$dropout2 <- nn_dropout(dropout)   # used after feed-forward
-    
+    self$dropout <- nn_dropout(dropout) # used between linear1 and linear2
+    self$dropout1 <- nn_dropout(dropout) # used after self-attention
+    self$dropout2 <- nn_dropout(dropout) # used after feed-forward
+
     # LayerNorm layers (use elementwise_affine = bias; if bias=FALSE, no affine params)
-    self$norm1 <- nn_layer_norm(normalized_shape = d_model, eps = layer_norm_eps, 
-                                elementwise_affine = bias)
-    self$norm2 <- nn_layer_norm(normalized_shape = d_model, eps = layer_norm_eps, 
-                                elementwise_affine = bias)
-    
+    self$norm1 <- nn_layer_norm(
+      normalized_shape = d_model, eps = layer_norm_eps,
+      elementwise_affine = bias
+    )
+    self$norm2 <- nn_layer_norm(
+      normalized_shape = d_model, eps = layer_norm_eps,
+      elementwise_affine = bias
+    )
+
     # Set up the activation function
     if (is.character(activation)) {
       act_name <- tolower(activation)
@@ -70,8 +76,10 @@ nn_transformer_encoder_layer <- nn_module(
         self$activation <- function(x) nnf_gelu(x)
         self$activation_relu_or_gelu <- 2
       } else {
-        stop("Unsupported activation string: ", activation,
-             ". Use 'relu', 'gelu', or a callable function.")
+        stop(
+          "Unsupported activation string: ", activation,
+          ". Use 'relu', 'gelu', or a callable function."
+        )
       }
     } else if (is.function(activation)) {
       self$activation <- activation
@@ -100,18 +108,19 @@ nn_transformer_encoder_layer <- nn_module(
       }
       # Causal mask: True means position should not be attended (mask out future positions)
       attn_mask_eff <- torch_ones(c(L, L), dtype = torch_bool())
-      attn_mask_eff <- attn_mask_eff$triu(diagonal = 1)  # ones above diagonal
+      attn_mask_eff <- attn_mask_eff$triu(diagonal = 1) # ones above diagonal
     }
-    
+
     # Self-attention with possible mask(s)
     # Query, Key, Value are all src (self-attention)
     if (self$norm_first) {
       # Pre-norm: normalize input before attention
       norm_src <- self$norm1(src)
-      attn_out <- self$self_attn(norm_src, norm_src, norm_src, 
-                                 attn_mask = attn_mask_eff, 
-                                 key_padding_mask = src_key_padding_mask, 
-                                 need_weights = FALSE)[[1]]
+      attn_out <- self$self_attn(norm_src, norm_src, norm_src,
+        attn_mask = attn_mask_eff,
+        key_padding_mask = src_key_padding_mask,
+        need_weights = FALSE
+      )[[1]]
       # Add residual connection and apply dropout
       src2 <- src + self$dropout1(attn_out)
       # Feed-forward network with pre-norm
@@ -120,10 +129,11 @@ nn_transformer_encoder_layer <- nn_module(
       out <- src2 + self$dropout2(ff_out)
     } else {
       # Post-norm: attention on input directly
-      attn_out <- self$self_attn(src, src, src, 
-                                 attn_mask = attn_mask_eff, 
-                                 key_padding_mask = src_key_padding_mask, 
-                                 need_weights = FALSE)[[1]]
+      attn_out <- self$self_attn(src, src, src,
+        attn_mask = attn_mask_eff,
+        key_padding_mask = src_key_padding_mask,
+        need_weights = FALSE
+      )[[1]]
       # Residual connection then norm
       src2 <- src + self$dropout1(attn_out)
       out1 <- self$norm1(src2)
@@ -146,19 +156,19 @@ nn_transformer_encoder_layer <- nn_module(
 #' @param num_layers (integer) the number of encoder layers to stack.
 #' @param norm (nn_module or NULL) optional layer normalization module to apply after the last layer (e.g., `nn_layer_norm`). Default: NULL (no extra normalization).
 #'
-#' @details 
-#' This module replicates the given `encoder_layer` `num_layers` times to construct the Transformer encoder. 
-#' If a `norm` module is provided, it will be applied to the output of the final encoder layer. 
-#' The forward pass sequentially applies each encoder layer to the input. 
+#' @details
+#' This module replicates the given `encoder_layer` `num_layers` times to construct the Transformer encoder.
+#' If a `norm` module is provided, it will be applied to the output of the final encoder layer.
+#' The forward pass sequentially applies each encoder layer to the input.
 #'
 #' @returns An `nn_module` of class `nn_transformer_encoder`. Calling it on an input tensor of shape `(S, N, E)` or `(N, S, E)` (depending on `batch_first`) returns the encoded output of the same shape.
 #'
 #' @examples
 #' if (torch_is_installed()) {
-#'   layer <- nn_transformer_encoder_layer(d_model=32, nhead=4, batch_first=TRUE)
-#'   model <- nn_transformer_encoder(layer, num_layers=2)
-#'   x <- torch_randn(8, 5, 32)  # (batch, seq, feature) since batch_first=TRUE
-#'   y <- model(x)  # output shape is (8, 5, 32)
+#'   layer <- nn_transformer_encoder_layer(d_model = 32, nhead = 4, batch_first = TRUE)
+#'   model <- nn_transformer_encoder(layer, num_layers = 2)
+#'   x <- torch_randn(8, 5, 32) # (batch, seq, feature) since batch_first=TRUE
+#'   y <- model(x) # output shape is (8, 5, 32)
 #' }
 #' @export
 nn_transformer_encoder <- nn_module(
@@ -179,8 +189,8 @@ nn_transformer_encoder <- nn_module(
     output <- src
     # Pass through each encoder layer in sequence
     for (i in seq_along(self$layers)) {
-      output <- self$layers[[i]](output, src_mask = mask, src_key_padding_mask = src_key_padding_mask, 
-                      is_causal = is_causal)
+      output <- self$layers[[i]](output, src_mask = mask, src_key_padding_mask = src_key_padding_mask,
+        is_causal = is_causal)
     }
     # Apply final normalization if provided
     if (!is.null(self$norm)) {
