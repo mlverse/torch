@@ -5,7 +5,8 @@ test_that("TransformerEncoderLayer produces output of correct shape", {
   layer <- nn_transformer_encoder_layer(d_model = 8, nhead = 2, dim_feedforward = 16)
   input <- torch_randn(5, 3, 8)  # (seq_len=5, batch=3, features=8)
   output <- layer(input)
-  expect_tensor(output)
+  expect_true(torch:::is_torch_tensor(output))
+  expect_no_error(as_array(output$to(device = "cpu")))
   expect_equal(dim(output), dim(input))  # output shape should match input shape
 })
 
@@ -127,4 +128,15 @@ test_that("Modules are serializable and gradients flow", {
   grads <- lapply(model$parameters, function(p) p$grad)
   has_grad <- any(sapply(grads, function(g) { !is_undefined_tensor(g) && g$numel() > 0 }))
   expect_true(has_grad)
+})
+
+
+test_that("TransformerEncoderLayer GPU test", {
+  if(cuda_is_available()) {
+  layer_bf <- nn_transformer_encoder_layer(d_model = 8, nhead = 2, batch_first = TRUE)
+  input_bf <- torch_randn(3, 5, 8, device = "cuda")  # (batch=3, seq_len=5, features=8)
+  layer_bf$to(device = "cuda")
+  output_bf <- layer_bf(input_bf)
+  expect_equal(dim(output_bf), dim(input_bf))
+  }
 })
