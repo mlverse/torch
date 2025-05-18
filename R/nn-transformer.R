@@ -19,9 +19,9 @@ NULL
 #' @param bias (logical) if FALSE, the Linear layers and LayerNorm will not learn additive bias (LayerNorm will have no affine params). Default: TRUE.
 #'
 #' @section Details:
-#' This module is equivalent to `torch::nn_transformer_encoder_layer` in PyTorch, with identical default arguments and behavior:contentReference[oaicite:2]{index=2}. 
+#' This module is equivalent to `torch::nn_transformer_encoder_layer` in PyTorch, with identical default arguments and behavior. 
 #' It consists of a multi-head self-attention (`self_attn`), followed by a feed-forward network (two linear layers with an activation in between), each part having residual connections and dropout. 
-#' Two LayerNorm layers (`norm1`, `norm2`) are used either in pre-norm or post-norm fashion based on `norm_first`:contentReference[oaicite:3]{index=3}.
+#' Two LayerNorm layers (`norm1`, `norm2`) are used either in pre-norm or post-norm fashion based on `norm_first`.
 #'
 #' The `forward()` method supports an optional `src_mask` (attention mask) and `src_key_padding_mask` to mask out positions, and an `is_causal` flag for auto-regressive masking. 
 #' If `is_causal=TRUE`, a causal mask will be applied (equivalent to a lower-triangular attention mask), which should not be combined with an explicit `src_mask`.
@@ -77,7 +77,7 @@ nn_transformer_encoder_layer <- nn_module(
       self$activation <- activation
       # Identify if the function corresponds to ReLU or GELU for potential optimizations
       self$activation_relu_or_gelu <- 0
-      # (In PyTorch, 1 indicates ReLU, 2 indicates GELU, 0 otherwise:contentReference[oaicite:4]{index=4})
+      # (In PyTorch, 1 indicates ReLU, 2 indicates GELU, 0 otherwise)
     } else {
       stop("activation must be a string ('relu' or 'gelu') or a function.")
     }
@@ -147,7 +147,7 @@ nn_transformer_encoder_layer <- nn_module(
 #' @param norm (nn_module or NULL) optional layer normalization module to apply after the last layer (e.g., `nn_layer_norm`). Default: NULL (no extra normalization).
 #'
 #' @details 
-#' This module replicates the given `encoder_layer` `num_layers` times to construct the Transformer encoder:contentReference[oaicite:5]{index=5}. 
+#' This module replicates the given `encoder_layer` `num_layers` times to construct the Transformer encoder. 
 #' If a `norm` module is provided, it will be applied to the output of the final encoder layer. 
 #' The forward pass sequentially applies each encoder layer to the input. 
 #'
@@ -169,7 +169,7 @@ nn_transformer_encoder <- nn_module(
       stop("encoder_layer must be an nn_module (transformer encoder layer instance).")
     }
     self$num_layers <- num_layers
-    # Use clone_module to deep-copy the layer for each repetition:contentReference[oaicite:6]{index=6}
+    # Use clone_module to deep-copy the layer for each repetition
     self$layers <- nn_module_list(lapply(seq_len(num_layers), function(i) {
       clone_module(encoder_layer, deep = TRUE)
     }))
