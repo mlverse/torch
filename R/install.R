@@ -45,16 +45,19 @@ torch_version <- "2.5.1"
 #' 
 #' @export
 install_torch <- function(reinstall = FALSE, ..., .inform_restart = TRUE) {
-  have_installed <- !torch_is_installed() || reinstall
+  have_installed <- (!torch_is_installed() || reinstall)
   
   liblantern <- lantern_url()
   libtorch <- libtorch_url()
-  
+  if (!have_rw_access) {
+    cli_abort("torch is lacking write access on the default temp folder.",
+              "Please configure a {.var TORCH_HOME} variable with a writable folder")
+  }
   install_lib("torch", libtorch, reinstall)
   install_lib("lantern", liblantern, reinstall)
   
   if (.inform_restart && have_installed && interactive()) {
-    cli::cli_inform(c(
+    cli_inform(c(
       v = "torch dependencies have been installed.",
       i = "You must restart your session to use {.pkg torch} correctly."
     ))
@@ -67,7 +70,7 @@ install_torch <- function(reinstall = FALSE, ..., .inform_restart = TRUE) {
 #' Returns the torch installation path.
 #' @export
 torch_install_path <- function() {
-  normalizePath(inst_path(), mustWork = FALSE)
+ normalizePath(inst_path(), mustWork = FALSE)
 }
 
 #' Verifies if torch is installed
@@ -171,7 +174,7 @@ inst_path <- function() {
 libtorch_url <- function() {
   url <- Sys.getenv("TORCH_URL", "")
   
-  if (url != "")
+  if (nzchar(url))
     return(url)
   
   if (is_macos()) {
@@ -314,11 +317,11 @@ architecture <- function() {
   arch <- Sys.info()["machine"]
 
   if (!is_x86_64(arch) && (!is_macos())) {
-    cli::cli_abort("Architecture {.val {arch}} is not supported in this OS.")
+    cli_abort("Architecture {.val {arch}} is not supported in this OS.")
   }
   
   if ((!is_arm64(arch)) && (!is_x86_64(arch))) {
-    cli::cli_abort("Unsupported architecture {.val {arch}}.")
+    cli_abort("Unsupported architecture {.val {arch}}.")
   }
   
   installer_message("Architecture is {.val {arch}}")
@@ -465,7 +468,7 @@ check_supported_cuda_version_linux <- function(version) {
 check_supported_version <- function(version, supported_versions) {
   if (!is.null(version)) {
     if (!version %in% supported_versions) {
-      cli::cli_abort(c(
+      cli_abort(c(
         x = "Unsupported CUDA version {.val {version}}",
         i = "Currently supported versions are: {.val {supported_versions}}."
       ))
@@ -526,7 +529,7 @@ installer_message <- function(msg) {
   if (!is_truthy(Sys.getenv("TORCH_INSTALL_DEBUG", FALSE)))
     return(invisible(msg))
   names(msg) <- rep("i", length(msg))
-  cli::cli_inform(msg, class = "torch_install", .envir = parent.frame())
+  cli_inform(msg, class = "torch_install", env = parent.frame())
 }
 
 is_truthy <- function(x) {
@@ -582,10 +585,10 @@ is_url <- function(x) {
 #' @export
 get_install_libs_url <- function(version = NA, type = NA) {
   if (!is.na(type)) {
-    cli::cli_abort("Please use the env vars described in {.fn install_torch} to configure the installation type.")
+    cli_abort("Please use the env vars described in {.fn install_torch} to configure the installation type.")
   }
   if (!is.na(version)) {
-    cli::cli_abort("It's not possible to configure the libtorch version.")
+    cli_abort("It's not possible to configure the libtorch version.")
   }
   out <- list(
     libtorch = libtorch_url(), 
@@ -593,7 +596,7 @@ get_install_libs_url <- function(version = NA, type = NA) {
   )
   
   if (interactive()) {
-    cli::cli_inform(c(
+    cli_inform(c(
       "Follow the links to download the dependencies, then set the {.envvar TORCH_URL} and {.envvar LANTERN_URL} env vars to the file paths.",
       "LibTorch: {.url {out$libtorch}}",
       "LibLantern: {.url {out$liblantern}}"
@@ -629,7 +632,7 @@ get_install_libs_url <- function(version = NA, type = NA) {
 #' }
 #' @export
 install_torch_from_file <- function(version = NA, type = NA, libtorch, liblantern, ...) {
-  cli::cli_abort(c(
+  cli_abort(c(
     "This function is now deprecated. The same results can be achieved with {.fn install_torch}.",
     i = "Use the envvars {.envvar TORCH_URL} and {.envvar LANTERN_URL} to set the file locations."
   ))
@@ -651,7 +654,7 @@ download_file <- function(url, destfile) {
       }
     }
     
-    cli::cli_abort(c(
+    cli_abort(c(
       x = "Unable to download from {.url {url}}",
       i = "Please verify that the URL is not blocked by your firewall. See also {.url https://torch.mlverse.org/docs/articles/installation.html#file-based-download}",
       additional_messages
@@ -664,3 +667,5 @@ is_package_version <- function(x) {
   regex <- "([[:digit:]]+[.-])*[[:digit:]]+"
   grepl(regex, x)
 }
+
+have_rw_access <- file.access(dirname(tempfile(fileext = ".zip")), 2 ) >= 0
