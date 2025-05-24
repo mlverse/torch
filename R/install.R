@@ -45,14 +45,11 @@ torch_version <- "2.5.1"
 #' 
 #' @export
 install_torch <- function(reinstall = FALSE, ..., .inform_restart = TRUE) {
-  have_installed <- (!torch_is_installed() || reinstall)
+  have_installed <- !torch_is_installed() || reinstall
   
   liblantern <- lantern_url()
   libtorch <- libtorch_url()
-  if (!have_rw_access) {
-    cli_abort("torch is lacking write access on the default temp folder.",
-              "Please configure a {.var TORCH_HOME} variable with a writable folder")
-  }
+
   install_lib("torch", libtorch, reinstall)
   install_lib("lantern", liblantern, reinstall)
   
@@ -167,8 +164,25 @@ lib_is_installed <- function(libname, install_path) {
 
 inst_path <- function() {
   install_path <- Sys.getenv("TORCH_HOME")
-  if (nzchar(install_path)) return(install_path)
-  system.file("", package = "torch")
+  if (nzchar(install_path)) {
+    if (can_write_into(install_path)) {
+      return(install_path)
+    } else {
+      cli_abort(c(
+        "x" = "{.pkg torch} cannot write into configured {.var TORCH_HOME} {.path {install_path}}.",
+        "i" = "Please configure {.var TORCH_HOME} to be one of {.val {.libPath()}}"
+      ))
+    }
+  }
+  install_path <- system.file("", package = "torch")
+  if (can_write_into(install_path)) {
+    return(install_path)
+  }
+  cli_abort(c("x" = "{.pkg torch} cannot write into {.path {install_path}}.",
+            "i" = "Please configure a {.var TORCH_HOME} variable with a writable folder",
+            " " = "and run {.fn install_torch()} again",
+            "i" = "Or run R under the root user once to perform the {.fn install_torch()} ",
+            " " = "if you use system level package manager like {.pkg r2u}"))
 }
 
 libtorch_url <- function() {
@@ -653,7 +667,6 @@ download_file <- function(url, destfile) {
         )
       }
     }
-    
     cli_abort(c(
       x = "Unable to download from {.url {url}}",
       i = "Please verify that the URL is not blocked by your firewall. See also {.url https://torch.mlverse.org/docs/articles/installation.html#file-based-download}",
@@ -668,4 +681,6 @@ is_package_version <- function(x) {
   grepl(regex, x)
 }
 
-have_rw_access <- file.access(dirname(tempfile(fileext = ".zip")), 2 ) >= 0
+can_write_into <- function(path) {
+  file.access(path, 2 ) >= 0
+}

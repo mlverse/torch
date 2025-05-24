@@ -1,115 +1,97 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: torch 0.14.0\n"
-"Report-Msgid-Bugs-To: \n"
+"Project-Id-Version: torch 0.14.2\n"
 "POT-Creation-Date: 2025-05-24 18:03+0200\n"
-"PO-Revision-Date: 2025-05-24 18:27+0200\n"
-"Last-Translator: Christophe Regouby <christophe.regouby@free.fr>\n"
-"Language-Team: \n"
-"Language: fr_FR\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Poedit 3.6\n"
 
 #: R7.R:46
 msgid "can only set to public, private and active"
-msgstr "ne peut être configuré qu’avec `public`, `private` ou `active`"
+msgstr ""
 
 #: autocast.R:63 autocast.R:87
 msgid "Unsupported device {.val {device}}."
-msgstr "Le périphérique {.val {device}} n'est pas un `device` valide."
+msgstr ""
 
 #: autocast.R:153
 msgid "{.var growth_factor} should be > 1 but got {.val {growth_factor}}."
 msgstr ""
-"{.var growth_factor} doit être > 1. Ici, il est à {.val {growth_factor}}."
 
 #: autocast.R:156
 msgid "{.var backoff_factor} should be < 1 but got {.val {backoff_factor}}."
 msgstr ""
-"{.var backoff_factor} doit être < 1. Ici, il est à {.val {backoff_factor}}."
 
 #: autocast.R:175
 msgid ""
 "{.var outputs} device must be {.val cuda}, got {.val {outputs$device$type}}."
 msgstr ""
-"le périphérique {.var outputs} doit être {.val cuda}. Ici, il est à {.val "
-"{outputs$device$type}}."
 
 #: autocast.R:188
 msgid ""
 "{.var outputs} must be a tensor or a list of tensors, got {.cls "
 "{class(outputs)}}."
 msgstr ""
-"{.var outputs} doit être un tenseur ou une liste de tenseurs. Ici, c'est un "
-"{.cls {class(outputs)}}."
 
 #: autocast.R:197
 msgid ""
 "{.fn unscale_} has already been called on this optimizer since the last {.fn "
 "update}."
 msgstr ""
-"{.fn unscale_} a déjà été appelé sur cet optimiseur depuis le dernier {.fn "
-"update}."
 
 #: autocast.R:199
 msgid "{.fn unscale_} is being called after {.fn step}."
-msgstr "{.fn unscale_} est appelé après {.fn step}, ce qui est invalide."
+msgstr ""
 
 #: autocast.R:216
 msgid "{.fn step} has already been called since the last {.fn update}."
-msgstr "{.fn step} a déjà été appelé depuis le dernier {.fn update}."
+msgstr ""
 
 #: autocast.R:254
 msgid "{.var .growth_tracker} initialized before {.var .scale}"
 msgstr ""
-"{.var .growth_tracker} est initialisé avant {.var .scale} ce qui est "
-"invalide."
 
 #: autocast.R:263
 msgid "Attempted {.fn {funcname}} but {.var .scale} is {.val NULL}."
 msgstr ""
-"Tentative d'appliquer {.fn {funcname}} mais {.var .scale} est {.val NULL}."
 
 #: autocast.R:269
 msgid "Attempted {.fn {funcname}} but {.var .growth_tracker} is {.val NULL}."
 msgstr ""
-"Tentative d'appliquer {.fn {funcname}} mais {.var .growth_tracker} est {.val "
-"NULL}."
 
 #: autograd.R:34
 msgid ""
 "This mode should be enabled only for debugging as the different tests will "
 "slow down your program execution."
 msgstr ""
-"Ce mode ne doit être activé qu'en cas de débogage. En effet, les différents "
-"tests vont ralentir l’exécution du programme."
 
 #: autograd.R:132
 msgid "`keep_graph` has been deprecated. Please use `retain_graph` instead."
-msgstr "`keep_graph` est déprécié au profit de `retain_graph`."
+msgstr ""
 
 #: autograd.R:133 install.R:173 install.R:182 install.R:184
 msgid "i"
-msgstr "i"
+msgstr ""
 
 #: autograd.R:133
 msgid "`keep_graph` will take precedence."
-msgstr "C'est `keep_graph` qui aura le dessus."
+msgstr ""
 
 #: autograd.R:134
 msgid "once"
-msgstr "once"
+msgstr ""
 
 #: autograd.R:135
 msgid "keep_graph"
-msgstr "keep_graph"
+msgstr ""
 
 #: backends.R:16
 msgid "CuDNN is not available."
-msgstr "CuDNN n'est pas disponible."
+msgstr ""
 
 #: call_torch_function.R:39
 msgid ""
@@ -123,111 +105,96 @@ msgid ""
 "removal from the API without\n"
 "            warning. Set quiet = TRUE to silence this warning."
 msgstr ""
-"Comme cette fonction ouvre l’accès aux fonctions non-exportées, utilisez-là "
-"avec prudence, et \n"
-"          seulement si vous êtes certains de ce que vous faites. Les "
-"fonctions non-exportées demandent\n"
-"          des entrées de type C++ plutôt que de type R. Par exemple, elles "
-"reposent sur l’indexation à 0 au lieu de\n"
-"          l’indexation à 1. De plus, les fonctions non-exportées pourront "
-"être supprimées sans préavis. \n"
-"          Configurez `quiet = TRUE` pour faire disparaitre ce message."
 
 #: call_torch_function.R:47
 msgid "Only functions prefixed with 'torch_' are available from this function."
 msgstr ""
-"Seules les fonctions préfixées par ‘torch_’ sont accessibles depuis cette "
-"fonction."
 
 #: call_torch_function.R:54
 msgid ""
 "A function of name %s was not found. Please check your spelling and that the "
 "desired function exists."
 msgstr ""
-"Impossible de trouver la fonction nommée %s . Veuillez vérifier "
-"l’orthographe et que la fonction désirée existe bien."
 
 #: codegen-utils.R:5
 msgid "Dimension is 1-based, but found 0."
-msgstr "La dimension doit être indexée à 1. Elle est indexée à 0."
+msgstr ""
 
 #: codegen-utils.R:40
 msgid "{fun_name} does not exist"
-msgstr "{fun_name} n'existe pas"
+msgstr ""
 
 #: conditions.R:2
 msgid "value_error"
-msgstr "value_error"
+msgstr ""
 
 #: conditions.R:6
 msgid "type_error"
-msgstr "type_error"
+msgstr ""
 
 #: conditions.R:10 utils-data-dataloader.R:499
 msgid "runtime_error"
-msgstr "runtime_error"
+msgstr ""
 
 #: conditions.R:14
 msgid "not_implemented_error"
-msgstr "pas implémenté"
+msgstr ""
 
 #: conditions.R:18
 msgid "warning"
-msgstr "warning"
+msgstr ""
 
 #: conditions.R:30
 msgid "stop_iteration_error"
-msgstr "stop_iteration_error"
+msgstr ""
 
 #: conditions.R:36
 msgid "deprecated"
-msgstr "déprécié"
+msgstr ""
 
 #: creation-ops.R:6 creation-ops.R:12
 msgid "You should specify a single size argument."
-msgstr "Vous ne devez utiliser qu'un seul argument."
+msgstr ""
 
 #: creation-ops.R:274
 msgid "This function is deprecated in favor of torch_arange."
-msgstr "Cette fonction est dépréciée et remplacée par ‘torch_arange’."
+msgstr ""
 
 #: creation-ops.R:394
 msgid "values must be length 1"
-msgstr "les valeurs doivent être de longueur 1"
+msgstr ""
 
 #: creation-ops.R:398
 msgid "value must be a length 1 vector"
-msgstr "la valeur doit être un vecteur de longueur 1"
+msgstr ""
 
 #: cuda.R:42
 msgid "device must be an integer between 0 and the number of devices minus 1"
-msgstr "‘device' doit être un entier entre 0 et le nombre de devices  moins un"
+msgstr ""
 
 #: cuda.R:92
 msgid "CUDA is not available."
-msgstr "CUDA n'est pas disponible."
+msgstr ""
 
 #: device.R:12
 msgid "type should not include an index because index was passed explicitly"
 msgstr ""
-"'type' ne doit pas inclure d’index, car l’index a déjà été fourni de manière "
-"explicite"
 
 #: device.R:119
 msgid "y is not a torch_device"
-msgstr "y n'est pas un device reconnu par torch"
+msgstr ""
 
 #: distributions-bernoulli.R:21 distributions-categorical.R:18
 msgid "Either `probs` or `logits` must be specified, but not both."
-msgstr "Vous pouvez configurer `probs` ou `logits` mais pas les deux."
+msgstr ""
 
 #: distributions-categorical.R:23
 msgid "`probs` must be at least one-dimensional."
-msgstr "`probs` doit être au minimum à une dimension."
+msgstr ""
 
 #: distributions-categorical.R:29
 msgid "`logits` must be at least one-dimensional."
-msgstr "`logits` doit être au minimum à une dimension."
+msgstr ""
 
 #: distributions-constraints.R:23
 msgid "{class(self)}"
@@ -235,20 +202,17 @@ msgstr ""
 
 #: distributions-constraints.R:38
 msgid "Cannot determine validity of dependent constraint"
-msgstr "Impossible de déterminer la validité de la constante liée"
+msgstr ""
 
 #: distributions-constraints.R:60
 msgid "Expected value$dim() >= {expected} but got {value$dim()}"
 msgstr ""
-"La valeur attendue est `value$dim() >= {expected}`. La valeur fournie est "
-"{value$dim()}"
 
 #: distributions-constraints.R:102
 msgid "{class(self)}:"
 msgstr ""
 
-#: distributions-constraints.R:103 distributions-constraints.R:252
-#: distributions-constraints.R:276
+#: distributions-constraints.R:103 distributions-constraints.R:252 distributions-constraints.R:276
 msgid "(lower_bound={self$lower_bound}, upper_bound={self$upper_bound})"
 msgstr ""
 
@@ -256,91 +220,77 @@ msgstr ""
 msgid "{class(self)}: (upper_bound={self$upper_bound})"
 msgstr ""
 
-#: distributions-constraints.R:148 distributions-constraints.R:183
-#: distributions-constraints.R:205
+#: distributions-constraints.R:148 distributions-constraints.R:183 distributions-constraints.R:205
 msgid "{class(self)}: (lower_bound={self$lower_bound})"
 msgstr ""
 
 #: distributions-mixture_same_family.R:20
 msgid "Mixture distribution must be distr_categorical."
-msgstr "La distribution de mélange doit être de type `distr_categorial`."
+msgstr ""
 
 #: distributions-mixture_same_family.R:24
 msgid "Component distribution must be an instance of torch_Distribution."
 msgstr ""
-"La distribution composante doit être une instance de `torch_Distribution`."
 
 #: distributions-mixture_same_family.R:32
 msgid ""
 "Mixture distribution component ({km}) does not equal "
 "component_distribution$batch_shape[-1] ({kc})."
 msgstr ""
-"Les composantes  de la loi de mélange ({km}) ne correspond pas à "
-"`component_distribution$batch_shape[-1]` ({kc})."
 
 #: distributions-multivariate_normal.R:81
 msgid "loc must be at least one-dimensional."
-msgstr "`loc` doit être au minimum à une dimension."
+msgstr ""
 
 #: distributions-multivariate_normal.R:85
 msgid ""
 "Exactly one of covariance_matrix or precision_matrix or scale_tril may be "
 "specified."
 msgstr ""
-"Vous ne pouvez pas spécifier plus d'un paramètre parmi `covariance_matrix`, "
-"`precision_matrix` et `scale_tril`."
 
 #: distributions-multivariate_normal.R:92
 msgid "scale_tril matrix must be at least two-dimensional"
-msgstr "la matrice `scale_tril` doit être au minimum de dimension 2"
+msgstr ""
 
-#: distributions-multivariate_normal.R:93
-#: distributions-multivariate_normal.R:103
-#: distributions-multivariate_normal.R:115
+#: distributions-multivariate_normal.R:93 distributions-multivariate_normal.R:103 distributions-multivariate_normal.R:115
 msgid "with optional leading batch dimensions"
-msgstr "préfixé de manière optionnelle par la taille du batch"
+msgstr ""
 
 #: distributions-multivariate_normal.R:102
 msgid "covariance_matrix matrix must be at least two-dimensional"
-msgstr "`covariance_matrix` doit être au minimum de dimension 2"
+msgstr ""
 
 #: distributions-multivariate_normal.R:114
 msgid "precision_matrix matrix must be at least two-dimensional"
-msgstr "`precision_matrix` doit être au minimum de dimension 2"
+msgstr ""
 
 #: distributions-utils.R:24
 msgid "Input arguments must all be instances of numeric,"
-msgstr "Tous les arguments en entrée doivent être soit des `numeric`,"
+msgstr ""
 
 #: distributions-utils.R:25
 msgid "torch_tensor or objects implementing __torch_function__."
 msgstr ""
-"soit des `torch_tensor`, soit des objets implémentant une "
-"__`torch_function`__."
 
 #: distributions.R:169
 msgid "The value argument to log_prob must be a Tensor"
-msgstr "La valeur de `log_prob` doit être un Tenseur"
+msgstr ""
 
 #: distributions.R:176
 msgid ""
 "The right-most size of value must match event_shape:\n"
 "           {value$size()} vs {private$.event_shape}."
 msgstr ""
-"La valeur la plus à droite ({value$size()}) doit être égale à `event_shape` "
-"({private$.event_shape})"
 
 #: distributions.R:192
 msgid ""
 "Value is not broadcastable with\n"
 "             batch_shape+event_shape: {actual_shape} vs {expected_shape}."
 msgstr ""
-"La valeur {actual_shape} n'est pas distribuable avec `batch_shape + "
-"event_shape = {expected_shape}`."
 
 #: distributions.R:199
 msgid "The value argument must be within the support"
-msgstr "Le paramêtre `value` doit être à l’intérieur du support"
+msgstr ""
 
 #: distributions.R:220
 msgid "{class_name} ({args_string})"
@@ -348,138 +298,116 @@ msgstr ""
 
 #: distributions.R:275
 msgid "Subclass {paste0(class(self), collapse = ' ')} of"
-msgstr "La classe dérivée {paste0(class(self), collapse = ' ')} de"
+msgstr ""
 
 #: distributions.R:276
 msgid "{paste0(class(cls), collapse = ' ')}"
-msgstr "{paste0(class(cls), collapse = ' ')}"
+msgstr ""
 
 #: distributions.R:277
 msgid "that defines a custom `initialize()` method"
-msgstr "qui définit une méthode spécifique pour `initialize()`"
+msgstr ""
 
 #: distributions.R:278
 msgid "must also define a custom `expand()` method."
-msgstr "doit aussi définir une méthode spécifique pour `expand()`."
+msgstr ""
 
 #: dtype.R:162
 msgid "One of the objects is not a dtype. Comparison is not possible."
-msgstr "Un des objets n’est pas un dtype. La comparaison n’est pas possible."
+msgstr ""
 
 #: generator.R:17
 msgid "bit64 is required to correctly show the seed."
 msgstr ""
-"Le format ‘bit64’ est nécessaire pour visualiser correctement la graine "
-"aléatoire."
 
 #: generator.R:24
 msgid "Seed must an integer or integer64."
-msgstr "La graine aléatoire doit être de type ‘integer’ ou ‘integer64’."
+msgstr ""
 
 #: generator.R:151
 msgid ""
 "Expected length {.var state} ({.val {length(state)}}) equal to the number of "
 "cuda devices ({.val {cuda_device_count()}})."
 msgstr ""
-"La taille attendue pour {.var state} ({.val {length(state)}}) doit être le "
-"nombre de périphériques CUDA, soit ({.val {cuda_device_count()}})."
 
 #: ignite.R:24
 msgid "The `params` must have length > 0."
-msgstr "L'argument `params` doit être de longueur > 0."
+msgstr ""
 
 #: ignite.R:62
 msgid ""
 "The `state_dict` must be a list with elements 'param_groups' and 'state'."
 msgstr ""
-"L'argument `state_dict` doit être une liste avec les éléments 'param_groups' "
-"et 'state'."
 
 #: ignite.R:67
 msgid ""
 "To-be loaded state dict is missing states for parameters "
 "{paste(setdiff(names(prev_states), names(states)), collapse = ', ')}."
 msgstr ""
-"Il manque l'état des paramêtres suivants au `state dict` sur le point d'être "
-"chargé: {paste(setdiff(names(prev_states), names(states)), collapse = ', ')}."
 
 #: ignite.R:71
 msgid ""
 "The {i}-th state has elements with names {paste0(names(prev_states[[i]]), "
 "collapse = ', ')} but got {paste0(names(states[[i]]), collapse = ', ')}."
 msgstr ""
-"Le {i}-ème état des éléments només était {paste0(names(prev_states[[i]]), "
-"collapse = ', ')}, actuellement c'est {paste0(names(states[[i]]), collapse = "
-"', ')}."
 
 #: ignite.R:108
 msgid "The `params` must be a list of tensors."
-msgstr "les paramêtres ‘params’ doivent être une liste de tenseurs."
+msgstr ""
 
 #: ignite.R:127
 msgid ""
 "Parameter groups must be a list of the same length as the number of "
 "parameter groups."
 msgstr ""
-"Le dictionnaire d’état chargé en mémoire a un nombre de groupes de "
-"paramètres différent"
 
 #: ignite.R:133
 msgid ""
 "Parameter groups must include names '{paste0(cpp_names, collapse = ', ')}' "
 "but only included '{paste0(names(new_param_group), collapse = ', ')}'."
 msgstr ""
-"Les groupes de paramêtres doivent contenir les noms '{paste0(cpp_names, "
-"collapse = ', ')}', actuellement, c'est '{paste0(names(new_param_group), "
-"collapse = ', ')}'."
 
 #: ignite.R:143
 msgid ""
 "Cannot change the parameter groups, use `$add_param_group()` to add a new "
 "parameter group."
 msgstr ""
-"On ne peut pas changer les groupes de paramêtres. Il faut utiliser "
-"`$add_param_group()` pour ajouter un nouveau groupe de paramêtres."
 
-#: ignite.R:157 ignite.R:158 ignite.R:159 ignite.R:160 ignite.R:161
-#: ignite.R:162 ignite.R:163
+#: ignite.R:157 ignite.R:158 ignite.R:159 ignite.R:160 ignite.R:161 ignite.R:162 ignite.R:163
 msgid "Abstract method"
-msgstr "<script_method>"
+msgstr ""
 
 #: install.R:58
 msgid "torch dependencies have been installed."
-msgstr "Les dépendances de torch ont été installées."
+msgstr ""
 
 #: install.R:59
 msgid "You must restart your session to use {.pkg torch} correctly."
 msgstr ""
-"Vous devez redémarrer votre session pour utiliser {.pkg torch} correctement."
 
 #: install.R:84
 msgid "We are now proceeding to download and installing lantern and torch."
 msgstr ""
-"Nous allons maintenant procéder au téléchargement et à l'installation de la "
-"lanterne et de la torche."
 
 #: install.R:85
 msgid "The installation path is: {.path {inst_path}}"
-msgstr "LE chemin d'installation est {.path {inst_path}}."
+msgstr ""
 
 #: install.R:90
 msgid "An installation of {.strong {libname}} already exists."
-msgstr "Une installation de {.strong {libname}}existe déjà."
+msgstr ""
 
 #: install.R:91
 msgid "Found file at {.path {inst_path}}."
-msgstr "Le fichier est disponible dans {.path {inst_path}}."
+msgstr ""
 
 #: install.R:147
 msgid "Installation failed."
-msgstr "L'installation a échoué."
+msgstr ""
 
 #: install.R:148
 msgid "Could not install {.strong {libname}} from {.val {url}}."
-msgstr "Impossible d'installer {.strong {libname}} depuis {.val {url}}."
+msgstr ""
 
 #: install.R:172 install.R:181
 msgid "x"
@@ -490,39 +418,30 @@ msgid ""
 "{.pkg torch} cannot write into configured {.var TORCH_HOME} {.path "
 "{install_path}}."
 msgstr ""
-"{.pkg torch} ne peut pas écrire dans le {.var TORCH_HOME} configuré à {.path "
-"{install_path}}."
 
 #: install.R:173
 msgid "Please configure {.var TORCH_HOME} to be one of {.val {.libPath()}}"
 msgstr ""
-"Veuillez configurer {.var TORCH_HOME} pour qu'il soit l'un des {.val {."
-"libPath()}}"
 
 #: install.R:181
 msgid "{.pkg torch} cannot write into {.path {install_path}}."
-msgstr "{.pkg torch} ne peut pas écrire dans {.path {install_path}}."
+msgstr ""
 
 #: install.R:182
 msgid "Please configure a {.var TORCH_HOME} variable with a writable folder"
 msgstr ""
-"Veuillez configurer une variable {.envvar TORCH_HOME} avec un dossier "
-"accessible en écriture"
 
 #: install.R:183
 msgid "and run {.fn install_torch()} again"
-msgstr "et lancer {.fn install_torch()} à nouveau."
+msgstr ""
 
 #: install.R:184
 msgid "Or run R under the root user once to perform the {.fn install_torch()}"
 msgstr ""
-"Vous pouvez également exécuter R sous l'utilisateur root une fois pour "
-"effectuer l'opération {.fn install_torch()}"
 
 #: install.R:185
 msgid "if you use system level package manager like {.pkg r2u}"
 msgstr ""
-"si vous utilisez des installateurs de packages système comme {.val r2u}"
 
 #: install.R:196
 msgid ""
@@ -544,7 +463,7 @@ msgstr ""
 
 #: install.R:208
 msgid "LibTorch will be downloaded from:"
-msgstr "LibTorch va être téléchargé depuis :"
+msgstr ""
 
 #: install.R:209
 msgid "{.url {url}}"
@@ -552,17 +471,15 @@ msgstr ""
 
 #: install.R:266
 msgid "Could not find the SHA of the commit that installed the package."
-msgstr "Impossible de trouver le SHA du commit qui a installé le paquet."
+msgstr ""
 
 #: install.R:267
 msgid "Using the latest build for the specified branch: {.val {branch}}."
 msgstr ""
-"Utilisation de la dernière version pour la branche spécifiée : {.val "
-"{branch}}."
 
 #: install.R:272
 msgid "Could find the SHA of the commit that installed the package."
-msgstr " le SHA du commit qui a installé le paquet a été trouvé."
+msgstr ""
 
 #: install.R:273
 msgid "SHA: {.val {remote_sha}}."
@@ -570,7 +487,7 @@ msgstr ""
 
 #: install.R:286
 msgid "Lantern will be downloaded from the following URL:"
-msgstr "Lantern va être téléchargé depuis l'URL :"
+msgstr ""
 
 #: install.R:287
 msgid "{.url {final_url}}"
@@ -579,66 +496,56 @@ msgstr ""
 #: install.R:313
 msgid "{.envvar PRECXX11ABI} value will be ignored. Only supported on Linux."
 msgstr ""
-"la valeur de {.envvar PRECXX11ABI} est ignorée ici, elle n'est prise en "
-"compte que sur Linux."
 
 #: install.R:321
 msgid "Installing the CXX11 ABI enabled build."
-msgstr "Installation de la version compilée avec CXX11 ABI activé."
+msgstr ""
 
 #: install.R:324
 msgid "Installing the pre-CXX11 ABI enabled build."
-msgstr "Installation de la version compilée avec pre-CXX11 ABI activé."
+msgstr ""
 
 #: install.R:334
 msgid "Architecture {.val {arch}} is not supported in this OS."
 msgstr ""
-"L'architecture {.val {arch} n'est pas disponible pour ce système "
-"d'exploitation."
 
 #: install.R:338
 msgid "Unsupported architecture {.val {arch}}."
-msgstr "L'architecture {.val {arch}} n'est pas disponible."
+msgstr ""
 
 #: install.R:341
 msgid "Architecture is {.val {arch}}"
-msgstr "L'architecture est {.val {arch}}."
+msgstr ""
 
 #: install.R:356
 msgid "No cuda instalation has been found. Using {.val cpu}."
 msgstr ""
-"Aucune installation de cuda n'a été trouvée. Utilisation de {.val cpu}."
 
 #: install.R:359
 msgid "{.envvar CUDA} is set to {.val cpu}, so using the {.val cpu}."
 msgstr ""
-"{.envvar CUDA} est positionné à {.val cpu}, on utilise donc la {.val cpu}."
 
 #: install.R:363
 msgid "Installation kind will be {.val {cu}}."
-msgstr "Le type d'installation sera {.val {cu}}."
+msgstr ""
 
 #: install.R:376
 msgid ""
 "{.envvar CUDA} has been specified. The CUDA version is {.strong {version}}"
 msgstr ""
-"{.envvar CUDA} est positionné. la version de CUDA est {.strong {version}}"
 
 #: install.R:388
 msgid "Not on Windows or Linux. No CUDA installation supported."
 msgstr ""
-"Pas sur Windows ou Linux. Aucune installation CUDA n'est prise en charge."
 
 #: install.R:398
 msgid "{.envvar CUDA_HOME}={.path {cuda_home}} is specified."
-msgstr "{.envvar CUDA_HOME}={.path {cuda_home}} est spécifié."
+msgstr ""
 
 #: install.R:400
 msgid ""
 "{.envvar CUDA_HOME} is not specified. Looking in conventional locations."
 msgstr ""
-"{.envvar CUDA_HOME} n'est pas spécifié. Recherche dans les emplacements "
-"conventionnels."
 
 #: install.R:441
 msgid "{.envvar CUDA_PATH}={.path {cuda_path}}."
@@ -646,58 +553,53 @@ msgstr ""
 
 #: install.R:442
 msgid "Trying to find CUDA in this path."
-msgstr "Tentative de trouver CUDA dans ce chemin."
+msgstr ""
 
 #: install.R:446
 msgid "{.envvar CUDA_PATH} is not specified."
-msgstr "{.envvar CUDA_PATH} n'est pas spécifié. "
+msgstr ""
 
 #: install.R:447
 msgid "Searching for installation in conventional locations."
-msgstr "Recherche d'une installation aux emplacements habituels."
+msgstr ""
 
 #: install.R:463
 msgid "Trying to use the nvcc version that might be on your path."
 msgstr ""
-"Tentative d'utiliser la version de nvcc qui se trouve peut-être dans votre "
-"variable PATH."
 
 #: install.R:486
 msgid "Unsupported CUDA version {.val {version}}"
-msgstr "La version de CUDA {.val {version}} n'est pas compatible."
+msgstr ""
 
 #: install.R:487
 msgid "Currently supported versions are: {.val {supported_versions}}."
-msgstr "Les versions compatibles sont: {.val {supported_versions}}."
+msgstr ""
 
 #: install.R:510
 msgid "Found CUDA version {.strong {cuda_version}}."
-msgstr "La version de CUDA {.strong {cuda_version}} a été trouvée."
+msgstr ""
 
 #: install.R:511
 msgid "This version was specified in {.path {versions_file}}"
-msgstr "Cette version a été spécifiée dans {.path {versions_file}}."
+msgstr ""
 
 #: install.R:515
 msgid "Could not find a CUDA version in {.path {versions_file}}."
 msgstr ""
-"Impossible de trouver une version de CUDA dans {.path {versions_file}}."
 
 #: install.R:528
 msgid ""
 "Tried to query nvcc from {.path {nvcc_path}}, but was unable to find a CUDA "
 "version."
 msgstr ""
-"Tentative de lancer nvcc depuis {.path {nvcc_path}}, mais impossible de "
-"toruver une version de CUDA."
 
 #: install.R:535
 msgid "Found CUDA version {.strong {version}}."
-msgstr "CUDA a été trouvé en version {.strong {version}}."
+msgstr ""
 
 #: install.R:536
 msgid "It was found by querying nvcc at {.path {nvcc_path}}."
-msgstr "grâce à nvcc situé en {.path {nvcc_path}}."
+msgstr ""
 
 #: install.R:546
 msgid "torch_install"
@@ -705,27 +607,23 @@ msgstr ""
 
 #: install.R:555
 msgid "Unexpected value"
-msgstr "Valeur inattendue"
+msgstr ""
 
 #: install.R:602
 msgid ""
 "Please use the env vars described in {.fn install_torch} to configure the "
 "installation type."
 msgstr ""
-"Merci d'utiliser les variables d'environnement comme expliqué dans {.fn "
-"install_torch} pour configurer le type d'installation."
 
 #: install.R:605
 msgid "It's not possible to configure the libtorch version."
-msgstr "La version de libtorch n'est pas configurable."
+msgstr ""
 
 #: install.R:614
 msgid ""
 "Follow the links to download the dependencies, then set the {.envvar "
 "TORCH_URL} and {.envvar LANTERN_URL} env vars to the file paths."
 msgstr ""
-"Utilisez les variables d'environnement {.envvar TORCH_URL} et {.envvar "
-"LANTERN_URL} pour configurer l'emplacement des fichiers."
 
 #: install.R:615
 msgid "LibTorch: {.url {out$libtorch}}"
@@ -740,20 +638,16 @@ msgid ""
 "This function is now deprecated. The same results can be achieved with {.fn "
 "install_torch}."
 msgstr ""
-"Cette fonction est dépréciée. Vous obtenez les mêmes résultats en utilisant "
-"{.fn install_torch}."
 
 #: install.R:651
 msgid ""
 "Use the envvars {.envvar TORCH_URL} and {.envvar LANTERN_URL} to set the "
 "file locations."
 msgstr ""
-"Utilisez les variables d'environnement {.envvar TORCH_URL} et {.envvar "
-"LANTERN_URL} pour configurer l'emplacement des fichiers."
 
 #: install.R:671
 msgid "Unable to download from {.url {url}}"
-msgstr "Impossible de télécharger depuis {.url {url}}"
+msgstr ""
 
 #: install.R:672
 msgid ""
@@ -761,170 +655,151 @@ msgid ""
 "https://torch.mlverse.org/docs/articles/installation.html#file-based-"
 "download}"
 msgstr ""
-"Veuillez vérifier que l'URL n'est pas bloquée par votre Firewall. Voir aussi "
-"{.url https://torch.mlverse.org/docs/articles/installation.html#file-based-"
-"download}."
 
 #: ivalue.R:12
 msgid "Argument 'x' must be a list."
-msgstr "L’argument ‘x’ doit être une liste."
+msgstr ""
 
 #: ivalue.R:29
 msgid "Argument 'x' must be scalar atomic."
-msgstr "L’argument ‘x’ doit être un scalaire simple."
+msgstr ""
 
 #: lantern_load.R:6
 msgid "Torch is not installed, please run 'install_torch()'."
-msgstr "Torch n’est pas installé, merci de lancer ‘install_torch()’."
+msgstr ""
 
 #: linalg.R:269
 msgid "`tol` argument is deprecated in favor of `atol` and `rtol`."
 msgstr ""
-"Le paramètre `tol` est déprécié. Il faut maintenant utiliser `atol` et "
-"`rtol`."
 
 #: linalg.R:954
 msgid "`rcond` is deprecated in favor of `rtol`."
-msgstr "Le paramètre`rcond` est déprécié. Il faut maintenant utiliser `rtol`."
+msgstr ""
 
 #: nn-activation.R:760
 msgid "embed_dim must be divisible by num_heads"
-msgstr "‘embed_dim’ doit être divisible par ‘num_heads’"
+msgstr ""
 
 #: nn-batchnorm.R:42 nn-init.R:229 nn-init.R:421
 msgid "not implemented"
-msgstr "pas implémenté"
+msgstr ""
 
 #: nn-batchnorm.R:177
 msgid "expected 2D or 3D input (got {input$dim()}D input)"
-msgstr "tenseur d’entrée attendu en 2D ou 3D (tenseur {input$dim()}D reçu)"
+msgstr ""
 
 #: nn-batchnorm.R:250
 msgid "expected 4D input (got {input$dim()}D input)"
-msgstr "le tenseur d’entrée est attendu en 4D (tenseur {input$dim()}D reçu)"
+msgstr ""
 
 #: nn-batchnorm.R:329
 msgid "expected 5D input (got {input$dim()}D input)"
-msgstr "le tenseur d’entrée est attendu en 5D (tenseur {input$dim()}D reçu)"
+msgstr ""
 
 #: nn-conv.R:10
 msgid "`in_channels` must be divisible by groups"
-msgstr "‘in_channels’ doit être divisible par ‘groups’"
+msgstr ""
 
 #: nn-conv.R:14
 msgid "`out_channels` must be divisible by groups"
-msgstr "‘out_channels’ doit être divisible par ‘groups’"
+msgstr ""
 
 #: nn-conv.R:21
 msgid ""
 "padding_mode must be one of [{paste(valid_padding_modes, collapse = ', ')}],"
 msgstr ""
-"‘padding_mode’ doit être pris parmi [{paste(valid_padding_modes, collapse = "
-"', ')}],"
 
 #: nn-conv.R:22
 msgid "but got padding_mode='{padding_mode}'."
-msgstr "actuellement ‘padding_mode={padding_mode}’."
+msgstr ""
 
 #: nn-conv.R:509
 msgid "Only `zeros` padding is supported."
-msgstr "Le remplissage ne peut se faire qu’avec des zéros."
+msgstr ""
 
 #: nn-conv.R:529
 msgid "output_size must have {k} or {k+2} elements (got {length(output_size)})"
 msgstr ""
-"‘output_size’ doit avoir soit  {k} soit {k+2} éléments (actuellement "
-"{length(output_size)} éléments)"
 
 #: nn-conv.R:550
 msgid "requested an output of size {output_size}, but valid"
 msgstr ""
-"la taille de sortie demandée est {output_size} alors que les tailles valides"
 
 #: nn-conv.R:551
 msgid "sizes range from {min_size} to {max_size} (for an input"
 msgstr ""
-"doivent être dans la plage de {min_size} à {max_size} (pour un tenseur "
-"d’entrée"
 
 #: nn-conv.R:552
 msgid "of size {input$size()[-c(1,2)]}"
-msgstr "de taille {input$size()[-c(1,2)]})"
+msgstr ""
 
 #: nn-conv.R:686
 msgid "Only `zeros` padding mode is supported for ConvTranspose1d"
 msgstr ""
-"Seul le remplissage avec des zéros est disponible pour ‘ConvTranspose1d’"
 
 #: nn-conv.R:843
 msgid "Only `zeros` padding mode is supported for ConvTranspose2d"
 msgstr ""
-"Seul le remplissage avec des zéros est disponible pour ‘ConvTranspose2d’"
 
 #: nn-conv.R:997
 msgid "Only `zeros` padding mode is supported for ConvTranspose3d"
 msgstr ""
-"Seul le remplissage avec des zéros est disponible pour ‘ConvTranspose3d’"
 
 #: nn-dropout.R:8
 msgid "dropout probability has to be between 0 and 1 but got {p}"
-msgstr "la probabilité de ‘dropout’ doit être entre 0 et 1 (actuellement {p})"
+msgstr ""
 
 #: nn-init.R:18
 msgid "mean is more than 2 std from [a, b] in nn.init.trunc_normal_."
 msgstr ""
-"La moyenne dépasse le double de l'écart-type sur [a, b] dans `nn.init."
-"trunc_normal_`."
 
 #: nn-init.R:19
 msgid "The distribution of values may be incorrect."
-msgstr "La distribution des valeurs pourrait être incorrecte."
+msgstr ""
 
 #: nn-init.R:89
 msgid "Unsupported nonlinearity: {nonlinearity}"
-msgstr "Non-linearité inconnue : {nonlinearity}"
+msgstr ""
 
 #: nn-loss.R:1001
 msgid "only p == 1 or p == 2 are supported."
-msgstr "‘p’ doit être soit 1 soit 2."
+msgstr ""
 
 #: nn-loss.R:1004
 msgid "weight must be NULL or 1-dimensional"
-msgstr "‘weight’ doit être NULL ou à une dimension"
+msgstr ""
 
 #: nn-pooling.R:685 nn-pooling.R:758
 msgid "both output_size and output_ratio are NULL"
-msgstr "les deux valeurs ‘output_size’ et ‘output_ratio’ sont à NULL"
+msgstr ""
 
 #: nn-pooling.R:689 nn-pooling.R:762
 msgid "both output_size and output_ratio are not NULL"
-msgstr "les deux valeurs ‘output_size’ et ‘output_ratio’ sont non NULL"
+msgstr ""
 
 #: nn-pooling.R:694 nn-pooling.R:767
 msgid "output_ratio must be between 0 and 1."
-msgstr "‘output_ratio’ doit être entre 0 et 1."
+msgstr ""
 
 #: nn-rnn.R:37
 msgid "dropout option adds dropout after all but last"
 msgstr ""
-"l'option `dropout` va ajouter du dropout à toutes les couches récurrentes "
-"sauf"
 
 #: nn-rnn.R:38
 msgid "recurrent layer, so non-zero dropout expects"
-msgstr "la dernière, donc un dropout non-null s'applique pour"
+msgstr ""
 
 #: nn-rnn.R:39
 msgid "num_layers greater than 1, but got dropout={dropout} and"
-msgstr "au moins deux couches. Il y a actuellement `dropout={dropout}` et"
+msgstr ""
 
 #: nn-rnn.R:40
 msgid "num_layers={num_layers}"
-msgstr "`num_layers={num_layers}`."
+msgstr ""
 
 #: nn-rnn.R:53
 msgid "Unrecognized RNN mode: {mode}"
-msgstr "Le mode du RNN {mode} est inconnu"
+msgstr ""
 
 #: nn-rnn.R:84
 msgid "weight_ih_l{layer}{suffix}"
@@ -944,796 +819,697 @@ msgstr ""
 
 #: nn-rnn.R:273
 msgid "No cudnn backend for mode '{mode}'"
-msgstr "Pas de support matériel de cudnn pour le mode '{mode}'"
+msgstr ""
 
 #: nn-rnn.R:395
 msgid "Unknown nonlinearity '{self$nonlinearity}'"
-msgstr "Non-linearité inconnue : '{self$nonlinearity}'"
+msgstr ""
 
 #: nn-sparse.R:67 nn-sparse.R:70 nn-sparse.R:167 nn-sparse.R:170
 msgid "`padding_idx` must be within num_embeddings"
-msgstr "‘padding_idx’ doit être inclus dans les valeurs de ‘num_embeddings’"
+msgstr ""
 
 #: nn-sparse.R:87 nn-sparse.R:187
 msgid "Shape of `.weight` does not match num_embeddings and embedding_dim"
 msgstr ""
-"La forme du tenseur ‘.weight’ ne correspond pas avec ‘num_embedding’ et "
-"‘embedding_dim’"
 
 #: nn-utils.R:7
 msgid "Input dimension should be at least {length(out_size) + 1}."
 msgstr ""
-"Les dimensions de l’entrée devraient être au moins de {length(out_size) + 1}."
 
 #: nn.R:21
 msgid "Forward method is not implemented"
-msgstr "la méthode 'forward' n'est pas implémentée."
+msgstr ""
 
 #: nn.R:32
 msgid "Expected {.cls nn_module} but got object of type {.cls {class(module)}}"
 msgstr ""
-"Un {.cls nn_module} est attendu, actuellement, c'est un objet de type {.cls "
-"{class(module)}}."
 
 #: nn.R:36
 msgid "Module {.str {name}} must be initialized"
-msgstr "Le module {.str {name}} doit être initialisé."
+msgstr ""
 
 #: nn.R:113
 msgid ""
 "nn.Module.to only accepts floating point '\n"
 "                      'dtypes, but got desired dtype {dtype}"
 msgstr ""
-"nn.Module.to n’accepte que des tenseurs de `dtypes float`, le type actuel "
-"est {dtype}."
 
 #: nn.R:199
 msgid "Could not find {key} in the state_dict."
-msgstr "Impossible de trouver {key} dans ‘state_dict’."
+msgstr ""
 
 #: nn.R:286
 msgid "Field `training` must be a logical flag."
-msgstr "Le paramêtre `training` doit être un booléen."
+msgstr ""
 
 #: nn.R:295
 msgid "It's not possible to modify the parameters list."
-msgstr "La liste des paramètres n’est pas modifiable."
+msgstr ""
 
 #: nn.R:296 nn.R:312
 msgid "You can modify the parameter in-place or use"
-msgstr "Vous pouvez modifier le paramètre à la volée ou bien utiliser"
+msgstr ""
 
 #: nn.R:297 nn.R:313
 msgid "`module$parameter_name <- new_value`"
-msgstr "`module$parameter_name <- new_value`"
+msgstr ""
 
 #: nn.R:311
 msgid "It's not possible to modify the buffers list."
-msgstr "La liste des tampons n’est pas modifiable."
+msgstr ""
 
 #: nn.R:327
 msgid "It's not possible to modify the modules list."
-msgstr "La liste des modules n’est pas modifiable."
+msgstr ""
 
 #: nn.R:328 nn.R:348
 msgid "You can modify the modules in-place"
-msgstr "Vous pouvez modifier les modules à la volée ou bien utiliser"
+msgstr ""
 
 #: nn.R:347
 msgid "It's not possible to modify the children list."
-msgstr "La liste des enfants n’est pas modifiable."
+msgstr ""
 
 #: nn.R:369
 msgid "`x` must be a tensor."
-msgstr "‘X’ doit être un tensor."
+msgstr ""
 
 #: nn.R:846
 msgid "All elements in {.arg dict} must be named."
-msgstr "Les éléments de {.arg dict} doivent tous être nommés."
+msgstr ""
 
 #: nn.R:852
 msgid "{.fn nn_module_dict} has {.fn forward} implementation."
-msgstr "{.fn nn_module_dict} dispose d'une implémentation de {.fn forward}"
+msgstr ""
 
 #: nn_adaptive.R:108
 msgid "not yet implemented"
-msgstr "pas implémenté"
+msgstr ""
 
 #: nnf-activation.R:81
 msgid "not yet implemented."
-msgstr "pas encore implémenté."
+msgstr ""
 
 #: nnf-activation.R:802
 msgid "Input should be a tensor and got '{class(input)}."
-msgstr "L’entrée doit être un tenseur. Actuellement c’est un ‘{class(input)}’."
+msgstr ""
 
 #: nnf-dropout.R:42
 msgid ""
 "dropout2d: Received a {inp_dim}-D input to dropout2d, which is deprecated"
-msgstr "dropout2d: Une entrée {inp_dim}D pour `dropout2d` est dépréciée"
+msgstr ""
 
 #: nnf-dropout.R:43
 msgid "and will result in an error in a future release. To retain the behavior"
-msgstr "et conduira prochainement à une erreur. Pour conserver le comportement"
+msgstr ""
 
 #: nnf-dropout.R:44
 msgid ""
 "and silence this warning, please use dropout instead. Note that dropout2d"
-msgstr "et faire taire ce message, veuillez utiliser `dropout`. `dropout2d`"
+msgstr ""
 
 #: nnf-dropout.R:45
 msgid ""
 "exists to provide channel-wise dropout on inputs with 2 spatial dimensions,"
 msgstr ""
-"n'existe que pour fournir du dropout sur la dimension couleur d'entrées à "
-"deux dimensions spatiales,"
 
 #: nnf-dropout.R:46
 msgid ""
 "a channel dimension, and an optional batch dimension (i.e. 3D or 4D inputs)."
 msgstr ""
-"une dimension couleur, et eventullement une dimension pour le batch, soit "
-"des tenseurs 3D ou 4D."
 
 #: nnf-dropout.R:52
 msgid ""
 "dropout2d: Received a 3D input to dropout2d and assuming that channel-wise"
 msgstr ""
-"dropout2d: Une entrée 3D pour `dropout2d` sous-entend qu'un dropout "
-"uniquement sur la"
 
 #: nnf-dropout.R:53
 msgid ""
 "1D dropout behavior is desired - input is interpreted as shape (N, C, L), "
 "where C"
 msgstr ""
-"dimension couleur est attendu. L'entrée est interpretée de forme (N, L, C)  "
-"avec C"
 
 #: nnf-dropout.R:54
 msgid ""
 "is the channel dim. This behavior will change in a future release to "
 "interpret the"
 msgstr ""
-"la dimension Couleur. Ce comportement va changer dans les prochaines "
-"versions pour considérer"
 
 #: nnf-dropout.R:55
 msgid ""
 "input as one without a batch dimension, i.e. shape (C, H, W). To maintain "
 "the 1D"
 msgstr ""
-"l'entrée comme étant sans dimension N pour le Batch. Pour conserver le "
-"fonctionnement 1D"
 
 #: nnf-dropout.R:56
 msgid ""
 "channel-wise dropout behavior, please switch to using dropout1d instead."
-msgstr "du dropout sur la Couleur, vous devez utiliser `dropout1d`."
+msgstr ""
 
 #: nnf-embedding.R:83
 msgid "if input is 2D, then offsets has to be NULL"
-msgstr "pour une entrée en 2D, les offsets doivent être NULL"
+msgstr ""
 
 #: nnf-loss.R:28
 msgid ""
 "reduction: 'mean' divides the total loss by both the batch size and the "
 "support size."
 msgstr ""
-"La réduction `mean` divise la loss totale par `batch_size` et par "
-"`support_size`."
 
 #: nnf-loss.R:29
 msgid ""
 "'batchmean' divides only by the batch size, and aligns with the KL div math "
 "definition."
 msgstr ""
-"`batchmean` divise la loss seulement par la `batch_size` et correspond avec "
-"la definition mathématique de la divergence de KL."
 
 #: nnf-loss.R:30
 msgid ""
 "'mean' will be changed to behave the same as 'batchmean' in the next major "
 "release."
 msgstr ""
-"Le fonctionnement de `mean` suivra celui de `batchmean` dans la prochaine "
-"version majeure."
 
 #: nnf-loss.R:63
 msgid ""
 "Using a target size {target_shape} that is different to the input size "
 "{input_shape}."
 msgstr ""
-"La taille cible {target_shape} est différente de taille de l'entrée "
-"{input_shape}."
 
 #: nnf-loss.R:64
 msgid "This will likely lead to incorrect results due to broadcasting."
 msgstr ""
-"Cela risque de conduire à des résultats erronés du fait du broadcasting."
 
 #: nnf-loss.R:65
 msgid "Please ensure they have the same size."
-msgstr "Assurez-vous qu'ils soient de même taille."
+msgstr ""
 
 #: nnf-loss.R:216
 msgid "reduction is not valid."
-msgstr "la réduction n’est pas valide."
+msgstr ""
 
 #: nnf-pooling.R:278
 msgid "output_size should be a sequence containing"
-msgstr "‘output_size’ doit être une séquence de "
+msgstr ""
 
 #: nnf-pooling.R:279
 msgid "{length(kernel_size)} or {length(kernel_size) + 2} elements"
-msgstr "{length(kernel_size)} ou  {length(kernel_size) + 2} éléments,"
+msgstr ""
 
 #: nnf-pooling.R:280
 msgid "but it has a length of '{length(output_size)}'"
-msgstr "mais sa longueur actuelle est '{length(output_size)}'"
+msgstr ""
 
 #: nnf-pooling.R:452
 msgid "output_ratio should not be NULL if output_size is NULL"
-msgstr "‘output_ratio’ ne doit pas être NULL quand ‘output_size’ est NULL"
+msgstr ""
 
 #: nnf-upsampling.R:60
 msgid "only one of size or scale_factor should be defined"
-msgstr " ‘size’ et ‘scale_factor’ ne peuvent pas être définis simultanément"
+msgstr ""
 
 #: nnf-upsampling.R:67
 msgid ""
 "size shape must match input shape. Input is {dim}D, size is {length(size)}"
 msgstr ""
-"la forme de ‘size’ doit correspondre avec la forme de l’entrée. L’entrée est "
-"en {dim}D, la taille est {length(size)}"
 
 #: nnf-upsampling.R:77
 msgid ""
 "scale_factor shape must match input shape. Input is {dim}D, size is "
 "{length(size)}"
 msgstr ""
-"La forme de ‘scale_factor’ doit correspondre avec la forme de l’entrée. "
-"L’entrée est en {dim}D, la taille est {length(size)}."
 
 #: nnf-upsampling.R:82
 msgid "either size or scale_factor should be defined"
-msgstr "vous devez définir soit ‘size’ soit ‘scale_factor’"
+msgstr ""
 
 #: nnf-upsampling.R:144
 msgid "Got 3D input, but bilinear mode needs 4D input"
-msgstr "L'entrée est en 3D, alors que le mode bilinéaire réclame du 4D."
+msgstr ""
 
 #: nnf-upsampling.R:148
 msgid "Got 3D input, but trilinear mode needs 5D input"
-msgstr "L'entrée est en 3D, alors que le mode trilinéaire réclame du 5D."
+msgstr ""
 
 #: nnf-upsampling.R:152
 msgid "Got 4D input, but trilinear mode needs 3D input"
-msgstr "L'entrée est en 4D, alors que le mode trilinéaire réclame du 3D."
+msgstr ""
 
 #: nnf-upsampling.R:164
 msgid "Got 4D input, but trilinear mode needs 5D input"
-msgstr "L'entrée est en 4D, alors que le mode trilinéaire réclame du 5D."
+msgstr ""
 
 #: nnf-upsampling.R:168
 msgid "Got 5D input, but trilinear mode needs 3D input"
-msgstr "L'entrée est en 5D, alors que le mode trilinéaire réclame du 3D."
+msgstr ""
 
 #: nnf-upsampling.R:172
 msgid "Got 5D input, but bilinear mode needs 4D input"
-msgstr "L'entrée est en 5D, alors que le mode bilinéaire réclame du 4D."
+msgstr ""
 
 #: nnf-upsampling.R:192
 msgid "Input Error: Only 3D, 4D and 5D input Tensors supported"
 msgstr ""
-"Erreur d'entrée: Seuls les tenseurs 3D, 4D, et 5D sont supportés en entrée"
 
 #: nnf-upsampling.R:193
 msgid ""
 "(got {input$dim()}D) for the modes: nearest | linear | bilinear | bicubic | "
 "trilinear"
 msgstr ""
-"(actuellement {input$dim()}D) pour les modes 'nearest | linear | bilinear | "
-"bicubic | trilinear'"
 
 #: nnf-upsampling.R:194
 msgid "(got {mode})"
-msgstr "(actuellement {mode})"
+msgstr ""
 
 #: nnf-vision.R:97
 msgid "Unknown mode name '{mode}'. Supported modes are 'bilinear'"
-msgstr "Le mode {mode} est inconnu. Les modes disponibles sont ‘bilinear’"
+msgstr ""
 
 #: nnf-vision.R:98
 msgid "and 'nearest'."
-msgstr "et ‘nearest’."
+msgstr ""
 
 #: nnf-vision.R:111
 msgid "Unknown padding mode name '{padding_mode}'. Supported modes are"
 msgstr ""
-"Mode de remplissage inconnu '{padding_mode}. Les modes disponibles sont"
 
 #: nnf-vision.R:112
 msgid "'zeros', 'border' and 'reflection'."
-msgstr "‘zeros’, ‘border’ et ‘reflection’."
+msgstr ""
 
-#: operators.R:326 operators.R:334 operators.R:342 operators.R:358
-#: operators.R:374
+#: operators.R:326 operators.R:334 operators.R:342 operators.R:358 operators.R:374
 msgid "Torch tensors do not have NAs!"
-msgstr "Les tenseurs torch n’ont pas de valeur NA!"
+msgstr ""
 
-#: optim-adadelta.R:52 optim-adagrad.R:110 optim-adam.R:106 optim-adamw.R:90
-#: optim-asgd.R:33 optim-rmsprop.R:105 optim-rprop.R:30 optim-sgd.R:106
+#: optim-adadelta.R:52 optim-adagrad.R:110 optim-adam.R:106 optim-adamw.R:90 optim-asgd.R:33 optim-rmsprop.R:105 optim-rprop.R:30 optim-sgd.R:106
 msgid "Invalid learning rate: {lr}"
-msgstr "‘learning_rate’ invalide: {lr}"
+msgstr ""
 
 #: optim-adadelta.R:56
 msgid "Invalid rho value: {rho}"
-msgstr "Valeur de ‘rho’ invalide: {rho}"
+msgstr ""
 
 #: optim-adadelta.R:60 optim-adagrad.R:126 optim-adamw.R:93 optim-rmsprop.R:108
 msgid "Invalid epsilon value: {eps}"
-msgstr "Valeur de ‘epsilon’ invalide: {eps}"
+msgstr ""
 
-#: optim-adadelta.R:64 optim-adagrad.R:118 optim-adamw.R:102 optim-asgd.R:37
-#: optim-rmsprop.R:114 optim-sgd.R:114
+#: optim-adadelta.R:64 optim-adagrad.R:118 optim-adamw.R:102 optim-asgd.R:37 optim-rmsprop.R:114 optim-sgd.R:114
 msgid "Invalid weight_decay value: {weight_decay}"
-msgstr "Valeur de ‘weight_decay’ invalide: {weight_decay}"
+msgstr ""
 
 #: optim-adagrad.R:114
 msgid "Invalid lr_decay value: {lr_decay}"
-msgstr "Valeur de ‘lr_decay’ invalide: {lr_decay}"
+msgstr ""
 
 #: optim-adagrad.R:122
 msgid "Invalid initial_accumulator_value value: {initial_accumulator_value}"
 msgstr ""
-"Valeur de ‘initial_accumulator_value’ invalide: {initial_accumulator_value}"
 
 #: optim-adam.R:110
 msgid "Invalid eps: {eps}"
-msgstr "Valeur de ‘ops’ invalide: {eps}"
+msgstr ""
 
 #: optim-adam.R:114
 msgid "Invalid beta parameter at index 1"
-msgstr "Paramètre ‘beta’ invalide à l’index 1"
+msgstr ""
 
 #: optim-adam.R:118
 msgid "Invalid beta parameter at index 2"
-msgstr "Paramètre ‘beta’ invalide à l’index 2"
+msgstr ""
 
 #: optim-adam.R:122
 msgid "Invalid weight decay value: {weight_decay}"
-msgstr "Valeur de ‘weight decay’ invalide: {weight_decay}"
+msgstr ""
 
 #: optim-adamw.R:96
 msgid "Invalid betas[1] parameter value: {beta[1]}"
-msgstr "Le paramètre `betas[1]` a une valeur invalide: {beta[1]}"
+msgstr ""
 
 #: optim-adamw.R:99
 msgid "Invalid betas[2] parameter value: {beta[2]}"
-msgstr "Le paramètre `betas[2]` a une valeur invalide: {beta[2]}"
+msgstr ""
 
 #: optim-lbfgs.R:372
 msgid "LBFGS doesn't support per-parameter options"
-msgstr "LBFGS ne permet pas les options pour chaque paramètre"
+msgstr ""
 
 #: optim-lbfgs.R:373
 msgid "(parameter groups)"
-msgstr "(parameter groups)"
+msgstr ""
 
 #: optim-lbfgs.R:528
 msgid "only strong_wolfe is supported"
-msgstr "seul ’strong_wolfe’ est disponible"
+msgstr ""
 
 #: optim-lr_scheduler.R:18
 msgid "not an optimizer"
-msgstr "n'est pas un optimiseur"
+msgstr ""
 
 #: optim-lr_scheduler.R:35
 msgid "param 'inital_lr' is not specified."
-msgstr "Le paramêtre ‘initial_lr ’ n’est pas fourni."
+msgstr ""
 
 #: optim-lr_scheduler.R:75
 msgid "Adjusting learning rate of group %s to %.4f"
-msgstr "Ajustement du ‘learning_rate’ du groupe %s à la valeur %.4f"
+msgstr ""
 
 #: optim-lr_scheduler.R:179 optim-lr_scheduler.R:237
 msgid "lr_lambda length ({i}) is different from the number of"
-msgstr "la longueur de ‘lr_lambda’ ({i}) diffère du nombre de "
+msgstr ""
 
 #: optim-lr_scheduler.R:180 optim-lr_scheduler.R:238
 msgid "optimizer$param_grpups ({j})"
-msgstr "optimizer$param_grpups ({j})"
+msgstr ""
 
 #: optim-lr_scheduler.R:425
 msgid "You must define either total_steps OR (epochs AND steps_per_epoch)"
 msgstr ""
-"Il faut définir soit ‘total_steps’, soit ensemble’ epoch’ et "
-"‘steps_per_epoch’"
 
 #: optim-lr_scheduler.R:428
 msgid "Expected positive integer total_steps, but got {total_steps}"
 msgstr ""
-"‘total_steps’ doit être un entier positif, actuellement c’est {total_steps}"
 
 #: optim-lr_scheduler.R:434
 msgid "Expected positive integer epochs, but got {epochs}"
-msgstr "‘epochs’ doit être un entier positif, actuellement c’est {epochs}"
+msgstr ""
 
 #: optim-lr_scheduler.R:438
 msgid "Expected positive integer steps_per_epoch, but got {steps_per_epoch}"
 msgstr ""
-"‘steps_per_epoch’ doit être un entier positif, actuellement c’est "
-"{steps_per_epoch}"
 
 #: optim-lr_scheduler.R:449
 msgid "Expected float between 0 and 1 pct_start, but got {pct_start}"
 msgstr ""
-"La valeur doit être une valeur flottante entre 0 et 1, actuellement c’est "
-"{pct_start}"
 
 #: optim-lr_scheduler.R:454
 msgid ""
 "anneal_strategy must by one of 'cos' or 'linear', instead got "
 "{anneal_strategy}"
 msgstr ""
-"‘anneal_strategy’ doit être soit ‘cos’ soit ‘linear’, actuellement c’est "
-"{anneal_strategy}"
 
 #: optim-lr_scheduler.R:478
 msgid "optimizer must support momentum with `cycle momentum` enabled"
 msgstr ""
-"L’optimiseur doit supporter un momentum incluant ‘cycle momentum’ activé"
 
 #: optim-lr_scheduler.R:506
 msgid "expected {length(optimizer$param_groups)} values for {name}"
 msgstr ""
-"la valeur {length(optimizer$param_groups)} est attendue pour la variable "
-"{name},"
 
 #: optim-lr_scheduler.R:507
 msgid "but got {length(param)}"
-msgstr "actuellement {length(param)}"
+msgstr ""
 
 #: optim-lr_scheduler.R:529
 msgid ""
 "Tried to step {step_num+1} times. The specified number of total steps is "
 "{self$total_steps}"
 msgstr ""
-"Tentative de répétition des `step` {step_num+1} fois. Le nombre de `step` "
-"spécifié est {self$total_steps}"
 
 #: optim-lr_scheduler.R:632
 msgid "Factor should be < 1.0"
-msgstr "Le `factor` doit être < 1.0"
+msgstr ""
 
 #: optim-lr_scheduler.R:639
 msgid "expected {length(optimizer$param_groups} min_lrs, got {length(min_lr)}"
 msgstr ""
-"{length(optimizer$param_groups} attendu pour `min_lrs`, actuellement c'est "
-"{length(min_lr)}"
 
 #: optim-lr_scheduler.R:697
 msgid "Epoch %s: reducing learning rate of group %s to %.4e"
 msgstr ""
-"Époque %s : réduction du ‘learning_rate’ du groupe %s à la valeur %.4e."
 
 #: optim-lr_scheduler.R:721
 msgid "mode {mode} is unknown!"
-msgstr "le mode {mode} est inconnu!"
+msgstr ""
 
 #: optim-lr_scheduler.R:724
 msgid "threshold mode {threshold_mode} is unknown!"
-msgstr "le mode de ’threshod’ {threshold_mode} est inconnu!"
+msgstr ""
 
 #: optim-rmsprop.R:111 optim-sgd.R:110
 msgid "Invalid momentum value: {momentum}"
-msgstr "Valeur de momentum invalide: {momentum}"
+msgstr ""
 
 #: optim-rmsprop.R:117
 msgid "Invalid alpha value: {alpha}"
-msgstr "Valeur de alpha invalide: {alpha}"
+msgstr ""
 
 #: optim-rprop.R:33
 msgid "Invalid eta values: {etas[[1]]}, {etas[[2]]}"
-msgstr "Valeurs de ‘eta’ invalides: {etas[[1]]}, {etas[[2]]}"
+msgstr ""
 
 #: optim-sgd.R:104
 msgid "Need to specify a learning rate"
-msgstr "Un `learning_rate` est nécessaire."
+msgstr ""
 
 #: optim-sgd.R:118
 msgid "Nesterov momentum requires a momentum and zero dampening"
-msgstr "Le Nesterov momentum a besoin d’un momentum et de ‘zero dampening’"
+msgstr ""
 
 #: optim.R:43
 msgid "Wrong parameters specification."
-msgstr "Spécification des paramètres erronée."
+msgstr ""
 
 #: optim.R:54
 msgid "`param_group` is not named"
-msgstr "le groupe de paramètres n’est pas nommé"
+msgstr ""
 
 #: optim.R:65
 msgid "optimizer can only optimize Tensors,"
-msgstr "l’optimiseur ne peut optimiser que des tenseurs,"
+msgstr ""
 
 #: optim.R:66
 msgid "but one of the params is {class(param)}"
-msgstr "mais un des paramètres est {class(param)}"
+msgstr ""
 
 #: optim.R:71
 msgid "can't optimize a non-leaf Tensor"
-msgstr "Impossible d’optimiser un tenseur non-feuille"
+msgstr ""
 
 #: optim.R:79
 msgid "parameter group didn't specify a value of required"
-msgstr "Il manque une valeur au groupe de paramètres "
+msgstr ""
 
 #: optim.R:80
 msgid "optimization parameter {nm}"
-msgstr "pour le paramètre d’optimisation {nm}"
+msgstr ""
 
 #: optim.R:119
 msgid "Loaded state dict has a different number of parameter groups"
 msgstr ""
-"Le dictionnaire d’état chargé en mémoire a un nombre de groupes de "
-"paramètres different"
 
 #: optim.R:124
 msgid ""
 "Loaded state dict has contains a parameter group that doesn't match the size "
 "of optimizers group."
 msgstr ""
-"Le dictionnaire d’état chargé en mémoire contient un groupes de paramètres "
-"dont la taille ne correspond pas à celle du groupe de l’optimiseur."
 
 #: optim.R:165
 msgid "OptimizerIgnite cannot be deep cloned"
-msgstr "OptimizerIgnite ne peut pas être cloné en profondeur"
+msgstr ""
 
 #: package.R:54
 msgid "Failed to install torch, manually run {.fn install_torch}"
 msgstr ""
-"L'installation de torch a échoué, vous devez lancer l'installation manuelle "
-"avec {.fn install_torch}."
 
 #: package.R:84
 msgid "torch failed to start, restart your R session to try again."
-msgstr "torch n'a pas pu démarrer. Redémarrez la session R puis réessayer."
+msgstr ""
 
 #: package.R:85
 msgid "You might need to reinstall torch using {.fn install_torch}"
 msgstr ""
-"Vous devriez relancer l'installation de torch avec {.fn install_torch}."
 
 #: package.R:108
 msgid "Aborted."
-msgstr "Abandonné."
+msgstr ""
 
 #: package.R:117
 msgid ""
 "Currently only {.code x86_64} systems are supported for automatic "
 "installation."
 msgstr ""
-"L'installation automatique n'existe que pour les systèmes {.code x86_64}."
 
 #: package.R:118
 msgid ""
 "You can manually compile LibTorch for you architecture following "
 "instructions in {.url https://github.com/pytorch/pytorch#from-source}"
 msgstr ""
-"Vous pouvez compiler LibTorch manuellement pour votre architecture en "
-"suivant les instructions de {.url https://github.com/pytorch/pytorch#from-"
-"source}"
 
 #: package.R:119
 msgid "You can then use {.fn install_torch_from_file} to install manually."
 msgstr ""
-"Vous pouvez ensuite utiliser {.fn install_torch_from_file} pour une "
-"installation manuelle."
 
 #: positron.R:20
 msgid "Failed to register Positron methods."
-msgstr "Impossible de consigner les méthodes Positron."
+msgstr ""
 
 #: save.R:86
 msgid "Cannot save `name` object."
-msgstr "Impossible de sauvegarder l'objet de type `name`."
+msgstr ""
 
 #: save.R:179
 msgid ""
 "Serializing objects with class {.cls {class(obj)}} is only supported with "
 "serialization version >= 3, got {.val {use_ser_version()}}"
 msgstr ""
-"La sérialisation d'objets de classe {.cls {class(obj)}} est possible à "
-"partir de la sérialisation en version 3. Ici on a sérialisation en version {."
-"val {use_ser_version()}}"
 
 #: save.R:256
 msgid "Unexpected device {.val NULL}"
-msgstr "Périphérique `device` inattendu: {.val NULL}"
+msgstr ""
 
 #: save.R:282
 msgid "File not saved with {.fn torch_save}, returning as is."
 msgstr ""
-"Le fichier n'a pas été enregistré avec {.fn torch_save}, il reste inchangé."
 
 #: save.R:283
 msgid "Use {.fn safetensors::safe_load_file} to silence this warning."
 msgstr ""
-"Utilisez {.fn safetensors::safe_load_file} pour faire taire ce message."
 
 #: save.R:304
 msgid "currently unsuported"
-msgstr "non disponible pour le moment"
+msgstr ""
 
 #: save.R:319
 msgid "This version of torch can't load files with serialization version >"
 msgstr ""
-"Cette version de torch ne peut pas lire des fichiers avec une version de "
-"sérialisation >"
 
 #: save.R:488
 msgid ""
 "{.arg path} must be a connection or an actual path, got {.cls {class(path)}}."
 msgstr ""
-"{.arg path} doit être une connexion ou un chemin existant. Ici, c'est un {."
-"cls {class(path)}}."
 
 #: save.R:504
 msgid ""
 "{.arg path} must be a connection, a raw vector or an actual path, got {.cls "
 "{class(path)}}."
 msgstr ""
-"{.arg path} doit être une connexion, un vecteur brut, ou un chemin existant. "
-"Ici, c'est un {.cls {class(path)}}."
 
 #: script_module.R:18
 msgid "ScriptModule does not support non persistent buffers."
-msgstr "Les buffeurs de classe ScriptModules doivent être persistants."
+msgstr ""
 
 #: script_module.R:29
 msgid "Script modules can only register Script modules children."
 msgstr ""
-"Les modules de Scripts ne peuvent enregistrer comme fils que d’autre modules "
-"de Script."
 
 #: script_module.R:132
 msgid ""
 "Forward is not defined. Methods from submodules of traced modules are not "
 "traced. Are you trying to call from a submodule?"
 msgstr ""
-"La méthode ‘forward’ n’est pas définie. Les méthodes des sous-modules des "
-"modules tracés ne sont pas tracées. Cet appel est-il tenté depuis un sous-"
-"module ?"
 
 #: tensor.R:58
 msgid "Indexing starts at 1 and got a 0."
-msgstr "L’indexation doit démarrer à 1. Actuellement elle est à 0."
+msgstr ""
 
 #: tensor.R:82
 msgid "Had {.arg other} but {.arg device} or {.arg dtype} are non {.val NULL}"
 msgstr ""
-"{.arg other} est incompatible avec {.arg device} ou {.arg dtype} non {.val "
-"NULL}."
 
 #: tensor.R:122
 msgid "You must pass a cuda device."
-msgstr "Vous devez fournir un équipement cuda."
+msgstr ""
 
 #: tensor.R:187 tensor.R:194 wrapers.R:234
 msgid "start indexing starts at 1"
-msgstr "‘start’ doit être indexé à 1"
+msgstr ""
 
 #: tensor.R:205 tensor.R:223
 msgid "Can't set other and dim arguments."
 msgstr ""
-"Les arguments ‘dim’ et ‘other’ ne peuvent pas être présents simultanément."
 
 #: tensor.R:352
 msgid "The tensor doesn't have names so you can't rename a dimension."
 msgstr ""
-"Le tenseur n’a pas de nom, donc vous ne pouvez pas renommer une dimension."
 
 #: tensor.R:444
 msgid ""
 "Converting integers > .Machine$integer.max is undefined and returns wrong "
 "results. Use as.integer64(x)"
 msgstr ""
-"La conversion d'entier de valeur supérieur à `.Machine$integer.max` n'est "
-"pas définie et renvoie des résultats erronés. Veuillez utiliser `as."
-"integer64(x)`"
 
 #: trace.R:76
 msgid "You must initialize the nn_module before tracing."
-msgstr "Vous devez initialiser le ‘nn_module’ avant de pouvoir le tracer."
+msgstr ""
 
 #: trace.R:89
 msgid "jit_trace needs a function or nn_module."
-msgstr "‘jit_trace’ n’est disponible que pour une fonction ou un ‘nn_module’."
+msgstr ""
 
 #: trace.R:134 trace.R:432
 msgid "Only `script_function` or `script_module` can be saved with `jit_save`."
 msgstr ""
-"‘jit_save’ n’est disponible que pour une ‘script_function’ ou un "
-"‘script_module’."
 
 #: trace.R:155
 msgid "Only `script_module` can be serialized with `jit_serialize`."
-msgstr "On ne peut sérialiser que des `script_module` avec `jit_serialize`."
+msgstr ""
 
 #: trace.R:171
 msgid "`obj` to be deserialized must be a raw vector."
-msgstr "l' objet `obj` à désérialiser doit être un vecteur brut."
+msgstr ""
 
 #: trace.R:327
 msgid "`mod` must be a `nn_module()`."
-msgstr "‘mod' doit être un `nn_module()`."
+msgstr ""
 
 #: trace.R:331
 msgid "`respect_mode` must be a logical(1)."
-msgstr "‘respect_mode' doit être un booléen."
+msgstr ""
 
 #: trace.R:335
 msgid "Arguments passed trough `...` must be named."
-msgstr "Les arguments passés via ‘…’ doivent tous être nommés."
+msgstr ""
 
 #: trace.R:344
 msgid "Methods `evalforward` and `trainforward` are reserved."
-msgstr "Les méthodes `evalforward` et `trainforward` sont réservées."
+msgstr ""
 
 #: trace.R:349
 msgid "Method '{name}' does not exist in `mod` and therefore can't be traced."
 msgstr ""
-"La méthode ‘{name}’ n’existe pas dans ‘mod’ et donc ne peut pas être tracée."
 
 #: type-info.R:42
 msgid "dtype must be an integer type."
-msgstr "le `dtype` doit être un entier."
+msgstr ""
 
 #: type-info.R:81
 msgid "dtype must be a float type."
-msgstr "le `dtype` doit être un réel (`float`)."
+msgstr ""
 
 #: utils-data-collate.R:31
 msgid "Can't collate data of class: '{class(data)}'"
-msgstr "Impossible de regrouper des données de type '{class(data)}'"
+msgstr ""
 
 #: utils-data-collate.R:46
 msgid "Can't convert data of class: '{class(data)}'"
-msgstr "Impossible de convertir des données de type '{class(data)}'"
+msgstr ""
 
 #: utils-data-dataloader.R:121
 msgid "Could not find an object with name '{names(worker_globals)[b]}'."
-msgstr "L’objet nommé '{names(worker_globals)[b]}' est introuvable."
+msgstr ""
 
 #: utils-data-dataloader.R:158
 msgid "Unknown dataset type with class {.cls {class(dataset)}}"
 msgstr ""
-"Le jeu de donnée de classe {.cls {class(dataset)}} est de type inconnu."
 
 #: utils-data-dataloader.R:211
 msgid "Multi-process dataloader not implemented yet for Iterable datasets."
 msgstr ""
-"Le dataloader multi-process n'est pas encore disponible pour les jeux de "
-"données itérable."
 
 #: utils-data-dataloader.R:405
 msgid "Could not create a connection with the main process."
-msgstr "Impossible d'établir la connexion avec le processus principal."
+msgstr ""
 
 #: utils-data-dataloader.R:441
 msgid "Failed starting the worker."
-msgstr "Échec à démarrer le worker."
+msgstr ""
 
 #: utils-data-dataloader.R:488 utils-data-dataloader.R:531
 msgid "dataloader worker timed out."
-msgstr "Le worker du data-loader a expiré."
+msgstr ""
 
 #: utils-data-dataloader.R:497
 msgid "Error when getting dataset item."
-msgstr "Erreur au moment d'obtenir l'élément dans le jeu de données."
+msgstr ""
 
 #: utils-data-dataloader.R:644
 msgid ""
@@ -1741,135 +1517,62 @@ msgid ""
 "fields containing tensors as they can't be correctly passed to the wroker "
 "subprocesses."
 msgstr ""
-"Les datasets fournis a un dataloader parallélisé (`num_workers` > 0) ne "
-"peuvent pas contenir de tenseurs, parce qu'ils ne peuvent pas être transmis "
-"à un sous-process."
 
-#: utils-data-dataloader.R:645
+#: utils-data-dataloader.R:645 utils-data-dataloader.R:645
 msgid "A field named '{nm}' exists."
-msgstr "Un champ '{nm}' existe déjà."
+msgstr ""
 
 #: utils-data-enum.R:41
 msgid ""
 "The `enumerate` construct is deprecated in favor of the `coro::loop` syntax."
-msgstr "La fonction `enumerate` est dépréciée et remplacée par `coro::loop`."
+msgstr ""
 
 #: utils-data-enum.R:42
 msgid "See https://github.com/mlverse/torch/issues/558 for more information."
-msgstr "Plus d'information dans  https://github.com/mlverse/torch/issues/558."
+msgstr ""
 
 #: utils-data.R:33
 msgid ""
 "Loading the state_dict is only implemented when {.arg .refer_to_state_dict} "
 "is {.val TRUE}"
 msgstr ""
-"Le chargement du `state_dict` n'est possible que quand {.arg ."
-"refer_to_state_dict} est {.val TRUE}"
 
 #: utils-data.R:226
 msgid "all tensors must have the same size in the first dimension."
 msgstr ""
-"Tous les tenseurs doivent avoir la même taille sur leur première dimension."
 
 #: wrapers.R:25
 msgid "argument 'out' must be a list of Tensors."
-msgstr "l’argument ‘out’ doit être une liste de tenseurs."
+msgstr ""
 
 #: wrapers.R:30
 msgid "expected tuple of"
-msgstr "le tuple attendu de"
+msgstr ""
 
 #: wrapers.R:30
 msgid "elements but got"
-msgstr "éléments en contient actuellement"
+msgstr ""
 
 #: wrapers.R:106
 msgid "argument 'window_length' must be int, not NULL"
-msgstr "l’argument 'window_length' doit être un entier, pas un NULL."
+msgstr ""
 
 #: wrapers.R:184
 msgid "tensordot expects dims >= 1, but got {dims}"
 msgstr ""
-"‘tensordot’ fonctionne avec des dims >=1, actuellement elles sont a {dims}"
 
 #: wrapers.R:499
 msgid "size is set, but one of mean or std is not a scalar value."
 msgstr ""
-"La taille est configurée, mais soit `mean`, soit `std` n'est pas une valeur "
-"scalaire."
 
 #: wrapers.R:505
 msgid "options is set, but one of mean or std is not a scalar value."
 msgstr ""
-"`options` est configuré, mais soit `mean`, soit `std` n'est pas une valeur "
-"scalaire."
 
 #: wrapers.R:514
 msgid "size is not set."
-msgstr "`size` n'est pas configuré."
+msgstr ""
 
 #: wrapers.R:553
 msgid "Please report a bug report in GitHub"
-msgstr "Merci de faire remonter un bug dans Github."
-
-#~ msgid "Can't convert cuda tensor to R. Convert to cpu tensor before."
-#~ msgstr ""
-#~ "Impossible de convertir un tenseur cuda en R directement, il faut le "
-#~ "déplacer en cpu d’abord."
-
-#~ msgid "Invalid learning rate: {lr)}"
-#~ msgstr "‘learning_rate’ invalide: {lr}"
-
-#~ msgid "<torch_hook>"
-#~ msgstr "<torch_hook>"
-
-#~ msgid "<torch_compilation_unit>"
-#~ msgstr "<torch_compilation_unit>"
-
-#~ msgid "%s"
-#~ msgstr "%s"
-
-#~ msgid "Either `probs` or `logits` must be specified but not both."
-#~ msgstr "Vous pouvez configurer `probs` ou `logits` mais pas les deux."
-
-#~ msgid ""
-#~ "Subclass %s of %s that defines a custom `initialize()` method must also "
-#~ "define a custom `expand()` method."
-#~ msgstr "La sous-classe %s de %s qui définit la méthode."
-
-#~ msgid "torch_%s"
-#~ msgstr "torch_%s"
-
-#~ msgid "torch_generator()"
-#~ msgstr "torch_generator()"
-
-#~ msgid "<slice>"
-#~ msgstr "<slice>"
-
-#~ msgid "arguments:"
-#~ msgstr "arguments:"
-
-#~ msgid "returns:"
-#~ msgstr "résultats:"
-
-#~ msgid "<torch_ops>: Handle to namespace  %s"
-#~ msgstr "<torch_ops>: Handle de l’espace de noms  %s"
-
-#~ msgid "Object of class <torch_ops>"
-#~ msgstr "Objet de la classe <torch_ops>"
-
-#~ msgid "torch_%s_format"
-#~ msgstr "torch_%s_format"
-
-#~ msgid ","
-#~ msgstr ","
-
-#~ msgid "expected %s values for %s but got %s"
-#~ msgstr ""
-#~ "`%s` valeurs sont attendues pour `%s`, actuellement `%s` sont présentes."
-
-#~ msgid "<script_function>"
-#~ msgstr "<script_function>"
-
-#~ msgid "expected tuple of %s elements but got %s"
-#~ msgstr "un tuple de %s éléments est attendu, actuellement il en a %s"
+msgstr ""
