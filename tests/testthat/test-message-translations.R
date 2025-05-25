@@ -43,3 +43,15 @@ test_that("installer_message gets correctly translated in FR", {
   ))
 })
 
+test_that("cli_abort gets correctly translated in FR", {
+  skip_if(torch::cuda_is_available() && grepl("linux-gnu", R.version$os))
+  skip_if(torch::backends_mps_is_available() && R.version$arch == "aarch64")
+    withr::with_language(lang = "fr",
+       expect_error(
+         torch:::check_supported_version("7.3.2", c("10.1", "10.2")),
+        regexp = "version de CUDA.",
+        fixed = TRUE
+      )
+  )
+})
+
