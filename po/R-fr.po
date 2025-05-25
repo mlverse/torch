@@ -689,7 +689,7 @@ msgid ""
 "version."
 msgstr ""
 "Tentative de lancer nvcc depuis {.path {nvcc_path}}, mais impossible de "
-"toruver une version de CUDA."
+"trouver une version de CUDA."
 
 #: install.R:535
 msgid "Found CUDA version {.strong {version}}."

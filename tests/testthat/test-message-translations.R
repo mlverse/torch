@@ -30,3 +30,16 @@ test_that("R-level warning messages are correctly translated in FR", {
   )
 })
 
+test_that("installer_message gets correctly translated in FR", {
+  skip_if(torch::cuda_is_available() && grepl("linux-gnu", R.version$os))
+  skip_if(torch::backends_mps_is_available() && R.version$arch == "aarch64")
+  withr::with_envvar(new = c("TORCH_INSTALL_DEBUG" = TRUE),  
+    withr::with_language(lang = "fr",
+       expect_message(
+         torch:::nvcc_version_from_path(tempfile()),
+        regexp = "mais impossible de trouver une version de CUDA.",
+        fixed = TRUE
+      )
+  ))
+})
+
