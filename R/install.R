@@ -181,7 +181,7 @@ inst_path <- function() {
   cli_abort(c("x" = "{.pkg torch} cannot write into {.path {install_path}}.",
             "i" = "Please configure a {.var TORCH_HOME} variable with a writable folder",
             " " = "and run {.fn install_torch()} again",
-            "i" = "Or run R under the root user once to perform the {.fn install_torch()} ",
+            "i" = "Or run R under the {.emph root} user {.strong once} to perform the {.fn install_torch()} ",
             " " = "if you use system level package manager like {.pkg r2u}"))
 }
 
