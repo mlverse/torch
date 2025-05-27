@@ -6,7 +6,13 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>TorchScript • torch</title>
-<script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<!-- mathjax math --><script src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.js" integrity="sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI=" crossorigin="anonymous"></script><script>
+  window.MathJax = {
+    chtml: {
+      fontURL: "https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/output/chtml/fonts/woff-v2"
+    }
+  };
+</script><script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
 <script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
 <link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
@@ -29,7 +35,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">torch</a>
 
-    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">0.14.1.9000</small>
+    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">0.14.2.9000</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -160,10 +166,9 @@ inspected with:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">traced_fn</span><span class="op">(</span><span class="fu"><a href="../reference/torch_randn.html">torch_randn</a></span><span class="op">(</span><span class="fl">3</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; torch_tensor</span></span>
-<span><span class="co">#&gt; 0.01 *</span></span>
 <span><span class="co">#&gt;  0.0000</span></span>
-<span><span class="co">#&gt;  0.0000</span></span>
-<span><span class="co">#&gt;  6.0648</span></span>
+<span><span class="co">#&gt;  0.9231</span></span>
+<span><span class="co">#&gt;  0.6188</span></span>
 <span><span class="co">#&gt; [ CPUFloatType{3} ]</span></span></code></pre></div>
 <p>It’s also possible to trace <code>nn_modules()</code> defined in R,
 for example:</p>
@@ -193,9 +198,9 @@ can be called the same way:</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">traced_module</span><span class="op">(</span><span class="fu"><a href="../reference/torch_randn.html">torch_randn</a></span><span class="op">(</span><span class="fl">3</span>, <span class="fl">10</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; torch_tensor</span></span>
-<span><span class="co">#&gt;  0.4704</span></span>
-<span><span class="co">#&gt;  0.1130</span></span>
-<span><span class="co">#&gt; -0.0008</span></span>
+<span><span class="co">#&gt;  0.4667</span></span>
+<span><span class="co">#&gt;  0.6166</span></span>
+<span><span class="co">#&gt;  0.7256</span></span>
 <span><span class="co">#&gt; [ CPUFloatType{3,1} ][ grad_fn = &lt;AddmmBackward0&gt; ]</span></span></code></pre></div>
 <div class="section level4">
 <h4 id="limitations-of-tracing">Limitations of tracing<a class="anchor" aria-label="anchor" href="#limitations-of-tracing"></a>
@@ -233,9 +238,9 @@ it were in the mode it was in during tracing, no matter which mode the
 <code class="sourceCode R"><span><span class="va">traced_dropout</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/jit_trace.html">jit_trace</a></span><span class="op">(</span><span class="fu"><a href="../reference/nn_dropout.html">nn_dropout</a></span><span class="op">(</span><span class="op">)</span>, <span class="fu"><a href="../reference/torch_ones.html">torch_ones</a></span><span class="op">(</span><span class="fl">5</span>,<span class="fl">5</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu">traced_dropout</span><span class="op">(</span><span class="fu"><a href="../reference/torch_ones.html">torch_ones</a></span><span class="op">(</span><span class="fl">3</span>,<span class="fl">3</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; torch_tensor</span></span>
-<span><span class="co">#&gt;  2  0  2</span></span>
-<span><span class="co">#&gt;  0  0  0</span></span>
-<span><span class="co">#&gt;  2  0  2</span></span>
+<span><span class="co">#&gt;  0  2  0</span></span>
+<span><span class="co">#&gt;  2  2  2</span></span>
+<span><span class="co">#&gt;  2  2  0</span></span>
 <span><span class="co">#&gt; [ CPUFloatType{3,3} ]</span></span>
 <span><span class="va">traced_dropout</span><span class="op">$</span><span class="fu">eval</span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] FALSE</span></span>
@@ -257,69 +262,69 @@ input and return tensors and lists of tensors. For example:</li>
 <span><span class="fu"><a href="../reference/jit_trace.html">jit_trace</a></span><span class="op">(</span><span class="va">fn</span>, <span class="fu"><a href="../reference/torch_tensor.html">torch_tensor</a></span><span class="op">(</span><span class="fl">1</span><span class="op">)</span>, <span class="fl">1</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Error in cpp_trace_function(tr_fn, list(...), .compilation_unit, strict, : Only tensors or (possibly nested) dict or tuples of tensors can be inputs to traced functions. Got float</span></span>
 <span><span class="co">#&gt; Exception raised from addInput at /Users/runner/work/libtorch-mac-m1/libtorch-mac-m1/pytorch/torch/csrc/jit/frontend/tracer.cpp:422 (most recent call first):</span></span>
-<span><span class="co">#&gt; frame #0: std::__1::shared_ptr&lt;c10::(anonymous namespace)::PyTorchStyleBacktrace&gt; std::__1::make_shared[abi:ue170006]&lt;c10::(anonymous namespace)::PyTorchStyleBacktrace, c10::SourceLocation&amp;, void&gt;(c10::SourceLocation&amp;) + 121 (0x10c264639 in libc10.dylib)</span></span>
-<span><span class="co">#&gt; frame #1: c10::Error::Error(c10::SourceLocation, std::__1::basic_string&lt;char, std::__1::char_traits&lt;char&gt;, std::__1::allocator&lt;char&gt;&gt;) + 54 (0x10c264776 in libc10.dylib)</span></span>
-<span><span class="co">#&gt; frame #2: c10::detail::torchCheckFail(char const*, char const*, unsigned int, std::__1::basic_string&lt;char, std::__1::char_traits&lt;char&gt;, std::__1::allocator&lt;char&gt;&gt; const&amp;) + 149 (0x10c261035 in libc10.dylib)</span></span>
-<span><span class="co">#&gt; frame #3: torch::jit::tracer::addInput(std::__1::shared_ptr&lt;torch::jit::tracer::TracingState&gt; const&amp;, c10::IValue const&amp;, c10::Type::SingletonOrSharedTypePtr&lt;c10::Type&gt; const&amp;, torch::jit::Value*) + 6225 (0x123854cf1 in libtorch_cpu.dylib)</span></span>
-<span><span class="co">#&gt; frame #4: torch::jit::tracer::addInput(std::__1::shared_ptr&lt;torch::jit::tracer::TracingState&gt; const&amp;, c10::IValue const&amp;, c10::Type::SingletonOrSharedTypePtr&lt;c10::Type&gt; const&amp;, torch::jit::Value*) + 4799 (0x12385475f in libtorch_cpu.dylib)</span></span>
-<span><span class="co">#&gt; frame #5: torch::jit::tracer::trace(std::__1::vector&lt;c10::IValue, std::__1::allocator&lt;c10::IValue&gt;&gt;, std::__1::function&lt;std::__1::vector&lt;c10::IValue, std::__1::allocator&lt;c10::IValue&gt;&gt; (std::__1::vector&lt;c10::IValue, std::__1::allocator&lt;c10::IValue&gt;&gt;)&gt; const&amp;, std::__1::function&lt;std::__1::basic_string&lt;char, std::__1::char_traits&lt;char&gt;, std::__1::allocator&lt;char&gt;&gt; (at::Tensor const&amp;)&gt;, bool, bool, torch::jit::Module*, std::__1::vector&lt;std::__1::basic_string&lt;char, std::__1::char_traits&lt;char&gt;, std::__1::allocator&lt;char&gt;&gt;, std::__1::allocator&lt;std::__1::basic_string&lt;char, std::__1::char_traits&lt;char&gt;, std::__1::allocator&lt;char&gt;&gt;&gt;&gt; const&amp;) + 666 (0x123851eaa in libtorch_cpu.dylib)</span></span>
-<span><span class="co">#&gt; frame #6: _lantern_trace_fn + 408 (0x110edbe28 in liblantern.dylib)</span></span>
-<span><span class="co">#&gt; frame #7: cpp_trace_function(Rcpp::Function_Impl&lt;Rcpp::PreserveStorage&gt;, XPtrTorchStack, XPtrTorchCompilationUnit, XPtrTorchstring, bool, XPtrTorchScriptModule, bool, bool) + 601 (0x10f135959 in torchpkg.so)</span></span>
-<span><span class="co">#&gt; frame #8: _torch_cpp_trace_function + 719 (0x10ef5268f in torchpkg.so)</span></span>
-<span><span class="co">#&gt; frame #9: R_doDotCall + 13245 (0x1096554bd in libR.dylib)</span></span>
-<span><span class="co">#&gt; frame #10: bcEval_loop + 146595 (0x1096bd123 in libR.dylib)</span></span>
-<span><span class="co">#&gt; frame #11: bcEval + 628 (0x10968adf4 in libR.dylib)</span></span>
-<span><span class="co">#&gt; frame #12: Rf_eval + 506 (0x10968a4fa in libR.dylib)</span></span>
-<span><span class="co">#&gt; frame #13: R_execClosure + 761 (0x10968d039 in libR.dylib)</span></span>
-<span><span class="co">#&gt; frame #14: applyClosure_core + 128 (0x10968c140 in libR.dylib)</span></span>
-<span><span class="co">#&gt; frame #15: Rf_eval + 1189 (0x10968a7a5 in libR.dylib)</span></span>
-<span><span class="co">#&gt; frame #16: do_eval + 1253 (0x109691b65 in libR.dylib)</span></span>
-<span><span class="co">#&gt; frame #17: bcEval_loop + 44444 (0x1096a421c in libR.dylib)</span></span>
-<span><span class="co">#&gt; frame #18: bcEval + 628 (0x10968adf4 in libR.dylib)</span></span>
-<span><span class="co">#&gt; frame #19: Rf_eval + 506 (0x10968a4fa in libR.dylib)</span></span>
-<span><span class="co">#&gt; frame #20: forcePromise + 230 (0x10968b026 in libR.dylib)</span></span>
-<span><span class="co">#&gt; frame #21: Rf_eval + 634 (0x10968a57a in libR.dylib)</span></span>
-<span><span class="co">#&gt; frame #22: do_withVisible + 57 (0x109691ef9 in libR.dylib)</span></span>
-<span><span class="co">#&gt; frame #23: do_internal + 362 (0x109709b6a in libR.dylib)</span></span>
-<span><span class="co">#&gt; frame #24: bcEval_loop + 45071 (0x1096a448f in libR.dylib)</span></span>
-<span><span class="co">#&gt; frame #25: bcEval + 628 (0x10968adf4 in libR.dylib)</span></span>
-<span><span class="co">#&gt; frame #26: Rf_eval + 506 (0x10968a4fa in libR.dylib)</span></span>
-<span><span class="co">#&gt; frame #27: forcePromise + 230 (0x10968b026 in libR.dylib)</span></span>
-<span><span class="co">#&gt; frame #28: Rf_eval + 634 (0x10968a57a in libR.dylib)</span></span>
-<span><span class="co">#&gt; frame #29: forcePromise + 230 (0x10968b026 in libR.dylib)</span></span>
-<span><span class="co">#&gt; frame #30: bcEval_loop + 19464 (0x10969e088 in libR.dylib)</span></span>
-<span><span class="co">#&gt; frame #31: bcEval + 628 (0x10968adf4 in libR.dylib)</span></span>
-<span><span class="co">#&gt; frame #32: Rf_eval + 506 (0x10968a4fa in libR.dylib)</span></span>
-<span><span class="co">#&gt; frame #33: R_execClosure + 761 (0x10968d039 in libR.dylib)</span></span>
-<span><span class="co">#&gt; frame #34: applyClosure_core + 128 (0x10968c140 in libR.dylib)</span></span>
-<span><span class="co">#&gt; frame #35: Rf_eval + 1189 (0x10968a7a5 in libR.dylib)</span></span>
-<span><span class="co">#&gt; frame #36: do_eval + 1253 (0x109691b65 in libR.dylib)</span></span>
-<span><span class="co">#&gt; frame #37: bcEval_loop + 44444 (0x1096a421c in libR.dylib)</span></span>
-<span><span class="co">#&gt; frame #38: bcEval + 628 (0x10968adf4 in libR.dylib)</span></span>
-<span><span class="co">#&gt; frame #39: Rf_eval + 506 (0x10968a4fa in libR.dylib)</span></span>
-<span><span class="co">#&gt; frame #40: R_execClosure + 761 (0x10968d039 in libR.dylib)</span></span>
-<span><span class="co">#&gt; frame #41: applyClosure_core + 128 (0x10968c140 in libR.dylib)</span></span>
-<span><span class="co">#&gt; frame #42: Rf_eval + 1189 (0x10968a7a5 in libR.dylib)</span></span>
-<span><span class="co">#&gt; frame #43: do_begin + 429 (0x10968fa2d in libR.dylib)</span></span>
-<span><span class="co">#&gt; frame #44: Rf_eval + 990 (0x10968a6de in libR.dylib)</span></span>
-<span><span class="co">#&gt; frame #45: R_execClosure + 761 (0x10968d039 in libR.dylib)</span></span>
-<span><span class="co">#&gt; frame #46: applyClosure_core + 128 (0x10968c140 in libR.dylib)</span></span>
-<span><span class="co">#&gt; frame #47: Rf_eval + 1189 (0x10968a7a5 in libR.dylib)</span></span>
-<span><span class="co">#&gt; frame #48: do_docall + 615 (0x10961b2a7 in libR.dylib)</span></span>
-<span><span class="co">#&gt; frame #49: bcEval_loop + 44444 (0x1096a421c in libR.dylib)</span></span>
-<span><span class="co">#&gt; frame #50: bcEval + 628 (0x10968adf4 in libR.dylib)</span></span>
-<span><span class="co">#&gt; frame #51: Rf_eval + 506 (0x10968a4fa in libR.dylib)</span></span>
-<span><span class="co">#&gt; frame #52: R_execClosure + 761 (0x10968d039 in libR.dylib)</span></span>
-<span><span class="co">#&gt; frame #53: applyClosure_core + 128 (0x10968c140 in libR.dylib)</span></span>
-<span><span class="co">#&gt; frame #54: Rf_eval + 1189 (0x10968a7a5 in libR.dylib)</span></span>
-<span><span class="co">#&gt; frame #55: do_docall + 615 (0x10961b2a7 in libR.dylib)</span></span>
-<span><span class="co">#&gt; frame #56: bcEval_loop + 44444 (0x1096a421c in libR.dylib)</span></span>
-<span><span class="co">#&gt; frame #57: bcEval + 628 (0x10968adf4 in libR.dylib)</span></span>
-<span><span class="co">#&gt; frame #58: Rf_eval + 506 (0x10968a4fa in libR.dylib)</span></span>
-<span><span class="co">#&gt; frame #59: R_execClosure + 761 (0x10968d039 in libR.dylib)</span></span>
-<span><span class="co">#&gt; frame #60: applyClosure_core + 128 (0x10968c140 in libR.dylib)</span></span>
-<span><span class="co">#&gt; frame #61: Rf_eval + 1189 (0x10968a7a5 in libR.dylib)</span></span>
-<span><span class="co">#&gt; frame #62: forcePromise + 230 (0x10968b026 in libR.dylib)</span></span>
+<span><span class="co">#&gt; frame #0: std::__1::shared_ptr&lt;c10::(anonymous namespace)::PyTorchStyleBacktrace&gt; std::__1::make_shared[abi:ue170006]&lt;c10::(anonymous namespace)::PyTorchStyleBacktrace, c10::SourceLocation&amp;, void&gt;(c10::SourceLocation&amp;) + 121 (0x10945f639 in libc10.dylib)</span></span>
+<span><span class="co">#&gt; frame #1: c10::Error::Error(c10::SourceLocation, std::__1::basic_string&lt;char, std::__1::char_traits&lt;char&gt;, std::__1::allocator&lt;char&gt;&gt;) + 54 (0x10945f776 in libc10.dylib)</span></span>
+<span><span class="co">#&gt; frame #2: c10::detail::torchCheckFail(char const*, char const*, unsigned int, std::__1::basic_string&lt;char, std::__1::char_traits&lt;char&gt;, std::__1::allocator&lt;char&gt;&gt; const&amp;) + 149 (0x10945c035 in libc10.dylib)</span></span>
+<span><span class="co">#&gt; frame #3: torch::jit::tracer::addInput(std::__1::shared_ptr&lt;torch::jit::tracer::TracingState&gt; const&amp;, c10::IValue const&amp;, c10::Type::SingletonOrSharedTypePtr&lt;c10::Type&gt; const&amp;, torch::jit::Value*) + 6225 (0x120d4fcf1 in libtorch_cpu.dylib)</span></span>
+<span><span class="co">#&gt; frame #4: torch::jit::tracer::addInput(std::__1::shared_ptr&lt;torch::jit::tracer::TracingState&gt; const&amp;, c10::IValue const&amp;, c10::Type::SingletonOrSharedTypePtr&lt;c10::Type&gt; const&amp;, torch::jit::Value*) + 4799 (0x120d4f75f in libtorch_cpu.dylib)</span></span>
+<span><span class="co">#&gt; frame #5: torch::jit::tracer::trace(std::__1::vector&lt;c10::IValue, std::__1::allocator&lt;c10::IValue&gt;&gt;, std::__1::function&lt;std::__1::vector&lt;c10::IValue, std::__1::allocator&lt;c10::IValue&gt;&gt; (std::__1::vector&lt;c10::IValue, std::__1::allocator&lt;c10::IValue&gt;&gt;)&gt; const&amp;, std::__1::function&lt;std::__1::basic_string&lt;char, std::__1::char_traits&lt;char&gt;, std::__1::allocator&lt;char&gt;&gt; (at::Tensor const&amp;)&gt;, bool, bool, torch::jit::Module*, std::__1::vector&lt;std::__1::basic_string&lt;char, std::__1::char_traits&lt;char&gt;, std::__1::allocator&lt;char&gt;&gt;, std::__1::allocator&lt;std::__1::basic_string&lt;char, std::__1::char_traits&lt;char&gt;, std::__1::allocator&lt;char&gt;&gt;&gt;&gt; const&amp;) + 666 (0x120d4ceaa in libtorch_cpu.dylib)</span></span>
+<span><span class="co">#&gt; frame #6: _lantern_trace_fn + 408 (0x10e3d6b88 in liblantern.dylib)</span></span>
+<span><span class="co">#&gt; frame #7: cpp_trace_function(Rcpp::Function_Impl&lt;Rcpp::PreserveStorage&gt;, XPtrTorchStack, XPtrTorchCompilationUnit, XPtrTorchstring, bool, XPtrTorchScriptModule, bool, bool) + 601 (0x10c633299 in torchpkg.so)</span></span>
+<span><span class="co">#&gt; frame #8: _torch_cpp_trace_function + 713 (0x10c450109 in torchpkg.so)</span></span>
+<span><span class="co">#&gt; frame #9: R_doDotCall + 13245 (0x106809b7d in libR.dylib)</span></span>
+<span><span class="co">#&gt; frame #10: bcEval_loop + 99716 (0x106866c04 in libR.dylib)</span></span>
+<span><span class="co">#&gt; frame #11: bcEval + 628 (0x106840134 in libR.dylib)</span></span>
+<span><span class="co">#&gt; frame #12: Rf_eval + 506 (0x10683f87a in libR.dylib)</span></span>
+<span><span class="co">#&gt; frame #13: R_execClosure + 761 (0x1068423b9 in libR.dylib)</span></span>
+<span><span class="co">#&gt; frame #14: applyClosure_core + 128 (0x1068414c0 in libR.dylib)</span></span>
+<span><span class="co">#&gt; frame #15: Rf_eval + 1189 (0x10683fb25 in libR.dylib)</span></span>
+<span><span class="co">#&gt; frame #16: do_eval + 1253 (0x106846da5 in libR.dylib)</span></span>
+<span><span class="co">#&gt; frame #17: bcEval_loop + 34028 (0x106856b6c in libR.dylib)</span></span>
+<span><span class="co">#&gt; frame #18: bcEval + 628 (0x106840134 in libR.dylib)</span></span>
+<span><span class="co">#&gt; frame #19: Rf_eval + 506 (0x10683f87a in libR.dylib)</span></span>
+<span><span class="co">#&gt; frame #20: forcePromise + 230 (0x106840366 in libR.dylib)</span></span>
+<span><span class="co">#&gt; frame #21: Rf_eval + 634 (0x10683f8fa in libR.dylib)</span></span>
+<span><span class="co">#&gt; frame #22: do_withVisible + 57 (0x106847139 in libR.dylib)</span></span>
+<span><span class="co">#&gt; frame #23: do_internal + 362 (0x1068b20aa in libR.dylib)</span></span>
+<span><span class="co">#&gt; frame #24: bcEval_loop + 34655 (0x106856ddf in libR.dylib)</span></span>
+<span><span class="co">#&gt; frame #25: bcEval + 628 (0x106840134 in libR.dylib)</span></span>
+<span><span class="co">#&gt; frame #26: Rf_eval + 506 (0x10683f87a in libR.dylib)</span></span>
+<span><span class="co">#&gt; frame #27: forcePromise + 230 (0x106840366 in libR.dylib)</span></span>
+<span><span class="co">#&gt; frame #28: Rf_eval + 634 (0x10683f8fa in libR.dylib)</span></span>
+<span><span class="co">#&gt; frame #29: forcePromise + 230 (0x106840366 in libR.dylib)</span></span>
+<span><span class="co">#&gt; frame #30: getvar + 253 (0x1068691fd in libR.dylib)</span></span>
+<span><span class="co">#&gt; frame #31: bcEval_loop + 18591 (0x106852f1f in libR.dylib)</span></span>
+<span><span class="co">#&gt; frame #32: bcEval + 628 (0x106840134 in libR.dylib)</span></span>
+<span><span class="co">#&gt; frame #33: Rf_eval + 506 (0x10683f87a in libR.dylib)</span></span>
+<span><span class="co">#&gt; frame #34: R_execClosure + 761 (0x1068423b9 in libR.dylib)</span></span>
+<span><span class="co">#&gt; frame #35: applyClosure_core + 128 (0x1068414c0 in libR.dylib)</span></span>
+<span><span class="co">#&gt; frame #36: Rf_eval + 1189 (0x10683fb25 in libR.dylib)</span></span>
+<span><span class="co">#&gt; frame #37: do_eval + 1253 (0x106846da5 in libR.dylib)</span></span>
+<span><span class="co">#&gt; frame #38: bcEval_loop + 34028 (0x106856b6c in libR.dylib)</span></span>
+<span><span class="co">#&gt; frame #39: bcEval + 628 (0x106840134 in libR.dylib)</span></span>
+<span><span class="co">#&gt; frame #40: Rf_eval + 506 (0x10683f87a in libR.dylib)</span></span>
+<span><span class="co">#&gt; frame #41: R_execClosure + 761 (0x1068423b9 in libR.dylib)</span></span>
+<span><span class="co">#&gt; frame #42: applyClosure_core + 128 (0x1068414c0 in libR.dylib)</span></span>
+<span><span class="co">#&gt; frame #43: Rf_eval + 1189 (0x10683fb25 in libR.dylib)</span></span>
+<span><span class="co">#&gt; frame #44: do_begin + 429 (0x106844ced in libR.dylib)</span></span>
+<span><span class="co">#&gt; frame #45: Rf_eval + 990 (0x10683fa5e in libR.dylib)</span></span>
+<span><span class="co">#&gt; frame #46: R_execClosure + 761 (0x1068423b9 in libR.dylib)</span></span>
+<span><span class="co">#&gt; frame #47: applyClosure_core + 128 (0x1068414c0 in libR.dylib)</span></span>
+<span><span class="co">#&gt; frame #48: Rf_eval + 1189 (0x10683fb25 in libR.dylib)</span></span>
+<span><span class="co">#&gt; frame #49: do_docall + 599 (0x1067ce857 in libR.dylib)</span></span>
+<span><span class="co">#&gt; frame #50: bcEval_loop + 34028 (0x106856b6c in libR.dylib)</span></span>
+<span><span class="co">#&gt; frame #51: bcEval + 628 (0x106840134 in libR.dylib)</span></span>
+<span><span class="co">#&gt; frame #52: Rf_eval + 506 (0x10683f87a in libR.dylib)</span></span>
+<span><span class="co">#&gt; frame #53: R_execClosure + 761 (0x1068423b9 in libR.dylib)</span></span>
+<span><span class="co">#&gt; frame #54: applyClosure_core + 128 (0x1068414c0 in libR.dylib)</span></span>
+<span><span class="co">#&gt; frame #55: Rf_eval + 1189 (0x10683fb25 in libR.dylib)</span></span>
+<span><span class="co">#&gt; frame #56: do_docall + 599 (0x1067ce857 in libR.dylib)</span></span>
+<span><span class="co">#&gt; frame #57: bcEval_loop + 34028 (0x106856b6c in libR.dylib)</span></span>
+<span><span class="co">#&gt; frame #58: bcEval + 628 (0x106840134 in libR.dylib)</span></span>
+<span><span class="co">#&gt; frame #59: Rf_eval + 506 (0x10683f87a in libR.dylib)</span></span>
+<span><span class="co">#&gt; frame #60: R_execClosure + 761 (0x1068423b9 in libR.dylib)</span></span>
+<span><span class="co">#&gt; frame #61: applyClosure_core + 128 (0x1068414c0 in libR.dylib)</span></span>
+<span><span class="co">#&gt; frame #62: Rf_eval + 1189 (0x10683fb25 in libR.dylib)</span></span>
 <span><span class="co">#&gt; :</span></span></code></pre></div>
 </div>
 </div>
@@ -458,7 +463,7 @@ etc. wrapped in <code><a href="../reference/jit_tuple.html">jit_tuple()</a></cod
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
 </div>
 
     </footer>

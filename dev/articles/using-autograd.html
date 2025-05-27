@@ -6,7 +6,13 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>Using autograd • torch</title>
-<script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<!-- mathjax math --><script src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.js" integrity="sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI=" crossorigin="anonymous"></script><script>
+  window.MathJax = {
+    chtml: {
+      fontURL: "https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/output/chtml/fonts/woff-v2"
+    }
+  };
+</script><script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
 <script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
 <link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
@@ -29,7 +35,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">torch</a>
 
-    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">0.14.1.9000</small>
+    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">0.14.2.9000</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -287,26 +293,26 @@ number of lines (that did manual backprop) are gone:</p>
 <span>    <span class="op">}</span><span class="op">)</span></span>
 <span>    </span>
 <span><span class="op">}</span></span>
-<span><span class="co">#&gt; 10 53.39279 </span></span>
-<span><span class="co">#&gt; 20 48.18108 </span></span>
-<span><span class="co">#&gt; 30 43.60909 </span></span>
-<span><span class="co">#&gt; 40 39.58902 </span></span>
-<span><span class="co">#&gt; 50 36.04592 </span></span>
-<span><span class="co">#&gt; 60 32.91418 </span></span>
-<span><span class="co">#&gt; 70 30.1415 </span></span>
-<span><span class="co">#&gt; 80 27.68606 </span></span>
-<span><span class="co">#&gt; 90 25.51679 </span></span>
-<span><span class="co">#&gt; 100 23.58184 </span></span>
-<span><span class="co">#&gt; 110 21.85429 </span></span>
-<span><span class="co">#&gt; 120 20.30842 </span></span>
-<span><span class="co">#&gt; 130 18.92111 </span></span>
-<span><span class="co">#&gt; 140 17.67605 </span></span>
-<span><span class="co">#&gt; 150 16.55709 </span></span>
-<span><span class="co">#&gt; 160 15.54987 </span></span>
-<span><span class="co">#&gt; 170 14.64194 </span></span>
-<span><span class="co">#&gt; 180 13.82296 </span></span>
-<span><span class="co">#&gt; 190 13.0857 </span></span>
-<span><span class="co">#&gt; 200 12.41805</span></span></code></pre></div>
+<span><span class="co">#&gt; 10 31.13681 </span></span>
+<span><span class="co">#&gt; 20 28.91011 </span></span>
+<span><span class="co">#&gt; 30 26.92254 </span></span>
+<span><span class="co">#&gt; 40 25.14654 </span></span>
+<span><span class="co">#&gt; 50 23.55786 </span></span>
+<span><span class="co">#&gt; 60 22.13516 </span></span>
+<span><span class="co">#&gt; 70 20.86155 </span></span>
+<span><span class="co">#&gt; 80 19.71761 </span></span>
+<span><span class="co">#&gt; 90 18.68889 </span></span>
+<span><span class="co">#&gt; 100 17.76227 </span></span>
+<span><span class="co">#&gt; 110 16.92673 </span></span>
+<span><span class="co">#&gt; 120 16.17233 </span></span>
+<span><span class="co">#&gt; 130 15.49024 </span></span>
+<span><span class="co">#&gt; 140 14.87246 </span></span>
+<span><span class="co">#&gt; 150 14.31216 </span></span>
+<span><span class="co">#&gt; 160 13.80329 </span></span>
+<span><span class="co">#&gt; 170 13.34012 </span></span>
+<span><span class="co">#&gt; 180 12.91785 </span></span>
+<span><span class="co">#&gt; 190 12.5321 </span></span>
+<span><span class="co">#&gt; 200 12.17889</span></span></code></pre></div>
 <p>We still manually compute the forward pass, and we still manually
 update the weights. In the last two chapters of this section, we’ll see
 how these parts of the logic can be made more modular and reusable, as
@@ -324,7 +330,7 @@ well.</p>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
 </div>
 
     </footer>

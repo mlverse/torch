@@ -6,7 +6,13 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>Memory management • torch</title>
-<script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<!-- mathjax math --><script src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.js" integrity="sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI=" crossorigin="anonymous"></script><script>
+  window.MathJax = {
+    chtml: {
+      fontURL: "https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/output/chtml/fonts/woff-v2"
+    }
+  };
+</script><script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
 <script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
 <link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
@@ -29,7 +35,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">torch</a>
 
-    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">0.14.1.9000</small>
+    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">0.14.2.9000</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -196,6 +202,30 @@ default is 0.8.</li>
 </ol>
 <p>These options can help tuning allocation performance depending on the
 program you are running.</p>
+<div class="section level3">
+<h3 id="cuda-memory-snapshots">CUDA Memory Snapshots<a class="anchor" aria-label="anchor" href="#cuda-memory-snapshots"></a>
+</h3>
+<p>To assist debugging CUDA memory usage, R torch provides functionality
+for generating CUDA memory snapshots, similar to the <a href="https://pytorch.org/docs/stable/torch_cuda_memory.html" class="external-link">PyTorch
+Python implementation</a>. Snapshots record the state of allocated CUDA
+memory at any point in time, and optionally records the history of
+allocation events that led up to that snapshot.</p>
+<p>To generate a snapshot:</p>
+<pre><code><span><span class="co"># Enable memory history recording, capturing tracebacks and allocation events</span></span>
+<span><span class="fu"><a href="../reference/cuda_record_memory_history.html">cuda_record_memory_history</a></span><span class="op">(</span>enabled <span class="op">=</span> <span class="st">"all"</span>, max_entries <span class="op">=</span> <span class="fl">1e6</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Run your code</span></span>
+<span></span>
+<span><span class="co"># Save a snapshot file</span></span>
+<span><span class="fu"><a href="../reference/cuda_dump_memory_snapshot.html">cuda_dump_memory_snapshot</a></span><span class="op">(</span><span class="st">"my_snapshot.pickle"</span><span class="op">)</span></span></code></pre>
+<p>Generated snapshots can be visualized interactively using the
+official PyTorch Memory Visualizer at <a href="pytorch.org/memory_viz">pytorch.org/memory_viz</a>. Simply drag
+and drop your saved snapshot (.pickle) into the visualizer, which runs
+locally in your browser without uploading any data.</p>
+</div>
+<div class="section level3">
+<h3 id="libtorch-cuda-allocation-options">LibTorch CUDA Allocation Options<a class="anchor" aria-label="anchor" href="#libtorch-cuda-allocation-options"></a>
+</h3>
 <p>Besides the R specific options you can set LibTorch options via
 environment variables as described below. The behavior of caching
 allocator can be controlled via environment variable
@@ -243,6 +273,7 @@ greater than 0.0 and less than 1.0.</li>
 collector but LibTorch’s collector, that releases memory from the cache
 to the OS.</p>
 </div>
+</div>
 <div class="section level2">
 <h2 id="mps">MPS<a class="anchor" aria-label="anchor" href="#mps"></a>
 </h2>
@@ -264,7 +295,7 @@ raised.</p>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
 </div>
 
     </footer>

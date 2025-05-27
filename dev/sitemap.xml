@@ -46,10 +46,13 @@
 <url><loc>https://torch.mlverse.org/docs/dev/reference/cuda_amp_grad_scaler.html</loc></url>
 <url><loc>https://torch.mlverse.org/docs/dev/reference/cuda_current_device.html</loc></url>
 <url><loc>https://torch.mlverse.org/docs/dev/reference/cuda_device_count.html</loc></url>
+<url><loc>https://torch.mlverse.org/docs/dev/reference/cuda_dump_memory_snapshot.html</loc></url>
 <url><loc>https://torch.mlverse.org/docs/dev/reference/cuda_empty_cache.html</loc></url>
 <url><loc>https://torch.mlverse.org/docs/dev/reference/cuda_get_device_capability.html</loc></url>
 <url><loc>https://torch.mlverse.org/docs/dev/reference/cuda_is_available.html</loc></url>
+<url><loc>https://torch.mlverse.org/docs/dev/reference/cuda_memory_snapshot.html</loc></url>
 <url><loc>https://torch.mlverse.org/docs/dev/reference/cuda_memory_stats.html</loc></url>
+<url><loc>https://torch.mlverse.org/docs/dev/reference/cuda_record_memory_history.html</loc></url>
 <url><loc>https://torch.mlverse.org/docs/dev/reference/cuda_runtime_version.html</loc></url>
 <url><loc>https://torch.mlverse.org/docs/dev/reference/cuda_synchronize.html</loc></url>
 <url><loc>https://torch.mlverse.org/docs/dev/reference/dataloader.html</loc></url>
