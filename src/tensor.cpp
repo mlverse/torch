@@ -95,9 +95,16 @@ torch::Tensor create_tensor_from_atomic(SEXP x, torch::Dtype cdtype) {
                            : std::vector<int64_t>(1, LENGTH(x));
   auto strides = stride_from_dim(dim);
 
-  torch::Tensor tensor =
-      lantern_from_blob(DATAPTR(x), &dim[0], dim.size(), &strides[0],
-                        strides.size(), options.get());
+  torch::Tensor tensor = [&]() {
+    if (TYPEOF(x) == NILSXP) {
+      return lantern_from_blob(nullptr, &dim[0], dim.size(), &strides[0],
+      strides.size(), options.get());  
+    }
+
+    return lantern_from_blob(DATAPTR(x), &dim[0], dim.size(), &strides[0],
+    strides.size(), options.get());
+  }();
+      
   if (dim.size() == 1) {
     // if we have a 1-dim vector contigous doesn't trigger a copy, and
     // would be unexpected.
