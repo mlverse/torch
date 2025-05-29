@@ -134,6 +134,6 @@ test_that("nn_aum_loss, 1-dim target", {
   expect_tensor(output)
   expect_equal_to_r(output >= 0, TRUE) 
   expect_false(rlang::is_null(output$grad_fn))
-  expect_equal(output$dim(), 0)
+  expect_length(output$shape, 0)
   
 })

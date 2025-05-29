@@ -438,7 +438,7 @@ nnf_binary_cross_entropy_with_logits <- function(input, target, weight = NULL,
 #' level of the binary outcome, i.e. with values `1L` and `2L`.
 #' 
 #' @export
-nnf_area_under_min_fpr_fnr <- function(input, target, roc_aum){
+nnf_area_under_min_fpr_fnr <- function(input, target){
   # thanks to https://tdhock.github.io/blog/2024/auto-grad-overhead/
   is_positive <- target == target$max()
   is_negative <- is_positive$bitwise_not()
@@ -466,18 +466,7 @@ nnf_area_under_min_fpr_fnr <- function(input, target, roc_aum){
   uniq_thresh_gr <- sorted_thresh_gr[sorted_fp_end]
   uniq_fp_after <- sorted_fp_cum[sorted_fp_end]
   uniq_fn_before <- sorted_fn_cum[sorted_fn_end]
-  if (input$ndim == 1) {
-    FPR <- torch_cat(c(padding$logical_not(), uniq_fp_after)) # FPR with trailing 0
-    FNR <-  torch_cat(c(uniq_fn_before, padding$logical_not())) # FNR with leading 0
-    roc_aum <- list(
-      FPR = FPR,
-      FNR = FNR,
-      TPR = 1 - FNR,
-      "min(FPR,FNR)" = torch_minimum(FNR, FPR), # full-range min(FNR, FPR)
-      constant_range_low = torch_cat(c(torch_tensor(-Inf), uniq_thresh_gr)),
-      constant_range_high = torch_cat(c(uniq_thresh_gr, torch_tensor(Inf)))
-    ) %>% lapply(as_array) %>% as.data.frame()
-  }
+
   min_FPR_FNR <- torch_minimum(uniq_fp_after[1:-2], uniq_fn_before[2:N])
   constant_range_gr <- uniq_thresh_gr$diff() # range splits leading to {FPR, FNR } errors (see roc_aum row)
   torch_sum(min_FPR_FNR * constant_range_gr, dim = 1)

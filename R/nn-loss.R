@@ -1357,9 +1357,8 @@ nn_aum_loss <- nn_module(
   inherit = nn_loss,
   initialize = function(){
     super$initialize()
-    self$roc_aum <- data.frame()
   },
-  forward = function(input, target, roc_aum = self$roc_aum) {
-    nnf_area_under_min_fpr_fnr(input, target, roc_aum = self$roc_aum)
+  forward = function(input, target) {
+    nnf_area_under_min_fpr_fnr(input, target)
   }
 )
