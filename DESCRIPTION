@@ -56,7 +56,9 @@ Suggests:
     palmerpenguins,
     mvtnorm,
     numDeriv,
-    katex
+    katex,
+    tabulate,
+    prettyunits
 VignetteBuilder: knitr
 Collate:
     'R7.R'
