@@ -424,3 +424,52 @@ nnf_binary_cross_entropy_with_logits <- function(input, target, weight = NULL,
     reduction_enum(reduction)
   )
 }
+
+#' Area under the \eqn{Min(FPR, FNR)} (AUM) 
+#' 
+#' Function that measures Area under the \eqn{Min(FPR, FNR)} (AUM)  between each
+#' element in the \eqn{input} and \eqn{target}. 
+#' 
+#' This is used for measuring the error of a binary reconstruction within highly unbalanced dataset, 
+#' where the goal is optimizing the ROC curve. 
+#'
+#' @param input Tensor of arbitrary shape
+#' @param target Tensor of the same shape as input. Should be the factor
+#' level of the binary outcome, i.e. with values `1L` and `2L`.
+#' 
+#' @export
+nnf_area_under_min_fpr_fnr <- function(input, target){
+  # thanks to https://tdhock.github.io/blog/2024/auto-grad-overhead/
+  is_positive <- target == target$max()
+  is_negative <- is_positive$bitwise_not()
+  
+  # manage case when prediction error is null (prevent division by 0)
+  if(as.logical(torch_sum(is_positive) == 0) || as.logical(torch_sum(is_negative) == 0)){
+    return(torch_sum(input*0))
+  }
+  
+  # nominal case
+  fn_diff <- -1L * is_positive
+  fp_diff <- is_negative$to(dtype = torch_long())
+  fp_denom <- torch_sum(is_negative) # or 1 for AUM based on count instead of rate
+  fn_denom <- torch_sum(is_positive) # or 1 for AUM based on count instead of rate
+  sorted_pred_ids <- torch_argsort(input, dim = 1, descending = TRUE)$squeeze(-1)
+  
+  sorted_fp_cum <- fp_diff[sorted_pred_ids]$cumsum(dim = 1) / fp_denom
+  sorted_fn_cum <- -fn_diff[sorted_pred_ids]$flip(1)$cumsum(dim = 1)$flip(1) / fn_denom
+  sorted_thresh_gr <- -input[sorted_pred_ids]
+  sorted_dedup <- sorted_thresh_gr$diff(dim = 1) != 0
+  # pad to replace removed last element
+  padding <- sorted_dedup$slice(dim = 1, 0, 1) # torch_tensor 1 w same dtype, same shape, same device 
+  sorted_fp_end <- torch_cat(c(sorted_dedup, padding))
+  sorted_fn_end <- torch_cat(c(padding, sorted_dedup))
+  uniq_thresh_gr <- sorted_thresh_gr[sorted_fp_end]
+  uniq_fp_after <- sorted_fp_cum[sorted_fp_end]
+  uniq_fn_before <- sorted_fn_cum[sorted_fn_end]
+
+  min_FPR_FNR <- torch_minimum(uniq_fp_after[1:-2], uniq_fn_before[2:N])
+  constant_range_gr <- uniq_thresh_gr$diff() # range splits leading to {FPR, FNR } errors (see roc_aum row)
+  torch_sum(min_FPR_FNR * constant_range_gr, dim = 1)
+  
+}
+

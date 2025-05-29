@@ -117,3 +117,23 @@ test_that("nn_l1_loss", {
     torch_mean(torch_abs(x -y))  
   )
 })
+
+test_that("nn_aum_loss, 1-dim target", {
+  
+  aum_loss <- nn_aum_loss()
+  
+  # the poor-guy expect_r6_class(x, class)
+  expect_true(all(c("nn_loss","nn_module") %in% class(aum_loss)))
+  
+  # 1-dim label
+  input <- torch_randn(100, requires_grad = TRUE)
+  target <- torch_randint(1, 3, 100, dtype = torch_long())
+  output <- aum_loss(input, target)
+  output$backward()
+  
+  expect_tensor(output)
+  expect_equal_to_r(output >= 0, TRUE) 
+  expect_false(rlang::is_null(output$grad_fn))
+  expect_length(output$shape, 0)
+  
+})
