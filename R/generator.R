@@ -148,7 +148,7 @@ cuda_set_rng_state <- function(state, device = NULL) {
   }
   
   if (length(state) != cuda_device_count()) {
-    cli::cli_abort("Expected length {.var state} ({.val {length(state)}}) equal to the number of cuda devices ({.val {cuda_device_count()}}).")
+    cli_abort("Expected length {.var state} ({.val {length(state)}}) equal to the number of cuda devices ({.val {cuda_device_count()}}).")
   }
   
   for (i in seq_along(state)) {

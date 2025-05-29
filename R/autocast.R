@@ -60,7 +60,7 @@ set_autocast <- function(device_type, dtype = NULL, enabled = TRUE, cache_enable
   } else if (device == "cuda") {
     cpp_amp_autocast_get_gpu_dtype()
   } else {
-    cli::cli_abort("Unsupported device {.val {device}}.")
+    cli_abort("Unsupported device {.val {device}}.")
   }
   
   cache_enabled <- if (!is.null(cache_enabled)) {
@@ -84,7 +84,7 @@ set_autocast <- function(device_type, dtype = NULL, enabled = TRUE, cache_enable
     cpp_amp_autocast_set_gpu_dtype(fast_dtype)
     cpp_amp_autocast_increment_nesting()
   } else {
-    cli::cli_abort("Unsupported device {.val {device}}.")
+    cli_abort("Unsupported device {.val {device}}.")
   }
   
   prev_cache_enabled <- cpp_amp_autocast_is_cache_enabled()
@@ -150,10 +150,10 @@ amp_GradScaler <- R6::R6Class(
       if (self$.enabled) {
         
         if (growth_factor <= 1) 
-          cli::cli_abort("{.var growth_factor} should be > 1 but got {.val {growth_factor}}.")
+          cli_abort("{.var growth_factor} should be > 1 but got {.val {growth_factor}}.")
         
         if (backoff_factor >= 1)
-          cli::cli_abort("{.var backoff_factor} should be < 1 but got {.val {backoff_factor}}.")
+          cli_abort("{.var backoff_factor} should be < 1 but got {.val {backoff_factor}}.")
         
         self$.init_scale <- init_scale
         self$.scale <- NULL
@@ -172,7 +172,7 @@ amp_GradScaler <- R6::R6Class(
       # Short-circuit for the common case.
       if (inherits(outputs, "torch_tensor")) {
         if (!outputs$is_cuda)
-          cli::cli_abort("{.var outputs} device must be {.val cuda}, got {.val {outputs$device$type}}.")
+          cli_abort("{.var outputs} device must be {.val cuda}, got {.val {outputs$device$type}}.")
         
         if (is.null(self$.scale)) {
           self$.lazy_init_scale_growth_tracker(outputs$device)
@@ -185,7 +185,7 @@ amp_GradScaler <- R6::R6Class(
       if (is.list(outputs))
         lapply(outputs, self$.scale)
       else
-        cli::cli_abort("{.var outputs} must be a tensor or a list of tensors, got {.cls {class(outputs)}}.")
+        cli_abort("{.var outputs} must be a tensor or a list of tensors, got {.cls {class(outputs)}}.")
     },
     unscale_ = function(optimizer) {
       if (!self$.enabled) return(invisible(NULL))
@@ -194,9 +194,9 @@ amp_GradScaler <- R6::R6Class(
       optimizer_state <- self$.get_optimizer_state(optimizer)
       
       if (optimizer_state[["stage"]] == "unscaled") {
-        cli::cli_abort("{.fn unscale_} has already been called on this optimizer since the last {.fn update}.")
+        cli_abort("{.fn unscale_} has already been called on this optimizer since the last {.fn update}.")
       } else if (optimizer_state[["stage"]] == "stepped") {
-        cli::cli_abort("{.fn unscale_} is being called after {.fn step}.")
+        cli_abort("{.fn unscale_} is being called after {.fn step}.")
       }
       
       # FP32 division can be imprecise for certain compile options, so we carry out the reciprocal in FP64.
@@ -213,7 +213,7 @@ amp_GradScaler <- R6::R6Class(
       optimizer_state <- self$.get_optimizer_state(optimizer)
       
       if (optimizer_state$stage == "stepped") {
-        cli::cli_abort("{.fn step} has already been called since the last {.fn update}.")
+        cli_abort("{.fn step} has already been called since the last {.fn update}.")
       }
 
       if (optimizer_state$stage == "ready") {
@@ -251,7 +251,7 @@ amp_GradScaler <- R6::R6Class(
     },
     .lazy_init_scale_growth_tracker = function(dev) {
       if (!is.null(self$.growth_tracker))
-        cli::cli_abort("{.var .growth_tracker} initialized before {.var .scale}")
+        cli_abort("{.var .growth_tracker} initialized before {.var .scale}")
       
       self$.scale <- torch_full(size = list(), self$.init_scale, dtype = torch_float32(), device = dev)
       self$.growth_tracker <- torch_full(size = list(), self$.init_growth_tracker, dtype = torch_int32(), device = dev)
@@ -259,13 +259,13 @@ amp_GradScaler <- R6::R6Class(
     .check_scale_growth_tracker = function(funcname) {
       fix = "This may indicate your script did not use scaler.scale(loss or outputs) earlier in the iteration."
       if (is.null(self$.scale)) {
-        cli::cli_abort(c(
+        cli_abort(c(
           "Attempted {.fn {funcname}} but {.var .scale} is {.val NULL}.",
           fix
         ))
       }
       if (is.null(self$.growth_tracker)) {
-        cli::cli_abort(c(
+        cli_abort(c(
           "Attempted {.fn {funcname}} but {.var .growth_tracker} is {.val NULL}.",
           fix
         ))

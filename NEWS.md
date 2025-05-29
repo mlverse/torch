@@ -1,5 +1,8 @@
 # torch (development version)
 
+- Add translation of install messages in French (@cregouby #1317)
+- fix installation checks for r2u users ((@cregouby #1317)
+
 # torch 0.14.2
 
 - Fixed a regression causing torch to crash on Windows if used within RStudio.

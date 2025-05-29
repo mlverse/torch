@@ -29,11 +29,11 @@ nn_Module <- R6::R6Class(
       }
 
       if (!inherits(module, "nn_module")) {
-        cli::cli_abort("Expected {.cls nn_module} but got object of type {.cls {class(module)}}")
+        cli_abort("Expected {.cls nn_module} but got object of type {.cls {class(module)}}")
       }
 
       if (inherits(module, "nn_module_generator")) {
-        cli::cli_abort("Module {.str {name}} must be initialized")
+        cli_abort("Module {.str {name}} must be initialized")
       }
 
       private$modules_[[name]] <- module
@@ -843,13 +843,13 @@ nn_module_list <- nn_module(
 #' @export
 nn_module_dict <- nn_module(
   initialize = function(dict) {
-    if (!rlang::is_named(dict)) cli::cli_abort("All elements in {.arg dict} must be named.")
+    if (!rlang::is_named(dict)) cli_abort("All elements in {.arg dict} must be named.")
     for(nm in names(dict)) {
       self[[nm]] <- dict[[nm]]
     }
   },
   forward = function(...) {
-    cli::cli_abort("{.fn nn_module_dict} has {.fn forward} implementation.")
+    cli_abort("{.fn nn_module_dict} has {.fn forward} implementation.")
   }
 )
 
