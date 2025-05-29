@@ -6,7 +6,7 @@ test_that("file installation ", {
 test_that("installer provides an explicit message when target folder has read-only access", {
   skip_if_not(is_linux())
   withr::with_envvar(new = c("TORCH_INSTALL_DEBUG" = TRUE, "TORCH_HOME" = "/usr/bin"),  
-    expect_message(
+    expect_error(
       torch:::inst_path(),
       regexp = "cannot write into configured",
       fixed = TRUE

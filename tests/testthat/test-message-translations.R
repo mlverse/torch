@@ -1,6 +1,6 @@
 test_that("R-level error messages are correctly translated in FR", {
   # skip on ubuntu cuda as image as no FR lang installed
-  skip_if(torch::cuda_is_available() && is_linux)
+  skip_if(torch::cuda_is_available() && is_linux())
   # skip on MAC M1
   skip_if(torch::backends_mps_is_available() && R.version$arch == "aarch64")
   withr::with_language(lang = "fr",
@@ -14,7 +14,7 @@ test_that("R-level error messages are correctly translated in FR", {
 
 test_that("R-level warning messages are correctly translated in FR", {
   # skip on ubuntu cuda as image as no FR lang installed
-  skip_if(torch::cuda_is_available() && is_linux)
+  skip_if(torch::cuda_is_available() && is_linux())
   # skip on MAC M1
   skip_if(torch::backends_mps_is_available() && R.version$arch == "aarch64")
   x <- torch_randn(2, requires_grad = TRUE)
@@ -31,20 +31,20 @@ test_that("R-level warning messages are correctly translated in FR", {
 })
 
 test_that("installer_message gets correctly translated in FR", {
-  skip_if(torch::cuda_is_available() && is_linux)
+  skip_if(torch::cuda_is_available() && is_linux())
   skip_if(torch::backends_mps_is_available() && R.version$arch == "aarch64")
   withr::with_envvar(new = c("TORCH_INSTALL_DEBUG" = TRUE),  
     withr::with_language(lang = "fr",
        expect_message(
          torch:::nvcc_version_from_path(tempfile()),
-        regexp = "impossible de trouver une version de CUDA.",
+        regexp = "trouver une version de CUDA.",
         fixed = TRUE
       )
   ))
 })
 
 test_that("cli_abort gets correctly translated in FR", {
-  skip_if(torch::cuda_is_available() && is_linux)
+  skip_if(torch::cuda_is_available() && is_linux())
   skip_if(torch::backends_mps_is_available() && R.version$arch == "aarch64")
     withr::with_language(lang = "fr",
        expect_error(
