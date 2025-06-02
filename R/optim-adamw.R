@@ -87,18 +87,18 @@ optim_adamw <- optimizer(
 
 assert_adamw_params <- function(lr, betas, eps, weight_decay, amsgrad) {
   if (lr < 0) {
-    cli::cli_abort("Invalid learning rate: {lr}")
+    cli_abort("Invalid learning rate: {lr}")
   }
   if (eps < 0) {
-    cli::cli_abort("Invalid epsilon value: {eps}")
+    cli_abort("Invalid epsilon value: {eps}")
   }
   if (betas[1] > 1 || betas[1] < 0) {
-    cli::cli_abort("Invalid betas[1] parameter value: {beta[1]}")
+    cli_abort("Invalid betas[1] parameter value: {beta[1]}")
   }
   if (betas[2] > 1 || betas[2] < 0) {
-    cli::cli_abort("Invalid betas[2] parameter value: {beta[2]}")
+    cli_abort("Invalid betas[2] parameter value: {beta[2]}")
   }
   if (weight_decay < 0) {
-    cli::cli_abort("Invalid weight_decay value: {weight_decay}")
+    cli_abort("Invalid weight_decay value: {weight_decay}")
   }
 }
