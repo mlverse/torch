@@ -176,7 +176,7 @@ torch_save.BaseDatasetFetcher <- function(obj, path, ..., compress = TRUE) {
 
 torch_save_to_file_with_state_dict <- function(obj, path) {
   if (use_ser_version() <= 2)
-    cli::cli_abort("Serializing objects with class {.cls {class(obj)}} is only supported with serialization version >= 3, got {.val {use_ser_version()}}")
+    cli_abort("Serializing objects with class {.cls {class(obj)}} is only supported with serialization version >= 3, got {.val {use_ser_version()}}")
 
   torch_save_to_file(
     "state_dict",
@@ -253,7 +253,7 @@ torch_load <- function(path, device = "cpu") {
   }
 
   if (is.null(device)) {
-    cli::cli_abort("Unexpected device {.val NULL}")
+    cli_abort("Unexpected device {.val NULL}")
   }
 
   con <- create_read_con(path)
@@ -485,7 +485,7 @@ create_write_con <- function(path) {
   con <- if (is.character(path)) {
     file(path, open = "wb")
   } else {
-    cli::cli_abort("{.arg path} must be a connection or an actual path, got {.cls {class(path)}}.")
+    cli_abort("{.arg path} must be a connection or an actual path, got {.cls {class(path)}}.")
   }
 
   withr::defer_parent({close(con)})
@@ -501,7 +501,7 @@ create_read_con <- function(path) {
   } else if (is.character(path)) {
     file(path, open = "rb")
   } else {
-    cli::cli_abort("{.arg path} must be a connection, a raw vector or an actual path, got {.cls {class(path)}}.")
+    cli_abort("{.arg path} must be a connection, a raw vector or an actual path, got {.cls {class(path)}}.")
   }
 
   withr::defer_parent({close(con)})
