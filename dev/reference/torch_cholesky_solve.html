@@ -134,71 +134,11 @@ batched outputs <code>c</code></p>
 <span class="r-in"><span><span class="fu">torch_cholesky_solve</span><span class="op">(</span><span class="va">b</span>, <span class="va">u</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="torch_mm.html">torch_mm</a></span><span class="op">(</span><span class="va">a</span><span class="op">$</span><span class="fu">inverse</span><span class="op">(</span><span class="op">)</span>, <span class="va">b</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">}</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in (function (self, upper) {    .Call(`_torch_cpp_torch_namespace_cholesky_self_Tensor`,         self, upper)})(self = &lt;pointer: 0x600001faf3a0&gt;, upper = FALSE):</span> cholesky: The factorization could not be completed because the input is not positive-definite (the leading minor of order 3 is not positive-definite).</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> Exception raised from _linalg_check_errors at /Users/runner/work/libtorch-mac-m1/libtorch-mac-m1/pytorch/aten/src/ATen/native/BatchLinearAlgebra.cpp:1551 (most recent call first):</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> frame #0: std::__1::shared_ptr&lt;c10::(anonymous namespace)::PyTorchStyleBacktrace&gt; std::__1::make_shared[abi:ue170006]&lt;c10::(anonymous namespace)::PyTorchStyleBacktrace, c10::SourceLocation&amp;, void&gt;(c10::SourceLocation&amp;) + 121 (0x104d1d639 in libc10.dylib)</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> frame #1: c10::Error::Error(c10::SourceLocation, std::__1::basic_string&lt;char, std::__1::char_traits&lt;char&gt;, std::__1::allocator&lt;char&gt;&gt;) + 54 (0x104d1d4f6 in libc10.dylib)</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> frame #2: at::native::_linalg_check_errors(at::Tensor const&amp;, c10::basic_string_view&lt;char&gt;, bool) + 1924 (0x1171497c4 in libtorch_cpu.dylib)</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> frame #3: at::_ops::_linalg_check_errors::call(at::Tensor const&amp;, c10::basic_string_view&lt;char&gt;, bool) + 306 (0x117f393d2 in libtorch_cpu.dylib)</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> frame #4: at::native::cholesky(at::Tensor const&amp;, bool) + 733 (0x11714c84d in libtorch_cpu.dylib)</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> frame #5: c10::impl::wrap_kernel_functor_unboxed_&lt;c10::impl::detail::WrapFunctionIntoFunctor_&lt;c10::CompileTimeFunctionPointer&lt;at::Tensor (at::Tensor const&amp;, bool), &amp;at::(anonymous namespace)::(anonymous namespace)::wrapper_CPU__cholesky(at::Tensor const&amp;, bool)&gt;, at::Tensor, c10::guts::typelist::typelist&lt;at::Tensor const&amp;, bool&gt;&gt;, at::Tensor (at::Tensor const&amp;, bool)&gt;::call(c10::OperatorKernel*, c10::DispatchKeySet, at::Tensor const&amp;, bool) + 20 (0x118255474 in libtorch_cpu.dylib)</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> frame #6: at::_ops::cholesky::redispatch(c10::DispatchKeySet, at::Tensor const&amp;, bool) + 95 (0x117a6a8cf in libtorch_cpu.dylib)</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> frame #7: c10::impl::wrap_kernel_functor_unboxed_&lt;c10::impl::detail::WrapFunctionIntoFunctor_&lt;c10::CompileTimeFunctionPointer&lt;at::Tensor (c10::DispatchKeySet, at::Tensor const&amp;, bool), &amp;torch::autograd::VariableType::(anonymous namespace)::cholesky(c10::DispatchKeySet, at::Tensor const&amp;, bool)&gt;, at::Tensor, c10::guts::typelist::typelist&lt;c10::DispatchKeySet, at::Tensor const&amp;, bool&gt;&gt;, at::Tensor (c10::DispatchKeySet, at::Tensor const&amp;, bool)&gt;::call(c10::OperatorKernel*, c10::DispatchKeySet, at::Tensor const&amp;, bool) + 762 (0x11a0f281a in libtorch_cpu.dylib)</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> frame #8: at::_ops::cholesky::call(at::Tensor const&amp;, bool) + 286 (0x117a6a63e in libtorch_cpu.dylib)</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> frame #9: at::cholesky(at::Tensor const&amp;, bool) + 47 (0x10840eaef in liblantern.dylib)</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> frame #10: _lantern_cholesky_tensor_bool + 78 (0x10840e46e in liblantern.dylib)</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> frame #11: cpp_torch_namespace_cholesky_self_Tensor(XPtrTorchTensor, XPtrTorchbool) + 56 (0x1069fba38 in torchpkg.so)</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> frame #12: _torch_cpp_torch_namespace_cholesky_self_Tensor + 283 (0x10667fa5b in torchpkg.so)</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> frame #13: R_doDotCall + 837 (0x101ae0b05 in libR.dylib)</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> frame #14: bcEval_loop + 99716 (0x101b40c04 in libR.dylib)</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> frame #15: bcEval + 628 (0x101b1a134 in libR.dylib)</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> frame #16: Rf_eval + 506 (0x101b1987a in libR.dylib)</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> frame #17: R_execClosure + 761 (0x101b1c3b9 in libR.dylib)</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> frame #18: applyClosure_core + 128 (0x101b1b4c0 in libR.dylib)</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> frame #19: Rf_eval + 1189 (0x101b19b25 in libR.dylib)</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> frame #20: do_docall + 599 (0x101aa8857 in libR.dylib)</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> frame #21: bcEval_loop + 34028 (0x101b30b6c in libR.dylib)</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> frame #22: bcEval + 628 (0x101b1a134 in libR.dylib)</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> frame #23: Rf_eval + 506 (0x101b1987a in libR.dylib)</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> frame #24: R_execClosure + 761 (0x101b1c3b9 in libR.dylib)</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> frame #25: applyClosure_core + 128 (0x101b1b4c0 in libR.dylib)</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> frame #26: Rf_eval + 1189 (0x101b19b25 in libR.dylib)</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> frame #27: do_set + 2673 (0x101b20631 in libR.dylib)</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> frame #28: Rf_eval + 990 (0x101b19a5e in libR.dylib)</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> frame #29: do_begin + 429 (0x101b1eced in libR.dylib)</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> frame #30: Rf_eval + 990 (0x101b19a5e in libR.dylib)</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> frame #31: Rf_eval + 990 (0x101b19a5e in libR.dylib)</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> frame #32: do_eval + 1253 (0x101b20da5 in libR.dylib)</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> frame #33: bcEval_loop + 34028 (0x101b30b6c in libR.dylib)</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> frame #34: bcEval + 628 (0x101b1a134 in libR.dylib)</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> frame #35: Rf_eval + 506 (0x101b1987a in libR.dylib)</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> frame #36: forcePromise + 230 (0x101b1a366 in libR.dylib)</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> frame #37: Rf_eval + 634 (0x101b198fa in libR.dylib)</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> frame #38: do_withVisible + 57 (0x101b21139 in libR.dylib)</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> frame #39: do_internal + 362 (0x101b8c0aa in libR.dylib)</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> frame #40: bcEval_loop + 34655 (0x101b30ddf in libR.dylib)</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> frame #41: bcEval + 628 (0x101b1a134 in libR.dylib)</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> frame #42: Rf_eval + 506 (0x101b1987a in libR.dylib)</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> frame #43: forcePromise + 230 (0x101b1a366 in libR.dylib)</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> frame #44: Rf_eval + 634 (0x101b198fa in libR.dylib)</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> frame #45: forcePromise + 230 (0x101b1a366 in libR.dylib)</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> frame #46: getvar + 253 (0x101b431fd in libR.dylib)</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> frame #47: bcEval_loop + 18591 (0x101b2cf1f in libR.dylib)</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> frame #48: bcEval + 628 (0x101b1a134 in libR.dylib)</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> frame #49: Rf_eval + 506 (0x101b1987a in libR.dylib)</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> frame #50: R_execClosure + 761 (0x101b1c3b9 in libR.dylib)</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> frame #51: applyClosure_core + 128 (0x101b1b4c0 in libR.dylib)</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> frame #52: Rf_eval + 1189 (0x101b19b25 in libR.dylib)</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> frame #53: do_eval + 1253 (0x101b20da5 in libR.dylib)</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> frame #54: bcEval_loop + 34028 (0x101b30b6c in libR.dylib)</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> frame #55: bcEval + 628 (0x101b1a134 in libR.dylib)</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> frame #56: Rf_eval + 506 (0x101b1987a in libR.dylib)</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> frame #57: R_execClosure + 761 (0x101b1c3b9 in libR.dylib)</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> frame #58: applyClosure_core + 128 (0x101b1b4c0 in libR.dylib)</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> frame #59: R_forceAndCall + 535 (0x101b1ba17 in libR.dylib)</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> frame #60: call_loop + 311 (0x1018e0877 in purrr.so)</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> frame #61: map_impl + 253 (0x1018e0afd in purrr.so)</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> frame #62: R_doDotCall + 13245 (0x101ae3b7d in libR.dylib)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> torch_tensor</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  4.1967  2.5782</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> -14.0787 -10.8413</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  0.7937  0.0255</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [ CPUFloatType{3,2} ]</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
