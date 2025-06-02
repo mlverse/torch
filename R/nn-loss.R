@@ -1331,3 +1331,34 @@ nn_ctc_loss <- nn_module(
     )
   }
 )
+
+#' AUM loss
+#'
+#' Creates a criterion that measures the Area under the \eqn{Min(FPR, FNR)} (AUM) between each
+#' element in the input \eqn{pred_tensor} and target \eqn{label_tensor}. 
+#' 
+#' This is used for measuring the error of a binary reconstruction within highly unbalanced dataset, 
+#' where the goal is optimizing the ROC curve. Note that the targets \eqn{label_tensor} should be factor
+#' level of the binary outcome, i.e. with values `1L` and `2L`.
+#' @references
+#' J. Hillman, T.D. Hocking: Optimizing ROC Curves with a Sort-Based 
+#' Surrogate Loss for Binary Classification and Changepoint Detection
+#' https://jmlr.org/papers/volume24/21-0751/21-0751.pdf
+#'
+#' @examplesIf torch_is_installed()
+#' loss <- nn_aum_loss()
+#' input <- torch_randn(4, 6, requires_grad = TRUE)
+#' target <- input > 1.5
+#' output <- loss(input, target)
+#' output$backward()
+#' @export
+nn_aum_loss <- nn_module(
+  "nn_aum_loss",
+  inherit = nn_loss,
+  initialize = function(){
+    super$initialize()
+  },
+  forward = function(input, target) {
+    nnf_area_under_min_fpr_fnr(input, target)
+  }
+)
