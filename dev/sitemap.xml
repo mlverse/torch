@@ -141,6 +141,7 @@
 <url><loc>https://torch.mlverse.org/docs/dev/reference/nn_adaptive_max_pool1d.html</loc></url>
 <url><loc>https://torch.mlverse.org/docs/dev/reference/nn_adaptive_max_pool2d.html</loc></url>
 <url><loc>https://torch.mlverse.org/docs/dev/reference/nn_adaptive_max_pool3d.html</loc></url>
+<url><loc>https://torch.mlverse.org/docs/dev/reference/nn_aum_loss.html</loc></url>
 <url><loc>https://torch.mlverse.org/docs/dev/reference/nn_avg_pool1d.html</loc></url>
 <url><loc>https://torch.mlverse.org/docs/dev/reference/nn_avg_pool2d.html</loc></url>
 <url><loc>https://torch.mlverse.org/docs/dev/reference/nn_avg_pool3d.html</loc></url>
@@ -265,6 +266,7 @@
 <url><loc>https://torch.mlverse.org/docs/dev/reference/nnf_adaptive_max_pool3d.html</loc></url>
 <url><loc>https://torch.mlverse.org/docs/dev/reference/nnf_affine_grid.html</loc></url>
 <url><loc>https://torch.mlverse.org/docs/dev/reference/nnf_alpha_dropout.html</loc></url>
+<url><loc>https://torch.mlverse.org/docs/dev/reference/nnf_area_under_min_fpr_fnr.html</loc></url>
 <url><loc>https://torch.mlverse.org/docs/dev/reference/nnf_avg_pool1d.html</loc></url>
 <url><loc>https://torch.mlverse.org/docs/dev/reference/nnf_avg_pool2d.html</loc></url>
 <url><loc>https://torch.mlverse.org/docs/dev/reference/nnf_avg_pool3d.html</loc></url>
