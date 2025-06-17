@@ -247,6 +247,8 @@
 <url><loc>https://torch.mlverse.org/docs/dev/reference/nn_tanh.html</loc></url>
 <url><loc>https://torch.mlverse.org/docs/dev/reference/nn_tanhshrink.html</loc></url>
 <url><loc>https://torch.mlverse.org/docs/dev/reference/nn_threshold.html</loc></url>
+<url><loc>https://torch.mlverse.org/docs/dev/reference/nn_transformer_encoder.html</loc></url>
+<url><loc>https://torch.mlverse.org/docs/dev/reference/nn_transformer_encoder_layer.html</loc></url>
 <url><loc>https://torch.mlverse.org/docs/dev/reference/nn_triplet_margin_loss.html</loc></url>
 <url><loc>https://torch.mlverse.org/docs/dev/reference/nn_triplet_margin_with_distance_loss.html</loc></url>
 <url><loc>https://torch.mlverse.org/docs/dev/reference/nn_unflatten.html</loc></url>
