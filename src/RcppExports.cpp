@@ -910,6 +910,16 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// cpp_torch_bfloat16
+Rcpp::XPtr<XPtrTorchDtype> cpp_torch_bfloat16();
+RcppExport SEXP _torch_cpp_torch_bfloat16() {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_bfloat16());
+    return rcpp_result_gen;
+END_RCPP
+}
 // cpp_torch_uint8
 Rcpp::XPtr<XPtrTorchDtype> cpp_torch_uint8();
 RcppExport SEXP _torch_cpp_torch_uint8() {
@@ -48231,6 +48241,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_torch_cpp_torch_float32", (DL_FUNC) &_torch_cpp_torch_float32, 0},
     {"_torch_cpp_torch_float64", (DL_FUNC) &_torch_cpp_torch_float64, 0},
     {"_torch_cpp_torch_float16", (DL_FUNC) &_torch_cpp_torch_float16, 0},
+    {"_torch_cpp_torch_bfloat16", (DL_FUNC) &_torch_cpp_torch_bfloat16, 0},
     {"_torch_cpp_torch_uint8", (DL_FUNC) &_torch_cpp_torch_uint8, 0},
     {"_torch_cpp_torch_int8", (DL_FUNC) &_torch_cpp_torch_int8, 0},
     {"_torch_cpp_torch_int16", (DL_FUNC) &_torch_cpp_torch_int16, 0},

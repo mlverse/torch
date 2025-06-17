@@ -7,6 +7,7 @@ test_that("Can create dtypes", {
   expect_s3_class(torch_double(), "torch_dtype")
   expect_s3_class(torch_float16(), "torch_dtype")
   expect_s3_class(torch_half(), "torch_dtype")
+  expect_s3_class(torch_bfloat16(), "torch_dtype")
   expect_s3_class(torch_uint8(), "torch_dtype")
   expect_s3_class(torch_int8(), "torch_dtype")
   expect_s3_class(torch_int16(), "torch_dtype")
@@ -47,6 +48,7 @@ test_that("can set select devices using strings", {
     "double" = torch_double(),
     "float16" = torch_float16(),
     "half" = torch_half(),
+    "bfloat16" = torch_bfloat16(),
     "uint8" = torch_uint8(),
     "int8" = torch_int8(),
     "int16" = torch_int16(),
