@@ -1,5 +1,18 @@
-library(torch)
-# Unit tests for nn_transformer_encoder_layer and nn_transformer_encoder
+test_that("Results are equal to Pytorch", {
+  with_torch_manual_seed(seed = 123, {
+    layer <- nn_transformer_encoder_layer(d_model = 8, nhead = 2, dim_feedforward = 16)
+    input <- torch_randn(5, 3, 8)  # (seq_len=5, batch=3, features=8)
+    output <- layer(input)  
+  })
+
+  expected <- rbind(
+    c(2.0008, -0.7164,  1.0093,  0.3160, -0.6471, -0.0106, -0.8325, -1.1195),
+    c(1.0405, -0.3428,  1.3047,  0.5384, -1.5694, -0.7368, -1.0591,  0.8246),
+    c(0.0510,  0.4845,  0.2344,  0.6781, -1.2878, -0.0163,  1.5982, -1.7421)
+  )
+
+  expect_equal_to_r(output[1,,], expected, tolerance = 1e-4)
+})
 
 test_that("TransformerEncoderLayer produces output of correct shape", {
   layer <- nn_transformer_encoder_layer(d_model = 8, nhead = 2, dim_feedforward = 16)
@@ -65,6 +78,22 @@ test_that("TransformerEncoder (stack of layers) produces correct output and uses
     manual_out <- model$norm(manual_out)
   }
   expect_equal(out_model, manual_out)
+})
+
+test_that("TransformerEncoder results are identical tom python", {
+  with_torch_manual_seed(seed = 123, {
+    base_layer <- nn_transformer_encoder_layer(d_model = 8, nhead = 2, dim_feedforward = 16)
+    model <- nn_transformer_encoder(base_layer, num_layers = 3)
+    x <- torch_randn(4, 2, 8)
+    out_model <- model(x)
+  })
+
+  expected <- rbind(
+    c(2.2889, -0.3724,  0.1357,  0.3804, -0.5985,  0.1374, -1.2492, -0.7224),
+    c(1.9246, -0.1313,  0.9192,  0.2264, -1.1253, -0.1943, -1.4291, -0.1902)
+  )
+
+  expect_equal_to_r(out_model[1,,], expected, tolerance = 1e-4)
 })
 
 test_that("TransformerEncoder supports different norm and preserves results", {
