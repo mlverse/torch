@@ -56,9 +56,9 @@ If \code{is_causal=TRUE}, a causal mask will be applied (equivalent to a lower-t
 \examples{
 if (torch_is_installed()) {
 if (torch_is_installed()) {
-  layer <- nn_transformer_encoder_layer(d_model=16, nhead=4)
-  x <- torch_randn(10, 2, 16)  # (sequence, batch, features)
-  y <- layer(x)  # output has shape (10, 2, 16)
+  layer <- nn_transformer_encoder_layer(d_model = 16, nhead = 4)
+  x <- torch_randn(10, 2, 16) # (sequence, batch, features)
+  y <- layer(x) # output has shape (10, 2, 16)
 }
 }
 }

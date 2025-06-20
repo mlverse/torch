@@ -27,10 +27,10 @@ The forward pass sequentially applies each encoder layer to the input.
 \examples{
 if (torch_is_installed()) {
 if (torch_is_installed()) {
-  layer <- nn_transformer_encoder_layer(d_model=32, nhead=4, batch_first=TRUE)
-  model <- nn_transformer_encoder(layer, num_layers=2)
-  x <- torch_randn(8, 5, 32)  # (batch, seq, feature) since batch_first=TRUE
-  y <- model(x)  # output shape is (8, 5, 32)
+  layer <- nn_transformer_encoder_layer(d_model = 32, nhead = 4, batch_first = TRUE)
+  model <- nn_transformer_encoder(layer, num_layers = 2)
+  x <- torch_randn(8, 5, 32) # (batch, seq, feature) since batch_first=TRUE
+  y <- model(x) # output shape is (8, 5, 32)
 }
 }
 }

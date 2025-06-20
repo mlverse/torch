@@ -4,7 +4,7 @@
 \alias{nnf_area_under_min_fpr_fnr}
 \title{Area under the \eqn{Min(FPR, FNR)} (AUM)}
 \usage{
-nnf_area_under_min_fpr_fnr(input, target, roc_aum)
+nnf_area_under_min_fpr_fnr(input, target)
 }
 \arguments{
 \item{input}{Tensor of arbitrary shape}
