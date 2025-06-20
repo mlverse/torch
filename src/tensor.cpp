@@ -48,10 +48,28 @@ void cpp_torch_tensor_print(torch::Tensor x, int n) {
   Rcpp::Rcout << result;
 };
 
+void* r_dataptr(SEXP x)
+{
+  void* p;
+  switch(TYPEOF(x))
+  {
+    case CHARSXP:   p = (void*) CHAR(x); break;
+    case LGLSXP:    p = (void*) LOGICAL(x); break;
+    case INTSXP:    p = (void*) INTEGER(x); break;
+    case REALSXP:   p = (void*) REAL(x); break;
+    case CPLXSXP:   p = (void*) COMPLEX(x); break; 
+    case RAWSXP:    p = (void*) RAW(x); break;
+    case EXTPTRSXP: return (char*) R_ExternalPtrAddr(x); break;
+    default: Rcpp::stop("invalid object type"); break;
+  }
+  if (p == NULL) Rcpp::stop("NULL address pointer");
+  return p; 
+}
+
 // [[Rcpp::export]]
 torch::Tensor cpp_tensor_from_buffer(const SEXP& data, std::vector<int64_t> shape, XPtrTorchTensorOptions options) {
   return lantern_from_blob(
-    DATAPTR(data), 
+    r_dataptr(data), 
     &shape[0], 
     shape.size(), 
     // we use the default strides
@@ -65,7 +83,7 @@ torch::Tensor cpp_tensor_from_buffer(const SEXP& data, std::vector<int64_t> shap
 SEXP cpp_buffer_from_tensor (torch::Tensor data) {
   auto n = lantern_Tensor_numel(data.get()) * lantern_Tensor_element_size(data.get());
   SEXP buffer = PROTECT(Rf_allocVector(RAWSXP, n = n));
-  lantern_buffer_from_tensor(data.get(), DATAPTR(buffer), n);
+  lantern_buffer_from_tensor(data.get(), r_dataptr(buffer), n);
   UNPROTECT(1);
   return buffer;
 }
@@ -101,7 +119,7 @@ torch::Tensor create_tensor_from_atomic(SEXP x, torch::Dtype cdtype) {
       strides.size(), options.get());  
     }
 
-    return lantern_from_blob(DATAPTR(x), &dim[0], dim.size(), &strides[0],
+    return lantern_from_blob(r_dataptr(x), &dim[0], dim.size(), &strides[0],
     strides.size(), options.get());
   }();
       
