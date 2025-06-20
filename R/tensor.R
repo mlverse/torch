@@ -387,8 +387,9 @@ as_array <- function(x) {
 }
 
 # Makes `as_array()` behave like `as.array()`.
+#' @export
 as_array.default <- function(x) {
-  base::as.array.default(x)
+  base::as.array(x)
 }  
 
 #' @export
