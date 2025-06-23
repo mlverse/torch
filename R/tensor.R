@@ -79,7 +79,7 @@ Tensor <- R7Class(
       if (has_other) {
         # can't have device and dtype
         if (has_device || has_dtype) {
-          cli::cli_abort("Had {.arg other} but {.arg device} or {.arg dtype} are non {.val NULL}")
+          cli_abort("Had {.arg other} but {.arg device} or {.arg dtype} are non {.val NULL}")
         }
 
         return(private$`_to`(other = other, non_blocking = non_blocking, copy = copy))
@@ -385,6 +385,12 @@ torch_tensor <- function(data, dtype = NULL, device = NULL, requires_grad = FALS
 as_array <- function(x) {
   UseMethod("as_array", x)
 }
+
+# Makes `as_array()` behave like `as.array()`.
+#' @export
+as_array.default <- function(x) {
+  base::as.array(x)
+}  
 
 #' @export
 as.array.torch_tensor <- function(x, ...) {

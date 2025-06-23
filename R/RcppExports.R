@@ -269,6 +269,14 @@ cpp_cuda_empty_cache <- function() {
     invisible(.Call(`_torch_cpp_cuda_empty_cache`))
 }
 
+cpp_cuda_record_memory_history <- function(enabled, context, stacks, max_entries) {
+    invisible(.Call(`_torch_cpp_cuda_record_memory_history`, enabled, context, stacks, max_entries))
+}
+
+cpp_cuda_memory_snapshot <- function() {
+    .Call(`_torch_cpp_cuda_memory_snapshot`)
+}
+
 cpp_device_type_to_string <- function(device) {
     .Call(`_torch_cpp_device_type_to_string`, device)
 }
@@ -319,6 +327,10 @@ cpp_torch_float64 <- function() {
 
 cpp_torch_float16 <- function() {
     .Call(`_torch_cpp_torch_float16`)
+}
+
+cpp_torch_bfloat16 <- function() {
+    .Call(`_torch_cpp_torch_bfloat16`)
 }
 
 cpp_torch_uint8 <- function() {

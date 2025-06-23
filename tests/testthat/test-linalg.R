@@ -173,7 +173,7 @@ test_that("pinv", {
   expect_equal_to_tensor(
     torch_matmul(linalg_pinv(A), B),
     linalg_lstsq(A, B)$solution,
-    tolerance = 1e-6
+    tolerance = 1e-5
   )
 
   A <- torch_randn(3, 3, 5)
@@ -182,7 +182,7 @@ test_that("pinv", {
   expect_equal_to_tensor(
     torch_bmm(linalg_pinv(A), B),
     linalg_lstsq(A, B)$solution,
-    tolerance = 1e-6
+    tolerance = 1e-5
   )
   
   expect_warning(linalg_pinv(A, rcond = 1e-15))

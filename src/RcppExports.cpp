@@ -748,6 +748,29 @@ BEGIN_RCPP
     return R_NilValue;
 END_RCPP
 }
+// cpp_cuda_record_memory_history
+void cpp_cuda_record_memory_history(Rcpp::Nullable<std::string> enabled, Rcpp::Nullable<std::string> context, std::string stacks, size_t max_entries);
+RcppExport SEXP _torch_cpp_cuda_record_memory_history(SEXP enabledSEXP, SEXP contextSEXP, SEXP stacksSEXP, SEXP max_entriesSEXP) {
+BEGIN_RCPP
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< Rcpp::Nullable<std::string> >::type enabled(enabledSEXP);
+    Rcpp::traits::input_parameter< Rcpp::Nullable<std::string> >::type context(contextSEXP);
+    Rcpp::traits::input_parameter< std::string >::type stacks(stacksSEXP);
+    Rcpp::traits::input_parameter< size_t >::type max_entries(max_entriesSEXP);
+    cpp_cuda_record_memory_history(enabled, context, stacks, max_entries);
+    return R_NilValue;
+END_RCPP
+}
+// cpp_cuda_memory_snapshot
+Rcpp::RawVector cpp_cuda_memory_snapshot();
+RcppExport SEXP _torch_cpp_cuda_memory_snapshot() {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    rcpp_result_gen = Rcpp::wrap(cpp_cuda_memory_snapshot());
+    return rcpp_result_gen;
+END_RCPP
+}
 // cpp_device_type_to_string
 std::string cpp_device_type_to_string(Rcpp::XPtr<XPtrTorchDevice> device);
 RcppExport SEXP _torch_cpp_device_type_to_string(SEXP deviceSEXP) {
@@ -884,6 +907,16 @@ BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     rcpp_result_gen = Rcpp::wrap(cpp_torch_float16());
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_torch_bfloat16
+Rcpp::XPtr<XPtrTorchDtype> cpp_torch_bfloat16();
+RcppExport SEXP _torch_cpp_torch_bfloat16() {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    rcpp_result_gen = Rcpp::wrap(cpp_torch_bfloat16());
     return rcpp_result_gen;
 END_RCPP
 }
@@ -48193,6 +48226,8 @@ static const R_CallMethodDef CallEntries[] = {
     {"_torch_cpp_cuda_memory_stats", (DL_FUNC) &_torch_cpp_cuda_memory_stats, 1},
     {"_torch_cpp_cuda_get_runtime_version", (DL_FUNC) &_torch_cpp_cuda_get_runtime_version, 0},
     {"_torch_cpp_cuda_empty_cache", (DL_FUNC) &_torch_cpp_cuda_empty_cache, 0},
+    {"_torch_cpp_cuda_record_memory_history", (DL_FUNC) &_torch_cpp_cuda_record_memory_history, 4},
+    {"_torch_cpp_cuda_memory_snapshot", (DL_FUNC) &_torch_cpp_cuda_memory_snapshot, 0},
     {"_torch_cpp_device_type_to_string", (DL_FUNC) &_torch_cpp_device_type_to_string, 1},
     {"_torch_cpp_device_index_to_int", (DL_FUNC) &_torch_cpp_device_index_to_int, 1},
     {"_torch_cpp_torch_device", (DL_FUNC) &_torch_cpp_torch_device, 2},
@@ -48206,6 +48241,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_torch_cpp_torch_float32", (DL_FUNC) &_torch_cpp_torch_float32, 0},
     {"_torch_cpp_torch_float64", (DL_FUNC) &_torch_cpp_torch_float64, 0},
     {"_torch_cpp_torch_float16", (DL_FUNC) &_torch_cpp_torch_float16, 0},
+    {"_torch_cpp_torch_bfloat16", (DL_FUNC) &_torch_cpp_torch_bfloat16, 0},
     {"_torch_cpp_torch_uint8", (DL_FUNC) &_torch_cpp_torch_uint8, 0},
     {"_torch_cpp_torch_int8", (DL_FUNC) &_torch_cpp_torch_int8, 0},
     {"_torch_cpp_torch_int16", (DL_FUNC) &_torch_cpp_torch_int16, 0},

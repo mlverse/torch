@@ -155,7 +155,7 @@ DataLoader <- R6::R6Class(
       } else if (is_iterable_dataset(dataset)) {
         self$.dataset_kind <- "iterable"
       } else {
-        cli::cli_abort("Unknown dataset type with class {.cls {class(dataset)}}")
+        cli_abort("Unknown dataset type with class {.cls {class(dataset)}}")
       }
 
       if (is.null(sampler)) {
@@ -208,7 +208,7 @@ DataLoader <- R6::R6Class(
         if (self$num_workers == 0) {
           return(SingleProcessDataLoaderIter$new(self))
         }
-        cli::cli_abort("Multi-process dataloader not implemented yet for Iterable datasets.")
+        cli_abort("Multi-process dataloader not implemented yet for Iterable datasets.")
       } else {
         not_implemented_error()
       }
@@ -558,15 +558,15 @@ MultiProcessingDataLoaderIter <- R6::R6Class(
         # TODO
       }
       data
-    },
+    }
+  ),
+  private = list(
+    tasks = list(),
     finalize = function() {
       lapply(private$workers, function(x) {
         x$close_socket_con()
       })
     }
-  ),
-  private = list(
-    tasks = list()
   )
 )
 

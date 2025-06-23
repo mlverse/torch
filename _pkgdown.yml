@@ -2,6 +2,7 @@ url: https://torch.mlverse.org/docs/
 destination: docs
 template:
   bootstrap: 5
+  math-rendering: mathjax
   bslib:
     primary: "#7e1f77"
   params:

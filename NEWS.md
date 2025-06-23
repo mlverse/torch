@@ -1,6 +1,13 @@
+# torch (development version)
+
+- add ROC AUM loss with `nn_aum_loss()` (#1310 @cregouby)
+- Add translation of install messages in French (@cregouby #1317)
+- fix installation checks for r2u users ((@cregouby #1317)
+
 # torch 0.14.2
 
 - Fixed a regression causing torch to crash on Windows if used within RStudio.
+- perf: Significantly reduce overhead when calling into jit-modules. (#1304)
 
 # torch 0.14.1
 
@@ -33,7 +40,7 @@ Bug fixes:
 
 ## Breaking changes
 
-- lantern is now distributed over a different URL (https://torch-cdn.mlverse.org). 
+- lantern is now distributed over a different URL (https://torch-cdn.mlverse.org).
   For most users this shouldn't have any effect, unless you need special authorization
   to access some URL's. (#1162)
 

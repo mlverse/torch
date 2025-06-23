@@ -256,6 +256,8 @@ LANTERN_OPTIONAL_DECLS(string_view)
   HOST_API void * lantern_Dtype_float64() {LANTERN_CHECK_LOADED void * ret = _lantern_Dtype_float64(); LANTERN_HOST_HANDLER return ret;}
   LANTERN_API void *(LANTERN_PTR _lantern_Dtype_float16)();
   HOST_API void * lantern_Dtype_float16() {LANTERN_CHECK_LOADED void * ret = _lantern_Dtype_float16(); LANTERN_HOST_HANDLER return ret;}
+  LANTERN_API void *(LANTERN_PTR _lantern_Dtype_bfloat16)();
+  HOST_API void * lantern_Dtype_bfloat16() {LANTERN_CHECK_LOADED void * ret = _lantern_Dtype_bfloat16(); LANTERN_HOST_HANDLER return ret;}
   LANTERN_API void *(LANTERN_PTR _lantern_Dtype_uint8)();
   HOST_API void * lantern_Dtype_uint8() {LANTERN_CHECK_LOADED void * ret = _lantern_Dtype_uint8(); LANTERN_HOST_HANDLER return ret;}
   LANTERN_API void *(LANTERN_PTR _lantern_Dtype_int8)();
@@ -2450,6 +2452,21 @@ HOST_API void lantern_cuda_empty_cache () {
   LANTERN_CHECK_LOADED
   _lantern_cuda_empty_cache();
   LANTERN_HOST_HANDLER;
+}
+
+LANTERN_API void (LANTERN_PTR _lantern_cuda_record_memory_history) (void* enabled, void* context, void* stacks, size_t max_entries);
+HOST_API void lantern_cuda_record_memory_history (void* enabled, void* context, void* stacks, size_t max_entries) {
+  LANTERN_CHECK_LOADED
+  _lantern_cuda_record_memory_history(enabled, context, stacks, max_entries);
+  LANTERN_HOST_HANDLER;
+}
+
+LANTERN_API void* (LANTERN_PTR _lantern_cuda_memory_snapshot) ();
+HOST_API void* lantern_cuda_memory_snapshot () {
+  LANTERN_CHECK_LOADED
+  void* ret = _lantern_cuda_memory_snapshot();
+  LANTERN_HOST_HANDLER;
+  return ret;
 }
 
 LANTERN_API bool (LANTERN_PTR _lantern_Tensor_is_sparse) (void* x);
@@ -10515,6 +10532,7 @@ bool lanternInit(const std::string &libPath, std::string *pError)
   LOAD_SYMBOL(_lantern_Dtype_float32);
   LOAD_SYMBOL(_lantern_Dtype_float64);
   LOAD_SYMBOL(_lantern_Dtype_float16);
+  LOAD_SYMBOL(_lantern_Dtype_bfloat16);
   LOAD_SYMBOL(_lantern_Dtype_uint8);
   LOAD_SYMBOL(_lantern_Dtype_int8);
   LOAD_SYMBOL(_lantern_Dtype_int16);
@@ -10897,6 +10915,8 @@ LOAD_SYMBOL(_lantern_set_cuda_allocator_thresholds);
 LOAD_SYMBOL(_lantern_cuda_synchronize);
 LOAD_SYMBOL(_lantern_backend_has_mps);
 LOAD_SYMBOL(_lantern_cuda_empty_cache);
+LOAD_SYMBOL(_lantern_cuda_record_memory_history);
+LOAD_SYMBOL(_lantern_cuda_memory_snapshot);
 LOAD_SYMBOL(_lantern_Tensor_is_sparse);
 LOAD_SYMBOL(_lantern_IntArrayRef_get);
 LOAD_SYMBOL(_lantern_autograd_zero_grad);

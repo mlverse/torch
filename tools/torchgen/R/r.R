@@ -237,7 +237,7 @@ r_argument_default <- function(default) {
 
   if (default == "\"reflect\"")
     return("\"reflect\"")
-  
+
   if (default == "::std::nullopt") {
     return("NULL")
   }
@@ -253,8 +253,6 @@ r_argument_default <- function(default) {
   if (default == '"right"') {
     return('"right"')
   }
-
-  browser()
 }
 
 r_argument_name <- function(name) {
