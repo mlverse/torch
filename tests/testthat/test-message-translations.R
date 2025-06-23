@@ -37,7 +37,7 @@ test_that("installer_message gets correctly translated in FR", {
     withr::with_language(lang = "fr",
        expect_message(
          torch:::nvcc_version_from_path(tempfile()),
-        regexp = "trouver une version de CUDA.",
+        regexp = "Tentative de lancer nvcc depuis",
         fixed = TRUE
       )
   ))
