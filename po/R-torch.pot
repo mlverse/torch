@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: torch 0.14.2\n"
-"POT-Creation-Date: 2025-05-24 18:03+0200\n"
+"Project-Id-Version: torch 0.14.2.9000\n"
+"POT-Creation-Date: 2025-06-23 16:08+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -312,7 +312,7 @@ msgstr ""
 msgid "must also define a custom `expand()` method."
 msgstr ""
 
-#: dtype.R:162
+#: dtype.R:165
 msgid "One of the objects is not a dtype. Comparison is not possible."
 msgstr ""
 
@@ -385,22 +385,6 @@ msgstr ""
 msgid "You must restart your session to use {.pkg torch} correctly."
 msgstr ""
 
-#: install.R:84
-msgid "We are now proceeding to download and installing lantern and torch."
-msgstr ""
-
-#: install.R:85
-msgid "The installation path is: {.path {inst_path}}"
-msgstr ""
-
-#: install.R:90
-msgid "An installation of {.strong {libname}} already exists."
-msgstr ""
-
-#: install.R:91
-msgid "Found file at {.path {inst_path}}."
-msgstr ""
-
 #: install.R:147
 msgid "Installation failed."
 msgstr ""
@@ -436,7 +420,9 @@ msgid "and run {.fn install_torch()} again"
 msgstr ""
 
 #: install.R:184
-msgid "Or run R under the root user once to perform the {.fn install_torch()}"
+msgid ""
+"Or run R under the {.emph root} user {.strong once} to perform the {.fn "
+"install_torch()}"
 msgstr ""
 
 #: install.R:185
@@ -461,50 +447,6 @@ msgid ""
 "deps-{torch_version}%2B{kind}.zip"
 msgstr ""
 
-#: install.R:208
-msgid "LibTorch will be downloaded from:"
-msgstr ""
-
-#: install.R:209
-msgid "{.url {url}}"
-msgstr ""
-
-#: install.R:266
-msgid "Could not find the SHA of the commit that installed the package."
-msgstr ""
-
-#: install.R:267
-msgid "Using the latest build for the specified branch: {.val {branch}}."
-msgstr ""
-
-#: install.R:272
-msgid "Could find the SHA of the commit that installed the package."
-msgstr ""
-
-#: install.R:273
-msgid "SHA: {.val {remote_sha}}."
-msgstr ""
-
-#: install.R:286
-msgid "Lantern will be downloaded from the following URL:"
-msgstr ""
-
-#: install.R:287
-msgid "{.url {final_url}}"
-msgstr ""
-
-#: install.R:313
-msgid "{.envvar PRECXX11ABI} value will be ignored. Only supported on Linux."
-msgstr ""
-
-#: install.R:321
-msgid "Installing the CXX11 ABI enabled build."
-msgstr ""
-
-#: install.R:324
-msgid "Installing the pre-CXX11 ABI enabled build."
-msgstr ""
-
 #: install.R:334
 msgid "Architecture {.val {arch}} is not supported in this OS."
 msgstr ""
@@ -513,92 +455,12 @@ msgstr ""
 msgid "Unsupported architecture {.val {arch}}."
 msgstr ""
 
-#: install.R:341
-msgid "Architecture is {.val {arch}}"
-msgstr ""
-
-#: install.R:356
-msgid "No cuda instalation has been found. Using {.val cpu}."
-msgstr ""
-
-#: install.R:359
-msgid "{.envvar CUDA} is set to {.val cpu}, so using the {.val cpu}."
-msgstr ""
-
-#: install.R:363
-msgid "Installation kind will be {.val {cu}}."
-msgstr ""
-
-#: install.R:376
-msgid ""
-"{.envvar CUDA} has been specified. The CUDA version is {.strong {version}}"
-msgstr ""
-
-#: install.R:388
-msgid "Not on Windows or Linux. No CUDA installation supported."
-msgstr ""
-
-#: install.R:398
-msgid "{.envvar CUDA_HOME}={.path {cuda_home}} is specified."
-msgstr ""
-
-#: install.R:400
-msgid ""
-"{.envvar CUDA_HOME} is not specified. Looking in conventional locations."
-msgstr ""
-
-#: install.R:441
-msgid "{.envvar CUDA_PATH}={.path {cuda_path}}."
-msgstr ""
-
-#: install.R:442
-msgid "Trying to find CUDA in this path."
-msgstr ""
-
-#: install.R:446
-msgid "{.envvar CUDA_PATH} is not specified."
-msgstr ""
-
-#: install.R:447
-msgid "Searching for installation in conventional locations."
-msgstr ""
-
-#: install.R:463
-msgid "Trying to use the nvcc version that might be on your path."
-msgstr ""
-
 #: install.R:486
 msgid "Unsupported CUDA version {.val {version}}"
 msgstr ""
 
 #: install.R:487
 msgid "Currently supported versions are: {.val {supported_versions}}."
-msgstr ""
-
-#: install.R:510
-msgid "Found CUDA version {.strong {cuda_version}}."
-msgstr ""
-
-#: install.R:511
-msgid "This version was specified in {.path {versions_file}}"
-msgstr ""
-
-#: install.R:515
-msgid "Could not find a CUDA version in {.path {versions_file}}."
-msgstr ""
-
-#: install.R:528
-msgid ""
-"Tried to query nvcc from {.path {nvcc_path}}, but was unable to find a CUDA "
-"version."
-msgstr ""
-
-#: install.R:535
-msgid "Found CUDA version {.strong {version}}."
-msgstr ""
-
-#: install.R:536
-msgid "It was found by querying nvcc at {.path {nvcc_path}}."
 msgstr ""
 
 #: install.R:546
@@ -831,6 +693,27 @@ msgstr ""
 
 #: nn-sparse.R:87 nn-sparse.R:187
 msgid "Shape of `.weight` does not match num_embeddings and embedding_dim"
+msgstr ""
+
+#: nn-transformer.R:80
+msgid ""
+"Unsupported activation string: {activation}. Use 'relu', 'gelu', or a "
+"callable function."
+msgstr ""
+
+#: nn-transformer.R:89
+msgid "activation must be a string ('relu' or 'gelu') or a function."
+msgstr ""
+
+#: nn-transformer.R:95
+msgid ""
+"Explicit src_mask should not be set when is_causal=TRUE. Use one or the "
+"other."
+msgstr ""
+
+#: nn-transformer.R:178
+msgid ""
+"`encoder_layer` must be an `nn_module` (transformer encoder layer instance)."
 msgstr ""
 
 #: nn-utils.R:7
@@ -1421,7 +1304,7 @@ msgstr ""
 msgid "The tensor doesn't have names so you can't rename a dimension."
 msgstr ""
 
-#: tensor.R:444
+#: tensor.R:445
 msgid ""
 "Converting integers > .Machine$integer.max is undefined and returns wrong "
 "results. Use as.integer64(x)"
