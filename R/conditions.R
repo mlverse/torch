@@ -22,8 +22,8 @@ cli_abort <- function(..., env = rlang::caller_env()) {
   cli::cli_abort(gettext(...)[[1]], .envir = env)
 }
 
-cli_inform <- function(..., env = rlang::caller_env()) {
-  cli::cli_inform(gettext(..., domain = "R-torch")[[1]], .envir = env)
+cli_inform <- function(..., env = rlang::caller_env(), class = NULL) {
+  cli::cli_inform(gettext(..., domain = "R-torch")[[1]], .envir = env, class = class)
 }
 
 stop_iteration_error <- function(..., env = rlang::caller_env()) {
