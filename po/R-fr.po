@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: torch 0.15.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-06-23 16:33+0200\n"
-"PO-Revision-Date: 2025-06-23 16:35+0200\n"
+"POT-Creation-Date: 2025-06-23 16:45+0200\n"
+"PO-Revision-Date: 2025-06-23 16:47+0200\n"
 "Last-Translator: Christophe Regouby <christophe.regouby@free.fr>\n"
 "Language-Team: \n"
 "Language: fr_FR\n"
@@ -1443,10 +1443,12 @@ msgid "currently unsuported"
 msgstr "non disponible pour le moment"
 
 #: save.R:319
-msgid "This version of torch can't load files with serialization version >"
+msgid ""
+"This version of torch can't load files with serialization version > "
+"{ser_version}"
 msgstr ""
-"Cette version de torch ne peut pas lire des fichiers avec une version de "
-"sérialisation >"
+"Cette version de torch ne peut pas lire des fichiers sérialisés en version > "
+"{ser_version}"
 
 #: save.R:488
 msgid ""
@@ -1496,7 +1498,7 @@ msgstr ""
 msgid "You must pass a cuda device."
 msgstr "Vous devez fournir un périphérique cuda."
 
-#: tensor.R:187 tensor.R:194 wrapers.R:234
+#: tensor.R:187 tensor.R:194 wrapers.R:233
 msgid "start indexing starts at 1"
 msgstr "‘start’ doit être indexé à 1"
 
@@ -1650,41 +1652,46 @@ msgid "argument 'out' must be a list of Tensors."
 msgstr "l’argument ‘out’ doit être une liste de tenseurs."
 
 #: wrapers.R:30
-msgid "expected tuple of"
-msgstr "le tuple attendu de"
+msgid ""
+"expected tuple of {2 + as.integer(get_infos)} elements but got {length(out)}"
+msgstr ""
+"un tuple de {2 + as.integer(get_infos)} éléments est attendu, actuellement "
+"il en a  {length(out)}"
 
-#: wrapers.R:30
-msgid "elements but got"
-msgstr "éléments en contient actuellement"
-
-#: wrapers.R:106
+#: wrapers.R:105
 msgid "argument 'window_length' must be int, not NULL"
 msgstr "l’argument 'window_length' doit être un entier, pas un NULL."
 
-#: wrapers.R:184
+#: wrapers.R:183
 msgid "tensordot expects dims >= 1, but got {dims}"
 msgstr ""
 "‘tensordot’ fonctionne avec des dims >=1, actuellement elles sont a {dims}"
 
-#: wrapers.R:499
+#: wrapers.R:498
 msgid "size is set, but one of mean or std is not a scalar value."
 msgstr ""
 "La taille est configurée, mais soit `mean`, soit `std` n'est pas une valeur "
 "scalaire."
 
-#: wrapers.R:505
+#: wrapers.R:504
 msgid "options is set, but one of mean or std is not a scalar value."
 msgstr ""
 "`options` est configuré, mais soit `mean`, soit `std` n'est pas une valeur "
 "scalaire."
 
-#: wrapers.R:514
+#: wrapers.R:513
 msgid "size is not set."
 msgstr "`size` n'est pas configuré."
 
-#: wrapers.R:553
+#: wrapers.R:552
 msgid "Please report a bug report in GitHub"
 msgstr "Merci de faire remonter un bug dans Github."
+
+#~ msgid "expected tuple of"
+#~ msgstr "le tuple attendu de"
+
+#~ msgid "elements but got"
+#~ msgstr "éléments en contient actuellement"
 
 #~ msgid "Unsupported activation string:"
 #~ msgstr "Nom de la fonction d'activation non reconnu:"
@@ -1859,6 +1866,3 @@ msgstr "Merci de faire remonter un bug dans Github."
 
 #~ msgid "<script_function>"
 #~ msgstr "<script_function>"
-
-#~ msgid "expected tuple of %s elements but got %s"
-#~ msgstr "un tuple de %s éléments est attendu, actuellement il en a %s"

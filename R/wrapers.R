@@ -22,13 +22,12 @@ torch_lu <- function(A, pivot = TRUE, get_infos = FALSE, out = NULL) {
 
   if (!is.null(out)) {
     if (!is.list(out)) {
-      stop("argument 'out' must be a list of Tensors.")
+      type_error("argument 'out' must be a list of Tensors.")
     }
 
     if (length(out) - as.integer(get_infos) != 2) {
-      stop(
-        "expected tuple of ", 2 + as.integer(get_infos), " elements but got ",
-        length(out)
+      value_error(
+        "expected tuple of {2 + as.integer(get_infos)} elements but got {length(out)}"
       )
     }
 
