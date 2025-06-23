@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: torch 0.15.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-06-23 16:45+0200\n"
-"PO-Revision-Date: 2025-06-23 16:47+0200\n"
+"POT-Creation-Date: 2025-06-23 17:21+0200\n"
+"PO-Revision-Date: 2025-06-23 17:22+0200\n"
 "Last-Translator: Christophe Regouby <christophe.regouby@free.fr>\n"
 "Language-Team: \n"
 "Language: fr_FR\n"
@@ -141,7 +141,7 @@ msgstr ""
 
 #: call_torch_function.R:54
 msgid ""
-"A function of name {name} was not found. Please check your spelling and that "
+"No function named {name} can be found. Please check your spelling and that "
 "the desired function exists."
 msgstr ""
 "Impossible de trouver la fonction nommée {name} . Veuillez vérifier "
@@ -209,7 +209,7 @@ msgstr "CUDA n'est pas disponible."
 
 #: device.R:12
 msgid ""
-"type {type} should not include an index because index was passed explicitly."
+"type {type} should not include any index because index was passed explicitly."
 msgstr ""
 "Le type {type} ne doit pas inclure d’index, car l’index a déjà été fourni de "
 "manière explicite"
@@ -544,10 +544,6 @@ msgstr "La version de CUDA {.val {version}} n'est pas compatible."
 #: install.R:487
 msgid "Currently supported versions are: {.val {supported_versions}}."
 msgstr "Les versions compatibles sont: {.val {supported_versions}}."
-
-#: install.R:546
-msgid "torch_install"
-msgstr ""
 
 #: install.R:555
 msgid "Unexpected value"

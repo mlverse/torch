@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: torch 0.14.2.9000\n"
-"POT-Creation-Date: 2025-06-23 16:45+0200\n"
+"POT-Creation-Date: 2025-06-23 17:21+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -112,7 +112,7 @@ msgstr ""
 
 #: call_torch_function.R:54
 msgid ""
-"A function of name {name} was not found. Please check your spelling and that "
+"No function named {name} can be found. Please check your spelling and that "
 "the desired function exists."
 msgstr ""
 
@@ -178,7 +178,7 @@ msgstr ""
 
 #: device.R:12
 msgid ""
-"type {type} should not include an index because index was passed explicitly."
+"type {type} should not include any index because index was passed explicitly."
 msgstr ""
 
 #: device.R:119
@@ -462,10 +462,6 @@ msgstr ""
 
 #: install.R:487
 msgid "Currently supported versions are: {.val {supported_versions}}."
-msgstr ""
-
-#: install.R:546
-msgid "torch_install"
 msgstr ""
 
 #: install.R:555
