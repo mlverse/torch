@@ -76,9 +76,8 @@ nn_transformer_encoder_layer <- nn_module(
         self$activation <- function(x) nnf_gelu(x)
         self$activation_relu_or_gelu <- 2
       } else {
-        stop(
-          "Unsupported activation string: ", activation,
-          ". Use 'relu', 'gelu', or a callable function."
+        value_error(
+          "Unsupported activation string: {activation}. Use 'relu', 'gelu', or a callable function."
         )
       }
     } else if (is.function(activation)) {
@@ -87,13 +86,13 @@ nn_transformer_encoder_layer <- nn_module(
       self$activation_relu_or_gelu <- 0
       # (In PyTorch, 1 indicates ReLU, 2 indicates GELU, 0 otherwise)
     } else {
-      stop("activation must be a string ('relu' or 'gelu') or a function.")
+      value_error("activation must be a string ('relu' or 'gelu') or a function.")
     }
   },
   forward = function(src, src_mask = NULL, src_key_padding_mask = NULL, is_causal = FALSE) {
     # Validate mask usage with is_causal
     if (!is.null(src_mask) && is_causal) {
-      stop("Explicit src_mask should not be set when is_causal=TRUE. Use one or the other.")
+      value_error("Explicit src_mask should not be set when is_causal=TRUE. Use one or the other.")
     }
     # If is_causal, generate a causal mask (upper triangular) for self-attention
     attn_mask_eff <- src_mask
@@ -176,7 +175,7 @@ nn_transformer_encoder <- nn_module(
   initialize = function(encoder_layer, num_layers, norm = NULL) {
     # Replicate the encoder_layer for the specified number of layers
     if (!is_nn_module(encoder_layer)) {
-      stop("encoder_layer must be an nn_module (transformer encoder layer instance).")
+      value_error("`encoder_layer` must be an `nn_module` (transformer encoder layer instance).")
     }
     self$num_layers <- num_layers
     # Use clone_module to deep-copy the layer for each repetition
