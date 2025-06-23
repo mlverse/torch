@@ -20,7 +20,7 @@ knitr::opts_chunk$set(
 library(torch)
 ```
 
-[TorchScript](https://pytorch.org/docs/stable/jit_language_reference.html#language-reference) is a statically typed subset of Python that can be interpreted by LibTorch without any Python dependency. 
+[TorchScript](https://docs.pytorch.org/docs/stable/jit_language_reference.html#language-reference) is a statically typed subset of Python that can be interpreted by LibTorch without any Python dependency. 
 The torch R package provides interfaces to create, serialize, load and execute TorchScript programs.
 
 Advantages of using TorchScript are:

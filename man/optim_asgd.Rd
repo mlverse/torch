@@ -28,7 +28,7 @@ parameter groups}
 \item{weight_decay}{(float, optional): weight decay (L2 penalty) (default: 0)}
 }
 \description{
-Proposed in \href{https://dl.acm.org/doi/10.1137/0330046}{Acceleration of stochastic approximation by averaging}
+Proposed in \href{https://doi.org/10.1137/0330046}{Acceleration of stochastic approximation by averaging}
 }
 \section{Warning}{
 If you need to move a model to GPU via \verb{$cuda()}, please do so before
