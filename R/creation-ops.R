@@ -3,13 +3,13 @@ resolve_size <- function(...) {
 
   if (!is.null(size[["size"]])) {
     if (!length(size) == 1) {
-      stop("You should specify a single size argument.")
+      value_error("You should specify a single size argument.")
     }
 
     size <- size[["size"]]
   } else if (length(size[[1]]) > 1) {
     if (!length(size) == 1) {
-      stop("You should specify a single size argument.")
+      value_error("You should specify a single size argument.")
     }
 
     size <- size[[1]]

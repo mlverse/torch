@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: torch 0.14.2.9000\n"
-"POT-Creation-Date: 2025-06-23 16:08+0200\n"
+"POT-Creation-Date: 2025-06-23 16:33+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -11,7 +11,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 #: R7.R:46
-msgid "can only set to public, private and active"
+msgid "can only set to `public`, `private` and `active`"
 msgstr ""
 
 #: autocast.R:63 autocast.R:87
@@ -112,8 +112,8 @@ msgstr ""
 
 #: call_torch_function.R:54
 msgid ""
-"A function of name %s was not found. Please check your spelling and that the "
-"desired function exists."
+"A function of name {name} was not found. Please check your spelling and that "
+"the desired function exists."
 msgstr ""
 
 #: codegen-utils.R:5
@@ -177,7 +177,8 @@ msgid "CUDA is not available."
 msgstr ""
 
 #: device.R:12
-msgid "type should not include an index because index was passed explicitly"
+msgid ""
+"type {type} should not include an index because index was passed explicitly."
 msgstr ""
 
 #: device.R:119
@@ -321,7 +322,7 @@ msgid "bit64 is required to correctly show the seed."
 msgstr ""
 
 #: generator.R:24
-msgid "Seed must an integer or integer64."
+msgid "Seed must be integer or integer64."
 msgstr ""
 
 #: generator.R:151

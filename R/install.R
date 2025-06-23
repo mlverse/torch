@@ -552,7 +552,7 @@ is_truthy <- function(x) {
   }
   
   if (length(x) > 1) {
-    stop("Unexpected value")
+    value_error("Unexpected value")
   }
   
   if (x == "") {

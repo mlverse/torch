@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: torch 0.15.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-06-23 16:08+0200\n"
-"PO-Revision-Date: 2025-06-23 16:09+0200\n"
+"POT-Creation-Date: 2025-06-23 16:33+0200\n"
+"PO-Revision-Date: 2025-06-23 16:35+0200\n"
 "Last-Translator: Christophe Regouby <christophe.regouby@free.fr>\n"
 "Language-Team: \n"
 "Language: fr_FR\n"
@@ -14,7 +14,7 @@ msgstr ""
 "X-Generator: Poedit 3.5\n"
 
 #: R7.R:46
-msgid "can only set to public, private and active"
+msgid "can only set to `public`, `private` and `active`"
 msgstr "ne peut être configuré qu’avec `public`, `private` ou `active`"
 
 #: autocast.R:63 autocast.R:87
@@ -141,10 +141,10 @@ msgstr ""
 
 #: call_torch_function.R:54
 msgid ""
-"A function of name %s was not found. Please check your spelling and that the "
-"desired function exists."
+"A function of name {name} was not found. Please check your spelling and that "
+"the desired function exists."
 msgstr ""
-"Impossible de trouver la fonction nommée %s . Veuillez vérifier "
+"Impossible de trouver la fonction nommée {name} . Veuillez vérifier "
 "l’orthographe et que la fonction désirée existe bien."
 
 #: codegen-utils.R:5
@@ -208,10 +208,11 @@ msgid "CUDA is not available."
 msgstr "CUDA n'est pas disponible."
 
 #: device.R:12
-msgid "type should not include an index because index was passed explicitly"
+msgid ""
+"type {type} should not include an index because index was passed explicitly."
 msgstr ""
-"'type' ne doit pas inclure d’index, car l’index a déjà été fourni de manière "
-"explicite"
+"Le type {type} ne doit pas inclure d’index, car l’index a déjà été fourni de "
+"manière explicite"
 
 #: device.R:119
 msgid "y is not a torch_device"
@@ -373,7 +374,7 @@ msgstr ""
 "aléatoire."
 
 #: generator.R:24
-msgid "Seed must an integer or integer64."
+msgid "Seed must be integer or integer64."
 msgstr "La graine aléatoire doit être de type ‘integer’ ou ‘integer64’."
 
 #: generator.R:151

@@ -3,7 +3,7 @@
 
 lantern_start <- function(reload = FALSE) {
   if (!torch_is_installed()) {
-    stop("Torch is not installed, please run 'install_torch()'.")
+    runtime_error("Torch is not installed, please run 'install_torch()'.")
   }
 
   if (.globals$lantern_started && !reload) {

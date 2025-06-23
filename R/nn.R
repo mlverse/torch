@@ -366,7 +366,7 @@ nn_Module <- R6::R6Class(
 #' @export
 nn_parameter <- function(x, requires_grad = TRUE) {
   if (!is_torch_tensor(x)) {
-    stop("`x` must be a tensor.")
+    type_error("`x` must be a tensor.")
   }
   x$requires_grad_(requires_grad)
   class(x) <- c(class(x), "nn_parameter")

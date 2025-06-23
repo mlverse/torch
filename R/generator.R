@@ -21,7 +21,7 @@ Generator <- R7Class(
     },
     set_current_seed = function(seed) {
       if ((!is.integer(seed)) && (!inherits(seed, "integer64"))) {
-        stop("Seed must an integer or integer64.")
+        type_error("Seed must be integer or integer64.")
       }
 
       seed <- as.character(seed)

@@ -9,7 +9,7 @@ Device <- R7Class(
 
       if (grepl(":", type, fixed = TRUE)) {
         if (!is.null(index)) {
-          stop("type should not include an index because index was passed explicitly ", type)
+          type_error("type {type} should not include an index because index was passed explicitly.")
         }
 
         spl <- strsplit(type, ":", fixed = TRUE)[[1]]
