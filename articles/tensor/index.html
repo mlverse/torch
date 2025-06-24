@@ -6,7 +6,13 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>Tensor objects • torch</title>
-<script src="../../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<!-- mathjax math --><script src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.js" integrity="sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI=" crossorigin="anonymous"></script><script>
+  window.MathJax = {
+    chtml: {
+      fontURL: "https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/output/chtml/fonts/woff-v2"
+    }
+  };
+</script><script src="../../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="../../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
 <script src="../../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
 <link href="../../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
@@ -28,7 +34,7 @@
 
     <a class="navbar-brand me-2" href="../../index.html">torch</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.14.2</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.15.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -109,7 +115,7 @@
 Tensors have a large amount of methods that can be called using the
 <code>$</code> operator.</p>
 <p>Following is a list of all methods that can be called by tensor
-objects and their documentation. You can also look at <a href="https://pytorch.org/docs/stable/tensors.html" class="external-link">PyTorch’s
+objects and their documentation. You can also look at <a href="https://docs.pytorch.org/docs/stable/tensors.html" class="external-link">PyTorch’s
 documentation</a> for additional details.</p>
 <div class="section level2">
 <h2 id="numpy_t">numpy_T<a class="anchor" aria-label="anchor" href="#numpy_t"></a>
@@ -591,10 +597,8 @@ derivative products. Defaults to <code>FALSE</code>.</li>
 <h2 id="bernoulli">bernoulli<a class="anchor" aria-label="anchor" href="#bernoulli"></a>
 </h2>
 <p>bernoulli(*, generator=NULL) -&gt; Tensor</p>
-<p>Returns a result tensor where each
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mtext mathvariant="monospace">𝚛𝚎𝚜𝚞𝚕𝚝[𝚒]</mtext><annotation encoding="application/x-tex">\texttt{result[i]}</annotation></semantics></math>
-is independently sampled from
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mtext mathvariant="normal">Bernoulli</mtext><mrow><mo stretchy="true" form="prefix">(</mo><mtext mathvariant="monospace">𝚜𝚎𝚕𝚏[𝚒]</mtext><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\text{Bernoulli}(\texttt{self[i]})</annotation></semantics></math>.
+<p>Returns a result tensor where each <span class="math inline">\(\texttt{result[i]}\)</span> is independently
+sampled from <span class="math inline">\(\text{Bernoulli}(\texttt{self[i]})\)</span>.
 <code>self</code> must have floating point <code>dtype</code>, and the
 result will have the same <code>dtype</code>.</p>
 <p>See <code><a href="../../reference/torch_bernoulli.html">?torch_bernoulli</a></code></p>
@@ -604,16 +608,13 @@ result will have the same <code>dtype</code>.</p>
 </h2>
 <p>bernoulli_(p=0.5, *, generator=NULL) -&gt; Tensor</p>
 <p>Fills each location of <code>self</code> with an independent sample
-from
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mtext mathvariant="normal">Bernoulli</mtext><mrow><mo stretchy="true" form="prefix">(</mo><mtext mathvariant="monospace">𝚙</mtext><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\text{Bernoulli}(\texttt{p})</annotation></semantics></math>.
+from <span class="math inline">\(\text{Bernoulli}(\texttt{p})\)</span>.
 <code>self</code> can have integral <code>dtype</code>.</p>
 <p>bernoulli_(p_tensor, *, generator=NULL) -&gt; Tensor</p>
 <p><code>p_tensor</code> should be a tensor containing probabilities to
 be used for drawing the binary random number.</p>
-<p>The
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msup><mtext mathvariant="normal">i</mtext><mrow><mi>t</mi><mi>h</mi></mrow></msup><annotation encoding="application/x-tex">\text{i}^{th}</annotation></semantics></math>
-element of <code>self</code> tensor will be set to a value sampled from
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mtext mathvariant="normal">Bernoulli</mtext><mrow><mo stretchy="true" form="prefix">(</mo><mtext mathvariant="monospace">𝚙_𝚝𝚎𝚗𝚜𝚘𝚛[𝚒]</mtext><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\text{Bernoulli}(\texttt{p\_tensor[i]})</annotation></semantics></math>.</p>
+<p>The <span class="math inline">\(\text{i}^{th}\)</span> element of
+<code>self</code> tensor will be set to a value sampled from <span class="math inline">\(\text{Bernoulli}(\texttt{p\_tensor[i]})\)</span>.</p>
 <p><code>self</code> can have integral <code>dtype</code>, but
 <code>p_tensor</code> must have floating point <code>dtype</code>.</p>
 <p>See also <code>$bernoulli</code> and
@@ -732,9 +733,9 @@ desired memory format of</li>
 </h2>
 <p>cauchy_(median=0, sigma=1, *, generator=NULL) -&gt; Tensor</p>
 <p>Fills the tensor with numbers drawn from the Cauchy distribution:</p>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>f</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>x</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><mfrac displaystyle="true"><mn>1</mn><mi>π</mi></mfrac><mfrac displaystyle="true"><mi>σ</mi><mrow><msup><mrow><mo stretchy="true" form="prefix">(</mo><mi>x</mi><mo>−</mo><mtext mathvariant="normal">median</mtext><mo stretchy="true" form="postfix">)</mo></mrow><mn>2</mn></msup><mo>+</mo><msup><mi>σ</mi><mn>2</mn></msup></mrow></mfrac></mrow><annotation encoding="application/x-tex">
+<p><span class="math display">\[
 f(x) = \dfrac{1}{\pi} \dfrac{\sigma}{(x - \text{median})^2 + \sigma^2}
-</annotation></semantics></math></p>
+\]</span></p>
 </div>
 <div class="section level2">
 <h2 id="ceil">ceil<a class="anchor" aria-label="anchor" href="#ceil"></a>
@@ -1285,9 +1286,9 @@ to the tensors, please clone them first.</p>
 <p>exponential_(lambd=1, *, generator=NULL) -&gt; Tensor</p>
 <p>Fills <code>self</code> tensor with elements drawn from the
 exponential distribution:</p>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>f</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>x</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><mi>λ</mi><msup><mi>e</mi><mrow><mo>−</mo><mi>λ</mi><mi>x</mi></mrow></msup></mrow><annotation encoding="application/x-tex">
+<p><span class="math display">\[
 f(x) = \lambda e^{-\lambda x}
-</annotation></semantics></math></p>
+\]</span></p>
 </div>
 <div class="section level2">
 <h2 id="fft">fft<a class="anchor" aria-label="anchor" href="#fft"></a>
@@ -1442,9 +1443,9 @@ desired memory format of</li>
 <p>geometric_(p, *, generator=NULL) -&gt; Tensor</p>
 <p>Fills <code>self</code> tensor with elements drawn from the geometric
 distribution:</p>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>f</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>X</mi><mo>=</mo><mi>k</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><msup><mi>p</mi><mrow><mi>k</mi><mo>−</mo><mn>1</mn></mrow></msup><mrow><mo stretchy="true" form="prefix">(</mo><mn>1</mn><mo>−</mo><mi>p</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">
+<p><span class="math display">\[
 f(X=k) = p^{k - 1} (1 - p)
-</annotation></semantics></math></p>
+\]</span></p>
 </div>
 <div class="section level2">
 <h2 id="geqrf">geqrf<a class="anchor" aria-label="anchor" href="#geqrf"></a>
@@ -2030,9 +2031,10 @@ and standard deviation <code>\sigma</code>. Note that <code>mean</code>
 and <code>std</code> are the mean and standard deviation of the
 underlying normal distribution, and not of the returned
 distribution:</p>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>f</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>x</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><mfrac displaystyle="true"><mn>1</mn><mrow><mi>x</mi><mi>σ</mi><msqrt><mrow><mn>2</mn><mi>π</mi></mrow></msqrt></mrow></mfrac><mspace width="0.222em"></mspace><msup><mi>e</mi><mrow><mo>−</mo><mfrac><msup><mrow><mo stretchy="true" form="prefix">(</mo><mo>ln</mo><mi>x</mi><mo>−</mo><mi>μ</mi><mo stretchy="true" form="postfix">)</mo></mrow><mn>2</mn></msup><mrow><mn>2</mn><msup><mi>σ</mi><mn>2</mn></msup></mrow></mfrac></mrow></msup></mrow><annotation encoding="application/x-tex">
-f(x) = \dfrac{1}{x \sigma \sqrt{2\pi}}\ e^{-\frac{(\ln x - \mu)^2}{2\sigma^2}}
-</annotation></semantics></math></p>
+<p><span class="math display">\[
+f(x) = \dfrac{1}{x \sigma \sqrt{2\pi}}\ e^{-\frac{(\ln x -
+\mu)^2}{2\sigma^2}}
+\]</span></p>
 </div>
 <div class="section level2">
 <h2 id="logaddexp">logaddexp<a class="anchor" aria-label="anchor" href="#logaddexp"></a>
@@ -2347,8 +2349,8 @@ start with underscore).</p>
 <p>Same as <code>Tensor.narrow</code> except returning a copy rather
 than shared storage. This is primarily for sparse tensors, which do not
 have a shared-storage narrow method. Calling
-<code>narrow_copy` with</code>dimemsion &gt; self<span class="math inline">$sparse_dim()`` will return a copy with the
-relevant dense dimension narrowed, and ``self$</span>shape`` updated
+<code>narrow_copy` with</code>dimemsion &gt; self<span class="math inline">\(sparse_dim()`` will return a copy with the
+relevant dense dimension narrowed, and ``self\)</span>shape`` updated
 accordingly.</p>
 </div>
 <div class="section level2">
@@ -2505,10 +2507,9 @@ default, the returned Tensor has the same <code>torch_dtype</code> and
 </h4>
 <p><code>new_tensor</code> always copies
 <code>data(). If you have a Tensor</code>data` and want to avoid a copy,
-use
-[<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>r</mi><mi>e</mi><mi>q</mi><mi>u</mi><mi>i</mi><mi>r</mi><mi>e</mi><msub><mi>s</mi><mi>g</mi></msub><mi>r</mi><mi>a</mi><msub><mi>d</mi><mrow><mo stretchy="true" form="prefix">(</mo><mo stretchy="true" form="postfix">)</mo></mrow></msub><mo stretchy="false" form="postfix">]</mo><mi>o</mi><mi>r</mi><mo stretchy="false" form="prefix">[</mo></mrow><annotation encoding="application/x-tex">requires_grad_()]
-or [</annotation></semantics></math>detach()]. If you have a numpy array
-and want to avoid a copy, use [torch_from_numpy()].</p>
+use [<span class="math inline">\(requires_grad_()]
+or [\)</span>detach()]. If you have a numpy array and want to avoid a
+copy, use [torch_from_numpy()].</p>
 <p>When data is a tensor <code>x</code>, [new_tensor()()] reads out ‘the
 data’ from whatever it is passed, and constructs a leaf variable.
 Therefore <code>tensor$new_tensor(x)</code> is equivalent to
@@ -3918,9 +3919,9 @@ returned tensor.</p>
 <p>uniform_(from=0, to=1) -&gt; Tensor</p>
 <p>Fills <code>self</code> tensor with numbers sampled from the
 continuous uniform distribution:</p>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>P</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>x</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><mfrac displaystyle="true"><mn>1</mn><mrow><mtext mathvariant="normal">to</mtext><mo>−</mo><mtext mathvariant="normal">from</mtext></mrow></mfrac></mrow><annotation encoding="application/x-tex">
+<p><span class="math display">\[
 P(x) = \dfrac{1}{\text{to} - \text{from}}
-</annotation></semantics></math></p>
+\]</span></p>
 </div>
 <div class="section level2">
 <h2 id="unique">unique<a class="anchor" aria-label="anchor" href="#unique"></a>
@@ -3981,9 +3982,9 @@ original dimension, or only span across original dimensions
 <code>d, d+1, \dots, d+k</code> that satisfy the following
 contiguity-like condition that
 <code>\forall i = d, \dots, d+k-1</code>,</p>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mtext mathvariant="normal">stride</mtext><mrow><mo stretchy="true" form="prefix">[</mo><mi>i</mi><mo stretchy="true" form="postfix">]</mo></mrow><mo>=</mo><mtext mathvariant="normal">stride</mtext><mrow><mo stretchy="true" form="prefix">[</mo><mi>i</mi><mo>+</mo><mn>1</mn><mo stretchy="true" form="postfix">]</mo></mrow><mo>×</mo><mtext mathvariant="normal">size</mtext><mrow><mo stretchy="true" form="prefix">[</mo><mi>i</mi><mo>+</mo><mn>1</mn><mo stretchy="true" form="postfix">]</mo></mrow></mrow><annotation encoding="application/x-tex">
+<p><span class="math display">\[
 \text{stride}[i] = \text{stride}[i+1] \times \text{size}[i+1]
-</annotation></semantics></math></p>
+\]</span></p>
 <p>Otherwise, it will not be possible to view <code>self</code> tensor
 as <code>shape</code> without copying it (e.g., via
 <code>contiguous</code>). When it is unclear whether a <code>view</code>
@@ -4041,7 +4042,7 @@ which returns a view if the shapes are compatible, and copies
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
 </div>
 
     </footer>
