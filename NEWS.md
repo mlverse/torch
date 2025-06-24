@@ -1,4 +1,4 @@
-# torch (development version)
+# torch 0.15.0
 
 - add ROC AUM loss with `nn_aum_loss()` (#1310 @cregouby)
 - Add translation of install messages in French (@cregouby #1317)
