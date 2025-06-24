@@ -15,7 +15,7 @@ None; snapshot is saved directly to the file.
 \description{
 Calls \code{cuda_memory_snapshot()} and saves the resulting binary snapshot
 to a specified file using \code{writeBin}. The resulting file can be visualized using the interactive
-snapshot viewer available at \href{https://pytorch.org/memory_viz}{pytorch.org/memory_viz}.
+snapshot viewer available at \href{https://docs.pytorch.org/memory_viz}{pytorch.org/memory_viz}.
 }
 \examples{
 if (torch_is_installed()) {

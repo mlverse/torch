@@ -23,7 +23,7 @@ torch_get_num_threads()
 Get and set the numbers used by torch computations.
 }
 \details{
-For details see the \href{https://pytorch.org/docs/stable/notes/cpu_threading_torchscript_inference.html?highlight=set_num_threads}{CPU threading article}
+For details see the \href{https://docs.pytorch.org/docs/stable/notes/cpu_threading_torchscript_inference.html?highlight=set_num_threads}{CPU threading article}
 in the PyTorch documentation.
 }
 \note{
