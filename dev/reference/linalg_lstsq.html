@@ -23,7 +23,7 @@ the least squares problem for a linear system  with
 
     <a class="navbar-brand me-2" href="../index.html">torch</a>
 
-    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">0.14.2.9000</small>
+    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">0.15.0.9000</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -133,7 +133,7 @@ the output has the same batch dimensions.
 <code>driver</code> chooses the LAPACK/MAGMA function that will be used.</p>
 <p>For CPU inputs the valid values are <code>'gels'</code>, <code>'gelsy'</code>, <code>'gelsd</code>, <code>'gelss'</code>.
 For CUDA input, the only valid driver is <code>'gels'</code>, which assumes that <code>A</code> is full-rank.</p>
-<p>To choose the best driver on CPU consider:</p><ul><li><p>If <code>A</code> is well-conditioned (its <a href="https://pytorch.org/docs/master/linalg.html#torch.linalg.cond" class="external-link">condition number</a> is not too large), or you do not mind some precision loss.</p></li>
+<p>To choose the best driver on CPU consider:</p><ul><li><p>If <code>A</code> is well-conditioned (its <a href="https://docs.pytorch.org/docs/master/linalg.html#torch.linalg.cond" class="external-link">condition number</a> is not too large), or you do not mind some precision loss.</p></li>
 <li><p>For a general matrix: <code>'gelsy'</code> (QR with pivoting) (default)</p></li>
 <li><p>If <code>A</code> is full-rank: <code>'gels'</code> (QR)</p></li>
 <li><p>If <code>A</code> is not well-conditioned.</p></li>
