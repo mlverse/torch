@@ -102,13 +102,11 @@ https://jmlr.org/papers/volume24/21-0751/21-0751.pdf</p>
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="torch_is_installed.html">torch_is_installed</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span></span>
-<span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span> <span class="co"># torch_is_installed()</span></span></span>
 <span class="r-in"><span><span class="va">loss</span> <span class="op">&lt;-</span> <span class="fu">nn_aum_loss</span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">input</span> <span class="op">&lt;-</span> <span class="fu"><a href="torch_randn.html">torch_randn</a></span><span class="op">(</span><span class="fl">4</span>, <span class="fl">6</span>, requires_grad <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">target</span> <span class="op">&lt;-</span> <span class="va">input</span> <span class="op">&gt;</span> <span class="fl">1.5</span></span></span>
 <span class="r-in"><span><span class="va">output</span> <span class="op">&lt;-</span> <span class="fu">loss</span><span class="op">(</span><span class="va">input</span>, <span class="va">target</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">output</span><span class="op">$</span><span class="fu">backward</span><span class="op">(</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="op">}</span></span></span>
 <span class="r-in"><span><span class="op">}</span></span></span>
 </code></pre></div>
     </div>

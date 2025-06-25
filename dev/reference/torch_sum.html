@@ -139,6 +139,14 @@ output tensor having 1 (or <code>len(dim)</code>) fewer dimension(s).</p>
 <span class="r-in"><span><span class="va">b</span> <span class="op">&lt;-</span> <span class="fu"><a href="torch_arange.html">torch_arange</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">4</span> <span class="op">*</span> <span class="fl">5</span> <span class="op">*</span> <span class="fl">6</span><span class="op">)</span><span class="op">$</span><span class="fu">view</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">4</span>, <span class="fl">5</span>, <span class="fl">6</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu">torch_sum</span><span class="op">(</span><span class="va">b</span>, <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">}</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> torch_tensor</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  1160</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  1180</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  1200</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  1220</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  1240</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  1260</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [ CPUFloatType{6} ]</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>

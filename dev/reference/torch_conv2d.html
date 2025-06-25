@@ -142,6 +142,39 @@ planes.</p>
 <span class="r-in"><span><span class="va">inputs</span> <span class="op">=</span> <span class="fu"><a href="torch_randn.html">torch_randn</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">4</span>,<span class="fl">5</span>,<span class="fl">5</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="nnf_conv2d.html">nnf_conv2d</a></span><span class="op">(</span><span class="va">inputs</span>, <span class="va">filters</span>, padding<span class="op">=</span><span class="fl">1</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">}</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> torch_tensor</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> (1,1,.,.) = </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   -1.0493   2.4377   9.1460   4.9499  11.8678</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   -2.8198  -0.0669  -1.0420   2.8404   9.5079</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    3.8763  -2.2125   6.2224  -1.8633  -2.9438</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   -7.3998  -7.3036  -9.5993   5.8143  -3.2232</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    0.4332  10.3359   3.0205   3.3356   2.1531</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> (1,2,.,.) = </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   -3.5008   1.1344  -9.8906   0.1096   1.7333</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    7.7755 -12.2273  -3.9881   2.3618   0.9525</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   -7.3159   3.8771   7.1206   2.1397   5.9139</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    6.0788   2.5111  14.3135   3.7777  -5.7705</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    4.0496  -3.5666  -1.4737   5.1576  -1.6740</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> (1,3,.,.) = </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    4.6179  -3.6161   4.8794  12.8730   5.1576</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    4.5735  11.4651   6.1501  -9.8438   0.0459</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   -0.8374  -0.2690   6.1711   4.4691  -3.0356</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    3.7814  -4.0345  -4.5262  -1.9806  -7.6807</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   -3.3991  -0.2507  -6.0621  -2.5871   4.8446</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> (1,4,.,.) = </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  -2.0544  6.7774 -2.5130  4.9019  1.2532</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  -4.5064  0.1256 -1.6398  0.5758  6.0767</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   5.7787  1.5969 -0.9779  2.7542 -0.7114</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   5.3121 -5.5369 -4.5343  0.5218 -1.6582</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  -1.6929 -4.1546  3.7939 -2.3652 -0.2628</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> (1,5,.,.) = </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   -1.3368   2.9420  -1.5268   7.4941  -2.4527</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ... [the output was truncated (use n=-1 to disable)]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [ CPUFloatType{1,8,5,5} ]</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>

@@ -147,6 +147,39 @@ composed of several input planes, sometimes also called "deconvolution".</p>
 <span class="r-in"><span><span class="va">weights</span> <span class="op">=</span> <span class="fu"><a href="torch_randn.html">torch_randn</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">4</span>, <span class="fl">8</span>, <span class="fl">3</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="nnf_conv_transpose2d.html">nnf_conv_transpose2d</a></span><span class="op">(</span><span class="va">inputs</span>, <span class="va">weights</span>, padding<span class="op">=</span><span class="fl">1</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">}</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> torch_tensor</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> (1,1,.,.) = </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    8.6229  -0.8499  -6.2249  11.9869   5.8515</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    2.1987   3.7358   7.0181   8.7883   7.3913</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   -1.9856   6.3470  10.3375   1.4873  -1.1834</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    3.0345  -3.5002   4.2000   8.9152   5.0700</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  -11.7650   5.5447   1.2962  -1.1168  -1.4474</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> (1,2,.,.) = </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   -6.4387  12.9119  10.5204   2.5195  -2.2491</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   -0.0804  -1.0821   0.0505 -12.0709  -0.7440</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   10.0175  16.7612   0.9927  -1.8950   0.3469</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    2.7509 -11.0839  -2.9234   1.5575   1.7075</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    2.4874  -7.6470   4.9171  -4.8596  -2.2775</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> (1,3,.,.) = </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  -10.3158   8.8825   4.3666  -4.5924  -3.4828</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   15.6238  -9.0864  16.8198  -3.0679  -3.1039</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   -1.3268  -6.2674 -12.1901  -3.9399  -0.7897</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    2.3956  -0.5405   3.6049  -9.0781  -0.9847</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   -0.4660  -4.5324  -0.7712  -5.0365  -1.7344</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> (1,4,.,.) = </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   1.8880 -5.3732 -3.8549 -3.4603 -3.0369</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   3.0764  5.3263 -1.0451  2.8784  5.3589</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  -2.2439  1.9614  3.5019  2.2228 -0.8983</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  -1.1563  4.6513 -3.1381  7.5958 -0.4772</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   4.1004  9.4145 -3.7799  0.1391  2.2974</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> (1,5,.,.) = </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    1.4385  -1.6536   0.0830   9.4841   3.2550</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ... [the output was truncated (use n=-1 to disable)]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [ CPUFloatType{1,8,5,5} ]</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
