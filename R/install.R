@@ -174,10 +174,17 @@ inst_path <- function() {
       ))
     }
   }
+
+  install_path <- torch_cache_dir_inst_path()
+  if (can_write_into(install_path)) {
+    return(install_path)
+  }
+
   install_path <- system.file("", package = "torch")
   if (can_write_into(install_path)) {
     return(install_path)
   }
+
   cli_abort(c("x" = "{.pkg torch} cannot write into {.path {install_path}}.",
             "i" = "Please configure a {.var TORCH_HOME} variable with a writable folder",
             " " = "and run {.fn install_torch()} again",
@@ -682,5 +689,90 @@ is_package_version <- function(x) {
 }
 
 can_write_into <- function(path) {
+  if (!dir.exists(path)) {
+    tryCatch({
+      dir.create(path, recursive = TRUE)
+      return(TRUE)
+    },
+    error = function(err) {
+      return(FALSE)
+    })
+  }
+
   file.access(path, 2 ) >= 0
+}
+
+#' Tools to manage the torch cache directory
+#' 
+#' The torch cache directory is used to store the installed versions of LibTorch and Lantern.
+#' Since the cache directory is shared between multiple versions of the package that users might
+#' have installed, it can get increasinly large over time So we provide some tools to cleanup the 
+#' cache.
+#' 
+#' @param keep If `TRUE` (default), all files in the cache directory will be removed except
+#'   the installation path of the current version of the package. If `FALSE`, the whole cache 
+#'   directory will be removed.
+#' 
+#' @export
+#' @rdname torch_cache_dir
+torch_cache_dir <- function() {
+  tools::R_user_dir("torch", which = "cache")
+}
+
+torch_cache_dir_size <- function() {
+  length(list.files(torch_cache_dir(), include.dirs = TRUE))
+}
+
+torch_cache_dir_inst_path <- function() {
+  dt <- file.info(system.file("DESCRIPTION", package = "torch"))$mtime
+  install_path <- file.path(torch_cache_dir(), rlang::hash(dt))
+}
+
+#' @export
+#' @rdname torch_cache_dir
+torch_cache_dir_purge <- function(keep = TRUE) {
+  if (!dir.exists(torch_cache_dir())) {
+    cli_inform("Torch cache directory does not exist, nothing to purge.")
+    return(invisible())
+  }
+  
+  if (torch_cache_dir_size() == 0) {
+    cli_inform("Torch cache directory is empty, nothing to purge.")
+    return(invisible())
+  }
+  
+  if (!keep) {
+    unlink(torch_cache_dir(), recursive = TRUE)
+    cli_inform("Torch cache directory has been purged.")
+    return(invisible())
+  }
+  
+  cli_inform(c(
+    "Purging torch cache directory.",
+    "Keeping the installation path: {.path {torch_cache_dir_inst_path()}}"
+  ))
+  
+  files <- list.files(torch_cache_dir(), full.names = TRUE)
+  inst_path <- normalizePath(torch_cache_dir_inst_path(), winslash = "/", mustWork = FALSE)
+  for (file in files) {
+    file <- normalizePath(file, winslash = "/", mustWork = FALSE)
+    if (file == inst_path) {
+      next
+    } else {
+      unlink(file, recursive = TRUE)
+    }
+  }
+}
+
+torch_check_cache_dir <- function() {
+  if (torch_cache_dir_size() > 2) {
+    cli::cli_inform(c(
+      "Torch cache directory has more than one LibTorch/LibLantern installation.",
+      i = "This may use unnecessary disk space.",
+      i = "Run {.fn torch_cache_dir_purge} to clean it up."
+    ),
+    .frequency = "once",
+    .frequency_id = "torch_cache_dir_purge"
+    )
+  }
 }
