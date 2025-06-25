@@ -83,7 +83,7 @@ legacy_save_nn_module <- function(obj, path, ..., compress = TRUE) {
 
 #' @export
 torch_save.name <- function(obj, path, ..., compress= TRUE) {
-  if (!is_exhausted(obj)) rlang::abort("Cannot save `name` object.")
+  if (!is_exhausted(obj)) runtime_error("Cannot save `name` object.")
   saveRDS(list(type = "coro::exhausted", version = use_ser_version()), path,
           compress = compress)
 }
