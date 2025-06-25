@@ -143,7 +143,7 @@ install_lib <- function(libname, url, reinstall = FALSE) {
     return(invisible(TRUE))
   } 
   
-  rlang::abort(c(
+  cli_abort(c(
     "Installation failed.",
     "Could not install {.strong {libname}} from {.val {url}}."
   ))

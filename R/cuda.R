@@ -89,7 +89,7 @@ paste_for_each <- function(x, y, ...) {
 #' @export
 cuda_memory_stats <- function(device = cuda_current_device()) {
   if (!cuda_is_available()) {
-    rlang::abort("CUDA is not available.")
+    runtime_error("CUDA is not available.")
   }
 
   # quickly allocate some memory to initialize the device

@@ -402,7 +402,7 @@ MultiProcessingDataLoaderIter <- R6::R6Class(
             Sys.sleep(0.5)
             
             if (i == 20) {
-              rlang::abort("Could not create a connection with the main process.")
+              runtime_error("Could not create a connection with the main process.")
             }
           }
         }
