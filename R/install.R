@@ -65,9 +65,10 @@ install_torch <- function(reinstall = FALSE, ..., .inform_restart = TRUE) {
 
 #' A simple exported version of install_path
 #' Returns the torch installation path.
+#' @param check_writable If `TRUE`, checks if the installation path is writable.
 #' @export
-torch_install_path <- function() {
- normalizePath(inst_path(), mustWork = FALSE)
+torch_install_path <- function(check_writable = FALSE) {
+ normalizePath(inst_path(check_writable = check_writable), mustWork = FALSE)
 }
 
 #' Verifies if torch is installed
@@ -79,7 +80,7 @@ torch_is_installed <- function() {
 }
 
 install_lib <- function(libname, url, reinstall = FALSE) {
-  inst_path <- torch_install_path()
+  inst_path <- torch_install_path(check_writable = TRUE)
   installer_message(c(
     "We are now proceeding to download and installing lantern and torch.",
     "The installation path is: {.path {inst_path}}"
@@ -162,9 +163,13 @@ lib_is_installed <- function(libname, install_path) {
   FALSE
 }
 
-inst_path <- function() {
+inst_path <- function(check_writable = FALSE) {
   install_path <- Sys.getenv("TORCH_HOME")
-  if (nzchar(install_path)) {
+  if (nzchar(install_path)) {    
+    if (!check_writable) {
+      return(install_path)
+    }
+
     if (can_write_into(install_path)) {
       return(install_path)
     } else {
@@ -175,14 +180,19 @@ inst_path <- function() {
     }
   }
   install_path <- system.file("", package = "torch")
-  if (can_write_into(install_path)) {
+  if (!check_writable) {
     return(install_path)
   }
-  cli_abort(c("x" = "{.pkg torch} cannot write into {.path {install_path}}.",
-            "i" = "Please configure a {.var TORCH_HOME} variable with a writable folder",
-            " " = "and run {.fn install_torch()} again",
-            "i" = "Or run R under the {.emph root} user {.strong once} to perform the {.fn install_torch()} ",
-            " " = "if you use system level package manager like {.pkg r2u}"))
+  
+  if (can_write_into(install_path)) {
+    return(install_path)
+  } else {
+    cli_abort(c("x" = "{.pkg torch} cannot write into {.path {install_path}}.",
+                "i" = "Please configure a {.var TORCH_HOME} variable with a writable folder",
+                " " = "and run {.fn install_torch()} again",
+                "i" = "Or run R under the {.emph root} user {.strong once} to perform the {.fn install_torch()} ",
+                " " = "if you use system level package manager like {.pkg r2u}"))
+  }
 }
 
 libtorch_url <- function() {
