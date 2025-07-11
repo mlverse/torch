@@ -78,6 +78,7 @@ endif()
 if (DEFINED CUDA_VERSION_NUMBER)
     if (WIN32)
         find_package(CUDAToolkit)
+        set(CMAKE_CUDA_FLAGS "${CMAKE_CUDA_FLAGS} -allow-unsupported-compiler")
         # Workaround issue with PyTorch NVTX headers
         # See https://discuss.pytorch.org/t/failed-to-find-nvtoolsext/179635/13?u=dfalbel
         if(CUDA_VERSION_NUMBER VERSION_GREATER_EQUAL 12)
