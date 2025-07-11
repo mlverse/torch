@@ -25,9 +25,9 @@ jobs:
           - {os: ubuntu, version: cu11.8, runner: [self-hosted, linux]}
           - {os: ubuntu, version: cu12.4, runner: [self-hosted, linux]}
 
-          - {os: windows, version: cpu, runner: windows-2019}
-          - {os: windows, version: cu11.8, runner: windows-2019}
-          - {os: windows, version: cu12.4, runner: windows-2019}
+          - {os: windows, version: cpu, runner: windows-2022}
+          - {os: windows, version: cu11.8, runner: windows-2022}
+          - {os: windows, version: cu12.4, runner: windows-2022}
         
         precxx11abi: [0, 1]
 
