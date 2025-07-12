@@ -91,7 +91,7 @@ jobs:
           cuda_version: ${{ matrix.cuda }}
 
       - name: Add msbuild to PATH
-        if: ${{ matrix.os == 'windows' && matrix.version == 'cu11.8' }}
+        if: ${{ matrix.config.os == 'windows' && matrix.config.version == 'cu11.8' }}
         uses: microsoft/setup-msbuild@v2
         with:
             vs-version: '[19.1,19.25)'
