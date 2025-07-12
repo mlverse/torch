@@ -94,7 +94,7 @@ jobs:
         if: ${{ matrix.config.os == 'windows' && matrix.config.version == 'cu11.8' }}
         uses: microsoft/setup-msbuild@v2
         with:
-            vs-version: '[19.1,19.25)'
+            vs-version: '16.11'
 
       - name: Run cmake
         run: |
