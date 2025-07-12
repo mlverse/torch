@@ -90,6 +90,12 @@ jobs:
         with:
           cuda_version: ${{ matrix.cuda }}
 
+      - name: Add msbuild to PATH
+        if: ${{ matrix.os == 'windows' && matrix.version == 'cu11.8' }}
+        uses: microsoft/setup-msbuild@v2
+        with:
+            vs-version: '[19.1,19.25)'
+
       - name: Run cmake
         run: |
           cd src/lantern/
