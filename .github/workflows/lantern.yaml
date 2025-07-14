@@ -26,7 +26,7 @@ jobs:
           - {os: ubuntu, version: cu12.4, runner: [self-hosted, linux]}
 
           - {os: windows, version: cpu, runner: windows-2022}
-          - {os: windows, version: cu11.8, runner: windows-2022}
+          - {os: windows, version: cu11.8, runner: windows-2022, cmake: '-G "Visual Studio 16 2019"'}
           - {os: windows, version: cu12.4, runner: windows-2022}
         
         precxx11abi: [0, 1]
@@ -94,14 +94,14 @@ jobs:
         if: ${{ matrix.config.os == 'windows' && matrix.config.version == 'cu11.8' }}
         uses: microsoft/setup-msbuild@v2
         with:
-            vs-version: '16.11'
+            vs-version: '[16.0,17.0)'
 
       - name: Run cmake
         run: |
           cd src/lantern/
           mkdir build
           cd build
-          cmake ..
+          cmake .. ${{ matrix.config.cmake }}
 
       - name: Build libs
         id: build
