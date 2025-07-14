@@ -90,6 +90,11 @@ jobs:
         with:
           cuda_version: ${{ matrix.cuda }}
 
+      - name: Install MSBuild
+        if: ${{ matrix.config.os == 'windows' && matrix.config.version == 'cu11.8' }}
+        run: |
+          choco install visualstudio2019buildtools
+
       - name: Add msbuild to PATH
         if: ${{ matrix.config.os == 'windows' && matrix.config.version == 'cu11.8' }}
         uses: microsoft/setup-msbuild@v2
