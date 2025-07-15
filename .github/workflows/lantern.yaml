@@ -26,7 +26,7 @@ jobs:
           - {os: ubuntu, version: cu12.4, runner: [self-hosted, linux]}
 
           - {os: windows, version: cpu, runner: windows-2022}
-          - {os: windows, version: cu11.8, runner: windows-2022, cmake: '-G "Visual Studio 16 2019" -DCMAKE_CUDA_COMPILER="C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v11.8/bin/nvcc.exe"'}
+          - {os: windows, version: cu11.8, runner: windows-2022}
           - {os: windows, version: cu12.4, runner: windows-2022}
         
         precxx11abi: [0, 1]
@@ -76,17 +76,6 @@ jobs:
         with:
           cmake-version: "3.25.1"
 
-      - name: Install MSBuild
-        if: ${{ matrix.config.os == 'windows' && matrix.config.version == 'cu11.8' }}
-        run: |
-          choco install visualstudio2019buildtools --package-parameters "--allWorkloads --includeRecommended --includeOptional --passive --locale en-US"
-
-      - name: Add msbuild to PATH
-        if: ${{ matrix.config.os == 'windows' && matrix.config.version == 'cu11.8' }}
-        uses: microsoft/setup-msbuild@v2
-        with:
-            vs-version: '[16.0,17.0)'
-
       - name: Install CUDA
         if: ${{matrix.cuda != ''}}
         uses: Jimver/cuda-toolkit@v0.2.24
@@ -100,13 +89,6 @@ jobs:
         uses: ./.github/actions/install-cudnn
         with:
           cuda_version: ${{ matrix.cuda }}
-
-      - name: Check nvcc
-        if: ${{ matrix.config.os == 'windows' && matrix.config.version == 'cu11.8' }}
-        run: |
-          "${{ env.CUDA_PATH }}/bin/nvcc.exe" --version || true
-          where nvcc
-          nvcc --version
 
       - name: Run cmake
         run: |
