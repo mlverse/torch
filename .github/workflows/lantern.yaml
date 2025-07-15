@@ -26,7 +26,7 @@ jobs:
           - {os: ubuntu, version: cu12.4, runner: [self-hosted, linux]}
 
           - {os: windows, version: cpu, runner: windows-2022}
-          - {os: windows, version: cu11.8, runner: windows-2022}
+          - {os: windows, version: cu11.8, runner: windows-2022, cmake: '-G "Visual Studio 16 2019"'}
           - {os: windows, version: cu12.4, runner: windows-2022}
         
         precxx11abi: [0, 1]
@@ -75,6 +75,17 @@ jobs:
         uses: jwlawson/actions-setup-cmake@v2
         with:
           cmake-version: "3.25.1"
+
+      - name: Install MSBuild
+        if: ${{ matrix.config.os == 'windows' && matrix.config.version == 'cu11.8' }}
+        run: |
+          choco install visualstudio2019buildtools --package-parameters "--allWorkloads --includeRecommended --includeOptional --passive --locale en-US"
+
+      - name: Add msbuild to PATH
+        if: ${{ matrix.config.os == 'windows' && matrix.config.version == 'cu11.8' }}
+        uses: microsoft/setup-msbuild@v2
+        with:
+            vs-version: '[16.0,17.0)'
 
       - name: Install CUDA
         if: ${{matrix.cuda != ''}}
