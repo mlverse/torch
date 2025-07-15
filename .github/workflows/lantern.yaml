@@ -104,7 +104,7 @@ jobs:
       - name: Check nvcc
         if: ${{ matrix.config.os == 'windows' && matrix.config.version == 'cu11.8' }}
         run: |
-          ${{ env.CUDA_PATH }}/bin/nvcc --version || true
+          "${{ env.CUDA_PATH }}/bin/nvcc.exe" --version || true
           where nvcc
           nvcc --version
 
