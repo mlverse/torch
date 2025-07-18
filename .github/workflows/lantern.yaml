@@ -37,10 +37,6 @@ jobs:
           - config: {os: ubuntu}
             precxx11abi: 1
             container: ubuntu:20.04
-            
-          - config: {version: cu11.8}
-            cuda: 11.8
-            cuda_patch: 0
           
           - config: {version: cu12.4}
             cuda: 12.4
