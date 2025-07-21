@@ -1,5 +1,7 @@
 # torch (development version)
 
+- Support for CUDA 11.8 was dropped on Windows. (#1342)
+
 # torch 0.15.1
 
 # torch 0.15.0
