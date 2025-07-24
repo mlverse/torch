@@ -23,9 +23,11 @@ jobs:
           
           - {os: ubuntu, version: cpu, runner: ubuntu-latest}
           - {os: ubuntu, version: cu12.4, runner: [self-hosted, linux]}
+          - {os: ubuntu, version: cu12.8, runner: [self-hosted, linux]}
 
           - {os: windows, version: cpu, runner: windows-2022}
           - {os: windows, version: cu12.4, runner: windows-2022}
+          - {os: windows, version: cu12.8, runner: windows-2022}
 
         include:
           - config: {os: ubuntu}
@@ -34,6 +36,10 @@ jobs:
           - config: {version: cu12.4}
             cuda: 12.4
             cuda_patch: 1
+          
+          - config: {version: cu12.8}
+            cuda: 12.8
+            cuda_patch: 0
         
     env:
       CUDA: ${{ matrix.cuda }}
