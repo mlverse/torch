@@ -1,5 +1,5 @@
 branch <- "main"
-torch_version <- "2.5.1"
+torch_version <- "2.7.1"
 
 #' Install Torch
 #'
