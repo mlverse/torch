@@ -7,7 +7,7 @@ jobs:
   build:
     runs-on: ${{ matrix.config.runner }}
     container: ${{ matrix.container }}
-    name: "os:${{matrix.config.os}} | v:${{matrix.config.version}} (pre-cxx11: ${{matrix.precxx11abi }})"
+    name: "os:${{matrix.config.os}} | v:${{matrix.config.version}}"
     permissions:
       id-token: write
       contents: read
@@ -26,32 +26,17 @@ jobs:
 
           - {os: windows, version: cpu, runner: windows-2022}
           - {os: windows, version: cu12.4, runner: windows-2022}
-        
-        precxx11abi: [0, 1]
 
         include:
           - config: {os: ubuntu}
-            precxx11abi: 0
-            container: ubuntu:20.04
-
-          - config: {os: ubuntu}
-            precxx11abi: 1
             container: ubuntu:20.04
           
           - config: {version: cu12.4}
             cuda: 12.4
             cuda_patch: 1
-
-        exclude:
-          - config: {os: macOS}
-            precxx11abi: 1
-
-          - config: {os: windows}
-            precxx11abi: 1
         
     env:
       CUDA: ${{ matrix.cuda }}
-      PRECXX11ABI: ${{ matrix.precxx11abi }}
       
     steps:
 
@@ -76,7 +61,7 @@ jobs:
         id: cuda-toolkit
         with:
           cuda: "${{matrix.cuda}}.${{matrix.cuda_patch}}"
-          log-file-suffix: '${{matrix.cuda}}.${{matrix.cuda_patch}}.${{matrix.precxx11abi}}.txt'
+          log-file-suffix: '${{matrix.cuda}}.${{matrix.cuda_patch}}.txt'
           
       - name: Install CuDNN
         if: ${{ matrix.cuda != '' }}
