@@ -22,20 +22,20 @@ jobs:
           - {os: macOS, version: cpu-m1, runner: [self-hosted, m1]}
           
           - {os: ubuntu, version: cpu, runner: ubuntu-latest}
-          - {os: ubuntu, version: cu12.4, runner: [self-hosted, linux]}
+          - {os: ubuntu, version: cu12.6, runner: [self-hosted, linux]}
           - {os: ubuntu, version: cu12.8, runner: [self-hosted, linux]}
 
           - {os: windows, version: cpu, runner: windows-2022}
-          - {os: windows, version: cu12.4, runner: windows-2022}
+          - {os: windows, version: cu12.6, runner: windows-2022}
           - {os: windows, version: cu12.8, runner: windows-2022}
 
         include:
           - config: {os: ubuntu}
             container: ubuntu:20.04
           
-          - config: {version: cu12.4}
-            cuda: 12.4
-            cuda_patch: 1
+          - config: {version: cu12.6}
+            cuda: 12.6
+            cuda_patch: 0
           
           - config: {version: cu12.8}
             cuda: 12.8
