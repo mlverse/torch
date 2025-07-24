@@ -30,14 +30,14 @@ jobs:
           - {os: macOS, r_version: '', version: cpu-m1, runner: [self-hosted, macOS, ARM64]}
 
           - {os: ubuntu, r_version: release, version: cpu, runner: ubuntu-22.04}
-          - {os: ubuntu, r_version: release, version: cu12.4, runner: [self-hosted, gpu-local]}
+          - {os: ubuntu, r_version: release, version: cu12.8, runner: [self-hosted, gpu-local]}
 
           - {os: windows, r_version: release, version: cpu, runner: windows-latest}
         
         include:
           
-          - config: {os: ubuntu, version: cu12.4}
-            container: {image: 'nvidia/cuda:12.4.1-cudnn-devel-ubuntu20.04', options: '--gpus all --runtime=nvidia'}
+          - config: {os: ubuntu, version: cu12.8}
+            container: {image: 'nvidia/cuda:12.8.0-cudnn-devel-ubuntu20.04', options: '--gpus all --runtime=nvidia'}
             cuda_enabled: 1
 
     runs-on: ${{ matrix.config.runner }}
