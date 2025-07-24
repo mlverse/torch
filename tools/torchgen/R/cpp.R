@@ -705,7 +705,7 @@ cpp <- function(path) {
     purrr::discard(~.x$name == "range" && length(.x$arguments) == 3) %>%
     purrr::discard(~.x$name == "range_out" && length(.x$arguments) == 3) %>%
     purrr::discard(~.x$name == "arange" && length(.x$arguments) == 3) %>%
-    purrr::discard(~.x$name == "stft" && length(.x$arguments) == 8)
+    purrr::discard(~.x$name == "stft" && length(.x$arguments) == 9)
 
   pb <- NULL
 
