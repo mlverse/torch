@@ -456,12 +456,12 @@ cuda_version_windows <- function() {
 }
 
 check_supported_cuda_version_windows <- function(version) {
-  supported_versions <- c("11.8", "12.4")
+  supported_versions <- c("12.6", "12.8")
   check_supported_version(version, supported_versions)
 }
 
 check_supported_cuda_version_linux <- function(version) {
-  supported_versions <- c("11.8", "12.4")
+  supported_versions <- c("12.6", "12.8")
   check_supported_version(version, supported_versions)
 }
 
