@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.19.2)
 project(lantern)
 
-set(TORCH_VERSION "2.5.1")
+set(TORCH_VERSION "2.7.1")
 
 if (NOT DEFINED TORCH_PATH)
     if (DEFINED ENV{TORCH_PATH})
@@ -22,16 +22,6 @@ if (DEFINED ENV{CUDA} AND NOT "$ENV{CUDA}" STREQUAL "")
     set(ENV{TORCH_CUDA_ARCH_LIST} "5.0 5.2 6.0 6.1 7.0 7.5 8.0 8.6 9.0+PTX")
 endif()
 
-
-if (DEFINED ENV{PRECXX11ABI} AND '$ENV{PRECXX11ABI}' STREQUAL '1')
-    if (NOT UNIX)
-        message(FATAL_ERROR "PRECXX11ABI is only supported on UNIX.")
-    endif()
-    message(STATUS "Building using -D_GLIBCXX_USE_CXX11_ABI=0")
-    add_definitions(-D_GLIBCXX_USE_CXX11_ABI=0)
-    set(PRECXX11ABI 1)
-endif()
-
 if (NOT EXISTS "${TORCH_PATH}")
 
     message(STATUS "TORCH_PATH doesn't exists yet. Downloading a pre-built binary.")
@@ -44,11 +34,6 @@ if (NOT EXISTS "${TORCH_PATH}")
     if (NOT DEFINED TORCH_URL)
         message(STATUS "No `TORCH_URL` is defined. Will use the default URL.")
 
-        set(PRECXX11ABI_URL "cxx11-abi-")
-        if(DEFINED PRECXX11ABI)
-            set(PRECXX11ABI_URL "")
-        endif()
-
         if (APPLE)
             set(TORCH_URL "https://github.com/mlverse/libtorch-mac-m1/releases/download/LibTorch-for-R/libtorch-${CMAKE_HOST_SYSTEM_PROCESSOR}-v${TORCH_VERSION}.zip")
         elseif(WIN32)
@@ -59,9 +44,9 @@ if (NOT EXISTS "${TORCH_PATH}")
             endif()
         elseif(UNIX)
             if (DEFINED CUDA_VERSION_NUMBER)
-                set(TORCH_URL "https://download.pytorch.org/libtorch/cu${CUDA_VERSION_NUMBER}/libtorch-${PRECXX11ABI_URL}shared-with-deps-${TORCH_VERSION}%2Bcu${CUDA_VERSION_NUMBER}.zip")
+                set(TORCH_URL "https://download.pytorch.org/libtorch/cu${CUDA_VERSION_NUMBER}/libtorch-cxx11-abi-shared-with-deps-${TORCH_VERSION}%2Bcu${CUDA_VERSION_NUMBER}.zip")
             else()
-                set(TORCH_URL "https://download.pytorch.org/libtorch/cpu/libtorch-${PRECXX11ABI_URL}shared-with-deps-${TORCH_VERSION}%2Bcpu.zip")
+                set(TORCH_URL "https://download.pytorch.org/libtorch/cpu/libtorch-cxx11-abi-shared-with-deps-${TORCH_VERSION}%2Bcpu.zip")
             endif()
         endif()
     endif()
@@ -226,10 +211,6 @@ endif()
 
 if (NOT WIN32)
     set(CPACK_PACKAGE_VERSION ${CPACK_PACKAGE_VERSION}+${CMAKE_SYSTEM_PROCESSOR})
-endif()
-
-if (DEFINED PRECXX11ABI)
-    set(CPACK_PACKAGE_VERSION "${CPACK_PACKAGE_VERSION}+pre-cxx11")
 endif()
 
 include(CPack)

@@ -1,5 +1,5 @@
 branch <- "main"
-torch_version <- "2.5.1"
+torch_version <- "2.7.1"
 
 #' Install Torch
 #'
@@ -21,7 +21,8 @@ torch_version <- "2.5.1"
 #'    Files will be installed/copied to the `TORCH_HOME` directory.
 #' - `LANTERN_URL`: Same as `TORCH_URL` but for the Lantern library.
 #' - `TORCH_INSTALL_DEBUG`: Setting it to 1, shows debug log messages during installation.
-#' - `PRECXX11ABI`: Setting it to `1` will will trigger the installation of
+#' - `PRECXX11ABI`: DEPRECATED. No longer has effects.
+#'    Setting it to `1` will will trigger the installation of
 #'    a Pre-cxx11 ABI installation of LibTorch. This can be useful in environments with
 #'    older versions of GLIBC like CentOS7 and older Debian/Ubuntu versions.
 #' - `LANTERN_BASE_URL`: The base URL for lantern files. This allows passing a directory
@@ -210,8 +211,7 @@ libtorch_url <- function() {
     url <- glue::glue("https://download.pytorch.org/libtorch/{kind}/libtorch-win-shared-with-deps-{torch_version}%2B{kind}.zip")
   }
   if (is_linux()) {
-    precxx11 <- ifelse(precxx11abi(), "", "cxx11-abi-")
-    url <- glue::glue("https://download.pytorch.org/libtorch/{kind}/libtorch-{precxx11}shared-with-deps-{torch_version}%2B{kind}.zip")
+    url <- glue::glue("https://download.pytorch.org/libtorch/{kind}/libtorch-cxx11-abi-shared-with-deps-{torch_version}%2B{kind}.zip")
   }
   
   installer_message(c(
@@ -235,16 +235,13 @@ lantern_url <- function() {
   pkg_version <- torch_r_version()
   kind <- installation_kind()
   arch <- architecture()
-  precxx11 <- precxx11abi()
   os <- os_name()
   
   fname <- paste0("lantern-", pkg_version, "+", kind)
   if (is_linux() || is_macos()) {
     fname <- paste0(fname, "+", arch)
   }
-  if (is_linux() && !is.null(precxx11) && precxx11) {
-    fname <- paste0(fname, "+pre-cxx11")
-  }
+  
   fname <- paste0(fname, "-", os, ".zip")
   
   # we now query the base URL for that file name. There are 2 cases:
@@ -315,27 +312,6 @@ os_name <- function() {
     "win64"
   }
 }
-
-precxx11abi <- function() {
-  abi <- Sys.getenv("PRECXX11ABI", "")
-  
-  if (abi != "" && !is_linux()) {
-    installer_message("{.envvar PRECXX11ABI} value will be ignored. Only supported on Linux.")
-  }
-  
-  if (!is_linux()) {
-    return(NULL)
-  }
-  
-  if (!is_truthy(abi)) {
-    installer_message("Installing the CXX11 ABI enabled build.")
-    return(FALSE)
-  } else {
-    installer_message("Installing the pre-CXX11 ABI enabled build.")
-    return(TRUE)
-  }
-}
-
 
 architecture <- function() {
   arch <- Sys.info()["machine"]
@@ -480,12 +456,12 @@ cuda_version_windows <- function() {
 }
 
 check_supported_cuda_version_windows <- function(version) {
-  supported_versions <- c("11.8", "12.4")
+  supported_versions <- c("12.6", "12.8")
   check_supported_version(version, supported_versions)
 }
 
 check_supported_cuda_version_linux <- function(version) {
-  supported_versions <- c("11.8", "12.4")
+  supported_versions <- c("12.6", "12.8")
   check_supported_version(version, supported_versions)
 }
 
