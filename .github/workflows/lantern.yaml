@@ -35,11 +35,11 @@ jobs:
           
           - config: {version: cu12.6}
             cuda: 12.6
-            cuda_patch: 0
+            cuda_patch: 3
           
           - config: {version: cu12.8}
             cuda: 12.8
-            cuda_patch: 0
+            cuda_patch: 1
         
     env:
       CUDA: ${{ matrix.cuda }}
