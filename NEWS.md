@@ -1,6 +1,9 @@
 # torch (development version)
 
 - Support for CUDA 11.8 was dropped on Windows. (#1342)
+- Dropped support for CUDA 12.4 (#1348)
+- Added Support for CUDA 12.6 and 12.8 (#1348)
+- Updated to LibTorch 2.7.1 (#1348)
 
 # torch 0.15.1
 
