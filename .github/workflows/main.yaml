@@ -70,7 +70,7 @@ jobs:
           echo "LANTERN_BASE_URL=${{ runner.temp }}/" >> $GITHUB_ENV
         shell: bash
 
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
       - if: ${{ env.TORCH_TEST_CUDA == 1 }}
         shell: bash
