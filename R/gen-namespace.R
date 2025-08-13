@@ -32260,8 +32260,8 @@ fun_type = 'namespace'
 }
 
 
-#' @rdname torch_repeat_interleave
-torch_repeat_interleave <- function(self, repeats, dim = NULL, output_size = NULL) {
+#' @rdname .torch_repeat_interleave
+.torch_repeat_interleave <- function(self, repeats, dim = NULL, output_size = NULL) {
   args <- mget(x = c("self", "repeats", "dim", "output_size"))
 expected_types <- list(self = "Tensor", repeats = c("Tensor", "int64_t"), dim = "int64_t", 
     output_size = "int64_t")

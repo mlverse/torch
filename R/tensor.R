@@ -156,6 +156,12 @@ Tensor <- R7Class(
       o[[2]]$add_(1L)
       o
     },
+    repeat_interleave = function(repeats, dim = NULL, output_size = NULL) {
+      if (is.numeric(repeats) && length(repeats) == 1L) {
+        cpp_torch_method_repeat_interleave_self_Tensor_repeats_int64_t(self, repeats, dim, output_size)
+      }
+      private$.repeat_interleave(repeats, dim, output_size)
+    },
     scatter = function(dim, index, src) {
       if (is_torch_tensor(src)) {
         private$`_scatter`(dim, index, src = src)

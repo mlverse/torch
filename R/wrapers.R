@@ -620,6 +620,22 @@ torch_multinomial <- function(self, num_samples, replacement = FALSE, generator 
   r
 }
 
+#' @rdname torch_repeat_interleave
+torch_repeat_interleave <- function(self, repeats, dim = NULL, output_size = NULL) {
+  if (is.numeric(repeats) && length(repeats) == 1) {
+    return(cpp_torch_namespace_repeat_interleave_self_Tensor_repeats_Tensor(
+      self,
+      repeats = repeats,
+      dim = dim,
+      output_size = output_size
+    ))
+  }
+  .torch_repeat_interleave(
+    self = self, repeats = repeats, dim = dim,
+    output_size = output_size
+  )
+}
+
 #' Index torch tensors
 #'
 #' Helper functions to index tensors.
