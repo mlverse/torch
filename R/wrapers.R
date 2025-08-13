@@ -623,7 +623,7 @@ torch_multinomial <- function(self, num_samples, replacement = FALSE, generator 
 #' @rdname torch_repeat_interleave
 torch_repeat_interleave <- function(self, repeats, dim = NULL, output_size = NULL) {
   if (is.numeric(repeats) && length(repeats) == 1) {
-    return(cpp_torch_namespace_repeat_interleave_self_Tensor_repeats_Tensor(
+    return(cpp_torch_namespace_repeat_interleave_self_Tensor_repeats_int64_t(
       self,
       repeats = repeats,
       dim = dim,
