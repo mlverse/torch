@@ -145,7 +145,7 @@ internal_funs <- c("logical_not", "max_pool1d_with_indices", "max_pool2d_with_in
                    "nonzero", "fft_fft", "fft_ifft", "fft_rfft", "fft_irfft",
                    "multinomial", "norm", "cross_entropy_loss", "sort",
                    "nll_loss_nd", "bincount", "fft_fftfreq",
-                   "where"
+                   "where", "repeat_interleave"
                    )
 
 internal_funs <- c(internal_funs, creation_ops)
@@ -451,7 +451,7 @@ internal_methods <- c("_backward", "retain_grad", "size", "to", "stride",
                       "rename_", "narrow", "narrow_copy", "is_leaf", "max",
                       "min", "argsort", "argmax", "argmin", "norm", "split",
                       "nonzero", "nonzero_numpy", "view", "sort", "bincount",
-                      "movedim", "clone", "detach")
+                      "movedim", "clone", "detach", "repeat_interleave")
 
 r_method_env <- function(decls) {
   if (decls[[1]]$name %in% internal_methods)

@@ -5755,7 +5755,7 @@ call_c_function(
   return_types = return_types,
   fun_type = 'method'
 )})
-Tensor$set("public", "repeat_interleave", function(repeats, dim = NULL, output_size = NULL) {  args <- mget(x = c("repeats", "dim", "output_size"))
+Tensor$set("private", "_repeat_interleave", function(repeats, dim = NULL, output_size = NULL) {  args <- mget(x = c("repeats", "dim", "output_size"))
 args <- c(list(self = self), args)
 expected_types <- list(self = "Tensor", repeats = c("Tensor", "int64_t"), dim = "int64_t", 
     output_size = "int64_t")
