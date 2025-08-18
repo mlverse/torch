@@ -4,6 +4,7 @@
 - Dropped support for CUDA 12.4 (#1348)
 - Added Support for CUDA 12.6 and 12.8 (#1348)
 - Updated to LibTorch 2.7.1 (#1348)
+- Fixed a bug causing repeat_interleave to not work properly on CUDA (#1353)
 
 # torch 0.15.1
 
