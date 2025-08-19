@@ -1024,7 +1024,7 @@ nn_multi_margin_loss <- nn_module(
 #' \eqn{(N, D)}.
 #'
 #' The distance swap is described in detail in the paper
-#' [Learning shallow convolutional feature descriptors with triplet losses](https://paperswithcode.com/paper/learning-local-feature-descriptors-with) by
+#' Learning shallow convolutional feature descriptors with triplet losses \doi{10.5244/C.30.119} by
 #' V. Balntas, E. Riba et al.
 #'
 #' The loss function for each sample in the mini-batch is:
@@ -1130,7 +1130,7 @@ nn_triplet_margin_loss <- nn_module(
 #'   margins penalize cases where the negative examples are not distant enough from the
 #'   anchors, relative to the positives. Default: \eqn{1}.
 #' @param swap (bool, optional): Whether to use the distance swap described in the paper
-#'   [Learning shallow convolutional feature descriptors with triplet losses](https://paperswithcode.com/paper/learning-local-feature-descriptors-with) by
+#'   Learning shallow convolutional feature descriptors with triplet losses \doi{10.5244/C.30.119} by
 #'   V. Balntas, E. Riba et al. If TRUE, and if the positive example is closer to the
 #'   negative example than the anchor is, swaps the positive example and the anchor in
 #'   the loss computation. Default: `FALSE`.

@@ -37,7 +37,7 @@ is composed by \code{a}, \code{p} and \code{n} (i.e., \code{anchor}, \verb{posit
 }
 \details{
 The distance swap is described in detail in the paper
-\href{https://paperswithcode.com/paper/learning-local-feature-descriptors-with}{Learning shallow convolutional feature descriptors with triplet losses} by
+Learning shallow convolutional feature descriptors with triplet losses \doi{10.5244/C.30.119} by
 V. Balntas, E. Riba et al.
 
 The loss function for each sample in the mini-batch is:
