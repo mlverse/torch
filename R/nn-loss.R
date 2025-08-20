@@ -1045,7 +1045,7 @@ nn_multi_margin_loss <- nn_module(
 #' @param margin (float, optional): Default: \eqn{1}.
 #' @param p (int, optional): The norm degree for pairwise distance. Default: \eqn{2}.
 #' @param swap (bool, optional): The distance swap is described in detail in the paper
-#'   [Learning shallow convolutional feature descriptors with triplet losses](https://paperswithcode.com/paper/learning-local-feature-descriptors-with) by
+#'   Learning shallow convolutional feature descriptors with triplet losses by
 #'   V. Balntas, E. Riba et al. Default: `FALSE`.
 #' @param eps constant to avoid NaN's
 #' @param reduction (string, optional): Specifies the reduction to apply to the output:

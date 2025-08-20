@@ -20,7 +20,7 @@ nn_triplet_margin_loss(
 \item{eps}{constant to avoid NaN's}
 
 \item{swap}{(bool, optional): The distance swap is described in detail in the paper
-\href{https://paperswithcode.com/paper/learning-local-feature-descriptors-with}{Learning shallow convolutional feature descriptors with triplet losses} by
+Learning shallow convolutional feature descriptors with triplet losses by
 V. Balntas, E. Riba et al. Default: \code{FALSE}.}
 
 \item{reduction}{(string, optional): Specifies the reduction to apply to the output:
