@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: torch 0.16.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-08-21 09:09+0200\n"
-"PO-Revision-Date: 2025-08-21 09:12+0200\n"
+"PO-Revision-Date: 2025-08-21 09:29+0200\n"
 "Last-Translator: Christophe Regouby <christophe.regouby@free.fr>\n"
 "Language-Team: \n"
 "Language: fr_FR\n"
@@ -438,7 +438,7 @@ msgstr ""
 
 #: install.R:87
 msgid "The installation path is: {.path {inst_path}}"
-msgstr "LE chemin d'installation est {.path {inst_path}}."
+msgstr "Le chemin d'installation est {.path {inst_path}}."
 
 #: install.R:92
 msgid "An installation of {.strong {libname}} already exists."
