@@ -137,3 +137,13 @@ scalar_or_zero <- function(x) {
   else
     as.numeric(x)
 }
+
+# add additional checks to release issues created with usethis::use_release_issue()
+# https://usethis.r-lib.org/reference/use_release_issue.html
+release_bullets <- function() {
+  c("Update `po/R-torch.pot` file with `potools::po_update()`",
+    "Contact translators to collect their translation `.po` files",
+    "Compile the translations with `potools::po_compile()`"
+  )
+}
+
