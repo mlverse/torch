@@ -19,7 +19,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">torch</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.15.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.16.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -110,7 +110,8 @@ within the package directory. Eg what's given by <code>system.file(package="torc
 Files will be installed/copied to the <code>TORCH_HOME</code> directory.</p></li>
 <li><p><code>LANTERN_URL</code>: Same as <code>TORCH_URL</code> but for the Lantern library.</p></li>
 <li><p><code>TORCH_INSTALL_DEBUG</code>: Setting it to 1, shows debug log messages during installation.</p></li>
-<li><p><code>PRECXX11ABI</code>: Setting it to <code>1</code> will will trigger the installation of
+<li><p><code>PRECXX11ABI</code>: DEPRECATED. No longer has effects.
+Setting it to <code>1</code> will will trigger the installation of
 a Pre-cxx11 ABI installation of LibTorch. This can be useful in environments with
 older versions of GLIBC like CentOS7 and older Debian/Ubuntu versions.</p></li>
 <li><p><code>LANTERN_BASE_URL</code>: The base URL for lantern files. This allows passing a directory

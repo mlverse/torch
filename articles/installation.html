@@ -34,7 +34,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">torch</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.15.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.16.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -149,11 +149,11 @@ order to use GPU’s with torch you need to:</p>
 <ul>
 <li><p>Have a CUDA compatible NVIDIA GPU. You can find if you have a
 CUDA compatible GPU <a href="https://developer.nvidia.com/cuda-gpus#compute" class="external-link">here</a>.</p></li>
-<li><p>Have properly installed the NVIDIA CUDA toolkit version 11.7. For
-CUDA v11.7, follow the installation instructions <a href="https://developer.nvidia.com/cuda-11-7-0-download-archive" class="external-link">here</a>.
+<li><p>Have properly installed the NVIDIA CUDA toolkit version 12.8. For
+CUDA v12.8, follow the installation instructions <a href="https://developer.nvidia.com/cuda-12-8-1-download-archive" class="external-link">here</a>.
 <strong>Note</strong>: The version of the CUDA toolkit must match
 exactly what’s mentioed above.</p></li>
-<li><p>Have installed cuDNN - a version compatible with CUDA v11.7.
+<li><p>Have installed cuDNN - a version compatible with CUDA v12.8.
 Follow the installation instructions available <a href="https://developer.nvidia.com/cudnn" class="external-link">here</a>.</p></li>
 </ul>
 <p>Once you have installed all pre-requisites you can install
@@ -219,7 +219,7 @@ version). Follow the installation instructions available <a href="https://develo
 <p>If you have followed default installation locations we will detect
 that you have CUDA software installed and automatically download the GPU
 enabled Lantern binaries. You can also specify the <code>CUDA</code> env
-var with something like <code>Sys.setenv(CUDA="11.7")</code> if you want
+var with something like <code>Sys.setenv(CUDA="12.8")</code> if you want
 to force an specific version of the CUDA toolkit.</p>
 </div>
 </div>
@@ -244,9 +244,9 @@ chosen below.</p>
 following:</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">options</a></span><span class="op">(</span>timeout <span class="op">=</span> <span class="fl">600</span><span class="op">)</span> <span class="co"># increasing timeout is recommended since we will be downloading a 2GB file.</span></span>
-<span><span class="co"># For Windows and Linux: "cpu", "cu124" are the only currently supported</span></span>
+<span><span class="co"># For Windows and Linux: "cpu", "cu128" are the only currently supported</span></span>
 <span><span class="co"># For MacOS the supported are: "cpu-intel" or "cpu-m1"</span></span>
-<span><span class="va">kind</span> <span class="op">&lt;-</span> <span class="st">"cu124"</span></span>
+<span><span class="va">kind</span> <span class="op">&lt;-</span> <span class="st">"cu128"</span></span>
 <span><span class="va">version</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/available.packages.html" class="external-link">available.packages</a></span><span class="op">(</span><span class="op">)</span><span class="op">[</span><span class="st">"torch"</span>,<span class="st">"Version"</span><span class="op">]</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">options</a></span><span class="op">(</span>repos <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
 <span>  torch <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sprintf.html" class="external-link">sprintf</a></span><span class="op">(</span><span class="st">"https://torch-cdn.mlverse.org/packages/%s/%s/"</span>, <span class="va">kind</span>, <span class="va">version</span><span class="op">)</span>,</span>
