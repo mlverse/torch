@@ -100,6 +100,10 @@ torch_is_installed <- function() {
       ))
       FALSE
     })
+  } else {
+    # In this case, we don't check further and just assume it can load
+    # so that we don't repeat the check every time
+    return(TRUE)
   }
 
   .torch_can_load
