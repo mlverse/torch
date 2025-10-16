@@ -398,7 +398,7 @@ extract_ignite_state_dict <- function(self, states, nms) {
     })
     if (length(states)) {
       states <- lapply(seq(1, length(states) - length(nms) + 1, by = length(nms)), function(i) {
-        set_names(states[i:(i + length(nms) - 1)], nms)
+        set_names(states[i:(i + length(nms) - 1)], as.character(nms))
       })
     }
     params_with_state <- rcpp_ignite_optim_parameters_with_state(self$ptr)

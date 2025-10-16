@@ -1,4 +1,4 @@
-branch <- "main"
+branch <- "cran/v0.16.1"
 torch_version <- "2.7.1"
 
 #' Install Torch
@@ -72,12 +72,41 @@ torch_install_path <- function(check_writable = FALSE) {
  normalizePath(inst_path(check_writable = check_writable), mustWork = FALSE)
 }
 
+.torch_can_load <- NULL
 #' Verifies if torch is installed
 #'
 #' @export
 torch_is_installed <- function() {
-  lib_is_installed("lantern", torch_install_path()) && 
-    lib_is_installed("torch", torch_install_path())
+  if (!lib_is_installed("lantern", torch_install_path())) {
+    return(FALSE)
+  }
+  
+  if(!lib_is_installed("torch", torch_install_path())) {
+    return(FALSE)
+  }
+    
+  if (is.null(.torch_can_load) && Sys.getenv("TORCH_VERIFY_LOAD", "TRUE") == "TRUE") {
+    .torch_can_load <<- tryCatch({
+      callr::r(function() {
+        torch::torch_tensor(1)
+        TRUE
+      }, env = c(TORCH_VERIFY_LOAD = "FALSE"))
+    }, error = function(err) {
+      cli::cli_warn(c(
+        "Torch libraries are installed but loading them caused a segfault.",
+        "Please reinstall torch with {.code install_torch(reinstall = TRUE)}",
+        "You can disable this check by setting {.envvar TORCH_VERIFY_LOAD} to {.val FALSE}",
+        conditionMessage(err)
+      ))
+      FALSE
+    })
+  } else {
+    # In this case, we don't check further and just assume it can load
+    # so that we don't repeat the check every time
+    return(TRUE)
+  }
+
+  .torch_can_load
 }
 
 install_lib <- function(libname, url, reinstall = FALSE) {
