@@ -1,1 +1,1 @@
-New release, includes bugfixes and improvements.
+Fixes issues with Windows runners.
