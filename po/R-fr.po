@@ -1,9 +1,9 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: torch 0.14.0\n"
+"Project-Id-Version: torch 0.15.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-05-24 18:03+0200\n"
-"PO-Revision-Date: 2025-05-24 18:27+0200\n"
+"POT-Creation-Date: 2025-06-23 17:53+0200\n"
+"PO-Revision-Date: 2025-06-23 17:55+0200\n"
 "Last-Translator: Christophe Regouby <christophe.regouby@free.fr>\n"
 "Language-Team: \n"
 "Language: fr_FR\n"
@@ -11,10 +11,10 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Poedit 3.6\n"
+"X-Generator: Poedit 3.5\n"
 
 #: R7.R:46
-msgid "can only set to public, private and active"
+msgid "can only set to `public`, `private` and `active`"
 msgstr "ne peut être configuré qu’avec `public`, `private` ou `active`"
 
 #: autocast.R:63 autocast.R:87
@@ -141,10 +141,10 @@ msgstr ""
 
 #: call_torch_function.R:54
 msgid ""
-"A function of name %s was not found. Please check your spelling and that the "
-"desired function exists."
+"No function named {name} can be found. Please check your spelling and that "
+"the desired function exists."
 msgstr ""
-"Impossible de trouver la fonction nommée %s . Veuillez vérifier "
+"Impossible de trouver la fonction nommée {name} . Veuillez vérifier "
 "l’orthographe et que la fonction désirée existe bien."
 
 #: codegen-utils.R:5
@@ -208,10 +208,11 @@ msgid "CUDA is not available."
 msgstr "CUDA n'est pas disponible."
 
 #: device.R:12
-msgid "type should not include an index because index was passed explicitly"
+msgid ""
+"type {type} should not include any index because index was passed explicitly."
 msgstr ""
-"'type' ne doit pas inclure d’index, car l’index a déjà été fourni de manière "
-"explicite"
+"Le type {type} ne doit pas inclure d’index, car l’index a déjà été fourni de "
+"manière explicite"
 
 #: device.R:119
 msgid "y is not a torch_device"
@@ -362,7 +363,7 @@ msgstr "qui définit une méthode spécifique pour `initialize()`"
 msgid "must also define a custom `expand()` method."
 msgstr "doit aussi définir une méthode spécifique pour `expand()`."
 
-#: dtype.R:162
+#: dtype.R:165
 msgid "One of the objects is not a dtype. Comparison is not possible."
 msgstr "Un des objets n’est pas un dtype. La comparaison n’est pas possible."
 
@@ -373,7 +374,7 @@ msgstr ""
 "aléatoire."
 
 #: generator.R:24
-msgid "Seed must an integer or integer64."
+msgid "Seed must be integer or integer64."
 msgstr "La graine aléatoire doit être de type ‘integer’ ou ‘integer64’."
 
 #: generator.R:151
@@ -514,10 +515,12 @@ msgid "and run {.fn install_torch()} again"
 msgstr "et lancer {.fn install_torch()} à nouveau."
 
 #: install.R:184
-msgid "Or run R under the root user once to perform the {.fn install_torch()}"
+msgid ""
+"Or run R under the {.emph root} user {.strong once} to perform the {.fn "
+"install_torch()}"
 msgstr ""
-"Vous pouvez également exécuter R sous l'utilisateur root une fois pour "
-"effectuer l'opération {.fn install_torch()}"
+"Vous pouvez également exécuter R avec l'utilisateur root {.strong une fois "
+"pour toute} pour effectuer l'opération {.fn install_torch()}"
 
 #: install.R:185
 msgid "if you use system level package manager like {.pkg r2u}"
@@ -959,6 +962,34 @@ msgid "Shape of `.weight` does not match num_embeddings and embedding_dim"
 msgstr ""
 "La forme du tenseur ‘.weight’ ne correspond pas avec ‘num_embedding’ et "
 "‘embedding_dim’"
+
+#: nn-transformer.R:80
+msgid ""
+"Unsupported activation string: {activation}. Use 'relu', 'gelu', or a "
+"callable function."
+msgstr ""
+"Activation non prise en charge : {activation}. Utilisez 'relu', 'gelu', ou "
+"une fonction appelable."
+
+#: nn-transformer.R:89
+msgid "activation must be a string ('relu' or 'gelu') or a function."
+msgstr ""
+"l'activation doit être une chaîne (\"relu\" ou \"gelu\") ou une fonction."
+
+#: nn-transformer.R:95
+msgid ""
+"Explicit src_mask should not be set when is_causal=TRUE. Use one or the "
+"other."
+msgstr ""
+"`src_mask` ne doit pas être défini quand `is_causal=TRUE`. Veuillez utilisez "
+"l'un ou l'autre."
+
+#: nn-transformer.R:178
+msgid ""
+"`encoder_layer` must be an `nn_module` (transformer encoder layer instance)."
+msgstr ""
+"`encoder_layer` doit être un `nn_module` (pour servir de couche d'encodeur "
+"du transformateur)."
 
 #: nn-utils.R:7
 msgid "Input dimension should be at least {length(out_size) + 1}."
@@ -1569,10 +1600,12 @@ msgid "currently unsuported"
 msgstr "non disponible pour le moment"
 
 #: save.R:319
-msgid "This version of torch can't load files with serialization version >"
+msgid ""
+"This version of torch can't load files with serialization version > "
+"{ser_version}"
 msgstr ""
-"Cette version de torch ne peut pas lire des fichiers avec une version de "
-"sérialisation >"
+"Cette version de torch ne peut pas lire des fichiers sérialisés en version > "
+"{ser_version}"
 
 #: save.R:488
 msgid ""
@@ -1620,9 +1653,9 @@ msgstr ""
 
 #: tensor.R:122
 msgid "You must pass a cuda device."
-msgstr "Vous devez fournir un équipement cuda."
+msgstr "Vous devez fournir un périphérique cuda."
 
-#: tensor.R:187 tensor.R:194 wrapers.R:234
+#: tensor.R:187 tensor.R:194 wrapers.R:233
 msgid "start indexing starts at 1"
 msgstr "‘start’ doit être indexé à 1"
 
@@ -1636,7 +1669,7 @@ msgid "The tensor doesn't have names so you can't rename a dimension."
 msgstr ""
 "Le tenseur n’a pas de nom, donc vous ne pouvez pas renommer une dimension."
 
-#: tensor.R:444
+#: tensor.R:445
 msgid ""
 "Converting integers > .Machine$integer.max is undefined and returns wrong "
 "results. Use as.integer64(x)"
@@ -1776,41 +1809,49 @@ msgid "argument 'out' must be a list of Tensors."
 msgstr "l’argument ‘out’ doit être une liste de tenseurs."
 
 #: wrapers.R:30
-msgid "expected tuple of"
-msgstr "le tuple attendu de"
+msgid ""
+"expected tuple of {2 + as.integer(get_infos)} elements but got {length(out)}"
+msgstr ""
+"un tuple de {2 + as.integer(get_infos)} éléments est attendu, actuellement "
+"il en a  {length(out)}"
 
-#: wrapers.R:30
-msgid "elements but got"
-msgstr "éléments en contient actuellement"
-
-#: wrapers.R:106
+#: wrapers.R:105
 msgid "argument 'window_length' must be int, not NULL"
 msgstr "l’argument 'window_length' doit être un entier, pas un NULL."
 
-#: wrapers.R:184
+#: wrapers.R:183
 msgid "tensordot expects dims >= 1, but got {dims}"
 msgstr ""
 "‘tensordot’ fonctionne avec des dims >=1, actuellement elles sont a {dims}"
 
-#: wrapers.R:499
+#: wrapers.R:498
 msgid "size is set, but one of mean or std is not a scalar value."
 msgstr ""
 "La taille est configurée, mais soit `mean`, soit `std` n'est pas une valeur "
 "scalaire."
 
-#: wrapers.R:505
+#: wrapers.R:504
 msgid "options is set, but one of mean or std is not a scalar value."
 msgstr ""
 "`options` est configuré, mais soit `mean`, soit `std` n'est pas une valeur "
 "scalaire."
 
-#: wrapers.R:514
+#: wrapers.R:513
 msgid "size is not set."
 msgstr "`size` n'est pas configuré."
 
-#: wrapers.R:553
+#: wrapers.R:552
 msgid "Please report a bug report in GitHub"
 msgstr "Merci de faire remonter un bug dans Github."
+
+#~ msgid "expected tuple of"
+#~ msgstr "le tuple attendu de"
+
+#~ msgid "elements but got"
+#~ msgstr "éléments en contient actuellement"
+
+#~ msgid "Unsupported activation string:"
+#~ msgstr "Nom de la fonction d'activation non reconnu:"
 
 #~ msgid "Can't convert cuda tensor to R. Convert to cpu tensor before."
 #~ msgstr ""
@@ -1836,9 +1877,6 @@ msgstr "Merci de faire remonter un bug dans Github."
 #~ "Subclass %s of %s that defines a custom `initialize()` method must also "
 #~ "define a custom `expand()` method."
 #~ msgstr "La sous-classe %s de %s qui définit la méthode."
-
-#~ msgid "torch_%s"
-#~ msgstr "torch_%s"
 
 #~ msgid "torch_generator()"
 #~ msgstr "torch_generator()"
@@ -1870,6 +1908,3 @@ msgstr "Merci de faire remonter un bug dans Github."
 
 #~ msgid "<script_function>"
 #~ msgstr "<script_function>"
-
-#~ msgid "expected tuple of %s elements but got %s"
-#~ msgstr "un tuple de %s éléments est attendu, actuellement il en a %s"

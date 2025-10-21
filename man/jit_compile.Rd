@@ -10,7 +10,7 @@ jit_compile(source)
 \item{source}{valid TorchScript source code.}
 }
 \description{
-See the \href{https://pytorch.org/docs/stable/jit_language_reference.html#language-reference}{TorchScript language reference} for
+See the \href{https://docs.pytorch.org/docs/stable/jit_language_reference.html#language-reference}{TorchScript language reference} for
 documentation on how to write TorchScript code.
 }
 \examples{

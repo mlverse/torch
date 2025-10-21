@@ -543,7 +543,7 @@ installer_message <- function(msg) {
   if (!is_truthy(Sys.getenv("TORCH_INSTALL_DEBUG", FALSE)))
     return(invisible(msg))
   names(msg) <- rep("i", length(msg))
-  cli_inform(msg, class = "torch_install", env = parent.frame())
+  cli_inform(msg, env = parent.frame(), class = "torch_install")
 }
 
 is_truthy <- function(x) {
@@ -552,7 +552,7 @@ is_truthy <- function(x) {
   }
   
   if (length(x) > 1) {
-    stop("Unexpected value")
+    value_error("Unexpected value")
   }
   
   if (x == "") {

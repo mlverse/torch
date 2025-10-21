@@ -39,7 +39,7 @@ cuda_synchronize <- function(device = NULL) {
 #' @export
 cuda_get_device_capability <- function(device = cuda_current_device()) {
   if (device < 0 | device >= cuda_device_count()) {
-    stop(paste("device must be an integer between 0 and the number of devices minus 1"))
+    value_error("device must be an integer between 0 and the number of devices minus 1")
   }
   res <- as.integer(cpp_cuda_get_device_capability(device))
   names(res) <- c("Major", "Minor")
@@ -198,7 +198,7 @@ cuda_empty_cache <- function() {
 #' this function can also keep a historical log of all allocation and free events.
 #'
 #' Use `cuda_memory_snapshot()` to retrieve recorded information. Visualization
-#' can be performed using [pytorch.org/memory_viz](https://pytorch.org/memory_viz).
+#' can be performed using [pytorch.org/memory_viz](https://docs.pytorch.org/memory_viz).
 #'
 #' @param enabled Character or \code{NULL}. Controls memory history recording. Options:
 #'   \describe{
@@ -236,7 +236,7 @@ cuda_record_memory_history <- function(enabled, context = "all", stacks = "all",
 #'
 #' Saves a snapshot of the CUDA memory state at the time it was called. The resulting
 #' binary output is in pickle format and can be visualized using the interactive snapshot
-#' viewer available at [pytorch.org/memory_viz](https://pytorch.org/memory_viz).
+#' viewer available at [pytorch.org/memory_viz](https://docs.pytorch.org/memory_viz).
 #'
 #' @return Raw binary data representing the snapshot in pickle format.
 #' @examples
@@ -252,7 +252,7 @@ cuda_memory_snapshot <- function() {
 #'
 #' Calls `cuda_memory_snapshot()` and saves the resulting binary snapshot
 #' to a specified file using `writeBin`. The resulting file can be visualized using the interactive 
-#' snapshot viewer available at [pytorch.org/memory_viz](https://pytorch.org/memory_viz).
+#' snapshot viewer available at [pytorch.org/memory_viz](https://docs.pytorch.org/memory_viz).
 #'
 #' @param filepath Character; the path to the file where the snapshot will be saved.
 #'

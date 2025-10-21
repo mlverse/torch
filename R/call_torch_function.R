@@ -44,16 +44,15 @@ call_torch_function <- function(name, ..., quiet = FALSE) {
   }
 
   if (!grepl("^torch_", name)) {
-    stop("Only functions prefixed with 'torch_' are available from this function.")
+    value_error("Only functions prefixed with 'torch_' are available from this function.")
   }
 
   namespace <- getNamespace("torch")
   torch_namespace <- grep("^torch_", names(namespace), value = TRUE)
   if (!name %in% torch_namespace) {
-    stop(sprintf(
-      "A function of name %s was not found. Please check your spelling and that the desired function exists.",
-      name
-    ))
+    value_error(
+      "No function named {name} can be found. Please check your spelling and that the desired function exists."
+    )
   }
 
   f <- namespace[[name]]

@@ -92,7 +92,7 @@ are running.
 ### CUDA Memory Snapshots
 
 To assist debugging CUDA memory usage, R torch provides functionality for generating
-CUDA memory snapshots, similar to the [PyTorch Python implementation](https://pytorch.org/docs/stable/torch_cuda_memory.html).
+CUDA memory snapshots, similar to the [PyTorch Python implementation](https://docs.pytorch.org/docs/stable/torch_cuda_memory.html).
 Snapshots record the state of allocated CUDA memory at any point in time, and
 optionally records the history of allocation events that led up to that snapshot.
 

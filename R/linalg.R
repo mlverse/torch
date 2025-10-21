@@ -767,7 +767,7 @@ linalg_solve <- function(A, B) {
 #' For CUDA input, the only valid driver is `'gels'`, which assumes that `A` is full-rank.
 #'
 #' To choose the best driver on CPU consider:
-#' - If `A` is well-conditioned (its [condition number](https://pytorch.org/docs/master/linalg.html#torch.linalg.cond) is not too large), or you do not mind some precision loss.
+#' - If `A` is well-conditioned (its [condition number](https://docs.pytorch.org/docs/master/linalg.html#torch.linalg.cond) is not too large), or you do not mind some precision loss.
 #' - For a general matrix: `'gelsy'` (QR with pivoting) (default)
 #' - If `A` is full-rank: `'gels'` (QR)
 #' - If `A` is not well-conditioned.

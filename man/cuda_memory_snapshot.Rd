@@ -12,7 +12,7 @@ Raw binary data representing the snapshot in pickle format.
 \description{
 Saves a snapshot of the CUDA memory state at the time it was called. The resulting
 binary output is in pickle format and can be visualized using the interactive snapshot
-viewer available at \href{https://pytorch.org/memory_viz}{pytorch.org/memory_viz}.
+viewer available at \href{https://docs.pytorch.org/memory_viz}{pytorch.org/memory_viz}.
 }
 \examples{
 if (torch_is_installed()) {

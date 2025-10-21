@@ -46,7 +46,7 @@ Alongside tracking stack traces for each current allocation and free event,
 this function can also keep a historical log of all allocation and free events.
 
 Use \code{cuda_memory_snapshot()} to retrieve recorded information. Visualization
-can be performed using \href{https://pytorch.org/memory_viz}{pytorch.org/memory_viz}.
+can be performed using \href{https://docs.pytorch.org/memory_viz}{pytorch.org/memory_viz}.
 }
 \examples{
 if (torch_is_installed()) {

@@ -301,7 +301,7 @@ torch_load <- function(path, device = "cpu") {
     return(object)
   }
 
-  stop("currently unsuported")
+  not_implemented_error("currently unsuported")
 }
 
 legacy_torch_load <- function(path, device = "cpu") {
@@ -315,9 +315,9 @@ legacy_torch_load <- function(path, device = "cpu") {
   r <- readRDS(path)
 
   if (!is.null(r$version) && r$version > ser_version) {
-    rlang::abort(c(x = paste0(
-      "This version of torch can't load files with serialization version > ",
-      ser_version)))
+    not_implemented_error(
+      "This version of torch can't load files with serialization version > {ser_version}"
+    )
   }
 
   if (r$type == "tensor") {
