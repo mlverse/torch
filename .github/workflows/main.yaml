@@ -58,7 +58,7 @@ jobs:
 
       - name: Download lantern artifacts
         if: ${{ needs.lantern.result != 'skipped' }}
-        uses: actions/download-artifact@v5
+        uses: actions/download-artifact@v6
         with:
           pattern: lantern-*
           path: '${{ runner.temp }}/'
