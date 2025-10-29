@@ -49,6 +49,7 @@ mnist-r.*
 ^src/lantern/.*
 ^tests/testthat/assets/model-v.*
 
+
 ^doc$
 ^Meta$
 ^vignettes/rsconnect*
