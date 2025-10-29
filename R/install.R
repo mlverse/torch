@@ -77,35 +77,46 @@ torch_install_path <- function(check_writable = FALSE) {
 #' @importFrom callr r
 #' @export
 torch_is_installed <- function() {
-  if (!lib_is_installed("lantern", torch_install_path())) {
+
+  install_path <- torch_install_path()
+
+  if (!lib_is_installed("lantern", install_path)) {
     return(FALSE)
   }
   
-  if(!lib_is_installed("torch", torch_install_path())) {
+  if(!lib_is_installed("torch", install_path)) {
     return(FALSE)
   }
-    
-  if (is.null(.torch_can_load) && Sys.getenv("TORCH_VERIFY_LOAD", "TRUE") == "TRUE") {
-    .torch_can_load <<- tryCatch({
-      r(function() {
-        torch::torch_tensor(1)
-        TRUE
-      }, env = c(TORCH_VERIFY_LOAD = "FALSE"))
-    }, error = function(err) {
-      cli::cli_warn(c(
-        "Torch libraries are installed but loading them caused a segfault.",
-        "Please reinstall torch with {.code install_torch(reinstall = TRUE)}",
-        "You can disable this check by setting {.envvar TORCH_VERIFY_LOAD} to {.val FALSE}",
-        conditionMessage(err)
-      ))
-      FALSE
-    })
-  } else {
-    # In this case, we don't check further and just assume it can load
-    # so that we don't repeat the check every time
+
+  should_verify <- Sys.getenv("TORCH_VERIFY_LOAD", "TRUE") == "TRUE"
+
+  if (!should_verify) {
+    # if we should not verify, we just return TRUE here
     return(TRUE)
   }
 
+  # already verified, short circuit
+  if (is.logical(.torch_can_load)) {
+    return(.torch_can_load)
+  }
+
+  # verify if torch can be loaded
+  .torch_can_load <<- tryCatch({
+    # executed for the side effect. if fails we catch the error
+    r(\() torch::torch_tensor(1), env = c(TORCH_VERIFY_LOAD = "FALSE"))
+    TRUE
+  }, error = function(err) {
+    cli::cli_warn(c(
+      "Torch libraries are installed but loading them caused a segfault.",
+      "Please reinstall torch with {.code install_torch(reinstall = TRUE)}",
+      "You can disable this check by setting {.envvar TORCH_VERIFY_LOAD} to {.val FALSE}",
+      "Torch libraries installed in: {.path {install_path}}",
+      conditionMessage(err)
+    ))
+    FALSE
+  })
+  
+  # return the result of the verification
   .torch_can_load
 }
 
