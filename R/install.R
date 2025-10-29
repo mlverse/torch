@@ -75,6 +75,7 @@ torch_install_path <- function(check_writable = FALSE) {
 .torch_can_load <- NULL
 #' Verifies if torch is installed
 #' @importFrom callr r
+#' @importFrom cli cli_warn cli_inform
 #' @export
 torch_is_installed <- function() {
 
@@ -103,10 +104,10 @@ torch_is_installed <- function() {
   # verify if torch can be loaded
   .torch_can_load <<- tryCatch({
     # executed for the side effect. if fails we catch the error
-    r(\() torch::torch_tensor(1), env = c(TORCH_VERIFY_LOAD = "FALSE"))
+    r(function() torch::torch_tensor(1), env = c(TORCH_VERIFY_LOAD = "FALSE"))
     TRUE
   }, error = function(err) {
-    cli::cli_warn(c(
+    cli_warn(c(
       "Torch libraries are installed but loading them caused a segfault.",
       "Please reinstall torch with {.code install_torch(reinstall = TRUE)}",
       "You can disable this check by setting {.envvar TORCH_VERIFY_LOAD} to {.val FALSE}",

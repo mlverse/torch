@@ -35,8 +35,8 @@ globalVariables(c("..", "self", "private", "N"))
     withCallingHandlers(
       torch_is_installed(),
       warning = function(msg) {
-        # forward warnings as package startup messages
-        packageStartupMessage(conditionMessage(msg))
+        # forward warnings as messages
+        cli_inform(conditionMessage(msg))
       }
     )
   }
