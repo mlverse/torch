@@ -74,7 +74,7 @@ torch_install_path <- function(check_writable = FALSE) {
 
 .torch_can_load <- NULL
 #' Verifies if torch is installed
-#'
+#' @importFrom callr r
 #' @export
 torch_is_installed <- function() {
   if (!lib_is_installed("lantern", torch_install_path())) {
@@ -87,7 +87,7 @@ torch_is_installed <- function() {
     
   if (is.null(.torch_can_load) && Sys.getenv("TORCH_VERIFY_LOAD", "TRUE") == "TRUE") {
     .torch_can_load <<- tryCatch({
-      callr::r(function() {
+      r(function() {
         torch::torch_tensor(1)
         TRUE
       }, env = c(TORCH_VERIFY_LOAD = "FALSE"))
