@@ -110,7 +110,11 @@ torch_is_installed <- function() {
         "torch::torch_tensor(1)"
       ),
       stderr = TRUE,
-      stdout = TRUE
+      stdout = TRUE,
+      env = c(
+        TORCH_HOME=install_path,
+        TORCH_VERIFY_LOAD="FALSE" # avoid infinite recursion
+      )
     ))
 
     if (attr(out, "status") %||% 0L != 0L) {
