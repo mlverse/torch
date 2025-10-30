@@ -105,15 +105,15 @@ torch_is_installed <- function() {
   .torch_can_load <<- tryCatch({
     out <- suppressWarnings(system2(
       rscript_exe(),
-      "-",
-      input = c(
-        "torch::torch_tensor(1)"
+      args = c(
+        "-e",
+        "'torch::torch_tensor(1); TRUE'"
       ),
       stderr = TRUE,
       stdout = TRUE,
       env = c(
-        TORCH_HOME=install_path,
-        TORCH_VERIFY_LOAD="FALSE" # avoid infinite recursion
+        paste0("TORCH_HOME='", as.character(install_path), "'"),
+        "TORCH_VERIFY_LOAD=no" # avoid infinite recursion
       )
     ))
 
