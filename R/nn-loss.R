@@ -256,7 +256,7 @@ nn_poisson_nll_loss <- nn_module(
 #' Kullback-Leibler divergence loss
 #'
 #' The Kullback-Leibler divergence loss measure
-#' [Kullback-Leibler divergence](https://en.wikipedia.org/wiki/Kullback-Leibler_divergence)
+#' Kullback-Leibler divergence \doi{10.1214/aoms/1177729694}
 #' is a useful distance measure for continuous distributions and is often
 #' useful when performing direct regression over the space of (discretely sampled)
 #' continuous output distributions.

@@ -1,4 +1,4 @@
-branch <- "main"
+branch <- "cran/v0.16.2"
 torch_version <- "2.7.1"
 
 #' Install Torch
@@ -75,6 +75,7 @@ torch_install_path <- function(check_writable = FALSE) {
 .torch_can_load <- NULL
 #' Verifies if torch is installed
 #' @importFrom callr r
+#' @importFrom cli cli_warn cli_inform
 #' @export
 torch_is_installed <- function() {
 
@@ -102,23 +103,49 @@ torch_is_installed <- function() {
 
   # verify if torch can be loaded
   .torch_can_load <<- tryCatch({
-    # executed for the side effect. if fails we catch the error
-    r(\() torch::torch_tensor(1), env = c(TORCH_VERIFY_LOAD = "FALSE"))
+    out <- suppressWarnings(system2(
+      rscript_exe(),
+      args = c(
+        "-e",
+        "'torch::torch_tensor(1); TRUE'"
+      ),
+      stderr = TRUE,
+      stdout = TRUE,
+      env = c(
+        paste0("TORCH_HOME='", as.character(install_path), "'"),
+        "TORCH_VERIFY_LOAD=no" # avoid infinite recursion
+      )
+    ))
+
+    if (attr(out, "status") %||% 0L != 0L) {
+      stop(paste(out, collapse = "\n"))
+    }
+
     TRUE
   }, error = function(err) {
-    cli::cli_warn(c(
-      "Torch libraries are installed but loading them caused a segfault.",
+    cli_inform(c(
+      "Torch libraries are installed but loading them was unsuccessful.",
       "Please reinstall torch with {.code install_torch(reinstall = TRUE)}",
       "You can disable this check by setting {.envvar TORCH_VERIFY_LOAD} to {.val FALSE}",
-      "Torch libraries installed in: {.path {install_path}}",
-      conditionMessage(err)
+      "Torch libraries installed in: {.path {install_path}}.",
+      if (interactive()) conditionMessage(err) else ""
     ))
+
     FALSE
   })
   
   # return the result of the verification
   .torch_can_load
 }
+
+rscript_exe <- function() {
+  file.path(
+    R.home("bin"),
+    if (is_windows()) "Rscript.exe" else "Rscript"
+  )
+}
+
+is_windows <- function() identical(.Platform$OS.type, "windows")
 
 install_lib <- function(libname, url, reinstall = FALSE) {
   inst_path <- torch_install_path(check_writable = TRUE)

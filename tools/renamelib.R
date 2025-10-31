@@ -6,7 +6,7 @@ for (lib in dir(libs_path, pattern = "torch\\.")) {
             overwrite = TRUE)
 
   # Uncomment CRAN release
-  # unlink(file.path(libs_path, lib))
+  unlink(file.path(libs_path, lib))
 }
 
 
