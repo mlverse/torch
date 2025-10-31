@@ -25,7 +25,7 @@ jobs:
       fail-fast: false
       matrix:
         config:
-          - {os: macOS, r_version: release, version: cpu-intel, runner: macos-13}
+          - {os: macOS, r_version: release, version: cpu-intel, runner: macos-15-intel}
           # on m1 the R version is whicherver is installed in the runner machine.
           - {os: macOS, r_version: '', version: cpu-m1, runner: [self-hosted, macOS, ARM64]}
 

@@ -18,7 +18,7 @@ jobs:
         config: 
           # when changing supported versions here, please modify supported versions
           # in install.R
-          - {os: macOS, version: cpu-intel, runner: macos-13}
+          - {os: macOS, version: cpu-intel, runner: macos-15-intel}
           - {os: macOS, version: cpu-m1, runner: [self-hosted, m1]}
           
           - {os: ubuntu, version: cpu, runner: ubuntu-latest}
