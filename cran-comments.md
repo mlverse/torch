@@ -1,1 +1,1 @@
-Fixes issues with Windows runners.
+This release tries to fix an issue within the Windows runners. There was a bug in the code that checked if there was a binary installation of torch and if that was valid. Compared to the previous version that failed the revdep checks, we have setup a new approach to check if there's a valid torch installation.
