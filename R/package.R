@@ -33,7 +33,7 @@ globalVariables(c("..", "self", "private", "N"))
 
   is_installed <- function() {
     withCallingHandlers(
-      torch_is_installed(),
+      torch_is_installed(recheck=TRUE),
       message = function(msg) {
         # forward as startup messages
         cli_inform(conditionMessage(msg), class = "packageStartupMessage")
@@ -69,7 +69,7 @@ globalVariables(c("..", "self", "private", "N"))
     )
   }
 
-  if (is_installed() && install_success && Sys.getenv("TORCH_LOAD", unset = 1) != 0) {
+  if (install_success && is_installed() && Sys.getenv("TORCH_LOAD", unset = 1) != 0) {
     # in case init fails aallow user to restart session rather than blocking install
     tryCatch(
       {

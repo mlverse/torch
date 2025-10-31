@@ -77,8 +77,7 @@ torch_install_path <- function(check_writable = FALSE) {
 #' @importFrom callr r
 #' @importFrom cli cli_warn cli_inform
 #' @export
-torch_is_installed <- function() {
-
+torch_is_installed <- function(recheck=FALSE) {
   install_path <- torch_install_path()
 
   if (!lib_is_installed("lantern", install_path)) {
@@ -97,7 +96,7 @@ torch_is_installed <- function() {
   }
 
   # already verified, short circuit
-  if (is.logical(.torch_can_load)) {
+  if (!recheck && is.logical(.torch_can_load)) {
     return(.torch_can_load)
   }
 
@@ -108,7 +107,7 @@ torch_is_installed <- function() {
       args = "-",
       input = c(
         "Sys.setenv(TORCH_VERIFY_LOAD='no')",
-        sprintf("Sys.setenv(TORCH_HOME='%s')", install_path),
+        sprintf("Sys.setenv(TORCH_HOME=r'{%s}')", install_path),
         "torch::torch_tensor(1)",
         "TRUE"
       ),
