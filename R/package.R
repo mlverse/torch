@@ -18,18 +18,9 @@ globalVariables(c("..", "self", "private", "N"))
   register_positron_methods()
   cpp_torch_namespace__store_main_thread_id()
 
-  install_success <- TRUE
-
   is_interactive <- interactive() ||
     "JPY_PARENT_PID" %in% names(Sys.getenv()) ||
     identical(getOption("jupyter.in_kernel"), TRUE)
-
-  # we only autoinstall if it has not explicitly disabled by setting
-  # TORCH_INSTALL = 0
-  autoinstall <- is_interactive && (Sys.getenv("TORCH_INSTALL", unset = 2) != 0)
-
-  # We can also auto install if TORCH_INSTALL is requested with TORCH_INSTALL=1
-  autoinstall <- autoinstall || (Sys.getenv("TORCH_INSTALL", unset = 2) == "1")
 
   is_installed <- function() {
     withCallingHandlers(
@@ -41,38 +32,68 @@ globalVariables(c("..", "self", "private", "N"))
     )
   }
 
-  # we only autoinstall if installation doesn't yet exist.
-  autoinstall <- autoinstall && (!is_installed())
-
-  if (autoinstall) {
-    install_success <- tryCatch(
-      {
-        cli::cli_alert_info("Additional software needs to be {.strong downloaded} and {.strong installed} for torch to work correctly.")
-        check_can_autoinstall() # this errors if it's not possible to autoinstall for that system
-        # in interactive environments we want to ask the user for permission to
-        # download and install stuff. That's not necessary otherwise because the
-        # user has explicitly asked for installation with `TORCH_INSTALL=1`.
-        if (is_interactive) {
-          get_confirmation() # this will error of response is not true.
-        }
-        install_torch(.inform_restart = FALSE)
-        TRUE
-      },
-      error = function(e) {
-        msg <- if (is.character(e$message)) e$message else "Unknown error."
-        cli::cli_warn(c(
-          i = "Failed to install torch, manually run {.fn install_torch}",
-          x = msg
-        ), parent = e)
-        FALSE
-      }
-    )
+  # already installed - let's start torch
+  if (is_installed()) {
+    return(start_torch())
   }
 
-  if (install_success && is_installed() && Sys.getenv("TORCH_LOAD", unset = 1) != 0) {
-    # in case init fails aallow user to restart session rather than blocking install
-    tryCatch(
-      {
+  # we only autoinstall if it has not explicitly disabled by setting
+  # TORCH_INSTALL = 0
+  autoinstall <- is_interactive && (Sys.getenv("TORCH_INSTALL", unset = 2) != 0)
+
+  # We can also auto install if TORCH_INSTALL is requested with TORCH_INSTALL=1
+  autoinstall <- autoinstall || (Sys.getenv("TORCH_INSTALL", unset = 2) == "1")
+
+  if (!autoinstall) {
+    # there's no installation and no auto install. nothing else we can do,
+    return()
+  }
+
+  # try to install
+  install_success <- tryCatch(
+    {
+      cli::cli_alert_info("Additional software needs to be {.strong downloaded} and {.strong installed} for torch to work correctly.")
+      check_can_autoinstall() # this errors if it's not possible to autoinstall for that system
+      # in interactive environments we want to ask the user for permission to
+      # download and install stuff. That's not necessary otherwise because the
+      # user has explicitly asked for installation with `TORCH_INSTALL=1`.
+      if (is_interactive) {
+        get_confirmation() # this will error of response is not true.
+      }
+      install_torch(.inform_restart = FALSE)
+      TRUE
+    },
+    error = function(e) {
+      msg <- if (is.character(e$message)) e$message else "Unknown error."
+      cli::cli_warn(c(
+        i = "Failed to install torch, manually run {.fn install_torch}",
+        x = msg
+      ), parent = e)
+      FALSE
+    }
+  )
+
+  if (!install_success) {
+    # installation failed, nothing else we can do
+    return()
+  }
+
+  # check once more if we can find the installation.
+  if (is_installed()) {
+    start_torch()
+  }
+}
+
+start_torch <- function() {
+  can_load <- Sys.getenv("TORCH_LOAD", unset = 1) != 0
+  
+  if (!can_load) {
+    return()
+  }
+
+  # in case init fails aallow user to restart session rather than blocking install
+  tryCatch(
+    {
         lantern_start()
         cpp_set_lantern_allocator(getOption("torch.threshold_call_gc", 4000L))
         cpp_set_cuda_allocator_allocator_thresholds(
@@ -97,8 +118,7 @@ globalVariables(c("..", "self", "private", "N"))
         ), parent = e)
         FALSE
       }
-    )
-  }
+  )
 }
 
 .onUnload <- function(libpath) {
