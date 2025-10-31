@@ -35,7 +35,7 @@
 
     <a class="navbar-brand me-2" href="../../index.html">torch</a>
 
-    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">0.16.1.9000</small>
+    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">0.16.2.9000</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -142,9 +142,10 @@
 <span><span class="va">model</span><span class="op">$</span><span class="va">parameters</span></span></code></pre></div>
 <pre><code><span><span class="co">## $w</span></span>
 <span><span class="co">## torch_tensor</span></span>
-<span><span class="co">##  0.9799</span></span>
-<span><span class="co">## -0.1096</span></span>
-<span><span class="co">## -0.3829</span></span>
+<span><span class="co">## 0.01 *</span></span>
+<span><span class="co">## -9.2304</span></span>
+<span><span class="co">##  -138.8453</span></span>
+<span><span class="co">##  -7.2478</span></span>
 <span><span class="co">## [ CPUFloatType{3,1} ][ requires_grad = TRUE ]</span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## $b</span></span>
@@ -155,9 +156,10 @@
 <code class="sourceCode R"><span><span class="co"># or individually</span></span>
 <span><span class="va">model</span><span class="op">$</span><span class="va">w</span></span></code></pre></div>
 <pre><code><span><span class="co">## torch_tensor</span></span>
-<span><span class="co">##  0.9799</span></span>
-<span><span class="co">## -0.1096</span></span>
-<span><span class="co">## -0.3829</span></span>
+<span><span class="co">## 0.01 *</span></span>
+<span><span class="co">## -9.2304</span></span>
+<span><span class="co">##  -138.8453</span></span>
+<span><span class="co">##  -7.2478</span></span>
 <span><span class="co">## [ CPUFloatType{3,1} ][ requires_grad = TRUE ]</span></span></code></pre>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">model</span><span class="op">$</span><span class="va">b</span></span></code></pre></div>
@@ -172,16 +174,16 @@
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">y_pred</span></span></code></pre></div>
 <pre><code><span><span class="co">## torch_tensor</span></span>
-<span><span class="co">## -0.2103</span></span>
-<span><span class="co">##  1.2397</span></span>
-<span><span class="co">##  0.8770</span></span>
-<span><span class="co">##  0.8658</span></span>
-<span><span class="co">## -0.1330</span></span>
-<span><span class="co">## -0.3035</span></span>
-<span><span class="co">##  0.6640</span></span>
-<span><span class="co">## -0.4692</span></span>
-<span><span class="co">##  1.5433</span></span>
-<span><span class="co">## -0.2236</span></span>
+<span><span class="co">## -0.1103</span></span>
+<span><span class="co">## -0.1146</span></span>
+<span><span class="co">##  0.7528</span></span>
+<span><span class="co">## -0.5629</span></span>
+<span><span class="co">##  0.4952</span></span>
+<span><span class="co">## -1.2916</span></span>
+<span><span class="co">## -1.8970</span></span>
+<span><span class="co">## -0.1733</span></span>
+<span><span class="co">## -1.3901</span></span>
+<span><span class="co">## -0.5952</span></span>
 <span><span class="co">## [ CPUFloatType{10,1} ][ grad_fn = &lt;AddBackward0&gt; ]</span></span></code></pre>
   </main>
 </div>
