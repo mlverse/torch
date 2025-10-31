@@ -74,9 +74,12 @@ torch_install_path <- function(check_writable = FALSE) {
 
 .torch_can_load <- NULL
 #' Verifies if torch is installed
+#' @param recheck If `TRUE`, forces rechecking if torch can be loaded in a spearate R process.
+#' still respects the `TORCH_VERIFY_LOAD` env var.
 #' @importFrom callr r
 #' @importFrom cli cli_warn cli_inform
 #' @export
+#' @returns TRUE if torch is installed and can be loaded, FALSE otherwise.
 torch_is_installed <- function(recheck=FALSE) {
   install_path <- torch_install_path()
 
