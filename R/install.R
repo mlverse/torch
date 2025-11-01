@@ -74,11 +74,13 @@ torch_install_path <- function(check_writable = FALSE) {
 
 .torch_can_load <- NULL
 #' Verifies if torch is installed
+#' @param recheck If `TRUE`, forces rechecking if torch can be loaded in a spearate R process.
+#' still respects the `TORCH_VERIFY_LOAD` env var.
 #' @importFrom callr r
 #' @importFrom cli cli_warn cli_inform
 #' @export
-torch_is_installed <- function() {
-
+#' @returns TRUE if torch is installed and can be loaded, FALSE otherwise.
+torch_is_installed <- function(recheck=FALSE) {
   install_path <- torch_install_path()
 
   if (!lib_is_installed("lantern", install_path)) {
@@ -97,7 +99,7 @@ torch_is_installed <- function() {
   }
 
   # already verified, short circuit
-  if (is.logical(.torch_can_load)) {
+  if (!recheck && is.logical(.torch_can_load)) {
     return(.torch_can_load)
   }
 
@@ -105,16 +107,15 @@ torch_is_installed <- function() {
   .torch_can_load <<- tryCatch({
     out <- suppressWarnings(system2(
       rscript_exe(),
-      args = c(
-        "-e",
-        "'torch::torch_tensor(1); TRUE'"
+      args = "-",
+      input = c(
+        "Sys.setenv(TORCH_VERIFY_LOAD='no')",
+        sprintf("Sys.setenv(TORCH_HOME=r'{%s}')", install_path),
+        "torch::torch_tensor(1)",
+        "TRUE"
       ),
       stderr = TRUE,
-      stdout = TRUE,
-      env = c(
-        paste0("TORCH_HOME='", as.character(install_path), "'"),
-        "TORCH_VERIFY_LOAD=no" # avoid infinite recursion
-      )
+      stdout = TRUE
     ))
 
     if (attr(out, "status") %||% 0L != 0L) {
