@@ -1,4 +1,4 @@
-# torch (development version)
+# torch 0.16.3
 
 # torch 0.16.1
 
