@@ -55,7 +55,7 @@ precisely described as:
 }
 
 where \eqn{\star} is the valid
-\href{https://en.wikipedia.org/wiki/Cross-correlation}{cross-correlation} operator,
+cross correlation operator,
 \eqn{N} is a batch size, \eqn{C} denotes a number of channels,
 \eqn{L} is a length of signal sequence.
 \itemize{
