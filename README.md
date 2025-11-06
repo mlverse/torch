@@ -8,6 +8,7 @@ experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](h
 [![Test](https://github.com/mlverse/torch/actions/workflows/main.yaml/badge.svg)](https://github.com/mlverse/torch/actions/workflows/main.yaml)
 [![CRAN
 status](https://www.r-pkg.org/badges/version/torch)](https://CRAN.R-project.org/package=torch)
+[![cuda](https://img.shields.io/badge/cuda-11.8~12.4-green)](https://developer.nvidia.com/cuda-downloads)
 [![](https://cranlogs.r-pkg.org/badges/torch)](https://cran.r-project.org/package=torch)
 [![Discord](https://img.shields.io/discord/837019024499277855?logo=discord)](https://discord.com/invite/s3D5cKhBkx)
 
