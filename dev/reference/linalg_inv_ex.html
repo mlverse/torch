@@ -41,7 +41,7 @@ the output has the same batch dimensions."><meta name="robots" content="noindex"
 
     <a class="navbar-brand me-2" href="../index.html">torch</a>
 
-    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">0.16.2.9000</small>
+    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">0.16.3.9000</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -74,6 +74,7 @@ the output has the same batch dimensions."><meta name="robots" content="noindex"
 <li class="nav-item dropdown">
   <button class="nav-link dropdown-toggle" type="button" id="dropdown-advanced" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Advanced</button>
   <ul class="dropdown-menu" aria-labelledby="dropdown-advanced"><li><a class="dropdown-item" href="../articles/memory-management.html">Memory management</a></li>
+    <li><a class="dropdown-item" href="../articles/compatibility-matrix.html">CUDA compatibility matrix</a></li>
     <li><a class="dropdown-item" href="../articles/modifying-source-code.html">Building locally</a></li>
     <li><a class="dropdown-item" href="../articles/amp.html">Automatic Mixed Precision</a></li>
     <li><a class="dropdown-item" href="../articles/modifying-source-code.html">Modifying source code</a></li>
@@ -139,31 +140,31 @@ that device with the CPU.</p>
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
     <div class="dont-index"><p><code><a href="linalg_inv.html">linalg_inv()</a></code> is a NumPy compatible variant that always checks for errors.</p>
 <p>Other linalg:
-<code><a href="linalg_cholesky.html">linalg_cholesky</a>()</code>,
-<code><a href="linalg_cholesky_ex.html">linalg_cholesky_ex</a>()</code>,
-<code><a href="linalg_det.html">linalg_det</a>()</code>,
-<code><a href="linalg_eig.html">linalg_eig</a>()</code>,
-<code><a href="linalg_eigh.html">linalg_eigh</a>()</code>,
-<code><a href="linalg_eigvals.html">linalg_eigvals</a>()</code>,
-<code><a href="linalg_eigvalsh.html">linalg_eigvalsh</a>()</code>,
-<code><a href="linalg_householder_product.html">linalg_householder_product</a>()</code>,
-<code><a href="linalg_inv.html">linalg_inv</a>()</code>,
-<code><a href="linalg_lstsq.html">linalg_lstsq</a>()</code>,
-<code><a href="linalg_matrix_norm.html">linalg_matrix_norm</a>()</code>,
-<code><a href="linalg_matrix_power.html">linalg_matrix_power</a>()</code>,
-<code><a href="linalg_matrix_rank.html">linalg_matrix_rank</a>()</code>,
-<code><a href="linalg_multi_dot.html">linalg_multi_dot</a>()</code>,
-<code><a href="linalg_norm.html">linalg_norm</a>()</code>,
-<code><a href="linalg_pinv.html">linalg_pinv</a>()</code>,
-<code><a href="linalg_qr.html">linalg_qr</a>()</code>,
-<code><a href="linalg_slogdet.html">linalg_slogdet</a>()</code>,
-<code><a href="linalg_solve.html">linalg_solve</a>()</code>,
-<code><a href="linalg_solve_triangular.html">linalg_solve_triangular</a>()</code>,
-<code><a href="linalg_svd.html">linalg_svd</a>()</code>,
-<code><a href="linalg_svdvals.html">linalg_svdvals</a>()</code>,
-<code><a href="linalg_tensorinv.html">linalg_tensorinv</a>()</code>,
-<code><a href="linalg_tensorsolve.html">linalg_tensorsolve</a>()</code>,
-<code><a href="linalg_vector_norm.html">linalg_vector_norm</a>()</code></p></div>
+<code><a href="linalg_cholesky.html">linalg_cholesky()</a></code>,
+<code><a href="linalg_cholesky_ex.html">linalg_cholesky_ex()</a></code>,
+<code><a href="linalg_det.html">linalg_det()</a></code>,
+<code><a href="linalg_eig.html">linalg_eig()</a></code>,
+<code><a href="linalg_eigh.html">linalg_eigh()</a></code>,
+<code><a href="linalg_eigvals.html">linalg_eigvals()</a></code>,
+<code><a href="linalg_eigvalsh.html">linalg_eigvalsh()</a></code>,
+<code><a href="linalg_householder_product.html">linalg_householder_product()</a></code>,
+<code><a href="linalg_inv.html">linalg_inv()</a></code>,
+<code><a href="linalg_lstsq.html">linalg_lstsq()</a></code>,
+<code><a href="linalg_matrix_norm.html">linalg_matrix_norm()</a></code>,
+<code><a href="linalg_matrix_power.html">linalg_matrix_power()</a></code>,
+<code><a href="linalg_matrix_rank.html">linalg_matrix_rank()</a></code>,
+<code><a href="linalg_multi_dot.html">linalg_multi_dot()</a></code>,
+<code><a href="linalg_norm.html">linalg_norm()</a></code>,
+<code><a href="linalg_pinv.html">linalg_pinv()</a></code>,
+<code><a href="linalg_qr.html">linalg_qr()</a></code>,
+<code><a href="linalg_slogdet.html">linalg_slogdet()</a></code>,
+<code><a href="linalg_solve.html">linalg_solve()</a></code>,
+<code><a href="linalg_solve_triangular.html">linalg_solve_triangular()</a></code>,
+<code><a href="linalg_svd.html">linalg_svd()</a></code>,
+<code><a href="linalg_svdvals.html">linalg_svdvals()</a></code>,
+<code><a href="linalg_tensorinv.html">linalg_tensorinv()</a></code>,
+<code><a href="linalg_tensorsolve.html">linalg_tensorsolve()</a></code>,
+<code><a href="linalg_vector_norm.html">linalg_vector_norm()</a></code></p></div>
     </div>
 
     <div class="section level2">
@@ -183,7 +184,7 @@ that device with the CPU.</p>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
 </div>
 
     </footer></div>
