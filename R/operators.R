@@ -175,7 +175,7 @@
   torch_logical_not(x)
 }
 
-#' @export
+#' @rawNamespace if (getRversion() >= "4.3.0") S3method("%*%", torch_tensor)
 `%*%.torch_tensor` <- function(e1, e2) {
   if (!is_torch_tensor(e2)) {
     e2 <- torch_tensor(e2, device = e1$device)
