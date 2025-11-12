@@ -39,6 +39,6 @@ m <- distr_poisson(torch_tensor(4))
 m$sample()
 }
 #> torch_tensor
-#>  4
+#>  6
 #> [ CPUFloatType{1} ]
 ```

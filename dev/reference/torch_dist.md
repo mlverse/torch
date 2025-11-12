@@ -43,6 +43,6 @@ torch_dist(x, y, 0)
 torch_dist(x, y, 1)
 }
 #> torch_tensor
-#> 3.15578
+#> 3.87574
 #> [ CPUFloatType{} ]
 ```

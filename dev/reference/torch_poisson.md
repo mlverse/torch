@@ -37,9 +37,9 @@ rates = torch_rand(c(4, 4)) * 5  # rate parameter between 0 and 5
 torch_poisson(rates)
 }
 #> torch_tensor
-#>  5  0  6  4
-#>  1  3  2  1
-#>  2  1  1  2
-#>  2  1  2  4
+#>  1  1  1  1
+#>  5  0  1  8
+#>  4  2  3  0
+#>  3  3  1  1
 #> [ CPUFloatType{4,4} ]
 ```

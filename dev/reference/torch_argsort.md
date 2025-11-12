@@ -40,9 +40,9 @@ a
 torch_argsort(a, dim=1)
 }
 #> torch_tensor
-#>  3  2  1  2
 #>  1  3  2  1
-#>  4  4  4  3
-#>  2  1  3  4
+#>  4  4  4  4
+#>  2  2  1  2
+#>  3  1  3  3
 #> [ CPULongType{4,4} ]
 ```

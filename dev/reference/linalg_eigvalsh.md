@@ -88,7 +88,7 @@ a <- torch_randn(2, 2)
 linalg_eigvalsh(a)
 }
 #> torch_tensor
-#> -1.1720
-#>  1.7569
+#> -1.1317
+#>  1.3491
 #> [ CPUFloatType{2} ]
 ```

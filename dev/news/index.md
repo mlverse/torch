@@ -2,6 +2,9 @@
 
 ## torch (development version)
 
+- Added `%*%` method for torch tensors.
+  ([\#1379](https://github.com/mlverse/torch/issues/1379))
+
 ## torch 0.16.3
 
 CRAN release: 2025-11-02
