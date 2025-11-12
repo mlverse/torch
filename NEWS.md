@@ -1,5 +1,7 @@
 # torch (development version)
 
+- Added `%*%` method for torch tensors. (#1379)
+
 # torch 0.16.3
 
 # torch 0.16.1
