@@ -25,26 +25,25 @@ jobs:
       fail-fast: false
       matrix:
         config:
-          - {os: macOS, r_version: release, version: cpu-intel, runner: macos-13}
+          - {os: macOS, r_version: release, version: cpu-intel, runner: macos-15-intel}
           # on m1 the R version is whicherver is installed in the runner machine.
           - {os: macOS, r_version: '', version: cpu-m1, runner: [self-hosted, macOS, ARM64]}
 
           - {os: ubuntu, r_version: release, version: cpu, runner: ubuntu-22.04}
-          - {os: ubuntu, r_version: release, version: cpu, runner: ubuntu-22.04, precxx11abi: 1}
-          - {os: ubuntu, r_version: release, version: cu12.4, runner: [self-hosted, gpu-local]}
+          - {os: ubuntu, r_version: release, version: cu12.6, runner: [self-hosted, gpu-local]}
 
           - {os: windows, r_version: release, version: cpu, runner: windows-latest}
         
         include:
-          
-          - config: {os: ubuntu, version: cu12.4}
-            container: {image: 'nvidia/cuda:12.4.1-cudnn-devel-ubuntu20.04', options: '--gpus all --runtime=nvidia'}
+
+          - config: {os: ubuntu, version: cu12.6}
+            container: {image: 'nvidia/cuda:12.6.3-cudnn-devel-ubuntu20.04', options: '--gpus all --runtime=nvidia'}
             cuda_enabled: 1
 
     runs-on: ${{ matrix.config.runner }}
     container: ${{ matrix.container }}
     
-    name: "${{ matrix.config.os }} R: ${{ matrix.config.r_version }} - ${{matrix.config.version}} (pre-cxx11: ${{ matrix.config.precxx11abi }})"
+    name: "${{ matrix.config.os }} R: ${{ matrix.config.r_version }} - ${{matrix.config.version}}"
     timeout-minutes: 120
     env:
       R_REMOTES_NO_ERRORS_FROM_WARNINGS: true
@@ -52,7 +51,6 @@ jobs:
       TORCH_INSTALL: 1
       TORCH_TEST_CUDA: ${{ matrix.cuda_enabled }}
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
-      PRECXX11ABI: ${{ matrix.config.precxx11abi }}
       ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION: true
       GHA_USE_NODE_20: false
 
@@ -60,7 +58,7 @@ jobs:
 
       - name: Download lantern artifacts
         if: ${{ needs.lantern.result != 'skipped' }}
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v6
         with:
           pattern: lantern-*
           path: '${{ runner.temp }}/'
@@ -72,7 +70,7 @@ jobs:
           echo "LANTERN_BASE_URL=${{ runner.temp }}/" >> $GITHUB_ENV
         shell: bash
 
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
       - if: ${{ env.TORCH_TEST_CUDA == 1 }}
         shell: bash

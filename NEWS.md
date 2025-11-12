@@ -1,5 +1,23 @@
 # torch (development version)
 
+- Added `%*%` method for torch tensors. (#1379)
+
+# torch 0.16.3
+
+# torch 0.16.1
+
+- Fixed issue with Windows CRAN checks. (#1366)
+
+# torch 0.16.0
+
+- Support for CUDA 11.8 was dropped on Windows. (#1342)
+- Dropped support for CUDA 12.4 (#1348)
+- Added Support for CUDA 12.6 and 12.8 (#1348)
+- Updated to LibTorch 2.7.1 (#1348)
+- Fixed a bug causing repeat_interleave to not work properly on CUDA (#1353)
+
+# torch 0.15.1
+
 # torch 0.15.0
 
 - add ROC AUM loss with `nn_aum_loss()` (#1310 @cregouby)

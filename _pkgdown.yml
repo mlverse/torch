@@ -48,6 +48,8 @@ navbar:
     menu:
       - text: Memory management
         href: articles/memory-management.html
+      - text: CUDA compatibility matrix
+        href: articles/compatibility-matrix.html
       - text: Building locally
         href: articles/modifying-source-code.html
       - text: Automatic Mixed Precision

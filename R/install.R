@@ -1,5 +1,5 @@
 branch <- "main"
-torch_version <- "2.5.1"
+torch_version <- "2.7.1"
 
 #' Install Torch
 #'
@@ -21,7 +21,8 @@ torch_version <- "2.5.1"
 #'    Files will be installed/copied to the `TORCH_HOME` directory.
 #' - `LANTERN_URL`: Same as `TORCH_URL` but for the Lantern library.
 #' - `TORCH_INSTALL_DEBUG`: Setting it to 1, shows debug log messages during installation.
-#' - `PRECXX11ABI`: Setting it to `1` will will trigger the installation of
+#' - `PRECXX11ABI`: DEPRECATED. No longer has effects.
+#'    Setting it to `1` will will trigger the installation of
 #'    a Pre-cxx11 ABI installation of LibTorch. This can be useful in environments with
 #'    older versions of GLIBC like CentOS7 and older Debian/Ubuntu versions.
 #' - `LANTERN_BASE_URL`: The base URL for lantern files. This allows passing a directory
@@ -65,21 +66,90 @@ install_torch <- function(reinstall = FALSE, ..., .inform_restart = TRUE) {
 
 #' A simple exported version of install_path
 #' Returns the torch installation path.
+#' @param check_writable If `TRUE`, checks if the installation path is writable.
 #' @export
-torch_install_path <- function() {
- normalizePath(inst_path(), mustWork = FALSE)
+torch_install_path <- function(check_writable = FALSE) {
+ normalizePath(inst_path(check_writable = check_writable), mustWork = FALSE)
 }
 
+.torch_can_load <- NULL
 #' Verifies if torch is installed
-#'
+#' @param recheck If `TRUE`, forces rechecking if torch can be loaded in a spearate R process.
+#' still respects the `TORCH_VERIFY_LOAD` env var.
+#' @importFrom callr r
+#' @importFrom cli cli_warn cli_inform
 #' @export
-torch_is_installed <- function() {
-  lib_is_installed("lantern", torch_install_path()) && 
-    lib_is_installed("torch", torch_install_path())
+#' @returns TRUE if torch is installed and can be loaded, FALSE otherwise.
+torch_is_installed <- function(recheck=FALSE) {
+  install_path <- torch_install_path()
+
+  if (!lib_is_installed("lantern", install_path)) {
+    return(FALSE)
+  }
+  
+  if(!lib_is_installed("torch", install_path)) {
+    return(FALSE)
+  }
+
+  should_verify <- Sys.getenv("TORCH_VERIFY_LOAD", "TRUE") == "TRUE"
+
+  if (!should_verify) {
+    # if we should not verify, we just return TRUE here
+    return(TRUE)
+  }
+
+  # already verified, short circuit
+  if (!recheck && is.logical(.torch_can_load)) {
+    return(.torch_can_load)
+  }
+
+  # verify if torch can be loaded
+  .torch_can_load <<- tryCatch({
+    out <- suppressWarnings(system2(
+      rscript_exe(),
+      args = "-",
+      input = c(
+        "Sys.setenv(TORCH_VERIFY_LOAD='no')",
+        sprintf("Sys.setenv(TORCH_HOME=r'{%s}')", install_path),
+        "torch::torch_tensor(1)",
+        "TRUE"
+      ),
+      stderr = TRUE,
+      stdout = TRUE
+    ))
+
+    if (attr(out, "status") %||% 0L != 0L) {
+      stop(paste(out, collapse = "\n"))
+    }
+
+    TRUE
+  }, error = function(err) {
+    cli_inform(c(
+      "Torch libraries are installed but loading them was unsuccessful.",
+      "Please reinstall torch with {.code install_torch(reinstall = TRUE)}",
+      "You can disable this check by setting {.envvar TORCH_VERIFY_LOAD} to {.val FALSE}",
+      "Torch libraries installed in: {.path {install_path}}.",
+      if (interactive()) conditionMessage(err) else ""
+    ))
+
+    FALSE
+  })
+  
+  # return the result of the verification
+  .torch_can_load
 }
+
+rscript_exe <- function() {
+  file.path(
+    R.home("bin"),
+    if (is_windows()) "Rscript.exe" else "Rscript"
+  )
+}
+
+is_windows <- function() identical(.Platform$OS.type, "windows")
 
 install_lib <- function(libname, url, reinstall = FALSE) {
-  inst_path <- torch_install_path()
+  inst_path <- torch_install_path(check_writable = TRUE)
   installer_message(c(
     "We are now proceeding to download and installing lantern and torch.",
     "The installation path is: {.path {inst_path}}"
@@ -143,7 +213,7 @@ install_lib <- function(libname, url, reinstall = FALSE) {
     return(invisible(TRUE))
   } 
   
-  rlang::abort(c(
+  cli_abort(c(
     "Installation failed.",
     "Could not install {.strong {libname}} from {.val {url}}."
   ))
@@ -162,9 +232,13 @@ lib_is_installed <- function(libname, install_path) {
   FALSE
 }
 
-inst_path <- function() {
+inst_path <- function(check_writable = FALSE) {
   install_path <- Sys.getenv("TORCH_HOME")
-  if (nzchar(install_path)) {
+  if (nzchar(install_path)) {    
+    if (!check_writable) {
+      return(install_path)
+    }
+
     if (can_write_into(install_path)) {
       return(install_path)
     } else {
@@ -175,14 +249,19 @@ inst_path <- function() {
     }
   }
   install_path <- system.file("", package = "torch")
-  if (can_write_into(install_path)) {
+  if (!check_writable) {
     return(install_path)
   }
-  cli_abort(c("x" = "{.pkg torch} cannot write into {.path {install_path}}.",
-            "i" = "Please configure a {.var TORCH_HOME} variable with a writable folder",
-            " " = "and run {.fn install_torch()} again",
-            "i" = "Or run R under the {.emph root} user {.strong once} to perform the {.fn install_torch()} ",
-            " " = "if you use system level package manager like {.pkg r2u}"))
+  
+  if (can_write_into(install_path)) {
+    return(install_path)
+  } else {
+    cli_abort(c("x" = "{.pkg torch} cannot write into {.path {install_path}}.",
+                "i" = "Please configure a {.var TORCH_HOME} variable with a writable folder",
+                " " = "and run {.fn install_torch()} again",
+                "i" = "Or run R under the {.emph root} user {.strong once} to perform the {.fn install_torch()} ",
+                " " = "if you use system level package manager like {.pkg r2u}"))
+  }
 }
 
 libtorch_url <- function() {
@@ -200,8 +279,7 @@ libtorch_url <- function() {
     url <- glue::glue("https://download.pytorch.org/libtorch/{kind}/libtorch-win-shared-with-deps-{torch_version}%2B{kind}.zip")
   }
   if (is_linux()) {
-    precxx11 <- ifelse(precxx11abi(), "", "cxx11-abi-")
-    url <- glue::glue("https://download.pytorch.org/libtorch/{kind}/libtorch-{precxx11}shared-with-deps-{torch_version}%2B{kind}.zip")
+    url <- glue::glue("https://download.pytorch.org/libtorch/{kind}/libtorch-cxx11-abi-shared-with-deps-{torch_version}%2B{kind}.zip")
   }
   
   installer_message(c(
@@ -225,16 +303,13 @@ lantern_url <- function() {
   pkg_version <- torch_r_version()
   kind <- installation_kind()
   arch <- architecture()
-  precxx11 <- precxx11abi()
   os <- os_name()
   
   fname <- paste0("lantern-", pkg_version, "+", kind)
   if (is_linux() || is_macos()) {
     fname <- paste0(fname, "+", arch)
   }
-  if (is_linux() && !is.null(precxx11) && precxx11) {
-    fname <- paste0(fname, "+pre-cxx11")
-  }
+  
   fname <- paste0(fname, "-", os, ".zip")
   
   # we now query the base URL for that file name. There are 2 cases:
@@ -305,27 +380,6 @@ os_name <- function() {
     "win64"
   }
 }
-
-precxx11abi <- function() {
-  abi <- Sys.getenv("PRECXX11ABI", "")
-  
-  if (abi != "" && !is_linux()) {
-    installer_message("{.envvar PRECXX11ABI} value will be ignored. Only supported on Linux.")
-  }
-  
-  if (!is_linux()) {
-    return(NULL)
-  }
-  
-  if (!is_truthy(abi)) {
-    installer_message("Installing the CXX11 ABI enabled build.")
-    return(FALSE)
-  } else {
-    installer_message("Installing the pre-CXX11 ABI enabled build.")
-    return(TRUE)
-  }
-}
-
 
 architecture <- function() {
   arch <- Sys.info()["machine"]
@@ -470,12 +524,12 @@ cuda_version_windows <- function() {
 }
 
 check_supported_cuda_version_windows <- function(version) {
-  supported_versions <- c("11.8", "12.4")
+  supported_versions <- c("12.6", "12.8")
   check_supported_version(version, supported_versions)
 }
 
 check_supported_cuda_version_linux <- function(version) {
-  supported_versions <- c("11.8", "12.4")
+  supported_versions <- c("12.6", "12.8")
   check_supported_version(version, supported_versions)
 }
 

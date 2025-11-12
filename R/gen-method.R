@@ -5755,7 +5755,7 @@ call_c_function(
   return_types = return_types,
   fun_type = 'method'
 )})
-Tensor$set("public", "repeat_interleave", function(repeats, dim = NULL, output_size = NULL) {  args <- mget(x = c("repeats", "dim", "output_size"))
+Tensor$set("private", "_repeat_interleave", function(repeats, dim = NULL, output_size = NULL) {  args <- mget(x = c("repeats", "dim", "output_size"))
 args <- c(list(self = self), args)
 expected_types <- list(self = "Tensor", repeats = c("Tensor", "int64_t"), dim = "int64_t", 
     output_size = "int64_t")
@@ -6592,12 +6592,12 @@ call_c_function(
   return_types = return_types,
   fun_type = 'method'
 )})
-Tensor$set("public", "stft", function(n_fft, hop_length = NULL, win_length = NULL, window = list(), center = TRUE, pad_mode = "reflect", normalized = FALSE, onesided = NULL, return_complex = NULL) {  args <- mget(x = c("n_fft", "hop_length", "win_length", "window", "center", "pad_mode", "normalized", "onesided", "return_complex"))
+Tensor$set("public", "stft", function(n_fft, hop_length = NULL, win_length = NULL, window = list(), center = TRUE, pad_mode = "reflect", normalized = FALSE, onesided = NULL, return_complex = NULL, align_to_window = NULL) {  args <- mget(x = c("n_fft", "hop_length", "win_length", "window", "center", "pad_mode", "normalized", "onesided", "return_complex", "align_to_window"))
 args <- c(list(self = self), args)
 expected_types <- list(self = "Tensor", n_fft = "int64_t", hop_length = "int64_t", 
     win_length = "int64_t", window = "Tensor", center = "bool", 
     pad_mode = "c10::string_view", normalized = "bool", onesided = "bool", 
-    return_complex = "bool")
+    return_complex = "bool", align_to_window = "bool")
 nd_args <- c("self", "n_fft")
 return_types <- list(list('Tensor'))
 call_c_function(

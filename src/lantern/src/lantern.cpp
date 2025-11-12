@@ -316,10 +316,10 @@ void* _lantern__functional_assert_async_tensor_cstringview_tensor(void* self, vo
   LANTERN_FUNCTION_END
 }
 
-void* _lantern__assert_tensor_metadata_tensor_intarrayref_intarrayref_scalartype(void* a, void* size, void* stride, void* dtype)
+void* _lantern__assert_tensor_metadata_tensor_intarrayref_intarrayref_scalartype_device_layout(void* a, void* size, void* stride, void* dtype, void* device, void* layout)
 {
   LANTERN_FUNCTION_START
-    torch::_assert_tensor_metadata(from_raw::Tensor(a), from_raw::optional::IntArrayRef(size), from_raw::optional::IntArrayRef(stride), from_raw::optional::ScalarType(dtype));
+    torch::_assert_tensor_metadata(from_raw::Tensor(a), from_raw::optional::IntArrayRef(size), from_raw::optional::IntArrayRef(stride), from_raw::optional::ScalarType(dtype), from_raw::optional::Device(device), from_raw::optional::Layout(layout));
     return NULL;
   LANTERN_FUNCTION_END
 }
@@ -6172,11 +6172,11 @@ void* _lantern__cslt_compress_tensor(void* input)
   LANTERN_FUNCTION_END
 }
 
-void* _lantern__cslt_sparse_mm_tensor_tensor_tensor_tensor_scalartype_bool_intt(void* compressed_A, void* dense_B, void* bias, void* alpha, void* out_dtype, void* transpose_result, void* alg_id)
+void* _lantern__cslt_sparse_mm_tensor_tensor_tensor_tensor_scalartype_bool_intt_intt_bool(void* compressed_A, void* dense_B, void* bias, void* alpha, void* out_dtype, void* transpose_result, void* alg_id, void* split_k, void* split_k_one_kernel)
 {
   LANTERN_FUNCTION_START
     return make_raw::Tensor(torch::_cslt_sparse_mm(
-        from_raw::Tensor(compressed_A), from_raw::Tensor(dense_B), from_raw::optional::Tensor(bias), from_raw::optional::Tensor(alpha), from_raw::optional::ScalarType(out_dtype), from_raw::bool_t(transpose_result), from_raw::int64_t(alg_id)));
+        from_raw::Tensor(compressed_A), from_raw::Tensor(dense_B), from_raw::optional::Tensor(bias), from_raw::optional::Tensor(alpha), from_raw::optional::ScalarType(out_dtype), from_raw::bool_t(transpose_result), from_raw::int64_t(alg_id), from_raw::int64_t(split_k), from_raw::bool_t(split_k_one_kernel)));
   LANTERN_FUNCTION_END
 }
 
@@ -7761,6 +7761,38 @@ void* _lantern__weight_int4pack_mm_tensor_tensor_intt_tensor(void* self, void* m
   LANTERN_FUNCTION_START
     return make_raw::Tensor(torch::_weight_int4pack_mm(
         from_raw::Tensor(self), from_raw::Tensor(mat2), from_raw::int64_t(qGroupSize), from_raw::Tensor(qScaleAndZeros)));
+  LANTERN_FUNCTION_END
+}
+
+void* _lantern__convert_weight_to_int4pack_for_cpu_tensor_intt(void* self, void* innerKTiles)
+{
+  LANTERN_FUNCTION_START
+    return make_raw::Tensor(torch::_convert_weight_to_int4pack_for_cpu(
+        from_raw::Tensor(self), from_raw::int64_t(innerKTiles)));
+  LANTERN_FUNCTION_END
+}
+
+void* _lantern__weight_int4pack_mm_for_cpu_tensor_tensor_intt_tensor(void* self, void* mat2, void* qGroupSize, void* qScaleAndZeros)
+{
+  LANTERN_FUNCTION_START
+    return make_raw::Tensor(torch::_weight_int4pack_mm_for_cpu(
+        from_raw::Tensor(self), from_raw::Tensor(mat2), from_raw::int64_t(qGroupSize), from_raw::Tensor(qScaleAndZeros)));
+  LANTERN_FUNCTION_END
+}
+
+void* _lantern__dyn_quant_pack_4bit_weight_tensor_tensor_tensor_intt_intt_intt(void* weights, void* scales_zeros, void* bias, void* block_size, void* in_features, void* out_features)
+{
+  LANTERN_FUNCTION_START
+    return make_raw::Tensor(torch::_dyn_quant_pack_4bit_weight(
+        from_raw::Tensor(weights), from_raw::Tensor(scales_zeros), from_raw::optional::Tensor(bias), from_raw::int64_t(block_size), from_raw::int64_t(in_features), from_raw::int64_t(out_features)));
+  LANTERN_FUNCTION_END
+}
+
+void* _lantern__dyn_quant_matmul_4bit_tensor_tensor_intt_intt_intt(void* inp, void* packed_weights, void* block_size, void* in_features, void* out_features)
+{
+  LANTERN_FUNCTION_START
+    return make_raw::Tensor(torch::_dyn_quant_matmul_4bit(
+        from_raw::Tensor(inp), from_raw::Tensor(packed_weights), from_raw::int64_t(block_size), from_raw::int64_t(in_features), from_raw::int64_t(out_features)));
   LANTERN_FUNCTION_END
 }
 
@@ -10420,35 +10452,35 @@ void* _lantern_dstack_out_tensor_tensorlist(void* out, void* tensors)
   LANTERN_FUNCTION_END
 }
 
-void* _lantern_stft_tensor_intt_intt_intt_tensor_bool_bool_bool(void* self, void* n_fft, void* hop_length, void* win_length, void* window, void* normalized, void* onesided, void* return_complex)
+void* _lantern_stft_tensor_intt_intt_intt_tensor_bool_bool_bool_bool(void* self, void* n_fft, void* hop_length, void* win_length, void* window, void* normalized, void* onesided, void* return_complex, void* align_to_window)
 {
   LANTERN_FUNCTION_START
     return make_raw::Tensor(torch::stft(
-        from_raw::Tensor(self), from_raw::int64_t(n_fft), from_raw::optional::int64_t(hop_length), from_raw::optional::int64_t(win_length), from_raw::optional::Tensor(window), from_raw::bool_t(normalized), from_raw::optional::bool_t(onesided), from_raw::optional::bool_t(return_complex)));
+        from_raw::Tensor(self), from_raw::int64_t(n_fft), from_raw::optional::int64_t(hop_length), from_raw::optional::int64_t(win_length), from_raw::optional::Tensor(window), from_raw::bool_t(normalized), from_raw::optional::bool_t(onesided), from_raw::optional::bool_t(return_complex), from_raw::optional::bool_t(align_to_window)));
   LANTERN_FUNCTION_END
 }
 
-void* _lantern_Tensor_stft_tensor_intt_intt_intt_tensor_bool_bool_bool(void* self, void* n_fft, void* hop_length, void* win_length, void* window, void* normalized, void* onesided, void* return_complex)
+void* _lantern_Tensor_stft_tensor_intt_intt_intt_tensor_bool_bool_bool_bool(void* self, void* n_fft, void* hop_length, void* win_length, void* window, void* normalized, void* onesided, void* return_complex, void* align_to_window)
 {
   LANTERN_FUNCTION_START
     return make_raw::Tensor(from_raw::Tensor(self).stft(
-        from_raw::int64_t(n_fft), from_raw::optional::int64_t(hop_length), from_raw::optional::int64_t(win_length), from_raw::optional::Tensor(window), from_raw::bool_t(normalized), from_raw::optional::bool_t(onesided), from_raw::optional::bool_t(return_complex)));
+        from_raw::int64_t(n_fft), from_raw::optional::int64_t(hop_length), from_raw::optional::int64_t(win_length), from_raw::optional::Tensor(window), from_raw::bool_t(normalized), from_raw::optional::bool_t(onesided), from_raw::optional::bool_t(return_complex), from_raw::optional::bool_t(align_to_window)));
   LANTERN_FUNCTION_END
 }
 
-void* _lantern_stft_tensor_intt_intt_intt_tensor_bool_cstringview_bool_bool_bool(void* self, void* n_fft, void* hop_length, void* win_length, void* window, void* center, void* pad_mode, void* normalized, void* onesided, void* return_complex)
+void* _lantern_stft_tensor_intt_intt_intt_tensor_bool_cstringview_bool_bool_bool_bool(void* self, void* n_fft, void* hop_length, void* win_length, void* window, void* center, void* pad_mode, void* normalized, void* onesided, void* return_complex, void* align_to_window)
 {
   LANTERN_FUNCTION_START
     return make_raw::Tensor(torch::stft(
-        from_raw::Tensor(self), from_raw::int64_t(n_fft), from_raw::optional::int64_t(hop_length), from_raw::optional::int64_t(win_length), from_raw::optional::Tensor(window), from_raw::bool_t(center), from_raw::string_view(pad_mode), from_raw::bool_t(normalized), from_raw::optional::bool_t(onesided), from_raw::optional::bool_t(return_complex)));
+        from_raw::Tensor(self), from_raw::int64_t(n_fft), from_raw::optional::int64_t(hop_length), from_raw::optional::int64_t(win_length), from_raw::optional::Tensor(window), from_raw::bool_t(center), from_raw::string_view(pad_mode), from_raw::bool_t(normalized), from_raw::optional::bool_t(onesided), from_raw::optional::bool_t(return_complex), from_raw::optional::bool_t(align_to_window)));
   LANTERN_FUNCTION_END
 }
 
-void* _lantern_Tensor_stft_tensor_intt_intt_intt_tensor_bool_cstringview_bool_bool_bool(void* self, void* n_fft, void* hop_length, void* win_length, void* window, void* center, void* pad_mode, void* normalized, void* onesided, void* return_complex)
+void* _lantern_Tensor_stft_tensor_intt_intt_intt_tensor_bool_cstringview_bool_bool_bool_bool(void* self, void* n_fft, void* hop_length, void* win_length, void* window, void* center, void* pad_mode, void* normalized, void* onesided, void* return_complex, void* align_to_window)
 {
   LANTERN_FUNCTION_START
     return make_raw::Tensor(from_raw::Tensor(self).stft(
-        from_raw::int64_t(n_fft), from_raw::optional::int64_t(hop_length), from_raw::optional::int64_t(win_length), from_raw::optional::Tensor(window), from_raw::bool_t(center), from_raw::string_view(pad_mode), from_raw::bool_t(normalized), from_raw::optional::bool_t(onesided), from_raw::optional::bool_t(return_complex)));
+        from_raw::int64_t(n_fft), from_raw::optional::int64_t(hop_length), from_raw::optional::int64_t(win_length), from_raw::optional::Tensor(window), from_raw::bool_t(center), from_raw::string_view(pad_mode), from_raw::bool_t(normalized), from_raw::optional::bool_t(onesided), from_raw::optional::bool_t(return_complex), from_raw::optional::bool_t(align_to_window)));
   LANTERN_FUNCTION_END
 }
 
@@ -12689,6 +12721,14 @@ void* _lantern__scaled_mm_out_tensor_tensor_tensor_tensor_tensor_tensor_tensor_s
   LANTERN_FUNCTION_START
     return make_raw::Tensor(torch::_scaled_mm_out(
         from_raw::Tensor(out), from_raw::Tensor(self), from_raw::Tensor(mat2), from_raw::Tensor(scale_a), from_raw::Tensor(scale_b), from_raw::optional::Tensor(bias), from_raw::optional::Tensor(scale_result), from_raw::optional::ScalarType(out_dtype), from_raw::bool_t(use_fast_accum)));
+  LANTERN_FUNCTION_END
+}
+
+void* _lantern__scaled_grouped_mm_tensor_tensor_tensor_tensor_tensor_tensor_tensor_scalartype_bool(void* self, void* mat2, void* scale_a, void* scale_b, void* offs, void* bias, void* scale_result, void* out_dtype, void* use_fast_accum)
+{
+  LANTERN_FUNCTION_START
+    return make_raw::Tensor(torch::_scaled_grouped_mm(
+        from_raw::Tensor(self), from_raw::Tensor(mat2), from_raw::Tensor(scale_a), from_raw::Tensor(scale_b), from_raw::optional::Tensor(offs), from_raw::optional::Tensor(bias), from_raw::optional::Tensor(scale_result), from_raw::optional::ScalarType(out_dtype), from_raw::bool_t(use_fast_accum)));
   LANTERN_FUNCTION_END
 }
 
@@ -19252,6 +19292,22 @@ void* _lantern__foreach_lerp__tensorlist_tensorlist_scalar(void* self, void* ten
   LANTERN_FUNCTION_END
 }
 
+void* _lantern__foreach_lerp_tensorlist_tensorlist_arrayrefscalar(void* self, void* tensors1, void* weight)
+{
+  LANTERN_FUNCTION_START
+    return make_raw::TensorList(torch::_foreach_lerp(
+        from_raw::TensorList(self), from_raw::TensorList(tensors1), from_raw::vector::Scalar(weight)));
+  LANTERN_FUNCTION_END
+}
+
+void* _lantern__foreach_lerp__tensorlist_tensorlist_arrayrefscalar(void* self, void* tensors1, void* weight)
+{
+  LANTERN_FUNCTION_START
+    torch::_foreach_lerp_(from_raw::TensorList(self), from_raw::TensorList(tensors1), from_raw::vector::Scalar(weight));
+    return NULL;
+  LANTERN_FUNCTION_END
+}
+
 void* _lantern__foreach_lgamma_tensorlist(void* self)
 {
   LANTERN_FUNCTION_START
@@ -19448,6 +19504,22 @@ void* _lantern__foreach_round__tensorlist(void* self)
 {
   LANTERN_FUNCTION_START
     torch::_foreach_round_(from_raw::TensorList(self));
+    return NULL;
+  LANTERN_FUNCTION_END
+}
+
+void* _lantern__foreach_rsqrt_tensorlist(void* self)
+{
+  LANTERN_FUNCTION_START
+    return make_raw::TensorList(torch::_foreach_rsqrt(
+        from_raw::TensorList(self)));
+  LANTERN_FUNCTION_END
+}
+
+void* _lantern__foreach_rsqrt__tensorlist(void* self)
+{
+  LANTERN_FUNCTION_START
+    torch::_foreach_rsqrt_(from_raw::TensorList(self));
     return NULL;
   LANTERN_FUNCTION_END
 }
@@ -24236,6 +24308,14 @@ void* _lantern__padded_dense_to_jagged_forward_tensor_tensorlist_intt(void* dens
   LANTERN_FUNCTION_END
 }
 
+void* _lantern__nested_from_padded_tensor_tensor_tensor_tensor_intt_tensor_tensor_intt(void* padded, void* offsets, void* dummy, void* ragged_idx, void* min_seqlen, void* max_seqlen, void* sum_S)
+{
+  LANTERN_FUNCTION_START
+    return make_raw::Tensor(torch::_nested_from_padded_tensor(
+        from_raw::Tensor(padded), from_raw::Tensor(offsets), from_raw::Tensor(dummy), from_raw::int64_t(ragged_idx), from_raw::optional::Tensor(min_seqlen), from_raw::optional::Tensor(max_seqlen), from_raw::optional::int64_t(sum_S)));
+  LANTERN_FUNCTION_END
+}
+
 void* _lantern__nested_tensor_softmax_with_shape_tensor_tensor(void* self, void* query)
 {
   LANTERN_FUNCTION_START
@@ -24388,11 +24468,11 @@ void* _lantern__flash_attention_forward_tensor_tensor_tensor_tensor_tensor_intt_
   LANTERN_FUNCTION_END
 }
 
-void* _lantern__flash_attention_backward_tensor_tensor_tensor_tensor_tensor_tensor_tensor_tensor_intt_intt_double_bool_tensor_tensor_double_intt_intt(void* grad_out, void* query, void* key, void* value, void* out, void* logsumexp, void* cum_seq_q, void* cum_seq_k, void* max_q, void* max_k, void* dropout_p, void* is_causal, void* philox_seed, void* philox_offset, void* scale, void* window_size_left, void* window_size_right)
+void* _lantern__flash_attention_backward_tensor_tensor_tensor_tensor_tensor_tensor_tensor_tensor_intt_intt_double_bool_tensor_tensor_double_intt_intt(void* grad_out, void* query, void* key, void* value, void* out, void* logsumexp, void* cum_seq_q, void* cum_seq_k, void* max_q, void* max_k, void* dropout_p, void* is_causal, void* rng_state, void* unused, void* scale, void* window_size_left, void* window_size_right)
 {
   LANTERN_FUNCTION_START
     return make_raw::tuple(torch::_flash_attention_backward(
-        from_raw::Tensor(grad_out), from_raw::Tensor(query), from_raw::Tensor(key), from_raw::Tensor(value), from_raw::Tensor(out), from_raw::Tensor(logsumexp), from_raw::Tensor(cum_seq_q), from_raw::Tensor(cum_seq_k), from_raw::int64_t(max_q), from_raw::int64_t(max_k), from_raw::double_t(dropout_p), from_raw::bool_t(is_causal), from_raw::Tensor(philox_seed), from_raw::Tensor(philox_offset), from_raw::optional::double_t(scale), from_raw::optional::int64_t(window_size_left), from_raw::optional::int64_t(window_size_right)));
+        from_raw::Tensor(grad_out), from_raw::Tensor(query), from_raw::Tensor(key), from_raw::Tensor(value), from_raw::Tensor(out), from_raw::Tensor(logsumexp), from_raw::Tensor(cum_seq_q), from_raw::Tensor(cum_seq_k), from_raw::int64_t(max_q), from_raw::int64_t(max_k), from_raw::double_t(dropout_p), from_raw::bool_t(is_causal), from_raw::Tensor(rng_state), from_raw::Tensor(unused), from_raw::optional::double_t(scale), from_raw::optional::int64_t(window_size_left), from_raw::optional::int64_t(window_size_right)));
   LANTERN_FUNCTION_END
 }
 
@@ -24409,6 +24489,14 @@ void* _lantern__efficient_attention_backward_tensor_tensor_tensor_tensor_tensor_
   LANTERN_FUNCTION_START
     return make_raw::tuple(torch::_efficient_attention_backward(
         from_raw::Tensor(grad_out_), from_raw::Tensor(query), from_raw::Tensor(key), from_raw::Tensor(value), from_raw::optional::Tensor(bias), from_raw::Tensor(out), from_raw::optional::Tensor(cu_seqlens_q), from_raw::optional::Tensor(cu_seqlens_k), from_raw::int64_t(max_seqlen_q), from_raw::int64_t(max_seqlen_k), from_raw::Tensor(logsumexp), from_raw::double_t(dropout_p), from_raw::Tensor(philox_seed), from_raw::Tensor(philox_offset), from_raw::int64_t(custom_mask_type), from_raw::bool_t(bias_requires_grad), from_raw::optional::double_t(scale), from_raw::optional::int64_t(num_splits_key), from_raw::optional::int64_t(window_size), from_raw::bool_t(shared_storage_dqdkdv)));
+  LANTERN_FUNCTION_END
+}
+
+void* _lantern__cudnn_attention_forward_tensor_tensor_tensor_tensor_tensor_tensor_intt_intt_bool_double_bool_bool_double(void* query, void* key, void* value, void* attn_bias, void* cum_seq_q, void* cum_seq_k, void* max_q, void* max_k, void* compute_log_sumexp, void* dropout_p, void* is_causal, void* return_debug_mask, void* scale)
+{
+  LANTERN_FUNCTION_START
+    return make_raw::tuple(torch::_cudnn_attention_forward(
+        from_raw::Tensor(query), from_raw::Tensor(key), from_raw::Tensor(value), from_raw::optional::Tensor(attn_bias), from_raw::optional::Tensor(cum_seq_q), from_raw::optional::Tensor(cum_seq_k), from_raw::int64_t(max_q), from_raw::int64_t(max_k), from_raw::bool_t(compute_log_sumexp), from_raw::double_t(dropout_p), from_raw::bool_t(is_causal), from_raw::bool_t(return_debug_mask), from_raw::optional::double_t(scale)));
   LANTERN_FUNCTION_END
 }
 
@@ -25361,6 +25449,22 @@ void* _lantern__conj_physical_out_tensor_tensor(void* out, void* self)
   LANTERN_FUNCTION_START
     return make_raw::Tensor(torch::_conj_physical_out(
         from_raw::Tensor(out), from_raw::Tensor(self)));
+  LANTERN_FUNCTION_END
+}
+
+void* _lantern_avg_pool1d_out_tensor_tensor_intarrayref_intarrayref_intarrayref_bool_bool(void* out, void* self, void* kernel_size, void* stride, void* padding, void* ceil_mode, void* count_include_pad)
+{
+  LANTERN_FUNCTION_START
+    return make_raw::Tensor(torch::avg_pool1d_out(
+        from_raw::Tensor(out), from_raw::Tensor(self), from_raw::IntArrayRef(kernel_size), from_raw::IntArrayRef(stride), from_raw::IntArrayRef(padding), from_raw::bool_t(ceil_mode), from_raw::bool_t(count_include_pad)));
+  LANTERN_FUNCTION_END
+}
+
+void* _lantern_adaptive_avg_pool1d_out_tensor_tensor_intarrayref(void* out, void* self, void* output_size)
+{
+  LANTERN_FUNCTION_START
+    return make_raw::Tensor(torch::adaptive_avg_pool1d_out(
+        from_raw::Tensor(out), from_raw::Tensor(self), from_raw::IntArrayRef(output_size)));
   LANTERN_FUNCTION_END
 }
 
@@ -28492,6 +28596,14 @@ void* _lantern__foreach_lerp_out_tensorlist_tensorlist_tensorlist_scalar(void* o
   LANTERN_FUNCTION_END
 }
 
+void* _lantern__foreach_lerp_out_tensorlist_tensorlist_tensorlist_arrayrefscalar(void* out, void* self, void* tensors1, void* weight)
+{
+  LANTERN_FUNCTION_START
+    torch::_foreach_lerp_out(from_raw::TensorList(out), from_raw::TensorList(self), from_raw::TensorList(tensors1), from_raw::vector::Scalar(weight));
+    return NULL;
+  LANTERN_FUNCTION_END
+}
+
 void* _lantern__foreach_lgamma_out_tensorlist_tensorlist(void* out, void* self)
 {
   LANTERN_FUNCTION_START
@@ -28592,6 +28704,14 @@ void* _lantern__foreach_round_out_tensorlist_tensorlist(void* out, void* self)
 {
   LANTERN_FUNCTION_START
     torch::_foreach_round_out(from_raw::TensorList(out), from_raw::TensorList(self));
+    return NULL;
+  LANTERN_FUNCTION_END
+}
+
+void* _lantern__foreach_rsqrt_out_tensorlist_tensorlist(void* out, void* self)
+{
+  LANTERN_FUNCTION_START
+    torch::_foreach_rsqrt_out(from_raw::TensorList(out), from_raw::TensorList(self));
     return NULL;
   LANTERN_FUNCTION_END
 }
@@ -28716,6 +28836,14 @@ void* _lantern_hardswish_backward_out_tensor_tensor_tensor(void* out, void* grad
   LANTERN_FUNCTION_END
 }
 
+void* _lantern_rrelu_with_noise_functional_tensor_tensor_scalar_scalar_bool_generator(void* self, void* noise, void* lower, void* upper, void* training, void* generator)
+{
+  LANTERN_FUNCTION_START
+    return make_raw::tuple(torch::rrelu_with_noise_functional(
+        from_raw::Tensor(self), from_raw::Tensor(noise), from_raw::Scalar(lower), from_raw::Scalar(upper), from_raw::bool_t(training), from_raw::optional::Generator(generator)));
+  LANTERN_FUNCTION_END
+}
+
 void* _lantern_rrelu_with_noise_backward_out_tensor_tensor_tensor_tensor_scalar_scalar_bool_bool(void* out, void* grad_output, void* self, void* noise, void* lower, void* upper, void* training, void* self_is_result)
 {
   LANTERN_FUNCTION_START
@@ -28761,6 +28889,22 @@ void* _lantern__adaptive_avg_pool3d_backward_out_tensor_tensor_tensor(void* out,
   LANTERN_FUNCTION_START
     return make_raw::Tensor(torch::_adaptive_avg_pool3d_backward_out(
         from_raw::Tensor(out), from_raw::Tensor(grad_output), from_raw::Tensor(self)));
+  LANTERN_FUNCTION_END
+}
+
+void* _lantern_upsample_bilinear2d_out_tensor_tensor_intarrayref_bool_arrayrefdouble(void* out, void* input, void* output_size, void* align_corners, void* scale_factors)
+{
+  LANTERN_FUNCTION_START
+    return make_raw::Tensor(torch::upsample_bilinear2d_out(
+        from_raw::Tensor(out), from_raw::Tensor(input), from_raw::optional::IntArrayRef(output_size), from_raw::bool_t(align_corners), from_raw::optional::DoubleArrayRef(scale_factors)));
+  LANTERN_FUNCTION_END
+}
+
+void* _lantern_upsample_nearest2d_out_tensor_tensor_intarrayref_arrayrefdouble(void* out, void* input, void* output_size, void* scale_factors)
+{
+  LANTERN_FUNCTION_START
+    return make_raw::Tensor(torch::upsample_nearest2d_out(
+        from_raw::Tensor(out), from_raw::Tensor(input), from_raw::optional::IntArrayRef(output_size), from_raw::optional::DoubleArrayRef(scale_factors)));
   LANTERN_FUNCTION_END
 }
 
