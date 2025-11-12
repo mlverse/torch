@@ -88,8 +88,8 @@ Select your system specifications to generate the recommended installation comma
   const compatibility = {
     "11.6": { torch_range: "0.10.0 (Linux only) or 0.11.0", rec_version: "0.11.0", linux_only: true },
     "11.7": { torch_range: "0.10.0 to 0.13.0", rec_version: "0.13.0", linux_only: false },
-    "11.8": { torch_range: "0.12.0 to 0.15.x", rec_version: "0.15.2", linux_only: false },
-    "12.4": { torch_range: "0.14.x to 0.15.x", rec_version: "0.15.2", linux_only: false },
+    "11.8": { torch_range: "0.12.0 to 0.15.x", rec_version: "0.15.1", linux_only: false },
+    "12.4": { torch_range: "0.14.x to 0.15.x", rec_version: "0.15.1", linux_only: false },
     "12.6": { torch_range: "0.16.x", rec_version: "0.16.3", linux_only: false },
     "12.8": { torch_range: "0.16.x", rec_version: "0.16.3", linux_only: false }
   };
