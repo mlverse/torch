@@ -194,14 +194,14 @@ torch_tensordot <- function(a, b, dims = 2) {
 torch_tril_indices <- function(row, col, offset = 0, dtype = NULL,
                                device = NULL, layout = NULL) {
   opt <- list(dtype = dtype, device = device, layout = layout)
-  .torch_tril_indices(row, col, offset, options = opt)
+  .torch_tril_indices(row, col, offset, options = opt)$add_(1L, 1L)
 }
 
 #' @rdname torch_triu_indices
 torch_triu_indices <- function(row, col, offset = 0, dtype = NULL,
                                device = NULL, layout = NULL) {
   opt <- list(dtype = dtype, device = device, layout = layout)
-  .torch_triu_indices(row, col, offset, options = opt)
+  .torch_triu_indices(row, col, offset, options = opt)$add_(1L, 1L)
 }
 
 #' @rdname torch_multilabel_margin_loss

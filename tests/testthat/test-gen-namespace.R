@@ -401,3 +401,15 @@ test_that("tile works correctly", {
   expect_true(length(x$tile(2)) == 6)
   expect_true(length(torch_tile(x, 2)) == 6)
 })
+
+test_that("torch_triu_indices and torch_tril_indices return 1-based indexes", {
+  n <- 4
+  m <- 5
+  k <- 0
+  
+  triu_indices <- torch_triu_indices(n, m, k)
+  tril_indices <- torch_tril_indices(n, m, k)
+  
+  expect_equal_to_r(torch_min(tril_indices), 1L)
+  expect_equal_to_r(torch_min(triu_indices), 1L)
+})
