@@ -495,6 +495,17 @@ test_that("is_sparse works", {
   expect_true(x$is_sparse())
 })
 
+test_that("indices() returns one based indices for sparse tensors", {
+  idx <- torch_tensor(
+    matrix(c(1, 2, 2, 3, 1, 3), ncol = 3, byrow = TRUE),
+    dtype = torch_int64()
+  )
+  values <- torch_tensor(c(3, 4, 5), dtype = torch_float32())
+  sparse <- torch_sparse_coo_tensor(idx, values, size = c(3, 3))$coalesce()
+
+  expect_equal_to_tensor(sparse$indices(), idx)
+})
+
 test_that("can make a byte tensor from a raw vector", {
 
   x <- charToRaw("hello world")

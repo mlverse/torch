@@ -451,7 +451,7 @@ internal_methods <- c("_backward", "retain_grad", "size", "to", "stride",
                       "rename_", "narrow", "narrow_copy", "is_leaf", "max",
                       "min", "argsort", "argmax", "argmin", "norm", "split",
                       "nonzero", "nonzero_numpy", "view", "sort", "bincount",
-                      "movedim", "clone", "detach", "repeat_interleave")
+                      "movedim", "clone", "detach", "repeat_interleave", "indices")
 
 r_method_env <- function(decls) {
   if (decls[[1]]$name %in% internal_methods)

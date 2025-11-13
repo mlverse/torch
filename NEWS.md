@@ -1,6 +1,8 @@
 # torch (development version)
 
 - Added `%*%` method for torch tensors. (#1379)
+- `torch_triu_indices` and `torch_tril_indices` now return 1-based indexes. (#1382)
+- `$indices()` now return 1-based indexes (#1382)
 
 # torch 0.16.3
 
