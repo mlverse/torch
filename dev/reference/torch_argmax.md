@@ -51,9 +51,9 @@ a
 torch_argmax(a, dim=1)
 }
 #> torch_tensor
-#>  4
+#>  3
 #>  4
 #>  2
-#>  1
+#>  2
 #> [ CPULongType{4} ]
 ```

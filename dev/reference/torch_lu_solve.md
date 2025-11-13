@@ -43,6 +43,6 @@ x = torch_lu_solve(b, out[[1]], out[[2]])
 torch_norm(torch_bmm(A, x) - b)
 }
 #> torch_tensor
-#> 4.96904e-07
+#> 1.27316e-07
 #> [ CPUFloatType{} ]
 ```
