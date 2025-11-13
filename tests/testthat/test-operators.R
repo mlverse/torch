@@ -121,6 +121,22 @@ test_that("! works", {
   expect_equal_to_r(!y, c(TRUE, FALSE))
 })
 
+test_that("%*% works", {
+  if (getRversion() < "4.3.0") {
+    skip("%*% S3 operator for torch_tensor requires R >= 4.3.0")
+  }
+
+  lhs <- torch_tensor(matrix(c(1, 2, 3, 4), nrow = 2))
+  rhs_tensor <- torch_tensor(matrix(c(0, 1, 1, 0), nrow = 2))
+  rhs_matrix <- matrix(c(2, 0, 1, 2), nrow = 2)
+
+  lhs_r <- as.matrix(as_array(lhs))
+  rhs_tensor_r <- as.matrix(as_array(rhs_tensor))
+
+  expect_equal_to_r(lhs %*% rhs_tensor, lhs_r %*% rhs_tensor_r)
+  expect_equal_to_r(lhs %*% rhs_matrix, lhs_r %*% rhs_matrix)
+})
+
 test_that("dim works", {
   x <- torch_randn(c(2, 2))
   expect_equal(dim(x), c(2, 2))
@@ -355,6 +371,24 @@ test_that("| works", {
   expect_equal_to_r(x | y, c(TRUE, TRUE))
   expect_equal_to_r(c(TRUE, TRUE) | y, c(TRUE, TRUE))
   expect_equal_to_r(x | 0, c(FALSE, TRUE))
+})
+
+test_that("%*% works on cuda", {
+  if (getRversion() < "4.3.0") {
+    skip("%*% S3 operator for torch_tensor requires R >= 4.3.0")
+  }
+
+  skip_if_cuda_not_available()
+
+  lhs <- torch_tensor(matrix(c(1, 2, 3, 4), nrow = 2), device = "cuda")
+  rhs_tensor <- torch_tensor(matrix(c(0, 1, 1, 0), nrow = 2), device = "cuda")
+  rhs_matrix <- matrix(c(2, 0, 1, 2), nrow = 2)
+
+  lhs_r <- as.matrix(as_array(lhs$cpu()))
+  rhs_tensor_r <- as.matrix(as_array(rhs_tensor$cpu()))
+
+  expect_equal_to_r(lhs %*% rhs_tensor, lhs_r %*% rhs_tensor_r)
+  expect_equal_to_r(lhs %*% rhs_matrix, lhs_r %*% rhs_matrix)
 })
 
 test_that("mean works", {

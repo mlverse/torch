@@ -50,9 +50,9 @@ Since version 0.1.1 torch supports GPU installation on Windows. In order to use 
 
 -   Have a CUDA compatible NVIDIA GPU. You can find if you have a CUDA compatible GPU [here](https://developer.nvidia.com/cuda-gpus#compute).
 
--   Have properly installed the NVIDIA CUDA toolkit version 11.7. For CUDA v11.7, follow the installation instructions [here](https://developer.nvidia.com/cuda-11-7-0-download-archive). **Note**: The version of the CUDA toolkit must match exactly what's mentioed above.
+-   Have properly installed the NVIDIA CUDA toolkit version 12.8. For CUDA v12.8, follow the installation instructions [here](https://developer.nvidia.com/cuda-12-8-1-download-archive). **Note**: The version of the CUDA toolkit must match exactly what's mentioed above.
 
--   Have installed cuDNN - a version compatible with CUDA v11.7. Follow the installation instructions available [here](https://developer.nvidia.com/cudnn).
+-   Have installed cuDNN - a version compatible with CUDA v12.8. Follow the installation instructions available [here](https://developer.nvidia.com/cudnn).
 
 Once you have installed all pre-requisites you can install `torch` with:
 
@@ -109,7 +109,7 @@ Once you have installed all pre-requisites you can install `torch` with:
 install.packages("torch")
 ```
 
-If you have followed default installation locations we will detect that you have CUDA software installed and automatically download the GPU enabled Lantern binaries. You can also specify the `CUDA` env var with something like `Sys.setenv(CUDA="11.7")` if you want to force an specific version of the CUDA toolkit.
+If you have followed default installation locations we will detect that you have CUDA software installed and automatically download the GPU enabled Lantern binaries. You can also specify the `CUDA` env var with something like `Sys.setenv(CUDA="12.8")` if you want to force an specific version of the CUDA toolkit.
 
 ## Installing from pre-built binaries {#pre-built}
 
@@ -129,9 +129,9 @@ To install from the pre-built binaries, you can use the following:
 
 ``` r
 options(timeout = 600) # increasing timeout is recommended since we will be downloading a 2GB file.
-# For Windows and Linux: "cpu", "cu124" are the only currently supported
+# For Windows and Linux: "cpu", "cu128" are the only currently supported
 # For MacOS the supported are: "cpu-intel" or "cpu-m1"
-kind <- "cu124"
+kind <- "cu128"
 version <- available.packages()["torch","Version"]
 options(repos = c(
   torch = sprintf("https://torch-cdn.mlverse.org/packages/%s/%s/", kind, version),

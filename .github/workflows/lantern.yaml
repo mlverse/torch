@@ -7,7 +7,7 @@ jobs:
   build:
     runs-on: ${{ matrix.config.runner }}
     container: ${{ matrix.container }}
-    name: "os:${{matrix.config.os}} | v:${{matrix.config.version}} (pre-cxx11: ${{matrix.precxx11abi }})"
+    name: "os:${{matrix.config.os}} | v:${{matrix.config.version}}"
     permissions:
       id-token: write
       contents: read
@@ -18,46 +18,31 @@ jobs:
         config: 
           # when changing supported versions here, please modify supported versions
           # in install.R
-          - {os: macOS, version: cpu-intel, runner: macos-13}
+          - {os: macOS, version: cpu-intel, runner: macos-15-intel}
           - {os: macOS, version: cpu-m1, runner: [self-hosted, m1]}
           
           - {os: ubuntu, version: cpu, runner: ubuntu-latest}
-          - {os: ubuntu, version: cu11.8, runner: [self-hosted, linux]}
-          - {os: ubuntu, version: cu12.4, runner: [self-hosted, linux]}
+          - {os: ubuntu, version: cu12.6, runner: [self-hosted, linux]}
+          - {os: ubuntu, version: cu12.8, runner: [self-hosted, linux]}
 
-          - {os: windows, version: cpu, runner: windows-2019}
-          - {os: windows, version: cu11.8, runner: windows-2019}
-          - {os: windows, version: cu12.4, runner: windows-2019}
-        
-        precxx11abi: [0, 1]
+          - {os: windows, version: cpu, runner: windows-2022}
+          - {os: windows, version: cu12.6, runner: windows-2022}
+          - {os: windows, version: cu12.8, runner: windows-2022}
 
         include:
           - config: {os: ubuntu}
-            precxx11abi: 0
             container: ubuntu:20.04
-
-          - config: {os: ubuntu}
-            precxx11abi: 1
-            container: ubuntu:20.04
-            
-          - config: {version: cu11.8}
-            cuda: 11.8
-            cuda_patch: 0
           
-          - config: {version: cu12.4}
-            cuda: 12.4
+          - config: {version: cu12.6}
+            cuda: 12.6
+            cuda_patch: 3
+          
+          - config: {version: cu12.8}
+            cuda: 12.8
             cuda_patch: 1
-
-        exclude:
-          - config: {os: macOS}
-            precxx11abi: 1
-
-          - config: {os: windows}
-            precxx11abi: 1
         
     env:
       CUDA: ${{ matrix.cuda }}
-      PRECXX11ABI: ${{ matrix.precxx11abi }}
       
     steps:
 
@@ -69,7 +54,7 @@ jobs:
           curl -fsSL https://get.docker.com -o get-docker.sh
           DRY_RUN=1 sh ./get-docker.sh
 
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       
       - name: Setup cmake
         uses: jwlawson/actions-setup-cmake@v2
@@ -82,7 +67,7 @@ jobs:
         id: cuda-toolkit
         with:
           cuda: "${{matrix.cuda}}.${{matrix.cuda_patch}}"
-          log-file-suffix: '${{matrix.cuda}}.${{matrix.cuda_patch}}.${{matrix.precxx11abi}}.txt'
+          log-file-suffix: '${{matrix.cuda}}.${{matrix.cuda_patch}}.txt'
           
       - name: Install CuDNN
         if: ${{ matrix.cuda != '' }}
@@ -95,7 +80,7 @@ jobs:
           cd src/lantern/
           mkdir build
           cd build
-          cmake ..
+          cmake .. ${{ matrix.config.cmake }}
 
       - name: Build libs
         id: build
@@ -108,7 +93,7 @@ jobs:
 
       - id: artifact
         if: ${{ github.workflow == 'Test' }}
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         with:
           name: ${{ steps.build.outputs.fname }}
           path: 'src/lantern/build/${{ steps.build.outputs.fname }}'

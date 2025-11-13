@@ -8,13 +8,13 @@ name: pkgdown
 
 jobs:
   pkgdown:
-    runs-on: macOS-13
+    runs-on: macOS-latest
     env:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
       TORCH_TEST: 1
       TORCH_INSTALL: 1
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
       - uses: r-lib/actions/setup-r@v2
 

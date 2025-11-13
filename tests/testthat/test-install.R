@@ -7,7 +7,7 @@ test_that("installer provides an explicit message when target folder has read-on
   skip_if_not(is_linux())
   withr::with_envvar(new = c("TORCH_INSTALL_DEBUG" = TRUE, "TORCH_HOME" = "/dev/mem"),  
     expect_error(
-      torch:::inst_path(),
+      torch:::inst_path(check_writable=TRUE),
       regexp = "cannot write into configured",
       fixed = TRUE
     )

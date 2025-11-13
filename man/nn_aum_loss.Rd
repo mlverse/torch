@@ -17,7 +17,7 @@ level of the binary outcome, i.e. with values \code{1L} and \code{2L}.
 }
 \examples{
 if (torch_is_installed()) {
-\dontshow{if (torch_is_installed()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (torch_is_installed()) withAutoprint(\{ # examplesIf}
 loss <- nn_aum_loss()
 input <- torch_randn(4, 6, requires_grad = TRUE)
 target <- input > 1.5

@@ -13,7 +13,7 @@ backends_cudnn_enabled <- backends_cudnn_is_available
 #' @export
 backends_cudnn_version <- function() {
   if (!backends_cudnn_is_available()) {
-    rlang::abort("CuDNN is not available.")
+    runtime_error("CuDNN is not available.")
   }
 
   v <- cpp_cudnn_runtime_version()

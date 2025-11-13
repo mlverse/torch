@@ -68,6 +68,8 @@ cpp_type <- function(decl) {
   } else {
     return("Rcpp::List")
   }
+
+  browser()
 }
 
 cpp_method_name <- function(decl) {
@@ -561,6 +563,8 @@ cpp_return_statement <- function(returns) {
 
     if (returns$dynamic_type == "IntArrayRef")
       return(cast_call("XPtrTorchIntArrayRef"))
+    
+    browser()
 
   } else {
 
@@ -701,7 +705,7 @@ cpp <- function(path) {
     purrr::discard(~.x$name == "range" && length(.x$arguments) == 3) %>%
     purrr::discard(~.x$name == "range_out" && length(.x$arguments) == 3) %>%
     purrr::discard(~.x$name == "arange" && length(.x$arguments) == 3) %>%
-    purrr::discard(~.x$name == "stft" && length(.x$arguments) == 8)
+    purrr::discard(~.x$name == "stft" && length(.x$arguments) == 9)
 
   pb <- NULL
 
@@ -715,7 +719,7 @@ cpp <- function(path) {
     purrr::map_chr(function(x) {
       pb$tick()
       res <- cpp_method(x)
-      if (length(res) != 1)
+      if (length(res) != 1) browser()
       res
     })
 

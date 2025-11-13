@@ -37,8 +37,7 @@ Samplers can be used with \code{\link[=dataloader]{dataloader()}} when creating 
 A sampler must implement the \code{.iter} and \code{.length()} methods.
 \itemize{
 \item \code{initialize} takes in a \code{data_source}. In general this is a \code{\link[=dataset]{dataset()}}.
-\item \code{.iter} returns a function that returns a dataset index everytime it's called.
-\item \code{.length} returns the maximum number of samples that can be retrieved from
-that sampler.
+\item \code{.iter} returns a function that returns an integer vector or coro::exhausted(). For a sampler, the integer vector should have length 1 (the value is one data index). For a batch_sampler, the integer vector should have length equal to batch size (the values are indices in the batch).
+\item \code{.length} returns the maximum number of times that .iter() can be called, before it returns coro::exhausted(). For a sampler, this the number of samples. For a batch_sampler, this is the number of batches.
 }
 }
