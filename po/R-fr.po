@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: torch 0.16.3\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-11-18 18:20+0100\n"
-"PO-Revision-Date: 2025-11-18 18:43+0100\n"
+"PO-Revision-Date: 2025-11-18 18:51+0100\n"
 "Last-Translator: Christophe Regouby <christophe.regouby@free.fr>\n"
 "Language-Team: \n"
 "Language: fr_FR\n"
@@ -396,8 +396,8 @@ msgid ""
 "Parameter groups must be a list of the same length as the number of "
 "parameter groups."
 msgstr ""
-"Le dictionnaire d’état chargé en mémoire a un nombre de groupes de "
-"paramètres différent"
+"Les groupes de paramètres doivent être une liste de même longueur que leur "
+"nombre."
 
 #: ignite.R:133
 msgid ""
@@ -445,8 +445,8 @@ msgid ""
 "You can disable this check by setting {.envvar TORCH_VERIFY_LOAD} to {.val "
 "FALSE}"
 msgstr ""
-"Vous pouvez désactiver cette vérification en définissant {.envvar "
-"TORCH_VERIFY_LOAD} sur {.val FALSE}."
+"Vous pouvez désactiver cette vérification en configurant {.envvar "
+"TORCH_VERIFY_LOAD} à {.val FALSE}."
 
 #: install.R:131
 msgid "Torch libraries installed in: {.path {install_path}}."
@@ -464,7 +464,7 @@ msgstr "Le chemin d'installation est {.path {inst_path}}."
 
 #: install.R:160
 msgid "An installation of {.strong {libname}} already exists."
-msgstr "Une installation de {.strong {libname}}existe déjà."
+msgstr "Une installation de {.strong {libname}} existe déjà."
 
 #: install.R:161
 msgid "Found file at {.path {inst_path}}."
