@@ -51,7 +51,7 @@ torch_trapz(y, x = x)
 
 }
 #> torch_tensor
-#>  1.5788
-#>  3.2002
+#>  0.1041
+#> -1.3825
 #> [ CPUFloatType{2} ]
 ```
