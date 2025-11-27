@@ -244,7 +244,7 @@ inst_path <- function(check_writable = FALSE) {
     } else {
       cli_abort(c(
         "x" = "{.pkg torch} cannot write into configured {.var TORCH_HOME} {.path {install_path}}.",
-        "i" = "Please configure {.var TORCH_HOME} to be one of {.val {.libPath()}}"
+        "i" = "Please configure {.var TORCH_HOME} to be one of {.val {(.libPaths())}}"
       ))
     }
   }
