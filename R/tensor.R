@@ -412,6 +412,13 @@ as.matrix.torch_tensor <- function(x, ...) {
 }
 
 as_array_impl <- function(x) {
+  if (x$is_sparse()) {
+    cli_abort(c(
+      "Sparse tensors are not supported for as_array conversion.",
+      i = "Use `as_array(x$to_dense())` to convert to a dense tensor first."
+    ))
+  }
+
   # move tensor to cpu before copying to R
   x <- x$cpu()
 

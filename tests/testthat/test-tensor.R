@@ -506,6 +506,21 @@ test_that("indices() returns one based indices for sparse tensors", {
   expect_equal_to_tensor(sparse$indices(), idx)
 })
 
+test_that("as_array errors for sparse tensors", {
+  idx <- torch_tensor(
+    matrix(c(1, 2, 2, 3), nrow = 2),
+    dtype = torch_int64()
+  )
+  values <- torch_tensor(c(3, 4), dtype = torch_float32())
+  sparse <- torch_sparse_coo_tensor(idx, values, size = c(3, 3))
+
+  expect_error(
+    as_array(sparse),
+    "Sparse tensors are not supported for as_array conversion.",
+    fixed = TRUE
+  )
+})
+
 test_that("can make a byte tensor from a raw vector", {
 
   x <- charToRaw("hello world")
