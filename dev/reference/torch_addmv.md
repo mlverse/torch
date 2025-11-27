@@ -58,7 +58,7 @@ vec = torch_randn(c(3))
 torch_addmv(M, mat, vec)
 }
 #> torch_tensor
-#> -1.2232
-#>  2.7582
+#> -0.6249
+#>  1.2479
 #> [ CPUFloatType{2} ]
 ```
