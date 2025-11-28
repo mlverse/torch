@@ -541,3 +541,18 @@ torch_tensor_from_buffer <- function(buffer, shape, dtype = "float") {
 buffer_from_torch_tensor <- function(tensor) {
   cpp_buffer_from_tensor(tensor)
 }
+
+#' @export
+#' @importFrom utils head
+head.torch_tensor <- function(x, n = 6, ...) {
+  index <- torch_tensor(seq_len(min(n, x$size(1))))
+  torch_index_select(x, dim = 1, index = index)
+}
+
+#' @export
+#' @importFrom utils tail
+tail.torch_tensor <- function(x, n = 6, ...) {
+  sz <- x$size(1)
+  index <- seq.int(max(1, sz - n + 1), sz)
+  torch_index_select(x, dim = 1, index = index)
+}

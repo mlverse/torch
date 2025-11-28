@@ -624,3 +624,21 @@ test_that("detach preserves attributes (#1136)", {
   x <- nn_parameter(torch_tensor(1)$requires_grad_(TRUE))
   expect_true(inherits(x$detach(), "nn_parameter"))
 })
+
+test_that("head and tail works", {
+  x <- torch_tensor(1:10)
+  expect_equal_to_r(head(x), 1:6)
+  expect_equal_to_r(tail(x), 5:10)
+
+  x <- torch_stack(list(x, x), dim = 2)
+  expect_equal_to_r(head(x, n = 3), cbind(1:3, 1:3))
+  expect_equal_to_r(tail(x, n = 4), cbind(7:10, 7:10))
+
+  # sparse
+  i <- torch_tensor(matrix(c(1,2,2,3), nrow=2), dtype=torch_int64())
+  v <- torch_tensor(c(3,4), dtype=torch_float32())
+  x <- torch_sparse_coo_tensor(i, v, size = c(3,3))
+
+  expect_equal_to_r(head(x, 2)$to_dense(), head(as.matrix(x$to_dense()), 2))
+  expect_true(torch_allclose(tail(x, 2)$to_dense(), tail(x$to_dense(), 2)))
+})
