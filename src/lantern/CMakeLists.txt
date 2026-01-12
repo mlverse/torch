@@ -230,11 +230,32 @@ option(BUNDLE_DEPENDENCIES "On or off" OFF)
 if (BUNDLE_DEPENDENCIES)
     install(DIRECTORY ${TORCH_PATH} DESTINATION .)
     install(TARGETS lantern RUNTIME_DEPENDENCY_SET lantern_deps)
-    install(RUNTIME_DEPENDENCY_SET lantern_deps 
-		        DESTINATION lib
-		        DIRECTORIES "${TORCH_PATH}/lib/" "${CUDA_TOOLKIT_ROOT_DIR}/bin/"
-		        UNRESOLVED_DEPENDENCIES_VAR unresolved_deps
-		)
+    install(RUNTIME_DEPENDENCY_SET lantern_deps
+        DESTINATION lib
+        DIRECTORIES "${TORCH_PATH}/lib/" "${CUDA_TOOLKIT_ROOT_DIR}/bin/"
+        # Exclude glibc libraries - these must come from the host system.
+        # Bundling glibc causes ABI conflicts because GLIBC_PRIVATE symbols
+        # are unstable across versions. The build environment (Ubuntu 20.04,
+        # glibc 2.31) differs from many target systems (e.g., Ubuntu 24.04,
+        # glibc 2.39), causing "undefined symbol: _dl_catch_error" errors.
+        PRE_EXCLUDE_REGEXES
+            "^libc\\.so"
+            "^libc-"
+            "^libdl\\.so"
+            "^libdl-"
+            "^libpthread\\.so"
+            "^libpthread-"
+            "^librt\\.so"
+            "^librt-"
+            "^libm\\.so"
+            "^libm-"
+            "^ld-linux"
+        POST_EXCLUDE_REGEXES
+            "^/lib/"
+            "^/lib64/"
+            "^/usr/lib/"
+        UNRESOLVED_DEPENDENCIES_VAR unresolved_deps
+    )
 endif()
 
 ############################################################
