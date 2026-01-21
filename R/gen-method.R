@@ -3532,7 +3532,7 @@ call_c_function(
   return_types = return_types,
   fun_type = 'method'
 )})
-Tensor$set("public", "indices", function() {  args <- list()
+Tensor$set("private", "_indices", function() {  args <- list()
 args <- c(list(self = self), args)
 expected_types <- list(self = "Tensor")
 nd_args <- "self"

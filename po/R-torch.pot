@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: torch 0.16.0\n"
-"POT-Creation-Date: 2025-08-21 09:09+0200\n"
+"Project-Id-Version: torch 0.16.3.9000\n"
+"POT-Creation-Date: 2025-11-18 18:20+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -73,7 +73,7 @@ msgstr ""
 msgid "`keep_graph` has been deprecated. Please use `retain_graph` instead."
 msgstr ""
 
-#: autograd.R:133 install.R:179 install.R:192 install.R:194
+#: autograd.R:133 install.R:247 install.R:260 install.R:262
 msgid "i"
 msgstr ""
 
@@ -362,243 +362,261 @@ msgstr ""
 msgid "You must restart your session to use {.pkg torch} correctly."
 msgstr ""
 
-#: install.R:86
+#: install.R:128
+msgid "Torch libraries are installed but loading them was unsuccessful."
+msgstr ""
+
+#: install.R:129
+msgid "Please reinstall torch with {.code install_torch(reinstall = TRUE)}"
+msgstr ""
+
+#: install.R:130
+msgid ""
+"You can disable this check by setting {.envvar TORCH_VERIFY_LOAD} to {.val "
+"FALSE}"
+msgstr ""
+
+#: install.R:131
+msgid "Torch libraries installed in: {.path {install_path}}."
+msgstr ""
+
+#: install.R:154
 msgid "We are now proceeding to download and installing lantern and torch."
 msgstr ""
 
-#: install.R:87
+#: install.R:155
 msgid "The installation path is: {.path {inst_path}}"
 msgstr ""
 
-#: install.R:92
+#: install.R:160
 msgid "An installation of {.strong {libname}} already exists."
 msgstr ""
 
-#: install.R:93
+#: install.R:161
 msgid "Found file at {.path {inst_path}}."
 msgstr ""
 
-#: install.R:149
+#: install.R:217
 msgid "Installation failed."
 msgstr ""
 
-#: install.R:150
+#: install.R:218
 msgid "Could not install {.strong {libname}} from {.val {url}}."
 msgstr ""
 
-#: install.R:178 install.R:191
+#: install.R:246 install.R:259
 msgid "x"
 msgstr ""
 
-#: install.R:178
+#: install.R:246
 msgid ""
 "{.pkg torch} cannot write into configured {.var TORCH_HOME} {.path "
 "{install_path}}."
 msgstr ""
 
-#: install.R:179
+#: install.R:247
 msgid "Please configure {.var TORCH_HOME} to be one of {.val {.libPath()}}"
 msgstr ""
 
-#: install.R:191
+#: install.R:259
 msgid "{.pkg torch} cannot write into {.path {install_path}}."
 msgstr ""
 
-#: install.R:192
+#: install.R:260
 msgid "Please configure a {.var TORCH_HOME} variable with a writable folder"
 msgstr ""
 
-#: install.R:193
+#: install.R:261
 msgid "and run {.fn install_torch()} again"
 msgstr ""
 
-#: install.R:194
+#: install.R:262
 msgid ""
 "Or run R under the {.emph root} user {.strong once} to perform the {.fn "
 "install_torch()}"
 msgstr ""
 
-#: install.R:195
+#: install.R:263
 msgid "if you use system level package manager like {.pkg r2u}"
 msgstr ""
 
-#: install.R:218
+#: install.R:286
 msgid "LibTorch will be downloaded from:"
 msgstr ""
 
-#: install.R:219
+#: install.R:287
 msgid "{.url {url}}"
 msgstr ""
 
-#: install.R:273
+#: install.R:341
 msgid "Could not find the SHA of the commit that installed the package."
 msgstr ""
 
-#: install.R:274
+#: install.R:342
 msgid "Using the latest build for the specified branch: {.val {branch}}."
 msgstr ""
 
-#: install.R:279
+#: install.R:347
 msgid "Could find the SHA of the commit that installed the package."
 msgstr ""
 
-#: install.R:280
+#: install.R:348
 msgid "SHA: {.val {remote_sha}}."
 msgstr ""
 
-#: install.R:293
+#: install.R:361
 msgid "Lantern will be downloaded from the following URL:"
 msgstr ""
 
-#: install.R:294
+#: install.R:362
 msgid "{.url {final_url}}"
 msgstr ""
 
-#: install.R:320
+#: install.R:388
 msgid "Architecture {.val {arch}} is not supported in this OS."
 msgstr ""
 
-#: install.R:324
+#: install.R:392
 msgid "Unsupported architecture {.val {arch}}."
 msgstr ""
 
-#: install.R:327
+#: install.R:395
 msgid "Architecture is {.val {arch}}"
 msgstr ""
 
-#: install.R:342
+#: install.R:410
 msgid "No cuda instalation has been found. Using {.val cpu}."
 msgstr ""
 
-#: install.R:345
+#: install.R:413
 msgid "{.envvar CUDA} is set to {.val cpu}, so using the {.val cpu}."
 msgstr ""
 
-#: install.R:349
+#: install.R:417
 msgid "Installation kind will be {.val {cu}}."
 msgstr ""
 
-#: install.R:362
+#: install.R:430
 msgid ""
 "{.envvar CUDA} has been specified. The CUDA version is {.strong {version}}"
 msgstr ""
 
-#: install.R:374
+#: install.R:442
 msgid "Not on Windows or Linux. No CUDA installation supported."
 msgstr ""
 
-#: install.R:384
+#: install.R:452
 msgid "{.envvar CUDA_HOME}={.path {cuda_home}} is specified."
 msgstr ""
 
-#: install.R:386
+#: install.R:454
 msgid ""
 "{.envvar CUDA_HOME} is not specified. Looking in conventional locations."
 msgstr ""
 
-#: install.R:427
+#: install.R:495
 msgid "{.envvar CUDA_PATH}={.path {cuda_path}}."
 msgstr ""
 
-#: install.R:428
+#: install.R:496
 msgid "Trying to find CUDA in this path."
 msgstr ""
 
-#: install.R:432
+#: install.R:500
 msgid "{.envvar CUDA_PATH} is not specified."
 msgstr ""
 
-#: install.R:433
+#: install.R:501
 msgid "Searching for installation in conventional locations."
 msgstr ""
 
-#: install.R:449
+#: install.R:517
 msgid "Trying to use the nvcc version that might be on your path."
 msgstr ""
 
-#: install.R:472
+#: install.R:540
 msgid "Unsupported CUDA version {.val {version}}"
 msgstr ""
 
-#: install.R:473
+#: install.R:541
 msgid "Currently supported versions are: {.val {supported_versions}}."
 msgstr ""
 
-#: install.R:496
+#: install.R:564
 msgid "Found CUDA version {.strong {cuda_version}}."
 msgstr ""
 
-#: install.R:497
+#: install.R:565
 msgid "This version was specified in {.path {versions_file}}"
 msgstr ""
 
-#: install.R:501
+#: install.R:569
 msgid "Could not find a CUDA version in {.path {versions_file}}."
 msgstr ""
 
-#: install.R:514
+#: install.R:582
 msgid ""
 "Tried to query nvcc from {.path {nvcc_path}}, but was unable to find a CUDA "
 "version."
 msgstr ""
 
-#: install.R:521
+#: install.R:589
 msgid "Found CUDA version {.strong {version}}."
 msgstr ""
 
-#: install.R:522
+#: install.R:590
 msgid "It was found by querying nvcc at {.path {nvcc_path}}."
 msgstr ""
 
-#: install.R:532
+#: install.R:600
 msgid "torch_install"
 msgstr ""
 
-#: install.R:541
+#: install.R:609
 msgid "Unexpected value"
 msgstr ""
 
-#: install.R:588
+#: install.R:656
 msgid ""
 "Please use the env vars described in {.fn install_torch} to configure the "
 "installation type."
 msgstr ""
 
-#: install.R:591
+#: install.R:659
 msgid "It's not possible to configure the libtorch version."
 msgstr ""
 
-#: install.R:600
+#: install.R:668
 msgid ""
 "Follow the links to download the dependencies, then set the {.envvar "
 "TORCH_URL} and {.envvar LANTERN_URL} env vars to the file paths."
 msgstr ""
 
-#: install.R:601
+#: install.R:669
 msgid "LibTorch: {.url {out$libtorch}}"
 msgstr ""
 
-#: install.R:602
+#: install.R:670
 msgid "LibLantern: {.url {out$liblantern}}"
 msgstr ""
 
-#: install.R:636
+#: install.R:704
 msgid ""
 "This function is now deprecated. The same results can be achieved with {.fn "
 "install_torch}."
 msgstr ""
 
-#: install.R:637
+#: install.R:705
 msgid ""
 "Use the envvars {.envvar TORCH_URL} and {.envvar LANTERN_URL} to set the "
 "file locations."
 msgstr ""
 
-#: install.R:657
+#: install.R:725
 msgid "Unable to download from {.url {url}}"
 msgstr ""
 
-#: install.R:658
+#: install.R:726
 msgid ""
 "Please verify that the URL is not blocked by your firewall. See also {.url "
 "https://torch.mlverse.org/docs/articles/installation.html#file-based-"
@@ -1050,7 +1068,7 @@ msgstr ""
 msgid "'zeros', 'border' and 'reflection'."
 msgstr ""
 
-#: operators.R:326 operators.R:334 operators.R:342 operators.R:358 operators.R:374
+#: operators.R:334 operators.R:342 operators.R:350 operators.R:366 operators.R:382
 msgid "Torch tensors do not have NAs!"
 msgstr ""
 
@@ -1260,35 +1278,39 @@ msgstr ""
 msgid "OptimizerIgnite cannot be deep cloned"
 msgstr ""
 
-#: package.R:54
+#: package.R:30
+msgid "packageStartupMessage"
+msgstr ""
+
+#: package.R:69
 msgid "Failed to install torch, manually run {.fn install_torch}"
 msgstr ""
 
-#: package.R:84
+#: package.R:115
 msgid "torch failed to start, restart your R session to try again."
 msgstr ""
 
-#: package.R:85
+#: package.R:116
 msgid "You might need to reinstall torch using {.fn install_torch}"
 msgstr ""
 
-#: package.R:108
+#: package.R:138
 msgid "Aborted."
 msgstr ""
 
-#: package.R:117
+#: package.R:147
 msgid ""
 "Currently only {.code x86_64} systems are supported for automatic "
 "installation."
 msgstr ""
 
-#: package.R:118
+#: package.R:148
 msgid ""
 "You can manually compile LibTorch for you architecture following "
 "instructions in {.url https://github.com/pytorch/pytorch#from-source}"
 msgstr ""
 
-#: package.R:119
+#: package.R:149
 msgid "You can then use {.fn install_torch_from_file} to install manually."
 msgstr ""
 
@@ -1373,11 +1395,11 @@ msgstr ""
 msgid "Can't set other and dim arguments."
 msgstr ""
 
-#: tensor.R:358
+#: tensor.R:361
 msgid "The tensor doesn't have names so you can't rename a dimension."
 msgstr ""
 
-#: tensor.R:451
+#: tensor.R:454
 msgid ""
 "Converting integers > .Machine$integer.max is undefined and returns wrong "
 "results. Use as.integer64(x)"

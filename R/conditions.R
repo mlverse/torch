@@ -18,12 +18,19 @@ warn <- function(..., env = rlang::caller_env()) {
   rlang::warn(glue::glue(gettext(..., domain = "R-torch")[[1]], .envir = env), class = "warning")
 }
 
-cli_abort <- function(..., env = rlang::caller_env()) {
-  cli::cli_abort(gettext(...)[[1]], .envir = env)
+cli_abort <- function(message, ..., env = rlang::caller_env()) {
+  cli::cli_abort(gettext_torch(message), ..., .envir = env)
 }
 
-cli_inform <- function(..., env = rlang::caller_env(), class = NULL) {
-  cli::cli_inform(gettext(..., domain = "R-torch")[[1]], .envir = env, class = class)
+cli_inform <- function(message, ..., env = rlang::caller_env(), class = NULL) {
+  cli::cli_inform(gettext_torch(message), .envir = env, class = class)
+}
+
+gettext_torch <- function(message, ..., domain = "R-torch") {
+  rlang::check_dots_empty()
+  message_t <- gettext(message, domain = "R-torch")
+  names(message_t) <- names(message)
+  message_t
 }
 
 stop_iteration_error <- function(..., env = rlang::caller_env()) {
