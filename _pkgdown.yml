@@ -1,4 +1,4 @@
-url: https://torch.mlverse.org/docs/
+url: https://cregouby.github.io/torch/
 destination: docs
 template:
   bootstrap: 5
