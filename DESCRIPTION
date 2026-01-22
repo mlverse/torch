@@ -19,7 +19,7 @@ Description: Provides functionality to define and train neural networks similar 
     using the 'libtorch' library. Also supports low-level tensor operations and
     'GPU' acceleration.
 License: MIT + file LICENSE
-URL: https://torch.mlverse.org/docs, https://github.com/mlverse/torch, https://cregouby.github.io/torch/
+URL: https://torch.mlverse.org/docs, https://github.com/mlverse/torch
 BugReports: https://github.com/mlverse/torch/issues
 Encoding: UTF-8
 SystemRequirements: LibTorch (https://pytorch.org/); Only x86_64 platforms
@@ -181,4 +181,3 @@ Collate:
     'variable_list.R'
     'with-indices.R'
     'wrapers.R'
-Config/Needs/website: tidyverse/tidytemplate
