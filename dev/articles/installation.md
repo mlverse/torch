@@ -68,8 +68,10 @@ install.packages("torch")
 If you have followed default installation locations we will detect that
 you have CUDA software installed and automatically download the GPU
 enabled Lantern binaries. You can also specify the `CUDA` env var with
-something like `Sys.setenv(CUDA="11.7")` if you want to force an
-specific version of the CUDA toolkit.
+something like `Sys.setenv(CUDA="12.8")` if you want to force an
+specific version of the CUDA toolkit. Refer to the [compatibility
+matrix](https://torch.mlverse.org/docs/dev/articles/compatibility-matrix)
+to select your version.
 
 ## MacOS
 
@@ -103,7 +105,7 @@ install.packages("torch")
 ### GPU
 
 torch has very specific requirements in terms of CUDA and CUDNN versions
-it supports. We recomment installing torch using pre-built binaries. See
+it supports. We recommand installing torch using pre-built binaries. See
 (#pre-built) for more information.
 
 To install the GPU version of `torch` on linux you must verify that:
@@ -111,9 +113,9 @@ To install the GPU version of `torch` on linux you must verify that:
 - You have a NVIDIA CUDA compatible GPU. You can find if you have a CUDA
   compatible GPU [here](https://developer.nvidia.com/cuda-gpus#compute).
 
-- You have correctly installed the NVIDIA CUDA Toolkit versions 11.6 or
-  11.7, follow the instructions
-  [here](https://docs.nvidia.com/cuda/archive/11.7.0/).
+- You have correctly installed the NVIDIA CUDA Toolkit versions 12.6 or
+  12.8, follow the instructions
+  [here](https://docs.nvidia.com/cuda/archive/12.8.0/).
 
 - You have installed cuDNN (a version compatible with your CUDA
   version). Follow the installation instructions available
@@ -129,7 +131,9 @@ If you have followed default installation locations we will detect that
 you have CUDA software installed and automatically download the GPU
 enabled Lantern binaries. You can also specify the `CUDA` env var with
 something like `Sys.setenv(CUDA="12.8")` if you want to force an
-specific version of the CUDA toolkit.
+specific version of the CUDA toolkit. Refer to the [compatibility
+matrix](https://torch.mlverse.org/docs/dev/articles/compatibility-matrix)
+to select your version.
 
 ## Installing from pre-built binaries
 
@@ -165,6 +169,17 @@ install.packages("torch")
 ```
 
 ## Troubleshooting
+
+### Debug installation messages
+
+As there are many installation failure scenario, you may want to
+activate verbose messages for better understanding what is going on
+during the installation process. This is done through the
+`TORCH_INSTALL_DEBUG` environment variable:
+
+``` r
+Sys.setenv(TORCH_INSTALL_DEBUG=1)
+```
 
 ### Large file download timeout
 

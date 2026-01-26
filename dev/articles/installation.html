@@ -165,8 +165,9 @@ Follow the installation instructions available <a href="https://developer.nvidia
 <p>If you have followed default installation locations we will detect
 that you have CUDA software installed and automatically download the GPU
 enabled Lantern binaries. You can also specify the <code>CUDA</code> env
-var with something like <code>Sys.setenv(CUDA="11.7")</code> if you want
-to force an specific version of the CUDA toolkit.</p>
+var with something like <code>Sys.setenv(CUDA="12.8")</code> if you want
+to force an specific version of the CUDA toolkit. Refer to the <a href="./compatibility-matrix">compatibility matrix</a> to select your
+version.</p>
 </div>
 </div>
 <div class="section level2">
@@ -202,7 +203,7 @@ torch with:</p>
 <h3 id="gpu-2">GPU<a class="anchor" aria-label="anchor" href="#gpu-2"></a>
 </h3>
 <p>torch has very specific requirements in terms of CUDA and CUDNN
-versions it supports. We recomment installing torch using pre-built
+versions it supports. We recommand installing torch using pre-built
 binaries. See (#pre-built) for more information.</p>
 <p>To install the GPU version of <code>torch</code> on linux you must
 verify that:</p>
@@ -210,7 +211,7 @@ verify that:</p>
 <li><p>You have a NVIDIA CUDA compatible GPU. You can find if you have a
 CUDA compatible GPU <a href="https://developer.nvidia.com/cuda-gpus#compute" class="external-link">here</a>.</p></li>
 <li><p>You have correctly installed the NVIDIA CUDA Toolkit versions
-11.6 or 11.7, follow the instructions <a href="https://docs.nvidia.com/cuda/archive/11.7.0/" class="external-link">here</a>.</p></li>
+12.6 or 12.8, follow the instructions <a href="https://docs.nvidia.com/cuda/archive/12.8.0/" class="external-link">here</a>.</p></li>
 <li><p>You have installed cuDNN (a version compatible with your CUDA
 version). Follow the installation instructions available <a href="https://developer.nvidia.com/cudnn" class="external-link">here</a>.</p></li>
 </ul>
@@ -222,7 +223,8 @@ version). Follow the installation instructions available <a href="https://develo
 that you have CUDA software installed and automatically download the GPU
 enabled Lantern binaries. You can also specify the <code>CUDA</code> env
 var with something like <code>Sys.setenv(CUDA="12.8")</code> if you want
-to force an specific version of the CUDA toolkit.</p>
+to force an specific version of the CUDA toolkit. Refer to the <a href="./compatibility-matrix">compatibility matrix</a> to select your
+version.</p>
 </div>
 </div>
 <div class="section level2">
@@ -260,6 +262,16 @@ following:</p>
 <h2 id="troubleshooting">Troubleshooting<a class="anchor" aria-label="anchor" href="#troubleshooting"></a>
 </h2>
 <div class="section level3">
+<h3 id="debug-installation-messages">Debug installation messages<a class="anchor" aria-label="anchor" href="#debug-installation-messages"></a>
+</h3>
+<p>As there are many installation failure scenario, you may want to
+activate verbose messages for better understanding what is going on
+during the installation process. This is done through the
+<code>TORCH_INSTALL_DEBUG</code> environment variable:</p>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Sys.setenv.html" class="external-link">Sys.setenv</a></span><span class="op">(</span>TORCH_INSTALL_DEBUG<span class="op">=</span><span class="fl">1</span><span class="op">)</span></span></code></pre></div>
+</div>
+<div class="section level3">
 <h3 id="large-file-download-timeout">Large file download timeout<a class="anchor" aria-label="anchor" href="#large-file-download-timeout"></a>
 </h3>
 <p>If you encounter timeout during library download, or if after a
@@ -272,7 +284,7 @@ while, downloads end-up with a warning such as:</p>
 3: Failed to install Torch, manually run install_torch(). download from 'https://download.pytorch.org/libtorch/cpu/libtorch-macos-1.7.1.zip' failed</code></pre>
 <p>This means you encounter a download timeout. then, you should
 increase the timeout value in <code><a href="../reference/install_torch.html">install_torch()</a></code> like</p>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/install_torch.html">install_torch</a></span><span class="op">(</span>timeout <span class="op">=</span> <span class="fl">600</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level3">
@@ -282,12 +294,12 @@ increase the timeout value in <code><a href="../reference/install_torch.html">in
 intend to install torch on, last resort is to install Torch and Lantern
 library from files. This is done in 3 steps :</p>
 <p>1- get the download URLs of the files.</p>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/install_torch_from_file.html">get_install_libs_url</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <p>2- save those files into the machine filesystem. We will use
 <code>/tmp/</code> here as an example .</p>
 <p>3- install torch from files</p>
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># then after making both files available into /tmp/</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/Sys.setenv.html" class="external-link">Sys.setenv</a></span><span class="op">(</span>TORCH_URL<span class="op">=</span><span class="st">"/tmp/libtorch-v1.13.1.zip"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/Sys.setenv.html" class="external-link">Sys.setenv</a></span><span class="op">(</span>LANTERN_URL<span class="op">=</span><span class="st">"/tmp/lantern-0.9.1.9001+cpu+arm64-Darwin.zip"</span><span class="op">)</span></span>
