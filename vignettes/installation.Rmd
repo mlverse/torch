@@ -60,7 +60,7 @@ Once you have installed all pre-requisites you can install `torch` with:
 install.packages("torch")
 ```
 
-If you have followed default installation locations we will detect that you have CUDA software installed and automatically download the GPU enabled Lantern binaries. You can also specify the `CUDA` env var with something like `Sys.setenv(CUDA="11.7")` if you want to force an specific version of the CUDA toolkit.
+If you have followed default installation locations we will detect that you have CUDA software installed and automatically download the GPU enabled Lantern binaries. You can also specify the `CUDA` env var with something like `Sys.setenv(CUDA="12.8")` if you want to force an specific version of the CUDA toolkit. Refer to the [compatibility matrix](./compatibility-matrix) to select your version.
 
 ## MacOS
 
@@ -92,14 +92,14 @@ install.packages("torch")
 
 ### GPU
 
-torch has very specific requirements in terms of CUDA and CUDNN versions it supports. We recomment installing torch
+torch has very specific requirements in terms of CUDA and CUDNN versions it supports. We recommand installing torch
 using pre-built binaries. See (#pre-built) for more information.
 
 To install the GPU version of `torch` on linux you must verify that:
 
 -   You have a NVIDIA CUDA compatible GPU. You can find if you have a CUDA compatible GPU [here](https://developer.nvidia.com/cuda-gpus#compute).
 
--   You have correctly installed the NVIDIA CUDA Toolkit versions 11.6 or 11.7, follow the instructions [here](https://docs.nvidia.com/cuda/archive/11.7.0/).
+-   You have correctly installed the NVIDIA CUDA Toolkit versions 12.6 or 12.8, follow the instructions [here](https://docs.nvidia.com/cuda/archive/12.8.0/).
 
 -   You have installed cuDNN (a version compatible with your CUDA version). Follow the installation instructions available [here](https://developer.nvidia.com/cudnn).
 
@@ -109,7 +109,7 @@ Once you have installed all pre-requisites you can install `torch` with:
 install.packages("torch")
 ```
 
-If you have followed default installation locations we will detect that you have CUDA software installed and automatically download the GPU enabled Lantern binaries. You can also specify the `CUDA` env var with something like `Sys.setenv(CUDA="12.8")` if you want to force an specific version of the CUDA toolkit.
+If you have followed default installation locations we will detect that you have CUDA software installed and automatically download the GPU enabled Lantern binaries. You can also specify the `CUDA` env var with something like `Sys.setenv(CUDA="12.8")` if you want to force an specific version of the CUDA toolkit. Refer to the [compatibility matrix](./compatibility-matrix) to select your version.
 
 ## Installing from pre-built binaries {#pre-built}
 
@@ -142,6 +142,15 @@ install.packages("torch")
 
 ## Troubleshooting
 
+### Debug installation messages
+
+As there are many installation failure scenario, you may want to activate verbose messages for better understanding what is going on during the installation process. This is done through the `TORCH_INSTALL_DEBUG` environment variable:
+
+```{r}
+Sys.setenv(TORCH_INSTALL_DEBUG=1)
+```
+
+
 ### Large file download timeout
 
 If you encounter timeout during library download, or if after a while, downloads end-up with a warning such as:
@@ -161,7 +170,7 @@ install_torch(timeout = 600)
 
 ### File based download
 
-In cases where you cannot reach download servers from the machine you intend to install torch on,  last resort is to install Torch and Lantern library from files. This is done in 3 steps :
+In cases where you cannot reach download servers from the machine you intend to install torch on, last resort is to install Torch and Lantern library from files. This is done in 3 steps :
 
 1- get the download URLs of the files.
 
