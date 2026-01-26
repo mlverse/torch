@@ -413,3 +413,46 @@ test_that("torch_triu_indices and torch_tril_indices return 1-based indexes", {
   expect_equal_to_r(torch_min(tril_indices), 1L)
   expect_equal_to_r(torch_min(triu_indices), 1L)
 })
+
+test_that("torch_scaled_dot_product_attention works correctly", {
+  # Basic usage with same-shaped Q, K, V
+  batch_size <- 2
+  num_heads <- 4
+  seq_len <- 8
+  head_dim <- 16
+  
+  query <- torch_randn(batch_size, num_heads, seq_len, head_dim)
+  key <- torch_randn(batch_size, num_heads, seq_len, head_dim)
+  value <- torch_randn(batch_size, num_heads, seq_len, head_dim)
+  
+  # Test basic call
+  output <- torch_scaled_dot_product_attention(query, key, value)
+  expect_tensor(output)
+  expect_equal(output$shape, c(batch_size, num_heads, seq_len, head_dim))
+  
+  # Test with causal masking
+  output_causal <- torch_scaled_dot_product_attention(
+    query, key, value,
+    is_causal = TRUE
+  )
+  expect_tensor(output_causal)
+  expect_equal(output_causal$shape, c(batch_size, num_heads, seq_len, head_dim))
+  
+  # Test with attention mask
+  attn_mask <- torch_ones(seq_len, seq_len)
+  attn_mask <- torch_tril(attn_mask)  # Lower triangular mask
+  output_masked <- torch_scaled_dot_product_attention(
+    query, key, value,
+    attn_mask = attn_mask
+  )
+  expect_tensor(output_masked)
+  expect_equal(output_masked$shape, c(batch_size, num_heads, seq_len, head_dim))
+  
+  # Test with dropout (should still work, even if not training)
+  output_dropout <- torch_scaled_dot_product_attention(
+    query, key, value,
+    dropout_p = 0.1
+  )
+  expect_tensor(output_dropout)
+  expect_equal(output_dropout$shape, c(batch_size, num_heads, seq_len, head_dim))
+})

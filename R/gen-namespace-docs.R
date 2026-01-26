@@ -7503,3 +7503,73 @@ NULL
 #' 
 #' @export
 NULL
+
+
+#' Scaled Dot Product Attention
+#'
+#' Computes scaled dot product attention on query, key and value tensors, using
+#' an optional attention mask if passed, and applying dropout if a probability
+#' greater than 0.0 is specified.
+#'
+#' This function uses optimized fused CUDA kernels when available, providing
+#' significant performance improvements (2-3x faster) compared to manually
+#' computing attention. It is particularly beneficial for transformer models.
+#'
+#' The attention mechanism is defined as:
+#' \deqn{Attention(Q, K, V) = softmax(\frac{QK^T}{\sqrt{d_k}})V}
+#'
+#' Where \eqn{N} is the batch size, \eqn{S} is the source sequence length,
+#' \eqn{L} is the target sequence length, \eqn{E} is the embedding dimension of the query and key,
+#' and \eqn{Ev} is the embedding dimension of the value.
+#'
+#' The function automatically selects the best available implementation based on
+#' hardware and input characteristics. On CUDA devices with compatible architectures,
+#' it can use flash attention or memory-efficient attention kernels.
+#'
+#' @param query (Tensor) Query tensor; shape \eqn{(N, ..., L, E)}.
+#' @param key (Tensor) Key tensor; shape \eqn{(N, ..., S, E)}.
+#' @param value (Tensor) Value tensor; shape \eqn{(N, ..., S, Ev)}.
+#' @param attn_mask (Tensor, optional) Attention mask; shape must be broadcastable to
+#'   the shape of attention weights, which is \eqn{(N,..., L, S)}. Two types of masks
+#'   are supported. A boolean mask where a value of `TRUE` indicates that the element
+#'   should take part in attention. A float mask of the same type as query, key, value
+#'   that is added to the attention score. Default: `list()`.
+#' @param dropout_p (float) Dropout probability; if greater than 0.0, dropout is applied.
+#'   Default: 0.0.
+#' @param is_causal (bool) If `TRUE`, assumes causal attention masking. `attn_mask` is
+#'   ignored when `is_causal=TRUE`. Default: `FALSE`.
+#' @param scale (float, optional) Scaling factor applied prior to softmax. If `NULL`,
+#'   the default value is set to \eqn{1/\sqrt{E}}. Default: `NULL`.
+#' @param enable_gqa (bool) If `TRUE`, enables grouped query attention (GQA) support.
+#'   Default: `FALSE`.
+#'
+#' @return A tensor with shape \eqn{(N, ..., L, Ev)}.
+#'
+#' @name torch_scaled_dot_product_attention
+#' @examples
+#' if (torch_is_installed()) {
+#'   # Basic usage
+#'   query <- torch_randn(2, 8, 10, 64)  # (batch, heads, seq_len, dim)
+#'   key <- torch_randn(2, 8, 10, 64)
+#'   value <- torch_randn(2, 8, 10, 64)
+#'
+#'   output <- torch_scaled_dot_product_attention(query, key, value)
+#'
+#'   # With causal masking (for autoregressive models)
+#'   output <- torch_scaled_dot_product_attention(
+#'     query, key, value,
+#'     is_causal = TRUE
+#'   )
+#'
+#'   # With attention mask
+#'   seq_len <- 10
+#'   attn_mask <- torch_ones(seq_len, seq_len)
+#'   attn_mask <- torch_tril(attn_mask)  # Lower triangular mask
+#'   output <- torch_scaled_dot_product_attention(
+#'     query, key, value,
+#'     attn_mask = attn_mask
+#'   )
+#' }
+#'
+#' @export
+NULL
