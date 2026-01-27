@@ -661,6 +661,7 @@
 <url><loc>https://torch.mlverse.org/docs/dev/reference/torch_rsqrt.html</loc></url>
 <url><loc>https://torch.mlverse.org/docs/dev/reference/torch_save.html</loc></url>
 <url><loc>https://torch.mlverse.org/docs/dev/reference/torch_scalar_tensor.html</loc></url>
+<url><loc>https://torch.mlverse.org/docs/dev/reference/torch_scaled_dot_product_attention.html</loc></url>
 <url><loc>https://torch.mlverse.org/docs/dev/reference/torch_searchsorted.html</loc></url>
 <url><loc>https://torch.mlverse.org/docs/dev/reference/torch_selu.html</loc></url>
 <url><loc>https://torch.mlverse.org/docs/dev/reference/torch_selu_.html</loc></url>

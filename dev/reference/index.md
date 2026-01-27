@@ -899,6 +899,9 @@
 - [`torch_scalar_tensor()`](https://torch.mlverse.org/docs/dev/reference/torch_scalar_tensor.md)
   : Scalar tensor
 
+- [`torch_scaled_dot_product_attention()`](https://torch.mlverse.org/docs/dev/reference/torch_scaled_dot_product_attention.md)
+  : Scaled Dot Product Attention
+
 - [`torch_searchsorted()`](https://torch.mlverse.org/docs/dev/reference/torch_searchsorted.md)
   : Searchsorted
 

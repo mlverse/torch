@@ -66,9 +66,9 @@ torch_multinomial(weights, 2)
 torch_multinomial(weights, 4, replacement=TRUE)
 }
 #> torch_tensor
-#>  2
+#>  3
 #>  2
 #>  3
-#>  3
+#>  2
 #> [ CPULongType{4} ]
 ```
