@@ -53,7 +53,6 @@
   <button class="nav-link dropdown-toggle" type="button" id="dropdown-advanced" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Advanced</button>
   <ul class="dropdown-menu" aria-labelledby="dropdown-advanced"><li><a class="dropdown-item" href="../articles/memory-management.html">Memory management</a></li>
     <li><a class="dropdown-item" href="../articles/compatibility-matrix.html">CUDA compatibility matrix</a></li>
-    <li><a class="dropdown-item" href="../articles/modifying-source-code.html">Building locally</a></li>
     <li><a class="dropdown-item" href="../articles/amp.html">Automatic Mixed Precision</a></li>
     <li><a class="dropdown-item" href="../articles/modifying-source-code.html">Modifying source code</a></li>
   </ul></li>
@@ -115,9 +114,9 @@ If \(N\) is 1, then this is a no-op - the original matrix is returned as is.</p>
 <span class="r-in"><span><span class="fu">torch_chain_matmul</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="va">a</span>, <span class="va">b</span>, <span class="va">c</span>, <span class="va">d</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">}</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> torch_tensor</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  -5.4680   4.6887   8.1535 -16.6434  18.1964 -16.1623  -4.6919</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  -0.6427 -22.9524  17.9867  34.5110 -18.9114  16.8145  20.4713</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   1.2116  -2.9397   0.4656  -0.5313  -3.9737  -3.5964   1.2048</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> -6.3532 -4.3129  5.5016 -0.4666  0.7138  1.0786  3.8337</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> -4.0510 -1.9581  7.3736  7.2316 -2.0499 -0.6098  2.8148</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  5.7732  1.9716 -2.7609  2.7733 -2.0811  1.5203 -3.1220</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [ CPUFloatType{3,7} ]</span>
 </code></pre></div>
     </div>

@@ -30,9 +30,9 @@ a
 torch_acos(a)
 }
 #> torch_tensor
-#>  2.7003
+#>  2.5451
+#>  1.7880
 #>     nan
-#>     nan
-#>  1.7134
+#>  0.8911
 #> [ CPUFloatType{4} ]
 ```

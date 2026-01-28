@@ -53,7 +53,6 @@
   <button class="nav-link dropdown-toggle" type="button" id="dropdown-advanced" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Advanced</button>
   <ul class="dropdown-menu" aria-labelledby="dropdown-advanced"><li><a class="dropdown-item" href="../articles/memory-management.html">Memory management</a></li>
     <li><a class="dropdown-item" href="../articles/compatibility-matrix.html">CUDA compatibility matrix</a></li>
-    <li><a class="dropdown-item" href="../articles/modifying-source-code.html">Building locally</a></li>
     <li><a class="dropdown-item" href="../articles/amp.html">Automatic Mixed Precision</a></li>
     <li><a class="dropdown-item" href="../articles/modifying-source-code.html">Modifying source code</a></li>
   </ul></li>
@@ -144,35 +143,35 @@ planes.</p>
 <span class="r-in"><span><span class="op">}</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> torch_tensor</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> (1,.,.) = </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  Columns 1 to 8   7.7821   1.1401   7.0596 -18.0148  -8.0119   3.5312   6.3678   1.1577</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    1.4168 -21.7658  -3.8629   3.7836  -2.8730   3.3767   1.3107  -7.6912</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   -1.2900   1.3924   0.4293 -12.1456  -5.1198  11.9490  -7.0972   0.1647</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   -3.9984   5.9896  -9.3157  -5.7545   0.2538   4.3508   3.8594   2.2356</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   -1.3127  19.0513 -11.2265  -3.7089  -4.9470  -2.9273   5.2524  -2.3379</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    6.9037   8.4869  -0.1168 -14.1164   7.8168   2.3922  -6.4525   6.7913</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    3.2033  14.0674   7.1300  -1.6438  -3.9614  -2.0177  -5.9154  -3.2822</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   -3.8510   8.7331   4.5380  11.4523  -0.8700   6.0459   7.0312 -12.1747</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   -2.8827   9.2593   8.2983  -0.8874   3.0346  -5.1481  -4.5896  -0.4153</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   -0.0607  -0.8083  -0.9835  -0.0790   5.9826   2.1725  -3.8092  11.2017</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   -7.0652  15.5899  -1.6786 -13.9086  12.0909  -1.3276 -20.9890  13.7807</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    0.4774  -0.0128  -0.2353  12.5776   1.0890  -6.0474  13.1473   4.1201</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   10.3552   5.7057 -11.3293  -2.8307   1.6694 -11.5058  -5.5629   6.6374</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    7.4876  -1.3666   6.0264   1.9139  -2.6408   6.2576   2.6033  -6.8402</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   -5.1727   1.0549   9.9360   1.8297  -0.1804  -2.1706  -6.6508   8.5265</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   -2.4241  -4.2964   2.4751   1.0475  -1.7561  -7.6616   3.0063  15.1142</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   -3.6064 -13.1878  -5.6382   5.4519   8.3442  -0.9002   9.3149  -4.8872</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    1.6292   5.3288   4.2803   8.9457  -5.8876   4.4505   0.5132  -4.3812</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    1.6326   7.3562  -0.3425  -9.7534  -0.2727   3.4866  -3.4696   7.8609</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   -6.6557  10.4909   2.9039   1.0667  -1.8801  -1.2761  -2.9188 -11.0050</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    6.2751  -1.9554   9.2415   1.5443  -5.9285   2.2983   1.0393  -0.3675</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    0.5540  -8.0793  -4.0453  15.4465  -5.4665   8.5274  -9.2435  -5.6795</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    0.3882   6.7377   9.4104  -1.1289   7.6823  13.5474  -1.6195   8.9032</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   -7.8136   5.9994   1.1162   7.6274  22.1626   6.3166   6.9810   5.6684</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   -0.7276   0.7945   8.8184 -15.3950  -7.8922   3.8768  -6.6414   0.3786</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    1.8089  -7.1999  -2.9335   4.4606   0.1712   0.9870  -3.9326  -5.8008</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   -7.6991   5.6514  -6.8531   5.1307   9.7328  -1.1070   4.3148   2.8988</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   -2.4336 -11.0794   5.7383  11.9821  -2.5089  10.2715   5.2683 -15.4027</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   -3.6935  -7.8457   5.9850   3.0752  -7.3826  -2.2674   3.2610  -2.7119</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  Columns 1 to 8   8.5066   5.2460  -5.0702   9.7661   7.8437   7.6397  -4.9277  -7.4332</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   -6.6144 -13.2427  -4.0484  -7.4242 -12.5976 -14.2367  -9.3327  -0.1520</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   -4.7191   7.4360  -9.3186   8.1276  -8.6746   5.7331  -5.7990  -5.0142</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    9.9508   6.6418   4.0012   3.0726   0.4566  10.7590   4.7616  -8.2945</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    7.1707   0.9770   7.4964   7.1305  11.7823   0.6940  -4.5239  -3.3830</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    2.6888   3.6749 -12.3774   2.5609   1.2296  -4.5380  -9.8231   1.4923</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    5.3915  -1.9385   3.6329   1.8798   1.1323   8.1682 -12.3050  11.0582</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  -11.6445   8.5847 -11.3606   6.7939  -5.7865   4.6098   6.7900  -4.4457</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    8.0151  -4.9409   3.4025  -6.7246   5.3516   5.4950  -7.3852   3.6879</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   -4.5881   4.3745  -1.8664   8.7960   1.3976  -4.6902   4.7306  -2.1597</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    0.9971  -4.9432   1.4991   0.3251   7.4873  -8.6693 -11.6045   3.8503</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   -7.2399   9.6449  -4.4143   4.4314   3.0613   2.5039   7.8003  -6.3692</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   -1.8625  -9.8309  -7.4603  -3.7788  -6.5241  -9.8672   4.6000  -1.2128</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   -3.9187  -5.9118   8.3398   0.4095   3.7267   0.4764  -3.7722   9.7326</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   18.7414  -0.4309   0.8262   2.5802   3.2783   5.8421  -3.6483   6.4690</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    1.1317  -2.9794   5.7389  -1.8460   2.7296  -6.7621  -4.3571  -0.2694</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   -4.0859  -1.1787 -11.2076  -1.9307  -6.9711   1.9999   5.1074  -4.7967</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    7.4927  -2.9980   4.6417 -16.7079  -2.2785  11.5917   7.2102  -1.2021</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    0.2247 -19.6565  14.3427  -0.3295   1.9919  -2.1295  -6.5629   7.6262</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    2.8063   9.0376  -6.1869  10.7453   7.2853  -3.3743 -11.3036   0.2057</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  -19.8373  10.7833  -5.9312   5.5679  -9.3279  -4.3200  -0.3028   0.6281</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  -10.7551  -7.3069  -5.4449  -9.9948  -1.3125  -4.7322   0.2011   1.2233</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  -13.0984   9.1607   4.0474   6.8254   3.6255  -1.9472   9.0260   0.4592</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    8.1648  -3.5669   5.7597  -6.5665  -1.2986  12.2016 -12.1307  -0.3799</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    5.7839  -2.5094  -0.4884  -2.8138  -6.3244 -11.9357   0.4833   4.6153</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  -13.5204   6.4655   4.8186   5.6089   7.6762   7.1157  16.7533   3.2583</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  -15.1425   2.7031   2.6893  -1.6723   3.8414   4.3749   2.0345  11.9733</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  -10.8651   6.3996 -12.6554   3.1680  -6.7817  -3.1557  -3.0154   0.5853</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  -12.4104  -4.9803   8.4476   9.4836   9.0326 -12.4321   3.4903  -2.2123</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ... [the output was truncated (use n=-1 to disable)]</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [ CPUFloatType{20,33,48} ]</span>
 </code></pre></div>
