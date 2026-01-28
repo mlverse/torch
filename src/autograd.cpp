@@ -5,8 +5,16 @@
 #include <future>
 #include <thread>
 
+// Global to store the longjump token when catching LongjumpException
+SEXP g_longjump_token = R_NilValue;
+
 #define LANTERN_CALLBACK_START try {
-#define LANTERN_CALLBACK_END(unknown, ret) \
+#define LANTERN_CALLBACK_END(fun, unknown, ret) \
+  }                                        \
+  catch (Rcpp::LongjumpException & ex) {   \
+    g_longjump_token = ex.token;           \
+    lanternSetLastError("LongjumpException");       \
+    return (void*)(ret);                   \
   }                                        \
   catch (const std::exception& ex) {       \
     lanternSetLastError(ex.what());        \
@@ -101,6 +109,7 @@ void cpp_torch_method__backward_self_Tensor_inputs_TensorList(
   gTasks.run();
 
   result_fut.get();
+  lantern_host_handler();
 }
 
 // [[Rcpp::export]]
@@ -125,6 +134,7 @@ void cpp_autograd_backward(Rcpp::XPtr<XPtrTorchvariable_list> tensors,
   gTasks.run();
 
   result_fut.get();
+  lantern_host_handler();
 }
 
 void* rcpp_call_hook(void* x, void* hook) {
@@ -151,7 +161,7 @@ unsigned int cpp_tensor_register_hook(Rcpp::XPtr<XPtrTorchTensor> self,
       auto out = Rcpp::as<Rcpp::XPtr<XPtrTorchTensor>>(f(y))->get();
       UNPROTECT(1);
       return out;
-      LANTERN_CALLBACK_END("Unknon error in hook.", NULL)
+      LANTERN_CALLBACK_END("register_hook","Unknon error in hook.", NULL)
     });
     std::future<void*> result_fut = task.get_future();
 
@@ -228,8 +238,7 @@ Rcpp::XPtr<XPtrTorch> cpp_Function_lambda(Rcpp::Function f) {
     gTasks.schedule(std::move(task));
 
     return result_fut.get();
-    LANTERN_CALLBACK_END("Unknown error in lambda function.",
-                         new torch::variable_list(lantern_variable_list_new()))
+    LANTERN_CALLBACK_END("lambda end" ,"Unknown error in lambda function.", NULL)
   });
 
   auto out = XPtrTorch(lantern_Function_lambda(&rcpp_call_forward, (void*)fun,
@@ -384,6 +393,7 @@ torch::variable_list cpp_autograd_grad(torch::variable_list outputs,
   schedule_backward_task(std::move(task));
   gTasks.run();
   result_fut.get();
+  lantern_host_handler();
   return torch::variable_list(out);
 }
 

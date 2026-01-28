@@ -139,10 +139,13 @@ void *_lantern_Function_lambda(void *(*fun)(void *, void *, void *),
                  torch::autograd::LanternAutogradContext *ctx,
                  torch::autograd::variable_list inputs) {
     auto out = (*fun)(custom, (void *)ctx, make_raw::variable_list(inputs));
-    torch::autograd::variable_list res(
+    if (out) {
+      torch::autograd::variable_list res(
         from_raw::variable_list((*get_ptr)(out)));  // copy the output
-    (*delete_out)(out);
-    return res;
+      (*delete_out)(out);
+      return res;
+    }
+    return torch::autograd::variable_list();
   };
   return (void *)new LanternLambdaFunction(out, custom);
   LANTERN_FUNCTION_END

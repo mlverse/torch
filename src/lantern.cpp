@@ -1,18 +1,34 @@
 #include <torch.h>
+#include <thread>
 #include "translate_messages.h"
 
 using namespace Rcpp;
 
+// Defined in autograd.cpp - stores the longjump token when catching LongjumpException
+extern SEXP g_longjump_token;
+
 void lantern_host_handler()
 {
+  if (std::this_thread::get_id() != main_thread_id()) {
+    return;
+  }
   if (lanternLastError() != NULL) {
     std::string last = lanternLastError();
     lanternLastErrorClear();
-    
+
+    // If we have a stored longjump token, resume the longjump
+    if (g_longjump_token != R_NilValue) {
+      SEXP token = g_longjump_token;
+      g_longjump_token = R_NilValue;
+      ::R_ReleaseObject(token);
+      ::R_ContinueUnwind(token);
+      // R_ContinueUnwind does not return
+    }
+
     std::string error_msg = translate_error_message(std::string(last.c_str()));
-    
+
     throw Rcpp::exception(error_msg.c_str());
-  } 
+  }
 }
 
 bool lantern_loaded = false;
