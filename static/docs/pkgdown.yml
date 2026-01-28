@@ -1,0 +1,26 @@
+pandoc: 3.1.11
+pkgdown: 2.1.3
+pkgdown_sha: ~
+articles:
+  articles/amp: amp.html
+  examples/basic-autograd: examples/basic-autograd.html
+  examples/basic-nn-module: examples/basic-nn-module.html
+  examples/dataset: examples/dataset.html
+  distributions: distributions.html
+  extending-autograd: extending-autograd.html
+  examples/index: examples/index.html
+  tensor/index: tensor/index.html
+  indexing: indexing.html
+  installation: installation.html
+  loading-data: loading-data.html
+  articles/memory-management: memory-management.html
+  articles/modifying-source-code: modifying-source-code.html
+  python-to-r: python-to-r.html
+  serialization: serialization.html
+  tensor-creation: tensor-creation.html
+  torchscript: torchscript.html
+  using-autograd: using-autograd.html
+last_built: 2025-11-02T19:08Z
+urls:
+  reference: https://torch.mlverse.org/docs/reference
+  article: https://torch.mlverse.org/docs/articles
