@@ -32,8 +32,8 @@ torch_floor(a)
 }
 #> torch_tensor
 #> -2
-#> -1
 #> -2
-#>  0
+#> -2
+#> -1
 #> [ CPUFloatType{4} ]
 ```

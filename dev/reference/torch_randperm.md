@@ -55,9 +55,9 @@ if (torch_is_installed()) {
 torch_randperm(4)
 }
 #> torch_tensor
-#>  3
 #>  0
 #>  1
+#>  3
 #>  2
 #> [ CPULongType{4} ]
 ```
