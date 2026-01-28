@@ -7,7 +7,7 @@ template:
     primary: "#7e1f77"
   params:
     ganalytics: G-9ZJSKW3L0N
-    
+
 development:
   mode: auto
 
@@ -62,11 +62,11 @@ navbar:
       - text: basic-nn-module
         href: articles/examples/basic-nn-module.html
       - text: dataset
-        href: articles/examples/dataset.html    
-   
-reference:  
+        href: articles/examples/dataset.html
+
+reference:
   - title: Tensor creation utilities
-    contents: 
+    contents:
       - torch_empty
       - torch_arange
       - torch_eye
@@ -136,7 +136,7 @@ reference:
     contents:
       - starts_with("lr_")
   - title: Datasets
-    contents: 
+    contents:
       - starts_with("dataset")
       - iterable_dataset
       - starts_with("dataloader")
@@ -179,7 +179,7 @@ reference:
     contents:
       - starts_with("cuda_")
   - title: JIT
-    contents: 
+    contents:
       - starts_with("jit")
   - title: Backends
     contents:
