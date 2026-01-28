@@ -1689,6 +1689,10 @@ XPtrTorchvariable_list from_sexp_variable_list(SEXP x) {
 }
 
 SEXP operator_sexp_variable_list(const XPtrTorchvariable_list* self) {
+  if (!self || !self->get()) {
+    return Rcpp::List(0);
+  }
+
   int64_t sze = lantern_variable_list_size(self->get());
   Rcpp::List out(sze);
   for (int64_t i = 0; i < sze; i++) {
