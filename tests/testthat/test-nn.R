@@ -176,6 +176,14 @@ test_that("to", {
   expect_equal(net$linear$bias$device$type, "cpu")
 })
 
+test_that("module$to works with bfloat16", {
+  net <- nn_linear(10, 10)
+  net$to(dtype = torch_bfloat16())
+
+  expect_true(net$weight$dtype == torch_bfloat16())
+  expect_true(net$bias$dtype == torch_bfloat16())
+})
+
 test_that("state_dict for modules", {
   Net <- nn_module(
     initialize = function() {
