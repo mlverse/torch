@@ -1,0 +1,120 @@
+# Serialization
+
+``` r
+library(torch)
+```
+
+Torch tensors in R are pointers to Tensors allocated by LibTorch. This
+has one major consequence for serialization. One cannot simply use
+`saveRDS` for serializing tensors, as you would save the pointer but not
+the data itself. When reloading a tensor saved with `saveRDS` the
+pointer might have been deleted in LibTorch and you would get wrong
+results.
+
+To solve this problem, `torch` implements specialized functions for
+serializing tensors to the disk:
+
+- [`torch_save()`](https://torch.mlverse.org/docs/dev/reference/torch_save.md):
+  to save tensors and models to the disk.
+- [`torch_load()`](https://torch.mlverse.org/docs/dev/reference/torch_load.md):
+  to load the models or tensors back to the session.
+
+Please note that this format is still experimental and you shouldn’t use
+it for long term storage.
+
+## Saving tensors
+
+You can save any object of type `torch_tensor` to the disk using:
+
+``` r
+x <- torch_randn(10, 10)
+torch_save(x, "tensor.pt")
+x_ <- torch_load("tensor.pt")
+
+torch_allclose(x, x_)
+#> [1] TRUE
+```
+
+## Saving modules
+
+The `torch_save` and `torch_load` functions also work for `nn_modules`
+objects.
+
+When saving an `nn_module`, all the object is serialized including the
+model structure and it’s state.
+
+``` r
+module <- nn_module(
+  "my_module",
+  initialize = function() {
+    self$fc1 <- nn_linear(10, 10)
+    self$fc2 <- nn_linear(10, 1)
+  },
+  forward = function(x) {
+    x %>% 
+      self$fc1() %>% 
+      self$fc2()
+  }
+)
+
+model <- module()
+torch_save(model, "model.pt")
+model_ <- torch_load("model.pt")
+
+# input tensor
+x <- torch_randn(50, 10)
+torch_allclose(model(x), model_(x))
+#> [1] TRUE
+```
+
+## Loading models saved in python
+
+Currently the only way to load models from python is to rewrite the
+model architecture in R. All the parameter names must be identical.
+
+You can then save the PyTorch model state_dict using:
+
+    torch.save(model, fpath, _use_new_zipfile_serialization=True)
+
+You can then reload the state dict in R and reload it into the model
+with:
+
+``` r
+state_dict <- load_state_dict(fpath)
+model <- Model()
+model$load_state_dict(state_dict)
+```
+
+You can find working examples in `torchvision`. For example
+[this](https://github.com/mlverse/torchvision/blob/main/R/models-alexnet.R#L2-L63)
+is what we do for the AlexNet model.
+
+## Saving optimizer state
+
+You can save the state of optimizers so you can continue training from
+the exact same position.
+
+In order to this we use the `state_dict()` and
+[`load_state_dict()`](https://torch.mlverse.org/docs/dev/reference/load_state_dict.md)
+methods from the optimizer combined with `torch_save`:
+
+``` r
+model <- nn_linear(1, 1)
+opt <- optim_adam(model$parameters)
+
+train_x <- torch_randn(100, 1)
+train_y <- torch_randn(100, 1)
+
+loss <- nnf_mse_loss(model(train_x), train_y)
+loss$backward()
+opt$step()
+#> NULL
+
+# Now let's save the optimizer state
+tmp <- tempfile()
+torch_save(opt$state_dict(), tmp)
+
+# And now let's create a new optimizer and load back
+opt2 <- optim_adam(model$parameters)
+opt2$load_state_dict(torch_load(tmp))
+```
