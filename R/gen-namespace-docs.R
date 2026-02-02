@@ -6368,6 +6368,28 @@ NULL
 NULL
 
 
+#' Ldexp
+#'
+#' @section ldexp(input, other, out=NULL) -> Tensor :
+#'
+#' Multiplies `input` by \eqn{2^{other}}.
+#'
+#' \deqn{
+#'     \text{out}_i = \text{input}_i * 2^{\text{other}_i}
+#' }
+#'
+#' Typically this function is used to construct floating point numbers by multiplying
+#' mantissas in `input` with integral powers of two created from the exponents in `other`.
+#'
+#' @param self (Tensor) the tensor of mantissas
+#' @param other (Tensor) the tensor of exponents, must be an integer dtype
+#'
+#' @name torch_ldexp
+#'
+#' @export
+NULL
+
+
 #' Kaiser_window
 #'
 #' @section kaiser_window(window_length, periodic=TRUE, beta=12.0, *, dtype=None, layout=torch.strided, device=None, requires_grad=FALSE) -> Tensor :
