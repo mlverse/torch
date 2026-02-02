@@ -82,5 +82,5 @@ X <- linalg_tensorsolve(A, B, dims = c(1, 3))
 A <- A$permute(c(2, 4, 5, 1, 3))
 torch_allclose(torch_tensordot(A, X, dims = X$ndim), B, atol = 1e-6)
 }
-#> [1] FALSE
+#> [1] TRUE
 ```
