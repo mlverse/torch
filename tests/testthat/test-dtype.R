@@ -70,10 +70,34 @@ test_that("can set select devices using strings", {
 })
 
 test_that("error when comparing dtypes", {
-  
+
   expect_error(
     NULL == torch_float64(),
     "not a dtype"
   )
-  
+
+})
+
+test_that("is_floating_point works for all floating point types", {
+  # All standard floating point types should return TRUE
+
+  expect_true(torch_float()$is_floating_point)
+  expect_true(torch_float32()$is_floating_point)
+  expect_true(torch_float64()$is_floating_point)
+  expect_true(torch_double()$is_floating_point)
+  expect_true(torch_float16()$is_floating_point)
+  expect_true(torch_half()$is_floating_point)
+
+  expect_true(torch_bfloat16()$is_floating_point)
+
+  # Non-floating point types should return FALSE
+  expect_false(torch_int()$is_floating_point)
+  expect_false(torch_int32()$is_floating_point)
+  expect_false(torch_int64()$is_floating_point)
+  expect_false(torch_long()$is_floating_point)
+  expect_false(torch_int16()$is_floating_point)
+  expect_false(torch_short()$is_floating_point)
+  expect_false(torch_int8()$is_floating_point)
+  expect_false(torch_uint8()$is_floating_point)
+  expect_false(torch_bool()$is_floating_point)
 })
