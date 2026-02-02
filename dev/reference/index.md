@@ -625,6 +625,9 @@
 - [`torch_lcm()`](https://torch.mlverse.org/docs/dev/reference/torch_lcm.md)
   : Lcm
 
+- [`torch_ldexp()`](https://torch.mlverse.org/docs/dev/reference/torch_ldexp.md)
+  : Ldexp
+
 - [`torch_le()`](https://torch.mlverse.org/docs/dev/reference/torch_le.md)
   : Le
 
