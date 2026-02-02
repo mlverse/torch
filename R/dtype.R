@@ -14,7 +14,7 @@ torch_dtype <- R7Class(
   ),
   active = list(
     is_floating_point = function() {
-      if (cpp_dtype_to_string(self$ptr) %in% c("Float", "Double", "Half")) {
+      if (cpp_dtype_to_string(self$ptr) %in% c("Float", "Double", "Half", "BFloat16")) {
         TRUE
       } else {
         FALSE
