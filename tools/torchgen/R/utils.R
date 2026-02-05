@@ -7,7 +7,7 @@
 #' @export
 declarations <- function() {
 
-  version <- getOption("torchgen.version", default = "2.7.1")
+  version <- getOption("torchgen.version", default = "2.8.0")
   path <- getOption("torchgen.path")
 
   if (is.null(path)) {
