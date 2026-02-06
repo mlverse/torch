@@ -31,7 +31,7 @@ declarations <- function() {
     eval.expr = FALSE,
     handlers = list(
       'bool#yes' = function(x) if (x == "y") x else TRUE,
-      'bool#no' = function(x) if (x == "n") x else FALSE,
+      'bool#no' = function(x) if (x %in% c("n", "N")) x else FALSE,
       int = identity
     )
   )
