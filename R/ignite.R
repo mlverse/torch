@@ -390,7 +390,11 @@ extract_ignite_state_dict <- function(self, states, nms) {
     # But we don't want to return them as part of the state dict.
     # Therefore, we unlist all the parameters and store the indices in the state dict.
     param_groups <- self$param_groups
-    addresses <- sapply(unlist(lapply(param_groups, function(x) x$params)), xptr_address)
+    # Keep tensor R objects alive so their pyobj_slot cache (used by
+    # xptr_address) is not invalidated by R_RunPendingFinalizers() inside
+    # operator_sexp_tensor when we later call parameters_with_state.
+    all_params <- unlist(lapply(param_groups, function(x) x$params))
+    addresses <- sapply(all_params, xptr_address)
     param_groups = lapply(param_groups, function(group) {
       group_param <- sapply(group$params, xptr_address)
       group$params <- match(group_param, addresses)

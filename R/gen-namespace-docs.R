@@ -482,9 +482,10 @@ NULL
 #' @param self (Tensor) the tensor to be added
 #' @param batch1 (Tensor) the first batch of matrices to be multiplied
 #' @param batch2 (Tensor) the second batch of matrices to be multiplied
+#' @param out_dtype (torch_dtype, optional) the output dtype
 #' @param beta (Number, optional) multiplier for `input` (\eqn{\beta})
 #' @param alpha (Number, optional) multiplier for \eqn{\mbox{batch1} \mathbin{@} \mbox{batch2}} (\eqn{\alpha})
-#' 
+#'
 #'
 #' @name torch_baddbmm
 #'
@@ -746,7 +747,8 @@ NULL
 #'
 #' @param self (Tensor) the first batch of matrices to be multiplied
 #' @param mat2 (Tensor) the second batch of matrices to be multiplied
-#' 
+#' @param out_dtype (torch_dtype, optional) the output dtype
+#'
 #'
 #' @name torch_bmm
 #'
@@ -2565,7 +2567,8 @@ NULL
 #'
 #' @param self (Tensor) the first matrix to be multiplied
 #' @param mat2 (Tensor) the second matrix to be multiplied
-#' 
+#' @param out_dtype (torch_dtype, optional) the output dtype
+#'
 #'
 #' @name torch_mm
 #'
@@ -4277,9 +4280,10 @@ NULL
 #' @param self (Tensor) matrix to be added
 #' @param mat1 (Tensor) the first matrix to be multiplied
 #' @param mat2 (Tensor) the second matrix to be multiplied
+#' @param out_dtype (torch_dtype, optional) the output dtype
 #' @param beta (Number, optional) multiplier for `input` (\eqn{\beta})
 #' @param alpha (Number, optional) multiplier for \eqn{mat1 @ mat2} (\eqn{\alpha})
-#' 
+#'
 #'
 #' @name torch_addmm
 #'
@@ -7557,7 +7561,7 @@ NULL
 #'   should take part in attention (and `FALSE` masks out the position). A float mask
 #'   of the same type as query, key, value that is added to the attention score (use
 #'   `-Inf` to mask out positions). Default: `list()`.
-#' @param dropout_p (float) Dropout probability in the range [0.0, 1.0]; if greater
+#' @param dropout_p (float) Dropout probability in the range \[0.0, 1.0\]; if greater
 #'   than 0.0, dropout is applied during training. Default: 0.0.
 #' @param is_causal (bool) If `TRUE`, assumes causal attention masking. `attn_mask` is
 #'   ignored when `is_causal=TRUE`. Default: `FALSE`.
