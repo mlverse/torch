@@ -5,12 +5,14 @@
 \alias{torch_mm}
 \title{Mm}
 \usage{
-torch_mm(self, mat2)
+torch_mm(self, mat2, out_dtype)
 }
 \arguments{
 \item{self}{(Tensor) the first matrix to be multiplied}
 
 \item{mat2}{(Tensor) the second matrix to be multiplied}
+
+\item{out_dtype}{(torch_dtype, optional) the output dtype}
 }
 \description{
 Mm

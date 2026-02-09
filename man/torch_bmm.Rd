@@ -5,12 +5,14 @@
 \alias{torch_bmm}
 \title{Bmm}
 \usage{
-torch_bmm(self, mat2)
+torch_bmm(self, mat2, out_dtype)
 }
 \arguments{
 \item{self}{(Tensor) the first batch of matrices to be multiplied}
 
 \item{mat2}{(Tensor) the second batch of matrices to be multiplied}
+
+\item{out_dtype}{(torch_dtype, optional) the output dtype}
 }
 \description{
 Bmm

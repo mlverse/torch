@@ -1,5 +1,5 @@
 branch <- "main"
-torch_version <- "2.7.1"
+torch_version <- "2.8.0"
 
 #' Install Torch
 #'
@@ -279,7 +279,7 @@ libtorch_url <- function() {
     url <- glue::glue("https://download.pytorch.org/libtorch/{kind}/libtorch-win-shared-with-deps-{torch_version}%2B{kind}.zip")
   }
   if (is_linux()) {
-    url <- glue::glue("https://download.pytorch.org/libtorch/{kind}/libtorch-cxx11-abi-shared-with-deps-{torch_version}%2B{kind}.zip")
+    url <- glue::glue("https://download.pytorch.org/libtorch/{kind}/libtorch-shared-with-deps-{torch_version}%2B{kind}.zip")
   }
   
   installer_message(c(
