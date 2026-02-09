@@ -176,11 +176,11 @@
 }
 
 #' @rawNamespace if (getRversion() >= "4.3.0") S3method("%*%", torch_tensor)
-`%*%.torch_tensor` <- function(e1, e2) {
-  if (!is_torch_tensor(e2)) {
-    e2 <- torch_tensor(e2, device = e1$device)
+`%*%.torch_tensor` <- function(x, y) {
+  if (!is_torch_tensor(y)) {
+    y <- torch_tensor(y, device = x$device)
   }
-  torch_matmul(e1, e2)
+  torch_matmul(x, y)
 }
 
 #' @export

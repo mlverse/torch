@@ -5,7 +5,7 @@
 \alias{torch_addmm}
 \title{Addmm}
 \usage{
-torch_addmm(self, mat1, mat2, beta = 1L, alpha = 1L)
+torch_addmm(self, mat1, mat2, out_dtype, beta = 1L, alpha = 1L)
 }
 \arguments{
 \item{self}{(Tensor) matrix to be added}
@@ -13,6 +13,8 @@ torch_addmm(self, mat1, mat2, beta = 1L, alpha = 1L)
 \item{mat1}{(Tensor) the first matrix to be multiplied}
 
 \item{mat2}{(Tensor) the second matrix to be multiplied}
+
+\item{out_dtype}{(torch_dtype, optional) the output dtype}
 
 \item{beta}{(Number, optional) multiplier for \code{input} (\eqn{\beta})}
 
