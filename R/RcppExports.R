@@ -333,6 +333,14 @@ cpp_torch_bfloat16 <- function() {
     .Call(`_torch_cpp_torch_bfloat16`)
 }
 
+cpp_torch_float8_e4m3fn <- function() {
+    .Call(`_torch_cpp_torch_float8_e4m3fn`)
+}
+
+cpp_torch_float8_e5m2 <- function() {
+    .Call(`_torch_cpp_torch_float8_e5m2`)
+}
+
 cpp_torch_uint8 <- function() {
     .Call(`_torch_cpp_torch_uint8`)
 }

@@ -258,6 +258,10 @@ LANTERN_OPTIONAL_DECLS(string_view)
   HOST_API void * lantern_Dtype_float16() {LANTERN_CHECK_LOADED void * ret = _lantern_Dtype_float16(); LANTERN_HOST_HANDLER return ret;}
   LANTERN_API void *(LANTERN_PTR _lantern_Dtype_bfloat16)();
   HOST_API void * lantern_Dtype_bfloat16() {LANTERN_CHECK_LOADED void * ret = _lantern_Dtype_bfloat16(); LANTERN_HOST_HANDLER return ret;}
+  LANTERN_API void *(LANTERN_PTR _lantern_Dtype_float8_e4m3fn)();
+  HOST_API void * lantern_Dtype_float8_e4m3fn() {LANTERN_CHECK_LOADED void * ret = _lantern_Dtype_float8_e4m3fn(); LANTERN_HOST_HANDLER return ret;}
+  LANTERN_API void *(LANTERN_PTR _lantern_Dtype_float8_e5m2)();
+  HOST_API void * lantern_Dtype_float8_e5m2() {LANTERN_CHECK_LOADED void * ret = _lantern_Dtype_float8_e5m2(); LANTERN_HOST_HANDLER return ret;}
   LANTERN_API void *(LANTERN_PTR _lantern_Dtype_uint8)();
   HOST_API void * lantern_Dtype_uint8() {LANTERN_CHECK_LOADED void * ret = _lantern_Dtype_uint8(); LANTERN_HOST_HANDLER return ret;}
   LANTERN_API void *(LANTERN_PTR _lantern_Dtype_int8)();
@@ -10601,6 +10605,8 @@ bool lanternInit(const std::string &libPath, std::string *pError)
   LOAD_SYMBOL(_lantern_Dtype_float64);
   LOAD_SYMBOL(_lantern_Dtype_float16);
   LOAD_SYMBOL(_lantern_Dtype_bfloat16);
+  LOAD_SYMBOL(_lantern_Dtype_float8_e4m3fn);
+  LOAD_SYMBOL(_lantern_Dtype_float8_e5m2);
   LOAD_SYMBOL(_lantern_Dtype_uint8);
   LOAD_SYMBOL(_lantern_Dtype_int8);
   LOAD_SYMBOL(_lantern_Dtype_int16);
