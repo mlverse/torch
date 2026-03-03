@@ -757,6 +757,38 @@ can_write_into <- function(path) {
 #' torch_sitrep()
 #' }
 torch_sitrep <- function(verbose = TRUE) {
+  # Status indicator with color
+  status_msg <- function(ok, msg_ok, msg_fail = "Not available") {
+    if (isTRUE(ok)) {
+      if (verbose) cli::cli_alert_success(msg_ok)
+      return(TRUE)
+    } else {
+      if (verbose) cli::cli_alert_danger(msg_fail)
+      return(FALSE)
+    }
+  }
+  # Check if a function exists (for internal functions)
+  fn_exists <- function(name) {
+    exists(name, envir = asNamespace("torch"), mode = "function", inherits = FALSE)
+  }
+  
+  # Call internal function safely
+  call_internal <- function(name, ...) {
+    tryCatch({
+      fn <- get(name, envir = asNamespace("torch"), mode = "function")
+      fn(...)
+    }, error = function(e) {
+      if (verbose) cli::cli_alert_warning("Could not call {name}: {e$message}")
+      NULL
+    })
+  }
+  
+  # Get internal variable safely
+  get_internal <- function(name, default = NULL) {
+    tryCatch({
+      get(name, envir = asNamespace("torch"))
+    }, error = function(e) default)
+  }
   
   # ---- Initialize Results ----
   results <- list()
@@ -769,7 +801,7 @@ torch_sitrep <- function(verbose = TRUE) {
   
   # OS detection (using internal functions)
   os_type <- Sys.info()["sysname"]
-  os_release <- if (isTRUE(os_type == "Linux")) {
+  os_release <- if (os_type == "Linux") {
     tryCatch({
       if (file.exists("/etc/os-release")) {
         lines <- readLines("/etc/os-release", warn = FALSE)
@@ -779,10 +811,14 @@ torch_sitrep <- function(verbose = TRUE) {
         } else "Linux"
       } else "Linux"
     }, error = function(e) "Linux")
-  } else if (isTRUE(os_type == "Darwin")) {
-    tryCatch(system("sw_vers -productVersion", intern = TRUE), error = function(e) "macOS")
-  } else if (isTRUE(os_type == "Windows")) {
-    tryCatch(paste(Sys.info()["release"], Sys.info()["version"]), error = function(e) "Windows")
+  } else if (os_type == "Darwin") {
+    tryCatch({
+      system("sw_vers -productVersion", intern = TRUE)
+    }, error = function(e) "macOS")
+  } else if (os_type == "Windows") {
+    tryCatch({
+      paste(Sys.info()["release"], Sys.info()["version"])
+    }, error = function(e) "Windows")
   } else {
     as.character(os_type)
   }
@@ -810,16 +846,23 @@ torch_sitrep <- function(verbose = TRUE) {
   if (verbose) cli::cli_h1("Package Information")
   
   # torch package version
-  torch_pkg_version <- tryCatch(
-    as.character(utils::packageVersion("torch")),
-    error = function(e) NA_character_
-  )
+  torch_pkg_version <- tryCatch({
+    as.character(utils::packageVersion("torch"))
+  }, error = function(e) NA_character_)
   
-  # LibTorch version (from internal torch_version)
-  libtorch_version <- tryCatch(
-    torch_version,
-    error = function(e) "unknown"
-  )
+  # LibTorch version (from internal)
+  libtorch_version <- tryCatch({
+    if (fn_exists("torch_version")) {
+      call_internal("torch_version")
+    } else {
+      # Fallback: read from installed files
+      install_path <- torch_install_path()
+      version_file <- file.path(install_path, "build-version")
+      if (file.exists(version_file)) {
+        readLines(version_file, warn = FALSE)[1]
+      } else "unknown"
+    }
+  }, error = function(e) "unknown")
   
   if (verbose) {
     cli::cli_bullets(c(
@@ -832,6 +875,7 @@ torch_sitrep <- function(verbose = TRUE) {
     torch_version = torch_pkg_version,
     libtorch_version = libtorch_version
   )
+  
   
   # ============================================
   # Section 3: Installation Status
@@ -895,27 +939,29 @@ torch_sitrep <- function(verbose = TRUE) {
     
     # LibTorch libraries
     torch_libs <- tryCatch({
-      lib_is_installed("torch", install_path)
+      length(list.files(
+        file.path(install_path, c("lib", "lib64", "bin")),
+        pattern = "^libtorch\\.|^torch\\.",
+        recursive = TRUE
+      )) > 0
     }, error = function(e) FALSE)
     
-    if (verbose) {
-      if (torch_libs) {
-        cli::cli_alert_success("LibTorch libraries found")
-      } else {
-        cli::cli_alert_danger("LibTorch libraries NOT found")
-      }
-    }
+    status_msg(
+      torch_libs,
+      "LibTorch libraries found",
+      "LibTorch libraries NOT found"
+    )
     
     # List actual library files in verbose mode
-    if (verbose) {
+    if (verbose && !is.na(install_path) && !is.null(install_path)) {
       lib_dirs <- file.path(install_path, c("lib", "lib64", "bin"))
       lib_dirs <- lib_dirs[dir.exists(lib_dirs)]
       if (length(lib_dirs) > 0) {
-        cli::cli_text("\n{.strong Library directories:}")
+        cli::cli_text("\n{.strong Library files:}")
         for (ld in lib_dirs) {
           files <- list.files(ld, pattern = "\\.(so|dylib|dll)$", full.names = FALSE)
           if (length(files) > 0) {
-            cli::cli_bullets(c("*" = "{.path {ld}}: {length(files)} files"))
+            cli::cli_ul(c(paste0("  ", basename(files))))
           }
         }
       }
@@ -932,22 +978,20 @@ torch_sitrep <- function(verbose = TRUE) {
   # ============================================
   if (verbose) cli::cli_h1("Lantern Loading Status")
   
-  # Check lantern_started global state (direct access)
-  lantern_started <- tryCatch(
-    isTRUE(.globals$lantern_started),
-    error = function(e) FALSE
+  # Check lantern_started global state
+  lantern_started <- tryCatch({
+    globals_env <- get(".globals", envir = asNamespace("torch"))
+    isTRUE(globals_env$lantern_started)
+  }, error = function(e) FALSE)
+  
+  status_msg(
+    lantern_started,
+    "Lantern is loaded and initialized",
+    "Lantern is NOT loaded"
   )
   
-  if (verbose) {
-    if (lantern_started) {
-      cli::cli_alert_success("Lantern is loaded and initialized")
-    } else {
-      cli::cli_alert_danger("Lantern is NOT loaded")
-    }
-  }
-  
   if (!lantern_started && is_installed) {
-    issues <<- c(issues, "Lantern not loaded despite installation. Try `library(torch)` or check library dependencies")
+    issues <<- c(issues, "Lantern not loaded despite installation. Try `library(torch)` or check library dependencies with `ldd`")
   }
   
   results$lantern <- list(
@@ -959,11 +1003,23 @@ torch_sitrep <- function(verbose = TRUE) {
   # ============================================
   if (verbose) cli::cli_h1("CUDA Status")
   
-  # Detected CUDA version (internal function)
-  detected_cuda <- tryCatch(cuda_version(), error = function(e) NULL)
+  # Detected CUDA version (for installation)
+  detected_cuda <- tryCatch({
+    if (fn_exists("cuda_version")) {
+      call_internal("cuda_version")
+    } else {
+      NULL
+    }
+  }, error = function(e) NULL)
   
-  # Installation kind (internal function)
-  install_kind <- tryCatch(installation_kind(), error = function(e) "unknown")
+  # Installation kind
+  install_kind <- tryCatch({
+    if (fn_exists("installation_kind")) {
+      call_internal("installation_kind")
+    } else {
+      "unknown"
+    }
+  }, error = function(e) "unknown")
   
   if (verbose) {
     cli::cli_alert_info("Installation type: {.val {install_kind}}")
@@ -974,16 +1030,18 @@ torch_sitrep <- function(verbose = TRUE) {
   
   # CUDA availability (requires loaded lantern)
   cuda_available <- tryCatch({
-    if (lantern_started) isTRUE(cuda_is_available()) else FALSE
+    if (isTRUE(lantern_started)) {
+      isTRUE(torch::cuda_is_available())
+    } else {
+      FALSE
+    }
   }, error = function(e) FALSE)
   
-  if (verbose) {
-    if (cuda_available) {
-      cli::cli_alert_success("CUDA is available")
-    } else {
-      cli::cli_alert_danger("CUDA is NOT available (or Lantern not loaded)")
-    }
-  }
+  status_msg(
+    cuda_available,
+    "CUDA is available",
+    "CUDA is NOT available (or Lantern not loaded)"
+  )
   
   cuda_info <- list(
     install_kind = install_kind,
@@ -992,10 +1050,12 @@ torch_sitrep <- function(verbose = TRUE) {
   )
   
   # Detailed CUDA info if available
-  if (cuda_available) {
+  if (isTRUE(cuda_available)) {
     
     # Device count
-    device_count <- tryCatch(cuda_device_count(), error = function(e) NA_integer_)
+    device_count <- tryCatch({
+      torch::cuda_device_count()
+    }, error = function(e) NA_integer_)
     
     if (verbose) {
       cli::cli_alert_info("GPU device count: {.val {device_count}}")
@@ -1003,7 +1063,9 @@ torch_sitrep <- function(verbose = TRUE) {
     cuda_info$device_count <- device_count
     
     # Runtime version
-    runtime_version <- tryCatch(cuda_runtime_version(), error = function(e) NA)
+    runtime_version <- tryCatch({
+      torch::cuda_runtime_version()
+    }, error = function(e) NA)
     
     if (verbose && !is.na(runtime_version)) {
       cli::cli_alert_info("CUDA runtime version: {.val {runtime_version}}")
@@ -1012,7 +1074,9 @@ torch_sitrep <- function(verbose = TRUE) {
     
     # Current device
     if (!is.na(device_count) && device_count > 0) {
-      current_device <- tryCatch(cuda_current_device(), error = function(e) NA_integer_)
+      current_device <- tryCatch({
+        torch::cuda_current_device()
+      }, error = function(e) NA_integer_)
       
       if (verbose && !is.na(current_device)) {
         cli::cli_alert_info("Current device: {.val {current_device}}")
@@ -1020,10 +1084,9 @@ torch_sitrep <- function(verbose = TRUE) {
       cuda_info$current_device <- current_device
       
       # Device capability
-      capability <- tryCatch(
-        cuda_get_device_capability(current_device),
-        error = function(e) NULL
-      )
+      capability <- tryCatch({
+        torch::cuda_get_device_capability(current_device)
+      }, error = function(e) NULL)
       
       if (!is.null(capability)) {
         if (verbose) {
@@ -1033,7 +1096,9 @@ torch_sitrep <- function(verbose = TRUE) {
       }
       
       # Memory stats
-      memory_stats <- tryCatch(cuda_memory_stats(current_device), error = function(e) NULL)
+      memory_stats <- tryCatch({
+        torch::cuda_memory_stats(current_device)
+      }, error = function(e) NULL)
       
       if (!is.null(memory_stats)) {
         if (verbose) {
@@ -1056,20 +1121,20 @@ torch_sitrep <- function(verbose = TRUE) {
   
   # cuDNN
   cudnn_avail <- tryCatch({
-    if (lantern_started) isTRUE(backends_cudnn_is_available()) else FALSE
+    if (isTRUE(lantern_started)) isTRUE(torch::backends_cudnn_is_available()) else FALSE
   }, error = function(e) FALSE)
   
-  if (verbose) {
-    if (cudnn_avail) {
-      cli::cli_alert_success("cuDNN is available")
-    } else {
-      cli::cli_alert_danger("cuDNN is NOT available")
-    }
-  }
+  status_msg(
+    cudnn_avail,
+    "cuDNN is available",
+    "cuDNN is NOT available"
+  )
   backends$cudnn <- cudnn_avail
   
-  if (cudnn_avail) {
-    cudnn_ver <- tryCatch(backends_cudnn_version(), error = function(e) NA)
+  if (isTRUE(cudnn_avail)) {
+    cudnn_ver <- tryCatch({
+      torch::backends_cudnn_version()
+    }, error = function(e) NA)
     if (verbose && !is.na(cudnn_ver)) {
       cli::cli_alert_info("cuDNN version: {.val {cudnn_ver}}")
     }
@@ -1078,59 +1143,51 @@ torch_sitrep <- function(verbose = TRUE) {
   
   # MKL
   mkl_avail <- tryCatch({
-    if (lantern_started) isTRUE(backends_mkl_is_available()) else FALSE
+    if (isTRUE(lantern_started)) isTRUE(torch::backends_mkl_is_available()) else FALSE
   }, error = function(e) FALSE)
   
-  if (verbose) {
-    if (mkl_avail) {
-      cli::cli_alert_success("MKL is available")
-    } else {
-      cli::cli_alert_danger("MKL is NOT available")
-    }
-  }
+  status_msg(
+    mkl_avail,
+    "MKL is available",
+    "MKL is NOT available"
+  )
   backends$mkl <- mkl_avail
   
   # MKL-DNN
   mkldnn_avail <- tryCatch({
-    if (lantern_started) isTRUE(backends_mkldnn_is_available()) else FALSE
+    if (isTRUE(lantern_started)) isTRUE(torch::backends_mkldnn_is_available()) else FALSE
   }, error = function(e) FALSE)
   
-  if (verbose) {
-    if (mkldnn_avail) {
-      cli::cli_alert_success("MKL-DNN is available")
-    } else {
-      cli::cli_alert_danger("MKL-DNN is NOT available")
-    }
-  }
+  status_msg(
+    mkldnn_avail,
+    "MKL-DNN is available",
+    "MKL-DNN is NOT available"
+  )
   backends$mkldnn <- mkldnn_avail
   
   # OpenMP
   openmp_avail <- tryCatch({
-    if (lantern_started) isTRUE(backends_openmp_is_available()) else FALSE
+    if (isTRUE(lantern_started)) isTRUE(torch::backends_openmp_is_available()) else FALSE
   }, error = function(e) FALSE)
   
-  if (verbose) {
-    if (openmp_avail) {
-      cli::cli_alert_success("OpenMP is available")
-    } else {
-      cli::cli_alert_danger("OpenMP is NOT available")
-    }
-  }
+  status_msg(
+    openmp_avail,
+    "OpenMP is available",
+    "OpenMP is NOT available"
+  )
   backends$openmp <- openmp_avail
   
   # MPS (Apple Silicon)
   mps_avail <- tryCatch({
-    if (lantern_started) isTRUE(backends_mps_is_available()) else FALSE
+    if (isTRUE(lantern_started)) isTRUE(torch::backends_mps_is_available()) else FALSE
   }, error = function(e) FALSE)
   
-  if (isTRUE(os_type == "Darwin")) {
-    if (verbose) {
-      if (mps_avail) {
-        cli::cli_alert_success("MPS (Apple Silicon GPU) is available")
-      } else {
-        cli::cli_alert_danger("MPS is NOT available")
-      }
-    }
+  if (os_type == "Darwin") {
+    status_msg(
+      mps_avail,
+      "MPS (Apple Silicon GPU) is available",
+      "MPS is NOT available"
+    )
   }
   backends$mps <- mps_avail
   
@@ -1176,19 +1233,19 @@ torch_sitrep <- function(verbose = TRUE) {
   if (is_installed && !lantern_started) {
     if (isTRUE(os_type == "Linux")) {
       issues <<- c(issues, 
-                   "Lantern failed to load. Check shared library dependencies:",
-                   "  Run: ldd <install_path>/lib/liblantern.so",
-                   "  Look for 'not found' errors indicating missing system libraries."
+        "Lantern failed to load. Check shared library dependencies:",
+        "  Run: ldd <install_path>/lib/liblantern.so",
+        "  Look for 'not found' errors indicating missing system libraries."
       )
     } else if (isTRUE(os_type == "Darwin")) {
       issues <<- c(issues,
-                   "Lantern failed to load. Check library dependencies:",
-                   "  Run: otool -L <install_path>/lib/liblantern.dylib"
+        "Lantern failed to load. Check library dependencies:",
+        "  Run: otool -L <install_path>/lib/liblantern.dylib"
       )
     } else if (isTRUE(os_type == "Windows")) {
       issues <<- c(issues,
-                   "Lantern failed to load. Ensure Visual C++ Redistributable is installed.",
-                   "  Download from: https://aka.ms/vs/17/release/vc_redist.x64.exe"
+        "Lantern failed to load. Ensure Visual C++ Redistributable is installed.",
+        "  Download from: https://aka.ms/vs/17/release/vc_redist.x64.exe"
       )
     }
   }
@@ -1200,8 +1257,8 @@ torch_sitrep <- function(verbose = TRUE) {
         is.character(detected_cuda) && is.character(runtime_ver)) {
       if (detected_cuda != gsub("\\.", "", runtime_ver)) {
         issues <<- c(issues,
-                     paste0("CUDA version mismatch: detected ", detected_cuda, 
-                            " but runtime reports ", runtime_ver)
+          paste0("CUDA version mismatch: detected ", detected_cuda, 
+                 " but runtime reports ", runtime_ver)
         )
       }
     }
@@ -1214,9 +1271,9 @@ torch_sitrep <- function(verbose = TRUE) {
       install_kind != "cpu" && 
       !isTRUE(cuda_available)) {
     issues <<- c(issues,
-                 "CUDA build installed but CUDA not available.",
-                 "  Check CUDA installation and driver.",
-                 "  Verify CUDA_VISIBLE_DEVICES is not hiding all GPUs."
+      "CUDA build installed but CUDA not available.",
+      "  Check CUDA installation and driver.",
+      "  Verify CUDA_VISIBLE_DEVICES is not hiding all GPUs."
     )
   }
   
@@ -1237,42 +1294,4 @@ torch_sitrep <- function(verbose = TRUE) {
   # Return Results
   # ============================================
   invisible(results)
-}
-
-
-#' Quick Status Check
-#'
-#' @description
-#' A minimal status check for quick verification. Use this for scripts
-#' where you just need to verify torch is working.
-#'
-#' @return TRUE if torch is fully functional, FALSE otherwise.
-#'
-#' @export
-torch_quick_check <- function() {
-  installed <- tryCatch(isTRUE(torch_is_installed()), error = function(e) FALSE)
-  if (!installed) {
-    cli::cli_alert_danger("Torch not installed")
-    return(FALSE)
-  }
-  
-  loaded <- tryCatch(isTRUE(.globals$lantern_started), error = function(e) FALSE)
-  if (!loaded) {
-    cli::cli_alert_danger("Lantern not loaded")
-    return(FALSE)
-  }
-  
-  # Try a simple operation
-  worked <- tryCatch({
-    torch_tensor(1)
-    TRUE
-  }, error = function(e) FALSE)
-  
-  if (worked) {
-    cli::cli_alert_success("Torch is fully functional")
-    return(TRUE)
-  } else {
-    cli::cli_alert_danger("Torch operations failed")
-    return(FALSE)
-  }
 }
