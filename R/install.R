@@ -1272,9 +1272,10 @@ torch_sitrep <- function(verbose = TRUE) {
 
       if (!is.null(memory_stats)) {
         if (verbose) {
-          # Safely extract peak memory with proper error handling
+          # Extract peak allocated memory using correct structure
           alloc <- tryCatch({
-            peak_bytes <- memory_stats$allocated_bytes$peak
+            # cuda_memory_stats returns allocated_bytes$all$peak
+            peak_bytes <- memory_stats$allocated_bytes$all$peak
             if (!is.null(peak_bytes) && is.numeric(peak_bytes) && length(peak_bytes) > 0) {
               round(peak_bytes / 1024^3, 2)
             } else {
