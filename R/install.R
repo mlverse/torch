@@ -918,13 +918,26 @@ torch_sitrep <- function(verbose = TRUE) {
   }
   
   # Check individual libraries
+  lantern_exists <- FALSE  # Initialize to ensure it's always defined
+
   if (!is.na(install_path) && !is.null(install_path)) {
-    
-    # Lantern library
+
+    # Lantern library - check using consistent method with torch libs
     lantern_exists <- tryCatch({
-      lib_is_installed("lantern", install_path)
+      # Check in standard locations
+      lib_dirs <- file.path(install_path, c("lib", "lib64", "bin"))
+      lib_dirs <- lib_dirs[dir.exists(lib_dirs)]
+
+      found <- FALSE
+      for (ld in lib_dirs) {
+        if (file.exists(file.path(ld, lib_name("lantern")))) {
+          found <- TRUE
+          break
+        }
+      }
+      found
     }, error = function(e) FALSE)
-    
+
     if (verbose) {
       if (lantern_exists) {
         cli::cli_alert_success("Lantern library found")
@@ -932,26 +945,33 @@ torch_sitrep <- function(verbose = TRUE) {
         cli::cli_alert_danger("Lantern library NOT found")
       }
     }
-    
+
     if (!lantern_exists && is_installed) {
       issues <<- c(issues, "Lantern library missing despite torch_is_installed() = TRUE")
     }
-    
+
     # LibTorch libraries
     torch_libs <- tryCatch({
-      length(list.files(
-        file.path(install_path, c("lib", "lib64", "bin")),
-        pattern = "^libtorch\\.|^torch\\.",
-        recursive = TRUE
-      )) > 0
+      lib_dirs <- file.path(install_path, c("lib", "lib64", "bin"))
+      lib_dirs <- lib_dirs[dir.exists(lib_dirs)]
+
+      found <- FALSE
+      for (ld in lib_dirs) {
+        libs <- list.files(ld, pattern = "^libtorch\\.|^torch\\.", recursive = TRUE)
+        if (length(libs) > 0) {
+          found <- TRUE
+          break
+        }
+      }
+      found
     }, error = function(e) FALSE)
-    
+
     status_msg(
       torch_libs,
       "LibTorch libraries found",
       "LibTorch libraries NOT found"
     )
-    
+
     # List actual library files in verbose mode
     if (verbose && !is.na(install_path) && !is.null(install_path)) {
       lib_dirs <- file.path(install_path, c("lib", "lib64", "bin"))
@@ -961,7 +981,7 @@ torch_sitrep <- function(verbose = TRUE) {
         for (ld in lib_dirs) {
           files <- list.files(ld, pattern = "\\.(so|dylib|dll)$", full.names = FALSE)
           if (length(files) > 0) {
-            cli::cli_ul(c(paste0("  ", basename(files))))
+            cli::cli_ul(files)
           }
         }
       }
@@ -977,27 +997,177 @@ torch_sitrep <- function(verbose = TRUE) {
   # Section 4: Lantern Loading Status
   # ============================================
   if (verbose) cli::cli_h1("Lantern Loading Status")
-  
+
   # Check lantern_started global state
   lantern_started <- tryCatch({
     globals_env <- get(".globals", envir = asNamespace("torch"))
     isTRUE(globals_env$lantern_started)
   }, error = function(e) FALSE)
-  
+
   status_msg(
     lantern_started,
     "Lantern is loaded and initialized",
     "Lantern is NOT loaded"
   )
-  
+
+  # Handle contradictory states
+  if (!lantern_exists && lantern_started) {
+    if (verbose) {
+      cli::cli_alert_info(
+        "Note: Lantern library file not found in standard locations, but Lantern is loaded and functional"
+      )
+    }
+  }
+
   if (!lantern_started && is_installed) {
     issues <<- c(issues, "Lantern not loaded despite installation. Try `library(torch)` or check library dependencies with `ldd`")
   }
-  
+
   results$lantern <- list(
-    is_loaded = lantern_started
+    is_loaded = lantern_started,
+    file_found = lantern_exists
   )
-  
+
+  # ============================================
+  # Section 4b: Library Dependencies Check (Linux only)
+  # ============================================
+  if (os_type == "Linux" && lantern_exists && !is.na(install_path) && !is.null(install_path)) {
+    if (verbose) cli::cli_h1("Library Dependencies")
+
+    # Find liblantern.so path
+    lantern_path <- NULL
+    lib_dirs <- file.path(install_path, c("lib", "lib64", "bin"))
+    lib_dirs <- lib_dirs[dir.exists(lib_dirs)]
+
+    for (ld in lib_dirs) {
+      candidate <- file.path(ld, lib_name("lantern"))
+      if (file.exists(candidate)) {
+        lantern_path <- candidate
+        break
+      }
+    }
+
+    if (!is.null(lantern_path)) {
+      # Run ldd to check dependencies
+      ldd_output <- tryCatch({
+        system2("ldd", lantern_path, stdout = TRUE, stderr = TRUE)
+      }, error = function(e) NULL)
+
+      if (!is.null(ldd_output)) {
+        # Parse ldd output for missing libraries
+        missing_libs <- grep("=> not found", ldd_output, value = TRUE)
+
+        if (length(missing_libs) > 0) {
+          # Extract library names
+          missing_lib_names <- gsub("^\\s*([^=]+)\\s*=>.*", "\\1", missing_libs)
+          missing_lib_names <- trimws(missing_lib_names)
+
+          if (verbose) {
+            cli::cli_alert_danger("Missing library dependencies detected:")
+            for (lib in missing_lib_names) {
+              cli::cli_bullets(c("x" = "{.file {lib}}"))
+            }
+          }
+
+          # Add to issues
+          issues <<- c(issues,
+            paste0("Missing library dependencies for liblantern.so: ",
+                   paste(missing_lib_names, collapse = ", ")),
+            "These libraries must be available in LD_LIBRARY_PATH or system paths"
+          )
+
+          # Special handling for common CUDA library issues
+          if (any(grepl("libcudart", missing_lib_names))) {
+            issues <<- c(issues,
+              "Missing libcudart.so.12: Ensure CUDA runtime libraries are in LD_LIBRARY_PATH",
+              "You may need to add the CUDA lib directory (e.g., /usr/local/cuda/lib64) to LD_LIBRARY_PATH"
+            )
+          }
+
+          results$library_dependencies <- list(
+            checked = TRUE,
+            missing = missing_lib_names
+          )
+        } else {
+          if (verbose) {
+            cli::cli_alert_success("All library dependencies are satisfied")
+          }
+          results$library_dependencies <- list(
+            checked = TRUE,
+            missing = character(0)
+          )
+        }
+
+        # Optionally show all dependencies in verbose mode
+        if (verbose && length(ldd_output) > 0) {
+          cli::cli_text("\n{.strong All dependencies for liblantern.so:}")
+          for (line in ldd_output) {
+            # Highlight "not found" lines
+            if (grepl("not found", line)) {
+              cli::cli_text("  {.emph {line}}")
+            } else {
+              cli::cli_text("  {line}")
+            }
+          }
+        }
+      } else {
+        if (verbose) {
+          cli::cli_alert_warning("Could not run ldd to check library dependencies")
+        }
+        results$library_dependencies <- list(
+          checked = FALSE,
+          error = "ldd command failed"
+        )
+      }
+    } else {
+      if (verbose) {
+        cli::cli_alert_info("Skipping ldd check: liblantern.so path not found")
+      }
+      results$library_dependencies <- list(
+        checked = FALSE,
+        reason = "liblantern.so not found"
+      )
+    }
+  } else if (os_type == "Darwin" && lantern_exists && !is.na(install_path) && !is.null(install_path)) {
+    # macOS: use otool -L instead
+    if (verbose) cli::cli_h1("Library Dependencies")
+
+    # Find liblantern.dylib path
+    lantern_path <- NULL
+    lib_dirs <- file.path(install_path, c("lib", "lib64", "bin"))
+    lib_dirs <- lib_dirs[dir.exists(lib_dirs)]
+
+    for (ld in lib_dirs) {
+      candidate <- file.path(ld, lib_name("lantern"))
+      if (file.exists(candidate)) {
+        lantern_path <- candidate
+        break
+      }
+    }
+
+    if (!is.null(lantern_path)) {
+      otool_output <- tryCatch({
+        system2("otool", c("-L", lantern_path), stdout = TRUE, stderr = TRUE)
+      }, error = function(e) NULL)
+
+      if (!is.null(otool_output)) {
+        # Check for any paths that don't exist
+        # This is a simplified check - could be enhanced
+        if (verbose) {
+          cli::cli_alert_success("Library dependency check available via otool")
+          cli::cli_text("\n{.strong Dependencies for liblantern.dylib:}")
+          for (line in otool_output) {
+            cli::cli_text("  {line}")
+          }
+        }
+        results$library_dependencies <- list(
+          checked = TRUE,
+          tool = "otool"
+        )
+      }
+    }
+  }
+
   # ============================================
   # Section 5: CUDA Status
   # ============================================
@@ -1099,10 +1269,18 @@ torch_sitrep <- function(verbose = TRUE) {
       memory_stats <- tryCatch({
         torch::cuda_memory_stats(current_device)
       }, error = function(e) NULL)
-      
+
       if (!is.null(memory_stats)) {
         if (verbose) {
-          alloc <- round(memory_stats$allocated_bytes$peak / 1024^3, 2)
+          # Safely extract peak memory with proper error handling
+          alloc <- tryCatch({
+            peak_bytes <- memory_stats$allocated_bytes$peak
+            if (!is.null(peak_bytes) && is.numeric(peak_bytes) && length(peak_bytes) > 0) {
+              round(peak_bytes / 1024^3, 2)
+            } else {
+              0
+            }
+          }, error = function(e) 0)
           cli::cli_alert_info("Peak GPU memory: {.val {alloc}} GB")
         }
         cuda_info$memory <- memory_stats
