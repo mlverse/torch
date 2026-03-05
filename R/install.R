@@ -1218,7 +1218,41 @@ torch_sitrep <- function(verbose = TRUE) {
       cli::cli_alert_info("Detected CUDA version: {.val {detected_cuda}}")
     }
   }
-  
+
+  # Check if detected CUDA version is supported
+  # Reuses check_supported_cuda_version_* functions from installation
+  if (!is.null(detected_cuda) && (is_linux() || is_windows())) {
+    cuda_supported <- tryCatch({
+      if (is_windows()) {
+        check_supported_cuda_version_windows(detected_cuda)
+        TRUE
+      } else if (is_linux()) {
+        check_supported_cuda_version_linux(detected_cuda)
+        TRUE
+      }
+    }, error = function(e) {
+      # Extract error message which contains supported versions
+      list(supported = FALSE, message = conditionMessage(e))
+    })
+
+    if (is.list(cuda_supported) && !cuda_supported$supported) {
+      if (verbose) {
+        cli::cli_alert_warning(
+          "Detected CUDA {.val {detected_cuda}} is not officially supported"
+        )
+        # Parse supported versions from error message
+        cli::cli_alert_info("{cuda_supported$message}")
+      }
+
+      issues <<- c(issues,
+        paste0("Detected CUDA version ", detected_cuda, " is not supported"),
+        "torch may not work correctly. Consider using a supported CUDA version or CPU build through {.cmd Sys.setenv(CUDA='cpu')}."
+      )
+    } else if (verbose) {
+      cli::cli_alert_success("Detected CUDA version is supported")
+    }
+  }
+
   # CUDA availability (requires loaded lantern)
   cuda_available <- tryCatch({
     if (isTRUE(lantern_started)) {
