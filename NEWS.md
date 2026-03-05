@@ -1,5 +1,6 @@
 # torch (development version)
 
+- Added `torch_sitrep()` for torch installation situation report. (#1415 cregouby)
 - Added `%*%` method for torch tensors. (#1379)
 - `torch_triu_indices` and `torch_tril_indices` now return 1-based indexes. (#1382)
 - `$indices()` now return 1-based indexes (#1382)
