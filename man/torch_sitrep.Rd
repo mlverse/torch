@@ -19,9 +19,7 @@ This function dumps everything relevant in one go - no more hunting through
 config files or trying random fixes when things break.
 }
 \examples{
-if (torch_is_installed()) {
 \dontrun{
 torch_sitrep()
-}
 }
 }

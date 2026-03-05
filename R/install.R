@@ -852,16 +852,23 @@ torch_sitrep <- function(verbose = TRUE) {
   
   # LibTorch version (from internal)
   libtorch_version <- tryCatch({
+    # Try calling torch_version() if available and lantern is loaded
     if (fn_exists("torch_version")) {
-      call_internal("torch_version")
-    } else {
-      # Fallback: read from installed files
-      install_path <- torch_install_path()
-      version_file <- file.path(install_path, "build-version")
-      if (file.exists(version_file)) {
-        readLines(version_file, warn = FALSE)[1]
-      } else "unknown"
+      ver <- call_internal("torch_version")
+      if (!is.null(ver) && !is.na(ver) && nzchar(ver)) {
+        return(ver)
+      }
     }
+    # Fallback: read from build-version file
+    install_path <- torch_install_path()
+    version_file <- file.path(install_path, "build-version")
+    if (file.exists(version_file)) {
+      ver <- trimws(readLines(version_file, warn = FALSE, n = 1))
+      if (length(ver) > 0 && nzchar(ver)) {
+        return(ver)
+      }
+    }
+    "unknown"
   }, error = function(e) "unknown")
   
   if (verbose) {
@@ -900,25 +907,15 @@ torch_sitrep <- function(verbose = TRUE) {
   }
   
   # Check if torch is installed (internal function)
+  # Note: torch_is_installed() checks both file existence AND loadability
   is_installed <- tryCatch(
     isTRUE(torch_is_installed()),
     error = function(e) FALSE
   )
   
-  if (verbose) {
-    if (is_installed) {
-      cli::cli_alert_success("Torch is installed")
-    } else {
-      cli::cli_alert_danger("Torch is NOT installed - run `install_torch()`")
-    }
-  }
-  
-  if (!is_installed) {
-    issues <<- c(issues, "Torch is not installed. Run `install_torch()`")
-  }
-  
   # Check individual libraries
   lantern_exists <- FALSE  # Initialize to ensure it's always defined
+  torch_libs <- FALSE
 
   if (!is.na(install_path) && !is.null(install_path)) {
 
@@ -938,18 +935,6 @@ torch_sitrep <- function(verbose = TRUE) {
       found
     }, error = function(e) FALSE)
 
-    if (verbose) {
-      if (lantern_exists) {
-        cli::cli_alert_success("Lantern library found")
-      } else {
-        cli::cli_alert_danger("Lantern library NOT found")
-      }
-    }
-
-    if (!lantern_exists && is_installed) {
-      issues <<- c(issues, "Lantern library missing despite torch_is_installed() = TRUE")
-    }
-
     # LibTorch libraries
     torch_libs <- tryCatch({
       lib_dirs <- file.path(install_path, c("lib", "lib64", "bin"))
@@ -965,24 +950,59 @@ torch_sitrep <- function(verbose = TRUE) {
       }
       found
     }, error = function(e) FALSE)
+  }
+
+  # Now show installation status based on file existence
+  if (verbose) {
+    if (lantern_exists && torch_libs) {
+      cli::cli_alert_success("Torch installation files found")
+    } else if (lantern_exists || torch_libs) {
+      cli::cli_alert_warning("Incomplete torch installation (some files missing)")
+    } else {
+      cli::cli_alert_danger("Torch installation files NOT found - run `install_torch()`")
+    }
+  }
+
+  # Report individual library status
+  if (verbose) {
+    status_msg(
+      lantern_exists,
+      "Lantern library found",
+      "Lantern library NOT found"
+    )
 
     status_msg(
       torch_libs,
       "LibTorch libraries found",
       "LibTorch libraries NOT found"
     )
+  }
 
-    # List actual library files in verbose mode
-    if (verbose && !is.na(install_path) && !is.null(install_path)) {
-      lib_dirs <- file.path(install_path, c("lib", "lib64", "bin"))
-      lib_dirs <- lib_dirs[dir.exists(lib_dirs)]
-      if (length(lib_dirs) > 0) {
-        cli::cli_text("\n{.strong Library files:}")
-        for (ld in lib_dirs) {
-          files <- list.files(ld, pattern = "\\.(so|dylib|dll)$", full.names = FALSE)
-          if (length(files) > 0) {
-            cli::cli_ul(files)
-          }
+  # Add issues based on file existence vs loadability
+  if (!lantern_exists && !torch_libs) {
+    issues <<- c(issues, "Torch installation files not found. Run `install_torch()`")
+  } else if (!lantern_exists) {
+    issues <<- c(issues, "Lantern library missing")
+  } else if (!torch_libs) {
+    issues <<- c(issues, "LibTorch libraries missing")
+  } else if (lantern_exists && torch_libs && !is_installed) {
+    # Files exist but torch_is_installed() verification failed
+    issues <<- c(issues, "Torch libraries found but cannot be loaded (verification failed)")
+  }
+
+  # Note: LibTorch version "unknown" is only a problem if torch isn't working
+  # If lantern loads successfully later, unknown version is just missing metadata
+
+  # List actual library files in verbose mode
+  if (verbose && !is.na(install_path) && !is.null(install_path)) {
+    lib_dirs <- file.path(install_path, c("lib", "lib64", "bin"))
+    lib_dirs <- lib_dirs[dir.exists(lib_dirs)]
+    if (length(lib_dirs) > 0) {
+      cli::cli_text("\n{.strong Library files:}")
+      for (ld in lib_dirs) {
+        files <- list.files(ld, pattern = "\\.(so|dylib|dll)$", full.names = FALSE)
+        if (length(files) > 0) {
+          cli::cli_ul(files)
         }
       }
     }
@@ -1019,8 +1039,9 @@ torch_sitrep <- function(verbose = TRUE) {
     }
   }
 
-  if (!lantern_started && is_installed) {
-    issues <<- c(issues, "Lantern not loaded despite installation. Try `library(torch)` or check library dependencies with `ldd`")
+  # Add issue if Lantern library exists but is not loaded
+  if (lantern_exists && !lantern_started) {
+    issues <<- c(issues, "Lantern library file exists but is not loaded")
   }
 
   results$lantern <- list(
@@ -1408,22 +1429,23 @@ torch_sitrep <- function(verbose = TRUE) {
   # ============================================
   if (verbose) cli::cli_h1("Issues and Recommendations")
   
-  # Issue: Lantern not loaded but libraries installed
-  if (is_installed && !lantern_started) {
+  # Issue: Lantern library exists but not loaded
+  # (Already noted in Installation Status, but provide OS-specific guidance here)
+  if (lantern_exists && !lantern_started) {
     if (isTRUE(os_type == "Linux")) {
-      issues <<- c(issues, 
-        "Lantern failed to load. Check shared library dependencies:",
-        "  Run: ldd <install_path>/lib/liblantern.so",
+      issues <<- c(issues,
+        "Troubleshooting: Check shared library dependencies with:",
+        "  ldd <install_path>/lib/liblantern.so",
         "  Look for 'not found' errors indicating missing system libraries."
       )
     } else if (isTRUE(os_type == "Darwin")) {
       issues <<- c(issues,
-        "Lantern failed to load. Check library dependencies:",
-        "  Run: otool -L <install_path>/lib/liblantern.dylib"
+        "Troubleshooting: Check library dependencies with:",
+        "  otool -L <install_path>/lib/liblantern.dylib"
       )
     } else if (isTRUE(os_type == "Windows")) {
       issues <<- c(issues,
-        "Lantern failed to load. Ensure Visual C++ Redistributable is installed.",
+        "Troubleshooting: Ensure Visual C++ Redistributable is installed.",
         "  Download from: https://aka.ms/vs/17/release/vc_redist.x64.exe"
       )
     }
