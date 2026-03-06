@@ -739,12 +739,11 @@ can_write_into <- function(path) {
   file.access(path, 2 ) >= 0
 }
 
-#' Torch Situation Report
+#' Torch Installation Situation Report
 #'
 #' @description
 #' Generate a comprehensive diagnostic report for torch installation status.
-#' This function dumps everything relevant in one go - no more hunting through
-#' config files or trying random fixes when things break.
+#' This function dumps everything relevant to installation and setup in one go.
 #'
 #' @param verbose logical; if TRUE, prints detailed information to console.
 #'   Default TRUE.
@@ -754,9 +753,9 @@ can_write_into <- function(path) {
 #' @export
 #' @examples
 #' \dontrun{
-#' torch_sitrep()
+#' install_torch_sitrep()
 #' }
-torch_sitrep <- function(verbose = TRUE) {
+install_torch_sitrep <- function(verbose = TRUE) {
   # Status indicator with color
   status_msg <- function(ok, msg_ok, msg_fail = "Not available") {
     if (isTRUE(ok)) {
