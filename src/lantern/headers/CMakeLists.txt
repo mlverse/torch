@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.5)
+cmake_minimum_required(VERSION 3.16)
 
 project(lanternheders)
 
@@ -8,7 +8,8 @@ project(lanternheders)
 
 include(ExternalProject)
 ExternalProject_Add(yamlcpp
-    URL https://codeload.github.com/jbeder/yaml-cpp/zip/yaml-cpp-0.6.3
+    URL https://codeload.github.com/jbeder/yaml-cpp/zip/yaml-cpp-0.9.0
+    DOWNLOAD_EXTRACT_TIMESTAMP TRUE
     BUILD_COMMAND make
     INSTALL_COMMAND cmake -E echo "Skipping install."
 )
