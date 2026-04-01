@@ -22,8 +22,8 @@ jobs:
           - {os: macOS, version: cpu-m1, runner: [self-hosted, m1]}
           
           - {os: ubuntu, version: cpu, runner: ubuntu-latest}
-          - {os: ubuntu, version: cu12.6, runner: [self-hosted, linux]}
-          - {os: ubuntu, version: cu12.8, runner: [self-hosted, linux]}
+          - {os: ubuntu, version: cu12.6, runner: ubuntu-22.04}
+          - {os: ubuntu, version: cu12.8, runner: ubuntu-22.04}
 
           - {os: windows, version: cpu, runner: windows-2022}
           - {os: windows, version: cu12.6, runner: windows-2022}
