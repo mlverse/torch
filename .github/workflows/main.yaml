@@ -181,7 +181,7 @@ jobs:
         run: |
           Rscript -e "sessionInfo()"
           Rscript -e "cat('CUDA lib path:', cuda12.8::lib_path(), '\n')"
-          Rscript -e "cat('Libs:', list.files(cuda12.8::lib_path(), pattern = '\\.so'), '\n')"
+          Rscript -e "cat('Libs:', list.files(cuda12.8::lib_path(), pattern = '\\\\.so'), '\n')"
 
       - uses: r-lib/actions/check-r-package@v2
         with:
