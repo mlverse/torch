@@ -30,7 +30,7 @@ jobs:
           - {os: macOS, r_version: '', version: cpu-m1, runner: [self-hosted, macOS, ARM64]}
 
           - {os: ubuntu, r_version: release, version: cpu, runner: ubuntu-22.04}
-          - {os: ubuntu, r_version: release, version: cu12.8, runner: [self-hosted, gpu-local]}
+          - {os: ubuntu, r_version: release, version: cu12.8, runner: cirun-gpu}
 
           - {os: windows, r_version: release, version: cpu, runner: windows-latest}
 

@@ -1,0 +1,9 @@
+runners:
+  - name: do-gpu-runner
+    cloud: do
+    gpu: nvidia
+    instance_type: gpu-4000adax1-20gb
+    machine_image: ubuntu-22-04-x64
+    region: tor1
+    labels:
+      - cirun-gpu
