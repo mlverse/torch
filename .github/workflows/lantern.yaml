@@ -6,7 +6,6 @@ on:
 jobs:
   build:
     runs-on: ${{ matrix.config.runner }}
-    container: ${{ matrix.container }}
     name: "os:${{matrix.config.os}} | v:${{matrix.config.version}}"
     permissions:
       id-token: write
@@ -30,9 +29,6 @@ jobs:
           - {os: windows, version: cu12.8, runner: windows-2022}
 
         include:
-          - config: {os: ubuntu}
-            container: ubuntu:20.04
-          
           - config: {version: cu12.6}
             cuda: 12.6
             cuda_patch: 3
@@ -45,14 +41,6 @@ jobs:
       CUDA: ${{ matrix.cuda }}
       
     steps:
-
-      - name: Install system dependencies
-        if: matrix.container != ''
-        run: |
-          DEBIAN_FRONTEND="noninteractive" apt-get update
-          DEBIAN_FRONTEND="noninteractive" apt-get install -y curl sudo libxml2-dev wget chrpath rsync git build-essential
-          curl -fsSL https://get.docker.com -o get-docker.sh
-          DRY_RUN=1 sh ./get-docker.sh
 
       - uses: actions/checkout@v6
       
