@@ -118,7 +118,7 @@ jobs:
     if: ${{ always() && needs.lantern.result != 'failed' }}
     runs-on: [self-hosted, gpu-local]
     container:
-      image: ubuntu:22.04
+      image: nvidia/cuda:12.8.1-base-ubuntu22.04
       options: '--gpus all --runtime=nvidia'
     name: "cudatoolkit - cuda12.8"
     timeout-minutes: 120
