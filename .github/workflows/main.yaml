@@ -102,7 +102,79 @@ jobs:
         with:
           error-on: '"error"'
           args: 'c("--no-multiarch", "--no-manual", "--as-cran")'
-        
 
-      
-      
+  check-cudatoolkit:
+    needs: lantern
+    if: ${{ always() && needs.lantern.result != 'failed' }}
+    runs-on: [self-hosted, gpu-local]
+    container:
+      image: ubuntu:22.04
+      options: '--gpus all --runtime=nvidia'
+    name: "cudatoolkit - cuda12.8"
+    timeout-minutes: 120
+    env:
+      R_REMOTES_NO_ERRORS_FROM_WARNINGS: true
+      TORCH_TEST: 1
+      TORCH_INSTALL: 1
+      TORCH_TEST_CUDA: 1
+      CUDA: "12.8"
+      GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
+      DEBIAN_FRONTEND: noninteractive
+
+    steps:
+
+      - name: Install system dependencies
+        run: |
+          apt-get update -y
+          apt-get install -y \
+            sudo software-properties-common dialog apt-utils \
+            tzdata locales curl wget git \
+            libcurl4-openssl-dev libssl-dev libxml2-dev \
+            libfontconfig1-dev libfreetype6-dev libpng-dev \
+            libharfbuzz-dev libfribidi-dev libtiff5-dev libjpeg-dev \
+            cmake make gcc g++
+
+      - name: Verify GPU access
+        run: nvidia-smi
+
+      - name: Download lantern artifacts
+        if: ${{ needs.lantern.result != 'skipped' }}
+        uses: actions/download-artifact@v7
+        with:
+          pattern: lantern-*
+          path: '${{ runner.temp }}/'
+          merge-multiple: true
+
+      - name: Set base URL for downloading
+        if: ${{ needs.lantern.result != 'skipped' }}
+        run: |
+          echo "LANTERN_BASE_URL=${{ runner.temp }}/" >> $GITHUB_ENV
+        shell: bash
+
+      - uses: actions/checkout@v6
+
+      - uses: ./.github/actions/setup-r
+        with:
+          r_version: release
+
+      - name: Install cuda12.8 R package
+        run: |
+          Rscript -e "install.packages('cuda12.8', repos = c('https://mlverse.r-universe.dev', 'https://cloud.r-project.org'))"
+
+      - uses: r-lib/actions/setup-r-dependencies@v2
+        with:
+          cache: false
+          extra-packages: any::rcmdcheck
+          needs: check
+
+      - name: Session info
+        run: |
+          Rscript -e "sessionInfo()"
+          Rscript -e "cat('CUDA lib path:', cuda12.8::lib_path(), '\n')"
+          Rscript -e "cat('Libs:', list.files(cuda12.8::lib_path(), pattern = '\\.so'), '\n')"
+
+      - uses: r-lib/actions/check-r-package@v2
+        with:
+          error-on: '"error"'
+          args: 'c("--no-multiarch", "--no-manual", "--as-cran")'
+
