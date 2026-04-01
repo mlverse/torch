@@ -17,7 +17,11 @@ static R_len_t dots_size(SEXP dots) {
 
 // [[Rcpp::export]]
 std::vector<Rcpp::RObject> enquos0(Rcpp::Environment env) {
+#if R_VERSION >= R_Version(4, 5, 0)
+  SEXP dots = R_getVarEx(R_DotsSymbol, env, FALSE, R_UnboundValue);
+#else
   SEXP dots = Rf_findVarInFrame(env, R_DotsSymbol);
+#endif
   std::vector<Rcpp::RObject> out;
   R_len_t size = dots_size(dots);
 
