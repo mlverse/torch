@@ -45,6 +45,7 @@ m <- distr_gamma(torch_tensor(1.0), torch_tensor(1.0))
 m$sample() # Gamma distributed with concentration=1 and rate=1
 }
 #> torch_tensor
-#>  0.3854
+#> 0.01 *
+#>  8.0247
 #> [ CPUFloatType{1} ]
 ```

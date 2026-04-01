@@ -8,6 +8,9 @@
   indexes. ([\#1382](https://github.com/mlverse/torch/issues/1382))
 - `$indices()` now return 1-based indexes
   ([\#1382](https://github.com/mlverse/torch/issues/1382))
+- Replaced non-API entry point `Rf_findVarInFrame` with `R_getVarEx` for
+  R 4.6 compatibility.
+  ([\#1421](https://github.com/mlverse/torch/issues/1421))
 
 ## torch 0.16.3
 

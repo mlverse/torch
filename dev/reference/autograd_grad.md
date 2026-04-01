@@ -78,12 +78,12 @@ o
 }
 #> [[1]]
 #> torch_tensor
-#> -1.0210
+#> -0.9935
 #> [ CPUFloatType{1} ]
 #> 
 #> [[2]]
 #> torch_tensor
-#> -1.6561
+#> -1.6206
 #> [ CPUFloatType{1} ]
 #> 
 ```

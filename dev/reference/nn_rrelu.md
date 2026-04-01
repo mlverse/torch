@@ -52,7 +52,7 @@ input <- torch_randn(2)
 m(input)
 }
 #> torch_tensor
-#>  1.0763
-#>  1.4656
+#> -0.0049
+#>  0.4970
 #> [ CPUFloatType{2} ]
 ```
