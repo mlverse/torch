@@ -31,8 +31,6 @@ jobs:
 
           - {os: ubuntu, r_version: release, version: cpu, runner: ubuntu-22.04}
           - {os: ubuntu, r_version: devel, version: cpu, runner: ubuntu-22.04}
-          - {os: ubuntu, r_version: release, version: cu12.6, runner: [self-hosted, gpu-local]}
-
           - {os: windows, r_version: release, version: cpu, runner: windows-latest}
 
         include:

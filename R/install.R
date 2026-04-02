@@ -129,7 +129,7 @@ torch_is_installed <- function(recheck=FALSE) {
       "Please reinstall torch with {.code install_torch(reinstall = TRUE)}",
       "You can disable this check by setting {.envvar TORCH_VERIFY_LOAD} to {.val FALSE}",
       "Torch libraries installed in: {.path {install_path}}.",
-      if (interactive()) conditionMessage(err) else ""
+      conditionMessage(err)
     ))
 
     FALSE
