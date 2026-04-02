@@ -111,6 +111,7 @@ torch_is_installed <- function(recheck=FALSE) {
       input = c(
         "Sys.setenv(TORCH_VERIFY_LOAD='no')",
         sprintf("Sys.setenv(TORCH_HOME=r'{%s}')", install_path),
+        sprintf(".libPaths(c(r'{%s}', .libPaths()))", dirname(install_path)),
         "torch::torch_tensor(1)",
         "TRUE"
       ),
