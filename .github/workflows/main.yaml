@@ -36,7 +36,7 @@ jobs:
         include:
 
           - config: {os: ubuntu, r_version: release, version: cu12.8, runner: [self-hosted, gpu-local]}
-            container: {image: 'nvidia/cuda:12.8.1-cudnn-devel-ubuntu20.04', options: '--gpus all --runtime=nvidia'}
+            container: {image: 'nvidia/cuda:12.8.1-cudnn-devel-ubuntu22.04', options: '--gpus all --runtime=nvidia'}
             cuda_enabled: 1
             torch_url: 'https://github.com/mlverse/libtorch-mac-m1/releases/download/LibTorch-for-R/libtorch-linux-cuda128-Release-x86_64-v2.8.0.zip'
 
