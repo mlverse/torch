@@ -130,6 +130,7 @@ jobs:
       CUDA: "12.6"
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
       DEBIAN_FRONTEND: noninteractive
+      R_ALWAYS_INSTALL_TESTS: true
 
     steps:
 
@@ -174,8 +175,10 @@ jobs:
       - uses: r-lib/actions/setup-r-dependencies@v2
         with:
           cache: false
-          extra-packages: any::rcmdcheck
-          needs: check
+
+      - name: Install package
+        run: |
+          Rscript -e "pak::local_install()"
 
       - name: Session info
         run: |
@@ -183,8 +186,7 @@ jobs:
           Rscript -e "cat('CUDA lib path:', cuda12.6::lib_path(), '\n')"
           Rscript -e "cat('Libs:', list.files(cuda12.6::lib_path(), pattern = '\\\\.so'), '\n')"
 
-      - uses: r-lib/actions/check-r-package@v2
-        with:
-          error-on: '"error"'
-          args: 'c("--no-multiarch", "--no-manual", "--as-cran")'
+      - name: Run tests
+        run: |
+          Rscript -e "testthat::test_package('torch')"
 
