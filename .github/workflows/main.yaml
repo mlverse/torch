@@ -77,7 +77,17 @@ jobs:
         shell: bash
         run: |
           nvidia-smi
-      
+          echo "--- LD_LIBRARY_PATH ---"
+          echo "${LD_LIBRARY_PATH:-<not set>}"
+          echo "--- CUDA libs ---"
+          ls /usr/local/cuda/lib64/libcudart* /usr/local/cuda/lib64/libcublas* 2>/dev/null || echo "not found in /usr/local/cuda/lib64"
+          ldconfig -p | grep -E "libcudart|libcublas" || echo "not in ldconfig cache"
+
+      - name: Set LD_LIBRARY_PATH for CUDA
+        if: ${{ env.TORCH_TEST_CUDA == 1 }}
+        run: echo "LD_LIBRARY_PATH=/usr/local/cuda/lib64${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}" >> $GITHUB_ENV
+        shell: bash
+
       - uses: ./.github/actions/setup-r
         with:
           r_version: ${{ matrix.config.r_version}}
