@@ -108,16 +108,16 @@ jobs:
     if: ${{ always() && needs.lantern.result != 'failed' }}
     runs-on: [self-hosted, gpu-local]
     container:
-      image: nvidia/cuda:12.8.1-base-ubuntu22.04
+      image: nvidia/cuda:12.6.3-base-ubuntu22.04
       options: '--gpus all --runtime=nvidia'
-    name: "cudatoolkit - cuda12.8"
+    name: "cudatoolkit - cuda12.6"
     timeout-minutes: 120
     env:
       R_REMOTES_NO_ERRORS_FROM_WARNINGS: true
       TORCH_TEST: 1
       TORCH_INSTALL: 1
       TORCH_TEST_CUDA: 1
-      CUDA: "12.8"
+      CUDA: "12.6"
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
       DEBIAN_FRONTEND: noninteractive
 
@@ -157,9 +157,9 @@ jobs:
         with:
           r_version: release
 
-      - name: Install cuda12.8 R package
+      - name: Install cuda12.6 R package
         run: |
-          Rscript -e "install.packages('cuda12.8', repos = c('https://mlverse.r-universe.dev', 'https://cloud.r-project.org'))"
+          Rscript -e "install.packages('cuda12.6', repos = c('https://mlverse.r-universe.dev', 'https://cloud.r-project.org'))"
 
       - uses: r-lib/actions/setup-r-dependencies@v2
         with:
@@ -170,8 +170,8 @@ jobs:
       - name: Session info
         run: |
           Rscript -e "sessionInfo()"
-          Rscript -e "cat('CUDA lib path:', cuda12.8::lib_path(), '\n')"
-          Rscript -e "cat('Libs:', list.files(cuda12.8::lib_path(), pattern = '\\\\.so'), '\n')"
+          Rscript -e "cat('CUDA lib path:', cuda12.6::lib_path(), '\n')"
+          Rscript -e "cat('Libs:', list.files(cuda12.6::lib_path(), pattern = '\\\\.so'), '\n')"
 
       - uses: r-lib/actions/check-r-package@v2
         with:
