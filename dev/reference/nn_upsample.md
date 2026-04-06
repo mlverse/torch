@@ -62,7 +62,7 @@ nn_upsample(scale_factor = c(2, 2), mode = "nearest")(input)
 }
 #> torch_tensor
 #> (1,1,.,.) = 
-#>   1  1  2  2
+#>  1  1  2  2
 #>   1  1  2  2
 #>   3  3  4  4
 #>   3  3  4  4

@@ -84,6 +84,6 @@ linalg_cond(a)
 linalg_cond(a, "fro")
 }
 #> torch_tensor
-#> 3.16228
+#> 3.1622776985168457
 #> [ CPUFloatType{} ]
 ```

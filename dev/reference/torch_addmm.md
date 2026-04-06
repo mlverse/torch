@@ -5,7 +5,7 @@ Addmm
 ## Usage
 
 ``` r
-torch_addmm(self, mat1, mat2, beta = 1L, alpha = 1L)
+torch_addmm(self, mat1, mat2, out_dtype, beta = 1L, alpha = 1L)
 ```
 
 ## Arguments
@@ -21,6 +21,10 @@ torch_addmm(self, mat1, mat2, beta = 1L, alpha = 1L)
 - mat2:
 
   (Tensor) the second matrix to be multiplied
+
+- out_dtype:
+
+  (torch_dtype, optional) the output dtype
 
 - beta:
 
@@ -58,7 +62,7 @@ mat2 = torch_randn(c(3, 3))
 torch_addmm(M, mat1, mat2)
 }
 #> torch_tensor
-#>  0.3173 -0.1104 -2.0254
-#> -1.3129 -2.2904  0.7331
+#> -0.5574 -0.8804 -0.1298
+#>  3.3991 -0.6742  0.5994
 #> [ CPUFloatType{2,3} ]
 ```

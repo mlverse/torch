@@ -68,6 +68,8 @@
   [`torch_float16()`](https://torch.mlverse.org/docs/dev/reference/torch_dtype.md)
   [`torch_half()`](https://torch.mlverse.org/docs/dev/reference/torch_dtype.md)
   [`torch_bfloat16()`](https://torch.mlverse.org/docs/dev/reference/torch_dtype.md)
+  [`torch_float8_e4m3fn()`](https://torch.mlverse.org/docs/dev/reference/torch_dtype.md)
+  [`torch_float8_e5m2()`](https://torch.mlverse.org/docs/dev/reference/torch_dtype.md)
   [`torch_uint8()`](https://torch.mlverse.org/docs/dev/reference/torch_dtype.md)
   [`torch_int8()`](https://torch.mlverse.org/docs/dev/reference/torch_dtype.md)
   [`torch_int16()`](https://torch.mlverse.org/docs/dev/reference/torch_dtype.md)

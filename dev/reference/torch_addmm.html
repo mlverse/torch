@@ -80,7 +80,7 @@
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">torch_addmm</span><span class="op">(</span><span class="va">self</span>, <span class="va">mat1</span>, <span class="va">mat2</span>, beta <span class="op">=</span> <span class="fl">1L</span>, alpha <span class="op">=</span> <span class="fl">1L</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">torch_addmm</span><span class="op">(</span><span class="va">self</span>, <span class="va">mat1</span>, <span class="va">mat2</span>, <span class="va">out_dtype</span>, beta <span class="op">=</span> <span class="fl">1L</span>, alpha <span class="op">=</span> <span class="fl">1L</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -97,6 +97,10 @@
 
 <dt id="arg-mat-">mat2<a class="anchor" aria-label="anchor" href="#arg-mat-"></a></dt>
 <dd><p>(Tensor) the second matrix to be multiplied</p></dd>
+
+
+<dt id="arg-out-dtype">out_dtype<a class="anchor" aria-label="anchor" href="#arg-out-dtype"></a></dt>
+<dd><p>(torch_dtype, optional) the output dtype</p></dd>
 
 
 <dt id="arg-beta">beta<a class="anchor" aria-label="anchor" href="#arg-beta"></a></dt>
@@ -137,8 +141,8 @@ For inputs of type <code>FloatTensor</code> or <code>DoubleTensor</code>, argume
 <span class="r-in"><span><span class="fu">torch_addmm</span><span class="op">(</span><span class="va">M</span>, <span class="va">mat1</span>, <span class="va">mat2</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">}</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> torch_tensor</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  0.3173 -0.1104 -2.0254</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> -1.3129 -2.2904  0.7331</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> -0.5574 -0.8804 -0.1298</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  3.3991 -0.6742  0.5994</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [ CPUFloatType{2,3} ]</span>
 </code></pre></div>
     </div>

@@ -55,6 +55,6 @@ y <- torch_tensor(c(4, 1, -1, 2), dtype = torch_long())$view(c(1, 4))
 loss(x, y)
 }
 #> torch_tensor
-#> 0.85
+#> 0.8500000238418579
 #> [ CPUFloatType{} ]
 ```

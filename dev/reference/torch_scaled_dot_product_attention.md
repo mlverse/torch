@@ -45,7 +45,7 @@ torch_scaled_dot_product_attention(
 
 - dropout_p:
 
-  (float) Dropout probability in the range 0.0, 1.0; if greater than
+  (float) Dropout probability in the range \[0.0, 1.0\]; if greater than
   0.0, dropout is applied during training. Default: 0.0.
 
 - is_causal:

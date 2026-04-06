@@ -5,7 +5,7 @@ Mm
 ## Usage
 
 ``` r
-torch_mm(self, mat2)
+torch_mm(self, mat2, out_dtype)
 ```
 
 ## Arguments
@@ -17,6 +17,10 @@ torch_mm(self, mat2)
 - mat2:
 
   (Tensor) the second matrix to be multiplied
+
+- out_dtype:
+
+  (torch_dtype, optional) the output dtype
 
 ## Note
 
@@ -40,7 +44,7 @@ mat2 = torch_randn(c(3, 3))
 torch_mm(mat1, mat2)
 }
 #> torch_tensor
-#>   0.0304  -1.0897  -0.4885
-#>  -2.6769  10.4545  -1.2609
+#>  2.9915  0.4781  0.9916
+#>  1.4514  0.5254 -0.3930
 #> [ CPUFloatType{2,3} ]
 ```

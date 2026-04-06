@@ -31,6 +31,10 @@ torch_half()
 
 torch_bfloat16()
 
+torch_float8_e4m3fn()
+
+torch_float8_e5m2()
+
 torch_uint8()
 
 torch_int8()
