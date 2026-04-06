@@ -26,6 +26,16 @@ Rcpp::XPtr<XPtrTorchDtype> cpp_torch_bfloat16() {
 }
 
 // [[Rcpp::export]]
+Rcpp::XPtr<XPtrTorchDtype> cpp_torch_float8_e4m3fn() {
+  return make_xptr<XPtrTorchDtype>(lantern_Dtype_float8_e4m3fn());
+}
+
+// [[Rcpp::export]]
+Rcpp::XPtr<XPtrTorchDtype> cpp_torch_float8_e5m2() {
+  return make_xptr<XPtrTorchDtype>(lantern_Dtype_float8_e5m2());
+}
+
+// [[Rcpp::export]]
 Rcpp::XPtr<XPtrTorchDtype> cpp_torch_uint8() {
   return make_xptr<XPtrTorchDtype>(lantern_Dtype_uint8());
 }

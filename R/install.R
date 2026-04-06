@@ -1,5 +1,5 @@
 branch <- "main"
-torch_version <- "2.7.1"
+torch_version <- "2.8.0"
 
 #' Install Torch
 #'
@@ -111,6 +111,7 @@ torch_is_installed <- function(recheck=FALSE) {
       input = c(
         "Sys.setenv(TORCH_VERIFY_LOAD='no')",
         sprintf("Sys.setenv(TORCH_HOME=r'{%s}')", install_path),
+        sprintf(".libPaths(c(r'{%s}', .libPaths()))", dirname(install_path)),
         "torch::torch_tensor(1)",
         "TRUE"
       ),
@@ -129,7 +130,7 @@ torch_is_installed <- function(recheck=FALSE) {
       "Please reinstall torch with {.code install_torch(reinstall = TRUE)}",
       "You can disable this check by setting {.envvar TORCH_VERIFY_LOAD} to {.val FALSE}",
       "Torch libraries installed in: {.path {install_path}}.",
-      if (interactive()) conditionMessage(err) else ""
+      conditionMessage(err)
     ))
 
     FALSE
@@ -279,7 +280,7 @@ libtorch_url <- function() {
     url <- glue::glue("https://download.pytorch.org/libtorch/{kind}/libtorch-win-shared-with-deps-{torch_version}%2B{kind}.zip")
   }
   if (is_linux()) {
-    url <- glue::glue("https://download.pytorch.org/libtorch/{kind}/libtorch-cxx11-abi-shared-with-deps-{torch_version}%2B{kind}.zip")
+    url <- glue::glue("https://download.pytorch.org/libtorch/{kind}/libtorch-shared-with-deps-{torch_version}%2B{kind}.zip")
   }
   
   installer_message(c(

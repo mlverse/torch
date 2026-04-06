@@ -29,7 +29,7 @@ should take part in attention (and \code{FALSE} masks out the position). A float
 of the same type as query, key, value that is added to the attention score (use
 \code{-Inf} to mask out positions). Default: \code{list()}.}
 
-\item{dropout_p}{(float) Dropout probability in the range \link{0.0, 1.0}; if greater
+\item{dropout_p}{(float) Dropout probability in the range [0.0, 1.0]; if greater
 than 0.0, dropout is applied during training. Default: 0.0.}
 
 \item{is_causal}{(bool) If \code{TRUE}, assumes causal attention masking. \code{attn_mask} is

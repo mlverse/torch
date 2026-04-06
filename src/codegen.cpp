@@ -78,9 +78,22 @@ std::string cpp_arg_to_torch_type(SEXP obj,
   bool is_atomic = Rf_isVectorAtomic(obj);
   bool is_scalar_atomic = is_atomic && len == 1;
 
+  bool is_numeric = Rf_isNumeric(obj);
+
   bool e_scalar = is_in("Scalar", etypes);
   if (e_scalar && (is_scalar_atomic || is_tensor)) {
     return "Scalar";
+  }
+
+  // int64_t and double must come before the Tensor catch-all so that a
+  // plain R numeric scalar (e.g. 500 or 0.1) dispatches as int64_t/double
+  // rather than Tensor when both types are valid for an argument.
+  if (is_in("int64_t", etypes) && is_numeric && len == 1) {
+    return "int64_t";
+  }
+
+  if (is_in("double", etypes) && is_numeric && len == 1) {
+    return "double";
   }
 
   if (e_tensor && is_atomic && !is_null) {
@@ -95,13 +108,7 @@ std::string cpp_arg_to_torch_type(SEXP obj,
     return "DimnameList";
   }
 
-  bool is_numeric = Rf_isNumeric(obj);
-
   bool is_numeric_or_list_or_null = is_numeric || is_list || is_null;
-
-  if (is_in("int64_t", etypes) && ((is_numeric && len == 1))) {
-    return "int64_t";
-  }
 
   if (is_in("IntArrayRef", etypes) && is_numeric_or_list_or_null) {
     return "IntArrayRef";

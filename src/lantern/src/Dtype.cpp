@@ -27,6 +27,8 @@ LANTERN_DTYPE_FUN(chalf, kComplexHalf)
 LANTERN_DTYPE_FUN(cfloat, kComplexFloat)
 LANTERN_DTYPE_FUN(cdouble, kComplexDouble)
 LANTERN_DTYPE_FUN(byte, kByte)
+LANTERN_DTYPE_FUN(float8_e4m3fn, kFloat8_e4m3fn)
+LANTERN_DTYPE_FUN(float8_e5m2, kFloat8_e5m2)
     
 void* _lantern_Dtype_from_string (void* dtype_str) {
   LANTERN_FUNCTION_START
@@ -71,6 +73,10 @@ void* _lantern_Dtype_from_string (void* dtype_str) {
       return torch::kQInt32;
     } else if (str == "quint4x2") {
       return torch::kQUInt4x2;
+    } else if (str == "float8_e4m3fn") {
+      return torch::kFloat8_e4m3fn;
+    } else if (str == "float8_e5m2") {
+      return torch::kFloat8_e5m2;
     } else {
       throw std::runtime_error("Error unknown type " + str);
     }

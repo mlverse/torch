@@ -15,6 +15,8 @@
 \alias{torch_float16}
 \alias{torch_half}
 \alias{torch_bfloat16}
+\alias{torch_float8_e4m3fn}
+\alias{torch_float8_e5m2}
 \alias{torch_uint8}
 \alias{torch_int8}
 \alias{torch_int16}
@@ -54,6 +56,10 @@ torch_float16()
 torch_half()
 
 torch_bfloat16()
+
+torch_float8_e4m3fn()
+
+torch_float8_e5m2()
 
 torch_uint8()
 
