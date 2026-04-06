@@ -3,6 +3,7 @@
 - Added `%*%` method for torch tensors. (#1379)
 - `torch_triu_indices` and `torch_tril_indices` now return 1-based indexes. (#1382)
 - `$indices()` now return 1-based indexes (#1382)
+- Updated to LibTorch 2.8.0 (#1419)
 - Replaced non-API entry point `Rf_findVarInFrame` with `R_getVarEx` for R 4.6 compatibility. (#1421)
 
 # torch 0.16.3
