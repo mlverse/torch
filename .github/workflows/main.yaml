@@ -171,7 +171,7 @@ jobs:
 
       - name: Install cuda12.8 R package
         run: |
-          Rscript -e "install.packages('cuda12.8', repos = c('https://mlverse.r-universe.dev', 'https://cloud.r-project.org'))"
+          Rscript -e "pak::pkg_install('mlverse/cudatoolkit/cuda12.8')"
 
       - uses: r-lib/actions/setup-r-dependencies@v2
         with:
