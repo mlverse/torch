@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: torch 0.16.3\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-04-02 18:13+0200\n"
-"PO-Revision-Date: 2026-04-02 18:23+0200\n"
+"PO-Revision-Date: 2026-04-07 13:14+0200\n"
 "Last-Translator: Christophe Regouby <christophe.regouby@free.fr>\n"
 "Language-Team: \n"
 "Language: fr_FR\n"
@@ -252,6 +252,7 @@ msgstr ""
 #: distributions-constraints.R:276
 msgid "(lower_bound={self$lower_bound}, upper_bound={self$upper_bound})"
 msgstr ""
+"(limite_inférieure={self$lower_bound}, limite_supérieure={self$upper_bound})"
 
 #: distributions-constraints.R:125 distributions-constraints.R:227
 msgid "{class(self)}: (upper_bound={self$upper_bound})"
