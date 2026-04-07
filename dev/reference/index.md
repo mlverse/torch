@@ -2234,6 +2234,8 @@
 - [`get_install_libs_url()`](https://torch.mlverse.org/docs/dev/reference/install_torch_from_file.md)
   [`install_torch_from_file()`](https://torch.mlverse.org/docs/dev/reference/install_torch_from_file.md)
   : Install Torch from files
+- [`install_torch_sitrep()`](https://torch.mlverse.org/docs/dev/reference/install_torch_sitrep.md)
+  : Torch Installation Situation Report
 
 ## Contrib
 

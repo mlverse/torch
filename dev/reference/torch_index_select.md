@@ -51,8 +51,8 @@ torch_index_select(x, 1, indices)
 torch_index_select(x, 2, indices)
 }
 #> torch_tensor
-#>  1.2824  1.7673
-#> -1.1347 -0.7082
-#>  0.4467 -1.0382
+#> -0.1424  0.9083
+#> -1.6367 -0.5155
+#> -0.6929  0.3480
 #> [ CPUFloatType{3,2} ]
 ```

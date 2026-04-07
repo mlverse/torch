@@ -75,6 +75,7 @@
 <url><loc>https://torch.mlverse.org/docs/dev/reference/index.html</loc></url>
 <url><loc>https://torch.mlverse.org/docs/dev/reference/install_torch.html</loc></url>
 <url><loc>https://torch.mlverse.org/docs/dev/reference/install_torch_from_file.html</loc></url>
+<url><loc>https://torch.mlverse.org/docs/dev/reference/install_torch_sitrep.html</loc></url>
 <url><loc>https://torch.mlverse.org/docs/dev/reference/is_dataloader.html</loc></url>
 <url><loc>https://torch.mlverse.org/docs/dev/reference/is_nn_buffer.html</loc></url>
 <url><loc>https://torch.mlverse.org/docs/dev/reference/is_nn_module.html</loc></url>
