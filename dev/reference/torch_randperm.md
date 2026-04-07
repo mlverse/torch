@@ -56,8 +56,8 @@ torch_randperm(4)
 }
 #> torch_tensor
 #>  2
-#>  3
-#>  0
 #>  1
+#>  0
+#>  3
 #> [ CPULongType{4} ]
 ```

@@ -43,6 +43,6 @@ A$det()
 A$det()$log()
 }
 #> torch_tensor
-#> nan
+#> -1.0218422412872314
 #> [ CPUFloatType{} ]
 ```
