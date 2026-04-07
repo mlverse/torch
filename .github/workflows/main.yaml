@@ -169,13 +169,13 @@ jobs:
         with:
           r_version: release
 
-      - name: Install cuda12.8 R package
-        run: |
-          Rscript -e "pak::pkg_install('mlverse/cudatoolkit/cuda12.8')"
-
       - uses: r-lib/actions/setup-r-dependencies@v2
         with:
           cache: false
+
+      - name: Install cuda12.8 R package
+        run: |
+          Rscript -e "pak::pkg_install('mlverse/cudatoolkit/cuda12.8')"
 
       - name: Install package
         run: |
