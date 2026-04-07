@@ -19,7 +19,7 @@ jobs:
           # when changing supported versions here, please modify supported versions
           # in install.R
           - {os: macOS, version: cpu-intel, runner: macos-15-intel}
-          - {os: macOS, version: cpu-m1, runner: [self-hosted, m1]}
+          - {os: macOS, version: cpu-m1, runner: macos-15}
           
           - {os: ubuntu, version: cpu, runner: ubuntu-latest}
           - {os: ubuntu, version: cu12.6, runner: ubuntu-22.04}
