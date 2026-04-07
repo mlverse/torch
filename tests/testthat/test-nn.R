@@ -644,6 +644,24 @@ test_that("empty initializer", {
   expect_equal_to_r(model()(torch_tensor(1)), 1)
 })
 
+test_that("nn_module initialize can have parameter named d (#1336)", {
+  mod <- nn_module(
+    classname = "issue1336_module",
+    initialize = function(d) {
+      self$d <- d
+    },
+    forward = function(x) x
+  )
+
+  model <- NULL
+  expect_no_error({
+    model <- mod(1:10)
+  })
+
+  expect_equal(model$d[1], 1L)
+  expect_equal(model$d[5], 5L)
+})
+
 test_that("can load state dict of a corrupt module", {
   local_edition(3)
 
