@@ -943,6 +943,9 @@
 - [`torch_sparse_coo_tensor()`](https://torch.mlverse.org/docs/dev/reference/torch_sparse_coo_tensor.md)
   : Sparse_coo_tensor
 
+- [`torch_sparse_sampled_addmm()`](https://torch.mlverse.org/docs/dev/reference/torch_sparse_sampled_addmm.md)
+  : Sparse_sampled_addmm
+
 - [`torch_split()`](https://torch.mlverse.org/docs/dev/reference/torch_split.md)
   : Split
 

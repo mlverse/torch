@@ -32,9 +32,9 @@ a
 torch_ceil(a)
 }
 #> torch_tensor
+#>  1
 #> -0
 #> -1
-#>  1
-#>  1
+#> -0
 #> [ CPUFloatType{4} ]
 ```

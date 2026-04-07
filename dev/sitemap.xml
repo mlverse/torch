@@ -676,6 +676,7 @@
 <url><loc>https://torch.mlverse.org/docs/dev/reference/torch_slogdet.html</loc></url>
 <url><loc>https://torch.mlverse.org/docs/dev/reference/torch_sort.html</loc></url>
 <url><loc>https://torch.mlverse.org/docs/dev/reference/torch_sparse_coo_tensor.html</loc></url>
+<url><loc>https://torch.mlverse.org/docs/dev/reference/torch_sparse_sampled_addmm.html</loc></url>
 <url><loc>https://torch.mlverse.org/docs/dev/reference/torch_split.html</loc></url>
 <url><loc>https://torch.mlverse.org/docs/dev/reference/torch_sqrt.html</loc></url>
 <url><loc>https://torch.mlverse.org/docs/dev/reference/torch_square.html</loc></url>
