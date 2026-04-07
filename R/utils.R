@@ -38,7 +38,7 @@ create_class <- function(name, inherit, ..., private, active, parent_env,
   e <- new.env(parent = parent_env)
   e$inherit <- inherit
 
-  d <- R6::R6Class(
+  .__class__ <- R6::R6Class(
     classname = name,
     lock_objects = FALSE,
     inherit = inherit,
@@ -48,16 +48,19 @@ create_class <- function(name, inherit, ..., private, active, parent_env,
     parent_env = e
   )
 
-  init <- get_init(d)
+  init <- get_init(.__class__)
   # same signature as the init method, but calls with dataset$new.
+  # NOTE: the R6 class is stored as `.__class__` rather than a short name
+  # like `d` to avoid being shadowed when a user names their `initialize`
+  # parameter `d` (or any other short letter).
   f <- rlang::new_function(
     args = rlang::fn_fmls(init),
     body = rlang::expr({
-      d$new(!!!rlang::fn_fmls_syms(init))
+      .__class__$new(!!!rlang::fn_fmls_syms(init))
     })
   )
 
-  attr(f, attr_name) <- d
+  attr(f, attr_name) <- .__class__
   if (!is.null(constructor_class)) {
     class(f) <- constructor_class
   }
