@@ -59,7 +59,7 @@ a
 torch_prod(a, 1)
 }
 #> torch_tensor
-#> -0.1666
-#> -0.0164
+#>  0.0013
+#>  0.2953
 #> [ CPUFloatType{2} ]
 ```
