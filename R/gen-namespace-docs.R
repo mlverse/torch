@@ -4291,6 +4291,38 @@ NULL
 NULL
 
 
+#' Sparse_sampled_addmm
+#'
+#' @section sparse_sampled_addmm(self, mat1, mat2, *, beta=1, alpha=1) -> Tensor :
+#'
+#' Performs a matrix multiplication of the dense matrices \code{mat1} and \code{mat2} at the locations
+#' specified by the sparsity pattern of \code{self}. The matrix \code{self} is added to the final result.
+#'
+#' Mathematically, this performs the following operation:
+#'
+#' \deqn{
+#'     \mbox{out} = \alpha\ (\mbox{mat1} \mathbin{@} \mbox{mat2}) * \mbox{spy}(\mbox{self}) + \beta\ \mbox{self}
+#' }
+#'
+#' where \eqn{\mbox{spy}(\mbox{self})} is the sparsity pattern matrix of \code{self}, \code{alpha} and
+#' \code{beta} are the scaling factors. \eqn{\mbox{spy}(\mbox{self})} has value 1 at the positions
+#' where \code{self} has non-zero values, and 0 elsewhere.
+#'
+#' \code{self} must be a sparse CSR tensor. \code{mat1} and \code{mat2} must be dense tensors.
+#'
+#' @param self (Tensor) a sparse CSR matrix of size \code{(m, n)} to be added and used to compute
+#'   the sampled matrix multiplication
+#' @param mat1 (Tensor) a dense matrix of size \code{(m, k)} to be multiplied
+#' @param mat2 (Tensor) a dense matrix of size \code{(k, n)} to be multiplied
+#' @param beta (Number, optional) multiplier for \code{self} (\eqn{\beta})
+#' @param alpha (Number, optional) multiplier for \eqn{mat1 @ mat2} (\eqn{\alpha})
+#'
+#' @name torch_sparse_sampled_addmm
+#'
+#' @export
+NULL
+
+
 #' Sparse_coo_tensor
 #'
 #' @section sparse_coo_tensor(indices, values, size=NULL, dtype=NULL, device=NULL, requires_grad=False) -> Tensor :
