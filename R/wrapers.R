@@ -663,3 +663,21 @@ NULL
 #' @name torch_index_put
 #' @export
 NULL
+
+# Override the generated to_sparse method to work around the optional Layout
+# type mismatch in the C++ layer. The layout-based overload passes a raw
+# torch::Layout* where the Lantern layer expects a self_contained::optional::Layout*,
+# causing a segfault. We route through the sparse_dim overload instead.
+Tensor$set("public", "to_sparse", function(sparse_dim, layout = NULL, blocksize = NULL, dense_dim = NULL) {
+  if (!missing(sparse_dim)) {
+    self$`_to_sparse`(sparse_dim = sparse_dim)
+  } else if (!is.null(layout) || !is.null(blocksize) || !is.null(dense_dim)) {
+    cli::cli_abort(c(
+      "The {.arg layout}, {.arg blocksize}, and {.arg dense_dim} arguments are not yet supported.",
+      i = "Use the dedicated conversion methods instead: {.fn to_sparse_csr}, {.fn to_sparse_csc}, {.fn to_sparse_bsr}, {.fn to_sparse_bsc}."
+    ))
+  } else {
+    # Default: convert to sparse COO format
+    self$`_to_sparse`(sparse_dim = self$dim())
+  }
+})

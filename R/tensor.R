@@ -290,6 +290,9 @@ Tensor <- R7Class(
     is_sparse = function() {
       cpp_method_Tensor_is_sparse(self)
     },
+    is_sparse_csr = function() {
+      cpp_method_Tensor_is_sparse_csr(self)
+    },
     movedim = function(source, destination) {
       private$`_movedim`(as_1_based_dim(source), as_1_based_dim(destination))
     },
@@ -412,7 +415,7 @@ as.matrix.torch_tensor <- function(x, ...) {
 }
 
 as_array_impl <- function(x) {
-  if (x$is_sparse()) {
+  if (x$is_sparse() || x$is_sparse_csr()) {
     cli_abort(c(
       "Sparse tensors are not supported for as_array conversion.",
       i = "Use `as_array(x$to_dense())` to convert to a dense tensor first."
