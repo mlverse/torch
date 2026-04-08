@@ -4,11 +4,8 @@
 #define TORCH_PRENV(x) TAG(x)
 
 static R_len_t dots_size(SEXP dots) {
-  if (dots == R_UnboundValue) {
-    // No dots at all in the environment
-    return 0;
-  } else if (dots == R_MissingArg) {
-    // Dots are present, but none were supplied
+  if (dots == R_MissingArg) {
+    // No dots at all, or dots are present but none were supplied
     return 0;
   } else {
     return Rf_length(dots);
@@ -18,9 +15,10 @@ static R_len_t dots_size(SEXP dots) {
 // [[Rcpp::export]]
 std::vector<Rcpp::RObject> enquos0(Rcpp::Environment env) {
 #if R_VERSION >= R_Version(4, 5, 0)
-  SEXP dots = R_getVarEx(R_DotsSymbol, env, FALSE, R_UnboundValue);
+  SEXP dots = R_getVarEx(R_DotsSymbol, env, FALSE, R_MissingArg);
 #else
   SEXP dots = Rf_findVarInFrame(env, R_DotsSymbol);
+  if (dots == R_UnboundValue) dots = R_MissingArg;
 #endif
   std::vector<Rcpp::RObject> out;
   R_len_t size = dots_size(dots);
