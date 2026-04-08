@@ -32,6 +32,6 @@ m(input)
 }
 #> torch_tensor
 #>  0.0000
-#>  0.7348
+#>  0.4440
 #> [ CPUFloatType{2} ]
 ```

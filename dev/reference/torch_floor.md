@@ -31,7 +31,7 @@ a
 torch_floor(a)
 }
 #> torch_tensor
-#>  2
+#> -1
 #>  0
 #> -1
 #> -1
