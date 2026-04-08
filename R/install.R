@@ -544,22 +544,38 @@ check_supported_cuda_version_linux <- function(version) {
 
 cuda_version_from_cudatoolkit <- function(supported_versions) {
   opt <- Sys.getenv("TORCH_CUDATOOLKIT", "")
+  cuda_env <- Sys.getenv("CUDA", "")
+
+  if (nzchar(opt) && nzchar(cuda_env)) {
+    cli::cli_abort(c(
+      x = "Both {.envvar CUDA} and {.envvar TORCH_CUDATOOLKIT} are set.",
+      i = "Set only one of them."
+    ))
+  }
 
   if (tolower(opt) == "false") {
     installer_message("{.envvar TORCH_CUDATOOLKIT}={.val FALSE}. Skipping cudatoolkit R package detection.")
     return(NULL)
   }
 
-  if (nzchar(opt)) {
-    pkg <- paste0("cuda", opt)
+  # Use TORCH_CUDATOOLKIT or CUDA to force a specific version
+  forced <- if (nzchar(opt)) opt else if (nzchar(cuda_env)) cuda_env else NULL
+
+  if (!is.null(forced)) {
+    pkg <- paste0("cuda", forced)
     if (requireNamespace(pkg, quietly = TRUE)) {
-      installer_message("{.envvar TORCH_CUDATOOLKIT}={.val {opt}}. Using CUDA version {.strong {opt}}.")
-      return(opt)
+      installer_message("Using cudatoolkit R package {.pkg {pkg}} for CUDA version {.strong {forced}}.")
+      return(forced)
     }
-    cli::cli_abort(c(
-      x = "R package {.pkg {pkg}} is not installed.",
-      i = "Install it or unset {.envvar TORCH_CUDATOOLKIT}."
-    ))
+    # If TORCH_CUDATOOLKIT is set, error. If CUDA is set, just return NULL
+    # so the caller falls through to system CUDA detection.
+    if (nzchar(opt)) {
+      cli::cli_abort(c(
+        x = "R package {.pkg {pkg}} is not installed.",
+        i = "Install it or unset {.envvar TORCH_CUDATOOLKIT}."
+      ))
+    }
+    return(NULL)
   }
 
   for (version in rev(supported_versions)) {
