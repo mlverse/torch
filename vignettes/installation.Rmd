@@ -99,7 +99,7 @@ To install the GPU version of `torch` on linux you must verify that:
 
 -   You have a NVIDIA CUDA compatible GPU. You can find if you have a CUDA compatible GPU [here](https://developer.nvidia.com/cuda-gpus#compute).
 
--   You have correctly installed the NVIDIA CUDA Toolkit versions 12.6 or 12.8, follow the instructions [here](https://docs.nvidia.com/cuda/archive/12.8.0/).
+-   You have correctly installed the NVIDIA CUDA Toolkit versions 12.6, 12.8, or 12.9, follow the instructions [here](https://docs.nvidia.com/cuda/).
 
 -   You have installed cuDNN (a version compatible with your CUDA version). Follow the installation instructions available [here](https://developer.nvidia.com/cudnn).
 
@@ -143,7 +143,7 @@ install.packages("torch")
 ## Using cudatoolkit R packages {#cudatoolkit}
 
 Instead of installing the full CUDA toolkit on your system, you can use the
-`cuda12.6` or `cuda12.8` R packages to provide the necessary CUDA runtime
+`cuda12.6`, `cuda12.8`, or `cuda12.9` R packages to provide the necessary CUDA runtime
 libraries. These packages bundle the CUDA shared libraries so torch can use
 GPU acceleration without a system-wide CUDA installation.
 

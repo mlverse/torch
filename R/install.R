@@ -420,8 +420,8 @@ installation_kind <- function() {
   }
 }
 
-supported_cuda_versions_windows <- c("12.6", "12.8")
-supported_cuda_versions_linux <- c("12.6", "12.8")
+supported_cuda_versions_windows <- c("12.6", "12.8", "12.9")
+supported_cuda_versions_linux <- c("12.6", "12.8", "12.9")
 
 # CUDA version detection priority:
 #
