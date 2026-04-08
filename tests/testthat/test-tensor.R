@@ -558,6 +558,19 @@ test_that("to_sparse with sparse_dim works", {
   expect_equal_to_tensor(sparse$to_dense(), x)
 })
 
+test_that("to_sparse with dense_dim works", {
+  x <- torch_randn(3, 4, 5)
+  # dense_dim=1 means the last dim stays dense, sparse_dim = 3 - 1 = 2
+  sparse <- x$to_sparse(dense_dim = 1L)
+  expect_true(sparse$is_sparse())
+  expect_equal_to_tensor(sparse$to_dense(), x)
+
+  # dense_dim=0 is equivalent to full sparse (sparse_dim = ndim)
+  sparse0 <- x$to_sparse(dense_dim = 0L)
+  expect_true(sparse0$is_sparse())
+  expect_equal_to_tensor(sparse0$to_dense(), x)
+})
+
 test_that("as_array errors for CSR sparse tensors", {
   x <- torch_randn(3, 3)$to_sparse_csr()
   expect_error(

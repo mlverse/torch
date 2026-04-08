@@ -671,9 +671,12 @@ NULL
 Tensor$set("public", "to_sparse", function(sparse_dim, layout = NULL, blocksize = NULL, dense_dim = NULL) {
   if (!missing(sparse_dim)) {
     self$`_to_sparse`(sparse_dim = sparse_dim)
-  } else if (!is.null(layout) || !is.null(blocksize) || !is.null(dense_dim)) {
+  } else if (!is.null(dense_dim) && is.null(layout) && is.null(blocksize)) {
+    # For COO format: sparse_dim + dense_dim = ndim
+    self$`_to_sparse`(sparse_dim = self$dim() - dense_dim)
+  } else if (!is.null(layout) || !is.null(blocksize)) {
     cli::cli_abort(c(
-      "The {.arg layout}, {.arg blocksize}, and {.arg dense_dim} arguments are not yet supported.",
+      "The {.arg layout} and {.arg blocksize} arguments are not yet supported.",
       i = "Use the dedicated conversion methods instead: {.fn to_sparse_csr}, {.fn to_sparse_csc}, {.fn to_sparse_bsr}, {.fn to_sparse_bsc}."
     ))
   } else {
