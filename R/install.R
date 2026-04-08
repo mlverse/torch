@@ -551,7 +551,7 @@ cuda_version_from_cudatoolkit <- function(supported_versions) {
   }
 
   if (nzchar(opt)) {
-    pkg <- paste0("cuda", gsub("\\.", "", opt))
+    pkg <- paste0("cuda", opt)
     if (requireNamespace(pkg, quietly = TRUE)) {
       installer_message("{.envvar TORCH_CUDATOOLKIT}={.val {opt}}. Using CUDA version {.strong {opt}}.")
       return(opt)
@@ -563,7 +563,7 @@ cuda_version_from_cudatoolkit <- function(supported_versions) {
   }
 
   for (version in rev(supported_versions)) {
-    pkg <- paste0("cuda", gsub("\\.", "", version))
+    pkg <- paste0("cuda", version)
     if (requireNamespace(pkg, quietly = TRUE)) {
       installer_message("Found installed R package {.pkg {pkg}}. Using CUDA version {.strong {version}}.")
       return(version)

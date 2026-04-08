@@ -15,7 +15,7 @@ load_cudatoolkit_libs <- function() {
   cuda_ver <- cuda_version_from_cudatoolkit(supported)
   if (is.null(cuda_ver)) return(invisible(FALSE))
 
-  pkg_name <- paste0("cuda", gsub("\\.", "", cuda_ver))
+  pkg_name <- paste0("cuda", cuda_ver)
   if (!requireNamespace(pkg_name, quietly = TRUE)) return(invisible(FALSE))
 
   lib_path <- getExportedValue(pkg_name, "lib_path")()
