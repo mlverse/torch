@@ -30,7 +30,7 @@ a
 torch_acos(a)
 }
 #> torch_tensor
-#>  1.3634
+#>  0.4197
 #>     nan
 #>     nan
 #>     nan

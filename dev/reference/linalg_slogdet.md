@@ -73,7 +73,7 @@ linalg_slogdet(a)
 #> 
 #> [[2]]
 #> torch_tensor
-#> -0.5178805589675903
+#> -0.1574307084083557
 #> [ CPUFloatType{} ]
 #> 
 ```
