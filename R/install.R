@@ -562,6 +562,7 @@ cuda_version_from_cudatoolkit <- function(supported_versions) {
   forced <- if (nzchar(opt)) opt else if (nzchar(cuda_env)) cuda_env else NULL
 
   if (!is.null(forced)) {
+    check_supported_version(forced, supported_versions)
     pkg <- paste0("cuda", forced)
     if (requireNamespace(pkg, quietly = TRUE)) {
       installer_message("Using cudatoolkit R package {.pkg {pkg}} for CUDA version {.strong {forced}}.")
