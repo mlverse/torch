@@ -1,6 +1,36 @@
 .globals <- new.env(parent = emptyenv())
 .globals$lantern_started <- FALSE
 
+load_cudatoolkit_libs <- function() {
+  cuda_ver <- cuda_version_from_cudatoolkit()
+  if (is.null(cuda_ver)) return(invisible(FALSE))
+
+  pkg_name <- paste0("cuda", cuda_ver)
+  if (!requireNamespace(pkg_name, quietly = TRUE)) return(invisible(FALSE))
+
+  lib_path <- getExportedValue(pkg_name, "lib_path")()
+  if (!dir.exists(lib_path)) return(invisible(FALSE))
+
+  if (is_windows()) {
+    # Add the lib path so Windows can find the DLLs
+    Sys.setenv(PATH = paste(lib_path, Sys.getenv("PATH"), sep = ";"))
+    libs <- list.files(lib_path, pattern = "\\.dll$", full.names = TRUE)
+  } else {
+    libs <- list.files(lib_path, pattern = "\\.so(\\.[0-9.]+)?$", full.names = TRUE)
+    # Only load real files, skip symlinks to avoid double-loading
+    libs <- libs[!nzchar(Sys.readlink(libs))]
+  }
+
+  for (lib in libs) {
+    tryCatch(
+      dyn.load(lib, local = FALSE, now = FALSE),
+      error = function(e) NULL
+    )
+  }
+
+  invisible(TRUE)
+}
+
 lantern_start <- function(reload = FALSE) {
   if (!torch_is_installed()) {
     runtime_error("Torch is not installed, please run 'install_torch()'.")
@@ -10,6 +40,7 @@ lantern_start <- function(reload = FALSE) {
     return()
   }
 
+  load_cudatoolkit_libs()
   cpp_lantern_init(file.path(torch_install_path(), "lib"))
 
   log_enabled <- as.integer(Sys.getenv("TORCH_LOG", "0"))

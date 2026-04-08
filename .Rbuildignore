@@ -2,6 +2,7 @@
 ^\.Rproj\.user$
 ^.github.*
 ^.vscode.*
+^\.claude$
 ^.cache.*
 tools/torchgen/.Rbuildignore
 ^README\.Rmd$
