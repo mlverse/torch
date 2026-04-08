@@ -446,12 +446,8 @@ cuda_version <- function() {
     return(NULL)
   }
 
-  if (cuda_env == "cpu") {
-    installer_message("{.envvar CUDA} is set to {.val cpu}.")
-    return("cpu")
-  }
-
   # Steps 1-3: cudatoolkit R package detection
+  # Runs before CUDA=cpu so the conflict check catches CUDA + TORCH_CUDATOOLKIT.
   ver <- cuda_version_from_cudatoolkit()
   if (!is.null(ver)) return(ver)
 
