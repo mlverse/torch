@@ -506,6 +506,14 @@ LANTERN_OPTIONAL_DECLS(string_view)
   HOST_API void * lantern_Layout_strided() {LANTERN_CHECK_LOADED void * ret = _lantern_Layout_strided(); LANTERN_HOST_HANDLER return ret;}
   LANTERN_API void *(LANTERN_PTR _lantern_Layout_sparse)();
   HOST_API void * lantern_Layout_sparse() {LANTERN_CHECK_LOADED void * ret = _lantern_Layout_sparse(); LANTERN_HOST_HANDLER return ret;}
+  LANTERN_API void *(LANTERN_PTR _lantern_Layout_sparse_csr)();
+  HOST_API void * lantern_Layout_sparse_csr() {LANTERN_CHECK_LOADED void * ret = _lantern_Layout_sparse_csr(); LANTERN_HOST_HANDLER return ret;}
+  LANTERN_API void *(LANTERN_PTR _lantern_Layout_sparse_csc)();
+  HOST_API void * lantern_Layout_sparse_csc() {LANTERN_CHECK_LOADED void * ret = _lantern_Layout_sparse_csc(); LANTERN_HOST_HANDLER return ret;}
+  LANTERN_API void *(LANTERN_PTR _lantern_Layout_sparse_bsr)();
+  HOST_API void * lantern_Layout_sparse_bsr() {LANTERN_CHECK_LOADED void * ret = _lantern_Layout_sparse_bsr(); LANTERN_HOST_HANDLER return ret;}
+  LANTERN_API void *(LANTERN_PTR _lantern_Layout_sparse_bsc)();
+  HOST_API void * lantern_Layout_sparse_bsc() {LANTERN_CHECK_LOADED void * ret = _lantern_Layout_sparse_bsc(); LANTERN_HOST_HANDLER return ret;}
   LANTERN_API const char *(LANTERN_PTR _lantern_Layout_string)(void *x);
   HOST_API const char * lantern_Layout_string(void *x) {LANTERN_CHECK_LOADED const char * ret = _lantern_Layout_string(x); LANTERN_HOST_HANDLER return ret;}
   LANTERN_API void *(LANTERN_PTR _lantern_TensorIndex_new)();
@@ -2478,6 +2486,15 @@ HOST_API bool lantern_Tensor_is_sparse (void* x)
 {
   LANTERN_CHECK_LOADED
   bool ret = _lantern_Tensor_is_sparse(x);
+  LANTERN_HOST_HANDLER;
+  return ret;
+}
+
+LANTERN_API bool (LANTERN_PTR _lantern_Tensor_is_sparse_csr) (void* x);
+HOST_API bool lantern_Tensor_is_sparse_csr (void* x)
+{
+  LANTERN_CHECK_LOADED
+  bool ret = _lantern_Tensor_is_sparse_csr(x);
   LANTERN_HOST_HANDLER;
   return ret;
 }
@@ -10992,6 +11009,7 @@ LOAD_SYMBOL(_lantern_cuda_empty_cache);
 LOAD_SYMBOL(_lantern_cuda_record_memory_history);
 LOAD_SYMBOL(_lantern_cuda_memory_snapshot);
 LOAD_SYMBOL(_lantern_Tensor_is_sparse);
+LOAD_SYMBOL(_lantern_Tensor_is_sparse_csr);
 LOAD_SYMBOL(_lantern_IntArrayRef_get);
 LOAD_SYMBOL(_lantern_autograd_zero_grad);
 LOAD_SYMBOL(_lantern_amp_is_autocast_gpu_enabled);

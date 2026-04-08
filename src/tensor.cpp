@@ -444,6 +444,11 @@ bool cpp_method_Tensor_is_sparse (torch::Tensor x) {
 }
 
 // [[Rcpp::export]]
+bool cpp_method_Tensor_is_sparse_csr (torch::Tensor x) {
+  return lantern_Tensor_is_sparse_csr(x.get());
+}
+
+// [[Rcpp::export]]
 void torch_tensor_free(Rcpp::XPtr<torch::Tensor> x) {
   x.release();
 }
