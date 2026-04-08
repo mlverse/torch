@@ -2,17 +2,7 @@
 .globals$lantern_started <- FALSE
 
 load_cudatoolkit_libs <- function() {
-  if (tolower(Sys.getenv("TORCH_CUDATOOLKIT", "")) == "false") return(invisible(FALSE))
-
-  if (is_windows()) {
-    supported <- supported_cuda_versions_windows
-  } else if (is_linux()) {
-    supported <- supported_cuda_versions_linux
-  } else {
-    return(invisible(FALSE))
-  }
-
-  cuda_ver <- cuda_version_from_cudatoolkit(supported)
+  cuda_ver <- cuda_version_from_cudatoolkit()
   if (is.null(cuda_ver)) return(invisible(FALSE))
 
   pkg_name <- paste0("cuda", cuda_ver)

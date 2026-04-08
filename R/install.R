@@ -420,119 +420,143 @@ installation_kind <- function() {
   }
 }
 
+supported_cuda_versions_windows <- c("12.6", "12.8")
+supported_cuda_versions_linux <- c("12.6", "12.8")
+
+# CUDA version detection priority:
+#
+# 1. TORCH_CUDATOOLKIT env var — explicit cudatoolkit R package selection.
+#    Set to a version (e.g. "12.8") to force that package, or "FALSE" to
+#    disable cudatoolkit detection entirely. If CUDA is also set, they must
+#    agree.
+#
+# 2. CUDA env var — if a matching cudatoolkit R package is installed, use it.
+#    If CUDA is set to "cpu", return "cpu" immediately.
+#    Otherwise fall through to system CUDA.
+#
+# 3. Auto-detect installed cudatoolkit R packages (newest first).
+#
+# 4. System CUDA — CUDA_HOME / CUDA_PATH, conventional paths, nvcc on PATH.
 cuda_version <- function() {
-  
-  version <- Sys.getenv("CUDA", "")
-  if (version == "") {
-    version <- NULL
+  cudatoolkit_opt <- Sys.getenv("TORCH_CUDATOOLKIT", "")
+  cuda_env <- Sys.getenv("CUDA", "")
+
+  if (!is_windows() && !is_linux()) {
+    installer_message("Not on Windows or Linux. No CUDA installation supported.")
+    return(NULL)
   }
-  
-  if (!is.null(version)) {
-    installer_message("{.envvar CUDA} has been specified. The CUDA version is {.strong {version}}")
-    return(version)
+
+  if (cuda_env == "cpu") {
+    installer_message("{.envvar CUDA} is set to {.val cpu}.")
+    return("cpu")
   }
-    
+
+  # Steps 1-3: cudatoolkit R package detection
+  ver <- cuda_version_from_cudatoolkit()
+  if (!is.null(ver)) return(ver)
+
+  # If TORCH_CUDATOOLKIT was explicitly set to a version but the package
+  # wasn't found, cuda_version_from_cudatoolkit() returns NULL silently.
+  # Here we error for the install-time path.
+  if (nzchar(cudatoolkit_opt) && tolower(cudatoolkit_opt) != "false") {
+    pkg <- paste0("cuda", cudatoolkit_opt)
+    cli::cli_abort(c(
+      x = "R package {.pkg {pkg}} is not installed.",
+      i = "Install it or unset {.envvar TORCH_CUDATOOLKIT}."
+    ))
+  }
+
+  # If CUDA is set but no cudatoolkit package matched, return it directly.
+  if (nzchar(cuda_env)) {
+    installer_message("{.envvar CUDA}={.val {cuda_env}} has been specified.")
+    return(cuda_env)
+  }
+
+  # Step 4: System CUDA (CUDA_HOME/CUDA_PATH, conventional paths, nvcc)
   if (is_windows()) {
-    return(cuda_version_windows())
+    return(cuda_version_from_system_windows())
   }
-  
-  if (is_linux()) {
-    return(cuda_version_linux())
-  }
-  
-  installer_message("Not on Windows or Linux. No CUDA installation supported.")
-  return(NULL)
+  return(cuda_version_from_system_linux())
 }
 
-cuda_version_linux <- function() {
-
-  cuda_version <- cuda_version_from_cudatoolkit(supported_cuda_versions_linux)
-  if (!is.null(cuda_version)) return(cuda_version)
-
+cuda_version_from_system_linux <- function() {
   cuda_version <- NULL
   cuda_home <- Sys.getenv("CUDA_HOME")
-  
+
   if (nzchar(cuda_home)) {
     installer_message("{.envvar CUDA_HOME}={.path {cuda_home}} is specified.")
   } else {
     installer_message("{.envvar CUDA_HOME} is not specified. Looking in conventional locations.")
   }
-  
+
   # This file no longer exists with cuda >= 11
   if (nzchar(cuda_home)) {
     versions_file <- file.path(cuda_home, "version.txt")
     cuda_version <- cuda_version_from_version_txt_file(versions_file)
   }
-  
+
   # Query nvcc from cuda in cuda_home path.
   if (nzchar(cuda_home) && is.null(cuda_version)) {
     nvcc_path <- file.path(cuda_home, "bin", "nvcc")
     cuda_version <- nvcc_version_from_path(nvcc_path)
   }
-  
+
   # Try to find in conventional location.
   if (is.null(cuda_version)) {
     versions_file <- "/usr/local/cuda/version.txt"
     cuda_version <- cuda_version_from_version_txt_file(versions_file)
   }
-  
+
   # Query nvcc from conventional location
   if (is.null(cuda_version)) {
     cuda_version <- nvcc_version_from_path("/usr/local/cuda/bin/nvcc")
   }
-  
+
   if (is.null(cuda_version)) {
     cuda_version <- nvcc_version_from_path("nvcc")
   }
-  
-  check_supported_cuda_version_linux(cuda_version)
-  
+
+  check_supported_version(cuda_version, supported_cuda_versions_linux)
+
   cuda_version
 }
 
-cuda_version_windows <- function() {
-
-  cuda_version <- cuda_version_from_cudatoolkit(supported_cuda_versions_windows)
-  if (!is.null(cuda_version)) return(cuda_version)
-
+cuda_version_from_system_windows <- function() {
   cuda_version <- NULL
   cuda_path <- Sys.getenv("CUDA_PATH")
-  
+
   if (nzchar(cuda_path)) {
     installer_message(c(
-      "{.envvar CUDA_PATH}={.path {cuda_path}}.", 
+      "{.envvar CUDA_PATH}={.path {cuda_path}}.",
       "Trying to find CUDA in this path."
     ))
   } else {
     installer_message(c(
-      "{.envvar CUDA_PATH} is not specified.", 
+      "{.envvar CUDA_PATH} is not specified.",
       "Searching for installation in conventional locations."
     ))
   }
-  
+
   if (nzchar(cuda_path)) {
     versions_file <- file.path(cuda_path, "version.txt")
     cuda_version <- cuda_version_from_version_txt_file(versions_file)
   }
-  
+
   # Query nvcc from cuda in cuda_path.
   if (nzchar(cuda_path) && is.null(cuda_version)) {
     nvcc_path <- file.path(cuda_path, "bin", "nvcc.exe")
     cuda_version <- nvcc_version_from_path(nvcc_path)
   }
-  
+
   if (is.null(cuda_version)) {
     installer_message("Trying to use the nvcc version that might be on your path.")
     cuda_version <- nvcc_version_from_path("nvcc")
   }
-  
-  check_supported_cuda_version_windows(cuda_version)
-  
+
+  check_supported_version(cuda_version, supported_cuda_versions_windows)
+
   cuda_version
 }
-
-supported_cuda_versions_windows <- c("12.6", "12.8")
-supported_cuda_versions_linux <- c("12.6", "12.8")
 
 check_supported_cuda_version_windows <- function(version) {
   check_supported_version(version, supported_cuda_versions_windows)
@@ -542,50 +566,53 @@ check_supported_cuda_version_linux <- function(version) {
   check_supported_version(version, supported_cuda_versions_linux)
 }
 
-cuda_version_from_cudatoolkit <- function(supported_versions) {
-  opt <- Sys.getenv("TORCH_CUDATOOLKIT", "")
+# Detect CUDA version from cudatoolkit R packages only (no system probing).
+# Used at startup by load_cudatoolkit_libs() and as steps 1-3 in cuda_version().
+# Returns a version string or NULL.
+cuda_version_from_cudatoolkit <- function() {
+  cudatoolkit_opt <- Sys.getenv("TORCH_CUDATOOLKIT", "")
   cuda_env <- Sys.getenv("CUDA", "")
 
-  if (nzchar(opt) && nzchar(cuda_env)) {
-    cli::cli_abort(c(
-      x = "Both {.envvar CUDA} and {.envvar TORCH_CUDATOOLKIT} are set.",
-      i = "Set only one of them."
-    ))
-  }
-
-  if (tolower(opt) == "false") {
-    installer_message("{.envvar TORCH_CUDATOOLKIT}={.val FALSE}. Skipping cudatoolkit R package detection.")
+  if (is_windows()) {
+    supported <- supported_cuda_versions_windows
+  } else if (is_linux()) {
+    supported <- supported_cuda_versions_linux
+  } else {
     return(NULL)
   }
 
-  # Use TORCH_CUDATOOLKIT or CUDA to force a specific version
-  forced <- if (nzchar(opt)) opt else if (nzchar(cuda_env)) cuda_env else NULL
+  # TORCH_CUDATOOLKIT=FALSE disables cudatoolkit detection
+  if (identical(tolower(cudatoolkit_opt), "false")) return(NULL)
 
-  if (!is.null(forced)) {
-    check_supported_version(forced, supported_versions)
-    pkg <- paste0("cuda", forced)
-    if (requireNamespace(pkg, quietly = TRUE)) {
-      installer_message("Using cudatoolkit R package {.pkg {pkg}} for CUDA version {.strong {forced}}.")
-      return(forced)
-    }
-    # If TORCH_CUDATOOLKIT is set, error. If CUDA is set, just return NULL
-    # so the caller falls through to system CUDA detection.
-    if (nzchar(opt)) {
+  # TORCH_CUDATOOLKIT=<version> — explicit selection
+  if (nzchar(cudatoolkit_opt)) {
+    if (nzchar(cuda_env) && cudatoolkit_opt != cuda_env) {
       cli::cli_abort(c(
-        x = "R package {.pkg {pkg}} is not installed.",
-        i = "Install it or unset {.envvar TORCH_CUDATOOLKIT}."
+        x = "{.envvar TORCH_CUDATOOLKIT}={.val {cudatoolkit_opt}} conflicts with {.envvar CUDA}={.val {cuda_env}}.",
+        i = "They must agree or only one should be set."
       ))
     }
+    check_supported_version(cudatoolkit_opt, supported)
+    pkg <- paste0("cuda", cudatoolkit_opt)
+    if (requireNamespace(pkg, quietly = TRUE)) return(cudatoolkit_opt)
+    # At startup (load_cudatoolkit_libs) we just return NULL silently.
+    # cuda_version() will error separately if needed.
     return(NULL)
   }
 
-  for (version in rev(supported_versions)) {
-    pkg <- paste0("cuda", version)
-    if (requireNamespace(pkg, quietly = TRUE)) {
-      installer_message("Found installed R package {.pkg {pkg}}. Using CUDA version {.strong {version}}.")
-      return(version)
-    }
+  # CUDA=<version> — look for matching cudatoolkit package
+  if (nzchar(cuda_env) && cuda_env != "cpu") {
+    pkg <- paste0("cuda", cuda_env)
+    if (requireNamespace(pkg, quietly = TRUE)) return(cuda_env)
+    return(NULL)
   }
+
+  # Auto-detect installed cudatoolkit R packages (newest first)
+  for (version in rev(supported)) {
+    pkg <- paste0("cuda", version)
+    if (requireNamespace(pkg, quietly = TRUE)) return(version)
+  }
+
   NULL
 }
 
