@@ -1,3 +1,4 @@
+#include <lantern/lantern.h>
 #include <torch.h>
 #include <thread>
 #include "translate_messages.h"
