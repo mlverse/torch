@@ -21,9 +21,15 @@ load_cudatoolkit_libs <- function() {
   lib_path <- getExportedValue(pkg_name, "lib_path")()
   if (!dir.exists(lib_path)) return(invisible(FALSE))
 
-  libs <- list.files(lib_path, pattern = "\\.so(\\.[0-9.]+)?$", full.names = TRUE)
-  # Only load real files, skip symlinks to avoid double-loading
-  libs <- libs[!nzchar(Sys.readlink(libs))]
+  if (is_windows()) {
+    # Add the lib path so Windows can find the DLLs
+    Sys.setenv(PATH = paste(lib_path, Sys.getenv("PATH"), sep = ";"))
+    libs <- list.files(lib_path, pattern = "\\.dll$", full.names = TRUE)
+  } else {
+    libs <- list.files(lib_path, pattern = "\\.so(\\.[0-9.]+)?$", full.names = TRUE)
+    # Only load real files, skip symlinks to avoid double-loading
+    libs <- libs[!nzchar(Sys.readlink(libs))]
+  }
 
   for (lib in libs) {
     tryCatch(
