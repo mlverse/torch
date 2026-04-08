@@ -43,18 +43,4 @@ y = torch_tensor(c(4, 5, 6))
 out = torch_meshgrid(list(x, y))
 out
 }
-#> [[1]]
-#> torch_tensor
-#>  1  1  1
-#>  2  2  2
-#>  3  3  3
-#> [ CPUFloatType{3,3} ]
-#> 
-#> [[2]]
-#> torch_tensor
-#>  4  5  6
-#>  4  5  6
-#>  4  5  6
-#> [ CPUFloatType{3,3} ]
-#> 
 ```

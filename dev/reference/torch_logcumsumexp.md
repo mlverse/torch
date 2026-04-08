@@ -37,16 +37,4 @@ if (torch_is_installed()) {
 a <- torch_randn(c(10))
 torch_logcumsumexp(a, dim=1)
 }
-#> torch_tensor
-#> -2.7548
-#>  0.1235
-#>  1.0988
-#>  1.2234
-#>  1.4055
-#>  1.9775
-#>  2.0614
-#>  2.1300
-#>  2.2654
-#>  2.3657
-#> [ CPUFloatType{10} ]
 ```

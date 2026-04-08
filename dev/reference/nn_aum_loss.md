@@ -27,10 +27,12 @@ https://jmlr.org/papers/volume24/21-0751/21-0751.pdf
 
 ``` r
 if (torch_is_installed()) {
+if (FALSE) { # torch_is_installed()
 loss <- nn_aum_loss()
 input <- torch_randn(4, 6, requires_grad = TRUE)
 target <- input > 1.5
 output <- loss(input, target)
 output$backward()
+}
 }
 ```

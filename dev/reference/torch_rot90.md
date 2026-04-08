@@ -40,13 +40,4 @@ x <- torch_arange(1, 8)$view(c(2, 2, 2))
 x
 torch_rot90(x, 1, c(1, 2))
 }
-#> torch_tensor
-#> (1,.,.) = 
-#>  3  4
-#>   7  8
-#> 
-#> (2,.,.) = 
-#>  1  2
-#>   5  6
-#> [ CPUFloatType{2,2,2} ]
 ```

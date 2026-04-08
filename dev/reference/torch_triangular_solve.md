@@ -66,16 +66,4 @@ b = torch_randn(c(2, 3))
 b
 torch_triangular_solve(b, A)
 }
-#> [[1]]
-#> torch_tensor
-#> -18.9728   2.6513   9.6761
-#>   2.7340  -0.0511  -1.3928
-#> [ CPUFloatType{2,3} ]
-#> 
-#> [[2]]
-#> torch_tensor
-#>  0.1895  1.6814
-#>  0.0000 -0.4896
-#> [ CPUFloatType{2,2} ]
-#> 
 ```

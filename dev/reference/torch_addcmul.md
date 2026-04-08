@@ -48,9 +48,4 @@ t1 = torch_randn(c(3, 1))
 t2 = torch_randn(c(1, 3))
 torch_addcmul(t, t1, t2, 0.1)
 }
-#> torch_tensor
-#>  0.5756  0.9289  1.2292
-#>  0.5633  1.1644  1.2184
-#>  0.5677  1.0809  1.2222
-#> [ CPUFloatType{3,3} ]
 ```

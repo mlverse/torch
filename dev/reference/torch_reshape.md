@@ -41,10 +41,4 @@ torch_reshape(a, list(2, 2))
 b <- torch_tensor(matrix(c(0, 1, 2, 3), ncol = 2, byrow=TRUE))
 torch_reshape(b, list(-1))
 }
-#> torch_tensor
-#>  0
-#>  1
-#>  2
-#>  3
-#> [ CPUFloatType{4} ]
 ```

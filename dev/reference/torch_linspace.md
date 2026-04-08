@@ -72,7 +72,4 @@ torch_linspace(-10, 10, steps=5)
 torch_linspace(start=-10, end=10, steps=5)
 torch_linspace(start=-10, end=10, steps=1)
 }
-#> torch_tensor
-#> -10
-#> [ CPUFloatType{1} ]
 ```

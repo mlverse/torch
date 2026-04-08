@@ -76,14 +76,4 @@ loss <- loss$mean()
 o <- autograd_grad(loss, list(w, b))
 o
 }
-#> [[1]]
-#> torch_tensor
-#> -0.9935
-#> [ CPUFloatType{1} ]
-#> 
-#> [[2]]
-#> torch_tensor
-#> -1.6206
-#> [ CPUFloatType{1} ]
-#> 
 ```

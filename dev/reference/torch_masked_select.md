@@ -42,9 +42,4 @@ mask = x$ge(0.5)
 mask
 torch_masked_select(x, mask)
 }
-#> torch_tensor
-#>  0.5223
-#>  0.6920
-#>  0.8083
-#> [ CPUFloatType{3} ]
 ```

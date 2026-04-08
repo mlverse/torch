@@ -86,15 +86,4 @@ A <- torch_randn(2, 2)
 out <- linalg_cholesky_ex(A)
 out
 }
-#> $L
-#> torch_tensor
-#> -0.2178  0.0000
-#> -0.7362 -0.9615
-#> [ CPUFloatType{2,2} ]
-#> 
-#> $info
-#> torch_tensor
-#> 1
-#> [ CPUIntType{} ]
-#> 
 ```

@@ -39,11 +39,4 @@ a <- torch_rand(5)
 a
 torch_logit(a, eps=1e-6)
 }
-#> torch_tensor
-#>  4.0949
-#> -2.8682
-#>  0.2537
-#>  1.3749
-#> -0.5914
-#> [ CPUFloatType{5} ]
 ```

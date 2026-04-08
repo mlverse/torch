@@ -32,5 +32,4 @@ m <- nn_sequential(
 output <- m(input)
 output$size()
 }
-#> [1] 2 2 5 5
 ```

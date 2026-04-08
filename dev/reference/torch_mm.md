@@ -43,8 +43,4 @@ mat1 = torch_randn(c(2, 3))
 mat2 = torch_randn(c(3, 3))
 torch_mm(mat1, mat2)
 }
-#> torch_tensor
-#> -0.6337  1.5085  0.3024
-#> -1.0748  1.4989 -3.3311
-#> [ CPUFloatType{2,3} ]
 ```

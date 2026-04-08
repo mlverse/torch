@@ -66,10 +66,4 @@ a = torch_randn(c(4))
 a
 torch_clamp(a, max=0.5)
 }
-#> torch_tensor
-#> -0.5586
-#> -0.2229
-#> -0.4296
-#> -0.1155
-#> [ CPUFloatType{4} ]
 ```

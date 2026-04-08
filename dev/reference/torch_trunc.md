@@ -28,10 +28,4 @@ a = torch_randn(c(4))
 a
 torch_trunc(a)
 }
-#> torch_tensor
-#> -0
-#> -0
-#> -1
-#>  0
-#> [ CPUFloatType{4} ]
 ```

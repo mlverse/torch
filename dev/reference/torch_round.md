@@ -34,10 +34,4 @@ a = torch_randn(c(4))
 a
 torch_round(a)
 }
-#> torch_tensor
-#>  1
-#> -2
-#>  1
-#>  1
-#> [ CPUFloatType{4} ]
 ```

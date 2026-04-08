@@ -62,5 +62,4 @@ input2 <- torch_randn(128, 30)
 output <- m(input1, input2)
 print(output$size())
 }
-#> [1] 128  50
 ```

@@ -45,10 +45,4 @@ end
 torch_lerp(start, end, 0.5)
 torch_lerp(start, end, torch_full_like(start, 0.5))
 }
-#> torch_tensor
-#>  5.5000
-#>  6.0000
-#>  6.5000
-#>  7.0000
-#> [ CPUFloatType{4} ]
 ```

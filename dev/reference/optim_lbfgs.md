@@ -115,8 +115,4 @@ for (i in 1:num_iterations) {
 rosenbrock(x)
 
 }
-#> torch_tensor
-#> 1e-12 *
-#>  4.5475
-#> [ CPUFloatType{1} ][ grad_fn = <AddBackward0> ]
 ```

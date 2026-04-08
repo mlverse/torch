@@ -37,11 +37,4 @@ if (torch_is_installed()) {
 torch_remainder(torch_tensor(c(-3., -2, -1, 1, 2, 3)), 2)
 torch_remainder(torch_tensor(c(1., 2, 3, 4, 5)), 1.5)
 }
-#> torch_tensor
-#>  1.0000
-#>  0.5000
-#>  0.0000
-#>  1.0000
-#>  0.5000
-#> [ CPUFloatType{5} ]
 ```

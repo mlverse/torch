@@ -45,10 +45,4 @@ torch_vander(x)
 torch_vander(x, N=3)
 torch_vander(x, N=3, increasing=TRUE)
 }
-#> torch_tensor
-#>   1   1   1
-#>   1   2   4
-#>   1   3   9
-#>   1   5  25
-#> [ CPUFloatType{4,3} ]
 ```

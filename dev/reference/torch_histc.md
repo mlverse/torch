@@ -41,10 +41,4 @@ if (torch_is_installed()) {
 
 torch_histc(torch_tensor(c(1., 2, 1)), bins=4, min=0, max=3)
 }
-#> torch_tensor
-#>  0
-#>  2
-#>  1
-#>  0
-#> [ CPUFloatType{4} ]
 ```

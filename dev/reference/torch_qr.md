@@ -54,9 +54,4 @@ r = out[[2]]
 torch_mm(q, r)$round()
 torch_mm(q$t(), q)$round()
 }
-#> torch_tensor
-#>  1 -0  0
-#> -0  1  0
-#>  0  0  1
-#> [ CPUFloatType{3,3} ]
 ```

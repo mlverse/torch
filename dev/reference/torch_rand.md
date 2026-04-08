@@ -66,8 +66,4 @@ if (torch_is_installed()) {
 torch_rand(4)
 torch_rand(c(2, 3))
 }
-#> torch_tensor
-#>  0.9510  0.4747  0.3428
-#>  0.9742  0.4210  0.5131
-#> [ CPUFloatType{2,3} ]
 ```

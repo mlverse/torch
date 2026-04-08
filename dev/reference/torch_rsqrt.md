@@ -30,10 +30,4 @@ a = torch_randn(c(4))
 a
 torch_rsqrt(a)
 }
-#> torch_tensor
-#>   0.9798
-#>  15.1796
-#>   1.1617
-#>   2.4674
-#> [ CPUFloatType{4} ]
 ```

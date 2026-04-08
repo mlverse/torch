@@ -56,8 +56,4 @@ t
 t = torch_as_strided(x, list(2, 2), list(1, 2), 1)
 t
 }
-#> torch_tensor
-#> -0.8948 -1.0811
-#> -0.0626  0.2733
-#> [ CPUFloatType{2,2} ]
 ```

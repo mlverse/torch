@@ -113,9 +113,9 @@ To install the GPU version of `torch` on linux you must verify that:
 - You have a NVIDIA CUDA compatible GPU. You can find if you have a CUDA
   compatible GPU [here](https://developer.nvidia.com/cuda-gpus#compute).
 
-- You have correctly installed the NVIDIA CUDA Toolkit versions 12.6 or
-  12.8, follow the instructions
-  [here](https://docs.nvidia.com/cuda/archive/12.8.0/).
+- You have correctly installed the NVIDIA CUDA Toolkit versions 12.6,
+  12.8, or 12.9, follow the instructions
+  [here](https://docs.nvidia.com/cuda/).
 
 - You have installed cuDNN (a version compatible with your CUDA
   version). Follow the installation instructions available
@@ -167,6 +167,51 @@ options(repos = c(
 ))
 install.packages("torch")
 ```
+
+## Using cudatoolkit R packages
+
+Instead of installing the full CUDA toolkit on your system, you can use
+the `cuda12.6`, `cuda12.8`, or `cuda12.9` R packages to provide the
+necessary CUDA runtime libraries. These packages bundle the CUDA shared
+libraries so torch can use GPU acceleration without a system-wide CUDA
+installation.
+
+``` r
+# Install the cudatoolkit R package for your desired CUDA version
+install.packages("cuda12.8", repos = c("https://mlverse.r-universe.dev", "https://cloud.r-project.org"))
+# Then install torch as usual
+install.packages("torch")
+```
+
+When torch starts, it automatically detects installed cudatoolkit R
+packages and uses them to provide CUDA libraries. If multiple versions
+are installed, the newest supported version is preferred.
+
+### Environment variables
+
+The `TORCH_CUDATOOLKIT` environment variable controls cudatoolkit R
+package detection:
+
+- **Not set** (default): torch auto-detects installed cudatoolkit R
+  packages.
+- **Set to a version** (e.g. `TORCH_CUDATOOLKIT=12.8`): forces torch to
+  use that specific cudatoolkit R package. Errors if the package is not
+  installed. If `CUDA` is also set, the two values must agree.
+- **Set to `FALSE`**: disables cudatoolkit R package detection entirely.
+  torch will only use system CUDA (via `CUDA_HOME`, `CUDA_PATH`, or
+  `nvcc`).
+
+The full CUDA version detection priority is:
+
+1.  `TORCH_CUDATOOLKIT` — explicit cudatoolkit R package selection.
+2.  `CUDA` — if a matching cudatoolkit R package is installed, use it;
+    otherwise use the value directly for system CUDA.
+3.  Auto-detect installed cudatoolkit R packages.
+4.  System CUDA — `CUDA_HOME` / `CUDA_PATH`, conventional paths, `nvcc`
+    on PATH.
+
+When a cudatoolkit R package is found (via any of steps 1-3), system
+CUDA detection is skipped entirely.
 
 ## Troubleshooting
 

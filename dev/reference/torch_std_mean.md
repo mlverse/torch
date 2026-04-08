@@ -64,20 +64,4 @@ a = torch_randn(c(4, 4))
 a
 torch_std_mean(a, 1)
 }
-#> [[1]]
-#> torch_tensor
-#>  0.9806
-#>  1.0791
-#>  1.0329
-#>  0.9386
-#> [ CPUFloatType{4} ]
-#> 
-#> [[2]]
-#> torch_tensor
-#> -0.3779
-#>  0.5736
-#>  0.1232
-#> -0.5242
-#> [ CPUFloatType{4} ]
-#> 
 ```

@@ -52,5 +52,4 @@ input <- torch_randn(128, 20)
 output <- m(input)
 print(output$size())
 }
-#> [1] 128  30
 ```

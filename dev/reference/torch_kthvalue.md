@@ -54,14 +54,4 @@ x <- torch_arange(1,6)$resize_(c(2,3))
 x
 torch_kthvalue(x, 2, 1, TRUE)
 }
-#> [[1]]
-#> torch_tensor
-#>  4  5  6
-#> [ CPUFloatType{1,3} ]
-#> 
-#> [[2]]
-#> torch_tensor
-#>  1  1  1
-#> [ CPULongType{1,3} ]
-#> 
 ```

@@ -54,22 +54,4 @@ a = torch_randn(c(4, 5))
 a
 torch_median(a, 1)
 }
-#> [[1]]
-#> torch_tensor
-#> -0.5459
-#> -0.8157
-#> -1.6129
-#> -0.8576
-#>  0.2113
-#> [ CPUFloatType{5} ]
-#> 
-#> [[2]]
-#> torch_tensor
-#>  3
-#>  2
-#>  1
-#>  2
-#>  2
-#> [ CPULongType{5} ]
-#> 
 ```

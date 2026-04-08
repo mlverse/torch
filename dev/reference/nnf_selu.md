@@ -31,5 +31,4 @@ y <- nnf_selu(x)
 nnf_selu_(x)
 torch_equal(x, y)
 }
-#> [1] TRUE
 ```

@@ -38,10 +38,4 @@ x = torch_tensor(c(1, 2, 3, 4))
 torch_unsqueeze(x, 1)
 torch_unsqueeze(x, 2)
 }
-#> torch_tensor
-#>  1
-#>  2
-#>  3
-#>  4
-#> [ CPUFloatType{4,1} ]
 ```

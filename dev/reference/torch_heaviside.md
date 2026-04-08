@@ -38,9 +38,4 @@ torch_heaviside(input, values)
 values <- torch_tensor(c(1.2, -2.0, 3.5))
 torch_heaviside(input, values)
 }
-#> torch_tensor
-#>  0
-#> -2
-#>  1
-#> [ CPUFloatType{3} ]
 ```

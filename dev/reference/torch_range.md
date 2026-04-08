@@ -80,15 +80,4 @@ if (torch_is_installed()) {
 torch_range(1, 4)
 torch_range(1, 4, 0.5)
 }
-#> Warning: This function is deprecated in favor of torch_arange.
-#> Warning: This function is deprecated in favor of torch_arange.
-#> torch_tensor
-#>  1.0000
-#>  1.5000
-#>  2.0000
-#>  2.5000
-#>  3.0000
-#>  3.5000
-#>  4.0000
-#> [ CPUFloatType{7} ]
 ```

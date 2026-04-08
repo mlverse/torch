@@ -35,11 +35,4 @@ a = torch_randn(c(5))
 a
 torch_log1p(a)
 }
-#> torch_tensor
-#>  0.1662
-#>    -nan
-#>  0.1560
-#>  0.0012
-#> -0.1938
-#> [ CPUFloatType{5} ]
 ```

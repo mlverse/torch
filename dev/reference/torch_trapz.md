@@ -50,8 +50,4 @@ x = torch_tensor(matrix(c(1, 3, 4, 1, 2, 3), ncol = 3, byrow=TRUE))
 torch_trapz(y, x = x)
 
 }
-#> torch_tensor
-#>  2.0151
-#> -1.8468
-#> [ CPUFloatType{2} ]
 ```

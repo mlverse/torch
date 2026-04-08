@@ -43,10 +43,4 @@ torch_roll(x, 1, 1)
 torch_roll(x, -1, 1)
 torch_roll(x, shifts=list(2, 1), dims=list(1, 2))
 }
-#> torch_tensor
-#>  6  5
-#>  8  7
-#>  2  1
-#>  4  3
-#> [ CPUFloatType{4,2} ]
 ```

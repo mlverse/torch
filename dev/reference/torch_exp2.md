@@ -27,10 +27,4 @@ if (torch_is_installed()) {
 
 torch_exp2(torch_tensor(c(0, log2(2.), 3, 4)))
 }
-#> torch_tensor
-#>   1
-#>   2
-#>   8
-#>  16
-#> [ CPUFloatType{4} ]
 ```

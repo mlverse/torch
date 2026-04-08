@@ -74,8 +74,4 @@ if (torch_is_installed()) {
 
 torch_full(list(2, 3), 3.141592)
 }
-#> torch_tensor
-#>  3.1416  3.1416  3.1416
-#>  3.1416  3.1416  3.1416
-#> [ CPUFloatType{2,3} ]
 ```

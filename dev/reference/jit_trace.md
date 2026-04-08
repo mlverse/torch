@@ -102,9 +102,4 @@ input <- torch_tensor(c(-1, 0, 1))
 tr_fn <- jit_trace(fn, input)
 tr_fn(input)
 }
-#> torch_tensor
-#>  0
-#>  0
-#>  1
-#> [ CPUFloatType{3} ]
 ```

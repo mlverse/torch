@@ -106,7 +106,4 @@ if (torch_is_installed()) {
 a <- torch_eye(10)
 linalg_matrix_rank(a)
 }
-#> torch_tensor
-#> 10
-#> [ CPULongType{} ]
 ```

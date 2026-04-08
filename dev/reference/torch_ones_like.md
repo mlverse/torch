@@ -66,8 +66,4 @@ if (torch_is_installed()) {
 input = torch_empty(c(2, 3))
 torch_ones_like(input)
 }
-#> torch_tensor
-#>  1  1  1
-#>  1  1  1
-#> [ CPUFloatType{2,3} ]
 ```

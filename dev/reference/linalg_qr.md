@@ -92,9 +92,4 @@ qr <- linalg_qr(a)
 torch_mm(qr[[1]], qr[[2]])$round()
 torch_mm(qr[[1]]$t(), qr[[1]])$round()
 }
-#> torch_tensor
-#>  1 -0  0
-#> -0  1  0
-#>  0  0  1
-#> [ CPUFloatType{3,3} ]
 ```

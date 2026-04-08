@@ -54,10 +54,4 @@ a <- torch_randn(c(4, 4))
 a
 torch_amin(a, 1)
 }
-#> torch_tensor
-#> -1.6256
-#> -0.5671
-#> -0.3116
-#> -0.7956
-#> [ CPUFloatType{4} ]
 ```

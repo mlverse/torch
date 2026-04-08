@@ -50,10 +50,4 @@ a = torch_randn(c(4, 4))
 a
 torch_argmax(a, dim=1)
 }
-#> torch_tensor
-#>  4
-#>  1
-#>  2
-#>  3
-#> [ CPULongType{4} ]
 ```

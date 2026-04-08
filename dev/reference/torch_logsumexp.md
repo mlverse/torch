@@ -47,9 +47,4 @@ if (torch_is_installed()) {
 a = torch_randn(c(3, 3))
 torch_logsumexp(a, 1)
 }
-#> torch_tensor
-#>  1.1211
-#>  1.2798
-#>  0.8486
-#> [ CPUFloatType{3} ]
 ```

@@ -41,9 +41,4 @@ torch_logaddexp(torch_tensor(c(-1.0)), torch_tensor(c(-1.0, -2, -3)))
 torch_logaddexp(torch_tensor(c(-100.0, -200, -300)), torch_tensor(c(-1.0, -2, -3)))
 torch_logaddexp(torch_tensor(c(1.0, 2000, 30000)), torch_tensor(c(-1.0, -2, -3)))
 }
-#> torch_tensor
-#>      1.1269
-#>   2000.0000
-#>  30000.0000
-#> [ CPUFloatType{3} ]
 ```

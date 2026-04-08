@@ -41,5 +41,4 @@ torch_device("cuda") # current cuda device
 torch_device("cuda", 0)
 torch_device("cpu", 0)
 }
-#> torch_device(type='cpu', index=0) 
 ```

@@ -109,7 +109,4 @@ b
 linalg_norm(a)
 linalg_norm(b)
 }
-#> torch_tensor
-#> 7.745966911315918
-#> [ CPUFloatType{} ]
 ```

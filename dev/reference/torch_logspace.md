@@ -78,7 +78,4 @@ torch_logspace(start=0.1, end=1.0, steps=5)
 torch_logspace(start=0.1, end=1.0, steps=1)
 torch_logspace(start=2, end=2, steps=1, base=2)
 }
-#> torch_tensor
-#>  4
-#> [ CPUFloatType{1} ]
 ```

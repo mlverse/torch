@@ -52,8 +52,4 @@ if (torch_is_installed()) {
 torch_isclose(torch_tensor(c(1., 2, 3)), torch_tensor(c(1 + 1e-10, 3, 4)))
 torch_isclose(torch_tensor(c(Inf, 4)), torch_tensor(c(Inf, 6)), rtol=.5)
 }
-#> torch_tensor
-#>  1
-#>  1
-#> [ CPUBoolType{2} ]
 ```

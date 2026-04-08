@@ -28,9 +28,4 @@ if (torch_is_installed()) {
 w <- torch_empty(3, 5)
 nn_init_xavier_uniform_(w)
 }
-#> torch_tensor
-#>  0.1609  0.1458  0.3774  0.4995 -0.6493
-#> -0.0674 -0.4849  0.1413  0.6953  0.4486
-#> -0.7175  0.8631 -0.3310  0.2922  0.3126
-#> [ CPUFloatType{3,5} ]
 ```

@@ -27,10 +27,4 @@ a = torch_randn(c(4))
 a
 torch_square(a)
 }
-#> torch_tensor
-#>  0.1940
-#>  0.2294
-#>  0.0026
-#>  2.8926
-#> [ CPUFloatType{4} ]
 ```

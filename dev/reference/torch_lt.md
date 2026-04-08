@@ -33,8 +33,4 @@ if (torch_is_installed()) {
 torch_lt(torch_tensor(matrix(1:4, ncol = 2, byrow=TRUE)), 
          torch_tensor(matrix(c(1,1,4,4), ncol = 2, byrow=TRUE)))
 }
-#> torch_tensor
-#>  0  0
-#>  1  0
-#> [ CPUBoolType{2,2} ]
 ```

@@ -50,9 +50,4 @@ indices = torch_tensor(c(1, 3), dtype = torch_int64())
 torch_index_select(x, 1, indices)
 torch_index_select(x, 2, indices)
 }
-#> torch_tensor
-#> -0.6226 -0.1648
-#>  1.3871  0.0558
-#>  1.5879  0.6196
-#> [ CPUFloatType{3,2} ]
 ```

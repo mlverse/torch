@@ -71,5 +71,4 @@ if (torch_is_installed()) {
 # inputs = torch_randn(c(20, 16, 50, 10, 20))
 # nnf_conv3d(inputs, filters)
 }
-#> NULL
 ```

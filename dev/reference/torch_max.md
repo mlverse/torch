@@ -86,10 +86,4 @@ b = torch_randn(c(4))
 b
 torch_max(a, other = b)
 }
-#> torch_tensor
-#>  0.2542
-#>  0.4709
-#>  0.3672
-#>  0.7548
-#> [ CPUFloatType{4} ]
 ```

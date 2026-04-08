@@ -87,5 +87,4 @@ Atensorinv <- linalg_tensorinv(A, 2)
 Ainv <- linalg_inv(A)
 torch_allclose(Atensorinv, Ainv)
 }
-#> [1] TRUE
 ```

@@ -88,5 +88,4 @@ b <- torch_randn(3)
 x <- linalg_solve(A, b)
 torch_allclose(torch_matmul(A, x), b)
 }
-#> [1] TRUE
 ```

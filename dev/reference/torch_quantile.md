@@ -69,5 +69,4 @@ q <- torch_tensor(c(0.25, 0.5, 0.75))
 torch_quantile(a, q, dim=1, keepdim=TRUE)
 torch_quantile(a, q, dim=1, keepdim=TRUE)$shape
 }
-#> [1] 3 1 3
 ```

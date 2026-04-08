@@ -37,9 +37,4 @@ a <- torch_tensor(c(1, 2, -1))
 b <- torch_tensor(c(3, 0, 4))
 torch_maximum(a, b)
 }
-#> torch_tensor
-#>  3
-#>  2
-#>  4
-#> [ CPUFloatType{3} ]
 ```

@@ -29,12 +29,4 @@ if (torch_is_installed()) {
 
 torch_i0(torch_arange(start = 0, end = 5, dtype=torch_float32()))
 }
-#> torch_tensor
-#>   1.0000
-#>   1.2661
-#>   2.2796
-#>   4.8808
-#>  11.3019
-#>  27.2399
-#> [ CPUFloatType{6} ]
 ```

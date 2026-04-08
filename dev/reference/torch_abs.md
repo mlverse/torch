@@ -27,9 +27,4 @@ if (torch_is_installed()) {
 
 torch_abs(torch_tensor(c(-1, -2, 3)))
 }
-#> torch_tensor
-#>  1
-#>  2
-#>  3
-#> [ CPUFloatType{3} ]
 ```

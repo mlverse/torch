@@ -51,8 +51,4 @@ m <- nn_rrelu(0.1, 0.3)
 input <- torch_randn(2)
 m(input)
 }
-#> torch_tensor
-#>  1.4809
-#>  1.6251
-#> [ CPUFloatType{2} ]
 ```

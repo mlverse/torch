@@ -45,26 +45,4 @@ try({
   })
 })
 }
-#> Error : one of the variables needed for gradient computation has been modified by an inplace operation: [CPUFloatType [1]] is at version 1; expected version 0 instead. Hint: enable anomaly detection to find the operation that failed to compute its gradient, with torch.autograd.set_detect_anomaly(True).
-#> Exception raised from unpack at /Users/runner/work/libtorch-mac-m1/libtorch-mac-m1/pytorch/torch/csrc/autograd/saved_variable.cpp:194 (most recent call first):
-#> frame #0: c10::Error::Error(c10::SourceLocation, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char>>) + 56 (0x1043d2b74 in libc10.dylib)
-#> frame #1: c10::detail::torchCheckFail(char const*, char const*, unsigned int, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char>> const&) + 120 (0x1043d00e8 in libc10.dylib)
-#> frame #2: torch::autograd::SavedVariable::unpack(std::__1::shared_ptr<torch::autograd::Node>) const + 2300 (0x118a17644 in libtorch_cpu.dylib)
-#> frame #3: torch::autograd::generated::PowBackward1::apply(std::__1::vector<at::Tensor, std::__1::allocator<at::Tensor>>&&) + 60 (0x11795a3b4 in libtorch_cpu.dylib)
-#> frame #4: torch::autograd::Node::operator()(std::__1::vector<at::Tensor, std::__1::allocator<at::Tensor>>&&) + 128 (0x1189e4fdc in libtorch_cpu.dylib)
-#> frame #5: torch::autograd::Engine::evaluate_function(std::__1::shared_ptr<torch::autograd::GraphTask>&, torch::autograd::Node*, torch::autograd::InputBuffer&, std::__1::shared_ptr<torch::autograd::ReadyQueue> const&) + 3196 (0x1189dd1f0 in libtorch_cpu.dylib)
-#> frame #6: torch::autograd::Engine::thread_main(std::__1::shared_ptr<torch::autograd::GraphTask> const&) + 844 (0x1189dbe8c in libtorch_cpu.dylib)
-#> frame #7: torch::autograd::Engine::execute_with_graph_task(std::__1::shared_ptr<torch::autograd::GraphTask> const&, std::__1::shared_ptr<torch::autograd::Node>, torch::autograd::InputBuffer&&) + 660 (0x1189e3b54 in libtorch_cpu.dylib)
-#> frame #8: torch::autograd::Engine::execute(std::__1::vector<torch::autograd::Edge, std::__1::allocator<torch::autograd::Edge>> const&, std::__1::vector<at::Tensor, std::__1::allocator<at::Tensor>> const&, bool, bool, bool, std::__1::vector<torch::autograd::Edge, std::__1::allocator<torch::autograd::Edge>> const&) + 2088 (0x1189e299c in libtorch_cpu.dylib)
-#> frame #9: torch::autograd::run_backward(std::__1::vector<at::Tensor, std::__1::allocator<at::Tensor>> const&, std::__1::vector<at::Tensor, std::__1::allocator<at::Tensor>> const&, bool, bool, std::__1::vector<at::Tensor, std::__1::allocator<at::Tensor>> const&, bool, bool) + 832 (0x1189ca694 in libtorch_cpu.dylib)
-#> frame #10: torch::autograd::backward(std::__1::vector<at::Tensor, std::__1::allocator<at::Tensor>> const&, std::__1::vector<at::Tensor, std::__1::allocator<at::Tensor>> const&, std::__1::optional<bool>, bool, std::__1::vector<at::Tensor, std::__1::allocator<at::Tensor>> const&) + 88 (0x1189c9bbc in libtorch_cpu.dylib)
-#> frame #11: torch::autograd::VariableHooks::_backward(at::Tensor const&, c10::ArrayRef<at::Tensor>, std::__1::optional<at::Tensor> const&, std::__1::optional<bool>, bool) const + 412 (0x118a1c4f4 in libtorch_cpu.dylib)
-#> frame #12: _lantern_Tensor__backward_tensor_tensorlist_tensor_bool_bool + 184 (0x107649c34 in liblantern.dylib)
-#> frame #13: std::__1::__function::__func<cpp_torch_method__backward_self_Tensor_inputs_TensorList(XPtrTorchTensor, XPtrTorchTensorList, XPtrTorchOptionalTensor, XPtrTorchoptional_bool, XPtrTorchbool)::$_1, std::__1::allocator<cpp_torch_method__backward_self_Tensor_inputs_TensorList(XPtrTorchTensor, XPtrTorchTensorList, XPtrTorchOptionalTensor, XPtrTorchoptional_bool, XPtrTorchbool)::$_1>, void ()>::operator()() + 64 (0x105e4a980 in torchpkg.so)
-#> frame #14: std::__1::packaged_task<void ()>::operator()() + 80 (0x105e48b50 in torchpkg.so)
-#> frame #15: EventLoop<void>::run() + 384 (0x105e48900 in torchpkg.so)
-#> frame #16: void* std::__1::__thread_proxy[abi:ne190102]<std::__1::tuple<std::__1::unique_ptr<std::__1::__thread_struct, std::__1::default_delete<std::__1::__thread_struct>>, ThreadPool<void>::ThreadPool(int)::'lambda'()>>(void*) + 52 (0x105e48674 in torchpkg.so)
-#> frame #17: _pthread_start + 136 (0x19f3ffbc8 in libsystem_pthread.dylib)
-#> frame #18: thread_start + 8 (0x19f3fab80 in libsystem_pthread.dylib)
-#> 
 ```

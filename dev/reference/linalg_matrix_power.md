@@ -66,9 +66,4 @@ if (torch_is_installed()) {
 A <- torch_randn(3, 3)
 linalg_matrix_power(A, 0)
 }
-#> torch_tensor
-#>  1  0  0
-#>  0  1  0
-#>  0  0  1
-#> [ CPUFloatType{3,3} ]
 ```

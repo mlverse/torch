@@ -66,14 +66,4 @@ if (torch_is_installed()) {
 a <- torch_randn(3, 3)
 linalg_slogdet(a)
 }
-#> [[1]]
-#> torch_tensor
-#> -1
-#> [ CPUFloatType{} ]
-#> 
-#> [[2]]
-#> torch_tensor
-#> -0.1574307084083557
-#> [ CPUFloatType{} ]
-#> 
 ```

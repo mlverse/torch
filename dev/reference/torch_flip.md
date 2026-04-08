@@ -31,13 +31,4 @@ x <- torch_arange(1, 8)$view(c(2, 2, 2))
 x
 torch_flip(x, c(1, 2))
 }
-#> torch_tensor
-#> (1,.,.) = 
-#>  7  8
-#>   5  6
-#> 
-#> (2,.,.) = 
-#>  3  4
-#>   1  2
-#> [ CPUFloatType{2,2,2} ]
 ```

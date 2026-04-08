@@ -56,8 +56,4 @@ v
 torch_bucketize(v, boundaries)
 torch_bucketize(v, boundaries, right=TRUE)
 }
-#> torch_tensor
-#>  2  3  5
-#>  2  3  5
-#> [ CPULongType{2,3} ]
 ```

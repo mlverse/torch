@@ -63,5 +63,4 @@ tr_linear <- jit_trace_module(linear, forward = list(torch_randn(10, 10)))
 x <- torch_randn(10, 10)
 torch_allclose(linear(x), tr_linear(x))
 }
-#> [1] TRUE
 ```

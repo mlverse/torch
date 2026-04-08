@@ -38,9 +38,4 @@ clone_module(nn_linear(1, 1), deep = TRUE)
 # is the same as
 nn_linear(1, 1)$clone(deep = TRUE)
 }
-#> An `nn_module` containing 2 parameters.
-#> 
-#> ── Parameters ──────────────────────────────────────────────────────────────────
-#> • weight: Float [1:1, 1:1]
-#> • bias: Float [1:1]
 ```

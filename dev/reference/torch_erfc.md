@@ -29,9 +29,4 @@ if (torch_is_installed()) {
 
 torch_erfc(torch_tensor(c(0, -1., 10.)))
 }
-#> torch_tensor
-#>  1.0000e+00
-#>  1.8427e+00
-#>  2.8026e-45
-#> [ CPUFloatType{3} ]
 ```

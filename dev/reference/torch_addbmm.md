@@ -59,9 +59,4 @@ batch1 = torch_randn(c(10, 3, 4))
 batch2 = torch_randn(c(10, 4, 5))
 torch_addbmm(M, batch1, batch2)
 }
-#> torch_tensor
-#> -5.9623 -5.0167  2.3277  0.8982  3.1610
-#>  0.5649 -2.8097  3.0692  3.4993 -5.1319
-#>  7.8250  3.9046 -0.2170  0.2029  0.3856
-#> [ CPUFloatType{3,5} ]
 ```

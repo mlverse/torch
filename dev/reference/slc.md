@@ -30,9 +30,4 @@ x <- torch_randn(10)
 x[slc(start = 1, end = 5, step = 2)]
 
 }
-#> torch_tensor
-#>  1.4533
-#>  0.6065
-#>  0.9893
-#> [ CPUFloatType{3} ]
 ```

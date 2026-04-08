@@ -26,11 +26,4 @@ if (torch_is_installed()) {
 
 torch_isfinite(torch_tensor(c(1, Inf, 2, -Inf, NaN)))
 }
-#> torch_tensor
-#>  1
-#>  0
-#>  1
-#>  0
-#>  0
-#> [ CPUBoolType{5} ]
 ```

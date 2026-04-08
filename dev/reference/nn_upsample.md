@@ -60,11 +60,4 @@ input <- torch_arange(start = 1, end = 4, dtype = torch_float())$view(c(1, 1, 2,
 nn_upsample(scale_factor = c(2), mode = "nearest")(input)
 nn_upsample(scale_factor = c(2, 2), mode = "nearest")(input)
 }
-#> torch_tensor
-#> (1,1,.,.) = 
-#>  1  1  2  2
-#>   1  1  2  2
-#>   3  3  4  4
-#>   3  3  4  4
-#> [ CPUFloatType{1,1,4,4} ]
 ```

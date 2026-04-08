@@ -33,16 +33,4 @@ jit_ops$aten$matmul(t1, t2)
 jit_ops$aten$split(torch::torch_arange(0, 3), torch::jit_scalar(2L), torch::jit_scalar(0L))
 
 }
-#> [[1]]
-#> torch_tensor
-#>  0
-#>  1
-#> [ CPUFloatType{2} ]
-#> 
-#> [[2]]
-#> torch_tensor
-#>  2
-#>  3
-#> [ CPUFloatType{2} ]
-#> 
 ```

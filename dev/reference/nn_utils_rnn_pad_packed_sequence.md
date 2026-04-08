@@ -71,18 +71,4 @@ packed <- nn_utils_rnn_pack_padded_sequence(seq, lens,
 packed
 nn_utils_rnn_pad_packed_sequence(packed, batch_first = TRUE)
 }
-#> [[1]]
-#> torch_tensor
-#>  1  2  0
-#>  3  0  0
-#>  4  5  6
-#> [ CPUFloatType{3,3} ]
-#> 
-#> [[2]]
-#> torch_tensor
-#>  2
-#>  1
-#>  3
-#> [ CPULongType{3} ]
-#> 
 ```

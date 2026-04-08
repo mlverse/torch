@@ -59,8 +59,4 @@ if (torch_is_installed()) {
 
 torch_empty(list(2,3), dtype = torch_int64())
 }
-#> torch_tensor
-#>  0  0  0
-#>  0  0  0
-#> [ CPULongType{2,3} ]
 ```

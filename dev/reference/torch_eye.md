@@ -60,9 +60,4 @@ if (torch_is_installed()) {
 
 torch_eye(3)
 }
-#> torch_tensor
-#>  1  0  0
-#>  0  1  0
-#>  0  0  1
-#> [ CPUFloatType{3,3} ]
 ```

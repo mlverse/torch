@@ -22,6 +22,4 @@ generator$set_current_seed(1234567L)
 generator$current_seed()
 
 }
-#> integer64
-#> [1] 1234567
 ```

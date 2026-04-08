@@ -43,12 +43,4 @@ prune <- nn_prune_head(x, 3)
 prune
 }
 }
-#> An `nn_module` containing 30 parameters.
-#> 
-#> ── Modules ─────────────────────────────────────────────────────────────────────
-#> • 0: <nn_relu> #0 parameters
-#> • 1: <nn_tanh> #0 parameters
-#> • 2: <nn_relu6> #0 parameters
-#> • 3: <nn_relu> #0 parameters
-#> • 4: <nn_linear> #30 parameters
 ```

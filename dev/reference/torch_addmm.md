@@ -61,8 +61,4 @@ mat1 = torch_randn(c(2, 3))
 mat2 = torch_randn(c(3, 3))
 torch_addmm(M, mat1, mat2)
 }
-#> torch_tensor
-#> -1.3683  0.8394 -3.7822
-#>  1.5442  0.2141 -0.2165
-#> [ CPUFloatType{2,3} ]
 ```

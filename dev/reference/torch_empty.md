@@ -61,8 +61,4 @@ if (torch_is_installed()) {
 
 torch_empty(c(2, 3))
 }
-#> torch_tensor
-#>  0  0  0
-#>  0  0  0
-#> [ CPUFloatType{2,3} ]
 ```

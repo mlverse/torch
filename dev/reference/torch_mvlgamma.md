@@ -41,8 +41,4 @@ a = torch_empty(c(2, 3))$uniform_(1, 2)
 a
 torch_mvlgamma(a, 2)
 }
-#> torch_tensor
-#>  0.4396  0.5161  1.0449
-#>  0.3896  0.4110  0.7620
-#> [ CPUFloatType{2,3} ]
 ```

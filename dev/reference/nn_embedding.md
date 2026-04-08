@@ -101,11 +101,4 @@ embedding <- nn_embedding(10, 3, padding_idx = 1)
 input <- torch_tensor(matrix(c(1, 3, 1, 6), nrow = 1), dtype = torch_long())
 embedding(input)
 }
-#> torch_tensor
-#> (1,.,.) = 
-#>  0.0000  0.0000  0.0000
-#>  -1.3940 -0.8844 -0.4864
-#>   0.0000  0.0000  0.0000
-#>  -0.4101 -0.0967  0.5244
-#> [ CPUFloatType{1,4,3} ][ grad_fn = <EmbeddingBackward0> ]
 ```

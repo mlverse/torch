@@ -51,5 +51,4 @@ torch_allclose(torch_tensor(c(10000., 1e-08)), torch_tensor(c(10000.1, 1e-09)))
 torch_allclose(torch_tensor(c(1.0, NaN)), torch_tensor(c(1.0, NaN)))
 torch_allclose(torch_tensor(c(1.0, NaN)), torch_tensor(c(1.0, NaN)), equal_nan=TRUE)
 }
-#> [1] TRUE
 ```

@@ -59,9 +59,4 @@ vec2 = torch_arange(1, 2)
 M = torch_zeros(c(3, 2))
 torch_addr(M, vec1, vec2)
 }
-#> torch_tensor
-#>  1  2
-#>  2  4
-#>  3  6
-#> [ CPUFloatType{3,2} ]
 ```

@@ -64,7 +64,4 @@ torch_norm(a, Inf)
 torch_norm(b, Inf)
 
 }
-#> torch_tensor
-#> 9
-#> [ CPUFloatType{} ]
 ```

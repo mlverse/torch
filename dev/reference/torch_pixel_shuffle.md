@@ -36,5 +36,4 @@ input = torch_randn(c(1, 9, 4, 4))
 output = nnf_pixel_shuffle(input, 3)
 print(output$size())
 }
-#> [1]  1  1 12 12
 ```

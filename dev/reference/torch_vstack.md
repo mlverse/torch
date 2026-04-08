@@ -34,12 +34,4 @@ a <- torch_tensor(rbind(1,2,3))
 b <- torch_tensor(rbind(4,5,6))
 torch_vstack(list(a,b))
 }
-#> torch_tensor
-#>  1
-#>  2
-#>  3
-#>  4
-#>  5
-#>  6
-#> [ CPUFloatType{6,1} ]
 ```

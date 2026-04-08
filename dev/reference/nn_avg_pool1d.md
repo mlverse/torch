@@ -68,8 +68,4 @@ if (torch_is_installed()) {
 m <- nn_avg_pool1d(3, stride = 2)
 m(torch_randn(1, 1, 8))
 }
-#> torch_tensor
-#> (1,.,.) = 
-#>  0.7575 -0.2045  0.7378
-#> [ CPUFloatType{1,1,3} ]
 ```

@@ -29,10 +29,4 @@ a = torch_randn(c(4))
 a
 torch_sigmoid(a)
 }
-#> torch_tensor
-#>  0.6495
-#>  0.8584
-#>  0.2880
-#>  0.9195
-#> [ CPUFloatType{4} ]
 ```

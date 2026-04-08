@@ -32,7 +32,4 @@ def foo (x):
 comp$fn(torch_tensor(-1))
 comp$foo(torch_randn(10))
 }
-#> torch_tensor
-#> -1.3768303394317627
-#> [ CPUFloatType{} ]
 ```

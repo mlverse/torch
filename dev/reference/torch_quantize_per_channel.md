@@ -49,8 +49,4 @@ torch_quantize_per_channel(x, torch_tensor(c(0.1, 0.01)),
 torch_quantize_per_channel(x, torch_tensor(c(0.1, 0.01)), 
                            torch_tensor(c(10L, 0L)), 0, torch_quint8())$int_repr()
 }
-#> torch_tensor
-#>    0   10
-#>  100  200
-#> [ CPUByteType{2,2} ]
 ```

@@ -56,8 +56,4 @@ torch_diff(c, dim = 1)
 torch_diff(c, dim = 2) 
 
 }
-#> torch_tensor
-#>  1  1
-#>  1  1
-#> [ CPUFloatType{2,2} ]
 ```

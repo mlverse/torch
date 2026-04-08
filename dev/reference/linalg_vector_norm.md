@@ -110,7 +110,4 @@ b
 linalg_vector_norm(a, ord = 3.5)
 linalg_vector_norm(b, ord = 3.5)
 }
-#> torch_tensor
-#> 5.434488296508789
-#> [ CPUFloatType{} ]
 ```

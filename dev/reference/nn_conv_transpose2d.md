@@ -184,5 +184,4 @@ h$size()
 output <- upsample(h, output_size = input$size())
 output$size()
 }
-#> [1]  1 16 12 12
 ```

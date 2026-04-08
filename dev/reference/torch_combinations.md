@@ -40,12 +40,4 @@ torch_combinations(tensor_a)
 torch_combinations(tensor_a, r=3)
 torch_combinations(tensor_a, with_replacement=TRUE)
 }
-#> torch_tensor
-#>  1  1
-#>  1  2
-#>  1  3
-#>  2  2
-#>  2  3
-#>  3  3
-#> [ CPUFloatType{6,2} ]
 ```

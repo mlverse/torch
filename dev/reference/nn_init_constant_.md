@@ -25,9 +25,4 @@ if (torch_is_installed()) {
 w <- torch_empty(3, 5)
 nn_init_constant_(w, 0.3)
 }
-#> torch_tensor
-#>  0.3000  0.3000  0.3000  0.3000  0.3000
-#>  0.3000  0.3000  0.3000  0.3000  0.3000
-#>  0.3000  0.3000  0.3000  0.3000  0.3000
-#> [ CPUFloatType{3,5} ]
 ```

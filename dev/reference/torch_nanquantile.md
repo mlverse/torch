@@ -62,8 +62,4 @@ t$nanquantile(0.5, dim=2)
 torch_nanquantile(t, 0.5, dim = 1)
 torch_nanquantile(t, 0.5, dim = 2)
 }
-#> torch_tensor
-#>     nan
-#>  1.5000
-#> [ CPUFloatType{2} ]
 ```

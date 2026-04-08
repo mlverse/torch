@@ -58,9 +58,4 @@ a = torch_randn(c(4, 2))
 a
 torch_prod(a, 1)
 }
-#> torch_tensor
-#> 0.01 *
-#> -0.0743
-#>  1.1880
-#> [ CPUFloatType{2} ]
 ```
