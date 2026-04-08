@@ -445,7 +445,10 @@ cuda_version <- function() {
 }
 
 cuda_version_linux <- function() {
-  
+
+  cuda_version <- cuda_version_from_cudatoolkit(supported_cuda_versions_linux)
+  if (!is.null(cuda_version)) return(cuda_version)
+
   cuda_version <- NULL
   cuda_home <- Sys.getenv("CUDA_HOME")
   
@@ -488,6 +491,10 @@ cuda_version_linux <- function() {
 }
 
 cuda_version_windows <- function() {
+
+  cuda_version <- cuda_version_from_cudatoolkit(supported_cuda_versions_windows)
+  if (!is.null(cuda_version)) return(cuda_version)
+
   cuda_version <- NULL
   cuda_path <- Sys.getenv("CUDA_PATH")
   
@@ -524,14 +531,45 @@ cuda_version_windows <- function() {
   cuda_version
 }
 
+supported_cuda_versions_windows <- c("12.6", "12.8")
+supported_cuda_versions_linux <- c("12.6", "12.8")
+
 check_supported_cuda_version_windows <- function(version) {
-  supported_versions <- c("12.6", "12.8")
-  check_supported_version(version, supported_versions)
+  check_supported_version(version, supported_cuda_versions_windows)
 }
 
 check_supported_cuda_version_linux <- function(version) {
-  supported_versions <- c("12.6", "12.8")
-  check_supported_version(version, supported_versions)
+  check_supported_version(version, supported_cuda_versions_linux)
+}
+
+cuda_version_from_cudatoolkit <- function(supported_versions) {
+  opt <- Sys.getenv("TORCH_CUDATOOLKIT", "")
+
+  if (tolower(opt) == "false") {
+    installer_message("{.envvar TORCH_CUDATOOLKIT}={.val FALSE}. Skipping cudatoolkit R package detection.")
+    return(NULL)
+  }
+
+  if (nzchar(opt)) {
+    pkg <- paste0("cuda", gsub("\\.", "", opt))
+    if (requireNamespace(pkg, quietly = TRUE)) {
+      installer_message("{.envvar TORCH_CUDATOOLKIT}={.val {opt}}. Using CUDA version {.strong {opt}}.")
+      return(opt)
+    }
+    cli::cli_abort(c(
+      x = "R package {.pkg {pkg}} is not installed.",
+      i = "Install it or unset {.envvar TORCH_CUDATOOLKIT}."
+    ))
+  }
+
+  for (version in rev(supported_versions)) {
+    pkg <- paste0("cuda", gsub("\\.", "", version))
+    if (requireNamespace(pkg, quietly = TRUE)) {
+      installer_message("Found installed R package {.pkg {pkg}}. Using CUDA version {.strong {version}}.")
+      return(version)
+    }
+  }
+  NULL
 }
 
 check_supported_version <- function(version, supported_versions) {

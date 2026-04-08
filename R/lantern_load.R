@@ -2,6 +2,8 @@
 .globals$lantern_started <- FALSE
 
 load_cudatoolkit_libs <- function() {
+  if (tolower(Sys.getenv("TORCH_CUDATOOLKIT", "")) == "false") return(invisible(FALSE))
+
   cuda_ver <- cuda_version()
   if (is.null(cuda_ver) || cuda_ver == "cpu") return(invisible(FALSE))
 
