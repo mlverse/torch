@@ -25,6 +25,8 @@ Encoding: UTF-8
 SystemRequirements: LibTorch (https://pytorch.org/); Only x86_64 platforms
   are currently supported except for ARM system running macOS.
 Config/build/copy-method: copy
+Remotes:
+    RcppCore/Rcpp
 LinkingTo:
     Rcpp
 Imports:
