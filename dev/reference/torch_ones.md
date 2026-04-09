@@ -64,4 +64,11 @@ if (torch_is_installed()) {
 torch_ones(c(2, 3))
 torch_ones(c(5))
 }
+#> torch_tensor
+#>  1
+#>  1
+#>  1
+#>  1
+#>  1
+#> [ CPUFloatType{5} ]
 ```

@@ -40,4 +40,9 @@ x = torch_randn(c(2, 3))
 x
 torch_transpose(x, 1, 2)
 }
+#> torch_tensor
+#> -0.2297 -1.0709
+#>  0.4883 -0.8743
+#>  0.5580  0.5781
+#> [ CPUFloatType{3,2} ]
 ```

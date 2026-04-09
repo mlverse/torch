@@ -62,4 +62,9 @@ t1 = torch_randn(c(3, 1))
 t2 = torch_randn(c(1, 3))
 torch_addcdiv(t, t1, t2, 0.1)
 }
+#> torch_tensor
+#>  0.1770 -2.8381  0.2346
+#> -0.1186  2.2582 -1.2048
+#>  0.1160 -1.7857 -0.0627
+#> [ CPUFloatType{3,3} ]
 ```

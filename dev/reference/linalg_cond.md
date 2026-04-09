@@ -83,4 +83,7 @@ a <- torch_tensor(rbind(c(1., 0, -1), c(0, 1, 0), c(1, 0, 1)))
 linalg_cond(a)
 linalg_cond(a, "fro")
 }
+#> torch_tensor
+#> 3.1622776985168457
+#> [ CPUFloatType{} ]
 ```

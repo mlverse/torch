@@ -46,4 +46,10 @@ if (torch_is_installed()) {
 torch_tensor(c(1, 2, 3, 4))
 torch_tensor(c(1, 2, 3, 4), dtype = torch_int())
 }
+#> torch_tensor
+#>  1
+#>  2
+#>  3
+#>  4
+#> [ CPUIntType{4} ]
 ```

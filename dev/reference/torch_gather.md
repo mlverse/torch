@@ -51,4 +51,8 @@ if (torch_is_installed()) {
 t = torch_tensor(matrix(c(1,2,3,4), ncol = 2, byrow = TRUE))
 torch_gather(t, 2, torch_tensor(matrix(c(1,1,2,1), ncol = 2, byrow=TRUE), dtype = torch_int64()))
 }
+#> torch_tensor
+#>  1  1
+#>  4  3
+#> [ CPUFloatType{2,2} ]
 ```

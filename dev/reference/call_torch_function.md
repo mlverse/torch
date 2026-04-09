@@ -53,4 +53,10 @@ call_torch_function("torch_tanh_backward", 1, y)
 all.equal(call_torch_function("torch_tanh_backward", 1, y, quiet = TRUE), x$grad)
 
 }
+#> Warning: Because this function allows access to unexported functions, please use with caution, and
+#>             only if you are sure know what you are doing. Unexported functions will expect inputs that
+#>             are more C++-like than R-like. For example, they will expect all indexes to be 0-based instead
+#>             of 1-based. In addition unexported functions may be subject to removal from the API without
+#>             warning. Set quiet = TRUE to silence this warning.
+#> [1] TRUE
 ```

@@ -29,4 +29,10 @@ a = torch_randn(c(4))
 a
 torch_reciprocal(a)
 }
+#> torch_tensor
+#> -1.6411
+#> -0.4249
+#> -2.6241
+#> -3.4347
+#> [ CPUFloatType{4} ]
 ```

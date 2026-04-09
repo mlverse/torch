@@ -108,4 +108,9 @@ b <- a$expand(c(2, -1, -1))
 linalg_matrix_norm(b)
 linalg_matrix_norm(b, dim = c(1, 3))
 }
+#> torch_tensor
+#>   3.1623
+#>  10.0000
+#>  17.2627
+#> [ CPUFloatType{3} ]
 ```

@@ -30,4 +30,10 @@ a = torch_randn(c(4))
 a
 torch_rsqrt(a)
 }
+#> torch_tensor
+#>     nan
+#>     nan
+#>  6.1489
+#>     nan
+#> [ CPUFloatType{4} ]
 ```

@@ -87,4 +87,8 @@ if (torch_is_installed()) {
 a <- torch_randn(2, 2)
 linalg_eigvalsh(a)
 }
+#> torch_tensor
+#> -0.9260
+#>  0.3237
+#> [ CPUFloatType{2} ]
 ```

@@ -62,4 +62,11 @@ exp <- torch_arange(1, 5)
 base <- 2
 torch_pow(base, exp)
 }
+#> torch_tensor
+#>   2
+#>   4
+#>   8
+#>  16
+#>  32
+#> [ CPUFloatType{5} ]
 ```

@@ -70,4 +70,11 @@ torch_fft_irfft(x)
 torch_fft_irfft(x, n = t$numel())
 
 }
+#> torch_tensor
+#>  0.0000
+#>  1.0000
+#>  2.0000
+#>  3.0000
+#>  4.0000
+#> [ CPUFloatType{5} ]
 ```

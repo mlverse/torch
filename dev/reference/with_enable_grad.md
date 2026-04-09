@@ -45,4 +45,7 @@ with_no_grad({
 y$backward()
 x$grad
 }
+#> torch_tensor
+#>  2
+#> [ CPUFloatType{1} ]
 ```

@@ -28,4 +28,9 @@ if (torch_is_installed()) {
 
 torch_erfinv(torch_tensor(c(0, 0.5, -1.)))
 }
+#> torch_tensor
+#>  0.0000
+#>  0.4769
+#>    -inf
+#> [ CPUFloatType{3} ]
 ```

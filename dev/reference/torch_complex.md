@@ -35,4 +35,5 @@ z <- torch_complex(real, imag)
 z
 z$dtype
 }
+#> torch_ComplexFloat
 ```

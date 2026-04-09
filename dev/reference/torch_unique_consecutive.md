@@ -52,4 +52,26 @@ output
 torch_unique_consecutive(x, return_inverse=TRUE)
 torch_unique_consecutive(x, return_counts=TRUE)
 }
+#> [[1]]
+#> torch_tensor
+#>  1
+#>  2
+#>  3
+#>  1
+#>  2
+#> [ CPUFloatType{5} ]
+#> 
+#> [[2]]
+#> torch_tensor
+#> [ CPULongType{0} ]
+#> 
+#> [[3]]
+#> torch_tensor
+#>  2
+#>  2
+#>  1
+#>  2
+#>  1
+#> [ CPULongType{5} ]
+#> 
 ```

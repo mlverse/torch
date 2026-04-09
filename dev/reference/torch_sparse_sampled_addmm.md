@@ -68,4 +68,8 @@ result <- torch_sparse_sampled_addmm(sparse_mask, mat1, mat2)
 result$to_dense()
 
 }
+#> torch_tensor
+#> -0.3813  0.0000  0.0000
+#>  0.0000  1.8636  5.7312
+#> [ CPUFloatType{2,3} ]
 ```

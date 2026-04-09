@@ -29,4 +29,10 @@ a = torch_tensor(c(0.7, -1.2, 0., 2.3))
 a
 torch_sign(a)
 }
+#> torch_tensor
+#>  1
+#> -1
+#>  0
+#>  1
+#> [ CPUFloatType{4} ]
 ```

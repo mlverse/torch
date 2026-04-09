@@ -143,6 +143,39 @@ For inputs of type <code>FloatTensor</code> or <code>DoubleTensor</code>, argume
 <span class="r-in"><span><span class="va">batch2</span> <span class="op">=</span> <span class="fu"><a href="torch_randn.html">torch_randn</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">10</span>, <span class="fl">4</span>, <span class="fl">5</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu">torch_baddbmm</span><span class="op">(</span><span class="va">M</span>, <span class="va">batch1</span>, <span class="va">batch2</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">}</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> torch_tensor</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> (1,.,.) = </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> -0.6476 -3.7951  3.8791 -0.5708  3.7264</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   0.3604  0.0941 -0.8949  0.0281 -2.9329</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  -1.2048 -1.6243 -0.3759 -0.8554  0.3386</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> (2,.,.) = </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  2.5763  0.9208 -1.8443 -1.3055  1.0865</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  -7.0371 -0.3243  2.0033  4.2180 -5.4648</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  -1.8444  0.8213  1.0452  0.5947 -2.2176</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> (3,.,.) = </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  1.1787  1.0082 -0.5317 -2.2000 -3.5713</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  -3.9603 -3.8660  3.4271  5.0162  3.8692</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  -2.2727  0.2941 -1.3051 -0.6263  0.6832</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> (4,.,.) = </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  0.4322 -0.3769 -1.2526 -1.1264  0.1531</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  -1.5310  1.8074  0.2924  1.4736  1.1504</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   0.9128 -1.8871 -0.5453 -2.5500 -2.5189</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> (5,.,.) = </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> -0.9157  3.1111  3.0414  3.9000  3.0016</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   0.0819  1.5839 -1.7987 -4.4689 -0.6642</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   2.0438 -2.7109 -3.6679 -1.9382 -0.3319</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> (6,.,.) = </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> -4.4783  1.8762 -3.5289 -1.5731  0.4174</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  -0.8554 -1.2589 -1.6062 -0.4598 -1.3856</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  -1.2624 -0.4637  0.5214 -0.1744 -1.0394</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ... [the output was truncated (use n=-1 to disable)]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [ CPUFloatType{10,3,5} ]</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>

@@ -23,4 +23,9 @@ if (torch_is_installed()) {
 w <- torch_empty(3, 5)
 nn_init_eye_(w)
 }
+#> torch_tensor
+#>  1  0  0  0  0
+#>  0  1  0  0  0
+#>  0  0  1  0  0
+#> [ CPUFloatType{3,5} ]
 ```

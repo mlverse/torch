@@ -52,4 +52,10 @@ if (torch_is_installed()) {
 
 torch_nonzero(torch_tensor(c(1, 1, 1, 0, 1)))
 }
+#> torch_tensor
+#>  1
+#>  2
+#>  3
+#>  5
+#> [ CPULongType{4,1} ]
 ```

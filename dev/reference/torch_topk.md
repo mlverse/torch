@@ -56,4 +56,18 @@ x = torch_arange(1., 6.)
 x
 torch_topk(x, 3)
 }
+#> [[1]]
+#> torch_tensor
+#>  6
+#>  5
+#>  4
+#> [ CPUFloatType{3} ]
+#> 
+#> [[2]]
+#> torch_tensor
+#>  6
+#>  5
+#>  4
+#> [ CPULongType{3} ]
+#> 
 ```

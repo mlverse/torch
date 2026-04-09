@@ -57,4 +57,7 @@ t
 torch_fft_fft(t, norm = "backward")
 
 }
+#> torch_tensor
+#> ℹ Use `$real` or `$imag` to print the contents of this tensor.
+#> [ CPUComplexFloatType{4} ]
 ```

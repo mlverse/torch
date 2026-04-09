@@ -54,4 +54,10 @@ a <- torch_randn(c(4, 4))
 a
 torch_amin(a, 1)
 }
+#> torch_tensor
+#> -1.4622
+#> -2.0687
+#> -1.0096
+#> -1.0387
+#> [ CPUFloatType{4} ]
 ```

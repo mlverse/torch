@@ -80,4 +80,10 @@ torch_arange(start = 0, end = 5)
 torch_arange(1, 4)
 torch_arange(1, 2.5, 0.5)
 }
+#> torch_tensor
+#>  1.0000
+#>  1.5000
+#>  2.0000
+#>  2.5000
+#> [ CPUFloatType{4} ]
 ```

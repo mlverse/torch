@@ -34,4 +34,8 @@ x <- torch_arange(start = 1, end = 4)$view(c(2, 2))
 x
 torch_flipud(x)
 }
+#> torch_tensor
+#>  3  4
+#>  1  2
+#> [ CPUFloatType{2,2} ]
 ```

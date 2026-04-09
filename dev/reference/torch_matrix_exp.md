@@ -39,4 +39,8 @@ torch_matrix_exp(a)
 x <- torch_tensor(rbind(c(0, pi/3), c(-pi/3, 0)))
 x$matrix_exp() # should be [[cos(pi/3), sin(pi/3)], [-sin(pi/3), cos(pi/3)]]
 }
+#> torch_tensor
+#>  0.5000  0.8660
+#> -0.8660  0.5000
+#> [ CPUFloatType{2,2} ]
 ```

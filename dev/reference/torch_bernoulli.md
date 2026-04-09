@@ -57,4 +57,9 @@ torch_bernoulli(a)
 a = torch_zeros(c(3, 3)) # probability of drawing "1" is 0
 torch_bernoulli(a)
 }
+#> torch_tensor
+#>  0  0  0
+#>  0  0  0
+#>  0  0  0
+#> [ CPUFloatType{3,3} ]
 ```

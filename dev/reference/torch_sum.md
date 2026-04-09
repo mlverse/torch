@@ -61,4 +61,12 @@ torch_sum(a, 1)
 b <- torch_arange(1, 4 * 5 * 6)$view(c(4, 5, 6))
 torch_sum(b, list(2, 1))
 }
+#> torch_tensor
+#>  1160
+#>  1180
+#>  1200
+#>  1220
+#>  1240
+#>  1260
+#> [ CPUFloatType{6} ]
 ```

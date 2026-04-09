@@ -84,4 +84,7 @@ if (torch_is_installed()) {
 
 linalg_multi_dot(list(torch_tensor(c(1, 2)), torch_tensor(c(2, 3))))
 }
+#> torch_tensor
+#> 8
+#> [ CPUFloatType{} ]
 ```

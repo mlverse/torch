@@ -98,4 +98,5 @@ for (i in 1:100) {
 }
 all.equal(x$item(), 0, tolerance = 1e-9)
 }
+#> [1] TRUE
 ```

@@ -38,4 +38,7 @@ if (torch_is_installed()) {
 m <- distr_poisson(torch_tensor(4))
 m$sample()
 }
+#> torch_tensor
+#>  6
+#> [ CPUFloatType{1} ]
 ```

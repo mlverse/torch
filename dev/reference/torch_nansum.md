@@ -60,4 +60,8 @@ torch_nansum(a)
 torch_nansum(a, dim=1)
 torch_nansum(a, dim=2)
 }
+#> torch_tensor
+#>  3
+#>  3
+#> [ CPUFloatType{2} ]
 ```

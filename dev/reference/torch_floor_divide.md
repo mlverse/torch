@@ -38,4 +38,8 @@ b = torch_tensor(c(2.0, 2.0))
 torch_floor_divide(a, b)
 torch_floor_divide(a, 1.4)
 }
+#> torch_tensor
+#>  2
+#>  2
+#> [ CPUFloatType{2} ]
 ```

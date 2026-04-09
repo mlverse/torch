@@ -28,4 +28,8 @@ if (torch_is_installed()) {
 
 torch_exp(torch_tensor(c(0, log(2))))
 }
+#> torch_tensor
+#>  1
+#>  2
+#> [ CPUFloatType{2} ]
 ```

@@ -73,4 +73,10 @@ torch_fft_fftfreq(5) # Nyquist frequency at f[3] is positive
 torch_fft_fftfreq(4) # Nyquist frequency at f[3] is given as negative
 
 }
+#> torch_tensor
+#>  0.0000
+#>  0.2500
+#> -0.5000
+#> -0.2500
+#> [ CPUFloatType{4} ]
 ```

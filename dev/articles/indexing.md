@@ -169,8 +169,8 @@ Consider a matrix:
 x <- torch_randn(2, 3)
 x
 #> torch_tensor
-#> -1.5223  0.2957  0.6037
-#>  0.3196 -0.6374 -0.7534
+#> -0.3826  1.1225  1.4973
+#>  0.2227  0.3275  0.0008
 #> [ CPUFloatType{2,3} ]
 ```
 
@@ -179,9 +179,9 @@ The following syntax will give you the first row:
 ``` r
 x[1,]
 #> torch_tensor
-#> -1.5223
-#>  0.2957
-#>  0.6037
+#> -0.3826
+#>  1.1225
+#>  1.4973
 #> [ CPUFloatType{3} ]
 ```
 
@@ -190,8 +190,8 @@ And this would give you the first 2 columns:
 ``` r
 x[,1:2]
 #> torch_tensor
-#> -1.5223  0.2957
-#>  0.3196 -0.6374
+#> -0.3826  1.1225
+#>  0.2227  0.3275
 #> [ CPUFloatType{2,2} ]
 ```
 
@@ -280,8 +280,8 @@ indexing.
 x <- torch_randn(4,4)
 x[c(1,3), c(1,3)]
 #> torch_tensor
-#> -0.6131  1.1614
-#> -0.0290 -1.1291
+#>  0.4961 -0.6147
+#>  0.9908 -0.8176
 #> [ CPUFloatType{2,2} ]
 ```
 
@@ -290,8 +290,8 @@ You can also use boolean vectors, for example:
 ``` r
 x[c(TRUE, FALSE, TRUE, FALSE), c(TRUE, FALSE, TRUE, FALSE)]
 #> torch_tensor
-#> -0.6131  1.1614
-#> -0.0290 -1.1291
+#>  0.4961 -0.6147
+#>  0.9908 -0.8176
 #> [ CPUFloatType{2,2} ]
 ```
 

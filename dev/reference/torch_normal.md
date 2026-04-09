@@ -91,4 +91,7 @@ torch_normal(mean=torch_arange(1., 6.))
 torch_normal(2, 3, size=c(1, 4))
 
 }
+#> torch_tensor
+#>  2.9935  8.0171  1.4862  1.1972
+#> [ CPUFloatType{1,4} ]
 ```

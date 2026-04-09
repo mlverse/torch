@@ -30,4 +30,11 @@ a = torch_rand(5)
 a
 torch_log2(a)
 }
+#> torch_tensor
+#> -2.2377
+#> -1.5131
+#> -1.5698
+#> -0.7529
+#> -0.7655
+#> [ CPUFloatType{5} ]
 ```

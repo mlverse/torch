@@ -30,4 +30,10 @@ a = torch_randn(c(4))
 a
 torch_tanh(a)
 }
+#> torch_tensor
+#>  0.0694
+#>  0.7631
+#> -0.0187
+#>  0.5685
+#> [ CPUFloatType{4} ]
 ```

@@ -29,4 +29,11 @@ a = torch_randn(c(5))
 a
 torch_neg(a)
 }
+#> torch_tensor
+#>  0.7782
+#>  0.5528
+#> -0.0116
+#>  1.5697
+#>  1.7394
+#> [ CPUFloatType{5} ]
 ```

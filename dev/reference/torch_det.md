@@ -37,4 +37,9 @@ A = torch_randn(c(3, 2, 2))
 A
 A$det()
 }
+#> torch_tensor
+#> -1.5723
+#>  0.5896
+#>  2.1255
+#> [ CPUFloatType{3} ]
 ```

@@ -38,4 +38,7 @@ angle <- torch_tensor(c(pi / 2, 5 * pi / 4), dtype=torch_float64())
 z <- torch_polar(abs, angle)
 z
 }
+#> torch_tensor
+#> ℹ Use `$real` or `$imag` to print the contents of this tensor.
+#> [ CPUComplexDoubleType{2} ]
 ```

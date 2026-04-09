@@ -51,4 +51,7 @@ torch_fft_ifft(x)
 
 
 }
+#> torch_tensor
+#> ℹ Use `$real` or `$imag` to print the contents of this tensor.
+#> [ CPUComplexFloatType{4} ]
 ```

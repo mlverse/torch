@@ -45,4 +45,11 @@ torch_movedim(t, 2, 1)
 torch_movedim(t, c(2, 3), c(1, 2))$shape
 torch_movedim(t, c(2, 3), c(1, 2))
 }
+#> torch_tensor
+#> (1,.,.) = 
+#> -0.3094  0.2462  0.6487
+#> 
+#> (2,.,.) = 
+#> -0.1282 -0.1854 -0.4271
+#> [ CPUFloatType{2,1,3} ]
 ```

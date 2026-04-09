@@ -21,4 +21,9 @@ if (torch_is_installed()) {
 w <- torch_empty(3, 5)
 nn_init_ones_(w)
 }
+#> torch_tensor
+#>  1  1  1  1  1
+#>  1  1  1  1  1
+#>  1  1  1  1  1
+#> [ CPUFloatType{3,5} ]
 ```

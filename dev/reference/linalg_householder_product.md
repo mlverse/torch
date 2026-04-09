@@ -88,4 +88,5 @@ h_tau <- torch_geqrf(A)
 Q <- linalg_householder_product(h_tau[[1]], h_tau[[2]])
 torch_allclose(Q, linalg_qr(A)[[1]])
 }
+#> [1] TRUE
 ```

@@ -41,4 +41,8 @@ a <- torch_tensor(c(1, 2))
 b <- torch_tensor(c(0, 1))
 torch_sub(a, b, alpha=2)
 }
+#> torch_tensor
+#>  1
+#>  0
+#> [ CPUFloatType{2} ]
 ```

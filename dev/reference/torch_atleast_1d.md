@@ -30,4 +30,14 @@ x <- torch_tensor(0.5)
 y <- torch_tensor(1.)
 torch_atleast_1d(list(x,y))
 }
+#> [[1]]
+#> torch_tensor
+#>  0.5000
+#> [ CPUFloatType{1} ]
+#> 
+#> [[2]]
+#> torch_tensor
+#>  1
+#> [ CPUFloatType{1} ]
+#> 
 ```

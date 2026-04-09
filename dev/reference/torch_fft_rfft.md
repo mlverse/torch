@@ -55,4 +55,7 @@ t <- torch_arange(start = 0, end = 3)
 torch_fft_rfft(t)
 
 }
+#> torch_tensor
+#> ℹ Use `$real` or `$imag` to print the contents of this tensor.
+#> [ CPUComplexFloatType{3} ]
 ```

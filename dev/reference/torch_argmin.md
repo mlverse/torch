@@ -48,4 +48,10 @@ a = torch_randn(c(4, 4))
 a
 torch_argmin(a, dim=1)
 }
+#> torch_tensor
+#>  3
+#>  3
+#>  3
+#>  1
+#> [ CPULongType{4} ]
 ```

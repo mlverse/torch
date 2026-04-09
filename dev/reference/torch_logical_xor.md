@@ -35,4 +35,10 @@ torch_logical_xor(a, b)
 torch_logical_xor(a$to(dtype=torch_double()), b$to(dtype=torch_double()))
 torch_logical_xor(a$to(dtype=torch_double()), b)
 }
+#> torch_tensor
+#>  1
+#>  1
+#>  0
+#>  0
+#> [ CPUBoolType{4} ]
 ```

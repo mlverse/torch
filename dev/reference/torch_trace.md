@@ -27,4 +27,7 @@ x <- torch_arange(1, 9)$view(c(3, 3))
 x
 torch_trace(x)
 }
+#> torch_tensor
+#> 15
+#> [ CPUFloatType{} ]
 ```

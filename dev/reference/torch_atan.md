@@ -29,4 +29,10 @@ a = torch_randn(c(4))
 a
 torch_atan(a)
 }
+#> torch_tensor
+#> -0.4389
+#> -0.0595
+#> -1.0777
+#>  0.6576
+#> [ CPUFloatType{4} ]
 ```

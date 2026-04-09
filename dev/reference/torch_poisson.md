@@ -36,4 +36,10 @@ if (torch_is_installed()) {
 rates = torch_rand(c(4, 4)) * 5  # rate parameter between 0 and 5
 torch_poisson(rates)
 }
+#> torch_tensor
+#>  2  9  5  2
+#>  1  2  3  0
+#>  1  1  5  0
+#>  0  0  0  5
+#> [ CPUFloatType{4,4} ]
 ```

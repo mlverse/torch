@@ -37,4 +37,9 @@ a <- torch_tensor(c(1, 2, -1))
 b <- torch_tensor(c(3, 0, 4))
 torch_minimum(a, b)
 }
+#> torch_tensor
+#>  1
+#>  0
+#> -1
+#> [ CPUFloatType{3} ]
 ```

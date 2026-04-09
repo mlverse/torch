@@ -46,4 +46,8 @@ sorted_idx <- torch_argsort(t, dim=2)
 torch_take_along_dim(t, sorted_idx, dim=2)
 
 }
+#> torch_tensor
+#>  10  20  40
+#>  30  50  60
+#> [ CPUFloatType{2,3} ]
 ```

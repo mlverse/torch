@@ -38,4 +38,8 @@ divisor = torch_tensor(c(3, 2), dtype=torch_int())
 torch_true_divide(dividend, divisor)
 torch_true_divide(dividend, 2)
 }
+#> torch_tensor
+#>  2.5000
+#>  1.5000
+#> [ CPUFloatType{2} ]
 ```

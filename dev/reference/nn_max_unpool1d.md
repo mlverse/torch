@@ -68,4 +68,15 @@ out <- pool(input)
 unpool(out[[1]], out[[2]], output_size = input$size())
 unpool(out[[1]], out[[2]])
 }
+#> torch_tensor
+#> (1,1,.,.) = 
+#>  0
+#>   2
+#>   0
+#>   4
+#>   0
+#>   6
+#>   0
+#>   8
+#> [ CPUFloatType{1,1,8,1} ]
 ```

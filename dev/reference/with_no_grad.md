@@ -35,4 +35,6 @@ with_no_grad({
 x
 x$grad
 }
+#> torch_tensor
+#> [ Tensor (undefined) ]
 ```

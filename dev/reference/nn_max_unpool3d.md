@@ -69,4 +69,5 @@ out <- pool(torch_randn(20, 16, 51, 33, 15))
 unpooled_output <- unpool(out[[1]], out[[2]])
 unpooled_output$size()
 }
+#> [1] 20 16 51 33 15
 ```

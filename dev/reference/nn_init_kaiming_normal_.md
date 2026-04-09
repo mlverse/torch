@@ -45,4 +45,9 @@ if (torch_is_installed()) {
 w <- torch_empty(3, 5)
 nn_init_kaiming_normal_(w, mode = "fan_in", nonlinearity = "leaky_relu")
 }
+#> torch_tensor
+#> -1.0969 -0.1582 -0.4484  0.8579 -0.6395
+#> -0.2985  0.3818 -0.2339  0.6773 -0.2748
+#> -0.4214  0.5225  0.2335  0.5838  0.3373
+#> [ CPUFloatType{3,5} ]
 ```

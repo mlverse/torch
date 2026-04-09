@@ -81,4 +81,8 @@ sorted_sequence_1d <- torch_tensor(c(1, 3, 5, 7, 9))
 sorted_sequence_1d
 torch_searchsorted(sorted_sequence_1d, values)
 }
+#> torch_tensor
+#>  1  3  4
+#>  1  3  4
+#> [ CPULongType{2,3} ]
 ```

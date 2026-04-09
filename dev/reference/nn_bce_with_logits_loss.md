@@ -93,4 +93,7 @@ pos_weight <- torch_ones(64) # All weights are equal to 1
 criterion <- nn_bce_with_logits_loss(pos_weight = pos_weight)
 criterion(output, target) # -log(sigmoid(1.5))
 }
+#> torch_tensor
+#> 0.2014133185148239
+#> [ CPUFloatType{} ]
 ```

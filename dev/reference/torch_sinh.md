@@ -30,4 +30,10 @@ a = torch_randn(c(4))
 a
 torch_sinh(a)
 }
+#> torch_tensor
+#> -0.2091
+#>  0.2189
+#>  0.2963
+#>  1.6932
+#> [ CPUFloatType{4} ]
 ```
