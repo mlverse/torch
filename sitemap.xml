@@ -4,6 +4,7 @@
 <url><loc>https://torch.mlverse.org/docs/LICENSE-text.html</loc></url>
 <url><loc>https://torch.mlverse.org/docs/LICENSE.html</loc></url>
 <url><loc>https://torch.mlverse.org/docs/articles/amp.html</loc></url>
+<url><loc>https://torch.mlverse.org/docs/articles/compatibility-matrix.html</loc></url>
 <url><loc>https://torch.mlverse.org/docs/articles/distributions.html</loc></url>
 <url><loc>https://torch.mlverse.org/docs/articles/examples/basic-autograd.html</loc></url>
 <url><loc>https://torch.mlverse.org/docs/articles/examples/basic-nn-module.html</loc></url>
@@ -75,6 +76,7 @@
 <url><loc>https://torch.mlverse.org/docs/reference/index.html</loc></url>
 <url><loc>https://torch.mlverse.org/docs/reference/install_torch.html</loc></url>
 <url><loc>https://torch.mlverse.org/docs/reference/install_torch_from_file.html</loc></url>
+<url><loc>https://torch.mlverse.org/docs/reference/install_torch_sitrep.html</loc></url>
 <url><loc>https://torch.mlverse.org/docs/reference/is_dataloader.html</loc></url>
 <url><loc>https://torch.mlverse.org/docs/reference/is_nn_buffer.html</loc></url>
 <url><loc>https://torch.mlverse.org/docs/reference/is_nn_module.html</loc></url>
@@ -556,6 +558,7 @@
 <url><loc>https://torch.mlverse.org/docs/reference/torch_kthvalue.html</loc></url>
 <url><loc>https://torch.mlverse.org/docs/reference/torch_layout.html</loc></url>
 <url><loc>https://torch.mlverse.org/docs/reference/torch_lcm.html</loc></url>
+<url><loc>https://torch.mlverse.org/docs/reference/torch_ldexp.html</loc></url>
 <url><loc>https://torch.mlverse.org/docs/reference/torch_le.html</loc></url>
 <url><loc>https://torch.mlverse.org/docs/reference/torch_lerp.html</loc></url>
 <url><loc>https://torch.mlverse.org/docs/reference/torch_less.html</loc></url>
@@ -661,6 +664,7 @@
 <url><loc>https://torch.mlverse.org/docs/reference/torch_rsqrt.html</loc></url>
 <url><loc>https://torch.mlverse.org/docs/reference/torch_save.html</loc></url>
 <url><loc>https://torch.mlverse.org/docs/reference/torch_scalar_tensor.html</loc></url>
+<url><loc>https://torch.mlverse.org/docs/reference/torch_scaled_dot_product_attention.html</loc></url>
 <url><loc>https://torch.mlverse.org/docs/reference/torch_searchsorted.html</loc></url>
 <url><loc>https://torch.mlverse.org/docs/reference/torch_selu.html</loc></url>
 <url><loc>https://torch.mlverse.org/docs/reference/torch_selu_.html</loc></url>
@@ -674,6 +678,7 @@
 <url><loc>https://torch.mlverse.org/docs/reference/torch_slogdet.html</loc></url>
 <url><loc>https://torch.mlverse.org/docs/reference/torch_sort.html</loc></url>
 <url><loc>https://torch.mlverse.org/docs/reference/torch_sparse_coo_tensor.html</loc></url>
+<url><loc>https://torch.mlverse.org/docs/reference/torch_sparse_sampled_addmm.html</loc></url>
 <url><loc>https://torch.mlverse.org/docs/reference/torch_split.html</loc></url>
 <url><loc>https://torch.mlverse.org/docs/reference/torch_sqrt.html</loc></url>
 <url><loc>https://torch.mlverse.org/docs/reference/torch_square.html</loc></url>

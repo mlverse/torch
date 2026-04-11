@@ -34,7 +34,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">torch</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.16.3</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.17.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -73,7 +73,7 @@
   <button class="nav-link dropdown-toggle" type="button" id="dropdown-advanced" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Advanced</button>
   <ul class="dropdown-menu" aria-labelledby="dropdown-advanced">
 <li><a class="dropdown-item" href="../articles/memory-management.html">Memory management</a></li>
-    <li><a class="dropdown-item" href="../articles/modifying-source-code.html">Building locally</a></li>
+    <li><a class="dropdown-item" href="../articles/compatibility-matrix.html">CUDA compatibility matrix</a></li>
     <li><a class="dropdown-item" href="../articles/amp.html">Automatic Mixed Precision</a></li>
     <li><a class="dropdown-item" href="../articles/modifying-source-code.html">Modifying source code</a></li>
   </ul>
@@ -292,26 +292,26 @@ number of lines (that did manual backprop) are gone:</p>
 <span>    <span class="op">}</span><span class="op">)</span></span>
 <span>    </span>
 <span><span class="op">}</span></span>
-<span><span class="co">#&gt; 10 121.6346 </span></span>
-<span><span class="co">#&gt; 20 105.6618 </span></span>
-<span><span class="co">#&gt; 30 92.57089 </span></span>
-<span><span class="co">#&gt; 40 81.57188 </span></span>
-<span><span class="co">#&gt; 50 72.35308 </span></span>
-<span><span class="co">#&gt; 60 64.50818 </span></span>
-<span><span class="co">#&gt; 70 57.80596 </span></span>
-<span><span class="co">#&gt; 80 52.075 </span></span>
-<span><span class="co">#&gt; 90 47.14217 </span></span>
-<span><span class="co">#&gt; 100 42.8751 </span></span>
-<span><span class="co">#&gt; 110 39.15832 </span></span>
-<span><span class="co">#&gt; 120 35.92579 </span></span>
-<span><span class="co">#&gt; 130 33.09055 </span></span>
-<span><span class="co">#&gt; 140 30.5957 </span></span>
-<span><span class="co">#&gt; 150 28.3841 </span></span>
-<span><span class="co">#&gt; 160 26.41403 </span></span>
-<span><span class="co">#&gt; 170 24.65911 </span></span>
-<span><span class="co">#&gt; 180 23.1015 </span></span>
-<span><span class="co">#&gt; 190 21.70018 </span></span>
-<span><span class="co">#&gt; 200 20.43552</span></span></code></pre></div>
+<span><span class="co">#&gt; 10 15.11812 </span></span>
+<span><span class="co">#&gt; 20 14.52788 </span></span>
+<span><span class="co">#&gt; 30 13.97921 </span></span>
+<span><span class="co">#&gt; 40 13.46805 </span></span>
+<span><span class="co">#&gt; 50 12.99064 </span></span>
+<span><span class="co">#&gt; 60 12.54425 </span></span>
+<span><span class="co">#&gt; 70 12.12638 </span></span>
+<span><span class="co">#&gt; 80 11.7334 </span></span>
+<span><span class="co">#&gt; 90 11.36309 </span></span>
+<span><span class="co">#&gt; 100 11.0143 </span></span>
+<span><span class="co">#&gt; 110 10.68515 </span></span>
+<span><span class="co">#&gt; 120 10.37372 </span></span>
+<span><span class="co">#&gt; 130 10.08288 </span></span>
+<span><span class="co">#&gt; 140 9.807492 </span></span>
+<span><span class="co">#&gt; 150 9.546458 </span></span>
+<span><span class="co">#&gt; 160 9.299159 </span></span>
+<span><span class="co">#&gt; 170 9.064342 </span></span>
+<span><span class="co">#&gt; 180 8.841112 </span></span>
+<span><span class="co">#&gt; 190 8.628736 </span></span>
+<span><span class="co">#&gt; 200 8.426556</span></span></code></pre></div>
 <p>We still manually compute the forward pass, and we still manually
 update the weights. In the last two chapters of this section, we’ll see
 how these parts of the logic can be made more modular and reusable, as
@@ -325,11 +325,11 @@ well.</p>
 
 
     <footer><div class="pkgdown-footer-left">
-  <p>Developed by Daniel Falbel, Javier Luraschi.</p>
+  <p>Developed by Tomasz Kalinowski, Daniel Falbel, Javier Luraschi.</p>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
 </div>
 
     </footer>

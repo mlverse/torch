@@ -19,7 +19,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">torch</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.16.3</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.17.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -52,7 +52,7 @@
 <li class="nav-item dropdown">
   <button class="nav-link dropdown-toggle" type="button" id="dropdown-advanced" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Advanced</button>
   <ul class="dropdown-menu" aria-labelledby="dropdown-advanced"><li><a class="dropdown-item" href="../articles/memory-management.html">Memory management</a></li>
-    <li><a class="dropdown-item" href="../articles/modifying-source-code.html">Building locally</a></li>
+    <li><a class="dropdown-item" href="../articles/compatibility-matrix.html">CUDA compatibility matrix</a></li>
     <li><a class="dropdown-item" href="../articles/amp.html">Automatic Mixed Precision</a></li>
     <li><a class="dropdown-item" href="../articles/modifying-source-code.html">Modifying source code</a></li>
   </ul></li>
@@ -164,10 +164,10 @@ by zero leads to undefined behavior.</p>
 <span class="r-in"><span><span class="fu">torch_div</span><span class="op">(</span><span class="va">a</span>, <span class="va">b</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">}</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> torch_tensor</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  0.4066  0.8488  0.8874 -0.1661</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  0.0266 -0.3959 -1.7568 -0.8114</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  0.0829  0.5218 -0.6705  0.0329</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> -1.4102  0.1434 -1.1056  4.4986</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    2.1556   -0.0695  291.6522  -12.2218</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    2.2823    0.7578  -98.7808   -8.1594</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    1.3462   -3.1393  134.4940   -4.2285</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    3.0776  -16.9262  302.5431   -3.1759</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [ CPUFloatType{4,4} ]</span>
 </code></pre></div>
     </div>
@@ -176,11 +176,11 @@ by zero leads to undefined behavior.</p>
 
 
     <footer><div class="pkgdown-footer-left">
-  <p>Developed by Daniel Falbel, Javier Luraschi.</p>
+  <p>Developed by Tomasz Kalinowski, Daniel Falbel, Javier Luraschi.</p>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
 </div>
 
     </footer></div>
