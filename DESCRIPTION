@@ -1,9 +1,10 @@
 Package: torch
 Type: Package
 Title: Tensors and Neural Networks with 'GPU' Acceleration
-Version: 0.16.3.9002
+Version: 0.17.0
 Authors@R: c(
-    person("Daniel", "Falbel", email = "daniel@rstudio.com", role = c("aut", "cre", "cph")),
+    person("Tomasz", "Kalinowski", role = c("ctb", "cre"), email = "tomasz@posit.co"),
+    person("Daniel", "Falbel", email = "daniel@rstudio.com", role = c("aut", "cph")),
     person("Javier", "Luraschi", email = "jluraschi@gmail.com", role = c("aut")),
     person("Dmitriy", "Selivanov", role = c("ctb")),
     person("Athos", "Damiani", role = c("ctb")),
@@ -25,8 +26,6 @@ Encoding: UTF-8
 SystemRequirements: LibTorch (https://pytorch.org/); Only x86_64 platforms
   are currently supported except for ARM system running macOS.
 Config/build/copy-method: copy
-Remotes:
-    RcppCore/Rcpp
 LinkingTo:
     Rcpp
 Imports:

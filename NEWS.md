@@ -1,11 +1,32 @@
-# torch (development version)
+# torch 0.17.0
 
-- Added `torch_sitrep()` for torch installation situation report. (#1415 cregouby)
-- Added `%*%` method for torch tensors. (#1379)
-- `torch_triu_indices` and `torch_tril_indices` now return 1-based indexes. (#1382)
-- `$indices()` now return 1-based indexes (#1382)
-- Updated to LibTorch 2.8.0 (#1419)
-- Replaced non-API entry point `Rf_findVarInFrame` with `R_getVarEx` for R 4.6 compatibility. (#1421)
+## Breaking changes
+
+- Updated to LibTorch 2.8.0 (#1419).
+- `torch_triu_indices()` and `torch_tril_indices()` now return 1-based indexes (#1382).
+- `$indices()` now returns 1-based indexes (#1382).
+
+## New features
+
+- Added `torch_sitrep()` for torch installation situation report (#1415, @cregouby).
+- Added `%*%` operator for torch tensors (#1379, @caio-hamamura).
+- Added `head()` and `tail()` methods for torch tensors (#1388).
+- Exported `torch_scaled_dot_product_attention()` (#1404).
+- Exported `torch_sparse_sampled_addmm()` (#1427).
+- Exported `torch_ldexp()` (#1407).
+- Integrated `cudatoolkit` R package for CUDA library loading (#1422).
+- Improved `as_array()` support for sparse tensors (#1387).
+
+## Bug fixes
+
+- Fixed sparse CSR tensor printing, `to_sparse()` crash, and `as_array()` detection (#1431).
+- Fixed `dataset()`/`nn_module()` crash when `initialize` parameter is named `d` (#1424, @Chandraveer-Singh).
+- Fixed `bfloat16` not being recognized as a floating point dtype (#1408).
+- Fixed handling of R longjump exceptions in autograd and tracing callbacks (#1406).
+- Fixed redundant `lantern.h` include causing macro redefinition warning (#1430).
+- Excluded glibc libraries from dependency bundling (#1397, @troyhernandez).
+- Replaced non-API entry point `Rf_findVarInFrame` with `R_getVarEx` for R 4.6 compatibility (#1421).
+- Added French translations for 5 missing messages (#1385, @cregouby).
 
 # torch 0.16.3
 

@@ -373,9 +373,9 @@ XPtrTorchTensorOptions from_sexp_tensor_options(SEXP x) {
 
     std::vector<std::string> names = args.names();
 
-    for (auto i = 0; i < names.size(); ++i) {
+    for (size_t i = 0; i < names.size(); ++i) {
       auto name = names[i];
-      
+
       if (TYPEOF(args[name]) == NILSXP) {
         continue;
       } else if (name == "dtype") {
@@ -615,7 +615,7 @@ XPtrTorchDimnameList from_sexp_dimname_list(SEXP x) {
   if (TYPEOF(x) == STRSXP) {
     XPtrTorchDimnameList out = lantern_DimnameList();
     auto names = Rcpp::as<std::vector<std::string>>(x);
-    for (int i = 0; i < names.size(); i++) {
+    for (size_t i = 0; i < names.size(); i++) {
       lantern_DimnameList_push_back(out.get(),
                                     XPtrTorchDimname(names[i]).get());
     }
@@ -780,7 +780,7 @@ SEXP operator_sexp_vector_string(const XPtrTorchvector_string* self) {
 XPtrTorchvector_string from_sexp_vector_string(SEXP x) {
   XPtrTorchvector_string out = lantern_vector_string_new();
   auto strings = Rcpp::as<std::vector<std::string>>(x);
-  for (int i = 0; i < strings.size(); i++) {
+  for (size_t i = 0; i < strings.size(); i++) {
     lantern_vector_string_push_back(out.get(), strings.at(i).c_str());
   }
   return out;
@@ -1297,7 +1297,7 @@ SEXP operator_sexp_named_tuple_helper(const XPtrTorchNamedTupleHelper* self) {
   std::vector<std::string> names_ = Rcpp::as<std::vector<std::string>>(names);
   Rcpp::List elements_ = Rcpp::as<Rcpp::List>(elements);
 
-  if (names_.size() != elements_.size()) return elements_;
+  if (names_.size() != static_cast<size_t>(elements_.size())) return elements_;
 
   if (std::all_of(names_.begin(), names_.end(),
                   [](std::string x) { return x.length() != 0; })) {
@@ -1312,7 +1312,7 @@ XPtrTorchNamedTupleHelper from_sexp_named_tuple_helper(SEXP x) {
   auto x_ = Rcpp::as<Rcpp::List>(x);
   auto names = Rcpp::as<std::vector<std::string>>(x_.names());
 
-  for (int i = 0; i < names.size(); i++) {
+  for (size_t i = 0; i < names.size(); i++) {
     lantern_jit_NamedTuple_push_back(out.get(), XPtrTorchstring(names[i]).get(),
                                      Rcpp::as<XPtrTorchIValue>(x_[i]).get());
   }
@@ -1453,7 +1453,7 @@ XPtrTorchIntArrayRef from_sexp_int_array_ref(SEXP x, bool allow_null,
   }
 
   if (index) {
-    for (int i = 0; i < vec.size(); i++) {
+    for (size_t i = 0; i < vec.size(); i++) {
       if (vec[i] == 0) {
         Rcpp::stop("Indexing starts at 1 but found a 0.");
       }
@@ -1531,7 +1531,7 @@ XPtrTorchOptionalIntArrayRef from_sexp_optional_int_array_ref(SEXP x,
     }
 
     if (index) {
-      for (int i = 0; i < data.size(); i++) {
+      for (size_t i = 0; i < data.size(); i++) {
         if (data[i] == 0) {
           Rcpp::stop("Indexing starts at 1 but found a 0.");
         }

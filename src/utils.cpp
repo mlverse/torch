@@ -70,22 +70,22 @@ Rcpp::List transpose2(Rcpp::List x) {
   const auto size = x.length();
   std::vector<Rcpp::List> out;
 
-  for (auto i = 0; i < num_elements; i++) {
+  for (R_xlen_t i = 0; i < num_elements; i++) {
     out.push_back(Rcpp::List(size));
   }
 
-  for (size_t j = 0; j < size; j++) {
+  for (R_xlen_t j = 0; j < size; j++) {
     if (Rf_isNull(x[j])) {
       Rcpp::stop("NULL is not allowed. Expected a list.");
     }
     auto el = Rcpp::as<Rcpp::List>(x[j]);
-    for (auto i = 0; i < num_elements; i++) {
+    for (R_xlen_t i = 0; i < num_elements; i++) {
       out[i][j] = el[i];
     }
   }
 
   Rcpp::List ret;
-  for (auto i = 0; i < num_elements; i++) {
+  for (R_xlen_t i = 0; i < num_elements; i++) {
     ret.push_back(out[i]);
   }
 

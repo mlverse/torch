@@ -30,18 +30,18 @@ void cpp_torch_tensor_print(torch::Tensor x, int n) {
   }
 
   bool truncated = false;
-  if (cont.size() > n && n > 1) {
+  if (static_cast<int>(cont.size()) > n && n > 1) {
     cont.erase(cont.begin() + n, cont.end() - 1);
     truncated = true;
   }
 
   std::string result;
-  for (int i = 0; i < cont.size(); i++) {
+  for (size_t i = 0; i < cont.size(); i++) {
     result += cont.at(i);
 
-    if (i != (cont.size() - 1)) result += "\n";
+    if (i != cont.size() - 1) result += "\n";
 
-    if (i == (cont.size() - 2) && truncated)
+    if (i == cont.size() - 2 && truncated)
       result += "... [the output was truncated (use n=-1 to disable)]\n";
   }
 
@@ -97,7 +97,7 @@ Rcpp::XPtr<XPtrTorchDtype> cpp_torch_tensor_dtype(torch::Tensor x) {
 std::vector<int64_t> stride_from_dim(std::vector<int64_t> x) {
   auto ret = std::vector<int64_t>(x.size());
   ret[0] = 1;
-  for (int i = 1; i < x.size(); i++) {
+  for (size_t i = 1; i < x.size(); i++) {
     ret[i] = ret[i - 1] * x[i - 1];
   }
   return ret;
