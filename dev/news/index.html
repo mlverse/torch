@@ -19,7 +19,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">torch</a>
 
-    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">0.16.3.9002</small>
+    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">0.17.0.9000</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -75,15 +75,40 @@
 
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="development version" id="torch-development-version">torch (development version)<a class="anchor" aria-label="anchor" href="#torch-development-version"></a></h2>
-<ul><li>Added <code>torch_sitrep()</code> for torch installation situation report. (<a href="https://github.com/mlverse/torch/issues/1415" class="external-link">#1415</a> cregouby)</li>
-<li>Added <code>%*%</code> method for torch tensors. (<a href="https://github.com/mlverse/torch/issues/1379" class="external-link">#1379</a>)</li>
+</div>
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="0.17.0" id="torch-0170">torch 0.17.0<a class="anchor" aria-label="anchor" href="#torch-0170"></a></h2><p class="text-muted">CRAN release: 2026-04-11</p>
+<div class="section level3">
+<h3 id="breaking-changes-0-17-0">Breaking changes<a class="anchor" aria-label="anchor" href="#breaking-changes-0-17-0"></a></h3>
+<ul><li>Updated to LibTorch 2.8.0 (<a href="https://github.com/mlverse/torch/issues/1419" class="external-link">#1419</a>).</li>
 <li>
-<code>torch_triu_indices</code> and <code>torch_tril_indices</code> now return 1-based indexes. (<a href="https://github.com/mlverse/torch/issues/1382" class="external-link">#1382</a>)</li>
+<code><a href="../reference/torch_triu_indices.html">torch_triu_indices()</a></code> and <code><a href="../reference/torch_tril_indices.html">torch_tril_indices()</a></code> now return 1-based indexes (<a href="https://github.com/mlverse/torch/issues/1382" class="external-link">#1382</a>).</li>
 <li>
-<code>$indices()</code> now return 1-based indexes (<a href="https://github.com/mlverse/torch/issues/1382" class="external-link">#1382</a>)</li>
-<li>Updated to LibTorch 2.8.0 (<a href="https://github.com/mlverse/torch/issues/1419" class="external-link">#1419</a>)</li>
-<li>Replaced non-API entry point <code>Rf_findVarInFrame</code> with <code>R_getVarEx</code> for R 4.6 compatibility. (<a href="https://github.com/mlverse/torch/issues/1421" class="external-link">#1421</a>)</li>
+<code>$indices()</code> now returns 1-based indexes (<a href="https://github.com/mlverse/torch/issues/1382" class="external-link">#1382</a>).</li>
 </ul></div>
+<div class="section level3">
+<h3 id="new-features-0-17-0">New features<a class="anchor" aria-label="anchor" href="#new-features-0-17-0"></a></h3>
+<ul><li>Added <code>torch_sitrep()</code> for torch installation situation report (<a href="https://github.com/mlverse/torch/issues/1415" class="external-link">#1415</a>, <a href="https://github.com/cregouby" class="external-link">@cregouby</a>).</li>
+<li>Added <code>%*%</code> operator for torch tensors (<a href="https://github.com/mlverse/torch/issues/1379" class="external-link">#1379</a>, <a href="https://github.com/caio-hamamura" class="external-link">@caio-hamamura</a>).</li>
+<li>Added <code><a href="https://rdrr.io/r/utils/head.html" class="external-link">head()</a></code> and <code><a href="https://rdrr.io/r/utils/head.html" class="external-link">tail()</a></code> methods for torch tensors (<a href="https://github.com/mlverse/torch/issues/1388" class="external-link">#1388</a>).</li>
+<li>Exported <code><a href="../reference/torch_scaled_dot_product_attention.html">torch_scaled_dot_product_attention()</a></code> (<a href="https://github.com/mlverse/torch/issues/1404" class="external-link">#1404</a>).</li>
+<li>Exported <code><a href="../reference/torch_sparse_sampled_addmm.html">torch_sparse_sampled_addmm()</a></code> (<a href="https://github.com/mlverse/torch/issues/1427" class="external-link">#1427</a>).</li>
+<li>Exported <code><a href="../reference/torch_ldexp.html">torch_ldexp()</a></code> (<a href="https://github.com/mlverse/torch/issues/1407" class="external-link">#1407</a>).</li>
+<li>Integrated <code>cudatoolkit</code> R package for CUDA library loading (<a href="https://github.com/mlverse/torch/issues/1422" class="external-link">#1422</a>).</li>
+<li>Improved <code><a href="../reference/as_array.html">as_array()</a></code> support for sparse tensors (<a href="https://github.com/mlverse/torch/issues/1387" class="external-link">#1387</a>).</li>
+</ul></div>
+<div class="section level3">
+<h3 id="bug-fixes-0-17-0">Bug fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-0-17-0"></a></h3>
+<ul><li>Fixed sparse CSR tensor printing, <code>to_sparse()</code> crash, and <code><a href="../reference/as_array.html">as_array()</a></code> detection (<a href="https://github.com/mlverse/torch/issues/1431" class="external-link">#1431</a>).</li>
+<li>Fixed <code><a href="../reference/dataset.html">dataset()</a></code>/<code><a href="../reference/nn_module.html">nn_module()</a></code> crash when <code>initialize</code> parameter is named <code>d</code> (<a href="https://github.com/mlverse/torch/issues/1424" class="external-link">#1424</a>, <a href="https://github.com/Chandraveer-Singh" class="external-link">@Chandraveer-Singh</a>).</li>
+<li>Fixed <code>bfloat16</code> not being recognized as a floating point dtype (<a href="https://github.com/mlverse/torch/issues/1408" class="external-link">#1408</a>).</li>
+<li>Fixed handling of R longjump exceptions in autograd and tracing callbacks (<a href="https://github.com/mlverse/torch/issues/1406" class="external-link">#1406</a>).</li>
+<li>Fixed redundant <code>lantern.h</code> include causing macro redefinition warning (<a href="https://github.com/mlverse/torch/issues/1430" class="external-link">#1430</a>).</li>
+<li>Excluded glibc libraries from dependency bundling (<a href="https://github.com/mlverse/torch/issues/1397" class="external-link">#1397</a>, <a href="https://github.com/troyhernandez" class="external-link">@troyhernandez</a>).</li>
+<li>Replaced non-API entry point <code>Rf_findVarInFrame</code> with <code>R_getVarEx</code> for R 4.6 compatibility (<a href="https://github.com/mlverse/torch/issues/1421" class="external-link">#1421</a>).</li>
+<li>Added French translations for 5 missing messages (<a href="https://github.com/mlverse/torch/issues/1385" class="external-link">#1385</a>, <a href="https://github.com/cregouby" class="external-link">@cregouby</a>).</li>
+</ul></div>
+</div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.16.3" id="torch-0163">torch 0.16.3<a class="anchor" aria-label="anchor" href="#torch-0163"></a></h2><p class="text-muted">CRAN release: 2025-11-02</p>
 </div>
@@ -763,7 +788,7 @@
 
 
     <footer><div class="pkgdown-footer-left">
-  <p>Developed by Daniel Falbel, Javier Luraschi.</p>
+  <p>Developed by Tomasz Kalinowski, Daniel Falbel, Javier Luraschi.</p>
 </div>
 
 <div class="pkgdown-footer-right">

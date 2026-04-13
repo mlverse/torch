@@ -2,7 +2,9 @@
 
 ## Authors
 
-- **Daniel Falbel**. Author, maintainer, copyright holder.
+- **Tomasz Kalinowski**. Contributor, maintainer.
+
+- **Daniel Falbel**. Author, copyright holder.
 
 - **Javier Luraschi**. Author.
 
@@ -28,13 +30,13 @@ Source:
 [`DESCRIPTION`](https://github.com/mlverse/torch/blob/main/DESCRIPTION)
 
 Falbel D, Luraschi J (2026). *torch: Tensors and Neural Networks with
-'GPU' Acceleration*. R package version 0.16.3.9002,
+'GPU' Acceleration*. R package version 0.17.0.9000,
 <https://torch.mlverse.org/docs>.
 
     @Manual{,
       title = {torch: Tensors and Neural Networks with 'GPU' Acceleration},
       author = {Daniel Falbel and Javier Luraschi},
       year = {2026},
-      note = {R package version 0.16.3.9002},
+      note = {R package version 0.17.0.9000},
       url = {https://torch.mlverse.org/docs},
     }

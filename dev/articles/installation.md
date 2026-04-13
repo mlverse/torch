@@ -47,7 +47,7 @@ Since version 0.1.1 torch supports GPU installation on Windows. In order
 to use GPU’s with torch you need to:
 
 - Have a CUDA compatible NVIDIA GPU. You can find if you have a CUDA
-  compatible GPU [here](https://developer.nvidia.com/cuda-gpus#compute).
+  compatible GPU [here](https://developer.nvidia.com/cuda/gpus#compute).
 
 - Have properly installed the NVIDIA CUDA toolkit version 12.8. For CUDA
   v12.8, follow the installation instructions
@@ -70,7 +70,7 @@ you have CUDA software installed and automatically download the GPU
 enabled Lantern binaries. You can also specify the `CUDA` env var with
 something like `Sys.setenv(CUDA="12.8")` if you want to force an
 specific version of the CUDA toolkit. Refer to the [compatibility
-matrix](https://torch.mlverse.org/docs/dev/articles/compatibility-matrix)
+matrix](https://torch.mlverse.org/docs/dev/articles/compatibility-matrix.html)
 to select your version.
 
 ## MacOS
@@ -111,7 +111,7 @@ it supports. We recommand installing torch using pre-built binaries. See
 To install the GPU version of `torch` on linux you must verify that:
 
 - You have a NVIDIA CUDA compatible GPU. You can find if you have a CUDA
-  compatible GPU [here](https://developer.nvidia.com/cuda-gpus#compute).
+  compatible GPU [here](https://developer.nvidia.com/cuda/gpus#compute).
 
 - You have correctly installed the NVIDIA CUDA Toolkit versions 12.6,
   12.8, or 12.9, follow the instructions
@@ -132,7 +132,7 @@ you have CUDA software installed and automatically download the GPU
 enabled Lantern binaries. You can also specify the `CUDA` env var with
 something like `Sys.setenv(CUDA="12.8")` if you want to force an
 specific version of the CUDA toolkit. Refer to the [compatibility
-matrix](https://torch.mlverse.org/docs/dev/articles/compatibility-matrix)
+matrix](https://torch.mlverse.org/docs/dev/articles/compatibility-matrix.html)
 to select your version.
 
 ## Installing from pre-built binaries

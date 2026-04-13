@@ -2,19 +2,74 @@
 
 ## torch (development version)
 
-- Added `torch_sitrep()` for torch installation situation report.
-  ([\#1415](https://github.com/mlverse/torch/issues/1415) cregouby)
-- Added `%*%` method for torch tensors.
-  ([\#1379](https://github.com/mlverse/torch/issues/1379))
-- `torch_triu_indices` and `torch_tril_indices` now return 1-based
-  indexes. ([\#1382](https://github.com/mlverse/torch/issues/1382))
-- `$indices()` now return 1-based indexes
-  ([\#1382](https://github.com/mlverse/torch/issues/1382))
+## torch 0.17.0
+
+CRAN release: 2026-04-11
+
+### Breaking changes
+
 - Updated to LibTorch 2.8.0
-  ([\#1419](https://github.com/mlverse/torch/issues/1419))
+  ([\#1419](https://github.com/mlverse/torch/issues/1419)).
+- [`torch_triu_indices()`](https://torch.mlverse.org/docs/dev/reference/torch_triu_indices.md)
+  and
+  [`torch_tril_indices()`](https://torch.mlverse.org/docs/dev/reference/torch_tril_indices.md)
+  now return 1-based indexes
+  ([\#1382](https://github.com/mlverse/torch/issues/1382)).
+- `$indices()` now returns 1-based indexes
+  ([\#1382](https://github.com/mlverse/torch/issues/1382)).
+
+### New features
+
+- Added `torch_sitrep()` for torch installation situation report
+  ([\#1415](https://github.com/mlverse/torch/issues/1415),
+  [@cregouby](https://github.com/cregouby)).
+- Added `%*%` operator for torch tensors
+  ([\#1379](https://github.com/mlverse/torch/issues/1379),
+  [@caio-hamamura](https://github.com/caio-hamamura)).
+- Added [`head()`](https://rdrr.io/r/utils/head.html) and
+  [`tail()`](https://rdrr.io/r/utils/head.html) methods for torch
+  tensors ([\#1388](https://github.com/mlverse/torch/issues/1388)).
+- Exported
+  [`torch_scaled_dot_product_attention()`](https://torch.mlverse.org/docs/dev/reference/torch_scaled_dot_product_attention.md)
+  ([\#1404](https://github.com/mlverse/torch/issues/1404)).
+- Exported
+  [`torch_sparse_sampled_addmm()`](https://torch.mlverse.org/docs/dev/reference/torch_sparse_sampled_addmm.md)
+  ([\#1427](https://github.com/mlverse/torch/issues/1427)).
+- Exported
+  [`torch_ldexp()`](https://torch.mlverse.org/docs/dev/reference/torch_ldexp.md)
+  ([\#1407](https://github.com/mlverse/torch/issues/1407)).
+- Integrated `cudatoolkit` R package for CUDA library loading
+  ([\#1422](https://github.com/mlverse/torch/issues/1422)).
+- Improved
+  [`as_array()`](https://torch.mlverse.org/docs/dev/reference/as_array.md)
+  support for sparse tensors
+  ([\#1387](https://github.com/mlverse/torch/issues/1387)).
+
+### Bug fixes
+
+- Fixed sparse CSR tensor printing, `to_sparse()` crash, and
+  [`as_array()`](https://torch.mlverse.org/docs/dev/reference/as_array.md)
+  detection ([\#1431](https://github.com/mlverse/torch/issues/1431)).
+- Fixed
+  [`dataset()`](https://torch.mlverse.org/docs/dev/reference/dataset.md)/[`nn_module()`](https://torch.mlverse.org/docs/dev/reference/nn_module.md)
+  crash when `initialize` parameter is named `d`
+  ([\#1424](https://github.com/mlverse/torch/issues/1424),
+  [@Chandraveer-Singh](https://github.com/Chandraveer-Singh)).
+- Fixed `bfloat16` not being recognized as a floating point dtype
+  ([\#1408](https://github.com/mlverse/torch/issues/1408)).
+- Fixed handling of R longjump exceptions in autograd and tracing
+  callbacks ([\#1406](https://github.com/mlverse/torch/issues/1406)).
+- Fixed redundant `lantern.h` include causing macro redefinition warning
+  ([\#1430](https://github.com/mlverse/torch/issues/1430)).
+- Excluded glibc libraries from dependency bundling
+  ([\#1397](https://github.com/mlverse/torch/issues/1397),
+  [@troyhernandez](https://github.com/troyhernandez)).
 - Replaced non-API entry point `Rf_findVarInFrame` with `R_getVarEx` for
-  R 4.6 compatibility.
-  ([\#1421](https://github.com/mlverse/torch/issues/1421))
+  R 4.6 compatibility
+  ([\#1421](https://github.com/mlverse/torch/issues/1421)).
+- Added French translations for 5 missing messages
+  ([\#1385](https://github.com/mlverse/torch/issues/1385),
+  [@cregouby](https://github.com/cregouby)).
 
 ## torch 0.16.3
 
