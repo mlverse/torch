@@ -9,15 +9,15 @@ RUN apt-get update -y && apt-get install -y \
     libcurl4-openssl-dev libssl-dev libxml2-dev \
     libfontconfig1-dev libfreetype6-dev libpng-dev \
     libharfbuzz-dev libfribidi-dev libtiff5-dev libjpeg-dev \
-    cmake make gcc g++ \
-    && rm -rf /var/lib/apt/lists/*
+    cmake make gcc g++
 
 # Install R via rig
-RUN curl -Ls https://github.com/r-lib/rig/releases/download/latest/rig-linux-latest.tar.gz | \
-    tar xz -C /usr/local && \
-    rig add release && \
-    ln -sf /opt/R/$(ls /opt/R)/bin/R /usr/local/bin/R && \
-    ln -sf /opt/R/$(ls /opt/R)/bin/Rscript /usr/local/bin/Rscript
+RUN curl -L https://rig.r-pkg.org/deb/rig.gpg -o /etc/apt/trusted.gpg.d/rig.gpg \
+    && echo "deb http://rig.r-pkg.org/deb rig main" > /etc/apt/sources.list.d/rig.list \
+    && apt-get update \
+    && apt-get install -y r-rig \
+    && rig add release \
+    && rm -rf /var/lib/apt/lists/*
 
 # Parallel compilation
 RUN echo "MAKEFLAGS=-j$(nproc)" >> "$(R RHOME)/etc/Renviron.site"
