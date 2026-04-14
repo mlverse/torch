@@ -138,6 +138,7 @@ jobs:
 
   test-gpu:
     needs: build-gpu-image
+    if: ${{ needs.build-gpu-image.result == 'success' }}
     runs-on: [self-hosted, gpu-local]
     container:
       image: ${{ needs.build-gpu-image.outputs.image }}
@@ -168,6 +169,7 @@ jobs:
 
   test-cudatoolkit:
     needs: build-gpu-image
+    if: ${{ needs.build-gpu-image.result == 'success' }}
     runs-on: [self-hosted, gpu-local]
     container:
       image: ${{ needs.build-gpu-image.outputs.image }}
