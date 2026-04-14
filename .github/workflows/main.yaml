@@ -165,7 +165,7 @@ jobs:
 
       - name: Run tests
         run: |
-          Rscript -e "testthat::test_package('torch')"
+          Rscript -e "testthat::test_package('torch', reporter = 'progress')"
 
   test-cudatoolkit:
     needs: build-gpu-image
@@ -196,4 +196,4 @@ jobs:
 
       - name: Run tests
         run: |
-          Rscript -e "testthat::test_package('torch')"
+          Rscript -e "testthat::test_package('torch', reporter = 'progress')"
