@@ -20,8 +20,10 @@ RUN curl -L https://rig.r-pkg.org/deb/rig.gpg -o /etc/apt/trusted.gpg.d/rig.gpg 
     && rig default release \
     && rm -rf /var/lib/apt/lists/*
 
-# Verify R is on PATH and show library paths
-RUN which R && R --version | head -1 && Rscript -e "cat(.libPaths(), sep='\n')"
+# Use a fixed library path (not HOME-dependent) so packages are found
+# regardless of what HOME is set to at runtime (GitHub Actions sets HOME=/github/home)
+ENV R_LIBS_USER=/opt/R/library
+RUN mkdir -p /opt/R/library
 
 # Parallel compilation
 RUN echo "MAKEFLAGS=-j$(nproc)" >> "$(R RHOME)/etc/Renviron.site"
@@ -43,9 +45,8 @@ RUN Rscript -e "\
     pak::pkg_install('mlverse/cudatoolkit/cuda12.8')" \
     && rm -rf /tmp/* /root/.cache
 
-# Install torch with tests (use same library as pak)
-RUN Rscript -e "lib <- .libPaths()[1]; cat('Installing to:', lib, '\n')" \
-    && R CMD INSTALL --install-tests --library=$(Rscript -e "cat(.libPaths()[1])") /build
+# Install torch with tests
+RUN R CMD INSTALL --install-tests /build
 
 # Trigger LibTorch download and clean up temp files
 RUN Rscript -e "library(torch)" \
