@@ -41,7 +41,7 @@ ENV TORCH_INSTALL=1
 # Install pak, R dependencies, and cudatoolkit
 RUN Rscript -e "\
     install.packages('pak', repos = 'https://r-lib.github.io/p/pak/devel/'); \
-    pak::local_install_deps('/build'); \
+    pak::local_install_deps('/build', dependencies = TRUE); \
     pak::pkg_install('mlverse/cudatoolkit/cuda12.8')" \
     && rm -rf /tmp/* /root/.cache
 
