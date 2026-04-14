@@ -36,12 +36,14 @@ ENV TORCH_INSTALL=1
 RUN Rscript -e "\
     install.packages('pak', repos = 'https://r-lib.github.io/p/pak/devel/'); \
     pak::local_install_deps('/build'); \
-    pak::pkg_install('mlverse/cudatoolkit/cuda12.8')"
+    pak::pkg_install('mlverse/cudatoolkit/cuda12.8')" \
+    && rm -rf /tmp/* /root/.cache
 
 # Install torch with tests
 RUN R CMD INSTALL --install-tests /build
 
-# Trigger LibTorch download
-RUN Rscript -e "library(torch)"
+# Trigger LibTorch download and clean up temp files
+RUN Rscript -e "library(torch)" \
+    && rm -rf /tmp/* /build
 
 ENV TORCH_TEST=1
