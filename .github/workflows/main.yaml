@@ -135,8 +135,8 @@ jobs:
           build-args: |
             TORCH_URL=${{ env.TORCH_URL }}
             LANTERN_BASE_URL=${{ needs.lantern.result == 'success' && '/build/lantern/' || '' }}
-          cache-from: type=gha
-          cache-to: type=gha,mode=max
+          cache-from: type=registry,ref=ghcr.io/${{ github.repository }}-ci:cache
+          cache-to: type=registry,ref=ghcr.io/${{ github.repository }}-ci:cache,mode=max
 
   test-gpu:
     needs: build-gpu-image
