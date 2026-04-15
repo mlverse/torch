@@ -201,7 +201,8 @@ jobs:
   test-gpu:
     needs: build-gpu-image
     if: ${{ always() && needs.build-gpu-image.result == 'success' }}
-    runs-on: [self-hosted, gpu-local]
+    runs-on:
+      - "runs-on=${{ github.run_id }}/family=g4dn.xlarge/image=ubuntu24-gpu-x64"
     container:
       image: ${{ needs.build-gpu-image.outputs.image }}
       credentials:
@@ -232,7 +233,8 @@ jobs:
   test-cudatoolkit:
     needs: build-gpu-image
     if: ${{ always() && needs.build-gpu-image.result == 'success' }}
-    runs-on: [self-hosted, gpu-local]
+    runs-on:
+      - "runs-on=${{ github.run_id }}/family=g4dn.xlarge/image=ubuntu24-gpu-x64"
     container:
       image: ${{ needs.build-gpu-image.outputs.image }}
       credentials:
