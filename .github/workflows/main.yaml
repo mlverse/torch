@@ -231,8 +231,10 @@ jobs:
           Rscript -e "testthat::test_package('torch', reporter = 'progress')"
 
   test-cudatoolkit:
-    needs: build-gpu-image
-    if: ${{ always() && needs.build-gpu-image.result == 'success' }}
+    # Depends on test-gpu to serialize GPU jobs — our AWS quota only allows
+    # a single GPU instance at a time.
+    needs: [build-gpu-image, test-gpu]
+    if: ${{ always() && needs.build-gpu-image.result == 'success' && !cancelled() }}
     runs-on:
       - "runs-on=${{ github.run_id }}/family=g4dn.xlarge/image=ubuntu24-gpu-x64"
     container:
