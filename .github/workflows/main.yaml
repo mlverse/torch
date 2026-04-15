@@ -201,6 +201,11 @@ jobs:
   test-gpu:
     needs: build-gpu-image
     if: ${{ always() && needs.build-gpu-image.result == 'success' }}
+    # Only one GPU job at a time across all workflow runs — our AWS quota
+    # allows a single GPU instance. Note: GitHub queues at most one pending
+    # job per group; a third arrival cancels the pending one.
+    concurrency:
+      group: gpu-tests
     runs-on:
       - "runs-on=${{ github.run_id }}/family=g4dn.xlarge/image=ubuntu24-gpu-x64"
     container:
@@ -231,10 +236,10 @@ jobs:
           Rscript -e "testthat::test_package('torch', reporter = 'progress')"
 
   test-cudatoolkit:
-    # Depends on test-gpu to serialize GPU jobs — our AWS quota only allows
-    # a single GPU instance at a time.
-    needs: [build-gpu-image, test-gpu]
-    if: ${{ always() && needs.build-gpu-image.result == 'success' && !cancelled() }}
+    needs: build-gpu-image
+    if: ${{ always() && needs.build-gpu-image.result == 'success' }}
+    concurrency:
+      group: gpu-tests
     runs-on:
       - "runs-on=${{ github.run_id }}/family=g4dn.xlarge/image=ubuntu24-gpu-x64"
     container:
