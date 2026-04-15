@@ -207,7 +207,7 @@ jobs:
     concurrency:
       group: gpu-tests
     runs-on:
-      - "runs-on=${{ github.run_id }}/family=g4dn.xlarge/image=ubuntu24-gpu-x64/retry=false"
+      - "runs-on=${{ github.run_id }}/family=g4dn.xlarge/image=ubuntu24-gpu-x64/spot=true/retry=false"
     container:
       image: ${{ needs.build-gpu-image.outputs.image }}
       credentials:
@@ -241,7 +241,7 @@ jobs:
     concurrency:
       group: gpu-tests
     runs-on:
-      - "runs-on=${{ github.run_id }}/family=g4dn.xlarge/image=ubuntu24-gpu-x64/retry=false"
+      - "runs-on=${{ github.run_id }}/family=g4dn.xlarge/image=ubuntu24-gpu-x64/spot=true/retry=false"
     container:
       image: ${{ needs.build-gpu-image.outputs.image }}
       credentials:
