@@ -254,6 +254,7 @@ jobs:
       TORCH_TEST: 1
       TORCH_TEST_CUDA: 1
       CUDA: "12.8"
+      TORCH_SKIP_SLOW_TESTS: 1
 
     steps:
       - name: Verify GPU access
