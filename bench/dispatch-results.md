@@ -37,3 +37,17 @@ Also removed a dead debug loop in `create_fn_name`.
 | dispatch       | 6.11µs          | 5.90µs         | -3.4%  |
 | create_fn_name | 1.39µs          | 1.19µs         | -14.4% |
 | direct         | 1.52µs          | 1.56µs         | (noise)|
+
+## Fix 3: Single-pass cpp_clean_names with lookup table
+
+Replace 11 sequential `erase(std::remove(...))` passes with a single pass
+using a static `bool[256]` lookup table. Also removed the dead
+`remove_characters` vector.
+
+| expression     | median (before) | median (after) | change |
+|----------------|-----------------|----------------|--------|
+| dispatch       | 5.90µs          | 5.86µs         | (noise)|
+| create_fn_name | 1.19µs          | 1.27µs         | (noise)|
+
+Negligible impact — the generated function names are short enough that the
+multi-pass approach was already fast. Still a cleaner implementation.
