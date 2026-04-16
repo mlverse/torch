@@ -694,6 +694,81 @@ SKIP_R_BINDIND <- c(
   "_make_dep_token"
 )
 
+# Generate a C++ dispatcher for a group of overloads (same function name).
+# The dispatcher takes an Rcpp::List of args, resolves types using existing
+# cpp_arg_to_torch_type, builds the function name, and dispatches to the
+# matching overload directly.
+cpp_dispatcher <- function(decls, type) {
+  fun_name <- decls[[1]]$name
+  dispatch_args <- get_dispatch_arguments(decls)
+
+  # Compute expected types per dispatch arg
+  expected_types_code <- vapply(dispatch_args, function(a) {
+    types <- r_argument_expected_types(a, decls)
+    items <- paste0('"', types, '"', collapse = ", ")
+    glue::glue('  static const std::vector<std::string> {r_argument_name(a)}_expected = {{{items}}};')
+  }, character(1))
+
+  # Type resolution code
+  resolve_code <- vapply(dispatch_args, function(a) {
+    rn <- r_argument_name(a)
+    glue::glue('  auto {rn}_type = cpp_arg_to_torch_type(args["{rn}"], {rn}_expected, "{rn}");')
+  }, character(1))
+
+  # Build dispatch branches for each overload
+  branches <- vapply(decls, function(decl) {
+    fn <- cpp_function_name(decl, type)
+    decl_args <- decl$arguments
+
+    # Build the condition: match all dispatch arg types
+    conds <- character()
+    for (a in dispatch_args) {
+      rn <- r_argument_name(a)
+      arg_in_decl <- Filter(function(x) x$name == a, decl_args)
+      if (length(arg_in_decl) == 0) {
+        conds <- c(conds, glue::glue('{rn}_type == "Missing"'))
+      } else {
+        dt <- r_mask_dynamic_type_name(arg_in_decl[[1]]$dynamic_type)
+        conds <- c(conds, glue::glue('{rn}_type == "{dt}"'))
+      }
+    }
+    condition <- paste(conds, collapse = " && ")
+
+    # Build the call with Rcpp::as<> conversions
+    call_args <- vapply(decl_args, function(arg) {
+      arg$decl_name <- fun_name
+      cpp_type <- cpp_parameter_type(arg)
+      rn <- r_argument_name(arg$name)
+      glue::glue('Rcpp::as<{cpp_type}>(args["{rn}"])')
+    }, character(1))
+    call_args_str <- paste(call_args, collapse = ", ")
+
+    ret_type <- cpp_type(decl)
+    if (ret_type == "void") {
+      glue::glue('  if ({condition}) {{
+    {fn}({call_args_str});
+    return R_NilValue;
+  }}')
+    } else {
+      glue::glue('  if ({condition}) {{
+    return Rcpp::wrap({fn}({call_args_str}));
+  }}')
+    }
+  }, character(1))
+
+  dispatcher_name <- glue::glue("cpp_torch_dispatch_{type}_{fun_name}")
+
+  glue::glue('
+// [[Rcpp::export(rng=false)]]
+SEXP {dispatcher_name} (Rcpp::List args) {{
+{paste(expected_types_code, collapse = "\n")}
+{paste(resolve_code, collapse = "\n")}
+{paste(branches, collapse = "\n")}
+  Rcpp::stop("No matching overload for {fun_name}");
+}}
+')
+}
+
 SKIP_CPP_BINDING <- c(
   "_cufft_get_plan_cache_size"
 )
@@ -735,13 +810,50 @@ cpp <- function(path) {
       cpp_namespace(x)
     })
 
+  # Generate C++ dispatchers for multi-overload functions that can't be
+  # handled by trivial or inline R dispatch.
+  # Use the same filtered decls list as namespace/method code above.
+  all_decls <- decls %>%
+    purrr::discard(~.x$name %in% SKIP_CPP_BINDING)
+
+  needs_cpp_dispatcher <- function(group_decls, type) {
+    # Single overload or 2-overload with inline R dispatch don't need this
+    if (length(group_decls) == 1) return(FALSE)
+    if (length(group_decls) == 2 && !is.null(r_inline_dispatch(group_decls, type))) return(FALSE)
+    TRUE
+  }
+
+  namespace_dispatchers <- all_decls %>%
+    purrr::keep(~"namespace" %in% .x$method_of) %>%
+    {split(., purrr::map_chr(., ~.x$name))} %>%
+    purrr::keep(~needs_cpp_dispatcher(.x, "namespace")) %>%
+    purrr::map_chr(~cpp_dispatcher(.x, "namespace"))
+
+  method_dispatchers <- all_decls %>%
+    purrr::keep(~"Tensor" %in% .x$method_of) %>%
+    {split(., purrr::map_chr(., ~.x$name))} %>%
+    purrr::keep(~needs_cpp_dispatcher(.x, "method")) %>%
+    purrr::map_chr(~cpp_dispatcher(.x, "method"))
+
+  dispatcher_header <- '
+// Forward declaration from codegen.cpp
+std::string cpp_arg_to_torch_type(SEXP obj,
+                                  const std::vector<std::string>& expected_types,
+                                  const std::string& arg_name);
+'
+
   writeLines(
     c(
       '// This file is auto generated. Dont modify it by hand.',
       '#include <torch.h>',
       '',
       methods_code,
-      namespace_code
+      namespace_code,
+      '',
+      '// C++ dispatchers for multi-overload functions',
+      dispatcher_header,
+      namespace_dispatchers,
+      method_dispatchers
     ),
     file.path(path, "/src/gen-namespace.cpp")
   )

@@ -620,20 +620,11 @@ r_namespace_body <- function(decls) {
   inline <- r_inline_dispatch(decls, "namespace")
   if (!is.null(inline)) return(inline)
 
-  glue::glue(.sep = "\n",
-  "{r_namespace_list_of_arguments(decls)}",
-  "{r_arguments_expected_types(decls)}",
-  "{r_arguments_with_no_default(decls)}",
-  "{r_return_types(decls)}",
-  "call_c_function(",
-    "fun_name = '{decls[[1]]$name}',",
-    "args = args,",
-    "expected_types = expected_types,",
-    "nd_args = nd_args,",
-    "return_types = return_types,",
-    "fun_type = 'namespace'",
-  ")"
-  )
+  # Use C++ dispatcher for remaining multi-overload functions
+  all_args <- purrr::map_chr(get_arguments_order(decls), r_argument_name)
+  args_mget <- glue::glue('"{all_args}"') %>% glue::glue_collapse(sep = ", ")
+  dispatcher <- glue::glue("cpp_torch_dispatch_namespace_{decls[[1]]$name}")
+  glue::glue("{dispatcher}(mget(x = c({args_mget})))")
 
 }
 
@@ -697,22 +688,20 @@ r_method_body <- function(decls) {
   inline <- r_inline_dispatch(decls, "method")
   if (!is.null(inline)) return(inline)
 
-  glue::glue(
-    "{r_method_list_of_arguments(decls)}",
-    "args <- c(list(self = self), args)",
-    "{r_arguments_expected_types(decls)}",
-    "{r_arguments_with_no_default(decls)}",
-    "{r_return_types(decls)}",
-    "call_c_function(",
-    "  fun_name = '{decls[[1]]$name}',",
-    "  args = args,",
-    "  expected_types = expected_types,",
-    "  nd_args = nd_args,",
-    "  return_types = return_types,",
-    "  fun_type = 'method'",
-    ")",
-    .sep = "\n",
-  )
+  # Use C++ dispatcher for remaining multi-overload methods.
+  # Methods need self prepended to the args list.
+  all_args <- purrr::map_chr(get_arguments_order(decls), r_argument_name)
+  other_args <- all_args[all_args != "self"]
+  if (length(other_args) > 0) {
+    args_mget <- glue::glue('"{other_args}"') %>% glue::glue_collapse(sep = ", ")
+    glue::glue(
+      'args <- mget(x = c({args_mget}))\n',
+      'args <- c(list(self = self), args)\n',
+      'cpp_torch_dispatch_method_{decls[[1]]$name}(args)'
+    )
+  } else {
+    glue::glue('cpp_torch_dispatch_method_{decls[[1]]$name}(list(self = self))')
+  }
 
 }
 
@@ -720,6 +709,10 @@ r <- function(path) {
 
   namespace <- declarations() %>%
     purrr::discard(~.x$name %in% SKIP_R_BINDIND[!SKIP_R_BINDIND %in% internal_funs]) %>%
+    purrr::discard(~.x$name == "range" && length(.x$arguments) == 3) %>%
+    purrr::discard(~.x$name == "range_out" && length(.x$arguments) == 3) %>%
+    purrr::discard(~.x$name == "arange" && length(.x$arguments) == 3) %>%
+    purrr::discard(~.x$name == "stft" && length(.x$arguments) == 9) %>%
     purrr::keep(~"namespace" %in% .x$method_of)
 
   namespace_nms <- purrr::map_chr(namespace, ~.x$name)

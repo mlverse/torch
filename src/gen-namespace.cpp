@@ -22095,3 +22095,7095 @@ auto wrap = XPtrTorchvector_void(r_out);
 return Rcpp::List::create(XPtrTorchTensorList(lantern_vector_get(wrap.get(), 0)),XPtrTorchTensorList(lantern_vector_get(wrap.get(), 1)),XPtrTorchTensorList(lantern_vector_get(wrap.get(), 2)));
 }
 
+
+// C++ dispatchers for multi-overload functions
+
+// Forward declaration from codegen.cpp
+std::string cpp_arg_to_torch_type(SEXP obj,
+                                  const std::vector<std::string>& expected_types,
+                                  const std::string& arg_name);
+
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace__aminmax (Rcpp::List args) {
+  static const std::vector<std::string> self_expected = {"Tensor"};
+  static const std::vector<std::string> dim_expected = {"int64_t"};
+  auto self_type = cpp_arg_to_torch_type(args["self"], self_expected, "self");
+  auto dim_type = cpp_arg_to_torch_type(args["dim"], dim_expected, "dim");
+if (self_type == "Tensor" && dim_type == "Missing") {
+  return Rcpp::wrap(cpp_torch_namespace__aminmax_self_Tensor(Rcpp::as<XPtrTorchTensor>(args["self"])));
+}
+if (self_type == "Tensor" && dim_type == "int64_t") {
+  return Rcpp::wrap(cpp_torch_namespace__aminmax_self_Tensor_dim_int64_t(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchindex_int64_t>(args["dim"]), Rcpp::as<XPtrTorchbool>(args["keepdim"])));
+}
+  Rcpp::stop("No matching overload for _aminmax");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace__aminmax_out (Rcpp::List args) {
+  static const std::vector<std::string> out0_expected = {"Tensor"};
+  static const std::vector<std::string> out1_expected = {"Tensor"};
+  static const std::vector<std::string> self_expected = {"Tensor"};
+  static const std::vector<std::string> dim_expected = {"int64_t"};
+  auto out0_type = cpp_arg_to_torch_type(args["out0"], out0_expected, "out0");
+  auto out1_type = cpp_arg_to_torch_type(args["out1"], out1_expected, "out1");
+  auto self_type = cpp_arg_to_torch_type(args["self"], self_expected, "self");
+  auto dim_type = cpp_arg_to_torch_type(args["dim"], dim_expected, "dim");
+if (out0_type == "Tensor" && out1_type == "Tensor" && self_type == "Tensor" && dim_type == "Missing") {
+  return Rcpp::wrap(cpp_torch_namespace__aminmax_out_out0_Tensor_out1_Tensor_self_Tensor(Rcpp::as<XPtrTorchTensor>(args["out0"]), Rcpp::as<XPtrTorchTensor>(args["out1"]), Rcpp::as<XPtrTorchTensor>(args["self"])));
+}
+if (out0_type == "Tensor" && out1_type == "Tensor" && self_type == "Tensor" && dim_type == "int64_t") {
+  return Rcpp::wrap(cpp_torch_namespace__aminmax_out_out0_Tensor_out1_Tensor_self_Tensor_dim_int64_t(Rcpp::as<XPtrTorchTensor>(args["out0"]), Rcpp::as<XPtrTorchTensor>(args["out1"]), Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchindex_int64_t>(args["dim"]), Rcpp::as<XPtrTorchbool>(args["keepdim"])));
+}
+  Rcpp::stop("No matching overload for _aminmax_out");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace__assert_async (Rcpp::List args) {
+  static const std::vector<std::string> self_expected = {"Tensor"};
+  static const std::vector<std::string> assert_msg_expected = {"c10::string_view"};
+  auto self_type = cpp_arg_to_torch_type(args["self"], self_expected, "self");
+  auto assert_msg_type = cpp_arg_to_torch_type(args["assert_msg"], assert_msg_expected, "assert_msg");
+if (self_type == "Tensor" && assert_msg_type == "Missing") {
+  cpp_torch_namespace__assert_async_self_Tensor(Rcpp::as<XPtrTorchTensor>(args["self"]));
+  return R_NilValue;
+}
+if (self_type == "Tensor" && assert_msg_type == "c10::string_view") {
+  cpp_torch_namespace__assert_async_self_Tensor_assert_msg_c10string_view(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchstring_view>(args["assert_msg"]));
+  return R_NilValue;
+}
+  Rcpp::stop("No matching overload for _assert_async");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace__convolution (Rcpp::List args) {
+  static const std::vector<std::string> input_expected = {"Tensor"};
+  static const std::vector<std::string> weight_expected = {"Tensor"};
+  static const std::vector<std::string> bias_expected = {"Tensor"};
+  static const std::vector<std::string> stride_expected = {"IntArrayRef"};
+  static const std::vector<std::string> padding_expected = {"IntArrayRef"};
+  static const std::vector<std::string> dilation_expected = {"IntArrayRef"};
+  static const std::vector<std::string> transposed_expected = {"bool"};
+  static const std::vector<std::string> output_padding_expected = {"IntArrayRef"};
+  static const std::vector<std::string> groups_expected = {"int64_t"};
+  static const std::vector<std::string> benchmark_expected = {"bool"};
+  static const std::vector<std::string> deterministic_expected = {"bool"};
+  static const std::vector<std::string> cudnn_enabled_expected = {"bool"};
+  static const std::vector<std::string> allow_tf32_expected = {"bool"};
+  auto input_type = cpp_arg_to_torch_type(args["input"], input_expected, "input");
+  auto weight_type = cpp_arg_to_torch_type(args["weight"], weight_expected, "weight");
+  auto bias_type = cpp_arg_to_torch_type(args["bias"], bias_expected, "bias");
+  auto stride_type = cpp_arg_to_torch_type(args["stride"], stride_expected, "stride");
+  auto padding_type = cpp_arg_to_torch_type(args["padding"], padding_expected, "padding");
+  auto dilation_type = cpp_arg_to_torch_type(args["dilation"], dilation_expected, "dilation");
+  auto transposed_type = cpp_arg_to_torch_type(args["transposed"], transposed_expected, "transposed");
+  auto output_padding_type = cpp_arg_to_torch_type(args["output_padding"], output_padding_expected, "output_padding");
+  auto groups_type = cpp_arg_to_torch_type(args["groups"], groups_expected, "groups");
+  auto benchmark_type = cpp_arg_to_torch_type(args["benchmark"], benchmark_expected, "benchmark");
+  auto deterministic_type = cpp_arg_to_torch_type(args["deterministic"], deterministic_expected, "deterministic");
+  auto cudnn_enabled_type = cpp_arg_to_torch_type(args["cudnn_enabled"], cudnn_enabled_expected, "cudnn_enabled");
+  auto allow_tf32_type = cpp_arg_to_torch_type(args["allow_tf32"], allow_tf32_expected, "allow_tf32");
+if (input_type == "Tensor" && weight_type == "Tensor" && bias_type == "Tensor" && stride_type == "IntArrayRef" && padding_type == "IntArrayRef" && dilation_type == "IntArrayRef" && transposed_type == "bool" && output_padding_type == "IntArrayRef" && groups_type == "int64_t" && benchmark_type == "bool" && deterministic_type == "bool" && cudnn_enabled_type == "bool" && allow_tf32_type == "bool") {
+  return Rcpp::wrap(cpp_torch_namespace__convolution_input_Tensor_weight_Tensor_bias_Tensor_stride_IntArrayRef_padding_IntArrayRef_dilation_IntArrayRef_transposed_bool_output_padding_IntArrayRef_groups_int64_t_benchmark_bool_deterministic_bool_cudnn_enabled_bool_allow_tf32_bool(Rcpp::as<XPtrTorchTensor>(args["input"]), Rcpp::as<XPtrTorchTensor>(args["weight"]), Rcpp::as<XPtrTorchOptionalTensor>(args["bias"]), Rcpp::as<XPtrTorchIntArrayRef>(args["stride"]), Rcpp::as<XPtrTorchIntArrayRef>(args["padding"]), Rcpp::as<XPtrTorchIntArrayRef>(args["dilation"]), Rcpp::as<XPtrTorchbool>(args["transposed"]), Rcpp::as<XPtrTorchIntArrayRef>(args["output_padding"]), Rcpp::as<XPtrTorchint64_t>(args["groups"]), Rcpp::as<XPtrTorchbool>(args["benchmark"]), Rcpp::as<XPtrTorchbool>(args["deterministic"]), Rcpp::as<XPtrTorchbool>(args["cudnn_enabled"]), Rcpp::as<XPtrTorchbool>(args["allow_tf32"])));
+}
+if (input_type == "Tensor" && weight_type == "Tensor" && bias_type == "Tensor" && stride_type == "IntArrayRef" && padding_type == "IntArrayRef" && dilation_type == "IntArrayRef" && transposed_type == "bool" && output_padding_type == "IntArrayRef" && groups_type == "int64_t" && benchmark_type == "bool" && deterministic_type == "bool" && cudnn_enabled_type == "bool" && allow_tf32_type == "Missing") {
+  return Rcpp::wrap(cpp_torch_namespace__convolution_input_Tensor_weight_Tensor_bias_Tensor_stride_IntArrayRef_padding_IntArrayRef_dilation_IntArrayRef_transposed_bool_output_padding_IntArrayRef_groups_int64_t_benchmark_bool_deterministic_bool_cudnn_enabled_bool(Rcpp::as<XPtrTorchTensor>(args["input"]), Rcpp::as<XPtrTorchTensor>(args["weight"]), Rcpp::as<XPtrTorchOptionalTensor>(args["bias"]), Rcpp::as<XPtrTorchIntArrayRef>(args["stride"]), Rcpp::as<XPtrTorchIntArrayRef>(args["padding"]), Rcpp::as<XPtrTorchIntArrayRef>(args["dilation"]), Rcpp::as<XPtrTorchbool>(args["transposed"]), Rcpp::as<XPtrTorchIntArrayRef>(args["output_padding"]), Rcpp::as<XPtrTorchint64_t>(args["groups"]), Rcpp::as<XPtrTorchbool>(args["benchmark"]), Rcpp::as<XPtrTorchbool>(args["deterministic"]), Rcpp::as<XPtrTorchbool>(args["cudnn_enabled"])));
+}
+  Rcpp::stop("No matching overload for _convolution");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace__ctc_loss (Rcpp::List args) {
+  static const std::vector<std::string> log_probs_expected = {"Tensor"};
+  static const std::vector<std::string> targets_expected = {"Tensor"};
+  static const std::vector<std::string> input_lengths_expected = {"IntArrayRef", "Tensor"};
+  static const std::vector<std::string> target_lengths_expected = {"IntArrayRef", "Tensor"};
+  auto log_probs_type = cpp_arg_to_torch_type(args["log_probs"], log_probs_expected, "log_probs");
+  auto targets_type = cpp_arg_to_torch_type(args["targets"], targets_expected, "targets");
+  auto input_lengths_type = cpp_arg_to_torch_type(args["input_lengths"], input_lengths_expected, "input_lengths");
+  auto target_lengths_type = cpp_arg_to_torch_type(args["target_lengths"], target_lengths_expected, "target_lengths");
+if (log_probs_type == "Tensor" && targets_type == "Tensor" && input_lengths_type == "IntArrayRef" && target_lengths_type == "IntArrayRef") {
+  return Rcpp::wrap(cpp_torch_namespace__ctc_loss_log_probs_Tensor_targets_Tensor_input_lengths_IntArrayRef_target_lengths_IntArrayRef(Rcpp::as<XPtrTorchTensor>(args["log_probs"]), Rcpp::as<XPtrTorchTensor>(args["targets"]), Rcpp::as<XPtrTorchIntArrayRef>(args["input_lengths"]), Rcpp::as<XPtrTorchIntArrayRef>(args["target_lengths"]), Rcpp::as<XPtrTorchint64_t>(args["blank"]), Rcpp::as<XPtrTorchbool>(args["zero_infinity"])));
+}
+if (log_probs_type == "Tensor" && targets_type == "Tensor" && input_lengths_type == "Tensor" && target_lengths_type == "Tensor") {
+  return Rcpp::wrap(cpp_torch_namespace__ctc_loss_log_probs_Tensor_targets_Tensor_input_lengths_Tensor_target_lengths_Tensor(Rcpp::as<XPtrTorchTensor>(args["log_probs"]), Rcpp::as<XPtrTorchTensor>(args["targets"]), Rcpp::as<XPtrTorchTensor>(args["input_lengths"]), Rcpp::as<XPtrTorchTensor>(args["target_lengths"]), Rcpp::as<XPtrTorchint64_t>(args["blank"]), Rcpp::as<XPtrTorchbool>(args["zero_infinity"])));
+}
+  Rcpp::stop("No matching overload for _ctc_loss");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace__ctc_loss_backward (Rcpp::List args) {
+  static const std::vector<std::string> grad_expected = {"Tensor"};
+  static const std::vector<std::string> log_probs_expected = {"Tensor"};
+  static const std::vector<std::string> targets_expected = {"Tensor"};
+  static const std::vector<std::string> input_lengths_expected = {"IntArrayRef", "Tensor"};
+  static const std::vector<std::string> target_lengths_expected = {"IntArrayRef", "Tensor"};
+  static const std::vector<std::string> neg_log_likelihood_expected = {"Tensor"};
+  static const std::vector<std::string> log_alpha_expected = {"Tensor"};
+  static const std::vector<std::string> blank_expected = {"int64_t"};
+  auto grad_type = cpp_arg_to_torch_type(args["grad"], grad_expected, "grad");
+  auto log_probs_type = cpp_arg_to_torch_type(args["log_probs"], log_probs_expected, "log_probs");
+  auto targets_type = cpp_arg_to_torch_type(args["targets"], targets_expected, "targets");
+  auto input_lengths_type = cpp_arg_to_torch_type(args["input_lengths"], input_lengths_expected, "input_lengths");
+  auto target_lengths_type = cpp_arg_to_torch_type(args["target_lengths"], target_lengths_expected, "target_lengths");
+  auto neg_log_likelihood_type = cpp_arg_to_torch_type(args["neg_log_likelihood"], neg_log_likelihood_expected, "neg_log_likelihood");
+  auto log_alpha_type = cpp_arg_to_torch_type(args["log_alpha"], log_alpha_expected, "log_alpha");
+  auto blank_type = cpp_arg_to_torch_type(args["blank"], blank_expected, "blank");
+if (grad_type == "Tensor" && log_probs_type == "Tensor" && targets_type == "Tensor" && input_lengths_type == "IntArrayRef" && target_lengths_type == "IntArrayRef" && neg_log_likelihood_type == "Tensor" && log_alpha_type == "Tensor" && blank_type == "int64_t") {
+  return Rcpp::wrap(cpp_torch_namespace__ctc_loss_backward_grad_Tensor_log_probs_Tensor_targets_Tensor_input_lengths_IntArrayRef_target_lengths_IntArrayRef_neg_log_likelihood_Tensor_log_alpha_Tensor_blank_int64_t(Rcpp::as<XPtrTorchTensor>(args["grad"]), Rcpp::as<XPtrTorchTensor>(args["log_probs"]), Rcpp::as<XPtrTorchTensor>(args["targets"]), Rcpp::as<XPtrTorchIntArrayRef>(args["input_lengths"]), Rcpp::as<XPtrTorchIntArrayRef>(args["target_lengths"]), Rcpp::as<XPtrTorchTensor>(args["neg_log_likelihood"]), Rcpp::as<XPtrTorchTensor>(args["log_alpha"]), Rcpp::as<XPtrTorchint64_t>(args["blank"]), Rcpp::as<XPtrTorchbool>(args["zero_infinity"])));
+}
+if (grad_type == "Tensor" && log_probs_type == "Tensor" && targets_type == "Tensor" && input_lengths_type == "Tensor" && target_lengths_type == "Tensor" && neg_log_likelihood_type == "Tensor" && log_alpha_type == "Tensor" && blank_type == "int64_t") {
+  return Rcpp::wrap(cpp_torch_namespace__ctc_loss_backward_grad_Tensor_log_probs_Tensor_targets_Tensor_input_lengths_Tensor_target_lengths_Tensor_neg_log_likelihood_Tensor_log_alpha_Tensor_blank_int64_t(Rcpp::as<XPtrTorchTensor>(args["grad"]), Rcpp::as<XPtrTorchTensor>(args["log_probs"]), Rcpp::as<XPtrTorchTensor>(args["targets"]), Rcpp::as<XPtrTorchTensor>(args["input_lengths"]), Rcpp::as<XPtrTorchTensor>(args["target_lengths"]), Rcpp::as<XPtrTorchTensor>(args["neg_log_likelihood"]), Rcpp::as<XPtrTorchTensor>(args["log_alpha"]), Rcpp::as<XPtrTorchint64_t>(args["blank"]), Rcpp::as<XPtrTorchbool>(args["zero_infinity"])));
+}
+  Rcpp::stop("No matching overload for _ctc_loss_backward");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace__ctc_loss_out (Rcpp::List args) {
+  static const std::vector<std::string> out0_expected = {"Tensor"};
+  static const std::vector<std::string> out1_expected = {"Tensor"};
+  static const std::vector<std::string> log_probs_expected = {"Tensor"};
+  static const std::vector<std::string> targets_expected = {"Tensor"};
+  static const std::vector<std::string> input_lengths_expected = {"IntArrayRef", "Tensor"};
+  static const std::vector<std::string> target_lengths_expected = {"IntArrayRef", "Tensor"};
+  auto out0_type = cpp_arg_to_torch_type(args["out0"], out0_expected, "out0");
+  auto out1_type = cpp_arg_to_torch_type(args["out1"], out1_expected, "out1");
+  auto log_probs_type = cpp_arg_to_torch_type(args["log_probs"], log_probs_expected, "log_probs");
+  auto targets_type = cpp_arg_to_torch_type(args["targets"], targets_expected, "targets");
+  auto input_lengths_type = cpp_arg_to_torch_type(args["input_lengths"], input_lengths_expected, "input_lengths");
+  auto target_lengths_type = cpp_arg_to_torch_type(args["target_lengths"], target_lengths_expected, "target_lengths");
+if (out0_type == "Tensor" && out1_type == "Tensor" && log_probs_type == "Tensor" && targets_type == "Tensor" && input_lengths_type == "IntArrayRef" && target_lengths_type == "IntArrayRef") {
+  return Rcpp::wrap(cpp_torch_namespace__ctc_loss_out_out0_Tensor_out1_Tensor_log_probs_Tensor_targets_Tensor_input_lengths_IntArrayRef_target_lengths_IntArrayRef(Rcpp::as<XPtrTorchTensor>(args["out0"]), Rcpp::as<XPtrTorchTensor>(args["out1"]), Rcpp::as<XPtrTorchTensor>(args["log_probs"]), Rcpp::as<XPtrTorchTensor>(args["targets"]), Rcpp::as<XPtrTorchIntArrayRef>(args["input_lengths"]), Rcpp::as<XPtrTorchIntArrayRef>(args["target_lengths"]), Rcpp::as<XPtrTorchint64_t>(args["blank"]), Rcpp::as<XPtrTorchbool>(args["zero_infinity"])));
+}
+if (out0_type == "Tensor" && out1_type == "Tensor" && log_probs_type == "Tensor" && targets_type == "Tensor" && input_lengths_type == "Tensor" && target_lengths_type == "Tensor") {
+  return Rcpp::wrap(cpp_torch_namespace__ctc_loss_out_out0_Tensor_out1_Tensor_log_probs_Tensor_targets_Tensor_input_lengths_Tensor_target_lengths_Tensor(Rcpp::as<XPtrTorchTensor>(args["out0"]), Rcpp::as<XPtrTorchTensor>(args["out1"]), Rcpp::as<XPtrTorchTensor>(args["log_probs"]), Rcpp::as<XPtrTorchTensor>(args["targets"]), Rcpp::as<XPtrTorchTensor>(args["input_lengths"]), Rcpp::as<XPtrTorchTensor>(args["target_lengths"]), Rcpp::as<XPtrTorchint64_t>(args["blank"]), Rcpp::as<XPtrTorchbool>(args["zero_infinity"])));
+}
+  Rcpp::stop("No matching overload for _ctc_loss_out");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace__cudnn_ctc_loss (Rcpp::List args) {
+  static const std::vector<std::string> log_probs_expected = {"Tensor"};
+  static const std::vector<std::string> targets_expected = {"Tensor"};
+  static const std::vector<std::string> input_lengths_expected = {"IntArrayRef", "Tensor"};
+  static const std::vector<std::string> target_lengths_expected = {"IntArrayRef", "Tensor"};
+  static const std::vector<std::string> blank_expected = {"int64_t"};
+  static const std::vector<std::string> deterministic_expected = {"bool"};
+  static const std::vector<std::string> zero_infinity_expected = {"bool"};
+  auto log_probs_type = cpp_arg_to_torch_type(args["log_probs"], log_probs_expected, "log_probs");
+  auto targets_type = cpp_arg_to_torch_type(args["targets"], targets_expected, "targets");
+  auto input_lengths_type = cpp_arg_to_torch_type(args["input_lengths"], input_lengths_expected, "input_lengths");
+  auto target_lengths_type = cpp_arg_to_torch_type(args["target_lengths"], target_lengths_expected, "target_lengths");
+  auto blank_type = cpp_arg_to_torch_type(args["blank"], blank_expected, "blank");
+  auto deterministic_type = cpp_arg_to_torch_type(args["deterministic"], deterministic_expected, "deterministic");
+  auto zero_infinity_type = cpp_arg_to_torch_type(args["zero_infinity"], zero_infinity_expected, "zero_infinity");
+if (log_probs_type == "Tensor" && targets_type == "Tensor" && input_lengths_type == "IntArrayRef" && target_lengths_type == "IntArrayRef" && blank_type == "int64_t" && deterministic_type == "bool" && zero_infinity_type == "bool") {
+  return Rcpp::wrap(cpp_torch_namespace__cudnn_ctc_loss_log_probs_Tensor_targets_Tensor_input_lengths_IntArrayRef_target_lengths_IntArrayRef_blank_int64_t_deterministic_bool_zero_infinity_bool(Rcpp::as<XPtrTorchTensor>(args["log_probs"]), Rcpp::as<XPtrTorchTensor>(args["targets"]), Rcpp::as<XPtrTorchIntArrayRef>(args["input_lengths"]), Rcpp::as<XPtrTorchIntArrayRef>(args["target_lengths"]), Rcpp::as<XPtrTorchint64_t>(args["blank"]), Rcpp::as<XPtrTorchbool>(args["deterministic"]), Rcpp::as<XPtrTorchbool>(args["zero_infinity"])));
+}
+if (log_probs_type == "Tensor" && targets_type == "Tensor" && input_lengths_type == "Tensor" && target_lengths_type == "Tensor" && blank_type == "int64_t" && deterministic_type == "bool" && zero_infinity_type == "bool") {
+  return Rcpp::wrap(cpp_torch_namespace__cudnn_ctc_loss_log_probs_Tensor_targets_Tensor_input_lengths_Tensor_target_lengths_Tensor_blank_int64_t_deterministic_bool_zero_infinity_bool(Rcpp::as<XPtrTorchTensor>(args["log_probs"]), Rcpp::as<XPtrTorchTensor>(args["targets"]), Rcpp::as<XPtrTorchTensor>(args["input_lengths"]), Rcpp::as<XPtrTorchTensor>(args["target_lengths"]), Rcpp::as<XPtrTorchint64_t>(args["blank"]), Rcpp::as<XPtrTorchbool>(args["deterministic"]), Rcpp::as<XPtrTorchbool>(args["zero_infinity"])));
+}
+  Rcpp::stop("No matching overload for _cudnn_ctc_loss");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace__foreach_add (Rcpp::List args) {
+  static const std::vector<std::string> self_expected = {"TensorList"};
+  static const std::vector<std::string> other_expected = {"TensorList", "Tensor"};
+  static const std::vector<std::string> scalar_expected = {"Scalar"};
+  static const std::vector<std::string> scalars_expected = {"ArrayRef<Scalar>"};
+  auto self_type = cpp_arg_to_torch_type(args["self"], self_expected, "self");
+  auto other_type = cpp_arg_to_torch_type(args["other"], other_expected, "other");
+  auto scalar_type = cpp_arg_to_torch_type(args["scalar"], scalar_expected, "scalar");
+  auto scalars_type = cpp_arg_to_torch_type(args["scalars"], scalars_expected, "scalars");
+if (self_type == "TensorList" && other_type == "Missing" && scalar_type == "Scalar" && scalars_type == "Missing") {
+  return Rcpp::wrap(cpp_torch_namespace__foreach_add_self_TensorList_scalar_Scalar(Rcpp::as<XPtrTorchTensorList>(args["self"]), Rcpp::as<XPtrTorchScalar>(args["scalar"])));
+}
+if (self_type == "TensorList" && other_type == "TensorList" && scalar_type == "Missing" && scalars_type == "Missing") {
+  return Rcpp::wrap(cpp_torch_namespace__foreach_add_self_TensorList_other_TensorList(Rcpp::as<XPtrTorchTensorList>(args["self"]), Rcpp::as<XPtrTorchTensorList>(args["other"]), Rcpp::as<XPtrTorchScalar>(args["alpha"])));
+}
+if (self_type == "TensorList" && other_type == "Missing" && scalar_type == "Missing" && scalars_type == "ArrayRef<Scalar>") {
+  return Rcpp::wrap(cpp_torch_namespace__foreach_add_self_TensorList_scalars_ArrayRefScalar(Rcpp::as<XPtrTorchTensorList>(args["self"]), Rcpp::as<XPtrTorchvector_Scalar>(args["scalars"])));
+}
+if (self_type == "TensorList" && other_type == "Tensor" && scalar_type == "Missing" && scalars_type == "Missing") {
+  return Rcpp::wrap(cpp_torch_namespace__foreach_add_self_TensorList_other_Tensor(Rcpp::as<XPtrTorchTensorList>(args["self"]), Rcpp::as<XPtrTorchTensor>(args["other"]), Rcpp::as<XPtrTorchScalar>(args["alpha"])));
+}
+  Rcpp::stop("No matching overload for _foreach_add");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace__foreach_add_ (Rcpp::List args) {
+  static const std::vector<std::string> self_expected = {"TensorList"};
+  static const std::vector<std::string> other_expected = {"TensorList", "Tensor"};
+  static const std::vector<std::string> scalar_expected = {"Scalar"};
+  static const std::vector<std::string> scalars_expected = {"ArrayRef<Scalar>"};
+  auto self_type = cpp_arg_to_torch_type(args["self"], self_expected, "self");
+  auto other_type = cpp_arg_to_torch_type(args["other"], other_expected, "other");
+  auto scalar_type = cpp_arg_to_torch_type(args["scalar"], scalar_expected, "scalar");
+  auto scalars_type = cpp_arg_to_torch_type(args["scalars"], scalars_expected, "scalars");
+if (self_type == "TensorList" && other_type == "Missing" && scalar_type == "Scalar" && scalars_type == "Missing") {
+  cpp_torch_namespace__foreach_add__self_TensorList_scalar_Scalar(Rcpp::as<XPtrTorchTensorList>(args["self"]), Rcpp::as<XPtrTorchScalar>(args["scalar"]));
+  return R_NilValue;
+}
+if (self_type == "TensorList" && other_type == "TensorList" && scalar_type == "Missing" && scalars_type == "Missing") {
+  cpp_torch_namespace__foreach_add__self_TensorList_other_TensorList(Rcpp::as<XPtrTorchTensorList>(args["self"]), Rcpp::as<XPtrTorchTensorList>(args["other"]), Rcpp::as<XPtrTorchScalar>(args["alpha"]));
+  return R_NilValue;
+}
+if (self_type == "TensorList" && other_type == "Missing" && scalar_type == "Missing" && scalars_type == "ArrayRef<Scalar>") {
+  cpp_torch_namespace__foreach_add__self_TensorList_scalars_ArrayRefScalar(Rcpp::as<XPtrTorchTensorList>(args["self"]), Rcpp::as<XPtrTorchvector_Scalar>(args["scalars"]));
+  return R_NilValue;
+}
+if (self_type == "TensorList" && other_type == "Tensor" && scalar_type == "Missing" && scalars_type == "Missing") {
+  cpp_torch_namespace__foreach_add__self_TensorList_other_Tensor(Rcpp::as<XPtrTorchTensorList>(args["self"]), Rcpp::as<XPtrTorchTensor>(args["other"]), Rcpp::as<XPtrTorchScalar>(args["alpha"]));
+  return R_NilValue;
+}
+  Rcpp::stop("No matching overload for _foreach_add_");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace__foreach_add_out (Rcpp::List args) {
+  static const std::vector<std::string> out_expected = {"TensorList"};
+  static const std::vector<std::string> self_expected = {"TensorList"};
+  static const std::vector<std::string> other_expected = {"TensorList", "Tensor"};
+  static const std::vector<std::string> scalar_expected = {"Scalar"};
+  static const std::vector<std::string> scalars_expected = {"ArrayRef<Scalar>"};
+  auto out_type = cpp_arg_to_torch_type(args["out"], out_expected, "out");
+  auto self_type = cpp_arg_to_torch_type(args["self"], self_expected, "self");
+  auto other_type = cpp_arg_to_torch_type(args["other"], other_expected, "other");
+  auto scalar_type = cpp_arg_to_torch_type(args["scalar"], scalar_expected, "scalar");
+  auto scalars_type = cpp_arg_to_torch_type(args["scalars"], scalars_expected, "scalars");
+if (out_type == "TensorList" && self_type == "TensorList" && other_type == "Missing" && scalar_type == "Scalar" && scalars_type == "Missing") {
+  cpp_torch_namespace__foreach_add_out_out_TensorList_self_TensorList_scalar_Scalar(Rcpp::as<XPtrTorchTensorList>(args["out"]), Rcpp::as<XPtrTorchTensorList>(args["self"]), Rcpp::as<XPtrTorchScalar>(args["scalar"]));
+  return R_NilValue;
+}
+if (out_type == "TensorList" && self_type == "TensorList" && other_type == "TensorList" && scalar_type == "Missing" && scalars_type == "Missing") {
+  cpp_torch_namespace__foreach_add_out_out_TensorList_self_TensorList_other_TensorList(Rcpp::as<XPtrTorchTensorList>(args["out"]), Rcpp::as<XPtrTorchTensorList>(args["self"]), Rcpp::as<XPtrTorchTensorList>(args["other"]), Rcpp::as<XPtrTorchScalar>(args["alpha"]));
+  return R_NilValue;
+}
+if (out_type == "TensorList" && self_type == "TensorList" && other_type == "Missing" && scalar_type == "Missing" && scalars_type == "ArrayRef<Scalar>") {
+  cpp_torch_namespace__foreach_add_out_out_TensorList_self_TensorList_scalars_ArrayRefScalar(Rcpp::as<XPtrTorchTensorList>(args["out"]), Rcpp::as<XPtrTorchTensorList>(args["self"]), Rcpp::as<XPtrTorchvector_Scalar>(args["scalars"]));
+  return R_NilValue;
+}
+if (out_type == "TensorList" && self_type == "TensorList" && other_type == "Tensor" && scalar_type == "Missing" && scalars_type == "Missing") {
+  cpp_torch_namespace__foreach_add_out_out_TensorList_self_TensorList_other_Tensor(Rcpp::as<XPtrTorchTensorList>(args["out"]), Rcpp::as<XPtrTorchTensorList>(args["self"]), Rcpp::as<XPtrTorchTensor>(args["other"]), Rcpp::as<XPtrTorchScalar>(args["alpha"]));
+  return R_NilValue;
+}
+  Rcpp::stop("No matching overload for _foreach_add_out");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace__foreach_addcdiv (Rcpp::List args) {
+  static const std::vector<std::string> self_expected = {"TensorList"};
+  static const std::vector<std::string> tensor1_expected = {"TensorList"};
+  static const std::vector<std::string> tensor2_expected = {"TensorList"};
+  static const std::vector<std::string> scalars_expected = {"ArrayRef<Scalar>", "Tensor"};
+  auto self_type = cpp_arg_to_torch_type(args["self"], self_expected, "self");
+  auto tensor1_type = cpp_arg_to_torch_type(args["tensor1"], tensor1_expected, "tensor1");
+  auto tensor2_type = cpp_arg_to_torch_type(args["tensor2"], tensor2_expected, "tensor2");
+  auto scalars_type = cpp_arg_to_torch_type(args["scalars"], scalars_expected, "scalars");
+if (self_type == "TensorList" && tensor1_type == "TensorList" && tensor2_type == "TensorList" && scalars_type == "Missing") {
+  return Rcpp::wrap(cpp_torch_namespace__foreach_addcdiv_self_TensorList_tensor1_TensorList_tensor2_TensorList(Rcpp::as<XPtrTorchTensorList>(args["self"]), Rcpp::as<XPtrTorchTensorList>(args["tensor1"]), Rcpp::as<XPtrTorchTensorList>(args["tensor2"]), Rcpp::as<XPtrTorchScalar>(args["value"])));
+}
+if (self_type == "TensorList" && tensor1_type == "TensorList" && tensor2_type == "TensorList" && scalars_type == "ArrayRef<Scalar>") {
+  return Rcpp::wrap(cpp_torch_namespace__foreach_addcdiv_self_TensorList_tensor1_TensorList_tensor2_TensorList_scalars_ArrayRefScalar(Rcpp::as<XPtrTorchTensorList>(args["self"]), Rcpp::as<XPtrTorchTensorList>(args["tensor1"]), Rcpp::as<XPtrTorchTensorList>(args["tensor2"]), Rcpp::as<XPtrTorchvector_Scalar>(args["scalars"])));
+}
+if (self_type == "TensorList" && tensor1_type == "TensorList" && tensor2_type == "TensorList" && scalars_type == "Tensor") {
+  return Rcpp::wrap(cpp_torch_namespace__foreach_addcdiv_self_TensorList_tensor1_TensorList_tensor2_TensorList_scalars_Tensor(Rcpp::as<XPtrTorchTensorList>(args["self"]), Rcpp::as<XPtrTorchTensorList>(args["tensor1"]), Rcpp::as<XPtrTorchTensorList>(args["tensor2"]), Rcpp::as<XPtrTorchTensor>(args["scalars"])));
+}
+  Rcpp::stop("No matching overload for _foreach_addcdiv");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace__foreach_addcdiv_ (Rcpp::List args) {
+  static const std::vector<std::string> self_expected = {"TensorList"};
+  static const std::vector<std::string> tensor1_expected = {"TensorList"};
+  static const std::vector<std::string> tensor2_expected = {"TensorList"};
+  static const std::vector<std::string> scalars_expected = {"ArrayRef<Scalar>", "Tensor"};
+  auto self_type = cpp_arg_to_torch_type(args["self"], self_expected, "self");
+  auto tensor1_type = cpp_arg_to_torch_type(args["tensor1"], tensor1_expected, "tensor1");
+  auto tensor2_type = cpp_arg_to_torch_type(args["tensor2"], tensor2_expected, "tensor2");
+  auto scalars_type = cpp_arg_to_torch_type(args["scalars"], scalars_expected, "scalars");
+if (self_type == "TensorList" && tensor1_type == "TensorList" && tensor2_type == "TensorList" && scalars_type == "Missing") {
+  cpp_torch_namespace__foreach_addcdiv__self_TensorList_tensor1_TensorList_tensor2_TensorList(Rcpp::as<XPtrTorchTensorList>(args["self"]), Rcpp::as<XPtrTorchTensorList>(args["tensor1"]), Rcpp::as<XPtrTorchTensorList>(args["tensor2"]), Rcpp::as<XPtrTorchScalar>(args["value"]));
+  return R_NilValue;
+}
+if (self_type == "TensorList" && tensor1_type == "TensorList" && tensor2_type == "TensorList" && scalars_type == "ArrayRef<Scalar>") {
+  cpp_torch_namespace__foreach_addcdiv__self_TensorList_tensor1_TensorList_tensor2_TensorList_scalars_ArrayRefScalar(Rcpp::as<XPtrTorchTensorList>(args["self"]), Rcpp::as<XPtrTorchTensorList>(args["tensor1"]), Rcpp::as<XPtrTorchTensorList>(args["tensor2"]), Rcpp::as<XPtrTorchvector_Scalar>(args["scalars"]));
+  return R_NilValue;
+}
+if (self_type == "TensorList" && tensor1_type == "TensorList" && tensor2_type == "TensorList" && scalars_type == "Tensor") {
+  cpp_torch_namespace__foreach_addcdiv__self_TensorList_tensor1_TensorList_tensor2_TensorList_scalars_Tensor(Rcpp::as<XPtrTorchTensorList>(args["self"]), Rcpp::as<XPtrTorchTensorList>(args["tensor1"]), Rcpp::as<XPtrTorchTensorList>(args["tensor2"]), Rcpp::as<XPtrTorchTensor>(args["scalars"]));
+  return R_NilValue;
+}
+  Rcpp::stop("No matching overload for _foreach_addcdiv_");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace__foreach_addcdiv_out (Rcpp::List args) {
+  static const std::vector<std::string> out_expected = {"TensorList"};
+  static const std::vector<std::string> self_expected = {"TensorList"};
+  static const std::vector<std::string> tensor1_expected = {"TensorList"};
+  static const std::vector<std::string> tensor2_expected = {"TensorList"};
+  static const std::vector<std::string> scalars_expected = {"ArrayRef<Scalar>", "Tensor"};
+  auto out_type = cpp_arg_to_torch_type(args["out"], out_expected, "out");
+  auto self_type = cpp_arg_to_torch_type(args["self"], self_expected, "self");
+  auto tensor1_type = cpp_arg_to_torch_type(args["tensor1"], tensor1_expected, "tensor1");
+  auto tensor2_type = cpp_arg_to_torch_type(args["tensor2"], tensor2_expected, "tensor2");
+  auto scalars_type = cpp_arg_to_torch_type(args["scalars"], scalars_expected, "scalars");
+if (out_type == "TensorList" && self_type == "TensorList" && tensor1_type == "TensorList" && tensor2_type == "TensorList" && scalars_type == "Missing") {
+  cpp_torch_namespace__foreach_addcdiv_out_out_TensorList_self_TensorList_tensor1_TensorList_tensor2_TensorList(Rcpp::as<XPtrTorchTensorList>(args["out"]), Rcpp::as<XPtrTorchTensorList>(args["self"]), Rcpp::as<XPtrTorchTensorList>(args["tensor1"]), Rcpp::as<XPtrTorchTensorList>(args["tensor2"]), Rcpp::as<XPtrTorchScalar>(args["value"]));
+  return R_NilValue;
+}
+if (out_type == "TensorList" && self_type == "TensorList" && tensor1_type == "TensorList" && tensor2_type == "TensorList" && scalars_type == "ArrayRef<Scalar>") {
+  cpp_torch_namespace__foreach_addcdiv_out_out_TensorList_self_TensorList_tensor1_TensorList_tensor2_TensorList_scalars_ArrayRefScalar(Rcpp::as<XPtrTorchTensorList>(args["out"]), Rcpp::as<XPtrTorchTensorList>(args["self"]), Rcpp::as<XPtrTorchTensorList>(args["tensor1"]), Rcpp::as<XPtrTorchTensorList>(args["tensor2"]), Rcpp::as<XPtrTorchvector_Scalar>(args["scalars"]));
+  return R_NilValue;
+}
+if (out_type == "TensorList" && self_type == "TensorList" && tensor1_type == "TensorList" && tensor2_type == "TensorList" && scalars_type == "Tensor") {
+  cpp_torch_namespace__foreach_addcdiv_out_out_TensorList_self_TensorList_tensor1_TensorList_tensor2_TensorList_scalars_Tensor(Rcpp::as<XPtrTorchTensorList>(args["out"]), Rcpp::as<XPtrTorchTensorList>(args["self"]), Rcpp::as<XPtrTorchTensorList>(args["tensor1"]), Rcpp::as<XPtrTorchTensorList>(args["tensor2"]), Rcpp::as<XPtrTorchTensor>(args["scalars"]));
+  return R_NilValue;
+}
+  Rcpp::stop("No matching overload for _foreach_addcdiv_out");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace__foreach_addcmul (Rcpp::List args) {
+  static const std::vector<std::string> self_expected = {"TensorList"};
+  static const std::vector<std::string> tensor1_expected = {"TensorList"};
+  static const std::vector<std::string> tensor2_expected = {"TensorList"};
+  static const std::vector<std::string> scalars_expected = {"ArrayRef<Scalar>", "Tensor"};
+  auto self_type = cpp_arg_to_torch_type(args["self"], self_expected, "self");
+  auto tensor1_type = cpp_arg_to_torch_type(args["tensor1"], tensor1_expected, "tensor1");
+  auto tensor2_type = cpp_arg_to_torch_type(args["tensor2"], tensor2_expected, "tensor2");
+  auto scalars_type = cpp_arg_to_torch_type(args["scalars"], scalars_expected, "scalars");
+if (self_type == "TensorList" && tensor1_type == "TensorList" && tensor2_type == "TensorList" && scalars_type == "Missing") {
+  return Rcpp::wrap(cpp_torch_namespace__foreach_addcmul_self_TensorList_tensor1_TensorList_tensor2_TensorList(Rcpp::as<XPtrTorchTensorList>(args["self"]), Rcpp::as<XPtrTorchTensorList>(args["tensor1"]), Rcpp::as<XPtrTorchTensorList>(args["tensor2"]), Rcpp::as<XPtrTorchScalar>(args["value"])));
+}
+if (self_type == "TensorList" && tensor1_type == "TensorList" && tensor2_type == "TensorList" && scalars_type == "ArrayRef<Scalar>") {
+  return Rcpp::wrap(cpp_torch_namespace__foreach_addcmul_self_TensorList_tensor1_TensorList_tensor2_TensorList_scalars_ArrayRefScalar(Rcpp::as<XPtrTorchTensorList>(args["self"]), Rcpp::as<XPtrTorchTensorList>(args["tensor1"]), Rcpp::as<XPtrTorchTensorList>(args["tensor2"]), Rcpp::as<XPtrTorchvector_Scalar>(args["scalars"])));
+}
+if (self_type == "TensorList" && tensor1_type == "TensorList" && tensor2_type == "TensorList" && scalars_type == "Tensor") {
+  return Rcpp::wrap(cpp_torch_namespace__foreach_addcmul_self_TensorList_tensor1_TensorList_tensor2_TensorList_scalars_Tensor(Rcpp::as<XPtrTorchTensorList>(args["self"]), Rcpp::as<XPtrTorchTensorList>(args["tensor1"]), Rcpp::as<XPtrTorchTensorList>(args["tensor2"]), Rcpp::as<XPtrTorchTensor>(args["scalars"])));
+}
+  Rcpp::stop("No matching overload for _foreach_addcmul");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace__foreach_addcmul_ (Rcpp::List args) {
+  static const std::vector<std::string> self_expected = {"TensorList"};
+  static const std::vector<std::string> tensor1_expected = {"TensorList"};
+  static const std::vector<std::string> tensor2_expected = {"TensorList"};
+  static const std::vector<std::string> scalars_expected = {"ArrayRef<Scalar>", "Tensor"};
+  auto self_type = cpp_arg_to_torch_type(args["self"], self_expected, "self");
+  auto tensor1_type = cpp_arg_to_torch_type(args["tensor1"], tensor1_expected, "tensor1");
+  auto tensor2_type = cpp_arg_to_torch_type(args["tensor2"], tensor2_expected, "tensor2");
+  auto scalars_type = cpp_arg_to_torch_type(args["scalars"], scalars_expected, "scalars");
+if (self_type == "TensorList" && tensor1_type == "TensorList" && tensor2_type == "TensorList" && scalars_type == "Missing") {
+  cpp_torch_namespace__foreach_addcmul__self_TensorList_tensor1_TensorList_tensor2_TensorList(Rcpp::as<XPtrTorchTensorList>(args["self"]), Rcpp::as<XPtrTorchTensorList>(args["tensor1"]), Rcpp::as<XPtrTorchTensorList>(args["tensor2"]), Rcpp::as<XPtrTorchScalar>(args["value"]));
+  return R_NilValue;
+}
+if (self_type == "TensorList" && tensor1_type == "TensorList" && tensor2_type == "TensorList" && scalars_type == "ArrayRef<Scalar>") {
+  cpp_torch_namespace__foreach_addcmul__self_TensorList_tensor1_TensorList_tensor2_TensorList_scalars_ArrayRefScalar(Rcpp::as<XPtrTorchTensorList>(args["self"]), Rcpp::as<XPtrTorchTensorList>(args["tensor1"]), Rcpp::as<XPtrTorchTensorList>(args["tensor2"]), Rcpp::as<XPtrTorchvector_Scalar>(args["scalars"]));
+  return R_NilValue;
+}
+if (self_type == "TensorList" && tensor1_type == "TensorList" && tensor2_type == "TensorList" && scalars_type == "Tensor") {
+  cpp_torch_namespace__foreach_addcmul__self_TensorList_tensor1_TensorList_tensor2_TensorList_scalars_Tensor(Rcpp::as<XPtrTorchTensorList>(args["self"]), Rcpp::as<XPtrTorchTensorList>(args["tensor1"]), Rcpp::as<XPtrTorchTensorList>(args["tensor2"]), Rcpp::as<XPtrTorchTensor>(args["scalars"]));
+  return R_NilValue;
+}
+  Rcpp::stop("No matching overload for _foreach_addcmul_");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace__foreach_addcmul_out (Rcpp::List args) {
+  static const std::vector<std::string> out_expected = {"TensorList"};
+  static const std::vector<std::string> self_expected = {"TensorList"};
+  static const std::vector<std::string> tensor1_expected = {"TensorList"};
+  static const std::vector<std::string> tensor2_expected = {"TensorList"};
+  static const std::vector<std::string> scalars_expected = {"ArrayRef<Scalar>", "Tensor"};
+  auto out_type = cpp_arg_to_torch_type(args["out"], out_expected, "out");
+  auto self_type = cpp_arg_to_torch_type(args["self"], self_expected, "self");
+  auto tensor1_type = cpp_arg_to_torch_type(args["tensor1"], tensor1_expected, "tensor1");
+  auto tensor2_type = cpp_arg_to_torch_type(args["tensor2"], tensor2_expected, "tensor2");
+  auto scalars_type = cpp_arg_to_torch_type(args["scalars"], scalars_expected, "scalars");
+if (out_type == "TensorList" && self_type == "TensorList" && tensor1_type == "TensorList" && tensor2_type == "TensorList" && scalars_type == "Missing") {
+  cpp_torch_namespace__foreach_addcmul_out_out_TensorList_self_TensorList_tensor1_TensorList_tensor2_TensorList(Rcpp::as<XPtrTorchTensorList>(args["out"]), Rcpp::as<XPtrTorchTensorList>(args["self"]), Rcpp::as<XPtrTorchTensorList>(args["tensor1"]), Rcpp::as<XPtrTorchTensorList>(args["tensor2"]), Rcpp::as<XPtrTorchScalar>(args["value"]));
+  return R_NilValue;
+}
+if (out_type == "TensorList" && self_type == "TensorList" && tensor1_type == "TensorList" && tensor2_type == "TensorList" && scalars_type == "ArrayRef<Scalar>") {
+  cpp_torch_namespace__foreach_addcmul_out_out_TensorList_self_TensorList_tensor1_TensorList_tensor2_TensorList_scalars_ArrayRefScalar(Rcpp::as<XPtrTorchTensorList>(args["out"]), Rcpp::as<XPtrTorchTensorList>(args["self"]), Rcpp::as<XPtrTorchTensorList>(args["tensor1"]), Rcpp::as<XPtrTorchTensorList>(args["tensor2"]), Rcpp::as<XPtrTorchvector_Scalar>(args["scalars"]));
+  return R_NilValue;
+}
+if (out_type == "TensorList" && self_type == "TensorList" && tensor1_type == "TensorList" && tensor2_type == "TensorList" && scalars_type == "Tensor") {
+  cpp_torch_namespace__foreach_addcmul_out_out_TensorList_self_TensorList_tensor1_TensorList_tensor2_TensorList_scalars_Tensor(Rcpp::as<XPtrTorchTensorList>(args["out"]), Rcpp::as<XPtrTorchTensorList>(args["self"]), Rcpp::as<XPtrTorchTensorList>(args["tensor1"]), Rcpp::as<XPtrTorchTensorList>(args["tensor2"]), Rcpp::as<XPtrTorchTensor>(args["scalars"]));
+  return R_NilValue;
+}
+  Rcpp::stop("No matching overload for _foreach_addcmul_out");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace__foreach_clamp_max (Rcpp::List args) {
+  static const std::vector<std::string> self_expected = {"TensorList"};
+  static const std::vector<std::string> other_expected = {"TensorList"};
+  static const std::vector<std::string> scalar_expected = {"Scalar"};
+  static const std::vector<std::string> scalars_expected = {"ArrayRef<Scalar>"};
+  auto self_type = cpp_arg_to_torch_type(args["self"], self_expected, "self");
+  auto other_type = cpp_arg_to_torch_type(args["other"], other_expected, "other");
+  auto scalar_type = cpp_arg_to_torch_type(args["scalar"], scalar_expected, "scalar");
+  auto scalars_type = cpp_arg_to_torch_type(args["scalars"], scalars_expected, "scalars");
+if (self_type == "TensorList" && other_type == "Missing" && scalar_type == "Scalar" && scalars_type == "Missing") {
+  return Rcpp::wrap(cpp_torch_namespace__foreach_clamp_max_self_TensorList_scalar_Scalar(Rcpp::as<XPtrTorchTensorList>(args["self"]), Rcpp::as<XPtrTorchScalar>(args["scalar"])));
+}
+if (self_type == "TensorList" && other_type == "TensorList" && scalar_type == "Missing" && scalars_type == "Missing") {
+  return Rcpp::wrap(cpp_torch_namespace__foreach_clamp_max_self_TensorList_other_TensorList(Rcpp::as<XPtrTorchTensorList>(args["self"]), Rcpp::as<XPtrTorchTensorList>(args["other"])));
+}
+if (self_type == "TensorList" && other_type == "Missing" && scalar_type == "Missing" && scalars_type == "ArrayRef<Scalar>") {
+  return Rcpp::wrap(cpp_torch_namespace__foreach_clamp_max_self_TensorList_scalars_ArrayRefScalar(Rcpp::as<XPtrTorchTensorList>(args["self"]), Rcpp::as<XPtrTorchvector_Scalar>(args["scalars"])));
+}
+  Rcpp::stop("No matching overload for _foreach_clamp_max");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace__foreach_clamp_max_ (Rcpp::List args) {
+  static const std::vector<std::string> self_expected = {"TensorList"};
+  static const std::vector<std::string> other_expected = {"TensorList"};
+  static const std::vector<std::string> scalar_expected = {"Scalar"};
+  static const std::vector<std::string> scalars_expected = {"ArrayRef<Scalar>"};
+  auto self_type = cpp_arg_to_torch_type(args["self"], self_expected, "self");
+  auto other_type = cpp_arg_to_torch_type(args["other"], other_expected, "other");
+  auto scalar_type = cpp_arg_to_torch_type(args["scalar"], scalar_expected, "scalar");
+  auto scalars_type = cpp_arg_to_torch_type(args["scalars"], scalars_expected, "scalars");
+if (self_type == "TensorList" && other_type == "Missing" && scalar_type == "Scalar" && scalars_type == "Missing") {
+  cpp_torch_namespace__foreach_clamp_max__self_TensorList_scalar_Scalar(Rcpp::as<XPtrTorchTensorList>(args["self"]), Rcpp::as<XPtrTorchScalar>(args["scalar"]));
+  return R_NilValue;
+}
+if (self_type == "TensorList" && other_type == "TensorList" && scalar_type == "Missing" && scalars_type == "Missing") {
+  cpp_torch_namespace__foreach_clamp_max__self_TensorList_other_TensorList(Rcpp::as<XPtrTorchTensorList>(args["self"]), Rcpp::as<XPtrTorchTensorList>(args["other"]));
+  return R_NilValue;
+}
+if (self_type == "TensorList" && other_type == "Missing" && scalar_type == "Missing" && scalars_type == "ArrayRef<Scalar>") {
+  cpp_torch_namespace__foreach_clamp_max__self_TensorList_scalars_ArrayRefScalar(Rcpp::as<XPtrTorchTensorList>(args["self"]), Rcpp::as<XPtrTorchvector_Scalar>(args["scalars"]));
+  return R_NilValue;
+}
+  Rcpp::stop("No matching overload for _foreach_clamp_max_");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace__foreach_clamp_max_out (Rcpp::List args) {
+  static const std::vector<std::string> out_expected = {"TensorList"};
+  static const std::vector<std::string> self_expected = {"TensorList"};
+  static const std::vector<std::string> other_expected = {"TensorList"};
+  static const std::vector<std::string> scalar_expected = {"Scalar"};
+  static const std::vector<std::string> scalars_expected = {"ArrayRef<Scalar>"};
+  auto out_type = cpp_arg_to_torch_type(args["out"], out_expected, "out");
+  auto self_type = cpp_arg_to_torch_type(args["self"], self_expected, "self");
+  auto other_type = cpp_arg_to_torch_type(args["other"], other_expected, "other");
+  auto scalar_type = cpp_arg_to_torch_type(args["scalar"], scalar_expected, "scalar");
+  auto scalars_type = cpp_arg_to_torch_type(args["scalars"], scalars_expected, "scalars");
+if (out_type == "TensorList" && self_type == "TensorList" && other_type == "Missing" && scalar_type == "Scalar" && scalars_type == "Missing") {
+  cpp_torch_namespace__foreach_clamp_max_out_out_TensorList_self_TensorList_scalar_Scalar(Rcpp::as<XPtrTorchTensorList>(args["out"]), Rcpp::as<XPtrTorchTensorList>(args["self"]), Rcpp::as<XPtrTorchScalar>(args["scalar"]));
+  return R_NilValue;
+}
+if (out_type == "TensorList" && self_type == "TensorList" && other_type == "TensorList" && scalar_type == "Missing" && scalars_type == "Missing") {
+  cpp_torch_namespace__foreach_clamp_max_out_out_TensorList_self_TensorList_other_TensorList(Rcpp::as<XPtrTorchTensorList>(args["out"]), Rcpp::as<XPtrTorchTensorList>(args["self"]), Rcpp::as<XPtrTorchTensorList>(args["other"]));
+  return R_NilValue;
+}
+if (out_type == "TensorList" && self_type == "TensorList" && other_type == "Missing" && scalar_type == "Missing" && scalars_type == "ArrayRef<Scalar>") {
+  cpp_torch_namespace__foreach_clamp_max_out_out_TensorList_self_TensorList_scalars_ArrayRefScalar(Rcpp::as<XPtrTorchTensorList>(args["out"]), Rcpp::as<XPtrTorchTensorList>(args["self"]), Rcpp::as<XPtrTorchvector_Scalar>(args["scalars"]));
+  return R_NilValue;
+}
+  Rcpp::stop("No matching overload for _foreach_clamp_max_out");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace__foreach_clamp_min (Rcpp::List args) {
+  static const std::vector<std::string> self_expected = {"TensorList"};
+  static const std::vector<std::string> other_expected = {"TensorList"};
+  static const std::vector<std::string> scalar_expected = {"Scalar"};
+  static const std::vector<std::string> scalars_expected = {"ArrayRef<Scalar>"};
+  auto self_type = cpp_arg_to_torch_type(args["self"], self_expected, "self");
+  auto other_type = cpp_arg_to_torch_type(args["other"], other_expected, "other");
+  auto scalar_type = cpp_arg_to_torch_type(args["scalar"], scalar_expected, "scalar");
+  auto scalars_type = cpp_arg_to_torch_type(args["scalars"], scalars_expected, "scalars");
+if (self_type == "TensorList" && other_type == "Missing" && scalar_type == "Scalar" && scalars_type == "Missing") {
+  return Rcpp::wrap(cpp_torch_namespace__foreach_clamp_min_self_TensorList_scalar_Scalar(Rcpp::as<XPtrTorchTensorList>(args["self"]), Rcpp::as<XPtrTorchScalar>(args["scalar"])));
+}
+if (self_type == "TensorList" && other_type == "TensorList" && scalar_type == "Missing" && scalars_type == "Missing") {
+  return Rcpp::wrap(cpp_torch_namespace__foreach_clamp_min_self_TensorList_other_TensorList(Rcpp::as<XPtrTorchTensorList>(args["self"]), Rcpp::as<XPtrTorchTensorList>(args["other"])));
+}
+if (self_type == "TensorList" && other_type == "Missing" && scalar_type == "Missing" && scalars_type == "ArrayRef<Scalar>") {
+  return Rcpp::wrap(cpp_torch_namespace__foreach_clamp_min_self_TensorList_scalars_ArrayRefScalar(Rcpp::as<XPtrTorchTensorList>(args["self"]), Rcpp::as<XPtrTorchvector_Scalar>(args["scalars"])));
+}
+  Rcpp::stop("No matching overload for _foreach_clamp_min");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace__foreach_clamp_min_ (Rcpp::List args) {
+  static const std::vector<std::string> self_expected = {"TensorList"};
+  static const std::vector<std::string> other_expected = {"TensorList"};
+  static const std::vector<std::string> scalar_expected = {"Scalar"};
+  static const std::vector<std::string> scalars_expected = {"ArrayRef<Scalar>"};
+  auto self_type = cpp_arg_to_torch_type(args["self"], self_expected, "self");
+  auto other_type = cpp_arg_to_torch_type(args["other"], other_expected, "other");
+  auto scalar_type = cpp_arg_to_torch_type(args["scalar"], scalar_expected, "scalar");
+  auto scalars_type = cpp_arg_to_torch_type(args["scalars"], scalars_expected, "scalars");
+if (self_type == "TensorList" && other_type == "Missing" && scalar_type == "Scalar" && scalars_type == "Missing") {
+  cpp_torch_namespace__foreach_clamp_min__self_TensorList_scalar_Scalar(Rcpp::as<XPtrTorchTensorList>(args["self"]), Rcpp::as<XPtrTorchScalar>(args["scalar"]));
+  return R_NilValue;
+}
+if (self_type == "TensorList" && other_type == "TensorList" && scalar_type == "Missing" && scalars_type == "Missing") {
+  cpp_torch_namespace__foreach_clamp_min__self_TensorList_other_TensorList(Rcpp::as<XPtrTorchTensorList>(args["self"]), Rcpp::as<XPtrTorchTensorList>(args["other"]));
+  return R_NilValue;
+}
+if (self_type == "TensorList" && other_type == "Missing" && scalar_type == "Missing" && scalars_type == "ArrayRef<Scalar>") {
+  cpp_torch_namespace__foreach_clamp_min__self_TensorList_scalars_ArrayRefScalar(Rcpp::as<XPtrTorchTensorList>(args["self"]), Rcpp::as<XPtrTorchvector_Scalar>(args["scalars"]));
+  return R_NilValue;
+}
+  Rcpp::stop("No matching overload for _foreach_clamp_min_");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace__foreach_clamp_min_out (Rcpp::List args) {
+  static const std::vector<std::string> out_expected = {"TensorList"};
+  static const std::vector<std::string> self_expected = {"TensorList"};
+  static const std::vector<std::string> other_expected = {"TensorList"};
+  static const std::vector<std::string> scalar_expected = {"Scalar"};
+  static const std::vector<std::string> scalars_expected = {"ArrayRef<Scalar>"};
+  auto out_type = cpp_arg_to_torch_type(args["out"], out_expected, "out");
+  auto self_type = cpp_arg_to_torch_type(args["self"], self_expected, "self");
+  auto other_type = cpp_arg_to_torch_type(args["other"], other_expected, "other");
+  auto scalar_type = cpp_arg_to_torch_type(args["scalar"], scalar_expected, "scalar");
+  auto scalars_type = cpp_arg_to_torch_type(args["scalars"], scalars_expected, "scalars");
+if (out_type == "TensorList" && self_type == "TensorList" && other_type == "Missing" && scalar_type == "Scalar" && scalars_type == "Missing") {
+  cpp_torch_namespace__foreach_clamp_min_out_out_TensorList_self_TensorList_scalar_Scalar(Rcpp::as<XPtrTorchTensorList>(args["out"]), Rcpp::as<XPtrTorchTensorList>(args["self"]), Rcpp::as<XPtrTorchScalar>(args["scalar"]));
+  return R_NilValue;
+}
+if (out_type == "TensorList" && self_type == "TensorList" && other_type == "TensorList" && scalar_type == "Missing" && scalars_type == "Missing") {
+  cpp_torch_namespace__foreach_clamp_min_out_out_TensorList_self_TensorList_other_TensorList(Rcpp::as<XPtrTorchTensorList>(args["out"]), Rcpp::as<XPtrTorchTensorList>(args["self"]), Rcpp::as<XPtrTorchTensorList>(args["other"]));
+  return R_NilValue;
+}
+if (out_type == "TensorList" && self_type == "TensorList" && other_type == "Missing" && scalar_type == "Missing" && scalars_type == "ArrayRef<Scalar>") {
+  cpp_torch_namespace__foreach_clamp_min_out_out_TensorList_self_TensorList_scalars_ArrayRefScalar(Rcpp::as<XPtrTorchTensorList>(args["out"]), Rcpp::as<XPtrTorchTensorList>(args["self"]), Rcpp::as<XPtrTorchvector_Scalar>(args["scalars"]));
+  return R_NilValue;
+}
+  Rcpp::stop("No matching overload for _foreach_clamp_min_out");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace__foreach_div (Rcpp::List args) {
+  static const std::vector<std::string> self_expected = {"TensorList"};
+  static const std::vector<std::string> other_expected = {"TensorList", "Tensor"};
+  static const std::vector<std::string> scalar_expected = {"Scalar"};
+  static const std::vector<std::string> scalars_expected = {"ArrayRef<Scalar>"};
+  auto self_type = cpp_arg_to_torch_type(args["self"], self_expected, "self");
+  auto other_type = cpp_arg_to_torch_type(args["other"], other_expected, "other");
+  auto scalar_type = cpp_arg_to_torch_type(args["scalar"], scalar_expected, "scalar");
+  auto scalars_type = cpp_arg_to_torch_type(args["scalars"], scalars_expected, "scalars");
+if (self_type == "TensorList" && other_type == "Missing" && scalar_type == "Scalar" && scalars_type == "Missing") {
+  return Rcpp::wrap(cpp_torch_namespace__foreach_div_self_TensorList_scalar_Scalar(Rcpp::as<XPtrTorchTensorList>(args["self"]), Rcpp::as<XPtrTorchScalar>(args["scalar"])));
+}
+if (self_type == "TensorList" && other_type == "TensorList" && scalar_type == "Missing" && scalars_type == "Missing") {
+  return Rcpp::wrap(cpp_torch_namespace__foreach_div_self_TensorList_other_TensorList(Rcpp::as<XPtrTorchTensorList>(args["self"]), Rcpp::as<XPtrTorchTensorList>(args["other"])));
+}
+if (self_type == "TensorList" && other_type == "Missing" && scalar_type == "Missing" && scalars_type == "ArrayRef<Scalar>") {
+  return Rcpp::wrap(cpp_torch_namespace__foreach_div_self_TensorList_scalars_ArrayRefScalar(Rcpp::as<XPtrTorchTensorList>(args["self"]), Rcpp::as<XPtrTorchvector_Scalar>(args["scalars"])));
+}
+if (self_type == "TensorList" && other_type == "Tensor" && scalar_type == "Missing" && scalars_type == "Missing") {
+  return Rcpp::wrap(cpp_torch_namespace__foreach_div_self_TensorList_other_Tensor(Rcpp::as<XPtrTorchTensorList>(args["self"]), Rcpp::as<XPtrTorchTensor>(args["other"])));
+}
+  Rcpp::stop("No matching overload for _foreach_div");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace__foreach_div_ (Rcpp::List args) {
+  static const std::vector<std::string> self_expected = {"TensorList"};
+  static const std::vector<std::string> other_expected = {"TensorList", "Tensor"};
+  static const std::vector<std::string> scalar_expected = {"Scalar"};
+  static const std::vector<std::string> scalars_expected = {"ArrayRef<Scalar>"};
+  auto self_type = cpp_arg_to_torch_type(args["self"], self_expected, "self");
+  auto other_type = cpp_arg_to_torch_type(args["other"], other_expected, "other");
+  auto scalar_type = cpp_arg_to_torch_type(args["scalar"], scalar_expected, "scalar");
+  auto scalars_type = cpp_arg_to_torch_type(args["scalars"], scalars_expected, "scalars");
+if (self_type == "TensorList" && other_type == "Missing" && scalar_type == "Scalar" && scalars_type == "Missing") {
+  cpp_torch_namespace__foreach_div__self_TensorList_scalar_Scalar(Rcpp::as<XPtrTorchTensorList>(args["self"]), Rcpp::as<XPtrTorchScalar>(args["scalar"]));
+  return R_NilValue;
+}
+if (self_type == "TensorList" && other_type == "TensorList" && scalar_type == "Missing" && scalars_type == "Missing") {
+  cpp_torch_namespace__foreach_div__self_TensorList_other_TensorList(Rcpp::as<XPtrTorchTensorList>(args["self"]), Rcpp::as<XPtrTorchTensorList>(args["other"]));
+  return R_NilValue;
+}
+if (self_type == "TensorList" && other_type == "Missing" && scalar_type == "Missing" && scalars_type == "ArrayRef<Scalar>") {
+  cpp_torch_namespace__foreach_div__self_TensorList_scalars_ArrayRefScalar(Rcpp::as<XPtrTorchTensorList>(args["self"]), Rcpp::as<XPtrTorchvector_Scalar>(args["scalars"]));
+  return R_NilValue;
+}
+if (self_type == "TensorList" && other_type == "Tensor" && scalar_type == "Missing" && scalars_type == "Missing") {
+  cpp_torch_namespace__foreach_div__self_TensorList_other_Tensor(Rcpp::as<XPtrTorchTensorList>(args["self"]), Rcpp::as<XPtrTorchTensor>(args["other"]));
+  return R_NilValue;
+}
+  Rcpp::stop("No matching overload for _foreach_div_");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace__foreach_div_out (Rcpp::List args) {
+  static const std::vector<std::string> out_expected = {"TensorList"};
+  static const std::vector<std::string> self_expected = {"TensorList"};
+  static const std::vector<std::string> other_expected = {"TensorList", "Tensor"};
+  static const std::vector<std::string> scalar_expected = {"Scalar"};
+  static const std::vector<std::string> scalars_expected = {"ArrayRef<Scalar>"};
+  auto out_type = cpp_arg_to_torch_type(args["out"], out_expected, "out");
+  auto self_type = cpp_arg_to_torch_type(args["self"], self_expected, "self");
+  auto other_type = cpp_arg_to_torch_type(args["other"], other_expected, "other");
+  auto scalar_type = cpp_arg_to_torch_type(args["scalar"], scalar_expected, "scalar");
+  auto scalars_type = cpp_arg_to_torch_type(args["scalars"], scalars_expected, "scalars");
+if (out_type == "TensorList" && self_type == "TensorList" && other_type == "Missing" && scalar_type == "Scalar" && scalars_type == "Missing") {
+  cpp_torch_namespace__foreach_div_out_out_TensorList_self_TensorList_scalar_Scalar(Rcpp::as<XPtrTorchTensorList>(args["out"]), Rcpp::as<XPtrTorchTensorList>(args["self"]), Rcpp::as<XPtrTorchScalar>(args["scalar"]));
+  return R_NilValue;
+}
+if (out_type == "TensorList" && self_type == "TensorList" && other_type == "TensorList" && scalar_type == "Missing" && scalars_type == "Missing") {
+  cpp_torch_namespace__foreach_div_out_out_TensorList_self_TensorList_other_TensorList(Rcpp::as<XPtrTorchTensorList>(args["out"]), Rcpp::as<XPtrTorchTensorList>(args["self"]), Rcpp::as<XPtrTorchTensorList>(args["other"]));
+  return R_NilValue;
+}
+if (out_type == "TensorList" && self_type == "TensorList" && other_type == "Missing" && scalar_type == "Missing" && scalars_type == "ArrayRef<Scalar>") {
+  cpp_torch_namespace__foreach_div_out_out_TensorList_self_TensorList_scalars_ArrayRefScalar(Rcpp::as<XPtrTorchTensorList>(args["out"]), Rcpp::as<XPtrTorchTensorList>(args["self"]), Rcpp::as<XPtrTorchvector_Scalar>(args["scalars"]));
+  return R_NilValue;
+}
+if (out_type == "TensorList" && self_type == "TensorList" && other_type == "Tensor" && scalar_type == "Missing" && scalars_type == "Missing") {
+  cpp_torch_namespace__foreach_div_out_out_TensorList_self_TensorList_other_Tensor(Rcpp::as<XPtrTorchTensorList>(args["out"]), Rcpp::as<XPtrTorchTensorList>(args["self"]), Rcpp::as<XPtrTorchTensor>(args["other"]));
+  return R_NilValue;
+}
+  Rcpp::stop("No matching overload for _foreach_div_out");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace__foreach_lerp (Rcpp::List args) {
+  static const std::vector<std::string> self_expected = {"TensorList"};
+  static const std::vector<std::string> tensors1_expected = {"TensorList"};
+  static const std::vector<std::string> weight_expected = {"Scalar", "ArrayRef<Scalar>"};
+  static const std::vector<std::string> weights_expected = {"TensorList"};
+  auto self_type = cpp_arg_to_torch_type(args["self"], self_expected, "self");
+  auto tensors1_type = cpp_arg_to_torch_type(args["tensors1"], tensors1_expected, "tensors1");
+  auto weight_type = cpp_arg_to_torch_type(args["weight"], weight_expected, "weight");
+  auto weights_type = cpp_arg_to_torch_type(args["weights"], weights_expected, "weights");
+if (self_type == "TensorList" && tensors1_type == "TensorList" && weight_type == "Missing" && weights_type == "TensorList") {
+  return Rcpp::wrap(cpp_torch_namespace__foreach_lerp_self_TensorList_tensors1_TensorList_weights_TensorList(Rcpp::as<XPtrTorchTensorList>(args["self"]), Rcpp::as<XPtrTorchTensorList>(args["tensors1"]), Rcpp::as<XPtrTorchTensorList>(args["weights"])));
+}
+if (self_type == "TensorList" && tensors1_type == "TensorList" && weight_type == "Scalar" && weights_type == "Missing") {
+  return Rcpp::wrap(cpp_torch_namespace__foreach_lerp_self_TensorList_tensors1_TensorList_weight_Scalar(Rcpp::as<XPtrTorchTensorList>(args["self"]), Rcpp::as<XPtrTorchTensorList>(args["tensors1"]), Rcpp::as<XPtrTorchScalar>(args["weight"])));
+}
+if (self_type == "TensorList" && tensors1_type == "TensorList" && weight_type == "ArrayRef<Scalar>" && weights_type == "Missing") {
+  return Rcpp::wrap(cpp_torch_namespace__foreach_lerp_self_TensorList_tensors1_TensorList_weight_ArrayRefScalar(Rcpp::as<XPtrTorchTensorList>(args["self"]), Rcpp::as<XPtrTorchTensorList>(args["tensors1"]), Rcpp::as<XPtrTorchvector_Scalar>(args["weight"])));
+}
+  Rcpp::stop("No matching overload for _foreach_lerp");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace__foreach_lerp_ (Rcpp::List args) {
+  static const std::vector<std::string> self_expected = {"TensorList"};
+  static const std::vector<std::string> tensors1_expected = {"TensorList"};
+  static const std::vector<std::string> weight_expected = {"Scalar", "ArrayRef<Scalar>"};
+  static const std::vector<std::string> weights_expected = {"TensorList"};
+  auto self_type = cpp_arg_to_torch_type(args["self"], self_expected, "self");
+  auto tensors1_type = cpp_arg_to_torch_type(args["tensors1"], tensors1_expected, "tensors1");
+  auto weight_type = cpp_arg_to_torch_type(args["weight"], weight_expected, "weight");
+  auto weights_type = cpp_arg_to_torch_type(args["weights"], weights_expected, "weights");
+if (self_type == "TensorList" && tensors1_type == "TensorList" && weight_type == "Missing" && weights_type == "TensorList") {
+  cpp_torch_namespace__foreach_lerp__self_TensorList_tensors1_TensorList_weights_TensorList(Rcpp::as<XPtrTorchTensorList>(args["self"]), Rcpp::as<XPtrTorchTensorList>(args["tensors1"]), Rcpp::as<XPtrTorchTensorList>(args["weights"]));
+  return R_NilValue;
+}
+if (self_type == "TensorList" && tensors1_type == "TensorList" && weight_type == "Scalar" && weights_type == "Missing") {
+  cpp_torch_namespace__foreach_lerp__self_TensorList_tensors1_TensorList_weight_Scalar(Rcpp::as<XPtrTorchTensorList>(args["self"]), Rcpp::as<XPtrTorchTensorList>(args["tensors1"]), Rcpp::as<XPtrTorchScalar>(args["weight"]));
+  return R_NilValue;
+}
+if (self_type == "TensorList" && tensors1_type == "TensorList" && weight_type == "ArrayRef<Scalar>" && weights_type == "Missing") {
+  cpp_torch_namespace__foreach_lerp__self_TensorList_tensors1_TensorList_weight_ArrayRefScalar(Rcpp::as<XPtrTorchTensorList>(args["self"]), Rcpp::as<XPtrTorchTensorList>(args["tensors1"]), Rcpp::as<XPtrTorchvector_Scalar>(args["weight"]));
+  return R_NilValue;
+}
+  Rcpp::stop("No matching overload for _foreach_lerp_");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace__foreach_lerp_out (Rcpp::List args) {
+  static const std::vector<std::string> out_expected = {"TensorList"};
+  static const std::vector<std::string> self_expected = {"TensorList"};
+  static const std::vector<std::string> tensors1_expected = {"TensorList"};
+  static const std::vector<std::string> weight_expected = {"Scalar", "ArrayRef<Scalar>"};
+  static const std::vector<std::string> weights_expected = {"TensorList"};
+  auto out_type = cpp_arg_to_torch_type(args["out"], out_expected, "out");
+  auto self_type = cpp_arg_to_torch_type(args["self"], self_expected, "self");
+  auto tensors1_type = cpp_arg_to_torch_type(args["tensors1"], tensors1_expected, "tensors1");
+  auto weight_type = cpp_arg_to_torch_type(args["weight"], weight_expected, "weight");
+  auto weights_type = cpp_arg_to_torch_type(args["weights"], weights_expected, "weights");
+if (out_type == "TensorList" && self_type == "TensorList" && tensors1_type == "TensorList" && weight_type == "Missing" && weights_type == "TensorList") {
+  cpp_torch_namespace__foreach_lerp_out_out_TensorList_self_TensorList_tensors1_TensorList_weights_TensorList(Rcpp::as<XPtrTorchTensorList>(args["out"]), Rcpp::as<XPtrTorchTensorList>(args["self"]), Rcpp::as<XPtrTorchTensorList>(args["tensors1"]), Rcpp::as<XPtrTorchTensorList>(args["weights"]));
+  return R_NilValue;
+}
+if (out_type == "TensorList" && self_type == "TensorList" && tensors1_type == "TensorList" && weight_type == "Scalar" && weights_type == "Missing") {
+  cpp_torch_namespace__foreach_lerp_out_out_TensorList_self_TensorList_tensors1_TensorList_weight_Scalar(Rcpp::as<XPtrTorchTensorList>(args["out"]), Rcpp::as<XPtrTorchTensorList>(args["self"]), Rcpp::as<XPtrTorchTensorList>(args["tensors1"]), Rcpp::as<XPtrTorchScalar>(args["weight"]));
+  return R_NilValue;
+}
+if (out_type == "TensorList" && self_type == "TensorList" && tensors1_type == "TensorList" && weight_type == "ArrayRef<Scalar>" && weights_type == "Missing") {
+  cpp_torch_namespace__foreach_lerp_out_out_TensorList_self_TensorList_tensors1_TensorList_weight_ArrayRefScalar(Rcpp::as<XPtrTorchTensorList>(args["out"]), Rcpp::as<XPtrTorchTensorList>(args["self"]), Rcpp::as<XPtrTorchTensorList>(args["tensors1"]), Rcpp::as<XPtrTorchvector_Scalar>(args["weight"]));
+  return R_NilValue;
+}
+  Rcpp::stop("No matching overload for _foreach_lerp_out");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace__foreach_maximum (Rcpp::List args) {
+  static const std::vector<std::string> self_expected = {"TensorList"};
+  static const std::vector<std::string> other_expected = {"TensorList"};
+  static const std::vector<std::string> scalar_expected = {"Scalar"};
+  static const std::vector<std::string> scalars_expected = {"ArrayRef<Scalar>"};
+  auto self_type = cpp_arg_to_torch_type(args["self"], self_expected, "self");
+  auto other_type = cpp_arg_to_torch_type(args["other"], other_expected, "other");
+  auto scalar_type = cpp_arg_to_torch_type(args["scalar"], scalar_expected, "scalar");
+  auto scalars_type = cpp_arg_to_torch_type(args["scalars"], scalars_expected, "scalars");
+if (self_type == "TensorList" && other_type == "Missing" && scalar_type == "Scalar" && scalars_type == "Missing") {
+  return Rcpp::wrap(cpp_torch_namespace__foreach_maximum_self_TensorList_scalar_Scalar(Rcpp::as<XPtrTorchTensorList>(args["self"]), Rcpp::as<XPtrTorchScalar>(args["scalar"])));
+}
+if (self_type == "TensorList" && other_type == "TensorList" && scalar_type == "Missing" && scalars_type == "Missing") {
+  return Rcpp::wrap(cpp_torch_namespace__foreach_maximum_self_TensorList_other_TensorList(Rcpp::as<XPtrTorchTensorList>(args["self"]), Rcpp::as<XPtrTorchTensorList>(args["other"])));
+}
+if (self_type == "TensorList" && other_type == "Missing" && scalar_type == "Missing" && scalars_type == "ArrayRef<Scalar>") {
+  return Rcpp::wrap(cpp_torch_namespace__foreach_maximum_self_TensorList_scalars_ArrayRefScalar(Rcpp::as<XPtrTorchTensorList>(args["self"]), Rcpp::as<XPtrTorchvector_Scalar>(args["scalars"])));
+}
+  Rcpp::stop("No matching overload for _foreach_maximum");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace__foreach_maximum_ (Rcpp::List args) {
+  static const std::vector<std::string> self_expected = {"TensorList"};
+  static const std::vector<std::string> other_expected = {"TensorList"};
+  static const std::vector<std::string> scalar_expected = {"Scalar"};
+  static const std::vector<std::string> scalars_expected = {"ArrayRef<Scalar>"};
+  auto self_type = cpp_arg_to_torch_type(args["self"], self_expected, "self");
+  auto other_type = cpp_arg_to_torch_type(args["other"], other_expected, "other");
+  auto scalar_type = cpp_arg_to_torch_type(args["scalar"], scalar_expected, "scalar");
+  auto scalars_type = cpp_arg_to_torch_type(args["scalars"], scalars_expected, "scalars");
+if (self_type == "TensorList" && other_type == "Missing" && scalar_type == "Scalar" && scalars_type == "Missing") {
+  cpp_torch_namespace__foreach_maximum__self_TensorList_scalar_Scalar(Rcpp::as<XPtrTorchTensorList>(args["self"]), Rcpp::as<XPtrTorchScalar>(args["scalar"]));
+  return R_NilValue;
+}
+if (self_type == "TensorList" && other_type == "TensorList" && scalar_type == "Missing" && scalars_type == "Missing") {
+  cpp_torch_namespace__foreach_maximum__self_TensorList_other_TensorList(Rcpp::as<XPtrTorchTensorList>(args["self"]), Rcpp::as<XPtrTorchTensorList>(args["other"]));
+  return R_NilValue;
+}
+if (self_type == "TensorList" && other_type == "Missing" && scalar_type == "Missing" && scalars_type == "ArrayRef<Scalar>") {
+  cpp_torch_namespace__foreach_maximum__self_TensorList_scalars_ArrayRefScalar(Rcpp::as<XPtrTorchTensorList>(args["self"]), Rcpp::as<XPtrTorchvector_Scalar>(args["scalars"]));
+  return R_NilValue;
+}
+  Rcpp::stop("No matching overload for _foreach_maximum_");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace__foreach_maximum_out (Rcpp::List args) {
+  static const std::vector<std::string> out_expected = {"TensorList"};
+  static const std::vector<std::string> self_expected = {"TensorList"};
+  static const std::vector<std::string> other_expected = {"TensorList"};
+  static const std::vector<std::string> scalar_expected = {"Scalar"};
+  static const std::vector<std::string> scalars_expected = {"ArrayRef<Scalar>"};
+  auto out_type = cpp_arg_to_torch_type(args["out"], out_expected, "out");
+  auto self_type = cpp_arg_to_torch_type(args["self"], self_expected, "self");
+  auto other_type = cpp_arg_to_torch_type(args["other"], other_expected, "other");
+  auto scalar_type = cpp_arg_to_torch_type(args["scalar"], scalar_expected, "scalar");
+  auto scalars_type = cpp_arg_to_torch_type(args["scalars"], scalars_expected, "scalars");
+if (out_type == "TensorList" && self_type == "TensorList" && other_type == "Missing" && scalar_type == "Scalar" && scalars_type == "Missing") {
+  cpp_torch_namespace__foreach_maximum_out_out_TensorList_self_TensorList_scalar_Scalar(Rcpp::as<XPtrTorchTensorList>(args["out"]), Rcpp::as<XPtrTorchTensorList>(args["self"]), Rcpp::as<XPtrTorchScalar>(args["scalar"]));
+  return R_NilValue;
+}
+if (out_type == "TensorList" && self_type == "TensorList" && other_type == "TensorList" && scalar_type == "Missing" && scalars_type == "Missing") {
+  cpp_torch_namespace__foreach_maximum_out_out_TensorList_self_TensorList_other_TensorList(Rcpp::as<XPtrTorchTensorList>(args["out"]), Rcpp::as<XPtrTorchTensorList>(args["self"]), Rcpp::as<XPtrTorchTensorList>(args["other"]));
+  return R_NilValue;
+}
+if (out_type == "TensorList" && self_type == "TensorList" && other_type == "Missing" && scalar_type == "Missing" && scalars_type == "ArrayRef<Scalar>") {
+  cpp_torch_namespace__foreach_maximum_out_out_TensorList_self_TensorList_scalars_ArrayRefScalar(Rcpp::as<XPtrTorchTensorList>(args["out"]), Rcpp::as<XPtrTorchTensorList>(args["self"]), Rcpp::as<XPtrTorchvector_Scalar>(args["scalars"]));
+  return R_NilValue;
+}
+  Rcpp::stop("No matching overload for _foreach_maximum_out");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace__foreach_minimum (Rcpp::List args) {
+  static const std::vector<std::string> self_expected = {"TensorList"};
+  static const std::vector<std::string> other_expected = {"TensorList"};
+  static const std::vector<std::string> scalar_expected = {"Scalar"};
+  static const std::vector<std::string> scalars_expected = {"ArrayRef<Scalar>"};
+  auto self_type = cpp_arg_to_torch_type(args["self"], self_expected, "self");
+  auto other_type = cpp_arg_to_torch_type(args["other"], other_expected, "other");
+  auto scalar_type = cpp_arg_to_torch_type(args["scalar"], scalar_expected, "scalar");
+  auto scalars_type = cpp_arg_to_torch_type(args["scalars"], scalars_expected, "scalars");
+if (self_type == "TensorList" && other_type == "Missing" && scalar_type == "Scalar" && scalars_type == "Missing") {
+  return Rcpp::wrap(cpp_torch_namespace__foreach_minimum_self_TensorList_scalar_Scalar(Rcpp::as<XPtrTorchTensorList>(args["self"]), Rcpp::as<XPtrTorchScalar>(args["scalar"])));
+}
+if (self_type == "TensorList" && other_type == "TensorList" && scalar_type == "Missing" && scalars_type == "Missing") {
+  return Rcpp::wrap(cpp_torch_namespace__foreach_minimum_self_TensorList_other_TensorList(Rcpp::as<XPtrTorchTensorList>(args["self"]), Rcpp::as<XPtrTorchTensorList>(args["other"])));
+}
+if (self_type == "TensorList" && other_type == "Missing" && scalar_type == "Missing" && scalars_type == "ArrayRef<Scalar>") {
+  return Rcpp::wrap(cpp_torch_namespace__foreach_minimum_self_TensorList_scalars_ArrayRefScalar(Rcpp::as<XPtrTorchTensorList>(args["self"]), Rcpp::as<XPtrTorchvector_Scalar>(args["scalars"])));
+}
+  Rcpp::stop("No matching overload for _foreach_minimum");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace__foreach_minimum_ (Rcpp::List args) {
+  static const std::vector<std::string> self_expected = {"TensorList"};
+  static const std::vector<std::string> other_expected = {"TensorList"};
+  static const std::vector<std::string> scalar_expected = {"Scalar"};
+  static const std::vector<std::string> scalars_expected = {"ArrayRef<Scalar>"};
+  auto self_type = cpp_arg_to_torch_type(args["self"], self_expected, "self");
+  auto other_type = cpp_arg_to_torch_type(args["other"], other_expected, "other");
+  auto scalar_type = cpp_arg_to_torch_type(args["scalar"], scalar_expected, "scalar");
+  auto scalars_type = cpp_arg_to_torch_type(args["scalars"], scalars_expected, "scalars");
+if (self_type == "TensorList" && other_type == "Missing" && scalar_type == "Scalar" && scalars_type == "Missing") {
+  cpp_torch_namespace__foreach_minimum__self_TensorList_scalar_Scalar(Rcpp::as<XPtrTorchTensorList>(args["self"]), Rcpp::as<XPtrTorchScalar>(args["scalar"]));
+  return R_NilValue;
+}
+if (self_type == "TensorList" && other_type == "TensorList" && scalar_type == "Missing" && scalars_type == "Missing") {
+  cpp_torch_namespace__foreach_minimum__self_TensorList_other_TensorList(Rcpp::as<XPtrTorchTensorList>(args["self"]), Rcpp::as<XPtrTorchTensorList>(args["other"]));
+  return R_NilValue;
+}
+if (self_type == "TensorList" && other_type == "Missing" && scalar_type == "Missing" && scalars_type == "ArrayRef<Scalar>") {
+  cpp_torch_namespace__foreach_minimum__self_TensorList_scalars_ArrayRefScalar(Rcpp::as<XPtrTorchTensorList>(args["self"]), Rcpp::as<XPtrTorchvector_Scalar>(args["scalars"]));
+  return R_NilValue;
+}
+  Rcpp::stop("No matching overload for _foreach_minimum_");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace__foreach_minimum_out (Rcpp::List args) {
+  static const std::vector<std::string> out_expected = {"TensorList"};
+  static const std::vector<std::string> self_expected = {"TensorList"};
+  static const std::vector<std::string> other_expected = {"TensorList"};
+  static const std::vector<std::string> scalar_expected = {"Scalar"};
+  static const std::vector<std::string> scalars_expected = {"ArrayRef<Scalar>"};
+  auto out_type = cpp_arg_to_torch_type(args["out"], out_expected, "out");
+  auto self_type = cpp_arg_to_torch_type(args["self"], self_expected, "self");
+  auto other_type = cpp_arg_to_torch_type(args["other"], other_expected, "other");
+  auto scalar_type = cpp_arg_to_torch_type(args["scalar"], scalar_expected, "scalar");
+  auto scalars_type = cpp_arg_to_torch_type(args["scalars"], scalars_expected, "scalars");
+if (out_type == "TensorList" && self_type == "TensorList" && other_type == "Missing" && scalar_type == "Scalar" && scalars_type == "Missing") {
+  cpp_torch_namespace__foreach_minimum_out_out_TensorList_self_TensorList_scalar_Scalar(Rcpp::as<XPtrTorchTensorList>(args["out"]), Rcpp::as<XPtrTorchTensorList>(args["self"]), Rcpp::as<XPtrTorchScalar>(args["scalar"]));
+  return R_NilValue;
+}
+if (out_type == "TensorList" && self_type == "TensorList" && other_type == "TensorList" && scalar_type == "Missing" && scalars_type == "Missing") {
+  cpp_torch_namespace__foreach_minimum_out_out_TensorList_self_TensorList_other_TensorList(Rcpp::as<XPtrTorchTensorList>(args["out"]), Rcpp::as<XPtrTorchTensorList>(args["self"]), Rcpp::as<XPtrTorchTensorList>(args["other"]));
+  return R_NilValue;
+}
+if (out_type == "TensorList" && self_type == "TensorList" && other_type == "Missing" && scalar_type == "Missing" && scalars_type == "ArrayRef<Scalar>") {
+  cpp_torch_namespace__foreach_minimum_out_out_TensorList_self_TensorList_scalars_ArrayRefScalar(Rcpp::as<XPtrTorchTensorList>(args["out"]), Rcpp::as<XPtrTorchTensorList>(args["self"]), Rcpp::as<XPtrTorchvector_Scalar>(args["scalars"]));
+  return R_NilValue;
+}
+  Rcpp::stop("No matching overload for _foreach_minimum_out");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace__foreach_mul (Rcpp::List args) {
+  static const std::vector<std::string> self_expected = {"TensorList"};
+  static const std::vector<std::string> other_expected = {"TensorList", "Tensor"};
+  static const std::vector<std::string> scalar_expected = {"Scalar"};
+  static const std::vector<std::string> scalars_expected = {"ArrayRef<Scalar>"};
+  auto self_type = cpp_arg_to_torch_type(args["self"], self_expected, "self");
+  auto other_type = cpp_arg_to_torch_type(args["other"], other_expected, "other");
+  auto scalar_type = cpp_arg_to_torch_type(args["scalar"], scalar_expected, "scalar");
+  auto scalars_type = cpp_arg_to_torch_type(args["scalars"], scalars_expected, "scalars");
+if (self_type == "TensorList" && other_type == "Missing" && scalar_type == "Scalar" && scalars_type == "Missing") {
+  return Rcpp::wrap(cpp_torch_namespace__foreach_mul_self_TensorList_scalar_Scalar(Rcpp::as<XPtrTorchTensorList>(args["self"]), Rcpp::as<XPtrTorchScalar>(args["scalar"])));
+}
+if (self_type == "TensorList" && other_type == "TensorList" && scalar_type == "Missing" && scalars_type == "Missing") {
+  return Rcpp::wrap(cpp_torch_namespace__foreach_mul_self_TensorList_other_TensorList(Rcpp::as<XPtrTorchTensorList>(args["self"]), Rcpp::as<XPtrTorchTensorList>(args["other"])));
+}
+if (self_type == "TensorList" && other_type == "Missing" && scalar_type == "Missing" && scalars_type == "ArrayRef<Scalar>") {
+  return Rcpp::wrap(cpp_torch_namespace__foreach_mul_self_TensorList_scalars_ArrayRefScalar(Rcpp::as<XPtrTorchTensorList>(args["self"]), Rcpp::as<XPtrTorchvector_Scalar>(args["scalars"])));
+}
+if (self_type == "TensorList" && other_type == "Tensor" && scalar_type == "Missing" && scalars_type == "Missing") {
+  return Rcpp::wrap(cpp_torch_namespace__foreach_mul_self_TensorList_other_Tensor(Rcpp::as<XPtrTorchTensorList>(args["self"]), Rcpp::as<XPtrTorchTensor>(args["other"])));
+}
+  Rcpp::stop("No matching overload for _foreach_mul");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace__foreach_mul_ (Rcpp::List args) {
+  static const std::vector<std::string> self_expected = {"TensorList"};
+  static const std::vector<std::string> other_expected = {"TensorList", "Tensor"};
+  static const std::vector<std::string> scalar_expected = {"Scalar"};
+  static const std::vector<std::string> scalars_expected = {"ArrayRef<Scalar>"};
+  auto self_type = cpp_arg_to_torch_type(args["self"], self_expected, "self");
+  auto other_type = cpp_arg_to_torch_type(args["other"], other_expected, "other");
+  auto scalar_type = cpp_arg_to_torch_type(args["scalar"], scalar_expected, "scalar");
+  auto scalars_type = cpp_arg_to_torch_type(args["scalars"], scalars_expected, "scalars");
+if (self_type == "TensorList" && other_type == "Missing" && scalar_type == "Scalar" && scalars_type == "Missing") {
+  cpp_torch_namespace__foreach_mul__self_TensorList_scalar_Scalar(Rcpp::as<XPtrTorchTensorList>(args["self"]), Rcpp::as<XPtrTorchScalar>(args["scalar"]));
+  return R_NilValue;
+}
+if (self_type == "TensorList" && other_type == "TensorList" && scalar_type == "Missing" && scalars_type == "Missing") {
+  cpp_torch_namespace__foreach_mul__self_TensorList_other_TensorList(Rcpp::as<XPtrTorchTensorList>(args["self"]), Rcpp::as<XPtrTorchTensorList>(args["other"]));
+  return R_NilValue;
+}
+if (self_type == "TensorList" && other_type == "Missing" && scalar_type == "Missing" && scalars_type == "ArrayRef<Scalar>") {
+  cpp_torch_namespace__foreach_mul__self_TensorList_scalars_ArrayRefScalar(Rcpp::as<XPtrTorchTensorList>(args["self"]), Rcpp::as<XPtrTorchvector_Scalar>(args["scalars"]));
+  return R_NilValue;
+}
+if (self_type == "TensorList" && other_type == "Tensor" && scalar_type == "Missing" && scalars_type == "Missing") {
+  cpp_torch_namespace__foreach_mul__self_TensorList_other_Tensor(Rcpp::as<XPtrTorchTensorList>(args["self"]), Rcpp::as<XPtrTorchTensor>(args["other"]));
+  return R_NilValue;
+}
+  Rcpp::stop("No matching overload for _foreach_mul_");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace__foreach_mul_out (Rcpp::List args) {
+  static const std::vector<std::string> out_expected = {"TensorList"};
+  static const std::vector<std::string> self_expected = {"TensorList"};
+  static const std::vector<std::string> other_expected = {"TensorList", "Tensor"};
+  static const std::vector<std::string> scalar_expected = {"Scalar"};
+  static const std::vector<std::string> scalars_expected = {"ArrayRef<Scalar>"};
+  auto out_type = cpp_arg_to_torch_type(args["out"], out_expected, "out");
+  auto self_type = cpp_arg_to_torch_type(args["self"], self_expected, "self");
+  auto other_type = cpp_arg_to_torch_type(args["other"], other_expected, "other");
+  auto scalar_type = cpp_arg_to_torch_type(args["scalar"], scalar_expected, "scalar");
+  auto scalars_type = cpp_arg_to_torch_type(args["scalars"], scalars_expected, "scalars");
+if (out_type == "TensorList" && self_type == "TensorList" && other_type == "Missing" && scalar_type == "Scalar" && scalars_type == "Missing") {
+  cpp_torch_namespace__foreach_mul_out_out_TensorList_self_TensorList_scalar_Scalar(Rcpp::as<XPtrTorchTensorList>(args["out"]), Rcpp::as<XPtrTorchTensorList>(args["self"]), Rcpp::as<XPtrTorchScalar>(args["scalar"]));
+  return R_NilValue;
+}
+if (out_type == "TensorList" && self_type == "TensorList" && other_type == "TensorList" && scalar_type == "Missing" && scalars_type == "Missing") {
+  cpp_torch_namespace__foreach_mul_out_out_TensorList_self_TensorList_other_TensorList(Rcpp::as<XPtrTorchTensorList>(args["out"]), Rcpp::as<XPtrTorchTensorList>(args["self"]), Rcpp::as<XPtrTorchTensorList>(args["other"]));
+  return R_NilValue;
+}
+if (out_type == "TensorList" && self_type == "TensorList" && other_type == "Missing" && scalar_type == "Missing" && scalars_type == "ArrayRef<Scalar>") {
+  cpp_torch_namespace__foreach_mul_out_out_TensorList_self_TensorList_scalars_ArrayRefScalar(Rcpp::as<XPtrTorchTensorList>(args["out"]), Rcpp::as<XPtrTorchTensorList>(args["self"]), Rcpp::as<XPtrTorchvector_Scalar>(args["scalars"]));
+  return R_NilValue;
+}
+if (out_type == "TensorList" && self_type == "TensorList" && other_type == "Tensor" && scalar_type == "Missing" && scalars_type == "Missing") {
+  cpp_torch_namespace__foreach_mul_out_out_TensorList_self_TensorList_other_Tensor(Rcpp::as<XPtrTorchTensorList>(args["out"]), Rcpp::as<XPtrTorchTensorList>(args["self"]), Rcpp::as<XPtrTorchTensor>(args["other"]));
+  return R_NilValue;
+}
+  Rcpp::stop("No matching overload for _foreach_mul_out");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace__foreach_pow (Rcpp::List args) {
+  static const std::vector<std::string> self_expected = {"TensorList", "Scalar"};
+  static const std::vector<std::string> exponent_expected = {"TensorList", "Scalar", "ArrayRef<Scalar>"};
+  auto self_type = cpp_arg_to_torch_type(args["self"], self_expected, "self");
+  auto exponent_type = cpp_arg_to_torch_type(args["exponent"], exponent_expected, "exponent");
+if (self_type == "TensorList" && exponent_type == "TensorList") {
+  return Rcpp::wrap(cpp_torch_namespace__foreach_pow_self_TensorList_exponent_TensorList(Rcpp::as<XPtrTorchTensorList>(args["self"]), Rcpp::as<XPtrTorchTensorList>(args["exponent"])));
+}
+if (self_type == "TensorList" && exponent_type == "Scalar") {
+  return Rcpp::wrap(cpp_torch_namespace__foreach_pow_self_TensorList_exponent_Scalar(Rcpp::as<XPtrTorchTensorList>(args["self"]), Rcpp::as<XPtrTorchScalar>(args["exponent"])));
+}
+if (self_type == "TensorList" && exponent_type == "ArrayRef<Scalar>") {
+  return Rcpp::wrap(cpp_torch_namespace__foreach_pow_self_TensorList_exponent_ArrayRefScalar(Rcpp::as<XPtrTorchTensorList>(args["self"]), Rcpp::as<XPtrTorchvector_Scalar>(args["exponent"])));
+}
+if (self_type == "Scalar" && exponent_type == "TensorList") {
+  return Rcpp::wrap(cpp_torch_namespace__foreach_pow_self_Scalar_exponent_TensorList(Rcpp::as<XPtrTorchScalar>(args["self"]), Rcpp::as<XPtrTorchTensorList>(args["exponent"])));
+}
+  Rcpp::stop("No matching overload for _foreach_pow");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace__foreach_pow_ (Rcpp::List args) {
+  static const std::vector<std::string> self_expected = {"TensorList"};
+  static const std::vector<std::string> exponent_expected = {"TensorList", "Scalar", "ArrayRef<Scalar>"};
+  auto self_type = cpp_arg_to_torch_type(args["self"], self_expected, "self");
+  auto exponent_type = cpp_arg_to_torch_type(args["exponent"], exponent_expected, "exponent");
+if (self_type == "TensorList" && exponent_type == "TensorList") {
+  cpp_torch_namespace__foreach_pow__self_TensorList_exponent_TensorList(Rcpp::as<XPtrTorchTensorList>(args["self"]), Rcpp::as<XPtrTorchTensorList>(args["exponent"]));
+  return R_NilValue;
+}
+if (self_type == "TensorList" && exponent_type == "Scalar") {
+  cpp_torch_namespace__foreach_pow__self_TensorList_exponent_Scalar(Rcpp::as<XPtrTorchTensorList>(args["self"]), Rcpp::as<XPtrTorchScalar>(args["exponent"]));
+  return R_NilValue;
+}
+if (self_type == "TensorList" && exponent_type == "ArrayRef<Scalar>") {
+  cpp_torch_namespace__foreach_pow__self_TensorList_exponent_ArrayRefScalar(Rcpp::as<XPtrTorchTensorList>(args["self"]), Rcpp::as<XPtrTorchvector_Scalar>(args["exponent"]));
+  return R_NilValue;
+}
+  Rcpp::stop("No matching overload for _foreach_pow_");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace__foreach_pow_out (Rcpp::List args) {
+  static const std::vector<std::string> out_expected = {"TensorList"};
+  static const std::vector<std::string> self_expected = {"TensorList"};
+  static const std::vector<std::string> exponent_expected = {"TensorList", "Scalar", "ArrayRef<Scalar>"};
+  auto out_type = cpp_arg_to_torch_type(args["out"], out_expected, "out");
+  auto self_type = cpp_arg_to_torch_type(args["self"], self_expected, "self");
+  auto exponent_type = cpp_arg_to_torch_type(args["exponent"], exponent_expected, "exponent");
+if (out_type == "TensorList" && self_type == "TensorList" && exponent_type == "TensorList") {
+  cpp_torch_namespace__foreach_pow_out_out_TensorList_self_TensorList_exponent_TensorList(Rcpp::as<XPtrTorchTensorList>(args["out"]), Rcpp::as<XPtrTorchTensorList>(args["self"]), Rcpp::as<XPtrTorchTensorList>(args["exponent"]));
+  return R_NilValue;
+}
+if (out_type == "TensorList" && self_type == "TensorList" && exponent_type == "Scalar") {
+  cpp_torch_namespace__foreach_pow_out_out_TensorList_self_TensorList_exponent_Scalar(Rcpp::as<XPtrTorchTensorList>(args["out"]), Rcpp::as<XPtrTorchTensorList>(args["self"]), Rcpp::as<XPtrTorchScalar>(args["exponent"]));
+  return R_NilValue;
+}
+if (out_type == "TensorList" && self_type == "TensorList" && exponent_type == "ArrayRef<Scalar>") {
+  cpp_torch_namespace__foreach_pow_out_out_TensorList_self_TensorList_exponent_ArrayRefScalar(Rcpp::as<XPtrTorchTensorList>(args["out"]), Rcpp::as<XPtrTorchTensorList>(args["self"]), Rcpp::as<XPtrTorchvector_Scalar>(args["exponent"]));
+  return R_NilValue;
+}
+  Rcpp::stop("No matching overload for _foreach_pow_out");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace__foreach_sub (Rcpp::List args) {
+  static const std::vector<std::string> self_expected = {"TensorList"};
+  static const std::vector<std::string> other_expected = {"TensorList"};
+  static const std::vector<std::string> scalar_expected = {"Scalar"};
+  static const std::vector<std::string> scalars_expected = {"ArrayRef<Scalar>"};
+  auto self_type = cpp_arg_to_torch_type(args["self"], self_expected, "self");
+  auto other_type = cpp_arg_to_torch_type(args["other"], other_expected, "other");
+  auto scalar_type = cpp_arg_to_torch_type(args["scalar"], scalar_expected, "scalar");
+  auto scalars_type = cpp_arg_to_torch_type(args["scalars"], scalars_expected, "scalars");
+if (self_type == "TensorList" && other_type == "Missing" && scalar_type == "Scalar" && scalars_type == "Missing") {
+  return Rcpp::wrap(cpp_torch_namespace__foreach_sub_self_TensorList_scalar_Scalar(Rcpp::as<XPtrTorchTensorList>(args["self"]), Rcpp::as<XPtrTorchScalar>(args["scalar"])));
+}
+if (self_type == "TensorList" && other_type == "TensorList" && scalar_type == "Missing" && scalars_type == "Missing") {
+  return Rcpp::wrap(cpp_torch_namespace__foreach_sub_self_TensorList_other_TensorList(Rcpp::as<XPtrTorchTensorList>(args["self"]), Rcpp::as<XPtrTorchTensorList>(args["other"]), Rcpp::as<XPtrTorchScalar>(args["alpha"])));
+}
+if (self_type == "TensorList" && other_type == "Missing" && scalar_type == "Missing" && scalars_type == "ArrayRef<Scalar>") {
+  return Rcpp::wrap(cpp_torch_namespace__foreach_sub_self_TensorList_scalars_ArrayRefScalar(Rcpp::as<XPtrTorchTensorList>(args["self"]), Rcpp::as<XPtrTorchvector_Scalar>(args["scalars"])));
+}
+  Rcpp::stop("No matching overload for _foreach_sub");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace__foreach_sub_ (Rcpp::List args) {
+  static const std::vector<std::string> self_expected = {"TensorList"};
+  static const std::vector<std::string> other_expected = {"TensorList"};
+  static const std::vector<std::string> scalar_expected = {"Scalar"};
+  static const std::vector<std::string> scalars_expected = {"ArrayRef<Scalar>"};
+  auto self_type = cpp_arg_to_torch_type(args["self"], self_expected, "self");
+  auto other_type = cpp_arg_to_torch_type(args["other"], other_expected, "other");
+  auto scalar_type = cpp_arg_to_torch_type(args["scalar"], scalar_expected, "scalar");
+  auto scalars_type = cpp_arg_to_torch_type(args["scalars"], scalars_expected, "scalars");
+if (self_type == "TensorList" && other_type == "Missing" && scalar_type == "Scalar" && scalars_type == "Missing") {
+  cpp_torch_namespace__foreach_sub__self_TensorList_scalar_Scalar(Rcpp::as<XPtrTorchTensorList>(args["self"]), Rcpp::as<XPtrTorchScalar>(args["scalar"]));
+  return R_NilValue;
+}
+if (self_type == "TensorList" && other_type == "TensorList" && scalar_type == "Missing" && scalars_type == "Missing") {
+  cpp_torch_namespace__foreach_sub__self_TensorList_other_TensorList(Rcpp::as<XPtrTorchTensorList>(args["self"]), Rcpp::as<XPtrTorchTensorList>(args["other"]), Rcpp::as<XPtrTorchScalar>(args["alpha"]));
+  return R_NilValue;
+}
+if (self_type == "TensorList" && other_type == "Missing" && scalar_type == "Missing" && scalars_type == "ArrayRef<Scalar>") {
+  cpp_torch_namespace__foreach_sub__self_TensorList_scalars_ArrayRefScalar(Rcpp::as<XPtrTorchTensorList>(args["self"]), Rcpp::as<XPtrTorchvector_Scalar>(args["scalars"]));
+  return R_NilValue;
+}
+  Rcpp::stop("No matching overload for _foreach_sub_");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace__foreach_sub_out (Rcpp::List args) {
+  static const std::vector<std::string> out_expected = {"TensorList"};
+  static const std::vector<std::string> self_expected = {"TensorList"};
+  static const std::vector<std::string> other_expected = {"TensorList"};
+  static const std::vector<std::string> scalar_expected = {"Scalar"};
+  static const std::vector<std::string> scalars_expected = {"ArrayRef<Scalar>"};
+  auto out_type = cpp_arg_to_torch_type(args["out"], out_expected, "out");
+  auto self_type = cpp_arg_to_torch_type(args["self"], self_expected, "self");
+  auto other_type = cpp_arg_to_torch_type(args["other"], other_expected, "other");
+  auto scalar_type = cpp_arg_to_torch_type(args["scalar"], scalar_expected, "scalar");
+  auto scalars_type = cpp_arg_to_torch_type(args["scalars"], scalars_expected, "scalars");
+if (out_type == "TensorList" && self_type == "TensorList" && other_type == "Missing" && scalar_type == "Scalar" && scalars_type == "Missing") {
+  cpp_torch_namespace__foreach_sub_out_out_TensorList_self_TensorList_scalar_Scalar(Rcpp::as<XPtrTorchTensorList>(args["out"]), Rcpp::as<XPtrTorchTensorList>(args["self"]), Rcpp::as<XPtrTorchScalar>(args["scalar"]));
+  return R_NilValue;
+}
+if (out_type == "TensorList" && self_type == "TensorList" && other_type == "TensorList" && scalar_type == "Missing" && scalars_type == "Missing") {
+  cpp_torch_namespace__foreach_sub_out_out_TensorList_self_TensorList_other_TensorList(Rcpp::as<XPtrTorchTensorList>(args["out"]), Rcpp::as<XPtrTorchTensorList>(args["self"]), Rcpp::as<XPtrTorchTensorList>(args["other"]), Rcpp::as<XPtrTorchScalar>(args["alpha"]));
+  return R_NilValue;
+}
+if (out_type == "TensorList" && self_type == "TensorList" && other_type == "Missing" && scalar_type == "Missing" && scalars_type == "ArrayRef<Scalar>") {
+  cpp_torch_namespace__foreach_sub_out_out_TensorList_self_TensorList_scalars_ArrayRefScalar(Rcpp::as<XPtrTorchTensorList>(args["out"]), Rcpp::as<XPtrTorchTensorList>(args["self"]), Rcpp::as<XPtrTorchvector_Scalar>(args["scalars"]));
+  return R_NilValue;
+}
+  Rcpp::stop("No matching overload for _foreach_sub_out");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace__fused_adagrad (Rcpp::List args) {
+  static const std::vector<std::string> self_expected = {"TensorList"};
+  static const std::vector<std::string> grads_expected = {"TensorList"};
+  static const std::vector<std::string> state_sums_expected = {"TensorList"};
+  static const std::vector<std::string> state_steps_expected = {"TensorList"};
+  static const std::vector<std::string> lr_expected = {"double", "Tensor"};
+  static const std::vector<std::string> lr_decay_expected = {"double"};
+  static const std::vector<std::string> weight_decay_expected = {"double"};
+  static const std::vector<std::string> eps_expected = {"double"};
+  static const std::vector<std::string> maximize_expected = {"bool"};
+  auto self_type = cpp_arg_to_torch_type(args["self"], self_expected, "self");
+  auto grads_type = cpp_arg_to_torch_type(args["grads"], grads_expected, "grads");
+  auto state_sums_type = cpp_arg_to_torch_type(args["state_sums"], state_sums_expected, "state_sums");
+  auto state_steps_type = cpp_arg_to_torch_type(args["state_steps"], state_steps_expected, "state_steps");
+  auto lr_type = cpp_arg_to_torch_type(args["lr"], lr_expected, "lr");
+  auto lr_decay_type = cpp_arg_to_torch_type(args["lr_decay"], lr_decay_expected, "lr_decay");
+  auto weight_decay_type = cpp_arg_to_torch_type(args["weight_decay"], weight_decay_expected, "weight_decay");
+  auto eps_type = cpp_arg_to_torch_type(args["eps"], eps_expected, "eps");
+  auto maximize_type = cpp_arg_to_torch_type(args["maximize"], maximize_expected, "maximize");
+if (self_type == "TensorList" && grads_type == "TensorList" && state_sums_type == "TensorList" && state_steps_type == "TensorList" && lr_type == "double" && lr_decay_type == "double" && weight_decay_type == "double" && eps_type == "double" && maximize_type == "bool") {
+  return Rcpp::wrap(cpp_torch_namespace__fused_adagrad_self_TensorList_grads_TensorList_state_sums_TensorList_state_steps_TensorList_lr_double_lr_decay_double_weight_decay_double_eps_double_maximize_bool(Rcpp::as<XPtrTorchTensorList>(args["self"]), Rcpp::as<XPtrTorchTensorList>(args["grads"]), Rcpp::as<XPtrTorchTensorList>(args["state_sums"]), Rcpp::as<XPtrTorchTensorList>(args["state_steps"]), Rcpp::as<XPtrTorchdouble>(args["lr"]), Rcpp::as<XPtrTorchdouble>(args["lr_decay"]), Rcpp::as<XPtrTorchdouble>(args["weight_decay"]), Rcpp::as<XPtrTorchdouble>(args["eps"]), Rcpp::as<XPtrTorchbool>(args["maximize"]), Rcpp::as<XPtrTorchOptionalTensor>(args["grad_scale"]), Rcpp::as<XPtrTorchOptionalTensor>(args["found_inf"])));
+}
+if (self_type == "TensorList" && grads_type == "TensorList" && state_sums_type == "TensorList" && state_steps_type == "TensorList" && lr_type == "Tensor" && lr_decay_type == "double" && weight_decay_type == "double" && eps_type == "double" && maximize_type == "bool") {
+  return Rcpp::wrap(cpp_torch_namespace__fused_adagrad_self_TensorList_grads_TensorList_state_sums_TensorList_state_steps_TensorList_lr_Tensor_lr_decay_double_weight_decay_double_eps_double_maximize_bool(Rcpp::as<XPtrTorchTensorList>(args["self"]), Rcpp::as<XPtrTorchTensorList>(args["grads"]), Rcpp::as<XPtrTorchTensorList>(args["state_sums"]), Rcpp::as<XPtrTorchTensorList>(args["state_steps"]), Rcpp::as<XPtrTorchTensor>(args["lr"]), Rcpp::as<XPtrTorchdouble>(args["lr_decay"]), Rcpp::as<XPtrTorchdouble>(args["weight_decay"]), Rcpp::as<XPtrTorchdouble>(args["eps"]), Rcpp::as<XPtrTorchbool>(args["maximize"]), Rcpp::as<XPtrTorchOptionalTensor>(args["grad_scale"]), Rcpp::as<XPtrTorchOptionalTensor>(args["found_inf"])));
+}
+  Rcpp::stop("No matching overload for _fused_adagrad");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace__fused_adagrad_ (Rcpp::List args) {
+  static const std::vector<std::string> self_expected = {"TensorList"};
+  static const std::vector<std::string> grads_expected = {"TensorList"};
+  static const std::vector<std::string> state_sums_expected = {"TensorList"};
+  static const std::vector<std::string> state_steps_expected = {"TensorList"};
+  static const std::vector<std::string> lr_expected = {"double", "Tensor"};
+  static const std::vector<std::string> lr_decay_expected = {"double"};
+  static const std::vector<std::string> weight_decay_expected = {"double"};
+  static const std::vector<std::string> eps_expected = {"double"};
+  static const std::vector<std::string> maximize_expected = {"bool"};
+  auto self_type = cpp_arg_to_torch_type(args["self"], self_expected, "self");
+  auto grads_type = cpp_arg_to_torch_type(args["grads"], grads_expected, "grads");
+  auto state_sums_type = cpp_arg_to_torch_type(args["state_sums"], state_sums_expected, "state_sums");
+  auto state_steps_type = cpp_arg_to_torch_type(args["state_steps"], state_steps_expected, "state_steps");
+  auto lr_type = cpp_arg_to_torch_type(args["lr"], lr_expected, "lr");
+  auto lr_decay_type = cpp_arg_to_torch_type(args["lr_decay"], lr_decay_expected, "lr_decay");
+  auto weight_decay_type = cpp_arg_to_torch_type(args["weight_decay"], weight_decay_expected, "weight_decay");
+  auto eps_type = cpp_arg_to_torch_type(args["eps"], eps_expected, "eps");
+  auto maximize_type = cpp_arg_to_torch_type(args["maximize"], maximize_expected, "maximize");
+if (self_type == "TensorList" && grads_type == "TensorList" && state_sums_type == "TensorList" && state_steps_type == "TensorList" && lr_type == "double" && lr_decay_type == "double" && weight_decay_type == "double" && eps_type == "double" && maximize_type == "bool") {
+  cpp_torch_namespace__fused_adagrad__self_TensorList_grads_TensorList_state_sums_TensorList_state_steps_TensorList_lr_double_lr_decay_double_weight_decay_double_eps_double_maximize_bool(Rcpp::as<XPtrTorchTensorList>(args["self"]), Rcpp::as<XPtrTorchTensorList>(args["grads"]), Rcpp::as<XPtrTorchTensorList>(args["state_sums"]), Rcpp::as<XPtrTorchTensorList>(args["state_steps"]), Rcpp::as<XPtrTorchdouble>(args["lr"]), Rcpp::as<XPtrTorchdouble>(args["lr_decay"]), Rcpp::as<XPtrTorchdouble>(args["weight_decay"]), Rcpp::as<XPtrTorchdouble>(args["eps"]), Rcpp::as<XPtrTorchbool>(args["maximize"]), Rcpp::as<XPtrTorchOptionalTensor>(args["grad_scale"]), Rcpp::as<XPtrTorchOptionalTensor>(args["found_inf"]));
+  return R_NilValue;
+}
+if (self_type == "TensorList" && grads_type == "TensorList" && state_sums_type == "TensorList" && state_steps_type == "TensorList" && lr_type == "Tensor" && lr_decay_type == "double" && weight_decay_type == "double" && eps_type == "double" && maximize_type == "bool") {
+  cpp_torch_namespace__fused_adagrad__self_TensorList_grads_TensorList_state_sums_TensorList_state_steps_TensorList_lr_Tensor_lr_decay_double_weight_decay_double_eps_double_maximize_bool(Rcpp::as<XPtrTorchTensorList>(args["self"]), Rcpp::as<XPtrTorchTensorList>(args["grads"]), Rcpp::as<XPtrTorchTensorList>(args["state_sums"]), Rcpp::as<XPtrTorchTensorList>(args["state_steps"]), Rcpp::as<XPtrTorchTensor>(args["lr"]), Rcpp::as<XPtrTorchdouble>(args["lr_decay"]), Rcpp::as<XPtrTorchdouble>(args["weight_decay"]), Rcpp::as<XPtrTorchdouble>(args["eps"]), Rcpp::as<XPtrTorchbool>(args["maximize"]), Rcpp::as<XPtrTorchOptionalTensor>(args["grad_scale"]), Rcpp::as<XPtrTorchOptionalTensor>(args["found_inf"]));
+  return R_NilValue;
+}
+  Rcpp::stop("No matching overload for _fused_adagrad_");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace__fused_adagrad_out (Rcpp::List args) {
+  static const std::vector<std::string> out_expected = {"TensorList"};
+  static const std::vector<std::string> self_expected = {"TensorList"};
+  static const std::vector<std::string> grads_expected = {"TensorList"};
+  static const std::vector<std::string> state_sums_expected = {"TensorList"};
+  static const std::vector<std::string> state_steps_expected = {"TensorList"};
+  static const std::vector<std::string> lr_expected = {"double", "Tensor"};
+  static const std::vector<std::string> lr_decay_expected = {"double"};
+  static const std::vector<std::string> weight_decay_expected = {"double"};
+  static const std::vector<std::string> eps_expected = {"double"};
+  static const std::vector<std::string> maximize_expected = {"bool"};
+  auto out_type = cpp_arg_to_torch_type(args["out"], out_expected, "out");
+  auto self_type = cpp_arg_to_torch_type(args["self"], self_expected, "self");
+  auto grads_type = cpp_arg_to_torch_type(args["grads"], grads_expected, "grads");
+  auto state_sums_type = cpp_arg_to_torch_type(args["state_sums"], state_sums_expected, "state_sums");
+  auto state_steps_type = cpp_arg_to_torch_type(args["state_steps"], state_steps_expected, "state_steps");
+  auto lr_type = cpp_arg_to_torch_type(args["lr"], lr_expected, "lr");
+  auto lr_decay_type = cpp_arg_to_torch_type(args["lr_decay"], lr_decay_expected, "lr_decay");
+  auto weight_decay_type = cpp_arg_to_torch_type(args["weight_decay"], weight_decay_expected, "weight_decay");
+  auto eps_type = cpp_arg_to_torch_type(args["eps"], eps_expected, "eps");
+  auto maximize_type = cpp_arg_to_torch_type(args["maximize"], maximize_expected, "maximize");
+if (out_type == "TensorList" && self_type == "TensorList" && grads_type == "TensorList" && state_sums_type == "TensorList" && state_steps_type == "TensorList" && lr_type == "double" && lr_decay_type == "double" && weight_decay_type == "double" && eps_type == "double" && maximize_type == "bool") {
+  cpp_torch_namespace__fused_adagrad_out_out_TensorList_self_TensorList_grads_TensorList_state_sums_TensorList_state_steps_TensorList_lr_double_lr_decay_double_weight_decay_double_eps_double_maximize_bool(Rcpp::as<XPtrTorchTensorList>(args["out"]), Rcpp::as<XPtrTorchTensorList>(args["self"]), Rcpp::as<XPtrTorchTensorList>(args["grads"]), Rcpp::as<XPtrTorchTensorList>(args["state_sums"]), Rcpp::as<XPtrTorchTensorList>(args["state_steps"]), Rcpp::as<XPtrTorchdouble>(args["lr"]), Rcpp::as<XPtrTorchdouble>(args["lr_decay"]), Rcpp::as<XPtrTorchdouble>(args["weight_decay"]), Rcpp::as<XPtrTorchdouble>(args["eps"]), Rcpp::as<XPtrTorchbool>(args["maximize"]), Rcpp::as<XPtrTorchOptionalTensor>(args["grad_scale"]), Rcpp::as<XPtrTorchOptionalTensor>(args["found_inf"]));
+  return R_NilValue;
+}
+if (out_type == "TensorList" && self_type == "TensorList" && grads_type == "TensorList" && state_sums_type == "TensorList" && state_steps_type == "TensorList" && lr_type == "Tensor" && lr_decay_type == "double" && weight_decay_type == "double" && eps_type == "double" && maximize_type == "bool") {
+  cpp_torch_namespace__fused_adagrad_out_out_TensorList_self_TensorList_grads_TensorList_state_sums_TensorList_state_steps_TensorList_lr_Tensor_lr_decay_double_weight_decay_double_eps_double_maximize_bool(Rcpp::as<XPtrTorchTensorList>(args["out"]), Rcpp::as<XPtrTorchTensorList>(args["self"]), Rcpp::as<XPtrTorchTensorList>(args["grads"]), Rcpp::as<XPtrTorchTensorList>(args["state_sums"]), Rcpp::as<XPtrTorchTensorList>(args["state_steps"]), Rcpp::as<XPtrTorchTensor>(args["lr"]), Rcpp::as<XPtrTorchdouble>(args["lr_decay"]), Rcpp::as<XPtrTorchdouble>(args["weight_decay"]), Rcpp::as<XPtrTorchdouble>(args["eps"]), Rcpp::as<XPtrTorchbool>(args["maximize"]), Rcpp::as<XPtrTorchOptionalTensor>(args["grad_scale"]), Rcpp::as<XPtrTorchOptionalTensor>(args["found_inf"]));
+  return R_NilValue;
+}
+  Rcpp::stop("No matching overload for _fused_adagrad_out");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace__fused_adam (Rcpp::List args) {
+  static const std::vector<std::string> self_expected = {"TensorList"};
+  static const std::vector<std::string> grads_expected = {"TensorList"};
+  static const std::vector<std::string> exp_avgs_expected = {"TensorList"};
+  static const std::vector<std::string> exp_avg_sqs_expected = {"TensorList"};
+  static const std::vector<std::string> max_exp_avg_sqs_expected = {"TensorList"};
+  static const std::vector<std::string> state_steps_expected = {"TensorList"};
+  static const std::vector<std::string> lr_expected = {"double", "Tensor"};
+  static const std::vector<std::string> beta1_expected = {"double"};
+  static const std::vector<std::string> beta2_expected = {"double"};
+  static const std::vector<std::string> weight_decay_expected = {"double"};
+  static const std::vector<std::string> eps_expected = {"double"};
+  static const std::vector<std::string> amsgrad_expected = {"bool"};
+  static const std::vector<std::string> maximize_expected = {"bool"};
+  auto self_type = cpp_arg_to_torch_type(args["self"], self_expected, "self");
+  auto grads_type = cpp_arg_to_torch_type(args["grads"], grads_expected, "grads");
+  auto exp_avgs_type = cpp_arg_to_torch_type(args["exp_avgs"], exp_avgs_expected, "exp_avgs");
+  auto exp_avg_sqs_type = cpp_arg_to_torch_type(args["exp_avg_sqs"], exp_avg_sqs_expected, "exp_avg_sqs");
+  auto max_exp_avg_sqs_type = cpp_arg_to_torch_type(args["max_exp_avg_sqs"], max_exp_avg_sqs_expected, "max_exp_avg_sqs");
+  auto state_steps_type = cpp_arg_to_torch_type(args["state_steps"], state_steps_expected, "state_steps");
+  auto lr_type = cpp_arg_to_torch_type(args["lr"], lr_expected, "lr");
+  auto beta1_type = cpp_arg_to_torch_type(args["beta1"], beta1_expected, "beta1");
+  auto beta2_type = cpp_arg_to_torch_type(args["beta2"], beta2_expected, "beta2");
+  auto weight_decay_type = cpp_arg_to_torch_type(args["weight_decay"], weight_decay_expected, "weight_decay");
+  auto eps_type = cpp_arg_to_torch_type(args["eps"], eps_expected, "eps");
+  auto amsgrad_type = cpp_arg_to_torch_type(args["amsgrad"], amsgrad_expected, "amsgrad");
+  auto maximize_type = cpp_arg_to_torch_type(args["maximize"], maximize_expected, "maximize");
+if (self_type == "TensorList" && grads_type == "TensorList" && exp_avgs_type == "TensorList" && exp_avg_sqs_type == "TensorList" && max_exp_avg_sqs_type == "TensorList" && state_steps_type == "TensorList" && lr_type == "double" && beta1_type == "double" && beta2_type == "double" && weight_decay_type == "double" && eps_type == "double" && amsgrad_type == "bool" && maximize_type == "bool") {
+  return Rcpp::wrap(cpp_torch_namespace__fused_adam_self_TensorList_grads_TensorList_exp_avgs_TensorList_exp_avg_sqs_TensorList_max_exp_avg_sqs_TensorList_state_steps_TensorList_lr_double_beta1_double_beta2_double_weight_decay_double_eps_double_amsgrad_bool_maximize_bool(Rcpp::as<XPtrTorchTensorList>(args["self"]), Rcpp::as<XPtrTorchTensorList>(args["grads"]), Rcpp::as<XPtrTorchTensorList>(args["exp_avgs"]), Rcpp::as<XPtrTorchTensorList>(args["exp_avg_sqs"]), Rcpp::as<XPtrTorchTensorList>(args["max_exp_avg_sqs"]), Rcpp::as<XPtrTorchTensorList>(args["state_steps"]), Rcpp::as<XPtrTorchdouble>(args["lr"]), Rcpp::as<XPtrTorchdouble>(args["beta1"]), Rcpp::as<XPtrTorchdouble>(args["beta2"]), Rcpp::as<XPtrTorchdouble>(args["weight_decay"]), Rcpp::as<XPtrTorchdouble>(args["eps"]), Rcpp::as<XPtrTorchbool>(args["amsgrad"]), Rcpp::as<XPtrTorchbool>(args["maximize"]), Rcpp::as<XPtrTorchOptionalTensor>(args["grad_scale"]), Rcpp::as<XPtrTorchOptionalTensor>(args["found_inf"])));
+}
+if (self_type == "TensorList" && grads_type == "TensorList" && exp_avgs_type == "TensorList" && exp_avg_sqs_type == "TensorList" && max_exp_avg_sqs_type == "TensorList" && state_steps_type == "TensorList" && lr_type == "Tensor" && beta1_type == "double" && beta2_type == "double" && weight_decay_type == "double" && eps_type == "double" && amsgrad_type == "bool" && maximize_type == "bool") {
+  return Rcpp::wrap(cpp_torch_namespace__fused_adam_self_TensorList_grads_TensorList_exp_avgs_TensorList_exp_avg_sqs_TensorList_max_exp_avg_sqs_TensorList_state_steps_TensorList_lr_Tensor_beta1_double_beta2_double_weight_decay_double_eps_double_amsgrad_bool_maximize_bool(Rcpp::as<XPtrTorchTensorList>(args["self"]), Rcpp::as<XPtrTorchTensorList>(args["grads"]), Rcpp::as<XPtrTorchTensorList>(args["exp_avgs"]), Rcpp::as<XPtrTorchTensorList>(args["exp_avg_sqs"]), Rcpp::as<XPtrTorchTensorList>(args["max_exp_avg_sqs"]), Rcpp::as<XPtrTorchTensorList>(args["state_steps"]), Rcpp::as<XPtrTorchTensor>(args["lr"]), Rcpp::as<XPtrTorchdouble>(args["beta1"]), Rcpp::as<XPtrTorchdouble>(args["beta2"]), Rcpp::as<XPtrTorchdouble>(args["weight_decay"]), Rcpp::as<XPtrTorchdouble>(args["eps"]), Rcpp::as<XPtrTorchbool>(args["amsgrad"]), Rcpp::as<XPtrTorchbool>(args["maximize"]), Rcpp::as<XPtrTorchOptionalTensor>(args["grad_scale"]), Rcpp::as<XPtrTorchOptionalTensor>(args["found_inf"])));
+}
+  Rcpp::stop("No matching overload for _fused_adam");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace__fused_adam_ (Rcpp::List args) {
+  static const std::vector<std::string> self_expected = {"TensorList"};
+  static const std::vector<std::string> grads_expected = {"TensorList"};
+  static const std::vector<std::string> exp_avgs_expected = {"TensorList"};
+  static const std::vector<std::string> exp_avg_sqs_expected = {"TensorList"};
+  static const std::vector<std::string> max_exp_avg_sqs_expected = {"TensorList"};
+  static const std::vector<std::string> state_steps_expected = {"TensorList"};
+  static const std::vector<std::string> lr_expected = {"double", "Tensor"};
+  static const std::vector<std::string> beta1_expected = {"double"};
+  static const std::vector<std::string> beta2_expected = {"double"};
+  static const std::vector<std::string> weight_decay_expected = {"double"};
+  static const std::vector<std::string> eps_expected = {"double"};
+  static const std::vector<std::string> amsgrad_expected = {"bool"};
+  static const std::vector<std::string> maximize_expected = {"bool"};
+  auto self_type = cpp_arg_to_torch_type(args["self"], self_expected, "self");
+  auto grads_type = cpp_arg_to_torch_type(args["grads"], grads_expected, "grads");
+  auto exp_avgs_type = cpp_arg_to_torch_type(args["exp_avgs"], exp_avgs_expected, "exp_avgs");
+  auto exp_avg_sqs_type = cpp_arg_to_torch_type(args["exp_avg_sqs"], exp_avg_sqs_expected, "exp_avg_sqs");
+  auto max_exp_avg_sqs_type = cpp_arg_to_torch_type(args["max_exp_avg_sqs"], max_exp_avg_sqs_expected, "max_exp_avg_sqs");
+  auto state_steps_type = cpp_arg_to_torch_type(args["state_steps"], state_steps_expected, "state_steps");
+  auto lr_type = cpp_arg_to_torch_type(args["lr"], lr_expected, "lr");
+  auto beta1_type = cpp_arg_to_torch_type(args["beta1"], beta1_expected, "beta1");
+  auto beta2_type = cpp_arg_to_torch_type(args["beta2"], beta2_expected, "beta2");
+  auto weight_decay_type = cpp_arg_to_torch_type(args["weight_decay"], weight_decay_expected, "weight_decay");
+  auto eps_type = cpp_arg_to_torch_type(args["eps"], eps_expected, "eps");
+  auto amsgrad_type = cpp_arg_to_torch_type(args["amsgrad"], amsgrad_expected, "amsgrad");
+  auto maximize_type = cpp_arg_to_torch_type(args["maximize"], maximize_expected, "maximize");
+if (self_type == "TensorList" && grads_type == "TensorList" && exp_avgs_type == "TensorList" && exp_avg_sqs_type == "TensorList" && max_exp_avg_sqs_type == "TensorList" && state_steps_type == "TensorList" && lr_type == "double" && beta1_type == "double" && beta2_type == "double" && weight_decay_type == "double" && eps_type == "double" && amsgrad_type == "bool" && maximize_type == "bool") {
+  cpp_torch_namespace__fused_adam__self_TensorList_grads_TensorList_exp_avgs_TensorList_exp_avg_sqs_TensorList_max_exp_avg_sqs_TensorList_state_steps_TensorList_lr_double_beta1_double_beta2_double_weight_decay_double_eps_double_amsgrad_bool_maximize_bool(Rcpp::as<XPtrTorchTensorList>(args["self"]), Rcpp::as<XPtrTorchTensorList>(args["grads"]), Rcpp::as<XPtrTorchTensorList>(args["exp_avgs"]), Rcpp::as<XPtrTorchTensorList>(args["exp_avg_sqs"]), Rcpp::as<XPtrTorchTensorList>(args["max_exp_avg_sqs"]), Rcpp::as<XPtrTorchTensorList>(args["state_steps"]), Rcpp::as<XPtrTorchdouble>(args["lr"]), Rcpp::as<XPtrTorchdouble>(args["beta1"]), Rcpp::as<XPtrTorchdouble>(args["beta2"]), Rcpp::as<XPtrTorchdouble>(args["weight_decay"]), Rcpp::as<XPtrTorchdouble>(args["eps"]), Rcpp::as<XPtrTorchbool>(args["amsgrad"]), Rcpp::as<XPtrTorchbool>(args["maximize"]), Rcpp::as<XPtrTorchOptionalTensor>(args["grad_scale"]), Rcpp::as<XPtrTorchOptionalTensor>(args["found_inf"]));
+  return R_NilValue;
+}
+if (self_type == "TensorList" && grads_type == "TensorList" && exp_avgs_type == "TensorList" && exp_avg_sqs_type == "TensorList" && max_exp_avg_sqs_type == "TensorList" && state_steps_type == "TensorList" && lr_type == "Tensor" && beta1_type == "double" && beta2_type == "double" && weight_decay_type == "double" && eps_type == "double" && amsgrad_type == "bool" && maximize_type == "bool") {
+  cpp_torch_namespace__fused_adam__self_TensorList_grads_TensorList_exp_avgs_TensorList_exp_avg_sqs_TensorList_max_exp_avg_sqs_TensorList_state_steps_TensorList_lr_Tensor_beta1_double_beta2_double_weight_decay_double_eps_double_amsgrad_bool_maximize_bool(Rcpp::as<XPtrTorchTensorList>(args["self"]), Rcpp::as<XPtrTorchTensorList>(args["grads"]), Rcpp::as<XPtrTorchTensorList>(args["exp_avgs"]), Rcpp::as<XPtrTorchTensorList>(args["exp_avg_sqs"]), Rcpp::as<XPtrTorchTensorList>(args["max_exp_avg_sqs"]), Rcpp::as<XPtrTorchTensorList>(args["state_steps"]), Rcpp::as<XPtrTorchTensor>(args["lr"]), Rcpp::as<XPtrTorchdouble>(args["beta1"]), Rcpp::as<XPtrTorchdouble>(args["beta2"]), Rcpp::as<XPtrTorchdouble>(args["weight_decay"]), Rcpp::as<XPtrTorchdouble>(args["eps"]), Rcpp::as<XPtrTorchbool>(args["amsgrad"]), Rcpp::as<XPtrTorchbool>(args["maximize"]), Rcpp::as<XPtrTorchOptionalTensor>(args["grad_scale"]), Rcpp::as<XPtrTorchOptionalTensor>(args["found_inf"]));
+  return R_NilValue;
+}
+  Rcpp::stop("No matching overload for _fused_adam_");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace__fused_adam_out (Rcpp::List args) {
+  static const std::vector<std::string> out_expected = {"TensorList"};
+  static const std::vector<std::string> self_expected = {"TensorList"};
+  static const std::vector<std::string> grads_expected = {"TensorList"};
+  static const std::vector<std::string> exp_avgs_expected = {"TensorList"};
+  static const std::vector<std::string> exp_avg_sqs_expected = {"TensorList"};
+  static const std::vector<std::string> max_exp_avg_sqs_expected = {"TensorList"};
+  static const std::vector<std::string> state_steps_expected = {"TensorList"};
+  static const std::vector<std::string> lr_expected = {"double", "Tensor"};
+  static const std::vector<std::string> beta1_expected = {"double"};
+  static const std::vector<std::string> beta2_expected = {"double"};
+  static const std::vector<std::string> weight_decay_expected = {"double"};
+  static const std::vector<std::string> eps_expected = {"double"};
+  static const std::vector<std::string> amsgrad_expected = {"bool"};
+  static const std::vector<std::string> maximize_expected = {"bool"};
+  auto out_type = cpp_arg_to_torch_type(args["out"], out_expected, "out");
+  auto self_type = cpp_arg_to_torch_type(args["self"], self_expected, "self");
+  auto grads_type = cpp_arg_to_torch_type(args["grads"], grads_expected, "grads");
+  auto exp_avgs_type = cpp_arg_to_torch_type(args["exp_avgs"], exp_avgs_expected, "exp_avgs");
+  auto exp_avg_sqs_type = cpp_arg_to_torch_type(args["exp_avg_sqs"], exp_avg_sqs_expected, "exp_avg_sqs");
+  auto max_exp_avg_sqs_type = cpp_arg_to_torch_type(args["max_exp_avg_sqs"], max_exp_avg_sqs_expected, "max_exp_avg_sqs");
+  auto state_steps_type = cpp_arg_to_torch_type(args["state_steps"], state_steps_expected, "state_steps");
+  auto lr_type = cpp_arg_to_torch_type(args["lr"], lr_expected, "lr");
+  auto beta1_type = cpp_arg_to_torch_type(args["beta1"], beta1_expected, "beta1");
+  auto beta2_type = cpp_arg_to_torch_type(args["beta2"], beta2_expected, "beta2");
+  auto weight_decay_type = cpp_arg_to_torch_type(args["weight_decay"], weight_decay_expected, "weight_decay");
+  auto eps_type = cpp_arg_to_torch_type(args["eps"], eps_expected, "eps");
+  auto amsgrad_type = cpp_arg_to_torch_type(args["amsgrad"], amsgrad_expected, "amsgrad");
+  auto maximize_type = cpp_arg_to_torch_type(args["maximize"], maximize_expected, "maximize");
+if (out_type == "TensorList" && self_type == "TensorList" && grads_type == "TensorList" && exp_avgs_type == "TensorList" && exp_avg_sqs_type == "TensorList" && max_exp_avg_sqs_type == "TensorList" && state_steps_type == "TensorList" && lr_type == "double" && beta1_type == "double" && beta2_type == "double" && weight_decay_type == "double" && eps_type == "double" && amsgrad_type == "bool" && maximize_type == "bool") {
+  cpp_torch_namespace__fused_adam_out_out_TensorList_self_TensorList_grads_TensorList_exp_avgs_TensorList_exp_avg_sqs_TensorList_max_exp_avg_sqs_TensorList_state_steps_TensorList_lr_double_beta1_double_beta2_double_weight_decay_double_eps_double_amsgrad_bool_maximize_bool(Rcpp::as<XPtrTorchTensorList>(args["out"]), Rcpp::as<XPtrTorchTensorList>(args["self"]), Rcpp::as<XPtrTorchTensorList>(args["grads"]), Rcpp::as<XPtrTorchTensorList>(args["exp_avgs"]), Rcpp::as<XPtrTorchTensorList>(args["exp_avg_sqs"]), Rcpp::as<XPtrTorchTensorList>(args["max_exp_avg_sqs"]), Rcpp::as<XPtrTorchTensorList>(args["state_steps"]), Rcpp::as<XPtrTorchdouble>(args["lr"]), Rcpp::as<XPtrTorchdouble>(args["beta1"]), Rcpp::as<XPtrTorchdouble>(args["beta2"]), Rcpp::as<XPtrTorchdouble>(args["weight_decay"]), Rcpp::as<XPtrTorchdouble>(args["eps"]), Rcpp::as<XPtrTorchbool>(args["amsgrad"]), Rcpp::as<XPtrTorchbool>(args["maximize"]), Rcpp::as<XPtrTorchOptionalTensor>(args["grad_scale"]), Rcpp::as<XPtrTorchOptionalTensor>(args["found_inf"]));
+  return R_NilValue;
+}
+if (out_type == "TensorList" && self_type == "TensorList" && grads_type == "TensorList" && exp_avgs_type == "TensorList" && exp_avg_sqs_type == "TensorList" && max_exp_avg_sqs_type == "TensorList" && state_steps_type == "TensorList" && lr_type == "Tensor" && beta1_type == "double" && beta2_type == "double" && weight_decay_type == "double" && eps_type == "double" && amsgrad_type == "bool" && maximize_type == "bool") {
+  cpp_torch_namespace__fused_adam_out_out_TensorList_self_TensorList_grads_TensorList_exp_avgs_TensorList_exp_avg_sqs_TensorList_max_exp_avg_sqs_TensorList_state_steps_TensorList_lr_Tensor_beta1_double_beta2_double_weight_decay_double_eps_double_amsgrad_bool_maximize_bool(Rcpp::as<XPtrTorchTensorList>(args["out"]), Rcpp::as<XPtrTorchTensorList>(args["self"]), Rcpp::as<XPtrTorchTensorList>(args["grads"]), Rcpp::as<XPtrTorchTensorList>(args["exp_avgs"]), Rcpp::as<XPtrTorchTensorList>(args["exp_avg_sqs"]), Rcpp::as<XPtrTorchTensorList>(args["max_exp_avg_sqs"]), Rcpp::as<XPtrTorchTensorList>(args["state_steps"]), Rcpp::as<XPtrTorchTensor>(args["lr"]), Rcpp::as<XPtrTorchdouble>(args["beta1"]), Rcpp::as<XPtrTorchdouble>(args["beta2"]), Rcpp::as<XPtrTorchdouble>(args["weight_decay"]), Rcpp::as<XPtrTorchdouble>(args["eps"]), Rcpp::as<XPtrTorchbool>(args["amsgrad"]), Rcpp::as<XPtrTorchbool>(args["maximize"]), Rcpp::as<XPtrTorchOptionalTensor>(args["grad_scale"]), Rcpp::as<XPtrTorchOptionalTensor>(args["found_inf"]));
+  return R_NilValue;
+}
+  Rcpp::stop("No matching overload for _fused_adam_out");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace__fused_adamw (Rcpp::List args) {
+  static const std::vector<std::string> self_expected = {"TensorList"};
+  static const std::vector<std::string> grads_expected = {"TensorList"};
+  static const std::vector<std::string> exp_avgs_expected = {"TensorList"};
+  static const std::vector<std::string> exp_avg_sqs_expected = {"TensorList"};
+  static const std::vector<std::string> max_exp_avg_sqs_expected = {"TensorList"};
+  static const std::vector<std::string> state_steps_expected = {"TensorList"};
+  static const std::vector<std::string> lr_expected = {"double", "Tensor"};
+  static const std::vector<std::string> beta1_expected = {"double"};
+  static const std::vector<std::string> beta2_expected = {"double"};
+  static const std::vector<std::string> weight_decay_expected = {"double"};
+  static const std::vector<std::string> eps_expected = {"double"};
+  static const std::vector<std::string> amsgrad_expected = {"bool"};
+  static const std::vector<std::string> maximize_expected = {"bool"};
+  auto self_type = cpp_arg_to_torch_type(args["self"], self_expected, "self");
+  auto grads_type = cpp_arg_to_torch_type(args["grads"], grads_expected, "grads");
+  auto exp_avgs_type = cpp_arg_to_torch_type(args["exp_avgs"], exp_avgs_expected, "exp_avgs");
+  auto exp_avg_sqs_type = cpp_arg_to_torch_type(args["exp_avg_sqs"], exp_avg_sqs_expected, "exp_avg_sqs");
+  auto max_exp_avg_sqs_type = cpp_arg_to_torch_type(args["max_exp_avg_sqs"], max_exp_avg_sqs_expected, "max_exp_avg_sqs");
+  auto state_steps_type = cpp_arg_to_torch_type(args["state_steps"], state_steps_expected, "state_steps");
+  auto lr_type = cpp_arg_to_torch_type(args["lr"], lr_expected, "lr");
+  auto beta1_type = cpp_arg_to_torch_type(args["beta1"], beta1_expected, "beta1");
+  auto beta2_type = cpp_arg_to_torch_type(args["beta2"], beta2_expected, "beta2");
+  auto weight_decay_type = cpp_arg_to_torch_type(args["weight_decay"], weight_decay_expected, "weight_decay");
+  auto eps_type = cpp_arg_to_torch_type(args["eps"], eps_expected, "eps");
+  auto amsgrad_type = cpp_arg_to_torch_type(args["amsgrad"], amsgrad_expected, "amsgrad");
+  auto maximize_type = cpp_arg_to_torch_type(args["maximize"], maximize_expected, "maximize");
+if (self_type == "TensorList" && grads_type == "TensorList" && exp_avgs_type == "TensorList" && exp_avg_sqs_type == "TensorList" && max_exp_avg_sqs_type == "TensorList" && state_steps_type == "TensorList" && lr_type == "double" && beta1_type == "double" && beta2_type == "double" && weight_decay_type == "double" && eps_type == "double" && amsgrad_type == "bool" && maximize_type == "bool") {
+  return Rcpp::wrap(cpp_torch_namespace__fused_adamw_self_TensorList_grads_TensorList_exp_avgs_TensorList_exp_avg_sqs_TensorList_max_exp_avg_sqs_TensorList_state_steps_TensorList_lr_double_beta1_double_beta2_double_weight_decay_double_eps_double_amsgrad_bool_maximize_bool(Rcpp::as<XPtrTorchTensorList>(args["self"]), Rcpp::as<XPtrTorchTensorList>(args["grads"]), Rcpp::as<XPtrTorchTensorList>(args["exp_avgs"]), Rcpp::as<XPtrTorchTensorList>(args["exp_avg_sqs"]), Rcpp::as<XPtrTorchTensorList>(args["max_exp_avg_sqs"]), Rcpp::as<XPtrTorchTensorList>(args["state_steps"]), Rcpp::as<XPtrTorchdouble>(args["lr"]), Rcpp::as<XPtrTorchdouble>(args["beta1"]), Rcpp::as<XPtrTorchdouble>(args["beta2"]), Rcpp::as<XPtrTorchdouble>(args["weight_decay"]), Rcpp::as<XPtrTorchdouble>(args["eps"]), Rcpp::as<XPtrTorchbool>(args["amsgrad"]), Rcpp::as<XPtrTorchbool>(args["maximize"]), Rcpp::as<XPtrTorchOptionalTensor>(args["grad_scale"]), Rcpp::as<XPtrTorchOptionalTensor>(args["found_inf"])));
+}
+if (self_type == "TensorList" && grads_type == "TensorList" && exp_avgs_type == "TensorList" && exp_avg_sqs_type == "TensorList" && max_exp_avg_sqs_type == "TensorList" && state_steps_type == "TensorList" && lr_type == "Tensor" && beta1_type == "double" && beta2_type == "double" && weight_decay_type == "double" && eps_type == "double" && amsgrad_type == "bool" && maximize_type == "bool") {
+  return Rcpp::wrap(cpp_torch_namespace__fused_adamw_self_TensorList_grads_TensorList_exp_avgs_TensorList_exp_avg_sqs_TensorList_max_exp_avg_sqs_TensorList_state_steps_TensorList_lr_Tensor_beta1_double_beta2_double_weight_decay_double_eps_double_amsgrad_bool_maximize_bool(Rcpp::as<XPtrTorchTensorList>(args["self"]), Rcpp::as<XPtrTorchTensorList>(args["grads"]), Rcpp::as<XPtrTorchTensorList>(args["exp_avgs"]), Rcpp::as<XPtrTorchTensorList>(args["exp_avg_sqs"]), Rcpp::as<XPtrTorchTensorList>(args["max_exp_avg_sqs"]), Rcpp::as<XPtrTorchTensorList>(args["state_steps"]), Rcpp::as<XPtrTorchTensor>(args["lr"]), Rcpp::as<XPtrTorchdouble>(args["beta1"]), Rcpp::as<XPtrTorchdouble>(args["beta2"]), Rcpp::as<XPtrTorchdouble>(args["weight_decay"]), Rcpp::as<XPtrTorchdouble>(args["eps"]), Rcpp::as<XPtrTorchbool>(args["amsgrad"]), Rcpp::as<XPtrTorchbool>(args["maximize"]), Rcpp::as<XPtrTorchOptionalTensor>(args["grad_scale"]), Rcpp::as<XPtrTorchOptionalTensor>(args["found_inf"])));
+}
+  Rcpp::stop("No matching overload for _fused_adamw");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace__fused_adamw_ (Rcpp::List args) {
+  static const std::vector<std::string> self_expected = {"TensorList"};
+  static const std::vector<std::string> grads_expected = {"TensorList"};
+  static const std::vector<std::string> exp_avgs_expected = {"TensorList"};
+  static const std::vector<std::string> exp_avg_sqs_expected = {"TensorList"};
+  static const std::vector<std::string> max_exp_avg_sqs_expected = {"TensorList"};
+  static const std::vector<std::string> state_steps_expected = {"TensorList"};
+  static const std::vector<std::string> lr_expected = {"double", "Tensor"};
+  static const std::vector<std::string> beta1_expected = {"double"};
+  static const std::vector<std::string> beta2_expected = {"double"};
+  static const std::vector<std::string> weight_decay_expected = {"double"};
+  static const std::vector<std::string> eps_expected = {"double"};
+  static const std::vector<std::string> amsgrad_expected = {"bool"};
+  static const std::vector<std::string> maximize_expected = {"bool"};
+  auto self_type = cpp_arg_to_torch_type(args["self"], self_expected, "self");
+  auto grads_type = cpp_arg_to_torch_type(args["grads"], grads_expected, "grads");
+  auto exp_avgs_type = cpp_arg_to_torch_type(args["exp_avgs"], exp_avgs_expected, "exp_avgs");
+  auto exp_avg_sqs_type = cpp_arg_to_torch_type(args["exp_avg_sqs"], exp_avg_sqs_expected, "exp_avg_sqs");
+  auto max_exp_avg_sqs_type = cpp_arg_to_torch_type(args["max_exp_avg_sqs"], max_exp_avg_sqs_expected, "max_exp_avg_sqs");
+  auto state_steps_type = cpp_arg_to_torch_type(args["state_steps"], state_steps_expected, "state_steps");
+  auto lr_type = cpp_arg_to_torch_type(args["lr"], lr_expected, "lr");
+  auto beta1_type = cpp_arg_to_torch_type(args["beta1"], beta1_expected, "beta1");
+  auto beta2_type = cpp_arg_to_torch_type(args["beta2"], beta2_expected, "beta2");
+  auto weight_decay_type = cpp_arg_to_torch_type(args["weight_decay"], weight_decay_expected, "weight_decay");
+  auto eps_type = cpp_arg_to_torch_type(args["eps"], eps_expected, "eps");
+  auto amsgrad_type = cpp_arg_to_torch_type(args["amsgrad"], amsgrad_expected, "amsgrad");
+  auto maximize_type = cpp_arg_to_torch_type(args["maximize"], maximize_expected, "maximize");
+if (self_type == "TensorList" && grads_type == "TensorList" && exp_avgs_type == "TensorList" && exp_avg_sqs_type == "TensorList" && max_exp_avg_sqs_type == "TensorList" && state_steps_type == "TensorList" && lr_type == "double" && beta1_type == "double" && beta2_type == "double" && weight_decay_type == "double" && eps_type == "double" && amsgrad_type == "bool" && maximize_type == "bool") {
+  cpp_torch_namespace__fused_adamw__self_TensorList_grads_TensorList_exp_avgs_TensorList_exp_avg_sqs_TensorList_max_exp_avg_sqs_TensorList_state_steps_TensorList_lr_double_beta1_double_beta2_double_weight_decay_double_eps_double_amsgrad_bool_maximize_bool(Rcpp::as<XPtrTorchTensorList>(args["self"]), Rcpp::as<XPtrTorchTensorList>(args["grads"]), Rcpp::as<XPtrTorchTensorList>(args["exp_avgs"]), Rcpp::as<XPtrTorchTensorList>(args["exp_avg_sqs"]), Rcpp::as<XPtrTorchTensorList>(args["max_exp_avg_sqs"]), Rcpp::as<XPtrTorchTensorList>(args["state_steps"]), Rcpp::as<XPtrTorchdouble>(args["lr"]), Rcpp::as<XPtrTorchdouble>(args["beta1"]), Rcpp::as<XPtrTorchdouble>(args["beta2"]), Rcpp::as<XPtrTorchdouble>(args["weight_decay"]), Rcpp::as<XPtrTorchdouble>(args["eps"]), Rcpp::as<XPtrTorchbool>(args["amsgrad"]), Rcpp::as<XPtrTorchbool>(args["maximize"]), Rcpp::as<XPtrTorchOptionalTensor>(args["grad_scale"]), Rcpp::as<XPtrTorchOptionalTensor>(args["found_inf"]));
+  return R_NilValue;
+}
+if (self_type == "TensorList" && grads_type == "TensorList" && exp_avgs_type == "TensorList" && exp_avg_sqs_type == "TensorList" && max_exp_avg_sqs_type == "TensorList" && state_steps_type == "TensorList" && lr_type == "Tensor" && beta1_type == "double" && beta2_type == "double" && weight_decay_type == "double" && eps_type == "double" && amsgrad_type == "bool" && maximize_type == "bool") {
+  cpp_torch_namespace__fused_adamw__self_TensorList_grads_TensorList_exp_avgs_TensorList_exp_avg_sqs_TensorList_max_exp_avg_sqs_TensorList_state_steps_TensorList_lr_Tensor_beta1_double_beta2_double_weight_decay_double_eps_double_amsgrad_bool_maximize_bool(Rcpp::as<XPtrTorchTensorList>(args["self"]), Rcpp::as<XPtrTorchTensorList>(args["grads"]), Rcpp::as<XPtrTorchTensorList>(args["exp_avgs"]), Rcpp::as<XPtrTorchTensorList>(args["exp_avg_sqs"]), Rcpp::as<XPtrTorchTensorList>(args["max_exp_avg_sqs"]), Rcpp::as<XPtrTorchTensorList>(args["state_steps"]), Rcpp::as<XPtrTorchTensor>(args["lr"]), Rcpp::as<XPtrTorchdouble>(args["beta1"]), Rcpp::as<XPtrTorchdouble>(args["beta2"]), Rcpp::as<XPtrTorchdouble>(args["weight_decay"]), Rcpp::as<XPtrTorchdouble>(args["eps"]), Rcpp::as<XPtrTorchbool>(args["amsgrad"]), Rcpp::as<XPtrTorchbool>(args["maximize"]), Rcpp::as<XPtrTorchOptionalTensor>(args["grad_scale"]), Rcpp::as<XPtrTorchOptionalTensor>(args["found_inf"]));
+  return R_NilValue;
+}
+  Rcpp::stop("No matching overload for _fused_adamw_");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace__fused_adamw_out (Rcpp::List args) {
+  static const std::vector<std::string> out_expected = {"TensorList"};
+  static const std::vector<std::string> self_expected = {"TensorList"};
+  static const std::vector<std::string> grads_expected = {"TensorList"};
+  static const std::vector<std::string> exp_avgs_expected = {"TensorList"};
+  static const std::vector<std::string> exp_avg_sqs_expected = {"TensorList"};
+  static const std::vector<std::string> max_exp_avg_sqs_expected = {"TensorList"};
+  static const std::vector<std::string> state_steps_expected = {"TensorList"};
+  static const std::vector<std::string> lr_expected = {"double", "Tensor"};
+  static const std::vector<std::string> beta1_expected = {"double"};
+  static const std::vector<std::string> beta2_expected = {"double"};
+  static const std::vector<std::string> weight_decay_expected = {"double"};
+  static const std::vector<std::string> eps_expected = {"double"};
+  static const std::vector<std::string> amsgrad_expected = {"bool"};
+  static const std::vector<std::string> maximize_expected = {"bool"};
+  auto out_type = cpp_arg_to_torch_type(args["out"], out_expected, "out");
+  auto self_type = cpp_arg_to_torch_type(args["self"], self_expected, "self");
+  auto grads_type = cpp_arg_to_torch_type(args["grads"], grads_expected, "grads");
+  auto exp_avgs_type = cpp_arg_to_torch_type(args["exp_avgs"], exp_avgs_expected, "exp_avgs");
+  auto exp_avg_sqs_type = cpp_arg_to_torch_type(args["exp_avg_sqs"], exp_avg_sqs_expected, "exp_avg_sqs");
+  auto max_exp_avg_sqs_type = cpp_arg_to_torch_type(args["max_exp_avg_sqs"], max_exp_avg_sqs_expected, "max_exp_avg_sqs");
+  auto state_steps_type = cpp_arg_to_torch_type(args["state_steps"], state_steps_expected, "state_steps");
+  auto lr_type = cpp_arg_to_torch_type(args["lr"], lr_expected, "lr");
+  auto beta1_type = cpp_arg_to_torch_type(args["beta1"], beta1_expected, "beta1");
+  auto beta2_type = cpp_arg_to_torch_type(args["beta2"], beta2_expected, "beta2");
+  auto weight_decay_type = cpp_arg_to_torch_type(args["weight_decay"], weight_decay_expected, "weight_decay");
+  auto eps_type = cpp_arg_to_torch_type(args["eps"], eps_expected, "eps");
+  auto amsgrad_type = cpp_arg_to_torch_type(args["amsgrad"], amsgrad_expected, "amsgrad");
+  auto maximize_type = cpp_arg_to_torch_type(args["maximize"], maximize_expected, "maximize");
+if (out_type == "TensorList" && self_type == "TensorList" && grads_type == "TensorList" && exp_avgs_type == "TensorList" && exp_avg_sqs_type == "TensorList" && max_exp_avg_sqs_type == "TensorList" && state_steps_type == "TensorList" && lr_type == "double" && beta1_type == "double" && beta2_type == "double" && weight_decay_type == "double" && eps_type == "double" && amsgrad_type == "bool" && maximize_type == "bool") {
+  cpp_torch_namespace__fused_adamw_out_out_TensorList_self_TensorList_grads_TensorList_exp_avgs_TensorList_exp_avg_sqs_TensorList_max_exp_avg_sqs_TensorList_state_steps_TensorList_lr_double_beta1_double_beta2_double_weight_decay_double_eps_double_amsgrad_bool_maximize_bool(Rcpp::as<XPtrTorchTensorList>(args["out"]), Rcpp::as<XPtrTorchTensorList>(args["self"]), Rcpp::as<XPtrTorchTensorList>(args["grads"]), Rcpp::as<XPtrTorchTensorList>(args["exp_avgs"]), Rcpp::as<XPtrTorchTensorList>(args["exp_avg_sqs"]), Rcpp::as<XPtrTorchTensorList>(args["max_exp_avg_sqs"]), Rcpp::as<XPtrTorchTensorList>(args["state_steps"]), Rcpp::as<XPtrTorchdouble>(args["lr"]), Rcpp::as<XPtrTorchdouble>(args["beta1"]), Rcpp::as<XPtrTorchdouble>(args["beta2"]), Rcpp::as<XPtrTorchdouble>(args["weight_decay"]), Rcpp::as<XPtrTorchdouble>(args["eps"]), Rcpp::as<XPtrTorchbool>(args["amsgrad"]), Rcpp::as<XPtrTorchbool>(args["maximize"]), Rcpp::as<XPtrTorchOptionalTensor>(args["grad_scale"]), Rcpp::as<XPtrTorchOptionalTensor>(args["found_inf"]));
+  return R_NilValue;
+}
+if (out_type == "TensorList" && self_type == "TensorList" && grads_type == "TensorList" && exp_avgs_type == "TensorList" && exp_avg_sqs_type == "TensorList" && max_exp_avg_sqs_type == "TensorList" && state_steps_type == "TensorList" && lr_type == "Tensor" && beta1_type == "double" && beta2_type == "double" && weight_decay_type == "double" && eps_type == "double" && amsgrad_type == "bool" && maximize_type == "bool") {
+  cpp_torch_namespace__fused_adamw_out_out_TensorList_self_TensorList_grads_TensorList_exp_avgs_TensorList_exp_avg_sqs_TensorList_max_exp_avg_sqs_TensorList_state_steps_TensorList_lr_Tensor_beta1_double_beta2_double_weight_decay_double_eps_double_amsgrad_bool_maximize_bool(Rcpp::as<XPtrTorchTensorList>(args["out"]), Rcpp::as<XPtrTorchTensorList>(args["self"]), Rcpp::as<XPtrTorchTensorList>(args["grads"]), Rcpp::as<XPtrTorchTensorList>(args["exp_avgs"]), Rcpp::as<XPtrTorchTensorList>(args["exp_avg_sqs"]), Rcpp::as<XPtrTorchTensorList>(args["max_exp_avg_sqs"]), Rcpp::as<XPtrTorchTensorList>(args["state_steps"]), Rcpp::as<XPtrTorchTensor>(args["lr"]), Rcpp::as<XPtrTorchdouble>(args["beta1"]), Rcpp::as<XPtrTorchdouble>(args["beta2"]), Rcpp::as<XPtrTorchdouble>(args["weight_decay"]), Rcpp::as<XPtrTorchdouble>(args["eps"]), Rcpp::as<XPtrTorchbool>(args["amsgrad"]), Rcpp::as<XPtrTorchbool>(args["maximize"]), Rcpp::as<XPtrTorchOptionalTensor>(args["grad_scale"]), Rcpp::as<XPtrTorchOptionalTensor>(args["found_inf"]));
+  return R_NilValue;
+}
+  Rcpp::stop("No matching overload for _fused_adamw_out");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace__fused_sgd (Rcpp::List args) {
+  static const std::vector<std::string> self_expected = {"TensorList"};
+  static const std::vector<std::string> grads_expected = {"TensorList"};
+  static const std::vector<std::string> momentum_buffer_list_expected = {"TensorList"};
+  static const std::vector<std::string> weight_decay_expected = {"double"};
+  static const std::vector<std::string> momentum_expected = {"double"};
+  static const std::vector<std::string> lr_expected = {"double", "Tensor"};
+  static const std::vector<std::string> dampening_expected = {"double"};
+  static const std::vector<std::string> nesterov_expected = {"bool"};
+  static const std::vector<std::string> maximize_expected = {"bool"};
+  static const std::vector<std::string> is_first_step_expected = {"bool"};
+  auto self_type = cpp_arg_to_torch_type(args["self"], self_expected, "self");
+  auto grads_type = cpp_arg_to_torch_type(args["grads"], grads_expected, "grads");
+  auto momentum_buffer_list_type = cpp_arg_to_torch_type(args["momentum_buffer_list"], momentum_buffer_list_expected, "momentum_buffer_list");
+  auto weight_decay_type = cpp_arg_to_torch_type(args["weight_decay"], weight_decay_expected, "weight_decay");
+  auto momentum_type = cpp_arg_to_torch_type(args["momentum"], momentum_expected, "momentum");
+  auto lr_type = cpp_arg_to_torch_type(args["lr"], lr_expected, "lr");
+  auto dampening_type = cpp_arg_to_torch_type(args["dampening"], dampening_expected, "dampening");
+  auto nesterov_type = cpp_arg_to_torch_type(args["nesterov"], nesterov_expected, "nesterov");
+  auto maximize_type = cpp_arg_to_torch_type(args["maximize"], maximize_expected, "maximize");
+  auto is_first_step_type = cpp_arg_to_torch_type(args["is_first_step"], is_first_step_expected, "is_first_step");
+if (self_type == "TensorList" && grads_type == "TensorList" && momentum_buffer_list_type == "TensorList" && weight_decay_type == "double" && momentum_type == "double" && lr_type == "double" && dampening_type == "double" && nesterov_type == "bool" && maximize_type == "bool" && is_first_step_type == "bool") {
+  return Rcpp::wrap(cpp_torch_namespace__fused_sgd_self_TensorList_grads_TensorList_momentum_buffer_list_TensorList_weight_decay_double_momentum_double_lr_double_dampening_double_nesterov_bool_maximize_bool_is_first_step_bool(Rcpp::as<XPtrTorchTensorList>(args["self"]), Rcpp::as<XPtrTorchTensorList>(args["grads"]), Rcpp::as<XPtrTorchTensorList>(args["momentum_buffer_list"]), Rcpp::as<XPtrTorchdouble>(args["weight_decay"]), Rcpp::as<XPtrTorchdouble>(args["momentum"]), Rcpp::as<XPtrTorchdouble>(args["lr"]), Rcpp::as<XPtrTorchdouble>(args["dampening"]), Rcpp::as<XPtrTorchbool>(args["nesterov"]), Rcpp::as<XPtrTorchbool>(args["maximize"]), Rcpp::as<XPtrTorchbool>(args["is_first_step"]), Rcpp::as<XPtrTorchOptionalTensor>(args["grad_scale"]), Rcpp::as<XPtrTorchOptionalTensor>(args["found_inf"])));
+}
+if (self_type == "TensorList" && grads_type == "TensorList" && momentum_buffer_list_type == "TensorList" && weight_decay_type == "double" && momentum_type == "double" && lr_type == "Tensor" && dampening_type == "double" && nesterov_type == "bool" && maximize_type == "bool" && is_first_step_type == "bool") {
+  return Rcpp::wrap(cpp_torch_namespace__fused_sgd_self_TensorList_grads_TensorList_momentum_buffer_list_TensorList_weight_decay_double_momentum_double_lr_Tensor_dampening_double_nesterov_bool_maximize_bool_is_first_step_bool(Rcpp::as<XPtrTorchTensorList>(args["self"]), Rcpp::as<XPtrTorchTensorList>(args["grads"]), Rcpp::as<XPtrTorchTensorList>(args["momentum_buffer_list"]), Rcpp::as<XPtrTorchdouble>(args["weight_decay"]), Rcpp::as<XPtrTorchdouble>(args["momentum"]), Rcpp::as<XPtrTorchTensor>(args["lr"]), Rcpp::as<XPtrTorchdouble>(args["dampening"]), Rcpp::as<XPtrTorchbool>(args["nesterov"]), Rcpp::as<XPtrTorchbool>(args["maximize"]), Rcpp::as<XPtrTorchbool>(args["is_first_step"]), Rcpp::as<XPtrTorchOptionalTensor>(args["grad_scale"]), Rcpp::as<XPtrTorchOptionalTensor>(args["found_inf"])));
+}
+  Rcpp::stop("No matching overload for _fused_sgd");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace__fused_sgd_ (Rcpp::List args) {
+  static const std::vector<std::string> self_expected = {"TensorList"};
+  static const std::vector<std::string> grads_expected = {"TensorList"};
+  static const std::vector<std::string> momentum_buffer_list_expected = {"TensorList"};
+  static const std::vector<std::string> weight_decay_expected = {"double"};
+  static const std::vector<std::string> momentum_expected = {"double"};
+  static const std::vector<std::string> lr_expected = {"double", "Tensor"};
+  static const std::vector<std::string> dampening_expected = {"double"};
+  static const std::vector<std::string> nesterov_expected = {"bool"};
+  static const std::vector<std::string> maximize_expected = {"bool"};
+  static const std::vector<std::string> is_first_step_expected = {"bool"};
+  auto self_type = cpp_arg_to_torch_type(args["self"], self_expected, "self");
+  auto grads_type = cpp_arg_to_torch_type(args["grads"], grads_expected, "grads");
+  auto momentum_buffer_list_type = cpp_arg_to_torch_type(args["momentum_buffer_list"], momentum_buffer_list_expected, "momentum_buffer_list");
+  auto weight_decay_type = cpp_arg_to_torch_type(args["weight_decay"], weight_decay_expected, "weight_decay");
+  auto momentum_type = cpp_arg_to_torch_type(args["momentum"], momentum_expected, "momentum");
+  auto lr_type = cpp_arg_to_torch_type(args["lr"], lr_expected, "lr");
+  auto dampening_type = cpp_arg_to_torch_type(args["dampening"], dampening_expected, "dampening");
+  auto nesterov_type = cpp_arg_to_torch_type(args["nesterov"], nesterov_expected, "nesterov");
+  auto maximize_type = cpp_arg_to_torch_type(args["maximize"], maximize_expected, "maximize");
+  auto is_first_step_type = cpp_arg_to_torch_type(args["is_first_step"], is_first_step_expected, "is_first_step");
+if (self_type == "TensorList" && grads_type == "TensorList" && momentum_buffer_list_type == "TensorList" && weight_decay_type == "double" && momentum_type == "double" && lr_type == "double" && dampening_type == "double" && nesterov_type == "bool" && maximize_type == "bool" && is_first_step_type == "bool") {
+  cpp_torch_namespace__fused_sgd__self_TensorList_grads_TensorList_momentum_buffer_list_TensorList_weight_decay_double_momentum_double_lr_double_dampening_double_nesterov_bool_maximize_bool_is_first_step_bool(Rcpp::as<XPtrTorchTensorList>(args["self"]), Rcpp::as<XPtrTorchTensorList>(args["grads"]), Rcpp::as<XPtrTorchTensorList>(args["momentum_buffer_list"]), Rcpp::as<XPtrTorchdouble>(args["weight_decay"]), Rcpp::as<XPtrTorchdouble>(args["momentum"]), Rcpp::as<XPtrTorchdouble>(args["lr"]), Rcpp::as<XPtrTorchdouble>(args["dampening"]), Rcpp::as<XPtrTorchbool>(args["nesterov"]), Rcpp::as<XPtrTorchbool>(args["maximize"]), Rcpp::as<XPtrTorchbool>(args["is_first_step"]), Rcpp::as<XPtrTorchOptionalTensor>(args["grad_scale"]), Rcpp::as<XPtrTorchOptionalTensor>(args["found_inf"]));
+  return R_NilValue;
+}
+if (self_type == "TensorList" && grads_type == "TensorList" && momentum_buffer_list_type == "TensorList" && weight_decay_type == "double" && momentum_type == "double" && lr_type == "Tensor" && dampening_type == "double" && nesterov_type == "bool" && maximize_type == "bool" && is_first_step_type == "bool") {
+  cpp_torch_namespace__fused_sgd__self_TensorList_grads_TensorList_momentum_buffer_list_TensorList_weight_decay_double_momentum_double_lr_Tensor_dampening_double_nesterov_bool_maximize_bool_is_first_step_bool(Rcpp::as<XPtrTorchTensorList>(args["self"]), Rcpp::as<XPtrTorchTensorList>(args["grads"]), Rcpp::as<XPtrTorchTensorList>(args["momentum_buffer_list"]), Rcpp::as<XPtrTorchdouble>(args["weight_decay"]), Rcpp::as<XPtrTorchdouble>(args["momentum"]), Rcpp::as<XPtrTorchTensor>(args["lr"]), Rcpp::as<XPtrTorchdouble>(args["dampening"]), Rcpp::as<XPtrTorchbool>(args["nesterov"]), Rcpp::as<XPtrTorchbool>(args["maximize"]), Rcpp::as<XPtrTorchbool>(args["is_first_step"]), Rcpp::as<XPtrTorchOptionalTensor>(args["grad_scale"]), Rcpp::as<XPtrTorchOptionalTensor>(args["found_inf"]));
+  return R_NilValue;
+}
+  Rcpp::stop("No matching overload for _fused_sgd_");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace__fused_sgd_out (Rcpp::List args) {
+  static const std::vector<std::string> out_expected = {"TensorList"};
+  static const std::vector<std::string> self_expected = {"TensorList"};
+  static const std::vector<std::string> grads_expected = {"TensorList"};
+  static const std::vector<std::string> momentum_buffer_list_expected = {"TensorList"};
+  static const std::vector<std::string> weight_decay_expected = {"double"};
+  static const std::vector<std::string> momentum_expected = {"double"};
+  static const std::vector<std::string> lr_expected = {"double", "Tensor"};
+  static const std::vector<std::string> dampening_expected = {"double"};
+  static const std::vector<std::string> nesterov_expected = {"bool"};
+  static const std::vector<std::string> maximize_expected = {"bool"};
+  static const std::vector<std::string> is_first_step_expected = {"bool"};
+  auto out_type = cpp_arg_to_torch_type(args["out"], out_expected, "out");
+  auto self_type = cpp_arg_to_torch_type(args["self"], self_expected, "self");
+  auto grads_type = cpp_arg_to_torch_type(args["grads"], grads_expected, "grads");
+  auto momentum_buffer_list_type = cpp_arg_to_torch_type(args["momentum_buffer_list"], momentum_buffer_list_expected, "momentum_buffer_list");
+  auto weight_decay_type = cpp_arg_to_torch_type(args["weight_decay"], weight_decay_expected, "weight_decay");
+  auto momentum_type = cpp_arg_to_torch_type(args["momentum"], momentum_expected, "momentum");
+  auto lr_type = cpp_arg_to_torch_type(args["lr"], lr_expected, "lr");
+  auto dampening_type = cpp_arg_to_torch_type(args["dampening"], dampening_expected, "dampening");
+  auto nesterov_type = cpp_arg_to_torch_type(args["nesterov"], nesterov_expected, "nesterov");
+  auto maximize_type = cpp_arg_to_torch_type(args["maximize"], maximize_expected, "maximize");
+  auto is_first_step_type = cpp_arg_to_torch_type(args["is_first_step"], is_first_step_expected, "is_first_step");
+if (out_type == "TensorList" && self_type == "TensorList" && grads_type == "TensorList" && momentum_buffer_list_type == "TensorList" && weight_decay_type == "double" && momentum_type == "double" && lr_type == "double" && dampening_type == "double" && nesterov_type == "bool" && maximize_type == "bool" && is_first_step_type == "bool") {
+  cpp_torch_namespace__fused_sgd_out_out_TensorList_self_TensorList_grads_TensorList_momentum_buffer_list_TensorList_weight_decay_double_momentum_double_lr_double_dampening_double_nesterov_bool_maximize_bool_is_first_step_bool(Rcpp::as<XPtrTorchTensorList>(args["out"]), Rcpp::as<XPtrTorchTensorList>(args["self"]), Rcpp::as<XPtrTorchTensorList>(args["grads"]), Rcpp::as<XPtrTorchTensorList>(args["momentum_buffer_list"]), Rcpp::as<XPtrTorchdouble>(args["weight_decay"]), Rcpp::as<XPtrTorchdouble>(args["momentum"]), Rcpp::as<XPtrTorchdouble>(args["lr"]), Rcpp::as<XPtrTorchdouble>(args["dampening"]), Rcpp::as<XPtrTorchbool>(args["nesterov"]), Rcpp::as<XPtrTorchbool>(args["maximize"]), Rcpp::as<XPtrTorchbool>(args["is_first_step"]), Rcpp::as<XPtrTorchOptionalTensor>(args["grad_scale"]), Rcpp::as<XPtrTorchOptionalTensor>(args["found_inf"]));
+  return R_NilValue;
+}
+if (out_type == "TensorList" && self_type == "TensorList" && grads_type == "TensorList" && momentum_buffer_list_type == "TensorList" && weight_decay_type == "double" && momentum_type == "double" && lr_type == "Tensor" && dampening_type == "double" && nesterov_type == "bool" && maximize_type == "bool" && is_first_step_type == "bool") {
+  cpp_torch_namespace__fused_sgd_out_out_TensorList_self_TensorList_grads_TensorList_momentum_buffer_list_TensorList_weight_decay_double_momentum_double_lr_Tensor_dampening_double_nesterov_bool_maximize_bool_is_first_step_bool(Rcpp::as<XPtrTorchTensorList>(args["out"]), Rcpp::as<XPtrTorchTensorList>(args["self"]), Rcpp::as<XPtrTorchTensorList>(args["grads"]), Rcpp::as<XPtrTorchTensorList>(args["momentum_buffer_list"]), Rcpp::as<XPtrTorchdouble>(args["weight_decay"]), Rcpp::as<XPtrTorchdouble>(args["momentum"]), Rcpp::as<XPtrTorchTensor>(args["lr"]), Rcpp::as<XPtrTorchdouble>(args["dampening"]), Rcpp::as<XPtrTorchbool>(args["nesterov"]), Rcpp::as<XPtrTorchbool>(args["maximize"]), Rcpp::as<XPtrTorchbool>(args["is_first_step"]), Rcpp::as<XPtrTorchOptionalTensor>(args["grad_scale"]), Rcpp::as<XPtrTorchOptionalTensor>(args["found_inf"]));
+  return R_NilValue;
+}
+  Rcpp::stop("No matching overload for _fused_sgd_out");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace__native_batch_norm_legit (Rcpp::List args) {
+  static const std::vector<std::string> input_expected = {"Tensor"};
+  static const std::vector<std::string> weight_expected = {"Tensor"};
+  static const std::vector<std::string> bias_expected = {"Tensor"};
+  static const std::vector<std::string> running_mean_expected = {"Tensor"};
+  static const std::vector<std::string> running_var_expected = {"Tensor"};
+  static const std::vector<std::string> training_expected = {"bool"};
+  static const std::vector<std::string> momentum_expected = {"double"};
+  static const std::vector<std::string> eps_expected = {"double"};
+  auto input_type = cpp_arg_to_torch_type(args["input"], input_expected, "input");
+  auto weight_type = cpp_arg_to_torch_type(args["weight"], weight_expected, "weight");
+  auto bias_type = cpp_arg_to_torch_type(args["bias"], bias_expected, "bias");
+  auto running_mean_type = cpp_arg_to_torch_type(args["running_mean"], running_mean_expected, "running_mean");
+  auto running_var_type = cpp_arg_to_torch_type(args["running_var"], running_var_expected, "running_var");
+  auto training_type = cpp_arg_to_torch_type(args["training"], training_expected, "training");
+  auto momentum_type = cpp_arg_to_torch_type(args["momentum"], momentum_expected, "momentum");
+  auto eps_type = cpp_arg_to_torch_type(args["eps"], eps_expected, "eps");
+if (input_type == "Tensor" && weight_type == "Tensor" && bias_type == "Tensor" && running_mean_type == "Tensor" && running_var_type == "Tensor" && training_type == "bool" && momentum_type == "double" && eps_type == "double") {
+  return Rcpp::wrap(cpp_torch_namespace__native_batch_norm_legit_input_Tensor_weight_Tensor_bias_Tensor_running_mean_Tensor_running_var_Tensor_training_bool_momentum_double_eps_double(Rcpp::as<XPtrTorchTensor>(args["input"]), Rcpp::as<XPtrTorchOptionalTensor>(args["weight"]), Rcpp::as<XPtrTorchOptionalTensor>(args["bias"]), Rcpp::as<XPtrTorchTensor>(args["running_mean"]), Rcpp::as<XPtrTorchTensor>(args["running_var"]), Rcpp::as<XPtrTorchbool>(args["training"]), Rcpp::as<XPtrTorchdouble>(args["momentum"]), Rcpp::as<XPtrTorchdouble>(args["eps"])));
+}
+if (input_type == "Tensor" && weight_type == "Tensor" && bias_type == "Tensor" && running_mean_type == "Missing" && running_var_type == "Missing" && training_type == "bool" && momentum_type == "double" && eps_type == "double") {
+  return Rcpp::wrap(cpp_torch_namespace__native_batch_norm_legit_input_Tensor_weight_Tensor_bias_Tensor_training_bool_momentum_double_eps_double(Rcpp::as<XPtrTorchTensor>(args["input"]), Rcpp::as<XPtrTorchOptionalTensor>(args["weight"]), Rcpp::as<XPtrTorchOptionalTensor>(args["bias"]), Rcpp::as<XPtrTorchbool>(args["training"]), Rcpp::as<XPtrTorchdouble>(args["momentum"]), Rcpp::as<XPtrTorchdouble>(args["eps"])));
+}
+  Rcpp::stop("No matching overload for _native_batch_norm_legit");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace__native_batch_norm_legit_out (Rcpp::List args) {
+  static const std::vector<std::string> out_expected = {"Tensor"};
+  static const std::vector<std::string> save_mean_expected = {"Tensor"};
+  static const std::vector<std::string> save_invstd_expected = {"Tensor"};
+  static const std::vector<std::string> input_expected = {"Tensor"};
+  static const std::vector<std::string> weight_expected = {"Tensor"};
+  static const std::vector<std::string> bias_expected = {"Tensor"};
+  static const std::vector<std::string> running_mean_expected = {"Tensor"};
+  static const std::vector<std::string> running_var_expected = {"Tensor"};
+  static const std::vector<std::string> training_expected = {"bool"};
+  static const std::vector<std::string> momentum_expected = {"double"};
+  static const std::vector<std::string> eps_expected = {"double"};
+  auto out_type = cpp_arg_to_torch_type(args["out"], out_expected, "out");
+  auto save_mean_type = cpp_arg_to_torch_type(args["save_mean"], save_mean_expected, "save_mean");
+  auto save_invstd_type = cpp_arg_to_torch_type(args["save_invstd"], save_invstd_expected, "save_invstd");
+  auto input_type = cpp_arg_to_torch_type(args["input"], input_expected, "input");
+  auto weight_type = cpp_arg_to_torch_type(args["weight"], weight_expected, "weight");
+  auto bias_type = cpp_arg_to_torch_type(args["bias"], bias_expected, "bias");
+  auto running_mean_type = cpp_arg_to_torch_type(args["running_mean"], running_mean_expected, "running_mean");
+  auto running_var_type = cpp_arg_to_torch_type(args["running_var"], running_var_expected, "running_var");
+  auto training_type = cpp_arg_to_torch_type(args["training"], training_expected, "training");
+  auto momentum_type = cpp_arg_to_torch_type(args["momentum"], momentum_expected, "momentum");
+  auto eps_type = cpp_arg_to_torch_type(args["eps"], eps_expected, "eps");
+if (out_type == "Tensor" && save_mean_type == "Tensor" && save_invstd_type == "Tensor" && input_type == "Tensor" && weight_type == "Tensor" && bias_type == "Tensor" && running_mean_type == "Tensor" && running_var_type == "Tensor" && training_type == "bool" && momentum_type == "double" && eps_type == "double") {
+  return Rcpp::wrap(cpp_torch_namespace__native_batch_norm_legit_out_out_Tensor_save_mean_Tensor_save_invstd_Tensor_input_Tensor_weight_Tensor_bias_Tensor_running_mean_Tensor_running_var_Tensor_training_bool_momentum_double_eps_double(Rcpp::as<XPtrTorchTensor>(args["out"]), Rcpp::as<XPtrTorchTensor>(args["save_mean"]), Rcpp::as<XPtrTorchTensor>(args["save_invstd"]), Rcpp::as<XPtrTorchTensor>(args["input"]), Rcpp::as<XPtrTorchOptionalTensor>(args["weight"]), Rcpp::as<XPtrTorchOptionalTensor>(args["bias"]), Rcpp::as<XPtrTorchTensor>(args["running_mean"]), Rcpp::as<XPtrTorchTensor>(args["running_var"]), Rcpp::as<XPtrTorchbool>(args["training"]), Rcpp::as<XPtrTorchdouble>(args["momentum"]), Rcpp::as<XPtrTorchdouble>(args["eps"])));
+}
+if (out_type == "Tensor" && save_mean_type == "Tensor" && save_invstd_type == "Tensor" && input_type == "Tensor" && weight_type == "Tensor" && bias_type == "Tensor" && running_mean_type == "Missing" && running_var_type == "Missing" && training_type == "bool" && momentum_type == "double" && eps_type == "double") {
+  return Rcpp::wrap(cpp_torch_namespace__native_batch_norm_legit_out_out_Tensor_save_mean_Tensor_save_invstd_Tensor_input_Tensor_weight_Tensor_bias_Tensor_training_bool_momentum_double_eps_double(Rcpp::as<XPtrTorchTensor>(args["out"]), Rcpp::as<XPtrTorchTensor>(args["save_mean"]), Rcpp::as<XPtrTorchTensor>(args["save_invstd"]), Rcpp::as<XPtrTorchTensor>(args["input"]), Rcpp::as<XPtrTorchOptionalTensor>(args["weight"]), Rcpp::as<XPtrTorchOptionalTensor>(args["bias"]), Rcpp::as<XPtrTorchbool>(args["training"]), Rcpp::as<XPtrTorchdouble>(args["momentum"]), Rcpp::as<XPtrTorchdouble>(args["eps"])));
+}
+  Rcpp::stop("No matching overload for _native_batch_norm_legit_out");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace__slow_conv2d_backward_out (Rcpp::List args) {
+  static const std::vector<std::string> grad_input_expected = {"Tensor"};
+  static const std::vector<std::string> out0_expected = {"Tensor"};
+  static const std::vector<std::string> grad_weight_expected = {"Tensor"};
+  static const std::vector<std::string> out1_expected = {"Tensor"};
+  static const std::vector<std::string> grad_bias_expected = {"Tensor"};
+  static const std::vector<std::string> out2_expected = {"Tensor"};
+  static const std::vector<std::string> grad_output_expected = {"Tensor"};
+  static const std::vector<std::string> self_expected = {"Tensor"};
+  static const std::vector<std::string> weight_expected = {"Tensor"};
+  static const std::vector<std::string> kernel_size_expected = {"IntArrayRef"};
+  static const std::vector<std::string> stride_expected = {"IntArrayRef"};
+  static const std::vector<std::string> padding_expected = {"IntArrayRef"};
+  static const std::vector<std::string> output_mask_expected = {"::std::array<bool,3>"};
+  auto grad_input_type = cpp_arg_to_torch_type(args["grad_input"], grad_input_expected, "grad_input");
+  auto out0_type = cpp_arg_to_torch_type(args["out0"], out0_expected, "out0");
+  auto grad_weight_type = cpp_arg_to_torch_type(args["grad_weight"], grad_weight_expected, "grad_weight");
+  auto out1_type = cpp_arg_to_torch_type(args["out1"], out1_expected, "out1");
+  auto grad_bias_type = cpp_arg_to_torch_type(args["grad_bias"], grad_bias_expected, "grad_bias");
+  auto out2_type = cpp_arg_to_torch_type(args["out2"], out2_expected, "out2");
+  auto grad_output_type = cpp_arg_to_torch_type(args["grad_output"], grad_output_expected, "grad_output");
+  auto self_type = cpp_arg_to_torch_type(args["self"], self_expected, "self");
+  auto weight_type = cpp_arg_to_torch_type(args["weight"], weight_expected, "weight");
+  auto kernel_size_type = cpp_arg_to_torch_type(args["kernel_size"], kernel_size_expected, "kernel_size");
+  auto stride_type = cpp_arg_to_torch_type(args["stride"], stride_expected, "stride");
+  auto padding_type = cpp_arg_to_torch_type(args["padding"], padding_expected, "padding");
+  auto output_mask_type = cpp_arg_to_torch_type(args["output_mask"], output_mask_expected, "output_mask");
+if (grad_input_type == "Tensor" && out0_type == "Missing" && grad_weight_type == "Tensor" && out1_type == "Missing" && grad_bias_type == "Tensor" && out2_type == "Missing" && grad_output_type == "Tensor" && self_type == "Tensor" && weight_type == "Tensor" && kernel_size_type == "IntArrayRef" && stride_type == "IntArrayRef" && padding_type == "IntArrayRef" && output_mask_type == "Missing") {
+  return Rcpp::wrap(cpp_torch_namespace__slow_conv2d_backward_out_grad_input_Tensor_grad_weight_Tensor_grad_bias_Tensor_grad_output_Tensor_self_Tensor_weight_Tensor_kernel_size_IntArrayRef_stride_IntArrayRef_padding_IntArrayRef(Rcpp::as<XPtrTorchTensor>(args["grad_input"]), Rcpp::as<XPtrTorchTensor>(args["grad_weight"]), Rcpp::as<XPtrTorchTensor>(args["grad_bias"]), Rcpp::as<XPtrTorchTensor>(args["grad_output"]), Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchTensor>(args["weight"]), Rcpp::as<XPtrTorchIntArrayRef>(args["kernel_size"]), Rcpp::as<XPtrTorchIntArrayRef>(args["stride"]), Rcpp::as<XPtrTorchIntArrayRef>(args["padding"])));
+}
+if (grad_input_type == "Missing" && out0_type == "Tensor" && grad_weight_type == "Missing" && out1_type == "Tensor" && grad_bias_type == "Missing" && out2_type == "Tensor" && grad_output_type == "Tensor" && self_type == "Tensor" && weight_type == "Tensor" && kernel_size_type == "IntArrayRef" && stride_type == "IntArrayRef" && padding_type == "IntArrayRef" && output_mask_type == "::std::array<bool,3>") {
+  return Rcpp::wrap(cpp_torch_namespace__slow_conv2d_backward_out_out0_Tensor_out1_Tensor_out2_Tensor_grad_output_Tensor_self_Tensor_weight_Tensor_kernel_size_IntArrayRef_stride_IntArrayRef_padding_IntArrayRef_output_mask_stdarraybool3(Rcpp::as<XPtrTorchTensor>(args["out0"]), Rcpp::as<XPtrTorchTensor>(args["out1"]), Rcpp::as<XPtrTorchTensor>(args["out2"]), Rcpp::as<XPtrTorchTensor>(args["grad_output"]), Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchTensor>(args["weight"]), Rcpp::as<XPtrTorchIntArrayRef>(args["kernel_size"]), Rcpp::as<XPtrTorchIntArrayRef>(args["stride"]), Rcpp::as<XPtrTorchIntArrayRef>(args["padding"]), Rcpp::as<std::vector<bool>>(args["output_mask"])));
+}
+  Rcpp::stop("No matching overload for _slow_conv2d_backward_out");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace__sparse_log_softmax (Rcpp::List args) {
+  static const std::vector<std::string> self_expected = {"Tensor"};
+  static const std::vector<std::string> dim_expected = {"int64_t", "Dimname"};
+  static const std::vector<std::string> half_to_float_expected = {"bool"};
+  auto self_type = cpp_arg_to_torch_type(args["self"], self_expected, "self");
+  auto dim_type = cpp_arg_to_torch_type(args["dim"], dim_expected, "dim");
+  auto half_to_float_type = cpp_arg_to_torch_type(args["half_to_float"], half_to_float_expected, "half_to_float");
+if (self_type == "Tensor" && dim_type == "int64_t" && half_to_float_type == "Missing") {
+  return Rcpp::wrap(cpp_torch_namespace__sparse_log_softmax_self_Tensor_dim_int64_t(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchindex_int64_t>(args["dim"]), Rcpp::as<XPtrTorchoptional_scalar_type>(args["dtype"])));
+}
+if (self_type == "Tensor" && dim_type == "Dimname" && half_to_float_type == "Missing") {
+  return Rcpp::wrap(cpp_torch_namespace__sparse_log_softmax_self_Tensor_dim_Dimname(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchDimname>(args["dim"]), Rcpp::as<XPtrTorchoptional_scalar_type>(args["dtype"])));
+}
+if (self_type == "Tensor" && dim_type == "int64_t" && half_to_float_type == "bool") {
+  return Rcpp::wrap(cpp_torch_namespace__sparse_log_softmax_self_Tensor_dim_int64_t_half_to_float_bool(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchindex_int64_t>(args["dim"]), Rcpp::as<XPtrTorchbool>(args["half_to_float"])));
+}
+  Rcpp::stop("No matching overload for _sparse_log_softmax");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace__sparse_mm (Rcpp::List args) {
+  static const std::vector<std::string> sparse_expected = {"Tensor"};
+  static const std::vector<std::string> dense_expected = {"Tensor"};
+  static const std::vector<std::string> reduce_expected = {"c10::string_view"};
+  auto sparse_type = cpp_arg_to_torch_type(args["sparse"], sparse_expected, "sparse");
+  auto dense_type = cpp_arg_to_torch_type(args["dense"], dense_expected, "dense");
+  auto reduce_type = cpp_arg_to_torch_type(args["reduce"], reduce_expected, "reduce");
+if (sparse_type == "Tensor" && dense_type == "Tensor" && reduce_type == "Missing") {
+  return Rcpp::wrap(cpp_torch_namespace__sparse_mm_sparse_Tensor_dense_Tensor(Rcpp::as<XPtrTorchTensor>(args["sparse"]), Rcpp::as<XPtrTorchTensor>(args["dense"])));
+}
+if (sparse_type == "Tensor" && dense_type == "Tensor" && reduce_type == "c10::string_view") {
+  return Rcpp::wrap(cpp_torch_namespace__sparse_mm_sparse_Tensor_dense_Tensor_reduce_c10string_view(Rcpp::as<XPtrTorchTensor>(args["sparse"]), Rcpp::as<XPtrTorchTensor>(args["dense"]), Rcpp::as<XPtrTorchstring_view>(args["reduce"])));
+}
+  Rcpp::stop("No matching overload for _sparse_mm");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace__sparse_softmax (Rcpp::List args) {
+  static const std::vector<std::string> self_expected = {"Tensor"};
+  static const std::vector<std::string> dim_expected = {"int64_t", "Dimname"};
+  static const std::vector<std::string> half_to_float_expected = {"bool"};
+  auto self_type = cpp_arg_to_torch_type(args["self"], self_expected, "self");
+  auto dim_type = cpp_arg_to_torch_type(args["dim"], dim_expected, "dim");
+  auto half_to_float_type = cpp_arg_to_torch_type(args["half_to_float"], half_to_float_expected, "half_to_float");
+if (self_type == "Tensor" && dim_type == "int64_t" && half_to_float_type == "Missing") {
+  return Rcpp::wrap(cpp_torch_namespace__sparse_softmax_self_Tensor_dim_int64_t(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchindex_int64_t>(args["dim"]), Rcpp::as<XPtrTorchoptional_scalar_type>(args["dtype"])));
+}
+if (self_type == "Tensor" && dim_type == "Dimname" && half_to_float_type == "Missing") {
+  return Rcpp::wrap(cpp_torch_namespace__sparse_softmax_self_Tensor_dim_Dimname(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchDimname>(args["dim"]), Rcpp::as<XPtrTorchoptional_scalar_type>(args["dtype"])));
+}
+if (self_type == "Tensor" && dim_type == "int64_t" && half_to_float_type == "bool") {
+  return Rcpp::wrap(cpp_torch_namespace__sparse_softmax_self_Tensor_dim_int64_t_half_to_float_bool(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchindex_int64_t>(args["dim"]), Rcpp::as<XPtrTorchbool>(args["half_to_float"])));
+}
+  Rcpp::stop("No matching overload for _sparse_softmax");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace__sparse_sum (Rcpp::List args) {
+  static const std::vector<std::string> self_expected = {"Tensor"};
+  static const std::vector<std::string> dim_expected = {"IntArrayRef"};
+  static const std::vector<std::string> dtype_expected = {"ScalarType"};
+  auto self_type = cpp_arg_to_torch_type(args["self"], self_expected, "self");
+  auto dim_type = cpp_arg_to_torch_type(args["dim"], dim_expected, "dim");
+  auto dtype_type = cpp_arg_to_torch_type(args["dtype"], dtype_expected, "dtype");
+if (self_type == "Tensor" && dim_type == "Missing" && dtype_type == "Missing") {
+  return Rcpp::wrap(cpp_torch_namespace__sparse_sum_self_Tensor(Rcpp::as<XPtrTorchTensor>(args["self"])));
+}
+if (self_type == "Tensor" && dim_type == "Missing" && dtype_type == "ScalarType") {
+  return Rcpp::wrap(cpp_torch_namespace__sparse_sum_self_Tensor_dtype_ScalarType(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchDtype>(args["dtype"])));
+}
+if (self_type == "Tensor" && dim_type == "IntArrayRef" && dtype_type == "Missing") {
+  return Rcpp::wrap(cpp_torch_namespace__sparse_sum_self_Tensor_dim_IntArrayRef(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchIndexIntArrayRef>(args["dim"])));
+}
+if (self_type == "Tensor" && dim_type == "IntArrayRef" && dtype_type == "ScalarType") {
+  return Rcpp::wrap(cpp_torch_namespace__sparse_sum_self_Tensor_dim_IntArrayRef_dtype_ScalarType(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchIndexIntArrayRef>(args["dim"]), Rcpp::as<XPtrTorchDtype>(args["dtype"])));
+}
+  Rcpp::stop("No matching overload for _sparse_sum");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace__test_autograd_multiple_dispatch (Rcpp::List args) {
+  static const std::vector<std::string> self_expected = {"Tensor"};
+  static const std::vector<std::string> b_expected = {"bool"};
+  auto self_type = cpp_arg_to_torch_type(args["self"], self_expected, "self");
+  auto b_type = cpp_arg_to_torch_type(args["b"], b_expected, "b");
+if (self_type == "Tensor" && b_type == "Missing") {
+  return Rcpp::wrap(cpp_torch_namespace__test_autograd_multiple_dispatch_self_Tensor(Rcpp::as<XPtrTorchTensor>(args["self"])));
+}
+if (self_type == "Tensor" && b_type == "bool") {
+  return Rcpp::wrap(cpp_torch_namespace__test_autograd_multiple_dispatch_self_Tensor_b_bool(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchbool>(args["b"])));
+}
+  Rcpp::stop("No matching overload for _test_autograd_multiple_dispatch");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace__to_sparse_out (Rcpp::List args) {
+  static const std::vector<std::string> out_expected = {"Tensor"};
+  static const std::vector<std::string> self_expected = {"Tensor"};
+  static const std::vector<std::string> sparse_dim_expected = {"int64_t"};
+  auto out_type = cpp_arg_to_torch_type(args["out"], out_expected, "out");
+  auto self_type = cpp_arg_to_torch_type(args["self"], self_expected, "self");
+  auto sparse_dim_type = cpp_arg_to_torch_type(args["sparse_dim"], sparse_dim_expected, "sparse_dim");
+if (out_type == "Tensor" && self_type == "Tensor" && sparse_dim_type == "int64_t") {
+  return Rcpp::wrap(cpp_torch_namespace__to_sparse_out_out_Tensor_self_Tensor_sparse_dim_int64_t(Rcpp::as<XPtrTorchTensor>(args["out"]), Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchint64_t>(args["sparse_dim"])));
+}
+if (out_type == "Tensor" && self_type == "Tensor" && sparse_dim_type == "Missing") {
+  return Rcpp::wrap(cpp_torch_namespace__to_sparse_out_out_Tensor_self_Tensor(Rcpp::as<XPtrTorchTensor>(args["out"]), Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchLayout>(args["layout"]), Rcpp::as<XPtrTorchOptionalIntArrayRef>(args["blocksize"]), Rcpp::as<XPtrTorchoptional_int64_t>(args["dense_dim"])));
+}
+  Rcpp::stop("No matching overload for _to_sparse_out");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace__upsample_bicubic2d_aa (Rcpp::List args) {
+  static const std::vector<std::string> input_expected = {"Tensor"};
+  static const std::vector<std::string> self_expected = {"Tensor"};
+  static const std::vector<std::string> output_size_expected = {"IntArrayRef"};
+  static const std::vector<std::string> align_corners_expected = {"bool"};
+  static const std::vector<std::string> scale_factors_expected = {"ArrayRef<double>"};
+  auto input_type = cpp_arg_to_torch_type(args["input"], input_expected, "input");
+  auto self_type = cpp_arg_to_torch_type(args["self"], self_expected, "self");
+  auto output_size_type = cpp_arg_to_torch_type(args["output_size"], output_size_expected, "output_size");
+  auto align_corners_type = cpp_arg_to_torch_type(args["align_corners"], align_corners_expected, "align_corners");
+  auto scale_factors_type = cpp_arg_to_torch_type(args["scale_factors"], scale_factors_expected, "scale_factors");
+if (input_type == "Tensor" && self_type == "Missing" && output_size_type == "IntArrayRef" && align_corners_type == "bool" && scale_factors_type == "ArrayRef<double>") {
+  return Rcpp::wrap(cpp_torch_namespace__upsample_bicubic2d_aa_input_Tensor_output_size_IntArrayRef_align_corners_bool_scale_factors_ArrayRefdouble(Rcpp::as<XPtrTorchTensor>(args["input"]), Rcpp::as<XPtrTorchOptionalIntArrayRef>(args["output_size"]), Rcpp::as<XPtrTorchbool>(args["align_corners"]), Rcpp::as<XPtrTorchOptionalDoubleArrayRef>(args["scale_factors"])));
+}
+if (input_type == "Missing" && self_type == "Tensor" && output_size_type == "IntArrayRef" && align_corners_type == "bool" && scale_factors_type == "Missing") {
+  return Rcpp::wrap(cpp_torch_namespace__upsample_bicubic2d_aa_self_Tensor_output_size_IntArrayRef_align_corners_bool(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchIntArrayRef>(args["output_size"]), Rcpp::as<XPtrTorchbool>(args["align_corners"]), Rcpp::as<XPtrTorchOptionaldouble>(args["scales_h"]), Rcpp::as<XPtrTorchOptionaldouble>(args["scales_w"])));
+}
+  Rcpp::stop("No matching overload for _upsample_bicubic2d_aa");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace__upsample_bilinear2d_aa (Rcpp::List args) {
+  static const std::vector<std::string> input_expected = {"Tensor"};
+  static const std::vector<std::string> self_expected = {"Tensor"};
+  static const std::vector<std::string> output_size_expected = {"IntArrayRef"};
+  static const std::vector<std::string> align_corners_expected = {"bool"};
+  static const std::vector<std::string> scale_factors_expected = {"ArrayRef<double>"};
+  auto input_type = cpp_arg_to_torch_type(args["input"], input_expected, "input");
+  auto self_type = cpp_arg_to_torch_type(args["self"], self_expected, "self");
+  auto output_size_type = cpp_arg_to_torch_type(args["output_size"], output_size_expected, "output_size");
+  auto align_corners_type = cpp_arg_to_torch_type(args["align_corners"], align_corners_expected, "align_corners");
+  auto scale_factors_type = cpp_arg_to_torch_type(args["scale_factors"], scale_factors_expected, "scale_factors");
+if (input_type == "Tensor" && self_type == "Missing" && output_size_type == "IntArrayRef" && align_corners_type == "bool" && scale_factors_type == "ArrayRef<double>") {
+  return Rcpp::wrap(cpp_torch_namespace__upsample_bilinear2d_aa_input_Tensor_output_size_IntArrayRef_align_corners_bool_scale_factors_ArrayRefdouble(Rcpp::as<XPtrTorchTensor>(args["input"]), Rcpp::as<XPtrTorchOptionalIntArrayRef>(args["output_size"]), Rcpp::as<XPtrTorchbool>(args["align_corners"]), Rcpp::as<XPtrTorchOptionalDoubleArrayRef>(args["scale_factors"])));
+}
+if (input_type == "Missing" && self_type == "Tensor" && output_size_type == "IntArrayRef" && align_corners_type == "bool" && scale_factors_type == "Missing") {
+  return Rcpp::wrap(cpp_torch_namespace__upsample_bilinear2d_aa_self_Tensor_output_size_IntArrayRef_align_corners_bool(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchIntArrayRef>(args["output_size"]), Rcpp::as<XPtrTorchbool>(args["align_corners"]), Rcpp::as<XPtrTorchOptionaldouble>(args["scales_h"]), Rcpp::as<XPtrTorchOptionaldouble>(args["scales_w"])));
+}
+  Rcpp::stop("No matching overload for _upsample_bilinear2d_aa");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace__upsample_nearest_exact1d (Rcpp::List args) {
+  static const std::vector<std::string> input_expected = {"Tensor"};
+  static const std::vector<std::string> self_expected = {"Tensor"};
+  static const std::vector<std::string> output_size_expected = {"IntArrayRef"};
+  static const std::vector<std::string> scale_factors_expected = {"ArrayRef<double>"};
+  auto input_type = cpp_arg_to_torch_type(args["input"], input_expected, "input");
+  auto self_type = cpp_arg_to_torch_type(args["self"], self_expected, "self");
+  auto output_size_type = cpp_arg_to_torch_type(args["output_size"], output_size_expected, "output_size");
+  auto scale_factors_type = cpp_arg_to_torch_type(args["scale_factors"], scale_factors_expected, "scale_factors");
+if (input_type == "Tensor" && self_type == "Missing" && output_size_type == "IntArrayRef" && scale_factors_type == "ArrayRef<double>") {
+  return Rcpp::wrap(cpp_torch_namespace__upsample_nearest_exact1d_input_Tensor_output_size_IntArrayRef_scale_factors_ArrayRefdouble(Rcpp::as<XPtrTorchTensor>(args["input"]), Rcpp::as<XPtrTorchOptionalIntArrayRef>(args["output_size"]), Rcpp::as<XPtrTorchOptionalDoubleArrayRef>(args["scale_factors"])));
+}
+if (input_type == "Missing" && self_type == "Tensor" && output_size_type == "IntArrayRef" && scale_factors_type == "Missing") {
+  return Rcpp::wrap(cpp_torch_namespace__upsample_nearest_exact1d_self_Tensor_output_size_IntArrayRef(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchIntArrayRef>(args["output_size"]), Rcpp::as<XPtrTorchOptionaldouble>(args["scales"])));
+}
+  Rcpp::stop("No matching overload for _upsample_nearest_exact1d");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace__upsample_nearest_exact2d (Rcpp::List args) {
+  static const std::vector<std::string> input_expected = {"Tensor"};
+  static const std::vector<std::string> self_expected = {"Tensor"};
+  static const std::vector<std::string> output_size_expected = {"IntArrayRef"};
+  static const std::vector<std::string> scale_factors_expected = {"ArrayRef<double>"};
+  auto input_type = cpp_arg_to_torch_type(args["input"], input_expected, "input");
+  auto self_type = cpp_arg_to_torch_type(args["self"], self_expected, "self");
+  auto output_size_type = cpp_arg_to_torch_type(args["output_size"], output_size_expected, "output_size");
+  auto scale_factors_type = cpp_arg_to_torch_type(args["scale_factors"], scale_factors_expected, "scale_factors");
+if (input_type == "Tensor" && self_type == "Missing" && output_size_type == "IntArrayRef" && scale_factors_type == "ArrayRef<double>") {
+  return Rcpp::wrap(cpp_torch_namespace__upsample_nearest_exact2d_input_Tensor_output_size_IntArrayRef_scale_factors_ArrayRefdouble(Rcpp::as<XPtrTorchTensor>(args["input"]), Rcpp::as<XPtrTorchOptionalIntArrayRef>(args["output_size"]), Rcpp::as<XPtrTorchOptionalDoubleArrayRef>(args["scale_factors"])));
+}
+if (input_type == "Missing" && self_type == "Tensor" && output_size_type == "IntArrayRef" && scale_factors_type == "Missing") {
+  return Rcpp::wrap(cpp_torch_namespace__upsample_nearest_exact2d_self_Tensor_output_size_IntArrayRef(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchIntArrayRef>(args["output_size"]), Rcpp::as<XPtrTorchOptionaldouble>(args["scales_h"]), Rcpp::as<XPtrTorchOptionaldouble>(args["scales_w"])));
+}
+  Rcpp::stop("No matching overload for _upsample_nearest_exact2d");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace__upsample_nearest_exact3d (Rcpp::List args) {
+  static const std::vector<std::string> input_expected = {"Tensor"};
+  static const std::vector<std::string> self_expected = {"Tensor"};
+  static const std::vector<std::string> output_size_expected = {"IntArrayRef"};
+  static const std::vector<std::string> scale_factors_expected = {"ArrayRef<double>"};
+  auto input_type = cpp_arg_to_torch_type(args["input"], input_expected, "input");
+  auto self_type = cpp_arg_to_torch_type(args["self"], self_expected, "self");
+  auto output_size_type = cpp_arg_to_torch_type(args["output_size"], output_size_expected, "output_size");
+  auto scale_factors_type = cpp_arg_to_torch_type(args["scale_factors"], scale_factors_expected, "scale_factors");
+if (input_type == "Tensor" && self_type == "Missing" && output_size_type == "IntArrayRef" && scale_factors_type == "ArrayRef<double>") {
+  return Rcpp::wrap(cpp_torch_namespace__upsample_nearest_exact3d_input_Tensor_output_size_IntArrayRef_scale_factors_ArrayRefdouble(Rcpp::as<XPtrTorchTensor>(args["input"]), Rcpp::as<XPtrTorchOptionalIntArrayRef>(args["output_size"]), Rcpp::as<XPtrTorchOptionalDoubleArrayRef>(args["scale_factors"])));
+}
+if (input_type == "Missing" && self_type == "Tensor" && output_size_type == "IntArrayRef" && scale_factors_type == "Missing") {
+  return Rcpp::wrap(cpp_torch_namespace__upsample_nearest_exact3d_self_Tensor_output_size_IntArrayRef(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchIntArrayRef>(args["output_size"]), Rcpp::as<XPtrTorchOptionaldouble>(args["scales_d"]), Rcpp::as<XPtrTorchOptionaldouble>(args["scales_h"]), Rcpp::as<XPtrTorchOptionaldouble>(args["scales_w"])));
+}
+  Rcpp::stop("No matching overload for _upsample_nearest_exact3d");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace__use_cudnn_ctc_loss (Rcpp::List args) {
+  static const std::vector<std::string> log_probs_expected = {"Tensor"};
+  static const std::vector<std::string> targets_expected = {"Tensor"};
+  static const std::vector<std::string> input_lengths_expected = {"IntArrayRef", "Tensor"};
+  static const std::vector<std::string> target_lengths_expected = {"IntArrayRef", "Tensor"};
+  static const std::vector<std::string> blank_expected = {"int64_t"};
+  auto log_probs_type = cpp_arg_to_torch_type(args["log_probs"], log_probs_expected, "log_probs");
+  auto targets_type = cpp_arg_to_torch_type(args["targets"], targets_expected, "targets");
+  auto input_lengths_type = cpp_arg_to_torch_type(args["input_lengths"], input_lengths_expected, "input_lengths");
+  auto target_lengths_type = cpp_arg_to_torch_type(args["target_lengths"], target_lengths_expected, "target_lengths");
+  auto blank_type = cpp_arg_to_torch_type(args["blank"], blank_expected, "blank");
+if (log_probs_type == "Tensor" && targets_type == "Tensor" && input_lengths_type == "IntArrayRef" && target_lengths_type == "IntArrayRef" && blank_type == "int64_t") {
+  return Rcpp::wrap(cpp_torch_namespace__use_cudnn_ctc_loss_log_probs_Tensor_targets_Tensor_input_lengths_IntArrayRef_target_lengths_IntArrayRef_blank_int64_t(Rcpp::as<XPtrTorchTensor>(args["log_probs"]), Rcpp::as<XPtrTorchTensor>(args["targets"]), Rcpp::as<XPtrTorchIntArrayRef>(args["input_lengths"]), Rcpp::as<XPtrTorchIntArrayRef>(args["target_lengths"]), Rcpp::as<XPtrTorchint64_t>(args["blank"])));
+}
+if (log_probs_type == "Tensor" && targets_type == "Tensor" && input_lengths_type == "Tensor" && target_lengths_type == "Tensor" && blank_type == "int64_t") {
+  return Rcpp::wrap(cpp_torch_namespace__use_cudnn_ctc_loss_log_probs_Tensor_targets_Tensor_input_lengths_Tensor_target_lengths_Tensor_blank_int64_t(Rcpp::as<XPtrTorchTensor>(args["log_probs"]), Rcpp::as<XPtrTorchTensor>(args["targets"]), Rcpp::as<XPtrTorchTensor>(args["input_lengths"]), Rcpp::as<XPtrTorchTensor>(args["target_lengths"]), Rcpp::as<XPtrTorchint64_t>(args["blank"])));
+}
+  Rcpp::stop("No matching overload for _use_cudnn_ctc_loss");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace_addmm (Rcpp::List args) {
+  static const std::vector<std::string> self_expected = {"Tensor"};
+  static const std::vector<std::string> mat1_expected = {"Tensor"};
+  static const std::vector<std::string> mat2_expected = {"Tensor"};
+  static const std::vector<std::string> out_dtype_expected = {"ScalarType"};
+  auto self_type = cpp_arg_to_torch_type(args["self"], self_expected, "self");
+  auto mat1_type = cpp_arg_to_torch_type(args["mat1"], mat1_expected, "mat1");
+  auto mat2_type = cpp_arg_to_torch_type(args["mat2"], mat2_expected, "mat2");
+  auto out_dtype_type = cpp_arg_to_torch_type(args["out_dtype"], out_dtype_expected, "out_dtype");
+if (self_type == "Tensor" && mat1_type == "Tensor" && mat2_type == "Tensor" && out_dtype_type == "Missing") {
+  return Rcpp::wrap(cpp_torch_namespace_addmm_self_Tensor_mat1_Tensor_mat2_Tensor(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchTensor>(args["mat1"]), Rcpp::as<XPtrTorchTensor>(args["mat2"]), Rcpp::as<XPtrTorchScalar>(args["beta"]), Rcpp::as<XPtrTorchScalar>(args["alpha"])));
+}
+if (self_type == "Tensor" && mat1_type == "Tensor" && mat2_type == "Tensor" && out_dtype_type == "ScalarType") {
+  return Rcpp::wrap(cpp_torch_namespace_addmm_self_Tensor_mat1_Tensor_mat2_Tensor_out_dtype_ScalarType(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchTensor>(args["mat1"]), Rcpp::as<XPtrTorchTensor>(args["mat2"]), Rcpp::as<XPtrTorchDtype>(args["out_dtype"]), Rcpp::as<XPtrTorchScalar>(args["beta"]), Rcpp::as<XPtrTorchScalar>(args["alpha"])));
+}
+  Rcpp::stop("No matching overload for addmm");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace_addmm_out (Rcpp::List args) {
+  static const std::vector<std::string> out_expected = {"Tensor"};
+  static const std::vector<std::string> self_expected = {"Tensor"};
+  static const std::vector<std::string> mat1_expected = {"Tensor"};
+  static const std::vector<std::string> mat2_expected = {"Tensor"};
+  static const std::vector<std::string> out_dtype_expected = {"ScalarType"};
+  auto out_type = cpp_arg_to_torch_type(args["out"], out_expected, "out");
+  auto self_type = cpp_arg_to_torch_type(args["self"], self_expected, "self");
+  auto mat1_type = cpp_arg_to_torch_type(args["mat1"], mat1_expected, "mat1");
+  auto mat2_type = cpp_arg_to_torch_type(args["mat2"], mat2_expected, "mat2");
+  auto out_dtype_type = cpp_arg_to_torch_type(args["out_dtype"], out_dtype_expected, "out_dtype");
+if (out_type == "Tensor" && self_type == "Tensor" && mat1_type == "Tensor" && mat2_type == "Tensor" && out_dtype_type == "Missing") {
+  return Rcpp::wrap(cpp_torch_namespace_addmm_out_out_Tensor_self_Tensor_mat1_Tensor_mat2_Tensor(Rcpp::as<XPtrTorchTensor>(args["out"]), Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchTensor>(args["mat1"]), Rcpp::as<XPtrTorchTensor>(args["mat2"]), Rcpp::as<XPtrTorchScalar>(args["beta"]), Rcpp::as<XPtrTorchScalar>(args["alpha"])));
+}
+if (out_type == "Tensor" && self_type == "Tensor" && mat1_type == "Tensor" && mat2_type == "Tensor" && out_dtype_type == "ScalarType") {
+  return Rcpp::wrap(cpp_torch_namespace_addmm_out_out_Tensor_self_Tensor_mat1_Tensor_mat2_Tensor_out_dtype_ScalarType(Rcpp::as<XPtrTorchTensor>(args["out"]), Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchTensor>(args["mat1"]), Rcpp::as<XPtrTorchTensor>(args["mat2"]), Rcpp::as<XPtrTorchDtype>(args["out_dtype"]), Rcpp::as<XPtrTorchScalar>(args["beta"]), Rcpp::as<XPtrTorchScalar>(args["alpha"])));
+}
+  Rcpp::stop("No matching overload for addmm_out");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace_all (Rcpp::List args) {
+  static const std::vector<std::string> self_expected = {"Tensor"};
+  static const std::vector<std::string> dim_expected = {"int64_t", "IntArrayRef", "Dimname"};
+  auto self_type = cpp_arg_to_torch_type(args["self"], self_expected, "self");
+  auto dim_type = cpp_arg_to_torch_type(args["dim"], dim_expected, "dim");
+if (self_type == "Tensor" && dim_type == "int64_t") {
+  return Rcpp::wrap(cpp_torch_namespace_all_self_Tensor_dim_int64_t(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchindex_int64_t>(args["dim"]), Rcpp::as<XPtrTorchbool>(args["keepdim"])));
+}
+if (self_type == "Tensor" && dim_type == "IntArrayRef") {
+  return Rcpp::wrap(cpp_torch_namespace_all_self_Tensor_dim_IntArrayRef(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchOptionalIndexIntArrayRef>(args["dim"]), Rcpp::as<XPtrTorchbool>(args["keepdim"])));
+}
+if (self_type == "Tensor" && dim_type == "Dimname") {
+  return Rcpp::wrap(cpp_torch_namespace_all_self_Tensor_dim_Dimname(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchDimname>(args["dim"]), Rcpp::as<XPtrTorchbool>(args["keepdim"])));
+}
+if (self_type == "Tensor" && dim_type == "Missing") {
+  return Rcpp::wrap(cpp_torch_namespace_all_self_Tensor(Rcpp::as<XPtrTorchTensor>(args["self"])));
+}
+  Rcpp::stop("No matching overload for all");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace_all_out (Rcpp::List args) {
+  static const std::vector<std::string> out_expected = {"Tensor"};
+  static const std::vector<std::string> self_expected = {"Tensor"};
+  static const std::vector<std::string> dim_expected = {"int64_t", "IntArrayRef", "Dimname"};
+  auto out_type = cpp_arg_to_torch_type(args["out"], out_expected, "out");
+  auto self_type = cpp_arg_to_torch_type(args["self"], self_expected, "self");
+  auto dim_type = cpp_arg_to_torch_type(args["dim"], dim_expected, "dim");
+if (out_type == "Tensor" && self_type == "Tensor" && dim_type == "int64_t") {
+  return Rcpp::wrap(cpp_torch_namespace_all_out_out_Tensor_self_Tensor_dim_int64_t(Rcpp::as<XPtrTorchTensor>(args["out"]), Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchindex_int64_t>(args["dim"]), Rcpp::as<XPtrTorchbool>(args["keepdim"])));
+}
+if (out_type == "Tensor" && self_type == "Tensor" && dim_type == "IntArrayRef") {
+  return Rcpp::wrap(cpp_torch_namespace_all_out_out_Tensor_self_Tensor_dim_IntArrayRef(Rcpp::as<XPtrTorchTensor>(args["out"]), Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchOptionalIndexIntArrayRef>(args["dim"]), Rcpp::as<XPtrTorchbool>(args["keepdim"])));
+}
+if (out_type == "Tensor" && self_type == "Tensor" && dim_type == "Dimname") {
+  return Rcpp::wrap(cpp_torch_namespace_all_out_out_Tensor_self_Tensor_dim_Dimname(Rcpp::as<XPtrTorchTensor>(args["out"]), Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchDimname>(args["dim"]), Rcpp::as<XPtrTorchbool>(args["keepdim"])));
+}
+if (out_type == "Tensor" && self_type == "Tensor" && dim_type == "Missing") {
+  return Rcpp::wrap(cpp_torch_namespace_all_out_out_Tensor_self_Tensor(Rcpp::as<XPtrTorchTensor>(args["out"]), Rcpp::as<XPtrTorchTensor>(args["self"])));
+}
+  Rcpp::stop("No matching overload for all_out");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace_any (Rcpp::List args) {
+  static const std::vector<std::string> self_expected = {"Tensor"};
+  static const std::vector<std::string> dim_expected = {"int64_t", "IntArrayRef", "Dimname"};
+  auto self_type = cpp_arg_to_torch_type(args["self"], self_expected, "self");
+  auto dim_type = cpp_arg_to_torch_type(args["dim"], dim_expected, "dim");
+if (self_type == "Tensor" && dim_type == "int64_t") {
+  return Rcpp::wrap(cpp_torch_namespace_any_self_Tensor_dim_int64_t(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchindex_int64_t>(args["dim"]), Rcpp::as<XPtrTorchbool>(args["keepdim"])));
+}
+if (self_type == "Tensor" && dim_type == "IntArrayRef") {
+  return Rcpp::wrap(cpp_torch_namespace_any_self_Tensor_dim_IntArrayRef(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchOptionalIndexIntArrayRef>(args["dim"]), Rcpp::as<XPtrTorchbool>(args["keepdim"])));
+}
+if (self_type == "Tensor" && dim_type == "Dimname") {
+  return Rcpp::wrap(cpp_torch_namespace_any_self_Tensor_dim_Dimname(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchDimname>(args["dim"]), Rcpp::as<XPtrTorchbool>(args["keepdim"])));
+}
+if (self_type == "Tensor" && dim_type == "Missing") {
+  return Rcpp::wrap(cpp_torch_namespace_any_self_Tensor(Rcpp::as<XPtrTorchTensor>(args["self"])));
+}
+  Rcpp::stop("No matching overload for any");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace_any_out (Rcpp::List args) {
+  static const std::vector<std::string> out_expected = {"Tensor"};
+  static const std::vector<std::string> self_expected = {"Tensor"};
+  static const std::vector<std::string> dim_expected = {"int64_t", "IntArrayRef", "Dimname"};
+  auto out_type = cpp_arg_to_torch_type(args["out"], out_expected, "out");
+  auto self_type = cpp_arg_to_torch_type(args["self"], self_expected, "self");
+  auto dim_type = cpp_arg_to_torch_type(args["dim"], dim_expected, "dim");
+if (out_type == "Tensor" && self_type == "Tensor" && dim_type == "int64_t") {
+  return Rcpp::wrap(cpp_torch_namespace_any_out_out_Tensor_self_Tensor_dim_int64_t(Rcpp::as<XPtrTorchTensor>(args["out"]), Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchindex_int64_t>(args["dim"]), Rcpp::as<XPtrTorchbool>(args["keepdim"])));
+}
+if (out_type == "Tensor" && self_type == "Tensor" && dim_type == "IntArrayRef") {
+  return Rcpp::wrap(cpp_torch_namespace_any_out_out_Tensor_self_Tensor_dim_IntArrayRef(Rcpp::as<XPtrTorchTensor>(args["out"]), Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchOptionalIndexIntArrayRef>(args["dim"]), Rcpp::as<XPtrTorchbool>(args["keepdim"])));
+}
+if (out_type == "Tensor" && self_type == "Tensor" && dim_type == "Dimname") {
+  return Rcpp::wrap(cpp_torch_namespace_any_out_out_Tensor_self_Tensor_dim_Dimname(Rcpp::as<XPtrTorchTensor>(args["out"]), Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchDimname>(args["dim"]), Rcpp::as<XPtrTorchbool>(args["keepdim"])));
+}
+if (out_type == "Tensor" && self_type == "Tensor" && dim_type == "Missing") {
+  return Rcpp::wrap(cpp_torch_namespace_any_out_out_Tensor_self_Tensor(Rcpp::as<XPtrTorchTensor>(args["out"]), Rcpp::as<XPtrTorchTensor>(args["self"])));
+}
+  Rcpp::stop("No matching overload for any_out");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace_arange (Rcpp::List args) {
+  static const std::vector<std::string> start_expected = {"Scalar"};
+  static const std::vector<std::string> end_expected = {"Scalar"};
+  auto start_type = cpp_arg_to_torch_type(args["start"], start_expected, "start");
+  auto end_type = cpp_arg_to_torch_type(args["end"], end_expected, "end");
+if (start_type == "Missing" && end_type == "Scalar") {
+  return Rcpp::wrap(cpp_torch_namespace_arange_end_Scalar(Rcpp::as<XPtrTorchScalar>(args["end"]), Rcpp::as<XPtrTorchTensorOptions>(args["options"])));
+}
+if (start_type == "Scalar" && end_type == "Scalar") {
+  return Rcpp::wrap(cpp_torch_namespace_arange_start_Scalar_end_Scalar(Rcpp::as<XPtrTorchScalar>(args["start"]), Rcpp::as<XPtrTorchScalar>(args["end"]), Rcpp::as<XPtrTorchScalar>(args["step"]), Rcpp::as<XPtrTorchTensorOptions>(args["options"])));
+}
+  Rcpp::stop("No matching overload for arange");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace_arange_out (Rcpp::List args) {
+  static const std::vector<std::string> out_expected = {"Tensor"};
+  static const std::vector<std::string> start_expected = {"Scalar"};
+  static const std::vector<std::string> end_expected = {"Scalar"};
+  auto out_type = cpp_arg_to_torch_type(args["out"], out_expected, "out");
+  auto start_type = cpp_arg_to_torch_type(args["start"], start_expected, "start");
+  auto end_type = cpp_arg_to_torch_type(args["end"], end_expected, "end");
+if (out_type == "Tensor" && start_type == "Missing" && end_type == "Scalar") {
+  return Rcpp::wrap(cpp_torch_namespace_arange_out_out_Tensor_end_Scalar(Rcpp::as<XPtrTorchTensor>(args["out"]), Rcpp::as<XPtrTorchScalar>(args["end"])));
+}
+if (out_type == "Tensor" && start_type == "Scalar" && end_type == "Scalar") {
+  return Rcpp::wrap(cpp_torch_namespace_arange_out_out_Tensor_start_Scalar_end_Scalar(Rcpp::as<XPtrTorchTensor>(args["out"]), Rcpp::as<XPtrTorchScalar>(args["start"]), Rcpp::as<XPtrTorchScalar>(args["end"]), Rcpp::as<XPtrTorchScalar>(args["step"])));
+}
+  Rcpp::stop("No matching overload for arange_out");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace_argsort (Rcpp::List args) {
+  static const std::vector<std::string> self_expected = {"Tensor"};
+  static const std::vector<std::string> stable_expected = {"bool"};
+  static const std::vector<std::string> dim_expected = {"int64_t", "Dimname"};
+  auto self_type = cpp_arg_to_torch_type(args["self"], self_expected, "self");
+  auto stable_type = cpp_arg_to_torch_type(args["stable"], stable_expected, "stable");
+  auto dim_type = cpp_arg_to_torch_type(args["dim"], dim_expected, "dim");
+if (self_type == "Tensor" && stable_type == "Missing" && dim_type == "int64_t") {
+  return Rcpp::wrap(cpp_torch_namespace_argsort_self_Tensor_dim_int64_t(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchindex_int64_t>(args["dim"]), Rcpp::as<XPtrTorchbool>(args["descending"])));
+}
+if (self_type == "Tensor" && stable_type == "bool" && dim_type == "int64_t") {
+  return Rcpp::wrap(cpp_torch_namespace_argsort_self_Tensor_stable_bool_dim_int64_t(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchbool>(args["stable"]), Rcpp::as<XPtrTorchindex_int64_t>(args["dim"]), Rcpp::as<XPtrTorchbool>(args["descending"])));
+}
+if (self_type == "Tensor" && stable_type == "Missing" && dim_type == "Dimname") {
+  return Rcpp::wrap(cpp_torch_namespace_argsort_self_Tensor_dim_Dimname(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchDimname>(args["dim"]), Rcpp::as<XPtrTorchbool>(args["descending"])));
+}
+  Rcpp::stop("No matching overload for argsort");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace_atleast_1d (Rcpp::List args) {
+  static const std::vector<std::string> self_expected = {"Tensor"};
+  static const std::vector<std::string> tensors_expected = {"TensorList"};
+  auto self_type = cpp_arg_to_torch_type(args["self"], self_expected, "self");
+  auto tensors_type = cpp_arg_to_torch_type(args["tensors"], tensors_expected, "tensors");
+if (self_type == "Tensor" && tensors_type == "Missing") {
+  return Rcpp::wrap(cpp_torch_namespace_atleast_1d_self_Tensor(Rcpp::as<XPtrTorchTensor>(args["self"])));
+}
+if (self_type == "Missing" && tensors_type == "TensorList") {
+  return Rcpp::wrap(cpp_torch_namespace_atleast_1d_tensors_TensorList(Rcpp::as<XPtrTorchTensorList>(args["tensors"])));
+}
+  Rcpp::stop("No matching overload for atleast_1d");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace_atleast_2d (Rcpp::List args) {
+  static const std::vector<std::string> self_expected = {"Tensor"};
+  static const std::vector<std::string> tensors_expected = {"TensorList"};
+  auto self_type = cpp_arg_to_torch_type(args["self"], self_expected, "self");
+  auto tensors_type = cpp_arg_to_torch_type(args["tensors"], tensors_expected, "tensors");
+if (self_type == "Tensor" && tensors_type == "Missing") {
+  return Rcpp::wrap(cpp_torch_namespace_atleast_2d_self_Tensor(Rcpp::as<XPtrTorchTensor>(args["self"])));
+}
+if (self_type == "Missing" && tensors_type == "TensorList") {
+  return Rcpp::wrap(cpp_torch_namespace_atleast_2d_tensors_TensorList(Rcpp::as<XPtrTorchTensorList>(args["tensors"])));
+}
+  Rcpp::stop("No matching overload for atleast_2d");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace_atleast_3d (Rcpp::List args) {
+  static const std::vector<std::string> self_expected = {"Tensor"};
+  static const std::vector<std::string> tensors_expected = {"TensorList"};
+  auto self_type = cpp_arg_to_torch_type(args["self"], self_expected, "self");
+  auto tensors_type = cpp_arg_to_torch_type(args["tensors"], tensors_expected, "tensors");
+if (self_type == "Tensor" && tensors_type == "Missing") {
+  return Rcpp::wrap(cpp_torch_namespace_atleast_3d_self_Tensor(Rcpp::as<XPtrTorchTensor>(args["self"])));
+}
+if (self_type == "Missing" && tensors_type == "TensorList") {
+  return Rcpp::wrap(cpp_torch_namespace_atleast_3d_tensors_TensorList(Rcpp::as<XPtrTorchTensorList>(args["tensors"])));
+}
+  Rcpp::stop("No matching overload for atleast_3d");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace_baddbmm (Rcpp::List args) {
+  static const std::vector<std::string> self_expected = {"Tensor"};
+  static const std::vector<std::string> batch1_expected = {"Tensor"};
+  static const std::vector<std::string> batch2_expected = {"Tensor"};
+  static const std::vector<std::string> out_dtype_expected = {"ScalarType"};
+  auto self_type = cpp_arg_to_torch_type(args["self"], self_expected, "self");
+  auto batch1_type = cpp_arg_to_torch_type(args["batch1"], batch1_expected, "batch1");
+  auto batch2_type = cpp_arg_to_torch_type(args["batch2"], batch2_expected, "batch2");
+  auto out_dtype_type = cpp_arg_to_torch_type(args["out_dtype"], out_dtype_expected, "out_dtype");
+if (self_type == "Tensor" && batch1_type == "Tensor" && batch2_type == "Tensor" && out_dtype_type == "Missing") {
+  return Rcpp::wrap(cpp_torch_namespace_baddbmm_self_Tensor_batch1_Tensor_batch2_Tensor(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchTensor>(args["batch1"]), Rcpp::as<XPtrTorchTensor>(args["batch2"]), Rcpp::as<XPtrTorchScalar>(args["beta"]), Rcpp::as<XPtrTorchScalar>(args["alpha"])));
+}
+if (self_type == "Tensor" && batch1_type == "Tensor" && batch2_type == "Tensor" && out_dtype_type == "ScalarType") {
+  return Rcpp::wrap(cpp_torch_namespace_baddbmm_self_Tensor_batch1_Tensor_batch2_Tensor_out_dtype_ScalarType(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchTensor>(args["batch1"]), Rcpp::as<XPtrTorchTensor>(args["batch2"]), Rcpp::as<XPtrTorchDtype>(args["out_dtype"]), Rcpp::as<XPtrTorchScalar>(args["beta"]), Rcpp::as<XPtrTorchScalar>(args["alpha"])));
+}
+  Rcpp::stop("No matching overload for baddbmm");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace_baddbmm_out (Rcpp::List args) {
+  static const std::vector<std::string> out_expected = {"Tensor"};
+  static const std::vector<std::string> self_expected = {"Tensor"};
+  static const std::vector<std::string> batch1_expected = {"Tensor"};
+  static const std::vector<std::string> batch2_expected = {"Tensor"};
+  static const std::vector<std::string> out_dtype_expected = {"ScalarType"};
+  auto out_type = cpp_arg_to_torch_type(args["out"], out_expected, "out");
+  auto self_type = cpp_arg_to_torch_type(args["self"], self_expected, "self");
+  auto batch1_type = cpp_arg_to_torch_type(args["batch1"], batch1_expected, "batch1");
+  auto batch2_type = cpp_arg_to_torch_type(args["batch2"], batch2_expected, "batch2");
+  auto out_dtype_type = cpp_arg_to_torch_type(args["out_dtype"], out_dtype_expected, "out_dtype");
+if (out_type == "Tensor" && self_type == "Tensor" && batch1_type == "Tensor" && batch2_type == "Tensor" && out_dtype_type == "Missing") {
+  return Rcpp::wrap(cpp_torch_namespace_baddbmm_out_out_Tensor_self_Tensor_batch1_Tensor_batch2_Tensor(Rcpp::as<XPtrTorchTensor>(args["out"]), Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchTensor>(args["batch1"]), Rcpp::as<XPtrTorchTensor>(args["batch2"]), Rcpp::as<XPtrTorchScalar>(args["beta"]), Rcpp::as<XPtrTorchScalar>(args["alpha"])));
+}
+if (out_type == "Tensor" && self_type == "Tensor" && batch1_type == "Tensor" && batch2_type == "Tensor" && out_dtype_type == "ScalarType") {
+  return Rcpp::wrap(cpp_torch_namespace_baddbmm_out_out_Tensor_self_Tensor_batch1_Tensor_batch2_Tensor_out_dtype_ScalarType(Rcpp::as<XPtrTorchTensor>(args["out"]), Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchTensor>(args["batch1"]), Rcpp::as<XPtrTorchTensor>(args["batch2"]), Rcpp::as<XPtrTorchDtype>(args["out_dtype"]), Rcpp::as<XPtrTorchScalar>(args["beta"]), Rcpp::as<XPtrTorchScalar>(args["alpha"])));
+}
+  Rcpp::stop("No matching overload for baddbmm_out");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace_bartlett_window (Rcpp::List args) {
+  static const std::vector<std::string> window_length_expected = {"int64_t"};
+  static const std::vector<std::string> periodic_expected = {"bool"};
+  auto window_length_type = cpp_arg_to_torch_type(args["window_length"], window_length_expected, "window_length");
+  auto periodic_type = cpp_arg_to_torch_type(args["periodic"], periodic_expected, "periodic");
+if (window_length_type == "int64_t" && periodic_type == "Missing") {
+  return Rcpp::wrap(cpp_torch_namespace_bartlett_window_window_length_int64_t(Rcpp::as<XPtrTorchint64_t>(args["window_length"]), Rcpp::as<XPtrTorchTensorOptions>(args["options"])));
+}
+if (window_length_type == "int64_t" && periodic_type == "bool") {
+  return Rcpp::wrap(cpp_torch_namespace_bartlett_window_window_length_int64_t_periodic_bool(Rcpp::as<XPtrTorchint64_t>(args["window_length"]), Rcpp::as<XPtrTorchbool>(args["periodic"]), Rcpp::as<XPtrTorchTensorOptions>(args["options"])));
+}
+  Rcpp::stop("No matching overload for bartlett_window");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace_bartlett_window_out (Rcpp::List args) {
+  static const std::vector<std::string> out_expected = {"Tensor"};
+  static const std::vector<std::string> window_length_expected = {"int64_t"};
+  static const std::vector<std::string> periodic_expected = {"bool"};
+  auto out_type = cpp_arg_to_torch_type(args["out"], out_expected, "out");
+  auto window_length_type = cpp_arg_to_torch_type(args["window_length"], window_length_expected, "window_length");
+  auto periodic_type = cpp_arg_to_torch_type(args["periodic"], periodic_expected, "periodic");
+if (out_type == "Tensor" && window_length_type == "int64_t" && periodic_type == "Missing") {
+  return Rcpp::wrap(cpp_torch_namespace_bartlett_window_out_out_Tensor_window_length_int64_t(Rcpp::as<XPtrTorchTensor>(args["out"]), Rcpp::as<XPtrTorchint64_t>(args["window_length"])));
+}
+if (out_type == "Tensor" && window_length_type == "int64_t" && periodic_type == "bool") {
+  return Rcpp::wrap(cpp_torch_namespace_bartlett_window_out_out_Tensor_window_length_int64_t_periodic_bool(Rcpp::as<XPtrTorchTensor>(args["out"]), Rcpp::as<XPtrTorchint64_t>(args["window_length"]), Rcpp::as<XPtrTorchbool>(args["periodic"])));
+}
+  Rcpp::stop("No matching overload for bartlett_window_out");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace_bernoulli (Rcpp::List args) {
+  static const std::vector<std::string> self_expected = {"Tensor"};
+  static const std::vector<std::string> p_expected = {"double", "Tensor"};
+  auto self_type = cpp_arg_to_torch_type(args["self"], self_expected, "self");
+  auto p_type = cpp_arg_to_torch_type(args["p"], p_expected, "p");
+if (self_type == "Tensor" && p_type == "Missing") {
+  return Rcpp::wrap(cpp_torch_namespace_bernoulli_self_Tensor(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchOptionalGenerator>(args["generator"])));
+}
+if (self_type == "Tensor" && p_type == "double") {
+  return Rcpp::wrap(cpp_torch_namespace_bernoulli_self_Tensor_p_double(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchdouble>(args["p"]), Rcpp::as<XPtrTorchOptionalGenerator>(args["generator"])));
+}
+if (self_type == "Tensor" && p_type == "Tensor") {
+  return Rcpp::wrap(cpp_torch_namespace_bernoulli_self_Tensor_p_Tensor(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchTensor>(args["p"]), Rcpp::as<XPtrTorchOptionalGenerator>(args["generator"])));
+}
+  Rcpp::stop("No matching overload for bernoulli");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace_bernoulli_out (Rcpp::List args) {
+  static const std::vector<std::string> out_expected = {"Tensor"};
+  static const std::vector<std::string> self_expected = {"Tensor"};
+  static const std::vector<std::string> p_expected = {"Tensor", "double"};
+  auto out_type = cpp_arg_to_torch_type(args["out"], out_expected, "out");
+  auto self_type = cpp_arg_to_torch_type(args["self"], self_expected, "self");
+  auto p_type = cpp_arg_to_torch_type(args["p"], p_expected, "p");
+if (out_type == "Tensor" && self_type == "Tensor" && p_type == "Missing") {
+  return Rcpp::wrap(cpp_torch_namespace_bernoulli_out_out_Tensor_self_Tensor(Rcpp::as<XPtrTorchTensor>(args["out"]), Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchOptionalGenerator>(args["generator"])));
+}
+if (out_type == "Tensor" && self_type == "Tensor" && p_type == "Tensor") {
+  return Rcpp::wrap(cpp_torch_namespace_bernoulli_out_out_Tensor_self_Tensor_p_Tensor(Rcpp::as<XPtrTorchTensor>(args["out"]), Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchTensor>(args["p"]), Rcpp::as<XPtrTorchOptionalGenerator>(args["generator"])));
+}
+if (out_type == "Tensor" && self_type == "Tensor" && p_type == "double") {
+  return Rcpp::wrap(cpp_torch_namespace_bernoulli_out_out_Tensor_self_Tensor_p_double(Rcpp::as<XPtrTorchTensor>(args["out"]), Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchdouble>(args["p"]), Rcpp::as<XPtrTorchOptionalGenerator>(args["generator"])));
+}
+  Rcpp::stop("No matching overload for bernoulli_out");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace_bitwise_and (Rcpp::List args) {
+  static const std::vector<std::string> self_expected = {"Tensor", "Scalar"};
+  static const std::vector<std::string> other_expected = {"Scalar", "Tensor"};
+  auto self_type = cpp_arg_to_torch_type(args["self"], self_expected, "self");
+  auto other_type = cpp_arg_to_torch_type(args["other"], other_expected, "other");
+if (self_type == "Tensor" && other_type == "Scalar") {
+  return Rcpp::wrap(cpp_torch_namespace_bitwise_and_self_Tensor_other_Scalar(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchScalar>(args["other"])));
+}
+if (self_type == "Scalar" && other_type == "Tensor") {
+  return Rcpp::wrap(cpp_torch_namespace_bitwise_and_self_Scalar_other_Tensor(Rcpp::as<XPtrTorchScalar>(args["self"]), Rcpp::as<XPtrTorchTensor>(args["other"])));
+}
+if (self_type == "Tensor" && other_type == "Tensor") {
+  return Rcpp::wrap(cpp_torch_namespace_bitwise_and_self_Tensor_other_Tensor(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchTensor>(args["other"])));
+}
+  Rcpp::stop("No matching overload for bitwise_and");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace_bitwise_and_out (Rcpp::List args) {
+  static const std::vector<std::string> out_expected = {"Tensor"};
+  static const std::vector<std::string> self_expected = {"Tensor", "Scalar"};
+  static const std::vector<std::string> other_expected = {"Tensor", "Scalar"};
+  auto out_type = cpp_arg_to_torch_type(args["out"], out_expected, "out");
+  auto self_type = cpp_arg_to_torch_type(args["self"], self_expected, "self");
+  auto other_type = cpp_arg_to_torch_type(args["other"], other_expected, "other");
+if (out_type == "Tensor" && self_type == "Tensor" && other_type == "Tensor") {
+  return Rcpp::wrap(cpp_torch_namespace_bitwise_and_out_out_Tensor_self_Tensor_other_Tensor(Rcpp::as<XPtrTorchTensor>(args["out"]), Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchTensor>(args["other"])));
+}
+if (out_type == "Tensor" && self_type == "Tensor" && other_type == "Scalar") {
+  return Rcpp::wrap(cpp_torch_namespace_bitwise_and_out_out_Tensor_self_Tensor_other_Scalar(Rcpp::as<XPtrTorchTensor>(args["out"]), Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchScalar>(args["other"])));
+}
+if (out_type == "Tensor" && self_type == "Scalar" && other_type == "Tensor") {
+  return Rcpp::wrap(cpp_torch_namespace_bitwise_and_out_out_Tensor_self_Scalar_other_Tensor(Rcpp::as<XPtrTorchTensor>(args["out"]), Rcpp::as<XPtrTorchScalar>(args["self"]), Rcpp::as<XPtrTorchTensor>(args["other"])));
+}
+  Rcpp::stop("No matching overload for bitwise_and_out");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace_bitwise_left_shift (Rcpp::List args) {
+  static const std::vector<std::string> self_expected = {"Tensor", "Scalar"};
+  static const std::vector<std::string> other_expected = {"Tensor", "Scalar"};
+  auto self_type = cpp_arg_to_torch_type(args["self"], self_expected, "self");
+  auto other_type = cpp_arg_to_torch_type(args["other"], other_expected, "other");
+if (self_type == "Tensor" && other_type == "Tensor") {
+  return Rcpp::wrap(cpp_torch_namespace_bitwise_left_shift_self_Tensor_other_Tensor(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchTensor>(args["other"])));
+}
+if (self_type == "Tensor" && other_type == "Scalar") {
+  return Rcpp::wrap(cpp_torch_namespace_bitwise_left_shift_self_Tensor_other_Scalar(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchScalar>(args["other"])));
+}
+if (self_type == "Scalar" && other_type == "Tensor") {
+  return Rcpp::wrap(cpp_torch_namespace_bitwise_left_shift_self_Scalar_other_Tensor(Rcpp::as<XPtrTorchScalar>(args["self"]), Rcpp::as<XPtrTorchTensor>(args["other"])));
+}
+  Rcpp::stop("No matching overload for bitwise_left_shift");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace_bitwise_left_shift_out (Rcpp::List args) {
+  static const std::vector<std::string> out_expected = {"Tensor"};
+  static const std::vector<std::string> self_expected = {"Tensor", "Scalar"};
+  static const std::vector<std::string> other_expected = {"Tensor", "Scalar"};
+  auto out_type = cpp_arg_to_torch_type(args["out"], out_expected, "out");
+  auto self_type = cpp_arg_to_torch_type(args["self"], self_expected, "self");
+  auto other_type = cpp_arg_to_torch_type(args["other"], other_expected, "other");
+if (out_type == "Tensor" && self_type == "Tensor" && other_type == "Tensor") {
+  return Rcpp::wrap(cpp_torch_namespace_bitwise_left_shift_out_out_Tensor_self_Tensor_other_Tensor(Rcpp::as<XPtrTorchTensor>(args["out"]), Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchTensor>(args["other"])));
+}
+if (out_type == "Tensor" && self_type == "Tensor" && other_type == "Scalar") {
+  return Rcpp::wrap(cpp_torch_namespace_bitwise_left_shift_out_out_Tensor_self_Tensor_other_Scalar(Rcpp::as<XPtrTorchTensor>(args["out"]), Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchScalar>(args["other"])));
+}
+if (out_type == "Tensor" && self_type == "Scalar" && other_type == "Tensor") {
+  return Rcpp::wrap(cpp_torch_namespace_bitwise_left_shift_out_out_Tensor_self_Scalar_other_Tensor(Rcpp::as<XPtrTorchTensor>(args["out"]), Rcpp::as<XPtrTorchScalar>(args["self"]), Rcpp::as<XPtrTorchTensor>(args["other"])));
+}
+  Rcpp::stop("No matching overload for bitwise_left_shift_out");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace_bitwise_or (Rcpp::List args) {
+  static const std::vector<std::string> self_expected = {"Tensor", "Scalar"};
+  static const std::vector<std::string> other_expected = {"Scalar", "Tensor"};
+  auto self_type = cpp_arg_to_torch_type(args["self"], self_expected, "self");
+  auto other_type = cpp_arg_to_torch_type(args["other"], other_expected, "other");
+if (self_type == "Tensor" && other_type == "Scalar") {
+  return Rcpp::wrap(cpp_torch_namespace_bitwise_or_self_Tensor_other_Scalar(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchScalar>(args["other"])));
+}
+if (self_type == "Scalar" && other_type == "Tensor") {
+  return Rcpp::wrap(cpp_torch_namespace_bitwise_or_self_Scalar_other_Tensor(Rcpp::as<XPtrTorchScalar>(args["self"]), Rcpp::as<XPtrTorchTensor>(args["other"])));
+}
+if (self_type == "Tensor" && other_type == "Tensor") {
+  return Rcpp::wrap(cpp_torch_namespace_bitwise_or_self_Tensor_other_Tensor(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchTensor>(args["other"])));
+}
+  Rcpp::stop("No matching overload for bitwise_or");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace_bitwise_or_out (Rcpp::List args) {
+  static const std::vector<std::string> out_expected = {"Tensor"};
+  static const std::vector<std::string> self_expected = {"Tensor", "Scalar"};
+  static const std::vector<std::string> other_expected = {"Tensor", "Scalar"};
+  auto out_type = cpp_arg_to_torch_type(args["out"], out_expected, "out");
+  auto self_type = cpp_arg_to_torch_type(args["self"], self_expected, "self");
+  auto other_type = cpp_arg_to_torch_type(args["other"], other_expected, "other");
+if (out_type == "Tensor" && self_type == "Tensor" && other_type == "Tensor") {
+  return Rcpp::wrap(cpp_torch_namespace_bitwise_or_out_out_Tensor_self_Tensor_other_Tensor(Rcpp::as<XPtrTorchTensor>(args["out"]), Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchTensor>(args["other"])));
+}
+if (out_type == "Tensor" && self_type == "Tensor" && other_type == "Scalar") {
+  return Rcpp::wrap(cpp_torch_namespace_bitwise_or_out_out_Tensor_self_Tensor_other_Scalar(Rcpp::as<XPtrTorchTensor>(args["out"]), Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchScalar>(args["other"])));
+}
+if (out_type == "Tensor" && self_type == "Scalar" && other_type == "Tensor") {
+  return Rcpp::wrap(cpp_torch_namespace_bitwise_or_out_out_Tensor_self_Scalar_other_Tensor(Rcpp::as<XPtrTorchTensor>(args["out"]), Rcpp::as<XPtrTorchScalar>(args["self"]), Rcpp::as<XPtrTorchTensor>(args["other"])));
+}
+  Rcpp::stop("No matching overload for bitwise_or_out");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace_bitwise_right_shift (Rcpp::List args) {
+  static const std::vector<std::string> self_expected = {"Tensor", "Scalar"};
+  static const std::vector<std::string> other_expected = {"Tensor", "Scalar"};
+  auto self_type = cpp_arg_to_torch_type(args["self"], self_expected, "self");
+  auto other_type = cpp_arg_to_torch_type(args["other"], other_expected, "other");
+if (self_type == "Tensor" && other_type == "Tensor") {
+  return Rcpp::wrap(cpp_torch_namespace_bitwise_right_shift_self_Tensor_other_Tensor(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchTensor>(args["other"])));
+}
+if (self_type == "Tensor" && other_type == "Scalar") {
+  return Rcpp::wrap(cpp_torch_namespace_bitwise_right_shift_self_Tensor_other_Scalar(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchScalar>(args["other"])));
+}
+if (self_type == "Scalar" && other_type == "Tensor") {
+  return Rcpp::wrap(cpp_torch_namespace_bitwise_right_shift_self_Scalar_other_Tensor(Rcpp::as<XPtrTorchScalar>(args["self"]), Rcpp::as<XPtrTorchTensor>(args["other"])));
+}
+  Rcpp::stop("No matching overload for bitwise_right_shift");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace_bitwise_right_shift_out (Rcpp::List args) {
+  static const std::vector<std::string> out_expected = {"Tensor"};
+  static const std::vector<std::string> self_expected = {"Tensor", "Scalar"};
+  static const std::vector<std::string> other_expected = {"Tensor", "Scalar"};
+  auto out_type = cpp_arg_to_torch_type(args["out"], out_expected, "out");
+  auto self_type = cpp_arg_to_torch_type(args["self"], self_expected, "self");
+  auto other_type = cpp_arg_to_torch_type(args["other"], other_expected, "other");
+if (out_type == "Tensor" && self_type == "Tensor" && other_type == "Tensor") {
+  return Rcpp::wrap(cpp_torch_namespace_bitwise_right_shift_out_out_Tensor_self_Tensor_other_Tensor(Rcpp::as<XPtrTorchTensor>(args["out"]), Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchTensor>(args["other"])));
+}
+if (out_type == "Tensor" && self_type == "Tensor" && other_type == "Scalar") {
+  return Rcpp::wrap(cpp_torch_namespace_bitwise_right_shift_out_out_Tensor_self_Tensor_other_Scalar(Rcpp::as<XPtrTorchTensor>(args["out"]), Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchScalar>(args["other"])));
+}
+if (out_type == "Tensor" && self_type == "Scalar" && other_type == "Tensor") {
+  return Rcpp::wrap(cpp_torch_namespace_bitwise_right_shift_out_out_Tensor_self_Scalar_other_Tensor(Rcpp::as<XPtrTorchTensor>(args["out"]), Rcpp::as<XPtrTorchScalar>(args["self"]), Rcpp::as<XPtrTorchTensor>(args["other"])));
+}
+  Rcpp::stop("No matching overload for bitwise_right_shift_out");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace_bitwise_xor (Rcpp::List args) {
+  static const std::vector<std::string> self_expected = {"Tensor", "Scalar"};
+  static const std::vector<std::string> other_expected = {"Scalar", "Tensor"};
+  auto self_type = cpp_arg_to_torch_type(args["self"], self_expected, "self");
+  auto other_type = cpp_arg_to_torch_type(args["other"], other_expected, "other");
+if (self_type == "Tensor" && other_type == "Scalar") {
+  return Rcpp::wrap(cpp_torch_namespace_bitwise_xor_self_Tensor_other_Scalar(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchScalar>(args["other"])));
+}
+if (self_type == "Scalar" && other_type == "Tensor") {
+  return Rcpp::wrap(cpp_torch_namespace_bitwise_xor_self_Scalar_other_Tensor(Rcpp::as<XPtrTorchScalar>(args["self"]), Rcpp::as<XPtrTorchTensor>(args["other"])));
+}
+if (self_type == "Tensor" && other_type == "Tensor") {
+  return Rcpp::wrap(cpp_torch_namespace_bitwise_xor_self_Tensor_other_Tensor(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchTensor>(args["other"])));
+}
+  Rcpp::stop("No matching overload for bitwise_xor");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace_bitwise_xor_out (Rcpp::List args) {
+  static const std::vector<std::string> out_expected = {"Tensor"};
+  static const std::vector<std::string> self_expected = {"Tensor", "Scalar"};
+  static const std::vector<std::string> other_expected = {"Tensor", "Scalar"};
+  auto out_type = cpp_arg_to_torch_type(args["out"], out_expected, "out");
+  auto self_type = cpp_arg_to_torch_type(args["self"], self_expected, "self");
+  auto other_type = cpp_arg_to_torch_type(args["other"], other_expected, "other");
+if (out_type == "Tensor" && self_type == "Tensor" && other_type == "Tensor") {
+  return Rcpp::wrap(cpp_torch_namespace_bitwise_xor_out_out_Tensor_self_Tensor_other_Tensor(Rcpp::as<XPtrTorchTensor>(args["out"]), Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchTensor>(args["other"])));
+}
+if (out_type == "Tensor" && self_type == "Tensor" && other_type == "Scalar") {
+  return Rcpp::wrap(cpp_torch_namespace_bitwise_xor_out_out_Tensor_self_Tensor_other_Scalar(Rcpp::as<XPtrTorchTensor>(args["out"]), Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchScalar>(args["other"])));
+}
+if (out_type == "Tensor" && self_type == "Scalar" && other_type == "Tensor") {
+  return Rcpp::wrap(cpp_torch_namespace_bitwise_xor_out_out_Tensor_self_Scalar_other_Tensor(Rcpp::as<XPtrTorchTensor>(args["out"]), Rcpp::as<XPtrTorchScalar>(args["self"]), Rcpp::as<XPtrTorchTensor>(args["other"])));
+}
+  Rcpp::stop("No matching overload for bitwise_xor_out");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace_blackman_window (Rcpp::List args) {
+  static const std::vector<std::string> window_length_expected = {"int64_t"};
+  static const std::vector<std::string> periodic_expected = {"bool"};
+  auto window_length_type = cpp_arg_to_torch_type(args["window_length"], window_length_expected, "window_length");
+  auto periodic_type = cpp_arg_to_torch_type(args["periodic"], periodic_expected, "periodic");
+if (window_length_type == "int64_t" && periodic_type == "Missing") {
+  return Rcpp::wrap(cpp_torch_namespace_blackman_window_window_length_int64_t(Rcpp::as<XPtrTorchint64_t>(args["window_length"]), Rcpp::as<XPtrTorchTensorOptions>(args["options"])));
+}
+if (window_length_type == "int64_t" && periodic_type == "bool") {
+  return Rcpp::wrap(cpp_torch_namespace_blackman_window_window_length_int64_t_periodic_bool(Rcpp::as<XPtrTorchint64_t>(args["window_length"]), Rcpp::as<XPtrTorchbool>(args["periodic"]), Rcpp::as<XPtrTorchTensorOptions>(args["options"])));
+}
+  Rcpp::stop("No matching overload for blackman_window");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace_blackman_window_out (Rcpp::List args) {
+  static const std::vector<std::string> out_expected = {"Tensor"};
+  static const std::vector<std::string> window_length_expected = {"int64_t"};
+  static const std::vector<std::string> periodic_expected = {"bool"};
+  auto out_type = cpp_arg_to_torch_type(args["out"], out_expected, "out");
+  auto window_length_type = cpp_arg_to_torch_type(args["window_length"], window_length_expected, "window_length");
+  auto periodic_type = cpp_arg_to_torch_type(args["periodic"], periodic_expected, "periodic");
+if (out_type == "Tensor" && window_length_type == "int64_t" && periodic_type == "Missing") {
+  return Rcpp::wrap(cpp_torch_namespace_blackman_window_out_out_Tensor_window_length_int64_t(Rcpp::as<XPtrTorchTensor>(args["out"]), Rcpp::as<XPtrTorchint64_t>(args["window_length"])));
+}
+if (out_type == "Tensor" && window_length_type == "int64_t" && periodic_type == "bool") {
+  return Rcpp::wrap(cpp_torch_namespace_blackman_window_out_out_Tensor_window_length_int64_t_periodic_bool(Rcpp::as<XPtrTorchTensor>(args["out"]), Rcpp::as<XPtrTorchint64_t>(args["window_length"]), Rcpp::as<XPtrTorchbool>(args["periodic"])));
+}
+  Rcpp::stop("No matching overload for blackman_window_out");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace_bmm (Rcpp::List args) {
+  static const std::vector<std::string> self_expected = {"Tensor"};
+  static const std::vector<std::string> mat2_expected = {"Tensor"};
+  static const std::vector<std::string> out_dtype_expected = {"ScalarType"};
+  auto self_type = cpp_arg_to_torch_type(args["self"], self_expected, "self");
+  auto mat2_type = cpp_arg_to_torch_type(args["mat2"], mat2_expected, "mat2");
+  auto out_dtype_type = cpp_arg_to_torch_type(args["out_dtype"], out_dtype_expected, "out_dtype");
+if (self_type == "Tensor" && mat2_type == "Tensor" && out_dtype_type == "Missing") {
+  return Rcpp::wrap(cpp_torch_namespace_bmm_self_Tensor_mat2_Tensor(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchTensor>(args["mat2"])));
+}
+if (self_type == "Tensor" && mat2_type == "Tensor" && out_dtype_type == "ScalarType") {
+  return Rcpp::wrap(cpp_torch_namespace_bmm_self_Tensor_mat2_Tensor_out_dtype_ScalarType(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchTensor>(args["mat2"]), Rcpp::as<XPtrTorchDtype>(args["out_dtype"])));
+}
+  Rcpp::stop("No matching overload for bmm");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace_bmm_out (Rcpp::List args) {
+  static const std::vector<std::string> out_expected = {"Tensor"};
+  static const std::vector<std::string> self_expected = {"Tensor"};
+  static const std::vector<std::string> mat2_expected = {"Tensor"};
+  static const std::vector<std::string> out_dtype_expected = {"ScalarType"};
+  auto out_type = cpp_arg_to_torch_type(args["out"], out_expected, "out");
+  auto self_type = cpp_arg_to_torch_type(args["self"], self_expected, "self");
+  auto mat2_type = cpp_arg_to_torch_type(args["mat2"], mat2_expected, "mat2");
+  auto out_dtype_type = cpp_arg_to_torch_type(args["out_dtype"], out_dtype_expected, "out_dtype");
+if (out_type == "Tensor" && self_type == "Tensor" && mat2_type == "Tensor" && out_dtype_type == "Missing") {
+  return Rcpp::wrap(cpp_torch_namespace_bmm_out_out_Tensor_self_Tensor_mat2_Tensor(Rcpp::as<XPtrTorchTensor>(args["out"]), Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchTensor>(args["mat2"])));
+}
+if (out_type == "Tensor" && self_type == "Tensor" && mat2_type == "Tensor" && out_dtype_type == "ScalarType") {
+  return Rcpp::wrap(cpp_torch_namespace_bmm_out_out_Tensor_self_Tensor_mat2_Tensor_out_dtype_ScalarType(Rcpp::as<XPtrTorchTensor>(args["out"]), Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchTensor>(args["mat2"]), Rcpp::as<XPtrTorchDtype>(args["out_dtype"])));
+}
+  Rcpp::stop("No matching overload for bmm_out");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace_clamp (Rcpp::List args) {
+  static const std::vector<std::string> self_expected = {"Tensor"};
+  static const std::vector<std::string> min_expected = {"Scalar", "Tensor"};
+  static const std::vector<std::string> max_expected = {"Scalar", "Tensor"};
+  auto self_type = cpp_arg_to_torch_type(args["self"], self_expected, "self");
+  auto min_type = cpp_arg_to_torch_type(args["min"], min_expected, "min");
+  auto max_type = cpp_arg_to_torch_type(args["max"], max_expected, "max");
+if (self_type == "Tensor" && min_type == "Scalar" && max_type == "Scalar") {
+  return Rcpp::wrap(cpp_torch_namespace_clamp_self_Tensor_min_Scalar_max_Scalar(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchoptional_scalar>(args["min"]), Rcpp::as<XPtrTorchoptional_scalar>(args["max"])));
+}
+if (self_type == "Tensor" && min_type == "Tensor" && max_type == "Tensor") {
+  return Rcpp::wrap(cpp_torch_namespace_clamp_self_Tensor_min_Tensor_max_Tensor(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchOptionalTensor>(args["min"]), Rcpp::as<XPtrTorchOptionalTensor>(args["max"])));
+}
+  Rcpp::stop("No matching overload for clamp");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace_clamp_ (Rcpp::List args) {
+  static const std::vector<std::string> self_expected = {"Tensor"};
+  static const std::vector<std::string> min_expected = {"Scalar", "Tensor"};
+  static const std::vector<std::string> max_expected = {"Scalar", "Tensor"};
+  auto self_type = cpp_arg_to_torch_type(args["self"], self_expected, "self");
+  auto min_type = cpp_arg_to_torch_type(args["min"], min_expected, "min");
+  auto max_type = cpp_arg_to_torch_type(args["max"], max_expected, "max");
+if (self_type == "Tensor" && min_type == "Scalar" && max_type == "Scalar") {
+  return Rcpp::wrap(cpp_torch_namespace_clamp__self_Tensor_min_Scalar_max_Scalar(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchoptional_scalar>(args["min"]), Rcpp::as<XPtrTorchoptional_scalar>(args["max"])));
+}
+if (self_type == "Tensor" && min_type == "Tensor" && max_type == "Tensor") {
+  return Rcpp::wrap(cpp_torch_namespace_clamp__self_Tensor_min_Tensor_max_Tensor(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchOptionalTensor>(args["min"]), Rcpp::as<XPtrTorchOptionalTensor>(args["max"])));
+}
+  Rcpp::stop("No matching overload for clamp_");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace_clamp_out (Rcpp::List args) {
+  static const std::vector<std::string> out_expected = {"Tensor"};
+  static const std::vector<std::string> self_expected = {"Tensor"};
+  static const std::vector<std::string> min_expected = {"Scalar", "Tensor"};
+  static const std::vector<std::string> max_expected = {"Scalar", "Tensor"};
+  auto out_type = cpp_arg_to_torch_type(args["out"], out_expected, "out");
+  auto self_type = cpp_arg_to_torch_type(args["self"], self_expected, "self");
+  auto min_type = cpp_arg_to_torch_type(args["min"], min_expected, "min");
+  auto max_type = cpp_arg_to_torch_type(args["max"], max_expected, "max");
+if (out_type == "Tensor" && self_type == "Tensor" && min_type == "Scalar" && max_type == "Scalar") {
+  return Rcpp::wrap(cpp_torch_namespace_clamp_out_out_Tensor_self_Tensor_min_Scalar_max_Scalar(Rcpp::as<XPtrTorchTensor>(args["out"]), Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchoptional_scalar>(args["min"]), Rcpp::as<XPtrTorchoptional_scalar>(args["max"])));
+}
+if (out_type == "Tensor" && self_type == "Tensor" && min_type == "Tensor" && max_type == "Tensor") {
+  return Rcpp::wrap(cpp_torch_namespace_clamp_out_out_Tensor_self_Tensor_min_Tensor_max_Tensor(Rcpp::as<XPtrTorchTensor>(args["out"]), Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchOptionalTensor>(args["min"]), Rcpp::as<XPtrTorchOptionalTensor>(args["max"])));
+}
+  Rcpp::stop("No matching overload for clamp_out");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace_clip (Rcpp::List args) {
+  static const std::vector<std::string> self_expected = {"Tensor"};
+  static const std::vector<std::string> min_expected = {"Scalar", "Tensor"};
+  static const std::vector<std::string> max_expected = {"Scalar", "Tensor"};
+  auto self_type = cpp_arg_to_torch_type(args["self"], self_expected, "self");
+  auto min_type = cpp_arg_to_torch_type(args["min"], min_expected, "min");
+  auto max_type = cpp_arg_to_torch_type(args["max"], max_expected, "max");
+if (self_type == "Tensor" && min_type == "Scalar" && max_type == "Scalar") {
+  return Rcpp::wrap(cpp_torch_namespace_clip_self_Tensor_min_Scalar_max_Scalar(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchoptional_scalar>(args["min"]), Rcpp::as<XPtrTorchoptional_scalar>(args["max"])));
+}
+if (self_type == "Tensor" && min_type == "Tensor" && max_type == "Tensor") {
+  return Rcpp::wrap(cpp_torch_namespace_clip_self_Tensor_min_Tensor_max_Tensor(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchOptionalTensor>(args["min"]), Rcpp::as<XPtrTorchOptionalTensor>(args["max"])));
+}
+  Rcpp::stop("No matching overload for clip");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace_clip_ (Rcpp::List args) {
+  static const std::vector<std::string> self_expected = {"Tensor"};
+  static const std::vector<std::string> min_expected = {"Scalar", "Tensor"};
+  static const std::vector<std::string> max_expected = {"Scalar", "Tensor"};
+  auto self_type = cpp_arg_to_torch_type(args["self"], self_expected, "self");
+  auto min_type = cpp_arg_to_torch_type(args["min"], min_expected, "min");
+  auto max_type = cpp_arg_to_torch_type(args["max"], max_expected, "max");
+if (self_type == "Tensor" && min_type == "Scalar" && max_type == "Scalar") {
+  return Rcpp::wrap(cpp_torch_namespace_clip__self_Tensor_min_Scalar_max_Scalar(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchoptional_scalar>(args["min"]), Rcpp::as<XPtrTorchoptional_scalar>(args["max"])));
+}
+if (self_type == "Tensor" && min_type == "Tensor" && max_type == "Tensor") {
+  return Rcpp::wrap(cpp_torch_namespace_clip__self_Tensor_min_Tensor_max_Tensor(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchOptionalTensor>(args["min"]), Rcpp::as<XPtrTorchOptionalTensor>(args["max"])));
+}
+  Rcpp::stop("No matching overload for clip_");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace_clip_out (Rcpp::List args) {
+  static const std::vector<std::string> out_expected = {"Tensor"};
+  static const std::vector<std::string> self_expected = {"Tensor"};
+  static const std::vector<std::string> min_expected = {"Scalar", "Tensor"};
+  static const std::vector<std::string> max_expected = {"Scalar", "Tensor"};
+  auto out_type = cpp_arg_to_torch_type(args["out"], out_expected, "out");
+  auto self_type = cpp_arg_to_torch_type(args["self"], self_expected, "self");
+  auto min_type = cpp_arg_to_torch_type(args["min"], min_expected, "min");
+  auto max_type = cpp_arg_to_torch_type(args["max"], max_expected, "max");
+if (out_type == "Tensor" && self_type == "Tensor" && min_type == "Scalar" && max_type == "Scalar") {
+  return Rcpp::wrap(cpp_torch_namespace_clip_out_out_Tensor_self_Tensor_min_Scalar_max_Scalar(Rcpp::as<XPtrTorchTensor>(args["out"]), Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchoptional_scalar>(args["min"]), Rcpp::as<XPtrTorchoptional_scalar>(args["max"])));
+}
+if (out_type == "Tensor" && self_type == "Tensor" && min_type == "Tensor" && max_type == "Tensor") {
+  return Rcpp::wrap(cpp_torch_namespace_clip_out_out_Tensor_self_Tensor_min_Tensor_max_Tensor(Rcpp::as<XPtrTorchTensor>(args["out"]), Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchOptionalTensor>(args["min"]), Rcpp::as<XPtrTorchOptionalTensor>(args["max"])));
+}
+  Rcpp::stop("No matching overload for clip_out");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace_conv1d (Rcpp::List args) {
+  static const std::vector<std::string> input_expected = {"Tensor"};
+  static const std::vector<std::string> weight_expected = {"Tensor"};
+  static const std::vector<std::string> padding_expected = {"IntArrayRef", "c10::string_view"};
+  auto input_type = cpp_arg_to_torch_type(args["input"], input_expected, "input");
+  auto weight_type = cpp_arg_to_torch_type(args["weight"], weight_expected, "weight");
+  auto padding_type = cpp_arg_to_torch_type(args["padding"], padding_expected, "padding");
+if (input_type == "Tensor" && weight_type == "Tensor" && padding_type == "IntArrayRef") {
+  return Rcpp::wrap(cpp_torch_namespace_conv1d_input_Tensor_weight_Tensor_padding_IntArrayRef(Rcpp::as<XPtrTorchTensor>(args["input"]), Rcpp::as<XPtrTorchTensor>(args["weight"]), Rcpp::as<XPtrTorchOptionalTensor>(args["bias"]), Rcpp::as<XPtrTorchIntArrayRef>(args["stride"]), Rcpp::as<XPtrTorchIntArrayRef>(args["padding"]), Rcpp::as<XPtrTorchIntArrayRef>(args["dilation"]), Rcpp::as<XPtrTorchint64_t>(args["groups"])));
+}
+if (input_type == "Tensor" && weight_type == "Tensor" && padding_type == "c10::string_view") {
+  return Rcpp::wrap(cpp_torch_namespace_conv1d_input_Tensor_weight_Tensor_padding_c10string_view(Rcpp::as<XPtrTorchTensor>(args["input"]), Rcpp::as<XPtrTorchTensor>(args["weight"]), Rcpp::as<XPtrTorchOptionalTensor>(args["bias"]), Rcpp::as<XPtrTorchIntArrayRef>(args["stride"]), Rcpp::as<XPtrTorchstring_view>(args["padding"]), Rcpp::as<XPtrTorchIntArrayRef>(args["dilation"]), Rcpp::as<XPtrTorchint64_t>(args["groups"])));
+}
+  Rcpp::stop("No matching overload for conv1d");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace_conv2d (Rcpp::List args) {
+  static const std::vector<std::string> input_expected = {"Tensor"};
+  static const std::vector<std::string> weight_expected = {"Tensor"};
+  static const std::vector<std::string> padding_expected = {"IntArrayRef", "c10::string_view"};
+  auto input_type = cpp_arg_to_torch_type(args["input"], input_expected, "input");
+  auto weight_type = cpp_arg_to_torch_type(args["weight"], weight_expected, "weight");
+  auto padding_type = cpp_arg_to_torch_type(args["padding"], padding_expected, "padding");
+if (input_type == "Tensor" && weight_type == "Tensor" && padding_type == "IntArrayRef") {
+  return Rcpp::wrap(cpp_torch_namespace_conv2d_input_Tensor_weight_Tensor_padding_IntArrayRef(Rcpp::as<XPtrTorchTensor>(args["input"]), Rcpp::as<XPtrTorchTensor>(args["weight"]), Rcpp::as<XPtrTorchOptionalTensor>(args["bias"]), Rcpp::as<XPtrTorchIntArrayRef>(args["stride"]), Rcpp::as<XPtrTorchIntArrayRef>(args["padding"]), Rcpp::as<XPtrTorchIntArrayRef>(args["dilation"]), Rcpp::as<XPtrTorchint64_t>(args["groups"])));
+}
+if (input_type == "Tensor" && weight_type == "Tensor" && padding_type == "c10::string_view") {
+  return Rcpp::wrap(cpp_torch_namespace_conv2d_input_Tensor_weight_Tensor_padding_c10string_view(Rcpp::as<XPtrTorchTensor>(args["input"]), Rcpp::as<XPtrTorchTensor>(args["weight"]), Rcpp::as<XPtrTorchOptionalTensor>(args["bias"]), Rcpp::as<XPtrTorchIntArrayRef>(args["stride"]), Rcpp::as<XPtrTorchstring_view>(args["padding"]), Rcpp::as<XPtrTorchIntArrayRef>(args["dilation"]), Rcpp::as<XPtrTorchint64_t>(args["groups"])));
+}
+  Rcpp::stop("No matching overload for conv2d");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace_conv3d (Rcpp::List args) {
+  static const std::vector<std::string> input_expected = {"Tensor"};
+  static const std::vector<std::string> weight_expected = {"Tensor"};
+  static const std::vector<std::string> padding_expected = {"IntArrayRef", "c10::string_view"};
+  auto input_type = cpp_arg_to_torch_type(args["input"], input_expected, "input");
+  auto weight_type = cpp_arg_to_torch_type(args["weight"], weight_expected, "weight");
+  auto padding_type = cpp_arg_to_torch_type(args["padding"], padding_expected, "padding");
+if (input_type == "Tensor" && weight_type == "Tensor" && padding_type == "IntArrayRef") {
+  return Rcpp::wrap(cpp_torch_namespace_conv3d_input_Tensor_weight_Tensor_padding_IntArrayRef(Rcpp::as<XPtrTorchTensor>(args["input"]), Rcpp::as<XPtrTorchTensor>(args["weight"]), Rcpp::as<XPtrTorchOptionalTensor>(args["bias"]), Rcpp::as<XPtrTorchIntArrayRef>(args["stride"]), Rcpp::as<XPtrTorchIntArrayRef>(args["padding"]), Rcpp::as<XPtrTorchIntArrayRef>(args["dilation"]), Rcpp::as<XPtrTorchint64_t>(args["groups"])));
+}
+if (input_type == "Tensor" && weight_type == "Tensor" && padding_type == "c10::string_view") {
+  return Rcpp::wrap(cpp_torch_namespace_conv3d_input_Tensor_weight_Tensor_padding_c10string_view(Rcpp::as<XPtrTorchTensor>(args["input"]), Rcpp::as<XPtrTorchTensor>(args["weight"]), Rcpp::as<XPtrTorchOptionalTensor>(args["bias"]), Rcpp::as<XPtrTorchIntArrayRef>(args["stride"]), Rcpp::as<XPtrTorchstring_view>(args["padding"]), Rcpp::as<XPtrTorchIntArrayRef>(args["dilation"]), Rcpp::as<XPtrTorchint64_t>(args["groups"])));
+}
+  Rcpp::stop("No matching overload for conv3d");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace_count_nonzero (Rcpp::List args) {
+  static const std::vector<std::string> self_expected = {"Tensor"};
+  static const std::vector<std::string> dim_expected = {"IntArrayRef", "int64_t"};
+  auto self_type = cpp_arg_to_torch_type(args["self"], self_expected, "self");
+  auto dim_type = cpp_arg_to_torch_type(args["dim"], dim_expected, "dim");
+if (self_type == "Tensor" && dim_type == "IntArrayRef") {
+  return Rcpp::wrap(cpp_torch_namespace_count_nonzero_self_Tensor_dim_IntArrayRef(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchIndexIntArrayRef>(args["dim"])));
+}
+if (self_type == "Tensor" && dim_type == "int64_t") {
+  return Rcpp::wrap(cpp_torch_namespace_count_nonzero_self_Tensor_dim_int64_t(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchoptional_index_int64_t>(args["dim"])));
+}
+  Rcpp::stop("No matching overload for count_nonzero");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace_count_nonzero_out (Rcpp::List args) {
+  static const std::vector<std::string> out_expected = {"Tensor"};
+  static const std::vector<std::string> self_expected = {"Tensor"};
+  static const std::vector<std::string> dim_expected = {"IntArrayRef", "int64_t"};
+  auto out_type = cpp_arg_to_torch_type(args["out"], out_expected, "out");
+  auto self_type = cpp_arg_to_torch_type(args["self"], self_expected, "self");
+  auto dim_type = cpp_arg_to_torch_type(args["dim"], dim_expected, "dim");
+if (out_type == "Tensor" && self_type == "Tensor" && dim_type == "IntArrayRef") {
+  return Rcpp::wrap(cpp_torch_namespace_count_nonzero_out_out_Tensor_self_Tensor_dim_IntArrayRef(Rcpp::as<XPtrTorchTensor>(args["out"]), Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchIndexIntArrayRef>(args["dim"])));
+}
+if (out_type == "Tensor" && self_type == "Tensor" && dim_type == "int64_t") {
+  return Rcpp::wrap(cpp_torch_namespace_count_nonzero_out_out_Tensor_self_Tensor_dim_int64_t(Rcpp::as<XPtrTorchTensor>(args["out"]), Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchoptional_index_int64_t>(args["dim"])));
+}
+  Rcpp::stop("No matching overload for count_nonzero_out");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace_ctc_loss (Rcpp::List args) {
+  static const std::vector<std::string> log_probs_expected = {"Tensor"};
+  static const std::vector<std::string> targets_expected = {"Tensor"};
+  static const std::vector<std::string> input_lengths_expected = {"IntArrayRef", "Tensor"};
+  static const std::vector<std::string> target_lengths_expected = {"IntArrayRef", "Tensor"};
+  auto log_probs_type = cpp_arg_to_torch_type(args["log_probs"], log_probs_expected, "log_probs");
+  auto targets_type = cpp_arg_to_torch_type(args["targets"], targets_expected, "targets");
+  auto input_lengths_type = cpp_arg_to_torch_type(args["input_lengths"], input_lengths_expected, "input_lengths");
+  auto target_lengths_type = cpp_arg_to_torch_type(args["target_lengths"], target_lengths_expected, "target_lengths");
+if (log_probs_type == "Tensor" && targets_type == "Tensor" && input_lengths_type == "IntArrayRef" && target_lengths_type == "IntArrayRef") {
+  return Rcpp::wrap(cpp_torch_namespace_ctc_loss_log_probs_Tensor_targets_Tensor_input_lengths_IntArrayRef_target_lengths_IntArrayRef(Rcpp::as<XPtrTorchTensor>(args["log_probs"]), Rcpp::as<XPtrTorchTensor>(args["targets"]), Rcpp::as<XPtrTorchIntArrayRef>(args["input_lengths"]), Rcpp::as<XPtrTorchIntArrayRef>(args["target_lengths"]), Rcpp::as<XPtrTorchint64_t>(args["blank"]), Rcpp::as<XPtrTorchint64_t>(args["reduction"]), Rcpp::as<XPtrTorchbool>(args["zero_infinity"])));
+}
+if (log_probs_type == "Tensor" && targets_type == "Tensor" && input_lengths_type == "Tensor" && target_lengths_type == "Tensor") {
+  return Rcpp::wrap(cpp_torch_namespace_ctc_loss_log_probs_Tensor_targets_Tensor_input_lengths_Tensor_target_lengths_Tensor(Rcpp::as<XPtrTorchTensor>(args["log_probs"]), Rcpp::as<XPtrTorchTensor>(args["targets"]), Rcpp::as<XPtrTorchTensor>(args["input_lengths"]), Rcpp::as<XPtrTorchTensor>(args["target_lengths"]), Rcpp::as<XPtrTorchint64_t>(args["blank"]), Rcpp::as<XPtrTorchint64_t>(args["reduction"]), Rcpp::as<XPtrTorchbool>(args["zero_infinity"])));
+}
+  Rcpp::stop("No matching overload for ctc_loss");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace_cumulative_trapezoid (Rcpp::List args) {
+  static const std::vector<std::string> y_expected = {"Tensor"};
+  static const std::vector<std::string> x_expected = {"Tensor"};
+  auto y_type = cpp_arg_to_torch_type(args["y"], y_expected, "y");
+  auto x_type = cpp_arg_to_torch_type(args["x"], x_expected, "x");
+if (y_type == "Tensor" && x_type == "Tensor") {
+  return Rcpp::wrap(cpp_torch_namespace_cumulative_trapezoid_y_Tensor_x_Tensor(Rcpp::as<XPtrTorchTensor>(args["y"]), Rcpp::as<XPtrTorchTensor>(args["x"]), Rcpp::as<XPtrTorchindex_int64_t>(args["dim"])));
+}
+if (y_type == "Tensor" && x_type == "Missing") {
+  return Rcpp::wrap(cpp_torch_namespace_cumulative_trapezoid_y_Tensor(Rcpp::as<XPtrTorchTensor>(args["y"]), Rcpp::as<XPtrTorchScalar>(args["dx"]), Rcpp::as<XPtrTorchindex_int64_t>(args["dim"])));
+}
+  Rcpp::stop("No matching overload for cumulative_trapezoid");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace_dequantize (Rcpp::List args) {
+  static const std::vector<std::string> self_expected = {"Tensor"};
+  static const std::vector<std::string> tensors_expected = {"TensorList"};
+  auto self_type = cpp_arg_to_torch_type(args["self"], self_expected, "self");
+  auto tensors_type = cpp_arg_to_torch_type(args["tensors"], tensors_expected, "tensors");
+if (self_type == "Tensor" && tensors_type == "Missing") {
+  return Rcpp::wrap(cpp_torch_namespace_dequantize_self_Tensor(Rcpp::as<XPtrTorchTensor>(args["self"])));
+}
+if (self_type == "Missing" && tensors_type == "TensorList") {
+  return Rcpp::wrap(cpp_torch_namespace_dequantize_tensors_TensorList(Rcpp::as<XPtrTorchTensorList>(args["tensors"])));
+}
+  Rcpp::stop("No matching overload for dequantize");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace_diagonal (Rcpp::List args) {
+  static const std::vector<std::string> self_expected = {"Tensor"};
+  static const std::vector<std::string> outdim_expected = {"Dimname"};
+  static const std::vector<std::string> dim1_expected = {"int64_t", "Dimname"};
+  static const std::vector<std::string> dim2_expected = {"int64_t", "Dimname"};
+  auto self_type = cpp_arg_to_torch_type(args["self"], self_expected, "self");
+  auto outdim_type = cpp_arg_to_torch_type(args["outdim"], outdim_expected, "outdim");
+  auto dim1_type = cpp_arg_to_torch_type(args["dim1"], dim1_expected, "dim1");
+  auto dim2_type = cpp_arg_to_torch_type(args["dim2"], dim2_expected, "dim2");
+if (self_type == "Tensor" && outdim_type == "Missing" && dim1_type == "int64_t" && dim2_type == "int64_t") {
+  return Rcpp::wrap(cpp_torch_namespace_diagonal_self_Tensor_dim1_int64_t_dim2_int64_t(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchint64_t>(args["offset"]), Rcpp::as<XPtrTorchindex_int64_t>(args["dim1"]), Rcpp::as<XPtrTorchindex_int64_t>(args["dim2"])));
+}
+if (self_type == "Tensor" && outdim_type == "Dimname" && dim1_type == "Dimname" && dim2_type == "Dimname") {
+  return Rcpp::wrap(cpp_torch_namespace_diagonal_self_Tensor_outdim_Dimname_dim1_Dimname_dim2_Dimname(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchDimname>(args["outdim"]), Rcpp::as<XPtrTorchDimname>(args["dim1"]), Rcpp::as<XPtrTorchDimname>(args["dim2"]), Rcpp::as<XPtrTorchint64_t>(args["offset"])));
+}
+  Rcpp::stop("No matching overload for diagonal");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace_div (Rcpp::List args) {
+  static const std::vector<std::string> self_expected = {"Tensor"};
+  static const std::vector<std::string> other_expected = {"Tensor", "Scalar"};
+  static const std::vector<std::string> rounding_mode_expected = {"c10::string_view"};
+  auto self_type = cpp_arg_to_torch_type(args["self"], self_expected, "self");
+  auto other_type = cpp_arg_to_torch_type(args["other"], other_expected, "other");
+  auto rounding_mode_type = cpp_arg_to_torch_type(args["rounding_mode"], rounding_mode_expected, "rounding_mode");
+if (self_type == "Tensor" && other_type == "Tensor" && rounding_mode_type == "Missing") {
+  return Rcpp::wrap(cpp_torch_namespace_div_self_Tensor_other_Tensor(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchTensor>(args["other"])));
+}
+if (self_type == "Tensor" && other_type == "Tensor" && rounding_mode_type == "c10::string_view") {
+  return Rcpp::wrap(cpp_torch_namespace_div_self_Tensor_other_Tensor_rounding_mode_c10string_view(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchTensor>(args["other"]), Rcpp::as<XPtrTorchoptional_string_view>(args["rounding_mode"])));
+}
+if (self_type == "Tensor" && other_type == "Scalar" && rounding_mode_type == "Missing") {
+  return Rcpp::wrap(cpp_torch_namespace_div_self_Tensor_other_Scalar(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchScalar>(args["other"])));
+}
+if (self_type == "Tensor" && other_type == "Scalar" && rounding_mode_type == "c10::string_view") {
+  return Rcpp::wrap(cpp_torch_namespace_div_self_Tensor_other_Scalar_rounding_mode_c10string_view(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchScalar>(args["other"]), Rcpp::as<XPtrTorchoptional_string_view>(args["rounding_mode"])));
+}
+  Rcpp::stop("No matching overload for div");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace_div_out (Rcpp::List args) {
+  static const std::vector<std::string> out_expected = {"Tensor"};
+  static const std::vector<std::string> self_expected = {"Tensor"};
+  static const std::vector<std::string> other_expected = {"Tensor", "Scalar"};
+  static const std::vector<std::string> rounding_mode_expected = {"c10::string_view"};
+  auto out_type = cpp_arg_to_torch_type(args["out"], out_expected, "out");
+  auto self_type = cpp_arg_to_torch_type(args["self"], self_expected, "self");
+  auto other_type = cpp_arg_to_torch_type(args["other"], other_expected, "other");
+  auto rounding_mode_type = cpp_arg_to_torch_type(args["rounding_mode"], rounding_mode_expected, "rounding_mode");
+if (out_type == "Tensor" && self_type == "Tensor" && other_type == "Tensor" && rounding_mode_type == "Missing") {
+  return Rcpp::wrap(cpp_torch_namespace_div_out_out_Tensor_self_Tensor_other_Tensor(Rcpp::as<XPtrTorchTensor>(args["out"]), Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchTensor>(args["other"])));
+}
+if (out_type == "Tensor" && self_type == "Tensor" && other_type == "Tensor" && rounding_mode_type == "c10::string_view") {
+  return Rcpp::wrap(cpp_torch_namespace_div_out_out_Tensor_self_Tensor_other_Tensor_rounding_mode_c10string_view(Rcpp::as<XPtrTorchTensor>(args["out"]), Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchTensor>(args["other"]), Rcpp::as<XPtrTorchoptional_string_view>(args["rounding_mode"])));
+}
+if (out_type == "Tensor" && self_type == "Tensor" && other_type == "Scalar" && rounding_mode_type == "Missing") {
+  return Rcpp::wrap(cpp_torch_namespace_div_out_out_Tensor_self_Tensor_other_Scalar(Rcpp::as<XPtrTorchTensor>(args["out"]), Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchScalar>(args["other"])));
+}
+if (out_type == "Tensor" && self_type == "Tensor" && other_type == "Scalar" && rounding_mode_type == "c10::string_view") {
+  return Rcpp::wrap(cpp_torch_namespace_div_out_out_Tensor_self_Tensor_other_Scalar_rounding_mode_c10string_view(Rcpp::as<XPtrTorchTensor>(args["out"]), Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchScalar>(args["other"]), Rcpp::as<XPtrTorchoptional_string_view>(args["rounding_mode"])));
+}
+  Rcpp::stop("No matching overload for div_out");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace_divide (Rcpp::List args) {
+  static const std::vector<std::string> self_expected = {"Tensor"};
+  static const std::vector<std::string> other_expected = {"Tensor", "Scalar"};
+  static const std::vector<std::string> rounding_mode_expected = {"c10::string_view"};
+  auto self_type = cpp_arg_to_torch_type(args["self"], self_expected, "self");
+  auto other_type = cpp_arg_to_torch_type(args["other"], other_expected, "other");
+  auto rounding_mode_type = cpp_arg_to_torch_type(args["rounding_mode"], rounding_mode_expected, "rounding_mode");
+if (self_type == "Tensor" && other_type == "Tensor" && rounding_mode_type == "Missing") {
+  return Rcpp::wrap(cpp_torch_namespace_divide_self_Tensor_other_Tensor(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchTensor>(args["other"])));
+}
+if (self_type == "Tensor" && other_type == "Scalar" && rounding_mode_type == "Missing") {
+  return Rcpp::wrap(cpp_torch_namespace_divide_self_Tensor_other_Scalar(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchScalar>(args["other"])));
+}
+if (self_type == "Tensor" && other_type == "Tensor" && rounding_mode_type == "c10::string_view") {
+  return Rcpp::wrap(cpp_torch_namespace_divide_self_Tensor_other_Tensor_rounding_mode_c10string_view(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchTensor>(args["other"]), Rcpp::as<XPtrTorchoptional_string_view>(args["rounding_mode"])));
+}
+if (self_type == "Tensor" && other_type == "Scalar" && rounding_mode_type == "c10::string_view") {
+  return Rcpp::wrap(cpp_torch_namespace_divide_self_Tensor_other_Scalar_rounding_mode_c10string_view(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchScalar>(args["other"]), Rcpp::as<XPtrTorchoptional_string_view>(args["rounding_mode"])));
+}
+  Rcpp::stop("No matching overload for divide");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace_divide_out (Rcpp::List args) {
+  static const std::vector<std::string> out_expected = {"Tensor"};
+  static const std::vector<std::string> self_expected = {"Tensor"};
+  static const std::vector<std::string> other_expected = {"Tensor"};
+  static const std::vector<std::string> rounding_mode_expected = {"c10::string_view"};
+  auto out_type = cpp_arg_to_torch_type(args["out"], out_expected, "out");
+  auto self_type = cpp_arg_to_torch_type(args["self"], self_expected, "self");
+  auto other_type = cpp_arg_to_torch_type(args["other"], other_expected, "other");
+  auto rounding_mode_type = cpp_arg_to_torch_type(args["rounding_mode"], rounding_mode_expected, "rounding_mode");
+if (out_type == "Tensor" && self_type == "Tensor" && other_type == "Tensor" && rounding_mode_type == "Missing") {
+  return Rcpp::wrap(cpp_torch_namespace_divide_out_out_Tensor_self_Tensor_other_Tensor(Rcpp::as<XPtrTorchTensor>(args["out"]), Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchTensor>(args["other"])));
+}
+if (out_type == "Tensor" && self_type == "Tensor" && other_type == "Tensor" && rounding_mode_type == "c10::string_view") {
+  return Rcpp::wrap(cpp_torch_namespace_divide_out_out_Tensor_self_Tensor_other_Tensor_rounding_mode_c10string_view(Rcpp::as<XPtrTorchTensor>(args["out"]), Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchTensor>(args["other"]), Rcpp::as<XPtrTorchoptional_string_view>(args["rounding_mode"])));
+}
+  Rcpp::stop("No matching overload for divide_out");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace_dsplit (Rcpp::List args) {
+  static const std::vector<std::string> self_expected = {"Tensor"};
+  static const std::vector<std::string> indices_expected = {"IntArrayRef"};
+  static const std::vector<std::string> sections_expected = {"int64_t"};
+  auto self_type = cpp_arg_to_torch_type(args["self"], self_expected, "self");
+  auto indices_type = cpp_arg_to_torch_type(args["indices"], indices_expected, "indices");
+  auto sections_type = cpp_arg_to_torch_type(args["sections"], sections_expected, "sections");
+if (self_type == "Tensor" && indices_type == "Missing" && sections_type == "int64_t") {
+  return Rcpp::wrap(cpp_torch_namespace_dsplit_self_Tensor_sections_int64_t(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchint64_t>(args["sections"])));
+}
+if (self_type == "Tensor" && indices_type == "IntArrayRef" && sections_type == "Missing") {
+  return Rcpp::wrap(cpp_torch_namespace_dsplit_self_Tensor_indices_IntArrayRef(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchIntArrayRef>(args["indices"])));
+}
+  Rcpp::stop("No matching overload for dsplit");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace_embedding_bag (Rcpp::List args) {
+  static const std::vector<std::string> weight_expected = {"Tensor"};
+  static const std::vector<std::string> indices_expected = {"Tensor"};
+  static const std::vector<std::string> offsets_expected = {"Tensor"};
+  static const std::vector<std::string> scale_grad_by_freq_expected = {"bool"};
+  static const std::vector<std::string> mode_expected = {"int64_t"};
+  static const std::vector<std::string> sparse_expected = {"bool"};
+  static const std::vector<std::string> per_sample_weights_expected = {"Tensor"};
+  static const std::vector<std::string> include_last_offset_expected = {"bool"};
+  static const std::vector<std::string> padding_idx_expected = {"int64_t"};
+  auto weight_type = cpp_arg_to_torch_type(args["weight"], weight_expected, "weight");
+  auto indices_type = cpp_arg_to_torch_type(args["indices"], indices_expected, "indices");
+  auto offsets_type = cpp_arg_to_torch_type(args["offsets"], offsets_expected, "offsets");
+  auto scale_grad_by_freq_type = cpp_arg_to_torch_type(args["scale_grad_by_freq"], scale_grad_by_freq_expected, "scale_grad_by_freq");
+  auto mode_type = cpp_arg_to_torch_type(args["mode"], mode_expected, "mode");
+  auto sparse_type = cpp_arg_to_torch_type(args["sparse"], sparse_expected, "sparse");
+  auto per_sample_weights_type = cpp_arg_to_torch_type(args["per_sample_weights"], per_sample_weights_expected, "per_sample_weights");
+  auto include_last_offset_type = cpp_arg_to_torch_type(args["include_last_offset"], include_last_offset_expected, "include_last_offset");
+  auto padding_idx_type = cpp_arg_to_torch_type(args["padding_idx"], padding_idx_expected, "padding_idx");
+if (weight_type == "Tensor" && indices_type == "Tensor" && offsets_type == "Tensor" && scale_grad_by_freq_type == "bool" && mode_type == "int64_t" && sparse_type == "bool" && per_sample_weights_type == "Tensor" && include_last_offset_type == "bool" && padding_idx_type == "Missing") {
+  return Rcpp::wrap(cpp_torch_namespace_embedding_bag_weight_Tensor_indices_Tensor_offsets_Tensor_scale_grad_by_freq_bool_mode_int64_t_sparse_bool_per_sample_weights_Tensor_include_last_offset_bool(Rcpp::as<XPtrTorchTensor>(args["weight"]), Rcpp::as<XPtrTorchIndexTensor>(args["indices"]), Rcpp::as<XPtrTorchTensor>(args["offsets"]), Rcpp::as<XPtrTorchbool>(args["scale_grad_by_freq"]), Rcpp::as<XPtrTorchint64_t>(args["mode"]), Rcpp::as<XPtrTorchbool>(args["sparse"]), Rcpp::as<XPtrTorchOptionalTensor>(args["per_sample_weights"]), Rcpp::as<XPtrTorchbool>(args["include_last_offset"])));
+}
+if (weight_type == "Tensor" && indices_type == "Tensor" && offsets_type == "Tensor" && scale_grad_by_freq_type == "bool" && mode_type == "int64_t" && sparse_type == "bool" && per_sample_weights_type == "Tensor" && include_last_offset_type == "bool" && padding_idx_type == "int64_t") {
+  return Rcpp::wrap(cpp_torch_namespace_embedding_bag_weight_Tensor_indices_Tensor_offsets_Tensor_scale_grad_by_freq_bool_mode_int64_t_sparse_bool_per_sample_weights_Tensor_include_last_offset_bool_padding_idx_int64_t(Rcpp::as<XPtrTorchTensor>(args["weight"]), Rcpp::as<XPtrTorchIndexTensor>(args["indices"]), Rcpp::as<XPtrTorchTensor>(args["offsets"]), Rcpp::as<XPtrTorchbool>(args["scale_grad_by_freq"]), Rcpp::as<XPtrTorchint64_t>(args["mode"]), Rcpp::as<XPtrTorchbool>(args["sparse"]), Rcpp::as<XPtrTorchOptionalTensor>(args["per_sample_weights"]), Rcpp::as<XPtrTorchbool>(args["include_last_offset"]), Rcpp::as<XPtrTorchoptional_int64_t>(args["padding_idx"])));
+}
+  Rcpp::stop("No matching overload for embedding_bag");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace_empty (Rcpp::List args) {
+  static const std::vector<std::string> size_expected = {"IntArrayRef"};
+  static const std::vector<std::string> names_expected = {"DimnameList"};
+  auto size_type = cpp_arg_to_torch_type(args["size"], size_expected, "size");
+  auto names_type = cpp_arg_to_torch_type(args["names"], names_expected, "names");
+if (size_type == "IntArrayRef" && names_type == "DimnameList") {
+  return Rcpp::wrap(cpp_torch_namespace_empty_size_IntArrayRef_names_DimnameList(Rcpp::as<XPtrTorchIntArrayRef>(args["size"]), Rcpp::as<XPtrTorchOptionalDimnameList>(args["names"]), Rcpp::as<XPtrTorchTensorOptions>(args["options"]), Rcpp::as<XPtrTorchoptional_memory_format>(args["memory_format"])));
+}
+if (size_type == "IntArrayRef" && names_type == "Missing") {
+  return Rcpp::wrap(cpp_torch_namespace_empty_size_IntArrayRef(Rcpp::as<XPtrTorchIntArrayRef>(args["size"]), Rcpp::as<XPtrTorchTensorOptions>(args["options"]), Rcpp::as<XPtrTorchoptional_memory_format>(args["memory_format"])));
+}
+  Rcpp::stop("No matching overload for empty");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace_empty_out (Rcpp::List args) {
+  static const std::vector<std::string> out_expected = {"Tensor"};
+  static const std::vector<std::string> size_expected = {"IntArrayRef"};
+  static const std::vector<std::string> names_expected = {"DimnameList"};
+  auto out_type = cpp_arg_to_torch_type(args["out"], out_expected, "out");
+  auto size_type = cpp_arg_to_torch_type(args["size"], size_expected, "size");
+  auto names_type = cpp_arg_to_torch_type(args["names"], names_expected, "names");
+if (out_type == "Tensor" && size_type == "IntArrayRef" && names_type == "Missing") {
+  return Rcpp::wrap(cpp_torch_namespace_empty_out_out_Tensor_size_IntArrayRef(Rcpp::as<XPtrTorchTensor>(args["out"]), Rcpp::as<XPtrTorchIntArrayRef>(args["size"]), Rcpp::as<XPtrTorchoptional_memory_format>(args["memory_format"])));
+}
+if (out_type == "Tensor" && size_type == "IntArrayRef" && names_type == "DimnameList") {
+  return Rcpp::wrap(cpp_torch_namespace_empty_out_out_Tensor_size_IntArrayRef_names_DimnameList(Rcpp::as<XPtrTorchTensor>(args["out"]), Rcpp::as<XPtrTorchIntArrayRef>(args["size"]), Rcpp::as<XPtrTorchOptionalDimnameList>(args["names"]), Rcpp::as<XPtrTorchoptional_memory_format>(args["memory_format"])));
+}
+  Rcpp::stop("No matching overload for empty_out");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace_eye (Rcpp::List args) {
+  static const std::vector<std::string> n_expected = {"int64_t"};
+  static const std::vector<std::string> m_expected = {"int64_t"};
+  auto n_type = cpp_arg_to_torch_type(args["n"], n_expected, "n");
+  auto m_type = cpp_arg_to_torch_type(args["m"], m_expected, "m");
+if (n_type == "int64_t" && m_type == "Missing") {
+  return Rcpp::wrap(cpp_torch_namespace_eye_n_int64_t(Rcpp::as<XPtrTorchint64_t>(args["n"]), Rcpp::as<XPtrTorchTensorOptions>(args["options"])));
+}
+if (n_type == "int64_t" && m_type == "int64_t") {
+  return Rcpp::wrap(cpp_torch_namespace_eye_n_int64_t_m_int64_t(Rcpp::as<XPtrTorchint64_t>(args["n"]), Rcpp::as<XPtrTorchint64_t>(args["m"]), Rcpp::as<XPtrTorchTensorOptions>(args["options"])));
+}
+  Rcpp::stop("No matching overload for eye");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace_eye_out (Rcpp::List args) {
+  static const std::vector<std::string> out_expected = {"Tensor"};
+  static const std::vector<std::string> n_expected = {"int64_t"};
+  static const std::vector<std::string> m_expected = {"int64_t"};
+  auto out_type = cpp_arg_to_torch_type(args["out"], out_expected, "out");
+  auto n_type = cpp_arg_to_torch_type(args["n"], n_expected, "n");
+  auto m_type = cpp_arg_to_torch_type(args["m"], m_expected, "m");
+if (out_type == "Tensor" && n_type == "int64_t" && m_type == "Missing") {
+  return Rcpp::wrap(cpp_torch_namespace_eye_out_out_Tensor_n_int64_t(Rcpp::as<XPtrTorchTensor>(args["out"]), Rcpp::as<XPtrTorchint64_t>(args["n"])));
+}
+if (out_type == "Tensor" && n_type == "int64_t" && m_type == "int64_t") {
+  return Rcpp::wrap(cpp_torch_namespace_eye_out_out_Tensor_n_int64_t_m_int64_t(Rcpp::as<XPtrTorchTensor>(args["out"]), Rcpp::as<XPtrTorchint64_t>(args["n"]), Rcpp::as<XPtrTorchint64_t>(args["m"])));
+}
+  Rcpp::stop("No matching overload for eye_out");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace_fake_quantize_per_tensor_affine (Rcpp::List args) {
+  static const std::vector<std::string> self_expected = {"Tensor"};
+  static const std::vector<std::string> scale_expected = {"double", "Tensor"};
+  static const std::vector<std::string> zero_point_expected = {"int64_t", "Tensor"};
+  static const std::vector<std::string> quant_min_expected = {"int64_t"};
+  static const std::vector<std::string> quant_max_expected = {"int64_t"};
+  auto self_type = cpp_arg_to_torch_type(args["self"], self_expected, "self");
+  auto scale_type = cpp_arg_to_torch_type(args["scale"], scale_expected, "scale");
+  auto zero_point_type = cpp_arg_to_torch_type(args["zero_point"], zero_point_expected, "zero_point");
+  auto quant_min_type = cpp_arg_to_torch_type(args["quant_min"], quant_min_expected, "quant_min");
+  auto quant_max_type = cpp_arg_to_torch_type(args["quant_max"], quant_max_expected, "quant_max");
+if (self_type == "Tensor" && scale_type == "double" && zero_point_type == "int64_t" && quant_min_type == "int64_t" && quant_max_type == "int64_t") {
+  return Rcpp::wrap(cpp_torch_namespace_fake_quantize_per_tensor_affine_self_Tensor_scale_double_zero_point_int64_t_quant_min_int64_t_quant_max_int64_t(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchdouble>(args["scale"]), Rcpp::as<XPtrTorchint64_t>(args["zero_point"]), Rcpp::as<XPtrTorchint64_t>(args["quant_min"]), Rcpp::as<XPtrTorchint64_t>(args["quant_max"])));
+}
+if (self_type == "Tensor" && scale_type == "Tensor" && zero_point_type == "Tensor" && quant_min_type == "int64_t" && quant_max_type == "int64_t") {
+  return Rcpp::wrap(cpp_torch_namespace_fake_quantize_per_tensor_affine_self_Tensor_scale_Tensor_zero_point_Tensor_quant_min_int64_t_quant_max_int64_t(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchTensor>(args["scale"]), Rcpp::as<XPtrTorchTensor>(args["zero_point"]), Rcpp::as<XPtrTorchint64_t>(args["quant_min"]), Rcpp::as<XPtrTorchint64_t>(args["quant_max"])));
+}
+  Rcpp::stop("No matching overload for fake_quantize_per_tensor_affine");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace_fbgemm_pack_quantized_matrix (Rcpp::List args) {
+  static const std::vector<std::string> input_expected = {"Tensor"};
+  static const std::vector<std::string> K_expected = {"int64_t"};
+  static const std::vector<std::string> N_expected = {"int64_t"};
+  auto input_type = cpp_arg_to_torch_type(args["input"], input_expected, "input");
+  auto K_type = cpp_arg_to_torch_type(args["K"], K_expected, "K");
+  auto N_type = cpp_arg_to_torch_type(args["N"], N_expected, "N");
+if (input_type == "Tensor" && K_type == "Missing" && N_type == "Missing") {
+  return Rcpp::wrap(cpp_torch_namespace_fbgemm_pack_quantized_matrix_input_Tensor(Rcpp::as<XPtrTorchTensor>(args["input"])));
+}
+if (input_type == "Tensor" && K_type == "int64_t" && N_type == "int64_t") {
+  return Rcpp::wrap(cpp_torch_namespace_fbgemm_pack_quantized_matrix_input_Tensor_K_int64_t_N_int64_t(Rcpp::as<XPtrTorchTensor>(args["input"]), Rcpp::as<XPtrTorchint64_t>(args["K"]), Rcpp::as<XPtrTorchint64_t>(args["N"])));
+}
+  Rcpp::stop("No matching overload for fbgemm_pack_quantized_matrix");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace_flatten (Rcpp::List args) {
+  static const std::vector<std::string> self_expected = {"Tensor"};
+  static const std::vector<std::string> dims_expected = {"DimnameList"};
+  static const std::vector<std::string> start_dim_expected = {"int64_t", "Dimname"};
+  static const std::vector<std::string> end_dim_expected = {"int64_t", "Dimname"};
+  static const std::vector<std::string> out_dim_expected = {"Dimname"};
+  auto self_type = cpp_arg_to_torch_type(args["self"], self_expected, "self");
+  auto dims_type = cpp_arg_to_torch_type(args["dims"], dims_expected, "dims");
+  auto start_dim_type = cpp_arg_to_torch_type(args["start_dim"], start_dim_expected, "start_dim");
+  auto end_dim_type = cpp_arg_to_torch_type(args["end_dim"], end_dim_expected, "end_dim");
+  auto out_dim_type = cpp_arg_to_torch_type(args["out_dim"], out_dim_expected, "out_dim");
+if (self_type == "Tensor" && dims_type == "Missing" && start_dim_type == "int64_t" && end_dim_type == "int64_t" && out_dim_type == "Missing") {
+  return Rcpp::wrap(cpp_torch_namespace_flatten_self_Tensor_start_dim_int64_t_end_dim_int64_t(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchindex_int64_t>(args["start_dim"]), Rcpp::as<XPtrTorchindex_int64_t>(args["end_dim"])));
+}
+if (self_type == "Tensor" && dims_type == "Missing" && start_dim_type == "int64_t" && end_dim_type == "int64_t" && out_dim_type == "Dimname") {
+  return Rcpp::wrap(cpp_torch_namespace_flatten_self_Tensor_start_dim_int64_t_end_dim_int64_t_out_dim_Dimname(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchindex_int64_t>(args["start_dim"]), Rcpp::as<XPtrTorchindex_int64_t>(args["end_dim"]), Rcpp::as<XPtrTorchDimname>(args["out_dim"])));
+}
+if (self_type == "Tensor" && dims_type == "Missing" && start_dim_type == "Dimname" && end_dim_type == "Dimname" && out_dim_type == "Dimname") {
+  return Rcpp::wrap(cpp_torch_namespace_flatten_self_Tensor_start_dim_Dimname_end_dim_Dimname_out_dim_Dimname(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchDimname>(args["start_dim"]), Rcpp::as<XPtrTorchDimname>(args["end_dim"]), Rcpp::as<XPtrTorchDimname>(args["out_dim"])));
+}
+if (self_type == "Tensor" && dims_type == "DimnameList" && start_dim_type == "Missing" && end_dim_type == "Missing" && out_dim_type == "Dimname") {
+  return Rcpp::wrap(cpp_torch_namespace_flatten_self_Tensor_dims_DimnameList_out_dim_Dimname(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchDimnameList>(args["dims"]), Rcpp::as<XPtrTorchDimname>(args["out_dim"])));
+}
+  Rcpp::stop("No matching overload for flatten");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace_float_power (Rcpp::List args) {
+  static const std::vector<std::string> self_expected = {"Tensor", "Scalar"};
+  static const std::vector<std::string> exponent_expected = {"Tensor", "Scalar"};
+  auto self_type = cpp_arg_to_torch_type(args["self"], self_expected, "self");
+  auto exponent_type = cpp_arg_to_torch_type(args["exponent"], exponent_expected, "exponent");
+if (self_type == "Tensor" && exponent_type == "Tensor") {
+  return Rcpp::wrap(cpp_torch_namespace_float_power_self_Tensor_exponent_Tensor(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchTensor>(args["exponent"])));
+}
+if (self_type == "Scalar" && exponent_type == "Tensor") {
+  return Rcpp::wrap(cpp_torch_namespace_float_power_self_Scalar_exponent_Tensor(Rcpp::as<XPtrTorchScalar>(args["self"]), Rcpp::as<XPtrTorchTensor>(args["exponent"])));
+}
+if (self_type == "Tensor" && exponent_type == "Scalar") {
+  return Rcpp::wrap(cpp_torch_namespace_float_power_self_Tensor_exponent_Scalar(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchScalar>(args["exponent"])));
+}
+  Rcpp::stop("No matching overload for float_power");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace_float_power_out (Rcpp::List args) {
+  static const std::vector<std::string> out_expected = {"Tensor"};
+  static const std::vector<std::string> self_expected = {"Tensor", "Scalar"};
+  static const std::vector<std::string> exponent_expected = {"Tensor", "Scalar"};
+  auto out_type = cpp_arg_to_torch_type(args["out"], out_expected, "out");
+  auto self_type = cpp_arg_to_torch_type(args["self"], self_expected, "self");
+  auto exponent_type = cpp_arg_to_torch_type(args["exponent"], exponent_expected, "exponent");
+if (out_type == "Tensor" && self_type == "Tensor" && exponent_type == "Tensor") {
+  return Rcpp::wrap(cpp_torch_namespace_float_power_out_out_Tensor_self_Tensor_exponent_Tensor(Rcpp::as<XPtrTorchTensor>(args["out"]), Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchTensor>(args["exponent"])));
+}
+if (out_type == "Tensor" && self_type == "Scalar" && exponent_type == "Tensor") {
+  return Rcpp::wrap(cpp_torch_namespace_float_power_out_out_Tensor_self_Scalar_exponent_Tensor(Rcpp::as<XPtrTorchTensor>(args["out"]), Rcpp::as<XPtrTorchScalar>(args["self"]), Rcpp::as<XPtrTorchTensor>(args["exponent"])));
+}
+if (out_type == "Tensor" && self_type == "Tensor" && exponent_type == "Scalar") {
+  return Rcpp::wrap(cpp_torch_namespace_float_power_out_out_Tensor_self_Tensor_exponent_Scalar(Rcpp::as<XPtrTorchTensor>(args["out"]), Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchScalar>(args["exponent"])));
+}
+  Rcpp::stop("No matching overload for float_power_out");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace_full (Rcpp::List args) {
+  static const std::vector<std::string> size_expected = {"IntArrayRef"};
+  static const std::vector<std::string> fill_value_expected = {"Scalar"};
+  static const std::vector<std::string> names_expected = {"DimnameList"};
+  auto size_type = cpp_arg_to_torch_type(args["size"], size_expected, "size");
+  auto fill_value_type = cpp_arg_to_torch_type(args["fill_value"], fill_value_expected, "fill_value");
+  auto names_type = cpp_arg_to_torch_type(args["names"], names_expected, "names");
+if (size_type == "IntArrayRef" && fill_value_type == "Scalar" && names_type == "DimnameList") {
+  return Rcpp::wrap(cpp_torch_namespace_full_size_IntArrayRef_fill_value_Scalar_names_DimnameList(Rcpp::as<XPtrTorchIntArrayRef>(args["size"]), Rcpp::as<XPtrTorchScalar>(args["fill_value"]), Rcpp::as<XPtrTorchOptionalDimnameList>(args["names"]), Rcpp::as<XPtrTorchTensorOptions>(args["options"])));
+}
+if (size_type == "IntArrayRef" && fill_value_type == "Scalar" && names_type == "Missing") {
+  return Rcpp::wrap(cpp_torch_namespace_full_size_IntArrayRef_fill_value_Scalar(Rcpp::as<XPtrTorchIntArrayRef>(args["size"]), Rcpp::as<XPtrTorchScalar>(args["fill_value"]), Rcpp::as<XPtrTorchTensorOptions>(args["options"])));
+}
+  Rcpp::stop("No matching overload for full");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace_full_out (Rcpp::List args) {
+  static const std::vector<std::string> out_expected = {"Tensor"};
+  static const std::vector<std::string> size_expected = {"IntArrayRef"};
+  static const std::vector<std::string> fill_value_expected = {"Scalar"};
+  static const std::vector<std::string> names_expected = {"DimnameList"};
+  auto out_type = cpp_arg_to_torch_type(args["out"], out_expected, "out");
+  auto size_type = cpp_arg_to_torch_type(args["size"], size_expected, "size");
+  auto fill_value_type = cpp_arg_to_torch_type(args["fill_value"], fill_value_expected, "fill_value");
+  auto names_type = cpp_arg_to_torch_type(args["names"], names_expected, "names");
+if (out_type == "Tensor" && size_type == "IntArrayRef" && fill_value_type == "Scalar" && names_type == "Missing") {
+  return Rcpp::wrap(cpp_torch_namespace_full_out_out_Tensor_size_IntArrayRef_fill_value_Scalar(Rcpp::as<XPtrTorchTensor>(args["out"]), Rcpp::as<XPtrTorchIntArrayRef>(args["size"]), Rcpp::as<XPtrTorchScalar>(args["fill_value"])));
+}
+if (out_type == "Tensor" && size_type == "IntArrayRef" && fill_value_type == "Scalar" && names_type == "DimnameList") {
+  return Rcpp::wrap(cpp_torch_namespace_full_out_out_Tensor_size_IntArrayRef_fill_value_Scalar_names_DimnameList(Rcpp::as<XPtrTorchTensor>(args["out"]), Rcpp::as<XPtrTorchIntArrayRef>(args["size"]), Rcpp::as<XPtrTorchScalar>(args["fill_value"]), Rcpp::as<XPtrTorchOptionalDimnameList>(args["names"])));
+}
+  Rcpp::stop("No matching overload for full_out");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace_gradient (Rcpp::List args) {
+  static const std::vector<std::string> self_expected = {"Tensor"};
+  static const std::vector<std::string> spacing_expected = {"Scalar", "ArrayRef<Scalar>", "TensorList"};
+  static const std::vector<std::string> dim_expected = {"int64_t", "IntArrayRef"};
+  auto self_type = cpp_arg_to_torch_type(args["self"], self_expected, "self");
+  auto spacing_type = cpp_arg_to_torch_type(args["spacing"], spacing_expected, "spacing");
+  auto dim_type = cpp_arg_to_torch_type(args["dim"], dim_expected, "dim");
+if (self_type == "Tensor" && spacing_type == "Scalar" && dim_type == "int64_t") {
+  return Rcpp::wrap(cpp_torch_namespace_gradient_self_Tensor_spacing_Scalar_dim_int64_t(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchoptional_scalar>(args["spacing"]), Rcpp::as<XPtrTorchoptional_index_int64_t>(args["dim"]), Rcpp::as<XPtrTorchint64_t>(args["edge_order"])));
+}
+if (self_type == "Tensor" && spacing_type == "Scalar" && dim_type == "IntArrayRef") {
+  return Rcpp::wrap(cpp_torch_namespace_gradient_self_Tensor_spacing_Scalar_dim_IntArrayRef(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchScalar>(args["spacing"]), Rcpp::as<XPtrTorchIndexIntArrayRef>(args["dim"]), Rcpp::as<XPtrTorchint64_t>(args["edge_order"])));
+}
+if (self_type == "Tensor" && spacing_type == "Missing" && dim_type == "IntArrayRef") {
+  return Rcpp::wrap(cpp_torch_namespace_gradient_self_Tensor_dim_IntArrayRef(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchIndexIntArrayRef>(args["dim"]), Rcpp::as<XPtrTorchint64_t>(args["edge_order"])));
+}
+if (self_type == "Tensor" && spacing_type == "ArrayRef<Scalar>" && dim_type == "int64_t") {
+  return Rcpp::wrap(cpp_torch_namespace_gradient_self_Tensor_spacing_ArrayRefScalar_dim_int64_t(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchvector_Scalar>(args["spacing"]), Rcpp::as<XPtrTorchoptional_index_int64_t>(args["dim"]), Rcpp::as<XPtrTorchint64_t>(args["edge_order"])));
+}
+if (self_type == "Tensor" && spacing_type == "ArrayRef<Scalar>" && dim_type == "IntArrayRef") {
+  return Rcpp::wrap(cpp_torch_namespace_gradient_self_Tensor_spacing_ArrayRefScalar_dim_IntArrayRef(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchvector_Scalar>(args["spacing"]), Rcpp::as<XPtrTorchIndexIntArrayRef>(args["dim"]), Rcpp::as<XPtrTorchint64_t>(args["edge_order"])));
+}
+if (self_type == "Tensor" && spacing_type == "TensorList" && dim_type == "int64_t") {
+  return Rcpp::wrap(cpp_torch_namespace_gradient_self_Tensor_spacing_TensorList_dim_int64_t(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchTensorList>(args["spacing"]), Rcpp::as<XPtrTorchoptional_index_int64_t>(args["dim"]), Rcpp::as<XPtrTorchint64_t>(args["edge_order"])));
+}
+if (self_type == "Tensor" && spacing_type == "TensorList" && dim_type == "IntArrayRef") {
+  return Rcpp::wrap(cpp_torch_namespace_gradient_self_Tensor_spacing_TensorList_dim_IntArrayRef(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchTensorList>(args["spacing"]), Rcpp::as<XPtrTorchIndexIntArrayRef>(args["dim"]), Rcpp::as<XPtrTorchint64_t>(args["edge_order"])));
+}
+  Rcpp::stop("No matching overload for gradient");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace_gru (Rcpp::List args) {
+  static const std::vector<std::string> data_expected = {"Tensor"};
+  static const std::vector<std::string> input_expected = {"Tensor"};
+  static const std::vector<std::string> batch_sizes_expected = {"Tensor"};
+  static const std::vector<std::string> hx_expected = {"Tensor"};
+  static const std::vector<std::string> params_expected = {"TensorList"};
+  static const std::vector<std::string> has_biases_expected = {"bool"};
+  static const std::vector<std::string> num_layers_expected = {"int64_t"};
+  static const std::vector<std::string> dropout_expected = {"double"};
+  static const std::vector<std::string> train_expected = {"bool"};
+  static const std::vector<std::string> batch_first_expected = {"bool"};
+  static const std::vector<std::string> bidirectional_expected = {"bool"};
+  auto data_type = cpp_arg_to_torch_type(args["data"], data_expected, "data");
+  auto input_type = cpp_arg_to_torch_type(args["input"], input_expected, "input");
+  auto batch_sizes_type = cpp_arg_to_torch_type(args["batch_sizes"], batch_sizes_expected, "batch_sizes");
+  auto hx_type = cpp_arg_to_torch_type(args["hx"], hx_expected, "hx");
+  auto params_type = cpp_arg_to_torch_type(args["params"], params_expected, "params");
+  auto has_biases_type = cpp_arg_to_torch_type(args["has_biases"], has_biases_expected, "has_biases");
+  auto num_layers_type = cpp_arg_to_torch_type(args["num_layers"], num_layers_expected, "num_layers");
+  auto dropout_type = cpp_arg_to_torch_type(args["dropout"], dropout_expected, "dropout");
+  auto train_type = cpp_arg_to_torch_type(args["train"], train_expected, "train");
+  auto batch_first_type = cpp_arg_to_torch_type(args["batch_first"], batch_first_expected, "batch_first");
+  auto bidirectional_type = cpp_arg_to_torch_type(args["bidirectional"], bidirectional_expected, "bidirectional");
+if (data_type == "Missing" && input_type == "Tensor" && batch_sizes_type == "Missing" && hx_type == "Tensor" && params_type == "TensorList" && has_biases_type == "bool" && num_layers_type == "int64_t" && dropout_type == "double" && train_type == "bool" && batch_first_type == "bool" && bidirectional_type == "bool") {
+  return Rcpp::wrap(cpp_torch_namespace_gru_input_Tensor_hx_Tensor_params_TensorList_has_biases_bool_num_layers_int64_t_dropout_double_train_bool_batch_first_bool_bidirectional_bool(Rcpp::as<XPtrTorchTensor>(args["input"]), Rcpp::as<XPtrTorchTensor>(args["hx"]), Rcpp::as<XPtrTorchTensorList>(args["params"]), Rcpp::as<XPtrTorchbool>(args["has_biases"]), Rcpp::as<XPtrTorchint64_t>(args["num_layers"]), Rcpp::as<XPtrTorchdouble>(args["dropout"]), Rcpp::as<XPtrTorchbool>(args["train"]), Rcpp::as<XPtrTorchbool>(args["bidirectional"]), Rcpp::as<XPtrTorchbool>(args["batch_first"])));
+}
+if (data_type == "Tensor" && input_type == "Missing" && batch_sizes_type == "Tensor" && hx_type == "Tensor" && params_type == "TensorList" && has_biases_type == "bool" && num_layers_type == "int64_t" && dropout_type == "double" && train_type == "bool" && batch_first_type == "Missing" && bidirectional_type == "bool") {
+  return Rcpp::wrap(cpp_torch_namespace_gru_data_Tensor_batch_sizes_Tensor_hx_Tensor_params_TensorList_has_biases_bool_num_layers_int64_t_dropout_double_train_bool_bidirectional_bool(Rcpp::as<XPtrTorchTensor>(args["data"]), Rcpp::as<XPtrTorchTensor>(args["batch_sizes"]), Rcpp::as<XPtrTorchTensor>(args["hx"]), Rcpp::as<XPtrTorchTensorList>(args["params"]), Rcpp::as<XPtrTorchbool>(args["has_biases"]), Rcpp::as<XPtrTorchint64_t>(args["num_layers"]), Rcpp::as<XPtrTorchdouble>(args["dropout"]), Rcpp::as<XPtrTorchbool>(args["train"]), Rcpp::as<XPtrTorchbool>(args["bidirectional"])));
+}
+  Rcpp::stop("No matching overload for gru");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace_hamming_window (Rcpp::List args) {
+  static const std::vector<std::string> window_length_expected = {"int64_t"};
+  static const std::vector<std::string> periodic_expected = {"bool"};
+  static const std::vector<std::string> alpha_expected = {"double"};
+  static const std::vector<std::string> beta_expected = {"double"};
+  auto window_length_type = cpp_arg_to_torch_type(args["window_length"], window_length_expected, "window_length");
+  auto periodic_type = cpp_arg_to_torch_type(args["periodic"], periodic_expected, "periodic");
+  auto alpha_type = cpp_arg_to_torch_type(args["alpha"], alpha_expected, "alpha");
+  auto beta_type = cpp_arg_to_torch_type(args["beta"], beta_expected, "beta");
+if (window_length_type == "int64_t" && periodic_type == "Missing" && alpha_type == "Missing" && beta_type == "Missing") {
+  return Rcpp::wrap(cpp_torch_namespace_hamming_window_window_length_int64_t(Rcpp::as<XPtrTorchint64_t>(args["window_length"]), Rcpp::as<XPtrTorchTensorOptions>(args["options"])));
+}
+if (window_length_type == "int64_t" && periodic_type == "bool" && alpha_type == "Missing" && beta_type == "Missing") {
+  return Rcpp::wrap(cpp_torch_namespace_hamming_window_window_length_int64_t_periodic_bool(Rcpp::as<XPtrTorchint64_t>(args["window_length"]), Rcpp::as<XPtrTorchbool>(args["periodic"]), Rcpp::as<XPtrTorchTensorOptions>(args["options"])));
+}
+if (window_length_type == "int64_t" && periodic_type == "bool" && alpha_type == "double" && beta_type == "Missing") {
+  return Rcpp::wrap(cpp_torch_namespace_hamming_window_window_length_int64_t_periodic_bool_alpha_double(Rcpp::as<XPtrTorchint64_t>(args["window_length"]), Rcpp::as<XPtrTorchbool>(args["periodic"]), Rcpp::as<XPtrTorchdouble>(args["alpha"]), Rcpp::as<XPtrTorchTensorOptions>(args["options"])));
+}
+if (window_length_type == "int64_t" && periodic_type == "bool" && alpha_type == "double" && beta_type == "double") {
+  return Rcpp::wrap(cpp_torch_namespace_hamming_window_window_length_int64_t_periodic_bool_alpha_double_beta_double(Rcpp::as<XPtrTorchint64_t>(args["window_length"]), Rcpp::as<XPtrTorchbool>(args["periodic"]), Rcpp::as<XPtrTorchdouble>(args["alpha"]), Rcpp::as<XPtrTorchdouble>(args["beta"]), Rcpp::as<XPtrTorchTensorOptions>(args["options"])));
+}
+  Rcpp::stop("No matching overload for hamming_window");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace_hamming_window_out (Rcpp::List args) {
+  static const std::vector<std::string> out_expected = {"Tensor"};
+  static const std::vector<std::string> window_length_expected = {"int64_t"};
+  static const std::vector<std::string> periodic_expected = {"bool"};
+  static const std::vector<std::string> alpha_expected = {"double"};
+  static const std::vector<std::string> beta_expected = {"double"};
+  auto out_type = cpp_arg_to_torch_type(args["out"], out_expected, "out");
+  auto window_length_type = cpp_arg_to_torch_type(args["window_length"], window_length_expected, "window_length");
+  auto periodic_type = cpp_arg_to_torch_type(args["periodic"], periodic_expected, "periodic");
+  auto alpha_type = cpp_arg_to_torch_type(args["alpha"], alpha_expected, "alpha");
+  auto beta_type = cpp_arg_to_torch_type(args["beta"], beta_expected, "beta");
+if (out_type == "Tensor" && window_length_type == "int64_t" && periodic_type == "Missing" && alpha_type == "Missing" && beta_type == "Missing") {
+  return Rcpp::wrap(cpp_torch_namespace_hamming_window_out_out_Tensor_window_length_int64_t(Rcpp::as<XPtrTorchTensor>(args["out"]), Rcpp::as<XPtrTorchint64_t>(args["window_length"])));
+}
+if (out_type == "Tensor" && window_length_type == "int64_t" && periodic_type == "bool" && alpha_type == "Missing" && beta_type == "Missing") {
+  return Rcpp::wrap(cpp_torch_namespace_hamming_window_out_out_Tensor_window_length_int64_t_periodic_bool(Rcpp::as<XPtrTorchTensor>(args["out"]), Rcpp::as<XPtrTorchint64_t>(args["window_length"]), Rcpp::as<XPtrTorchbool>(args["periodic"])));
+}
+if (out_type == "Tensor" && window_length_type == "int64_t" && periodic_type == "bool" && alpha_type == "double" && beta_type == "Missing") {
+  return Rcpp::wrap(cpp_torch_namespace_hamming_window_out_out_Tensor_window_length_int64_t_periodic_bool_alpha_double(Rcpp::as<XPtrTorchTensor>(args["out"]), Rcpp::as<XPtrTorchint64_t>(args["window_length"]), Rcpp::as<XPtrTorchbool>(args["periodic"]), Rcpp::as<XPtrTorchdouble>(args["alpha"])));
+}
+if (out_type == "Tensor" && window_length_type == "int64_t" && periodic_type == "bool" && alpha_type == "double" && beta_type == "double") {
+  return Rcpp::wrap(cpp_torch_namespace_hamming_window_out_out_Tensor_window_length_int64_t_periodic_bool_alpha_double_beta_double(Rcpp::as<XPtrTorchTensor>(args["out"]), Rcpp::as<XPtrTorchint64_t>(args["window_length"]), Rcpp::as<XPtrTorchbool>(args["periodic"]), Rcpp::as<XPtrTorchdouble>(args["alpha"]), Rcpp::as<XPtrTorchdouble>(args["beta"])));
+}
+  Rcpp::stop("No matching overload for hamming_window_out");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace_hann_window (Rcpp::List args) {
+  static const std::vector<std::string> window_length_expected = {"int64_t"};
+  static const std::vector<std::string> periodic_expected = {"bool"};
+  auto window_length_type = cpp_arg_to_torch_type(args["window_length"], window_length_expected, "window_length");
+  auto periodic_type = cpp_arg_to_torch_type(args["periodic"], periodic_expected, "periodic");
+if (window_length_type == "int64_t" && periodic_type == "Missing") {
+  return Rcpp::wrap(cpp_torch_namespace_hann_window_window_length_int64_t(Rcpp::as<XPtrTorchint64_t>(args["window_length"]), Rcpp::as<XPtrTorchTensorOptions>(args["options"])));
+}
+if (window_length_type == "int64_t" && periodic_type == "bool") {
+  return Rcpp::wrap(cpp_torch_namespace_hann_window_window_length_int64_t_periodic_bool(Rcpp::as<XPtrTorchint64_t>(args["window_length"]), Rcpp::as<XPtrTorchbool>(args["periodic"]), Rcpp::as<XPtrTorchTensorOptions>(args["options"])));
+}
+  Rcpp::stop("No matching overload for hann_window");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace_hann_window_out (Rcpp::List args) {
+  static const std::vector<std::string> out_expected = {"Tensor"};
+  static const std::vector<std::string> window_length_expected = {"int64_t"};
+  static const std::vector<std::string> periodic_expected = {"bool"};
+  auto out_type = cpp_arg_to_torch_type(args["out"], out_expected, "out");
+  auto window_length_type = cpp_arg_to_torch_type(args["window_length"], window_length_expected, "window_length");
+  auto periodic_type = cpp_arg_to_torch_type(args["periodic"], periodic_expected, "periodic");
+if (out_type == "Tensor" && window_length_type == "int64_t" && periodic_type == "Missing") {
+  return Rcpp::wrap(cpp_torch_namespace_hann_window_out_out_Tensor_window_length_int64_t(Rcpp::as<XPtrTorchTensor>(args["out"]), Rcpp::as<XPtrTorchint64_t>(args["window_length"])));
+}
+if (out_type == "Tensor" && window_length_type == "int64_t" && periodic_type == "bool") {
+  return Rcpp::wrap(cpp_torch_namespace_hann_window_out_out_Tensor_window_length_int64_t_periodic_bool(Rcpp::as<XPtrTorchTensor>(args["out"]), Rcpp::as<XPtrTorchint64_t>(args["window_length"]), Rcpp::as<XPtrTorchbool>(args["periodic"])));
+}
+  Rcpp::stop("No matching overload for hann_window_out");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace_histogram (Rcpp::List args) {
+  static const std::vector<std::string> self_expected = {"Tensor"};
+  static const std::vector<std::string> bins_expected = {"Tensor", "int64_t"};
+  auto self_type = cpp_arg_to_torch_type(args["self"], self_expected, "self");
+  auto bins_type = cpp_arg_to_torch_type(args["bins"], bins_expected, "bins");
+if (self_type == "Tensor" && bins_type == "Tensor") {
+  return Rcpp::wrap(cpp_torch_namespace_histogram_self_Tensor_bins_Tensor(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchTensor>(args["bins"]), Rcpp::as<XPtrTorchOptionalTensor>(args["weight"]), Rcpp::as<XPtrTorchbool>(args["density"])));
+}
+if (self_type == "Tensor" && bins_type == "int64_t") {
+  return Rcpp::wrap(cpp_torch_namespace_histogram_self_Tensor_bins_int64_t(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchint64_t>(args["bins"]), Rcpp::as<XPtrTorchOptionalDoubleArrayRef>(args["range"]), Rcpp::as<XPtrTorchOptionalTensor>(args["weight"]), Rcpp::as<XPtrTorchbool>(args["density"])));
+}
+  Rcpp::stop("No matching overload for histogram");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace_histogram_out (Rcpp::List args) {
+  static const std::vector<std::string> hist_expected = {"Tensor"};
+  static const std::vector<std::string> bin_edges_expected = {"Tensor"};
+  static const std::vector<std::string> self_expected = {"Tensor"};
+  static const std::vector<std::string> bins_expected = {"Tensor", "int64_t"};
+  auto hist_type = cpp_arg_to_torch_type(args["hist"], hist_expected, "hist");
+  auto bin_edges_type = cpp_arg_to_torch_type(args["bin_edges"], bin_edges_expected, "bin_edges");
+  auto self_type = cpp_arg_to_torch_type(args["self"], self_expected, "self");
+  auto bins_type = cpp_arg_to_torch_type(args["bins"], bins_expected, "bins");
+if (hist_type == "Tensor" && bin_edges_type == "Tensor" && self_type == "Tensor" && bins_type == "Tensor") {
+  return Rcpp::wrap(cpp_torch_namespace_histogram_out_hist_Tensor_bin_edges_Tensor_self_Tensor_bins_Tensor(Rcpp::as<XPtrTorchTensor>(args["hist"]), Rcpp::as<XPtrTorchTensor>(args["bin_edges"]), Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchTensor>(args["bins"]), Rcpp::as<XPtrTorchOptionalTensor>(args["weight"]), Rcpp::as<XPtrTorchbool>(args["density"])));
+}
+if (hist_type == "Tensor" && bin_edges_type == "Tensor" && self_type == "Tensor" && bins_type == "int64_t") {
+  return Rcpp::wrap(cpp_torch_namespace_histogram_out_hist_Tensor_bin_edges_Tensor_self_Tensor_bins_int64_t(Rcpp::as<XPtrTorchTensor>(args["hist"]), Rcpp::as<XPtrTorchTensor>(args["bin_edges"]), Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchint64_t>(args["bins"]), Rcpp::as<XPtrTorchOptionalDoubleArrayRef>(args["range"]), Rcpp::as<XPtrTorchOptionalTensor>(args["weight"]), Rcpp::as<XPtrTorchbool>(args["density"])));
+}
+  Rcpp::stop("No matching overload for histogram_out");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace_histogramdd (Rcpp::List args) {
+  static const std::vector<std::string> self_expected = {"Tensor"};
+  static const std::vector<std::string> bins_expected = {"IntArrayRef", "int64_t", "TensorList"};
+  auto self_type = cpp_arg_to_torch_type(args["self"], self_expected, "self");
+  auto bins_type = cpp_arg_to_torch_type(args["bins"], bins_expected, "bins");
+if (self_type == "Tensor" && bins_type == "IntArrayRef") {
+  return Rcpp::wrap(cpp_torch_namespace_histogramdd_self_Tensor_bins_IntArrayRef(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchIntArrayRef>(args["bins"]), Rcpp::as<XPtrTorchOptionalDoubleArrayRef>(args["range"]), Rcpp::as<XPtrTorchOptionalTensor>(args["weight"]), Rcpp::as<XPtrTorchbool>(args["density"])));
+}
+if (self_type == "Tensor" && bins_type == "int64_t") {
+  return Rcpp::wrap(cpp_torch_namespace_histogramdd_self_Tensor_bins_int64_t(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchint64_t>(args["bins"]), Rcpp::as<XPtrTorchOptionalDoubleArrayRef>(args["range"]), Rcpp::as<XPtrTorchOptionalTensor>(args["weight"]), Rcpp::as<XPtrTorchbool>(args["density"])));
+}
+if (self_type == "Tensor" && bins_type == "TensorList") {
+  return Rcpp::wrap(cpp_torch_namespace_histogramdd_self_Tensor_bins_TensorList(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchTensorList>(args["bins"]), Rcpp::as<XPtrTorchOptionalDoubleArrayRef>(args["range"]), Rcpp::as<XPtrTorchOptionalTensor>(args["weight"]), Rcpp::as<XPtrTorchbool>(args["density"])));
+}
+  Rcpp::stop("No matching overload for histogramdd");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace_hsplit (Rcpp::List args) {
+  static const std::vector<std::string> self_expected = {"Tensor"};
+  static const std::vector<std::string> indices_expected = {"IntArrayRef"};
+  static const std::vector<std::string> sections_expected = {"int64_t"};
+  auto self_type = cpp_arg_to_torch_type(args["self"], self_expected, "self");
+  auto indices_type = cpp_arg_to_torch_type(args["indices"], indices_expected, "indices");
+  auto sections_type = cpp_arg_to_torch_type(args["sections"], sections_expected, "sections");
+if (self_type == "Tensor" && indices_type == "Missing" && sections_type == "int64_t") {
+  return Rcpp::wrap(cpp_torch_namespace_hsplit_self_Tensor_sections_int64_t(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchint64_t>(args["sections"])));
+}
+if (self_type == "Tensor" && indices_type == "IntArrayRef" && sections_type == "Missing") {
+  return Rcpp::wrap(cpp_torch_namespace_hsplit_self_Tensor_indices_IntArrayRef(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchIntArrayRef>(args["indices"])));
+}
+  Rcpp::stop("No matching overload for hsplit");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace_index_fill (Rcpp::List args) {
+  static const std::vector<std::string> self_expected = {"Tensor"};
+  static const std::vector<std::string> dim_expected = {"int64_t", "Dimname"};
+  static const std::vector<std::string> index_expected = {"Tensor"};
+  static const std::vector<std::string> value_expected = {"Scalar", "Tensor"};
+  auto self_type = cpp_arg_to_torch_type(args["self"], self_expected, "self");
+  auto dim_type = cpp_arg_to_torch_type(args["dim"], dim_expected, "dim");
+  auto index_type = cpp_arg_to_torch_type(args["index"], index_expected, "index");
+  auto value_type = cpp_arg_to_torch_type(args["value"], value_expected, "value");
+if (self_type == "Tensor" && dim_type == "int64_t" && index_type == "Tensor" && value_type == "Scalar") {
+  return Rcpp::wrap(cpp_torch_namespace_index_fill_self_Tensor_dim_int64_t_index_Tensor_value_Scalar(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchindex_int64_t>(args["dim"]), Rcpp::as<XPtrTorchIndexTensor>(args["index"]), Rcpp::as<XPtrTorchScalar>(args["value"])));
+}
+if (self_type == "Tensor" && dim_type == "int64_t" && index_type == "Tensor" && value_type == "Tensor") {
+  return Rcpp::wrap(cpp_torch_namespace_index_fill_self_Tensor_dim_int64_t_index_Tensor_value_Tensor(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchindex_int64_t>(args["dim"]), Rcpp::as<XPtrTorchIndexTensor>(args["index"]), Rcpp::as<XPtrTorchTensor>(args["value"])));
+}
+if (self_type == "Tensor" && dim_type == "Dimname" && index_type == "Tensor" && value_type == "Scalar") {
+  return Rcpp::wrap(cpp_torch_namespace_index_fill_self_Tensor_dim_Dimname_index_Tensor_value_Scalar(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchDimname>(args["dim"]), Rcpp::as<XPtrTorchIndexTensor>(args["index"]), Rcpp::as<XPtrTorchScalar>(args["value"])));
+}
+if (self_type == "Tensor" && dim_type == "Dimname" && index_type == "Tensor" && value_type == "Tensor") {
+  return Rcpp::wrap(cpp_torch_namespace_index_fill_self_Tensor_dim_Dimname_index_Tensor_value_Tensor(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchDimname>(args["dim"]), Rcpp::as<XPtrTorchIndexTensor>(args["index"]), Rcpp::as<XPtrTorchTensor>(args["value"])));
+}
+  Rcpp::stop("No matching overload for index_fill");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace_isin (Rcpp::List args) {
+  static const std::vector<std::string> element_expected = {"Scalar"};
+  static const std::vector<std::string> elements_expected = {"Tensor"};
+  static const std::vector<std::string> test_element_expected = {"Scalar"};
+  static const std::vector<std::string> test_elements_expected = {"Tensor"};
+  auto element_type = cpp_arg_to_torch_type(args["element"], element_expected, "element");
+  auto elements_type = cpp_arg_to_torch_type(args["elements"], elements_expected, "elements");
+  auto test_element_type = cpp_arg_to_torch_type(args["test_element"], test_element_expected, "test_element");
+  auto test_elements_type = cpp_arg_to_torch_type(args["test_elements"], test_elements_expected, "test_elements");
+if (element_type == "Missing" && elements_type == "Tensor" && test_element_type == "Missing" && test_elements_type == "Tensor") {
+  return Rcpp::wrap(cpp_torch_namespace_isin_elements_Tensor_test_elements_Tensor(Rcpp::as<XPtrTorchTensor>(args["elements"]), Rcpp::as<XPtrTorchTensor>(args["test_elements"]), Rcpp::as<XPtrTorchbool>(args["assume_unique"]), Rcpp::as<XPtrTorchbool>(args["invert"])));
+}
+if (element_type == "Missing" && elements_type == "Tensor" && test_element_type == "Scalar" && test_elements_type == "Missing") {
+  return Rcpp::wrap(cpp_torch_namespace_isin_elements_Tensor_test_element_Scalar(Rcpp::as<XPtrTorchTensor>(args["elements"]), Rcpp::as<XPtrTorchScalar>(args["test_element"]), Rcpp::as<XPtrTorchbool>(args["assume_unique"]), Rcpp::as<XPtrTorchbool>(args["invert"])));
+}
+if (element_type == "Scalar" && elements_type == "Missing" && test_element_type == "Missing" && test_elements_type == "Tensor") {
+  return Rcpp::wrap(cpp_torch_namespace_isin_element_Scalar_test_elements_Tensor(Rcpp::as<XPtrTorchScalar>(args["element"]), Rcpp::as<XPtrTorchTensor>(args["test_elements"]), Rcpp::as<XPtrTorchbool>(args["assume_unique"]), Rcpp::as<XPtrTorchbool>(args["invert"])));
+}
+  Rcpp::stop("No matching overload for isin");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace_isin_out (Rcpp::List args) {
+  static const std::vector<std::string> out_expected = {"Tensor"};
+  static const std::vector<std::string> element_expected = {"Scalar"};
+  static const std::vector<std::string> elements_expected = {"Tensor"};
+  static const std::vector<std::string> test_element_expected = {"Scalar"};
+  static const std::vector<std::string> test_elements_expected = {"Tensor"};
+  auto out_type = cpp_arg_to_torch_type(args["out"], out_expected, "out");
+  auto element_type = cpp_arg_to_torch_type(args["element"], element_expected, "element");
+  auto elements_type = cpp_arg_to_torch_type(args["elements"], elements_expected, "elements");
+  auto test_element_type = cpp_arg_to_torch_type(args["test_element"], test_element_expected, "test_element");
+  auto test_elements_type = cpp_arg_to_torch_type(args["test_elements"], test_elements_expected, "test_elements");
+if (out_type == "Tensor" && element_type == "Missing" && elements_type == "Tensor" && test_element_type == "Missing" && test_elements_type == "Tensor") {
+  return Rcpp::wrap(cpp_torch_namespace_isin_out_out_Tensor_elements_Tensor_test_elements_Tensor(Rcpp::as<XPtrTorchTensor>(args["out"]), Rcpp::as<XPtrTorchTensor>(args["elements"]), Rcpp::as<XPtrTorchTensor>(args["test_elements"]), Rcpp::as<XPtrTorchbool>(args["assume_unique"]), Rcpp::as<XPtrTorchbool>(args["invert"])));
+}
+if (out_type == "Tensor" && element_type == "Missing" && elements_type == "Tensor" && test_element_type == "Scalar" && test_elements_type == "Missing") {
+  return Rcpp::wrap(cpp_torch_namespace_isin_out_out_Tensor_elements_Tensor_test_element_Scalar(Rcpp::as<XPtrTorchTensor>(args["out"]), Rcpp::as<XPtrTorchTensor>(args["elements"]), Rcpp::as<XPtrTorchScalar>(args["test_element"]), Rcpp::as<XPtrTorchbool>(args["assume_unique"]), Rcpp::as<XPtrTorchbool>(args["invert"])));
+}
+if (out_type == "Tensor" && element_type == "Scalar" && elements_type == "Missing" && test_element_type == "Missing" && test_elements_type == "Tensor") {
+  return Rcpp::wrap(cpp_torch_namespace_isin_out_out_Tensor_element_Scalar_test_elements_Tensor(Rcpp::as<XPtrTorchTensor>(args["out"]), Rcpp::as<XPtrTorchScalar>(args["element"]), Rcpp::as<XPtrTorchTensor>(args["test_elements"]), Rcpp::as<XPtrTorchbool>(args["assume_unique"]), Rcpp::as<XPtrTorchbool>(args["invert"])));
+}
+  Rcpp::stop("No matching overload for isin_out");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace_kaiser_window (Rcpp::List args) {
+  static const std::vector<std::string> window_length_expected = {"int64_t"};
+  static const std::vector<std::string> periodic_expected = {"bool"};
+  static const std::vector<std::string> beta_expected = {"double"};
+  auto window_length_type = cpp_arg_to_torch_type(args["window_length"], window_length_expected, "window_length");
+  auto periodic_type = cpp_arg_to_torch_type(args["periodic"], periodic_expected, "periodic");
+  auto beta_type = cpp_arg_to_torch_type(args["beta"], beta_expected, "beta");
+if (window_length_type == "int64_t" && periodic_type == "Missing" && beta_type == "Missing") {
+  return Rcpp::wrap(cpp_torch_namespace_kaiser_window_window_length_int64_t(Rcpp::as<XPtrTorchint64_t>(args["window_length"]), Rcpp::as<XPtrTorchTensorOptions>(args["options"])));
+}
+if (window_length_type == "int64_t" && periodic_type == "bool" && beta_type == "Missing") {
+  return Rcpp::wrap(cpp_torch_namespace_kaiser_window_window_length_int64_t_periodic_bool(Rcpp::as<XPtrTorchint64_t>(args["window_length"]), Rcpp::as<XPtrTorchbool>(args["periodic"]), Rcpp::as<XPtrTorchTensorOptions>(args["options"])));
+}
+if (window_length_type == "int64_t" && periodic_type == "bool" && beta_type == "double") {
+  return Rcpp::wrap(cpp_torch_namespace_kaiser_window_window_length_int64_t_periodic_bool_beta_double(Rcpp::as<XPtrTorchint64_t>(args["window_length"]), Rcpp::as<XPtrTorchbool>(args["periodic"]), Rcpp::as<XPtrTorchdouble>(args["beta"]), Rcpp::as<XPtrTorchTensorOptions>(args["options"])));
+}
+  Rcpp::stop("No matching overload for kaiser_window");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace_kaiser_window_out (Rcpp::List args) {
+  static const std::vector<std::string> out_expected = {"Tensor"};
+  static const std::vector<std::string> window_length_expected = {"int64_t"};
+  static const std::vector<std::string> periodic_expected = {"bool"};
+  static const std::vector<std::string> beta_expected = {"double"};
+  auto out_type = cpp_arg_to_torch_type(args["out"], out_expected, "out");
+  auto window_length_type = cpp_arg_to_torch_type(args["window_length"], window_length_expected, "window_length");
+  auto periodic_type = cpp_arg_to_torch_type(args["periodic"], periodic_expected, "periodic");
+  auto beta_type = cpp_arg_to_torch_type(args["beta"], beta_expected, "beta");
+if (out_type == "Tensor" && window_length_type == "int64_t" && periodic_type == "Missing" && beta_type == "Missing") {
+  return Rcpp::wrap(cpp_torch_namespace_kaiser_window_out_out_Tensor_window_length_int64_t(Rcpp::as<XPtrTorchTensor>(args["out"]), Rcpp::as<XPtrTorchint64_t>(args["window_length"])));
+}
+if (out_type == "Tensor" && window_length_type == "int64_t" && periodic_type == "bool" && beta_type == "Missing") {
+  return Rcpp::wrap(cpp_torch_namespace_kaiser_window_out_out_Tensor_window_length_int64_t_periodic_bool(Rcpp::as<XPtrTorchTensor>(args["out"]), Rcpp::as<XPtrTorchint64_t>(args["window_length"]), Rcpp::as<XPtrTorchbool>(args["periodic"])));
+}
+if (out_type == "Tensor" && window_length_type == "int64_t" && periodic_type == "bool" && beta_type == "double") {
+  return Rcpp::wrap(cpp_torch_namespace_kaiser_window_out_out_Tensor_window_length_int64_t_periodic_bool_beta_double(Rcpp::as<XPtrTorchTensor>(args["out"]), Rcpp::as<XPtrTorchint64_t>(args["window_length"]), Rcpp::as<XPtrTorchbool>(args["periodic"]), Rcpp::as<XPtrTorchdouble>(args["beta"])));
+}
+  Rcpp::stop("No matching overload for kaiser_window_out");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace_linalg_cond (Rcpp::List args) {
+  static const std::vector<std::string> self_expected = {"Tensor"};
+  static const std::vector<std::string> p_expected = {"Scalar", "c10::string_view"};
+  auto self_type = cpp_arg_to_torch_type(args["self"], self_expected, "self");
+  auto p_type = cpp_arg_to_torch_type(args["p"], p_expected, "p");
+if (self_type == "Tensor" && p_type == "Scalar") {
+  return Rcpp::wrap(cpp_torch_namespace_linalg_cond_self_Tensor_p_Scalar(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchoptional_scalar>(args["p"])));
+}
+if (self_type == "Tensor" && p_type == "c10::string_view") {
+  return Rcpp::wrap(cpp_torch_namespace_linalg_cond_self_Tensor_p_c10string_view(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchstring_view>(args["p"])));
+}
+  Rcpp::stop("No matching overload for linalg_cond");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace_linalg_cond_out (Rcpp::List args) {
+  static const std::vector<std::string> out_expected = {"Tensor"};
+  static const std::vector<std::string> self_expected = {"Tensor"};
+  static const std::vector<std::string> p_expected = {"Scalar", "c10::string_view"};
+  auto out_type = cpp_arg_to_torch_type(args["out"], out_expected, "out");
+  auto self_type = cpp_arg_to_torch_type(args["self"], self_expected, "self");
+  auto p_type = cpp_arg_to_torch_type(args["p"], p_expected, "p");
+if (out_type == "Tensor" && self_type == "Tensor" && p_type == "Scalar") {
+  return Rcpp::wrap(cpp_torch_namespace_linalg_cond_out_out_Tensor_self_Tensor_p_Scalar(Rcpp::as<XPtrTorchTensor>(args["out"]), Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchoptional_scalar>(args["p"])));
+}
+if (out_type == "Tensor" && self_type == "Tensor" && p_type == "c10::string_view") {
+  return Rcpp::wrap(cpp_torch_namespace_linalg_cond_out_out_Tensor_self_Tensor_p_c10string_view(Rcpp::as<XPtrTorchTensor>(args["out"]), Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchstring_view>(args["p"])));
+}
+  Rcpp::stop("No matching overload for linalg_cond_out");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace_linalg_matrix_norm (Rcpp::List args) {
+  static const std::vector<std::string> self_expected = {"Tensor"};
+  static const std::vector<std::string> ord_expected = {"Scalar", "c10::string_view"};
+  auto self_type = cpp_arg_to_torch_type(args["self"], self_expected, "self");
+  auto ord_type = cpp_arg_to_torch_type(args["ord"], ord_expected, "ord");
+if (self_type == "Tensor" && ord_type == "Scalar") {
+  return Rcpp::wrap(cpp_torch_namespace_linalg_matrix_norm_self_Tensor_ord_Scalar(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchScalar>(args["ord"]), Rcpp::as<XPtrTorchIndexIntArrayRef>(args["dim"]), Rcpp::as<XPtrTorchbool>(args["keepdim"]), Rcpp::as<XPtrTorchoptional_scalar_type>(args["dtype"])));
+}
+if (self_type == "Tensor" && ord_type == "c10::string_view") {
+  return Rcpp::wrap(cpp_torch_namespace_linalg_matrix_norm_self_Tensor_ord_c10string_view(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchstring_view>(args["ord"]), Rcpp::as<XPtrTorchIndexIntArrayRef>(args["dim"]), Rcpp::as<XPtrTorchbool>(args["keepdim"]), Rcpp::as<XPtrTorchoptional_scalar_type>(args["dtype"])));
+}
+  Rcpp::stop("No matching overload for linalg_matrix_norm");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace_linalg_matrix_norm_out (Rcpp::List args) {
+  static const std::vector<std::string> out_expected = {"Tensor"};
+  static const std::vector<std::string> self_expected = {"Tensor"};
+  static const std::vector<std::string> ord_expected = {"Scalar", "c10::string_view"};
+  auto out_type = cpp_arg_to_torch_type(args["out"], out_expected, "out");
+  auto self_type = cpp_arg_to_torch_type(args["self"], self_expected, "self");
+  auto ord_type = cpp_arg_to_torch_type(args["ord"], ord_expected, "ord");
+if (out_type == "Tensor" && self_type == "Tensor" && ord_type == "Scalar") {
+  return Rcpp::wrap(cpp_torch_namespace_linalg_matrix_norm_out_out_Tensor_self_Tensor_ord_Scalar(Rcpp::as<XPtrTorchTensor>(args["out"]), Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchScalar>(args["ord"]), Rcpp::as<XPtrTorchIndexIntArrayRef>(args["dim"]), Rcpp::as<XPtrTorchbool>(args["keepdim"]), Rcpp::as<XPtrTorchoptional_scalar_type>(args["dtype"])));
+}
+if (out_type == "Tensor" && self_type == "Tensor" && ord_type == "c10::string_view") {
+  return Rcpp::wrap(cpp_torch_namespace_linalg_matrix_norm_out_out_Tensor_self_Tensor_ord_c10string_view(Rcpp::as<XPtrTorchTensor>(args["out"]), Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchstring_view>(args["ord"]), Rcpp::as<XPtrTorchIndexIntArrayRef>(args["dim"]), Rcpp::as<XPtrTorchbool>(args["keepdim"]), Rcpp::as<XPtrTorchoptional_scalar_type>(args["dtype"])));
+}
+  Rcpp::stop("No matching overload for linalg_matrix_norm_out");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace_linalg_matrix_rank (Rcpp::List args) {
+  static const std::vector<std::string> input_expected = {"Tensor"};
+  static const std::vector<std::string> self_expected = {"Tensor"};
+  static const std::vector<std::string> atol_expected = {"Tensor", "double"};
+  static const std::vector<std::string> tol_expected = {"double", "Tensor"};
+  static const std::vector<std::string> rtol_expected = {"Tensor", "double"};
+  auto input_type = cpp_arg_to_torch_type(args["input"], input_expected, "input");
+  auto self_type = cpp_arg_to_torch_type(args["self"], self_expected, "self");
+  auto atol_type = cpp_arg_to_torch_type(args["atol"], atol_expected, "atol");
+  auto tol_type = cpp_arg_to_torch_type(args["tol"], tol_expected, "tol");
+  auto rtol_type = cpp_arg_to_torch_type(args["rtol"], rtol_expected, "rtol");
+if (input_type == "Tensor" && self_type == "Missing" && atol_type == "Tensor" && tol_type == "Missing" && rtol_type == "Tensor") {
+  return Rcpp::wrap(cpp_torch_namespace_linalg_matrix_rank_input_Tensor_atol_Tensor_rtol_Tensor(Rcpp::as<XPtrTorchTensor>(args["input"]), Rcpp::as<XPtrTorchOptionalTensor>(args["atol"]), Rcpp::as<XPtrTorchOptionalTensor>(args["rtol"]), Rcpp::as<XPtrTorchbool>(args["hermitian"])));
+}
+if (input_type == "Missing" && self_type == "Tensor" && atol_type == "double" && tol_type == "Missing" && rtol_type == "double") {
+  return Rcpp::wrap(cpp_torch_namespace_linalg_matrix_rank_self_Tensor_atol_double_rtol_double(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchOptionaldouble>(args["atol"]), Rcpp::as<XPtrTorchOptionaldouble>(args["rtol"]), Rcpp::as<XPtrTorchbool>(args["hermitian"])));
+}
+if (input_type == "Missing" && self_type == "Tensor" && atol_type == "Missing" && tol_type == "double" && rtol_type == "Missing") {
+  return Rcpp::wrap(cpp_torch_namespace_linalg_matrix_rank_self_Tensor_tol_double(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchdouble>(args["tol"]), Rcpp::as<XPtrTorchbool>(args["hermitian"])));
+}
+if (input_type == "Tensor" && self_type == "Missing" && atol_type == "Missing" && tol_type == "Tensor" && rtol_type == "Missing") {
+  return Rcpp::wrap(cpp_torch_namespace_linalg_matrix_rank_input_Tensor_tol_Tensor(Rcpp::as<XPtrTorchTensor>(args["input"]), Rcpp::as<XPtrTorchTensor>(args["tol"]), Rcpp::as<XPtrTorchbool>(args["hermitian"])));
+}
+  Rcpp::stop("No matching overload for linalg_matrix_rank");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace_linalg_matrix_rank_out (Rcpp::List args) {
+  static const std::vector<std::string> out_expected = {"Tensor"};
+  static const std::vector<std::string> input_expected = {"Tensor"};
+  static const std::vector<std::string> self_expected = {"Tensor"};
+  static const std::vector<std::string> atol_expected = {"Tensor", "double"};
+  static const std::vector<std::string> tol_expected = {"double", "Tensor"};
+  static const std::vector<std::string> rtol_expected = {"Tensor", "double"};
+  auto out_type = cpp_arg_to_torch_type(args["out"], out_expected, "out");
+  auto input_type = cpp_arg_to_torch_type(args["input"], input_expected, "input");
+  auto self_type = cpp_arg_to_torch_type(args["self"], self_expected, "self");
+  auto atol_type = cpp_arg_to_torch_type(args["atol"], atol_expected, "atol");
+  auto tol_type = cpp_arg_to_torch_type(args["tol"], tol_expected, "tol");
+  auto rtol_type = cpp_arg_to_torch_type(args["rtol"], rtol_expected, "rtol");
+if (out_type == "Tensor" && input_type == "Tensor" && self_type == "Missing" && atol_type == "Tensor" && tol_type == "Missing" && rtol_type == "Tensor") {
+  return Rcpp::wrap(cpp_torch_namespace_linalg_matrix_rank_out_out_Tensor_input_Tensor_atol_Tensor_rtol_Tensor(Rcpp::as<XPtrTorchTensor>(args["out"]), Rcpp::as<XPtrTorchTensor>(args["input"]), Rcpp::as<XPtrTorchOptionalTensor>(args["atol"]), Rcpp::as<XPtrTorchOptionalTensor>(args["rtol"]), Rcpp::as<XPtrTorchbool>(args["hermitian"])));
+}
+if (out_type == "Tensor" && input_type == "Missing" && self_type == "Tensor" && atol_type == "double" && tol_type == "Missing" && rtol_type == "double") {
+  return Rcpp::wrap(cpp_torch_namespace_linalg_matrix_rank_out_out_Tensor_self_Tensor_atol_double_rtol_double(Rcpp::as<XPtrTorchTensor>(args["out"]), Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchOptionaldouble>(args["atol"]), Rcpp::as<XPtrTorchOptionaldouble>(args["rtol"]), Rcpp::as<XPtrTorchbool>(args["hermitian"])));
+}
+if (out_type == "Tensor" && input_type == "Missing" && self_type == "Tensor" && atol_type == "Missing" && tol_type == "double" && rtol_type == "Missing") {
+  return Rcpp::wrap(cpp_torch_namespace_linalg_matrix_rank_out_out_Tensor_self_Tensor_tol_double(Rcpp::as<XPtrTorchTensor>(args["out"]), Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchdouble>(args["tol"]), Rcpp::as<XPtrTorchbool>(args["hermitian"])));
+}
+if (out_type == "Tensor" && input_type == "Tensor" && self_type == "Missing" && atol_type == "Missing" && tol_type == "Tensor" && rtol_type == "Missing") {
+  return Rcpp::wrap(cpp_torch_namespace_linalg_matrix_rank_out_out_Tensor_input_Tensor_tol_Tensor(Rcpp::as<XPtrTorchTensor>(args["out"]), Rcpp::as<XPtrTorchTensor>(args["input"]), Rcpp::as<XPtrTorchTensor>(args["tol"]), Rcpp::as<XPtrTorchbool>(args["hermitian"])));
+}
+  Rcpp::stop("No matching overload for linalg_matrix_rank_out");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace_linalg_norm (Rcpp::List args) {
+  static const std::vector<std::string> self_expected = {"Tensor"};
+  static const std::vector<std::string> ord_expected = {"Scalar", "c10::string_view"};
+  auto self_type = cpp_arg_to_torch_type(args["self"], self_expected, "self");
+  auto ord_type = cpp_arg_to_torch_type(args["ord"], ord_expected, "ord");
+if (self_type == "Tensor" && ord_type == "Scalar") {
+  return Rcpp::wrap(cpp_torch_namespace_linalg_norm_self_Tensor_ord_Scalar(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchoptional_scalar>(args["ord"]), Rcpp::as<XPtrTorchOptionalIndexIntArrayRef>(args["dim"]), Rcpp::as<XPtrTorchbool>(args["keepdim"]), Rcpp::as<XPtrTorchoptional_scalar_type>(args["dtype"])));
+}
+if (self_type == "Tensor" && ord_type == "c10::string_view") {
+  return Rcpp::wrap(cpp_torch_namespace_linalg_norm_self_Tensor_ord_c10string_view(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchstring_view>(args["ord"]), Rcpp::as<XPtrTorchOptionalIndexIntArrayRef>(args["dim"]), Rcpp::as<XPtrTorchbool>(args["keepdim"]), Rcpp::as<XPtrTorchoptional_scalar_type>(args["dtype"])));
+}
+  Rcpp::stop("No matching overload for linalg_norm");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace_linalg_norm_out (Rcpp::List args) {
+  static const std::vector<std::string> out_expected = {"Tensor"};
+  static const std::vector<std::string> self_expected = {"Tensor"};
+  static const std::vector<std::string> ord_expected = {"Scalar", "c10::string_view"};
+  auto out_type = cpp_arg_to_torch_type(args["out"], out_expected, "out");
+  auto self_type = cpp_arg_to_torch_type(args["self"], self_expected, "self");
+  auto ord_type = cpp_arg_to_torch_type(args["ord"], ord_expected, "ord");
+if (out_type == "Tensor" && self_type == "Tensor" && ord_type == "Scalar") {
+  return Rcpp::wrap(cpp_torch_namespace_linalg_norm_out_out_Tensor_self_Tensor_ord_Scalar(Rcpp::as<XPtrTorchTensor>(args["out"]), Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchoptional_scalar>(args["ord"]), Rcpp::as<XPtrTorchOptionalIndexIntArrayRef>(args["dim"]), Rcpp::as<XPtrTorchbool>(args["keepdim"]), Rcpp::as<XPtrTorchoptional_scalar_type>(args["dtype"])));
+}
+if (out_type == "Tensor" && self_type == "Tensor" && ord_type == "c10::string_view") {
+  return Rcpp::wrap(cpp_torch_namespace_linalg_norm_out_out_Tensor_self_Tensor_ord_c10string_view(Rcpp::as<XPtrTorchTensor>(args["out"]), Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchstring_view>(args["ord"]), Rcpp::as<XPtrTorchOptionalIndexIntArrayRef>(args["dim"]), Rcpp::as<XPtrTorchbool>(args["keepdim"]), Rcpp::as<XPtrTorchoptional_scalar_type>(args["dtype"])));
+}
+  Rcpp::stop("No matching overload for linalg_norm_out");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace_linalg_pinv (Rcpp::List args) {
+  static const std::vector<std::string> self_expected = {"Tensor"};
+  static const std::vector<std::string> atol_expected = {"Tensor", "double"};
+  static const std::vector<std::string> rcond_expected = {"double", "Tensor"};
+  static const std::vector<std::string> rtol_expected = {"Tensor", "double"};
+  auto self_type = cpp_arg_to_torch_type(args["self"], self_expected, "self");
+  auto atol_type = cpp_arg_to_torch_type(args["atol"], atol_expected, "atol");
+  auto rcond_type = cpp_arg_to_torch_type(args["rcond"], rcond_expected, "rcond");
+  auto rtol_type = cpp_arg_to_torch_type(args["rtol"], rtol_expected, "rtol");
+if (self_type == "Tensor" && atol_type == "Tensor" && rcond_type == "Missing" && rtol_type == "Tensor") {
+  return Rcpp::wrap(cpp_torch_namespace_linalg_pinv_self_Tensor_atol_Tensor_rtol_Tensor(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchOptionalTensor>(args["atol"]), Rcpp::as<XPtrTorchOptionalTensor>(args["rtol"]), Rcpp::as<XPtrTorchbool>(args["hermitian"])));
+}
+if (self_type == "Tensor" && atol_type == "double" && rcond_type == "Missing" && rtol_type == "double") {
+  return Rcpp::wrap(cpp_torch_namespace_linalg_pinv_self_Tensor_atol_double_rtol_double(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchOptionaldouble>(args["atol"]), Rcpp::as<XPtrTorchOptionaldouble>(args["rtol"]), Rcpp::as<XPtrTorchbool>(args["hermitian"])));
+}
+if (self_type == "Tensor" && atol_type == "Missing" && rcond_type == "double" && rtol_type == "Missing") {
+  return Rcpp::wrap(cpp_torch_namespace_linalg_pinv_self_Tensor_rcond_double(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchdouble>(args["rcond"]), Rcpp::as<XPtrTorchbool>(args["hermitian"])));
+}
+if (self_type == "Tensor" && atol_type == "Missing" && rcond_type == "Tensor" && rtol_type == "Missing") {
+  return Rcpp::wrap(cpp_torch_namespace_linalg_pinv_self_Tensor_rcond_Tensor(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchTensor>(args["rcond"]), Rcpp::as<XPtrTorchbool>(args["hermitian"])));
+}
+  Rcpp::stop("No matching overload for linalg_pinv");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace_linalg_pinv_out (Rcpp::List args) {
+  static const std::vector<std::string> out_expected = {"Tensor"};
+  static const std::vector<std::string> self_expected = {"Tensor"};
+  static const std::vector<std::string> atol_expected = {"Tensor", "double"};
+  static const std::vector<std::string> rcond_expected = {"double", "Tensor"};
+  static const std::vector<std::string> rtol_expected = {"Tensor", "double"};
+  auto out_type = cpp_arg_to_torch_type(args["out"], out_expected, "out");
+  auto self_type = cpp_arg_to_torch_type(args["self"], self_expected, "self");
+  auto atol_type = cpp_arg_to_torch_type(args["atol"], atol_expected, "atol");
+  auto rcond_type = cpp_arg_to_torch_type(args["rcond"], rcond_expected, "rcond");
+  auto rtol_type = cpp_arg_to_torch_type(args["rtol"], rtol_expected, "rtol");
+if (out_type == "Tensor" && self_type == "Tensor" && atol_type == "Tensor" && rcond_type == "Missing" && rtol_type == "Tensor") {
+  return Rcpp::wrap(cpp_torch_namespace_linalg_pinv_out_out_Tensor_self_Tensor_atol_Tensor_rtol_Tensor(Rcpp::as<XPtrTorchTensor>(args["out"]), Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchOptionalTensor>(args["atol"]), Rcpp::as<XPtrTorchOptionalTensor>(args["rtol"]), Rcpp::as<XPtrTorchbool>(args["hermitian"])));
+}
+if (out_type == "Tensor" && self_type == "Tensor" && atol_type == "double" && rcond_type == "Missing" && rtol_type == "double") {
+  return Rcpp::wrap(cpp_torch_namespace_linalg_pinv_out_out_Tensor_self_Tensor_atol_double_rtol_double(Rcpp::as<XPtrTorchTensor>(args["out"]), Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchOptionaldouble>(args["atol"]), Rcpp::as<XPtrTorchOptionaldouble>(args["rtol"]), Rcpp::as<XPtrTorchbool>(args["hermitian"])));
+}
+if (out_type == "Tensor" && self_type == "Tensor" && atol_type == "Missing" && rcond_type == "double" && rtol_type == "Missing") {
+  return Rcpp::wrap(cpp_torch_namespace_linalg_pinv_out_out_Tensor_self_Tensor_rcond_double(Rcpp::as<XPtrTorchTensor>(args["out"]), Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchdouble>(args["rcond"]), Rcpp::as<XPtrTorchbool>(args["hermitian"])));
+}
+if (out_type == "Tensor" && self_type == "Tensor" && atol_type == "Missing" && rcond_type == "Tensor" && rtol_type == "Missing") {
+  return Rcpp::wrap(cpp_torch_namespace_linalg_pinv_out_out_Tensor_self_Tensor_rcond_Tensor(Rcpp::as<XPtrTorchTensor>(args["out"]), Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchTensor>(args["rcond"]), Rcpp::as<XPtrTorchbool>(args["hermitian"])));
+}
+  Rcpp::stop("No matching overload for linalg_pinv_out");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace_linspace (Rcpp::List args) {
+  static const std::vector<std::string> start_expected = {"Scalar", "Tensor"};
+  static const std::vector<std::string> end_expected = {"Scalar", "Tensor"};
+  static const std::vector<std::string> steps_expected = {"int64_t"};
+  auto start_type = cpp_arg_to_torch_type(args["start"], start_expected, "start");
+  auto end_type = cpp_arg_to_torch_type(args["end"], end_expected, "end");
+  auto steps_type = cpp_arg_to_torch_type(args["steps"], steps_expected, "steps");
+if (start_type == "Scalar" && end_type == "Scalar" && steps_type == "int64_t") {
+  return Rcpp::wrap(cpp_torch_namespace_linspace_start_Scalar_end_Scalar_steps_int64_t(Rcpp::as<XPtrTorchScalar>(args["start"]), Rcpp::as<XPtrTorchScalar>(args["end"]), Rcpp::as<XPtrTorchint64_t>(args["steps"]), Rcpp::as<XPtrTorchTensorOptions>(args["options"])));
+}
+if (start_type == "Tensor" && end_type == "Tensor" && steps_type == "int64_t") {
+  return Rcpp::wrap(cpp_torch_namespace_linspace_start_Tensor_end_Tensor_steps_int64_t(Rcpp::as<XPtrTorchTensor>(args["start"]), Rcpp::as<XPtrTorchTensor>(args["end"]), Rcpp::as<XPtrTorchint64_t>(args["steps"]), Rcpp::as<XPtrTorchTensorOptions>(args["options"])));
+}
+if (start_type == "Tensor" && end_type == "Scalar" && steps_type == "int64_t") {
+  return Rcpp::wrap(cpp_torch_namespace_linspace_start_Tensor_end_Scalar_steps_int64_t(Rcpp::as<XPtrTorchTensor>(args["start"]), Rcpp::as<XPtrTorchScalar>(args["end"]), Rcpp::as<XPtrTorchint64_t>(args["steps"]), Rcpp::as<XPtrTorchTensorOptions>(args["options"])));
+}
+if (start_type == "Scalar" && end_type == "Tensor" && steps_type == "int64_t") {
+  return Rcpp::wrap(cpp_torch_namespace_linspace_start_Scalar_end_Tensor_steps_int64_t(Rcpp::as<XPtrTorchScalar>(args["start"]), Rcpp::as<XPtrTorchTensor>(args["end"]), Rcpp::as<XPtrTorchint64_t>(args["steps"]), Rcpp::as<XPtrTorchTensorOptions>(args["options"])));
+}
+  Rcpp::stop("No matching overload for linspace");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace_linspace_out (Rcpp::List args) {
+  static const std::vector<std::string> out_expected = {"Tensor"};
+  static const std::vector<std::string> start_expected = {"Scalar", "Tensor"};
+  static const std::vector<std::string> end_expected = {"Scalar", "Tensor"};
+  static const std::vector<std::string> steps_expected = {"int64_t"};
+  auto out_type = cpp_arg_to_torch_type(args["out"], out_expected, "out");
+  auto start_type = cpp_arg_to_torch_type(args["start"], start_expected, "start");
+  auto end_type = cpp_arg_to_torch_type(args["end"], end_expected, "end");
+  auto steps_type = cpp_arg_to_torch_type(args["steps"], steps_expected, "steps");
+if (out_type == "Tensor" && start_type == "Scalar" && end_type == "Scalar" && steps_type == "int64_t") {
+  return Rcpp::wrap(cpp_torch_namespace_linspace_out_out_Tensor_start_Scalar_end_Scalar_steps_int64_t(Rcpp::as<XPtrTorchTensor>(args["out"]), Rcpp::as<XPtrTorchScalar>(args["start"]), Rcpp::as<XPtrTorchScalar>(args["end"]), Rcpp::as<XPtrTorchint64_t>(args["steps"])));
+}
+if (out_type == "Tensor" && start_type == "Tensor" && end_type == "Tensor" && steps_type == "int64_t") {
+  return Rcpp::wrap(cpp_torch_namespace_linspace_out_out_Tensor_start_Tensor_end_Tensor_steps_int64_t(Rcpp::as<XPtrTorchTensor>(args["out"]), Rcpp::as<XPtrTorchTensor>(args["start"]), Rcpp::as<XPtrTorchTensor>(args["end"]), Rcpp::as<XPtrTorchint64_t>(args["steps"])));
+}
+if (out_type == "Tensor" && start_type == "Tensor" && end_type == "Scalar" && steps_type == "int64_t") {
+  return Rcpp::wrap(cpp_torch_namespace_linspace_out_out_Tensor_start_Tensor_end_Scalar_steps_int64_t(Rcpp::as<XPtrTorchTensor>(args["out"]), Rcpp::as<XPtrTorchTensor>(args["start"]), Rcpp::as<XPtrTorchScalar>(args["end"]), Rcpp::as<XPtrTorchint64_t>(args["steps"])));
+}
+if (out_type == "Tensor" && start_type == "Scalar" && end_type == "Tensor" && steps_type == "int64_t") {
+  return Rcpp::wrap(cpp_torch_namespace_linspace_out_out_Tensor_start_Scalar_end_Tensor_steps_int64_t(Rcpp::as<XPtrTorchTensor>(args["out"]), Rcpp::as<XPtrTorchScalar>(args["start"]), Rcpp::as<XPtrTorchTensor>(args["end"]), Rcpp::as<XPtrTorchint64_t>(args["steps"])));
+}
+  Rcpp::stop("No matching overload for linspace_out");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace_logspace (Rcpp::List args) {
+  static const std::vector<std::string> start_expected = {"Scalar", "Tensor"};
+  static const std::vector<std::string> end_expected = {"Scalar", "Tensor"};
+  static const std::vector<std::string> steps_expected = {"int64_t"};
+  auto start_type = cpp_arg_to_torch_type(args["start"], start_expected, "start");
+  auto end_type = cpp_arg_to_torch_type(args["end"], end_expected, "end");
+  auto steps_type = cpp_arg_to_torch_type(args["steps"], steps_expected, "steps");
+if (start_type == "Scalar" && end_type == "Scalar" && steps_type == "int64_t") {
+  return Rcpp::wrap(cpp_torch_namespace_logspace_start_Scalar_end_Scalar_steps_int64_t(Rcpp::as<XPtrTorchScalar>(args["start"]), Rcpp::as<XPtrTorchScalar>(args["end"]), Rcpp::as<XPtrTorchint64_t>(args["steps"]), Rcpp::as<XPtrTorchdouble>(args["base"]), Rcpp::as<XPtrTorchTensorOptions>(args["options"])));
+}
+if (start_type == "Tensor" && end_type == "Tensor" && steps_type == "int64_t") {
+  return Rcpp::wrap(cpp_torch_namespace_logspace_start_Tensor_end_Tensor_steps_int64_t(Rcpp::as<XPtrTorchTensor>(args["start"]), Rcpp::as<XPtrTorchTensor>(args["end"]), Rcpp::as<XPtrTorchint64_t>(args["steps"]), Rcpp::as<XPtrTorchdouble>(args["base"]), Rcpp::as<XPtrTorchTensorOptions>(args["options"])));
+}
+if (start_type == "Tensor" && end_type == "Scalar" && steps_type == "int64_t") {
+  return Rcpp::wrap(cpp_torch_namespace_logspace_start_Tensor_end_Scalar_steps_int64_t(Rcpp::as<XPtrTorchTensor>(args["start"]), Rcpp::as<XPtrTorchScalar>(args["end"]), Rcpp::as<XPtrTorchint64_t>(args["steps"]), Rcpp::as<XPtrTorchdouble>(args["base"]), Rcpp::as<XPtrTorchTensorOptions>(args["options"])));
+}
+if (start_type == "Scalar" && end_type == "Tensor" && steps_type == "int64_t") {
+  return Rcpp::wrap(cpp_torch_namespace_logspace_start_Scalar_end_Tensor_steps_int64_t(Rcpp::as<XPtrTorchScalar>(args["start"]), Rcpp::as<XPtrTorchTensor>(args["end"]), Rcpp::as<XPtrTorchint64_t>(args["steps"]), Rcpp::as<XPtrTorchdouble>(args["base"]), Rcpp::as<XPtrTorchTensorOptions>(args["options"])));
+}
+  Rcpp::stop("No matching overload for logspace");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace_logspace_out (Rcpp::List args) {
+  static const std::vector<std::string> out_expected = {"Tensor"};
+  static const std::vector<std::string> start_expected = {"Scalar", "Tensor"};
+  static const std::vector<std::string> end_expected = {"Scalar", "Tensor"};
+  static const std::vector<std::string> steps_expected = {"int64_t"};
+  auto out_type = cpp_arg_to_torch_type(args["out"], out_expected, "out");
+  auto start_type = cpp_arg_to_torch_type(args["start"], start_expected, "start");
+  auto end_type = cpp_arg_to_torch_type(args["end"], end_expected, "end");
+  auto steps_type = cpp_arg_to_torch_type(args["steps"], steps_expected, "steps");
+if (out_type == "Tensor" && start_type == "Scalar" && end_type == "Scalar" && steps_type == "int64_t") {
+  return Rcpp::wrap(cpp_torch_namespace_logspace_out_out_Tensor_start_Scalar_end_Scalar_steps_int64_t(Rcpp::as<XPtrTorchTensor>(args["out"]), Rcpp::as<XPtrTorchScalar>(args["start"]), Rcpp::as<XPtrTorchScalar>(args["end"]), Rcpp::as<XPtrTorchint64_t>(args["steps"]), Rcpp::as<XPtrTorchdouble>(args["base"])));
+}
+if (out_type == "Tensor" && start_type == "Tensor" && end_type == "Tensor" && steps_type == "int64_t") {
+  return Rcpp::wrap(cpp_torch_namespace_logspace_out_out_Tensor_start_Tensor_end_Tensor_steps_int64_t(Rcpp::as<XPtrTorchTensor>(args["out"]), Rcpp::as<XPtrTorchTensor>(args["start"]), Rcpp::as<XPtrTorchTensor>(args["end"]), Rcpp::as<XPtrTorchint64_t>(args["steps"]), Rcpp::as<XPtrTorchdouble>(args["base"])));
+}
+if (out_type == "Tensor" && start_type == "Tensor" && end_type == "Scalar" && steps_type == "int64_t") {
+  return Rcpp::wrap(cpp_torch_namespace_logspace_out_out_Tensor_start_Tensor_end_Scalar_steps_int64_t(Rcpp::as<XPtrTorchTensor>(args["out"]), Rcpp::as<XPtrTorchTensor>(args["start"]), Rcpp::as<XPtrTorchScalar>(args["end"]), Rcpp::as<XPtrTorchint64_t>(args["steps"]), Rcpp::as<XPtrTorchdouble>(args["base"])));
+}
+if (out_type == "Tensor" && start_type == "Scalar" && end_type == "Tensor" && steps_type == "int64_t") {
+  return Rcpp::wrap(cpp_torch_namespace_logspace_out_out_Tensor_start_Scalar_end_Tensor_steps_int64_t(Rcpp::as<XPtrTorchTensor>(args["out"]), Rcpp::as<XPtrTorchScalar>(args["start"]), Rcpp::as<XPtrTorchTensor>(args["end"]), Rcpp::as<XPtrTorchint64_t>(args["steps"]), Rcpp::as<XPtrTorchdouble>(args["base"])));
+}
+  Rcpp::stop("No matching overload for logspace_out");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace_lstm (Rcpp::List args) {
+  static const std::vector<std::string> data_expected = {"Tensor"};
+  static const std::vector<std::string> input_expected = {"Tensor"};
+  static const std::vector<std::string> batch_sizes_expected = {"Tensor"};
+  static const std::vector<std::string> hx_expected = {"TensorList"};
+  static const std::vector<std::string> params_expected = {"TensorList"};
+  static const std::vector<std::string> has_biases_expected = {"bool"};
+  static const std::vector<std::string> num_layers_expected = {"int64_t"};
+  static const std::vector<std::string> dropout_expected = {"double"};
+  static const std::vector<std::string> train_expected = {"bool"};
+  static const std::vector<std::string> batch_first_expected = {"bool"};
+  static const std::vector<std::string> bidirectional_expected = {"bool"};
+  auto data_type = cpp_arg_to_torch_type(args["data"], data_expected, "data");
+  auto input_type = cpp_arg_to_torch_type(args["input"], input_expected, "input");
+  auto batch_sizes_type = cpp_arg_to_torch_type(args["batch_sizes"], batch_sizes_expected, "batch_sizes");
+  auto hx_type = cpp_arg_to_torch_type(args["hx"], hx_expected, "hx");
+  auto params_type = cpp_arg_to_torch_type(args["params"], params_expected, "params");
+  auto has_biases_type = cpp_arg_to_torch_type(args["has_biases"], has_biases_expected, "has_biases");
+  auto num_layers_type = cpp_arg_to_torch_type(args["num_layers"], num_layers_expected, "num_layers");
+  auto dropout_type = cpp_arg_to_torch_type(args["dropout"], dropout_expected, "dropout");
+  auto train_type = cpp_arg_to_torch_type(args["train"], train_expected, "train");
+  auto batch_first_type = cpp_arg_to_torch_type(args["batch_first"], batch_first_expected, "batch_first");
+  auto bidirectional_type = cpp_arg_to_torch_type(args["bidirectional"], bidirectional_expected, "bidirectional");
+if (data_type == "Missing" && input_type == "Tensor" && batch_sizes_type == "Missing" && hx_type == "TensorList" && params_type == "TensorList" && has_biases_type == "bool" && num_layers_type == "int64_t" && dropout_type == "double" && train_type == "bool" && batch_first_type == "bool" && bidirectional_type == "bool") {
+  return Rcpp::wrap(cpp_torch_namespace_lstm_input_Tensor_hx_TensorList_params_TensorList_has_biases_bool_num_layers_int64_t_dropout_double_train_bool_batch_first_bool_bidirectional_bool(Rcpp::as<XPtrTorchTensor>(args["input"]), Rcpp::as<XPtrTorchTensorList>(args["hx"]), Rcpp::as<XPtrTorchTensorList>(args["params"]), Rcpp::as<XPtrTorchbool>(args["has_biases"]), Rcpp::as<XPtrTorchint64_t>(args["num_layers"]), Rcpp::as<XPtrTorchdouble>(args["dropout"]), Rcpp::as<XPtrTorchbool>(args["train"]), Rcpp::as<XPtrTorchbool>(args["bidirectional"]), Rcpp::as<XPtrTorchbool>(args["batch_first"])));
+}
+if (data_type == "Tensor" && input_type == "Missing" && batch_sizes_type == "Tensor" && hx_type == "TensorList" && params_type == "TensorList" && has_biases_type == "bool" && num_layers_type == "int64_t" && dropout_type == "double" && train_type == "bool" && batch_first_type == "Missing" && bidirectional_type == "bool") {
+  return Rcpp::wrap(cpp_torch_namespace_lstm_data_Tensor_batch_sizes_Tensor_hx_TensorList_params_TensorList_has_biases_bool_num_layers_int64_t_dropout_double_train_bool_bidirectional_bool(Rcpp::as<XPtrTorchTensor>(args["data"]), Rcpp::as<XPtrTorchTensor>(args["batch_sizes"]), Rcpp::as<XPtrTorchTensorList>(args["hx"]), Rcpp::as<XPtrTorchTensorList>(args["params"]), Rcpp::as<XPtrTorchbool>(args["has_biases"]), Rcpp::as<XPtrTorchint64_t>(args["num_layers"]), Rcpp::as<XPtrTorchdouble>(args["dropout"]), Rcpp::as<XPtrTorchbool>(args["train"]), Rcpp::as<XPtrTorchbool>(args["bidirectional"])));
+}
+  Rcpp::stop("No matching overload for lstm");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace_max (Rcpp::List args) {
+  static const std::vector<std::string> self_expected = {"Tensor"};
+  static const std::vector<std::string> dim_expected = {"int64_t", "Dimname"};
+  static const std::vector<std::string> other_expected = {"Tensor"};
+  auto self_type = cpp_arg_to_torch_type(args["self"], self_expected, "self");
+  auto dim_type = cpp_arg_to_torch_type(args["dim"], dim_expected, "dim");
+  auto other_type = cpp_arg_to_torch_type(args["other"], other_expected, "other");
+if (self_type == "Tensor" && dim_type == "int64_t" && other_type == "Missing") {
+  return Rcpp::wrap(cpp_torch_namespace_max_self_Tensor_dim_int64_t(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchindex_int64_t>(args["dim"]), Rcpp::as<XPtrTorchbool>(args["keepdim"])));
+}
+if (self_type == "Tensor" && dim_type == "Dimname" && other_type == "Missing") {
+  return Rcpp::wrap(cpp_torch_namespace_max_self_Tensor_dim_Dimname(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchDimname>(args["dim"]), Rcpp::as<XPtrTorchbool>(args["keepdim"])));
+}
+if (self_type == "Tensor" && dim_type == "Missing" && other_type == "Missing") {
+  return Rcpp::wrap(cpp_torch_namespace_max_self_Tensor(Rcpp::as<XPtrTorchTensor>(args["self"])));
+}
+if (self_type == "Tensor" && dim_type == "Missing" && other_type == "Tensor") {
+  return Rcpp::wrap(cpp_torch_namespace_max_self_Tensor_other_Tensor(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchTensor>(args["other"])));
+}
+  Rcpp::stop("No matching overload for max");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace_max_out (Rcpp::List args) {
+  static const std::vector<std::string> max_expected = {"Tensor"};
+  static const std::vector<std::string> out_expected = {"Tensor"};
+  static const std::vector<std::string> max_values_expected = {"Tensor"};
+  static const std::vector<std::string> other_expected = {"Tensor"};
+  static const std::vector<std::string> self_expected = {"Tensor"};
+  static const std::vector<std::string> dim_expected = {"int64_t", "Dimname"};
+  auto max_type = cpp_arg_to_torch_type(args["max"], max_expected, "max");
+  auto out_type = cpp_arg_to_torch_type(args["out"], out_expected, "out");
+  auto max_values_type = cpp_arg_to_torch_type(args["max_values"], max_values_expected, "max_values");
+  auto other_type = cpp_arg_to_torch_type(args["other"], other_expected, "other");
+  auto self_type = cpp_arg_to_torch_type(args["self"], self_expected, "self");
+  auto dim_type = cpp_arg_to_torch_type(args["dim"], dim_expected, "dim");
+if (max_type == "Tensor" && out_type == "Missing" && max_values_type == "Tensor" && other_type == "Missing" && self_type == "Tensor" && dim_type == "int64_t") {
+  return Rcpp::wrap(cpp_torch_namespace_max_out_max_Tensor_max_values_Tensor_self_Tensor_dim_int64_t(Rcpp::as<XPtrTorchTensor>(args["max"]), Rcpp::as<XPtrTorchTensor>(args["max_values"]), Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchindex_int64_t>(args["dim"]), Rcpp::as<XPtrTorchbool>(args["keepdim"])));
+}
+if (max_type == "Tensor" && out_type == "Missing" && max_values_type == "Tensor" && other_type == "Missing" && self_type == "Tensor" && dim_type == "Dimname") {
+  return Rcpp::wrap(cpp_torch_namespace_max_out_max_Tensor_max_values_Tensor_self_Tensor_dim_Dimname(Rcpp::as<XPtrTorchTensor>(args["max"]), Rcpp::as<XPtrTorchTensor>(args["max_values"]), Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchDimname>(args["dim"]), Rcpp::as<XPtrTorchbool>(args["keepdim"])));
+}
+if (max_type == "Missing" && out_type == "Tensor" && max_values_type == "Missing" && other_type == "Tensor" && self_type == "Tensor" && dim_type == "Missing") {
+  return Rcpp::wrap(cpp_torch_namespace_max_out_out_Tensor_other_Tensor_self_Tensor(Rcpp::as<XPtrTorchTensor>(args["out"]), Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchTensor>(args["other"])));
+}
+if (max_type == "Missing" && out_type == "Tensor" && max_values_type == "Missing" && other_type == "Missing" && self_type == "Tensor" && dim_type == "Missing") {
+  return Rcpp::wrap(cpp_torch_namespace_max_out_out_Tensor_self_Tensor(Rcpp::as<XPtrTorchTensor>(args["out"]), Rcpp::as<XPtrTorchTensor>(args["self"])));
+}
+  Rcpp::stop("No matching overload for max_out");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace_mean (Rcpp::List args) {
+  static const std::vector<std::string> self_expected = {"Tensor"};
+  static const std::vector<std::string> dim_expected = {"IntArrayRef", "DimnameList"};
+  auto self_type = cpp_arg_to_torch_type(args["self"], self_expected, "self");
+  auto dim_type = cpp_arg_to_torch_type(args["dim"], dim_expected, "dim");
+if (self_type == "Tensor" && dim_type == "Missing") {
+  return Rcpp::wrap(cpp_torch_namespace_mean_self_Tensor(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchoptional_scalar_type>(args["dtype"])));
+}
+if (self_type == "Tensor" && dim_type == "IntArrayRef") {
+  return Rcpp::wrap(cpp_torch_namespace_mean_self_Tensor_dim_IntArrayRef(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchOptionalIndexIntArrayRef>(args["dim"]), Rcpp::as<XPtrTorchbool>(args["keepdim"]), Rcpp::as<XPtrTorchoptional_scalar_type>(args["dtype"])));
+}
+if (self_type == "Tensor" && dim_type == "DimnameList") {
+  return Rcpp::wrap(cpp_torch_namespace_mean_self_Tensor_dim_DimnameList(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchDimnameList>(args["dim"]), Rcpp::as<XPtrTorchbool>(args["keepdim"]), Rcpp::as<XPtrTorchoptional_scalar_type>(args["dtype"])));
+}
+  Rcpp::stop("No matching overload for mean");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace_mean_out (Rcpp::List args) {
+  static const std::vector<std::string> out_expected = {"Tensor"};
+  static const std::vector<std::string> self_expected = {"Tensor"};
+  static const std::vector<std::string> dim_expected = {"IntArrayRef", "DimnameList"};
+  auto out_type = cpp_arg_to_torch_type(args["out"], out_expected, "out");
+  auto self_type = cpp_arg_to_torch_type(args["self"], self_expected, "self");
+  auto dim_type = cpp_arg_to_torch_type(args["dim"], dim_expected, "dim");
+if (out_type == "Tensor" && self_type == "Tensor" && dim_type == "Missing") {
+  return Rcpp::wrap(cpp_torch_namespace_mean_out_out_Tensor_self_Tensor(Rcpp::as<XPtrTorchTensor>(args["out"]), Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchoptional_scalar_type>(args["dtype"])));
+}
+if (out_type == "Tensor" && self_type == "Tensor" && dim_type == "IntArrayRef") {
+  return Rcpp::wrap(cpp_torch_namespace_mean_out_out_Tensor_self_Tensor_dim_IntArrayRef(Rcpp::as<XPtrTorchTensor>(args["out"]), Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchOptionalIndexIntArrayRef>(args["dim"]), Rcpp::as<XPtrTorchbool>(args["keepdim"]), Rcpp::as<XPtrTorchoptional_scalar_type>(args["dtype"])));
+}
+if (out_type == "Tensor" && self_type == "Tensor" && dim_type == "DimnameList") {
+  return Rcpp::wrap(cpp_torch_namespace_mean_out_out_Tensor_self_Tensor_dim_DimnameList(Rcpp::as<XPtrTorchTensor>(args["out"]), Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchDimnameList>(args["dim"]), Rcpp::as<XPtrTorchbool>(args["keepdim"]), Rcpp::as<XPtrTorchoptional_scalar_type>(args["dtype"])));
+}
+  Rcpp::stop("No matching overload for mean_out");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace_median (Rcpp::List args) {
+  static const std::vector<std::string> self_expected = {"Tensor"};
+  static const std::vector<std::string> dim_expected = {"int64_t", "Dimname"};
+  auto self_type = cpp_arg_to_torch_type(args["self"], self_expected, "self");
+  auto dim_type = cpp_arg_to_torch_type(args["dim"], dim_expected, "dim");
+if (self_type == "Tensor" && dim_type == "Missing") {
+  return Rcpp::wrap(cpp_torch_namespace_median_self_Tensor(Rcpp::as<XPtrTorchTensor>(args["self"])));
+}
+if (self_type == "Tensor" && dim_type == "int64_t") {
+  return Rcpp::wrap(cpp_torch_namespace_median_self_Tensor_dim_int64_t(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchindex_int64_t>(args["dim"]), Rcpp::as<XPtrTorchbool>(args["keepdim"])));
+}
+if (self_type == "Tensor" && dim_type == "Dimname") {
+  return Rcpp::wrap(cpp_torch_namespace_median_self_Tensor_dim_Dimname(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchDimname>(args["dim"]), Rcpp::as<XPtrTorchbool>(args["keepdim"])));
+}
+  Rcpp::stop("No matching overload for median");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace_median_out (Rcpp::List args) {
+  static const std::vector<std::string> out_expected = {"Tensor"};
+  static const std::vector<std::string> values_expected = {"Tensor"};
+  static const std::vector<std::string> indices_expected = {"Tensor"};
+  static const std::vector<std::string> self_expected = {"Tensor"};
+  static const std::vector<std::string> dim_expected = {"int64_t", "Dimname"};
+  auto out_type = cpp_arg_to_torch_type(args["out"], out_expected, "out");
+  auto values_type = cpp_arg_to_torch_type(args["values"], values_expected, "values");
+  auto indices_type = cpp_arg_to_torch_type(args["indices"], indices_expected, "indices");
+  auto self_type = cpp_arg_to_torch_type(args["self"], self_expected, "self");
+  auto dim_type = cpp_arg_to_torch_type(args["dim"], dim_expected, "dim");
+if (out_type == "Missing" && values_type == "Tensor" && indices_type == "Tensor" && self_type == "Tensor" && dim_type == "int64_t") {
+  return Rcpp::wrap(cpp_torch_namespace_median_out_values_Tensor_indices_Tensor_self_Tensor_dim_int64_t(Rcpp::as<XPtrTorchTensor>(args["values"]), Rcpp::as<XPtrTorchIndexTensor>(args["indices"]), Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchindex_int64_t>(args["dim"]), Rcpp::as<XPtrTorchbool>(args["keepdim"])));
+}
+if (out_type == "Missing" && values_type == "Tensor" && indices_type == "Tensor" && self_type == "Tensor" && dim_type == "Dimname") {
+  return Rcpp::wrap(cpp_torch_namespace_median_out_values_Tensor_indices_Tensor_self_Tensor_dim_Dimname(Rcpp::as<XPtrTorchTensor>(args["values"]), Rcpp::as<XPtrTorchIndexTensor>(args["indices"]), Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchDimname>(args["dim"]), Rcpp::as<XPtrTorchbool>(args["keepdim"])));
+}
+if (out_type == "Tensor" && values_type == "Missing" && indices_type == "Missing" && self_type == "Tensor" && dim_type == "Missing") {
+  return Rcpp::wrap(cpp_torch_namespace_median_out_out_Tensor_self_Tensor(Rcpp::as<XPtrTorchTensor>(args["out"]), Rcpp::as<XPtrTorchTensor>(args["self"])));
+}
+  Rcpp::stop("No matching overload for median_out");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace_meshgrid (Rcpp::List args) {
+  static const std::vector<std::string> tensors_expected = {"TensorList"};
+  static const std::vector<std::string> indexing_expected = {"c10::string_view"};
+  auto tensors_type = cpp_arg_to_torch_type(args["tensors"], tensors_expected, "tensors");
+  auto indexing_type = cpp_arg_to_torch_type(args["indexing"], indexing_expected, "indexing");
+if (tensors_type == "TensorList" && indexing_type == "Missing") {
+  return Rcpp::wrap(cpp_torch_namespace_meshgrid_tensors_TensorList(Rcpp::as<XPtrTorchTensorList>(args["tensors"])));
+}
+if (tensors_type == "TensorList" && indexing_type == "c10::string_view") {
+  return Rcpp::wrap(cpp_torch_namespace_meshgrid_tensors_TensorList_indexing_c10string_view(Rcpp::as<XPtrTorchTensorList>(args["tensors"]), Rcpp::as<XPtrTorchstring_view>(args["indexing"])));
+}
+  Rcpp::stop("No matching overload for meshgrid");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace_min (Rcpp::List args) {
+  static const std::vector<std::string> self_expected = {"Tensor"};
+  static const std::vector<std::string> dim_expected = {"int64_t", "Dimname"};
+  static const std::vector<std::string> other_expected = {"Tensor"};
+  auto self_type = cpp_arg_to_torch_type(args["self"], self_expected, "self");
+  auto dim_type = cpp_arg_to_torch_type(args["dim"], dim_expected, "dim");
+  auto other_type = cpp_arg_to_torch_type(args["other"], other_expected, "other");
+if (self_type == "Tensor" && dim_type == "int64_t" && other_type == "Missing") {
+  return Rcpp::wrap(cpp_torch_namespace_min_self_Tensor_dim_int64_t(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchindex_int64_t>(args["dim"]), Rcpp::as<XPtrTorchbool>(args["keepdim"])));
+}
+if (self_type == "Tensor" && dim_type == "Dimname" && other_type == "Missing") {
+  return Rcpp::wrap(cpp_torch_namespace_min_self_Tensor_dim_Dimname(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchDimname>(args["dim"]), Rcpp::as<XPtrTorchbool>(args["keepdim"])));
+}
+if (self_type == "Tensor" && dim_type == "Missing" && other_type == "Missing") {
+  return Rcpp::wrap(cpp_torch_namespace_min_self_Tensor(Rcpp::as<XPtrTorchTensor>(args["self"])));
+}
+if (self_type == "Tensor" && dim_type == "Missing" && other_type == "Tensor") {
+  return Rcpp::wrap(cpp_torch_namespace_min_self_Tensor_other_Tensor(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchTensor>(args["other"])));
+}
+  Rcpp::stop("No matching overload for min");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace_min_out (Rcpp::List args) {
+  static const std::vector<std::string> min_expected = {"Tensor"};
+  static const std::vector<std::string> out_expected = {"Tensor"};
+  static const std::vector<std::string> min_indices_expected = {"Tensor"};
+  static const std::vector<std::string> other_expected = {"Tensor"};
+  static const std::vector<std::string> self_expected = {"Tensor"};
+  static const std::vector<std::string> dim_expected = {"int64_t", "Dimname"};
+  auto min_type = cpp_arg_to_torch_type(args["min"], min_expected, "min");
+  auto out_type = cpp_arg_to_torch_type(args["out"], out_expected, "out");
+  auto min_indices_type = cpp_arg_to_torch_type(args["min_indices"], min_indices_expected, "min_indices");
+  auto other_type = cpp_arg_to_torch_type(args["other"], other_expected, "other");
+  auto self_type = cpp_arg_to_torch_type(args["self"], self_expected, "self");
+  auto dim_type = cpp_arg_to_torch_type(args["dim"], dim_expected, "dim");
+if (min_type == "Tensor" && out_type == "Missing" && min_indices_type == "Tensor" && other_type == "Missing" && self_type == "Tensor" && dim_type == "int64_t") {
+  return Rcpp::wrap(cpp_torch_namespace_min_out_min_Tensor_min_indices_Tensor_self_Tensor_dim_int64_t(Rcpp::as<XPtrTorchTensor>(args["min"]), Rcpp::as<XPtrTorchTensor>(args["min_indices"]), Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchindex_int64_t>(args["dim"]), Rcpp::as<XPtrTorchbool>(args["keepdim"])));
+}
+if (min_type == "Tensor" && out_type == "Missing" && min_indices_type == "Tensor" && other_type == "Missing" && self_type == "Tensor" && dim_type == "Dimname") {
+  return Rcpp::wrap(cpp_torch_namespace_min_out_min_Tensor_min_indices_Tensor_self_Tensor_dim_Dimname(Rcpp::as<XPtrTorchTensor>(args["min"]), Rcpp::as<XPtrTorchTensor>(args["min_indices"]), Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchDimname>(args["dim"]), Rcpp::as<XPtrTorchbool>(args["keepdim"])));
+}
+if (min_type == "Missing" && out_type == "Tensor" && min_indices_type == "Missing" && other_type == "Missing" && self_type == "Tensor" && dim_type == "Missing") {
+  return Rcpp::wrap(cpp_torch_namespace_min_out_out_Tensor_self_Tensor(Rcpp::as<XPtrTorchTensor>(args["out"]), Rcpp::as<XPtrTorchTensor>(args["self"])));
+}
+if (min_type == "Missing" && out_type == "Tensor" && min_indices_type == "Missing" && other_type == "Tensor" && self_type == "Tensor" && dim_type == "Missing") {
+  return Rcpp::wrap(cpp_torch_namespace_min_out_out_Tensor_other_Tensor_self_Tensor(Rcpp::as<XPtrTorchTensor>(args["out"]), Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchTensor>(args["other"])));
+}
+  Rcpp::stop("No matching overload for min_out");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace_mm (Rcpp::List args) {
+  static const std::vector<std::string> self_expected = {"Tensor"};
+  static const std::vector<std::string> mat2_expected = {"Tensor"};
+  static const std::vector<std::string> out_dtype_expected = {"ScalarType"};
+  auto self_type = cpp_arg_to_torch_type(args["self"], self_expected, "self");
+  auto mat2_type = cpp_arg_to_torch_type(args["mat2"], mat2_expected, "mat2");
+  auto out_dtype_type = cpp_arg_to_torch_type(args["out_dtype"], out_dtype_expected, "out_dtype");
+if (self_type == "Tensor" && mat2_type == "Tensor" && out_dtype_type == "Missing") {
+  return Rcpp::wrap(cpp_torch_namespace_mm_self_Tensor_mat2_Tensor(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchTensor>(args["mat2"])));
+}
+if (self_type == "Tensor" && mat2_type == "Tensor" && out_dtype_type == "ScalarType") {
+  return Rcpp::wrap(cpp_torch_namespace_mm_self_Tensor_mat2_Tensor_out_dtype_ScalarType(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchTensor>(args["mat2"]), Rcpp::as<XPtrTorchDtype>(args["out_dtype"])));
+}
+  Rcpp::stop("No matching overload for mm");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace_mm_out (Rcpp::List args) {
+  static const std::vector<std::string> out_expected = {"Tensor"};
+  static const std::vector<std::string> self_expected = {"Tensor"};
+  static const std::vector<std::string> mat2_expected = {"Tensor"};
+  static const std::vector<std::string> out_dtype_expected = {"ScalarType"};
+  auto out_type = cpp_arg_to_torch_type(args["out"], out_expected, "out");
+  auto self_type = cpp_arg_to_torch_type(args["self"], self_expected, "self");
+  auto mat2_type = cpp_arg_to_torch_type(args["mat2"], mat2_expected, "mat2");
+  auto out_dtype_type = cpp_arg_to_torch_type(args["out_dtype"], out_dtype_expected, "out_dtype");
+if (out_type == "Tensor" && self_type == "Tensor" && mat2_type == "Tensor" && out_dtype_type == "Missing") {
+  return Rcpp::wrap(cpp_torch_namespace_mm_out_out_Tensor_self_Tensor_mat2_Tensor(Rcpp::as<XPtrTorchTensor>(args["out"]), Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchTensor>(args["mat2"])));
+}
+if (out_type == "Tensor" && self_type == "Tensor" && mat2_type == "Tensor" && out_dtype_type == "ScalarType") {
+  return Rcpp::wrap(cpp_torch_namespace_mm_out_out_Tensor_self_Tensor_mat2_Tensor_out_dtype_ScalarType(Rcpp::as<XPtrTorchTensor>(args["out"]), Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchTensor>(args["mat2"]), Rcpp::as<XPtrTorchDtype>(args["out_dtype"])));
+}
+  Rcpp::stop("No matching overload for mm_out");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace_moveaxis (Rcpp::List args) {
+  static const std::vector<std::string> self_expected = {"Tensor"};
+  static const std::vector<std::string> source_expected = {"IntArrayRef", "int64_t"};
+  static const std::vector<std::string> destination_expected = {"IntArrayRef", "int64_t"};
+  auto self_type = cpp_arg_to_torch_type(args["self"], self_expected, "self");
+  auto source_type = cpp_arg_to_torch_type(args["source"], source_expected, "source");
+  auto destination_type = cpp_arg_to_torch_type(args["destination"], destination_expected, "destination");
+if (self_type == "Tensor" && source_type == "IntArrayRef" && destination_type == "IntArrayRef") {
+  return Rcpp::wrap(cpp_torch_namespace_moveaxis_self_Tensor_source_IntArrayRef_destination_IntArrayRef(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchIntArrayRef>(args["source"]), Rcpp::as<XPtrTorchIntArrayRef>(args["destination"])));
+}
+if (self_type == "Tensor" && source_type == "int64_t" && destination_type == "int64_t") {
+  return Rcpp::wrap(cpp_torch_namespace_moveaxis_self_Tensor_source_int64_t_destination_int64_t(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchint64_t>(args["source"]), Rcpp::as<XPtrTorchint64_t>(args["destination"])));
+}
+  Rcpp::stop("No matching overload for moveaxis");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace_movedim (Rcpp::List args) {
+  static const std::vector<std::string> self_expected = {"Tensor"};
+  static const std::vector<std::string> source_expected = {"IntArrayRef", "int64_t"};
+  static const std::vector<std::string> destination_expected = {"IntArrayRef", "int64_t"};
+  auto self_type = cpp_arg_to_torch_type(args["self"], self_expected, "self");
+  auto source_type = cpp_arg_to_torch_type(args["source"], source_expected, "source");
+  auto destination_type = cpp_arg_to_torch_type(args["destination"], destination_expected, "destination");
+if (self_type == "Tensor" && source_type == "IntArrayRef" && destination_type == "IntArrayRef") {
+  return Rcpp::wrap(cpp_torch_namespace_movedim_self_Tensor_source_IntArrayRef_destination_IntArrayRef(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchIntArrayRef>(args["source"]), Rcpp::as<XPtrTorchIntArrayRef>(args["destination"])));
+}
+if (self_type == "Tensor" && source_type == "int64_t" && destination_type == "int64_t") {
+  return Rcpp::wrap(cpp_torch_namespace_movedim_self_Tensor_source_int64_t_destination_int64_t(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchint64_t>(args["source"]), Rcpp::as<XPtrTorchint64_t>(args["destination"])));
+}
+  Rcpp::stop("No matching overload for movedim");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace_nanmedian (Rcpp::List args) {
+  static const std::vector<std::string> self_expected = {"Tensor"};
+  static const std::vector<std::string> dim_expected = {"int64_t", "Dimname"};
+  auto self_type = cpp_arg_to_torch_type(args["self"], self_expected, "self");
+  auto dim_type = cpp_arg_to_torch_type(args["dim"], dim_expected, "dim");
+if (self_type == "Tensor" && dim_type == "Missing") {
+  return Rcpp::wrap(cpp_torch_namespace_nanmedian_self_Tensor(Rcpp::as<XPtrTorchTensor>(args["self"])));
+}
+if (self_type == "Tensor" && dim_type == "int64_t") {
+  return Rcpp::wrap(cpp_torch_namespace_nanmedian_self_Tensor_dim_int64_t(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchindex_int64_t>(args["dim"]), Rcpp::as<XPtrTorchbool>(args["keepdim"])));
+}
+if (self_type == "Tensor" && dim_type == "Dimname") {
+  return Rcpp::wrap(cpp_torch_namespace_nanmedian_self_Tensor_dim_Dimname(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchDimname>(args["dim"]), Rcpp::as<XPtrTorchbool>(args["keepdim"])));
+}
+  Rcpp::stop("No matching overload for nanmedian");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace_nanmedian_out (Rcpp::List args) {
+  static const std::vector<std::string> out_expected = {"Tensor"};
+  static const std::vector<std::string> values_expected = {"Tensor"};
+  static const std::vector<std::string> indices_expected = {"Tensor"};
+  static const std::vector<std::string> self_expected = {"Tensor"};
+  static const std::vector<std::string> dim_expected = {"int64_t", "Dimname"};
+  auto out_type = cpp_arg_to_torch_type(args["out"], out_expected, "out");
+  auto values_type = cpp_arg_to_torch_type(args["values"], values_expected, "values");
+  auto indices_type = cpp_arg_to_torch_type(args["indices"], indices_expected, "indices");
+  auto self_type = cpp_arg_to_torch_type(args["self"], self_expected, "self");
+  auto dim_type = cpp_arg_to_torch_type(args["dim"], dim_expected, "dim");
+if (out_type == "Missing" && values_type == "Tensor" && indices_type == "Tensor" && self_type == "Tensor" && dim_type == "int64_t") {
+  return Rcpp::wrap(cpp_torch_namespace_nanmedian_out_values_Tensor_indices_Tensor_self_Tensor_dim_int64_t(Rcpp::as<XPtrTorchTensor>(args["values"]), Rcpp::as<XPtrTorchIndexTensor>(args["indices"]), Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchindex_int64_t>(args["dim"]), Rcpp::as<XPtrTorchbool>(args["keepdim"])));
+}
+if (out_type == "Missing" && values_type == "Tensor" && indices_type == "Tensor" && self_type == "Tensor" && dim_type == "Dimname") {
+  return Rcpp::wrap(cpp_torch_namespace_nanmedian_out_values_Tensor_indices_Tensor_self_Tensor_dim_Dimname(Rcpp::as<XPtrTorchTensor>(args["values"]), Rcpp::as<XPtrTorchIndexTensor>(args["indices"]), Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchDimname>(args["dim"]), Rcpp::as<XPtrTorchbool>(args["keepdim"])));
+}
+if (out_type == "Tensor" && values_type == "Missing" && indices_type == "Missing" && self_type == "Tensor" && dim_type == "Missing") {
+  return Rcpp::wrap(cpp_torch_namespace_nanmedian_out_out_Tensor_self_Tensor(Rcpp::as<XPtrTorchTensor>(args["out"]), Rcpp::as<XPtrTorchTensor>(args["self"])));
+}
+  Rcpp::stop("No matching overload for nanmedian_out");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace_nanquantile (Rcpp::List args) {
+  static const std::vector<std::string> self_expected = {"Tensor"};
+  static const std::vector<std::string> q_expected = {"Tensor", "double"};
+  auto self_type = cpp_arg_to_torch_type(args["self"], self_expected, "self");
+  auto q_type = cpp_arg_to_torch_type(args["q"], q_expected, "q");
+if (self_type == "Tensor" && q_type == "Tensor") {
+  return Rcpp::wrap(cpp_torch_namespace_nanquantile_self_Tensor_q_Tensor(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchTensor>(args["q"]), Rcpp::as<XPtrTorchoptional_index_int64_t>(args["dim"]), Rcpp::as<XPtrTorchbool>(args["keepdim"]), Rcpp::as<XPtrTorchstring_view>(args["interpolation"])));
+}
+if (self_type == "Tensor" && q_type == "double") {
+  return Rcpp::wrap(cpp_torch_namespace_nanquantile_self_Tensor_q_double(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchdouble>(args["q"]), Rcpp::as<XPtrTorchoptional_index_int64_t>(args["dim"]), Rcpp::as<XPtrTorchbool>(args["keepdim"]), Rcpp::as<XPtrTorchstring_view>(args["interpolation"])));
+}
+  Rcpp::stop("No matching overload for nanquantile");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace_nanquantile_out (Rcpp::List args) {
+  static const std::vector<std::string> out_expected = {"Tensor"};
+  static const std::vector<std::string> self_expected = {"Tensor"};
+  static const std::vector<std::string> q_expected = {"Tensor", "double"};
+  auto out_type = cpp_arg_to_torch_type(args["out"], out_expected, "out");
+  auto self_type = cpp_arg_to_torch_type(args["self"], self_expected, "self");
+  auto q_type = cpp_arg_to_torch_type(args["q"], q_expected, "q");
+if (out_type == "Tensor" && self_type == "Tensor" && q_type == "Tensor") {
+  return Rcpp::wrap(cpp_torch_namespace_nanquantile_out_out_Tensor_self_Tensor_q_Tensor(Rcpp::as<XPtrTorchTensor>(args["out"]), Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchTensor>(args["q"]), Rcpp::as<XPtrTorchoptional_index_int64_t>(args["dim"]), Rcpp::as<XPtrTorchbool>(args["keepdim"]), Rcpp::as<XPtrTorchstring_view>(args["interpolation"])));
+}
+if (out_type == "Tensor" && self_type == "Tensor" && q_type == "double") {
+  return Rcpp::wrap(cpp_torch_namespace_nanquantile_out_out_Tensor_self_Tensor_q_double(Rcpp::as<XPtrTorchTensor>(args["out"]), Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchdouble>(args["q"]), Rcpp::as<XPtrTorchoptional_index_int64_t>(args["dim"]), Rcpp::as<XPtrTorchbool>(args["keepdim"]), Rcpp::as<XPtrTorchstring_view>(args["interpolation"])));
+}
+  Rcpp::stop("No matching overload for nanquantile_out");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace_narrow (Rcpp::List args) {
+  static const std::vector<std::string> self_expected = {"Tensor"};
+  static const std::vector<std::string> dim_expected = {"int64_t"};
+  static const std::vector<std::string> start_expected = {"int64_t", "Tensor"};
+  static const std::vector<std::string> length_expected = {"int64_t"};
+  auto self_type = cpp_arg_to_torch_type(args["self"], self_expected, "self");
+  auto dim_type = cpp_arg_to_torch_type(args["dim"], dim_expected, "dim");
+  auto start_type = cpp_arg_to_torch_type(args["start"], start_expected, "start");
+  auto length_type = cpp_arg_to_torch_type(args["length"], length_expected, "length");
+if (self_type == "Tensor" && dim_type == "int64_t" && start_type == "int64_t" && length_type == "int64_t") {
+  return Rcpp::wrap(cpp_torch_namespace_narrow_self_Tensor_dim_int64_t_start_int64_t_length_int64_t(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchindex_int64_t>(args["dim"]), Rcpp::as<XPtrTorchint64_t>(args["start"]), Rcpp::as<XPtrTorchint64_t>(args["length"])));
+}
+if (self_type == "Tensor" && dim_type == "int64_t" && start_type == "Tensor" && length_type == "int64_t") {
+  return Rcpp::wrap(cpp_torch_namespace_narrow_self_Tensor_dim_int64_t_start_Tensor_length_int64_t(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchindex_int64_t>(args["dim"]), Rcpp::as<XPtrTorchTensor>(args["start"]), Rcpp::as<XPtrTorchint64_t>(args["length"])));
+}
+  Rcpp::stop("No matching overload for narrow");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace_native_norm (Rcpp::List args) {
+  static const std::vector<std::string> self_expected = {"Tensor"};
+  static const std::vector<std::string> p_expected = {"Scalar"};
+  static const std::vector<std::string> dim_expected = {"IntArrayRef"};
+  static const std::vector<std::string> keepdim_expected = {"bool"};
+  static const std::vector<std::string> dtype_expected = {"ScalarType"};
+  auto self_type = cpp_arg_to_torch_type(args["self"], self_expected, "self");
+  auto p_type = cpp_arg_to_torch_type(args["p"], p_expected, "p");
+  auto dim_type = cpp_arg_to_torch_type(args["dim"], dim_expected, "dim");
+  auto keepdim_type = cpp_arg_to_torch_type(args["keepdim"], keepdim_expected, "keepdim");
+  auto dtype_type = cpp_arg_to_torch_type(args["dtype"], dtype_expected, "dtype");
+if (self_type == "Tensor" && p_type == "Scalar" && dim_type == "Missing" && keepdim_type == "Missing" && dtype_type == "Missing") {
+  return Rcpp::wrap(cpp_torch_namespace_native_norm_self_Tensor_p_Scalar(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchScalar>(args["p"])));
+}
+if (self_type == "Tensor" && p_type == "Scalar" && dim_type == "IntArrayRef" && keepdim_type == "bool" && dtype_type == "ScalarType") {
+  return Rcpp::wrap(cpp_torch_namespace_native_norm_self_Tensor_p_Scalar_dim_IntArrayRef_keepdim_bool_dtype_ScalarType(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchoptional_scalar>(args["p"]), Rcpp::as<XPtrTorchIndexIntArrayRef>(args["dim"]), Rcpp::as<XPtrTorchbool>(args["keepdim"]), Rcpp::as<XPtrTorchoptional_scalar_type>(args["dtype"])));
+}
+  Rcpp::stop("No matching overload for native_norm");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace_native_norm_out (Rcpp::List args) {
+  static const std::vector<std::string> out_expected = {"Tensor"};
+  static const std::vector<std::string> self_expected = {"Tensor"};
+  static const std::vector<std::string> p_expected = {"Scalar"};
+  static const std::vector<std::string> dim_expected = {"IntArrayRef"};
+  static const std::vector<std::string> keepdim_expected = {"bool"};
+  static const std::vector<std::string> dtype_expected = {"ScalarType"};
+  auto out_type = cpp_arg_to_torch_type(args["out"], out_expected, "out");
+  auto self_type = cpp_arg_to_torch_type(args["self"], self_expected, "self");
+  auto p_type = cpp_arg_to_torch_type(args["p"], p_expected, "p");
+  auto dim_type = cpp_arg_to_torch_type(args["dim"], dim_expected, "dim");
+  auto keepdim_type = cpp_arg_to_torch_type(args["keepdim"], keepdim_expected, "keepdim");
+  auto dtype_type = cpp_arg_to_torch_type(args["dtype"], dtype_expected, "dtype");
+if (out_type == "Tensor" && self_type == "Tensor" && p_type == "Scalar" && dim_type == "Missing" && keepdim_type == "Missing" && dtype_type == "Missing") {
+  return Rcpp::wrap(cpp_torch_namespace_native_norm_out_out_Tensor_self_Tensor_p_Scalar(Rcpp::as<XPtrTorchTensor>(args["out"]), Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchScalar>(args["p"])));
+}
+if (out_type == "Tensor" && self_type == "Tensor" && p_type == "Scalar" && dim_type == "IntArrayRef" && keepdim_type == "bool" && dtype_type == "ScalarType") {
+  return Rcpp::wrap(cpp_torch_namespace_native_norm_out_out_Tensor_self_Tensor_p_Scalar_dim_IntArrayRef_keepdim_bool_dtype_ScalarType(Rcpp::as<XPtrTorchTensor>(args["out"]), Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchoptional_scalar>(args["p"]), Rcpp::as<XPtrTorchIndexIntArrayRef>(args["dim"]), Rcpp::as<XPtrTorchbool>(args["keepdim"]), Rcpp::as<XPtrTorchoptional_scalar_type>(args["dtype"])));
+}
+  Rcpp::stop("No matching overload for native_norm_out");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace_norm (Rcpp::List args) {
+  static const std::vector<std::string> self_expected = {"Tensor"};
+  static const std::vector<std::string> p_expected = {"Scalar"};
+  static const std::vector<std::string> dim_expected = {"IntArrayRef", "DimnameList"};
+  static const std::vector<std::string> keepdim_expected = {"bool"};
+  static const std::vector<std::string> dtype_expected = {"ScalarType"};
+  auto self_type = cpp_arg_to_torch_type(args["self"], self_expected, "self");
+  auto p_type = cpp_arg_to_torch_type(args["p"], p_expected, "p");
+  auto dim_type = cpp_arg_to_torch_type(args["dim"], dim_expected, "dim");
+  auto keepdim_type = cpp_arg_to_torch_type(args["keepdim"], keepdim_expected, "keepdim");
+  auto dtype_type = cpp_arg_to_torch_type(args["dtype"], dtype_expected, "dtype");
+if (self_type == "Tensor" && p_type == "Scalar" && dim_type == "Missing" && keepdim_type == "Missing" && dtype_type == "ScalarType") {
+  return Rcpp::wrap(cpp_torch_namespace_norm_self_Tensor_p_Scalar_dtype_ScalarType(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchoptional_scalar>(args["p"]), Rcpp::as<XPtrTorchDtype>(args["dtype"])));
+}
+if (self_type == "Tensor" && p_type == "Scalar" && dim_type == "Missing" && keepdim_type == "Missing" && dtype_type == "Missing") {
+  return Rcpp::wrap(cpp_torch_namespace_norm_self_Tensor_p_Scalar(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchScalar>(args["p"])));
+}
+if (self_type == "Tensor" && p_type == "Scalar" && dim_type == "IntArrayRef" && keepdim_type == "bool" && dtype_type == "ScalarType") {
+  return Rcpp::wrap(cpp_torch_namespace_norm_self_Tensor_p_Scalar_dim_IntArrayRef_keepdim_bool_dtype_ScalarType(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchoptional_scalar>(args["p"]), Rcpp::as<XPtrTorchIndexIntArrayRef>(args["dim"]), Rcpp::as<XPtrTorchbool>(args["keepdim"]), Rcpp::as<XPtrTorchDtype>(args["dtype"])));
+}
+if (self_type == "Tensor" && p_type == "Scalar" && dim_type == "IntArrayRef" && keepdim_type == "bool" && dtype_type == "Missing") {
+  return Rcpp::wrap(cpp_torch_namespace_norm_self_Tensor_p_Scalar_dim_IntArrayRef_keepdim_bool(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchoptional_scalar>(args["p"]), Rcpp::as<XPtrTorchIndexIntArrayRef>(args["dim"]), Rcpp::as<XPtrTorchbool>(args["keepdim"])));
+}
+if (self_type == "Tensor" && p_type == "Scalar" && dim_type == "DimnameList" && keepdim_type == "bool" && dtype_type == "ScalarType") {
+  return Rcpp::wrap(cpp_torch_namespace_norm_self_Tensor_p_Scalar_dim_DimnameList_keepdim_bool_dtype_ScalarType(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchoptional_scalar>(args["p"]), Rcpp::as<XPtrTorchDimnameList>(args["dim"]), Rcpp::as<XPtrTorchbool>(args["keepdim"]), Rcpp::as<XPtrTorchDtype>(args["dtype"])));
+}
+if (self_type == "Tensor" && p_type == "Scalar" && dim_type == "DimnameList" && keepdim_type == "bool" && dtype_type == "Missing") {
+  return Rcpp::wrap(cpp_torch_namespace_norm_self_Tensor_p_Scalar_dim_DimnameList_keepdim_bool(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchoptional_scalar>(args["p"]), Rcpp::as<XPtrTorchDimnameList>(args["dim"]), Rcpp::as<XPtrTorchbool>(args["keepdim"])));
+}
+  Rcpp::stop("No matching overload for norm");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace_norm_out (Rcpp::List args) {
+  static const std::vector<std::string> out_expected = {"Tensor"};
+  static const std::vector<std::string> self_expected = {"Tensor"};
+  static const std::vector<std::string> p_expected = {"Scalar"};
+  static const std::vector<std::string> dim_expected = {"IntArrayRef", "DimnameList"};
+  static const std::vector<std::string> keepdim_expected = {"bool"};
+  static const std::vector<std::string> dtype_expected = {"ScalarType"};
+  auto out_type = cpp_arg_to_torch_type(args["out"], out_expected, "out");
+  auto self_type = cpp_arg_to_torch_type(args["self"], self_expected, "self");
+  auto p_type = cpp_arg_to_torch_type(args["p"], p_expected, "p");
+  auto dim_type = cpp_arg_to_torch_type(args["dim"], dim_expected, "dim");
+  auto keepdim_type = cpp_arg_to_torch_type(args["keepdim"], keepdim_expected, "keepdim");
+  auto dtype_type = cpp_arg_to_torch_type(args["dtype"], dtype_expected, "dtype");
+if (out_type == "Tensor" && self_type == "Tensor" && p_type == "Scalar" && dim_type == "IntArrayRef" && keepdim_type == "bool" && dtype_type == "ScalarType") {
+  return Rcpp::wrap(cpp_torch_namespace_norm_out_out_Tensor_self_Tensor_p_Scalar_dim_IntArrayRef_keepdim_bool_dtype_ScalarType(Rcpp::as<XPtrTorchTensor>(args["out"]), Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchoptional_scalar>(args["p"]), Rcpp::as<XPtrTorchIndexIntArrayRef>(args["dim"]), Rcpp::as<XPtrTorchbool>(args["keepdim"]), Rcpp::as<XPtrTorchDtype>(args["dtype"])));
+}
+if (out_type == "Tensor" && self_type == "Tensor" && p_type == "Scalar" && dim_type == "IntArrayRef" && keepdim_type == "bool" && dtype_type == "Missing") {
+  return Rcpp::wrap(cpp_torch_namespace_norm_out_out_Tensor_self_Tensor_p_Scalar_dim_IntArrayRef_keepdim_bool(Rcpp::as<XPtrTorchTensor>(args["out"]), Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchoptional_scalar>(args["p"]), Rcpp::as<XPtrTorchIndexIntArrayRef>(args["dim"]), Rcpp::as<XPtrTorchbool>(args["keepdim"])));
+}
+if (out_type == "Tensor" && self_type == "Tensor" && p_type == "Scalar" && dim_type == "DimnameList" && keepdim_type == "bool" && dtype_type == "ScalarType") {
+  return Rcpp::wrap(cpp_torch_namespace_norm_out_out_Tensor_self_Tensor_p_Scalar_dim_DimnameList_keepdim_bool_dtype_ScalarType(Rcpp::as<XPtrTorchTensor>(args["out"]), Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchoptional_scalar>(args["p"]), Rcpp::as<XPtrTorchDimnameList>(args["dim"]), Rcpp::as<XPtrTorchbool>(args["keepdim"]), Rcpp::as<XPtrTorchDtype>(args["dtype"])));
+}
+if (out_type == "Tensor" && self_type == "Tensor" && p_type == "Scalar" && dim_type == "DimnameList" && keepdim_type == "bool" && dtype_type == "Missing") {
+  return Rcpp::wrap(cpp_torch_namespace_norm_out_out_Tensor_self_Tensor_p_Scalar_dim_DimnameList_keepdim_bool(Rcpp::as<XPtrTorchTensor>(args["out"]), Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchoptional_scalar>(args["p"]), Rcpp::as<XPtrTorchDimnameList>(args["dim"]), Rcpp::as<XPtrTorchbool>(args["keepdim"])));
+}
+if (out_type == "Tensor" && self_type == "Tensor" && p_type == "Scalar" && dim_type == "Missing" && keepdim_type == "Missing" && dtype_type == "ScalarType") {
+  return Rcpp::wrap(cpp_torch_namespace_norm_out_out_Tensor_self_Tensor_p_Scalar_dtype_ScalarType(Rcpp::as<XPtrTorchTensor>(args["out"]), Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchoptional_scalar>(args["p"]), Rcpp::as<XPtrTorchDtype>(args["dtype"])));
+}
+if (out_type == "Tensor" && self_type == "Tensor" && p_type == "Scalar" && dim_type == "Missing" && keepdim_type == "Missing" && dtype_type == "Missing") {
+  return Rcpp::wrap(cpp_torch_namespace_norm_out_out_Tensor_self_Tensor_p_Scalar(Rcpp::as<XPtrTorchTensor>(args["out"]), Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchScalar>(args["p"])));
+}
+  Rcpp::stop("No matching overload for norm_out");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace_normal_out (Rcpp::List args) {
+  static const std::vector<std::string> out_expected = {"Tensor"};
+  static const std::vector<std::string> self_expected = {"Tensor"};
+  static const std::vector<std::string> mean_expected = {"Tensor", "double"};
+  static const std::vector<std::string> size_expected = {"IntArrayRef"};
+  static const std::vector<std::string> std_expected = {"double", "Tensor"};
+  auto out_type = cpp_arg_to_torch_type(args["out"], out_expected, "out");
+  auto self_type = cpp_arg_to_torch_type(args["self"], self_expected, "self");
+  auto mean_type = cpp_arg_to_torch_type(args["mean"], mean_expected, "mean");
+  auto size_type = cpp_arg_to_torch_type(args["size"], size_expected, "size");
+  auto std_type = cpp_arg_to_torch_type(args["std"], std_expected, "std");
+if (out_type == "Tensor" && self_type == "Missing" && mean_type == "Tensor" && size_type == "Missing" && std_type == "double") {
+  return Rcpp::wrap(cpp_torch_namespace_normal_out_out_Tensor_mean_Tensor_std_double(Rcpp::as<XPtrTorchTensor>(args["out"]), Rcpp::as<XPtrTorchTensor>(args["mean"]), Rcpp::as<XPtrTorchdouble>(args["std"]), Rcpp::as<XPtrTorchOptionalGenerator>(args["generator"])));
+}
+if (out_type == "Tensor" && self_type == "Missing" && mean_type == "double" && size_type == "Missing" && std_type == "Tensor") {
+  return Rcpp::wrap(cpp_torch_namespace_normal_out_out_Tensor_mean_double_std_Tensor(Rcpp::as<XPtrTorchTensor>(args["out"]), Rcpp::as<XPtrTorchdouble>(args["mean"]), Rcpp::as<XPtrTorchTensor>(args["std"]), Rcpp::as<XPtrTorchOptionalGenerator>(args["generator"])));
+}
+if (out_type == "Tensor" && self_type == "Missing" && mean_type == "Tensor" && size_type == "Missing" && std_type == "Tensor") {
+  return Rcpp::wrap(cpp_torch_namespace_normal_out_out_Tensor_mean_Tensor_std_Tensor(Rcpp::as<XPtrTorchTensor>(args["out"]), Rcpp::as<XPtrTorchTensor>(args["mean"]), Rcpp::as<XPtrTorchTensor>(args["std"]), Rcpp::as<XPtrTorchOptionalGenerator>(args["generator"])));
+}
+if (out_type == "Tensor" && self_type == "Missing" && mean_type == "double" && size_type == "IntArrayRef" && std_type == "double") {
+  return Rcpp::wrap(cpp_torch_namespace_normal_out_out_Tensor_mean_double_size_IntArrayRef_std_double(Rcpp::as<XPtrTorchTensor>(args["out"]), Rcpp::as<XPtrTorchdouble>(args["mean"]), Rcpp::as<XPtrTorchdouble>(args["std"]), Rcpp::as<XPtrTorchIntArrayRef>(args["size"]), Rcpp::as<XPtrTorchOptionalGenerator>(args["generator"])));
+}
+if (out_type == "Tensor" && self_type == "Tensor" && mean_type == "double" && size_type == "Missing" && std_type == "double") {
+  return Rcpp::wrap(cpp_torch_namespace_normal_out_out_Tensor_self_Tensor_mean_double_std_double(Rcpp::as<XPtrTorchTensor>(args["out"]), Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchdouble>(args["mean"]), Rcpp::as<XPtrTorchdouble>(args["std"]), Rcpp::as<XPtrTorchOptionalGenerator>(args["generator"])));
+}
+  Rcpp::stop("No matching overload for normal_out");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace_nuclear_norm (Rcpp::List args) {
+  static const std::vector<std::string> self_expected = {"Tensor"};
+  static const std::vector<std::string> dim_expected = {"IntArrayRef"};
+  auto self_type = cpp_arg_to_torch_type(args["self"], self_expected, "self");
+  auto dim_type = cpp_arg_to_torch_type(args["dim"], dim_expected, "dim");
+if (self_type == "Tensor" && dim_type == "Missing") {
+  return Rcpp::wrap(cpp_torch_namespace_nuclear_norm_self_Tensor(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchbool>(args["keepdim"])));
+}
+if (self_type == "Tensor" && dim_type == "IntArrayRef") {
+  return Rcpp::wrap(cpp_torch_namespace_nuclear_norm_self_Tensor_dim_IntArrayRef(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchIndexIntArrayRef>(args["dim"]), Rcpp::as<XPtrTorchbool>(args["keepdim"])));
+}
+  Rcpp::stop("No matching overload for nuclear_norm");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace_nuclear_norm_out (Rcpp::List args) {
+  static const std::vector<std::string> out_expected = {"Tensor"};
+  static const std::vector<std::string> self_expected = {"Tensor"};
+  static const std::vector<std::string> dim_expected = {"IntArrayRef"};
+  auto out_type = cpp_arg_to_torch_type(args["out"], out_expected, "out");
+  auto self_type = cpp_arg_to_torch_type(args["self"], self_expected, "self");
+  auto dim_type = cpp_arg_to_torch_type(args["dim"], dim_expected, "dim");
+if (out_type == "Tensor" && self_type == "Tensor" && dim_type == "Missing") {
+  return Rcpp::wrap(cpp_torch_namespace_nuclear_norm_out_out_Tensor_self_Tensor(Rcpp::as<XPtrTorchTensor>(args["out"]), Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchbool>(args["keepdim"])));
+}
+if (out_type == "Tensor" && self_type == "Tensor" && dim_type == "IntArrayRef") {
+  return Rcpp::wrap(cpp_torch_namespace_nuclear_norm_out_out_Tensor_self_Tensor_dim_IntArrayRef(Rcpp::as<XPtrTorchTensor>(args["out"]), Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchIndexIntArrayRef>(args["dim"]), Rcpp::as<XPtrTorchbool>(args["keepdim"])));
+}
+  Rcpp::stop("No matching overload for nuclear_norm_out");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace_ones (Rcpp::List args) {
+  static const std::vector<std::string> size_expected = {"IntArrayRef"};
+  static const std::vector<std::string> names_expected = {"DimnameList"};
+  auto size_type = cpp_arg_to_torch_type(args["size"], size_expected, "size");
+  auto names_type = cpp_arg_to_torch_type(args["names"], names_expected, "names");
+if (size_type == "IntArrayRef" && names_type == "DimnameList") {
+  return Rcpp::wrap(cpp_torch_namespace_ones_size_IntArrayRef_names_DimnameList(Rcpp::as<XPtrTorchIntArrayRef>(args["size"]), Rcpp::as<XPtrTorchOptionalDimnameList>(args["names"]), Rcpp::as<XPtrTorchTensorOptions>(args["options"])));
+}
+if (size_type == "IntArrayRef" && names_type == "Missing") {
+  return Rcpp::wrap(cpp_torch_namespace_ones_size_IntArrayRef(Rcpp::as<XPtrTorchIntArrayRef>(args["size"]), Rcpp::as<XPtrTorchTensorOptions>(args["options"])));
+}
+  Rcpp::stop("No matching overload for ones");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace_ones_out (Rcpp::List args) {
+  static const std::vector<std::string> out_expected = {"Tensor"};
+  static const std::vector<std::string> size_expected = {"IntArrayRef"};
+  static const std::vector<std::string> names_expected = {"DimnameList"};
+  auto out_type = cpp_arg_to_torch_type(args["out"], out_expected, "out");
+  auto size_type = cpp_arg_to_torch_type(args["size"], size_expected, "size");
+  auto names_type = cpp_arg_to_torch_type(args["names"], names_expected, "names");
+if (out_type == "Tensor" && size_type == "IntArrayRef" && names_type == "Missing") {
+  return Rcpp::wrap(cpp_torch_namespace_ones_out_out_Tensor_size_IntArrayRef(Rcpp::as<XPtrTorchTensor>(args["out"]), Rcpp::as<XPtrTorchIntArrayRef>(args["size"])));
+}
+if (out_type == "Tensor" && size_type == "IntArrayRef" && names_type == "DimnameList") {
+  return Rcpp::wrap(cpp_torch_namespace_ones_out_out_Tensor_size_IntArrayRef_names_DimnameList(Rcpp::as<XPtrTorchTensor>(args["out"]), Rcpp::as<XPtrTorchIntArrayRef>(args["size"]), Rcpp::as<XPtrTorchOptionalDimnameList>(args["names"])));
+}
+  Rcpp::stop("No matching overload for ones_out");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace_pow (Rcpp::List args) {
+  static const std::vector<std::string> self_expected = {"Tensor", "Scalar"};
+  static const std::vector<std::string> exponent_expected = {"Tensor", "Scalar"};
+  auto self_type = cpp_arg_to_torch_type(args["self"], self_expected, "self");
+  auto exponent_type = cpp_arg_to_torch_type(args["exponent"], exponent_expected, "exponent");
+if (self_type == "Tensor" && exponent_type == "Tensor") {
+  return Rcpp::wrap(cpp_torch_namespace_pow_self_Tensor_exponent_Tensor(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchTensor>(args["exponent"])));
+}
+if (self_type == "Scalar" && exponent_type == "Tensor") {
+  return Rcpp::wrap(cpp_torch_namespace_pow_self_Scalar_exponent_Tensor(Rcpp::as<XPtrTorchScalar>(args["self"]), Rcpp::as<XPtrTorchTensor>(args["exponent"])));
+}
+if (self_type == "Tensor" && exponent_type == "Scalar") {
+  return Rcpp::wrap(cpp_torch_namespace_pow_self_Tensor_exponent_Scalar(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchScalar>(args["exponent"])));
+}
+  Rcpp::stop("No matching overload for pow");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace_pow_out (Rcpp::List args) {
+  static const std::vector<std::string> out_expected = {"Tensor"};
+  static const std::vector<std::string> self_expected = {"Tensor", "Scalar"};
+  static const std::vector<std::string> exponent_expected = {"Tensor", "Scalar"};
+  auto out_type = cpp_arg_to_torch_type(args["out"], out_expected, "out");
+  auto self_type = cpp_arg_to_torch_type(args["self"], self_expected, "self");
+  auto exponent_type = cpp_arg_to_torch_type(args["exponent"], exponent_expected, "exponent");
+if (out_type == "Tensor" && self_type == "Tensor" && exponent_type == "Tensor") {
+  return Rcpp::wrap(cpp_torch_namespace_pow_out_out_Tensor_self_Tensor_exponent_Tensor(Rcpp::as<XPtrTorchTensor>(args["out"]), Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchTensor>(args["exponent"])));
+}
+if (out_type == "Tensor" && self_type == "Scalar" && exponent_type == "Tensor") {
+  return Rcpp::wrap(cpp_torch_namespace_pow_out_out_Tensor_self_Scalar_exponent_Tensor(Rcpp::as<XPtrTorchTensor>(args["out"]), Rcpp::as<XPtrTorchScalar>(args["self"]), Rcpp::as<XPtrTorchTensor>(args["exponent"])));
+}
+if (out_type == "Tensor" && self_type == "Tensor" && exponent_type == "Scalar") {
+  return Rcpp::wrap(cpp_torch_namespace_pow_out_out_Tensor_self_Tensor_exponent_Scalar(Rcpp::as<XPtrTorchTensor>(args["out"]), Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchScalar>(args["exponent"])));
+}
+  Rcpp::stop("No matching overload for pow_out");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace_prod (Rcpp::List args) {
+  static const std::vector<std::string> self_expected = {"Tensor"};
+  static const std::vector<std::string> dim_expected = {"int64_t", "Dimname"};
+  auto self_type = cpp_arg_to_torch_type(args["self"], self_expected, "self");
+  auto dim_type = cpp_arg_to_torch_type(args["dim"], dim_expected, "dim");
+if (self_type == "Tensor" && dim_type == "Missing") {
+  return Rcpp::wrap(cpp_torch_namespace_prod_self_Tensor(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchoptional_scalar_type>(args["dtype"])));
+}
+if (self_type == "Tensor" && dim_type == "int64_t") {
+  return Rcpp::wrap(cpp_torch_namespace_prod_self_Tensor_dim_int64_t(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchindex_int64_t>(args["dim"]), Rcpp::as<XPtrTorchbool>(args["keepdim"]), Rcpp::as<XPtrTorchoptional_scalar_type>(args["dtype"])));
+}
+if (self_type == "Tensor" && dim_type == "Dimname") {
+  return Rcpp::wrap(cpp_torch_namespace_prod_self_Tensor_dim_Dimname(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchDimname>(args["dim"]), Rcpp::as<XPtrTorchbool>(args["keepdim"]), Rcpp::as<XPtrTorchoptional_scalar_type>(args["dtype"])));
+}
+  Rcpp::stop("No matching overload for prod");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace_prod_out (Rcpp::List args) {
+  static const std::vector<std::string> out_expected = {"Tensor"};
+  static const std::vector<std::string> self_expected = {"Tensor"};
+  static const std::vector<std::string> dim_expected = {"int64_t", "Dimname"};
+  auto out_type = cpp_arg_to_torch_type(args["out"], out_expected, "out");
+  auto self_type = cpp_arg_to_torch_type(args["self"], self_expected, "self");
+  auto dim_type = cpp_arg_to_torch_type(args["dim"], dim_expected, "dim");
+if (out_type == "Tensor" && self_type == "Tensor" && dim_type == "int64_t") {
+  return Rcpp::wrap(cpp_torch_namespace_prod_out_out_Tensor_self_Tensor_dim_int64_t(Rcpp::as<XPtrTorchTensor>(args["out"]), Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchindex_int64_t>(args["dim"]), Rcpp::as<XPtrTorchbool>(args["keepdim"]), Rcpp::as<XPtrTorchoptional_scalar_type>(args["dtype"])));
+}
+if (out_type == "Tensor" && self_type == "Tensor" && dim_type == "Dimname") {
+  return Rcpp::wrap(cpp_torch_namespace_prod_out_out_Tensor_self_Tensor_dim_Dimname(Rcpp::as<XPtrTorchTensor>(args["out"]), Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchDimname>(args["dim"]), Rcpp::as<XPtrTorchbool>(args["keepdim"]), Rcpp::as<XPtrTorchoptional_scalar_type>(args["dtype"])));
+}
+if (out_type == "Tensor" && self_type == "Tensor" && dim_type == "Missing") {
+  return Rcpp::wrap(cpp_torch_namespace_prod_out_out_Tensor_self_Tensor(Rcpp::as<XPtrTorchTensor>(args["out"]), Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchoptional_scalar_type>(args["dtype"])));
+}
+  Rcpp::stop("No matching overload for prod_out");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace_quantile (Rcpp::List args) {
+  static const std::vector<std::string> self_expected = {"Tensor"};
+  static const std::vector<std::string> q_expected = {"Tensor", "double"};
+  auto self_type = cpp_arg_to_torch_type(args["self"], self_expected, "self");
+  auto q_type = cpp_arg_to_torch_type(args["q"], q_expected, "q");
+if (self_type == "Tensor" && q_type == "Tensor") {
+  return Rcpp::wrap(cpp_torch_namespace_quantile_self_Tensor_q_Tensor(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchTensor>(args["q"]), Rcpp::as<XPtrTorchoptional_index_int64_t>(args["dim"]), Rcpp::as<XPtrTorchbool>(args["keepdim"]), Rcpp::as<XPtrTorchstring_view>(args["interpolation"])));
+}
+if (self_type == "Tensor" && q_type == "double") {
+  return Rcpp::wrap(cpp_torch_namespace_quantile_self_Tensor_q_double(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchdouble>(args["q"]), Rcpp::as<XPtrTorchoptional_index_int64_t>(args["dim"]), Rcpp::as<XPtrTorchbool>(args["keepdim"]), Rcpp::as<XPtrTorchstring_view>(args["interpolation"])));
+}
+  Rcpp::stop("No matching overload for quantile");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace_quantile_out (Rcpp::List args) {
+  static const std::vector<std::string> out_expected = {"Tensor"};
+  static const std::vector<std::string> self_expected = {"Tensor"};
+  static const std::vector<std::string> q_expected = {"Tensor", "double"};
+  auto out_type = cpp_arg_to_torch_type(args["out"], out_expected, "out");
+  auto self_type = cpp_arg_to_torch_type(args["self"], self_expected, "self");
+  auto q_type = cpp_arg_to_torch_type(args["q"], q_expected, "q");
+if (out_type == "Tensor" && self_type == "Tensor" && q_type == "Tensor") {
+  return Rcpp::wrap(cpp_torch_namespace_quantile_out_out_Tensor_self_Tensor_q_Tensor(Rcpp::as<XPtrTorchTensor>(args["out"]), Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchTensor>(args["q"]), Rcpp::as<XPtrTorchoptional_index_int64_t>(args["dim"]), Rcpp::as<XPtrTorchbool>(args["keepdim"]), Rcpp::as<XPtrTorchstring_view>(args["interpolation"])));
+}
+if (out_type == "Tensor" && self_type == "Tensor" && q_type == "double") {
+  return Rcpp::wrap(cpp_torch_namespace_quantile_out_out_Tensor_self_Tensor_q_double(Rcpp::as<XPtrTorchTensor>(args["out"]), Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchdouble>(args["q"]), Rcpp::as<XPtrTorchoptional_index_int64_t>(args["dim"]), Rcpp::as<XPtrTorchbool>(args["keepdim"]), Rcpp::as<XPtrTorchstring_view>(args["interpolation"])));
+}
+  Rcpp::stop("No matching overload for quantile_out");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace_quantize_per_tensor (Rcpp::List args) {
+  static const std::vector<std::string> self_expected = {"Tensor"};
+  static const std::vector<std::string> tensors_expected = {"TensorList"};
+  static const std::vector<std::string> scale_expected = {"double", "Tensor"};
+  static const std::vector<std::string> scales_expected = {"Tensor"};
+  static const std::vector<std::string> zero_point_expected = {"int64_t", "Tensor"};
+  static const std::vector<std::string> zero_points_expected = {"Tensor"};
+  static const std::vector<std::string> dtype_expected = {"ScalarType"};
+  auto self_type = cpp_arg_to_torch_type(args["self"], self_expected, "self");
+  auto tensors_type = cpp_arg_to_torch_type(args["tensors"], tensors_expected, "tensors");
+  auto scale_type = cpp_arg_to_torch_type(args["scale"], scale_expected, "scale");
+  auto scales_type = cpp_arg_to_torch_type(args["scales"], scales_expected, "scales");
+  auto zero_point_type = cpp_arg_to_torch_type(args["zero_point"], zero_point_expected, "zero_point");
+  auto zero_points_type = cpp_arg_to_torch_type(args["zero_points"], zero_points_expected, "zero_points");
+  auto dtype_type = cpp_arg_to_torch_type(args["dtype"], dtype_expected, "dtype");
+if (self_type == "Tensor" && tensors_type == "Missing" && scale_type == "double" && scales_type == "Missing" && zero_point_type == "int64_t" && zero_points_type == "Missing" && dtype_type == "ScalarType") {
+  return Rcpp::wrap(cpp_torch_namespace_quantize_per_tensor_self_Tensor_scale_double_zero_point_int64_t_dtype_ScalarType(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchdouble>(args["scale"]), Rcpp::as<XPtrTorchint64_t>(args["zero_point"]), Rcpp::as<XPtrTorchDtype>(args["dtype"])));
+}
+if (self_type == "Tensor" && tensors_type == "Missing" && scale_type == "Tensor" && scales_type == "Missing" && zero_point_type == "Tensor" && zero_points_type == "Missing" && dtype_type == "ScalarType") {
+  return Rcpp::wrap(cpp_torch_namespace_quantize_per_tensor_self_Tensor_scale_Tensor_zero_point_Tensor_dtype_ScalarType(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchTensor>(args["scale"]), Rcpp::as<XPtrTorchTensor>(args["zero_point"]), Rcpp::as<XPtrTorchDtype>(args["dtype"])));
+}
+if (self_type == "Missing" && tensors_type == "TensorList" && scale_type == "Missing" && scales_type == "Tensor" && zero_point_type == "Missing" && zero_points_type == "Tensor" && dtype_type == "ScalarType") {
+  return Rcpp::wrap(cpp_torch_namespace_quantize_per_tensor_tensors_TensorList_scales_Tensor_zero_points_Tensor_dtype_ScalarType(Rcpp::as<XPtrTorchTensorList>(args["tensors"]), Rcpp::as<XPtrTorchTensor>(args["scales"]), Rcpp::as<XPtrTorchTensor>(args["zero_points"]), Rcpp::as<XPtrTorchDtype>(args["dtype"])));
+}
+  Rcpp::stop("No matching overload for quantize_per_tensor");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace_quantize_per_tensor_out (Rcpp::List args) {
+  static const std::vector<std::string> out_expected = {"Tensor", "TensorList"};
+  static const std::vector<std::string> self_expected = {"Tensor"};
+  static const std::vector<std::string> tensors_expected = {"TensorList"};
+  static const std::vector<std::string> scale_expected = {"double", "Tensor"};
+  static const std::vector<std::string> scales_expected = {"Tensor"};
+  static const std::vector<std::string> zero_point_expected = {"int64_t", "Tensor"};
+  static const std::vector<std::string> zero_points_expected = {"Tensor"};
+  static const std::vector<std::string> dtype_expected = {"ScalarType"};
+  auto out_type = cpp_arg_to_torch_type(args["out"], out_expected, "out");
+  auto self_type = cpp_arg_to_torch_type(args["self"], self_expected, "self");
+  auto tensors_type = cpp_arg_to_torch_type(args["tensors"], tensors_expected, "tensors");
+  auto scale_type = cpp_arg_to_torch_type(args["scale"], scale_expected, "scale");
+  auto scales_type = cpp_arg_to_torch_type(args["scales"], scales_expected, "scales");
+  auto zero_point_type = cpp_arg_to_torch_type(args["zero_point"], zero_point_expected, "zero_point");
+  auto zero_points_type = cpp_arg_to_torch_type(args["zero_points"], zero_points_expected, "zero_points");
+  auto dtype_type = cpp_arg_to_torch_type(args["dtype"], dtype_expected, "dtype");
+if (out_type == "Tensor" && self_type == "Tensor" && tensors_type == "Missing" && scale_type == "double" && scales_type == "Missing" && zero_point_type == "int64_t" && zero_points_type == "Missing" && dtype_type == "ScalarType") {
+  return Rcpp::wrap(cpp_torch_namespace_quantize_per_tensor_out_out_Tensor_self_Tensor_scale_double_zero_point_int64_t_dtype_ScalarType(Rcpp::as<XPtrTorchTensor>(args["out"]), Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchdouble>(args["scale"]), Rcpp::as<XPtrTorchint64_t>(args["zero_point"]), Rcpp::as<XPtrTorchDtype>(args["dtype"])));
+}
+if (out_type == "Tensor" && self_type == "Tensor" && tensors_type == "Missing" && scale_type == "Tensor" && scales_type == "Missing" && zero_point_type == "Tensor" && zero_points_type == "Missing" && dtype_type == "ScalarType") {
+  return Rcpp::wrap(cpp_torch_namespace_quantize_per_tensor_out_out_Tensor_self_Tensor_scale_Tensor_zero_point_Tensor_dtype_ScalarType(Rcpp::as<XPtrTorchTensor>(args["out"]), Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchTensor>(args["scale"]), Rcpp::as<XPtrTorchTensor>(args["zero_point"]), Rcpp::as<XPtrTorchDtype>(args["dtype"])));
+}
+if (out_type == "TensorList" && self_type == "Missing" && tensors_type == "TensorList" && scale_type == "Missing" && scales_type == "Tensor" && zero_point_type == "Missing" && zero_points_type == "Tensor" && dtype_type == "ScalarType") {
+  cpp_torch_namespace_quantize_per_tensor_out_out_TensorList_tensors_TensorList_scales_Tensor_zero_points_Tensor_dtype_ScalarType(Rcpp::as<XPtrTorchTensorList>(args["out"]), Rcpp::as<XPtrTorchTensorList>(args["tensors"]), Rcpp::as<XPtrTorchTensor>(args["scales"]), Rcpp::as<XPtrTorchTensor>(args["zero_points"]), Rcpp::as<XPtrTorchDtype>(args["dtype"]));
+  return R_NilValue;
+}
+  Rcpp::stop("No matching overload for quantize_per_tensor_out");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace_rand (Rcpp::List args) {
+  static const std::vector<std::string> size_expected = {"IntArrayRef"};
+  static const std::vector<std::string> generator_expected = {"Generator"};
+  static const std::vector<std::string> names_expected = {"DimnameList"};
+  auto size_type = cpp_arg_to_torch_type(args["size"], size_expected, "size");
+  auto generator_type = cpp_arg_to_torch_type(args["generator"], generator_expected, "generator");
+  auto names_type = cpp_arg_to_torch_type(args["names"], names_expected, "names");
+if (size_type == "IntArrayRef" && generator_type == "Missing" && names_type == "DimnameList") {
+  return Rcpp::wrap(cpp_torch_namespace_rand_size_IntArrayRef_names_DimnameList(Rcpp::as<XPtrTorchIntArrayRef>(args["size"]), Rcpp::as<XPtrTorchOptionalDimnameList>(args["names"]), Rcpp::as<XPtrTorchTensorOptions>(args["options"])));
+}
+if (size_type == "IntArrayRef" && generator_type == "Generator" && names_type == "DimnameList") {
+  return Rcpp::wrap(cpp_torch_namespace_rand_size_IntArrayRef_generator_Generator_names_DimnameList(Rcpp::as<XPtrTorchIntArrayRef>(args["size"]), Rcpp::as<XPtrTorchOptionalGenerator>(args["generator"]), Rcpp::as<XPtrTorchOptionalDimnameList>(args["names"]), Rcpp::as<XPtrTorchTensorOptions>(args["options"])));
+}
+if (size_type == "IntArrayRef" && generator_type == "Missing" && names_type == "Missing") {
+  return Rcpp::wrap(cpp_torch_namespace_rand_size_IntArrayRef(Rcpp::as<XPtrTorchIntArrayRef>(args["size"]), Rcpp::as<XPtrTorchTensorOptions>(args["options"])));
+}
+if (size_type == "IntArrayRef" && generator_type == "Generator" && names_type == "Missing") {
+  return Rcpp::wrap(cpp_torch_namespace_rand_size_IntArrayRef_generator_Generator(Rcpp::as<XPtrTorchIntArrayRef>(args["size"]), Rcpp::as<XPtrTorchOptionalGenerator>(args["generator"]), Rcpp::as<XPtrTorchTensorOptions>(args["options"])));
+}
+  Rcpp::stop("No matching overload for rand");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace_rand_out (Rcpp::List args) {
+  static const std::vector<std::string> out_expected = {"Tensor"};
+  static const std::vector<std::string> size_expected = {"IntArrayRef"};
+  static const std::vector<std::string> generator_expected = {"Generator"};
+  static const std::vector<std::string> names_expected = {"DimnameList"};
+  auto out_type = cpp_arg_to_torch_type(args["out"], out_expected, "out");
+  auto size_type = cpp_arg_to_torch_type(args["size"], size_expected, "size");
+  auto generator_type = cpp_arg_to_torch_type(args["generator"], generator_expected, "generator");
+  auto names_type = cpp_arg_to_torch_type(args["names"], names_expected, "names");
+if (out_type == "Tensor" && size_type == "IntArrayRef" && generator_type == "Missing" && names_type == "Missing") {
+  return Rcpp::wrap(cpp_torch_namespace_rand_out_out_Tensor_size_IntArrayRef(Rcpp::as<XPtrTorchTensor>(args["out"]), Rcpp::as<XPtrTorchIntArrayRef>(args["size"])));
+}
+if (out_type == "Tensor" && size_type == "IntArrayRef" && generator_type == "Generator" && names_type == "Missing") {
+  return Rcpp::wrap(cpp_torch_namespace_rand_out_out_Tensor_size_IntArrayRef_generator_Generator(Rcpp::as<XPtrTorchTensor>(args["out"]), Rcpp::as<XPtrTorchIntArrayRef>(args["size"]), Rcpp::as<XPtrTorchOptionalGenerator>(args["generator"])));
+}
+if (out_type == "Tensor" && size_type == "IntArrayRef" && generator_type == "Missing" && names_type == "DimnameList") {
+  return Rcpp::wrap(cpp_torch_namespace_rand_out_out_Tensor_size_IntArrayRef_names_DimnameList(Rcpp::as<XPtrTorchTensor>(args["out"]), Rcpp::as<XPtrTorchIntArrayRef>(args["size"]), Rcpp::as<XPtrTorchOptionalDimnameList>(args["names"])));
+}
+if (out_type == "Tensor" && size_type == "IntArrayRef" && generator_type == "Generator" && names_type == "DimnameList") {
+  return Rcpp::wrap(cpp_torch_namespace_rand_out_out_Tensor_size_IntArrayRef_generator_Generator_names_DimnameList(Rcpp::as<XPtrTorchTensor>(args["out"]), Rcpp::as<XPtrTorchIntArrayRef>(args["size"]), Rcpp::as<XPtrTorchOptionalGenerator>(args["generator"]), Rcpp::as<XPtrTorchOptionalDimnameList>(args["names"])));
+}
+  Rcpp::stop("No matching overload for rand_out");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace_randint (Rcpp::List args) {
+  static const std::vector<std::string> low_expected = {"int64_t"};
+  static const std::vector<std::string> high_expected = {"int64_t"};
+  static const std::vector<std::string> size_expected = {"IntArrayRef"};
+  static const std::vector<std::string> generator_expected = {"Generator"};
+  auto low_type = cpp_arg_to_torch_type(args["low"], low_expected, "low");
+  auto high_type = cpp_arg_to_torch_type(args["high"], high_expected, "high");
+  auto size_type = cpp_arg_to_torch_type(args["size"], size_expected, "size");
+  auto generator_type = cpp_arg_to_torch_type(args["generator"], generator_expected, "generator");
+if (low_type == "Missing" && high_type == "int64_t" && size_type == "IntArrayRef" && generator_type == "Missing") {
+  return Rcpp::wrap(cpp_torch_namespace_randint_high_int64_t_size_IntArrayRef(Rcpp::as<XPtrTorchint64_t>(args["high"]), Rcpp::as<XPtrTorchIntArrayRef>(args["size"]), Rcpp::as<XPtrTorchTensorOptions>(args["options"])));
+}
+if (low_type == "Missing" && high_type == "int64_t" && size_type == "IntArrayRef" && generator_type == "Generator") {
+  return Rcpp::wrap(cpp_torch_namespace_randint_high_int64_t_size_IntArrayRef_generator_Generator(Rcpp::as<XPtrTorchint64_t>(args["high"]), Rcpp::as<XPtrTorchIntArrayRef>(args["size"]), Rcpp::as<XPtrTorchOptionalGenerator>(args["generator"]), Rcpp::as<XPtrTorchTensorOptions>(args["options"])));
+}
+if (low_type == "int64_t" && high_type == "int64_t" && size_type == "IntArrayRef" && generator_type == "Missing") {
+  return Rcpp::wrap(cpp_torch_namespace_randint_low_int64_t_high_int64_t_size_IntArrayRef(Rcpp::as<XPtrTorchint64_t>(args["low"]), Rcpp::as<XPtrTorchint64_t>(args["high"]), Rcpp::as<XPtrTorchIntArrayRef>(args["size"]), Rcpp::as<XPtrTorchTensorOptions>(args["options"])));
+}
+if (low_type == "int64_t" && high_type == "int64_t" && size_type == "IntArrayRef" && generator_type == "Generator") {
+  return Rcpp::wrap(cpp_torch_namespace_randint_low_int64_t_high_int64_t_size_IntArrayRef_generator_Generator(Rcpp::as<XPtrTorchint64_t>(args["low"]), Rcpp::as<XPtrTorchint64_t>(args["high"]), Rcpp::as<XPtrTorchIntArrayRef>(args["size"]), Rcpp::as<XPtrTorchOptionalGenerator>(args["generator"]), Rcpp::as<XPtrTorchTensorOptions>(args["options"])));
+}
+  Rcpp::stop("No matching overload for randint");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace_randint_like (Rcpp::List args) {
+  static const std::vector<std::string> self_expected = {"Tensor"};
+  static const std::vector<std::string> low_expected = {"int64_t"};
+  static const std::vector<std::string> high_expected = {"int64_t", "Tensor"};
+  auto self_type = cpp_arg_to_torch_type(args["self"], self_expected, "self");
+  auto low_type = cpp_arg_to_torch_type(args["low"], low_expected, "low");
+  auto high_type = cpp_arg_to_torch_type(args["high"], high_expected, "high");
+if (self_type == "Tensor" && low_type == "Missing" && high_type == "int64_t") {
+  return Rcpp::wrap(cpp_torch_namespace_randint_like_self_Tensor_high_int64_t(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchint64_t>(args["high"]), Rcpp::as<XPtrTorchTensorOptions>(args["options"]), Rcpp::as<XPtrTorchoptional_memory_format>(args["memory_format"])));
+}
+if (self_type == "Tensor" && low_type == "Missing" && high_type == "Tensor") {
+  return Rcpp::wrap(cpp_torch_namespace_randint_like_self_Tensor_high_Tensor(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchTensor>(args["high"]), Rcpp::as<XPtrTorchTensorOptions>(args["options"]), Rcpp::as<XPtrTorchoptional_memory_format>(args["memory_format"])));
+}
+if (self_type == "Tensor" && low_type == "int64_t" && high_type == "int64_t") {
+  return Rcpp::wrap(cpp_torch_namespace_randint_like_self_Tensor_low_int64_t_high_int64_t(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchint64_t>(args["low"]), Rcpp::as<XPtrTorchint64_t>(args["high"]), Rcpp::as<XPtrTorchTensorOptions>(args["options"]), Rcpp::as<XPtrTorchoptional_memory_format>(args["memory_format"])));
+}
+  Rcpp::stop("No matching overload for randint_like");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace_randint_like_out (Rcpp::List args) {
+  static const std::vector<std::string> out_expected = {"Tensor"};
+  static const std::vector<std::string> self_expected = {"Tensor"};
+  static const std::vector<std::string> low_expected = {"int64_t"};
+  static const std::vector<std::string> high_expected = {"int64_t", "Tensor"};
+  auto out_type = cpp_arg_to_torch_type(args["out"], out_expected, "out");
+  auto self_type = cpp_arg_to_torch_type(args["self"], self_expected, "self");
+  auto low_type = cpp_arg_to_torch_type(args["low"], low_expected, "low");
+  auto high_type = cpp_arg_to_torch_type(args["high"], high_expected, "high");
+if (out_type == "Tensor" && self_type == "Tensor" && low_type == "Missing" && high_type == "int64_t") {
+  return Rcpp::wrap(cpp_torch_namespace_randint_like_out_out_Tensor_self_Tensor_high_int64_t(Rcpp::as<XPtrTorchTensor>(args["out"]), Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchint64_t>(args["high"]), Rcpp::as<XPtrTorchoptional_memory_format>(args["memory_format"])));
+}
+if (out_type == "Tensor" && self_type == "Tensor" && low_type == "Missing" && high_type == "Tensor") {
+  return Rcpp::wrap(cpp_torch_namespace_randint_like_out_out_Tensor_self_Tensor_high_Tensor(Rcpp::as<XPtrTorchTensor>(args["out"]), Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchTensor>(args["high"]), Rcpp::as<XPtrTorchoptional_memory_format>(args["memory_format"])));
+}
+if (out_type == "Tensor" && self_type == "Tensor" && low_type == "int64_t" && high_type == "int64_t") {
+  return Rcpp::wrap(cpp_torch_namespace_randint_like_out_out_Tensor_self_Tensor_low_int64_t_high_int64_t(Rcpp::as<XPtrTorchTensor>(args["out"]), Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchint64_t>(args["low"]), Rcpp::as<XPtrTorchint64_t>(args["high"]), Rcpp::as<XPtrTorchoptional_memory_format>(args["memory_format"])));
+}
+  Rcpp::stop("No matching overload for randint_like_out");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace_randint_out (Rcpp::List args) {
+  static const std::vector<std::string> out_expected = {"Tensor"};
+  static const std::vector<std::string> low_expected = {"int64_t"};
+  static const std::vector<std::string> high_expected = {"int64_t"};
+  static const std::vector<std::string> size_expected = {"IntArrayRef"};
+  static const std::vector<std::string> generator_expected = {"Generator"};
+  auto out_type = cpp_arg_to_torch_type(args["out"], out_expected, "out");
+  auto low_type = cpp_arg_to_torch_type(args["low"], low_expected, "low");
+  auto high_type = cpp_arg_to_torch_type(args["high"], high_expected, "high");
+  auto size_type = cpp_arg_to_torch_type(args["size"], size_expected, "size");
+  auto generator_type = cpp_arg_to_torch_type(args["generator"], generator_expected, "generator");
+if (out_type == "Tensor" && low_type == "Missing" && high_type == "int64_t" && size_type == "IntArrayRef" && generator_type == "Missing") {
+  return Rcpp::wrap(cpp_torch_namespace_randint_out_out_Tensor_high_int64_t_size_IntArrayRef(Rcpp::as<XPtrTorchTensor>(args["out"]), Rcpp::as<XPtrTorchint64_t>(args["high"]), Rcpp::as<XPtrTorchIntArrayRef>(args["size"])));
+}
+if (out_type == "Tensor" && low_type == "Missing" && high_type == "int64_t" && size_type == "IntArrayRef" && generator_type == "Generator") {
+  return Rcpp::wrap(cpp_torch_namespace_randint_out_out_Tensor_high_int64_t_size_IntArrayRef_generator_Generator(Rcpp::as<XPtrTorchTensor>(args["out"]), Rcpp::as<XPtrTorchint64_t>(args["high"]), Rcpp::as<XPtrTorchIntArrayRef>(args["size"]), Rcpp::as<XPtrTorchOptionalGenerator>(args["generator"])));
+}
+if (out_type == "Tensor" && low_type == "int64_t" && high_type == "int64_t" && size_type == "IntArrayRef" && generator_type == "Missing") {
+  return Rcpp::wrap(cpp_torch_namespace_randint_out_out_Tensor_low_int64_t_high_int64_t_size_IntArrayRef(Rcpp::as<XPtrTorchTensor>(args["out"]), Rcpp::as<XPtrTorchint64_t>(args["low"]), Rcpp::as<XPtrTorchint64_t>(args["high"]), Rcpp::as<XPtrTorchIntArrayRef>(args["size"])));
+}
+if (out_type == "Tensor" && low_type == "int64_t" && high_type == "int64_t" && size_type == "IntArrayRef" && generator_type == "Generator") {
+  return Rcpp::wrap(cpp_torch_namespace_randint_out_out_Tensor_low_int64_t_high_int64_t_size_IntArrayRef_generator_Generator(Rcpp::as<XPtrTorchTensor>(args["out"]), Rcpp::as<XPtrTorchint64_t>(args["low"]), Rcpp::as<XPtrTorchint64_t>(args["high"]), Rcpp::as<XPtrTorchIntArrayRef>(args["size"]), Rcpp::as<XPtrTorchOptionalGenerator>(args["generator"])));
+}
+  Rcpp::stop("No matching overload for randint_out");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace_randn (Rcpp::List args) {
+  static const std::vector<std::string> size_expected = {"IntArrayRef"};
+  static const std::vector<std::string> generator_expected = {"Generator"};
+  static const std::vector<std::string> names_expected = {"DimnameList"};
+  auto size_type = cpp_arg_to_torch_type(args["size"], size_expected, "size");
+  auto generator_type = cpp_arg_to_torch_type(args["generator"], generator_expected, "generator");
+  auto names_type = cpp_arg_to_torch_type(args["names"], names_expected, "names");
+if (size_type == "IntArrayRef" && generator_type == "Missing" && names_type == "Missing") {
+  return Rcpp::wrap(cpp_torch_namespace_randn_size_IntArrayRef(Rcpp::as<XPtrTorchIntArrayRef>(args["size"]), Rcpp::as<XPtrTorchTensorOptions>(args["options"])));
+}
+if (size_type == "IntArrayRef" && generator_type == "Generator" && names_type == "Missing") {
+  return Rcpp::wrap(cpp_torch_namespace_randn_size_IntArrayRef_generator_Generator(Rcpp::as<XPtrTorchIntArrayRef>(args["size"]), Rcpp::as<XPtrTorchOptionalGenerator>(args["generator"]), Rcpp::as<XPtrTorchTensorOptions>(args["options"])));
+}
+if (size_type == "IntArrayRef" && generator_type == "Missing" && names_type == "DimnameList") {
+  return Rcpp::wrap(cpp_torch_namespace_randn_size_IntArrayRef_names_DimnameList(Rcpp::as<XPtrTorchIntArrayRef>(args["size"]), Rcpp::as<XPtrTorchOptionalDimnameList>(args["names"]), Rcpp::as<XPtrTorchTensorOptions>(args["options"])));
+}
+if (size_type == "IntArrayRef" && generator_type == "Generator" && names_type == "DimnameList") {
+  return Rcpp::wrap(cpp_torch_namespace_randn_size_IntArrayRef_generator_Generator_names_DimnameList(Rcpp::as<XPtrTorchIntArrayRef>(args["size"]), Rcpp::as<XPtrTorchOptionalGenerator>(args["generator"]), Rcpp::as<XPtrTorchOptionalDimnameList>(args["names"]), Rcpp::as<XPtrTorchTensorOptions>(args["options"])));
+}
+  Rcpp::stop("No matching overload for randn");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace_randn_out (Rcpp::List args) {
+  static const std::vector<std::string> out_expected = {"Tensor"};
+  static const std::vector<std::string> size_expected = {"IntArrayRef"};
+  static const std::vector<std::string> generator_expected = {"Generator"};
+  static const std::vector<std::string> names_expected = {"DimnameList"};
+  auto out_type = cpp_arg_to_torch_type(args["out"], out_expected, "out");
+  auto size_type = cpp_arg_to_torch_type(args["size"], size_expected, "size");
+  auto generator_type = cpp_arg_to_torch_type(args["generator"], generator_expected, "generator");
+  auto names_type = cpp_arg_to_torch_type(args["names"], names_expected, "names");
+if (out_type == "Tensor" && size_type == "IntArrayRef" && generator_type == "Missing" && names_type == "Missing") {
+  return Rcpp::wrap(cpp_torch_namespace_randn_out_out_Tensor_size_IntArrayRef(Rcpp::as<XPtrTorchTensor>(args["out"]), Rcpp::as<XPtrTorchIntArrayRef>(args["size"])));
+}
+if (out_type == "Tensor" && size_type == "IntArrayRef" && generator_type == "Generator" && names_type == "Missing") {
+  return Rcpp::wrap(cpp_torch_namespace_randn_out_out_Tensor_size_IntArrayRef_generator_Generator(Rcpp::as<XPtrTorchTensor>(args["out"]), Rcpp::as<XPtrTorchIntArrayRef>(args["size"]), Rcpp::as<XPtrTorchOptionalGenerator>(args["generator"])));
+}
+if (out_type == "Tensor" && size_type == "IntArrayRef" && generator_type == "Missing" && names_type == "DimnameList") {
+  return Rcpp::wrap(cpp_torch_namespace_randn_out_out_Tensor_size_IntArrayRef_names_DimnameList(Rcpp::as<XPtrTorchTensor>(args["out"]), Rcpp::as<XPtrTorchIntArrayRef>(args["size"]), Rcpp::as<XPtrTorchOptionalDimnameList>(args["names"])));
+}
+if (out_type == "Tensor" && size_type == "IntArrayRef" && generator_type == "Generator" && names_type == "DimnameList") {
+  return Rcpp::wrap(cpp_torch_namespace_randn_out_out_Tensor_size_IntArrayRef_generator_Generator_names_DimnameList(Rcpp::as<XPtrTorchTensor>(args["out"]), Rcpp::as<XPtrTorchIntArrayRef>(args["size"]), Rcpp::as<XPtrTorchOptionalGenerator>(args["generator"]), Rcpp::as<XPtrTorchOptionalDimnameList>(args["names"])));
+}
+  Rcpp::stop("No matching overload for randn_out");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace_random (Rcpp::List args) {
+  static const std::vector<std::string> self_expected = {"Tensor"};
+  static const std::vector<std::string> from_expected = {"int64_t"};
+  static const std::vector<std::string> to_expected = {"int64_t"};
+  auto self_type = cpp_arg_to_torch_type(args["self"], self_expected, "self");
+  auto from_type = cpp_arg_to_torch_type(args["from"], from_expected, "from");
+  auto to_type = cpp_arg_to_torch_type(args["to"], to_expected, "to");
+if (self_type == "Tensor" && from_type == "int64_t" && to_type == "int64_t") {
+  return Rcpp::wrap(cpp_torch_namespace_random_self_Tensor_from_int64_t_to_int64_t(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchint64_t>(args["from"]), Rcpp::as<XPtrTorchoptional_int64_t>(args["to"]), Rcpp::as<XPtrTorchOptionalGenerator>(args["generator"])));
+}
+if (self_type == "Tensor" && from_type == "Missing" && to_type == "int64_t") {
+  return Rcpp::wrap(cpp_torch_namespace_random_self_Tensor_to_int64_t(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchint64_t>(args["to"]), Rcpp::as<XPtrTorchOptionalGenerator>(args["generator"])));
+}
+if (self_type == "Tensor" && from_type == "Missing" && to_type == "Missing") {
+  return Rcpp::wrap(cpp_torch_namespace_random_self_Tensor(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchOptionalGenerator>(args["generator"])));
+}
+  Rcpp::stop("No matching overload for random");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace_random_out (Rcpp::List args) {
+  static const std::vector<std::string> out_expected = {"Tensor"};
+  static const std::vector<std::string> self_expected = {"Tensor"};
+  static const std::vector<std::string> from_expected = {"int64_t"};
+  static const std::vector<std::string> to_expected = {"int64_t"};
+  auto out_type = cpp_arg_to_torch_type(args["out"], out_expected, "out");
+  auto self_type = cpp_arg_to_torch_type(args["self"], self_expected, "self");
+  auto from_type = cpp_arg_to_torch_type(args["from"], from_expected, "from");
+  auto to_type = cpp_arg_to_torch_type(args["to"], to_expected, "to");
+if (out_type == "Tensor" && self_type == "Tensor" && from_type == "int64_t" && to_type == "int64_t") {
+  return Rcpp::wrap(cpp_torch_namespace_random_out_out_Tensor_self_Tensor_from_int64_t_to_int64_t(Rcpp::as<XPtrTorchTensor>(args["out"]), Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchint64_t>(args["from"]), Rcpp::as<XPtrTorchoptional_int64_t>(args["to"]), Rcpp::as<XPtrTorchOptionalGenerator>(args["generator"])));
+}
+if (out_type == "Tensor" && self_type == "Tensor" && from_type == "Missing" && to_type == "int64_t") {
+  return Rcpp::wrap(cpp_torch_namespace_random_out_out_Tensor_self_Tensor_to_int64_t(Rcpp::as<XPtrTorchTensor>(args["out"]), Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchint64_t>(args["to"]), Rcpp::as<XPtrTorchOptionalGenerator>(args["generator"])));
+}
+if (out_type == "Tensor" && self_type == "Tensor" && from_type == "Missing" && to_type == "Missing") {
+  return Rcpp::wrap(cpp_torch_namespace_random_out_out_Tensor_self_Tensor(Rcpp::as<XPtrTorchTensor>(args["out"]), Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchOptionalGenerator>(args["generator"])));
+}
+  Rcpp::stop("No matching overload for random_out");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace_randperm (Rcpp::List args) {
+  static const std::vector<std::string> n_expected = {"int64_t"};
+  static const std::vector<std::string> generator_expected = {"Generator"};
+  auto n_type = cpp_arg_to_torch_type(args["n"], n_expected, "n");
+  auto generator_type = cpp_arg_to_torch_type(args["generator"], generator_expected, "generator");
+if (n_type == "int64_t" && generator_type == "Missing") {
+  return Rcpp::wrap(cpp_torch_namespace_randperm_n_int64_t(Rcpp::as<XPtrTorchint64_t>(args["n"]), Rcpp::as<XPtrTorchTensorOptions>(args["options"])));
+}
+if (n_type == "int64_t" && generator_type == "Generator") {
+  return Rcpp::wrap(cpp_torch_namespace_randperm_n_int64_t_generator_Generator(Rcpp::as<XPtrTorchint64_t>(args["n"]), Rcpp::as<XPtrTorchOptionalGenerator>(args["generator"]), Rcpp::as<XPtrTorchTensorOptions>(args["options"])));
+}
+  Rcpp::stop("No matching overload for randperm");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace_randperm_out (Rcpp::List args) {
+  static const std::vector<std::string> out_expected = {"Tensor"};
+  static const std::vector<std::string> n_expected = {"int64_t"};
+  static const std::vector<std::string> generator_expected = {"Generator"};
+  auto out_type = cpp_arg_to_torch_type(args["out"], out_expected, "out");
+  auto n_type = cpp_arg_to_torch_type(args["n"], n_expected, "n");
+  auto generator_type = cpp_arg_to_torch_type(args["generator"], generator_expected, "generator");
+if (out_type == "Tensor" && n_type == "int64_t" && generator_type == "Missing") {
+  return Rcpp::wrap(cpp_torch_namespace_randperm_out_out_Tensor_n_int64_t(Rcpp::as<XPtrTorchTensor>(args["out"]), Rcpp::as<XPtrTorchint64_t>(args["n"])));
+}
+if (out_type == "Tensor" && n_type == "int64_t" && generator_type == "Generator") {
+  return Rcpp::wrap(cpp_torch_namespace_randperm_out_out_Tensor_n_int64_t_generator_Generator(Rcpp::as<XPtrTorchTensor>(args["out"]), Rcpp::as<XPtrTorchint64_t>(args["n"]), Rcpp::as<XPtrTorchOptionalGenerator>(args["generator"])));
+}
+  Rcpp::stop("No matching overload for randperm_out");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace_remainder (Rcpp::List args) {
+  static const std::vector<std::string> self_expected = {"Tensor", "Scalar"};
+  static const std::vector<std::string> other_expected = {"Scalar", "Tensor"};
+  auto self_type = cpp_arg_to_torch_type(args["self"], self_expected, "self");
+  auto other_type = cpp_arg_to_torch_type(args["other"], other_expected, "other");
+if (self_type == "Tensor" && other_type == "Scalar") {
+  return Rcpp::wrap(cpp_torch_namespace_remainder_self_Tensor_other_Scalar(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchScalar>(args["other"])));
+}
+if (self_type == "Tensor" && other_type == "Tensor") {
+  return Rcpp::wrap(cpp_torch_namespace_remainder_self_Tensor_other_Tensor(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchTensor>(args["other"])));
+}
+if (self_type == "Scalar" && other_type == "Tensor") {
+  return Rcpp::wrap(cpp_torch_namespace_remainder_self_Scalar_other_Tensor(Rcpp::as<XPtrTorchScalar>(args["self"]), Rcpp::as<XPtrTorchTensor>(args["other"])));
+}
+  Rcpp::stop("No matching overload for remainder");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace_remainder_out (Rcpp::List args) {
+  static const std::vector<std::string> out_expected = {"Tensor"};
+  static const std::vector<std::string> self_expected = {"Tensor", "Scalar"};
+  static const std::vector<std::string> other_expected = {"Scalar", "Tensor"};
+  auto out_type = cpp_arg_to_torch_type(args["out"], out_expected, "out");
+  auto self_type = cpp_arg_to_torch_type(args["self"], self_expected, "self");
+  auto other_type = cpp_arg_to_torch_type(args["other"], other_expected, "other");
+if (out_type == "Tensor" && self_type == "Tensor" && other_type == "Scalar") {
+  return Rcpp::wrap(cpp_torch_namespace_remainder_out_out_Tensor_self_Tensor_other_Scalar(Rcpp::as<XPtrTorchTensor>(args["out"]), Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchScalar>(args["other"])));
+}
+if (out_type == "Tensor" && self_type == "Tensor" && other_type == "Tensor") {
+  return Rcpp::wrap(cpp_torch_namespace_remainder_out_out_Tensor_self_Tensor_other_Tensor(Rcpp::as<XPtrTorchTensor>(args["out"]), Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchTensor>(args["other"])));
+}
+if (out_type == "Tensor" && self_type == "Scalar" && other_type == "Tensor") {
+  return Rcpp::wrap(cpp_torch_namespace_remainder_out_out_Tensor_self_Scalar_other_Tensor(Rcpp::as<XPtrTorchTensor>(args["out"]), Rcpp::as<XPtrTorchScalar>(args["self"]), Rcpp::as<XPtrTorchTensor>(args["other"])));
+}
+  Rcpp::stop("No matching overload for remainder_out");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace_repeat_interleave (Rcpp::List args) {
+  static const std::vector<std::string> self_expected = {"Tensor"};
+  static const std::vector<std::string> repeats_expected = {"Tensor", "int64_t"};
+  auto self_type = cpp_arg_to_torch_type(args["self"], self_expected, "self");
+  auto repeats_type = cpp_arg_to_torch_type(args["repeats"], repeats_expected, "repeats");
+if (self_type == "Missing" && repeats_type == "Tensor") {
+  return Rcpp::wrap(cpp_torch_namespace_repeat_interleave_repeats_Tensor(Rcpp::as<XPtrTorchTensor>(args["repeats"]), Rcpp::as<XPtrTorchoptional_int64_t>(args["output_size"])));
+}
+if (self_type == "Tensor" && repeats_type == "Tensor") {
+  return Rcpp::wrap(cpp_torch_namespace_repeat_interleave_self_Tensor_repeats_Tensor(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchTensor>(args["repeats"]), Rcpp::as<XPtrTorchoptional_index_int64_t>(args["dim"]), Rcpp::as<XPtrTorchoptional_int64_t>(args["output_size"])));
+}
+if (self_type == "Tensor" && repeats_type == "int64_t") {
+  return Rcpp::wrap(cpp_torch_namespace_repeat_interleave_self_Tensor_repeats_int64_t(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchint64_t>(args["repeats"]), Rcpp::as<XPtrTorchoptional_index_int64_t>(args["dim"]), Rcpp::as<XPtrTorchoptional_int64_t>(args["output_size"])));
+}
+  Rcpp::stop("No matching overload for repeat_interleave");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace_result_type (Rcpp::List args) {
+  static const std::vector<std::string> scalar_expected = {"Scalar"};
+  static const std::vector<std::string> scalar1_expected = {"Scalar"};
+  static const std::vector<std::string> other_expected = {"Tensor", "Scalar"};
+  static const std::vector<std::string> scalar2_expected = {"Scalar"};
+  static const std::vector<std::string> tensor_expected = {"Tensor"};
+  auto scalar_type = cpp_arg_to_torch_type(args["scalar"], scalar_expected, "scalar");
+  auto scalar1_type = cpp_arg_to_torch_type(args["scalar1"], scalar1_expected, "scalar1");
+  auto other_type = cpp_arg_to_torch_type(args["other"], other_expected, "other");
+  auto scalar2_type = cpp_arg_to_torch_type(args["scalar2"], scalar2_expected, "scalar2");
+  auto tensor_type = cpp_arg_to_torch_type(args["tensor"], tensor_expected, "tensor");
+if (scalar_type == "Missing" && scalar1_type == "Missing" && other_type == "Tensor" && scalar2_type == "Missing" && tensor_type == "Tensor") {
+  return Rcpp::wrap(cpp_torch_namespace_result_type_other_Tensor_tensor_Tensor(Rcpp::as<XPtrTorchTensor>(args["tensor"]), Rcpp::as<XPtrTorchTensor>(args["other"])));
+}
+if (scalar_type == "Missing" && scalar1_type == "Missing" && other_type == "Scalar" && scalar2_type == "Missing" && tensor_type == "Tensor") {
+  return Rcpp::wrap(cpp_torch_namespace_result_type_other_Scalar_tensor_Tensor(Rcpp::as<XPtrTorchTensor>(args["tensor"]), Rcpp::as<XPtrTorchScalar>(args["other"])));
+}
+if (scalar_type == "Scalar" && scalar1_type == "Missing" && other_type == "Missing" && scalar2_type == "Missing" && tensor_type == "Tensor") {
+  return Rcpp::wrap(cpp_torch_namespace_result_type_scalar_Scalar_tensor_Tensor(Rcpp::as<XPtrTorchScalar>(args["scalar"]), Rcpp::as<XPtrTorchTensor>(args["tensor"])));
+}
+if (scalar_type == "Missing" && scalar1_type == "Scalar" && other_type == "Missing" && scalar2_type == "Scalar" && tensor_type == "Missing") {
+  return Rcpp::wrap(cpp_torch_namespace_result_type_scalar1_Scalar_scalar2_Scalar(Rcpp::as<XPtrTorchScalar>(args["scalar1"]), Rcpp::as<XPtrTorchScalar>(args["scalar2"])));
+}
+  Rcpp::stop("No matching overload for result_type");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace_rnn_relu (Rcpp::List args) {
+  static const std::vector<std::string> data_expected = {"Tensor"};
+  static const std::vector<std::string> input_expected = {"Tensor"};
+  static const std::vector<std::string> batch_sizes_expected = {"Tensor"};
+  static const std::vector<std::string> hx_expected = {"Tensor"};
+  static const std::vector<std::string> params_expected = {"TensorList"};
+  static const std::vector<std::string> has_biases_expected = {"bool"};
+  static const std::vector<std::string> num_layers_expected = {"int64_t"};
+  static const std::vector<std::string> dropout_expected = {"double"};
+  static const std::vector<std::string> train_expected = {"bool"};
+  static const std::vector<std::string> batch_first_expected = {"bool"};
+  static const std::vector<std::string> bidirectional_expected = {"bool"};
+  auto data_type = cpp_arg_to_torch_type(args["data"], data_expected, "data");
+  auto input_type = cpp_arg_to_torch_type(args["input"], input_expected, "input");
+  auto batch_sizes_type = cpp_arg_to_torch_type(args["batch_sizes"], batch_sizes_expected, "batch_sizes");
+  auto hx_type = cpp_arg_to_torch_type(args["hx"], hx_expected, "hx");
+  auto params_type = cpp_arg_to_torch_type(args["params"], params_expected, "params");
+  auto has_biases_type = cpp_arg_to_torch_type(args["has_biases"], has_biases_expected, "has_biases");
+  auto num_layers_type = cpp_arg_to_torch_type(args["num_layers"], num_layers_expected, "num_layers");
+  auto dropout_type = cpp_arg_to_torch_type(args["dropout"], dropout_expected, "dropout");
+  auto train_type = cpp_arg_to_torch_type(args["train"], train_expected, "train");
+  auto batch_first_type = cpp_arg_to_torch_type(args["batch_first"], batch_first_expected, "batch_first");
+  auto bidirectional_type = cpp_arg_to_torch_type(args["bidirectional"], bidirectional_expected, "bidirectional");
+if (data_type == "Missing" && input_type == "Tensor" && batch_sizes_type == "Missing" && hx_type == "Tensor" && params_type == "TensorList" && has_biases_type == "bool" && num_layers_type == "int64_t" && dropout_type == "double" && train_type == "bool" && batch_first_type == "bool" && bidirectional_type == "bool") {
+  return Rcpp::wrap(cpp_torch_namespace_rnn_relu_input_Tensor_hx_Tensor_params_TensorList_has_biases_bool_num_layers_int64_t_dropout_double_train_bool_batch_first_bool_bidirectional_bool(Rcpp::as<XPtrTorchTensor>(args["input"]), Rcpp::as<XPtrTorchTensor>(args["hx"]), Rcpp::as<XPtrTorchTensorList>(args["params"]), Rcpp::as<XPtrTorchbool>(args["has_biases"]), Rcpp::as<XPtrTorchint64_t>(args["num_layers"]), Rcpp::as<XPtrTorchdouble>(args["dropout"]), Rcpp::as<XPtrTorchbool>(args["train"]), Rcpp::as<XPtrTorchbool>(args["bidirectional"]), Rcpp::as<XPtrTorchbool>(args["batch_first"])));
+}
+if (data_type == "Tensor" && input_type == "Missing" && batch_sizes_type == "Tensor" && hx_type == "Tensor" && params_type == "TensorList" && has_biases_type == "bool" && num_layers_type == "int64_t" && dropout_type == "double" && train_type == "bool" && batch_first_type == "Missing" && bidirectional_type == "bool") {
+  return Rcpp::wrap(cpp_torch_namespace_rnn_relu_data_Tensor_batch_sizes_Tensor_hx_Tensor_params_TensorList_has_biases_bool_num_layers_int64_t_dropout_double_train_bool_bidirectional_bool(Rcpp::as<XPtrTorchTensor>(args["data"]), Rcpp::as<XPtrTorchTensor>(args["batch_sizes"]), Rcpp::as<XPtrTorchTensor>(args["hx"]), Rcpp::as<XPtrTorchTensorList>(args["params"]), Rcpp::as<XPtrTorchbool>(args["has_biases"]), Rcpp::as<XPtrTorchint64_t>(args["num_layers"]), Rcpp::as<XPtrTorchdouble>(args["dropout"]), Rcpp::as<XPtrTorchbool>(args["train"]), Rcpp::as<XPtrTorchbool>(args["bidirectional"])));
+}
+  Rcpp::stop("No matching overload for rnn_relu");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace_rnn_tanh (Rcpp::List args) {
+  static const std::vector<std::string> data_expected = {"Tensor"};
+  static const std::vector<std::string> input_expected = {"Tensor"};
+  static const std::vector<std::string> batch_sizes_expected = {"Tensor"};
+  static const std::vector<std::string> hx_expected = {"Tensor"};
+  static const std::vector<std::string> params_expected = {"TensorList"};
+  static const std::vector<std::string> has_biases_expected = {"bool"};
+  static const std::vector<std::string> num_layers_expected = {"int64_t"};
+  static const std::vector<std::string> dropout_expected = {"double"};
+  static const std::vector<std::string> train_expected = {"bool"};
+  static const std::vector<std::string> batch_first_expected = {"bool"};
+  static const std::vector<std::string> bidirectional_expected = {"bool"};
+  auto data_type = cpp_arg_to_torch_type(args["data"], data_expected, "data");
+  auto input_type = cpp_arg_to_torch_type(args["input"], input_expected, "input");
+  auto batch_sizes_type = cpp_arg_to_torch_type(args["batch_sizes"], batch_sizes_expected, "batch_sizes");
+  auto hx_type = cpp_arg_to_torch_type(args["hx"], hx_expected, "hx");
+  auto params_type = cpp_arg_to_torch_type(args["params"], params_expected, "params");
+  auto has_biases_type = cpp_arg_to_torch_type(args["has_biases"], has_biases_expected, "has_biases");
+  auto num_layers_type = cpp_arg_to_torch_type(args["num_layers"], num_layers_expected, "num_layers");
+  auto dropout_type = cpp_arg_to_torch_type(args["dropout"], dropout_expected, "dropout");
+  auto train_type = cpp_arg_to_torch_type(args["train"], train_expected, "train");
+  auto batch_first_type = cpp_arg_to_torch_type(args["batch_first"], batch_first_expected, "batch_first");
+  auto bidirectional_type = cpp_arg_to_torch_type(args["bidirectional"], bidirectional_expected, "bidirectional");
+if (data_type == "Missing" && input_type == "Tensor" && batch_sizes_type == "Missing" && hx_type == "Tensor" && params_type == "TensorList" && has_biases_type == "bool" && num_layers_type == "int64_t" && dropout_type == "double" && train_type == "bool" && batch_first_type == "bool" && bidirectional_type == "bool") {
+  return Rcpp::wrap(cpp_torch_namespace_rnn_tanh_input_Tensor_hx_Tensor_params_TensorList_has_biases_bool_num_layers_int64_t_dropout_double_train_bool_batch_first_bool_bidirectional_bool(Rcpp::as<XPtrTorchTensor>(args["input"]), Rcpp::as<XPtrTorchTensor>(args["hx"]), Rcpp::as<XPtrTorchTensorList>(args["params"]), Rcpp::as<XPtrTorchbool>(args["has_biases"]), Rcpp::as<XPtrTorchint64_t>(args["num_layers"]), Rcpp::as<XPtrTorchdouble>(args["dropout"]), Rcpp::as<XPtrTorchbool>(args["train"]), Rcpp::as<XPtrTorchbool>(args["bidirectional"]), Rcpp::as<XPtrTorchbool>(args["batch_first"])));
+}
+if (data_type == "Tensor" && input_type == "Missing" && batch_sizes_type == "Tensor" && hx_type == "Tensor" && params_type == "TensorList" && has_biases_type == "bool" && num_layers_type == "int64_t" && dropout_type == "double" && train_type == "bool" && batch_first_type == "Missing" && bidirectional_type == "bool") {
+  return Rcpp::wrap(cpp_torch_namespace_rnn_tanh_data_Tensor_batch_sizes_Tensor_hx_Tensor_params_TensorList_has_biases_bool_num_layers_int64_t_dropout_double_train_bool_bidirectional_bool(Rcpp::as<XPtrTorchTensor>(args["data"]), Rcpp::as<XPtrTorchTensor>(args["batch_sizes"]), Rcpp::as<XPtrTorchTensor>(args["hx"]), Rcpp::as<XPtrTorchTensorList>(args["params"]), Rcpp::as<XPtrTorchbool>(args["has_biases"]), Rcpp::as<XPtrTorchint64_t>(args["num_layers"]), Rcpp::as<XPtrTorchdouble>(args["dropout"]), Rcpp::as<XPtrTorchbool>(args["train"]), Rcpp::as<XPtrTorchbool>(args["bidirectional"])));
+}
+  Rcpp::stop("No matching overload for rnn_tanh");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace_round (Rcpp::List args) {
+  static const std::vector<std::string> self_expected = {"Tensor"};
+  static const std::vector<std::string> decimals_expected = {"int64_t"};
+  auto self_type = cpp_arg_to_torch_type(args["self"], self_expected, "self");
+  auto decimals_type = cpp_arg_to_torch_type(args["decimals"], decimals_expected, "decimals");
+if (self_type == "Tensor" && decimals_type == "Missing") {
+  return Rcpp::wrap(cpp_torch_namespace_round_self_Tensor(Rcpp::as<XPtrTorchTensor>(args["self"])));
+}
+if (self_type == "Tensor" && decimals_type == "int64_t") {
+  return Rcpp::wrap(cpp_torch_namespace_round_self_Tensor_decimals_int64_t(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchint64_t>(args["decimals"])));
+}
+  Rcpp::stop("No matching overload for round");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace_round_ (Rcpp::List args) {
+  static const std::vector<std::string> self_expected = {"Tensor"};
+  static const std::vector<std::string> decimals_expected = {"int64_t"};
+  auto self_type = cpp_arg_to_torch_type(args["self"], self_expected, "self");
+  auto decimals_type = cpp_arg_to_torch_type(args["decimals"], decimals_expected, "decimals");
+if (self_type == "Tensor" && decimals_type == "Missing") {
+  return Rcpp::wrap(cpp_torch_namespace_round__self_Tensor(Rcpp::as<XPtrTorchTensor>(args["self"])));
+}
+if (self_type == "Tensor" && decimals_type == "int64_t") {
+  return Rcpp::wrap(cpp_torch_namespace_round__self_Tensor_decimals_int64_t(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchint64_t>(args["decimals"])));
+}
+  Rcpp::stop("No matching overload for round_");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace_round_out (Rcpp::List args) {
+  static const std::vector<std::string> out_expected = {"Tensor"};
+  static const std::vector<std::string> self_expected = {"Tensor"};
+  static const std::vector<std::string> decimals_expected = {"int64_t"};
+  auto out_type = cpp_arg_to_torch_type(args["out"], out_expected, "out");
+  auto self_type = cpp_arg_to_torch_type(args["self"], self_expected, "self");
+  auto decimals_type = cpp_arg_to_torch_type(args["decimals"], decimals_expected, "decimals");
+if (out_type == "Tensor" && self_type == "Tensor" && decimals_type == "Missing") {
+  return Rcpp::wrap(cpp_torch_namespace_round_out_out_Tensor_self_Tensor(Rcpp::as<XPtrTorchTensor>(args["out"]), Rcpp::as<XPtrTorchTensor>(args["self"])));
+}
+if (out_type == "Tensor" && self_type == "Tensor" && decimals_type == "int64_t") {
+  return Rcpp::wrap(cpp_torch_namespace_round_out_out_Tensor_self_Tensor_decimals_int64_t(Rcpp::as<XPtrTorchTensor>(args["out"]), Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchint64_t>(args["decimals"])));
+}
+  Rcpp::stop("No matching overload for round_out");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace_scatter (Rcpp::List args) {
+  static const std::vector<std::string> self_expected = {"Tensor"};
+  static const std::vector<std::string> dim_expected = {"int64_t", "Dimname"};
+  static const std::vector<std::string> index_expected = {"Tensor"};
+  static const std::vector<std::string> src_expected = {"Tensor"};
+  static const std::vector<std::string> value_expected = {"Scalar"};
+  static const std::vector<std::string> reduce_expected = {"c10::string_view"};
+  auto self_type = cpp_arg_to_torch_type(args["self"], self_expected, "self");
+  auto dim_type = cpp_arg_to_torch_type(args["dim"], dim_expected, "dim");
+  auto index_type = cpp_arg_to_torch_type(args["index"], index_expected, "index");
+  auto src_type = cpp_arg_to_torch_type(args["src"], src_expected, "src");
+  auto value_type = cpp_arg_to_torch_type(args["value"], value_expected, "value");
+  auto reduce_type = cpp_arg_to_torch_type(args["reduce"], reduce_expected, "reduce");
+if (self_type == "Tensor" && dim_type == "int64_t" && index_type == "Tensor" && src_type == "Tensor" && value_type == "Missing" && reduce_type == "Missing") {
+  return Rcpp::wrap(cpp_torch_namespace_scatter_self_Tensor_dim_int64_t_index_Tensor_src_Tensor(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchindex_int64_t>(args["dim"]), Rcpp::as<XPtrTorchIndexTensor>(args["index"]), Rcpp::as<XPtrTorchTensor>(args["src"])));
+}
+if (self_type == "Tensor" && dim_type == "int64_t" && index_type == "Tensor" && src_type == "Missing" && value_type == "Scalar" && reduce_type == "Missing") {
+  return Rcpp::wrap(cpp_torch_namespace_scatter_self_Tensor_dim_int64_t_index_Tensor_value_Scalar(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchindex_int64_t>(args["dim"]), Rcpp::as<XPtrTorchIndexTensor>(args["index"]), Rcpp::as<XPtrTorchScalar>(args["value"])));
+}
+if (self_type == "Tensor" && dim_type == "int64_t" && index_type == "Tensor" && src_type == "Tensor" && value_type == "Missing" && reduce_type == "c10::string_view") {
+  return Rcpp::wrap(cpp_torch_namespace_scatter_self_Tensor_dim_int64_t_index_Tensor_src_Tensor_reduce_c10string_view(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchindex_int64_t>(args["dim"]), Rcpp::as<XPtrTorchIndexTensor>(args["index"]), Rcpp::as<XPtrTorchTensor>(args["src"]), Rcpp::as<XPtrTorchstring_view>(args["reduce"])));
+}
+if (self_type == "Tensor" && dim_type == "int64_t" && index_type == "Tensor" && src_type == "Missing" && value_type == "Scalar" && reduce_type == "c10::string_view") {
+  return Rcpp::wrap(cpp_torch_namespace_scatter_self_Tensor_dim_int64_t_index_Tensor_value_Scalar_reduce_c10string_view(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchindex_int64_t>(args["dim"]), Rcpp::as<XPtrTorchIndexTensor>(args["index"]), Rcpp::as<XPtrTorchScalar>(args["value"]), Rcpp::as<XPtrTorchstring_view>(args["reduce"])));
+}
+if (self_type == "Tensor" && dim_type == "Dimname" && index_type == "Tensor" && src_type == "Tensor" && value_type == "Missing" && reduce_type == "Missing") {
+  return Rcpp::wrap(cpp_torch_namespace_scatter_self_Tensor_dim_Dimname_index_Tensor_src_Tensor(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchDimname>(args["dim"]), Rcpp::as<XPtrTorchIndexTensor>(args["index"]), Rcpp::as<XPtrTorchTensor>(args["src"])));
+}
+if (self_type == "Tensor" && dim_type == "Dimname" && index_type == "Tensor" && src_type == "Missing" && value_type == "Scalar" && reduce_type == "Missing") {
+  return Rcpp::wrap(cpp_torch_namespace_scatter_self_Tensor_dim_Dimname_index_Tensor_value_Scalar(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchDimname>(args["dim"]), Rcpp::as<XPtrTorchIndexTensor>(args["index"]), Rcpp::as<XPtrTorchScalar>(args["value"])));
+}
+  Rcpp::stop("No matching overload for scatter");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace_scatter_out (Rcpp::List args) {
+  static const std::vector<std::string> out_expected = {"Tensor"};
+  static const std::vector<std::string> self_expected = {"Tensor"};
+  static const std::vector<std::string> dim_expected = {"int64_t"};
+  static const std::vector<std::string> index_expected = {"Tensor"};
+  static const std::vector<std::string> src_expected = {"Tensor"};
+  static const std::vector<std::string> value_expected = {"Scalar"};
+  static const std::vector<std::string> reduce_expected = {"c10::string_view"};
+  auto out_type = cpp_arg_to_torch_type(args["out"], out_expected, "out");
+  auto self_type = cpp_arg_to_torch_type(args["self"], self_expected, "self");
+  auto dim_type = cpp_arg_to_torch_type(args["dim"], dim_expected, "dim");
+  auto index_type = cpp_arg_to_torch_type(args["index"], index_expected, "index");
+  auto src_type = cpp_arg_to_torch_type(args["src"], src_expected, "src");
+  auto value_type = cpp_arg_to_torch_type(args["value"], value_expected, "value");
+  auto reduce_type = cpp_arg_to_torch_type(args["reduce"], reduce_expected, "reduce");
+if (out_type == "Tensor" && self_type == "Tensor" && dim_type == "int64_t" && index_type == "Tensor" && src_type == "Tensor" && value_type == "Missing" && reduce_type == "Missing") {
+  return Rcpp::wrap(cpp_torch_namespace_scatter_out_out_Tensor_self_Tensor_dim_int64_t_index_Tensor_src_Tensor(Rcpp::as<XPtrTorchTensor>(args["out"]), Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchindex_int64_t>(args["dim"]), Rcpp::as<XPtrTorchIndexTensor>(args["index"]), Rcpp::as<XPtrTorchTensor>(args["src"])));
+}
+if (out_type == "Tensor" && self_type == "Tensor" && dim_type == "int64_t" && index_type == "Tensor" && src_type == "Missing" && value_type == "Scalar" && reduce_type == "Missing") {
+  return Rcpp::wrap(cpp_torch_namespace_scatter_out_out_Tensor_self_Tensor_dim_int64_t_index_Tensor_value_Scalar(Rcpp::as<XPtrTorchTensor>(args["out"]), Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchindex_int64_t>(args["dim"]), Rcpp::as<XPtrTorchIndexTensor>(args["index"]), Rcpp::as<XPtrTorchScalar>(args["value"])));
+}
+if (out_type == "Tensor" && self_type == "Tensor" && dim_type == "int64_t" && index_type == "Tensor" && src_type == "Tensor" && value_type == "Missing" && reduce_type == "c10::string_view") {
+  return Rcpp::wrap(cpp_torch_namespace_scatter_out_out_Tensor_self_Tensor_dim_int64_t_index_Tensor_src_Tensor_reduce_c10string_view(Rcpp::as<XPtrTorchTensor>(args["out"]), Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchindex_int64_t>(args["dim"]), Rcpp::as<XPtrTorchIndexTensor>(args["index"]), Rcpp::as<XPtrTorchTensor>(args["src"]), Rcpp::as<XPtrTorchstring_view>(args["reduce"])));
+}
+if (out_type == "Tensor" && self_type == "Tensor" && dim_type == "int64_t" && index_type == "Tensor" && src_type == "Missing" && value_type == "Scalar" && reduce_type == "c10::string_view") {
+  return Rcpp::wrap(cpp_torch_namespace_scatter_out_out_Tensor_self_Tensor_dim_int64_t_index_Tensor_value_Scalar_reduce_c10string_view(Rcpp::as<XPtrTorchTensor>(args["out"]), Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchindex_int64_t>(args["dim"]), Rcpp::as<XPtrTorchIndexTensor>(args["index"]), Rcpp::as<XPtrTorchScalar>(args["value"]), Rcpp::as<XPtrTorchstring_view>(args["reduce"])));
+}
+  Rcpp::stop("No matching overload for scatter_out");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace_set (Rcpp::List args) {
+  static const std::vector<std::string> self_expected = {"Tensor"};
+  static const std::vector<std::string> source_expected = {"Storage", "Tensor"};
+  static const std::vector<std::string> storage_offset_expected = {"int64_t"};
+  static const std::vector<std::string> size_expected = {"IntArrayRef"};
+  auto self_type = cpp_arg_to_torch_type(args["self"], self_expected, "self");
+  auto source_type = cpp_arg_to_torch_type(args["source"], source_expected, "source");
+  auto storage_offset_type = cpp_arg_to_torch_type(args["storage_offset"], storage_offset_expected, "storage_offset");
+  auto size_type = cpp_arg_to_torch_type(args["size"], size_expected, "size");
+if (self_type == "Tensor" && source_type == "Storage" && storage_offset_type == "Missing" && size_type == "Missing") {
+  return Rcpp::wrap(cpp_torch_namespace_set_self_Tensor_source_Storage(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<Rcpp::XPtr<XPtrTorch>>(args["source"])));
+}
+if (self_type == "Tensor" && source_type == "Storage" && storage_offset_type == "int64_t" && size_type == "IntArrayRef") {
+  return Rcpp::wrap(cpp_torch_namespace_set_self_Tensor_source_Storage_storage_offset_int64_t_size_IntArrayRef(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<Rcpp::XPtr<XPtrTorch>>(args["source"]), Rcpp::as<XPtrTorchint64_t>(args["storage_offset"]), Rcpp::as<XPtrTorchIntArrayRef>(args["size"]), Rcpp::as<XPtrTorchIntArrayRef>(args["stride"])));
+}
+if (self_type == "Tensor" && source_type == "Tensor" && storage_offset_type == "Missing" && size_type == "Missing") {
+  return Rcpp::wrap(cpp_torch_namespace_set_self_Tensor_source_Tensor(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchTensor>(args["source"])));
+}
+if (self_type == "Tensor" && source_type == "Missing" && storage_offset_type == "Missing" && size_type == "Missing") {
+  return Rcpp::wrap(cpp_torch_namespace_set_self_Tensor(Rcpp::as<XPtrTorchTensor>(args["self"])));
+}
+  Rcpp::stop("No matching overload for set");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace_set_out (Rcpp::List args) {
+  static const std::vector<std::string> out_expected = {"Tensor"};
+  static const std::vector<std::string> self_expected = {"Tensor"};
+  static const std::vector<std::string> source_expected = {"Storage", "Tensor"};
+  static const std::vector<std::string> storage_offset_expected = {"int64_t"};
+  static const std::vector<std::string> size_expected = {"IntArrayRef"};
+  auto out_type = cpp_arg_to_torch_type(args["out"], out_expected, "out");
+  auto self_type = cpp_arg_to_torch_type(args["self"], self_expected, "self");
+  auto source_type = cpp_arg_to_torch_type(args["source"], source_expected, "source");
+  auto storage_offset_type = cpp_arg_to_torch_type(args["storage_offset"], storage_offset_expected, "storage_offset");
+  auto size_type = cpp_arg_to_torch_type(args["size"], size_expected, "size");
+if (out_type == "Tensor" && self_type == "Tensor" && source_type == "Storage" && storage_offset_type == "Missing" && size_type == "Missing") {
+  return Rcpp::wrap(cpp_torch_namespace_set_out_out_Tensor_self_Tensor_source_Storage(Rcpp::as<XPtrTorchTensor>(args["out"]), Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<Rcpp::XPtr<XPtrTorch>>(args["source"])));
+}
+if (out_type == "Tensor" && self_type == "Tensor" && source_type == "Storage" && storage_offset_type == "int64_t" && size_type == "IntArrayRef") {
+  return Rcpp::wrap(cpp_torch_namespace_set_out_out_Tensor_self_Tensor_source_Storage_storage_offset_int64_t_size_IntArrayRef(Rcpp::as<XPtrTorchTensor>(args["out"]), Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<Rcpp::XPtr<XPtrTorch>>(args["source"]), Rcpp::as<XPtrTorchint64_t>(args["storage_offset"]), Rcpp::as<XPtrTorchIntArrayRef>(args["size"]), Rcpp::as<XPtrTorchIntArrayRef>(args["stride"])));
+}
+if (out_type == "Tensor" && self_type == "Tensor" && source_type == "Tensor" && storage_offset_type == "Missing" && size_type == "Missing") {
+  return Rcpp::wrap(cpp_torch_namespace_set_out_out_Tensor_self_Tensor_source_Tensor(Rcpp::as<XPtrTorchTensor>(args["out"]), Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchTensor>(args["source"])));
+}
+if (out_type == "Tensor" && self_type == "Tensor" && source_type == "Missing" && storage_offset_type == "Missing" && size_type == "Missing") {
+  return Rcpp::wrap(cpp_torch_namespace_set_out_out_Tensor_self_Tensor(Rcpp::as<XPtrTorchTensor>(args["out"]), Rcpp::as<XPtrTorchTensor>(args["self"])));
+}
+  Rcpp::stop("No matching overload for set_out");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace_sort (Rcpp::List args) {
+  static const std::vector<std::string> self_expected = {"Tensor"};
+  static const std::vector<std::string> dim_expected = {"int64_t", "Dimname"};
+  static const std::vector<std::string> stable_expected = {"bool"};
+  auto self_type = cpp_arg_to_torch_type(args["self"], self_expected, "self");
+  auto dim_type = cpp_arg_to_torch_type(args["dim"], dim_expected, "dim");
+  auto stable_type = cpp_arg_to_torch_type(args["stable"], stable_expected, "stable");
+if (self_type == "Tensor" && dim_type == "int64_t" && stable_type == "Missing") {
+  return Rcpp::wrap(cpp_torch_namespace_sort_self_Tensor_dim_int64_t(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchindex_int64_t>(args["dim"]), Rcpp::as<XPtrTorchbool>(args["descending"])));
+}
+if (self_type == "Tensor" && dim_type == "int64_t" && stable_type == "bool") {
+  return Rcpp::wrap(cpp_torch_namespace_sort_self_Tensor_dim_int64_t_stable_bool(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchoptional_bool>(args["stable"]), Rcpp::as<XPtrTorchindex_int64_t>(args["dim"]), Rcpp::as<XPtrTorchbool>(args["descending"])));
+}
+if (self_type == "Tensor" && dim_type == "Dimname" && stable_type == "Missing") {
+  return Rcpp::wrap(cpp_torch_namespace_sort_self_Tensor_dim_Dimname(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchDimname>(args["dim"]), Rcpp::as<XPtrTorchbool>(args["descending"])));
+}
+if (self_type == "Tensor" && dim_type == "Dimname" && stable_type == "bool") {
+  return Rcpp::wrap(cpp_torch_namespace_sort_self_Tensor_dim_Dimname_stable_bool(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchoptional_bool>(args["stable"]), Rcpp::as<XPtrTorchDimname>(args["dim"]), Rcpp::as<XPtrTorchbool>(args["descending"])));
+}
+  Rcpp::stop("No matching overload for sort");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace_sort_out (Rcpp::List args) {
+  static const std::vector<std::string> values_expected = {"Tensor"};
+  static const std::vector<std::string> indices_expected = {"Tensor"};
+  static const std::vector<std::string> self_expected = {"Tensor"};
+  static const std::vector<std::string> stable_expected = {"bool"};
+  static const std::vector<std::string> dim_expected = {"int64_t", "Dimname"};
+  auto values_type = cpp_arg_to_torch_type(args["values"], values_expected, "values");
+  auto indices_type = cpp_arg_to_torch_type(args["indices"], indices_expected, "indices");
+  auto self_type = cpp_arg_to_torch_type(args["self"], self_expected, "self");
+  auto stable_type = cpp_arg_to_torch_type(args["stable"], stable_expected, "stable");
+  auto dim_type = cpp_arg_to_torch_type(args["dim"], dim_expected, "dim");
+if (values_type == "Tensor" && indices_type == "Tensor" && self_type == "Tensor" && stable_type == "Missing" && dim_type == "int64_t") {
+  return Rcpp::wrap(cpp_torch_namespace_sort_out_values_Tensor_indices_Tensor_self_Tensor_dim_int64_t(Rcpp::as<XPtrTorchTensor>(args["values"]), Rcpp::as<XPtrTorchIndexTensor>(args["indices"]), Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchindex_int64_t>(args["dim"]), Rcpp::as<XPtrTorchbool>(args["descending"])));
+}
+if (values_type == "Tensor" && indices_type == "Tensor" && self_type == "Tensor" && stable_type == "bool" && dim_type == "int64_t") {
+  return Rcpp::wrap(cpp_torch_namespace_sort_out_values_Tensor_indices_Tensor_self_Tensor_stable_bool_dim_int64_t(Rcpp::as<XPtrTorchTensor>(args["values"]), Rcpp::as<XPtrTorchIndexTensor>(args["indices"]), Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchoptional_bool>(args["stable"]), Rcpp::as<XPtrTorchindex_int64_t>(args["dim"]), Rcpp::as<XPtrTorchbool>(args["descending"])));
+}
+if (values_type == "Tensor" && indices_type == "Tensor" && self_type == "Tensor" && stable_type == "Missing" && dim_type == "Dimname") {
+  return Rcpp::wrap(cpp_torch_namespace_sort_out_values_Tensor_indices_Tensor_self_Tensor_dim_Dimname(Rcpp::as<XPtrTorchTensor>(args["values"]), Rcpp::as<XPtrTorchIndexTensor>(args["indices"]), Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchDimname>(args["dim"]), Rcpp::as<XPtrTorchbool>(args["descending"])));
+}
+if (values_type == "Tensor" && indices_type == "Tensor" && self_type == "Tensor" && stable_type == "bool" && dim_type == "Dimname") {
+  return Rcpp::wrap(cpp_torch_namespace_sort_out_values_Tensor_indices_Tensor_self_Tensor_stable_bool_dim_Dimname(Rcpp::as<XPtrTorchTensor>(args["values"]), Rcpp::as<XPtrTorchIndexTensor>(args["indices"]), Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchoptional_bool>(args["stable"]), Rcpp::as<XPtrTorchDimname>(args["dim"]), Rcpp::as<XPtrTorchbool>(args["descending"])));
+}
+  Rcpp::stop("No matching overload for sort_out");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace_sparse_bsc_tensor (Rcpp::List args) {
+  static const std::vector<std::string> ccol_indices_expected = {"Tensor"};
+  static const std::vector<std::string> row_indices_expected = {"Tensor"};
+  static const std::vector<std::string> values_expected = {"Tensor"};
+  static const std::vector<std::string> size_expected = {"IntArrayRef"};
+  static const std::vector<std::string> options_expected = {"TensorOptions"};
+  auto ccol_indices_type = cpp_arg_to_torch_type(args["ccol_indices"], ccol_indices_expected, "ccol_indices");
+  auto row_indices_type = cpp_arg_to_torch_type(args["row_indices"], row_indices_expected, "row_indices");
+  auto values_type = cpp_arg_to_torch_type(args["values"], values_expected, "values");
+  auto size_type = cpp_arg_to_torch_type(args["size"], size_expected, "size");
+  auto options_type = cpp_arg_to_torch_type(args["options"], options_expected, "options");
+if (ccol_indices_type == "Tensor" && row_indices_type == "Tensor" && values_type == "Tensor" && size_type == "IntArrayRef" && options_type == "TensorOptions") {
+  return Rcpp::wrap(cpp_torch_namespace_sparse_bsc_tensor_ccol_indices_Tensor_row_indices_Tensor_values_Tensor_size_IntArrayRef_options_TensorOptions(Rcpp::as<XPtrTorchTensor>(args["ccol_indices"]), Rcpp::as<XPtrTorchTensor>(args["row_indices"]), Rcpp::as<XPtrTorchTensor>(args["values"]), Rcpp::as<XPtrTorchIntArrayRef>(args["size"]), Rcpp::as<XPtrTorchTensorOptions>(args["options"])));
+}
+if (ccol_indices_type == "Tensor" && row_indices_type == "Tensor" && values_type == "Tensor" && size_type == "Missing" && options_type == "TensorOptions") {
+  return Rcpp::wrap(cpp_torch_namespace_sparse_bsc_tensor_ccol_indices_Tensor_row_indices_Tensor_values_Tensor_options_TensorOptions(Rcpp::as<XPtrTorchTensor>(args["ccol_indices"]), Rcpp::as<XPtrTorchTensor>(args["row_indices"]), Rcpp::as<XPtrTorchTensor>(args["values"]), Rcpp::as<XPtrTorchTensorOptions>(args["options"])));
+}
+  Rcpp::stop("No matching overload for sparse_bsc_tensor");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace_sparse_bsr_tensor (Rcpp::List args) {
+  static const std::vector<std::string> crow_indices_expected = {"Tensor"};
+  static const std::vector<std::string> col_indices_expected = {"Tensor"};
+  static const std::vector<std::string> values_expected = {"Tensor"};
+  static const std::vector<std::string> size_expected = {"IntArrayRef"};
+  static const std::vector<std::string> options_expected = {"TensorOptions"};
+  auto crow_indices_type = cpp_arg_to_torch_type(args["crow_indices"], crow_indices_expected, "crow_indices");
+  auto col_indices_type = cpp_arg_to_torch_type(args["col_indices"], col_indices_expected, "col_indices");
+  auto values_type = cpp_arg_to_torch_type(args["values"], values_expected, "values");
+  auto size_type = cpp_arg_to_torch_type(args["size"], size_expected, "size");
+  auto options_type = cpp_arg_to_torch_type(args["options"], options_expected, "options");
+if (crow_indices_type == "Tensor" && col_indices_type == "Tensor" && values_type == "Tensor" && size_type == "IntArrayRef" && options_type == "TensorOptions") {
+  return Rcpp::wrap(cpp_torch_namespace_sparse_bsr_tensor_crow_indices_Tensor_col_indices_Tensor_values_Tensor_size_IntArrayRef_options_TensorOptions(Rcpp::as<XPtrTorchTensor>(args["crow_indices"]), Rcpp::as<XPtrTorchTensor>(args["col_indices"]), Rcpp::as<XPtrTorchTensor>(args["values"]), Rcpp::as<XPtrTorchIntArrayRef>(args["size"]), Rcpp::as<XPtrTorchTensorOptions>(args["options"])));
+}
+if (crow_indices_type == "Tensor" && col_indices_type == "Tensor" && values_type == "Tensor" && size_type == "Missing" && options_type == "TensorOptions") {
+  return Rcpp::wrap(cpp_torch_namespace_sparse_bsr_tensor_crow_indices_Tensor_col_indices_Tensor_values_Tensor_options_TensorOptions(Rcpp::as<XPtrTorchTensor>(args["crow_indices"]), Rcpp::as<XPtrTorchTensor>(args["col_indices"]), Rcpp::as<XPtrTorchTensor>(args["values"]), Rcpp::as<XPtrTorchTensorOptions>(args["options"])));
+}
+  Rcpp::stop("No matching overload for sparse_bsr_tensor");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace_sparse_compressed_tensor (Rcpp::List args) {
+  static const std::vector<std::string> compressed_indices_expected = {"Tensor"};
+  static const std::vector<std::string> plain_indices_expected = {"Tensor"};
+  static const std::vector<std::string> values_expected = {"Tensor"};
+  static const std::vector<std::string> size_expected = {"IntArrayRef"};
+  static const std::vector<std::string> options_expected = {"TensorOptions"};
+  auto compressed_indices_type = cpp_arg_to_torch_type(args["compressed_indices"], compressed_indices_expected, "compressed_indices");
+  auto plain_indices_type = cpp_arg_to_torch_type(args["plain_indices"], plain_indices_expected, "plain_indices");
+  auto values_type = cpp_arg_to_torch_type(args["values"], values_expected, "values");
+  auto size_type = cpp_arg_to_torch_type(args["size"], size_expected, "size");
+  auto options_type = cpp_arg_to_torch_type(args["options"], options_expected, "options");
+if (compressed_indices_type == "Tensor" && plain_indices_type == "Tensor" && values_type == "Tensor" && size_type == "IntArrayRef" && options_type == "TensorOptions") {
+  return Rcpp::wrap(cpp_torch_namespace_sparse_compressed_tensor_compressed_indices_Tensor_plain_indices_Tensor_values_Tensor_size_IntArrayRef_options_TensorOptions(Rcpp::as<XPtrTorchTensor>(args["compressed_indices"]), Rcpp::as<XPtrTorchTensor>(args["plain_indices"]), Rcpp::as<XPtrTorchTensor>(args["values"]), Rcpp::as<XPtrTorchIntArrayRef>(args["size"]), Rcpp::as<XPtrTorchTensorOptions>(args["options"])));
+}
+if (compressed_indices_type == "Tensor" && plain_indices_type == "Tensor" && values_type == "Tensor" && size_type == "Missing" && options_type == "TensorOptions") {
+  return Rcpp::wrap(cpp_torch_namespace_sparse_compressed_tensor_compressed_indices_Tensor_plain_indices_Tensor_values_Tensor_options_TensorOptions(Rcpp::as<XPtrTorchTensor>(args["compressed_indices"]), Rcpp::as<XPtrTorchTensor>(args["plain_indices"]), Rcpp::as<XPtrTorchTensor>(args["values"]), Rcpp::as<XPtrTorchTensorOptions>(args["options"])));
+}
+  Rcpp::stop("No matching overload for sparse_compressed_tensor");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace_sparse_coo_tensor (Rcpp::List args) {
+  static const std::vector<std::string> indices_expected = {"Tensor"};
+  static const std::vector<std::string> values_expected = {"Tensor"};
+  static const std::vector<std::string> size_expected = {"IntArrayRef"};
+  static const std::vector<std::string> options_expected = {"TensorOptions"};
+  auto indices_type = cpp_arg_to_torch_type(args["indices"], indices_expected, "indices");
+  auto values_type = cpp_arg_to_torch_type(args["values"], values_expected, "values");
+  auto size_type = cpp_arg_to_torch_type(args["size"], size_expected, "size");
+  auto options_type = cpp_arg_to_torch_type(args["options"], options_expected, "options");
+if (indices_type == "Missing" && values_type == "Missing" && size_type == "IntArrayRef" && options_type == "TensorOptions") {
+  return Rcpp::wrap(cpp_torch_namespace_sparse_coo_tensor_size_IntArrayRef_options_TensorOptions(Rcpp::as<XPtrTorchIntArrayRef>(args["size"]), Rcpp::as<XPtrTorchTensorOptions>(args["options"])));
+}
+if (indices_type == "Tensor" && values_type == "Tensor" && size_type == "Missing" && options_type == "TensorOptions") {
+  return Rcpp::wrap(cpp_torch_namespace_sparse_coo_tensor_indices_Tensor_values_Tensor_options_TensorOptions(Rcpp::as<XPtrTorchIndexTensor>(args["indices"]), Rcpp::as<XPtrTorchTensor>(args["values"]), Rcpp::as<XPtrTorchTensorOptions>(args["options"]), Rcpp::as<XPtrTorchoptional_bool>(args["is_coalesced"])));
+}
+if (indices_type == "Tensor" && values_type == "Tensor" && size_type == "IntArrayRef" && options_type == "TensorOptions") {
+  return Rcpp::wrap(cpp_torch_namespace_sparse_coo_tensor_indices_Tensor_values_Tensor_size_IntArrayRef_options_TensorOptions(Rcpp::as<XPtrTorchIndexTensor>(args["indices"]), Rcpp::as<XPtrTorchTensor>(args["values"]), Rcpp::as<XPtrTorchIntArrayRef>(args["size"]), Rcpp::as<XPtrTorchTensorOptions>(args["options"]), Rcpp::as<XPtrTorchoptional_bool>(args["is_coalesced"])));
+}
+  Rcpp::stop("No matching overload for sparse_coo_tensor");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace_sparse_csc_tensor (Rcpp::List args) {
+  static const std::vector<std::string> ccol_indices_expected = {"Tensor"};
+  static const std::vector<std::string> row_indices_expected = {"Tensor"};
+  static const std::vector<std::string> values_expected = {"Tensor"};
+  static const std::vector<std::string> size_expected = {"IntArrayRef"};
+  static const std::vector<std::string> options_expected = {"TensorOptions"};
+  auto ccol_indices_type = cpp_arg_to_torch_type(args["ccol_indices"], ccol_indices_expected, "ccol_indices");
+  auto row_indices_type = cpp_arg_to_torch_type(args["row_indices"], row_indices_expected, "row_indices");
+  auto values_type = cpp_arg_to_torch_type(args["values"], values_expected, "values");
+  auto size_type = cpp_arg_to_torch_type(args["size"], size_expected, "size");
+  auto options_type = cpp_arg_to_torch_type(args["options"], options_expected, "options");
+if (ccol_indices_type == "Tensor" && row_indices_type == "Tensor" && values_type == "Tensor" && size_type == "IntArrayRef" && options_type == "TensorOptions") {
+  return Rcpp::wrap(cpp_torch_namespace_sparse_csc_tensor_ccol_indices_Tensor_row_indices_Tensor_values_Tensor_size_IntArrayRef_options_TensorOptions(Rcpp::as<XPtrTorchTensor>(args["ccol_indices"]), Rcpp::as<XPtrTorchTensor>(args["row_indices"]), Rcpp::as<XPtrTorchTensor>(args["values"]), Rcpp::as<XPtrTorchIntArrayRef>(args["size"]), Rcpp::as<XPtrTorchTensorOptions>(args["options"])));
+}
+if (ccol_indices_type == "Tensor" && row_indices_type == "Tensor" && values_type == "Tensor" && size_type == "Missing" && options_type == "TensorOptions") {
+  return Rcpp::wrap(cpp_torch_namespace_sparse_csc_tensor_ccol_indices_Tensor_row_indices_Tensor_values_Tensor_options_TensorOptions(Rcpp::as<XPtrTorchTensor>(args["ccol_indices"]), Rcpp::as<XPtrTorchTensor>(args["row_indices"]), Rcpp::as<XPtrTorchTensor>(args["values"]), Rcpp::as<XPtrTorchTensorOptions>(args["options"])));
+}
+  Rcpp::stop("No matching overload for sparse_csc_tensor");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace_sparse_csr_tensor (Rcpp::List args) {
+  static const std::vector<std::string> crow_indices_expected = {"Tensor"};
+  static const std::vector<std::string> col_indices_expected = {"Tensor"};
+  static const std::vector<std::string> values_expected = {"Tensor"};
+  static const std::vector<std::string> size_expected = {"IntArrayRef"};
+  static const std::vector<std::string> options_expected = {"TensorOptions"};
+  auto crow_indices_type = cpp_arg_to_torch_type(args["crow_indices"], crow_indices_expected, "crow_indices");
+  auto col_indices_type = cpp_arg_to_torch_type(args["col_indices"], col_indices_expected, "col_indices");
+  auto values_type = cpp_arg_to_torch_type(args["values"], values_expected, "values");
+  auto size_type = cpp_arg_to_torch_type(args["size"], size_expected, "size");
+  auto options_type = cpp_arg_to_torch_type(args["options"], options_expected, "options");
+if (crow_indices_type == "Tensor" && col_indices_type == "Tensor" && values_type == "Tensor" && size_type == "IntArrayRef" && options_type == "TensorOptions") {
+  return Rcpp::wrap(cpp_torch_namespace_sparse_csr_tensor_crow_indices_Tensor_col_indices_Tensor_values_Tensor_size_IntArrayRef_options_TensorOptions(Rcpp::as<XPtrTorchTensor>(args["crow_indices"]), Rcpp::as<XPtrTorchTensor>(args["col_indices"]), Rcpp::as<XPtrTorchTensor>(args["values"]), Rcpp::as<XPtrTorchIntArrayRef>(args["size"]), Rcpp::as<XPtrTorchTensorOptions>(args["options"])));
+}
+if (crow_indices_type == "Tensor" && col_indices_type == "Tensor" && values_type == "Tensor" && size_type == "Missing" && options_type == "TensorOptions") {
+  return Rcpp::wrap(cpp_torch_namespace_sparse_csr_tensor_crow_indices_Tensor_col_indices_Tensor_values_Tensor_options_TensorOptions(Rcpp::as<XPtrTorchTensor>(args["crow_indices"]), Rcpp::as<XPtrTorchTensor>(args["col_indices"]), Rcpp::as<XPtrTorchTensor>(args["values"]), Rcpp::as<XPtrTorchTensorOptions>(args["options"])));
+}
+  Rcpp::stop("No matching overload for sparse_csr_tensor");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace_special_chebyshev_polynomial_t (Rcpp::List args) {
+  static const std::vector<std::string> x_expected = {"Tensor", "Scalar"};
+  static const std::vector<std::string> n_expected = {"Tensor", "Scalar"};
+  auto x_type = cpp_arg_to_torch_type(args["x"], x_expected, "x");
+  auto n_type = cpp_arg_to_torch_type(args["n"], n_expected, "n");
+if (x_type == "Tensor" && n_type == "Tensor") {
+  return Rcpp::wrap(cpp_torch_namespace_special_chebyshev_polynomial_t_x_Tensor_n_Tensor(Rcpp::as<XPtrTorchTensor>(args["x"]), Rcpp::as<XPtrTorchTensor>(args["n"])));
+}
+if (x_type == "Scalar" && n_type == "Tensor") {
+  return Rcpp::wrap(cpp_torch_namespace_special_chebyshev_polynomial_t_x_Scalar_n_Tensor(Rcpp::as<XPtrTorchScalar>(args["x"]), Rcpp::as<XPtrTorchTensor>(args["n"])));
+}
+if (x_type == "Tensor" && n_type == "Scalar") {
+  return Rcpp::wrap(cpp_torch_namespace_special_chebyshev_polynomial_t_x_Tensor_n_Scalar(Rcpp::as<XPtrTorchTensor>(args["x"]), Rcpp::as<XPtrTorchScalar>(args["n"])));
+}
+  Rcpp::stop("No matching overload for special_chebyshev_polynomial_t");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace_special_chebyshev_polynomial_t_out (Rcpp::List args) {
+  static const std::vector<std::string> out_expected = {"Tensor"};
+  static const std::vector<std::string> x_expected = {"Tensor", "Scalar"};
+  static const std::vector<std::string> n_expected = {"Tensor", "Scalar"};
+  auto out_type = cpp_arg_to_torch_type(args["out"], out_expected, "out");
+  auto x_type = cpp_arg_to_torch_type(args["x"], x_expected, "x");
+  auto n_type = cpp_arg_to_torch_type(args["n"], n_expected, "n");
+if (out_type == "Tensor" && x_type == "Tensor" && n_type == "Tensor") {
+  return Rcpp::wrap(cpp_torch_namespace_special_chebyshev_polynomial_t_out_out_Tensor_x_Tensor_n_Tensor(Rcpp::as<XPtrTorchTensor>(args["out"]), Rcpp::as<XPtrTorchTensor>(args["x"]), Rcpp::as<XPtrTorchTensor>(args["n"])));
+}
+if (out_type == "Tensor" && x_type == "Scalar" && n_type == "Tensor") {
+  return Rcpp::wrap(cpp_torch_namespace_special_chebyshev_polynomial_t_out_out_Tensor_x_Scalar_n_Tensor(Rcpp::as<XPtrTorchTensor>(args["out"]), Rcpp::as<XPtrTorchScalar>(args["x"]), Rcpp::as<XPtrTorchTensor>(args["n"])));
+}
+if (out_type == "Tensor" && x_type == "Tensor" && n_type == "Scalar") {
+  return Rcpp::wrap(cpp_torch_namespace_special_chebyshev_polynomial_t_out_out_Tensor_x_Tensor_n_Scalar(Rcpp::as<XPtrTorchTensor>(args["out"]), Rcpp::as<XPtrTorchTensor>(args["x"]), Rcpp::as<XPtrTorchScalar>(args["n"])));
+}
+  Rcpp::stop("No matching overload for special_chebyshev_polynomial_t_out");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace_special_chebyshev_polynomial_u (Rcpp::List args) {
+  static const std::vector<std::string> x_expected = {"Tensor", "Scalar"};
+  static const std::vector<std::string> n_expected = {"Tensor", "Scalar"};
+  auto x_type = cpp_arg_to_torch_type(args["x"], x_expected, "x");
+  auto n_type = cpp_arg_to_torch_type(args["n"], n_expected, "n");
+if (x_type == "Tensor" && n_type == "Tensor") {
+  return Rcpp::wrap(cpp_torch_namespace_special_chebyshev_polynomial_u_x_Tensor_n_Tensor(Rcpp::as<XPtrTorchTensor>(args["x"]), Rcpp::as<XPtrTorchTensor>(args["n"])));
+}
+if (x_type == "Scalar" && n_type == "Tensor") {
+  return Rcpp::wrap(cpp_torch_namespace_special_chebyshev_polynomial_u_x_Scalar_n_Tensor(Rcpp::as<XPtrTorchScalar>(args["x"]), Rcpp::as<XPtrTorchTensor>(args["n"])));
+}
+if (x_type == "Tensor" && n_type == "Scalar") {
+  return Rcpp::wrap(cpp_torch_namespace_special_chebyshev_polynomial_u_x_Tensor_n_Scalar(Rcpp::as<XPtrTorchTensor>(args["x"]), Rcpp::as<XPtrTorchScalar>(args["n"])));
+}
+  Rcpp::stop("No matching overload for special_chebyshev_polynomial_u");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace_special_chebyshev_polynomial_u_out (Rcpp::List args) {
+  static const std::vector<std::string> out_expected = {"Tensor"};
+  static const std::vector<std::string> x_expected = {"Tensor", "Scalar"};
+  static const std::vector<std::string> n_expected = {"Tensor", "Scalar"};
+  auto out_type = cpp_arg_to_torch_type(args["out"], out_expected, "out");
+  auto x_type = cpp_arg_to_torch_type(args["x"], x_expected, "x");
+  auto n_type = cpp_arg_to_torch_type(args["n"], n_expected, "n");
+if (out_type == "Tensor" && x_type == "Tensor" && n_type == "Tensor") {
+  return Rcpp::wrap(cpp_torch_namespace_special_chebyshev_polynomial_u_out_out_Tensor_x_Tensor_n_Tensor(Rcpp::as<XPtrTorchTensor>(args["out"]), Rcpp::as<XPtrTorchTensor>(args["x"]), Rcpp::as<XPtrTorchTensor>(args["n"])));
+}
+if (out_type == "Tensor" && x_type == "Scalar" && n_type == "Tensor") {
+  return Rcpp::wrap(cpp_torch_namespace_special_chebyshev_polynomial_u_out_out_Tensor_x_Scalar_n_Tensor(Rcpp::as<XPtrTorchTensor>(args["out"]), Rcpp::as<XPtrTorchScalar>(args["x"]), Rcpp::as<XPtrTorchTensor>(args["n"])));
+}
+if (out_type == "Tensor" && x_type == "Tensor" && n_type == "Scalar") {
+  return Rcpp::wrap(cpp_torch_namespace_special_chebyshev_polynomial_u_out_out_Tensor_x_Tensor_n_Scalar(Rcpp::as<XPtrTorchTensor>(args["out"]), Rcpp::as<XPtrTorchTensor>(args["x"]), Rcpp::as<XPtrTorchScalar>(args["n"])));
+}
+  Rcpp::stop("No matching overload for special_chebyshev_polynomial_u_out");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace_special_chebyshev_polynomial_v (Rcpp::List args) {
+  static const std::vector<std::string> x_expected = {"Tensor", "Scalar"};
+  static const std::vector<std::string> n_expected = {"Tensor", "Scalar"};
+  auto x_type = cpp_arg_to_torch_type(args["x"], x_expected, "x");
+  auto n_type = cpp_arg_to_torch_type(args["n"], n_expected, "n");
+if (x_type == "Tensor" && n_type == "Tensor") {
+  return Rcpp::wrap(cpp_torch_namespace_special_chebyshev_polynomial_v_x_Tensor_n_Tensor(Rcpp::as<XPtrTorchTensor>(args["x"]), Rcpp::as<XPtrTorchTensor>(args["n"])));
+}
+if (x_type == "Scalar" && n_type == "Tensor") {
+  return Rcpp::wrap(cpp_torch_namespace_special_chebyshev_polynomial_v_x_Scalar_n_Tensor(Rcpp::as<XPtrTorchScalar>(args["x"]), Rcpp::as<XPtrTorchTensor>(args["n"])));
+}
+if (x_type == "Tensor" && n_type == "Scalar") {
+  return Rcpp::wrap(cpp_torch_namespace_special_chebyshev_polynomial_v_x_Tensor_n_Scalar(Rcpp::as<XPtrTorchTensor>(args["x"]), Rcpp::as<XPtrTorchScalar>(args["n"])));
+}
+  Rcpp::stop("No matching overload for special_chebyshev_polynomial_v");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace_special_chebyshev_polynomial_v_out (Rcpp::List args) {
+  static const std::vector<std::string> out_expected = {"Tensor"};
+  static const std::vector<std::string> x_expected = {"Tensor", "Scalar"};
+  static const std::vector<std::string> n_expected = {"Tensor", "Scalar"};
+  auto out_type = cpp_arg_to_torch_type(args["out"], out_expected, "out");
+  auto x_type = cpp_arg_to_torch_type(args["x"], x_expected, "x");
+  auto n_type = cpp_arg_to_torch_type(args["n"], n_expected, "n");
+if (out_type == "Tensor" && x_type == "Tensor" && n_type == "Tensor") {
+  return Rcpp::wrap(cpp_torch_namespace_special_chebyshev_polynomial_v_out_out_Tensor_x_Tensor_n_Tensor(Rcpp::as<XPtrTorchTensor>(args["out"]), Rcpp::as<XPtrTorchTensor>(args["x"]), Rcpp::as<XPtrTorchTensor>(args["n"])));
+}
+if (out_type == "Tensor" && x_type == "Scalar" && n_type == "Tensor") {
+  return Rcpp::wrap(cpp_torch_namespace_special_chebyshev_polynomial_v_out_out_Tensor_x_Scalar_n_Tensor(Rcpp::as<XPtrTorchTensor>(args["out"]), Rcpp::as<XPtrTorchScalar>(args["x"]), Rcpp::as<XPtrTorchTensor>(args["n"])));
+}
+if (out_type == "Tensor" && x_type == "Tensor" && n_type == "Scalar") {
+  return Rcpp::wrap(cpp_torch_namespace_special_chebyshev_polynomial_v_out_out_Tensor_x_Tensor_n_Scalar(Rcpp::as<XPtrTorchTensor>(args["out"]), Rcpp::as<XPtrTorchTensor>(args["x"]), Rcpp::as<XPtrTorchScalar>(args["n"])));
+}
+  Rcpp::stop("No matching overload for special_chebyshev_polynomial_v_out");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace_special_chebyshev_polynomial_w (Rcpp::List args) {
+  static const std::vector<std::string> x_expected = {"Tensor", "Scalar"};
+  static const std::vector<std::string> n_expected = {"Tensor", "Scalar"};
+  auto x_type = cpp_arg_to_torch_type(args["x"], x_expected, "x");
+  auto n_type = cpp_arg_to_torch_type(args["n"], n_expected, "n");
+if (x_type == "Tensor" && n_type == "Tensor") {
+  return Rcpp::wrap(cpp_torch_namespace_special_chebyshev_polynomial_w_x_Tensor_n_Tensor(Rcpp::as<XPtrTorchTensor>(args["x"]), Rcpp::as<XPtrTorchTensor>(args["n"])));
+}
+if (x_type == "Scalar" && n_type == "Tensor") {
+  return Rcpp::wrap(cpp_torch_namespace_special_chebyshev_polynomial_w_x_Scalar_n_Tensor(Rcpp::as<XPtrTorchScalar>(args["x"]), Rcpp::as<XPtrTorchTensor>(args["n"])));
+}
+if (x_type == "Tensor" && n_type == "Scalar") {
+  return Rcpp::wrap(cpp_torch_namespace_special_chebyshev_polynomial_w_x_Tensor_n_Scalar(Rcpp::as<XPtrTorchTensor>(args["x"]), Rcpp::as<XPtrTorchScalar>(args["n"])));
+}
+  Rcpp::stop("No matching overload for special_chebyshev_polynomial_w");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace_special_chebyshev_polynomial_w_out (Rcpp::List args) {
+  static const std::vector<std::string> out_expected = {"Tensor"};
+  static const std::vector<std::string> x_expected = {"Tensor", "Scalar"};
+  static const std::vector<std::string> n_expected = {"Tensor", "Scalar"};
+  auto out_type = cpp_arg_to_torch_type(args["out"], out_expected, "out");
+  auto x_type = cpp_arg_to_torch_type(args["x"], x_expected, "x");
+  auto n_type = cpp_arg_to_torch_type(args["n"], n_expected, "n");
+if (out_type == "Tensor" && x_type == "Tensor" && n_type == "Tensor") {
+  return Rcpp::wrap(cpp_torch_namespace_special_chebyshev_polynomial_w_out_out_Tensor_x_Tensor_n_Tensor(Rcpp::as<XPtrTorchTensor>(args["out"]), Rcpp::as<XPtrTorchTensor>(args["x"]), Rcpp::as<XPtrTorchTensor>(args["n"])));
+}
+if (out_type == "Tensor" && x_type == "Scalar" && n_type == "Tensor") {
+  return Rcpp::wrap(cpp_torch_namespace_special_chebyshev_polynomial_w_out_out_Tensor_x_Scalar_n_Tensor(Rcpp::as<XPtrTorchTensor>(args["out"]), Rcpp::as<XPtrTorchScalar>(args["x"]), Rcpp::as<XPtrTorchTensor>(args["n"])));
+}
+if (out_type == "Tensor" && x_type == "Tensor" && n_type == "Scalar") {
+  return Rcpp::wrap(cpp_torch_namespace_special_chebyshev_polynomial_w_out_out_Tensor_x_Tensor_n_Scalar(Rcpp::as<XPtrTorchTensor>(args["out"]), Rcpp::as<XPtrTorchTensor>(args["x"]), Rcpp::as<XPtrTorchScalar>(args["n"])));
+}
+  Rcpp::stop("No matching overload for special_chebyshev_polynomial_w_out");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace_special_hermite_polynomial_h (Rcpp::List args) {
+  static const std::vector<std::string> x_expected = {"Tensor", "Scalar"};
+  static const std::vector<std::string> n_expected = {"Tensor", "Scalar"};
+  auto x_type = cpp_arg_to_torch_type(args["x"], x_expected, "x");
+  auto n_type = cpp_arg_to_torch_type(args["n"], n_expected, "n");
+if (x_type == "Tensor" && n_type == "Tensor") {
+  return Rcpp::wrap(cpp_torch_namespace_special_hermite_polynomial_h_x_Tensor_n_Tensor(Rcpp::as<XPtrTorchTensor>(args["x"]), Rcpp::as<XPtrTorchTensor>(args["n"])));
+}
+if (x_type == "Scalar" && n_type == "Tensor") {
+  return Rcpp::wrap(cpp_torch_namespace_special_hermite_polynomial_h_x_Scalar_n_Tensor(Rcpp::as<XPtrTorchScalar>(args["x"]), Rcpp::as<XPtrTorchTensor>(args["n"])));
+}
+if (x_type == "Tensor" && n_type == "Scalar") {
+  return Rcpp::wrap(cpp_torch_namespace_special_hermite_polynomial_h_x_Tensor_n_Scalar(Rcpp::as<XPtrTorchTensor>(args["x"]), Rcpp::as<XPtrTorchScalar>(args["n"])));
+}
+  Rcpp::stop("No matching overload for special_hermite_polynomial_h");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace_special_hermite_polynomial_h_out (Rcpp::List args) {
+  static const std::vector<std::string> out_expected = {"Tensor"};
+  static const std::vector<std::string> x_expected = {"Tensor", "Scalar"};
+  static const std::vector<std::string> n_expected = {"Tensor", "Scalar"};
+  auto out_type = cpp_arg_to_torch_type(args["out"], out_expected, "out");
+  auto x_type = cpp_arg_to_torch_type(args["x"], x_expected, "x");
+  auto n_type = cpp_arg_to_torch_type(args["n"], n_expected, "n");
+if (out_type == "Tensor" && x_type == "Tensor" && n_type == "Tensor") {
+  return Rcpp::wrap(cpp_torch_namespace_special_hermite_polynomial_h_out_out_Tensor_x_Tensor_n_Tensor(Rcpp::as<XPtrTorchTensor>(args["out"]), Rcpp::as<XPtrTorchTensor>(args["x"]), Rcpp::as<XPtrTorchTensor>(args["n"])));
+}
+if (out_type == "Tensor" && x_type == "Scalar" && n_type == "Tensor") {
+  return Rcpp::wrap(cpp_torch_namespace_special_hermite_polynomial_h_out_out_Tensor_x_Scalar_n_Tensor(Rcpp::as<XPtrTorchTensor>(args["out"]), Rcpp::as<XPtrTorchScalar>(args["x"]), Rcpp::as<XPtrTorchTensor>(args["n"])));
+}
+if (out_type == "Tensor" && x_type == "Tensor" && n_type == "Scalar") {
+  return Rcpp::wrap(cpp_torch_namespace_special_hermite_polynomial_h_out_out_Tensor_x_Tensor_n_Scalar(Rcpp::as<XPtrTorchTensor>(args["out"]), Rcpp::as<XPtrTorchTensor>(args["x"]), Rcpp::as<XPtrTorchScalar>(args["n"])));
+}
+  Rcpp::stop("No matching overload for special_hermite_polynomial_h_out");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace_special_hermite_polynomial_he (Rcpp::List args) {
+  static const std::vector<std::string> x_expected = {"Tensor", "Scalar"};
+  static const std::vector<std::string> n_expected = {"Tensor", "Scalar"};
+  auto x_type = cpp_arg_to_torch_type(args["x"], x_expected, "x");
+  auto n_type = cpp_arg_to_torch_type(args["n"], n_expected, "n");
+if (x_type == "Tensor" && n_type == "Tensor") {
+  return Rcpp::wrap(cpp_torch_namespace_special_hermite_polynomial_he_x_Tensor_n_Tensor(Rcpp::as<XPtrTorchTensor>(args["x"]), Rcpp::as<XPtrTorchTensor>(args["n"])));
+}
+if (x_type == "Scalar" && n_type == "Tensor") {
+  return Rcpp::wrap(cpp_torch_namespace_special_hermite_polynomial_he_x_Scalar_n_Tensor(Rcpp::as<XPtrTorchScalar>(args["x"]), Rcpp::as<XPtrTorchTensor>(args["n"])));
+}
+if (x_type == "Tensor" && n_type == "Scalar") {
+  return Rcpp::wrap(cpp_torch_namespace_special_hermite_polynomial_he_x_Tensor_n_Scalar(Rcpp::as<XPtrTorchTensor>(args["x"]), Rcpp::as<XPtrTorchScalar>(args["n"])));
+}
+  Rcpp::stop("No matching overload for special_hermite_polynomial_he");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace_special_hermite_polynomial_he_out (Rcpp::List args) {
+  static const std::vector<std::string> out_expected = {"Tensor"};
+  static const std::vector<std::string> x_expected = {"Tensor", "Scalar"};
+  static const std::vector<std::string> n_expected = {"Tensor", "Scalar"};
+  auto out_type = cpp_arg_to_torch_type(args["out"], out_expected, "out");
+  auto x_type = cpp_arg_to_torch_type(args["x"], x_expected, "x");
+  auto n_type = cpp_arg_to_torch_type(args["n"], n_expected, "n");
+if (out_type == "Tensor" && x_type == "Tensor" && n_type == "Tensor") {
+  return Rcpp::wrap(cpp_torch_namespace_special_hermite_polynomial_he_out_out_Tensor_x_Tensor_n_Tensor(Rcpp::as<XPtrTorchTensor>(args["out"]), Rcpp::as<XPtrTorchTensor>(args["x"]), Rcpp::as<XPtrTorchTensor>(args["n"])));
+}
+if (out_type == "Tensor" && x_type == "Scalar" && n_type == "Tensor") {
+  return Rcpp::wrap(cpp_torch_namespace_special_hermite_polynomial_he_out_out_Tensor_x_Scalar_n_Tensor(Rcpp::as<XPtrTorchTensor>(args["out"]), Rcpp::as<XPtrTorchScalar>(args["x"]), Rcpp::as<XPtrTorchTensor>(args["n"])));
+}
+if (out_type == "Tensor" && x_type == "Tensor" && n_type == "Scalar") {
+  return Rcpp::wrap(cpp_torch_namespace_special_hermite_polynomial_he_out_out_Tensor_x_Tensor_n_Scalar(Rcpp::as<XPtrTorchTensor>(args["out"]), Rcpp::as<XPtrTorchTensor>(args["x"]), Rcpp::as<XPtrTorchScalar>(args["n"])));
+}
+  Rcpp::stop("No matching overload for special_hermite_polynomial_he_out");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace_special_laguerre_polynomial_l (Rcpp::List args) {
+  static const std::vector<std::string> x_expected = {"Tensor", "Scalar"};
+  static const std::vector<std::string> n_expected = {"Tensor", "Scalar"};
+  auto x_type = cpp_arg_to_torch_type(args["x"], x_expected, "x");
+  auto n_type = cpp_arg_to_torch_type(args["n"], n_expected, "n");
+if (x_type == "Tensor" && n_type == "Tensor") {
+  return Rcpp::wrap(cpp_torch_namespace_special_laguerre_polynomial_l_x_Tensor_n_Tensor(Rcpp::as<XPtrTorchTensor>(args["x"]), Rcpp::as<XPtrTorchTensor>(args["n"])));
+}
+if (x_type == "Scalar" && n_type == "Tensor") {
+  return Rcpp::wrap(cpp_torch_namespace_special_laguerre_polynomial_l_x_Scalar_n_Tensor(Rcpp::as<XPtrTorchScalar>(args["x"]), Rcpp::as<XPtrTorchTensor>(args["n"])));
+}
+if (x_type == "Tensor" && n_type == "Scalar") {
+  return Rcpp::wrap(cpp_torch_namespace_special_laguerre_polynomial_l_x_Tensor_n_Scalar(Rcpp::as<XPtrTorchTensor>(args["x"]), Rcpp::as<XPtrTorchScalar>(args["n"])));
+}
+  Rcpp::stop("No matching overload for special_laguerre_polynomial_l");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace_special_laguerre_polynomial_l_out (Rcpp::List args) {
+  static const std::vector<std::string> out_expected = {"Tensor"};
+  static const std::vector<std::string> x_expected = {"Tensor", "Scalar"};
+  static const std::vector<std::string> n_expected = {"Tensor", "Scalar"};
+  auto out_type = cpp_arg_to_torch_type(args["out"], out_expected, "out");
+  auto x_type = cpp_arg_to_torch_type(args["x"], x_expected, "x");
+  auto n_type = cpp_arg_to_torch_type(args["n"], n_expected, "n");
+if (out_type == "Tensor" && x_type == "Tensor" && n_type == "Tensor") {
+  return Rcpp::wrap(cpp_torch_namespace_special_laguerre_polynomial_l_out_out_Tensor_x_Tensor_n_Tensor(Rcpp::as<XPtrTorchTensor>(args["out"]), Rcpp::as<XPtrTorchTensor>(args["x"]), Rcpp::as<XPtrTorchTensor>(args["n"])));
+}
+if (out_type == "Tensor" && x_type == "Scalar" && n_type == "Tensor") {
+  return Rcpp::wrap(cpp_torch_namespace_special_laguerre_polynomial_l_out_out_Tensor_x_Scalar_n_Tensor(Rcpp::as<XPtrTorchTensor>(args["out"]), Rcpp::as<XPtrTorchScalar>(args["x"]), Rcpp::as<XPtrTorchTensor>(args["n"])));
+}
+if (out_type == "Tensor" && x_type == "Tensor" && n_type == "Scalar") {
+  return Rcpp::wrap(cpp_torch_namespace_special_laguerre_polynomial_l_out_out_Tensor_x_Tensor_n_Scalar(Rcpp::as<XPtrTorchTensor>(args["out"]), Rcpp::as<XPtrTorchTensor>(args["x"]), Rcpp::as<XPtrTorchScalar>(args["n"])));
+}
+  Rcpp::stop("No matching overload for special_laguerre_polynomial_l_out");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace_special_legendre_polynomial_p (Rcpp::List args) {
+  static const std::vector<std::string> x_expected = {"Tensor", "Scalar"};
+  static const std::vector<std::string> n_expected = {"Tensor", "Scalar"};
+  auto x_type = cpp_arg_to_torch_type(args["x"], x_expected, "x");
+  auto n_type = cpp_arg_to_torch_type(args["n"], n_expected, "n");
+if (x_type == "Tensor" && n_type == "Tensor") {
+  return Rcpp::wrap(cpp_torch_namespace_special_legendre_polynomial_p_x_Tensor_n_Tensor(Rcpp::as<XPtrTorchTensor>(args["x"]), Rcpp::as<XPtrTorchTensor>(args["n"])));
+}
+if (x_type == "Scalar" && n_type == "Tensor") {
+  return Rcpp::wrap(cpp_torch_namespace_special_legendre_polynomial_p_x_Scalar_n_Tensor(Rcpp::as<XPtrTorchScalar>(args["x"]), Rcpp::as<XPtrTorchTensor>(args["n"])));
+}
+if (x_type == "Tensor" && n_type == "Scalar") {
+  return Rcpp::wrap(cpp_torch_namespace_special_legendre_polynomial_p_x_Tensor_n_Scalar(Rcpp::as<XPtrTorchTensor>(args["x"]), Rcpp::as<XPtrTorchScalar>(args["n"])));
+}
+  Rcpp::stop("No matching overload for special_legendre_polynomial_p");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace_special_legendre_polynomial_p_out (Rcpp::List args) {
+  static const std::vector<std::string> out_expected = {"Tensor"};
+  static const std::vector<std::string> x_expected = {"Tensor", "Scalar"};
+  static const std::vector<std::string> n_expected = {"Tensor", "Scalar"};
+  auto out_type = cpp_arg_to_torch_type(args["out"], out_expected, "out");
+  auto x_type = cpp_arg_to_torch_type(args["x"], x_expected, "x");
+  auto n_type = cpp_arg_to_torch_type(args["n"], n_expected, "n");
+if (out_type == "Tensor" && x_type == "Tensor" && n_type == "Tensor") {
+  return Rcpp::wrap(cpp_torch_namespace_special_legendre_polynomial_p_out_out_Tensor_x_Tensor_n_Tensor(Rcpp::as<XPtrTorchTensor>(args["out"]), Rcpp::as<XPtrTorchTensor>(args["x"]), Rcpp::as<XPtrTorchTensor>(args["n"])));
+}
+if (out_type == "Tensor" && x_type == "Scalar" && n_type == "Tensor") {
+  return Rcpp::wrap(cpp_torch_namespace_special_legendre_polynomial_p_out_out_Tensor_x_Scalar_n_Tensor(Rcpp::as<XPtrTorchTensor>(args["out"]), Rcpp::as<XPtrTorchScalar>(args["x"]), Rcpp::as<XPtrTorchTensor>(args["n"])));
+}
+if (out_type == "Tensor" && x_type == "Tensor" && n_type == "Scalar") {
+  return Rcpp::wrap(cpp_torch_namespace_special_legendre_polynomial_p_out_out_Tensor_x_Tensor_n_Scalar(Rcpp::as<XPtrTorchTensor>(args["out"]), Rcpp::as<XPtrTorchTensor>(args["x"]), Rcpp::as<XPtrTorchScalar>(args["n"])));
+}
+  Rcpp::stop("No matching overload for special_legendre_polynomial_p_out");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace_special_shifted_chebyshev_polynomial_t (Rcpp::List args) {
+  static const std::vector<std::string> x_expected = {"Tensor", "Scalar"};
+  static const std::vector<std::string> n_expected = {"Tensor", "Scalar"};
+  auto x_type = cpp_arg_to_torch_type(args["x"], x_expected, "x");
+  auto n_type = cpp_arg_to_torch_type(args["n"], n_expected, "n");
+if (x_type == "Tensor" && n_type == "Tensor") {
+  return Rcpp::wrap(cpp_torch_namespace_special_shifted_chebyshev_polynomial_t_x_Tensor_n_Tensor(Rcpp::as<XPtrTorchTensor>(args["x"]), Rcpp::as<XPtrTorchTensor>(args["n"])));
+}
+if (x_type == "Scalar" && n_type == "Tensor") {
+  return Rcpp::wrap(cpp_torch_namespace_special_shifted_chebyshev_polynomial_t_x_Scalar_n_Tensor(Rcpp::as<XPtrTorchScalar>(args["x"]), Rcpp::as<XPtrTorchTensor>(args["n"])));
+}
+if (x_type == "Tensor" && n_type == "Scalar") {
+  return Rcpp::wrap(cpp_torch_namespace_special_shifted_chebyshev_polynomial_t_x_Tensor_n_Scalar(Rcpp::as<XPtrTorchTensor>(args["x"]), Rcpp::as<XPtrTorchScalar>(args["n"])));
+}
+  Rcpp::stop("No matching overload for special_shifted_chebyshev_polynomial_t");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace_special_shifted_chebyshev_polynomial_t_out (Rcpp::List args) {
+  static const std::vector<std::string> out_expected = {"Tensor"};
+  static const std::vector<std::string> x_expected = {"Tensor", "Scalar"};
+  static const std::vector<std::string> n_expected = {"Tensor", "Scalar"};
+  auto out_type = cpp_arg_to_torch_type(args["out"], out_expected, "out");
+  auto x_type = cpp_arg_to_torch_type(args["x"], x_expected, "x");
+  auto n_type = cpp_arg_to_torch_type(args["n"], n_expected, "n");
+if (out_type == "Tensor" && x_type == "Tensor" && n_type == "Tensor") {
+  return Rcpp::wrap(cpp_torch_namespace_special_shifted_chebyshev_polynomial_t_out_out_Tensor_x_Tensor_n_Tensor(Rcpp::as<XPtrTorchTensor>(args["out"]), Rcpp::as<XPtrTorchTensor>(args["x"]), Rcpp::as<XPtrTorchTensor>(args["n"])));
+}
+if (out_type == "Tensor" && x_type == "Scalar" && n_type == "Tensor") {
+  return Rcpp::wrap(cpp_torch_namespace_special_shifted_chebyshev_polynomial_t_out_out_Tensor_x_Scalar_n_Tensor(Rcpp::as<XPtrTorchTensor>(args["out"]), Rcpp::as<XPtrTorchScalar>(args["x"]), Rcpp::as<XPtrTorchTensor>(args["n"])));
+}
+if (out_type == "Tensor" && x_type == "Tensor" && n_type == "Scalar") {
+  return Rcpp::wrap(cpp_torch_namespace_special_shifted_chebyshev_polynomial_t_out_out_Tensor_x_Tensor_n_Scalar(Rcpp::as<XPtrTorchTensor>(args["out"]), Rcpp::as<XPtrTorchTensor>(args["x"]), Rcpp::as<XPtrTorchScalar>(args["n"])));
+}
+  Rcpp::stop("No matching overload for special_shifted_chebyshev_polynomial_t_out");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace_special_shifted_chebyshev_polynomial_u (Rcpp::List args) {
+  static const std::vector<std::string> x_expected = {"Tensor", "Scalar"};
+  static const std::vector<std::string> n_expected = {"Tensor", "Scalar"};
+  auto x_type = cpp_arg_to_torch_type(args["x"], x_expected, "x");
+  auto n_type = cpp_arg_to_torch_type(args["n"], n_expected, "n");
+if (x_type == "Tensor" && n_type == "Tensor") {
+  return Rcpp::wrap(cpp_torch_namespace_special_shifted_chebyshev_polynomial_u_x_Tensor_n_Tensor(Rcpp::as<XPtrTorchTensor>(args["x"]), Rcpp::as<XPtrTorchTensor>(args["n"])));
+}
+if (x_type == "Scalar" && n_type == "Tensor") {
+  return Rcpp::wrap(cpp_torch_namespace_special_shifted_chebyshev_polynomial_u_x_Scalar_n_Tensor(Rcpp::as<XPtrTorchScalar>(args["x"]), Rcpp::as<XPtrTorchTensor>(args["n"])));
+}
+if (x_type == "Tensor" && n_type == "Scalar") {
+  return Rcpp::wrap(cpp_torch_namespace_special_shifted_chebyshev_polynomial_u_x_Tensor_n_Scalar(Rcpp::as<XPtrTorchTensor>(args["x"]), Rcpp::as<XPtrTorchScalar>(args["n"])));
+}
+  Rcpp::stop("No matching overload for special_shifted_chebyshev_polynomial_u");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace_special_shifted_chebyshev_polynomial_u_out (Rcpp::List args) {
+  static const std::vector<std::string> out_expected = {"Tensor"};
+  static const std::vector<std::string> x_expected = {"Tensor", "Scalar"};
+  static const std::vector<std::string> n_expected = {"Tensor", "Scalar"};
+  auto out_type = cpp_arg_to_torch_type(args["out"], out_expected, "out");
+  auto x_type = cpp_arg_to_torch_type(args["x"], x_expected, "x");
+  auto n_type = cpp_arg_to_torch_type(args["n"], n_expected, "n");
+if (out_type == "Tensor" && x_type == "Tensor" && n_type == "Tensor") {
+  return Rcpp::wrap(cpp_torch_namespace_special_shifted_chebyshev_polynomial_u_out_out_Tensor_x_Tensor_n_Tensor(Rcpp::as<XPtrTorchTensor>(args["out"]), Rcpp::as<XPtrTorchTensor>(args["x"]), Rcpp::as<XPtrTorchTensor>(args["n"])));
+}
+if (out_type == "Tensor" && x_type == "Scalar" && n_type == "Tensor") {
+  return Rcpp::wrap(cpp_torch_namespace_special_shifted_chebyshev_polynomial_u_out_out_Tensor_x_Scalar_n_Tensor(Rcpp::as<XPtrTorchTensor>(args["out"]), Rcpp::as<XPtrTorchScalar>(args["x"]), Rcpp::as<XPtrTorchTensor>(args["n"])));
+}
+if (out_type == "Tensor" && x_type == "Tensor" && n_type == "Scalar") {
+  return Rcpp::wrap(cpp_torch_namespace_special_shifted_chebyshev_polynomial_u_out_out_Tensor_x_Tensor_n_Scalar(Rcpp::as<XPtrTorchTensor>(args["out"]), Rcpp::as<XPtrTorchTensor>(args["x"]), Rcpp::as<XPtrTorchScalar>(args["n"])));
+}
+  Rcpp::stop("No matching overload for special_shifted_chebyshev_polynomial_u_out");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace_special_shifted_chebyshev_polynomial_v (Rcpp::List args) {
+  static const std::vector<std::string> x_expected = {"Tensor", "Scalar"};
+  static const std::vector<std::string> n_expected = {"Tensor", "Scalar"};
+  auto x_type = cpp_arg_to_torch_type(args["x"], x_expected, "x");
+  auto n_type = cpp_arg_to_torch_type(args["n"], n_expected, "n");
+if (x_type == "Tensor" && n_type == "Tensor") {
+  return Rcpp::wrap(cpp_torch_namespace_special_shifted_chebyshev_polynomial_v_x_Tensor_n_Tensor(Rcpp::as<XPtrTorchTensor>(args["x"]), Rcpp::as<XPtrTorchTensor>(args["n"])));
+}
+if (x_type == "Scalar" && n_type == "Tensor") {
+  return Rcpp::wrap(cpp_torch_namespace_special_shifted_chebyshev_polynomial_v_x_Scalar_n_Tensor(Rcpp::as<XPtrTorchScalar>(args["x"]), Rcpp::as<XPtrTorchTensor>(args["n"])));
+}
+if (x_type == "Tensor" && n_type == "Scalar") {
+  return Rcpp::wrap(cpp_torch_namespace_special_shifted_chebyshev_polynomial_v_x_Tensor_n_Scalar(Rcpp::as<XPtrTorchTensor>(args["x"]), Rcpp::as<XPtrTorchScalar>(args["n"])));
+}
+  Rcpp::stop("No matching overload for special_shifted_chebyshev_polynomial_v");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace_special_shifted_chebyshev_polynomial_v_out (Rcpp::List args) {
+  static const std::vector<std::string> out_expected = {"Tensor"};
+  static const std::vector<std::string> x_expected = {"Tensor", "Scalar"};
+  static const std::vector<std::string> n_expected = {"Tensor", "Scalar"};
+  auto out_type = cpp_arg_to_torch_type(args["out"], out_expected, "out");
+  auto x_type = cpp_arg_to_torch_type(args["x"], x_expected, "x");
+  auto n_type = cpp_arg_to_torch_type(args["n"], n_expected, "n");
+if (out_type == "Tensor" && x_type == "Tensor" && n_type == "Tensor") {
+  return Rcpp::wrap(cpp_torch_namespace_special_shifted_chebyshev_polynomial_v_out_out_Tensor_x_Tensor_n_Tensor(Rcpp::as<XPtrTorchTensor>(args["out"]), Rcpp::as<XPtrTorchTensor>(args["x"]), Rcpp::as<XPtrTorchTensor>(args["n"])));
+}
+if (out_type == "Tensor" && x_type == "Scalar" && n_type == "Tensor") {
+  return Rcpp::wrap(cpp_torch_namespace_special_shifted_chebyshev_polynomial_v_out_out_Tensor_x_Scalar_n_Tensor(Rcpp::as<XPtrTorchTensor>(args["out"]), Rcpp::as<XPtrTorchScalar>(args["x"]), Rcpp::as<XPtrTorchTensor>(args["n"])));
+}
+if (out_type == "Tensor" && x_type == "Tensor" && n_type == "Scalar") {
+  return Rcpp::wrap(cpp_torch_namespace_special_shifted_chebyshev_polynomial_v_out_out_Tensor_x_Tensor_n_Scalar(Rcpp::as<XPtrTorchTensor>(args["out"]), Rcpp::as<XPtrTorchTensor>(args["x"]), Rcpp::as<XPtrTorchScalar>(args["n"])));
+}
+  Rcpp::stop("No matching overload for special_shifted_chebyshev_polynomial_v_out");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace_special_shifted_chebyshev_polynomial_w (Rcpp::List args) {
+  static const std::vector<std::string> x_expected = {"Tensor", "Scalar"};
+  static const std::vector<std::string> n_expected = {"Tensor", "Scalar"};
+  auto x_type = cpp_arg_to_torch_type(args["x"], x_expected, "x");
+  auto n_type = cpp_arg_to_torch_type(args["n"], n_expected, "n");
+if (x_type == "Tensor" && n_type == "Tensor") {
+  return Rcpp::wrap(cpp_torch_namespace_special_shifted_chebyshev_polynomial_w_x_Tensor_n_Tensor(Rcpp::as<XPtrTorchTensor>(args["x"]), Rcpp::as<XPtrTorchTensor>(args["n"])));
+}
+if (x_type == "Scalar" && n_type == "Tensor") {
+  return Rcpp::wrap(cpp_torch_namespace_special_shifted_chebyshev_polynomial_w_x_Scalar_n_Tensor(Rcpp::as<XPtrTorchScalar>(args["x"]), Rcpp::as<XPtrTorchTensor>(args["n"])));
+}
+if (x_type == "Tensor" && n_type == "Scalar") {
+  return Rcpp::wrap(cpp_torch_namespace_special_shifted_chebyshev_polynomial_w_x_Tensor_n_Scalar(Rcpp::as<XPtrTorchTensor>(args["x"]), Rcpp::as<XPtrTorchScalar>(args["n"])));
+}
+  Rcpp::stop("No matching overload for special_shifted_chebyshev_polynomial_w");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace_special_shifted_chebyshev_polynomial_w_out (Rcpp::List args) {
+  static const std::vector<std::string> out_expected = {"Tensor"};
+  static const std::vector<std::string> x_expected = {"Tensor", "Scalar"};
+  static const std::vector<std::string> n_expected = {"Tensor", "Scalar"};
+  auto out_type = cpp_arg_to_torch_type(args["out"], out_expected, "out");
+  auto x_type = cpp_arg_to_torch_type(args["x"], x_expected, "x");
+  auto n_type = cpp_arg_to_torch_type(args["n"], n_expected, "n");
+if (out_type == "Tensor" && x_type == "Tensor" && n_type == "Tensor") {
+  return Rcpp::wrap(cpp_torch_namespace_special_shifted_chebyshev_polynomial_w_out_out_Tensor_x_Tensor_n_Tensor(Rcpp::as<XPtrTorchTensor>(args["out"]), Rcpp::as<XPtrTorchTensor>(args["x"]), Rcpp::as<XPtrTorchTensor>(args["n"])));
+}
+if (out_type == "Tensor" && x_type == "Scalar" && n_type == "Tensor") {
+  return Rcpp::wrap(cpp_torch_namespace_special_shifted_chebyshev_polynomial_w_out_out_Tensor_x_Scalar_n_Tensor(Rcpp::as<XPtrTorchTensor>(args["out"]), Rcpp::as<XPtrTorchScalar>(args["x"]), Rcpp::as<XPtrTorchTensor>(args["n"])));
+}
+if (out_type == "Tensor" && x_type == "Tensor" && n_type == "Scalar") {
+  return Rcpp::wrap(cpp_torch_namespace_special_shifted_chebyshev_polynomial_w_out_out_Tensor_x_Tensor_n_Scalar(Rcpp::as<XPtrTorchTensor>(args["out"]), Rcpp::as<XPtrTorchTensor>(args["x"]), Rcpp::as<XPtrTorchScalar>(args["n"])));
+}
+  Rcpp::stop("No matching overload for special_shifted_chebyshev_polynomial_w_out");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace_special_xlog1py (Rcpp::List args) {
+  static const std::vector<std::string> self_expected = {"Tensor", "Scalar"};
+  static const std::vector<std::string> other_expected = {"Tensor", "Scalar"};
+  auto self_type = cpp_arg_to_torch_type(args["self"], self_expected, "self");
+  auto other_type = cpp_arg_to_torch_type(args["other"], other_expected, "other");
+if (self_type == "Tensor" && other_type == "Tensor") {
+  return Rcpp::wrap(cpp_torch_namespace_special_xlog1py_self_Tensor_other_Tensor(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchTensor>(args["other"])));
+}
+if (self_type == "Scalar" && other_type == "Tensor") {
+  return Rcpp::wrap(cpp_torch_namespace_special_xlog1py_self_Scalar_other_Tensor(Rcpp::as<XPtrTorchScalar>(args["self"]), Rcpp::as<XPtrTorchTensor>(args["other"])));
+}
+if (self_type == "Tensor" && other_type == "Scalar") {
+  return Rcpp::wrap(cpp_torch_namespace_special_xlog1py_self_Tensor_other_Scalar(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchScalar>(args["other"])));
+}
+  Rcpp::stop("No matching overload for special_xlog1py");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace_special_xlog1py_out (Rcpp::List args) {
+  static const std::vector<std::string> out_expected = {"Tensor"};
+  static const std::vector<std::string> self_expected = {"Tensor", "Scalar"};
+  static const std::vector<std::string> other_expected = {"Tensor", "Scalar"};
+  auto out_type = cpp_arg_to_torch_type(args["out"], out_expected, "out");
+  auto self_type = cpp_arg_to_torch_type(args["self"], self_expected, "self");
+  auto other_type = cpp_arg_to_torch_type(args["other"], other_expected, "other");
+if (out_type == "Tensor" && self_type == "Tensor" && other_type == "Tensor") {
+  return Rcpp::wrap(cpp_torch_namespace_special_xlog1py_out_out_Tensor_self_Tensor_other_Tensor(Rcpp::as<XPtrTorchTensor>(args["out"]), Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchTensor>(args["other"])));
+}
+if (out_type == "Tensor" && self_type == "Scalar" && other_type == "Tensor") {
+  return Rcpp::wrap(cpp_torch_namespace_special_xlog1py_out_out_Tensor_self_Scalar_other_Tensor(Rcpp::as<XPtrTorchTensor>(args["out"]), Rcpp::as<XPtrTorchScalar>(args["self"]), Rcpp::as<XPtrTorchTensor>(args["other"])));
+}
+if (out_type == "Tensor" && self_type == "Tensor" && other_type == "Scalar") {
+  return Rcpp::wrap(cpp_torch_namespace_special_xlog1py_out_out_Tensor_self_Tensor_other_Scalar(Rcpp::as<XPtrTorchTensor>(args["out"]), Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchScalar>(args["other"])));
+}
+  Rcpp::stop("No matching overload for special_xlog1py_out");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace_special_xlogy (Rcpp::List args) {
+  static const std::vector<std::string> self_expected = {"Tensor", "Scalar"};
+  static const std::vector<std::string> other_expected = {"Tensor", "Scalar"};
+  auto self_type = cpp_arg_to_torch_type(args["self"], self_expected, "self");
+  auto other_type = cpp_arg_to_torch_type(args["other"], other_expected, "other");
+if (self_type == "Tensor" && other_type == "Tensor") {
+  return Rcpp::wrap(cpp_torch_namespace_special_xlogy_self_Tensor_other_Tensor(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchTensor>(args["other"])));
+}
+if (self_type == "Scalar" && other_type == "Tensor") {
+  return Rcpp::wrap(cpp_torch_namespace_special_xlogy_self_Scalar_other_Tensor(Rcpp::as<XPtrTorchScalar>(args["self"]), Rcpp::as<XPtrTorchTensor>(args["other"])));
+}
+if (self_type == "Tensor" && other_type == "Scalar") {
+  return Rcpp::wrap(cpp_torch_namespace_special_xlogy_self_Tensor_other_Scalar(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchScalar>(args["other"])));
+}
+  Rcpp::stop("No matching overload for special_xlogy");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace_special_xlogy_out (Rcpp::List args) {
+  static const std::vector<std::string> out_expected = {"Tensor"};
+  static const std::vector<std::string> self_expected = {"Tensor", "Scalar"};
+  static const std::vector<std::string> other_expected = {"Tensor", "Scalar"};
+  auto out_type = cpp_arg_to_torch_type(args["out"], out_expected, "out");
+  auto self_type = cpp_arg_to_torch_type(args["self"], self_expected, "self");
+  auto other_type = cpp_arg_to_torch_type(args["other"], other_expected, "other");
+if (out_type == "Tensor" && self_type == "Tensor" && other_type == "Tensor") {
+  return Rcpp::wrap(cpp_torch_namespace_special_xlogy_out_out_Tensor_self_Tensor_other_Tensor(Rcpp::as<XPtrTorchTensor>(args["out"]), Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchTensor>(args["other"])));
+}
+if (out_type == "Tensor" && self_type == "Scalar" && other_type == "Tensor") {
+  return Rcpp::wrap(cpp_torch_namespace_special_xlogy_out_out_Tensor_self_Scalar_other_Tensor(Rcpp::as<XPtrTorchTensor>(args["out"]), Rcpp::as<XPtrTorchScalar>(args["self"]), Rcpp::as<XPtrTorchTensor>(args["other"])));
+}
+if (out_type == "Tensor" && self_type == "Tensor" && other_type == "Scalar") {
+  return Rcpp::wrap(cpp_torch_namespace_special_xlogy_out_out_Tensor_self_Tensor_other_Scalar(Rcpp::as<XPtrTorchTensor>(args["out"]), Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchScalar>(args["other"])));
+}
+  Rcpp::stop("No matching overload for special_xlogy_out");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace_special_zeta (Rcpp::List args) {
+  static const std::vector<std::string> self_expected = {"Tensor", "Scalar"};
+  static const std::vector<std::string> other_expected = {"Tensor", "Scalar"};
+  auto self_type = cpp_arg_to_torch_type(args["self"], self_expected, "self");
+  auto other_type = cpp_arg_to_torch_type(args["other"], other_expected, "other");
+if (self_type == "Tensor" && other_type == "Tensor") {
+  return Rcpp::wrap(cpp_torch_namespace_special_zeta_self_Tensor_other_Tensor(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchTensor>(args["other"])));
+}
+if (self_type == "Scalar" && other_type == "Tensor") {
+  return Rcpp::wrap(cpp_torch_namespace_special_zeta_self_Scalar_other_Tensor(Rcpp::as<XPtrTorchScalar>(args["self"]), Rcpp::as<XPtrTorchTensor>(args["other"])));
+}
+if (self_type == "Tensor" && other_type == "Scalar") {
+  return Rcpp::wrap(cpp_torch_namespace_special_zeta_self_Tensor_other_Scalar(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchScalar>(args["other"])));
+}
+  Rcpp::stop("No matching overload for special_zeta");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace_special_zeta_out (Rcpp::List args) {
+  static const std::vector<std::string> out_expected = {"Tensor"};
+  static const std::vector<std::string> self_expected = {"Tensor", "Scalar"};
+  static const std::vector<std::string> other_expected = {"Tensor", "Scalar"};
+  auto out_type = cpp_arg_to_torch_type(args["out"], out_expected, "out");
+  auto self_type = cpp_arg_to_torch_type(args["self"], self_expected, "self");
+  auto other_type = cpp_arg_to_torch_type(args["other"], other_expected, "other");
+if (out_type == "Tensor" && self_type == "Tensor" && other_type == "Tensor") {
+  return Rcpp::wrap(cpp_torch_namespace_special_zeta_out_out_Tensor_self_Tensor_other_Tensor(Rcpp::as<XPtrTorchTensor>(args["out"]), Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchTensor>(args["other"])));
+}
+if (out_type == "Tensor" && self_type == "Scalar" && other_type == "Tensor") {
+  return Rcpp::wrap(cpp_torch_namespace_special_zeta_out_out_Tensor_self_Scalar_other_Tensor(Rcpp::as<XPtrTorchTensor>(args["out"]), Rcpp::as<XPtrTorchScalar>(args["self"]), Rcpp::as<XPtrTorchTensor>(args["other"])));
+}
+if (out_type == "Tensor" && self_type == "Tensor" && other_type == "Scalar") {
+  return Rcpp::wrap(cpp_torch_namespace_special_zeta_out_out_Tensor_self_Tensor_other_Scalar(Rcpp::as<XPtrTorchTensor>(args["out"]), Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchScalar>(args["other"])));
+}
+  Rcpp::stop("No matching overload for special_zeta_out");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace_split (Rcpp::List args) {
+  static const std::vector<std::string> self_expected = {"Tensor"};
+  static const std::vector<std::string> split_size_expected = {"int64_t", "IntArrayRef"};
+  auto self_type = cpp_arg_to_torch_type(args["self"], self_expected, "self");
+  auto split_size_type = cpp_arg_to_torch_type(args["split_size"], split_size_expected, "split_size");
+if (self_type == "Tensor" && split_size_type == "int64_t") {
+  return Rcpp::wrap(cpp_torch_namespace_split_self_Tensor_split_size_int64_t(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchint64_t>(args["split_size"]), Rcpp::as<XPtrTorchindex_int64_t>(args["dim"])));
+}
+if (self_type == "Tensor" && split_size_type == "IntArrayRef") {
+  return Rcpp::wrap(cpp_torch_namespace_split_self_Tensor_split_size_IntArrayRef(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchIntArrayRef>(args["split_size"]), Rcpp::as<XPtrTorchindex_int64_t>(args["dim"])));
+}
+  Rcpp::stop("No matching overload for split");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace_squeeze (Rcpp::List args) {
+  static const std::vector<std::string> self_expected = {"Tensor"};
+  static const std::vector<std::string> dim_expected = {"int64_t", "Dimname", "IntArrayRef"};
+  auto self_type = cpp_arg_to_torch_type(args["self"], self_expected, "self");
+  auto dim_type = cpp_arg_to_torch_type(args["dim"], dim_expected, "dim");
+if (self_type == "Tensor" && dim_type == "Missing") {
+  return Rcpp::wrap(cpp_torch_namespace_squeeze_self_Tensor(Rcpp::as<XPtrTorchTensor>(args["self"])));
+}
+if (self_type == "Tensor" && dim_type == "int64_t") {
+  return Rcpp::wrap(cpp_torch_namespace_squeeze_self_Tensor_dim_int64_t(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchindex_int64_t>(args["dim"])));
+}
+if (self_type == "Tensor" && dim_type == "Dimname") {
+  return Rcpp::wrap(cpp_torch_namespace_squeeze_self_Tensor_dim_Dimname(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchDimname>(args["dim"])));
+}
+if (self_type == "Tensor" && dim_type == "IntArrayRef") {
+  return Rcpp::wrap(cpp_torch_namespace_squeeze_self_Tensor_dim_IntArrayRef(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchIndexIntArrayRef>(args["dim"])));
+}
+  Rcpp::stop("No matching overload for squeeze");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace_squeeze_copy (Rcpp::List args) {
+  static const std::vector<std::string> self_expected = {"Tensor"};
+  static const std::vector<std::string> dim_expected = {"int64_t", "IntArrayRef"};
+  auto self_type = cpp_arg_to_torch_type(args["self"], self_expected, "self");
+  auto dim_type = cpp_arg_to_torch_type(args["dim"], dim_expected, "dim");
+if (self_type == "Tensor" && dim_type == "Missing") {
+  return Rcpp::wrap(cpp_torch_namespace_squeeze_copy_self_Tensor(Rcpp::as<XPtrTorchTensor>(args["self"])));
+}
+if (self_type == "Tensor" && dim_type == "int64_t") {
+  return Rcpp::wrap(cpp_torch_namespace_squeeze_copy_self_Tensor_dim_int64_t(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchindex_int64_t>(args["dim"])));
+}
+if (self_type == "Tensor" && dim_type == "IntArrayRef") {
+  return Rcpp::wrap(cpp_torch_namespace_squeeze_copy_self_Tensor_dim_IntArrayRef(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchIndexIntArrayRef>(args["dim"])));
+}
+  Rcpp::stop("No matching overload for squeeze_copy");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace_squeeze_copy_out (Rcpp::List args) {
+  static const std::vector<std::string> out_expected = {"Tensor"};
+  static const std::vector<std::string> self_expected = {"Tensor"};
+  static const std::vector<std::string> dim_expected = {"int64_t", "IntArrayRef"};
+  auto out_type = cpp_arg_to_torch_type(args["out"], out_expected, "out");
+  auto self_type = cpp_arg_to_torch_type(args["self"], self_expected, "self");
+  auto dim_type = cpp_arg_to_torch_type(args["dim"], dim_expected, "dim");
+if (out_type == "Tensor" && self_type == "Tensor" && dim_type == "Missing") {
+  return Rcpp::wrap(cpp_torch_namespace_squeeze_copy_out_out_Tensor_self_Tensor(Rcpp::as<XPtrTorchTensor>(args["out"]), Rcpp::as<XPtrTorchTensor>(args["self"])));
+}
+if (out_type == "Tensor" && self_type == "Tensor" && dim_type == "int64_t") {
+  return Rcpp::wrap(cpp_torch_namespace_squeeze_copy_out_out_Tensor_self_Tensor_dim_int64_t(Rcpp::as<XPtrTorchTensor>(args["out"]), Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchindex_int64_t>(args["dim"])));
+}
+if (out_type == "Tensor" && self_type == "Tensor" && dim_type == "IntArrayRef") {
+  return Rcpp::wrap(cpp_torch_namespace_squeeze_copy_out_out_Tensor_self_Tensor_dim_IntArrayRef(Rcpp::as<XPtrTorchTensor>(args["out"]), Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchIndexIntArrayRef>(args["dim"])));
+}
+  Rcpp::stop("No matching overload for squeeze_copy_out");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace_std (Rcpp::List args) {
+  static const std::vector<std::string> self_expected = {"Tensor"};
+  static const std::vector<std::string> dim_expected = {"IntArrayRef", "DimnameList"};
+  auto self_type = cpp_arg_to_torch_type(args["self"], self_expected, "self");
+  auto dim_type = cpp_arg_to_torch_type(args["dim"], dim_expected, "dim");
+if (self_type == "Tensor" && dim_type == "Missing") {
+  return Rcpp::wrap(cpp_torch_namespace_std_self_Tensor(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchbool>(args["unbiased"])));
+}
+if (self_type == "Tensor" && dim_type == "IntArrayRef") {
+  return Rcpp::wrap(cpp_torch_namespace_std_self_Tensor_dim_IntArrayRef(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchOptionalIndexIntArrayRef>(args["dim"]), Rcpp::as<XPtrTorchbool>(args["unbiased"]), Rcpp::as<XPtrTorchbool>(args["keepdim"])));
+}
+if (self_type == "Tensor" && dim_type == "DimnameList") {
+  return Rcpp::wrap(cpp_torch_namespace_std_self_Tensor_dim_DimnameList(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchDimnameList>(args["dim"]), Rcpp::as<XPtrTorchbool>(args["unbiased"]), Rcpp::as<XPtrTorchbool>(args["keepdim"])));
+}
+  Rcpp::stop("No matching overload for std");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace_std_mean (Rcpp::List args) {
+  static const std::vector<std::string> self_expected = {"Tensor"};
+  static const std::vector<std::string> dim_expected = {"IntArrayRef", "DimnameList"};
+  auto self_type = cpp_arg_to_torch_type(args["self"], self_expected, "self");
+  auto dim_type = cpp_arg_to_torch_type(args["dim"], dim_expected, "dim");
+if (self_type == "Tensor" && dim_type == "Missing") {
+  return Rcpp::wrap(cpp_torch_namespace_std_mean_self_Tensor(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchbool>(args["unbiased"])));
+}
+if (self_type == "Tensor" && dim_type == "IntArrayRef") {
+  return Rcpp::wrap(cpp_torch_namespace_std_mean_self_Tensor_dim_IntArrayRef(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchOptionalIndexIntArrayRef>(args["dim"]), Rcpp::as<XPtrTorchbool>(args["unbiased"]), Rcpp::as<XPtrTorchbool>(args["keepdim"])));
+}
+if (self_type == "Tensor" && dim_type == "DimnameList") {
+  return Rcpp::wrap(cpp_torch_namespace_std_mean_self_Tensor_dim_DimnameList(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchDimnameList>(args["dim"]), Rcpp::as<XPtrTorchbool>(args["unbiased"]), Rcpp::as<XPtrTorchbool>(args["keepdim"])));
+}
+  Rcpp::stop("No matching overload for std_mean");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace_sum (Rcpp::List args) {
+  static const std::vector<std::string> self_expected = {"Tensor"};
+  static const std::vector<std::string> dim_expected = {"IntArrayRef", "DimnameList"};
+  auto self_type = cpp_arg_to_torch_type(args["self"], self_expected, "self");
+  auto dim_type = cpp_arg_to_torch_type(args["dim"], dim_expected, "dim");
+if (self_type == "Tensor" && dim_type == "Missing") {
+  return Rcpp::wrap(cpp_torch_namespace_sum_self_Tensor(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchoptional_scalar_type>(args["dtype"])));
+}
+if (self_type == "Tensor" && dim_type == "IntArrayRef") {
+  return Rcpp::wrap(cpp_torch_namespace_sum_self_Tensor_dim_IntArrayRef(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchOptionalIndexIntArrayRef>(args["dim"]), Rcpp::as<XPtrTorchbool>(args["keepdim"]), Rcpp::as<XPtrTorchoptional_scalar_type>(args["dtype"])));
+}
+if (self_type == "Tensor" && dim_type == "DimnameList") {
+  return Rcpp::wrap(cpp_torch_namespace_sum_self_Tensor_dim_DimnameList(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchDimnameList>(args["dim"]), Rcpp::as<XPtrTorchbool>(args["keepdim"]), Rcpp::as<XPtrTorchoptional_scalar_type>(args["dtype"])));
+}
+  Rcpp::stop("No matching overload for sum");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace_sum_out (Rcpp::List args) {
+  static const std::vector<std::string> out_expected = {"Tensor"};
+  static const std::vector<std::string> self_expected = {"Tensor"};
+  static const std::vector<std::string> dim_expected = {"IntArrayRef", "DimnameList"};
+  auto out_type = cpp_arg_to_torch_type(args["out"], out_expected, "out");
+  auto self_type = cpp_arg_to_torch_type(args["self"], self_expected, "self");
+  auto dim_type = cpp_arg_to_torch_type(args["dim"], dim_expected, "dim");
+if (out_type == "Tensor" && self_type == "Tensor" && dim_type == "IntArrayRef") {
+  return Rcpp::wrap(cpp_torch_namespace_sum_out_out_Tensor_self_Tensor_dim_IntArrayRef(Rcpp::as<XPtrTorchTensor>(args["out"]), Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchOptionalIndexIntArrayRef>(args["dim"]), Rcpp::as<XPtrTorchbool>(args["keepdim"]), Rcpp::as<XPtrTorchoptional_scalar_type>(args["dtype"])));
+}
+if (out_type == "Tensor" && self_type == "Tensor" && dim_type == "DimnameList") {
+  return Rcpp::wrap(cpp_torch_namespace_sum_out_out_Tensor_self_Tensor_dim_DimnameList(Rcpp::as<XPtrTorchTensor>(args["out"]), Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchDimnameList>(args["dim"]), Rcpp::as<XPtrTorchbool>(args["keepdim"]), Rcpp::as<XPtrTorchoptional_scalar_type>(args["dtype"])));
+}
+if (out_type == "Tensor" && self_type == "Tensor" && dim_type == "Missing") {
+  return Rcpp::wrap(cpp_torch_namespace_sum_out_out_Tensor_self_Tensor(Rcpp::as<XPtrTorchTensor>(args["out"]), Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchoptional_scalar_type>(args["dtype"])));
+}
+  Rcpp::stop("No matching overload for sum_out");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace_tensor_split (Rcpp::List args) {
+  static const std::vector<std::string> self_expected = {"Tensor"};
+  static const std::vector<std::string> indices_expected = {"IntArrayRef"};
+  static const std::vector<std::string> sections_expected = {"int64_t"};
+  static const std::vector<std::string> tensor_indices_or_sections_expected = {"Tensor"};
+  auto self_type = cpp_arg_to_torch_type(args["self"], self_expected, "self");
+  auto indices_type = cpp_arg_to_torch_type(args["indices"], indices_expected, "indices");
+  auto sections_type = cpp_arg_to_torch_type(args["sections"], sections_expected, "sections");
+  auto tensor_indices_or_sections_type = cpp_arg_to_torch_type(args["tensor_indices_or_sections"], tensor_indices_or_sections_expected, "tensor_indices_or_sections");
+if (self_type == "Tensor" && indices_type == "Missing" && sections_type == "int64_t" && tensor_indices_or_sections_type == "Missing") {
+  return Rcpp::wrap(cpp_torch_namespace_tensor_split_self_Tensor_sections_int64_t(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchint64_t>(args["sections"]), Rcpp::as<XPtrTorchindex_int64_t>(args["dim"])));
+}
+if (self_type == "Tensor" && indices_type == "IntArrayRef" && sections_type == "Missing" && tensor_indices_or_sections_type == "Missing") {
+  return Rcpp::wrap(cpp_torch_namespace_tensor_split_self_Tensor_indices_IntArrayRef(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchIntArrayRef>(args["indices"]), Rcpp::as<XPtrTorchindex_int64_t>(args["dim"])));
+}
+if (self_type == "Tensor" && indices_type == "Missing" && sections_type == "Missing" && tensor_indices_or_sections_type == "Tensor") {
+  return Rcpp::wrap(cpp_torch_namespace_tensor_split_self_Tensor_tensor_indices_or_sections_Tensor(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchTensor>(args["tensor_indices_or_sections"]), Rcpp::as<XPtrTorchindex_int64_t>(args["dim"])));
+}
+  Rcpp::stop("No matching overload for tensor_split");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace_transpose (Rcpp::List args) {
+  static const std::vector<std::string> self_expected = {"Tensor"};
+  static const std::vector<std::string> dim0_expected = {"int64_t", "Dimname"};
+  static const std::vector<std::string> dim1_expected = {"int64_t", "Dimname"};
+  auto self_type = cpp_arg_to_torch_type(args["self"], self_expected, "self");
+  auto dim0_type = cpp_arg_to_torch_type(args["dim0"], dim0_expected, "dim0");
+  auto dim1_type = cpp_arg_to_torch_type(args["dim1"], dim1_expected, "dim1");
+if (self_type == "Tensor" && dim0_type == "int64_t" && dim1_type == "int64_t") {
+  return Rcpp::wrap(cpp_torch_namespace_transpose_self_Tensor_dim0_int64_t_dim1_int64_t(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchindex_int64_t>(args["dim0"]), Rcpp::as<XPtrTorchindex_int64_t>(args["dim1"])));
+}
+if (self_type == "Tensor" && dim0_type == "Dimname" && dim1_type == "Dimname") {
+  return Rcpp::wrap(cpp_torch_namespace_transpose_self_Tensor_dim0_Dimname_dim1_Dimname(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchDimname>(args["dim0"]), Rcpp::as<XPtrTorchDimname>(args["dim1"])));
+}
+  Rcpp::stop("No matching overload for transpose");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace_trapezoid (Rcpp::List args) {
+  static const std::vector<std::string> y_expected = {"Tensor"};
+  static const std::vector<std::string> x_expected = {"Tensor"};
+  auto y_type = cpp_arg_to_torch_type(args["y"], y_expected, "y");
+  auto x_type = cpp_arg_to_torch_type(args["x"], x_expected, "x");
+if (y_type == "Tensor" && x_type == "Tensor") {
+  return Rcpp::wrap(cpp_torch_namespace_trapezoid_y_Tensor_x_Tensor(Rcpp::as<XPtrTorchTensor>(args["y"]), Rcpp::as<XPtrTorchTensor>(args["x"]), Rcpp::as<XPtrTorchindex_int64_t>(args["dim"])));
+}
+if (y_type == "Tensor" && x_type == "Missing") {
+  return Rcpp::wrap(cpp_torch_namespace_trapezoid_y_Tensor(Rcpp::as<XPtrTorchTensor>(args["y"]), Rcpp::as<XPtrTorchScalar>(args["dx"]), Rcpp::as<XPtrTorchindex_int64_t>(args["dim"])));
+}
+  Rcpp::stop("No matching overload for trapezoid");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace_trapz (Rcpp::List args) {
+  static const std::vector<std::string> y_expected = {"Tensor"};
+  static const std::vector<std::string> x_expected = {"Tensor"};
+  auto y_type = cpp_arg_to_torch_type(args["y"], y_expected, "y");
+  auto x_type = cpp_arg_to_torch_type(args["x"], x_expected, "x");
+if (y_type == "Tensor" && x_type == "Tensor") {
+  return Rcpp::wrap(cpp_torch_namespace_trapz_y_Tensor_x_Tensor(Rcpp::as<XPtrTorchTensor>(args["y"]), Rcpp::as<XPtrTorchTensor>(args["x"]), Rcpp::as<XPtrTorchindex_int64_t>(args["dim"])));
+}
+if (y_type == "Tensor" && x_type == "Missing") {
+  return Rcpp::wrap(cpp_torch_namespace_trapz_y_Tensor(Rcpp::as<XPtrTorchTensor>(args["y"]), Rcpp::as<XPtrTorchdouble>(args["dx"]), Rcpp::as<XPtrTorchindex_int64_t>(args["dim"])));
+}
+  Rcpp::stop("No matching overload for trapz");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace_upsample_bicubic2d (Rcpp::List args) {
+  static const std::vector<std::string> input_expected = {"Tensor"};
+  static const std::vector<std::string> self_expected = {"Tensor"};
+  static const std::vector<std::string> output_size_expected = {"IntArrayRef"};
+  static const std::vector<std::string> align_corners_expected = {"bool"};
+  static const std::vector<std::string> scale_factors_expected = {"ArrayRef<double>"};
+  auto input_type = cpp_arg_to_torch_type(args["input"], input_expected, "input");
+  auto self_type = cpp_arg_to_torch_type(args["self"], self_expected, "self");
+  auto output_size_type = cpp_arg_to_torch_type(args["output_size"], output_size_expected, "output_size");
+  auto align_corners_type = cpp_arg_to_torch_type(args["align_corners"], align_corners_expected, "align_corners");
+  auto scale_factors_type = cpp_arg_to_torch_type(args["scale_factors"], scale_factors_expected, "scale_factors");
+if (input_type == "Tensor" && self_type == "Missing" && output_size_type == "IntArrayRef" && align_corners_type == "bool" && scale_factors_type == "ArrayRef<double>") {
+  return Rcpp::wrap(cpp_torch_namespace_upsample_bicubic2d_input_Tensor_output_size_IntArrayRef_align_corners_bool_scale_factors_ArrayRefdouble(Rcpp::as<XPtrTorchTensor>(args["input"]), Rcpp::as<XPtrTorchOptionalIntArrayRef>(args["output_size"]), Rcpp::as<XPtrTorchbool>(args["align_corners"]), Rcpp::as<XPtrTorchOptionalDoubleArrayRef>(args["scale_factors"])));
+}
+if (input_type == "Missing" && self_type == "Tensor" && output_size_type == "IntArrayRef" && align_corners_type == "bool" && scale_factors_type == "Missing") {
+  return Rcpp::wrap(cpp_torch_namespace_upsample_bicubic2d_self_Tensor_output_size_IntArrayRef_align_corners_bool(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchIntArrayRef>(args["output_size"]), Rcpp::as<XPtrTorchbool>(args["align_corners"]), Rcpp::as<XPtrTorchOptionaldouble>(args["scales_h"]), Rcpp::as<XPtrTorchOptionaldouble>(args["scales_w"])));
+}
+  Rcpp::stop("No matching overload for upsample_bicubic2d");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace_upsample_bilinear2d (Rcpp::List args) {
+  static const std::vector<std::string> input_expected = {"Tensor"};
+  static const std::vector<std::string> self_expected = {"Tensor"};
+  static const std::vector<std::string> output_size_expected = {"IntArrayRef"};
+  static const std::vector<std::string> align_corners_expected = {"bool"};
+  static const std::vector<std::string> scale_factors_expected = {"ArrayRef<double>"};
+  auto input_type = cpp_arg_to_torch_type(args["input"], input_expected, "input");
+  auto self_type = cpp_arg_to_torch_type(args["self"], self_expected, "self");
+  auto output_size_type = cpp_arg_to_torch_type(args["output_size"], output_size_expected, "output_size");
+  auto align_corners_type = cpp_arg_to_torch_type(args["align_corners"], align_corners_expected, "align_corners");
+  auto scale_factors_type = cpp_arg_to_torch_type(args["scale_factors"], scale_factors_expected, "scale_factors");
+if (input_type == "Tensor" && self_type == "Missing" && output_size_type == "IntArrayRef" && align_corners_type == "bool" && scale_factors_type == "ArrayRef<double>") {
+  return Rcpp::wrap(cpp_torch_namespace_upsample_bilinear2d_input_Tensor_output_size_IntArrayRef_align_corners_bool_scale_factors_ArrayRefdouble(Rcpp::as<XPtrTorchTensor>(args["input"]), Rcpp::as<XPtrTorchOptionalIntArrayRef>(args["output_size"]), Rcpp::as<XPtrTorchbool>(args["align_corners"]), Rcpp::as<XPtrTorchOptionalDoubleArrayRef>(args["scale_factors"])));
+}
+if (input_type == "Missing" && self_type == "Tensor" && output_size_type == "IntArrayRef" && align_corners_type == "bool" && scale_factors_type == "Missing") {
+  return Rcpp::wrap(cpp_torch_namespace_upsample_bilinear2d_self_Tensor_output_size_IntArrayRef_align_corners_bool(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchIntArrayRef>(args["output_size"]), Rcpp::as<XPtrTorchbool>(args["align_corners"]), Rcpp::as<XPtrTorchOptionaldouble>(args["scales_h"]), Rcpp::as<XPtrTorchOptionaldouble>(args["scales_w"])));
+}
+  Rcpp::stop("No matching overload for upsample_bilinear2d");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace_upsample_bilinear2d_out (Rcpp::List args) {
+  static const std::vector<std::string> out_expected = {"Tensor"};
+  static const std::vector<std::string> input_expected = {"Tensor"};
+  static const std::vector<std::string> self_expected = {"Tensor"};
+  static const std::vector<std::string> output_size_expected = {"IntArrayRef"};
+  static const std::vector<std::string> align_corners_expected = {"bool"};
+  static const std::vector<std::string> scale_factors_expected = {"ArrayRef<double>"};
+  auto out_type = cpp_arg_to_torch_type(args["out"], out_expected, "out");
+  auto input_type = cpp_arg_to_torch_type(args["input"], input_expected, "input");
+  auto self_type = cpp_arg_to_torch_type(args["self"], self_expected, "self");
+  auto output_size_type = cpp_arg_to_torch_type(args["output_size"], output_size_expected, "output_size");
+  auto align_corners_type = cpp_arg_to_torch_type(args["align_corners"], align_corners_expected, "align_corners");
+  auto scale_factors_type = cpp_arg_to_torch_type(args["scale_factors"], scale_factors_expected, "scale_factors");
+if (out_type == "Tensor" && input_type == "Missing" && self_type == "Tensor" && output_size_type == "IntArrayRef" && align_corners_type == "bool" && scale_factors_type == "Missing") {
+  return Rcpp::wrap(cpp_torch_namespace_upsample_bilinear2d_out_out_Tensor_self_Tensor_output_size_IntArrayRef_align_corners_bool(Rcpp::as<XPtrTorchTensor>(args["out"]), Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchIntArrayRef>(args["output_size"]), Rcpp::as<XPtrTorchbool>(args["align_corners"]), Rcpp::as<XPtrTorchOptionaldouble>(args["scales_h"]), Rcpp::as<XPtrTorchOptionaldouble>(args["scales_w"])));
+}
+if (out_type == "Tensor" && input_type == "Tensor" && self_type == "Missing" && output_size_type == "IntArrayRef" && align_corners_type == "bool" && scale_factors_type == "ArrayRef<double>") {
+  return Rcpp::wrap(cpp_torch_namespace_upsample_bilinear2d_out_out_Tensor_input_Tensor_output_size_IntArrayRef_align_corners_bool_scale_factors_ArrayRefdouble(Rcpp::as<XPtrTorchTensor>(args["out"]), Rcpp::as<XPtrTorchTensor>(args["input"]), Rcpp::as<XPtrTorchOptionalIntArrayRef>(args["output_size"]), Rcpp::as<XPtrTorchbool>(args["align_corners"]), Rcpp::as<XPtrTorchOptionalDoubleArrayRef>(args["scale_factors"])));
+}
+  Rcpp::stop("No matching overload for upsample_bilinear2d_out");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace_upsample_linear1d (Rcpp::List args) {
+  static const std::vector<std::string> input_expected = {"Tensor"};
+  static const std::vector<std::string> self_expected = {"Tensor"};
+  static const std::vector<std::string> output_size_expected = {"IntArrayRef"};
+  static const std::vector<std::string> align_corners_expected = {"bool"};
+  static const std::vector<std::string> scale_factors_expected = {"ArrayRef<double>"};
+  auto input_type = cpp_arg_to_torch_type(args["input"], input_expected, "input");
+  auto self_type = cpp_arg_to_torch_type(args["self"], self_expected, "self");
+  auto output_size_type = cpp_arg_to_torch_type(args["output_size"], output_size_expected, "output_size");
+  auto align_corners_type = cpp_arg_to_torch_type(args["align_corners"], align_corners_expected, "align_corners");
+  auto scale_factors_type = cpp_arg_to_torch_type(args["scale_factors"], scale_factors_expected, "scale_factors");
+if (input_type == "Tensor" && self_type == "Missing" && output_size_type == "IntArrayRef" && align_corners_type == "bool" && scale_factors_type == "ArrayRef<double>") {
+  return Rcpp::wrap(cpp_torch_namespace_upsample_linear1d_input_Tensor_output_size_IntArrayRef_align_corners_bool_scale_factors_ArrayRefdouble(Rcpp::as<XPtrTorchTensor>(args["input"]), Rcpp::as<XPtrTorchOptionalIntArrayRef>(args["output_size"]), Rcpp::as<XPtrTorchbool>(args["align_corners"]), Rcpp::as<XPtrTorchOptionalDoubleArrayRef>(args["scale_factors"])));
+}
+if (input_type == "Missing" && self_type == "Tensor" && output_size_type == "IntArrayRef" && align_corners_type == "bool" && scale_factors_type == "Missing") {
+  return Rcpp::wrap(cpp_torch_namespace_upsample_linear1d_self_Tensor_output_size_IntArrayRef_align_corners_bool(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchIntArrayRef>(args["output_size"]), Rcpp::as<XPtrTorchbool>(args["align_corners"]), Rcpp::as<XPtrTorchOptionaldouble>(args["scales"])));
+}
+  Rcpp::stop("No matching overload for upsample_linear1d");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace_upsample_nearest1d (Rcpp::List args) {
+  static const std::vector<std::string> input_expected = {"Tensor"};
+  static const std::vector<std::string> self_expected = {"Tensor"};
+  static const std::vector<std::string> output_size_expected = {"IntArrayRef"};
+  static const std::vector<std::string> scale_factors_expected = {"ArrayRef<double>"};
+  auto input_type = cpp_arg_to_torch_type(args["input"], input_expected, "input");
+  auto self_type = cpp_arg_to_torch_type(args["self"], self_expected, "self");
+  auto output_size_type = cpp_arg_to_torch_type(args["output_size"], output_size_expected, "output_size");
+  auto scale_factors_type = cpp_arg_to_torch_type(args["scale_factors"], scale_factors_expected, "scale_factors");
+if (input_type == "Tensor" && self_type == "Missing" && output_size_type == "IntArrayRef" && scale_factors_type == "ArrayRef<double>") {
+  return Rcpp::wrap(cpp_torch_namespace_upsample_nearest1d_input_Tensor_output_size_IntArrayRef_scale_factors_ArrayRefdouble(Rcpp::as<XPtrTorchTensor>(args["input"]), Rcpp::as<XPtrTorchOptionalIntArrayRef>(args["output_size"]), Rcpp::as<XPtrTorchOptionalDoubleArrayRef>(args["scale_factors"])));
+}
+if (input_type == "Missing" && self_type == "Tensor" && output_size_type == "IntArrayRef" && scale_factors_type == "Missing") {
+  return Rcpp::wrap(cpp_torch_namespace_upsample_nearest1d_self_Tensor_output_size_IntArrayRef(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchIntArrayRef>(args["output_size"]), Rcpp::as<XPtrTorchOptionaldouble>(args["scales"])));
+}
+  Rcpp::stop("No matching overload for upsample_nearest1d");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace_upsample_nearest2d (Rcpp::List args) {
+  static const std::vector<std::string> input_expected = {"Tensor"};
+  static const std::vector<std::string> self_expected = {"Tensor"};
+  static const std::vector<std::string> output_size_expected = {"IntArrayRef"};
+  static const std::vector<std::string> scale_factors_expected = {"ArrayRef<double>"};
+  auto input_type = cpp_arg_to_torch_type(args["input"], input_expected, "input");
+  auto self_type = cpp_arg_to_torch_type(args["self"], self_expected, "self");
+  auto output_size_type = cpp_arg_to_torch_type(args["output_size"], output_size_expected, "output_size");
+  auto scale_factors_type = cpp_arg_to_torch_type(args["scale_factors"], scale_factors_expected, "scale_factors");
+if (input_type == "Tensor" && self_type == "Missing" && output_size_type == "IntArrayRef" && scale_factors_type == "ArrayRef<double>") {
+  return Rcpp::wrap(cpp_torch_namespace_upsample_nearest2d_input_Tensor_output_size_IntArrayRef_scale_factors_ArrayRefdouble(Rcpp::as<XPtrTorchTensor>(args["input"]), Rcpp::as<XPtrTorchOptionalIntArrayRef>(args["output_size"]), Rcpp::as<XPtrTorchOptionalDoubleArrayRef>(args["scale_factors"])));
+}
+if (input_type == "Missing" && self_type == "Tensor" && output_size_type == "IntArrayRef" && scale_factors_type == "Missing") {
+  return Rcpp::wrap(cpp_torch_namespace_upsample_nearest2d_self_Tensor_output_size_IntArrayRef(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchIntArrayRef>(args["output_size"]), Rcpp::as<XPtrTorchOptionaldouble>(args["scales_h"]), Rcpp::as<XPtrTorchOptionaldouble>(args["scales_w"])));
+}
+  Rcpp::stop("No matching overload for upsample_nearest2d");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace_upsample_nearest2d_out (Rcpp::List args) {
+  static const std::vector<std::string> out_expected = {"Tensor"};
+  static const std::vector<std::string> input_expected = {"Tensor"};
+  static const std::vector<std::string> self_expected = {"Tensor"};
+  static const std::vector<std::string> output_size_expected = {"IntArrayRef"};
+  static const std::vector<std::string> scale_factors_expected = {"ArrayRef<double>"};
+  auto out_type = cpp_arg_to_torch_type(args["out"], out_expected, "out");
+  auto input_type = cpp_arg_to_torch_type(args["input"], input_expected, "input");
+  auto self_type = cpp_arg_to_torch_type(args["self"], self_expected, "self");
+  auto output_size_type = cpp_arg_to_torch_type(args["output_size"], output_size_expected, "output_size");
+  auto scale_factors_type = cpp_arg_to_torch_type(args["scale_factors"], scale_factors_expected, "scale_factors");
+if (out_type == "Tensor" && input_type == "Missing" && self_type == "Tensor" && output_size_type == "IntArrayRef" && scale_factors_type == "Missing") {
+  return Rcpp::wrap(cpp_torch_namespace_upsample_nearest2d_out_out_Tensor_self_Tensor_output_size_IntArrayRef(Rcpp::as<XPtrTorchTensor>(args["out"]), Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchIntArrayRef>(args["output_size"]), Rcpp::as<XPtrTorchOptionaldouble>(args["scales_h"]), Rcpp::as<XPtrTorchOptionaldouble>(args["scales_w"])));
+}
+if (out_type == "Tensor" && input_type == "Tensor" && self_type == "Missing" && output_size_type == "IntArrayRef" && scale_factors_type == "ArrayRef<double>") {
+  return Rcpp::wrap(cpp_torch_namespace_upsample_nearest2d_out_out_Tensor_input_Tensor_output_size_IntArrayRef_scale_factors_ArrayRefdouble(Rcpp::as<XPtrTorchTensor>(args["out"]), Rcpp::as<XPtrTorchTensor>(args["input"]), Rcpp::as<XPtrTorchOptionalIntArrayRef>(args["output_size"]), Rcpp::as<XPtrTorchOptionalDoubleArrayRef>(args["scale_factors"])));
+}
+  Rcpp::stop("No matching overload for upsample_nearest2d_out");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace_upsample_nearest3d (Rcpp::List args) {
+  static const std::vector<std::string> input_expected = {"Tensor"};
+  static const std::vector<std::string> self_expected = {"Tensor"};
+  static const std::vector<std::string> output_size_expected = {"IntArrayRef"};
+  static const std::vector<std::string> scale_factors_expected = {"ArrayRef<double>"};
+  auto input_type = cpp_arg_to_torch_type(args["input"], input_expected, "input");
+  auto self_type = cpp_arg_to_torch_type(args["self"], self_expected, "self");
+  auto output_size_type = cpp_arg_to_torch_type(args["output_size"], output_size_expected, "output_size");
+  auto scale_factors_type = cpp_arg_to_torch_type(args["scale_factors"], scale_factors_expected, "scale_factors");
+if (input_type == "Tensor" && self_type == "Missing" && output_size_type == "IntArrayRef" && scale_factors_type == "ArrayRef<double>") {
+  return Rcpp::wrap(cpp_torch_namespace_upsample_nearest3d_input_Tensor_output_size_IntArrayRef_scale_factors_ArrayRefdouble(Rcpp::as<XPtrTorchTensor>(args["input"]), Rcpp::as<XPtrTorchOptionalIntArrayRef>(args["output_size"]), Rcpp::as<XPtrTorchOptionalDoubleArrayRef>(args["scale_factors"])));
+}
+if (input_type == "Missing" && self_type == "Tensor" && output_size_type == "IntArrayRef" && scale_factors_type == "Missing") {
+  return Rcpp::wrap(cpp_torch_namespace_upsample_nearest3d_self_Tensor_output_size_IntArrayRef(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchIntArrayRef>(args["output_size"]), Rcpp::as<XPtrTorchOptionaldouble>(args["scales_d"]), Rcpp::as<XPtrTorchOptionaldouble>(args["scales_h"]), Rcpp::as<XPtrTorchOptionaldouble>(args["scales_w"])));
+}
+  Rcpp::stop("No matching overload for upsample_nearest3d");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace_upsample_trilinear3d (Rcpp::List args) {
+  static const std::vector<std::string> input_expected = {"Tensor"};
+  static const std::vector<std::string> self_expected = {"Tensor"};
+  static const std::vector<std::string> output_size_expected = {"IntArrayRef"};
+  static const std::vector<std::string> align_corners_expected = {"bool"};
+  static const std::vector<std::string> scale_factors_expected = {"ArrayRef<double>"};
+  auto input_type = cpp_arg_to_torch_type(args["input"], input_expected, "input");
+  auto self_type = cpp_arg_to_torch_type(args["self"], self_expected, "self");
+  auto output_size_type = cpp_arg_to_torch_type(args["output_size"], output_size_expected, "output_size");
+  auto align_corners_type = cpp_arg_to_torch_type(args["align_corners"], align_corners_expected, "align_corners");
+  auto scale_factors_type = cpp_arg_to_torch_type(args["scale_factors"], scale_factors_expected, "scale_factors");
+if (input_type == "Tensor" && self_type == "Missing" && output_size_type == "IntArrayRef" && align_corners_type == "bool" && scale_factors_type == "ArrayRef<double>") {
+  return Rcpp::wrap(cpp_torch_namespace_upsample_trilinear3d_input_Tensor_output_size_IntArrayRef_align_corners_bool_scale_factors_ArrayRefdouble(Rcpp::as<XPtrTorchTensor>(args["input"]), Rcpp::as<XPtrTorchOptionalIntArrayRef>(args["output_size"]), Rcpp::as<XPtrTorchbool>(args["align_corners"]), Rcpp::as<XPtrTorchOptionalDoubleArrayRef>(args["scale_factors"])));
+}
+if (input_type == "Missing" && self_type == "Tensor" && output_size_type == "IntArrayRef" && align_corners_type == "bool" && scale_factors_type == "Missing") {
+  return Rcpp::wrap(cpp_torch_namespace_upsample_trilinear3d_self_Tensor_output_size_IntArrayRef_align_corners_bool(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchIntArrayRef>(args["output_size"]), Rcpp::as<XPtrTorchbool>(args["align_corners"]), Rcpp::as<XPtrTorchOptionaldouble>(args["scales_d"]), Rcpp::as<XPtrTorchOptionaldouble>(args["scales_h"]), Rcpp::as<XPtrTorchOptionaldouble>(args["scales_w"])));
+}
+  Rcpp::stop("No matching overload for upsample_trilinear3d");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace_var (Rcpp::List args) {
+  static const std::vector<std::string> self_expected = {"Tensor"};
+  static const std::vector<std::string> dim_expected = {"IntArrayRef", "DimnameList"};
+  auto self_type = cpp_arg_to_torch_type(args["self"], self_expected, "self");
+  auto dim_type = cpp_arg_to_torch_type(args["dim"], dim_expected, "dim");
+if (self_type == "Tensor" && dim_type == "Missing") {
+  return Rcpp::wrap(cpp_torch_namespace_var_self_Tensor(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchbool>(args["unbiased"])));
+}
+if (self_type == "Tensor" && dim_type == "IntArrayRef") {
+  return Rcpp::wrap(cpp_torch_namespace_var_self_Tensor_dim_IntArrayRef(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchOptionalIndexIntArrayRef>(args["dim"]), Rcpp::as<XPtrTorchbool>(args["unbiased"]), Rcpp::as<XPtrTorchbool>(args["keepdim"])));
+}
+if (self_type == "Tensor" && dim_type == "DimnameList") {
+  return Rcpp::wrap(cpp_torch_namespace_var_self_Tensor_dim_DimnameList(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchDimnameList>(args["dim"]), Rcpp::as<XPtrTorchbool>(args["unbiased"]), Rcpp::as<XPtrTorchbool>(args["keepdim"])));
+}
+  Rcpp::stop("No matching overload for var");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace_var_mean (Rcpp::List args) {
+  static const std::vector<std::string> self_expected = {"Tensor"};
+  static const std::vector<std::string> dim_expected = {"IntArrayRef", "DimnameList"};
+  auto self_type = cpp_arg_to_torch_type(args["self"], self_expected, "self");
+  auto dim_type = cpp_arg_to_torch_type(args["dim"], dim_expected, "dim");
+if (self_type == "Tensor" && dim_type == "Missing") {
+  return Rcpp::wrap(cpp_torch_namespace_var_mean_self_Tensor(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchbool>(args["unbiased"])));
+}
+if (self_type == "Tensor" && dim_type == "IntArrayRef") {
+  return Rcpp::wrap(cpp_torch_namespace_var_mean_self_Tensor_dim_IntArrayRef(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchOptionalIndexIntArrayRef>(args["dim"]), Rcpp::as<XPtrTorchbool>(args["unbiased"]), Rcpp::as<XPtrTorchbool>(args["keepdim"])));
+}
+if (self_type == "Tensor" && dim_type == "DimnameList") {
+  return Rcpp::wrap(cpp_torch_namespace_var_mean_self_Tensor_dim_DimnameList(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchDimnameList>(args["dim"]), Rcpp::as<XPtrTorchbool>(args["unbiased"]), Rcpp::as<XPtrTorchbool>(args["keepdim"])));
+}
+  Rcpp::stop("No matching overload for var_mean");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace_view_copy (Rcpp::List args) {
+  static const std::vector<std::string> self_expected = {"Tensor"};
+  static const std::vector<std::string> dtype_expected = {"ScalarType"};
+  static const std::vector<std::string> size_expected = {"IntArrayRef"};
+  auto self_type = cpp_arg_to_torch_type(args["self"], self_expected, "self");
+  auto dtype_type = cpp_arg_to_torch_type(args["dtype"], dtype_expected, "dtype");
+  auto size_type = cpp_arg_to_torch_type(args["size"], size_expected, "size");
+if (self_type == "Tensor" && dtype_type == "Missing" && size_type == "IntArrayRef") {
+  return Rcpp::wrap(cpp_torch_namespace_view_copy_self_Tensor_size_IntArrayRef(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchIntArrayRef>(args["size"])));
+}
+if (self_type == "Tensor" && dtype_type == "ScalarType" && size_type == "Missing") {
+  return Rcpp::wrap(cpp_torch_namespace_view_copy_self_Tensor_dtype_ScalarType(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchDtype>(args["dtype"])));
+}
+  Rcpp::stop("No matching overload for view_copy");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace_view_copy_out (Rcpp::List args) {
+  static const std::vector<std::string> out_expected = {"Tensor"};
+  static const std::vector<std::string> self_expected = {"Tensor"};
+  static const std::vector<std::string> dtype_expected = {"ScalarType"};
+  static const std::vector<std::string> size_expected = {"IntArrayRef"};
+  auto out_type = cpp_arg_to_torch_type(args["out"], out_expected, "out");
+  auto self_type = cpp_arg_to_torch_type(args["self"], self_expected, "self");
+  auto dtype_type = cpp_arg_to_torch_type(args["dtype"], dtype_expected, "dtype");
+  auto size_type = cpp_arg_to_torch_type(args["size"], size_expected, "size");
+if (out_type == "Tensor" && self_type == "Tensor" && dtype_type == "Missing" && size_type == "IntArrayRef") {
+  return Rcpp::wrap(cpp_torch_namespace_view_copy_out_out_Tensor_self_Tensor_size_IntArrayRef(Rcpp::as<XPtrTorchTensor>(args["out"]), Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchIntArrayRef>(args["size"])));
+}
+if (out_type == "Tensor" && self_type == "Tensor" && dtype_type == "ScalarType" && size_type == "Missing") {
+  return Rcpp::wrap(cpp_torch_namespace_view_copy_out_out_Tensor_self_Tensor_dtype_ScalarType(Rcpp::as<XPtrTorchTensor>(args["out"]), Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchDtype>(args["dtype"])));
+}
+  Rcpp::stop("No matching overload for view_copy_out");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace_vsplit (Rcpp::List args) {
+  static const std::vector<std::string> self_expected = {"Tensor"};
+  static const std::vector<std::string> indices_expected = {"IntArrayRef"};
+  static const std::vector<std::string> sections_expected = {"int64_t"};
+  auto self_type = cpp_arg_to_torch_type(args["self"], self_expected, "self");
+  auto indices_type = cpp_arg_to_torch_type(args["indices"], indices_expected, "indices");
+  auto sections_type = cpp_arg_to_torch_type(args["sections"], sections_expected, "sections");
+if (self_type == "Tensor" && indices_type == "Missing" && sections_type == "int64_t") {
+  return Rcpp::wrap(cpp_torch_namespace_vsplit_self_Tensor_sections_int64_t(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchint64_t>(args["sections"])));
+}
+if (self_type == "Tensor" && indices_type == "IntArrayRef" && sections_type == "Missing") {
+  return Rcpp::wrap(cpp_torch_namespace_vsplit_self_Tensor_indices_IntArrayRef(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchIntArrayRef>(args["indices"])));
+}
+  Rcpp::stop("No matching overload for vsplit");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace_where (Rcpp::List args) {
+  static const std::vector<std::string> condition_expected = {"Tensor"};
+  static const std::vector<std::string> self_expected = {"Tensor", "Scalar"};
+  static const std::vector<std::string> other_expected = {"Tensor", "Scalar"};
+  auto condition_type = cpp_arg_to_torch_type(args["condition"], condition_expected, "condition");
+  auto self_type = cpp_arg_to_torch_type(args["self"], self_expected, "self");
+  auto other_type = cpp_arg_to_torch_type(args["other"], other_expected, "other");
+if (condition_type == "Tensor" && self_type == "Tensor" && other_type == "Tensor") {
+  return Rcpp::wrap(cpp_torch_namespace_where_condition_Tensor_self_Tensor_other_Tensor(Rcpp::as<XPtrTorchTensor>(args["condition"]), Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchTensor>(args["other"])));
+}
+if (condition_type == "Tensor" && self_type == "Scalar" && other_type == "Tensor") {
+  return Rcpp::wrap(cpp_torch_namespace_where_condition_Tensor_self_Scalar_other_Tensor(Rcpp::as<XPtrTorchTensor>(args["condition"]), Rcpp::as<XPtrTorchScalar>(args["self"]), Rcpp::as<XPtrTorchTensor>(args["other"])));
+}
+if (condition_type == "Tensor" && self_type == "Tensor" && other_type == "Scalar") {
+  return Rcpp::wrap(cpp_torch_namespace_where_condition_Tensor_self_Tensor_other_Scalar(Rcpp::as<XPtrTorchTensor>(args["condition"]), Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchScalar>(args["other"])));
+}
+if (condition_type == "Tensor" && self_type == "Scalar" && other_type == "Scalar") {
+  return Rcpp::wrap(cpp_torch_namespace_where_condition_Tensor_self_Scalar_other_Scalar(Rcpp::as<XPtrTorchTensor>(args["condition"]), Rcpp::as<XPtrTorchScalar>(args["self"]), Rcpp::as<XPtrTorchScalar>(args["other"])));
+}
+if (condition_type == "Tensor" && self_type == "Missing" && other_type == "Missing") {
+  return Rcpp::wrap(cpp_torch_namespace_where_condition_Tensor(Rcpp::as<XPtrTorchTensor>(args["condition"])));
+}
+  Rcpp::stop("No matching overload for where");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace_xlogy (Rcpp::List args) {
+  static const std::vector<std::string> self_expected = {"Tensor", "Scalar"};
+  static const std::vector<std::string> other_expected = {"Tensor", "Scalar"};
+  auto self_type = cpp_arg_to_torch_type(args["self"], self_expected, "self");
+  auto other_type = cpp_arg_to_torch_type(args["other"], other_expected, "other");
+if (self_type == "Tensor" && other_type == "Tensor") {
+  return Rcpp::wrap(cpp_torch_namespace_xlogy_self_Tensor_other_Tensor(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchTensor>(args["other"])));
+}
+if (self_type == "Scalar" && other_type == "Tensor") {
+  return Rcpp::wrap(cpp_torch_namespace_xlogy_self_Scalar_other_Tensor(Rcpp::as<XPtrTorchScalar>(args["self"]), Rcpp::as<XPtrTorchTensor>(args["other"])));
+}
+if (self_type == "Tensor" && other_type == "Scalar") {
+  return Rcpp::wrap(cpp_torch_namespace_xlogy_self_Tensor_other_Scalar(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchScalar>(args["other"])));
+}
+  Rcpp::stop("No matching overload for xlogy");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace_xlogy_out (Rcpp::List args) {
+  static const std::vector<std::string> out_expected = {"Tensor"};
+  static const std::vector<std::string> self_expected = {"Tensor", "Scalar"};
+  static const std::vector<std::string> other_expected = {"Tensor", "Scalar"};
+  auto out_type = cpp_arg_to_torch_type(args["out"], out_expected, "out");
+  auto self_type = cpp_arg_to_torch_type(args["self"], self_expected, "self");
+  auto other_type = cpp_arg_to_torch_type(args["other"], other_expected, "other");
+if (out_type == "Tensor" && self_type == "Tensor" && other_type == "Tensor") {
+  return Rcpp::wrap(cpp_torch_namespace_xlogy_out_out_Tensor_self_Tensor_other_Tensor(Rcpp::as<XPtrTorchTensor>(args["out"]), Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchTensor>(args["other"])));
+}
+if (out_type == "Tensor" && self_type == "Scalar" && other_type == "Tensor") {
+  return Rcpp::wrap(cpp_torch_namespace_xlogy_out_out_Tensor_self_Scalar_other_Tensor(Rcpp::as<XPtrTorchTensor>(args["out"]), Rcpp::as<XPtrTorchScalar>(args["self"]), Rcpp::as<XPtrTorchTensor>(args["other"])));
+}
+if (out_type == "Tensor" && self_type == "Tensor" && other_type == "Scalar") {
+  return Rcpp::wrap(cpp_torch_namespace_xlogy_out_out_Tensor_self_Tensor_other_Scalar(Rcpp::as<XPtrTorchTensor>(args["out"]), Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchScalar>(args["other"])));
+}
+  Rcpp::stop("No matching overload for xlogy_out");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace_zeros (Rcpp::List args) {
+  static const std::vector<std::string> size_expected = {"IntArrayRef"};
+  static const std::vector<std::string> names_expected = {"DimnameList"};
+  auto size_type = cpp_arg_to_torch_type(args["size"], size_expected, "size");
+  auto names_type = cpp_arg_to_torch_type(args["names"], names_expected, "names");
+if (size_type == "IntArrayRef" && names_type == "DimnameList") {
+  return Rcpp::wrap(cpp_torch_namespace_zeros_size_IntArrayRef_names_DimnameList(Rcpp::as<XPtrTorchIntArrayRef>(args["size"]), Rcpp::as<XPtrTorchOptionalDimnameList>(args["names"]), Rcpp::as<XPtrTorchTensorOptions>(args["options"])));
+}
+if (size_type == "IntArrayRef" && names_type == "Missing") {
+  return Rcpp::wrap(cpp_torch_namespace_zeros_size_IntArrayRef(Rcpp::as<XPtrTorchIntArrayRef>(args["size"]), Rcpp::as<XPtrTorchTensorOptions>(args["options"])));
+}
+  Rcpp::stop("No matching overload for zeros");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_namespace_zeros_out (Rcpp::List args) {
+  static const std::vector<std::string> out_expected = {"Tensor"};
+  static const std::vector<std::string> size_expected = {"IntArrayRef"};
+  static const std::vector<std::string> names_expected = {"DimnameList"};
+  auto out_type = cpp_arg_to_torch_type(args["out"], out_expected, "out");
+  auto size_type = cpp_arg_to_torch_type(args["size"], size_expected, "size");
+  auto names_type = cpp_arg_to_torch_type(args["names"], names_expected, "names");
+if (out_type == "Tensor" && size_type == "IntArrayRef" && names_type == "Missing") {
+  return Rcpp::wrap(cpp_torch_namespace_zeros_out_out_Tensor_size_IntArrayRef(Rcpp::as<XPtrTorchTensor>(args["out"]), Rcpp::as<XPtrTorchIntArrayRef>(args["size"])));
+}
+if (out_type == "Tensor" && size_type == "IntArrayRef" && names_type == "DimnameList") {
+  return Rcpp::wrap(cpp_torch_namespace_zeros_out_out_Tensor_size_IntArrayRef_names_DimnameList(Rcpp::as<XPtrTorchTensor>(args["out"]), Rcpp::as<XPtrTorchIntArrayRef>(args["size"]), Rcpp::as<XPtrTorchOptionalDimnameList>(args["names"])));
+}
+  Rcpp::stop("No matching overload for zeros_out");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_method__to_sparse (Rcpp::List args) {
+  static const std::vector<std::string> self_expected = {"Tensor"};
+  static const std::vector<std::string> sparse_dim_expected = {"int64_t"};
+  auto self_type = cpp_arg_to_torch_type(args["self"], self_expected, "self");
+  auto sparse_dim_type = cpp_arg_to_torch_type(args["sparse_dim"], sparse_dim_expected, "sparse_dim");
+if (self_type == "Tensor" && sparse_dim_type == "int64_t") {
+  return Rcpp::wrap(cpp_torch_method__to_sparse_self_Tensor_sparse_dim_int64_t(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchint64_t>(args["sparse_dim"])));
+}
+if (self_type == "Tensor" && sparse_dim_type == "Missing") {
+  return Rcpp::wrap(cpp_torch_method__to_sparse_self_Tensor(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchLayout>(args["layout"]), Rcpp::as<XPtrTorchOptionalIntArrayRef>(args["blocksize"]), Rcpp::as<XPtrTorchoptional_int64_t>(args["dense_dim"])));
+}
+  Rcpp::stop("No matching overload for _to_sparse");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_method_align_to (Rcpp::List args) {
+  static const std::vector<std::string> self_expected = {"Tensor"};
+  static const std::vector<std::string> names_expected = {"DimnameList"};
+  static const std::vector<std::string> order_expected = {"DimnameList"};
+  static const std::vector<std::string> ellipsis_idx_expected = {"int64_t"};
+  auto self_type = cpp_arg_to_torch_type(args["self"], self_expected, "self");
+  auto names_type = cpp_arg_to_torch_type(args["names"], names_expected, "names");
+  auto order_type = cpp_arg_to_torch_type(args["order"], order_expected, "order");
+  auto ellipsis_idx_type = cpp_arg_to_torch_type(args["ellipsis_idx"], ellipsis_idx_expected, "ellipsis_idx");
+if (self_type == "Tensor" && names_type == "DimnameList" && order_type == "Missing" && ellipsis_idx_type == "Missing") {
+  return Rcpp::wrap(cpp_torch_method_align_to_self_Tensor_names_DimnameList(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchDimnameList>(args["names"])));
+}
+if (self_type == "Tensor" && names_type == "Missing" && order_type == "DimnameList" && ellipsis_idx_type == "int64_t") {
+  return Rcpp::wrap(cpp_torch_method_align_to_self_Tensor_order_DimnameList_ellipsis_idx_int64_t(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchDimnameList>(args["order"]), Rcpp::as<XPtrTorchint64_t>(args["ellipsis_idx"])));
+}
+  Rcpp::stop("No matching overload for align_to");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_method_all (Rcpp::List args) {
+  static const std::vector<std::string> self_expected = {"Tensor"};
+  static const std::vector<std::string> dim_expected = {"int64_t", "IntArrayRef", "Dimname"};
+  auto self_type = cpp_arg_to_torch_type(args["self"], self_expected, "self");
+  auto dim_type = cpp_arg_to_torch_type(args["dim"], dim_expected, "dim");
+if (self_type == "Tensor" && dim_type == "int64_t") {
+  return Rcpp::wrap(cpp_torch_method_all_self_Tensor_dim_int64_t(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchindex_int64_t>(args["dim"]), Rcpp::as<XPtrTorchbool>(args["keepdim"])));
+}
+if (self_type == "Tensor" && dim_type == "IntArrayRef") {
+  return Rcpp::wrap(cpp_torch_method_all_self_Tensor_dim_IntArrayRef(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchOptionalIndexIntArrayRef>(args["dim"]), Rcpp::as<XPtrTorchbool>(args["keepdim"])));
+}
+if (self_type == "Tensor" && dim_type == "Dimname") {
+  return Rcpp::wrap(cpp_torch_method_all_self_Tensor_dim_Dimname(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchDimname>(args["dim"]), Rcpp::as<XPtrTorchbool>(args["keepdim"])));
+}
+if (self_type == "Tensor" && dim_type == "Missing") {
+  return Rcpp::wrap(cpp_torch_method_all_self_Tensor(Rcpp::as<XPtrTorchTensor>(args["self"])));
+}
+  Rcpp::stop("No matching overload for all");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_method_any (Rcpp::List args) {
+  static const std::vector<std::string> self_expected = {"Tensor"};
+  static const std::vector<std::string> dim_expected = {"int64_t", "IntArrayRef", "Dimname"};
+  auto self_type = cpp_arg_to_torch_type(args["self"], self_expected, "self");
+  auto dim_type = cpp_arg_to_torch_type(args["dim"], dim_expected, "dim");
+if (self_type == "Tensor" && dim_type == "int64_t") {
+  return Rcpp::wrap(cpp_torch_method_any_self_Tensor_dim_int64_t(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchindex_int64_t>(args["dim"]), Rcpp::as<XPtrTorchbool>(args["keepdim"])));
+}
+if (self_type == "Tensor" && dim_type == "IntArrayRef") {
+  return Rcpp::wrap(cpp_torch_method_any_self_Tensor_dim_IntArrayRef(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchOptionalIndexIntArrayRef>(args["dim"]), Rcpp::as<XPtrTorchbool>(args["keepdim"])));
+}
+if (self_type == "Tensor" && dim_type == "Dimname") {
+  return Rcpp::wrap(cpp_torch_method_any_self_Tensor_dim_Dimname(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchDimname>(args["dim"]), Rcpp::as<XPtrTorchbool>(args["keepdim"])));
+}
+if (self_type == "Tensor" && dim_type == "Missing") {
+  return Rcpp::wrap(cpp_torch_method_any_self_Tensor(Rcpp::as<XPtrTorchTensor>(args["self"])));
+}
+  Rcpp::stop("No matching overload for any");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_method_argsort (Rcpp::List args) {
+  static const std::vector<std::string> self_expected = {"Tensor"};
+  static const std::vector<std::string> stable_expected = {"bool"};
+  static const std::vector<std::string> dim_expected = {"int64_t", "Dimname"};
+  auto self_type = cpp_arg_to_torch_type(args["self"], self_expected, "self");
+  auto stable_type = cpp_arg_to_torch_type(args["stable"], stable_expected, "stable");
+  auto dim_type = cpp_arg_to_torch_type(args["dim"], dim_expected, "dim");
+if (self_type == "Tensor" && stable_type == "Missing" && dim_type == "int64_t") {
+  return Rcpp::wrap(cpp_torch_method_argsort_self_Tensor_dim_int64_t(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchindex_int64_t>(args["dim"]), Rcpp::as<XPtrTorchbool>(args["descending"])));
+}
+if (self_type == "Tensor" && stable_type == "bool" && dim_type == "int64_t") {
+  return Rcpp::wrap(cpp_torch_method_argsort_self_Tensor_stable_bool_dim_int64_t(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchbool>(args["stable"]), Rcpp::as<XPtrTorchindex_int64_t>(args["dim"]), Rcpp::as<XPtrTorchbool>(args["descending"])));
+}
+if (self_type == "Tensor" && stable_type == "Missing" && dim_type == "Dimname") {
+  return Rcpp::wrap(cpp_torch_method_argsort_self_Tensor_dim_Dimname(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchDimname>(args["dim"]), Rcpp::as<XPtrTorchbool>(args["descending"])));
+}
+  Rcpp::stop("No matching overload for argsort");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_method_bernoulli (Rcpp::List args) {
+  static const std::vector<std::string> self_expected = {"Tensor"};
+  static const std::vector<std::string> p_expected = {"double"};
+  auto self_type = cpp_arg_to_torch_type(args["self"], self_expected, "self");
+  auto p_type = cpp_arg_to_torch_type(args["p"], p_expected, "p");
+if (self_type == "Tensor" && p_type == "Missing") {
+  return Rcpp::wrap(cpp_torch_method_bernoulli_self_Tensor(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchOptionalGenerator>(args["generator"])));
+}
+if (self_type == "Tensor" && p_type == "double") {
+  return Rcpp::wrap(cpp_torch_method_bernoulli_self_Tensor_p_double(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchdouble>(args["p"]), Rcpp::as<XPtrTorchOptionalGenerator>(args["generator"])));
+}
+  Rcpp::stop("No matching overload for bernoulli");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_method_bernoulli_ (Rcpp::List args) {
+  static const std::vector<std::string> self_expected = {"Tensor"};
+  static const std::vector<std::string> p_expected = {"Tensor", "double"};
+  auto self_type = cpp_arg_to_torch_type(args["self"], self_expected, "self");
+  auto p_type = cpp_arg_to_torch_type(args["p"], p_expected, "p");
+if (self_type == "Tensor" && p_type == "Tensor") {
+  return Rcpp::wrap(cpp_torch_method_bernoulli__self_Tensor_p_Tensor(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchTensor>(args["p"]), Rcpp::as<XPtrTorchOptionalGenerator>(args["generator"])));
+}
+if (self_type == "Tensor" && p_type == "double") {
+  return Rcpp::wrap(cpp_torch_method_bernoulli__self_Tensor_p_double(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchdouble>(args["p"]), Rcpp::as<XPtrTorchOptionalGenerator>(args["generator"])));
+}
+  Rcpp::stop("No matching overload for bernoulli_");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_method_clamp (Rcpp::List args) {
+  static const std::vector<std::string> self_expected = {"Tensor"};
+  static const std::vector<std::string> min_expected = {"Scalar", "Tensor"};
+  static const std::vector<std::string> max_expected = {"Scalar", "Tensor"};
+  auto self_type = cpp_arg_to_torch_type(args["self"], self_expected, "self");
+  auto min_type = cpp_arg_to_torch_type(args["min"], min_expected, "min");
+  auto max_type = cpp_arg_to_torch_type(args["max"], max_expected, "max");
+if (self_type == "Tensor" && min_type == "Scalar" && max_type == "Scalar") {
+  return Rcpp::wrap(cpp_torch_method_clamp_self_Tensor_min_Scalar_max_Scalar(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchoptional_scalar>(args["min"]), Rcpp::as<XPtrTorchoptional_scalar>(args["max"])));
+}
+if (self_type == "Tensor" && min_type == "Tensor" && max_type == "Tensor") {
+  return Rcpp::wrap(cpp_torch_method_clamp_self_Tensor_min_Tensor_max_Tensor(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchOptionalTensor>(args["min"]), Rcpp::as<XPtrTorchOptionalTensor>(args["max"])));
+}
+  Rcpp::stop("No matching overload for clamp");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_method_clamp_ (Rcpp::List args) {
+  static const std::vector<std::string> self_expected = {"Tensor"};
+  static const std::vector<std::string> min_expected = {"Scalar", "Tensor"};
+  static const std::vector<std::string> max_expected = {"Scalar", "Tensor"};
+  auto self_type = cpp_arg_to_torch_type(args["self"], self_expected, "self");
+  auto min_type = cpp_arg_to_torch_type(args["min"], min_expected, "min");
+  auto max_type = cpp_arg_to_torch_type(args["max"], max_expected, "max");
+if (self_type == "Tensor" && min_type == "Scalar" && max_type == "Scalar") {
+  return Rcpp::wrap(cpp_torch_method_clamp__self_Tensor_min_Scalar_max_Scalar(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchoptional_scalar>(args["min"]), Rcpp::as<XPtrTorchoptional_scalar>(args["max"])));
+}
+if (self_type == "Tensor" && min_type == "Tensor" && max_type == "Tensor") {
+  return Rcpp::wrap(cpp_torch_method_clamp__self_Tensor_min_Tensor_max_Tensor(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchOptionalTensor>(args["min"]), Rcpp::as<XPtrTorchOptionalTensor>(args["max"])));
+}
+  Rcpp::stop("No matching overload for clamp_");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_method_clip (Rcpp::List args) {
+  static const std::vector<std::string> self_expected = {"Tensor"};
+  static const std::vector<std::string> min_expected = {"Scalar", "Tensor"};
+  static const std::vector<std::string> max_expected = {"Scalar", "Tensor"};
+  auto self_type = cpp_arg_to_torch_type(args["self"], self_expected, "self");
+  auto min_type = cpp_arg_to_torch_type(args["min"], min_expected, "min");
+  auto max_type = cpp_arg_to_torch_type(args["max"], max_expected, "max");
+if (self_type == "Tensor" && min_type == "Scalar" && max_type == "Scalar") {
+  return Rcpp::wrap(cpp_torch_method_clip_self_Tensor_min_Scalar_max_Scalar(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchoptional_scalar>(args["min"]), Rcpp::as<XPtrTorchoptional_scalar>(args["max"])));
+}
+if (self_type == "Tensor" && min_type == "Tensor" && max_type == "Tensor") {
+  return Rcpp::wrap(cpp_torch_method_clip_self_Tensor_min_Tensor_max_Tensor(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchOptionalTensor>(args["min"]), Rcpp::as<XPtrTorchOptionalTensor>(args["max"])));
+}
+  Rcpp::stop("No matching overload for clip");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_method_clip_ (Rcpp::List args) {
+  static const std::vector<std::string> self_expected = {"Tensor"};
+  static const std::vector<std::string> min_expected = {"Scalar", "Tensor"};
+  static const std::vector<std::string> max_expected = {"Scalar", "Tensor"};
+  auto self_type = cpp_arg_to_torch_type(args["self"], self_expected, "self");
+  auto min_type = cpp_arg_to_torch_type(args["min"], min_expected, "min");
+  auto max_type = cpp_arg_to_torch_type(args["max"], max_expected, "max");
+if (self_type == "Tensor" && min_type == "Scalar" && max_type == "Scalar") {
+  return Rcpp::wrap(cpp_torch_method_clip__self_Tensor_min_Scalar_max_Scalar(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchoptional_scalar>(args["min"]), Rcpp::as<XPtrTorchoptional_scalar>(args["max"])));
+}
+if (self_type == "Tensor" && min_type == "Tensor" && max_type == "Tensor") {
+  return Rcpp::wrap(cpp_torch_method_clip__self_Tensor_min_Tensor_max_Tensor(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchOptionalTensor>(args["min"]), Rcpp::as<XPtrTorchOptionalTensor>(args["max"])));
+}
+  Rcpp::stop("No matching overload for clip_");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_method_count_nonzero (Rcpp::List args) {
+  static const std::vector<std::string> self_expected = {"Tensor"};
+  static const std::vector<std::string> dim_expected = {"IntArrayRef", "int64_t"};
+  auto self_type = cpp_arg_to_torch_type(args["self"], self_expected, "self");
+  auto dim_type = cpp_arg_to_torch_type(args["dim"], dim_expected, "dim");
+if (self_type == "Tensor" && dim_type == "IntArrayRef") {
+  return Rcpp::wrap(cpp_torch_method_count_nonzero_self_Tensor_dim_IntArrayRef(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchIndexIntArrayRef>(args["dim"])));
+}
+if (self_type == "Tensor" && dim_type == "int64_t") {
+  return Rcpp::wrap(cpp_torch_method_count_nonzero_self_Tensor_dim_int64_t(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchoptional_index_int64_t>(args["dim"])));
+}
+  Rcpp::stop("No matching overload for count_nonzero");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_method_diagonal (Rcpp::List args) {
+  static const std::vector<std::string> self_expected = {"Tensor"};
+  static const std::vector<std::string> outdim_expected = {"Dimname"};
+  static const std::vector<std::string> dim1_expected = {"int64_t", "Dimname"};
+  static const std::vector<std::string> dim2_expected = {"int64_t", "Dimname"};
+  auto self_type = cpp_arg_to_torch_type(args["self"], self_expected, "self");
+  auto outdim_type = cpp_arg_to_torch_type(args["outdim"], outdim_expected, "outdim");
+  auto dim1_type = cpp_arg_to_torch_type(args["dim1"], dim1_expected, "dim1");
+  auto dim2_type = cpp_arg_to_torch_type(args["dim2"], dim2_expected, "dim2");
+if (self_type == "Tensor" && outdim_type == "Missing" && dim1_type == "int64_t" && dim2_type == "int64_t") {
+  return Rcpp::wrap(cpp_torch_method_diagonal_self_Tensor_dim1_int64_t_dim2_int64_t(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchint64_t>(args["offset"]), Rcpp::as<XPtrTorchindex_int64_t>(args["dim1"]), Rcpp::as<XPtrTorchindex_int64_t>(args["dim2"])));
+}
+if (self_type == "Tensor" && outdim_type == "Dimname" && dim1_type == "Dimname" && dim2_type == "Dimname") {
+  return Rcpp::wrap(cpp_torch_method_diagonal_self_Tensor_outdim_Dimname_dim1_Dimname_dim2_Dimname(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchDimname>(args["outdim"]), Rcpp::as<XPtrTorchDimname>(args["dim1"]), Rcpp::as<XPtrTorchDimname>(args["dim2"]), Rcpp::as<XPtrTorchint64_t>(args["offset"])));
+}
+  Rcpp::stop("No matching overload for diagonal");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_method_div (Rcpp::List args) {
+  static const std::vector<std::string> self_expected = {"Tensor"};
+  static const std::vector<std::string> other_expected = {"Tensor", "Scalar"};
+  static const std::vector<std::string> rounding_mode_expected = {"c10::string_view"};
+  auto self_type = cpp_arg_to_torch_type(args["self"], self_expected, "self");
+  auto other_type = cpp_arg_to_torch_type(args["other"], other_expected, "other");
+  auto rounding_mode_type = cpp_arg_to_torch_type(args["rounding_mode"], rounding_mode_expected, "rounding_mode");
+if (self_type == "Tensor" && other_type == "Tensor" && rounding_mode_type == "Missing") {
+  return Rcpp::wrap(cpp_torch_method_div_self_Tensor_other_Tensor(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchTensor>(args["other"])));
+}
+if (self_type == "Tensor" && other_type == "Tensor" && rounding_mode_type == "c10::string_view") {
+  return Rcpp::wrap(cpp_torch_method_div_self_Tensor_other_Tensor_rounding_mode_c10string_view(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchTensor>(args["other"]), Rcpp::as<XPtrTorchoptional_string_view>(args["rounding_mode"])));
+}
+if (self_type == "Tensor" && other_type == "Scalar" && rounding_mode_type == "Missing") {
+  return Rcpp::wrap(cpp_torch_method_div_self_Tensor_other_Scalar(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchScalar>(args["other"])));
+}
+if (self_type == "Tensor" && other_type == "Scalar" && rounding_mode_type == "c10::string_view") {
+  return Rcpp::wrap(cpp_torch_method_div_self_Tensor_other_Scalar_rounding_mode_c10string_view(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchScalar>(args["other"]), Rcpp::as<XPtrTorchoptional_string_view>(args["rounding_mode"])));
+}
+  Rcpp::stop("No matching overload for div");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_method_div_ (Rcpp::List args) {
+  static const std::vector<std::string> self_expected = {"Tensor"};
+  static const std::vector<std::string> other_expected = {"Tensor", "Scalar"};
+  static const std::vector<std::string> rounding_mode_expected = {"c10::string_view"};
+  auto self_type = cpp_arg_to_torch_type(args["self"], self_expected, "self");
+  auto other_type = cpp_arg_to_torch_type(args["other"], other_expected, "other");
+  auto rounding_mode_type = cpp_arg_to_torch_type(args["rounding_mode"], rounding_mode_expected, "rounding_mode");
+if (self_type == "Tensor" && other_type == "Tensor" && rounding_mode_type == "Missing") {
+  return Rcpp::wrap(cpp_torch_method_div__self_Tensor_other_Tensor(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchTensor>(args["other"])));
+}
+if (self_type == "Tensor" && other_type == "Tensor" && rounding_mode_type == "c10::string_view") {
+  return Rcpp::wrap(cpp_torch_method_div__self_Tensor_other_Tensor_rounding_mode_c10string_view(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchTensor>(args["other"]), Rcpp::as<XPtrTorchoptional_string_view>(args["rounding_mode"])));
+}
+if (self_type == "Tensor" && other_type == "Scalar" && rounding_mode_type == "Missing") {
+  return Rcpp::wrap(cpp_torch_method_div__self_Tensor_other_Scalar(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchScalar>(args["other"])));
+}
+if (self_type == "Tensor" && other_type == "Scalar" && rounding_mode_type == "c10::string_view") {
+  return Rcpp::wrap(cpp_torch_method_div__self_Tensor_other_Scalar_rounding_mode_c10string_view(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchScalar>(args["other"]), Rcpp::as<XPtrTorchoptional_string_view>(args["rounding_mode"])));
+}
+  Rcpp::stop("No matching overload for div_");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_method_divide (Rcpp::List args) {
+  static const std::vector<std::string> self_expected = {"Tensor"};
+  static const std::vector<std::string> other_expected = {"Tensor", "Scalar"};
+  static const std::vector<std::string> rounding_mode_expected = {"c10::string_view"};
+  auto self_type = cpp_arg_to_torch_type(args["self"], self_expected, "self");
+  auto other_type = cpp_arg_to_torch_type(args["other"], other_expected, "other");
+  auto rounding_mode_type = cpp_arg_to_torch_type(args["rounding_mode"], rounding_mode_expected, "rounding_mode");
+if (self_type == "Tensor" && other_type == "Tensor" && rounding_mode_type == "Missing") {
+  return Rcpp::wrap(cpp_torch_method_divide_self_Tensor_other_Tensor(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchTensor>(args["other"])));
+}
+if (self_type == "Tensor" && other_type == "Scalar" && rounding_mode_type == "Missing") {
+  return Rcpp::wrap(cpp_torch_method_divide_self_Tensor_other_Scalar(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchScalar>(args["other"])));
+}
+if (self_type == "Tensor" && other_type == "Tensor" && rounding_mode_type == "c10::string_view") {
+  return Rcpp::wrap(cpp_torch_method_divide_self_Tensor_other_Tensor_rounding_mode_c10string_view(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchTensor>(args["other"]), Rcpp::as<XPtrTorchoptional_string_view>(args["rounding_mode"])));
+}
+if (self_type == "Tensor" && other_type == "Scalar" && rounding_mode_type == "c10::string_view") {
+  return Rcpp::wrap(cpp_torch_method_divide_self_Tensor_other_Scalar_rounding_mode_c10string_view(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchScalar>(args["other"]), Rcpp::as<XPtrTorchoptional_string_view>(args["rounding_mode"])));
+}
+  Rcpp::stop("No matching overload for divide");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_method_divide_ (Rcpp::List args) {
+  static const std::vector<std::string> self_expected = {"Tensor"};
+  static const std::vector<std::string> other_expected = {"Tensor", "Scalar"};
+  static const std::vector<std::string> rounding_mode_expected = {"c10::string_view"};
+  auto self_type = cpp_arg_to_torch_type(args["self"], self_expected, "self");
+  auto other_type = cpp_arg_to_torch_type(args["other"], other_expected, "other");
+  auto rounding_mode_type = cpp_arg_to_torch_type(args["rounding_mode"], rounding_mode_expected, "rounding_mode");
+if (self_type == "Tensor" && other_type == "Tensor" && rounding_mode_type == "Missing") {
+  return Rcpp::wrap(cpp_torch_method_divide__self_Tensor_other_Tensor(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchTensor>(args["other"])));
+}
+if (self_type == "Tensor" && other_type == "Scalar" && rounding_mode_type == "Missing") {
+  return Rcpp::wrap(cpp_torch_method_divide__self_Tensor_other_Scalar(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchScalar>(args["other"])));
+}
+if (self_type == "Tensor" && other_type == "Tensor" && rounding_mode_type == "c10::string_view") {
+  return Rcpp::wrap(cpp_torch_method_divide__self_Tensor_other_Tensor_rounding_mode_c10string_view(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchTensor>(args["other"]), Rcpp::as<XPtrTorchoptional_string_view>(args["rounding_mode"])));
+}
+if (self_type == "Tensor" && other_type == "Scalar" && rounding_mode_type == "c10::string_view") {
+  return Rcpp::wrap(cpp_torch_method_divide__self_Tensor_other_Scalar_rounding_mode_c10string_view(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchScalar>(args["other"]), Rcpp::as<XPtrTorchoptional_string_view>(args["rounding_mode"])));
+}
+  Rcpp::stop("No matching overload for divide_");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_method_dsplit (Rcpp::List args) {
+  static const std::vector<std::string> self_expected = {"Tensor"};
+  static const std::vector<std::string> indices_expected = {"IntArrayRef"};
+  static const std::vector<std::string> sections_expected = {"int64_t"};
+  auto self_type = cpp_arg_to_torch_type(args["self"], self_expected, "self");
+  auto indices_type = cpp_arg_to_torch_type(args["indices"], indices_expected, "indices");
+  auto sections_type = cpp_arg_to_torch_type(args["sections"], sections_expected, "sections");
+if (self_type == "Tensor" && indices_type == "Missing" && sections_type == "int64_t") {
+  return Rcpp::wrap(cpp_torch_method_dsplit_self_Tensor_sections_int64_t(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchint64_t>(args["sections"])));
+}
+if (self_type == "Tensor" && indices_type == "IntArrayRef" && sections_type == "Missing") {
+  return Rcpp::wrap(cpp_torch_method_dsplit_self_Tensor_indices_IntArrayRef(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchIntArrayRef>(args["indices"])));
+}
+  Rcpp::stop("No matching overload for dsplit");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_method_flatten (Rcpp::List args) {
+  static const std::vector<std::string> self_expected = {"Tensor"};
+  static const std::vector<std::string> dims_expected = {"DimnameList"};
+  static const std::vector<std::string> start_dim_expected = {"int64_t", "Dimname"};
+  static const std::vector<std::string> end_dim_expected = {"int64_t", "Dimname"};
+  static const std::vector<std::string> out_dim_expected = {"Dimname"};
+  auto self_type = cpp_arg_to_torch_type(args["self"], self_expected, "self");
+  auto dims_type = cpp_arg_to_torch_type(args["dims"], dims_expected, "dims");
+  auto start_dim_type = cpp_arg_to_torch_type(args["start_dim"], start_dim_expected, "start_dim");
+  auto end_dim_type = cpp_arg_to_torch_type(args["end_dim"], end_dim_expected, "end_dim");
+  auto out_dim_type = cpp_arg_to_torch_type(args["out_dim"], out_dim_expected, "out_dim");
+if (self_type == "Tensor" && dims_type == "Missing" && start_dim_type == "int64_t" && end_dim_type == "int64_t" && out_dim_type == "Missing") {
+  return Rcpp::wrap(cpp_torch_method_flatten_self_Tensor_start_dim_int64_t_end_dim_int64_t(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchindex_int64_t>(args["start_dim"]), Rcpp::as<XPtrTorchindex_int64_t>(args["end_dim"])));
+}
+if (self_type == "Tensor" && dims_type == "Missing" && start_dim_type == "int64_t" && end_dim_type == "int64_t" && out_dim_type == "Dimname") {
+  return Rcpp::wrap(cpp_torch_method_flatten_self_Tensor_start_dim_int64_t_end_dim_int64_t_out_dim_Dimname(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchindex_int64_t>(args["start_dim"]), Rcpp::as<XPtrTorchindex_int64_t>(args["end_dim"]), Rcpp::as<XPtrTorchDimname>(args["out_dim"])));
+}
+if (self_type == "Tensor" && dims_type == "Missing" && start_dim_type == "Dimname" && end_dim_type == "Dimname" && out_dim_type == "Dimname") {
+  return Rcpp::wrap(cpp_torch_method_flatten_self_Tensor_start_dim_Dimname_end_dim_Dimname_out_dim_Dimname(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchDimname>(args["start_dim"]), Rcpp::as<XPtrTorchDimname>(args["end_dim"]), Rcpp::as<XPtrTorchDimname>(args["out_dim"])));
+}
+if (self_type == "Tensor" && dims_type == "DimnameList" && start_dim_type == "Missing" && end_dim_type == "Missing" && out_dim_type == "Dimname") {
+  return Rcpp::wrap(cpp_torch_method_flatten_self_Tensor_dims_DimnameList_out_dim_Dimname(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchDimnameList>(args["dims"]), Rcpp::as<XPtrTorchDimname>(args["out_dim"])));
+}
+  Rcpp::stop("No matching overload for flatten");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_method_histogram (Rcpp::List args) {
+  static const std::vector<std::string> self_expected = {"Tensor"};
+  static const std::vector<std::string> bins_expected = {"Tensor", "int64_t"};
+  auto self_type = cpp_arg_to_torch_type(args["self"], self_expected, "self");
+  auto bins_type = cpp_arg_to_torch_type(args["bins"], bins_expected, "bins");
+if (self_type == "Tensor" && bins_type == "Tensor") {
+  return Rcpp::wrap(cpp_torch_method_histogram_self_Tensor_bins_Tensor(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchTensor>(args["bins"]), Rcpp::as<XPtrTorchOptionalTensor>(args["weight"]), Rcpp::as<XPtrTorchbool>(args["density"])));
+}
+if (self_type == "Tensor" && bins_type == "int64_t") {
+  return Rcpp::wrap(cpp_torch_method_histogram_self_Tensor_bins_int64_t(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchint64_t>(args["bins"]), Rcpp::as<XPtrTorchOptionalDoubleArrayRef>(args["range"]), Rcpp::as<XPtrTorchOptionalTensor>(args["weight"]), Rcpp::as<XPtrTorchbool>(args["density"])));
+}
+  Rcpp::stop("No matching overload for histogram");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_method_hsplit (Rcpp::List args) {
+  static const std::vector<std::string> self_expected = {"Tensor"};
+  static const std::vector<std::string> indices_expected = {"IntArrayRef"};
+  static const std::vector<std::string> sections_expected = {"int64_t"};
+  auto self_type = cpp_arg_to_torch_type(args["self"], self_expected, "self");
+  auto indices_type = cpp_arg_to_torch_type(args["indices"], indices_expected, "indices");
+  auto sections_type = cpp_arg_to_torch_type(args["sections"], sections_expected, "sections");
+if (self_type == "Tensor" && indices_type == "Missing" && sections_type == "int64_t") {
+  return Rcpp::wrap(cpp_torch_method_hsplit_self_Tensor_sections_int64_t(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchint64_t>(args["sections"])));
+}
+if (self_type == "Tensor" && indices_type == "IntArrayRef" && sections_type == "Missing") {
+  return Rcpp::wrap(cpp_torch_method_hsplit_self_Tensor_indices_IntArrayRef(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchIntArrayRef>(args["indices"])));
+}
+  Rcpp::stop("No matching overload for hsplit");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_method_index_fill (Rcpp::List args) {
+  static const std::vector<std::string> self_expected = {"Tensor"};
+  static const std::vector<std::string> dim_expected = {"int64_t", "Dimname"};
+  static const std::vector<std::string> index_expected = {"Tensor"};
+  static const std::vector<std::string> value_expected = {"Scalar", "Tensor"};
+  auto self_type = cpp_arg_to_torch_type(args["self"], self_expected, "self");
+  auto dim_type = cpp_arg_to_torch_type(args["dim"], dim_expected, "dim");
+  auto index_type = cpp_arg_to_torch_type(args["index"], index_expected, "index");
+  auto value_type = cpp_arg_to_torch_type(args["value"], value_expected, "value");
+if (self_type == "Tensor" && dim_type == "int64_t" && index_type == "Tensor" && value_type == "Scalar") {
+  return Rcpp::wrap(cpp_torch_method_index_fill_self_Tensor_dim_int64_t_index_Tensor_value_Scalar(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchindex_int64_t>(args["dim"]), Rcpp::as<XPtrTorchIndexTensor>(args["index"]), Rcpp::as<XPtrTorchScalar>(args["value"])));
+}
+if (self_type == "Tensor" && dim_type == "int64_t" && index_type == "Tensor" && value_type == "Tensor") {
+  return Rcpp::wrap(cpp_torch_method_index_fill_self_Tensor_dim_int64_t_index_Tensor_value_Tensor(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchindex_int64_t>(args["dim"]), Rcpp::as<XPtrTorchIndexTensor>(args["index"]), Rcpp::as<XPtrTorchTensor>(args["value"])));
+}
+if (self_type == "Tensor" && dim_type == "Dimname" && index_type == "Tensor" && value_type == "Scalar") {
+  return Rcpp::wrap(cpp_torch_method_index_fill_self_Tensor_dim_Dimname_index_Tensor_value_Scalar(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchDimname>(args["dim"]), Rcpp::as<XPtrTorchIndexTensor>(args["index"]), Rcpp::as<XPtrTorchScalar>(args["value"])));
+}
+if (self_type == "Tensor" && dim_type == "Dimname" && index_type == "Tensor" && value_type == "Tensor") {
+  return Rcpp::wrap(cpp_torch_method_index_fill_self_Tensor_dim_Dimname_index_Tensor_value_Tensor(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchDimname>(args["dim"]), Rcpp::as<XPtrTorchIndexTensor>(args["index"]), Rcpp::as<XPtrTorchTensor>(args["value"])));
+}
+  Rcpp::stop("No matching overload for index_fill");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_method_index_fill_ (Rcpp::List args) {
+  static const std::vector<std::string> self_expected = {"Tensor"};
+  static const std::vector<std::string> dim_expected = {"int64_t", "Dimname"};
+  static const std::vector<std::string> index_expected = {"Tensor"};
+  static const std::vector<std::string> value_expected = {"Scalar", "Tensor"};
+  auto self_type = cpp_arg_to_torch_type(args["self"], self_expected, "self");
+  auto dim_type = cpp_arg_to_torch_type(args["dim"], dim_expected, "dim");
+  auto index_type = cpp_arg_to_torch_type(args["index"], index_expected, "index");
+  auto value_type = cpp_arg_to_torch_type(args["value"], value_expected, "value");
+if (self_type == "Tensor" && dim_type == "int64_t" && index_type == "Tensor" && value_type == "Scalar") {
+  return Rcpp::wrap(cpp_torch_method_index_fill__self_Tensor_dim_int64_t_index_Tensor_value_Scalar(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchindex_int64_t>(args["dim"]), Rcpp::as<XPtrTorchIndexTensor>(args["index"]), Rcpp::as<XPtrTorchScalar>(args["value"])));
+}
+if (self_type == "Tensor" && dim_type == "int64_t" && index_type == "Tensor" && value_type == "Tensor") {
+  return Rcpp::wrap(cpp_torch_method_index_fill__self_Tensor_dim_int64_t_index_Tensor_value_Tensor(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchindex_int64_t>(args["dim"]), Rcpp::as<XPtrTorchIndexTensor>(args["index"]), Rcpp::as<XPtrTorchTensor>(args["value"])));
+}
+if (self_type == "Tensor" && dim_type == "Dimname" && index_type == "Tensor" && value_type == "Scalar") {
+  return Rcpp::wrap(cpp_torch_method_index_fill__self_Tensor_dim_Dimname_index_Tensor_value_Scalar(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchDimname>(args["dim"]), Rcpp::as<XPtrTorchIndexTensor>(args["index"]), Rcpp::as<XPtrTorchScalar>(args["value"])));
+}
+if (self_type == "Tensor" && dim_type == "Dimname" && index_type == "Tensor" && value_type == "Tensor") {
+  return Rcpp::wrap(cpp_torch_method_index_fill__self_Tensor_dim_Dimname_index_Tensor_value_Tensor(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchDimname>(args["dim"]), Rcpp::as<XPtrTorchIndexTensor>(args["index"]), Rcpp::as<XPtrTorchTensor>(args["value"])));
+}
+  Rcpp::stop("No matching overload for index_fill_");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_method_max (Rcpp::List args) {
+  static const std::vector<std::string> self_expected = {"Tensor"};
+  static const std::vector<std::string> dim_expected = {"int64_t", "Dimname"};
+  static const std::vector<std::string> other_expected = {"Tensor"};
+  auto self_type = cpp_arg_to_torch_type(args["self"], self_expected, "self");
+  auto dim_type = cpp_arg_to_torch_type(args["dim"], dim_expected, "dim");
+  auto other_type = cpp_arg_to_torch_type(args["other"], other_expected, "other");
+if (self_type == "Tensor" && dim_type == "int64_t" && other_type == "Missing") {
+  return Rcpp::wrap(cpp_torch_method_max_self_Tensor_dim_int64_t(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchindex_int64_t>(args["dim"]), Rcpp::as<XPtrTorchbool>(args["keepdim"])));
+}
+if (self_type == "Tensor" && dim_type == "Dimname" && other_type == "Missing") {
+  return Rcpp::wrap(cpp_torch_method_max_self_Tensor_dim_Dimname(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchDimname>(args["dim"]), Rcpp::as<XPtrTorchbool>(args["keepdim"])));
+}
+if (self_type == "Tensor" && dim_type == "Missing" && other_type == "Missing") {
+  return Rcpp::wrap(cpp_torch_method_max_self_Tensor(Rcpp::as<XPtrTorchTensor>(args["self"])));
+}
+if (self_type == "Tensor" && dim_type == "Missing" && other_type == "Tensor") {
+  return Rcpp::wrap(cpp_torch_method_max_self_Tensor_other_Tensor(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchTensor>(args["other"])));
+}
+  Rcpp::stop("No matching overload for max");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_method_mean (Rcpp::List args) {
+  static const std::vector<std::string> self_expected = {"Tensor"};
+  static const std::vector<std::string> dim_expected = {"IntArrayRef", "DimnameList"};
+  auto self_type = cpp_arg_to_torch_type(args["self"], self_expected, "self");
+  auto dim_type = cpp_arg_to_torch_type(args["dim"], dim_expected, "dim");
+if (self_type == "Tensor" && dim_type == "Missing") {
+  return Rcpp::wrap(cpp_torch_method_mean_self_Tensor(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchoptional_scalar_type>(args["dtype"])));
+}
+if (self_type == "Tensor" && dim_type == "IntArrayRef") {
+  return Rcpp::wrap(cpp_torch_method_mean_self_Tensor_dim_IntArrayRef(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchOptionalIndexIntArrayRef>(args["dim"]), Rcpp::as<XPtrTorchbool>(args["keepdim"]), Rcpp::as<XPtrTorchoptional_scalar_type>(args["dtype"])));
+}
+if (self_type == "Tensor" && dim_type == "DimnameList") {
+  return Rcpp::wrap(cpp_torch_method_mean_self_Tensor_dim_DimnameList(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchDimnameList>(args["dim"]), Rcpp::as<XPtrTorchbool>(args["keepdim"]), Rcpp::as<XPtrTorchoptional_scalar_type>(args["dtype"])));
+}
+  Rcpp::stop("No matching overload for mean");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_method_median (Rcpp::List args) {
+  static const std::vector<std::string> self_expected = {"Tensor"};
+  static const std::vector<std::string> dim_expected = {"int64_t", "Dimname"};
+  auto self_type = cpp_arg_to_torch_type(args["self"], self_expected, "self");
+  auto dim_type = cpp_arg_to_torch_type(args["dim"], dim_expected, "dim");
+if (self_type == "Tensor" && dim_type == "Missing") {
+  return Rcpp::wrap(cpp_torch_method_median_self_Tensor(Rcpp::as<XPtrTorchTensor>(args["self"])));
+}
+if (self_type == "Tensor" && dim_type == "int64_t") {
+  return Rcpp::wrap(cpp_torch_method_median_self_Tensor_dim_int64_t(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchindex_int64_t>(args["dim"]), Rcpp::as<XPtrTorchbool>(args["keepdim"])));
+}
+if (self_type == "Tensor" && dim_type == "Dimname") {
+  return Rcpp::wrap(cpp_torch_method_median_self_Tensor_dim_Dimname(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchDimname>(args["dim"]), Rcpp::as<XPtrTorchbool>(args["keepdim"])));
+}
+  Rcpp::stop("No matching overload for median");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_method_min (Rcpp::List args) {
+  static const std::vector<std::string> self_expected = {"Tensor"};
+  static const std::vector<std::string> dim_expected = {"int64_t", "Dimname"};
+  static const std::vector<std::string> other_expected = {"Tensor"};
+  auto self_type = cpp_arg_to_torch_type(args["self"], self_expected, "self");
+  auto dim_type = cpp_arg_to_torch_type(args["dim"], dim_expected, "dim");
+  auto other_type = cpp_arg_to_torch_type(args["other"], other_expected, "other");
+if (self_type == "Tensor" && dim_type == "int64_t" && other_type == "Missing") {
+  return Rcpp::wrap(cpp_torch_method_min_self_Tensor_dim_int64_t(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchindex_int64_t>(args["dim"]), Rcpp::as<XPtrTorchbool>(args["keepdim"])));
+}
+if (self_type == "Tensor" && dim_type == "Dimname" && other_type == "Missing") {
+  return Rcpp::wrap(cpp_torch_method_min_self_Tensor_dim_Dimname(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchDimname>(args["dim"]), Rcpp::as<XPtrTorchbool>(args["keepdim"])));
+}
+if (self_type == "Tensor" && dim_type == "Missing" && other_type == "Missing") {
+  return Rcpp::wrap(cpp_torch_method_min_self_Tensor(Rcpp::as<XPtrTorchTensor>(args["self"])));
+}
+if (self_type == "Tensor" && dim_type == "Missing" && other_type == "Tensor") {
+  return Rcpp::wrap(cpp_torch_method_min_self_Tensor_other_Tensor(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchTensor>(args["other"])));
+}
+  Rcpp::stop("No matching overload for min");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_method_moveaxis (Rcpp::List args) {
+  static const std::vector<std::string> self_expected = {"Tensor"};
+  static const std::vector<std::string> source_expected = {"IntArrayRef", "int64_t"};
+  static const std::vector<std::string> destination_expected = {"IntArrayRef", "int64_t"};
+  auto self_type = cpp_arg_to_torch_type(args["self"], self_expected, "self");
+  auto source_type = cpp_arg_to_torch_type(args["source"], source_expected, "source");
+  auto destination_type = cpp_arg_to_torch_type(args["destination"], destination_expected, "destination");
+if (self_type == "Tensor" && source_type == "IntArrayRef" && destination_type == "IntArrayRef") {
+  return Rcpp::wrap(cpp_torch_method_moveaxis_self_Tensor_source_IntArrayRef_destination_IntArrayRef(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchIntArrayRef>(args["source"]), Rcpp::as<XPtrTorchIntArrayRef>(args["destination"])));
+}
+if (self_type == "Tensor" && source_type == "int64_t" && destination_type == "int64_t") {
+  return Rcpp::wrap(cpp_torch_method_moveaxis_self_Tensor_source_int64_t_destination_int64_t(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchint64_t>(args["source"]), Rcpp::as<XPtrTorchint64_t>(args["destination"])));
+}
+  Rcpp::stop("No matching overload for moveaxis");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_method_movedim (Rcpp::List args) {
+  static const std::vector<std::string> self_expected = {"Tensor"};
+  static const std::vector<std::string> source_expected = {"IntArrayRef", "int64_t"};
+  static const std::vector<std::string> destination_expected = {"IntArrayRef", "int64_t"};
+  auto self_type = cpp_arg_to_torch_type(args["self"], self_expected, "self");
+  auto source_type = cpp_arg_to_torch_type(args["source"], source_expected, "source");
+  auto destination_type = cpp_arg_to_torch_type(args["destination"], destination_expected, "destination");
+if (self_type == "Tensor" && source_type == "IntArrayRef" && destination_type == "IntArrayRef") {
+  return Rcpp::wrap(cpp_torch_method_movedim_self_Tensor_source_IntArrayRef_destination_IntArrayRef(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchIntArrayRef>(args["source"]), Rcpp::as<XPtrTorchIntArrayRef>(args["destination"])));
+}
+if (self_type == "Tensor" && source_type == "int64_t" && destination_type == "int64_t") {
+  return Rcpp::wrap(cpp_torch_method_movedim_self_Tensor_source_int64_t_destination_int64_t(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchint64_t>(args["source"]), Rcpp::as<XPtrTorchint64_t>(args["destination"])));
+}
+  Rcpp::stop("No matching overload for movedim");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_method_nanmedian (Rcpp::List args) {
+  static const std::vector<std::string> self_expected = {"Tensor"};
+  static const std::vector<std::string> dim_expected = {"int64_t", "Dimname"};
+  auto self_type = cpp_arg_to_torch_type(args["self"], self_expected, "self");
+  auto dim_type = cpp_arg_to_torch_type(args["dim"], dim_expected, "dim");
+if (self_type == "Tensor" && dim_type == "Missing") {
+  return Rcpp::wrap(cpp_torch_method_nanmedian_self_Tensor(Rcpp::as<XPtrTorchTensor>(args["self"])));
+}
+if (self_type == "Tensor" && dim_type == "int64_t") {
+  return Rcpp::wrap(cpp_torch_method_nanmedian_self_Tensor_dim_int64_t(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchindex_int64_t>(args["dim"]), Rcpp::as<XPtrTorchbool>(args["keepdim"])));
+}
+if (self_type == "Tensor" && dim_type == "Dimname") {
+  return Rcpp::wrap(cpp_torch_method_nanmedian_self_Tensor_dim_Dimname(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchDimname>(args["dim"]), Rcpp::as<XPtrTorchbool>(args["keepdim"])));
+}
+  Rcpp::stop("No matching overload for nanmedian");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_method_nanquantile (Rcpp::List args) {
+  static const std::vector<std::string> self_expected = {"Tensor"};
+  static const std::vector<std::string> q_expected = {"Tensor", "double"};
+  auto self_type = cpp_arg_to_torch_type(args["self"], self_expected, "self");
+  auto q_type = cpp_arg_to_torch_type(args["q"], q_expected, "q");
+if (self_type == "Tensor" && q_type == "Tensor") {
+  return Rcpp::wrap(cpp_torch_method_nanquantile_self_Tensor_q_Tensor(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchTensor>(args["q"]), Rcpp::as<XPtrTorchoptional_index_int64_t>(args["dim"]), Rcpp::as<XPtrTorchbool>(args["keepdim"]), Rcpp::as<XPtrTorchstring_view>(args["interpolation"])));
+}
+if (self_type == "Tensor" && q_type == "double") {
+  return Rcpp::wrap(cpp_torch_method_nanquantile_self_Tensor_q_double(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchdouble>(args["q"]), Rcpp::as<XPtrTorchoptional_index_int64_t>(args["dim"]), Rcpp::as<XPtrTorchbool>(args["keepdim"]), Rcpp::as<XPtrTorchstring_view>(args["interpolation"])));
+}
+  Rcpp::stop("No matching overload for nanquantile");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_method_narrow (Rcpp::List args) {
+  static const std::vector<std::string> self_expected = {"Tensor"};
+  static const std::vector<std::string> dim_expected = {"int64_t"};
+  static const std::vector<std::string> start_expected = {"int64_t", "Tensor"};
+  static const std::vector<std::string> length_expected = {"int64_t"};
+  auto self_type = cpp_arg_to_torch_type(args["self"], self_expected, "self");
+  auto dim_type = cpp_arg_to_torch_type(args["dim"], dim_expected, "dim");
+  auto start_type = cpp_arg_to_torch_type(args["start"], start_expected, "start");
+  auto length_type = cpp_arg_to_torch_type(args["length"], length_expected, "length");
+if (self_type == "Tensor" && dim_type == "int64_t" && start_type == "int64_t" && length_type == "int64_t") {
+  return Rcpp::wrap(cpp_torch_method_narrow_self_Tensor_dim_int64_t_start_int64_t_length_int64_t(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchindex_int64_t>(args["dim"]), Rcpp::as<XPtrTorchint64_t>(args["start"]), Rcpp::as<XPtrTorchint64_t>(args["length"])));
+}
+if (self_type == "Tensor" && dim_type == "int64_t" && start_type == "Tensor" && length_type == "int64_t") {
+  return Rcpp::wrap(cpp_torch_method_narrow_self_Tensor_dim_int64_t_start_Tensor_length_int64_t(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchindex_int64_t>(args["dim"]), Rcpp::as<XPtrTorchTensor>(args["start"]), Rcpp::as<XPtrTorchint64_t>(args["length"])));
+}
+  Rcpp::stop("No matching overload for narrow");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_method_norm (Rcpp::List args) {
+  static const std::vector<std::string> self_expected = {"Tensor"};
+  static const std::vector<std::string> p_expected = {"Scalar"};
+  static const std::vector<std::string> dim_expected = {"IntArrayRef", "DimnameList"};
+  static const std::vector<std::string> keepdim_expected = {"bool"};
+  static const std::vector<std::string> dtype_expected = {"ScalarType"};
+  auto self_type = cpp_arg_to_torch_type(args["self"], self_expected, "self");
+  auto p_type = cpp_arg_to_torch_type(args["p"], p_expected, "p");
+  auto dim_type = cpp_arg_to_torch_type(args["dim"], dim_expected, "dim");
+  auto keepdim_type = cpp_arg_to_torch_type(args["keepdim"], keepdim_expected, "keepdim");
+  auto dtype_type = cpp_arg_to_torch_type(args["dtype"], dtype_expected, "dtype");
+if (self_type == "Tensor" && p_type == "Scalar" && dim_type == "Missing" && keepdim_type == "Missing" && dtype_type == "ScalarType") {
+  return Rcpp::wrap(cpp_torch_method_norm_self_Tensor_p_Scalar_dtype_ScalarType(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchoptional_scalar>(args["p"]), Rcpp::as<XPtrTorchDtype>(args["dtype"])));
+}
+if (self_type == "Tensor" && p_type == "Scalar" && dim_type == "Missing" && keepdim_type == "Missing" && dtype_type == "Missing") {
+  return Rcpp::wrap(cpp_torch_method_norm_self_Tensor_p_Scalar(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchScalar>(args["p"])));
+}
+if (self_type == "Tensor" && p_type == "Scalar" && dim_type == "IntArrayRef" && keepdim_type == "bool" && dtype_type == "ScalarType") {
+  return Rcpp::wrap(cpp_torch_method_norm_self_Tensor_p_Scalar_dim_IntArrayRef_keepdim_bool_dtype_ScalarType(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchoptional_scalar>(args["p"]), Rcpp::as<XPtrTorchIndexIntArrayRef>(args["dim"]), Rcpp::as<XPtrTorchbool>(args["keepdim"]), Rcpp::as<XPtrTorchDtype>(args["dtype"])));
+}
+if (self_type == "Tensor" && p_type == "Scalar" && dim_type == "IntArrayRef" && keepdim_type == "bool" && dtype_type == "Missing") {
+  return Rcpp::wrap(cpp_torch_method_norm_self_Tensor_p_Scalar_dim_IntArrayRef_keepdim_bool(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchoptional_scalar>(args["p"]), Rcpp::as<XPtrTorchIndexIntArrayRef>(args["dim"]), Rcpp::as<XPtrTorchbool>(args["keepdim"])));
+}
+if (self_type == "Tensor" && p_type == "Scalar" && dim_type == "DimnameList" && keepdim_type == "bool" && dtype_type == "ScalarType") {
+  return Rcpp::wrap(cpp_torch_method_norm_self_Tensor_p_Scalar_dim_DimnameList_keepdim_bool_dtype_ScalarType(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchoptional_scalar>(args["p"]), Rcpp::as<XPtrTorchDimnameList>(args["dim"]), Rcpp::as<XPtrTorchbool>(args["keepdim"]), Rcpp::as<XPtrTorchDtype>(args["dtype"])));
+}
+if (self_type == "Tensor" && p_type == "Scalar" && dim_type == "DimnameList" && keepdim_type == "bool" && dtype_type == "Missing") {
+  return Rcpp::wrap(cpp_torch_method_norm_self_Tensor_p_Scalar_dim_DimnameList_keepdim_bool(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchoptional_scalar>(args["p"]), Rcpp::as<XPtrTorchDimnameList>(args["dim"]), Rcpp::as<XPtrTorchbool>(args["keepdim"])));
+}
+  Rcpp::stop("No matching overload for norm");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_method_prod (Rcpp::List args) {
+  static const std::vector<std::string> self_expected = {"Tensor"};
+  static const std::vector<std::string> dim_expected = {"int64_t", "Dimname"};
+  auto self_type = cpp_arg_to_torch_type(args["self"], self_expected, "self");
+  auto dim_type = cpp_arg_to_torch_type(args["dim"], dim_expected, "dim");
+if (self_type == "Tensor" && dim_type == "Missing") {
+  return Rcpp::wrap(cpp_torch_method_prod_self_Tensor(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchoptional_scalar_type>(args["dtype"])));
+}
+if (self_type == "Tensor" && dim_type == "int64_t") {
+  return Rcpp::wrap(cpp_torch_method_prod_self_Tensor_dim_int64_t(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchindex_int64_t>(args["dim"]), Rcpp::as<XPtrTorchbool>(args["keepdim"]), Rcpp::as<XPtrTorchoptional_scalar_type>(args["dtype"])));
+}
+if (self_type == "Tensor" && dim_type == "Dimname") {
+  return Rcpp::wrap(cpp_torch_method_prod_self_Tensor_dim_Dimname(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchDimname>(args["dim"]), Rcpp::as<XPtrTorchbool>(args["keepdim"]), Rcpp::as<XPtrTorchoptional_scalar_type>(args["dtype"])));
+}
+  Rcpp::stop("No matching overload for prod");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_method_quantile (Rcpp::List args) {
+  static const std::vector<std::string> self_expected = {"Tensor"};
+  static const std::vector<std::string> q_expected = {"Tensor", "double"};
+  auto self_type = cpp_arg_to_torch_type(args["self"], self_expected, "self");
+  auto q_type = cpp_arg_to_torch_type(args["q"], q_expected, "q");
+if (self_type == "Tensor" && q_type == "Tensor") {
+  return Rcpp::wrap(cpp_torch_method_quantile_self_Tensor_q_Tensor(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchTensor>(args["q"]), Rcpp::as<XPtrTorchoptional_index_int64_t>(args["dim"]), Rcpp::as<XPtrTorchbool>(args["keepdim"]), Rcpp::as<XPtrTorchstring_view>(args["interpolation"])));
+}
+if (self_type == "Tensor" && q_type == "double") {
+  return Rcpp::wrap(cpp_torch_method_quantile_self_Tensor_q_double(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchdouble>(args["q"]), Rcpp::as<XPtrTorchoptional_index_int64_t>(args["dim"]), Rcpp::as<XPtrTorchbool>(args["keepdim"]), Rcpp::as<XPtrTorchstring_view>(args["interpolation"])));
+}
+  Rcpp::stop("No matching overload for quantile");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_method_random_ (Rcpp::List args) {
+  static const std::vector<std::string> self_expected = {"Tensor"};
+  static const std::vector<std::string> from_expected = {"int64_t"};
+  static const std::vector<std::string> to_expected = {"int64_t"};
+  auto self_type = cpp_arg_to_torch_type(args["self"], self_expected, "self");
+  auto from_type = cpp_arg_to_torch_type(args["from"], from_expected, "from");
+  auto to_type = cpp_arg_to_torch_type(args["to"], to_expected, "to");
+if (self_type == "Tensor" && from_type == "int64_t" && to_type == "int64_t") {
+  return Rcpp::wrap(cpp_torch_method_random__self_Tensor_from_int64_t_to_int64_t(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchint64_t>(args["from"]), Rcpp::as<XPtrTorchoptional_int64_t>(args["to"]), Rcpp::as<XPtrTorchOptionalGenerator>(args["generator"])));
+}
+if (self_type == "Tensor" && from_type == "Missing" && to_type == "int64_t") {
+  return Rcpp::wrap(cpp_torch_method_random__self_Tensor_to_int64_t(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchint64_t>(args["to"]), Rcpp::as<XPtrTorchOptionalGenerator>(args["generator"])));
+}
+if (self_type == "Tensor" && from_type == "Missing" && to_type == "Missing") {
+  return Rcpp::wrap(cpp_torch_method_random__self_Tensor(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchOptionalGenerator>(args["generator"])));
+}
+  Rcpp::stop("No matching overload for random_");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_method_repeat_interleave (Rcpp::List args) {
+  static const std::vector<std::string> self_expected = {"Tensor"};
+  static const std::vector<std::string> repeats_expected = {"Tensor", "int64_t"};
+  auto self_type = cpp_arg_to_torch_type(args["self"], self_expected, "self");
+  auto repeats_type = cpp_arg_to_torch_type(args["repeats"], repeats_expected, "repeats");
+if (self_type == "Tensor" && repeats_type == "Tensor") {
+  return Rcpp::wrap(cpp_torch_method_repeat_interleave_self_Tensor_repeats_Tensor(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchTensor>(args["repeats"]), Rcpp::as<XPtrTorchoptional_index_int64_t>(args["dim"]), Rcpp::as<XPtrTorchoptional_int64_t>(args["output_size"])));
+}
+if (self_type == "Tensor" && repeats_type == "int64_t") {
+  return Rcpp::wrap(cpp_torch_method_repeat_interleave_self_Tensor_repeats_int64_t(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchint64_t>(args["repeats"]), Rcpp::as<XPtrTorchoptional_index_int64_t>(args["dim"]), Rcpp::as<XPtrTorchoptional_int64_t>(args["output_size"])));
+}
+  Rcpp::stop("No matching overload for repeat_interleave");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_method_round (Rcpp::List args) {
+  static const std::vector<std::string> self_expected = {"Tensor"};
+  static const std::vector<std::string> decimals_expected = {"int64_t"};
+  auto self_type = cpp_arg_to_torch_type(args["self"], self_expected, "self");
+  auto decimals_type = cpp_arg_to_torch_type(args["decimals"], decimals_expected, "decimals");
+if (self_type == "Tensor" && decimals_type == "Missing") {
+  return Rcpp::wrap(cpp_torch_method_round_self_Tensor(Rcpp::as<XPtrTorchTensor>(args["self"])));
+}
+if (self_type == "Tensor" && decimals_type == "int64_t") {
+  return Rcpp::wrap(cpp_torch_method_round_self_Tensor_decimals_int64_t(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchint64_t>(args["decimals"])));
+}
+  Rcpp::stop("No matching overload for round");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_method_round_ (Rcpp::List args) {
+  static const std::vector<std::string> self_expected = {"Tensor"};
+  static const std::vector<std::string> decimals_expected = {"int64_t"};
+  auto self_type = cpp_arg_to_torch_type(args["self"], self_expected, "self");
+  auto decimals_type = cpp_arg_to_torch_type(args["decimals"], decimals_expected, "decimals");
+if (self_type == "Tensor" && decimals_type == "Missing") {
+  return Rcpp::wrap(cpp_torch_method_round__self_Tensor(Rcpp::as<XPtrTorchTensor>(args["self"])));
+}
+if (self_type == "Tensor" && decimals_type == "int64_t") {
+  return Rcpp::wrap(cpp_torch_method_round__self_Tensor_decimals_int64_t(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchint64_t>(args["decimals"])));
+}
+  Rcpp::stop("No matching overload for round_");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_method_scatter (Rcpp::List args) {
+  static const std::vector<std::string> self_expected = {"Tensor"};
+  static const std::vector<std::string> dim_expected = {"int64_t", "Dimname"};
+  static const std::vector<std::string> index_expected = {"Tensor"};
+  static const std::vector<std::string> src_expected = {"Tensor"};
+  static const std::vector<std::string> value_expected = {"Scalar"};
+  static const std::vector<std::string> reduce_expected = {"c10::string_view"};
+  auto self_type = cpp_arg_to_torch_type(args["self"], self_expected, "self");
+  auto dim_type = cpp_arg_to_torch_type(args["dim"], dim_expected, "dim");
+  auto index_type = cpp_arg_to_torch_type(args["index"], index_expected, "index");
+  auto src_type = cpp_arg_to_torch_type(args["src"], src_expected, "src");
+  auto value_type = cpp_arg_to_torch_type(args["value"], value_expected, "value");
+  auto reduce_type = cpp_arg_to_torch_type(args["reduce"], reduce_expected, "reduce");
+if (self_type == "Tensor" && dim_type == "int64_t" && index_type == "Tensor" && src_type == "Tensor" && value_type == "Missing" && reduce_type == "Missing") {
+  return Rcpp::wrap(cpp_torch_method_scatter_self_Tensor_dim_int64_t_index_Tensor_src_Tensor(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchindex_int64_t>(args["dim"]), Rcpp::as<XPtrTorchIndexTensor>(args["index"]), Rcpp::as<XPtrTorchTensor>(args["src"])));
+}
+if (self_type == "Tensor" && dim_type == "int64_t" && index_type == "Tensor" && src_type == "Missing" && value_type == "Scalar" && reduce_type == "Missing") {
+  return Rcpp::wrap(cpp_torch_method_scatter_self_Tensor_dim_int64_t_index_Tensor_value_Scalar(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchindex_int64_t>(args["dim"]), Rcpp::as<XPtrTorchIndexTensor>(args["index"]), Rcpp::as<XPtrTorchScalar>(args["value"])));
+}
+if (self_type == "Tensor" && dim_type == "int64_t" && index_type == "Tensor" && src_type == "Tensor" && value_type == "Missing" && reduce_type == "c10::string_view") {
+  return Rcpp::wrap(cpp_torch_method_scatter_self_Tensor_dim_int64_t_index_Tensor_src_Tensor_reduce_c10string_view(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchindex_int64_t>(args["dim"]), Rcpp::as<XPtrTorchIndexTensor>(args["index"]), Rcpp::as<XPtrTorchTensor>(args["src"]), Rcpp::as<XPtrTorchstring_view>(args["reduce"])));
+}
+if (self_type == "Tensor" && dim_type == "int64_t" && index_type == "Tensor" && src_type == "Missing" && value_type == "Scalar" && reduce_type == "c10::string_view") {
+  return Rcpp::wrap(cpp_torch_method_scatter_self_Tensor_dim_int64_t_index_Tensor_value_Scalar_reduce_c10string_view(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchindex_int64_t>(args["dim"]), Rcpp::as<XPtrTorchIndexTensor>(args["index"]), Rcpp::as<XPtrTorchScalar>(args["value"]), Rcpp::as<XPtrTorchstring_view>(args["reduce"])));
+}
+if (self_type == "Tensor" && dim_type == "Dimname" && index_type == "Tensor" && src_type == "Tensor" && value_type == "Missing" && reduce_type == "Missing") {
+  return Rcpp::wrap(cpp_torch_method_scatter_self_Tensor_dim_Dimname_index_Tensor_src_Tensor(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchDimname>(args["dim"]), Rcpp::as<XPtrTorchIndexTensor>(args["index"]), Rcpp::as<XPtrTorchTensor>(args["src"])));
+}
+if (self_type == "Tensor" && dim_type == "Dimname" && index_type == "Tensor" && src_type == "Missing" && value_type == "Scalar" && reduce_type == "Missing") {
+  return Rcpp::wrap(cpp_torch_method_scatter_self_Tensor_dim_Dimname_index_Tensor_value_Scalar(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchDimname>(args["dim"]), Rcpp::as<XPtrTorchIndexTensor>(args["index"]), Rcpp::as<XPtrTorchScalar>(args["value"])));
+}
+  Rcpp::stop("No matching overload for scatter");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_method_scatter_ (Rcpp::List args) {
+  static const std::vector<std::string> self_expected = {"Tensor"};
+  static const std::vector<std::string> dim_expected = {"int64_t"};
+  static const std::vector<std::string> index_expected = {"Tensor"};
+  static const std::vector<std::string> src_expected = {"Tensor"};
+  static const std::vector<std::string> value_expected = {"Scalar"};
+  static const std::vector<std::string> reduce_expected = {"c10::string_view"};
+  auto self_type = cpp_arg_to_torch_type(args["self"], self_expected, "self");
+  auto dim_type = cpp_arg_to_torch_type(args["dim"], dim_expected, "dim");
+  auto index_type = cpp_arg_to_torch_type(args["index"], index_expected, "index");
+  auto src_type = cpp_arg_to_torch_type(args["src"], src_expected, "src");
+  auto value_type = cpp_arg_to_torch_type(args["value"], value_expected, "value");
+  auto reduce_type = cpp_arg_to_torch_type(args["reduce"], reduce_expected, "reduce");
+if (self_type == "Tensor" && dim_type == "int64_t" && index_type == "Tensor" && src_type == "Tensor" && value_type == "Missing" && reduce_type == "Missing") {
+  return Rcpp::wrap(cpp_torch_method_scatter__self_Tensor_dim_int64_t_index_Tensor_src_Tensor(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchindex_int64_t>(args["dim"]), Rcpp::as<XPtrTorchIndexTensor>(args["index"]), Rcpp::as<XPtrTorchTensor>(args["src"])));
+}
+if (self_type == "Tensor" && dim_type == "int64_t" && index_type == "Tensor" && src_type == "Missing" && value_type == "Scalar" && reduce_type == "Missing") {
+  return Rcpp::wrap(cpp_torch_method_scatter__self_Tensor_dim_int64_t_index_Tensor_value_Scalar(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchindex_int64_t>(args["dim"]), Rcpp::as<XPtrTorchIndexTensor>(args["index"]), Rcpp::as<XPtrTorchScalar>(args["value"])));
+}
+if (self_type == "Tensor" && dim_type == "int64_t" && index_type == "Tensor" && src_type == "Tensor" && value_type == "Missing" && reduce_type == "c10::string_view") {
+  return Rcpp::wrap(cpp_torch_method_scatter__self_Tensor_dim_int64_t_index_Tensor_src_Tensor_reduce_c10string_view(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchindex_int64_t>(args["dim"]), Rcpp::as<XPtrTorchIndexTensor>(args["index"]), Rcpp::as<XPtrTorchTensor>(args["src"]), Rcpp::as<XPtrTorchstring_view>(args["reduce"])));
+}
+if (self_type == "Tensor" && dim_type == "int64_t" && index_type == "Tensor" && src_type == "Missing" && value_type == "Scalar" && reduce_type == "c10::string_view") {
+  return Rcpp::wrap(cpp_torch_method_scatter__self_Tensor_dim_int64_t_index_Tensor_value_Scalar_reduce_c10string_view(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchindex_int64_t>(args["dim"]), Rcpp::as<XPtrTorchIndexTensor>(args["index"]), Rcpp::as<XPtrTorchScalar>(args["value"]), Rcpp::as<XPtrTorchstring_view>(args["reduce"])));
+}
+  Rcpp::stop("No matching overload for scatter_");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_method_set_ (Rcpp::List args) {
+  static const std::vector<std::string> self_expected = {"Tensor"};
+  static const std::vector<std::string> source_expected = {"Storage", "Tensor"};
+  static const std::vector<std::string> storage_offset_expected = {"int64_t"};
+  static const std::vector<std::string> size_expected = {"IntArrayRef"};
+  auto self_type = cpp_arg_to_torch_type(args["self"], self_expected, "self");
+  auto source_type = cpp_arg_to_torch_type(args["source"], source_expected, "source");
+  auto storage_offset_type = cpp_arg_to_torch_type(args["storage_offset"], storage_offset_expected, "storage_offset");
+  auto size_type = cpp_arg_to_torch_type(args["size"], size_expected, "size");
+if (self_type == "Tensor" && source_type == "Storage" && storage_offset_type == "Missing" && size_type == "Missing") {
+  return Rcpp::wrap(cpp_torch_method_set__self_Tensor_source_Storage(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<Rcpp::XPtr<XPtrTorch>>(args["source"])));
+}
+if (self_type == "Tensor" && source_type == "Storage" && storage_offset_type == "int64_t" && size_type == "IntArrayRef") {
+  return Rcpp::wrap(cpp_torch_method_set__self_Tensor_source_Storage_storage_offset_int64_t_size_IntArrayRef(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<Rcpp::XPtr<XPtrTorch>>(args["source"]), Rcpp::as<XPtrTorchint64_t>(args["storage_offset"]), Rcpp::as<XPtrTorchIntArrayRef>(args["size"]), Rcpp::as<XPtrTorchIntArrayRef>(args["stride"])));
+}
+if (self_type == "Tensor" && source_type == "Tensor" && storage_offset_type == "int64_t" && size_type == "IntArrayRef") {
+  return Rcpp::wrap(cpp_torch_method_set__self_Tensor_source_Tensor_storage_offset_int64_t_size_IntArrayRef(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchTensor>(args["source"]), Rcpp::as<XPtrTorchint64_t>(args["storage_offset"]), Rcpp::as<XPtrTorchIntArrayRef>(args["size"]), Rcpp::as<XPtrTorchIntArrayRef>(args["stride"])));
+}
+if (self_type == "Tensor" && source_type == "Tensor" && storage_offset_type == "Missing" && size_type == "Missing") {
+  return Rcpp::wrap(cpp_torch_method_set__self_Tensor_source_Tensor(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchTensor>(args["source"])));
+}
+if (self_type == "Tensor" && source_type == "Missing" && storage_offset_type == "Missing" && size_type == "Missing") {
+  return Rcpp::wrap(cpp_torch_method_set__self_Tensor(Rcpp::as<XPtrTorchTensor>(args["self"])));
+}
+  Rcpp::stop("No matching overload for set_");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_method_sort (Rcpp::List args) {
+  static const std::vector<std::string> self_expected = {"Tensor"};
+  static const std::vector<std::string> dim_expected = {"int64_t", "Dimname"};
+  static const std::vector<std::string> stable_expected = {"bool"};
+  auto self_type = cpp_arg_to_torch_type(args["self"], self_expected, "self");
+  auto dim_type = cpp_arg_to_torch_type(args["dim"], dim_expected, "dim");
+  auto stable_type = cpp_arg_to_torch_type(args["stable"], stable_expected, "stable");
+if (self_type == "Tensor" && dim_type == "int64_t" && stable_type == "Missing") {
+  return Rcpp::wrap(cpp_torch_method_sort_self_Tensor_dim_int64_t(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchindex_int64_t>(args["dim"]), Rcpp::as<XPtrTorchbool>(args["descending"])));
+}
+if (self_type == "Tensor" && dim_type == "int64_t" && stable_type == "bool") {
+  return Rcpp::wrap(cpp_torch_method_sort_self_Tensor_dim_int64_t_stable_bool(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchoptional_bool>(args["stable"]), Rcpp::as<XPtrTorchindex_int64_t>(args["dim"]), Rcpp::as<XPtrTorchbool>(args["descending"])));
+}
+if (self_type == "Tensor" && dim_type == "Dimname" && stable_type == "Missing") {
+  return Rcpp::wrap(cpp_torch_method_sort_self_Tensor_dim_Dimname(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchDimname>(args["dim"]), Rcpp::as<XPtrTorchbool>(args["descending"])));
+}
+if (self_type == "Tensor" && dim_type == "Dimname" && stable_type == "bool") {
+  return Rcpp::wrap(cpp_torch_method_sort_self_Tensor_dim_Dimname_stable_bool(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchoptional_bool>(args["stable"]), Rcpp::as<XPtrTorchDimname>(args["dim"]), Rcpp::as<XPtrTorchbool>(args["descending"])));
+}
+  Rcpp::stop("No matching overload for sort");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_method_split (Rcpp::List args) {
+  static const std::vector<std::string> self_expected = {"Tensor"};
+  static const std::vector<std::string> split_size_expected = {"int64_t", "IntArrayRef"};
+  auto self_type = cpp_arg_to_torch_type(args["self"], self_expected, "self");
+  auto split_size_type = cpp_arg_to_torch_type(args["split_size"], split_size_expected, "split_size");
+if (self_type == "Tensor" && split_size_type == "int64_t") {
+  return Rcpp::wrap(cpp_torch_method_split_self_Tensor_split_size_int64_t(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchint64_t>(args["split_size"]), Rcpp::as<XPtrTorchindex_int64_t>(args["dim"])));
+}
+if (self_type == "Tensor" && split_size_type == "IntArrayRef") {
+  return Rcpp::wrap(cpp_torch_method_split_self_Tensor_split_size_IntArrayRef(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchIntArrayRef>(args["split_size"]), Rcpp::as<XPtrTorchindex_int64_t>(args["dim"])));
+}
+  Rcpp::stop("No matching overload for split");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_method_squeeze (Rcpp::List args) {
+  static const std::vector<std::string> self_expected = {"Tensor"};
+  static const std::vector<std::string> dim_expected = {"int64_t", "Dimname", "IntArrayRef"};
+  auto self_type = cpp_arg_to_torch_type(args["self"], self_expected, "self");
+  auto dim_type = cpp_arg_to_torch_type(args["dim"], dim_expected, "dim");
+if (self_type == "Tensor" && dim_type == "Missing") {
+  return Rcpp::wrap(cpp_torch_method_squeeze_self_Tensor(Rcpp::as<XPtrTorchTensor>(args["self"])));
+}
+if (self_type == "Tensor" && dim_type == "int64_t") {
+  return Rcpp::wrap(cpp_torch_method_squeeze_self_Tensor_dim_int64_t(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchindex_int64_t>(args["dim"])));
+}
+if (self_type == "Tensor" && dim_type == "Dimname") {
+  return Rcpp::wrap(cpp_torch_method_squeeze_self_Tensor_dim_Dimname(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchDimname>(args["dim"])));
+}
+if (self_type == "Tensor" && dim_type == "IntArrayRef") {
+  return Rcpp::wrap(cpp_torch_method_squeeze_self_Tensor_dim_IntArrayRef(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchIndexIntArrayRef>(args["dim"])));
+}
+  Rcpp::stop("No matching overload for squeeze");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_method_squeeze_ (Rcpp::List args) {
+  static const std::vector<std::string> self_expected = {"Tensor"};
+  static const std::vector<std::string> dim_expected = {"int64_t", "IntArrayRef", "Dimname"};
+  auto self_type = cpp_arg_to_torch_type(args["self"], self_expected, "self");
+  auto dim_type = cpp_arg_to_torch_type(args["dim"], dim_expected, "dim");
+if (self_type == "Tensor" && dim_type == "Missing") {
+  return Rcpp::wrap(cpp_torch_method_squeeze__self_Tensor(Rcpp::as<XPtrTorchTensor>(args["self"])));
+}
+if (self_type == "Tensor" && dim_type == "int64_t") {
+  return Rcpp::wrap(cpp_torch_method_squeeze__self_Tensor_dim_int64_t(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchindex_int64_t>(args["dim"])));
+}
+if (self_type == "Tensor" && dim_type == "IntArrayRef") {
+  return Rcpp::wrap(cpp_torch_method_squeeze__self_Tensor_dim_IntArrayRef(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchIndexIntArrayRef>(args["dim"])));
+}
+if (self_type == "Tensor" && dim_type == "Dimname") {
+  return Rcpp::wrap(cpp_torch_method_squeeze__self_Tensor_dim_Dimname(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchDimname>(args["dim"])));
+}
+  Rcpp::stop("No matching overload for squeeze_");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_method_std (Rcpp::List args) {
+  static const std::vector<std::string> self_expected = {"Tensor"};
+  static const std::vector<std::string> dim_expected = {"IntArrayRef", "DimnameList"};
+  auto self_type = cpp_arg_to_torch_type(args["self"], self_expected, "self");
+  auto dim_type = cpp_arg_to_torch_type(args["dim"], dim_expected, "dim");
+if (self_type == "Tensor" && dim_type == "Missing") {
+  return Rcpp::wrap(cpp_torch_method_std_self_Tensor(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchbool>(args["unbiased"])));
+}
+if (self_type == "Tensor" && dim_type == "IntArrayRef") {
+  return Rcpp::wrap(cpp_torch_method_std_self_Tensor_dim_IntArrayRef(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchOptionalIndexIntArrayRef>(args["dim"]), Rcpp::as<XPtrTorchbool>(args["unbiased"]), Rcpp::as<XPtrTorchbool>(args["keepdim"])));
+}
+if (self_type == "Tensor" && dim_type == "DimnameList") {
+  return Rcpp::wrap(cpp_torch_method_std_self_Tensor_dim_DimnameList(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchDimnameList>(args["dim"]), Rcpp::as<XPtrTorchbool>(args["unbiased"]), Rcpp::as<XPtrTorchbool>(args["keepdim"])));
+}
+  Rcpp::stop("No matching overload for std");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_method_sum (Rcpp::List args) {
+  static const std::vector<std::string> self_expected = {"Tensor"};
+  static const std::vector<std::string> dim_expected = {"IntArrayRef", "DimnameList"};
+  auto self_type = cpp_arg_to_torch_type(args["self"], self_expected, "self");
+  auto dim_type = cpp_arg_to_torch_type(args["dim"], dim_expected, "dim");
+if (self_type == "Tensor" && dim_type == "Missing") {
+  return Rcpp::wrap(cpp_torch_method_sum_self_Tensor(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchoptional_scalar_type>(args["dtype"])));
+}
+if (self_type == "Tensor" && dim_type == "IntArrayRef") {
+  return Rcpp::wrap(cpp_torch_method_sum_self_Tensor_dim_IntArrayRef(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchOptionalIndexIntArrayRef>(args["dim"]), Rcpp::as<XPtrTorchbool>(args["keepdim"]), Rcpp::as<XPtrTorchoptional_scalar_type>(args["dtype"])));
+}
+if (self_type == "Tensor" && dim_type == "DimnameList") {
+  return Rcpp::wrap(cpp_torch_method_sum_self_Tensor_dim_DimnameList(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchDimnameList>(args["dim"]), Rcpp::as<XPtrTorchbool>(args["keepdim"]), Rcpp::as<XPtrTorchoptional_scalar_type>(args["dtype"])));
+}
+  Rcpp::stop("No matching overload for sum");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_method_tensor_split (Rcpp::List args) {
+  static const std::vector<std::string> self_expected = {"Tensor"};
+  static const std::vector<std::string> indices_expected = {"IntArrayRef"};
+  static const std::vector<std::string> sections_expected = {"int64_t"};
+  static const std::vector<std::string> tensor_indices_or_sections_expected = {"Tensor"};
+  auto self_type = cpp_arg_to_torch_type(args["self"], self_expected, "self");
+  auto indices_type = cpp_arg_to_torch_type(args["indices"], indices_expected, "indices");
+  auto sections_type = cpp_arg_to_torch_type(args["sections"], sections_expected, "sections");
+  auto tensor_indices_or_sections_type = cpp_arg_to_torch_type(args["tensor_indices_or_sections"], tensor_indices_or_sections_expected, "tensor_indices_or_sections");
+if (self_type == "Tensor" && indices_type == "Missing" && sections_type == "int64_t" && tensor_indices_or_sections_type == "Missing") {
+  return Rcpp::wrap(cpp_torch_method_tensor_split_self_Tensor_sections_int64_t(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchint64_t>(args["sections"]), Rcpp::as<XPtrTorchindex_int64_t>(args["dim"])));
+}
+if (self_type == "Tensor" && indices_type == "IntArrayRef" && sections_type == "Missing" && tensor_indices_or_sections_type == "Missing") {
+  return Rcpp::wrap(cpp_torch_method_tensor_split_self_Tensor_indices_IntArrayRef(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchIntArrayRef>(args["indices"]), Rcpp::as<XPtrTorchindex_int64_t>(args["dim"])));
+}
+if (self_type == "Tensor" && indices_type == "Missing" && sections_type == "Missing" && tensor_indices_or_sections_type == "Tensor") {
+  return Rcpp::wrap(cpp_torch_method_tensor_split_self_Tensor_tensor_indices_or_sections_Tensor(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchTensor>(args["tensor_indices_or_sections"]), Rcpp::as<XPtrTorchindex_int64_t>(args["dim"])));
+}
+  Rcpp::stop("No matching overload for tensor_split");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_method_to (Rcpp::List args) {
+  static const std::vector<std::string> self_expected = {"Tensor"};
+  static const std::vector<std::string> device_expected = {"Device"};
+  static const std::vector<std::string> other_expected = {"Tensor"};
+  static const std::vector<std::string> dtype_expected = {"ScalarType"};
+  auto self_type = cpp_arg_to_torch_type(args["self"], self_expected, "self");
+  auto device_type = cpp_arg_to_torch_type(args["device"], device_expected, "device");
+  auto other_type = cpp_arg_to_torch_type(args["other"], other_expected, "other");
+  auto dtype_type = cpp_arg_to_torch_type(args["dtype"], dtype_expected, "dtype");
+if (self_type == "Tensor" && device_type == "Missing" && other_type == "Missing" && dtype_type == "Missing") {
+  return Rcpp::wrap(cpp_torch_method_to_self_Tensor(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchTensorOptions>(args["options"]), Rcpp::as<XPtrTorchbool>(args["non_blocking"]), Rcpp::as<XPtrTorchbool>(args["copy"]), Rcpp::as<XPtrTorchoptional_memory_format>(args["memory_format"])));
+}
+if (self_type == "Tensor" && device_type == "Device" && other_type == "Missing" && dtype_type == "ScalarType") {
+  return Rcpp::wrap(cpp_torch_method_to_self_Tensor_device_Device_dtype_ScalarType(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchDevice>(args["device"]), Rcpp::as<XPtrTorchDtype>(args["dtype"]), Rcpp::as<XPtrTorchbool>(args["non_blocking"]), Rcpp::as<XPtrTorchbool>(args["copy"]), Rcpp::as<XPtrTorchoptional_memory_format>(args["memory_format"])));
+}
+if (self_type == "Tensor" && device_type == "Missing" && other_type == "Missing" && dtype_type == "ScalarType") {
+  return Rcpp::wrap(cpp_torch_method_to_self_Tensor_dtype_ScalarType(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchDtype>(args["dtype"]), Rcpp::as<XPtrTorchbool>(args["non_blocking"]), Rcpp::as<XPtrTorchbool>(args["copy"]), Rcpp::as<XPtrTorchoptional_memory_format>(args["memory_format"])));
+}
+if (self_type == "Tensor" && device_type == "Missing" && other_type == "Tensor" && dtype_type == "Missing") {
+  return Rcpp::wrap(cpp_torch_method_to_self_Tensor_other_Tensor(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchTensor>(args["other"]), Rcpp::as<XPtrTorchbool>(args["non_blocking"]), Rcpp::as<XPtrTorchbool>(args["copy"]), Rcpp::as<XPtrTorchoptional_memory_format>(args["memory_format"])));
+}
+  Rcpp::stop("No matching overload for to");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_method_to_sparse (Rcpp::List args) {
+  static const std::vector<std::string> self_expected = {"Tensor"};
+  static const std::vector<std::string> sparse_dim_expected = {"int64_t"};
+  auto self_type = cpp_arg_to_torch_type(args["self"], self_expected, "self");
+  auto sparse_dim_type = cpp_arg_to_torch_type(args["sparse_dim"], sparse_dim_expected, "sparse_dim");
+if (self_type == "Tensor" && sparse_dim_type == "int64_t") {
+  return Rcpp::wrap(cpp_torch_method_to_sparse_self_Tensor_sparse_dim_int64_t(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchint64_t>(args["sparse_dim"])));
+}
+if (self_type == "Tensor" && sparse_dim_type == "Missing") {
+  return Rcpp::wrap(cpp_torch_method_to_sparse_self_Tensor(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchLayout>(args["layout"]), Rcpp::as<XPtrTorchOptionalIntArrayRef>(args["blocksize"]), Rcpp::as<XPtrTorchoptional_int64_t>(args["dense_dim"])));
+}
+  Rcpp::stop("No matching overload for to_sparse");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_method_transpose (Rcpp::List args) {
+  static const std::vector<std::string> self_expected = {"Tensor"};
+  static const std::vector<std::string> dim0_expected = {"int64_t", "Dimname"};
+  static const std::vector<std::string> dim1_expected = {"int64_t", "Dimname"};
+  auto self_type = cpp_arg_to_torch_type(args["self"], self_expected, "self");
+  auto dim0_type = cpp_arg_to_torch_type(args["dim0"], dim0_expected, "dim0");
+  auto dim1_type = cpp_arg_to_torch_type(args["dim1"], dim1_expected, "dim1");
+if (self_type == "Tensor" && dim0_type == "int64_t" && dim1_type == "int64_t") {
+  return Rcpp::wrap(cpp_torch_method_transpose_self_Tensor_dim0_int64_t_dim1_int64_t(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchindex_int64_t>(args["dim0"]), Rcpp::as<XPtrTorchindex_int64_t>(args["dim1"])));
+}
+if (self_type == "Tensor" && dim0_type == "Dimname" && dim1_type == "Dimname") {
+  return Rcpp::wrap(cpp_torch_method_transpose_self_Tensor_dim0_Dimname_dim1_Dimname(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchDimname>(args["dim0"]), Rcpp::as<XPtrTorchDimname>(args["dim1"])));
+}
+  Rcpp::stop("No matching overload for transpose");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_method_var (Rcpp::List args) {
+  static const std::vector<std::string> self_expected = {"Tensor"};
+  static const std::vector<std::string> dim_expected = {"IntArrayRef", "DimnameList"};
+  auto self_type = cpp_arg_to_torch_type(args["self"], self_expected, "self");
+  auto dim_type = cpp_arg_to_torch_type(args["dim"], dim_expected, "dim");
+if (self_type == "Tensor" && dim_type == "Missing") {
+  return Rcpp::wrap(cpp_torch_method_var_self_Tensor(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchbool>(args["unbiased"])));
+}
+if (self_type == "Tensor" && dim_type == "IntArrayRef") {
+  return Rcpp::wrap(cpp_torch_method_var_self_Tensor_dim_IntArrayRef(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchOptionalIndexIntArrayRef>(args["dim"]), Rcpp::as<XPtrTorchbool>(args["unbiased"]), Rcpp::as<XPtrTorchbool>(args["keepdim"])));
+}
+if (self_type == "Tensor" && dim_type == "DimnameList") {
+  return Rcpp::wrap(cpp_torch_method_var_self_Tensor_dim_DimnameList(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchDimnameList>(args["dim"]), Rcpp::as<XPtrTorchbool>(args["unbiased"]), Rcpp::as<XPtrTorchbool>(args["keepdim"])));
+}
+  Rcpp::stop("No matching overload for var");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_method_view (Rcpp::List args) {
+  static const std::vector<std::string> self_expected = {"Tensor"};
+  static const std::vector<std::string> dtype_expected = {"ScalarType"};
+  static const std::vector<std::string> size_expected = {"IntArrayRef"};
+  auto self_type = cpp_arg_to_torch_type(args["self"], self_expected, "self");
+  auto dtype_type = cpp_arg_to_torch_type(args["dtype"], dtype_expected, "dtype");
+  auto size_type = cpp_arg_to_torch_type(args["size"], size_expected, "size");
+if (self_type == "Tensor" && dtype_type == "Missing" && size_type == "IntArrayRef") {
+  return Rcpp::wrap(cpp_torch_method_view_self_Tensor_size_IntArrayRef(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchIntArrayRef>(args["size"])));
+}
+if (self_type == "Tensor" && dtype_type == "ScalarType" && size_type == "Missing") {
+  return Rcpp::wrap(cpp_torch_method_view_self_Tensor_dtype_ScalarType(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchDtype>(args["dtype"])));
+}
+  Rcpp::stop("No matching overload for view");
+}
+// [[Rcpp::export(rng=false)]]
+SEXP cpp_torch_dispatch_method_vsplit (Rcpp::List args) {
+  static const std::vector<std::string> self_expected = {"Tensor"};
+  static const std::vector<std::string> indices_expected = {"IntArrayRef"};
+  static const std::vector<std::string> sections_expected = {"int64_t"};
+  auto self_type = cpp_arg_to_torch_type(args["self"], self_expected, "self");
+  auto indices_type = cpp_arg_to_torch_type(args["indices"], indices_expected, "indices");
+  auto sections_type = cpp_arg_to_torch_type(args["sections"], sections_expected, "sections");
+if (self_type == "Tensor" && indices_type == "Missing" && sections_type == "int64_t") {
+  return Rcpp::wrap(cpp_torch_method_vsplit_self_Tensor_sections_int64_t(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchint64_t>(args["sections"])));
+}
+if (self_type == "Tensor" && indices_type == "IntArrayRef" && sections_type == "Missing") {
+  return Rcpp::wrap(cpp_torch_method_vsplit_self_Tensor_indices_IntArrayRef(Rcpp::as<XPtrTorchTensor>(args["self"]), Rcpp::as<XPtrTorchIntArrayRef>(args["indices"])));
+}
+  Rcpp::stop("No matching overload for vsplit");
+}
