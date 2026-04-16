@@ -48,6 +48,6 @@ m <- distr_normal(loc = 0, scale = 1)
 m$sample() # normally distributed with loc=0 and scale=1
 }
 #> torch_tensor
-#> -0.1598
+#>  0.2362
 #> [ CPUFloatType{1} ]
 ```

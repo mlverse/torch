@@ -31,10 +31,10 @@ a
 torch_log(a)
 }
 #> torch_tensor
-#> -0.5517
+#> -0.6372
+#> -0.5145
 #>     nan
-#> -2.3271
-#>  0.7973
+#>     nan
 #>     nan
 #> [ CPUFloatType{5} ]
 ```
