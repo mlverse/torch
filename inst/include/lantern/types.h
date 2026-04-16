@@ -1,5 +1,9 @@
+#pragma once
+
 #include <c10/core/Device.h>
 #include <torch/torch.h>
+
+#include <cassert>
 
 // https://pt.stackoverflow.com/a/438284/6036
 //
@@ -25,11 +29,13 @@ class Vector {
   Vector(std::vector<T> x) : x_(x) {}
   Vector() : x_() {}
   std::vector<T> x_;
-  operator std::array<T, 2>() const { return std::array<T, 2>{x_[0], x_[1]}; }
+  operator std::array<T, 2>() const { assert(x_.size() >= 2); return std::array<T, 2>{x_[0], x_[1]}; }
   operator std::array<T, 3>() const {
+    assert(x_.size() >= 3);
     return std::array<T, 3>{x_[0], x_[1], x_[2]};
   }
   operator std::array<T, 4>() const {
+    assert(x_.size() >= 4);
     return std::array<T, 4>{x_[0], x_[1], x_[2], x_[3]};
   }
   operator std::vector<T>() const { return x_; }
@@ -54,9 +60,9 @@ void* TensorList(const torch::TensorList& x);
 void* ScalarType(const torch::ScalarType& x);
 void* Scalar(const torch::Scalar& x);
 void* TensorOptions(const torch::TensorOptions& x);
-void* Device(torch::Device& x);
+void* Device(const torch::Device& x);
 void* Dtype(const torch::Dtype& x);
-void* Dimname(torch::Dimname& x);
+void* Dimname(const torch::Dimname& x);
 void* DimnameList(const torch::DimnameList& x);
 void* Generator(const torch::Generator& x);
 void* MemoryFormat(const torch::MemoryFormat& x);
@@ -152,7 +158,6 @@ LANTERN_FROM_RAW_DECL(bool_t, bool)
 LANTERN_FROM_RAW_DECL(double_t, double)
 LANTERN_FROM_RAW_DECL(Stream, at::Stream)
 LANTERN_FROM_RAW_DECL(IValue, torch::IValue)
-LANTERN_FROM_RAW_DECL(Layout, torch::Layout)
 LANTERN_FROM_RAW_DECL(SymInt, c10::SymInt)
 LANTERN_FROM_RAW_DECL(SymIntArrayRef, c10::SymIntArrayRef)
 LANTERN_FROM_RAW_DECL(FunctionSchema, c10::FunctionSchema)
@@ -272,10 +277,10 @@ class ArrayBox : public ArrayBoxImpl<Type>{
     ArrayBox(const std::vector<Type>& x) : ArrayBoxImpl<Type>(x) {}
 };
 
-template<typename T>
-std::vector<T> to_int_vec (const std::vector<c10::SymInt> x) {
+inline std::vector<int64_t> to_int_vec(const std::vector<c10::SymInt>& x) {
   std::vector<int64_t> out;
-  for (auto i : x) {
+  out.reserve(x.size());
+  for (const auto& i : x) {
     out.push_back(i.expect_int());
   }
   return out;
@@ -293,7 +298,7 @@ class ArrayBox<int64_t> : public ArrayBoxImpl<int64_t> {
     sym_ = c10::SymIntArrayRef(sym_buffer_);
   }
   ArrayBox(const std::vector<c10::SymInt>& x)
-      : ArrayBoxImpl<int64_t>(to_int_vec<int64_t>(x)), sym_buffer_(x), sym_(sym_buffer_) {}
+      : ArrayBoxImpl<int64_t>(to_int_vec(x)), sym_buffer_(x), sym_(sym_buffer_) {}
   ArrayBox(const ArrayBox& other)
       : ArrayBoxImpl<int64_t>(other), sym_buffer_(other.sym_buffer_), sym_(sym_buffer_) {}
   ArrayBox(ArrayBox&& other) noexcept
@@ -469,9 +474,9 @@ void* Scalar(const torch::Scalar& x) { return make_ptr<torch::Scalar>(x); }
 void* TensorOptions(const torch::TensorOptions& x) {
   return make_ptr<torch::TensorOptions>(x);
 }
-void* Device(torch::Device& x) { return make_ptr<self_contained::Device>(x); }
+void* Device(const torch::Device& x) { return make_ptr<self_contained::Device>(x); }
 void* Dtype(const torch::Dtype& x) { return make_ptr<torch::Dtype>(x); }
-void* Dimname(torch::Dimname& x) {
+void* Dimname(const torch::Dimname& x) {
   return make_ptr<self_contained::Dimname>(x);
 }
 void* DimnameList(const torch::DimnameList& x) {
@@ -604,10 +609,10 @@ void* Device(const c10::optional<torch::Device>& x) {
 }  // namespace make_raw
 
 #define LANTERN_FROM_RAW(name, type) \
-  type& name(void* x) { return *reinterpret_cast<type*>(x); }
+  type& name(void* x) { assert(x != nullptr && "from_raw::" #name " called with null pointer"); return *reinterpret_cast<type*>(x); }
 
-#define LANTERN_FROM_RAW_WRAPPED(name, wraper_type, type) \
-  type& name(void* x) { return *reinterpret_cast<wraper_type*>(x); }
+#define LANTERN_FROM_RAW_WRAPPED(name, wrapper_type, type) \
+  type& name(void* x) { assert(x != nullptr && "from_raw::" #name " called with null pointer"); return *reinterpret_cast<wrapper_type*>(x); }
 
 namespace alias {
 using TensorDict = c10::Dict<std::string, torch::Tensor>;
