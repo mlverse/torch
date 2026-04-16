@@ -177,21 +177,32 @@ inline std::string cpp_suffix(const std::vector<std::string>& arg_names,
   return out;
 }
 
+static const bool* get_remove_table() {
+  static bool table[256] = {};
+  static bool initialized = false;
+  if (!initialized) {
+    const char chars[] = "'\"%%#:><, *&";
+    for (const char* p = chars; *p; ++p) {
+      table[static_cast<unsigned char>(*p)] = true;
+    }
+    initialized = true;
+  }
+  return table;
+}
+
 // [[Rcpp::export]]
 std::string cpp_clean_names(const std::string& x,
                             const std::vector<std::string>& r) {
-  std::string out = x;
-  char replace;
-  int r_size = r.size();
-  for (int i = 0; i < r_size; i++) {
-    replace = r[i][0];
-    out.erase(std::remove(out.begin(), out.end(), replace), out.end());
+  const bool* table = get_remove_table();
+  std::string out;
+  out.reserve(x.size());
+  for (char c : x) {
+    if (!table[static_cast<unsigned char>(c)]) {
+      out += c;
+    }
   }
   return out;
 }
-
-const std::vector<std::string> remove_characters = {
-    "'", "\"", "%", "#", ":", ">", "<", ",", " ", "*", "&"};
 
 // [[Rcpp::export]]
 std::string cpp_make_function_name(const std::string& method_name,
@@ -200,7 +211,7 @@ std::string cpp_make_function_name(const std::string& method_name,
                                    const std::string& type) {
   std::string out = "cpp_torch_" + type + "_" + method_name + "_";
   out += cpp_suffix(arg_names, arg_types);
-  out = cpp_clean_names(out, remove_characters);
+  out = cpp_clean_names(out, {});
   return out;
 }
 
