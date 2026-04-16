@@ -200,50 +200,69 @@ struct NamedTupleHelper {
   std::vector<std::string> names;
 };
 
-// a wrapper class for optional<torch::ArrayRef<T>> that owns all of it's memory
+// a wrapper class for optional<torch::ArrayRef<T>> that owns all of its memory
 // and can easily be cast to the array ref type.
 template <typename T>
 class OptionalArrayRef {
  public:
-  std::shared_ptr<std::vector<T>> x_;
-  std::shared_ptr<c10::optional<torch::ArrayRef<T>>> x_ref_;
+  std::vector<T> x_;
+  c10::optional<torch::ArrayRef<T>> x_ref_;
   OptionalArrayRef(const c10::optional<torch::ArrayRef<T>>& x) {
     if (x.has_value()) {
-      x_ = std::make_shared<std::vector<T>>(x.value().vec());
-      x_ref_ = std::make_shared<c10::optional<torch::ArrayRef<T>>>(*x_);
+      x_ = std::vector<T>(x.value().vec());
+      x_ref_ = torch::ArrayRef<T>(x_);
     } else {
-      x_ref_ =
-          std::make_shared<c10::optional<torch::ArrayRef<T>>>(c10::nullopt);
+      x_ref_ = c10::nullopt;
     }
   }
   OptionalArrayRef(const std::vector<T>& x) {
     if (x.size() == 0) {
-      x_ref_ =
-          std::make_shared<c10::optional<torch::ArrayRef<T>>>(c10::nullopt);
+      x_ref_ = c10::nullopt;
     } else {
-      x_ = std::make_shared<std::vector<T>>(x);
-      x_ref_ = std::make_shared<c10::optional<torch::ArrayRef<T>>>(*x_);
+      x_ = x;
+      x_ref_ = torch::ArrayRef<T>(x_);
     }
   }
-  operator c10::optional<torch::ArrayRef<T>> &() { return *x_ref_; }
+  OptionalArrayRef(const OptionalArrayRef& other) : x_(other.x_) {
+    if (other.x_ref_.has_value()) {
+      x_ref_ = torch::ArrayRef<T>(x_);
+    } else {
+      x_ref_ = c10::nullopt;
+    }
+  }
+  OptionalArrayRef(OptionalArrayRef&& other) noexcept
+      : x_(std::move(other.x_)) {
+    if (other.x_ref_.has_value()) {
+      x_ref_ = torch::ArrayRef<T>(x_);
+    } else {
+      x_ref_ = c10::nullopt;
+    }
+  }
+  OptionalArrayRef& operator=(const OptionalArrayRef&) = delete;
+  OptionalArrayRef& operator=(OptionalArrayRef&&) = delete;
+  operator c10::optional<torch::ArrayRef<T>> &() { return x_ref_; }
 };
 
 template <typename Type>
 class ArrayBoxImpl {
  public:
-  std::shared_ptr<std::vector<Type>> buffer_;
-  std::shared_ptr<torch::ArrayRef<Type>> x_;
-  ArrayBoxImpl(const std::vector<Type>& x) {
-    buffer_ = std::make_shared<std::vector<Type>>(x);
-    x_ = std::make_shared<torch::ArrayRef<Type>>(*buffer_);
-  }
-  operator torch::ArrayRef<Type> &() { return *x_; }
-  operator std::vector<Type> &() { return *buffer_; }
+  std::vector<Type> buffer_;
+  torch::ArrayRef<Type> x_;
+  ArrayBoxImpl(const std::vector<Type>& x)
+      : buffer_(x), x_(buffer_) {}
+  ArrayBoxImpl(const ArrayBoxImpl& other)
+      : buffer_(other.buffer_), x_(buffer_) {}
+  ArrayBoxImpl(ArrayBoxImpl&& other) noexcept
+      : buffer_(std::move(other.buffer_)), x_(buffer_) {}
+  ArrayBoxImpl& operator=(const ArrayBoxImpl&) = delete;
+  ArrayBoxImpl& operator=(ArrayBoxImpl&&) = delete;
+  operator torch::ArrayRef<Type> &() { return x_; }
+  operator std::vector<Type> &() { return buffer_; }
   void push_back(const Type& x) {
-    buffer_->push_back(x);
+    buffer_.push_back(x);
     // We have to re-create the ArrayRef because the underlying buffer has
     // changed.
-    x_ = std::make_shared<torch::ArrayRef<Type>>(*buffer_);
+    x_ = torch::ArrayRef<Type>(buffer_);
   }
 };
 
@@ -265,21 +284,24 @@ std::vector<T> to_int_vec (const std::vector<c10::SymInt> x) {
 template <>
 class ArrayBox<int64_t> : public ArrayBoxImpl<int64_t> {
  public:
-  std::shared_ptr<std::vector<c10::SymInt>> sym_buffer_;
-  std::shared_ptr<c10::SymIntArrayRef> sym_;
-  ArrayBox(const std::vector<int64_t>& x) : ArrayBoxImpl<int64_t>(x) {
-    sym_buffer_ = std::make_shared<std::vector<c10::SymInt>>();
+  std::vector<c10::SymInt> sym_buffer_;
+  c10::SymIntArrayRef sym_;
+  ArrayBox(const std::vector<int64_t>& x) : ArrayBoxImpl<int64_t>(x), sym_buffer_(), sym_(sym_buffer_) {
     for (auto i : x) {
-      sym_buffer_->push_back(c10::SymInt(i));
+      sym_buffer_.push_back(c10::SymInt(i));
     }
-    sym_ = std::make_shared<c10::SymIntArrayRef>(*sym_buffer_);
+    sym_ = c10::SymIntArrayRef(sym_buffer_);
   }
-  ArrayBox(const std::vector<c10::SymInt>& x) : ArrayBoxImpl<int64_t>(to_int_vec<int64_t>(x)) {
-    sym_buffer_ = std::make_shared<std::vector<c10::SymInt>>(x);
-    sym_ = std::make_shared<c10::SymIntArrayRef>(*sym_buffer_);
-  }
+  ArrayBox(const std::vector<c10::SymInt>& x)
+      : ArrayBoxImpl<int64_t>(to_int_vec<int64_t>(x)), sym_buffer_(x), sym_(sym_buffer_) {}
+  ArrayBox(const ArrayBox& other)
+      : ArrayBoxImpl<int64_t>(other), sym_buffer_(other.sym_buffer_), sym_(sym_buffer_) {}
+  ArrayBox(ArrayBox&& other) noexcept
+      : ArrayBoxImpl<int64_t>(std::move(other)), sym_buffer_(std::move(other.sym_buffer_)), sym_(sym_buffer_) {}
+  ArrayBox& operator=(const ArrayBox&) = delete;
+  ArrayBox& operator=(ArrayBox&&) = delete;
   operator c10::SymIntArrayRef &() {
-    return *sym_;
+    return sym_;
   }
 };
 
@@ -287,9 +309,9 @@ class ArrayBox<int64_t> : public ArrayBoxImpl<int64_t> {
 template <typename T>
 class Box {
  public:
-  std::shared_ptr<T> x_;
-  Box(const T& x) { x_ = std::make_shared<T>(x); }
-  operator T&() { return *x_; }
+  T x_;
+  Box(const T& x) : x_(x) {}
+  operator T&() { return x_; }
 };
 
 // Objects return from lantern must own all memory necessary to re-use them.
@@ -315,9 +337,13 @@ using SymIntArrayRef = ArrayBox<std::int64_t>;
 
 class string_view {
  public:
-  std::shared_ptr<std::string> s_;
-  std::shared_ptr<c10::string_view> s_view_;
+  std::string s_;
+  c10::string_view s_view_;
   string_view(const c10::string_view& x);
+  string_view(const string_view& other) : s_(other.s_), s_view_(s_) {}
+  string_view(string_view&& other) noexcept : s_(std::move(other.s_)), s_view_(s_) {}
+  string_view& operator=(const string_view&) = delete;
+  string_view& operator=(string_view&&) = delete;
   operator c10::string_view &();
 };
 
@@ -329,18 +355,50 @@ namespace optional {
 
 class DimnameList {
  public:
-  std::shared_ptr<c10::optional<torch::DimnameList>> x_;
-  std::shared_ptr<std::vector<torch::Dimname>> vec_;
+  std::vector<torch::Dimname> vec_;
+  c10::optional<torch::DimnameList> x_;
   DimnameList(const c10::optional<torch::DimnameList>& x);
+  DimnameList(const DimnameList& other) : vec_(other.vec_) {
+    if (other.x_.has_value()) {
+      x_ = torch::DimnameList(vec_);
+    } else {
+      x_ = c10::nullopt;
+    }
+  }
+  DimnameList(DimnameList&& other) noexcept : vec_(std::move(other.vec_)) {
+    if (other.x_.has_value()) {
+      x_ = torch::DimnameList(vec_);
+    } else {
+      x_ = c10::nullopt;
+    }
+  }
+  DimnameList& operator=(const DimnameList&) = delete;
+  DimnameList& operator=(DimnameList&&) = delete;
   operator c10::optional<torch::DimnameList> &();
 };
 
 class string_view {
  public:
-  std::shared_ptr<std::string> s_;
-  std::shared_ptr<c10::optional<c10::string_view>> s_view_;
-  operator c10::optional<c10::string_view> &();
+  std::string s_;
+  c10::optional<c10::string_view> s_view_;
   string_view(const c10::optional<c10::string_view>& x);
+  string_view(const string_view& other) : s_(other.s_) {
+    if (other.s_view_.has_value()) {
+      s_view_ = c10::string_view(s_);
+    } else {
+      s_view_ = c10::nullopt;
+    }
+  }
+  string_view(string_view&& other) noexcept : s_(std::move(other.s_)) {
+    if (other.s_view_.has_value()) {
+      s_view_ = c10::string_view(s_);
+    } else {
+      s_view_ = c10::nullopt;
+    }
+  }
+  string_view& operator=(const string_view&) = delete;
+  string_view& operator=(string_view&&) = delete;
+  operator c10::optional<c10::string_view> &();
 };
 
 using Generator = Box<c10::optional<torch::Generator>>;
@@ -367,36 +425,34 @@ using Layout = Box<c10::optional<torch::Layout>>;
 
 namespace self_contained {
 
-string_view::string_view(const c10::string_view& x) {
-  s_ = std::make_shared<std::string>(x.data(), x.size());
-  s_view_ = std::make_shared<c10::string_view>(*s_);
-}
+string_view::string_view(const c10::string_view& x)
+    : s_(x.data(), x.size()), s_view_(s_) {}
 
-string_view::operator c10::string_view &() { return *s_view_; }
+string_view::operator c10::string_view &() { return s_view_; }
 
 namespace optional {
 
 DimnameList::DimnameList(const c10::optional<torch::DimnameList>& x) {
   if (x.has_value()) {
-    vec_ = std::make_shared<std::vector<torch::Dimname>>(x.value().vec());
-    x_ = std::make_shared<c10::optional<torch::DimnameList>>(*vec_);
+    vec_ = x.value().vec();
+    x_ = torch::DimnameList(vec_);
   } else {
-    x_ = std::make_shared<c10::optional<torch::DimnameList>>(c10::nullopt);
+    x_ = c10::nullopt;
   }
-};
+}
 
-DimnameList::operator c10::optional<torch::DimnameList> &() { return *x_; };
+DimnameList::operator c10::optional<torch::DimnameList> &() { return x_; }
 
 string_view::string_view(const c10::optional<c10::string_view>& x) {
   if (x.has_value()) {
-    s_ = std::make_shared<std::string>(x.value().data(), x.value().size());
-    s_view_ = std::make_shared<c10::optional<c10::string_view>>(*s_);
+    s_ = std::string(x.value().data(), x.value().size());
+    s_view_ = c10::string_view(s_);
   } else {
-    s_view_ = std::make_shared<c10::optional<c10::string_view>>(c10::nullopt);
+    s_view_ = c10::nullopt;
   }
-};
+}
 
-string_view::operator c10::optional<c10::string_view> &() { return *s_view_; };
+string_view::operator c10::optional<c10::string_view> &() { return s_view_; }
 
 }  // namespace optional
 }  // namespace self_contained
