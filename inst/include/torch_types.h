@@ -17,7 +17,7 @@ class XPtrTorch {
       : XPtrTorch(std::shared_ptr<void>(x, deleter)) {}
   explicit XPtrTorch(std::shared_ptr<void> x) : ptr(x) {}
   void* get() const { return ptr.get(); }
-  std::shared_ptr<void> get_shared() const { return ptr; }
+  const std::shared_ptr<void>& get_shared() const { return ptr; }
 };
 
 class XPtrTorchIndexTensor : public XPtrTorch {
