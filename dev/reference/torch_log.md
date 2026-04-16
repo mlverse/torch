@@ -31,8 +31,8 @@ a
 torch_log(a)
 }
 #> torch_tensor
-#> -0.6372
-#> -0.5145
+#>  0.5593
+#>     nan
 #>     nan
 #>     nan
 #>     nan

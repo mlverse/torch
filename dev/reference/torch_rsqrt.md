@@ -31,9 +31,9 @@ a
 torch_rsqrt(a)
 }
 #> torch_tensor
-#>  8.2110
-#>  0.8747
-#>  0.7605
+#>     nan
+#>  1.1090
+#>     nan
 #>     nan
 #> [ CPUFloatType{4} ]
 ```
