@@ -82,18 +82,39 @@ Benchmarked with `torch_matmul(a, b)` (single-overload, direct call):
 
 Multi-overload functions like `torch_add` are unaffected (still 5.86µs).
 
+## Fix 6: Generate inline if/else for 2-overload functions (codegen)
+
+For functions with exactly 2 overloads differing in one dispatch arg type,
+generate inline R type checks instead of calling the generic dispatcher.
+Added helper functions `is_tensor_dispatch()` and `is_int64_dispatch()` to
+`R/codegen-utils.R` and type-check code generation in `r_inline_dispatch()`.
+
+Covers 10 type pairs (Scalar|Tensor, Dimname|int64_t, Tensor|double, etc.)
+affecting 106 namespace functions and 100 methods.
+
+| expression | median (before) | median (after) | change |
+|------------|-----------------|----------------|--------|
+| torch_add  | 5.86µs          | 2.05µs         | -65%   |
+| direct     | 1.56µs          | 1.56µs         | (unchanged) |
+
 ## Summary
+
+Dispatch path breakdown (namespace / methods):
+
+| path             | namespace   | methods   |
+|------------------|-------------|-----------|
+| direct call      | 2,065 (84%) | 609 (80%) |
+| inline if/else   | 106 (4%)    | 100 (13%) |
+| generic dispatch | 298 (12%)   | 56 (7%)   |
+
+Final performance:
 
 | function       | type             | baseline | after all fixes | improvement |
 |----------------|------------------|----------|-----------------|-------------|
-| torch_matmul   | single-overload  | 6.76µs   | 1.39µs          | -79%        |
-| torch_add      | multi-overload   | 6.76µs   | 5.86µs          | -13%        |
+| torch_matmul   | direct call      | 6.76µs   | 1.39µs          | -79%        |
+| torch_add      | inline if/else   | 6.76µs   | 2.05µs          | -70%        |
+| torch_div      | generic dispatch | 6.76µs   | 5.86µs          | -13%        |
 
-For single-overload functions (the vast majority), dispatch overhead is
-essentially eliminated — only ~0.16µs remains from the R function call
-wrapper itself.
-
-For multi-overload functions, the remaining ~4.3µs overhead is dominated by
-`do.call()`, the R↔C++ round-trip for `create_fn_name`, and `mget()` + list
-construction. Further gains for these would require generating inline type
-checks at codegen time.
+For ~88-93% of functions, dispatch overhead is essentially eliminated.
+The remaining ~7-12% still use the generic dispatcher (functions with 3+
+overloads or complex dispatch patterns).

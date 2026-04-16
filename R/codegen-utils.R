@@ -26,6 +26,19 @@ make_cpp_function_name <- function(method_name, arg_types, type) {
   cpp_make_function_name(method_name, names(arg_types), arg_types, type)
 }
 
+# Type-check helpers used by generated inline dispatch code.
+# These replicate the priority logic in cpp_arg_to_torch_type for specific
+# type pairs so that codegen can emit simple if/else branches.
+is_tensor_dispatch <- function(x) {
+  if (inherits(x, "torch_tensor")) return(TRUE)
+  if (is.null(x) || inherits(x, "torch_scalar")) return(FALSE)
+  is.atomic(x) && length(x) != 1L
+}
+
+is_int64_dispatch <- function(x) {
+  is.numeric(x) && length(x) == 1L
+}
+
 do_call <- function(fun, args) {
   args_needed <- names(formals(fun))
   args <- args[args_needed]

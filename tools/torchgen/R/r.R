@@ -423,6 +423,160 @@ is_trivial_dispatch <- function(decls) {
   length(decls) == 1
 }
 
+# Identify the single dispatch arg that has multiple types across overloads.
+# Returns NULL if there isn't exactly one such arg.
+get_single_multitype_arg <- function(decls) {
+  dispatch_args <- get_dispatch_arguments(decls)
+  multitype_args <- Filter(function(a) {
+    length(r_argument_expected_types(a, decls)) > 1
+  }, dispatch_args)
+  if (length(multitype_args) == 1) multitype_args[[1]] else NULL
+}
+
+# Map a set of expected types to an R expression that checks whether the
+# dispatch arg should resolve to a given target type. Returns NULL if we
+# don't have a known check for this type pair.
+r_type_check <- function(target_type, all_types, arg_r_name) {
+  pair <- sort(all_types)
+  key <- paste(pair, collapse = "|")
+
+  # Scalar | Tensor — the dominant case (229 functions)
+  if (key == "Scalar|Tensor") {
+    if (target_type == "Tensor")
+      return(glue::glue("is_tensor_dispatch({arg_r_name})"))
+    else
+      return(glue::glue("!is_tensor_dispatch({arg_r_name})"))
+  }
+
+  # Dimname | int64_t
+  if (key == "Dimname|int64_t") {
+    if (target_type == "Dimname")
+      return(glue::glue("is.character({arg_r_name})"))
+    else
+      return(glue::glue("!is.character({arg_r_name})"))
+  }
+
+  # Tensor | double
+  if (key == "Tensor|double") {
+    if (target_type == "Tensor")
+      return(glue::glue("is_tensor_dispatch({arg_r_name})"))
+    else
+      return(glue::glue("!is_tensor_dispatch({arg_r_name})"))
+  }
+
+  # DimnameList | IntArrayRef
+  if (key == "DimnameList|IntArrayRef") {
+    if (target_type == "DimnameList")
+      return(glue::glue("is.character({arg_r_name})"))
+    else
+      return(glue::glue("!is.character({arg_r_name})"))
+  }
+
+  # IntArrayRef | c10::string_view
+  if (key == "IntArrayRef|c10::string_view") {
+    if (target_type == "c10::string_view")
+      return(glue::glue("is.character({arg_r_name})"))
+    else
+      return(glue::glue("!is.character({arg_r_name})"))
+  }
+
+  # int64_t | IntArrayRef
+  if (key == "IntArrayRef|int64_t") {
+    if (target_type == "int64_t")
+      return(glue::glue("is_int64_dispatch({arg_r_name})"))
+    else
+      return(glue::glue("!is_int64_dispatch({arg_r_name})"))
+  }
+
+  # IntArrayRef | Tensor
+  if (key == "IntArrayRef|Tensor") {
+    if (target_type == "Tensor")
+      return(glue::glue("inherits({arg_r_name}, 'torch_tensor')"))
+    else
+      return(glue::glue("!inherits({arg_r_name}, 'torch_tensor')"))
+  }
+
+  # Tensor | TensorList
+  if (key == "Tensor|TensorList") {
+    if (target_type == "Tensor")
+      return(glue::glue("inherits({arg_r_name}, 'torch_tensor')"))
+    else
+      return(glue::glue("!inherits({arg_r_name}, 'torch_tensor')"))
+  }
+
+  # int64_t | Tensor
+  if (key == "Tensor|int64_t") {
+    if (target_type == "Tensor")
+      return(glue::glue("inherits({arg_r_name}, 'torch_tensor')"))
+    else
+      return(glue::glue("!inherits({arg_r_name}, 'torch_tensor')"))
+  }
+
+  # Scalar | c10::string_view
+  if (key == "Scalar|c10::string_view") {
+    if (target_type == "c10::string_view")
+      return(glue::glue("is.character({arg_r_name})"))
+    else
+      return(glue::glue("!is.character({arg_r_name})"))
+  }
+
+  NULL
+}
+
+# Try to generate inline if/else dispatch for functions with exactly 2
+# overloads where one dispatch arg has multiple types.
+# Returns NULL if inline dispatch is not possible.
+r_inline_dispatch <- function(decls, fun_type) {
+  if (length(decls) != 2) return(NULL)
+  multitype_arg <- get_single_multitype_arg(decls)
+  if (is.null(multitype_arg)) return(NULL)
+
+  arg_r_name <- r_argument_name(multitype_arg)
+  all_types <- r_argument_expected_types(multitype_arg, decls)
+
+  # Group overloads by the type of the multi-type dispatch arg.
+  overload_by_type <- list()
+  for (decl in decls) {
+    arg_obj <- Filter(function(x) x$name == multitype_arg, decl$arguments)
+    if (length(arg_obj) == 0) return(NULL)
+    dtype <- r_mask_dynamic_type_name(arg_obj[[1]]$dynamic_type)
+    overload_by_type[[dtype]] <- decl
+  }
+
+  # Generate type check for each overload
+  branches <- list()
+  for (dtype in names(overload_by_type)) {
+    check <- r_type_check(dtype, all_types, arg_r_name)
+    if (is.null(check)) return(NULL)  # unsupported type pair, fall back
+
+    decl <- overload_by_type[[dtype]]
+    fn_name <- cpp_function_name(decl, fun_type)
+    fn_args <- purrr::map_chr(decl$arguments, ~ r_argument_name(.x$name))
+    args_str <- glue::glue_collapse(fn_args, sep = ", ")
+    branches[[length(branches) + 1]] <- list(
+      check = check,
+      call = glue::glue("{fn_name}({args_str})")
+    )
+  }
+
+  if (length(branches) < 2) return(NULL)
+
+  # Build if/else chain: first branch gets `if`, last gets `else`
+  lines <- character()
+  for (i in seq_along(branches)) {
+    if (i == 1) {
+      lines <- c(lines, glue::glue("if ({branches[[i]]$check}) {{"))
+    } else if (i == length(branches)) {
+      lines <- c(lines, "} else {")
+    } else {
+      lines <- c(lines, glue::glue("}} else if ({branches[[i]]$check}) {{"))
+    }
+    lines <- c(lines, glue::glue("  {branches[[i]]$call}"))
+  }
+  lines <- c(lines, "}")
+  paste(lines, collapse = "\n")
+}
+
 # For trivial dispatch, compute the resolved C++ function name at codegen time.
 # This reuses the same make_cpp_function_name used by cpp.R.
 resolve_trivial_fn_name <- function(decls, fun_type) {
@@ -462,6 +616,9 @@ r_namespace_body <- function(decls) {
     args_str <- glue::glue_collapse(fn_args, sep = ", ")
     return(glue::glue("{fn_name}({args_str})"))
   }
+
+  inline <- r_inline_dispatch(decls, "namespace")
+  if (!is.null(inline)) return(inline)
 
   glue::glue(.sep = "\n",
   "{r_namespace_list_of_arguments(decls)}",
@@ -536,6 +693,9 @@ r_method_body <- function(decls) {
     args_str <- glue::glue_collapse(fn_args, sep = ", ")
     return(glue::glue("{fn_name}({args_str})"))
   }
+
+  inline <- r_inline_dispatch(decls, "method")
+  if (!is.null(inline)) return(inline)
 
   glue::glue(
     "{r_method_list_of_arguments(decls)}",
