@@ -37,8 +37,8 @@ torch_count_nonzero(x)
 torch_count_nonzero(x, dim=1)
 }
 #> torch_tensor
-#>  0
-#>  2
+#>  1
+#>  1
 #>  1
 #> [ CPULongType{3} ]
 ```

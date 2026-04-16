@@ -43,10 +43,8 @@ mask
 torch_masked_select(x, mask)
 }
 #> torch_tensor
-#>  1.0695
-#>  1.6993
-#>  1.0509
-#>  1.5542
-#>  0.6183
-#> [ CPUFloatType{5} ]
+#>  1.5749
+#>  0.6866
+#>  1.6827
+#> [ CPUFloatType{3} ]
 ```
