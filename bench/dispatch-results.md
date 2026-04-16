@@ -51,3 +51,26 @@ using a static `bool[256]` lookup table. Also removed the dead
 
 Negligible impact — the generated function names are short enough that the
 multi-pass approach was already fast. Still a cleaner implementation.
+
+## Fix 4 (tried, reverted): Skip list subsetting when args already match
+
+Tried adding an `identical(names(args), args_needed)` guard to skip
+`args[args_needed]` when names already match. No improvement — the
+`identical()` check costs roughly the same as the subsetting itself.
+
+| expression | median (before) | median (after) | change |
+|------------|-----------------|----------------|--------|
+| dispatch   | 5.86µs          | 5.95µs         | (noise)|
+
+## Summary
+
+| | baseline | after all fixes | improvement |
+|----------|----------|-----------------|-------------|
+| dispatch | 6.76µs   | 5.86µs          | -13.3%      |
+| direct   | 1.56µs   | 1.56µs          | (unchanged) |
+
+The remaining ~4.3µs dispatch overhead is dominated by `do.call()` (~0.65µs
+inherent cost), the R↔C++ round-trip for `create_fn_name`, and `mget()` +
+list construction in the generated R wrappers. Further gains would require
+deeper refactors (e.g. moving the full dispatch into a single C++ call, or
+generating inline dispatch code at codegen time).
