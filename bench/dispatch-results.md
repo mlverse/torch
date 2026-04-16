@@ -25,3 +25,15 @@ Cache the resolved function and its `formals()` names in an environment
 |------------|-----------------|----------------|--------|
 | dispatch   | 6.76µs          | 6.11µs         | -9.6%  |
 | direct     | 1.56µs          | 1.52µs         | (noise)|
+
+## Fix 2: Replace std::set with linear scan in type resolution
+
+The `expected_types` vectors are tiny (1-3 elements). Building a `std::set`
+from them on every call is slower than a simple `std::find` linear scan.
+Also removed a dead debug loop in `create_fn_name`.
+
+| expression     | median (before) | median (after) | change |
+|----------------|-----------------|----------------|--------|
+| dispatch       | 6.11µs          | 5.90µs         | -3.4%  |
+| create_fn_name | 1.39µs          | 1.19µs         | -14.4% |
+| direct         | 1.52µs          | 1.56µs         | (noise)|
