@@ -32,14 +32,20 @@ do_call <- function(fun, args) {
   do.call(fun, args)
 }
 
+.dispatch_cache <- new.env(parent = emptyenv())
+
 call_c_function <- function(fun_name, args, expected_types, nd_args, return_types, fun_type) {
   fun_name <- create_fn_name(fun_name, fun_type, nd_args, args, expected_types)
-  f <- getNamespace("torch")[[fun_name]]
 
-  if (is.null(f)) {
-    value_error("{fun_name} does not exist")
+  cached <- .dispatch_cache[[fun_name]]
+  if (is.null(cached)) {
+    f <- getNamespace("torch")[[fun_name]]
+    if (is.null(f)) {
+      value_error("{fun_name} does not exist")
+    }
+    cached <- list(f = f, args_needed = names(formals(f)))
+    .dispatch_cache[[fun_name]] <- cached
   }
 
-  out <- do_call(f, args)
-  out
+  do.call(cached$f, args[cached$args_needed])
 }
