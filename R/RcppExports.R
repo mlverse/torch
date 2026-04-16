@@ -209,18 +209,6 @@ cpp_arg_to_torch_type <- function(obj, expected_types, arg_name) {
     .Call(`_torch_cpp_arg_to_torch_type`, obj, expected_types, arg_name)
 }
 
-cpp_clean_names <- function(x, r) {
-    .Call(`_torch_cpp_clean_names`, x, r)
-}
-
-cpp_make_function_name <- function(method_name, arg_names, arg_types, type) {
-    .Call(`_torch_cpp_make_function_name`, method_name, arg_names, arg_types, type)
-}
-
-create_fn_name <- function(fun_name, fun_type, nd_args, args, expected_types) {
-    .Call(`_torch_create_fn_name`, fun_name, fun_type, nd_args, args, expected_types)
-}
-
 cpp_contrib_torch_sparsemax <- function(input, dim) {
     .Call(`_torch_cpp_contrib_torch_sparsemax`, input, dim)
 }
