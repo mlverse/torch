@@ -417,7 +417,51 @@ r_return_types <- function(decls) {
   glue::glue("return_types <- list({glue::glue_collapse(types, ', ')})")
 }
 
+# Dispatch is trivial when there is only one overload, so the resolved
+# C++ function name is fully determined at codegen time.
+is_trivial_dispatch <- function(decls) {
+  length(decls) == 1
+}
+
+# For trivial dispatch, compute the resolved C++ function name at codegen time.
+# This reuses the same make_cpp_function_name used by cpp.R.
+resolve_trivial_fn_name <- function(decls, fun_type) {
+  dispatch_args <- get_dispatch_arguments(decls)
+  if (length(dispatch_args) == 0) {
+    return(make_cpp_function_name(decls[[1]]$name, list(), fun_type))
+  }
+  arg_types <- list()
+  for (a in dispatch_args) {
+    types <- r_argument_expected_types(a, decls)
+    arg_types[[r_argument_name(a)]] <- types
+  }
+  make_cpp_function_name(decls[[1]]$name, arg_types, fun_type)
+}
+
+# Get the ordered arg names that the resolved C++ function expects.
+# For trivial dispatch all overloads resolve to the same function; we find
+# the matching overload and return its full arg list (in declaration order).
+resolve_trivial_fn_args <- function(decls, fun_type) {
+  fn_name <- resolve_trivial_fn_name(decls, fun_type)
+  # Check each overload to find the one whose generated name matches
+  for (decl in decls) {
+    candidate <- cpp_function_name(decl, fun_type)
+    if (candidate == fn_name) {
+      return(purrr::map_chr(decl$arguments, ~ r_argument_name(.x$name)))
+    }
+  }
+  # Fallback: use get_arguments_order (should not happen for trivial dispatch)
+  purrr::map_chr(get_arguments_order(decls), r_argument_name)
+}
+
 r_namespace_body <- function(decls) {
+
+  if (is_trivial_dispatch(decls)) {
+    fn_name <- resolve_trivial_fn_name(decls, "namespace")
+    fn_args <- resolve_trivial_fn_args(decls, "namespace")
+    args_str <- glue::glue_collapse(fn_args, sep = ", ")
+    return(glue::glue("{fn_name}({args_str})"))
+  }
 
   glue::glue(.sep = "\n",
   "{r_namespace_list_of_arguments(decls)}",
@@ -485,6 +529,13 @@ r_method_signature <- function(decls) {
 }
 
 r_method_body <- function(decls) {
+
+  if (is_trivial_dispatch(decls)) {
+    fn_name <- resolve_trivial_fn_name(decls, "method")
+    fn_args <- resolve_trivial_fn_args(decls, "method")
+    args_str <- glue::glue_collapse(fn_args, sep = ", ")
+    return(glue::glue("{fn_name}({args_str})"))
+  }
 
   glue::glue(
     "{r_method_list_of_arguments(decls)}",
