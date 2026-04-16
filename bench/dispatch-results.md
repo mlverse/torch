@@ -62,15 +62,38 @@ Tried adding an `identical(names(args), args_needed)` guard to skip
 |------------|-----------------|----------------|--------|
 | dispatch   | 5.86µs          | 5.95µs         | (noise)|
 
+## Fix 5: Generate direct calls for single-overload functions (codegen)
+
+For functions with only one overload, the resolved C++ function name is
+known at codegen time. Changed `tools/torchgen/R/r.R` to generate a direct
+call (e.g. `cpp_torch_namespace_matmul_self_Tensor_other_Tensor(self, other)`)
+instead of going through `call_c_function`.
+
+This eliminates all dispatch overhead (type resolution, cache lookup,
+`do.call`) for ~82% of namespace functions (1,851 of 2,256) and ~72% of
+methods (409 of 565).
+
+Benchmarked with `torch_matmul(a, b)` (single-overload, direct call):
+
+| expression | median (before) | median (after) | change |
+|------------|-----------------|----------------|--------|
+| dispatch   | ~5.86µs         | 1.39µs         | -76%   |
+| direct     | 1.23µs          | 1.23µs         | (unchanged) |
+
+Multi-overload functions like `torch_add` are unaffected (still 5.86µs).
+
 ## Summary
 
-| | baseline | after all fixes | improvement |
-|----------|----------|-----------------|-------------|
-| dispatch | 6.76µs   | 5.86µs          | -13.3%      |
-| direct   | 1.56µs   | 1.56µs          | (unchanged) |
+| function       | type             | baseline | after all fixes | improvement |
+|----------------|------------------|----------|-----------------|-------------|
+| torch_matmul   | single-overload  | 6.76µs   | 1.39µs          | -79%        |
+| torch_add      | multi-overload   | 6.76µs   | 5.86µs          | -13%        |
 
-The remaining ~4.3µs dispatch overhead is dominated by `do.call()` (~0.65µs
-inherent cost), the R↔C++ round-trip for `create_fn_name`, and `mget()` +
-list construction in the generated R wrappers. Further gains would require
-deeper refactors (e.g. moving the full dispatch into a single C++ call, or
-generating inline dispatch code at codegen time).
+For single-overload functions (the vast majority), dispatch overhead is
+essentially eliminated — only ~0.16µs remains from the R function call
+wrapper itself.
+
+For multi-overload functions, the remaining ~4.3µs overhead is dominated by
+`do.call()`, the R↔C++ round-trip for `create_fn_name`, and `mget()` + list
+construction. Further gains for these would require generating inline type
+checks at codegen time.
