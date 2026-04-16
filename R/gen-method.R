@@ -75,18 +75,7 @@ Tensor$set("public", "_sparse_mask_projection", function(mask, accumulate_matche
 Tensor$set("public", "_to_dense", function(dtype = NULL, masked_grad = NULL) {  cpp_torch_method__to_dense_self_Tensor(self, dtype, masked_grad)})
 Tensor$set("public", "_to_sparse", function(layout = NULL, sparse_dim, blocksize = NULL, dense_dim = NULL) {  args <- mget(x = c("layout", "sparse_dim", "blocksize", "dense_dim"))
 args <- c(list(self = self), args)
-expected_types <- list(self = "Tensor", layout = "Layout", sparse_dim = "int64_t", 
-    blocksize = "IntArrayRef", dense_dim = "int64_t")
-nd_args <- c("self", "sparse_dim")
-return_types <- list(list('Tensor'))
-call_c_function(
-  fun_name = '_to_sparse',
-  args = args,
-  expected_types = expected_types,
-  nd_args = nd_args,
-  return_types = return_types,
-  fun_type = 'method'
-)})
+cpp_torch_dispatch_method__to_sparse(args)})
 Tensor$set("public", "_to_sparse_bsc", function(blocksize, dense_dim = NULL) {  cpp_torch_method__to_sparse_bsc_self_Tensor_blocksize_IntArrayRef(self, blocksize, dense_dim)})
 Tensor$set("public", "_to_sparse_bsr", function(blocksize, dense_dim = NULL) {  cpp_torch_method__to_sparse_bsr_self_Tensor_blocksize_IntArrayRef(self, blocksize, dense_dim)})
 Tensor$set("public", "_to_sparse_csc", function(dense_dim = NULL) {  cpp_torch_method__to_sparse_csc_self_Tensor(self, dense_dim)})
@@ -128,32 +117,10 @@ Tensor$set("public", "alias", function() {  cpp_torch_method_alias_self_Tensor(s
 Tensor$set("public", "align_as", function(other) {  cpp_torch_method_align_as_self_Tensor_other_Tensor(self, other)})
 Tensor$set("public", "align_to", function(names, order, ellipsis_idx) {  args <- mget(x = c("names", "order", "ellipsis_idx"))
 args <- c(list(self = self), args)
-expected_types <- list(self = "Tensor", names = "DimnameList", order = "DimnameList", 
-    ellipsis_idx = "int64_t")
-nd_args <- c("self", "names", "order", "ellipsis_idx")
-return_types <- list(list('Tensor'))
-call_c_function(
-  fun_name = 'align_to',
-  args = args,
-  expected_types = expected_types,
-  nd_args = nd_args,
-  return_types = return_types,
-  fun_type = 'method'
-)})
+cpp_torch_dispatch_method_align_to(args)})
 Tensor$set("public", "all", function(dim = NULL, keepdim = FALSE) {  args <- mget(x = c("dim", "keepdim"))
 args <- c(list(self = self), args)
-expected_types <- list(self = "Tensor", dim = c("int64_t", "IntArrayRef", "Dimname"
-), keepdim = "bool")
-nd_args <- c("self", "dim")
-return_types <- list(list('Tensor'))
-call_c_function(
-  fun_name = 'all',
-  args = args,
-  expected_types = expected_types,
-  nd_args = nd_args,
-  return_types = return_types,
-  fun_type = 'method'
-)})
+cpp_torch_dispatch_method_all(args)})
 Tensor$set("public", "allclose", function(other, rtol = 1e-05, atol = 1e-08, equal_nan = FALSE) {  cpp_torch_method_allclose_self_Tensor_other_Tensor(self, other, rtol, atol, equal_nan)})
 Tensor$set("public", "amax", function(dim = list(), keepdim = FALSE) {  cpp_torch_method_amax_self_Tensor(self, dim, keepdim)})
 Tensor$set("public", "amin", function(dim = list(), keepdim = FALSE) {  cpp_torch_method_amin_self_Tensor(self, dim, keepdim)})
@@ -161,18 +128,7 @@ Tensor$set("public", "aminmax", function(dim = NULL, keepdim = FALSE) {  cpp_tor
 Tensor$set("public", "angle", function() {  cpp_torch_method_angle_self_Tensor(self)})
 Tensor$set("public", "any", function(dim = NULL, keepdim = FALSE) {  args <- mget(x = c("dim", "keepdim"))
 args <- c(list(self = self), args)
-expected_types <- list(self = "Tensor", dim = c("int64_t", "IntArrayRef", "Dimname"
-), keepdim = "bool")
-nd_args <- c("self", "dim")
-return_types <- list(list('Tensor'))
-call_c_function(
-  fun_name = 'any',
-  args = args,
-  expected_types = expected_types,
-  nd_args = nd_args,
-  return_types = return_types,
-  fun_type = 'method'
-)})
+cpp_torch_dispatch_method_any(args)})
 Tensor$set("public", "arccos", function() {  cpp_torch_method_arccos_self_Tensor(self)})
 Tensor$set("public", "arccos_", function() {  cpp_torch_method_arccos__self_Tensor(self)})
 Tensor$set("public", "arccosh", function() {  cpp_torch_method_arccosh_self_Tensor(self)})
@@ -191,18 +147,7 @@ Tensor$set("private", "_argmax", function(dim = NULL, keepdim = FALSE) {  cpp_to
 Tensor$set("private", "_argmin", function(dim = NULL, keepdim = FALSE) {  cpp_torch_method_argmin_self_Tensor(self, dim, keepdim)})
 Tensor$set("private", "_argsort", function(stable, dim = -1L, descending = FALSE) {  args <- mget(x = c("stable", "dim", "descending"))
 args <- c(list(self = self), args)
-expected_types <- list(self = "Tensor", stable = "bool", dim = c("int64_t", "Dimname"
-), descending = "bool")
-nd_args <- c("self", "stable", "dim")
-return_types <- list(list('Tensor'))
-call_c_function(
-  fun_name = 'argsort',
-  args = args,
-  expected_types = expected_types,
-  nd_args = nd_args,
-  return_types = return_types,
-  fun_type = 'method'
-)})
+cpp_torch_dispatch_method_argsort(args)})
 Tensor$set("public", "argwhere", function() {  cpp_torch_method_argwhere_self_Tensor(self)})
 Tensor$set("public", "as_strided", function(size, stride, storage_offset = NULL) {  cpp_torch_method_as_strided_self_Tensor_size_IntArrayRef_stride_IntArrayRef(self, size, stride, storage_offset)})
 Tensor$set("public", "as_strided_", function(size, stride, storage_offset = NULL) {  cpp_torch_method_as_strided__self_Tensor_size_IntArrayRef_stride_IntArrayRef(self, size, stride, storage_offset)})
@@ -221,30 +166,10 @@ Tensor$set("public", "baddbmm", function(batch1, batch2, beta = 1L, alpha = 1L) 
 Tensor$set("public", "baddbmm_", function(batch1, batch2, beta = 1L, alpha = 1L) {  cpp_torch_method_baddbmm__self_Tensor_batch1_Tensor_batch2_Tensor(self, batch1, batch2, beta, alpha)})
 Tensor$set("public", "bernoulli", function(p, generator = NULL) {  args <- mget(x = c("p", "generator"))
 args <- c(list(self = self), args)
-expected_types <- list(self = "Tensor", p = "double", generator = "Generator")
-nd_args <- c("self", "p")
-return_types <- list(list('Tensor'))
-call_c_function(
-  fun_name = 'bernoulli',
-  args = args,
-  expected_types = expected_types,
-  nd_args = nd_args,
-  return_types = return_types,
-  fun_type = 'method'
-)})
+cpp_torch_dispatch_method_bernoulli(args)})
 Tensor$set("public", "bernoulli_", function(p = 0.5, generator = NULL) {  args <- mget(x = c("p", "generator"))
 args <- c(list(self = self), args)
-expected_types <- list(self = "Tensor", p = c("Tensor", "double"), generator = "Generator")
-nd_args <- c("self", "p")
-return_types <- list(list('Tensor'))
-call_c_function(
-  fun_name = 'bernoulli_',
-  args = args,
-  expected_types = expected_types,
-  nd_args = nd_args,
-  return_types = return_types,
-  fun_type = 'method'
-)})
+cpp_torch_dispatch_method_bernoulli_(args)})
 Tensor$set("private", "_bincount", function(weights = list(), minlength = 0L) {  cpp_torch_method_bincount_self_Tensor(self, weights, minlength)})
 Tensor$set("public", "bitwise_and", function(other) {  if (!is_tensor_dispatch(other)) {
   cpp_torch_method_bitwise_and_self_Tensor_other_Scalar(self, other)
@@ -311,32 +236,10 @@ Tensor$set("public", "cholesky_solve", function(input2, upper = FALSE) {  cpp_to
 Tensor$set("public", "chunk", function(chunks, dim = 1L) {  cpp_torch_method_chunk_self_Tensor_chunks_int64_t(self, chunks, dim)})
 Tensor$set("public", "clamp", function(min = NULL, max = NULL) {  args <- mget(x = c("min", "max"))
 args <- c(list(self = self), args)
-expected_types <- list(self = "Tensor", min = c("Scalar", "Tensor"), max = c("Scalar", 
-"Tensor"))
-nd_args <- c("self", "min", "max")
-return_types <- list(list('Tensor'))
-call_c_function(
-  fun_name = 'clamp',
-  args = args,
-  expected_types = expected_types,
-  nd_args = nd_args,
-  return_types = return_types,
-  fun_type = 'method'
-)})
+cpp_torch_dispatch_method_clamp(args)})
 Tensor$set("public", "clamp_", function(min = NULL, max = NULL) {  args <- mget(x = c("min", "max"))
 args <- c(list(self = self), args)
-expected_types <- list(self = "Tensor", min = c("Scalar", "Tensor"), max = c("Scalar", 
-"Tensor"))
-nd_args <- c("self", "min", "max")
-return_types <- list(list('Tensor'))
-call_c_function(
-  fun_name = 'clamp_',
-  args = args,
-  expected_types = expected_types,
-  nd_args = nd_args,
-  return_types = return_types,
-  fun_type = 'method'
-)})
+cpp_torch_dispatch_method_clamp_(args)})
 Tensor$set("public", "clamp_max", function(max) {  if (!is_tensor_dispatch(max)) {
   cpp_torch_method_clamp_max_self_Tensor_max_Scalar(self, max)
 } else {
@@ -359,32 +262,10 @@ Tensor$set("public", "clamp_min_", function(min) {  if (!is_tensor_dispatch(min)
 }})
 Tensor$set("public", "clip", function(min = NULL, max = NULL) {  args <- mget(x = c("min", "max"))
 args <- c(list(self = self), args)
-expected_types <- list(self = "Tensor", min = c("Scalar", "Tensor"), max = c("Scalar", 
-"Tensor"))
-nd_args <- c("self", "min", "max")
-return_types <- list(list('Tensor'))
-call_c_function(
-  fun_name = 'clip',
-  args = args,
-  expected_types = expected_types,
-  nd_args = nd_args,
-  return_types = return_types,
-  fun_type = 'method'
-)})
+cpp_torch_dispatch_method_clip(args)})
 Tensor$set("public", "clip_", function(min = NULL, max = NULL) {  args <- mget(x = c("min", "max"))
 args <- c(list(self = self), args)
-expected_types <- list(self = "Tensor", min = c("Scalar", "Tensor"), max = c("Scalar", 
-"Tensor"))
-nd_args <- c("self", "min", "max")
-return_types <- list(list('Tensor'))
-call_c_function(
-  fun_name = 'clip_',
-  args = args,
-  expected_types = expected_types,
-  nd_args = nd_args,
-  return_types = return_types,
-  fun_type = 'method'
-)})
+cpp_torch_dispatch_method_clip_(args)})
 Tensor$set("private", "_clone", function(memory_format = NULL) {  cpp_torch_method_clone_self_Tensor(self, memory_format)})
 Tensor$set("public", "coalesce", function() {  cpp_torch_method_coalesce_self_Tensor(self)})
 Tensor$set("public", "col_indices", function() {  cpp_torch_method_col_indices_self_Tensor(self)})
@@ -410,17 +291,7 @@ Tensor$set("public", "cosh", function() {  cpp_torch_method_cosh_self_Tensor(sel
 Tensor$set("public", "cosh_", function() {  cpp_torch_method_cosh__self_Tensor(self)})
 Tensor$set("public", "count_nonzero", function(dim = NULL) {  args <- mget(x = c("dim"))
 args <- c(list(self = self), args)
-expected_types <- list(self = "Tensor", dim = c("IntArrayRef", "int64_t"))
-nd_args <- c("self", "dim")
-return_types <- list(list('Tensor'))
-call_c_function(
-  fun_name = 'count_nonzero',
-  args = args,
-  expected_types = expected_types,
-  nd_args = nd_args,
-  return_types = return_types,
-  fun_type = 'method'
-)})
+cpp_torch_dispatch_method_count_nonzero(args)})
 Tensor$set("public", "cov", function(correction = 1L, fweights = list(), aweights = list()) {  cpp_torch_method_cov_self_Tensor(self, correction, fweights, aweights)})
 Tensor$set("public", "cross", function(other, dim = NULL) {  cpp_torch_method_cross_self_Tensor_other_Tensor(self, other, dim)})
 Tensor$set("public", "crow_indices", function() {  cpp_torch_method_crow_indices_self_Tensor(self)})
@@ -467,18 +338,7 @@ Tensor$set("public", "diag_embed", function(offset = 0L, dim1 = -2L, dim2 = -1L)
 Tensor$set("public", "diagflat", function(offset = 0L) {  cpp_torch_method_diagflat_self_Tensor(self, offset)})
 Tensor$set("public", "diagonal", function(outdim, dim1 = 1L, dim2 = 2L, offset = 0L) {  args <- mget(x = c("outdim", "dim1", "dim2", "offset"))
 args <- c(list(self = self), args)
-expected_types <- list(self = "Tensor", outdim = "Dimname", dim1 = c("int64_t", 
-"Dimname"), dim2 = c("int64_t", "Dimname"), offset = "int64_t")
-nd_args <- c("self", "outdim", "dim1", "dim2")
-return_types <- list(list('Tensor'))
-call_c_function(
-  fun_name = 'diagonal',
-  args = args,
-  expected_types = expected_types,
-  nd_args = nd_args,
-  return_types = return_types,
-  fun_type = 'method'
-)})
+cpp_torch_dispatch_method_diagonal(args)})
 Tensor$set("public", "diagonal_scatter", function(src, offset = 0L, dim1 = 1L, dim2 = 2L) {  cpp_torch_method_diagonal_scatter_self_Tensor_src_Tensor(self, src, offset, dim1, dim2)})
 Tensor$set("public", "diff", function(n = 1L, dim = -1L, prepend = list(), append = list()) {  cpp_torch_method_diff_self_Tensor(self, n, dim, prepend, append)})
 Tensor$set("public", "digamma", function() {  cpp_torch_method_digamma_self_Tensor(self)})
@@ -486,70 +346,20 @@ Tensor$set("public", "digamma_", function() {  cpp_torch_method_digamma__self_Te
 Tensor$set("public", "dist", function(other, p = 2L) {  cpp_torch_method_dist_self_Tensor_other_Tensor(self, other, p)})
 Tensor$set("public", "div", function(other, rounding_mode) {  args <- mget(x = c("other", "rounding_mode"))
 args <- c(list(self = self), args)
-expected_types <- list(self = "Tensor", other = c("Tensor", "Scalar"), rounding_mode = "c10::string_view")
-nd_args <- c("self", "other", "rounding_mode")
-return_types <- list(list('Tensor'))
-call_c_function(
-  fun_name = 'div',
-  args = args,
-  expected_types = expected_types,
-  nd_args = nd_args,
-  return_types = return_types,
-  fun_type = 'method'
-)})
+cpp_torch_dispatch_method_div(args)})
 Tensor$set("public", "div_", function(other, rounding_mode) {  args <- mget(x = c("other", "rounding_mode"))
 args <- c(list(self = self), args)
-expected_types <- list(self = "Tensor", other = c("Tensor", "Scalar"), rounding_mode = "c10::string_view")
-nd_args <- c("self", "other", "rounding_mode")
-return_types <- list(list('Tensor'))
-call_c_function(
-  fun_name = 'div_',
-  args = args,
-  expected_types = expected_types,
-  nd_args = nd_args,
-  return_types = return_types,
-  fun_type = 'method'
-)})
+cpp_torch_dispatch_method_div_(args)})
 Tensor$set("public", "divide", function(other, rounding_mode) {  args <- mget(x = c("other", "rounding_mode"))
 args <- c(list(self = self), args)
-expected_types <- list(self = "Tensor", other = c("Tensor", "Scalar"), rounding_mode = "c10::string_view")
-nd_args <- c("self", "other", "rounding_mode")
-return_types <- list(list('Tensor'))
-call_c_function(
-  fun_name = 'divide',
-  args = args,
-  expected_types = expected_types,
-  nd_args = nd_args,
-  return_types = return_types,
-  fun_type = 'method'
-)})
+cpp_torch_dispatch_method_divide(args)})
 Tensor$set("public", "divide_", function(other, rounding_mode) {  args <- mget(x = c("other", "rounding_mode"))
 args <- c(list(self = self), args)
-expected_types <- list(self = "Tensor", other = c("Tensor", "Scalar"), rounding_mode = "c10::string_view")
-nd_args <- c("self", "other", "rounding_mode")
-return_types <- list(list('Tensor'))
-call_c_function(
-  fun_name = 'divide_',
-  args = args,
-  expected_types = expected_types,
-  nd_args = nd_args,
-  return_types = return_types,
-  fun_type = 'method'
-)})
+cpp_torch_dispatch_method_divide_(args)})
 Tensor$set("public", "dot", function(tensor) {  cpp_torch_method_dot_self_Tensor_tensor_Tensor(self, tensor)})
 Tensor$set("public", "dsplit", function(indices, sections) {  args <- mget(x = c("indices", "sections"))
 args <- c(list(self = self), args)
-expected_types <- list(self = "Tensor", indices = "IntArrayRef", sections = "int64_t")
-nd_args <- c("self", "indices", "sections")
-return_types <- list(list('TensorList'))
-call_c_function(
-  fun_name = 'dsplit',
-  args = args,
-  expected_types = expected_types,
-  nd_args = nd_args,
-  return_types = return_types,
-  fun_type = 'method'
-)})
+cpp_torch_dispatch_method_dsplit(args)})
 Tensor$set("public", "eq", function(other) {  if (!is_tensor_dispatch(other)) {
   cpp_torch_method_eq_self_Tensor_other_Scalar(self, other)
 } else {
@@ -586,18 +396,7 @@ Tensor$set("public", "fix", function() {  cpp_torch_method_fix_self_Tensor(self)
 Tensor$set("public", "fix_", function() {  cpp_torch_method_fix__self_Tensor(self)})
 Tensor$set("public", "flatten", function(dims, start_dim = 1L, end_dim = -1L, out_dim) {  args <- mget(x = c("dims", "start_dim", "end_dim", "out_dim"))
 args <- c(list(self = self), args)
-expected_types <- list(self = "Tensor", dims = "DimnameList", start_dim = c("int64_t", 
-"Dimname"), end_dim = c("int64_t", "Dimname"), out_dim = "Dimname")
-nd_args <- c("self", "dims", "start_dim", "end_dim", "out_dim")
-return_types <- list(list('Tensor'))
-call_c_function(
-  fun_name = 'flatten',
-  args = args,
-  expected_types = expected_types,
-  nd_args = nd_args,
-  return_types = return_types,
-  fun_type = 'method'
-)})
+cpp_torch_dispatch_method_flatten(args)})
 Tensor$set("public", "flip", function(dims) {  cpp_torch_method_flip_self_Tensor_dims_IntArrayRef(self, dims)})
 Tensor$set("public", "fliplr", function() {  cpp_torch_method_fliplr_self_Tensor(self)})
 Tensor$set("public", "flipud", function() {  cpp_torch_method_flipud_self_Tensor(self)})
@@ -695,31 +494,10 @@ Tensor$set("public", "heaviside_", function(values) {  cpp_torch_method_heavisid
 Tensor$set("public", "histc", function(bins = 100L, min = 0L, max = 0L) {  cpp_torch_method_histc_self_Tensor(self, bins, min, max)})
 Tensor$set("public", "histogram", function(bins = 100L, range = NULL, weight = list(), density = FALSE) {  args <- mget(x = c("bins", "range", "weight", "density"))
 args <- c(list(self = self), args)
-expected_types <- list(self = "Tensor", bins = c("Tensor", "int64_t"), range = "ArrayRef<double>", 
-    weight = "Tensor", density = "bool")
-nd_args <- c("self", "bins")
-return_types <- list(list("Tensor", "Tensor"))
-call_c_function(
-  fun_name = 'histogram',
-  args = args,
-  expected_types = expected_types,
-  nd_args = nd_args,
-  return_types = return_types,
-  fun_type = 'method'
-)})
+cpp_torch_dispatch_method_histogram(args)})
 Tensor$set("public", "hsplit", function(indices, sections) {  args <- mget(x = c("indices", "sections"))
 args <- c(list(self = self), args)
-expected_types <- list(self = "Tensor", indices = "IntArrayRef", sections = "int64_t")
-nd_args <- c("self", "indices", "sections")
-return_types <- list(list('TensorList'))
-call_c_function(
-  fun_name = 'hsplit',
-  args = args,
-  expected_types = expected_types,
-  nd_args = nd_args,
-  return_types = return_types,
-  fun_type = 'method'
-)})
+cpp_torch_dispatch_method_hsplit(args)})
 Tensor$set("public", "hypot", function(other) {  cpp_torch_method_hypot_self_Tensor_other_Tensor(self, other)})
 Tensor$set("public", "hypot_", function(other) {  cpp_torch_method_hypot__self_Tensor_other_Tensor(self, other)})
 Tensor$set("public", "i0", function() {  cpp_torch_method_i0_self_Tensor(self)})
@@ -747,32 +525,10 @@ Tensor$set("public", "index_copy_", function(dim, index, source) {  if (!is.char
 }})
 Tensor$set("public", "index_fill", function(dim, index, value) {  args <- mget(x = c("dim", "index", "value"))
 args <- c(list(self = self), args)
-expected_types <- list(self = "Tensor", dim = c("int64_t", "Dimname"), index = "Tensor", 
-    value = c("Scalar", "Tensor"))
-nd_args <- c("self", "dim", "index", "value")
-return_types <- list(list('Tensor'))
-call_c_function(
-  fun_name = 'index_fill',
-  args = args,
-  expected_types = expected_types,
-  nd_args = nd_args,
-  return_types = return_types,
-  fun_type = 'method'
-)})
+cpp_torch_dispatch_method_index_fill(args)})
 Tensor$set("public", "index_fill_", function(dim, index, value) {  args <- mget(x = c("dim", "index", "value"))
 args <- c(list(self = self), args)
-expected_types <- list(self = "Tensor", dim = c("int64_t", "Dimname"), index = "Tensor", 
-    value = c("Scalar", "Tensor"))
-nd_args <- c("self", "dim", "index", "value")
-return_types <- list(list('Tensor'))
-call_c_function(
-  fun_name = 'index_fill_',
-  args = args,
-  expected_types = expected_types,
-  nd_args = nd_args,
-  return_types = return_types,
-  fun_type = 'method'
-)})
+cpp_torch_dispatch_method_index_fill_(args)})
 Tensor$set("public", "index_put", function(indices, values, accumulate = FALSE) {  cpp_torch_method_index_put_self_Tensor_indices_constc10ListstdoptionalTensor_values_Tensor(self, indices, values, accumulate)})
 Tensor$set("public", "index_put_", function(indices, values, accumulate = FALSE) {  cpp_torch_method_index_put__self_Tensor_indices_constc10ListstdoptionalTensor_values_Tensor(self, indices, values, accumulate)})
 Tensor$set("public", "index_reduce", function(dim, index, source, reduce, include_self = TRUE) {  cpp_torch_method_index_reduce_self_Tensor_dim_int64_t_index_Tensor_source_Tensor_reduce_c10string_view(self, dim, index, source, reduce, include_self)})
@@ -927,61 +683,18 @@ Tensor$set("public", "matrix_H", function() {  cpp_torch_method_matrix_H_self_Te
 Tensor$set("public", "matrix_power", function(n) {  cpp_torch_method_matrix_power_self_Tensor_n_int64_t(self, n)})
 Tensor$set("private", "_max", function(dim, other, keepdim = FALSE) {  args <- mget(x = c("dim", "other", "keepdim"))
 args <- c(list(self = self), args)
-expected_types <- list(self = "Tensor", dim = c("int64_t", "Dimname"), other = "Tensor", 
-    keepdim = "bool")
-nd_args <- c("self", "dim", "other")
-return_types <- list(list("Tensor", "Tensor"), list('Tensor'))
-call_c_function(
-  fun_name = 'max',
-  args = args,
-  expected_types = expected_types,
-  nd_args = nd_args,
-  return_types = return_types,
-  fun_type = 'method'
-)})
+cpp_torch_dispatch_method_max(args)})
 Tensor$set("public", "maximum", function(other) {  cpp_torch_method_maximum_self_Tensor_other_Tensor(self, other)})
 Tensor$set("public", "mean", function(dim, keepdim = FALSE, dtype = NULL) {  args <- mget(x = c("dim", "keepdim", "dtype"))
 args <- c(list(self = self), args)
-expected_types <- list(self = "Tensor", dim = c("IntArrayRef", "DimnameList"), 
-    keepdim = "bool", dtype = "ScalarType")
-nd_args <- c("self", "dim")
-return_types <- list(list('Tensor'))
-call_c_function(
-  fun_name = 'mean',
-  args = args,
-  expected_types = expected_types,
-  nd_args = nd_args,
-  return_types = return_types,
-  fun_type = 'method'
-)})
+cpp_torch_dispatch_method_mean(args)})
 Tensor$set("public", "median", function(dim, keepdim = FALSE) {  args <- mget(x = c("dim", "keepdim"))
 args <- c(list(self = self), args)
-expected_types <- list(self = "Tensor", dim = c("int64_t", "Dimname"), keepdim = "bool")
-nd_args <- c("self", "dim")
-return_types <- list(list('Tensor'), list("Tensor", "Tensor"))
-call_c_function(
-  fun_name = 'median',
-  args = args,
-  expected_types = expected_types,
-  nd_args = nd_args,
-  return_types = return_types,
-  fun_type = 'method'
-)})
+cpp_torch_dispatch_method_median(args)})
 Tensor$set("public", "mH", function() {  cpp_torch_method_mH_self_Tensor(self)})
 Tensor$set("private", "_min", function(dim, other, keepdim = FALSE) {  args <- mget(x = c("dim", "other", "keepdim"))
 args <- c(list(self = self), args)
-expected_types <- list(self = "Tensor", dim = c("int64_t", "Dimname"), other = "Tensor", 
-    keepdim = "bool")
-nd_args <- c("self", "dim", "other")
-return_types <- list(list("Tensor", "Tensor"), list('Tensor'))
-call_c_function(
-  fun_name = 'min',
-  args = args,
-  expected_types = expected_types,
-  nd_args = nd_args,
-  return_types = return_types,
-  fun_type = 'method'
-)})
+cpp_torch_dispatch_method_min(args)})
 Tensor$set("public", "minimum", function(other) {  cpp_torch_method_minimum_self_Tensor_other_Tensor(self, other)})
 Tensor$set("public", "mm", function(mat2) {  cpp_torch_method_mm_self_Tensor_mat2_Tensor(self, mat2)})
 Tensor$set("public", "mode", function(dim = -1L, keepdim = FALSE) {  if (!is.character(dim)) {
@@ -991,32 +704,10 @@ Tensor$set("public", "mode", function(dim = -1L, keepdim = FALSE) {  if (!is.cha
 }})
 Tensor$set("public", "moveaxis", function(source, destination) {  args <- mget(x = c("source", "destination"))
 args <- c(list(self = self), args)
-expected_types <- list(self = "Tensor", source = c("IntArrayRef", "int64_t"), destination = c("IntArrayRef", 
-"int64_t"))
-nd_args <- c("self", "source", "destination")
-return_types <- list(list('Tensor'))
-call_c_function(
-  fun_name = 'moveaxis',
-  args = args,
-  expected_types = expected_types,
-  nd_args = nd_args,
-  return_types = return_types,
-  fun_type = 'method'
-)})
+cpp_torch_dispatch_method_moveaxis(args)})
 Tensor$set("private", "_movedim", function(source, destination) {  args <- mget(x = c("source", "destination"))
 args <- c(list(self = self), args)
-expected_types <- list(self = "Tensor", source = c("IntArrayRef", "int64_t"), destination = c("IntArrayRef", 
-"int64_t"))
-nd_args <- c("self", "source", "destination")
-return_types <- list(list('Tensor'))
-call_c_function(
-  fun_name = 'movedim',
-  args = args,
-  expected_types = expected_types,
-  nd_args = nd_args,
-  return_types = return_types,
-  fun_type = 'method'
-)})
+cpp_torch_dispatch_method_movedim(args)})
 Tensor$set("public", "msort", function() {  cpp_torch_method_msort_self_Tensor(self)})
 Tensor$set("public", "mT", function() {  cpp_torch_method_mT_self_Tensor(self)})
 Tensor$set("public", "mul", function(other) {  if (is_tensor_dispatch(other)) {
@@ -1048,46 +739,14 @@ Tensor$set("public", "nan_to_num_", function(nan = NULL, posinf = NULL, neginf =
 Tensor$set("public", "nanmean", function(dim = NULL, keepdim = FALSE, dtype = NULL) {  cpp_torch_method_nanmean_self_Tensor(self, dim, keepdim, dtype)})
 Tensor$set("public", "nanmedian", function(dim, keepdim = FALSE) {  args <- mget(x = c("dim", "keepdim"))
 args <- c(list(self = self), args)
-expected_types <- list(self = "Tensor", dim = c("int64_t", "Dimname"), keepdim = "bool")
-nd_args <- c("self", "dim")
-return_types <- list(list('Tensor'), list("Tensor", "Tensor"))
-call_c_function(
-  fun_name = 'nanmedian',
-  args = args,
-  expected_types = expected_types,
-  nd_args = nd_args,
-  return_types = return_types,
-  fun_type = 'method'
-)})
+cpp_torch_dispatch_method_nanmedian(args)})
 Tensor$set("public", "nanquantile", function(q, dim = NULL, keepdim = FALSE, interpolation = "linear") {  args <- mget(x = c("q", "dim", "keepdim", "interpolation"))
 args <- c(list(self = self), args)
-expected_types <- list(self = "Tensor", q = c("Tensor", "double"), dim = "int64_t", 
-    keepdim = "bool", interpolation = "c10::string_view")
-nd_args <- c("self", "q")
-return_types <- list(list('Tensor'))
-call_c_function(
-  fun_name = 'nanquantile',
-  args = args,
-  expected_types = expected_types,
-  nd_args = nd_args,
-  return_types = return_types,
-  fun_type = 'method'
-)})
+cpp_torch_dispatch_method_nanquantile(args)})
 Tensor$set("public", "nansum", function(dim = NULL, keepdim = FALSE, dtype = NULL) {  cpp_torch_method_nansum_self_Tensor(self, dim, keepdim, dtype)})
 Tensor$set("private", "_narrow", function(dim, start, length) {  args <- mget(x = c("dim", "start", "length"))
 args <- c(list(self = self), args)
-expected_types <- list(self = "Tensor", dim = "int64_t", start = c("int64_t", "Tensor"
-), length = "int64_t")
-nd_args <- c("self", "dim", "start", "length")
-return_types <- list(list('Tensor'))
-call_c_function(
-  fun_name = 'narrow',
-  args = args,
-  expected_types = expected_types,
-  nd_args = nd_args,
-  return_types = return_types,
-  fun_type = 'method'
-)})
+cpp_torch_dispatch_method_narrow(args)})
 Tensor$set("private", "_narrow_copy", function(dim, start, length) {  cpp_torch_method_narrow_copy_self_Tensor_dim_int64_t_start_int64_t_length_int64_t(self, dim, start, length)})
 Tensor$set("public", "ne", function(other) {  if (!is_tensor_dispatch(other)) {
   cpp_torch_method_ne_self_Tensor_other_Scalar(self, other)
@@ -1115,18 +774,7 @@ Tensor$set("private", "_nonzero_numpy", function() {  cpp_torch_method_nonzero_n
 Tensor$set("public", "nonzero_static", function(size, fill_value = -1L) {  cpp_torch_method_nonzero_static_self_Tensor_size_int64_t(self, size, fill_value)})
 Tensor$set("private", "_norm", function(p = 2L, dim, keepdim = FALSE, dtype) {  args <- mget(x = c("p", "dim", "keepdim", "dtype"))
 args <- c(list(self = self), args)
-expected_types <- list(self = "Tensor", p = "Scalar", dim = c("IntArrayRef", "DimnameList"
-), keepdim = "bool", dtype = "ScalarType")
-nd_args <- c("self", "p", "dim", "keepdim", "dtype")
-return_types <- list(list('Tensor'))
-call_c_function(
-  fun_name = 'norm',
-  args = args,
-  expected_types = expected_types,
-  nd_args = nd_args,
-  return_types = return_types,
-  fun_type = 'method'
-)})
+cpp_torch_dispatch_method_norm(args)})
 Tensor$set("public", "normal_", function(mean = 0L, std = 1L, generator = NULL) {  cpp_torch_method_normal__self_Tensor(self, mean, std, generator)})
 Tensor$set("public", "not_equal", function(other) {  if (!is_tensor_dispatch(other)) {
   cpp_torch_method_not_equal_self_Tensor_other_Scalar(self, other)
@@ -1161,18 +809,7 @@ Tensor$set("public", "pow_", function(exponent) {  if (!is_tensor_dispatch(expon
 Tensor$set("public", "prelu", function(weight) {  cpp_torch_method_prelu_self_Tensor_weight_Tensor(self, weight)})
 Tensor$set("public", "prod", function(dim, keepdim = FALSE, dtype = NULL) {  args <- mget(x = c("dim", "keepdim", "dtype"))
 args <- c(list(self = self), args)
-expected_types <- list(self = "Tensor", dim = c("int64_t", "Dimname"), keepdim = "bool", 
-    dtype = "ScalarType")
-nd_args <- c("self", "dim")
-return_types <- list(list('Tensor'))
-call_c_function(
-  fun_name = 'prod',
-  args = args,
-  expected_types = expected_types,
-  nd_args = nd_args,
-  return_types = return_types,
-  fun_type = 'method'
-)})
+cpp_torch_dispatch_method_prod(args)})
 Tensor$set("public", "put", function(index, source, accumulate = FALSE) {  cpp_torch_method_put_self_Tensor_index_Tensor_source_Tensor(self, index, source, accumulate)})
 Tensor$set("public", "put_", function(index, source, accumulate = FALSE) {  cpp_torch_method_put__self_Tensor_index_Tensor_source_Tensor(self, index, source, accumulate)})
 Tensor$set("public", "q_per_channel_axis", function() {  cpp_torch_method_q_per_channel_axis_self_Tensor(self)})
@@ -1184,33 +821,12 @@ Tensor$set("public", "qr", function(some = TRUE) {  cpp_torch_method_qr_self_Ten
 Tensor$set("public", "qscheme", function() {  cpp_torch_method_qscheme_self_Tensor(self)})
 Tensor$set("public", "quantile", function(q, dim = NULL, keepdim = FALSE, interpolation = "linear") {  args <- mget(x = c("q", "dim", "keepdim", "interpolation"))
 args <- c(list(self = self), args)
-expected_types <- list(self = "Tensor", q = c("Tensor", "double"), dim = "int64_t", 
-    keepdim = "bool", interpolation = "c10::string_view")
-nd_args <- c("self", "q")
-return_types <- list(list('Tensor'))
-call_c_function(
-  fun_name = 'quantile',
-  args = args,
-  expected_types = expected_types,
-  nd_args = nd_args,
-  return_types = return_types,
-  fun_type = 'method'
-)})
+cpp_torch_dispatch_method_quantile(args)})
 Tensor$set("public", "rad2deg", function() {  cpp_torch_method_rad2deg_self_Tensor(self)})
 Tensor$set("public", "rad2deg_", function() {  cpp_torch_method_rad2deg__self_Tensor(self)})
 Tensor$set("public", "random_", function(from, to, generator = NULL) {  args <- mget(x = c("from", "to", "generator"))
 args <- c(list(self = self), args)
-expected_types <- list(self = "Tensor", from = "int64_t", to = "int64_t", generator = "Generator")
-nd_args <- c("self", "from", "to")
-return_types <- list(list('Tensor'))
-call_c_function(
-  fun_name = 'random_',
-  args = args,
-  expected_types = expected_types,
-  nd_args = nd_args,
-  return_types = return_types,
-  fun_type = 'method'
-)})
+cpp_torch_dispatch_method_random_(args)})
 Tensor$set("public", "ravel", function() {  cpp_torch_method_ravel_self_Tensor(self)})
 Tensor$set("public", "reciprocal", function() {  cpp_torch_method_reciprocal_self_Tensor(self)})
 Tensor$set("public", "reciprocal_", function() {  cpp_torch_method_reciprocal__self_Tensor(self)})
@@ -1235,18 +851,7 @@ Tensor$set("public", "renorm_", function(p, dim, maxnorm) {  cpp_torch_method_re
 Tensor$set("public", "repeat", function(repeats) {  cpp_torch_method_repeat_self_Tensor_repeats_IntArrayRef(self, repeats)})
 Tensor$set("private", "_repeat_interleave", function(repeats, dim = NULL, output_size = NULL) {  args <- mget(x = c("repeats", "dim", "output_size"))
 args <- c(list(self = self), args)
-expected_types <- list(self = "Tensor", repeats = c("Tensor", "int64_t"), dim = "int64_t", 
-    output_size = "int64_t")
-nd_args <- c("self", "repeats")
-return_types <- list(list('Tensor'))
-call_c_function(
-  fun_name = 'repeat_interleave',
-  args = args,
-  expected_types = expected_types,
-  nd_args = nd_args,
-  return_types = return_types,
-  fun_type = 'method'
-)})
+cpp_torch_dispatch_method_repeat_interleave(args)})
 Tensor$set("public", "requires_grad_", function(requires_grad = TRUE) {  cpp_torch_method_requires_grad__self_Tensor(self, requires_grad)})
 Tensor$set("public", "reshape", function(shape) {  cpp_torch_method_reshape_self_Tensor_shape_IntArrayRef(self, shape)})
 Tensor$set("public", "reshape_as", function(other) {  cpp_torch_method_reshape_as_self_Tensor_other_Tensor(self, other)})
@@ -1261,61 +866,19 @@ Tensor$set("public", "roll", function(shifts, dims = list()) {  cpp_torch_method
 Tensor$set("public", "rot90", function(k = 1L, dims = c(0,1)) {  cpp_torch_method_rot90_self_Tensor(self, k, dims)})
 Tensor$set("public", "round", function(decimals) {  args <- mget(x = c("decimals"))
 args <- c(list(self = self), args)
-expected_types <- list(self = "Tensor", decimals = "int64_t")
-nd_args <- c("self", "decimals")
-return_types <- list(list('Tensor'))
-call_c_function(
-  fun_name = 'round',
-  args = args,
-  expected_types = expected_types,
-  nd_args = nd_args,
-  return_types = return_types,
-  fun_type = 'method'
-)})
+cpp_torch_dispatch_method_round(args)})
 Tensor$set("public", "round_", function(decimals) {  args <- mget(x = c("decimals"))
 args <- c(list(self = self), args)
-expected_types <- list(self = "Tensor", decimals = "int64_t")
-nd_args <- c("self", "decimals")
-return_types <- list(list('Tensor'))
-call_c_function(
-  fun_name = 'round_',
-  args = args,
-  expected_types = expected_types,
-  nd_args = nd_args,
-  return_types = return_types,
-  fun_type = 'method'
-)})
+cpp_torch_dispatch_method_round_(args)})
 Tensor$set("public", "row_indices", function() {  cpp_torch_method_row_indices_self_Tensor(self)})
 Tensor$set("public", "rsqrt", function() {  cpp_torch_method_rsqrt_self_Tensor(self)})
 Tensor$set("public", "rsqrt_", function() {  cpp_torch_method_rsqrt__self_Tensor(self)})
 Tensor$set("private", "_scatter", function(dim, index, src, value, reduce) {  args <- mget(x = c("dim", "index", "src", "value", "reduce"))
 args <- c(list(self = self), args)
-expected_types <- list(self = "Tensor", dim = c("int64_t", "Dimname"), index = "Tensor", 
-    src = "Tensor", value = "Scalar", reduce = "c10::string_view")
-nd_args <- c("self", "dim", "index", "src", "value", "reduce")
-return_types <- list(list('Tensor'))
-call_c_function(
-  fun_name = 'scatter',
-  args = args,
-  expected_types = expected_types,
-  nd_args = nd_args,
-  return_types = return_types,
-  fun_type = 'method'
-)})
+cpp_torch_dispatch_method_scatter(args)})
 Tensor$set("private", "_scatter_", function(dim, index, src, value, reduce) {  args <- mget(x = c("dim", "index", "src", "value", "reduce"))
 args <- c(list(self = self), args)
-expected_types <- list(self = "Tensor", dim = "int64_t", index = "Tensor", src = "Tensor", 
-    value = "Scalar", reduce = "c10::string_view")
-nd_args <- c("self", "dim", "index", "src", "value", "reduce")
-return_types <- list(list('Tensor'))
-call_c_function(
-  fun_name = 'scatter_',
-  args = args,
-  expected_types = expected_types,
-  nd_args = nd_args,
-  return_types = return_types,
-  fun_type = 'method'
-)})
+cpp_torch_dispatch_method_scatter_(args)})
 Tensor$set("public", "scatter_add", function(dim, index, src) {  if (!is.character(dim)) {
   cpp_torch_method_scatter_add_self_Tensor_dim_int64_t_index_Tensor_src_Tensor(self, dim, index, src)
 } else {
@@ -1332,18 +895,7 @@ Tensor$set("public", "select", function(dim, index) {  if (is.character(dim)) {
 Tensor$set("public", "select_scatter", function(src, dim, index) {  cpp_torch_method_select_scatter_self_Tensor_src_Tensor_dim_int64_t_index_int64_t(self, src, dim, index)})
 Tensor$set("public", "set_", function(source, storage_offset, size, stride = list()) {  args <- mget(x = c("source", "storage_offset", "size", "stride"))
 args <- c(list(self = self), args)
-expected_types <- list(self = "Tensor", source = c("Storage", "Tensor"), storage_offset = "int64_t", 
-    size = "IntArrayRef", stride = "IntArrayRef")
-nd_args <- c("self", "source", "storage_offset", "size")
-return_types <- list(list('Tensor'))
-call_c_function(
-  fun_name = 'set_',
-  args = args,
-  expected_types = expected_types,
-  nd_args = nd_args,
-  return_types = return_types,
-  fun_type = 'method'
-)})
+cpp_torch_dispatch_method_set_(args)})
 Tensor$set("public", "set_data", function(new_data) {  cpp_torch_method_set_data_self_Tensor_new_data_Tensor(self, new_data)})
 Tensor$set("public", "sgn", function() {  cpp_torch_method_sgn_self_Tensor(self)})
 Tensor$set("public", "sgn_", function() {  cpp_torch_method_sgn__self_Tensor(self)})
@@ -1371,36 +923,14 @@ Tensor$set("public", "softmax", function(dim, dtype = NULL) {  if (!is.character
 }})
 Tensor$set("private", "_sort", function(dim = -1L, descending = FALSE, stable) {  args <- mget(x = c("dim", "descending", "stable"))
 args <- c(list(self = self), args)
-expected_types <- list(self = "Tensor", dim = c("int64_t", "Dimname"), descending = "bool", 
-    stable = "bool")
-nd_args <- c("self", "dim", "stable")
-return_types <- list(list("Tensor", "Tensor"))
-call_c_function(
-  fun_name = 'sort',
-  args = args,
-  expected_types = expected_types,
-  nd_args = nd_args,
-  return_types = return_types,
-  fun_type = 'method'
-)})
+cpp_torch_dispatch_method_sort(args)})
 Tensor$set("public", "sparse_dim", function() {  cpp_torch_method_sparse_dim_self_Tensor(self)})
 Tensor$set("public", "sparse_mask", function(mask) {  cpp_torch_method_sparse_mask_self_Tensor_mask_Tensor(self, mask)})
 Tensor$set("public", "sparse_resize_", function(size, sparse_dim, dense_dim) {  cpp_torch_method_sparse_resize__self_Tensor_size_IntArrayRef_sparse_dim_int64_t_dense_dim_int64_t(self, size, sparse_dim, dense_dim)})
 Tensor$set("public", "sparse_resize_and_clear_", function(size, sparse_dim, dense_dim) {  cpp_torch_method_sparse_resize_and_clear__self_Tensor_size_IntArrayRef_sparse_dim_int64_t_dense_dim_int64_t(self, size, sparse_dim, dense_dim)})
 Tensor$set("private", "_split", function(split_size, dim = 1L) {  args <- mget(x = c("split_size", "dim"))
 args <- c(list(self = self), args)
-expected_types <- list(self = "Tensor", split_size = c("int64_t", "IntArrayRef"
-), dim = "int64_t")
-nd_args <- c("self", "split_size")
-return_types <- list(list('TensorList'))
-call_c_function(
-  fun_name = 'split',
-  args = args,
-  expected_types = expected_types,
-  nd_args = nd_args,
-  return_types = return_types,
-  fun_type = 'method'
-)})
+cpp_torch_dispatch_method_split(args)})
 Tensor$set("public", "split_with_sizes", function(split_sizes, dim = 1L) {  cpp_torch_method_split_with_sizes_self_Tensor_split_sizes_IntArrayRef(self, split_sizes, dim)})
 Tensor$set("public", "sqrt", function() {  cpp_torch_method_sqrt_self_Tensor(self)})
 Tensor$set("public", "sqrt_", function() {  cpp_torch_method_sqrt__self_Tensor(self)})
@@ -1408,63 +938,17 @@ Tensor$set("public", "square", function() {  cpp_torch_method_square_self_Tensor
 Tensor$set("public", "square_", function() {  cpp_torch_method_square__self_Tensor(self)})
 Tensor$set("public", "squeeze", function(dim) {  args <- mget(x = c("dim"))
 args <- c(list(self = self), args)
-expected_types <- list(self = "Tensor", dim = c("int64_t", "Dimname", "IntArrayRef"
-))
-nd_args <- c("self", "dim")
-return_types <- list(list('Tensor'))
-call_c_function(
-  fun_name = 'squeeze',
-  args = args,
-  expected_types = expected_types,
-  nd_args = nd_args,
-  return_types = return_types,
-  fun_type = 'method'
-)})
+cpp_torch_dispatch_method_squeeze(args)})
 Tensor$set("public", "squeeze_", function(dim) {  args <- mget(x = c("dim"))
 args <- c(list(self = self), args)
-expected_types <- list(self = "Tensor", dim = c("int64_t", "IntArrayRef", "Dimname"
-))
-nd_args <- c("self", "dim")
-return_types <- list(list('Tensor'))
-call_c_function(
-  fun_name = 'squeeze_',
-  args = args,
-  expected_types = expected_types,
-  nd_args = nd_args,
-  return_types = return_types,
-  fun_type = 'method'
-)})
+cpp_torch_dispatch_method_squeeze_(args)})
 Tensor$set("public", "sspaddmm", function(mat1, mat2, beta = 1L, alpha = 1L) {  cpp_torch_method_sspaddmm_self_Tensor_mat1_Tensor_mat2_Tensor(self, mat1, mat2, beta, alpha)})
 Tensor$set("public", "std", function(dim, unbiased = TRUE, keepdim = FALSE) {  args <- mget(x = c("dim", "unbiased", "keepdim"))
 args <- c(list(self = self), args)
-expected_types <- list(self = "Tensor", dim = c("IntArrayRef", "DimnameList"), 
-    unbiased = "bool", keepdim = "bool")
-nd_args <- c("self", "dim")
-return_types <- list(list('Tensor'))
-call_c_function(
-  fun_name = 'std',
-  args = args,
-  expected_types = expected_types,
-  nd_args = nd_args,
-  return_types = return_types,
-  fun_type = 'method'
-)})
+cpp_torch_dispatch_method_std(args)})
 Tensor$set("public", "stft", function(n_fft, hop_length = NULL, win_length = NULL, window = list(), center = TRUE, pad_mode = "reflect", normalized = FALSE, onesided = NULL, return_complex = NULL, align_to_window = NULL) {  args <- mget(x = c("n_fft", "hop_length", "win_length", "window", "center", "pad_mode", "normalized", "onesided", "return_complex", "align_to_window"))
 args <- c(list(self = self), args)
-expected_types <- list(self = "Tensor", n_fft = "int64_t", hop_length = "int64_t", 
-    win_length = "int64_t", window = "Tensor", center = "bool", 
-    pad_mode = "c10::string_view", normalized = "bool", onesided = "bool", 
-    return_complex = "bool", align_to_window = "bool")
-nd_args <- c("self", "n_fft")
-return_types <- list(list('Tensor'))
-call_c_function(
-  fun_name = 'stft',
-  args = args,
-  expected_types = expected_types,
-  nd_args = nd_args,
-  return_types = return_types,
-  fun_type = 'method'
-)})
+cpp_torch_dispatch_method_stft(args)})
 Tensor$set("private", "_stride", function(dim) {  if (!is.character(dim)) {
   cpp_torch_method_stride_self_Tensor_dim_int64_t(self, dim)
 } else {
@@ -1492,18 +976,7 @@ Tensor$set("public", "subtract_", function(other, alpha = 1L) {  if (is_tensor_d
 }})
 Tensor$set("public", "sum", function(dim, keepdim = FALSE, dtype = NULL) {  args <- mget(x = c("dim", "keepdim", "dtype"))
 args <- c(list(self = self), args)
-expected_types <- list(self = "Tensor", dim = c("IntArrayRef", "DimnameList"), 
-    keepdim = "bool", dtype = "ScalarType")
-nd_args <- c("self", "dim")
-return_types <- list(list('Tensor'))
-call_c_function(
-  fun_name = 'sum',
-  args = args,
-  expected_types = expected_types,
-  nd_args = nd_args,
-  return_types = return_types,
-  fun_type = 'method'
-)})
+cpp_torch_dispatch_method_sum(args)})
 Tensor$set("public", "sum_to_size", function(size) {  cpp_torch_method_sum_to_size_self_Tensor_size_IntArrayRef(self, size)})
 Tensor$set("public", "svd", function(some = TRUE, compute_uv = TRUE) {  cpp_torch_method_svd_self_Tensor(self, some, compute_uv)})
 Tensor$set("public", "swapaxes", function(axis0, axis1) {  cpp_torch_method_swapaxes_self_Tensor_axis0_int64_t_axis1_int64_t(self, axis0, axis1)})
@@ -1520,52 +993,17 @@ Tensor$set("public", "tanh", function() {  cpp_torch_method_tanh_self_Tensor(sel
 Tensor$set("public", "tanh_", function() {  cpp_torch_method_tanh__self_Tensor(self)})
 Tensor$set("public", "tensor_split", function(indices, sections, tensor_indices_or_sections, dim = 1L) {  args <- mget(x = c("indices", "sections", "tensor_indices_or_sections", "dim"))
 args <- c(list(self = self), args)
-expected_types <- list(self = "Tensor", indices = "IntArrayRef", sections = "int64_t", 
-    tensor_indices_or_sections = "Tensor", dim = "int64_t")
-nd_args <- c("self", "indices", "sections", "tensor_indices_or_sections"
-)
-return_types <- list(list('TensorList'))
-call_c_function(
-  fun_name = 'tensor_split',
-  args = args,
-  expected_types = expected_types,
-  nd_args = nd_args,
-  return_types = return_types,
-  fun_type = 'method'
-)})
+cpp_torch_dispatch_method_tensor_split(args)})
 Tensor$set("public", "tile", function(dims) {  cpp_torch_method_tile_self_Tensor_dims_IntArrayRef(self, dims)})
 Tensor$set("private", "_to", function(device, options = list(), other, dtype, non_blocking = FALSE, copy = FALSE, memory_format = NULL) {  args <- mget(x = c("device", "options", "other", "dtype", "non_blocking", "copy", "memory_format"))
 args <- c(list(self = self), args)
-expected_types <- list(self = "Tensor", device = "Device", options = "TensorOptions", 
-    other = "Tensor", dtype = "ScalarType", non_blocking = "bool", 
-    copy = "bool", memory_format = "MemoryFormat")
-nd_args <- c("self", "device", "other", "dtype")
-return_types <- list(list('Tensor'))
-call_c_function(
-  fun_name = 'to',
-  args = args,
-  expected_types = expected_types,
-  nd_args = nd_args,
-  return_types = return_types,
-  fun_type = 'method'
-)})
+cpp_torch_dispatch_method_to(args)})
 Tensor$set("public", "to_dense", function(dtype = NULL, masked_grad = NULL) {  cpp_torch_method_to_dense_self_Tensor(self, dtype, masked_grad)})
 Tensor$set("public", "to_mkldnn", function(dtype = NULL) {  cpp_torch_method_to_mkldnn_self_Tensor(self, dtype)})
 Tensor$set("public", "to_padded_tensor", function(padding, output_size = NULL) {  cpp_torch_method_to_padded_tensor_self_Tensor_padding_double(self, padding, output_size)})
 Tensor$set("public", "to_sparse", function(layout = NULL, sparse_dim, blocksize = NULL, dense_dim = NULL) {  args <- mget(x = c("layout", "sparse_dim", "blocksize", "dense_dim"))
 args <- c(list(self = self), args)
-expected_types <- list(self = "Tensor", layout = "Layout", sparse_dim = "int64_t", 
-    blocksize = "IntArrayRef", dense_dim = "int64_t")
-nd_args <- c("self", "sparse_dim")
-return_types <- list(list('Tensor'))
-call_c_function(
-  fun_name = 'to_sparse',
-  args = args,
-  expected_types = expected_types,
-  nd_args = nd_args,
-  return_types = return_types,
-  fun_type = 'method'
-)})
+cpp_torch_dispatch_method_to_sparse(args)})
 Tensor$set("public", "to_sparse_bsc", function(blocksize, dense_dim = NULL) {  cpp_torch_method_to_sparse_bsc_self_Tensor_blocksize_IntArrayRef(self, blocksize, dense_dim)})
 Tensor$set("public", "to_sparse_bsr", function(blocksize, dense_dim = NULL) {  cpp_torch_method_to_sparse_bsr_self_Tensor_blocksize_IntArrayRef(self, blocksize, dense_dim)})
 Tensor$set("public", "to_sparse_csc", function(dense_dim = NULL) {  cpp_torch_method_to_sparse_csc_self_Tensor(self, dense_dim)})
@@ -1574,18 +1012,7 @@ Tensor$set("private", "_topk", function(k, dim = -1L, largest = TRUE, sorted = T
 Tensor$set("public", "trace", function() {  cpp_torch_method_trace_self_Tensor(self)})
 Tensor$set("public", "transpose", function(dim0, dim1) {  args <- mget(x = c("dim0", "dim1"))
 args <- c(list(self = self), args)
-expected_types <- list(self = "Tensor", dim0 = c("int64_t", "Dimname"), dim1 = c("int64_t", 
-"Dimname"))
-nd_args <- c("self", "dim0", "dim1")
-return_types <- list(list('Tensor'))
-call_c_function(
-  fun_name = 'transpose',
-  args = args,
-  expected_types = expected_types,
-  nd_args = nd_args,
-  return_types = return_types,
-  fun_type = 'method'
-)})
+cpp_torch_dispatch_method_transpose(args)})
 Tensor$set("public", "transpose_", function(dim0, dim1) {  cpp_torch_method_transpose__self_Tensor_dim0_int64_t_dim1_int64_t(self, dim0, dim1)})
 Tensor$set("public", "triangular_solve", function(A, upper = TRUE, transpose = FALSE, unitriangular = FALSE) {  cpp_torch_method_triangular_solve_self_Tensor_A_Tensor(self, A, upper, transpose, unitriangular)})
 Tensor$set("public", "tril", function(diagonal = 0L) {  cpp_torch_method_tril_self_Tensor(self, diagonal)})
@@ -1625,46 +1052,15 @@ Tensor$set("public", "unsqueeze_", function(dim) {  cpp_torch_method_unsqueeze__
 Tensor$set("public", "values", function() {  cpp_torch_method_values_self_Tensor(self)})
 Tensor$set("public", "var", function(dim, unbiased = TRUE, keepdim = FALSE) {  args <- mget(x = c("dim", "unbiased", "keepdim"))
 args <- c(list(self = self), args)
-expected_types <- list(self = "Tensor", dim = c("IntArrayRef", "DimnameList"), 
-    unbiased = "bool", keepdim = "bool")
-nd_args <- c("self", "dim")
-return_types <- list(list('Tensor'))
-call_c_function(
-  fun_name = 'var',
-  args = args,
-  expected_types = expected_types,
-  nd_args = nd_args,
-  return_types = return_types,
-  fun_type = 'method'
-)})
+cpp_torch_dispatch_method_var(args)})
 Tensor$set("public", "vdot", function(other) {  cpp_torch_method_vdot_self_Tensor_other_Tensor(self, other)})
 Tensor$set("private", "_view", function(dtype, size) {  args <- mget(x = c("dtype", "size"))
 args <- c(list(self = self), args)
-expected_types <- list(self = "Tensor", dtype = "ScalarType", size = "IntArrayRef")
-nd_args <- c("self", "dtype", "size")
-return_types <- list(list('Tensor'))
-call_c_function(
-  fun_name = 'view',
-  args = args,
-  expected_types = expected_types,
-  nd_args = nd_args,
-  return_types = return_types,
-  fun_type = 'method'
-)})
+cpp_torch_dispatch_method_view(args)})
 Tensor$set("public", "view_as", function(other) {  cpp_torch_method_view_as_self_Tensor_other_Tensor(self, other)})
 Tensor$set("public", "vsplit", function(indices, sections) {  args <- mget(x = c("indices", "sections"))
 args <- c(list(self = self), args)
-expected_types <- list(self = "Tensor", indices = "IntArrayRef", sections = "int64_t")
-nd_args <- c("self", "indices", "sections")
-return_types <- list(list('TensorList'))
-call_c_function(
-  fun_name = 'vsplit',
-  args = args,
-  expected_types = expected_types,
-  nd_args = nd_args,
-  return_types = return_types,
-  fun_type = 'method'
-)})
+cpp_torch_dispatch_method_vsplit(args)})
 Tensor$set("public", "where", function(condition, other) {  if (is_tensor_dispatch(other)) {
   cpp_torch_method_where_condition_Tensor_self_Tensor_other_Tensor(condition, self, other)
 } else {

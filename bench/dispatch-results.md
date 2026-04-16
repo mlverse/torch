@@ -97,24 +97,39 @@ affecting 106 namespace functions and 100 methods.
 | torch_add  | 5.86µs          | 2.05µs         | -65%   |
 | direct     | 1.56µs          | 1.56µs         | (unchanged) |
 
+## Fix 7: Generate C++ dispatchers for remaining multi-overload functions
+
+For functions with 3+ overloads or complex dispatch patterns, generate a
+C++ dispatcher function that does type resolution and dispatch entirely
+in C++, eliminating `do.call`, cache lookup, and R↔C++ round-trips.
+
+Each dispatcher takes an `Rcpp::List` of args (from `mget`), calls
+`cpp_arg_to_torch_type` for each dispatch arg, then dispatches to the
+matching overload directly via `Rcpp::as<>()` conversions.
+
+| expression | median (before) | median (after) | change |
+|------------|-----------------|----------------|--------|
+| torch_div  | 5.86µs          | 2.34µs         | -60%   |
+| direct     | 1.23µs          | 1.23µs         | (unchanged) |
+
 ## Summary
 
 Dispatch path breakdown (namespace / methods):
 
-| path             | namespace   | methods   |
-|------------------|-------------|-----------|
-| direct call      | 2,065 (84%) | 609 (80%) |
-| inline if/else   | 106 (4%)    | 100 (13%) |
-| generic dispatch | 298 (12%)   | 56 (7%)   |
+| path             | namespace | methods |
+|------------------|-----------|---------|
+| direct call      | 84%       | 80%     |
+| inline if/else   | 4%        | 13%     |
+| C++ dispatcher   | 12%       | 7%      |
 
-Final performance:
+Final performance (all measured on 2×2 tensors):
 
-| function       | type             | baseline | after all fixes | improvement |
-|----------------|------------------|----------|-----------------|-------------|
-| torch_matmul   | direct call      | 6.76µs   | 1.39µs          | -79%        |
-| torch_add      | inline if/else   | 6.76µs   | 2.05µs          | -70%        |
-| torch_div      | generic dispatch | 6.76µs   | 5.86µs          | -13%        |
+| function       | dispatch path    | baseline | final  | improvement |
+|----------------|------------------|----------|--------|-------------|
+| torch_matmul   | direct call      | 6.76µs   | 1.44µs | -79%        |
+| torch_add      | inline if/else   | 6.76µs   | 2.01µs | -70%        |
+| torch_div      | C++ dispatcher   | 6.76µs   | 2.34µs | -65%        |
 
-For ~88-93% of functions, dispatch overhead is essentially eliminated.
-The remaining ~7-12% still use the generic dispatcher (functions with 3+
-overloads or complex dispatch patterns).
+All dispatch paths now achieve sub-2.5µs overhead, down from 6.76µs
+baseline. The generic `call_c_function` R dispatcher is no longer used
+by any generated code.
