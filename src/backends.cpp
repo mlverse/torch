@@ -12,3 +12,6 @@ bool cpp_backends_openmp_is_available() { return lantern_backend_has_openmp(); }
 
 // [[Rcpp::export]]
 bool cpp_backends_mps_is_available() { return lantern_backend_has_mps(); }
+
+// [[Rcpp::export]]
+void cpp_mps_synchronize() { lantern_mps_synchronize(); }
