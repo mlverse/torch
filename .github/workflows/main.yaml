@@ -88,6 +88,48 @@ jobs:
           error-on: '"error"'
           args: 'c("--no-multiarch", "--no-manual", "--as-cran")'
 
+  benchmarks:
+    needs: lantern
+    if: ${{ always() && needs.lantern.result != 'failed' }}
+    runs-on: ubuntu-22.04
+    name: "Benchmarks"
+    timeout-minutes: 60
+    env:
+      TORCH_INSTALL: 1
+      GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
+
+    steps:
+      - name: Download lantern artifacts
+        if: ${{ needs.lantern.result != 'skipped' }}
+        uses: actions/download-artifact@v8
+        with:
+          pattern: lantern-*
+          path: '${{ runner.temp }}/'
+          merge-multiple: true
+
+      - name: Set base URL for downloading
+        if: ${{ needs.lantern.result != 'skipped' }}
+        run: |
+          echo "LANTERN_BASE_URL=${{ runner.temp }}/" >> $GITHUB_ENV
+        shell: bash
+
+      - uses: actions/checkout@v6
+
+      - uses: ./.github/actions/setup-r
+        with:
+          r_version: release
+
+      - uses: r-lib/actions/setup-r-dependencies@v2
+        with:
+          cache: false
+
+      - name: Run CPU cache benchmark
+        run: |
+          echo '## CPU Cache Benchmark' >> $GITHUB_STEP_SUMMARY
+          echo '```' >> $GITHUB_STEP_SUMMARY
+          bash bench/benchmark_cpu_cache/run.sh 2>&1 | tee -a $GITHUB_STEP_SUMMARY
+          echo '```' >> $GITHUB_STEP_SUMMARY
+
   build-gpu-image:
     needs: lantern
     if: ${{ always() && needs.lantern.result != 'failed' }}
