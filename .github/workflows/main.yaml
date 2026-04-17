@@ -120,7 +120,7 @@ jobs:
           r_version: release
 
       - name: Install torch
-        run: Rscript -e "pak::local_install()"
+        run: Rscript -e "install.packages('pak'); pak::local_install()"
 
       - name: Run CPU cache benchmark
         run: |
