@@ -966,6 +966,38 @@ HOST_API void set_lantern_allocator (void (*r_gc) (bool), uint64_t threshold_mb)
   LANTERN_HOST_HANDLER;
 }
 
+LANTERN_API void (LANTERN_PTR _lantern_set_allocator_bypass) (bool bypass);
+HOST_API void lantern_set_allocator_bypass (bool bypass)
+{
+  LANTERN_CHECK_LOADED
+  _lantern_set_allocator_bypass(bypass);
+  LANTERN_HOST_HANDLER;
+}
+
+LANTERN_API void (LANTERN_PTR _lantern_set_cache_max_size) (uint64_t max_size_mb);
+HOST_API void lantern_set_cache_max_size (uint64_t max_size_mb)
+{
+  LANTERN_CHECK_LOADED
+  _lantern_set_cache_max_size(max_size_mb);
+  LANTERN_HOST_HANDLER;
+}
+
+LANTERN_API void (LANTERN_PTR _lantern_set_cache_min_block_size) (uint64_t min_size_bytes);
+HOST_API void lantern_set_cache_min_block_size (uint64_t min_size_bytes)
+{
+  LANTERN_CHECK_LOADED
+  _lantern_set_cache_min_block_size(min_size_bytes);
+  LANTERN_HOST_HANDLER;
+}
+
+LANTERN_API void (LANTERN_PTR _lantern_flush_cache) ();
+HOST_API void lantern_flush_cache ()
+{
+  LANTERN_CHECK_LOADED
+  _lantern_flush_cache();
+  LANTERN_HOST_HANDLER;
+}
+
 LANTERN_API void (LANTERN_PTR _lantern_vector_bool_delete) (void* x);
 HOST_API void lantern_vector_bool_delete (void* x)
 {
@@ -10837,6 +10869,10 @@ bool lanternInit(const std::string &libPath, std::string *pError)
   LOAD_SYMBOL(_lantern_JITModule_delete);
   LOAD_SYMBOL(_lantern_TraceableFunction_delete);
   LOAD_SYMBOL(_set_lantern_allocator);
+  LOAD_SYMBOL(_lantern_set_allocator_bypass);
+  LOAD_SYMBOL(_lantern_set_cache_max_size);
+  LOAD_SYMBOL(_lantern_set_cache_min_block_size);
+  LOAD_SYMBOL(_lantern_flush_cache);
   LOAD_SYMBOL(_lantern_vector_bool_delete);
   LOAD_SYMBOL(_lantern_normal_double_double_intarrayref_generator_tensoroptions);
   LOAD_SYMBOL(_lantern_normal_tensor_tensor_generator);

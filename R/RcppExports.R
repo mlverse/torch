@@ -177,8 +177,12 @@ cpp_autograd_grad <- function(outputs, inputs, grad_outputs, retain_graph, creat
     .Call(`_torch_cpp_autograd_grad`, outputs, inputs, grad_outputs, retain_graph, create_graph, allow_unused)
 }
 
-cpp_set_lantern_allocator <- function(threshold_call_gc = 4000L) {
-    invisible(.Call(`_torch_cpp_set_lantern_allocator`, threshold_call_gc))
+cpp_set_lantern_allocator <- function(threshold_call_gc = 4000L, cache_enabled = TRUE, cache_max_size_mb = 4000L, cache_min_block_size = 1024L) {
+    invisible(.Call(`_torch_cpp_set_lantern_allocator`, threshold_call_gc, cache_enabled, cache_max_size_mb, cache_min_block_size))
+}
+
+cpp_cpu_cache_flush <- function() {
+    invisible(.Call(`_torch_cpp_cpu_cache_flush`))
 }
 
 cpp_set_cuda_allocator_allocator_thresholds <- function(reserved_rate, allocated_rate, allocated_reserved_rate) {
