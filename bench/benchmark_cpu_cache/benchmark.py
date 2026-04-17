@@ -1,15 +1,20 @@
+import argparse
 import math
 import time
 import torch
 import torch.nn as nn
 import torch.optim as optim
 
+parser = argparse.ArgumentParser()
+parser.add_argument("--latent", type=int, default=5000)
+args = parser.parse_args()
+
 print(f"PyTorch version: {torch.__version__}")
 
 p = 100
 steps = 1000
 n = 1000
-latent = 5000
+latent = args.latent
 nreps = 5
 
 def se(xs):

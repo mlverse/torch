@@ -3,7 +3,7 @@ library(torch)
 args <- commandArgs(trailingOnly = TRUE)
 cache_enabled <- !("--no-cache" %in% args)
 latent_arg <- grep("^--latent=", args, value = TRUE)
-latent <- if (length(latent_arg)) as.integer(sub("--latent=", "", latent_arg)) else 5000L
+latent <- if (length(latent_arg)) as.integer(sub("--latent=", "", latent_arg)) else 500L
 
 set_cpu_allocator_config(cache_enabled = cache_enabled)
 
