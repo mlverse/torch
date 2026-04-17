@@ -120,7 +120,10 @@ jobs:
           r_version: release
 
       - name: Install system dependencies
-        run: sudo apt-get update && sudo apt-get install -y libcurl4-openssl-dev libssl-dev libxml2-dev
+        run: |
+          sudo apt-get update && sudo apt-get install -y libcurl4-openssl-dev libssl-dev libxml2-dev libopenblas-dev
+          sudo update-alternatives --set libblas.so.3-x86_64-linux-gnu /usr/lib/x86_64-linux-gnu/openblas-pthread/libblas.so.3
+          sudo update-alternatives --set liblapack.so.3-x86_64-linux-gnu /usr/lib/x86_64-linux-gnu/openblas-pthread/liblapack.so.3
 
       - name: Install uv
         uses: astral-sh/setup-uv@v6
