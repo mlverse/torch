@@ -205,6 +205,10 @@ cpp_backends_mps_is_available <- function() {
     .Call(`_torch_cpp_backends_mps_is_available`)
 }
 
+cpp_mps_synchronize <- function() {
+    invisible(.Call(`_torch_cpp_mps_synchronize`))
+}
+
 cpp_arg_to_torch_type <- function(obj, expected_types, arg_name) {
     .Call(`_torch_cpp_arg_to_torch_type`, obj, expected_types, arg_name)
 }

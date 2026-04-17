@@ -116,6 +116,7 @@ Collate:
     'layout.R'
     'linalg.R'
     'memory_format.R'
+    'mps.R'
     'nn.R'
     'nn-activation.R'
     'nn-batchnorm.R'

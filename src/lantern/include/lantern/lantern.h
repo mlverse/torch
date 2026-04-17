@@ -2459,6 +2459,13 @@ HOST_API bool lantern_backend_has_mps () {
   return ret;
 }
 
+LANTERN_API void (LANTERN_PTR _lantern_mps_synchronize) ();
+HOST_API void lantern_mps_synchronize () {
+  LANTERN_CHECK_LOADED
+  _lantern_mps_synchronize();
+  LANTERN_HOST_HANDLER;
+}
+
 LANTERN_API void (LANTERN_PTR _lantern_cuda_empty_cache) ();
 HOST_API void lantern_cuda_empty_cache () {
   LANTERN_CHECK_LOADED
@@ -11005,6 +11012,7 @@ LOAD_SYMBOL(_lantern_torch_parallel_info);
 LOAD_SYMBOL(_lantern_set_cuda_allocator_thresholds);
 LOAD_SYMBOL(_lantern_cuda_synchronize);
 LOAD_SYMBOL(_lantern_backend_has_mps);
+LOAD_SYMBOL(_lantern_mps_synchronize);
 LOAD_SYMBOL(_lantern_cuda_empty_cache);
 LOAD_SYMBOL(_lantern_cuda_record_memory_history);
 LOAD_SYMBOL(_lantern_cuda_memory_snapshot);
