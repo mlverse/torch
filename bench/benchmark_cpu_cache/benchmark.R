@@ -2,16 +2,18 @@ library(torch)
 
 args <- commandArgs(trailingOnly = TRUE)
 cache_enabled <- !("--no-cache" %in% args)
+latent_arg <- grep("^--latent=", args, value = TRUE)
+latent <- if (length(latent_arg)) as.integer(sub("--latent=", "", latent_arg)) else 5000L
 
 set_cpu_allocator_config(cache_enabled = cache_enabled)
 
 cat("torch version:", as.character(packageVersion("torch")), "\n")
 cat("cache:", if (cache_enabled) "enabled" else "disabled", "\n")
+cat("latent:", latent, "\n")
 
 p <- 100
 steps <- 1000
 n <- 1000
-latent <- 5000
 nreps <- 5
 
 se <- function(x) sd(x) / sqrt(length(x))
