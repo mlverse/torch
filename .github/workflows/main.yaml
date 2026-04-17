@@ -119,6 +119,9 @@ jobs:
         with:
           r_version: release
 
+      - name: Install system dependencies
+        run: sudo apt-get update && sudo apt-get install -y libcurl4-openssl-dev libssl-dev libxml2-dev
+
       - name: Install torch
         run: Rscript -e "install.packages('pak'); pak::local_install()"
 
