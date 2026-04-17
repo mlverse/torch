@@ -119,9 +119,8 @@ jobs:
         with:
           r_version: release
 
-      - uses: r-lib/actions/setup-r-dependencies@v2
-        with:
-          cache: false
+      - name: Install torch
+        run: Rscript -e "pak::local_install()"
 
       - name: Run CPU cache benchmark
         run: |
