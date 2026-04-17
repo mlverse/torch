@@ -83,8 +83,9 @@ struct CPUBlockCache {
       return;
     }
     size_t nbytes = it->second;
-    if (cached_bytes + nbytes > max_cache_size) {
-      // Cache is full, free to OS instead
+    if (lantern_allocator_bypass.load(std::memory_order_relaxed) ||
+        cached_bytes + nbytes > max_cache_size) {
+      // Cache disabled or full — free to OS instead of caching
       c10::free_cpu(ptr);
       allocated.erase(it);
       return;
@@ -175,6 +176,9 @@ struct LanternCPUAllocator final : at::Allocator {
       } catch (...) {
         (*call_r_gc)(true);
         wait_for_gc();
+        // GC ran finalizers which populated the cache via CachedDelete.
+        // Flush those blocks back to the OS so the retry can succeed.
+        block_cache.free_cached();
         data = alloc_cpu(nbytes);
       }
     }

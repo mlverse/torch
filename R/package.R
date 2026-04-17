@@ -95,10 +95,11 @@ start_torch <- function() {
   tryCatch(
     {
         lantern_start()
+        gc_threshold <- getOption("torch.threshold_call_gc", 4000L)
         cpp_set_lantern_allocator(
-          threshold_call_gc = getOption("torch.threshold_call_gc", 4000L),
+          threshold_call_gc = gc_threshold,
           cache_enabled = getOption("torch.cpu_cache_enabled", TRUE),
-          cache_max_size_mb = getOption("torch.cpu_cache_max_size_mb", 4000L),
+          cache_max_size_mb = getOption("torch.cpu_cache_max_size_mb", gc_threshold),
           cache_min_block_size = getOption("torch.cpu_cache_min_block_size", 1024L)
         )
         cpp_set_cuda_allocator_allocator_thresholds(
