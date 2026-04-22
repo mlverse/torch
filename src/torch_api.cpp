@@ -5,11 +5,29 @@
 // torch's C API. Most of functions here should not be directly used, but they
 // are called by torch type wrappers.
 
-// READY_TO_FINALIZE is bit 0 of the gp field. R's GC sets this flag in
-// CheckFinalizers() BEFORE running the actual weak-ref finalizer, so we can
-// detect that a key has been scheduled for collection without calling
+// READY_TO_FINALIZE is bit 0 of the gp field in sxpinfo. R's GC sets this
+// flag in CheckFinalizers() BEFORE running the actual weak-ref finalizer, so
+// we can detect that a key has been scheduled for collection without calling
 // R_RunPendingFinalizers().
-#define WEAKREF_READY_TO_FINALIZE(w) (LEVELS(w) & 1)
+//
+// We avoid using the LEVELS() macro/function because it was removed from R's
+// public API in R-devel. Instead we replicate the check directly using the
+// sxpinfo bit layout, which has been stable since weak references were
+// introduced in R.
+static inline bool weakref_is_ready_to_finalize(SEXP w) {
+  // The gp field sits right after type(5):scalar(1):obj(1):alt(1) = 8 bits
+  // = 1 byte. Bit 0 of gp is the READY_TO_FINALIZE flag.
+  // LEVELS(x) returns the 16-bit gp field; we only need bit 0.
+  //
+  // We use the same struct layout as R's sxpinfo_struct. The gp field
+  // is at the same position across all R versions that support weak refs.
+  struct sxpinfo_minimal {
+    unsigned int type_and_flags : 8;  // type(5) + scalar(1) + obj(1) + alt(1)
+    unsigned int gp : 16;
+  };
+  auto* info = reinterpret_cast<const sxpinfo_minimal*>(w);
+  return info->gp & 1;  // READY_TO_FINALIZE_MASK
+}
 
 // Weak-ref finalizer: called when the R tensor object (key) is collected.
 // Clears the pyobj slot in the C++ TensorImpl and releases the preserved
@@ -117,7 +135,7 @@ SEXP operator_sexp_tensor(const XPtrTorchTensor* self) {
     // has been scheduled for collection by the GC.  This flag is set during
     // CheckFinalizers() which runs BEFORE the weak-ref finalizer clears the
     // key — so it catches the race window without R_RunPendingFinalizers().
-    if (!WEAKREF_READY_TO_FINALIZE(weakref)) {
+    if (!weakref_is_ready_to_finalize(weakref)) {
       SEXP key = R_WeakRefKey(weakref);
       if (key != R_NilValue) {
         return key;
