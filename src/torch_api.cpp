@@ -5,11 +5,23 @@
 // torch's C API. Most of functions here should not be directly used, but they
 // are called by torch type wrappers.
 
-static inline void tensor_finalizer(SEXP ptr) {
-  auto xptr = Rcpp::as<Rcpp::XPtr<XPtrTorchTensor>>(ptr);
-  // When the the xptr is released, we might call this function with an invalid ptr.
+// READY_TO_FINALIZE is bit 0 of the gp field. R's GC sets this flag in
+// CheckFinalizers() BEFORE running the actual weak-ref finalizer, so we can
+// detect that a key has been scheduled for collection without calling
+// R_RunPendingFinalizers().
+#define WEAKREF_READY_TO_FINALIZE(w) (LEVELS(w) & 1)
+
+// Weak-ref finalizer: called when the R tensor object (key) is collected.
+// Clears the pyobj slot in the C++ TensorImpl and releases the preserved
+// weak reference.
+static void weakref_tensor_clean(SEXP key) {
+  auto xptr = Rcpp::as<Rcpp::XPtr<XPtrTorchTensor>>(key);
   if (xptr.get()) {
-    lantern_tensor_set_pyobj(xptr->get(), nullptr);
+    void* stored = lantern_tensor_get_pyobj(xptr->get());
+    if (stored) {
+      R_ReleaseObject((SEXP)stored);  // release the preserved weak ref
+      lantern_tensor_set_pyobj(xptr->get(), nullptr);
+    }
   }
 }
 
@@ -96,33 +108,39 @@ static inline std::string torch_string_to_string (XPtrTorchstring x) {
 // torch_tensor
 
 SEXP operator_sexp_tensor(const XPtrTorchTensor* self) {
-  // If there's an R object stored in the Tensor Implementation
-  // we want to return it directly so we have a unique R object
-  // that points to each tensor.
-  if (lantern_tensor_get_pyobj(self->get())) {
-    // It could be that the R objet is still stored in the TensorImpl but
-    // it has already been scheduled for finalization by the GC.
-    // Thus we need to run the pending finalizers and retry.
-    R_RunPendingFinalizers();
-    void* ptr = lantern_tensor_get_pyobj(self->get());
-    if (ptr) {
-      SEXP out = PROTECT(Rf_duplicate((SEXP)ptr));
-      UNPROTECT(1);
-      return out;
+  // Check if there's already a cached R object for this tensor, stored as a
+  // weak reference in the TensorImpl's pyobj slot.
+  void* stored = lantern_tensor_get_pyobj(self->get());
+  if (stored) {
+    SEXP weakref = (SEXP)stored;
+    // Use the READY_TO_FINALIZE flag to detect if the key (R tensor object)
+    // has been scheduled for collection by the GC.  This flag is set during
+    // CheckFinalizers() which runs BEFORE the weak-ref finalizer clears the
+    // key — so it catches the race window without R_RunPendingFinalizers().
+    if (!WEAKREF_READY_TO_FINALIZE(weakref)) {
+      SEXP key = R_WeakRefKey(weakref);
+      if (key != R_NilValue) {
+        return key;
+      }
     }
+    // Key was collected (or is about to be) — clean up our side.
+    R_ReleaseObject(weakref);
+    lantern_tensor_set_pyobj(self->get(), nullptr);
   }
 
-  // If there's no R object stored in the Tensor, we will create a new one
-  // and store the weak reference.
-  // Since this will be the only R object that points to that tensor, we also
-  // register a finalizer that will erase the reference to the R object in the
-  // C++ object whenever this object gets out of scope.
+  // Create a new R wrapper for this tensor.
   auto xptr = make_xptr<XPtrTorchTensor>(*self);
   xptr.attr("class") = Rcpp::CharacterVector::create("torch_tensor", "R7");
   SEXP xptr_ = PROTECT(Rcpp::wrap(xptr));
-  R_RegisterCFinalizer(xptr_, tensor_finalizer);
-  lantern_tensor_set_pyobj(self->get(), (void*)xptr_);
-  UNPROTECT(1);
+
+  // Create a weak reference with the xptr as key.  When the xptr becomes
+  // unreachable, weakref_tensor_clean will clear the pyobj slot.
+  // We preserve the weak ref so it survives independently of the key.
+  SEXP weakref = PROTECT(R_MakeWeakRefC(xptr_, R_NilValue, weakref_tensor_clean, FALSE));
+  R_PreserveObject(weakref);
+  lantern_tensor_set_pyobj(self->get(), (void*)weakref);
+
+  UNPROTECT(2);
   return xptr_;
 }
 
