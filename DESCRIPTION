@@ -73,6 +73,7 @@ Collate:
     'compilation_unit.R'
     'conditions.R'
     'contrib.R'
+    'cpu-allocator.R'
     'creation-ops.R'
     'cuda.R'
     'device.R'

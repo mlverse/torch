@@ -419,8 +419,19 @@ void call_r_gc(bool full) {
 }
 
 // [[Rcpp::export]]
-void cpp_set_lantern_allocator(uint64_t threshold_call_gc = 4000) {
+void cpp_set_lantern_allocator(uint64_t threshold_call_gc = 4000,
+                               bool cache_enabled = true,
+                               uint64_t cache_max_size_mb = 4000,
+                               uint64_t cache_min_block_size = 1024) {
   set_lantern_allocator(&call_r_gc, threshold_call_gc);
+  lantern_set_allocator_bypass(!cache_enabled);
+  lantern_set_cache_max_size(cache_max_size_mb);
+  lantern_set_cache_min_block_size(cache_min_block_size);
+}
+
+// [[Rcpp::export]]
+void cpp_cpu_cache_flush() {
+  lantern_flush_cache();
 }
 
 // [[Rcpp::export]]
