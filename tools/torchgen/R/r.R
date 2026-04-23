@@ -131,7 +131,7 @@ internal_funs <- c("logical_not", "max_pool1d_with_indices", "max_pool2d_with_in
                    "max_pool2d_with_indices_out", "max_pool3d_with_indices",
                    "max_pool3d_with_indices_out", "max", "min", "max_out", "min_out",
                    "nll_loss", "nll_loss2d", "bartlett_window", "blackman_window",
-                   "hamming_window", "hann_window", "normal",
+                   "hamming_window", "hann_window",
                    "result_type", "sparse_coo_tensor", "stft",
                    "tensordot", "tril_indices", "triu_indices",
                    "multilabel_margin_loss", "multi_margin_loss",
