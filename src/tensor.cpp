@@ -125,9 +125,14 @@ static void shm_mapping_destructor(SEXP x) {
     R_ClearExternalPtr(x);
   }
 }
+#endif // _WIN32
 
 // [[Rcpp::export]]
 Rcpp::List cpp_tensor_to_shm(torch::Tensor tensor) {
+#ifdef _WIN32
+  Rcpp::stop("SHM transport is not supported on Windows");
+  return Rcpp::List();
+#else
   auto numel = lantern_Tensor_numel(tensor.get());
   auto elem_size = lantern_Tensor_element_size(tensor.get());
   size_t nbytes = static_cast<size_t>(numel) * static_cast<size_t>(elem_size);
@@ -159,10 +164,15 @@ Rcpp::List cpp_tensor_to_shm(torch::Tensor tensor) {
     Rcpp::Named("name") = name,
     Rcpp::Named("nbytes") = static_cast<double>(nbytes)
   );
+#endif
 }
 
 // [[Rcpp::export]]
 SEXP cpp_map_shm(std::string name, double nbytes_dbl) {
+#ifdef _WIN32
+  Rcpp::stop("SHM transport is not supported on Windows");
+  return R_NilValue;
+#else
   size_t nbytes = static_cast<size_t>(nbytes_dbl);
 
   int fd = shm_open(name.c_str(), O_RDONLY, 0);
@@ -180,9 +190,8 @@ SEXP cpp_map_shm(std::string name, double nbytes_dbl) {
   R_RegisterCFinalizerEx(extptr, shm_mapping_destructor, TRUE);
   UNPROTECT(2);
   return extptr;
+#endif
 }
-
-#endif // _WIN32
 
 // [[Rcpp::export]]
 Rcpp::XPtr<XPtrTorchDtype> cpp_torch_tensor_dtype(torch::Tensor x) {
