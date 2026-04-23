@@ -57,3 +57,26 @@ test_that("SHM segments from unconsumed batches are cleaned up", {
   expect_false(cpp_shm_exists(shm1$name))
   expect_false(cpp_shm_exists(shm2$name))
 })
+
+test_that("zero-length tensors work with SHM transport", {
+  skip_on_os("windows")
+  withr::local_options(torch.dataloader_use_shm = TRUE)
+
+  ds <- dataset(
+    initialize = function() {},
+    .getitem = function(i) {
+      list(
+        x = torch_randn(5),
+        empty = torch_tensor(numeric(0))
+      )
+    },
+    .length = function() { 10 }
+  )
+
+  dl <- dataloader(ds(), batch_size = 5, num_workers = 1)
+  iter <- dataloader_make_iter(dl)
+  batch <- dataloader_next(iter)
+
+  expect_tensor_shape(batch$x, c(5, 5))
+  expect_equal(batch$empty$numel(), 0)
+})

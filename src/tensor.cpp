@@ -137,6 +137,14 @@ Rcpp::List cpp_tensor_to_shm(torch::Tensor tensor) {
   auto elem_size = lantern_Tensor_element_size(tensor.get());
   size_t nbytes = static_cast<size_t>(numel) * static_cast<size_t>(elem_size);
 
+  // mmap(... , 0, ...) is invalid on POSIX — skip SHM for empty tensors
+  if (nbytes == 0) {
+    return Rcpp::List::create(
+      Rcpp::Named("name") = "",
+      Rcpp::Named("nbytes") = 0.0
+    );
+  }
+
   std::string name = "/torch_" + std::to_string(getpid()) + "_" +
                      std::to_string(shm_counter++);
 

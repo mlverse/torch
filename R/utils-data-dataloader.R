@@ -679,6 +679,10 @@ tensors_to_shared <- function(x) {
 tensors_from_shared <- function(x) {
   if (coro::is_exhausted(x)) return(x)
   if (inherits(x, "torch_shared_tensor")) {
+    if (x$nbytes == 0) {
+      # Empty tensor — no SHM segment was created
+      return(torch_tensor(numeric(0), dtype = x$dtype)$reshape(x$shape))
+    }
     shm_ref <- cpp_map_shm(x$name, x$nbytes)
     t <- torch_tensor_from_buffer(shm_ref, x$shape, x$dtype)
     attr(t, ".shm_ref") <- shm_ref  # prevent GC of the mapping
@@ -694,7 +698,7 @@ tensors_from_shared <- function(x) {
 # Used during cleanup of prefetched but unconsumed tasks.
 shm_unlink_recursive <- function(x) {
   if (inherits(x, "torch_shared_tensor")) {
-    cpp_shm_unlink(x$name)
+    if (nzchar(x$name)) cpp_shm_unlink(x$name)
   } else if (is.list(x)) {
     lapply(x, shm_unlink_recursive)
   }
