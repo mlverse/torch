@@ -57,24 +57,45 @@ void* r_dataptr(SEXP x)
     case LGLSXP:    p = (void*) LOGICAL(x); break;
     case INTSXP:    p = (void*) INTEGER(x); break;
     case REALSXP:   p = (void*) REAL(x); break;
-    case CPLXSXP:   p = (void*) COMPLEX(x); break; 
+    case CPLXSXP:   p = (void*) COMPLEX(x); break;
     case RAWSXP:    p = (void*) RAW(x); break;
     case EXTPTRSXP: return (char*) R_ExternalPtrAddr(x); break;
     default: Rcpp::stop("invalid object type"); break;
   }
   if (p == NULL) Rcpp::stop("NULL address pointer");
-  return p; 
+  return p;
+}
+
+// Read-only variant that avoids triggering copy-on-write materialization
+// on ALTREP objects (e.g. mori shared memory vectors). Use this when
+// the caller only needs to read from the buffer (e.g. torch::from_blob).
+void* r_dataptr_ro(SEXP x)
+{
+  void* p;
+  switch(TYPEOF(x))
+  {
+    case CHARSXP:   p = (void*) CHAR(x); break;
+    case LGLSXP:
+    case INTSXP:
+    case REALSXP:
+    case CPLXSXP:
+    case RAWSXP:    p = (void*) DATAPTR_RO(x); break;
+    case EXTPTRSXP: return (char*) R_ExternalPtrAddr(x); break;
+    default: Rcpp::stop("invalid object type"); break;
+  }
+  if (p == NULL) Rcpp::stop("NULL address pointer");
+  return p;
 }
 
 // [[Rcpp::export]]
 torch::Tensor cpp_tensor_from_buffer(const SEXP& data, std::vector<int64_t> shape, XPtrTorchTensorOptions options) {
   return lantern_from_blob(
-    r_dataptr(data), 
-    &shape[0], 
-    shape.size(), 
+    r_dataptr_ro(data),
+    &shape[0],
+    shape.size(),
     // we use the default strides
     nullptr,
-    0, 
+    0,
     options.get()
   );
 }
@@ -87,6 +108,81 @@ SEXP cpp_buffer_from_tensor (torch::Tensor data) {
   UNPROTECT(1);
   return buffer;
 }
+
+#ifndef _WIN32
+#include <sys/mman.h>
+#include <fcntl.h>
+#include <unistd.h>
+
+static int shm_counter = 0;
+
+static void shm_mapping_destructor(SEXP x) {
+  void* ptr = R_ExternalPtrAddr(x);
+  if (ptr) {
+    SEXP tag = R_ExternalPtrTag(x);
+    size_t nbytes = static_cast<size_t>(REAL(tag)[0]);
+    munmap(ptr, nbytes);
+    R_ClearExternalPtr(x);
+  }
+}
+
+// [[Rcpp::export]]
+Rcpp::List cpp_tensor_to_shm(torch::Tensor tensor) {
+  auto numel = lantern_Tensor_numel(tensor.get());
+  auto elem_size = lantern_Tensor_element_size(tensor.get());
+  size_t nbytes = static_cast<size_t>(numel) * static_cast<size_t>(elem_size);
+
+  std::string name = "/torch_" + std::to_string(getpid()) + "_" +
+                     std::to_string(shm_counter++);
+
+  int fd = shm_open(name.c_str(), O_CREAT | O_RDWR, 0600);
+  if (fd < 0) Rcpp::stop("shm_open failed: %s", strerror(errno));
+
+  if (ftruncate(fd, nbytes) < 0) {
+    close(fd);
+    shm_unlink(name.c_str());
+    Rcpp::stop("ftruncate failed: %s", strerror(errno));
+  }
+
+  void* ptr = mmap(NULL, nbytes, PROT_READ | PROT_WRITE, MAP_SHARED, fd, 0);
+  close(fd);
+  if (ptr == MAP_FAILED) {
+    shm_unlink(name.c_str());
+    Rcpp::stop("mmap failed: %s", strerror(errno));
+  }
+
+  // Single memcpy: tensor data -> SHM
+  lantern_buffer_from_tensor(tensor.get(), ptr, nbytes);
+  munmap(ptr, nbytes);
+
+  return Rcpp::List::create(
+    Rcpp::Named("name") = name,
+    Rcpp::Named("nbytes") = static_cast<double>(nbytes)
+  );
+}
+
+// [[Rcpp::export]]
+SEXP cpp_map_shm(std::string name, double nbytes_dbl) {
+  size_t nbytes = static_cast<size_t>(nbytes_dbl);
+
+  int fd = shm_open(name.c_str(), O_RDONLY, 0);
+  if (fd < 0) Rcpp::stop("shm_open failed: %s", strerror(errno));
+
+  void* ptr = mmap(NULL, nbytes, PROT_READ, MAP_SHARED, fd, 0);
+  close(fd);
+  shm_unlink(name.c_str()); // safe: mapping persists until munmap
+
+  if (ptr == MAP_FAILED) Rcpp::stop("mmap failed: %s", strerror(errno));
+
+  // External pointer: addr = mapped SHM, tag = nbytes for destructor
+  SEXP nbytes_sexp = PROTECT(Rf_ScalarReal(nbytes_dbl));
+  SEXP extptr = PROTECT(R_MakeExternalPtr(ptr, nbytes_sexp, R_NilValue));
+  R_RegisterCFinalizerEx(extptr, shm_mapping_destructor, TRUE);
+  UNPROTECT(2);
+  return extptr;
+}
+
+#endif // _WIN32
 
 // [[Rcpp::export]]
 Rcpp::XPtr<XPtrTorchDtype> cpp_torch_tensor_dtype(torch::Tensor x) {
@@ -119,7 +215,7 @@ torch::Tensor create_tensor_from_atomic(SEXP x, torch::Dtype cdtype) {
       strides.size(), options.get());  
     }
 
-    return lantern_from_blob(r_dataptr(x), &dim[0], dim.size(), &strides[0],
+    return lantern_from_blob(r_dataptr_ro(x), &dim[0], dim.size(), &strides[0],
     strides.size(), options.get());
   }();
       

@@ -138,6 +138,11 @@ jobs:
           bash bench/benchmark_cpu_cache/run.sh 2>&1 | tee -a $GITHUB_STEP_SUMMARY
           echo '```' >> $GITHUB_STEP_SUMMARY
 
+      - name: Run SHM dataloader benchmark
+        run: |
+          echo '## SHM Dataloader Benchmark' >> $GITHUB_STEP_SUMMARY
+          Rscript bench/bench-shm.R 2>&1 | tee -a $GITHUB_STEP_SUMMARY
+
   build-gpu-image:
     needs: lantern
     if: ${{ always() && needs.lantern.result != 'failed' }}

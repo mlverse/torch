@@ -16941,6 +16941,14 @@ cpp_buffer_from_tensor <- function(data) {
     .Call(`_torch_cpp_buffer_from_tensor`, data)
 }
 
+cpp_tensor_to_shm <- function(tensor) {
+    .Call(`_torch_cpp_tensor_to_shm`, tensor)
+}
+
+cpp_map_shm <- function(name, nbytes_dbl) {
+    .Call(`_torch_cpp_map_shm`, name, nbytes_dbl)
+}
+
 cpp_torch_tensor_dtype <- function(x) {
     .Call(`_torch_cpp_torch_tensor_dtype`, x)
 }

@@ -363,7 +363,7 @@ MultiProcessingDataLoaderIter <- R6::R6Class(
       }
 
       worker_config <- function(id, num_workers, seed, init_fn, globals,
-                                packages, socket_port = NULL) {
+                                packages, socket_port = NULL, use_mori = FALSE) {
         library(torch)
         .worker_info <<- list(
           id = id,
@@ -386,27 +386,28 @@ MultiProcessingDataLoaderIter <- R6::R6Class(
         if (!is.null(init_fn)) {
           init_fn(id)
         }
-        
+
         .socket_con <<- NULL
         if (!is.null(socket_port)) {
           # We need to wait for the main process to start the server, so here we
           # retry a few times until the conection works.
           for(i in 1:20) {
             tr <- try({.socket_con <<- socketConnection(
-              port = socket_port, 
-              blocking = TRUE, 
+              port = socket_port,
+              blocking = TRUE,
               open = "a+b"
-            )}, silent = TRUE) 
-            
+            )}, silent = TRUE)
+
             if (!inherits(tr, "try-error")) break
             Sys.sleep(0.5)
-            
+
             if (i == 20) {
               runtime_error("Could not create a connection with the main process.")
             }
           }
         }
-        
+
+        .use_mori <<- use_mori
       }
 
       fetcher <- self$.dataset_fetcher$fetch
@@ -424,7 +425,8 @@ MultiProcessingDataLoaderIter <- R6::R6Class(
             init_fn = self$.worker_init_fn,
             globals = self$.worker_globals,
             packages = self$.worker_packages,
-            socket_port = worker$port
+            socket_port = worker$port,
+            use_mori = worker$using_mori
           )
         )
         
@@ -464,11 +466,11 @@ MultiProcessingDataLoaderIter <- R6::R6Class(
       # send task to the worker
       if (coro::is_exhausted(index)) {
         worker$session$call(function() {
-          torch:::to_exportable_tensor(coro::exhausted(), .socket_con)
+          torch:::to_exportable_tensor(coro::exhausted(), .socket_con, .use_mori)
         })
       } else {
         worker$session$call(function(index) {
-          torch:::to_exportable_tensor(fetcher(index), .socket_con)
+          torch:::to_exportable_tensor(fetcher(index), .socket_con, .use_mori)
         }, list(index = index))
       }
 
@@ -481,7 +483,27 @@ MultiProcessingDataLoaderIter <- R6::R6Class(
       task <- private$tasks[[1]]
       private$tasks <- private$tasks[-1]
 
-      if (!task$using_socket_con) {
+      if (task$using_mori) {
+        # mori path: tensor data is in shared memory, only a small
+        # reference comes through callr's pipe.
+        p <- task$session$poll_process(timeout = self$.timeout)
+        if (p == "timeout") {
+          runtime_error("dataloader worker timed out.")
+        }
+        result <- task$session$read()
+        if (!is.null(result$error)) {
+          if (packageVersion("callr") >= "3.7.1") {
+            rlang::abort(
+              "Error when getting dataset item.",
+              parent = result$error,
+              class = "runtime_error"
+            )
+          } else {
+            runtime_error(result$error$message)
+          }
+        }
+        from_exportable_tensor(result$result)
+      } else if (!task$using_socket_con) {
         # wait for the process to be ready
         p <- task$session$poll_process(timeout = self$.timeout)
         if (p == "timeout") {
@@ -597,7 +619,10 @@ as_iterator.dataloader <- function(x) {
 
 # takes a tensor and saves it's state in a field so we can
 # reconstruct it after transfering via futures
-to_exportable_tensor <- function(x, con) {
+to_exportable_tensor <- function(x, con, use_mori = FALSE) {
+  if (use_mori) {
+    return(tensors_to_shared(x))
+  }
   if (is.null(con)) {
     return(tensor_to_raw_vector(x))
   }
@@ -606,6 +631,10 @@ to_exportable_tensor <- function(x, con) {
 }
 
 from_exportable_tensor <- function(x) {
+  if (coro::is_exhausted(x)) return(x)
+  if (inherits(x, "torch_shared_tensor") || inherits(x, "torch_shared_batch")) {
+    return(tensors_from_shared(x))
+  }
   if (!inherits(x, "connection")) {
     con <- rawConnection(x)
     on.exit({close(con)})
@@ -613,6 +642,41 @@ from_exportable_tensor <- function(x) {
     con <- x
   }
   torch_load(con)
+}
+
+# Convert batch tensors to POSIX shared memory for IPC.
+# Single memcpy: tensor data -> SHM. Called in the worker process.
+tensors_to_shared <- function(x) {
+  if (coro::is_exhausted(x)) return(x)
+  if (is_torch_tensor(x)) {
+    t <- x$cpu()$contiguous()
+    shm <- cpp_tensor_to_shm(t)
+    return(structure(
+      list(name = shm$name, nbytes = shm$nbytes,
+           shape = t$shape, dtype = tolower(as.character(t$dtype))),
+      class = "torch_shared_tensor"
+    ))
+  }
+  if (is.list(x)) {
+    return(structure(lapply(x, tensors_to_shared), class = c("torch_shared_batch", "list")))
+  }
+  x
+}
+
+# Reconstruct tensors from POSIX shared memory.
+# Zero-copy: from_blob aliases the mapped SHM directly.
+tensors_from_shared <- function(x) {
+  if (coro::is_exhausted(x)) return(x)
+  if (inherits(x, "torch_shared_tensor")) {
+    shm_ref <- cpp_map_shm(x$name, x$nbytes)
+    t <- torch_tensor_from_buffer(shm_ref, x$shape, x$dtype)
+    attr(t, ".shm_ref") <- shm_ref  # prevent GC of the mapping
+    return(t)
+  }
+  if (inherits(x, "torch_shared_batch") || is.list(x)) {
+    return(lapply(x, tensors_from_shared))
+  }
+  x
 }
 
 walk_fields <- function(env, nms, func) {
@@ -657,9 +721,12 @@ r_session <- R6::R6Class(
     con = NULL,
     session = NULL,
     using_socket_con = FALSE,
+    using_mori = FALSE,
     initialize = function() {
-      if (use_socket_con()) {
-        self$port <- parallelly::freePort()  
+      if (use_mori_con()) {
+        self$using_mori <- TRUE
+      } else if (use_socket_con()) {
+        self$port <- parallelly::freePort()
         self$using_socket_con <- TRUE
       }
       self$session <- callr::r_session$new()
@@ -680,4 +747,8 @@ r_session <- R6::R6Class(
 
 use_socket_con <- function() {
   getOption("torch.dataloader_use_socket_con", FALSE)
+}
+
+use_mori_con <- function() {
+  getOption("torch.dataloader_use_mori", FALSE)
 }
