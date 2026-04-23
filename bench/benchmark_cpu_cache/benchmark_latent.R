@@ -60,21 +60,27 @@ for (latent in latent_sizes) {
   }
 }
 
-# Print table
-cat("\n=== Results ===\n")
+# Print markdown table
+cat("\n## Results\n\n")
 has_python <- "Python PyTorch" %in% results$mode
-header <- sprintf("%-8s %16s %16s %8s", "latent", "cache enabled", "cache disabled", "speedup")
-if (has_python) header <- paste0(header, sprintf(" %16s %8s", "Python", "R/Python"))
+
+header <- "| Latent | Cache enabled | Cache disabled | Cache speedup |"
+sep    <- "|--------|---------------|----------------|---------------|"
+if (has_python) {
+  header <- paste0(header, " Python | R/Python |")
+  sep    <- paste0(sep, "--------|----------|")
+}
 cat(header, "\n")
+cat(sep, "\n")
 
 for (latent in latent_sizes) {
   enabled <- results$mean_s[results$latent == latent & results$mode == "cache enabled"]
   disabled <- results$mean_s[results$latent == latent & results$mode == "cache disabled"]
-  line <- sprintf("%-8d %13.3f s %13.3f s %7.2fx", latent, enabled, disabled, disabled / enabled)
+  line <- sprintf("| %d | %.3fs | %.3fs | %.2fx |", latent, enabled, disabled, disabled / enabled)
   if (has_python) {
     python_t <- results$mean_s[results$latent == latent & results$mode == "Python PyTorch"]
     if (length(python_t) > 0) {
-      line <- paste0(line, sprintf(" %13.3f s %7.2fx", python_t, enabled / python_t))
+      line <- paste0(line, sprintf(" %.3fs | %.2fx |", python_t, enabled / python_t))
     }
   }
   cat(line, "\n")
