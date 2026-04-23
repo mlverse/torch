@@ -10464,12 +10464,6 @@ torch_norm_out <- function(out, self, p = 2L, dim, keepdim = FALSE, dtype) {
 }
 
 
-#' @rdname .torch_normal
-.torch_normal <- function(mean, std = 1L, size, generator = NULL, options = list()) {
-  cpp_torch_dispatch_namespace_normal(mget(x = c("mean", "std", "size", "generator", "options")))
-}
-
-
 #' @rdname torch_normal_functional
 torch_normal_functional <- function(self, mean = 0L, std = 1L, generator = NULL) {
   cpp_torch_namespace_normal_functional_self_Tensor(self, mean, std, generator)
