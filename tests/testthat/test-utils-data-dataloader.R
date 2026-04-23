@@ -698,3 +698,27 @@ test_that("zero-length tensors work with multiworker dataloader", {
   expect_equal(batch$empty$numel(), 0)
 })
 
+test_that("requires_grad is preserved through multiworker dataloader", {
+  if (cuda_is_available()) skip_on_os("windows")
+
+  ds <- dataset(
+    initialize = function() {
+      self$x <- matrix(rnorm(40), nrow = 4, ncol = 10)
+    },
+    .getitem = function(i) {
+      list(
+        x = torch_tensor(self$x[i, ])$requires_grad_(TRUE),
+        y = torch_tensor(self$x[i, ])
+      )
+    },
+    .length = function() { 4 }
+  )
+
+  dl <- dataloader(ds(), batch_size = 2, num_workers = 1)
+  iter <- dataloader_make_iter(dl)
+  batch <- dataloader_next(iter)
+
+  expect_true(batch$x$requires_grad)
+  expect_false(batch$y$requires_grad)
+})
+

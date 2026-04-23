@@ -668,7 +668,8 @@ tensors_to_shared <- function(x) {
     shm <- cpp_tensor_to_shm(t)
     return(structure(
       list(name = shm$name, nbytes = shm$nbytes,
-           shape = t$shape, dtype = tolower(as.character(t$dtype))),
+           shape = t$shape, dtype = tolower(as.character(t$dtype)),
+           requires_grad = t$requires_grad),
       class = "torch_shared_tensor"
     ))
   }
@@ -686,9 +687,13 @@ tensors_from_shared <- function(x) {
   if (coro::is_exhausted(x)) return(x)
   if (inherits(x, "torch_shared_tensor")) {
     if (x$nbytes == 0) {
-      return(torch_tensor(numeric(0), dtype = x$dtype)$reshape(x$shape))
+      t <- torch_tensor(numeric(0), dtype = x$dtype)$reshape(x$shape)
+      if (isTRUE(x$requires_grad)) t <- t$requires_grad_(TRUE)
+      return(t)
     }
-    return(cpp_tensor_from_shm(x$name, x$nbytes, x$shape, list(dtype = x$dtype)))
+    t <- cpp_tensor_from_shm(x$name, x$nbytes, x$shape, list(dtype = x$dtype))
+    if (isTRUE(x$requires_grad)) t <- t$requires_grad_(TRUE)
+    return(t)
   }
   if (is.list(x)) {
     out <- lapply(x, tensors_from_shared)
