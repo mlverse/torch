@@ -88,6 +88,13 @@ jobs:
           error-on: '"error"'
           args: 'c("--no-multiarch", "--no-manual", "--as-cran")'
 
+      - name: Upload install log
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: install-log-${{ matrix.config.os }}-${{ matrix.config.r_version }}
+          path: check/torch.Rcheck/00install.out
+
   benchmarks:
     needs: lantern
     if: ${{ always() && needs.lantern.result != 'failed' }}
