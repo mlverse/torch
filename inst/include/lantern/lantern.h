@@ -10621,13 +10621,11 @@ bool laternCloseLibrary(void *pLib, std::string *pError)
   LOAD_SYMBOL(_lantern_optional_##name##_delete);             \
 
 
-bool lanternInit(const std::string &libPath, std::string *pError)
+// Split lanternInit into multiple smaller functions to avoid
+// "variable tracking size limit exceeded" compiler note (GH #1452)
+
+static bool lanternInitManualSymbols(std::string *pError)
 {
-  if (!lanternLoadLibrary(libPath, pError))
-    return false;
-
-  lantern_loaded = true;
-
   LANTERN_OPTIONAL_LOAD_SYMBOL(dimname_list)
   LANTERN_OPTIONAL_LOAD_SYMBOL(generator)
   LANTERN_OPTIONAL_LOAD_SYMBOL(tensor)
@@ -11137,6 +11135,12 @@ LOAD_SYMBOL(_ignite_optim_param_groups_size);
 LOAD_SYMBOL(_ignite_optim_get_param_group_params);
 LOAD_SYMBOL(_ignite_optim_step);
 LOAD_SYMBOL(_ignite_optim_zero_grad);
+
+  return true;
+}
+
+static bool lanternInitAutogenSymbols(std::string *pError)
+{
   /* Autogen Symbols -- Start */
   LOAD_SYMBOL(_lantern__cast_byte_tensor_bool)
   LOAD_SYMBOL(_lantern__cast_char_tensor_bool)
@@ -14828,6 +14832,21 @@ LOAD_SYMBOL(_ignite_optim_zero_grad);
   LOAD_SYMBOL(_lantern__fused_adagrad_out_tensorlist_tensorlist_tensorlist_tensorlist_tensorlist_tensor_double_double_double_bool_tensor_tensor)
   LOAD_SYMBOL(_lantern__fused_adagrad_tensorlist_tensorlist_tensorlist_tensorlist_tensor_double_double_double_bool_tensor_tensor)
   /* Autogen Symbols -- End */
+
+  return true;
+}
+
+bool lanternInit(const std::string &libPath, std::string *pError)
+{
+  if (!lanternLoadLibrary(libPath, pError))
+    return false;
+
+  lantern_loaded = true;
+
+  if (!lanternInitManualSymbols(pError))
+    return false;
+  if (!lanternInitAutogenSymbols(pError))
+    return false;
 
   return true;
 }
