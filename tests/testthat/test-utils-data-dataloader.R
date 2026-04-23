@@ -649,6 +649,33 @@ test_that("in-place ops work on multiworker dataloader batches", {
   expect_no_error(batch$mul_(3))
 })
 
+test_that("derived tensors survive GC of original batch", {
+  if (cuda_is_available()) skip_on_os("windows")
+
+  ds <- dataset(
+    initialize = function() {
+      self$x <- matrix(1:20, nrow = 4, ncol = 5)
+    },
+    .getitem = function(i) {
+      torch_tensor(self$x[i, ], dtype = torch_float())
+    },
+    .length = function() { 4 }
+  )
+
+  dl <- dataloader(ds(), batch_size = 2, num_workers = 1)
+  iter <- dataloader_make_iter(dl)
+  batch <- dataloader_next(iter)
+
+  # Derive a new tensor, drop the original, force GC
+  v <- batch$view(-1)
+  expected <- as.numeric(v)
+  rm(batch, iter, dl)
+  gc()
+
+  # v must still be valid — no segfault, correct values
+  expect_equal(as.numeric(v), expected)
+})
+
 test_that("zero-length tensors work with multiworker dataloader", {
   if (cuda_is_available()) skip_on_os("windows")
 

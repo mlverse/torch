@@ -688,10 +688,7 @@ tensors_from_shared <- function(x) {
     if (x$nbytes == 0) {
       return(torch_tensor(numeric(0), dtype = x$dtype)$reshape(x$shape))
     }
-    shm_ref <- cpp_map_shm(x$name, x$nbytes)
-    t <- torch_tensor_from_buffer(shm_ref, x$shape, x$dtype)
-    attr(t, ".shm_ref") <- shm_ref
-    return(t)
+    return(cpp_tensor_from_shm(x$name, x$nbytes, x$shape, list(dtype = x$dtype)))
   }
   if (is.list(x)) {
     out <- lapply(x, tensors_from_shared)

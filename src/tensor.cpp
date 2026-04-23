@@ -116,15 +116,6 @@ SEXP cpp_buffer_from_tensor (torch::Tensor data) {
 
 static int shm_counter = 0;
 
-static void shm_mapping_destructor(SEXP x) {
-  void* ptr = R_ExternalPtrAddr(x);
-  if (ptr) {
-    SEXP tag = R_ExternalPtrTag(x);
-    size_t nbytes = static_cast<size_t>(REAL(tag)[0]);
-    munmap(ptr, nbytes);
-    R_ClearExternalPtr(x);
-  }
-}
 #endif // _WIN32
 
 // [[Rcpp::export]]
@@ -175,31 +166,35 @@ Rcpp::List cpp_tensor_to_shm(torch::Tensor tensor) {
 #endif
 }
 
+// Map SHM, create tensor via from_blob, clone it, then munmap + unlink.
+// The clone gives the tensor its own storage so no SHM lifetime concerns:
+// derived tensors ($view, $transpose, etc.) share the cloned storage,
+// not the SHM mapping.
 // [[Rcpp::export]]
-SEXP cpp_map_shm(std::string name, double nbytes_dbl) {
+torch::Tensor cpp_tensor_from_shm(std::string name, double nbytes_dbl,
+                                   std::vector<int64_t> shape,
+                                   XPtrTorchTensorOptions options) {
 #ifdef _WIN32
   Rcpp::stop("SHM transport is not supported on Windows");
-  return R_NilValue;
+  return torch::Tensor();
 #else
   size_t nbytes = static_cast<size_t>(nbytes_dbl);
 
-  int fd = shm_open(name.c_str(), O_RDWR, 0);
+  int fd = shm_open(name.c_str(), O_RDONLY, 0);
   if (fd < 0) Rcpp::stop("shm_open failed: %s", strerror(errno));
 
-  // Map writable. shm_unlink orphans the region immediately so we are
-  // the sole owner — writes are safe and won't corrupt other processes.
-  void* ptr = mmap(NULL, nbytes, PROT_READ | PROT_WRITE, MAP_SHARED, fd, 0);
+  void* ptr = mmap(NULL, nbytes, PROT_READ, MAP_SHARED, fd, 0);
   close(fd);
-  shm_unlink(name.c_str()); // orphan: mapping persists until munmap
+  shm_unlink(name.c_str());
 
   if (ptr == MAP_FAILED) Rcpp::stop("mmap failed: %s", strerror(errno));
 
-  // External pointer: addr = mapped SHM, tag = nbytes for destructor
-  SEXP nbytes_sexp = PROTECT(Rf_ScalarReal(nbytes_dbl));
-  SEXP extptr = PROTECT(R_MakeExternalPtr(ptr, nbytes_sexp, R_NilValue));
-  R_RegisterCFinalizerEx(extptr, shm_mapping_destructor, TRUE);
-  UNPROTECT(2);
-  return extptr;
+  // from_blob aliases the mapping, clone copies into tensor-owned storage
+  torch::Tensor view = lantern_from_blob(ptr, &shape[0], shape.size(), nullptr, 0, options.get());
+  torch::Tensor owned = lantern_Tensor_clone(view.get());
+
+  munmap(ptr, nbytes);
+  return owned;
 #endif
 }
 

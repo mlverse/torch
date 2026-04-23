@@ -16945,8 +16945,8 @@ cpp_tensor_to_shm <- function(tensor) {
     .Call(`_torch_cpp_tensor_to_shm`, tensor)
 }
 
-cpp_map_shm <- function(name, nbytes_dbl) {
-    .Call(`_torch_cpp_map_shm`, name, nbytes_dbl)
+cpp_tensor_from_shm <- function(name, nbytes_dbl, shape, options) {
+    .Call(`_torch_cpp_tensor_from_shm`, name, nbytes_dbl, shape, options)
 }
 
 cpp_shm_exists <- function(name) {
