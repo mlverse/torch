@@ -89,3 +89,4 @@ test_that("SHM preserves list class and names through roundtrip", {
   expect_named(batch, c("x", "y"))
   expect_tensor_shape(batch$x, c(5, 10))
 })
+

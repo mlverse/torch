@@ -722,3 +722,32 @@ test_that("requires_grad is preserved through multiworker dataloader", {
   expect_false(batch$y$requires_grad)
 })
 
+test_that("aliased tensors from custom collate preserve sharing through multiworker", {
+  if (cuda_is_available()) skip_on_os("windows")
+
+  ds <- dataset(
+    initialize = function() {
+      self$x <- matrix(rnorm(40), nrow = 4, ncol = 10)
+    },
+    .getitem = function(i) {
+      torch_tensor(self$x[i, ])
+    },
+    .length = function() { 4 }
+  )
+
+  # Collate that returns the same tensor in two slots
+  my_collate <- function(batch) {
+    t <- torch_stack(batch)
+    list(a = t, b = t)
+  }
+
+  dl <- dataloader(ds(), batch_size = 2, num_workers = 1, collate_fn = my_collate)
+  iter <- dataloader_make_iter(dl)
+  batch <- dataloader_next(iter)
+
+  # In-place update on a should be visible through b
+  batch$a$add_(100)
+  expect_equal(as.numeric(batch$a), as.numeric(batch$b))
+})
+
+

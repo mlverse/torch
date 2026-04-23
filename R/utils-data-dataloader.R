@@ -661,46 +661,64 @@ from_exportable_tensor <- function(x) {
 
 # Convert batch tensors to POSIX shared memory for IPC.
 # Single memcpy: tensor data -> SHM. Called in the worker process.
+# Memoizes by data pointer so tensors sharing storage produce the same
+# SHM descriptor, preserving aliasing through the roundtrip.
 tensors_to_shared <- function(x) {
+  memo <- new.env(parent = emptyenv())
+  to_shared <- function(x) {
+    if (is_torch_tensor(x)) {
+      t <- x$cpu()$contiguous()
+      key <- xptr_address(t)
+      if (!is.null(memo[[key]])) return(memo[[key]])
+      shm <- cpp_tensor_to_shm(t)
+      result <- structure(
+        list(name = shm$name, nbytes = shm$nbytes,
+             shape = t$shape, dtype = tolower(as.character(t$dtype)),
+             requires_grad = t$requires_grad),
+        class = "torch_shared_tensor"
+      )
+      memo[[key]] <- result
+      return(result)
+    }
+    if (is.list(x)) {
+      out <- lapply(x, to_shared)
+      attributes(out) <- attributes(x)
+      return(out)
+    }
+    x
+  }
   if (coro::is_exhausted(x)) return(x)
-  if (is_torch_tensor(x)) {
-    t <- x$cpu()$contiguous()
-    shm <- cpp_tensor_to_shm(t)
-    return(structure(
-      list(name = shm$name, nbytes = shm$nbytes,
-           shape = t$shape, dtype = tolower(as.character(t$dtype)),
-           requires_grad = t$requires_grad),
-      class = "torch_shared_tensor"
-    ))
-  }
-  if (is.list(x)) {
-    out <- lapply(x, tensors_to_shared)
-    attributes(out) <- attributes(x)
-    return(out)
-  }
-  x
+  to_shared(x)
 }
 
 # Reconstruct tensors from POSIX shared memory.
-# Zero-copy: from_blob aliases the mapped SHM directly.
+# Memoizes by SHM name so duplicate references reconstruct to the same
+# tensor, preserving storage sharing from the original batch.
 tensors_from_shared <- function(x) {
-  if (coro::is_exhausted(x)) return(x)
-  if (inherits(x, "torch_shared_tensor")) {
-    if (x$nbytes == 0) {
-      t <- torch_tensor(numeric(0), dtype = x$dtype)$reshape(x$shape)
+  memo <- new.env(parent = emptyenv())
+  from_shared <- function(x) {
+    if (inherits(x, "torch_shared_tensor")) {
+      if (x$nbytes == 0) {
+        t <- torch_tensor(numeric(0), dtype = x$dtype)$reshape(x$shape)
+        if (isTRUE(x$requires_grad)) t <- t$requires_grad_(TRUE)
+        return(t)
+      }
+      key <- x$name
+      if (!is.null(memo[[key]])) return(memo[[key]])
+      t <- cpp_tensor_from_shm(x$name, x$nbytes, x$shape, list(dtype = x$dtype))
       if (isTRUE(x$requires_grad)) t <- t$requires_grad_(TRUE)
+      memo[[key]] <- t
       return(t)
     }
-    t <- cpp_tensor_from_shm(x$name, x$nbytes, x$shape, list(dtype = x$dtype))
-    if (isTRUE(x$requires_grad)) t <- t$requires_grad_(TRUE)
-    return(t)
+    if (is.list(x)) {
+      out <- lapply(x, from_shared)
+      attributes(out) <- attributes(x)
+      return(out)
+    }
+    x
   }
-  if (is.list(x)) {
-    out <- lapply(x, tensors_from_shared)
-    attributes(out) <- attributes(x)
-    return(out)
-  }
-  x
+  if (coro::is_exhausted(x)) return(x)
+  from_shared(x)
 }
 
 # Unlink SHM segments from a shared result without mapping them.
