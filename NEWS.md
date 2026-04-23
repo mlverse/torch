@@ -1,5 +1,9 @@
 # torch (development version)
 
+- Multi-worker dataloaders now use POSIX shared memory for tensor transfer on
+  Unix systems, resulting in up to 2x faster data loading. To revert to the
+  previous behavior, set `options(torch.dataloader_use_shm = FALSE)`. (#1456)
+
 # torch 0.17.0
 
 ## Breaking changes

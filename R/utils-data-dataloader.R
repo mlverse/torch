@@ -750,5 +750,5 @@ use_socket_con <- function() {
 }
 
 use_shm <- function() {
-  getOption("torch.dataloader_use_shm", FALSE)
+  getOption("torch.dataloader_use_shm", .Platform$OS.type != "windows")
 }
