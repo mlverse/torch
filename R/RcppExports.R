@@ -16949,6 +16949,10 @@ cpp_map_shm <- function(name, nbytes_dbl) {
     .Call(`_torch_cpp_map_shm`, name, nbytes_dbl)
 }
 
+cpp_shm_exists <- function(name) {
+    .Call(`_torch_cpp_shm_exists`, name)
+}
+
 cpp_shm_unlink <- function(name) {
     invisible(.Call(`_torch_cpp_shm_unlink`, name))
 }

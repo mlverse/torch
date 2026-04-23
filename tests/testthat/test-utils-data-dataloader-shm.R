@@ -32,3 +32,28 @@ test_that("in-place ops work on SHM-backed tensors", {
   expect_no_error(batch$div_(2))
   expect_no_error(batch$mul_(3))
 })
+
+test_that("SHM segments from unconsumed batches are cleaned up", {
+  skip_on_os("windows")
+
+  # Create SHM segments as a worker would
+  t <- torch_randn(10)
+  shm1 <- cpp_tensor_to_shm(t)
+  shm2 <- cpp_tensor_to_shm(t)
+
+  expect_true(cpp_shm_exists(shm1$name))
+  expect_true(cpp_shm_exists(shm2$name))
+
+  # shm_unlink_recursive walks a shared result and unlinks all segments
+  result <- structure(list(
+    structure(list(name = shm1$name, nbytes = shm1$nbytes, shape = 10L, dtype = "float"),
+              class = "torch_shared_tensor"),
+    structure(list(name = shm2$name, nbytes = shm2$nbytes, shape = 10L, dtype = "float"),
+              class = "torch_shared_tensor")
+  ), class = c("torch_shared_batch", "list"))
+
+  torch:::shm_unlink_recursive(result)
+
+  expect_false(cpp_shm_exists(shm1$name))
+  expect_false(cpp_shm_exists(shm2$name))
+})

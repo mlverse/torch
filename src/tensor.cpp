@@ -196,6 +196,20 @@ SEXP cpp_map_shm(std::string name, double nbytes_dbl) {
 }
 
 // [[Rcpp::export]]
+bool cpp_shm_exists(std::string name) {
+#ifdef _WIN32
+  return false;
+#else
+  int fd = shm_open(name.c_str(), O_RDONLY, 0);
+  if (fd >= 0) {
+    close(fd);
+    return true;
+  }
+  return false;
+#endif
+}
+
+// [[Rcpp::export]]
 void cpp_shm_unlink(std::string name) {
 #ifdef _WIN32
   Rcpp::stop("SHM transport is not supported on Windows");
