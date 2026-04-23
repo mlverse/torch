@@ -44,10 +44,10 @@ cat("|---|---|---|---|---|\n")
 for (cfg in configs) {
   batch_mb <- cfg$bs * cfg$p * 4 / 1024^2
 
-  options(torch.dataloader_use_mori = FALSE)
+  options(torch.dataloader_use_shm = FALSE)
   t_default <- bench_transfer(cfg$n, cfg$p, cfg$bs, 2)
 
-  options(torch.dataloader_use_mori = TRUE)
+  options(torch.dataloader_use_shm = TRUE)
   t_shm <- bench_transfer(cfg$n, cfg$p, cfg$bs, 2)
 
   cat(sprintf("| %s | %.3fs | %.3fs | %.2fx | %.1f |\n",

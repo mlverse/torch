@@ -363,7 +363,7 @@ MultiProcessingDataLoaderIter <- R6::R6Class(
       }
 
       worker_config <- function(id, num_workers, seed, init_fn, globals,
-                                packages, socket_port = NULL, use_mori = FALSE) {
+                                packages, socket_port = NULL, use_shm = FALSE) {
         library(torch)
         .worker_info <<- list(
           id = id,
@@ -407,7 +407,7 @@ MultiProcessingDataLoaderIter <- R6::R6Class(
           }
         }
 
-        .use_mori <<- use_mori
+        .use_shm <<- use_shm
       }
 
       fetcher <- self$.dataset_fetcher$fetch
@@ -426,7 +426,7 @@ MultiProcessingDataLoaderIter <- R6::R6Class(
             globals = self$.worker_globals,
             packages = self$.worker_packages,
             socket_port = worker$port,
-            use_mori = worker$using_mori
+            use_shm = worker$using_shm
           )
         )
         
@@ -466,11 +466,11 @@ MultiProcessingDataLoaderIter <- R6::R6Class(
       # send task to the worker
       if (coro::is_exhausted(index)) {
         worker$session$call(function() {
-          torch:::to_exportable_tensor(coro::exhausted(), .socket_con, .use_mori)
+          torch:::to_exportable_tensor(coro::exhausted(), .socket_con, .use_shm)
         })
       } else {
         worker$session$call(function(index) {
-          torch:::to_exportable_tensor(fetcher(index), .socket_con, .use_mori)
+          torch:::to_exportable_tensor(fetcher(index), .socket_con, .use_shm)
         }, list(index = index))
       }
 
@@ -483,8 +483,8 @@ MultiProcessingDataLoaderIter <- R6::R6Class(
       task <- private$tasks[[1]]
       private$tasks <- private$tasks[-1]
 
-      if (task$using_mori) {
-        # mori path: tensor data is in shared memory, only a small
+      if (task$using_shm) {
+        # SHM path: tensor data is in shared memory, only a small
         # reference comes through callr's pipe.
         p <- task$session$poll_process(timeout = self$.timeout)
         if (p == "timeout") {
@@ -619,8 +619,8 @@ as_iterator.dataloader <- function(x) {
 
 # takes a tensor and saves it's state in a field so we can
 # reconstruct it after transfering via futures
-to_exportable_tensor <- function(x, con, use_mori = FALSE) {
-  if (use_mori) {
+to_exportable_tensor <- function(x, con, use_shm = FALSE) {
+  if (use_shm) {
     return(tensors_to_shared(x))
   }
   if (is.null(con)) {
@@ -721,10 +721,10 @@ r_session <- R6::R6Class(
     con = NULL,
     session = NULL,
     using_socket_con = FALSE,
-    using_mori = FALSE,
+    using_shm = FALSE,
     initialize = function() {
-      if (use_mori_con()) {
-        self$using_mori <- TRUE
+      if (use_shm()) {
+        self$using_shm <- TRUE
       } else if (use_socket_con()) {
         self$port <- parallelly::freePort()
         self$using_socket_con <- TRUE
@@ -749,6 +749,6 @@ use_socket_con <- function() {
   getOption("torch.dataloader_use_socket_con", FALSE)
 }
 
-use_mori_con <- function() {
-  getOption("torch.dataloader_use_mori", FALSE)
+use_shm <- function() {
+  getOption("torch.dataloader_use_shm", FALSE)
 }
