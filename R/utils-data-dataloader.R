@@ -646,13 +646,18 @@ from_exportable_tensor <- function(x) {
   if (inherits(x, "torch_shared_tensor") || inherits(x, "torch_shared_batch")) {
     return(tensors_from_shared(x))
   }
-  if (!inherits(x, "connection")) {
-    con <- rawConnection(x)
-    on.exit({close(con)})
-  } else {
-    con <- x
+  if (is.raw(x) || inherits(x, "connection")) {
+    if (!inherits(x, "connection")) {
+      con <- rawConnection(x)
+      on.exit({close(con)})
+    } else {
+      con <- x
+    }
+    return(torch_load(con))
   }
-  torch_load(con)
+  # Non-tensor, non-serialized payload (e.g. from a custom collate_fn
+  # that returns scalars, character vectors, etc.) — pass through as-is.
+  x
 }
 
 # Convert batch tensors to POSIX shared memory for IPC.

@@ -80,3 +80,28 @@ test_that("zero-length tensors work with SHM transport", {
   expect_tensor_shape(batch$x, c(5, 5))
   expect_equal(batch$empty$numel(), 0)
 })
+
+test_that("custom collate returning non-tensor objects works with SHM", {
+  skip_on_os("windows")
+  withr::local_options(torch.dataloader_use_shm = TRUE)
+
+  ds <- dataset(
+    initialize = function() {},
+    .getitem = function(i) {
+      list(x = torch_randn(3), label = paste0("item_", i))
+    },
+    .length = function() { 10 }
+  )
+
+  # Custom collate that returns a character vector (not a tensor or list)
+  my_collate <- function(batch) {
+    sapply(batch, function(b) b$label)
+  }
+
+  dl <- dataloader(ds(), batch_size = 5, num_workers = 1, collate_fn = my_collate)
+  iter <- dataloader_make_iter(dl)
+  batch <- dataloader_next(iter)
+
+  expect_true(is.character(batch))
+  expect_equal(length(batch), 5)
+})
