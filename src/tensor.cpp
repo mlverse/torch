@@ -175,12 +175,14 @@ SEXP cpp_map_shm(std::string name, double nbytes_dbl) {
 #else
   size_t nbytes = static_cast<size_t>(nbytes_dbl);
 
-  int fd = shm_open(name.c_str(), O_RDONLY, 0);
+  int fd = shm_open(name.c_str(), O_RDWR, 0);
   if (fd < 0) Rcpp::stop("shm_open failed: %s", strerror(errno));
 
-  void* ptr = mmap(NULL, nbytes, PROT_READ, MAP_SHARED, fd, 0);
+  // Map writable. shm_unlink orphans the region immediately so we are
+  // the sole owner — writes are safe and won't corrupt other processes.
+  void* ptr = mmap(NULL, nbytes, PROT_READ | PROT_WRITE, MAP_SHARED, fd, 0);
   close(fd);
-  shm_unlink(name.c_str()); // safe: mapping persists until munmap
+  shm_unlink(name.c_str()); // orphan: mapping persists until munmap
 
   if (ptr == MAP_FAILED) Rcpp::stop("mmap failed: %s", strerror(errno));
 
