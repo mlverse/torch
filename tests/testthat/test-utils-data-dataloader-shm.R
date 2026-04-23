@@ -9,30 +9,6 @@ test_that("all dataloader tests pass with SHM transport enabled", {
   source(test_path("test-utils-data-dataloader.R"), local = TRUE)
 })
 
-test_that("in-place ops work on SHM-backed tensors", {
-  skip_on_os("windows")
-  withr::local_options(torch.dataloader_use_shm = TRUE)
-
-  ds <- dataset(
-    initialize = function() {
-      self$x <- matrix(1:20, nrow = 4, ncol = 5)
-    },
-    .getitem = function(i) {
-      torch_tensor(self$x[i, ], dtype = torch_float())
-    },
-    .length = function() { 4 }
-  )
-
-  dl <- dataloader(ds(), batch_size = 2, num_workers = 1)
-  iter <- dataloader_make_iter(dl)
-  batch <- dataloader_next(iter)
-
-  # in-place ops must not segfault on SHM-backed tensors
-  expect_no_error(batch$add_(1))
-  expect_no_error(batch$div_(2))
-  expect_no_error(batch$mul_(3))
-})
-
 test_that("SHM segments from unconsumed batches are cleaned up", {
   skip_on_os("windows")
 
@@ -45,40 +21,17 @@ test_that("SHM segments from unconsumed batches are cleaned up", {
   expect_true(cpp_shm_exists(shm2$name))
 
   # shm_unlink_recursive walks a shared result and unlinks all segments
-  result <- structure(list(
+  result <- list(
     structure(list(name = shm1$name, nbytes = shm1$nbytes, shape = 10L, dtype = "float"),
               class = "torch_shared_tensor"),
     structure(list(name = shm2$name, nbytes = shm2$nbytes, shape = 10L, dtype = "float"),
               class = "torch_shared_tensor")
-  ), class = c("torch_shared_batch", "list"))
+  )
 
   torch:::shm_unlink_recursive(result)
 
   expect_false(cpp_shm_exists(shm1$name))
   expect_false(cpp_shm_exists(shm2$name))
-})
-
-test_that("zero-length tensors work with SHM transport", {
-  skip_on_os("windows")
-  withr::local_options(torch.dataloader_use_shm = TRUE)
-
-  ds <- dataset(
-    initialize = function() {},
-    .getitem = function(i) {
-      list(
-        x = torch_randn(5),
-        empty = torch_tensor(numeric(0))
-      )
-    },
-    .length = function() { 10 }
-  )
-
-  dl <- dataloader(ds(), batch_size = 5, num_workers = 1)
-  iter <- dataloader_make_iter(dl)
-  batch <- dataloader_next(iter)
-
-  expect_tensor_shape(batch$x, c(5, 5))
-  expect_equal(batch$empty$numel(), 0)
 })
 
 test_that("custom collate returning non-tensor objects works with SHM", {
@@ -93,7 +46,6 @@ test_that("custom collate returning non-tensor objects works with SHM", {
     .length = function() { 10 }
   )
 
-  # Custom collate that returns a character vector (not a tensor or list)
   my_collate <- function(batch) {
     sapply(batch, function(b) b$label)
   }
@@ -104,4 +56,36 @@ test_that("custom collate returning non-tensor objects works with SHM", {
 
   expect_true(is.character(batch))
   expect_equal(length(batch), 5)
+})
+
+test_that("SHM preserves list class and names through roundtrip", {
+  skip_on_os("windows")
+  withr::local_options(torch.dataloader_use_shm = TRUE)
+
+  ds <- dataset(
+    initialize = function() {
+      self$x <- matrix(rnorm(100), nrow = 10, ncol = 10)
+    },
+    .getitem = function(i) {
+      list(x = torch_tensor(self$x[i, ]), y = i)
+    },
+    .length = function() { 10 }
+  )
+
+  my_collate <- function(batch) {
+    out <- list(
+      x = torch_stack(lapply(batch, function(b) b$x)),
+      y = sapply(batch, function(b) b$y)
+    )
+    class(out) <- c("my_batch", "list")
+    out
+  }
+
+  dl <- dataloader(ds(), batch_size = 5, num_workers = 1, collate_fn = my_collate)
+  iter <- dataloader_make_iter(dl)
+  batch <- dataloader_next(iter)
+
+  expect_true(inherits(batch, "my_batch"))
+  expect_named(batch, c("x", "y"))
+  expect_tensor_shape(batch$x, c(5, 10))
 })

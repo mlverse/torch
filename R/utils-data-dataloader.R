@@ -643,9 +643,8 @@ to_exportable_tensor <- function(x, con, use_shm = FALSE) {
 
 from_exportable_tensor <- function(x) {
   if (coro::is_exhausted(x)) return(x)
-  if (inherits(x, "torch_shared_tensor") || inherits(x, "torch_shared_batch")) {
-    return(tensors_from_shared(x))
-  }
+  # tensors_from_shared is a no-op for non-shared objects
+  x <- tensors_from_shared(x)
   if (is.raw(x) || inherits(x, "connection")) {
     if (!inherits(x, "connection")) {
       con <- rawConnection(x)
@@ -674,7 +673,9 @@ tensors_to_shared <- function(x) {
     ))
   }
   if (is.list(x)) {
-    return(structure(lapply(x, tensors_to_shared), class = c("torch_shared_batch", "list")))
+    out <- lapply(x, tensors_to_shared)
+    attributes(out) <- attributes(x)
+    return(out)
   }
   x
 }
@@ -685,16 +686,17 @@ tensors_from_shared <- function(x) {
   if (coro::is_exhausted(x)) return(x)
   if (inherits(x, "torch_shared_tensor")) {
     if (x$nbytes == 0) {
-      # Empty tensor — no SHM segment was created
       return(torch_tensor(numeric(0), dtype = x$dtype)$reshape(x$shape))
     }
     shm_ref <- cpp_map_shm(x$name, x$nbytes)
     t <- torch_tensor_from_buffer(shm_ref, x$shape, x$dtype)
-    attr(t, ".shm_ref") <- shm_ref  # prevent GC of the mapping
+    attr(t, ".shm_ref") <- shm_ref
     return(t)
   }
-  if (inherits(x, "torch_shared_batch") || is.list(x)) {
-    return(lapply(x, tensors_from_shared))
+  if (is.list(x)) {
+    out <- lapply(x, tensors_from_shared)
+    attributes(out) <- attributes(x)
+    return(out)
   }
   x
 }

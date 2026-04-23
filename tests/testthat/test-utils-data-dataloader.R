@@ -624,5 +624,50 @@ test_that("a case that errors in luz", {
   ds <- get_iterable_ds()
   dl <- dataloader(ds, batch_size = 32)
   expect_equal(length(coro::collect(dl)), 4)
-  
+
 })
+
+test_that("in-place ops work on multiworker dataloader batches", {
+  if (cuda_is_available()) skip_on_os("windows")
+
+  ds <- dataset(
+    initialize = function() {
+      self$x <- matrix(1:20, nrow = 4, ncol = 5)
+    },
+    .getitem = function(i) {
+      torch_tensor(self$x[i, ], dtype = torch_float())
+    },
+    .length = function() { 4 }
+  )
+
+  dl <- dataloader(ds(), batch_size = 2, num_workers = 1)
+  iter <- dataloader_make_iter(dl)
+  batch <- dataloader_next(iter)
+
+  expect_no_error(batch$add_(1))
+  expect_no_error(batch$div_(2))
+  expect_no_error(batch$mul_(3))
+})
+
+test_that("zero-length tensors work with multiworker dataloader", {
+  if (cuda_is_available()) skip_on_os("windows")
+
+  ds <- dataset(
+    initialize = function() {},
+    .getitem = function(i) {
+      list(
+        x = torch_randn(5),
+        empty = torch_tensor(numeric(0))
+      )
+    },
+    .length = function() { 10 }
+  )
+
+  dl <- dataloader(ds(), batch_size = 5, num_workers = 1)
+  iter <- dataloader_make_iter(dl)
+  batch <- dataloader_next(iter)
+
+  expect_tensor_shape(batch$x, c(5, 5))
+  expect_equal(batch$empty$numel(), 0)
+})
+
