@@ -16949,6 +16949,10 @@ cpp_map_shm <- function(name, nbytes_dbl) {
     .Call(`_torch_cpp_map_shm`, name, nbytes_dbl)
 }
 
+cpp_shm_unlink <- function(name) {
+    invisible(.Call(`_torch_cpp_shm_unlink`, name))
+}
+
 cpp_torch_tensor_dtype <- function(x) {
     .Call(`_torch_cpp_torch_tensor_dtype`, x)
 }

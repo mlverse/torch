@@ -196,6 +196,15 @@ SEXP cpp_map_shm(std::string name, double nbytes_dbl) {
 }
 
 // [[Rcpp::export]]
+void cpp_shm_unlink(std::string name) {
+#ifdef _WIN32
+  Rcpp::stop("SHM transport is not supported on Windows");
+#else
+  shm_unlink(name.c_str());
+#endif
+}
+
+// [[Rcpp::export]]
 Rcpp::XPtr<XPtrTorchDtype> cpp_torch_tensor_dtype(torch::Tensor x) {
   XPtrTorchDtype out = lantern_Tensor_dtype(x.get());
   return make_xptr<XPtrTorchDtype>(out);

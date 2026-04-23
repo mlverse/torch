@@ -585,6 +585,17 @@ MultiProcessingDataLoaderIter <- R6::R6Class(
   private = list(
     tasks = list(),
     finalize = function() {
+      # Drain any prefetched tasks so their SHM segments are cleaned up.
+      for (task in private$tasks) {
+        tryCatch({
+          task$session$poll_process(timeout = 5000)
+          result <- task$session$read()
+          if (!is.null(result$result)) {
+            shm_unlink_recursive(result$result)
+          }
+        }, error = function(e) NULL)
+      }
+      private$tasks <- list()
       lapply(private$workers, function(x) {
         x$close_socket_con()
       })
@@ -677,6 +688,17 @@ tensors_from_shared <- function(x) {
     return(lapply(x, tensors_from_shared))
   }
   x
+}
+
+# Unlink SHM segments from a shared result without mapping them.
+# Used during cleanup of prefetched but unconsumed tasks.
+shm_unlink_recursive <- function(x) {
+  if (inherits(x, "torch_shared_tensor")) {
+    cpp_shm_unlink(x$name)
+  } else if (is.list(x)) {
+    lapply(x, shm_unlink_recursive)
+  }
+  invisible(NULL)
 }
 
 walk_fields <- function(env, nms, func) {
