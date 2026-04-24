@@ -190,7 +190,8 @@ torch::Tensor cpp_tensor_from_shm(std::string name, double nbytes_dbl,
   if (ptr == MAP_FAILED) Rcpp::stop("mmap failed: %s", strerror(errno));
 
   // from_blob aliases the mapping, clone copies into tensor-owned storage
-  torch::Tensor view = lantern_from_blob(ptr, &shape[0], shape.size(), nullptr, 0, options.get());
+  int64_t* shape_ptr = shape.empty() ? nullptr : &shape[0];
+  torch::Tensor view = lantern_from_blob(ptr, shape_ptr, shape.size(), nullptr, 0, options.get());
   torch::Tensor owned = lantern_Tensor_clone(view.get());
 
   munmap(ptr, nbytes);

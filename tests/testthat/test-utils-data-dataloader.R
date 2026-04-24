@@ -787,6 +787,32 @@ test_that("all standard dtypes roundtrip through multiworker dataloader", {
   expect_true(batch$bool$dtype    == torch_bool())
 })
 
+test_that("scalar tensors work with multiworker dataloader", {
+  if (cuda_is_available()) skip_on_os("windows")
+
+  ds <- dataset(
+    initialize = function() {
+      self$x <- rnorm(10)
+    },
+    .getitem = function(i) {
+      torch_tensor(self$x[i])
+    },
+    .length = function() { 10 }
+  )
+
+  # Custom collate that reduces to a scalar
+  my_collate <- function(batch) {
+    torch_mean(torch_stack(batch))
+  }
+
+  dl <- dataloader(ds(), batch_size = 5, num_workers = 1, collate_fn = my_collate)
+  iter <- dataloader_make_iter(dl)
+  batch <- dataloader_next(iter)
+
+  expect_equal(length(batch$shape), 0)  # 0-dim scalar
+  expect_true(is_torch_tensor(batch))
+})
+
 test_that("aliased non-contiguous views preserve sharing through multiworker", {
   if (cuda_is_available()) skip_on_os("windows")
 
