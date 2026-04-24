@@ -778,11 +778,11 @@ r_session <- R6::R6Class(
     using_socket_con = FALSE,
     using_shm = FALSE,
     initialize = function() {
-      if (use_shm()) {
-        self$using_shm <- TRUE
-      } else if (use_socket_con()) {
+      if (use_socket_con()) {
         self$port <- parallelly::freePort()
         self$using_socket_con <- TRUE
+      } else if (use_shm()) {
+        self$using_shm <- TRUE
       }
       self$session <- callr::r_session$new()
     },
