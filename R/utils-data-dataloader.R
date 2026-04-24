@@ -669,9 +669,9 @@ tensors_to_shared <- function(x) {
   memo <- new.env(parent = emptyenv())
   to_shared <- function(x) {
     if (is_torch_tensor(x)) {
-      t <- x$cpu()$contiguous()
-      key <- xptr_address(t)
+      key <- xptr_address(x)
       if (!is.null(memo[[key]])) return(memo[[key]])
+      t <- x$cpu()$contiguous()
       shm <- cpp_tensor_to_shm(t)
       result <- structure(
         list(name = shm$name, nbytes = shm$nbytes,
