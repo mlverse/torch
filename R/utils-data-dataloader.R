@@ -690,7 +690,14 @@ tensors_to_shared <- function(x) {
     x
   }
   if (coro::is_exhausted(x)) return(x)
-  to_shared(x)
+  tryCatch(to_shared(x), error = function(e) {
+    # Clean up any SHM segments created before the failure
+    for (key in ls(memo)) {
+      nm <- memo[[key]]$name
+      if (nzchar(nm)) tryCatch(cpp_shm_unlink(nm), error = function(e2) NULL)
+    }
+    stop(e)
+  })
 }
 
 # Reconstruct tensors from POSIX shared memory.
