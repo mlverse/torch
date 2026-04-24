@@ -661,6 +661,19 @@ from_exportable_tensor <- function(x) {
   x
 }
 
+# Map C++ dtype names to names accepted by torch_tensor_from_buffer / dtype_from_string.
+# Most match with tolower(), but a few have different canonical names.
+dtype_to_shm_string <- function(dtype) {
+  s <- tolower(as.character(dtype))
+  switch(s,
+    "char" = "int8",
+    "byte" = "uint8",
+    "complexfloat" = "cfloat",
+    "complexdouble" = "cdouble",
+    s
+  )
+}
+
 # Convert batch tensors to POSIX shared memory for IPC.
 # Single memcpy: tensor data -> SHM. Called in the worker process.
 # Memoizes by data pointer so tensors sharing storage produce the same
@@ -675,7 +688,7 @@ tensors_to_shared <- function(x) {
       shm <- cpp_tensor_to_shm(t)
       result <- structure(
         list(name = shm$name, nbytes = shm$nbytes,
-             shape = t$shape, dtype = tolower(as.character(t$dtype)),
+             shape = t$shape, dtype = dtype_to_shm_string(t$dtype),
              requires_grad = t$requires_grad),
         class = "torch_shared_tensor"
       )

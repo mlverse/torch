@@ -750,6 +750,43 @@ test_that("aliased tensors from custom collate preserve sharing through multiwor
   expect_equal(as.numeric(batch$a), as.numeric(batch$b))
 })
 
+test_that("all standard dtypes roundtrip through multiworker dataloader", {
+  if (cuda_is_available()) skip_on_os("windows")
+
+  ds <- dataset(
+    initialize = function() {
+      self$x <- rnorm(40)
+    },
+    .getitem = function(i) {
+      v <- self$x[((i-1)*10 + 1):(i*10)]
+      list(
+        float32 = torch_tensor(v, dtype = torch_float()),
+        float64 = torch_tensor(v, dtype = torch_double()),
+        int8    = torch_tensor(as.integer(v), dtype = torch_int8()),
+        uint8   = torch_tensor(abs(as.integer(v)), dtype = torch_uint8()),
+        int16   = torch_tensor(as.integer(v), dtype = torch_int16()),
+        int32   = torch_tensor(as.integer(v), dtype = torch_int32()),
+        int64   = torch_tensor(as.integer(v), dtype = torch_int64()),
+        bool    = torch_tensor(v > 0, dtype = torch_bool())
+      )
+    },
+    .length = function() { 4 }
+  )
+
+  dl <- dataloader(ds(), batch_size = 2, num_workers = 1)
+  iter <- dataloader_make_iter(dl)
+  batch <- dataloader_next(iter)
+
+  expect_true(batch$float32$dtype == torch_float())
+  expect_true(batch$float64$dtype == torch_double())
+  expect_true(batch$int8$dtype    == torch_int8())
+  expect_true(batch$uint8$dtype   == torch_uint8())
+  expect_true(batch$int16$dtype   == torch_int16())
+  expect_true(batch$int32$dtype   == torch_int32())
+  expect_true(batch$int64$dtype   == torch_int64())
+  expect_true(batch$bool$dtype    == torch_bool())
+})
+
 test_that("aliased non-contiguous views preserve sharing through multiworker", {
   if (cuda_is_available()) skip_on_os("windows")
 
