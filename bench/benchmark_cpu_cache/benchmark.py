@@ -6,7 +6,7 @@ import torch.nn as nn
 import torch.optim as optim
 
 parser = argparse.ArgumentParser()
-parser.add_argument("--latent", type=int, default=5000)
+parser.add_argument("--latent", type=int, default=500)
 args = parser.parse_args()
 
 print(f"PyTorch version: {torch.__version__}")
