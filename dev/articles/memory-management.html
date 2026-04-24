@@ -128,34 +128,113 @@ the memory is being allocated: on the CPU, GPU (CUDA devices) or <a href="https:
 <div class="section level2">
 <h2 id="cpu">CPU<a class="anchor" aria-label="anchor" href="#cpu"></a>
 </h2>
-<p>On the CPU, torch will possibly call the R garbage collector in two
-moments:</p>
+<div class="section level3">
+<h3 id="the-gc-problem">The GC problem<a class="anchor" aria-label="anchor" href="#the-gc-problem"></a>
+</h3>
+<p>Python frees tensors immediately via reference counting: when a
+variable is reassigned, the old tensor’s memory is returned to the
+system allocator right away. R uses garbage collection (GC) instead,
+meaning old tensors accumulate in memory until GC runs. For large
+tensors (roughly &gt; 1 MB), the system allocator uses
+<code>mmap</code>/<code>munmap</code> system calls to obtain and release
+memory. When many dead-but-not-yet-collected tensors are still mapped,
+new allocations can’t reuse that memory and must request fresh pages
+from the OS — which is expensive.</p>
+</div>
+<div class="section level3">
+<h3 id="cpu-block-cache">CPU block cache<a class="anchor" aria-label="anchor" href="#cpu-block-cache"></a>
+</h3>
+<p>To compensate, torch includes a <strong>CPU block cache</strong> that
+intercepts freed tensor memory and holds it in an in-process pool, keyed
+by allocation size. When a new tensor of the same size is needed, the
+cache returns a block instantly — skipping the costly
+<code>mmap</code>/<code>munmap</code> round-trip entirely. This is
+especially effective during training loops, where the same tensor shapes
+are allocated and freed repeatedly across iterations.</p>
+<p>The cache is flushed automatically whenever the allocator triggers
+R’s garbage collector (see below), so memory is eventually returned to
+the OS. You can also flush it manually with [cpu_cache_flush()].</p>
+</div>
+<div class="section level3">
+<h3 id="gc-triggering">GC triggering<a class="anchor" aria-label="anchor" href="#gc-triggering"></a>
+</h3>
+<p>On the CPU, torch will call the R garbage collector in two
+situations:</p>
 <ol style="list-style-type: decimal">
 <li>
-<p>Every 4GB of memory allocated by LibTorch we make a call to the R
-garbage collector so it cleans up dangling tensors. The 4GB threshold
-can be controled by setting the option
-<code>torch.threshold_call_gc</code>, for example using:</p>
-<pre><code><span><span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">options</a></span><span class="op">(</span>torch.threshold_call_gc <span class="op">=</span> <span class="fl">4000</span><span class="op">)</span></span></code></pre>
-<p>This option must be set before calling <code><a href="https://torch.mlverse.org/docs">library(torch)</a></code> or
-calling any torch function for the first time, as this setting is
-applied when torch starts up.</p>
+<p><strong>Periodic threshold</strong>: Every 4 GB of cumulative
+allocations, the allocator triggers <code><a href="https://rdrr.io/r/base/gc.html" class="external-link">gc()</a></code> to clean up
+dangling tensors. After GC runs, the block cache is flushed so that
+freed memory is returned to the OS. The threshold can be controlled with
+the <code>torch.threshold_call_gc</code> option (in MB):</p>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">options</a></span><span class="op">(</span>torch.threshold_call_gc <span class="op">=</span> <span class="fl">4000</span><span class="op">)</span></span></code></pre></div>
+<p>This option must be set before calling <code><a href="https://torch.mlverse.org/docs">library(torch)</a></code>,
+as it is applied at startup.</p>
 </li>
 <li>
-<p>If torch fails allocating enough memory for for creating a new
-tensor, the garbage collector is called and the allocation is retried.
-Note: in some OS’s (specially the UNIX based) it’s very hard for an
-allocation to fail if it’s not too large, because the system tries to
-use swap. If too much swaping is used it’s possible that the system
-hangs completely.</p>
-<p>If your R session is hanging, and you are convinced that it should
-have enough memory for the operations, try setting a lower value for the
-<code>torch.threshold_call_gc</code> option, with this you will call the
-GC more often and make sure tensors are quickly released from memory.
-Note though, that calling the GC too often adds a lot of overhead, so
-this will probably slow down the program execution.</p>
+<p><strong>On allocation failure</strong>: If
+<code>alloc_cpu()</code> fails, the allocator first flushes the block
+cache, then retries. If that still fails, it triggers a full GC and
+retries once more.</p>
+<p>Note: on most UNIX-based systems (Linux, macOS), memory allocations
+almost never fail — the OS will overcommit memory and use swap instead.
+If swap is exhausted, the system may hang or the OOM killer may
+terminate the process, rather than returning an allocation error that
+torch could handle gracefully.</p>
+<p>If your R session is hanging and you believe it should have enough
+memory, try lowering <code>torch.threshold_call_gc</code> to trigger GC
+more frequently. This adds overhead but ensures tensors are released
+sooner.</p>
 </li>
 </ol>
+</div>
+<div class="section level3">
+<h3 id="configuration">Configuration<a class="anchor" aria-label="anchor" href="#configuration"></a>
+</h3>
+<p>All CPU allocator settings can be adjusted at runtime with
+[set_cpu_allocator_config()], or via R options before loading torch:</p>
+<table class="table">
+<colgroup>
+<col width="26%">
+<col width="30%">
+<col width="43%">
+</colgroup>
+<thead><tr class="header">
+<th>Option</th>
+<th>Default</th>
+<th>Description</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td><code>torch.threshold_call_gc</code></td>
+<td>4000</td>
+<td>GC trigger threshold in MB</td>
+</tr>
+<tr class="even">
+<td><code>torch.cpu_cache_enabled</code></td>
+<td><code>TRUE</code></td>
+<td>Enable/disable the block cache</td>
+</tr>
+<tr class="odd">
+<td><code>torch.cpu_cache_max_size_mb</code></td>
+<td>4000</td>
+<td>Maximum cached memory in MB</td>
+</tr>
+<tr class="even">
+<td><code>torch.cpu_cache_min_block_size</code></td>
+<td>1024</td>
+<td>Minimum block size (bytes) to cache</td>
+</tr>
+</tbody>
+</table>
+<p>Example: reducing cache size on a memory-constrained system:</p>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/set_cpu_allocator_config.html">set_cpu_allocator_config</a></span><span class="op">(</span>cache_max_size_mb <span class="op">=</span> <span class="fl">512</span><span class="op">)</span></span></code></pre></div>
+<p>To release all cached memory immediately:</p>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/cpu_cache_flush.html">cpu_cache_flush</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+</div>
 </div>
 <div class="section level2">
 <h2 id="cuda">CUDA<a class="anchor" aria-label="anchor" href="#cuda"></a>

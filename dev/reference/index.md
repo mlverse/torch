@@ -2241,3 +2241,10 @@
 
 - [`contrib_sort_vertices()`](https://torch.mlverse.org/docs/dev/reference/contrib_sort_vertices.md)
   : Contrib sort vertices
+
+## Memory management
+
+- [`set_cpu_allocator_config()`](https://torch.mlverse.org/docs/dev/reference/set_cpu_allocator_config.md)
+  : Configure the CPU memory allocator
+- [`cpu_cache_flush()`](https://torch.mlverse.org/docs/dev/reference/cpu_cache_flush.md)
+  : Flush the CPU memory cache

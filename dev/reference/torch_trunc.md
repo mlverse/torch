@@ -32,6 +32,6 @@ torch_trunc(a)
 #>  0
 #> -0
 #> -0
-#>  0
+#> -1
 #> [ CPUFloatType{4} ]
 ```
