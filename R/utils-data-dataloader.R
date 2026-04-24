@@ -632,7 +632,9 @@ as_iterator.dataloader <- function(x) {
 # reconstruct it after transfering via futures
 to_exportable_tensor <- function(x, con, use_shm = FALSE) {
   if (use_shm) {
-    return(tensors_to_shared(x))
+    result <- tryCatch(tensors_to_shared(x), error = function(e) NULL)
+    if (!is.null(result)) return(result)
+    # SHM failed (e.g. /dev/shm full in Docker) — fall back to serialization
   }
   if (is.null(con)) {
     return(tensor_to_raw_vector(x))
