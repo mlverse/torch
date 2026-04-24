@@ -586,9 +586,11 @@ MultiProcessingDataLoaderIter <- R6::R6Class(
     tasks = list(),
     finalize = function() {
       # Drain any prefetched tasks so their SHM segments are cleaned up.
+      # Wait indefinitely (-1) — the worker will finish or die when the
+      # session is closed. A timeout would leak SHM segments.
       for (task in private$tasks) {
         tryCatch({
-          task$session$poll_process(timeout = 5000)
+          task$session$poll_process(timeout = -1)
           result <- task$session$read()
           if (!is.null(result$result)) {
             shm_unlink_recursive(result$result)
