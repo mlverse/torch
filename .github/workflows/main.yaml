@@ -133,7 +133,7 @@ jobs:
           sudo update-alternatives --set liblapack.so.3-x86_64-linux-gnu /usr/lib/x86_64-linux-gnu/openblas-pthread/liblapack.so.3
 
       - name: Install uv
-        uses: astral-sh/setup-uv@v6
+        uses: astral-sh/setup-uv@v7
 
       - name: Install torch
         run: Rscript -e "install.packages('pak'); pak::local_install()"
