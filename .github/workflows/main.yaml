@@ -90,7 +90,7 @@ jobs:
 
       - name: Upload install log
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: install-log-${{ matrix.config.os }}-${{ matrix.config.r_version }}
           path: check/torch.Rcheck/00install.out
