@@ -43,12 +43,12 @@ torch_bincount(input, weights)
 input$bincount(weights)
 }
 #> torch_tensor
-#>  0.7500
 #>  0.0000
 #>  0.0000
-#>  0.0000
+#>  0.5000
+#>  1.0000
 #>  0.0000
 #>  0.2500
-#>  1.5000
+#>  0.7500
 #> [ CPUFloatType{7} ]
 ```

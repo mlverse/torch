@@ -33,6 +33,6 @@ comp$fn(torch_tensor(-1))
 comp$foo(torch_randn(10))
 }
 #> torch_tensor
-#> 0.19119417667388916
+#> -3.056978702545166
 #> [ CPUFloatType{} ]
 ```
