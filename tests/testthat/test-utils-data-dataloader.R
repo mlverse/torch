@@ -624,5 +624,221 @@ test_that("a case that errors in luz", {
   ds <- get_iterable_ds()
   dl <- dataloader(ds, batch_size = 32)
   expect_equal(length(coro::collect(dl)), 4)
-  
+
 })
+
+test_that("in-place ops work on multiworker dataloader batches", {
+  if (cuda_is_available()) skip_on_os("windows")
+
+  ds <- dataset(
+    initialize = function() {
+      self$x <- matrix(1:20, nrow = 4, ncol = 5)
+    },
+    .getitem = function(i) {
+      torch_tensor(self$x[i, ], dtype = torch_float())
+    },
+    .length = function() { 4 }
+  )
+
+  dl <- dataloader(ds(), batch_size = 2, num_workers = 1)
+  iter <- dataloader_make_iter(dl)
+  batch <- dataloader_next(iter)
+
+  expect_no_error(batch$add_(1))
+  expect_no_error(batch$div_(2))
+  expect_no_error(batch$mul_(3))
+})
+
+test_that("derived tensors survive GC of original batch", {
+  if (cuda_is_available()) skip_on_os("windows")
+
+  ds <- dataset(
+    initialize = function() {
+      self$x <- matrix(1:20, nrow = 4, ncol = 5)
+    },
+    .getitem = function(i) {
+      torch_tensor(self$x[i, ], dtype = torch_float())
+    },
+    .length = function() { 4 }
+  )
+
+  dl <- dataloader(ds(), batch_size = 2, num_workers = 1)
+  iter <- dataloader_make_iter(dl)
+  batch <- dataloader_next(iter)
+
+  # Derive a new tensor, drop the original, force GC
+  v <- batch$view(-1)
+  expected <- as.numeric(v)
+  rm(batch, iter, dl)
+  gc()
+
+  # v must still be valid — no segfault, correct values
+  expect_equal(as.numeric(v), expected)
+})
+
+test_that("zero-length tensors work with multiworker dataloader", {
+  if (cuda_is_available()) skip_on_os("windows")
+
+  ds <- dataset(
+    initialize = function() {},
+    .getitem = function(i) {
+      list(
+        x = torch_randn(5),
+        empty = torch_tensor(numeric(0))
+      )
+    },
+    .length = function() { 10 }
+  )
+
+  dl <- dataloader(ds(), batch_size = 5, num_workers = 1)
+  iter <- dataloader_make_iter(dl)
+  batch <- dataloader_next(iter)
+
+  expect_tensor_shape(batch$x, c(5, 5))
+  expect_equal(batch$empty$numel(), 0)
+})
+
+test_that("requires_grad is preserved through multiworker dataloader", {
+  if (cuda_is_available()) skip_on_os("windows")
+
+  ds <- dataset(
+    initialize = function() {
+      self$x <- matrix(rnorm(40), nrow = 4, ncol = 10)
+    },
+    .getitem = function(i) {
+      list(
+        x = torch_tensor(self$x[i, ])$requires_grad_(TRUE),
+        y = torch_tensor(self$x[i, ])
+      )
+    },
+    .length = function() { 4 }
+  )
+
+  dl <- dataloader(ds(), batch_size = 2, num_workers = 1)
+  iter <- dataloader_make_iter(dl)
+  batch <- dataloader_next(iter)
+
+  expect_true(batch$x$requires_grad)
+  expect_false(batch$y$requires_grad)
+})
+
+test_that("aliased tensors from custom collate preserve sharing through multiworker", {
+  if (cuda_is_available()) skip_on_os("windows")
+
+  ds <- dataset(
+    initialize = function() {
+      self$x <- matrix(rnorm(40), nrow = 4, ncol = 10)
+    },
+    .getitem = function(i) {
+      torch_tensor(self$x[i, ])
+    },
+    .length = function() { 4 }
+  )
+
+  # Collate that returns the same tensor in two slots
+  my_collate <- function(batch) {
+    t <- torch_stack(batch)
+    list(a = t, b = t)
+  }
+
+  dl <- dataloader(ds(), batch_size = 2, num_workers = 1, collate_fn = my_collate)
+  iter <- dataloader_make_iter(dl)
+  batch <- dataloader_next(iter)
+
+  # In-place update on a should be visible through b
+  batch$a$add_(100)
+  expect_equal(as.numeric(batch$a), as.numeric(batch$b))
+})
+
+test_that("all standard dtypes roundtrip through multiworker dataloader", {
+  if (cuda_is_available()) skip_on_os("windows")
+
+  ds <- dataset(
+    initialize = function() {
+      self$x <- rnorm(40)
+    },
+    .getitem = function(i) {
+      v <- self$x[((i-1)*10 + 1):(i*10)]
+      list(
+        float32 = torch_tensor(v, dtype = torch_float()),
+        float64 = torch_tensor(v, dtype = torch_double()),
+        int8    = torch_tensor(as.integer(v), dtype = torch_int8()),
+        uint8   = torch_tensor(abs(as.integer(v)), dtype = torch_uint8()),
+        int16   = torch_tensor(as.integer(v), dtype = torch_int16()),
+        int32   = torch_tensor(as.integer(v), dtype = torch_int32()),
+        int64   = torch_tensor(as.integer(v), dtype = torch_int64()),
+        bool    = torch_tensor(v > 0, dtype = torch_bool())
+      )
+    },
+    .length = function() { 4 }
+  )
+
+  dl <- dataloader(ds(), batch_size = 2, num_workers = 1)
+  iter <- dataloader_make_iter(dl)
+  batch <- dataloader_next(iter)
+
+  expect_true(batch$float32$dtype == torch_float())
+  expect_true(batch$float64$dtype == torch_double())
+  expect_true(batch$int8$dtype    == torch_int8())
+  expect_true(batch$uint8$dtype   == torch_uint8())
+  expect_true(batch$int16$dtype   == torch_int16())
+  expect_true(batch$int32$dtype   == torch_int32())
+  expect_true(batch$int64$dtype   == torch_int64())
+  expect_true(batch$bool$dtype    == torch_bool())
+})
+
+test_that("scalar tensors work with multiworker dataloader", {
+  if (cuda_is_available()) skip_on_os("windows")
+
+  ds <- dataset(
+    initialize = function() {
+      self$x <- rnorm(10)
+    },
+    .getitem = function(i) {
+      torch_tensor(self$x[i])
+    },
+    .length = function() { 10 }
+  )
+
+  # Custom collate that reduces to a scalar
+  my_collate <- function(batch) {
+    torch_mean(torch_stack(batch))
+  }
+
+  dl <- dataloader(ds(), batch_size = 5, num_workers = 1, collate_fn = my_collate)
+  iter <- dataloader_make_iter(dl)
+  batch <- dataloader_next(iter)
+
+  expect_equal(length(batch$shape), 0)  # 0-dim scalar
+  expect_true(is_torch_tensor(batch))
+})
+
+test_that("aliased non-contiguous views preserve sharing through multiworker", {
+  if (cuda_is_available()) skip_on_os("windows")
+
+  ds <- dataset(
+    initialize = function() {
+      self$x <- matrix(rnorm(40), nrow = 4, ncol = 10)
+    },
+    .getitem = function(i) {
+      torch_tensor(self$x[i, ])
+    },
+    .length = function() { 4 }
+  )
+
+  # Collate returns the same non-contiguous view in both slots
+  my_collate <- function(batch) {
+    t <- torch_stack(batch)
+    v <- t[, 1:5]
+    list(a = v, b = v)
+  }
+
+  dl <- dataloader(ds(), batch_size = 2, num_workers = 1, collate_fn = my_collate)
+  iter <- dataloader_make_iter(dl)
+  batch <- dataloader_next(iter)
+
+  batch$a$add_(100)
+  expect_equal(as.numeric(batch$a), as.numeric(batch$b))
+})
+
+

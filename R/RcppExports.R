@@ -16941,6 +16941,22 @@ cpp_buffer_from_tensor <- function(data) {
     .Call(`_torch_cpp_buffer_from_tensor`, data)
 }
 
+cpp_tensor_to_shm <- function(tensor) {
+    .Call(`_torch_cpp_tensor_to_shm`, tensor)
+}
+
+cpp_tensor_from_shm <- function(name, nbytes_dbl, shape, options) {
+    .Call(`_torch_cpp_tensor_from_shm`, name, nbytes_dbl, shape, options)
+}
+
+cpp_shm_exists <- function(name) {
+    .Call(`_torch_cpp_shm_exists`, name)
+}
+
+cpp_shm_unlink <- function(name) {
+    invisible(.Call(`_torch_cpp_shm_unlink`, name))
+}
+
 cpp_torch_tensor_dtype <- function(x) {
     .Call(`_torch_cpp_torch_tensor_dtype`, x)
 }

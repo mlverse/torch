@@ -363,7 +363,7 @@ MultiProcessingDataLoaderIter <- R6::R6Class(
       }
 
       worker_config <- function(id, num_workers, seed, init_fn, globals,
-                                packages, socket_port = NULL) {
+                                packages, socket_port = NULL, use_shm = FALSE) {
         library(torch)
         .worker_info <<- list(
           id = id,
@@ -386,27 +386,28 @@ MultiProcessingDataLoaderIter <- R6::R6Class(
         if (!is.null(init_fn)) {
           init_fn(id)
         }
-        
+
         .socket_con <<- NULL
         if (!is.null(socket_port)) {
           # We need to wait for the main process to start the server, so here we
           # retry a few times until the conection works.
           for(i in 1:20) {
             tr <- try({.socket_con <<- socketConnection(
-              port = socket_port, 
-              blocking = TRUE, 
+              port = socket_port,
+              blocking = TRUE,
               open = "a+b"
-            )}, silent = TRUE) 
-            
+            )}, silent = TRUE)
+
             if (!inherits(tr, "try-error")) break
             Sys.sleep(0.5)
-            
+
             if (i == 20) {
               runtime_error("Could not create a connection with the main process.")
             }
           }
         }
-        
+
+        .use_shm <<- use_shm
       }
 
       fetcher <- self$.dataset_fetcher$fetch
@@ -424,7 +425,8 @@ MultiProcessingDataLoaderIter <- R6::R6Class(
             init_fn = self$.worker_init_fn,
             globals = self$.worker_globals,
             packages = self$.worker_packages,
-            socket_port = worker$port
+            socket_port = worker$port,
+            use_shm = worker$using_shm
           )
         )
         
@@ -464,11 +466,11 @@ MultiProcessingDataLoaderIter <- R6::R6Class(
       # send task to the worker
       if (coro::is_exhausted(index)) {
         worker$session$call(function() {
-          torch:::to_exportable_tensor(coro::exhausted(), .socket_con)
+          torch:::to_exportable_tensor(coro::exhausted(), .socket_con, .use_shm)
         })
       } else {
         worker$session$call(function(index) {
-          torch:::to_exportable_tensor(fetcher(index), .socket_con)
+          torch:::to_exportable_tensor(fetcher(index), .socket_con, .use_shm)
         }, list(index = index))
       }
 
@@ -481,7 +483,27 @@ MultiProcessingDataLoaderIter <- R6::R6Class(
       task <- private$tasks[[1]]
       private$tasks <- private$tasks[-1]
 
-      if (!task$using_socket_con) {
+      if (task$using_shm) {
+        # SHM path: tensor data is in shared memory, only a small
+        # reference comes through callr's pipe.
+        p <- task$session$poll_process(timeout = self$.timeout)
+        if (p == "timeout") {
+          runtime_error("dataloader worker timed out.")
+        }
+        result <- task$session$read()
+        if (!is.null(result$error)) {
+          if (packageVersion("callr") >= "3.7.1") {
+            rlang::abort(
+              "Error when getting dataset item.",
+              parent = result$error,
+              class = "runtime_error"
+            )
+          } else {
+            runtime_error(result$error$message)
+          }
+        }
+        from_exportable_tensor(result$result)
+      } else if (!task$using_socket_con) {
         # wait for the process to be ready
         p <- task$session$poll_process(timeout = self$.timeout)
         if (p == "timeout") {
@@ -563,6 +585,19 @@ MultiProcessingDataLoaderIter <- R6::R6Class(
   private = list(
     tasks = list(),
     finalize = function() {
+      # Drain any prefetched tasks so their SHM segments are cleaned up.
+      # Wait indefinitely (-1) — the worker will finish or die when the
+      # session is closed. A timeout would leak SHM segments.
+      for (task in private$tasks) {
+        tryCatch({
+          task$session$poll_process(timeout = -1)
+          result <- task$session$read()
+          if (!is.null(result$result)) {
+            shm_unlink_recursive(result$result)
+          }
+        }, error = function(e) NULL)
+      }
+      private$tasks <- list()
       lapply(private$workers, function(x) {
         x$close_socket_con()
       })
@@ -597,7 +632,12 @@ as_iterator.dataloader <- function(x) {
 
 # takes a tensor and saves it's state in a field so we can
 # reconstruct it after transfering via futures
-to_exportable_tensor <- function(x, con) {
+to_exportable_tensor <- function(x, con, use_shm = FALSE) {
+  if (use_shm) {
+    result <- tryCatch(tensors_to_shared(x), error = function(e) NULL)
+    if (!is.null(result)) return(result)
+    # SHM failed (e.g. /dev/shm full in Docker) — fall back to serialization
+  }
   if (is.null(con)) {
     return(tensor_to_raw_vector(x))
   }
@@ -606,13 +646,114 @@ to_exportable_tensor <- function(x, con) {
 }
 
 from_exportable_tensor <- function(x) {
-  if (!inherits(x, "connection")) {
-    con <- rawConnection(x)
-    on.exit({close(con)})
-  } else {
-    con <- x
+  if (coro::is_exhausted(x)) return(x)
+  # tensors_from_shared is a no-op for non-shared objects
+  x <- tensors_from_shared(x)
+  if (is.raw(x) || inherits(x, "connection")) {
+    if (!inherits(x, "connection")) {
+      con <- rawConnection(x)
+      on.exit({close(con)})
+    } else {
+      con <- x
+    }
+    return(torch_load(con))
   }
-  torch_load(con)
+  # Non-tensor, non-serialized payload (e.g. from a custom collate_fn
+  # that returns scalars, character vectors, etc.) — pass through as-is.
+  x
+}
+
+# Map C++ dtype names to names accepted by torch_tensor_from_buffer / dtype_from_string.
+# Most match with tolower(), but a few have different canonical names.
+dtype_to_shm_string <- function(dtype) {
+  s <- tolower(as.character(dtype))
+  switch(s,
+    "char" = "int8",
+    "byte" = "uint8",
+    "complexfloat" = "cfloat",
+    "complexdouble" = "cdouble",
+    s
+  )
+}
+
+# Convert batch tensors to POSIX shared memory for IPC.
+# Single memcpy: tensor data -> SHM. Called in the worker process.
+# Memoizes by data pointer so tensors sharing storage produce the same
+# SHM descriptor, preserving aliasing through the roundtrip.
+tensors_to_shared <- function(x) {
+  memo <- new.env(parent = emptyenv())
+  to_shared <- function(x) {
+    if (is_torch_tensor(x)) {
+      key <- xptr_address(x)
+      if (!is.null(memo[[key]])) return(memo[[key]])
+      t <- x$cpu()$contiguous()
+      shm <- cpp_tensor_to_shm(t)
+      result <- structure(
+        list(name = shm$name, nbytes = shm$nbytes,
+             shape = t$shape, dtype = dtype_to_shm_string(t$dtype),
+             requires_grad = t$requires_grad),
+        class = "torch_shared_tensor"
+      )
+      memo[[key]] <- result
+      return(result)
+    }
+    if (is.list(x)) {
+      out <- lapply(x, to_shared)
+      attributes(out) <- attributes(x)
+      return(out)
+    }
+    x
+  }
+  if (coro::is_exhausted(x)) return(x)
+  tryCatch(to_shared(x), error = function(e) {
+    # Clean up any SHM segments created before the failure
+    for (key in ls(memo)) {
+      nm <- memo[[key]]$name
+      if (nzchar(nm)) tryCatch(cpp_shm_unlink(nm), error = function(e2) NULL)
+    }
+    stop(e)
+  })
+}
+
+# Reconstruct tensors from POSIX shared memory.
+# Memoizes by SHM name so duplicate references reconstruct to the same
+# tensor, preserving storage sharing from the original batch.
+tensors_from_shared <- function(x) {
+  memo <- new.env(parent = emptyenv())
+  from_shared <- function(x) {
+    if (inherits(x, "torch_shared_tensor")) {
+      if (x$nbytes == 0) {
+        t <- torch_tensor(numeric(0), dtype = x$dtype)$reshape(x$shape)
+        if (isTRUE(x$requires_grad)) t <- t$requires_grad_(TRUE)
+        return(t)
+      }
+      key <- x$name
+      if (!is.null(memo[[key]])) return(memo[[key]])
+      t <- cpp_tensor_from_shm(x$name, x$nbytes, x$shape, list(dtype = x$dtype))
+      if (isTRUE(x$requires_grad)) t <- t$requires_grad_(TRUE)
+      memo[[key]] <- t
+      return(t)
+    }
+    if (is.list(x)) {
+      out <- lapply(x, from_shared)
+      attributes(out) <- attributes(x)
+      return(out)
+    }
+    x
+  }
+  if (coro::is_exhausted(x)) return(x)
+  from_shared(x)
+}
+
+# Unlink SHM segments from a shared result without mapping them.
+# Used during cleanup of prefetched but unconsumed tasks.
+shm_unlink_recursive <- function(x) {
+  if (inherits(x, "torch_shared_tensor")) {
+    if (nzchar(x$name)) cpp_shm_unlink(x$name)
+  } else if (is.list(x)) {
+    lapply(x, shm_unlink_recursive)
+  }
+  invisible(NULL)
 }
 
 walk_fields <- function(env, nms, func) {
@@ -657,10 +798,13 @@ r_session <- R6::R6Class(
     con = NULL,
     session = NULL,
     using_socket_con = FALSE,
+    using_shm = FALSE,
     initialize = function() {
       if (use_socket_con()) {
-        self$port <- parallelly::freePort()  
+        self$port <- parallelly::freePort()
         self$using_socket_con <- TRUE
+      } else if (use_shm()) {
+        self$using_shm <- TRUE
       }
       self$session <- callr::r_session$new()
     },
@@ -680,4 +824,8 @@ r_session <- R6::R6Class(
 
 use_socket_con <- function() {
   getOption("torch.dataloader_use_socket_con", FALSE)
+}
+
+use_shm <- function() {
+  getOption("torch.dataloader_use_shm", .Platform$OS.type != "windows")
 }
