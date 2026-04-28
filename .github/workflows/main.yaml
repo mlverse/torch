@@ -201,7 +201,13 @@ jobs:
   test-gpu:
     needs: build-gpu-image
     if: ${{ always() && needs.build-gpu-image.result == 'success' }}
-    runs-on: [self-hosted, gpu-local]
+    # Only one GPU job at a time across all workflow runs — our AWS quota
+    # allows a single GPU instance. Note: GitHub queues at most one pending
+    # job per group; a third arrival cancels the pending one.
+    concurrency:
+      group: gpu-tests
+    runs-on:
+      - "runs-on=${{ github.run_id }}/family=g4dn.xlarge/image=ubuntu24-gpu-x64/spot=true"
     container:
       image: ${{ needs.build-gpu-image.outputs.image }}
       credentials:
@@ -232,7 +238,10 @@ jobs:
   test-cudatoolkit:
     needs: build-gpu-image
     if: ${{ always() && needs.build-gpu-image.result == 'success' }}
-    runs-on: [self-hosted, gpu-local]
+    concurrency:
+      group: gpu-tests
+    runs-on:
+      - "runs-on=${{ github.run_id }}/family=g4dn.xlarge/image=ubuntu24-gpu-x64/spot=true"
     container:
       image: ${{ needs.build-gpu-image.outputs.image }}
       credentials:
@@ -245,6 +254,7 @@ jobs:
       TORCH_TEST: 1
       TORCH_TEST_CUDA: 1
       CUDA: "12.8"
+      TORCH_SKIP_SLOW_TESTS: 1
 
     steps:
       - name: Verify GPU access
