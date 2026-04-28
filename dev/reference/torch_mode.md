@@ -52,12 +52,12 @@ torch_mode(a, 1)
 }
 #> [[1]]
 #> torch_tensor
-#> 2
+#> 39
 #> [ CPUFloatType{} ]
 #> 
 #> [[2]]
 #> torch_tensor
-#> 0
+#> 4
 #> [ CPULongType{} ]
 #> 
 ```

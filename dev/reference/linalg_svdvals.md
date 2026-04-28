@@ -63,8 +63,8 @@ S <- linalg_svdvals(A)
 S
 }
 #> torch_tensor
-#>  2.3556
-#>  2.0064
-#>  1.7246
+#>  2.7544
+#>  1.8239
+#>  1.1147
 #> [ CPUFloatType{3} ]
 ```

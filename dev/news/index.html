@@ -75,7 +75,8 @@
 
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="development version" id="torch-development-version">torch (development version)<a class="anchor" aria-label="anchor" href="#torch-development-version"></a></h2>
-</div>
+<ul><li>Multi-worker dataloaders now use POSIX shared memory for tensor transfer on Unix systems, resulting in up to 2x faster data loading. To revert to the previous behavior, set <code>options(torch.dataloader_use_shm = FALSE)</code>. (<a href="https://github.com/mlverse/torch/issues/1456" class="external-link">#1456</a>)</li>
+</ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.17.0" id="torch-0170">torch 0.17.0<a class="anchor" aria-label="anchor" href="#torch-0170"></a></h2><p class="text-muted">CRAN release: 2026-04-11</p>
 <div class="section level3">

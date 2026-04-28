@@ -48,8 +48,8 @@ a = torch_randn(c(3, 3))
 torch_logsumexp(a, 1)
 }
 #> torch_tensor
-#>  1.7318
-#>  1.7512
-#>  1.9639
+#>  1.9761
+#>  1.7549
+#>  0.8374
 #> [ CPUFloatType{3} ]
 ```

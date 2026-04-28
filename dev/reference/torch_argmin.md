@@ -49,7 +49,7 @@ a
 torch_argmin(a, dim=1)
 }
 #> torch_tensor
-#>  4
+#>  2
 #>  4
 #>  4
 #>  4
