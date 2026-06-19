@@ -14,10 +14,10 @@ class XPtrTorch {
  public:
   XPtrTorch(
       void* x, std::function<void(void*)> deleter = [](void*) {})
-      : XPtrTorch(std::shared_ptr<void>(x, deleter)){};
+      : XPtrTorch(std::shared_ptr<void>(x, deleter)) {}
   explicit XPtrTorch(std::shared_ptr<void> x) : ptr(x) {}
   void* get() const { return ptr.get(); }
-  std::shared_ptr<void> get_shared() const { return ptr; }
+  const std::shared_ptr<void>& get_shared() const { return ptr; }
 };
 
 class XPtrTorchIndexTensor : public XPtrTorch {
@@ -27,6 +27,9 @@ class XPtrTorchIndexTensor : public XPtrTorch {
   explicit XPtrTorchIndexTensor(std::shared_ptr<void> x) : XPtrTorch(x) {}
   XPtrTorchIndexTensor(const XPtrTorchIndexTensor& x)
       : XPtrTorch(x.get_shared()) {}
+  XPtrTorchIndexTensor(XPtrTorchIndexTensor&&) = default;
+  XPtrTorchIndexTensor& operator=(const XPtrTorchIndexTensor&) = default;
+  XPtrTorchIndexTensor& operator=(XPtrTorchIndexTensor&&) = default;
   explicit XPtrTorchIndexTensor(SEXP x);
   operator SEXP() const;
 };
@@ -39,6 +42,9 @@ class XPtrTorchTensor : public XPtrTorch {
   XPtrTorchTensor(void* x) : XPtrTorch(x, delete_tensor) {}
   explicit XPtrTorchTensor(std::shared_ptr<void> x) : XPtrTorch(x) {}
   XPtrTorchTensor(const XPtrTorchTensor& x) : XPtrTorch(x.get_shared()) {}
+  XPtrTorchTensor(XPtrTorchTensor&&) = default;
+  XPtrTorchTensor& operator=(const XPtrTorchTensor&) = default;
+  XPtrTorchTensor& operator=(XPtrTorchTensor&&) = default;
   XPtrTorchTensor(XPtrTorchIndexTensor x) : XPtrTorch(x.get_shared()) {}
   explicit XPtrTorchTensor(SEXP x);
   operator SEXP() const;
@@ -50,6 +56,9 @@ class XPtrTorchScriptModule : public XPtrTorch {
   explicit XPtrTorchScriptModule(std::shared_ptr<void> x) : XPtrTorch(x) {}
   XPtrTorchScriptModule(const XPtrTorchScriptModule& x)
       : XPtrTorch(x.get_shared()) {}
+  XPtrTorchScriptModule(XPtrTorchScriptModule&&) = default;
+  XPtrTorchScriptModule& operator=(const XPtrTorchScriptModule&) = default;
+  XPtrTorchScriptModule& operator=(XPtrTorchScriptModule&&) = default;
   explicit XPtrTorchScriptModule(SEXP x);
   operator SEXP() const;
 };
@@ -62,6 +71,9 @@ class XPtrTorchScriptMethod : public XPtrTorch {
   explicit XPtrTorchScriptMethod(std::shared_ptr<void> x) : XPtrTorch(x) {}
   XPtrTorchScriptMethod(const XPtrTorchScriptMethod& x)
       : XPtrTorch(x.get_shared()) {}
+  XPtrTorchScriptMethod(XPtrTorchScriptMethod&&) = default;
+  XPtrTorchScriptMethod& operator=(const XPtrTorchScriptMethod&) = default;
+  XPtrTorchScriptMethod& operator=(XPtrTorchScriptMethod&&) = default;
   explicit XPtrTorchScriptMethod(SEXP x);
   operator SEXP() const;
 };
@@ -72,6 +84,9 @@ class XPtrTorchOptionalTensor : public XPtrTorch {
   explicit XPtrTorchOptionalTensor(std::shared_ptr<void> x) : XPtrTorch(x) {}
   XPtrTorchOptionalTensor(const XPtrTorchOptionalTensor& x)
       : XPtrTorch(x.get_shared()) {}
+  XPtrTorchOptionalTensor(XPtrTorchOptionalTensor&&) = default;
+  XPtrTorchOptionalTensor& operator=(const XPtrTorchOptionalTensor&) = default;
+  XPtrTorchOptionalTensor& operator=(XPtrTorchOptionalTensor&&) = default;
   explicit XPtrTorchOptionalTensor(SEXP x);
   operator SEXP() const;
 };
@@ -82,6 +97,9 @@ class XPtrTorchTensorList : public XPtrTorch {
   explicit XPtrTorchTensorList(std::shared_ptr<void> x) : XPtrTorch(x) {}
   XPtrTorchTensorList(const XPtrTorchTensorList& x)
       : XPtrTorch(x.get_shared()) {}
+  XPtrTorchTensorList(XPtrTorchTensorList&&) = default;
+  XPtrTorchTensorList& operator=(const XPtrTorchTensorList&) = default;
+  XPtrTorchTensorList& operator=(XPtrTorchTensorList&&) = default;
   explicit XPtrTorchTensorList(SEXP x);
   operator SEXP() const;
 };
@@ -104,6 +122,9 @@ class XPtrTorchIndexTensorList : public XPtrTorch {
   explicit XPtrTorchIndexTensorList(std::shared_ptr<void> x) : XPtrTorch(x) {}
   XPtrTorchIndexTensorList(const XPtrTorchIndexTensorList& x)
       : XPtrTorch(x.get_shared()) {}
+  XPtrTorchIndexTensorList(XPtrTorchIndexTensorList&&) = default;
+  XPtrTorchIndexTensorList& operator=(const XPtrTorchIndexTensorList&) = default;
+  XPtrTorchIndexTensorList& operator=(XPtrTorchIndexTensorList&&) = default;
   explicit XPtrTorchIndexTensorList(SEXP x);
 };
 
@@ -115,6 +136,9 @@ class XPtrTorchOptionalIndexTensorList : public XPtrTorch {
       : XPtrTorch(x) {}
   XPtrTorchOptionalIndexTensorList(const XPtrTorchOptionalIndexTensorList& x)
       : XPtrTorch(x.get_shared()) {}
+  XPtrTorchOptionalIndexTensorList(XPtrTorchOptionalIndexTensorList&&) = default;
+  XPtrTorchOptionalIndexTensorList& operator=(const XPtrTorchOptionalIndexTensorList&) = default;
+  XPtrTorchOptionalIndexTensorList& operator=(XPtrTorchOptionalIndexTensorList&&) = default;
   explicit XPtrTorchOptionalIndexTensorList(SEXP x);
 };
 
@@ -124,6 +148,9 @@ class XPtrTorchScalarType : public XPtrTorch {
   explicit XPtrTorchScalarType(std::shared_ptr<void> x) : XPtrTorch(x) {}
   XPtrTorchScalarType(const XPtrTorchScalarType& x)
       : XPtrTorch(x.get_shared()) {}
+  XPtrTorchScalarType(XPtrTorchScalarType&&) = default;
+  XPtrTorchScalarType& operator=(const XPtrTorchScalarType&) = default;
+  XPtrTorchScalarType& operator=(XPtrTorchScalarType&&) = default;
   XPtrTorchScalarType(SEXP x);
   operator SEXP() const;
 };
@@ -142,16 +169,22 @@ class XPtrTorchScalar : public XPtrTorch {
   XPtrTorchScalar(void* x) : XPtrTorch(x, delete_scalar) {}
   explicit XPtrTorchScalar(std::shared_ptr<void> x) : XPtrTorch(x) {}
   XPtrTorchScalar(const XPtrTorchScalar& x) : XPtrTorch(x.get_shared()) {}
+  XPtrTorchScalar(XPtrTorchScalar&&) = default;
+  XPtrTorchScalar& operator=(const XPtrTorchScalar&) = default;
+  XPtrTorchScalar& operator=(XPtrTorchScalar&&) = default;
   explicit XPtrTorchScalar(SEXP x);
   operator SEXP() const;
 };
 
 class XPtrTorchTensorOptions : public XPtrTorch {
  public:
-  XPtrTorchTensorOptions(void* x) : XPtrTorch(x, delete_tensor_options){};
-  explicit XPtrTorchTensorOptions(std::shared_ptr<void> x) : XPtrTorch(x){};
+  XPtrTorchTensorOptions(void* x) : XPtrTorch(x, delete_tensor_options) {}
+  explicit XPtrTorchTensorOptions(std::shared_ptr<void> x) : XPtrTorch(x) {}
   XPtrTorchTensorOptions(const XPtrTorchTensorOptions& x)
-      : XPtrTorch(x.get_shared()){};
+      : XPtrTorch(x.get_shared()) {}
+  XPtrTorchTensorOptions(XPtrTorchTensorOptions&&) = default;
+  XPtrTorchTensorOptions& operator=(const XPtrTorchTensorOptions&) = default;
+  XPtrTorchTensorOptions& operator=(XPtrTorchTensorOptions&&) = default;
   explicit XPtrTorchTensorOptions(SEXP x);
   operator SEXP() const;
 };
@@ -159,8 +192,11 @@ class XPtrTorchTensorOptions : public XPtrTorch {
 class XPtrTorchDevice : public XPtrTorch {
  public:
   XPtrTorchDevice(void* x) : XPtrTorch(x, delete_device) {}
-  explicit XPtrTorchDevice(std::shared_ptr<void> x) : XPtrTorch(x){};
-  XPtrTorchDevice(const XPtrTorchDevice& x) : XPtrTorch(x.get_shared()){};
+  explicit XPtrTorchDevice(std::shared_ptr<void> x) : XPtrTorch(x) {}
+  XPtrTorchDevice(const XPtrTorchDevice& x) : XPtrTorch(x.get_shared()) {}
+  XPtrTorchDevice(XPtrTorchDevice&&) = default;
+  XPtrTorchDevice& operator=(const XPtrTorchDevice&) = default;
+  XPtrTorchDevice& operator=(XPtrTorchDevice&&) = default;
   explicit XPtrTorchDevice(SEXP x);
   operator SEXP() const;
 };
@@ -168,9 +204,12 @@ class XPtrTorchDevice : public XPtrTorch {
 class XPtrTorchOptionalDevice : public XPtrTorch {
  public:
   XPtrTorchOptionalDevice(void* x) : XPtrTorch(x, delete_optional_device) {}
-  explicit XPtrTorchOptionalDevice(std::shared_ptr<void> x) : XPtrTorch(x){};
+  explicit XPtrTorchOptionalDevice(std::shared_ptr<void> x) : XPtrTorch(x) {}
   XPtrTorchOptionalDevice(const XPtrTorchOptionalDevice& x)
-      : XPtrTorch(x.get_shared()){};
+      : XPtrTorch(x.get_shared()) {}
+  XPtrTorchOptionalDevice(XPtrTorchOptionalDevice&&) = default;
+  XPtrTorchOptionalDevice& operator=(const XPtrTorchOptionalDevice&) = default;
+  XPtrTorchOptionalDevice& operator=(XPtrTorchOptionalDevice&&) = default;
   explicit XPtrTorchOptionalDevice(SEXP x);
   operator SEXP() const;
 };
@@ -179,8 +218,11 @@ class XPtrTorchDtype : public XPtrTorch {
  public:
   XPtrTorchDtype() : XPtrTorch{NULL} {}
   XPtrTorchDtype(void* x) : XPtrTorch(x, delete_dtype) {}
-  explicit XPtrTorchDtype(std::shared_ptr<void> x) : XPtrTorch(x){};
-  XPtrTorchDtype(const XPtrTorchDtype& x) : XPtrTorch(x.get_shared()){};
+  explicit XPtrTorchDtype(std::shared_ptr<void> x) : XPtrTorch(x) {}
+  XPtrTorchDtype(const XPtrTorchDtype& x) : XPtrTorch(x.get_shared()) {}
+  XPtrTorchDtype(XPtrTorchDtype&&) = default;
+  XPtrTorchDtype& operator=(const XPtrTorchDtype&) = default;
+  XPtrTorchDtype& operator=(XPtrTorchDtype&&) = default;
   explicit XPtrTorchDtype(SEXP x);
   operator SEXP() const;
 };
@@ -188,20 +230,26 @@ class XPtrTorchDtype : public XPtrTorch {
 class XPtrTorchDimname : public XPtrTorch {
  public:
   XPtrTorchDimname(void* x) : XPtrTorch(x, delete_dimname) {}
-  explicit XPtrTorchDimname(std::shared_ptr<void> x) : XPtrTorch(x){};
-  XPtrTorchDimname(const XPtrTorchDimname& x) : XPtrTorch(x.get_shared()){};
+  explicit XPtrTorchDimname(std::shared_ptr<void> x) : XPtrTorch(x) {}
+  XPtrTorchDimname(const XPtrTorchDimname& x) : XPtrTorch(x.get_shared()) {}
+  XPtrTorchDimname(XPtrTorchDimname&&) = default;
+  XPtrTorchDimname& operator=(const XPtrTorchDimname&) = default;
+  XPtrTorchDimname& operator=(XPtrTorchDimname&&) = default;
   explicit XPtrTorchDimname(SEXP x);
   explicit XPtrTorchDimname(const std::string& x)
-      : XPtrTorchDimname(Rcpp::wrap(x)){};
+      : XPtrTorchDimname(Rcpp::wrap(x)) {}
   operator SEXP() const;
 };
 
 class XPtrTorchDimnameList : public XPtrTorch {
  public:
   XPtrTorchDimnameList(void* x) : XPtrTorch(x, delete_dimname_list) {}
-  explicit XPtrTorchDimnameList(std::shared_ptr<void> x) : XPtrTorch(x){};
+  explicit XPtrTorchDimnameList(std::shared_ptr<void> x) : XPtrTorch(x) {}
   XPtrTorchDimnameList(const XPtrTorchDimnameList& x)
-      : XPtrTorch(x.get_shared()){};
+      : XPtrTorch(x.get_shared()) {}
+  XPtrTorchDimnameList(XPtrTorchDimnameList&&) = default;
+  XPtrTorchDimnameList& operator=(const XPtrTorchDimnameList&) = default;
+  XPtrTorchDimnameList& operator=(XPtrTorchDimnameList&&) = default;
   explicit XPtrTorchDimnameList(SEXP x);
   operator SEXP() const;
 };
@@ -211,9 +259,12 @@ class XPtrTorchOptionalDimnameList : public XPtrTorch {
   XPtrTorchOptionalDimnameList(void* x)
       : XPtrTorch(x, delete_optional_dimname_list) {}
   explicit XPtrTorchOptionalDimnameList(std::shared_ptr<void> x)
-      : XPtrTorch(x){};
+      : XPtrTorch(x) {}
   XPtrTorchOptionalDimnameList(const XPtrTorchOptionalDimnameList& x)
-      : XPtrTorch(x.get_shared()){};
+      : XPtrTorch(x.get_shared()) {}
+  XPtrTorchOptionalDimnameList(XPtrTorchOptionalDimnameList&&) = default;
+  XPtrTorchOptionalDimnameList& operator=(const XPtrTorchOptionalDimnameList&) = default;
+  XPtrTorchOptionalDimnameList& operator=(XPtrTorchOptionalDimnameList&&) = default;
   explicit XPtrTorchOptionalDimnameList(SEXP x);
   operator SEXP() const;
 };
@@ -223,9 +274,12 @@ class XPtrTorchjit_named_parameter_list : public XPtrTorch {
   XPtrTorchjit_named_parameter_list(void* x)
       : XPtrTorch(x, delete_jit_named_parameter_list) {}
   explicit XPtrTorchjit_named_parameter_list(std::shared_ptr<void> x)
-      : XPtrTorch(x){};
+      : XPtrTorch(x) {}
   XPtrTorchjit_named_parameter_list(const XPtrTorchjit_named_parameter_list& x)
-      : XPtrTorch(x.get_shared()){};
+      : XPtrTorch(x.get_shared()) {}
+  XPtrTorchjit_named_parameter_list(XPtrTorchjit_named_parameter_list&&) = default;
+  XPtrTorchjit_named_parameter_list& operator=(const XPtrTorchjit_named_parameter_list&) = default;
+  XPtrTorchjit_named_parameter_list& operator=(XPtrTorchjit_named_parameter_list&&) = default;
   operator SEXP() const;
 };
 
@@ -234,9 +288,12 @@ class XPtrTorchjit_named_buffer_list : public XPtrTorch {
   XPtrTorchjit_named_buffer_list(void* x)
       : XPtrTorch(x, delete_jit_named_buffer_list) {}
   explicit XPtrTorchjit_named_buffer_list(std::shared_ptr<void> x)
-      : XPtrTorch(x){};
+      : XPtrTorch(x) {}
   XPtrTorchjit_named_buffer_list(const XPtrTorchjit_named_buffer_list& x)
-      : XPtrTorch(x.get_shared()){};
+      : XPtrTorch(x.get_shared()) {}
+  XPtrTorchjit_named_buffer_list(XPtrTorchjit_named_buffer_list&&) = default;
+  XPtrTorchjit_named_buffer_list& operator=(const XPtrTorchjit_named_buffer_list&) = default;
+  XPtrTorchjit_named_buffer_list& operator=(XPtrTorchjit_named_buffer_list&&) = default;
   operator SEXP() const;
 };
 
@@ -245,17 +302,23 @@ class XPtrTorchjit_named_module_list : public XPtrTorch {
   XPtrTorchjit_named_module_list(void* x)
       : XPtrTorch(x, delete_jit_named_module_list) {}
   explicit XPtrTorchjit_named_module_list(std::shared_ptr<void> x)
-      : XPtrTorch(x){};
+      : XPtrTorch(x) {}
   XPtrTorchjit_named_module_list(const XPtrTorchjit_named_module_list& x)
-      : XPtrTorch(x.get_shared()){};
+      : XPtrTorch(x.get_shared()) {}
+  XPtrTorchjit_named_module_list(XPtrTorchjit_named_module_list&&) = default;
+  XPtrTorchjit_named_module_list& operator=(const XPtrTorchjit_named_module_list&) = default;
+  XPtrTorchjit_named_module_list& operator=(XPtrTorchjit_named_module_list&&) = default;
   operator SEXP() const;
 };
 
 class XPtrTorchGenerator : public XPtrTorch {
  public:
   XPtrTorchGenerator(void* x) : XPtrTorch(x, delete_generator) {}
-  explicit XPtrTorchGenerator(std::shared_ptr<void> x) : XPtrTorch(x){};
-  XPtrTorchGenerator(const XPtrTorchGenerator& x) : XPtrTorch(x.get_shared()){};
+  explicit XPtrTorchGenerator(std::shared_ptr<void> x) : XPtrTorch(x) {}
+  XPtrTorchGenerator(const XPtrTorchGenerator& x) : XPtrTorch(x.get_shared()) {}
+  XPtrTorchGenerator(XPtrTorchGenerator&&) = default;
+  XPtrTorchGenerator& operator=(const XPtrTorchGenerator&) = default;
+  XPtrTorchGenerator& operator=(XPtrTorchGenerator&&) = default;
   explicit XPtrTorchGenerator(SEXP x);
   operator SEXP() const;
 };
@@ -264,55 +327,70 @@ class XPtrTorchOptionalGenerator : public XPtrTorch {
  public:
   XPtrTorchOptionalGenerator(void* x)
       : XPtrTorch(x, delete_optional_generator) {}
-  explicit XPtrTorchOptionalGenerator(std::shared_ptr<void> x) : XPtrTorch(x){};
+  explicit XPtrTorchOptionalGenerator(std::shared_ptr<void> x) : XPtrTorch(x) {}
   XPtrTorchOptionalGenerator(const XPtrTorchOptionalGenerator& x)
-      : XPtrTorch(x.get_shared()){};
+      : XPtrTorch(x.get_shared()) {}
+  XPtrTorchOptionalGenerator(XPtrTorchOptionalGenerator&&) = default;
+  XPtrTorchOptionalGenerator& operator=(const XPtrTorchOptionalGenerator&) = default;
+  XPtrTorchOptionalGenerator& operator=(XPtrTorchOptionalGenerator&&) = default;
   explicit XPtrTorchOptionalGenerator(SEXP x);
   operator SEXP() const;
 };
 
 class XPtrTorchMemoryFormat : public XPtrTorch {
  public:
-  XPtrTorchMemoryFormat() : XPtrTorch{NULL} {};
+  XPtrTorchMemoryFormat() : XPtrTorch{NULL} {}
   XPtrTorchMemoryFormat(void* x) : XPtrTorch(x, delete_memory_format) {}
-  explicit XPtrTorchMemoryFormat(std::shared_ptr<void> x) : XPtrTorch(x){};
+  explicit XPtrTorchMemoryFormat(std::shared_ptr<void> x) : XPtrTorch(x) {}
   XPtrTorchMemoryFormat(const XPtrTorchMemoryFormat& x)
-      : XPtrTorch(x.get_shared()){};
+      : XPtrTorch(x.get_shared()) {}
+  XPtrTorchMemoryFormat(XPtrTorchMemoryFormat&&) = default;
+  XPtrTorchMemoryFormat& operator=(const XPtrTorchMemoryFormat&) = default;
+  XPtrTorchMemoryFormat& operator=(XPtrTorchMemoryFormat&&) = default;
   explicit XPtrTorchMemoryFormat(SEXP x);
   operator SEXP() const;
 };
 
 class XPtrTorchIntArrayRef : public XPtrTorch {
  public:
-  XPtrTorchIntArrayRef() : XPtrTorch{NULL} {};
+  XPtrTorchIntArrayRef() : XPtrTorch{NULL} {}
   XPtrTorchIntArrayRef(void* x) : XPtrTorch(x, delete_vector_int64_t) {}
-  explicit XPtrTorchIntArrayRef(std::shared_ptr<void> x) : XPtrTorch(x){};
+  explicit XPtrTorchIntArrayRef(std::shared_ptr<void> x) : XPtrTorch(x) {}
   XPtrTorchIntArrayRef(const XPtrTorchIntArrayRef& x)
-      : XPtrTorch(x.get_shared()){};
+      : XPtrTorch(x.get_shared()) {}
+  XPtrTorchIntArrayRef(XPtrTorchIntArrayRef&&) = default;
+  XPtrTorchIntArrayRef& operator=(const XPtrTorchIntArrayRef&) = default;
+  XPtrTorchIntArrayRef& operator=(XPtrTorchIntArrayRef&&) = default;
   explicit XPtrTorchIntArrayRef(SEXP x);
-  operator SEXP () const;
+  operator SEXP() const;
 };
 
 class XPtrTorchSymIntArrayRef : public XPtrTorch {
-public:
-  XPtrTorchSymIntArrayRef() : XPtrTorch{NULL} {};
+ public:
+  XPtrTorchSymIntArrayRef() : XPtrTorch{NULL} {}
   XPtrTorchSymIntArrayRef(void* x) : XPtrTorch(x, delete_vector_int64_t) {}
-  explicit XPtrTorchSymIntArrayRef(std::shared_ptr<void> x) : XPtrTorch(x){};
+  explicit XPtrTorchSymIntArrayRef(std::shared_ptr<void> x) : XPtrTorch(x) {}
   XPtrTorchSymIntArrayRef(const XPtrTorchSymIntArrayRef& x)
-    : XPtrTorch(x.get_shared()){};
+    : XPtrTorch(x.get_shared()) {}
+  XPtrTorchSymIntArrayRef(XPtrTorchSymIntArrayRef&&) = default;
+  XPtrTorchSymIntArrayRef& operator=(const XPtrTorchSymIntArrayRef&) = default;
+  XPtrTorchSymIntArrayRef& operator=(XPtrTorchSymIntArrayRef&&) = default;
   explicit XPtrTorchSymIntArrayRef(SEXP x);
-  // operator SEXP () const;
+  // operator SEXP() const;
 };
 
 class XPtrTorchSymInt : public XPtrTorch {
-public:
-  XPtrTorchSymInt() : XPtrTorch{NULL} {};
+ public:
+  XPtrTorchSymInt() : XPtrTorch{NULL} {}
   XPtrTorchSymInt(void* x) : XPtrTorch(x, delete_vector_int64_t) {}
-  explicit XPtrTorchSymInt(std::shared_ptr<void> x) : XPtrTorch(x){};
+  explicit XPtrTorchSymInt(std::shared_ptr<void> x) : XPtrTorch(x) {}
   XPtrTorchSymInt(const XPtrTorchSymInt& x)
-    : XPtrTorch(x.get_shared()){};
+    : XPtrTorch(x.get_shared()) {}
+  XPtrTorchSymInt(XPtrTorchSymInt&&) = default;
+  XPtrTorchSymInt& operator=(const XPtrTorchSymInt&) = default;
+  XPtrTorchSymInt& operator=(XPtrTorchSymInt&&) = default;
   explicit XPtrTorchSymInt(SEXP x);
-  // operator SEXP () const;
+  // operator SEXP() const;
 };
 
 class XPtrTorchFunctionPtr : public XPtrTorch {
@@ -320,35 +398,41 @@ class XPtrTorchFunctionPtr : public XPtrTorch {
   XPtrTorchFunctionPtr(void* x) : XPtrTorch(x, delete_function_ptr) {}
   XPtrTorchFunctionPtr(void* x, std::function<void(void*)> deleter)
       : XPtrTorch(x, deleter) {}
-  explicit XPtrTorchFunctionPtr(std::shared_ptr<void> x) : XPtrTorch(x){};
+  explicit XPtrTorchFunctionPtr(std::shared_ptr<void> x) : XPtrTorch(x) {}
   XPtrTorchFunctionPtr(const XPtrTorchFunctionPtr& x)
-      : XPtrTorch(x.get_shared()){};
+      : XPtrTorch(x.get_shared()) {}
+  XPtrTorchFunctionPtr(XPtrTorchFunctionPtr&&) = default;
+  XPtrTorchFunctionPtr& operator=(const XPtrTorchFunctionPtr&) = default;
+  XPtrTorchFunctionPtr& operator=(XPtrTorchFunctionPtr&&) = default;
 };
 
 class XPtrTorchIndexIntArrayRef : public XPtrTorch {
  public:
-  XPtrTorchIndexIntArrayRef() : XPtrTorch{NULL} {};
+  XPtrTorchIndexIntArrayRef() : XPtrTorch{NULL} {}
   XPtrTorchIndexIntArrayRef(void* x) : XPtrTorch(x, delete_vector_int64_t) {}
-  explicit XPtrTorchIndexIntArrayRef(std::shared_ptr<void> x) : XPtrTorch(x){};
+  explicit XPtrTorchIndexIntArrayRef(std::shared_ptr<void> x) : XPtrTorch(x) {}
   XPtrTorchIndexIntArrayRef(const XPtrTorchIndexIntArrayRef& x)
-      : XPtrTorch(x.get_shared()){};
+      : XPtrTorch(x.get_shared()) {}
+  XPtrTorchIndexIntArrayRef(XPtrTorchIndexIntArrayRef&&) = default;
+  XPtrTorchIndexIntArrayRef& operator=(const XPtrTorchIndexIntArrayRef&) = default;
+  XPtrTorchIndexIntArrayRef& operator=(XPtrTorchIndexIntArrayRef&&) = default;
   explicit XPtrTorchIndexIntArrayRef(SEXP x);
 };
 
 class XPtrTorchOptionalDoubleArrayRef : public XPtrTorch {
  public:
-  XPtrTorchOptionalDoubleArrayRef() : XPtrTorch{NULL} {};
+  XPtrTorchOptionalDoubleArrayRef() : XPtrTorch{NULL} {}
   XPtrTorchOptionalDoubleArrayRef(void* x)
-      : XPtrTorch(x, delete_optional_double_array_ref){};
+      : XPtrTorch(x, delete_optional_double_array_ref) {}
   XPtrTorchOptionalDoubleArrayRef(SEXP x);
 };
 
 class XPtrTorchOptionalIntArrayRef : public XPtrTorch {
  public:
-  XPtrTorchOptionalIntArrayRef() : XPtrTorch{NULL} {};
+  XPtrTorchOptionalIntArrayRef() : XPtrTorch{NULL} {}
   XPtrTorchOptionalIntArrayRef(SEXP x);
   XPtrTorchOptionalIntArrayRef(void* x)
-      : XPtrTorch(x, delete_optional_int_array_ref){};
+      : XPtrTorch(x, delete_optional_int_array_ref) {}
 };
 
 class XPtrTorchOptionalIndexIntArrayRef : public XPtrTorchOptionalIntArrayRef {
@@ -389,7 +473,7 @@ class XPtrTorchindex_int64_t {
  public:
   std::shared_ptr<void> ptr;
   explicit XPtrTorchindex_int64_t(SEXP x_);
-  explicit XPtrTorchindex_int64_t(std::shared_ptr<void> x) : ptr(x){};
+  explicit XPtrTorchindex_int64_t(std::shared_ptr<void> x) : ptr(x) {}
   void* get() { return ptr.get(); }
 };
 
@@ -397,7 +481,7 @@ class XPtrTorchoptional_index_int64_t {
  public:
   std::shared_ptr<void> ptr;
   explicit XPtrTorchoptional_index_int64_t(SEXP x_);
-  explicit XPtrTorchoptional_index_int64_t(std::shared_ptr<void> x) : ptr(x){};
+  explicit XPtrTorchoptional_index_int64_t(std::shared_ptr<void> x) : ptr(x) {}
   void* get() { return ptr.get(); }
 };
 
@@ -405,7 +489,10 @@ class XPtrTorchvector_string : public XPtrTorch {
  public:
   XPtrTorchvector_string(SEXP x);
   XPtrTorchvector_string(const XPtrTorchvector_string& x)
-      : XPtrTorch(x.get_shared()){};
+      : XPtrTorch(x.get_shared()) {}
+  XPtrTorchvector_string(XPtrTorchvector_string&&) = default;
+  XPtrTorchvector_string& operator=(const XPtrTorchvector_string&) = default;
+  XPtrTorchvector_string& operator=(XPtrTorchvector_string&&) = default;
   XPtrTorchvector_string(void* x) : XPtrTorch(x, delete_vector_string) {}
   operator SEXP() const;
 };
@@ -414,9 +501,12 @@ class XPtrTorchstring : public XPtrTorch {
  public:
   XPtrTorchstring(void* x) : XPtrTorch(x, delete_string) {}
   XPtrTorchstring(SEXP x);
-  XPtrTorchstring(const XPtrTorchstring& x) : XPtrTorch(x.get_shared()){};
+  XPtrTorchstring(const XPtrTorchstring& x) : XPtrTorch(x.get_shared()) {}
+  XPtrTorchstring(XPtrTorchstring&&) = default;
+  XPtrTorchstring& operator=(const XPtrTorchstring&) = default;
+  XPtrTorchstring& operator=(XPtrTorchstring&&) = default;
   XPtrTorchstring(std::string x)
-      : XPtrTorchstring(fixme_new_string(x.c_str(), x.size())){};
+      : XPtrTorchstring(fixme_new_string(x.c_str(), x.size())) {}
   operator SEXP() const;
   operator std::string() const;
 };
@@ -426,7 +516,10 @@ class XPtrTorchstring_view : public XPtrTorch {
   XPtrTorchstring_view(void* x) : XPtrTorch(x, delete_string_view) {}
   XPtrTorchstring_view(SEXP x);
   XPtrTorchstring_view(const XPtrTorchstring_view& x)
-      : XPtrTorch(x.get_shared()){};
+      : XPtrTorch(x.get_shared()) {}
+  XPtrTorchstring_view(XPtrTorchstring_view&&) = default;
+  XPtrTorchstring_view& operator=(const XPtrTorchstring_view&) = default;
+  XPtrTorchstring_view& operator=(XPtrTorchstring_view&&) = default;
 };
 
 class XPtrTorchoptional_string_view : public XPtrTorch {
@@ -435,7 +528,7 @@ class XPtrTorchoptional_string_view : public XPtrTorch {
       : XPtrTorch(x, delete_optional_string_view) {}
   XPtrTorchoptional_string_view(SEXP x);
   XPtrTorchoptional_string_view(const XPtrTorchstring_view& x)
-      : XPtrTorch(x.get_shared()){};
+      : XPtrTorch(x.get_shared()) {}
 };
 
 class XPtrTorchoptional_string : public XPtrTorch {
@@ -450,7 +543,7 @@ class XPtrTorchStack : public XPtrTorch {
   XPtrTorchStack(void* x) : XPtrTorch(x, delete_stack) {}
   XPtrTorchStack(void* x, std::function<void(void*)> deleter)
       : XPtrTorch(x, deleter) {}
-  explicit XPtrTorchStack(std::shared_ptr<void> x) : XPtrTorch(x){};
+  explicit XPtrTorchStack(std::shared_ptr<void> x) : XPtrTorch(x) {}
   XPtrTorchStack(SEXP x);
   operator SEXP() const;
 };
@@ -458,48 +551,63 @@ class XPtrTorchStack : public XPtrTorch {
 class XPtrTorchIValue : public XPtrTorch {
  public:
   XPtrTorchIValue(void* x) : XPtrTorch(x, delete_ivalue) {}
-  explicit XPtrTorchIValue(std::shared_ptr<void> x) : XPtrTorch(x){};
-  XPtrTorchIValue(const XPtrTorchIValue& x) : XPtrTorch(x.get_shared()){};
+  explicit XPtrTorchIValue(std::shared_ptr<void> x) : XPtrTorch(x) {}
+  XPtrTorchIValue(const XPtrTorchIValue& x) : XPtrTorch(x.get_shared()) {}
+  XPtrTorchIValue(XPtrTorchIValue&&) = default;
+  XPtrTorchIValue& operator=(const XPtrTorchIValue&) = default;
+  XPtrTorchIValue& operator=(XPtrTorchIValue&&) = default;
   XPtrTorchIValue(SEXP x);
   operator SEXP() const;
 };
 
 class XPtrTorchFunctionSchema : public XPtrTorch {
-public:
+ public:
   XPtrTorchFunctionSchema(void* x) : XPtrTorch(x, delete_function_schema) {}
-  explicit XPtrTorchFunctionSchema(std::shared_ptr<void> x) : XPtrTorch(x){};
+  explicit XPtrTorchFunctionSchema(std::shared_ptr<void> x) : XPtrTorch(x) {}
   XPtrTorchFunctionSchema(const XPtrTorchFunctionSchema& x)
-    : XPtrTorch(x.get_shared()){};
+    : XPtrTorch(x.get_shared()) {}
+  XPtrTorchFunctionSchema(XPtrTorchFunctionSchema&&) = default;
+  XPtrTorchFunctionSchema& operator=(const XPtrTorchFunctionSchema&) = default;
+  XPtrTorchFunctionSchema& operator=(XPtrTorchFunctionSchema&&) = default;
   XPtrTorchFunctionSchema(SEXP x);
   operator SEXP() const;
 };
 
 class XPtrTorchFunctionSchemaList : public XPtrTorch {
-public:
+ public:
   XPtrTorchFunctionSchemaList(void* x) : XPtrTorch(x, delete_function_schema_list) {}
-  explicit XPtrTorchFunctionSchemaList(std::shared_ptr<void> x) : XPtrTorch(x){};
+  explicit XPtrTorchFunctionSchemaList(std::shared_ptr<void> x) : XPtrTorch(x) {}
   XPtrTorchFunctionSchemaList(const XPtrTorchFunctionSchemaList& x)
-    : XPtrTorch(x.get_shared()){};
+    : XPtrTorch(x.get_shared()) {}
+  XPtrTorchFunctionSchemaList(XPtrTorchFunctionSchemaList&&) = default;
+  XPtrTorchFunctionSchemaList& operator=(const XPtrTorchFunctionSchemaList&) = default;
+  XPtrTorchFunctionSchemaList& operator=(XPtrTorchFunctionSchemaList&&) = default;
   XPtrTorchFunctionSchemaList(SEXP x);
   operator SEXP() const;
 };
 
 class XPtrTorchFunctionSchemaArgument : public XPtrTorch {
-public:
+ public:
   XPtrTorchFunctionSchemaArgument(void* x) : XPtrTorch(x, delete_function_schema_argument) {}
-  explicit XPtrTorchFunctionSchemaArgument(std::shared_ptr<void> x) : XPtrTorch(x){};
+  explicit XPtrTorchFunctionSchemaArgument(std::shared_ptr<void> x) : XPtrTorch(x) {}
   XPtrTorchFunctionSchemaArgument(const XPtrTorchFunctionSchemaArgument& x)
-    : XPtrTorch(x.get_shared()){};
+    : XPtrTorch(x.get_shared()) {}
+  XPtrTorchFunctionSchemaArgument(XPtrTorchFunctionSchemaArgument&&) = default;
+  XPtrTorchFunctionSchemaArgument& operator=(const XPtrTorchFunctionSchemaArgument&) = default;
+  XPtrTorchFunctionSchemaArgument& operator=(XPtrTorchFunctionSchemaArgument&&) = default;
   XPtrTorchFunctionSchemaArgument(SEXP x);
   operator SEXP() const;
 };
 
 class XPtrTorchFunctionSchemaArgumentList : public XPtrTorch {
-public:
+ public:
   XPtrTorchFunctionSchemaArgumentList(void* x) : XPtrTorch(x, delete_function_schema_argument_list) {}
-  explicit XPtrTorchFunctionSchemaArgumentList(std::shared_ptr<void> x) : XPtrTorch(x){};
+  explicit XPtrTorchFunctionSchemaArgumentList(std::shared_ptr<void> x) : XPtrTorch(x) {}
   XPtrTorchFunctionSchemaArgumentList(const XPtrTorchFunctionSchemaArgumentList& x)
-    : XPtrTorch(x.get_shared()){};
+    : XPtrTorch(x.get_shared()) {}
+  XPtrTorchFunctionSchemaArgumentList(XPtrTorchFunctionSchemaArgumentList&&) = default;
+  XPtrTorchFunctionSchemaArgumentList& operator=(const XPtrTorchFunctionSchemaArgumentList&) = default;
+  XPtrTorchFunctionSchemaArgumentList& operator=(XPtrTorchFunctionSchemaArgumentList&&) = default;
   XPtrTorchFunctionSchemaArgumentList(SEXP x);
   operator SEXP() const;
 };
@@ -508,7 +616,10 @@ public:
 class XPtrTorchTuple : public XPtrTorch {
  public:
   XPtrTorchTuple(void* x) : XPtrTorch(x, delete_tuple) {}
-  XPtrTorchTuple(const XPtrTorchTuple& x) : XPtrTorch(x.get_shared()){};
+  XPtrTorchTuple(const XPtrTorchTuple& x) : XPtrTorch(x.get_shared()) {}
+  XPtrTorchTuple(XPtrTorchTuple&&) = default;
+  XPtrTorchTuple& operator=(const XPtrTorchTuple&) = default;
+  XPtrTorchTuple& operator=(XPtrTorchTuple&&) = default;
   XPtrTorchTuple(SEXP x);
   operator SEXP() const;
 };
@@ -526,7 +637,10 @@ class XPtrTorchvector_Scalar : public XPtrTorch {
   operator SEXP() const;
   XPtrTorchvector_Scalar(SEXP x);
   XPtrTorchvector_Scalar(const XPtrTorchvector_Scalar& x)
-      : XPtrTorch(x.get_shared()){};
+      : XPtrTorch(x.get_shared()) {}
+  XPtrTorchvector_Scalar(XPtrTorchvector_Scalar&&) = default;
+  XPtrTorchvector_Scalar& operator=(const XPtrTorchvector_Scalar&) = default;
+  XPtrTorchvector_Scalar& operator=(XPtrTorchvector_Scalar&&) = default;
 };
 
 class XPtrTorchvector_int64_t : public XPtrTorch {
@@ -579,9 +693,12 @@ class XPtrTorchCompilationUnit : public XPtrTorch {
  public:
   XPtrTorchCompilationUnit(void* x) : XPtrTorch(x, delete_compilation_unit) {}
   XPtrTorchCompilationUnit(SEXP x);
-  explicit XPtrTorchCompilationUnit(std::shared_ptr<void> x) : XPtrTorch(x){};
+  explicit XPtrTorchCompilationUnit(std::shared_ptr<void> x) : XPtrTorch(x) {}
   XPtrTorchCompilationUnit(const XPtrTorchCompilationUnit& x)
-      : XPtrTorch(x.get_shared()){};
+      : XPtrTorch(x.get_shared()) {}
+  XPtrTorchCompilationUnit(XPtrTorchCompilationUnit&&) = default;
+  XPtrTorchCompilationUnit& operator=(const XPtrTorchCompilationUnit&) = default;
+  XPtrTorchCompilationUnit& operator=(XPtrTorchCompilationUnit&&) = default;
   operator SEXP() const;
 };
 
@@ -605,8 +722,6 @@ class XPtrTorchOptionaldouble : public XPtrTorch {
   XPtrTorchOptionaldouble(void* x) : XPtrTorch(x, delete_optional_double) {}
   XPtrTorchOptionaldouble(SEXP x);
 };
-
-#include <Rcpp.h>
 
 class XPtrTorchQScheme : public XPtrTorch {
  public:
@@ -632,7 +747,7 @@ class XPtrTorchLayout : public XPtrTorch {
   XPtrTorchLayout(void* x) : XPtrTorch(x, delete_layout) {}
   operator SEXP() const;
   XPtrTorchLayout(SEXP x);
-  explicit XPtrTorchLayout(std::shared_ptr<void> x) : XPtrTorch(x){};
+  explicit XPtrTorchLayout(std::shared_ptr<void> x) : XPtrTorch(x) {}
   XPtrTorchLayout() : XPtrTorch{NULL} {}
 };
 
@@ -673,63 +788,63 @@ class XPtrTorchvector_void : public XPtrTorch {
 };
 
 class optim_adamw {
-public:
+ public:
   std::shared_ptr<void> ptr;
-  optim_adamw (void* x);
-  optim_adamw (std::shared_ptr<void> x) : ptr(x) {}
-  optim_adamw (SEXP x);
-  operator SEXP () const;
-  void* get ();
+  optim_adamw(void* x);
+  optim_adamw(std::shared_ptr<void> x) : ptr(x) {}
+  optim_adamw(SEXP x);
+  operator SEXP() const;
+  void* get();
 };
 
 class optim_adam {
-public:
+ public:
   std::shared_ptr<void> ptr;
-  optim_adam (void* x);
-  optim_adam (std::shared_ptr<void> x) : ptr(x) {}
-  optim_adam (SEXP x);
-  operator SEXP () const;
-  void* get ();
+  optim_adam(void* x);
+  optim_adam(std::shared_ptr<void> x) : ptr(x) {}
+  optim_adam(SEXP x);
+  operator SEXP() const;
+  void* get();
 };
 
 class optim_adagrad {
-public:
+ public:
   std::shared_ptr<void> ptr;
-  optim_adagrad (void* x);
-  optim_adagrad (std::shared_ptr<void> x) : ptr(x) {}
-  optim_adagrad (SEXP x);
-  operator SEXP () const;
-  void* get ();
+  optim_adagrad(void* x);
+  optim_adagrad(std::shared_ptr<void> x) : ptr(x) {}
+  optim_adagrad(SEXP x);
+  operator SEXP() const;
+  void* get();
 };
 
 class optim_sgd {
-public:
+ public:
   std::shared_ptr<void> ptr;
-  optim_sgd (void* x);
-  optim_sgd (std::shared_ptr<void> x) : ptr(x) {}
-  optim_sgd (SEXP x);
-  operator SEXP () const;
-  void* get ();
+  optim_sgd(void* x);
+  optim_sgd(std::shared_ptr<void> x) : ptr(x) {}
+  optim_sgd(SEXP x);
+  operator SEXP() const;
+  void* get();
 };
 
 class optim_rmsprop {
-public:
+ public:
   std::shared_ptr<void> ptr;
-  optim_rmsprop (void* x);
-  optim_rmsprop (std::shared_ptr<void> x) : ptr(x) {}
-  optim_rmsprop (SEXP x);
-  operator SEXP () const;
-  void* get ();
+  optim_rmsprop(void* x);
+  optim_rmsprop(std::shared_ptr<void> x) : ptr(x) {}
+  optim_rmsprop(SEXP x);
+  operator SEXP() const;
+  void* get();
 };
 
 class optim_param_groups {
-public:
+ public:
   std::shared_ptr<void> ptr;
-  optim_param_groups (void* x);
-  optim_param_groups (std::shared_ptr<void> x) : ptr(x) {}
-  optim_param_groups (SEXP x);
-  operator SEXP () const;
-  void* get ();
+  optim_param_groups(void* x);
+  optim_param_groups(std::shared_ptr<void> x) : ptr(x) {}
+  optim_param_groups(SEXP x);
+  operator SEXP() const;
+  void* get();
 };
 
 template <class T>
@@ -894,4 +1009,4 @@ using TraceableFunction = XPtrTorchTraceableFunction;
 }  // namespace jit
 }  // namespace torch
 
-#endif  // TORCH_DYPES
+#endif  // TORCH_TYPES

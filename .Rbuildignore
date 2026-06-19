@@ -2,6 +2,8 @@
 ^\.Rproj\.user$
 ^.github.*
 ^.vscode.*
+^\.claude$
+^\.superset$
 ^.cache.*
 tools/torchgen/.Rbuildignore
 ^README\.Rmd$

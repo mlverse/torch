@@ -23,6 +23,7 @@
 // lantern.h are normally 'extern' (no storage), causing "undefined symbol"
 // errors. Weak linkage provides actual BSS definitions that satisfy RTLD_NOW,
 // while allowing the linker to merge duplicates across translation units.
+#undef LANTERN_API
 #if (defined(__GNUC__) || defined(__clang__)) && !defined(_WIN32)
 #define LANTERN_API __attribute__((weak))
 #else

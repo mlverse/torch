@@ -4,21 +4,16 @@
 #define TORCH_PRENV(x) TAG(x)
 
 static R_len_t dots_size(SEXP dots) {
-  if (dots == R_UnboundValue) {
-    // No dots at all in the environment
-    return 0;
-  } else if (dots == R_MissingArg) {
-    // Dots are present, but none were supplied
-    return 0;
-  } else {
+  if (TYPEOF(dots) == DOTSXP) {
     return Rf_length(dots);
   }
+  return 0;
 }
 
 // [[Rcpp::export]]
 std::vector<Rcpp::RObject> enquos0(Rcpp::Environment env) {
 #if R_VERSION >= R_Version(4, 5, 0)
-  SEXP dots = R_getVarEx(R_DotsSymbol, env, FALSE, R_UnboundValue);
+  SEXP dots = R_getVarEx(R_DotsSymbol, env, FALSE, R_NilValue);
 #else
   SEXP dots = Rf_findVarInFrame(env, R_DotsSymbol);
 #endif
@@ -50,7 +45,7 @@ std::vector<Rcpp::RObject> enquos0(Rcpp::Environment env) {
 
 void list2env(Rcpp::Environment e, Rcpp::List mask) {
   std::vector<std::string> nms = mask.names();
-  for (auto i = 0; i < nms.size(); i++) {
+  for (size_t i = 0; i < nms.size(); i++) {
     e.assign(nms[i], mask[nms[i]]);
   }
 }
@@ -65,7 +60,7 @@ std::vector<Rcpp::RObject> evaluate_slices(std::vector<Rcpp::RObject> quosures,
   SEXP quosure_e;
   SEXP quosure_c;
   SEXP na = Rcpp::LogicalVector::create(NA_LOGICAL);
-  for (auto i = 0; i < quosures.size(); i++) {
+  for (size_t i = 0; i < quosures.size(); i++) {
     quosure = quosures[i];
     quosure_c = quosure[0];
     quosure_e = quosure[1];
@@ -297,7 +292,7 @@ std::vector<XPtrTorchTensorIndex> slices_to_index(
   SEXP slice;
   int num_dim = 0;
   bool has_ellipsis = false;
-  for (auto i = 0; i < slices.size(); i++) {
+  for (size_t i = 0; i < slices.size(); i++) {
     slice = slices[i];
     auto info = index_append_sexp(index, slice, drop, device);
 
@@ -307,7 +302,7 @@ std::vector<XPtrTorchTensorIndex> slices_to_index(
 
     num_dim += info.dim;
     if (info.vector && !is_put) {
-      bool last_dim = i >= (slices.size() - 1);
+      bool last_dim = i >= slices.size() - 1;
       // we add an ellipsis to get all the other dimensions and append it to the
       // output vector. we only append if it's not the last dimension too.
       if (!last_dim && !has_ellipsis) {

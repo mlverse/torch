@@ -1,9 +1,10 @@
 Package: torch
 Type: Package
 Title: Tensors and Neural Networks with 'GPU' Acceleration
-Version: 0.16.3.9000
+Version: 0.17.0.9000
 Authors@R: c(
-    person("Daniel", "Falbel", email = "daniel@rstudio.com", role = c("aut", "cre", "cph")),
+    person("Tomasz", "Kalinowski", role = c("ctb", "cre"), email = "tomasz@posit.co"),
+    person("Daniel", "Falbel", email = "daniel@rstudio.com", role = c("aut", "cph")),
     person("Javier", "Luraschi", email = "jluraschi@gmail.com", role = c("aut")),
     person("Dmitriy", "Selivanov", role = c("ctb")),
     person("Athos", "Damiani", role = c("ctb")),
@@ -72,6 +73,7 @@ Collate:
     'compilation_unit.R'
     'conditions.R'
     'contrib.R'
+    'cpu-allocator.R'
     'creation-ops.R'
     'cuda.R'
     'device.R'
@@ -115,6 +117,7 @@ Collate:
     'layout.R'
     'linalg.R'
     'memory_format.R'
+    'mps.R'
     'nn.R'
     'nn-activation.R'
     'nn-batchnorm.R'

@@ -1,4 +1,3 @@
-#include <lantern/lantern.h>
 #include <torch.h>
 
 // [[Rcpp::export]]

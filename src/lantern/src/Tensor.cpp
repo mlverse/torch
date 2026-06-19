@@ -49,6 +49,13 @@ const char *_lantern_Tensor_StreamInsertion(void *x) {
     tensor = tensor.dequantize();
   }
 
+  // the stream insertion method calls is_contiguous() which is not
+  // supported for compressed sparse tensors (CSR, CSC, BSR, BSC).
+  // Convert to dense before printing.
+  if (tensor.is_sparse_csr()) {
+    tensor = tensor.to_dense();
+  }
+
   // the stream insertion method seems to cast tensors to float64
   // before printing and that's not supported by the MPS device
   // thus we first cast to CPU, print and later do a regex replace
@@ -412,5 +419,12 @@ bool _lantern_Tensor_is_sparse (void* x) {
   LANTERN_FUNCTION_START
   auto t = from_raw::Tensor(x);
   return t.is_sparse();
+  LANTERN_FUNCTION_END_RET(false)
+}
+
+bool _lantern_Tensor_is_sparse_csr (void* x) {
+  LANTERN_FUNCTION_START
+  auto t = from_raw::Tensor(x);
+  return t.is_sparse_csr();
   LANTERN_FUNCTION_END_RET(false)
 }

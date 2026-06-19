@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: torch 0.16.3.9000\n"
-"POT-Creation-Date: 2025-11-18 18:20+0100\n"
+"POT-Creation-Date: 2026-04-02 18:13+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"

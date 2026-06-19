@@ -192,3 +192,7 @@ reference:
   - title: Contrib
     contents:
       - contrib_sort_vertices
+  - title: Memory management
+    contents:
+      - set_cpu_allocator_config
+      - cpu_cache_flush

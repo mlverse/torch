@@ -506,6 +506,14 @@ LANTERN_OPTIONAL_DECLS(string_view)
   HOST_API void * lantern_Layout_strided() {LANTERN_CHECK_LOADED void * ret = _lantern_Layout_strided(); LANTERN_HOST_HANDLER return ret;}
   LANTERN_API void *(LANTERN_PTR _lantern_Layout_sparse)();
   HOST_API void * lantern_Layout_sparse() {LANTERN_CHECK_LOADED void * ret = _lantern_Layout_sparse(); LANTERN_HOST_HANDLER return ret;}
+  LANTERN_API void *(LANTERN_PTR _lantern_Layout_sparse_csr)();
+  HOST_API void * lantern_Layout_sparse_csr() {LANTERN_CHECK_LOADED void * ret = _lantern_Layout_sparse_csr(); LANTERN_HOST_HANDLER return ret;}
+  LANTERN_API void *(LANTERN_PTR _lantern_Layout_sparse_csc)();
+  HOST_API void * lantern_Layout_sparse_csc() {LANTERN_CHECK_LOADED void * ret = _lantern_Layout_sparse_csc(); LANTERN_HOST_HANDLER return ret;}
+  LANTERN_API void *(LANTERN_PTR _lantern_Layout_sparse_bsr)();
+  HOST_API void * lantern_Layout_sparse_bsr() {LANTERN_CHECK_LOADED void * ret = _lantern_Layout_sparse_bsr(); LANTERN_HOST_HANDLER return ret;}
+  LANTERN_API void *(LANTERN_PTR _lantern_Layout_sparse_bsc)();
+  HOST_API void * lantern_Layout_sparse_bsc() {LANTERN_CHECK_LOADED void * ret = _lantern_Layout_sparse_bsc(); LANTERN_HOST_HANDLER return ret;}
   LANTERN_API const char *(LANTERN_PTR _lantern_Layout_string)(void *x);
   HOST_API const char * lantern_Layout_string(void *x) {LANTERN_CHECK_LOADED const char * ret = _lantern_Layout_string(x); LANTERN_HOST_HANDLER return ret;}
   LANTERN_API void *(LANTERN_PTR _lantern_TensorIndex_new)();
@@ -955,6 +963,38 @@ HOST_API void set_lantern_allocator (void (*r_gc) (bool), uint64_t threshold_mb)
 {
   LANTERN_CHECK_LOADED
   _set_lantern_allocator(r_gc, threshold_mb);
+  LANTERN_HOST_HANDLER;
+}
+
+LANTERN_API void (LANTERN_PTR _lantern_set_allocator_bypass) (bool bypass);
+HOST_API void lantern_set_allocator_bypass (bool bypass)
+{
+  LANTERN_CHECK_LOADED
+  _lantern_set_allocator_bypass(bypass);
+  LANTERN_HOST_HANDLER;
+}
+
+LANTERN_API void (LANTERN_PTR _lantern_set_cache_max_size) (uint64_t max_size_mb);
+HOST_API void lantern_set_cache_max_size (uint64_t max_size_mb)
+{
+  LANTERN_CHECK_LOADED
+  _lantern_set_cache_max_size(max_size_mb);
+  LANTERN_HOST_HANDLER;
+}
+
+LANTERN_API void (LANTERN_PTR _lantern_set_cache_min_block_size) (uint64_t min_size_bytes);
+HOST_API void lantern_set_cache_min_block_size (uint64_t min_size_bytes)
+{
+  LANTERN_CHECK_LOADED
+  _lantern_set_cache_min_block_size(min_size_bytes);
+  LANTERN_HOST_HANDLER;
+}
+
+LANTERN_API void (LANTERN_PTR _lantern_flush_cache) ();
+HOST_API void lantern_flush_cache ()
+{
+  LANTERN_CHECK_LOADED
+  _lantern_flush_cache();
   LANTERN_HOST_HANDLER;
 }
 
@@ -2451,6 +2491,13 @@ HOST_API bool lantern_backend_has_mps () {
   return ret;
 }
 
+LANTERN_API void (LANTERN_PTR _lantern_mps_synchronize) ();
+HOST_API void lantern_mps_synchronize () {
+  LANTERN_CHECK_LOADED
+  _lantern_mps_synchronize();
+  LANTERN_HOST_HANDLER;
+}
+
 LANTERN_API void (LANTERN_PTR _lantern_cuda_empty_cache) ();
 HOST_API void lantern_cuda_empty_cache () {
   LANTERN_CHECK_LOADED
@@ -2478,6 +2525,15 @@ HOST_API bool lantern_Tensor_is_sparse (void* x)
 {
   LANTERN_CHECK_LOADED
   bool ret = _lantern_Tensor_is_sparse(x);
+  LANTERN_HOST_HANDLER;
+  return ret;
+}
+
+LANTERN_API bool (LANTERN_PTR _lantern_Tensor_is_sparse_csr) (void* x);
+HOST_API bool lantern_Tensor_is_sparse_csr (void* x)
+{
+  LANTERN_CHECK_LOADED
+  bool ret = _lantern_Tensor_is_sparse_csr(x);
   LANTERN_HOST_HANDLER;
   return ret;
 }
@@ -10565,13 +10621,11 @@ bool laternCloseLibrary(void *pLib, std::string *pError)
   LOAD_SYMBOL(_lantern_optional_##name##_delete);             \
 
 
-bool lanternInit(const std::string &libPath, std::string *pError)
+// Split lanternInit into multiple smaller functions to avoid
+// "variable tracking size limit exceeded" compiler note (GH #1452)
+
+static bool lanternInitManualSymbols(std::string *pError)
 {
-  if (!lanternLoadLibrary(libPath, pError))
-    return false;
-
-  lantern_loaded = true;
-
   LANTERN_OPTIONAL_LOAD_SYMBOL(dimname_list)
   LANTERN_OPTIONAL_LOAD_SYMBOL(generator)
   LANTERN_OPTIONAL_LOAD_SYMBOL(tensor)
@@ -10820,6 +10874,10 @@ bool lanternInit(const std::string &libPath, std::string *pError)
   LOAD_SYMBOL(_lantern_JITModule_delete);
   LOAD_SYMBOL(_lantern_TraceableFunction_delete);
   LOAD_SYMBOL(_set_lantern_allocator);
+  LOAD_SYMBOL(_lantern_set_allocator_bypass);
+  LOAD_SYMBOL(_lantern_set_cache_max_size);
+  LOAD_SYMBOL(_lantern_set_cache_min_block_size);
+  LOAD_SYMBOL(_lantern_flush_cache);
   LOAD_SYMBOL(_lantern_vector_bool_delete);
   LOAD_SYMBOL(_lantern_normal_double_double_intarrayref_generator_tensoroptions);
   LOAD_SYMBOL(_lantern_normal_tensor_tensor_generator);
@@ -10988,10 +11046,12 @@ LOAD_SYMBOL(_lantern_torch_parallel_info);
 LOAD_SYMBOL(_lantern_set_cuda_allocator_thresholds);
 LOAD_SYMBOL(_lantern_cuda_synchronize);
 LOAD_SYMBOL(_lantern_backend_has_mps);
+LOAD_SYMBOL(_lantern_mps_synchronize);
 LOAD_SYMBOL(_lantern_cuda_empty_cache);
 LOAD_SYMBOL(_lantern_cuda_record_memory_history);
 LOAD_SYMBOL(_lantern_cuda_memory_snapshot);
 LOAD_SYMBOL(_lantern_Tensor_is_sparse);
+LOAD_SYMBOL(_lantern_Tensor_is_sparse_csr);
 LOAD_SYMBOL(_lantern_IntArrayRef_get);
 LOAD_SYMBOL(_lantern_autograd_zero_grad);
 LOAD_SYMBOL(_lantern_amp_is_autocast_gpu_enabled);
@@ -11075,6 +11135,12 @@ LOAD_SYMBOL(_ignite_optim_param_groups_size);
 LOAD_SYMBOL(_ignite_optim_get_param_group_params);
 LOAD_SYMBOL(_ignite_optim_step);
 LOAD_SYMBOL(_ignite_optim_zero_grad);
+
+  return true;
+}
+
+static bool lanternInitAutogenSymbols(std::string *pError)
+{
   /* Autogen Symbols -- Start */
   LOAD_SYMBOL(_lantern__cast_byte_tensor_bool)
   LOAD_SYMBOL(_lantern__cast_char_tensor_bool)
@@ -14766,6 +14832,21 @@ LOAD_SYMBOL(_ignite_optim_zero_grad);
   LOAD_SYMBOL(_lantern__fused_adagrad_out_tensorlist_tensorlist_tensorlist_tensorlist_tensorlist_tensor_double_double_double_bool_tensor_tensor)
   LOAD_SYMBOL(_lantern__fused_adagrad_tensorlist_tensorlist_tensorlist_tensorlist_tensor_double_double_double_bool_tensor_tensor)
   /* Autogen Symbols -- End */
+
+  return true;
+}
+
+bool lanternInit(const std::string &libPath, std::string *pError)
+{
+  if (!lanternLoadLibrary(libPath, pError))
+    return false;
+
+  lantern_loaded = true;
+
+  if (!lanternInitManualSymbols(pError))
+    return false;
+  if (!lanternInitAutogenSymbols(pError))
+    return false;
 
   return true;
 }

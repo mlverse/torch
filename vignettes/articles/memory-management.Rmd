@@ -27,30 +27,81 @@ GPU (CUDA devices) or [MPS](https://developer.apple.com/documentation/metalperfo
 
 ## CPU
 
-On the CPU, torch will possibly call the R garbage collector in two moments:
+### The GC problem
 
-1. Every 4GB of memory allocated by LibTorch we make a call to the R garbage collector
-   so it cleans up dangling tensors. The 4GB threshold can be controled by setting 
-   the option `torch.threshold_call_gc`, for example using:
-   
-   ```
+Python frees tensors immediately via reference counting: when a variable is
+reassigned, the old tensor's memory is returned to the system allocator right away.
+R uses garbage collection (GC) instead, meaning old tensors accumulate in memory
+until GC runs. For large tensors (roughly > 1 MB), the system allocator uses
+`mmap`/`munmap` system calls to obtain and release memory. When many dead-but-not-yet-collected
+tensors are still mapped, new allocations can't reuse that memory and must request
+fresh pages from the OS — which is expensive.
+
+### CPU block cache
+
+To compensate, torch includes a **CPU block cache** that intercepts freed tensor
+memory and holds it in an in-process pool, keyed by allocation size. When a new
+tensor of the same size is needed, the cache returns a block instantly — skipping
+the costly `mmap`/`munmap` round-trip entirely. This is especially effective during
+training loops, where the same tensor shapes are allocated and freed repeatedly
+across iterations.
+
+The cache is flushed automatically whenever the allocator triggers R's garbage
+collector (see below), so memory is eventually returned to the OS. You can also
+flush it manually with [cpu_cache_flush()].
+
+### GC triggering
+
+On the CPU, torch will call the R garbage collector in two situations:
+
+1. **Periodic threshold**: Every 4 GB of cumulative allocations, the allocator
+   triggers `gc()` to clean up dangling tensors. After GC runs, the block cache
+   is flushed so that freed memory is returned to the OS. The threshold can be
+   controlled with the `torch.threshold_call_gc` option (in MB):
+
+   ```r
    options(torch.threshold_call_gc = 4000)
    ```
-   
-   This option must be set before calling `library(torch)` or calling any torch
-   function for the first time, as this setting is applied when torch starts up.
 
-2. If torch fails allocating enough memory for for creating a new tensor, the 
-   garbage collector is called and the allocation is retried. Note: in some OS's
-   (specially the UNIX based) it's very hard for an allocation to fail if it's
-   not too large, because the system tries to use swap. If too much swaping is
-   used it's possible that the system hangs completely. 
-   
-   If your R session is hanging, and you are convinced that it should have enough 
-   memory for the operations, try setting a lower value for the `torch.threshold_call_gc` 
-   option, with this you will call the GC more often and make sure tensors are
-   quickly released from memory. Note though, that calling the GC too often adds
-   a lot of overhead, so this will probably slow down the program execution.
+   This option must be set before calling `library(torch)`, as it is applied at
+   startup.
+
+2. **On allocation failure**: If `alloc_cpu()` fails, the allocator first flushes
+   the block cache, then retries. If that still fails, it triggers a full GC and
+   retries once more.
+
+   Note: on most UNIX-based systems (Linux, macOS), memory allocations almost
+   never fail — the OS will overcommit memory and use swap instead. If swap is
+   exhausted, the system may hang or the OOM killer may terminate the process,
+   rather than returning an allocation error that torch could handle gracefully.
+
+   If your R session is hanging and you believe it should have enough memory,
+   try lowering `torch.threshold_call_gc` to trigger GC more frequently. This
+   adds overhead but ensures tensors are released sooner.
+
+### Configuration
+
+All CPU allocator settings can be adjusted at runtime with
+[set_cpu_allocator_config()], or via R options before loading torch:
+
+| Option | Default | Description |
+|--------|---------|-------------|
+| `torch.threshold_call_gc` | 4000 | GC trigger threshold in MB |
+| `torch.cpu_cache_enabled` | `TRUE` | Enable/disable the block cache |
+| `torch.cpu_cache_max_size_mb` | 4000 | Maximum cached memory in MB |
+| `torch.cpu_cache_min_block_size` | 1024 | Minimum block size (bytes) to cache |
+
+Example: reducing cache size on a memory-constrained system:
+
+```r
+set_cpu_allocator_config(cache_max_size_mb = 512)
+```
+
+To release all cached memory immediately:
+
+```r
+cpu_cache_flush()
+```
 
 
 ## CUDA

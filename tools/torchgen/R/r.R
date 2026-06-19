@@ -131,7 +131,7 @@ internal_funs <- c("logical_not", "max_pool1d_with_indices", "max_pool2d_with_in
                    "max_pool2d_with_indices_out", "max_pool3d_with_indices",
                    "max_pool3d_with_indices_out", "max", "min", "max_out", "min_out",
                    "nll_loss", "nll_loss2d", "bartlett_window", "blackman_window",
-                   "hamming_window", "hann_window", "normal",
+                   "hamming_window", "hann_window",
                    "result_type", "sparse_coo_tensor", "stft",
                    "tensordot", "tril_indices", "triu_indices",
                    "multilabel_margin_loss", "multi_margin_loss",
@@ -417,22 +417,214 @@ r_return_types <- function(decls) {
   glue::glue("return_types <- list({glue::glue_collapse(types, ', ')})")
 }
 
+# Dispatch is trivial when there is only one overload, so the resolved
+# C++ function name is fully determined at codegen time.
+is_trivial_dispatch <- function(decls) {
+  length(decls) == 1
+}
+
+# Identify the single dispatch arg that has multiple types across overloads.
+# Returns NULL if there isn't exactly one such arg.
+get_single_multitype_arg <- function(decls) {
+  dispatch_args <- get_dispatch_arguments(decls)
+  multitype_args <- Filter(function(a) {
+    length(r_argument_expected_types(a, decls)) > 1
+  }, dispatch_args)
+  if (length(multitype_args) == 1) multitype_args[[1]] else NULL
+}
+
+# Map a set of expected types to an R expression that checks whether the
+# dispatch arg should resolve to a given target type. Returns NULL if we
+# don't have a known check for this type pair.
+r_type_check <- function(target_type, all_types, arg_r_name) {
+  pair <- sort(all_types)
+  key <- paste(pair, collapse = "|")
+
+  # Scalar | Tensor — the dominant case (229 functions)
+  if (key == "Scalar|Tensor") {
+    if (target_type == "Tensor")
+      return(glue::glue("is_tensor_dispatch({arg_r_name})"))
+    else
+      return(glue::glue("!is_tensor_dispatch({arg_r_name})"))
+  }
+
+  # Dimname | int64_t
+  if (key == "Dimname|int64_t") {
+    if (target_type == "Dimname")
+      return(glue::glue("is.character({arg_r_name})"))
+    else
+      return(glue::glue("!is.character({arg_r_name})"))
+  }
+
+  # Tensor | double
+  if (key == "Tensor|double") {
+    if (target_type == "Tensor")
+      return(glue::glue("is_tensor_dispatch({arg_r_name})"))
+    else
+      return(glue::glue("!is_tensor_dispatch({arg_r_name})"))
+  }
+
+  # DimnameList | IntArrayRef
+  if (key == "DimnameList|IntArrayRef") {
+    if (target_type == "DimnameList")
+      return(glue::glue("is.character({arg_r_name})"))
+    else
+      return(glue::glue("!is.character({arg_r_name})"))
+  }
+
+  # IntArrayRef | c10::string_view
+  if (key == "IntArrayRef|c10::string_view") {
+    if (target_type == "c10::string_view")
+      return(glue::glue("is.character({arg_r_name})"))
+    else
+      return(glue::glue("!is.character({arg_r_name})"))
+  }
+
+  # int64_t | IntArrayRef
+  if (key == "IntArrayRef|int64_t") {
+    if (target_type == "int64_t")
+      return(glue::glue("is_int64_dispatch({arg_r_name})"))
+    else
+      return(glue::glue("!is_int64_dispatch({arg_r_name})"))
+  }
+
+  # IntArrayRef | Tensor
+  if (key == "IntArrayRef|Tensor") {
+    if (target_type == "Tensor")
+      return(glue::glue("inherits({arg_r_name}, 'torch_tensor')"))
+    else
+      return(glue::glue("!inherits({arg_r_name}, 'torch_tensor')"))
+  }
+
+  # Tensor | TensorList
+  if (key == "Tensor|TensorList") {
+    if (target_type == "Tensor")
+      return(glue::glue("inherits({arg_r_name}, 'torch_tensor')"))
+    else
+      return(glue::glue("!inherits({arg_r_name}, 'torch_tensor')"))
+  }
+
+  # int64_t | Tensor
+  if (key == "Tensor|int64_t") {
+    if (target_type == "Tensor")
+      return(glue::glue("inherits({arg_r_name}, 'torch_tensor')"))
+    else
+      return(glue::glue("!inherits({arg_r_name}, 'torch_tensor')"))
+  }
+
+  # Scalar | c10::string_view
+  if (key == "Scalar|c10::string_view") {
+    if (target_type == "c10::string_view")
+      return(glue::glue("is.character({arg_r_name})"))
+    else
+      return(glue::glue("!is.character({arg_r_name})"))
+  }
+
+  NULL
+}
+
+# Try to generate inline if/else dispatch for functions with exactly 2
+# overloads where one dispatch arg has multiple types.
+# Returns NULL if inline dispatch is not possible.
+r_inline_dispatch <- function(decls, fun_type) {
+  if (length(decls) != 2) return(NULL)
+  multitype_arg <- get_single_multitype_arg(decls)
+  if (is.null(multitype_arg)) return(NULL)
+
+  arg_r_name <- r_argument_name(multitype_arg)
+  all_types <- r_argument_expected_types(multitype_arg, decls)
+
+  # Group overloads by the type of the multi-type dispatch arg.
+  overload_by_type <- list()
+  for (decl in decls) {
+    arg_obj <- Filter(function(x) x$name == multitype_arg, decl$arguments)
+    if (length(arg_obj) == 0) return(NULL)
+    dtype <- r_mask_dynamic_type_name(arg_obj[[1]]$dynamic_type)
+    overload_by_type[[dtype]] <- decl
+  }
+
+  # Generate type check for each overload
+  branches <- list()
+  for (dtype in names(overload_by_type)) {
+    check <- r_type_check(dtype, all_types, arg_r_name)
+    if (is.null(check)) return(NULL)  # unsupported type pair, fall back
+
+    decl <- overload_by_type[[dtype]]
+    fn_name <- cpp_function_name(decl, fun_type)
+    fn_args <- purrr::map_chr(decl$arguments, ~ r_argument_name(.x$name))
+    args_str <- glue::glue_collapse(fn_args, sep = ", ")
+    branches[[length(branches) + 1]] <- list(
+      check = check,
+      call = glue::glue("{fn_name}({args_str})")
+    )
+  }
+
+  if (length(branches) < 2) return(NULL)
+
+  # Build if/else chain: first branch gets `if`, last gets `else`
+  lines <- character()
+  for (i in seq_along(branches)) {
+    if (i == 1) {
+      lines <- c(lines, glue::glue("if ({branches[[i]]$check}) {{"))
+    } else if (i == length(branches)) {
+      lines <- c(lines, "} else {")
+    } else {
+      lines <- c(lines, glue::glue("}} else if ({branches[[i]]$check}) {{"))
+    }
+    lines <- c(lines, glue::glue("  {branches[[i]]$call}"))
+  }
+  lines <- c(lines, "}")
+  paste(lines, collapse = "\n")
+}
+
+# For trivial dispatch, compute the resolved C++ function name at codegen time.
+# This reuses the same make_cpp_function_name used by cpp.R.
+resolve_trivial_fn_name <- function(decls, fun_type) {
+  dispatch_args <- get_dispatch_arguments(decls)
+  if (length(dispatch_args) == 0) {
+    return(make_cpp_function_name(decls[[1]]$name, list(), fun_type))
+  }
+  arg_types <- list()
+  for (a in dispatch_args) {
+    types <- r_argument_expected_types(a, decls)
+    arg_types[[r_argument_name(a)]] <- types
+  }
+  make_cpp_function_name(decls[[1]]$name, arg_types, fun_type)
+}
+
+# Get the ordered arg names that the resolved C++ function expects.
+# For trivial dispatch all overloads resolve to the same function; we find
+# the matching overload and return its full arg list (in declaration order).
+resolve_trivial_fn_args <- function(decls, fun_type) {
+  fn_name <- resolve_trivial_fn_name(decls, fun_type)
+  # Check each overload to find the one whose generated name matches
+  for (decl in decls) {
+    candidate <- cpp_function_name(decl, fun_type)
+    if (candidate == fn_name) {
+      return(purrr::map_chr(decl$arguments, ~ r_argument_name(.x$name)))
+    }
+  }
+  # Fallback: use get_arguments_order (should not happen for trivial dispatch)
+  purrr::map_chr(get_arguments_order(decls), r_argument_name)
+}
+
 r_namespace_body <- function(decls) {
 
-  glue::glue(.sep = "\n",
-  "{r_namespace_list_of_arguments(decls)}",
-  "{r_arguments_expected_types(decls)}",
-  "{r_arguments_with_no_default(decls)}",
-  "{r_return_types(decls)}",
-  "call_c_function(",
-    "fun_name = '{decls[[1]]$name}',",
-    "args = args,",
-    "expected_types = expected_types,",
-    "nd_args = nd_args,",
-    "return_types = return_types,",
-    "fun_type = 'namespace'",
-  ")"
-  )
+  if (is_trivial_dispatch(decls)) {
+    fn_name <- resolve_trivial_fn_name(decls, "namespace")
+    fn_args <- resolve_trivial_fn_args(decls, "namespace")
+    args_str <- glue::glue_collapse(fn_args, sep = ", ")
+    return(glue::glue("{fn_name}({args_str})"))
+  }
+
+  inline <- r_inline_dispatch(decls, "namespace")
+  if (!is.null(inline)) return(inline)
+
+  # Use C++ dispatcher for remaining multi-overload functions
+  all_args <- purrr::map_chr(get_arguments_order(decls), r_argument_name)
+  args_mget <- glue::glue('"{all_args}"') %>% glue::glue_collapse(sep = ", ")
+  dispatcher <- glue::glue("cpp_torch_dispatch_namespace_{decls[[1]]$name}")
+  glue::glue("{dispatcher}(mget(x = c({args_mget})))")
 
 }
 
@@ -486,22 +678,30 @@ r_method_signature <- function(decls) {
 
 r_method_body <- function(decls) {
 
-  glue::glue(
-    "{r_method_list_of_arguments(decls)}",
-    "args <- c(list(self = self), args)",
-    "{r_arguments_expected_types(decls)}",
-    "{r_arguments_with_no_default(decls)}",
-    "{r_return_types(decls)}",
-    "call_c_function(",
-    "  fun_name = '{decls[[1]]$name}',",
-    "  args = args,",
-    "  expected_types = expected_types,",
-    "  nd_args = nd_args,",
-    "  return_types = return_types,",
-    "  fun_type = 'method'",
-    ")",
-    .sep = "\n",
-  )
+  if (is_trivial_dispatch(decls)) {
+    fn_name <- resolve_trivial_fn_name(decls, "method")
+    fn_args <- resolve_trivial_fn_args(decls, "method")
+    args_str <- glue::glue_collapse(fn_args, sep = ", ")
+    return(glue::glue("{fn_name}({args_str})"))
+  }
+
+  inline <- r_inline_dispatch(decls, "method")
+  if (!is.null(inline)) return(inline)
+
+  # Use C++ dispatcher for remaining multi-overload methods.
+  # Methods need self prepended to the args list.
+  all_args <- purrr::map_chr(get_arguments_order(decls), r_argument_name)
+  other_args <- all_args[all_args != "self"]
+  if (length(other_args) > 0) {
+    args_mget <- glue::glue('"{other_args}"') %>% glue::glue_collapse(sep = ", ")
+    glue::glue(
+      'args <- mget(x = c({args_mget}))\n',
+      'args <- c(list(self = self), args)\n',
+      'cpp_torch_dispatch_method_{decls[[1]]$name}(args)'
+    )
+  } else {
+    glue::glue('cpp_torch_dispatch_method_{decls[[1]]$name}(list(self = self))')
+  }
 
 }
 
@@ -509,6 +709,10 @@ r <- function(path) {
 
   namespace <- declarations() %>%
     purrr::discard(~.x$name %in% SKIP_R_BINDIND[!SKIP_R_BINDIND %in% internal_funs]) %>%
+    purrr::discard(~.x$name == "range" && length(.x$arguments) == 3) %>%
+    purrr::discard(~.x$name == "range_out" && length(.x$arguments) == 3) %>%
+    purrr::discard(~.x$name == "arange" && length(.x$arguments) == 3) %>%
+    purrr::discard(~.x$name == "stft" && length(.x$arguments) == 9) %>%
     purrr::keep(~"namespace" %in% .x$method_of)
 
   namespace_nms <- purrr::map_chr(namespace, ~.x$name)
