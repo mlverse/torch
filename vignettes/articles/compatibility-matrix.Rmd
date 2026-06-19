@@ -50,4 +50,4 @@ Here is a mapping overview of the major GPU architectures to their typical model
 
 : GPU architectures reference
 
-[^1] Previous architecture deprecated according to [pytorch issue 172351] (https://github.com/pytorch/pytorch/issues/172351)
+[^1] Previous architecture deprecated according to [pytorch issue 172351](https://github.com/pytorch/pytorch/issues/172351)
