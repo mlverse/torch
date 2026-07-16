@@ -61,7 +61,7 @@ jobs:
           echo "LANTERN_BASE_URL=${{ runner.temp }}/" >> $GITHUB_ENV
         shell: bash
 
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
 
       - uses: ./.github/actions/setup-r
         with:
@@ -120,7 +120,7 @@ jobs:
           echo "LANTERN_BASE_URL=${{ runner.temp }}/" >> $GITHUB_ENV
         shell: bash
 
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
 
       - uses: ./.github/actions/setup-r
         with:
@@ -164,7 +164,7 @@ jobs:
       TORCH_URL: 'https://github.com/mlverse/libtorch-mac-m1/releases/download/LibTorch-for-R/libtorch-linux-cuda128-Release-x86_64-v2.8.0.zip'
 
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
 
       - name: Create lantern directory
         run: mkdir -p lantern
