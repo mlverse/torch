@@ -1,6 +1,7 @@
 # Serialization
 
 ``` r
+
 library(torch)
 ```
 
@@ -27,6 +28,7 @@ it for long term storage.
 You can save any object of type `torch_tensor` to the disk using:
 
 ``` r
+
 x <- torch_randn(10, 10)
 torch_save(x, "tensor.pt")
 x_ <- torch_load("tensor.pt")
@@ -44,6 +46,7 @@ When saving an `nn_module`, all the object is serialized including the
 model structure and it’s state.
 
 ``` r
+
 module <- nn_module(
   "my_module",
   initialize = function() {
@@ -80,6 +83,7 @@ You can then reload the state dict in R and reload it into the model
 with:
 
 ``` r
+
 state_dict <- load_state_dict(fpath)
 model <- Model()
 model$load_state_dict(state_dict)
@@ -99,6 +103,7 @@ In order to this we use the `state_dict()` and
 methods from the optimizer combined with `torch_save`:
 
 ``` r
+
 model <- nn_linear(1, 1)
 opt <- optim_adam(model$parameters)
 

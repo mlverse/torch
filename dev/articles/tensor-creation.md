@@ -1,6 +1,7 @@
 # Creating tensors
 
 ``` r
+
 library(torch)
 ```
 
@@ -16,6 +17,7 @@ creates an equivalent `torch_tensor`.
 You can see a few examples below:
 
 ``` r
+
 torch_tensor(c(1,2,3))
 #> torch_tensor
 #>  1
@@ -50,6 +52,7 @@ You can always modify `dtype` and `device` when converting an R object
 to a torch tensor. For example:
 
 ``` r
+
 torch_tensor(1, dtype = torch_long())
 #> torch_tensor
 #>  1
@@ -81,14 +84,15 @@ the `...` argument to pass the size of the dimensions. For example, the
 code below will create a normally distributed tensor with shape 5x3.
 
 ``` r
+
 x <- torch_randn(5, 3)
 x
 #> torch_tensor
-#> -0.4861 -0.4182  0.5396
-#>  0.8237 -0.1378 -1.0305
-#> -0.2168  0.2183 -0.9247
-#>  2.0781 -0.5104  1.6765
-#>  0.4441 -0.3723 -0.1106
+#> -0.5966 -1.4002  0.1533
+#>  1.0734 -0.0776 -0.1400
+#> -0.0992  0.8115 -0.4353
+#> -1.6759  0.3184 -0.0107
+#> -1.2494  0.1753  0.3063
 #> [ CPUFloatType{5,3} ]
 ```
 
@@ -96,6 +100,7 @@ Another example is `torch_ones`, which creates a tensor filled with
 ones.
 
 ``` r
+
 x <- torch_ones(2, 4, dtype = torch_int64(), device = "cpu")
 x
 #> torch_tensor
@@ -132,6 +137,7 @@ Once a tensor exists you can convert between `dtype`s and move to a
 different device with `to` method. For example:
 
 ``` r
+
 x <- torch_tensor(1)
 y <- x$to(dtype = torch_int32())
 x

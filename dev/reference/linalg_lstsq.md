@@ -43,7 +43,9 @@ A list `(solution, residuals, rank, singular_values)`.
 
 ## Details
 
-$$\underset{X \in \mathbb{K}^{n \times k}}{\min}\parallel AX - B\parallel_{F}$$X∈Kn×kmin​∥AX−B∥F​
+``` math
+\min_{X \in \mathbb{K}^{n \times k}} \|AX - B\|_F
+```
 
 where denotes the Frobenius norm. Supports inputs of float, double,
 cfloat and cdouble dtypes.

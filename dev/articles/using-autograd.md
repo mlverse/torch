@@ -1,6 +1,7 @@
 # Using autograd
 
 ``` r
+
 library(torch)
 ```
 
@@ -28,15 +29,17 @@ this “recording” to happen, tensors have to be created with
 `requires_grad = TRUE`. E.g.
 
 ``` r
+
 x <- torch_ones(2,2, requires_grad = TRUE)
 ```
 
 To be clear, this is a tensor *with respect to which* gradients have to
 be calculated – normally, a tensor representing a weight or a bias, not
-the input data [¹](#fn1). If we now perform some operation on that
-tensor, assigning the result to `y`
+the input data [^1]. If we now perform some operation on that tensor,
+assigning the result to `y`
 
 ``` r
+
 y <- x$mean()
 ```
 
@@ -44,6 +47,7 @@ we find that `y` now has a non-empty `grad_fn` that tells torch how to
 compute the gradient of `y` with respect to `x`:
 
 ``` r
+
 y$grad_fn
 #> MeanBackward0
 ```
@@ -52,6 +56,7 @@ Actual computation of gradients is triggered by calling `backward()` on
 the output tensor.
 
 ``` r
+
 y$backward()
 ```
 
@@ -59,6 +64,7 @@ That executed, `x` now has a non-empty field `grad` that stores the
 gradient of `y` with respect to `x`:
 
 ``` r
+
 x$grad
 #> torch_tensor
 #>  0.2500  0.2500
@@ -75,6 +81,7 @@ gradients – while of course they have to be computed – aren’t stored, in
 order to save memory.
 
 ``` r
+
 x1 <- torch_ones(2,2, requires_grad = TRUE)
 x2 <- torch_tensor(1.1, requires_grad = TRUE)
 y <- x1 * (x2 + 2)
@@ -88,6 +95,7 @@ Starting from `out$grad_fn`, we can follow the graph all back to the
 leaf nodes:
 
 ``` r
+
 # how to compute the gradient for mean, the last operation executed
 out$grad_fn
 #> MeanBackward0
@@ -122,6 +130,7 @@ respective gradients created. Without our calls to `retain_grad` above,
 `z$grad` and `y$grad` would be empty:
 
 ``` r
+
 out$backward()
 z$grad
 #> torch_tensor
@@ -152,6 +161,7 @@ For a single new line calling `loss$backward()`, now a number of lines
 (that did manual backprop) are gone:
 
 ``` r
+
 ### generate training data -----------------------------------------------------
 # input dimensionality (number of input features)
 d_in <- 3
@@ -207,33 +217,31 @@ for (t in 1:200) {
     })
     
 }
-#> 10 15.43936 
-#> 20 14.97118 
-#> 30 14.53257 
-#> 40 14.12 
-#> 50 13.73146 
-#> 60 13.36592 
-#> 70 13.02268 
-#> 80 12.70011 
-#> 90 12.3967 
-#> 100 12.11105 
-#> 110 11.8419 
-#> 120 11.58658 
-#> 130 11.34527 
-#> 140 11.11734 
-#> 150 10.90187 
-#> 160 10.69796 
-#> 170 10.50478 
-#> 180 10.32138 
-#> 190 10.14742 
-#> 200 9.981853
+#> 10 152.082 
+#> 20 136.4988 
+#> 30 123.133 
+#> 40 111.5728 
+#> 50 101.5116 
+#> 60 92.78075 
+#> 70 85.1498 
+#> 80 78.43261 
+#> 90 72.46456 
+#> 100 67.12895 
+#> 110 62.34062 
+#> 120 58.03084 
+#> 130 54.14169 
+#> 140 50.63132 
+#> 150 47.41655 
+#> 160 44.49591 
+#> 170 41.83249 
+#> 180 39.40317 
+#> 190 37.17709 
+#> 200 35.1328
 ```
 
 We still manually compute the forward pass, and we still manually update
 the weights. In the last two chapters of this section, we’ll see how
 these parts of the logic can be made more modular and reusable, as well.
 
-------------------------------------------------------------------------
-
-1.  Unless we *want* to change the data, as in adversarial example
+[^1]: Unless we *want* to change the data, as in adversarial example
     generation

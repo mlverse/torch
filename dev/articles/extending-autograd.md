@@ -1,6 +1,7 @@
 # Extending Autograd
 
 ``` r
+
 library(torch)
 ```
 
@@ -49,6 +50,7 @@ forward’s `ctx` properly in order to ensure that the new
 Below you can find code for a linear function:
 
 ``` r
+
 linear <- autograd_function(
   forward = function(ctx, input, weight, bias = NULL) {
     ctx$save_for_backward(input = input, weight = weight, bias = bias)
@@ -86,6 +88,7 @@ Here, we give an additional example of a function that is parametrized
 by non-Tensor arguments:
 
 ``` r
+
 mul_constant <- autograd_function(
   forward = function(ctx, tensor, constant) {
     ctx$save_for_backward(constant = constant)
@@ -101,6 +104,7 @@ mul_constant <- autograd_function(
 ```
 
 ``` r
+
 x <- torch_tensor(1, requires_grad = TRUE)
 o <- mul_constant(x, 2)
 o$backward()

@@ -27,7 +27,9 @@ A real-valued tensor, even when `A` is complex.
 
 ## Details
 
-$$\kappa(A) = \parallel A\parallel_{p}\parallel A^{- 1}\parallel_{p}$$κ(A)=∥A∥p​∥A−1∥p​
+``` math
+\kappa(A) = \|A\|_p\|A^{-1}\|_p
+```
 
 The condition number of `A` measures the numerical stability of the
 linear system `AX = B` with respect to a matrix norm.
@@ -50,7 +52,9 @@ to be square and invertible.
 For `p` in `(2, -2)`, this function can be computed in terms of the
 singular values
 
-$$\kappa_{2}(A) = \frac{\sigma_{1}}{\sigma_{n}}\qquad\kappa_{- 2}(A) = \frac{\sigma_{n}}{\sigma_{1}}$$κ2​(A)=σn​σ1​​κ−2​(A)=σ1​σn​​
+``` math
+\kappa_2(A) = \frac{\sigma_1}{\sigma_n}\qquad \kappa_{-2}(A) = \frac{\sigma_n}{\sigma_1}
+```
 
 In these cases, it is computed using
 [`linalg_svd()`](https://torch.mlverse.org/docs/dev/reference/linalg_svd.md).

@@ -19,7 +19,9 @@ linalg_eigvals(A)
 
 ## Details
 
-$$p(\lambda) = \det(A - \lambda I_{n}){\qquad\lambda \in \mathbb{C}}$$p(λ)=det(A−λIn​)λ∈C
+``` math
+p(\lambda) = \operatorname{det}(A - \lambda \mathrm{I}_n)\mathrlap{\qquad \lambda \in \mathbb{C}}
+```
 
 where is the `n`-dimensional identity matrix. Supports input of float,
 double, cfloat and cdouble dtypes. Also supports batches of matrices,

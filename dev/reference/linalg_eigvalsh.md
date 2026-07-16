@@ -29,7 +29,9 @@ complex. The eigenvalues are returned in ascending order.
 
 ## Details
 
-$$p(\lambda) = \det(A - \lambda I_{n}){\qquad\lambda \in \mathbb{R}}$$p(λ)=det(A−λIn​)λ∈R
+``` math
+p(\lambda) = \operatorname{det}(A - \lambda \mathrm{I}_n)\mathrlap{\qquad \lambda \in \mathbb{R}}
+```
 
 where is the `n`-dimensional identity matrix.
 
@@ -88,7 +90,7 @@ a <- torch_randn(2, 2)
 linalg_eigvalsh(a)
 }
 #> torch_tensor
-#> -2.0134
-#>  0.3529
+#> -0.9907
+#>  0.4482
 #> [ CPUFloatType{2} ]
 ```

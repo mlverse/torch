@@ -1,6 +1,7 @@
 # Tensor objects
 
 ``` r
+
 library(torch)
 ```
 
@@ -191,6 +192,7 @@ To align a tensor to a specific order, use `$align_to`.
 ### Examples:
 
 ``` r
+
 # Example 1: Applying a mask
 mask <- torch_randint(low = 0, high = 2, size = c(127, 128), dtype=torch_bool())$refine_names(c('W', 'H'))
 imgs <- torch_randn(32, 128, 127, 3, names=c('N', 'H', 'W', 'C'))
@@ -251,6 +253,7 @@ Returns TRUE if all elements in the tensor are TRUE, FALSE otherwise.
 #### Examples:
 
 ``` r
+
 a <- torch_rand(1, 2)$to(dtype = torch_bool())
 a
 a$all()
@@ -275,6 +278,7 @@ squeezed (see `?torch_squeeze()),` resulting in the output tensor having
 #### Examples:
 
 ``` r
+
 a <- torch_rand(4, 2)$to(dtype = torch_bool())
 a
 a$all(dim=2)
@@ -304,6 +308,7 @@ Returns TRUE if any elements in the tensor are TRUE, FALSE otherwise.
 #### Examples:
 
 ``` r
+
 a <- torch_rand(1, 2)$to(dtype = torch_bool())
 a
 a$any()
@@ -328,6 +333,7 @@ squeezed (see `?torch_squeeze()),` resulting in the output tensor having
 #### Examples:
 
 ``` r
+
 a <- torch_randn(4, 2) < 0
 a
 a$any(2)
@@ -698,6 +704,7 @@ Returns a copy of the `self` tensor. The copy has the same size and data
 type as `self`.
 
 ``` r
+
 x <- torch_tensor(1)
 y <- x$clone()
 
@@ -1024,6 +1031,7 @@ Returns the size in bytes of an individual element.
 #### Examples:
 
 ``` r
+
 torch_tensor(c(1))$element_size()
 ```
 
@@ -1132,6 +1140,7 @@ the tensors, please clone them first.
 #### Examples:
 
 ``` r
+
 x <- torch_tensor(matrix(c(1,2,3), ncol = 1))
 x$size()
 x$expand(c(3, 4))
@@ -1201,6 +1210,7 @@ modifies the input tensor in-place, and returns the input tensor.
 #### Examples:
 
 ``` r
+
 a <- torch_zeros(3, 3)
 a$fill_diagonal_(5)
 b <- torch_zeros(7, 3)
@@ -1352,6 +1362,7 @@ which the tensor resides. For CPU tensors, an error is thrown.
 #### Examples:
 
 ``` r
+
 x <- torch_randn(3, 4, 5, device='cuda:0')
 x$get_device()
 x$cpu()$get_device()  # RuntimeError: get_device is not implemented for type torch_FloatTensor
@@ -1425,6 +1436,7 @@ The returned tensor and `self` share the same underlying storage.
 #### Examples:
 
 ``` r
+
 x <- torch_randn(4, dtype=torch_cfloat())
 x
 x$imag
@@ -1467,6 +1479,7 @@ deterministic (potentially at a performance cost) by setting
 #### Examples:
 
 ``` r
+
 x <- torch_ones(5, 3)
 t <- torch_tensor(matrix(1:9, ncol = 3), dtype=torch_float())
 index <- torch_tensor(c(1L, 4L, 3L))
@@ -1502,6 +1515,7 @@ of `index` (which must be a vector), and all other dimensions must match
 #### Examples:
 
 ``` r
+
 x <- torch_zeros(5, 3)
 t <- torch_tensor(matrix(1:9, ncol = 3), dtype=torch_float())
 index <- torch_tensor(c(1, 5, 3))
@@ -1531,6 +1545,7 @@ the indices in the order given in `index`.
 #### Examples:
 
 ``` r
+
 x <- torch_tensor(matrix(1:9, ncol = 3), dtype=torch_float())
 index <- torch_tensor(c(1, 3), dtype = torch_long())
 x$index_fill_(1, index, -1)
@@ -1662,6 +1677,7 @@ use \[retain_grad()\].
 #### Examples:
 
 ``` r
+
 a <- torch_rand(10, requires_grad=TRUE)
 a$is_leaf
 
@@ -1766,6 +1782,7 @@ This operation is not differentiable.
 #### Examples:
 
 ``` r
+
 x <- torch_tensor(1.0)
 x$item()
 ```
@@ -2189,6 +2206,7 @@ See
 #### Examples:
 
 ``` r
+
 x <- torch_tensor(matrix(1:9, ncol = 3))
 x$narrow(1, 1, 3)
 x$narrow(1, 1, 2)
@@ -2267,6 +2285,7 @@ default, the returned Tensor has the same `torch_dtype` and
 #### Examples:
 
 ``` r
+
 tensor <- torch_ones(5)
 tensor$new_empty(c(2, 3))
 ```
@@ -2294,6 +2313,7 @@ this tensor.
 #### Examples:
 
 ``` r
+
 tensor <- torch_ones(c(2), dtype=torch_float64())
 tensor$new_full(c(3, 4), 3.141592)
 ```
@@ -2321,6 +2341,7 @@ tensor.
 #### Examples:
 
 ``` r
+
 tensor <- torch_tensor(c(2), dtype=torch_int32())
 tensor$new_ones(c(2, 3))
 ```
@@ -2362,6 +2383,7 @@ recommended.
 #### Examples:
 
 ``` r
+
 tensor <- torch_ones(c(2), dtype=torch_int8)
 data <- matrix(1:4, ncol = 2)
 tensor$new_tensor(data)
@@ -2390,6 +2412,7 @@ tensor.
 #### Examples:
 
 ``` r
+
 tensor <- torch_tensor(c(1), dtype=torch_float64())
 tensor$new_zeros(c(2, 3))
 ```
@@ -2453,6 +2476,7 @@ Returns a view of the original tensor with its dimensions permuted.
 #### Examples:
 
 ``` r
+
 x <- torch_randn(2, 3, 5)
 x$size()
 x$permute(c(3, 1, 2))$size()
@@ -2525,6 +2549,7 @@ duplicate elements.
 #### Examples:
 
 ``` r
+
 src <- torch_tensor(matrix(3:8, ncol = 3))
 src$put_(torch_tensor(1:2), torch_tensor(9:10))
 ```
@@ -2618,6 +2643,7 @@ returned tensor and `self` share the same underlying storage.
 #### Examples:
 
 ``` r
+
 x <- torch_randn(4, dtype=torch_cfloat())
 x
 x$real
@@ -2676,6 +2702,7 @@ greedily; it is expanded in-place to fill `names` to the same length as
 #### Examples:
 
 ``` r
+
 imgs <- torch_randn(32, 3, 128, 128)
 named_imgs <- imgs$refine_names(c('N', 'C', 'H', 'W'))
 named_imgs$names
@@ -2699,6 +2726,7 @@ removes the hook from the module.
 #### Example
 
 ``` r
+
 v <- torch_tensor(c(0., 0., 0.), requires_grad=TRUE)
 h <- v$register_hook(function(grad) grad * 2)  # double the gradient
 v$backward(torch_tensor(c(1., 2., 3.)))
@@ -2738,6 +2766,7 @@ One cannot specify both positional args `names` and keyword args
 #### Examples:
 
 ``` r
+
 imgs <- torch_rand(2, 3, 5, 7, names=c('N', 'C', 'H', 'W'))
 renamed_imgs <- imgs$rename(c("Batch", "Channels", "Height", "Width"))
 ```
@@ -2776,6 +2805,7 @@ Unlike `$expand`, this function copies the tensor’s data.
 #### Examples:
 
 ``` r
+
 x <- torch_tensor(c(1, 2, 3))
 x$`repeat`(c(4, 2))
 x$`repeat`(c(4, 2, 1))$size()
@@ -2819,6 +2849,7 @@ makes it so that autograd will begin to record operations on `tensor`.
 #### Examples:
 
 ``` r
+
 # Let's say we want to preprocess some saved weights and use
 # the result as new weights.
 saved_weights <- c(0.1, 0.2, 0.3, 0.25)
@@ -2895,6 +2926,7 @@ the size in-place with custom strides, see `$set_()`.
 #### Examples:
 
 ``` r
+
 x <- torch_tensor(matrix(1:6, ncol = 2))
 x$resize_(c(2, 2))
 ```
@@ -3008,6 +3040,7 @@ specified dimension `dim` must be unique.
 #### Examples:
 
 ``` r
+
 x <- torch_rand(2, 5)
 x
 torch_zeros(3, 5)$scatter_(
@@ -3067,6 +3100,7 @@ deterministic (potentially at a performance cost) by setting
 #### Examples:
 
 ``` r
+
 x <- torch_rand(2, 5)
 x
 torch_ones(3, 5)$scatter_add_(1, torch_tensor(rbind(c(0, 1, 2, 0, 0), c(2, 0, 0, 1, 2))), x)
@@ -3190,6 +3224,7 @@ of `tuple`.
 #### Examples:
 
 ``` r
+
 torch_empty(3, 4, 5)$size()
 ```
 
@@ -3303,6 +3338,7 @@ number of storage elements (not bytes).
 #### Examples:
 
 ``` r
+
 x <- torch_tensor(c(1, 2, 3, 4, 5))
 x$storage_offset()
 x[3:N]$storage_offset()
@@ -3332,6 +3368,7 @@ stride in the particular dimension `dim`.
 #### Examples:
 
 ``` r
+
 x <- torch_tensor(matrix(1:10, nrow = 2))
 x$stride()
 x$stride(1)
@@ -3485,6 +3522,7 @@ matches the desired conversion.
 #### Examples:
 
 ``` r
+
 tensor <- torch_randn(2, 2)  # Initially dtype=float32, device=cpu
 tensor$to(dtype = torch_float64())
 

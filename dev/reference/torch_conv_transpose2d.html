@@ -5,7 +5,7 @@
       fontURL: "https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/output/chtml/fonts/woff-v2"
     }
   };
-</script><script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet"><script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet"><link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet"><script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><link href="../extra.css" rel="stylesheet"><meta property="og:title" content="Conv_transpose2d — torch_conv_transpose2d"><meta name="description" content="Conv_transpose2d"><meta property="og:description" content="Conv_transpose2d"><meta name="robots" content="noindex"><!-- Global site tag (gtag.js) - Google Analytics --><script async src="https://www.googletagmanager.com/gtag/js?id=G-9ZJSKW3L0N"></script><script>
+</script><script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><link href="../deps/bootstrap-5.3.8/bootstrap.min.css" rel="stylesheet"><script src="../deps/bootstrap-5.3.8/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet"><link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet"><script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><link href="../extra.css" rel="stylesheet"><meta property="og:title" content="Conv_transpose2d — torch_conv_transpose2d"><meta name="description" content="Conv_transpose2d"><meta property="og:description" content="Conv_transpose2d"><meta name="robots" content="noindex"><!-- Global site tag (gtag.js) - Google Analytics --><script async src="https://www.googletagmanager.com/gtag/js?id=G-9ZJSKW3L0N"></script><script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
@@ -149,35 +149,35 @@ composed of several input planes, sometimes also called "deconvolution".</p>
 <span class="r-in"><span><span class="op">}</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> torch_tensor</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> (1,1,.,.) = </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   2.5568  -1.8705   2.5651  -2.8518  -0.4414</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   -6.4169   7.6458   4.3671  -4.9875  -3.2369</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   -3.1286   2.6792 -12.7062  -5.5724  -8.7022</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    2.2325   1.8812  -3.8924  -0.1773  -2.4867</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    3.2300  -3.1472  -5.2938  -5.6013   1.7491</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> -1.4636  3.5161 -2.7510 -2.8869 -0.4838</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   0.8258  5.1777 -8.2110  2.8304 -0.0019</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  -1.5254 -3.8930 -5.1843 -6.7888  3.2270</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   1.3018  2.4710 -0.1588  8.3189  5.5026</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  -0.7152  0.1423  0.2256 -1.8368  2.3311</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> (1,2,.,.) = </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   2.8212  -1.8808  -4.3737  -1.8916  -3.5754</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   -1.9973   5.3080  -5.5791  -9.7201  -8.9990</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   -2.0654  -6.1619  -0.6746 -11.2846  -9.5520</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    1.7883  -6.1783  -2.7848   0.9098  -9.0128</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   -1.1351  -3.0385  -6.0454   1.0130   5.4653</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   4.1432   5.9676   0.5320   2.5029  -3.7740</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   -1.3973  -0.5129   2.7479  -4.4615  -0.5974</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   -7.2364  -5.1928 -11.0599   2.4220  -2.9429</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   -3.4015 -14.7040  -6.2951  -2.1509   1.9241</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   -3.1988   0.5072  -2.5737   5.4147   1.0831</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> (1,3,.,.) = </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   3.4252  -4.1577  -1.6184  11.1418  -1.3712</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    5.3313  -8.7328   2.1915   9.9304   4.7661</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    7.5666  15.2094  -8.6994   3.0033   3.3304</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   -7.6365  -7.9769  -0.5043   7.9092   4.4929</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   -4.0548   3.7929  12.1501   2.7287  -2.3606</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   6.5032   1.3897   5.4583   4.0585   0.9590</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   -9.3080 -13.5038   1.2196  -1.2739   0.6051</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    4.0024   8.9190  -2.1227   8.5741  -0.4870</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   -1.7317   5.6270   6.8652   1.0116  -4.0103</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    0.2482   2.8695   6.1423   6.6906  -4.3282</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> (1,4,.,.) = </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  -2.7799  -2.8323  14.1922  -6.5315   4.9636</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    4.4233 -19.4052  -7.2880  -5.9969   7.4471</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    5.2161  -7.7022   5.8766  -9.0684   7.8324</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    5.4072  -3.8466  -7.1176  -6.3199   1.9464</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  -10.2469   4.5499   4.1510  10.8789  -3.5523</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  -4.5766   5.4295   6.0979   3.6568  -1.2714</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   -4.2877 -11.1995  -4.1214   4.5560  -0.6576</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    6.3589  -3.2076  -3.6959  -4.5781   1.6753</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  -11.9048  -2.1476  -1.5277   6.2448  -3.4997</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    4.4947  -8.2989   6.8716   4.8715   0.2789</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> (1,5,.,.) = </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   3.2937  -1.8881  11.0727   1.5660   1.9271</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   0.0397   0.1034   2.5267   0.8907  -0.9782</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ... [the output was truncated (use n=-1 to disable)]</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [ CPUFloatType{1,8,5,5} ]</span>
 </code></pre></div>
@@ -191,7 +191,7 @@ composed of several input planes, sometimes also called "deconvolution".</p>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.1.</p>
 </div>
 
     </footer></div>

@@ -17,7 +17,7 @@ set-up your environment.
 | 0.11.0  |  1.13.1  |       11.6, 11.7        |
 | 0.10.0  |  1.13.1  | 11.6 (Linux only), 11.7 |
 
-torch compatibility matrix
+torch compatibility matrix {.table}
 
 ## CUDA version compatibility
 

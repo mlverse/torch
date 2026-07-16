@@ -25,6 +25,7 @@ If you don’t have a GPU or want to install the CPU version of `torch`,
 you can install with:
 
 ``` r
+
 install.packages("torch")
 ```
 
@@ -62,6 +63,7 @@ to use GPU’s with torch you need to:
 Once you have installed all pre-requisites you can install `torch` with:
 
 ``` r
+
 install.packages("torch")
 ```
 
@@ -81,6 +83,7 @@ We support CPU builds of torch on MacOS. On MacOS you can install torch
 with:
 
 ``` r
+
 install.packages("torch")
 ```
 
@@ -89,6 +92,7 @@ install.packages("torch")
 On Apple Silicon architecture we support GPU through MPS:
 
 ``` r
+
 install.packages("torch")
 ```
 
@@ -99,6 +103,7 @@ install.packages("torch")
 To install the cpu version of `torch` you can run:
 
 ``` r
+
 install.packages("torch")
 ```
 
@@ -124,6 +129,7 @@ To install the GPU version of `torch` on linux you must verify that:
 Once you have installed all pre-requisites you can install `torch` with:
 
 ``` r
+
 install.packages("torch")
 ```
 
@@ -156,6 +162,7 @@ need to match the installation *‘kind’* chosen below.
 To install from the pre-built binaries, you can use the following:
 
 ``` r
+
 options(timeout = 600) # increasing timeout is recommended since we will be downloading a 2GB file.
 # For Windows and Linux: "cpu", "cu128" are the only currently supported
 # For MacOS the supported are: "cpu-intel" or "cpu-m1"
@@ -177,6 +184,7 @@ libraries so torch can use GPU acceleration without a system-wide CUDA
 installation.
 
 ``` r
+
 # Install the cudatoolkit R package for your desired CUDA version
 install.packages("cuda12.8", repos = c("https://mlverse.r-universe.dev", "https://cloud.r-project.org"))
 # Then install torch as usual
@@ -223,6 +231,7 @@ during the installation process. This is done through the
 `TORCH_INSTALL_DEBUG` environment variable:
 
 ``` r
+
 Sys.setenv(TORCH_INSTALL_DEBUG=1)
 ```
 
@@ -244,6 +253,7 @@ the timeout value in
 like
 
 ``` r
+
 install_torch(timeout = 600)
 ```
 
@@ -256,6 +266,7 @@ library from files. This is done in 3 steps :
 1- get the download URLs of the files.
 
 ``` r
+
 get_install_libs_url()
 ```
 
@@ -265,6 +276,7 @@ here as an example .
 3- install torch from files
 
 ``` r
+
 # then after making both files available into /tmp/
 Sys.setenv(TORCH_URL="/tmp/libtorch-v1.13.1.zip")
 Sys.setenv(LANTERN_URL="/tmp/lantern-0.9.1.9001+cpu+arm64-Darwin.zip")

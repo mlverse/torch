@@ -23,7 +23,9 @@ linalg_householder_product(A, tau)
 
 ## Details
 
-$$H_{1}H_{2}...H_{k}\qquad with\qquad H_{i} = I_{m} - \tau_{i}v_{i}v_{i}^{H}$$H1​H2​...Hk​withHi​=Im​−τi​vi​viH​
+``` math
+H_1H_2 ... H_k \qquad with \qquad H_i = \mathrm{I}_m - \tau_i v_i v_i^{H}
+```
 
 where is the `m`-dimensional identity matrix and is the conjugate
 transpose when is complex, and the transpose when is real-valued. See

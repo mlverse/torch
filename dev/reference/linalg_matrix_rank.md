@@ -60,7 +60,9 @@ lower triangular part of the matrix is used in the computations.
 If `tol` is not specified and `A` is a matrix of dimensions `(m, n)`,
 the tolerance is set to be
 
-$$tol = \sigma_{1}\max(m,n)\varepsilon$$tol=σ1​max(m,n)ε
+``` math
+tol = \sigma_1 \max(m, n) \varepsilon
+```
 
 where is the largest singular value (or eigenvalue in absolute value
 when `hermitian = TRUE`), and is the epsilon value for the dtype of `A`

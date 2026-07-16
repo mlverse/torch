@@ -1,6 +1,7 @@
 # dataset
 
 ``` r
+
 library(torch)
 
 # In deep learning models you don't usually have all your data in RAM
@@ -82,6 +83,7 @@ mtcars_dataset$.getitem(1)
     ## [ CPUFloatType{1} ]
 
 ``` r
+
 # Given a dataset you can create a dataloader with
 dl <- dataloader(mtcars_dataset, batch_size = 15, shuffle = TRUE)
 

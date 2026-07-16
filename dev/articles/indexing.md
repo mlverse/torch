@@ -1,6 +1,7 @@
 # Indexing tensors
 
 ``` r
+
 library(torch)
 ```
 
@@ -20,6 +21,7 @@ indexing from the end of the array. (In R, negative indices are used to
 remove elements.)
 
 ``` r
+
 x <- torch_tensor(1:10)
 x[1]
 #> torch_tensor
@@ -35,6 +37,7 @@ You can also subset matrices and higher dimensions arrays using the same
 syntax:
 
 ``` r
+
 x <- x$reshape(shape = c(2,5))
 x
 #> torch_tensor
@@ -56,6 +59,7 @@ than dimensions, torch’s behaviour differs from R, which flattens the
 array. In torch, the missing indices are considered complete slices `:`.
 
 ``` r
+
 x[1]
 #> torch_tensor
 #>  1
@@ -73,6 +77,7 @@ same number of dimensions, but of different sizes than the original.
 This is best illustrated by a few examples:
 
 ``` r
+
 x <- torch_tensor(1:10)
 x
 #> torch_tensor
@@ -107,6 +112,7 @@ You can also use the `1:10:2` syntax which means: In the range from 1 to
 10, take every second item. For example:
 
 ``` r
+
 x[1:5:2]
 #> torch_tensor
 #>  1
@@ -119,6 +125,7 @@ Another special syntax is the `N`, meaning the size of the specified
 dimension.
 
 ``` r
+
 x[5:N]
 #> torch_tensor
 #>   5
@@ -139,6 +146,7 @@ To allow dynamic dynamic indices, you can create a new slice using the
 `slc` function. For example:
 
 ``` r
+
 x[1:5:2]
 #> torch_tensor
 #>  1
@@ -150,6 +158,7 @@ x[1:5:2]
 is equivalent to:
 
 ``` r
+
 x[slc(start = 1, end = 5, step = 2)]
 #> torch_tensor
 #>  1
@@ -166,32 +175,35 @@ empty.
 Consider a matrix:
 
 ``` r
+
 x <- torch_randn(2, 3)
 x
 #> torch_tensor
-#>  0.9674  0.0909  0.0001
-#> -0.7283 -0.0625 -0.4096
+#>  0.2843  1.1182 -0.0681
+#> -0.3088  1.8548  1.0860
 #> [ CPUFloatType{2,3} ]
 ```
 
 The following syntax will give you the first row:
 
 ``` r
+
 x[1,]
 #> torch_tensor
-#>  0.9674
-#>  0.0909
-#>  0.0001
+#>  0.2843
+#>  1.1182
+#> -0.0681
 #> [ CPUFloatType{3} ]
 ```
 
 And this would give you the first 2 columns:
 
 ``` r
+
 x[,1:2]
 #> torch_tensor
-#>  0.9674  0.0909
-#> -0.7283 -0.0625
+#>  0.2843  1.1182
+#> -0.3088  1.8548
 #> [ CPUFloatType{2,2} ]
 ```
 
@@ -201,6 +213,7 @@ By default, when indexing by a single integer, this dimension will be
 dropped to avoid the singleton dimension:
 
 ``` r
+
 x <- torch_randn(2, 3)
 x[1,]$shape
 #> [1] 3
@@ -210,6 +223,7 @@ You can optionally use the `drop = FALSE` argument to avoid dropping the
 dimension.
 
 ``` r
+
 x[1,,drop = FALSE]$shape
 #> [1] 1 3
 ```
@@ -220,6 +234,7 @@ It’s possible to add a new dimension to a tensor using index-like
 syntax:
 
 ``` r
+
 x <- torch_tensor(c(10))
 x$shape
 #> [1] 1
@@ -232,6 +247,7 @@ x[, newaxis, newaxis]$shape
 You can also use `NULL` instead of `newaxis`:
 
 ``` r
+
 x[,NULL]$shape
 #> [1] 1 1
 ```
@@ -243,6 +259,7 @@ what to do with the last available dimension, or the first one. To
 subsume all others, we can use `..`:
 
 ``` r
+
 z <- torch_tensor(1:125)$reshape(c(5,5,5))
 z[1,..]
 #> torch_tensor
@@ -277,21 +294,23 @@ indexing.
 > or `torch_index_put_`.
 
 ``` r
+
 x <- torch_randn(4,4)
 x[c(1,3), c(1,3)]
 #> torch_tensor
-#>  0.0273 -0.8107
-#> -0.1289  1.6311
+#> -1.1769 -1.0276
+#> -1.6456  0.1899
 #> [ CPUFloatType{2,2} ]
 ```
 
 You can also use boolean vectors, for example:
 
 ``` r
+
 x[c(TRUE, FALSE, TRUE, FALSE), c(TRUE, FALSE, TRUE, FALSE)]
 #> torch_tensor
-#>  0.0273 -0.8107
-#> -0.1289  1.6311
+#> -1.1769 -1.0276
+#> -1.6456  0.1899
 #> [ CPUFloatType{2,2} ]
 ```
 
@@ -300,6 +319,7 @@ instead of R vectors. It’s also possible to index with multi-dimensional
 boolean tensors:
 
 ``` r
+
 x <- torch_tensor(rbind(
   c(1,2,3),
   c(4,5,6)

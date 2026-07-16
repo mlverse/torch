@@ -1,6 +1,7 @@
 # Automatic Mixed Precision
 
 ``` r
+
 library(torch)
 torch_manual_seed(1)
 ```
@@ -30,6 +31,7 @@ We will define a model and some random training data to showcase how to
 enabled AMP with torch:
 
 ``` r
+
 batch_size <- 512 # Try, for example, 128, 256, 513.
 in_size <- 4096
 out_size <- 4096
@@ -47,6 +49,7 @@ targets <- lapply(1:num_batches, function(x) torch_randn(batch_size, out_size, d
 Now let’s define the model:
 
 ``` r
+
 make_model <- function(in_size, out_size, num_layers) {
   layers <- list()
   for (i in seq_len(num_layers-1)) {
@@ -60,6 +63,7 @@ make_model <- function(in_size, out_size, num_layers) {
 To train the model without mixed precision we can do:
 
 ``` r
+
 loss_fn <- nn_mse_loss()$cuda()
 net <- make_model(in_size, out_size, num_layers)
 opt <- optim_sgd(net$parameters, lr=0.1)
@@ -83,6 +87,7 @@ computations (including the loss computation) inside a `with_autocast`
 context.
 
 ``` r
+
 loss_fn <- nn_mse_loss()$cuda()
 net <- make_model(in_size, out_size, num_layers)
 opt <- optim_sgd(net$parameters, lr=0.1)
@@ -109,6 +114,7 @@ before actually updating the weights. The training loop is now
 implemented as:
 
 ``` r
+
 loss_fn <- nn_mse_loss()$cuda()
 net <- make_model(in_size, out_size, num_layers)
 opt <- optim_sgd(net$parameters, lr=0.1)
@@ -135,6 +141,7 @@ We now write a simple function that allows us to quickly switch between
 feature so we can benchmark AMP:
 
 ``` r
+
 run <- function(autocast, scale) {
   loss_fn <- nn_mse_loss()$cuda()
   net <- make_model(in_size, out_size, num_layers)

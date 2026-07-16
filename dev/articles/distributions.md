@@ -1,6 +1,7 @@
 # Distributions
 
 ``` r
+
 library(torch)
 torch_manual_seed(1) # setting seed for reproducibility
 ```
@@ -25,6 +26,7 @@ This vignette is based in the TensorFlow’s distributions
 Let’s start and create a new instance of a normal distribution:
 
 ``` r
+
 n <- distr_normal(loc = 0, scale = 1)
 n
 #> torch_Normal ()
@@ -33,6 +35,7 @@ n
 We can draw samples from it with:
 
 ``` r
+
 n$sample()
 #> torch_tensor
 #>  0.6614
@@ -42,6 +45,7 @@ n$sample()
 or, draw multiple samples:
 
 ``` r
+
 n$sample(3)
 #> torch_tensor
 #>  0.2669
@@ -53,6 +57,7 @@ n$sample(3)
 We can evaluate the log probability of values:
 
 ``` r
+
 n$log_prob(0)
 #> torch_tensor
 #> -0.9189
@@ -64,6 +69,7 @@ log(dnorm(0)) # equivalent R code
 or, evaluate multiple log probabilities:
 
 ``` r
+
 n$log_prob(c(0, 2, 4))
 #> torch_tensor
 #> -0.9189
@@ -77,6 +83,7 @@ n$log_prob(c(0, 2, 4))
 A distribution can take a tensor as it’s parameters:
 
 ``` r
+
 b <- distr_bernoulli(probs = torch_tensor(c(0.25, 0.5, 0.75)))
 b
 #> torch_Bernoulli ()
@@ -88,6 +95,7 @@ each element of the tensor.
 We can sample a single observation:
 
 ``` r
+
 b$sample()
 #> torch_tensor
 #>  0
@@ -99,6 +107,7 @@ b$sample()
 or, a batch of `n` observations:
 
 ``` r
+
 b$sample(6)
 #> torch_tensor
 #>  0  0  1
@@ -119,6 +128,7 @@ Let’s implement a Gaussian linear model, but first let’s simulate some
 data
 
 ``` r
+
 x <- torch_randn(100, 1)
 y <- 2*x + 1 + torch_randn(100, 1)
 ```
@@ -126,6 +136,7 @@ y <- 2*x + 1 + torch_randn(100, 1)
 and plot:
 
 ``` r
+
 plot(as.numeric(x), as.numeric(y))
 ```
 
@@ -134,6 +145,7 @@ plot(as.numeric(x), as.numeric(y))
 We can now define our model:
 
 ``` r
+
 GaussianLinear <- nn_module(
   initialize = function() {
     # this linear predictor will estimate the mean of the normal distribution
@@ -155,6 +167,7 @@ model <- GaussianLinear()
 We can now train our model with:
 
 ``` r
+
 opt <- optim_sgd(model$parameters, lr = 0.1)
 
 for (i in 1:100) {
@@ -166,7 +179,7 @@ for (i in 1:100) {
   if (i %% 10 == 0)
     cat("iter: ", i, " loss: ", loss$item(), "\n")
 }
-#> iter:  10  loss:  1.975727 
+#> iter:  10  loss:  1.975726 
 #> iter:  20  loss:  1.790831 
 #> iter:  30  loss:  1.64495 
 #> iter:  40  loss:  1.532009 
@@ -181,6 +194,7 @@ for (i in 1:100) {
 We can see the parameter estimates with:
 
 ``` r
+
 model$parameters
 #> $linear.weight
 #> torch_tensor
@@ -202,6 +216,7 @@ and quickly compare with the [`glm()`](https://rdrr.io/r/stats/glm.html)
 function:
 
 ``` r
+
 summary(glm(as.numeric(y) ~ as.numeric(x)))
 #> 
 #> Call:

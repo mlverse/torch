@@ -58,6 +58,7 @@ On the CPU, torch will call the R garbage collector in two situations:
     controlled with the `torch.threshold_call_gc` option (in MB):
 
     ``` r
+
     options(torch.threshold_call_gc = 4000)
     ```
 
@@ -85,22 +86,24 @@ On the CPU, torch will call the R garbage collector in two situations:
 All CPU allocator settings can be adjusted at runtime with
 \[set_cpu_allocator_config()\], or via R options before loading torch:
 
-| Option                           | Default | Description                         |
-|----------------------------------|---------|-------------------------------------|
-| `torch.threshold_call_gc`        | 4000    | GC trigger threshold in MB          |
-| `torch.cpu_cache_enabled`        | `TRUE`  | Enable/disable the block cache      |
-| `torch.cpu_cache_max_size_mb`    | 4000    | Maximum cached memory in MB         |
-| `torch.cpu_cache_min_block_size` | 1024    | Minimum block size (bytes) to cache |
+| Option | Default | Description |
+|----|----|----|
+| `torch.threshold_call_gc` | 4000 | GC trigger threshold in MB |
+| `torch.cpu_cache_enabled` | `TRUE` | Enable/disable the block cache |
+| `torch.cpu_cache_max_size_mb` | 4000 | Maximum cached memory in MB |
+| `torch.cpu_cache_min_block_size` | 1024 | Minimum block size (bytes) to cache |
 
 Example: reducing cache size on a memory-constrained system:
 
 ``` r
+
 set_cpu_allocator_config(cache_max_size_mb = 512)
 ```
 
 To release all cached memory immediately:
 
 ``` r
+
 cpu_cache_flush()
 ```
 

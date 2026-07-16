@@ -1,6 +1,7 @@
 # basic-nn-module
 
 ``` r
+
 library(torch)
 
 # creates example tensors. x requires_grad = TRUE tells that
@@ -32,15 +33,16 @@ model <- dense(3, 1)
     ## Calling initialize!
 
 ``` r
+
 # you can get all parameters
 model$parameters
 ```
 
     ## $w
     ## torch_tensor
-    ## -0.8039
-    ## -0.3388
-    ##  0.2384
+    ## -0.2701
+    ## -0.8660
+    ## -0.3649
     ## [ CPUFloatType{3,1} ][ requires_grad = TRUE ]
     ## 
     ## $b
@@ -49,17 +51,19 @@ model$parameters
     ## [ CPUFloatType{1} ][ requires_grad = TRUE ]
 
 ``` r
+
 # or individually
 model$w
 ```
 
     ## torch_tensor
-    ## -0.8039
-    ## -0.3388
-    ##  0.2384
+    ## -0.2701
+    ## -0.8660
+    ## -0.3649
     ## [ CPUFloatType{3,1} ][ requires_grad = TRUE ]
 
 ``` r
+
 model$b
 ```
 
@@ -68,6 +72,7 @@ model$b
     ## [ CPUFloatType{1} ][ requires_grad = TRUE ]
 
 ``` r
+
 # create an input tensor
 x <- torch_randn(10, 3)
 y_pred <- model(x)
@@ -76,18 +81,19 @@ y_pred <- model(x)
     ## Calling forward!
 
 ``` r
+
 y_pred
 ```
 
     ## torch_tensor
-    ## -0.5913
-    ## -0.9220
-    ## -0.1355
-    ## -0.8166
-    ## -0.5390
-    ## -0.4185
-    ## -0.8865
-    ##  1.0686
-    ##  1.0430
-    ## -0.5388
+    ## -2.5162
+    ## -1.6344
+    ##  0.8293
+    ## -0.6207
+    ##  0.2985
+    ## -0.7197
+    ## -0.1984
+    ##  0.2321
+    ## -0.7243
+    ##  1.2233
     ## [ CPUFloatType{10,1} ][ grad_fn = <AddBackward0> ]

@@ -25,7 +25,9 @@ when `A` is real. The eigenvectors will be given by the columns of
 
 ## Details
 
-$$A = V{diag}(\Lambda)V^{- 1}{\qquad V \in \mathbb{C}^{n \times n},\Lambda \in \mathbb{C}^{n}}$$A=Vdiag(Λ)V−1V∈Cn×n,Λ∈Cn
+``` math
+A = V \operatorname{diag}(\Lambda) V^{-1}\mathrlap{\qquad V \in \mathbb{C}^{n \times n}, \Lambda \in \mathbb{C}^n}
+```
 
 This decomposition exists if and only if is `diagonalizable`\_. This is
 the case when all its eigenvalues are different. Supports input of

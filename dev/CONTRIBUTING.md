@@ -92,6 +92,7 @@ be done before upfront.
 The first time you clone the repository, run:
 
 ``` r
+
 source("tools/buildlantern.R")
 ```
 
@@ -105,12 +106,14 @@ that lives in `lantern/src`.
 You can then run
 
 ``` r
+
 devtools::load_all()
 ```
 
 to load `torch`, and test interactively. Alternatively, run
 
 ``` r
+
 devtools::test()
 ```
 

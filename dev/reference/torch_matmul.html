@@ -5,7 +5,7 @@
       fontURL: "https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/output/chtml/fonts/woff-v2"
     }
   };
-</script><script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet"><script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet"><link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet"><script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><link href="../extra.css" rel="stylesheet"><meta property="og:title" content="Matmul — torch_matmul"><meta name="description" content="Matmul"><meta property="og:description" content="Matmul"><meta name="robots" content="noindex"><!-- Global site tag (gtag.js) - Google Analytics --><script async src="https://www.googletagmanager.com/gtag/js?id=G-9ZJSKW3L0N"></script><script>
+</script><script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><link href="../deps/bootstrap-5.3.8/bootstrap.min.css" rel="stylesheet"><script src="../deps/bootstrap-5.3.8/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet"><link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet"><script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><link href="../extra.css" rel="stylesheet"><meta property="og:title" content="Matmul — torch_matmul"><meta name="description" content="Matmul"><meta property="og:description" content="Matmul"><meta name="robots" content="noindex"><!-- Global site tag (gtag.js) - Google Analytics --><script async src="https://www.googletagmanager.com/gtag/js?id=G-9ZJSKW3L0N"></script><script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
@@ -150,34 +150,34 @@ tensor, <code>out</code> will be an \((j \times k \times n \times p)\) tensor.</
 <span class="r-in"><span><span class="op">}</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> torch_tensor</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> (1,.,.) = </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  1.3977 -0.8071 -1.3793  6.6738 -3.3532</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   2.1333  2.1260  3.8244 -0.6445  3.7818</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  -0.5757  1.3252  1.1835 -2.8181 -3.2426</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> -1.9268 -0.1290  0.3416  0.8652 -1.8294</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  -0.4310 -1.4549 -0.9116 -0.0464 -0.2522</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   0.4475  0.9954  0.5673 -0.2792  0.0727</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> (2,.,.) = </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  0.9607 -0.8200 -0.9338  4.3632  0.8131</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  -0.4915 -0.4180 -1.5332  4.8285  2.5968</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   0.3201  0.0256 -0.5937  3.4723 -1.8644</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  2.9637 -0.2107  1.4099  0.9341  1.4816</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   2.3750  0.1675  1.1787  0.9961  1.7245</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  -4.1420 -0.7073 -1.1798  0.1873 -2.7630</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> (3,.,.) = </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  0.3961 -0.9377 -1.7421  4.5634 -3.1279</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   1.0760 -1.4209 -1.4793  4.3089 -0.3532</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   1.7756 -0.4999  0.5755  1.2381  1.0220</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> -6.7648  2.0947 -1.7594 -2.6398 -5.1306</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  -4.5116  2.1055 -1.1686 -1.9637 -2.9721</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  -4.6646  1.9024 -1.7377 -3.2465 -3.8042</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> (4,.,.) = </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  0.0567  2.7418  2.3177  0.3835 -2.6114</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   0.9727 -0.5539  0.0742  1.8428  4.2935</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  -1.8755  1.0241  0.0448 -0.2665  4.8501</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  1.0883  0.3951  0.4732 -0.4429  0.1560</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  -1.7434  2.8295 -1.1666 -2.6171 -0.0311</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  -2.9678  0.3383  0.3498 -0.3633 -3.9824</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> (5,.,.) = </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> -3.1776 -1.8429 -2.1443 -9.0234 -1.4406</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  -1.9297 -0.1384 -1.2468 -1.0086  0.0282</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   2.8737 -2.1020 -1.1590  5.4398 -1.1498</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> -3.4502  1.3499 -1.9822 -2.5596 -1.7509</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  -5.8525 -0.1497 -2.2273 -1.8920 -4.5885</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  -2.2539 -0.3241 -0.2703  0.0216 -2.2374</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> (6,.,.) = </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> -1.1527  0.9059  1.2084 -4.9728  2.1403</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  -0.7745 -0.9816 -1.4871  0.0142 -0.6364</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  -2.2127  0.1432 -1.3725  0.1577  0.7092</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  2.8622 -0.2450  0.1625  0.2047  2.8082</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  -0.6754  1.3081 -0.1154 -0.6231  0.0329</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  -3.6347 -1.0650 -0.3803  0.3493 -3.8736</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ... [the output was truncated (use n=-1 to disable)]</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [ CPUFloatType{10,3,5} ]</span>
@@ -192,7 +192,7 @@ tensor, <code>out</code> will be an \((j \times k \times n \times p)\) tensor.</
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.1.</p>
 </div>
 
     </footer></div>

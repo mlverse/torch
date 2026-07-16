@@ -26,7 +26,9 @@ A list `(Q, R)`.
 
 ## Details
 
-$$A = QR{\qquad Q \in \mathbb{K}^{m \times m},R \in \mathbb{K}^{m \times n}}$$A=QRQ∈Km×m,R∈Km×n
+``` math
+A = QR\mathrlap{\qquad Q \in \mathbb{K}^{m \times m}, R \in \mathbb{K}^{m \times n}}
+```
 
 where is orthogonal in the real case and unitary in the complex case,
 and is upper triangular. When `m > n` (tall matrix), as `R` is upper
@@ -34,7 +36,9 @@ triangular, its last `m - n` rows are zero. In this case, we can drop
 the last `m - n` columns of `Q` to form the **reduced QR
 decomposition**:
 
-$$A = QR{\qquad Q \in \mathbb{K}^{m \times n},R \in \mathbb{K}^{n \times n}}$$A=QRQ∈Km×n,R∈Kn×n
+``` math
+A = QR\mathrlap{\qquad Q \in \mathbb{K}^{m \times n}, R \in \mathbb{K}^{n \times n}}
+```
 
 The reduced QR decomposition agrees with the full QR decomposition when
 `n >= m` (wide matrix). Supports input of float, double, cfloat and

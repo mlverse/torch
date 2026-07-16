@@ -32,7 +32,9 @@ rows of `V` respectively.
 
 ## Details
 
-$$A = U{diag}(S)V^{H}{\qquad U \in \mathbb{K}^{m \times m},S \in \mathbb{R}^{k},V \in \mathbb{K}^{n \times n}}$$A=Udiag(S)VHU∈Km×m,S∈Rk,V∈Kn×n
+``` math
+A = U \operatorname{diag}(S) V^{H} \mathrlap{\qquad U \in \mathbb{K}^{m \times m}, S \in \mathbb{R}^k, V \in \mathbb{K}^{n \times n}}
+```
 
 where , is the conjugate transpose when is complex, and the transpose
 when is real-valued.
@@ -42,7 +44,9 @@ in the complex case. When `m > n` (resp. `m < n`) we can drop the last
 `m - n` (resp. `n - m`) columns of `U` (resp. `V`) to form the **reduced
 SVD**:
 
-$$A = U{diag}(S)V^{H}{\qquad U \in \mathbb{K}^{m \times k},S \in \mathbb{R}^{k},V \in \mathbb{K}^{k \times n}}$$A=Udiag(S)VHU∈Km×k,S∈Rk,V∈Kk×n
+``` math
+A = U \operatorname{diag}(S) V^{H} \mathrlap{\qquad U \in \mathbb{K}^{m \times k}, S \in \mathbb{R}^k, V \in \mathbb{K}^{k \times n}}
+```
 
 where .
 
@@ -142,25 +146,25 @@ linalg_svd(a, full_matrices = FALSE)
 }
 #> [[1]]
 #> torch_tensor
-#> -0.0365  0.0095 -0.7386
-#>  0.8888 -0.2147  0.2082
-#>  0.3094  0.5230 -0.4735
-#>  0.1963  0.7167  0.1992
-#>  0.2727 -0.4083 -0.3837
+#>  0.0068 -0.2231  0.4195
+#> -0.8518 -0.2656  0.2994
+#> -0.5098  0.6037 -0.3967
+#> -0.0663 -0.2145  0.3022
+#> -0.1005 -0.6850 -0.6969
 #> [ CPUFloatType{5,3} ]
 #> 
 #> [[2]]
 #> torch_tensor
-#>  4.7142
-#>  2.8843
-#>  0.4452
+#>  2.1574
+#>  1.9414
+#>  1.5336
 #> [ CPUFloatType{3} ]
 #> 
 #> [[3]]
 #> torch_tensor
-#>  0.4516  0.8579 -0.2450
-#> -0.8493  0.4975  0.1767
-#> -0.2734 -0.1283 -0.9533
+#> -0.0373 -0.0193  0.9991
+#>  0.8819  0.4695  0.0420
+#> -0.4699  0.8827 -0.0005
 #> [ CPUFloatType{3,3} ]
 #> 
 ```

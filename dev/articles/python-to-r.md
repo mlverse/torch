@@ -78,6 +78,7 @@ case would be training a model in Python then using Shiny to develop a
 GUI for predictions from a trained model.
 
 ``` r
+
 library(torch)
 
 #Make up some test data

@@ -31,7 +31,9 @@ same dtype as `A` and will contain the eigenvectors as its columns.
 
 ## Details
 
-$$A = Q{diag}(\Lambda)Q^{H}{\qquad Q \in \mathbb{K}^{n \times n},\Lambda \in \mathbb{R}^{n}}$$A=Qdiag(Λ)QHQ∈Kn×n,Λ∈Rn
+``` math
+A = Q \operatorname{diag}(\Lambda) Q^{H}\mathrlap{\qquad Q \in \mathbb{K}^{n \times n}, \Lambda \in \mathbb{R}^n}
+```
 
 where is the conjugate transpose when is complex, and the transpose when
 is real-valued. is orthogonal in the real case and unitary in the
@@ -135,14 +137,14 @@ linalg_eigh(a)
 }
 #> [[1]]
 #> torch_tensor
-#> -0.6515
-#>  0.5834
+#> -1.6032
+#>  0.4986
 #> [ CPUFloatType{2} ]
 #> 
 #> [[2]]
 #> torch_tensor
-#> -0.9852 -0.1716
-#>  0.1716 -0.9852
+#>  0.3215 -0.9469
+#>  0.9469  0.3215
 #> [ CPUFloatType{2,2} ]
 #> 
 ```

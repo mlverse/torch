@@ -1,6 +1,7 @@
 # Loading data
 
 ``` r
+
 library(torch)
 ```
 
@@ -79,12 +80,13 @@ preprocessing is. Here we show how to create your own `Dataset` class to
 train on [Allison Horst's
 penguins](https://github.com/allisonhorst/palmerpenguins).
 
-| Component       |                                                                                                                                `Dataset` R6 class                                                                                                                                 |                                 `Dataset` object                                 |                       `DataLoader` object                        |                           batch                           |
-|:----------------|:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------:|:--------------------------------------------------------------------------------:|:----------------------------------------------------------------:|:---------------------------------------------------------:|
-| Description     | Output of [`dataset()`](https://torch.mlverse.org/docs/dev/reference/dataset.md). When calling [`dataset()`](https://torch.mlverse.org/docs/dev/reference/dataset.md) it should have at least a `name`, `initialize`, `.getitem`, and `.length`. Output is a `Dataset` generator. | Object created by using the custom `Dataset` generator. Actually stores the data | Object that queries the `Dataset` object to pull batches of data | The subsample of data used for things like model training |
-| Penguin example |                                                                                                                                `penguins_dataset`                                                                                                                                 |                                     `tuxes`                                      |                               `dl`                               |                            `b`                            |
+| Component | `Dataset` R6 class | `Dataset` object | `DataLoader` object | batch |
+|:---|:--:|:--:|:--:|:--:|
+| Description | Output of [`dataset()`](https://torch.mlverse.org/docs/dev/reference/dataset.md). When calling [`dataset()`](https://torch.mlverse.org/docs/dev/reference/dataset.md) it should have at least a `name`, `initialize`, `.getitem`, and `.length`. Output is a `Dataset` generator. | Object created by using the custom `Dataset` generator. Actually stores the data | Object that queries the `Dataset` object to pull batches of data | The subsample of data used for things like model training |
+| Penguin example | `penguins_dataset` | `tuxes` | `dl` | `b` |
 
 ``` r
+
 library(palmerpenguins)
 #> 
 #> Attaching package: 'palmerpenguins'
@@ -125,6 +127,7 @@ returned in a list, to be accessed as `batch[[1]]` and `batch[[2]]`
 during training.
 
 ``` r
+
 penguins_dataset <- dataset(
   
   name = "penguins_dataset",
@@ -163,6 +166,7 @@ Let’s create the dataset , query for it’s length, and look at its first
 item:
 
 ``` r
+
 tuxes <- penguins_dataset()
 tuxes$.length()
 #> [1] 333
@@ -188,6 +192,7 @@ To be able to iterate over `tuxes`, we need a data loader (we override
 the default batch size of `1`):
 
 ``` r
+
 dl <- tuxes %>% dataloader(batch_size = 8)
 ```
 
@@ -195,6 +200,7 @@ Calling `.length()` on a data loader (as opposed to a dataset) will
 return the number of `batches` we have:
 
 ``` r
+
 dl$.length()
 #> [1] 42
 ```
@@ -202,6 +208,7 @@ dl$.length()
 And we can create an iterator to inspect the first batch:
 
 ``` r
+
 iter <- dl$.iter()
 b <- iter$.next()
 b
@@ -241,6 +248,7 @@ Our example network is very simple. (In reality, we would want to treat
 embed it.)
 
 ``` r
+
 net <- nn_module(
   "PenguinNet",
   initialize = function() {
@@ -262,12 +270,14 @@ model <- net()
 We still need an optimizer:
 
 ``` r
+
 optimizer <- optim_sgd(model$parameters, lr = 0.01)
 ```
 
 And we’re ready to train:
 
 ``` r
+
 for (epoch in 1:10) {
   
   l <- c()
@@ -283,7 +293,7 @@ for (epoch in 1:10) {
   
   cat(sprintf("Loss at epoch %d: %3f\n", epoch, mean(l)))
 }
-#> Loss at epoch 1: 41.737845
+#> Loss at epoch 1: 8398.049213
 #> Loss at epoch 2: 2.068251
 #> Loss at epoch 3: 2.068251
 #> Loss at epoch 4: 2.068251
@@ -318,6 +328,7 @@ switching to using `.getbatch()` which will pull all the datapoints in a
 batch at once:
 
 ``` r
+
 penguins_dataset_batching <- dataset(
   
   name = "penguins_dataset_batching",
@@ -367,6 +378,7 @@ the data. At this point you are trading readability of your code and
 convenience for speed.
 
 ``` r
+
 input <- na.omit(penguins) 
 # conveniently, the categorical data are already factors
 input$species <- as.numeric(input$species)

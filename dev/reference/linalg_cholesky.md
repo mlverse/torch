@@ -19,7 +19,9 @@ linalg_cholesky(A)
 
 ## Details
 
-$$A = LL^{H}{\qquad L \in \mathbb{K}^{n \times n}}$$A=LLHL∈Kn×n
+``` math
+A = LL^{H}\mathrlap{\qquad L \in \mathbb{K}^{n \times n}}
+```
 
 where is a lower triangular matrix and is the conjugate transpose when
 is complex, and the transpose when is real-valued.

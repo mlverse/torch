@@ -20,8 +20,10 @@ linalg_inv(A)
 Letting be or , for a matrix , its **inverse matrix** (if it exists) is
 defined as
 
-$$A^{- 1}A = AA^{- 1} = I_{n}$$A−1A=AA−1=In​ where is the `n`-dimensional
-identity matrix.
+``` math
+A^{-1}A = AA^{-1} = \mathrm{I}_n
+```
+where is the `n`-dimensional identity matrix.
 
 The inverse matrix exists if and only if is invertible. In this case,
 the inverse is unique. Supports input of float, double, cfloat and
@@ -79,9 +81,9 @@ A <- torch_randn(4, 4)
 linalg_inv(A)
 }
 #> torch_tensor
-#> -0.2165  0.3481 -0.3708  0.2484
-#> -0.6277  0.1170  0.6777  0.3475
-#>  2.2243 -1.2087 -0.4140  1.3177
-#> -0.3438  0.5458  0.8195  0.1205
+#>  1.1411  1.2683  0.2403 -2.4936
+#> -0.2140 -0.4395 -0.3704  0.0760
+#> -0.1184 -0.8593 -0.8293  1.6678
+#> -0.9623 -1.1062 -0.9510  2.5254
 #> [ CPUFloatType{4,4} ]
 ```

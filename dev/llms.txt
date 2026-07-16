@@ -14,12 +14,14 @@ status](https://www.r-pkg.org/badges/version/torch)](https://CRAN.R-project.org/
 torch can be installed from CRAN with:
 
 ``` r
+
 install.packages("torch")
 ```
 
 You can also install the development version with:
 
 ``` r
+
 remotes::install_github("mlverse/torch")
 ```
 
@@ -33,6 +35,7 @@ You can create torch tensors from R objects with the `torch_tensor`
 function and convert them back to R objects with `as_array`.
 
 ``` r
+
 library(torch)
 x <- array(runif(8), dim = c(2, 2, 2))
 y <- torch_tensor(x, dtype = torch_float64())
@@ -56,6 +59,7 @@ In the following snippet we let torch, using the autograd feature,
 calculate the derivatives:
 
 ``` r
+
 x <- torch_tensor(1, requires_grad = TRUE)
 w <- torch_tensor(2, requires_grad = TRUE)
 b <- torch_tensor(3, requires_grad = TRUE)

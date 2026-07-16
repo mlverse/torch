@@ -41,9 +41,12 @@ is `a * b * c`. Given matrices `A`, `B`, `C` with shapes `(10, 100)`,
 `(100, 5)`, `(5, 50)` respectively, we can calculate the cost of
 different multiplication orders as follows:
 
-$$\begin{matrix}
-{{cost}((AB)C)} & {= 10 \times 100 \times 5 + 10 \times 5 \times 50 = 7500\ {cost}(A(BC))} & {= 10 \times 100 \times 50 + 100 \times 5 \times 50 = 75000}
-\end{matrix}$$cost((AB)C)​=10×100×5+10×5×50=7500 cost(A(BC))​=10×100×50+100×5×50=75000​
+``` math
+\begin{align*}
+\operatorname{cost}((AB)C) &= 10 \times 100 \times 5 + 10 \times 5 \times 50 = 7500 \
+\operatorname{cost}(A(BC)) &= 10 \times 100 \times 50 + 100 \times 5 \times 50 = 75000
+\end{align*}
+```
 
 In this case, multiplying `A` and `B` first followed by `C` is 10 times
 faster.
