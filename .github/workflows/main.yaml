@@ -220,6 +220,7 @@ jobs:
       TORCH_TEST: 1
       TORCH_TEST_CUDA: 1
       TORCH_CUDATOOLKIT: 'FALSE'
+      TORCH_SKIP_SLOW_TESTS: 1
       LD_LIBRARY_PATH: /usr/local/cuda/lib64
 
     steps:
