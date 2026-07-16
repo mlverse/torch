@@ -32,6 +32,39 @@ void call_void(const char* name, Args... args) {
   lantern_call_host_handler();
 }
 
+inline ::torch::TensorOptions tensor_options() {
+  return ::torch::TensorOptions(call<void*>("_lantern_TensorOptions"));
+}
+
+inline ::torch::IntArrayRef int_array_ref(
+    const std::vector<std::int64_t>& values) {
+  auto* data = values.empty() ? nullptr
+                              : const_cast<std::int64_t*>(values.data());
+  return ::torch::IntArrayRef(
+      call<void*>("_lantern_vector_int64_t", data, values.size()));
+}
+
+inline ::torch::Scalar scalar(double value) {
+  return ::torch::Scalar(call<void*>("_lantern_Scalar", &value, "double"));
+}
+
+inline ::torch::Scalar scalar(int value) {
+  return ::torch::Scalar(call<void*>("_lantern_Scalar", &value, "int"));
+}
+
+inline ::torch::int64_t integer(std::int64_t value) {
+  return ::torch::int64_t(call<void*>("_lantern_int64_t", value));
+}
+
+inline ::torch::double_t floating(double value) {
+  return ::torch::double_t(call<void*>("_lantern_double", value));
+}
+
+inline XPtrTorchoptional_memory_format optional_memory_format() {
+  return XPtrTorchoptional_memory_format(
+      call<void*>("_lantern_optional_memory_format", nullptr));
+}
+
 }  // namespace detail
 
 // An experimental, LibTorch-inspired facade over the Lantern C API.
@@ -434,6 +467,275 @@ inline ::torch::Tensor& as_torch(Tensor& tensor) noexcept {
 
 inline Tensor matmul(const Tensor& left, const Tensor& right) {
   return left.matmul(right);
+}
+
+inline Tensor empty(const std::vector<std::int64_t>& size,
+                    const ::torch::TensorOptions& options) {
+  auto dimensions = detail::int_array_ref(size);
+  auto memory_format = detail::optional_memory_format();
+  return Tensor(::torch::Tensor(detail::call<void*>(
+      "_lantern_empty_intarrayref_tensoroptions_memoryformat",
+      dimensions.get(), options.get(), memory_format.get())));
+}
+
+inline Tensor empty(const std::vector<std::int64_t>& size) {
+  return empty(size, detail::tensor_options());
+}
+
+inline Tensor empty(std::initializer_list<std::int64_t> size,
+                    const ::torch::TensorOptions& options) {
+  return empty(std::vector<std::int64_t>(size), options);
+}
+
+inline Tensor empty(std::initializer_list<std::int64_t> size) {
+  return empty(std::vector<std::int64_t>(size));
+}
+
+#define TORCH_EXPERIMENTAL_SHAPED_CREATOR(name)                              \
+  inline Tensor name(const std::vector<std::int64_t>& size,                  \
+                     const ::torch::TensorOptions& options) {                \
+    auto dimensions = detail::int_array_ref(size);                           \
+    return Tensor(::torch::Tensor(detail::call<void*>(                       \
+        "_lantern_" #name "_intarrayref_tensoroptions", dimensions.get(),  \
+        options.get())));                                                    \
+  }                                                                          \
+  inline Tensor name(const std::vector<std::int64_t>& size) {                \
+    return name(size, detail::tensor_options());                             \
+  }                                                                          \
+  inline Tensor name(std::initializer_list<std::int64_t> size,              \
+                     const ::torch::TensorOptions& options) {                \
+    return name(std::vector<std::int64_t>(size), options);                   \
+  }                                                                          \
+  inline Tensor name(std::initializer_list<std::int64_t> size) {            \
+    return name(std::vector<std::int64_t>(size));                            \
+  }
+
+TORCH_EXPERIMENTAL_SHAPED_CREATOR(zeros)
+TORCH_EXPERIMENTAL_SHAPED_CREATOR(ones)
+TORCH_EXPERIMENTAL_SHAPED_CREATOR(rand)
+TORCH_EXPERIMENTAL_SHAPED_CREATOR(randn)
+
+#undef TORCH_EXPERIMENTAL_SHAPED_CREATOR
+
+#define TORCH_EXPERIMENTAL_LIKE_CREATOR(name)                               \
+  inline Tensor name##_like(const Tensor& input,                            \
+                            const ::torch::TensorOptions& options) {         \
+    auto memory_format = detail::optional_memory_format();                  \
+    return Tensor(::torch::Tensor(detail::call<void*>(                      \
+        "_lantern_" #name "_like_tensor_tensoroptions_memoryformat",      \
+        input.get(), options.get(), memory_format.get())));                 \
+  }                                                                         \
+  inline Tensor name##_like(const Tensor& input) {                          \
+    return name##_like(input, detail::tensor_options());                    \
+  }
+
+TORCH_EXPERIMENTAL_LIKE_CREATOR(empty)
+TORCH_EXPERIMENTAL_LIKE_CREATOR(zeros)
+TORCH_EXPERIMENTAL_LIKE_CREATOR(ones)
+TORCH_EXPERIMENTAL_LIKE_CREATOR(rand)
+TORCH_EXPERIMENTAL_LIKE_CREATOR(randn)
+
+#undef TORCH_EXPERIMENTAL_LIKE_CREATOR
+
+inline Tensor empty_strided(const std::vector<std::int64_t>& size,
+                            const std::vector<std::int64_t>& stride,
+                            const ::torch::TensorOptions& options) {
+  auto dimensions = detail::int_array_ref(size);
+  auto strides = detail::int_array_ref(stride);
+  return Tensor(::torch::Tensor(detail::call<void*>(
+      "_lantern_empty_strided_intarrayref_intarrayref_tensoroptions",
+      dimensions.get(), strides.get(), options.get())));
+}
+
+inline Tensor empty_strided(const std::vector<std::int64_t>& size,
+                            const std::vector<std::int64_t>& stride) {
+  return empty_strided(size, stride, detail::tensor_options());
+}
+
+inline Tensor full(const std::vector<std::int64_t>& size, double fill_value,
+                   const ::torch::TensorOptions& options) {
+  auto dimensions = detail::int_array_ref(size);
+  auto value = detail::scalar(fill_value);
+  return Tensor(::torch::Tensor(detail::call<void*>(
+      "_lantern_full_intarrayref_scalar_tensoroptions", dimensions.get(),
+      value.get(), options.get())));
+}
+
+inline Tensor full(const std::vector<std::int64_t>& size, double fill_value) {
+  return full(size, fill_value, detail::tensor_options());
+}
+
+inline Tensor full(std::initializer_list<std::int64_t> size, double fill_value,
+                   const ::torch::TensorOptions& options) {
+  return full(std::vector<std::int64_t>(size), fill_value, options);
+}
+
+inline Tensor full(std::initializer_list<std::int64_t> size,
+                   double fill_value) {
+  return full(std::vector<std::int64_t>(size), fill_value);
+}
+
+inline Tensor full_like(const Tensor& input, double fill_value,
+                        const ::torch::TensorOptions& options) {
+  auto value = detail::scalar(fill_value);
+  auto memory_format = detail::optional_memory_format();
+  return Tensor(::torch::Tensor(detail::call<void*>(
+      "_lantern_full_like_tensor_scalar_tensoroptions_memoryformat",
+      input.get(), value.get(), options.get(), memory_format.get())));
+}
+
+inline Tensor full_like(const Tensor& input, double fill_value) {
+  return full_like(input, fill_value, detail::tensor_options());
+}
+
+inline Tensor randint(std::int64_t high,
+                      const std::vector<std::int64_t>& size,
+                      const ::torch::TensorOptions& options) {
+  auto high_value = detail::integer(high);
+  auto dimensions = detail::int_array_ref(size);
+  return Tensor(::torch::Tensor(detail::call<void*>(
+      "_lantern_randint_intt_intarrayref_tensoroptions", high_value.get(),
+      dimensions.get(), options.get())));
+}
+
+inline Tensor randint(std::int64_t high,
+                      const std::vector<std::int64_t>& size) {
+  return randint(high, size, detail::tensor_options());
+}
+
+inline Tensor randint(std::int64_t low, std::int64_t high,
+                      const std::vector<std::int64_t>& size,
+                      const ::torch::TensorOptions& options) {
+  auto low_value = detail::integer(low);
+  auto high_value = detail::integer(high);
+  auto dimensions = detail::int_array_ref(size);
+  return Tensor(::torch::Tensor(detail::call<void*>(
+      "_lantern_randint_intt_intt_intarrayref_tensoroptions", low_value.get(),
+      high_value.get(), dimensions.get(), options.get())));
+}
+
+inline Tensor randint(std::int64_t low, std::int64_t high,
+                      const std::vector<std::int64_t>& size) {
+  return randint(low, high, size, detail::tensor_options());
+}
+
+inline Tensor randint_like(const Tensor& input, std::int64_t low,
+                           std::int64_t high,
+                           const ::torch::TensorOptions& options) {
+  auto low_value = detail::integer(low);
+  auto high_value = detail::integer(high);
+  auto memory_format = detail::optional_memory_format();
+  return Tensor(::torch::Tensor(detail::call<void*>(
+      "_lantern_randint_like_tensor_intt_intt_tensoroptions_memoryformat",
+      input.get(), low_value.get(), high_value.get(), options.get(),
+      memory_format.get())));
+}
+
+inline Tensor randint_like(const Tensor& input, std::int64_t low,
+                           std::int64_t high) {
+  return randint_like(input, low, high, detail::tensor_options());
+}
+
+inline Tensor randperm(std::int64_t n,
+                       const ::torch::TensorOptions& options) {
+  auto count = detail::integer(n);
+  return Tensor(::torch::Tensor(detail::call<void*>(
+      "_lantern_randperm_intt_tensoroptions", count.get(), options.get())));
+}
+
+inline Tensor randperm(std::int64_t n) {
+  return randperm(n, detail::tensor_options());
+}
+
+inline Tensor arange(double end, const ::torch::TensorOptions& options) {
+  auto end_value = detail::scalar(end);
+  return Tensor(::torch::Tensor(detail::call<void*>(
+      "_lantern_arange_scalar_tensoroptions", end_value.get(),
+      options.get())));
+}
+
+inline Tensor arange(double end) {
+  return arange(end, detail::tensor_options());
+}
+
+inline Tensor arange(double start, double end, double step,
+                     const ::torch::TensorOptions& options) {
+  auto start_value = detail::scalar(start);
+  auto end_value = detail::scalar(end);
+  auto step_value = detail::scalar(step);
+  return Tensor(::torch::Tensor(detail::call<void*>(
+      "_lantern_arange_scalar_scalar_scalar_tensoroptions", start_value.get(),
+      end_value.get(), step_value.get(), options.get())));
+}
+
+inline Tensor arange(double start, double end, double step = 1.0) {
+  return arange(start, end, step, detail::tensor_options());
+}
+
+inline Tensor linspace(double start, double end, std::int64_t steps,
+                       const ::torch::TensorOptions& options) {
+  auto start_value = detail::scalar(start);
+  auto end_value = detail::scalar(end);
+  auto count = detail::integer(steps);
+  return Tensor(::torch::Tensor(detail::call<void*>(
+      "_lantern_linspace_scalar_scalar_intt_tensoroptions", start_value.get(),
+      end_value.get(), count.get(), options.get())));
+}
+
+inline Tensor linspace(double start, double end, std::int64_t steps = 100) {
+  return linspace(start, end, steps, detail::tensor_options());
+}
+
+inline Tensor logspace(double start, double end, std::int64_t steps,
+                       double base, const ::torch::TensorOptions& options) {
+  auto start_value = detail::scalar(start);
+  auto end_value = detail::scalar(end);
+  auto count = detail::integer(steps);
+  auto base_value = detail::floating(base);
+  return Tensor(::torch::Tensor(detail::call<void*>(
+      "_lantern_logspace_scalar_scalar_intt_double_tensoroptions",
+      start_value.get(), end_value.get(), count.get(), base_value.get(),
+      options.get())));
+}
+
+inline Tensor logspace(double start, double end, std::int64_t steps = 100,
+                       double base = 10.0) {
+  return logspace(start, end, steps, base, detail::tensor_options());
+}
+
+inline Tensor eye(std::int64_t n, const ::torch::TensorOptions& options) {
+  auto rows = detail::integer(n);
+  return Tensor(::torch::Tensor(detail::call<void*>(
+      "_lantern_eye_intt_tensoroptions", rows.get(), options.get())));
+}
+
+inline Tensor eye(std::int64_t n) {
+  return eye(n, detail::tensor_options());
+}
+
+inline Tensor eye(std::int64_t n, std::int64_t m,
+                  const ::torch::TensorOptions& options) {
+  auto rows = detail::integer(n);
+  auto columns = detail::integer(m);
+  return Tensor(::torch::Tensor(detail::call<void*>(
+      "_lantern_eye_intt_intt_tensoroptions", rows.get(), columns.get(),
+      options.get())));
+}
+
+inline Tensor eye(std::int64_t n, std::int64_t m) {
+  return eye(n, m, detail::tensor_options());
+}
+
+inline Tensor scalar_tensor(double value,
+                            const ::torch::TensorOptions& options) {
+  auto scalar = detail::scalar(value);
+  return Tensor(::torch::Tensor(detail::call<void*>(
+      "_lantern_scalar_tensor_scalar_tensoroptions", scalar.get(),
+      options.get())));
+}
+
+inline Tensor scalar_tensor(double value) {
+  return scalar_tensor(value, detail::tensor_options());
 }
 
 }  // namespace experimental

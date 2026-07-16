@@ -18,4 +18,16 @@ test_that("the experimental C++ Tensor API works through Lantern", {
     c(-1, 3)
   )
   expect_true(cpp_experimental_tensor_native_bool_return(x))
+
+  expect_equal(as.numeric(cpp_experimental_creation_zeros()), rep(0, 6))
+  expect_equal(as.numeric(cpp_experimental_creation_arange()), c(1, 3, 5, 7))
+  expect_equal(
+    as.numeric(cpp_experimental_creation_eye()),
+    c(1, 0, 0, 0, 1, 0)
+  )
+  expect_equal(
+    as.numeric(cpp_experimental_creation_full_like(x)),
+    rep(7, 4)
+  )
+  expect_equal(cpp_experimental_creation_random_sizes(), c(2, 3))
 })
