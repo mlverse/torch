@@ -41,7 +41,21 @@ lantern_start <- function(reload = FALSE) {
   }
 
   load_cudatoolkit_libs()
-  cpp_lantern_init(file.path(torch_install_path(), "lib"))
+
+  lib_path <- file.path(torch_install_path(), "lib")
+  if (is_windows()) {
+    # cuDNN 9 is split across several DLLs. cuDNN's lazy sub-DLL load (e.g.
+    # cudnn_graph64_9.dll) does not find the install lib dir unless it is on
+    # PATH, so cuDNN-backed CUDA ops otherwise fail with "Could not locate
+    # cudnn_graph64_9.dll" even though the DLL is present here. Prepend lib_path
+    # (once) so those loads resolve.
+    path_dirs <- strsplit(Sys.getenv("PATH"), ";", fixed = TRUE)[[1]]
+    if (!any(normalizePath(path_dirs, winslash = "/", mustWork = FALSE) ==
+             normalizePath(lib_path, winslash = "/", mustWork = FALSE))) {
+      Sys.setenv(PATH = paste(lib_path, Sys.getenv("PATH"), sep = ";"))
+    }
+  }
+  cpp_lantern_init(lib_path)
 
   log_enabled <- as.integer(Sys.getenv("TORCH_LOG", "0"))
   cpp_lantern_configure(log_enabled)
