@@ -30,8 +30,8 @@ torch_trunc(a)
 }
 #> torch_tensor
 #>  2
-#>  1
-#>  1
 #> -1
+#> -0
+#>  0
 #> [ CPUFloatType{4} ]
 ```

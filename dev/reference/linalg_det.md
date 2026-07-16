@@ -57,8 +57,8 @@ a <- torch_randn(3, 3, 3)
 linalg_det(a)
 }
 #> torch_tensor
-#> -1.3396
-#>  0.1396
-#> -7.1022
+#>  0.9947
+#> -0.0832
+#> -5.3668
 #> [ CPUFloatType{3} ]
 ```
