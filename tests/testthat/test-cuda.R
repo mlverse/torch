@@ -51,11 +51,13 @@ test_that("cuda is really available", {
 
 test_that("cuda memory snapshot works", {
   skip_if_cuda_not_available()
-  
+  skip_slow_tests()
+
+  withr::defer(cuda_record_memory_history(enabled = NULL))
   cuda_record_memory_history(enabled = "all", max_entries = 1e3)
   x <- torch_randn(16, device="cuda")
   memory <- cuda_memory_snapshot()
-  
+
   expect_true(class(memory) == "raw")
   expect_true(length(memory) > 100)
 })

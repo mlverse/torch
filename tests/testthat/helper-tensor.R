@@ -13,6 +13,12 @@ skip_if_cuda_not_available <- function() {
   }
 }
 
+skip_slow_tests <- function() {
+  if (Sys.getenv("TORCH_SKIP_SLOW_TESTS", "0") == "1") {
+    skip("Skipping slow test (TORCH_SKIP_SLOW_TESTS=1)")
+  }
+}
+
 skip_if_not_m1_mac <- function() {
   if (!grepl("darwin", R.version$os)) {
     skip("Not on MacOS")
