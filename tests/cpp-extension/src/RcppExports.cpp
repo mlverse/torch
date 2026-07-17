@@ -65,6 +65,85 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// cpp_experimental_tensor_metadata
+Rcpp::List cpp_experimental_tensor_metadata(torch::experimental::Tensor input);
+RcppExport SEXP _torchextensiontest_cpp_experimental_tensor_metadata(SEXP inputSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< torch::experimental::Tensor >::type input(inputSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_experimental_tensor_metadata(input));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_experimental_tensor_shape_pipeline
+torch::experimental::Tensor cpp_experimental_tensor_shape_pipeline(torch::experimental::Tensor input);
+RcppExport SEXP _torchextensiontest_cpp_experimental_tensor_shape_pipeline(SEXP inputSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< torch::experimental::Tensor >::type input(inputSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_experimental_tensor_shape_pipeline(input));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_experimental_tensor_reductions
+torch::experimental::Tensor cpp_experimental_tensor_reductions(torch::experimental::Tensor input);
+RcppExport SEXP _torchextensiontest_cpp_experimental_tensor_reductions(SEXP inputSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< torch::experimental::Tensor >::type input(inputSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_experimental_tensor_reductions(input));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_experimental_tensor_comparisons
+torch::experimental::Tensor cpp_experimental_tensor_comparisons(torch::experimental::Tensor first, torch::experimental::Tensor second);
+RcppExport SEXP _torchextensiontest_cpp_experimental_tensor_comparisons(SEXP firstSEXP, SEXP secondSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< torch::experimental::Tensor >::type first(firstSEXP);
+    Rcpp::traits::input_parameter< torch::experimental::Tensor >::type second(secondSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_experimental_tensor_comparisons(first, second));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_experimental_namespace_out_overload
+torch::experimental::Tensor cpp_experimental_namespace_out_overload(torch::experimental::Tensor first, torch::experimental::Tensor second);
+RcppExport SEXP _torchextensiontest_cpp_experimental_namespace_out_overload(SEXP firstSEXP, SEXP secondSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< torch::experimental::Tensor >::type first(firstSEXP);
+    Rcpp::traits::input_parameter< torch::experimental::Tensor >::type second(secondSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_experimental_namespace_out_overload(first, second));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_experimental_tensor_to_dtype
+torch::experimental::Tensor cpp_experimental_tensor_to_dtype(torch::experimental::Tensor input);
+RcppExport SEXP _torchextensiontest_cpp_experimental_tensor_to_dtype(SEXP inputSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< torch::experimental::Tensor >::type input(inputSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_experimental_tensor_to_dtype(input));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_experimental_tensor_autograd_state
+torch::experimental::Tensor cpp_experimental_tensor_autograd_state(torch::experimental::Tensor input);
+RcppExport SEXP _torchextensiontest_cpp_experimental_tensor_autograd_state(SEXP inputSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< torch::experimental::Tensor >::type input(inputSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_experimental_tensor_autograd_state(input));
+    return rcpp_result_gen;
+END_RCPP
+}
 // cpp_experimental_tensor_scalar_overloads
 torch::experimental::Tensor cpp_experimental_tensor_scalar_overloads(torch::experimental::Tensor input);
 RcppExport SEXP _torchextensiontest_cpp_experimental_tensor_scalar_overloads(SEXP inputSEXP) {
@@ -260,6 +339,13 @@ static const R_CallMethodDef CallEntries[] = {
     {"_torchextensiontest_cpp_experimental_tensor_generated_methods", (DL_FUNC) &_torchextensiontest_cpp_experimental_tensor_generated_methods, 1},
     {"_torchextensiontest_cpp_experimental_tensor_native_integer_argument", (DL_FUNC) &_torchextensiontest_cpp_experimental_tensor_native_integer_argument, 1},
     {"_torchextensiontest_cpp_experimental_tensor_native_bool_return", (DL_FUNC) &_torchextensiontest_cpp_experimental_tensor_native_bool_return, 1},
+    {"_torchextensiontest_cpp_experimental_tensor_metadata", (DL_FUNC) &_torchextensiontest_cpp_experimental_tensor_metadata, 1},
+    {"_torchextensiontest_cpp_experimental_tensor_shape_pipeline", (DL_FUNC) &_torchextensiontest_cpp_experimental_tensor_shape_pipeline, 1},
+    {"_torchextensiontest_cpp_experimental_tensor_reductions", (DL_FUNC) &_torchextensiontest_cpp_experimental_tensor_reductions, 1},
+    {"_torchextensiontest_cpp_experimental_tensor_comparisons", (DL_FUNC) &_torchextensiontest_cpp_experimental_tensor_comparisons, 2},
+    {"_torchextensiontest_cpp_experimental_namespace_out_overload", (DL_FUNC) &_torchextensiontest_cpp_experimental_namespace_out_overload, 2},
+    {"_torchextensiontest_cpp_experimental_tensor_to_dtype", (DL_FUNC) &_torchextensiontest_cpp_experimental_tensor_to_dtype, 1},
+    {"_torchextensiontest_cpp_experimental_tensor_autograd_state", (DL_FUNC) &_torchextensiontest_cpp_experimental_tensor_autograd_state, 1},
     {"_torchextensiontest_cpp_experimental_tensor_scalar_overloads", (DL_FUNC) &_torchextensiontest_cpp_experimental_tensor_scalar_overloads, 1},
     {"_torchextensiontest_cpp_experimental_tensor_inplace_overloads", (DL_FUNC) &_torchextensiontest_cpp_experimental_tensor_inplace_overloads, 2},
     {"_torchextensiontest_cpp_experimental_tensor_cat_overloads", (DL_FUNC) &_torchextensiontest_cpp_experimental_tensor_cat_overloads, 2},

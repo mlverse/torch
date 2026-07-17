@@ -21,6 +21,34 @@ cpp_experimental_tensor_native_bool_return <- function(input) {
     .Call(`_torchextensiontest_cpp_experimental_tensor_native_bool_return`, input)
 }
 
+cpp_experimental_tensor_metadata <- function(input) {
+    .Call(`_torchextensiontest_cpp_experimental_tensor_metadata`, input)
+}
+
+cpp_experimental_tensor_shape_pipeline <- function(input) {
+    .Call(`_torchextensiontest_cpp_experimental_tensor_shape_pipeline`, input)
+}
+
+cpp_experimental_tensor_reductions <- function(input) {
+    .Call(`_torchextensiontest_cpp_experimental_tensor_reductions`, input)
+}
+
+cpp_experimental_tensor_comparisons <- function(first, second) {
+    .Call(`_torchextensiontest_cpp_experimental_tensor_comparisons`, first, second)
+}
+
+cpp_experimental_namespace_out_overload <- function(first, second) {
+    .Call(`_torchextensiontest_cpp_experimental_namespace_out_overload`, first, second)
+}
+
+cpp_experimental_tensor_to_dtype <- function(input) {
+    .Call(`_torchextensiontest_cpp_experimental_tensor_to_dtype`, input)
+}
+
+cpp_experimental_tensor_autograd_state <- function(input) {
+    .Call(`_torchextensiontest_cpp_experimental_tensor_autograd_state`, input)
+}
+
 cpp_experimental_tensor_scalar_overloads <- function(input) {
     .Call(`_torchextensiontest_cpp_experimental_tensor_scalar_overloads`, input)
 }

@@ -59,6 +59,70 @@ bool cpp_experimental_tensor_native_bool_return(
   return input.equal(input);
 }
 
+// [[Rcpp::export]]
+Rcpp::List cpp_experimental_tensor_metadata(
+    torch::experimental::Tensor input) {
+  return Rcpp::List::create(
+      Rcpp::Named("dim") = input.dim(),
+      Rcpp::Named("numel") = input.numel(),
+      Rcpp::Named("element_size") = input.element_size(),
+      Rcpp::Named("sizes") = input.sizes(),
+      Rcpp::Named("contiguous") = input.is_contiguous(),
+      Rcpp::Named("requires_grad") = input.requires_grad(),
+      Rcpp::Named("defined") = input.defined());
+}
+
+// [[Rcpp::export]]
+torch::experimental::Tensor cpp_experimental_tensor_shape_pipeline(
+    torch::experimental::Tensor input) {
+  return input.transpose(0, 1)
+      .unsqueeze(0)
+      .squeeze(0)
+      .flatten(0, 1)
+      .reshape({-1});
+}
+
+// [[Rcpp::export]]
+torch::experimental::Tensor cpp_experimental_tensor_reductions(
+    torch::experimental::Tensor input) {
+  return torch::cat({input.min().reshape({1}), input.max().reshape({1}),
+                     input.all().reshape({1}), input.any().reshape({1})});
+}
+
+// [[Rcpp::export]]
+torch::experimental::Tensor cpp_experimental_tensor_comparisons(
+    torch::experimental::Tensor first,
+    torch::experimental::Tensor second) {
+  auto equal = first.eq(second);
+  return torch::where(equal, torch::maximum(first, second),
+                      torch::minimum(first, second));
+}
+
+// [[Rcpp::export]]
+torch::experimental::Tensor cpp_experimental_namespace_out_overload(
+    torch::experimental::Tensor first,
+    torch::experimental::Tensor second) {
+  auto output = torch::zeros_like(first);
+  torch::maximum_out(output, first, second);
+  return output;
+}
+
+// [[Rcpp::export]]
+torch::experimental::Tensor cpp_experimental_tensor_to_dtype(
+    torch::experimental::Tensor input) {
+  auto options = torch::experimental::TensorOptions()
+                     .dtype(torch::experimental::kFloat64);
+  return input.to(options.as_torch());
+}
+
+// [[Rcpp::export]]
+torch::experimental::Tensor cpp_experimental_tensor_autograd_state(
+    torch::experimental::Tensor input) {
+  auto output = input.clone();
+  output.requires_grad_(true);
+  return output.detach();
+}
+
 // Exercise native scalar overload resolution independently of the nn2poly
 // compatibility examples below.
 // [[Rcpp::export]]
