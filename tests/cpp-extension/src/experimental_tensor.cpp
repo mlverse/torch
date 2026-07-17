@@ -5,16 +5,14 @@
 
 #include <type_traits>
 
-using ExperimentalTensor = torch::experimental::Tensor;
-
-static_assert(std::is_copy_constructible<ExperimentalTensor>::value, "Tensor must be copyable");
-static_assert(std::is_move_constructible<ExperimentalTensor>::value, "Tensor must be movable");
-static_assert(std::is_same<decltype(std::declval<const ExperimentalTensor&>().sizes()),
+static_assert(std::is_copy_constructible<torch::experimental::Tensor>::value, "Tensor must be copyable");
+static_assert(std::is_move_constructible<torch::experimental::Tensor>::value, "Tensor must be movable");
+static_assert(std::is_same<decltype(std::declval<const torch::experimental::Tensor&>().sizes()),
                            std::vector<std::int64_t>>::value,
               "sizes() must return a standard owning vector");
 
-void compile_experimental_tensor_api(ExperimentalTensor x,
-                                     const ExperimentalTensor& y,
+void compile_experimental_tensor_api(torch::experimental::Tensor x,
+                                     const torch::experimental::Tensor& y,
                                      torch::TensorOptions options) {
   auto clone = x.clone();
   auto reshaped = x.reshape({-1});
@@ -64,14 +62,14 @@ bool cpp_experimental_tensor_native_bool_return(
 // Exercise native scalar overload resolution independently of the nn2poly
 // compatibility examples below.
 // [[Rcpp::export]]
-ExperimentalTensor cpp_experimental_tensor_scalar_overloads(
-    ExperimentalTensor input) {
+torch::experimental::Tensor cpp_experimental_tensor_scalar_overloads(
+    torch::experimental::Tensor input) {
   return input.add(2).mul(3.0).pow(2);
 }
 
 // [[Rcpp::export]]
-ExperimentalTensor cpp_experimental_tensor_inplace_overloads(
-    ExperimentalTensor input, ExperimentalTensor other) {
+torch::experimental::Tensor cpp_experimental_tensor_inplace_overloads(
+    torch::experimental::Tensor input, torch::experimental::Tensor other) {
   auto output = input.clone();
   output.add_(other);
   output.select(0, 0).fill_(7);
@@ -79,33 +77,33 @@ ExperimentalTensor cpp_experimental_tensor_inplace_overloads(
 }
 
 // [[Rcpp::export]]
-ExperimentalTensor cpp_experimental_tensor_cat_overloads(
-    ExperimentalTensor first, ExperimentalTensor second) {
+torch::experimental::Tensor cpp_experimental_tensor_cat_overloads(
+    torch::experimental::Tensor first, torch::experimental::Tensor second) {
   return torch::experimental::cat({first, second}, 0);
 }
 
 // [[Rcpp::export]]
-ExperimentalTensor cpp_public_torch_namespace_functions(
-    ExperimentalTensor first, ExperimentalTensor second) {
+torch::experimental::Tensor cpp_public_torch_namespace_functions(
+    torch::experimental::Tensor first, torch::experimental::Tensor second) {
   auto joined = torch::cat({first, second}, 0);
   auto bias = torch::ones({joined.size(0)});
   return torch::matmul(joined.reshape({1, -1}), bias.reshape({-1, 1}));
 }
 
 // [[Rcpp::export]]
-ExperimentalTensor cpp_public_torch_nested_namespace_functions(
-    ExperimentalTensor input) {
+torch::experimental::Tensor cpp_public_torch_nested_namespace_functions(
+    torch::experimental::Tensor input) {
   auto diagonal = torch::linalg::diagonal(torch::abs(input), 0, 0, 1);
   return torch::special::expm1(diagonal);
 }
 
 // [[Rcpp::export]]
-ExperimentalTensor cpp_experimental_tensor_to_device(ExperimentalTensor input) {
+torch::experimental::Tensor cpp_experimental_tensor_to_device(torch::experimental::Tensor input) {
   return input.to(torch::kCPU);
 }
 
 void compile_experimental_tensor_to_indexed_device(
-    const ExperimentalTensor& input) {
+    const torch::experimental::Tensor& input) {
   auto cpu = input.to(torch::kCPU, 0);
   auto cuda = input.to(torch::kCUDA, 0);
   (void)cpu;
@@ -113,13 +111,13 @@ void compile_experimental_tensor_to_indexed_device(
 }
 
 void compile_public_torch_fft_namespace(
-    const ExperimentalTensor& input, XPtrTorchoptional_int64_t n,
+    const torch::experimental::Tensor& input, XPtrTorchoptional_int64_t n,
     XPtrTorchoptional_string_view norm) {
   auto transformed = torch::fft::fft(input, n, -1, norm);
   (void)transformed;
 }
 
-void compile_experimental_creation_api(const ExperimentalTensor& input,
+void compile_experimental_creation_api(const torch::experimental::Tensor& input,
                                        torch::TensorOptions options) {
   using namespace torch::experimental;
   auto a = empty({2, 3});
@@ -153,7 +151,7 @@ void compile_experimental_creation_api(const ExperimentalTensor& input,
   (void)v; (void)w; (void)x; (void)y;
 }
 
-void compile_public_torch_namespace_api(const ExperimentalTensor& input) {
+void compile_public_torch_namespace_api(const torch::experimental::Tensor& input) {
   auto a = torch::empty({2, 3});
   auto b = torch::empty_strided({2, 3}, {3, 1});
   auto c = torch::zeros({2, 3});
@@ -244,8 +242,8 @@ torch::experimental::Tensor zeros(int rows, int cols) {
 
 // Torch equivalents of every operation used by nn2poly's linalg_arma.h.
 // [[Rcpp::export]]
-ExperimentalTensor cpp_experimental_nn2poly_linear(
-    ExperimentalTensor layer, ExperimentalTensor coefficients) {
+torch::experimental::Tensor cpp_experimental_nn2poly_linear(
+    torch::experimental::Tensor layer, torch::experimental::Tensor coefficients) {
   using namespace torch::experimental;
   auto intercept = zeros({1, coefficients.size(1)});
   intercept.select(1, 0).fill_(1.0);
@@ -253,17 +251,17 @@ ExperimentalTensor cpp_experimental_nn2poly_linear(
 }
 
 // [[Rcpp::export]]
-ExperimentalTensor cpp_experimental_nn2poly_add_partition(
-    ExperimentalTensor matrix, std::int64_t column, double scalar,
-    ExperimentalTensor values) {
+torch::experimental::Tensor cpp_experimental_nn2poly_add_partition(
+    torch::experimental::Tensor matrix, std::int64_t column, double scalar,
+    torch::experimental::Tensor values) {
   auto result = matrix.clone();
   result.select(1, column).add_(values.mul(scalar));
   return result;
 }
 
 // [[Rcpp::export]]
-ExperimentalTensor cpp_experimental_nn2poly_add_poly_eval(
-    ExperimentalTensor matrix, std::int64_t column, ExperimentalTensor input,
+torch::experimental::Tensor cpp_experimental_nn2poly_add_poly_eval(
+    torch::experimental::Tensor matrix, std::int64_t column, torch::experimental::Tensor input,
     std::int64_t input_column, std::vector<double> coefficients) {
   using namespace torch::experimental;
   auto result = full({input.size(0)}, coefficients.back());
@@ -278,10 +276,10 @@ ExperimentalTensor cpp_experimental_nn2poly_add_poly_eval(
 }
 
 // [[Rcpp::export]]
-ExperimentalTensor cpp_experimental_nn2poly_accumulate_partition(
-    ExperimentalTensor matrix, std::int64_t output_column,
+torch::experimental::Tensor cpp_experimental_nn2poly_accumulate_partition(
+    torch::experimental::Tensor matrix, std::int64_t output_column,
     std::vector<std::int64_t> input_columns,
-    std::vector<double> multipliers, ExperimentalTensor output) {
+    std::vector<double> multipliers, torch::experimental::Tensor output) {
   using namespace torch::experimental;
   auto partition = ones({matrix.size(0)});
   for (std::size_t i = 0; i < input_columns.size(); ++i) {

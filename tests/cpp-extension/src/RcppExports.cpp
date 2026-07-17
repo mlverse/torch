@@ -66,70 +66,70 @@ BEGIN_RCPP
 END_RCPP
 }
 // cpp_experimental_tensor_scalar_overloads
-ExperimentalTensor cpp_experimental_tensor_scalar_overloads(ExperimentalTensor input);
+torch::experimental::Tensor cpp_experimental_tensor_scalar_overloads(torch::experimental::Tensor input);
 RcppExport SEXP _torchextensiontest_cpp_experimental_tensor_scalar_overloads(SEXP inputSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< ExperimentalTensor >::type input(inputSEXP);
+    Rcpp::traits::input_parameter< torch::experimental::Tensor >::type input(inputSEXP);
     rcpp_result_gen = Rcpp::wrap(cpp_experimental_tensor_scalar_overloads(input));
     return rcpp_result_gen;
 END_RCPP
 }
 // cpp_experimental_tensor_inplace_overloads
-ExperimentalTensor cpp_experimental_tensor_inplace_overloads(ExperimentalTensor input, ExperimentalTensor other);
+torch::experimental::Tensor cpp_experimental_tensor_inplace_overloads(torch::experimental::Tensor input, torch::experimental::Tensor other);
 RcppExport SEXP _torchextensiontest_cpp_experimental_tensor_inplace_overloads(SEXP inputSEXP, SEXP otherSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< ExperimentalTensor >::type input(inputSEXP);
-    Rcpp::traits::input_parameter< ExperimentalTensor >::type other(otherSEXP);
+    Rcpp::traits::input_parameter< torch::experimental::Tensor >::type input(inputSEXP);
+    Rcpp::traits::input_parameter< torch::experimental::Tensor >::type other(otherSEXP);
     rcpp_result_gen = Rcpp::wrap(cpp_experimental_tensor_inplace_overloads(input, other));
     return rcpp_result_gen;
 END_RCPP
 }
 // cpp_experimental_tensor_cat_overloads
-ExperimentalTensor cpp_experimental_tensor_cat_overloads(ExperimentalTensor first, ExperimentalTensor second);
+torch::experimental::Tensor cpp_experimental_tensor_cat_overloads(torch::experimental::Tensor first, torch::experimental::Tensor second);
 RcppExport SEXP _torchextensiontest_cpp_experimental_tensor_cat_overloads(SEXP firstSEXP, SEXP secondSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< ExperimentalTensor >::type first(firstSEXP);
-    Rcpp::traits::input_parameter< ExperimentalTensor >::type second(secondSEXP);
+    Rcpp::traits::input_parameter< torch::experimental::Tensor >::type first(firstSEXP);
+    Rcpp::traits::input_parameter< torch::experimental::Tensor >::type second(secondSEXP);
     rcpp_result_gen = Rcpp::wrap(cpp_experimental_tensor_cat_overloads(first, second));
     return rcpp_result_gen;
 END_RCPP
 }
 // cpp_public_torch_namespace_functions
-ExperimentalTensor cpp_public_torch_namespace_functions(ExperimentalTensor first, ExperimentalTensor second);
+torch::experimental::Tensor cpp_public_torch_namespace_functions(torch::experimental::Tensor first, torch::experimental::Tensor second);
 RcppExport SEXP _torchextensiontest_cpp_public_torch_namespace_functions(SEXP firstSEXP, SEXP secondSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< ExperimentalTensor >::type first(firstSEXP);
-    Rcpp::traits::input_parameter< ExperimentalTensor >::type second(secondSEXP);
+    Rcpp::traits::input_parameter< torch::experimental::Tensor >::type first(firstSEXP);
+    Rcpp::traits::input_parameter< torch::experimental::Tensor >::type second(secondSEXP);
     rcpp_result_gen = Rcpp::wrap(cpp_public_torch_namespace_functions(first, second));
     return rcpp_result_gen;
 END_RCPP
 }
 // cpp_public_torch_nested_namespace_functions
-ExperimentalTensor cpp_public_torch_nested_namespace_functions(ExperimentalTensor input);
+torch::experimental::Tensor cpp_public_torch_nested_namespace_functions(torch::experimental::Tensor input);
 RcppExport SEXP _torchextensiontest_cpp_public_torch_nested_namespace_functions(SEXP inputSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< ExperimentalTensor >::type input(inputSEXP);
+    Rcpp::traits::input_parameter< torch::experimental::Tensor >::type input(inputSEXP);
     rcpp_result_gen = Rcpp::wrap(cpp_public_torch_nested_namespace_functions(input));
     return rcpp_result_gen;
 END_RCPP
 }
 // cpp_experimental_tensor_to_device
-ExperimentalTensor cpp_experimental_tensor_to_device(ExperimentalTensor input);
+torch::experimental::Tensor cpp_experimental_tensor_to_device(torch::experimental::Tensor input);
 RcppExport SEXP _torchextensiontest_cpp_experimental_tensor_to_device(SEXP inputSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< ExperimentalTensor >::type input(inputSEXP);
+    Rcpp::traits::input_parameter< torch::experimental::Tensor >::type input(inputSEXP);
     rcpp_result_gen = Rcpp::wrap(cpp_experimental_tensor_to_device(input));
     return rcpp_result_gen;
 END_RCPP
@@ -198,40 +198,40 @@ BEGIN_RCPP
 END_RCPP
 }
 // cpp_experimental_nn2poly_linear
-ExperimentalTensor cpp_experimental_nn2poly_linear(ExperimentalTensor layer, ExperimentalTensor coefficients);
+torch::experimental::Tensor cpp_experimental_nn2poly_linear(torch::experimental::Tensor layer, torch::experimental::Tensor coefficients);
 RcppExport SEXP _torchextensiontest_cpp_experimental_nn2poly_linear(SEXP layerSEXP, SEXP coefficientsSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< ExperimentalTensor >::type layer(layerSEXP);
-    Rcpp::traits::input_parameter< ExperimentalTensor >::type coefficients(coefficientsSEXP);
+    Rcpp::traits::input_parameter< torch::experimental::Tensor >::type layer(layerSEXP);
+    Rcpp::traits::input_parameter< torch::experimental::Tensor >::type coefficients(coefficientsSEXP);
     rcpp_result_gen = Rcpp::wrap(cpp_experimental_nn2poly_linear(layer, coefficients));
     return rcpp_result_gen;
 END_RCPP
 }
 // cpp_experimental_nn2poly_add_partition
-ExperimentalTensor cpp_experimental_nn2poly_add_partition(ExperimentalTensor matrix, std::int64_t column, double scalar, ExperimentalTensor values);
+torch::experimental::Tensor cpp_experimental_nn2poly_add_partition(torch::experimental::Tensor matrix, std::int64_t column, double scalar, torch::experimental::Tensor values);
 RcppExport SEXP _torchextensiontest_cpp_experimental_nn2poly_add_partition(SEXP matrixSEXP, SEXP columnSEXP, SEXP scalarSEXP, SEXP valuesSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< ExperimentalTensor >::type matrix(matrixSEXP);
+    Rcpp::traits::input_parameter< torch::experimental::Tensor >::type matrix(matrixSEXP);
     Rcpp::traits::input_parameter< std::int64_t >::type column(columnSEXP);
     Rcpp::traits::input_parameter< double >::type scalar(scalarSEXP);
-    Rcpp::traits::input_parameter< ExperimentalTensor >::type values(valuesSEXP);
+    Rcpp::traits::input_parameter< torch::experimental::Tensor >::type values(valuesSEXP);
     rcpp_result_gen = Rcpp::wrap(cpp_experimental_nn2poly_add_partition(matrix, column, scalar, values));
     return rcpp_result_gen;
 END_RCPP
 }
 // cpp_experimental_nn2poly_add_poly_eval
-ExperimentalTensor cpp_experimental_nn2poly_add_poly_eval(ExperimentalTensor matrix, std::int64_t column, ExperimentalTensor input, std::int64_t input_column, std::vector<double> coefficients);
+torch::experimental::Tensor cpp_experimental_nn2poly_add_poly_eval(torch::experimental::Tensor matrix, std::int64_t column, torch::experimental::Tensor input, std::int64_t input_column, std::vector<double> coefficients);
 RcppExport SEXP _torchextensiontest_cpp_experimental_nn2poly_add_poly_eval(SEXP matrixSEXP, SEXP columnSEXP, SEXP inputSEXP, SEXP input_columnSEXP, SEXP coefficientsSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< ExperimentalTensor >::type matrix(matrixSEXP);
+    Rcpp::traits::input_parameter< torch::experimental::Tensor >::type matrix(matrixSEXP);
     Rcpp::traits::input_parameter< std::int64_t >::type column(columnSEXP);
-    Rcpp::traits::input_parameter< ExperimentalTensor >::type input(inputSEXP);
+    Rcpp::traits::input_parameter< torch::experimental::Tensor >::type input(inputSEXP);
     Rcpp::traits::input_parameter< std::int64_t >::type input_column(input_columnSEXP);
     Rcpp::traits::input_parameter< std::vector<double> >::type coefficients(coefficientsSEXP);
     rcpp_result_gen = Rcpp::wrap(cpp_experimental_nn2poly_add_poly_eval(matrix, column, input, input_column, coefficients));
@@ -239,16 +239,16 @@ BEGIN_RCPP
 END_RCPP
 }
 // cpp_experimental_nn2poly_accumulate_partition
-ExperimentalTensor cpp_experimental_nn2poly_accumulate_partition(ExperimentalTensor matrix, std::int64_t output_column, std::vector<std::int64_t> input_columns, std::vector<double> multipliers, ExperimentalTensor output);
+torch::experimental::Tensor cpp_experimental_nn2poly_accumulate_partition(torch::experimental::Tensor matrix, std::int64_t output_column, std::vector<std::int64_t> input_columns, std::vector<double> multipliers, torch::experimental::Tensor output);
 RcppExport SEXP _torchextensiontest_cpp_experimental_nn2poly_accumulate_partition(SEXP matrixSEXP, SEXP output_columnSEXP, SEXP input_columnsSEXP, SEXP multipliersSEXP, SEXP outputSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< ExperimentalTensor >::type matrix(matrixSEXP);
+    Rcpp::traits::input_parameter< torch::experimental::Tensor >::type matrix(matrixSEXP);
     Rcpp::traits::input_parameter< std::int64_t >::type output_column(output_columnSEXP);
     Rcpp::traits::input_parameter< std::vector<std::int64_t> >::type input_columns(input_columnsSEXP);
     Rcpp::traits::input_parameter< std::vector<double> >::type multipliers(multipliersSEXP);
-    Rcpp::traits::input_parameter< ExperimentalTensor >::type output(outputSEXP);
+    Rcpp::traits::input_parameter< torch::experimental::Tensor >::type output(outputSEXP);
     rcpp_result_gen = Rcpp::wrap(cpp_experimental_nn2poly_accumulate_partition(matrix, output_column, input_columns, multipliers, output));
     return rcpp_result_gen;
 END_RCPP
