@@ -129,6 +129,10 @@ inline ::torch::double_t floating(double value) {
   return ::torch::double_t(call<void*>("_lantern_double", value));
 }
 
+inline ::torch::bool_t boolean(bool value) {
+  return ::torch::bool_t(call<void*>("_lantern_bool", value));
+}
+
 inline XPtrTorchoptional_memory_format optional_memory_format() {
   return XPtrTorchoptional_memory_format(
       call<void*>("_lantern_optional_memory_format", nullptr));
@@ -951,6 +955,35 @@ inline Tensor scalar_tensor(double value) {
 }
 
 }  // namespace experimental
+
+#include "experimental_namespace_functions.h"
+
+// Opt-in public namespace spellings matching LibTorch's free-function API.
+// Tensor itself remains under torch::experimental because torch.h already
+// exposes the established Lantern handle as torch::Tensor.
+using experimental::arange;
+using experimental::cat;
+using experimental::empty;
+using experimental::empty_like;
+using experimental::empty_strided;
+using experimental::eye;
+using experimental::full;
+using experimental::full_like;
+using experimental::linspace;
+using experimental::logspace;
+using experimental::ones;
+using experimental::ones_like;
+using experimental::rand;
+using experimental::rand_like;
+using experimental::randint;
+using experimental::randint_like;
+using experimental::randn;
+using experimental::randn_like;
+using experimental::randperm;
+using experimental::scalar_tensor;
+using experimental::zeros;
+using experimental::zeros_like;
+
 }  // namespace torch
 
 #endif  // TORCH_EXPERIMENTAL_H

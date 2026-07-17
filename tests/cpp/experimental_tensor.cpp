@@ -85,6 +85,28 @@ ExperimentalTensor cpp_experimental_tensor_cat_overloads(
   return torch::experimental::cat({first, second}, 0);
 }
 
+// [[Rcpp::export]]
+ExperimentalTensor cpp_public_torch_namespace_functions(
+    ExperimentalTensor first, ExperimentalTensor second) {
+  auto joined = torch::cat({first, second}, 0);
+  auto bias = torch::ones({joined.size(0)});
+  return torch::matmul(joined.reshape({1, -1}), bias.reshape({-1, 1}));
+}
+
+// [[Rcpp::export]]
+ExperimentalTensor cpp_public_torch_nested_namespace_functions(
+    ExperimentalTensor input) {
+  auto diagonal = torch::linalg::diagonal(torch::abs(input), 0, 0, 1);
+  return torch::special::expm1(diagonal);
+}
+
+void compile_public_torch_fft_namespace(
+    const ExperimentalTensor& input, XPtrTorchoptional_int64_t n,
+    XPtrTorchoptional_string_view norm) {
+  auto transformed = torch::fft::fft(input, n, -1, norm);
+  (void)transformed;
+}
+
 void compile_experimental_creation_api(const ExperimentalTensor& input,
                                        torch::TensorOptions options) {
   using namespace torch::experimental;
@@ -117,6 +139,36 @@ void compile_experimental_creation_api(const ExperimentalTensor& input,
   (void)h; (void)i; (void)j; (void)k; (void)l; (void)m; (void)n;
   (void)o; (void)p; (void)q; (void)r; (void)s; (void)t; (void)u;
   (void)v; (void)w; (void)x; (void)y;
+}
+
+void compile_public_torch_namespace_api(const ExperimentalTensor& input) {
+  auto a = torch::empty({2, 3});
+  auto b = torch::empty_strided({2, 3}, {3, 1});
+  auto c = torch::zeros({2, 3});
+  auto d = torch::ones({2, 3});
+  auto e = torch::rand({2, 3});
+  auto f = torch::randn({2, 3});
+  auto g = torch::randint(10, std::vector<std::int64_t>{2, 3});
+  auto h = torch::randperm(10);
+  auto i = torch::arange(10);
+  auto j = torch::linspace(0, 1, 5);
+  auto k = torch::logspace(0, 2, 3);
+  auto l = torch::eye(3);
+  auto m = torch::full({2, 3}, 4);
+  auto n = torch::scalar_tensor(2);
+  auto o = torch::empty_like(input);
+  auto p = torch::zeros_like(input);
+  auto q = torch::ones_like(input);
+  auto r = torch::rand_like(input);
+  auto s = torch::randn_like(input);
+  auto t = torch::randint_like(input, 0, 10);
+  auto u = torch::full_like(input, 3);
+  auto v = torch::cat({input, input});
+  auto w = torch::matmul(input, input);
+  (void)a; (void)b; (void)c; (void)d; (void)e; (void)f; (void)g;
+  (void)h; (void)i; (void)j; (void)k; (void)l; (void)m; (void)n;
+  (void)o; (void)p; (void)q; (void)r; (void)s; (void)t; (void)u;
+  (void)v; (void)w;
 }
 
 void compile_experimental_creation_types() {

@@ -34,6 +34,18 @@ test_that("the experimental C++ Tensor API works through Lantern", {
     )),
     c(1, 2, 3, 4)
   )
+  expect_equal(
+    as.numeric(cpp_public_torch_namespace_functions(
+      torch_tensor(c(1, 2)), torch_tensor(c(3, 4))
+    )),
+    10
+  )
+  nested_input <- torch_tensor(matrix(c(-1, 2, 3, -4), nrow = 2))
+  expect_equal(
+    as.numeric(cpp_public_torch_nested_namespace_functions(nested_input)),
+    expm1(c(1, 4)),
+    tolerance = 1e-6
+  )
 
   expect_equal(as.numeric(cpp_experimental_creation_zeros()), rep(0, 6))
   expect_equal(as.numeric(cpp_experimental_creation_arange()), c(1, 3, 5, 7))
