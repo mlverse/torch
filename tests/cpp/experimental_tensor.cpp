@@ -62,6 +62,29 @@ bool cpp_experimental_tensor_native_bool_return(
   return input.equal(input);
 }
 
+// Exercise native scalar overload resolution independently of the nn2poly
+// compatibility examples below.
+// [[Rcpp::export]]
+ExperimentalTensor cpp_experimental_tensor_scalar_overloads(
+    ExperimentalTensor input) {
+  return input.add(2).mul(3.0).pow(2);
+}
+
+// [[Rcpp::export]]
+ExperimentalTensor cpp_experimental_tensor_inplace_overloads(
+    ExperimentalTensor input, ExperimentalTensor other) {
+  auto output = input.clone();
+  output.add_(other);
+  output.select(0, 0).fill_(7);
+  return output;
+}
+
+// [[Rcpp::export]]
+ExperimentalTensor cpp_experimental_tensor_cat_overloads(
+    ExperimentalTensor first, ExperimentalTensor second) {
+  return torch::experimental::cat({first, second}, 0);
+}
+
 void compile_experimental_creation_api(const ExperimentalTensor& input,
                                        torch::TensorOptions options) {
   using namespace torch::experimental;

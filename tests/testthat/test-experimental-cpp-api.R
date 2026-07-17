@@ -1,5 +1,5 @@
 test_that("the experimental C++ Tensor API works through Lantern", {
-  Rcpp::sourceCpp(test_path("..", "cpp", "experimental_tensor.cpp"))
+  source_cpp_test("experimental_tensor.cpp")
 
   x <- torch_tensor(matrix(c(-1, 2, 3, -4), nrow = 2))
 
@@ -18,6 +18,22 @@ test_that("the experimental C++ Tensor API works through Lantern", {
     c(-1, 3)
   )
   expect_true(cpp_experimental_tensor_native_bool_return(x))
+  expect_equal(
+    as.numeric(cpp_experimental_tensor_scalar_overloads(torch_tensor(c(1, 2)))),
+    c(81, 144)
+  )
+  expect_equal(
+    as_array(cpp_experimental_tensor_inplace_overloads(
+      torch_zeros(2, 2), torch_ones(2, 2)
+    )),
+    matrix(c(7, 7, 1, 1), nrow = 2, byrow = TRUE)
+  )
+  expect_equal(
+    as.numeric(cpp_experimental_tensor_cat_overloads(
+      torch_tensor(c(1, 2)), torch_tensor(c(3, 4))
+    )),
+    c(1, 2, 3, 4)
+  )
 
   expect_equal(as.numeric(cpp_experimental_creation_zeros()), rep(0, 6))
   expect_equal(as.numeric(cpp_experimental_creation_arange()), c(1, 3, 5, 7))
