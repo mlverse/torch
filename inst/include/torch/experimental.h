@@ -480,6 +480,16 @@ class Tensor {
         "_lantern_Tensor_to", get(), options.get()));
   }
 
+  Tensor to(DeviceType device) const {
+    auto options = TensorOptions().device(device);
+    return to(options.as_torch());
+  }
+
+  Tensor to(DeviceType device, std::int64_t index) const {
+    auto options = TensorOptions().device(device, index);
+    return to(options.as_torch());
+  }
+
   Tensor& requires_grad_(bool requires_grad = true) {
     // Lantern returns another owning wrapper around the mutated tensor.
     // Letting it die here releases only that wrapper, not the tensor value.
@@ -983,6 +993,8 @@ using experimental::randperm;
 using experimental::scalar_tensor;
 using experimental::zeros;
 using experimental::zeros_like;
+using experimental::kCPU;
+using experimental::kCUDA;
 
 }  // namespace torch
 

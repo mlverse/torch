@@ -1,6 +1,5 @@
 #include <Rcpp.h>
 
-// [[Rcpp::depends(torch)]]
 #define IMPORT_TORCH
 #include <torch/experimental.h>
 
@@ -98,6 +97,19 @@ ExperimentalTensor cpp_public_torch_nested_namespace_functions(
     ExperimentalTensor input) {
   auto diagonal = torch::linalg::diagonal(torch::abs(input), 0, 0, 1);
   return torch::special::expm1(diagonal);
+}
+
+// [[Rcpp::export]]
+ExperimentalTensor cpp_experimental_tensor_to_device(ExperimentalTensor input) {
+  return input.to(torch::kCPU);
+}
+
+void compile_experimental_tensor_to_indexed_device(
+    const ExperimentalTensor& input) {
+  auto cpu = input.to(torch::kCPU, 0);
+  auto cuda = input.to(torch::kCUDA, 0);
+  (void)cpu;
+  (void)cuda;
 }
 
 void compile_public_torch_fft_namespace(
@@ -281,3 +293,8 @@ ExperimentalTensor cpp_experimental_nn2poly_accumulate_partition(
       .add_(partition.mul(matrix.select(1, 0).pow(multipliers.front())));
   return result;
 }
+
+// Keep the fixture in one translation unit because torch_imports.h provides
+// package-level C-callable shims. RcppExports.cpp is generated normally by
+// Rcpp::compileAttributes(), then compiled here rather than as a second object.
+#include "RcppExports.cpp"

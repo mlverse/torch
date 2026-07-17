@@ -1,5 +1,5 @@
 test_that("the experimental C++ Tensor API works through Lantern", {
-  source_cpp_test("experimental_tensor.cpp")
+  cpp_extension_package()
 
   x <- torch_tensor(matrix(c(-1, 2, 3, -4), nrow = 2))
 
@@ -46,6 +46,9 @@ test_that("the experimental C++ Tensor API works through Lantern", {
     expm1(c(1, 4)),
     tolerance = 1e-6
   )
+  moved <- cpp_experimental_tensor_to_device(nested_input)
+  expect_equal(as_array(moved), as_array(nested_input))
+  expect_equal(moved$device$type, "cpu")
 
   expect_equal(as.numeric(cpp_experimental_creation_zeros()), rep(0, 6))
   expect_equal(as.numeric(cpp_experimental_creation_arange()), c(1, 3, 5, 7))

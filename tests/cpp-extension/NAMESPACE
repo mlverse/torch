@@ -1,0 +1,3 @@
+useDynLib(torchextensiontest, .registration = TRUE)
+importFrom(Rcpp, evalCpp)
+exportPattern("^(cpp_|zeros$)")
