@@ -13,6 +13,75 @@
 namespace torch {
 namespace experimental {
 
+enum class ScalarType {
+  Float32,
+  Float64,
+  Float16,
+  BFloat16,
+  ComplexHalf,
+  ComplexFloat,
+  ComplexDouble,
+  Float8E4M3FN,
+  Float8E5M2,
+  UInt8,
+  Int8,
+  Int16,
+  Int32,
+  Int64,
+  Bool,
+  QUInt8,
+  QInt8,
+  QInt32,
+};
+
+using Dtype = ScalarType;
+
+inline constexpr ScalarType kFloat32 = ScalarType::Float32;
+inline constexpr ScalarType kFloat64 = ScalarType::Float64;
+inline constexpr ScalarType kFloat16 = ScalarType::Float16;
+inline constexpr ScalarType kBFloat16 = ScalarType::BFloat16;
+inline constexpr ScalarType kComplexHalf = ScalarType::ComplexHalf;
+inline constexpr ScalarType kComplexFloat = ScalarType::ComplexFloat;
+inline constexpr ScalarType kComplexDouble = ScalarType::ComplexDouble;
+inline constexpr ScalarType kFloat8E4M3FN = ScalarType::Float8E4M3FN;
+inline constexpr ScalarType kFloat8E5M2 = ScalarType::Float8E5M2;
+inline constexpr ScalarType kUInt8 = ScalarType::UInt8;
+inline constexpr ScalarType kInt8 = ScalarType::Int8;
+inline constexpr ScalarType kInt16 = ScalarType::Int16;
+inline constexpr ScalarType kInt32 = ScalarType::Int32;
+inline constexpr ScalarType kInt64 = ScalarType::Int64;
+inline constexpr ScalarType kBool = ScalarType::Bool;
+inline constexpr ScalarType kQUInt8 = ScalarType::QUInt8;
+inline constexpr ScalarType kQInt8 = ScalarType::QInt8;
+inline constexpr ScalarType kQInt32 = ScalarType::QInt32;
+
+// LibTorch's conventional aliases from torch/types.h.
+inline constexpr ScalarType kByte = kUInt8;
+inline constexpr ScalarType kChar = kInt8;
+inline constexpr ScalarType kShort = kInt16;
+inline constexpr ScalarType kInt = kInt32;
+inline constexpr ScalarType kLong = kInt64;
+inline constexpr ScalarType kHalf = kFloat16;
+inline constexpr ScalarType kFloat = kFloat32;
+inline constexpr ScalarType kDouble = kFloat64;
+inline constexpr ScalarType kComplexFloat32 = kComplexHalf;
+inline constexpr ScalarType kComplexFloat64 = kComplexFloat;
+inline constexpr ScalarType kComplexFloat128 = kComplexDouble;
+
+enum class Layout { Strided, Sparse, SparseCsr, SparseCsc, SparseBsr, SparseBsc };
+
+inline constexpr Layout kStrided = Layout::Strided;
+inline constexpr Layout kSparse = Layout::Sparse;
+inline constexpr Layout kSparseCsr = Layout::SparseCsr;
+inline constexpr Layout kSparseCsc = Layout::SparseCsc;
+inline constexpr Layout kSparseBsr = Layout::SparseBsr;
+inline constexpr Layout kSparseBsc = Layout::SparseBsc;
+
+enum class DeviceType { CPU, CUDA };
+
+inline constexpr DeviceType kCPU = DeviceType::CPU;
+inline constexpr DeviceType kCUDA = DeviceType::CUDA;
+
 namespace detail {
 
 template <typename Return, typename... Args>
@@ -65,7 +134,98 @@ inline XPtrTorchoptional_memory_format optional_memory_format() {
       call<void*>("_lantern_optional_memory_format", nullptr));
 }
 
+inline ::torch::Dtype dtype(ScalarType type) {
+  const char* symbol = nullptr;
+  switch (type) {
+    case ScalarType::Float32: symbol = "_lantern_Dtype_float32"; break;
+    case ScalarType::Float64: symbol = "_lantern_Dtype_float64"; break;
+    case ScalarType::Float16: symbol = "_lantern_Dtype_float16"; break;
+    case ScalarType::BFloat16: symbol = "_lantern_Dtype_bfloat16"; break;
+    case ScalarType::ComplexHalf: symbol = "_lantern_Dtype_chalf"; break;
+    case ScalarType::ComplexFloat: symbol = "_lantern_Dtype_cfloat"; break;
+    case ScalarType::ComplexDouble: symbol = "_lantern_Dtype_cdouble"; break;
+    case ScalarType::Float8E4M3FN: symbol = "_lantern_Dtype_float8_e4m3fn"; break;
+    case ScalarType::Float8E5M2: symbol = "_lantern_Dtype_float8_e5m2"; break;
+    case ScalarType::UInt8: symbol = "_lantern_Dtype_uint8"; break;
+    case ScalarType::Int8: symbol = "_lantern_Dtype_int8"; break;
+    case ScalarType::Int16: symbol = "_lantern_Dtype_int16"; break;
+    case ScalarType::Int32: symbol = "_lantern_Dtype_int32"; break;
+    case ScalarType::Int64: symbol = "_lantern_Dtype_int64"; break;
+    case ScalarType::Bool: symbol = "_lantern_Dtype_bool"; break;
+    case ScalarType::QUInt8: symbol = "_lantern_Dtype_quint8"; break;
+    case ScalarType::QInt8: symbol = "_lantern_Dtype_qint8"; break;
+    case ScalarType::QInt32: symbol = "_lantern_Dtype_qint32"; break;
+  }
+  return ::torch::Dtype(call<void*>(symbol));
+}
+
+inline ::torch::Layout layout(Layout type) {
+  const char* symbol = nullptr;
+  switch (type) {
+    case Layout::Strided: symbol = "_lantern_Layout_strided"; break;
+    case Layout::Sparse: symbol = "_lantern_Layout_sparse"; break;
+    case Layout::SparseCsr: symbol = "_lantern_Layout_sparse_csr"; break;
+    case Layout::SparseCsc: symbol = "_lantern_Layout_sparse_csc"; break;
+    case Layout::SparseBsr: symbol = "_lantern_Layout_sparse_bsr"; break;
+    case Layout::SparseBsc: symbol = "_lantern_Layout_sparse_bsc"; break;
+  }
+  return ::torch::Layout(call<void*>(symbol));
+}
+
+inline ::torch::Device device(DeviceType type, std::int64_t index,
+                              bool has_index) {
+  const char* name = type == DeviceType::CUDA ? "cuda" : "cpu";
+  return ::torch::Device(
+      call<void*>("_lantern_Device", name, index, has_index));
+}
+
 }  // namespace detail
+
+class TensorOptions {
+ public:
+  TensorOptions() : options_(detail::tensor_options()) {}
+
+  TensorOptions dtype(ScalarType type) const {
+    auto value = detail::dtype(type);
+    return TensorOptions(detail::call<void*>(
+        "_lantern_TensorOptions_dtype", options_.get(), value.get()));
+  }
+
+  TensorOptions layout(Layout type) const {
+    auto value = detail::layout(type);
+    return TensorOptions(detail::call<void*>(
+        "_lantern_TensorOptions_layout", options_.get(), value.get()));
+  }
+
+  TensorOptions device(DeviceType type) const {
+    auto value = detail::device(type, 0, false);
+    return TensorOptions(detail::call<void*>(
+        "_lantern_TensorOptions_device", options_.get(), value.get()));
+  }
+
+  TensorOptions device(DeviceType type, std::int64_t index) const {
+    auto value = detail::device(type, index, true);
+    return TensorOptions(detail::call<void*>(
+        "_lantern_TensorOptions_device", options_.get(), value.get()));
+  }
+
+  TensorOptions requires_grad(bool value = true) const {
+    return TensorOptions(detail::call<void*>(
+        "_lantern_TensorOptions_requires_grad", options_.get(), value));
+  }
+
+  TensorOptions pinned_memory(bool value = true) const {
+    return TensorOptions(detail::call<void*>(
+        "_lantern_TensorOptions_pinned_memory", options_.get(), value));
+  }
+
+  const ::torch::TensorOptions& as_torch() const noexcept { return options_; }
+  operator const ::torch::TensorOptions&() const noexcept { return options_; }
+
+ private:
+  explicit TensorOptions(void* value) : options_(value) {}
+  ::torch::TensorOptions options_;
+};
 
 // An experimental, LibTorch-inspired facade over the Lantern C API.
 //
@@ -223,6 +383,21 @@ class Tensor {
         alpha.get()));
   }
 
+  Tensor add(double other) const {
+    auto value = detail::scalar(other);
+    auto alpha = detail::scalar(1);
+    return from_raw(detail::call<void*>(
+        "_lantern_Tensor_add_tensor_scalar_scalar", get(), value.get(),
+        alpha.get()));
+  }
+
+  Tensor add_(const Tensor& other) {
+    auto alpha = detail::scalar(1);
+    return from_raw(detail::call<void*>(
+        "_lantern_Tensor_add__tensor_tensor_scalar", get(), other.get(),
+        alpha.get()));
+  }
+
   Tensor sub(const Tensor& other) const {
     auto alpha = scalar(1);
     return from_raw(detail::call<void*>(
@@ -233,6 +408,24 @@ class Tensor {
   Tensor mul(const Tensor& other) const {
     return from_raw(detail::call<void*>(
         "_lantern_Tensor_mul_tensor_tensor", get(), other.get()));
+  }
+
+  Tensor mul(double other) const {
+    auto value = detail::scalar(other);
+    return from_raw(detail::call<void*>(
+        "_lantern_Tensor_mul_tensor_scalar", get(), value.get()));
+  }
+
+  Tensor pow(double exponent) const {
+    auto value = detail::scalar(exponent);
+    return from_raw(detail::call<void*>(
+        "_lantern_Tensor_pow_tensor_scalar", get(), value.get()));
+  }
+
+  Tensor fill_(double value) {
+    auto scalar_value = detail::scalar(value);
+    return from_raw(detail::call<void*>(
+        "_lantern_Tensor_fill__tensor_scalar", get(), scalar_value.get()));
   }
 
   Tensor div(const Tensor& other) const {
@@ -411,8 +604,10 @@ class Tensor {
 
   Tensor operator-() const { return neg(); }
   Tensor operator+(const Tensor& other) const { return add(other); }
+  Tensor operator+(double other) const { return add(other); }
   Tensor operator-(const Tensor& other) const { return sub(other); }
   Tensor operator*(const Tensor& other) const { return mul(other); }
+  Tensor operator*(double other) const { return mul(other); }
   Tensor operator/(const Tensor& other) const { return div(other); }
 
 #include "experimental_tensor_methods.h"
@@ -467,6 +662,23 @@ inline ::torch::Tensor& as_torch(Tensor& tensor) noexcept {
 
 inline Tensor matmul(const Tensor& left, const Tensor& right) {
   return left.matmul(right);
+}
+
+inline Tensor cat(const std::vector<Tensor>& tensors, std::int64_t dim = 0) {
+  ::torch::TensorList values(detail::call<void*>("_lantern_TensorList"));
+  for (const auto& tensor : tensors) {
+    detail::call_void("_lantern_TensorList_push_back", values.get(),
+                      tensor.get());
+  }
+  auto dimension = detail::integer(dim);
+  return Tensor(::torch::Tensor(detail::call<void*>(
+      "_lantern_cat_constitensorlistref_intt", values.get(),
+      dimension.get())));
+}
+
+inline Tensor cat(std::initializer_list<Tensor> tensors,
+                  std::int64_t dim = 0) {
+  return cat(std::vector<Tensor>(tensors), dim);
 }
 
 inline Tensor empty(const std::vector<std::int64_t>& size,

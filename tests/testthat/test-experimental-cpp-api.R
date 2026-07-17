@@ -30,4 +30,40 @@ test_that("the experimental C++ Tensor API works through Lantern", {
     rep(7, 4)
   )
   expect_equal(cpp_experimental_creation_random_sizes(), c(2, 3))
+  options_tensor <- zeros(5, 3)
+  expect_equal(as.numeric(options_tensor), rep(0, 15))
+  expect_true(options_tensor$dtype == torch_float64())
+
+  layer <- torch_tensor(matrix(as.numeric(1:6), nrow = 3, ncol = 2))
+  coefficients <- torch_tensor(matrix(c(10, 20, 30, 40), nrow = 2))
+  intercept <- torch_tensor(matrix(c(1, 0), nrow = 1))
+  expect_equal(
+    as_array(cpp_experimental_nn2poly_linear(layer, coefficients)),
+    as_array(layer$t()$matmul(torch_cat(list(intercept, coefficients))))
+  )
+
+  matrix <- torch_zeros(3, 2)
+  values <- torch_tensor(c(1, 2, 3))
+  expect_equal(
+    as_array(cpp_experimental_nn2poly_add_partition(matrix, 1, 2, values)),
+    cbind(c(0, 0, 0), c(2, 4, 6))
+  )
+
+  input <- torch_tensor(cbind(c(1, 2, 3), c(4, 5, 6)))
+  expect_equal(
+    as_array(cpp_experimental_nn2poly_add_poly_eval(
+      torch_zeros(3, 2), 0, input, 1, c(2, 3, 4)
+    )),
+    cbind(2 + 3 * c(4, 5, 6) + 4 * c(4, 5, 6)^2, c(0, 0, 0))
+  )
+
+  partition_input <- torch_tensor(
+    cbind(c(2, 3, 4), c(5, 6, 7), c(2, 3, 4))
+  )
+  expect_equal(
+    as_array(cpp_experimental_nn2poly_accumulate_partition(
+      partition_input, 1, c(1, 2), c(2, 3), torch_zeros(3, 2)
+    )),
+    cbind(c(0, 0, 0), c(2, 3, 4)^2 * c(5, 6, 7)^2 * c(2, 3, 4)^3)
+  )
 })
