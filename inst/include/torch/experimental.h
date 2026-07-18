@@ -121,6 +121,11 @@ inline ::torch::Scalar scalar(int value) {
   return ::torch::Scalar(call<void*>("_lantern_Scalar", &value, "int"));
 }
 
+inline ::torch::Scalar scalar(std::int64_t value) {
+  return ::torch::Scalar(
+      call<void*>("_lantern_Scalar", &value, "int64_t"));
+}
+
 inline ::torch::int64_t integer(std::int64_t value) {
   return ::torch::int64_t(call<void*>("_lantern_int64_t", value));
 }
@@ -403,6 +408,14 @@ class Tensor {
         alpha.get()));
   }
 
+  Tensor add(std::int64_t other) const {
+    auto value = detail::scalar(other);
+    auto alpha = detail::scalar(1);
+    return from_raw(detail::call<void*>(
+        "_lantern_Tensor_add_tensor_scalar_scalar", get(), value.get(),
+        alpha.get()));
+  }
+
   Tensor add_(const Tensor& other) {
     auto alpha = detail::scalar(1);
     return from_raw(detail::call<void*>(
@@ -434,6 +447,12 @@ class Tensor {
         "_lantern_Tensor_mul_tensor_scalar", get(), value.get()));
   }
 
+  Tensor mul(std::int64_t other) const {
+    auto value = detail::scalar(other);
+    return from_raw(detail::call<void*>(
+        "_lantern_Tensor_mul_tensor_scalar", get(), value.get()));
+  }
+
   Tensor pow(double exponent) const {
     auto value = detail::scalar(exponent);
     return from_raw(detail::call<void*>(
@@ -441,6 +460,12 @@ class Tensor {
   }
 
   Tensor pow(int exponent) const {
+    auto value = detail::scalar(exponent);
+    return from_raw(detail::call<void*>(
+        "_lantern_Tensor_pow_tensor_scalar", get(), value.get()));
+  }
+
+  Tensor pow(std::int64_t exponent) const {
     auto value = detail::scalar(exponent);
     return from_raw(detail::call<void*>(
         "_lantern_Tensor_pow_tensor_scalar", get(), value.get()));

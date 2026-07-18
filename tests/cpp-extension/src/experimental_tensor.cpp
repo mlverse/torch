@@ -185,6 +185,57 @@ torch::experimental::Tensor cpp_experimental_edge_invalid_reshape(
   return input.reshape({2, 2});
 }
 
+// [[Rcpp::export]]
+torch::experimental::Tensor cpp_experimental_edge_large_integer_scalar(
+    torch::experimental::Tensor input) {
+  return input.add(INT64_C(5000000000));
+}
+
+// [[Rcpp::export]]
+bool cpp_experimental_edge_large_integer_is_exact(
+    torch::experimental::Tensor input) {
+  auto result = input.add(INT64_C(5000000000)).contiguous();
+  auto* values = result.data_ptr<std::int64_t>();
+  return values[0] == INT64_C(5000000001) &&
+         values[1] == INT64_C(5000000002);
+}
+
+// [[Rcpp::export]]
+torch::experimental::Tensor cpp_experimental_edge_view_from_temporary(
+    torch::experimental::Tensor input) {
+  return input.clone().select(0, 0);
+}
+
+// [[Rcpp::export]]
+torch::experimental::Tensor cpp_experimental_edge_copy_move_ownership(
+    torch::experimental::Tensor input) {
+  torch::experimental::Tensor copy(input);
+  torch::experimental::Tensor moved(std::move(copy));
+  input = torch::experimental::Tensor::undefined();
+  return moved;
+}
+
+// [[Rcpp::export]]
+torch::experimental::Tensor cpp_experimental_edge_identity_roundtrip(
+    torch::experimental::Tensor input) {
+  return input;
+}
+
+// [[Rcpp::export]]
+Rcpp::List cpp_experimental_edge_options_are_immutable() {
+  auto base = torch::experimental::TensorOptions();
+  auto changed = base.dtype(torch::experimental::kFloat64);
+  auto from_base = torch::experimental::zeros({1}, base);
+  auto from_changed = torch::experimental::zeros({1}, changed);
+  return Rcpp::List::create(Rcpp::Named("base") = SEXP(from_base),
+                            Rcpp::Named("changed") = SEXP(from_changed));
+}
+
+// [[Rcpp::export]]
+torch::experimental::Tensor cpp_experimental_edge_scalar_shape() {
+  return torch::zeros(std::vector<std::int64_t>{});
+}
+
 // Exercise native scalar overload resolution independently of the nn2poly
 // compatibility examples below.
 // [[Rcpp::export]]

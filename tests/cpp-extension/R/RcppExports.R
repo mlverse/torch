@@ -89,6 +89,34 @@ cpp_experimental_edge_invalid_reshape <- function(input) {
     .Call(`_torchextensiontest_cpp_experimental_edge_invalid_reshape`, input)
 }
 
+cpp_experimental_edge_large_integer_scalar <- function(input) {
+    .Call(`_torchextensiontest_cpp_experimental_edge_large_integer_scalar`, input)
+}
+
+cpp_experimental_edge_large_integer_is_exact <- function(input) {
+    .Call(`_torchextensiontest_cpp_experimental_edge_large_integer_is_exact`, input)
+}
+
+cpp_experimental_edge_view_from_temporary <- function(input) {
+    .Call(`_torchextensiontest_cpp_experimental_edge_view_from_temporary`, input)
+}
+
+cpp_experimental_edge_copy_move_ownership <- function(input) {
+    .Call(`_torchextensiontest_cpp_experimental_edge_copy_move_ownership`, input)
+}
+
+cpp_experimental_edge_identity_roundtrip <- function(input) {
+    .Call(`_torchextensiontest_cpp_experimental_edge_identity_roundtrip`, input)
+}
+
+cpp_experimental_edge_options_are_immutable <- function() {
+    .Call(`_torchextensiontest_cpp_experimental_edge_options_are_immutable`)
+}
+
+cpp_experimental_edge_scalar_shape <- function() {
+    .Call(`_torchextensiontest_cpp_experimental_edge_scalar_shape`)
+}
+
 cpp_experimental_tensor_scalar_overloads <- function(input) {
     .Call(`_torchextensiontest_cpp_experimental_tensor_scalar_overloads`, input)
 }

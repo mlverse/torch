@@ -69,4 +69,47 @@ test_that("creation options and Lantern errors propagate", {
     cpp_experimental_edge_invalid_reshape(torch_ones(3)),
     "shape.*invalid|invalid.*shape|size"
   )
+
+  # A failed Lantern call must not poison the next call's host-handler state.
+  expect_equal(as.numeric(cpp_experimental_creation_zeros()), rep(0, 6))
+})
+
+test_that("64-bit C++ scalars are not truncated or promoted", {
+  cpp_extension_package()
+  x <- torch_tensor(c(1L, 2L), dtype = torch_int64())
+  result <- cpp_experimental_edge_large_integer_scalar(x)
+
+  expect_true(result$dtype == torch_int64())
+  expect_true(cpp_experimental_edge_large_integer_is_exact(x))
+})
+
+test_that("temporary views and copied handles retain ownership", {
+  cpp_extension_package()
+  x <- torch_tensor(matrix(as.numeric(1:6), nrow = 2))
+
+  view <- cpp_experimental_edge_view_from_temporary(x)
+  expect_equal(as.numeric(view), c(1, 3, 5))
+
+  owned <- cpp_experimental_edge_copy_move_ownership(x)
+  expect_equal(as_array(owned), as_array(x))
+})
+
+test_that("identity roundtrips alias while option builders do not", {
+  cpp_extension_package()
+  x <- torch_zeros(2, 2)
+  alias <- cpp_experimental_edge_identity_roundtrip(x)
+  alias$fill_(4)
+  expect_equal(as.numeric(x), rep(4, 4))
+
+  options <- cpp_experimental_edge_options_are_immutable()
+  expect_true(options$base$dtype == torch_float32())
+  expect_true(options$changed$dtype == torch_float64())
+})
+
+test_that("an empty size vector means a scalar, not an empty tensor", {
+  cpp_extension_package()
+  scalar <- cpp_experimental_edge_scalar_shape()
+  expect_equal(scalar$dim(), 0)
+  expect_equal(scalar$numel(), 1)
+  expect_equal(as.numeric(scalar), 0)
 })
