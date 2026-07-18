@@ -49,8 +49,52 @@ cpp_experimental_tensor_autograd_state <- function(input) {
     .Call(`_torchextensiontest_cpp_experimental_tensor_autograd_state`, input)
 }
 
+cpp_experimental_edge_negative_indices <- function(input) {
+    .Call(`_torchextensiontest_cpp_experimental_edge_negative_indices`, input)
+}
+
+cpp_experimental_edge_transpose_is_contiguous <- function(input) {
+    .Call(`_torchextensiontest_cpp_experimental_edge_transpose_is_contiguous`, input)
+}
+
+cpp_experimental_edge_make_contiguous <- function(input) {
+    .Call(`_torchextensiontest_cpp_experimental_edge_make_contiguous`, input)
+}
+
+cpp_experimental_edge_clone_isolation <- function(input) {
+    .Call(`_torchextensiontest_cpp_experimental_edge_clone_isolation`, input)
+}
+
+cpp_experimental_edge_view_aliasing <- function(input) {
+    .Call(`_torchextensiontest_cpp_experimental_edge_view_aliasing`, input)
+}
+
+cpp_experimental_edge_zero_sized <- function() {
+    .Call(`_torchextensiontest_cpp_experimental_edge_zero_sized`)
+}
+
+cpp_experimental_edge_scalar_tensor <- function(value) {
+    .Call(`_torchextensiontest_cpp_experimental_edge_scalar_tensor`, value)
+}
+
+cpp_experimental_edge_temporary_lifetime <- function(input) {
+    .Call(`_torchextensiontest_cpp_experimental_edge_temporary_lifetime`, input)
+}
+
+cpp_experimental_edge_requires_grad_creation <- function() {
+    .Call(`_torchextensiontest_cpp_experimental_edge_requires_grad_creation`)
+}
+
+cpp_experimental_edge_invalid_reshape <- function(input) {
+    .Call(`_torchextensiontest_cpp_experimental_edge_invalid_reshape`, input)
+}
+
 cpp_experimental_tensor_scalar_overloads <- function(input) {
     .Call(`_torchextensiontest_cpp_experimental_tensor_scalar_overloads`, input)
+}
+
+cpp_experimental_tensor_integral_scalar_overloads <- function(input) {
+    .Call(`_torchextensiontest_cpp_experimental_tensor_integral_scalar_overloads`, input)
 }
 
 cpp_experimental_tensor_inplace_overloads <- function(input, other) {

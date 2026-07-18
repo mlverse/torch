@@ -395,6 +395,14 @@ class Tensor {
         alpha.get()));
   }
 
+  Tensor add(int other) const {
+    auto value = detail::scalar(other);
+    auto alpha = detail::scalar(1);
+    return from_raw(detail::call<void*>(
+        "_lantern_Tensor_add_tensor_scalar_scalar", get(), value.get(),
+        alpha.get()));
+  }
+
   Tensor add_(const Tensor& other) {
     auto alpha = detail::scalar(1);
     return from_raw(detail::call<void*>(
@@ -420,7 +428,19 @@ class Tensor {
         "_lantern_Tensor_mul_tensor_scalar", get(), value.get()));
   }
 
+  Tensor mul(int other) const {
+    auto value = detail::scalar(other);
+    return from_raw(detail::call<void*>(
+        "_lantern_Tensor_mul_tensor_scalar", get(), value.get()));
+  }
+
   Tensor pow(double exponent) const {
+    auto value = detail::scalar(exponent);
+    return from_raw(detail::call<void*>(
+        "_lantern_Tensor_pow_tensor_scalar", get(), value.get()));
+  }
+
+  Tensor pow(int exponent) const {
     auto value = detail::scalar(exponent);
     return from_raw(detail::call<void*>(
         "_lantern_Tensor_pow_tensor_scalar", get(), value.get()));
@@ -619,9 +639,11 @@ class Tensor {
   Tensor operator-() const { return neg(); }
   Tensor operator+(const Tensor& other) const { return add(other); }
   Tensor operator+(double other) const { return add(other); }
+  Tensor operator+(int other) const { return add(other); }
   Tensor operator-(const Tensor& other) const { return sub(other); }
   Tensor operator*(const Tensor& other) const { return mul(other); }
   Tensor operator*(double other) const { return mul(other); }
+  Tensor operator*(int other) const { return mul(other); }
   Tensor operator/(const Tensor& other) const { return div(other); }
 
 #include "experimental_tensor_methods.h"

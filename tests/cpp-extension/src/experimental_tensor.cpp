@@ -123,12 +123,80 @@ torch::experimental::Tensor cpp_experimental_tensor_autograd_state(
   return output.detach();
 }
 
+// [[Rcpp::export]]
+torch::experimental::Tensor cpp_experimental_edge_negative_indices(
+    torch::experimental::Tensor input) {
+  return input.select(-1, -1).unsqueeze(-1);
+}
+
+// [[Rcpp::export]]
+bool cpp_experimental_edge_transpose_is_contiguous(
+    torch::experimental::Tensor input) {
+  return input.transpose(0, 1).is_contiguous();
+}
+
+// [[Rcpp::export]]
+torch::experimental::Tensor cpp_experimental_edge_make_contiguous(
+    torch::experimental::Tensor input) {
+  return input.transpose(0, 1).contiguous();
+}
+
+// [[Rcpp::export]]
+torch::experimental::Tensor cpp_experimental_edge_clone_isolation(
+    torch::experimental::Tensor input) {
+  auto clone = input.clone();
+  clone.zero_();
+  return torch::cat({input.reshape({-1}), clone.reshape({-1})});
+}
+
+// [[Rcpp::export]]
+torch::experimental::Tensor cpp_experimental_edge_view_aliasing(
+    torch::experimental::Tensor input) {
+  auto output = input.clone();
+  output.select(0, 0).fill_(9);
+  return output;
+}
+
+// [[Rcpp::export]]
+torch::experimental::Tensor cpp_experimental_edge_zero_sized() {
+  return torch::zeros({0, 3});
+}
+
+// [[Rcpp::export]]
+torch::experimental::Tensor cpp_experimental_edge_scalar_tensor(double value) {
+  return torch::scalar_tensor(value);
+}
+
+// [[Rcpp::export]]
+torch::experimental::Tensor cpp_experimental_edge_temporary_lifetime(
+    torch::experimental::Tensor input) {
+  return torch::abs(input).add(1).square().reshape({-1});
+}
+
+// [[Rcpp::export]]
+torch::experimental::Tensor cpp_experimental_edge_requires_grad_creation() {
+  auto options = torch::experimental::TensorOptions().requires_grad();
+  return torch::ones({2, 2}, options);
+}
+
+// [[Rcpp::export]]
+torch::experimental::Tensor cpp_experimental_edge_invalid_reshape(
+    torch::experimental::Tensor input) {
+  return input.reshape({2, 2});
+}
+
 // Exercise native scalar overload resolution independently of the nn2poly
 // compatibility examples below.
 // [[Rcpp::export]]
 torch::experimental::Tensor cpp_experimental_tensor_scalar_overloads(
     torch::experimental::Tensor input) {
   return input.add(2).mul(3.0).pow(2);
+}
+
+// [[Rcpp::export]]
+torch::experimental::Tensor cpp_experimental_tensor_integral_scalar_overloads(
+    torch::experimental::Tensor input) {
+  return input.add(2).mul(3).pow(2);
 }
 
 // [[Rcpp::export]]

@@ -144,6 +144,114 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// cpp_experimental_edge_negative_indices
+torch::experimental::Tensor cpp_experimental_edge_negative_indices(torch::experimental::Tensor input);
+RcppExport SEXP _torchextensiontest_cpp_experimental_edge_negative_indices(SEXP inputSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< torch::experimental::Tensor >::type input(inputSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_experimental_edge_negative_indices(input));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_experimental_edge_transpose_is_contiguous
+bool cpp_experimental_edge_transpose_is_contiguous(torch::experimental::Tensor input);
+RcppExport SEXP _torchextensiontest_cpp_experimental_edge_transpose_is_contiguous(SEXP inputSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< torch::experimental::Tensor >::type input(inputSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_experimental_edge_transpose_is_contiguous(input));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_experimental_edge_make_contiguous
+torch::experimental::Tensor cpp_experimental_edge_make_contiguous(torch::experimental::Tensor input);
+RcppExport SEXP _torchextensiontest_cpp_experimental_edge_make_contiguous(SEXP inputSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< torch::experimental::Tensor >::type input(inputSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_experimental_edge_make_contiguous(input));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_experimental_edge_clone_isolation
+torch::experimental::Tensor cpp_experimental_edge_clone_isolation(torch::experimental::Tensor input);
+RcppExport SEXP _torchextensiontest_cpp_experimental_edge_clone_isolation(SEXP inputSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< torch::experimental::Tensor >::type input(inputSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_experimental_edge_clone_isolation(input));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_experimental_edge_view_aliasing
+torch::experimental::Tensor cpp_experimental_edge_view_aliasing(torch::experimental::Tensor input);
+RcppExport SEXP _torchextensiontest_cpp_experimental_edge_view_aliasing(SEXP inputSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< torch::experimental::Tensor >::type input(inputSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_experimental_edge_view_aliasing(input));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_experimental_edge_zero_sized
+torch::experimental::Tensor cpp_experimental_edge_zero_sized();
+RcppExport SEXP _torchextensiontest_cpp_experimental_edge_zero_sized() {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    rcpp_result_gen = Rcpp::wrap(cpp_experimental_edge_zero_sized());
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_experimental_edge_scalar_tensor
+torch::experimental::Tensor cpp_experimental_edge_scalar_tensor(double value);
+RcppExport SEXP _torchextensiontest_cpp_experimental_edge_scalar_tensor(SEXP valueSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< double >::type value(valueSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_experimental_edge_scalar_tensor(value));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_experimental_edge_temporary_lifetime
+torch::experimental::Tensor cpp_experimental_edge_temporary_lifetime(torch::experimental::Tensor input);
+RcppExport SEXP _torchextensiontest_cpp_experimental_edge_temporary_lifetime(SEXP inputSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< torch::experimental::Tensor >::type input(inputSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_experimental_edge_temporary_lifetime(input));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_experimental_edge_requires_grad_creation
+torch::experimental::Tensor cpp_experimental_edge_requires_grad_creation();
+RcppExport SEXP _torchextensiontest_cpp_experimental_edge_requires_grad_creation() {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    rcpp_result_gen = Rcpp::wrap(cpp_experimental_edge_requires_grad_creation());
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_experimental_edge_invalid_reshape
+torch::experimental::Tensor cpp_experimental_edge_invalid_reshape(torch::experimental::Tensor input);
+RcppExport SEXP _torchextensiontest_cpp_experimental_edge_invalid_reshape(SEXP inputSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< torch::experimental::Tensor >::type input(inputSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_experimental_edge_invalid_reshape(input));
+    return rcpp_result_gen;
+END_RCPP
+}
 // cpp_experimental_tensor_scalar_overloads
 torch::experimental::Tensor cpp_experimental_tensor_scalar_overloads(torch::experimental::Tensor input);
 RcppExport SEXP _torchextensiontest_cpp_experimental_tensor_scalar_overloads(SEXP inputSEXP) {
@@ -152,6 +260,17 @@ BEGIN_RCPP
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< torch::experimental::Tensor >::type input(inputSEXP);
     rcpp_result_gen = Rcpp::wrap(cpp_experimental_tensor_scalar_overloads(input));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_experimental_tensor_integral_scalar_overloads
+torch::experimental::Tensor cpp_experimental_tensor_integral_scalar_overloads(torch::experimental::Tensor input);
+RcppExport SEXP _torchextensiontest_cpp_experimental_tensor_integral_scalar_overloads(SEXP inputSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< torch::experimental::Tensor >::type input(inputSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_experimental_tensor_integral_scalar_overloads(input));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -346,7 +465,18 @@ static const R_CallMethodDef CallEntries[] = {
     {"_torchextensiontest_cpp_experimental_namespace_out_overload", (DL_FUNC) &_torchextensiontest_cpp_experimental_namespace_out_overload, 2},
     {"_torchextensiontest_cpp_experimental_tensor_to_dtype", (DL_FUNC) &_torchextensiontest_cpp_experimental_tensor_to_dtype, 1},
     {"_torchextensiontest_cpp_experimental_tensor_autograd_state", (DL_FUNC) &_torchextensiontest_cpp_experimental_tensor_autograd_state, 1},
+    {"_torchextensiontest_cpp_experimental_edge_negative_indices", (DL_FUNC) &_torchextensiontest_cpp_experimental_edge_negative_indices, 1},
+    {"_torchextensiontest_cpp_experimental_edge_transpose_is_contiguous", (DL_FUNC) &_torchextensiontest_cpp_experimental_edge_transpose_is_contiguous, 1},
+    {"_torchextensiontest_cpp_experimental_edge_make_contiguous", (DL_FUNC) &_torchextensiontest_cpp_experimental_edge_make_contiguous, 1},
+    {"_torchextensiontest_cpp_experimental_edge_clone_isolation", (DL_FUNC) &_torchextensiontest_cpp_experimental_edge_clone_isolation, 1},
+    {"_torchextensiontest_cpp_experimental_edge_view_aliasing", (DL_FUNC) &_torchextensiontest_cpp_experimental_edge_view_aliasing, 1},
+    {"_torchextensiontest_cpp_experimental_edge_zero_sized", (DL_FUNC) &_torchextensiontest_cpp_experimental_edge_zero_sized, 0},
+    {"_torchextensiontest_cpp_experimental_edge_scalar_tensor", (DL_FUNC) &_torchextensiontest_cpp_experimental_edge_scalar_tensor, 1},
+    {"_torchextensiontest_cpp_experimental_edge_temporary_lifetime", (DL_FUNC) &_torchextensiontest_cpp_experimental_edge_temporary_lifetime, 1},
+    {"_torchextensiontest_cpp_experimental_edge_requires_grad_creation", (DL_FUNC) &_torchextensiontest_cpp_experimental_edge_requires_grad_creation, 0},
+    {"_torchextensiontest_cpp_experimental_edge_invalid_reshape", (DL_FUNC) &_torchextensiontest_cpp_experimental_edge_invalid_reshape, 1},
     {"_torchextensiontest_cpp_experimental_tensor_scalar_overloads", (DL_FUNC) &_torchextensiontest_cpp_experimental_tensor_scalar_overloads, 1},
+    {"_torchextensiontest_cpp_experimental_tensor_integral_scalar_overloads", (DL_FUNC) &_torchextensiontest_cpp_experimental_tensor_integral_scalar_overloads, 1},
     {"_torchextensiontest_cpp_experimental_tensor_inplace_overloads", (DL_FUNC) &_torchextensiontest_cpp_experimental_tensor_inplace_overloads, 2},
     {"_torchextensiontest_cpp_experimental_tensor_cat_overloads", (DL_FUNC) &_torchextensiontest_cpp_experimental_tensor_cat_overloads, 2},
     {"_torchextensiontest_cpp_public_torch_namespace_functions", (DL_FUNC) &_torchextensiontest_cpp_public_torch_namespace_functions, 2},
