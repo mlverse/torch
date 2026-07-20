@@ -6,6 +6,9 @@
 - On Windows, the install lib directory is now prepended to `PATH` at load so
   cuDNN's lazily-loaded sub-DLLs (e.g. `cudnn_graph64_9.dll`) resolve; cuDNN-backed
   CUDA ops previously failed with "Could not locate cudnn_graph64_9.dll".
+- Arithmetic with an R scalar on the left no longer promotes the result dtype:
+  `1 - t` keeps `t`'s dtype (e.g. bfloat16, int64) instead of upcasting to
+  float32, matching Python's scalar promotion semantics. (#1471)
 
 # torch 0.17.0
 
