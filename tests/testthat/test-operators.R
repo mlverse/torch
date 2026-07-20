@@ -406,3 +406,22 @@ test_that("mean works", {
   expect_tensor_shape(mean(x, dim = 1, keepdim = TRUE), c(1, 100))
   expect_tensor_shape(mean(x, dim = 2, keepdim = TRUE), c(20, 1))
 })
+
+test_that("lhs scalars do not promote the result dtype", {
+  x <- torch_ones(3, dtype = torch_bfloat16())
+  expect_true((1 - x)$dtype == torch_bfloat16())
+  expect_true((2 * x)$dtype == torch_bfloat16())
+  expect_true((1 + x)$dtype == torch_bfloat16())
+  expect_true((2^x)$dtype == torch_bfloat16())
+  expect_equal_to_r((1 - x)$to(dtype = torch_float()), rep(0, 3))
+
+  y <- torch_ones(3, dtype = torch_long())
+  expect_true((1L + y)$dtype == torch_long())
+  expect_true((5L %% y)$dtype == torch_long())
+  expect_true((5L %/% y)$dtype == torch_long())
+  # division of integer tensors still promotes to the default dtype
+  expect_true((1L / y)$dtype == torch_float())
+
+  # dimensioned lhs vectors keep dictating promotion
+  expect_true((c(1, 2, 3) - x)$dtype == torch_float())
+})

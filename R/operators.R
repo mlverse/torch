@@ -1,3 +1,15 @@
+# Convert a non-tensor lhs operand for arithmetic. Length-1 numerics
+# become 0-dim tensors, which participate weakly in type promotion the
+# way Python scalars do: `1 - t` keeps t's dtype instead of promoting
+# to the scalar's dtype (e.g. bfloat16 -> float32, int64 -> float32).
+to_operand_tensor <- function(x, ref) {
+  if ((is.numeric(x) || is.logical(x)) && length(x) == 1L) {
+    torch_scalar_tensor(x, device = ref$device)
+  } else {
+    torch_tensor(x, device = ref$device)
+  }
+}
+
 #' @export
 `+.torch_tensor` <- function(e1, e2) {
   if (missing(e2)) {
@@ -5,7 +17,7 @@
   }
 
   if (!is_torch_tensor(e1)) {
-    e1 <- torch_tensor(e1, device = e2$device)
+    e1 <- to_operand_tensor(e1, e2)
   }
 
   torch_add(e1, e2)
@@ -19,7 +31,7 @@
   }
 
   if (!is_torch_tensor(e1)) {
-    e1 <- torch_tensor(e1, device = e2$device)
+    e1 <- to_operand_tensor(e1, e2)
   }
 
   torch_sub(e1, e2)
@@ -28,7 +40,7 @@
 #' @export
 `*.torch_tensor` <- function(e1, e2) {
   if (!is_torch_tensor(e1)) {
-    e1 <- torch_tensor(e1, device = e2$device)
+    e1 <- to_operand_tensor(e1, e2)
   }
 
   torch_mul(e1, e2)
@@ -37,7 +49,7 @@
 #' @export
 `/.torch_tensor` <- function(e1, e2) {
   if (!is_torch_tensor(e1)) {
-    e1 <- torch_tensor(e1, device = e2$device)
+    e1 <- to_operand_tensor(e1, e2)
   }
 
   torch_div(e1, e2)
@@ -46,7 +58,7 @@
 #' @export
 `^.torch_tensor` <- function(e1, e2) {
   if (!is_torch_tensor(e1)) {
-    e1 <- torch_tensor(e1, device = e2$device)
+    e1 <- to_operand_tensor(e1, e2)
   }
 
   torch_pow(e1, e2)
@@ -55,7 +67,7 @@
 #' @export
 `%%.torch_tensor` <- function(e1, e2) {
   if (!is_torch_tensor(e1)) {
-    e1 <- torch_tensor(e1, device = e2$device)
+    e1 <- to_operand_tensor(e1, e2)
   }
 
   torch_fmod(e1, e2)
@@ -64,7 +76,7 @@
 #' @export
 `%/%.torch_tensor` <- function(e1, e2) {
   if (!is_torch_tensor(e1)) {
-    e1 <- torch_tensor(e1, device = e2$device)
+    e1 <- to_operand_tensor(e1, e2)
   }
 
   torch_div(e1, e2, rounding_mode = "trunc")
