@@ -21,11 +21,33 @@ Finding the right combination of libtorch, {torch}, and CUDA can be tricky. This
 
 ## CUDA version compatibility
 
-| CUDA version |  Suitable {torch} version   |
-|:------------:|:---------------------------:|
-|     11.6     | 0.10.0 (Linux only), 0.11.0 |
-|     11.7     |      0.10.0 to 0.13.0       |
-|     11.8     |      0.12.0 to 0.15.x       |
-|     12.4     |      0.14.x to 0.15.x       |
-|     12.6     |      0.16.x to 0.17.x       |
-|     12.8     |      0.16.x to 0.17.x       |
+The following table details the suitable `{torch}` versions for each CUDA release, along with the supported GPU architectures and their corresponding compute capability ranges.
+
+| CUDA version | Suitable {torch} version | Supported architectures | Compute capability |
+|:------------:|:------------------------:|:-----------------------:|:------------------:|
+|     11.6     | 0.10.0 (Linux only), 0.11.0 | Maxwell, Pascal, Volta, Turing, Ampere | 5.0 - 8.6 |
+|     11.7     |      0.10.0 to 0.13.0       | Maxwell, Pascal, Volta, Turing, Ampere | 5.0 - 8.6 |
+|     11.8     |      0.12.0 to 0.15.x       | Maxwell, Pascal, Volta, Turing, Ampere | 5.0 - 8.6 |
+|     12.4     |      0.14.x to 0.15.x       | Maxwell, Pascal, Volta, Turing, Ampere, Hopper | 5.0 - 9.0 |
+|     12.6     |      0.16.x to 0.17.x       | Maxwell, Pascal, Volta, Turing, Ampere, Hopper | 5.0 - 9.0 |
+|     12.8     |      0.16.x to 0.17.x       | Turing, Ampere, Hopper, Blackwell [^1] | 7.5 - 12.0 |
+
+: CUDA compatibility matrix with architectures and compute capabilities
+
+## GPU Architectures and Compute Capabilities
+
+Here is a mapping overview of the major GPU architectures to their typical models and exact compute capabilities.
+
+| Architecture | Example GPU Models | Compute Capability |
+|:------------:|:------------------:|:------------------:|
+| Maxwell | GTX 900 series, Tesla M10/M40 | 5.0 - 5.3 |
+| Pascal | GTX 1000 series, Tesla P100/P40 | 6.0 - 6.2 |
+| Volta | Titan V, Tesla V100 | 7.0 - 7.2 |
+| Turing | RTX 2000 series, Tesla T4 | 7.5 |
+| Ampere | RTX 3000 series, A100, A10 | 8.0 - 8.7 |
+| Hopper | H100, H200 | 9.0 |
+| Blackwell | RTX 5000 series, B100, B200 | 10.0 / 12.0 |
+
+: GPU architectures reference
+
+[^1] Previous architecture deprecated according to [pytorch issue 172351](https://github.com/pytorch/pytorch/issues/172351)
