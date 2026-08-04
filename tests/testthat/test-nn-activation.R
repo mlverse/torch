@@ -72,6 +72,26 @@ test_that("Multihead attention works", {
   expect_error(nn_multihead_attention(embed_dim = 512, num_heads = 10), regexp="divisible")
 })
 
+test_that("Multihead attention works with bias = FALSE and query != key", {
+  # the encoder-decoder path (key and value identical, query different) used to only compute the
+  # key and value projections when there was a bias, so it failed with `object 'k' not found`.
+  x <- torch_randn(4, 3, 8)
+  q <- x[, 1, drop = FALSE]
+
+  attn <- nn_multihead_attention(embed_dim = 8, num_heads = 2, bias = FALSE, batch_first = TRUE)
+  out <- attn(query = q, key = x, value = x, need_weights = FALSE)
+  expect_equal(dim(out[[1]]), c(4, 1, 8))
+
+  # cross-attention, i.e. all three tensors different, and self-attention still work
+  v <- torch_randn(4, 3, 8)
+  expect_equal(dim(attn(query = q, key = x, value = v, need_weights = FALSE)[[1]]), c(4, 1, 8))
+  expect_equal(dim(attn(query = x, key = x, value = x, need_weights = FALSE)[[1]]), c(4, 3, 8))
+
+  # with a bias the encoder-decoder path is unchanged
+  attn_bias <- nn_multihead_attention(embed_dim = 8, num_heads = 2, bias = TRUE, batch_first = TRUE)
+  expect_equal(dim(attn_bias(query = q, key = x, value = x, need_weights = FALSE)[[1]]), c(4, 1, 8))
+})
+
 test_that("silu works", {
   
   silu <- nn_silu()
