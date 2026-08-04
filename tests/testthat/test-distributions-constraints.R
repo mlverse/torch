@@ -33,3 +33,20 @@ test_that("lower cholesky", {
   x <- torch_eye(2, 2)$unsqueeze(1)$mul(-2)
   expect_equal_to_r(constraint_lower_cholesky$check(x), rep(FALSE, 1))
 })
+
+test_that("less than", {
+  constraint <- constraint_less_than$new(1)
+
+  expect_equal_to_r(constraint$check(torch_tensor(0.5)), TRUE)
+  expect_equal_to_r(constraint$check(torch_tensor(1.5)), FALSE)
+  expect_equal_to_r(constraint$upper_bound, 1)
+})
+
+test_that("half open interval", {
+  constraint <- constraint_half_open_interval$new(0, 1)
+
+  expect_equal_to_r(constraint$check(torch_tensor(0)), TRUE)
+  expect_equal_to_r(constraint$check(torch_tensor(0.5)), TRUE)
+  expect_equal_to_r(constraint$check(torch_tensor(1)), FALSE)
+  expect_equal_to_r(constraint$check(torch_tensor(-1)), FALSE)
+})
