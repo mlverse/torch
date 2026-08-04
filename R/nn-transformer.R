@@ -106,7 +106,9 @@ nn_transformer_encoder_layer <- nn_module(
         L <- dim(src)[1]
       }
       # Causal mask: True means position should not be attended (mask out future positions)
-      attn_mask_eff <- torch_ones(c(L, L), dtype = torch_bool())
+      # It is created on the device of `src`, as it would otherwise land on the default device and
+      # the attention would fail with a device mismatch once the module is not on the CPU.
+      attn_mask_eff <- torch_ones(c(L, L), dtype = torch_bool(), device = src$device)
       attn_mask_eff <- attn_mask_eff$triu(diagonal = 1) # ones above diagonal
     }
 
