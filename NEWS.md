@@ -6,6 +6,13 @@
 - On Windows, the install lib directory is now prepended to `PATH` at load so
   cuDNN's lazily-loaded sub-DLLs (e.g. `cudnn_graph64_9.dll`) resolve; cuDNN-backed
   CUDA ops previously failed with "Could not locate cudnn_graph64_9.dll".
+- The `ignore_index` argument of `nnf_cross_entropy()`, `nnf_nll_loss()`,
+  `nn_cross_entropy_loss()` and `nn_nll_loss()` is now interpreted as the 1-based class
+  index that `target` already used. It was forwarded to libtorch unconverted while the
+  target was converted, so it ignored the class to the left of the requested one, and the
+  last class could not be ignored at all. Passing `0` is now an error instead of silently
+  ignoring the first class. The default `-100`, and any other negative sentinel, is
+  unaffected. The documented target range was corrected to \eqn{1 \leq target \leq C}.
 
 # torch 0.17.0
 
