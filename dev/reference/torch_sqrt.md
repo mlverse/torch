@@ -33,6 +33,6 @@ torch_sqrt(a)
 #>     nan
 #>     nan
 #>     nan
-#>  1.1642
+#>  1.4067
 #> [ CPUFloatType{4} ]
 ```

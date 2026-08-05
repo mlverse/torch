@@ -75,8 +75,10 @@
 
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="development version" id="torch-development-version">torch (development version)<a class="anchor" aria-label="anchor" href="#torch-development-version"></a></h2>
-<ul><li>Multi-worker dataloaders now use POSIX shared memory for tensor transfer on Unix systems, resulting in up to 2x faster data loading. To revert to the previous behavior, set <code>options(torch.dataloader_use_shm = FALSE)</code>. (<a href="https://github.com/mlverse/torch/issues/1456" class="external-link">#1456</a>)</li>
-<li>On Windows, the install lib directory is now prepended to <code>PATH</code> at load so cuDNN’s lazily-loaded sub-DLLs (e.g. <code>cudnn_graph64_9.dll</code>) resolve; cuDNN-backed CUDA ops previously failed with “Could not locate cudnn_graph64_9.dll”.</li>
+<ul><li><p>Fixed <code><a href="../reference/nn_multihead_attention.html">nn_multihead_attention()</a></code> and <code><a href="../reference/nnf_multi_head_attention_forward.html">nnf_multi_head_attention_forward()</a></code> with <code>bias = FALSE</code> when <code>query</code> differs from <code>key</code> (i.e. cross- and encoder-decoder attention), which failed with <code>object 'k' not found</code>. The key and value projections were only computed when a bias was present.</p></li>
+<li><p>Fixed <code><a href="../reference/lr_one_cycle.html">lr_one_cycle()</a></code> with <code>anneal_strategy = "linear"</code>, which failed with <code>attempt to apply non-function</code> because the annealing function was never assigned.</p></li>
+<li><p>Multi-worker dataloaders now use POSIX shared memory for tensor transfer on Unix systems, resulting in up to 2x faster data loading. To revert to the previous behavior, set <code>options(torch.dataloader_use_shm = FALSE)</code>. (<a href="https://github.com/mlverse/torch/issues/1456" class="external-link">#1456</a>)</p></li>
+<li><p>On Windows, the install lib directory is now prepended to <code>PATH</code> at load so cuDNN’s lazily-loaded sub-DLLs (e.g. <code>cudnn_graph64_9.dll</code>) resolve; cuDNN-backed CUDA ops previously failed with “Could not locate cudnn_graph64_9.dll”.</p></li>
 </ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.17.0" id="torch-0170">torch 0.17.0<a class="anchor" aria-label="anchor" href="#torch-0170"></a></h2><p class="text-muted">CRAN release: 2026-04-11</p>
