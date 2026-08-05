@@ -28,6 +28,20 @@
   resolve; cuDNN-backed CUDA ops previously failed with “Could not
   locate cudnn_graph64_9.dll”.
 
+- The `ignore_index` argument of
+  [`nnf_cross_entropy()`](https://torch.mlverse.org/docs/dev/reference/nnf_cross_entropy.md),
+  [`nnf_nll_loss()`](https://torch.mlverse.org/docs/dev/reference/nnf_nll_loss.md),
+  [`nn_cross_entropy_loss()`](https://torch.mlverse.org/docs/dev/reference/nn_cross_entropy_loss.md)
+  and
+  [`nn_nll_loss()`](https://torch.mlverse.org/docs/dev/reference/nn_nll_loss.md)
+  is now interpreted as the 1-based class index that `target` already
+  used. It was forwarded to libtorch unconverted while the target was
+  converted, so it ignored the class to the left of the requested one,
+  and the last class could not be ignored at all. Passing `0` is now an
+  error instead of silently ignoring the first class. The default
+  `-100`, and any other negative sentinel, is unaffected. The documented
+  target range was corrected to .
+
 ## torch 0.17.0
 
 CRAN release: 2026-04-11

@@ -23,8 +23,10 @@ nn_cross_entropy_loss(weight = NULL, ignore_index = -100, reduction = "mean")
 - ignore_index:
 
   (int, optional): Specifies a target value that is ignored and does not
-  contribute to the input gradient. When `size_average` is `TRUE`, the
-  loss is averaged over non-ignored targets.
+  contribute to the input gradient. Like `target`, this is a 1-based
+  class index. The default `-100` is never a valid target and therefore
+  ignores nothing. When `size_average` is `TRUE`, the loss is averaged
+  over non-ignored targets.
 
 - reduction:
 
@@ -67,8 +69,8 @@ shape (see below).
 - Input: \\(N, C)\\ where `C = number of classes`, or \\(N, C, d_1, d_2,
   ..., d_K)\\ with \\K \geq 1\\ in the case of `K`-dimensional loss.
 
-- Target: \\(N)\\ where each value is \\0 \leq \mbox{targets}\[i\] \leq
-  C-1\\, or \\(N, d_1, d_2, ..., d_K)\\ with \\K \geq 1\\ in the case of
+- Target: \\(N)\\ where each value is \\1 \leq \mbox{targets}\[i\] \leq
+  C\\, or \\(N, d_1, d_2, ..., d_K)\\ with \\K \geq 1\\ in the case of
   K-dimensional loss.
 
 - Output: scalar. If `reduction` is `'none'`, then the same size as the

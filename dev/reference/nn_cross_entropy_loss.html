@@ -97,7 +97,7 @@ If given, has to be a Tensor of size <code>C</code></p></dd>
 
 <dt id="arg-ignore-index">ignore_index<a class="anchor" aria-label="anchor" href="#arg-ignore-index"></a></dt>
 <dd><p>(int, optional): Specifies a target value that is ignored
-and does not contribute to the input gradient. When <code>size_average</code> is
+and does not contribute to the input gradient. Like <code>target</code>, this is a 1-based class index. The default <code>-100</code> is never a valid target and therefore ignores nothing. When <code>size_average</code> is
 <code>TRUE</code>, the loss is averaged over non-ignored targets.</p></dd>
 
 
@@ -143,7 +143,7 @@ where \(K\) is the number of dimensions, and a target of appropriate shape
 <ul><li><p>Input: \((N, C)\) where <code>C = number of classes</code>, or
 \((N, C, d_1, d_2, ..., d_K)\) with \(K \geq 1\)
 in the case of <code>K</code>-dimensional loss.</p></li>
-<li><p>Target: \((N)\) where each value is \(0 \leq \mbox{targets}[i] \leq C-1\), or
+<li><p>Target: \((N)\) where each value is \(1 \leq \mbox{targets}[i] \leq C\), or
 \((N, d_1, d_2, ..., d_K)\) with \(K \geq 1\) in the case of
 K-dimensional loss.</p></li>
 <li><p>Output: scalar.

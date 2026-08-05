@@ -42,12 +42,12 @@ torch_slogdet(A)
 }
 #> [[1]]
 #> torch_tensor
-#> 1
+#> -1
 #> [ CPUFloatType{} ]
 #> 
 #> [[2]]
 #> torch_tensor
-#> -1.7191466093063354
+#> 0.27041804790496826
 #> [ CPUFloatType{} ]
 #> 
 ```

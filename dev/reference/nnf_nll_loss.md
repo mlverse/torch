@@ -24,9 +24,8 @@ nnf_nll_loss(
 
 - target:
 
-  \\(N)\\ where each value is \\0 \leq \mbox{targets}\[i\] \leq C-1\\,
-  or \\(N, d_1, d_2, ..., d_K)\\ where \\K \geq 1\\ for K-dimensional
-  loss.
+  \\(N)\\ where each value is \\1 \leq \mbox{targets}\[i\] \leq C\\, or
+  \\(N, d_1, d_2, ..., d_K)\\ where \\K \geq 1\\ for K-dimensional loss.
 
 - weight:
 
@@ -36,7 +35,9 @@ nnf_nll_loss(
 - ignore_index:
 
   (int, optional) Specifies a target value that is ignored and does not
-  contribute to the input gradient.
+  contribute to the input gradient. Like codetarget, this is a 1-based
+  class index. The default code-100 is never a valid target and
+  therefore ignores nothing.
 
 - reduction:
 
