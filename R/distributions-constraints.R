@@ -217,7 +217,7 @@ is_dependent <- function(object) {
   public = list(
     upper_bound = NULL,
     initialize = function(upper_bound) {
-      self$upper_bound <- lower_bound
+      self$upper_bound <- upper_bound
     },
     check = function(value) {
       self$upper_bound < value
@@ -269,7 +269,7 @@ is_dependent <- function(object) {
       self$upper_bound <- upper_bound
     },
     check = function(value) {
-      (self.$ower_bound <= value) & (value < self$upper_bound)
+      (self$lower_bound <= value) & (value < self$upper_bound)
     },
     print = function() {
       cat(glue::glue(
