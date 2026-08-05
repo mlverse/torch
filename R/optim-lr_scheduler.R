@@ -455,7 +455,7 @@ lr_one_cycle <- lr_scheduler(
     } else if (anneal_strategy == "cos") {
       self$anneal_func <- self$.annealing_cos
     } else if (anneal_strategy == "linear") {
-      self.anneal_func <- self$.annealing_linear
+      self$anneal_func <- self$.annealing_linear
     }
 
     # Initialize learning rate variables

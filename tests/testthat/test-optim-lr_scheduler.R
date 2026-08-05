@@ -46,6 +46,42 @@ test_that("lr_one_cycle", {
   expect_error(scheduler$step())
 })
 
+test_that("lr_one_cycle supports anneal_strategy = 'linear'", {
+  # `anneal_func` was assigned to `self.anneal_func` instead of `self$anneal_func`, so the linear
+  # strategy left it unset and stepping failed with `attempt to apply non-function`.
+  m <- nn_linear(10, 10)
+  o <- optim_adam(params = m$parameters, lr = 1)
+  scheduler <- lr_one_cycle(
+    optimizer = o, max_lr = 0.5, total_steps = 10, anneal_strategy = "linear"
+  )
+
+  lrs <- sapply(1:6, function(i) {
+    scheduler$step()
+    o$param_groups[[1]]$lr
+  })
+
+  # after the warmup peak the decay is linear, i.e. the differences are constant
+  decay <- diff(lrs[2:6])
+  expect_equal(max(abs(decay - mean(decay))), 0, tolerance = 1e-6)
+
+  # and it differs from the cosine strategy
+  o2 <- optim_adam(params = nn_linear(10, 10)$parameters, lr = 1)
+  scheduler2 <- lr_one_cycle(
+    optimizer = o2, max_lr = 0.5, total_steps = 10, anneal_strategy = "cos"
+  )
+  lrs_cos <- sapply(1:6, function(i) {
+    scheduler2$step()
+    o2$param_groups[[1]]$lr
+  })
+  expect_false(isTRUE(all.equal(lrs, lrs_cos)))
+
+  expect_error(
+    lr_one_cycle(optimizer = optim_adam(params = nn_linear(2, 2)$parameters, lr = 1),
+      max_lr = 0.5, total_steps = 10, anneal_strategy = "nope"),
+    regexp = "anneal_strategy"
+  )
+})
+
 test_that("lr_step", {
   m <- nn_linear(10, 10)
   o <- optim_adam(params = m$parameters, lr = 1)

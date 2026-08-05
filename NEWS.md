@@ -1,5 +1,11 @@
 # torch (development version)
 
+- Fixed `nn_multihead_attention()` and `nnf_multi_head_attention_forward()` with `bias = FALSE`
+  when `query` differs from `key` (i.e. cross- and encoder-decoder attention), which failed with
+  `object 'k' not found`. The key and value projections were only computed when a bias was present.
+- Fixed `lr_one_cycle()` with `anneal_strategy = "linear"`, which failed with
+  `attempt to apply non-function` because the annealing function was never assigned.
+
 - Multi-worker dataloaders now use POSIX shared memory for tensor transfer on
   Unix systems, resulting in up to 2x faster data loading. To revert to the
   previous behavior, set `options(torch.dataloader_use_shm = FALSE)`. (#1456)
