@@ -1,6 +1,16 @@
 #' @include utils-data.R
 NULL
 
+default_parent_env = function() {
+  env = parent.frame(2)
+  pe = parent.env(env)
+  if (all(sapply(c(".__active__", "self", "private", "super"), function(field) exists(field, pe)))) {
+    get("inherit", pe)$parent_env
+  } else {
+    env
+  }
+}
+
 get_inherited_classes <- function(inherit) {
   inherit_class <- inherit$public_fields$.classes
   # Filter out classes that we eventually add in our normal flow.
@@ -496,7 +506,7 @@ is_nn_module <- function(x) {
 #' @export
 nn_module <- function(classname = NULL, inherit = nn_Module, ...,
                       private = NULL, active = NULL,
-                      parent_env = parent.frame()) {
+                      parent_env = default_parent_env()) {
   if (inherits(inherit, "nn_module")) {
     inherit <- attr(inherit, "module")
   }
