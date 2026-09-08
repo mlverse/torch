@@ -3,6 +3,20 @@
 
 #include "torch.h"
 
+void* lantern_get_symbol(const char* name) {
+  using Fn = void* (*)(const char*);
+  static Fn fn = reinterpret_cast<Fn>(
+      R_GetCCallable("torch", "lantern_get_symbol"));
+  return fn(name);
+}
+
+void lantern_call_host_handler() {
+  using Fn = void (*)();
+  static Fn fn = reinterpret_cast<Fn>(
+      R_GetCCallable("torch", "lantern_call_host_handler"));
+  fn();
+}
+
 #define IMPORT_SEXP_OPERATOR(name, type)                         \
   SEXP name(const type* self) {                                  \
     static SEXP (*fn)(const type*) = NULL;                       \

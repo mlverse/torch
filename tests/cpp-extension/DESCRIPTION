@@ -1,0 +1,16 @@
+Package: torchextensiontest
+Type: Package
+Title: Downstream C++ Extension Test Fixture for Torch
+Version: 0.0.0.9000
+Authors@R: person("Torch", "Authors", role = c("aut", "cre"), email = "torch@example.com")
+Description: Compiles and exercises the public torch C++ headers as a real
+    downstream package. This package is only used by the torch test suite.
+License: MIT
+Encoding: UTF-8
+Imports:
+    Rcpp,
+    torch
+LinkingTo:
+    Rcpp,
+    torch
+SystemRequirements: C++20
