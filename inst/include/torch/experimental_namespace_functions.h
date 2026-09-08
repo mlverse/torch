@@ -160,7 +160,7 @@ inline Rcpp::List _cudnn_rnn_backward(const experimental::Tensor& input, XPtrTor
   return Rcpp::List::create(XPtrTorchTensor(experimental::detail::call<void*>("_lantern_vector_get", wrap.get(), 0)),XPtrTorchTensor(experimental::detail::call<void*>("_lantern_vector_get", wrap.get(), 1)),XPtrTorchTensor(experimental::detail::call<void*>("_lantern_vector_get", wrap.get(), 2)),XPtrTorchTensorList(experimental::detail::call<void*>("_lantern_vector_get", wrap.get(), 3)));
 }
 
-inline experimental::Tensor _cudnn_init_dropout_state_dropout_double_train_bool(double dropout, bool train, std::int64_t dropout_seed, XPtrTorchTensorOptions options) {
+inline experimental::Tensor _cudnn_init_dropout_state(double dropout, bool train, std::int64_t dropout_seed, XPtrTorchTensorOptions options) {
     auto r_out = experimental::detail::call<void*>("_lantern__cudnn_init_dropout_state_double_bool_intt_tensoroptions", experimental::detail::floating(dropout).get(), experimental::detail::boolean(train).get(), experimental::detail::integer(dropout_seed).get(), options.get());
   return experimental::Tensor(::torch::Tensor(r_out));
 }
@@ -831,7 +831,7 @@ inline experimental::Tensor baddbmm(const experimental::Tensor& self, const expe
   return experimental::Tensor(::torch::Tensor(r_out));
 }
 
-inline experimental::Tensor baddbmm_out_out_Tensor_self_Tensor_batch1_Tensor_batch2_Tensor(const experimental::Tensor& out, const experimental::Tensor& self, const experimental::Tensor& batch1, const experimental::Tensor& batch2, XPtrTorchDtype out_dtype, XPtrTorchScalar beta, XPtrTorchScalar alpha) {
+inline experimental::Tensor baddbmm_out(const experimental::Tensor& out, const experimental::Tensor& self, const experimental::Tensor& batch1, const experimental::Tensor& batch2, XPtrTorchDtype out_dtype, XPtrTorchScalar beta, XPtrTorchScalar alpha) {
     auto r_out = experimental::detail::call<void*>("_lantern_baddbmm_out_tensor_tensor_tensor_tensor_scalartype_scalar_scalar", out.get(), self.get(), batch1.get(), batch2.get(), out_dtype.get(), beta.get(), alpha.get());
   return experimental::Tensor(::torch::Tensor(r_out));
 }
@@ -1018,7 +1018,7 @@ inline experimental::Tensor bmm(const experimental::Tensor& self, const experime
   return experimental::Tensor(::torch::Tensor(r_out));
 }
 
-inline experimental::Tensor bmm_out_out_Tensor_self_Tensor_mat2_Tensor(const experimental::Tensor& out, const experimental::Tensor& self, const experimental::Tensor& mat2, XPtrTorchDtype out_dtype) {
+inline experimental::Tensor bmm_out(const experimental::Tensor& out, const experimental::Tensor& self, const experimental::Tensor& mat2, XPtrTorchDtype out_dtype) {
     auto r_out = experimental::detail::call<void*>("_lantern_bmm_out_tensor_tensor_tensor_scalartype", out.get(), self.get(), mat2.get(), out_dtype.get());
   return experimental::Tensor(::torch::Tensor(r_out));
 }
@@ -1865,7 +1865,7 @@ inline experimental::Tensor embedding(const experimental::Tensor& weight, const 
   return experimental::Tensor(::torch::Tensor(r_out));
 }
 
-inline experimental::Tensor embedding_backward_grad_Tensor_indices_Tensor_num_weights_int64_t_padding_idx_int64_t_scale(const experimental::Tensor& grad, const experimental::Tensor& indices, std::int64_t num_weights, std::int64_t padding_idx, bool scale_grad_by_freq, bool sparse) {
+inline experimental::Tensor embedding_backward(const experimental::Tensor& grad, const experimental::Tensor& indices, std::int64_t num_weights, std::int64_t padding_idx, bool scale_grad_by_freq, bool sparse) {
     auto r_out = experimental::detail::call<void*>("_lantern_embedding_backward_tensor_tensor_intt_intt_bool_bool", grad.get(), indices.get(), experimental::detail::integer(num_weights).get(), experimental::detail::integer(padding_idx).get(), experimental::detail::boolean(scale_grad_by_freq).get(), experimental::detail::boolean(sparse).get());
   return experimental::Tensor(::torch::Tensor(r_out));
 }
@@ -1880,7 +1880,7 @@ inline experimental::Tensor embedding_renorm_(const experimental::Tensor& self, 
   return experimental::Tensor(::torch::Tensor(r_out));
 }
 
-inline experimental::Tensor embedding_sparse_backward_grad_Tensor_indices_Tensor_num_weights_int64_t_padding_idx_int64_t_scale(const experimental::Tensor& grad, const experimental::Tensor& indices, std::int64_t num_weights, std::int64_t padding_idx, bool scale_grad_by_freq) {
+inline experimental::Tensor embedding_sparse_backward(const experimental::Tensor& grad, const experimental::Tensor& indices, std::int64_t num_weights, std::int64_t padding_idx, bool scale_grad_by_freq) {
     auto r_out = experimental::detail::call<void*>("_lantern_embedding_sparse_backward_tensor_tensor_intt_intt_bool", grad.get(), indices.get(), experimental::detail::integer(num_weights).get(), experimental::detail::integer(padding_idx).get(), experimental::detail::boolean(scale_grad_by_freq).get());
   return experimental::Tensor(::torch::Tensor(r_out));
 }
@@ -1925,17 +1925,17 @@ inline Rcpp::List _embedding_bag(const experimental::Tensor& weight, const exper
   return Rcpp::List::create(XPtrTorchTensor(experimental::detail::call<void*>("_lantern_vector_get", wrap.get(), 0)),XPtrTorchTensor(experimental::detail::call<void*>("_lantern_vector_get", wrap.get(), 1)),XPtrTorchTensor(experimental::detail::call<void*>("_lantern_vector_get", wrap.get(), 2)),XPtrTorchTensor(experimental::detail::call<void*>("_lantern_vector_get", wrap.get(), 3)));
 }
 
-inline experimental::Tensor _embedding_bag_backward_grad_Tensor_indices_Tensor_offsets_Tensor_offset2bag_Tensor_bag_size_Tensor_maximum_indices_Tensor_num_weights_int64_t_scale(const experimental::Tensor& grad, const experimental::Tensor& indices, const experimental::Tensor& offsets, const experimental::Tensor& offset2bag, const experimental::Tensor& bag_size, const experimental::Tensor& maximum_indices, std::int64_t num_weights, bool scale_grad_by_freq, std::int64_t mode, bool sparse, XPtrTorchOptionalTensor per_sample_weights, std::int64_t padding_idx) {
+inline experimental::Tensor _embedding_bag_backward(const experimental::Tensor& grad, const experimental::Tensor& indices, const experimental::Tensor& offsets, const experimental::Tensor& offset2bag, const experimental::Tensor& bag_size, const experimental::Tensor& maximum_indices, std::int64_t num_weights, bool scale_grad_by_freq, std::int64_t mode, bool sparse, XPtrTorchOptionalTensor per_sample_weights, std::int64_t padding_idx) {
     auto r_out = experimental::detail::call<void*>("_lantern__embedding_bag_backward_tensor_tensor_tensor_tensor_tensor_tensor_intt_bool_intt_bool_tensor_intt", grad.get(), indices.get(), offsets.get(), offset2bag.get(), bag_size.get(), maximum_indices.get(), experimental::detail::integer(num_weights).get(), experimental::detail::boolean(scale_grad_by_freq).get(), experimental::detail::integer(mode).get(), experimental::detail::boolean(sparse).get(), per_sample_weights.get(), experimental::detail::integer(padding_idx).get());
   return experimental::Tensor(::torch::Tensor(r_out));
 }
 
-inline experimental::Tensor _embedding_bag_sparse_backward_grad_Tensor_indices_Tensor_offsets_Tensor_offset2bag_Tensor_bag_size_Tensor_num_weights_int64_t_scale(const experimental::Tensor& grad, const experimental::Tensor& indices, const experimental::Tensor& offsets, const experimental::Tensor& offset2bag, const experimental::Tensor& bag_size, std::int64_t num_weights, bool scale_grad_by_freq, std::int64_t mode, XPtrTorchOptionalTensor per_sample_weights, std::int64_t padding_idx) {
+inline experimental::Tensor _embedding_bag_sparse_backward(const experimental::Tensor& grad, const experimental::Tensor& indices, const experimental::Tensor& offsets, const experimental::Tensor& offset2bag, const experimental::Tensor& bag_size, std::int64_t num_weights, bool scale_grad_by_freq, std::int64_t mode, XPtrTorchOptionalTensor per_sample_weights, std::int64_t padding_idx) {
     auto r_out = experimental::detail::call<void*>("_lantern__embedding_bag_sparse_backward_tensor_tensor_tensor_tensor_tensor_intt_bool_intt_tensor_intt", grad.get(), indices.get(), offsets.get(), offset2bag.get(), bag_size.get(), experimental::detail::integer(num_weights).get(), experimental::detail::boolean(scale_grad_by_freq).get(), experimental::detail::integer(mode).get(), per_sample_weights.get(), experimental::detail::integer(padding_idx).get());
   return experimental::Tensor(::torch::Tensor(r_out));
 }
 
-inline experimental::Tensor _embedding_bag_dense_backward_grad_Tensor_indices_Tensor_offset2bag_Tensor_bag_size_Tensor_maximum_indices_Tensor_num_weights_int64_t_scale(const experimental::Tensor& grad, const experimental::Tensor& indices, const experimental::Tensor& offset2bag, const experimental::Tensor& bag_size, const experimental::Tensor& maximum_indices, std::int64_t num_weights, bool scale_grad_by_freq, std::int64_t mode, XPtrTorchOptionalTensor per_sample_weights, std::int64_t padding_idx) {
+inline experimental::Tensor _embedding_bag_dense_backward(const experimental::Tensor& grad, const experimental::Tensor& indices, const experimental::Tensor& offset2bag, const experimental::Tensor& bag_size, const experimental::Tensor& maximum_indices, std::int64_t num_weights, bool scale_grad_by_freq, std::int64_t mode, XPtrTorchOptionalTensor per_sample_weights, std::int64_t padding_idx) {
     auto r_out = experimental::detail::call<void*>("_lantern__embedding_bag_dense_backward_tensor_tensor_tensor_tensor_tensor_intt_bool_intt_tensor_intt", grad.get(), indices.get(), offset2bag.get(), bag_size.get(), maximum_indices.get(), experimental::detail::integer(num_weights).get(), experimental::detail::boolean(scale_grad_by_freq).get(), experimental::detail::integer(mode).get(), per_sample_weights.get(), experimental::detail::integer(padding_idx).get());
   return experimental::Tensor(::torch::Tensor(r_out));
 }
@@ -2434,7 +2434,7 @@ inline experimental::Tensor _index_put_impl_(const experimental::Tensor& self, X
   return experimental::Tensor(::torch::Tensor(r_out));
 }
 
-inline experimental::Tensor instance_norm_input_Tensor_weight_Tensor_bias_Tensor_running_mean_Tensor_running_var_Tensor_use(const experimental::Tensor& input, XPtrTorchOptionalTensor weight, XPtrTorchOptionalTensor bias, XPtrTorchOptionalTensor running_mean, XPtrTorchOptionalTensor running_var, bool use_input_stats, double momentum, double eps, bool cudnn_enabled) {
+inline experimental::Tensor instance_norm(const experimental::Tensor& input, XPtrTorchOptionalTensor weight, XPtrTorchOptionalTensor bias, XPtrTorchOptionalTensor running_mean, XPtrTorchOptionalTensor running_var, bool use_input_stats, double momentum, double eps, bool cudnn_enabled) {
     auto r_out = experimental::detail::call<void*>("_lantern_instance_norm_tensor_tensor_tensor_tensor_tensor_bool_double_double_bool", input.get(), weight.get(), bias.get(), running_mean.get(), running_var.get(), experimental::detail::boolean(use_input_stats).get(), experimental::detail::floating(momentum).get(), experimental::detail::floating(eps).get(), experimental::detail::boolean(cudnn_enabled).get());
   return experimental::Tensor(::torch::Tensor(r_out));
 }
@@ -2449,7 +2449,7 @@ inline experimental::Tensor isin_out(const experimental::Tensor& out, const expe
   return experimental::Tensor(::torch::Tensor(r_out));
 }
 
-inline experimental::Tensor isin_elements_Tensor_test(const experimental::Tensor& elements, const experimental::Tensor& test_elements, bool assume_unique, bool invert) {
+inline experimental::Tensor isin(const experimental::Tensor& elements, const experimental::Tensor& test_elements, bool assume_unique, bool invert) {
     auto r_out = experimental::detail::call<void*>("_lantern_isin_tensor_tensor_bool_bool", elements.get(), test_elements.get(), experimental::detail::boolean(assume_unique).get(), experimental::detail::boolean(invert).get());
   return experimental::Tensor(::torch::Tensor(r_out));
 }
@@ -2701,7 +2701,7 @@ inline experimental::Tensor _sparse_semi_structured_linear(const experimental::T
   return experimental::Tensor(::torch::Tensor(r_out));
 }
 
-inline experimental::Tensor _sparse_semi_structured_mm_mat1_Tensor(const experimental::Tensor& mat1, const experimental::Tensor& mat1_meta, const experimental::Tensor& mat2, XPtrTorchoptional_scalar_type out_dtype) {
+inline experimental::Tensor _sparse_semi_structured_mm(const experimental::Tensor& mat1, const experimental::Tensor& mat1_meta, const experimental::Tensor& mat2, XPtrTorchoptional_scalar_type out_dtype) {
     auto r_out = experimental::detail::call<void*>("_lantern__sparse_semi_structured_mm_tensor_tensor_tensor_scalartype", mat1.get(), mat1_meta.get(), mat2.get(), out_dtype.get());
   return experimental::Tensor(::torch::Tensor(r_out));
 }
@@ -2737,12 +2737,12 @@ inline experimental::Tensor fbgemm_pack_gemm_matrix_fp16(const experimental::Ten
   return experimental::Tensor(::torch::Tensor(r_out));
 }
 
-inline experimental::Tensor _wrapped_linear_prepack_weight_Tensor_weight_scale_Tensor(const experimental::Tensor& weight, const experimental::Tensor& weight_scale, const experimental::Tensor& weight_zero_point, const experimental::Tensor& bias) {
+inline experimental::Tensor _wrapped_linear_prepack(const experimental::Tensor& weight, const experimental::Tensor& weight_scale, const experimental::Tensor& weight_zero_point, const experimental::Tensor& bias) {
     auto r_out = experimental::detail::call<void*>("_lantern__wrapped_linear_prepack_tensor_tensor_tensor_tensor", weight.get(), weight_scale.get(), weight_zero_point.get(), bias.get());
   return experimental::Tensor(::torch::Tensor(r_out));
 }
 
-inline experimental::Tensor _wrapped_quantized_linear_prepacked_input_Tensor_input_scale_Tensor(const experimental::Tensor& input, const experimental::Tensor& input_scale, const experimental::Tensor& input_zero_point, const experimental::Tensor& packed_weight, const experimental::Tensor& output_scale, const experimental::Tensor& output_zero_point, std::int64_t out_channel) {
+inline experimental::Tensor _wrapped_quantized_linear_prepacked(const experimental::Tensor& input, const experimental::Tensor& input_scale, const experimental::Tensor& input_zero_point, const experimental::Tensor& packed_weight, const experimental::Tensor& output_scale, const experimental::Tensor& output_zero_point, std::int64_t out_channel) {
     auto r_out = experimental::detail::call<void*>("_lantern__wrapped_quantized_linear_prepacked_tensor_tensor_tensor_tensor_tensor_tensor_intt", input.get(), input_scale.get(), input_zero_point.get(), packed_weight.get(), output_scale.get(), output_zero_point.get(), experimental::detail::integer(out_channel).get());
   return experimental::Tensor(::torch::Tensor(r_out));
 }
@@ -3148,7 +3148,7 @@ inline Rcpp::List max(const experimental::Tensor& self, std::int64_t dim, bool k
   return Rcpp::List::create(XPtrTorchTensor(experimental::detail::call<void*>("_lantern_vector_get", wrap.get(), 0)),XPtrTorchTensor(experimental::detail::call<void*>("_lantern_vector_get", wrap.get(), 1)));
 }
 
-inline Rcpp::List max_out_max_Tensor(const experimental::Tensor& max, const experimental::Tensor& max_values, const experimental::Tensor& self, std::int64_t dim, bool keepdim) {
+inline Rcpp::List max_out(const experimental::Tensor& max, const experimental::Tensor& max_values, const experimental::Tensor& self, std::int64_t dim, bool keepdim) {
     auto r_out = experimental::detail::call<void*>("_lantern_max_out_tensor_tensor_tensor_intt_bool", max.get(), max_values.get(), self.get(), experimental::detail::integer(dim).get(), experimental::detail::boolean(keepdim).get());
   auto wrap = XPtrTorchvector_void(r_out);
   return Rcpp::List::create(XPtrTorchTensor(experimental::detail::call<void*>("_lantern_vector_get", wrap.get(), 0)),XPtrTorchTensor(experimental::detail::call<void*>("_lantern_vector_get", wrap.get(), 1)));
@@ -3160,7 +3160,7 @@ inline Rcpp::List max(const experimental::Tensor& self, XPtrTorchDimname dim, bo
   return Rcpp::List::create(XPtrTorchTensor(experimental::detail::call<void*>("_lantern_vector_get", wrap.get(), 0)),XPtrTorchTensor(experimental::detail::call<void*>("_lantern_vector_get", wrap.get(), 1)));
 }
 
-inline Rcpp::List max_out_max_Tensor(const experimental::Tensor& max, const experimental::Tensor& max_values, const experimental::Tensor& self, XPtrTorchDimname dim, bool keepdim) {
+inline Rcpp::List max_out(const experimental::Tensor& max, const experimental::Tensor& max_values, const experimental::Tensor& self, XPtrTorchDimname dim, bool keepdim) {
     auto r_out = experimental::detail::call<void*>("_lantern_max_out_tensor_tensor_tensor_dimname_bool", max.get(), max_values.get(), self.get(), dim.get(), experimental::detail::boolean(keepdim).get());
   auto wrap = XPtrTorchvector_void(r_out);
   return Rcpp::List::create(XPtrTorchTensor(experimental::detail::call<void*>("_lantern_vector_get", wrap.get(), 0)),XPtrTorchTensor(experimental::detail::call<void*>("_lantern_vector_get", wrap.get(), 1)));
@@ -3346,7 +3346,7 @@ inline Rcpp::List min(const experimental::Tensor& self, std::int64_t dim, bool k
   return Rcpp::List::create(XPtrTorchTensor(experimental::detail::call<void*>("_lantern_vector_get", wrap.get(), 0)),XPtrTorchTensor(experimental::detail::call<void*>("_lantern_vector_get", wrap.get(), 1)));
 }
 
-inline Rcpp::List min_out_min_Tensor(const experimental::Tensor& min, const experimental::Tensor& min_indices, const experimental::Tensor& self, std::int64_t dim, bool keepdim) {
+inline Rcpp::List min_out(const experimental::Tensor& min, const experimental::Tensor& min_indices, const experimental::Tensor& self, std::int64_t dim, bool keepdim) {
     auto r_out = experimental::detail::call<void*>("_lantern_min_out_tensor_tensor_tensor_intt_bool", min.get(), min_indices.get(), self.get(), experimental::detail::integer(dim).get(), experimental::detail::boolean(keepdim).get());
   auto wrap = XPtrTorchvector_void(r_out);
   return Rcpp::List::create(XPtrTorchTensor(experimental::detail::call<void*>("_lantern_vector_get", wrap.get(), 0)),XPtrTorchTensor(experimental::detail::call<void*>("_lantern_vector_get", wrap.get(), 1)));
@@ -3358,7 +3358,7 @@ inline Rcpp::List min(const experimental::Tensor& self, XPtrTorchDimname dim, bo
   return Rcpp::List::create(XPtrTorchTensor(experimental::detail::call<void*>("_lantern_vector_get", wrap.get(), 0)),XPtrTorchTensor(experimental::detail::call<void*>("_lantern_vector_get", wrap.get(), 1)));
 }
 
-inline Rcpp::List min_out_min_Tensor(const experimental::Tensor& min, const experimental::Tensor& min_indices, const experimental::Tensor& self, XPtrTorchDimname dim, bool keepdim) {
+inline Rcpp::List min_out(const experimental::Tensor& min, const experimental::Tensor& min_indices, const experimental::Tensor& self, XPtrTorchDimname dim, bool keepdim) {
     auto r_out = experimental::detail::call<void*>("_lantern_min_out_tensor_tensor_tensor_dimname_bool", min.get(), min_indices.get(), self.get(), dim.get(), experimental::detail::boolean(keepdim).get());
   auto wrap = XPtrTorchvector_void(r_out);
   return Rcpp::List::create(XPtrTorchTensor(experimental::detail::call<void*>("_lantern_vector_get", wrap.get(), 0)),XPtrTorchTensor(experimental::detail::call<void*>("_lantern_vector_get", wrap.get(), 1)));
@@ -3466,7 +3466,7 @@ inline experimental::Tensor mm(const experimental::Tensor& self, const experimen
   return experimental::Tensor(::torch::Tensor(r_out));
 }
 
-inline experimental::Tensor mm_out_out_Tensor_self_Tensor_mat2_Tensor(const experimental::Tensor& out, const experimental::Tensor& self, const experimental::Tensor& mat2, XPtrTorchDtype out_dtype) {
+inline experimental::Tensor mm_out(const experimental::Tensor& out, const experimental::Tensor& self, const experimental::Tensor& mat2, XPtrTorchDtype out_dtype) {
     auto r_out = experimental::detail::call<void*>("_lantern_mm_out_tensor_tensor_tensor_scalartype", out.get(), self.get(), mat2.get(), out_dtype.get());
   return experimental::Tensor(::torch::Tensor(r_out));
 }
@@ -3853,7 +3853,7 @@ inline experimental::Tensor pinverse(const experimental::Tensor& self, double rc
   return experimental::Tensor(::torch::Tensor(r_out));
 }
 
-inline experimental::Tensor poisson_nll_loss_input_Tensor_target_Tensor_log(const experimental::Tensor& input, const experimental::Tensor& target, bool log_input, bool full, double eps, std::int64_t reduction) {
+inline experimental::Tensor poisson_nll_loss(const experimental::Tensor& input, const experimental::Tensor& target, bool log_input, bool full, double eps, std::int64_t reduction) {
     auto r_out = experimental::detail::call<void*>("_lantern_poisson_nll_loss_tensor_tensor_bool_bool_double_intt", input.get(), target.get(), experimental::detail::boolean(log_input).get(), experimental::detail::boolean(full).get(), experimental::detail::floating(eps).get(), experimental::detail::integer(reduction).get());
   return experimental::Tensor(::torch::Tensor(r_out));
 }
@@ -4871,7 +4871,7 @@ inline experimental::Tensor tanh_out(const experimental::Tensor& out, const expe
   return experimental::Tensor(::torch::Tensor(r_out));
 }
 
-inline experimental::Tensor tensordot_self_Tensor_other_Tensor_dims(const experimental::Tensor& self, const experimental::Tensor& other, XPtrTorchIndexIntArrayRef dims_self, XPtrTorchIndexIntArrayRef dims_other) {
+inline experimental::Tensor tensordot(const experimental::Tensor& self, const experimental::Tensor& other, XPtrTorchIndexIntArrayRef dims_self, XPtrTorchIndexIntArrayRef dims_other) {
     auto r_out = experimental::detail::call<void*>("_lantern_tensordot_tensor_tensor_intarrayref_intarrayref", self.get(), other.get(), dims_self.get(), dims_other.get());
   return experimental::Tensor(::torch::Tensor(r_out));
 }
@@ -4981,7 +4981,7 @@ inline experimental::Tensor trapz(const experimental::Tensor& y, double dx, std:
   return experimental::Tensor(::torch::Tensor(r_out));
 }
 
-inline Rcpp::List _transform_bias_rescale_qkv_qkv_Tensor(const experimental::Tensor& qkv, const experimental::Tensor& qkv_bias, std::int64_t num_heads) {
+inline Rcpp::List _transform_bias_rescale_qkv(const experimental::Tensor& qkv, const experimental::Tensor& qkv_bias, std::int64_t num_heads) {
     auto r_out = experimental::detail::call<void*>("_lantern__transform_bias_rescale_qkv_tensor_tensor_intt", qkv.get(), qkv_bias.get(), experimental::detail::integer(num_heads).get());
   auto wrap = XPtrTorchvector_void(r_out);
   return Rcpp::List::create(XPtrTorchTensor(experimental::detail::call<void*>("_lantern_vector_get", wrap.get(), 0)),XPtrTorchTensor(experimental::detail::call<void*>("_lantern_vector_get", wrap.get(), 1)),XPtrTorchTensor(experimental::detail::call<void*>("_lantern_vector_get", wrap.get(), 2)));
@@ -5645,7 +5645,7 @@ inline experimental::Tensor addmm(const experimental::Tensor& self, const experi
   return experimental::Tensor(::torch::Tensor(r_out));
 }
 
-inline experimental::Tensor addmm_out_out_Tensor_self_Tensor_mat1_Tensor_mat2_Tensor(const experimental::Tensor& out, const experimental::Tensor& self, const experimental::Tensor& mat1, const experimental::Tensor& mat2, XPtrTorchDtype out_dtype, XPtrTorchScalar beta, XPtrTorchScalar alpha) {
+inline experimental::Tensor addmm_out(const experimental::Tensor& out, const experimental::Tensor& self, const experimental::Tensor& mat1, const experimental::Tensor& mat2, XPtrTorchDtype out_dtype, XPtrTorchScalar beta, XPtrTorchScalar alpha) {
     auto r_out = experimental::detail::call<void*>("_lantern_addmm_out_tensor_tensor_tensor_tensor_scalartype_scalar_scalar", out.get(), self.get(), mat1.get(), mat2.get(), out_dtype.get(), beta.get(), alpha.get());
   return experimental::Tensor(::torch::Tensor(r_out));
 }
@@ -6071,12 +6071,12 @@ inline experimental::Tensor combinations(const experimental::Tensor& self, std::
   return experimental::Tensor(::torch::Tensor(r_out));
 }
 
-inline ::torch::ScalarType result_type_other_Tensor(const experimental::Tensor& tensor, const experimental::Tensor& other) {
+inline ::torch::ScalarType result_type(const experimental::Tensor& tensor, const experimental::Tensor& other) {
     auto r_out = experimental::detail::call<void*>("_lantern_result_type_tensor_tensor", tensor.get(), other.get());
   return XPtrTorchScalarType(r_out);
 }
 
-inline ::torch::ScalarType result_type_other_Scalar(const experimental::Tensor& tensor, XPtrTorchScalar other) {
+inline ::torch::ScalarType result_type(const experimental::Tensor& tensor, XPtrTorchScalar other) {
     auto r_out = experimental::detail::call<void*>("_lantern_result_type_tensor_scalar", tensor.get(), other.get());
   return XPtrTorchScalarType(r_out);
 }
@@ -7003,7 +7003,7 @@ inline experimental::Tensor gather(const experimental::Tensor& self, std::int64_
   return experimental::Tensor(::torch::Tensor(r_out));
 }
 
-inline experimental::Tensor gather_backward_grad_Tensor_self_Tensor_dim_int64_t_index_Tensor_sparse(const experimental::Tensor& grad, const experimental::Tensor& self, std::int64_t dim, const experimental::Tensor& index, bool sparse_grad) {
+inline experimental::Tensor gather_backward(const experimental::Tensor& grad, const experimental::Tensor& self, std::int64_t dim, const experimental::Tensor& index, bool sparse_grad) {
     auto r_out = experimental::detail::call<void*>("_lantern_gather_backward_tensor_tensor_intt_tensor_bool", grad.get(), self.get(), experimental::detail::integer(dim).get(), index.get(), experimental::detail::boolean(sparse_grad).get());
   return experimental::Tensor(::torch::Tensor(r_out));
 }
@@ -9116,7 +9116,7 @@ inline experimental::Tensor avg_pool3d_backward(const experimental::Tensor& grad
   return experimental::Tensor(::torch::Tensor(r_out));
 }
 
-inline Rcpp::List fractional_max_pool2d_out_output_Tensor_indices_Tensor_self_Tensor_kernel_size_IntArrayRef(const experimental::Tensor& output, const experimental::Tensor& indices, const experimental::Tensor& self, XPtrTorchIntArrayRef kernel_size, XPtrTorchIntArrayRef output_size, const experimental::Tensor& random_samples) {
+inline Rcpp::List fractional_max_pool2d_out(const experimental::Tensor& output, const experimental::Tensor& indices, const experimental::Tensor& self, XPtrTorchIntArrayRef kernel_size, XPtrTorchIntArrayRef output_size, const experimental::Tensor& random_samples) {
     auto r_out = experimental::detail::call<void*>("_lantern_fractional_max_pool2d_out_tensor_tensor_tensor_intarrayref_intarrayref_tensor", output.get(), indices.get(), self.get(), kernel_size.get(), output_size.get(), random_samples.get());
   auto wrap = XPtrTorchvector_void(r_out);
   return Rcpp::List::create(XPtrTorchTensor(experimental::detail::call<void*>("_lantern_vector_get", wrap.get(), 0)),XPtrTorchTensor(experimental::detail::call<void*>("_lantern_vector_get", wrap.get(), 1)));
@@ -9138,7 +9138,7 @@ inline experimental::Tensor fractional_max_pool2d_backward(const experimental::T
   return experimental::Tensor(::torch::Tensor(r_out));
 }
 
-inline Rcpp::List fractional_max_pool3d_out_output_Tensor_indices_Tensor_self_Tensor_kernel_size_IntArrayRef(const experimental::Tensor& output, const experimental::Tensor& indices, const experimental::Tensor& self, XPtrTorchIntArrayRef kernel_size, XPtrTorchIntArrayRef output_size, const experimental::Tensor& random_samples) {
+inline Rcpp::List fractional_max_pool3d_out(const experimental::Tensor& output, const experimental::Tensor& indices, const experimental::Tensor& self, XPtrTorchIntArrayRef kernel_size, XPtrTorchIntArrayRef output_size, const experimental::Tensor& random_samples) {
     auto r_out = experimental::detail::call<void*>("_lantern_fractional_max_pool3d_out_tensor_tensor_tensor_intarrayref_intarrayref_tensor", output.get(), indices.get(), self.get(), kernel_size.get(), output_size.get(), random_samples.get());
   auto wrap = XPtrTorchvector_void(r_out);
   return Rcpp::List::create(XPtrTorchTensor(experimental::detail::call<void*>("_lantern_vector_get", wrap.get(), 0)),XPtrTorchTensor(experimental::detail::call<void*>("_lantern_vector_get", wrap.get(), 1)));
@@ -11252,7 +11252,7 @@ inline Rcpp::List batch_norm_backward_reduce_out(const experimental::Tensor& out
   return Rcpp::List::create(XPtrTorchTensor(experimental::detail::call<void*>("_lantern_vector_get", wrap.get(), 0)),XPtrTorchTensor(experimental::detail::call<void*>("_lantern_vector_get", wrap.get(), 1)),XPtrTorchTensor(experimental::detail::call<void*>("_lantern_vector_get", wrap.get(), 2)),XPtrTorchTensor(experimental::detail::call<void*>("_lantern_vector_get", wrap.get(), 3)));
 }
 
-inline experimental::Tensor batch_norm_backward_elemt_out_out_Tensor_grad(const experimental::Tensor& out, const experimental::Tensor& grad_out, const experimental::Tensor& input, const experimental::Tensor& mean, const experimental::Tensor& invstd, XPtrTorchOptionalTensor weight, const experimental::Tensor& sum_dy, const experimental::Tensor& sum_dy_xmu, const experimental::Tensor& count) {
+inline experimental::Tensor batch_norm_backward_elemt_out(const experimental::Tensor& out, const experimental::Tensor& grad_out, const experimental::Tensor& input, const experimental::Tensor& mean, const experimental::Tensor& invstd, XPtrTorchOptionalTensor weight, const experimental::Tensor& sum_dy, const experimental::Tensor& sum_dy_xmu, const experimental::Tensor& count) {
     auto r_out = experimental::detail::call<void*>("_lantern_batch_norm_backward_elemt_out_tensor_tensor_tensor_tensor_tensor_tensor_tensor_tensor_tensor", out.get(), grad_out.get(), input.get(), mean.get(), invstd.get(), weight.get(), sum_dy.get(), sum_dy_xmu.get(), count.get());
   return experimental::Tensor(::torch::Tensor(r_out));
 }

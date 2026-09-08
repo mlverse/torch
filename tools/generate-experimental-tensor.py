@@ -204,16 +204,27 @@ def namespace_public_parameter(parameter):
     return value.replace("const Tensor&", "const experimental::Tensor&")
 
 
-def namespace_name(encoded_name, parameters):
+def namespace_name(encoded_name, parameters, body):
+    # Unlike the C++ dispatch name, Lantern encodes every parameter type.
+    # torchgen's lantern_function_name lowercases each type and removes all
+    # nonletters, so exactly len(parameters) trailing components are types.
+    # This avoids confusing argument names (test_elements, use_input_stats)
+    # or operation names (abs_out) with the start of the dispatch suffix.
+    match = re.search(r"\blantern_([A-Za-z0-9_]+)\(", body)
+    if not match:
+        raise ValueError(f"Cannot find Lantern call in {encoded_name}")
+    symbol = match.group(1)
+    components = symbol.rsplit("_", len(parameters))
+    if (len(components) != len(parameters) + 1 or
+            any(not re.fullmatch(r"[a-z]+", value) for value in components[1:])):
+        raise ValueError(f"Invalid Lantern parameter suffix in {symbol}")
+    lantern_name = components[0].removesuffix("_") if not parameters else components[0]
     name = encoded_name.removeprefix("namespace_")
-    if parameters:
-        parameter_name = re.match(
-            r"(.+?)\s+([A-Za-z_][A-Za-z0-9_]*)$", parameters[0]
-        ).group(2)
-        marker = f"_{parameter_name}_"
-        if marker not in name:
-            raise ValueError(f"Cannot find first parameter in {encoded_name}")
-        name = name.rsplit(marker, 1)[0]
+    if not (name.lower() == lantern_name or
+            name.lower().startswith(lantern_name + "_")):
+        raise ValueError(f"Lantern operation {lantern_name} does not match {encoded_name}")
+    # Preserve the C++ spelling of names such as _cast_Byte.
+    name = name[:len(lantern_name)]
     namespace = None
     prefix = name.split("_", 1)[0]
     if prefix in SUBNAMESPACES:
@@ -273,7 +284,7 @@ def generated_namespace_source():
         if return_type not in RETURN_TYPES:
             raise ValueError(f"Unhandled namespace return type: {return_type}")
         parameters = split_parameters(signature)
-        namespace, function_name = namespace_name(encoded_name, parameters)
+        namespace, function_name = namespace_name(encoded_name, parameters, body)
         # torch_types.h already exposes torch::index as a namespace.
         if namespace is None and function_name == "index":
             continue
