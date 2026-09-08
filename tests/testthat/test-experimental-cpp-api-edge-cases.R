@@ -74,7 +74,7 @@ test_that("creation options and Lantern errors propagate", {
   expect_equal(as.numeric(cpp_experimental_creation_zeros()), rep(0, 6))
 })
 
-test_that("64-bit C++ scalars are not truncated or promoted", {
+test_that("64-bit C++ scalar methods and operators preserve exact integers", {
   cpp_extension_package()
   x <- torch_tensor(c(1L, 2L), dtype = torch_int64())
   result <- cpp_experimental_edge_large_integer_scalar(x)

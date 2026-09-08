@@ -665,10 +665,12 @@ class Tensor {
   Tensor operator+(const Tensor& other) const { return add(other); }
   Tensor operator+(double other) const { return add(other); }
   Tensor operator+(int other) const { return add(other); }
+  Tensor operator+(std::int64_t other) const { return add(other); }
   Tensor operator-(const Tensor& other) const { return sub(other); }
   Tensor operator*(const Tensor& other) const { return mul(other); }
   Tensor operator*(double other) const { return mul(other); }
   Tensor operator*(int other) const { return mul(other); }
+  Tensor operator*(std::int64_t other) const { return mul(other); }
   Tensor operator/(const Tensor& other) const { return div(other); }
 
 #include "experimental_tensor_methods.h"

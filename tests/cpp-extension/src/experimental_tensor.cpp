@@ -196,8 +196,15 @@ bool cpp_experimental_edge_large_integer_is_exact(
     torch::experimental::Tensor input) {
   auto result = input.add(INT64_C(5000000000)).contiguous();
   auto* values = result.data_ptr<std::int64_t>();
+  const std::int64_t large = INT64_C(9007199254740993);
+  auto sum = (input + large).contiguous();
+  auto product = (input * large).contiguous();
+  auto* sums = sum.data_ptr<std::int64_t>();
+  auto* products = product.data_ptr<std::int64_t>();
   return values[0] == INT64_C(5000000001) &&
-         values[1] == INT64_C(5000000002);
+         values[1] == INT64_C(5000000002) &&
+         sums[0] == large + 1 && sums[1] == large + 2 &&
+         products[0] == large && products[1] == 2 * large;
 }
 
 // [[Rcpp::export]]
