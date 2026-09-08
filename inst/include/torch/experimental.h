@@ -5,6 +5,8 @@
 
 #include <cstdint>
 #include <initializer_list>
+#include <limits>
+#include <stdexcept>
 #include <string>
 #include <type_traits>
 #include <utility>
@@ -124,6 +126,24 @@ inline ::torch::Scalar scalar(int value) {
 inline ::torch::Scalar scalar(std::int64_t value) {
   return ::torch::Scalar(
       call<void*>("_lantern_Scalar", &value, "int64_t"));
+}
+
+// Preserve scalar kind and reject unsigned values that Lantern cannot represent.
+template <typename T>
+inline ::torch::Scalar creation_scalar(T value) {
+  if constexpr (std::is_same<T, bool>::value) {
+    return ::torch::Scalar(call<void*>("_lantern_Scalar", &value, "bool"));
+  } else if constexpr (std::is_integral<T>::value) {
+    if constexpr (std::is_unsigned<T>::value) {
+      if (value > static_cast<std::uint64_t>(
+                      std::numeric_limits<std::int64_t>::max())) {
+        throw std::out_of_range("scalar value exceeds the int64_t range");
+      }
+    }
+    return scalar(static_cast<std::int64_t>(value));
+  } else {
+    return scalar(static_cast<double>(value));
+  }
 }
 
 inline ::torch::int64_t integer(std::int64_t value) {
@@ -473,6 +493,14 @@ class Tensor {
 
   Tensor fill_(double value) {
     auto scalar_value = detail::scalar(value);
+    return from_raw(detail::call<void*>(
+        "_lantern_Tensor_fill__tensor_scalar", get(), scalar_value.get()));
+  }
+
+  template <typename T,
+            std::enable_if_t<std::is_integral<T>::value, int> = 0>
+  Tensor fill_(T value) {
+    auto scalar_value = detail::creation_scalar(value);
     return from_raw(detail::call<void*>(
         "_lantern_Tensor_fill__tensor_scalar", get(), scalar_value.get()));
   }
@@ -863,6 +891,54 @@ inline Tensor full_like(const Tensor& input, double fill_value) {
   return full_like(input, fill_value, detail::tensor_options());
 }
 
+template <typename T,
+          std::enable_if_t<std::is_integral<T>::value, int> = 0>
+inline Tensor full(const std::vector<std::int64_t>& size, T fill_value,
+                   const ::torch::TensorOptions& options) {
+  auto dimensions = detail::int_array_ref(size);
+  auto value = detail::creation_scalar(fill_value);
+  return Tensor(::torch::Tensor(detail::call<void*>(
+      "_lantern_full_intarrayref_scalar_tensoroptions", dimensions.get(),
+      value.get(), options.get())));
+}
+
+template <typename T,
+          std::enable_if_t<std::is_integral<T>::value, int> = 0>
+inline Tensor full(const std::vector<std::int64_t>& size, T fill_value) {
+  return full(size, fill_value, detail::tensor_options());
+}
+
+template <typename T,
+          std::enable_if_t<std::is_integral<T>::value, int> = 0>
+inline Tensor full(std::initializer_list<std::int64_t> size, T fill_value,
+                   const ::torch::TensorOptions& options) {
+  return full(std::vector<std::int64_t>(size), fill_value, options);
+}
+
+template <typename T,
+          std::enable_if_t<std::is_integral<T>::value, int> = 0>
+inline Tensor full(std::initializer_list<std::int64_t> size,
+                   T fill_value) {
+  return full(std::vector<std::int64_t>(size), fill_value);
+}
+
+template <typename T,
+          std::enable_if_t<std::is_integral<T>::value, int> = 0>
+inline Tensor full_like(const Tensor& input, T fill_value,
+                        const ::torch::TensorOptions& options) {
+  auto value = detail::creation_scalar(fill_value);
+  auto memory_format = detail::optional_memory_format();
+  return Tensor(::torch::Tensor(detail::call<void*>(
+      "_lantern_full_like_tensor_scalar_tensoroptions_memoryformat",
+      input.get(), value.get(), options.get(), memory_format.get())));
+}
+
+template <typename T,
+          std::enable_if_t<std::is_integral<T>::value, int> = 0>
+inline Tensor full_like(const Tensor& input, T fill_value) {
+  return full_like(input, fill_value, detail::tensor_options());
+}
+
 inline Tensor randint(std::int64_t high,
                       const std::vector<std::int64_t>& size,
                       const ::torch::TensorOptions& options) {
@@ -947,6 +1023,45 @@ inline Tensor arange(double start, double end, double step = 1.0) {
   return arange(start, end, step, detail::tensor_options());
 }
 
+template <typename T,
+          std::enable_if_t<std::is_integral<T>::value, int> = 0>
+inline Tensor arange(T end, const ::torch::TensorOptions& options) {
+  auto end_value = detail::creation_scalar(end);
+  return Tensor(::torch::Tensor(detail::call<void*>(
+      "_lantern_arange_scalar_tensoroptions", end_value.get(),
+      options.get())));
+}
+
+template <typename T,
+          std::enable_if_t<std::is_integral<T>::value, int> = 0>
+inline Tensor arange(T end) {
+  return arange(end, detail::tensor_options());
+}
+
+template <typename Start, typename End, typename Step = int,
+          std::enable_if_t<std::is_arithmetic<Start>::value &&
+                               std::is_arithmetic<End>::value &&
+                               std::is_arithmetic<Step>::value,
+                           int> = 0>
+inline Tensor arange(Start start, End end, Step step,
+                     const ::torch::TensorOptions& options) {
+  auto start_value = detail::creation_scalar(start);
+  auto end_value = detail::creation_scalar(end);
+  auto step_value = detail::creation_scalar(step);
+  return Tensor(::torch::Tensor(detail::call<void*>(
+      "_lantern_arange_scalar_scalar_scalar_tensoroptions", start_value.get(),
+      end_value.get(), step_value.get(), options.get())));
+}
+
+template <typename Start, typename End, typename Step = int,
+          std::enable_if_t<std::is_arithmetic<Start>::value &&
+                               std::is_arithmetic<End>::value &&
+                               std::is_arithmetic<Step>::value,
+                           int> = 0>
+inline Tensor arange(Start start, End end, Step step = 1) {
+  return arange(start, end, step, detail::tensor_options());
+}
+
 inline Tensor linspace(double start, double end, std::int64_t steps,
                        const ::torch::TensorOptions& options) {
   auto start_value = detail::scalar(start);
@@ -1010,6 +1125,22 @@ inline Tensor scalar_tensor(double value,
 }
 
 inline Tensor scalar_tensor(double value) {
+  return scalar_tensor(value, detail::tensor_options());
+}
+
+template <typename T,
+          std::enable_if_t<std::is_integral<T>::value, int> = 0>
+inline Tensor scalar_tensor(T value,
+                            const ::torch::TensorOptions& options) {
+  auto scalar = detail::creation_scalar(value);
+  return Tensor(::torch::Tensor(detail::call<void*>(
+      "_lantern_scalar_tensor_scalar_tensoroptions", scalar.get(),
+      options.get())));
+}
+
+template <typename T,
+          std::enable_if_t<std::is_integral<T>::value, int> = 0>
+inline Tensor scalar_tensor(T value) {
   return scalar_tensor(value, detail::tensor_options());
 }
 

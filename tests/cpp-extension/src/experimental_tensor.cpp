@@ -485,4 +485,5 @@ torch::experimental::Tensor cpp_experimental_nn2poly_accumulate_partition(
 // Keep the fixture in one translation unit because torch_imports.h provides
 // package-level C-callable shims. RcppExports.cpp is generated normally by
 // Rcpp::compileAttributes(), then compiled here rather than as a second object.
+#include "creation_scalars.cpp"
 #include "RcppExports.cpp"

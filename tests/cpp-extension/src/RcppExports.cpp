@@ -10,6 +10,25 @@ Rcpp::Rostream<true>&  Rcpp::Rcout = Rcpp::Rcpp_cout_get();
 Rcpp::Rostream<false>& Rcpp::Rcerr = Rcpp::Rcpp_cerr_get();
 #endif
 
+// cpp_experimental_creation_integral_scalars
+Rcpp::List cpp_experimental_creation_integral_scalars();
+RcppExport SEXP _torchextensiontest_cpp_experimental_creation_integral_scalars() {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    rcpp_result_gen = Rcpp::wrap(cpp_experimental_creation_integral_scalars());
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_experimental_creation_unsigned_overflow
+void cpp_experimental_creation_unsigned_overflow();
+RcppExport SEXP _torchextensiontest_cpp_experimental_creation_unsigned_overflow() {
+BEGIN_RCPP
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    cpp_experimental_creation_unsigned_overflow();
+    return R_NilValue;
+END_RCPP
+}
 // cpp_experimental_tensor_relu_reshape
 torch::experimental::Tensor cpp_experimental_tensor_relu_reshape(torch::experimental::Tensor input);
 RcppExport SEXP _torchextensiontest_cpp_experimental_tensor_relu_reshape(SEXP inputSEXP) {
@@ -528,6 +547,8 @@ END_RCPP
 }
 
 static const R_CallMethodDef CallEntries[] = {
+    {"_torchextensiontest_cpp_experimental_creation_integral_scalars", (DL_FUNC) &_torchextensiontest_cpp_experimental_creation_integral_scalars, 0},
+    {"_torchextensiontest_cpp_experimental_creation_unsigned_overflow", (DL_FUNC) &_torchextensiontest_cpp_experimental_creation_unsigned_overflow, 0},
     {"_torchextensiontest_cpp_experimental_tensor_relu_reshape", (DL_FUNC) &_torchextensiontest_cpp_experimental_tensor_relu_reshape, 1},
     {"_torchextensiontest_cpp_experimental_tensor_sizes", (DL_FUNC) &_torchextensiontest_cpp_experimental_tensor_sizes, 1},
     {"_torchextensiontest_cpp_experimental_tensor_generated_methods", (DL_FUNC) &_torchextensiontest_cpp_experimental_tensor_generated_methods, 1},
