@@ -1,5 +1,6 @@
 # torch (development version)
 
+- Add lantern compilation for cuda 12.9 (@cregouby #1483)
 - Fixed `nn_multihead_attention()` and `nnf_multi_head_attention_forward()` with `bias = FALSE`
   when `query` differs from `key` (i.e. cross- and encoder-decoder attention), which failed with
   `object 'k' not found`. The key and value projections were only computed when a bias was present.
