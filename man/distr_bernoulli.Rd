@@ -31,11 +31,11 @@ m$sample() # 30\% chance 1; 70\% chance 0
 \seealso{
 \link{Distribution} for details on the available methods.
 
-Other distributions: 
-\code{\link{distr_chi2}()},
-\code{\link{distr_gamma}()},
-\code{\link{distr_multivariate_normal}()},
-\code{\link{distr_normal}()},
-\code{\link{distr_poisson}()}
+Other distributions:
+\code{\link[=distr_chi2]{distr_chi2()}},
+\code{\link[=distr_gamma]{distr_gamma()}},
+\code{\link[=distr_multivariate_normal]{distr_multivariate_normal()}},
+\code{\link[=distr_normal]{distr_normal()}},
+\code{\link[=distr_poisson]{distr_poisson()}}
 }
 \concept{distributions}

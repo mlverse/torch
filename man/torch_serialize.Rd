@@ -20,9 +20,9 @@ A raw vector containing the serialized object. Can be reloaded using
 It's just a wraper around \code{\link[=torch_save]{torch_save()}}.
 }
 \seealso{
-Other torch_save: 
-\code{\link{torch_load}()},
-\code{\link{torch_save}()}
+Other torch_save:
+\code{\link[=torch_load]{torch_load()}},
+\code{\link[=torch_save]{torch_save()}}
 }
 \concept{serialization}
 \concept{torch_save}

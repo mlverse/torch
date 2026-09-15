@@ -13,6 +13,6 @@ These objects are imported from other packages. Follow the links
 below to see their documentation.
 
 \describe{
-  \item{coro}{\code{\link[coro]{as_iterator}}, \code{\link[coro:collect]{loop}}, \code{\link[coro]{yield}}}
+  \item{coro}{\code{\link[coro:as_iterator]{as_iterator()}}, \code{\link[coro:loop]{loop()}}, \code{\link[coro:yield]{yield()}}}
 }}
 

@@ -5,68 +5,65 @@
 \title{Class representing the context.}
 \description{
 Class representing the context.
-
-Class representing the context.
 }
 \section{Public fields}{
-\if{html}{\out{<div class="r6-fields">}}
-\describe{
-\item{\code{ptr}}{(Dev related) pointer to the context c++ object.}
-}
-\if{html}{\out{</div>}}
+  \if{html}{\out{<div class="r6-fields">}}
+  \describe{
+    \item{\code{ptr}}{(Dev related) pointer to the context c++ object.}
+  }
+  \if{html}{\out{</div>}}
 }
 \section{Active bindings}{
-\if{html}{\out{<div class="r6-active-bindings">}}
-\describe{
-\item{\code{needs_input_grad}}{boolean listing arguments of \code{forward} and whether they require_grad.}
+  \if{html}{\out{<div class="r6-active-bindings">}}
+  \describe{
+    \item{\code{needs_input_grad}}{boolean listing arguments of \code{forward} and whether they require_grad.}
 
-\item{\code{saved_variables}}{list of objects that were saved for backward via \code{save_for_backward}.}
-}
-\if{html}{\out{</div>}}
+    \item{\code{saved_variables}}{list of objects that were saved for backward via \code{save_for_backward}.}
+  }
+  \if{html}{\out{</div>}}
 }
 \section{Methods}{
 \subsection{Public methods}{
-\itemize{
-\item \href{#method-torch_autograd_context-new}{\code{AutogradContext$new()}}
-\item \href{#method-torch_autograd_context-save_for_backward}{\code{AutogradContext$save_for_backward()}}
-\item \href{#method-torch_autograd_context-mark_non_differentiable}{\code{AutogradContext$mark_non_differentiable()}}
-\item \href{#method-torch_autograd_context-mark_dirty}{\code{AutogradContext$mark_dirty()}}
-\item \href{#method-torch_autograd_context-clone}{\code{AutogradContext$clone()}}
-}
+  \itemize{
+    \item \href{#method-torch_autograd_context-initialize}{\code{torch_autograd_context$new()}}
+    \item \href{#method-torch_autograd_context-save_for_backward}{\code{torch_autograd_context$save_for_backward()}}
+    \item \href{#method-torch_autograd_context-mark_non_differentiable}{\code{torch_autograd_context$mark_non_differentiable()}}
+    \item \href{#method-torch_autograd_context-mark_dirty}{\code{torch_autograd_context$mark_dirty()}}
+    \item \href{#method-torch_autograd_context-clone}{\code{torch_autograd_context$clone()}}
+  }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-torch_autograd_context-new"></a>}}
-\if{latex}{\out{\hypertarget{method-torch_autograd_context-new}{}}}
-\subsection{Method \code{new()}}{
-(Dev related) Initializes the context. Not user related.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{AutogradContext$new(
+\if{html}{\out{<a id="method-torch_autograd_context-initialize"></a>}}
+\if{latex}{\out{\hypertarget{method-torch_autograd_context-initialize}{}}}
+\subsection{\code{torch_autograd_context$new()}}{
+  (Dev related) Initializes the context. Not user related.
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{torch_autograd_context$new(
   ptr,
   env,
   argument_names = NULL,
   argument_needs_grad = NULL
-)}\if{html}{\out{</div>}}
+)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{ptr}}{pointer to the c++ object}
+      \item{\code{env}}{environment that encloses both forward and backward}
+      \item{\code{argument_names}}{names of forward arguments}
+      \item{\code{argument_needs_grad}}{whether each argument in forward needs grad.}
+    }
+    \if{html}{\out{</div>}}
+  }
 }
 
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{ptr}}{pointer to the c++ object}
-
-\item{\code{env}}{environment that encloses both forward and backward}
-
-\item{\code{argument_names}}{names of forward arguments}
-
-\item{\code{argument_needs_grad}}{whether each argument in forward needs grad.}
-}
-\if{html}{\out{</div>}}
-}
-}
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-torch_autograd_context-save_for_backward"></a>}}
 \if{latex}{\out{\hypertarget{method-torch_autograd_context-save_for_backward}{}}}
-\subsection{Method \code{save_for_backward()}}{
-Saves given objects for a future call to backward().
+\subsection{\code{torch_autograd_context$save_for_backward()}}{
+  Saves given objects for a future call to backward().
 
 This should be called at most once, and only from inside the \code{forward()}
 method.
@@ -76,24 +73,26 @@ Before returning them to the user, a check is made to ensure they weren’t used
 in any in-place operation that modified their content.
 
 Arguments can also be any kind of R object.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{AutogradContext$save_for_backward(...)}\if{html}{\out{</div>}}
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{torch_autograd_context$save_for_backward(...)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{...}}{any kind of R object that will be saved for the backward pass.
+It's common to pass named arguments.}
+    }
+    \if{html}{\out{</div>}}
+  }
 }
 
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{...}}{any kind of R object that will be saved for the backward pass.
-It's common to pass named arguments.}
-}
-\if{html}{\out{</div>}}
-}
-}
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-torch_autograd_context-mark_non_differentiable"></a>}}
 \if{latex}{\out{\hypertarget{method-torch_autograd_context-mark_non_differentiable}{}}}
-\subsection{Method \code{mark_non_differentiable()}}{
-Marks outputs as non-differentiable.
+\subsection{\code{torch_autograd_context$mark_non_differentiable()}}{
+  Marks outputs as non-differentiable.
 
 This should be called at most once, only from inside the \code{forward()} method,
 and all arguments should be outputs.
@@ -104,23 +103,25 @@ in \code{backward()}, but it’s always going to be a zero tensor with the same
 shape as the shape of a corresponding output.
 
 This is used e.g. for indices returned from a max Function.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{AutogradContext$mark_non_differentiable(...)}\if{html}{\out{</div>}}
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{torch_autograd_context$mark_non_differentiable(...)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{...}}{non-differentiable outputs.}
+    }
+    \if{html}{\out{</div>}}
+  }
 }
 
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{...}}{non-differentiable outputs.}
-}
-\if{html}{\out{</div>}}
-}
-}
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-torch_autograd_context-mark_dirty"></a>}}
 \if{latex}{\out{\hypertarget{method-torch_autograd_context-mark_dirty}{}}}
-\subsection{Method \code{mark_dirty()}}{
-Marks given tensors as modified in an in-place operation.
+\subsection{\code{torch_autograd_context$mark_dirty()}}{
+  Marks given tensors as modified in an in-place operation.
 
 This should be called at most once, only from inside the \code{forward()} method,
 and all arguments should be inputs.
@@ -128,33 +129,37 @@ and all arguments should be inputs.
 Every tensor that’s been modified in-place in a call to \code{forward()} should
 be given to this function, to ensure correctness of our checks. It doesn’t
 matter whether the function is called before or after modification.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{AutogradContext$mark_dirty(...)}\if{html}{\out{</div>}}
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{torch_autograd_context$mark_dirty(...)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{...}}{tensors that are modified in-place.}
+    }
+    \if{html}{\out{</div>}}
+  }
 }
 
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{...}}{tensors that are modified in-place.}
-}
-\if{html}{\out{</div>}}
-}
-}
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-torch_autograd_context-clone"></a>}}
 \if{latex}{\out{\hypertarget{method-torch_autograd_context-clone}{}}}
-\subsection{Method \code{clone()}}{
-The objects of this class are cloneable with this method.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{AutogradContext$clone(deep = FALSE)}\if{html}{\out{</div>}}
+\subsection{\code{torch_autograd_context$clone()}}{
+  The objects of this class are cloneable with this method.
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{torch_autograd_context$clone(deep = FALSE)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{deep}}{Whether to make a deep clone.}
+    }
+    \if{html}{\out{</div>}}
+  }
 }
 
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{deep}}{Whether to make a deep clone.}
-}
-\if{html}{\out{</div>}}
-}
-}
 }

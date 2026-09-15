@@ -38,7 +38,7 @@ and vdim are \code{NULL}, they will be set to embed_dim such that query, key,
 and value have the same number of features.}
 
 \item{batch_first}{if \code{TRUE} then the input and output tensors are \eqn{(N,
-  S, E)} instead of \eqn{(S, N, E)}, where N is the batch size, S is the
+S, E)} instead of \eqn{(S, N, E)}, where N is the batch size, S is the
 sequence length, and E is the embedding dimension.}
 }
 \description{

@@ -11,8 +11,9 @@ nn_cross_entropy_loss(weight = NULL, ignore_index = -100, reduction = "mean")
 If given, has to be a Tensor of size \code{C}}
 
 \item{ignore_index}{(int, optional): Specifies a target value that is ignored
-and does not contribute to the input gradient. Like \code{target}, this is a 1-based class index. The default \code{-100} is never a valid target and therefore ignores nothing. When \code{size_average} is
-\code{TRUE}, the loss is averaged over non-ignored targets.}
+and does not contribute to the input gradient. Like \code{target}, this is a 1-based
+class index. The default \code{-100} is never a valid target and therefore ignores nothing.
+When \code{size_average} is \code{TRUE}, the loss is averaged over non-ignored targets.}
 
 \item{reduction}{(string, optional): Specifies the reduction to apply to the output:
 \code{'none'} | \code{'mean'} | \code{'sum'}. \code{'none'}: no reduction will be applied,

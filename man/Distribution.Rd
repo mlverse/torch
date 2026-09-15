@@ -9,313 +9,342 @@ Note: in Python, adding torch.Size objects works as concatenation
 Try for example: torch.Size((2, 1)) + torch.Size((1,))
 }
 \section{Public fields}{
-\if{html}{\out{<div class="r6-fields">}}
-\describe{
-\item{\code{.validate_args}}{whether to validate arguments}
+  \if{html}{\out{<div class="r6-fields">}}
+  \describe{
+    \item{\code{.validate_args}}{whether to validate arguments}
 
-\item{\code{has_rsample}}{whether has an rsample}
+    \item{\code{has_rsample}}{whether has an rsample}
 
-\item{\code{has_enumerate_support}}{whether has enumerate support}
-}
-\if{html}{\out{</div>}}
+    \item{\code{has_enumerate_support}}{whether has enumerate support}
+  }
+  \if{html}{\out{</div>}}
 }
 \section{Active bindings}{
-\if{html}{\out{<div class="r6-active-bindings">}}
-\describe{
-\item{\code{batch_shape}}{Returns the shape over which parameters are batched.}
+  \if{html}{\out{<div class="r6-active-bindings">}}
+  \describe{
+    \item{\code{batch_shape}}{Returns the shape over which parameters are batched.}
 
-\item{\code{event_shape}}{Returns the shape of a single sample (without batching).
+    \item{\code{event_shape}}{Returns the shape of a single sample (without batching).
 Returns a dictionary from argument names to
 \code{torch_Constraint} objects that
 should be satisfied by each argument of this distribution. Args that
 are not tensors need not appear in this dict.}
 
-\item{\code{support}}{Returns a \code{torch_Constraint} object representing this distribution's
+    \item{\code{support}}{Returns a \code{torch_Constraint} object representing this distribution's
 support.}
 
-\item{\code{mean}}{Returns the mean on of the distribution}
+    \item{\code{mean}}{Returns the mean on of the distribution}
 
-\item{\code{variance}}{Returns the variance of the distribution}
+    \item{\code{variance}}{Returns the variance of the distribution}
 
-\item{\code{stddev}}{Returns the standard deviation of the distribution
+    \item{\code{stddev}}{Returns the standard deviation of the distribution
 TODO: consider different message}
-}
-\if{html}{\out{</div>}}
+  }
+  \if{html}{\out{</div>}}
 }
 \section{Methods}{
 \subsection{Public methods}{
-\itemize{
-\item \href{#method-torch_Distribution-new}{\code{Distribution$new()}}
-\item \href{#method-torch_Distribution-expand}{\code{Distribution$expand()}}
-\item \href{#method-torch_Distribution-sample}{\code{Distribution$sample()}}
-\item \href{#method-torch_Distribution-rsample}{\code{Distribution$rsample()}}
-\item \href{#method-torch_Distribution-log_prob}{\code{Distribution$log_prob()}}
-\item \href{#method-torch_Distribution-cdf}{\code{Distribution$cdf()}}
-\item \href{#method-torch_Distribution-icdf}{\code{Distribution$icdf()}}
-\item \href{#method-torch_Distribution-enumerate_support}{\code{Distribution$enumerate_support()}}
-\item \href{#method-torch_Distribution-entropy}{\code{Distribution$entropy()}}
-\item \href{#method-torch_Distribution-perplexity}{\code{Distribution$perplexity()}}
-\item \href{#method-torch_Distribution-.extended_shape}{\code{Distribution$.extended_shape()}}
-\item \href{#method-torch_Distribution-.validate_sample}{\code{Distribution$.validate_sample()}}
-\item \href{#method-torch_Distribution-print}{\code{Distribution$print()}}
-\item \href{#method-torch_Distribution-clone}{\code{Distribution$clone()}}
-}
+  \itemize{
+    \item \href{#method-torch_Distribution-initialize}{\code{torch_Distribution$new()}}
+    \item \href{#method-torch_Distribution-expand}{\code{torch_Distribution$expand()}}
+    \item \href{#method-torch_Distribution-sample}{\code{torch_Distribution$sample()}}
+    \item \href{#method-torch_Distribution-rsample}{\code{torch_Distribution$rsample()}}
+    \item \href{#method-torch_Distribution-log_prob}{\code{torch_Distribution$log_prob()}}
+    \item \href{#method-torch_Distribution-cdf}{\code{torch_Distribution$cdf()}}
+    \item \href{#method-torch_Distribution-icdf}{\code{torch_Distribution$icdf()}}
+    \item \href{#method-torch_Distribution-enumerate_support}{\code{torch_Distribution$enumerate_support()}}
+    \item \href{#method-torch_Distribution-entropy}{\code{torch_Distribution$entropy()}}
+    \item \href{#method-torch_Distribution-perplexity}{\code{torch_Distribution$perplexity()}}
+    \item \href{#method-torch_Distribution-.extended_shape}{\code{torch_Distribution$.extended_shape()}}
+    \item \href{#method-torch_Distribution-.validate_sample}{\code{torch_Distribution$.validate_sample()}}
+    \item \href{#method-torch_Distribution-print}{\code{torch_Distribution$print()}}
+    \item \href{#method-torch_Distribution-clone}{\code{torch_Distribution$clone()}}
+  }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-torch_Distribution-new"></a>}}
-\if{latex}{\out{\hypertarget{method-torch_Distribution-new}{}}}
-\subsection{Method \code{new()}}{
-Initializes a distribution class.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{Distribution$new(batch_shape = NULL, event_shape = NULL, validate_args = NULL)}\if{html}{\out{</div>}}
-}
-
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{batch_shape}}{the shape over which parameters are batched.}
-
-\item{\code{event_shape}}{the shape of a single sample (without batching).}
-
-\item{\code{validate_args}}{whether to validate the arguments or not. Validation
+\if{html}{\out{<a id="method-torch_Distribution-initialize"></a>}}
+\if{latex}{\out{\hypertarget{method-torch_Distribution-initialize}{}}}
+\subsection{\code{torch_Distribution$new()}}{
+  Initializes a distribution class.
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{torch_Distribution$new(
+  batch_shape = NULL,
+  event_shape = NULL,
+  validate_args = NULL
+)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{batch_shape}}{the shape over which parameters are batched.}
+      \item{\code{event_shape}}{the shape of a single sample (without batching).}
+      \item{\code{validate_args}}{whether to validate the arguments or not. Validation
 can be time consuming so you might want to disable it.}
+    }
+    \if{html}{\out{</div>}}
+  }
 }
-\if{html}{\out{</div>}}
-}
-}
+
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-torch_Distribution-expand"></a>}}
 \if{latex}{\out{\hypertarget{method-torch_Distribution-expand}{}}}
-\subsection{Method \code{expand()}}{
-Returns a new distribution instance (or populates an existing instance
+\subsection{\code{torch_Distribution$expand()}}{
+  Returns a new distribution instance (or populates an existing instance
 provided by a derived class) with batch dimensions expanded to batch_shape.
 This method calls expand on the distribution’s parameters. As such, this
 does not allocate new memory for the expanded distribution instance.
 Additionally, this does not repeat any args checking or parameter
 broadcasting in \code{initialize}, when an instance is first created.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{Distribution$expand(batch_shape, .instance = NULL)}\if{html}{\out{</div>}}
-}
-
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{batch_shape}}{the desired expanded size.}
-
-\item{\code{.instance}}{new instance provided by subclasses that need to
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{torch_Distribution$expand(batch_shape, .instance = NULL)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{batch_shape}}{the desired expanded size.}
+      \item{\code{.instance}}{new instance provided by subclasses that need to
 override \code{expand}.}
+    }
+    \if{html}{\out{</div>}}
+  }
 }
-\if{html}{\out{</div>}}
-}
-}
+
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-torch_Distribution-sample"></a>}}
 \if{latex}{\out{\hypertarget{method-torch_Distribution-sample}{}}}
-\subsection{Method \code{sample()}}{
-Generates a \code{sample_shape} shaped sample or \code{sample_shape} shaped batch of
+\subsection{\code{torch_Distribution$sample()}}{
+  Generates a \code{sample_shape} shaped sample or \code{sample_shape} shaped batch of
 samples if the distribution parameters are batched.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{Distribution$sample(sample_shape = NULL)}\if{html}{\out{</div>}}
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{torch_Distribution$sample(sample_shape = NULL)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{sample_shape}}{the shape you want to sample.}
+    }
+    \if{html}{\out{</div>}}
+  }
 }
 
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{sample_shape}}{the shape you want to sample.}
-}
-\if{html}{\out{</div>}}
-}
-}
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-torch_Distribution-rsample"></a>}}
 \if{latex}{\out{\hypertarget{method-torch_Distribution-rsample}{}}}
-\subsection{Method \code{rsample()}}{
-Generates a sample_shape shaped reparameterized sample or sample_shape
+\subsection{\code{torch_Distribution$rsample()}}{
+  Generates a sample_shape shaped reparameterized sample or sample_shape
 shaped batch of reparameterized samples if the distribution parameters
 are batched.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{Distribution$rsample(sample_shape = NULL)}\if{html}{\out{</div>}}
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{torch_Distribution$rsample(sample_shape = NULL)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{sample_shape}}{the shape you want to sample.}
+    }
+    \if{html}{\out{</div>}}
+  }
 }
 
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{sample_shape}}{the shape you want to sample.}
-}
-\if{html}{\out{</div>}}
-}
-}
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-torch_Distribution-log_prob"></a>}}
 \if{latex}{\out{\hypertarget{method-torch_Distribution-log_prob}{}}}
-\subsection{Method \code{log_prob()}}{
-Returns the log of the probability density/mass function evaluated at
+\subsection{\code{torch_Distribution$log_prob()}}{
+  Returns the log of the probability density/mass function evaluated at
 \code{value}.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{Distribution$log_prob(value)}\if{html}{\out{</div>}}
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{torch_Distribution$log_prob(value)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{value}}{values to evaluate the density on.}
+    }
+    \if{html}{\out{</div>}}
+  }
 }
 
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{value}}{values to evaluate the density on.}
-}
-\if{html}{\out{</div>}}
-}
-}
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-torch_Distribution-cdf"></a>}}
 \if{latex}{\out{\hypertarget{method-torch_Distribution-cdf}{}}}
-\subsection{Method \code{cdf()}}{
-Returns the cumulative density/mass function evaluated at
+\subsection{\code{torch_Distribution$cdf()}}{
+  Returns the cumulative density/mass function evaluated at
 \code{value}.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{Distribution$cdf(value)}\if{html}{\out{</div>}}
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{torch_Distribution$cdf(value)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{value}}{values to evaluate the density on.}
+    }
+    \if{html}{\out{</div>}}
+  }
 }
 
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{value}}{values to evaluate the density on.}
-}
-\if{html}{\out{</div>}}
-}
-}
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-torch_Distribution-icdf"></a>}}
 \if{latex}{\out{\hypertarget{method-torch_Distribution-icdf}{}}}
-\subsection{Method \code{icdf()}}{
-Returns the inverse cumulative density/mass function evaluated at
+\subsection{\code{torch_Distribution$icdf()}}{
+  Returns the inverse cumulative density/mass function evaluated at
 \code{value}.
 
 @description
 Returns tensor containing all values supported by a discrete
 distribution. The result will enumerate over dimension 0, so the shape
 of the result will be \verb{(cardinality,) + batch_shape + event_shape (where }event_shape = ()\verb{for univariate distributions). Note that this enumerates over all batched tensors in lock-step}list(c(0, 0), c(1, 1), ...)\verb{. With }expand=FALSE\verb{, enumeration happens along dim 0, but with the remaining batch dimensions being singleton dimensions, }list(c(0), c(1), ...)`.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{Distribution$icdf(value)}\if{html}{\out{</div>}}
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{torch_Distribution$icdf(value)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{value}}{values to evaluate the density on.}
+    }
+    \if{html}{\out{</div>}}
+  }
 }
 
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{value}}{values to evaluate the density on.}
-}
-\if{html}{\out{</div>}}
-}
-}
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-torch_Distribution-enumerate_support"></a>}}
 \if{latex}{\out{\hypertarget{method-torch_Distribution-enumerate_support}{}}}
-\subsection{Method \code{enumerate_support()}}{
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{Distribution$enumerate_support(expand = TRUE)}\if{html}{\out{</div>}}
+\subsection{\code{torch_Distribution$enumerate_support()}}{
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{torch_Distribution$enumerate_support(expand = TRUE)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{expand}}{(bool): whether to expand the support over the
+batch dims to match the distribution's \code{batch_shape}.}
+    }
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Returns}{
+    Tensor iterating over dimension 0.
+  }
 }
 
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{expand}}{(bool): whether to expand the support over the
-batch dims to match the distribution's \code{batch_shape}.}
-}
-\if{html}{\out{</div>}}
-}
-\subsection{Returns}{
-Tensor iterating over dimension 0.
-}
-}
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-torch_Distribution-entropy"></a>}}
 \if{latex}{\out{\hypertarget{method-torch_Distribution-entropy}{}}}
-\subsection{Method \code{entropy()}}{
-Returns entropy of distribution, batched over batch_shape.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{Distribution$entropy()}\if{html}{\out{</div>}}
+\subsection{\code{torch_Distribution$entropy()}}{
+  Returns entropy of distribution, batched over batch_shape.
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{torch_Distribution$entropy()}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Returns}{
+    Tensor of shape batch_shape.
+  }
 }
 
-\subsection{Returns}{
-Tensor of shape batch_shape.
-}
-}
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-torch_Distribution-perplexity"></a>}}
 \if{latex}{\out{\hypertarget{method-torch_Distribution-perplexity}{}}}
-\subsection{Method \code{perplexity()}}{
-Returns perplexity of distribution, batched over batch_shape.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{Distribution$perplexity()}\if{html}{\out{</div>}}
+\subsection{\code{torch_Distribution$perplexity()}}{
+  Returns perplexity of distribution, batched over batch_shape.
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{torch_Distribution$perplexity()}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Returns}{
+    Tensor of shape batch_shape.
+  }
 }
 
-\subsection{Returns}{
-Tensor of shape batch_shape.
-}
-}
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-torch_Distribution-.extended_shape"></a>}}
 \if{latex}{\out{\hypertarget{method-torch_Distribution-.extended_shape}{}}}
-\subsection{Method \code{.extended_shape()}}{
-Returns the size of the sample returned by the distribution, given
+\subsection{\code{torch_Distribution$.extended_shape()}}{
+  Returns the size of the sample returned by the distribution, given
 a \code{sample_shape}. Note, that the batch and event shapes of a distribution
 instance are fixed at the time of construction. If this is empty, the
 returned shape is upcast to (1,).
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{Distribution$.extended_shape(sample_shape = NULL)}\if{html}{\out{</div>}}
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{torch_Distribution$.extended_shape(sample_shape = NULL)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{sample_shape}}{(torch_Size): the size of the sample to be drawn.}
+    }
+    \if{html}{\out{</div>}}
+  }
 }
 
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{sample_shape}}{(torch_Size): the size of the sample to be drawn.}
-}
-\if{html}{\out{</div>}}
-}
-}
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-torch_Distribution-.validate_sample"></a>}}
 \if{latex}{\out{\hypertarget{method-torch_Distribution-.validate_sample}{}}}
-\subsection{Method \code{.validate_sample()}}{
-Argument validation for distribution methods such as \code{log_prob},
+\subsection{\code{torch_Distribution$.validate_sample()}}{
+  Argument validation for distribution methods such as \code{log_prob},
 \code{cdf} and \code{icdf}. The rightmost dimensions of a value to be
 scored via these methods must agree with the distribution's batch
 and event shapes.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{Distribution$.validate_sample(value)}\if{html}{\out{</div>}}
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{torch_Distribution$.validate_sample(value)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{value}}{(Tensor): the tensor whose log probability is to be
+computed by the \code{log_prob} method.}
+    }
+    \if{html}{\out{</div>}}
+  }
 }
 
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{value}}{(Tensor): the tensor whose log probability is to be
-computed by the \code{log_prob} method.}
-}
-\if{html}{\out{</div>}}
-}
-}
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-torch_Distribution-print"></a>}}
 \if{latex}{\out{\hypertarget{method-torch_Distribution-print}{}}}
-\subsection{Method \code{print()}}{
-Prints the distribution instance.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{Distribution$print()}\if{html}{\out{</div>}}
+\subsection{\code{torch_Distribution$print()}}{
+  Prints the distribution instance.
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{torch_Distribution$print()}
+    \if{html}{\out{</div>}}
+  }
 }
 
-}
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-torch_Distribution-clone"></a>}}
 \if{latex}{\out{\hypertarget{method-torch_Distribution-clone}{}}}
-\subsection{Method \code{clone()}}{
-The objects of this class are cloneable with this method.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{Distribution$clone(deep = FALSE)}\if{html}{\out{</div>}}
+\subsection{\code{torch_Distribution$clone()}}{
+  The objects of this class are cloneable with this method.
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{torch_Distribution$clone(deep = FALSE)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{deep}}{Whether to make a deep clone.}
+    }
+    \if{html}{\out{</div>}}
+  }
 }
 
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{deep}}{Whether to make a deep clone.}
-}
-\if{html}{\out{</div>}}
-}
-}
 }

@@ -17,9 +17,9 @@ be reused.}
 Loads a saved object
 }
 \seealso{
-Other torch_save: 
-\code{\link{torch_save}()},
-\code{\link{torch_serialize}()}
+Other torch_save:
+\code{\link[=torch_save]{torch_save()}},
+\code{\link[=torch_serialize]{torch_serialize()}}
 }
 \concept{serialization}
 \concept{torch_save}

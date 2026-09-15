@@ -4,65 +4,66 @@
 \alias{Constraint}
 \title{Abstract base class for constraints.}
 \description{
-Abstract base class for constraints.
-
-Abstract base class for constraints.
-}
-\details{
 A constraint object represents a region over which a variable is valid,
 e.g. within which a variable can be optimized.
 }
 \section{Methods}{
 \subsection{Public methods}{
-\itemize{
-\item \href{#method-torch_Constraint-check}{\code{Constraint$check()}}
-\item \href{#method-torch_Constraint-print}{\code{Constraint$print()}}
-\item \href{#method-torch_Constraint-clone}{\code{Constraint$clone()}}
-}
+  \itemize{
+    \item \href{#method-torch_Constraint-check}{\code{torch_Constraint$check()}}
+    \item \href{#method-torch_Constraint-print}{\code{torch_Constraint$print()}}
+    \item \href{#method-torch_Constraint-clone}{\code{torch_Constraint$clone()}}
+  }
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-torch_Constraint-check"></a>}}
 \if{latex}{\out{\hypertarget{method-torch_Constraint-check}{}}}
-\subsection{Method \code{check()}}{
-Returns a byte tensor of \code{sample_shape + batch_shape} indicating
+\subsection{\code{torch_Constraint$check()}}{
+  Returns a byte tensor of \code{sample_shape + batch_shape} indicating
 whether each event in value satisfies this constraint.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{Constraint$check(value)}\if{html}{\out{</div>}}
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{torch_Constraint$check(value)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{value}}{each event in value will be checked.}
+    }
+    \if{html}{\out{</div>}}
+  }
 }
 
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{value}}{each event in value will be checked.}
-}
-\if{html}{\out{</div>}}
-}
-}
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-torch_Constraint-print"></a>}}
 \if{latex}{\out{\hypertarget{method-torch_Constraint-print}{}}}
-\subsection{Method \code{print()}}{
-Define the print method for constraints,
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{Constraint$print()}\if{html}{\out{</div>}}
+\subsection{\code{torch_Constraint$print()}}{
+  Define the print method for constraints,
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{torch_Constraint$print()}
+    \if{html}{\out{</div>}}
+  }
 }
 
-}
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-torch_Constraint-clone"></a>}}
 \if{latex}{\out{\hypertarget{method-torch_Constraint-clone}{}}}
-\subsection{Method \code{clone()}}{
-The objects of this class are cloneable with this method.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{Constraint$clone(deep = FALSE)}\if{html}{\out{</div>}}
+\subsection{\code{torch_Constraint$clone()}}{
+  The objects of this class are cloneable with this method.
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{torch_Constraint$clone(deep = FALSE)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{deep}}{Whether to make a deep clone.}
+    }
+    \if{html}{\out{</div>}}
+  }
 }
 
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{deep}}{Whether to make a deep clone.}
-}
-\if{html}{\out{</div>}}
-}
-}
 }

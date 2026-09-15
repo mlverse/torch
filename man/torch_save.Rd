@@ -22,9 +22,9 @@ This function is experimental, don't use for long
 term storage.
 }
 \seealso{
-Other torch_save: 
-\code{\link{torch_load}()},
-\code{\link{torch_serialize}()}
+Other torch_save:
+\code{\link[=torch_load]{torch_load()}},
+\code{\link[=torch_serialize]{torch_serialize()}}
 }
 \concept{serialization}
 \concept{torch_save}

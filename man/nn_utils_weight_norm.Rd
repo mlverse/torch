@@ -49,139 +49,147 @@ weight_norm$recompute(x)
 }
 \section{Methods}{
 \subsection{Public methods}{
-\itemize{
-\item \href{#method-nn_utils_weight_norm-new}{\code{nn_utils_weight_norm$new()}}
-\item \href{#method-nn_utils_weight_norm-compute_weight}{\code{nn_utils_weight_norm$compute_weight()}}
-\item \href{#method-nn_utils_weight_norm-apply}{\code{nn_utils_weight_norm$apply()}}
-\item \href{#method-nn_utils_weight_norm-call}{\code{nn_utils_weight_norm$call()}}
-\item \href{#method-nn_utils_weight_norm-recompute}{\code{nn_utils_weight_norm$recompute()}}
-\item \href{#method-nn_utils_weight_norm-remove}{\code{nn_utils_weight_norm$remove()}}
-\item \href{#method-nn_utils_weight_norm-clone}{\code{nn_utils_weight_norm$clone()}}
-}
+  \itemize{
+    \item \href{#method-nn_utils_weight_norm-initialize}{\code{nn_utils_weight_norm$new()}}
+    \item \href{#method-nn_utils_weight_norm-compute_weight}{\code{nn_utils_weight_norm$compute_weight()}}
+    \item \href{#method-nn_utils_weight_norm-apply}{\code{nn_utils_weight_norm$apply()}}
+    \item \href{#method-nn_utils_weight_norm-call}{\code{nn_utils_weight_norm$call()}}
+    \item \href{#method-nn_utils_weight_norm-recompute}{\code{nn_utils_weight_norm$recompute()}}
+    \item \href{#method-nn_utils_weight_norm-remove}{\code{nn_utils_weight_norm$remove()}}
+    \item \href{#method-nn_utils_weight_norm-clone}{\code{nn_utils_weight_norm$clone()}}
+  }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-nn_utils_weight_norm-new"></a>}}
-\if{latex}{\out{\hypertarget{method-nn_utils_weight_norm-new}{}}}
-\subsection{Method \code{new()}}{
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{nn_utils_weight_norm$new(name, dim)}\if{html}{\out{</div>}}
+\if{html}{\out{<a id="method-nn_utils_weight_norm-initialize"></a>}}
+\if{latex}{\out{\hypertarget{method-nn_utils_weight_norm-initialize}{}}}
+\subsection{\code{nn_utils_weight_norm$new()}}{
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{nn_utils_weight_norm$new(name, dim)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{name}}{(str, optional): name of weight parameter}
+      \item{\code{dim}}{(int, optional): dimension over which to compute the norm}
+    }
+    \if{html}{\out{</div>}}
+  }
 }
 
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{name}}{(str, optional): name of weight parameter}
-
-\item{\code{dim}}{(int, optional): dimension over which to compute the norm}
-}
-\if{html}{\out{</div>}}
-}
-}
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-nn_utils_weight_norm-compute_weight"></a>}}
 \if{latex}{\out{\hypertarget{method-nn_utils_weight_norm-compute_weight}{}}}
-\subsection{Method \code{compute_weight()}}{
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{nn_utils_weight_norm$compute_weight(module, name = NULL, dim = NULL)}\if{html}{\out{</div>}}
+\subsection{\code{nn_utils_weight_norm$compute_weight()}}{
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{nn_utils_weight_norm$compute_weight(module, name = NULL, dim = NULL)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{module}}{(Module): containing module}
+      \item{\code{name}}{(str, optional): name of weight parameter}
+      \item{\code{dim}}{(int, optional): dimension over which to compute the norm}
+    }
+    \if{html}{\out{</div>}}
+  }
 }
 
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{module}}{(Module): containing module}
-
-\item{\code{name}}{(str, optional): name of weight parameter}
-
-\item{\code{dim}}{(int, optional): dimension over which to compute the norm}
-}
-\if{html}{\out{</div>}}
-}
-}
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-nn_utils_weight_norm-apply"></a>}}
 \if{latex}{\out{\hypertarget{method-nn_utils_weight_norm-apply}{}}}
-\subsection{Method \code{apply()}}{
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{nn_utils_weight_norm$apply(module, name = NULL, dim = NULL)}\if{html}{\out{</div>}}
+\subsection{\code{nn_utils_weight_norm$apply()}}{
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{nn_utils_weight_norm$apply(module, name = NULL, dim = NULL)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{module}}{(Module): containing module}
+      \item{\code{name}}{(str, optional): name of weight parameter}
+      \item{\code{dim}}{(int, optional): dimension over which to compute the norm}
+    }
+    \if{html}{\out{</div>}}
+  }
 }
 
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{module}}{(Module): containing module}
-
-\item{\code{name}}{(str, optional): name of weight parameter}
-
-\item{\code{dim}}{(int, optional): dimension over which to compute the norm}
-}
-\if{html}{\out{</div>}}
-}
-}
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-nn_utils_weight_norm-call"></a>}}
 \if{latex}{\out{\hypertarget{method-nn_utils_weight_norm-call}{}}}
-\subsection{Method \code{call()}}{
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{nn_utils_weight_norm$call(module)}\if{html}{\out{</div>}}
+\subsection{\code{nn_utils_weight_norm$call()}}{
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{nn_utils_weight_norm$call(module)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{module}}{(Module): containing module}
+    }
+    \if{html}{\out{</div>}}
+  }
 }
 
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{module}}{(Module): containing module}
-}
-\if{html}{\out{</div>}}
-}
-}
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-nn_utils_weight_norm-recompute"></a>}}
 \if{latex}{\out{\hypertarget{method-nn_utils_weight_norm-recompute}{}}}
-\subsection{Method \code{recompute()}}{
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{nn_utils_weight_norm$recompute(module)}\if{html}{\out{</div>}}
+\subsection{\code{nn_utils_weight_norm$recompute()}}{
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{nn_utils_weight_norm$recompute(module)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{module}}{(Module): containing module}
+    }
+    \if{html}{\out{</div>}}
+  }
 }
 
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{module}}{(Module): containing module}
-}
-\if{html}{\out{</div>}}
-}
-}
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-nn_utils_weight_norm-remove"></a>}}
 \if{latex}{\out{\hypertarget{method-nn_utils_weight_norm-remove}{}}}
-\subsection{Method \code{remove()}}{
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{nn_utils_weight_norm$remove(module, name = NULL)}\if{html}{\out{</div>}}
+\subsection{\code{nn_utils_weight_norm$remove()}}{
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{nn_utils_weight_norm$remove(module, name = NULL)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{module}}{(Module): containing module}
+      \item{\code{name}}{(str, optional): name of weight parameter}
+    }
+    \if{html}{\out{</div>}}
+  }
 }
 
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{module}}{(Module): containing module}
-
-\item{\code{name}}{(str, optional): name of weight parameter}
-}
-\if{html}{\out{</div>}}
-}
-}
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-nn_utils_weight_norm-clone"></a>}}
 \if{latex}{\out{\hypertarget{method-nn_utils_weight_norm-clone}{}}}
-\subsection{Method \code{clone()}}{
-The objects of this class are cloneable with this method.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{nn_utils_weight_norm$clone(deep = FALSE)}\if{html}{\out{</div>}}
+\subsection{\code{nn_utils_weight_norm$clone()}}{
+  The objects of this class are cloneable with this method.
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{nn_utils_weight_norm$clone(deep = FALSE)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{deep}}{Whether to make a deep clone.}
+    }
+    \if{html}{\out{</div>}}
+  }
 }
 
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{deep}}{Whether to make a deep clone.}
-}
-\if{html}{\out{</div>}}
-}
-}
 }

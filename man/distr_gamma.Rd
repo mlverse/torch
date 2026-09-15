@@ -27,11 +27,11 @@ m$sample() # Gamma distributed with concentration=1 and rate=1
 \seealso{
 \link{Distribution} for details on the available methods.
 
-Other distributions: 
-\code{\link{distr_bernoulli}()},
-\code{\link{distr_chi2}()},
-\code{\link{distr_multivariate_normal}()},
-\code{\link{distr_normal}()},
-\code{\link{distr_poisson}()}
+Other distributions:
+\code{\link[=distr_bernoulli]{distr_bernoulli()}},
+\code{\link[=distr_chi2]{distr_chi2()}},
+\code{\link[=distr_multivariate_normal]{distr_multivariate_normal()}},
+\code{\link[=distr_normal]{distr_normal()}},
+\code{\link[=distr_poisson]{distr_poisson()}}
 }
 \concept{distributions}

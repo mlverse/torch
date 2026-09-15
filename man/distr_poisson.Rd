@@ -26,11 +26,11 @@ m$sample()
 \seealso{
 \link{Distribution} for details on the available methods.
 
-Other distributions: 
-\code{\link{distr_bernoulli}()},
-\code{\link{distr_chi2}()},
-\code{\link{distr_gamma}()},
-\code{\link{distr_multivariate_normal}()},
-\code{\link{distr_normal}()}
+Other distributions:
+\code{\link[=distr_bernoulli]{distr_bernoulli()}},
+\code{\link[=distr_chi2]{distr_chi2()}},
+\code{\link[=distr_gamma]{distr_gamma()}},
+\code{\link[=distr_multivariate_normal]{distr_multivariate_normal()}},
+\code{\link[=distr_normal]{distr_normal()}}
 }
 \concept{distributions}
