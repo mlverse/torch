@@ -22,7 +22,6 @@ generator$set_current_seed(1234567L)
 generator$current_seed()
 
 }
-#> Warning: NAs introduced by coercion to integer64 range
 #> integer64
 #> [1] 1234567
 ```
