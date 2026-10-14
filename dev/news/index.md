@@ -3,6 +3,13 @@
 ## torch (development version)
 
 - Fixed
+  [`torch_scalar_tensor()`](https://torch.mlverse.org/docs/dev/reference/torch_scalar_tensor.md)
+  with `requires_grad = TRUE`, which returned a non-leaf tensor because
+  `$squeeze()` was applied after `requires_grad` was set, so `.grad` was
+  never populated after `backward()`.
+  ([\#1368](https://github.com/mlverse/torch/issues/1368))
+
+- Fixed
   [`nn_multihead_attention()`](https://torch.mlverse.org/docs/dev/reference/nn_multihead_attention.md)
   and
   [`nnf_multi_head_attention_forward()`](https://torch.mlverse.org/docs/dev/reference/nnf_multi_head_attention_forward.md)

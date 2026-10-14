@@ -2312,6 +2312,8 @@ information.
   : MKLDNN is available
 - [`backends_mps_is_available()`](https://torch.mlverse.org/docs/dev/reference/backends_mps_is_available.md)
   : MPS is available
+- [`backends_mps_synchronize()`](https://torch.mlverse.org/docs/dev/reference/backends_mps_synchronize.md)
+  : Waits for all kernels in all streams on the MPS device to complete.
 - [`backends_openmp_is_available()`](https://torch.mlverse.org/docs/dev/reference/backends_openmp_is_available.md)
   : OpenMP is available
 

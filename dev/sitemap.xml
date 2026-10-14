@@ -39,6 +39,7 @@
 <url><loc>https://torch.mlverse.org/docs/dev/reference/backends_mkl_is_available.html</loc></url>
 <url><loc>https://torch.mlverse.org/docs/dev/reference/backends_mkldnn_is_available.html</loc></url>
 <url><loc>https://torch.mlverse.org/docs/dev/reference/backends_mps_is_available.html</loc></url>
+<url><loc>https://torch.mlverse.org/docs/dev/reference/backends_mps_synchronize.html</loc></url>
 <url><loc>https://torch.mlverse.org/docs/dev/reference/backends_openmp_is_available.html</loc></url>
 <url><loc>https://torch.mlverse.org/docs/dev/reference/broadcast_all.html</loc></url>
 <url><loc>https://torch.mlverse.org/docs/dev/reference/call_torch_function.html</loc></url>
