@@ -20,8 +20,10 @@
   the right: `1 - t` keeps `t`'s dtype (bfloat16, float64, or int64 with
   `1L`) instead of promoting to float32, and `0.1 + t` on a float64 tensor no
   longer rounds the scalar through float32 first. A scalar combined with a
-  0-dim tensor now gives a 0-dim result on both sides. `t != x` with a
-  non-tensor `x` now converts `x` like the other comparison operators. (#1471)
+  0-dim tensor now gives a 0-dim result on both sides, so for example
+  `distr_multivariate_normal()$entropy()` without a batch dimension is 0-dim,
+  as in PyTorch. `t != x` with a non-tensor `x` now converts `x` like the
+  other comparison operators. (#1471)
 - The `ignore_index` argument of `nnf_cross_entropy()`, `nnf_nll_loss()`,
   `nn_cross_entropy_loss()` and `nn_nll_loss()` is now interpreted as the 1-based class
   index that `target` already used. It was forwarded to libtorch unconverted while the
