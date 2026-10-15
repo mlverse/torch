@@ -407,21 +407,69 @@ test_that("mean works", {
   expect_tensor_shape(mean(x, dim = 2, keepdim = TRUE), c(20, 1))
 })
 
-test_that("lhs scalars do not promote the result dtype", {
+test_that("lhs scalars promote like Python scalars", {
   x <- torch_ones(3, dtype = torch_bfloat16())
-  expect_true((1 - x)$dtype == torch_bfloat16())
-  expect_true((2 * x)$dtype == torch_bfloat16())
-  expect_true((1 + x)$dtype == torch_bfloat16())
-  expect_true((2^x)$dtype == torch_bfloat16())
+  for (r in list(1 + x, 1 - x, 2 * x, 1 / x, 2^x, 5 %% x, 5 %/% x)) {
+    expect_true(r$dtype == torch_bfloat16())
+    expect_equal(r$shape, 3L)
+  }
   expect_equal_to_r((1 - x)$to(dtype = torch_float()), rep(0, 3))
+  expect_equal_to_r((2 / x)$to(dtype = torch_float()), rep(2, 3))
+  expect_equal_to_r((2^x)$to(dtype = torch_float()), rep(2, 3))
+  expect_equal_to_r((5 %% x)$to(dtype = torch_float()), rep(0, 3))
+  expect_equal_to_r((5 %/% x)$to(dtype = torch_float()), rep(5, 3))
 
+  # an integer scalar keeps an integer tensor's dtype
   y <- torch_ones(3, dtype = torch_long())
-  expect_true((1L + y)$dtype == torch_long())
-  expect_true((5L %% y)$dtype == torch_long())
-  expect_true((5L %/% y)$dtype == torch_long())
+  for (r in list(1L + y, 1L - y, 2L * y, 2L^y, 5L %% y, 5L %/% y)) {
+    expect_true(r$dtype == torch_long())
+  }
+  expect_equal_to_r(5L %/% y, rep(5, 3))
+  expect_equal_to_r(5L %% y, rep(0, 3))
+  # while a double scalar promotes it to the default float dtype, as in Python
+  expect_true((1 + y)$dtype == torch_float())
+  expect_true((2.5 %/% y)$dtype == torch_float())
+  expect_equal_to_r(2.5 %/% y, rep(2, 3))
   # division of integer tensors still promotes to the default dtype
   expect_true((1L / y)$dtype == torch_float())
 
-  # dimensioned lhs vectors keep dictating promotion
+  # dimensioned lhs operands keep dictating promotion and shape
   expect_true((c(1, 2, 3) - x)$dtype == torch_float())
+  expect_tensor_shape(matrix(2) * torch_ones(3), c(1, 3))
+  expect_true((matrix(2) * x)$dtype == torch_float())
+})
+
+test_that("lhs scalars behave like rhs scalars", {
+  # a scalar and a 0-dim tensor give a 0-dim result on both sides
+  z <- torch_ones(3, dtype = torch_bfloat16())$sum()
+  expect_true((1 - z)$dtype == torch_bfloat16())
+  expect_true((2 * z)$dtype == torch_bfloat16())
+  expect_equal((1 - z)$shape, (z - 1)$shape)
+  expect_equal((1 == z)$shape, (z == 1)$shape)
+  expect_equal_to_r((1 - z)$to(dtype = torch_float()), -2)
+
+  # a double scalar is no longer rounded through float32 first
+  d <- torch_tensor(1, dtype = torch_float64())
+  expect_equal(as.numeric(0.1 + d), as.numeric(d + 0.1), tolerance = 0)
+  expect_equal(as.numeric(0.1 + d), 1.1, tolerance = 0)
+
+  # small integer dtypes wrap the scalar on both sides, as in Python
+  u <- torch_ones(3, dtype = torch_uint8())
+  expect_true((300L + u)$dtype == torch_uint8())
+  expect_equal(as.integer(as_array(300L + u)), as.integer(as_array(u + 300L)))
+})
+
+test_that("comparisons with a lhs scalar", {
+  y <- torch_tensor(c(1, 2, 3), dtype = torch_long())
+  expect_equal_to_r(2.5 > y, c(TRUE, TRUE, FALSE))
+  expect_equal_to_r(2.5 < y, c(FALSE, FALSE, TRUE))
+  expect_equal_to_r(2 >= y, c(TRUE, TRUE, FALSE))
+  expect_equal_to_r(2 <= y, c(FALSE, TRUE, TRUE))
+  expect_equal_to_r(2 == y, c(FALSE, TRUE, FALSE))
+  expect_equal_to_r(2 != y, c(TRUE, FALSE, TRUE))
+  expect_equal_to_r(y != c(1, 5, 3), c(FALSE, TRUE, FALSE))
+
+  b <- torch_tensor(c(TRUE, FALSE))
+  expect_equal_to_r(TRUE & b, c(TRUE, FALSE))
+  expect_equal_to_r(FALSE | b, c(TRUE, FALSE))
 })

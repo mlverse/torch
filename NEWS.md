@@ -15,9 +15,13 @@
 - On Windows, the install lib directory is now prepended to `PATH` at load so
   cuDNN's lazily-loaded sub-DLLs (e.g. `cudnn_graph64_9.dll`) resolve; cuDNN-backed
   CUDA ops previously failed with "Could not locate cudnn_graph64_9.dll".
-- Arithmetic with an R scalar on the left no longer promotes the result dtype:
-  `1 - t` keeps `t`'s dtype (e.g. bfloat16, int64) instead of upcasting to
-  float32, matching Python's scalar promotion semantics. (#1471)
+- An R scalar on the left of an arithmetic or comparison operator now takes
+  part in type promotion the way a Python scalar does, as it already did on
+  the right: `1 - t` keeps `t`'s dtype (bfloat16, float64, or int64 with
+  `1L`) instead of promoting to float32, and `0.1 + t` on a float64 tensor no
+  longer rounds the scalar through float32 first. A scalar combined with a
+  0-dim tensor now gives a 0-dim result on both sides. `t != x` with a
+  non-tensor `x` now converts `x` like the other comparison operators. (#1471)
 - The `ignore_index` argument of `nnf_cross_entropy()`, `nnf_nll_loss()`,
   `nn_cross_entropy_loss()` and `nn_nll_loss()` is now interpreted as the 1-based class
   index that `target` already used. It was forwarded to libtorch unconverted while the

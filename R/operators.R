@@ -1,10 +1,21 @@
-# Convert a non-tensor lhs operand for arithmetic. Length-1 numerics
-# become 0-dim tensors, which participate weakly in type promotion the
-# way Python scalars do: `1 - t` keeps t's dtype instead of promoting
-# to the scalar's dtype (e.g. bfloat16 -> float32, int64 -> float32).
-to_operand_tensor <- function(x, ref) {
-  if ((is.numeric(x) || is.logical(x)) && length(x) == 1L) {
-    torch_scalar_tensor(x, device = ref$device)
+# An R scalar is a plain length-1 numeric or logical: no dimensions and no
+# class. A 1x1 matrix keeps its dimensions, and a classed value such as
+# `bit64::integer64` keeps going through `torch_tensor()`.
+is_r_scalar <- function(x) {
+  (is.numeric(x) || is.logical(x)) && length(x) == 1L && is.null(dim(x)) &&
+    !is.object(x)
+}
+
+# Convert a non-tensor operand. When libtorch has a Scalar overload for the
+# operation the operators below pass the R scalar straight to it, which is
+# exactly what `t - 1` already does. This helper covers the rest: the scalar
+# becomes a 0-dim tensor whose dtype is the one libtorch would use for
+# `op(ref, x)` with `x` passed as a Scalar, so it takes part in type
+# promotion the way a Python scalar does. `1 / t` keeps `t`'s dtype
+# (bfloat16, float64, int64 with `1L`) instead of promoting to float32.
+operand_to_tensor <- function(x, ref) {
+  if (is_r_scalar(x)) {
+    torch_scalar_tensor(x, dtype = torch_result_type(ref, x), device = ref$device)
   } else {
     torch_tensor(x, device = ref$device)
   }
@@ -16,8 +27,12 @@ to_operand_tensor <- function(x, ref) {
     e2 <- torch_zeros_like(e1)
   }
 
+  if (is_r_scalar(e1)) {
+    return(torch_add(e2, e1))
+  }
+
   if (!is_torch_tensor(e1)) {
-    e1 <- to_operand_tensor(e1, e2)
+    e1 <- torch_tensor(e1, device = e2$device)
   }
 
   torch_add(e1, e2)
@@ -30,8 +45,12 @@ to_operand_tensor <- function(x, ref) {
     e1 <- torch_zeros_like(e1)
   }
 
+  if (is_r_scalar(e1)) {
+    return(torch_rsub(e2, e1))
+  }
+
   if (!is_torch_tensor(e1)) {
-    e1 <- to_operand_tensor(e1, e2)
+    e1 <- torch_tensor(e1, device = e2$device)
   }
 
   torch_sub(e1, e2)
@@ -39,8 +58,12 @@ to_operand_tensor <- function(x, ref) {
 
 #' @export
 `*.torch_tensor` <- function(e1, e2) {
+  if (is_r_scalar(e1)) {
+    return(torch_mul(e2, e1))
+  }
+
   if (!is_torch_tensor(e1)) {
-    e1 <- to_operand_tensor(e1, e2)
+    e1 <- torch_tensor(e1, device = e2$device)
   }
 
   torch_mul(e1, e2)
@@ -49,7 +72,7 @@ to_operand_tensor <- function(x, ref) {
 #' @export
 `/.torch_tensor` <- function(e1, e2) {
   if (!is_torch_tensor(e1)) {
-    e1 <- to_operand_tensor(e1, e2)
+    e1 <- operand_to_tensor(e1, e2)
   }
 
   torch_div(e1, e2)
@@ -57,8 +80,9 @@ to_operand_tensor <- function(x, ref) {
 
 #' @export
 `^.torch_tensor` <- function(e1, e2) {
-  if (!is_torch_tensor(e1)) {
-    e1 <- to_operand_tensor(e1, e2)
+  # `torch_pow()` has a Scalar-first overload, so an R scalar passes through.
+  if (!is_torch_tensor(e1) && !is_r_scalar(e1)) {
+    e1 <- torch_tensor(e1, device = e2$device)
   }
 
   torch_pow(e1, e2)
@@ -67,7 +91,7 @@ to_operand_tensor <- function(x, ref) {
 #' @export
 `%%.torch_tensor` <- function(e1, e2) {
   if (!is_torch_tensor(e1)) {
-    e1 <- to_operand_tensor(e1, e2)
+    e1 <- operand_to_tensor(e1, e2)
   }
 
   torch_fmod(e1, e2)
@@ -76,94 +100,94 @@ to_operand_tensor <- function(x, ref) {
 #' @export
 `%/%.torch_tensor` <- function(e1, e2) {
   if (!is_torch_tensor(e1)) {
-    e1 <- to_operand_tensor(e1, e2)
+    e1 <- operand_to_tensor(e1, e2)
   }
 
   torch_div(e1, e2, rounding_mode = "trunc")
 }
 
-#' @export
-`>=.torch_tensor` <- function(e1, e2) {
-  if (!is_torch_tensor(e1)) {
+# Comparisons have Scalar overloads, so an R scalar on either side passes
+# straight through; anything else that is not a tensor is converted.
+comparison_operands <- function(e1, e2) {
+  if (!is_torch_tensor(e1) && !is_r_scalar(e1)) {
     e1 <- torch_tensor(e1, device = e2$device)
   }
 
-  if (!is_torch_tensor(e2)) {
+  if (!is_torch_tensor(e2) && !is_r_scalar(e2)) {
     e2 <- torch_tensor(e2, device = e1$device)
   }
 
-  torch_ge(e1, e2)
+  list(e1, e2)
+}
+
+#' @export
+`>=.torch_tensor` <- function(e1, e2) {
+  if (is_r_scalar(e1)) {
+    return(torch_le(e2, e1))
+  }
+
+  args <- comparison_operands(e1, e2)
+  torch_ge(args[[1]], args[[2]])
 }
 
 #' @export
 `>.torch_tensor` <- function(e1, e2) {
-  if (!is_torch_tensor(e1)) {
-    e1 <- torch_tensor(e1, device = e2$device)
+  if (is_r_scalar(e1)) {
+    return(torch_lt(e2, e1))
   }
 
-  if (!is_torch_tensor(e2)) {
-    e2 <- torch_tensor(e2, device = e1$device)
-  }
-
-  torch_gt(e1, e2)
+  args <- comparison_operands(e1, e2)
+  torch_gt(args[[1]], args[[2]])
 }
 
 #' @export
 `<=.torch_tensor` <- function(e1, e2) {
-  if (!is_torch_tensor(e1)) {
-    e1 <- torch_tensor(e1, device = e2$device)
+  if (is_r_scalar(e1)) {
+    return(torch_ge(e2, e1))
   }
 
-  if (!is_torch_tensor(e2)) {
-    e2 <- torch_tensor(e2, device = e1$device)
-  }
-
-  torch_le(e1, e2)
+  args <- comparison_operands(e1, e2)
+  torch_le(args[[1]], args[[2]])
 }
 
 #' @export
 `<.torch_tensor` <- function(e1, e2) {
-  if (!is_torch_tensor(e1)) {
-    e1 <- torch_tensor(e1, device = e2$device)
+  if (is_r_scalar(e1)) {
+    return(torch_gt(e2, e1))
   }
 
-  if (!is_torch_tensor(e2)) {
-    e2 <- torch_tensor(e2, device = e1$device)
-  }
-
-  torch_lt(e1, e2)
+  args <- comparison_operands(e1, e2)
+  torch_lt(args[[1]], args[[2]])
 }
 
 #' @export
 `==.torch_tensor` <- function(e1, e2) {
-  if (!is_torch_tensor(e1)) {
-    e1 <- torch_tensor(e1, device = e2$device)
+  if (is_r_scalar(e1)) {
+    return(torch_eq(e2, e1))
   }
 
-  if (!is_torch_tensor(e2)) {
-    e2 <- torch_tensor(e2, device = e1$device)
-  }
-
-  torch_eq(e1, e2)
+  args <- comparison_operands(e1, e2)
+  torch_eq(args[[1]], args[[2]])
 }
 
 #' @export
 `!=.torch_tensor` <- function(e1, e2) {
-  if (!is_torch_tensor(e1)) {
-    e1 <- torch_tensor(e1, device = e2$device)
+  if (is_r_scalar(e1)) {
+    return(torch_ne(e2, e1))
   }
 
-  torch_ne(e1, e2)
+  args <- comparison_operands(e1, e2)
+  torch_ne(args[[1]], args[[2]])
 }
 
 #' @export
 `&.torch_tensor` <- function(e1, e2) {
   if (!is_torch_tensor(e1)) {
-    e1 <- torch_tensor(e1, device = e2$device)
+    e1 <- operand_to_tensor(e1, e2)
   }
 
   if (!is_torch_tensor(e2)) {
-    e2 <- torch_tensor(e2, device = e1$device)
+    e2 <- operand_to_tensor(e2, e1)
   }
 
   torch_logical_and(e1, e2)
@@ -172,11 +196,11 @@ to_operand_tensor <- function(x, ref) {
 #' @export
 `|.torch_tensor` <- function(e1, e2) {
   if (!is_torch_tensor(e1)) {
-    e1 <- torch_tensor(e1, device = e2$device)
+    e1 <- operand_to_tensor(e1, e2)
   }
 
   if (!is_torch_tensor(e2)) {
-    e2 <- torch_tensor(e2, device = e1$device)
+    e2 <- operand_to_tensor(e2, e1)
   }
 
   torch_logical_or(e1, e2)
