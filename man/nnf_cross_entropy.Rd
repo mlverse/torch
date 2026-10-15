@@ -17,14 +17,14 @@ nnf_cross_entropy(
 in case of 2D Loss, or \eqn{(N, C, d_1, d_2, ..., d_K)} where \eqn{K \geq 1}
 in the case of K-dimensional loss.}
 
-\item{target}{(Tensor) \eqn{(N)} where each value is \eqn{0 \leq \mbox{targets}[i] \leq C-1},
+\item{target}{(Tensor) \eqn{(N)} where each value is \eqn{1 \leq \mbox{targets}[i] \leq C},
 or \eqn{(N, d_1, d_2, ..., d_K)} where \eqn{K \geq 1} for K-dimensional loss.}
 
 \item{weight}{(Tensor, optional) a manual rescaling weight given to each class. If
 given, has to be a Tensor of size \code{C}}
 
 \item{ignore_index}{(int, optional) Specifies a target value that is ignored
-and does not contribute to the input gradient.}
+and does not contribute to the input gradient. Like code{target}, this is a 1-based class index. The default code{-100} is never a valid target and therefore ignores nothing.}
 
 \item{reduction}{(string, optional) – Specifies the reduction to apply to the
 output: 'none' | 'mean' | 'sum'. 'none': no reduction will be applied, 'mean':

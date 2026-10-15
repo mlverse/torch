@@ -608,10 +608,10 @@ nnf_multi_head_attention_forward <- function(query, # type: Tensor
         w_ <- in_proj_weight[start_:N, ]
         if (!is.null(b_)) {
           b_ <- b_[start_:N]
-          o <- nnf_linear(key, w_, b_)$chunk(2, dim = -1)
-          k <- o[[1]]
-          v <- o[[2]]
         }
+        o <- nnf_linear(key, w_, b_)$chunk(2, dim = -1)
+        k <- o[[1]]
+        v <- o[[2]]
       }
     } else {
 

@@ -139,13 +139,14 @@ nn_l1_loss <- nn_module(
 #'   be applied, `'mean'`: the weighted mean of the output is taken,
 #'   `'sum'`: the output will be summed.
 #' @param ignore_index (int, optional): Specifies a target value that is ignored
-#'   and does not contribute to the input gradient.
+#'   and does not contribute to the input gradient. Like `target`, this is a 1-based
+#'   class index. The default `-100` is never a valid target and therefore ignores nothing.
 #'
 #' @section Shape:
 #' - Input: \eqn{(N, C)} where `C = number of classes`, or
 #'   \eqn{(N, C, d_1, d_2, ..., d_K)} with \eqn{K \geq 1}
 #'   in the case of `K`-dimensional loss.
-#' - Target: \eqn{(N)} where each value is \eqn{0 \leq \mbox{targets}[i] \leq C-1}, or
+#' - Target: \eqn{(N)} where each value is \eqn{1 \leq \mbox{targets}[i] \leq C}, or
 #'   \eqn{(N, d_1, d_2, ..., d_K)} with \eqn{K \geq 1} in the case of
 #'   K-dimensional loss.
 #' - Output: scalar.
@@ -779,8 +780,9 @@ nn_soft_margin_loss <- nn_module(
 #' @param weight (Tensor, optional): a manual rescaling weight given to each class.
 #'   If given, has to be a Tensor of size `C`
 #' @param ignore_index (int, optional): Specifies a target value that is ignored
-#'   and does not contribute to the input gradient. When `size_average` is
-#'   `TRUE`, the loss is averaged over non-ignored targets.
+#'   and does not contribute to the input gradient. Like `target`, this is a 1-based
+#'   class index. The default `-100` is never a valid target and therefore ignores nothing.
+#'   When `size_average` is `TRUE`, the loss is averaged over non-ignored targets.
 #' @param reduction (string, optional): Specifies the reduction to apply to the output:
 #'   `'none'` | `'mean'` | `'sum'`. `'none'`: no reduction will be applied,
 #'   `'mean'`: the sum of the output will be divided by the number of
@@ -790,7 +792,7 @@ nn_soft_margin_loss <- nn_module(
 #' - Input: \eqn{(N, C)} where `C = number of classes`, or
 #' \eqn{(N, C, d_1, d_2, ..., d_K)} with \eqn{K \geq 1}
 #' in the case of `K`-dimensional loss.
-#' - Target: \eqn{(N)} where each value is \eqn{0 \leq \mbox{targets}[i] \leq C-1}, or
+#' - Target: \eqn{(N)} where each value is \eqn{1 \leq \mbox{targets}[i] \leq C}, or
 #' \eqn{(N, d_1, d_2, ..., d_K)} with \eqn{K \geq 1} in the case of
 #' K-dimensional loss.
 #' - Output: scalar.

@@ -1,5 +1,14 @@
 # torch (development version)
 
+- Fixed `torch_scalar_tensor()` with `requires_grad = TRUE`, which returned a
+  non-leaf tensor because `$squeeze()` was applied after `requires_grad` was
+  set, so `.grad` was never populated after `backward()`. (#1368)
+- Fixed `nn_multihead_attention()` and `nnf_multi_head_attention_forward()` with `bias = FALSE`
+  when `query` differs from `key` (i.e. cross- and encoder-decoder attention), which failed with
+  `object 'k' not found`. The key and value projections were only computed when a bias was present.
+- Fixed `lr_one_cycle()` with `anneal_strategy = "linear"`, which failed with
+  `attempt to apply non-function` because the annealing function was never assigned.
+
 - Multi-worker dataloaders now use POSIX shared memory for tensor transfer on
   Unix systems, resulting in up to 2x faster data loading. To revert to the
   previous behavior, set `options(torch.dataloader_use_shm = FALSE)`. (#1456)
@@ -9,6 +18,13 @@
 - Arithmetic with an R scalar on the left no longer promotes the result dtype:
   `1 - t` keeps `t`'s dtype (e.g. bfloat16, int64) instead of upcasting to
   float32, matching Python's scalar promotion semantics. (#1471)
+- The `ignore_index` argument of `nnf_cross_entropy()`, `nnf_nll_loss()`,
+  `nn_cross_entropy_loss()` and `nn_nll_loss()` is now interpreted as the 1-based class
+  index that `target` already used. It was forwarded to libtorch unconverted while the
+  target was converted, so it ignored the class to the left of the requested one, and the
+  last class could not be ignored at all. Passing `0` is now an error instead of silently
+  ignoring the first class. The default `-100`, and any other negative sentinel, is
+  unaffected. The documented target range was corrected to \eqn{1 \leq target \leq C}.
 
 # torch 0.17.0
 

@@ -361,12 +361,13 @@ nnf_margin_ranking_loss <- function(input1, input2, target, margin = 0,
 #' @param input \eqn{(N, C)} where `C = number of classes` or \eqn{(N, C, H, W)} in
 #'   case of 2D Loss, or \eqn{(N, C, d_1, d_2, ..., d_K)} where \eqn{K \geq 1} in
 #'   the case of K-dimensional loss.
-#' @param target \eqn{(N)} where each value is \eqn{0 \leq \mbox{targets}[i] \leq C-1},
+#' @param target \eqn{(N)} where each value is \eqn{1 \leq \mbox{targets}[i] \leq C},
 #'   or \eqn{(N, d_1, d_2, ..., d_K)} where \eqn{K \geq 1} for K-dimensional loss.
 #' @param weight (Tensor, optional) a manual rescaling weight given to each class.
 #'   If given, has to be a Tensor of size `C`
 #' @param ignore_index (int, optional) Specifies a target value that is ignored and
-#'   does not contribute to the input gradient.
+#'   does not contribute to the input gradient. Like `target`, this is a 1-based class
+#'   index. The default `-100` is never a valid target and therefore ignores nothing.
 #'
 #' @export
 nnf_nll_loss <- function(input, target, weight = NULL, ignore_index = -100,
@@ -383,12 +384,13 @@ nnf_nll_loss <- function(input, target, weight = NULL, ignore_index = -100,
 #' @param input (Tensor) \eqn{(N, C)} where `C = number of classes` or \eqn{(N, C, H, W)}
 #'   in case of 2D Loss, or \eqn{(N, C, d_1, d_2, ..., d_K)} where \eqn{K \geq 1}
 #'   in the case of K-dimensional loss.
-#' @param target (Tensor) \eqn{(N)} where each value is \eqn{0 \leq \mbox{targets}[i] \leq C-1},
+#' @param target (Tensor) \eqn{(N)} where each value is \eqn{1 \leq \mbox{targets}[i] \leq C},
 #'   or \eqn{(N, d_1, d_2, ..., d_K)} where \eqn{K \geq 1} for K-dimensional loss.
 #' @param weight (Tensor, optional) a manual rescaling weight given to each class. If
 #'   given, has to be a Tensor of size `C`
 #' @param ignore_index (int, optional) Specifies a target value that is ignored
-#'   and does not contribute to the input gradient.
+#'   and does not contribute to the input gradient. Like `target`, this is a 1-based
+#'   class index. The default `-100` is never a valid target and therefore ignores nothing.
 #'
 #' @export
 nnf_cross_entropy <- function(input, target, weight = NULL, ignore_index = -100,

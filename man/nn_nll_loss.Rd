@@ -12,7 +12,7 @@ class. If given, it has to be a Tensor of size \code{C}. Otherwise, it is
 treated as if having all ones.}
 
 \item{ignore_index}{(int, optional): Specifies a target value that is ignored
-and does not contribute to the input gradient.}
+and does not contribute to the input gradient. Like code{target}, this is a 1-based class index. The default code{-100} is never a valid target and therefore ignores nothing.}
 
 \item{reduction}{(string, optional): Specifies the reduction to apply to the output:
 \code{'none'} | \code{'mean'} | \code{'sum'}. \code{'none'}: no reduction will
@@ -75,7 +75,7 @@ where \eqn{K} is the number of dimensions, and a target of appropriate shape
 \item Input: \eqn{(N, C)} where \verb{C = number of classes}, or
 \eqn{(N, C, d_1, d_2, ..., d_K)} with \eqn{K \geq 1}
 in the case of \code{K}-dimensional loss.
-\item Target: \eqn{(N)} where each value is \eqn{0 \leq \mbox{targets}[i] \leq C-1}, or
+\item Target: \eqn{(N)} where each value is \eqn{1 \leq \mbox{targets}[i] \leq C}, or
 \eqn{(N, d_1, d_2, ..., d_K)} with \eqn{K \geq 1} in the case of
 K-dimensional loss.
 \item Output: scalar.

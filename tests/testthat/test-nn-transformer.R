@@ -175,3 +175,28 @@ test_that("TransformerEncoderLayer GPU test", {
   expect_equal(dim(output_bf), dim(input_bf))
   }
 })
+
+test_that("TransformerEncoderLayer is_causal works on the GPU", {
+  # is_causal builds the causal mask itself, which has to end up on the device of the input rather
+  # than on the default device
+  skip_if_cuda_not_available()
+  for (batch_first in c(TRUE, FALSE)) {
+    layer <- nn_transformer_encoder_layer(d_model = 8, nhead = 2, dropout = 0,
+                                          batch_first = batch_first)
+    layer$eval()
+    layer$to(device = "cuda")
+    x <- if (batch_first) {
+      torch_randn(3, 5, 8, device = "cuda")  # (batch, seq, feature)
+    } else {
+      torch_randn(5, 3, 8, device = "cuda")  # (seq, batch, feature)
+    }
+
+    out_flag <- layer(x, is_causal = TRUE)
+    expect_equal(dim(out_flag), dim(x))
+
+    # the flag has to agree with passing the same mask explicitly
+    causal_mask <- torch_ones(c(5, 5), dtype = torch_bool(), device = "cuda")$triu(diagonal = 1)
+    out_mask <- layer(x, src_mask = causal_mask)
+    expect_true(as.logical(torch_allclose(out_flag, out_mask)))
+  }
+})

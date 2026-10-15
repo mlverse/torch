@@ -210,3 +210,17 @@ test_that("scalar_tensor", {
   expect_equal(length(x$shape), 0)
   expect_true(x$dtype == torch_float())
 })
+
+test_that("scalar_tensor is a leaf when requires_grad = TRUE (#1368)", {
+  x <- torch_scalar_tensor(2, requires_grad = TRUE)
+  expect_true(x$is_leaf)
+  y <- x^2
+  y$backward()
+  expect_equal(as.numeric(x$grad), 4)
+
+  z <- torch_scalar_tensor(torch_tensor(2), requires_grad = TRUE)
+  expect_true(z$is_leaf)
+  w <- z^2
+  w$backward()
+  expect_equal(as.numeric(z$grad), 4)
+})

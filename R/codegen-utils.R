@@ -9,7 +9,7 @@ as_1_based_dim <- function(x) {
 }
 
 as_1_based_tensor_list <- function(x) {
-  tensors <- lapply(tensors, as_1_based_tensor)
+  tensors <- lapply(x, as_1_based_tensor)
 }
 
 as_1_based_tensor <- function(x) {
