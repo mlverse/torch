@@ -15,15 +15,22 @@
 - On Windows, the install lib directory is now prepended to `PATH` at load so
   cuDNN's lazily-loaded sub-DLLs (e.g. `cudnn_graph64_9.dll`) resolve; cuDNN-backed
   CUDA ops previously failed with "Could not locate cudnn_graph64_9.dll".
-- An R scalar on the left of an arithmetic or comparison operator now takes
-  part in type promotion the way a Python scalar does, as it already did on
-  the right: `1 - t` keeps `t`'s dtype (bfloat16, float64, or int64 with
-  `1L`) instead of promoting to float32, and `0.1 + t` on a float64 tensor no
-  longer rounds the scalar through float32 first. A scalar combined with a
-  0-dim tensor now gives a 0-dim result on both sides, so for example
-  `distr_multivariate_normal()$entropy()` without a batch dimension is 0-dim,
-  as in PyTorch. `t != x` with a non-tensor `x` now converts `x` like the
-  other comparison operators. (#1471)
+- An R scalar on the left of an arithmetic or comparison operator is now
+  passed to libtorch as a Scalar, as one on the right already was. `1 - t`
+  keeps `t`'s dtype (bfloat16, float64, or int64 with `1L`) instead of
+  promoting to float32, and `0.1 + t` on a float64 tensor no longer rounds
+  the scalar through float32 first. `x / t` computes the quotient at the
+  promoted floating dtype (float32 for float16 and bfloat16 tensors) before
+  the result is cast back, so `300L / t` on a uint8 tensor is 300 and
+  `1e-5 / t` on a float16 tensor holding `1e-5` is finite. `x & t` and
+  `x | t` use the scalar's truth value. A scalar combined with a 0-dim tensor
+  now gives a 0-dim result on both sides, so for example
+  `distr_multivariate_normal()$entropy()` without a batch dimension is 0-dim.
+  `t != x` with a non-tensor `x` now converts `x` like the other comparison
+  operators. A scalar outside the range of the tensor's dtype now behaves on
+  the left as it already did on the right: `300L + t` on a uint8 tensor wraps
+  to 45 and `1e5 * t` on a float16 tensor overflows to `Inf`, where they
+  previously widened the result to int64 and float32. (#1471)
 - The `ignore_index` argument of `nnf_cross_entropy()`, `nnf_nll_loss()`,
   `nn_cross_entropy_loss()` and `nn_nll_loss()` is now interpreted as the 1-based class
   index that `target` already used. It was forwarded to libtorch unconverted while the

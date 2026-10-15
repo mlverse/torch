@@ -32,6 +32,27 @@ logical_operand <- function(x, ref) {
   }
 }
 
+# True division always gives a floating result, so an integer scalar must not
+# be narrowed to the tensor's integer dtype first: `300L / uint8` is 300, not
+# 44. The quotient is computed at the output dtype, except that float16 and
+# bfloat16 inputs are computed at float32 and cast back afterwards, as
+# libtorch's own kernels do per element. Dividing directly at that precision
+# keeps a large scalar (`65536 / half`) and a tiny denominator
+# (`1e-5 / half(1e-5)`) from overflowing when the quotient itself is
+# representable; `reciprocal(t) * x` would overflow `1 / t` in the second case.
+divide_scalar_by <- function(x, ref) {
+  out <- torch_result_type(ref, x)
+  if (!out$is_floating_point && !ref$is_complex()) {
+    out <- torch_get_default_dtype()
+  }
+  compute <- out
+  if (out == torch_float16() || out == torch_bfloat16()) {
+    compute <- torch_float32()
+  }
+  numerator <- torch_scalar_tensor(x, dtype = compute, device = ref$device)
+  torch_div(numerator, ref$to(dtype = compute))$to(dtype = out)
+}
+
 #' @export
 `+.torch_tensor` <- function(e1, e2) {
   if (missing(e2)) {
@@ -83,12 +104,7 @@ logical_operand <- function(x, ref) {
 #' @export
 `/.torch_tensor` <- function(e1, e2) {
   if (is_r_scalar(e1)) {
-    # As PyTorch's `__rtruediv__`. The scalar stays a Scalar, so it is neither
-    # narrowed to an integer dtype before division promotes to floating point
-    # (`300L / uint8`) nor overflowed by a cast to float16 (`65536 / half`).
-    # The product rounds twice, so a float32 result can differ from a single
-    # division by one ulp, as in PyTorch.
-    return(torch_mul(torch_reciprocal(e2), e1))
+    return(divide_scalar_by(e1, e2))
   }
 
   if (!is_torch_tensor(e1)) {
