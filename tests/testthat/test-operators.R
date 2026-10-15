@@ -473,3 +473,21 @@ test_that("comparisons with a lhs scalar", {
   expect_equal_to_r(TRUE & b, c(TRUE, FALSE))
   expect_equal_to_r(FALSE | b, c(TRUE, FALSE))
 })
+
+test_that("lhs scalars are not narrowed by division or logical operators", {
+  # division promotes to floating point before the scalar is cast
+  u <- torch_ones(1, dtype = torch_uint8())
+  expect_equal_to_r(300L / u, 300)
+  expect_true((300L / u)$dtype == torch_float())
+  h <- torch_tensor(1024, dtype = torch_float16())
+  expect_true((65536 / h)$dtype == torch_float16())
+  expect_equal_to_r((65536 / h)$to(dtype = torch_float()), 64)
+
+  # logical operators use the scalar's truth value on either side
+  expect_equal_to_r(256L & u, TRUE)
+  expect_equal_to_r(u & 256L, TRUE)
+  expect_equal_to_r(0 & u, FALSE)
+  expect_equal_to_r(0 | u, TRUE)
+  expect_equal_to_r(1e-8 | torch_zeros(1, dtype = torch_float16()), TRUE)
+  expect_equal_to_r(torch_zeros(1, dtype = torch_float16()) | 1e-8, TRUE)
+})

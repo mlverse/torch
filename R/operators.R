@@ -8,14 +8,25 @@ is_r_scalar <- function(x) {
 
 # Convert a non-tensor operand. When libtorch has a Scalar overload for the
 # operation the operators below pass the R scalar straight to it, which is
-# exactly what `t - 1` already does. This helper covers the rest: the scalar
-# becomes a 0-dim tensor whose dtype is the one libtorch would use for
+# exactly what `t - 1` already does. This helper covers `%%` and `%/%`: the
+# scalar becomes a 0-dim tensor whose dtype is the one libtorch would use for
 # `op(ref, x)` with `x` passed as a Scalar, so it takes part in type
-# promotion the way a Python scalar does. `1 / t` keeps `t`'s dtype
-# (bfloat16, float64, int64 with `1L`) instead of promoting to float32.
+# promotion the way a Python scalar does. `5 %% t` keeps `t`'s dtype
+# (bfloat16, float64, int64 with `5L`) instead of promoting to float32.
 operand_to_tensor <- function(x, ref) {
   if (is_r_scalar(x)) {
     torch_scalar_tensor(x, dtype = torch_result_type(ref, x), device = ref$device)
+  } else {
+    torch_tensor(x, device = ref$device)
+  }
+}
+
+# `&` and `|` only need the scalar's truth value, so it becomes a bool tensor.
+# Converting to the other operand's dtype could wrap `256L` to zero in uint8
+# or underflow `1e-8` to zero in float16.
+logical_operand <- function(x, ref) {
+  if (is_r_scalar(x)) {
+    torch_scalar_tensor(as.logical(x), device = ref$device)
   } else {
     torch_tensor(x, device = ref$device)
   }
@@ -71,8 +82,17 @@ operand_to_tensor <- function(x, ref) {
 
 #' @export
 `/.torch_tensor` <- function(e1, e2) {
+  if (is_r_scalar(e1)) {
+    # As PyTorch's `__rtruediv__`. The scalar stays a Scalar, so it is neither
+    # narrowed to an integer dtype before division promotes to floating point
+    # (`300L / uint8`) nor overflowed by a cast to float16 (`65536 / half`).
+    # The product rounds twice, so a float32 result can differ from a single
+    # division by one ulp, as in PyTorch.
+    return(torch_mul(torch_reciprocal(e2), e1))
+  }
+
   if (!is_torch_tensor(e1)) {
-    e1 <- operand_to_tensor(e1, e2)
+    e1 <- torch_tensor(e1, device = e2$device)
   }
 
   torch_div(e1, e2)
@@ -183,11 +203,11 @@ comparison_operands <- function(e1, e2) {
 #' @export
 `&.torch_tensor` <- function(e1, e2) {
   if (!is_torch_tensor(e1)) {
-    e1 <- operand_to_tensor(e1, e2)
+    e1 <- logical_operand(e1, e2)
   }
 
   if (!is_torch_tensor(e2)) {
-    e2 <- operand_to_tensor(e2, e1)
+    e2 <- logical_operand(e2, e1)
   }
 
   torch_logical_and(e1, e2)
@@ -196,11 +216,11 @@ comparison_operands <- function(e1, e2) {
 #' @export
 `|.torch_tensor` <- function(e1, e2) {
   if (!is_torch_tensor(e1)) {
-    e1 <- operand_to_tensor(e1, e2)
+    e1 <- logical_operand(e1, e2)
   }
 
   if (!is_torch_tensor(e2)) {
-    e2 <- operand_to_tensor(e2, e1)
+    e2 <- logical_operand(e2, e1)
   }
 
   torch_logical_or(e1, e2)
