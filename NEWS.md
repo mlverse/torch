@@ -4,6 +4,9 @@
   startup. `load_cudatoolkit_libs()` now catches it, warns naming the toolkit
   package at fault, and continues without preloading those libraries, instead of
   the failure surfacing as "torch failed to start".
+- Fixed `torch_scalar_tensor()` with `requires_grad = TRUE`, which returned a
+  non-leaf tensor because `$squeeze()` was applied after `requires_grad` was
+  set, so `.grad` was never populated after `backward()`. (#1368)
 - Fixed `nn_multihead_attention()` and `nnf_multi_head_attention_forward()` with `bias = FALSE`
   when `query` differs from `key` (i.e. cross- and encoder-decoder attention), which failed with
   `object 'k' not found`. The key and value projections were only computed when a bias was present.

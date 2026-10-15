@@ -81,7 +81,18 @@ void schedule_backward_task(std::packaged_task<void()>&& task) {
   );
   
   if (std::this_thread::get_id() == main_thread_id()) {
-    pool->push(std::move(task));
+    // The number of intra-op threads (torch_set_num_threads()) is thread-local
+    // in OpenMP, so the worker threads would otherwise use all available cores.
+    // We only set it when it differs, as at::set_num_threads() also clears the
+    // oneDNN cache.
+    int num_threads = lantern_get_num_threads();
+    pool->push(std::packaged_task<void()>(
+        [num_threads, task = std::move(task)]() mutable {
+          if (lantern_get_num_threads() != num_threads) {
+            lantern_set_num_threads(num_threads);
+          }
+          task();
+        }));
   } else {
     gBackwardTasks.schedule(std::move(task));
   }
