@@ -510,7 +510,9 @@ test_that("lhs scalar division is computed at the promoted precision", {
   expect_equal(as.numeric(r), 1e30, tolerance = 1e-6)
   r <- 1e-50 / torch_tensor(1e-30)
   expect_true(r$dtype == torch_float())
-  expect_equal(as.numeric(r), 1e-20, tolerance = 1e-6)
+  # expect_equal() compares values this small absolutely, so 0 would pass it
+  expect_gt(as.numeric(r), 0)
+  expect_lt(abs(as.numeric(r) / 1e-20 - 1), 1e-6)
   r <- 1e40 / torch_tensor(1e10, dtype = torch_bfloat16())
   expect_true(r$dtype == torch_bfloat16())
   expect_equal(as.numeric(r$to(dtype = torch_float())), 1e30, tolerance = 1e-2)

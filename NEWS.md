@@ -21,7 +21,8 @@
   promoting to float32, and `0.1 + t` on a float64 tensor no longer rounds
   the scalar through float32 first. `x / t` computes the quotient at the
   promoted floating dtype (float32 for float16 and bfloat16 tensors, float64
-  when the scalar is outside float32's range) before the result is cast
+  when the scalar is outside float32's range, except on MPS, which has no
+  float64) before the result is cast
   back, so `300L / t` on a uint8 tensor is 300, `1e-5 / t` on a float16
   tensor holding `1e-5` is finite, and `1e40 / t` on a float32 tensor
   holding `1e10` is `1e30`. `x & t` and
