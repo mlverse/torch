@@ -40,6 +40,9 @@ logical_operand <- function(x, ref) {
 # keeps a large scalar (`65536 / half`) and a tiny denominator
 # (`1e-5 / half(1e-5)`) from overflowing when the quotient itself is
 # representable; `reciprocal(t) * x` would overflow `1 / t` in the second case.
+# A double scalar outside float32's normal range (`1e40`, `1e-50`) would
+# itself overflow or flush to zero at float32, so the quotient is computed at
+# float64 then. MPS has no float64, so there it stays at float32.
 divide_scalar_by <- function(x, ref) {
   out <- torch_result_type(ref, x)
   if (!out$is_floating_point && !ref$is_complex()) {
@@ -49,8 +52,22 @@ divide_scalar_by <- function(x, ref) {
   if (out == torch_float16() || out == torch_bfloat16()) {
     compute <- torch_float32()
   }
+  if (outside_float32_range(x) && ref$device$type != "mps") {
+    if (compute == torch_float32()) {
+      compute <- torch_float64()
+    } else if (compute == torch_cfloat()) {
+      compute <- torch_cdouble()
+    }
+  }
   numerator <- torch_scalar_tensor(x, dtype = compute, device = ref$device)
   torch_div(numerator, ref$to(dtype = compute))$to(dtype = out)
+}
+
+# TRUE when a finite nonzero scalar would overflow or become subnormal or zero
+# as a float32. The limits are FLT_MAX and FLT_MIN.
+outside_float32_range <- function(x) {
+  a <- abs(as.double(x))
+  is.finite(a) && a != 0 && (a > 3.4028234663852886e38 || a < 1.1754943508222875e-38)
 }
 
 #' @export

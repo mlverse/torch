@@ -20,9 +20,11 @@
   keeps `t`'s dtype (bfloat16, float64, or int64 with `1L`) instead of
   promoting to float32, and `0.1 + t` on a float64 tensor no longer rounds
   the scalar through float32 first. `x / t` computes the quotient at the
-  promoted floating dtype (float32 for float16 and bfloat16 tensors) before
-  the result is cast back, so `300L / t` on a uint8 tensor is 300 and
-  `1e-5 / t` on a float16 tensor holding `1e-5` is finite. `x & t` and
+  promoted floating dtype (float32 for float16 and bfloat16 tensors, float64
+  when the scalar is outside float32's range) before the result is cast
+  back, so `300L / t` on a uint8 tensor is 300, `1e-5 / t` on a float16
+  tensor holding `1e-5` is finite, and `1e40 / t` on a float32 tensor
+  holding `1e10` is `1e30`. `x & t` and
   `x | t` use the scalar's truth value. A scalar combined with a 0-dim tensor
   now gives a 0-dim result on both sides, so for example
   `distr_multivariate_normal()$entropy()` without a batch dimension is 0-dim.

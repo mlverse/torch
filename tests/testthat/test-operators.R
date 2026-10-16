@@ -503,6 +503,22 @@ test_that("lhs scalar division is computed at the promoted precision", {
   expect_true(as.logical(torch_isfinite(r)))
   expect_equal(as.numeric(r), 1e30, tolerance = 1e-4)
 
+  # a double scalar outside float32's range is not narrowed before dividing
+  r <- 1e40 / torch_tensor(1e10)
+  expect_true(r$dtype == torch_float())
+  expect_tensor_shape(r, 1)
+  expect_equal(as.numeric(r), 1e30, tolerance = 1e-6)
+  r <- 1e-50 / torch_tensor(1e-30)
+  expect_true(r$dtype == torch_float())
+  expect_equal(as.numeric(r), 1e-20, tolerance = 1e-6)
+  r <- 1e40 / torch_tensor(1e10, dtype = torch_bfloat16())
+  expect_true(r$dtype == torch_bfloat16())
+  expect_equal(as.numeric(r$to(dtype = torch_float())), 1e30, tolerance = 1e-2)
+  x <- torch_tensor(1e10, requires_grad = TRUE)
+  (1e40 / x)$backward()
+  expect_true(x$grad$dtype == torch_float())
+  expect_equal(as.numeric(x$grad), -1e20, tolerance = 1e-6)
+
   # float64 keeps the scalar's full precision
   d <- torch_tensor(3, dtype = torch_float64())
   expect_true((1 / d)$dtype == torch_float64())
