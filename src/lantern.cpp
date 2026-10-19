@@ -37,6 +37,10 @@ void lantern_host_handler()
   }
 }
 
+void lantern_call_host_handler() {
+  lantern_host_handler();
+}
+
 bool lantern_loaded = false;
 void check_lantern_loaded ()
 {
@@ -44,6 +48,17 @@ void check_lantern_loaded ()
   {
     throw std::runtime_error("Lantern is not loaded. Please use `install_torch()` to install additional dependencies.");
   }
+}
+
+void* lantern_get_symbol(const char* name) {
+  check_lantern_loaded();
+
+  void* symbol = nullptr;
+  std::string error;
+  if (!laternLoadSymbol(pLibrary, name, &symbol, &error)) {
+    Rcpp::stop(error);
+  }
+  return symbol;
 }
 
 // [[Rcpp::export]]

@@ -6,6 +6,8 @@
 
 // [[Rcpp::init]]
 void register_callables(DllInfo *dll) {
+  REGISTER_C_CALLABLE(lantern_get_symbol)
+  REGISTER_C_CALLABLE(lantern_call_host_handler)
   REGISTER_C_CALLABLE(operator_sexp_tensor)
   REGISTER_C_CALLABLE(operator_sexp_optional_tensor)
   REGISTER_C_CALLABLE(operator_sexp_tensor_list)
