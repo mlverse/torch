@@ -30,7 +30,7 @@ a
 torch_sqrt(a)
 }
 #> torch_tensor
-#>  0.5047
+#>  1.3255
 #>     nan
 #>     nan
 #>     nan

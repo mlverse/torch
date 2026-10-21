@@ -2,6 +2,12 @@
 
 ## torch (development version)
 
+- An error raised inside a `cuda*` package’s `lib_path()` no longer
+  aborts torch startup. `load_cudatoolkit_libs()` now catches it, warns
+  naming the toolkit package at fault, and continues without preloading
+  those libraries, instead of the failure surfacing as “torch failed to
+  start”.
+
 - Fixed
   [`torch_scalar_tensor()`](https://torch.mlverse.org/docs/dev/reference/torch_scalar_tensor.md)
   with `requires_grad = TRUE`, which returned a non-leaf tensor because
