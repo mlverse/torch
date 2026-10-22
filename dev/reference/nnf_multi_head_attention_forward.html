@@ -108,7 +108,8 @@ subspaces. See reference: Attention Is All You Need</p>
 <span>  v_proj_weight <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  static_k <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  static_v <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  batch_first <span class="op">=</span> <span class="cn">FALSE</span></span>
+<span>  batch_first <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  is_causal <span class="op">=</span> <span class="cn">FALSE</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
@@ -233,7 +234,18 @@ which is a combination of q_proj_weight, k_proj_weight, v_proj_weight.</p></dd>
 <dd><p>Logical; whether to expect query, key, and value to have
 batch as their first parameter, and to return output with batch first.</p></dd>
 
+
+<dt id="arg-is-causal">is_causal<a class="anchor" aria-label="anchor" href="#arg-is-causal"></a></dt>
+<dd><p>Logical; a hint that <code>attn_mask</code> is the causal mask, which then has to be provided.
+If <code>need_weights</code> is <code>FALSE</code> and there is no <code>key_padding_mask</code>, the causal mask is applied by
+<code><a href="torch_scaled_dot_product_attention.html">torch_scaled_dot_product_attention()</a></code> instead of <code>attn_mask</code>, which allows faster kernels.</p></dd>
+
 </dl></div>
+    <div class="section level2">
+    <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
+    <p>When <code>need_weights</code> is <code>FALSE</code>, the attention is computed with the fused
+<code><a href="torch_scaled_dot_product_attention.html">torch_scaled_dot_product_attention()</a></code>, like in PyTorch.</p>
+    </div>
 
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside></div>

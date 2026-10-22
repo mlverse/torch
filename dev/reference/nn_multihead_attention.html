@@ -148,6 +148,22 @@ sequence length, and E is the embedding dimension.</p></dd>
 \mbox{where} head_i = \mbox{Attention}(QW_i^Q, KW_i^K, VW_i^V) $$</p>
     </div>
     <div class="section level2">
+    <h2 id="forward">Forward<a class="anchor" aria-label="anchor" href="#forward"></a></h2>
+
+
+
+<p>The module is called with <code>query</code>, <code>key</code>, <code>value</code>, and optionally <code>key_padding_mask</code>, <code>attn_mask</code>
+(see Shape), <code>need_weights</code> (whether to return the attention weights, default <code>TRUE</code>),
+<code>avg_weights</code> (whether to average the weights over the heads, default <code>TRUE</code>) and <code>is_causal</code>
+(a hint that <code>attn_mask</code> is the causal mask, see <code><a href="nnf_multi_head_attention_forward.html">nnf_multi_head_attention_forward()</a></code>).</p>
+<p>Like in PyTorch, the attention is computed with the fused <code><a href="torch_scaled_dot_product_attention.html">torch_scaled_dot_product_attention()</a></code>
+when <code>need_weights = FALSE</code>. In evaluation mode and without gradients, self-attention (where <code>query</code>,
+<code>key</code> and <code>value</code> are the same tensor) with <code>batch_first = TRUE</code>, an even number of heads, a bias and
+neither <code>add_bias_kv</code> nor <code>add_zero_attn</code> uses the fused native implementation, which is faster,
+unless the attention is masked and <code>need_weights = FALSE</code>. Pass <code>need_weights = FALSE</code> whenever you don't
+need the attention weights.</p>
+    </div>
+    <div class="section level2">
     <h2 id="shape">Shape<a class="anchor" aria-label="anchor" href="#shape"></a></h2>
 
 

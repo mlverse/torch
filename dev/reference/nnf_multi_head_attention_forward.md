@@ -31,7 +31,8 @@ nnf_multi_head_attention_forward(
   v_proj_weight = NULL,
   static_k = NULL,
   static_v = NULL,
-  batch_first = FALSE
+  batch_first = FALSE,
+  is_causal = FALSE
 )
 ```
 
@@ -160,3 +161,17 @@ nnf_multi_head_attention_forward(
 
   Logical; whether to expect query, key, and value to have batch as
   their first parameter, and to return output with batch first.
+
+- is_causal:
+
+  Logical; a hint that `attn_mask` is the causal mask, which then has to
+  be provided. If `need_weights` is `FALSE` and there is no
+  `key_padding_mask`, the causal mask is applied by
+  [`torch_scaled_dot_product_attention()`](https://torch.mlverse.org/docs/dev/reference/torch_scaled_dot_product_attention.md)
+  instead of `attn_mask`, which allows faster kernels.
+
+## Details
+
+When `need_weights` is `FALSE`, the attention is computed with the fused
+[`torch_scaled_dot_product_attention()`](https://torch.mlverse.org/docs/dev/reference/torch_scaled_dot_product_attention.md),
+like in PyTorch.

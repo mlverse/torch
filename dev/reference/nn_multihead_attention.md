@@ -68,6 +68,25 @@ nn_multihead_attention(
 \$\$ \mbox{MultiHead}(Q, K, V) = \mbox{Concat}(head_1,\dots,head_h)W^O
 \mbox{where} head_i = \mbox{Attention}(QW_i^Q, KW_i^K, VW_i^V) \$\$
 
+## Forward
+
+The module is called with `query`, `key`, `value`, and optionally
+`key_padding_mask`, `attn_mask` (see Shape), `need_weights` (whether to
+return the attention weights, default `TRUE`), `avg_weights` (whether to
+average the weights over the heads, default `TRUE`) and `is_causal` (a
+hint that `attn_mask` is the causal mask, see
+[`nnf_multi_head_attention_forward()`](https://torch.mlverse.org/docs/dev/reference/nnf_multi_head_attention_forward.md)).
+
+Like in PyTorch, the attention is computed with the fused
+[`torch_scaled_dot_product_attention()`](https://torch.mlverse.org/docs/dev/reference/torch_scaled_dot_product_attention.md)
+when `need_weights = FALSE`. In evaluation mode and without gradients,
+self-attention (where `query`, `key` and `value` are the same tensor)
+with `batch_first = TRUE`, an even number of heads, a bias and neither
+`add_bias_kv` nor `add_zero_attn` uses the fused native implementation,
+which is faster, unless the attention is masked and
+`need_weights = FALSE`. Pass `need_weights = FALSE` whenever you don't
+need the attention weights.
+
 ## Shape
 
 Inputs:

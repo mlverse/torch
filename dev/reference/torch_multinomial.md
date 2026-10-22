@@ -69,6 +69,6 @@ torch_multinomial(weights, 4, replacement=TRUE)
 #>  3
 #>  3
 #>  3
-#>  3
+#>  2
 #> [ CPULongType{4} ]
 ```
