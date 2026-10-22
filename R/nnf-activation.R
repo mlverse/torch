@@ -562,6 +562,11 @@ nnf_multi_head_attention_forward <- function(query, # type: Tensor
                                              static_v = NULL, # type: Optional[Tensor])
                                              batch_first = FALSE # type: bool
 ) {
+  # Like in PyTorch, self-attention is detected by checking whether query, key and value are the same tensor
+  # (and not by comparing their values, which is expensive). This has to happen before transposing them.
+  key_is_value <- is_same_tensor(key, value)
+  self_attention <- key_is_value && is_same_tensor(query, key)
+
   if (batch_first) {
     query <- torch_transpose(query, 1, 2)
     key <- torch_transpose(key, 1, 2)
@@ -578,13 +583,13 @@ nnf_multi_head_attention_forward <- function(query, # type: Tensor
   scaling <- head_dim^(-0.5)
 
   if (!use_separate_proj_weight) {
-    if (torch_equal(query, key) && torch_equal(key, value)) {
+    if (self_attention) {
       # self-attention
       o <- nnf_linear(query, in_proj_weight, in_proj_bias)$chunk(3, dim = -1)
       q <- o[[1]]
       k <- o[[2]]
       v <- o[[3]]
-    } else if (torch_equal(key, value)) {
+    } else if (key_is_value) {
       # encoder-decoder attention
       #             # This is inline in_proj function with in_proj_weight and in_proj_bias
       b_ <- in_proj_bias
@@ -658,6 +663,27 @@ nnf_multi_head_attention_forward <- function(query, # type: Tensor
     }
   }
 
+  if (!need_weights && is.null(bias_k) && is.null(bias_v) && !add_zero_attn && is.null(static_k) &&
+    is.null(static_v)) {
+    # Fast path for the common case: without the attention weights, we use the fused scaled dot product
+    # attention, like PyTorch does. Its kernels need the layout (bsz, num_heads, length, head_dim), which only
+    # requires views of q, k and v. It scales q itself, by head_dim^(-0.5).
+    to_heads <- function(x) x$view(c(x$size(1), bsz, num_heads, head_dim))$permute(c(2, 3, 1, 4))
+    src_len <- k$size(1)
+    attn_output <- torch_scaled_dot_product_attention(
+      to_heads(q), to_heads(k), to_heads(v),
+      attn_mask = mha_sdpa_mask(attn_mask, key_padding_mask, bsz, num_heads, src_len, q$dtype) %||% list(),
+      dropout_p = if (training) dropout_p else 0
+    )
+    # (bsz, num_heads, tgt_len, head_dim) -> (tgt_len, bsz, embed_dim)
+    attn_output <- attn_output$permute(c(3, 1, 2, 4))$reshape(c(tgt_len, bsz, embed_dim))
+    attn_output <- nnf_linear(attn_output, out_proj_weight, out_proj_bias)
+    if (batch_first) {
+      attn_output <- torch_transpose(attn_output, 1, 2)
+    }
+    return(list(attn_output, NULL))
+  }
+
   q <- q * scaling
 
   if (!is.null(bias_k) && !is.null(bias_v)) {
@@ -703,7 +729,7 @@ nnf_multi_head_attention_forward <- function(query, # type: Tensor
       dtype = k$dtype, device = k$device
     )), dim = 2)
     v_size <- v$size()
-    k <- torch_cat(list(k, torch_zeros(append(list(v_size[1], 1), v_size[3:length(v_size)]),
+    v <- torch_cat(list(v, torch_zeros(append(list(v_size[1], 1), v_size[3:length(v_size)]),
       dtype = v$dtype, device = v$device
     )), dim = 2)
 
@@ -714,6 +740,26 @@ nnf_multi_head_attention_forward <- function(query, # type: Tensor
     if (!is.null(key_padding_mask)) {
       key_padding_mask <- nnf_pad(key_padding_mask, list(0, 1))
     }
+  }
+
+  if (!need_weights) {
+    # Without the attention weights, we can use the fused scaled dot product attention, like PyTorch does.
+    # Its fused kernels need the layout (bsz, num_heads, length, head_dim); splitting the first dimension of
+    # (bsz * num_heads, length, head_dim) into it is free. `q` is already scaled.
+    attn_output <- torch_scaled_dot_product_attention(
+      q$view(c(bsz, num_heads, tgt_len, head_dim)),
+      k$view(c(bsz, num_heads, src_len, head_dim)),
+      v$view(c(bsz, num_heads, src_len, head_dim)),
+      attn_mask = mha_sdpa_mask(attn_mask, key_padding_mask, bsz, num_heads, src_len, q$dtype) %||% list(),
+      dropout_p = if (training) dropout_p else 0,
+      scale = 1
+    )
+    attn_output <- attn_output$permute(c(3, 1, 2, 4))$reshape(c(tgt_len, bsz, embed_dim))
+    attn_output <- nnf_linear(attn_output, out_proj_weight, out_proj_bias)
+    if (batch_first) {
+      attn_output <- torch_transpose(attn_output, 1, 2)
+    }
+    return(list(attn_output, NULL))
   }
 
   attn_output_weights <- torch_bmm(q, k$transpose(2, 3))
@@ -771,6 +817,37 @@ nnf_multi_head_attention_forward <- function(query, # type: Tensor
   } else {
     return(list(attn_output, NULL))
   }
+}
+
+# Whether `x` and `y` are the same tensor object.
+is_same_tensor <- function(x, y) {
+  identical(x, y) || (inherits(x, "torch_tensor") && inherits(y, "torch_tensor") &&
+    identical(xptr_address(x), xptr_address(y)))
+}
+
+# Combines the `attn_mask` and `key_padding_mask` of `nnf_multi_head_attention_forward()` into one additive
+# mask for `torch_scaled_dot_product_attention()` with inputs of shape (bsz, num_heads, length, head_dim).
+# This is needed because it treats boolean masks the other way around (`TRUE` means "attend") and has no separate
+# key padding mask. Returns `NULL` if there is no mask.
+mha_sdpa_mask <- function(attn_mask, key_padding_mask, bsz, num_heads, src_len, dtype) {
+  to_additive <- function(mask) {
+    if (mask$dtype == torch_bool()) {
+      torch_zeros_like(mask, dtype = dtype)$masked_fill_(mask, -Inf)
+    } else {
+      mask$to(dtype = dtype)
+    }
+  }
+  mask <- NULL
+  if (!is.null(attn_mask)) {
+    mask <- to_additive(attn_mask)
+    # (tgt_len, src_len) broadcasts, (bsz * num_heads, tgt_len, src_len) is split like q, k and v
+    if (mask$dim() == 3) mask <- mask$view(c(bsz, num_heads, -1, src_len))
+  }
+  if (!is.null(key_padding_mask)) {
+    key_padding_mask <- to_additive(key_padding_mask)$view(c(bsz, 1, 1, src_len))
+    mask <- if (is.null(mask)) key_padding_mask else mask + key_padding_mask
+  }
+  mask
 }
 
 #' Sigmoid

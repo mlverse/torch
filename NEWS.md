@@ -1,5 +1,13 @@
 # torch (development version)
 
+- `nn_multihead_attention()` and `nnf_multi_head_attention_forward()` use the fused
+  `torch_scaled_dot_product_attention()` when `need_weights = FALSE` (like PyTorch does),
+  which is up to 2 times faster on GPU for long sequences. Self-attention is now detected by
+  checking whether `query`, `key` and `value` are the same tensor, instead of comparing their
+  values in every forward pass.
+- Fixed `nn_multihead_attention()` and `nnf_multi_head_attention_forward()` with
+  `add_zero_attn = TRUE`, which failed because the zero attention was added to the keys twice
+  instead of to the keys and values.
 - An error raised inside a `cuda*` package's `lib_path()` no longer aborts torch
   startup. `load_cudatoolkit_libs()` now catches it, warns naming the toolkit
   package at fault, and continues without preloading those libraries, instead of
