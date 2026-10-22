@@ -680,6 +680,20 @@ nn_softshrink <- nn_module(
 #'   S, E)} instead of \eqn{(S, N, E)}, where N is the batch size, S is the
 #'   sequence length, and E is the embedding dimension.
 #'
+#' @section Forward:
+#'
+#'   The module is called with `query`, `key`, `value`, and optionally `key_padding_mask`, `attn_mask`
+#'   (see Shape), `need_weights` (whether to return the attention weights, default `TRUE`),
+#'   `avg_weights` (whether to average the weights over the heads, default `TRUE`) and `is_causal`
+#'   (a hint that `attn_mask` is the causal mask, see [nnf_multi_head_attention_forward()]).
+#'
+#'   Like in PyTorch, the attention is computed with the fused [torch_scaled_dot_product_attention()]
+#'   when `need_weights = FALSE`. In evaluation mode and without gradients, self-attention (where `query`,
+#'   `key` and `value` are the same tensor) with `batch_first = TRUE`, an even number of heads, a bias and
+#'   neither `add_bias_kv` nor `add_zero_attn` uses the fused native implementation, which is faster,
+#'   unless the attention is masked and `need_weights = FALSE`. Pass `need_weights = FALSE` whenever you don't
+#'   need the attention weights.
+#'
 #' @section Shape:
 #'
 #'   Inputs:
@@ -817,34 +831,78 @@ nn_multihead_attention <- nn_module(
     }
   },
   forward = function(query, key, value, key_padding_mask = NULL,
-                     need_weights = TRUE, attn_mask = NULL, avg_weights = TRUE) {
-    if (!self$qkv_same_embed_dim_) {
-      nnf_multi_head_attention_forward(
+                     need_weights = TRUE, attn_mask = NULL, avg_weights = TRUE, is_causal = FALSE) {
+    if (self$can_use_native_attention(query, key, value, attn_mask, key_padding_mask, need_weights)) {
+      # Like PyTorch, inference for self-attention uses the fused native implementation.
+      attn_mask <- mha_canonical_mask(attn_mask, "attn_mask", query$dtype)
+      key_padding_mask <- mha_canonical_mask(key_padding_mask, "key_padding_mask", query$dtype)
+      mask <- mha_native_mask(attn_mask, key_padding_mask, query, self$num_heads)
+      out <- torch__native_multi_head_attention(
         query, key, value, self$embed_dim, self$num_heads,
-        self$in_proj_weight, self$in_proj_bias,
-        self$bias_k, self$bias_v, self$add_zero_attn,
-        self$dropout, self$out_proj$weight, self$out_proj$bias,
-        training = self$training,
-        key_padding_mask = key_padding_mask, need_weights = need_weights,
-        attn_mask = attn_mask, use_separate_proj_weight = TRUE,
-        q_proj_weight = self$q_proj_weight, k_proj_weight = self$k_proj_weight,
-        v_proj_weight = self$v_proj_weight,
-        batch_first = self$batch_first
+        self$in_proj_weight, self$in_proj_bias, self$out_proj$weight, self$out_proj$bias,
+        mask = mask$mask %||% list(), need_weights = need_weights, average_attn_weights = avg_weights,
+        mask_type = mask$type
       )
-    } else {
-      nnf_multi_head_attention_forward(
-        query, key, value, self$embed_dim, self$num_heads,
-        self$in_proj_weight, self$in_proj_bias,
-        self$bias_k, self$bias_v, self$add_zero_attn,
-        self$dropout, self$out_proj$weight, self$out_proj$bias,
-        training = self$training,
-        key_padding_mask = key_padding_mask, need_weights = need_weights,
-        attn_mask = attn_mask, avg_weights = avg_weights,
-        batch_first = self$batch_first
-      )
+      return(list(out[[1]], if (need_weights) out[[2]]))
     }
+    nnf_multi_head_attention_forward(
+      query, key, value, self$embed_dim, self$num_heads,
+      self$in_proj_weight, self$in_proj_bias,
+      self$bias_k, self$bias_v, self$add_zero_attn,
+      self$dropout, self$out_proj$weight, self$out_proj$bias,
+      training = self$training,
+      key_padding_mask = key_padding_mask, need_weights = need_weights,
+      attn_mask = attn_mask, avg_weights = avg_weights,
+      use_separate_proj_weight = !self$qkv_same_embed_dim_,
+      q_proj_weight = self$q_proj_weight, k_proj_weight = self$k_proj_weight,
+      v_proj_weight = self$v_proj_weight,
+      batch_first = self$batch_first, is_causal = is_causal
+    )
+  },
+  # The conditions under which PyTorch uses the native implementation in `MultiheadAttention.forward()`.
+  # It treats masks as boolean, so floating point masks are not supported. Unlike PyTorch, we don't use it for
+  # masked attention without the weights, where the scaled dot product attention is up to 2.5 times faster on GPU.
+  can_use_native_attention = function(query, key, value, attn_mask = NULL, key_padding_mask = NULL,
+                                      need_weights = TRUE) {
+    if ((!need_weights && (!is.null(attn_mask) || !is.null(key_padding_mask))) ||
+      (!is.null(attn_mask) && attn_mask$is_floating_point()) ||
+      (!is.null(key_padding_mask) && key_padding_mask$is_floating_point()) ||
+      self$training || !self$batch_first || !self$qkv_same_embed_dim_ || self$num_heads %% 2 != 0 ||
+      !is.null(self$bias_k) || !is.null(self$bias_v) || self$add_zero_attn || is.null(self$in_proj_bias) ||
+      query$dim() != 3 || !is_same_tensor(query, key) || !is_same_tensor(key, value) ||
+      query$dtype != self$in_proj_weight$dtype || query$dtype != self$in_proj_bias$dtype ||
+      cpp_amp_is_autocast_cpu_enabled() || cpp_amp_is_autocast_gpu_enabled()) {
+      return(FALSE)
+    }
+    tensors <- list(query, self$in_proj_weight, self$in_proj_bias, self$out_proj$weight, self$out_proj$bias)
+    for (x in tensors) {
+      if (!is.null(x) && !(x$device$type %in% c("cpu", "cuda"))) {
+        return(FALSE)
+      }
+    }
+    !(cpp_autograd_is_enabled() && any(vapply(tensors, function(x) !is.null(x) && x$requires_grad, logical(1))))
   }
 )
+
+# Merges the additive masks for `torch__native_multi_head_attention()`, like PyTorch's
+# `MultiheadAttention.merge_masks()`. Returns the merged mask and its type (1 for a key padding mask of shape
+# (bsz, seq_len), 2 for a mask of shape (bsz, num_heads, seq_len, seq_len)).
+mha_native_mask <- function(attn_mask, key_padding_mask, query, num_heads) {
+  if (is.null(attn_mask)) {
+    return(list(mask = key_padding_mask, type = if (!is.null(key_padding_mask)) 1L))
+  }
+  bsz <- query$size(1)
+  seq_len <- query$size(2)
+  mask <- if (attn_mask$dim() == 3) {
+    attn_mask$reshape(c(bsz, -1, seq_len, seq_len))
+  } else {
+    attn_mask$reshape(c(1, 1, seq_len, seq_len))$expand(c(bsz, num_heads, -1, -1))
+  }
+  if (!is.null(key_padding_mask)) {
+    mask <- mask + key_padding_mask$reshape(c(bsz, 1, 1, seq_len))$expand(c(-1, num_heads, -1, -1))
+  }
+  list(mask = mask, type = 2L)
+}
 
 #' PReLU module
 #'
