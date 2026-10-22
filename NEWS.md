@@ -1,5 +1,6 @@
 # torch (development version)
 
+- Improved accuracy of `install_torch_sitrep()` for ms-windows operating systems. (#1480 @cregouby)
 - An error raised inside a `cuda*` package's `lib_path()` no longer aborts torch
   startup. `load_cudatoolkit_libs()` now catches it, warns naming the toolkit
   package at fault, and continues without preloading those libraries, instead of
