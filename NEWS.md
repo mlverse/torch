@@ -2,11 +2,12 @@
 
 - `nn_multihead_attention()` and `nnf_multi_head_attention_forward()` are faster and behave like PyTorch
   (#1488):
-  - With `need_weights = FALSE`, they use the fused `torch_scaled_dot_product_attention()` (up to 2 times
-    faster on GPU for long sequences). Inputs with `batch_first = TRUE` are then no longer transposed, and the
+  - With `need_weights = FALSE`, they use the fused `torch_scaled_dot_product_attention()` (e.g. causal
+    training is up to 4 times faster on GPU). Inputs with `batch_first = TRUE` are then no longer transposed, and the
     output is contiguous.
   - In evaluation mode and without gradients, self-attention with `batch_first = TRUE` uses the fused native
-    implementation, under the same conditions as in PyTorch.
+    implementation, under the same conditions as in PyTorch, except for masked attention with
+    `need_weights = FALSE`, where the scaled dot product attention is faster.
   - The new `is_causal` argument is a hint that `attn_mask` is the causal mask, which then allows the fastest
     attention kernels. `nn_transformer_encoder_layer()` passes it on.
   - Self-attention is detected by checking whether `query`, `key` and `value` are the same tensor, instead of

@@ -196,6 +196,8 @@ test_that("nn_multihead_attention uses the native implementation for inference, 
   expect_false(attn$can_use_native_attention(x, x, x)) # the parameters require gradients
   # the native implementation treats masks as boolean
   expect_false(with_no_grad(attn$can_use_native_attention(x, x, x, torch_randn(5, 5))))
+  # masked attention without the weights uses the faster scaled dot product attention
+  expect_false(with_no_grad(attn$can_use_native_attention(x, x, x, mask, kpm, need_weights = FALSE)))
   for (need_weights in c(TRUE, FALSE)) {
     native <- with_no_grad(attn(x, x, x, attn_mask = mask, key_padding_mask = kpm, need_weights = need_weights))
     expected <- attn(x, x, x, attn_mask = mask, key_padding_mask = kpm, need_weights = need_weights)

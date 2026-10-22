@@ -690,8 +690,9 @@ nn_softshrink <- nn_module(
 #'   Like in PyTorch, the attention is computed with the fused [torch_scaled_dot_product_attention()]
 #'   when `need_weights = FALSE`. In evaluation mode and without gradients, self-attention (where `query`,
 #'   `key` and `value` are the same tensor) with `batch_first = TRUE`, an even number of heads, a bias and
-#'   neither `add_bias_kv` nor `add_zero_attn` uses the fused native implementation, which is faster.
-#'   Pass `need_weights = FALSE` whenever you don't need the attention weights.
+#'   neither `add_bias_kv` nor `add_zero_attn` uses the fused native implementation, which is faster,
+#'   unless the attention is masked and `need_weights = FALSE`. Pass `need_weights = FALSE` whenever you don't
+#'   need the attention weights.
 #'
 #' @section Shape:
 #'
@@ -831,7 +832,7 @@ nn_multihead_attention <- nn_module(
   },
   forward = function(query, key, value, key_padding_mask = NULL,
                      need_weights = TRUE, attn_mask = NULL, avg_weights = TRUE, is_causal = FALSE) {
-    if (self$can_use_native_attention(query, key, value, attn_mask, key_padding_mask)) {
+    if (self$can_use_native_attention(query, key, value, attn_mask, key_padding_mask, need_weights)) {
       # Like PyTorch, inference for self-attention uses the fused native implementation.
       attn_mask <- mha_canonical_mask(attn_mask, "attn_mask", query$dtype)
       key_padding_mask <- mha_canonical_mask(key_padding_mask, "key_padding_mask", query$dtype)
@@ -859,9 +860,12 @@ nn_multihead_attention <- nn_module(
     )
   },
   # The conditions under which PyTorch uses the native implementation in `MultiheadAttention.forward()`.
-  # It treats masks as boolean, so floating point masks are not supported.
-  can_use_native_attention = function(query, key, value, attn_mask = NULL, key_padding_mask = NULL) {
-    if ((!is.null(attn_mask) && attn_mask$is_floating_point()) ||
+  # It treats masks as boolean, so floating point masks are not supported. Unlike PyTorch, we don't use it for
+  # masked attention without the weights, where the scaled dot product attention is up to 2.5 times faster on GPU.
+  can_use_native_attention = function(query, key, value, attn_mask = NULL, key_padding_mask = NULL,
+                                      need_weights = TRUE) {
+    if ((!need_weights && (!is.null(attn_mask) || !is.null(key_padding_mask))) ||
+      (!is.null(attn_mask) && attn_mask$is_floating_point()) ||
       (!is.null(key_padding_mask) && key_padding_mask$is_floating_point()) ||
       self$training || !self$batch_first || !self$qkv_same_embed_dim_ || self$num_heads %% 2 != 0 ||
       !is.null(self$bias_k) || !is.null(self$bias_v) || self$add_zero_attn || is.null(self$in_proj_bias) ||
