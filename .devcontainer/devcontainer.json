@@ -1,0 +1,15 @@
+{
+  "name": "R torch (with PyTorch)",
+  "build": {
+    "dockerfile": "Dockerfile",
+    "context": ".."
+  },
+  "workspaceFolder": "/workspaces/torch",
+  "workspaceMount": "source=${localWorkspaceFolder},target=/workspaces/torch,type=bind",
+  "postCreateCommand": "bash .devcontainer/post-create.sh",
+  "customizations": {
+    "vscode": {
+      "extensions": ["REditorSupport.r", "ms-python.python"]
+    }
+  }
+}

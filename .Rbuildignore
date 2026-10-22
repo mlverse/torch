@@ -57,3 +57,4 @@ mnist-r.*
 ^revdep$
 ^CRAN-SUBMISSION$
 ^vignettes/articles$
+^\.devcontainer$
