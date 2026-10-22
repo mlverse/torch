@@ -125,9 +125,7 @@ Select your system specifications to generate the recommended installation comma
     if (selectedOs === 'macos') {
       command = "# On macOS, {torch} uses the 'mps' backend for GPU acceleration.\n" +
                 debugInstall +
-                "install.packages(\"torch\")\n\n" +
-                "# After installing, load the library.\n" +
-                "# It will prompt to install the correct libtorch.\n" +
+                "install.packages(\"torch\")\n" +
                 "library(torch)";
       if (selectedCuda !== 'cpu') {
         error = "Note: CUDA is not supported on macOS. Falling back to CPU/MPS install.";
@@ -135,16 +133,12 @@ Select your system specifications to generate the recommended installation comma
     } else if (selectedCuda === 'cpu') {
       command = "# This command installs the CPU-only version of {torch}.\n" +
                 debugInstall +
-                "install.packages(\"torch\")\n\n" +
-                "# After installing, load the library.\n" +
-                "# It will prompt to install the CPU-only libtorch.\n" +
+                "install.packages(\"torch\")\n" +
                 "library(torch)";
     } else if (selectedCuda === '12.8' || selectedCuda === '12.6') {
       command = "# This command installs the latest supported CUDA version of {torch}.\n" +
                 debugInstall + debugCuda +
-                "install.packages(\"torch\")\n\n" +
-                "# After installing, load the library.\n" +
-                "# It will prompt to install the matching libtorch with CUDA support.\n" +
+                "install.packages(\"torch\")\n" +
                 "library(torch)";
     } else {
       var info = compatibility[selectedCuda];
@@ -152,17 +146,11 @@ Select your system specifications to generate the recommended installation comma
         error = "CUDA " + selectedCuda + " with {torch} " + info.torch_range +
                 " is only supported on Linux. Please select another combination.";
       } else {
-        command = "# For CUDA " + selectedCuda + ", the compatible {torch} R package version is " + info.torch_range + ".\n" +
-                  "# We recommend installing the latest compatible version (e.g., " + info.rec_version + ").\n\n" +
-                  "# You may need the 'remotes' package:\n" +
-                  "# install.packages(\"remotes\")\n" +
+        command = "# For CUDA " + selectedCuda + ", the recommended {torch} R package version is " + info.rec_version + ").\n" +
+                  "# You may need the 'remotes' package: install.packages(\"remotes\")\n" +
                   debugInstall + debugCuda +
-                  "remotes::install_version(\"torch\", version = \"" + info.rec_version + "\")\n\n" +
-                  "# After installing, load the library.\n" +
-                  "# It will prompt to install the matching libtorch with CUDA support.\n" +
-                  "library(torch)\n\n" +
-                  "# If it doesn't prompt, or to reinstall, run:\n" +
-                  "# torch::install_torch()";
+                  "remotes::install_version(\"torch\", version = \"" + info.rec_version + "\")\n" +
+                  "library(torch)";
       }
     }
 
