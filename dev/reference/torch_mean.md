@@ -59,6 +59,6 @@ torch_mean(a, 1)
 torch_mean(a, 1, TRUE)
 }
 #> torch_tensor
-#>  0.5507  0.3568  0.1090 -0.4286
+#> -0.3003  0.6683 -0.4624  0.3859
 #> [ CPUFloatType{1,4} ]
 ```

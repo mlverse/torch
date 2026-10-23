@@ -38,6 +38,6 @@ torch_round(a)
 #>  1
 #> -1
 #> -1
-#> -0
+#> -1
 #> [ CPUFloatType{4} ]
 ```
