@@ -1,5 +1,8 @@
 # torch (development version)
 
+- Fixed `nn_rnn()`, `nn_gru()` and `nn_lstm()` on sequences packed with
+  `enforce_sorted = TRUE`, which failed with "Expected a proper Tensor but got None". A
+  `PackedSequence`'s `$sorted_indices` and `$unsorted_indices` are now `NULL` in that case. (#1156)
 - `nn_multihead_attention()` and `nnf_multi_head_attention_forward()` are faster and behave like PyTorch
   (#1488):
   - With `need_weights = FALSE`, they use the fused `torch_scaled_dot_product_attention()` (e.g. causal
