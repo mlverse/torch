@@ -303,3 +303,29 @@ test_that("gru can be traced", {
     tr(v)[[1]]
   )
 })
+
+test_that("rnns work with sequences packed with enforce_sorted = TRUE (#1156)", {
+  x <- torch_randn(2, 4, 3)
+  lengths <- torch_tensor(c(4, 2), dtype = torch_long())
+  p <- nn_utils_rnn_pack_padded_sequence(x, lengths, batch_first = TRUE, enforce_sorted = TRUE)
+  p_unsorted <- nn_utils_rnn_pack_padded_sequence(x, lengths, batch_first = TRUE, enforce_sorted = FALSE)
+  expect_null(p$sorted_indices)
+  expect_null(p$unsorted_indices)
+
+  rnns <- list(nn_rnn(3, 5, batch_first = TRUE), nn_gru(3, 5, batch_first = TRUE), nn_lstm(3, 5, batch_first = TRUE))
+  for (rnn in rnns) {
+    hx <- torch_randn(1, 2, 5)
+    if (inherits(rnn, "nn_lstm")) hx <- list(hx, torch_randn(1, 2, 5))
+
+    for (h in list(NULL, hx)) {
+      out <- rnn(p, h)
+      expected <- rnn(p_unsorted, h)
+      expect_true(is_packed_sequence(out[[1]]))
+      expect_null(out[[1]]$sorted_indices)
+      expect_equal_to_tensor(out[[1]]$data, expected[[1]]$data)
+
+      padded <- nn_utils_rnn_pad_packed_sequence(out[[1]], batch_first = TRUE)[[1]]
+      expect_tensor_shape(padded, c(2, 4, 5))
+    }
+  }
+})

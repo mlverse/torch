@@ -14,10 +14,10 @@ PackedSequence <- R6::R6Class(
       Tensor$new(ptr = cpp_nn_utils_PackedSequence_batch_sizes(self$ptr))
     },
     sorted_indices = function() {
-      Tensor$new(ptr = cpp_nn_utils_PackedSequence_sorted_indices(self$ptr))$add(1L, alpha = 1L)
+      packed_sequence_indices(cpp_nn_utils_PackedSequence_sorted_indices(self$ptr))
     },
     unsorted_indices = function() {
-      Tensor$new(ptr = cpp_nn_utils_PackedSequence_unsorted_indices(self$ptr))$add(1L, alpha = 1L)
+      packed_sequence_indices(cpp_nn_utils_PackedSequence_unsorted_indices(self$ptr))
     }
   )
 )
@@ -26,10 +26,27 @@ new_packed_sequence <- function(data, batch_sizes, sorted_indices, unsorted_indi
   o <- cpp_nn_utils_PackedSequence_new(
     data$ptr,
     batch_sizes$ptr,
-    sorted_indices$sub(1L, 1L)$ptr,
-    unsorted_indices$sub(1L, 1L)$ptr
+    packed_sequence_indices_ptr(sorted_indices),
+    packed_sequence_indices_ptr(unsorted_indices)
   )
   PackedSequence$new(ptr = o)
+}
+
+# The indices are undefined when the sequences were packed with
+# `enforce_sorted = TRUE`, which we represent as `NULL` on the R side.
+packed_sequence_indices <- function(ptr) {
+  x <- Tensor$new(ptr = ptr)
+  if (is_undefined_tensor(x)) {
+    return(NULL)
+  }
+  x$add(1L, alpha = 1L)
+}
+
+packed_sequence_indices_ptr <- function(x) {
+  if (is.null(x)) {
+    return(cpp_tensor_undefined())
+  }
+  x$sub(1L, 1L)$ptr
 }
 
 is_packed_sequence <- function(x) {
