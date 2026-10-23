@@ -4,10 +4,12 @@
 \alias{as_array}
 \title{Converts to array}
 \usage{
-as_array(x)
+as_array(x, ...)
 }
 \arguments{
 \item{x}{object to be converted into an array}
+
+\item{...}{additional arguments passed to methods.}
 }
 \description{
 Converts to array
