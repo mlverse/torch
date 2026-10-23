@@ -87,7 +87,8 @@ test_that("properites", {
   expect_equal_to_tensor(m$precision_matrix, torch_eye(2))
   expect_equal_to_tensor(m$mean, m$loc)
   expect_tensor_shape(m$variance, c(2))
-  expect_tensor_shape(m$entropy(), 1)
+  # no batch dimension, so the entropy is a 0-dim tensor as in PyTorch
+  expect_tensor_shape(m$entropy(), integer(0))
 })
 
 test_that("works with precision matrix", {
