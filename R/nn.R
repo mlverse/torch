@@ -108,6 +108,21 @@ nn_Module <- R6::R6Class(
     },
     to = function(dtype = NULL, device = NULL, tensor = NULL, non_blocking = FALSE, copy = FALSE,
                   memory_format = torch_preserve_format()) {
+      # Like in PyTorch, `module$to(y)` and `module$to(tensor = y)` take the dtype and the
+      # device from the tensor `y`.
+      if (is_torch_tensor(dtype) && is.null(tensor)) {
+        tensor <- dtype
+        dtype <- NULL
+      }
+      if (!is.null(tensor)) {
+        if (!is.null(dtype) || !is.null(device)) {
+          cli_abort("Had {.arg tensor} but {.arg device} or {.arg dtype} are non {.val NULL}")
+        }
+        dtype <- tensor$dtype
+        device <- tensor$device
+        tensor <- NULL
+      }
+
       if (!is.null(dtype)) {
         if (!dtype$is_floating_point) {
           value_error("nn.Module.to only accepts floating point '
@@ -117,7 +132,10 @@ nn_Module <- R6::R6Class(
 
       self$.apply(function(x) {
         if (x$is_floating_point()) {
-          x$to(dtype, device, tensor, non_blocking, copy, memory_format)
+          x$to(
+            dtype = dtype, device = device, non_blocking = non_blocking, copy = copy,
+            memory_format = memory_format
+          )
         } else {
           x$to(
             device = device, non_blocking = non_blocking, copy = copy,

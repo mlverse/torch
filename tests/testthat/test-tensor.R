@@ -106,6 +106,33 @@ test_that("Pass only device argument to `to`", {
   expect_true(k$dtype == torch_long())
 })
 
+test_that("`to` accepts a tensor as its first argument (#1060)", {
+  x <- torch_randn(2, 3, 4, 5)
+  y <- torch_tensor(1L, dtype = torch_int())
+  k <- x$to(y)
+  expect_true(k$dtype == torch_int())
+  expect_error(x$to(y, device = "cpu"), "other")
+
+  k <- x$to(torch_tensor(1, dtype = torch_float64()), memory_format = torch_channels_last_format())
+  expect_true(k$dtype == torch_float64())
+  expect_equal(k$stride(), c(60, 1, 15, 3)) # channels last
+
+  x <- torch_zeros(2)
+  x$to(torch_randn(1), copy = TRUE)$add_(1)
+  expect_equal_to_r(x, c(0, 0))
+  x$to(torch_randn(1))$add_(1)
+  expect_equal_to_r(x, c(1, 1))
+})
+
+test_that("`to` with a tensor on another device (#1060)", {
+  skip_if_cuda_not_available()
+  x <- torch_randn(2)
+  y <- torch_tensor(1L, device = "cuda")
+  k <- x$to(y, non_blocking = TRUE)
+  expect_true(k$device == torch_device("cuda", 0))
+  expect_true(k$dtype == torch_long())
+})
+
 test_that("cuda and cpu methods", {
   skip_if_cuda_not_available()
 

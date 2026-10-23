@@ -3330,7 +3330,8 @@ already matches the desired conversion.
 function:: to(other, non_blocking=FALSE, copy=FALSE) -> Tensor
 
 Returns a Tensor with same `torch_dtype` and :class:`torch_device` as
-the Tensor `other`. When `non_blocking`, tries to convert
+the Tensor `other`. `other` can also be passed as the first argument, as in
+`tensor$to(other)`. When `non_blocking`, tries to convert
 asynchronously with respect to the host if possible, e.g., converting a CPU
 Tensor with pinned memory to a CUDA Tensor.
 
@@ -3345,6 +3346,7 @@ tensor$to(dtype = torch_float64())
 
 other <- torch_randn(1, dtype=torch_float64())
 tensor$to(other = other, non_blocking=TRUE)
+tensor$to(other)
 ```
     
 ## to_mkldnn

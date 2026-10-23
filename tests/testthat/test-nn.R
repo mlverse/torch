@@ -924,3 +924,37 @@ test_that("non-persistent buffers are cloned", {
   n1 <- n$clone(deep = TRUE)
   expect_false(identical(n$buffers, n1$buffers))
 })
+
+test_that("nn_module's `to` takes dtype and device from a tensor (#1060)", {
+  m <- nn_module(
+    initialize = function() {
+      self$linear <- nn_linear(2, 2)
+      self$count <- nn_buffer(torch_tensor(1L))
+    }
+  )()
+  y <- torch_tensor(1, dtype = torch_float64())
+
+  m$to(y)
+  expect_true(m$linear$weight$dtype == torch_float64())
+  expect_true(m$count$dtype == torch_long())
+
+  m <- nn_linear(2, 2)
+  m$to(tensor = y)
+  expect_true(m$weight$dtype == torch_float64())
+
+  expect_error(nn_linear(2, 2)$to(torch_tensor(1L)), "floating point")
+  expect_error(nn_linear(2, 2)$to(y, device = "cpu"), "tensor")
+})
+
+test_that("nn_module's `to` moves integer buffers to the device of a tensor (#1060)", {
+  skip_if_cuda_not_available()
+  m <- nn_module(
+    initialize = function() {
+      self$linear <- nn_linear(2, 2)
+      self$count <- nn_buffer(torch_tensor(1L))
+    }
+  )()
+  m$to(torch_tensor(1, device = "cuda"))
+  expect_true(m$linear$weight$device == torch_device("cuda", 0))
+  expect_true(m$count$device == torch_device("cuda", 0))
+})
