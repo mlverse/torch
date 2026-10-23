@@ -237,19 +237,37 @@ nn_Module <- R6::R6Class(
       fn(self)
       invisible(create_nn_module_callable(self))
     },
-    named_parameters = function(recursive = TRUE) {
+    named_parameters = function(recursive = TRUE, remove_duplicate = TRUE) {
+      pars <- private$parameters_
       if (recursive) {
-        self$parameters
-      } else {
-        private$parameters_
+        # the default path goes through the `$parameters` field so that child modules
+        # overriding it (or `named_parameters()` with the old signature) keep working
+        pars <- lapply(private$modules_, function(x) {
+          if (remove_duplicate) x$parameters else x$named_parameters(remove_duplicate = FALSE)
+        })
+        pars <- append(pars, private$parameters_)
+        pars <- unlist(pars, recursive = TRUE, use.names = TRUE)
       }
+      if (remove_duplicate) {
+        pars <- pars[!duplicated(pars)] # unique doesn't preserve the names
+      }
+      pars
     },
-    named_buffers = function(recursive = TRUE) {
+    named_buffers = function(recursive = TRUE, remove_duplicate = TRUE) {
+      bufs <- private$buffers_
       if (recursive) {
-        self$buffers
-      } else {
-        private$buffers_
+        # the default path goes through the `$buffers` field so that child modules
+        # overriding it (or `named_buffers()` with the old signature) keep working
+        bufs <- lapply(private$modules_, function(x) {
+          if (remove_duplicate) x$buffers else x$named_buffers(remove_duplicate = FALSE)
+        })
+        bufs <- append(bufs, private$buffers_)
+        bufs <- unlist(bufs, recursive = TRUE, use.names = TRUE)
       }
+      if (remove_duplicate) {
+        bufs <- bufs[!duplicated(bufs)] # unique doesn't preserve the names
+      }
+      bufs
     },
     .replace_values_from_table = function(table) {
       for (i in seq_along(private$modules_)) {
@@ -298,12 +316,7 @@ nn_Module <- R6::R6Class(
         )
       }
 
-      pars <- lapply(private$modules_, function(x) x$parameters)
-      pars <- append(pars, self$named_parameters(recursive = FALSE))
-      pars <- unlist(pars, recursive = TRUE, use.names = TRUE)
-      pars <- pars[!duplicated(pars)] # unique doesn't preserve the names
-
-      pars
+      self$named_parameters()
     },
     buffers = function(value) {
       if (!missing(value)) {
@@ -314,12 +327,7 @@ nn_Module <- R6::R6Class(
         )
       }
 
-      bufs <- lapply(private$modules_, function(x) x$buffers)
-      bufs <- append(bufs, self$named_buffers(recursive = FALSE))
-      bufs <- unlist(bufs, recursive = TRUE, use.names = TRUE)
-      bufs <- bufs[!duplicated(bufs)] # unique doesn't preserve the names
-
-      bufs
+      self$named_buffers()
     },
     modules = function(value) {
       if (!missing(value)) {
