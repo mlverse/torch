@@ -2,6 +2,12 @@
 
 ## torch (development version)
 
+- Fixed
+  [`torch_arange()`](https://torch.mlverse.org/docs/dev/reference/torch_arange.md)
+  dropping the end point when an integer `dtype` was given as a string,
+  e.g. `dtype = "long"`.
+  ([\#1063](https://github.com/mlverse/torch/issues/1063))
+
 - The
   [`as_array()`](https://torch.mlverse.org/docs/dev/reference/as_array.md)
   generic and its methods now take `...`, so other packages can define

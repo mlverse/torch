@@ -75,7 +75,8 @@
 
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="development version" id="torch-development-version">torch (development version)<a class="anchor" aria-label="anchor" href="#torch-development-version"></a></h2>
-<ul><li><p>The <code><a href="../reference/as_array.html">as_array()</a></code> generic and its methods now take <code>...</code>, so other packages can define methods with extra arguments.</p></li>
+<ul><li><p>Fixed <code><a href="../reference/torch_arange.html">torch_arange()</a></code> dropping the end point when an integer <code>dtype</code> was given as a string, e.g. <code>dtype = "long"</code>. (<a href="https://github.com/mlverse/torch/issues/1063" class="external-link">#1063</a>)</p></li>
+<li><p>The <code><a href="../reference/as_array.html">as_array()</a></code> generic and its methods now take <code>...</code>, so other packages can define methods with extra arguments.</p></li>
 <li>
 <p><code><a href="../reference/nn_multihead_attention.html">nn_multihead_attention()</a></code> and <code><a href="../reference/nnf_multi_head_attention_forward.html">nnf_multi_head_attention_forward()</a></code> are faster and behave like PyTorch (<a href="https://github.com/mlverse/torch/issues/1488" class="external-link">#1488</a>):</p>
 <ul><li>With <code>need_weights = FALSE</code>, they use the fused <code><a href="../reference/torch_scaled_dot_product_attention.html">torch_scaled_dot_product_attention()</a></code> (e.g. causal training is up to 4 times faster on GPU). Inputs with <code>batch_first = TRUE</code> are then no longer transposed, and the output is contiguous.</li>

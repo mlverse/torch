@@ -29,8 +29,8 @@ a
 torch_trunc(a)
 }
 #> torch_tensor
-#> -0
-#> -1
+#>  1
+#>  2
 #>  0
 #> -1
 #> [ CPUFloatType{4} ]
