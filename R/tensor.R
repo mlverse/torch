@@ -72,6 +72,12 @@ Tensor <- R7Class(
     to = function(dtype = NULL, device = NULL, other = NULL, non_blocking = FALSE,
                   copy = FALSE, memory_format = NULL) {
 
+      # Allow `x$to(y)` as a shorthand for `x$to(other = y)`, like in PyTorch.
+      if (is_torch_tensor(dtype) && is.null(other)) {
+        other <- dtype
+        dtype <- NULL
+      }
+
       has_device <- !is.null(device)
       has_dtype <- !is.null(dtype)
       has_other <- !is.null(other)
@@ -82,7 +88,14 @@ Tensor <- R7Class(
           cli_abort("Had {.arg other} but {.arg device} or {.arg dtype} are non {.val NULL}")
         }
 
-        return(private$`_to`(other = other, non_blocking = non_blocking, copy = copy))
+        if (is.null(memory_format)) {
+          memory_format <- torch_preserve_format()
+        }
+
+        return(private$`_to`(
+          other = other, non_blocking = non_blocking, copy = copy,
+          memory_format = memory_format
+        ))
       }
 
       if (!has_dtype) {

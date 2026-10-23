@@ -1,5 +1,11 @@
 # torch (development version)
 
+- `x$to(y)` with a tensor `y` now converts `x` to the dtype and device of `y`, as in
+  PyTorch. Previously this required `x$to(other = y)`. `memory_format` is no longer ignored
+  when converting to the dtype and device of another tensor. (#1060)
+- `nn_module`'s `$to()` now also accepts a tensor, as `module$to(y)` or `module$to(tensor = y)`,
+  and takes both the dtype and the device from it. Integer buffers are now moved to the device
+  of `y` as well, and a non-floating point `y` is an error, as in PyTorch. (#1060)
 - `nn_multihead_attention()` and `nnf_multi_head_attention_forward()` are faster and behave like PyTorch
   (#1488):
   - With `need_weights = FALSE`, they use the fused `torch_scaled_dot_product_attention()` (e.g. causal
