@@ -40,7 +40,7 @@ vec = torch_randn(c(3))
 torch_mv(mat, vec)
 }
 #> torch_tensor
-#>  0.0804
-#> -1.8964
+#>  0.6738
+#> -1.1917
 #> [ CPUFloatType{2} ]
 ```

@@ -88,13 +88,13 @@ out
 }
 #> $L
 #> torch_tensor
-#>  0.8357  0.0000
-#>  0.1751 -2.0757
+#>  0.4545  0.0000
+#>  0.1874  0.9888
 #> [ CPUFloatType{2,2} ]
 #> 
 #> $info
 #> torch_tensor
-#> 2
+#> 0
 #> [ CPUIntType{} ]
 #> 
 ```

@@ -56,8 +56,8 @@ torch_cholesky_solve(b, u)
 torch_mm(a$inverse(), b)
 }
 #> torch_tensor
-#> -0.0527 -0.0593
-#> -0.1502  0.4571
-#>  0.1415  0.0532
+#>  1.1149  1.0940
+#>  1.2927  1.0566
+#>  1.7071  1.7380
 #> [ CPUFloatType{3,2} ]
 ```
