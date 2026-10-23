@@ -924,3 +924,53 @@ test_that("non-persistent buffers are cloned", {
   n1 <- n$clone(deep = TRUE)
   expect_false(identical(n$buffers, n1$buffers))
 })
+
+test_that("named_parameters and named_buffers drop parameters registered under several names (#988)", {
+  # not nn_linear: tracing one bumps the class name in the graph snapshots of test-script_module.R
+  child <- nn_module(
+    "dedup_child",
+    initialize = function() {
+      self$weight <- nn_parameter(torch_randn(3, 3))
+      self$bias <- nn_parameter(torch_randn(3))
+    },
+    forward = function(x) {
+      torch_mm(x, self$weight) + self$bias
+    }
+  )
+  net <- nn_module(
+    initialize = function() {
+      self$w1 <- nn_parameter(torch_randn(3, 3))
+      self$w2 <- self$w1
+      self$b1 <- nn_buffer(torch_randn(3))
+      self$b2 <- self$b1
+      self$child <- child()
+      self$child2 <- self$child
+    },
+    forward = function(x) {
+      self$child(torch_mm(x, self$w2)) + self$b2
+    }
+  )()
+
+  expect_named(net$named_parameters(recursive = FALSE), "w1")
+  expect_named(net$named_parameters(), c("child.weight", "child.bias", "w1"))
+  expect_named(net$parameters, c("child.weight", "child.bias", "w1"))
+  expect_named(net$named_parameters(recursive = FALSE, remove_duplicate = FALSE), c("w1", "w2"))
+  expect_named(
+    net$named_parameters(remove_duplicate = FALSE),
+    c("child.weight", "child.bias", "child2.weight", "child2.bias", "w1", "w2")
+  )
+
+  expect_named(net$named_buffers(recursive = FALSE), "b1")
+  expect_named(net$buffers, "b1")
+  expect_named(net$named_buffers(recursive = FALSE, remove_duplicate = FALSE), c("b1", "b2"))
+
+  # tracing still registers every alias
+  traced <- jit_trace(net, torch_randn(2, 3))
+  expect_named(traced$parameters, c("child.weight", "child.bias", "w1"))
+  expect_named(
+    traced$named_parameters(remove_duplicate = FALSE),
+    c("child.weight", "child.bias", "child2.weight", "child2.bias", "w1", "w2")
+  )
+  x <- torch_randn(2, 3)
+  expect_equal_to_tensor(traced(x), net(x))
+})

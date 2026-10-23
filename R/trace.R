@@ -269,11 +269,11 @@ create_script_module <- function(mod) {
 
   module <- cpp_jit_script_module_new(.compilation_unit, make_script_module_name(mod))
 
-  iwalk(mod$named_parameters(recursive = FALSE), function(par, name) {
+  iwalk(mod$named_parameters(recursive = FALSE, remove_duplicate = FALSE), function(par, name) {
     module$register_parameter(name, par)
   })
 
-  iwalk(mod$named_buffers(recursive = FALSE), function(buf, name) {
+  iwalk(mod$named_buffers(recursive = FALSE, remove_duplicate = FALSE), function(buf, name) {
     module$register_buffer(name, buf)
   })
 

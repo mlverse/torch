@@ -1,5 +1,8 @@
 # torch (development version)
 
+- `nn_module`'s `$named_parameters()` and `$named_buffers()` now return each tensor only once
+  with `recursive = FALSE` too, matching `recursive = TRUE` and the `$parameters` field.
+  Both gain a `remove_duplicate` argument, as in PyTorch, to keep aliases. (#988)
 - `nn_multihead_attention()` and `nnf_multi_head_attention_forward()` are faster and behave like PyTorch
   (#1488):
   - With `need_weights = FALSE`, they use the fused `torch_scaled_dot_product_attention()` (e.g. causal
