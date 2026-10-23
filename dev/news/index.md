@@ -2,6 +2,11 @@
 
 ## torch (development version)
 
+- The
+  [`as_array()`](https://torch.mlverse.org/docs/dev/reference/as_array.md)
+  generic and its methods now take `...`, so other packages can define
+  methods with extra arguments.
+
 - [`nn_multihead_attention()`](https://torch.mlverse.org/docs/dev/reference/nn_multihead_attention.md)
   and
   [`nnf_multi_head_attention_forward()`](https://torch.mlverse.org/docs/dev/reference/nnf_multi_head_attention_forward.md)

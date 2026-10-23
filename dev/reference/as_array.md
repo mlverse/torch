@@ -5,7 +5,7 @@ Converts to array
 ## Usage
 
 ``` r
-as_array(x)
+as_array(x, ...)
 ```
 
 ## Arguments
@@ -13,3 +13,7 @@ as_array(x)
 - x:
 
   object to be converted into an array
+
+- ...:
+
+  additional arguments passed to methods.

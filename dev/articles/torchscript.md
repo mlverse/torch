@@ -70,7 +70,8 @@ The traced function can now be invoked as a regular R function:
 
 traced_fn(torch_randn(3))
 #> torch_tensor
-#>  2.5197
+#> 0.01 *
+#>  8.5097
 #>  0.0000
 #>  0.0000
 #> [ CPUFloatType{3} ]
@@ -108,9 +109,9 @@ example inputs to other methods. Traced modules look like normal
 
 traced_module(torch_randn(3, 10))
 #> torch_tensor
-#>  0.5466
-#>  0.6026
-#>  0.6805
+#> -0.2224
+#> -0.1467
+#> -0.0803
 #> [ CPUFloatType{3,1} ][ grad_fn = <AddmmBackward0> ]
 ```
 
@@ -152,9 +153,9 @@ traced_fn(torch_randn(11, 5, 5))
 traced_dropout <- jit_trace(nn_dropout(), torch_ones(5,5))
 traced_dropout(torch_ones(3,3))
 #> torch_tensor
-#>  0  2  2
-#>  0  0  2
-#>  0  0  0
+#>  2  2  0
+#>  2  0  2
+#>  2  0  2
 #> [ CPUFloatType{3,3} ]
 traced_dropout$eval()
 #> [1] FALSE
@@ -179,69 +180,69 @@ jit_trace(fn, torch_tensor(1), 1)
 #> Error:
 #> ! Only tensors or (possibly nested) dict or tuples of tensors can be inputs to traced functions. Got float
 #> Exception raised from addInput at /Users/runner/work/libtorch-mac-m1/libtorch-mac-m1/pytorch/torch/csrc/jit/frontend/tracer.cpp:424 (most recent call first):
-#> frame #0: c10::Error::Error(c10::SourceLocation, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char>>) + 56 (0x107e72b74 in libc10.dylib)
-#> frame #1: c10::detail::torchCheckFail(char const*, char const*, unsigned int, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char>> const&) + 120 (0x107e700e8 in libc10.dylib)
-#> frame #2: torch::jit::tracer::addInput(std::__1::shared_ptr<torch::jit::tracer::TracingState> const&, c10::IValue const&, c10::Type::SingletonOrSharedTypePtr<c10::Type> const&, torch::jit::Value*) + 5780 (0x121f00978 in libtorch_cpu.dylib)
-#> frame #3: torch::jit::tracer::addInput(std::__1::shared_ptr<torch::jit::tracer::TracingState> const&, c10::IValue const&, c10::Type::SingletonOrSharedTypePtr<c10::Type> const&, torch::jit::Value*) + 4288 (0x121f003a4 in libtorch_cpu.dylib)
-#> frame #4: torch::jit::tracer::trace(std::__1::vector<c10::IValue, std::__1::allocator<c10::IValue>>, std::__1::function<std::__1::vector<c10::IValue, std::__1::allocator<c10::IValue>> (std::__1::vector<c10::IValue, std::__1::allocator<c10::IValue>>)> const&, std::__1::function<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char>> (at::Tensor const&)>, bool, bool, torch::jit::Module*, std::__1::vector<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char>>, std::__1::allocator<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char>>>> const&) + 660 (0x121efe158 in libtorch_cpu.dylib)
-#> frame #5: _lantern_trace_fn + 252 (0x10c4675fc in liblantern.dylib)
-#> frame #6: cpp_trace_function(Rcpp::Function_Impl<Rcpp::PreserveStorage>, XPtrTorchStack, XPtrTorchCompilationUnit, XPtrTorchstring, bool, XPtrTorchScriptModule, bool, bool) + 528 (0x10b60f4d0 in torchpkg.so)
-#> frame #7: _torch_cpp_trace_function + 720 (0x10b203cd0 in torchpkg.so)
-#> frame #8: R_doDotCall + 2940 (0x10097ee7c in libR.dylib)
-#> frame #9: bcEval_loop + 24000 (0x1009c47c0 in libR.dylib)
-#> frame #10: bcEval + 628 (0x1009b07f4 in libR.dylib)
-#> frame #11: Rf_eval + 356 (0x1009afea4 in libR.dylib)
-#> frame #12: R_execClosure + 796 (0x1009b2a9c in libR.dylib)
-#> frame #13: applyClosure_core + 164 (0x1009b1ba4 in libR.dylib)
-#> frame #14: Rf_eval + 1640 (0x1009b03a8 in libR.dylib)
-#> frame #15: do_eval + 1340 (0x1009b72bc in libR.dylib)
-#> frame #16: bcEval_loop + 20580 (0x1009c3a64 in libR.dylib)
-#> frame #17: bcEval + 628 (0x1009b07f4 in libR.dylib)
-#> frame #18: Rf_eval + 356 (0x1009afea4 in libR.dylib)
-#> frame #19: forcePromise + 248 (0x1009b0a78 in libR.dylib)
-#> frame #20: Rf_eval + 648 (0x1009affc8 in libR.dylib)
-#> frame #21: do_withVisible + 64 (0x1009b7600 in libR.dylib)
-#> frame #22: do_internal + 400 (0x100a127d0 in libR.dylib)
-#> frame #23: bcEval_loop + 30772 (0x1009c6234 in libR.dylib)
-#> frame #24: bcEval + 628 (0x1009b07f4 in libR.dylib)
-#> frame #25: Rf_eval + 356 (0x1009afea4 in libR.dylib)
-#> frame #26: forcePromise + 248 (0x1009b0a78 in libR.dylib)
-#> frame #27: Rf_eval + 648 (0x1009affc8 in libR.dylib)
-#> frame #28: forcePromise + 248 (0x1009b0a78 in libR.dylib)
-#> frame #29: getvar + 412 (0x1009cfb9c in libR.dylib)
-#> frame #30: bcEval_loop + 42712 (0x1009c90d8 in libR.dylib)
-#> frame #31: bcEval + 628 (0x1009b07f4 in libR.dylib)
-#> frame #32: Rf_eval + 356 (0x1009afea4 in libR.dylib)
-#> frame #33: R_execClosure + 796 (0x1009b2a9c in libR.dylib)
-#> frame #34: applyClosure_core + 164 (0x1009b1ba4 in libR.dylib)
-#> frame #35: Rf_eval + 1640 (0x1009b03a8 in libR.dylib)
-#> frame #36: do_eval + 1340 (0x1009b72bc in libR.dylib)
-#> frame #37: bcEval_loop + 20580 (0x1009c3a64 in libR.dylib)
-#> frame #38: bcEval + 628 (0x1009b07f4 in libR.dylib)
-#> frame #39: Rf_eval + 356 (0x1009afea4 in libR.dylib)
-#> frame #40: R_execClosure + 796 (0x1009b2a9c in libR.dylib)
-#> frame #41: applyClosure_core + 164 (0x1009b1ba4 in libR.dylib)
-#> frame #42: Rf_eval + 1640 (0x1009b03a8 in libR.dylib)
-#> frame #43: do_begin + 404 (0x1009b5314 in libR.dylib)
-#> frame #44: Rf_eval + 1024 (0x1009b0140 in libR.dylib)
-#> frame #45: R_execClosure + 796 (0x1009b2a9c in libR.dylib)
-#> frame #46: applyClosure_core + 164 (0x1009b1ba4 in libR.dylib)
-#> frame #47: Rf_eval + 1640 (0x1009b03a8 in libR.dylib)
-#> frame #48: do_docall + 628 (0x100949bb4 in libR.dylib)
-#> frame #49: bcEval_loop + 20580 (0x1009c3a64 in libR.dylib)
-#> frame #50: bcEval + 628 (0x1009b07f4 in libR.dylib)
-#> frame #51: Rf_eval + 356 (0x1009afea4 in libR.dylib)
-#> frame #52: R_execClosure + 796 (0x1009b2a9c in libR.dylib)
-#> frame #53: applyClosure_core + 164 (0x1009b1ba4 in libR.dylib)
-#> frame #54: Rf_eval + 1640 (0x1009b03a8 in libR.dylib)
-#> frame #55: do_docall + 628 (0x100949bb4 in libR.dylib)
-#> frame #56: bcEval_loop + 20580 (0x1009c3a64 in libR.dylib)
-#> frame #57: bcEval + 628 (0x1009b07f4 in libR.dylib)
-#> frame #58: Rf_eval + 356 (0x1009afea4 in libR.dylib)
-#> frame #59: R_execClosure + 796 (0x1009b2a9c in libR.dylib)
-#> frame #60: applyClosure_core + 164 (0x1009b1ba4 in libR.dylib)
-#> frame #61: Rf_eval + 1640 (0x1009b03a8 in libR.dylib)
-#> frame #62: forcePromise + 248 (0x1009b0a78 in libR.dylib)
+#> frame #0: c10::Error::Error(c10::SourceLocation, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char>>) + 56 (0x10ab1ab74 in libc10.dylib)
+#> frame #1: c10::detail::torchCheckFail(char const*, char const*, unsigned int, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char>> const&) + 120 (0x10ab180e8 in libc10.dylib)
+#> frame #2: torch::jit::tracer::addInput(std::__1::shared_ptr<torch::jit::tracer::TracingState> const&, c10::IValue const&, c10::Type::SingletonOrSharedTypePtr<c10::Type> const&, torch::jit::Value*) + 5780 (0x123f00978 in libtorch_cpu.dylib)
+#> frame #3: torch::jit::tracer::addInput(std::__1::shared_ptr<torch::jit::tracer::TracingState> const&, c10::IValue const&, c10::Type::SingletonOrSharedTypePtr<c10::Type> const&, torch::jit::Value*) + 4288 (0x123f003a4 in libtorch_cpu.dylib)
+#> frame #4: torch::jit::tracer::trace(std::__1::vector<c10::IValue, std::__1::allocator<c10::IValue>>, std::__1::function<std::__1::vector<c10::IValue, std::__1::allocator<c10::IValue>> (std::__1::vector<c10::IValue, std::__1::allocator<c10::IValue>>)> const&, std::__1::function<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char>> (at::Tensor const&)>, bool, bool, torch::jit::Module*, std::__1::vector<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char>>, std::__1::allocator<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char>>>> const&) + 660 (0x123efe158 in libtorch_cpu.dylib)
+#> frame #5: _lantern_trace_fn + 252 (0x10f08f5fc in liblantern.dylib)
+#> frame #6: cpp_trace_function(Rcpp::Function_Impl<Rcpp::PreserveStorage>, XPtrTorchStack, XPtrTorchCompilationUnit, XPtrTorchstring, bool, XPtrTorchScriptModule, bool, bool) + 528 (0x10e2374d0 in torchpkg.so)
+#> frame #7: _torch_cpp_trace_function + 720 (0x10de2bcd0 in torchpkg.so)
+#> frame #8: R_doDotCall + 2940 (0x1036dee7c in libR.dylib)
+#> frame #9: bcEval_loop + 24000 (0x1037247c0 in libR.dylib)
+#> frame #10: bcEval + 628 (0x1037107f4 in libR.dylib)
+#> frame #11: Rf_eval + 356 (0x10370fea4 in libR.dylib)
+#> frame #12: R_execClosure + 796 (0x103712a9c in libR.dylib)
+#> frame #13: applyClosure_core + 164 (0x103711ba4 in libR.dylib)
+#> frame #14: Rf_eval + 1640 (0x1037103a8 in libR.dylib)
+#> frame #15: do_eval + 1340 (0x1037172bc in libR.dylib)
+#> frame #16: bcEval_loop + 20580 (0x103723a64 in libR.dylib)
+#> frame #17: bcEval + 628 (0x1037107f4 in libR.dylib)
+#> frame #18: Rf_eval + 356 (0x10370fea4 in libR.dylib)
+#> frame #19: forcePromise + 248 (0x103710a78 in libR.dylib)
+#> frame #20: Rf_eval + 648 (0x10370ffc8 in libR.dylib)
+#> frame #21: do_withVisible + 64 (0x103717600 in libR.dylib)
+#> frame #22: do_internal + 400 (0x1037727d0 in libR.dylib)
+#> frame #23: bcEval_loop + 30772 (0x103726234 in libR.dylib)
+#> frame #24: bcEval + 628 (0x1037107f4 in libR.dylib)
+#> frame #25: Rf_eval + 356 (0x10370fea4 in libR.dylib)
+#> frame #26: forcePromise + 248 (0x103710a78 in libR.dylib)
+#> frame #27: Rf_eval + 648 (0x10370ffc8 in libR.dylib)
+#> frame #28: forcePromise + 248 (0x103710a78 in libR.dylib)
+#> frame #29: getvar + 412 (0x10372fb9c in libR.dylib)
+#> frame #30: bcEval_loop + 42712 (0x1037290d8 in libR.dylib)
+#> frame #31: bcEval + 628 (0x1037107f4 in libR.dylib)
+#> frame #32: Rf_eval + 356 (0x10370fea4 in libR.dylib)
+#> frame #33: R_execClosure + 796 (0x103712a9c in libR.dylib)
+#> frame #34: applyClosure_core + 164 (0x103711ba4 in libR.dylib)
+#> frame #35: Rf_eval + 1640 (0x1037103a8 in libR.dylib)
+#> frame #36: do_eval + 1340 (0x1037172bc in libR.dylib)
+#> frame #37: bcEval_loop + 20580 (0x103723a64 in libR.dylib)
+#> frame #38: bcEval + 628 (0x1037107f4 in libR.dylib)
+#> frame #39: Rf_eval + 356 (0x10370fea4 in libR.dylib)
+#> frame #40: R_execClosure + 796 (0x103712a9c in libR.dylib)
+#> frame #41: applyClosure_core + 164 (0x103711ba4 in libR.dylib)
+#> frame #42: Rf_eval + 1640 (0x1037103a8 in libR.dylib)
+#> frame #43: do_begin + 404 (0x103715314 in libR.dylib)
+#> frame #44: Rf_eval + 1024 (0x103710140 in libR.dylib)
+#> frame #45: R_execClosure + 796 (0x103712a9c in libR.dylib)
+#> frame #46: applyClosure_core + 164 (0x103711ba4 in libR.dylib)
+#> frame #47: Rf_eval + 1640 (0x1037103a8 in libR.dylib)
+#> frame #48: do_docall + 628 (0x1036a9bb4 in libR.dylib)
+#> frame #49: bcEval_loop + 20580 (0x103723a64 in libR.dylib)
+#> frame #50: bcEval + 628 (0x1037107f4 in libR.dylib)
+#> frame #51: Rf_eval + 356 (0x10370fea4 in libR.dylib)
+#> frame #52: R_execClosure + 796 (0x103712a9c in libR.dylib)
+#> frame #53: applyClosure_core + 164 (0x103711ba4 in libR.dylib)
+#> frame #54: Rf_eval + 1640 (0x1037103a8 in libR.dylib)
+#> frame #55: do_docall + 628 (0x1036a9bb4 in libR.dylib)
+#> frame #56: bcEval_loop + 20580 (0x103723a64 in libR.dylib)
+#> frame #57: bcEval + 628 (0x1037107f4 in libR.dylib)
+#> frame #58: Rf_eval + 356 (0x10370fea4 in libR.dylib)
+#> frame #59: R_execClosure + 796 (0x103712a9c in libR.dylib)
+#> frame #60: applyClosure_core + 164 (0x103711ba4 in libR.dylib)
+#> frame #61: Rf_eval + 1640 (0x1037103a8 in libR.dylib)
+#> frame #62: forcePromise + 248 (0x103710a78 in libR.dylib)
 #> :
 ```
 
