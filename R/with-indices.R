@@ -4,7 +4,7 @@ torch_max_pool1d_with_indices <- function(self, kernel_size, stride = list(), pa
     self, kernel_size, stride, padding, dilation,
     ceil_mode
   )
-  out[[2]]$add_(1L, 1L)
+  out[[2]] <- out[[2]]$add(1L, 1L)
   out
 }
 
@@ -14,7 +14,7 @@ torch_max_pool2d_with_indices <- function(self, kernel_size, stride = list(), pa
     self, kernel_size, stride, padding, dilation,
     ceil_mode
   )
-  out[[2]]$add_(1L, 1L)
+  out[[2]] <- out[[2]]$add(1L, 1L)
   out
 }
 
@@ -34,7 +34,7 @@ torch_max_pool3d_with_indices <- function(self, kernel_size, stride = list(), pa
     self, kernel_size, stride, padding, dilation,
     ceil_mode
   )
-  out[[2]]$add_(1L, 1L)
+  out[[2]] <- out[[2]]$add(1L, 1L)
   out
 }
 
@@ -51,7 +51,7 @@ torch_max_pool3d_with_indices_out <- function(out, indices, self, kernel_size, s
 torch_max <- function(self, dim, other, keepdim = FALSE) {
   o <- do.call(.torch_max, as.list(environment()))
   if (is.list(o) && length(o) == 2) {
-    o[[2]]$add_(1L, 1L)
+    o[[2]] <- o[[2]]$add(1L, 1L)
   }
   o
 }
@@ -60,7 +60,7 @@ torch_min <- function(self, dim, other, keepdim = FALSE) {
   args <- as.list(environment())
   o <- do.call(.torch_min, args)
   if (is.list(o) && length(o) == 2) {
-    o[[2]]$add_(1L, 1L)
+    o[[2]] <- o[[2]]$add(1L, 1L)
   }
   o
 }
@@ -133,7 +133,7 @@ torch_sort <- function(self, dim = -1L, descending = FALSE, stable) {
   } else {
     out <- .torch_sort(self = self, dim = dim, descending = descending, stable = stable)
   }
-  out[[2]]$add_(1L)
+  out[[2]] <- out[[2]]$add(1L)
   out
 }
 

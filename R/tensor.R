@@ -153,7 +153,7 @@ Tensor <- R7Class(
     },
     topk = function(k, dim = -1L, largest = TRUE, sorted = TRUE) {
       o <- private$`_topk`(k, dim, largest, sorted)
-      o[[2]]$add_(1L)
+      o[[2]] <- o[[2]]$add(1L)
       o
     },
     repeat_interleave = function(repeats, dim = NULL, output_size = NULL) {
@@ -260,7 +260,7 @@ Tensor <- R7Class(
       } else {
         o <- private$`_sort`(dim = dim, descending = descending, stable = stable)
       }
-      o[[2]]$add_(1L)
+      o[[2]] <- o[[2]]$add(1L)
       o
     },
     norm = function(p = 2, dim, keepdim = FALSE, dtype) {

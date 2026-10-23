@@ -130,3 +130,36 @@ test_that("ignore_index is 1 indexed", {
     nn_cross_entropy_loss(ignore_index = 2)(logits, torch_tensor(rep(2L, 3L), dtype = torch_long()))
   )))
 })
+
+test_that("backward works through max, min, sort, topk and max_pool with indices (#1185)", {
+  x <- torch_tensor(matrix(c(1, 5, 3, 2, 8, 4), nrow = 2), requires_grad = TRUE)
+
+  torch_max(x, dim = 2)[[1]]$sum()$backward()
+  expect_equal_to_r(x$grad, matrix(c(0, 1, 0, 0, 1, 0), nrow = 2))
+
+  x$grad$zero_()
+  torch_min(x, dim = 2)[[1]]$sum()$backward()
+  expect_equal_to_r(x$grad, matrix(c(1, 0, 0, 1, 0, 0), nrow = 2))
+
+  for (sort in list(torch_sort, function(x, dim) x$sort(dim = dim))) {
+    x$grad$zero_()
+    out <- sort(x, dim = 2)
+    (out[[1]] * torch_tensor(c(1, 2, 3)))$sum()$backward()
+    expect_equal_to_r(out[[2]], matrix(c(1L, 2L, 2L, 3L, 3L, 1L), nrow = 2))
+    expect_equal_to_r(x$grad, matrix(c(1, 3, 2, 1, 3, 2), nrow = 2))
+  }
+
+  for (topk in list(torch_topk, function(x, k) x$topk(k))) {
+    x$grad$zero_()
+    out <- topk(x, 2)
+    out[[1]]$sum()$backward()
+    expect_equal_to_r(out[[2]], matrix(c(3L, 1L, 2L, 3L), nrow = 2))
+    expect_equal_to_r(x$grad, matrix(c(0, 1, 1, 0, 1, 1), nrow = 2))
+  }
+
+  y <- torch_randn(1, 1, 4, 4, requires_grad = TRUE)
+  out <- nnf_max_pool2d(y, kernel_size = 2, return_indices = TRUE)
+  out[[1]]$sum()$backward()
+  expect_equal_to_r(y$grad$sum(), 4)
+  expect_true(out[[2]]$min()$item() >= 1)
+})
