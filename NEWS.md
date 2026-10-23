@@ -1,5 +1,7 @@
 # torch (development version)
 
+- Fixed `torch_arange()` dropping the end point when an integer `dtype` was given as a string,
+  e.g. `dtype = "long"`. (#1063)
 - The `as_array()` generic and its methods now take `...`, so other packages can define
   methods with extra arguments.
 - `nn_multihead_attention()` and `nnf_multi_head_attention_forward()` are faster and behave like PyTorch
