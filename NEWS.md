@@ -1,5 +1,7 @@
 # torch (development version)
 
+- Fixed `torch_arange()` dropping the end point when an integer `dtype` was given as a string,
+  e.g. `dtype = "long"`. (#1063)
 - `nn_multihead_attention()` and `nnf_multi_head_attention_forward()` are faster and behave like PyTorch
   (#1488):
   - With `need_weights = FALSE`, they use the fused `torch_scaled_dot_product_attention()` (e.g. causal
