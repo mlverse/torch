@@ -392,16 +392,17 @@ torch_tensor <- function(data, dtype = NULL, device = NULL, requires_grad = FALS
 #' Converts to array
 #'
 #' @param x object to be converted into an array
+#' @param ... additional arguments passed to methods.
 #'
 #' @export
-as_array <- function(x) {
+as_array <- function(x, ...) {
   UseMethod("as_array", x)
 }
 
 # Makes `as_array()` behave like `as.array()`.
 #' @export
-as_array.default <- function(x) {
-  base::as.array(x)
+as_array.default <- function(x, ...) {
+  base::as.array(x, ...)
 }  
 
 #' @export
@@ -452,7 +453,7 @@ as_array_impl <- function(x) {
 }
 
 #' @export
-as_array.torch_tensor <- function(x) {
+as_array.torch_tensor <- function(x, ...) {
   # dequantize before converting
   if (x$is_quantized()) {
     x <- x$dequantize()
