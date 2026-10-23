@@ -1,5 +1,7 @@
 # torch (development version)
 
+- The `as_array()` generic and its methods now take `...`, so other packages can define
+  methods with extra arguments.
 - `nn_multihead_attention()` and `nnf_multi_head_attention_forward()` are faster and behave like PyTorch
   (#1488):
   - With `need_weights = FALSE`, they use the fused `torch_scaled_dot_product_attention()` (e.g. causal
