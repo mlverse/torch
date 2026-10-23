@@ -1,5 +1,10 @@
 # torch (development version)
 
+- Fixed the backward pass through `torch_max()`, `torch_min()`, `torch_sort()`, `torch_topk()`
+  (and the `$sort()` and `$topk()` methods) with indices, and through max pooling with
+  `return_indices = TRUE`, which failed with "one of the variables needed for gradient
+  computation has been modified by an inplace operation". The returned indices were shifted to
+  1-based in place, but autograd had saved them for the backward pass. (#1185)
 - `nn_multihead_attention()` and `nnf_multi_head_attention_forward()` are faster and behave like PyTorch
   (#1488):
   - With `need_weights = FALSE`, they use the fused `torch_scaled_dot_product_attention()` (e.g. causal
