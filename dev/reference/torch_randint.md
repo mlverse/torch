@@ -89,7 +89,7 @@ torch_randint(0, 10, size = list(2, 2))
 torch_randint(3, 10, list(2, 2))
 }
 #> torch_tensor
-#>  9  6
-#>  8  4
+#>  5  3
+#>  3  9
 #> [ CPUFloatType{2,2} ]
 ```

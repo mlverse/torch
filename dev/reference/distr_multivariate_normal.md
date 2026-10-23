@@ -77,7 +77,7 @@ m <- distr_multivariate_normal(torch_zeros(2), torch_eye(2))
 m$sample() # normally distributed with mean=`[0,0]` and covariance_matrix=`I`
 }
 #> torch_tensor
-#>  0.7850
-#>  1.4299
+#>  1.1834
+#> -0.3267
 #> [ CPUFloatType{2} ]
 ```

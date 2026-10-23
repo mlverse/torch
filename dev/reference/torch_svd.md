@@ -86,6 +86,6 @@ v = out[[3]]
 torch_dist(a_big, torch_matmul(torch_matmul(u, torch_diag_embed(s)), v$transpose(-2, -1)))
 }
 #> torch_tensor
-#> 2.6829934540728573e-06
+#> 2.3220675302582094e-06
 #> [ CPUFloatType{} ]
 ```
