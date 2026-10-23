@@ -1,6 +1,24 @@
 # torch (development version)
 
 - Add lantern compilation for cuda 12.9 (@cregouby #1483)
+- `nn_multihead_attention()` and `nnf_multi_head_attention_forward()` are faster and behave like PyTorch
+  (#1488):
+  - With `need_weights = FALSE`, they use the fused `torch_scaled_dot_product_attention()` (e.g. causal
+    training is up to 4 times faster on GPU). Inputs with `batch_first = TRUE` are then no longer transposed, and the
+    output is contiguous.
+  - In evaluation mode and without gradients, self-attention with `batch_first = TRUE` uses the fused native
+    implementation, under the same conditions as in PyTorch, except for masked attention with
+    `need_weights = FALSE`, where the scaled dot product attention is faster.
+  - The new `is_causal` argument is a hint that `attn_mask` is the causal mask, which then allows the fastest
+    attention kernels. `nn_transformer_encoder_layer()` passes it on.
+  - Self-attention is detected by checking whether `query`, `key` and `value` are the same tensor, instead of
+    comparing their values in every forward pass.
+  - Masks are checked for their shapes, and may be non-contiguous.
+- Fixed `nn_multihead_attention()` and `nnf_multi_head_attention_forward()` with `add_zero_attn = TRUE`, which
+  failed because the zero attention was added to the keys twice instead of to the keys and values.
+- Integer (e.g. `torch_uint8()`) masks in `nn_multihead_attention()` are now treated as boolean masks, as
+  documented, instead of being added to the attention scores.
+- `nn_multihead_attention()` with `kdim` or `vdim` no longer ignores `avg_weights`.
 - An error raised inside a `cuda*` package's `lib_path()` no longer aborts torch
   startup. `load_cudatoolkit_libs()` now catches it, warns naming the toolkit
   package at fault, and continues without preloading those libraries, instead of

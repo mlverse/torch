@@ -534,6 +534,13 @@ nnf_threshold_ <- function(input, threshold, value) {
 #' @param static_v currently undocumented.
 #' @param batch_first Logical; whether to expect query, key, and value to have 
 #'   batch as their first parameter, and to return output with batch first.
+#' @param is_causal Logical; a hint that `attn_mask` is the causal mask, which then has to be provided.
+#'   If `need_weights` is `FALSE` and there is no `key_padding_mask`, the causal mask is applied by
+#'   [torch_scaled_dot_product_attention()] instead of `attn_mask`, which allows faster kernels.
+#'
+#' @details
+#' When `need_weights` is `FALSE`, the attention is computed with the fused
+#' [torch_scaled_dot_product_attention()], like in PyTorch.
 #'
 #' @export
 nnf_multi_head_attention_forward <- function(query, # type: Tensor
@@ -560,217 +567,258 @@ nnf_multi_head_attention_forward <- function(query, # type: Tensor
                                              v_proj_weight = NULL, # type: Optional[Tensor]
                                              static_k = NULL, # type: Optional[Tensor]
                                              static_v = NULL, # type: Optional[Tensor])
-                                             batch_first = FALSE # type: bool
+                                             batch_first = FALSE, # type: bool
+                                             is_causal = FALSE # type: bool
 ) {
-  if (batch_first) {
+  # Like in PyTorch, self-attention is detected by checking whether query, key and value are the same tensor
+  # (and not by comparing their values, which is expensive). This has to happen before transposing them.
+  key_is_value <- is_same_tensor(key, value)
+  self_attention <- key_is_value && is_same_tensor(query, key)
+
+  # Without the attention weights, we use the fused scaled dot product attention, like PyTorch does. In the
+  # common case where nothing is added to the keys and values, q, k and v only need to be viewed in its layout
+  # (bsz, num_heads, length, head_dim), so inputs with the batch first don't have to be transposed.
+  fast_path <- !need_weights && is.null(bias_k) && is.null(bias_v) && !add_zero_attn && is.null(static_k) &&
+    is.null(static_v)
+  if (batch_first && !fast_path) {
     query <- torch_transpose(query, 1, 2)
     key <- torch_transpose(key, 1, 2)
     value <- torch_transpose(value, 1, 2)
   }
+  # whether query, key and value are of shape (bsz, length, embed_dim) instead of (length, bsz, embed_dim)
+  is_bsz_first <- batch_first && fast_path
   o <- query$size()
-  tgt_len <- o[[1]]
-  bsz <- o[[2]]
+  if (is_bsz_first) {
+    bsz <- o[[1]]
+    tgt_len <- o[[2]]
+    src_len <- key$size(2)
+  } else {
+    tgt_len <- o[[1]]
+    bsz <- o[[2]]
+    src_len <- key$size(1)
+  }
   embed_dim <- o[[3]]
 
+  head_dim <- embed_dim %/% num_heads
+  if (head_dim * num_heads != embed_dim) {
+    value_error("embed_dim ({embed_dim}) must be divisible by num_heads ({num_heads})")
+  }
 
-  head_dim <- floor(embed_dim / num_heads)
-
-  scaling <- head_dim^(-0.5)
+  attn_mask <- mha_canonical_mask(attn_mask, "attn_mask", query$dtype)
+  key_padding_mask <- mha_canonical_mask(key_padding_mask, "key_padding_mask", query$dtype)
+  if (is_causal && is.null(attn_mask)) {
+    runtime_error(paste0(
+      "Need attn_mask if specifying the is_causal hint. You may use ",
+      "`nn_transformer_encoder_layer()` with `is_causal = TRUE` to create this mask."
+    ))
+  }
+  if (!is.null(attn_mask)) {
+    mha_check_attn_mask(attn_mask, bsz, num_heads, tgt_len, src_len)
+  }
+  # With the is_causal hint, the fused attention can apply the causal mask itself, which allows using the
+  # fastest kernels. A key padding mask is merged into the attention mask, which is then no longer causal.
+  if (is_causal && fast_path && is.null(key_padding_mask)) {
+    attn_mask <- NULL
+  } else {
+    is_causal <- FALSE
+  }
 
   if (!use_separate_proj_weight) {
-    if (torch_equal(query, key) && torch_equal(key, value)) {
-      # self-attention
+    if (self_attention) {
       o <- nnf_linear(query, in_proj_weight, in_proj_bias)$chunk(3, dim = -1)
       q <- o[[1]]
       k <- o[[2]]
       v <- o[[3]]
-    } else if (torch_equal(key, value)) {
-      # encoder-decoder attention
-      #             # This is inline in_proj function with in_proj_weight and in_proj_bias
-      b_ <- in_proj_bias
-      start_ <- 1
-      end_ <- embed_dim
-      w_ <- in_proj_weight[start_:end_, ]
-
-      if (!is.null(b_)) {
-        b_ <- b_[start_:end_]
-      }
-
-      q <- nnf_linear(query, w_, b_)
-
-      if (is.null(key)) {
-        k <- NULL
-        v <- NULL
-      } else {
-        b_ <- in_proj_bias
-        start_ <- embed_dim + 1
-        end_ <- NULL
-        w_ <- in_proj_weight[start_:N, ]
-        if (!is.null(b_)) {
-          b_ <- b_[start_:N]
-        }
-        o <- nnf_linear(key, w_, b_)$chunk(2, dim = -1)
+    } else {
+      w <- in_proj_weight$split(c(embed_dim, 2 * embed_dim))
+      b <- if (is.null(in_proj_bias)) list(NULL, NULL) else in_proj_bias$split(c(embed_dim, 2 * embed_dim))
+      q <- nnf_linear(query, w[[1]], b[[1]])
+      if (key_is_value) {
+        # encoder-decoder attention
+        o <- nnf_linear(key, w[[2]], b[[2]])$chunk(2, dim = -1)
         k <- o[[1]]
         v <- o[[2]]
+      } else {
+        w <- w[[2]]$chunk(2)
+        b <- if (is.null(in_proj_bias)) list(NULL, NULL) else b[[2]]$chunk(2)
+        k <- nnf_linear(key, w[[1]], b[[1]])
+        v <- nnf_linear(value, w[[2]], b[[2]])
       }
-    } else {
-
-      # This is inline in_proj function with in_proj_weight and in_proj_bias
-      b_ <- in_proj_bias
-      start_ <- 1
-      end_ <- embed_dim
-      w_ <- in_proj_weight[start_:end_, ]
-      if (!is.null(b_)) {
-        b_ <- b_[start_:end_]
-      }
-      q <- nnf_linear(query, w_, b_)
-
-
-      # This is inline in_proj function with in_proj_weight and in_proj_bias
-      b_ <- in_proj_bias
-      start_ <- embed_dim + 1
-      end_ <- embed_dim * 2
-      w_ <- in_proj_weight[start_:end_, ]
-      if (!is.null(b_)) {
-        b_ <- b_[start_:end_]
-      }
-      k <- nnf_linear(key, w_, b_)
-
-      # This is inline in_proj function with in_proj_weight and in_proj_bias
-      b_ <- in_proj_bias
-      start_ <- embed_dim * 2 + 1
-      end_ <- NULL
-      w_ <- in_proj_weight[start_:N, ]
-      if (!is.null(b_)) {
-        b_ <- b_[start_:N]
-      }
-      v <- nnf_linear(value, w_, b_)
     }
   } else {
-    if (!is.null(in_proj_bias)) {
-      q <- nnf_linear(query, q_proj_weight, in_proj_bias[1:embed_dim])
-      k <- nnf_linear(key, k_proj_weight, in_proj_bias[(embed_dim + 1):(embed_dim * 2)])
-      v <- nnf_linear(value, v_proj_weight, in_proj_bias[(embed_dim * 2 + 1):N])
+    b <- if (is.null(in_proj_bias)) list(NULL, NULL, NULL) else in_proj_bias$chunk(3)
+    q <- nnf_linear(query, q_proj_weight, b[[1]])
+    k <- nnf_linear(key, k_proj_weight, b[[2]])
+    v <- nnf_linear(value, v_proj_weight, b[[3]])
+  }
+
+  if (fast_path) {
+    to_heads <- if (is_bsz_first) {
+      function(x) x$view(c(bsz, -1, num_heads, head_dim))$transpose(2, 3)
     } else {
-      q <- nnf_linear(query, q_proj_weight, in_proj_bias)
-      k <- nnf_linear(key, k_proj_weight, in_proj_bias)
-      v <- nnf_linear(value, v_proj_weight, in_proj_bias)
+      function(x) x$view(c(-1, bsz, num_heads, head_dim))$permute(c(2, 3, 1, 4))
     }
-  }
-
-  q <- q * scaling
-
-  if (!is.null(bias_k) && !is.null(bias_v)) {
-    if (is.null(static_k) && is.null(static_v)) {
-      k <- torch_cat(list(k, bias_k[["repeat"]](c(1, bsz, 1))))
-      v <- torch_cat(list(v, bias_v[["repeat"]](c(1, bsz, 1))))
-
-      if (!is.null(attn_mask)) {
-        attn_mask <- nnf_pad(attn_mask, c(0, 1))
-      }
-
-      if (!is.null(key_padding_mask)) {
-        key_padding_mask <- nnf_pad(key_padding_mask, c(0, 1))
-      }
-    }
-  }
-
-  q <- q$contiguous()$view(c(tgt_len, bsz * num_heads, head_dim))$transpose(1, 2)
-
-  if (!is.null(k)) {
-    k <- k$contiguous()$view(c(-1, bsz * num_heads, head_dim))$transpose(1, 2)
-  }
-
-  if (!is.null(v)) {
-    v <- v$contiguous()$view(c(-1, bsz * num_heads, head_dim))$transpose(1, 2)
-  }
-
-
-  if (!is.null(static_k)) {
-    k <- static_k
-  }
-
-  if (!is.null(static_v)) {
-    v <- static_v
-  }
-
-  src_len <- k$size(2)
-
-  if (add_zero_attn) {
-    src_len <- src_len + 1
-    k_size <- k$size()
-    k <- torch_cat(list(k, torch_zeros(append(list(k_size[1], 1), k_size[3:length(k_size)]),
-      dtype = k$dtype, device = k$device
-    )), dim = 2)
-    v_size <- v$size()
-    k <- torch_cat(list(k, torch_zeros(append(list(v_size[1], 1), v_size[3:length(v_size)]),
-      dtype = v$dtype, device = v$device
-    )), dim = 2)
-
-    if (!is.null(attn_mask)) {
-      attn_mask <- nnf_pad(attn_mask, list(0, 1))
-    }
-
     if (!is.null(key_padding_mask)) {
-      key_padding_mask <- nnf_pad(key_padding_mask, list(0, 1))
+      mha_check_key_padding_mask(key_padding_mask, bsz, src_len)
     }
-  }
-
-  attn_output_weights <- torch_bmm(q, k$transpose(2, 3))
-
-  if (!is.null(attn_mask)) {
-    if (attn_mask$dtype == torch_bool()) {
-      attn_output_weights$masked_fill_(attn_mask, -Inf)
-    } else {
-      attn_output_weights <- attn_output_weights + attn_mask
-    }
-  }
-
-  if (!is.null(key_padding_mask)) {
-    attn_output_weights <- attn_output_weights$view(c(bsz, num_heads, tgt_len, src_len))
-    if (key_padding_mask$dtype == torch_bool()) {
-      attn_output_weights <- attn_output_weights$masked_fill(
-        key_padding_mask$unsqueeze(2)$unsqueeze(3),
-        -Inf
-      )
-    } else {
-      attn_output_weights <- attn_output_weights + key_padding_mask$unsqueeze(2)$unsqueeze(3)
-    }
-    attn_output_weights <- attn_output_weights$view(c(
-      bsz * num_heads,
-      tgt_len,
-      src_len
+    return(mha_sdpa(
+      to_heads(q), to_heads(k), to_heads(v), attn_mask, key_padding_mask, is_causal, dropout_p, training,
+      out_proj_weight, out_proj_bias, batch_first
     ))
   }
 
+  if (!is.null(bias_k) && !is.null(bias_v)) {
+    if (is.null(static_k) && is.null(static_v)) {
+      k <- torch_cat(list(k, bias_k$`repeat`(c(1, bsz, 1))))
+      v <- torch_cat(list(v, bias_v$`repeat`(c(1, bsz, 1))))
+      if (!is.null(attn_mask)) {
+        attn_mask <- nnf_pad(attn_mask, c(0, 1))
+      }
+      if (!is.null(key_padding_mask)) {
+        key_padding_mask <- nnf_pad(key_padding_mask, c(0, 1))
+      }
+    } else {
+      value_error("bias cannot be added to static key and value.")
+    }
+  }
+
+  # (length, bsz, embed_dim) -> (bsz * num_heads, length, head_dim)
+  q <- q$reshape(c(tgt_len, bsz * num_heads, head_dim))$transpose(1, 2)
+  k <- if (is.null(static_k)) k$reshape(c(-1, bsz * num_heads, head_dim))$transpose(1, 2) else static_k
+  v <- if (is.null(static_v)) v$reshape(c(-1, bsz * num_heads, head_dim))$transpose(1, 2) else static_v
+
+  src_len <- k$size(2)
+  if (!is.null(key_padding_mask)) {
+    mha_check_key_padding_mask(key_padding_mask, bsz, src_len)
+  }
+
+  if (add_zero_attn) {
+    src_len <- src_len + 1
+    k <- torch_cat(list(k, k$new_zeros(c(bsz * num_heads, 1, head_dim))), dim = 2)
+    v <- torch_cat(list(v, v$new_zeros(c(bsz * num_heads, 1, head_dim))), dim = 2)
+    if (!is.null(attn_mask)) {
+      attn_mask <- nnf_pad(attn_mask, c(0, 1))
+    }
+    if (!is.null(key_padding_mask)) {
+      key_padding_mask <- nnf_pad(key_padding_mask, c(0, 1))
+    }
+  }
+
+  if (!need_weights) {
+    # splitting the first dimension of (bsz * num_heads, length, head_dim) is free
+    return(mha_sdpa(
+      q$view(c(bsz, num_heads, tgt_len, head_dim)),
+      k$reshape(c(bsz, num_heads, src_len, head_dim)),
+      v$reshape(c(bsz, num_heads, src_len, head_dim)),
+      attn_mask, key_padding_mask, is_causal, dropout_p, training, out_proj_weight, out_proj_bias, batch_first
+    ))
+  }
+
+  attn_output_weights <- torch_bmm(q * head_dim^(-0.5), k$transpose(2, 3))
+  if (!is.null(attn_mask)) {
+    attn_output_weights <- attn_output_weights + attn_mask
+  }
+  if (!is.null(key_padding_mask)) {
+    attn_output_weights <- attn_output_weights$view(c(bsz, num_heads, tgt_len, src_len)) +
+      key_padding_mask$reshape(c(bsz, 1, 1, src_len))
+    attn_output_weights <- attn_output_weights$view(c(bsz * num_heads, tgt_len, src_len))
+  }
+
   attn_output_weights <- nnf_softmax(attn_output_weights, dim = -1)
-  attn_output_weights <- nnf_dropout(attn_output_weights,
-    p = dropout_p,
-    training = training
-  )
+  attn_output_weights <- nnf_dropout(attn_output_weights, p = dropout_p, training = training)
 
   attn_output <- torch_bmm(attn_output_weights, v)
-  attn_output <- attn_output$transpose(1, 2)$contiguous()$view(c(tgt_len, bsz, embed_dim))
+  attn_output <- attn_output$transpose(1, 2)$reshape(c(tgt_len, bsz, embed_dim))
   attn_output <- nnf_linear(attn_output, out_proj_weight, out_proj_bias)
-  
   if (batch_first) {
     attn_output <- torch_transpose(attn_output, 1, 2)
   }
 
-  if (need_weights) {
-    attn_output_weights <- attn_output_weights$view(c(
-      bsz, num_heads,
-      tgt_len,
-      src_len
-    ))
-    if (avg_weights) {
-      return(list(attn_output, attn_output_weights$sum(dim = 2) / num_heads))
-    } else {
-      return(list(attn_output, attn_output_weights))
-    }
-  } else {
-    return(list(attn_output, NULL))
+  attn_output_weights <- attn_output_weights$view(c(bsz, num_heads, tgt_len, src_len))
+  if (avg_weights) {
+    attn_output_weights <- attn_output_weights$mean(dim = 2)
   }
+  list(attn_output, attn_output_weights)
+}
+
+# Whether `x` and `y` are the same tensor object.
+is_same_tensor <- function(x, y) {
+  identical(x, y) || (inherits(x, "torch_tensor") && inherits(y, "torch_tensor") &&
+    identical(xptr_address(x), xptr_address(y)))
+}
+
+# Converts a mask of `nnf_multi_head_attention_forward()` into an additive mask of type `dtype`, where boolean
+# (and, as documented, integer) masks are `-Inf` where they are `TRUE` (non-zero).
+mha_canonical_mask <- function(mask, name, dtype) {
+  if (is.null(mask)) {
+    return(NULL)
+  }
+  if (mask$is_floating_point()) {
+    return(mask$to(dtype = dtype))
+  }
+  if (mask$dtype != torch_bool()) {
+    if (mask$is_complex()) {
+      value_error("Only boolean, integer and floating point types of {name} are supported.")
+    }
+    mask <- mask$to(dtype = torch_bool())
+  }
+  torch_zeros_like(mask, dtype = dtype)$masked_fill_(mask, -Inf)
+}
+
+mha_check_attn_mask <- function(attn_mask, bsz, num_heads, tgt_len, src_len) {
+  expected <- switch(as.character(attn_mask$dim()),
+    "2" = c(tgt_len, src_len),
+    "3" = c(bsz * num_heads, tgt_len, src_len),
+    value_error("attn_mask's dimension {attn_mask$dim()} is not supported.")
+  )
+  if (!identical(as.numeric(attn_mask$shape), as.numeric(expected))) {
+    value_error(paste0(
+      "The shape of the {attn_mask$dim()}D attn_mask is ({paste(attn_mask$shape, collapse = ', ')}), ",
+      "but should be ({paste(expected, collapse = ', ')})."
+    ))
+  }
+}
+
+mha_check_key_padding_mask <- function(key_padding_mask, bsz, src_len) {
+  if (!identical(as.numeric(key_padding_mask$shape), as.numeric(c(bsz, src_len)))) {
+    value_error(paste0(
+      "Expected key_padding_mask of shape ({bsz}, {src_len}), ",
+      "but got ({paste(key_padding_mask$shape, collapse = ', ')})."
+    ))
+  }
+}
+
+# Computes the attention output of `nnf_multi_head_attention_forward()` with the fused scaled dot product
+# attention, for `q`, `k` and `v` of shape (bsz, num_heads, length, head_dim) and the additive masks.
+mha_sdpa <- function(q, k, v, attn_mask, key_padding_mask, is_causal, dropout_p, training, out_proj_weight,
+                     out_proj_bias, batch_first) {
+  bsz <- q$size(1)
+  tgt_len <- q$size(3)
+  src_len <- k$size(3)
+  embed_dim <- q$size(2) * q$size(4)
+  # The attention mask (tgt_len, src_len) broadcasts, (bsz * num_heads, tgt_len, src_len) is split like q, k and
+  # v, and the key padding mask is merged into it, as the fused attention has no separate one.
+  mask <- attn_mask
+  if (!is.null(mask) && mask$dim() == 3) {
+    mask <- mask$reshape(c(bsz, -1, tgt_len, src_len))
+  }
+  if (!is.null(key_padding_mask)) {
+    key_padding_mask <- key_padding_mask$reshape(c(bsz, 1, 1, src_len))
+    mask <- if (is.null(mask)) key_padding_mask else mask + key_padding_mask
+  }
+  attn_output <- torch_scaled_dot_product_attention(
+    q, k, v,
+    attn_mask = mask %||% list(),
+    dropout_p = if (training) dropout_p else 0,
+    is_causal = is_causal
+  )
+  # (bsz, num_heads, tgt_len, head_dim) -> (bsz, tgt_len, embed_dim) or (tgt_len, bsz, embed_dim)
+  attn_output <- if (batch_first) {
+    attn_output$transpose(2, 3)$reshape(c(bsz, tgt_len, embed_dim))
+  } else {
+    attn_output$permute(c(3, 1, 2, 4))$reshape(c(tgt_len, bsz, embed_dim))
+  }
+  list(nnf_linear(attn_output, out_proj_weight, out_proj_bias), NULL)
 }
 
 #' Sigmoid
