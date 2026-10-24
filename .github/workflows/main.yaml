@@ -161,7 +161,7 @@ jobs:
     outputs:
       image: ghcr.io/${{ github.repository }}-ci:${{ github.sha }}
     env:
-      TORCH_URL: 'https://github.com/mlverse/libtorch-mac-m1/releases/download/LibTorch-for-R/libtorch-linux-cuda128-Release-x86_64-v2.8.0.zip'
+      TORCH_URL: 'https://github.com/mlverse/libtorch-mac-m1/releases/download/LibTorch-for-R/libtorch-linux-cuda129-Release-x86_64-v2.8.0.zip'
 
     steps:
       - uses: actions/checkout@v7
