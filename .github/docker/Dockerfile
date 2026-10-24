@@ -1,4 +1,4 @@
-FROM nvidia/cuda:12.8.1-cudnn-devel-ubuntu22.04
+FROM nvidia/cuda:12.9.2-cudnn-devel-ubuntu22.04
 
 ENV DEBIAN_FRONTEND=noninteractive
 
@@ -42,7 +42,7 @@ ENV TORCH_INSTALL=1
 RUN Rscript -e "\
     install.packages('pak', repos = 'https://r-lib.github.io/p/pak/devel/'); \
     pak::local_install_deps('/build', dependencies = TRUE); \
-    pak::pkg_install('mlverse/cudatoolkit/cuda12.8')" \
+    pak::pkg_install('mlverse/cudatoolkit/cuda12.9')" \
     && rm -rf /tmp/* /root/.cache
 
 # Install torch with tests

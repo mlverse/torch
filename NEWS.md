@@ -1,5 +1,6 @@
 # torch (development version)
 
+- Add lantern compilation for cuda 12.9 (@cregouby #1483)
 - Fixed `torch_arange()` dropping the end point when an integer `dtype` was given as a string,
   e.g. `dtype = "long"`. (#1063)
 - The `as_array()` generic and its methods now take `...`, so other packages can define

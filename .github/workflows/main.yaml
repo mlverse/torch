@@ -133,7 +133,7 @@ jobs:
           sudo update-alternatives --set liblapack.so.3-x86_64-linux-gnu /usr/lib/x86_64-linux-gnu/openblas-pthread/liblapack.so.3
 
       - name: Install uv
-        uses: astral-sh/setup-uv@v7
+        uses: astral-sh/setup-uv@v10.1.0
 
       - name: Install torch
         run: Rscript -e "install.packages('pak'); pak::local_install()"
@@ -161,7 +161,7 @@ jobs:
     outputs:
       image: ghcr.io/${{ github.repository }}-ci:${{ github.sha }}
     env:
-      TORCH_URL: 'https://github.com/mlverse/libtorch-mac-m1/releases/download/LibTorch-for-R/libtorch-linux-cuda128-Release-x86_64-v2.8.0.zip'
+      TORCH_URL: 'https://github.com/mlverse/libtorch-mac-m1/releases/download/LibTorch-for-R/libtorch-linux-cuda129-Release-x86_64-v2.8.0.zip'
 
     steps:
       - uses: actions/checkout@v7
@@ -214,7 +214,7 @@ jobs:
         username: ${{ github.actor }}
         password: ${{ secrets.GITHUB_TOKEN }}
       options: '--gpus all --runtime=nvidia'
-    name: "GPU tests - cuda12.8"
+    name: "GPU tests - cuda12.9"
     timeout-minutes: 60
     env:
       TORCH_TEST: 1
@@ -249,12 +249,12 @@ jobs:
         username: ${{ github.actor }}
         password: ${{ secrets.GITHUB_TOKEN }}
       options: '--gpus all --runtime=nvidia'
-    name: "cudatoolkit - cuda12.8"
+    name: "cudatoolkit - cuda12.9"
     timeout-minutes: 60
     env:
       TORCH_TEST: 1
       TORCH_TEST_CUDA: 1
-      CUDA: "12.8"
+      CUDA: "12.9"
       TORCH_SKIP_SLOW_TESTS: 1
 
     steps:
@@ -264,8 +264,8 @@ jobs:
       - name: Session info
         run: |
           Rscript -e "sessionInfo()"
-          Rscript -e "cat('CUDA lib path:', cuda12.8::lib_path(), '\n')"
-          Rscript -e "cat('Libs:', list.files(cuda12.8::lib_path(), pattern = '\\\\.so'), '\n')"
+          Rscript -e "cat('CUDA lib path:', cuda12.9::lib_path(), '\n')"
+          Rscript -e "cat('Libs:', list.files(cuda12.9::lib_path(), pattern = '\\\\.so'), '\n')"
 
       - name: Run tests
         run: |

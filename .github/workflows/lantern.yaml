@@ -24,14 +24,16 @@ jobs:
           - {os: ubuntu, version: cpu, runner: ubuntu-latest}
           - {os: ubuntu, version: cu12.6, runner: ubuntu-22.04}
           - {os: ubuntu, version: cu12.8, runner: ubuntu-22.04}
+          - {os: ubuntu, version: cu12.9, runner: ubuntu-22.04}
 
           - {os: windows, version: cpu, runner: windows-2022}
           - {os: windows, version: cu12.6, runner: windows-2022}
           - {os: windows, version: cu12.8, runner: windows-2022}
+          - {os: windows, version: cu12.9, runner: windows-2022}
 
         include:
           - config: {os: ubuntu}
-            container: ubuntu:20.04
+            container: ubuntu:22.04
           
           - config: {version: cu12.6}
             cuda: 12.6
@@ -39,7 +41,11 @@ jobs:
           
           - config: {version: cu12.8}
             cuda: 12.8
-            cuda_patch: 1
+            cuda_patch: 2
+        
+          - config: {version: cu12.9}
+            cuda: 12.9
+            cuda_patch: 2
         
     env:
       CUDA: ${{ matrix.cuda }}
@@ -59,11 +65,11 @@ jobs:
       - name: Setup cmake
         uses: jwlawson/actions-setup-cmake@v2
         with:
-          cmake-version: "3.25.1"
+          cmake-version: "3.31.12"
 
       - name: Install CUDA
         if: ${{matrix.cuda != ''}}
-        uses: Jimver/cuda-toolkit@v0.2.24
+        uses: Jimver/cuda-toolkit@v0.2.36
         id: cuda-toolkit
         with:
           cuda: "${{matrix.cuda}}.${{matrix.cuda_patch}}"
