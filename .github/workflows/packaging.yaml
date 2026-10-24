@@ -24,10 +24,10 @@ jobs:
           - {r_version: 'release', os: macOS, version: cpu-m1, runner: macos-latest}
           
           - {r_version: 'release', os: ubuntu, version: cpu, runner: [self-hosted, linux]}
-          - {r_version: 'release', os: ubuntu, version: cu128, runner: [self-hosted, linux]}
+          - {r_version: 'release', os: ubuntu, version: cu129, runner: [self-hosted, linux]}
           
           - {r_version: 'release', os: windows, version: cpu, runner: windows-2022}
-          - {r_version: 'release', os: windows, version: cu128, runner: windows-2022}
+          - {r_version: 'release', os: windows, version: cu129, runner: windows-2022}
           
         include:
           
@@ -72,7 +72,7 @@ jobs:
 
       - name: Install CUDA
         if: ${{matrix.cuda != ''}}
-        uses: Jimver/cuda-toolkit@v0.2.24
+        uses: Jimver/cuda-toolkit@v0.2.36
         id: cuda-toolkit
         with:
           cuda: "${{matrix.cuda}}.${{matrix.cuda_patch}}"
