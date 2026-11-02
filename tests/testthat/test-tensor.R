@@ -402,6 +402,43 @@ test_that("can create tensors from tensors", {
   expect_equal_to_tensor(x, y)
 })
 
+test_that("tensors created from R arrays do not share memory with them", {
+  # Arrays whose layout is already contiguous (at most one dimension larger
+  # than 1) used to wrap R's memory directly when no dtype conversion was
+  # needed, so the tensor read freed memory once R garbage collected the array.
+  shapes <- list(c(3, 1), c(1, 3), c(3, 1, 1), c(1, 1))
+  for (shape in shapes) {
+    x <- array(as.numeric(seq_len(prod(shape))), dim = shape)
+    a <- torch_tensor(x, dtype = torch_float64())
+    b <- torch_tensor(x, dtype = torch_float64())
+    expect_false(a$storage()$data_ptr() == b$storage()$data_ptr())
+
+    a$add_(10)
+    expect_equal(as.numeric(x), as.numeric(seq_len(prod(shape))))
+    expect_equal(as.numeric(as_array(b)), as.numeric(x))
+
+    y <- array(seq_len(prod(shape)), dim = shape)
+    a <- torch_tensor(y, dtype = torch_int32())
+    b <- torch_tensor(y, dtype = torch_int32())
+    expect_false(a$storage()$data_ptr() == b$storage()$data_ptr())
+  }
+
+  # 1-d vectors (previously handled by a special case)
+  x <- c(1, 2, 3)
+  a <- torch_tensor(x, dtype = torch_float64())
+  a$add_(10)
+  expect_equal(x, c(1, 2, 3))
+})
+
+test_that("tensors created from integer64 arrays do not share memory with them", {
+  skip_if_not_installed("bit64")
+  x <- bit64::as.integer64(c(1, 2, 3))
+  dim(x) <- c(3L, 1L)
+  a <- torch_tensor(x)
+  b <- torch_tensor(x)
+  expect_false(a$storage()$data_ptr() == b$storage()$data_ptr())
+})
+
 test_that("print complex tensors", {
   testthat::local_edition(3)
   skip_on_os("windows")

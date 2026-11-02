@@ -1,5 +1,10 @@
 # torch (development version)
 
+- Fixed `torch_tensor()` sharing memory with the R object for arrays whose layout was already
+  contiguous (at most one dimension larger than 1, e.g. `n x 1` or `1 x n` matrices) when no
+  dtype conversion was needed, e.g. a double matrix with `dtype = torch_float64()`. The tensor
+  could then read freed memory after R garbage collected the array, and in-place operations on
+  the tensor modified the R object.
 - Fixed `torch_arange()` dropping the end point when an integer `dtype` was given as a string,
   e.g. `dtype = "long"`. (#1063)
 - The `as_array()` generic and its methods now take `...`, so other packages can define

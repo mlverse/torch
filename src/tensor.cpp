@@ -257,12 +257,17 @@ torch::Tensor create_tensor_from_atomic(SEXP x, torch::Dtype cdtype) {
     strides.size(), options.get());
   }();
       
-  if (dim.size() == 1) {
-    // if we have a 1-dim vector contigous doesn't trigger a copy, and
-    // would be unexpected.
+  // `tensor` points directly at R's memory, so we must always copy: if R
+  // later garbage collects `x` the tensor would read freed memory.
+  // `contiguous()` only copies when the layout is not already contiguous.
+  // Column-major R arrays with at most one dimension larger than 1 (1-d
+  // vectors, n x 1 and 1 x n matrices, n x 1 x 1 arrays, ...) already count
+  // as contiguous, so in that case we clone explicitly.
+  if (lantern_Tensor_is_contiguous(tensor.get())) {
     tensor = lantern_Tensor_clone(tensor.get());
+  } else {
+    tensor = lantern_Tensor_contiguous(tensor.get());
   }
-  tensor = lantern_Tensor_contiguous(tensor.get());
 
   return tensor;
 }
