@@ -208,7 +208,7 @@ is_dependent <- function(object) {
   )
 )
 
-#' Constrain to a real half line `[lower_bound, inf)`.
+#' Constrain to a real half line `(-inf, upper_bound)`.
 #' @noRd
 .LessThan <- R6::R6Class(
   "torch_LessThan",
@@ -220,7 +220,7 @@ is_dependent <- function(object) {
       self$upper_bound <- upper_bound
     },
     check = function(value) {
-      self$upper_bound < value
+      value < self$upper_bound
     },
     print = function() {
       cat(glue::glue(

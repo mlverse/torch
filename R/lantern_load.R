@@ -8,8 +8,21 @@ load_cudatoolkit_libs <- function() {
   pkg_name <- paste0("cuda", cuda_ver)
   if (!requireNamespace(pkg_name, quietly = TRUE)) return(invisible(FALSE))
 
-  lib_path <- getExportedValue(pkg_name, "lib_path")()
-  if (!dir.exists(lib_path)) return(invisible(FALSE))
+  # `lib_path()` is `system.file(..., mustWork = TRUE)`, which errors rather
+  # than returning "" when the directory is missing, so the dir.exists() guard
+  # below is unreachable for that case. Without this tryCatch the error
+  # propagates out of .onLoad and is reported as torch failing to start.
+  lib_path <- tryCatch(
+    getExportedValue(pkg_name, "lib_path")(),
+    error = function(e) {
+      cli::cli_warn(c(
+        i = "Skipping CUDA library preload from {.pkg {pkg_name}}.",
+        x = conditionMessage(e)
+      ))
+      NULL
+    }
+  )
+  if (is.null(lib_path) || !dir.exists(lib_path)) return(invisible(FALSE))
 
   if (is_windows()) {
     # Add the lib path so Windows can find the DLLs

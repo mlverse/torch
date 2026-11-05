@@ -120,7 +120,8 @@ nn_transformer_encoder_layer <- nn_module(
       attn_out <- self$self_attn(norm_src, norm_src, norm_src,
         attn_mask = attn_mask_eff,
         key_padding_mask = src_key_padding_mask,
-        need_weights = FALSE
+        need_weights = FALSE,
+        is_causal = is_causal
       )[[1]]
       # Add residual connection and apply dropout
       src2 <- src + self$dropout1(attn_out)
@@ -133,7 +134,8 @@ nn_transformer_encoder_layer <- nn_module(
       attn_out <- self$self_attn(src, src, src,
         attn_mask = attn_mask_eff,
         key_padding_mask = src_key_padding_mask,
-        need_weights = FALSE
+        need_weights = FALSE,
+        is_causal = is_causal
       )[[1]]
       # Residual connection then norm
       src2 <- src + self$dropout1(attn_out)

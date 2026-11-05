@@ -39,7 +39,7 @@ test_that("less than", {
 
   expect_equal_to_r(constraint$check(torch_tensor(0.5)), TRUE)
   expect_equal_to_r(constraint$check(torch_tensor(1.5)), FALSE)
-  expect_equal_to_r(constraint$upper_bound, 1)
+  expect_equal(constraint$upper_bound, 1)
 })
 
 test_that("half open interval", {

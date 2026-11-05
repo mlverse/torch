@@ -49,6 +49,22 @@ representation subspaces. See reference: Attention Is All You Need
 \deqn{ \mbox{MultiHead}(Q, K, V) = \mbox{Concat}(head_1,\dots,head_h)W^O
 \mbox{where} head_i = \mbox{Attention}(QW_i^Q, KW_i^K, VW_i^V) }
 }
+\section{Forward}{
+
+
+The module is called with \code{query}, \code{key}, \code{value}, and optionally \code{key_padding_mask}, \code{attn_mask}
+(see Shape), \code{need_weights} (whether to return the attention weights, default \code{TRUE}),
+\code{avg_weights} (whether to average the weights over the heads, default \code{TRUE}) and \code{is_causal}
+(a hint that \code{attn_mask} is the causal mask, see \code{\link[=nnf_multi_head_attention_forward]{nnf_multi_head_attention_forward()}}).
+
+Like in PyTorch, the attention is computed with the fused \code{\link[=torch_scaled_dot_product_attention]{torch_scaled_dot_product_attention()}}
+when \code{need_weights = FALSE}. In evaluation mode and without gradients, self-attention (where \code{query},
+\code{key} and \code{value} are the same tensor) with \code{batch_first = TRUE}, an even number of heads, a bias and
+neither \code{add_bias_kv} nor \code{add_zero_attn} uses the fused native implementation, which is faster,
+unless the attention is masked and \code{need_weights = FALSE}. Pass \code{need_weights = FALSE} whenever you don't
+need the attention weights.
+}
+
 \section{Shape}{
 
 

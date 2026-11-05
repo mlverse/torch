@@ -401,6 +401,6 @@ torch_scalar_tensor <- function(value, dtype = NULL, device = NULL, requires_gra
   if (is_torch_tensor(value)) {
     value$squeeze()$to(device = device, dtype = dtype)$requires_grad_(requires_grad)
   } else {
-    torch_tensor(value, dtype = dtype, device = device, requires_grad = requires_grad)$squeeze()
+    torch_tensor(value, dtype = dtype, device = device)$squeeze()$requires_grad_(requires_grad)
   }
 }

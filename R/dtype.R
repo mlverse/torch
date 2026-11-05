@@ -192,7 +192,9 @@ is_torch_dtype <- function(x) {
 }
 
 is_integer_dtype <- function(x) {
-  is_torch_dtype(x) && (cpp_dtype_to_string(x) %in% c("Int", "Short", "Long", "Char", "Byte"))
+  # strings like "long" are parsed by the same C++ code that parses them when creating tensors
+  (is_torch_dtype(x) || is.character(x)) &&
+    (cpp_dtype_to_string(x) %in% c("Int", "Short", "Long", "Char", "Byte"))
 }
 
 #' Gets and sets the default floating point dtype.
