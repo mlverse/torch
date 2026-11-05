@@ -23,9 +23,185 @@ Finding the right combination of libtorch, {torch}, and CUDA can be tricky. This
 
 | CUDA version |  Suitable {torch} version   |
 |:------------:|:---------------------------:|
-|     11.6     | 0.10.0 (Linux only), 0.11.0 |
-|     11.7     |      0.10.0 to 0.13.0       |
-|     11.8     |      0.12.0 to 0.15.x       |
-|     12.4     |      0.14.x to 0.15.x       |
-|     12.6     |      0.16.x to 0.17.x       |
 |     12.8     |      0.16.x to 0.17.x       |
+|     12.6     |      0.16.x to 0.17.x       |
+|     12.4     |      0.14.x to 0.15.x       |
+|     11.8     |      0.12.0 to 0.15.x       |
+|     11.7     |      0.10.0 to 0.13.0       |
+|     11.6     | 0.10.0 (Linux only), 0.11.0 |
+
+
+---
+
+## Interactive Install Guide
+
+Select your system specifications to generate the recommended installation command.
+
+<!-- To test this widget, run pkgdown::build_article("articles/compatibility-matrix")
+     and exercise all OS / CUDA / Debug combinations in a browser. -->
+
+<style>
+  .selector-group { margin-bottom: 15px; }
+  .selector-group h4 { margin-bottom: 5px; }
+  .selector-group label { margin-right: 10px; display: inline-block; padding: 5px 10px; border: 1px solid #ccc; border-radius: 4px; cursor: pointer; }
+  .selector-group input[type="radio"] { display: none; }
+  .selector-group input[type="radio"]:checked + label { background-color: #007bff; color: white; border-color: #007bff; }
+  #install-command-box { background-color: #f8f8f8; border: 1px solid #eee; padding: 1em; border-radius: 5px; }
+  #install-command { white-space: pre-wrap; word-wrap: break-word; }
+  #error-message { color: #d9534f; font-weight: bold; }
+</style>
+
+<div class="selector-group" id="os-selector">
+  <h4>1. Operating System</h4>
+  <input type="radio" id="os-linux" name="os" value="linux">
+  <label for="os-linux">Linux</label>
+  <input type="radio" id="os-windows" name="os" value="windows">
+  <label for="os-windows">Windows</label>
+  <input type="radio" id="os-macos" name="os" value="macos">
+  <label for="os-macos">macOS (No CUDA)</label>
+</div>
+
+<div class="selector-group" id="cuda-selector">
+  <h4>2. CUDA Version</h4>
+  <input type="radio" id="cuda-12.8" name="cuda" value="12.8" checked>
+  <label for="cuda-12.8">12.8</label>
+  <input type="radio" id="cuda-12.6" name="cuda" value="12.6">
+  <label for="cuda-12.6">12.6</label>
+  <input type="radio" id="cuda-12.4" name="cuda" value="12.4">
+  <label for="cuda-12.4">12.4</label>
+  <input type="radio" id="cuda-11.8" name="cuda" value="11.8">
+  <label for="cuda-11.8">11.8</label>
+  <input type="radio" id="cuda-11.7" name="cuda" value="11.7">
+  <label for="cuda-11.7">11.7</label>
+  <input type="radio" id="cuda-11.6" name="cuda" value="11.6">
+  <label for="cuda-11.6">11.6</label>
+  <input type="radio" id="cuda-none" name="cuda" value="cpu">
+  <label for="cuda-none">None (CPU)</label>
+</div>
+
+<div class="selector-group" id="debug-selector">
+  <h4>3. Debug Mode</h4>
+  <input type="radio" id="debug-auto" name="debug" value="auto" checked>
+  <label for="debug-auto">Auto</label>
+  <input type="radio" id="debug-manual" name="debug" value="manual">
+  <label for="debug-manual">Manual</label>
+</div>
+
+<h4>4. Run this command in R</h4>
+<div id="install-command-box">
+  <code id="install-command">
+    Select your options above...
+  </code>
+  <p id="error-message" style="display: none;"></p>
+</div>
+
+<script>
+  // Keep in sync with the compatibility tables above.
+  var compatibility = {
+    "11.6": { torch_range: "0.10.0 (Linux only) or 0.11.0", rec_version: "0.11.0", linux_only: true },
+    "11.7": { torch_range: "0.10.0 to 0.13.0", rec_version: "0.13.0", linux_only: false },
+    "11.8": { torch_range: "0.12.0 to 0.15.x", rec_version: "0.15.1", linux_only: false },
+    "12.4": { torch_range: "0.14.x to 0.15.x", rec_version: "0.15.1", linux_only: false },
+    "12.6": { torch_range: "0.16.x to 0.17.x", rec_version: "0.17.0", linux_only: false },
+    "12.8": { torch_range: "0.16.x to 0.17.x", rec_version: "0.17.0", linux_only: false }
+  };
+
+  function updateCommand() {
+    var selectedOs = document.querySelector('input[name="os"]:checked').value;
+    var selectedCuda = document.querySelector('input[name="cuda"]:checked').value;
+    var selectedDebug = document.querySelector('input[name="debug"]:checked').value;
+    var outputElement = document.getElementById('install-command');
+    var errorElement = document.getElementById('error-message');
+    var command = "";
+    var error = "";
+
+    var debugInstall = selectedDebug === "manual"
+      ? 'Sys.setenv(TORCH_INSTALL_DEBUG = "1")\n'
+      : "";
+    var debugCuda = selectedDebug === "manual"
+      ? 'Sys.setenv(CUDA = "' + selectedCuda + '")\n'
+      : "";
+
+    if (selectedOs === 'macos') {
+      command = "# On macOS, {torch} uses the 'mps' backend for GPU acceleration.\n" +
+                debugInstall +
+                "install.packages(\"torch\")\n" +
+                "library(torch)";
+      if (selectedCuda !== 'cpu') {
+        error = "Note: CUDA is not supported on macOS. Falling back to CPU/MPS install.";
+      }
+    } else if (selectedCuda === 'cpu') {
+      command = "# This command installs the CPU-only version of {torch}.\n" +
+                debugInstall +
+                "install.packages(\"torch\")\n" +
+                "library(torch)";
+    } else if (selectedCuda === '12.8' || selectedCuda === '12.6') {
+      command = "# This command installs the latest supported CUDA version of {torch}.\n" +
+                debugInstall + debugCuda +
+                "install.packages(\"torch\")\n" +
+                "library(torch)";
+    } else {
+      var info = compatibility[selectedCuda];
+      if (info.linux_only && selectedOs !== 'linux') {
+        error = "CUDA " + selectedCuda + " with {torch} " + info.torch_range +
+                " is only supported on Linux. Please select another combination.";
+      } else {
+        command = "# For CUDA " + selectedCuda + ", the recommended {torch} R package version is " + info.rec_version + ").\n" +
+                  "# You may need the 'remotes' package: install.packages(\"remotes\")\n" +
+                  debugInstall + debugCuda +
+                  "remotes::install_version(\"torch\", version = \"" + info.rec_version + "\")\n" +
+                  "library(torch)";
+      }
+    }
+
+    outputElement.textContent = command;
+    if (error) {
+      errorElement.textContent = error;
+      errorElement.style.display = 'block';
+    } else {
+      errorElement.style.display = 'none';
+    }
+  }
+
+  function applyCudaVisibility() {
+    var selectedOs = document.querySelector('input[name="os"]:checked').value;
+    var cudaSelector = document.getElementById('cuda-selector');
+    if (selectedOs === 'macos') {
+      cudaSelector.style.display = 'none';
+      document.getElementById('cuda-none').checked = true;
+    } else {
+      cudaSelector.style.display = 'block';
+    }
+  }
+
+  function setDefaultOS() {
+    var platform = (navigator.userAgentData
+      ? navigator.userAgentData.platform
+      : navigator.platform || "").toLowerCase();
+
+    if (platform.startsWith("win")) {
+      document.getElementById("os-windows").checked = true;
+    } else if (platform.startsWith("mac")) {
+      document.getElementById("os-macos").checked = true;
+    } else {
+      document.getElementById("os-linux").checked = true;
+    }
+    applyCudaVisibility();
+  }
+
+  document.querySelectorAll('input[name="os"]').forEach(function(radio) {
+    radio.addEventListener('change', function() {
+      applyCudaVisibility();
+      updateCommand();
+    });
+  });
+  document.querySelectorAll('input[name="cuda"]').forEach(function(radio) {
+    radio.addEventListener('change', updateCommand);
+  });
+  document.querySelectorAll('input[name="debug"]').forEach(function(radio) {
+    radio.addEventListener('change', updateCommand);
+  });
+
+  setDefaultOS();
+  updateCommand();
+</script>
