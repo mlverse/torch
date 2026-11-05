@@ -495,6 +495,91 @@ test_that("is_sparse works", {
   expect_true(x$is_sparse())
 })
 
+test_that("indices() returns one based indices for sparse tensors", {
+  idx <- torch_tensor(
+    matrix(c(1, 2, 2, 3, 1, 3), ncol = 3, byrow = TRUE),
+    dtype = torch_int64()
+  )
+  values <- torch_tensor(c(3, 4, 5), dtype = torch_float32())
+  sparse <- torch_sparse_coo_tensor(idx, values, size = c(3, 3))$coalesce()
+
+  expect_equal_to_tensor(sparse$indices(), idx)
+})
+
+test_that("as_array errors for sparse tensors", {
+  idx <- torch_tensor(
+    matrix(c(1, 2, 2, 3), nrow = 2),
+    dtype = torch_int64()
+  )
+  values <- torch_tensor(c(3, 4), dtype = torch_float32())
+  sparse <- torch_sparse_coo_tensor(idx, values, size = c(3, 3))
+
+  expect_error(
+    as_array(sparse),
+    "Sparse tensors are not supported for as_array conversion.",
+    fixed = TRUE
+  )
+})
+
+test_that("CSR sparse tensors can be printed", {
+  x <- torch_randn(3, 3)$to_sparse_csr()
+  expect_output(print(x), "torch_tensor")
+})
+
+test_that("is_sparse_csr works", {
+  x <- torch_randn(3, 3)
+  expect_false(x$is_sparse_csr())
+
+  csr <- x$to_sparse_csr()
+  expect_true(csr$is_sparse_csr())
+
+  coo <- torch_sparse_coo_tensor(
+    torch_tensor(matrix(c(1, 2), nrow = 2), dtype = torch_long()),
+    torch_tensor(1, dtype = torch_float()),
+    size = c(3, 3)
+  )
+  expect_false(coo$is_sparse_csr())
+})
+
+test_that("to_sparse converts CSR back to COO", {
+  x <- torch_eye(3)
+  csr <- x$to_sparse_csr()
+  coo <- csr$to_sparse()
+
+  expect_true(coo$is_sparse())
+  expect_false(coo$is_sparse_csr())
+  expect_equal_to_tensor(coo$to_dense(), x)
+})
+
+test_that("to_sparse with sparse_dim works", {
+  x <- torch_randn(3, 3)
+  sparse <- x$to_sparse(sparse_dim = 2L)
+  expect_true(sparse$is_sparse())
+  expect_equal_to_tensor(sparse$to_dense(), x)
+})
+
+test_that("to_sparse with dense_dim works", {
+  x <- torch_randn(3, 4, 5)
+  # dense_dim=1 means the last dim stays dense, sparse_dim = 3 - 1 = 2
+  sparse <- x$to_sparse(dense_dim = 1L)
+  expect_true(sparse$is_sparse())
+  expect_equal_to_tensor(sparse$to_dense(), x)
+
+  # dense_dim=0 is equivalent to full sparse (sparse_dim = ndim)
+  sparse0 <- x$to_sparse(dense_dim = 0L)
+  expect_true(sparse0$is_sparse())
+  expect_equal_to_tensor(sparse0$to_dense(), x)
+})
+
+test_that("as_array errors for CSR sparse tensors", {
+  x <- torch_randn(3, 3)$to_sparse_csr()
+  expect_error(
+    as_array(x),
+    "Sparse tensors are not supported for as_array conversion.",
+    fixed = TRUE
+  )
+})
+
 test_that("can make a byte tensor from a raw vector", {
 
   x <- charToRaw("hello world")
@@ -597,4 +682,22 @@ test_that("cuda tensor can be converted to tensor", {
 test_that("detach preserves attributes (#1136)", {
   x <- nn_parameter(torch_tensor(1)$requires_grad_(TRUE))
   expect_true(inherits(x$detach(), "nn_parameter"))
+})
+
+test_that("head and tail works", {
+  x <- torch_tensor(1:10)
+  expect_equal_to_r(head(x), 1:6)
+  expect_equal_to_r(tail(x), 5:10)
+
+  x <- torch_stack(list(x, x), dim = 2)
+  expect_equal_to_r(head(x, n = 3), cbind(1:3, 1:3))
+  expect_equal_to_r(tail(x, n = 4), cbind(7:10, 7:10))
+
+  # sparse
+  i <- torch_tensor(matrix(c(1,2,2,3), nrow=2), dtype=torch_int64())
+  v <- torch_tensor(c(3,4), dtype=torch_float32())
+  x <- torch_sparse_coo_tensor(i, v, size = c(3,3))
+
+  expect_equal_to_r(head(x, 2)$to_dense(), head(as.matrix(x$to_dense()), 2))
+  expect_true(torch_allclose(tail(x, 2)$to_dense(), tail(x$to_dense(), 2)))
 })

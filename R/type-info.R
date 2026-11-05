@@ -8,7 +8,7 @@
 #'
 #' @export
 torch_iinfo <- function(dtype) {
-  if (dtype == torch_int32()) {
+  if (dtype == torch_int32() || dtype == torch_qint32()) {
     list(
       bits = 32,
       max = bit64::as.integer64("2147483647"),
@@ -25,6 +25,18 @@ torch_iinfo <- function(dtype) {
       bits = 16,
       max = 32767L,
       min = -32768L
+    )
+  } else if (dtype == torch_int8() || dtype == torch_qint8()) {
+    list(
+      bits = 8,
+      max = 127L,
+      min = -128L
+    )
+  } else if (dtype == torch_uint8() || dtype == torch_quint8()) {
+    list(
+      bits = 8,
+      max = 255L,
+      min = 0L
     )
   } else {
     value_error("dtype must be an integer type.")

@@ -1,5 +1,157 @@
 # torch (development version)
 
+- Fixed `torch_arange()` dropping the end point when an integer `dtype` was given as a string,
+  e.g. `dtype = "long"`. (#1063)
+- The `as_array()` generic and its methods now take `...`, so other packages can define
+  methods with extra arguments.
+- `nn_multihead_attention()` and `nnf_multi_head_attention_forward()` are faster and behave like PyTorch
+  (#1488):
+  - With `need_weights = FALSE`, they use the fused `torch_scaled_dot_product_attention()` (e.g. causal
+    training is up to 4 times faster on GPU). Inputs with `batch_first = TRUE` are then no longer transposed, and the
+    output is contiguous.
+  - In evaluation mode and without gradients, self-attention with `batch_first = TRUE` uses the fused native
+    implementation, under the same conditions as in PyTorch, except for masked attention with
+    `need_weights = FALSE`, where the scaled dot product attention is faster.
+  - The new `is_causal` argument is a hint that `attn_mask` is the causal mask, which then allows the fastest
+    attention kernels. `nn_transformer_encoder_layer()` passes it on.
+  - Self-attention is detected by checking whether `query`, `key` and `value` are the same tensor, instead of
+    comparing their values in every forward pass.
+  - Masks are checked for their shapes, and may be non-contiguous.
+- Fixed `nn_multihead_attention()` and `nnf_multi_head_attention_forward()` with `add_zero_attn = TRUE`, which
+  failed because the zero attention was added to the keys twice instead of to the keys and values.
+- Integer (e.g. `torch_uint8()`) masks in `nn_multihead_attention()` are now treated as boolean masks, as
+  documented, instead of being added to the attention scores.
+- `nn_multihead_attention()` with `kdim` or `vdim` no longer ignores `avg_weights`.
+- An error raised inside a `cuda*` package's `lib_path()` no longer aborts torch
+  startup. `load_cudatoolkit_libs()` now catches it, warns naming the toolkit
+  package at fault, and continues without preloading those libraries, instead of
+  the failure surfacing as "torch failed to start".
+- Fixed `torch_scalar_tensor()` with `requires_grad = TRUE`, which returned a
+  non-leaf tensor because `$squeeze()` was applied after `requires_grad` was
+  set, so `.grad` was never populated after `backward()`. (#1368)
+- Fixed `nn_multihead_attention()` and `nnf_multi_head_attention_forward()` with `bias = FALSE`
+  when `query` differs from `key` (i.e. cross- and encoder-decoder attention), which failed with
+  `object 'k' not found`. The key and value projections were only computed when a bias was present.
+- Fixed `lr_one_cycle()` with `anneal_strategy = "linear"`, which failed with
+  `attempt to apply non-function` because the annealing function was never assigned.
+
+- Multi-worker dataloaders now use POSIX shared memory for tensor transfer on
+  Unix systems, resulting in up to 2x faster data loading. To revert to the
+  previous behavior, set `options(torch.dataloader_use_shm = FALSE)`. (#1456)
+- On Windows, the install lib directory is now prepended to `PATH` at load so
+  cuDNN's lazily-loaded sub-DLLs (e.g. `cudnn_graph64_9.dll`) resolve; cuDNN-backed
+  CUDA ops previously failed with "Could not locate cudnn_graph64_9.dll".
+- The `ignore_index` argument of `nnf_cross_entropy()`, `nnf_nll_loss()`,
+  `nn_cross_entropy_loss()` and `nn_nll_loss()` is now interpreted as the 1-based class
+  index that `target` already used. It was forwarded to libtorch unconverted while the
+  target was converted, so it ignored the class to the left of the requested one, and the
+  last class could not be ignored at all. Passing `0` is now an error instead of silently
+  ignoring the first class. The default `-100`, and any other negative sentinel, is
+  unaffected. The documented target range was corrected to \eqn{1 \leq target \leq C}.
+
+# torch 0.17.0
+
+## Breaking changes
+
+- Updated to LibTorch 2.8.0 (#1419).
+- `torch_triu_indices()` and `torch_tril_indices()` now return 1-based indexes (#1382).
+- `$indices()` now returns 1-based indexes (#1382).
+
+## New features
+
+- Added `torch_sitrep()` for torch installation situation report (#1415, @cregouby).
+- Added `%*%` operator for torch tensors (#1379, @caio-hamamura).
+- Added `head()` and `tail()` methods for torch tensors (#1388).
+- Exported `torch_scaled_dot_product_attention()` (#1404).
+- Exported `torch_sparse_sampled_addmm()` (#1427).
+- Exported `torch_ldexp()` (#1407).
+- Integrated `cudatoolkit` R package for CUDA library loading (#1422).
+- Improved `as_array()` support for sparse tensors (#1387).
+
+## Bug fixes
+
+- Fixed sparse CSR tensor printing, `to_sparse()` crash, and `as_array()` detection (#1431).
+- Fixed `dataset()`/`nn_module()` crash when `initialize` parameter is named `d` (#1424, @Chandraveer-Singh).
+- Fixed `bfloat16` not being recognized as a floating point dtype (#1408).
+- Fixed handling of R longjump exceptions in autograd and tracing callbacks (#1406).
+- Fixed redundant `lantern.h` include causing macro redefinition warning (#1430).
+- Excluded glibc libraries from dependency bundling (#1397, @troyhernandez).
+- Replaced non-API entry point `Rf_findVarInFrame` with `R_getVarEx` for R 4.6 compatibility (#1421).
+- Added French translations for 5 missing messages (#1385, @cregouby).
+
+# torch 0.16.3
+
+# torch 0.16.1
+
+- Fixed issue with Windows CRAN checks. (#1366)
+
+# torch 0.16.0
+
+- Support for CUDA 11.8 was dropped on Windows. (#1342)
+- Dropped support for CUDA 12.4 (#1348)
+- Added Support for CUDA 12.6 and 12.8 (#1348)
+- Updated to LibTorch 2.7.1 (#1348)
+- Fixed a bug causing repeat_interleave to not work properly on CUDA (#1353)
+
+# torch 0.15.1
+
+# torch 0.15.0
+
+- add ROC AUM loss with `nn_aum_loss()` (#1310 @cregouby)
+- Add translation of install messages in French (@cregouby #1317)
+- fix installation checks for r2u users ((@cregouby #1317)
+
+# torch 0.14.2
+
+- Fixed a regression causing torch to crash on Windows if used within RStudio.
+- perf: Significantly reduce overhead when calling into jit-modules. (#1304)
+
+# torch 0.14.1
+
+Bug fixes:
+
+- Fixed issue when compiling on non-glibc Linux distributions that don't implement `RTLD_DEEPBIND` (#1268)
+
+# torch 0.14.0
+
+## Breaking changes
+
+- Updated to LibTorch v2.5.1 (#1204) -- potentially breaking change!
+
+## New features
+
+- Feature: Faster optimizers (`optim_ignite_<name>()`) are available: Adam, AdamW, Adagrad, RMSprop,SGD.
+  These can be used as drop-in replacements for `optim_<name>` but are considerably
+  faster as they wrap the LibTorch implementation of the optimizer.
+  The biggest speed differences can be observed for complex optimizers such as `AdamW`.
+
+## Bug fixes
+
+- `torch_iinfo()` now support all integer dtypes (#1190 @cregouby)
+- Fixed float key_padding_mask in `nnf_multi_head_attention_forward()` (#1205)
+- Fix french translation (#1176 @cregouby)
+- Trace jitted modules now respect 'train' and 'eval' mode (#1211)
+* Fix: Avoid name clashes between multiple calls to `jit_trace` (#1246)
+
+# torch 0.13.0
+
+## Breaking changes
+
+- lantern is now distributed over a different URL (https://torch-cdn.mlverse.org).
+  For most users this shouldn't have any effect, unless you need special authorization
+  to access some URL's. (#1162)
+
+## New features
+
+- Added support for a private `$finalize_deep_clone()` method for `nn_module` which
+ allows to run some code after cloning a module.
+- A `compare_proxy` method for the `torch_tensor` type was added
+  it allows to compare torch tensors using `testthat::expect_equal()`.
+- Converting torch tensor to R array works when tensor has 'cuda' device (#1130)
+
+## Bug fixes
+
+- Fix a bug on using input projection initialization bias in `nnf_multi_head_attention_forward` (#1154 @cregouby)
 - Bugfix: calling `$detach()` on a tensor now preserves attributes (#1136)
 - Make sure deep cloning of tensor and nn_module preserves class attributes and the requires_grad field. (#1129)
 - Fixed that parameters and buffers of children of nn_modules were not cloned
@@ -7,10 +159,9 @@
 - Fixed bug where nn_module's patched clone method was invalid after a call to
   the internal `create_nn_module_callable()`
 - Printing of `grad_fn` now appends a new line at the end.
-- Added support for a private `$finalize_deep_clone()` method for `nn_module` which
- allows to run some code after cloning a module.
 - Make sure deep cloning preserve state dict attributes. (#1129)
-- Converting torch tensor to R array works when tensor has 'cuda' device (#1130)
+- Added separate setter and unsetter for the autocast context instead of only allowing `local_autocast()`. (#1142)
+- Fixed a bug in `torch_arange()` causing it to return 1:(n-1) values when specific request `dtype = torch_int64()` (#1160)
 
 # torch 0.12.0
 

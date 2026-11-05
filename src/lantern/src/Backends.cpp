@@ -15,3 +15,9 @@ bool _lantern_backend_has_openmp() { return at::hasOpenMP(); }
 bool _lantern_backend_has_lapack() { return at::hasLAPACK(); }
 
 bool _lantern_backend_has_mps() { return at::hasMPS(); }
+
+void _lantern_mps_synchronize() {
+  LANTERN_FUNCTION_START
+  at::detail::getMPSHooks().deviceSynchronize();
+  LANTERN_FUNCTION_END_VOID
+}

@@ -30,7 +30,7 @@ Dataset <- R6::R6Class(
         }
         invisible(NULL)
       } else {
-        cli::cli_abort("Loading the state_dict is only implemented when {.arg .refer_to_state_dict} is {.val TRUE}")
+        cli_abort("Loading the state_dict is only implemented when {.arg .refer_to_state_dict} is {.val TRUE}")
       }
     }
   )

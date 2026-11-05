@@ -1,11 +1,11 @@
 cmake_minimum_required(VERSION 3.19.2)
 project(lantern)
 
-set(TORCH_VERSION "2.0.1")
+set(TORCH_VERSION "2.8.0")
 
 if (NOT DEFINED TORCH_PATH)
     if (DEFINED ENV{TORCH_PATH})
-        set(TORCH_PATH "ENV{TORCH_PATH}")
+        set(TORCH_PATH "$ENV{TORCH_PATH}")
     else()
         set(TORCH_PATH "${CMAKE_CURRENT_BINARY_DIR}/libtorch/")
     endif()
@@ -19,17 +19,7 @@ if (DEFINED ENV{CUDA} AND NOT "$ENV{CUDA}" STREQUAL "")
     message(STATUS "CUDA VERSION: $ENV{CUDA} | ${CUDA_VERSION} | ${CUDA_VERSION_NUMBER}")
     
     set(CAFFE2_USE_CUDNN 1)
-    set(ENV{TORCH_CUDA_ARCH_LIST} "3.7 5.0 5.2 6.0 6.1 7.0 7.5 8.0 8.6+PTX")
-endif()
-
-
-if (DEFINED ENV{PRECXX11ABI} AND '$ENV{PRECXX11ABI}' STREQUAL '1')
-    if (NOT UNIX)
-        message(FATAL_ERROR "PRECXX11ABI is only supported on UNIX.")
-    endif()
-    message(STATUS "Building using -D_GLIBCXX_USE_CXX11_ABI=0")
-    add_definitions(-D_GLIBCXX_USE_CXX11_ABI=0)
-    set(PRECXX11ABI 1)
+    set(ENV{TORCH_CUDA_ARCH_LIST} "5.0 5.2 6.0 6.1 7.0 7.5 8.0 8.6 9.0+PTX")
 endif()
 
 if (NOT EXISTS "${TORCH_PATH}")
@@ -37,24 +27,15 @@ if (NOT EXISTS "${TORCH_PATH}")
     message(STATUS "TORCH_PATH doesn't exists yet. Downloading a pre-built binary.")
 
     if(DEFINED ENV{TORCH_URL})
-        set(TORCH_URL "ENV{TORCH_URL}")
+        set(TORCH_URL "$ENV{TORCH_URL}")
     endif()
 
     # find an appropriate torch url
     if (NOT DEFINED TORCH_URL)
         message(STATUS "No `TORCH_URL` is defined. Will use the default URL.")
 
-        set(PRECXX11ABI_URL "cxx11-abi-")
-        if(DEFINED PRECXX11ABI)
-            set(PRECXX11ABI_URL "")
-        endif()
-
         if (APPLE)
-            if ('${CMAKE_HOST_SYSTEM_PROCESSOR}' STREQUAL 'x86_64')
-                set(TORCH_URL "https://download.pytorch.org/libtorch/cpu/libtorch-macos-${TORCH_VERSION}.zip")
-            elseif('${CMAKE_HOST_SYSTEM_PROCESSOR}' STREQUAL 'arm64')    
-                set(TORCH_URL "https://github.com/mlverse/libtorch-mac-m1/releases/download/LibTorch-for-R/libtorch-v${TORCH_VERSION}.zip")
-            endif()
+            set(TORCH_URL "https://github.com/mlverse/libtorch-mac-m1/releases/download/LibTorch-for-R/libtorch-${CMAKE_HOST_SYSTEM_PROCESSOR}-v${TORCH_VERSION}.zip")
         elseif(WIN32)
             if (DEFINED CUDA_VERSION_NUMBER)    
                 set(TORCH_URL "https://download.pytorch.org/libtorch/cu${CUDA_VERSION_NUMBER}/libtorch-win-shared-with-deps-${TORCH_VERSION}%2Bcu${CUDA_VERSION_NUMBER}.zip")
@@ -63,9 +44,9 @@ if (NOT EXISTS "${TORCH_PATH}")
             endif()
         elseif(UNIX)
             if (DEFINED CUDA_VERSION_NUMBER)
-                set(TORCH_URL "https://download.pytorch.org/libtorch/cu${CUDA_VERSION_NUMBER}/libtorch-${PRECXX11ABI_URL}shared-with-deps-${TORCH_VERSION}%2Bcu${CUDA_VERSION_NUMBER}.zip")
+                set(TORCH_URL "https://download.pytorch.org/libtorch/cu${CUDA_VERSION_NUMBER}/libtorch-shared-with-deps-${TORCH_VERSION}%2Bcu${CUDA_VERSION_NUMBER}.zip")
             else()
-                set(TORCH_URL "https://download.pytorch.org/libtorch/cpu/libtorch-${PRECXX11ABI_URL}shared-with-deps-${TORCH_VERSION}%2Bcpu.zip")
+                set(TORCH_URL "https://download.pytorch.org/libtorch/cpu/libtorch-shared-with-deps-${TORCH_VERSION}%2Bcpu.zip")
             endif()
         endif()
     endif()
@@ -82,6 +63,22 @@ endif()
 if (DEFINED CUDA_VERSION_NUMBER)
     if (WIN32)
         find_package(CUDAToolkit)
+        set(CMAKE_CUDA_FLAGS "${CMAKE_CUDA_FLAGS} -allow-unsupported-compiler")
+        # Workaround issue with PyTorch NVTX headers
+        # See https://discuss.pytorch.org/t/failed-to-find-nvtoolsext/179635/13?u=dfalbel
+        if(CUDA_VERSION_NUMBER VERSION_GREATER_EQUAL 12)
+            message(STATUS "PyTorch NVTX headers workaround: Yes")
+            # only do this if nvToolsExt is not defined and CUDA::nvtx3 exists
+            if(NOT TARGET CUDA::nvToolsExt AND TARGET CUDA::nvtx3)
+                add_library(CUDA::nvToolsExt INTERFACE IMPORTED)
+                # ensure that PyTorch is told to use NVTX3 headers
+                target_compile_definitions(
+                    CUDA::nvToolsExt INTERFACE
+                    TORCH_CUDA_USE_NVTX3
+                )
+                target_link_libraries(CUDA::nvToolsExt INTERFACE CUDA::nvtx3)
+            endif()
+        endif()
     endif()
     enable_language(CUDA)
     add_compile_definitions("CUDA${CUDA_VERSION_NUMBER}")
@@ -131,7 +128,8 @@ set(LANTERN_SRC
     src/Compile.cpp
     src/Amp.cpp
     src/JITExecute.cpp
-    src/Pickler.cpp
+    src/Unpickler.cpp
+    src/Ignite.cpp
 )
 
 if(APPLE)
@@ -158,7 +156,7 @@ if(DEFINED ENV{CUDA} AND NOT '$ENV{CUDA}' STREQUAL '')
     set_property(TARGET lantern PROPERTY CUDA_SEPARABLE_COMPILATION ON)
     set_property(TARGET lantern PROPERTY CUDA_STANDARD 17)
   else()
-    set_property(TARGET lantern PROPERTY CUDA_STANDARD 14)
+    set_property(TARGET lantern PROPERTY CUDA_STANDARD 17)
   endif()
   
 else()
@@ -215,10 +213,6 @@ if (NOT WIN32)
     set(CPACK_PACKAGE_VERSION ${CPACK_PACKAGE_VERSION}+${CMAKE_SYSTEM_PROCESSOR})
 endif()
 
-if (DEFINED PRECXX11ABI)
-    set(CPACK_PACKAGE_VERSION "${CPACK_PACKAGE_VERSION}+pre-cxx11")
-endif()
-
 include(CPack)
 
 install(
@@ -236,11 +230,32 @@ option(BUNDLE_DEPENDENCIES "On or off" OFF)
 if (BUNDLE_DEPENDENCIES)
     install(DIRECTORY ${TORCH_PATH} DESTINATION .)
     install(TARGETS lantern RUNTIME_DEPENDENCY_SET lantern_deps)
-    install(RUNTIME_DEPENDENCY_SET lantern_deps 
-		        DESTINATION lib
-		        DIRECTORIES "${TORCH_PATH}/lib/" "${CUDA_TOOLKIT_ROOT_DIR}/bin/"
-		        UNRESOLVED_DEPENDENCIES_VAR unresolved_deps
-		)
+    install(RUNTIME_DEPENDENCY_SET lantern_deps
+        DESTINATION lib
+        DIRECTORIES "${TORCH_PATH}/lib/" "${CUDA_TOOLKIT_ROOT_DIR}/bin/"
+        # Exclude glibc libraries - these must come from the host system.
+        # Bundling glibc causes ABI conflicts because GLIBC_PRIVATE symbols
+        # are unstable across versions. The build environment (Ubuntu 20.04,
+        # glibc 2.31) differs from many target systems (e.g., Ubuntu 24.04,
+        # glibc 2.39), causing "undefined symbol: _dl_catch_error" errors.
+        PRE_EXCLUDE_REGEXES
+            "^libc\\.so"
+            "^libc-"
+            "^libdl\\.so"
+            "^libdl-"
+            "^libpthread\\.so"
+            "^libpthread-"
+            "^librt\\.so"
+            "^librt-"
+            "^libm\\.so"
+            "^libm-"
+            "^ld-linux"
+        POST_EXCLUDE_REGEXES
+            "^/lib/"
+            "^/lib64/"
+            "^/usr/lib/"
+        UNRESOLVED_DEPENDENCIES_VAR unresolved_deps
+    )
 endif()
 
 ############################################################

@@ -37,3 +37,27 @@ int cpp_cuda_get_runtime_version() {
 void cpp_cuda_empty_cache () {
   lantern_cuda_empty_cache();
 }
+
+// [[Rcpp::export]]
+void cpp_cuda_record_memory_history(Rcpp::Nullable<std::string> enabled, Rcpp::Nullable<std::string> context, std::string stacks, size_t max_entries) {
+  void* en_ptr = nullptr;
+  void* ctx_ptr = nullptr;
+  std::string en_str, ctx_str;
+  if (enabled.isNotNull()) {
+    en_str = Rcpp::as<std::string>(enabled);
+    en_ptr = (void*)&en_str;
+  }
+  if (context.isNotNull()) {
+    ctx_str = Rcpp::as<std::string>(context);
+    ctx_ptr = (void*)&ctx_str;
+  }
+  lantern_cuda_record_memory_history(en_ptr, ctx_ptr, (void*)&stacks, max_entries);
+}
+
+// [[Rcpp::export]]
+Rcpp::RawVector cpp_cuda_memory_snapshot() {
+  std::string snapshot = torch::string(lantern_cuda_memory_snapshot());
+  Rcpp::RawVector out(snapshot.size());
+  std::copy(snapshot.begin(), snapshot.end(), out.begin());
+  return out;
+}

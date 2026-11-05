@@ -18,6 +18,30 @@ void *_lantern_Layout_sparse() {
   LANTERN_FUNCTION_END
 }
 
+void *_lantern_Layout_sparse_csr() {
+  LANTERN_FUNCTION_START
+  return make_raw::Layout(torch::kSparseCsr);
+  LANTERN_FUNCTION_END
+}
+
+void *_lantern_Layout_sparse_csc() {
+  LANTERN_FUNCTION_START
+  return make_raw::Layout(torch::kSparseCsc);
+  LANTERN_FUNCTION_END
+}
+
+void *_lantern_Layout_sparse_bsr() {
+  LANTERN_FUNCTION_START
+  return make_raw::Layout(torch::kSparseBsr);
+  LANTERN_FUNCTION_END
+}
+
+void *_lantern_Layout_sparse_bsc() {
+  LANTERN_FUNCTION_START
+  return make_raw::Layout(torch::kSparseBsc);
+  LANTERN_FUNCTION_END
+}
+
 const char *_lantern_Layout_string(void *x) {
   LANTERN_FUNCTION_START
   std::string str;
@@ -26,6 +50,14 @@ const char *_lantern_Layout_string(void *x) {
     str = "strided";
   } else if (l == torch::kSparse) {
     str = "sparse_coo";
+  } else if (l == torch::kSparseCsr) {
+    str = "sparse_csr";
+  } else if (l == torch::kSparseCsc) {
+    str = "sparse_csc";
+  } else if (l == torch::kSparseBsr) {
+    str = "sparse_bsr";
+  } else if (l == torch::kSparseBsc) {
+    str = "sparse_bsc";
   }
 
   char *cstr = new char[str.length() + 1];

@@ -83,7 +83,7 @@ nn_conv_nd <- nn_module(
 #' }
 #'
 #' where \eqn{\star} is the valid
-#' [cross-correlation](https://en.wikipedia.org/wiki/Cross-correlation) operator,
+#' cross correlation operator,
 #' \eqn{N} is a batch size, \eqn{C} denotes a number of channels,
 #' \eqn{L} is a length of signal sequence.
 #'

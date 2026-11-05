@@ -12,7 +12,7 @@ void *_lantern_vector_int64_t(int64_t *x, size_t x_size) {
   LANTERN_FUNCTION_START
   auto out = std::vector<int64_t>(x, x + x_size);
   return make_raw::vector::int64_t(out);
-  LANTERN_FUNCTION_END
+  LANTERN_FUNCTION_END_RET(0)
 }
 
 void* _lantern_IntArrayRef_get (void* x) {
@@ -25,7 +25,7 @@ void* _lantern_IntArrayRef_get (void* x) {
 int64_t _lantern_vector_int64_t_size(void *self) {
   LANTERN_FUNCTION_START
   return from_raw::vector::int64_t(self).size();
-  LANTERN_FUNCTION_END
+  LANTERN_FUNCTION_END_RET(0)
 }
 
 int64_t _lantern_vector_int64_t_at(void *self, int64_t index) {
@@ -56,7 +56,7 @@ void _lantern_vector_int64_t_push_back(void *self, int64_t x) {
 double _lantern_vector_double_size(void *self) {
   LANTERN_FUNCTION_START
   return reinterpret_cast<std::vector<double> *>(self)->size();
-  LANTERN_FUNCTION_END
+  LANTERN_FUNCTION_END_RET(0)
 }
 
 double _lantern_vector_double_at(void *self, int64_t index) {
@@ -139,19 +139,19 @@ void *_lantern_bool(bool x) {
 bool _lantern_bool_get(void *x) {
   LANTERN_FUNCTION_START
   return from_raw::bool_t(x);
-  LANTERN_FUNCTION_END
+  LANTERN_FUNCTION_END_RET(false)
 }
 
 int64_t _lantern_int64_t_get(void *x) {
   LANTERN_FUNCTION_START
   return from_raw::int64_t(x);
-  LANTERN_FUNCTION_END
+  LANTERN_FUNCTION_END_RET(0)
 }
 
 double _lantern_double_get(void *x) {
   LANTERN_FUNCTION_START
   return from_raw::double_t(x);
-  LANTERN_FUNCTION_END
+  LANTERN_FUNCTION_END_RET(0)
 }
 
 void *_lantern_vector_get(void *x, int i) {

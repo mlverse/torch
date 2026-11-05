@@ -77,14 +77,29 @@ torch_argmin <- function(self, dim = NULL, keepdim = FALSE) {
   o
 }
 
+# `ignore_index` names a target *value*, and is compared against the target inside libtorch after
+# `to_index_tensor()` has made that target 0 based. It therefore has to undergo the same
+# translation, or it selects the class one to the left of the one that was asked for.
+# Values that cannot be a 1 based class index are left alone: the default `-100`, and any other
+# negative sentinel, is meant to match no target at all and does so in either convention.
+to_index_ignore_index <- function(ignore_index) {
+  if (is.null(ignore_index)) {
+    return(ignore_index)
+  }
+  if (ignore_index == 0) {
+    value_error("`ignore_index` is a 1 based class index, so it cannot be 0. Use a negative value (e.g. the default -100) for a target value that never occurs.")
+  }
+  if (ignore_index >= 1) ignore_index - 1L else ignore_index
+}
+
 torch_nll_loss <- function(self, target, weight = list(), reduction = torch_reduction_mean(), ignore_index = -100) {
   target <- to_index_tensor(target)
-  .torch_nll_loss(self, target, weight, reduction, ignore_index)
+  .torch_nll_loss(self, target, weight, reduction, to_index_ignore_index(ignore_index))
 }
 
 torch_nll_loss2d <- function(self, target, weight = list(), reduction = torch_reduction_mean(), ignore_index = -100) {
   target <- to_index_tensor(target)
-  .torch_nll_loss2d(self, target, weight, reduction, ignore_index)
+  .torch_nll_loss2d(self, target, weight, reduction, to_index_ignore_index(ignore_index))
 }
 
 #' @rdname torch_argsort
@@ -98,7 +113,7 @@ torch_cross_entropy_loss <- function(self, target, weight = list(),
   target <- to_index_tensor(target)
   .torch_cross_entropy_loss(
     self = self, target = target, weight = weight,
-    reduction = reduction, ignore_index = ignore_index
+    reduction = reduction, ignore_index = to_index_ignore_index(ignore_index)
   )
 }
 
@@ -106,9 +121,9 @@ torch_nll_loss_nd <- function(self, target, weight = list(), reduction = torch_r
                                ignore_index = -100L) {
   target <- to_index_tensor(target)
   .torch_nll_loss_nd(
-    self = self, target = target, weight = weight, 
-    reduction = reduction, 
-    ignore_index = ignore_index
+    self = self, target = target, weight = weight,
+    reduction = reduction,
+    ignore_index = to_index_ignore_index(ignore_index)
   )
 }
 

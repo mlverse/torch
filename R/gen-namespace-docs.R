@@ -482,9 +482,10 @@ NULL
 #' @param self (Tensor) the tensor to be added
 #' @param batch1 (Tensor) the first batch of matrices to be multiplied
 #' @param batch2 (Tensor) the second batch of matrices to be multiplied
+#' @param out_dtype (torch_dtype, optional) the output dtype
 #' @param beta (Number, optional) multiplier for `input` (\eqn{\beta})
 #' @param alpha (Number, optional) multiplier for \eqn{\mbox{batch1} \mathbin{@} \mbox{batch2}} (\eqn{\alpha})
-#' 
+#'
 #'
 #' @name torch_baddbmm
 #'
@@ -746,7 +747,8 @@ NULL
 #'
 #' @param self (Tensor) the first batch of matrices to be multiplied
 #' @param mat2 (Tensor) the second batch of matrices to be multiplied
-#' 
+#' @param out_dtype (torch_dtype, optional) the output dtype
+#'
 #'
 #' @name torch_bmm
 #'
@@ -2565,7 +2567,8 @@ NULL
 #'
 #' @param self (Tensor) the first matrix to be multiplied
 #' @param mat2 (Tensor) the second matrix to be multiplied
-#' 
+#' @param out_dtype (torch_dtype, optional) the output dtype
+#'
 #'
 #' @name torch_mm
 #'
@@ -4277,11 +4280,44 @@ NULL
 #' @param self (Tensor) matrix to be added
 #' @param mat1 (Tensor) the first matrix to be multiplied
 #' @param mat2 (Tensor) the second matrix to be multiplied
+#' @param out_dtype (torch_dtype, optional) the output dtype
 #' @param beta (Number, optional) multiplier for `input` (\eqn{\beta})
 #' @param alpha (Number, optional) multiplier for \eqn{mat1 @ mat2} (\eqn{\alpha})
-#' 
+#'
 #'
 #' @name torch_addmm
+#'
+#' @export
+NULL
+
+
+#' Sparse_sampled_addmm
+#'
+#' @section sparse_sampled_addmm(self, mat1, mat2, *, beta=1, alpha=1) -> Tensor :
+#'
+#' Performs a matrix multiplication of the dense matrices \code{mat1} and \code{mat2} at the locations
+#' specified by the sparsity pattern of \code{self}. The matrix \code{self} is added to the final result.
+#'
+#' Mathematically, this performs the following operation:
+#'
+#' \deqn{
+#'     \mbox{out} = \alpha\ (\mbox{mat1} \mathbin{@} \mbox{mat2}) * \mbox{spy}(\mbox{self}) + \beta\ \mbox{self}
+#' }
+#'
+#' where \eqn{\mbox{spy}(\mbox{self})} is the sparsity pattern matrix of \code{self}, \code{alpha} and
+#' \code{beta} are the scaling factors. \eqn{\mbox{spy}(\mbox{self})} has value 1 at the positions
+#' where \code{self} has non-zero values, and 0 elsewhere.
+#'
+#' \code{self} must be a sparse CSR tensor. \code{mat1} and \code{mat2} must be dense tensors.
+#'
+#' @param self (Tensor) a sparse CSR matrix of size \code{(m, n)} to be added and used to compute
+#'   the sampled matrix multiplication
+#' @param mat1 (Tensor) a dense matrix of size \code{(m, k)} to be multiplied
+#' @param mat2 (Tensor) a dense matrix of size \code{(k, n)} to be multiplied
+#' @param beta (Number, optional) multiplier for \code{self} (\eqn{\beta})
+#' @param alpha (Number, optional) multiplier for \eqn{mat1 @ mat2} (\eqn{\alpha})
+#'
+#' @name torch_sparse_sampled_addmm
 #'
 #' @export
 NULL
@@ -4450,7 +4486,7 @@ NULL
 #' described in the type promotion documentation .
 #'
 #'
-#' @param from (dtype) The original `torch_dtype`.
+#' @param from_ (dtype) The original `torch_dtype`.
 #' @param to (dtype) The target `torch_dtype`.
 #'
 #' @name torch_can_cast
@@ -6368,6 +6404,28 @@ NULL
 NULL
 
 
+#' Ldexp
+#'
+#' @section ldexp(input, other, out=NULL) -> Tensor :
+#'
+#' Multiplies `input` by \eqn{2^{other}}.
+#'
+#' \deqn{
+#'     \text{out}_i = \text{input}_i * 2^{\text{other}_i}
+#' }
+#'
+#' Typically this function is used to construct floating point numbers by multiplying
+#' mantissas in `input` with integral powers of two created from the exponents in `other`.
+#'
+#' @param self (Tensor) the tensor of mantissas
+#' @param other (Tensor) the tensor of exponents, must be an integer dtype
+#'
+#' @name torch_ldexp
+#'
+#' @export
+NULL
+
+
 #' Kaiser_window
 #'
 #' @section kaiser_window(window_length, periodic=TRUE, beta=12.0, *, dtype=None, layout=torch.strided, device=None, requires_grad=FALSE) -> Tensor :
@@ -7477,5 +7535,100 @@ NULL
 #' @param other (`Tensor`) other tensor.
 #' 
 #' @name torch_kron
+#' @export
+NULL
+
+
+#' Selects values from input at the 1-dimensional indices from indices along the given dim.
+#' 
+#' @note If dim is `NULL`, the input array is treated as if it has been flattened to 1d.
+#' 
+#' Functions that return indices along a dimension, like [torch_argmax()] and [torch_argsort()], 
+#' are designed to work with this function. See the examples below.
+#' 
+#' @param self the input tensor.
+#' @param indices the indices into input. Must have long dtype.
+#' @param dim the dimension to select along. Default is `NULL`.
+#' 
+#' @name torch_take_along_dim
+#' @examples
+#' t <- torch_tensor(matrix(c(10, 30, 20, 60, 40, 50), nrow = 2))
+#' max_idx <- torch_argmax(t)
+#' torch_take_along_dim(t, max_idx)
+#' 
+#' sorted_idx <- torch_argsort(t, dim=2)
+#' torch_take_along_dim(t, sorted_idx, dim=2)
+#' 
+#' @export
+NULL
+
+
+#' Scaled Dot Product Attention
+#'
+#' Computes scaled dot product attention on query, key and value tensors, using
+#' an optional attention mask if passed, and applying dropout if a probability
+#' greater than 0.0 is specified.
+#'
+#' This function uses optimized fused CUDA kernels when available, providing
+#' significant performance improvements (2-3x faster) compared to manually
+#' computing attention. It is particularly beneficial for transformer models.
+#'
+#' The attention mechanism is defined as:
+#' \deqn{Attention(Q, K, V) = softmax(\frac{QK^T}{\sqrt{d_k}})V}
+#'
+#' Where \eqn{N} is the batch size, \eqn{S} is the source sequence length,
+#' \eqn{L} is the target sequence length, \eqn{E} is the embedding dimension of the query and key,
+#' and \eqn{Ev} is the embedding dimension of the value.
+#'
+#' The function automatically selects the best available implementation based on
+#' hardware and input characteristics. On CUDA devices with compatible architectures,
+#' it can use flash attention or memory-efficient attention kernels.
+#'
+#' @param query (Tensor) Query tensor; shape \eqn{(N, ..., L, E)}.
+#' @param key (Tensor) Key tensor; shape \eqn{(N, ..., S, E)}.
+#' @param value (Tensor) Value tensor; shape \eqn{(N, ..., S, Ev)}.
+#' @param attn_mask (Tensor, optional) Attention mask; shape must be broadcastable to
+#'   the shape of attention weights, which is \eqn{(N,..., L, S)}. Two types of masks
+#'   are supported. A boolean mask where a value of `TRUE` indicates that the element
+#'   should take part in attention (and `FALSE` masks out the position). A float mask
+#'   of the same type as query, key, value that is added to the attention score (use
+#'   `-Inf` to mask out positions). Default: `list()`.
+#' @param dropout_p (float) Dropout probability in the range \[0.0, 1.0\]; if greater
+#'   than 0.0, dropout is applied during training. Default: 0.0.
+#' @param is_causal (bool) If `TRUE`, assumes causal attention masking. `attn_mask` is
+#'   ignored when `is_causal=TRUE`. Default: `FALSE`.
+#' @param scale (float, optional) Scaling factor applied prior to softmax. If `NULL`,
+#'   the default value is set to \eqn{1/\sqrt{E}}. Default: `NULL`.
+#' @param enable_gqa (bool) If `TRUE`, enables grouped query attention (GQA) support.
+#'   Default: `FALSE`.
+#'
+#' @return A tensor with shape \eqn{(N, ..., L, Ev)}.
+#'
+#' @name torch_scaled_dot_product_attention
+#' @examples
+#' if (torch_is_installed()) {
+#'   # Basic usage
+#'   query <- torch_randn(2, 8, 10, 64)  # (batch, heads, seq_len, dim)
+#'   key <- torch_randn(2, 8, 10, 64)
+#'   value <- torch_randn(2, 8, 10, 64)
+#'
+#'   output <- torch_scaled_dot_product_attention(query, key, value)
+#'
+#'   # With causal masking (for autoregressive models)
+#'   output <- torch_scaled_dot_product_attention(
+#'     query, key, value,
+#'     is_causal = TRUE
+#'   )
+#'
+#'   # With attention mask
+#'   seq_len <- 10
+#'   attn_mask <- torch_ones(seq_len, seq_len)
+#'   attn_mask <- torch_tril(attn_mask)  # Lower triangular mask
+#'   output <- torch_scaled_dot_product_attention(
+#'     query, key, value,
+#'     attn_mask = attn_mask
+#'   )
+#' }
+#'
 #' @export
 NULL

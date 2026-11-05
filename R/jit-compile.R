@@ -1,6 +1,6 @@
 #' Compile TorchScript code into a graph
 #'
-#' See the [TorchScript language reference](https://pytorch.org/docs/stable/jit_language_reference.html#language-reference) for
+#' See the [TorchScript language reference](https://docs.pytorch.org/docs/stable/jit_language_reference.html#language-reference) for
 #' documentation on how to write TorchScript code.
 #'
 #' @param source valid TorchScript source code.

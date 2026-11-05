@@ -24,9 +24,8 @@ Sampler <- R6::R6Class(
 #' 
 #' A sampler must implement the `.iter` and `.length()` methods.
 #' - `initialize` takes in a `data_source`. In general this is a [dataset()].
-#' - `.iter` returns a function that returns a dataset index everytime it's called.
-#' - `.length` returns the maximum number of samples that can be retrieved from
-#'  that sampler.
+#' - `.iter` returns a function that returns an integer vector or coro::exhausted(). For a sampler, the integer vector should have length 1 (the value is one data index). For a batch_sampler, the integer vector should have length equal to batch size (the values are indices in the batch).
+#' - `.length` returns the maximum number of times that .iter() can be called, before it returns coro::exhausted(). For a sampler, this the number of samples. For a batch_sampler, this is the number of batches.
 #' 
 #' @param name (optional) name of the sampler
 #' @param inherit (optional) you can inherit from other samplers to re-use

@@ -46,7 +46,7 @@ For CUDA input, the only valid driver is \code{'gels'}, which assumes that \code
 
 To choose the best driver on CPU consider:
 \itemize{
-\item If \code{A} is well-conditioned (its \href{https://pytorch.org/docs/master/linalg.html#torch.linalg.cond}{condition number} is not too large), or you do not mind some precision loss.
+\item If \code{A} is well-conditioned (its \href{https://docs.pytorch.org/docs/master/linalg.html#torch.linalg.cond}{condition number} is not too large), or you do not mind some precision loss.
 \item For a general matrix: \code{'gelsy'} (QR with pivoting) (default)
 \item If \code{A} is full-rank: \code{'gels'} (QR)
 \item If \code{A} is not well-conditioned.
@@ -123,6 +123,7 @@ Other linalg:
 \code{\link{linalg_qr}()},
 \code{\link{linalg_slogdet}()},
 \code{\link{linalg_solve}()},
+\code{\link{linalg_solve_triangular}()},
 \code{\link{linalg_svd}()},
 \code{\link{linalg_svdvals}()},
 \code{\link{linalg_tensorinv}()},

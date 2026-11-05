@@ -39,7 +39,7 @@ cuda_synchronize <- function(device = NULL) {
 #' @export
 cuda_get_device_capability <- function(device = cuda_current_device()) {
   if (device < 0 | device >= cuda_device_count()) {
-    stop(paste("device must be an integer between 0 and the number of devices minus 1"))
+    value_error("device must be an integer between 0 and the number of devices minus 1")
   }
   res <- as.integer(cpp_cuda_get_device_capability(device))
   names(res) <- c("Major", "Minor")
@@ -89,7 +89,7 @@ paste_for_each <- function(x, y, ...) {
 #' @export
 cuda_memory_stats <- function(device = cuda_current_device()) {
   if (!cuda_is_available()) {
-    rlang::abort("CUDA is not available.")
+    runtime_error("CUDA is not available.")
   }
 
   # quickly allocate some memory to initialize the device
@@ -187,4 +187,84 @@ cuda_runtime_version <- function() {
 #' @export
 cuda_empty_cache <- function() {
   cpp_cuda_empty_cache()
+}
+
+#' Enable Recording of Memory Allocation Stack Traces
+#'
+#' Enables recording of stack traces associated with memory allocations, allowing
+#' users to identify the source of memory allocation in CUDA snapshots.
+#'
+#' Alongside tracking stack traces for each current allocation and free event,
+#' this function can also keep a historical log of all allocation and free events.
+#'
+#' Use `cuda_memory_snapshot()` to retrieve recorded information. Visualization
+#' can be performed using [pytorch.org/memory_viz](https://docs.pytorch.org/memory_viz).
+#'
+#' @param enabled Character or \code{NULL}. Controls memory history recording. Options:
+#'   \describe{
+#'     \item{\code{NULL}}{Disable recording of memory history.}
+#'     \item{\code{"state"}}{Record currently allocated memory information.}
+#'     \item{\code{"all"}}{Record the history of all allocation and free events (default).}
+#'   }
+#'
+#' @param context Character or \code{NULL}. Controls traceback recording. Options:
+#'   \describe{
+#'     \item{\code{NULL}}{Do not record any tracebacks.}
+#'     \item{\code{"state"}}{Record tracebacks for currently allocated memory.}
+#'     \item{\code{"alloc"}}{Record tracebacks for allocation events.}
+#'     \item{\code{"all"}}{Record tracebacks for both allocation and free events (default).}
+#'   }
+#'
+#' @param stacks Character. Defines the stack trace frames to include. Options:
+#'   \describe{
+#'     \item{\code{"all"}}{Include all frames (default).}
+#'   }
+#'
+#' @param max_entries Integer. The maximum number of allocation/free events to retain.
+#'
+#' @return None; function invoked for side effects.
+#' @examples
+#' \dontrun{
+#' cuda_record_memory_history(enabled = 'all', context = 'all', stacks = 'all', max_entries = 10000)
+#' }
+#' @export
+cuda_record_memory_history <- function(enabled, context = "all", stacks = "all", max_entries = 1) {
+  cpp_cuda_record_memory_history(enabled, context, stacks, as.integer(max_entries))
+}
+
+#' Capture CUDA Memory State Snapshot
+#'
+#' Saves a snapshot of the CUDA memory state at the time it was called. The resulting
+#' binary output is in pickle format and can be visualized using the interactive snapshot
+#' viewer available at [pytorch.org/memory_viz](https://docs.pytorch.org/memory_viz).
+#'
+#' @return Raw binary data representing the snapshot in pickle format.
+#' @examples
+#' \dontrun{
+#' snapshot <- cuda_memory_snapshot()
+#' }
+#' @export
+cuda_memory_snapshot <- function() {
+  cpp_cuda_memory_snapshot()
+}
+
+#' Save CUDA Memory State Snapshot to File
+#'
+#' Calls `cuda_memory_snapshot()` and saves the resulting binary snapshot
+#' to a specified file using `writeBin`. The resulting file can be visualized using the interactive 
+#' snapshot viewer available at [pytorch.org/memory_viz](https://docs.pytorch.org/memory_viz).
+#'
+#' @param filepath Character; the path to the file where the snapshot will be saved.
+#'
+#' @return None; snapshot is saved directly to the file.
+#' @examples
+#' \dontrun{
+#' cuda_dump_memory_snapshot("snapshot.bin")
+#' }
+#' @export
+cuda_dump_memory_snapshot <- function(filepath) {
+  snapshot <- cuda_memory_snapshot()
+  con <- file(filepath, "wb")
+  on.exit(close(con))
+  writeBin(snapshot, con)
 }

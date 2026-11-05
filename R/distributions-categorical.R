@@ -53,7 +53,7 @@ Categorical <- R6::R6Class(
 
       .args$validate_args <- self$.validate_args
 
-      new <- private$.get_checked_instance(self, .instance, .args)
+      new <- private$.get_checked_instance(self, instance, .args)
       new
     },
     sample = function(sample_shape = list()) {

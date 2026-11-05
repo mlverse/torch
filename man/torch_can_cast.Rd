@@ -5,10 +5,10 @@
 \alias{torch_can_cast}
 \title{Can_cast}
 \usage{
-torch_can_cast(from, to)
+torch_can_cast(from_, to)
 }
 \arguments{
-\item{from}{(dtype) The original \code{torch_dtype}.}
+\item{from_}{(dtype) The original \code{torch_dtype}.}
 
 \item{to}{(dtype) The target \code{torch_dtype}.}
 }

@@ -139,9 +139,33 @@ test_that("arange", {
   x <- torch_arange(torch_tensor(10), torch_tensor(1), torch_tensor(-1))
   expect_equal(length(x), 10)
 
+  x <- torch_arange(1, 10, dtype = torch_int64())
+  expect_equal(length(x), 10)
+
+  x <- torch_arange(10L)
+  expect_equal(length(x), 10)
+  expect_true(x$dtype == torch_int64())
+
+  x <- torch_arange(10)
+  expect_equal(length(x), 10)
+  expect_true(x$dtype == torch_float32())
+
+  x <- torch_arange(0L, 5L)
+  expect_identical(as.array(x), 0:5)
+
   # deprecated
   expect_warning(x <- torch_range(1, 9))
   expect_equal(x$size(1), 9)
+})
+
+test_that("arange includes the end point when dtype is given as a string (#1063)", {
+  expect_equal_to_r(torch_arange(1, 3, dtype = "long"), c(1L, 2L, 3L))
+  expect_equal_to_r(torch_arange(1, 3, dtype = "int"), c(1L, 2L, 3L))
+  expect_equal_to_r(torch_arange(0, 1, 0.5, dtype = "double"), c(0, 0.5, 1))
+  expect_true(torch_arange(1, 3, dtype = "long")$dtype == torch_long())
+  expect_equal_to_r(torch_arange(1, 3, dtype = "uint8")$to(dtype = torch_int()), c(1L, 2L, 3L))
+  expect_true(torch_arange(1, 3, dtype = "bfloat16")$dtype == torch_bfloat16())
+  expect_error(torch_arange(1, 3, dtype = "lnog"))
 })
 
 test_that("linspace", {
@@ -195,4 +219,18 @@ test_that("scalar_tensor", {
   x <- torch_scalar_tensor(x)
   expect_equal(length(x$shape), 0)
   expect_true(x$dtype == torch_float())
+})
+
+test_that("scalar_tensor is a leaf when requires_grad = TRUE (#1368)", {
+  x <- torch_scalar_tensor(2, requires_grad = TRUE)
+  expect_true(x$is_leaf)
+  y <- x^2
+  y$backward()
+  expect_equal(as.numeric(x$grad), 4)
+
+  z <- torch_scalar_tensor(torch_tensor(2), requires_grad = TRUE)
+  expect_true(z$is_leaf)
+  w <- z^2
+  w$backward()
+  expect_equal(as.numeric(z$grad), 4)
 })

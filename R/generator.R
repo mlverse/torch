@@ -10,7 +10,7 @@ Generator <- R7Class(
       cpp_torch_generator()
     },
     print = function() {
-      cat("torch_generator()")
+      cat("torch_generator()\n")
     },
     current_seed = function() {
       if (!requireNamespace("bit64")) {
@@ -21,7 +21,7 @@ Generator <- R7Class(
     },
     set_current_seed = function(seed) {
       if ((!is.integer(seed)) && (!inherits(seed, "integer64"))) {
-        stop("Seed must an integer or integer64.")
+        type_error("Seed must be integer or integer64.")
       }
 
       seed <- as.character(seed)
@@ -99,7 +99,7 @@ local_torch_manual_seed <- function(seed, .env = parent.frame()) {
 #' @describeIn torch_manual_seed A with context to change the seed during the function execution.
 #' @export
 with_torch_manual_seed <- function(code, ..., seed) {
-  ellipsis::check_dots_empty()
+  rlang::check_dots_empty()
   local_torch_manual_seed(seed)
   force(code)
 }
@@ -148,7 +148,7 @@ cuda_set_rng_state <- function(state, device = NULL) {
   }
   
   if (length(state) != cuda_device_count()) {
-    cli::cli_abort("Expected length {.var state} ({.val {length(state)}}) equal to the number of cuda devices ({.val {cuda_device_count()}}).")
+    cli_abort("Expected length {.var state} ({.val {length(state)}}) equal to the number of cuda devices ({.val {cuda_device_count()}}).")
   }
   
   for (i in seq_along(state)) {

@@ -22,13 +22,12 @@ torch_lu <- function(A, pivot = TRUE, get_infos = FALSE, out = NULL) {
 
   if (!is.null(out)) {
     if (!is.list(out)) {
-      stop("argument 'out' must be a list of Tensors.")
+      type_error("argument 'out' must be a list of Tensors.")
     }
 
     if (length(out) - as.integer(get_infos) != 2) {
-      stop(
-        "expected tuple of ", 2 + as.integer(get_infos), " elements but got ",
-        length(out)
+      value_error(
+        "expected tuple of {2 + as.integer(get_infos)} elements but got {length(out)}"
       )
     }
 
@@ -195,14 +194,14 @@ torch_tensordot <- function(a, b, dims = 2) {
 torch_tril_indices <- function(row, col, offset = 0, dtype = NULL,
                                device = NULL, layout = NULL) {
   opt <- list(dtype = dtype, device = device, layout = layout)
-  .torch_tril_indices(row, col, offset, options = opt)
+  .torch_tril_indices(row, col, offset, options = opt)$add_(1L, 1L)
 }
 
 #' @rdname torch_triu_indices
 torch_triu_indices <- function(row, col, offset = 0, dtype = NULL,
                                device = NULL, layout = NULL) {
   opt <- list(dtype = dtype, device = device, layout = layout)
-  .torch_triu_indices(row, col, offset, options = opt)
+  .torch_triu_indices(row, col, offset, options = opt)$add_(1L, 1L)
 }
 
 #' @rdname torch_multilabel_margin_loss
@@ -621,6 +620,22 @@ torch_multinomial <- function(self, num_samples, replacement = FALSE, generator 
   r
 }
 
+#' @rdname torch_repeat_interleave
+torch_repeat_interleave <- function(self, repeats, dim = NULL, output_size = NULL) {
+  if (is.numeric(repeats) && length(repeats) == 1) {
+    return(cpp_torch_namespace_repeat_interleave_self_Tensor_repeats_int64_t(
+      self,
+      repeats = repeats,
+      dim = dim,
+      output_size = output_size
+    ))
+  }
+  .torch_repeat_interleave(
+    self = self, repeats = repeats, dim = dim,
+    output_size = output_size
+  )
+}
+
 #' Index torch tensors
 #'
 #' Helper functions to index tensors.
@@ -648,3 +663,24 @@ NULL
 #' @name torch_index_put
 #' @export
 NULL
+
+# Override the generated to_sparse method to work around the optional Layout
+# type mismatch in the C++ layer. The layout-based overload passes a raw
+# torch::Layout* where the Lantern layer expects a self_contained::optional::Layout*,
+# causing a segfault. We route through the sparse_dim overload instead.
+Tensor$set("public", "to_sparse", function(sparse_dim, layout = NULL, blocksize = NULL, dense_dim = NULL) {
+  if (!missing(sparse_dim)) {
+    self$`_to_sparse`(sparse_dim = sparse_dim)
+  } else if (!is.null(dense_dim) && is.null(layout) && is.null(blocksize)) {
+    # For COO format: sparse_dim + dense_dim = ndim
+    self$`_to_sparse`(sparse_dim = self$dim() - dense_dim)
+  } else if (!is.null(layout) || !is.null(blocksize)) {
+    cli::cli_abort(c(
+      "The {.arg layout} and {.arg blocksize} arguments are not yet supported.",
+      i = "Use the dedicated conversion methods instead: {.fn to_sparse_csr}, {.fn to_sparse_csc}, {.fn to_sparse_bsr}, {.fn to_sparse_bsc}."
+    ))
+  } else {
+    # Default: convert to sparse COO format
+    self$`_to_sparse`(sparse_dim = self$dim())
+  }
+})

@@ -3,13 +3,13 @@ resolve_size <- function(...) {
 
   if (!is.null(size[["size"]])) {
     if (!length(size) == 1) {
-      stop("You should specify a single size argument.")
+      value_error("You should specify a single size argument.")
     }
 
     size <- size[["size"]]
   } else if (length(size[[1]]) > 1) {
     if (!length(size) == 1) {
-      stop("You should specify a single size argument.")
+      value_error("You should specify a single size argument.")
     }
 
     size <- size[[1]]
@@ -238,7 +238,7 @@ torch_empty_like <- function(input, dtype = NULL, layout = NULL,
 }
 
 #' @rdname torch_arange
-torch_arange <- function(start, end, step = 1, dtype = NULL, layout = NULL,
+torch_arange <- function(start, end, step = 1L, dtype = NULL, layout = NULL,
                          device = NULL, requires_grad = FALSE) {
   args <- list(
     options = list(
@@ -248,8 +248,22 @@ torch_arange <- function(start, end, step = 1, dtype = NULL, layout = NULL,
       requires_grad = requires_grad
     )
   )
+
+  if (missing(end)) {
+    end <- start
+    start <- 1L
+  }
+
+  if (is.null(dtype) && is.integer(start) && is.integer(end) && is.integer(step)) {
+    dtype <- torch_int64()
+  }
+
   args$start <- start
-  args$end <- torch_nextafter(end, end + sign(step))
+  args$end <- if (is_integer_dtype(dtype)) {
+    end + as.integer(sign(step))
+  } else {
+    torch_nextafter(end, end + sign(step))
+  }
   args$step <- step
   do.call(.torch_arange, args)
 }
@@ -387,6 +401,6 @@ torch_scalar_tensor <- function(value, dtype = NULL, device = NULL, requires_gra
   if (is_torch_tensor(value)) {
     value$squeeze()$to(device = device, dtype = dtype)$requires_grad_(requires_grad)
   } else {
-    torch_tensor(value, dtype = dtype, device = device, requires_grad = requires_grad)$squeeze()
+    torch_tensor(value, dtype = dtype, device = device)$squeeze()$requires_grad_(requires_grad)
   }
 }

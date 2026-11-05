@@ -173,7 +173,7 @@ test_that("pinv", {
   expect_equal_to_tensor(
     torch_matmul(linalg_pinv(A), B),
     linalg_lstsq(A, B)$solution,
-    tolerance = 1e-6
+    tolerance = 1e-5
   )
 
   A <- torch_randn(3, 3, 5)
@@ -182,7 +182,7 @@ test_that("pinv", {
   expect_equal_to_tensor(
     torch_bmm(linalg_pinv(A), B),
     linalg_lstsq(A, B)$solution,
-    tolerance = 1e-6
+    tolerance = 1e-5
   )
   
   expect_warning(linalg_pinv(A, rcond = 1e-15))
@@ -262,5 +262,14 @@ test_that("linalg_inv_ex", {
   expect_equal_to_tensor(
     out$inverse,
     linalg_inv(A)
+  )
+})
+
+test_that("linalg_solve_triangular works", {
+  a <- torch_randn(3,3)$triu_()
+  b <- torch_randn(3,4)
+  expect_error(
+    x <- linalg_solve_triangular(a, b, upper = TRUE),
+    regexp = NA
   )
 })

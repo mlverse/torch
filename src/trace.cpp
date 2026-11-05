@@ -2,13 +2,24 @@
 
 void* rcpp_call_hook(void* x, void* hook);
 
+// Defined in autograd.cpp - stores the longjump token when catching LongjumpException
+extern SEXP g_longjump_token;
+// Defined in lantern.cpp - resumes longjump if token is set
+void maybe_resume_longjump();
+
 // [[Rcpp::export]]
 Rcpp::XPtr<XPtrTorchFunctionPtr> cpp_trace_function(
     Rcpp::Function fn, XPtrTorchStack inputs,
     XPtrTorchCompilationUnit compilation_unit, XPtrTorchstring name,
     bool strict = true, XPtrTorchScriptModule module = R_NilValue,
     bool should_mangle = true, bool manage_memory = true) {
+
+  // to create a qualified name, the module must be present.
+  // if we don't qualify the names, calling jit_save will fail,
+  // when calling it on jit-traced modules
+  bool qualified_name = (module.get() != nullptr);
   auto output = XPtrTorchStack(lantern_Stack_new());
+
   std::string error;
 
   std::function<void*(void*)> r_fn = [&error, &fn, &output](void* inputs) {
@@ -21,6 +32,10 @@ Rcpp::XPtr<XPtrTorchFunctionPtr> cpp_trace_function(
     // tracer is left unfinished and in an error state.
     try {
       output = Rcpp::as<XPtrTorchStack>(fn(inputs_));
+    } catch (Rcpp::LongjumpException& e) {
+      g_longjump_token = e.token;
+      error = "LongjumpException";
+      output = XPtrTorchStack((void*)nullptr);
     } catch (const std::exception& e) {
       error = e.what();
       output = XPtrTorchStack((void*)nullptr);
@@ -42,10 +57,12 @@ Rcpp::XPtr<XPtrTorchFunctionPtr> cpp_trace_function(
   try {
     tr_fn_ptr = lantern_trace_fn(traceable_fn.get(), inputs.get(),
                                  compilation_unit.get(), strict, module.get(),
-                                 name.get(), should_mangle);
+                                 name.get(), should_mangle, qualified_name);
   } catch (const std::exception& e) {
+    maybe_resume_longjump();
     Rcpp::stop(std::string(e.what()) + std::string(": ") + error);
   } catch (...) {
+    maybe_resume_longjump();
     Rcpp::stop("Unknown error");
   }
 

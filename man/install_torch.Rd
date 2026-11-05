@@ -28,7 +28,8 @@ within the package directory. Eg what's given by \code{system.file(package="torc
 Files will be installed/copied to the \code{TORCH_HOME} directory.
 \item \code{LANTERN_URL}: Same as \code{TORCH_URL} but for the Lantern library.
 \item \code{TORCH_INSTALL_DEBUG}: Setting it to 1, shows debug log messages during installation.
-\item \code{PRECXX11ABI}: Setting it to \code{1} will will trigger the installation of
+\item \code{PRECXX11ABI}: DEPRECATED. No longer has effects.
+Setting it to \code{1} will will trigger the installation of
 a Pre-cxx11 ABI installation of LibTorch. This can be useful in environments with
 older versions of GLIBC like CentOS7 and older Debian/Ubuntu versions.
 \item \code{LANTERN_BASE_URL}: The base URL for lantern files. This allows passing a directory

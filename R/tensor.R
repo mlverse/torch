@@ -79,7 +79,7 @@ Tensor <- R7Class(
       if (has_other) {
         # can't have device and dtype
         if (has_device || has_dtype) {
-          cli::cli_abort("Had {.arg other} but {.arg device} or {.arg dtype} are non {.val NULL}")
+          cli_abort("Had {.arg other} but {.arg device} or {.arg dtype} are non {.val NULL}")
         }
 
         return(private$`_to`(other = other, non_blocking = non_blocking, copy = copy))
@@ -87,6 +87,10 @@ Tensor <- R7Class(
 
       if (!has_dtype) {
         dtype <- self$dtype
+      }
+
+      if (is.null(memory_format)) {
+        memory_format <- torch_preserve_format()
       }
 
       if (has_device) {
@@ -151,6 +155,12 @@ Tensor <- R7Class(
       o <- private$`_topk`(k, dim, largest, sorted)
       o[[2]]$add_(1L)
       o
+    },
+    repeat_interleave = function(repeats, dim = NULL, output_size = NULL) {
+      if (is.numeric(repeats) && length(repeats) == 1L) {
+        return(cpp_torch_method_repeat_interleave_self_Tensor_repeats_int64_t(self, repeats, dim, output_size))
+      }
+      private$`_repeat_interleave`(repeats, dim, output_size)
     },
     scatter = function(dim, index, src) {
       if (is_torch_tensor(src)) {
@@ -228,6 +238,9 @@ Tensor <- R7Class(
       o[[2]] <- o[[2]] + 1L # make 1 based
       o
     },
+    indices = function() {
+      private$`_indices`() + 1L
+    },
     argsort = function(dim = -1L, descending = FALSE) {
       private$`_argsort`(dim = dim, descending = descending)$add_(1L, 1L)
     },
@@ -276,6 +289,9 @@ Tensor <- R7Class(
     },
     is_sparse = function() {
       cpp_method_Tensor_is_sparse(self)
+    },
+    is_sparse_csr = function() {
+      cpp_method_Tensor_is_sparse_csr(self)
     },
     movedim = function(source, destination) {
       private$`_movedim`(as_1_based_dim(source), as_1_based_dim(destination))
@@ -376,11 +392,18 @@ torch_tensor <- function(data, dtype = NULL, device = NULL, requires_grad = FALS
 #' Converts to array
 #'
 #' @param x object to be converted into an array
+#' @param ... additional arguments passed to methods.
 #'
 #' @export
-as_array <- function(x) {
+as_array <- function(x, ...) {
   UseMethod("as_array", x)
 }
+
+# Makes `as_array()` behave like `as.array()`.
+#' @export
+as_array.default <- function(x, ...) {
+  base::as.array(x, ...)
+}  
 
 #' @export
 as.array.torch_tensor <- function(x, ...) {
@@ -393,6 +416,13 @@ as.matrix.torch_tensor <- function(x, ...) {
 }
 
 as_array_impl <- function(x) {
+  if (x$is_sparse() || x$is_sparse_csr()) {
+    cli_abort(c(
+      "Sparse tensors are not supported for as_array conversion.",
+      i = "Use `as_array(x$to_dense())` to convert to a dense tensor first."
+    ))
+  }
+
   # move tensor to cpu before copying to R
   x <- x$cpu()
 
@@ -423,7 +453,7 @@ as_array_impl <- function(x) {
 }
 
 #' @export
-as_array.torch_tensor <- function(x) {
+as_array.torch_tensor <- function(x, ...) {
   # dequantize before converting
   if (x$is_quantized()) {
     x <- x$dequantize()
@@ -504,6 +534,9 @@ tensor_to_complex <- function(x) {
 #'
 #' @export
 torch_tensor_from_buffer <- function(buffer, shape, dtype = "float") {
+  if (!is.integer(shape)) {
+    shape <- as.integer(shape)
+  }
   cpp_tensor_from_buffer(buffer, shape, list(dtype=dtype))
 }
 
@@ -511,4 +544,19 @@ torch_tensor_from_buffer <- function(buffer, shape, dtype = "float") {
 #' @export
 buffer_from_torch_tensor <- function(tensor) {
   cpp_buffer_from_tensor(tensor)
+}
+
+#' @export
+#' @importFrom utils head
+head.torch_tensor <- function(x, n = 6, ...) {
+  index <- torch_tensor(seq_len(min(n, x$size(1))))
+  torch_index_select(x, dim = 1, index = index)
+}
+
+#' @export
+#' @importFrom utils tail
+tail.torch_tensor <- function(x, n = 6, ...) {
+  sz <- x$size(1)
+  index <- seq.int(max(1, sz - n + 1), sz)
+  torch_index_select(x, dim = 1, index = index)
 }

@@ -5,7 +5,10 @@
 \title{A simple exported version of install_path
 Returns the torch installation path.}
 \usage{
-torch_install_path()
+torch_install_path(check_writable = FALSE)
+}
+\arguments{
+\item{check_writable}{If \code{TRUE}, checks if the installation path is writable.}
 }
 \description{
 A simple exported version of install_path

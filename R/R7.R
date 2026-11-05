@@ -43,7 +43,7 @@ R7Class <- function(classname = NULL, public = list(), private = list(),
     } else if (which == "private") {
       env_bind(methods$private, !!name := prepare_method(value))
     } else {
-      stop("can only set to public, private and active")
+      value_error("can only set to `public`, `private` and `active`")
     }
   }
   

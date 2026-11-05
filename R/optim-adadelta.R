@@ -3,7 +3,7 @@ NULL
 
 #' Adadelta optimizer
 #'
-#' It has been proposed in [ADADELTA: An Adaptive Learning Rate Method](https://arxiv.org/pdf/1212.5701.pdf)
+#' It has been proposed in [ADADELTA: An Adaptive Learning Rate Method](https://arxiv.org/pdf/1212.5701)
 #'
 #' @param params (iterable): list of parameters to optimize or list defining
 #'   parameter groups
@@ -35,6 +35,7 @@ NULL
 #' \end{array}
 #' }
 #'
+#' @include optim.R
 #' @examples
 #' \dontrun{
 #' optimizer <- optim_adadelta(model$parameters, lr = 0.1)

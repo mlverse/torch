@@ -83,7 +83,7 @@ nnf_embedding_bag <- function(input, weight, offsets = NULL, max_norm = NULL,
       value_error("if input is 2D, then offsets has to be NULL")
     }
     
-    offsets <- torch_arange(0, input$numel(), input$size(2), 
+    offsets <- torch_arange(0, input$numel()-1L, input$size(2), 
                             dtype=input$dtype, device=input$device) 
       
     input <- input$reshape(-1)

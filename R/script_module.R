@@ -53,6 +53,9 @@ ScriptModule <- R7Class(
     save = function(path) {
       cpp_jit_script_module_save(self, path)
     },
+    serialize = function(path) {
+      cpp_jit_script_module_serialize(self)
+    },
     save_for_mobile = function(path) {
       cpp_jit_script_module_save_for_mobile(self, path)
     }
@@ -60,6 +63,9 @@ ScriptModule <- R7Class(
   active = list(
     parameters = function() {
       cpp_jit_script_module_parameters(self, TRUE)
+    },
+    training = function() {
+      self$is_training()
     },
     is_training = function() {
       cpp_jit_script_module_is_training(self)
@@ -120,6 +126,15 @@ nn_ScriptModule <- R6::R6Class(
         env = private
       )
     },
+
+    forward =  function(...) {
+      if (is.null(private$.forward)) {
+        runtime_error("Forward is not defined. Methods from submodules of traced modules are not traced. Are you trying to call from a submodule?")
+      }
+      # we need to call into private method .forward because we can't change the forward method without
+      # calling unlockBinding() which causes issues on CRAN
+      private$.forward(...)
+    },
     register_parameter = function(name, param) {
       private$ptr$register_parameter(name, param)
     },
@@ -133,7 +148,14 @@ nn_ScriptModule <- R6::R6Class(
       private$ptr$add_constant(name, value)
     },
     graph_for = function(...) {
-      self$forward$graph_for(...)
+      if (!private$.respects_mode()) {
+        return(private$find_method("forward")$graph_for(...))
+      }
+      if (self$training) {
+        private$find_method("trainforward")$graph_for(...)
+      } else {
+        private$find_method("evalforward")$graph_for(...)
+      }
     },
     ..ptr.. = function() {
       private$ptr
@@ -142,11 +164,45 @@ nn_ScriptModule <- R6::R6Class(
   private = list(
     find_method = function(name) {
       private$ptr$find_method(name)
+    },
+    .update_forward = function(respect_mode) {
+      # don't change without benchmark
+      # https://github.com/mlverse/torch/issues/1304
+      private$.forward <- if (respect_mode) {
+        is_training <- self$is_training
+        evalforward <- self$evalforward
+        trainforward <- self$trainforward
+        function(...) {
+          if (is_training()) {
+            trainforward(...)
+          } else {
+            evalforward(...)
+          }
+        }
+      } else {
+        private$ptr$find_method("forward")
+      }
+    },
+    .respects_mode = function() {
+      is.null(private$ptr$find_method("forward")) &&
+        !is.null(private$ptr$find_method("evalforward")) &&
+        !is.null(private$ptr$find_method("trainforward"))
     }
   ),
   active = list(
     graph = function() {
-      self$forward$graph
+      if (!private$.respects_mode()) {
+        return(private$find_method("forward")$graph)
+      }
+      if (self$training) {
+        private$find_method("trainforward")$graph
+      } else {
+        private$find_method("evalforward")$graph
+
+      }
+    },
+    training = function() {
+      self$is_training()
     }
   )
 )
@@ -166,20 +222,16 @@ nn_ScriptModule <- R6::R6Class(
 }
 
 new_script_module <- function(ptr) {
-  f <- function(...) {
-    inputs <- list(...)
+  module <- nn_ScriptModule$new(ptr = ptr)
+  respect_mode <- !is.null(ptr$find_method("trainforward")) && !is.null(ptr$find_method("evalforward")) &&
+      is.null(ptr$find_method("forward"))
 
-    if (is.null(ptr$find_method("forward"))) {
-      runtime_error("Forward is not defined. Methods from submodules of traced modules are not traced. Are you trying to call from a submodule?")
-    }
+  module$.__enclos_env__$private$.update_forward(respect_mode = respect_mode)
 
-    out <- cpp_call_jit_script(ptr, inputs)
-    # calling the traced function always returns a stack
-    # with a single element.
-    out[[1]]
-  }
+  f <- module$forward
+
   class(f) <- c("script_module", "nn_module")
-  attr(f, "module") <- nn_ScriptModule$new(ptr = ptr)
+  attr(f, "module") <- module
   f
 }
 

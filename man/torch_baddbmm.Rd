@@ -5,7 +5,7 @@
 \alias{torch_baddbmm}
 \title{Baddbmm}
 \usage{
-torch_baddbmm(self, batch1, batch2, beta = 1L, alpha = 1L)
+torch_baddbmm(self, batch1, batch2, out_dtype, beta = 1L, alpha = 1L)
 }
 \arguments{
 \item{self}{(Tensor) the tensor to be added}
@@ -13,6 +13,8 @@ torch_baddbmm(self, batch1, batch2, beta = 1L, alpha = 1L)
 \item{batch1}{(Tensor) the first batch of matrices to be multiplied}
 
 \item{batch2}{(Tensor) the second batch of matrices to be multiplied}
+
+\item{out_dtype}{(torch_dtype, optional) the output dtype}
 
 \item{beta}{(Number, optional) multiplier for \code{input} (\eqn{\beta})}
 

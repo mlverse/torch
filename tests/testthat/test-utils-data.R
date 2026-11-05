@@ -189,3 +189,25 @@ test_that("can have a dataset named torch_tensor", {
   })
   
 })
+
+test_that("dataset initialize can have parameter named d (#1336)", {
+  ds <- dataset(
+    name = "issue1336",
+    initialize = function(d) {
+      self$d <- d
+    },
+    .getitem = function(i) {
+      self$d[i]
+    },
+    .length = function() {
+      length(self$d)
+    }
+  )
+
+  expect_no_error({
+    obj <- ds(1:10)
+  })
+  expect_equal(length(obj), 10)
+  expect_equal(obj[1], 1L)
+  expect_equal(obj[5], 5L)
+})

@@ -2,6 +2,7 @@ url: https://torch.mlverse.org/docs/
 destination: docs
 template:
   bootstrap: 5
+  math-rendering: mathjax
   bslib:
     primary: "#7e1f77"
   params:
@@ -14,7 +15,7 @@ navbar:
  bg: primary
  structure:
   left:  [home, articles, examples, advanced, reference, news]
-  right: [github]
+  right: [search, github]
  components:
   articles:
     text: Articles
@@ -40,15 +41,19 @@ navbar:
        href: articles/extending-autograd.html
      - text: Python models
        href: articles/python-to-r.html
+     - text: Jit Compilation
+       href: articles/torchscript.html
   advanced:
     text: Advanced
     menu:
       - text: Memory management
         href: articles/memory-management.html
-      - text: Building locally
-        href: articles/modifying-source-code.html
+      - text: CUDA compatibility matrix
+        href: articles/compatibility-matrix.html
       - text: Automatic Mixed Precision
         href: articles/amp.html
+      - text: Modifying source code
+        href: articles/modifying-source-code.html
   examples:
     text: Examples
     menu:
@@ -87,6 +92,7 @@ reference:
   - title: Serialization
     contents:
       - has_concept("serialization")
+      - clone_module
   - title: Mathematical operations on tensors
     contents:
       - starts_with("torch_")
@@ -124,6 +130,8 @@ reference:
       - optimizer
       - starts_with("optim_")
       - is_optimizer
+      - optimizer_ignite
+      - OptimizerIgnite
   - title: Learning rate schedulers
     contents:
       - starts_with("lr_")
@@ -152,6 +160,8 @@ reference:
     contents:
       - local_autocast
       - with_autocast
+      - set_autocast
+      - unset_autocast
       - starts_with("cuda_amp_")
   - title: Random numbers
     contents:
@@ -182,3 +192,7 @@ reference:
   - title: Contrib
     contents:
       - contrib_sort_vertices
+  - title: Memory management
+    contents:
+      - set_cpu_allocator_config
+      - cpu_cache_flush

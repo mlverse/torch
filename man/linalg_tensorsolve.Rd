@@ -11,7 +11,7 @@ linalg_tensorsolve(A, B, dims = NULL)
 
 \item{B}{(Tensor): the solution}
 
-\item{dims}{(Tuple\link{int}, optional): dimensions of \code{A} to be moved.
+\item{dims}{(\code{Tuple[int]}, optional): dimensions of \code{A} to be moved.
 If \code{NULL}, no dimensions are moved. Default: \code{NULL}.}
 }
 \description{
@@ -66,6 +66,7 @@ Other linalg:
 \code{\link{linalg_qr}()},
 \code{\link{linalg_slogdet}()},
 \code{\link{linalg_solve}()},
+\code{\link{linalg_solve_triangular}()},
 \code{\link{linalg_svd}()},
 \code{\link{linalg_svdvals}()},
 \code{\link{linalg_tensorinv}()},

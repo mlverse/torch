@@ -20,6 +20,7 @@ NULL
 #' The main downside of this method is the fact that learning rate may be
 #' getting small too fast, so that at some point a model cannot learn anymore.
 #'
+#' @include optim.R
 #' @note
 #' Update rule:
 #' \deqn{
@@ -34,25 +35,7 @@ optim_adagrad <- optimizer(
   "optim_adagrad",
   initialize = function(params, lr = 1e-2, lr_decay = 0, weight_decay = 0,
                         initial_accumulator_value = 0, eps = 1e-10) {
-    if (lr < 0) {
-      value_error("Invalid learning rate: {lr}")
-    }
-
-    if (lr_decay < 0) {
-      value_error("Invalid lr_decay value: {lr_decay}")
-    }
-
-    if (weight_decay < 0) {
-      value_error("Invalid weight_decay value: {weight_decay}")
-    }
-
-    if (initial_accumulator_value < 0) {
-      value_error("Invalid initial_accumulator_value value: {initial_accumulator_value}")
-    }
-
-    if (eps < 0) {
-      value_error("Invalid epsilon value: {eps}")
-    }
+    assert_adagrad_params(lr, lr_decay, weight_decay, initial_accumulator_value, eps)
 
     defaults <- list(
       lr = lr, lr_decay = lr_decay, weight_decay = weight_decay,
@@ -121,3 +104,25 @@ optim_adagrad <- optimizer(
     })
   }
 )
+
+assert_adagrad_params <- function(lr, lr_decay, weight_decay, initial_accumulator_value, eps) {
+  if (lr < 0) {
+    value_error("Invalid learning rate: {lr}")
+  }
+
+  if (lr_decay < 0) {
+    value_error("Invalid lr_decay value: {lr_decay}")
+  }
+
+  if (weight_decay < 0) {
+    value_error("Invalid weight_decay value: {weight_decay}")
+  }
+
+  if (initial_accumulator_value < 0) {
+    value_error("Invalid initial_accumulator_value value: {initial_accumulator_value}")
+  }
+
+  if (eps < 0) {
+    value_error("Invalid epsilon value: {eps}")
+  }
+}

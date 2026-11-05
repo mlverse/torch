@@ -46,10 +46,12 @@ runs:
         Get-ChildItem -Path "${env:CUDA_PATH}\lib"
         Get-ChildItem -Path "C:\cudnn\" -Directory | Move-Item -Destination "C:\cudnn\cuda"
         Get-ChildItem -Path "C:\cudnn\"
+        Get-ChildItem -Path "C:\cudnn\cuda"
         Move-Item -Path "C:\cudnn\cuda\bin\cudnn*.dll" -Destination "${env:CUDA_PATH}\bin"
         Move-Item -Path "C:\cudnn\cuda\include\cudnn*.h" -Destination "${env:CUDA_PATH}\include"
         Move-Item -Path "C:\cudnn\cuda\lib\cudnn*.lib" -Destination "${env:CUDA_PATH}\lib\x64"
-        echo "CUDNN_INCLUDE_PATH=""${CUDA_PATH}\include""" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
-        echo "CUDNN_LIBRARY_PATH=""${CUDA_PATH}\lib\x64""" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
+        Move-Item -Path "C:\cudnn\cuda\lib\x64\cudnn*.lib" -Destination "${env:CUDA_PATH}\lib\x64"
+        echo "CUDNN_INCLUDE_PATH=""${env:CUDA_PATH}\include""" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
+        echo "CUDNN_LIBRARY_PATH=""${env:CUDA_PATH}\lib\x64""" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
         Remove-Item -Path cudnn.zip
       shell: pwsh

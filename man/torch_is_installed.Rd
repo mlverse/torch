@@ -4,7 +4,14 @@
 \alias{torch_is_installed}
 \title{Verifies if torch is installed}
 \usage{
-torch_is_installed()
+torch_is_installed(recheck = FALSE)
+}
+\arguments{
+\item{recheck}{If \code{TRUE}, forces rechecking if torch can be loaded in a spearate R process.
+still respects the \code{TORCH_VERIFY_LOAD} env var.}
+}
+\value{
+TRUE if torch is installed and can be loaded, FALSE otherwise.
 }
 \description{
 Verifies if torch is installed

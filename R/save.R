@@ -83,7 +83,7 @@ legacy_save_nn_module <- function(obj, path, ..., compress = TRUE) {
 
 #' @export
 torch_save.name <- function(obj, path, ..., compress= TRUE) {
-  if (!is_exhausted(obj)) rlang::abort("Cannot save `name` objects.")
+  if (!is_exhausted(obj)) runtime_error("Cannot save `name` object.")
   saveRDS(list(type = "coro::exhausted", version = use_ser_version()), path,
           compress = compress)
 }
@@ -176,7 +176,7 @@ torch_save.BaseDatasetFetcher <- function(obj, path, ..., compress = TRUE) {
 
 torch_save_to_file_with_state_dict <- function(obj, path) {
   if (use_ser_version() <= 2)
-    cli::cli_abort("Serializing objects with class {.cls {class(obj)}} is only supported with serialization version >= 3, got {.val {use_ser_version()}}")
+    cli_abort("Serializing objects with class {.cls {class(obj)}} is only supported with serialization version >= 3, got {.val {use_ser_version()}}")
 
   torch_save_to_file(
     "state_dict",
@@ -251,9 +251,9 @@ torch_load <- function(path, device = "cpu") {
   if (is_rds(path)) {
     return(legacy_torch_load(path, device))
   }
-  
+
   if (is.null(device)) {
-    cli::cli_abort("Unexpected device {.val NULL}")
+    cli_abort("Unexpected device {.val NULL}")
   }
 
   con <- create_read_con(path)
@@ -301,7 +301,7 @@ torch_load <- function(path, device = "cpu") {
     return(object)
   }
 
-  stop("currently unsuported")
+  not_implemented_error("currently unsuported")
 }
 
 legacy_torch_load <- function(path, device = "cpu") {
@@ -315,9 +315,9 @@ legacy_torch_load <- function(path, device = "cpu") {
   r <- readRDS(path)
 
   if (!is.null(r$version) && r$version > ser_version) {
-    rlang::abort(c(x = paste0(
-      "This version of torch can't load files with serialization version > ",
-      ser_version)))
+    not_implemented_error(
+      "This version of torch can't load files with serialization version > {ser_version}"
+    )
   }
 
   if (r$type == "tensor") {
@@ -333,6 +333,7 @@ legacy_torch_load <- function(path, device = "cpu") {
 
 #' Serialize a torch object returning a raw object
 #'
+
 #' It's just a wraper around [torch_save()].
 #'
 #' @inheritParams torch_save
@@ -341,7 +342,7 @@ legacy_torch_load <- function(path, device = "cpu") {
 #' @returns A raw vector containing the serialized object. Can be reloaded using
 #'   [torch_load()].
 #' @family torch_save
-#' 
+#'
 #' @export
 #' @concept serialization
 torch_serialize <- function(obj, ...) {
@@ -484,7 +485,7 @@ create_write_con <- function(path) {
   con <- if (is.character(path)) {
     file(path, open = "wb")
   } else {
-    cli::cli_abort("{.arg path} must be a connection or a actual path, got {.cls {class(path)}}.")
+    cli_abort("{.arg path} must be a connection or an actual path, got {.cls {class(path)}}.")
   }
 
   withr::defer_parent({close(con)})
@@ -500,7 +501,7 @@ create_read_con <- function(path) {
   } else if (is.character(path)) {
     file(path, open = "rb")
   } else {
-    cli::cli_abort("{.arg path} must be a connection, a raw vector or an actual path, got {.cls {class(path)}}.")
+    cli_abort("{.arg path} must be a connection, a raw vector or an actual path, got {.cls {class(path)}}.")
   }
 
   withr::defer_parent({close(con)})

@@ -8,7 +8,7 @@
 torch_arange(
   start,
   end,
-  step = 1,
+  step = 1L,
   dtype = NULL,
   layout = NULL,
   device = NULL,

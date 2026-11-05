@@ -4,7 +4,7 @@
 \alias{jit_trace}
 \title{Trace a function and return an executable \code{script_function}.}
 \usage{
-jit_trace(func, ..., strict = TRUE)
+jit_trace(func, ..., strict = TRUE, respect_mode = TRUE)
 }
 \arguments{
 \item{func}{An R function that will be run with \code{example_inputs}. func arguments
@@ -24,6 +24,15 @@ turn this off when you want the tracer to record your mutable container types
 (currently list/dict) and you are sure that the container you are using in
 your problem is a constant structure and does not get used as control flow
 (\code{if}, \code{for}) conditions.}
+
+\item{respect_mode}{(\code{logical(1)})\cr
+Whether both modes ('train' or 'eval') should be traced. If \code{TRUE} (default),
+the underlying C++ ScriptModule will have two methods \code{trainforward()} and
+\code{evalforward()}.
+The \verb{$forward()} method of the R torch module will then select either based
+on the mode.
+If \code{FALSE}, only the current mode of the module will be jitted and hence only
+one \code{forward()} method exists.}
 }
 \value{
 An \code{script_function} if \code{func} is a function and \code{script_module} if
@@ -36,10 +45,6 @@ recording the operations performed on all the tensors.
 }
 \details{
 The resulting recording of a standalone function produces a \code{script_function}.
-In the future we will also support tracing \code{nn_modules}.
-}
-\note{
-Scripting is not yet supported in R.
 }
 \section{Warning}{
 
@@ -67,6 +72,7 @@ In cases like these, tracing would not be appropriate and scripting is a better
 choice. If you trace such models, you may silently get incorrect results on
 subsequent invocations of the model. The tracer will try to emit warnings when
 doing something that may cause an incorrect trace to be produced.
+For scripting, see \code{\link{jit_compile}}.
 }
 
 \examples{

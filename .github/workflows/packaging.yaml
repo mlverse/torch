@@ -4,14 +4,15 @@ on:
   workflow_dispatch:
   push:
     branches:
-      - main
       - cran/*
-      - packaging3
   schedule:
     - cron: "0 2 * * *"
   
 jobs:
   binaries:
+    permissions:
+      id-token: write
+      contents: read
     runs-on: ${{ matrix.config.runner }}
     container: ${{ matrix.container }}
     strategy:
@@ -19,19 +20,19 @@ jobs:
       matrix:
         
         config: 
-          - {r_version: 'release', os: macOS, version: cpu-intel, runner: macOS-latest}
-          - {r_version: '',        os: macOS, version: cpu-m1, runner: [self-hosted, m1]}
+          - {r_version: 'release', os: macOS, version: cpu-intel, runner: macos-15-intel}
+          - {r_version: 'release', os: macOS, version: cpu-m1, runner: macos-latest}
           
           - {r_version: 'release', os: ubuntu, version: cpu, runner: [self-hosted, linux]}
-          - {r_version: 'release', os: ubuntu, version: cu118, runner: [self-hosted, linux]}
+          - {r_version: 'release', os: ubuntu, version: cu128, runner: [self-hosted, linux]}
           
-          - {r_version: 'release', os: windows, version: cpu, runner: windows-2019}
-          - {r_version: 'release', os: windows, version: cu118, runner: windows-2019}
+          - {r_version: 'release', os: windows, version: cpu, runner: windows-2022}
+          - {r_version: 'release', os: windows, version: cu128, runner: windows-2022}
           
         include:
           
-          - config: {version: cu118}
-            cuda: 11.8
+          - config: {version: cu128}
+            cuda: 12.8
             cuda_patch: 0
           
           - config: {os: ubuntu}
@@ -57,7 +58,7 @@ jobs:
 
     steps:
     
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v7
       
       - uses: ./.github/actions/setup-r
         with:
@@ -65,13 +66,13 @@ jobs:
           makevars: true
       
       - name: Setup cmake
-        uses: jwlawson/actions-setup-cmake@v1
+        uses: jwlawson/actions-setup-cmake@v2
         with:
           cmake-version: "3.25.1"
 
       - name: Install CUDA
         if: ${{matrix.cuda != ''}}
-        uses: Jimver/cuda-toolkit@v0.2.10
+        uses: Jimver/cuda-toolkit@v0.2.24
         id: cuda-toolkit
         with:
           cuda: "${{matrix.cuda}}.${{matrix.cuda_patch}}"
@@ -87,7 +88,7 @@ jobs:
           cache: false
           extra-packages: any::rcmdcheck
           needs: check
-          
+           
       - name: Build binary package
         id: build
         run: |
@@ -98,15 +99,11 @@ jobs:
           cat("pkg_version=", desc::desc_get("Version"), "\n", file = Sys.getenv("GITHUB_OUTPUT"), sep="")
         shell: Rscript {0}
         
-      - id: 'auth'
-        uses: 'google-github-actions/auth@v1'
-        with:
-          credentials_json: ${{ secrets.GCP_APPLICATION_CREDENTIALS }}
-
-      - id: 'upload-file'
-        uses: 'google-github-actions/upload-cloud-storage@v1'
+      - id: 'upload-s3'
+        uses: ./.github/actions/upload-dir-to-s3
         with:
           path: "../binaries"
-          destination: 'torch-lantern-builds/packages/${{ matrix.config.version }}/${{ steps.build.outputs.pkg_version }}/'
-          parent: false
+          destination: 's3://torch-binaries/packages/${{ matrix.config.version }}/${{ steps.build.outputs.pkg_version }}/'
+          aws_role_to_assume: ${{ secrets.AWS_ROLE_TO_ASSUME }}
+          aws_region: ${{ secrets.AWS_REGION }}
       

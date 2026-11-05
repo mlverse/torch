@@ -90,3 +90,43 @@ test_that("bincount is 1 indexed", {
   
   
 })
+test_that("ignore_index is 1 indexed", {
+  # `ignore_index` names a target value, and targets are 1 based in this package. It used to be
+  # forwarded to libtorch unchanged while the target was converted, so it selected the class to the
+  # left of the requested one, and the last class could not be ignored at all.
+  logits <- torch_tensor(matrix(c(10, 0, 0, 0, 10, 0, 0, 0, 10), nrow = 3, byrow = TRUE))
+  loss_for <- function(cls, ...) {
+    target <- torch_tensor(rep(cls, 3L), dtype = torch_long())
+    as.numeric(nnf_cross_entropy(logits, target, ...))
+  }
+
+  for (cls in 1:3) {
+    # ignoring exactly the class that occurs leaves nothing to average over
+    expect_true(is.nan(loss_for(cls, ignore_index = cls)))
+    # while ignoring any other class leaves the loss untouched
+    for (other in setdiff(1:3, cls)) {
+      expect_equal(loss_for(cls, ignore_index = other), loss_for(cls), tolerance = 1e-6)
+    }
+  }
+
+  # the default sentinel is not a valid target and must ignore nothing
+  expect_false(is.nan(loss_for(1)))
+  expect_equal(loss_for(1, ignore_index = -100), loss_for(1), tolerance = 1e-6)
+
+  # 0 is not a valid 1 based class index
+  expect_error(loss_for(1, ignore_index = 0), regexp = "1 based class index")
+
+  # nnf_nll_loss goes through the same conversion
+  log_probs <- nnf_log_softmax(logits, dim = 2)
+  nll_for <- function(cls, ...) {
+    target <- torch_tensor(rep(cls, 3L), dtype = torch_long())
+    as.numeric(nnf_nll_loss(log_probs, target, ...))
+  }
+  expect_true(is.nan(nll_for(3, ignore_index = 3)))
+  expect_equal(nll_for(3, ignore_index = 1), nll_for(3), tolerance = 1e-6)
+
+  # and so does the nn_module interface
+  expect_true(is.nan(as.numeric(
+    nn_cross_entropy_loss(ignore_index = 2)(logits, torch_tensor(rep(2L, 3L), dtype = torch_long()))
+  )))
+})

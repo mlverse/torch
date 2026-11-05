@@ -1,20 +1,22 @@
 #include <torch.h>
 
+#define TORCH_PRCODE(x) CDR(x)
+#define TORCH_PRENV(x) TAG(x)
+
 static R_len_t dots_size(SEXP dots) {
-  if (dots == R_UnboundValue) {
-    // No dots at all in the environment
-    return 0;
-  } else if (dots == R_MissingArg) {
-    // Dots are present, but none were supplied
-    return 0;
-  } else {
+  if (TYPEOF(dots) == DOTSXP) {
     return Rf_length(dots);
   }
+  return 0;
 }
 
 // [[Rcpp::export]]
 std::vector<Rcpp::RObject> enquos0(Rcpp::Environment env) {
-  SEXP dots = Rf_findVarInFrame3(env, R_DotsSymbol, TRUE);
+#if R_VERSION >= R_Version(4, 5, 0)
+  SEXP dots = R_getVarEx(R_DotsSymbol, env, FALSE, R_NilValue);
+#else
+  SEXP dots = Rf_findVarInFrame(env, R_DotsSymbol);
+#endif
   std::vector<Rcpp::RObject> out;
   R_len_t size = dots_size(dots);
 
@@ -27,13 +29,13 @@ std::vector<Rcpp::RObject> enquos0(Rcpp::Environment env) {
     el = CAR(node);
 
     while (true) {
-      SEXP code = PRCODE(el);
+      SEXP code = TORCH_PRCODE(el);
       if (TYPEOF(code) != PROMSXP) break;
       el = code;
     }
 
-    c = PRCODE(el);
-    e = PRENV(el);
+    c = TORCH_PRCODE(el);
+    e = TORCH_PRENV(el);
 
     out.push_back(Rcpp::List::create(c, e));
   }
@@ -43,7 +45,7 @@ std::vector<Rcpp::RObject> enquos0(Rcpp::Environment env) {
 
 void list2env(Rcpp::Environment e, Rcpp::List mask) {
   std::vector<std::string> nms = mask.names();
-  for (int i = 0; i < nms.size(); i++) {
+  for (size_t i = 0; i < nms.size(); i++) {
     e.assign(nms[i], mask[nms[i]]);
   }
 }
@@ -58,7 +60,7 @@ std::vector<Rcpp::RObject> evaluate_slices(std::vector<Rcpp::RObject> quosures,
   SEXP quosure_e;
   SEXP quosure_c;
   SEXP na = Rcpp::LogicalVector::create(NA_LOGICAL);
-  for (int i = 0; i < quosures.size(); i++) {
+  for (size_t i = 0; i < quosures.size(); i++) {
     quosure = quosures[i];
     quosure_c = quosure[0];
     quosure_e = quosure[1];
@@ -205,7 +207,7 @@ struct index_info {
 // returns true if appended a vector like object. We use the boolean vector
 // to decide if we should start a new index object.
 index_info index_append_sexp(XPtrTorchTensorIndex& index, SEXP slice,
-                             bool drop) {
+                             bool drop, torch::Device device) {
   // a single NA means empty argument which and in turn we must select
   // all elements in that dimension.
   if (TYPEOF(slice) == LGLSXP && LENGTH(slice) == 1 &&
@@ -226,12 +228,6 @@ index_info index_append_sexp(XPtrTorchTensorIndex& index, SEXP slice,
     } else {
       return {0, false, false};
     }
-  }
-
-  // scalar boolean
-  if (TYPEOF(slice) == LGLSXP && LENGTH(slice) == 1) {
-    index_append_scalar_bool(index, slice);
-    return {1, false, false};
   }
 
   // the fill sybol was passed. in this case we add the ellipsis ...
@@ -255,13 +251,26 @@ index_info index_append_sexp(XPtrTorchTensorIndex& index, SEXP slice,
   // if it's a numeric vector
   if ((TYPEOF(slice) == REALSXP || TYPEOF(slice) == INTSXP) &&
       LENGTH(slice) > 1) {
-    index_append_integer_vector(index, slice);
-    return {1, true, false};
+    // if it's a numeric vector but has a dim attribute, we convert the value to a Tensor
+    // before adding it to the index.
+    const auto dims = Rcpp::RObject(Rf_getAttrib(slice, R_DimSymbol));
+    if (Rf_isNull(dims)) {
+      index_append_integer_vector(index, slice);
+      return {1, true, false};
+    }
+    // If the slice has a dim attribute, we convert it to a tensor and let the code
+    // continue to add it to the index.
+    slice = torch_tensor_cpp(slice, torch::Dtype(lantern_Dtype_int64()), device);
   }
 
-  if (TYPEOF(slice) == LGLSXP && LENGTH(slice) > 1) {
-    index_append_bool_vector(index, slice);
-    return {1, true, false};
+  if (TYPEOF(slice) == LGLSXP) {
+    const auto dims = Rcpp::RObject(Rf_getAttrib(slice, R_DimSymbol));
+    if (Rf_isNull(dims)) {
+      index_append_bool_vector(index, slice);
+      return {1, true, false};  
+    }
+    /// convert to tensor a let it go
+    slice = torch_tensor_cpp(slice, torch::Dtype(lantern_Dtype_bool()));
   }
 
   if (Rf_inherits(slice, "torch_tensor")) {
@@ -277,23 +286,23 @@ index_info index_append_sexp(XPtrTorchTensorIndex& index, SEXP slice,
 }
 
 std::vector<XPtrTorchTensorIndex> slices_to_index(
-    std::vector<Rcpp::RObject> slices, bool drop) {
+    std::vector<Rcpp::RObject> slices, bool drop, torch::Device device, bool is_put = false) {
   std::vector<XPtrTorchTensorIndex> output;
   XPtrTorchTensorIndex index = lantern_TensorIndex_new();
   SEXP slice;
   int num_dim = 0;
   bool has_ellipsis = false;
-  for (int i = 0; i < slices.size(); i++) {
+  for (size_t i = 0; i < slices.size(); i++) {
     slice = slices[i];
-    auto info = index_append_sexp(index, slice, drop);
+    auto info = index_append_sexp(index, slice, drop, device);
 
     if (!has_ellipsis && info.ellipsis) {
       has_ellipsis = true;
     }
 
     num_dim += info.dim;
-    if (info.vector) {
-      bool last_dim = i >= (slices.size() - 1);
+    if (info.vector && !is_put) {
+      bool last_dim = i >= slices.size() - 1;
       // we add an ellipsis to get all the other dimensions and append it to the
       // output vector. we only append if it's not the last dimension too.
       if (!last_dim && !has_ellipsis) {
@@ -334,7 +343,8 @@ std::vector<XPtrTorchTensorIndex> slices_to_index(
 XPtrTorchTensor Tensor_slice(XPtrTorchTensor self, Rcpp::Environment e,
                              bool drop, Rcpp::List mask) {
   auto dots = evaluate_slices(enquos0(e), mask);
-  auto index = slices_to_index(dots, drop);
+  auto device = torch::Device(lantern_Tensor_device(self.get()));
+  auto index = slices_to_index(dots, drop, device);
   XPtrTorchTensor out = self;
   for (auto& ind : index) {
     out = lantern_Tensor_index(out.get(), ind.get());
@@ -345,10 +355,11 @@ XPtrTorchTensor Tensor_slice(XPtrTorchTensor self, Rcpp::Environment e,
 XPtrTorchScalar cpp_torch_scalar(SEXP x);
 
 // [[Rcpp::export]]
-void Tensor_slice_put(Rcpp::XPtr<XPtrTorchTensor> self, Rcpp::Environment e,
+void Tensor_slice_put(XPtrTorchTensor self, Rcpp::Environment e,
                       SEXP rhs, Rcpp::List mask) {
   auto dots = evaluate_slices(enquos0(e), mask);
-  auto indexes = slices_to_index(dots, true);
+  auto device = torch::Device(lantern_Tensor_device(self.get()));
+  auto indexes = slices_to_index(dots, true, device, true);
 
   if (indexes.size() > 1) {
     Rcpp::stop(
@@ -362,13 +373,13 @@ void Tensor_slice_put(Rcpp::XPtr<XPtrTorchTensor> self, Rcpp::Environment e,
        TYPEOF(rhs) == LGLSXP || TYPEOF(rhs) == STRSXP) &&
       LENGTH(rhs) == 1) {
     auto s = cpp_torch_scalar(rhs);
-    lantern_Tensor_index_put_scalar_(self->get(), index.get(), s.get());
+    lantern_Tensor_index_put_scalar_(self.get(), index.get(), s.get());
     return;
   }
 
   if (Rf_inherits(rhs, "torch_tensor")) {
     Rcpp::XPtr<XPtrTorchTensor> t = Rcpp::as<Rcpp::XPtr<XPtrTorchTensor>>(rhs);
-    lantern_Tensor_index_put_tensor_(self->get(), index.get(), t->get());
+    lantern_Tensor_index_put_tensor_(self.get(), index.get(), t->get());
     return;
   }
 

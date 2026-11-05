@@ -1,3 +1,6 @@
+#' @include positron.R
+NULL
+
 #' @useDynLib torchpkg, .registration = TRUE
 #' @importFrom Rcpp sourceCpp
 NULL
@@ -11,13 +14,28 @@ globalVariables(c("..", "self", "private", "N"))
 }
 
 .onLoad <- function(libname, pkgname) {
+  register_s3_method("waldo", "compare_proxy", "torch_tensor")
+  register_positron_methods()
   cpp_torch_namespace__store_main_thread_id()
-
-  install_success <- TRUE
 
   is_interactive <- interactive() ||
     "JPY_PARENT_PID" %in% names(Sys.getenv()) ||
     identical(getOption("jupyter.in_kernel"), TRUE)
+
+  is_installed <- function() {
+    withCallingHandlers(
+      torch_is_installed(recheck=TRUE),
+      message = function(msg) {
+        # forward as startup messages
+        cli_inform(conditionMessage(msg), class = "packageStartupMessage")
+      }
+    )
+  }
+
+  # already installed - let's start torch
+  if (is_installed()) {
+    return(start_torch())
+  }
 
   # we only autoinstall if it has not explicitly disabled by setting
   # TORCH_INSTALL = 0
@@ -26,40 +44,64 @@ globalVariables(c("..", "self", "private", "N"))
   # We can also auto install if TORCH_INSTALL is requested with TORCH_INSTALL=1
   autoinstall <- autoinstall || (Sys.getenv("TORCH_INSTALL", unset = 2) == "1")
 
-  # we only autoinstall if installation doesn't yet exist.
-  autoinstall <- autoinstall && (!torch_is_installed())
-
-  if (autoinstall) {
-    install_success <- tryCatch(
-      {
-        cli::cli_alert_info("Additional software needs to be {.strong downloaded} and {.strong installed} for torch to work correctly.")
-        check_can_autoinstall() # this errors if it's not possible to autoinstall for that system
-        # in interactive environments we want to ask the user for permission to
-        # download and install stuff. That's not necessary otherwise because the
-        # user has explicitly asked for installation with `TORCH_INSTALL=1`.
-        if (is_interactive) {
-          get_confirmation() # this will error of response is not true.
-        }
-        install_torch(.inform_restart = FALSE)
-        TRUE
-      },
-      error = function(e) {
-        msg <- if (is.character(e$message)) e$message else "Unknown error."
-        cli::cli_warn(c(
-          i = "Failed to install torch, manually run {.fn install_torch}",
-          x = msg
-        ), parent = e)
-        FALSE
-      }
-    )
+  if (!autoinstall) {
+    # there's no installation and no auto install. nothing else we can do,
+    return()
   }
 
-  if (torch_is_installed() && install_success && Sys.getenv("TORCH_LOAD", unset = 1) != 0) {
-    # in case init fails aallow user to restart session rather than blocking install
-    tryCatch(
-      {
+  # try to install
+  install_success <- tryCatch(
+    {
+      cli::cli_alert_info("Additional software needs to be {.strong downloaded} and {.strong installed} for torch to work correctly.")
+      check_can_autoinstall() # this errors if it's not possible to autoinstall for that system
+      # in interactive environments we want to ask the user for permission to
+      # download and install stuff. That's not necessary otherwise because the
+      # user has explicitly asked for installation with `TORCH_INSTALL=1`.
+      if (is_interactive) {
+        get_confirmation() # this will error of response is not true.
+      }
+      install_torch(.inform_restart = FALSE)
+      TRUE
+    },
+    error = function(e) {
+      msg <- if (is.character(e$message)) e$message else "Unknown error."
+      cli::cli_warn(c(
+        i = "Failed to install torch, manually run {.fn install_torch}",
+        x = msg
+      ), parent = e)
+      FALSE
+    }
+  )
+
+  if (!install_success) {
+    # installation failed, nothing else we can do
+    return()
+  }
+
+  # check once more if we can find the installation.
+  if (is_installed()) {
+    start_torch()
+  }
+}
+
+start_torch <- function() {
+  can_load <- Sys.getenv("TORCH_LOAD", unset = 1) != 0
+  
+  if (!can_load) {
+    return()
+  }
+
+  # in case init fails aallow user to restart session rather than blocking install
+  tryCatch(
+    {
         lantern_start()
-        cpp_set_lantern_allocator(getOption("torch.threshold_call_gc", 4000L))
+        gc_threshold <- getOption("torch.threshold_call_gc", 4000L)
+        cpp_set_lantern_allocator(
+          threshold_call_gc = gc_threshold,
+          cache_enabled = getOption("torch.cpu_cache_enabled", TRUE),
+          cache_max_size_mb = getOption("torch.cpu_cache_max_size_mb", gc_threshold),
+          cache_min_block_size = getOption("torch.cpu_cache_min_block_size", 1024L)
+        )
         cpp_set_cuda_allocator_allocator_thresholds(
           getOption("torch.cuda_allocator_reserved_rate", 0.2),
           getOption("torch.cuda_allocator_allocated_rate", 0.8),
@@ -82,8 +124,7 @@ globalVariables(c("..", "self", "private", "N"))
         ), parent = e)
         FALSE
       }
-    )
-  }
+  )
 }
 
 .onUnload <- function(libpath) {
@@ -108,7 +149,7 @@ get_confirmation <-  function() {
 check_can_autoinstall <- function() {
   if (!grepl("x86_64", R.version$arch)) {
     if (!grepl("darwin", R.version$os)) {
-      cli::cli_abort(c(
+      cli_abort(c(
         "Currently only {.code x86_64} systems are supported for automatic installation. ",
         i = "You can manually compile LibTorch for you architecture following instructions in {.url https://github.com/pytorch/pytorch#from-source}",
         i = "You can then use {.fn install_torch_from_file} to install manually."

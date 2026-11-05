@@ -1,3 +1,4 @@
+#include <torch/csrc/jit/serialization/import.h>
 #define LANTERN_BUILD
 #include <torch/csrc/jit/frontend/tracer.h>
 #include <torch/script.h>  // One-stop header.
@@ -14,8 +15,33 @@ void* _lantern_ScriptModule_new(void* cu, void* name) {
   // the R side.
   auto cu_ = std::shared_ptr<torch::CompilationUnit>(
       &from_raw::CompilationUnit(cu), [](void* x) {});
+
   auto name_ = *reinterpret_cast<std::string*>(name);
-  return (void*)new torch::jit::Module(name_, cu_);
+  auto module = new torch::jit::Module(name_, cu_);
+
+  // for trace jitted models, we add a custom forward method that respects
+  // the train/eval mode
+  module->register_attribute("training", torch::BoolType::get(), true);
+  module->define(R"(
+  def train(self, x: Optional[List[bool]] = None) -> List[bool]:
+      if x is None:
+          x = [True]  # Default value
+      self.training = x[0]
+      return x
+  )");
+
+  module->define(R"(
+    def eval(self) -> List[bool]:
+      self.training = False
+      return [False]
+  )");
+
+  module->define(R"(
+    def is_training(self) -> List[bool]:
+      return [self.training]
+  )");
+
+  return (void*) module;
 }
 
 void* _lantern_ScriptModule_parameters(void* module, bool recurse) {
@@ -189,6 +215,26 @@ void _lantern_ScriptModule_save(void* self, void* path) {
   auto path_ = from_raw::string(path);
   self_->save(path_);
   LANTERN_FUNCTION_END_VOID
+}
+
+void* _lantern_ScriptModule_serialize(void* self) {
+  LANTERN_FUNCTION_START
+  auto self_ = reinterpret_cast<torch::jit::script::Module*>(self);
+  std::ostringstream oss(std::ios::binary);
+  self_->save(oss);
+  auto str = std::string(oss.str());
+  return make_raw::string(str);
+  LANTERN_FUNCTION_END
+}
+
+void* _lantern_ScriptModule_unserialize(void* s) {
+  LANTERN_FUNCTION_START
+  auto str = from_raw::string(s);
+  std::istringstream input_stream(str);
+  torch::jit::script::Module module;
+  module = torch::jit::load(input_stream);
+  return (void*)new torch::jit::script::Module(module);
+  LANTERN_FUNCTION_END
 }
 
 void* _lantern_ScriptMethod_graph_print(void* self) {

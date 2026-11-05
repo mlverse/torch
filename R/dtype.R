@@ -14,7 +14,7 @@ torch_dtype <- R7Class(
   ),
   active = list(
     is_floating_point = function() {
-      if (cpp_dtype_to_string(self$ptr) %in% c("Float", "Double", "Half")) {
+      if (cpp_dtype_to_string(self$ptr) %in% c("Float", "Double", "Half", "BFloat16", "Float8_e4m3fn", "Float8_e5m2")) {
         TRUE
       } else {
         FALSE
@@ -53,7 +53,9 @@ dtype_from_string <- function(str) {
     "qint32" = torch_qint32(),
     "chalf" = torch_chalf(),
     "cfloat" = torch_cfloat(),
-    "cdouble" = torch_cdouble()
+    "cdouble" = torch_cdouble(),
+    "float8_e4m3fn" = torch_float8_e4m3fn(),
+    "float8_e5m2" = torch_float8_e5m2()
   )
 }
 
@@ -109,6 +111,16 @@ torch_float16 <- function() torch_dtype$new(cpp_torch_float16())
 #' @rdname torch_dtype
 #' @export
 torch_half <- function() torch_dtype$new(cpp_torch_float16())
+#' @rdname torch_dtype
+#' @export
+torch_bfloat16 <- function() torch_dtype$new(cpp_torch_bfloat16())
+
+#' @rdname torch_dtype
+#' @export
+torch_float8_e4m3fn <- function() torch_dtype$new(cpp_torch_float8_e4m3fn())
+#' @rdname torch_dtype
+#' @export
+torch_float8_e5m2 <- function() torch_dtype$new(cpp_torch_float8_e5m2())
 
 #' @rdname torch_dtype
 #' @export
@@ -177,6 +189,12 @@ torch_qint32 <- function() torch_dtype$new(cpp_torch_qint32())
 #' @export
 is_torch_dtype <- function(x) {
   inherits(x, "torch_dtype")
+}
+
+is_integer_dtype <- function(x) {
+  # strings like "long" are parsed by the same C++ code that parses them when creating tensors
+  (is_torch_dtype(x) || is.character(x)) &&
+    (cpp_dtype_to_string(x) %in% c("Int", "Short", "Long", "Char", "Byte"))
 }
 
 #' Gets and sets the default floating point dtype.

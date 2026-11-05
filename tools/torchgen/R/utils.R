@@ -7,7 +7,7 @@
 #' @export
 declarations <- function() {
 
-  version <- getOption("torchgen.version", default = "2.0.1")
+  version <- getOption("torchgen.version", default = "2.8.0")
   path <- getOption("torchgen.path")
 
   if (is.null(path)) {
@@ -31,7 +31,7 @@ declarations <- function() {
     eval.expr = FALSE,
     handlers = list(
       'bool#yes' = function(x) if (x == "y") x else TRUE,
-      'bool#no' = function(x) if (x == "n") x else FALSE,
+      'bool#no' = function(x) if (x %in% c("n", "N")) x else FALSE,
       int = identity
     )
   )
@@ -72,13 +72,11 @@ clean_names <- function(x) {
 #clean_names <- torch:::clean_names
 
 make_cpp_function_name <- function(method_name, arg_types, type) {
-
   if (length(arg_types) == 0)
     return(method_name)
 
-  make_cpp_function_name2(method_name, unlist(arg_types), type)
-}
-
-make_cpp_function_name2 <- function(method_name, arg_types, type) {
-  torch:::cpp_make_function_name(method_name, names(arg_types), arg_types, type)
+  arg_types <- unlist(arg_types)
+  suffix <- paste(names(arg_types), arg_types, sep = "_", collapse = "_")
+  out <- paste0("cpp_torch_", type, "_", method_name, "_", suffix)
+  gsub("['\"%#:><, *&]", "", out)
 }

@@ -11,7 +11,7 @@ linalg_norm(A, ord = NULL, dim = NULL, keepdim = FALSE, dtype = NULL)
 
 \item{ord}{(int, float, inf, -inf, 'fro', 'nuc', optional): order of norm. Default: \code{NULL}}
 
-\item{dim}{(int, Tuple\link{int}, optional): dimensions over which to compute
+\item{dim}{(int, \code{Tuple[int]}, optional): dimensions over which to compute
 the vector or matrix norm. See above for the behavior when \code{dim=NULL}.
 Default: \code{NULL}}
 
@@ -81,6 +81,7 @@ Other linalg:
 \code{\link{linalg_qr}()},
 \code{\link{linalg_slogdet}()},
 \code{\link{linalg_solve}()},
+\code{\link{linalg_solve_triangular}()},
 \code{\link{linalg_svd}()},
 \code{\link{linalg_svdvals}()},
 \code{\link{linalg_tensorinv}()},

@@ -32,7 +32,7 @@ LRScheduler <- R6::R6Class(
           optimizer$param_groups,
           function(group) {
             if (is.null(group[["initial_lr"]])) {
-              value_error("param 'inital_lr' not is not specified.")
+              value_error("param 'inital_lr' is not specified.")
             }
           }
         )
@@ -455,7 +455,7 @@ lr_one_cycle <- lr_scheduler(
     } else if (anneal_strategy == "cos") {
       self$anneal_func <- self$.annealing_cos
     } else if (anneal_strategy == "linear") {
-      self.anneal_func <- self$.annealing_linear
+      self$anneal_func <- self$.annealing_linear
     }
 
     # Initialize learning rate variables

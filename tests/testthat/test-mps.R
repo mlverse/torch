@@ -15,6 +15,12 @@ test_that("can allocate a bunch of tensors without OOM", {
   })
 })
 
+test_that("backends_mps_synchronize works", {
+  x <- torch_randn(10, 10, device = "mps")
+  y <- torch_mm(x, x)
+  expect_no_error(backends_mps_synchronize())
+})
+
 test_that("can run nn_linear on mps device", {
   skip_if_not_m1_mac()
   

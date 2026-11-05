@@ -1,7 +1,9 @@
 #include "Function.h"
 
+#include <c10/core/TensorImpl.h>
 #include <torch/csrc/autograd/functions/accumulate_grad.h>
 #include <torch/torch.h>
+#include <unordered_set>
 
 #include "Autograd.h"
 #include "lantern/lantern.h"
@@ -64,13 +66,18 @@ variable_list LanternFunction::apply(variable_list args, void *forward_,
     LANTERN_ERROR_HANDLE
   }
 
+  const std::unordered_set<TensorImpl *> set;
+
   auto wrapped_outputs = _wrap_outputs(
       args, node->ctx_.get_non_differentiable(), node->ctx_.get_dirty(),
       to_optional(outputs), is_executable ? node : nullptr,
       // TODO: not sure what this function should actually do. Seems to be
       // related to functorch & co. Hopefully it's not used by the currrent
       // code.
-      [](variable_list x, variable_list y) { return x; });
+      [](variable_list x, variable_list y) { return x; },
+      set,
+      [](torch::Tensor x) {return x;}
+    );
 
   node->output_info_.reserve(wrapped_outputs.size());
   for (auto &output : wrapped_outputs) {

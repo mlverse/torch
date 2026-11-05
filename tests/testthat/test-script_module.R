@@ -113,10 +113,6 @@ test_that("can print the graph", {
   traced <- jit_trace(nn_linear(10, 10), torch_randn(10, 10))
 
   expect_snapshot_output({
-    print(traced$forward$graph)
-  })
-
-  expect_snapshot_output({
     print(traced$graph)
   })
 })
@@ -125,10 +121,6 @@ test_that("graph_for", {
   testthat::local_edition(3)
 
   traced <- jit_trace(nn_linear(10, 10), torch_randn(10, 10))
-  expect_snapshot_output({
-    traced$forward$graph_for(torch_randn(10, 10))
-  })
-
   expect_snapshot_output({
     traced$graph_for(torch_randn(10, 10))
   })

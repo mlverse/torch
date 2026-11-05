@@ -26,7 +26,7 @@ Currently the distributions modules are considered 'work in progress'
 and are still experimental features in the torch package. You can see
 the progress in this [link](https://github.com/mlverse/torch/issues/479).
 
-The distributions modules in torch are modelled after PyTorch's [distributions module](https://pytorch.org/docs/stable/distributions.html#) which in turn is based on the TensorFlow [Distributions package](https://arxiv.org/abs/1711.10604).
+The distributions modules in torch are modelled after PyTorch's [distributions module](https://docs.pytorch.org/docs/stable/distributions.html#) which in turn is based on the TensorFlow [Distributions package](https://arxiv.org/abs/1711.10604).
 
 This vignette is based in the TensorFlow's distributions [tutorial](https://www.tensorflow.org/probability/examples/TensorFlow_Distributions_Tutorial#basic_univariate_distributions).
 

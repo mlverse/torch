@@ -29,7 +29,8 @@ nnf_multi_head_attention_forward(
   v_proj_weight = NULL,
   static_k = NULL,
   static_v = NULL,
-  batch_first = FALSE
+  batch_first = FALSE,
+  is_causal = FALSE
 )
 }
 \arguments{
@@ -46,9 +47,9 @@ the embedding dimension. If batch_first is TRUE, the first two dimensions are tr
 
 \item{num_heads}{parallel attention heads.}
 
-\item{in_proj_weight}{input projection weight and bias.}
+\item{in_proj_weight}{input projection weight.}
 
-\item{in_proj_bias}{currently undocumented.}
+\item{in_proj_bias}{input projection bias.}
 
 \item{bias_k}{bias of the key and value sequences to be added at dim=0.}
 
@@ -59,9 +60,9 @@ value sequences at dim=1.}
 
 \item{dropout_p}{probability of an element to be zeroed.}
 
-\item{out_proj_weight}{the output projection weight and bias.}
+\item{out_proj_weight}{the output projection weight.}
 
-\item{out_proj_bias}{currently undocumented.}
+\item{out_proj_bias}{output projection bias.}
 
 \item{training}{apply dropout if is \code{TRUE}.}
 
@@ -100,8 +101,16 @@ which is a combination of q_proj_weight, k_proj_weight, v_proj_weight.}
 
 \item{batch_first}{Logical; whether to expect query, key, and value to have
 batch as their first parameter, and to return output with batch first.}
+
+\item{is_causal}{Logical; a hint that \code{attn_mask} is the causal mask, which then has to be provided.
+If \code{need_weights} is \code{FALSE} and there is no \code{key_padding_mask}, the causal mask is applied by
+\code{\link[=torch_scaled_dot_product_attention]{torch_scaled_dot_product_attention()}} instead of \code{attn_mask}, which allows faster kernels.}
 }
 \description{
 Allows the model to jointly attend to information from different representation
 subspaces. See reference: Attention Is All You Need
+}
+\details{
+When \code{need_weights} is \code{FALSE}, the attention is computed with the fused
+\code{\link[=torch_scaled_dot_product_attention]{torch_scaled_dot_product_attention()}}, like in PyTorch.
 }

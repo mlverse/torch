@@ -38,7 +38,7 @@ create_class <- function(name, inherit, ..., private, active, parent_env,
   e <- new.env(parent = parent_env)
   e$inherit <- inherit
 
-  d <- R6::R6Class(
+  .__class__ <- R6::R6Class(
     classname = name,
     lock_objects = FALSE,
     inherit = inherit,
@@ -48,16 +48,19 @@ create_class <- function(name, inherit, ..., private, active, parent_env,
     parent_env = e
   )
 
-  init <- get_init(d)
+  init <- get_init(.__class__)
   # same signature as the init method, but calls with dataset$new.
+  # NOTE: the R6 class is stored as `.__class__` rather than a short name
+  # like `d` to avoid being shadowed when a user names their `initialize`
+  # parameter `d` (or any other short letter).
   f <- rlang::new_function(
     args = rlang::fn_fmls(init),
     body = rlang::expr({
-      d$new(!!!rlang::fn_fmls_syms(init))
+      .__class__$new(!!!rlang::fn_fmls_syms(init))
     })
   )
 
-  attr(f, attr_name) <- d
+  attr(f, attr_name) <- .__class__
   if (!is.null(constructor_class)) {
     class(f) <- constructor_class
   }
@@ -93,16 +96,16 @@ torch_option <- function(option, default = NULL) {
 }
 
 math_to_rd_impl <- function(tex, ascii = tex, displayMode = TRUE, ..., include_css = TRUE) {
-  
+
   if (in_pkgdown()) {
     html <- katex::katex_html(tex,
                               include_css = include_css, displayMode = displayMode, ...,
                               preview = FALSE
-    )  
+    )
   } else {
     html <- "<p>Math could not be displayed. Please visit the package website.</p>"
   }
-  
+
   html_out <- paste("\\if{html}{\\out{", html, "}}", sep = "\n")
   # We won't show the equations in latex mode because of limitted support.
   latex_out <- paste("\\if{latex,text}{\\out{", ascii, "}}", sep = "\n")
@@ -137,3 +140,13 @@ scalar_or_zero <- function(x) {
   else
     as.numeric(x)
 }
+
+# add additional checks to release issues created with usethis::use_release_issue()
+# https://usethis.r-lib.org/reference/use_release_issue.html
+release_bullets <- function() {
+  c("Update `po/R-torch.pot` file with `potools::po_update()`",
+    "Contact translators to collect their translation `.po` files",
+    "Compile the translations with `potools::po_compile()`"
+  )
+}
+

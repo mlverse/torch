@@ -44,5 +44,5 @@ test_that("group_norm", {
   m <- nn_layer_norm(3)
   mg <- nn_group_norm(1, 3)
 
-  expect_equal_to_tensor(mg(input), m(input))
+  expect_equal_to_tensor(mg(input), m(input), tolerance = 1e-6)
 })

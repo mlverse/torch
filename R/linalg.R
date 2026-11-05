@@ -15,7 +15,7 @@
 #'
 #' @param A (Tensor): tensor of shape `(*, n)` or `(*, m, n)` where `*` is zero or more batch dimensions
 #' @param ord (int, float, inf, -inf, 'fro', 'nuc', optional): order of norm. Default: `NULL`
-#' @param dim (int, Tuple[int], optional): dimensions over which to compute
+#' @param dim (int, `Tuple[int]`, optional): dimensions over which to compute
 #'   the vector or matrix norm. See above for the behavior when `dim=NULL`.
 #'   Default: `NULL`
 #' @param keepdim (bool, optional): If set to `TRUE`, the reduced dimensions are retained
@@ -264,7 +264,7 @@ linalg_cond <- function(A, p = NULL) {
 #' @family linalg
 #' @export
 linalg_matrix_rank <- function(A, ..., atol = NULL, rtol = NULL, tol = NULL, hermitian = FALSE) {
-  ellipsis::check_dots_empty()
+  rlang::check_dots_empty()
   if (!is.null(tol)) {
     warn("`tol` argument is deprecated in favor of `atol` and `rtol`.")
     atol <- tol
@@ -767,7 +767,7 @@ linalg_solve <- function(A, B) {
 #' For CUDA input, the only valid driver is `'gels'`, which assumes that `A` is full-rank.
 #'
 #' To choose the best driver on CPU consider:
-#' - If `A` is well-conditioned (its [condition number](https://pytorch.org/docs/master/linalg.html#torch.linalg.cond) is not too large), or you do not mind some precision loss.
+#' - If `A` is well-conditioned (its [condition number](https://docs.pytorch.org/docs/master/linalg.html#torch.linalg.cond) is not too large), or you do not mind some precision loss.
 #' - For a general matrix: `'gelsy'` (QR with pivoting) (default)
 #' - If `A` is full-rank: `'gels'` (QR)
 #' - If `A` is not well-conditioned.
@@ -833,7 +833,7 @@ linalg_solve <- function(A, B) {
 #' @family linalg
 #' @export
 linalg_lstsq <- function(A, B, rcond = NULL, ..., driver = NULL) {
-  ellipsis::check_dots_empty()
+  rlang::check_dots_empty()
 
   args <- list(
     self = A,
@@ -1135,7 +1135,7 @@ linalg_tensorinv <- function(A, ind = 3L) {
 #'
 #' @param A (Tensor): tensor to solve for.
 #' @param B (Tensor): the solution
-#' @param dims (Tuple[int], optional): dimensions of `A` to be moved.
+#' @param dims (`Tuple[int]`, optional): dimensions of `A` to be moved.
 #' If `NULL`, no dimensions are moved. Default: `NULL`.
 #'
 #' @examples
@@ -1234,4 +1234,18 @@ linalg_inv_ex <- function(A, check_errors = FALSE) {
     torch_linalg_inv_ex(A, check_errors = check_errors),
     c("inverse", "info")
   )
+}
+
+#' Triangular solve
+#' @param A tensor of shape `(*, n, n)` or `(*, k, k)` if `left=TRUE`) where `*` is zero or more batch dimensions.
+#' @param B right-hand side tensor of shape `(*, n, k)`
+#' @param upper whether A is an upper or lower triangular matrix.
+#' @param left wheter to solve the system AX=B or XA=B
+#' @param unitriangular if `TRUE`, the diagonal elements of A are assumed to be all equal to 1. 
+#' @param ... Currently ignored.
+#' @family linalg
+#' @export
+linalg_solve_triangular <- function(A, B, ..., upper, left = TRUE, unitriangular = FALSE) {
+  rlang::check_dots_empty()
+  torch_linalg_solve_triangular(A, B, upper, left, unitriangular)
 }

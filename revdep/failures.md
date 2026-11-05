@@ -1,90 +1,97 @@
-# PLNmodels
+# COTAN
 
 <details>
 
-* Version: 1.0.1
-* GitHub: https://github.com/pln-team/PLNmodels
-* Source code: https://github.com/cran/PLNmodels
-* Date/Publication: 2023-02-12 14:42:07 UTC
-* Number of recursive dependencies: 147
+* Version: 2.6.2
+* GitHub: https://github.com/seriph78/COTAN
+* Source code: https://github.com/cran/COTAN
+* Date/Publication: 2025-01-19
+* Number of recursive dependencies: 276
 
-Run `revdepcheck::revdep_details(, "PLNmodels")` for more info
+Run `revdepcheck::revdep_details(, "COTAN")` for more info
 
 </details>
 
 ## In both
 
-*   checking whether package ‘PLNmodels’ can be installed ... ERROR
+*   checking examples ... ERROR
     ```
-    Installation failed.
-    See ‘/Users/dfalbel/Documents/posit/torch/revdep/checks.noindex/PLNmodels/new/PLNmodels.Rcheck/00install.out’ for details.
+    Running examples in ‘COTAN-Ex.R’ failed
+    The error most likely occurred in:
+    
+    > ### Name: COTAN_ObjectCreation
+    > ### Title: 'COTAN' shortcuts
+    > ### Aliases: COTAN_ObjectCreation COTAN proceedToCoex,COTAN-method
+    > ###   proceedToCoex automaticCOTANObjectCreation
+    > 
+    > ### ** Examples
+    > 
+    ...
+    Cotan genes' coex estimation started
+    Warning in canUseTorch(optimizeForSpeed, deviceStr) :
+      The `torch` library could not find any `CUDA` device
+    Warning in canUseTorch(optimizeForSpeed, deviceStr) :
+      Falling back to CPU calculations
+    Calculate genes coex (torch) on device cpu: START
+    Error in cpp_cuda_empty_cache() : 
+      `cuda_empty_cache` is only supported on CUDA runtimes.
+    Calls: automaticCOTANObjectCreation ... calculateCoex_Torch -> <Anonymous> -> cpp_cuda_empty_cache
+    Execution halted
     ```
 
-## Installation
+*   R CMD check timed out
+    
 
-### Devel
+*   checking installed package size ... NOTE
+    ```
+      installed size is 13.7Mb
+      sub-directories of 1Mb or more:
+        doc  11.8Mb
+    ```
 
-```
-* installing *source* package ‘PLNmodels’ ...
-** package ‘PLNmodels’ successfully unpacked and MD5 sums checked
-** using staged installation
-** libs
-clang++ -arch arm64 -std=gnu++14 -I"/Library/Frameworks/R.framework/Versions/4.2-arm64/Resources/include" -DNDEBUG  -I'/Users/dfalbel/Documents/posit/torch/revdep/library.noindex/torch/new/Rcpp/include' -I'/Users/dfalbel/Documents/posit/torch/revdep/library.noindex/PLNmodels/RcppArmadillo/include' -I'/Users/dfalbel/Documents/posit/torch/revdep/library.noindex/PLNmodels/nloptr/include' -I/opt/R/arm64/include   -fPIC  -falign-functions=64 -Wall -g -O2  -c RcppExports.cpp -o RcppExports.o
-clang++ -arch arm64 -std=gnu++14 -I"/Library/Frameworks/R.framework/Versions/4.2-arm64/Resources/include" -DNDEBUG  -I'/Users/dfalbel/Documents/posit/torch/revdep/library.noindex/torch/new/Rcpp/include' -I'/Users/dfalbel/Documents/posit/torch/revdep/library.noindex/PLNmodels/RcppArmadillo/include' -I'/Users/dfalbel/Documents/posit/torch/revdep/library.noindex/PLNmodels/nloptr/include' -I/opt/R/arm64/include   -fPIC  -falign-functions=64 -Wall -g -O2  -c nlopt_wrapper.cpp -o nlopt_wrapper.o
-clang++ -arch arm64 -std=gnu++14 -I"/Library/Frameworks/R.framework/Versions/4.2-arm64/Resources/include" -DNDEBUG  -I'/Users/dfalbel/Documents/posit/torch/revdep/library.noindex/torch/new/Rcpp/include' -I'/Users/dfalbel/Documents/posit/torch/revdep/library.noindex/PLNmodels/RcppArmadillo/include' -I'/Users/dfalbel/Documents/posit/torch/revdep/library.noindex/PLNmodels/nloptr/include' -I/opt/R/arm64/include   -fPIC  -falign-functions=64 -Wall -g -O2  -c optim_diag_cov.cpp -o optim_diag_cov.o
-clang++ -arch arm64 -std=gnu++14 -I"/Library/Frameworks/R.framework/Versions/4.2-arm64/Resources/include" -DNDEBUG  -I'/Users/dfalbel/Documents/posit/torch/revdep/library.noindex/torch/new/Rcpp/include' -I'/Users/dfalbel/Documents/posit/torch/revdep/library.noindex/PLNmodels/RcppArmadillo/include' -I'/Users/dfalbel/Documents/posit/torch/revdep/library.noindex/PLNmodels/nloptr/include' -I/opt/R/arm64/include   -fPIC  -falign-functions=64 -Wall -g -O2  -c optim_fixed_cov.cpp -o optim_fixed_cov.o
-clang++ -arch arm64 -std=gnu++14 -I"/Library/Frameworks/R.framework/Versions/4.2-arm64/Resources/include" -DNDEBUG  -I'/Users/dfalbel/Documents/posit/torch/revdep/library.noindex/torch/new/Rcpp/include' -I'/Users/dfalbel/Documents/posit/torch/revdep/library.noindex/PLNmodels/RcppArmadillo/include' -I'/Users/dfalbel/Documents/posit/torch/revdep/library.noindex/PLNmodels/nloptr/include' -I/opt/R/arm64/include   -fPIC  -falign-functions=64 -Wall -g -O2  -c optim_full_cov.cpp -o optim_full_cov.o
-clang++ -arch arm64 -std=gnu++14 -I"/Library/Frameworks/R.framework/Versions/4.2-arm64/Resources/include" -DNDEBUG  -I'/Users/dfalbel/Documents/posit/torch/revdep/library.noindex/torch/new/Rcpp/include' -I'/Users/dfalbel/Documents/posit/torch/revdep/library.noindex/PLNmodels/RcppArmadillo/include' -I'/Users/dfalbel/Documents/posit/torch/revdep/library.noindex/PLNmodels/nloptr/include' -I/opt/R/arm64/include   -fPIC  -falign-functions=64 -Wall -g -O2  -c optim_genet_cov.cpp -o optim_genet_cov.o
-...
-1 warning generated.
-1 warning generated.
-clang++ -arch arm64 -std=gnu++14 -dynamiclib -Wl,-headerpad_max_install_names -undefined dynamic_lookup -single_module -multiply_defined suppress -L/Library/Frameworks/R.framework/Versions/4.2-arm64/Resources/lib -L/opt/R/arm64/lib -o PLNmodels.so RcppExports.o nlopt_wrapper.o optim_diag_cov.o optim_fixed_cov.o optim_full_cov.o optim_genet_cov.o optim_rank_cov.o optim_spherical.o packing.o -L/Library/Frameworks/R.framework/Versions/4.2-arm64/Resources/lib -lRlapack -L/Library/Frameworks/R.framework/Versions/4.2-arm64/Resources/lib -lRblas -L/opt/R/arm64/gfortran/lib/gcc/aarch64-apple-darwin20.6.0/12.0.1 -L/opt/R/arm64/gfortran/lib -lgfortran -lemutls_w -lquadmath -F/Library/Frameworks/R.framework/Versions/4.2-arm64 -framework R -Wl,-framework -Wl,CoreFoundation
-ld: warning: directory not found for option '-L/opt/R/arm64/gfortran/lib/gcc/aarch64-apple-darwin20.6.0/12.0.1'
-ld: warning: directory not found for option '-L/opt/R/arm64/gfortran/lib'
-ld: library not found for -lgfortran
-clang: error: linker command failed with exit code 1 (use -v to see invocation)
-make: *** [PLNmodels.so] Error 1
-ERROR: compilation failed for package ‘PLNmodels’
-* removing ‘/Users/dfalbel/Documents/posit/torch/revdep/checks.noindex/PLNmodels/new/PLNmodels.Rcheck/PLNmodels’
+*   checking dependencies in R code ... NOTE
+    ```
+    'library' or 'require' call to ‘torch’ in package code.
+      Please use :: or requireNamespace() instead.
+      See section 'Suggested packages' in the 'Writing R Extensions' manual.
+    Unexported object imported by a ':::' call: ‘ggplot2:::ggname’
+      See the note in ?`:::` about the use of this operator.
+    ```
 
+*   checking R code for possible problems ... NOTE
+    ```
+    mergeUniformCellsClusters : fromMergedName: warning in
+      vapply(currentClNames, function(clName, mergedName) {: partial
+      argument match of 'FUN.VAL' to 'FUN.VALUE'
+    mergeUniformCellsClusters : fromMergedName: warning in
+      return(str_detect(mergedName, clName)): partial argument match of
+      'FUN.VAL' to 'FUN.VALUE'
+    mergeUniformCellsClusters : fromMergedName: warning in }, FUN.VAL =
+      logical(1L), mergedClName): partial argument match of 'FUN.VAL' to
+      'FUN.VALUE'
+    ECDPlot: no visible binding for global variable ‘.’
+    ...
+      ‘clusterData’
+    Undefined global functions or variables:
+      . .x CellNumber Cluster Condition ExpGenes GCS GDI PC1 PC2 UDEPLot a
+      bGroupGenesPlot cl1 cl2 clName1 clName2 clusterData clusters coex
+      condName conditions expectedN expectedNN expectedNY expectedYN
+      expectedYY g2 group hk keys lambda means mit.percentage n nu nuPlot
+      obj objSeurat observedNN observedNY observedY observedYN observedYY
+      pcaCellsPlot permMap rankGenes rawNorm secondaryMarkers sum.raw.norm
+      type types useTorch usedMaxResolution values violinwidth width x xmax
+      xmaxv xminv y zoomedNuPlot
+    ```
 
-```
-### CRAN
-
-```
-* installing *source* package ‘PLNmodels’ ...
-** package ‘PLNmodels’ successfully unpacked and MD5 sums checked
-** using staged installation
-** libs
-clang++ -arch arm64 -std=gnu++14 -I"/Library/Frameworks/R.framework/Versions/4.2-arm64/Resources/include" -DNDEBUG  -I'/Users/dfalbel/Documents/posit/torch/revdep/library.noindex/torch/old/Rcpp/include' -I'/Users/dfalbel/Documents/posit/torch/revdep/library.noindex/PLNmodels/RcppArmadillo/include' -I'/Users/dfalbel/Documents/posit/torch/revdep/library.noindex/PLNmodels/nloptr/include' -I/opt/R/arm64/include   -fPIC  -falign-functions=64 -Wall -g -O2  -c RcppExports.cpp -o RcppExports.o
-clang++ -arch arm64 -std=gnu++14 -I"/Library/Frameworks/R.framework/Versions/4.2-arm64/Resources/include" -DNDEBUG  -I'/Users/dfalbel/Documents/posit/torch/revdep/library.noindex/torch/old/Rcpp/include' -I'/Users/dfalbel/Documents/posit/torch/revdep/library.noindex/PLNmodels/RcppArmadillo/include' -I'/Users/dfalbel/Documents/posit/torch/revdep/library.noindex/PLNmodels/nloptr/include' -I/opt/R/arm64/include   -fPIC  -falign-functions=64 -Wall -g -O2  -c nlopt_wrapper.cpp -o nlopt_wrapper.o
-clang++ -arch arm64 -std=gnu++14 -I"/Library/Frameworks/R.framework/Versions/4.2-arm64/Resources/include" -DNDEBUG  -I'/Users/dfalbel/Documents/posit/torch/revdep/library.noindex/torch/old/Rcpp/include' -I'/Users/dfalbel/Documents/posit/torch/revdep/library.noindex/PLNmodels/RcppArmadillo/include' -I'/Users/dfalbel/Documents/posit/torch/revdep/library.noindex/PLNmodels/nloptr/include' -I/opt/R/arm64/include   -fPIC  -falign-functions=64 -Wall -g -O2  -c optim_diag_cov.cpp -o optim_diag_cov.o
-clang++ -arch arm64 -std=gnu++14 -I"/Library/Frameworks/R.framework/Versions/4.2-arm64/Resources/include" -DNDEBUG  -I'/Users/dfalbel/Documents/posit/torch/revdep/library.noindex/torch/old/Rcpp/include' -I'/Users/dfalbel/Documents/posit/torch/revdep/library.noindex/PLNmodels/RcppArmadillo/include' -I'/Users/dfalbel/Documents/posit/torch/revdep/library.noindex/PLNmodels/nloptr/include' -I/opt/R/arm64/include   -fPIC  -falign-functions=64 -Wall -g -O2  -c optim_fixed_cov.cpp -o optim_fixed_cov.o
-clang++ -arch arm64 -std=gnu++14 -I"/Library/Frameworks/R.framework/Versions/4.2-arm64/Resources/include" -DNDEBUG  -I'/Users/dfalbel/Documents/posit/torch/revdep/library.noindex/torch/old/Rcpp/include' -I'/Users/dfalbel/Documents/posit/torch/revdep/library.noindex/PLNmodels/RcppArmadillo/include' -I'/Users/dfalbel/Documents/posit/torch/revdep/library.noindex/PLNmodels/nloptr/include' -I/opt/R/arm64/include   -fPIC  -falign-functions=64 -Wall -g -O2  -c optim_full_cov.cpp -o optim_full_cov.o
-clang++ -arch arm64 -std=gnu++14 -I"/Library/Frameworks/R.framework/Versions/4.2-arm64/Resources/include" -DNDEBUG  -I'/Users/dfalbel/Documents/posit/torch/revdep/library.noindex/torch/old/Rcpp/include' -I'/Users/dfalbel/Documents/posit/torch/revdep/library.noindex/PLNmodels/RcppArmadillo/include' -I'/Users/dfalbel/Documents/posit/torch/revdep/library.noindex/PLNmodels/nloptr/include' -I/opt/R/arm64/include   -fPIC  -falign-functions=64 -Wall -g -O2  -c optim_genet_cov.cpp -o optim_genet_cov.o
-...
-1 warning generated.
-1 warning generated.
-clang++ -arch arm64 -std=gnu++14 -dynamiclib -Wl,-headerpad_max_install_names -undefined dynamic_lookup -single_module -multiply_defined suppress -L/Library/Frameworks/R.framework/Versions/4.2-arm64/Resources/lib -L/opt/R/arm64/lib -o PLNmodels.so RcppExports.o nlopt_wrapper.o optim_diag_cov.o optim_fixed_cov.o optim_full_cov.o optim_genet_cov.o optim_rank_cov.o optim_spherical.o packing.o -L/Library/Frameworks/R.framework/Versions/4.2-arm64/Resources/lib -lRlapack -L/Library/Frameworks/R.framework/Versions/4.2-arm64/Resources/lib -lRblas -L/opt/R/arm64/gfortran/lib/gcc/aarch64-apple-darwin20.6.0/12.0.1 -L/opt/R/arm64/gfortran/lib -lgfortran -lemutls_w -lquadmath -F/Library/Frameworks/R.framework/Versions/4.2-arm64 -framework R -Wl,-framework -Wl,CoreFoundation
-ld: warning: directory not found for option '-L/opt/R/arm64/gfortran/lib/gcc/aarch64-apple-darwin20.6.0/12.0.1'
-ld: warning: directory not found for option '-L/opt/R/arm64/gfortran/lib'
-ld: library not found for -lgfortran
-clang: error: linker command failed with exit code 1 (use -v to see invocation)
-make: *** [PLNmodels.so] Error 1
-ERROR: compilation failed for package ‘PLNmodels’
-* removing ‘/Users/dfalbel/Documents/posit/torch/revdep/checks.noindex/PLNmodels/old/PLNmodels.Rcheck/PLNmodels’
-
-
-```
 # proteus
 
 <details>
 
-* Version: 1.1.0
+* Version: 1.1.4
 * GitHub: NA
 * Source code: https://github.com/cran/proteus
-* Date/Publication: 2023-03-08 09:20:05 UTC
-* Number of recursive dependencies: 123
+* Date/Publication: 2023-10-21 17:40:02 UTC
+* Number of recursive dependencies: 137
 
 Run `revdepcheck::revdep_details(, "proteus")` for more info
 
@@ -95,227 +102,46 @@ Run `revdepcheck::revdep_details(, "proteus")` for more info
 *   R CMD check timed out
     
 
-# scDHA
+# tabnet
 
 <details>
 
-* Version: 1.2.1
-* GitHub: https://github.com/duct317/scDHA
-* Source code: https://github.com/cran/scDHA
-* Date/Publication: 2023-04-04 12:10:02 UTC
-* Number of recursive dependencies: 62
+* Version: 0.6.0
+* GitHub: https://github.com/mlverse/tabnet
+* Source code: https://github.com/cran/tabnet
+* Date/Publication: 2024-06-15 18:20:02 UTC
+* Number of recursive dependencies: 173
 
-Run `revdepcheck::revdep_details(, "scDHA")` for more info
+Run `revdepcheck::revdep_details(, "tabnet")` for more info
 
 </details>
 
 ## In both
 
-*   checking whether package ‘scDHA’ can be installed ... ERROR
+*   checking tests ...
     ```
-    Installation failed.
-    See ‘/Users/dfalbel/Documents/posit/torch/revdep/checks.noindex/scDHA/new/scDHA.Rcheck/00install.out’ for details.
+      Running ‘spelling.R’
+      Running ‘testthat.R’
+     ERROR
+    Running the tests in ‘tests/testthat.R’ failed.
+    Last 13 lines of output:
+        4.       └─testthat:::test_files_parallel(...)
+        5.         ├─withr::with_dir(...)
+        6.         │ └─base::force(code)
+        7.         ├─testthat::with_reporter(...)
+        8.         │ └─base::tryCatch(...)
+    ...
+        9.         │   └─base (local) tryCatchList(expr, classes, parentenv, handlers)
+       10.         │     └─base (local) tryCatchOne(expr, names, parentenv, handlers[[1L]])
+       11.         │       └─base (local) doTryCatch(return(expr), name, parentenv, handler)
+       12.         └─testthat:::parallel_event_loop_chunky(queue, reporters, ".")
+       13.           └─queue$poll(Inf)
+       14.             └─base::lapply(...)
+       15.               └─testthat (local) FUN(X[[i]], ...)
+       16.                 └─private$handle_error(msg, i)
+       17.                   └─rlang::abort(...)
+      Execution halted
     ```
-
-## Installation
-
-### Devel
-
-```
-* installing *source* package ‘scDHA’ ...
-** package ‘scDHA’ successfully unpacked and MD5 sums checked
-** using staged installation
-** libs
-clang++ -arch arm64 -std=gnu++14 -I"/Library/Frameworks/R.framework/Versions/4.2-arm64/Resources/include" -DNDEBUG -DARMA_64BIT_WORD=1 -I'/Users/dfalbel/Documents/posit/torch/revdep/library.noindex/torch/new/Rcpp/include' -I'/Users/dfalbel/Documents/posit/torch/revdep/library.noindex/scDHA/RcppArmadillo/include' -I'/Users/dfalbel/Documents/posit/torch/revdep/library.noindex/scDHA/RcppParallel/include' -I'/Users/dfalbel/Documents/posit/torch/revdep/library.noindex/scDHA/RcppAnnoy/include' -I/opt/R/arm64/include   -fPIC  -falign-functions=64 -Wall -g -O2  -c RcppExports.cpp -o RcppExports.o
-clang++ -arch arm64 -std=gnu++14 -I"/Library/Frameworks/R.framework/Versions/4.2-arm64/Resources/include" -DNDEBUG -DARMA_64BIT_WORD=1 -I'/Users/dfalbel/Documents/posit/torch/revdep/library.noindex/torch/new/Rcpp/include' -I'/Users/dfalbel/Documents/posit/torch/revdep/library.noindex/scDHA/RcppArmadillo/include' -I'/Users/dfalbel/Documents/posit/torch/revdep/library.noindex/scDHA/RcppParallel/include' -I'/Users/dfalbel/Documents/posit/torch/revdep/library.noindex/scDHA/RcppAnnoy/include' -I/opt/R/arm64/include   -fPIC  -falign-functions=64 -Wall -g -O2  -c Support.cpp -o Support.o
-clang++ -arch arm64 -std=gnu++14 -dynamiclib -Wl,-headerpad_max_install_names -undefined dynamic_lookup -single_module -multiply_defined suppress -L/Library/Frameworks/R.framework/Versions/4.2-arm64/Resources/lib -L/opt/R/arm64/lib -o scDHA.so RcppExports.o Support.o -L/Library/Frameworks/R.framework/Versions/4.2-arm64/Resources/lib -lRlapack -L/Library/Frameworks/R.framework/Versions/4.2-arm64/Resources/lib -lRblas -L/opt/R/arm64/gfortran/lib/gcc/aarch64-apple-darwin20.6.0/12.0.1 -L/opt/R/arm64/gfortran/lib -lgfortran -lemutls_w -lquadmath -F/Library/Frameworks/R.framework/Versions/4.2-arm64 -framework R -Wl,-framework -Wl,CoreFoundation
-ld: warning: directory not found for option '-L/opt/R/arm64/gfortran/lib/gcc/aarch64-apple-darwin20.6.0/12.0.1'
-ld: warning: directory not found for option '-L/opt/R/arm64/gfortran/lib'
-ld: library not found for -lgfortran
-clang: error: linker command failed with exit code 1 (use -v to see invocation)
-make: *** [scDHA.so] Error 1
-ERROR: compilation failed for package ‘scDHA’
-* removing ‘/Users/dfalbel/Documents/posit/torch/revdep/checks.noindex/scDHA/new/scDHA.Rcheck/scDHA’
-
-
-```
-### CRAN
-
-```
-* installing *source* package ‘scDHA’ ...
-** package ‘scDHA’ successfully unpacked and MD5 sums checked
-** using staged installation
-** libs
-clang++ -arch arm64 -std=gnu++14 -I"/Library/Frameworks/R.framework/Versions/4.2-arm64/Resources/include" -DNDEBUG -DARMA_64BIT_WORD=1 -I'/Users/dfalbel/Documents/posit/torch/revdep/library.noindex/torch/old/Rcpp/include' -I'/Users/dfalbel/Documents/posit/torch/revdep/library.noindex/scDHA/RcppArmadillo/include' -I'/Users/dfalbel/Documents/posit/torch/revdep/library.noindex/scDHA/RcppParallel/include' -I'/Users/dfalbel/Documents/posit/torch/revdep/library.noindex/scDHA/RcppAnnoy/include' -I/opt/R/arm64/include   -fPIC  -falign-functions=64 -Wall -g -O2  -c RcppExports.cpp -o RcppExports.o
-clang++ -arch arm64 -std=gnu++14 -I"/Library/Frameworks/R.framework/Versions/4.2-arm64/Resources/include" -DNDEBUG -DARMA_64BIT_WORD=1 -I'/Users/dfalbel/Documents/posit/torch/revdep/library.noindex/torch/old/Rcpp/include' -I'/Users/dfalbel/Documents/posit/torch/revdep/library.noindex/scDHA/RcppArmadillo/include' -I'/Users/dfalbel/Documents/posit/torch/revdep/library.noindex/scDHA/RcppParallel/include' -I'/Users/dfalbel/Documents/posit/torch/revdep/library.noindex/scDHA/RcppAnnoy/include' -I/opt/R/arm64/include   -fPIC  -falign-functions=64 -Wall -g -O2  -c Support.cpp -o Support.o
-clang++ -arch arm64 -std=gnu++14 -dynamiclib -Wl,-headerpad_max_install_names -undefined dynamic_lookup -single_module -multiply_defined suppress -L/Library/Frameworks/R.framework/Versions/4.2-arm64/Resources/lib -L/opt/R/arm64/lib -o scDHA.so RcppExports.o Support.o -L/Library/Frameworks/R.framework/Versions/4.2-arm64/Resources/lib -lRlapack -L/Library/Frameworks/R.framework/Versions/4.2-arm64/Resources/lib -lRblas -L/opt/R/arm64/gfortran/lib/gcc/aarch64-apple-darwin20.6.0/12.0.1 -L/opt/R/arm64/gfortran/lib -lgfortran -lemutls_w -lquadmath -F/Library/Frameworks/R.framework/Versions/4.2-arm64 -framework R -Wl,-framework -Wl,CoreFoundation
-ld: warning: directory not found for option '-L/opt/R/arm64/gfortran/lib/gcc/aarch64-apple-darwin20.6.0/12.0.1'
-ld: warning: directory not found for option '-L/opt/R/arm64/gfortran/lib'
-ld: library not found for -lgfortran
-clang: error: linker command failed with exit code 1 (use -v to see invocation)
-make: *** [scDHA.so] Error 1
-ERROR: compilation failed for package ‘scDHA’
-* removing ‘/Users/dfalbel/Documents/posit/torch/revdep/checks.noindex/scDHA/old/scDHA.Rcheck/scDHA’
-
-
-```
-# sits
-
-<details>
-
-* Version: 1.4.0
-* GitHub: https://github.com/e-sensing/sits
-* Source code: https://github.com/cran/sits
-* Date/Publication: 2023-05-17 16:50:02 UTC
-* Number of recursive dependencies: 211
-
-Run `revdepcheck::revdep_details(, "sits")` for more info
-
-</details>
-
-## In both
-
-*   checking whether package ‘sits’ can be installed ... ERROR
-    ```
-    Installation failed.
-    See ‘/Users/dfalbel/Documents/posit/torch/revdep/checks.noindex/sits/new/sits.Rcheck/00install.out’ for details.
-    ```
-
-## Installation
-
-### Devel
-
-```
-* installing *source* package ‘sits’ ...
-** package ‘sits’ successfully unpacked and MD5 sums checked
-** using staged installation
-** libs
-clang++ -arch arm64 -std=gnu++14 -I"/Library/Frameworks/R.framework/Versions/4.2-arm64/Resources/include" -DNDEBUG  -I'/Users/dfalbel/Documents/posit/torch/revdep/library.noindex/torch/new/Rcpp/include' -I'/Users/dfalbel/Documents/posit/torch/revdep/library.noindex/sits/RcppArmadillo/include' -I/opt/R/arm64/include   -fPIC  -falign-functions=64 -Wall -g -O2  -c RcppExports.cpp -o RcppExports.o
-clang++ -arch arm64 -std=gnu++14 -I"/Library/Frameworks/R.framework/Versions/4.2-arm64/Resources/include" -DNDEBUG  -I'/Users/dfalbel/Documents/posit/torch/revdep/library.noindex/torch/new/Rcpp/include' -I'/Users/dfalbel/Documents/posit/torch/revdep/library.noindex/sits/RcppArmadillo/include' -I/opt/R/arm64/include   -fPIC  -falign-functions=64 -Wall -g -O2  -c combine_data.cpp -o combine_data.o
-clang++ -arch arm64 -std=gnu++14 -I"/Library/Frameworks/R.framework/Versions/4.2-arm64/Resources/include" -DNDEBUG  -I'/Users/dfalbel/Documents/posit/torch/revdep/library.noindex/torch/new/Rcpp/include' -I'/Users/dfalbel/Documents/posit/torch/revdep/library.noindex/sits/RcppArmadillo/include' -I/opt/R/arm64/include   -fPIC  -falign-functions=64 -Wall -g -O2  -c kernel.cpp -o kernel.o
-clang++ -arch arm64 -std=gnu++14 -I"/Library/Frameworks/R.framework/Versions/4.2-arm64/Resources/include" -DNDEBUG  -I'/Users/dfalbel/Documents/posit/torch/revdep/library.noindex/torch/new/Rcpp/include' -I'/Users/dfalbel/Documents/posit/torch/revdep/library.noindex/sits/RcppArmadillo/include' -I/opt/R/arm64/include   -fPIC  -falign-functions=64 -Wall -g -O2  -c label_class.cpp -o label_class.o
-clang++ -arch arm64 -std=gnu++14 -I"/Library/Frameworks/R.framework/Versions/4.2-arm64/Resources/include" -DNDEBUG  -I'/Users/dfalbel/Documents/posit/torch/revdep/library.noindex/torch/new/Rcpp/include' -I'/Users/dfalbel/Documents/posit/torch/revdep/library.noindex/sits/RcppArmadillo/include' -I/opt/R/arm64/include   -fPIC  -falign-functions=64 -Wall -g -O2  -c linear_interp.cpp -o linear_interp.o
-clang++ -arch arm64 -std=gnu++14 -I"/Library/Frameworks/R.framework/Versions/4.2-arm64/Resources/include" -DNDEBUG  -I'/Users/dfalbel/Documents/posit/torch/revdep/library.noindex/torch/new/Rcpp/include' -I'/Users/dfalbel/Documents/posit/torch/revdep/library.noindex/sits/RcppArmadillo/include' -I/opt/R/arm64/include   -fPIC  -falign-functions=64 -Wall -g -O2  -c nnls_solver.cpp -o nnls_solver.o
-...
-clang++ -arch arm64 -std=gnu++14 -I"/Library/Frameworks/R.framework/Versions/4.2-arm64/Resources/include" -DNDEBUG  -I'/Users/dfalbel/Documents/posit/torch/revdep/library.noindex/torch/new/Rcpp/include' -I'/Users/dfalbel/Documents/posit/torch/revdep/library.noindex/sits/RcppArmadillo/include' -I/opt/R/arm64/include   -fPIC  -falign-functions=64 -Wall -g -O2  -c smooth_whit.cpp -o smooth_whit.o
-clang++ -arch arm64 -std=gnu++14 -I"/Library/Frameworks/R.framework/Versions/4.2-arm64/Resources/include" -DNDEBUG  -I'/Users/dfalbel/Documents/posit/torch/revdep/library.noindex/torch/new/Rcpp/include' -I'/Users/dfalbel/Documents/posit/torch/revdep/library.noindex/sits/RcppArmadillo/include' -I/opt/R/arm64/include   -fPIC  -falign-functions=64 -Wall -g -O2  -c uncertainty.cpp -o uncertainty.o
-clang++ -arch arm64 -std=gnu++14 -dynamiclib -Wl,-headerpad_max_install_names -undefined dynamic_lookup -single_module -multiply_defined suppress -L/Library/Frameworks/R.framework/Versions/4.2-arm64/Resources/lib -L/opt/R/arm64/lib -o sits.so RcppExports.o combine_data.o kernel.o label_class.o linear_interp.o nnls_solver.o normalize_data.o normalize_data_0.o sampling_window.o smooth.o smooth_bayes.o smooth_sgp.o smooth_whit.o uncertainty.o -L/Library/Frameworks/R.framework/Versions/4.2-arm64/Resources/lib -lRlapack -L/Library/Frameworks/R.framework/Versions/4.2-arm64/Resources/lib -lRblas -L/opt/R/arm64/gfortran/lib/gcc/aarch64-apple-darwin20.6.0/12.0.1 -L/opt/R/arm64/gfortran/lib -lgfortran -lemutls_w -lquadmath -F/Library/Frameworks/R.framework/Versions/4.2-arm64 -framework R -Wl,-framework -Wl,CoreFoundation
-ld: warning: directory not found for option '-L/opt/R/arm64/gfortran/lib/gcc/aarch64-apple-darwin20.6.0/12.0.1'
-ld: warning: directory not found for option '-L/opt/R/arm64/gfortran/lib'
-ld: library not found for -lgfortran
-clang: error: linker command failed with exit code 1 (use -v to see invocation)
-make: *** [sits.so] Error 1
-ERROR: compilation failed for package ‘sits’
-* removing ‘/Users/dfalbel/Documents/posit/torch/revdep/checks.noindex/sits/new/sits.Rcheck/sits’
-
-
-```
-### CRAN
-
-```
-* installing *source* package ‘sits’ ...
-** package ‘sits’ successfully unpacked and MD5 sums checked
-** using staged installation
-** libs
-clang++ -arch arm64 -std=gnu++14 -I"/Library/Frameworks/R.framework/Versions/4.2-arm64/Resources/include" -DNDEBUG  -I'/Users/dfalbel/Documents/posit/torch/revdep/library.noindex/torch/old/Rcpp/include' -I'/Users/dfalbel/Documents/posit/torch/revdep/library.noindex/sits/RcppArmadillo/include' -I/opt/R/arm64/include   -fPIC  -falign-functions=64 -Wall -g -O2  -c RcppExports.cpp -o RcppExports.o
-clang++ -arch arm64 -std=gnu++14 -I"/Library/Frameworks/R.framework/Versions/4.2-arm64/Resources/include" -DNDEBUG  -I'/Users/dfalbel/Documents/posit/torch/revdep/library.noindex/torch/old/Rcpp/include' -I'/Users/dfalbel/Documents/posit/torch/revdep/library.noindex/sits/RcppArmadillo/include' -I/opt/R/arm64/include   -fPIC  -falign-functions=64 -Wall -g -O2  -c combine_data.cpp -o combine_data.o
-clang++ -arch arm64 -std=gnu++14 -I"/Library/Frameworks/R.framework/Versions/4.2-arm64/Resources/include" -DNDEBUG  -I'/Users/dfalbel/Documents/posit/torch/revdep/library.noindex/torch/old/Rcpp/include' -I'/Users/dfalbel/Documents/posit/torch/revdep/library.noindex/sits/RcppArmadillo/include' -I/opt/R/arm64/include   -fPIC  -falign-functions=64 -Wall -g -O2  -c kernel.cpp -o kernel.o
-clang++ -arch arm64 -std=gnu++14 -I"/Library/Frameworks/R.framework/Versions/4.2-arm64/Resources/include" -DNDEBUG  -I'/Users/dfalbel/Documents/posit/torch/revdep/library.noindex/torch/old/Rcpp/include' -I'/Users/dfalbel/Documents/posit/torch/revdep/library.noindex/sits/RcppArmadillo/include' -I/opt/R/arm64/include   -fPIC  -falign-functions=64 -Wall -g -O2  -c label_class.cpp -o label_class.o
-clang++ -arch arm64 -std=gnu++14 -I"/Library/Frameworks/R.framework/Versions/4.2-arm64/Resources/include" -DNDEBUG  -I'/Users/dfalbel/Documents/posit/torch/revdep/library.noindex/torch/old/Rcpp/include' -I'/Users/dfalbel/Documents/posit/torch/revdep/library.noindex/sits/RcppArmadillo/include' -I/opt/R/arm64/include   -fPIC  -falign-functions=64 -Wall -g -O2  -c linear_interp.cpp -o linear_interp.o
-clang++ -arch arm64 -std=gnu++14 -I"/Library/Frameworks/R.framework/Versions/4.2-arm64/Resources/include" -DNDEBUG  -I'/Users/dfalbel/Documents/posit/torch/revdep/library.noindex/torch/old/Rcpp/include' -I'/Users/dfalbel/Documents/posit/torch/revdep/library.noindex/sits/RcppArmadillo/include' -I/opt/R/arm64/include   -fPIC  -falign-functions=64 -Wall -g -O2  -c nnls_solver.cpp -o nnls_solver.o
-...
-clang++ -arch arm64 -std=gnu++14 -I"/Library/Frameworks/R.framework/Versions/4.2-arm64/Resources/include" -DNDEBUG  -I'/Users/dfalbel/Documents/posit/torch/revdep/library.noindex/torch/old/Rcpp/include' -I'/Users/dfalbel/Documents/posit/torch/revdep/library.noindex/sits/RcppArmadillo/include' -I/opt/R/arm64/include   -fPIC  -falign-functions=64 -Wall -g -O2  -c smooth_whit.cpp -o smooth_whit.o
-clang++ -arch arm64 -std=gnu++14 -I"/Library/Frameworks/R.framework/Versions/4.2-arm64/Resources/include" -DNDEBUG  -I'/Users/dfalbel/Documents/posit/torch/revdep/library.noindex/torch/old/Rcpp/include' -I'/Users/dfalbel/Documents/posit/torch/revdep/library.noindex/sits/RcppArmadillo/include' -I/opt/R/arm64/include   -fPIC  -falign-functions=64 -Wall -g -O2  -c uncertainty.cpp -o uncertainty.o
-clang++ -arch arm64 -std=gnu++14 -dynamiclib -Wl,-headerpad_max_install_names -undefined dynamic_lookup -single_module -multiply_defined suppress -L/Library/Frameworks/R.framework/Versions/4.2-arm64/Resources/lib -L/opt/R/arm64/lib -o sits.so RcppExports.o combine_data.o kernel.o label_class.o linear_interp.o nnls_solver.o normalize_data.o normalize_data_0.o sampling_window.o smooth.o smooth_bayes.o smooth_sgp.o smooth_whit.o uncertainty.o -L/Library/Frameworks/R.framework/Versions/4.2-arm64/Resources/lib -lRlapack -L/Library/Frameworks/R.framework/Versions/4.2-arm64/Resources/lib -lRblas -L/opt/R/arm64/gfortran/lib/gcc/aarch64-apple-darwin20.6.0/12.0.1 -L/opt/R/arm64/gfortran/lib -lgfortran -lemutls_w -lquadmath -F/Library/Frameworks/R.framework/Versions/4.2-arm64 -framework R -Wl,-framework -Wl,CoreFoundation
-ld: warning: directory not found for option '-L/opt/R/arm64/gfortran/lib/gcc/aarch64-apple-darwin20.6.0/12.0.1'
-ld: warning: directory not found for option '-L/opt/R/arm64/gfortran/lib'
-ld: library not found for -lgfortran
-clang: error: linker command failed with exit code 1 (use -v to see invocation)
-make: *** [sits.so] Error 1
-ERROR: compilation failed for package ‘sits’
-* removing ‘/Users/dfalbel/Documents/posit/torch/revdep/checks.noindex/sits/old/sits.Rcheck/sits’
-
-
-```
-# SPQR
-
-<details>
-
-* Version: 0.1.0
-* GitHub: https://github.com/stevengxu/SPQR
-* Source code: https://github.com/cran/SPQR
-* Date/Publication: 2022-05-02 20:02:03 UTC
-* Number of recursive dependencies: 65
-
-Run `revdepcheck::revdep_details(, "SPQR")` for more info
-
-</details>
-
-## In both
-
-*   checking whether package ‘SPQR’ can be installed ... ERROR
-    ```
-    Installation failed.
-    See ‘/Users/dfalbel/Documents/posit/torch/revdep/checks.noindex/SPQR/new/SPQR.Rcheck/00install.out’ for details.
-    ```
-
-## Installation
-
-### Devel
-
-```
-* installing *source* package ‘SPQR’ ...
-** package ‘SPQR’ successfully unpacked and MD5 sums checked
-** using staged installation
-** libs
-clang++ -arch arm64 -std=gnu++11 -I"/Library/Frameworks/R.framework/Versions/4.2-arm64/Resources/include" -DNDEBUG  -I'/Users/dfalbel/Documents/posit/torch/revdep/library.noindex/torch/new/Rcpp/include' -I'/Users/dfalbel/Documents/posit/torch/revdep/library.noindex/SPQR/RcppArmadillo/include' -I/opt/R/arm64/include    -fPIC  -falign-functions=64 -Wall -g -O2  -c RcppExports.cpp -o RcppExports.o
-clang++ -arch arm64 -std=gnu++11 -I"/Library/Frameworks/R.framework/Versions/4.2-arm64/Resources/include" -DNDEBUG  -I'/Users/dfalbel/Documents/posit/torch/revdep/library.noindex/torch/new/Rcpp/include' -I'/Users/dfalbel/Documents/posit/torch/revdep/library.noindex/SPQR/RcppArmadillo/include' -I/opt/R/arm64/include    -fPIC  -falign-functions=64 -Wall -g -O2  -c mcmc_export.cpp -o mcmc_export.o
-clang++ -arch arm64 -std=gnu++11 -dynamiclib -Wl,-headerpad_max_install_names -undefined dynamic_lookup -single_module -multiply_defined suppress -L/Library/Frameworks/R.framework/Versions/4.2-arm64/Resources/lib -L/opt/R/arm64/lib -o SPQR.so RcppExports.o mcmc_export.o -L/Library/Frameworks/R.framework/Versions/4.2-arm64/Resources/lib -lRlapack -L/Library/Frameworks/R.framework/Versions/4.2-arm64/Resources/lib -lRblas -L/opt/R/arm64/gfortran/lib/gcc/aarch64-apple-darwin20.6.0/12.0.1 -L/opt/R/arm64/gfortran/lib -lgfortran -lemutls_w -lquadmath -F/Library/Frameworks/R.framework/Versions/4.2-arm64 -framework R -Wl,-framework -Wl,CoreFoundation
-ld: warning: directory not found for option '-L/opt/R/arm64/gfortran/lib/gcc/aarch64-apple-darwin20.6.0/12.0.1'
-ld: warning: directory not found for option '-L/opt/R/arm64/gfortran/lib'
-ld: library not found for -lgfortran
-clang: error: linker command failed with exit code 1 (use -v to see invocation)
-make: *** [SPQR.so] Error 1
-ERROR: compilation failed for package ‘SPQR’
-* removing ‘/Users/dfalbel/Documents/posit/torch/revdep/checks.noindex/SPQR/new/SPQR.Rcheck/SPQR’
-
-
-```
-### CRAN
-
-```
-* installing *source* package ‘SPQR’ ...
-** package ‘SPQR’ successfully unpacked and MD5 sums checked
-** using staged installation
-** libs
-clang++ -arch arm64 -std=gnu++11 -I"/Library/Frameworks/R.framework/Versions/4.2-arm64/Resources/include" -DNDEBUG  -I'/Users/dfalbel/Documents/posit/torch/revdep/library.noindex/torch/old/Rcpp/include' -I'/Users/dfalbel/Documents/posit/torch/revdep/library.noindex/SPQR/RcppArmadillo/include' -I/opt/R/arm64/include    -fPIC  -falign-functions=64 -Wall -g -O2  -c RcppExports.cpp -o RcppExports.o
-clang++ -arch arm64 -std=gnu++11 -I"/Library/Frameworks/R.framework/Versions/4.2-arm64/Resources/include" -DNDEBUG  -I'/Users/dfalbel/Documents/posit/torch/revdep/library.noindex/torch/old/Rcpp/include' -I'/Users/dfalbel/Documents/posit/torch/revdep/library.noindex/SPQR/RcppArmadillo/include' -I/opt/R/arm64/include    -fPIC  -falign-functions=64 -Wall -g -O2  -c mcmc_export.cpp -o mcmc_export.o
-clang++ -arch arm64 -std=gnu++11 -dynamiclib -Wl,-headerpad_max_install_names -undefined dynamic_lookup -single_module -multiply_defined suppress -L/Library/Frameworks/R.framework/Versions/4.2-arm64/Resources/lib -L/opt/R/arm64/lib -o SPQR.so RcppExports.o mcmc_export.o -L/Library/Frameworks/R.framework/Versions/4.2-arm64/Resources/lib -lRlapack -L/Library/Frameworks/R.framework/Versions/4.2-arm64/Resources/lib -lRblas -L/opt/R/arm64/gfortran/lib/gcc/aarch64-apple-darwin20.6.0/12.0.1 -L/opt/R/arm64/gfortran/lib -lgfortran -lemutls_w -lquadmath -F/Library/Frameworks/R.framework/Versions/4.2-arm64 -framework R -Wl,-framework -Wl,CoreFoundation
-ld: warning: directory not found for option '-L/opt/R/arm64/gfortran/lib/gcc/aarch64-apple-darwin20.6.0/12.0.1'
-ld: warning: directory not found for option '-L/opt/R/arm64/gfortran/lib'
-ld: library not found for -lgfortran
-clang: error: linker command failed with exit code 1 (use -v to see invocation)
-make: *** [SPQR.so] Error 1
-ERROR: compilation failed for package ‘SPQR’
-* removing ‘/Users/dfalbel/Documents/posit/torch/revdep/checks.noindex/SPQR/old/SPQR.Rcheck/SPQR’
-
-
-```
-# targets
-
-<details>
-
-* Version: 1.1.3
-* GitHub: https://github.com/ropensci/targets
-* Source code: https://github.com/cran/targets
-* Date/Publication: 2023-05-23 14:10:02 UTC
-* Number of recursive dependencies: 177
-
-Run `revdepcheck::revdep_details(, "targets")` for more info
-
-</details>
-
-## Newly broken
 
 *   R CMD check timed out
     
@@ -324,11 +150,11 @@ Run `revdepcheck::revdep_details(, "targets")` for more info
 
 <details>
 
-* Version: 0.3.0
+* Version: 0.3.1
 * GitHub: https://github.com/mlverse/torchdatasets
 * Source code: https://github.com/cran/torchdatasets
-* Date/Publication: 2023-02-14 11:00:02 UTC
-* Number of recursive dependencies: 70
+* Date/Publication: 2024-06-20 12:40:01 UTC
+* Number of recursive dependencies: 71
 
 Run `revdepcheck::revdep_details(, "torchdatasets")` for more info
 
@@ -339,72 +165,81 @@ Run `revdepcheck::revdep_details(, "torchdatasets")` for more info
 *   R CMD check timed out
     
 
-# torchvision
+# torchvisionlib
 
 <details>
 
-* Version: 0.5.1
-* GitHub: https://github.com/mlverse/torchvision
-* Source code: https://github.com/cran/torchvision
-* Date/Publication: 2023-04-14 10:00:02 UTC
-* Number of recursive dependencies: 43
+* Version: 0.5.0
+* GitHub: https://github.com/mlverse/torchvisionlib
+* Source code: https://github.com/cran/torchvisionlib
+* Date/Publication: 2024-02-15 19:20:02 UTC
+* Number of recursive dependencies: 31
 
-Run `revdepcheck::revdep_details(, "torchvision")` for more info
+Run `revdepcheck::revdep_details(, "torchvisionlib")` for more info
 
 </details>
 
 ## Newly broken
 
-*   checking examples ...sh: line 1: 12985 Abort trap: 6           LANGUAGE=en _R_CHECK_INTERNALS2_=1 '/Library/Frameworks/R.framework/Versions/4.2-arm64/Resources/bin/R' --vanilla > 'torchvision-Ex.Rout' 2>&1 < 'torchvision-Ex.R'
+*   checking whether package ‘torchvisionlib’ can be installed ... ERROR
     ```
-     ERROR
-    Running examples in ‘torchvision-Ex.R’ failed
-    The error most likely occurred in:
-    
-    > ### Name: draw_bounding_boxes
-    > ### Title: Draws bounding boxes on image.
-    > ### Aliases: draw_bounding_boxes
-    > 
-    > ### ** Examples
-    > 
-    > if (torch::torch_is_installed()) {
-    + image <- torch::torch_randint(170, 250, size = c(3, 360, 360))$to(torch::torch_uint8())
-    + x <- torch::torch_randint(low = 1, high = 160, size = c(12,1))
-    + y <- torch::torch_randint(low = 1, high = 260, size = c(12,1))
-    + boxes <- torch::torch_cat(c(x, y, x + 20, y +  10), dim = 2)
-    + bboxed <- draw_bounding_boxes(image, boxes, colors = "black", fill = TRUE)
-    + tensor_image_browse(bboxed)
-    + }
-    Error : R: UnableToReadFont `helvetica' @ error/annotate.c/RenderFreetype/1396
+    Installation failed.
+    See ‘/Users/dfalbel/Documents/posit/torch/revdep/checks.noindex/torchvisionlib/new/torchvisionlib.Rcheck/00install.out’ for details.
     ```
 
-## Newly fixed
+## Installation
 
-*   checking examples ...sh: line 1: 12283 Abort trap: 6           LANGUAGE=en _R_CHECK_INTERNALS2_=1 '/Library/Frameworks/R.framework/Versions/4.2-arm64/Resources/bin/R' --vanilla > 'torchvision-Ex.Rout' 2>&1 < 'torchvision-Ex.R'
-    ```
-     ERROR
-    Running examples in ‘torchvision-Ex.R’ failed
-    The error most likely occurred in:
-    
-    > ### Name: draw_bounding_boxes
-    > ### Title: Draws bounding boxes on image.
-    > ### Aliases: draw_bounding_boxes
-    > 
-    > ### ** Examples
-    > 
-    > if (torch::torch_is_installed()) {
-    + image <- torch::torch_randint(170, 250, size = c(3, 360, 360))$to(torch::torch_uint8())
-    + x <- torch::torch_randint(low = 1, high = 160, size = c(12,1))
-    + y <- torch::torch_randint(low = 1, high = 260, size = c(12,1))
-    + boxes <- torch::torch_cat(c(x, y, x + 20, y +  10), dim = 2)
-    + bboxed <- draw_bounding_boxes(image, boxes, colors = "black", fill = TRUE)
-    + tensor_image_browse(bboxed)
-    + }
-    Error : R: UnableToReadFont `helvetica' @ error/annotate.c/RenderFreetype/1396
-    ```
+### Devel
 
-## In both
+```
+* installing *source* package ‘torchvisionlib’ ...
+** package ‘torchvisionlib’ successfully unpacked and MD5 sums checked
+** using staged installation
+** libs
+using C++ compiler: ‘Apple clang version 16.0.0 (clang-1600.0.26.3)’
+using SDK: ‘MacOSX15.1.sdk’
+clang++ -arch arm64 -std=gnu++17 -I"/Library/Frameworks/R.framework/Versions/4.4-arm64/Resources/include" -DNDEBUG -I../inst/include/ -I'/Users/dfalbel/Documents/posit/torch/revdep/library.noindex/torch/new/Rcpp/include' -I'/Users/dfalbel/Documents/posit/torch/revdep/library.noindex/torch/new/torch/include' -I/opt/R/arm64/include    -fPIC  -falign-functions=64 -Wall -g -O2   -c RcppExports.cpp -o RcppExports.o
+clang++ -arch arm64 -std=gnu++17 -I"/Library/Frameworks/R.framework/Versions/4.4-arm64/Resources/include" -DNDEBUG -I../inst/include/ -I'/Users/dfalbel/Documents/posit/torch/revdep/library.noindex/torch/new/Rcpp/include' -I'/Users/dfalbel/Documents/posit/torch/revdep/library.noindex/torch/new/torch/include' -I/opt/R/arm64/include    -fPIC  -falign-functions=64 -Wall -g -O2   -c exports.cpp -o exports.o
+clang++ -arch arm64 -std=gnu++17 -I"/Library/Frameworks/R.framework/Versions/4.4-arm64/Resources/include" -DNDEBUG -I../inst/include/ -I'/Users/dfalbel/Documents/posit/torch/revdep/library.noindex/torch/new/Rcpp/include' -I'/Users/dfalbel/Documents/posit/torch/revdep/library.noindex/torch/new/torch/include' -I/opt/R/arm64/include    -fPIC  -falign-functions=64 -Wall -g -O2   -c torchvisionlib.cpp -o torchvisionlib.o
+clang++ -arch arm64 -std=gnu++17 -I"/Library/Frameworks/R.framework/Versions/4.4-arm64/Resources/include" -DNDEBUG -I../inst/include/ -I'/Users/dfalbel/Documents/posit/torch/revdep/library.noindex/torch/new/Rcpp/include' -I'/Users/dfalbel/Documents/posit/torch/revdep/library.noindex/torch/new/torch/include' -I/opt/R/arm64/include    -fPIC  -falign-functions=64 -Wall -g -O2   -c torchvisionlib_types.cpp -o torchvisionlib_types.o
+...
+ .onLoad failed in loadNamespace() for 'torchvisionlib', details:
+  call: dyn.load(lib_path("torchvision"), local = FALSE)
+  error: unable to load shared object '/Users/dfalbel/Documents/posit/torch/revdep/checks.noindex/torchvisionlib/new/torchvisionlib.Rcheck/00LOCK-torchvisionlib/00new/torchvisionlib//lib/libtorchvision.dylib':
+  dlopen(/Users/dfalbel/Documents/posit/torch/revdep/checks.noindex/torchvisionlib/new/torchvisionlib.Rcheck/00LOCK-torchvisionlib/00new/torchvisionlib//lib/libtorchvision.dylib, 0x000A): Symbol not found: __ZN2at4_ops10zeros_like4callERKNS_6TensorEN3c108optionalINS5_10ScalarTypeEEENS6_INS5_6LayoutEEENS6_INS5_6DeviceEEENS6_IbEENS6_INS5_12MemoryFormatEEE
+  Referenced from: <7770DCC4-8CD6-3A42-8643-D57BF69E720D> /Users/dfalbel/Documents/posit/torch/revdep/checks.noindex/torchvisionlib/new/torchvisionlib.Rcheck/00LOCK-torchvisionlib/00new/torchvisionlib/lib/libtorchvision.dylib
+  Expected in:     <30A54DCC-A845-368C-8B03-ADCDD3639E86> /Users/dfalbel/Documents/posit/torch/revdep/library.noindex/torch/new/torch/lib/libtorch_cpu.dylib
+Error: loading failed
+Execution halted
+ERROR: loading failed
+* removing ‘/Users/dfalbel/Documents/posit/torch/revdep/checks.noindex/torchvisionlib/new/torchvisionlib.Rcheck/torchvisionlib’
 
-*   R CMD check timed out
-    
 
+```
+### CRAN
+
+```
+* installing *source* package ‘torchvisionlib’ ...
+** package ‘torchvisionlib’ successfully unpacked and MD5 sums checked
+** using staged installation
+** libs
+using C++ compiler: ‘Apple clang version 16.0.0 (clang-1600.0.26.3)’
+using SDK: ‘MacOSX15.1.sdk’
+clang++ -arch arm64 -std=gnu++17 -I"/Library/Frameworks/R.framework/Versions/4.4-arm64/Resources/include" -DNDEBUG -I../inst/include/ -I'/Users/dfalbel/Documents/posit/torch/revdep/library.noindex/torch/old/Rcpp/include' -I'/Users/dfalbel/Documents/posit/torch/revdep/library.noindex/torch/old/torch/include' -I/opt/R/arm64/include    -fPIC  -falign-functions=64 -Wall -g -O2   -c RcppExports.cpp -o RcppExports.o
+clang++ -arch arm64 -std=gnu++17 -I"/Library/Frameworks/R.framework/Versions/4.4-arm64/Resources/include" -DNDEBUG -I../inst/include/ -I'/Users/dfalbel/Documents/posit/torch/revdep/library.noindex/torch/old/Rcpp/include' -I'/Users/dfalbel/Documents/posit/torch/revdep/library.noindex/torch/old/torch/include' -I/opt/R/arm64/include    -fPIC  -falign-functions=64 -Wall -g -O2   -c exports.cpp -o exports.o
+clang++ -arch arm64 -std=gnu++17 -I"/Library/Frameworks/R.framework/Versions/4.4-arm64/Resources/include" -DNDEBUG -I../inst/include/ -I'/Users/dfalbel/Documents/posit/torch/revdep/library.noindex/torch/old/Rcpp/include' -I'/Users/dfalbel/Documents/posit/torch/revdep/library.noindex/torch/old/torch/include' -I/opt/R/arm64/include    -fPIC  -falign-functions=64 -Wall -g -O2   -c torchvisionlib.cpp -o torchvisionlib.o
+clang++ -arch arm64 -std=gnu++17 -I"/Library/Frameworks/R.framework/Versions/4.4-arm64/Resources/include" -DNDEBUG -I../inst/include/ -I'/Users/dfalbel/Documents/posit/torch/revdep/library.noindex/torch/old/Rcpp/include' -I'/Users/dfalbel/Documents/posit/torch/revdep/library.noindex/torch/old/torch/include' -I/opt/R/arm64/include    -fPIC  -falign-functions=64 -Wall -g -O2   -c torchvisionlib_types.cpp -o torchvisionlib_types.o
+...
+** testing if installed package can be loaded from temporary location
+trying URL 'https://github.com/mlverse/torchvisionlib/releases/download/v0.5.0/torchvisionlib-0.5.0+cpu+arm64-Darwin.zip'
+Content type 'application/octet-stream' length 928798 bytes (907 KB)
+==================================================
+downloaded 907 KB
+
+** checking absolute paths in shared objects and dynamic libraries
+** testing if installed package can be loaded from final location
+** testing if installed package keeps a record of temporary installation path
+* DONE (torchvisionlib)
+
+
+```

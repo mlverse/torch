@@ -1,9 +1,9 @@
-if (dir.exists("lantern")) {
+if (dir.exists("src/lantern")) {
   cat("Building lantern .... \n")
 
-  dir.create("lantern/build", showWarnings = FALSE, recursive = TRUE)
+  dir.create("src/lantern/build", showWarnings = FALSE, recursive = TRUE)
 
-  withr::with_dir("lantern/build", {
+  withr::with_dir("src/lantern/build", {
     system("cmake ..")
     system("cmake --build . --target lantern --config Release --parallel 8")
   })

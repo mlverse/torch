@@ -226,7 +226,7 @@ nn_init_dirac_ <- function(tensor, groups = 1) {
   out_chans_per_grp <- floor(sizes[1] / groups)
   min_dim <- min(out_chans_per_grp, sizes[2])
 
-  stop("not implemented")
+  not_implemented_error("not implemented")
 }
 
 nn_init_calculate_fan_in_and_fan_out <- function(tensor) {
@@ -418,5 +418,5 @@ nn_init_orthogonal_ <- function(tensor, gain = 1) {
 #' }
 #' @export
 nn_init_sparse_ <- function(tensor, sparsity, std = 0.01) {
-  stop("not implemented")
+  not_implemented_error("not implemented")
 }

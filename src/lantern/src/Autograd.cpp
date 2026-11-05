@@ -139,10 +139,13 @@ void *_lantern_Function_lambda(void *(*fun)(void *, void *, void *),
                  torch::autograd::LanternAutogradContext *ctx,
                  torch::autograd::variable_list inputs) {
     auto out = (*fun)(custom, (void *)ctx, make_raw::variable_list(inputs));
-    torch::autograd::variable_list res(
+    if (out) {
+      torch::autograd::variable_list res(
         from_raw::variable_list((*get_ptr)(out)));  // copy the output
-    (*delete_out)(out);
-    return res;
+      (*delete_out)(out);
+      return res;
+    }
+    return torch::autograd::variable_list();
   };
   return (void *)new LanternLambdaFunction(out, custom);
   LANTERN_FUNCTION_END
@@ -296,14 +299,18 @@ void *_lantern_Edge_function(void *self) {
   LANTERN_FUNCTION_END
 }
 
-void _lantern_autograd_zero_grad (void * self) {
+void _lantern_autograd_zero_grad (void * self, bool set_to_none) {
   LANTERN_FUNCTION_START
   auto list = from_raw::TensorList(self);
-  for (auto &t : list) {
-    auto grad = t.grad();
-    if (grad.defined()) {
-      grad.zero_();
-    }
+  for (auto &p : list) {
+    if (p.mutable_grad().defined()) {
+        p.mutable_grad().detach_();
+        if (set_to_none) {
+          p.mutable_grad().reset();
+        } else {
+          p.mutable_grad().zero_();
+        }
+      }
   }
   LANTERN_FUNCTION_END_VOID
 }

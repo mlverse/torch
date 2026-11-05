@@ -77,7 +77,7 @@ rosenbrock <- function(x) {
   x2 <- x[2]
   (a - x1)^2 + b * (x2 - x1^2)^2
 }
- 
+
 x <- torch_tensor(c(-1, 1), requires_grad = TRUE)
 
 optimizer <- optim_lbfgs(x)
@@ -87,12 +87,12 @@ calc_loss <- function() {
   value$backward()
   value
 }
-  
+
 num_iterations <- 2
 for (i in 1:num_iterations) {
   optimizer$step(calc_loss)
 }
-    
+
 rosenbrock(x)
 
 }

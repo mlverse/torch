@@ -1,11 +1,20 @@
+#include <memory>
 #include <torch.h>
 
 #include <deque>
 #include <future>
 #include <thread>
 
+// Global to store the longjump token when catching LongjumpException
+SEXP g_longjump_token = R_NilValue;
+
 #define LANTERN_CALLBACK_START try {
-#define LANTERN_CALLBACK_END(unknown, ret) \
+#define LANTERN_CALLBACK_END(fun, unknown, ret) \
+  }                                        \
+  catch (Rcpp::LongjumpException & ex) {   \
+    g_longjump_token = ex.token;           \
+    lanternSetLastError("LongjumpException");       \
+    return (void*)(ret);                   \
   }                                        \
   catch (const std::exception& ex) {       \
     lanternSetLastError(ex.what());        \
@@ -57,18 +66,33 @@ void call_r_gc(bool full);
   
 namespace {
 
-EventLoop<void*> gTasks;
-EventLoop<void> gBackwardTasks;
-std::atomic<bool> backward_is_running(false);
-static ThreadPool<void>* pool;
+static EventLoop<void*> gTasks;
+static EventLoop<void> gBackwardTasks;
+static std::atomic<bool> backward_is_running(false);
 
 void schedule_backward_task(std::packaged_task<void()>&& task) {
-  if (!pool) {
-    pool = new ThreadPool<void>(5);
-  }
+  // This needs to be a pointer because on Windows, disposing of this objects
+  // when the process exits causes a crash.
+  static auto pool = std::unique_ptr<ThreadPool<void>, std::function<void(ThreadPool<void>*)>>(
+    new ThreadPool<void>(5), 
+    [](auto p) {
+      p->stop();
+    }
+  );
   
   if (std::this_thread::get_id() == main_thread_id()) {
-    pool->push(std::move(task));
+    // The number of intra-op threads (torch_set_num_threads()) is thread-local
+    // in OpenMP, so the worker threads would otherwise use all available cores.
+    // We only set it when it differs, as at::set_num_threads() also clears the
+    // oneDNN cache.
+    int num_threads = lantern_get_num_threads();
+    pool->push(std::packaged_task<void()>(
+        [num_threads, task = std::move(task)]() mutable {
+          if (lantern_get_num_threads() != num_threads) {
+            lantern_set_num_threads(num_threads);
+          }
+          task();
+        }));
   } else {
     gBackwardTasks.schedule(std::move(task));
   }
@@ -85,7 +109,6 @@ void cpp_torch_method__backward_self_Tensor_inputs_TensorList(
   auto running_sg = makeScopeGuard([] {backward_is_running = false;});
   std::function<void()> backward([&]() {
     auto sg = makeScopeGuard([] { gTasks.stopWhenEmpty(); });
-
     lantern_Tensor__backward_tensor_tensorlist_tensor_bool_bool(
         self.get(), inputs.get(), gradient.get(), retain_graph.get(),
         create_graph.get());
@@ -97,6 +120,7 @@ void cpp_torch_method__backward_self_Tensor_inputs_TensorList(
   gTasks.run();
 
   result_fut.get();
+  lantern_host_handler();
 }
 
 // [[Rcpp::export]]
@@ -121,6 +145,7 @@ void cpp_autograd_backward(Rcpp::XPtr<XPtrTorchvariable_list> tensors,
   gTasks.run();
 
   result_fut.get();
+  lantern_host_handler();
 }
 
 void* rcpp_call_hook(void* x, void* hook) {
@@ -147,7 +172,7 @@ unsigned int cpp_tensor_register_hook(Rcpp::XPtr<XPtrTorchTensor> self,
       auto out = Rcpp::as<Rcpp::XPtr<XPtrTorchTensor>>(f(y))->get();
       UNPROTECT(1);
       return out;
-      LANTERN_CALLBACK_END("Unknon error in hook.", NULL)
+      LANTERN_CALLBACK_END("register_hook","Unknon error in hook.", NULL)
     });
     std::future<void*> result_fut = task.get_future();
 
@@ -224,8 +249,7 @@ Rcpp::XPtr<XPtrTorch> cpp_Function_lambda(Rcpp::Function f) {
     gTasks.schedule(std::move(task));
 
     return result_fut.get();
-    LANTERN_CALLBACK_END("Unknown error in lambda function.",
-                         new torch::variable_list(lantern_variable_list_new()))
+    LANTERN_CALLBACK_END("lambda end" ,"Unknown error in lambda function.", NULL)
   });
 
   auto out = XPtrTorch(lantern_Function_lambda(&rcpp_call_forward, (void*)fun,
@@ -380,6 +404,7 @@ torch::variable_list cpp_autograd_grad(torch::variable_list outputs,
   schedule_backward_task(std::move(task));
   gTasks.run();
   result_fut.get();
+  lantern_host_handler();
   return torch::variable_list(out);
 }
 
@@ -405,8 +430,19 @@ void call_r_gc(bool full) {
 }
 
 // [[Rcpp::export]]
-void cpp_set_lantern_allocator(uint64_t threshold_call_gc = 4000) {
+void cpp_set_lantern_allocator(uint64_t threshold_call_gc = 4000,
+                               bool cache_enabled = true,
+                               uint64_t cache_max_size_mb = 4000,
+                               uint64_t cache_min_block_size = 1024) {
   set_lantern_allocator(&call_r_gc, threshold_call_gc);
+  lantern_set_allocator_bypass(!cache_enabled);
+  lantern_set_cache_max_size(cache_max_size_mb);
+  lantern_set_cache_min_block_size(cache_min_block_size);
+}
+
+// [[Rcpp::export]]
+void cpp_cpu_cache_flush() {
+  lantern_flush_cache();
 }
 
 // [[Rcpp::export]]
@@ -416,6 +452,6 @@ void cpp_set_cuda_allocator_allocator_thresholds (double reserved_rate, double a
 }
 
 // [[Rcpp::export]]
-void cpp_autograd_zero_grad (torch::TensorList x) {
-  lantern_autograd_zero_grad(x.get());
+void cpp_autograd_zero_grad (torch::TensorList x, bool set_to_none) {
+  lantern_autograd_zero_grad(x.get(), set_to_none);
 }

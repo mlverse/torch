@@ -88,3 +88,13 @@ test_that("var works", {
   r <- var(as.numeric(x))
   expect_equal_to_r(s, r, tolerance = 1e-6)
 })
+
+test_that("repeat interleave works with cuda", {
+  device <- if (cuda_is_available()) "cuda" else "cpu"
+  x <- torch_tensor(c(1, 2, 3), device = device)
+  y <- x$repeat_interleave(2L)
+  expect_tensor_shape(y, c(6))
+
+  y <- torch_repeat_interleave(x, 2L)
+  expect_tensor_shape(y, c(6))
+})

@@ -13,6 +13,9 @@ nn_weighted_loss <- nn_module(
   inherit = nn_loss,
   initialize = function(weight = NULL, reduction = "mean") {
     super$initialize(reduction)
+    if (!is.null(weight) && !inherits(weight, "torch_tensor")) {
+      weight = torch_tensor(weight)
+    }
     self$register_buffer("weight", weight)
   }
 )
@@ -136,13 +139,14 @@ nn_l1_loss <- nn_module(
 #'   be applied, `'mean'`: the weighted mean of the output is taken,
 #'   `'sum'`: the output will be summed.
 #' @param ignore_index (int, optional): Specifies a target value that is ignored
-#'   and does not contribute to the input gradient.
+#'   and does not contribute to the input gradient. Like `target`, this is a 1-based
+#'   class index. The default `-100` is never a valid target and therefore ignores nothing.
 #'
 #' @section Shape:
 #' - Input: \eqn{(N, C)} where `C = number of classes`, or
 #'   \eqn{(N, C, d_1, d_2, ..., d_K)} with \eqn{K \geq 1}
 #'   in the case of `K`-dimensional loss.
-#' - Target: \eqn{(N)} where each value is \eqn{0 \leq \mbox{targets}[i] \leq C-1}, or
+#' - Target: \eqn{(N)} where each value is \eqn{1 \leq \mbox{targets}[i] \leq C}, or
 #'   \eqn{(N, d_1, d_2, ..., d_K)} with \eqn{K \geq 1} in the case of
 #'   K-dimensional loss.
 #' - Output: scalar.
@@ -253,7 +257,7 @@ nn_poisson_nll_loss <- nn_module(
 #' Kullback-Leibler divergence loss
 #'
 #' The Kullback-Leibler divergence loss measure
-#' [Kullback-Leibler divergence](https://en.wikipedia.org/wiki/Kullback-Leibler_divergence)
+#' Kullback-Leibler divergence \doi{10.1214/aoms/1177729694}
 #' is a useful distance measure for continuous distributions and is often
 #' useful when performing direct regression over the space of (discretely sampled)
 #' continuous output distributions.
@@ -776,8 +780,9 @@ nn_soft_margin_loss <- nn_module(
 #' @param weight (Tensor, optional): a manual rescaling weight given to each class.
 #'   If given, has to be a Tensor of size `C`
 #' @param ignore_index (int, optional): Specifies a target value that is ignored
-#'   and does not contribute to the input gradient. When `size_average` is
-#'   `TRUE`, the loss is averaged over non-ignored targets.
+#'   and does not contribute to the input gradient. Like `target`, this is a 1-based
+#'   class index. The default `-100` is never a valid target and therefore ignores nothing.
+#'   When `size_average` is `TRUE`, the loss is averaged over non-ignored targets.
 #' @param reduction (string, optional): Specifies the reduction to apply to the output:
 #'   `'none'` | `'mean'` | `'sum'`. `'none'`: no reduction will be applied,
 #'   `'mean'`: the sum of the output will be divided by the number of
@@ -787,7 +792,7 @@ nn_soft_margin_loss <- nn_module(
 #' - Input: \eqn{(N, C)} where `C = number of classes`, or
 #' \eqn{(N, C, d_1, d_2, ..., d_K)} with \eqn{K \geq 1}
 #' in the case of `K`-dimensional loss.
-#' - Target: \eqn{(N)} where each value is \eqn{0 \leq \mbox{targets}[i] \leq C-1}, or
+#' - Target: \eqn{(N)} where each value is \eqn{1 \leq \mbox{targets}[i] \leq C}, or
 #' \eqn{(N, d_1, d_2, ..., d_K)} with \eqn{K \geq 1} in the case of
 #' K-dimensional loss.
 #' - Output: scalar.
@@ -1021,7 +1026,7 @@ nn_multi_margin_loss <- nn_module(
 #' \eqn{(N, D)}.
 #'
 #' The distance swap is described in detail in the paper
-#' [Learning shallow convolutional feature descriptors with triplet losses](https://paperswithcode.com/paper/learning-local-feature-descriptors-with) by
+#' Learning shallow convolutional feature descriptors with triplet losses \doi{10.5244/C.30.119} by
 #' V. Balntas, E. Riba et al.
 #'
 #' The loss function for each sample in the mini-batch is:
@@ -1042,7 +1047,7 @@ nn_multi_margin_loss <- nn_module(
 #' @param margin (float, optional): Default: \eqn{1}.
 #' @param p (int, optional): The norm degree for pairwise distance. Default: \eqn{2}.
 #' @param swap (bool, optional): The distance swap is described in detail in the paper
-#'   [Learning shallow convolutional feature descriptors with triplet losses](https://paperswithcode.com/paper/learning-local-feature-descriptors-with) by
+#'   Learning shallow convolutional feature descriptors with triplet losses by
 #'   V. Balntas, E. Riba et al. Default: `FALSE`.
 #' @param eps constant to avoid NaN's
 #' @param reduction (string, optional): Specifies the reduction to apply to the output:
@@ -1127,7 +1132,7 @@ nn_triplet_margin_loss <- nn_module(
 #'   margins penalize cases where the negative examples are not distant enough from the
 #'   anchors, relative to the positives. Default: \eqn{1}.
 #' @param swap (bool, optional): Whether to use the distance swap described in the paper
-#'   [Learning shallow convolutional feature descriptors with triplet losses](https://paperswithcode.com/paper/learning-local-feature-descriptors-with) by
+#'   Learning shallow convolutional feature descriptors with triplet losses \doi{10.5244/C.30.119} by
 #'   V. Balntas, E. Riba et al. If TRUE, and if the positive example is closer to the
 #'   negative example than the anchor is, swaps the positive example and the anchor in
 #'   the loss computation. Default: `FALSE`.
@@ -1326,5 +1331,36 @@ nn_ctc_loss <- nn_module(
       blank = self$blank,
       reduction = self$reduction, zero_infinity = self$zero_infinity
     )
+  }
+)
+
+#' AUM loss
+#'
+#' Creates a criterion that measures the Area under the \eqn{Min(FPR, FNR)} (AUM) between each
+#' element in the input \eqn{pred_tensor} and target \eqn{label_tensor}. 
+#' 
+#' This is used for measuring the error of a binary reconstruction within highly unbalanced dataset, 
+#' where the goal is optimizing the ROC curve. Note that the targets \eqn{label_tensor} should be factor
+#' level of the binary outcome, i.e. with values `1L` and `2L`.
+#' @references
+#' J. Hillman, T.D. Hocking: Optimizing ROC Curves with a Sort-Based 
+#' Surrogate Loss for Binary Classification and Changepoint Detection
+#' https://jmlr.org/papers/volume24/21-0751/21-0751.pdf
+#'
+#' @examplesIf torch_is_installed()
+#' loss <- nn_aum_loss()
+#' input <- torch_randn(4, 6, requires_grad = TRUE)
+#' target <- input > 1.5
+#' output <- loss(input, target)
+#' output$backward()
+#' @export
+nn_aum_loss <- nn_module(
+  "nn_aum_loss",
+  inherit = nn_loss,
+  initialize = function(){
+    super$initialize()
+  },
+  forward = function(input, target) {
+    nnf_area_under_min_fpr_fnr(input, target)
   }
 )

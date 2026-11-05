@@ -181,8 +181,9 @@ test_that("internal cpp_amp_check works", {
 })
 
 test_that("grad scalers work correctly", {
-  
+
   skip_if_cuda_not_available()
+  skip_slow_tests()
 
   make_model <- function(in_size, out_size, num_layers) {
     layers <- list()

@@ -69,6 +69,11 @@ test_that("nn_sequential", {
   expect_s3_class(model, "nn_module")
 })
 
+test_that("nn_sequential only accepts modules", {
+  expect_error(nn_sequential(identity), "but got object of type")
+  expect_error(nn_sequential(nn_linear), "must be initialized")
+})
+
 test_that("nn_module_list", {
   x <- nn_module_list(list(
     nn_linear(10, 100),
@@ -169,6 +174,14 @@ test_that("to", {
   net$cpu()
   expect_equal(net$linear$weight$device$type, "cpu")
   expect_equal(net$linear$bias$device$type, "cpu")
+})
+
+test_that("module$to works with bfloat16", {
+  net <- nn_linear(10, 10)
+  net$to(dtype = torch_bfloat16())
+
+  expect_true(net$weight$dtype == torch_bfloat16())
+  expect_true(net$bias$dtype == torch_bfloat16())
 })
 
 test_that("state_dict for modules", {
@@ -629,6 +642,24 @@ test_that("classes are inherited correctly", {
 test_that("empty initializer", {
   model <- nn_module(forward = function(input) input)
   expect_equal_to_r(model()(torch_tensor(1)), 1)
+})
+
+test_that("nn_module initialize can have parameter named d (#1336)", {
+  mod <- nn_module(
+    classname = "issue1336_module",
+    initialize = function(d) {
+      self$d <- d
+    },
+    forward = function(x) x
+  )
+
+  model <- NULL
+  expect_no_error({
+    model <- mod(1:10)
+  })
+
+  expect_equal(model$d[1], 1L)
+  expect_equal(model$d[5], 5L)
 })
 
 test_that("can load state dict of a corrupt module", {

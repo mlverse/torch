@@ -49,6 +49,13 @@ const char *_lantern_Tensor_StreamInsertion(void *x) {
     tensor = tensor.dequantize();
   }
 
+  // the stream insertion method calls is_contiguous() which is not
+  // supported for compressed sparse tensors (CSR, CSC, BSR, BSC).
+  // Convert to dense before printing.
+  if (tensor.is_sparse_csr()) {
+    tensor = tensor.to_dense();
+  }
+
   // the stream insertion method seems to cast tensors to float64
   // before printing and that's not supported by the MPS device
   // thus we first cast to CPU, print and later do a regex replace
@@ -156,7 +163,6 @@ bool *_lantern_Tensor_data_ptr_bool(void *self) {
 int64_t _lantern_Tensor_numel(void *self) {
   LANTERN_FUNCTION_START
   torch::Tensor x = from_raw::Tensor(self);
-  ;
   return x.numel();
   LANTERN_FUNCTION_END_RET(0)
 }
@@ -164,7 +170,6 @@ int64_t _lantern_Tensor_numel(void *self) {
 int64_t _lantern_Tensor_element_size(void *self) {
   LANTERN_FUNCTION_START
   torch::Tensor x = from_raw::Tensor(self);
-  ;
   return x.element_size();
   LANTERN_FUNCTION_END_RET(0)
 }
@@ -172,7 +177,6 @@ int64_t _lantern_Tensor_element_size(void *self) {
 int64_t _lantern_Tensor_ndimension(void *self) {
   LANTERN_FUNCTION_START
   torch::Tensor x = from_raw::Tensor(self);
-  ;
   return x.ndimension();
   LANTERN_FUNCTION_END_RET(0)
 }
@@ -180,7 +184,6 @@ int64_t _lantern_Tensor_ndimension(void *self) {
 int64_t _lantern_Tensor_size(void *self, int64_t i) {
   LANTERN_FUNCTION_START
   torch::Tensor x = from_raw::Tensor(self);
-  ;
   return x.size(i);
   LANTERN_FUNCTION_END_RET(0)
 }
@@ -188,7 +191,6 @@ int64_t _lantern_Tensor_size(void *self, int64_t i) {
 void *_lantern_Tensor_dtype(void *self) {
   LANTERN_FUNCTION_START
   torch::Tensor x = from_raw::Tensor(self);
-  ;
   torch::Dtype dtype = c10::typeMetaToScalarType(x.dtype());
   return make_raw::Dtype(dtype);
   LANTERN_FUNCTION_END
@@ -197,7 +199,6 @@ void *_lantern_Tensor_dtype(void *self) {
 void *_lantern_Tensor_device(void *self) {
   LANTERN_FUNCTION_START
   torch::Tensor x = from_raw::Tensor(self);
-  ;
   torch::Device device = x.device();
   return make_raw::Device(device);
   LANTERN_FUNCTION_END
@@ -238,7 +239,6 @@ void *_lantern_Tensor_names(void *self) {
 bool _lantern_Tensor_has_any_zeros(void *self) {
   LANTERN_FUNCTION_START
   torch::Tensor x = from_raw::Tensor(self);
-  ;
   return (x == 0).any().item().toBool();
   LANTERN_FUNCTION_END
 }
@@ -360,18 +360,35 @@ struct NoopPyInterpreterVTable final : public PyInterpreterVTable {
   }
 
   // Just swallow the event, don't do anything
-  void trace_gpu_event_creation(uintptr_t event) const override {}
-  void trace_gpu_event_deletion(uintptr_t event) const override {}
-  void trace_gpu_event_record(uintptr_t event, uintptr_t stream)
+  void trace_gpu_event_creation(c10::DeviceType device_type, uintptr_t event) const override {}
+  void trace_gpu_event_deletion(c10::DeviceType device_type, uintptr_t event) const override {}
+  void trace_gpu_event_record(c10::DeviceType device_type, uintptr_t event, uintptr_t stream)
       const override {}
-  void trace_gpu_event_wait(uintptr_t event, uintptr_t stream) const override {}
-  void trace_gpu_memory_allocation(uintptr_t ptr) const override {}
-  void trace_gpu_memory_deallocation(uintptr_t ptr) const override {}
-  void trace_gpu_stream_creation(uintptr_t stream) const override {}
-  void trace_gpu_device_synchronization() const override {}
-  void trace_gpu_stream_synchronization(uintptr_t stream) const override {}
-  void trace_gpu_event_synchronization(uintptr_t event) const override {}
+  void trace_gpu_event_wait(c10::DeviceType device_type, uintptr_t event, uintptr_t stream) const override {}
+  void trace_gpu_memory_allocation(c10::DeviceType device_type, uintptr_t ptr) const override {}
+  void trace_gpu_memory_deallocation(c10::DeviceType device_type, uintptr_t ptr) const override {}
+  void trace_gpu_stream_creation(c10::DeviceType device_type, uintptr_t stream) const override {}
+  void trace_gpu_device_synchronization(c10::DeviceType device_type) const override {}
+  void trace_gpu_stream_synchronization(c10::DeviceType device_type, uintptr_t stream) const override {}
+  void trace_gpu_event_synchronization(c10::DeviceType device_type, uintptr_t event) const override {}
 
+
+  void incref(PyObject* pyobj) const override {}
+  void reportErrorCallback(PyObject* callback, DispatchKey key) const override {}
+  void python_op_registration_trampoline(const c10::OperatorHandle& op,
+      c10::DispatchKey,
+      c10::DispatchKeySet keyset,
+      torch::jit::Stack* stack,
+      bool with_keyset,
+      bool with_op) const override {}
+  void throw_abstract_impl_not_imported_error(std::string opname,
+      const char* pymodule,
+      const char* context) const override {}
+  int64_t numel(const TensorImpl* self) const override {
+    return self->numel();
+  }
+  void reset_backward_hooks(const TensorImpl* self) const override {}
+  
 };
 
 } // namespace impl
@@ -402,5 +419,12 @@ bool _lantern_Tensor_is_sparse (void* x) {
   LANTERN_FUNCTION_START
   auto t = from_raw::Tensor(x);
   return t.is_sparse();
+  LANTERN_FUNCTION_END_RET(false)
+}
+
+bool _lantern_Tensor_is_sparse_csr (void* x) {
+  LANTERN_FUNCTION_START
+  auto t = from_raw::Tensor(x);
+  return t.is_sparse_csr();
   LANTERN_FUNCTION_END_RET(false)
 }

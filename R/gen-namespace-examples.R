@@ -1975,6 +1975,27 @@ NULL
 NULL
 # -> addmm <-
 
+# -> sparse_sampled_addmm <-
+#'
+#' @name torch_sparse_sampled_addmm
+#'
+#' @examples
+#'
+#' # Create a sparse CSR mask from a COO tensor
+#' i <- torch_tensor(matrix(c(1, 2, 2, 1, 2, 3), nrow = 2, byrow = TRUE),
+#'   dtype = torch_long())
+#' v <- torch_tensor(c(1, 2, 3), dtype = torch_float32())
+#' sparse_mask <- torch_sparse_coo_tensor(i, v, c(2, 3))$to_sparse_csr()
+#'
+#' mat1 <- torch_randn(c(2, 3))
+#' mat2 <- torch_randn(c(3, 3))
+#'
+#' result <- torch_sparse_sampled_addmm(sparse_mask, mat1, mat2)
+#' result$to_dense()
+#'
+NULL
+# -> sparse_sampled_addmm <-
+
 # -> sparse_coo_tensor: 89c4a3054942381686d7a96fb8161134 <-
 #'
 #' @name torch_sparse_coo_tensor

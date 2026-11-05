@@ -7,7 +7,10 @@
 
 static inline void tensor_finalizer(SEXP ptr) {
   auto xptr = Rcpp::as<Rcpp::XPtr<XPtrTorchTensor>>(ptr);
-  lantern_tensor_set_pyobj(xptr->get(), nullptr);
+  // When the the xptr is released, we might call this function with an invalid ptr.
+  if (xptr.get()) {
+    lantern_tensor_set_pyobj(xptr->get(), nullptr);
+  }
 }
 
 static inline bool rlang_is_named(SEXP x) {
@@ -140,13 +143,18 @@ XPtrTorchTensor from_sexp_tensor(SEXP x) {
   Rcpp::stop("Expected a torch_tensor.");
 }
 
-void delete_tensor(void* x) { lantern_Tensor_delete(x); }
+void delete_tensor(void* x) { 
+  lantern_Tensor_delete(x); 
+}
 
 // optional_torch_tensor
 
 SEXP operator_sexp_optional_tensor(const XPtrTorchOptionalTensor* self) {
   if (!lantern_optional_tensor_has_value(self->get())) {
-    return R_NilValue;
+    // even though we shouldnt need to protect RNilValue, it makes rchk checks happy :)
+    SEXP result = PROTECT(R_NilValue);
+    UNPROTECT(1);
+    return result;
   }
   auto x = torch::Tensor(lantern_optional_tensor_value(self->get()));
   return x;
@@ -163,7 +171,9 @@ XPtrTorchOptionalTensor from_sexp_optional_tensor(SEXP x) {
   }
 }
 
-void delete_optional_tensor(void* x) { lantern_optional_tensor_delete(x); }
+void delete_optional_tensor(void* x) { 
+  lantern_optional_tensor_delete(x); 
+}
 
 // index tensor
 
@@ -209,7 +219,7 @@ XPtrTorchTensorList from_sexp_tensor_list(SEXP x) {
   }
 
   if (Rf_isNull(x)) {
-    Rcpp::List tmp;  // create an empty list
+    Rcpp::List tmp(0);  // create an empty list
     return cpp_torch_tensor_list(tmp);
   }
 
@@ -363,9 +373,9 @@ XPtrTorchTensorOptions from_sexp_tensor_options(SEXP x) {
 
     std::vector<std::string> names = args.names();
 
-    for (auto i = 0; i < names.size(); ++i) {
+    for (size_t i = 0; i < names.size(); ++i) {
       auto name = names[i];
-      
+
       if (TYPEOF(args[name]) == NILSXP) {
         continue;
       } else if (name == "dtype") {
@@ -605,7 +615,7 @@ XPtrTorchDimnameList from_sexp_dimname_list(SEXP x) {
   if (TYPEOF(x) == STRSXP) {
     XPtrTorchDimnameList out = lantern_DimnameList();
     auto names = Rcpp::as<std::vector<std::string>>(x);
-    for (int i = 0; i < names.size(); i++) {
+    for (size_t i = 0; i < names.size(); i++) {
       lantern_DimnameList_push_back(out.get(),
                                     XPtrTorchDimname(names[i]).get());
     }
@@ -770,7 +780,7 @@ SEXP operator_sexp_vector_string(const XPtrTorchvector_string* self) {
 XPtrTorchvector_string from_sexp_vector_string(SEXP x) {
   XPtrTorchvector_string out = lantern_vector_string_new();
   auto strings = Rcpp::as<std::vector<std::string>>(x);
-  for (int i = 0; i < strings.size(); i++) {
+  for (size_t i = 0; i < strings.size(); i++) {
     lantern_vector_string_push_back(out.get(), strings.at(i).c_str());
   }
   return out;
@@ -1287,7 +1297,7 @@ SEXP operator_sexp_named_tuple_helper(const XPtrTorchNamedTupleHelper* self) {
   std::vector<std::string> names_ = Rcpp::as<std::vector<std::string>>(names);
   Rcpp::List elements_ = Rcpp::as<Rcpp::List>(elements);
 
-  if (names_.size() != elements_.size()) return elements_;
+  if (names_.size() != static_cast<size_t>(elements_.size())) return elements_;
 
   if (std::all_of(names_.begin(), names_.end(),
                   [](std::string x) { return x.length() != 0; })) {
@@ -1302,7 +1312,7 @@ XPtrTorchNamedTupleHelper from_sexp_named_tuple_helper(SEXP x) {
   auto x_ = Rcpp::as<Rcpp::List>(x);
   auto names = Rcpp::as<std::vector<std::string>>(x_.names());
 
-  for (int i = 0; i < names.size(); i++) {
+  for (size_t i = 0; i < names.size(); i++) {
     lantern_jit_NamedTuple_push_back(out.get(), XPtrTorchstring(names[i]).get(),
                                      Rcpp::as<XPtrTorchIValue>(x_[i]).get());
   }
@@ -1424,7 +1434,10 @@ XPtrTorchIntArrayRef from_sexp_int_array_ref(SEXP x, bool allow_null,
     if (allow_null) {
       return nullptr;
     } else {
-      Rcpp::stop("Expected a list of integers and found NULL.");
+      // this is required by torch_count_nonzero to keep its behavior of not requiring the dim
+      // argument.
+      std::vector<int64_t> vec(0);
+      return XPtrTorchIntArrayRef(lantern_vector_int64_t(vec.data(), vec.size()));
     }
   }
 
@@ -1440,7 +1453,7 @@ XPtrTorchIntArrayRef from_sexp_int_array_ref(SEXP x, bool allow_null,
   }
 
   if (index) {
-    for (int i = 0; i < vec.size(); i++) {
+    for (size_t i = 0; i < vec.size(); i++) {
       if (vec[i] == 0) {
         Rcpp::stop("Indexing starts at 1 but found a 0.");
       }
@@ -1518,7 +1531,7 @@ XPtrTorchOptionalIntArrayRef from_sexp_optional_int_array_ref(SEXP x,
     }
 
     if (index) {
-      for (int i = 0; i < data.size(); i++) {
+      for (size_t i = 0; i < data.size(); i++) {
         if (data[i] == 0) {
           Rcpp::stop("Indexing starts at 1 but found a 0.");
         }
@@ -1676,6 +1689,10 @@ XPtrTorchvariable_list from_sexp_variable_list(SEXP x) {
 }
 
 SEXP operator_sexp_variable_list(const XPtrTorchvariable_list* self) {
+  if (!self || !self->get()) {
+    return Rcpp::List(0);
+  }
+
   int64_t sze = lantern_variable_list_size(self->get());
   Rcpp::List out(sze);
   for (int64_t i = 0; i < sze; i++) {
@@ -1763,3 +1780,97 @@ void delete_traceable_function(void* x) { lantern_TraceableFunction_delete(x); }
 // vector_void
 
 void delete_vector_void(void* x) { lantern_vector_void_delete(x); }
+
+// optims
+
+void rcpp_delete_optim_adamw (void* x) {
+  lantern_optim_adamw_delete(x);
+}
+
+void* optim_adamw::get() {
+  return ptr.get();
+}
+optim_adamw::operator SEXP () const {
+  auto xptr = make_xptr<optim_adamw>(*this);
+  xptr.attr("class") = Rcpp::CharacterVector::create("optim_ignite_adamw");
+  return xptr;
+}
+optim_adamw::optim_adamw (SEXP x) : optim_adamw{Rcpp::as<Rcpp::XPtr<optim_adamw>>(x)->ptr} {}
+optim_adamw::optim_adamw (void* x) : ptr(x, rcpp_delete_optim_adamw) {};
+
+void rcpp_delete_optim_adam (void* x) {
+  lantern_optim_adam_delete(x);
+}
+
+void* optim_adam::get() {
+  return ptr.get();
+}
+optim_adam::operator SEXP () const {
+  auto xptr = make_xptr<optim_adam>(*this);
+  xptr.attr("class") = Rcpp::CharacterVector::create("optim_ignite_adam");
+  return xptr;
+}
+optim_adam::optim_adam (SEXP x) : optim_adam{Rcpp::as<Rcpp::XPtr<optim_adam>>(x)->ptr} {}
+optim_adam::optim_adam (void* x) : ptr(x, rcpp_delete_optim_adam) {};
+
+void rcpp_delete_optim_sgd (void* x) {
+  lantern_optim_sgd_delete(x);
+}
+
+void* optim_sgd::get() {
+  return ptr.get();
+}
+optim_sgd::operator SEXP () const {
+  auto xptr = make_xptr<optim_sgd>(*this);
+  xptr.attr("class") = Rcpp::CharacterVector::create("optim_ignite_sgd");
+  return xptr;
+}
+optim_sgd::optim_sgd (SEXP x) : optim_sgd{Rcpp::as<Rcpp::XPtr<optim_sgd>>(x)->ptr} {}
+optim_sgd::optim_sgd (void* x) : ptr(x, rcpp_delete_optim_sgd) {};
+
+void rcpp_delete_optim_rmsprop (void* x) {
+  lantern_optim_rmsprop_delete(x);
+}
+
+void* optim_rmsprop::get() {
+  return ptr.get();
+}
+optim_rmsprop::operator SEXP () const {
+  auto xptr = make_xptr<optim_rmsprop>(*this);
+  xptr.attr("class") = Rcpp::CharacterVector::create("optim_ignite_rmsprop");
+  return xptr;
+}
+optim_rmsprop::optim_rmsprop (SEXP x) : optim_rmsprop{Rcpp::as<Rcpp::XPtr<optim_rmsprop>>(x)->ptr} {}
+optim_rmsprop::optim_rmsprop (void* x) : ptr(x, rcpp_delete_optim_rmsprop) {};
+
+void rcpp_delete_optim_adagrad (void* x) {
+  lantern_optim_adagrad_delete(x);
+}
+
+void* optim_adagrad::get() {
+  return ptr.get();
+}
+optim_adagrad::operator SEXP () const {
+  auto xptr = make_xptr<optim_adagrad>(*this);
+  xptr.attr("class") = Rcpp::CharacterVector::create("optim_ignite_adagrad");
+  return xptr;
+}
+optim_adagrad::optim_adagrad (SEXP x) : optim_adagrad{Rcpp::as<Rcpp::XPtr<optim_adagrad>>(x)->ptr} {}
+optim_adagrad::optim_adagrad (void* x) : ptr(x, rcpp_delete_optim_adagrad) {};
+
+void rcpp_delete_optim_param_groups (void* x) {
+  lantern_vector_optim_optimizer_group_delete(x);
+}
+
+void* optim_param_groups::get() {
+  return ptr.get();
+}
+optim_param_groups::operator SEXP () const {
+  auto xptr = make_xptr<optim_param_groups>(*this);
+  xptr.attr("class") = Rcpp::CharacterVector::create("optim_ignite_param_groups");
+  return xptr;
+}
+
+optim_param_groups::optim_param_groups (SEXP x) : optim_param_groups{Rcpp::as<Rcpp::XPtr<optim_param_groups>>(x)->ptr} {}
+optim_param_groups::optim_param_groups (void* x) : ptr(x, rcpp_delete_optim_param_groups) {};
+

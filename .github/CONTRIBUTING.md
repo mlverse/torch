@@ -127,3 +127,8 @@ the custom `tools/document.R` script instead of `devtools::document()`,
 as we need to patch `roxygen2` to avoid running the examples on CRAN.
 
 We're looking forward to your contributions!
+
+
+### Known Issues
+
+* When running the tests twice (e.g. via `devtools::test()`) this will cause a segfault, see [#1218](https://github.com/mlverse/torch/issues/1218) for a discussion.
