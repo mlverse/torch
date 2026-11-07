@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # =============================================================================
-# make_rocm_kit.sh v15 -- build liblantern with ROCm, aligned with the {torch}
+# make_rocm_kit.sh v16 -- build liblantern with ROCm, aligned with the {torch}
 # dev tree (issue mlverse/torch#907)
 #
 # Put this script in <torch-tree>/tools/ (or pass --tree <root>).
@@ -24,6 +24,49 @@
 #            --lantern-src <dir>     (default: <tree>/src/lantern; the legacy
 #                                     top-level lantern/ of platform/amd_gpu is
 #                                     obsolete on the upstream side)
+#
+# CHANGELOG v16 -- fix the v15 compile failure at 51%: "conflicting declaration
+#   'using uchar1'" (x28) + "redefinition of 'struct dim3'" + "cannot convert
+#   'cudaMemcpyKind' to 'hipMemcpyKind'" in src/Cuda.cpp.o -> gmake Error 2.
+#   Root cause: v15 enables the REAL cuda_* implementations (LANTERN_HIP), so
+#   Cuda.cpp now compiles <ATen/cuda/CUDAContext.h> +
+#   <c10/cuda/CUDACachingAllocator.h> etc. The wheel installs torch's VANILLA
+#   headers: ATen/cuda/CUDAContextLight.h includes <cuda_runtime_api.h>,
+#   <cusparse.h>, <cublas_v2.h>, <cublasLt.h> UNGUARDED (lines 7-13),
+#   c10/cuda/CUDAStream.h:3 and CUDAFunctions.h:14 include
+#   <cuda_runtime_api.h>, CUDAException.h:9 includes <cuda.h>. torch's own
+#   ROCm build never compiles those as-is (tools/amd_build hipifies its
+#   sources into build-dir copies first), but a downstream g++ build hits
+#   them raw -- while the USE_ROCM branches of the same TU pull the HIP
+#   headers from the system SDK (hipsolver -> hip_complex ->
+#   amd_hip_vector_types). Two outcomes, both fatal:
+#   (a) host with NVIDIA CUDA headers in /usr/include (this machine): NVIDIA
+#       typedefs (uchar1/uchar2/.../dim3/cudaMemcpyKind) collide with the HIP
+#       ones -> the conflict storm; CUDAFunctions.h:94 (the TORCH_HIP_VERSION
+#       >= 301 branch) then feeds NVIDIA's cudaMemcpyKind to
+#       hipMemcpyWithStream;
+#   (b) host without NVIDIA headers: "cuda_runtime_api.h: No such file or
+#       directory".
+#   Fix -- ensure_hip_compat() stages build-lantern/hip-compat/, six
+#   cuda->HIP shim headers shadowing the unguarded includes (cuda.h,
+#   cuda_runtime_api.h, cusparse.h, cublas_v2.h, cublasLt.h, cusolverDn.h):
+#   cuda_runtime_api.h includes <hip/hip_runtime_api.h> and maps the EXACT
+#   26-token cuda* closure of the torch 2.8.0 headers lantern compiles
+#   (cudaError_t/cudaStream_t/cudaEvent_t/cudaMemcpyKind/cudaDeviceProp/
+#   cudaStreamCaptureStatus... -> hipError_t/hipStream_t/hipEvent_t/
+#   hipMemcpyKind/hipDeviceProp_t/hipStreamCaptureStatus... -- the capture
+#   enum members hipStreamCaptureStatusNone/Active/Invalidated match torch's
+#   static_asserts, verified against ROCm 6.4.4 sources), and the math shims
+#   alias the handles the ROCm headers do NOT provide (hipsparse.h ships no
+#   cusparseHandle_t, hipblas.h no cublasHandle_t, hipblaslt.h no
+#   cublasLtHandle_t, hipSOLVER's dense handle is hipsolverDnHandle_t). The
+#   hip-shim block puts that dir FIRST on lantern's include path
+#   (target_include_directories BEFORE) and pins USE_ROCM explicitly (the
+#   wheel's torch config exports it, but the target no longer depends on
+#   that). A post-configure check greps flags.make for -DUSE_ROCM + the
+#   hip-compat dir, so a silent injection miss dies immediately instead of
+#   resurfacing as the conflict storm at 51%. patch_cuda_hip also (void)-casts
+#   the nodiscard hipRuntimeGetVersion call (warning noise only).
 #
 # CHANGELOG v15 -- the kit BUILDS and the GPU chain works end-to-end (field:
 #   tensor on cuda:0 OK). This release closes the remaining functional gaps
@@ -543,8 +586,137 @@ if(TARGET lantern AND EXISTS "${TORCH_PATH}/lib/libtorch_hip.so")
   target_compile_definitions(lantern PRIVATE LANTERN_HIP=1)
   message(STATUS "[hip-shim] LANTERN_HIP=1 -- cuda_* API paths enabled for the ROCm wheel (patch_cuda_hip)")
 endif()
+# v16 -- cuda->HIP compat headers FIRST on lantern's include path + USE_ROCM.
+# torch 2.8.0's ATen/cuda + c10/cuda headers include <cuda_runtime_api.h>,
+# <cusparse.h>, <cublas_v2.h>, <cublasLt.h>, <cuda.h> UNGUARDED even under
+# USE_ROCM (torch's own ROCm build hipifies its sources instead of compiling
+# these vanilla headers). Downstream g++ resolves them to the NVIDIA toolkit
+# headers in /usr/include when present (conflicting uchar1/dim3/cudaMemcpyKind
+# declarations vs the HIP headers the USE_ROCM branches pull) or fails
+# outright when absent. The kit stages HIP-backed shims in
+# build-lantern/hip-compat (ensure_hip_compat) and puts that dir before every
+# other include dir of the target. USE_ROCM is exported by the wheel's torch
+# config today; spelling it out keeps the target self-sufficient.
+if(TARGET lantern AND EXISTS "${TORCH_PATH}/lib/libtorch_hip.so" AND EXISTS "${TORCH_PATH}/../hip-compat/cuda_runtime_api.h")
+  target_include_directories(lantern BEFORE PRIVATE "${TORCH_PATH}/../hip-compat")
+  target_compile_definitions(lantern PRIVATE USE_ROCM)
+  message(STATUS "[hip-shim] cuda->HIP compat headers first on the include path: ${TORCH_PATH}/../hip-compat (+ USE_ROCM)")
+endif()
 # <<< hip-shim-rocm
 EOF
+}
+
+# --- v16: cuda -> HIP compat headers (torch's unguarded CUDA includes) --------
+# The ROCm wheel installs torch's VANILLA headers and six of them include
+# CUDA-named headers unguarded even under USE_ROCM. torch's own ROCm build
+# hipifies its sources before compiling (tools/amd_build), so upstream never
+# hits this; a downstream g++ build does. The compat dir shadows the six
+# includes with HIP-backed equivalents. The token map is the EXACT cuda*
+# closure of {ATen/cuda/CUDAContext.h, ATen/cuda/detail/CUDAHooks.h,
+# c10/cuda/CUDACachingAllocator.h} in torch 2.8.0 (26 cuda* tokens; verified
+# programmatically) + the four math-handle aliases the ROCm headers do NOT
+# provide. Gated on a ROCm wheel staging so CUDA/CPU trees are untouched.
+ensure_hip_compat() {
+  [[ -f "$LIBTORCH_DIR/lib/libtorch_hip.so" ]] || return 0
+  local dir="$BUILD_DIR/hip-compat"
+  rm -rf "$dir"                       # clean regeneration on every kit run
+  mkdir -p "$dir"
+
+  cat > "$dir/cuda_runtime_api.h" <<'EOF'
+#pragma once
+/* cuda -> HIP compat shim (make_rocm_kit.sh v16).
+ * torch 2.8.0 includes <cuda_runtime_api.h> UNGUARDED even under USE_ROCM
+ * (ATen/cuda/CUDAContextLight.h:7, c10/cuda/CUDAStream.h:3,
+ * c10/cuda/CUDAFunctions.h:14). torch's own ROCm build hipifies its sources
+ * before compiling; downstream g++ builds must map the CUDA names onto HIP
+ * themselves. Token set = the exact cuda* closure of the torch 2.8.0 headers
+ * lantern compiles (ATen/cuda/CUDAContext.h, ATen/cuda/detail/CUDAHooks.h,
+ * c10/cuda/CUDACachingAllocator.h + their c10/cuda closure). */
+#include <hip/hip_runtime_api.h>
+
+using cudaError_t    = hipError_t;
+using cudaStream_t   = hipStream_t;
+using cudaEvent_t    = hipEvent_t;
+using cudaMemcpyKind = hipMemcpyKind;
+using cudaDeviceProp = hipDeviceProp_t;
+using cudaStreamCaptureMode   = hipStreamCaptureMode;
+using cudaStreamCaptureStatus = hipStreamCaptureStatus;
+
+#define cudaSuccess hipSuccess
+#define cudaErrorNotReady hipErrorNotReady
+#define cudaStreamCaptureStatusNone hipStreamCaptureStatusNone
+#define cudaStreamCaptureStatusActive hipStreamCaptureStatusActive
+#define cudaStreamCaptureStatusInvalidated hipStreamCaptureStatusInvalidated
+#define cudaGetLastError hipGetLastError
+#define cudaGetErrorString hipGetErrorString
+#define cudaGetDevice hipGetDevice
+#define cudaGetDeviceCount hipGetDeviceCount
+#define cudaSetDevice hipSetDevice
+#define cudaDeviceSynchronize hipDeviceSynchronize
+#define cudaMalloc hipMalloc
+#define cudaFree hipFree
+#define cudaMallocAsync hipMallocAsync
+#define cudaMemsetAsync hipMemsetAsync
+#define cudaMemcpyAsync hipMemcpyAsync
+#define cudaMemcpyAsyncPeer hipMemcpyPeerAsync
+#define cudaStreamQuery hipStreamQuery
+#define cudaStreamSynchronize hipStreamSynchronize
+#define cudaStreamGetPriority hipStreamGetPriority
+#define cudaStreamIsCapturing hipStreamIsCapturing
+#define cudaThreadExchangeStreamCaptureMode hipThreadExchangeStreamCaptureMode
+#define cudaDeviceGetStreamPriorityRange hipDeviceGetStreamPriorityRange
+#define cudaEventCreateWithFlags hipEventCreateWithFlags
+EOF
+
+  cat > "$dir/cuda.h" <<'EOF'
+#pragma once
+/* cuda -> HIP compat shim (v16): c10/cuda/CUDAException.h:9 includes <cuda.h>
+ * unguarded. torch's ROCm build hipifies it to <hip/hip_runtime.h>; the
+ * driver-API surface is not referenced by the closure lantern compiles, so
+ * the runtime API + the token map below are enough. */
+#include <hip/hip_runtime_api.h>
+#include <cuda_runtime_api.h>
+EOF
+
+  cat > "$dir/cusparse.h" <<'EOF'
+#pragma once
+/* cuda -> HIP compat shim (v16): ATen/cuda/CUDAContextLight.h:8 includes
+ * <cusparse.h> unguarded. hipSPARSE ships no cusparse* compat typedefs
+ * (hipsparseHandle_t is void*, verified against ROCm 6.4.4). */
+#include <hipsparse.h>
+using cusparseHandle_t = hipsparseHandle_t;
+EOF
+
+  cat > "$dir/cublas_v2.h" <<'EOF'
+#pragma once
+/* cuda -> HIP compat shim (v16): ATen/cuda/CUDAContextLight.h:9 includes
+ * <cublas_v2.h> unguarded (hipBLAS itself includes cublas_v2.h only under
+ * __HIP_PLATFORM_NVCC__). hipBLAS ships no cublasHandle_t alias. */
+#include <hipblas.h>
+using cublasHandle_t = hipblasHandle_t;
+EOF
+
+  cat > "$dir/cublasLt.h" <<'EOF'
+#pragma once
+/* cuda -> HIP compat shim (v16): ATen/cuda/CUDAContextLight.h:13 includes
+ * <cublasLt.h> unguarded. hipBLASLt defines hipblasLtHandle_t (void*), no
+ * cublasLtHandle_t alias. */
+#include <hipblaslt.h>
+using cublasLtHandle_t = hipblasLtHandle_t;
+EOF
+
+  cat > "$dir/cusolverDn.h" <<'EOF'
+#pragma once
+/* cuda -> HIP compat shim (v16): ATen/cuda/CUDAContextLight.h:16 includes
+ * <cusolverDn.h> under "#ifdef CUDART_VERSION" (dead here -- the HIP shim
+ * defines no CUDART_VERSION, exactly like torch's own ROCm build); kept for
+ * robustness. hipSOLVER's dense handle is hipsolverDnHandle_t; no
+ * cusolverDnHandle_t alias is shipped. */
+#include <hipsolver.h>
+using cusolverDnHandle_t = hipsolverDnHandle_t;
+EOF
+
+  echo "    [compat] wrote 6 cuda->HIP shim headers in $dir (torch 2.8.0 closure: 26 cuda* tokens + 4 handle aliases)"
 }
 
 # --- v7: SONAME symlink repair -------------------------------------------------
@@ -704,7 +876,7 @@ new_fn = fn.replace(
     "#if defined(__NVCC__) || defined(LANTERN_HIP)\n"
     "  int runtimeVersion;\n"
     "#if defined(LANTERN_HIP)\n"
-    "  hipRuntimeGetVersion(&runtimeVersion);   /* HIP/ROCm: same C ABI family */\n"
+    "  (void)hipRuntimeGetVersion(&runtimeVersion);   /* HIP/ROCm: same C ABI family */\n"
     "#else\n"
     "  cudaRuntimeGetVersion(&runtimeVersion);\n"
     "#endif\n"
@@ -1421,6 +1593,9 @@ unset CUDA || true
 # shim below), and the R-side cuda_* fixes (marked block appended to R/cuda.R).
 patch_cuda_hip
 apply_cuda_r_block
+# v16: stage the cuda->HIP compat headers for the torch include closure (the
+# unguarded <cuda_runtime_api.h>/<cusparse.h>/... includes, see CHANGELOG v16).
+ensure_hip_compat
 
 # v4 hip shim: appended AFTER find_package(Torch) -- re-aligns hip::* to the
 # HIP runtime EMBEDDED in the wheel (prevents mixing system 7.x with wheel
@@ -1433,6 +1608,17 @@ cmake -S "$LANTERN_SRC" -B "$BUILD_DIR" \
       -DTORCH_PATH="$LIBTORCH_DIR" \
       -DCMAKE_BUILD_RPATH="$LIBTORCH_DIR/lib" \
       -DCMAKE_INSTALL_RPATH="$LIBTORCH_DIR/lib"
+# v16: fail fast when the compat injection did not land (a silent miss would
+# resurface as the uchar1/dim3 conflict storm at 51%). ROCm-wheel trees only.
+if [[ -f "$LIBTORCH_DIR/lib/libtorch_hip.so" ]]; then
+  FLAGS_MAKE="$BUILD_DIR/CMakeFiles/lantern.dir/flags.make"
+  [[ -f "$FLAGS_MAKE" ]] || die "flags.make missing after configure -- cmake configure failed above"
+  grep -q -- '-DUSE_ROCM' "$FLAGS_MAKE" \
+    || die "USE_ROCM missing from lantern's compile flags -- hip-shim block did not apply to $LANTERN_SRC/CMakeLists.txt"
+  grep -q 'hip-compat' "$FLAGS_MAKE" \
+    || die "hip-compat include dir missing from lantern's compile flags -- hip-shim block did not apply"
+  echo "    flags check: USE_ROCM + hip-compat include dir present (ok)"
+fi
 cmake --build "$BUILD_DIR" --target lantern --parallel "$(nproc)"
 
 LIBLANTERN=$(find "$BUILD_DIR" -maxdepth 2 -name 'liblantern.so' | head -n1)
@@ -1508,6 +1694,9 @@ cat <<EOF
 
 Aligned tree:
   build-lantern/libtorch/          -> $LIBTORCH_DIR   (TORCH_URL candidate)
+  build-lantern/hip-compat/        -> cuda->HIP shim headers (torch's unguarded
+                                      <cuda_runtime_api.h>/<cusparse.h>/...
+                                      includes; first on lantern's include path)
   build-lantern/liblantern.so      -> $LIBLANTERN
   inst/lib/liblantern.so           -> dev loading (load_all)
   torch-rocm-kit/lantern/          -> $KIT_DIR/lantern   (LANTERN_URL candidate)
