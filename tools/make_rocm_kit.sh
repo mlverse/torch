@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # =============================================================================
-# make_rocm_kit.sh v16 -- build liblantern with ROCm, aligned with the {torch}
+# make_rocm_kit.sh v17 -- build liblantern with ROCm, aligned with the {torch}
 # dev tree (issue mlverse/torch#907)
 #
 # Put this script in <torch-tree>/tools/ (or pass --tree <root>).
@@ -24,6 +24,42 @@
 #            --lantern-src <dir>     (default: <tree>/src/lantern; the legacy
 #                                     top-level lantern/ of platform/amd_gpu is
 #                                     obsolete on the upstream side)
+#
+# CHANGELOG v17 -- fix the v16 compile failure at 51% (src/Cuda.cpp.o): the six
+#   shims resolved, but hip-compat/cusparse.h:5 died on "#include <hipsparse.h>:
+#   No such file or directory". Split include surface: the wheel BUNDLES the
+#   hip/ RUNTIME headers under libtorch/include/hip/ (that is why the v16
+#   cuda_runtime_api.h shim compiled -- its <hip/hip_runtime_api.h> resolved
+#   from the torch include dirs, one line BEFORE the failing cusparse.h), but
+#   NO math-library headers: hipsparse.h, hipblas.h, hipblaslt.h, hipsolver.h
+#   exist only in a system HIP SDK, which the kit deliberately keeps off
+#   lantern's include path (hermetic link policy; adding /opt/rocm/include to
+#   the target would also let its hip/ headers shadow the wheel's bundled 6.4
+#   ones). The v14/v15 runs never reached the math headers (platform macro
+#   first, then the NVIDIA typedef storm), so the hole only opened once both
+#   were fixed. ensure_hip_compat() now closes it in four steps:
+#   (a) locate the host HIP SDK headers: ROCM_PATH/HIP_PATH, /opt/rocm,
+#       /opt/rocm-* (newest first), /usr/include -- the first dir holding
+#       hipsparse.h wins; none -> die with the install one-liner;
+#   (b) SNAPSHOT the forwarded math headers into build-lantern/hip-compat/
+#       (already FIRST on lantern's include path): ordering-independent, never
+#       shadows a wheel header, and compile-time ONLY (opaque handles -- the
+#       wheel's runtime chain stays authoritative, nothing new gets linked);
+#       hipsparse/hipblas/hipblaslt are hard requirements (torch 2.8.0 includes
+#       <cusparse.h>/<cublas_v2.h>/<cublasLt.h> unguarded), hipsolver.h is
+#       best-effort (its shim only fires under CUDART_VERSION, dead on HIP);
+#   (c) SELF-HEAL: g++ -fsyntax-only probe of the exact torch 2.8.0 cuda-header
+#       closure (six shims + ATen/cuda/CUDAContext.h + detail/CUDAHooks.h +
+#       c10/cuda/{CUDAFunctions,CUDAStream,CUDACachingAllocator}.h) with the
+#       hard-coded shim defines; every residual "fatal error: X.h" is cured by
+#       copying X.h from the SDK into hip-compat (path preserved), retrying --
+#       the math headers pull more SDK headers transitively (roc* family,
+#       hip/hip_version.h); unknown headers or non-missing-header errors are
+#       left to the second gate;
+#   (d) post-configure, the flags gate now ALSO syntax-compiles the probe with
+#       the REAL flags.make -D/-I/-std set: any residual breakage dies BEFORE
+#       make with the full g++ output instead of at 51%. Artifacts for manual
+#       reruns: hip-compat/compat-probe.cpp, compat-probe.log, flags-probe.log.
 #
 # CHANGELOG v16 -- fix the v15 compile failure at 51%: "conflicting declaration
 #   'using uchar1'" (x28) + "redefinition of 'struct dim3'" + "cannot convert
@@ -616,6 +652,9 @@ EOF
 # c10/cuda/CUDACachingAllocator.h} in torch 2.8.0 (26 cuda* tokens; verified
 # programmatically) + the four math-handle aliases the ROCm headers do NOT
 # provide. Gated on a ROCm wheel staging so CUDA/CPU trees are untouched.
+# v17: also snapshots the HIP SDK math headers the shims forward to (the
+# wheel bundles only the hip/ runtime subset) and self-heals the closure via
+# a g++ -fsyntax-only probe -- see CHANGELOG v17.
 ensure_hip_compat() {
   [[ -f "$LIBTORCH_DIR/lib/libtorch_hip.so" ]] || return 0
   local dir="$BUILD_DIR/hip-compat"
@@ -716,7 +755,119 @@ EOF
 using cusolverDnHandle_t = hipsolverDnHandle_t;
 EOF
 
-  echo "    [compat] wrote 6 cuda->HIP shim headers in $dir (torch 2.8.0 closure: 26 cuda* tokens + 4 handle aliases)"
+  # v17 -- the wheel ships NO math-library headers: the shims forward to
+  # <hipsparse.h>/<hipblas.h>/<hipblaslt.h>/<hipsolver.h>, which exist only in
+  # a system HIP SDK (field evidence, v16 run: the <hip/hip_runtime_api.h> of
+  # the cuda_runtime_api.h shim resolved from the wheel's bundled
+  # libtorch/include/hip/ one line BEFORE hipsparse.h died). Snapshot the SDK
+  # copies into $dir (FIRST on lantern's include path): ordering-independent,
+  # never shadows a header the wheel ships, and compile-time ONLY -- opaque
+  # handles, nothing gets linked, the hermetic runtime chain is untouched.
+  local sdk="" cand sdkver="(unknown version)" h missing_req="" copied=0
+  local -a sdk_cands=()
+  [[ -n "${ROCM_PATH:-}" ]] && sdk_cands+=("$ROCM_PATH/include")
+  [[ -n "${HIP_PATH:-}" ]]  && sdk_cands+=("$HIP_PATH/include")
+  sdk_cands+=("/opt/rocm/include")
+  # any other local ROCm install (lexicographic reverse = newest first)
+  while IFS= read -r cand; do sdk_cands+=("$cand"); done \
+    < <(compgen -G '/opt/rocm-*/include' 2>/dev/null | sort -r || true)
+  sdk_cands+=("/usr/include")
+  for cand in "${sdk_cands[@]}"; do
+    [[ -f "$cand/hipsparse.h" ]] && { sdk="$cand"; break; }
+  done
+  [[ -n "$sdk" ]] || die "no HIP SDK headers found (looked in: ${sdk_cands[*]})
+     The cuda->HIP shims forward to hipsparse.h/hipblas.h/hipblaslt.h, which
+     the wheel does not bundle. Install the ROCm SDK dev headers:
+       sudo amdgpu-install --usecase=rocm    (or: sudo apt install rocm-dev)
+     or set ROCM_PATH to an install that has <prefix>/include/hipsparse.h."
+  [[ -f "$sdk/../.info/version" ]] && sdkver="$(<"$sdk/../.info/version")"
+
+  for h in hipsparse.h hipblas.h hipblaslt.h; do
+    if [[ -f "$LIBTORCH_DIR/include/$h" ]]; then
+      echo "    [compat] $h already bundled by the wheel -- no snapshot needed"
+    elif [[ -f "$sdk/$h" ]]; then
+      cp "$sdk/$h" "$dir/$h"; copied=$((copied + 1))
+    else
+      missing_req+=" $h"
+    fi
+  done
+  [[ -z "$missing_req" ]] || die "HIP SDK headers missing from $sdk:$missing_req
+     (hipsparse.h + hipblas.h + hipblaslt.h are hard requirements: torch 2.8.0
+     includes <cusparse.h>/<cublas_v2.h>/<cublasLt.h> unguarded and the shims
+     forward to these). Install the ROCm SDK dev headers on this host
+     (sudo amdgpu-install --usecase=rocm / apt install rocm-dev) or point
+     ROCM_PATH at an install that has them."
+  # hipsolver.h: the cusolverDn shim only fires under "#ifdef CUDART_VERSION"
+  # (dead on HIP) -- snapshot it when available, warn otherwise.
+  if [[ ! -f "$LIBTORCH_DIR/include/hipsolver.h" && -f "$sdk/hipsolver.h" ]]; then
+    cp "$sdk/hipsolver.h" "$dir/hipsolver.h"; copied=$((copied + 1))
+  elif [[ ! -f "$sdk/hipsolver.h" ]]; then
+    warn "hipsolver.h not in $sdk -- fine unless some header includes <cusolverDn.h> outside CUDART_VERSION"
+  fi
+  (( copied > 0 )) && warn "snapshotted $copied math-header(s) from the system HIP SDK $sdk ($sdkver) into hip-compat -- compile-time ONLY (opaque handles), the wheel's own runtime chain stays authoritative"
+
+  # v17 -- syntax-compile the EXACT torch cuda-header closure NOW and self-heal
+  # every remaining missing SDK header (math headers pull more SDK headers
+  # transitively, e.g. the roc* family or hip/hip_version.h). The probe and
+  # its logs stay in hip-compat/ for manual reruns.
+  local probe="$dir/compat-probe.cpp" plog="$dir/compat-probe.log"
+  cat > "$probe" <<'EOF'
+/* make_rocm_kit.sh v17 -- cuda->HIP compat probe: the torch 2.8.0 header
+ * closure of lantern's src/Cuda.cpp. Compiled with -fsyntax-only by the kit
+ * (g++ <defines> <includes> compat-probe.cpp) so a missing/broken HIP SDK
+ * header dies HERE, in seconds, instead of at 51% inside make. */
+#include <cuda.h>
+#include <cuda_runtime_api.h>
+#include <cublas_v2.h>
+#include <cublasLt.h>
+#include <cusparse.h>
+EOF
+  # cusolverDn.h is a dead include on HIP (CUDART_VERSION undefined): probe it
+  # only when its hipsolver.h counterpart is actually resolvable.
+  if [[ -f "$dir/hipsolver.h" || -f "$LIBTORCH_DIR/include/hipsolver.h" ]]; then
+    echo '#include <cusolverDn.h>' >> "$probe"
+  fi
+  # and only the closure headers the STAGED tree actually ships (torch 2.8.0
+  # wheels carry all of them; fake/partial stagings must not false-kill the
+  # post-configure gate on headers that would never be compiled anyway).
+  local _ti
+  for _ti in ATen/cuda/CUDAContext.h ATen/cuda/detail/CUDAHooks.h \
+             c10/cuda/CUDAFunctions.h c10/cuda/CUDAStream.h \
+             c10/cuda/CUDACachingAllocator.h; do
+    [[ -f "$LIBTORCH_DIR/include/$_ti" ]] && echo "#include <$_ti>" >> "$probe"
+  done
+  echo 'int main() { return 0; }' >> "$probe"
+  if command -v g++ >/dev/null 2>&1; then
+    local -a pflags=(-std=c++17 -fsyntax-only "-I$dir"
+                     "-I$LIBTORCH_DIR/include"
+                     "-I$LIBTORCH_DIR/include/torch/csrc/api/include"
+                     -D__HIP_PLATFORM_AMD__ -D__HIP_PLATFORM_HCC__
+                     -DC10_CUDA_NO_CMAKE_CONFIGURE_FILE -DUSE_ROCM -DLANTERN_HIP=1)
+    local attempt=0 probe_ok=0 mh src_h
+    while (( attempt < 15 )); do
+      if g++ "${pflags[@]}" "$probe" 2>"$plog"; then probe_ok=1; break; fi
+      mh="$(grep -m1 -oE 'fatal error: [^ :]+: No such file or directory' "$plog" \
+            | sed -E 's/^fatal error: //; s/: No such file or directory$//' || true)"
+      [[ -n "$mh" ]] || break
+      src_h=""
+      [[ -f "$sdk/$mh" ]] && src_h="$sdk/$mh"
+      [[ -n "$src_h" ]] || src_h="$(find "$sdk" -name "$(basename "$mh")" 2>/dev/null | head -n1 || true)"
+      [[ -n "$src_h" ]] || break
+      mkdir -p "$dir/$(dirname "$mh")"
+      cp "$src_h" "$dir/$mh"
+      echo "    [compat] self-heal: snapshot $mh <- $src_h"
+      copied=$((copied + 1)); attempt=$((attempt + 1))
+    done
+    if (( probe_ok )); then
+      echo "    [compat] probe: torch cuda-header closure compiles (g++ -fsyntax-only; $copied SDK header(s) snapshotted in total)"
+    else
+      warn "compat probe still failing -- full g++ output in $plog (informational: the post-configure gate re-judges with the real lantern flags)"
+    fi
+  else
+    warn "g++ not found -- compat probe skipped (cmake will judge)"
+  fi
+
+  echo "    [compat] wrote 6 cuda->HIP shim headers in $dir + HIP SDK snapshot/probe (torch 2.8.0 closure: 26 cuda* tokens + 4 handle aliases)"
 }
 
 # --- v7: SONAME symlink repair -------------------------------------------------
@@ -1618,6 +1769,38 @@ if [[ -f "$LIBTORCH_DIR/lib/libtorch_hip.so" ]]; then
   grep -q 'hip-compat' "$FLAGS_MAKE" \
     || die "hip-compat include dir missing from lantern's compile flags -- hip-shim block did not apply"
   echo "    flags check: USE_ROCM + hip-compat include dir present (ok)"
+  # v17: pre-build gate with the REAL compile flags (the exact -D/-I/-std set
+  # make will use): syntax-compile the torch cuda-header closure NOW, so any
+  # residual breakage dies with the full g++ output instead of at 51% inside
+  # make (field: hipsparse.h died exactly there in the v16 run). Skipped when
+  # the staged tree ships NO torch cuda headers at all (dummy stagings have
+  # nothing to probe; real torch wheels always carry ATen/cuda/CUDAContext.h --
+  # exactly the surface that died at 51%).
+  # (top-level code: plain variables, no `local`)
+  if [[ ! -f "$LIBTORCH_DIR/include/ATen/cuda/CUDAContext.h" ]]; then
+    echo "    flags probe: skipped (staged tree ships no ATen/cuda headers -- nothing to probe)"
+  elif ! command -v g++ >/dev/null 2>&1; then
+    warn "g++ not found -- flags probe skipped (make will judge)"
+  else
+    KIT_PROBE_FILE="$BUILD_DIR/hip-compat/compat-probe.cpp"
+    [[ -f "$KIT_PROBE_FILE" ]] || die "compat probe missing ($KIT_PROBE_FILE) -- ensure_hip_compat did not run on this staging?"
+    KIT_D=(); KIT_I=()
+    read -r -a KIT_D < <(sed -n 's/^CXX_DEFINES = //p' "$FLAGS_MAKE") || true
+    read -r -a KIT_I < <(sed -n 's/^CXX_INCLUDES = //p' "$FLAGS_MAKE") || true
+    KIT_STD="$(sed -n 's/^CXX_FLAGS = //p' "$FLAGS_MAKE" | grep -o -- '-std=[a-z0-9+]*' | head -n1 || true)"
+    if g++ "${KIT_D[@]}" "${KIT_I[@]}" ${KIT_STD:+"$KIT_STD"} -fsyntax-only "$KIT_PROBE_FILE" \
+         2>"$BUILD_DIR/hip-compat/flags-probe.log"; then
+      echo "    flags probe: torch cuda-header closure compiles with the REAL lantern flags (ok)"
+    else
+      die "the torch cuda-header closure does NOT compile with the real lantern flags
+     (this is exactly how make would fail at ~51% on src/Cuda.cpp.o). Full g++
+     output: $BUILD_DIR/hip-compat/flags-probe.log
+     A missing hip*/roc* header here means the HIP SDK headers could not be
+     snapshotted: install them (sudo amdgpu-install --usecase=rocm / apt
+     install rocm-dev) or set ROCM_PATH, then rerun this script."
+    fi
+    unset KIT_D KIT_I KIT_STD KIT_PROBE_FILE
+  fi
 fi
 cmake --build "$BUILD_DIR" --target lantern --parallel "$(nproc)"
 
@@ -1694,9 +1877,11 @@ cat <<EOF
 
 Aligned tree:
   build-lantern/libtorch/          -> $LIBTORCH_DIR   (TORCH_URL candidate)
-  build-lantern/hip-compat/        -> cuda->HIP shim headers (torch's unguarded
-                                      <cuda_runtime_api.h>/<cusparse.h>/...
-                                      includes; first on lantern's include path)
+  build-lantern/hip-compat/        -> cuda->HIP shim headers + HIP SDK math-header
+                                      snapshot (hipsparse/hipblas/hipblaslt: the
+                                      wheel bundles only the hip/ runtime subset;
+                                      compile-time only) + the -fsyntax-only probe
+                                      (compat-probe.cpp / flags-probe.log)
   build-lantern/liblantern.so      -> $LIBLANTERN
   inst/lib/liblantern.so           -> dev loading (load_all)
   torch-rocm-kit/lantern/          -> $KIT_DIR/lantern   (LANTERN_URL candidate)
