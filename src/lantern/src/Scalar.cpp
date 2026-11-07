@@ -14,6 +14,8 @@ void *_lantern_Scalar(void *value, const char *type) {
 
   if (TYPE == "int") {
     out = *reinterpret_cast<int *>(value);
+  } else if (TYPE == "int64_t") {
+    out = *reinterpret_cast<int64_t *>(value);
   } else if (TYPE == "bool") {
     out = *reinterpret_cast<bool *>(value);
   } else if (TYPE == "double") {

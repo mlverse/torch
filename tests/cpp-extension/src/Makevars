@@ -1,0 +1,2 @@
+CXX_STD = CXX20
+OBJECTS = experimental_tensor.o

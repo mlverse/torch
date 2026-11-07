@@ -4,6 +4,9 @@
 #include "torch_deleters.h"
 #include "torch_types.h"
 
+void* lantern_get_symbol(const char* name);
+void lantern_call_host_handler();
+
 SEXP operator_sexp_tensor(const XPtrTorchTensor* self);
 SEXP operator_sexp_optional_tensor(const XPtrTorchOptionalTensor* self);
 SEXP operator_sexp_tensor_list(const XPtrTorchTensorList* self);
