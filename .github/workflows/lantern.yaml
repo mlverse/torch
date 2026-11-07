@@ -14,7 +14,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-
+        
         config: 
           # when changing supported versions here, please modify supported versions
           # in install.R
@@ -24,7 +24,7 @@ jobs:
           - {os: ubuntu, version: cpu, runner: ubuntu-latest}
           - {os: ubuntu, version: cu12.6, runner: ubuntu-22.04}
           - {os: ubuntu, version: cu12.8, runner: ubuntu-22.04}
-          - {os: ubuntu, version: rocm7.2, runner: ubuntu-22.04}
+          - {os: ubuntu, version: rocm6.4, runner: ubuntu-22.04}
 
           - {os: windows, version: cpu, runner: windows-2022}
           - {os: windows, version: cu12.6, runner: windows-2022}
@@ -41,7 +41,7 @@ jobs:
           - config: {version: cu12.8}
             cuda: 12.8
             cuda_patch: 1
-
+        
     env:
       CUDA: ${{ matrix.cuda }}
       
@@ -70,7 +70,7 @@ jobs:
           cuda: "${{matrix.cuda}}.${{matrix.cuda_patch}}"
           rocm: "${{matrix.rocm}}"
           log-file-suffix: '${{matrix.cuda}}.${{matrix.cuda_patch}}.txt'
-
+          
       - name: Install CuDNN
         if: ${{ matrix.cuda != '' }}
         uses: ./.github/actions/install-cudnn
@@ -113,3 +113,5 @@ jobs:
           fname: ${{ steps.build.outputs.fname }}
           aws_role_to_assume: ${{ secrets.AWS_ROLE_TO_ASSUME }}
           aws_region: ${{ secrets.AWS_REGION }}
+
+      
