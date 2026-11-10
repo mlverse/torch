@@ -1,5 +1,5 @@
 #pragma once
-/* cuda -> HIP compat shim (make_rocm_kit.sh v16).
+/* cuda -> HIP compat shim (make_rocm_kit.sh v20).
  * torch 2.8.0 includes <cuda_runtime_api.h> UNGUARDED even under USE_ROCM
  * (ATen/cuda/CUDAContextLight.h:7, c10/cuda/CUDAStream.h:3,
  * c10/cuda/CUDAFunctions.h:14). torch's own ROCm build hipifies its sources
@@ -41,3 +41,5 @@ using cudaStreamCaptureStatus = hipStreamCaptureStatus;
 #define cudaThreadExchangeStreamCaptureMode hipThreadExchangeStreamCaptureMode
 #define cudaDeviceGetStreamPriorityRange hipDeviceGetStreamPriorityRange
 #define cudaEventCreateWithFlags hipEventCreateWithFlags
+/* lantern src/AllocatorCuda.cpp:26 calls this inside C10_CUDA_CHECK. */
+#define cudaMemGetInfo hipMemGetInfo

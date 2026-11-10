@@ -3,11 +3,14 @@
 # Run from the {torch} tree root:   source("tools/test_torch_rocm.R")
 # or headless:                      Rscript tools/test_torch_rocm.R
 #
-# Expected on a gfx900-class card (Vega10, ROCm 6.4 wheel, kit >= v15):
+# Last change: v15 -- smoke test for the kit artifacts and the LANTERN_HIP
+# patches.
+#
+# Expected on a gfx900-class card (Vega10, ROCm 6.4 wheel):
 #   [ok]   device detection, allocations, ATen element-wise kernels,
 #          deterministic device RNG, the whole torch::cuda_* inventory
 #   [info] matmul -> the wheel's rocBLAS ships no Tensile kernels for gfx900
-#          (pre-gfx908 cards); see tools/make_rocm_kit.sh --doctor [8]
+#          (pre-gfx908 cards); see tools/make_rocm_kit.sh --doctor
 #
 # Every check is collected and reported; the script stops (when needed) only
 # at the END, so you always get the full picture first.
@@ -88,7 +91,7 @@ if (!is.null(x)) {
   if (isTRUE(det)) say("ok", "device RNG: manual_seed + torch_rand is deterministic")
 }
 
-# --- 5. torch::cuda_* inventory (kit v15 enables the real implementations) --------
+# --- 5. torch::cuda_* inventory (the kit enables the real implementations) -------
 if (!is.null(x)) {
   say("info", "torch::cuda_* inventory:")
   apis <- list(
@@ -115,11 +118,11 @@ if (!is.null(x)) {
     } else {
       hint <- ""
       if (grepl("libcaffe2_nvrtc", res)) {
-        hint <- " -- rerun the kit (v15 stages the libcaffe2_nvrtc -> hiprtc bridge)"
+        hint <- " -- rerun the kit (it stages the libcaffe2_nvrtc -> hiprtc bridge)"
       } else if (grepl("only supported on CUDA", res)) {
-        hint <- " -- rebuild liblantern with kit >= v15 (the Cuda.cpp patch was missing)"
+        hint <- " -- rebuild liblantern with the kit (the Cuda.cpp patch was missing)"
       } else if (grepl("device=-", res)) {
-        hint <- " -- rebuild liblantern with kit >= v15 (the R/cuda.R patch was missing)"
+        hint <- " -- rebuild liblantern with the kit (the R/cuda.R patch was missing)"
       }
       say("fail", sprintf("%s() failed: %s%s", nm, res, hint))
     }

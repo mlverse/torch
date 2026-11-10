@@ -1,26 +1,20 @@
 
 # >>> hip-shim-rocm (make_rocm_kit.sh) -- self-managed block (remove with: tools/make_rocm_kit.sh --unpatch)
-# v4 -- ALIGN the HIP runtime with the staged wheel (see CHANGELOG v4 in the script):
+# Last change: v16 -- cuda->HIP compat headers first on the include path (+ USE_ROCM).
+# ALIGN the HIP runtime and the roc* math libraries with the staged wheel:
 # torch's CMake config (LoadHIP) points hip::* at the SYSTEM ROCm, while
-# libc10_hip/libtorch_cuda from the wheel embed their own ROCm chain (6.4).
-# Linking the system libamdhip64.so.7 on top mixes two runtimes: at load time,
-# the already-loaded libhsa (6.4 chain) does not export the recent ROCR_1
-# symbol required by the .so.7 -> "undefined symbol:
-# hsa_amd_memory_get_preferred_copy_engine".
-# We therefore REWRITE IMPORTED_LOCATION to the libamdhip64 bundled in the
-# wheel (exactly the runtime already validated on the Python side). If the
+# libc10_hip/libtorch_cuda from the wheel embed their own ROCm chain. Linking
+# the system libamdhip64 on top mixes two runtimes: at load time, the
+# already-loaded libhsa does not export the recent ROCR_1 symbol required by
+# the system library -> "undefined symbol:
+# hsa_amd_memory_get_preferred_copy_engine". The runtime and the math libs
+# (hipblas, hipsparse, hipsolver, hipblaslt, ...) are therefore re-aligned to
+# the wheel: the staged lib dir is searched FIRST for plain -l<name> items,
+# bare-name imported targets are created/redirected to the wheel files, and
+# any imported target still pointing outside the wheel (roc::X, hip::X,
+# full-path locations) is re-aligned to the same-family wheel library. If the
 # targets do not exist (wheel-only machine), create them: wheel first, system
 # ROCm as a last resort.
-# v8 -- ALIGN the roc* math libraries as well (hipblas, hipsparse, hipsolver,
-# hipblaslt, ...). torch's exported HIP interfaces drag the SYSTEM ROCm math
-# libs (7.x sonames) into lantern's direct DT_NEEDED while the wheel ships
-# its own sonames -> silent 6.4/7.x mixing or load failure. Three
-# complementary mechanisms; whichever the interface uses, one hits:
-#   a) the staged lib dir is searched FIRST for plain -l<name> items;
-#   b) bare-name imported targets are created/redirected to the wheel files
-#      (CMake substitutes them into plain-name interface items);
-#   c) any imported target still pointing outside the wheel (roc::X, hip::X,
-#      full-path locations) is re-aligned to the same-family wheel library.
 set(_KIT_HIP "")
 file(GLOB _KIT_HIP_GLOB "${TORCH_PATH}/lib/libamdhip64.so*")
 if(_KIT_HIP_GLOB)
@@ -54,11 +48,11 @@ foreach(_hiptgt amdhip64 host device)
 endforeach()
 unset(_KIT_HIP_GLOB)
 unset(_KIT_HIP)
-# v8 (a) -- make sure plain -l<name> items resolve to the staged wheel first.
+# make sure plain -l<name> items resolve to the staged wheel first.
 if(TARGET lantern)
   target_link_directories(lantern BEFORE PRIVATE "${TORCH_PATH}/lib")
 endif()
-# v8 (b) -- bare-name imported targets for the known ROCm math libraries.
+# bare-name imported targets for the known ROCm math libraries.
 set(_KIT_ROCM_LIBS amdhip64 hipblas hipblaslt hipsparse hipsolver hipfft hiprand
                    rocblas rocsolver rocsparse rocrand hiprtc roctracer64 MIOpen)
 foreach(_kitlib ${_KIT_ROCM_LIBS})
@@ -83,7 +77,7 @@ foreach(_kitlib ${_KIT_ROCM_LIBS})
   unset(_KIT_GLOB)
   unset(_KIT_CAND)
 endforeach()
-# v8 (c) -- sweep every imported target still pointing outside the staged
+# sweep every imported target still pointing outside the staged
 # wheel and re-align it to the same-family library (covers roc::X / hip::X
 # style targets and full-path locations from the system ROCm).
 get_property(_KIT_TGTS DIRECTORY PROPERTY IMPORTED_TARGETS)
@@ -118,7 +112,7 @@ foreach(_tgt IN LISTS _KIT_TGTS)
   unset(_KIT_CAND)
 endforeach()
 unset(_KIT_TGTS)
-# v14 -- COMPILE definitions for a ROCm wheel. Two gaps the wheel cannot fill,
+# COMPILE definitions for a ROCm wheel. Two gaps the wheel cannot fill,
 # both hit at 51% (the first TU including ATen/cuda headers):
 # (1) torch's AMD HIP build does NOT generate c10/cuda/impl/cuda_cmake_macros.h
 #     (see the comment around the include in c10/cuda/CUDAMacros.h upstream),
@@ -141,7 +135,7 @@ if(TARGET lantern AND EXISTS "${TORCH_PATH}/lib/libtorch_hip.so")
     __HIP_PLATFORM_AMD__ __HIP_PLATFORM_HCC__ C10_CUDA_NO_CMAKE_CONFIGURE_FILE)
   message(STATUS "[hip-shim] compile definitions for the ROCm wheel: __HIP_PLATFORM_AMD__ __HIP_PLATFORM_HCC__ C10_CUDA_NO_CMAKE_CONFIGURE_FILE")
 endif()
-# v15 -- enable lantern's CUDA-flavored implementations on the ROCm wheel.
+# enable lantern's CUDA-flavored implementations on the ROCm wheel.
 # src/lantern/src/Cuda.cpp guards the real cuda_* code with "#ifdef __NVCC__"
 # (torch's CMakeLists sets it ONLY for $ENV{CUDA} nvcc builds); on a ROCm
 # wheel build every one of those functions compiled to its #else stub that
@@ -158,7 +152,7 @@ if(TARGET lantern AND EXISTS "${TORCH_PATH}/lib/libtorch_hip.so")
   target_compile_definitions(lantern PRIVATE LANTERN_HIP=1)
   message(STATUS "[hip-shim] LANTERN_HIP=1 -- cuda_* API paths enabled for the ROCm wheel (patch_cuda_hip)")
 endif()
-# v16 -- cuda->HIP compat headers FIRST on lantern's include path + USE_ROCM.
+# cuda->HIP compat headers FIRST on lantern's include path + USE_ROCM.
 # torch 2.8.0's ATen/cuda + c10/cuda headers include <cuda_runtime_api.h>,
 # <cusparse.h>, <cublas_v2.h>, <cublasLt.h>, <cuda.h> UNGUARDED even under
 # USE_ROCM (torch's own ROCm build hipifies its sources instead of compiling

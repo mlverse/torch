@@ -7,6 +7,9 @@
 # script extracts that block and exercises it on synthetic fixtures.
 #
 # Run:  ./tools/test-kit.sh
+#
+# Last change: v23 -- tests for install_nvrtc_bridge and the effective-arch
+# verdict.
 # =============================================================================
 set -uo pipefail
 # binutils output is parsed by sed patterns written for the C locale.
@@ -31,7 +34,7 @@ die()  { printf 'die: %s\n' "$*" >&2; exit 1; }
 # SCRIPT_DIR is used by apply_hip_shim/apply_cuda_r_block/ensure_hip_compat.
 SCRIPT_DIR="$HERE"
 
-# 3.1 -- the helpers are a standalone, side-effect-free library.
+# The helpers are a standalone, side-effect-free library.
 # shellcheck source=kit-lib.sh
 source "$HERE/kit-lib.sh"
 
@@ -131,6 +134,26 @@ else
 fi
 
 # -----------------------------------------------------------------------------
+# 2.7) install_nvrtc_bridge: copies into both layouts with the right DT_RPATH
+# -----------------------------------------------------------------------------
+if have patchelf && have readelf && have gcc; then
+  d="$TMP/nvrtc"; mkdir -p "$d/staged/lib" "$d/dev" "$d/kit"
+  printf 'int kit_n(void){return 0;}\n' > "$TMP/n.c"
+  gcc -shared -fPIC -o "$d/staged/lib/libcaffe2_nvrtc.so" "$TMP/n.c"
+  LIBTORCH_DIR="$d/staged" install_nvrtc_bridge "$d/dev" dev >/dev/null 2>&1
+  LIBTORCH_DIR="$d/staged" install_nvrtc_bridge "$d/kit" kit >/dev/null 2>&1
+  if [[ -s "$d/dev/libcaffe2_nvrtc.so" && -s "$d/kit/libcaffe2_nvrtc.so" ]] \
+     && readelf -d "$d/kit/libcaffe2_nvrtc.so" 2>/dev/null | grep -q 'Library rpath: \[\$ORIGIN\]' \
+     && readelf -d "$d/dev/libcaffe2_nvrtc.so" 2>/dev/null | grep -qF "Library rpath: [\$ORIGIN:$d/staged/lib]"; then
+    ok "install_nvrtc_bridge copies into both layouts with the right DT_RPATH"
+  else
+    bad "install_nvrtc_bridge did not stage both copies correctly"
+  fi
+else
+  skip "install_nvrtc_bridge (patchelf/readelf/gcc missing)"
+fi
+
+# -----------------------------------------------------------------------------
 # 1.5) audit_closure: a dependency resolving into ROCM_MARK is fatal
 # -----------------------------------------------------------------------------
 if have gcc && have ldd; then
@@ -166,6 +189,10 @@ out=$(verdict_for_arch gfx90a "gfx90a gfx1100")
 out=$(verdict_for_arch gfx999 "gfx1100")
 [[ "$out" == *"TORCH_ROCM_ARCH=gfx999"* ]] && ok "verdict_for_arch falls back to a source rebuild" \
   || bad "verdict_for_arch missed the rebuild fallback"
+out=$(HSA_OVERRIDE_GFX_VERSION=9.0.0 verdict_for_arch gfx90c "gfx900 gfx1100" gfx900)
+[[ "$out" == *"maps it to gfx900"* && "$out" == *"~/.Renviron"* ]] \
+  && ok "verdict_for_arch explains a hardware arch covered via HSA_OVERRIDE" \
+  || bad "verdict_for_arch missed the hardware/effective arch distinction"
 
 # -----------------------------------------------------------------------------
 # 1.2/1.8) patch_cuda_hip: patch, idempotence, drift guard, missing guards

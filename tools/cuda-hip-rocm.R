@@ -1,6 +1,6 @@
 
 # >>> cuda-hip-rocm (make_rocm_kit.sh) -- self-managed block (remove with: tools/make_rocm_kit.sh --unpatch)
-# v15 -- ROCm/HIP fixes for the cuda_* API; these definitions override the
+# Last change: v15 -- ROCm/HIP fixes for the cuda_* API; these definitions override the
 # ones above (R resolves the LAST definition of a function):
 # - cuda_synchronize(device = NULL) passed -1 ("synchronize all devices"),
 #   which dies inside the wheel's HIP CUDAHooks ("device >= 0 && device <

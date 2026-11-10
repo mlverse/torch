@@ -2,6 +2,213 @@
 
 Full design notes, one section per version (newest first).
 
+CHANGELOG v23 -- fix the --doctor [gpu_arch] verdict for the "invalid device function"
+  failure on a Ryzen APU. Field: build + install OK, torch_tensor(...,
+  device="cuda") prints (H2D copy, no kernel), but the FIRST kernel launch
+  (torch_rand, +, ^, *) dies with "HIP error: invalid device function".
+  v13/v14 blamed a missing gfx900 code object ("torch 2.8.0+rocm6.4 does not
+  build for gfx900"). Ground truth on the real wheel:
+    llvm-objdump --offloading libtorch_hip.so
+      -> ...hipv4-amdgcn-amd-amdhsa--gfx900  (240 code objects, PRESENT)
+  The wheel DOES ship gfx900 kernels. The actual defect is an ARCH mismatch
+  hidden by the environment: the Ryzen 5 5600H iGPU is gfx90c (Renoir Vega),
+  which is NOT in the wheel. ~/.bashrc exports HSA_OVERRIDE_GFX_VERSION=9.0.0,
+  so a SHELL-inherited R sees gfx900 (covered) and works, but R/RStudio
+  launched from a GUI/desktop launcher does NOT source ~/.bashrc -> it sees
+  gfx90c -> every kernel launch fails. (Verified matrix on the field machine:
+  no override -> gfx90c -> FAIL; override 9.0.0 -> gfx900 -> OK; override
+  9.0.6 -> gfx906 -> OK; HSA_XNACK=0 alone -> gfx90c -> still FAIL, because
+  the wheel has no gfx90c code objects -- the v13-v22 "xnack" theory was
+  wrong, gfx900:xnack+ loads the wheel's gfx900 code objects fine.)
+  doctor [gpu_arch] now:
+  (a) reads the device ISA as seen NOW and, with HSA_OVERRIDE_GFX_VERSION
+      stripped (env -u), the REAL hardware ISA, and warns when they differ:
+      the override is active in the shell but must reach the R process;
+  (b) reads the REAL offload bundle ids from the staged libtorch_hip.so via
+      llvm-objdump --offloading (strings fallback kept), and judges coverage
+      on the EFFECTIVE arch;
+  (c) for a hardware arch that is not in the wheel, recommends the
+      HSA_OVERRIDE_MAP sibling and says to put it in ~/.Renviron, not only
+      ~/.bashrc. Adds [gfx90c]="9.0.0" (Renoir/Cezanne APU -> gfx900) to the
+      map;
+  (d) judges matmul by the ACTUAL Tensile/kernel files (rocblas/library,
+      hipblaslt), not by .so strings. librocblas.so contains "gfx900" as a
+      supported-arch LIST string with NO gfx900 kernel, so v13-v22 wrongly
+      reported "matmul covers it"; the wheel ships only gfx908/gfx90a/gfx942/
+      gfx1030/gfx1100-1102/gfx1200-1201 Tensile kernels, hence GEMM still
+      fails on gfx900/906/90c and needs ROCm 5.7 or a rocBLAS/Tensile rebuild.
+  The end-of-run reminder (v14) is reworded accordingly: it no longer claims
+  the wheel lacks gfx900.
+
+CHANGELOG v22 -- make the nvrtc bridge part of the INSTALLED artifacts.
+  Field failure: torch::cuda_get_rng_state() / JIT kernel compilation dies
+  with "Error in dlopen: libcaffe2_nvrtc.so" even though the wheel ships
+  the file. Ground truth: torch 2.8.0+rocm6.4 DOES ship
+  lib/libcaffe2_nvrtc.so (a real ELF exporting load_nvrtc and linking
+  libhiprtc -- not the symlink ensure_nvrtc_stub() would create), so
+  ensure_nvrtc_stub() correctly no-ops. But the kit only copied
+  liblantern.so into inst/lib and torch-rocm-kit/lantern/lib; the nvrtc
+  file stayed in build-lantern/libtorch/lib. At load time the INSTALLED
+  libtorch_cpu.so (DT_RUNPATH=$ORIGIN = the package lib dir) dlopens
+  "libcaffe2_nvrtc.so" by bare name and does not find it.
+  Fix: install_nvrtc_bridge() copies the staged libcaffe2_nvrtc.so next to
+  liblantern in BOTH layouts. The dev copy (inst/lib) gets
+  DT_RPATH='$ORIGIN:<staged>/lib' because its own NEEDED chain
+  (libhiprtc/libamdhip64/libamd_comgr/...) lives in the staged wheel, not
+  in inst/lib; the kit copy keeps DT_RPATH='$ORIGIN' (install_torch()
+  drops it next to the full wheel). The EXIT trap now also quarantines
+  both copies, and doctor [nvrtc] reports whether the installed copies exist.
+
+CHANGELOG v21 -- fix the R CMD INSTALL / library(torch) failure
+    "undefined symbol: _ZN3c104cuda20CUDACachingAllocator9allocatorE"
+  (demangled: c10::cuda::CUDACachingAllocator::allocator) on a freshly built
+  liblantern. The wheel is a HIP build: torch's hipify pass compiled
+  c10/cuda/CUDACachingAllocator.cpp as c10/hip/HIPCachingAllocator and the
+  library exports c10::hip::HIPCachingAllocator::allocator (nm -D
+  libc10_hip.so). The wheel still ships the VANILLA CUDA-named header, so
+  lantern's AllocatorCuda.cpp:4 / Cuda.cpp:9 compile the inline get()
+  wrappers that reference c10::cuda::CUDACachingAllocator::allocator -- a
+  symbol no wheel library defines (ldd -r reports exactly this one).
+  Fix: ensure_hip_compat() stages c10/cuda/CUDACachingAllocator.h, which
+  redirects the namespace to c10::hip::HIPCachingAllocator (a
+  using-directive: qualified lookup of
+  c10::cuda::CUDACachingAllocator::getDeviceStats/emptyCache then calls the
+  HIP inline wrappers, whose allocator is the wheel's real object). The
+  shim also keeps the transitive surface the original header used to
+  provide (c10/cuda/CUDAException.h for C10_CUDA_CHECK, cuda_runtime_api.h
+  for cudaGetDevice/cudaMemGetInfo).
+  No source patch needed; the shim is first on lantern's include path and is
+  a no-op for CUDA/CPU trees (hip-compat is only added for a ROCm wheel).
+
+CHANGELOG v20 -- fix the v19 field failure at 56% in make (src/Cuda.cpp):
+    ATen/cuda/CUDAContextLight.h:95: error: 'cusolverDnHandle_t' does not name
+      a type; did you mean 'hipsolverDnHandle_t'?
+  Ground truth (headers pulled straight out of the torch 2.8.0+rocm6.4 wheel
+  by HTTP range requests): the wheel installs the VANILLA CUDA-named ATen/cuda
+  tree, whose cusolver surface is
+    L15-17: "#ifdef CUDART_VERSION #include <cusolverDn.h> #endif" -- DEAD on
+            HIP (the v16 shims define no CUDART_VERSION), so the v16
+            cusolverDn.h shim carrying the cusolverDnHandle_t alias is never
+            reached;
+    L23-25: "#if defined(USE_ROCM) #include <hipsolver/hipsolver.h> #endif"
+            -- ACTIVE (the kit pins -DUSE_ROCM): declares hipsolverDnHandle_t
+            but no cusolver alias (hence the gcc suggestion);
+    L94-96: "#if defined(CUDART_VERSION) || defined(USE_ROCM)
+            cusolverDnHandle_t getCurrentCUDASolverDnHandle();" -- ACTIVE
+            under the pinned USE_ROCM, needs cusolverDnHandle_t from nowhere
+            the wheel provides. (v19 believed include AND declaration were
+            both dead under CUDART_VERSION; 2.8.0 guards the declaration with
+            "CUDART_VERSION || USE_ROCM".) Same story in
+            ATen/cuda/Exceptions.h:112 (cusolverGetErrorMessage takes a
+            cusolverStatus_t; its cusolver_common.h include is the dead
+            !USE_ROCM branch).
+  Fix: the cusparse.h shim -- included BEFORE <hipsolver/hipsolver.h> by BOTH
+  torch headers (CUDAContextLight.h:8, Exceptions.h:4) -- now declares the
+  two cusolver types self-contained (struct cusolverDnContext* / int: plain
+  pointer + int, ABI-identical to hipsolverDnHandle_t/hipsolverStatus_t, no
+  hipsolver-tag coupling, no ordering hazard). The cusolverDn.h shim aliases
+  onto the hipsolver types only when reached standalone (macro guard).
+  Also:
+  (a) cuda_runtime_api.h shim: + cudaMemGetInfo -> hipMemGetInfo. Ground
+      truth: lantern src/AllocatorCuda.cpp:26 calls it inside C10_CUDA_CHECK;
+      that TU was never reached by an earlier round, so the 26-token map
+      (built from {CUDAContext.h, CUDAHooks.h, CUDACachingAllocator.h})
+      missed it.
+  (b) NEW shims cuda_runtime.h (forwards to the api shim) and library_types.h
+      (cudaDataType + CUDA_R_*/CUDA_C_*): both included by wheel headers
+      adjacent to the closure (ATenCUDAGeneral.h/CUDADevice.h, CUDADataType.h)
+      -- insurance, not needed by today's lantern closure.
+  (c) flat-SDK bridge: torch 2.8.0 includes <hipsolver/hipsolver.h>
+      PER-COMPONENT (CUDAContextLight.h:24, Exceptions.h:10); on ROCm <=6.x
+      flat SDKs (no hipsolver/ dir) the snapshot mirrors the flat
+      hipsolver.h into hip-compat/hipsolver/hipsolver.h so the include
+      resolves on every SDK generation. hipsolver.h is now a HARD
+      requirement like hipsparse/hipblas/hipblaslt.
+  (d) the compat probe is now FATAL, not informational (opt-out:
+      LANTERN_ROCM_KIT_PROBE_WARN=1). This failure class compiles fine for
+      every lantern TU except Cuda.cpp and dies ~10 min into make; the probe
+      produces the same g++ error in seconds. The probe also covers
+      ATen/cuda/Exceptions.h (the cusolverStatus_t site) and
+      torch/csrc/cuda/memory_snapshot.h (AllocatorCuda's closure).
+  Validation: full syntax sweep of ALL lantern TUs (torch main src/lantern,
+  40 files) against the REAL wheel include tree (torch 2.8.0+rocm6.4, 9437
+  headers fetched into the sandbox by range requests): 40/40 compile clean
+  with the v20 shims; Cuda.cpp reproduces the v19 failure with the v19 set.
+
+CHANGELOG v19 -- fix the v18 field failure at the flags gate (host: ROCm 7.2.4
+  SDK complete, ROCM_PATH set, every header resolves): "the torch cuda-header
+  closure does NOT compile with the real lantern flags" -- flags-probe.log:
+    ATen/cuda/Exceptions.h:59: error: 'cublasStatus_t' was not declared in this
+      scope; did you mean 'hipblasStatus_t'?
+    ATen/cuda/Exceptions.h:71: error: 'cusparseStatus_t' was not declared in
+      this scope; did you mean 'hipsparseStatus_t'?
+  Root cause: torch 2.8.0's ATen/cuda/Exceptions.h (pulled by
+  ATen/cuda/CUDAContext.h:9) DECLARES _cublasGetErrorEnum(cublasStatus_t) and
+  cusparseGetErrorString(cusparseStatus_t) -- cublas*/cusparse* STATUS types
+  the v16 shims never aliased (they mapped the four HANDLE types only).
+  torch's own ROCm build hipifies those declarations away; a downstream g++
+  build hits them raw. Fix: the cublas_v2.h shim now also aliases
+  cublasStatus_t -> hipblasStatus_t and the cusparse.h shim
+  cusparseStatus_t -> hipsparseStatus_t, plus the paired
+  CUBLAS_STATUS_SUCCESS / CUSPARSE_STATUS_SUCCESS defines (insurance for the
+  AT_CUBLAS_CHECK / AT_CUSPARSE_CHECK macros of the same header, which expand
+  the type and the success constant together in downstream TUs).
+  Also:
+  (a) the self-heal budget rises 15 -> 50 iterations. Field evidence: the
+      ROCm 7.2.4 hip/ runtime closure revealed 15 headers ONE BY ONE (g++
+      stops at the first missing include, so the closure fills one header per
+      probe run) and EXHAUSTED the old budget: the informational probe never
+      reached Exceptions.h and always printed "compat probe still failing"
+      ending on hip/library_types.h -- the 15th fix, applied AFTER the last
+      probe run of the loop. A budget-exhausted state now prints its own
+      explicit warning instead of the generic one.
+  (b) the fatal flags-gate message now prints the FIRST g++ errors INLINE --
+      a residual failure is self-diagnosing instead of requiring another
+      `cat flags-probe.log` round-trip.
+  (c) the unit harness (scripts/test_hip_compat_v19.sh) now mirrors the REAL
+      2.8.0 closure: its fake wheel ships an ATen/cuda/Exceptions.h with the
+      cublasStatus_t/cusparseStatus_t declarations. The v18 harness lacked
+      that file, which is exactly why the sandbox run passed while the field
+      gate failed. The aliases are regression-tested against the REAL ROCm
+      7.2.4 headers (hipblas 3.2.0 / hipsparse 4.2.0), and a negative test
+      proves the harness would catch the bug.
+  Note: the manual workaround of copying /opt/rocm*/include into hip-compat
+  is neither needed nor persistent -- ensure_hip_compat() wipes and rebuilds
+  the directory on every run; the self-heal now fills everything the probe
+  reveals, and the real lantern flags also carry the SDK include dirs via
+  torch's imported HIP targets.
+
+CHANGELOG v18 -- fix the v17 "no HIP SDK headers found" false failure on
+  ROCm 7.x hosts WITH a complete SDK (field: rocm-hip-sdk 7.2.4 installed,
+  /opt/rocm-7.2.4/include present, hipsparse.h still "not found"). ROCm 7.x
+  moved the math headers into per-component subdirs: hipblas-dev 3.2.0
+  ships include/hipblas/hipblas.h, hipsparse-dev 4.2.0
+  include/hipsparse/hipsparse.h, hipblaslt-dev 1.2.2
+  include/hipblaslt/hipblaslt.h, hipsolver-dev 3.2.0
+  include/hipsolver/hipsolver.h -- there is NO flat <name>.h at the include
+  root anymore, and the v17 sentinel (-f $cand/hipsparse.h) matched
+  nothing. ensure_hip_compat() now:
+  (a) locates hipsparse.h RECURSIVELY (find -H -- /opt/rocm/include is
+      usually a symlink) under each candidate include root; flat ROCm 6.x
+      layouts still win through the direct file test;
+  (b) snapshots each forwarded header via sdk_snap(): flat layout -> direct
+      copy (as v17); per-component layout -> a 1-line flat WRAPPER
+      ("#include <hipsparse/hipsparse.h>") + a recursive copy of the whole
+      component dir into hip-compat, so every relative internal include
+      ("internal/precond/...", "hipsparse-types.h") and every
+      cross-component include (hipblaslt.h 1.2.2 pulls <hipblas/hipblas.h>
+      and <hipblas-common/hipblas-common.h>) resolves INSIDE hip-compat
+      with zero self-heal iterations;
+  (c) hipblas-common.h joins hipsolver.h as best-effort snapshot (new
+      hipblas 3.2.0 / hipblaslt 1.2.2 dependency);
+  (d) the die messages name the exact apt packages (hipblas-dev,
+      hipsparse-dev, hipblaslt-dev -- all pulled by rocm-hip-sdk) instead
+      of the misleading generic rocm-dev suggestion.
+  Verified against the REAL ROCm 7.2.4 header tree (packages pulled from
+  repo.radeon.com/rocm/apt/7.2.4): the wrappers compile the full
+  compat-probe with -fsyntax-only; the ROCm 6.x flat path stays covered by
+  the unit harness (scripts/test_hip_compat_v18.sh).
+
 CHANGELOG v17 -- fix the v16 compile failure at 51% (src/Cuda.cpp.o): the six
   shims resolved, but hip-compat/cusparse.h:5 died on "#include <hipsparse.h>:
   No such file or directory". Split include surface: the wheel BUNDLES the
