@@ -148,14 +148,6 @@ jobs:
           force: ${{ inputs.force || 'false' }}
           lantern-src: ${{ inputs.lantern-src || '' }}
 
-  # smoke-load -- PHASE 2 (not enabled yet).
-  # CPU-only dlopen smoke test: install the R package from the built artifact,
-  # point TORCH_URL/LANTERN_URL at the staged kit, and check that liblantern
-  # loads without launching a GPU kernel.
-  #
-  # gpu-smoke -- PHASE 3 (not enabled yet).
-  # Self-hosted AMD GPU runner, nightly and workflow_dispatch only:
+  # gpu-tests requires self-hosted AMD GPU runner, schedule/workflow_dispatch only :
   #   runs-on: [self-hosted, linux, amd-gpu]
-  # Runs tools/test_torch_rocm.R against the staged kit, setting
-  # HSA_OVERRIDE_GFX_VERSION when the GPU arch is not shipped by the wheel.
-  # Decisions required: runner provisioning, R package install, and GPU quota.
+  # Runs tests/testthat/test-rocm.R with TORCH_TEST_ROCM=1

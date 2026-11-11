@@ -72,8 +72,9 @@ devtools::load_all("<tree>")        # libs loaded from inst/
 ```sh
 R CMD INSTALL "<tree>"                   # R side (incl. the R/cuda.R patch)
 "<tree>/tools/make_rocm_kit.sh" --install  # ROCm libtorch + kit lantern
-# restart R, then:
-Rscript "<tree>/tools/test_torch_rocm.R"
+# restart R, then (Linux + ROCm GPU):
+TORCH_TEST_ROCM=1 Rscript -e 'testthat::test_dir(
+  "<tree>/tests/testthat", filter = "^rocm$", stop_on_failure = TRUE)'
 ```
 
 `--install` is the missing half of the kit: it copies the clean ROCm libtorch
@@ -133,9 +134,11 @@ engine and YAML only orchestrates it.
   `--allow-hip-header-mismatch`.
 - The generic `.github/workflows/lantern.yaml` no longer has a `rocm` row:
   it builds against a CPU/CUDA libtorch and cannot produce a ROCm artifact.
-- Phase 2 (`smoke-load`, CPU dlopen) and phase 3 (`gpu-smoke`, self-hosted
-  AMD runner + `tools/test_torch_rocm.R`) are documented placeholders in
-  `rocm-kit.yaml`; they need runner/provisioning decisions.
+- Pull requests only run `unit` (bash/shellcheck/test-kit.sh) and `build`
+  (compile + link). Phase 2 (`smoke-load`, CPU dlopen) and phase 3
+  (`gpu-smoke`, self-hosted AMD runner + `tests/testthat/test-rocm.R`) are
+  documented placeholders in `rocm-kit.yaml`; `gpu-smoke` must stay on
+  `schedule`/`workflow_dispatch` and never run on `pull_request`.
 
 ## Startup prompt note
 

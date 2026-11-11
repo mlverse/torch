@@ -34,8 +34,10 @@ CHANGELOG v25 -- CI migration, phase 0+1 (GitHub Actions).
     `download.pytorch.org` -> `make_rocm_kit.sh --from-zip --ci` -> ELF/RPATH
     audit -> artifact upload (kit + logs + quarantine). No Python venv.
   - `.github/workflows/rocm-kit.yaml` (new): `unit` (bash -n + shellcheck +
-    `test-kit.sh`) and `build` (composite action); `smoke-load` (CPU) and
-    `gpu-smoke` (self-hosted AMD) are documented placeholders for phases 2-3.
+    `test-kit.sh`) and `build` (composite action); pull requests only run
+    these two jobs. `smoke-load` (CPU) and `gpu-smoke` (self-hosted AMD,
+    schedule/dispatch only) are documented placeholders for phases 2-3; the
+    runtime checks live in `tests/testthat/test-rocm.R`.
   - `.github/workflows/lantern.yaml`: the inert `rocm6.4` row and the invalid
     `rocm:` input are removed; ROCm now belongs to `rocm-kit.yaml`.
 

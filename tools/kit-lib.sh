@@ -1141,7 +1141,7 @@ install_kit() {
   fi
   echo "    installed libtorch: $ip/lib (ROCm/HIP)"
   echo "    installed lantern:  $ip/lib/liblantern.so"
-  warn "restart R before running tools/test_torch_rocm.R (loaded .so files are cached per process)"
+  warn "restart R before running the ROCm smoke tests (TORCH_TEST_ROCM=1; loaded .so files are cached per process)"
 }
 
 
