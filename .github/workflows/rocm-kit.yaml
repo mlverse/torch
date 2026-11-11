@@ -1,0 +1,161 @@
+name: ROCm kit
+
+on:
+  workflow_call:
+    inputs:
+      rocm-version:
+        description: "ROCm major.minor version (e.g. 6.4)."
+        type: string
+        required: false
+        default: "6.4"
+      torch-version:
+        description: "libtorch version (e.g. 2.8.0)."
+        type: string
+        required: false
+        default: "2.8.0"
+      rocm-components:
+        description: "ROCm components for the rocm<version> package (empty = default, all = everything)."
+        type: string
+        required: false
+        default: ""
+      libtorch-url:
+        description: "libtorch ROCm archive URL (empty = derive from rocm-version and torch-version)."
+        type: string
+        required: false
+        default: ""
+      cudatoolkit-ref:
+        description: "cudatoolkit git ref providing the ROCm package."
+        type: string
+        required: false
+        default: "rocm6.4"
+      force:
+        description: "Reapply source patches over local edits."
+        type: boolean
+        required: false
+        default: false
+      lantern-src:
+        description: "Override the lantern source directory."
+        type: string
+        required: false
+        default: ""
+  workflow_dispatch:
+    inputs:
+      rocm-version:
+        description: "ROCm major.minor version (e.g. 6.4)."
+        type: string
+        required: false
+        default: "6.4"
+      torch-version:
+        description: "libtorch version (e.g. 2.8.0)."
+        type: string
+        required: false
+        default: "2.8.0"
+      rocm-components:
+        description: "ROCm components (empty = default, all = everything)."
+        type: string
+        required: false
+        default: ""
+      libtorch-url:
+        description: "libtorch ROCm archive URL (empty = derive)."
+        type: string
+        required: false
+        default: ""
+      cudatoolkit-ref:
+        description: "cudatoolkit git ref providing the ROCm package."
+        type: string
+        required: false
+        default: "rocm6.4"
+      force:
+        description: "Reapply source patches over local edits."
+        type: boolean
+        required: false
+        default: false
+      lantern-src:
+        description: "Override the lantern source directory."
+        type: string
+        required: false
+        default: ""
+  pull_request:
+    paths:
+      - "tools/**"
+      - ".github/actions/build-rocm-lantern/**"
+      - ".github/workflows/rocm-kit.yaml"
+  schedule:
+    - cron: "0 3 * * *"
+
+permissions:
+  contents: read
+
+jobs:
+  unit:
+    name: "unit (bash -n + test-kit.sh)"
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install shellcheck and binutils
+        env:
+          DEBIAN_FRONTEND: noninteractive
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends \
+            shellcheck binutils patchelf gcc
+        shell: bash
+
+      - name: Syntax-check tools scripts
+        run: |
+          for f in tools/*.sh; do
+            echo "bash -n $f"
+            bash -n "$f"
+          done
+        shell: bash
+
+      - name: Shellcheck the kit scripts
+        run: |
+          if command -v shellcheck >/dev/null 2>&1; then
+            shellcheck -S warning \
+              tools/make_rocm_kit.sh tools/kit-lib.sh tools/test-kit.sh || true
+          else
+            echo "shellcheck is not available; skipping"
+          fi
+        shell: bash
+
+      - name: Run kit unit tests
+        run: ./tools/test-kit.sh
+        shell: bash
+
+  build:
+    name: "build (${{ inputs.rocm-version || '6.4' }} / libtorch ${{ inputs.torch-version || '2.8.0' }})"
+    needs: unit
+    runs-on: ubuntu-22.04
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: r-lib/actions/setup-r@v2
+        with:
+          r-version: release
+
+      - name: Build liblantern from libtorch plus the ROCm toolkit
+        uses: ./.github/actions/build-rocm-lantern
+        with:
+          rocm-version: ${{ inputs.rocm-version || '6.4' }}
+          torch-version: ${{ inputs.torch-version || '2.8.0' }}
+          rocm-components: ${{ inputs.rocm-components || '' }}
+          libtorch-url: ${{ inputs.libtorch-url || '' }}
+          cudatoolkit-ref: ${{ inputs.cudatoolkit-ref || 'rocm6.4' }}
+          force: ${{ inputs.force || 'false' }}
+          lantern-src: ${{ inputs.lantern-src || '' }}
+
+  # smoke-load -- PHASE 2 (not enabled yet).
+  # CPU-only dlopen smoke test: install the R package from the built artifact,
+  # point TORCH_URL/LANTERN_URL at the staged kit, and check that liblantern
+  # loads without launching a GPU kernel.
+  #
+  # gpu-smoke -- PHASE 3 (not enabled yet).
+  # Self-hosted AMD GPU runner, nightly and workflow_dispatch only:
+  #   runs-on: [self-hosted, linux, amd-gpu]
+  # Runs tools/test_torch_rocm.R against the staged kit, setting
+  # HSA_OVERRIDE_GFX_VERSION when the GPU arch is not shipped by the wheel.
+  # Decisions required: runner provisioning, R package install, and GPU quota.

@@ -1,1 +1,0 @@
-linux   5.2.5    https://storage.googleapis.com/torch-lantern-builds/cudnn/cudnn-11.3-linux-x64-v8.2.1.32.tgz

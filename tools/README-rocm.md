@@ -3,8 +3,9 @@
 This document holds the long-form guidance that the script prints at the end
 of a successful run. Paths below use `<tree>` for the `{torch}` checkout root.
 
-Last change: v24 -- the kit installs the staged ROCm libtorch too (`--install`);
-a plain install_torch() fetches a CPU/CUDA wheel (ABI chimera).
+Last change: v25 -- CI migration (phase 0+1): `--ci`, fatal wheel/SDK HIP
+mismatch gate, `rocm-kit.yaml` + `build-rocm-lantern` action. v24 added
+`--install` (a plain install_torch() fetches a CPU/CUDA wheel: ABI chimera).
 
 ## Aligned tree
 
@@ -105,6 +106,36 @@ overwriting a hardlink would zero BOTH the installed and the staged files
 
 For the dev loop, the same bundles can go to `<tree>/inst` instead:
 `TORCH_HOME=<tree>/inst` + `TORCH_URL`/`LANTERN_URL` + `install_torch()`.
+
+## CI (GitHub Actions)
+
+Phase 0+1 of `tools/ROCM_CI_PLAN.md` is implemented; the script remains the
+engine and YAML only orchestrates it.
+
+- `.github/workflows/rocm-kit.yaml`:
+  - `unit` (ubuntu-latest): `bash -n tools/*.sh`, `shellcheck` on the kit
+    scripts, then `./tools/test-kit.sh` (no GPU, no ROCm).
+  - `build` (ubuntu-22.04): the `build-rocm-lantern` composite action.
+- `.github/actions/build-rocm-lantern/action.yml`: installs `cmake rsync
+  patchelf unzip ...`, installs the ROCm toolkit from the `rocm6.4` R package
+  (the ROCm branch of `{cudatoolkit}`, which extracts the ROCm `.deb` files
+  without root), caches and downloads the official libtorch ROCm archive
+  (`download.pytorch.org`), then runs
+  `./tools/make_rocm_kit.sh --from-zip <archive> --ci`. No Python venv. It does
+  NOT run `--install`; CI only publishes the built kit.
+- `--ci` is the CI contract: plain ASCII (no ANSI), `cp` without `-v`, and
+  stale artifacts are moved to `build-lantern/quarantine/` instead of deleted
+  so the workflow can upload them with `if: always()`.
+- Version pinning: the `rocm6.4` package pins the versioned repo
+  `https://repo.radeon.com/rocm/apt/6.4` (Ubuntu codename suite) in
+  `inst/components.tsv`, and `ensure_hip_compat` fails when the toolkit
+  major.minor differs from the archive's `+rocmX.Y`; override only with
+  `--allow-hip-header-mismatch`.
+- The generic `.github/workflows/lantern.yaml` no longer has a `rocm` row:
+  it builds against a CPU/CUDA libtorch and cannot produce a ROCm artifact.
+- Phase 2 (`smoke-load`, CPU dlopen) and phase 3 (`gpu-smoke`, self-hosted
+  AMD runner + `tools/test_torch_rocm.R`) are documented placeholders in
+  `rocm-kit.yaml`; they need runner/provisioning decisions.
 
 ## Startup prompt note
 

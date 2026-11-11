@@ -2,6 +2,43 @@
 
 Full design notes, one section per version (newest first).
 
+CHANGELOG v25 -- CI migration, phase 0+1 (GitHub Actions).
+  The kit stays the engine; CI only orchestrates it.
+  v25:
+  (a) `--ci`: plain ASCII logging (no ANSI), `cp` instead of `cp -v`,
+      `KIT_KEEP_ARTIFACTS=1` + `NO_COLOR=1`. On failure the stale
+      liblantern/nvrtc artifacts are MOVED to `build-lantern/quarantine/`
+      instead of deleted, so the workflow can upload them with
+      `if: always()`.
+  (b) `--allow-hip-header-mismatch`: `ensure_hip_compat` now extracts the
+      wheel HIP major.minor from `libtorch/version.py` (`+rocmX.Y`) and the
+      system SDK version from `.info/version`; a mismatch is FATAL by default
+      (header/ABI risk), opt-out with the new flag.
+  (c) `apply_cuda_r_block` is gated on `libtorch/lib/libtorch_hip.so` like
+      `patch_cuda_hip`/`ensure_hip_compat`, so CPU/CUDA trees never get the
+      R-side HIP block.
+  (d) the staging log reads the real wheel version from `version.py` instead
+      of the hardcoded `2.8.0+rocm6.4`.
+  (e) SIGPIPE-141 hardening: `find|head` pipelines use `-print -quit` or a
+      trailing `|| true` under `set -o pipefail`.
+  (f) `test-kit.sh` fails loudly if `kit-lib.sh` cannot be sourced, if a key
+      helper is missing, or if zero tests ran (no more false green).
+  (g) `.gitignore`: `torch-rocm-kit/`, `*.orig-make-rocm-kit`,
+      `*.kit-applied`.
+  CI files:
+  - `.github/actions/install-rocm/` removed: the ROCm toolkit now comes from
+    the `rocm6.4` R package (ROCm branch of `{cudatoolkit}`), which extracts
+    the versioned `repo.radeon.com/rocm/apt/6.4` `.deb` files without root.
+  - `.github/actions/build-rocm-lantern/action.yml` (new composite): deps ->
+    `rocm6.4` R package (`ROCM_PATH`) -> cached libtorch ROCm archive from
+    `download.pytorch.org` -> `make_rocm_kit.sh --from-zip --ci` -> ELF/RPATH
+    audit -> artifact upload (kit + logs + quarantine). No Python venv.
+  - `.github/workflows/rocm-kit.yaml` (new): `unit` (bash -n + shellcheck +
+    `test-kit.sh`) and `build` (composite action); `smoke-load` (CPU) and
+    `gpu-smoke` (self-hosted AMD) are documented placeholders for phases 2-3.
+  - `.github/workflows/lantern.yaml`: the inert `rocm6.4` row and the invalid
+    `rocm:` input are removed; ROCm now belongs to `rocm-kit.yaml`.
+
 CHANGELOG v24 -- add the missing INSTALL half: `--install` + doctor detection.
   Field: kit build + `R CMD INSTALL .` + smoke test -> cuda_synchronize()
   fails with an impossible "device=-80" (num_gpus=1) while randn/add/reduction

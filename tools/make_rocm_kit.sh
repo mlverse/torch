@@ -24,15 +24,24 @@
 #   ./tools/make_rocm_kit.sh --unpatch    (removes the hip-shim block from CMakeLists)
 #   ./tools/make_rocm_kit.sh --doctor     (loader culprit + GPU-ISA vs wheel-arch verdict)
 #   ./tools/make_rocm_kit.sh --force      (reapply source patches over local edits)
+#   ./tools/make_rocm_kit.sh --from-venv ~/venv --ci   (GitHub Actions mode)
 #   options: --tree <torch-root>     (default: auto-detected from tools/)
 #            --lantern-src <dir>     (default: <tree>/src/lantern; the legacy
 #                                     top-level lantern/ of platform/amd_gpu is
 #                                     obsolete on the upstream side)
+#            --ci                    (CI output: no ANSI, no cp -v, preserve
+#                                     stale artifacts on failure)
+#            --allow-hip-header-mismatch
+#                                     (permit a system/wheel HIP header version
+#                                     mismatch; consumed by the HIP gate)
 #
 
-# Last change: v24 -- --install step + doctor check: install the ROCm libtorch
-# into the R library (a plain install_torch() would fetch a CPU/CUDA wheel and
-# create an ABI chimera with the ROCm liblantern).
+# Last change: v25 -- CI mode: --ci (plain output, KIT_KEEP_ARTIFACTS), fatal
+# wheel/SDK HIP mismatch (--allow-hip-header-mismatch to opt out), R patch
+# gated on libtorch_hip.so, version read from version.py, SIGPIPE fixes.
+# v24 -- --install step + doctor check: install the ROCm libtorch into the R
+# library (a plain install_torch() would fetch a CPU/CUDA wheel and create an
+# ABI chimera with the ROCm liblantern).
 # v23 -- doctor: real offload bundle ids, hardware/effective ISA, Tensile kernel files.
 # Full history and per-version design notes: tools/make_rocm_kit.CHANGELOG.md
 #
@@ -48,7 +57,12 @@ set -euo pipefail
 export LC_ALL=C
 export LANG=C
 
+usage() {
+  echo "Usage: $0 --from-venv <venv> | --from-zip <libtorch.zip> | --install | --unpatch | --doctor [--force] [--ci] [--allow-hip-header-mismatch]"
+}
+
 MODE=""; SRC=""; TREE_ARG=""; LANTERN_ARG=""; UNPATCH=""; DOCTOR=""; FORCE=""; INSTALL=""
+CI_MODE=""; ALLOW_HIP_MISMATCH=""
 while [[ $# -gt 0 ]]; do
   case "$1" in
     --from-venv)    MODE="venv"; SRC="${2:?}"; shift 2 ;;
@@ -59,18 +73,65 @@ while [[ $# -gt 0 ]]; do
     --doctor)       DOCTOR=1; shift ;;
     --install)      INSTALL=1; shift ;;
     --force)        FORCE=1; shift ;;
-    *) echo "Unknown option: $1"; exit 1 ;;
+    --ci)           CI_MODE=1; shift ;;
+    --allow-hip-header-mismatch) ALLOW_HIP_MISMATCH=1; shift ;;
+    *) echo "Unknown option: $1"; usage; exit 1 ;;
   esac
 done
-[[ -z "$MODE" && -z "$UNPATCH" && -z "$DOCTOR" && -z "$INSTALL" ]] && { echo "Usage: $0 --from-venv <venv> | --from-zip <libtorch.zip> | --install | --unpatch | --doctor [--force]"; exit 1; }
+[[ -z "$MODE" && -z "$UNPATCH" && -z "$DOCTOR" && -z "$INSTALL" ]] && { usage; exit 1; }
+
+# CI mode keeps stale artifacts for upload and disables color in child tools.
+if [[ -n "$CI_MODE" ]]; then
+  export KIT_KEEP_ARTIFACTS=1
+  export NO_COLOR=1
+fi
 
 # The extracted assets (kit-lib.sh, hip-compat/, hip-shim.cmake,
 # cuda-hip-rocm.R) live next to this script, whether or not --tree is used.
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)"
 
-log()  { printf '\n\033[1;32m==> %s\033[0m\n' "$*"; }
-warn() { printf '\033[1;33m[!] %s\033[0m\n' "$*"; }
-die()  { printf '\033[1;31m[x] %s\033[0m\n' "$*"; exit 1; }
+log()  {
+  if [[ -n "${CI_MODE:-}" ]]; then
+    printf '==> %s\n' "$*"
+  else
+    printf '\n\033[1;32m==> %s\033[0m\n' "$*"
+  fi
+}
+warn() {
+  if [[ -n "${CI_MODE:-}" ]]; then
+    printf '[!] %s\n' "$*"
+  else
+    printf '\033[1;33m[!] %s\033[0m\n' "$*"
+  fi
+}
+die()  {
+  if [[ -n "${CI_MODE:-}" ]]; then
+    printf '[x] %s\n' "$*"
+  else
+    printf '\033[1;31m[x] %s\033[0m\n' "$*"
+  fi
+  exit 1
+}
+
+# cp wrapper: verbose locally, plain (deterministic, no ANSI/progress) in CI.
+kit_cp() {
+  if [[ -n "${CI_MODE:-}" ]]; then
+    cp "$@"
+  else
+    cp -v "$@"
+  fi
+}
+
+# Version of the staged libtorch, read from the wheel's version.py
+# (__version__, falling back to git_version, then "unknown").
+staged_torch_version() {
+  local vf="$LIBTORCH_DIR/version.py" v=""
+  if [[ -f "$vf" ]]; then
+    v=$(sed -n -E "/^[[:space:]]*__version__[[:space:]]*=/{s|^[[:space:]]*__version__[[:space:]]*=[[:space:]]*[\"']?([^\"']+)[\"']?.*|\1|p;q;}" "$vf")
+    [[ -n "$v" ]] || v=$(sed -n -E "/^[[:space:]]*git_version[[:space:]]*=/{s|^[[:space:]]*git_version[[:space:]]*=[[:space:]]*[\"']?([^\"']+)[\"']?.*|\1|p;q;}" "$vf")
+  fi
+  printf '%s' "${v:-unknown}"
+}
 
 # >>> kit-functions (test-extractable block: pure functions only) --------------
 # The helpers live in tools/kit-lib.sh so tools/test-kit.sh can source
@@ -167,7 +228,7 @@ ensure_nvrtc_stub
 # cache (DT_RUNPATH does not). This kills the load-time soname swap that
 # rebuilt the 6.4/7.2 chimera even though every link-time gate passed.
 hermetize_libs "$LIBTORCH_DIR/lib"
-log "expected libtorch 2.8.0+rocm6.4 -- staged + hermetized: $LIBTORCH_DIR"
+log "staged libtorch $(staged_torch_version) -- staged + hermetized: $LIBTORCH_DIR"
 
 # --- 2/4 Build liblantern in build-lantern/ -----------------------------------
 log "2/4 Building lantern (purged cache) -> $BUILD_DIR"
@@ -257,7 +318,7 @@ ${KIT_ERRS:-       (no 'error:' lines found -- open the full log)}
 fi
 cmake --build "$BUILD_DIR" --target lantern --parallel "$(nproc 2>/dev/null || echo 2)"
 
-LIBLANTERN=$(find "$BUILD_DIR" -maxdepth 2 -name 'liblantern.so' | head -n1)
+LIBLANTERN=$(find "$BUILD_DIR" -maxdepth 2 -name 'liblantern.so' -print -quit)
 [[ -n "$LIBLANTERN" ]] || die "liblantern.so not found after build"
 log "Build OK: $LIBLANTERN"
 
@@ -303,7 +364,7 @@ readelf -d "$LIBLANTERN" 2>/dev/null | sed -n 's/.*(Shared library: \[\([^]]*\)\
 # --- 3/4 Copy into inst/lib (dev loading) --------------------------------------
 log "3/4 Installing into the dev tree (inst/lib)"
 mkdir -p "$TREE/inst/lib"
-cp -v "$LIBLANTERN" "$TREE/inst/lib/liblantern.so"
+kit_cp "$LIBLANTERN" "$TREE/inst/lib/liblantern.so"
 # The nvrtc bridge must be installed too (installed libtorch_cpu dlopens
 # it by bare name from the package lib dir, not from the staged wheel).
 install_nvrtc_bridge "$TREE/inst/lib" dev
@@ -312,7 +373,7 @@ install_nvrtc_bridge "$TREE/inst/lib" dev
 log "4/4 Staging lantern/ for install_torch() -> $KIT_DIR/lantern"
 rm -rf "$KIT_DIR/lantern"
 mkdir -p "$KIT_DIR/lantern/lib"
-cp -v "$LIBLANTERN" "$KIT_DIR/lantern/lib/liblantern.so"
+kit_cp "$LIBLANTERN" "$KIT_DIR/lantern/lib/liblantern.so"
 # Make the kit artifact relocatable -- '$ORIGIN' resolves against the dir
 # that will hold liblantern at install time (next to the libtorch bundle).
 # Without patchelf the artifact keeps the absolute build-tree RUNPATH, which

@@ -36,7 +36,14 @@ SCRIPT_DIR="$HERE"
 
 # The helpers are a standalone, side-effect-free library.
 # shellcheck source=kit-lib.sh
-source "$HERE/kit-lib.sh"
+source "$HERE/kit-lib.sh" || { printf 'FATAL: cannot source %s\n' "$HERE/kit-lib.sh" >&2; exit 1; }
+
+for helper in strip_hip_shim apply_hip_shim patch_cuda_hip verdict_for_arch; do
+  if ! declare -F "$helper" >/dev/null 2>&1; then
+    printf 'FATAL: helper %s is not a function after sourcing kit-lib.sh\n' "$helper" >&2
+    exit 1
+  fi
+done
 
 have() { command -v "$1" >/dev/null 2>&1; }
 
@@ -271,4 +278,9 @@ fi
 
 # -----------------------------------------------------------------------------
 printf '\n%d passed, %d failed\n' "$PASS" "$FAIL"
-[[ "$FAIL" -eq 0 ]]
+if [[ "$PASS" -eq 0 ]]; then
+  printf 'FATAL: zero tests passed; refusing to report a green run\n' >&2
+  exit 1
+fi
+[[ "$FAIL" -eq 0 ]] || exit 1
+exit 0

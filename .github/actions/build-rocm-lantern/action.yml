@@ -1,0 +1,223 @@
+name: "Build ROCm lantern"
+description: "Build liblantern.so from a ROCm libtorch archive using the ROCm toolkit R package and tools/make_rocm_kit.sh"
+
+inputs:
+  rocm-version:
+    description: "ROCm major.minor version (e.g. 6.4). Selects the cudatoolkit ROCm package (rocm6.4)."
+    required: false
+    default: "6.4"
+  torch-version:
+    description: "libtorch version to download (e.g. 2.8.0)."
+    required: false
+    default: "2.8.0"
+  rocm-components:
+    description: "Comma-separated ROCm components for the rocm<version> package (empty = package default, 'all' = everything)."
+    required: false
+    default: ""
+  libtorch-url:
+    description: "libtorch ROCm archive URL (empty = derive from rocm-version and torch-version)."
+    required: false
+    default: ""
+  cudatoolkit-ref:
+    description: "Git ref of mlverse/cudatoolkit that provides the ROCm package."
+    required: false
+    default: "rocm6.4"
+  lantern-src:
+    description: "Override the lantern source directory (passed as --lantern-src when non-empty)."
+    required: false
+    default: ""
+  force:
+    description: "Reapply source patches over local edits (passed as --force when true)."
+    required: false
+    default: "false"
+  upload-artifact:
+    description: "Upload the built kit (or logs) as a GitHub artifact."
+    required: false
+    default: "true"
+  tree:
+    description: "Root of the torch checkout (defaults to github.workspace)."
+    required: false
+    default: ""
+
+outputs:
+  kit-dir:
+    description: "Staged install.R-format kit directory (torch-rocm-kit)."
+    value: ${{ steps.kit.outputs.kit-dir }}
+  liblantern-path:
+    description: "Path to the built liblantern.so."
+    value: ${{ steps.kit.outputs.liblantern-path }}
+  artifact-name:
+    description: "Name of the uploaded artifact."
+    value: ${{ steps.kit.outputs.artifact-name }}
+
+runs:
+  using: composite
+  steps:
+    - name: Install build dependencies
+      env:
+        DEBIAN_FRONTEND: noninteractive
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y --no-install-recommends \
+          cmake rsync patchelf unzip binutils build-essential \
+          curl ca-certificates git
+      shell: bash
+
+    - name: Cache ROCm .deb packages
+      uses: actions/cache@v4
+      with:
+        path: ${{ runner.temp }}/rocm-debs
+        key: rocm-debs-${{ inputs.rocm-version }}-${{ inputs.rocm-components || 'default' }}
+
+    - name: Install ROCm toolkit (cudatoolkit rocm${{ inputs.rocm-version }})
+      env:
+        ROCM_VERSION: ${{ inputs.rocm-version }}
+        ROCM_COMPONENTS: ${{ inputs.rocm-components }}
+        ROCM_DEB_CACHE: ${{ runner.temp }}/rocm-debs
+        CUDATOOLKIT_REF: ${{ inputs.cudatoolkit-ref }}
+      run: |
+        set -euo pipefail
+        pkg="rocm${ROCM_VERSION}"
+        src="$RUNNER_TEMP/cudatoolkit"
+        lib="$RUNNER_TEMP/Rlib"
+        rm -rf "$src"
+        mkdir -p "$lib"
+        git clone --depth 1 --branch "$CUDATOOLKIT_REF" \
+          https://github.com/mlverse/cudatoolkit "$src"
+        R CMD INSTALL --library="$lib" "$src/$pkg"
+        export R_LIBS_USER="$lib"
+
+        rocm_path="$(Rscript -e "cat(dirname(system.file('include', package='${pkg}')))")"
+        if [[ ! -d "$rocm_path/include/hip" ]]; then
+          echo "::error::HIP headers not found under $rocm_path/include"
+          exit 1
+        fi
+        echo "R_LIBS_USER=$lib" >> "$GITHUB_ENV"
+        echo "ROCM_PATH=$rocm_path" >> "$GITHUB_ENV"
+        echo "LD_LIBRARY_PATH=$rocm_path/lib${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}" >> "$GITHUB_ENV"
+        echo "ROCm toolkit: $rocm_path"
+      shell: bash
+
+    - name: Resolve libtorch URL
+      id: libtorch
+      env:
+        ROCM_VERSION: ${{ inputs.rocm-version }}
+        TORCH_VERSION: ${{ inputs.torch-version }}
+        LIBTORCH_URL: ${{ inputs.libtorch-url }}
+      run: |
+        set -euo pipefail
+        url="$LIBTORCH_URL"
+        if [[ -z "$url" ]]; then
+          url="https://download.pytorch.org/libtorch/rocm${ROCM_VERSION}/libtorch-shared-with-deps-${TORCH_VERSION}%2Brocm${ROCM_VERSION}.zip"
+        fi
+        echo "url=$url" >> "$GITHUB_OUTPUT"
+        echo "libtorch: $url"
+      shell: bash
+
+    - name: Cache libtorch archive
+      id: libtorch-cache
+      uses: actions/cache@v4
+      with:
+        path: ${{ runner.temp }}/libtorch-rocm.zip
+        key: libtorch-rocm-${{ inputs.rocm-version }}-${{ inputs.torch-version }}-${{ inputs.libtorch-url || 'auto' }}
+
+    - name: Download libtorch (ROCm)
+      if: steps.libtorch-cache.outputs.cache-hit != 'true'
+      env:
+        LIBTORCH_URL: ${{ steps.libtorch.outputs.url }}
+      run: |
+        set -euo pipefail
+        curl -fL --retry 3 --retry-delay 5 \
+          -o "$RUNNER_TEMP/libtorch-rocm.zip" "$LIBTORCH_URL"
+      shell: bash
+
+    - name: Run make_rocm_kit.sh (--ci --from-zip)
+      id: kit
+      env:
+        TREE_INPUT: ${{ inputs.tree }}
+        FORCE: ${{ inputs.force }}
+        LANTERN_SRC: ${{ inputs.lantern-src }}
+        ROCM_VERSION: ${{ inputs.rocm-version }}
+        TORCH_VERSION: ${{ inputs.torch-version }}
+        LIBTORCH_ZIP: ${{ runner.temp }}/libtorch-rocm.zip
+      run: |
+        set -euo pipefail
+        TREE="${TREE_INPUT:-$GITHUB_WORKSPACE}"
+        if [[ "$TREE" == *'github.workspace'* ]]; then
+          TREE="$GITHUB_WORKSPACE"
+        fi
+        if [[ ! -d "$TREE" ]]; then
+          echo "::error::tree not found: $TREE"
+          exit 1
+        fi
+        if [[ ! -s "$LIBTORCH_ZIP" ]]; then
+          echo "::error::missing libtorch archive: $LIBTORCH_ZIP"
+          exit 1
+        fi
+        args=(--ci --tree "$TREE" --from-zip "$LIBTORCH_ZIP")
+        if [[ "$FORCE" == "true" ]]; then
+          args+=(--force)
+        fi
+        if [[ -n "$LANTERN_SRC" ]]; then
+          args+=(--lantern-src "$LANTERN_SRC")
+        fi
+        "$TREE/tools/make_rocm_kit.sh" "${args[@]}"
+        artifact="rocm-kit-${ROCM_VERSION}-${TORCH_VERSION}"
+        {
+          echo "kit-dir=$TREE/torch-rocm-kit"
+          echo "liblantern-path=$TREE/build-lantern/lib/liblantern.so"
+          echo "artifact-name=$artifact"
+        } >> "$GITHUB_OUTPUT"
+      shell: bash
+
+    - name: Audit liblantern
+      env:
+        TREE_INPUT: ${{ inputs.tree }}
+      run: |
+        set -euo pipefail
+        TREE="${TREE_INPUT:-$GITHUB_WORKSPACE}"
+        if [[ "$TREE" == *'github.workspace'* ]]; then
+          TREE="$GITHUB_WORKSPACE"
+        fi
+        lib="$TREE/build-lantern/lib/liblantern.so"
+        if [[ ! -s "$lib" ]]; then
+          echo "::error::missing or empty $lib"
+          exit 1
+        fi
+        needed="$(readelf -d "$lib" | sed -n 's/.*Shared library: \[\([^]]*\)\].*/\1/p')"
+        if grep -qx 'libtorch_hip.so' <<< "$needed"; then
+          rpath="$(readelf -d "$lib" \
+            | sed -n -e 's/.*Library runpath: \[\([^]]*\)\].*/\1/p' \
+                     -e 's/.*Library rpath: \[\([^]]*\)\].*/\1/p' \
+            | head -n1 || true)"
+          if ! grep -Fq '$ORIGIN' <<< "$rpath"; then
+            echo "::error::libtorch_hip.so is a DT_NEEDED but RPATH/RUNPATH has no \$ORIGIN: ${rpath:-<empty>}"
+            exit 1
+          fi
+          echo "audit: libtorch_hip.so NEEDED with \$ORIGIN-relative RPATH ($rpath)"
+        else
+          echo "audit: no direct libtorch_hip.so DT_NEEDED"
+        fi
+      shell: bash
+
+    - name: Upload ROCm kit artifact
+      if: ${{ always() && inputs.upload-artifact == 'true' }}
+      uses: actions/upload-artifact@v4
+      with:
+        name: rocm-kit-${{ inputs.rocm-version }}-${{ inputs.torch-version }}
+        path: |
+          ${{ inputs.tree || github.workspace }}/build-lantern/lib/liblantern.so
+          ${{ inputs.tree || github.workspace }}/torch-rocm-kit/lantern/lib/*.so
+          ${{ inputs.tree || github.workspace }}/build-lantern/hip-compat/*.log
+          ${{ inputs.tree || github.workspace }}/build-lantern/quarantine/**
+        if-no-files-found: ignore
+
+    - name: Upload ROCm kit logs
+      if: ${{ always() && inputs.upload-artifact != 'true' }}
+      uses: actions/upload-artifact@v4
+      with:
+        name: rocm-kit-${{ inputs.rocm-version }}-${{ inputs.torch-version }}-logs
+        path: |
+          ${{ inputs.tree || github.workspace }}/build-lantern/hip-compat/*.log
+          ${{ inputs.tree || github.workspace }}/build-lantern/quarantine/**
+        if-no-files-found: ignore

@@ -82,6 +82,22 @@ apply_hip_shim() {
 # (ROCm <=6.x) and per-component (ROCm 7.x) header layouts, and self-heals the
 # closure via a g++ -fsyntax-only probe. Gated on a ROCm wheel staging so
 # CUDA/CPU trees are untouched.
+
+# major.minor components of a HIP/SDK version string (6.4.43482-... -> 6.4).
+hip_mm() {
+  local v="$1"
+  [[ "$v" =~ ^([0-9]+)\.([0-9]+) ]] || return 0
+  printf '%s.%s' "${BASH_REMATCH[1]}" "${BASH_REMATCH[2]}"
+}
+
+# major.minor of the wheel's HIP variant from version.py (+rocmX.Y); empty if none.
+wheel_hip_mm() {
+  local vf="$1" v
+  [[ -f "$vf" ]] || return 0
+  v="$(sed -nE 's/.*\+rocm([0-9]+\.[0-9]+).*/\1/p' "$vf" 2>/dev/null || true)"
+  printf '%s' "${v%%$'\n'*}"
+}
+
 ensure_hip_compat() {
   [[ -f "$LIBTORCH_DIR/lib/libtorch_hip.so" ]] || return 0
   local dir="$BUILD_DIR/hip-compat"
@@ -112,6 +128,7 @@ ensure_hip_compat() {
   # Both header layouts are supported -- flat (ROCm <=6.x) and per-component
   # subdirs (ROCm 7.x: <sdk>/hipsparse/hipsparse.h ...).
   local sdk="" cand sdkver="(unknown version)" h missing_req="" copied=0
+  local wheel_mm sdk_mm
   local -a sdk_cands=()
   [[ -n "${ROCM_PATH:-}" ]] && sdk_cands+=("$ROCM_PATH/include")
   [[ -n "${HIP_PATH:-}" ]]  && sdk_cands+=("$HIP_PATH/include")
@@ -142,6 +159,21 @@ ensure_hip_compat() {
        (or: sudo amdgpu-install --usecase=rocm / apt install rocm-dev)
      or set ROCM_PATH to an install that has <sdk>/hipsparse/hipsparse.h."
   [[ -f "$sdk/../.info/version" ]] && sdkver="$(<"$sdk/../.info/version")"
+  # The wheel bundles its own HIP runtime; compiling against a DIFFERENT
+  # system SDK's headers is a header/ABI mismatch (field: undefined ROCR_1
+  # symbols, or headers that only compile against the wheel's own HIP).
+  # Fatal by default; --allow-hip-header-mismatch sets ALLOW_HIP_MISMATCH=1.
+  wheel_mm="$(wheel_hip_mm "$LIBTORCH_DIR/version.py")"
+  sdk_mm="$(hip_mm "$sdkver")"
+  if [[ -n "$wheel_mm" && -n "$sdk_mm" && "$sdk_mm" != "$wheel_mm" ]]; then
+    if [[ "${ALLOW_HIP_MISMATCH:-}" == "1" ]]; then
+      warn "HIP SDK $sdk_mm != wheel HIP $wheel_mm -- continuing (ALLOW_HIP_MISMATCH=1)"
+    else
+      die "HIP SDK/wheel version mismatch: system SDK $sdk_mm at $sdk (version: $sdkver) != staged wheel HIP $wheel_mm (from $LIBTORCH_DIR/version.py).
+     Compiling against a different HIP SDK than the wheel bundles risks a header/ABI mismatch (e.g. undefined ROCR_1 symbols, or SDK headers incompatible with the wheel's HIP).
+     Install the matching HIP SDK, or rerun with --allow-hip-header-mismatch to override."
+    fi
+  fi
 
   # Snapshot each forwarded math header, supporting BOTH layouts:
   #   ROCm <=6.x: <sdk>/hipsparse.h                    (flat copy)
@@ -285,7 +317,7 @@ EOF
         die "compat probe self-heal hit its $budget-iteration budget (field: the ROCm 7.2.4 hip/ closure needed 15).
      A failing probe means make would die on the same header minutes later.
      First g++ errors:
-$(grep -E 'error:' "$plog" | head -8 | sed 's/^/       /')
+$(grep -E 'error:' "$plog" | head -8 | sed 's/^/       /' || true)
      Full output: $plog. Opt out (at your own risk): LANTERN_ROCM_KIT_PROBE_WARN=1"
       fi
     else
@@ -296,7 +328,7 @@ $(grep -E 'error:' "$plog" | head -8 | sed 's/^/       /')
      A failing probe means make would die on the same header minutes later
      (field evidence: 'cusolverDnHandle_t does not name a type' at 56%).
      First g++ errors:
-$(grep -E 'error:' "$plog" | head -8 | sed 's/^/       /')
+$(grep -E 'error:' "$plog" | head -8 | sed 's/^/       /' || true)
      Fix the alias surface in $dir/<shim>.h (pattern: typedef/using/define the
      CUDA-named token in the shim that the failing header includes first), or
      opt out (at your own risk): LANTERN_ROCM_KIT_PROBE_WARN=1. Full output: $plog"
@@ -568,6 +600,7 @@ strip_cuda_r_block() {
 
 apply_cuda_r_block() {
   local f="$TREE/R/cuda.R"
+  [[ -f "$LIBTORCH_DIR/lib/libtorch_hip.so" ]] || { echo "    [patch] not a ROCm wheel staging -- R/cuda.R untouched"; return 0; }
   [[ -f "$f" ]] || { warn "R/cuda.R not found -- R-side cuda_* fixes skipped"; return 0; }
   strip_cuda_r_block "$f"
   # The R block lives in tools/cuda-hip-rocm.R (versioned, parseable).
@@ -774,12 +807,23 @@ audit_kit_layout() {
 # the process at load time. Quarantining turns that silent
 # chimera into a loud "liblantern.so not found".
 quarantine_stale_libs() {
-  local f
+  local f dest qdir
   for f in "$TREE/inst/lib/liblantern.so" "$KIT_DIR/lantern/lib/liblantern.so" \
            "$TREE/inst/lib/libcaffe2_nvrtc.so" "$KIT_DIR/lantern/lib/libcaffe2_nvrtc.so"; do
     [[ -e "$f" ]] || continue
-    rm -f "$f"
-    echo "    [quarantine] removed stale artifact: $f"
+    if [[ "${KIT_KEEP_ARTIFACTS:-0}" == "1" ]]; then
+      qdir="$BUILD_DIR/quarantine"
+      mkdir -p "$qdir"
+      dest="$qdir/$(basename "$f").$(date +%s)"
+      if mv -f "$f" "$dest"; then
+        echo "    [quarantine] preserved stale artifact: $dest"
+      else
+        warn "could not preserve stale artifact: $f (continuing)"
+      fi
+    else
+      rm -f "$f"
+      echo "    [quarantine] removed stale artifact: $f"
+    fi
   done
 }
 
@@ -797,6 +841,9 @@ on_fail_quarantine() {
   fi
   warn "kit run FAILED (rc=$rc) -- quarantining stale liblantern artifacts:"
   quarantine_stale_libs
+  if [[ "${KIT_KEEP_ARTIFACTS:-0}" == "1" ]]; then
+    warn "preserved stale artifacts are in $BUILD_DIR/quarantine/ -- CI must upload them with 'if: always()'"
+  fi
   warn "'R CMD INSTALL .' reuses the PREVIOUS inst/lib/liblantern.so ('*** Skip building lantern.'),"
   warn "so a stale copy would resurrect the 6.4/7.2 chimera (undefined symbol ... ROCR_1)."
   warn "Fix the failure above, then rerun this script and R CMD INSTALL."
@@ -1153,7 +1200,7 @@ doctor() {
       p=""
       for c in "$LIBTORCH_DIR/lib/"$f*; do [[ -e "$c" ]] && { p="$c"; break; }; done
       if [[ -n "$p" ]]; then
-        rp=$(readelf -d "$p" 2>/dev/null | grep -E 'Library (rpath|runpath)' | head -n1)
+        rp=$(readelf -d "$p" 2>/dev/null | grep -E 'Library (rpath|runpath)' | head -n1 || true)
         if [[ -n "$rp" ]]; then echo "      $(basename "$p"): $rp"
         else echo "      $(basename "$p"): (NO rpath at all -- hostile env can override it)"; fi
       fi
@@ -1226,9 +1273,9 @@ EOF
         env "LD_LIBRARY_PATH=$ROCM_HOSTILE_LIB" LD_DEBUG=libs,files "$probe" "$lib" >/dev/null 2>"$dbg" || true
         echo "      -- who requires what (culprit lines):"
         { grep -E 'needed by|required by' "$dbg" 2>/dev/null | grep -E 'amdhip64|hsa-runtime64' ;
-          grep -E 'needed by|required by' "$dbg" 2>/dev/null | grep -F "$ROCM_MARK" ; } | sort -u | sed 's/^/      /' | head -20
+          grep -E 'needed by|required by' "$dbg" 2>/dev/null | grep -F "$ROCM_MARK" ; } | sort -u | sed 's/^/      /' | head -20 || true
         echo "      -- resolutions into $ROCM_MARK:"
-        grep 'trying file=' "$dbg" 2>/dev/null | grep -F "$ROCM_MARK" | sed 's/^/      /' | head -15
+        grep 'trying file=' "$dbg" 2>/dev/null | grep -F "$ROCM_MARK" | sed 's/^/      /' | head -15 || true
         echo "      -- full log: $dbg"
       fi
     done
@@ -1328,7 +1375,7 @@ EOF
 stage_from_venv() {
   local venv torch_pkg py
   venv="$(cd "$1" && pwd -P)"
-  torch_pkg=$(compgen -G "$venv/lib/python3*/site-packages/torch" | head -n1)
+  torch_pkg=$(compgen -G "$venv/lib/python3*/site-packages/torch" | head -n1 || true)
   [[ -n "$torch_pkg" ]] || die "torch package not found in $venv"
   py="$venv/bin/python"
   [[ -x "$py" ]] || die "python interpreter missing: $py"
@@ -1343,7 +1390,7 @@ stage_from_zip() {
   [[ -f "$src" ]] || die "Zip not found: $src"
   tmp=$(mktemp -d)
   unzip -q "$src" -d "$tmp"
-  sub=$(find "$tmp" -mindepth 1 -maxdepth 1 -type d | head -n1)
+  sub=$(find "$tmp" -mindepth 1 -maxdepth 1 -type d -print -quit)
   # empty the staging dir then move the zip content into it
   rm -rf "$LIBTORCH_DIR" && mkdir -p "$LIBTORCH_DIR"
   # dotglob+nullglob inside a subshell -- the old `mv "$sub"/* "$sub"/.[!.]*`
