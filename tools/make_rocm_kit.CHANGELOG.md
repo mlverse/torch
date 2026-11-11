@@ -2,6 +2,36 @@
 
 Full design notes, one section per version (newest first).
 
+CHANGELOG v24 -- add the missing INSTALL half: `--install` + doctor detection.
+  Field: kit build + `R CMD INSTALL .` + smoke test -> cuda_synchronize()
+  fails with an impossible "device=-80" (num_gpus=1) while randn/add/reduction
+  and every other cuda_* call work. Diagnosis: the INSTALLED libtorch was a
+  CPU/CUDA wheel (no libtorch_hip.so, different libtorch_cpu.so md5 than the
+  staged tree). The kit only STAGES libtorch; `R CMD INSTALL` re-creates the
+  package without it, and a bare `torch::install_torch()` (no TORCH_URL)
+  fetches a CPU/CUDA wheel. liblantern (ROCm) then resolves libtorch_hip.so
+  through its RPATH to build-lantern/libtorch while libtorch_cpu.so comes
+  from the package: same sonames, different builds -> CUDAHooks vtable
+  mismatch, so `torch::cuda::synchronize()` dispatches to isGPUArch() with
+  an uninitialised DeviceIndex byte (-80). Not an R-patch bug.
+  v24:
+  (a) `make_rocm_kit.sh --install` (standalone or with --from-venv/--from-zip)
+      runs torch::install_torch(reinstall = TRUE) with TORCH_URL +
+      LANTERN_URL, then verifies libtorch_hip.so/liblantern.so landed and
+      libtorch_cpu.so matches staging;
+  (b) doctor [install] warns when the installed bundle has no libtorch_hip.so
+      or differs from the staged one, and prints the --install fix;
+  (c) summary/docs spell out the order: kit -> R CMD INSTALL . -> kit --install.
+  (d) two safeguards found while testing --install on a hardlinked staging
+      (the cp -al disk fallback): before install_torch() the destination
+      entries that also exist in the staged lib are unlinked (file.copy()
+      truncates its destination, so a hardlink would zero BOTH copies --
+      observed: libtorch_cpu.so/libtorch_hip.so went to 0 bytes and R
+      segfaulted); and the installer R process runs with TORCH_LOAD=0 so it
+      never dlopens the libtorch it is about to overwrite (SIGBUS on a mapped
+      .so). The install is now ~1 min for 12 GB on NVMe and the smoke test
+      reports 12 ok / 0 warn / 0 fail (matmul still [info] on gfx900).
+
 CHANGELOG v23 -- fix the --doctor [gpu_arch] verdict for the "invalid device function"
   failure on a Ryzen APU. Field: build + install OK, torch_tensor(...,
   device="cuda") prints (H2D copy, no kernel), but the FIRST kernel launch

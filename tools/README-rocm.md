@@ -3,8 +3,8 @@
 This document holds the long-form guidance that the script prints at the end
 of a successful run. Paths below use `<tree>` for the `{torch}` checkout root.
 
-Last change: v23 -- doctor: real offload bundle ids, hardware/effective ISA,
-Tensile kernel files.
+Last change: v24 -- the kit installs the staged ROCm libtorch too (`--install`);
+a plain install_torch() fetches a CPU/CUDA wheel (ABI chimera).
 
 ## Aligned tree
 
@@ -66,15 +66,45 @@ devtools::load_all("<tree>")        # libs loaded from inst/
 # or: R CMD INSTALL "<tree>"
 ```
 
-## Path B -- clean install through install.R
+## Path B -- clean install (installed R package)
+
+```sh
+R CMD INSTALL "<tree>"                   # R side (incl. the R/cuda.R patch)
+"<tree>/tools/make_rocm_kit.sh" --install  # ROCm libtorch + kit lantern
+# restart R, then:
+Rscript "<tree>/tools/test_torch_rocm.R"
+```
+
+`--install` is the missing half of the kit: it copies the clean ROCm libtorch
+layout (11 GB, `lib/include/share/bin` only) and `torch-rocm-kit/lantern` into
+`torch_install_path()` with `reinstall = TRUE`. Equivalent manual form:
 
 ```r
-Sys.setenv(TORCH_HOME  = "<tree>/inst")
-Sys.setenv(TORCH_URL   = "<tree>/build-lantern/libtorch")
-Sys.setenv(LANTERN_URL = "<tree>/torch-rocm-kit/lantern")
-torch::install_torch()             # then restart R
-source("tools/test_torch_rocm.R")
+Sys.setenv(TORCH_URL   = "<tree>/torch-rocm-kit/libtorch",
+           LANTERN_URL = "<tree>/torch-rocm-kit/lantern")
+torch::install_torch(reinstall = TRUE)   # then restart R
 ```
+
+`torch-rocm-kit/libtorch` is built by the kit (hardlinked to
+`build-lantern/libtorch`, no extra space) because the staging root is the
+WHEEL root: pointing `TORCH_URL` there would copy the whole Python `torch`
+package (105 entries, ~1.5 GB) into the R package.
+
+Do NOT rely on a bare `torch::install_torch()`: without `TORCH_URL` it fetches
+a CPU/CUDA wheel. `R CMD INSTALL` re-creates the package but never ships a
+libtorch, so the package ends up with a CPU/ROCm mix: liblantern (ROCm) then
+loads `libtorch_hip.so` from the build tree while `libtorch_cpu.so` comes from
+the package -- same sonames, different builds. The symptom is an impossible
+`device=-80` from `cuda_synchronize()` while every element-wise kernel still
+works. `--doctor` section `[install]` now detects it.
+
+If you staged by hardlink (`cp -al`) because of disk space: `--install` unlinks
+the destination entries first. `file.copy()` truncates its destination, so
+overwriting a hardlink would zero BOTH the installed and the staged files
+(seen in the field: 0-byte `libtorch_cpu.so`/`libtorch_hip.so` then a segfault).
+
+For the dev loop, the same bundles can go to `<tree>/inst` instead:
+`TORCH_HOME=<tree>/inst` + `TORCH_URL`/`LANTERN_URL` + `install_torch()`.
 
 ## Startup prompt note
 

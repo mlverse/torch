@@ -3,8 +3,13 @@
 # Run from the {torch} tree root:   source("tools/test_torch_rocm.R")
 # or headless:                      Rscript tools/test_torch_rocm.R
 #
-# Last change: v15 -- smoke test for the kit artifacts and the LANTERN_HIP
-# patches.
+# Last change: v17 -- refuse to test a CPU/CUDA libtorch bundle (mixing it with
+# the ROCm liblantern is an ABI chimera whose symptoms look like R-patch bugs),
+# and fix the device-RNG assertion (torch_equal() returns a plain R logical).
+#
+# v16 -- run the matmul probe in an isolated Rscript: a missing Tensile kernel
+# makes rocBLAS abort the process (SIGABRT), which tryCatch() cannot catch and
+# which used to kill the whole smoke test.
 #
 # Expected on a gfx900-class card (Vega10, ROCm 6.4 wheel):
 #   [ok]   device detection, allocations, ATen element-wise kernels,
@@ -48,6 +53,25 @@ if (!loaded) {
        "LANTERN_URL=<tree>/torch-rocm-kit/lantern, and restart R.")
 }
 
+# The INSTALLED libtorch bundle must be the ROCm/HIP one. liblantern is linked
+# against build-lantern/libtorch, so dropping it next to a CPU/CUDA libtorch
+# makes the loader pull libtorch_hip from the build tree while libtorch_cpu
+# comes from the installed package: same sonames, different builds -> virtual
+# calls land on the wrong method (field signature: cuda_synchronize() reports
+# an impossible "device=-80" while everything element-wise still works).
+lib_dir <- file.path(torch::torch_install_path(), "lib")
+has_hip <- length(list.files(lib_dir, pattern = "^libtorch_hip\\.so")) > 0L
+if (!has_hip) {
+  say("fail", sprintf(
+    "installed libtorch is not the ROCm bundle (no libtorch_hip.so in %s)",
+    lib_dir))
+  stop("reinstall the ROCm libtorch from the kit, then restart R:\n",
+       "  Sys.setenv(TORCH_URL   = '<tree>/build-lantern/libtorch',\n",
+       "             LANTERN_URL = '<tree>/torch-rocm-kit/lantern')\n",
+       "  torch::install_torch(reinstall = TRUE)")
+}
+say("info", sprintf("libtorch bundle: %s (ROCm/HIP)", lib_dir))
+
 # --- 2. device detection ----------------------------------------------------------
 avail <- tryCatch(torch::cuda_is_available(), error = function(e) {
   say("fail", paste("cuda_is_available() failed:", conditionMessage(e)))
@@ -83,7 +107,7 @@ if (!is.null(x)) {
     a <- torch::torch_rand(4L, device = "cuda")
     torch::torch_manual_seed(42)
     b <- torch::torch_rand(4L, device = "cuda")
-    isTRUE(torch::torch_equal(a, b)$item())
+    isTRUE(torch::torch_equal(a, b))
   }, error = function(e) {
     say("fail", paste("device RNG failed:", conditionMessage(e)))
     FALSE
@@ -130,15 +154,53 @@ if (!is.null(x)) {
 }
 
 # --- 6. matmul -> expected to fail on gfx900 (rocBLAS without TensileLibrary) -----
+# A missing Tensile kernel does NOT raise an R error: rocBLAS prints
+# "Cannot read ... TensileLibrary.dat ... for GPU arch : gfx900" and aborts
+# the whole process (SIGABRT -> exit status 134). tryCatch() cannot intercept
+# a signal, so the probe runs in an isolated Rscript; a crash is then reported
+# here instead of killing the session. The child also disables core dumps
+# (a torch process core file can be several GB).
+matmul_probe <- function() {
+  libs <- paste(sprintf('"%s"', .libPaths()), collapse = ", ")
+  code <- c(
+    sprintf(".libPaths(c(%s))", libs),
+    'suppressPackageStartupMessages(library(torch))',
+    'a <- torch::torch_randn(64L, 64L, device = "cuda")',
+    'b <- torch::torch_randn(64L, 64L, device = "cuda")',
+    'torch::torch_mm(a, b)',
+    'cat("\\nMATMUL_OK\\n")'
+  )
+  script <- tempfile("matmul-probe-", fileext = ".R")
+  writeLines(code, script)
+  on.exit(unlink(script), add = TRUE)
+  cmd <- sprintf(
+    "ulimit -c 0; exec %s --no-init-file --no-save --no-restore %s",
+    shQuote(file.path(R.home("bin"), "Rscript")), shQuote(script))
+  out <- suppressWarnings(
+    system2("/bin/sh", c("-c", shQuote(cmd)), stdout = TRUE, stderr = TRUE))
+  status <- attr(out, "status")
+  list(status = if (is.null(status)) 0L else status, output = out)
+}
 if (!is.null(x)) {
-  mm <- tryCatch({
-    torch::torch_mm(torch::torch_randn(64L, 64L, device = "cuda"),
-                    torch::torch_randn(64L, 64L, device = "cuda"))
-    "OK (surprising on this card!)"
-  }, error = function(e) {
-    paste("unavailable (expected on gfx900):", sub("\n.*", "", conditionMessage(e)))
-  })
-  say("info", paste("matmul:", mm))
+  mm <- matmul_probe()
+  if (mm$status == 0L && any(grepl("MATMUL_OK", mm$output, fixed = TRUE))) {
+    say("ok", "matmul: OK (surprising on this card!)")
+  } else {
+    detail <- grep("rocBLAS error|HIP error|Error", mm$output, value = TRUE)
+    detail <- if (length(detail)) sub("\n.*", "", detail[[1]]) else "no detail"
+    how <- if (mm$status > 128L) {
+      sprintf("isolated R process killed by signal %d", mm$status - 128L)
+    } else {
+      sprintf("isolated R process exited with status %d", mm$status)
+    }
+    if (grepl("TensileLibrary", detail, fixed = TRUE)) {
+      say("info", sprintf("matmul: unavailable (expected on gfx900) -- %s; %s",
+                          how, detail))
+    } else {
+      say("warn", sprintf("matmul: probe failed unexpectedly -- %s; %s",
+                          how, detail))
+    }
+  }
 }
 
 # --- summary ------------------------------------------------------------------------

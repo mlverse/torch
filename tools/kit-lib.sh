@@ -1001,6 +1001,103 @@ doctor_gpu_arch() {
   echo "      note: torch-kernel archs = real offload bundle ids (llvm-objdump --offloading) when available, else the strings heuristic. matmul archs = actual Tensile/kernel files (rocblas/library, hipblaslt), not .so strings."
 }
 
+# --- clean TORCH_URL layout (lib/include/share/bin only) -----------------------
+# The venv staging root is the WHEEL root: libtorch + the whole Python package
+# (torch/*.py, _C*.so, nn/, distributed/, ...). install_torch() copies EVERY
+# entry of TORCH_URL into the R package, so pointing it at
+# build-lantern/libtorch litters the package with Python modules (observed:
+# 105 wheel-only entries at the R package root, ~1.5 GB). Stage a clean
+# libtorch layout in torch-rocm-kit/libtorch and use THAT as TORCH_URL.
+# Hardlinks when possible (same filesystem, zero extra space).
+ensure_kit_libtorch() {
+  local d dst="$KIT_DIR/libtorch"
+  [[ -d "$LIBTORCH_DIR/lib" ]] \
+    || die "staged libtorch absent ($LIBTORCH_DIR/lib) -- run the kit --from-venv/--from-zip first"
+  rm -rf "$dst"
+  mkdir -p "$dst"
+  for d in lib include share bin; do
+    [[ -e "$LIBTORCH_DIR/$d" ]] || continue
+    cp -al "$LIBTORCH_DIR/$d" "$dst/$d" 2>/dev/null \
+      || cp -a "$LIBTORCH_DIR/$d" "$dst/$d"
+  done
+  echo "    clean TORCH_URL layout -> $dst (lib/include/share/bin only)"
+}
+
+# --- install_kit: put the staged bundles where R loads them ---------------------
+# The kit only STAGES libtorch (build-lantern/libtorch) and lantern
+# (torch-rocm-kit/lantern). `R CMD INSTALL .` re-creates the package but never
+# ships the ROCm libtorch, so a plain `torch::install_torch()` (no TORCH_URL)
+# fills the package with a CPU/CUDA wheel. liblantern then pulls libtorch_hip
+# from the build tree while libtorch_cpu comes from the package: same sonames,
+# different builds -> vtable/ABI chimera whose symptoms look like source bugs
+# (field: cuda_synchronize() -> impossible "device=-80" while every
+# element-wise kernel still works). install_kit() runs the missing half with
+# both kit URLs and reinstall=TRUE.
+install_kit() {
+  local ip staged need_kb free_kb b cleared=0
+  [[ -f "$LIBTORCH_DIR/lib/libtorch_hip.so" ]] \
+    || die "staged libtorch has no libtorch_hip.so ($LIBTORCH_DIR/lib) -- run the kit --from-venv/--from-zip first"
+  [[ -f "$KIT_DIR/lantern/lib/liblantern.so" ]] \
+    || die "kit lantern missing ($KIT_DIR/lantern/lib/liblantern.so) -- rerun the kit (4/4 step)"
+  command -v Rscript >/dev/null 2>&1 \
+    || die "Rscript not found -- cannot install the bundles into the R library"
+
+  ensure_kit_libtorch
+
+  ip=$(TORCH_INSTALL=0 Rscript --vanilla -e 'cat(torch::torch_install_path())' 2>/dev/null || true)
+  [[ -n "$ip" ]] \
+    || die "cannot resolve torch_install_path() -- install the R package first (R CMD INSTALL .)"
+  # install_torch() COPIES the whole staged tree (the ROCm wheel is ~12 GB).
+  # Warn before a nearly-full disk turns that into a partial install.
+  need_kb=$(du -sk "$KIT_DIR/libtorch" 2>/dev/null | awk '{print $1}')
+  free_kb=$(df -Pk "$(dirname "$ip")" 2>/dev/null | awk 'NR==2 {print $4}')
+  if [[ -n "$need_kb" && -n "$free_kb" && "$free_kb" -lt $((need_kb + need_kb / 10)) ]]; then
+    warn "only ${free_kb}K free on $(dirname "$ip"), the staged tree needs ~${need_kb}K (install_torch copies it). Free space first, or stage by hardlink (cp -al) as a manual fallback."
+  fi
+
+  # file.copy() opens the destination for writing, which TRUNCATES it. If a
+  # destination entry is a hardlink to the staged tree (the cp -al fallback),
+  # the SOURCE is truncated too -- libtorch_cpu.so/hip.so become 0 bytes in
+  # both places (field: exactly this, followed by a segfault). Unlink every
+  # staged top-level name from the destination first so install_torch() writes
+  # fresh inodes. liblantern.so is NOT in the staged layout and is left alone
+  # (it is reinstalled from LANTERN_URL right after).
+  if [[ -d "$ip" ]]; then
+    for b in "$KIT_DIR/libtorch"/*; do
+      [[ -e "$b" ]] || continue
+      b=$(basename "$b")
+      if [[ -e "$ip/$b" || -L "$ip/$b" ]]; then
+        rm -rf -- "$ip/$b"
+        cleared=$((cleared + 1))
+      fi
+    done
+    [[ "$cleared" -gt 0 ]] && echo "    cleared $cleared destination entr(y/ies) before install (avoids overwriting hardlinked sources)"
+  fi
+
+  log "Installing the staged ROCm libtorch + kit lantern into the R library"
+  # TORCH_LOAD=0: the installer must NOT dlopen the installed libtorch it is
+  # about to overwrite (overwriting a mapped .so in the same process SIGBUSes).
+  TORCH_URL="$KIT_DIR/libtorch" LANTERN_URL="$KIT_DIR/lantern" TORCH_INSTALL=0 TORCH_LOAD=0 \
+    Rscript --vanilla -e 'torch::install_torch(reinstall = TRUE, .inform_restart = FALSE)'
+
+  [[ -d "$ip/lib" ]] \
+    || die "torch_install_path() has no lib/ after install ($ip) -- install the R package first (R CMD INSTALL .)"
+  [[ -f "$ip/lib/libtorch_hip.so" ]] \
+    || die "install_torch() did not place libtorch_hip.so in $ip/lib -- paste the output above into the issue"
+  [[ -f "$ip/lib/liblantern.so" ]] \
+    || die "install_torch() did not place liblantern.so in $ip/lib"
+
+  staged="$LIBTORCH_DIR/lib/libtorch_cpu.so"
+  if [[ -f "$staged" && -f "$ip/lib/libtorch_cpu.so" ]] \
+     && ! cmp -s "$staged" "$ip/lib/libtorch_cpu.so"; then
+    warn "installed libtorch_cpu.so differs from the staged ROCm one (partial copy?) -- rerun ./tools/make_rocm_kit.sh --install"
+  fi
+  echo "    installed libtorch: $ip/lib (ROCm/HIP)"
+  echo "    installed lantern:  $ip/lib/liblantern.so"
+  warn "restart R before running tools/test_torch_rocm.R (loaded .so files are cached per process)"
+}
+
+
 # --doctor. Standalone, READ-ONLY diagnosis of a load failure (never
 # quarantines anything: it runs before the EXIT trap is armed). Answers ONE
 # question: WHO drags the system ROCm into the torch load? Prints the
@@ -1188,6 +1285,16 @@ EOF
           warn "      installed $ipx/lib/$ln: MISSING -- library(torch) will offer to install at every startup"
         fi
       done
+      if [[ -e "$ipx/lib/libtorch_hip.so" ]]; then
+        if [[ -f "$LIBTORCH_DIR/lib/libtorch_hip.so" ]] \
+           && ! cmp -s "$ipx/lib/libtorch_hip.so" "$LIBTORCH_DIR/lib/libtorch_hip.so"; then
+          warn "      [!!] installed libtorch_hip.so DIFFERS from the staged ROCm bundle -- CPU/ROCm or version chimera. Fix: ./tools/make_rocm_kit.sh --install"
+        else
+          echo "      installed libtorch: ROCm/HIP bundle (libtorch_hip.so present, matches staging)"
+        fi
+      else
+        warn "      [!!] installed libtorch has NO libtorch_hip.so (CPU/CUDA wheel). Mixed with the ROCm liblantern it is an ABI chimera (symptom: cuda_synchronize() -> 'device=-80'). Fix: ./tools/make_rocm_kit.sh --install"
+      fi
     else
       echo "      (torch package not installed)"
     fi

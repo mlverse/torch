@@ -6,9 +6,10 @@
 # Put this script in <torch-tree>/tools/ (or pass --tree <root>).
 # It feeds the directories ALREADY present in the tree:
 #
-#   build-lantern/libtorch/      <- staged ROCm libtorch (default location
-#                                   expected by lantern's CMake: TORCH_PATH
-#                                   computed from CMAKE_CURRENT_BINARY_DIR)
+#   build-lantern/libtorch/      <- staged ROCm libtorch (WHEEL root: libtorch
+#                                   + Python modules; CMake TORCH_PATH)
+#   torch-rocm-kit/libtorch/     <- clean TORCH_URL layout (lib/include/share/bin
+#                                   only, hardlinked) for torch::install_torch()
 #   build-lantern/               <- lantern cmake build dir (cache purged)
 #   inst/lib/liblantern.so       <- result copied for dev loading
 #                                   (devtools::load_all() reads inst/)
@@ -18,6 +19,8 @@
 # Usage:
 #   ./tools/make_rocm_kit.sh --from-venv ~/python/vision/.venv
 #   ./tools/make_rocm_kit.sh --from-zip  /path/to/libtorch-...+rocm6.4.zip
+#   ./tools/make_rocm_kit.sh --install    (install the staged libtorch+lantern
+#                                         into the R library, reinstall=TRUE)
 #   ./tools/make_rocm_kit.sh --unpatch    (removes the hip-shim block from CMakeLists)
 #   ./tools/make_rocm_kit.sh --doctor     (loader culprit + GPU-ISA vs wheel-arch verdict)
 #   ./tools/make_rocm_kit.sh --force      (reapply source patches over local edits)
@@ -27,8 +30,10 @@
 #                                     obsolete on the upstream side)
 #
 
-# Last change: v23 -- doctor: real offload bundle ids, hardware/effective ISA,
-# Tensile kernel files.
+# Last change: v24 -- --install step + doctor check: install the ROCm libtorch
+# into the R library (a plain install_torch() would fetch a CPU/CUDA wheel and
+# create an ABI chimera with the ROCm liblantern).
+# v23 -- doctor: real offload bundle ids, hardware/effective ISA, Tensile kernel files.
 # Full history and per-version design notes: tools/make_rocm_kit.CHANGELOG.md
 #
 # Platform: Linux only (rocminfo, patchelf, readlink -f, GNU binutils).
@@ -43,7 +48,7 @@ set -euo pipefail
 export LC_ALL=C
 export LANG=C
 
-MODE=""; SRC=""; TREE_ARG=""; LANTERN_ARG=""; UNPATCH=""; DOCTOR=""; FORCE=""
+MODE=""; SRC=""; TREE_ARG=""; LANTERN_ARG=""; UNPATCH=""; DOCTOR=""; FORCE=""; INSTALL=""
 while [[ $# -gt 0 ]]; do
   case "$1" in
     --from-venv)    MODE="venv"; SRC="${2:?}"; shift 2 ;;
@@ -52,11 +57,12 @@ while [[ $# -gt 0 ]]; do
     --lantern-src)  LANTERN_ARG="${2:?}"; shift 2 ;;
     --unpatch)      UNPATCH=1; shift ;;
     --doctor)       DOCTOR=1; shift ;;
+    --install)      INSTALL=1; shift ;;
     --force)        FORCE=1; shift ;;
     *) echo "Unknown option: $1"; exit 1 ;;
   esac
 done
-[[ -z "$MODE" && -z "$UNPATCH" && -z "$DOCTOR" ]] && { echo "Usage: $0 --from-venv <venv> | --from-zip <libtorch.zip> | --unpatch | --doctor [--force]"; exit 1; }
+[[ -z "$MODE" && -z "$UNPATCH" && -z "$DOCTOR" && -z "$INSTALL" ]] && { echo "Usage: $0 --from-venv <venv> | --from-zip <libtorch.zip> | --install | --unpatch | --doctor [--force]"; exit 1; }
 
 # The extracted assets (kit-lib.sh, hip-compat/, hip-shim.cmake,
 # cuda-hip-rocm.R) live next to this script, whether or not --tree is used.
@@ -110,6 +116,15 @@ KIT_DIR="$TREE/torch-rocm-kit"
 # diagnosing.
 if [[ -n "$DOCTOR" ]]; then
   doctor
+  exit 0
+fi
+
+# --install alone (no staging mode) reuses the artifacts of a previous run.
+# Recommended order: kit (build+stage) -> R CMD INSTALL . -> kit --install.
+# R CMD INSTALL re-creates the package WITHOUT the ROCm libtorch; this step
+# puts the staged bundle back and forces reinstall=TRUE.
+if [[ -n "$INSTALL" && -z "$MODE" ]]; then
+  install_kit
   exit 0
 fi
 
@@ -311,6 +326,10 @@ install_nvrtc_bridge "$KIT_DIR/lantern/lib" kit
 # Audit the kit artifact in a SIMULATED install layout (hardlinked next
 # to the wheel libs, exactly where install_torch() will drop it).
 audit_kit_layout "$KIT_DIR/lantern/lib/liblantern.so" "$LIBTORCH_DIR/lib" "$KIT_DIR/.audit"
+# A clean libtorch layout for TORCH_URL: the staging root is the WHEEL root
+# (libtorch + the Python package), and install_torch() copies EVERY entry of
+# TORCH_URL into the R package. Keep lib/include/share/bin only.
+ensure_kit_libtorch
 
 # Arm "keep the audited artifacts" only once BOTH copies are really
 # there and non-empty. A full disk / permission error at cp time must still
@@ -321,19 +340,34 @@ else
   die "fresh liblantern copies are missing/empty after staging -- FRESH_OK not armed"
 fi
 
+# --- optional: install into the R library -------------------------------------
+if [[ -n "$INSTALL" ]]; then
+  install_kit
+fi
+
 # --- Summary -------------------------------------------------------------------
 cat <<EOF
 
 make_rocm_kit.sh -- build OK, artifacts aligned and audited.
 
-  build-lantern/libtorch/     -> $LIBTORCH_DIR   (TORCH_URL candidate)
+  build-lantern/libtorch/     -> $LIBTORCH_DIR   (CMake staging root)
+  torch-rocm-kit/libtorch/    -> $KIT_DIR/libtorch   (TORCH_URL, libtorch layout)
   build-lantern/hip-compat/   -> cuda->HIP shims + HIP SDK math headers + probes
   build-lantern/liblantern.so -> $LIBLANTERN
   inst/lib/liblantern.so      -> dev loading (load_all)
   inst/lib/libcaffe2_nvrtc.so -> nvrtc bridge (device RNG / JIT)
-  torch-rocm-kit/lantern/     -> $KIT_DIR/lantern   (LANTERN_URL candidate)
+  torch-rocm-kit/lantern/     -> $KIT_DIR/lantern   (LANTERN_URL)
   torch-rocm-kit/lantern/lib/libcaffe2_nvrtc.so
                               -> nvrtc bridge staged for install_torch()
+
+  INSTALL STEP (the kit only stages the bundles):
+    R CMD INSTALL .                     # rebuilds the R package
+    ./tools/make_rocm_kit.sh --install  # puts the ROCm libtorch + lantern in
+                                        # the package and forces reinstall=TRUE
+  A plain torch::install_torch() WITHOUT TORCH_URL fetches a CPU/CUDA wheel;
+  next to the ROCm liblantern that is an ABI chimera (symptom: impossible
+  "device=-80" from cuda_synchronize() while element-wise ops still work).
+  Check with: ./tools/make_rocm_kit.sh --doctor   (section [install])
 
   staged tree is hermetic (DT_RPATH=\$ORIGIN); the source patches live in
   src/lantern/src/Cuda.cpp and R/cuda.R (remove with --unpatch).
