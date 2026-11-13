@@ -38,6 +38,8 @@ defined by the variable argument \code{size}.
 }
 
 \examples{
+if (torch_is_installed()) {
 
 torch_empty(c(2, 3))
+}
 }

@@ -25,9 +25,11 @@ LU factorization of A from \code{torch_lu}.
 }
 
 \examples{
+if (torch_is_installed()) {
 A = torch_randn(c(2, 3, 3))
 b = torch_randn(c(2, 3, 1))
 out = torch_lu(A)
 x = torch_lu_solve(b, out[[1]], out[[2]])
 torch_norm(torch_bmm(A, x) - b)
+}
 }

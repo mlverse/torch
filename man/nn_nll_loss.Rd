@@ -12,7 +12,8 @@ class. If given, it has to be a Tensor of size \code{C}. Otherwise, it is
 treated as if having all ones.}
 
 \item{ignore_index}{(int, optional): Specifies a target value that is ignored
-and does not contribute to the input gradient. Like code{target}, this is a 1-based class index. The default code{-100} is never a valid target and therefore ignores nothing.}
+and does not contribute to the input gradient. Like \code{target}, this is a 1-based
+class index. The default \code{-100} is never a valid target and therefore ignores nothing.}
 
 \item{reduction}{(string, optional): Specifies the reduction to apply to the output:
 \code{'none'} | \code{'mean'} | \code{'sum'}. \code{'none'}: no reduction will
@@ -87,6 +88,7 @@ of K-dimensional loss.
 }
 
 \examples{
+if (torch_is_installed()) {
 m <- nn_log_softmax(dim = 2)
 loss <- nn_nll_loss()
 # input is of size N x C = 3 x 5
@@ -108,4 +110,5 @@ m <- nn_log_softmax(dim = 1)
 target <- torch_empty(N, 8, 8, dtype = torch_long())$random_(1, C)
 output <- loss(m(conv(data)), target)
 output$backward()
+}
 }

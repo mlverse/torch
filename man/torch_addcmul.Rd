@@ -37,9 +37,11 @@ a real number, otherwise an integer.
 }
 
 \examples{
+if (torch_is_installed()) {
 
 t = torch_randn(c(1, 3))
 t1 = torch_randn(c(3, 1))
 t2 = torch_randn(c(1, 3))
 torch_addcmul(t, t1, t2, 0.1)
+}
 }

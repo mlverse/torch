@@ -36,7 +36,9 @@ output contains only the positive frequencies below the Nyquist frequency.
 To compute the full output, use \code{\link[=torch_fft_fft]{torch_fft_fft()}}.
 }
 \examples{
+if (torch_is_installed()) {
 t <- torch_arange(start = 0, end = 3)
 torch_fft_rfft(t)
 
+}
 }

@@ -46,6 +46,7 @@ the specified inputs. If it’s \code{FALSE}, then gradient w.r.t. all remaining
 will still be computed, and will be accumulated into their \code{.grad} attribute.
 }
 \examples{
+if (torch_is_installed()) {
 w <- torch_tensor(0.5, requires_grad = TRUE)
 b <- torch_tensor(0.9, requires_grad = TRUE)
 x <- torch_tensor(runif(100))
@@ -55,4 +56,5 @@ loss <- loss$mean()
 
 o <- autograd_grad(loss, list(w, b))
 o
+}
 }

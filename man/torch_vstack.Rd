@@ -23,6 +23,7 @@ have been reshaped by \code{\link[=torch_atleast_2d]{torch_atleast_2d()}}.
 }
 
 \examples{
+if (torch_is_installed()) {
 
 a <- torch_tensor(c(1, 2, 3))
 b <- torch_tensor(c(4, 5, 6))
@@ -30,4 +31,5 @@ torch_vstack(list(a,b))
 a <- torch_tensor(rbind(1,2,3))
 b <- torch_tensor(rbind(4,5,6))
 torch_vstack(list(a,b))
+}
 }

@@ -52,8 +52,10 @@ of tensor \code{input}.
 }
 
 \examples{
+if (torch_is_installed()) {
 
 weights = torch_tensor(c(0, 10, 3, 0), dtype=torch_float()) # create a tensor of weights
 torch_multinomial(weights, 2)
 torch_multinomial(weights, 4, replacement=TRUE)
+}
 }

@@ -24,6 +24,8 @@ Computes the element-wise absolute value of the given \code{input} tensor.
 }
 
 \examples{
+if (torch_is_installed()) {
 
 torch_abs(torch_tensor(c(-1, -2, 3)))
+}
 }

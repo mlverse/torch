@@ -40,7 +40,9 @@ they are equal, with NaNs being considered equal to each other when
 }
 
 \examples{
+if (torch_is_installed()) {
 
 torch_isclose(torch_tensor(c(1., 2, 3)), torch_tensor(c(1 + 1e-10, 3, 4)))
 torch_isclose(torch_tensor(c(Inf, 4)), torch_tensor(c(Inf, 6)), rtol=.5)
+}
 }

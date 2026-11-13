@@ -15,6 +15,7 @@ modules it contains are properly registered, and will be visible by all
 \code{nn_module} methods.
 }
 \examples{
+if (torch_is_installed()) {
 
 my_module <- nn_module(
   initialize = function() {
@@ -27,6 +28,7 @@ my_module <- nn_module(
     x
   }
 )
+}
 }
 \seealso{
 \code{\link[=nn_module_dict]{nn_module_dict()}}

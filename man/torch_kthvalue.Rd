@@ -36,6 +36,7 @@ they are of size 1. Otherwise, \code{dim} is squeezed
 }
 
 \examples{
+if (torch_is_installed()) {
 
 x <- torch_arange(1, 6)
 x
@@ -43,4 +44,5 @@ torch_kthvalue(x, 4)
 x <- torch_arange(1,6)$resize_(c(2,3))
 x
 torch_kthvalue(x, 2, 1, TRUE)
+}
 }

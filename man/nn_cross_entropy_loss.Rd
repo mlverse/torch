@@ -11,8 +11,9 @@ nn_cross_entropy_loss(weight = NULL, ignore_index = -100, reduction = "mean")
 If given, has to be a Tensor of size \code{C}}
 
 \item{ignore_index}{(int, optional): Specifies a target value that is ignored
-and does not contribute to the input gradient. Like \code{target}, this is a 1-based class index. The default \code{-100} is never a valid target and therefore ignores nothing. When \code{size_average} is
-\code{TRUE}, the loss is averaged over non-ignored targets.}
+and does not contribute to the input gradient. Like \code{target}, this is a 1-based
+class index. The default \code{-100} is never a valid target and therefore ignores nothing.
+When \code{size_average} is \code{TRUE}, the loss is averaged over non-ignored targets.}
 
 \item{reduction}{(string, optional): Specifies the reduction to apply to the output:
 \code{'none'} | \code{'mean'} | \code{'sum'}. \code{'none'}: no reduction will be applied,
@@ -72,9 +73,11 @@ of K-dimensional loss.
 }
 
 \examples{
+if (torch_is_installed()) {
 loss <- nn_cross_entropy_loss()
 input <- torch_randn(3, 5, requires_grad = TRUE)
 target <- torch_randint(low = 1, high = 5, size = 3, dtype = torch_long())
 output <- loss(input, target)
 output$backward()
+}
 }

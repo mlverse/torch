@@ -55,8 +55,10 @@ a tensor with dtype \code{torch_int64}.
 }
 
 \examples{
+if (torch_is_installed()) {
 
 torch_randint(3, 5, list(3))
 torch_randint(0, 10, size = list(2, 2))
 torch_randint(3, 10, list(2, 2))
+}
 }

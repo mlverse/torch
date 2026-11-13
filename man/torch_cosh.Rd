@@ -25,8 +25,10 @@ Returns a new tensor with the hyperbolic cosine  of the elements of
 }
 
 \examples{
+if (torch_is_installed()) {
 
 a = torch_randn(c(4))
 a
 torch_cosh(a)
+}
 }

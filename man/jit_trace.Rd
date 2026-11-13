@@ -76,10 +76,12 @@ For scripting, see \code{\link{jit_compile}}.
 }
 
 \examples{
+if (torch_is_installed()) {
 fn <- function(x) {
   torch_relu(x)
 }
 input <- torch_tensor(c(-1, 0, 1))
 tr_fn <- jit_trace(fn, input)
 tr_fn(input)
+}
 }

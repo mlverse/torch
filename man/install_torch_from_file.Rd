@@ -32,6 +32,7 @@ present on local filesystem, \code{"install_torch_from_file()"} can be used as a
 that is used for the R package. Both are highly dependent, and should be checked through \code{"get_install_libs_url()"}
 }
 \examples{
+if (torch_is_installed()) {
 \dontrun{
 # on a linux CPU platform 
 get_install_libs_url()
@@ -39,5 +40,6 @@ get_install_libs_url()
 Sys.setenv(TORCH_URL="/tmp/libtorch-v1.13.1.zip")
 Sys.setenv(LANTERN_URL="/tmp/lantern-0.9.1.9001+cpu+arm64-Darwin.zip")
 torch::install_torch()
+}
 }
 }

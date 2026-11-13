@@ -24,9 +24,11 @@ while keeping the original tensor shape.
 }
 
 \examples{
+if (torch_is_installed()) {
 
 input <- torch_randn(c(1, 4, 2, 2))
 print(input)
 output <- torch_channel_shuffle(input, 2)
 print(output)
+}
 }

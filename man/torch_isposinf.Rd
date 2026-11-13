@@ -20,7 +20,9 @@ Tests if each element of \code{input} is positive infinity or not.
 }
 
 \examples{
+if (torch_is_installed()) {
 
 a <- torch_tensor(c(-Inf, Inf, 1.2))
 torch_isposinf(a)
+}
 }

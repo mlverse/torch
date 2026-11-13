@@ -19,8 +19,10 @@ distr_gamma(concentration, rate, validate_args = NULL)
 Creates a Gamma distribution parameterized by shape \code{concentration} and \code{rate}.
 }
 \examples{
+if (torch_is_installed()) {
 m <- distr_gamma(torch_tensor(1.0), torch_tensor(1.0))
 m$sample() # Gamma distributed with concentration=1 and rate=1
+}
 }
 \seealso{
 \link{Distribution} for details on the available methods.

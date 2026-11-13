@@ -28,8 +28,10 @@ Returns a new tensor with the inverse hyperbolic cosine of the elements of \code
 }
 
 \examples{
+if (torch_is_installed()) {
 
 a <- torch_randn(c(4))$uniform_(1, 2)
 a
 torch_acosh(a)
+}
 }

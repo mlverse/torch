@@ -32,9 +32,11 @@ with the goal of migrating to NumPy’s behavior.
 }
 
 \examples{
+if (torch_is_installed()) {
 
 x = torch_tensor(c(1, 2, 3))
 y = torch_tensor(c(4, 5, 6))
 out = torch_meshgrid(list(x, y))
 out
+}
 }

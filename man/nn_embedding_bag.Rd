@@ -58,6 +58,7 @@ initialized from \eqn{\mathcal{N}(0, 1)}
 }
 
 \examples{
+if (torch_is_installed()) {
 # an EmbeddingBag module containing 10 tensors of size 3
 embedding_sum <- nn_embedding_bag(10, 3, mode = 'sum')
 # a batch of 2 samples of 4 indices each
@@ -74,4 +75,5 @@ embedding <- nn_embedding(10, 3, padding_idx = 2)
 embedding_sum <- nn_embedding_bag$from_pretrained(embedding$weight,
                                                  padding_idx = embedding$padding_idx,
                                                  mode='sum')
+}
 }

@@ -37,8 +37,10 @@ frequencies are redundant. rfft() returns the more compact one-sided representat
 where only the positive frequencies are returned.
 }
 \examples{
+if (torch_is_installed()) {
 t <- torch_arange(start = 0, end = 3)
 t
 torch_fft_fft(t, norm = "backward")
 
+}
 }

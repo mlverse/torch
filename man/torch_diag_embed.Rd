@@ -47,8 +47,10 @@ need to be explicitly specified.
 }
 
 \examples{
+if (torch_is_installed()) {
 
 a = torch_randn(c(2, 3))
 torch_diag_embed(a)
 torch_diag_embed(a, offset=1, dim1=1, dim2=3)
+}
 }

@@ -43,7 +43,9 @@ For even lengths, the Nyquist frequency at \code{f[n/2]} can be thought of as ei
 or positive. \code{fftfreq()} follows NumPy’s convention of taking it to be negative.
 }
 \examples{
+if (torch_is_installed()) {
 torch_fft_fftfreq(5) # Nyquist frequency at f[3] is positive
 torch_fft_fftfreq(4) # Nyquist frequency at f[3] is given as negative
 
+}
 }

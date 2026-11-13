@@ -20,7 +20,9 @@ Tests if each element of \code{input} has its sign bit set (is less than zero) o
 }
 
 \examples{
+if (torch_is_installed()) {
 
 a <- torch_tensor(c(0.7, -1.2, 0., 2.3))
 torch_signbit(a)
+}
 }
