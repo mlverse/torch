@@ -16,7 +16,7 @@ skip_if_rocm_not_requested <- function() {
 
 rocm_is_available <- function() {
   lib <- tryCatch(torch::torch_install_path(), error = function(e) NULL)
-  !is.null(lib) && file.exists(file.path(lib, "lib", "libtorch_hip.so"))
+  !is.null(lib) && torch:::rocm_bundle_is_installed(lib)
 }
 
 skip_if_no_rocm_bundle <- function() {

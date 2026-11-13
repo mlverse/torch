@@ -58,6 +58,14 @@ test_that("TORCH_CUDATOOLKIT + CUDA=rocm6.4 conflict is detected", {
   })
 })
 
+test_that("rocm_version_from_system_linux returns NULL when ROCm not found", {
+  skip_if_not(is_linux())
+  withr::with_envvar(list(ROCM_PATH = "", ROCM_HOME = ""), {
+    result <- suppressMessages(torch:::rocm_version_from_system_linux())
+    expect_null(result)
+  })
+})
+
 test_that("load_cudatoolkit_libs does not look for cudarocm6.4 package", {
   with_mocked_bindings(
     cuda_version_from_cudatoolkit = function() "rocm6.4",

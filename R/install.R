@@ -445,6 +445,10 @@ check_supported_rocm_version_linux <- function(version) {
   }
 }
 
+rocm_bundle_is_installed <- function(install_path) {
+  file.exists(file.path(install_path, "lib", "libtorch_hip.so"))
+}
+
 # CUDA version detection priority:
 #
 # 1. TORCH_CUDATOOLKIT env var — explicit cudatoolkit R package selection.
@@ -494,7 +498,9 @@ cuda_version <- function() {
   if (is_windows()) {
     return(cuda_version_from_system_windows())
   }
-  return(cuda_version_from_system_linux())
+  cuda_ver <- cuda_version_from_system_linux()
+  if (!is.null(cuda_ver)) return(cuda_ver)
+  return(rocm_version_from_system_linux())
 }
 
 cuda_version_from_system_linux <- function() {
@@ -582,6 +588,29 @@ check_supported_cuda_version_windows <- function(version) {
 
 check_supported_cuda_version_linux <- function(version) {
   check_supported_version(version, supported_cuda_versions_linux)
+}
+
+rocm_version_from_system_linux <- function() {
+  rocm_home <- Sys.getenv("ROCM_PATH", Sys.getenv("ROCM_HOME", "/opt/rocm"))
+
+  version_file <- file.path(rocm_home, ".info", "version")
+  if (file.exists(version_file)) {
+    raw <- tryCatch(readLines(version_file, n = 1, warn = FALSE), error = function(e) NULL)
+    if (!is.null(raw)) {
+      ver <- sub("(\\d+\\.\\d+).*", "\\1", gsub("-.*", "", trimws(raw)))
+      rocm_ver <- paste0("rocm", ver)
+      installer_message("Found ROCm version {.strong {rocm_ver}} in {.path {version_file}}.")
+      ok <- tryCatch({
+        check_supported_rocm_version_linux(rocm_ver)
+        TRUE
+      }, error = function(e) FALSE)
+      if (ok) return(rocm_ver)
+      installer_message("ROCm version {.val {rocm_ver}} is not supported, ignoring.")
+    }
+  }
+
+  installer_message("No ROCm installation found at {.path {rocm_home}}.")
+  NULL
 }
 
 # Detect CUDA version from cudatoolkit R packages only (no system probing).
