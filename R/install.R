@@ -429,6 +429,21 @@ installation_kind <- function() {
 
 supported_cuda_versions_windows <- c("12.6", "12.8", "12.9")
 supported_cuda_versions_linux <- c("12.6", "12.8", "12.9")
+supported_rocm_versions_linux <- c("6.4")
+
+is_rocm_version <- function(x) {
+  grepl("^rocm", x, ignore.case = FALSE)
+}
+
+check_supported_rocm_version_linux <- function(version) {
+  ver <- sub("^rocm", "", version)
+  if (!ver %in% supported_rocm_versions_linux) {
+    cli_abort(c(
+      x = "Unsupported ROCm version {.val {version}}",
+      i = "Currently supported versions are: {.val {paste0('rocm', supported_rocm_versions_linux)}}."
+    ))
+  }
+}
 
 # CUDA version detection priority:
 #
