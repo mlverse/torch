@@ -32,7 +32,11 @@ torch_version <- "2.8.0"
 #'   use the latest build for the branch.
 #' - `CUDA`: We try to automatically detect the CUDA version installed in your system,
 #'   but you might want to manually set it here. You can also disable CUDA installation
-#'   by setting it to 'cpu'.
+#'   by setting it to 'cpu'. To install the AMD GPU ROCm backend (Linux x86_64 only),
+#'   set it to `'rocm<version>'`, e.g. `'rocm6.4'`. This downloads the ROCm-enabled
+#'   libtorch from PyTorch and the matching lantern binary.
+#' - `ROCM_PATH` / `ROCM_HOME`: Conventional path where ROCm is installed on the system
+#'   (e.g. `/opt/rocm`). Used by auto-detection when `CUDA` is not set.
 #' - `TORCH_R_VERSION`: The R torch version. It's unlikely that you need to change it,
 #'   but it can be useful if you don't have the R package installed, but want to
 #'   install the dependencies.
