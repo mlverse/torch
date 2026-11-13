@@ -51,6 +51,21 @@ test_that("cuda_version_from_cudatoolkit does not error for CUDA=rocm6.4", {
   })
 })
 
+test_that("sitrep does not apply CUDA version check to ROCm version strings", {
+  detected_cuda <- "rocm6.4"
+  should_check <- !is.null(detected_cuda) &&
+    !torch:::is_rocm_version(detected_cuda) &&
+    (is_linux() || is_windows())
+  expect_false(should_check)
+})
+
+test_that("installation_kind ROCm detection is anchored (uses is_rocm_version)", {
+  skip_if_not(is_linux())
+  withr::with_envvar(list(CUDA = "rocm6.4", TORCH_CUDATOOLKIT = ""), {
+    expect_equal(torch:::installation_kind(), "rocm6.4")
+  })
+})
+
 test_that("TORCH_CUDATOOLKIT + CUDA=rocm6.4 conflict is detected", {
   skip_if_not(is_linux() || is_windows())
   withr::with_envvar(list(TORCH_CUDATOOLKIT = "12.8", CUDA = "rocm6.4"), {
@@ -74,4 +89,26 @@ test_that("load_cudatoolkit_libs does not look for cudarocm6.4 package", {
       expect_no_error(torch:::load_cudatoolkit_libs())
     }
   )
+})
+
+test_that("sitrep does not apply CUDA version check to ROCm version strings", {
+  detected_cuda <- "rocm6.4"
+  should_check <- !is.null(detected_cuda) &&
+    !torch:::is_rocm_version(detected_cuda) &&
+    (is_linux() || is_windows())
+  expect_false(should_check)
+})
+
+test_that("sitrep does not report CUDA version mismatch for ROCm builds", {
+  detected_cuda <- "rocm6.4"
+  should_check_mismatch <- !is.null(detected_cuda) &&
+    !torch:::is_rocm_version(detected_cuda)
+  expect_false(should_check_mismatch)
+})
+
+test_that("installation_kind ROCm detection is anchored (uses is_rocm_version)", {
+  skip_if_not(is_linux())
+  withr::with_envvar(list(CUDA = "rocm6.4", TORCH_CUDATOOLKIT = ""), {
+    expect_equal(torch:::installation_kind(), "rocm6.4")
+  })
 })

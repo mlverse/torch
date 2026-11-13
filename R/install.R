@@ -417,7 +417,7 @@ installation_kind <- function() {
   } else if (cu == "cpu") {
     installer_message("{.envvar CUDA} is set to {.val cpu}, so using the {.val cpu}.")
     return("cpu")
-  } else if (grepl("rocm", cu)) {
+  } else if (is_rocm_version(cu)) {
     installer_message("Installation kind will be {.val {cu}}.")
     return(cu)
   } else {
@@ -1352,13 +1352,14 @@ install_torch_sitrep <- function(verbose = TRUE) {
   if (verbose) {
     cli::cli_alert_info("Installation type: {.val {install_kind}}")
     if (!is.null(detected_cuda)) {
-      cli::cli_alert_info("Detected CUDA version: {.val {detected_cuda}}")
+      label <- if (is_rocm_version(detected_cuda)) "Detected ROCm version" else "Detected CUDA version"
+      cli::cli_alert_info("{label}: {.val {detected_cuda}}")
     }
   }
 
   # Check if detected CUDA version is supported
   # Reuses check_supported_cuda_version_* functions from installation
-  if (!is.null(detected_cuda) && (is_linux() || is_windows())) {
+  if (!is.null(detected_cuda) && !is_rocm_version(detected_cuda) && (is_linux() || is_windows())) {
     cuda_supported <- tryCatch({
       if (is_windows()) {
         check_supported_cuda_version_windows(detected_cuda)
@@ -1650,7 +1651,7 @@ install_torch_sitrep <- function(verbose = TRUE) {
   }
   
   # Issue: CUDA version mismatch
-  if (isTRUE(cuda_available) && !is.null(detected_cuda)) {
+  if (isTRUE(cuda_available) && !is.null(detected_cuda) && !is_rocm_version(detected_cuda)) {
     runtime_ver <- cuda_info$runtime_version
     if (!is.null(runtime_ver) && !is.na(runtime_ver) && 
         is.character(detected_cuda) && is.character(runtime_ver)) {
