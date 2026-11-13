@@ -37,3 +37,23 @@ test_that("check_supported_rocm_version_linux accepts rocm6.4", {
 test_that("check_supported_rocm_version_linux aborts on unknown rocm version", {
   expect_error(torch:::check_supported_rocm_version_linux("rocm5.0"))
 })
+
+test_that("cuda_version_from_cudatoolkit returns NULL for CUDA=rocm6.4 without package", {
+  withr::with_envvar(list(CUDA = "rocm6.4", TORCH_CUDATOOLKIT = ""), {
+    result <- torch:::cuda_version_from_cudatoolkit()
+    expect_null(result)
+  })
+})
+
+test_that("cuda_version_from_cudatoolkit does not error for CUDA=rocm6.4", {
+  withr::with_envvar(list(CUDA = "rocm6.4", TORCH_CUDATOOLKIT = ""), {
+    expect_no_error(torch:::cuda_version_from_cudatoolkit())
+  })
+})
+
+test_that("TORCH_CUDATOOLKIT + CUDA=rocm6.4 conflict is detected", {
+  skip_if_not(is_linux() || is_windows())
+  withr::with_envvar(list(TORCH_CUDATOOLKIT = "12.8", CUDA = "rocm6.4"), {
+    expect_error(torch:::cuda_version_from_cudatoolkit(), "conflicts with")
+  })
+})

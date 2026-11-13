@@ -620,7 +620,7 @@ cuda_version_from_cudatoolkit <- function() {
 
   # CUDA=<version> — look for matching cudatoolkit package
   if (nzchar(cuda_env) && cuda_env != "cpu") {
-    pkg <- paste0("cuda", cuda_env)
+    pkg <- if (is_rocm_version(cuda_env)) cuda_env else paste0("cuda", cuda_env)
     if (requireNamespace(pkg, quietly = TRUE)) return(cuda_env)
     return(NULL)
   }
@@ -629,6 +629,14 @@ cuda_version_from_cudatoolkit <- function() {
   for (version in rev(supported)) {
     pkg <- paste0("cuda", version)
     if (requireNamespace(pkg, quietly = TRUE)) return(version)
+  }
+
+  # Auto-detect installed ROCm cudatoolkit packages (newest first)
+  if (is_linux()) {
+    for (version in rev(supported_rocm_versions_linux)) {
+      pkg <- paste0("rocm", version)
+      if (requireNamespace(pkg, quietly = TRUE)) return(paste0("rocm", version))
+    }
   }
 
   NULL
