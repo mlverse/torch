@@ -1482,7 +1482,34 @@ install_torch_sitrep <- function(verbose = TRUE) {
   }
   
   results$cuda <- cuda_info
-  
+
+  # ============================================
+  # Section 5b: ROCm / HIP Status
+  # ============================================
+  is_rocm <- is_rocm_version(install_kind %||% "")
+  if (is_rocm) {
+    if (verbose) cli::cli_h1("ROCm / HIP Status")
+    if (verbose) cli::cli_alert_info("ROCm build: {.val {install_kind}}")
+
+    hip_found <- !is.na(install_path) && !is.null(install_path) &&
+      rocm_bundle_is_installed(install_path)
+
+    status_msg(
+      hip_found,
+      "libtorch_hip.so found (ROCm/HIP bundle)",
+      "libtorch_hip.so NOT found — install the ROCm libtorch kit"
+    )
+
+    if (!hip_found) {
+      issues <<- c(issues,
+        "ROCm build selected but libtorch_hip.so is missing.",
+        "Run make_rocm_kit.sh --install or set TORCH_URL to the ROCm libtorch archive."
+      )
+    }
+
+    results$rocm <- list(install_kind = install_kind, hip_lib_found = hip_found)
+  }
+
   # ============================================
   # Section 6: Backend Status
   # ============================================
@@ -1637,10 +1664,11 @@ install_torch_sitrep <- function(verbose = TRUE) {
   }
   
   # Issue: CUDA expected but not available
-  if (isTRUE(lantern_started) && 
-      is.character(install_kind) && 
+  if (isTRUE(lantern_started) &&
+      is.character(install_kind) &&
       !is.na(install_kind) &&
-      install_kind != "cpu" && 
+      install_kind != "cpu" &&
+      !is_rocm_version(install_kind) &&
       !isTRUE(cuda_available)) {
     issues <<- c(issues,
       "CUDA build installed but CUDA not available.",
