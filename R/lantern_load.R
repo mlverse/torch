@@ -5,7 +5,7 @@ load_cudatoolkit_libs <- function() {
   cuda_ver <- cuda_version_from_cudatoolkit()
   if (is.null(cuda_ver)) return(invisible(FALSE))
 
-  pkg_name <- paste0("cuda", cuda_ver)
+  pkg_name <- if (is_rocm_version(cuda_ver)) cuda_ver else paste0("cuda", cuda_ver)
   if (!requireNamespace(pkg_name, quietly = TRUE)) return(invisible(FALSE))
 
   # `lib_path()` is `system.file(..., mustWork = TRUE)`, which errors rather

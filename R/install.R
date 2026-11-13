@@ -32,7 +32,11 @@ torch_version <- "2.8.0"
 #'   use the latest build for the branch.
 #' - `CUDA`: We try to automatically detect the CUDA version installed in your system,
 #'   but you might want to manually set it here. You can also disable CUDA installation
-#'   by setting it to 'cpu'.
+#'   by setting it to 'cpu'. To install the AMD GPU ROCm backend (Linux x86_64 only),
+#'   set it to `'rocm<version>'`, e.g. `'rocm6.4'`. This downloads the ROCm-enabled
+#'   libtorch from PyTorch and the matching lantern binary.
+#' - `ROCM_PATH` / `ROCM_HOME`: Conventional path where ROCm is installed on the system
+#'   (e.g. `/opt/rocm`). Used by auto-detection when `CUDA` is not set.
 #' - `TORCH_R_VERSION`: The R torch version. It's unlikely that you need to change it,
 #'   but it can be useful if you don't have the R package installed, but want to
 #'   install the dependencies.
@@ -413,6 +417,9 @@ installation_kind <- function() {
   } else if (cu == "cpu") {
     installer_message("{.envvar CUDA} is set to {.val cpu}, so using the {.val cpu}.")
     return("cpu")
+  } else if (is_rocm_version(cu)) {
+    installer_message("Installation kind will be {.val {cu}}.")
+    return(cu)
   } else {
     cu <- paste0("cu", gsub(".", "", cu, fixed = TRUE))
     installer_message("Installation kind will be {.val {cu}}.")
@@ -422,6 +429,25 @@ installation_kind <- function() {
 
 supported_cuda_versions_windows <- c("12.6", "12.8", "12.9")
 supported_cuda_versions_linux <- c("12.6", "12.8", "12.9")
+supported_rocm_versions_linux <- c("6.4")
+
+is_rocm_version <- function(x) {
+  grepl("^rocm", x, ignore.case = FALSE)
+}
+
+check_supported_rocm_version_linux <- function(version) {
+  ver <- sub("^rocm", "", version)
+  if (!ver %in% supported_rocm_versions_linux) {
+    cli_abort(c(
+      x = "Unsupported ROCm version {.val {version}}",
+      i = "Currently supported versions are: {.val {paste0('rocm', supported_rocm_versions_linux)}}."
+    ))
+  }
+}
+
+rocm_bundle_is_installed <- function(install_path) {
+  file.exists(file.path(install_path, "lib", "libtorch_hip.so"))
+}
 
 # CUDA version detection priority:
 #
@@ -472,7 +498,9 @@ cuda_version <- function() {
   if (is_windows()) {
     return(cuda_version_from_system_windows())
   }
-  return(cuda_version_from_system_linux())
+  cuda_ver <- cuda_version_from_system_linux()
+  if (!is.null(cuda_ver)) return(cuda_ver)
+  return(rocm_version_from_system_linux())
 }
 
 cuda_version_from_system_linux <- function() {
@@ -562,6 +590,29 @@ check_supported_cuda_version_linux <- function(version) {
   check_supported_version(version, supported_cuda_versions_linux)
 }
 
+rocm_version_from_system_linux <- function() {
+  rocm_home <- Sys.getenv("ROCM_PATH", Sys.getenv("ROCM_HOME", "/opt/rocm"))
+
+  version_file <- file.path(rocm_home, ".info", "version")
+  if (file.exists(version_file)) {
+    raw <- tryCatch(readLines(version_file, n = 1, warn = FALSE), error = function(e) NULL)
+    if (!is.null(raw)) {
+      ver <- sub("(\\d+\\.\\d+).*", "\\1", gsub("-.*", "", trimws(raw)))
+      rocm_ver <- paste0("rocm", ver)
+      installer_message("Found ROCm version {.strong {rocm_ver}} in {.path {version_file}}.")
+      ok <- tryCatch({
+        check_supported_rocm_version_linux(rocm_ver)
+        TRUE
+      }, error = function(e) FALSE)
+      if (ok) return(rocm_ver)
+      installer_message("ROCm version {.val {rocm_ver}} is not supported, ignoring.")
+    }
+  }
+
+  installer_message("No ROCm installation found at {.path {rocm_home}}.")
+  NULL
+}
+
 # Detect CUDA version from cudatoolkit R packages only (no system probing).
 # Used at startup by load_cudatoolkit_libs() and as steps 1-3 in cuda_version().
 # Returns a version string or NULL.
@@ -598,7 +649,7 @@ cuda_version_from_cudatoolkit <- function() {
 
   # CUDA=<version> — look for matching cudatoolkit package
   if (nzchar(cuda_env) && cuda_env != "cpu") {
-    pkg <- paste0("cuda", cuda_env)
+    pkg <- if (is_rocm_version(cuda_env)) cuda_env else paste0("cuda", cuda_env)
     if (requireNamespace(pkg, quietly = TRUE)) return(cuda_env)
     return(NULL)
   }
@@ -607,6 +658,14 @@ cuda_version_from_cudatoolkit <- function() {
   for (version in rev(supported)) {
     pkg <- paste0("cuda", version)
     if (requireNamespace(pkg, quietly = TRUE)) return(version)
+  }
+
+  # Auto-detect installed ROCm cudatoolkit packages (newest first)
+  if (is_linux()) {
+    for (version in rev(supported_rocm_versions_linux)) {
+      pkg <- paste0("rocm", version)
+      if (requireNamespace(pkg, quietly = TRUE)) return(paste0("rocm", version))
+    }
   }
 
   NULL
@@ -1293,13 +1352,14 @@ install_torch_sitrep <- function(verbose = TRUE) {
   if (verbose) {
     cli::cli_alert_info("Installation type: {.val {install_kind}}")
     if (!is.null(detected_cuda)) {
-      cli::cli_alert_info("Detected CUDA version: {.val {detected_cuda}}")
+      label <- if (is_rocm_version(detected_cuda)) "Detected ROCm version" else "Detected CUDA version"
+      cli::cli_alert_info("{label}: {.val {detected_cuda}}")
     }
   }
 
   # Check if detected CUDA version is supported
   # Reuses check_supported_cuda_version_* functions from installation
-  if (!is.null(detected_cuda) && (is_linux() || is_windows())) {
+  if (!is.null(detected_cuda) && !is_rocm_version(detected_cuda) && (is_linux() || is_windows())) {
     cuda_supported <- tryCatch({
       if (is_windows()) {
         check_supported_cuda_version_windows(detected_cuda)
@@ -1423,7 +1483,34 @@ install_torch_sitrep <- function(verbose = TRUE) {
   }
   
   results$cuda <- cuda_info
-  
+
+  # ============================================
+  # Section 5b: ROCm / HIP Status
+  # ============================================
+  is_rocm <- is_rocm_version(install_kind %||% "")
+  if (is_rocm) {
+    if (verbose) cli::cli_h1("ROCm / HIP Status")
+    if (verbose) cli::cli_alert_info("ROCm build: {.val {install_kind}}")
+
+    hip_found <- !is.na(install_path) && !is.null(install_path) &&
+      rocm_bundle_is_installed(install_path)
+
+    status_msg(
+      hip_found,
+      "libtorch_hip.so found (ROCm/HIP bundle)",
+      "libtorch_hip.so NOT found — install the ROCm libtorch kit"
+    )
+
+    if (!hip_found) {
+      issues <<- c(issues,
+        "ROCm build selected but libtorch_hip.so is missing.",
+        "Run make_rocm_kit.sh --install or set TORCH_URL to the ROCm libtorch archive."
+      )
+    }
+
+    results$rocm <- list(install_kind = install_kind, hip_lib_found = hip_found)
+  }
+
   # ============================================
   # Section 6: Backend Status
   # ============================================
@@ -1564,7 +1651,7 @@ install_torch_sitrep <- function(verbose = TRUE) {
   }
   
   # Issue: CUDA version mismatch
-  if (isTRUE(cuda_available) && !is.null(detected_cuda)) {
+  if (isTRUE(cuda_available) && !is.null(detected_cuda) && !is_rocm_version(detected_cuda)) {
     runtime_ver <- cuda_info$runtime_version
     if (!is.null(runtime_ver) && !is.na(runtime_ver) && 
         is.character(detected_cuda) && is.character(runtime_ver)) {
@@ -1578,10 +1665,11 @@ install_torch_sitrep <- function(verbose = TRUE) {
   }
   
   # Issue: CUDA expected but not available
-  if (isTRUE(lantern_started) && 
-      is.character(install_kind) && 
+  if (isTRUE(lantern_started) &&
+      is.character(install_kind) &&
       !is.na(install_kind) &&
-      install_kind != "cpu" && 
+      install_kind != "cpu" &&
+      !is_rocm_version(install_kind) &&
       !isTRUE(cuda_available)) {
     issues <<- c(issues,
       "CUDA build installed but CUDA not available.",

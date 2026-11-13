@@ -43,3 +43,8 @@ mnist-r
 hello.pt
 .cache/
 compile_flags.txt
+
+# ROCm kit build artifacts
+torch-rocm-kit/
+*.orig-make-rocm-kit
+*.kit-applied

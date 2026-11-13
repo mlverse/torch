@@ -18,26 +18,26 @@ jobs:
         config: 
           # when changing supported versions here, please modify supported versions
           # in install.R
-          - {os: macOS, version: cpu-intel, runner: macos-15-intel}
-          - {os: macOS, version: cpu-m1, runner: macos-15}
+          - {os: macOS, version: cpu-intel, runner: macos-15-intel, cmake: ''}
+          - {os: macOS, version: cpu-m1, runner: macos-15, cmake: ''}
           
-          - {os: ubuntu, version: cpu, runner: ubuntu-latest}
-          - {os: ubuntu, version: cu12.6, runner: ubuntu-22.04}
-          - {os: ubuntu, version: cu12.8, runner: ubuntu-22.04}
+          - {os: ubuntu, version: cpu, runner: ubuntu-latest, cmake: ''}
+          - {os: ubuntu, version: cu12.6, runner: ubuntu-22.04, cmake: ''}
+          - {os: ubuntu, version: cu12.8, runner: ubuntu-22.04, cmake: ''}
 
-          - {os: windows, version: cpu, runner: windows-2022}
-          - {os: windows, version: cu12.6, runner: windows-2022}
-          - {os: windows, version: cu12.8, runner: windows-2022}
+          - {os: windows, version: cpu, runner: windows-2022, cmake: ''}
+          - {os: windows, version: cu12.6, runner: windows-2022, cmake: ''}
+          - {os: windows, version: cu12.8, runner: windows-2022, cmake: ''}
 
         include:
-          - config: {os: ubuntu}
+          - config: {os: ubuntu, cmake: ''}
             container: ubuntu:20.04
           
-          - config: {version: cu12.6}
+          - config: {version: cu12.6, cmake: ''}
             cuda: 12.6
             cuda_patch: 3
           
-          - config: {version: cu12.8}
+          - config: {version: cu12.8, cmake: ''}
             cuda: 12.8
             cuda_patch: 1
         

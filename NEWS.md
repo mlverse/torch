@@ -48,6 +48,7 @@
   last class could not be ignored at all. Passing `0` is now an error instead of silently
   ignoring the first class. The default `-100`, and any other negative sentinel, is
   unaffected. The documented target range was corrected to \eqn{1 \leq target \leq C}.
+- Add experimental support for AMD GPU ROCm v6.4 (cregouby #1498)
 
 # torch 0.17.0
 
