@@ -57,3 +57,13 @@ test_that("TORCH_CUDATOOLKIT + CUDA=rocm6.4 conflict is detected", {
     expect_error(torch:::cuda_version_from_cudatoolkit(), "conflicts with")
   })
 })
+
+test_that("load_cudatoolkit_libs does not look for cudarocm6.4 package", {
+  with_mocked_bindings(
+    cuda_version_from_cudatoolkit = function() "rocm6.4",
+    .package = "torch",
+    {
+      expect_no_error(torch:::load_cudatoolkit_libs())
+    }
+  )
+})
