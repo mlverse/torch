@@ -63,17 +63,19 @@ optim_adam <- optimizer(
         }
       }
 
-      exp_avg <- state(param)[["exp_avg"]]
-      exp_avg_sq <- state(param)[["exp_avg_sq"]]
+      param_state <- state(param)
+      exp_avg <- param_state[["exp_avg"]]
+      exp_avg_sq <- param_state[["exp_avg_sq"]]
       if (amsgrad) {
-        max_exp_avg_sq <- state(param)[["max_exp_avg_sq"]]
+        max_exp_avg_sq <- param_state[["max_exp_avg_sq"]]
       }
       beta1 <- group$betas[[1]]
       beta2 <- group$betas[[2]]
 
-      state(param)[["step"]] <- state(param)[["step"]] + 1
-      bias_correction1 <- 1 - beta1^state(param)[["step"]]
-      bias_correction2 <- 1 - beta2^state(param)[["step"]]
+      param_state[["step"]] <- param_state[["step"]] + 1
+      state(param) <- param_state
+      bias_correction1 <- 1 - beta1^param_state[["step"]]
+      bias_correction2 <- 1 - beta2^param_state[["step"]]
 
       if (group$weight_decay != 0) {
         grad$add_(param, alpha = group$weight_decay)
