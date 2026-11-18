@@ -87,13 +87,15 @@ optim_adadelta <- optimizer(
         state(param)[["acc_delta"]] <- torch_zeros_like(param, memory_format = torch_preserve_format())
       }
 
-      square_avg <- state(param)[["square_avg"]]
-      acc_delta <- state(param)[["acc_delta"]]
+      param_state <- state(param)
+      square_avg <- param_state[["square_avg"]]
+      acc_delta <- param_state[["acc_delta"]]
 
       rho <- group[["rho"]]
       eps <- group[["eps"]]
 
-      state(param)[["step"]] <- state(param)[["step"]] + 1
+      param_state[["step"]] <- param_state[["step"]] + 1
+      state(param) <- param_state
 
       if (group[["weight_decay"]] != 0) {
         grad <- grad$add(param, alpha = group[["weight_decay"]])

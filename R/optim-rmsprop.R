@@ -69,10 +69,12 @@ optim_rmsprop <- optimizer(
         }
       }
 
-      square_avg <- state(param)[["square_avg"]]
+      param_state <- state(param)
+      square_avg <- param_state[["square_avg"]]
       alpha <- group[["alpha"]]
 
-      state(param)[["step"]] <- state(param)[["step"]] + 1
+      param_state[["step"]] <- param_state[["step"]] + 1
+      state(param) <- param_state
 
 
       if (group[["weight_decay"]] != 0) {
@@ -82,7 +84,7 @@ optim_rmsprop <- optimizer(
       square_avg$mul_(alpha)$addcmul_(grad, grad, value = 1 - alpha)
 
       if (group[["centered"]]) {
-        grad_avg <- state(param)[["grad_avg"]]
+        grad_avg <- param_state[["grad_avg"]]
         grad_avg$mul_(alpha)$add_(grad, alpha = 1 - alpha)
         avg <- square_avg$addcmul(grad_avg, grad_avg, value = -1)$sqrt_()$add_(group[["eps"]])
       } else {
@@ -90,7 +92,7 @@ optim_rmsprop <- optimizer(
       }
 
       if (group[["momentum"]] > 0) {
-        buf <- state(param)[["momentum_buffer"]]
+        buf <- param_state[["momentum_buffer"]]
         buf$mul_(group[["momentum"]])$addcdiv_(grad, avg)
         param$add_(buf, alpha = -group[["lr"]])
       } else {
