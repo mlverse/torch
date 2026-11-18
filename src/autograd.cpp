@@ -47,7 +47,7 @@ bool cpp_autograd_detect_anomaly_is_enabled() {
   return lantern_autograd_detect_anomaly_is_enabled();
 }
 
-// [[Rcpp::export]]
+// [[Rcpp::export(rng = false)]]
 torch::Tensor cpp_tensor_grad(torch::Tensor self) {
   return torch::Tensor(lantern_Tensor_grad(self.get()));
 }

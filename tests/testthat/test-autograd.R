@@ -882,3 +882,32 @@ test_that("local grad functions", {
   })
   
 })
+
+test_that("reading gradients does not initialize or modify R's RNG", {
+  withr::local_preserve_seed()
+  x <- torch_tensor(1, requires_grad = TRUE)
+  y <- torch_tensor(1, requires_grad = TRUE)
+  y$grad <- torch_ones(1)
+
+  if (exists(".Random.seed", envir = .GlobalEnv, inherits = FALSE)) {
+    rm(".Random.seed", envir = .GlobalEnv)
+  }
+  missing_grad <- x$grad
+  defined_grad <- y$grad
+  missing_is_undefined <- is_undefined_tensor(missing_grad)
+  defined_is_undefined <- is_undefined_tensor(defined_grad)
+  seed_created <- exists(".Random.seed", envir = .GlobalEnv, inherits = FALSE)
+
+  set.seed(123)
+  seed_before <- .Random.seed
+  invisible(x$grad)
+  invisible(y$grad)
+  invisible(is_undefined_tensor(missing_grad))
+  invisible(is_undefined_tensor(defined_grad))
+  seed_after <- .Random.seed
+
+  expect_true(missing_is_undefined)
+  expect_false(defined_is_undefined)
+  expect_false(seed_created)
+  expect_identical(seed_after, seed_before)
+})
