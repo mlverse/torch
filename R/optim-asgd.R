@@ -56,29 +56,33 @@ optim_asgd <- optimizer(
         state(param)[["ax"]] <- torch_zeros_like(param, memory_format = torch_preserve_format())
       }
 
-      state(param)[["step"]] <- state(param)[["step"]] + 1
+      param_state <- state(param)
+      param_state[["step"]] <- param_state[["step"]] + 1
+      state(param) <- param_state
 
       if (group[["weight_decay"]] != 0) {
         grad <- grad$add(param, alpha = group$weight_decay)
       }
 
       # decay term
-      param$mul_(1 - group$lambda * state(param)$eta)
+      param$mul_(1 - group$lambda * param_state$eta)
 
       # update parameter
-      param$add_(grad, alpha = -state(param)$eta)
+      param$add_(grad, alpha = -param_state$eta)
 
       # averaging
-      if (state(param)[["mu"]] != 1) {
-        state(param)[["ax"]]$add_(param$sub(state(param)[["ax"]])$mul(state(param)[["mu"]]))
+      if (param_state[["mu"]] != 1) {
+        param_state[["ax"]]$add_(param$sub(param_state[["ax"]])$mul(param_state[["mu"]]))
       } else {
-        state(param)[["ax"]]$copy_(param)
+        param_state[["ax"]]$copy_(param)
       }
 
       # update eta and mu
-      denominator <- (1 + group[["lambda"]] * group[["lr"]] * state(param)[["step"]])^group[["alpha"]]
-      state(param)[["eta"]] <- group[["lr"]] / denominator
-      state(param)[["mu"]] <- 1 / max(1, state(param)[["step"]] - group[["t0"]])
+      denominator <- (1 + group[["lambda"]] * group[["lr"]] * param_state[["step"]])^group[["alpha"]]
+      param_state[["eta"]] <- group[["lr"]] / denominator
+      state(param) <- param_state
+      param_state[["mu"]] <- 1 / max(1, param_state[["step"]] - group[["t0"]])
+      state(param) <- param_state
     })
   }
 )
