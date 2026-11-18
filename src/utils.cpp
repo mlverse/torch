@@ -25,9 +25,10 @@ XPtrTorchTensor to_index_tensor(XPtrTorchTensor t) {
     Rcpp::stop("Indexing starts at 1 but found a 0.");
   }
 
-  /// make it 0 based!
-  XPtrTorchTensor sign = lantern_Tensor_signbit_tensor(t.get());
-  sign = lantern_logical_not_tensor(sign.get());
+  // Positive indices are one-based; negative indices are already zero-based.
+  int zero = 0;
+  XPtrTorchScalar zero_scalar = lantern_Scalar((void*)&zero, "int");
+  XPtrTorchTensor sign = lantern_Tensor_ge_tensor_scalar(t.get(), zero_scalar.get());
 
   // cast from bool to int
   XPtrTorchTensorOptions options = lantern_TensorOptions();
