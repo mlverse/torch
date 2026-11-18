@@ -222,7 +222,7 @@ void cpp_shm_unlink(std::string name) {
 #endif
 }
 
-// [[Rcpp::export]]
+// [[Rcpp::export(rng = false)]]
 Rcpp::XPtr<XPtrTorchDtype> cpp_torch_tensor_dtype(torch::Tensor x) {
   XPtrTorchDtype out = lantern_Tensor_dtype(x.get());
   return make_xptr<XPtrTorchDtype>(out);
@@ -460,12 +460,12 @@ Rcpp::List cpp_as_array(Rcpp::XPtr<torch::Tensor> x) {
   Rcpp::stop("dtype '" + dtype + "' not handled");
 };
 
-// [[Rcpp::export]]
+// [[Rcpp::export(rng = false)]]
 int cpp_tensor_element_size(Rcpp::XPtr<torch::Tensor> x) {
   return lantern_Tensor_element_size(x->get());
 }
 
-// [[Rcpp::export]]
+// [[Rcpp::export(rng = false)]]
 std::vector<int> cpp_tensor_dim(Rcpp::XPtr<torch::Tensor> x) {
   auto ndim = lantern_Tensor_ndimension(x->get());
   std::vector<int> out;
@@ -475,17 +475,17 @@ std::vector<int> cpp_tensor_dim(Rcpp::XPtr<torch::Tensor> x) {
   return out;
 }
 
-// [[Rcpp::export]]
+// [[Rcpp::export(rng = false)]]
 int cpp_tensor_ndim (torch::Tensor x) {
   return lantern_Tensor_ndimension(x.get());
 }
 
-// [[Rcpp::export]]
+// [[Rcpp::export(rng = false)]]
 int cpp_tensor_numel(Rcpp::XPtr<torch::Tensor> x) {
   return lantern_Tensor_numel(x->get());
 }
 
-// [[Rcpp::export]]
+// [[Rcpp::export(rng = false)]]
 Rcpp::XPtr<XPtrTorchDevice> cpp_tensor_device(Rcpp::XPtr<torch::Tensor> self) {
   XPtrTorchDevice out = lantern_Tensor_device(self->get());
   return make_xptr<XPtrTorchDevice>(out);
