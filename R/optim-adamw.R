@@ -46,9 +46,10 @@ optim_adamw <- optimizer(
       }
     }
 
-    exp_avg      <- state(param)[["exp_avg"]]
-    exp_avg_sq   <- state(param)[["exp_avg_sq"]]
-    step         <- state(param)[["step"]]
+    param_state  <- state(param)
+    exp_avg      <- param_state[["exp_avg"]]
+    exp_avg_sq   <- param_state[["exp_avg_sq"]]
+    step         <- param_state[["step"]]
 
     # update step
     step$add_(1)
@@ -69,7 +70,7 @@ optim_adamw <- optimizer(
 
     if (amsgrad) {
       # Maintains the maximum of all 2nd moment running avg. till now
-      max_exp_avg_sqs <- state(param)[["max_exp_avg_sqs"]]
+      max_exp_avg_sqs <- param_state[["max_exp_avg_sqs"]]
       torch_maximum_out(max_exp_avg_sqs, exp_avg_sq, max_exp_avg_sqs)
       # Use the max. for normalizing running avg. of gradient
       denom <- (max_exp_avg_sqs$sqrt() / bias_correction2_sqrt)$add_(eps)
