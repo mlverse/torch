@@ -24,3 +24,15 @@ test_that("call_torch_function works as expected", {
     "check your spelling"
   )
 })
+
+test_that("call_torch_function looks up names only in the torch namespace", {
+  torch_not_a_real_function <- function(...) "wrong environment"
+  expect_error(
+    call_torch_function("torch_not_a_real_function", quiet = TRUE),
+    "check your spelling"
+  )
+  expect_equal_to_tensor(
+    call_torch_function("torch_relu", torch_tensor(-1), quiet = TRUE),
+    torch_tensor(0)
+  )
+})

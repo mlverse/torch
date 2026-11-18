@@ -48,8 +48,7 @@ call_torch_function <- function(name, ..., quiet = FALSE) {
   }
 
   namespace <- getNamespace("torch")
-  torch_namespace <- grep("^torch_", names(namespace), value = TRUE)
-  if (!name %in% torch_namespace) {
+  if (!exists(name, envir = namespace, inherits = FALSE)) {
     value_error(
       "No function named {name} can be found. Please check your spelling and that the desired function exists."
     )
