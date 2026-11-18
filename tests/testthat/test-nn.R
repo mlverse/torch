@@ -41,6 +41,32 @@ test_that("nn_modules can have child modules", {
   expect_equal(output$dim(), 2)
 })
 
+test_that("module lookup handles registered and ordinary members", {
+  net <- nn_module(
+    initialize = function() {
+      self$weight <- nn_parameter(torch_ones(1))
+      self$running <- nn_buffer(torch_zeros(1))
+      self$child <- nn_relu()
+      self$ordinary <- "field"
+    },
+    active = list(active_value = function(value) {
+      if (missing(value)) "active" else stop("read only")
+    }),
+    private = list(find_method = function(name) {
+      if (name == "dynamic") "found" else NULL
+    })
+  )()
+
+  expect_s3_class(net$weight, "nn_parameter")
+  expect_s3_class(net[["running"]], "nn_buffer")
+  expect_s3_class(net$child, "nn_relu")
+  expect_s3_class(net[[1]], "nn_relu")
+  expect_identical(net$ordinary, "field")
+  expect_identical(net$active_value, "active")
+  expect_identical(net$dynamic, "found")
+  expect_null(net$missing_member)
+})
+
 test_that("nn_sequential", {
   model <- nn_sequential(
     nn_linear(10, 100),

@@ -582,11 +582,13 @@ create_nn_module_callable <- function(instance) {
     return(NextMethod())
   }
 
+  # This is an R6 internal binding; bypass module dispatch when retrieving it.
+  private <- .subset2(x, ".__enclos_env__")[["private"]]
   if (is.numeric(y)) {
-    return(x[[".__enclos_env__"]][["private"]][["modules_"]][[y]])
+    return(private[["modules_"]][[y]])
   }
 
-  pars <- x[[".__enclos_env__"]][["private"]][["parameters_"]]
+  pars <- private[["parameters_"]]
   if (!is.null(pars)) {
     o <- pars[[y]]
     if (!is.null(o)) {
@@ -594,7 +596,7 @@ create_nn_module_callable <- function(instance) {
     }
   }
 
-  bufs <- x[[".__enclos_env__"]][["private"]][["buffers_"]]
+  bufs <- private[["buffers_"]]
   if (!is.null(bufs)) {
     o <- bufs[[y]]
     if (!is.null(o)) {
@@ -602,7 +604,7 @@ create_nn_module_callable <- function(instance) {
     }
   }
 
-  mods <- x[[".__enclos_env__"]][["private"]][["modules_"]]
+  mods <- private[["modules_"]]
   if (!is.null(mods)) {
     o <- mods[[y]]
     if (!is.null(o)) {
@@ -610,7 +612,7 @@ create_nn_module_callable <- function(instance) {
     }
   }
 
-  find_method <- x[[".__enclos_env__"]][["private"]][["find_method"]]
+  find_method <- private[["find_method"]]
   if (!is.null(find_method)) {
     o <- find_method(y)
     if (!is.null(o)) {
