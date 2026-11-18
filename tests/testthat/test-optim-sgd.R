@@ -85,3 +85,18 @@ test_that("optimizers skip parameters without gradients", {
     expect_equal(as.numeric(y), 2)
   }
 })
+
+test_that("SGD reuses momentum across steps", {
+  for (nesterov in c(FALSE, TRUE)) {
+    x <- torch_tensor(1, requires_grad = TRUE)
+    opt <- optim_sgd(x, lr = 0.1, momentum = 0.9, nesterov = nesterov)
+    x$grad <- torch_tensor(1)
+    opt$step()
+    opt$step()
+
+    expected <- if (nesterov) 0.539 else 0.71
+    expect_equal(as.numeric(x), expected, tolerance = 1e-6)
+    saved <- opt$state_dict()$state[["1"]]
+    expect_equal(as.numeric(saved$momentum_buffer), 1.9, tolerance = 1e-6)
+  }
+})
