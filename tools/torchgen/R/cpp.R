@@ -817,6 +817,8 @@ cpp <- function(path) {
     purrr::discard(~.x$name %in% SKIP_CPP_BINDING)
 
   needs_cpp_dispatcher <- function(group_decls, type) {
+    # Guarded R fast paths still need the C++ dispatcher as a fallback.
+    if (is_guarded_array_string_dispatch(group_decls, type)) return(TRUE)
     # Single overload or 2-overload with inline R dispatch don't need this
     if (length(group_decls) == 1) return(FALSE)
     if (length(group_decls) == 2 && !is.null(r_inline_dispatch(group_decls, type))) return(FALSE)

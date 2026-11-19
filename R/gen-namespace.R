@@ -5452,19 +5452,43 @@ torch_conv_transpose3d <- function(input, weight, bias = list(), stride = 1L, pa
 
 #' @rdname torch_conv1d
 torch_conv1d <- function(input, weight, bias = list(), stride = 1L, padding = 0L, dilation = 1L, groups = 1L) {
-  cpp_torch_dispatch_namespace_conv1d(mget(x = c("input", "weight", "bias", "stride", "padding", "dilation", "groups")))
+  if (!missing(input) && inherits(input, 'torch_tensor') && !missing(weight) && inherits(weight, 'torch_tensor') && (is.character(padding) || is.numeric(padding) || is.list(padding) || is.null(padding))) {
+    if (!is.character(padding)) {
+      cpp_torch_namespace_conv1d_input_Tensor_weight_Tensor_padding_IntArrayRef(input, weight, bias, stride, padding, dilation, groups)
+    } else {
+      cpp_torch_namespace_conv1d_input_Tensor_weight_Tensor_padding_c10string_view(input, weight, bias, stride, padding, dilation, groups)
+    }
+  } else {
+    cpp_torch_dispatch_namespace_conv1d(mget(x = c("input", "weight", "bias", "stride", "padding", "dilation", "groups")))
+  }
 }
 
 
 #' @rdname torch_conv2d
 torch_conv2d <- function(input, weight, bias = list(), stride = 1L, padding = 0L, dilation = 1L, groups = 1L) {
-  cpp_torch_dispatch_namespace_conv2d(mget(x = c("input", "weight", "bias", "stride", "padding", "dilation", "groups")))
+  if (!missing(input) && inherits(input, 'torch_tensor') && !missing(weight) && inherits(weight, 'torch_tensor') && (is.character(padding) || is.numeric(padding) || is.list(padding) || is.null(padding))) {
+    if (!is.character(padding)) {
+      cpp_torch_namespace_conv2d_input_Tensor_weight_Tensor_padding_IntArrayRef(input, weight, bias, stride, padding, dilation, groups)
+    } else {
+      cpp_torch_namespace_conv2d_input_Tensor_weight_Tensor_padding_c10string_view(input, weight, bias, stride, padding, dilation, groups)
+    }
+  } else {
+    cpp_torch_dispatch_namespace_conv2d(mget(x = c("input", "weight", "bias", "stride", "padding", "dilation", "groups")))
+  }
 }
 
 
 #' @rdname torch_conv3d
 torch_conv3d <- function(input, weight, bias = list(), stride = 1L, padding = 0L, dilation = 1L, groups = 1L) {
-  cpp_torch_dispatch_namespace_conv3d(mget(x = c("input", "weight", "bias", "stride", "padding", "dilation", "groups")))
+  if (!missing(input) && inherits(input, 'torch_tensor') && !missing(weight) && inherits(weight, 'torch_tensor') && (is.character(padding) || is.numeric(padding) || is.list(padding) || is.null(padding))) {
+    if (!is.character(padding)) {
+      cpp_torch_namespace_conv3d_input_Tensor_weight_Tensor_padding_IntArrayRef(input, weight, bias, stride, padding, dilation, groups)
+    } else {
+      cpp_torch_namespace_conv3d_input_Tensor_weight_Tensor_padding_c10string_view(input, weight, bias, stride, padding, dilation, groups)
+    }
+  } else {
+    cpp_torch_dispatch_namespace_conv3d(mget(x = c("input", "weight", "bias", "stride", "padding", "dilation", "groups")))
+  }
 }
 
 

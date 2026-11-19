@@ -473,7 +473,7 @@ r_type_check <- function(target_type, all_types, arg_r_name) {
   }
 
   # IntArrayRef | c10::string_view
-  if (key == "IntArrayRef|c10::string_view") {
+  if (setequal(all_types, c("IntArrayRef", "c10::string_view"))) {
     if (target_type == "c10::string_view")
       return(glue::glue("is.character({arg_r_name})"))
     else
@@ -523,6 +523,21 @@ r_type_check <- function(target_type, all_types, arg_r_name) {
   NULL
 }
 
+# These overloads retain the C++ dispatcher for inputs outside the guarded
+# tensor and numeric/list/string cases.
+is_guarded_array_string_dispatch <- function(decls, fun_type) {
+  if (fun_type != "namespace" || length(decls) != 2) return(FALSE)
+  arg <- get_single_multitype_arg(decls)
+  if (is.null(arg) || !setequal(r_argument_expected_types(arg, decls),
+                                c("IntArrayRef", "c10::string_view"))) return(FALSE)
+  other_args <- setdiff(get_dispatch_arguments(decls), arg)
+  if (!all(vapply(other_args, function(x) {
+    identical(r_argument_expected_types(x, decls), "Tensor")
+  }, logical(1)))) return(FALSE)
+  names <- lapply(decls, function(x) vapply(x$arguments, `[[`, "", "name"))
+  setequal(names[[1]], names[[2]])
+}
+
 # Try to generate inline if/else dispatch for functions with exactly 2
 # overloads where one dispatch arg has multiple types.
 # Returns NULL if inline dispatch is not possible.
@@ -533,6 +548,9 @@ r_inline_dispatch <- function(decls, fun_type) {
 
   arg_r_name <- r_argument_name(multitype_arg)
   all_types <- r_argument_expected_types(multitype_arg, decls)
+  array_string <- setequal(all_types, c("IntArrayRef", "c10::string_view"))
+  guarded <- is_guarded_array_string_dispatch(decls, fun_type)
+  if (array_string && !guarded) return(NULL)
 
   # Group overloads by the type of the multi-type dispatch arg.
   overload_by_type <- list()
@@ -574,6 +592,26 @@ r_inline_dispatch <- function(decls, fun_type) {
     lines <- c(lines, glue::glue("  {branches[[i]]$call}"))
   }
   lines <- c(lines, "}")
+  if (guarded) {
+    tensor_args <- setdiff(get_dispatch_arguments(decls), multitype_arg)
+    tensor_checks <- vapply(tensor_args, function(x) {
+      x <- r_argument_name(x)
+      glue::glue("!missing({x}) && inherits({x}, 'torch_tensor')")
+    }, "")
+    arg_check <- glue::glue("(is.character({arg_r_name}) || is.numeric({arg_r_name}) || is.list({arg_r_name}) || is.null({arg_r_name}))")
+    if (!multitype_arg %in% get_arguments_with_default(decls)) {
+      arg_check <- glue::glue("!missing({arg_r_name}) && {arg_check}")
+    }
+    checks <- paste(c(tensor_checks, arg_check), collapse = " && ")
+    args <- purrr::map_chr(get_arguments_order(decls), r_argument_name)
+    args <- paste0('"', args, '"', collapse = ", ")
+    dispatcher <- glue::glue("cpp_torch_dispatch_namespace_{decls[[1]]$name}")
+    return(glue::glue('if ({checks}) {{
+{paste0("    ", lines, collapse = "\n")}
+  }} else {{
+    {dispatcher}(mget(x = c({args})))
+  }}'))
+  }
   paste(lines, collapse = "\n")
 }
 
