@@ -213,7 +213,6 @@ torch::Tensor cpp_tensor_grad(torch::Tensor self);
 RcppExport SEXP _torch_cpp_tensor_grad(SEXP selfSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< torch::Tensor >::type self(selfSEXP);
     rcpp_result_gen = Rcpp::wrap(cpp_tensor_grad(self));
     return rcpp_result_gen;
@@ -51765,7 +51764,6 @@ bool cpp_tensor_is_undefined(Rcpp::XPtr<torch::Tensor> self);
 RcppExport SEXP _torch_cpp_tensor_is_undefined(SEXP selfSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< Rcpp::XPtr<torch::Tensor> >::type self(selfSEXP);
     rcpp_result_gen = Rcpp::wrap(cpp_tensor_is_undefined(self));
     return rcpp_result_gen;
