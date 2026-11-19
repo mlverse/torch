@@ -70,7 +70,7 @@ optim_asgd <- optimizer(
 
       # averaging
       if (state(param)[["mu"]] != 1) {
-        state(param)[["mu"]]$add_(param$sub(state(param)[["ax"]])$mul(state(param)[["mu"]]))
+        state(param)[["ax"]]$add_(param$sub(state(param)[["ax"]])$mul(state(param)[["mu"]]))
       } else {
         state(param)[["ax"]]$copy_(param)
       }
