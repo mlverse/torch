@@ -70,11 +70,13 @@ optim_adagrad <- optimizer(
 
   step = function(closure = NULL) {
     private$step_helper(closure, function(group, param, g, p) {
-      state(param)[["step"]] <- state(param)[["step"]] + 1
+      param_state <- state(param)
+      param_state[["step"]] <- param_state[["step"]] + 1
+      state(param) <- param_state
 
       grad <- param$grad
-      state_sum <- state(param)[["sum"]]
-      state_step <- state(param)[["step"]]
+      state_sum <- param_state[["sum"]]
+      state_step <- param_state[["step"]]
 
       if (group$weight_decay != 0) {
         # if (grad$is_sparse) {
@@ -83,7 +85,7 @@ optim_adagrad <- optimizer(
         grad <- grad$add(param, alpha = group$weight_decay)
       }
 
-      clr <- group$lr / (1 + (state(param)[["step"]] - 1) * group$lr_decay)
+      clr <- group$lr / (1 + (state_step - 1) * group$lr_decay)
 
       # Sparse tensors handling will be added in future
       # if (grad$is_sparse) {
@@ -98,8 +100,8 @@ optim_adagrad <- optimizer(
       # param$add_(_make_sparse(grad, grad_indices, grad_values / std_values), alpha=-clr)
       # } else {
 
-      state(param)[["sum"]]$addcmul_(grad, grad, value = 1)
-      std <- state(param)[["sum"]]$sqrt()$add_(group$eps)
+      state_sum$addcmul_(grad, grad, value = 1)
+      std <- state_sum$sqrt()$add_(group$eps)
       param$addcdiv_(grad, std, value = -clr)
     })
   }

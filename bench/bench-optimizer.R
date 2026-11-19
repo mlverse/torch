@@ -1,6 +1,6 @@
 # Compare installed torch builds with: Rscript bench/bench-optimizer.R
 # Many small parameters expose per-parameter optimizer overhead. Set
-# TORCH_BENCH_OPTIMIZER=adamw to benchmark AdamW instead of Adam.
+# TORCH_BENCH_OPTIMIZER to adamw or adagrad to benchmark other optimizers.
 library(torch)
 
 parameters <- lapply(seq_len(250), function(i) {
@@ -10,6 +10,7 @@ parameters <- lapply(seq_len(250), function(i) {
 })
 optimizer_name <- Sys.getenv("TORCH_BENCH_OPTIMIZER", "adam")
 optimizer_fn <- switch(optimizer_name, adam = optim_adam, adamw = optim_adamw,
+                       adagrad = optim_adagrad,
                        stop("Unknown optimizer: ", optimizer_name))
 optimizer <- optimizer_fn(parameters)
 optimizer$step() # Initialize optimizer state before timing.
