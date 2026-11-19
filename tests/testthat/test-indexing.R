@@ -186,6 +186,19 @@ test_that("indexing with long tensors", {
   expect_error(x[index, ], regexp = "Indexing starts at 1")
 })
 
+test_that("tensor index conversion handles positive and negative values", {
+  dtypes <- list(torch_int8(), torch_int16(), torch_int32(), torch_int64(),
+                 torch_float32(), torch_float64())
+  for (dtype in dtypes) {
+    index <- torch_tensor(c(-3, -1, 1, 3), dtype = dtype)
+    expect_equal(as.numeric(to_index_tensor(index)), c(-3, -1, 0, 2))
+    expect_error(to_index_tensor(torch_tensor(c(-1, 0, 1), dtype = dtype)),
+                 "Indexing starts at 1")
+  }
+  empty <- torch_tensor(numeric(), dtype = torch_long())
+  expect_length(as.numeric(to_index_tensor(empty)), 0)
+})
+
 test_that("can use the slc construct", {
   x <- torch_randn(10, 10)
   r <- as_array(x)
