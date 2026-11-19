@@ -293,7 +293,7 @@ for (epoch in 1:10) {
   
   cat(sprintf("Loss at epoch %d: %3f\n", epoch, mean(l)))
 }
-#> Loss at epoch 1: 98.626470
+#> Loss at epoch 1: 54.924345
 #> Loss at epoch 2: 2.068251
 #> Loss at epoch 3: 2.068251
 #> Loss at epoch 4: 2.068251

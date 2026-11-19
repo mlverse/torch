@@ -49,9 +49,9 @@ a
 torch_argmin(a, dim=1)
 }
 #> torch_tensor
-#>  2
-#>  2
+#>  3
 #>  4
 #>  2
+#>  4
 #> [ CPULongType{4} ]
 ```
