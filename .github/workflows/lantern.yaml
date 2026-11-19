@@ -57,9 +57,7 @@ jobs:
       - uses: actions/checkout@v7
       
       - name: Setup cmake
-        uses: jwlawson/actions-setup-cmake@v2
-        with:
-          cmake-version: "3.25.1"
+        uses: ./.github/actions/setup-cmake
 
       - name: Install CUDA
         if: ${{matrix.cuda != ''}}
