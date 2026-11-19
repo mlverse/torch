@@ -179,8 +179,9 @@ Optimizer <- R6::R6Class(
         group <- self$param_groups[[g]]
         for (p in seq_along(group$params)) {
           param <- group$params[[p]]
+          grad <- param$grad
 
-          if (is.null(param$grad) || is_undefined_tensor(param$grad)) {
+          if (is.null(grad) || is_undefined_tensor(grad)) {
             next
           }
 

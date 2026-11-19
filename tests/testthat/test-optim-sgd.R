@@ -66,3 +66,22 @@ test_that("zero_grad set_to_none", {
 
   expect_true(is_undefined_tensor(x$grad))
 })
+
+test_that("optimizers skip parameters without gradients", {
+  for (optimizer in list(optim_sgd, optim_adam)) {
+    x <- torch_tensor(1, requires_grad = TRUE)
+    y <- torch_tensor(2, requires_grad = TRUE)
+    opt <- optimizer(list(x, y), lr = 0.1)
+
+    (2 * x)$backward()
+    opt$step()
+    expect_lt(as.numeric(x), 1)
+    expect_equal(as.numeric(y), 2)
+
+    opt$zero_grad(set_to_none = TRUE)
+    before <- as.numeric(x)
+    opt$step()
+    expect_equal(as.numeric(x), before)
+    expect_equal(as.numeric(y), 2)
+  }
+})
