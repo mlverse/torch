@@ -53,11 +53,14 @@ optim_rprop <- optimizer(
       step_size_min <- group[["step_sizes"]][[1]]
       step_size_max <- group[["step_sizes"]][[2]]
 
-      step_size <- state(param)[["step_size"]]
+      param_state <- state(param)
+      step_size <- param_state[["step_size"]]
+      prev <- param_state[["prev"]]
 
-      state(param)[["step"]] <- state(param)[["step"]] + 1
+      param_state[["step"]] <- param_state[["step"]] + 1
+      state(param) <- param_state
 
-      sign <- grad$mul(state(param)[["prev"]])$sign()
+      sign <- grad$mul(prev)$sign()
       sign[sign$gt(0)] <- etaplus
       sign[sign$lt(0)] <- etaminus
       sign[sign$eq(0)] <- 1
@@ -73,7 +76,7 @@ optim_rprop <- optimizer(
       # update parameters
       param$addcmul_(grad$sign(), step_size, value = -1)
 
-      state(param)[["prev"]]$copy_(grad)
+      prev$copy_(grad)
     })
   }
 )
