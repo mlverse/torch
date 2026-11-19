@@ -135,9 +135,6 @@ nn_Module <- R6::R6Class(
       for (param_name in names(private$parameters_)) {
         param <- private$parameters_[[param_name]]
         if (!is.null(param)) {
-          if (!keepvars) {
-            param$detach
-          }
           out[[paste0(prefix, param_name)]] <- keepvars_or_detach(param, keepvars)
         }
       }
