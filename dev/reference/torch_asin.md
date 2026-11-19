@@ -31,8 +31,8 @@ torch_asin(a)
 }
 #> torch_tensor
 #>     nan
-#>  0.3527
-#>     nan
-#>  0.1249
+#> -1.1949
+#> -0.5968
+#>  0.1697
 #> [ CPUFloatType{4} ]
 ```
