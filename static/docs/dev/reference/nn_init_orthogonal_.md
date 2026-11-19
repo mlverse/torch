@@ -1,0 +1,38 @@
+# Orthogonal initialization
+
+Fills the input `Tensor` with a (semi) orthogonal matrix, as described
+in
+`Exact solutions to the nonlinear dynamics of learning in deep linear neural networks` -
+Saxe, A. et al. (2013). The input tensor must have at least 2
+dimensions, and for tensors with more than 2 dimensions the trailing
+dimensions are flattened.
+
+## Usage
+
+``` r
+nn_init_orthogonal_(tensor, gain = 1)
+```
+
+## Arguments
+
+- tensor:
+
+  an n-dimensional `Tensor`
+
+- gain:
+
+  optional scaling factor
+
+## Examples
+
+``` r
+if (torch_is_installed()) {
+w <- torch_empty(3, 5)
+nn_init_orthogonal_(w)
+}
+#> torch_tensor
+#> -0.6794  0.6194  0.0311 -0.3871 -0.0628
+#>  0.1313  0.6264 -0.0755  0.7277  0.2350
+#>  0.1229  0.1384  0.4626  0.1806 -0.8480
+#> [ CPUFloatType{3,5} ]
+```

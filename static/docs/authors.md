@@ -1,0 +1,42 @@
+# Authors and Citation
+
+## Authors
+
+- **Tomasz Kalinowski**. Contributor, maintainer.
+
+- **Daniel Falbel**. Author, copyright holder.
+
+- **Javier Luraschi**. Author.
+
+- **Dmitriy Selivanov**. Contributor.
+
+- **Athos Damiani**. Contributor.
+
+- **Christophe Regouby**. Contributor.
+
+- **Krzysztof Joachimiak**. Contributor.
+
+- **Hamada S. Badr**. Contributor.
+
+- **Sebastian Fischer**. Contributor.
+
+- **Maximilian Pichler**. Contributor.
+
+- **RStudio**. Copyright holder.
+
+## Citation
+
+Source:
+[`DESCRIPTION`](https://github.com/mlverse/torch/blob/main/DESCRIPTION)
+
+Falbel D, Luraschi J (2026). *torch: Tensors and Neural Networks with
+'GPU' Acceleration*. R package version 0.17.0,
+<https://torch.mlverse.org/docs>.
+
+    @Manual{,
+      title = {torch: Tensors and Neural Networks with 'GPU' Acceleration},
+      author = {Daniel Falbel and Javier Luraschi},
+      year = {2026},
+      note = {R package version 0.17.0},
+      url = {https://torch.mlverse.org/docs},
+    }
