@@ -63,41 +63,21 @@ r7_func_factory <- function(self, private, fn) {
   f
 }
 
-find_method <- function(self, name) {
-  if (inherits(self, "R7_private"))
-    find_method.R7_private(self, name)
-  else
-    find_method.default(self, name)
-}
-
-find_method.default <- function(self, name) {
-  # private is a special case because we need to return an object that is aware
-  # of which objets is its `self`, and not only the private_methods env.
-  if (name == "private") {
-    return(structure(
-      list(),
-      r7_slf = self,
-      class = .r7_pvt_class
-    ))
-  }
-  method <- .generators[[class(self)[1]]][["methods"]][[name]]
-  r7_func_factory(self, self$private, method)
-}
-
-find_method.R7_private <- function(self, name) {
-  slf <- attr(self, "r7_slf")
-  
-  env <- .generators[[class(slf)[1]]][["methods"]][["private"]]
-  method <- env[[name]]
-  r7_func_factory(slf, slf$private, method)  
-}
-
 extract_method <- function(self, name, call = TRUE) {
-  method <- find_method(self, name)
-  if (call && isTRUE(attr(method, "active"))) {
-    method()
+  if (inherits(self, "R7_private")) {
+    self <- attr(self, "r7_slf")
+    method <- .generators[[class(self)[1]]][["methods"]][["private"]][[name]]
   } else {
-    method
+    if (name == "private") {
+      return(structure(list(), r7_slf = self, class = .r7_pvt_class))
+    }
+    method <- .generators[[class(self)[1]]][["methods"]][[name]]
+  }
+
+  if (call && isTRUE(attr(method, "active"))) {
+    method(self, self$private)
+  } else {
+    r7_func_factory(self, self$private, method)
   }
 }
 
