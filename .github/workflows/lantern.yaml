@@ -50,14 +50,17 @@ jobs:
         if: matrix.container != ''
         run: |
           DEBIAN_FRONTEND="noninteractive" apt-get update
-          DEBIAN_FRONTEND="noninteractive" apt-get install -y curl sudo libxml2-dev wget chrpath rsync git build-essential
+          DEBIAN_FRONTEND="noninteractive" apt-get install -y curl sudo libxml2-dev wget chrpath rsync git build-essential unzip
           curl -fsSL https://get.docker.com -o get-docker.sh
           DRY_RUN=1 sh ./get-docker.sh
 
       - uses: actions/checkout@v7
       
       - name: Setup cmake
-        uses: ./.github/actions/setup-cmake
+        uses: lukka/get-cmake@v4.4.2
+        with:
+          cmakeVersion: "3.25.1"
+          useCloudCache: false
 
       - name: Install CUDA
         if: ${{matrix.cuda != ''}}

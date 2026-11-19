@@ -68,8 +68,11 @@ jobs:
           r_version: ${{ matrix.config.r_version}}
 
       - name: Setup cmake
-        uses: ./.github/actions/setup-cmake
+        uses: lukka/get-cmake@v4.4.2
         if: ${{ env.BUILD_LANTERN == 1}}
+        with:
+          cmakeVersion: "latest"
+          useCloudCache: false
       
       - uses: r-lib/actions/setup-r-dependencies@v2
         with:
