@@ -51672,7 +51672,6 @@ Rcpp::XPtr<XPtrTorchDtype> cpp_torch_tensor_dtype(torch::Tensor x);
 RcppExport SEXP _torch_cpp_torch_tensor_dtype(SEXP xSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< torch::Tensor >::type x(xSEXP);
     rcpp_result_gen = Rcpp::wrap(cpp_torch_tensor_dtype(x));
     return rcpp_result_gen;
@@ -51709,7 +51708,6 @@ int cpp_tensor_element_size(Rcpp::XPtr<torch::Tensor> x);
 RcppExport SEXP _torch_cpp_tensor_element_size(SEXP xSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< Rcpp::XPtr<torch::Tensor> >::type x(xSEXP);
     rcpp_result_gen = Rcpp::wrap(cpp_tensor_element_size(x));
     return rcpp_result_gen;
@@ -51720,7 +51718,6 @@ std::vector<int> cpp_tensor_dim(Rcpp::XPtr<torch::Tensor> x);
 RcppExport SEXP _torch_cpp_tensor_dim(SEXP xSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< Rcpp::XPtr<torch::Tensor> >::type x(xSEXP);
     rcpp_result_gen = Rcpp::wrap(cpp_tensor_dim(x));
     return rcpp_result_gen;
@@ -51731,7 +51728,6 @@ int cpp_tensor_ndim(torch::Tensor x);
 RcppExport SEXP _torch_cpp_tensor_ndim(SEXP xSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< torch::Tensor >::type x(xSEXP);
     rcpp_result_gen = Rcpp::wrap(cpp_tensor_ndim(x));
     return rcpp_result_gen;
@@ -51742,7 +51738,6 @@ int cpp_tensor_numel(Rcpp::XPtr<torch::Tensor> x);
 RcppExport SEXP _torch_cpp_tensor_numel(SEXP xSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< Rcpp::XPtr<torch::Tensor> >::type x(xSEXP);
     rcpp_result_gen = Rcpp::wrap(cpp_tensor_numel(x));
     return rcpp_result_gen;
@@ -51753,7 +51748,6 @@ Rcpp::XPtr<XPtrTorchDevice> cpp_tensor_device(Rcpp::XPtr<torch::Tensor> self);
 RcppExport SEXP _torch_cpp_tensor_device(SEXP selfSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< Rcpp::XPtr<torch::Tensor> >::type self(selfSEXP);
     rcpp_result_gen = Rcpp::wrap(cpp_tensor_device(self));
     return rcpp_result_gen;

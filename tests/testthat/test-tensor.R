@@ -701,3 +701,25 @@ test_that("head and tail works", {
   expect_equal_to_r(head(x, 2)$to_dense(), head(as.matrix(x$to_dense()), 2))
   expect_true(torch_allclose(tail(x, 2)$to_dense(), tail(x$to_dense(), 2)))
 })
+
+test_that("tensor metadata inspection does not initialize or modify R's RNG", {
+  withr::local_preserve_seed()
+  tensors <- list(torch_tensor(1), torch_ones(2, 3), torch_empty(0, 3))
+
+  inspect <- function(x) {
+    list(x$shape, x$dim(), x$numel(), x$element_size(), x$device, x$dtype)
+  }
+  if (exists(".Random.seed", envir = .GlobalEnv, inherits = FALSE)) {
+    rm(".Random.seed", envir = .GlobalEnv)
+  }
+  invisible(lapply(tensors, inspect))
+  seed_created <- exists(".Random.seed", envir = .GlobalEnv, inherits = FALSE)
+
+  set.seed(123)
+  seed_before <- .Random.seed
+  invisible(lapply(tensors, inspect))
+  seed_after <- .Random.seed
+
+  expect_false(seed_created)
+  expect_identical(seed_after, seed_before)
+})
