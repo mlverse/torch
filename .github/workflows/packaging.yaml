@@ -65,10 +65,15 @@ jobs:
           r_version: ${{ matrix.config.r_version}}
           makevars: true
       
+      - name: Install unzip
+        if: matrix.container != ''
+        run: sudo apt-get update && sudo apt-get install -y unzip
+
       - name: Setup cmake
-        uses: jwlawson/actions-setup-cmake@v2
+        uses: lukka/get-cmake@v4.4.2
         with:
-          cmake-version: "3.25.1"
+          cmakeVersion: "3.25.1"
+          useCloudCache: false
 
       - name: Install CUDA
         if: ${{matrix.cuda != ''}}

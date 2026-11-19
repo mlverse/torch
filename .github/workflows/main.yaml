@@ -68,10 +68,11 @@ jobs:
           r_version: ${{ matrix.config.r_version}}
 
       - name: Setup cmake
-        uses: jwlawson/actions-setup-cmake@v2
+        uses: lukka/get-cmake@v4.4.2
         if: ${{ env.BUILD_LANTERN == 1}}
         with:
-          cmake-version: "latest" 
+          cmakeVersion: "latest"
+          useCloudCache: false
       
       - uses: r-lib/actions/setup-r-dependencies@v2
         with:
