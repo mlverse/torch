@@ -406,3 +406,151 @@ test_that("mean works", {
   expect_tensor_shape(mean(x, dim = 1, keepdim = TRUE), c(1, 100))
   expect_tensor_shape(mean(x, dim = 2, keepdim = TRUE), c(20, 1))
 })
+
+test_that("lhs scalars promote like Python scalars", {
+  x <- torch_ones(3, dtype = torch_bfloat16())
+  for (r in list(1 + x, 1 - x, 2 * x, 1 / x, 2^x, 5 %% x, 5 %/% x)) {
+    expect_true(r$dtype == torch_bfloat16())
+    expect_equal(r$shape, 3L)
+  }
+  expect_equal_to_r((1 - x)$to(dtype = torch_float()), rep(0, 3))
+  expect_equal_to_r((2 / x)$to(dtype = torch_float()), rep(2, 3))
+  expect_equal_to_r((2^x)$to(dtype = torch_float()), rep(2, 3))
+  expect_equal_to_r((5 %% x)$to(dtype = torch_float()), rep(0, 3))
+  expect_equal_to_r((5 %/% x)$to(dtype = torch_float()), rep(5, 3))
+
+  # an integer scalar keeps an integer tensor's dtype
+  y <- torch_ones(3, dtype = torch_long())
+  for (r in list(1L + y, 1L - y, 2L * y, 2L^y, 5L %% y, 5L %/% y)) {
+    expect_true(r$dtype == torch_long())
+  }
+  expect_equal_to_r(5L %/% y, rep(5, 3))
+  expect_equal_to_r(5L %% y, rep(0, 3))
+  # while a double scalar promotes it to the default float dtype, as `y + 1` does
+  expect_true((1 + y)$dtype == torch_float())
+  expect_true((2.5 %/% y)$dtype == torch_float())
+  expect_equal_to_r(2.5 %/% y, rep(2, 3))
+  # division of integer tensors still promotes to the default dtype
+  expect_true((1L / y)$dtype == torch_float())
+
+  # dimensioned lhs operands keep dictating promotion and shape
+  expect_true((c(1, 2, 3) - x)$dtype == torch_float())
+  expect_tensor_shape(matrix(2) * torch_ones(3), c(1, 3))
+  expect_true((matrix(2) * x)$dtype == torch_float())
+})
+
+test_that("lhs scalars behave like rhs scalars", {
+  # a scalar and a 0-dim tensor give a 0-dim result on both sides
+  z <- torch_ones(3, dtype = torch_bfloat16())$sum()
+  expect_true((1 - z)$dtype == torch_bfloat16())
+  expect_true((2 * z)$dtype == torch_bfloat16())
+  expect_equal((1 - z)$shape, (z - 1)$shape)
+  expect_equal((1 == z)$shape, (z == 1)$shape)
+  expect_equal_to_r((1 - z)$to(dtype = torch_float()), -2)
+
+  # a double scalar is no longer rounded through float32 first
+  d <- torch_tensor(1, dtype = torch_float64())
+  expect_equal(as.numeric(0.1 + d), as.numeric(d + 0.1), tolerance = 0)
+  expect_equal(as.numeric(0.1 + d), 1.1, tolerance = 0)
+
+  # an integer scalar outside the dtype's range is treated the same on both
+  # sides. It currently wraps, as `u + 300L` already did; this records the
+  # present behavior, not a decision to keep it.
+  u <- torch_ones(3, dtype = torch_uint8())
+  expect_true((300L + u)$dtype == torch_uint8())
+  expect_equal(as.integer(as_array(300L + u)), as.integer(as_array(u + 300L)))
+})
+
+test_that("comparisons with a lhs scalar", {
+  y <- torch_tensor(c(1, 2, 3), dtype = torch_long())
+  expect_equal_to_r(2.5 > y, c(TRUE, TRUE, FALSE))
+  expect_equal_to_r(2.5 < y, c(FALSE, FALSE, TRUE))
+  expect_equal_to_r(2 >= y, c(TRUE, TRUE, FALSE))
+  expect_equal_to_r(2 <= y, c(FALSE, TRUE, TRUE))
+  expect_equal_to_r(2 == y, c(FALSE, TRUE, FALSE))
+  expect_equal_to_r(2 != y, c(TRUE, FALSE, TRUE))
+  expect_equal_to_r(y != c(1, 5, 3), c(FALSE, TRUE, FALSE))
+
+  b <- torch_tensor(c(TRUE, FALSE))
+  expect_equal_to_r(TRUE & b, c(TRUE, FALSE))
+  expect_equal_to_r(FALSE | b, c(TRUE, FALSE))
+})
+
+test_that("lhs scalar division is computed at the promoted precision", {
+  # integer inputs promote to the default float dtype before the scalar is used
+  u <- torch_ones(1, dtype = torch_uint8())
+  expect_true((300L / u)$dtype == torch_float())
+  expect_equal_to_r(300L / u, 300)
+
+  # a scalar too large for float16 still gives the representable quotient
+  h <- torch_tensor(c(1024, 2048), dtype = torch_float16())
+  r <- 65536 / h
+  expect_true(r$dtype == torch_float16())
+  expect_tensor_shape(r, 2)
+  expect_equal_to_r(r$to(dtype = torch_float()), c(64, 32))
+
+  # so does a denominator whose reciprocal overflows, in float16 and float32
+  tiny <- torch_tensor(1e-5, dtype = torch_float16())
+  r <- 1e-5 / tiny
+  expect_true(r$dtype == torch_float16())
+  expect_tensor_shape(r, 1)
+  expect_true(as.logical(torch_isfinite(r)))
+  expect_equal(as.numeric(r), 1, tolerance = 1e-2)
+  expect_tensor_shape(1e-5 / tiny$squeeze(), integer(0))
+  subnormal <- torch_tensor(1e-40)
+  r <- 1e-10 / subnormal
+  expect_true(r$dtype == torch_float())
+  expect_true(as.logical(torch_isfinite(r)))
+  expect_equal(as.numeric(r), 1e30, tolerance = 1e-4)
+
+  # a double scalar outside float32's range is not narrowed before dividing
+  r <- 1e40 / torch_tensor(1e10)
+  expect_true(r$dtype == torch_float())
+  expect_tensor_shape(r, 1)
+  expect_equal(as.numeric(r), 1e30, tolerance = 1e-6)
+  r <- 1e-50 / torch_tensor(1e-30)
+  expect_true(r$dtype == torch_float())
+  # expect_equal() compares values this small absolutely, so 0 would pass it
+  expect_gt(as.numeric(r), 0)
+  expect_lt(abs(as.numeric(r) / 1e-20 - 1), 1e-6)
+  r <- 1e40 / torch_tensor(1e10, dtype = torch_bfloat16())
+  expect_true(r$dtype == torch_bfloat16())
+  expect_equal(as.numeric(r$to(dtype = torch_float())), 1e30, tolerance = 1e-2)
+  x <- torch_tensor(1e10, requires_grad = TRUE)
+  (1e40 / x)$backward()
+  expect_true(x$grad$dtype == torch_float())
+  expect_equal(as.numeric(x$grad), -1e20, tolerance = 1e-6)
+
+  # float64 keeps the scalar's full precision
+  d <- torch_tensor(3, dtype = torch_float64())
+  expect_true((1 / d)$dtype == torch_float64())
+  expect_equal(as.numeric(1 / d), 1 / 3, tolerance = 0)
+
+  # gradients flow through the cast and keep the input dtype
+  x <- torch_tensor(c(1024, 2048), dtype = torch_float16(), requires_grad = TRUE)
+  (65536 / x)$sum()$backward()
+  expect_true(x$grad$dtype == torch_float16())
+  expect_equal_to_r(x$grad$to(dtype = torch_float()), -65536 / c(1024, 2048)^2)
+
+  x <- torch_tensor(1e-5, dtype = torch_float16(), requires_grad = TRUE)
+  y <- 1e-6 / x
+  expect_true(as.logical(torch_isfinite(y)))
+  expect_equal(as.numeric(y), 0.1, tolerance = 1e-2)
+  y$backward()
+  expect_true(as.logical(torch_isfinite(x$grad)))
+  expect_equal(as.numeric(x$grad), -1e4, tolerance = 1e-2)
+
+  x <- torch_tensor(c(2, 4), requires_grad = TRUE)
+  (1 / x)$sum()$backward()
+  expect_equal_to_r(x$grad, c(-0.25, -0.0625))
+})
+
+test_that("lhs scalars keep their truth value in logical operators", {
+  u <- torch_ones(1, dtype = torch_uint8())
+  expect_equal_to_r(256L & u, TRUE)
+  expect_equal_to_r(u & 256L, TRUE)
+  expect_equal_to_r(0 & u, FALSE)
+  expect_equal_to_r(0 | u, TRUE)
+  expect_equal_to_r(1e-8 | torch_zeros(1, dtype = torch_float16()), TRUE)
+  expect_equal_to_r(torch_zeros(1, dtype = torch_float16()) | 1e-8, TRUE)
+})

@@ -67,7 +67,9 @@ test_that("register hook: can throw exceptions in the lantern thread", {
   x$register_hook(function(grad) {
     2 * grad
   })
-  y <- 2 * x
+  # Multiply by a tensor so the graph saves it and a second backward() fails.
+  # A plain R scalar is stored by value, so nothing would be freed.
+  y <- torch_tensor(2) * x
   y$backward()
   expect_equal_to_r(x$grad, 4)
   expect_error(y$backward())
